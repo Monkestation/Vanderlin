@@ -25,8 +25,7 @@
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal_rogue(get_turf(owner))
 	H.color = "#660759"
 	var/list/wCount = owner.get_wounds()
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.adjust_bloodvolume(healing_on_tick + 1)
+	owner.adjust_blood_volume(healing_on_tick + 1, maximum = BLOOD_VOLUME_NORMAL)
 	if(length(wCount) > 0)
 		if(iscarbon(owner))
 			var/mob/living/carbon/carbon = owner

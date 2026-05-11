@@ -87,7 +87,7 @@
 	if(!. || !iscarbon(affected))
 		return FALSE
 	var/mob/living/carbon/C = affected
-	if(NOBLOOD in C.dna?.species?.species_traits)
+	if(!CAN_HAVE_BLOOD(C))
 		return FALSE
 	if(is_species(C, /datum/species/werewolf) || C.mind?.has_antag_datum(/datum/antagonist/werewolf)) // Dendor protects
 		return FALSE

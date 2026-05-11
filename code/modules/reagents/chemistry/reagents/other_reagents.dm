@@ -48,22 +48,20 @@
 		exposed_mob.adjust_hydration(vitae * 0.1)
 
 	var/mob/living/carbon/exposed_carbon = exposed_mob
-	if(istype(exposed_carbon) && (NOBLOOD in exposed_carbon.dna?.species?.species_traits))
+	if(istype(exposed_carbon) && !CAN_HAVE_BLOOD(exposed_carbon))
 		return
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
 	if(methods & INJECT)
 		var/modifier = 1 //TODO: Borbop ~ Once we get a proper transfusion system this will become unneeded basically means instead of 5 units we inject 100 units which is 4 injections to suriving level. This is 100% blood duping but like... its this or 80 syringes of blood to get someone restarted
 		if(exposed_mob.stat >= DEAD)
 			modifier = 20
-		if(exposed_mob.blood_volume <= BLOOD_VOLUME_MAXIMUM)
-			exposed_mob.adjust_bloodvolume(round(reac_volume, 0.1) * modifier)
+		exposed_mob.adjust_blood_volume(round(reac_volume, 0.1) * modifier, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 		return
 	if(methods & INGEST)
 		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(exposed_mob, TRAIT_BLOODDRINKER) || HAS_TRAIT(exposed_mob, TRAIT_NASTY_EATER))))
 			if(!HAS_TRAIT(exposed_mob, TRAIT_NOHUNGER))
 				exposed_mob.adjust_hydration(reac_volume * 0.2)
-			if(exposed_mob.blood_volume < BLOOD_VOLUME_NORMAL)
-				exposed_mob.adjust_bloodvolume(reac_volume * 0.2)
+			exposed_mob.adjust_blood_volume(reac_volume * 0.2, maximum = BLOOD_VOLUME_NORMAL)
 			return
 		var/tox = toxicity * reac_volume
 		if(HAS_TRAIT(exposed_carbon, TRAIT_POISON_RESILIENCE))

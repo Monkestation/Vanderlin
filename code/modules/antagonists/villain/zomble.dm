@@ -272,7 +272,7 @@
 		return
 
 	record_round_statistic(STATS_DEADITES_WOKEN_UP)
-	zombie.blood_volume = BLOOD_VOLUME_NORMAL
+	zombie.set_blood_volume(BLOOD_VOLUME_NORMAL)
 	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
 	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
 	if(!infected_wake) //if we died, heal all of this too
@@ -332,7 +332,7 @@
 	if(stat >= DEAD) //do shit the natural way i guess
 		return
 	to_chat(src, "<span class='danger'>I feel horrible... REALLY horrible after that...</span>")
-	if(blood_volume)
+	if(get_blood_volume())
 		MOBTIMER_SET(src, MT_PUKE)
 		vomit(1, blood = TRUE, stun = FALSE)
 	addtimer(CALLBACK(src, PROC_REF(wake_zombie)), 1 MINUTES)

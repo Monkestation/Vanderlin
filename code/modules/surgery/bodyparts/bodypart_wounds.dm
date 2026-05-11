@@ -113,14 +113,13 @@
 		return FALSE
 	if(!is_organic_limb())
 		return FALSE
-	if(NOBLOOD in owner?.dna?.species?.species_traits)
+	if(!CAN_HAVE_BLOOD(owner))
 		return FALSE
 	return TRUE
 
 /// Returns the total bleed rate on this bodypart
-/obj/item/bodypart/proc/get_bleed_rate(artifical = FALSE)
-	var/datum/species/physiology = owner?.dna?.species
-	if(NOBLOOD in physiology?.species_traits)
+/obj/item/bodypart/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
+	if(!CAN_HAVE_BLOOD(owner))
 		return 0
 	if(!bleeds)
 		return 0
@@ -129,19 +128,13 @@
 		bleed_rate += wound.bleed_rate
 
 	for(var/datum/injury/injury as anything in injuries)
-		if(!artifical)
-			if(injury.is_bleeding())
-				bleed_rate += injury.get_bleed_rate()
-		else
-			bleed_rate += injury.get_artifical_bleed_rate()
+		bleed_rate += injury.get_bleed_rate(ignore_is_bleeding)
 
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
 		bleed_rate += embedded.embedding.embedded_bloodloss
-	if(physiology)
-		bleed_rate *= physiology.bleed_mod
-	if(bandage)
+	if(!ignore_is_bleeding && bandage)
 		bleed_rate *= bandage?.bandage_effectiveness
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
@@ -149,9 +142,6 @@
 	var/surgery_flags = get_surgery_flags()
 	if(surgery_flags & SURGERY_CLAMPED)
 		bleed_rate = min(bleed_rate, 0.5)
-	switch(burn_dam/max_damage)
-		if(0.75 to INFINITY)
-			bleed_rate += 5
 	return bleed_rate
 
 /obj/item/bodypart/proc/skeletonized_mod(bclass)
@@ -175,8 +165,6 @@
 		return
 	dam *= damage_multiplier
 	if(dam < 5 && bclass != WOUND_INTERNAL_BRUISE)
-		if(CEILING(dam, 1) < 5)
-			return
 		dam = CEILING(dam, 1)
 
 	var/do_crit = (modifiers[CRIT_MOD_CHANCE] <= -100) ? FALSE : TRUE

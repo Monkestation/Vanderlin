@@ -23,7 +23,7 @@
 	var/volume = 9
 
 	// Effectiveness when used as a bandage, how much it'll lower the bloodloss, bloodloss will get multiplied by this.
-	var/bandage_effectiveness = 0.5
+	var/bandage_effectiveness = 0 // EXPERIMENTAL CHANGE: BANDAGES STOP ALL BLEEDING
 	///how long it will take to bandage something with this
 	var/bandage_speed = 7 SECONDS
 	///How much you can bleed into the bandage until it needs to be changed (Blood loss is measured in 50% of the health)

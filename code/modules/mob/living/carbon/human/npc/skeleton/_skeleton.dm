@@ -49,8 +49,8 @@
 		faction |= "islander"
 	if(length(quirks))
 		clear_quirks()
+	ADD_TRAIT(src, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	if(dna?.species)
-		dna.species.species_traits |= NOBLOOD
 		dna.species.soundpack_m = new /datum/voicepack/skeleton()
 		dna.species.soundpack_f = new /datum/voicepack/skeleton()
 		var/obj/item/bodypart/head/headdy = get_bodypart("head")

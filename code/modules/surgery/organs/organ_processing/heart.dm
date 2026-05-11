@@ -133,7 +133,7 @@
 
 	var/effective_blood_circulation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_circulation(), owner.total_blood_req)
 	switch(effective_blood_circulation)
-		if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
+		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAXIMUM)
 			owner.status_flags &= ~BLEEDOUT
 			if(DT_PROB(2.5, delta_time))
 				to_chat(owner, span_userdanger("Blood starts to tear my arteries apart!"))
@@ -156,33 +156,26 @@
 
 	var/temp_bleed = 0
 	var/bleed_mod = 1
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		if(human_owner.physiology)
-			bleed_mod *= human_owner.physiology.bleed_mod
 	for(var/obj/item/bodypart/bleed_part as anything in owner.bodyparts)
-		var/resulting_bleed = bleed_part.get_bleed_rate(TRUE) * 0.5 * delta_time
 		var/true_bleed = bleed_part.get_bleed_rate() * 0.5 * delta_time
 		switch(owner.pulse)
 			if(PULSE_SLOW)
-				resulting_bleed *= 0.8
+				true_bleed *= 0.8
 			if(PULSE_FAST)
-				resulting_bleed *= 1.25
+				true_bleed *= 1.25
 			if(PULSE_FASTER, PULSE_THREADY)
-				resulting_bleed *= 1.5
-		resulting_bleed = CEILING(resulting_bleed * bleed_mod, 0.1)
+				true_bleed *= 1.5
+		true_bleed = CEILING(true_bleed * bleed_mod, 0.1)
+		temp_bleed += true_bleed
 		if(bleed_part.bandage)
 			bleed_part.try_bandage_expire()
-		else if(true_bleed > 0)
-			temp_bleed += true_bleed
-	if(temp_bleed)
-		if(owner.bleed(temp_bleed) && (temp_bleed >= 1.5))
+	if(temp_bleed > 0)
+		if(owner.bleed(temp_bleed) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"
-			if((temp_bleed > 1) && (owner.body_position == STANDING_UP))
-				playsound(owner, bleed_sound, 60, FALSE)
+			playsound(owner, bleed_sound, 60, FALSE)
 
-	if(!HAS_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE) && owner.stat != DEAD)
-		switch(owner.blood_volume)
+	if(CAN_HAVE_BLOOD(owner) && !HAS_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE) && owner.stat != DEAD)
+		switch(owner.get_blood_volume())
 			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)

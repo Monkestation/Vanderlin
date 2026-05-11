@@ -3,10 +3,10 @@
 	mob_types = list(/mob/living/carbon/human)
 
 /datum/organ_process/spleen/needs_process(mob/living/carbon/owner)
-	return (..() && !HAS_TRAIT(owner, TRAIT_NOHUNGER))
+	return (..() && !HAS_TRAIT(owner, TRAIT_NOHUNGER) && CAN_HAVE_BLOOD(owner))
 
 /datum/organ_process/spleen/handle_process(mob/living/carbon/owner, delta_time, times_fired)
-	if(owner.blood_volume >= BLOOD_VOLUME_NORMAL)
+	if(owner.get_blood_volume() >= BLOOD_VOLUME_NORMAL)
 		return
 	var/nutrition_ratio = 0
 	switch(owner.nutrition)
@@ -36,12 +36,5 @@
 	if(!blood_regen)
 		return
 	owner.adjust_nutrition(-combined_nutrition_requirement * nutrition_ratio * delta_time)
-	owner.adjust_bloodvolume(CEILING(blood_regen * nutrition_ratio * delta_time, 0.1))
-	return TRUE
-
-/// Blood volume adjust proc
-/mob/living/proc/adjust_bloodvolume(amount, cap)
-	if(cap && (blood_volume >= cap))
-		return TRUE
-	blood_volume = max(blood_volume + amount, 0)
+	owner.adjust_blood_volume(CEILING(blood_regen * nutrition_ratio * delta_time, 0.1))
 	return TRUE

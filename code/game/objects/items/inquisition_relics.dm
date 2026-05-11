@@ -582,8 +582,7 @@
 			visible_message(span_warning("[src] draws from [M]!"))
 			playsound(M, 'sound/combat/hits/bladed/genstab (1).ogg', 30, FALSE, -1)
 			timestaken++
-			M.adjust_bloodvolume(-30)
-			M.handle_blood()
+			M.adjust_blood_volume(-30)
 			if(M.mind)
 				if(M.mind.has_antag_datum(/datum/antagonist/werewolf, FALSE))
 					cursedblood = 3
@@ -609,14 +608,9 @@
 	if(!active)
 		to_chat(user, span_warning("It's not primed."))
 		return
-	if(HAS_TRAIT(M, TRAIT_BLOODLOSS_IMMUNE))
+	if(!CAN_HAVE_BLOOD(M) || !M.get_blood_volume())
 		to_chat(user, span_warning("They don't have any blood to sample."))
 		return
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
-		if(NOBLOOD in C.dna.species.species_traits)
-			to_chat(user, span_warning("They don't have any blood to sample."))
-			return
 	if(full)
 		to_chat(user, span_warning("It's full."))
 		return
@@ -1329,7 +1323,6 @@
 		attacked.flash_fullscreen("redflash3")
 		attacked.adjustBruteLoss(40, damage_type = BCLASS_PIERCE)
 		attacked.adjust_bloodpool(-240)
-		attacked.handle_blood()
 		feeder = WEAKREF(attacked)
 		openstate = "bloody"
 		fedblood = TRUE

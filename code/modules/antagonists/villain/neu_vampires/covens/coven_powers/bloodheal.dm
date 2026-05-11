@@ -62,8 +62,7 @@
 		else
 			bashing_lethal_heal = injury.heal_damage(bashing_lethal_heal)
 
-	if(owner.blood_volume <= BLOOD_VOLUME_NORMAL)
-		owner.adjust_bloodvolume(vitae_cost)
+	owner.adjust_blood_volume(vitae_cost, maximum = BLOOD_VOLUME_NORMAL)
 
 	//this is quadratic so expect it to scale like crazy
 	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6, source=src)

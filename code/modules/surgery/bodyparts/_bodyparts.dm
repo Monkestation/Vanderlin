@@ -19,6 +19,8 @@
 	var/fingerprint
 	var/status = BODYPART_ORGANIC
 
+	///Random flags that describe this bodypart
+	var/bodypart_flags
 	var/static_icon = FALSE
 	var/body_zone //BODY_ZONE_CHEST, BODY_ZONE_L_ARM, etc , used for def_zone
 	var/aux_zone // used for hands
@@ -773,7 +775,7 @@
 
 /obj/item/bodypart/chest/skeletonize(lethal = TRUE)
 	. = ..()
-	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
+	if(lethal && owner && CAN_HAVE_BLOOD(owner))
 		owner.death()
 
 /obj/item/bodypart/proc/update_HP()
@@ -1219,7 +1221,6 @@
 			species_icon = S.limbs_icon_f
 		if(H.age == AGE_CHILD)
 			species_icon = S.child_icon
-		species_flags_list = H.dna.species.species_traits
 
 
 		if(S.use_skintones)

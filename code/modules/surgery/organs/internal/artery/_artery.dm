@@ -55,10 +55,6 @@
 			bleed_mod *= 1.25
 		if(PULSE_FASTER, PULSE_THREADY)
 			bleed_mod *= 1.5
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		if(human_owner.physiology)
-			bleed_mod *= human_owner.physiology.bleed_mod
 	var/final_bleed_rate = CEILING(blood_flow * bleed_mod, 0.1)
 	if(!final_bleed_rate)
 		return
@@ -128,4 +124,4 @@
 		owner.bleed(amount)
 	// No open wound, even less drama
 	else
-		owner.adjust_bloodvolume(-amount)
+		owner.adjust_blood_volume(-amount)

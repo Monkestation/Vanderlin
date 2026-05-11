@@ -35,7 +35,7 @@
 	. = ..()
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if(limb.owner && (damage_per_injury() >= 5 || damage + limb.burn_dam >= 20))
-		limb.owner.adjust_bloodvolume(-CEILING(BLOOD_VOLUME_SURVIVE * damage/100, 1))
+		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_SURVIVE * damage/100, 1))
 */
 
 /*

@@ -611,15 +611,16 @@
 	else
 		examination += "<span class='dead'>[m1] dead.</span>"
 
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			examination += "<span class='artery'>[m1] anemic.</span>"
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			examination += "<span class='artery'>[m1] a little anemic.</span>"
+	if(CAN_HAVE_BLOOD(src))
+		switch(get_blood_volume())
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				examination += "<span class='artery'>[m1] anemic.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				examination += "<span class='artery'>[m1] a little anemic.</span>"
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		if(HAS_TRAIT(src, TRAIT_NO_BITE))

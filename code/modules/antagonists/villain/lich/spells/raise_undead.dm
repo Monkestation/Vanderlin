@@ -83,7 +83,7 @@
 	mind.current.job = null
 	mind.add_antag_datum(/datum/antagonist/skeleton)
 
-	dna.species.species_traits |= NOBLOOD
+	ADD_TRAIT(src, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
 

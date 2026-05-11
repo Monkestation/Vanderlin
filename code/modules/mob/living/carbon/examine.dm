@@ -524,9 +524,9 @@
 		. += span_warning("[P[THEYRE]] barely unconscious.")
 
 	// Blood volume
-	if(!SEND_SIGNAL(src, COMSIG_DISGUISE_STATUS))
+	if(!SEND_SIGNAL(src, COMSIG_DISGUISE_STATUS) && CAN_HAVE_BLOOD(src))
 		var/blood_lvl_msg
-		switch(blood_volume)
+		switch(get_blood_volume())
 			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 				blood_lvl_msg = html_tag("B", "[P[THEYRE]] extremely pale and sickly.")
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)

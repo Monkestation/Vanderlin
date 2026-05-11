@@ -1,3 +1,5 @@
+#define BLEED_DAMAGE_RATIO 10
+
 //This is basically the baystation wound datum, which i thought would synergize well with the TG wounds
 /****************************************************
 				INJURY DATUM
@@ -13,7 +15,7 @@
 	var/current_stage = 0
 	/// Amount of damage this injury is currently causing
 	var/damage = 0
-	/// How much we bleed on each tick per 10 damage
+	/// How much we bleed on each tick per BLEED_DAMAGE_RATIO damage
 	var/bleed_rate = 1
 	/// Ticks of bleeding left
 	var/bleed_timer = 0
@@ -367,6 +369,8 @@
 	return TRUE
 
 /datum/injury/proc/is_bleeding()
+	if(!CAN_HAVE_BLOOD(parent_mob))
+		return
 	for(var/thing in embedded_objects)
 		var/obj/item/item = thing
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
@@ -377,21 +381,16 @@
 		return FALSE
 	return ((bleed_timer > 0 || damage_per_injury() > bleed_threshold) && current_stage <= max_bleeding_stage)
 
-/datum/injury/proc/get_bleed_rate()
-	if(!is_bleeding())
+/datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
+	if(!CAN_HAVE_BLOOD(parent_mob))
+		return 0
+	if(!ignore_is_bleeding && !is_bleeding())
 		return 0
 	var/bad_embeddies = 0
 	for(var/obj/item/item in embedded_objects)
 		if((item.w_class < WEIGHT_CLASS_SMALL))
 			bad_embeddies += 1
-	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
-
-/datum/injury/proc/get_artifical_bleed_rate()
-	var/bad_embeddies = 0
-	for(var/obj/item/item in embedded_objects)
-		if((item.w_class < WEIGHT_CLASS_SMALL))
-			bad_embeddies += 1
-	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
+	return max(0.1, (bleed_rate * (damage/BLEED_DAMAGE_RATIO)) + bad_embeddies)
 
 /datum/injury/proc/is_surgical()
 	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))
@@ -422,3 +421,5 @@
 	if(CHECK_BITFIELD(injury_flags, INJURY_BANDAGED))
 		return TRUE
 	return FALSE
+
+#undef BLEED_DAMAGE_RATIO

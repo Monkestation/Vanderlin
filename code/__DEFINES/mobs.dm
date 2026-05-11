@@ -21,9 +21,10 @@
 #define SUBMIT_INTENT 1
 
 //Blood levels
+#define BLOOD_VOLUME_MAXIMUM BLOOD_VOLUME_NORMAL * 3.5
 #define BLOOD_VOLUME_MAX_LETHAL BLOOD_VOLUME_NORMAL * 3
 #define BLOOD_VOLUME_EXCESS BLOOD_VOLUME_NORMAL * 2.5
-#define BLOOD_VOLUME_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
+#define BLOOD_VOLUME_SAFE_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
 #define BLOOD_VOLUME_NORMAL		1200
 #define BLOOD_VOLUME_SAFE		BLOOD_VOLUME_NORMAL * 0.8
 #define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
@@ -383,6 +384,11 @@
 #define MOVES_ON_ITS_OWN (1<<0)
 /// Simple mob trait, can be fireman carried
 #define CAN_BE_FIREMANNED (1<<1)
+/// Blood volume or status has changed since the last [proc/update_blood_effects] call.
+/// Nowhere near guaranteed to happen only once per life tick, or at all.
+#define BLOOD_UPDATE_QUEUED (1<<4)
+/// This mob can have blood, cached value of [proc/can_have_blood]
+#define LIVING_CAN_HAVE_BLOOD (1<<5)
 
 // Body position defines.
 /// Mob is standing up, usually associated with lying_angle value of 0.

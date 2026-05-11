@@ -45,8 +45,8 @@
 	spawned.mind.special_role = "Skeleton"
 	spawned.mind?.current.job = null
 
+	ADD_TRAIT(spawned, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	if(spawned.dna && spawned.dna.species)
-		spawned.dna.species.species_traits |= NOBLOOD
 		spawned.dna.species.soundpack_m = new /datum/voicepack/skeleton()
 		spawned.dna.species.soundpack_f = new /datum/voicepack/skeleton()
 

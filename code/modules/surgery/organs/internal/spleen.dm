@@ -33,5 +33,5 @@
 	else if(damage >= low_threshold)
 		examine_list += span_notice("<b>[owner]</b> looks a little wan.")
 
-/obj/item/organ/spleen/get_availability(datum/species/S)
-	return (!(NOBLOOD in S.species_traits))
+/obj/item/organ/spleen/get_availability(datum/species/S, mob/living/carbon/owner_mob)
+	return CAN_HAVE_BLOOD(owner_mob)

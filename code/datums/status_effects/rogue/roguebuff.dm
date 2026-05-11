@@ -581,8 +581,7 @@
 	return "SUBJECTPRONOUN is bathed in a restorative aura!"
 
 /datum/status_effect/buff/matthioshealing/tick()
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume+10, BLOOD_VOLUME_NORMAL)
+	owner.adjust_blood_volume(10, maximum = BLOOD_VOLUME_NORMAL)
 	if(owner.get_wounds())
 		owner.heal_wounds(healing_on_tick)
 		owner.update_damage_overlays()

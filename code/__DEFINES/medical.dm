@@ -286,7 +286,6 @@ DEFINE_BITFIELD(organ_flags, list(
 #define GETPULSE_ADVANCED 1   // More accurate. (med scanner, sleeper, etc.)
 #define GETPULSE_PERFECT 2   // Perfectly accurate. (currently no non-adminbus means, you get the exact value 0-5)
 
-
 // ~CPR types
 /// Mouth to mouth - Heals oxygen deprivation
 #define CPR_MOUTH "m2m"
@@ -381,3 +380,5 @@ DEFINE_BITFIELD(organ_flags, list(
 
 /// How often can we annoy the player about their bleeding? This duration is extended if it's not serious bleeding
 #define BLEEDING_MESSAGE_BASE_CD 15 SECONDS
+/// Arbitrary value for "noticeable bleeding"
+#define BLEED_RATE_NOTICABLE	1.5

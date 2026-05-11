@@ -627,7 +627,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/used_neworgan = FALSE
 		var/should_have
 		if(neworgan)
-			should_have = neworgan.get_availability(src)
+			should_have = neworgan.get_availability(src, C)
 		else
 			should_have = TRUE
 
@@ -1248,7 +1248,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
 	if(chem.type == exotic_bloodtype)
-		H.blood_volume = min(H.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		H.adjust_blood_volume(round(chem.volume, 0.1), maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 		H.reagents.del_reagent(chem.type)
 		return TRUE
 	if(chem.overdose_threshold && chem.volume >= chem.overdose_threshold)

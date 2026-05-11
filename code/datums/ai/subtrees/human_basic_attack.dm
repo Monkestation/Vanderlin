@@ -177,7 +177,7 @@
 	if(!(pawn.mobility_flags & MOBILITY_STAND))
 		pawn.aimheight_change(rand(1, 4))
 		return
-	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE))
+	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE) || !CAN_HAVE_BLOOD(target))
 		pawn.aimheight_change(rand(12, 19))
 		return
 	pawn.aimheight_change(pick(rand(5, 8), rand(9, 11), rand(12, 19)))

@@ -497,7 +497,9 @@
 		return
 	else
 		if(hud_used.bloods)
-			var/bloodloss = ((BLOOD_VOLUME_NORMAL - blood_volume) / BLOOD_VOLUME_NORMAL) * 100
+			var/bloodloss = 0
+			if(CAN_HAVE_BLOOD(src))
+				bloodloss = ((BLOOD_VOLUME_NORMAL - get_blood_volume()) / BLOOD_VOLUME_NORMAL) * 100
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
@@ -640,7 +642,7 @@
 	return TRUE
 
 /mob/living/carbon/human/vomit(lost_nutrition = 10, blood = 0, stun = 1, distance = 0, message = 1, toxic = 0)
-	if(blood && (NOBLOOD in dna.species.species_traits) && !HAS_TRAIT(src, TRAIT_TOXINLOVER))
+	if(blood && !CAN_HAVE_BLOOD(src) && !HAS_TRAIT(src, TRAIT_TOXINLOVER))
 		if(message)
 			visible_message("<span class='warning'>[src] dry heaves!</span>", \
 							"<span class='danger'>I try to throw up, but there's nothing in your stomach!</span>")

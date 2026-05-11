@@ -85,9 +85,9 @@
 	species_traits = list(
 		NO_UNDERWEAR,
 		NOTRANSSTING,
-		NOBLOOD,
 	)
 	inherent_traits = list(
+		TRAIT_NOBLOOD,
 		TRAIT_BLOODLOSS_IMMUNE,
 		TRAIT_NORMALIZED_BLOOD,
 		TRAIT_NOMOOD,

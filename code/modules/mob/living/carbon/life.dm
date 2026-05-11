@@ -37,7 +37,7 @@
 		handle_shock(delta_time, times_fired)
 		handle_shock_stage(delta_time, times_fired)
 
-		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+		if(!CAN_HAVE_BLOOD(src) || (get_blood_volume() > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
 				if(oxyloss)
 					adjustOxyLoss(-5)
@@ -385,8 +385,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(limb && !limb.skeletonized)
 			if(limb.get_damage() >= (limb.max_damage - 5))
 				limb.cremation_progress += rand(2,5)
-				if(dna && dna.species && !(NOBLOOD in dna.species.species_traits))
-					blood_volume = max(blood_volume - 10, 0)
+				if(CAN_HAVE_BLOOD(src))
+					adjust_blood_volume(-10)
 				if(limb.cremation_progress >= 50)
 					if(limb.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
 						limb.skeletonize()
@@ -427,9 +427,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					H.underwear = "Nude"
 				should_update_body = TRUE
 				if(dna && dna.species)
-					if(dna && dna.species && !(NOBLOOD in dna.species.species_traits))
-						blood_volume = 0
-					dna.species.species_traits |= NOBLOOD
+					if(CAN_HAVE_BLOOD(src))
+						set_blood_volume(0)
+					ADD_TRAIT(src, TRAIT_NOBLOOD, TRAIT_GENERIC)
 
 	if(should_update_body)
 		update_body()
@@ -457,8 +457,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /mob/living/carbon/proc/needs_heart()
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return FALSE
-	if(NOBLOOD in dna?.species?.species_traits) //not all carbons have species!
+	if(!CAN_HAVE_BLOOD(src))
 		return FALSE
+	// if(dna && dna.species && isnull(dna.species.mutantheart)) //not all carbons have species!
+	// 	return FALSE
 	return TRUE
 
 /*
@@ -543,7 +545,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			adjust_energy(sleepy_mod * (max_energy * 0.004))
 		if(hydration > 0 || yess)
 			if(!bleed_rate)
-				adjust_bloodvolume(4 * sleepy_mod, BLOOD_VOLUME_NORMAL)
+				adjust_blood_volume(4 * sleepy_mod, maximum = BLOOD_VOLUME_NORMAL)
 			for(var/obj/item/bodypart/affecting as anything in bodyparts)
 				//for context, it takes 5 small cuts (0.4 x 5) or 3 normal cuts (0.8 x 3) for a bodypart to not be able to heal itself
 				if(affecting.get_bleed_rate() >= 2)

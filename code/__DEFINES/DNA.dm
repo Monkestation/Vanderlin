@@ -57,7 +57,6 @@
 #define FACEHAIR		3
 #define EYECOLOR		4
 #define LIPS			5
-#define NOBLOOD			6
 #define NOTRANSSTING	7
 #define NOZOMBIE		9
 #define NO_UNDERWEAR	11

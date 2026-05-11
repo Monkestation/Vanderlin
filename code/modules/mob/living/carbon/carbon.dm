@@ -625,7 +625,7 @@
 					var/mob/living/carbon/C = src
 					C.add_stress(/datum/stress_event/vomit)
 	else
-		if(NOBLOOD in dna?.species?.species_traits)
+		if(!CAN_HAVE_BLOOD(src))
 			return TRUE
 		if(message)
 			visible_message("<span class='danger'>[src] coughs up blood!</span>", "<span class='danger'>I cough up blood!</span>")
@@ -848,7 +848,7 @@
 	else
 		clear_fullscreen("CMODE")
 
-	if(health <= crit_threshold || ((blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE)))
+	if(health <= crit_threshold || (!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && CAN_HAVE_BLOOD(src) && (get_blood_volume() in -INFINITY to BLOOD_VOLUME_SURVIVE)))
 		var/severity = 0
 		switch(health)
 			if(-20 to -10)
@@ -1030,8 +1030,8 @@
 
 /mob/living/carbon/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	if(excess_healing)
-		if(dna && !(NOBLOOD in dna.species.species_traits))
-			adjust_bloodvolume(excess_healing * 2)
+		if(CAN_HAVE_BLOOD(src))
+			adjust_blood_volume(excess_healing * 2)
 
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			organ.applyOrganDamage(excess_healing * -1)

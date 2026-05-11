@@ -93,7 +93,7 @@
  * owner_species - species, needed to return the mutant slot as true or false. stomach set to null means it shouldn't have one.
  * owner_mob - for more specific checks, like nightmares.
  */
-/obj/item/organ/proc/get_availability(datum/species/owner_species)
+/obj/item/organ/proc/get_availability(datum/species/owner_species, mob/living/carbon/owner_mob)
 	return slot in owner_species.organs
 
 /// Sets an accessory type and optionally colors too.

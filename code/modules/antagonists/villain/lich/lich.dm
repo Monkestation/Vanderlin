@@ -128,7 +128,7 @@
 	if(length(L.quirks))
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
+	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	L.grant_undead_eyes()
 	L.skeletonize(FALSE)
 	L.equipOutfit(/datum/outfit/lich)

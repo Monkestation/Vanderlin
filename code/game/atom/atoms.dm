@@ -703,7 +703,7 @@
 /mob/living/carbon/get_blood_dna_list()
 	if(isnull(dna)) // Xenos
 		return ..()
-	if(NOBLOOD in dna.species.species_traits) //no skeletons bleeding
+	if(!CAN_HAVE_BLOOD(src)) //no skeletons bleeding
 		return null
 	var/datum/blood_type/blood = get_blood_type()
 	return list("[dna.unique_enzymes]" = blood.type)

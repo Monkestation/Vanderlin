@@ -845,7 +845,7 @@
 	character.grant_undead_eyes()
 
 	character.mob_biotypes |= MOB_UNDEAD
-	character.dna?.species?.species_traits |= NOBLOOD
+	ADD_TRAIT(character, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	character.dna?.species?.soundpack_m = new /datum/voicepack/skeleton()
 	character.dna?.species?.soundpack_f = new /datum/voicepack/skeleton()
 
