@@ -97,8 +97,8 @@
 	name = "Gate Amulet"
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
-	var/uses = 3
-	var/can_local_portal = FALSE
+	var/uses = 6
+	var/can_local_portal = TRUE
 
 /obj/item/clothing/neck/portalamulet/Initialize()
 	GLOB.vampire_objects |= src
@@ -119,6 +119,7 @@
 		for(var/obj/structure/vampire/portalmaker/P in GLOB.vampire_objects)
 			P.create_portal_return(name, 3000)
 		user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
+		to_chat(user, span_danger("[name] has [uses] left."))
 		if(uses <= 0)
 			visible_message("[src] shatters!")
 			qdel(src)
