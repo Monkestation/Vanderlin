@@ -8,18 +8,9 @@
 /datum/organ_process/spleen/handle_process(mob/living/carbon/owner, delta_time, times_fired)
 	if(owner.get_blood_volume() >= BLOOD_VOLUME_NORMAL)
 		return
-	var/nutrition_ratio = 0
-	switch(owner.nutrition)
-		if(0 to NUTRITION_LEVEL_STARVING)
-			nutrition_ratio = 0.4
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-			nutrition_ratio = 0.6
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-			nutrition_ratio = 0.8
-		if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-			nutrition_ratio = 1
-		else
-			nutrition_ratio = 1
+
+	var/nutrition_ratio = clamp(round(owner.nutrition / NUTRITION_LEVEL_WELL_FED, 0.2), 0.4, 1)
+
 	if(owner.satiety > 80)
 		nutrition_ratio *= 1.25
 
