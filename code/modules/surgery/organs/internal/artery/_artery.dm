@@ -21,7 +21,7 @@
 	nutriment_req = 0.1
 	hydration_req = 0.05
 
-	/// How much blood we gush when torn
+	/// How much blood we gush when torn. This will be multiplied by delta_time
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
 	/// If torn, this is basically the time until we gush again
 	COOLDOWN_DECLARE(next_squirt)
@@ -59,8 +59,8 @@
 			bleed_mod *= 1.25
 		if(PULSE_FASTER, PULSE_THREADY)
 			bleed_mod *= 1.5
-	var/final_bleed_rate = CEILING(blood_flow * bleed_mod, 0.1)
-	if(!final_bleed_rate)
+	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * delta_time, 0.1)
+	if(!final_bleed_rate <= 0)
 		return
 	if(COOLDOWN_FINISHED(src, next_squirt))
 		squirt(final_bleed_rate)

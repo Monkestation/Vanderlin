@@ -29,6 +29,7 @@
 	name = "thoracic aorta"
 	desc = "Shot through the heart, and you're to blame - Darlin', you give love a bad name."
 	zone = BODY_ZONE_CHEST
+	blood_flow = ARTERIAL_BLOOD_FLOW * 2.5
 
 /obj/item/organ/artery/chest/tear()
 	. = ..()
