@@ -67,10 +67,6 @@
 	if(exited == ramrod)
 		ramrod = null
 
-/obj/item/gun/ballistic/powder/clear_chambered(datum/source)
-	. = ..()
-	bullet_rammed = FALSE
-
 /obj/item/gun/ballistic/powder/examine(mob/user)
 	. = ..()
 
@@ -140,7 +136,7 @@
 		return
 
 	var/skill = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms)
- 	if(skill < 10)
+	if(skill < 10)
 		balloon_alert(user, "don't know how!")
 		return
 
@@ -280,6 +276,8 @@
 		var/turf/M_turf = get_turf(M)
 		if(M_turf)
 			M.playsound_local(M_turf, fire_sound, 100, 1, get_rand_frequency())
+
+	bullet_rammed = FALSE
 
 /obj/item/gun/ballistic/powder/postfire_empty_checks(last_shot_succeeded)
 	. = ..()

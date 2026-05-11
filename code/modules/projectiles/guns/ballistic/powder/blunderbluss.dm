@@ -23,7 +23,7 @@
 	wlength = WLENGTH_LONG
 
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shotgun
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/shotgun
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/shotgun/empty
 	weapon_weight = WEAPON_HEAVY
 	recoil = 10
 	randomspread = 2

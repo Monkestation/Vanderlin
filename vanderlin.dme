@@ -2715,6 +2715,7 @@
 #include "code\modules\crafting\quality_of_crafting\living_start.dm"
 #include "code\modules\crafting\quality_of_crafting\narcotics.dm"
 #include "code\modules\crafting\quality_of_crafting\natural_items.dm"
+#include "code\modules\crafting\quality_of_crafting\pellets.dm"
 #include "code\modules\crafting\quality_of_crafting\projectile.dm"
 #include "code\modules\crafting\quality_of_crafting\reading.dm"
 #include "code\modules\crafting\quality_of_crafting\sewing.dm"

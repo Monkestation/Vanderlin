@@ -14,7 +14,7 @@
 	name = "pelletshot"
 	desc = "A handful of pellet shots, made to punch many holes into a packed bunch of enemies."
 	projectile_type = /obj/projectile/bullet/pellet
-	caliber = "pelletshot" //shotgun variant of lead balls essentially
+	caliber = "blundershot" //shotgun variant of lead balls essentially
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "pellets"
 	dropshrink = 0.5
@@ -25,6 +25,38 @@
 
 	force = DAMAGE_KNIFE - 7
 	item_weight = 75 GRAMS
+
+/obj/item/ammo_casing/caseless/pelletshot/zenar
+	name = "zenarshot"
+	desc = "A handful of pellet shots out of zenars, made to punch many holes into a packed bunch of enemies."
+	icon_state = "pellets_zenar"
+	projectile_type = /obj/projectile/bullet/pellet/zenar
+
+/obj/item/ammo_casing/caseless/pelletshot/zil
+	name = "zilshot"
+	desc = "A handful of pellet shots out of zils, made to punch many holes into a packed bunch of enemies."
+	icon_state = "pellets_zenarii"
+	projectile_type = /obj/projectile/bullet/pellet/zil
+
+/obj/item/ammo_casing/caseless/pelletshot/zenny
+	name = "zennyshot"
+	desc = "A handful of pellet shots out of zennies, made to punch many holes into a packed bunch of enemies."
+	icon_state = "pellets_zenny"
+	projectile_type = /obj/projectile/bullet/pellet/zenny
+
+/obj/item/ammo_casing/caseless/pelletshot/glass
+	name = "glasshot"
+	desc = "A handful of pellet shots out of glass shards, made to bleed a packed bunch of enemies."
+	icon_state = "pellets_shard"
+	projectile_type = /obj/projectile/bullet/pellet/glass
+	pellets = 9
+
+/obj/item/ammo_casing/caseless/pelletshot/salt
+	name = "saltshot"
+	desc = "A handful of pellet shots out of salt, made to incapacitate a packed bunch of enemies."
+	icon_state = "pellets_salt"
+	projectile_type = /obj/projectile/bullet/pellet/salt
+	pellets = 9
 
 /obj/item/ammo_casing/caseless/cball
 	name = "large cannonball"
