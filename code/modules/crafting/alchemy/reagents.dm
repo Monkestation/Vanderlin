@@ -8,6 +8,7 @@
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	liver_chemical = FALSE
 
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
@@ -17,7 +18,7 @@
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 3, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 
 /datum/reagent/medicine/healthpot/on_mob_end_metabolize(mob/living/L)
@@ -28,6 +29,7 @@
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
+	M.adjust_blood_volume(BLOOD_REGEN_FACTOR * 200 * efficiency * 3, maximum = BLOOD_VOLUME_NORMAL)
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
 		M.heal_wounds(3 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
@@ -49,6 +51,7 @@
 	taste_description = "rich lifeblood"
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM * 2
+	liver_chemical = FALSE
 
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
@@ -60,7 +63,7 @@
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 30, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 
@@ -73,6 +76,7 @@
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
+	M.adjust_blood_volume(BLOOD_REGEN_FACTOR * 200 * efficiency * 5, maximum = BLOOD_VOLUME_NORMAL)
 	M.heal_wounds(6 * efficiency) //at a motabalism of .5 U a tick this translates to 240WHP healing with 20 U Most wounds are unsewn 15-100.
 	for(var/datum/injury/injury in M.all_injuries)
 		if(!injury.can_heal())

@@ -140,7 +140,7 @@
 
 /datum/reagent/water/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 0.1, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
 
 /datum/reagent/water/on_mob_end_metabolize(mob/living/L)
 	. = ..()
