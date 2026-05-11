@@ -44,6 +44,7 @@
 		if(!(locate(/obj/item/natural/stone) in T))
 			if(prob(23))
 				new /obj/item/natural/stone(T)
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 	return ..()
 
 /obj/structure/closet/dirthole/grave

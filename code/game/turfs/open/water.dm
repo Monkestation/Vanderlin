@@ -242,6 +242,7 @@
 	baseturfs = /turf/open/water/river/creatable
 
 /turf/open/water/river/creatable/Initialize()
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 	var/list/viable_directions = list()
 	for(var/direction in GLOB.cardinals)
 		var/turf/open/water/water = get_step(src, direction)
