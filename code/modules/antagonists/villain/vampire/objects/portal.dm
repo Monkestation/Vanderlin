@@ -95,6 +95,7 @@
 
 /obj/item/clothing/neck/portalamulet
 	name = "Gate Amulet"
+	desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
 	var/uses = 6
@@ -108,6 +109,12 @@
 	GLOB.vampire_objects -= src
 	return ..()
 
+/obj/item/clothing/neck/portalamulet/examine(mob/user)
+	. = ..()
+	if(user.mind.has_antag_datum(/datum/antagonist/vampire))
+		desc = "World anchor, used by the portal in The Mansion. Using it will return you to where it was made, right in the evil's lair. Leave it behind to make a portal to later."
+	else
+		desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"
 /obj/item/clothing/neck/portalamulet/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!can_local_portal)
