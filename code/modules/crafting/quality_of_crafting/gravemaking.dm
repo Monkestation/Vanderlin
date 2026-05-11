@@ -16,7 +16,7 @@
 	output = /obj/item/gravedecor/headstone
 	craftdiff = 2
 
-/datum/repeatable_crafting_recipe/gravemaking/peaked_headstone
+/datum/repeatable_crafting_recipe/gravemaking/obelisk_headstone
 	name = "headstone obelisk"
 	requirements = list(
 		/obj/item/natural/stoneblock = 3,
