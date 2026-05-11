@@ -67,14 +67,15 @@
 	var/custom_message
 
 /obj/item/gravedecor/headstone/examine(mob/user)
+	. = ..()
+
 	if(inscription)
 		. += "<br>[inscription]"
 		. += span_warning("Wait... shouldn't this be attached to a grave?")
 	else if(custom_message) // Not inscribed, but there is a custom_message
-		. += span_info("There is a message carved into the middle of \the [src]...<br>")
+		. += span_info("There is a message carved onto \the [src]...<br>")
 		. += span_italics("[custom_message]")
 
-	return ..()
 
 /obj/item/gravedecor/headstone/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/chisel) || (I.wlength == WLENGTH_SHORT)) // Chisel or dagger
