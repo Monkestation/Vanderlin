@@ -226,7 +226,7 @@
 		if("Leviathanian Membrane - No Terrain Slowdown")
 			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_GOOD_SWIM, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_SWIMMER, TRAIT_GENERIC)
 		if("Nerve Staple - No Mood")
 			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
