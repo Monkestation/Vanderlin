@@ -256,9 +256,10 @@ All foods are distributed among various categories. Use common sense.
 				temp_modifier = max(0.2, 1.0 - ((20 -turf_temp) / 3) * 0.2)
 				// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
 
-		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in get_turf(src)
+		var/turf/location = get_turf(src)
+		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in location
 		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack))
-			var/obj/structure/table/located = locate(/obj/structure/table) in loc
+			var/obj/structure/table/located = locate(/obj/structure/table) in location
 			if(located || vendor || chest)
 				warming -= 4 * temp_modifier
 			else
@@ -483,9 +484,7 @@ All foods are distributed among various categories. Use common sense.
 				plate_check.fork_usages +=1
 				if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
 					plate_check.dirty = TRUE
-					var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
-					if(particle_spewer)
-						qdel(particle_spewer)
+					qdel(plate_check.GetComponent(/datum/component/particle_spewer/sparkle/turf_only))
 					plate_check.update_appearance(UPDATE_OVERLAYS)
 
 		if(M == user)

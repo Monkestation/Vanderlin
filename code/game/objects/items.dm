@@ -109,7 +109,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/list/attack_verb //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/list/species_exception = null	// list() of species types, if a species cannot put items in a certain slot, but species type is in list, it will be able to wear that item
 
-	var/mob/thrownby = null
+	///A weakref to the mob who threw the item
+	var/datum/weakref/thrownby = null //I cannot verbally describe how much I hate this var
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER //the icon to indicate this object is being dragged
 
@@ -122,6 +123,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/sharpness = IS_BLUNT
 
 	var/tool_behaviour = NONE
+	///How fast does the tool work
 	var/toolspeed = 1
 
 	/// Organ storage component requires this
@@ -239,8 +241,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/last_used = 0
 
-	// Boolean sanity var for smelteries to avoid runtimes. Is this is a bar smelted through ore for exp gain?
-	var/smelted = FALSE
 	// Can this be used against a training dummy to learn skills? Prevents dumb exploits.
 	var/istrainable = FALSE
 
@@ -267,14 +267,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/grid_height
 	///this is used to see how many times we've been repaired via melding
 	var/integrity_restores = 0
-	///our melting material, basically if exists this is what we melt into in a crucible
+	/// Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/datum/material/melting_material
-	///our metling amount
+	/// The melting amount. Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/melt_amount = 0
 	///our current in progress slapcraft
 	var/datum/orderless_slapcraft/in_progress_slapcraft
-	///these are flags of what tools can interact with this atom useful to stop hard coding interactions
-	var/tool_flags = NONE
 
 	var/list/attunement_values
 	///this is in KG
@@ -284,11 +282,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	/// Artificers Recipe
 	var/datum/artificer_recipe/artrecipe
+	/// Current anvil/forging recipe
+	var/datum/anvil_recipe/currecipe
 
 	/// angle of the icon, these are used for attack animations
 	var/icon_angle = 50 // most of our icons are angled
 	///the processing quality we have
-	var/recipe_quality = 1
+	var/recipe_quality
 
 	// Lock related
 
@@ -420,12 +420,16 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			embedded_mob.simple_remove_embedded_object(src)
 	if(artrecipe)
 		QDEL_NULL(artrecipe)
+	if(currecipe)
+		QDEL_NULL(currecipe)
 	if(istype(loc, /obj/machinery/artificer_table))
 		var/obj/machinery/artificer_table/A = loc
 		A.material = null
 		A.update_appearance(UPDATE_OVERLAYS)
 	return ..()
 
+/obj/item/proc/set_quality(quality)
+	recipe_quality = quality
 
 /obj/item/update_overlays()
 	. = ..()
@@ -436,19 +440,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(get_detail_color())
 			pic.color = get_detail_color()
 		. += pic
-
-	// Add quality overlay to the food item
-	if(recipe_quality <= 0 || !ismob(loc))
-		return
-	var/list/quality_icons = list(
-		null, // Regular has no overlay
-		// "bronze",
-		"silver",
-		"gold",
-		"diamond",
-	)
-	if(recipe_quality <= length(quality_icons) && quality_icons[recipe_quality])
-		. += mutable_appearance('icons/effects/crop_quality.dmi', quality_icons[recipe_quality])
 
 /**
  * Handles adding components to the item. Added in Initialize()
@@ -683,7 +674,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 
 	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
+		to_chat(user, span_warning("[src] is too hot to handle with your hands!"))
 		return
 
 	if(resistance_flags & ON_FIRE)
@@ -1086,7 +1077,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum, damage_type = src.damage_type)
 
 /obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
-	thrownby = thrower
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		return
+	thrownby = WEAKREF(thrower)
 	callback = CALLBACK(src, PROC_REF(after_throw), callback) //replace their callback with our own
 	. = ..(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
@@ -1222,7 +1215,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/turf/T = get_turf(src)
 		var/ash_type = /obj/item/fertilizer/ash
 		if(w_class == WEIGHT_CLASS_HUGE || w_class == WEIGHT_CLASS_GIGANTIC)
-			ash_type = /obj/item/fertilizer/ash
+			ash_type = /obj/item/fertilizer/ash/large
 		var/obj/item/fertilizer/ash/A = new ash_type(T)
 		A.desc += "\nLooks like this used to be \an [name] some time ago."
 		..()
@@ -1585,6 +1578,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	if(currecipe)
+		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	if(!get_precursor_data(src))
 		return
 	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60
@@ -1606,16 +1601,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
-
-/obj/item/proc/set_quality(quality)
-	recipe_quality = clamp(quality, 0, 4)
-	update_appearance(UPDATE_OVERLAYS)
-	if(recipe_quality >= 3) // gold tier and above
-		AddComponent(/datum/component/particle_spewer/sparkle)
-	else
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
 
 /obj/item/atom_break(damage_flag, silent)
 	. = ..()

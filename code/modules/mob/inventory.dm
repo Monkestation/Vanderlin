@@ -335,64 +335,28 @@
 		if(IS_WEAKREF_OF(I, offered_item_ref))
 			stop_offering_item()
 
-//Outdated but still in use apparently. This should at least be a human proc.
-//Daily reminder to murder this - Remie.
-/mob/living/proc/get_equipped_items(include_pockets = FALSE)
-	return
+/**
+ * Used to return a list of equipped items on a mob; does not include held items (use get_all_gear)
+ *
+ * Argument(s):
+ * * Optional - include_flags, (see obj.flags.dm) describes which optional things to include or not (pockets, accessories, held items)
+ */
 
-/mob/living/carbon/get_equipped_items(include_pockets = FALSE)
+/mob/living/proc/get_equipped_items(include_flags = NONE)
 	var/list/items = list()
-	if(backr)
-		items += backr
-	if(backl)
-		items += backl
-	if(head)
-		items += head
-	if(wear_mask)
-		items += wear_mask
-	if(wear_neck)
-		items += wear_neck
-	if(shoes)
-		items += shoes
-	if(gloves)
-		items += gloves
-	if(mouth)
-		items += mouth
-	if(handcuffed)
-		items += handcuffed
-	if(legcuffed)
-		items += legcuffed
-	return items
-
-/mob/living/carbon/human/get_equipped_items(include_pockets = FALSE)
-	var/list/items = ..()
-	if(belt)
-		items += belt
-	if(beltr)
-		items += beltr
-	if(beltl)
-		items += beltl
-	if(wear_ring)
-		items += wear_ring
-	if(wear_wrists)
-		items += wear_wrists
-	if(wear_armor)
-		items += wear_armor
-	if(wear_pants)
-		items += wear_pants
-	if(cloak)
-		items += cloak
-	if(wear_shirt)
-		items += wear_shirt
+	for(var/obj/item/item_contents in contents)
+		if(item_contents.item_flags & IN_INVENTORY)
+			items += item_contents
+	if (!(include_flags & INCLUDE_HELD))
+		items -= held_items
 	return items
 
 /mob/living/proc/unequip_everything(silent = TRUE)
 	var/list/items = list()
-	items |= get_equipped_items(TRUE)
+	items |= get_equipped_items(INCLUDE_POCKETS)
 	for(var/I in items)
 		dropItemToGround(I, TRUE, silent)
 	drop_all_held_items(silent)
-
 
 /mob/living/carbon/proc/check_obscured_slots(transparent_protection)
 	var/obscured = NONE

@@ -28,6 +28,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
 
 ///generic atom traits
+///Chasms will be safe to cross while they've this trait.
+#define TRAIT_CHASM_STOPPED "chasm_stopped"
 /// If this movable is currently considered to be treading in a turf with the immerse element.
 #define TRAIT_IMMERSED "immersed"
 ///The effects of the immerse element will be halted while this trait is present.
@@ -583,7 +585,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOEMBED "noembed"
 /// Can't be teleported
 #define TRAIT_NO_TELEPORT "no-teleport" //you just can't
+/// Item is too hot to pick up by hands, must use tongs.
 #define TRAIT_NEEDS_QUENCH "Needs Quenching"
+/// Item has been recently smelted and should give XP when retrieved
+#define TRAIT_NEWLY_SMELTED "newly_smelted"
 /// Properly wielded two handed item
 #define TRAIT_WIELDED "wielded"
 /// The items needs two hands to be carried
@@ -602,6 +607,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This atom is a secluded location, which is counted as out of bounds.
 /// Anything that enters this atom's contents should react if it wants to stay in bounds.
 #define TRAIT_SECLUDED_LOCATION "secluded_loc"
+
+/// Generic atom traits
+/// Stops someone from splashing their reagent_container on an object with this trait
+#define TRAIT_DO_NOT_SPLASH "do_not_splash"
 
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"

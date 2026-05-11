@@ -135,7 +135,7 @@ DEFINE_BITFIELD(organ_flags, list(
 /// Max damage we consider for damage_organs()
 #define MAX_CONSIDERED_ORGAN_DAMAGE_ROLL 75
 /// ditto but for internal organ damage
-#define ORGAN_MINIMUM_DAMAGE 12.5
+#define ORGAN_MINIMUM_DAMAGE 25
 
 //wound severities for /datum/wound
 /// Wounds that are either surgically induced or too minor to matter

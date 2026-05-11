@@ -10,7 +10,7 @@
 	anchored = TRUE
 	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND | INTERACT_ATOM_UI_INTERACT
 
-	var/stat = 0
+	var/machine_stat = 0
 
 	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
 
@@ -34,7 +34,7 @@
 	if(!armor)
 		armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 10, "fire" = 50, "acid" = 70)
 	. = ..()
-	GLOB.machines += src
+	SSmachines.register_machine(src)
 
 	if(!speed_process)
 		START_PROCESSING(SSmachines, src)
@@ -47,42 +47,27 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/Destroy()
-	GLOB.machines.Remove(src)
+	SSmachines.unregister_machine(src)
 	if(!speed_process)
 		STOP_PROCESSING(SSmachines, src)
 	else
 		STOP_PROCESSING(SSfastprocess, src)
-	dropContents()
-	if(length(component_parts))
-		for(var/atom/A in component_parts)
-			qdel(A)
-		component_parts.Cut()
-	return ..()
 
-/obj/machinery/proc/locate_machinery()
-	return
+	return ..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
 	return PROCESS_KILL
-
-/obj/machinery/proc/dropContents(list/subset = null)
-	var/turf/T = get_turf(src)
-	for(var/atom/movable/A in contents)
-		if(subset && !(A in subset))
-			continue
-		A.forceMove(T)
-	occupant = null
 
 /obj/machinery/proc/can_be_occupant(atom/movable/am)
 	return occupant_typecache ? is_type_in_typecache(am, occupant_typecache) : isliving(am)
 
 
 /obj/machinery/proc/is_operational()
-	return !(stat & (NOPOWER|BROKEN|MAINT))
+	return !(machine_stat & (NOPOWER|BROKEN|MAINT))
 
 /obj/machinery/can_interact(mob/user)
 	var/silicon = IsAdminGhost(user)
-	if((stat & (NOPOWER|BROKEN)) && !(interaction_flags_machine & INTERACT_MACHINE_OFFLINE))
+	if((machine_stat & (NOPOWER|BROKEN)) && !(interaction_flags_machine & INTERACT_MACHINE_OFFLINE))
 		return FALSE
 	if(!(interaction_flags_machine & INTERACT_MACHINE_OPEN))
 		if(!silicon || !(interaction_flags_machine & INTERACT_MACHINE_OPEN_SILICON))
@@ -99,7 +84,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 //Return a non FALSE value to interrupt attack_hand propagation to subtypes.
-/obj/machinery/interact(mob/user, special_state)
+/obj/machinery/interact(mob/user, special_machine_state)
 	if(interaction_flags_machine & INTERACT_MACHINE_SET_MACHINE)
 		user.set_machine(src)
 	. = ..()
@@ -138,19 +123,79 @@
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return
 
-/obj/machinery/deconstruct(disassembled = TRUE)
-	if(!(flags_1 & NODECONSTRUCT_1))
-		on_deconstruction()
-		if(component_parts && component_parts.len)
-			for(var/obj/item/I in component_parts)
-				I.forceMove(loc)
-			component_parts.Cut()
-	qdel(src)
+/obj/machinery/handle_deconstruct(disassembled = TRUE)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	if(obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION)
+		dump_inventory_contents() //drop stuff we consider important
+		return
+
+	on_deconstruction()
+
+	if(!LAZYLEN(component_parts))
+		dump_contents() //drop everything inside us
+		return //we don't have any parts.
+
+	if(component_parts && component_parts.len)
+		for(var/part in component_parts)
+			var/obj/item/obj_part = part
+			component_parts -= part
+			obj_part.forceMove(loc)
+	LAZYCLEARLIST(component_parts)
+
+	//drop everything inside us. we do this last to give machines a chance
+	//to handle their contents before we dump them
+	dump_contents()
+
+/obj/machinery/proc/set_occupant(atom/movable/new_occupant)
+	SHOULD_CALL_PARENT(TRUE)
+
+	SEND_SIGNAL(src, COMSIG_MACHINERY_SET_OCCUPANT, new_occupant)
+	occupant = new_occupant
+
+/**
+ * Drop every movable atom in the machine's contents list, including any components and circuit.
+ */
+/obj/machinery/dump_contents()
+	// Start by calling the dump_inventory_contents proc. Will allow machines with special contents
+	// to handle their dropping.
+	dump_inventory_contents()
+
+	// Then we can clean up and drop everything else.
+	var/turf/this_turf = get_turf(src)
+	for(var/atom/movable/movable_atom in contents)
+		movable_atom.forceMove(this_turf)
+
+	// We'll have dropped the occupant, circuit and component parts as part of this.
+	set_occupant(null)
+	LAZYCLEARLIST(component_parts)
+
+/*
+ * Drop every movable atom in the machine's contents list that is not a component_part.
+ *
+ * Proc does not drop components and will skip over anything in the component_parts list.
+ * Call dump_contents() to drop all contents including components.
+ * Arguments:
+ * * subset - If this is not null, only atoms that are also contained within the subset list will be dropped.
+ */
+/obj/machinery/proc/dump_inventory_contents(list/subset = null)
+	var/turf/this_turf = get_turf(src)
+	for(var/atom/movable/movable_atom in contents)
+		if(subset && !(movable_atom in subset))
+			continue
+
+		if(movable_atom in component_parts)
+			continue
+
+		movable_atom.forceMove(this_turf)
+
+		if(occupant == movable_atom)
+			set_occupant(null)
 
 /obj/machinery/atom_break(damage_flag, silent)
 	. = ..()
-	if(!(stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1))
-		stat |= BROKEN
+	if(!(machine_stat & BROKEN))
+		machine_stat |= BROKEN
 		SEND_SIGNAL(src, COMSIG_MACHINERY_BROKEN, damage_flag)
 		update_appearance(UPDATE_ICON)
 		return TRUE
@@ -161,7 +206,7 @@
 
 /obj/machinery/handle_atom_del(atom/A)
 	if(A == occupant)
-		occupant = null
+		set_occupant(null)
 		update_appearance(UPDATE_ICON)
 		updateUsrDialog()
 
@@ -172,7 +217,7 @@
 	return SUCCESSFUL_UNFASTEN
 
 /obj/proc/default_unfasten_wrench(mob/user, obj/item/I, time = 20) //try to unwrench an object in a WONDERFUL DYNAMIC WAY
-	if(!(flags_1 & NODECONSTRUCT_1) && I.tool_behaviour == TOOL_WRENCH)
+	if(I.tool_behaviour == TOOL_WRENCH)
 		var/can_be_unfasten = can_be_unfasten_wrench(user)
 		if(!can_be_unfasten || can_be_unfasten == FAILED_UNFASTEN)
 			return can_be_unfasten
@@ -180,7 +225,7 @@
 			to_chat(user, "<span class='notice'>I begin [anchored ? "un" : ""]securing [src]...</span>")
 		I.play_tool_sound(src, 50)
 		var/prev_anchored = anchored
-		//as long as we're the same anchored state and we're either on a floor or are anchored, toggle our anchored state
+		//as long as we're the same anchored machine_state and we're either on a floor or are anchored, toggle our anchored machine_state
 		if(I.use_tool(src, user, time, extra_checks = CALLBACK(src, PROC_REF(unfasten_wrench_check), prev_anchored, user)))
 			to_chat(user, "<span class='notice'>I [anchored ? "un" : ""]secure [src].</span>")
 			setAnchored(!anchored)
@@ -233,7 +278,7 @@
 /obj/machinery/Exited(atom/movable/gone, direction)
 	. = ..()
 	if (gone == occupant)
-		occupant = null
+		set_occupant(null)
 
 /obj/machinery/proc/adjust_item_drop_location(atom/movable/AM)	// Adjust item drop location to a 3x3 grid inside the tile, returns slot id from 0 to 8
 	var/md5 = md5(AM.name)										// Oh, and it's deterministic too. A specific item will always drop from the same slot.

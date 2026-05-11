@@ -1,6 +1,6 @@
 // Weapons
 /obj/item/weapon/sword/short/gronn
-	name = "Osslandic hinterblade"
+	name = "osslandic hinterblade"
 	desc = "Due to the shortage of forged steel in Ossland, their iron blades have become hardier and thicker than what one may see elsewhere. The favoured weapon of choice for any able-bodied hunter of Ossland, the hinterblade is the heftier, unwieldy cousin of the arming sword."
 	icon_state = "gronnsword"
 	force = DAMAGE_SWORD
@@ -10,7 +10,7 @@
 	gripped_intents = null
 	minstr = 9 //NO TWINKS!!
 	w_class = WEIGHT_CLASS_NORMAL
-
+	smeltresult = /obj/item/ingot/iron
 	grid_width = 32
 	grid_height = 96
 	item_weight = 1.2 KILOGRAMS
@@ -22,7 +22,7 @@
 	penfactor = 10
 
 /obj/item/weapon/handclaw
-	name = "Iron Hound Claws"
+	name = "iron hound claws"
 	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh, \
 			a show of the continual worship and veneration of the Great Hunt in Ossland."
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
@@ -42,14 +42,14 @@
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	grid_height = 96
 	grid_width = 32
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/handclaw/steel
-	name = "Steel Mantis Claws"
+	name = "steel mantis claws"
 	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel, \
 			Their longer blades offer a superior defence option but their added weight slows them down."
 	icon_state = "steelclaws"
@@ -59,11 +59,11 @@
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 250
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/handclaw/gronn
-	name = "Ossland Beast Claws"
+	name = "ossland beast claws"
 	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
 			Their unique design aids them in slipping between the plates in armor and their light weight supports rapid aggressive slashes. \
 			'The cycle of predator and prey continues. To hunt is to be hunted is to hunt in return.'"

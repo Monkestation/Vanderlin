@@ -119,13 +119,13 @@
 	/// So 1u of exposure is 5 seconds of statue time
 	var/reagent_to_time_conversion = 5 SECONDS
 
-/datum/reagent/sal_petris/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/sal_petris/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
 	if(reac_volume < min_volume_to_pretrify)
 		return
 
-	M.Stun(4 SECONDS)
-	M.petrify(reac_volume * reagent_to_time_conversion)
+	exposed_mob.Stun(4 SECONDS)
+	exposed_mob.petrify(reac_volume * reagent_to_time_conversion)
 
 /datum/reagent/cryzaline_suspension
 	name = "Crysaline Suspension"
@@ -140,11 +140,10 @@
 	/// How much reagent volume converts into frost stacks
 	var/reagent_to_stack_conversion = 0.2
 
-/datum/reagent/cryzaline_suspension/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/cryzaline_suspension/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-
 	if(reac_volume < min_volume_to_affect)
 		return
 
 	var/stacks = max(1, round(reac_volume * reagent_to_stack_conversion))
-	apply_frost_stack(M, stacks)
+	apply_frost_stack(exposed_mob, stacks)

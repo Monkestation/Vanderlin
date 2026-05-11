@@ -100,9 +100,6 @@
 						shoes_check.polished = 2
 						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
-						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
-						if(particle_spewer)
-							qdel(particle_spewer)
 						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
 						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
 						target.add_stress(/datum/stress_event/extra_shiny_shoes)

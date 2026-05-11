@@ -16,6 +16,7 @@
 	min_damage_dividend = 0
 	strong_intent_bonus = TRUE
 	aimed_intent_bonus = TRUE
+	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	var/artery_type_override
 
 /datum/wound/artery/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
@@ -27,7 +28,7 @@
 	. = ..()
 	if(affected.status == BODYPART_ROBOTIC)
 		return FALSE
-	if(!affected.get_incision())
+	if(!affected.get_cut())
 		return FALSE
 	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
 		return FALSE

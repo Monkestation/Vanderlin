@@ -1152,6 +1152,7 @@
 	requirements = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/fibers = 1,
 				/obj/item/clothing/neck/chaincoif)
+	blacklisted_paths = list(/obj/item/clothing/neck/chaincoif/iron)
 	craftdiff = 4
 	category = "Hat"
 

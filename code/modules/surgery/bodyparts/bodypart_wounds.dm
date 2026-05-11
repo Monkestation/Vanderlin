@@ -118,20 +118,21 @@
 	return TRUE
 
 /// Returns the total bleed rate on this bodypart
-/obj/item/bodypart/proc/get_bleed_rate()
+/obj/item/bodypart/proc/get_bleed_rate(artifical = FALSE)
 	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return 0
 	if(!bleeds)
 		return 0
 	var/bleed_rate = 0
-	if(bandage && !GET_ATOM_BLOOD_DNA_LENGTH(bandage))
-		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += (wound.bleed_rate * owner.dna.species.bleed_mod)
 
 	for(var/datum/injury/injury as anything in injuries)
-		if(injury.is_bleeding())
-			bleed_rate += injury.get_bleed_rate()
+		if(!artifical)
+			if(injury.is_bleeding())
+				bleed_rate += injury.get_bleed_rate()
+		else
+			bleed_rate += injury.get_artifical_bleed_rate()
 
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(!embedded.embedding.embedded_bloodloss)
@@ -389,7 +390,7 @@
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage_expire()
-	var/bleed_rate = get_bleed_rate()
+	var/bleed_rate = get_bleed_rate(TRUE)
 	if(!bandage)
 		return FALSE
 	if(!bleed_rate)

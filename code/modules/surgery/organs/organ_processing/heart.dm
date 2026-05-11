@@ -162,6 +162,7 @@
 			bleed_mod *= human_owner.physiology.bleed_mod
 	for(var/obj/item/bodypart/bleed_part as anything in owner.bodyparts)
 		var/resulting_bleed = bleed_part.get_bleed_rate(TRUE) * 0.5 * delta_time
+		var/true_bleed = bleed_part.get_bleed_rate() * 0.5 * delta_time
 		switch(owner.pulse)
 			if(PULSE_SLOW)
 				resulting_bleed *= 0.8
@@ -170,12 +171,10 @@
 			if(PULSE_FASTER, PULSE_THREADY)
 				resulting_bleed *= 1.5
 		resulting_bleed = CEILING(resulting_bleed * bleed_mod, 0.1)
-		if(resulting_bleed <= 0)
-			continue
 		if(bleed_part.bandage)
 			bleed_part.try_bandage_expire()
-		else
-			temp_bleed += resulting_bleed
+		else if(true_bleed > 0)
+			temp_bleed += true_bleed
 	if(temp_bleed)
 		if(owner.bleed(temp_bleed) && (temp_bleed >= 1.5))
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"

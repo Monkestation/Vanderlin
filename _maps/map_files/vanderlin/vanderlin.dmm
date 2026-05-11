@@ -9213,6 +9213,21 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
+"ese" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/essence_connector,
+/obj/item/essence_connector,
+/obj/item/essence_connector,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/essence_node_jar{
+	pixel_x = -7;
+	pixel_y = 17
+	},
+/obj/structure/chem_separator{
+	pixel_y = 17
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/clinic_large/apothecary)
 "esh" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/dirt,
@@ -10035,7 +10050,6 @@
 /area/indoors/town/keep/halls)
 "eNl" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/clothing/head/priestmask,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/church)
 "eNE" = (
@@ -10889,6 +10903,7 @@
 /obj/structure/rack,
 /obj/item/flint,
 /obj/item/flint,
+/obj/item/weapon/tongs,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/smithy)
 "fiN" = (
@@ -15400,6 +15415,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/undershirt/priest,
 /obj/item/clothing/shirt/robe/priest,
+/obj/item/clothing/head/roguehood/priest,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/church)
 "hyQ" = (
@@ -18455,6 +18471,10 @@
 "iQk" = (
 /turf/open/floor/blocks,
 /area/under/town/sewer)
+"iQr" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/turf/open/floor/cobblerock,
+/area/indoors/town/keep/magician)
 "iQw" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/dirt/road,
@@ -21731,6 +21751,10 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"krf" = (
+/obj/item/mould/customizable,
+/turf/open/floor/cobblerock,
+/area/indoors/town/smithy)
 "kri" = (
 /obj/structure/fluff/clock,
 /obj/effect/decal/borderfall{
@@ -25427,21 +25451,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
 /area/outdoors/basin/safe)
-"mbA" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/essence_connector,
-/obj/item/essence_connector,
-/obj/item/essence_connector,
-/obj/item/reagent_containers/glass/bucket/wooden,
-/obj/item/essence_node_jar{
-	pixel_x = -7;
-	pixel_y = 17
-	},
-/obj/structure/chem_separator{
-	pixel_y = 17
-	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/indoors/town/clinic_large/apothecary)
 "mbG" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/gibs/old,
@@ -26851,10 +26860,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
 /area/under/town/sewer)
-"mKg" = (
-/obj/item/weapon/tongs,
-/turf/open/floor/cobblerock,
-/area/indoors/town/smithy)
 "mKh" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -31327,10 +31332,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town/roofs)
-"oKx" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
-/turf/open/floor/cobblerock,
-/area/indoors/town/keep/magician)
 "oKG" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/blocks,
@@ -33777,6 +33778,14 @@
 /obj/item/bedsheet/wool,
 /turf/open/floor/wood,
 /area/indoors/town)
+"pQU" = (
+/obj/structure/pottery_lathe,
+/obj/item/natural/clay,
+/obj/item/natural/clay,
+/obj/item/natural/clay,
+/obj/item/natural/clay,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/smithy)
 "pRk" = (
 /obj/structure/door/fancy{
 	name = "Green Noble Manor"
@@ -52422,6 +52431,21 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
+/obj/item/clothing/face/spectacles/sglasses,
+/obj/item/clothing/face/spectacles,
+/obj/item/clothing/face/exoticsilkmask,
+/obj/item/clothing/armor/gambeson/arming,
+/obj/item/clothing/cloak/eastcloak2,
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/head/courtierhat,
+/obj/item/clothing/shoes/ridingboots,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/face/spectacles/inqglasses,
+/obj/item/clothing/shirt/undershirt/eastshirt2,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/armor/basiceast/crafteast,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/shoes/boots/armor/matthios/lord,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
 "yiz" = (
@@ -67637,7 +67661,7 @@ qRG
 dVG
 ner
 tbW
-oKx
+iQr
 tbW
 ner
 ner
@@ -110096,7 +110120,7 @@ wkg
 siK
 neD
 gRT
-mbA
+ese
 eFi
 neD
 gRT
@@ -113758,7 +113782,7 @@ gQw
 clQ
 xys
 xys
-kmk
+pQU
 xRN
 kmk
 vDf
@@ -114161,7 +114185,7 @@ fWg
 hCp
 hCp
 hCp
-mKg
+krf
 tFy
 xys
 xys

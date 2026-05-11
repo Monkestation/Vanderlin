@@ -171,7 +171,7 @@
 	taste_description = "a flash of white"
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 16
-	metabolization_rate = 0.2
+	metabolization_rate = 0.1
 
 /datum/reagent/ozium/on_mob_metabolize(mob/living/L)
 	. = ..()
