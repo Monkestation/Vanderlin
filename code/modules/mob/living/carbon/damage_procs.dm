@@ -137,6 +137,26 @@
 		amount = min(amount, 0)
 	return ..()
 
+/mob/living/carbon/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
+	. = ..()
+	if(isnull(.))
+		return
+	if(. <= 75)
+		if(getOxyLoss() > 75)
+			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+	else if(getOxyLoss() <= 75)
+		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+
+/mob/living/carbon/setOxyLoss(amount, updating_health = TRUE, forced = FALSE)
+	. = ..()
+	if(isnull(.))
+		return
+	if(. <= 75)
+		if(getOxyLoss() > 75)
+			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+	else if(getOxyLoss() <= 75)
+		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+
 
 /** adjustOrganLoss
  * inputs: slot (organ slot, like ORGAN_SLOT_HEART), amount (damage to be done), and maximum (currently an arbitrarily large number, can be set so as to limit damage)
@@ -171,41 +191,29 @@
 
 /mob/living/carbon/getPainLoss()
 	var/amount = 0
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/bodypart = X
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		amount += bodypart.pain_dam * bodypart.pain_damage_coeff
 	return amount
 
 /mob/living/carbon/adjustPainLoss(amount, updating_health = TRUE, forced = FALSE, required_status = null)
 	if(!forced && (status_flags & GODMODE))
-		return FALSE
+		return 0
 	var/old_amount = amount
-	var/list/obj/item/bodypart/parts
-	if(amount > 0)
-		parts = get_painable_bodyparts()
-	else
-		parts = get_pained_bodyparts()
+	var/list/obj/item/bodypart/parts = get_painable_bodyparts(adding_pain = (amount > 0 ? TRUE : FALSE))
+	if(!parts)
+		return 0
 	var/update = FALSE
-	while(parts.len && amount)
-		var/obj/item/bodypart/picked = pick(parts)
-		var/pain_per_part
-		if(amount < 0)
-			pain_per_part = FLOOR(amount/parts.len, DAMAGE_PRECISION)
-		else
-			pain_per_part = CEILING(amount/parts.len, DAMAGE_PRECISION)
-
-		var/pain_was = picked.pain_dam
-		if(amount < 0)
+	var/pain_per_part = amount / length(parts)
+	if(pain_per_part < 0)
+		pain_per_part = FLOOR(pain_per_part, DAMAGE_PRECISION)
+	else
+		pain_per_part = CEILING(pain_per_part, DAMAGE_PRECISION)
+	while(length(parts))
+		var/obj/item/bodypart/picked = pick_n_take(parts)
+		if(pain_per_part < 0)
 			update |= picked.remove_pain(abs(pain_per_part))
 		else
 			update |= picked.add_pain(abs(pain_per_part))
-
-		if(pain_per_part < 0)
-			pain_per_part = FLOOR(amount - (picked.pain_dam - pain_was), DAMAGE_PRECISION)
-		else
-			pain_per_part = CEILING(amount - (picked.pain_dam - pain_was), DAMAGE_PRECISION)
-
-		parts -= picked
 	if(updating_health)
 		updatehealth()
 	if(update)
@@ -225,24 +233,17 @@
 /mob/living/carbon/proc/InFullShock()
 	return (shock_stage >= SHOCK_STAGE_6)
 
-/mob/living/carbon/proc/get_painable_bodyparts(status)
+/mob/living/carbon/proc/get_painable_bodyparts(status, adding_pain)
 	var/list/obj/item/bodypart/parts = list()
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		if(status && (BP.status != status))
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(status && (bodypart.status != status))
 			continue
-		if(BP.pain_dam < BP.max_pain_damage)
-			parts += BP
-	return parts
-
-/mob/living/carbon/proc/get_pained_bodyparts(status)
-	var/list/obj/item/bodypart/parts = list()
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		if(status && (BP.status != status))
-			continue
-		if(BP.pain_dam)
-			parts += BP
+		if(adding_pain)
+			if(bodypart.pain_dam < bodypart.max_pain_damage)
+				parts += bodypart
+		else
+			if(bodypart.pain_dam)
+				parts += bodypart
 	return parts
 
 /mob/living/carbon/proc/endorphinate(forced = FALSE, silent = FALSE, local_sound = TRUE, flash = TRUE, special_sound)
@@ -321,8 +322,7 @@
 
 	var/shock = 0
 	shock += SHOCK_MOD_CLONE * getCloneLoss()
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/bodypart = X
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		shock += bodypart.get_shock(FALSE, TRUE)
 
 	if(painkiller_included)

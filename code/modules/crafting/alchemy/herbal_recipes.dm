@@ -75,7 +75,7 @@
 	taste_description = "bitter flowers"
 	scent_description = "marigold"
 
-/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
+/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
@@ -85,6 +85,8 @@
 			injury.heal_damage(3)
 		injury.adjust_germ_level(-5)
 	bodypart.disinfect_limb(20 SECONDS)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)
 /datum/reagent/medicine/herbal/hypericum_tonic
@@ -396,7 +398,7 @@
 	overdose_threshold = 30
 	taste_description = "bitter numbness"
 
-/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
+/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
@@ -405,6 +407,8 @@
 		if(injury.damage_type != WOUND_BURN)
 			injury.heal_damage(0.75)
 	bodypart.add_pain(-amount_to_transfer * 0.3)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M)
 	M.adjustToxLoss(0.5)
@@ -450,8 +454,7 @@
 			break
 		total_healing = injury.heal_damage(total_healing)
 
-	if(prob(15))
-		M.heal_bodypart_damage(1, 1, 0)
+	M.update_all_limb_states()
 	. = ..()
 
 // Anti-Poison Blend

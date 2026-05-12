@@ -140,10 +140,12 @@
 	. = ..()
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 
-/datum/reagent/medicine/coldvein_compress/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/coldvein_compress/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
+	for(var/datum/injury/injury in bodypart.injuries)
 		if(injury.damage_type == WOUND_BURN)
 			injury.heal_damage(2)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/coldvein_compress/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -167,13 +169,15 @@
 			M.heal_wounds(4 * efficiency)
 	. = ..()
 
-/datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
+	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		if(injury.damage_type == WOUND_BURN)
 			continue
 		injury.heal_damage(2)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/ashbinders_salve
 	name = "Ashbinder's Salve"
@@ -189,13 +193,15 @@
 		M.adjustFireLoss(-4 * REM * efficiency, 0)
 	. = ..()
 
-/datum/reagent/medicine/ashbinders_salve/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/ashbinders_salve/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
+	for(var/datum/injury/injury in bodypart.injuries)
 		if(injury.damage_type != WOUND_BURN)
 			continue
 		injury.heal_damage(3)
 		injury.adjust_germ_level(-10)
-	BP.disinfect_limb(30 SECONDS)
+	bodypart.disinfect_limb(30 SECONDS)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/vitalroot_draught
 	name = "Vitalroot Draught"
@@ -275,13 +281,15 @@
 	scent_description = "resinous amber"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/woundwrack_oil/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/woundwrack_oil/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
+	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(2)
 		injury.salve_injury()
-	BP.adjust_germ_level(-10)
+	bodypart.adjust_germ_level(-10)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/woundwrack_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -407,13 +415,15 @@
 	scent_description = "dust and old herbs"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/witchknit_paste/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/witchknit_paste/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
+	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(1.5)
 		injury.salve_injury()
-	BP.adjust_germ_level(-15)
+	bodypart.adjust_germ_level(-15)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/witchknit_paste/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)

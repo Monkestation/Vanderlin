@@ -3445,6 +3445,7 @@
 #include "code\modules\mob\living\carbon\carbon.dm"
 #include "code\modules\mob\living\carbon\carbon_defense.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
+#include "code\modules\mob\living\carbon\carbon_medical.dm"
 #include "code\modules\mob\living\carbon\carbon_movement.dm"
 #include "code\modules\mob\living\carbon\carbon_shock.dm"
 #include "code\modules\mob\living\carbon\carbon_wounds.dm"

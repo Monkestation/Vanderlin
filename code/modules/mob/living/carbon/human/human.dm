@@ -422,8 +422,8 @@
 					if(prob(35) || (diceroll >= DICE_SUCCESS))
 						target?.pump_heart(src)
 						target.set_heartattack(FALSE)
-						if(GETBRAINLOSS(target) >= 100)
-							SETBRAINLOSS(target, 99)
+						if(GETBRAINLOSS(target) >= BRAIN_DAMAGE_DEATH)
+							SETBRAINLOSS(target, BRAIN_DAMAGE_DEATH - 1)
 						if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
 							to_chat(src, span_warning("Necra holds tight to this one."))
 							return FALSE

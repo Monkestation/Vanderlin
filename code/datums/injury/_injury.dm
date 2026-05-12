@@ -296,8 +296,8 @@
 	if(damage > min_damage)
 		heal_damage(damage-min_damage)
 	injury_flags &= ~INJURY_RETRACTED
-	parent_bodypart?.update_bodypart_damage_state()
-	parent_bodypart?.owner?.update_damage_overlays()
+	if(parent_bodypart?.post_damage_change())
+		parent_bodypart?.owner?.update_damage_overlays()
 
 // opens the injury and worsens it
 /datum/injury/proc/open_injury(damage, retracting = FALSE)
@@ -313,8 +313,8 @@
 		injury_flags |= INJURY_RETRACTED
 	if(parent_bodypart)
 		parent_bodypart.last_injury = src
-		parent_bodypart.update_bodypart_damage_state()
-		parent_bodypart.owner?.update_damage_overlays()
+		if(parent_bodypart?.post_damage_change())
+			parent_bodypart?.owner?.update_damage_overlays()
 
 // disinfects the injury
 /datum/injury/proc/disinfect_injury()

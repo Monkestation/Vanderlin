@@ -62,6 +62,7 @@
 		else
 			bashing_lethal_heal = injury.heal_damage(bashing_lethal_heal)
 
+	owner.update_all_limb_states()
 	owner.adjust_blood_volume(vitae_cost, maximum = BLOOD_VOLUME_NORMAL)
 
 	//this is quadratic so expect it to scale like crazy

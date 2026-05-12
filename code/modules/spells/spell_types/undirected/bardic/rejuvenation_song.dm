@@ -30,11 +30,11 @@
 		if(iscarbon(owner))
 			var/mob/living/carbon/carbon = owner
 			for(var/datum/injury/injury in carbon.all_injuries)
-				if(!(injury.damage_type in list(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE, WOUND_BLUNT)))
+				if(!(injury.damage_type in list(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE, WOUND_BLUNT)) || !injury.can_heal())
 					continue
 				injury.heal_damage(healing_on_tick)
+			carbon.update_all_limb_states()
 		owner.heal_wounds(healing_on_tick, list(/datum/wound/slash, /datum/wound/puncture, /datum/wound/bite, /datum/wound/bruise))
-		owner.update_damage_overlays()
 
 	owner.adjustOxyLoss(-healing_on_tick, 0)
 	owner.adjustToxLoss(-healing_on_tick, 0)
@@ -50,3 +50,4 @@
 			if(!injury.can_heal())
 				continue
 		healing_on_tick = injury.heal_damage(healing_on_tick)
+	human.update_all_limb_states()

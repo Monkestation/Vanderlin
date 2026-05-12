@@ -35,3 +35,4 @@
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(0.1)
+	carbon.update_all_limb_states()

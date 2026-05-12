@@ -20,7 +20,7 @@
 	spell_cost = 10
 
 	/// Base healing before adjustments
-	var/base_healing = 25
+	var/base_healing = 12.5
 	/// Wound healing modifier
 	var/wound_modifier = 0.25
 	/// Blood healing amount
@@ -263,12 +263,11 @@
 
 	var/mob/living/carbon/C = cast_on
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(owner.zone_selected))
-	if(affecting)
-		affecting.heal_wounds(amount_healed * wound_modifier, src)
-		for(var/datum/injury/injury as anything in affecting.injuries)
-			if(!injury.can_heal())
-				continue
-			injury.heal_damage(amount_healed)
+	if(!affecting)
+		to_chat(owner, span_danger("[C] is missing their [affecting]!"))
+		return
+
+	if(affecting.heal_damage(brute = amount_healed, burn = amount_healed))
 		C.update_damage_overlays()
 
 	for(var/obj/item/organ/possible_organ in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
@@ -306,7 +305,7 @@
 	cooldown_time = 20 SECONDS
 	spell_cost = 45
 
-	base_healing = 50
+	base_healing = 25
 	wound_modifier = 0.5
 	blood_restoration = BLOOD_VOLUME_SURVIVE
 	stun_undead = TRUE

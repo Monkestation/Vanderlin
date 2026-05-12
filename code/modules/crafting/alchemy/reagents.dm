@@ -10,11 +10,13 @@
 	alpha = 173
 	liver_chemical = FALSE
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(1)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -37,6 +39,7 @@
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(1/10 * efficiency)
+	M.update_all_limb_states()
 	if(volume > 0.99)
 		M.adjustBruteLoss(-1.75*REM * efficiency, 0)
 		M.adjustFireLoss(-1.75*REM * efficiency, 0)
@@ -53,13 +56,15 @@
 	metabolization_rate = REAGENTS_METABOLISM * 2
 	liver_chemical = FALSE
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(2)
 	for(var/datum/wound/wound in bodypart.wounds)
 		wound.heal_wound(2)
+	if(bodypart.post_damage_change())
+		carbon_mob.update_damage_overlays()
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -82,6 +87,7 @@
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(2/10 * efficiency)
+	M.update_all_limb_states()
 	if(volume > 0.99)
 		M.adjustBruteLoss(-7*REM * efficiency, 0)
 		M.adjustFireLoss(-7*REM * efficiency, 0)

@@ -255,8 +255,7 @@
 		injury.heal_damage(10)
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE)
 		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine))
-		affecting.update_damages()
-		if(affecting.update_bodypart_damage_state())
+		if(affecting.post_damage_change())
 			target.update_damage_overlays()
 		if(injury.damage_per_injury() > injury.autoheal_cutoff)
 			user.visible_message(span_green("<b>[user]</b> partially stitches \a [injury.get_desc()] on <b>[target]</b>'s [affecting.name] with \the [src]."), \

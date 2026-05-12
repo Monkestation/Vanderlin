@@ -96,6 +96,7 @@
 				urhealedamt_burn = injury.heal_damage(urhealedamt_burn)
 			if(urhealedamt_brute && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)) && injury.required_status == BODYPART_ORGANIC)
 				urhealedamt_brute = injury.heal_damage(urhealedamt_brute)
+		target.update_all_limb_states()
 	else
 		target.heal_bodypart_damage(urhealedamt_brute, urhealedamt_burn, required_status = BODYPART_ORGANIC)
 	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)

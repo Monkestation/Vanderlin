@@ -417,7 +417,6 @@
 		. = TRUE
 	needs_processing = .
 
-
 /// Proc for damaging organs inside a limb based on damage values
 /obj/item/bodypart/proc/damage_internal_organs(wounding_type, amount = 0, organ_bonus = 0, bare_organ_bonus = 0, forced = FALSE, wound_messages = TRUE)
 	. = FALSE
@@ -572,11 +571,8 @@
 		if(owner)
 			injury.bleed_timer = max(0, injury.bleed_timer - (0.5 * delta_time))
 
-	// Sync the limb's damage with its injuries
-	update_damages()
-	// Also update efficiency
-	update_limb_efficiency()
-	owner.update_damage_overlays()
+	if(post_damage_change())
+		owner.update_damage_overlays()
 
 /// Updates brute_damn and burn_damn from injuries
 /obj/item/bodypart/proc/update_damages()
@@ -930,21 +926,7 @@
 		if(shock_penalty)
 			owner.update_shock_penalty(shock_penalty)
 
-
-	if(owner)
-		if(can_be_disabled)
-			update_disabled()
-		update_limb_efficiency()
-		if(updating_health)
-			owner.updatehealth()
-
-			if(get_shock(FALSE, TRUE) >= DAMAGE_PRECISION)
-				owner.update_shock()
-				. = TRUE
-
-	update_damages()
-	consider_processing()
-	return update_bodypart_damage_state() || .
+	return post_damage_change(TRUE, FALSE)
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
@@ -953,7 +935,6 @@
 	update_HP()
 	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
-
 
 	for(var/thing in injuries)
 		if((brute <= 0) && (burn <= 0))
@@ -967,23 +948,23 @@
 		else if(injury.damage_type == WOUND_BURN)
 			burn = injury.heal_damage(burn)
 
+	return post_damage_change(updating_health)
+
+/// Call this after you damage or heal injuries to update the bodypart's damage properties properly. Returns whether limb need their overlays updated
+/obj/item/bodypart/proc/post_damage_change(updating_health = TRUE, updating_shock = FALSE)
+	. = FALSE
 	update_damages()
-
-	if(brute)
-		set_brute_dam(round(max(brute_dam - brute, 0), DAMAGE_PRECISION))
-	if(burn)
-		set_burn_dam(round(max(burn_dam - burn, 0), DAMAGE_PRECISION))
-
-	update_damages()
-
 	if(owner)
 		update_limb_efficiency()
 		if(can_be_disabled)
 			update_disabled()
 		if(updating_health)
 			owner.updatehealth()
+			if(updating_shock && get_shock(FALSE, TRUE) >= DAMAGE_PRECISION)
+				owner.update_shock()
+				. = TRUE
 	consider_processing()
-	return update_bodypart_damage_state()
+	return update_bodypart_damage_state() || .
 
 ///Proc to hook behavior associated to the change of the brute_dam variable's value.
 /obj/item/bodypart/proc/set_brute_dam(new_value)
@@ -1147,11 +1128,11 @@
 	SIGNAL_HANDLER
 	set_can_be_disabled(initial(can_be_disabled))
 
-//Updates an organ's brute/burn states for use by update_damage_overlays()
-//Returns 1 if we need to update overlays. 0 otherwise.
+/// Updates an organ's brute/burn states for use by update_damage_overlays()
+/// Returns 1 if we need to update overlays. 0 otherwise.
 /obj/item/bodypart/proc/update_bodypart_damage_state()
-	var/tbrute	= round( (brute_dam/max_damage)*3, 1 )
-	var/tburn	= round( (burn_dam/max_damage)*3, 1 )
+	var/tbrute = round( (brute_dam/max_damage) * 3, 1 )
+	var/tburn = round( (burn_dam/max_damage) * 3, 1 )
 	if((tbrute != brutestate) || (tburn != burnstate))
 		brutestate = tbrute
 		burnstate = tburn
