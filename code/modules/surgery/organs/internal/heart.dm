@@ -108,6 +108,7 @@
 	. = ..()
 	if(!special)
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS)
+	owner?.stop_sound_channel(CHANNEL_HEARTBEAT)
 
 /obj/item/organ/heart/attack_self(mob/user)
 	. = ..()
@@ -118,12 +119,12 @@
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 8 SECONDS)
 
 /obj/item/organ/heart/proc/can_stop()
-	if(beating)
-		return TRUE
-	return FALSE
+	return beating
 
 /obj/item/organ/heart/proc/stop_if_unowned()
-	if(!owner)
+	if(QDELETED(src))
+		return
+	if(isnull(owner))
 		Stop()
 
 /obj/item/organ/heart/proc/Stop()

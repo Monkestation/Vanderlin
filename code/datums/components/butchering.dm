@@ -19,29 +19,6 @@
 		butchering_enabled = FALSE
 	if(_can_be_blunt)
 		can_be_blunt = _can_be_blunt
-	if(isitem(parent))
-		RegisterSignal(parent, COMSIG_ITEM_ATTACK, PROC_REF(onItemAttack))
-
-/datum/component/butchering/proc/onItemAttack(obj/item/source, mob/living/M, mob/living/user)
-	return
-/*
-	if(user.used_intent.type != INTENT_HARM)
-		return
-	if(M.stat == DEAD && (M.butcher_results || M.guaranteed_butcher_results)) //can we butcher it?
-		if(butchering_enabled && (can_be_blunt || source.get_sharpness()))
-			INVOKE_ASYNC(src, PROC_REF(startButcher), source, M, user)
-			return COMPONENT_ITEM_NO_ATTACK
-
-	if(ishuman(M) && source.force && source.get_sharpness())
-		var/mob/living/carbon/human/H = M
-		if((H.health <= H.crit_threshold || (user.pulling == H && user.grab_state >= GRAB_NECK) || H.IsSleeping()) && user.zone_selected == BODY_ZONE_HEAD) // Only sleeping, neck grabbed, or crit, can be sliced.
-			if(H.has_status_effect(/datum/status_effect/neck_slice))
-				user.show_message("<span class='warning'>[H]'s neck has already been cut, you can't make the bleeding any worse!</span>", MSG_VISUAL, \
-								"<span class='warning'>Their neck has already been cut, you can't make the bleeding any worse!</span>")
-				return COMPONENT_ITEM_NO_ATTACK
-			INVOKE_ASYNC(src, PROC_REF(startNeckSlice), source, H, user)
-			return COMPONENT_ITEM_NO_ATTACK
-*/
 
 /datum/component/butchering/proc/startButcher(obj/item/source, mob/living/M, mob/living/user)
 	to_chat(user, "<span class='notice'>I begin to butcher [M]...</span>")

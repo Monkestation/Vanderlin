@@ -88,7 +88,6 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_HEAD)
-	BP?.add_pain(rand(17.5, 27.5))
 	BP?.limb_flags |= BODYPART_CHRONIC_MIGRAINE
 	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))

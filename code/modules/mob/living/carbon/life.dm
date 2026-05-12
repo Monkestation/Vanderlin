@@ -469,10 +469,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
  * related situations (i.e not just cardiac arrest)
  */
 /mob/living/carbon/proc/undergoing_cardiac_arrest()
+	if(!needs_heart())
+		return FALSE
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
 	if(istype(heart) && heart.beating)
-		return FALSE
-	else if(!needs_heart())
 		return FALSE
 	return TRUE
 

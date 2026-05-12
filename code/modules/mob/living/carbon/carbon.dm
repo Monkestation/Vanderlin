@@ -848,7 +848,7 @@
 	else
 		clear_fullscreen("CMODE")
 
-	if(health <= crit_threshold || (!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && CAN_HAVE_BLOOD(src) && (get_blood_volume() in -INFINITY to BLOOD_VOLUME_SURVIVE)))
+	if(HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_NOCRITOVERLAY))
 		var/severity = 0
 		switch(health)
 			if(-20 to -10)

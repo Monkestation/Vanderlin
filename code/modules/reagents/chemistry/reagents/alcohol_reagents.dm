@@ -45,11 +45,11 @@
 
 /datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.increase_chem_effect(CE_PAINKILLER, boozepwr/2, "[type]")
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr * 0.3, "[type]")
 
 /datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/2, "[type]")
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr * 0.3, "[type]")
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
 	. = ..()
@@ -592,8 +592,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	..()
 	. = 1
 
-/datum/reagent/consumable/ethanol/murkwine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/murkwine)
+/datum/reagent/consumable/ethanol/murkwine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/murkwine)
 
 /datum/reagent/consumable/ethanol/nocshine // wait, no, NOCSHINE
 	name = "Noc's Shine"
@@ -612,8 +613,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	..()
 	. = 1
 
-/datum/reagent/consumable/ethanol/nocshine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/nocshine)
+/datum/reagent/consumable/ethanol/nocshine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/nocshine)
 
 /datum/reagent/consumable/ethanol/luxwine // oh no.
 	name = "Luxintenebre" // lux left w/ sugar in a darkened place for quite some time... U could say... Light in Darkness.....
@@ -631,8 +633,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		M.adjustFireLoss(-1*REM * efficiency, 0)
 	..()
 
-/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/lux_drank)
+/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/lux_drank)
 
 /datum/reagent/consumable/ethanol/luxwine/aged
 	name = "Aged Luxintenebre"

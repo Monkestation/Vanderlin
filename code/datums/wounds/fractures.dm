@@ -256,6 +256,7 @@
 		"The ribs are mauled!",
 		"The ribcage caves in!",
 	)
+	woundpain = 50
 	whp = 50
 	// Lose 224.6 blood over 18 ticks then clot
 	bleed_rate = 1.6

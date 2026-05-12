@@ -532,6 +532,7 @@
 
 /datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	affected_bodypart.add_pain(-(amount_to_transfer * 0.3))
+	. = ..()
 
 /datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjust_stamina(1.5 * efficiency)

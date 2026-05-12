@@ -323,6 +323,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_STARTING_TREASURY = 0,
 	STATS_HUNTED_PEOPLE = 0,
 	STATS_FOREIGNERS = 0,
+	STATS_CPR_REVIVALS = 0,
 ))
 
 GLOBAL_LIST_EMPTY(patron_follower_counts)

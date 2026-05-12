@@ -98,9 +98,10 @@
 
 	// Finally, check if we should go into cardiac arrest
 	// cardiovascular shock, not enough liquid to pump
-	var/should_stop = (owner.get_blood_circulation() < GET_EFFECTIVE_BLOOD_VOL(BLOOD_VOLUME_SURVIVE, owner.total_blood_req)) && DT_PROB(40, delta_time)
+	/* Your heart doesn't stop because you ran out of blood, it stops because it's dead */
+	// var/should_stop = (owner.get_blood_circulation() < GET_EFFECTIVE_BLOOD_VOL(BLOOD_VOLUME_SURVIVE, owner.total_blood_req)) && DT_PROB(40, delta_time)
 	// brain failing to work heart properly
-	should_stop = should_stop || DT_PROB(CEILING(max(0, GETBRAINLOSS(owner) - (owner.maxHealth * 0.5)) / 2, 1), delta_time)
+	var/should_stop = DT_PROB(CEILING(max(0, GETBRAINLOSS(owner) - (owner.maxHealth * 0.5)) / 2, 1), delta_time)
 	// erratic heart patterns, usually caused by oxyloss
 	should_stop = should_stop || ((owner.pulse >= PULSE_THREADY) && DT_PROB(6, delta_time))
 

@@ -518,10 +518,14 @@
 
 	if(!getorganslot(ORGAN_SLOT_BRAIN) || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
 		. += span_boldred("[P[THEYRE]] dead.")
-	else if(appears_dead || stat >= UNCONSCIOUS)
+	else if(appears_dead || HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION))
 		. += span_boldwarning("[P[THEYRE]] unconscious.")
-	else if(InCritical())
-		. += span_warning("[P[THEYRE]] barely unconscious.")
+	else
+		switch(stat)
+			if(UNCONSCIOUS)
+				. += span_notice("[P[THEYRE]]n't responding to anything around [P[THEM]] and seem[p_s()] to be asleep.")
+			if(SOFT_CRIT)
+				. += span_notice("[P[THEYRE]] barely conscious.")
 
 	// Blood volume
 	if(!SEND_SIGNAL(src, COMSIG_DISGUISE_STATUS) && CAN_HAVE_BLOOD(src))

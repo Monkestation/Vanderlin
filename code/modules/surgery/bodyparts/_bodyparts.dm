@@ -247,6 +247,8 @@
 /obj/item/bodypart/proc/on_chronic_fracture_life()
 	if(!prob(2))
 		return
+	if(pain_dam >= SHOCK_STAGE_3)
+		return
 	if(owner.encumbrance >= ENCUMBRANCE_HEAVY)
 		var/pain_amount = rand(3, 5)
 		if(owner.encumbrance >= ENCUMBRANCE_EXTREME)
@@ -257,21 +259,21 @@
 		add_pain(pain_amount)
 
 /obj/item/bodypart/proc/on_arthritis_life()
-	if(prob(2) && pain_dam < max_pain_damage * 0.1)
-		add_pain(rand(1, 2))
+	if(prob(2) && pain_dam < SHOCK_STAGE_1)
+		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 		var/pain_msg = pick("Your [name] throbs with arthritic pain!",
 							"A sharp ache shoots through your [name]!",
 							"Your [name] feels stiff and painful!")
 		to_chat(owner, span_warning(pain_msg))
 
-	if(prob(1) && owner.loc && pain_dam < max_pain_damage * 0.15)
+	if(prob(1) && owner.loc && pain_dam < (SHOCK_STAGE_2 / 2))
 		if(SSParticleWeather.runningWeather && SSParticleWeather.runningWeather.can_weather(owner))
-			add_pain(rand(2, 3))
+			add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 			to_chat(owner, span_warning("The weather makes your arthritis act up."))
 
 /obj/item/bodypart/proc/on_migraine_life()
-	if(prob(2) && pain_dam < max_pain_damage * 0.2)
-		add_pain(rand(2, 3))
+	if(prob(2) && pain_dam < SHOCK_STAGE_2)
+		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_2 * 0.5))
 
 		if(prob(30))
 			owner.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
@@ -280,8 +282,8 @@
 			to_chat(owner, span_warning("A migraine headache begins to build."))
 
 	if(prob(1))
-		if(pain_dam > max_pain_damage * 0.2 && owner.loc?.luminosity > 2)
-			add_pain(rand(3, 5))
+		if(pain_dam < SHOCK_STAGE_2 && owner.loc?.luminosity > 2)
+			add_pain(rand(SHOCK_STAGE_1 * 0.3, SHOCK_STAGE_1 * 0.5))
 			to_chat(owner, span_warning("The flickering flames make your migraine worse!"))
 
 /obj/item/bodypart/proc/update_pain_coeff()
@@ -396,7 +398,7 @@
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		remove_pain(amount = (pain_heal_tick * multiplier * (0.5 * delta_time)), updating_health = FALSE)
+		remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE)
 	if(can_decay())
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
 			update_germs(delta_time, times_fired)
@@ -796,13 +798,13 @@
 /obj/item/bodypart/proc/add_pain(amount = 0, updating_health = TRUE, required_status = null)
 	if(required_status && (status != required_status))
 		return
+	if(amount <= 0)
+		return
 	if(!can_feel_pain())
 		return
-	var/can_inflict = max_pain_damage - pain_dam
-	amount *= CONFIG_GET(number/damage_multiplier)
+	amount = min(max_pain_damage - pain_dam, amount)
 	amount -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
-	amount = min(can_inflict, amount)
-	pain_dam = round(pain_dam + max(amount, 0), DAMAGE_PRECISION)
+	pain_dam = round(pain_dam + amount, DAMAGE_PRECISION)
 	if(updating_health)
 		owner.update_shock()
 	if(can_be_disabled)
@@ -814,9 +816,9 @@
 /obj/item/bodypart/proc/remove_pain(amount = 0, updating_health = TRUE, required_status = null)
 	if(required_status && (status != required_status))
 		return
-	if(amount > pain_dam)
-		amount = pain_dam
-	pain_dam = FLOOR(pain_dam - max(abs(amount), 0), DAMAGE_PRECISION)
+	if(amount <= 0)
+		return
+	pain_dam = max(FLOOR(pain_dam - min(amount, pain_dam), DAMAGE_PRECISION), 0)
 	if(updating_health)
 		owner?.update_shock()
 	if(can_be_disabled)
@@ -835,7 +837,7 @@
 		return remove_pain(abs(diff), updating_health, required_status)
 
 /// Returns how much pain we are dealing with right now, taking other damage types into account
-/obj/item/bodypart/proc/get_shock(painkiller_included = FALSE, nerve_included = TRUE)
+/obj/item/bodypart/proc/get_shock(painkiller_included = FALSE)
 	if(!can_feel_pain())
 		return 0
 	//Multiply our total pain damage by this
@@ -845,10 +847,6 @@
 		multiplier *= 0.75
 	if(multiplier <= 0)
 		return 0
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		if(human_owner.dna?.species)
-			multiplier *= human_owner.dna?.species.pain_mod
 	var/constant_pain = 0
 	constant_pain += SHOCK_MOD_BRUTE * brute_dam
 	constant_pain += SHOCK_MOD_BURN * burn_dam
@@ -958,7 +956,7 @@
 			update_disabled()
 		if(updating_health)
 			owner.updatehealth()
-			if(updating_shock && get_shock(FALSE, TRUE) >= DAMAGE_PRECISION)
+			if(updating_shock && get_shock(FALSE) >= DAMAGE_PRECISION)
 				owner.update_shock()
 				. = TRUE
 	consider_processing()

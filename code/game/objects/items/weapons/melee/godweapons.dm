@@ -77,7 +77,7 @@
 	var/mob/living/carbon/human/H = target
 	var/heart_crit = H.has_wound(/datum/wound/artery/heart)
 	var/dead = H.stat == DEAD
-	if((H.health < H.crit_threshold) || heart_crit || dead)
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) || heart_crit || dead)
 		var/fast = heart_crit || dead
 		var/obj/item/organ/heart/heart = H.getorganslot(ORGAN_SLOT_HEART)
 		if(!heart)
@@ -148,7 +148,7 @@
 	if(H.get_lux_status() != LUX_HAS_LUX)
 		return
 	var/dead = H.stat == DEAD
-	if((H.health < H.crit_threshold) || dead)
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) || dead)
 		var/speed = dead ? 3 SECONDS : 7 SECONDS
 		visible_message(user, span_notice("Neant lights up and begins to tear at [target]..."))
 		if(!do_after(user, speed, H))

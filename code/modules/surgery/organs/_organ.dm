@@ -630,7 +630,7 @@
 	var/effective_efficiency = LAZYACCESS(organ_efficiency, slot)
 	if(isnull(effective_efficiency))
 		return effective_efficiency
-	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY)
+	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY, ORGAN_SLOT_HEART)
 	if(slot in no_bleedout_organs)
 		if(is_failing_without_bleedout())
 			return 0
@@ -803,7 +803,7 @@
 		return round(maxHealth * pain_multiplier, DAMAGE_PRECISION)
 	var/constant_pain = damage
 	if(painkiller_included)
-		constant_pain -= (owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR)
+		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
 	return max(FLOOR(constant_pain * pain_multiplier, DAMAGE_PRECISION), 0)
 
 GLOBAL_LIST_INIT(all_organ_slots, get_all_slots())

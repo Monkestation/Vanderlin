@@ -2,11 +2,11 @@
 	name = "intestines"
 
 /mob/living/carbon/proc/gut_cut()
-	if(get_chem_effect(CE_PAINKILLER) < 100)
+	if(get_chem_effect(CE_PAINKILLER) < 80)
 		emote("scream")
 		CombatKnockdown(30)
 		var/obj/item/bodypart/vitals = get_bodypart(BODY_ZONE_CHEST)
-		vitals?.add_pain(25)
+		vitals?.add_pain(SHOCK_STAGE_2)
 
 /datum/wound/spill
 	name = "Spill"

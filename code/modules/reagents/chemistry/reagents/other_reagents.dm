@@ -358,14 +358,7 @@
 	name = "SATE"
 	color = "#e46363"
 	glows = TRUE
-
-/datum/reagent/sate/on_mob_add(mob/living/L)
-	. = ..()
-	ADD_TRAIT(L, TRAIT_SATE, type)
-
-/datum/reagent/sate/on_mob_delete(mob/living/L)
-	. = ..()
-	REMOVE_TRAIT(L, TRAIT_SATE, type)
+	added_traits = list(TRAIT_SATE)
 
 /datum/reagent/devour
 	name = "DEVOUR"

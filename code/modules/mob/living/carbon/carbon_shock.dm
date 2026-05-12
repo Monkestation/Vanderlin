@@ -58,7 +58,7 @@
 	var/maxbpshock = 0
 	var/obj/item/bodypart/damaged_bodypart
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		var/bpshock = bodypart.get_shock(FALSE, TRUE)
+		var/bpshock = bodypart.get_shock(FALSE)
 		// make the choice of the organ depend on damage,
 		// but also sometimes use one of the less damaged ones
 		if((bpshock >= maxbpshock) && ((maxbpshock <= 0) || prob(70)) )
@@ -79,7 +79,7 @@
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/organ as anything in internal_organs)
-		if(DT_PROB(1, delta_time) && organ.can_feel_pain() && (organ.get_shock() >= 5))
+		if(DT_PROB(1, delta_time) && organ.get_shock(TRUE) >= 5)
 			var/obj/item/bodypart/parent = get_bodypart(organ.current_zone)
 			if(parent)
 				var/pain = 10
@@ -144,16 +144,16 @@
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 
 	if(traumatic_shock >= max(SHOCK_STAGE_2, 0.8 * shock_stage))
-		adjustShockStage(0.5 * delta_time * (ATTRIBUTE_MIDDLING/our_endurance))
+		adjustShockStage(delta_time * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
 		setShockStage(min(shock_stage, SHOCK_STAGE_7))
-		var/recovery = 0.5 * delta_time
+		var/recovery = delta_time
 		//Lower shock faster the less pain we feel
-		if(traumatic_shock < 0.5 * shock_stage)
-			recovery += 0.5 * delta_time
+		if(traumatic_shock < shock_stage)
+			recovery += 1
 		if(traumatic_shock < 0.25 * shock_stage)
-			recovery += 0.5 * delta_time
-		adjustShockStage(-recovery * (our_endurance/ATTRIBUTE_MIDDLING))
+			recovery += 1
+		adjustShockStage(-recovery * (our_endurance/ATTRIBUTE_MIDDLING) * PAIN_SYSTEM_SPEED_MODIFIER/2)
 
 	//Shock makes us slow
 	if(shock_stage >= (SHOCK_STAGE_2 * (our_endurance/ATTRIBUTE_MIDDLING)))

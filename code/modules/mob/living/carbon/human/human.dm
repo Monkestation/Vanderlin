@@ -417,36 +417,38 @@
 				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
 					epinephrine_mod +=  3
 
-				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, dice_num = 8, context = DICE_CONTEXT_PHYSICAL)
-				if((diceroll >= DICE_SUCCESS) || !attributes)
-					if(prob(35) || (diceroll >= DICE_SUCCESS))
-						target?.pump_heart(src)
-						target.set_heartattack(FALSE)
-						if(GETBRAINLOSS(target) >= BRAIN_DAMAGE_DEATH)
-							SETBRAINLOSS(target, BRAIN_DAMAGE_DEATH - 1)
-						if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
-							to_chat(src, span_warning("Necra holds tight to this one."))
-							return FALSE
-						if(diceroll >= DICE_CRIT_SUCCESS)
-							if(target.revive())
-								target.grab_ghost(TRUE)
-								target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
-												span_userdanger("My muscles spasm as i am brought back to life!"))
-								target.emote("breathgasp")
-								target.adjust_jitter(100 SECONDS)
-								add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
-								target.apply_status_effect(/datum/status_effect/debuff/revive)
-								target.remove_client_colour(/datum/client_colour/monochrome/death)
-								chest.add_wound(/datum/wound/fracture/chest)
-								record_round_statistic(STATS_CPR_REVIVALS, 1)
-							else
-								to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
+				/// Always pump heart and break ribs unless you crit fail
+				/// Journeymen (average 35) have a 5% chance of doing a CPR revive
+				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, dice_num = 13, context = DICE_CONTEXT_PHYSICAL)
+				if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
+					target.pump_heart(src)
+					if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
+						to_chat(src, span_warning("Necra holds tight to this one."))
+						return FALSE
+					if(target.stat < DEAD) // No point in running the revive check
+						return
+					if(GETBRAINLOSS(target) >= BRAIN_DAMAGE_DEATH)
+						SETBRAINLOSS(target, BRAIN_DAMAGE_DEATH - 1)
+					if(target.revive())
+						chest.add_wound(/datum/wound/fracture/chest)
+						target.grab_ghost(TRUE)
+						target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
+										span_userdanger("My muscles spasm as i am brought back to life!"))
+						target.emote("breathgasp")
+						target.adjust_jitter(100 SECONDS)
+						add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
+						target.apply_status_effect(/datum/status_effect/debuff/revive)
+						record_round_statistic(STATS_CPR_REVIVALS, 1)
+					else
+						to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
 				else
 					if(diceroll <= DICE_CRIT_FAILURE)
 						visible_message(span_danger("<b>[src]</b> botches the chest compressions!"), \
 									span_danger("I botch the chest compressions!"),
 									span_hear("I hear frantic pressing!"),
 									ignored_mobs = target)
+					else
+						target.pump_heart(src)
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())

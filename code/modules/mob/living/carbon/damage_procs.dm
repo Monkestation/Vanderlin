@@ -198,10 +198,12 @@
 /mob/living/carbon/adjustPainLoss(amount, updating_health = TRUE, forced = FALSE, required_status = null)
 	if(!forced && (status_flags & GODMODE))
 		return 0
-	var/old_amount = amount
 	var/list/obj/item/bodypart/parts = get_painable_bodyparts(adding_pain = (amount > 0 ? TRUE : FALSE))
-	if(!parts)
+	if(!length(parts))
 		return 0
+	var/old_amount = amount
+	. = old_amount
+	amount *= CONFIG_GET(number/damage_multiplier)
 	var/update = FALSE
 	var/pain_per_part = amount / length(parts)
 	if(pain_per_part < 0)
@@ -218,7 +220,6 @@
 		updatehealth()
 	if(update)
 		update_damage_overlays()
-	return old_amount
 
 /mob/living/carbon/setPainLoss(amount, updating_health = TRUE, forced = FALSE)
 	var/current = getPainLoss()
@@ -247,13 +248,13 @@
 	return parts
 
 /mob/living/carbon/proc/endorphinate(forced = FALSE, silent = FALSE, local_sound = TRUE, flash = TRUE, special_sound)
-	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
-	if(!forced && (TIMER_COOLDOWN_CHECK(src, COOLDOWN_CARBON_ENDORPHINATION) || (diceroll(endurance, context = DICE_CONTEXT_MENTAL) <= DICE_FAILURE)))
+	if(!forced && (TIMER_COOLDOWN_CHECK(src, COOLDOWN_CARBON_ENDORPHINATION)))
 		return
 
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
 	var/current_body_amount = reagents.get_reagent_amount(/datum/reagent/medicine/endorphin)
-	var/endorphin_amount = clamp(endurance, 5, 29)
-	endorphin_amount = min(endorphin_amount, 30 - current_body_amount)
+	var/endorphin_amount = clamp(endurance, 10, 29)
+	endorphin_amount = min(endorphin_amount, 29 - current_body_amount)
 	reagents?.add_reagent(/datum/reagent/medicine/endorphin, endorphin_amount)
 	TIMER_COOLDOWN_START(src, COOLDOWN_CARBON_ENDORPHINATION, HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) ? ENDORPHINATION_COOLDOWN_DURATION * 0.75 : ENDORPHINATION_COOLDOWN_DURATION)
 	if(!silent)
@@ -323,10 +324,7 @@
 	var/shock = 0
 	shock += SHOCK_MOD_CLONE * getCloneLoss()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		shock += bodypart.get_shock(FALSE, TRUE)
-
-	if(painkiller_included)
-		shock = max(0, shock - get_chem_effect(CE_PAINKILLER))
+		shock += bodypart.get_shock(painkiller_included)
 
 	return max(0, shock)
 

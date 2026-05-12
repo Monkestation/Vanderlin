@@ -323,7 +323,7 @@
 	// Coffin regeneration
 	var/obj/structure/closet/crate/coffin/coffin = loc
 	if(istype(coffin) && (src in coffin.contents))
-		if(InCritical() && !HAS_TRAIT(src, TRAIT_DEATHCOMA))
+		if(HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_DEATHCOMA))
 			to_chat(src, span_notice("You enter the horrible slumber of deathless Torpor. You will heal until you are renewed."))
 			ADD_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		heal_overall_damage(5, 5)
@@ -338,7 +338,7 @@
 				set_blood_volume(BLOOD_VOLUME_SAFE)
 			adjust_blood_volume(10)
 		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 5)))
-	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!InCritical() || (!istype(coffin) || !(src in coffin.contents))))
+	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		to_chat(src, span_warning("You have recovered from Torpor."))
 

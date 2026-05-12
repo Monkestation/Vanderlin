@@ -8,6 +8,7 @@
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
 	if(!heart.current_blood)
 		heart.current_blood = heart.max_blood_storage
+	set_heartattack(FALSE)
 	return TRUE
 
 /mob/living/carbon/proc/check_pulse(mob/living/carbon/user)

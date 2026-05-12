@@ -27,10 +27,11 @@
 	M.apply_status_effect(/datum/status_effect/buff/weed)
 	M.overlay_fullscreen("weedsm", /atom/movable/screen/fullscreen/weedsm)
 
-/datum/reagent/drug/space_drugs/on_mob_end_metabolize(mob/living/M)
-	M.set_drugginess(0)
-	M.clear_fullscreen("weedsm")
-	M.remove_status_effect(/datum/status_effect/buff/weed)
+/datum/reagent/drug/space_drugs/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.set_drugginess(0)
+	affected_mob.clear_fullscreen("weedsm")
+	affected_mob.remove_status_effect(/datum/status_effect/buff/weed)
 
 /atom/movable/screen/fullscreen/weedsm
 	icon_state = "smok"
