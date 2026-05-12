@@ -58,3 +58,8 @@
   - balance: Templar Sacrestant speed -2 to -1
   ta3754859-max:
   - balance: Collar detonator size decreased to 1x1
+2026-05-12:
+  PotatoTomahto:
+  - image: changes the recipe books css to look like parchment
+  aberrantQuesrist:
+  - bugfix: Default priest mask restored.
