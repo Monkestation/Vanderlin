@@ -48,8 +48,6 @@
 	allowed_ages = ALL_AGES_LIST_CHILD
 	spells = list(/datum/action/cooldown/spell/undirected/call_bird)
 	job_bitflag = BITFLAG_ROYALTY
-	honorary = "Lord"
-	honorary_f = "Lady"
 
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
@@ -76,7 +74,10 @@
 	tutorial = "Through merit or inheritance, you once served as a lieutenant in the Royal army, leading your forces to victory. Though your military daes are behind you, and your skills rusty, you still keep your old armour and arrogance."
 	outfit = /datum/outfit/minornoble/former_commander
 	category_tags = list(CTAG_MINOR_NOBLE)
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	give_bank_account = 40
+	honorary = "Baronet"
+	honorary_f = "Baronetess"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/former_commander
 
@@ -110,7 +111,9 @@
 	tutorial = "Through years of careful investment or plain old nepotism, you have managed to gather a large fortune. You have not had much in the way of physical exercise, however, so it would be wise to put your wealth to use in this regard."
 	outfit = /datum/outfit/minornoble/magnate
 	category_tags = list(CTAG_MINOR_NOBLE)
-	give_bank_account = 200
+	give_bank_account = 250
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/magnate
 
@@ -145,6 +148,8 @@
 	outfit = /datum/outfit/minornoble/magickal_graduate
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 20
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/magickal_graduate
 
@@ -160,6 +165,36 @@
 		/obj/item/chalk = 1
 	)
 
+/datum/attribute_holder/sheet/job/herald
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 3,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/misc/music = 20,
+		/datum/attribute/skill/misc/riding = 30
+	)
+
+/datum/job/advclass/minornoble/herald
+	title = "Lord Herald"
+	tutorial = "Through an aptitude for words, or politicking, you’ve managed to become the Sovereign’s loyal herald. Make sure their word is known by the commoners, and act as their mouthpiece, for surely they still have use for you despite their throne…"
+	outfit = /datum/outfit/minornoble/herald
+	category_tags = list(CTAG_MINOR_NOBLE)
+	give_bank_account = 60
+	honorary = "Lord Herald"
+	honorary_f = "Lady Herald"
+
+	attribute_sheet = /datum/attribute_holder/sheet/job/herald
+
+	traits = list(
+		TRAIT_BARDIC_TRAINING
+	)
+
+/datum/outfit/minornoble/herald
+	name = "Lord Herald (noble)"
+	head = /obj/item/clothing/head/chaperon
+	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+	shirt = /obj/item/clothing/shirt/dress/silkdress/loudmouth
+	backr = /obj/item/storage/backpack/satchel
 
 /datum/attribute_holder/sheet/job/vassal
 	raw_attribute_list = list(
@@ -172,6 +207,8 @@
 	outfit = /datum/outfit/minornoble/vassal
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 100
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vassal
 
