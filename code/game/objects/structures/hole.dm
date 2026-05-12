@@ -397,7 +397,8 @@
 			record_featured_stat(FEATURED_STATS_CRIMINALS, user) //You aren't a Necran, even though you didn't get any consequences you're still a criminal.
 			record_round_statistic(STATS_GRAVES_ROBBED)
 			SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
-			addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20,90) SECONDS) // Delayed alert
+			if(gravequality >= 7)
+				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20,90) SECONDS) // Delayed alert
 		//Logic thread for curses.
 	else
 		switch(gravequality)
@@ -457,7 +458,7 @@
 
 /// Alerts all clergy (except non-necran acoyltes) of a robbery!
 /obj/structure/closet/dirthole/proc/robbery_alert(mob/robber, var/delay = FALSE)
-	var/robbery_location = get_area_name(get_turf(src))
+	var/robbery_location = capitalize(get_area_name(get_turf(src)))
 	if(robber) // Graverobbers get a delay before the alert, to give them time to leave
 		to_chat(robber, span_warning("The rites I performed on \the [src] have bought me time, but the whispers of the disturbed dead were eventually able to break through..."))
 

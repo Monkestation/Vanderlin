@@ -101,11 +101,15 @@
 	burial_grounds = TRUE
 
 /area/outdoors/exposed/church
+	name = "church exterior"
 	icon_state = "church"
 	background_track = 'sound/music/area/church.ogg'
 	background_track_dusk = null
 	background_track_night = 'sound/music/area/churchnight.ogg'
 	burial_grounds = TRUE
+
+/area/outdoors/exposed/church/graveyard
+	name = "church graveyard"
 
 /area/indoors/town/church/chapel
 	name = "prayer hall"
