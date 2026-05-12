@@ -4150,9 +4150,6 @@
 /obj/item/storage/keyring/merchant,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
-"cCX" = (
-/turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/church)
 "cDF" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/ruinedwood,
@@ -80055,7 +80052,7 @@ bbU
 bbU
 iUl
 sGN
-cCX
+apo
 nJJ
 nJJ
 nJJ
