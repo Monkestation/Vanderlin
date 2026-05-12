@@ -382,9 +382,9 @@
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage_expire()
-	var/bleed_rate = get_bleed_rate(TRUE)
 	if(!bandage)
 		return FALSE
+	var/bleed_rate = get_bleed_rate(TRUE)
 	if(!bleed_rate)
 		return FALSE
 
@@ -398,7 +398,7 @@
 					var/amount_to_transfer = min(R.volume, R.metabolization_rate)
 					if(amount_to_transfer > 0)
 
-						R.on_bodypart_absorb(src, owner, amount_to_transfer)
+						R.on_bodypart_absorb(owner, src, amount_to_transfer)
 						cloth.reagents.remove_reagent(R.type, amount_to_transfer)
 
 		if(owner)

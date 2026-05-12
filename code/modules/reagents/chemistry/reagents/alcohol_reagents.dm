@@ -19,11 +19,12 @@
 	var/age_time = 10 MINUTES
 	var/age_timer
 
-/datum/reagent/consumable/ethanol/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	BP.disinfect_limb(boozepwr)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/consumable/ethanol/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.disinfect_limb(boozepwr)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-boozepwr * 0.5)
-	BP.adjust_germ_level(-boozepwr * 0.1)
+	affected_bodypart.adjust_germ_level(-boozepwr * 0.1)
+	. = ..()
 
 /datum/reagent/consumable/ethanol/New()
 	. = ..()

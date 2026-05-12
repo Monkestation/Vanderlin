@@ -99,9 +99,16 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/reaction_turf(turf/T, volume)
 	return
 
-/datum/reagent/proc/on_bodypart_absorb(obj/item/bodypart, mob/living/carbon/M, amount_to_transfer)
-	SHOULD_CALL_PARENT(FALSE)
-	on_mob_life(M)
+/// Call parent to simulate transfering reagent to the mob and instantly metabolizing it. This seems awful.
+/datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	volume = amount_to_transfer
+	if(!affected_mob)
+		return
+	on_mob_add(affected_mob)
+	on_mob_metabolize(affected_mob)
+	on_mob_life(affected_mob, efficiency = 1)
+	on_mob_end_metabolize(affected_mob)
+	on_mob_delete(affected_mob)
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency)
 	SHOULD_CALL_PARENT(TRUE)

@@ -95,21 +95,21 @@
 	taste_description = "the clouds"
 	overdose_threshold = 30
 
-/datum/reagent/drug/hallucinogen/on_mob_life(mob/living/carbon/psychonaut, seconds_per_tick, metabolization_ratio)
+/datum/reagent/drug/hallucinogen/on_mob_life(mob/living/carbon/psychonaut, efficiency)
 	. = ..()
-	psychonaut.slurring = max(psychonaut.slurring, 2.5 SECONDS * metabolization_ratio * seconds_per_tick)
+	psychonaut.slurring = max(psychonaut.slurring, 2.5 SECONDS * efficiency)
 
 	switch(current_cycle)
 		if(2 to 6)
-			if(SPT_PROB(5, seconds_per_tick))
+			if(SPT_PROB(5, 2))
 				psychonaut.emote(pick("twitch","giggle"))
 		if(6 to 11)
-			psychonaut.set_jitter_if_lower(50 SECONDS * metabolization_ratio * seconds_per_tick)
-			if(SPT_PROB(10, seconds_per_tick))
+			psychonaut.set_jitter_if_lower(50 SECONDS * efficiency)
+			if(SPT_PROB(10, 2))
 				psychonaut.emote(pick("twitch","giggle"))
 		if (11 to INFINITY)
-			psychonaut.set_jitter_if_lower(100 SECONDS * metabolization_ratio * seconds_per_tick)
-			if(SPT_PROB(16, seconds_per_tick))
+			psychonaut.set_jitter_if_lower(100 SECONDS * efficiency)
+			if(SPT_PROB(16, 2))
 				psychonaut.emote(pick("twitch","giggle"))
 
 /datum/reagent/drug/hallucinogen/on_mob_metabolize(mob/living/psychonaut)
@@ -169,9 +169,9 @@
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 	taste_description = " something deeply wrong"
 
-/datum/reagent/drug/hallucinogen_concetrate/on_mob_life(mob/living/carbon/psychonaut, seconds_per_tick, metabolization_ratio)
+/datum/reagent/drug/hallucinogen_concetrate/on_mob_life(mob/living/carbon/psychonaut, efficiency)
 	. = ..()
 	// weaker version of base hallucinogen — slurring only, mild jitter at high cycle
-	psychonaut.slurring = max(psychonaut.slurring, 1 SECONDS * metabolization_ratio * seconds_per_tick)
+	psychonaut.slurring = max(psychonaut.slurring, 1 SECONDS * efficiency)
 	if(current_cycle >= 8)
-		psychonaut.set_jitter_if_lower(20 SECONDS * metabolization_ratio * seconds_per_tick)
+		psychonaut.set_jitter_if_lower(20 SECONDS * efficiency)

@@ -10,13 +10,12 @@
 	alpha = 173
 	liver_chemical = FALSE
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
-	for(var/datum/injury/injury in bodypart.injuries)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(1)
-	if(bodypart.post_damage_change())
-		carbon_mob.update_damage_overlays()
+	. = ..()
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -56,15 +55,14 @@
 	metabolization_rate = REAGENTS_METABOLISM * 2
 	liver_chemical = FALSE
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/carbon_mob, amount_to_transfer)
-	for(var/datum/injury/injury in bodypart.injuries)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
 		injury.heal_damage(2)
-	for(var/datum/wound/wound in bodypart.wounds)
+	for(var/datum/wound/wound in affected_bodypart.wounds)
 		wound.heal_wound(2)
-	if(bodypart.post_damage_change())
-		carbon_mob.update_damage_overlays()
+	. = ..()
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -238,11 +236,12 @@
 	scent_description = "saiga droppings"
 	metabolization_rate = REAGENTS_METABOLISM * 3
 
-/datum/reagent/medicine/diseasecure/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	BP.disinfect_limb(20 MINUTES)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/diseasecure/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.disinfect_limb(20 MINUTES)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-30)
-	BP.adjust_germ_level(-30)
+	affected_bodypart.adjust_germ_level(-30)
+	. = ..()
 
 /datum/reagent/medicine/diseasecure/on_mob_metabolize(mob/living/L)
 	. = ..()
