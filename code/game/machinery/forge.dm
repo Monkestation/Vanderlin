@@ -10,20 +10,20 @@
 	climbable = TRUE
 	climb_time = 0
 
-/obj/machinery/light/fueled/forge/attackby(obj/item/W, mob/living/user, list/modifiers)
-	if(istype(W, /obj/item/weapon/tongs) && on)
-		var/obj/item/weapon/tongs/T = W
-		if(T.held_item)
-			var/tyme = world.time
-			T.hott = tyme
-			T.proxy_heat(150, 1500)
-			addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 100)
-			T.update_appearance(UPDATE_ICON_STATE)
-			user.visible_message("<span class='info'>[user] heats the bar.</span>")
-			if(istype(W, /obj/item/weapon/tongs/stone))
-				W.take_damage(1, BRUTE, "blunt")
+/obj/machinery/light/fueled/forge/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
+	if(!on)
+		return ..()
+	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
+	if(istype(attacking_item, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = attacking_item
+		if(tongs.held_item)
+			tongs.heat_held_item(source = "tongs", duration = 30 SECONDS, incoming = 150, max_heat = 1500)
+			user.visible_message(span_info("[user] heats [tongs.held_item] with [tongs]."))
+			if(istype(attacking_item, /obj/item/weapon/tongs/stone))
+				attacking_item.take_damage(1, BRUTE, BLUNT)
 			return TRUE
-	if(istype(W, /obj/item/storage/crucible) && on)
-		user.visible_message("<span class='info'>[user] places the [W] onto [src].</span>")
-		W.forceMove(get_turf(src))
+	if(istype(attacking_item, /obj/item/storage/crucible))
+		user.visible_message("<span class='info'>[user] places [attacking_item] onto [src].</span>")
+		user.transferItemToLoc(attacking_item, get_turf(src), silent = TRUE)
+		return TRUE
 	return ..()

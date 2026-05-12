@@ -154,6 +154,7 @@
 		return FALSE
 	var/atom/drop_location = owner.drop_location()
 	var/mob/living/carbon/was_owner = owner
+	remove_chronic()
 	update_limb(TRUE, owner)
 
 	if(length(wounds))
@@ -172,12 +173,17 @@
 		was_owner.surgeries -= body_zone
 	for(var/obj/item/embedded in embedded_objects)
 		remove_embedded_object(embedded)
+
+	for(var/datum/injury/injury as anything in injuries)
+		injury.remove_from_mob()
+
 	if(bandage)
 		if(drop_location)
 			bandage.forceMove(drop_location)
 		else
 			qdel(bandage)
 		bandage = null
+		unbandage_limb()
 
 	if(!special)
 		for(var/obj/item/organ/organ as anything in was_owner.internal_organs) //internal organs inside the dismembered limb are dropped.
@@ -194,6 +200,9 @@
 	update_icon_dropped()
 	was_owner.update_health_hud() //update the healthdoll
 	was_owner.update_body()
+
+	if(CHECK_BITFIELD(limb_flags, BODYPART_VITAL))
+		was_owner.death()
 
 	// drop_location = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
 	if(!drop_location)
@@ -349,6 +358,8 @@
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special)
 	moveToNullspace()
 	set_owner(C)
+	update_chronic()
+
 	C.add_bodypart(src)
 	if(held_index)
 		if(held_index > C.hand_bodyparts.len)
@@ -375,6 +386,11 @@
 	for(var/datum/wound/wound as anything in wounds)
 		wounds -= wound
 		wound.apply_to_bodypart(src, silent = TRUE, crit_message = FALSE)
+
+	//Add injuries to the owner's injury list
+	for(var/datum/injury/injury as anything in injuries)
+		injury.parent_mob = C
+		LAZYADD(C.all_injuries, injury)
 
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
 	if(affecting && dismember_wound)

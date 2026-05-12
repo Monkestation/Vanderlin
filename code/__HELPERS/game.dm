@@ -379,7 +379,7 @@
 			if (!istype(turf_area, specific_area))
 				continue
 
-		if (!is_blocked_turf(found_turf))
+		if (!found_turf.is_blocked_turf())
 			possible_loc.Add(found_turf)
 
 	// Need at least one free location.

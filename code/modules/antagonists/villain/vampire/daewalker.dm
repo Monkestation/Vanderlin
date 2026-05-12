@@ -200,7 +200,7 @@
 
 /obj/item/weapon/sword/long/daewalker/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/vampiric)
+	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/silver)
 	RegisterSignal(src, COMSIG_ITEM_AFTER_PICKUP, PROC_REF(hands_off))
 

@@ -26,7 +26,6 @@
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 
 	faction = list("kraken")
-	aggressive = TRUE
 	stat_attack = UNCONSCIOUS
 	deaggroprob = 0
 	del_on_deaggro = FALSE
@@ -182,7 +181,7 @@
 	smoke.start()
 
 	for(var/mob/living/L in view(cloud_range, owner))
-		if(L == owner || L.faction == owner.faction)
+		if(L == owner || L.faction_check_atom(owner, TRUE))
 			continue
 		L.adjust_temp_blindness(6 SECONDS)
 		to_chat(L, span_danger("The ink stings your eyes!"))

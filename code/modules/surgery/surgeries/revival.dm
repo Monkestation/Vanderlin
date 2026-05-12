@@ -60,6 +60,7 @@
 	if(!target.revive(excess_healing = 50))
 		to_chat(user, span_warning("Nothing happens."))
 		return FALSE
+	target.reagents.add_reagent(/datum/reagent/medicine/atropine, 20)
 	if(tainted_lux && !tainted_mob)
 		if(prob(50))
 			display_results(user, target,

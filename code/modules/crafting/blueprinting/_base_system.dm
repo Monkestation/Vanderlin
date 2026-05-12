@@ -660,7 +660,7 @@
 
 	var/atom/selected_output = selected_recipe.result_type
 
-	if(ispath(selected_output, /turf/closed) && (istype(get_area(final_location), /area/overlord_lair) && !("overlord" in user.faction)))
+	if(ispath(selected_output, /turf/closed) && (istype(get_area(final_location), /area/overlord_lair) && !user.has_faction("overlord")))
 		return
 
 	// Handle wall fixtures - place blueprint on adjacent floor when clicking on wall

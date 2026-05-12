@@ -21,8 +21,8 @@
 /datum/customizer_choice/organ/eyes/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
 	..()
 	var/datum/customizer_entry/organ/eyes/eyes_entry = entry
-	eyes_entry.right_eye_color = sanitize_hexcolor(eyes_entry.right_eye_color, 6, TRUE, initial(eyes_entry.right_eye_color))
-	eyes_entry.left_eye_color = sanitize_hexcolor(eyes_entry.left_eye_color, 6, TRUE, initial(eyes_entry.left_eye_color))
+	eyes_entry.right_eye_color = sanitize_hexcolor(eyes_entry.right_eye_color, default = initial(eyes_entry.right_eye_color))
+	eyes_entry.left_eye_color = sanitize_hexcolor(eyes_entry.left_eye_color, default = initial(eyes_entry.left_eye_color))
 
 /datum/customizer_choice/organ/eyes/imprint_organ_dna(datum/organ_dna/organ_dna, datum/customizer_entry/entry, datum/preferences/prefs)
     ..()
@@ -46,14 +46,14 @@
 			var/new_color = input(user, "Choose your right eye color:", "Character Preference", eyes_entry.right_eye_color) as color|null
 			if(!new_color)
 				return
-			eyes_entry.right_eye_color = sanitize_hexcolor(new_color, 6, TRUE)
+			eyes_entry.right_eye_color = sanitize_hexcolor(new_color)
 		if("left_eye_color")
 			if(!allows_heterochromia)
 				return
 			var/new_color = input(user, "Choose your left eye color:", "Character Preference", eyes_entry.left_eye_color) as color|null
 			if(!new_color)
 				return
-			eyes_entry.left_eye_color = sanitize_hexcolor(new_color, 6, TRUE)
+			eyes_entry.left_eye_color = sanitize_hexcolor(new_color)
 
 /datum/customizer_entry/organ/eyes
 	var/right_eye_color = "111111"

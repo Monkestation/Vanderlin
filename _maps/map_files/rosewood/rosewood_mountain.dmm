@@ -282,7 +282,7 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/lower)
 "cx" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/max,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/max,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/dungeon/lower)
 "cy" = (
@@ -424,7 +424,7 @@
 /turf/open/floor/carpet/red,
 /area/under/mountains/anvil/dungeon/lower)
 "dy" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/adv,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/adv,
 /mob/living/simple_animal/hostile/retaliate/infernal/watcher,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon/lower)
@@ -1587,7 +1587,7 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "mD" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/teleport,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/teleport,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon)
 "mG" = (
@@ -2224,7 +2224,7 @@
 /turf/open/floor/church,
 /area/under/mountains/anvil/lower)
 "rQ" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /mob/living/simple_animal/hostile/retaliate/elemental/warden{
 	name = "Guardian Warden"
 	},
@@ -6317,7 +6317,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/mountains/anvil/surface/building)
 "Yo" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /obj/effect/spawner/map_spawner/loot/common,
 /mob/living/simple_animal/hostile/retaliate/elemental/warden{
 	name = "Guardian Warden"
@@ -6363,7 +6363,7 @@
 /turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon/lower)
 "YG" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /mob/living/simple_animal/hostile/retaliate/elemental/warden{
 	name = "Guardian Warden"
 	},

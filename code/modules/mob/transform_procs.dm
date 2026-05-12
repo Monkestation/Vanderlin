@@ -19,7 +19,7 @@
 		CH.cavity_items -= item
 
 	if(tr_flags & TR_KEEPITEMS)
-		var/Itemlist = get_equipped_items(TRUE)
+		var/Itemlist = get_equipped_items(INCLUDE_POCKETS)
 		Itemlist += held_items
 		for(var/obj/item/W in Itemlist)
 			dropItemToGround(W)
@@ -134,7 +134,7 @@
 
 	//now the rest
 	if (tr_flags & TR_KEEPITEMS)
-		var/Itemlist = get_equipped_items(TRUE)
+		var/Itemlist = get_equipped_items(INCLUDE_POCKETS)
 		Itemlist += held_items
 		for(var/obj/item/W in Itemlist)
 			dropItemToGround(W, TRUE)

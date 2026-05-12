@@ -228,6 +228,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	try_unimmerse(movable, buckled)
 	LAZYREMOVE(attached_turf_contents[source], movable)
 	UnregisterSignal(movable, list(COMSIG_LIVING_SET_BUCKLED, COMSIG_QDELETING, COMSIG_LIVING_UPDATE_OFFSETS, COMSIG_ATOM_SPIN_ANIMATION, COMSIG_LIVING_POST_UPDATE_TRANSFORM))
+	REMOVE_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src)) // redundant but just in case
 	REMOVE_TRAIT(movable, TRAIT_ENTERED_IMMERSE, ELEMENT_TRAIT(src))
 
 /// Generate a mask filter mutable to use as render_source for the alpha filter based on provided width, height and immersion state
@@ -355,7 +356,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 		return
 
 	if (animate)
-		source.transition_filter("immerse_mask", list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z), time = UPDATE_TRANSFORM_ANIMATION_TIME)
+		source.transition_filter("immerse_mask", UPDATE_TRANSFORM_ANIMATION_TIME, list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z))
 	else
 		source.modify_filter("immerse_mask", list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z))
 

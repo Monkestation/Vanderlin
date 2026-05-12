@@ -4,7 +4,7 @@
 
 	Otherwise pretty standard.
 */
-/mob/living/carbon/UnarmedAttack(atom/A, proximity, list/modifiers, atom/source)
+/mob/living/carbon/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		return FALSE
 
@@ -26,14 +26,14 @@
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
 	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
-	if(proximity && istype(G) && G.Touch(A,1))
+	if(proximity_flag && istype(G) && G.Touch(A,1))
 		return TRUE
 
 	//This signal is needed to prevent gloves of the north star + hulk.
-	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity) & COMPONENT_CANCEL_ATTACK_CHAIN)
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity_flag) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
-	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity)
+	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers)
 
 	var/rmb_stam_penalty = 1
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
@@ -55,7 +55,6 @@
 				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE
 			L.attack_hand(src, modifiers)
-
 		return TRUE
 
 	var/item_skip = FALSE
@@ -174,7 +173,7 @@
 	if(dmg)
 		dmg = apply_damage(dmg, BRUTE, def_zone, run_armor_check(user.zone_selected, "stab", blade_dulling=BCLASS_BITE), user)
 		if(dmg)
-			affecting.bodypart_attacked_by(BCLASS_BITE, dmg, user, user.zone_selected, crit_message = TRUE)
+			affecting.bodypart_attacked_by(BCLASS_BITE, dmg, user, user.zone_selected, crit_message = TRUE, incoming_germ = 50)
 			playsound(src, "smallslash", 100, TRUE, -1)
 			if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
 				var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2
@@ -232,6 +231,13 @@
 
 /mob/living/MiddleClickOn(atom/A, list/modifiers)
 	. = ..()
+
+	var/obj/item/held_item = get_active_held_item()
+	if(istype(held_item, /obj/item/instrument))
+		var/mob/living/carbon/human/human = src
+		if(istype(human) && isliving(A))
+			human.toggleaudience(A)
+
 	if(!mmb_intent)
 		if(!A.Adjacent(src))
 			return
@@ -559,7 +565,7 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.get_complex_pain() / 50
+		jadded += H.getPainLoss() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1

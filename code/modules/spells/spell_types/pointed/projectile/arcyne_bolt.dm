@@ -31,6 +31,7 @@
 	icon_state = "arcane_barrage"
 	damage = 30
 	damage_type = BRUTE
+	woundclass = BCLASS_BLUNT
 	armor_penetration = 10
 	nodamage = FALSE
 	flag = "piercing"

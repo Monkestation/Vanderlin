@@ -14,22 +14,12 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 	if(GLOB.nya_catmodder_go)
 		spawned.add_spell(/datum/action/cooldown/spell/undirected/choose_riding_virtue_mount)
 
-/datum/component/riding/equestria/get_rider_offsets_and_layers(pass_index, mob/offsetter)
-	return list(
-		TEXT_NORTH = list(0, 0, OBJ_LAYER),
-		TEXT_SOUTH = list(0, 4, ABOVE_MOB_LAYER),
-		TEXT_EAST = list(0, 4, OBJ_LAYER),
-		TEXT_WEST = list(0, 4, OBJ_LAYER)
-	)
-
 /mob/living/simple_animal/hostile/retaliate/honse/equestria
 	generate_genetics = FALSE
 	icon = 'icons/mrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrow.dmi'
-	tame = TRUE
+	start_tamed = TRUE
 	indexed = FALSE
-	can_buckle = FALSE
 	pixel_x = 0
-
 
 /mob/living/simple_animal/hostile/retaliate/honse/equestria/Initialize()
 	. = ..()
@@ -40,9 +30,10 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 /mob/living/simple_animal/hostile/retaliate/honse/equestria/tamed()
 	..()
 	deaggroprob = 20
-	can_buckle = TRUE
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/equestria)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/equestria)
 
 /datum/status_effect/buff/healing/saddleborn
 	healing_on_tick = 0.25

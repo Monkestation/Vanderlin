@@ -18,7 +18,7 @@
 /mob/living/proc/taste(datum/reagents/from)
 	if(last_taste_time + 50 < world.time)
 		var/taste_sensitivity = get_taste_sensitivity()
-		var/text_output = from.generate_taste_message(taste_sensitivity)
+		var/text_output = from.generate_taste_message(src, taste_sensitivity)
 		if(text_output != last_taste_text || last_taste_time + 100 < world.time)
 			to_chat(src, "<span class='info'>I can taste [text_output].</span>")
 			// "something indescribable" -> too many tastes, not enough flavor.

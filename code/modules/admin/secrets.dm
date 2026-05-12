@@ -212,8 +212,9 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Break All Lights"))
 			message_admins("[key_name_admin(usr)] broke all lights")
-			for(var/obj/machinery/light/L in GLOB.machines)
+			for(var/obj/machinery/light/L as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 				L.break_light_tube()
+				CHECK_TICK
 
 		if("anime")
 			if(!check_rights(R_FUN))
@@ -242,8 +243,9 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Fix All Lights"))
 			message_admins("[key_name_admin(usr)] fixed all lights")
-			for(var/obj/machinery/light/L in GLOB.machines)
+			for(var/obj/machinery/light/L as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 				L.fix()
+				CHECK_TICK
 
 		if("stupidify")
 			if(!check_rights(R_FUN))

@@ -11,6 +11,8 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	grid_width = 64
 	grid_height = 32
+	grind_results = list(/datum/reagent/tree_sap = 15)
+	indexed = TRUE
 	var/plank_name = "wooden planks"
 	var/static/list/accepted = typecacheof(list(/*/obj/item/reagent_containers/food/snacks/grown/tobacco,
 	/obj/item/reagent_containers/food/snacks/grown/tea,

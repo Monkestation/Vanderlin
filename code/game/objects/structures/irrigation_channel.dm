@@ -116,14 +116,14 @@
 		var/obj/item/weapon/shovel/shovel = I
 		if(!shovel.heldclod)
 			user.visible_message("[user] starts digging a trench.", "I start digging a trench.")
-			if(!do_after(user, 10 SECONDS * shovel.time_multiplier, src))
+			if(!do_after(user, 10 SECONDS * shovel.toolspeed, src))
 				return
 			new /obj/structure/trench(get_turf(src))
 			qdel(src)
 			return TRUE
 
 		user.visible_message("[user] starts filling [src].", "You start filling [src].")
-		if(!do_after(user, 4 SECONDS * shovel.time_multiplier, src))
+		if(!do_after(user, 4 SECONDS * shovel.toolspeed, src))
 			return
 		QDEL_NULL(shovel.heldclod)
 		shovel.update_appearance(UPDATE_OVERLAYS)

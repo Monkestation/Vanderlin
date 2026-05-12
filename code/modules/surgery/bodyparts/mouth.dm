@@ -315,8 +315,10 @@
 	else
 		damage = 12
 
+	/*
 	if(human.mind?.has_antag_datum(/datum/antagonist/werewolf))
 		damage *= 2
+	*/
 
 	if(used_con >= 11)
 		damage = max(damage * (1 + ((used_con - 10) * 0.03)), 1)
