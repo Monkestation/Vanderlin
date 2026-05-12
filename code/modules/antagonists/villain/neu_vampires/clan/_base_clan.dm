@@ -56,7 +56,7 @@ And it also helps for the character set panel
 	/// Whether this clan allows non-vampire members
 	var/allows_non_vampires = TRUE
 	/// Title for non-vampire members
-	var/non_vampire_title = "Slave"
+	var/non_vampire_title = "Thrall"
 	var/has_hierarchy = TRUE
 	var/datum/clan_hierarchy_node/hierarchy_root
 	var/list/datum/clan_hierarchy_node/all_positions = list()

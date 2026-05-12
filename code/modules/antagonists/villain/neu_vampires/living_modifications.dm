@@ -395,4 +395,6 @@
 	if(!master.clan)
 		return
 	master.clan.add_non_vampire_member(src)
+	var/datum/clan_hierarchy_node/new_clan_position = master.clan.create_position("Thrall", "", master.clan_position, 1)
+	new_clan_position.assign_member(src)
 	add_bodypart_feature(new /datum/bodypart_feature/vamprire_seal)
