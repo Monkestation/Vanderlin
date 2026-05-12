@@ -112,7 +112,7 @@
 /area/outdoors/exposed/church/graveyard
 	name = "church graveyard"
 	icon_state = "graveyard"
-	first_time_text = "The Graveyard"
+	first_time_text = "THE GRAVEYARD"
 
 /area/indoors/town/church/chapel
 	name = "prayer hall"
