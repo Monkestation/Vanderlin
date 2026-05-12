@@ -936,17 +936,15 @@
 	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
-	for(var/thing in injuries)
+	for(var/datum/injury/injury as anything in injuries)
 		if((brute <= 0) && (burn <= 0))
 			break
-		var/datum/injury/injury = thing
-		var/list/heal_list = list(WOUND_SLASH, WOUND_PIERCE, WOUND_BLUNT, WOUND_INTERNAL_BRUISE)
-		if(true_heal)
-			heal_list |= list(WOUND_BITE, WOUND_BLUNT, WOUND_DIVINE, WOUND_LASH)
-		if(injury.damage_type in heal_list)
-			brute = injury.heal_damage(brute)
-		else if(injury.damage_type == WOUND_BURN)
+		if(!true_heal && !injury.can_heal())
+			continue
+		if(injury.damage_type == WOUND_BURN)
 			burn = injury.heal_damage(burn)
+		else
+			brute = injury.heal_damage(brute)
 
 	return post_damage_change(updating_health)
 
