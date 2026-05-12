@@ -1,6 +1,7 @@
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss
 	name = "blunderbuss"
-	desc = "The current peak of Grenzelholfian firearms. It uses a much less complex firing mechanism than previous weapons."
+	desc = "An older design of long-barrelled firearm that has been made obsolete by the more modern musket. Due to it's poor machining quality it's unable to fire lead balls without maintaining it shape, \
+	as such it fires pellets instead. It has a wide spread and is devastating at close range, but is inaccurate and weak at longer ranges. It still maintains a small niche to this day."
 	icon = 'icons/roguetown/weapons/64/guns.dmi'
 	icon_state = "blunderbuss"
 	base_icon_state = "blunderbuss"
