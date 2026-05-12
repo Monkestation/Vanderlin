@@ -112,8 +112,8 @@
 			//Find their observer if it exists, if no words given, we make one up
 			var/my_final_words
 			// Find the observer
-			if(corpse.last_mind?.current)
-				var/mob/ghost = corpse.last_mind.current
+			if(corpse.last_mind?.current_ghost)
+				var/mob/ghost = corpse.last_mind.current_ghost
 
 				my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 10 SECONDS)
 				if(my_final_words)
