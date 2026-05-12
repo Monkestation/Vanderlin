@@ -53,6 +53,7 @@ And it also helps for the character set panel
 
 	var/list/clan_members = list()
 	var/list/non_vampire_members = list()
+	var/list/new_members_titles = list("Neonate", "Fledgling", "Youngblood", "Progeny")
 	/// Whether this clan allows non-vampire members
 	var/allows_non_vampires = TRUE
 	/// Title for non-vampire members

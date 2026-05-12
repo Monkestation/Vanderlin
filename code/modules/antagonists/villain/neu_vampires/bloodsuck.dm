@@ -117,7 +117,7 @@
 	grab_ghost(TRUE, TRUE)
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
 	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
-	var/datum/clan_hierarchy_node/new_clan_position = C.create_position("Neonate", "", sire.clan_position, 1)
+	var/datum/clan_hierarchy_node/new_clan_position = C.create_position(pick(C.new_members_titles), "A new member of clan [C.name]", sire.clan_position, 1)
 	new_clan_position.assign_member(src)
 	set_bloodpool(500)
 	grant_undead_eyes()
