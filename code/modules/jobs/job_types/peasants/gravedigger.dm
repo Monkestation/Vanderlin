@@ -54,6 +54,7 @@
 	)
 
 	languages = list(/datum/language/celestial)
+	book_type = /obj/item/recipe_book/gravemaking
 
 /datum/job/undertaker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -76,7 +77,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	backr = /obj/item/weapon/shovel/necran
 	wrists = /obj/item/storage/keyring/gravetender
-	backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red, /obj/item/recipe_book/gravemaking, /obj/item/weapon/chisel/iron) // Needed for coffin sanctification, they get enough for one, the rest they must source themselves.
+	backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red, /obj/item/weapon/chisel/iron)
 
 /datum/outfit/undertaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
