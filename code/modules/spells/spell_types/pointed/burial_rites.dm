@@ -139,7 +139,8 @@
 	for(var/final_words in their_final_words)
 		headstone.inscription += SPAN_GOD_NECRA("<br>[final_words]")
 
-	grave.say(pick(their_final_words)) //pick a random final words to say
+	if(length(their_final_words))
+		grave.say(pick(their_final_words)) //pick a random final words to say
 
 	return TRUE
 
