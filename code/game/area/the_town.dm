@@ -89,6 +89,7 @@
 	converted_type = /area/outdoors/exposed/tavern
 
 /area/outdoors/exposed/tavern
+	name = "tavern exterior"
 	icon_state = "tavern"
 
 /area/indoors/town/church
@@ -110,11 +111,18 @@
 
 /area/outdoors/exposed/church/graveyard
 	name = "church graveyard"
+	icon_state = "graveyard"
+	first_time_text = "The Graveyard"
 
 /area/indoors/town/church/chapel
 	name = "prayer hall"
 	icon_state = "chapel"
 	first_time_text = "THE HOUSE OF THE TEN"
+
+/area/indoors/town/church/crypt
+	name = "royal crypt"
+	icon_state = "crypt"
+	first_time_text = "THE ROYAL CRYPT"
 
 /area/indoors/town/church/inquisition
 	name = "inquisition"
