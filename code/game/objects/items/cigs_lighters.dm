@@ -382,19 +382,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/cigbutt/zigar
 	name = "zigar butt"
-	desc = ""
-	icon = 'icons/roguetown/items/lighting.dmi'
-	icon_state = "roach"
-	w_class = WEIGHT_CLASS_TINY
-	throwforce = 0
-	slot_flags = ITEM_SLOT_MOUTH
-	spitoutmouth = TRUE
-	resistance_flags = FLAMMABLE
-
-/obj/item/zigarbutt/Initialize()
-	. = ..()
-	pixel_x = base_pixel_x + rand(-5, 5)
-	pixel_y = base_pixel_y + rand(-5, 5)
 
 /////////////////
 //SMOKING PIPES//
