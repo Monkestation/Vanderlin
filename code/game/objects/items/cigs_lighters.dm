@@ -380,7 +380,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	chem_volume = 120
 	list_reagents = list(/datum/reagent/drug/nicotine = 120)
 
-/obj/item/zigarbutt
+/obj/item/cigbutt/zigar
 	name = "zigar butt"
 	desc = ""
 	icon = 'icons/roguetown/items/lighting.dmi'
