@@ -395,7 +395,7 @@
 			C.electrocute_act(shock_damage*0.75, src, 1, flags)
 	//Stun
 	var/should_stun = (!(flags & SHOCK_TESLA) || siemens_coeff > 0.5) && !(flags & SHOCK_NOSTUN)
-	if(!HAS_TRAIT(src, TRAIT_NOPAIN))
+	if(can_feel_pain())
 		if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/shock_recovery))
 			Paralyze(3 SECONDS)
 		//Jitter and other fluff.
@@ -408,7 +408,7 @@
 
 ///Called slightly after electrocute act to apply a secondary stun.
 /mob/living/carbon/proc/secondary_shock(should_stun)
-	if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/shock_recovery))
+	if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && can_feel_pain() && !has_status_effect(/datum/status_effect/shock_recovery))
 		Paralyze(6 SECONDS)
 		apply_shock_paralyze_immunity(12 SECONDS)
 

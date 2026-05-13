@@ -1266,7 +1266,7 @@
 		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
 			if(BP.body_zone in missing_bodyparts_zones)
 				continue
-			if(HAS_TRAIT(H, TRAIT_NOPAIN))
+			if(!H.can_feel_pain())
 				var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]")
 				limby.color = "#78a8ba"
 				. += limby

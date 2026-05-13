@@ -785,15 +785,13 @@
  * they don't have many painkillers
  */
 /obj/item/organ/proc/can_feel_pain()
-	. = FALSE
 	if(pain_multiplier <= 0)
 		return FALSE
 	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY | ORGAN_DEAD))
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return FALSE
-	if(owner?.can_feel_pain())
-		return TRUE
+	return owner?.can_feel_pain()
 
 /obj/item/organ/proc/get_shock(painkiller_included = FALSE)
 	if(!can_feel_pain())

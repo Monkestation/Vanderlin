@@ -126,7 +126,7 @@
 
 /mob/living/proc/handle_random_events()
 	//random painstun
-	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN) || !can_feel_pain())
 		return
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return

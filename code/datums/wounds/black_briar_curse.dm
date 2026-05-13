@@ -175,7 +175,7 @@
 			infection_percent = min(1, infection_percent + heal_percent)
 			if(can_examine)
 				owner.visible_message(span_danger("The briar gets worse!"), span_briar("I feel thorns digging into me!")) //don't heal as malum, he likes this shit
-			if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
+			if(owner.can_feel_pain())
 				if(infection_percent >= BBC_STAGE_LATE && prob(30))
 					owner.emote("firescream")
 				else if(infection_percent >= BBC_STAGE_MID && prob(50))
@@ -276,7 +276,7 @@
 		return
 	owner.adjust_energy(max(0, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 20)) * (SSmobs.wait * 0.1) * infection_percent)
 	if(infection_percent >= 1)
-		if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
+		if(owner.can_feel_pain())
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
 			if(prob(80))
 				owner.emote(pick("agony", "painscream", "firescream", "laugh"))

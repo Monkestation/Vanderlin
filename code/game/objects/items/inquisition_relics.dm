@@ -571,7 +571,7 @@
 	if(active && working && !full)
 		if(do_after(user, 20, M))
 			M.flash_fullscreen("redflash3")
-			if(!HAS_TRAIT(M, TRAIT_NOPAIN) || !HAS_TRAIT(M, TRAIT_NOPAINSTUN))
+			if(M.can_feel_pain())
 				if(prob(15))
 					M.emote("whimper", forced = TRUE)
 				else if(prob(15))

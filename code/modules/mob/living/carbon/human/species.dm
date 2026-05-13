@@ -1993,7 +1993,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.brute_mod
-			if(!HAS_TRAIT(H, TRAIT_NOPAIN))
+			if(H.can_feel_pain())
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
 					if(prob(damage_amount * 3))
