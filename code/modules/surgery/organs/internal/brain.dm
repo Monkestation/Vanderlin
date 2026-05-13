@@ -31,8 +31,8 @@
 	current_blood = 100
 	blood_req = 2.5
 	oxygen_req = 5
-	nutriment_req = 3.5
-	hydration_req = 2
+	nutriment_req = 3
+	hydration_req = 1.5
 
 	COOLDOWN_DECLARE(trauma_cooldown)
 
