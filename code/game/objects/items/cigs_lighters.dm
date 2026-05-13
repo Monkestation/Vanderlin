@@ -377,9 +377,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "zigaroff"
 	icon_on = "zigaron"
 	type_butt = "zigarbutt"
-	throw_speed = 0.5
-	item_state = "spliffoff"
-	smoketime = 180
 	chem_volume = 120
 	list_reagents = list(/datum/reagent/drug/nicotine = 120)
 
