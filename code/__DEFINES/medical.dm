@@ -257,9 +257,9 @@ DEFINE_BITFIELD(organ_flags, list(
 /// Water sanitization per unit
 #define SANITIZATION_PER_UNIT_WATER 10
 /// CE_ANTIBIOTIC bodypart/organ sanitization per CE unit
-#define SANITIZATION_ANTIBIOTIC 0.1
+#define SANITIZATION_ANTIBIOTIC 0.05
 /// Bodypart/organ sanitization for laying down
-#define SANITIZATION_LYING 1
+#define SANITIZATION_LYING 0.5
 
 //~brain damage related defines
 /// We need to take at least this much brainloss gained at once to roll for brain traumas, any less it won't roll

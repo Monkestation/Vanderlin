@@ -32,7 +32,7 @@
 	/// Amount of germs in the injury
 	var/germ_level = 0
 	/// Rate of infection for this injury
-	var/infection_rate = 1
+	var/infection_rate = 0.5
 	/// Time it takes for the injury to fade away once healed up
 	var/fade_away_time = 1 MINUTES
 	/// The bodypart the injury is on, if on a bodypart
@@ -129,7 +129,7 @@
 	damage = our_damage
 
 	//initialize with the appropriate stage and bleeding ticks
-	bleed_timer += our_damage
+	bleed_timer += our_damage * 2
 	init_stage(our_damage)
 
 	if(istype(parent))
@@ -302,7 +302,7 @@
 // opens the injury and worsens it
 /datum/injury/proc/open_injury(damage, retracting = FALSE)
 	src.damage += damage
-	bleed_timer += damage
+	bleed_timer += damage * 2
 
 	while(current_stage > 1 && damage_list[current_stage-1] < damage_per_injury())
 		current_stage--

@@ -39,7 +39,7 @@
 /obj/item/organ/appendix/organ_failure(delta_time)
 	. = ..()
 	inflamation_stage = TRUE
-	owner.adjustToxLoss(0.5 * delta_time, TRUE, TRUE) //forced to ensure people don't use it to gain tox as slime person
+	owner.adjustToxLoss(2 * delta_time, TRUE, TRUE) //forced to ensure people don't use it to gain tox as slime person
 
 /obj/item/organ/appendix/prepare_eat()
 	var/obj/S = ..()

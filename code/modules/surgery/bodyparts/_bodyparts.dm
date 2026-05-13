@@ -562,16 +562,16 @@
 		var/heal_amt = 0
 
 		if(!toxins && injury.can_autoheal())
-			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.01)
+			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.005)
 			if(owner?.IsSleeping())
 				heal_amt *= 2
 
 		if(heal_amt)
-			injury.heal_damage(heal_amt * (0.5 * delta_time))
+			injury.heal_damage(heal_amt * delta_time)
 
 		// Bleeding
 		if(owner)
-			injury.bleed_timer = max(0, injury.bleed_timer - (0.5 * delta_time))
+			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
 
 	if(post_damage_change())
 		owner.update_damage_overlays()
@@ -616,7 +616,7 @@
 	if(istype(open_turf))
 		for(var/datum/injury/injury as anything in injuries)
 			if(injury.infection_check(delta_time, times_fired) && (max(open_turf.germ_level, owner_germ_level) > injury.germ_level))
-				injury.adjust_germ_level(injury.infection_rate * (0.5 * delta_time))
+				injury.adjust_germ_level(injury.infection_rate * delta_time)
 
 	// If we have sufficient antibiotics, then skip over this stuff, the infection is going away
 	var/antibiotics = owner.get_antibiotics()
@@ -626,7 +626,7 @@
 	for(var/datum/injury/injury as anything in injuries)
 		//Infected injuries raise the bodypart's germ level
 		if(injury.germ_level > germ_level || DT_PROB(CEILING(min(injury.germ_level/5, 40)/2, 1), delta_time))
-			adjust_germ_level(injury.infection_rate * (0.5 * delta_time))
+			adjust_germ_level(injury.infection_rate * delta_time)
 			break	//limit increase to a maximum of one injury infection increase per 2 seconds
 
 
@@ -640,11 +640,11 @@
 	// Being properly oxygenated
 	if(!artery_needed() || (arterial_efficiency >= ORGAN_FAILING_EFFICIENCY))
 		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && DT_PROB(immunity*0.3, delta_time))
-			adjust_germ_level(-1 * (0.5 * delta_time))
+			adjust_germ_level(-0.5 * delta_time)
 			return
 	// Dry gangrene
 	else
-		adjust_germ_level(1 * (0.5 * delta_time))
+		adjust_germ_level(0.5 * delta_time)
 
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Warn the user that they're a bit fucked
@@ -654,10 +654,10 @@
 		if(antibiotics < 5 && DT_PROB(FLOOR(germ_level/6 * immunity_weakness * 0.005, 1), delta_time))
 			if(immunity > 0)
 				//Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
-				adjust_germ_level(clamp(FLOOR(1/immunity, 1), 1, 10) * (0.5 * delta_time))
+				adjust_germ_level(clamp(FLOOR(0.5/immunity, 1), 1, 10) * delta_time)
 			else
 				//Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
-				adjust_germ_level(10 * (0.5 * delta_time))
+				adjust_germ_level(5 * delta_time)
 
 	if(germ_level >= INFECTION_LEVEL_ONE && (antibiotics < 20))
 		if(DT_PROB(3, delta_time) && (owner.stat < DEAD) && germ_level <= INFECTION_LEVEL_TWO)
@@ -684,7 +684,7 @@
 
 		// Infect the target organ
 		if(target_organ)
-			target_organ.adjust_germ_level(1 * (0.5 * delta_time))
+			target_organ.adjust_germ_level(0.5 * delta_time)
 
 		// Spread the infection to child and parent organs
 		var/zones = list()
@@ -694,7 +694,7 @@
 				var/obj/item/bodypart/bodypart = owner.get_bodypart(zone)
 				if(bodypart && (bodypart.germ_level < germ_level))
 					if(bodypart.germ_level < INFECTION_LEVEL_TWO || DT_PROB(15, delta_time))
-						bodypart.adjust_germ_level(1 * (0.5 * delta_time))
+						bodypart.adjust_germ_level(0.5 * delta_time)
 
 /// Handle the antibiotic chem effect
 /obj/item/bodypart/proc/handle_antibiotics(delta_time, times_fired)
@@ -709,9 +709,9 @@
 		if(getorganslotefficiency(ORGAN_SLOT_ARTERY) >= ORGAN_FAILING_EFFICIENCY)
 			set_germ_level(0) //cure instantly
 	else
-		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * (0.5 * delta_time))	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * delta_time)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		if(owner?.body_position == LYING_DOWN)
-			adjust_germ_level(-SANITIZATION_LYING * (0.5 * delta_time))
+			adjust_germ_level(-SANITIZATION_LYING * delta_time)
 
 /obj/item/bodypart/proc/create_base_organs()
 	if(CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY))

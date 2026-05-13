@@ -85,7 +85,7 @@
 	var/in_bleedout = owner.in_bleedout()
 	if(arterial_efficiency && !is_failing())
 		// Arteries get an extra flat 5 blood regen
-		current_blood = min(current_blood + 5 * (0.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+		current_blood = min(current_blood + 2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 		return
 	if(!blood_req)
 		return

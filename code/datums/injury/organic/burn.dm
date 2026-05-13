@@ -3,7 +3,7 @@
 	damage_type = WOUND_BURN
 	autoheal_cutoff = 3
 	max_bleeding_stage = 0
-	infection_rate = 2.5
+	infection_rate = 1.25
 
 /datum/injury/burn/infection_check()
 	//anything less than a FUCK burn isn't infectable if treated properly

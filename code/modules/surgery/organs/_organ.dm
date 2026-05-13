@@ -220,7 +220,7 @@
 		failer = is_failing()
 	if(arterial_efficiency && !failer && !in_bleedout)
 		// Arteries get an extra flat 10 blood regen
-		current_blood = min(current_blood + 5 * (0.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+		current_blood = min(current_blood + (2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 		return
 	if(!blood_req)
 		return
@@ -435,16 +435,16 @@
 	var/antibiotics = owner?.get_antibiotics()
 
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && DT_PROB(virus_immunity*0.15, delta_time))
-		adjust_germ_level(-1 * (0.5 * delta_time))
+		adjust_germ_level(-0.5 * delta_time)
 		return
 
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
 		if(antibiotics < 5 && DT_PROB(round(germ_level/6 * owner.immunity_weakness() * 0.005), delta_time))
 			if(virus_immunity > 0)
-				adjust_germ_level(clamp(round(1/virus_immunity), 1, 10) * (0.5 * delta_time)) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
+				adjust_germ_level(clamp(round(0.5/virus_immunity), 1, 10) * delta_time) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
-				adjust_germ_level(10 * (0.5 * delta_time))
+				adjust_germ_level(5 * delta_time)
 
 	if(germ_level >= INFECTION_LEVEL_ONE && antibiotics < 20)
 		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
@@ -455,7 +455,7 @@
 		if(bodypart)
 			//Spread germs
 			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || DT_PROB(owner.immunity_weakness() * 0.15, delta_time)))
-				bodypart.adjust_germ_level(1 * (0.5 * delta_time))
+				bodypart.adjust_germ_level(0.5 * delta_time)
 		//Cause organ damage about once every ~30 seconds
 		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
 		if(DT_PROB(2, delta_time))
@@ -467,7 +467,7 @@
 		if(bodypart)
 			// Spread germs really badly
 			if(antibiotics < 10 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_THREE))
-				bodypart.adjust_germ_level(1 * (0.5 * delta_time))
+				bodypart.adjust_germ_level(0.5 * delta_time)
 
 /// Antibiotics combating germs and stuff
 /obj/item/organ/proc/handle_antibiotics(delta_time, times_fired)
@@ -481,9 +481,9 @@
 	if((germ_level < INFECTION_LEVEL_ONE) && (antibiotics >= 20))
 		set_germ_level(GERM_LEVEL_STERILE)
 	else
-		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * (0.5 * delta_time))	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * delta_time)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		if(owner?.body_position == LYING_DOWN)
-			adjust_germ_level(-SANITIZATION_LYING * (0.5 * delta_time))
+			adjust_germ_level(-SANITIZATION_LYING * delta_time)
 
 /obj/item/organ/proc/on_life(delta_time, times_fired)	//repair organ damage if the organ is not failing
 	SHOULD_CALL_PARENT(TRUE)
@@ -559,8 +559,8 @@
 		return
 	applyOrganDamage(-healing_amount, damage) // pass curent damage incase we are over cap
 	//this doesn't seem very right at all...
-	owner.adjust_nutrition(-nutriment_req/100 * (0.5 * delta_time))
-	owner.adjust_hydration(-hydration_req/100 * (0.5 * delta_time))
+	owner.adjust_nutrition(-nutriment_req/200 * delta_time)
+	owner.adjust_hydration(-hydration_req/200 * delta_time)
 
 /** organ_failure
  * generic proc for handling dying organs
