@@ -404,7 +404,6 @@
 		/obj/item/weapon/surgery/bonesetter,
 		/obj/item/weapon/surgery/cautery,
 		/obj/item/natural/worms/leech,
-		/obj/item/natural/worms/leech,
 		/obj/item/weapon/surgery/hammer,
 		/obj/item/natural/bundle/fibers/full,
 	)

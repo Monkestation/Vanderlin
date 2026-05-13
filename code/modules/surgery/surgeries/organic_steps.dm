@@ -28,11 +28,7 @@
 		"<span class='notice'>Blood pools around the incision in [target]'s [parse_zone(target_zone)].</span>")
 	var/obj/item/bodypart/gotten_part = target.get_bodypart(check_zone(target_zone))
 	if(gotten_part)
-		var/datum/injury/ouchie = gotten_part.create_injury(WOUND_SLASH, 49, TRUE)
-		gotten_part.update_damages()
-		if(!ouchie)
-			return
-		ouchie.injury_flags |= INJURY_SURGICAL
+		gotten_part.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO, surgical = TRUE)
 	return TRUE
 
 /// Clamping

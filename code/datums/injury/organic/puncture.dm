@@ -1,6 +1,6 @@
 /datum/injury/puncture
 	bleed_threshold = 10
-	damage_type = WOUND_PIERCE
+	damage_type = WOUND_PUNCTURE
 
 /datum/injury/puncture/can_worsen(damage_type, damage)
 	return FALSE //cannot be enlargened

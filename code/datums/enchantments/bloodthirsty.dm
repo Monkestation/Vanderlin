@@ -23,7 +23,7 @@
 
 	var/bleeding_bite = FALSE
 	for(var/datum/injury/injury in carbon.all_injuries)
-		if(injury.damage_type != WOUND_BITE)
+		if(!(injury.damage_type & WOUND_BITE))
 			continue
 		if(!injury.get_bleed_rate())
 			continue

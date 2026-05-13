@@ -317,33 +317,38 @@ DEFINE_BITFIELD(organ_flags, list(
 
 // ~wound categories
 /// doesn't actually wound
-#define WOUND_NONE 0
+#define WOUND_NONE		0
 /// any brute weapon/attack that doesn't have sharpness. rolls for blunt bone wounds
-#define WOUND_BLUNT 1
+#define WOUND_BLUNT		(1<<0)
 /// any sharp weapon, edged or pointy, can cause arteries to be torn
-#define WOUND_ARTERY 2
+#define WOUND_ARTERY	(1<<1)
 /// any sharp weapon, edged or pointy, can cause tendons to be torn
-#define WOUND_TENDON 3
+#define WOUND_TENDON	(1<<2)
 /// any sharp weapon, edged or pointy, can cause nerves to be torn
-#define WOUND_NERVE 4
+#define WOUND_NERVE		(1<<3)
 /// britification lol
-#define WOUND_TEETH 5
+#define WOUND_TEETH		(1<<4)
 /// any kind of organ spilling
-#define WOUND_SPILL 6
+#define WOUND_SPILL		(1<<5)
 /// any brute weapon/attack with sharpness = SHARP_EDGED. rolls for slash wounds
-#define WOUND_SLASH 7
+#define WOUND_SLASH		(1<<6)
 /// any brute weapon/attack with sharpness = SHARP_POINTY. rolls for piercing wounds
-#define WOUND_PIERCE 8
+#define WOUND_PUNCTURE	(1<<7)
 /// any concentrated burn attack (lasers really). rolls for burning wounds
-#define WOUND_BURN 9
+#define WOUND_BURN		(1<<8)
 ///any wounds from bites
-#define WOUND_BITE 10
+#define WOUND_BITE		(1<<9)
 ///any wounds from lashes
-#define WOUND_LASH 11
+#define WOUND_LASH		(1<<10)
 ///any wounds from internal bruising (only really a thing for weird chems that should cause brutes)
-#define WOUND_INTERNAL_BRUISE 12
+#define WOUND_INTERNAL_BRUISE	(1<<11)
 ///wounds coming from divine sources
-#define WOUND_DIVINE 13
+#define WOUND_DIVINE	(1<<12)
+
+#define SEWABLE_WOUND_TYPES	(WOUND_SLASH|WOUND_PUNCTURE|WOUND_BITE|WOUND_LASH)
+#define BRUTE_WOUND_TYPES	(SEWABLE_WOUND_TYPES|WOUND_BLUNT|WOUND_INTERNAL_BRUISE)
+#define FIRE_WOUND_TYPES	(WOUND_BURN)
+#define CUT_WOUND_TYPES		(WOUND_SLASH|WOUND_PUNCTURE|WOUND_BITE)
 
 // ~injury flags
 /// This injury creates sounds hints when applied
@@ -358,7 +363,7 @@ DEFINE_BITFIELD(organ_flags, list(
 #define INJURY_SALVED (1<<4)
 /// This injury is disinfected, and the infection has been wiped AND won't progress
 #define INJURY_DISINFECTED (1<<5)
-/// This is a surgical injury and will not autoheal
+/// This is a surgical injury and will not autoheal. Also not be healed by healing surgery step.
 #define INJURY_SURGICAL (1<<6)
 /// This injury is retracted and gives access to people's yummy guts and bones
 #define INJURY_RETRACTED (1<<7)
@@ -379,3 +384,6 @@ DEFINE_BITFIELD(organ_flags, list(
 #define BLEEDING_MESSAGE_BASE_CD 15 SECONDS
 /// Arbitrary value for "noticeable bleeding"
 #define BLEED_RATE_NOTICABLE	1.5
+
+/// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
+#define BLEED_DAMAGE_RATIO 30

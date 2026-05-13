@@ -652,7 +652,7 @@
 		var/list/mechanics_result = list()
 		for(var/wound_type in all_untreated)
 			switch(wound_type)
-				if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+				if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE)
 					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 				if(WOUND_BLUNT, WOUND_LASH)
 					mechanics_result += "Bandage bruises and lashes to allow them to heal."

@@ -32,7 +32,7 @@
 #define PAIN_NO_SPEAK 250
 
 /// Divisor used in pain calculations, since carbon pain is a flat amount and spread across bodyparts
-#define PAINKILLER_DIVISOR 1.5
+#define PAINKILLER_DIVISOR 1.75
 
 /// Use this to keep the speed of pain-related systems consistent relatively
 #define PAIN_SYSTEM_SPEED_MODIFIER 3

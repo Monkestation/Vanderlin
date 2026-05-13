@@ -151,7 +151,7 @@
 			return 0.7
 		if(WOUND_BITE)
 			return 1.1
-		if(WOUND_PIERCE)
+		if(WOUND_PUNCTURE)
 			return 0.8
 		else
 			return 1
@@ -184,11 +184,11 @@
 			if(BCLASS_BLUNT, BCLASS_SMASH, BCLASS_PUNCH)
 				wounding_type = WOUND_BLUNT
 			if(BCLASS_DRILL, BCLASS_PICK, BCLASS_PIERCE, BCLASS_SHOT)
-				wounding_type = WOUND_PIERCE
+				wounding_type = WOUND_PUNCTURE
 			if(BCLASS_CUT, BCLASS_CHOP)
 				wounding_type = WOUND_SLASH
 			if(BCLASS_STAB)
-				wounding_type = WOUND_PIERCE
+				wounding_type = WOUND_PUNCTURE
 			if(BCLASS_TWIST)
 				wounding_type = WOUND_BLUNT
 			if(BCLASS_BITE)
@@ -200,10 +200,10 @@
 
 	dam *= skeletonized_mod(wounding_type)
 
-	if(wounding_type == WOUND_NONE)
+	if(wounding_type & WOUND_NONE)
 		return
 
-	if((zone_precise in list(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE)) && wounding_type == WOUND_PIERCE)
+	if((zone_precise in list(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE)) && (wounding_type & WOUND_PUNCTURE))
 		organ_bonus = CANT_ORGAN
 
 	if(organ_bonus != CANT_ORGAN)
@@ -218,8 +218,6 @@
 
 	if(incoming_germ && injury)
 		injury.adjust_germ_level(incoming_germ * 0.1)
-
-	update_damages()
 
 	/*
 	for(var/datum/wound/iter_wound as anything in wounds)
@@ -462,11 +460,9 @@
 	if(can_bloody_wound())
 		returned_flags |= SURGERY_BLOODY
 
-	for(var/datum/injury/slash/slash in injuries)
-		if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
-			continue
+	if(get_incision())
 		returned_flags |= SURGERY_INCISED
-		break
+
 	var/static/list/retracting_behaviors = list(
 		TOOL_RETRACTOR,
 		TOOL_CROWBAR,

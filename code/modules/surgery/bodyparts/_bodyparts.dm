@@ -458,7 +458,7 @@
 	var/organ_damaged_required = organ_damage_requirement
 	switch(wounding_type)
 		// Penetrating and blunt injuries are more likely to damage internal organs
-		if(WOUND_PIERCE, WOUND_BLUNT)
+		if(WOUND_PUNCTURE, WOUND_BLUNT)
 			organ_damage_minimum *= 0.75
 		// Burn damage is unlikely to damage organs
 		if(WOUND_BURN)
@@ -530,8 +530,10 @@
 			var/datum/injury/new_injury = new new_injury_type()
 			// Check whether we can add the wound to an existing wound
 			if(surgical)
-				new_injury.autoheal_cutoff = 0
 				new_injury.injury_flags |= INJURY_SURGICAL
+				new_injury.stages = list("surgical incision" = 0)
+				new_injury.desc_list = list("surgical incision")
+				new_injury.damage_list = list(0)
 			else
 				for(var/datum/injury/other in injuries)
 					if(other.can_merge(new_injury))
@@ -541,6 +543,9 @@
 			new_injury.apply_injury(damage, src)
 			last_injury = new_injury
 			. = new_injury
+
+	if(.)
+		post_damage_change()
 
 /// Deal with injury healing and other updates
 /obj/item/bodypart/proc/update_injuries(delta_time, times_fired)
@@ -558,20 +563,18 @@
 			qdel(injury)
 			continue
 
-		// Slow healing
-		var/heal_amt = 0
-
-		if(!toxins && injury.can_autoheal())
-			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.005)
-			if(owner?.IsSleeping())
-				heal_amt *= 2
-
-		if(heal_amt)
-			injury.heal_damage(heal_amt * delta_time)
-
 		// Bleeding
 		if(owner)
 			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
+
+		// Slow healing
+		var/heal_amt = injury.base_autoheal_amount
+		if(!toxins && injury.can_autoheal())
+			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.004)
+			if(owner?.IsSleeping())
+				heal_amt *= 2
+		if(heal_amt)
+			injury.heal_damage(heal_amt * delta_time)
 
 	if(post_damage_change())
 		owner.update_damage_overlays()
@@ -585,7 +588,7 @@
 		if(injury.damage <= 0)
 			continue
 
-		if(injury.damage_type == WOUND_BURN)
+		if(injury.damage_type & FIRE_WOUND_TYPES)
 			burn_dam += injury.damage
 		else
 			brute_dam += injury.damage
@@ -928,7 +931,7 @@
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
-/obj/item/bodypart/proc/heal_damage(brute, burn, required_status, updating_health = TRUE, true_heal = FALSE)
+/obj/item/bodypart/proc/heal_damage(brute, burn, updating_health = TRUE, forced = FALSE, required_status)
 	update_HP()
 	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
@@ -936,9 +939,9 @@
 	for(var/datum/injury/injury as anything in injuries)
 		if((brute <= 0) && (burn <= 0))
 			break
-		if(!true_heal && !injury.can_heal())
+		if(!forced && !injury.can_heal())
 			continue
-		if(injury.damage_type == WOUND_BURN)
+		if(injury.damage_type & FIRE_WOUND_TYPES)
 			burn = injury.heal_damage(burn)
 		else
 			brute = injury.heal_damage(brute)
@@ -949,16 +952,18 @@
 /obj/item/bodypart/proc/post_damage_change(updating_health = TRUE, updating_shock = FALSE)
 	. = FALSE
 	update_damages()
+
 	if(owner)
 		update_limb_efficiency()
 		if(can_be_disabled)
 			update_disabled()
 		if(updating_health)
 			owner.updatehealth()
-			if(updating_shock && get_shock(FALSE) >= DAMAGE_PRECISION)
-				owner.update_shock()
-				. = TRUE
+		if(updating_shock && get_shock(FALSE) >= DAMAGE_PRECISION)
+			owner.update_shock()
+			. = TRUE
 	consider_processing()
+
 	return update_bodypart_damage_state() || .
 
 ///Proc to hook behavior associated to the change of the brute_dam variable's value.
@@ -1126,8 +1131,10 @@
 /// Updates an organ's brute/burn states for use by update_damage_overlays()
 /// Returns 1 if we need to update overlays. 0 otherwise.
 /obj/item/bodypart/proc/update_bodypart_damage_state()
-	var/tbrute = round( (brute_dam/max_damage) * 3, 1 )
-	var/tburn = round( (burn_dam/max_damage) * 3, 1 )
+	SHOULD_CALL_PARENT(TRUE)
+
+	var/tbrute = round((brute_dam/max_damage) * 3, 1)
+	var/tburn = round((burn_dam/max_damage) * 3, 1)
 	if((tbrute != brutestate) || (tburn != burnstate))
 		brutestate = tbrute
 		burnstate = tburn
@@ -1513,68 +1520,61 @@
 		if(artery.is_broken())
 			return TRUE
 
-/obj/item/bodypart/proc/get_incision(strict = FALSE, ignore_gauze = FALSE)
-	if(ignore_gauze && (bandage))
+/obj/item/bodypart/proc/get_incision(surgical_only = FALSE, ignore_gauze = FALSE)
+	if(!ignore_gauze && bandage)
 		return
-	var/datum/wound/incision
+
 	for(var/datum/wound/slash/slash in wounds)
 		if(slash.is_sewn())
 			continue
-		incision = slash
-		break
+		return slash
 
-	if(!incision)
-		var/datum/injury/internal_incision
-		for(var/datum/injury/slash/slash in injuries)
-			if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
-				continue
-			if(strict && !slash.is_surgical()) //We don't need dirty ones
-				continue
-			if(!internal_incision)
-				internal_incision = slash
-				continue
-			if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
-				if(slash.damage > internal_incision.damage)
-					internal_incision = slash
-					break
-			else if(slash.is_surgical()) //otherwise surgical one takes priority
+	var/datum/injury/internal_incision
+	for(var/datum/injury/slash/slash in injuries)
+		if(surgical_only && !slash.is_surgical()) //We don't need dirty ones
+			continue
+		if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
+			continue
+		if(!internal_incision)
+			internal_incision = slash
+			continue
+		if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
+			if(slash.damage > internal_incision.damage)
 				internal_incision = slash
 				break
-		return internal_incision
-	return incision
+		else if(slash.is_surgical()) //otherwise surgical one takes priority
+			internal_incision = slash
+			break
+	return internal_incision
 
-/obj/item/bodypart/proc/get_cut(strict = FALSE, ignore_gauze = FALSE)
-	if(ignore_gauze && (bandage))
+/obj/item/bodypart/proc/get_cut(surgical_only = FALSE, ignore_gauze = FALSE)
+	if(!ignore_gauze && bandage)
 		return
-	var/datum/wound/incision
+
 	for(var/datum/wound/slash/slash in wounds)
 		if(slash.is_sewn())
 			continue
-		incision = slash
-		break
+		return slash
 
-	if(!incision)
-		var/datum/injury/internal_incision
-		for(var/datum/injury/slash in injuries)
-			if(!(slash.damage_type in list(WOUND_SLASH, WOUND_BITE, WOUND_PIERCE)))
-				continue
-			if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
-				continue
-			if(strict && !slash.is_surgical()) //We don't need dirty ones
-				continue
-			if(!internal_incision)
-				internal_incision = slash
-				continue
-			if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
-				if(slash.damage > internal_incision.damage)
-					internal_incision = slash
-					break
-			else if(slash.is_surgical()) //otherwise surgical one takes priority
+	var/datum/injury/internal_incision
+	for(var/datum/injury/slash in injuries)
+		if(!(slash.damage_type & CUT_WOUND_TYPES))
+			continue
+		if(slash.is_sutured() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
+			continue
+		if(surgical_only && !slash.is_surgical()) //We don't need dirty ones
+			continue
+		if(!internal_incision)
+			internal_incision = slash
+			continue
+		if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
+			if(slash.damage > internal_incision.damage)
 				internal_incision = slash
 				break
-		return internal_incision
-	return incision
-
+		else if(slash.is_surgical()) //otherwise surgical one takes priority
+			internal_incision = slash
+			break
+	return internal_incision
 
 /obj/item/bodypart/proc/is_bandaged()
 	. = TRUE
@@ -1592,13 +1592,6 @@
 	. = TRUE
 	for(var/datum/injury/injury in injuries)
 		if(!injury.is_disinfected())
-			return FALSE
-
-
-/obj/item/bodypart/proc/is_clamped()
-	. = TRUE
-	for(var/datum/injury/injury in injuries)
-		if(!injury.is_clamped())
 			return FALSE
 
 /obj/item/bodypart/proc/clamp_limb()

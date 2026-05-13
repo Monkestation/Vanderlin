@@ -98,11 +98,3 @@
 		return "[bpm]"
 	else
 		return "[bpm > 0 ? max(0, bpm + rand(-10, 10)) : 0]"
-
-/// USE THIS SPARINGLY, FOR EXAMPLE IF YOU'RE HEALING ALL INJURIES
-/mob/living/carbon/proc/update_all_limb_states()
-	. = FALSE
-	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		. |= bodypart.post_damage_change()
-	if(.)
-		update_damage_overlays()

@@ -22,7 +22,7 @@
 
 	for(var/wound_type in untreated_types)
 		switch(wound_type)
-			if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+			if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE)
 				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 			if(WOUND_BLUNT, WOUND_LASH)
 				. += "Bandage bruises and lashes to allow them to heal."
@@ -182,8 +182,8 @@
 /obj/item/bodypart/proc/get_injury_status(mob/user, advanced = FALSE)
 	var/list/status = list()
 
-	var/brute = brute_dam
-	var/burn = burn_dam
+	var/brute = round(brute_dam, DAMAGE_PRECISION)
+	var/burn = round(burn_dam, DAMAGE_PRECISION)
 
 	if(advanced)
 		if(brute)
@@ -191,7 +191,7 @@
 		if(burn)
 			status += "<span class='[burn >= 10 ? "danger" : "warning"]'>[burn] BURN</span>"
 	else
-		if(brute >= DAMAGE_PRECISION)
+		if(brute)
 			switch(brute/max_damage)
 				if(0.75 to INFINITY)
 					status += "<span class='userdanger'><B>[heavy_brute_msg]</B></span>"
@@ -201,8 +201,7 @@
 					status += "<span class='danger'>[medium_brute_msg]</span>"
 				else
 					status += "<span class='warning'>[light_brute_msg]</span>"
-
-		if(burn >= DAMAGE_PRECISION)
+		if(burn)
 			switch(burn/max_damage)
 				if(0.75 to INFINITY)
 					status += "<span class='userdanger'><B>[heavy_burn_msg]</B></span>"
@@ -234,7 +233,7 @@
 
 	for(var/obj/item/organ/possible_artery in shuffle(getorganslotlist(ORGAN_SLOT_ARTERY)))
 		if(possible_artery.is_bruised())
-			if(get_cut())
+			if(get_cut(ignore_gauze = TRUE))
 				status += uppertext(span_bloody("cut [parse_zone(possible_artery.zone)]"))
 			else
 				status += uppertext(span_bloody("bruised [parse_zone(possible_artery.zone)]"))
@@ -277,7 +276,6 @@
 		status += "<span class='deadsay'>CRIPPLED</span>"
 
 	return status
-
 
 /obj/item/bodypart/proc/get_injuries_desc()
 	var/list/flavor_text = list()

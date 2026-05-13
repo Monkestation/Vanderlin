@@ -5,9 +5,6 @@
 	bleed_threshold = INFINITY
 	fade_away_time = INFINITY
 
-/datum/injury/divine/can_autoheal()
-	return FALSE // nuh uh
-
 /datum/injury/divine/smite
 	stages = list(
 		"raw smite wound" = 10,

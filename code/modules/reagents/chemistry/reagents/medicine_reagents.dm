@@ -89,9 +89,7 @@
 		M.adjustBruteLoss(-1 * REM * efficiency, 0)
 		M.adjustFireLoss(-1 * REM * efficiency, 0)
 		M.adjustToxLoss(-0.5 * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(1 * efficiency)
+		M.heal_wounds(1 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/soulweave_distillate
@@ -141,10 +139,7 @@
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 
 /datum/reagent/medicine/coldvein_compress/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	for(var/datum/injury/injury in affected_bodypart.injuries)
-		if(injury.damage_type == WOUND_BURN)
-			injury.heal_damage(2)
-	if(affected_bodypart.post_damage_change())
+	if(affected_bodypart.heal_damage(0, 2 * REM, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
 	. = ..()
 
@@ -165,19 +160,11 @@
 /datum/reagent/medicine/ichor_of_mending/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-3.5 * REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(4 * efficiency)
+		M.heal_wounds(4 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	for(var/datum/injury/injury in affected_bodypart.injuries)
-		if(!injury.can_heal())
-			continue
-		if(injury.damage_type == WOUND_BURN)
-			continue
-		injury.heal_damage(2)
-	if(affected_bodypart.post_damage_change())
+	if(affected_bodypart.heal_damage(3.5 * REM, 0, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
 	. = ..()
 
@@ -197,13 +184,13 @@
 
 /datum/reagent/medicine/ashbinders_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	for(var/datum/injury/injury in affected_bodypart.injuries)
-		if(injury.damage_type != WOUND_BURN)
+		if(!injury.can_heal())
 			continue
-		injury.heal_damage(3)
+		if(!(injury.damage_type & FIRE_WOUND_TYPES))
+			continue
 		injury.adjust_germ_level(-10)
+		injury.heal_damage(3)
 	affected_bodypart.disinfect_limb(30 SECONDS)
-	if(affected_bodypart.post_damage_change())
-		affected_mob.update_damage_overlays()
 	. = ..()
 
 /datum/reagent/medicine/vitalroot_draught
@@ -289,11 +276,9 @@
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
-		injury.heal_damage(2)
 		injury.salve_injury()
+		injury.heal_damage(2)
 	affected_bodypart.adjust_germ_level(-10)
-	if(affected_bodypart.post_damage_change())
-		affected_mob.update_damage_overlays()
 	. = ..()
 
 /datum/reagent/medicine/woundwrack_oil/on_mob_life(mob/living/carbon/M, efficiency)
@@ -355,9 +340,7 @@
 	if(volume > 0.99)
 		M.adjustBruteLoss(-2.5 * REM * efficiency, 0)
 		M.adjustFireLoss(-2.5 * REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(5 * efficiency)
+		M.heal_wounds(5 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/marrowbrew
@@ -424,11 +407,9 @@
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
-		injury.heal_damage(1.5)
 		injury.salve_injury()
+		injury.heal_damage(1.5)
 	affected_bodypart.adjust_germ_level(-15)
-	if(affected_bodypart.post_damage_change())
-		affected_mob.update_damage_overlays()
 	. = ..()
 
 /datum/reagent/medicine/witchknit_paste/on_mob_life(mob/living/carbon/M, efficiency)
@@ -474,9 +455,7 @@
 	if(volume > 0.99)
 		M.adjustBruteLoss(-2 * REM * efficiency, 0)
 		M.adjustCloneLoss(-1.5 * REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(2 * efficiency)
+		M.heal_wounds(2 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/sunpetal_decoction

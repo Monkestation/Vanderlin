@@ -41,7 +41,7 @@
 			break
 	var/gaping_injury = FALSE
 	for(var/datum/injury/injury as anything in new_limb.injuries)
-		if(injury.damage_type != WOUND_SLASH)
+		if(!(injury.damage_type & WOUND_SLASH))
 			continue
 		if(injury.damage && (injury.damage >= 30))
 			gaping_wound = TRUE

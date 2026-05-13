@@ -22,7 +22,7 @@
 			return prob(damage*2)
 		if(WOUND_SLASH)
 			return prob(damage)
-		if(WOUND_PIERCE)
+		if(WOUND_PUNCTURE)
 			return prob(damage*1.25)
 
 	return FALSE
@@ -41,7 +41,7 @@
 /*
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, wounding_type = WOUND_BLUNT)
 	. = ..()
-	if((wounding_type == WOUND_BURN) && (damage + damage_received >= 50) && parent_bodypart)
+	if((wounding_type & WOUND_BURN) && (damage + damage_received >= 50) && parent_bodypart)
 		if(!parent_bodypart.is_dead())
 			if(parent_bodypart.is_organic_limb())
 				parent_bodypart.kill_limb()

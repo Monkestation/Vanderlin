@@ -16,7 +16,7 @@
 /datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(affected.status == BODYPART_ROBOTIC)
 		return FALSE
-	if(!affected.get_cut())
+	if(!affected.get_cut(ignore_gauze = TRUE))
 		return FALSE
 	return ..()
 

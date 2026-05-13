@@ -19,7 +19,7 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	minimum_time = 7 SECONDS
 	maximum_time = 9 SECONDS
-	surgery_flags = SURGERY_INCISED
+	surgery_flags = SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 	preop_sound = 'sound/surgery/cautery1.ogg'
