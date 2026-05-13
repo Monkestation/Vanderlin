@@ -380,11 +380,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	chem_volume = 120
 	list_reagents = list(/datum/reagent/drug/nicotine = 120)
 
-/obj/item/clothing/face/cigarette/zigar/Initialize()
-	. = ..()
-	pixel_x = base_pixel_x + rand(-5, 5)
-	pixel_y = base_pixel_y + rand(-5, 5)
-
 /obj/item/zigarbutt
 	name = "zigar butt"
 	desc = ""
