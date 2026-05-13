@@ -382,8 +382,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	smoketime = 180
 	chem_volume = 120
 	list_reagents = list(/datum/reagent/drug/nicotine = 120)
-	muteinmouth = FALSE
-	abstract_type = /obj/item/clothing/face/cigarette/zigar
 
 /obj/item/clothing/face/cigarette/zigar/Initialize()
 	. = ..()
