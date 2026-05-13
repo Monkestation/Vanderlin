@@ -225,9 +225,9 @@
 	if(!blood_req)
 		return
 	if(!in_bleedout)
-		current_blood = min(current_blood + (blood_req * (0.6 * delta_time)), max_blood_storage) //very slow refill
+		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage) //very slow refill
 		return
-	current_blood = max(current_blood - (blood_req * (0.5 * delta_time)), 0)
+	current_blood = max(current_blood - (blood_req * delta_time), 0)
 	// When all blood is lost, take blood from blood vessels
 	if(!current_blood)
 		var/obj/item/organ/artery
@@ -239,7 +239,7 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * 0.5 * delta_time), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * delta_time), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		if((current_blood <= 0) && !(organ_flags & ORGAN_LIMB_SUPPORTER))
 			applyOrganDamage(0.2 * delta_time)

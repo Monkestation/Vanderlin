@@ -29,7 +29,7 @@
 	organ_volume = 0.5
 	max_blood_storage = 100
 	current_blood = 100
-	blood_req = 5
+	blood_req = 2.5
 	oxygen_req = 5
 	nutriment_req = 3.5
 	hydration_req = 2
@@ -85,17 +85,17 @@
 	var/in_bleedout = owner.in_bleedout()
 	if(arterial_efficiency && !is_failing())
 		// Arteries get an extra flat 5 blood regen
-		current_blood = min(current_blood + 2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+		current_blood = min(current_blood + (2.5 * delta_time * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY)), max_blood_storage)
 		return
 	if(!blood_req)
 		return
 	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_SAFE))
-		current_blood = min(current_blood + (blood_req * (0.5 * delta_time)), max_blood_storage)
+		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
 		return
 	if(in_bleedout)
-		current_blood = max(current_blood - (blood_req * (0.5 * delta_time)), 0)
+		current_blood = max(current_blood - (blood_req * delta_time), 0)
 	else
-		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * (0.5 * delta_time)), 0)
+		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time), 0)
 	// When all blood is lost, take blood from blood vessels
 	if(!current_blood)
 		var/obj/item/organ/artery
@@ -107,7 +107,7 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * 0.5 * delta_time), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * delta_time), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		//Don't apply damage, this is handled by the organ process datum, if necessary
 
