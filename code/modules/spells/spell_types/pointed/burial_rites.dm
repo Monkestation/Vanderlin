@@ -100,8 +100,6 @@
 	// We have the names of the mobs we buried, now we grab the mobs themselves and prepare a list of final_words
 	var/list/their_final_words = list()
 	var/list/premade_final_words = file2list("strings/grave_final_words.txt")
-	to_chat(owner, span_warning("Energy flows into \the [grave] from my hands, I must stand by \the [grave] or risk failing the rites..."))
-
 	for(var/mob/buried in grave.get_all_contents())
 		if(ishuman(buried))
 			var/mob/living/carbon/human/corpse = buried
@@ -114,8 +112,8 @@
 			// Find the observer
 			if(corpse.last_mind?.current_ghost)
 				var/mob/ghost = corpse.last_mind.current_ghost
-
-				my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 10 SECONDS)
+				to_chat(owner, span_warning("Energy flows into \the [grave] from my hands, I must stand by \the [grave] or risk failing the rites..."))
+				my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
 				if(my_final_words)
 					log_say("[ghost] put [my_final_words] for their final words.")
 					corpse.final_words = my_final_words // They won't be prompted again
