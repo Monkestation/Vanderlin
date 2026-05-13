@@ -268,19 +268,9 @@
 	return TRUE
 
 /datum/status_effect/buff/healing/spider_cocoon/tick()
+	. = ..()
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal_rogue(get_turf(owner))
 	H.color = "#4e4c4c00"
-	var/list/wCount = owner.get_wounds()
-	//Keeps the user alive
 	owner.adjust_blood_volume(blood_healing_on_tick, maximum = BLOOD_VOLUME_NORMAL)
-	if(wCount.len > 0)
-		owner.heal_wounds(healing_on_tick)
-		owner.update_damage_overlays()
-	owner.adjustBruteLoss(-healing_on_tick, 0)
-	owner.adjustFireLoss(-healing_on_tick, 0)
-	owner.adjustOxyLoss(-healing_on_tick * 5, 0)
-	owner.adjustToxLoss(-healing_on_tick, 0)
-	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
-	owner.adjustCloneLoss(-healing_on_tick, 0)
 
 #undef COCOON_FILTER

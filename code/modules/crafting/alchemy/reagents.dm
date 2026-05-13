@@ -14,7 +14,7 @@
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
-		injury.heal_damage(1)
+		injury.heal_damage(1) // update in on_mob_life
 	. = ..()
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)

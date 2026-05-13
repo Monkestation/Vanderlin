@@ -258,7 +258,7 @@
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
 /datum/injury/proc/heal_damage(amount_heal)
-	var/healed_damage = min(src.damage, amount_heal)
+	var/healed_damage = min(damage, amount_heal)
 	damage -= healed_damage
 	while(damage_per_injury() < damage_list[current_stage] && current_stage < length(desc_list))
 		current_stage++
@@ -294,7 +294,7 @@
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
 	if(damage > min_damage)
-		heal_damage(damage-min_damage)
+		heal_damage(damage - min_damage)
 	injury_flags &= ~INJURY_RETRACTED
 	if(parent_bodypart?.post_damage_change())
 		parent_bodypart?.owner?.update_damage_overlays()

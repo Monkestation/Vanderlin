@@ -33,3 +33,28 @@
 	if(!isnull(new_healing_on_tick))
 		healing_on_tick = new_healing_on_tick
 	return ..()
+
+/datum/status_effect/buff/healing/tick(seconds_between_ticks)
+	owner.adjust_blood_volume(healing_on_tick + 1, maximum = BLOOD_VOLUME_NORMAL)
+	owner.adjustOxyLoss(-healing_on_tick, 0)
+	owner.adjustToxLoss(-healing_on_tick, 0)
+	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
+	owner.adjustCloneLoss(-healing_on_tick, 0)
+
+	if(length(owner.get_wounds()) && owner.heal_wounds(healing_on_tick, src))
+		owner.update_damage_overlays()
+
+	if(!iscarbon(owner))
+		return
+
+	var/mob/living/carbon/carbon_owner = owner
+	var/healing_amount = healing_on_tick
+	for(var/datum/injury/injury as anything in carbon_owner.all_injuries)
+		if(!healing_on_tick)
+			break
+		if(!injury.can_heal())
+			continue
+		healing_on_tick = injury.heal_damage(healing_on_tick)
+	if(healing_amount != healing_on_tick) // we healed something
+		carbon_owner.update_all_limb_states()
+

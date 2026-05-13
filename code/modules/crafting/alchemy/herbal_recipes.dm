@@ -448,13 +448,6 @@
 	M.adjustToxLoss(-1*REM*efficiency)
 	M.adjustOxyLoss(-1*efficiency)
 	M.adjust_stamina(2*REM*efficiency)
-	var/total_healing = 1.5 * efficiency * REM
-	for(var/datum/injury/injury in M.all_injuries)
-		if(!total_healing)
-			break
-		total_healing = injury.heal_damage(total_healing)
-
-	M.update_all_limb_states()
 	. = ..()
 
 // Anti-Poison Blend

@@ -47,7 +47,9 @@
 /datum/coven_power/bloodheal/proc/trigger_healing()
 	// Calculate healing amounts based on level
 	var/bashing_lethal_heal = HEAL_BASHING_LETHAL * level
+	var/original_brute_heal = bashing_lethal_heal
 	var/aggravated_heal = HEAL_AGGRAVATED * level
+	var/original_burn_heal = aggravated_heal
 
 	owner.adjustToxLoss(-aggravated_heal * 0.5)
 
@@ -62,7 +64,8 @@
 		else
 			bashing_lethal_heal = injury.heal_damage(bashing_lethal_heal)
 
-	owner.update_all_limb_states()
+	if(bashing_lethal_heal != original_brute_heal || aggravated_heal != original_burn_heal)
+		owner.update_all_limb_states()
 	owner.adjust_blood_volume(vitae_cost, maximum = BLOOD_VOLUME_NORMAL)
 
 	//this is quadratic so expect it to scale like crazy
