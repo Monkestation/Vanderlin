@@ -199,11 +199,14 @@
 /obj/item/storage/fancy/cigarettes/zig/empty
 	spawn_type = null
 
-/obj/item/storage/fancy/cigarettes/zig/tin
+/obj/item/storage/fancy/cigarettes/tinzig
 	name = "metal zigbox"
+	desc = ""
 	icon_state = "tinzig"
 	base_icon_state = "tinzig"
-	spawn_type = /obj/item/clothing/face/cigarette/zigar
+	contents_tag = "zig"
+	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine/zigar
+	component_type = /datum/component/storage/concrete/grid/zigbox
 	item_weight = 84 GRAMS
 
 /obj/item/storage/fancy/cigarettes/tinzig/empty

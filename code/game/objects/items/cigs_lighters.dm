@@ -371,7 +371,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 //Cigars
 
-/obj/item/clothing/face/cigarette/zigar
+/obj/item/clothing/face/cigarette/rollie/nicotine/zigar
 	name = "zigar"
 	desc = "A strong, manly verison of the common zig, this isnt your average smokers treat- No, this is for the humble, the wise, the ones 'in' on it. You know who you are."
 	icon_state = "zigaroff"
