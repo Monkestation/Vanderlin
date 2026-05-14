@@ -376,7 +376,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = "A strong, manly verison of the common zig, this isnt your average smokers treat- No, this is for the humble, the wise, the ones 'in' on it. You know who you are."
 	icon_state = "zigaroff"
 	icon_on = "zigaron"
-	type_butt = "zigarbutt"
+	type_butt = /obj/item/cigbutt/zigar
 	chem_volume = 120
 	list_reagents = list(/datum/reagent/drug/nicotine = 120)
 
