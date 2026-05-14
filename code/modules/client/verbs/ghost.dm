@@ -39,9 +39,12 @@
 			GLOB.job_respawn_delays[src.ckey] = world.time + target_job.same_job_respawn_delay
 
 	var/mob/living/carbon/human/dead_hum
+	var/has_coin = FALSE // We check here since we will be moving them to a spirit, if this is TRUE, they had a coin in their mouth and have payment for toll
 	if(!QDELETED(mind.current))
 		if(ishuman(mind.current))
 			dead_hum = mind.current // We use this later since we will give a prompt, and we dont want the rest of the code to sleep
+		if(HAS_TRAIT(mind.current, TRAIT_BURIED_COIN_GIVEN))
+			has_coin = TRUE
 
 	var/turf/spawn_loc = pick(GLOB.underworldspiritspawns)
 	var/mob/living/carbon/spirit/live_spirit = new /mob/living/carbon/spirit(spawn_loc)
@@ -50,11 +53,12 @@
 	ADD_TRAIT(live_spirit, TRAIT_PACIFISM, TRAIT_GENERIC)
 
 	live_spirit.set_patron(live_spirit.client.prefs.selected_patron)
-	SSdeath_arena.add_fighter(live_spirit, mind?.last_death)
 
-	if(HAS_TRAIT(mind?.current, TRAIT_BURIED_COIN_GIVEN))
+	if(has_coin)
 		live_spirit.paid = TRUE
 		to_chat(live_spirit.client, span_biginfo("Necra has guaranteed your passage to the next life. Your toll has been already paid."))
+	else
+		SSdeath_arena.add_fighter(live_spirit, mind?.last_death)
 
 	var/area/underworld/underworld = get_area(spawn_loc)
 	underworld.Entered(live_spirit, null)
