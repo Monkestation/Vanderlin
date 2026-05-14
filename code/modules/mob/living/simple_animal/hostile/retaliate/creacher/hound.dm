@@ -46,11 +46,6 @@
 	base_constitution = 8
 	base_strength = 7
 	base_speed = 13
-
-	simple_detect_bonus = 20
-	retreat_distance = 0
-	minimum_distance = 0
-	deaggroprob = 0
 	defprob = 35
 	defdrain = 5
 	del_on_deaggro = FALSE
