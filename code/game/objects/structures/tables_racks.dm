@@ -139,21 +139,26 @@
 	log_combat(user, pushed_mob, "head slammed", null, "against [src]")
 	pushed_mob.add_stress(/datum/stress_event/table_headsmash)
 
+/obj/structure/table/screwdriver_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(!deconstruction_ready)
+		return
+
+	to_chat(user, span_notice("I start disassembling [src]..."))
+	if(I.use_tool(src, user, 20, volume=50))
+		deconstruct(TRUE)
+
+/obj/structure/table/wrench_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(!deconstruction_ready)
+		return
+
+	to_chat(user, span_notice("I start deconstructing [src]..."))
+	if(I.use_tool(src, user, 40, volume=50))
+		playsound(src, 'sound/blank.ogg', 50, TRUE)
+		deconstruct(TRUE)
+
 /obj/structure/table/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(I.tool_behaviour == TOOL_SCREWDRIVER && deconstruction_ready)
-			to_chat(user, "<span class='notice'>I start disassembling [src]...</span>")
-			if(I.use_tool(src, user, 20, volume=50))
-				deconstruct(TRUE)
-			return
-
-		if(I.tool_behaviour == TOOL_WRENCH && deconstruction_ready)
-			to_chat(user, "<span class='notice'>I start deconstructing [src]...</span>")
-			if(I.use_tool(src, user, 40, volume=50))
-				playsound(src, 'sound/blank.ogg', 50, TRUE)
-				deconstruct(TRUE, 1)
-			return
-
 	if(!user.cmode)
 		if(!(I.item_flags & ABSTRACT))
 			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
@@ -170,22 +175,20 @@
 
 	return ..()
 
-/obj/structure/table/deconstruct(disassembled = TRUE, wrench_disassembly = 0)
-	if(disassembled)
-		if(!(flags_1 & NODECONSTRUCT_1))
-			var/turf/T = get_turf(src)
-			if(buildstack)
-				new buildstack(T, buildstackamount)
-			if(!wrench_disassembly)
-				new frame(T)
-			else
-				new framestack(T, framestackamount)
-	qdel(src)
+/obj/structure/table/atom_deconstruct(disassembled)
+	. = ..()
+	var/turf/target_turf = get_turf(src)
+	if(buildstack)
+		new buildstack(target_turf, buildstackamount)
+
+	if(frame)
+		new frame(target_turf)
+	else if(framestack)
+		new framestack(get_turf(src), framestackamount)
 
 /*
  * Wooden tables
  */
-
 /obj/structure/table/wood
 	name = "wooden table"
 	icon = 'icons/roguetown/misc/tables.dmi'
@@ -197,7 +200,7 @@
 
 /obj/structure/table/wood/bar
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-	flags_1 = NODECONSTRUCT_1
+	obj_flags = CAN_BE_HIT | NO_DEBRIS_AFTER_DECONSTRUCTION
 	max_integrity = 1000
 
 /obj/structure/table/wood/crafted
@@ -421,12 +424,16 @@
 	if(O.loc != src.loc)
 		step(O, get_dir(O, src))
 
+/obj/structure/rack/wrench_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(user.used_intent.type == INTENT_HELP)
+		return
+
+	I.play_tool_sound(src)
+	deconstruct(TRUE)
+
 /obj/structure/rack/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
-	if (I.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1) && user.used_intent.type != INTENT_HELP)
-		I.play_tool_sound(src)
-		deconstruct(TRUE)
-		return
 
 	if(!user.cmode)
 		if(!(I.item_flags & ABSTRACT))
@@ -444,9 +451,8 @@
 /obj/structure/rack/attack_paw(mob/living/user)
 	attack_hand(user)
 
-
-/obj/structure/rack/deconstruct(disassembled = TRUE)
-	qdel(src)
+/obj/structure/rack/atom_deconstruct(disassembled)
+	return
 
 /obj/structure/rack/underworld
 	icon = 'icons/roguetown/misc/structure.dmi'
@@ -502,7 +508,7 @@
 	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "optable"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = NO_BUCKLE_LYING
 	buckle_requires_restraints = 1
 	var/mob/living/carbon/human/patient = null

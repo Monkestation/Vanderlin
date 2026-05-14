@@ -346,7 +346,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
 				B.kill_limb()
 				should_update = TRUE
-			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 				var/turf/open/T = C.loc
 				if(istype(T))
 					T.pollute_turf(/datum/pollutant/rot, 4)

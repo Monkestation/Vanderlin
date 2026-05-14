@@ -183,6 +183,7 @@
 		else
 			qdel(bandage)
 		bandage = null
+		unbandage_limb()
 
 	if(!special)
 		for(var/obj/item/organ/organ as anything in was_owner.internal_organs) //internal organs inside the dismembered limb are dropped.

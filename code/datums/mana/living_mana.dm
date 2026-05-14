@@ -106,19 +106,20 @@
 /mob/living/carbon/proc/get_max_mana_capacity_mult()
 	SHOULD_BE_PURE(TRUE)
 
-	var/mult = 1
+	var/skill_level = max(1, GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/magic/arcane))
+	return 1 + (skill_level * 0.1)
 
-	return mult
 
 /mob/living/carbon/proc/safe_adjust_personal_mana(amount_to_adjust)
-// proc for adjusting mana without going over the softcap
-	if(mana_pool) // playing it safe, does nothing if you have no mana pool
-		if(amount_to_adjust < 0) // if the amount is negative
-			if(mana_pool.amount > -amount_to_adjust) // not risking negatives
-				mana_pool.adjust_mana(amount_to_adjust)
-		else
-			if(mana_pool.amount < mana_pool.get_softcap())
-				mana_pool.adjust_mana(amount_to_adjust)
+	if(!mana_pool)
+		return
+	if(amount_to_adjust < 0)
+		if(mana_pool.amount > -amount_to_adjust)
+			mana_pool.adjust_mana(amount_to_adjust)
+	else
+		var/safe_ceiling = min(mana_pool.get_softcap(), mana_overload_threshold-10)
+		if(mana_pool.amount < safe_ceiling)
+			mana_pool.adjust_mana(amount_to_adjust)
 
 /mob/living/carbon/proc/adjust_personal_mana(amount_to_adjust)
 // proc for adjusting mana that CAN go over the softcap

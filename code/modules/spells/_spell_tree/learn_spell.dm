@@ -5,6 +5,7 @@
 	sound = null
 
 	school = SCHOOL_TRANSMUTATION
+	spell_flags = SPELL_UNETCHABLE
 
 	charge_required = FALSE
 	has_visual_effects = FALSE

@@ -39,7 +39,6 @@
 
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
 	dodgetime = 50
-	aggressive = 1
 //	stat_attack = UNCONSCIOUS
 
 	ai_controller = /datum/ai_controller/minotaur
@@ -196,7 +195,7 @@
 		return
 
 	for(var/mob/living/L in get_turf(src))
-		if(L.faction.Find("caves"))
+		if(L.has_faction("caves"))
 			continue
 
 		L.adjustFireLoss(damage_per_tick)

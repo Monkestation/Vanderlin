@@ -17,6 +17,9 @@
 /datum/pet_command/idle/retrieve_command_text(atom/living_pet, atom/target)
 	return "signals [living_pet] to stay idle!"
 
+/datum/pet_command/idle/gnome
+	speech_commands = list()
+
 /**
  * # Pet Command: Stop
  * Tells a pet to exit command mode and resume its normal behaviour, which includes regular target-seeking and what have you
@@ -35,6 +38,8 @@
 /datum/pet_command/free/retrieve_command_text(atom/living_pet, atom/target)
 	return "signals [living_pet] to go free!"
 
+/datum/pet_command/free/gnome
+	speech_commands = list()
 /**
  * # Pet Command: Follow
  * Tells a pet to follow you until you tell it to do something else
@@ -47,6 +52,9 @@
 	callout_type = /datum/callout_option/move
 	///the behavior we use to follow
 	var/follow_behavior = /datum/ai_behavior/pet_follow_friend
+
+/datum/pet_command/follow/gnome
+	speech_commands = list()
 
 /datum/pet_command/follow/set_command_active(mob/living/parent, mob/living/commander)
 	. = ..()

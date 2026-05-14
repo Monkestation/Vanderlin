@@ -31,8 +31,8 @@
 	current_blood = 100
 	blood_req = 5
 	oxygen_req = 5
-	nutriment_req = 3
-	hydration_req = 1.5
+	nutriment_req = 3.5
+	hydration_req = 2
 
 	/// This is stuff
 	var/damage_threshold_value = BRAIN_DAMAGE_DEATH/10
@@ -417,9 +417,9 @@
 		if(!is_failing())
 			REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, CRIT_HEALTH_TRAIT)
 	if(damage >= 60)
-		owner.add_stress(/datum/stress_event/brain_damage)
+		owner?.add_stress(/datum/stress_event/brain_damage)
 	else
-		owner.remove_stress(/datum/stress_event/brain_damage)
+		owner?.remove_stress(/datum/stress_event/brain_damage)
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 

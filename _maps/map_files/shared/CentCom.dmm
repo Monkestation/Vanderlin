@@ -5038,10 +5038,6 @@
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
-"Ef" = (
-/obj/structure/overlord_portal,
-/turf/open/floor/churchbrick,
-/area/overlord_lair)
 "Ei" = (
 /obj/item/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -7106,6 +7102,10 @@
 /obj/item/clothing/shirt/robe/necromancer,
 /turf/open/floor/wood,
 /area)
+"Sd" = (
+/obj/structure/pocket_portal,
+/turf/open/floor/churchbrick,
+/area/overlord_lair)
 "Se" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobble,
@@ -22700,7 +22700,7 @@ oB
 oB
 oB
 oB
-Ef
+Sd
 oB
 oB
 hZ

@@ -342,6 +342,8 @@
 		return FALSE
 	if(!target || !isturf(pawn.loc) || !isturf(target.loc))
 		return FALSE
+	if(!pawn.ai_controller.can_move())
+		return FALSE
 
 	if(world.time < pawn.ai_controller.blackboard[BB_HUMAN_NPC_JUKE_COOLDOWN])
 		return FALSE

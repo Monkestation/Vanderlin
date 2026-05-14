@@ -90,7 +90,7 @@
 
 	var/list/turf_list = (getline(user, attacked_atom) - get_turf(src))
 	for(var/turf/singular_turf as anything in turf_list)
-		if(!is_blocked_turf(singular_turf))
+		if(!singular_turf.is_blocked_turf())
 			continue
 		attacked_atom = singular_turf
 		break

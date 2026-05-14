@@ -13,6 +13,7 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	liquid_fire_power = 10
 	hydration_factor = 10
+	boiling_point = T0C + 78 // Ethanol boils at 78.4C
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
 	var/datum/reagent/age_path
 	var/age_time = 10 MINUTES
@@ -97,12 +98,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			O.visible_message("<span class='warning'>[O]'s ink is smeared by [name], but doesn't wash away!</span>")
 	return
 
-/datum/reagent/consumable/ethanol/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with ethanol isn't quite as good as fuel.
-	if(!isliving(M))
+/datum/reagent/consumable/ethanol/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with ethanol isn't quite as good as fuel.
+	if(!isliving(exposed_mob))
 		return
 
-	if(method in list(TOUCH, VAPOR, PATCH))
-		M.adjust_fire_stacks(reac_volume / 15)
+	if(methods in list(TOUCH, VAPOR, PATCH))
+		exposed_mob.adjust_fire_stacks(reac_volume / 15)
 
 	return ..()
 

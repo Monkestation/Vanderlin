@@ -1,10 +1,12 @@
 /datum/action/cooldown/spell/essence/healing_spring
 	name = "Healing Spring"
 	desc = "Creates a small spring of healing water that slowly restores health."
-	button_icon_state = "healing_spring"
+	button_icon_state = "healingspring"
+	button_icon = 'icons/effects/effects.dmi'
 	cast_range = 2
 	point_cost = 8
 	attunements = list(/datum/attunement/life, /datum/attunement/blood)
+	essences = list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/water)
 
 /datum/action/cooldown/spell/essence/healing_spring/cast(atom/cast_on)
 	. = ..()

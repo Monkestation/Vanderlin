@@ -25,7 +25,6 @@
 	defprob = 35
 	defdrain = 5
 
-	aggressive = 1
 
 	hud_type = /datum/hud/putrid
 	see_in_dark = 10

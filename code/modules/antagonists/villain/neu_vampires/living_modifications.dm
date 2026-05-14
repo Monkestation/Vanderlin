@@ -6,6 +6,8 @@
 	var/cached_island_id = null
 	var/last_island_check = 0
 
+	var/last_scale_number = 1
+
 	var/mob/living/walk_to_target
 	var/walk_to_duration = 0
 	var/walk_to_steps_taken = 0

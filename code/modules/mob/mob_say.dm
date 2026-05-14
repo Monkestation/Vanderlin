@@ -57,7 +57,7 @@
 		return
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
 	message = parsemarkdown_basic(message, limited = TRUE, barebones = TRUE)
-	usr.emote("me", 1, message, intentional = TRUE)
+	usr.emote("me", NONE, message, intentional = TRUE)
 
 ///The big me emote verb
 /mob/verb/me_big_verb()

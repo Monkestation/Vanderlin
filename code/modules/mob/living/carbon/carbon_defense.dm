@@ -233,7 +233,9 @@
 
 	for(var/zone in bodypart_zone)
 		var/obj/item/bodypart/part = get_bodypart(deprecise_zone(zone))
-		for(var/datum/injury/injury in part.injuries)
+		for(var/datum/injury/injury in part?.injuries)
+			if(add_germs > 0 && injury.is_bandaged()) //lets treat this as a covered zone
+				continue
 			injury.adjust_germ_level(add_germs, minimum_germs, maximum_germs)
 
 /mob/living/carbon/adjust_germ_level(add_germs, minimum_germs, maximum_germs)

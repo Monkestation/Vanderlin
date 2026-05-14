@@ -13,7 +13,7 @@
 	var/current_stage = 0
 	/// Amount of damage this injury is currently causing
 	var/damage = 0
-	/// How much we bleed on each tick per 40 damage
+	/// How much we bleed on each tick per 10 damage
 	var/bleed_rate = 1
 	/// Ticks of bleeding left
 	var/bleed_timer = 0
@@ -163,7 +163,9 @@
 	return (damage/amount)
 
 /datum/injury/proc/can_autoheal()
-	if(parent_mob.stat == DEAD)
+	if(!parent_mob)
+		return FALSE
+	if(parent_mob?.stat == DEAD)
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
 		return FALSE
@@ -356,7 +358,7 @@
 
 // unbandages the injury
 /datum/injury/proc/unbandage_injury()
-	injury_flags |= INJURY_BANDAGED
+	injury_flags &= ~INJURY_BANDAGED
 	return TRUE
 
 /datum/injury/proc/is_bleeding()
@@ -365,6 +367,8 @@
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
 	if(is_bandaged() || is_clamped() || is_sutured())
+		return FALSE
+	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
 	return ((bleed_timer > 0 || damage_per_injury() > bleed_threshold) && current_stage <= max_bleeding_stage)
 
@@ -375,7 +379,15 @@
 	for(var/obj/item/item in embedded_objects)
 		if((item.w_class < WEIGHT_CLASS_SMALL))
 			bad_embeddies += 1
-	return max(0.1, (bleed_rate * damage)/20 + bad_embeddies)
+	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
+
+/datum/injury/proc/get_artifical_bleed_rate()
+	var/bad_embeddies = 0
+	for(var/obj/item/item in embedded_objects)
+		if((item.w_class < WEIGHT_CLASS_SMALL))
+			bad_embeddies += 1
+	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
+
 
 /datum/injury/proc/is_surgical()
 	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))

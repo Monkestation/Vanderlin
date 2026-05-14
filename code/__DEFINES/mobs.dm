@@ -325,6 +325,7 @@
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_SLOW_METABOLISM 0.1 // needed to have poisons have powerful effect at low doses without making it too fast
+#define REAGENTS_INSANELY_SLOW_METABOLISM 0.01
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
@@ -372,9 +373,13 @@
 
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
+/// Possible value of [/atom/movable/buckle_dir]. If set to a different (positive-or-zero) value than this, the buckling thing will force a dir on the buckled.
+#define BUCKLE_MATCH_DIR -1
 
 /// Simple mob trait, indicating it may follow continuous move actions controlled by code instead of by user input.
 #define MOVES_ON_ITS_OWN (1<<0)
+/// Simple mob trait, can be fireman carried
+#define CAN_BE_FIREMANNED (1<<1)
 
 // Body position defines.
 /// Mob is standing up, usually associated with lying_angle value of 0.

@@ -83,7 +83,12 @@
 	user.adjustCloneLoss(clone_transfer)
 
 	for(var/datum/injury/injury in H.all_injuries)
+		if(injury.damage_type == WOUND_DIVINE)
+			continue
 		injury.transfer_injury(user)
+
+	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
+		artery.applyOrganDamage(-artery.damage)
 
 	// Transfer blood
 	var/blood_transfer = 0

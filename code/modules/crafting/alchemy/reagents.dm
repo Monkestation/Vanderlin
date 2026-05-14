@@ -15,12 +15,12 @@
 			continue
 		injury.heal_damage(1)
 
-/datum/reagent/consumable/healthpot/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
 	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 
-/datum/reagent/consumable/healthpot/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/healthpot/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
@@ -44,7 +44,7 @@
 	color = "#820000be"
 	taste_description = "rich lifeblood"
 	scent_description = "metal"
-	metabolization_rate = REAGENTS_METABOLISM * 3
+	metabolization_rate = REAGENTS_METABOLISM * 2
 
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
 	for(var/datum/injury/injury in bodypart.injuries)
@@ -54,13 +54,13 @@
 	for(var/datum/wound/wound in bodypart.wounds)
 		wound.heal_wound(2)
 
-/datum/reagent/consumable/stronghealth/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
 	L.add_chem_effect(CE_BLOODRESTORE, 30, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 
-/datum/reagent/consumable/stronghealth/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/stronghealth/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
@@ -629,6 +629,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	reagent_state = LIQUID
 	color = "#ffc400"
 	metabolization_rate = 0.5
+	boiling_point = T0C + 95
 
 /datum/reagent/toxin/fyritiusnectar/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.49 && prob(33))

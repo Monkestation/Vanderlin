@@ -207,7 +207,7 @@
 		to_chat(doctor, span_warning("There is a bandage in the way."))
 		return FALSE
 
-	if(affecting.get_incision())
+	if(affecting.get_cut())
 		if(affecting.is_artery_torn())
 			var/time = 5 SECONDS
 			time *= (ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_PERCEPTION), 1))
@@ -238,7 +238,7 @@
 	var/injury_healed = FALSE
 	for(var/thing in affecting.injuries)
 		var/datum/injury/injury = thing
-		if(!(injury.damage_type in list(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)) || (injury.damage_per_injury() <= injury.autoheal_cutoff))
+		if(!(injury.damage_type in list(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)))
 			continue
 		var/time = 2 SECONDS + (injury.damage * 0.5)
 		time *= min(time * 1.5, (ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION), 1)))
@@ -249,9 +249,8 @@
 		if(!use(1))
 			to_chat(user, span_warning("All used up..."))
 			return
-		//pretty easy
-		if(user.diceroll(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine)+3, context = DICE_CONTEXT_PHYSICAL) <= DICE_FAILURE)
-			//to_chat(user, span_warning(fail_msg()))
+		injury.suture_injury()
+		if((injury.damage_per_injury() <= injury.autoheal_cutoff))
 			continue
 		injury.heal_damage(10)
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE)
@@ -265,7 +264,6 @@
 		else
 			user.visible_message(span_green("<b>[user]</b> stitches \a [injury.get_desc()] shut on <b>[target]</b>'s [affecting.name] with \the [src]."), \
 								span_green("I stitch \a [injury.get_desc()] shut on \the [affecting.name] with \the [src]."))
-		injury.suture_injury()
 		injury_healed = TRUE
 
 	var/list/sewable = affecting.get_sewable_wounds()

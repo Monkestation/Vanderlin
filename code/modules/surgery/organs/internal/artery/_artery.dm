@@ -18,8 +18,8 @@
 	max_blood_storage = 100
 	current_blood = 100
 	oxygen_req = 0.25
-	nutriment_req = 0.09
-	hydration_req = 0.03
+	nutriment_req = 0.1
+	hydration_req = 0.05
 
 	/// How much blood we gush when torn
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
@@ -101,12 +101,12 @@
 		if(wound.bleed_rate)
 			open_wound = TRUE
 			break
-	/*
+
 	for(var/datum/injury/injury as anything in limb.injuries)
 		if(injury.is_bleeding())
 			open_wound = TRUE
 			break
-	*/
+
 	var/unrestricted_flow = TRUE
 	if(LAZYLEN(limb.grabbedby) || limb.bandage)
 		unrestricted_flow = FALSE

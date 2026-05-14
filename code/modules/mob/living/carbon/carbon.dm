@@ -114,6 +114,12 @@
 
 	update_a_intents()
 
+	var/obj/item/new_held_item = src.get_active_held_item()
+	if(item_in_hand)
+		SEND_SIGNAL(item_in_hand, COMSIG_ITEM_NOLONGER_ACTIVE, src)
+	if(new_held_item)
+		SEND_SIGNAL(new_held_item, COMSIG_ITEM_NOW_ACTIVE, src)
+
 	return TRUE
 
 /mob/living/carbon/activate_hand(selhand) //l/r OR 1-held_items.len
@@ -652,7 +658,7 @@
 			if(T)
 				T.add_vomit_floor(src, VOMIT_TOXIC)//toxic barf looks different
 		T = get_step(T, dir)
-		if (is_blocked_turf(T))
+		if (T.is_blocked_turf())
 			break
 	return TRUE
 
@@ -672,7 +678,7 @@
 
 	var/turf/floor = get_turf(src)
 	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
-	bite.reagents.trans_to(spew, amount, transfered_by = src)
+	bite?.reagents.trans_to(spew, amount, transfered_by = src)
 
 /mob/living/carbon/proc/spew_organ(power = 5, amt = 1)
 	for(var/i in 1 to amt)

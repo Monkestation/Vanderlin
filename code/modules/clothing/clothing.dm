@@ -569,9 +569,7 @@ BLIND     // can't see anything
 	if(proper_drying && !C.has_stress_type(/datum/stress_event/washed_cloth))
 		C.add_stress(/datum/stress_event/washed_cloth)
 		proper_drying = FALSE
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle))
 
 	if(wet.use_water(0.7))
 		if(HAS_TRAIT(C, TRAIT_NOBLE_BLOOD) && wet.water_stacks == 0)

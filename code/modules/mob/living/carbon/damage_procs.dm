@@ -252,7 +252,7 @@
 
 	var/endorphin_amount = clamp(endurance, 5, 29)
 	reagents?.add_reagent(/datum/reagent/medicine/endorphin, endorphin_amount)
-	TIMER_COOLDOWN_START(src, COOLDOWN_CARBON_ENDORPHINATION, ENDORPHINATION_COOLDOWN_DURATION)
+	TIMER_COOLDOWN_START(src, COOLDOWN_CARBON_ENDORPHINATION, HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) ? ENDORPHINATION_COOLDOWN_DURATION * 0.75 : ENDORPHINATION_COOLDOWN_DURATION)
 	if(!silent)
 		var/final_sound = special_sound || 'sound/heart/combatcocktail.ogg'
 		if(local_sound)
@@ -293,8 +293,9 @@
 		last_pain_message = message
 		if(world.time >= next_pain_message_time)
 			to_chat(src, span_animatedpain("[message]"))
+			next_pain_message_time = world.time + (60 SECONDS + power)
 
-		if(pain_emote)
+		if(pain_emote && world.time >= next_pain_emote_time)
 			var/force_emote
 			if(ishuman(src))
 				var/mob/living/carbon/human/human_src = src
@@ -302,11 +303,11 @@
 					force_emote = human_src.dna.species.get_pain_emote(power)
 			if(force_emote && prob(power))
 				INVOKE_ASYNC(src, PROC_REF(emote), force_emote)
+				next_pain_emote_time = world.time + (90 SECONDS + power)
 
 	// Briefly flash the pain overlay
 	//flash_pain(power)
 	next_pain_time = world.time + (rand(100, 150) + power)
-	next_pain_message_time = world.time + (60 SECONDS + power)
 	return TRUE
 
 /mob/living/carbon/can_feel_pain()
