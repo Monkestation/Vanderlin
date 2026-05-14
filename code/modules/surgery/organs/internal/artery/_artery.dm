@@ -9,9 +9,6 @@
 	organ_efficiency = list(ORGAN_SLOT_ARTERY = 100)
 	needs_processing = TRUE
 
-	maxHealth = ARTERY_MAX_HEALTH
-	high_threshold = ARTERY_MAX_HEALTH * 0.8
-	low_threshold = ARTERY_MAX_HEALTH * 0.2
 	pain_multiplier = 0.05
 
 	organ_volume = 0.5

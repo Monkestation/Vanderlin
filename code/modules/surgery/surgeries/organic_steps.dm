@@ -108,7 +108,12 @@
 	. = ..()
 	if(!.)
 		return
-	return length(bodypart.wounds)
+	if(length(bodypart.wounds))
+		return TRUE
+	for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(artery.damage)
+			return TRUE
+	return FALSE
 
 /datum/surgery_step/cauterize/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to cauterize the wounds on [target]'s [parse_zone(target_zone)]...</span>",
@@ -124,7 +129,10 @@
 	if(bodypart)
 		for(var/datum/wound/bleeder in bodypart.wounds)
 			bleeder.cauterize_wound()
-		bodypart.receive_damage(burn = 40) //painful, but the wounds go away eh?
+		for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
+			if(artery.damage)
+				artery.applyOrganDamage(-artery.damage)
+		bodypart.bodypart_attacked_by(BCLASS_BURN, dam = 25, modifiers = list(CRIT_MOD_CHANCE = -100)) //painful, but the wounds go away eh?
 	target.emote("scream")
 	return TRUE
 

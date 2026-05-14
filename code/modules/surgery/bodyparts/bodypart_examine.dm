@@ -214,10 +214,10 @@
 
 	var/bleed_rate = get_bleed_rate()
 	if(bleed_rate)
-		if(bleed_rate > 1) //Totally arbitrary value
-			status += "<span class='bloody'><B>BLEEDING</B></span>"
+		if(bleed_rate > BLEED_RATE_NOTICABLE) //Totally arbitrary value
+			status += span_bloody("<B>BLEEDING</B>")
 		else
-			status += "<span class='bloody'>BLEEDING</span>"
+			status += span_bloody("BLEEDING")
 
 	var/list/wound_strings = list()
 	for(var/datum/wound/wound as anything in wounds)
@@ -234,9 +234,9 @@
 	for(var/obj/item/organ/possible_artery in shuffle(getorganslotlist(ORGAN_SLOT_ARTERY)))
 		if(possible_artery.is_bruised())
 			if(get_cut(ignore_gauze = TRUE))
-				status += uppertext(span_bloody("cut [parse_zone(possible_artery.zone)]"))
+				status += span_artery(uppertext("cut [parse_zone(possible_artery.zone)]"))
 			else
-				status += uppertext(span_bloody("bruised [parse_zone(possible_artery.zone)]"))
+				status += span_bloody(uppertext("bruised [parse_zone(possible_artery.zone)]"))
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"
@@ -289,9 +289,9 @@
 			this_injury_desc = "<span style='color: [COLOR_PALE_RED_GRAY];'>[this_injury_desc]</span>"
 		if(injury.is_bleeding())
 			if(is_artery_torn())
-				this_injury_desc = "<b><i><span class='artery'>blood-gushing</span></i></b> [this_injury_desc]"
+				this_injury_desc = span_artery("<b><i>blood-gushing</span></i></b> [this_injury_desc]")
 			//Completely arbitrary value
-			else if(injury.get_bleed_rate() > 1)
+			else if(injury.get_bleed_rate() > BLEED_RATE_NOTICABLE)
 				this_injury_desc = "<b><i>badly bleeding</i></b> [this_injury_desc]"
 			else
 				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"

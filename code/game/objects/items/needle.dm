@@ -215,7 +215,7 @@
 		if(!do_after(doctor, time, patient))
 			to_chat(doctor, span_warning("I must stand still!"))
 			return FALSE
-		if(stringamt < 1)
+		if(!use(1))
 			to_chat(doctor, span_warning("The needle has no thread left!"))
 			return FALSE
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine)
@@ -227,10 +227,9 @@
 		doctor.visible_message(
 			span_green("<b>[doctor]</b> sutures <b>[patient]</b>'s [affecting.name] arteries with \the [src]."),
 			span_green("I suture <b>[patient]</b>'s [affecting.name] arteries with \the [src]."))
-		use(1)
 		for(var/obj/item/organ/artery in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
 			if(artery.damage)
-				artery.applyOrganDamage(-min(artery.maxHealth/2, 50))
+				artery.applyOrganDamage(-artery.maxHealth/3)
 				return TRUE
 
 	// Then try to sew wounds (crits)
@@ -257,7 +256,7 @@
 			to_chat(user, span_warning("I must stand still!"))
 			return
 		if(!use(1))
-			to_chat(user, span_warning("All used up..."))
+			to_chat(doctor, span_warning("The needle has no thread left!"))
 			return
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine)
 		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise)

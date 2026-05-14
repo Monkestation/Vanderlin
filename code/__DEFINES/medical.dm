@@ -303,8 +303,7 @@ DEFINE_BITFIELD(organ_flags, list(
 
 
 // ~arteries
-#define ARTERY_MAX_HEALTH 100
-#define ARTERIAL_BLOOD_FLOW 10
+#define ARTERIAL_BLOOD_FLOW 20
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth

@@ -26,9 +26,6 @@
 	return TRUE
 
 /datum/wound/artery/apply_to_bodypart(obj/item/bodypart/affected, silent, crit_message)
-	. = ..()
-	if(!.)
-		return
 	var/obj/item/organ/artery/artery
 	for(var/obj/item/organ/possible_artery in shuffle(affected.getorganslotlist(ORGAN_SLOT_ARTERY)))
 		if(!possible_artery)
@@ -40,13 +37,15 @@
 		artery = possible_artery
 		break
 	if(!artery)
-		return
+		qdel(src)
+		return FALSE
 	var/dissection = (severity >= WOUND_SEVERITY_CRITICAL) || (artery?.damage >= (artery?.maxHealth * 0.5))
 	if(artery)
 		if(dissection)
 			artery.dissect()
 		else
 			artery.tear()
+	. = ..()
 	qdel(src)
 
 /datum/wound/artery/neck_slice

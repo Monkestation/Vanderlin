@@ -27,9 +27,6 @@
 
 	return FALSE
 
-/datum/injury/burn/is_bleeding()
-	return FALSE //burns cannot bleed
-
 /*
 /datum/injury/burn/apply_injury(our_damage, obj/item/bodypart/limb)
 	. = ..()
