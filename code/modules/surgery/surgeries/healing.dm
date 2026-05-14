@@ -110,6 +110,13 @@
 				urhealedamt_burn = injury.heal_damage(urhealedamt_burn)
 			else if(injury.damage_type & BRUTE_WOUND_TYPES)
 				urhealedamt_brute = injury.heal_damage(urhealedamt_brute)
+
+		var/update_overlays = FALSE
+		for(var/obj/item/bodypart/bodypart as anything in target.bodyparts)
+			update_overlays |= bodypart.post_damage_change(FALSE)
+		if(update_overlays)
+			target.update_damage_overlays()
+		target.updatehealth()
 	else
 		target.heal_bodypart_damage(urhealedamt_brute, urhealedamt_burn, required_status = BODYPART_ORGANIC)
 	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)

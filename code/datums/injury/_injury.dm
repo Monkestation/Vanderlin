@@ -258,10 +258,9 @@
 /datum/injury/proc/can_heal()
 	return !(damage_type & WOUND_DIVINE)
 
-/// Heal the given amount of damagem and returns how much is left over from amount_heal.
-/// Keep update_bodypart FALSE if you are looping through injuries.
+/// Heal the given amount of damage and returns how much is left over from amount_heal.
 /// CAN QDELETE INJURY.
-/datum/injury/proc/heal_damage(amount_heal, update_bodypart = TRUE, updating_health = FALSE)
+/datum/injury/proc/heal_damage(amount_heal, update_bodypart = FALSE, updating_health = TRUE)
 	if(amount_heal <= 0)
 		return
 	var/healed_damage = min(damage, amount_heal)
@@ -274,9 +273,7 @@
 	var/mob/living/carbon/cached_parent_mob = parent_mob
 	if(!damage)
 		qdel(src)
-	if(update_bodypart && cached_bodypart)
-		updating_health &= cached_bodypart?.post_damage_change(updating_health)
-	if(updating_health)
+	if(update_bodypart && cached_bodypart && cached_bodypart.post_damage_change(updating_health))
 		cached_parent_mob?.update_damage_overlays()
 	// return amount of healing still leftover, can be used for other injuries
 	return (amount_heal - healed_damage)

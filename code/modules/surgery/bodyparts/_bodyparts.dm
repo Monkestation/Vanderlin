@@ -926,7 +926,7 @@
 		if(shock_penalty)
 			owner.update_shock_penalty(shock_penalty)
 
-	return post_damage_change(FALSE, TRUE)
+	return post_damage_change(updating_health, TRUE)
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.

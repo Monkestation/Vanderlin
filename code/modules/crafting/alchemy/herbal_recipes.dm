@@ -86,6 +86,8 @@
 		if(QDELETED(injury))
 			continue
 		injury.heal_damage(1)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
 	affected_bodypart.disinfect_limb(20 SECONDS)
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)

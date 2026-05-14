@@ -190,6 +190,8 @@
 			continue
 		injury.adjust_germ_level(-10)
 		injury.heal_damage(3)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
 	affected_bodypart.disinfect_limb(30 SECONDS)
 	. = ..()
 
@@ -278,6 +280,8 @@
 			continue
 		injury.salve_injury()
 		injury.heal_damage(2)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
 	affected_bodypart.adjust_germ_level(-10)
 	. = ..()
 
@@ -409,6 +413,8 @@
 			continue
 		injury.salve_injury()
 		injury.heal_damage(1.5)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
 	affected_bodypart.adjust_germ_level(-15)
 	. = ..()
 

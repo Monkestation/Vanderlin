@@ -262,7 +262,7 @@
 		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise)
 		. = TRUE
 		var/injury_heal = min(10, injury.damage_per_injury() - injury.autoheal_cutoff)
-		injury.heal_damage(injury_heal)
+		injury.heal_damage(injury_heal, TRUE)
 		if(injury.damage_per_injury() > injury.autoheal_cutoff)
 			user.visible_message(span_green("<b>[user]</b> partially stitches \a [injury.get_desc()] on <b>[target]</b>'s [affecting.name] with \the [src]."), \
 								span_green("I partially stitch \a [injury.get_desc()] on \the [affecting.name] with \the [src]."))
