@@ -66,7 +66,7 @@
 			maxbpshock = bpshock
 
 	if(damaged_bodypart && (get_chem_effect(CE_PAINKILLER) < maxbpshock))
-		var/burning = (damaged_bodypart.burn_dam >= damaged_bodypart.brute_dam)
+		var/burning = (damaged_bodypart.burn_dam > damaged_bodypart.brute_dam)
 		var/message
 		switch(CEILING(maxbpshock, 1))
 			if(1 to 10)

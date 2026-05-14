@@ -860,10 +860,9 @@
 	for(var/thing in get_organs())
 		organ = thing
 		constant_pain += organ.get_shock(FALSE)
-	var/obj/item/item
-	for(var/thing in embedded_objects)
-		item = thing
-		constant_pain += 3 * item.w_class
+	for(var/obj/item/embebbed as anything in embedded_objects)
+		if(embebbed.embedding)
+			constant_pain += embebbed.embedding.embedded_pain_multiplier * embebbed.w_class
 	if(painkiller_included)
 		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
 	return clamp(FLOOR((pain_dam + constant_pain) * multiplier, DAMAGE_PRECISION), 0, max_pain_damage)
