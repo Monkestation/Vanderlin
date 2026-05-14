@@ -57,6 +57,7 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
  * currently_z_moving defines. Higher numbers mean higher priority.
  * This one is for falling down open space from stuff such as deleted tile, pit grate...
  */
+#define CURERENTLY_Z_CLIMBING_DOWN 0.5
 #define CURRENTLY_Z_FALLING 1
 /// currently_z_moving is set to this in zMove() if 0.
 #define CURRENTLY_Z_MOVING_GENERIC 2

@@ -66,6 +66,7 @@
 	attribute_sheet_adult = /datum/attribute_holder/sheet/job/mageapprentice/adult
 
 	skill_multipliers = list(/datum/attribute/skill/magic/arcane = 1.25)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/mageapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

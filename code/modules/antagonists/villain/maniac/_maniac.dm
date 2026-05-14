@@ -174,9 +174,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.set_patron(/datum/patron/inhumen/zizo)
 			dreamer.cmode_music = old_cm
 			dreamer.remove_stat_modifier("[type]")
-			var/datum/component/themesong = dreamer.GetComponent(/datum/component/theme_music)
-			if(themesong)
-				themesong.RemoveComponent()
+			qdel(dreamer.GetComponent(/datum/component/theme_music))
 			phy.bleed_mod *= 2
 			UnregisterSignal(dreamer, COMSIG_LIVING_DEATH)
 			var/client/client = dreamer?.client

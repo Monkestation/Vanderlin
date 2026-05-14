@@ -4606,6 +4606,9 @@
 /obj/item/key/lord,
 /obj/item/servant_bell/lord,
 /obj/item/storage/belt/pouch/coins/mid,
+/obj/structure/fluff/walldeco/painting{
+	pixel_y = -32
+	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/lord_appt)
 "cUk" = (
@@ -28349,9 +28352,26 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/halls/w)
 "sek" = (
-/obj/structure/fluff/walldeco/painting{
-	pixel_x = -32
-	},
+/obj/structure/closet/crate/crafted_closet/lord,
+/obj/item/clothing/face/spectacles/sglasses,
+/obj/item/clothing/face/spectacles,
+/obj/item/clothing/face/exoticsilkmask,
+/obj/item/clothing/armor/gambeson/arming,
+/obj/item/clothing/cloak/eastcloak2,
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/head/courtierhat,
+/obj/item/clothing/shoes/ridingboots,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/face/spectacles/inqglasses,
+/obj/item/clothing/shirt/undershirt/eastshirt2,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/armor/basiceast/crafteast,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/shoes/boots/furlinedanklets,
+/obj/item/clothing/shoes/boots/furlinedboots,
+/obj/item/clothing/cloak/raincloak/furcloak,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/lord_appt)
 "sel" = (
@@ -33423,7 +33443,7 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/halls/w)
 "vuv" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /mob/living/simple_animal/hostile/retaliate/elemental/warden,
 /turf/open/floor/blocks,
 /area/under/town/basement)

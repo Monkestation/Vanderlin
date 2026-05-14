@@ -71,6 +71,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/artificer
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/artificer/old
+	book_type = /obj/item/recipe_book/engineering
 
 /datum/outfit/artificer
 	name = JOB_ARTIFICER

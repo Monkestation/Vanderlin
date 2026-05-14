@@ -48,6 +48,7 @@
 	traits = list(
 		TRAIT_SEEPRICES
 	)
+	book_type = /obj/item/recipe_book/sewing
 
 /datum/outfit/tailor
 	name = JOB_TAILOR

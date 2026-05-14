@@ -99,16 +99,16 @@
 		return ..()
 
 /obj/item/chalk/attack_self(mob/living/carbon/human/user, list/modifiers)
-	if(!isarcyne(user))//We'll set up other items for other types of rune rituals
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)//We'll set up other items for other types of rune rituals
 		to_chat(user, span_cult("Nothing comes in mind to draw with the chalk."))
 		return
-	var/obj/effect/decal/cleanable/roguerune/pickrune
+	var/obj/effect/decal/cleanable/ritual_rune/pickrune
 	var/runenameinput = browser_input_list(user, "Runes", "Tier 1&2 Runes", GLOB.t2rune_types)
 	pickrune = GLOB.rune_types[runenameinput]
 	if(!pickrune)
 		return
 	var/turf/Turf = get_turf(user)
-	if(locate(/obj/effect/decal/cleanable/roguerune) in Turf)
+	if(locate(/obj/effect/decal/cleanable/ritual_rune) in Turf)
 		to_chat(user, span_cult("There is already a rune here."))
 		return
 	var/structures_in_way = check_for_structures_and_closed_turfs(loc, pickrune)
@@ -130,17 +130,18 @@
 	if(amount <= 0)
 		qdel(src)
 
-/obj/item/chalk/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/roguerune/rune_to_scribe)
+/obj/item/chalk/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/ritual_rune/rune_to_scribe)
 	for(var/turf/T in range(loc, rune_to_scribe.runesize))
 		//check for /sturcture subtypes in the turf's contents
 		for(var/obj/structure/S in T.contents)
-			return TRUE		//Found a structure, no need to continue
+			if(S.density)
+				return TRUE		//Found a structure, no need to continue
 
 		//check if turf itself is a /turf/closed subtype
 		if(istype(T,/turf/closed))
 			return TRUE
 		//check if rune in the turfs contents
-		for(var/obj/effect/decal/cleanable/roguerune/R in T.contents)
+		for(var/obj/effect/decal/cleanable/ritual_rune/R in T.contents)
 			return TRUE
 		//Return false if nothing in range was found
 	return FALSE
@@ -168,15 +169,15 @@
 		return ..()
 
 /obj/item/weapon/knife/dagger/silver/arcyne/attack_self(mob/living/carbon/human/user, list/modifiers)
-	if(!isarcyne(user))
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		return
-	var/obj/effect/decal/cleanable/roguerune/pickrune
+	var/obj/effect/decal/cleanable/ritual_rune/pickrune
 	var/runenameinput = browser_input_list(user, "Runes", "All Runes", GLOB.t4rune_types)
 	pickrune = GLOB.rune_types[runenameinput]
 	if(!pickrune)
 		return
 	var/turf/Turf = get_turf(user)
-	if(locate(/obj/effect/decal/cleanable/roguerune) in Turf)
+	if(locate(/obj/effect/decal/cleanable/ritual_rune) in Turf)
 		to_chat(user, span_cult("There is already a rune here."))
 		return
 	var/structures_in_way = check_for_structures_and_closed_turfs(loc, pickrune)
@@ -207,7 +208,7 @@
 		span_notice("I finish dragging the blade in symbols and circles, leaving behind a [pickrune.name]."))
 		new pickrune(Turf, chosen_keyword)
 
-/obj/item/weapon/knife/dagger/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/roguerune/rune_to_scribe)
+/obj/item/weapon/knife/dagger/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/ritual_rune/rune_to_scribe)
 	for(var/turf/T in range(loc, rune_to_scribe.runesize))
 		//check for /sturcture subtypes in the turf's contents
 		for(var/obj/structure/S in T.contents)
@@ -216,7 +217,7 @@
 		if(istype(T,/turf/closed))
 			return TRUE
 		//check if rune in the turfs contents
-		for(var/obj/effect/decal/cleanable/roguerune/R in T.contents)
+		for(var/obj/effect/decal/cleanable/ritual_rune/R in T.contents)
 			return TRUE
 		//Return false if nothing in range was found
 	return FALSE
@@ -644,6 +645,8 @@
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
 	item_weight = 40 GRAMS
+	var/obj/item/book/granter/spellbook/melded_quality = /obj/item/book/granter/spellbook/adept
+	var/shock_damage = 20
 
 /obj/item/natural/melded/t1
 	name = "arcanic meld"
@@ -659,6 +662,8 @@
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
 	item_weight = 50 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/expert
+	shock_damage = 40
 
 /obj/item/natural/melded/t3
 	name = "sorcerous weave"
@@ -666,6 +671,8 @@
 	icon_state = "wessence"
 	desc = "A melding of molten core, heartwood core and elemental fragment."
 	item_weight = 60 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/master
+	shock_damage = 60
 
 /obj/item/natural/melded/t4
 	name = "magical confluence"
@@ -673,12 +680,16 @@
 	icon_state = "wessence"
 	desc = "A melding of abyssal flame, sylvan essence and elemental relic."
 	item_weight = 70 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/legendary
+	shock_damage = 80
 
 /obj/item/natural/melded/t5
 	name = "arcanic aberation"
 	icon_state = "wessence"
 	desc = "A melding of arcyne fusion and voidstone. It pulses erratically, power coiled tightly within and dangerous. Many would be afraid of going near this, let alone holding it."
 	item_weight = 80 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/legendary
+	shock_damage = 40
 
 /obj/structure/soul
 	name = "soul"
@@ -746,3 +757,53 @@
 		else
 			mana_amount -= transfer_amount
 			user.mana_pool.adjust_mana(transfer_amount)
+
+/obj/item/pylon_linker
+	name = "ley linker"
+	desc = "A mystical tool used to bind mana pylons together, allowing mana to flow between them."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "dbrush"
+
+	var/obj/structure/mana_pylon/source_pylon
+
+/obj/item/pylon_linker/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+	if(!istype(target, /obj/structure/mana_pylon))
+		return
+
+	var/obj/structure/mana_pylon/pylon = target
+
+	if(!source_pylon)
+		source_pylon = pylon
+		user.balloon_alert(user, "source set: [pylon.name]")
+		return
+
+	if(source_pylon == pylon)
+		user.balloon_alert(user, "can't link to itself!")
+		return
+
+	source_pylon.link_pylon(pylon)
+	user.balloon_alert(user, "pylons linked!")
+	source_pylon = null
+
+/obj/item/pylon_linker/afterattack_secondary(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+
+	if(!istype(target, /obj/structure/mana_pylon))
+		if(source_pylon)
+			user.balloon_alert(user, "source cleared!")
+			source_pylon = null
+		return
+
+	var/obj/structure/mana_pylon/pylon = target
+
+	if(!pylon.linked_pylon)
+		user.balloon_alert(user, "not linked!")
+		return
+
+	pylon.unlink_pylon(pylon.linked_pylon)
+	user.balloon_alert(user, "link broken!")

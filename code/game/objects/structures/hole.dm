@@ -44,6 +44,7 @@
 		if(!(locate(/obj/item/natural/stone) in T))
 			if(prob(23))
 				new /obj/item/natural/stone(T)
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 	return ..()
 
 /obj/structure/closet/dirthole/grave
@@ -139,7 +140,7 @@
 	if(attacking_shovel.heldclod)
 		playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
 		if(stage == 3) //close grave
-			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) //can't have nice things can we
+			if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) //can't have nice things can we
 				return
 			stage = 4
 			climb_offset = 10
@@ -169,7 +170,7 @@
 			if(under_turf && our_turf && isopenturf(under_turf))
 				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 				user.visible_message("[user] starts digging out the bottom of [src]", "I start digging out the bottom of [src].")
-				if(!do_after(user, 10 SECONDS * attacking_shovel.time_multiplier, src))
+				if(!do_after(user, 10 SECONDS * attacking_shovel.toolspeed, src))
 					return TRUE
 				attacking_shovel.heldclod = new(attacking_shovel)
 				attacking_shovel.update_appearance(UPDATE_ICON_STATE)
@@ -195,7 +196,7 @@
 			else
 				stage++
 		if(stage == 4)
-			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
+			if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) // WE CANT HAVE NICE THINGS CAN WE
 				return
 			stage = 3
 			climb_offset = 0

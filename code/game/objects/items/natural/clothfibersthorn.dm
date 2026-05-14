@@ -88,11 +88,8 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 20
 	item_weight = 3 GRAMS
-
-/obj/item/natural/thorn/Initialize(mapload)
-	. = ..()
-	create_reagents(10)
-	reagents.add_reagent(/datum/reagent/thorn_essence, 10)
+	indexed = TRUE
+	grind_results = list(/datum/reagent/thorn_essence = 10)
 
 /obj/item/natural/thorn/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")

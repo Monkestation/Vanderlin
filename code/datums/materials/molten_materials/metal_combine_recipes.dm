@@ -51,10 +51,22 @@ GLOBAL_LIST_INIT(molten_recipes, list())
 /datum/molten_recipe/blacksteel
 	name = "Blacksteel"
 	materials_required = list(
-		/datum/material/steel = 6,
-		/datum/material/silver = 4,
+		/datum/material/steel = 3,
+		/datum/material/silver = 1,
 	)
 	temperature_required = 1953.15
 	output = list(
-		/datum/material/blacksteel = 10,
+		/datum/material/blacksteel = 2,
 	)
+
+/datum/molten_recipe/steel
+	name = "Steel"
+	materials_required = list(
+		/datum/material/iron = 3,
+		/datum/material/coke = 1,
+	)
+	temperature_required = 1866
+	output = list(
+		/datum/material/steel = 3,
+	)
+

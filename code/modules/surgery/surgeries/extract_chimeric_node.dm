@@ -1,7 +1,6 @@
 /datum/surgery/extract_chimeric_node
 	name = "Extract Humors"
 	category = "Pestran"
-	heretical = TRUE
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/clamp,

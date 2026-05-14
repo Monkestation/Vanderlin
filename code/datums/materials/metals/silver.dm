@@ -1,11 +1,10 @@
 /datum/material/silver
 	name = "Silver"
-	red_hot = TRUE
+	show_as_filling = TRUE
 	color = "#d1e6e3"
 	hardness = MAT_VALUE_FLEXIBLE + 10
 	integrity_modifier = 0.65
-	can_be_molded = TRUE
-	ingot_type = /obj/item/ingot/silver
+	solid_form = /obj/item/ingot/silver
 
 	traits = list(
 		/datum/material_trait/silver_bane

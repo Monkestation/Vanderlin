@@ -516,8 +516,7 @@
 
 /datum/status_effect/debuff/stinky_person/on_remove()
 	. = ..()
-	var/datum/component/stinky_component = GetComponent(/datum/component/rot/stinky_person)
-	stinky_component?.RemoveComponent()
+	qdel(GetComponent(/datum/component/rot/stinky_person))
 
 /datum/status_effect/debuff/tainted_lux
 	id = "tainted_lux"
