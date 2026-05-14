@@ -1,7 +1,7 @@
 /datum/repeatable_crafting_recipe/sigdry
 	name = "westleach zig"
 	output = /obj/item/clothing/face/cigarette/rollie/nicotine
-	starting_atom = /obj/item/alch/tobaccodust
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/produce/dry_westleach = 2
 	)
@@ -15,7 +15,7 @@
 /datum/repeatable_crafting_recipe/sigsweet
 	name = "swampweed zig"
 	output = /obj/item/clothing/face/cigarette/rollie/cannabis
-	starting_atom = /obj/item/alch/swampdust
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/produce/swampweed_dried = 2
 	)
