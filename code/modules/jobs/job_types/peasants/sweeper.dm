@@ -1,16 +1,13 @@
 /datum/attribute_holder/sheet/job/sweeper
-	attribute_variance = list(
-		STAT_FORTUNE = list(-9, 9),
-		/datum/attribute/skill/misc/sneaking = list(10, 40),
-		/datum/attribute/skill/misc/climbing = list(10, 30),
-		/datum/attribute/skill/combat/wrestling = list(-10, 10),
-		/datum/attribute/skill/combat/unarmed = list(10, 20),
-	)
 	raw_attribute_list = list(
-		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,
 		STAT_INTELLIGENCE = -2,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/crafting = 20,
 	)
 
 /datum/job/sweeper
