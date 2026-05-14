@@ -23431,7 +23431,9 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "lec" = (
-/obj/structure/door,
+/obj/structure/door{
+	name = "Sweeper's Quarters"
+	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/sweeper,
 /turf/open/floor/ruinedwood/turned,
