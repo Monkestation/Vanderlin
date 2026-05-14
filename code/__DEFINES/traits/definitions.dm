@@ -278,6 +278,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOCKED_DIAGONAL "blocked_diagonals"
 /// Can swim ignoring water flow and slowdown
 #define TRAIT_SWIMMER "Good Swimmer"
+///can we ride the lightning
+#define TRAIT_PYLON_RIDER "Pylon Rider"
 /// trait determines if this mob can breed given by /datum/component/breeding
 #define TRAIT_MOB_BREEDER "mob_breeder"
 /// can't be perceived in any way, likely due to invisibility
@@ -348,7 +350,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CANNOT_BE_UNBUCKLED "cannot_be_unbuckled"
 /// Prevents mob from riding mobs when buckled onto something
 #define TRAIT_CANT_RIDE "cant_ride"
-
 /// trait that prevents AI controllers from planning detached from ai_status to prevent weird state stuff.
 #define TRAIT_AI_PAUSED "TRAIT_AI_PAUSED"
 ///trait that stops our ai controlled mob from moving at all due to ai planning
@@ -450,6 +451,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RECOGNIZE_ADDICTS	"Addict Recognition"
 #define TRAIT_NOENERGY "Boundless Energy" //Specifically, You don't lose fatigue, but you do continue losing stamina.
 #define TRAIT_KEENEARS "Keen Ears"
+#define TRAIT_KEENEYES "Keen Eyes"
 #define TRAIT_POISON_RESILIENCE "Poison Resilience"
 #define TRAIT_SEED_FINDER "Seed Finder"
 /// Cannot count coins
@@ -504,6 +506,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BETTER_SLEEP "Better Sleep" //Recover more energy (blue bar) when sleeping
 #define TRAIT_EXTEROCEPTION	"Exteroception" //See others' hunger and thirst
 #define TRAIT_TUTELAGE "Tutelage" //Slightly more sleep xp to you and xp to apprentices
+#define TRAIT_ARCANE_KNOWLEDGE "Arcane Knowledge"
 #define TRAIT_APRICITY "Apricity" //Decreased stamina regen time during DAY
 #define TRAIT_BLACKLEG "Blackleg" //Rig coin, dice, cards in your favor
 #define TRAIT_INQUISITION "Member of the Oratorium Throni Vacui"
