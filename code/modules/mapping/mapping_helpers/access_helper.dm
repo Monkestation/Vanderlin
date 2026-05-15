@@ -101,9 +101,6 @@
 	accesses = list(ACCESS_BATHHOUSE)
 	difficulty = 5
 
-/obj/effect/mapping_helpers/access/keyset/town/bathhouse
-	accesses = list(ACCESS_BATHHOUSE)
-
 /obj/effect/mapping_helpers/access/keyset/town/sweeper
 	accesses = list(ACCESS_SWEEPER)
 
