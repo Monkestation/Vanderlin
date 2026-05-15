@@ -185,11 +185,11 @@
 // checks whether the injury has been appropriately treated
 /datum/injury/proc/is_treated()
 	if(damage_type & SEWABLE_WOUND_TYPES)
-		return (is_bandaged() || is_sutured())
+		return is_bandaged() || is_sutured()
 	if(damage_type & (WOUND_BLUNT|WOUND_DIVINE))
 		return is_bandaged()
 	if(damage_type & WOUND_BURN)
-		return (is_salved() || (is_disinfected() && is_bandaged()) )
+		return is_salved() || (is_bandaged() && (is_disinfected() || germ_level <= 0))
 	return TRUE
 
 // Checks whether other other can be merged into src.
@@ -404,7 +404,7 @@
 	return CHECK_BITFIELD(injury_flags, INJURY_SURGICAL)
 
 /datum/injury/proc/is_disinfected()
-	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) || germ_level < INFECTION_LEVEL_ONE)
+	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) && germ_level <= 0)
 		return TRUE
 	return FALSE
 

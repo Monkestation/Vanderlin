@@ -366,13 +366,15 @@
 			update_disabled()
 	return TRUE
 
-/obj/item/bodypart/proc/try_bandage(obj/item/new_bandage)
-	if(!new_bandage)
+/obj/item/bodypart/proc/try_bandage(obj/item/natural/cloth/new_bandage)
+	if(!istype(new_bandage))
 		return FALSE
+	. = TRUE
 	bandage = new_bandage
-	bandage_limb()
 	new_bandage.forceMove(src)
-	return TRUE
+	if(!new_bandage.bandage_health)
+		return
+	bandage_limb()
 
 /obj/item/bodypart/proc/try_bandage_expire()
 	if(!bandage)
@@ -409,9 +411,10 @@
 		return FALSE
 	if(!bandage)
 		return FALSE
-	if(owner.stat != DEAD)
+	bandage.bandage_effectiveness = 1
+	unbandage_limb()
+	if(owner.stat < UNCONSCIOUS)
 		to_chat(owner, span_warning("Blood soaks through the bandage on my [name]."))
-		bandage.bandage_effectiveness = 1
 	return bandage.add_mob_blood(owner)
 
 /obj/item/bodypart/proc/remove_bandage()

@@ -2,7 +2,7 @@
 	name = "cloth"
 	desc = "A square of cloth mended from fibers."
 	icon_state = "cloth"
-	possible_item_intents = list(/datum/intent/use, /datum/intent/soak, /datum/intent/wring)
+	possible_item_intents = list(/datum/intent/use, INTENT_SOAK, INTENT_WRING)
 	force = 0
 	throwforce = 0
 	firefuel = 3 MINUTES
@@ -26,9 +26,13 @@
 	var/bandage_effectiveness = 0 // EXPERIMENTAL CHANGE: BANDAGES STOP ALL BLEEDING
 	///how long it will take to bandage something with this
 	var/bandage_speed = 7 SECONDS
-	///How much you can bleed into the bandage until it needs to be changed (Blood loss is measured in 50% of the health)
-	var/bandage_health = 300
+	///How much you can bleed into the bandage until it needs to be changed
+	var/bandage_health = 250
 	obj_flags = CAN_BE_HIT //enables splashing on by containers
+
+/obj/item/natural/cloth/examine(mob/user)
+	. = ..()
+	. += span_notice("[src] has [PERCENT(bandage_health/initial(bandage_health))]% of its absorption left.")
 
 /obj/item/natural/cloth/Initialize(mapload, vol)
 	. = ..()
@@ -76,11 +80,13 @@
 	return TRUE
 
 /obj/item/natural/cloth/proc/on_clean_success(datum/source, atom/target, mob/living/user, clean_succeeded)
-	if(clean_succeeded)
-		if(prob(50) && isturf(target)) // to prevent infinitely renewable water
-			var/turf/T = target
-			T.add_liquid_from_reagents(reagents, amount = 1)
-		reagents.remove_all(1)
+	if(!clean_succeeded)
+		return
+	if(prob(50) && isturf(target)) // to prevent infinitely renewable water
+		var/turf/T = target
+		T.add_liquid_from_reagents(reagents, amount = 1)
+	reagents.remove_all(1)
+	if(!reagents.total_volume)
 		bandage_health = initial(bandage_health)
 		bandage_effectiveness = initial(bandage_effectiveness)
 
@@ -178,6 +184,8 @@
 			reagents.trans_to(O, reagents.total_volume, 1, transfered_by = user)
 			user.visible_message(span_small("[user] wrings out \the [src] in \the [O]."), span_small("I wring out \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
+			bandage_health = initial(bandage_health)
+			bandage_effectiveness = initial(bandage_effectiveness)
 	else if(isturf(target))
 		var/turf/T = target
 		if(istype(T, /turf/open/water))
@@ -191,6 +199,8 @@
 				reagents.clear_reagents()
 				user.visible_message(span_small("[user] wrings out \the [src]."), span_small("I wring out \the [src]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
+				bandage_health = initial(bandage_health)
+				bandage_effectiveness = initial(bandage_effectiveness)
 
 	update_appearance()
 

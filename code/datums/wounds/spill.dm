@@ -51,7 +51,7 @@
 	return TRUE
 
 /datum/wound/spill/gut/on_crit_applied(obj/item/bodypart/affected, mob/living/user, zone_precise, list/modifiers)
-	affected.add_wound(/datum/wound/slash/disembowel)
+	affected.add_wound(/datum/wound/slash/disembowel, crit_message = TRUE)
 
 /datum/wound/spill/gut/on_bodypart_gain(obj/item/bodypart/new_limb)
 	. = ..()
