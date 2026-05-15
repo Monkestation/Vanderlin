@@ -140,5 +140,5 @@
 	user.visible_message(span_notice("<b>[user]</b> burn the rot away from \the [src]."), \
 					span_notice("I burn the rot away from \the [src]."), \
 					vision_distance = COMBAT_MESSAGE_RANGE)
-	set_germ_level(GERM_LEVEL_STERILE)
+	set_germ_level(0)
 	return TRUE

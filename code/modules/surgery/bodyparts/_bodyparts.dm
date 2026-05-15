@@ -10,7 +10,7 @@
 	icon_state = ""
 	layer = BELOW_MOB_LAYER //so it isn't hidden behind objects when on the floor
 
-	germ_level = GERM_LEVEL_STERILE
+	germ_level = 0
 
 	var/disinfects_in
 	var/mob/living/carbon/owner
@@ -367,7 +367,7 @@
 		update_icon_dropped()
 
 /// Adding/removing germs
-/obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
 	if(germ_level >= INFECTION_LEVEL_THREE && !CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
 		kill_limb()

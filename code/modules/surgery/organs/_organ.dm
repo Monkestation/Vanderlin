@@ -10,7 +10,7 @@
 
 	grid_width = 32
 	grid_height = 32
-	germ_level = GERM_LEVEL_STERILE
+	germ_level = 0
 
 	/// Time we have spent failing
 	var/failure_time = 0
@@ -207,7 +207,7 @@
 /obj/item/organ/proc/unnecrose_organ()
 	. = FALSE
 	if(CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
-		set_germ_level(GERM_LEVEL_STERILE)
+		set_germ_level(0)
 		organ_flags &= ~ORGAN_DEAD
 		return TRUE
 
@@ -372,7 +372,7 @@
 /obj/item/organ/proc/decay(delta_time)
 	adjust_germ_level(rand(min_decay_factor,max_decay_factor) * delta_time)
 
-/obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
 	if((germ_level >= INFECTION_LEVEL_THREE) && !CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
 		kill_organ()
@@ -480,7 +480,7 @@
 		return
 
 	if((germ_level < INFECTION_LEVEL_ONE) && (antibiotics >= 20))
-		set_germ_level(GERM_LEVEL_STERILE)
+		set_germ_level(0)
 	else
 		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * delta_time)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		if(owner?.body_position == LYING_DOWN)

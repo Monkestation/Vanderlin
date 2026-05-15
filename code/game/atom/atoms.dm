@@ -166,7 +166,7 @@
 	/**
 	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
 	 */
-	var/germ_level = GERM_LEVEL_AMBIENT
+	var/germ_level = INFECTION_LEVEL_ONE
 
 
 /**
@@ -898,7 +898,7 @@
 	atom_colours[colour_priority] = null
 	update_atom_colour()
 
-/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 /// Force set the germ level

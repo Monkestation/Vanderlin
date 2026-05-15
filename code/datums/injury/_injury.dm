@@ -139,7 +139,7 @@
 			set_mob(parent_bodypart.owner)
 
 //increase or decrease infection
-/datum/injury/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/datum/injury/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 //makes the injury get infected more when the victim is moving around
@@ -404,7 +404,7 @@
 	return CHECK_BITFIELD(injury_flags, INJURY_SURGICAL)
 
 /datum/injury/proc/is_disinfected()
-	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) && (germ_level <= 0))
+	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) || germ_level < INFECTION_LEVEL_ONE)
 		return TRUE
 	return FALSE
 
