@@ -28,3 +28,10 @@
   - bugfix: essence dupe
   - balance: reduced the cost of all research
   - balance: reduced the time for infusing
+2026-05-06:
+  CheffieGithub:
+  - bugfix: Fixed voices lacking colours and emotes using voice color
+  PotatoTomahto:
+  - refactor: buckling and riding code refactored
+  - rscadd: animals can be fireman carried
+  - balance: riding speed

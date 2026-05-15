@@ -1,6 +1,0 @@
-author: "PotatoTomahto"
-delete-after: True
-changes:
-  - refactor: "buckling and riding code refactored"
-  - rscadd: "animals can be fireman carried"
-  - balance: "riding speed"
