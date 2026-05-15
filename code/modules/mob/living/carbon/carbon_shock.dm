@@ -226,7 +226,7 @@
 			endorphinate()
 		if(DT_PROB(1, delta_time))
 			Unconscious(5)
-			endorphinate()
+			endorphinate(TRUE)
 		if(DT_PROB(4, delta_time))
 			emote("gargle")
 
@@ -235,15 +235,14 @@
 		emote("scream")
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(10 SECONDS)
-			//Attempt to inject combat cocktail - ONE FINAL TIME
-			endorphinate()
+			endorphinate(TRUE)
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage >= SHOCK_STAGE_8))
 		//How the fuck are we still alive?
 		if(!IsUnconscious())
-			visible_message(PAIN_KNOCKOUT_MESSAGE)
-			custom_pain(PAIN_KNOCKOUT_MESSAGE_SELF, 100, nopainloss = TRUE)
+			visible_message(span_bolddanger("[src] scrunchs [p_their()] and collapses!"), ignored_mobs = src)
+			custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 			//death_rattle()
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(15 SECONDS)
-			endorphinate()
+			endorphinate(TRUE)

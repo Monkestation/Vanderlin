@@ -16,8 +16,8 @@
 /datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(affected.status == BODYPART_ROBOTIC)
 		return FALSE
-	if(!affected.get_cut(ignore_gauze = TRUE))
-		return FALSE
+	// if(!affected.get_cut(ignore_gauze = TRUE))
+	// 	return FALSE
 	return ..()
 
 /datum/wound/artery/can_stack_with(datum/wound/other)
@@ -46,6 +46,7 @@
 		else
 			artery.tear()
 	. = ..()
+	affected.temporary_crit_paralysis(10 SECONDS)
 	qdel(src)
 
 /datum/wound/artery/neck_slice
@@ -63,6 +64,11 @@
 
 /datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
+		return FALSE
+	// Must be vitals zone
+	if(affected.body_zone != BODY_ZONE_CHEST)
+		return FALSE
+	if(!affected.getorganslot(ORGAN_SLOT_HEART))
 		return FALSE
 	return ..()
 

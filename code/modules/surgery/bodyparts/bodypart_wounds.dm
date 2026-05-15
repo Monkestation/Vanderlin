@@ -241,16 +241,11 @@
 	var/list/candidates = list()
 	for(var/wound_type in GLOB.primordial_wounds)
 		var/datum/wound/primordial = GLOB.primordial_wounds[wound_type]
-		var/datum/primoridial_type = primordial.type
-		if(IS_ABSTRACT(primoridial_type))
-			continue
 		if(!primordial.can_roll)
 			continue
-		var/chance = primordial.get_crit_prob(bclass, dam, damage_dividend, user, src, zone_precise, modifiers)
-		if(chance <= 0)
+		if(!primordial.can_apply_to_bodypart(src, zone_precise))
 			continue
-		if(!primordial.can_apply_to_bodypart(src))
-			continue
+		var/chance = primordial.get_crit_prob(bclass, dam, damage_dividend, user, src, modifiers)
 		if(prob(chance))
 			candidates += wound_type
 

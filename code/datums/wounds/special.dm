@@ -270,7 +270,7 @@
 /datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
 	if(!(bclass in associated_bclasses))
 		return 0
-	if(length(viable_zones) && !(zone_precise in viable_zones) && viable_zones != ALL_BODYPARTS)
+	if(length(viable_zones) && !(zone_precise in viable_zones))
 		return 0
 	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
 		return 0

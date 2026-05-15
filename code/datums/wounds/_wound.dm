@@ -3,7 +3,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /proc/init_primordial_wounds()
 	var/list/primordial_wounds = list()
-	for(var/wound_type in typesof(/datum/wound))
+	for(var/datum/wound/wound_type as anything in typesof(/datum/wound))
+		if(IS_ABSTRACT(wound_type))
+			continue
 		primordial_wounds[wound_type] = new wound_type()
 	return primordial_wounds
 
@@ -127,7 +129,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	///list of viable zones for this
 	var/list/viable_zones = ALL_BODYPARTS
 
-	/// These are effectively try_crit moved onto the wound
+	/**
+	 * These are effectively try_crit moved onto the wound
+	 * */
 
 	/// Minimum damage required to attempt this wound
 	var/min_damage = 5
@@ -210,20 +214,16 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		final_message = "<span class='crit'><b>Critical hit!</b> [final_message]</span>"
 	return final_message
 
-/datum/wound/proc/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
+/datum/wound/proc/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, list/modifiers)
 	if(!can_roll)
 		return 0
 	if(!(bclass in associated_bclasses))
 		return 0
 	if(dam < min_damage)
 		return 0
-	if(deprecise_zone(zone_precise) != affected.body_zone)
-		return 0 // we are in a weird place
 	if(damage_dividend < min_damage_dividend)
 		if(!(brittle_bonus && HAS_TRAIT(affected, TRAIT_BRITTLE))) // brittle skips the dividend gate
 			return 0
-	if(length(viable_zones) && !(zone_precise in viable_zones) && viable_zones != ALL_BODYPARTS)
-		return 0
 
 	var/used = base_prob_weight + (modifiers?[CRIT_MOD_CHANCE] || 0)
 	var/calc_dam = dam
@@ -251,7 +251,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return pick(sound_effect)
 
 /// Returns whether or not this wound can be applied to a given bodypart
-/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
+/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise)
 	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
 	if(!ignore_bloody && !isnull(bleed_rate) && !affected.can_bloody_wound())
@@ -259,6 +259,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/datum/wound/other_wound as anything in affected.wounds)
 		if(!can_stack_with(other_wound))
 			return FALSE
+	if(length(viable_zones) && !(zone_precise in viable_zones))
+		return FALSE
+	if(deprecise_zone(zone_precise) != affected.body_zone)
+		return FALSE // we are in a weird place
 	return TRUE
 
 /// Returns whether or not this wound can be applied while this other wound is present

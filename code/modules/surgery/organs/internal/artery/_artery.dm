@@ -18,7 +18,7 @@
 	nutriment_req = 0.09
 	hydration_req = 0.03
 
-	/// How much blood we gush when torn. This will be multiplied by delta_time
+	/// How much blood we gush when torn. Multiplied by damage/maxHealth
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
 	/// If torn, this is basically the time until we gush again
 	COOLDOWN_DECLARE(next_squirt)

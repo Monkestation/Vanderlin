@@ -806,6 +806,8 @@
 		return
 	amount = min(max_pain_damage - pain_dam, amount)
 	amount -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	if(amount <= 0)
+		return
 	pain_dam = round(pain_dam + amount, DAMAGE_PRECISION)
 	if(updating_health)
 		owner.update_shock()
@@ -1447,7 +1449,7 @@
 	if(owner)
 		for(var/thing in shuffle(owner.getorganslotlist(slot)))
 			var/obj/item/organ/organ = thing
-			if(organ.current_zone == body_zone)
+			if(deprecise_zone(organ.current_zone) == body_zone)
 				return organ
 	else
 		var/list/organs = list()

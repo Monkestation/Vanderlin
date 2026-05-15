@@ -2,7 +2,10 @@
 	name = "disembowelment"
 	check_name = "<span class='userdanger'><B>GUTS</B></span>"
 	severity = WOUND_SEVERITY_FATAL
-	crit_message = "%VICTIM spills %P_THEIR organs!"
+	crit_message = list(
+		"%VICTIM spills %P_THEIR organs!",
+		"%VICTIM spills %P_THEIR entrails!",
+	)
 	sound_effect = 'sound/combat/crit2.ogg'
 	whp = 100
 	sewn_whp = 35

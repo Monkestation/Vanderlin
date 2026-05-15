@@ -184,13 +184,12 @@
 
 // checks whether the injury has been appropriately treated
 /datum/injury/proc/is_treated()
-	switch(damage_type)
-		if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE, WOUND_LASH)
-			return (is_bandaged() || is_sutured())
-		if(WOUND_DIVINE)
-			return (is_bandaged())
-		if(WOUND_BURN)
-			return (is_salved() || (is_disinfected() && is_bandaged()) )
+	if(damage_type & SEWABLE_WOUND_TYPES)
+		return (is_bandaged() || is_sutured())
+	if(damage_type & (WOUND_BLUNT|WOUND_DIVINE))
+		return is_bandaged()
+	if(damage_type & WOUND_BURN)
+		return (is_salved() || (is_disinfected() && is_bandaged()) )
 	return TRUE
 
 // Checks whether other other can be merged into src.

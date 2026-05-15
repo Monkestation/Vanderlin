@@ -66,9 +66,9 @@
 		owner.set_heartattack(TRUE)
 		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 		return
-	if(owner.pulse <= PULSE_NONE)
-		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
-		return
+	// if(owner.pulse <= PULSE_NONE)
+	// 	ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
+	// 	return
 
 	// Pulse normally shouldn't go above PULSE_FASTER unless you get extremely doped up
 	if(pulse_mod < 5)
@@ -189,6 +189,10 @@
 				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 				owner.remove_status_effect(/datum/status_effect/debuff/bleeding)
 				owner.apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+			else
+				owner.remove_status_effect(/datum/status_effect/debuff/bleeding)
+				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/bleeding)
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
@@ -201,7 +205,7 @@
 		owner.remove_stress(/datum/stress_event/bleeding)
 
 /datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, delta_time, times_fired)
-	var/cardiac_arrest = owner.undergoing_nervous_system_failure()
+	var/cardiac_arrest = owner.undergoing_cardiac_arrest()
 	var/nervous_failure = owner.undergoing_nervous_system_failure()
 	if((owner.heartbeat_sound != BEAT_SLOW) && (cardiac_arrest || nervous_failure))
 		owner.heartbeat_sound = BEAT_SLOW

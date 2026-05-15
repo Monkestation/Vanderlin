@@ -269,7 +269,7 @@
  * Adds pain onto a limb while giving the player a message styled depending on the powerf of the pain added.
  *
  * Arguments:
- * * Message is the custom message to be displayed
+ * * Message is the custom message to be displayed to the source
  * * Power decides how much painkillers will stop the message, as well as how much pain it causes
  * * Forced means it ignores anti-spam timer
  */
@@ -281,8 +281,7 @@
 		return FALSE
 
 	// Take the edge off
-	power -= get_chem_effect(CE_PAINKILLER)
-	if(power <= 0)
+	if(power - get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR <= 0)
 		return FALSE
 
 	// Share the pain

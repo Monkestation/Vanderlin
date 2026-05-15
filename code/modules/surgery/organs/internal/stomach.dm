@@ -85,6 +85,7 @@
 	slot = ORGAN_SLOT_GUTS
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
+	organ_efficiency = list(ORGAN_SLOT_GUTS = 100)
 
 	healing_factor = STANDARD_ORGAN_HEALING
 	low_threshold_passed = "<span class='info'>My guts flashes with pain before subsiding.</span>"

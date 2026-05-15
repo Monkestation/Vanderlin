@@ -14,6 +14,7 @@
 
 	/// Time we have spent failing
 	var/failure_time = 0
+	/// The body zone this organ is supposed to inhabit.
 	var/zone = BODY_ZONE_CHEST
 	var/unique_slot
 	var/unique_side_sprite = FALSE
@@ -78,7 +79,7 @@
 	/// Needs to get processed on next life() tick
 	var/needs_processing = TRUE
 
-	/// Efficiency attached to each slot
+	/// When an efficiency is associated with a slot, it is added to that zones internal_organs_slot. Efficiency varies from 0 to 100.
 	var/list/organ_efficiency = list()
 	///this is just an easy to access list of modification sources going slot = list(type = val)
 	var/list/organ_efficiency_modification

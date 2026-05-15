@@ -53,6 +53,29 @@
 		return FALSE
 	return TRUE
 
+/datum/wound/fracture/on_bodypart_gain(obj/item/bodypart/affected)
+	. = ..()
+	affected.temporary_crit_paralysis(20 SECONDS)
+	ADD_TRAIT(affected, TRAIT_FINGERLESS, "[type]")
+	ADD_TRAIT(affected, TRAIT_BRITTLE, "[type]")
+	switch(affected.body_zone)
+		if(BODY_ZONE_R_LEG)
+			affected.owner.add_movespeed_modifier(MOVESPEED_ID_FRACTURE_RIGHT_LEG, multiplicative_slowdown = FRACTURED_ADD_SLOWDOWN)
+		if(BODY_ZONE_L_LEG)
+			affected.owner.add_movespeed_modifier(MOVESPEED_ID_FRACTURE_LEFT_LEG, multiplicative_slowdown = FRACTURED_ADD_SLOWDOWN)
+
+/datum/wound/fracture/on_bodypart_loss(obj/item/bodypart/affected)
+	. = ..()
+	REMOVE_TRAIT(affected, TRAIT_FINGERLESS, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_BRITTLE, "[type]")
+	if(!affected.owner)
+		return
+	switch(affected.body_zone)
+		if(BODY_ZONE_R_LEG)
+			affected.owner.remove_movespeed_modifier(MOVESPEED_ID_FRACTURE_RIGHT_LEG)
+		if(BODY_ZONE_L_LEG)
+			affected.owner.remove_movespeed_modifier(MOVESPEED_ID_FRACTURE_LEFT_LEG)
+
 /datum/wound/fracture/on_mob_gain(mob/living/affected)
 	. = ..()
 	if(gain_emote)
