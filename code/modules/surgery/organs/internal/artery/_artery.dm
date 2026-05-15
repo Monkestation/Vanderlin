@@ -22,10 +22,11 @@
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
 	/// If torn, this is basically the time until we gush again
 	COOLDOWN_DECLARE(next_squirt)
+	// On average 2 seconds, like life ticks
 	/// Minimum time until we squirt again
-	var/squirt_delay_min_seconds = 4
+	var/squirt_delay_min_seconds = 1.5 SECONDS
 	/// Maximum time until we squirt again
-	var/squirt_delay_max_seconds = 10
+	var/squirt_delay_max_seconds = 2.5 SECONDS
 	///squirting sound
 	var/squirt_sound = list('sound/gore/artery1.ogg', 'sound/gore/artery2.ogg', 'sound/gore/artery3.ogg')
 
@@ -57,7 +58,7 @@
 		if(PULSE_FASTER, PULSE_THREADY)
 			bleed_mod *= 1.5
 	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * delta_time, 0.1)
-	if(!final_bleed_rate <= 0)
+	if(final_bleed_rate <= 0)
 		return
 	if(COOLDOWN_FINISHED(src, next_squirt))
 		squirt(final_bleed_rate)
@@ -72,7 +73,7 @@
 	owner.bleed(blood_flow)
 	current_blood = 0
 	applyOrganDamage(maxHealth * 0.5)
-	var/cd_time = rand(squirt_delay_min_seconds, squirt_delay_max_seconds) SECONDS
+	var/cd_time = rand(squirt_delay_min_seconds, squirt_delay_max_seconds)
 	COOLDOWN_START(src, next_squirt, cd_time)
 
 /obj/item/organ/artery/dissect()
@@ -83,7 +84,7 @@
 	owner.bleed(blood_flow)
 	current_blood = 0
 	applyOrganDamage(maxHealth)
-	var/cd_time = rand(squirt_delay_min_seconds, squirt_delay_max_seconds) SECONDS
+	var/cd_time = rand(squirt_delay_min_seconds, squirt_delay_max_seconds)
 	COOLDOWN_START(src, next_squirt, cd_time)
 
 /obj/item/organ/artery/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
@@ -112,9 +113,9 @@
 			playsound(owner, squirt_sound, 75, 0)
 			owner.bleed(amount)
 			//owner.do_arterygush()
-			COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds) SECONDS)
+			COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds))
 		else
-			COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds) SECONDS)
+			COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds))
 			return squirt_less(amount, open_wound)
 	else
 		return squirt_less(amount, open_wound)

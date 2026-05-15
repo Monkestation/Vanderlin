@@ -189,7 +189,7 @@
 	if(damage_type & (WOUND_BLUNT|WOUND_DIVINE))
 		return is_bandaged()
 	if(damage_type & WOUND_BURN)
-		return is_salved() || (is_bandaged() && (is_disinfected() || germ_level <= 0))
+		return is_salved() || is_bandaged()
 	return TRUE
 
 // Checks whether other other can be merged into src.

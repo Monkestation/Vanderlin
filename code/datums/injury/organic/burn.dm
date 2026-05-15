@@ -1,7 +1,7 @@
 /** BURNS **/
 /datum/injury/burn
 	damage_type = WOUND_BURN
-	autoheal_cutoff = 3
+	autoheal_cutoff = 6
 	max_bleeding_stage = 0
 	infection_rate = 1.25
 

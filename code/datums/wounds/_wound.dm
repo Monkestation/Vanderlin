@@ -250,7 +250,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return 'sound/combat/CriticalHit.ogg'
 	return pick(sound_effect)
 
-/// Returns whether or not this wound can be applied to a given bodypart
+/// Returns whether or not this wound can be applied to a given bodypart.
+/// Setting zone_precise will check whether its in viable_zones and if it matches limb body_zone
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise)
 	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
@@ -259,6 +260,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/datum/wound/other_wound as anything in affected.wounds)
 		if(!can_stack_with(other_wound))
 			return FALSE
+	if(!zone_precise)
+		return TRUE
 	if(length(viable_zones) && !(zone_precise in viable_zones))
 		return FALSE
 	if(deprecise_zone(zone_precise) != affected.body_zone)

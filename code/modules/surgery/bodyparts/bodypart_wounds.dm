@@ -73,20 +73,22 @@
 		healed_any = TRUE
 	return healed_any
 
-/// Adds a wound to this bodypart, applying any necessary effects
+/// Adds a wound to this bodypart, applying any necessary effects. IS NOT SAFE FOR CHECKING LIMB ZONES.
 /obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
 	if(!wound || !owner)
 		return
 	if(!forced && (owner.status_flags & GODMODE))
 		return
+	if(!ispath(wound) && !istype(wound))
+		return
+
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
 		if(!primordial_wound.can_apply_to_bodypart(src))
 			return
 		wound = new wound()
-	else if(!istype(wound))
-		return
-	else if(!wound.can_apply_to_bodypart(src))
+
+	if(!wound.can_apply_to_bodypart(src))
 		qdel(wound)
 		return
 	if(!wound.apply_to_bodypart(src, silent, crit_message))
