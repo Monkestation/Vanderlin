@@ -114,6 +114,8 @@
 	if(!parent_mob)
 		return
 	LAZYREMOVE(parent_mob.all_injuries, src)
+	parent_mob.updatehealth()
+	parent_mob.update_damage_overlays()
 	parent_mob = null
 
 /datum/injury/proc/remove_from_bodypart()
@@ -122,6 +124,7 @@
 	LAZYREMOVE(parent_bodypart.injuries, src)
 	if(parent_bodypart.last_injury == src)
 		parent_bodypart.last_injury = null
+	parent_bodypart.post_damage_change()
 	parent_bodypart = null
 
 //applies the injury on a limb proper
@@ -268,12 +271,10 @@
 		current_stage++
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
-	var/obj/item/bodypart/cached_bodypart = parent_bodypart
-	var/mob/living/carbon/cached_parent_mob = parent_mob
 	if(!damage)
 		qdel(src)
-	if(update_bodypart && cached_bodypart && cached_bodypart.post_damage_change(updating_health))
-		cached_parent_mob?.update_damage_overlays()
+	if(update_bodypart && parent_bodypart?.post_damage_change(updating_health)) // no need to cache since qdel will update limbs and owner
+		parent_mob?.update_damage_overlays()
 	// return amount of healing still leftover, can be used for other injuries
 	return (amount_heal - healed_damage)
 
