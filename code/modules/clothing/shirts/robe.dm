@@ -102,10 +102,9 @@
 
 /obj/item/clothing/shirt/robe/malum
 	name = "toiler's vest"
-	desc = "A red leather jerkin worn by those who toil in the name of Malum."
+	desc = "A red vest worn by those who toil in the name of Malum."
 	icon_state = "malumrobe"
 	slot_flags = ITEM_SLOT_ARMOR
-	armor = ARMOR_PADDED_BAD
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD

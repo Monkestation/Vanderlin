@@ -151,6 +151,14 @@
 	craftdiff = 3
 	category = "Hat"
 
+/datum/repeatable_crafting_recipe/sewing/weaving/malumcoif
+	name = "hood (Malum)"
+	output = /obj/item/clothing/head/roguehood/malumcowl
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/silk = 1)
+	craftdiff = 3
+	category = "Hat"
+
 /datum/repeatable_crafting_recipe/sewing/weaving/eorahood
 	name = "hood (eora)"
 	output = /obj/item/clothing/head/roguehood/eora
@@ -293,6 +301,13 @@
 /datum/repeatable_crafting_recipe/sewing/weaving/dendorrobe
 	name = "robes (Dendor)"
 	output = /obj/item/clothing/shirt/robe/dendor
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/silk = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/sewing/weaving/malumrobe
+	name = "robes (Malum)"
+	output = /obj/item/clothing/shirt/robe/malum
 	requirements = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/silk = 1)
 	craftdiff = 4
