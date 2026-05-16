@@ -87,10 +87,11 @@
 		if(!primordial_wound.can_apply_to_bodypart(src))
 			return
 		wound = new wound()
-
-	if(!wound.can_apply_to_bodypart(src))
+	else if(!wound.can_apply_to_bodypart(src))
 		qdel(wound)
 		return
+	if(!(body_zone in wound.viable_zones))
+		stack_trace("Call to add_wound added [wound] to [src] that isn't part of its viable zones!")
 	if(!wound.apply_to_bodypart(src, silent, crit_message))
 		qdel(wound)
 		return
