@@ -18,21 +18,21 @@
 		return null
 
 	var/list/data = list()
-	data["type"]         = "snack_processing"
-	data["name"]         = name
-	data["category"]     = "Processing"
+	data["type"] = "snack_processing"
+	data["name"] = name
+	data["category"] = "Processing"
 	data["_output_path"] = "[type]"
-	data["output_name"]  = name
-	data["output_icon"]  = "[icon]"
+	data["output_name"] = name
+	data["output_icon"] = "[icon]"
 	data["output_state"] = "[icon_state]"
 
 	var/list/milled_from = list()
 	for(var/atom/src_path as anything in milled_from_paths)
 		milled_from += list(list(
-			"name"       = initial(src_path.name),
-			"icon"       = "[initial(src_path.icon)]",
+			"name" = initial(src_path.name),
+			"icon" = "[initial(src_path.icon)]",
 			"icon_state" = "[initial(src_path.icon_state)]",
-			"_path"      = "[src_path]",
+			"_path" = "[src_path]",
 		))
 	data["milled_from"] = milled_from
 	return data
@@ -171,7 +171,17 @@
 	taste_description = "a flash of white"
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 16
-	metabolization_rate = 0.2
+	metabolization_rate = 0.1
+
+/datum/reagent/ozium/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_PAINKILLER, 100, "[type]")
+	L.add_chem_effect(CE_STIMULANT, 2, "[type]")
+
+/datum/reagent/ozium/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_PAINKILLER, "[type]")
+	L.remove_chem_effect(CE_STIMULANT, "[type]")
 
 /datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
@@ -209,10 +219,12 @@
 /datum/reagent/moondust/on_mob_metabolize(mob/living/M)
 	animate(M.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
 	animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
+	M.add_chem_effect(CE_PULSE, 1, "[type]")
 
 /datum/reagent/moondust/on_mob_end_metabolize(mob/living/M)
 	M.remove_status_effect(/datum/status_effect/buff/moondust)
 	animate(M.client)
+	M.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
@@ -226,7 +238,7 @@
 	..()
 
 /datum/reagent/moondust/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.25*REM, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
 	. = ..()
 
 /datum/reagent/moondust/overdose_start(mob/living/M)
@@ -254,11 +266,13 @@
 	M.overlay_fullscreen("purest_kaif", /atom/movable/screen/fullscreen/purest)
 	animate(M.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
 	animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
+	M.add_chem_effect(CE_PULSE, 2, "[type]")
 
 /datum/reagent/moondust_purest/on_mob_end_metabolize(mob/living/M)
 	animate(M.client)
 	M.clear_fullscreen("purest_kaif")
 	M.remove_status_effect(/datum/status_effect/buff/moondust_purest)
+	M.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
@@ -272,7 +286,7 @@
 	..()
 
 /datum/reagent/moondust_purest/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.25*REM, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
 	. = ..()
 
 /datum/reagent/moondust_purest/overdose_start(mob/living/M)

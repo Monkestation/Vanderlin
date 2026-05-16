@@ -173,7 +173,7 @@
 
 /obj/structure/closet/crate/chest/inqreliquary/relic/bullion/populate_contents()
 	for(var/i in 1 to 6)
-		new /obj/item/ingot/silverblessed/bullion(src)
+		new /obj/item/ingot/silverblessed(src)
 
 //  ARTICLES  RIGHT HERE! THAT'S RIGHT!
 

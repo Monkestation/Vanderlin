@@ -185,7 +185,7 @@
 		else if(isitem(mover) && mover.throwforce > 10)
 			take_damage(mover.throwforce)
 
-	if(climbable && (mover.throwing || mover.movement_type & (FLYING|FLOATING)))
+	if(climbable && (mover.throwing || mover.movement_type & FLYING)) // DO NOT MAKE THIS FLYING|FLOATING
 		if(ishuman(mover))
 			var/mob/living/carbon/human/dude = mover
 			if(prob(100 - clamp((GET_MOB_SKILL_VALUE_OLD(dude, /datum/attribute/skill/misc/athletics) + GET_MOB_SKILL_VALUE_OLD(dude, /datum/attribute/skill/misc/climbing)) * 10 - (!dude.IsOffBalanced() * 30), 10, 100)))

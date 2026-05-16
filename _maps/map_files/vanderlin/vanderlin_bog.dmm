@@ -1380,6 +1380,26 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"aAY" = (
+/obj/structure/closet/crate/crafted_closet/inn{
+	color = "#7D9BAE"
+	},
+/obj/item/broom,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/effect/spawner/map_spawner/loot/potion_poisons,
+/turf/open/floor/abyss_tile/three{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "aBd" = (
 /obj/structure/flora/ocean_plants,
 /turf/open/floor/abyss_sand,
@@ -2455,16 +2475,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"aZh" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/coin/gold/pile,
-/obj/item/ingot/silverblessed/bullion,
-/obj/item/ingot/silver,
-/obj/item/carvedgem/onyxa/obelisk,
-/obj/item/carvedgem/amber/sun,
-/obj/item/carvedgem/onyxa/vase,
-/turf/open/floor/abyss_sand,
-/area/under/cavewet)
 "aZi" = (
 /obj/item/rope/chain,
 /turf/open/floor/abyss_tile{
@@ -7748,26 +7758,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/south/east)
-"gjs" = (
-/obj/structure/closet/crate/crafted_closet/inn{
-	color = "#7D9BAE"
-	},
-/obj/item/broom,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/effect/spawner/map_spawner/loot/potion_poisons,
-/turf/open/floor/abyss_tile/three{
-	color = "#547285"
-	},
-/area/under/cavewet)
 "gjx" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /obj/effect/decal/cleanable/blood,
@@ -8758,27 +8748,6 @@
 /obj/item/clothing/wrists/gem/opalbracelet,
 /turf/open/floor/carpet/red,
 /area/indoors/ship)
-"hjp" = (
-/obj/structure/table/stone_small{
-	color = "#7D9BAE"
-	},
-/obj/structure/closet/crate/chest/neu_fancy{
-	pixel_x = 0;
-	pixel_y = 10
-	},
-/obj/item/carvedgem/opal/fish,
-/obj/item/carvedgem/opal,
-/obj/item/ingot/silverblessed/bullion,
-/obj/item/ingot/silverblessed/bullion,
-/obj/item/ingot/silverblessed,
-/obj/item/coin/silver/pile,
-/obj/item/clothing/armor/plate/full/silver,
-/obj/item/clothing/pants/platelegs/silver,
-/obj/item/clothing/face/facemask/psydonmask,
-/turf/open/floor/abyss_tile{
-	color = "#314C5D"
-	},
-/area/under/tomb/indoors/magic)
 "hjz" = (
 /turf/open/openspace,
 /area/indoors/shelter/bog)
@@ -9354,6 +9323,12 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"hON" = (
+/obj/fae_trickery_trap/disorient,
+/turf/open/floor/abyss_tile/three{
+	color = "#29404E"
+	},
+/area/indoors/wilderness/magic)
 "hPc" = (
 /obj/structure/bridge,
 /turf/open/openspace,
@@ -9551,6 +9526,27 @@
 /obj/structure/table/wood/reinforced,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog)
+"idP" = (
+/obj/structure/table/stone_small{
+	color = "#7D9BAE"
+	},
+/obj/structure/closet/crate/chest/neu_fancy{
+	pixel_x = 0;
+	pixel_y = 10
+	},
+/obj/item/carvedgem/opal/fish,
+/obj/item/carvedgem/opal,
+/obj/item/ingot/silverblessed,
+/obj/item/ingot/silverblessed,
+/obj/item/ingot/silverblessed,
+/obj/item/coin/silver/pile,
+/obj/item/clothing/armor/plate/full/silver,
+/obj/item/clothing/pants/platelegs/silver,
+/obj/item/clothing/face/facemask/psydonmask,
+/turf/open/floor/abyss_tile{
+	color = "#314C5D"
+	},
+/area/under/tomb/indoors/magic)
 "idQ" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
@@ -16907,14 +16903,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
-"pNt" = (
-/obj/fae_trickery_trap/disorient,
-/turf/open/floor/abyss_tile/three{
-	color = "#29404E";
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/area/indoors/wilderness/magic)
 "pNu" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/bog/north/west)
@@ -18997,18 +18985,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"snE" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid{
-	pixel_x = -18;
-	pixel_y = -16
-	},
-/mob/living/simple_animal/hostile/retaliate/elemental/warden{
-	faction = list("Hostile")
-	},
-/turf/open/floor/abyss_tile/three{
-	color = "#547285"
-	},
-/area/indoors/wilderness/magic)
 "sol" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -19144,6 +19120,15 @@
 	color = "#314C5D"
 	},
 /area/under/tomb/indoors/magic)
+"svG" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid{
+	pixel_x = -18;
+	pixel_y = -16
+	},
+/turf/open/floor/abyss_tile/three{
+	color = "#547285"
+	},
+/area/indoors/wilderness/magic)
 "swr" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
@@ -19806,6 +19791,16 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/bath,
 /area/indoors/shelter/bog/lich)
+"tmR" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/coin/gold/pile,
+/obj/item/ingot/silverblessed,
+/obj/item/ingot/silver,
+/obj/item/carvedgem/onyxa/obelisk,
+/obj/item/carvedgem/amber/sun,
+/obj/item/carvedgem/onyxa/vase,
+/turf/open/floor/abyss_sand,
+/area/under/cavewet)
 "tmU" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/fluid_drain,
@@ -34483,7 +34478,7 @@ aWL
 aWL
 aWL
 aWL
-aZh
+tmR
 ake
 aWL
 aWL
@@ -82545,7 +82540,7 @@ bDJ
 iUc
 ltt
 pFA
-pNt
+hON
 apu
 nNT
 oyM
@@ -86369,7 +86364,7 @@ tyT
 tyT
 tyT
 aeQ
-gjs
+aAY
 aeI
 aqR
 aeQ
@@ -122946,7 +122941,7 @@ foi
 dey
 fPp
 lJf
-snE
+svG
 nWL
 nqF
 ltt
@@ -123148,7 +123143,7 @@ psq
 dey
 beb
 apu
-ltt
+fkm
 eet
 qRB
 sSY
@@ -133459,7 +133454,7 @@ aWL
 aWL
 aqi
 ajL
-hjp
+idP
 eOH
 aIf
 eOH

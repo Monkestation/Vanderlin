@@ -23,8 +23,8 @@
 	taste_description = "burning"
 	self_consuming = TRUE
 
-/datum/reagent/rogueacid/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	M.adjustFireLoss(35, 0)
+/datum/reagent/rogueacid/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+	exposed_mob.adjustFireLoss(35, 0)
 	..()
 
 /datum/reagent/blastpowder

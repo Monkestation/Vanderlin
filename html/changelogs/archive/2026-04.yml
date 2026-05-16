@@ -316,3 +316,6 @@
   ta3754859-max:
   - bugfix: Fixes cyclops and short sighted removing masks from advanced classes
   - bugfix: Fixes wrong vision cone getting blocked with the eyepatch/cyclops trait
+2026-04-28:
+  realforest2001:
+  - bugfix: Fixed an Inquisition exploit.

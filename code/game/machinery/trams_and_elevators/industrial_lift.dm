@@ -75,6 +75,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	var/list/moving_lifts = list()
 	///are we fake? if so we remove the z_fall block and such
 	var/fake = FALSE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/industrial_lift/Initialize(mapload)
 	. = ..()
@@ -83,9 +84,9 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	set_movement_registrations()
 	if(fake)
 		alpha = 0
-		obj_flags = CAN_BE_HIT
+		obj_flags &= ~BLOCK_Z_OUT_DOWN
 	else
-		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 	//since lift_master datums find all connected platforms when an industrial lift first creates it and then
 	//sets those platforms' lift_master_datum to itself, this check will only evaluate to true once per tram platform
@@ -348,12 +349,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 				else
 					// Less violent landing simply crushes every bone in your body.
 					crushed.Paralyze(30 SECONDS, ignore_canstun = TRUE)
-					crushed.apply_damage(30, BRUTE, BODY_ZONE_CHEST)
-					crushed.apply_damage(20, BRUTE, BODY_ZONE_HEAD)
-					crushed.apply_damage(15, BRUTE, BODY_ZONE_L_LEG)
-					crushed.apply_damage(15, BRUTE, BODY_ZONE_R_LEG)
-					crushed.apply_damage(15, BRUTE, BODY_ZONE_L_ARM)
-					crushed.apply_damage(15, BRUTE, BODY_ZONE_R_ARM)
+					crushed.apply_damage(30, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_BLUNT)
+					crushed.apply_damage(20, BRUTE, BODY_ZONE_HEAD, damage_type = BCLASS_BLUNT)
+					crushed.apply_damage(15, BRUTE, BODY_ZONE_L_LEG, damage_type = BCLASS_BLUNT)
+					crushed.apply_damage(15, BRUTE, BODY_ZONE_R_LEG, damage_type = BCLASS_BLUNT)
+					crushed.apply_damage(15, BRUTE, BODY_ZONE_L_ARM, damage_type = BCLASS_BLUNT)
+					crushed.apply_damage(15, BRUTE, BODY_ZONE_R_ARM, damage_type = BCLASS_BLUNT)
 
 	else if(going == UP)
 		for(var/turf/dest_turf as anything in entering_locs)
@@ -415,12 +416,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 						damage = 29 * collision_lethality * damage_multiplier
 					else
 						damage = rand(7, 21) * collision_lethality * damage_multiplier
-					collided.apply_damage(2 * damage, BRUTE, BODY_ZONE_HEAD)
-					collided.apply_damage(3 * damage, BRUTE, BODY_ZONE_CHEST)
-					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_L_LEG)
-					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_R_LEG)
-					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_L_ARM)
-					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_R_ARM)
+					collided.apply_damage(2 * damage, BRUTE, BODY_ZONE_HEAD, damage_type = BCLASS_BLUNT)
+					collided.apply_damage(3 * damage, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_BLUNT)
+					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_L_LEG, damage_type = BCLASS_BLUNT)
+					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_R_LEG, damage_type = BCLASS_BLUNT)
+					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_L_ARM, damage_type = BCLASS_BLUNT)
+					collided.apply_damage(0.5 * damage, BRUTE, BODY_ZONE_R_ARM, damage_type = BCLASS_BLUNT)
 					log_combat(src, collided, "collided with")
 
 					if(QDELETED(collided)) //in case it was a mob that dels on death
@@ -663,6 +664,16 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	if(user.incapacitated(IGNORE_GRAB) || !user.Adjacent(src) || starting_loc != src.loc)
 		return FALSE
 	return TRUE
+
+/obj/structure/industrial_lift/proc/show_lift()
+	obj_flags |= BLOCK_Z_OUT_DOWN
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
+	alpha = 255
+
+/obj/structure/industrial_lift/proc/hide_lift()
+	obj_flags &= ~BLOCK_Z_OUT_DOWN
+	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
+	alpha = 0
 
 /obj/structure/industrial_lift/attack_hand(mob/user, list/modifiers)
 	. = ..()

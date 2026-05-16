@@ -1,5 +1,5 @@
 /datum/component/spawner
-	var/mob_types = list(/mob/living/simple_animal/hostile/werewolf)
+	var/mob_types = list(/mob/living/simple_animal/hostile/deepone)
 	var/spawn_time = 300 //30 seconds default
 	var/list/spawned_mobs = list()
 	var/spawn_delay = 0
@@ -45,5 +45,5 @@
 	L.flags_1 |= (P.flags_1 & ADMIN_SPAWNED_1)
 	spawned_mobs += L
 	L.nest = src
-	L.faction = src.faction
+	L.set_faction(faction)
 	P.visible_message("<span class='danger'>[L] [spawn_text] [P].</span>")

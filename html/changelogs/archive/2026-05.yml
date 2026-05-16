@@ -1,0 +1,68 @@
+2026-05-01:
+  realforest2001:
+  - bugfix: Fixes inability to ban people for days
+2026-05-03:
+  Archeonan:
+  - balance: Changed the weights of numerous armors across the board to feel more
+      balanced instead of being based on 'realism'
+  HeWhoBe:
+  - balance: Made Atropa Death Draught's Metabolisation rate slower to make it a viable
+      poison
+  Monkeke2:
+  - rscadd: Added an ability that makes triton glow with a blue color.
+  Sulaboy:
+  - bugfix: Shovel, Godendag, and Psydonian Greatmace intents that required sharpness
+      work now.
+2026-05-04:
+  Sulaboy:
+  - bugfix: Evil tree vines delete when the evil tree is killed.
+2026-05-05:
+  Snack-Max:
+  - rscadd: Touch-ups to Abyssorite templar armor, renamed the bronze helmet to deep
+      abyssorite helmet.
+  dwasint:
+  - refactor: 'all code pertaining to apothecary has been refactored
+
+      add; you can hover over essence machinery to see their links with a connector'
+  - bugfix: gave gnomes back their frontal lobe
+  - bugfix: essence dupe
+  - balance: reduced the cost of all research
+  - balance: reduced the time for infusing
+2026-05-06:
+  CheffieGithub:
+  - bugfix: Fixed voices lacking colours and emotes using voice color
+  PotatoTomahto:
+  - refactor: buckling and riding code refactored
+  - rscadd: animals can be fireman carried
+  - balance: riding speed
+2026-05-09:
+  ta3754859-max:
+  - bugfix: Getting a kill in the normal world properly makes you fight your way out
+      of the underworld
+2026-05-10:
+  Sulaboy:
+  - balance: Rope/Chain grid size 2x2->1x2
+  - balance: Resize keys to 1x1
+  dwasint:
+  - balance: minimum damage required to hit organs has been doubled
+  - balance: organ pain has been reduced by around 45%
+  - balance: organs can only be damaged after the bodypart is above 40% of its total
+      damage from 20%
+2026-05-11:
+  PotatoTomahto:
+  - balance: blacksmithing
+  Singul0:
+  - qol: The monarch has procured some very exotic fashion from various corners of
+      the world from various traveling merchants
+  Sulaboy:
+  - balance: Templar Sacrestant speed -2 to -1
+  ta3754859-max:
+  - balance: Collar detonator size decreased to 1x1
+2026-05-12:
+  PotatoTomahto:
+  - image: changes the recipe books css to look like parchment
+  aberrantQuesrist:
+  - bugfix: Default priest mask restored.
+2026-05-13:
+  Ben10083:
+  - spellcheck: Spymaster Knife Fervor now has correct name.

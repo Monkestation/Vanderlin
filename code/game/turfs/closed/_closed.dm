@@ -117,7 +117,7 @@
 			var/mob/living/carbon/human/H = AM
 			if(H.dir == get_dir(H,src) && (H.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(H, TRAIT_STUMBLE)) && H.body_position != LYING_DOWN)
 				H.Immobilize(10)
-				H.apply_damage(15, BRUTE, "head", H.run_armor_check("head", "blunt", damage = 15))
+				H.apply_damage(15, BRUTE, BODY_ZONE_HEAD, H.run_armor_check("head", "blunt", damage = 15), damage_type = BCLASS_BLUNT)
 				H.toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
 				playsound(src, "genblunt", 100, TRUE)
 				H.visible_message("<span class='warning'>[H] runs into [src]!</span>", "<span class='warning'>I run into [src]!</span>")
@@ -162,17 +162,25 @@
 		if(!user.can_z_move(UP, start = get_turf(user), z_move_flags = Z_MOVE_CLIMBING_FLAGS))
 			return
 		var/turf/target = GET_TURF_ABOVE(src)
-		if(!target || !istype(target, /turf/open))
+		// EXPERIMENTAL: Allow climbing up through railings to replicate old behavior. Revisit when refactoring CanPass.
+		if(target.is_blocked_turf(exclude_mobs = TRUE, ignore_atoms = list(/obj/structure/fluff/railing), type_list = TRUE))
+			target = GET_TURF_ABOVE(user)
+		if(target.zPassOut(DOWN) || target.is_blocked_turf(exclude_mobs = TRUE, ignore_atoms = list(/obj/structure/fluff/railing), type_list = TRUE))
 			to_chat(user, span_warning("I can't climb here."))
 			return
-		for(var/obj/structure/F in target)
-			if(F && (F.density && !F.climbable))
-				to_chat(user, span_warning("I can't climb here."))
-				return
-		INVOKE_ASYNC(src, PROC_REF(start_traveling), user, UP)
 
-/turf/closed/proc/start_traveling(mob/living/user, direction)
-	var/turf/target = get_step_multiz(src, direction)
+		// if(!target || !istype(target, /turf/open))
+		// 	to_chat(user, span_warning("I can't climb here."))
+		// 	return
+		// for(var/obj/structure/F in target)
+		// 	if(F && (F.density && !F.climbable))
+		// 		to_chat(user, span_warning("I can't climb here."))
+		// 		return
+		INVOKE_ASYNC(src, PROC_REF(start_traveling), user, target)
+
+/turf/closed/proc/start_traveling(mob/living/user, target)
+	if(!target)
+		return
 	var/climbsound = 'sound/foley/climb.ogg'
 	var/myskill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/climbing)
 	if(locate(/obj/structure/table) in user.loc)

@@ -71,10 +71,9 @@
 				choice.forceMove(drop_location())
 			update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/bookcase/deconstruct(disassembled = TRUE)
+/obj/structure/bookcase/atom_deconstruct(disassembled)
 	for(var/obj/item/B in contents)
-		B.forceMove(get_turf(src))
-	qdel(src)
+		B.forceMove(loc)
 
 /obj/structure/bookcase/update_icon_state()
 	if((length(contents) >= 1) && (length(contents) <= 15))

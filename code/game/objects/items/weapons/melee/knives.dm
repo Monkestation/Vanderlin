@@ -175,7 +175,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
-	melting_material = /datum/material/steel
 	melt_amount = 75
 	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
 	dropshrink = 0.9
@@ -189,7 +188,7 @@
 	throwforce = DAMAGE_KNIFE + 6
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
 	item_weight = 250 GRAMS
@@ -210,7 +209,6 @@
 	icon_state = "dagger_bronze"
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
-	melt_amount = 50
 	sellprice = 10
 	item_weight = 180 GRAMS
 
@@ -314,7 +312,7 @@
 	item_weight = 270 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
-	name ="plaguebringer sickle"
+	name = "plaguebringer sickle"
 	desc = "A wicked edge brings feculent delights."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "pestrasickle"
@@ -322,14 +320,14 @@
 	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand
-	name = "Fervor"
+	name = "\proper fervor"
 	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
 	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
-	name = "Apathy"
+	name = "\proper apathy"
 	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
@@ -352,7 +350,7 @@
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/baothagift)
+	enchant(/datum/enchantment/on_hit/baothagift)
 
 
 //................ Silver Dagger ............... //
@@ -388,6 +386,7 @@
 	max_blade_int = 300
 	icon_state = "pdagger"
 	melting_material = null
+	melt_amount = 0
 	embedding = list("embed_chance" = 0) // Embedding the cursed dagger has the potential to cause duping issues. Keep it like this unless you want to do a lot of bug hunting.
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
@@ -574,6 +573,7 @@
 	max_blade_int = 50
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 0
 	sellprice = 5
 	item_weight = 150 GRAMS
 
@@ -617,7 +617,6 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
-	melt_amount = 50
 	sellprice = 10
 	item_weight = 180 GRAMS
 
@@ -691,7 +690,7 @@
 	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/throwcard
-	name = "Calling Card"
+	name = "\proper calling card"
 	desc = "A thin sheet of pig-iron stamped into a calling card, too thin and useless to be smelted. You've been had. From Heartfelt with love."
 	icon_state = "throwcard"
 	throw_speed = 5

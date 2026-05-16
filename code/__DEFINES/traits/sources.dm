@@ -12,6 +12,7 @@
 #define ORGAN_TRAIT "organ"
 #define CRIT_TRAIT "crit"
 #define ASYSTOLE_TRAIT "no_pulse"
+#define GERM_LEVEL_TRAIT "germ_level"
 /// Set on roundstart, not removed unless via admins
 #define ROUNDSTART_TRAIT "roundstart"
 #define JOB_TRAIT "job"

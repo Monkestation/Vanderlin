@@ -56,7 +56,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blacksmith
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/blacksmith/old
-
+	book_type = /obj/item/recipe_book/blacksmithing
 
 /datum/outfit/blacksmith
 	name = JOB_BLACKSMITH

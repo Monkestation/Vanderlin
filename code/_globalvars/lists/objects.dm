@@ -1,5 +1,4 @@
 GLOBAL_LIST_EMPTY(portals)					        //list of all /obj/effect/portal
-GLOBAL_LIST_EMPTY(machines)					        //NOTE: this is a list of ALL machines now. The processing machines list is SSmachine.processing !
 
 GLOBAL_LIST(chemical_reactions_list)				//list of all /datum/chemical_reaction datums. Used during chemical reactions
 GLOBAL_LIST(chemical_reagents_list)				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
@@ -15,9 +14,13 @@ GLOBAL_LIST_EMPTY(trophy_cases)
 GLOBAL_LIST_EMPTY(mob_spawners) 		    // All mob_spawn objects
 
 GLOBAL_LIST_INIT(anvil_recipes, init_subtypes(/datum/anvil_recipe, list()))
+/// This is a global list of typepaths, these typepaths are resulting atoms that are associated with anvil recipes.
+GLOBAL_LIST_EMPTY(anvil_recipes_atom)
 GLOBAL_LIST_INIT(artificer_recipes, init_subtypes(/datum/artificer_recipe, list()))
 GLOBAL_LIST_INIT(alch_grind_recipes, init_subtypes(/datum/alch_grind_recipe, list()))
 GLOBAL_LIST_INIT(alch_cauldron_recipes, init_subtypes(/datum/alch_cauldron_recipe, list()))
+
+GLOBAL_LIST_INIT(distillation_recipes, setup_distillation_recipes())
 
 /* COLORS */
 GLOBAL_LIST_INIT(peasant_dyes, list(

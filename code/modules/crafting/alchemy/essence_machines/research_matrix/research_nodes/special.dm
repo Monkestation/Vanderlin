@@ -21,9 +21,9 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/advanced_combiner_applications)
 	required_essences = list(
-		/datum/thaumaturgical_essence/cycle = 40,
-		/datum/thaumaturgical_essence/void = 30,
-		/datum/thaumaturgical_essence/chaos = 25,
+		/datum/thaumaturgical_essence/cycle = 20,
+		/datum/thaumaturgical_essence/void = 10,
+		/datum/thaumaturgical_essence/chaos = 5,
 	)
 	node_x = 180
 	node_y = 680
@@ -33,12 +33,12 @@
 	desc = "Advanced techniques for combining different magical essences into more powerful and complex compounds. The foundation for all higher-level combination work."
 	icon_state = "node"
 	required_essences = list(
-		/datum/thaumaturgical_essence/fire = 30,
-		/datum/thaumaturgical_essence/water = 30,
-		/datum/thaumaturgical_essence/earth = 30,
-		/datum/thaumaturgical_essence/air = 30,
-		/datum/thaumaturgical_essence/order = 20,
-		/datum/thaumaturgical_essence/chaos = 20,
+		/datum/thaumaturgical_essence/fire = 15,
+		/datum/thaumaturgical_essence/water = 15,
+		/datum/thaumaturgical_essence/earth = 15,
+		/datum/thaumaturgical_essence/air = 15,
+		/datum/thaumaturgical_essence/order = 9,
+		/datum/thaumaturgical_essence/chaos = 9,
 	)
 	node_x = 300
 	node_y = 840

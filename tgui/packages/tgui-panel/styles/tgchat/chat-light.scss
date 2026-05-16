@@ -820,6 +820,57 @@ h2.alert {
   }
 }
 
+
+.animatedpain {
+  color: #BA55D3;
+  text-shadow: 0 0 6px #c75be2;
+  font-size: 110%;
+  animation: pain 750ms infinite;
+}
+
+@keyframes pain {
+  0% {
+    color: #BA55D3;
+    text-shadow: 0 0 4px #c75be2;
+  }
+
+  50% {
+    color: #cc00ff;
+    text-shadow: 0 0 8px #ad37ca;
+  }
+
+  100% {
+    color: #BA55D3;
+    text-shadow: 0 0 4px #c75be2;
+  }
+}
+
+.lowpain {
+  color: #a4a562;
+  text-shadow: 0 0 0px #a4a562;
+}
+
+.lowestpain {
+  color: #a4a562;
+  font-size: 85%;
+  text-shadow: 0 0 0px #a4a562;
+}
+
+.artery {
+  color: #9B5455;
+  text-shadow: 0 0 3px #9B5455;
+}
+
+.infection {
+  color: #77c72b;
+  text-shadow: 0 0 3px #68af26;
+}
+
+.necrosis {
+  color: #558d20;
+  text-shadow: 0 0 6px #497a1a;
+}
+
 .bloody {
   color: hsl(0, 86%, 43%);
 }

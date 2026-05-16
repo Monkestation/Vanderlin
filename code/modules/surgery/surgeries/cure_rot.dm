@@ -41,7 +41,7 @@
 	if(!has_rot && iscarbon(target))
 		var/mob/living/carbon/stinky = target
 		for(var/obj/item/bodypart/bodypart as anything in stinky.bodyparts)
-			if(bodypart.rotted)
+			if(HAS_TRAIT(bodypart, TRAIT_ROTTEN))
 				has_rot = TRUE
 				break
 	if(was_zombie)
@@ -54,7 +54,8 @@
 	if(iscarbon(target))
 		var/mob/living/carbon/stinky = target
 		for(var/obj/item/bodypart/rotty in stinky.bodyparts)
-			rotty.rotted = FALSE
+			rotty.revive_limb()
+			rotty.germ_level = 0
 			rotty.update_limb()
 			if(rotty.can_be_disabled)
 				rotty.update_disabled()

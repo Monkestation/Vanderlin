@@ -108,7 +108,8 @@
 			if(BODY_ZONE_CHEST)
 				to_chat(target, "<span class='danger'>[target] is pummeled by a skeletal hand!</span>")
 				playsound(target, pick('sound/combat/hits/punch/punch_hard (1).ogg','sound/combat/hits/punch/punch_hard (2).ogg','sound/combat/hits/punch/punch_hard (3).ogg'), 100, FALSE, -1)
-				target.adjustBruteLoss(oxy_drain*mult*3)
+				var/obj/item/bodypart/chest = target.get_bodypart(BODY_ZONE_CHEST)
+				chest.bodypart_attacked_by(BCLASS_BLUNT, oxy_drain*mult*3)
 			else
 				to_chat(target, "<span class='danger'>[target]'s [bodypart] is twisted by a skeletal hand!</span>")
 				playsound(target, pick('sound/combat/hits/punch/punch (1).ogg','sound/combat/hits/punch/punch (2).ogg','sound/combat/hits/punch/punch (3).ogg'), 100, FALSE, -1)

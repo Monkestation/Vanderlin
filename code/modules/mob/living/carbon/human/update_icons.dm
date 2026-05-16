@@ -1086,7 +1086,7 @@ GLOBAL_PROTECT(no_child_icons)
 					S.pixel_y += offsets[OFFSET_SHIRT][2]
 			overlays_standing[SHIRTSLEEVE_LAYER] = sleeves
 
-	update_body_parts(redraw = TRUE)
+	update_body_parts()
 	dna.species.handle_body(src)
 	update_body()
 
@@ -1149,7 +1149,7 @@ GLOBAL_PROTECT(no_child_icons)
 					S.pixel_y += offsets[OFFSET_ARMOR][2]
 			overlays_standing[ARMORSLEEVE_LAYER] = sleeves
 
-	update_body_parts(redraw = TRUE)
+	update_body_parts()
 	dna.species.handle_body(src)
 	update_body()
 	update_inv_shirt() // fix boob
@@ -1606,7 +1606,7 @@ generate/load female uniform sprites matching all previously decided variables
 			. += "organic"
 		else
 			. += "robotic"
-		if(BP.rotted)
+		if(HAS_TRAIT(BP, TRAIT_ROTTEN))
 			. += "rotted"
 		if(BP.skeletonized)
 			. += "skeletonized"

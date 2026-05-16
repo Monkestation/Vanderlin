@@ -1,11 +1,9 @@
 /obj/item/reagent_containers/glass/bucket
-	name = "bugged bucket please report to mappers"
+	name = "bucket or pot"
 	desc = ""
 	icon = 'icons/roguetown/items/misc.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
-	icon_state = "woodbucket"
-	item_state = "woodbucket"
 	fill_icon_thresholds = list(0, 50, 100)
 	reagent_flags = OPENCONTAINER
 	max_integrity = 300
@@ -41,6 +39,8 @@
 /obj/item/reagent_containers/glass/bucket/wooden
 	name = "bucket"
 	fill_icon_state = "bucket"
+	icon_state = "woodbucket"
+	item_state = "woodbucket"
 	force = 5
 	throwforce = 10
 	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 50)
@@ -68,9 +68,12 @@
 	desc = "The peasants friend, when filled with boiling water it will turn the driest oats to filling oatmeal."
 	icon = 'icons/roguetown/items/cooking.dmi'
 	icon_state = "pote"
+	item_state = "pot"
 	fill_icon_state = "pote"
 	force = 10
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
+	grid_width = 96
+	grid_height = 96
 	melting_material = /datum/material/iron
 	melt_amount = 80
 	var/processing_amount = 0 ///we use this to "reserve" reagents

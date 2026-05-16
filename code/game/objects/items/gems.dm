@@ -18,6 +18,8 @@
 	var/quality = GEM_REGULAR
 	var/datum/gem_effect/effect_template
 	var/is_cut = FALSE
+	var/arcyne_potency = 20
+	var/datum/attunement/attuned
 
 /obj/item/gem/Initialize()
 	. = ..()
@@ -174,6 +176,7 @@
 	icon_state = "emerald_cut"
 	sellprice = 44
 	dropshrink = 0.4
+	arcyne_potency = 7
 	attuned = /datum/attunement/earth
 	effect_template = /datum/gem_effect/gemerald
 	item_weight = 24 GRAMS
@@ -185,6 +188,7 @@
 	icon_state = "quartz_cut"
 	sellprice = 88
 	dropshrink = 0.4
+	arcyne_potency = 25
 	attuned = /datum/attunement/ice
 	effect_template = /datum/gem_effect/blortz
 	item_weight = 18 GRAMS
@@ -196,6 +200,7 @@
 	icon_state = "topaz_cut"
 	sellprice = 25
 	dropshrink = 0.4
+	arcyne_potency = 5
 	attuned = /datum/attunement/electric
 	effect_template = /datum/gem_effect/toper
 	item_weight = 21 GRAMS
@@ -207,6 +212,7 @@
 	icon_state = "sapphire_cut"
 	sellprice = 56
 	dropshrink = 0.4
+	arcyne_potency = 10
 	attuned = /datum/attunement/arcyne
 	effect_template = /datum/gem_effect/saffira
 	item_weight = 21 GRAMS
@@ -218,6 +224,7 @@
 	icon_state = "diamond_cut"
 	sellprice = 121
 	dropshrink = 0.4
+	arcyne_potency = 15
 	attuned = /datum/attunement/light
 	effect_template = /datum/gem_effect/dorpel
 	item_weight = 15 GRAMS
