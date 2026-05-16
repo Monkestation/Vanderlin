@@ -319,7 +319,7 @@
 				if(!SScommunications.can_announce(usr))
 					return
 
-				priority_announce("[A.real_name] has been assigned the title of [new_pos].", "Steward's Desk", 'sound/misc/alert.ogg', "Captain")
+				scom_announce("[A.real_name] has been assigned the title of [new_pos].")
 				break
 	if(href_list["payroll"])
 		var/list/L = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.company_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.apprentices_positions) + list(GLOB.inquisition_positions)
