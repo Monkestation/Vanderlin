@@ -4,7 +4,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	whp = 75
 	sewn_whp = 25
-	bleed_rate = ARTERIAL_BLOOD_FLOW / 2
+	bleed_rate = ARTERIAL_BLOOD_FLOW
 	sewn_bleed_rate = 0.25
 	clotting_threshold = null
 	sewn_clotting_threshold = null

@@ -296,7 +296,7 @@ DEFINE_BITFIELD(organ_flags, list(
 
 
 // ~arteries
-#define ARTERIAL_BLOOD_FLOW 40
+#define ARTERIAL_BLOOD_FLOW 20
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth
