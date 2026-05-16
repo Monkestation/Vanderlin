@@ -117,6 +117,7 @@
 	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
 	zombie.AddComponent(/datum/component/ai_aggro_system)
 	zombie.status_flags &= ~BLEEDOUT
+	zombie.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 	for(var/obj/item/organ/organ as anything in zombie.internal_organs)
 		organ.setOrganDamage(0)
 	return ..()
