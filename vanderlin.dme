@@ -3628,6 +3628,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\gaseous_form.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\headless.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\honeyspider.dm"
+#include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\hound.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\lamia.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\mimic.dm"
 #include "code\modules\mob\living\simple_animal\hostile\retaliate\creacher\minotaur.dm"
