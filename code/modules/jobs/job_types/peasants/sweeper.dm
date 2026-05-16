@@ -26,6 +26,7 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/sweeper
+	give_bank_account = 10
 	can_random = FALSE
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
@@ -37,10 +38,6 @@
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sweeper
-
-/datum/job/sweeper/New()
-	. = ..()
-	peopleknowme = list()
 
 /datum/job/sweeper/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
