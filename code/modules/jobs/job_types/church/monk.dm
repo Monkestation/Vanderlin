@@ -264,6 +264,7 @@
 			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 			shoes = /obj/item/clothing/shoes/boots
 			pants = /obj/item/clothing/pants/tights/colored/black
+			shirt = /obj/item/clothing/shirt/shortshirt/colored/uncolored
 			armor = /obj/item/clothing/shirt/robe/malum
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 			backpack_contents += /obj/item/weapon/hammer/iron
