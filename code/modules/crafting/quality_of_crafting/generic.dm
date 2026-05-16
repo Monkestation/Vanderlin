@@ -35,6 +35,7 @@
 		/obj/item/alch/tobaccodust = 1
 	)
 	attacked_atom = /obj/item/alch/tobaccodust
+	allow_inverse_start = TRUE
 
 	craft_time = 10 SECONDS
 	crafting_message = "starts rolling up a strong zigar"
