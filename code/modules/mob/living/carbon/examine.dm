@@ -523,7 +523,7 @@
 	else
 		switch(stat)
 			if(UNCONSCIOUS)
-				. += span_notice("[P[THEYRE]]n't responding to anything around [P[THEM]] and seem[p_s()] to be asleep.")
+				. += span_boldwarning("[P[THEYRE]] unconscious.")
 			if(SOFT_CRIT)
 				. += span_notice("[P[THEYRE]] barely conscious.")
 

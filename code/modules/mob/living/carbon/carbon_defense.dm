@@ -454,6 +454,10 @@
 
 	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 
+	if(!getorganslot(ORGAN_SLOT_BRAIN) || HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+		return
+	if(stat == UNCONSCIOUS)
+		to_chat(M, span_notice("[p_theyre(capitalized = TRUE, expand = TRUE)]n't responding to anything around [p_them()] and seem[p_s()] to be asleep."))
 
 /mob/living/carbon/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0)
 	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
