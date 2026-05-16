@@ -20,6 +20,37 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
 
+/obj/item/clothing/head/roguehood/malumcowl
+	name = "toiler's cowl"
+	desc = "A simple cowl worn by those who toil in worship of Malum."
+	icon_state = "malumcowl"
+	flags_inv = HIDEEARS|HIDEHAIR
+	default_hidden = HIDEEARS|HIDEHAIR
+	item_weight = 250 GRAMS
+
+/obj/item/clothing/head/roguehood/malumcowl/AdjustClothes(mob/user)
+	if(loc == user)
+		playsound(user, "rustle", 70, TRUE, -5)
+		if(adjustable == CAN_CADJUST)
+			adjustable = CADJUSTED
+			if(toggle_icon_state)
+				icon_state = "[initial(icon_state)]_t"
+			flags_inv = HIDEEARS|HIDEHAIR
+			body_parts_covered = NECK|HAIR|EARS|HEAD
+			dynamic_hair_suffix = "+generic"
+			if(ishuman(user))
+				var/mob/living/carbon/H = user
+				H.update_inv_head()
+		else if(adjustable == CADJUSTED)
+			ResetAdjust(user)
+			flags_inv = default_hidden
+			if(user)
+				if(ishuman(user))
+					var/mob/living/carbon/H = user
+					H.update_inv_head()
+		user.update_fov_angles()
+		user.regenerate_clothes()
+
 /obj/item/clothing/head/padded/deathface
 	name = "death shroud"
 	desc = "A Veil for those in service to the Veiled Lady. When inducted into the cult of Necra, the supplicant must make a talisman to hold the memory of a loved one since passed."
