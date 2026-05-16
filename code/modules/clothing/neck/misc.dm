@@ -521,7 +521,6 @@
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
 	smeltresult = /obj/item/ingot/bronze
-	melting_material = /datum/material/bronze
 	armor = ARMOR_MAILLE_GOOD
 
 /obj/item/clothing/neck/highcollier

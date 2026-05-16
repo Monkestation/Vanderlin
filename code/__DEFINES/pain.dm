@@ -4,12 +4,12 @@
 // ~shock stages
 #define SHOCK_STAGE_1 20
 #define SHOCK_STAGE_2 40
-#define SHOCK_STAGE_3 50
-#define SHOCK_STAGE_4 70 // "Softcrit"
-#define SHOCK_STAGE_5 100
-#define SHOCK_STAGE_6 130 // "Hardcrit"
-#define SHOCK_STAGE_7 170
-#define SHOCK_STAGE_8 220
+#define SHOCK_STAGE_3 60
+#define SHOCK_STAGE_4 80 // "Softcrit"
+#define SHOCK_STAGE_5 130
+#define SHOCK_STAGE_6 160 // "Hardcrit"
+#define SHOCK_STAGE_7 200
+#define SHOCK_STAGE_8 250
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 
 // ~shock modifiers

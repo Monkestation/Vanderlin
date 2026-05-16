@@ -202,7 +202,7 @@
 		if(DT_PROB(2.5, delta_time))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-				Paralyze(5 SECONDS)
+				Paralyze(2.5 SECONDS)
 				endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_6) && (previous_shock_stage >= SHOCK_STAGE_6))
@@ -218,15 +218,15 @@
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Paralyze(5 SECONDS)
 			//Attempt to inject combat cocktail, even though at this point it won't help much
-			endorphinate()
+			endorphinate(TRUE)
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Paralyze(5 SECONDS)
-			endorphinate()
+			endorphinate(TRUE)
 		if(DT_PROB(1, delta_time))
 			Unconscious(5)
-			endorphinate(TRUE)
+			endorphinate()
 		if(DT_PROB(4, delta_time))
 			emote("gargle")
 
