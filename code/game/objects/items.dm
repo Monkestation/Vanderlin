@@ -845,6 +845,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	SHOULD_CALL_PARENT(TRUE)
 
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
+	SEND_SIGNAL(user, COMSIG_MOB_PICKUP_ITEM, src)
 
 	item_flags |= IN_INVENTORY
 

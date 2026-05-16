@@ -92,6 +92,8 @@
 
 	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
+	///do we block certain interactions?
+	var/block_game_interaction = FALSE
 
 /**
  * A list of teleport locations

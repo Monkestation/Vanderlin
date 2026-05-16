@@ -144,6 +144,8 @@
 #define COMSIG_ITEM_DROPPED "item_drop"
 ///from base of obj/item/pickup(): (/mob/taker)
 #define COMSIG_ITEM_PICKUP "item_pickup"
+///from base of obj/item/pickup(): (src)
+#define COMSIG_MOB_PICKUP_ITEM "mob_item_pickup"
 ///from base of obj/item/afterpickup(): (/mob/taker)
 #define COMSIG_ITEM_AFTER_PICKUP "item_after_pickup"
 ///from base of mob/living/carbon/attacked_by(): (mob/living/carbon/target, mob/living/user, hit_zone)
@@ -155,3 +157,9 @@
 #define COMSIG_ITEM_WEARERCROSSED "wearer_crossed"
 
 #define COMSIG_MOB_MOUSE_ENTERED "user_mouse_entered"
+
+#define COMSIG_MOB_END_TUTORIAL "tutorial_over"
+/// From /datum/tutorial/proc/update_objective() : (new_objective)
+#define COMSIG_MOB_TUTORIAL_UPDATE_OBJECTIVE "mob_tutorial_update_objective"
+
+#define COMSIG_MOB_UNBANDAGE "mob_unbandage_limb"

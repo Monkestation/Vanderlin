@@ -1,0 +1,197 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall/mineral/craftstone,
+/area)
+"e" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/east,
+/turf/open/floor/blocks/newstone,
+/area)
+"n" = (
+/turf/open/floor/blocks/newstone,
+/area)
+"x" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/east,
+/obj/effect/landmark/tutorial_bottom_left,
+/turf/open/floor/blocks/newstone,
+/area)
+"N" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/turf/open/floor/blocks/newstone,
+/area)
+"P" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/north,
+/turf/open/floor/blocks/newstone,
+/area)
+"S" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/blocks/newstone,
+/area)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+e
+n
+n
+e
+n
+n
+e
+n
+n
+x
+a
+"}
+(3,1,1) = {"
+a
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+a
+"}
+(4,1,1) = {"
+a
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+a
+"}
+(5,1,1) = {"
+a
+S
+n
+n
+n
+n
+n
+n
+n
+n
+P
+a
+"}
+(6,1,1) = {"
+a
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+a
+"}
+(7,1,1) = {"
+a
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+a
+"}
+(8,1,1) = {"
+a
+S
+n
+n
+n
+n
+n
+n
+n
+n
+P
+a
+"}
+(9,1,1) = {"
+a
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+a
+"}
+(10,1,1) = {"
+a
+n
+n
+n
+n
+n
+n
+n
+n
+n
+n
+a
+"}
+(11,1,1) = {"
+a
+N
+n
+n
+N
+n
+n
+N
+n
+n
+N
+a
+"}
+(12,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

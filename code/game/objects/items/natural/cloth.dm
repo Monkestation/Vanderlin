@@ -142,6 +142,7 @@
 			return
 		if(do_after(user, clean_speed, O))
 			O.reagents.trans_to(src, reagents.maximum_volume, 1, transfered_by = user)
+			SEND_SIGNAL(src, COMSIG_CLOTH_SOAKED, target)
 			user.visible_message(span_small("[user] soaks \the [src] in \the [O]."), span_small("I soak \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
 	else if(isturf(target))
@@ -176,6 +177,7 @@
 			return
 		if(do_after(user, clean_speed * 2.5, O))
 			reagents.trans_to(O, reagents.total_volume, 1, transfered_by = user)
+			SEND_SIGNAL(src, COMSIG_CLOTH_SOAKED, target)
 			user.visible_message(span_small("[user] wrings out \the [src] in \the [O]."), span_small("I wring out \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
 	else if(isturf(target))

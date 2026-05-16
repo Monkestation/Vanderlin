@@ -41,6 +41,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 // ************* mob traits
 
+/// If the mob is currently loading a tutorial
+#define TRAIT_IN_TUTORIAL "t_IN_TUTORIAL"
 /// Prevents voluntary movement.
 #define TRAIT_IMMOBILIZED "immobilized"
 /// Buckling yourself to objects with this trait won't immobilize you
@@ -615,3 +617,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
 #define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"
+
+/// Status trait coming from a tutorial
+#define TRAIT_SOURCE_TUTORIAL "t_s_tutorials"

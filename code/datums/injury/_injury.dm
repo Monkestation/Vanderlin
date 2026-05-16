@@ -322,6 +322,7 @@
 // salves the injury
 /datum/injury/proc/salve_injury()
 	injury_flags |= INJURY_SALVED
+	SEND_SIGNAL(src, COMSIG_INJURY_SALVED)
 	return TRUE
 
 // unsalves the injury
@@ -344,6 +345,7 @@
 	injury_flags |= INJURY_SUTURED
 	if(parent_bodypart?.spilled)
 		parent_bodypart.spilled = FALSE
+	SEND_SIGNAL(src, COMSIG_INJURY_SUTURED)
 	return TRUE
 
 // unsutures the injury

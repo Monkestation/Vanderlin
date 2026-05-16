@@ -6,3 +6,12 @@
 #define COMSIG_CHIMERIC_ORGAN_TRIGGER "chimeric_organ_trigger"
 
 #define COMSIG_BODYPART_WOUND_REMOVED "bodypart_wound_removed"
+
+/// Called when a bodypart is successfully bandaged
+#define COMSIG_BODYPART_BANDAGED "bodypart_bandaged"
+/// Called when a bodypart is disinfected
+#define COMSIG_BODYPART_DISINFECTED "bodypart_disinfected"
+/// Called when an injury is salved
+#define COMSIG_INJURY_SALVED "injury_salved"
+/// Called when an injury is sutured
+#define COMSIG_INJURY_SUTURED "injury_sutured"

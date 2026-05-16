@@ -1658,6 +1658,7 @@
 		injury.disinfect_injury()
 	if(time)
 		disinfects_in = addtimer(CALLBACK(src, PROC_REF(undisinfect_limb)), time, TIMER_STOPPABLE)
+	SEND_SIGNAL(src, COMSIG_BODYPART_DISINFECTED)
 
 /obj/item/bodypart/proc/undisinfect_limb()
 	for(var/datum/injury/injury as anything in injuries)
@@ -1670,3 +1671,5 @@
 /obj/item/bodypart/proc/unbandage_limb()
 	for(var/datum/injury/injury as anything in injuries)
 		injury.unbandage_injury()
+	if(owner)
+		SEND_SIGNAL(owner, COMSIG_MOB_UNBANDAGE, src)

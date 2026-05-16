@@ -7,6 +7,22 @@
 //	where you would want the updater procs below to run
 #define SAVEFILE_VERSION_MAX 33
 
+/// Converts a client's list of completed tutorials into a string for saving
+/datum/preferences/proc/tutorial_list_to_savestring()
+	if(!length(completed_tutorials))
+		return ""
+
+	var/return_string = ""
+	var/last_id = completed_tutorials[length(completed_tutorials)]
+	for(var/tutorial_id in completed_tutorials)
+		return_string += tutorial_id + (tutorial_id != last_id ? ";" : "")
+	return return_string
+
+/// Converts a saved string of completed tutorials into a list for in-game use
+/datum/preferences/proc/tutorial_savestring_to_list(savestring)
+	completed_tutorials = splittext(savestring, ";")
+	return completed_tutorials
+
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
 	This proc checks if the current directory of the savefile S needs updating
@@ -183,6 +199,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
 
+	var/tutorial_string = ""
+	S["completed_tutorials"] >> tutorial_string
+	tutorial_savestring_to_list(tutorial_string)
+
 	if(!char_theme)
 		char_theme = "grimshart"
 	//try to fix any outdated data if necessary
@@ -289,6 +309,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["multi_char_ready"], multi_char_ready)
 	WRITE_FILE(S["multi_ready_slots"], multi_ready_slots)
+	WRITE_FILE(S["completed_tutorials"], tutorial_list_to_savestring())
 	return TRUE
 
 /datum/preferences/proc/_load_species(S)

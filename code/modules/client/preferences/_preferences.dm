@@ -254,6 +254,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	/// culture datum type
 	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
+	/// A list of tutorials that the client has completed, saved across rounds
+	var/list/completed_tutorials = list()
+
 /datum/preferences/New(client/C)
 	parent = C
 

@@ -102,6 +102,8 @@ SUBSYSTEM_DEF(ticker)
 
 	/// ID of round reboot timer, if it exists
 	var/reboot_timer = null
+	///if we don't want to create tutorial zones
+	var/tutorial_disabled = FALSE
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	load_mode()

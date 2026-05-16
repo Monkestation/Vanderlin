@@ -183,3 +183,6 @@
 
 /obj/item/reagent_containers/glass/bottle/vial/mirrorwaste
 	list_reagents = list(/datum/reagent/poison/mirrorwaste = 25)
+
+/obj/item/reagent_containers/glass/bottle/vial/calendula_salve
+	list_reagents = list(/datum/reagent/medicine/herbal/calendula_salve = 25)

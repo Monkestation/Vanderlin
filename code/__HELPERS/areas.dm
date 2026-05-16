@@ -104,3 +104,13 @@
 	return TRUE
 
 #undef BP_MAX_ROOM_SIZE
+
+
+/// Returns TRUE if the target is somewhere that the game should not interact with if possible
+/// In this case, admin Zs and tutorial areas
+/proc/should_block_game_interaction(atom/target)
+	var/area/target_area = get_area(target)
+	if(target_area?.block_game_interaction)
+		return TRUE
+
+	return FALSE

@@ -390,6 +390,7 @@
 	bandage = new_bandage
 	bandage_limb()
 	new_bandage.forceMove(src)
+	SEND_SIGNAL(src, COMSIG_BODYPART_BANDAGED, new_bandage)
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage_expire()
