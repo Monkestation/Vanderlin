@@ -191,7 +191,7 @@
 	 * Stage 4 begins mimicking "soft crit"
 	 */
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))  // Crossed stage 4
-		emote("freezes and goes limp.", intentional = TRUE)
+		// emote("freezes and goes limp.", intentional = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Immobilize(rand(2, 3) SECONDS)
 

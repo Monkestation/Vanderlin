@@ -12,6 +12,13 @@
 	aimed_intent_bonus = TRUE
 	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	var/artery_type_override
+	viable_zones = list(\
+		BODY_ZONE_R_ARM, \
+		BODY_ZONE_R_LEG, \
+		BODY_ZONE_PRECISE_MOUTH, \
+		BODY_ZONE_L_LEG, \
+		BODY_ZONE_L_ARM, \
+		BODY_ZONE_HEAD)
 
 /datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(affected.status == BODYPART_ROBOTIC)
@@ -54,6 +61,7 @@
 	artery_type_override = /obj/item/organ/artery/neck
 	can_roll = FALSE //snowflake used for neck slit
 	show_in_book = FALSE
+	viable_zones = list(BODY_ZONE_PRECISE_NECK)
 
 /datum/wound/artery/heart
 	name = "Aortic Dissection"
