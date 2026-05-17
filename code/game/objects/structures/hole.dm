@@ -242,7 +242,7 @@
 		attack_shovel(attacking_item, user)
 	else if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
 		attemptwatermake(attacking_item, user)
-	else if(!user.cmode && headstone && (istype(attacking_item, /obj/item/weapon/chisel) || (attacking_item.wlength == WLENGTH_SHORT)))
+	else if(!user.cmode && !is_consecrated && headstone && (istype(attacking_item, /obj/item/weapon/chisel) || (attacking_item.wlength == WLENGTH_SHORT)))
 		if(attacking_item.wlength == WLENGTH_SHORT && !(attacking_item.get_sharpness()))
 			to_chat(user, span_warning("\The [attacking_item] is not sharp enough to engrave \the [headstone] on \the [src]!"))
 			return
