@@ -49,6 +49,8 @@
 	spells = list(/datum/action/cooldown/spell/undirected/call_bird)
 	job_bitflag = BITFLAG_ROYALTY
 
+/datum/job/advclass/minornoble
+	inherit_parent_title = TRUE
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/minor_noble
@@ -66,7 +68,15 @@
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/swords = 10,
-		/datum/attribute/skill/misc/riding = 30
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/combat/bows = 20
 	)
 
 /datum/job/advclass/minornoble/former_commander
@@ -104,6 +114,10 @@
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = -3,
 		/datum/attribute/skill/labor/mathematics = 60,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/bows = 20
 	)
 
 /datum/job/advclass/minornoble/magnate
@@ -111,7 +125,7 @@
 	tutorial = "Through years of careful investment or plain old nepotism, you have managed to gather a large fortune. You have not had much in the way of physical exercise, however, so it would be wise to put your wealth to use in this regard."
 	outfit = /datum/outfit/minornoble/magnate
 	category_tags = list(CTAG_MINOR_NOBLE)
-	give_bank_account = 250
+	give_bank_account = 300
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -139,7 +153,14 @@
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/magic/arcane = 25,
-		/datum/attribute/skill/misc/riding = 30
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/sneaking = 25,
+		/datum/attribute/skill/misc/athletics = 25,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/combat/bows = 20
 	)
 
 /datum/job/advclass/minornoble/magickal_graduate
@@ -170,8 +191,16 @@
 		STAT_STRENGTH = -2,
 		STAT_INTELLIGENCE = 3,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/misc/music = 20,
-		/datum/attribute/skill/misc/riding = 30
+		/datum/attribute/skill/misc/music = 25,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/combat/bows = 20
 	)
 
 /datum/job/advclass/minornoble/herald
@@ -199,6 +228,14 @@
 /datum/attribute_holder/sheet/job/vassal
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/combat/bows = 20
 	)
 
 /datum/job/advclass/minornoble/vassal
