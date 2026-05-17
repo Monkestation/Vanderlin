@@ -155,10 +155,6 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 		playsound_local(src, pick('sound/misc/jumphumans (1).ogg','sound/misc/jumphumans (2).ogg','sound/misc/jumphumans (3).ogg'), 100)
 	shake_camera(src, 2, 2)
 
-/mob/living/proc/setup_equip_block()
-	for(var/obj/item/clothing/clothing in contents)
-		clothing.AddElement(/datum/element/faction_restricted_equip)
-
 // Return whether a mob is blocked from being ambushed
 /mob/living/proc/get_will_block_ambush()
 	if(!ambushable())
