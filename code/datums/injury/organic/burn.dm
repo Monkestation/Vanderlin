@@ -2,8 +2,9 @@
 /datum/injury/burn
 	damage_type = WOUND_BURN
 	autoheal_cutoff = 6
-	max_bleeding_stage = 0
+	max_bleeding_stage = 1
 	infection_rate = 1.25
+	bleed_rate = BLEED_DAMAGE_RATIO / 100 // burns generally don't bleed much
 
 /datum/injury/burn/infection_check()
 	//anything less than a FUCK burn isn't infectable if treated properly
@@ -27,13 +28,11 @@
 
 	return FALSE
 
-/*
 /datum/injury/burn/apply_injury(our_damage, obj/item/bodypart/limb)
 	. = ..()
 	//Burn damage can cause fluid loss due to blistering and cook-off
-	if(limb.owner && (damage_per_injury() >= 5 || damage + limb.burn_dam >= 20))
-		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_SURVIVE * damage/100, 1))
-*/
+	if(limb.owner && (limb.burn_dam/limb.max_damage) >= 0.25) // medium burn damage
+		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_SURVIVE * damage_per_injury()/100, 1))
 
 /*
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, wounding_type = WOUND_BLUNT)

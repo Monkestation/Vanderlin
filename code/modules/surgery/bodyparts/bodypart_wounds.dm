@@ -142,6 +142,9 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
+	// switch(burn_dam/max_damage)
+	// 	if(0.75 to INFINITY)
+	// 		bleed_rate += 5
 	return bleed_rate
 
 /obj/item/bodypart/proc/skeletonized_mod(bclass)

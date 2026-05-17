@@ -2158,8 +2158,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(burn_damage > 0)
 			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod, 0, CONFIG_GET(number/per_tick/max_fire_damage))
 			H.apply_damage(final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
-			if(!H.has_smoke_protection())
-				H.apply_damage(final_damage/4, OXY, flashes = FALSE) // Smoke inhalation
+			// if(!H.has_smoke_protection())
+			// 	H.apply_damage(final_damage/4, OXY, flashes = FALSE) // Smoke inhalation
 			if(H.stat < UNCONSCIOUS && prob(burn_damage * 10 / 4))
 				H.emote("pain")
 		// Apply building heat debuffs

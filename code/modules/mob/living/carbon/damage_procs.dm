@@ -119,8 +119,6 @@
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(amount > 0)
-		if(getFireLoss() >= 800)
-			return //we are already capped no point
 		take_overall_damage(0, amount, updating_health, required_status)
 	else
 		heal_overall_damage(0, abs(amount), required_status ? required_status : BODYPART_ORGANIC, updating_health)

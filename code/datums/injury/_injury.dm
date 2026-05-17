@@ -40,7 +40,7 @@
 	var/mob/living/carbon/parent_mob
 
 	// ~these are defined by the injury type and should not be changed here
-	/// Stages such as "cut", "deep cut", etc.
+	/// Stages such as "cut", "deep cut", etc. Stages should be listed in decreasing order of severity
 	var/list/stages
 	/// Maximum stage at which bleeding should still happen - Beyond this stage bleeding is prevented
 	var/max_bleeding_stage = 0
