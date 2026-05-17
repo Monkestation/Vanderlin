@@ -195,6 +195,20 @@
 					playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
 					QDEL_NULL(src)
 
+/obj/structure/closet/dirthole/proc/inscribe(obj/item/sharp, mob/user)
+	var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [headstone]?", "Custom Inscription", headstone.custom_message, 150, TRUE)
+	if(!new_message || new_message == headstone.custom_message)
+		return
+
+	user.visible_message(span_info("[user] begins to engrave a message into \the [headstone] with \a [sharp]."), span_info("You begin to engrave a message into \the [headstone]."), span_info("You hear someone cutting into stone."))
+	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
+	if(!do_after(user, 5 SECONDS, src, progress=TRUE, display_over_user=TRUE))
+		return
+	else
+		user.visible_message(span_info("[user] finishes working on \the [headstone]."), span_info("You finish engraving \the [headstone] with your message."))
+		headstone.custom_message = new_message
+		return
+
 /obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 //If you want to add in more items that arent a gravedecor subtype but do have an associated gravedecoration, add them here.
 //In the future, an associated list can be made between any non-gravedecor items, and their associated decoration. We only have one such case, so that isnt necessary.
@@ -228,6 +242,11 @@
 		attack_shovel(attacking_item, user)
 	else if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
 		attemptwatermake(attacking_item, user)
+	else if(!user.cmode && !is_consecrated && headstone && attacking_item.wlength == WLENGTH_SHORT)
+		if(!(attacking_item.get_sharpness()))
+			to_chat(user, span_warning("\The [attacking_item] is not sharp enough to engrave \the [headstone] on \the [src]!"))
+			return
+		inscribe(attacking_item, user)
 	else
 		return ..()
 
