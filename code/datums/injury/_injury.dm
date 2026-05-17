@@ -179,8 +179,6 @@
 		return FALSE
 	if(parent_bodypart.is_retracted())
 		return FALSE
-	if(is_surgical())
-		return FALSE
 	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE
 	return ((damage_per_injury() <= autoheal_cutoff) ? TRUE : (is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))

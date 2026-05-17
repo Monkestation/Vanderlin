@@ -32,7 +32,7 @@
 
 /obj/item/natural/cloth/examine(mob/user)
 	. = ..()
-	. += span_notice("[src] has [PERCENT(bandage_health/initial(bandage_health))]% of its absorption left.")
+	. += span_notice("[src] is [PERCENT(bandage_health/initial(bandage_health))]% soaked in blood.")
 
 /obj/item/natural/cloth/Initialize(mapload, vol)
 	. = ..()
@@ -158,6 +158,8 @@
 				reagents.add_reagent(W.water_reagent, reagents.maximum_volume)
 				user.visible_message(span_small("[user] soaks \the [src] in \the [T]."), span_small("I soak \the [src] in \the [T]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
+				bandage_health = initial(bandage_health)
+				bandage_effectiveness = initial(bandage_effectiveness)
 		else
 			var/datum/liquid_group/lg = T.liquids?.liquid_group
 			if(!lg)
