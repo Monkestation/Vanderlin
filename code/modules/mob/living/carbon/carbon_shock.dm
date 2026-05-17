@@ -193,7 +193,7 @@
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))  // Crossed stage 4
 		// emote("freezes and goes limp.", intentional = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Immobilize(rand(2, 3) SECONDS)
+			Immobilize(0.5 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage >= SHOCK_STAGE_4))
 		if(DT_PROB(1, delta_time))
@@ -227,8 +227,8 @@
 		if(!IsUnconscious())
 			custom_pain("[pick("I feel like I could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			emote("agony")
-			Immobilize(5 SECONDS)
+			// emote("agony")
+			Immobilize(rand(2, 3) SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
 		if(DT_PROB(1, delta_time))
