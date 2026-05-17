@@ -280,10 +280,6 @@
 	if(affecting && !affecting.can_feel_pain())
 		return FALSE
 
-	// Take the edge off
-	if(power - get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR <= 0)
-		return FALSE
-
 	// Share the pain
 	if(!nopainloss && power)
 		if(affecting)
@@ -291,26 +287,30 @@
 		else
 			adjustPainLoss(CEILING(power, 1))
 
+	// Take the edge off
+	power -= get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	if(power < PAIN_EMOTE_MINIMUM)
+		return FALSE
+
 	// Anti message spam checks
-	if(forced || (message != last_pain_message) || (world.time >= next_pain_message_time))
-		last_pain_message = message
+	if(forced || world.time >= next_pain_message_time)
 		if(world.time >= next_pain_message_time)
 			to_chat(src, span_animatedpain("[message]"))
-			next_pain_message_time = world.time + (60 SECONDS + power)
+			next_pain_message_time = world.time + PAIN_MESSAGE_COOLDOWN + power
 
-		if(pain_emote && world.time >= next_pain_emote_time)
-			var/force_emote
-			if(ishuman(src))
-				var/mob/living/carbon/human/human_src = src
-				if(human_src.dna?.species)
-					force_emote = human_src.dna.species.get_pain_emote(power)
-			if(force_emote && prob(power))
-				INVOKE_ASYNC(src, PROC_REF(emote), force_emote)
-				next_pain_emote_time = world.time + (90 SECONDS + power)
+	if(pain_emote && world.time >= next_pain_emote_time)
+		var/force_emote
+		if(ishuman(src))
+			var/mob/living/carbon/human/human_src = src
+			if(human_src.dna?.species)
+				force_emote = human_src.dna.species.get_pain_emote(power)
+		if(force_emote && prob(power))
+			INVOKE_ASYNC(src, PROC_REF(emote), force_emote)
+			next_pain_emote_time = world.time + PAIN_EMOTE_COOLDOWN + power
 
 	// Briefly flash the pain overlay
 	//flash_pain(power)
-	next_pain_time = world.time + (rand(100, 150) + power)
+	next_pain_time = world.time + (rand(10 SECONDS, 15 SECONDS) + power)
 	return TRUE
 
 /mob/living/carbon/can_feel_pain()

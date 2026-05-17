@@ -278,8 +278,6 @@
 	var/traumatic_shock = 0
 	/// Shock stage, as in how much our crit has progressed
 	var/shock_stage = 0
-	/// Last pain related message we have received - Used to prevent spam
-	var/last_pain_message = ""
 	/// Next time we are able to trigger custom_pain()
 	var/next_pain_time = 0
 	/// Next time we are able to send a custom_pain() chat message

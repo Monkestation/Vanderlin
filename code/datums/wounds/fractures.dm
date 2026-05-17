@@ -144,6 +144,7 @@
 
 /datum/wound/fracture/head/brain
 	name = "depressed cranial fracture"
+	check_name = "<span class='bone'><B>CROWNCRACK</B></span>"
 	severity = WOUND_SEVERITY_FATAL
 	crit_message = list(
 		"The cranium is fractured!",

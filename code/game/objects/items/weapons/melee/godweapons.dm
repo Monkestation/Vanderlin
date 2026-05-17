@@ -158,7 +158,7 @@
 			return
 		playsound(user, 'sound/surgery/scalpel2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
-			C.create_injury(WOUND_SLASH, C.max_damage * 0.3, TRUE)
+			C.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO/6, surgical = TRUE)
 
 		playsound(user, 'sound/surgery/organ2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))

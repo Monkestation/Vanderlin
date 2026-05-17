@@ -189,9 +189,9 @@
 /datum/injury/proc/is_treated()
 	if(damage_type & SEWABLE_WOUND_TYPES)
 		return is_bandaged() || is_sutured()
-	if(damage_type & (WOUND_BLUNT|WOUND_DIVINE))
+	if(damage_type & (WOUND_BLUNT|WOUND_INTERNAL_BRUISE))
 		return is_bandaged()
-	if(damage_type & WOUND_BURN)
+	if(damage_type & FIRE_WOUND_TYPES)
 		return is_salved() || is_bandaged()
 	return TRUE
 

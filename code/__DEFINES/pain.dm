@@ -1,5 +1,7 @@
 // ~pain levels when using the custom_pain proc and shit
 #define PAIN_EMOTE_MINIMUM 10
+#define PAIN_MESSAGE_COOLDOWN 40 SECONDS
+#define PAIN_EMOTE_COOLDOWN 60 SECONDS
 
 // ~shock stages
 #define SHOCK_STAGE_1 20
@@ -7,8 +9,8 @@
 #define SHOCK_STAGE_3 60
 #define SHOCK_STAGE_4 80 // "Softcrit"
 #define SHOCK_STAGE_5 130
-#define SHOCK_STAGE_6 160 // "Hardcrit"
-#define SHOCK_STAGE_7 200
+#define SHOCK_STAGE_6 160
+#define SHOCK_STAGE_7 200 // "Hardcrit"
 #define SHOCK_STAGE_8 250
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 

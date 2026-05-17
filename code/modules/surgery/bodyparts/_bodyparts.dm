@@ -394,7 +394,7 @@
 
 /// Return TRUE to get whatever mob this is in to update health.
 /obj/item/bodypart/proc/on_life(delta_time, times_fired)
-	if(pain_heal_tick && (pain_dam >= DAMAGE_PRECISION))
+	if(pain_heal_tick)
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
@@ -570,9 +570,9 @@
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
-			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.004)
+			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.005
 			if(owner?.IsSleeping())
-				heal_amt *= 2
+				heal_amt *= 3
 		if(heal_amt)
 			injury.heal_damage(heal_amt * delta_time)
 
@@ -945,8 +945,8 @@
 			continue
 		if(injury.damage_type & FIRE_WOUND_TYPES)
 			burn = injury.heal_damage(burn)
-		else
-			brute = injury.heal_damage(brute)
+		else if(!forced || injury.damage_type & BRUTE_WOUND_TYPES)
+			brute = injury.heal_damage(brute) // serve as fallback healing amount for forced heal
 
 	return post_damage_change(updating_health)
 
