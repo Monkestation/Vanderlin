@@ -448,8 +448,6 @@
 							add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
 							target.apply_status_effect(/datum/status_effect/debuff/revive)
 							record_round_statistic(STATS_CPR_REVIVALS, 1)
-						else
-							to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())

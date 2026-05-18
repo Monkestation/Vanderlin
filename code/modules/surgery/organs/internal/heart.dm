@@ -150,7 +150,7 @@
 	return TRUE
 
 /obj/item/organ/heart/get_availability(datum/species/S, mob/living/carbon/owner_mob)
-	return (CAN_HAVE_BLOOD(owner_mob) && !(TRAIT_STABLEHEART in S.inherent_traits))
+	return (!(TRAIT_NOBLOOD in S.inherent_traits) && !(TRAIT_STABLEHEART in S.inherent_traits))
 
 /obj/item/organ/heart/get_mechanics_examine(mob/user)
 	. = ..()

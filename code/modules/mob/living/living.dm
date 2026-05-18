@@ -1011,8 +1011,8 @@
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
 		timeofdeath = 0
 		updatehealth() //then we check if the mob should wake up.
-		// if(full_heal_flags & HEAL_ADMIN)
-		// 	get_up(TRUE)
+		if(full_heal_flags & HEAL_ADMIN)
+			get_up(TRUE)
 		update_sight()
 		clear_alert("not_enough_oxy")
 		reload_fullscreen()
@@ -1030,9 +1030,9 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
 			log_combat(src, src, "revived")
 
-	// else if(full_heal_flags & HEAL_ADMIN)
-	// 	updatehealth()
-	// 	get_up(TRUE)
+	else if(full_heal_flags & HEAL_ADMIN)
+		updatehealth()
+		get_up(TRUE)
 
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)

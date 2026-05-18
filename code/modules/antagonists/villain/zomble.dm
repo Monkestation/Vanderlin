@@ -120,6 +120,7 @@
 	zombie.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 	for(var/obj/item/organ/organ as anything in zombie.internal_organs)
 		organ.setOrganDamage(0)
+	zombie.update_eyes()
 	return ..()
 
 /datum/antagonist/zombie/on_removal()

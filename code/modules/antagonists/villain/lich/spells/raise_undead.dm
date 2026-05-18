@@ -83,7 +83,6 @@
 	mind.current.job = null
 	mind.add_antag_datum(/datum/antagonist/skeleton)
 
-	ADD_TRAIT(src, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
@@ -126,6 +125,7 @@
 	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOBLOOD, TRAIT_GENERIC)
 
 	update_body()
 

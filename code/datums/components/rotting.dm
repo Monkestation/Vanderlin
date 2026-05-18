@@ -80,7 +80,7 @@
 				if(amount > 45 MINUTES)
 					if(!is_zombie)
 						B.skeletonize()
-						ADD_TRAIT(C, TRAIT_NOBLOOD, SPECIES_TRAIT)
+						ADD_TRAIT(C, TRAIT_NOBLOOD, TRAIT_GENERIC)
 						C.change_stat(STAT_CONSTITUTION, -99)
 						shouldupdate = TRUE
 				else

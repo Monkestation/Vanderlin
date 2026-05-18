@@ -121,18 +121,22 @@
 	L.mana_pool.set_intrinsic_recharge(MANA_SOULS)
 	L.mana_pool.ethereal_recharge_rate += 0.2
 
+	ADD_TRAIT(L, TRAIT_NOBLOOD, TRAIT_GENERIC)
+
+	L.set_faction(FACTION_UNDEAD)
+	L.mob_biotypes |= MOB_UNDEAD
+	L.grant_undead_eyes()
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
+	L.skeletonize(FALSE)
+
+	L.equipOutfit(/datum/outfit/lich)
+	L.set_patron(/datum/patron/inhumen/zizo)
+
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.set_faction(FACTION_UNDEAD)
 	if(length(L.quirks))
 		L.clear_quirks()
-	L.mob_biotypes |= MOB_UNDEAD
-	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
-	L.grant_undead_eyes()
-	L.skeletonize(FALSE)
-	L.equipOutfit(/datum/outfit/lich)
-	L.set_patron(/datum/patron/inhumen/zizo)
 
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()

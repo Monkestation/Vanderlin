@@ -116,11 +116,12 @@
 	if(length(L.quirks))
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
-	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.grant_undead_eyes()
 	L.skeletonize(FALSE)
 	L.equipOutfit(/datum/outfit/overlord)
 	L.set_patron(/datum/patron/inhumen/zizo)
+	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
 
 /datum/antagonist/overlord/proc/on_death(datum/source)
 	SIGNAL_HANDLER

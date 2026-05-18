@@ -34,4 +34,4 @@
 		examine_list += span_notice("<b>[owner]</b> looks a little wan.")
 
 /obj/item/organ/spleen/get_availability(datum/species/S, mob/living/carbon/owner_mob)
-	return CAN_HAVE_BLOOD(owner_mob)
+	return !(TRAIT_NOBLOOD in S.inherent_traits)

@@ -49,8 +49,8 @@
 		faction |= "islander"
 	if(length(quirks))
 		clear_quirks()
-	ADD_TRAIT(src, TRAIT_NOBLOOD, SPECIES_TRAIT)
 	if(dna?.species)
+		dna.species.inherent_traits |= TRAIT_NOBLOOD
 		dna.species.soundpack_m = new /datum/voicepack/skeleton()
 		dna.species.soundpack_f = new /datum/voicepack/skeleton()
 		var/obj/item/bodypart/head/headdy = get_bodypart("head")
@@ -72,6 +72,7 @@
 	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NO_ORGAN_PROCESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOBLOOD, TRAIT_GENERIC)
 	if(skel_outfit)
 		var/datum/outfit/OU = new skel_outfit
 		if(OU)
