@@ -22,6 +22,22 @@
 	randomspread = 2
 	spread = 3
 
+/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded
+	name = "puffer"
+	desc = "A result of Dwarven and Humen cooperation on the Eastern continent. It uses alchemical blastpowder to propel metal balls for devastating effect."
+
+	sellprice = 200
+
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
+
+	cocked = TRUE
+	wound = TRUE
+	bullet_rammed = TRUE
+
+/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/blastpowder, powder_required)
+
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured
 	name = "puffer"
 	desc = "A magically conjured copy of a eastern styled wheellock. \
