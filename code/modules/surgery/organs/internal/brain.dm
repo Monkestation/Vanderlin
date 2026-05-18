@@ -299,14 +299,16 @@
 	QDEL_LIST(traumas)
 	return ..()
 
-/obj/item/organ/brain/can_heal(delta_time, times_fired)
+/obj/item/organ/brain/can_self_heal(delta_time, times_fired)
 	. = TRUE
 	if(!owner)
 		return FALSE
 	if(healing_factor <= 0)
 		return FALSE
+
 	if(owner.get_chem_effect(CE_BRAIN_REGEN))
 		return TRUE
+
 	if(is_dead())
 		return FALSE
 	if(current_blood <= 0)
@@ -315,6 +317,8 @@
 		return FALSE
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	if(effective_blood_oxygenation < BLOOD_VOLUME_SAFE)
+		return FALSE
+	if(owner.stat >= DEAD)
 		return FALSE
 
 /obj/item/organ/brain/proc/past_damage_threshold(threshold)

@@ -31,7 +31,7 @@
 	///squirting sound
 	var/squirt_sound = list('sound/gore/artery1.ogg', 'sound/gore/artery2.ogg', 'sound/gore/artery3.ogg')
 
-/obj/item/organ/artery/can_heal(delta_time, times_fired)
+/obj/item/organ/artery/can_self_heal(delta_time, times_fired)
 	return FALSE
 
 /obj/item/organ/artery/on_life(delta_time, times_fired)

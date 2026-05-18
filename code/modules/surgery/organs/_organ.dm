@@ -510,7 +510,7 @@
 		failure_time = max(0, failure_time - delta_time)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_heal(delta_time, times_fired) && damage)
+	if(can_self_heal(delta_time, times_fired) && damage)
 		handle_self_healing(delta_time, times_fired)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
@@ -522,14 +522,16 @@
 	organ_failure(delta_time)
 
 /// healing checks
-/obj/item/organ/proc/can_heal(delta_time, times_fired)
+/obj/item/organ/proc/can_self_heal(delta_time, times_fired)
 	. = TRUE
 	if(!owner)
 		return FALSE
 	if(healing_factor <= 0)
 		return FALSE
+
 	if(owner.get_chem_effect(CE_ORGAN_REGEN))
 		return TRUE
+
 	if(is_dead())
 		return FALSE
 	if(current_blood <= 0)
@@ -537,6 +539,8 @@
 	if(owner.undergoing_cardiac_arrest())
 		return FALSE
 	if(owner.get_chem_effect(CE_TOXIN))
+		return FALSE
+	if(owner.stat >= DEAD)
 		return FALSE
 
 /obj/item/organ/proc/handle_self_healing(delta_time, times_fired)

@@ -324,7 +324,7 @@
 
 	var/obj/item/bodypart/mouth/jaw = target.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 	var/obj/item/bodypart/chest/chest = target.get_bodypart(BODY_ZONE_CHEST)
-	var/medical_skill = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/medicine)
+	var/medical_skill = max(GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/medicine), 0)
 
 	if(DOING_INTERACTION_WITH_TARGET(src, target))
 		return FALSE
@@ -352,28 +352,27 @@
 				to_chat(src, span_warning("I have no lungs!"))
 				return FALSE
 
-			if(world.time >= target.last_mtom + M2M_COOLDOWN)
-				if(!do_after(src, M2M_TIME, target))
-					return
-				var/they_breathe = !HAS_TRAIT(target, TRAIT_NOBREATH)
-				var/obj/item/organ/lungs/they_lung = target.getorganslot(ORGAN_SLOT_LUNGS)
-				visible_message(span_notice("<b>[src]</b> performs mouth to mouth on <b>[target]</b>!"), \
-								span_notice("I perform mouth to mouth on <b>[target]</b>."),
-								span_hear("I hear loud breathing."),
-								vision_distance = COMBAT_MESSAGE_RANGE,
-								ignored_mobs = target)
-				target.last_mtom = world.time
-				log_combat(src, target, "M2Med")
-				if(they_breathe && they_lung)
-					var/epinephrine_mod = 0
-					if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
-						epinephrine_mod += 5
-					target.adjustOxyLoss(-((medical_skill * 0.2) + epinephrine_mod))
-					to_chat(target, span_unconscious("I feel a breath of fresh air enter my lungs... It feels good..."))
-				else if(they_breathe && !they_lung)
-					to_chat(target, span_unconscious("I feel a breath of fresh air... But i don't feel any better..."))
-				else
-					to_chat(target, span_unconscious("I feel a breath of fresh air... Which is a sensation i don't recognise..."))
+			if(!do_after(src, 3 SECONDS, target))
+				return
+			var/they_breathe = !HAS_TRAIT(target, TRAIT_NOBREATH)
+			var/obj/item/organ/lungs/they_lung = target.getorganslot(ORGAN_SLOT_LUNGS)
+			visible_message(span_notice("<b>[src]</b> performs mouth to mouth on <b>[target]</b>!"), \
+							span_notice("I perform mouth to mouth on <b>[target]</b>."),
+							span_hear("I hear loud breathing."),
+							vision_distance = COMBAT_MESSAGE_RANGE,
+							ignored_mobs = target)
+			log_combat(src, target, "M2Med")
+			if(they_breathe && they_lung)
+				var/epinephrine_mod = 0
+				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
+					epinephrine_mod += 5
+				target.adjustOxyLoss(-((medical_skill * 0.2) + epinephrine_mod))
+				to_chat(target, span_unconscious("I feel a breath of fresh air enter my lungs... It feels good..."))
+			else if(they_breathe && !they_lung)
+				to_chat(target, span_unconscious("I feel a breath of fresh air... But i don't feel any better..."))
+			else
+				to_chat(target, span_unconscious("I feel a breath of fresh air... Which is a sensation i don't recognise..."))
+
 		if(CPR_CHEST)
 			var/mob/living/carbon/human/humie = target
 			if(istype(humie))
@@ -386,68 +385,83 @@
 					to_chat(src, span_warning("I need to take [humie.p_their()] [suit] off!"))
 					return
 
-			if(world.time >= target.last_cpr + CPR_COOLDOWN)
-				var/compression_time = CPR_TIME
-				compression_time *= GENERAL_SKILL_TIME_MULITPLIER(src, /datum/attribute/skill/misc/medicine)
-				if(!do_after(src, min(compression_time, 4 SECONDS), target))
-					return
-				var/they_beat = !HAS_TRAIT(target, TRAIT_STABLEHEART)
-				var/obj/item/organ/heart/they_heart = target.getorganslot(ORGAN_SLOT_HEART)
-				target.last_cpr = world.time
-				log_combat(src, target, "CPRed")
-				if(they_beat && they_heart)
-					to_chat(target, span_unconscious("I feel my heart being pumped..."))
-				else if(they_beat && !they_heart)
-					to_chat(target, span_unconscious("I feel my chest being pumped... But i don't feel any better..."))
-				else
-					to_chat(target, span_unconscious("I feel my chest being pushed on..."))
-				var/epinephrine_mod = 0
-				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
-					epinephrine_mod +=  3
-				var/heart_exposed_mod = 0
-				if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
-					heart_exposed_mod += 5
+			var/compression_time = 10 SECONDS
+			compression_time *= 1 - max(medical_skill * 0.01, 0.4)
+			if(!do_after(src, compression_time, target))
+				return
+			var/they_beat = !HAS_TRAIT(target, TRAIT_STABLEHEART)
+			var/obj/item/organ/heart/they_heart = target.getorganslot(ORGAN_SLOT_HEART)
+			log_combat(src, target, "CPRed")
+			if(they_beat && they_heart)
+				to_chat(target, span_unconscious("I feel my heart being pumped..."))
+			else if(they_beat && !they_heart)
+				to_chat(target, span_unconscious("I feel my chest being pumped... But i don't feel any better..."))
+			else
+				to_chat(target, span_unconscious("I feel my chest being pushed on..."))
+			var/epinephrine_mod = 0
+			if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
+				epinephrine_mod +=  3
+			var/heart_exposed_mod = 0
+			if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
+				heart_exposed_mod += 5
 
-				/// Journeymen (average 35) have a 5% chance of doing a CPR revive
-				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, dice_num = 13, context = DICE_CONTEXT_PHYSICAL)
-				if(diceroll <= DICE_CRIT_FAILURE)
-					visible_message(span_danger("<b>[src]</b> botches the chest compressions!"), \
-								span_danger("I botch the chest compressions!"),
+			/// Journeymen (average 35) have a 5% chance of doing a CPR revive
+			var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, dice_num = 13, context = DICE_CONTEXT_PHYSICAL)
+			if(diceroll <= DICE_CRIT_FAILURE)
+				visible_message(span_danger("<b>[src]</b> botches the chest compressions!"), \
+							span_danger("I botch the chest compressions!"),
+							span_hear("I hear pushing."),
+							vision_distance = COMBAT_MESSAGE_RANGE, \
+							ignored_mobs = target)
+				if(target.stat >= DEAD)
+					/**
+					 * y = 15 * e^(-0.022x)
+					 * Aiming for points (0, 15) (30, 10) (50, 5)
+					 */
+					they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
+			else
+				if(heart_exposed_mod)
+					visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
+								span_notice("I massage <b>[target]</b>'s [they_heart]."), \
 								span_hear("I hear pushing."),
 								vision_distance = COMBAT_MESSAGE_RANGE, \
 								ignored_mobs = target)
 				else
-					if(heart_exposed_mod)
-						visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
-									span_notice("I massage <b>[target]</b>'s [they_heart]."), \
-									span_hear("I hear pushing."),
-									vision_distance = COMBAT_MESSAGE_RANGE, \
-									ignored_mobs = target)
+					visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
+								span_notice("I perform chest compressions on <b>[target]</b>."), \
+								span_hear("I hear pushing."),
+								vision_distance = COMBAT_MESSAGE_RANGE, \
+								ignored_mobs = target)
+				target.pump_heart(src)
+				if(target.stat < DEAD) // No point in running the revive check
+					return
+				if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
+					to_chat(src, span_warning("Necra holds tight to this one."))
+					return FALSE
+				chest.add_wound(/datum/wound/fracture/chest)
+				if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
+					if(they_heart.is_failing_without_bleedout())
+						to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
+						return FALSE
+
+					if(GETBRAINLOSS(target) >= BRAIN_DAMAGE_DEATH)
+						SETBRAINLOSS(target, BRAIN_DAMAGE_DEATH - 1)
+					if(target.revive())
+						target.grab_ghost(TRUE)
+						target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
+										span_userdanger("My muscles spasm as i am brought back to life!"))
+						target.emote("breathgasp")
+						target.adjust_jitter(100 SECONDS)
+						add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
+						target.apply_status_effect(/datum/status_effect/debuff/revive)
+						record_round_statistic(STATS_CPR_REVIVALS, 1)
+						/**
+						 * y = 15 * e^(-0.022x)
+						 * Aiming for points (0, 15) (30, 10) (50, 5)
+						 */
+						they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
 					else
-						visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
-									span_notice("I perform chest compressions on <b>[target]</b>."), \
-									span_hear("I hear pushing."),
-									vision_distance = COMBAT_MESSAGE_RANGE, \
-									ignored_mobs = target)
-					target.pump_heart(src)
-					if(target.stat < DEAD) // No point in running the revive check
-						return
-					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
-						if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
-							to_chat(src, span_warning("Necra holds tight to this one."))
-							return FALSE
-						if(GETBRAINLOSS(target) >= BRAIN_DAMAGE_DEATH)
-							SETBRAINLOSS(target, BRAIN_DAMAGE_DEATH - 1)
-						if(target.revive())
-							chest.add_wound(/datum/wound/fracture/chest)
-							target.grab_ghost(TRUE)
-							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
-											span_userdanger("My muscles spasm as i am brought back to life!"))
-							target.emote("breathgasp")
-							target.adjust_jitter(100 SECONDS)
-							add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
-							target.apply_status_effect(/datum/status_effect/debuff/revive)
-							record_round_statistic(STATS_CPR_REVIVALS, 1)
+						to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())
