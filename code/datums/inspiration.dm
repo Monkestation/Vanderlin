@@ -1,182 +1,106 @@
-// Bardic Inspo time - Datum/definition setup
-
-GLOBAL_LIST_INIT(inspiration_songs, list(\
-	BARD_T1_KEY = (list(/datum/action/cooldown/spell/undirected/song/dirge_fortune,\
-		/datum/action/cooldown/spell/undirected/song/furtive_fortissimo,\
-		/datum/action/cooldown/spell/undirected/song/intellectual_interval)), \
-	BARD_T2_KEY = (list(/datum/action/cooldown/spell/undirected/song/recovery_song,\
-		/datum/action/cooldown/spell/undirected/song/fervor_song,\
-		/datum/action/cooldown/spell/undirected/song/pestilent_piedpiper)), \
-	BARD_T3_KEY = (list(/datum/action/cooldown/spell/undirected/song/rejuvenation_song,\
-		/datum/action/cooldown/spell/undirected/song/suffocating_seliloquy,\
-		/datum/action/cooldown/spell/undirected/song/accelakathist))
-))
-
 /datum/inspiration
 	var/mob/living/carbon/human/holder
-	var/current_tier = 0
-	var/maxaudience = 0
-	/// List of weakrefs to name (not real name)
-	var/list/audience_weakrefs
-	var/list/available_song_tiers
+	var/level = BARD_T1
+	var/maxaudience = 3
+	var/list/audience = list()
+	var/maxsongs = 2
+	var/songsbought = 0
+	var/datum/rhythm_tracker/rhythm_tracker = null
+	var/list/selected_buffs = list()
 
-/datum/inspiration/New(mob/living/carbon/human/holder, bard_tier_override)
+/datum/inspiration/New(mob/living/carbon/human/holder)
 	. = ..()
 	src.holder = holder
-	RegisterSignal(holder, COMSIG_QDELETING, PROC_REF(on_holder_qdel))
-	RegisterSignal(holder, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_change))
-	add_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience))
-	set_inspiration_tier(bard_tier_override)
+	holder?.inspiration = src
 
 /datum/inspiration/Destroy(force)
-	if(ishuman(holder))
-		holder.inspiration = null
-	remove_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience, /mob/living/carbon/human/proc/picksongs))
-	holder.remove_spells(source = src)
-	UnregisterSignal(holder, list(COMSIG_QDELETING, COMSIG_SKILL_RANK_CHANGE))
-	holder = null
 	. = ..()
+	holder?.inspiration = null
+	holder = null
+	QDEL_NULL(rhythm_tracker)
+	STOP_PROCESSING(SSobj, src)
 
-///Called when holder is qdeleted for us to clean ourselves as not to leave any unlawful references.
-/datum/inspiration/proc/on_holder_qdel(atom/source, force)
-	SIGNAL_HANDLER
-	qdel(src)
-
-/datum/inspiration/proc/on_skill_change(datum/source, datum/attribute/skill/skill_ref, new_level, old_level)
-	SIGNAL_HANDLER
-
-	if(!ispath(skill_ref, /datum/attribute/skill/misc/music))
+/datum/inspiration/proc/grant_inspiration(mob/living/carbon/human/H, bard_tier)
+	if(!H || !H.mind)
 		return
-	if(new_level <= old_level)
-		return
+	level = bard_tier
+	switch(bard_tier)
+		if(BARD_T1)
+			maxaudience = 4
+			maxsongs = 2
+		if(BARD_T2)
+			maxaudience = 6
+			maxsongs = 4
+	audience |= H // Bard is always in their own audience
+	H.verbs += list(/mob/living/carbon/human/proc/explain_bard, /mob/living/carbon/human/proc/clear_audience)
 
-	set_inspiration_tier()
-
-/datum/inspiration/proc/check_in_audience(mob/possible_attendee)
-	LAZYINITLIST(audience_weakrefs)
-	for(var/datum/weakref/mob_ref as anything in audience_weakrefs)
-		if(mob_ref.resolve() == possible_attendee)
-			return TRUE
+/mob/living/carbon/human/proc/in_audience(mob/living/carbon/human/audiencee)
+	if(!src.inspiration)
+		return FALSE
+	if(audiencee in src.inspiration.audience)
+		return TRUE
 	return FALSE
 
-/// If tier_override is not set, uses holder's music skill to set the new tier. Based on the new tier, songs will be made available.
-/datum/inspiration/proc/set_inspiration_tier(tier_override)
-	var/old_inspire_tier = current_tier
-	var/target_tier
-	if(tier_override)
-		target_tier = tier_override
-	else
-		switch(floor(GET_MOB_SKILL_VALUE_OLD(holder, /datum/attribute/skill/misc/music)))
-			if(SKILL_RANK_EXPERT)
-				target_tier = 1
-			if(SKILL_RANK_MASTER)
-				target_tier = 2
-			if(SKILL_RANK_LEGENDARY to INFINITY)
-				target_tier = 3
+/datum/inspiration/proc/check_in_audience(mob/possible_attendee)
+	return (possible_attendee in audience)
 
-	LAZYINITLIST(available_song_tiers)
-	while(old_inspire_tier < target_tier)
-		old_inspire_tier++
-		switch(old_inspire_tier)
-			if(BARD_T1_VALUE)
-				available_song_tiers += BARD_T1_KEY
-			if(BARD_T2_VALUE)
-				available_song_tiers += BARD_T2_KEY
-			if(BARD_T3_VALUE)
-				available_song_tiers += BARD_T3_KEY
-
-	current_tier = target_tier
-	maxaudience = 2 * current_tier
-	if(length(available_song_tiers))
-		add_verb(holder, /mob/living/carbon/human/proc/picksongs)
-
-/**
- * MOB VERBS FOR INSPIRATION
- */
-
-/mob/living/carbon/human/proc/setaudience()
-	set name = "Audience Choice"
-	set category = "RoleUnique.Bard"
-
-	if(!inspiration)
-		return
-	if(length(inspiration.audience_weakrefs) >= inspiration.maxaudience)
-		to_chat(src, "I cannot maintain an audience larger than [inspiration.maxaudience]!")
-		return
-	var/list/folksnearby = list()
-	for(var/mob/living/carbon/human/folk in view(7, src))
-		if(!inspiration.check_in_audience(folk))
-			folksnearby += folk
-
-	if(!length(folksnearby))
-		return
-	var/mob/target = browser_input_list(src, "Who will you perform for?", "Audience Choice", folksnearby)
-	if(!target)
-		return
-
-	inspiration.audience_weakrefs[WEAKREF(target)] = target.name
-	to_chat(src, "You add [target] to your audience.")
-
-/mob/living/carbon/human/proc/clearaudience()
+/mob/living/carbon/human/proc/clear_audience()
 	set name = "Clear Audience"
-	set category = "RoleUnique.Bard"
+	set category = "Inspiration"
 	if(!inspiration)
+		return FALSE
+	if(src.has_status_effect(/datum/status_effect/buff/playing_melody) || src.has_status_effect(/datum/status_effect/buff/playing_dirge))
 		return
-	if(has_status_effect(/datum/status_effect/stacking/playing_inspiration)) // cant clear while playing
-		to_chat(src, span_warning("You can't clear your audience while preparing a tune!"))
-		return
-	inspiration.audience_weakrefs = list()
-	to_chat(src, "You clear your audience list.")
+	inspiration.audience = list(src)
+
+	return TRUE
+
+/mob/living/carbon/human/proc/toggleaudience(mob/living/carbon/human/target)
+	if(!inspiration)
+		return FALSE
+	if(src.has_status_effect(/datum/status_effect/buff/playing_melody) || src.has_status_effect(/datum/status_effect/buff/playing_dirge))
+		to_chat(src, span_warning("I cannot change my audience while performing!"))
+		return FALSE
+	if(!target || target == src)
+		return FALSE
+	if(inspiration.check_in_audience(target))
+		inspiration.audience -= target
+		to_chat(src, span_notice("[target.real_name] is no longer in my audience."))
+	else
+		var/audience_count = inspiration.audience.len - 1
+		if(audience_count >= inspiration.maxaudience)
+			to_chat(src, span_warning("I cannot maintain an audience larger than [inspiration.maxaudience]!"))
+			return FALSE
+		inspiration.audience |= target
+		to_chat(src, span_notice("[target.real_name] is now in my audience."))
+	return TRUE
 
 /mob/living/carbon/human/proc/checkaudience()
 	set name = "Check Audience"
-	set category = "RoleUnique.Bard"
+	set category = "Inspiration"
 
 	if(!inspiration)
+		return FALSE
+	var/text = ""
+	for(var/mob/living/carbon/human/folks in inspiration.audience)
+		text += "[folks.real_name], "
+	if(!text)
 		return
-	var/list/text = list()
-	for(var/datum/weakref/mob_ref as anything in inspiration.audience_weakrefs)
-		if(mob_ref.resolve())
-			text += inspiration.audience_weakrefs[mob_ref]
-	if(!length(text))
-		return
-	to_chat(src, "My audience members are: [text.Join(", ")].")
+	to_chat(src, "My audience members are: [text]")
+	return TRUE
 
-/mob/living/carbon/human/proc/picksongs()
-	set name = "Fill Songbook"
-	set category = "RoleUnique.Bard"
-
+/mob/living/carbon/human/proc/explain_bard()
+	set name = "Explain Bardic Inspiration"
+	set category = "Inspiration"
 	if(!inspiration)
-		return
-	if(!length(inspiration.available_song_tiers))
-		return
+		return FALSE
+	var/tier_name = inspiration.level == BARD_T2 ? "Full Bard" : "Lesser Bard"
+	to_chat(src, span_info("Bardic Inspiration allows you to inspire your allies with music. \
+	Set your audience using the 'Audience Choice' verb, then open your Songbook from the action bar to learn songs and rhythms. \
+	To activate a song, hold an instrument in one hand and toggle the song from your action bar. \
+	Songs are mutually exclusive - activating a new song replaces the current one."))
+	to_chat(src, span_info("Rhythm: Activate a rhythm, then strike within 8 seconds to trigger its effect. \
+	All rhythms share a cooldown. Full Bards can build toward a Crescendo - a powerful blast after 3 rhythm procs."))
+	to_chat(src, span_smallnotice("You're a [tier_name] and can have up to [inspiration.maxaudience] audience members and know [inspiration.maxsongs] songs."))
 
-	var/chosensongtier = browser_input_list(src, "Choose a tier of song to add to your songbook", "SERENADE", inspiration.available_song_tiers)
-
-	if(!chosensongtier)
-		return
-
-	var/list/possible_songs = GLOB.inspiration_songs[chosensongtier]
-	if(!possible_songs)
-		return
-
-	var/list/song_choices = list()
-	for(var/i = 1, i <= possible_songs.len, i++)
-		var/datum/action/cooldown/spell/undirected/song/spell_item = possible_songs[i]
-		song_choices["[spell_item.name]"] = spell_item
-
-	var/choice = input("Choose a song") as anything in song_choices
-	if(!choice) // user canceled;
-		return
-
-	var/datum/action/cooldown/spell/undirected/song/item = song_choices[choice]
-	if(get_spell(item , TRUE))
-		to_chat(src, span_warning("You already know this song!"))
-		return
-	if(tgui_alert(src, "[item.desc]", "[item.name]", list("Learn", "Cancel")) == "Cancel") //gives a preview of the spell's description to let people know what a spell does
-		return
-
-	add_spell(item, source = inspiration)
-	inspiration.available_song_tiers -= chosensongtier
-	if(!length(inspiration.available_song_tiers))
-		remove_verb(src, /mob/living/carbon/human/proc/picksongs)
+	return TRUE

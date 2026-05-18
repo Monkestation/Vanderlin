@@ -7,15 +7,15 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 6,
 		STAT_CONSTITUTION = 6,
-		STAT_ENDURANCE = 6,
-
-		/datum/attribute/skill/combat/knives = 60,
-		/datum/attribute/skill/combat/wrestling = 50,
-		/datum/attribute/skill/combat/unarmed = 50,
-		/datum/attribute/skill/misc/climbing = 50,
-		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/medicine = 40
-
+		STAT_ENDURANCE = 6
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(60, 60),
+		/datum/attribute/skill/combat/wrestling = list(50, 50),
+		/datum/attribute/skill/combat/unarmed = list(50, 50),
+		/datum/attribute/skill/misc/climbing = list(50, 50),
+		/datum/attribute/skill/misc/athletics = list(40, 40),
+		/datum/attribute/skill/misc/medicine = list(40, 40)
 	)
 
 /datum/antagonist/maniac
@@ -174,9 +174,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.set_patron(/datum/patron/inhumen/zizo)
 			dreamer.cmode_music = old_cm
 			dreamer.remove_stat_modifier("[type]")
-			var/datum/component/themesong = dreamer.GetComponent(/datum/component/theme_music)
-			if(themesong)
-				themesong.RemoveComponent()
+			qdel(dreamer.GetComponent(/datum/component/theme_music))
 			phy.bleed_mod *= 2
 			UnregisterSignal(dreamer, COMSIG_LIVING_DEATH)
 			var/client/client = dreamer?.client

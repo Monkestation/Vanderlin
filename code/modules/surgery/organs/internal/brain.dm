@@ -31,8 +31,10 @@
 	current_blood = 100
 	blood_req = 5
 	oxygen_req = 5
-	nutriment_req = 3
-	hydration_req = 1.5
+	nutriment_req = 3.5
+	hydration_req = 2
+
+	COOLDOWN_DECLARE(trauma_cooldown)
 
 	/// This is stuff
 	var/damage_threshold_value = BRAIN_DAMAGE_DEATH/10
@@ -146,9 +148,6 @@
 
 /obj/item/organ/brain/handle_healing_item(obj/item/tool, mob/living/user, params)
 	var/obj/item/natural/stack = tool
-	if(organ_flags & (ORGAN_DESTROYED|ORGAN_DEAD))
-		to_chat(user, span_warning("\The [src] is damaged beyond the point of no return."))
-		return
 	if(!damage && !length(traumas))
 		to_chat(user, span_notice("\The [src] is in pristine quality already."))
 		return
@@ -160,7 +159,7 @@
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
 
 	if(owner)
-		//owner.custom_pain("OH GOD! There are needles inside my [src]!", 30, FALSE, owner.get_bodypart(current_zone))
+		owner.custom_pain("OH GOD! There are needles inside my [src]!", 30, FALSE, owner.get_bodypart(current_zone))
 		if(!do_after(user, time, owner))
 			to_chat(user, span_warning("I must stand still!"))
 			return
@@ -182,7 +181,7 @@
 	user.visible_message(span_notice("<b>[user]</b> starts lobotomizing \the [src]..."), \
 					span_notice("I start lobotomizing \the [src]..."), \
 					vision_distance = COMBAT_MESSAGE_RANGE)
-	//owner.custom_pain("OH GOD! My [src] is being SLASHED IN TWAIN!", 30, FALSE, owner.get_bodypart(current_zone))
+	owner.custom_pain("OH GOD! My [src] is being SLASHED IN TWAIN!", 30, FALSE, owner.get_bodypart(current_zone))
 
 	var/time = 10 SECONDS
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
@@ -335,7 +334,7 @@
 		return
 	var/damage_delta = damage - prev_damage
 	// Safeguard to prevent traumas from low damage
-	if((damage_delta >= TRAUMA_ROLL_THRESHOLD) && (damage >= BRAIN_DAMAGE_MILD))
+	if((damage_delta >= TRAUMA_ROLL_THRESHOLD) && (damage >= BRAIN_DAMAGE_MILD) && COOLDOWN_FINISHED(src, trauma_cooldown))
 		var/is_boosted = FALSE
 		var/intelligence_modifier = (owner ? -(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)-ATTRIBUTE_MIDDLING) : 0)
 		if(damage >= BRAIN_DAMAGE_SEVERE)
@@ -343,12 +342,15 @@
 			if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
 				if(prob(20 + (is_boosted * 30) - (intelligence_modifier * 2)))
 					gain_trauma_type(BRAIN_TRAUMA_SPECIAL, is_boosted ? TRAUMA_RESILIENCE_SURGERY : null, natural_gain = TRUE)
+					COOLDOWN_START(src, trauma_cooldown, 5 MINUTES)
 				else
 					gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
+					COOLDOWN_START(src, trauma_cooldown, 5 MINUTES)
 		else
 			// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
 			if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
 				gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
+				COOLDOWN_START(src, trauma_cooldown, 5 MINUTES)
 	if(owner)
 		if(damage >= BRAIN_DAMAGE_DEATH && prev_damage < BRAIN_DAMAGE_DEATH && (organ_flags & ORGAN_VITAL))
 			owner.death()
@@ -364,6 +366,28 @@
 			. += "\n[brain_message]"
 		else
 			return brain_message
+
+/obj/item/organ/brain/can_heal(delta_time, times_fired)
+	. = TRUE
+	if(!owner)
+		return FALSE
+	if(healing_factor <= 0)
+		return FALSE
+	if(is_dead())
+		return FALSE
+	if(current_blood <= 0)
+		return FALSE
+	if(owner.undergoing_cardiac_arrest())
+		return FALSE
+	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
+	if(effective_blood_oxygenation < BLOOD_VOLUME_SAFE)
+		return FALSE
+	// if stable and not too damaged we can heal
+	if(!past_damage_threshold(3) && owner.get_chem_effect(CE_STABLE))
+		return TRUE
+	// else, we only naturally regen to basically get rounded
+	if(!(damage % damage_threshold_value) || owner.get_chem_effect(CE_BRAIN_REGEN))
+		return FALSE
 
 /obj/item/organ/brain/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
 	if(!amount) //Micro-optimization.
@@ -398,9 +422,9 @@
 		if(!is_failing())
 			REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, CRIT_HEALTH_TRAIT)
 	if(damage >= 60)
-		owner.add_stress(/datum/stress_event/brain_damage)
+		owner?.add_stress(/datum/stress_event/brain_damage)
 	else
-		owner.remove_stress(/datum/stress_event/brain_damage)
+		owner?.remove_stress(/datum/stress_event/brain_damage)
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
@@ -503,7 +527,7 @@
 		if(!initial(brain_trauma.random_gain))
 			continue
 		if(ispath(brain_trauma, /datum/brain_trauma/severe/split_personality))
-			if(!force_split_personality && owner?.client.prefs.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
+			if(!force_split_personality && owner?.client?.prefs?.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
 				continue
 		if(can_gain_trauma(brain_trauma, resilience, natural_gain))
 			possible_traumas += brain_trauma

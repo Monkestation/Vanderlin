@@ -153,9 +153,7 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/hellspeak)
-	var/datum/component/bad_luck = C.GetComponent(/datum/component/malaguero)
-	if(bad_luck)
-		bad_luck.RemoveComponent()
+	qdel(C.GetComponent(/datum/component/malaguero))
 
 /datum/species/tieberian/qualifies_for_rank(rank, list/features)
 	return TRUE

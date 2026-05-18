@@ -48,7 +48,7 @@
 		if(isliving(victim))
 			var/mob/living/victim_living = victim
 			victim_living.Paralyze(5 SECONDS)
-			victim_living.adjustBruteLoss(5)
+			victim_living.adjustBruteLoss(5, damage_type = BCLASS_BLUNT)
 			to_chat(victim, span_userdanger("You're slammed into the floor by [caster]!"))
 		return
 

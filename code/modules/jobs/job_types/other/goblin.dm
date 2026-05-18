@@ -21,7 +21,7 @@
 		spawned.mind.special_role = "goblin"
 		spawned.mind.current.job = null
 
-	spawned.faction = list(FACTION_ORCS)
+	spawned.set_faction(FACTION_ORCS)
 	spawned.name = "goblin"
 	spawned.real_name = "goblin"
 

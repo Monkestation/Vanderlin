@@ -963,7 +963,7 @@
 	message = "burps gluttonously!"
 	snd_range = 4
 	snd_vol = 200
-	mute_time = 100 // little less spammable
+	cooldown = 10 SECONDS // little less spammable
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"
@@ -983,7 +983,7 @@
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, BE_SPECIAL_TRAIT)
-	character.inspiration = new /datum/inspiration(character)
+	character.grant_inspiration()
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/muscial)
 
 /datum/special_trait/baothan

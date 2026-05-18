@@ -306,7 +306,8 @@
 	// If someone got hit- wound them with the glass shard
 	if(ishuman(hit_atom))
 		var/mob/living/carbon/victim = hit_atom
-		var/obj/item/bodypart/affecting = victim.get_bodypart(check_zone(thrownby.zone_selected))
+		var/mob/thrown_by = thrownby?.resolve()
+		var/obj/item/bodypart/affecting = victim.get_bodypart(check_zone(thrown_by.zone_selected))
 		if(!affecting)
 			affecting = victim.get_bodypart(pickweight(list(BODY_ZONE_HEAD = 1, BODY_ZONE_CHEST = 1, BODY_ZONE_L_ARM = 4, BODY_ZONE_R_ARM = 4, BODY_ZONE_L_LEG = 4, BODY_ZONE_R_LEG = 4)))
 		affecting.add_embedded_object(bottleshard)

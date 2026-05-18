@@ -5,8 +5,7 @@
 	icon_state = "cuirass"
 	item_state = "cuirass"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	boobed = FALSE
 	sellprice = VALUE_STEEL_ARMOR
 
@@ -27,7 +26,7 @@
 	boobed = TRUE
 
 	armor = ARMOR_PLATE_GOOD
-	item_weight = 13.45 KILOGRAMS
+	item_weight = 10 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/rare
 	abstract_type = /obj/item/clothing/armor/cuirass/rare
@@ -55,7 +54,7 @@
 	armor = ARMOR_PLATE_BAD
 	body_parts_covered = COVERAGE_VEST
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 KILOGRAMS
+	item_weight = 6.5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/rust

@@ -70,7 +70,7 @@
 	exp_types_granted  = list(EXP_TYPE_MEDICAL)
 
 	skill_multipliers = list(/datum/attribute/skill/misc/medicine = 1.25, /datum/attribute/skill/craft/alchemy = 1.25)
-
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/clinicapprentice
 	name = JOB_CLINIC_APP

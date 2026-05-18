@@ -6,8 +6,6 @@
 
 /datum/idle_behavior/bless_crops/perform_idle_behavior(delta_time, datum/ai_controller/controller)
 	. = ..()
-	if(!controller.able_to_run())
-		return
 
 	var/last_cooldown = controller.blackboard[BB_AGRIOPYLON_BLESS_COOLDOWN] || 0
 	if(world.time < last_cooldown)

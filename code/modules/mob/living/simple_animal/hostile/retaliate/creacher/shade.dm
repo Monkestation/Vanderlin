@@ -72,7 +72,6 @@
 	del_on_deaggro = 999 SECONDS
 
 	attack_sound = list('sound/magic/magic_nulled.ogg')
-	aggressive = 1
 	retreat_health = null
 	remains_type = null
 

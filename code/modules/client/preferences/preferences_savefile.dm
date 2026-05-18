@@ -190,8 +190,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		update_preferences(needs_update, S)		//needs_update = savefile_version if we need an update (positive integer)
 
 	//Sanitize
-	asaycolor = sanitize_color(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
-	ooccolor = sanitize_color(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
+	asaycolor = sanitize_color(sanitize_hexcolor(asaycolor, default = initial(asaycolor)))
+	ooccolor = sanitize_color(sanitize_hexcolor(ooccolor, default = initial(ooccolor)))
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style = sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
 	hotkeys = sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
@@ -357,6 +357,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["setspouse"] >> setspouse
 	S["selected_accent"] >> selected_accent
 
+	voice_color = sanitize_hexcolor(voice_color, include_crunch = FALSE)
+
 	// We load our list, but override everything to FALSE to stop a "tainted" save from making it random again.
 	randomise[RANDOM_BODY] = FALSE
 	randomise[RANDOM_BODY_ANTAG] = FALSE
@@ -455,7 +457,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = SANITIZE_LIST(randomise)
 
 	age = sanitize_inlist(age, pref_species.possible_ages)
-	eye_color = sanitize_hexcolor(eye_color, 3, 0)
+	eye_color = sanitize_hexcolor(eye_color, 3, include_crunch = FALSE)
 	voice_color = voice_color
 	pronouns = sanitize_text(pronouns, THEY_THEM)
 	voice_type = sanitize_inlist(voice_type, VOICE_TYPES_LIST, VOICE_TYPE_MASC)

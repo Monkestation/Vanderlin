@@ -2,12 +2,6 @@
 #define MAX_PLANT_NUTRITION 300
 #define SOIL_DECAY_TIME 20 MINUTES
 
-#define QUALITY_REGULAR 1
-// #define QUALITY_BRONZE 2
-#define QUALITY_SILVER 2
-#define QUALITY_GOLD 3
-#define QUALITY_DIAMOND 4
-
 #define BLESSING_WEED_DECAY_RATE 10 / (1 MINUTES)
 #define WEED_GROWTH_RATE 3 / (1 MINUTES)
 #define WEED_DECAY_RATE 5 / (1 MINUTES)
@@ -65,8 +59,8 @@
 	var/pollination_time = 0
 	/// Time remaining for the soil to decay and destroy itself, only applicable when its out of water and nutriments and has no plant
 	var/soil_decay_time = SOIL_DECAY_TIME
-	/// Current quality tier of the crop (1-5, regular to diamond)
-	var/crop_quality = QUALITY_REGULAR
+	/// Current quality tier of the crop (CROP_QUALITY defines)
+	var/crop_quality = CROP_QUALITY_REGULAR
 	/// Tracks quality points that accumulate toward quality tier increases
 	var/quality_points = 0
 	///accellerated_growth
@@ -159,7 +153,7 @@
 		var/obj/item/weapon/shovel/shovel = attacking_item
 		to_chat(user, span_notice("I begin to uproot the crop..."))
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, get_farming_do_time(user, 4 SECONDS * shovel.time_multiplier), src))
+		if(do_after(user, get_farming_do_time(user, 4 SECONDS * shovel.toolspeed), src))
 			to_chat(user, span_notice("I uproot the crop."))
 			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 			uproot()
@@ -171,7 +165,7 @@
 		var/obj/item/weapon/hoe/hoe = attacking_item
 		to_chat(user, span_notice("I begin to till the soil..."))
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, get_farming_do_time(user, 3 SECONDS * hoe.time_multiplier), src))
+		if(do_after(user, get_farming_do_time(user, 3 SECONDS * hoe.toolspeed), src))
 			to_chat(user, span_notice("I till the soil."))
 			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 			user_till_soil(user)
@@ -265,7 +259,7 @@
 		to_chat(user, span_notice("I begin flattening the soil with \the [attacking_item]..."))
 		var/obj/item/weapon/shovel/shovel = attacking_item
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, get_farming_do_time(user, 3 SECONDS * shovel.time_multiplier), src))
+		if(do_after(user, get_farming_do_time(user, 3 SECONDS * shovel.toolspeed), src))
 			if(plant)
 				return FALSE
 			apply_farming_fatigue(user, 10)
@@ -667,13 +661,13 @@
 
 	// Quality tier thresholds
 	if(quality_points >= max_quality_points * 0.9)
-		crop_quality = QUALITY_DIAMOND
+		crop_quality = CROP_QUALITY_DIAMOND
 	else if(quality_points >= max_quality_points * 0.7)
-		crop_quality = QUALITY_GOLD
+		crop_quality = CROP_QUALITY_GOLD
 	else if(quality_points >= max_quality_points * 0.5)
-		crop_quality = QUALITY_SILVER
+		crop_quality = CROP_QUALITY_SILVER
 	else
-		crop_quality = QUALITY_REGULAR
+		crop_quality = CROP_QUALITY_REGULAR
 
 // Optional: Add a proc to show current quality progress to players
 /obj/structure/soil/proc/get_quality_info()
@@ -682,18 +676,18 @@
 
 	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
-	var/progress_percent = round((quality_points / max_quality_points) * 100, 1)
+	var/progress_percent = PERCENT(quality_points / max_quality_points)
 
 	var/quality_name = "Regular"
 	switch(crop_quality)
-		if(QUALITY_SILVER)
+		if(CROP_QUALITY_SILVER)
 			quality_name = "Silver"
-		if(QUALITY_GOLD)
+		if(CROP_QUALITY_GOLD)
 			quality_name = "Gold"
-		if(QUALITY_DIAMOND)
+		if(CROP_QUALITY_DIAMOND)
 			quality_name = "Diamond"
 
-	return "Current Quality: [quality_name] ([progress_percent]% of maximum potential)"
+	return "Current Quality: [quality_name] ([total_potential_time], [max_quality_points], [progress_percent]% of maximum potential)"
 
 // Calculate quality modifier based on NPK balance
 /obj/structure/soil/proc/calculate_npk_quality_modifier()
@@ -835,7 +829,7 @@
 		improvement_chance += 10
 	if(pollination_time > 0)
 		improvement_chance += 10
-	if(crop_quality >= QUALITY_SILVER) // the rich get richer
+	if(crop_quality >= CROP_QUALITY_SILVER) // the rich get richer
 		improvement_chance += 20
 
 	// Improve two random traits
@@ -1102,7 +1096,6 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 /// Yields produce on its tile if it's ready for harvest
-
 /obj/structure/soil/proc/yield_produce(modifier = 0)
 	if(!produce_ready || !plant_genetics)
 		return
@@ -1121,6 +1114,7 @@
 	for(var/i in 1 to spawn_amount)
 		var/obj/item/produce = new plant.produce_type(loc)
 		produce.set_quality(crop_quality)
+		produce.AddElement(/datum/element/visual_quality, crop_quality)
 		if(produce && istype(produce, /obj/item/reagent_containers/food/snacks/produce))
 			var/obj/item/reagent_containers/food/snacks/produce/P = produce
 			// Pass genetics to the produce for seed extraction
@@ -1133,11 +1127,10 @@
 
 	// Reset quality for next growth cycle if plant is perennial
 	if(plant?.perennial)
-		crop_quality = QUALITY_REGULAR
+		crop_quality = CROP_QUALITY_REGULAR
 		quality_points = 0
 
 	update_appearance(UPDATE_OVERLAYS)
-
 
 /obj/structure/soil/proc/insert_plant(datum/plant_def/new_plant, datum/plant_genetics/new_genetics)
 	if(plant)
@@ -1153,7 +1146,7 @@
 	plant_dead = FALSE
 	plant_genetics = new_genetics
 	// Reset quality values
-	crop_quality = QUALITY_REGULAR
+	crop_quality = CROP_QUALITY_REGULAR
 	quality_points = 0
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -1285,11 +1278,11 @@
 #undef MAX_PLANT_WEEDS
 #undef SOIL_DECAY_TIME
 
-#undef QUALITY_REGULAR
+#undef CROP_QUALITY_REGULAR
 // #undef QUALITY_BRONZE
-#undef QUALITY_SILVER
-#undef QUALITY_GOLD
-#undef QUALITY_DIAMOND
+#undef CROP_QUALITY_SILVER
+#undef CROP_QUALITY_GOLD
+#undef CROP_QUALITY_DIAMOND
 
 #undef BLESSING_WEED_DECAY_RATE
 #undef WEED_GROWTH_RATE

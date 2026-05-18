@@ -1,9 +1,9 @@
-#define ARMORID "armor-[blunt]-[slash]-[stab]-[piercing]-[fire]-[acid]-[magic]"
+#define ARMORID "armor-[blunt]-[slash]-[stab]-[piercing]-[fire]-[acid]-[magic]-[wound]"
 
-/proc/getArmor(blunt = 0, slash = 0, stab = 0, piercing = 0, fire = 0, acid = 0, magic = 0)
+/proc/getArmor(blunt = 0, slash = 0, stab = 0, piercing = 0, fire = 0, acid = 0, magic = 0, wound = 0)
 	. = locate(ARMORID)
 	if (!.)
-		. = new /datum/armor(blunt, slash, stab, piercing, fire, acid, magic)
+		. = new /datum/armor(blunt, slash, stab, piercing, fire, acid, magic, wound)
 
 /datum/armor
 	datum_flags = DF_USE_TAG
@@ -21,8 +21,10 @@
 	var/acid
 	/// protection against magical attacks (make this adjustable via rune enchantments or something)
 	var/magic
+	/// protection against internal wounding, basically padding for blunt hits
+	var/wound
 
-/datum/armor/New(blunt = 0, slash = 0, stab = 0, piercing = 0, fire = 0, acid = 0, magic = 0)
+/datum/armor/New(blunt = 0, slash = 0, stab = 0, piercing = 0, fire = 0, acid = 0, magic = 0, wound = 0)
 	src.blunt = blunt
 	src.slash = slash
 	src.stab = stab
@@ -30,38 +32,40 @@
 	src.fire = fire
 	src.acid = acid
 	src.magic = magic
+	src.wound = wound
 	tag = ARMORID
 
-/datum/armor/proc/modifyRating(blunt = 0, slash = 0, stab = 0, piercing = 0, fire = 0, acid = 0, magic = 0)
-	return getArmor(src.blunt+blunt, src.slash+slash, src.stab+stab, src.piercing+piercing,src.fire+fire, src.acid+acid, src.magic+magic)
+/datum/armor/proc/modifyRating(blunt = 0, slash = 0, stab = 0, piercing = 0, fire = 0, acid = 0, magic = 0, wound = 0)
+	return getArmor(src.blunt+blunt, src.slash+slash, src.stab+stab, src.piercing+piercing,src.fire+fire, src.acid+acid, src.magic+magic, src.wound+wound)
 
 /datum/armor/proc/modifyAllRatings(modifier = 0)
-	return getArmor(blunt+modifier, slash+modifier, stab+modifier, piercing+modifier,fire+modifier, acid+modifier, magic+modifier)
+	return getArmor(blunt+modifier, slash+modifier, stab+modifier, piercing+modifier,fire+modifier, acid+modifier, magic+modifier, wound+modifier)
 
 //TODO! PORT BLACKSTONE BLUNT/SLASH/STAB ARMOR DEFINES!!!!!!
 /datum/armor/proc/multiplymodifyAllRatings(modifier = 0)
-	return getArmor(blunt*modifier, slash*modifier, stab*modifier, piercing*modifier, fire*modifier, acid*modifier, magic*modifier)
+	return getArmor(blunt*modifier, slash*modifier, stab*modifier, piercing*modifier, fire*modifier, acid*modifier, magic*modifier, wound*modifier)
 
-/datum/armor/proc/setRating(blunt, slash, stab, piercing, fire, acid, magic)
+/datum/armor/proc/setRating(blunt, slash, stab, piercing, fire, acid, magic, wound)
 	return getArmor((isnull(blunt) ? src.blunt : blunt),\
 					(isnull(slash) ? src.slash : slash),\
 					(isnull(stab) ? src.stab : stab),\
 					(isnull(piercing) ? src.piercing : piercing),\
 					(isnull(fire) ? src.fire : fire),\
 					(isnull(acid) ? src.acid : acid),\
-					(isnull(magic) ? src.magic : magic))
+					(isnull(magic) ? src.magic : magic),\
+					(isnull(wound) ? src.wound : wound))
 
 /datum/armor/proc/getRating(rating)
 	return vars[rating]
 
 /datum/armor/proc/getList()
-	return list("blunt" = blunt, "slash" = slash, "stab" = stab, "piercing" = piercing, "fire" = fire, "acid" = acid, "magic" = magic)
+	return list("blunt" = blunt, "slash" = slash, "stab" = stab, "piercing" = piercing, "fire" = fire, "acid" = acid, "magic" = magic, "wound" = wound)
 
 /datum/armor/proc/attachArmor(datum/armor/AA)
-	return getArmor(blunt+AA.blunt, slash+AA.slash, stab+AA.stab, piercing+AA.piercing, fire+AA.fire, acid+AA.acid, magic+AA.magic)
+	return getArmor(blunt+AA.blunt, slash+AA.slash, stab+AA.stab, piercing+AA.piercing, fire+AA.fire, acid+AA.acid, magic+AA.magic, wound+AA.wound)
 
 /datum/armor/proc/detachArmor(datum/armor/AA)
-	return getArmor(blunt-AA.blunt, slash-AA.slash, stab-AA.stab, piercing-AA.piercing, fire-AA.fire, acid-AA.acid, magic-AA.magic)
+	return getArmor(blunt-AA.blunt, slash-AA.slash, stab-AA.stab, piercing-AA.piercing, fire-AA.fire, acid-AA.acid, magic-AA.magic, wound-AA.wound)
 
 /datum/armor/vv_edit_var(var_name, var_value)
 	if (var_name == NAMEOF(src, tag))
@@ -100,6 +104,8 @@
 			return "ACID"
 		if(MAGIC)
 			return "MAGIC"
+		if(WOUND)
+			return "WOUND"
 	CRASH("Unknown armor type '[armor_type]'")
 
 /**

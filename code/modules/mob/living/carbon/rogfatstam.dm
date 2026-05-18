@@ -161,6 +161,13 @@
 /mob/living/adjust_stamina(added as num, emote_override, force_emote = TRUE, internal_regen = TRUE) //call update_stamina here and set last_fatigued, return false when not enough fatigue left
 	if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
 		return TRUE
+	var/energetic = get_chem_effect(CE_ENERGETIC) * 0.1
+	if(added <= 0)
+		energetic *= max(0.1, 1 - energetic)
+	else
+		energetic *= max(0.1, 1 + energetic)
+	added += energetic
+
 	stamina = CLAMP(stamina+added, 0, maximum_stamina)
 	SEND_SIGNAL(src, COMSIG_LIVING_ADJUSTED, -added, STAMINA)
 	if(internal_regen && added < 0)

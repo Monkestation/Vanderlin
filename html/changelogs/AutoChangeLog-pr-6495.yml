@@ -1,0 +1,4 @@
+author: "SSensum13"
+delete-after: True
+changes:
+  - bugfix: "maniac skills now being given via \"clamped_adjustment\" to avoid them getting 100+ skill level, that should not be possible"

@@ -54,6 +54,6 @@
 #define HEAL_AFFLICTIONS (HEAL_NEGATIVE_DISEASES|HEAL_NEGATIVE_MUTATIONS|HEAL_ALL_REAGENTS|HEAL_STATUS|HEAL_CC_STATUS)
 
 /// Full heal that isn't admin forced
-#define HEAL_ALL ~(HEAL_ADMIN|HEAL_RESTRAINTS)
+#define HEAL_ALL ~(HEAL_ADMIN|HEAL_RESTRAINTS|HEAL_ORGANS)
 /// Heals everything and is as strong as / is an admin heal
 #define ADMIN_HEAL_ALL ALL
