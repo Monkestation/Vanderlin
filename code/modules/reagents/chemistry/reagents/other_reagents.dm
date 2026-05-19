@@ -54,7 +54,7 @@
 	if(methods & INJECT)
 		var/modifier = 1 //TODO: Borbop ~ Once we get a proper transfusion system this will become unneeded basically means instead of 5 units we inject 100 units which is 4 injections to suriving level. This is 100% blood duping but like... its this or 80 syringes of blood to get someone restarted
 		if(exposed_mob.stat >= DEAD)
-			modifier = 20
+			modifier = 10
 		exposed_mob.adjust_blood_volume(round(reac_volume, 0.1) * modifier, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 		return
 	if(methods & INGEST)
