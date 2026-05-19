@@ -1,7 +1,6 @@
 
 /datum/enchantment
 	var/atom/enchanted_item
-	var/starting_duration = 15 MINUTES
 	var/examine_text
 	var/enchantment_name
 	var/enchantment_end_message
@@ -26,6 +25,13 @@
 	registered_signals = null
 	return ..()
 
+/datum/enchantment/proc/can_enchant(atom/item)
+	return TRUE
+
+///exclusively from the enchanting matrix a byproduct of enchanting
+/datum/enchantment/proc/apply_user_modifications(mob/user)
+	return TRUE
+
 /datum/enchantment/proc/add_item(atom/item)
 	if(!item)
 		return FALSE
@@ -36,6 +42,7 @@
 	return TRUE
 
 /datum/enchantment/proc/register_triggers(atom/item)
+	SHOULD_CALL_PARENT(TRUE)
 	if(!item)
 		return
 	registered_signals += COMSIG_QDELETING
@@ -45,6 +52,7 @@
 	RegisterSignal(item, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/enchantment/proc/unregister_triggers()
+	SHOULD_CALL_PARENT(TRUE)
 	if(!enchanted_item || !length(registered_signals))
 		return
 

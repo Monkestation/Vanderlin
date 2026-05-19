@@ -822,7 +822,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return FALSE
 
 	target.key = key
-	target.faction = list(FACTION_NEUTRAL)
+	target.set_faction(FACTION_NEUTRAL)
 	return TRUE
 
 //this is a mob verb instead of atom for performance reasons

@@ -33,7 +33,6 @@
 	#define MT_AMBUSHCHECK "ambush_check"
 
 	#define MT_SLO "slo" //! I literally don't know what this is supposed to be
-	#define MT_AGGROTIME "aggro_time" //! AI
 
 	#define MT_LASTTRICK "lasttrick"
 	#define MT_MIRRORTIME "mirrortime"

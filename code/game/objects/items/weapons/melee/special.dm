@@ -16,8 +16,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = FIRE_PROOF|LAVA_PROOF|ACID_PROOF // Nigh indestructible due to how important it is
 	associated_skill = /datum/attribute/skill/combat/axesmaces
-	smeltresult = null // No
-	melting_material = null
 	swingsound = BLUNTWOOSH_MED
 	blade_dulling = DULLING_BASHCHOP
 	var/static/list/rod_jobs = null
@@ -132,6 +130,9 @@
 	var/static/list/rod_jobs_priest = null
 	COOLDOWN_DECLARE(staff)
 	item_weight = 1.2 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -363,8 +364,7 @@
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	thrown_bclass = BCLASS_CUT
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
@@ -373,6 +373,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psykatar"
 	item_weight = 400 GRAMS
+	smeltresult = /obj/item/ingot/silverblessed
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver

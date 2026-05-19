@@ -22,6 +22,8 @@
 	return ..()
 
 /datum/component/rot/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+		return
 	var/amt2add = rot_amount_per_process
 	if(last_process)
 		amt2add = ((world.time - last_process)/10) * amt2add
@@ -35,6 +37,8 @@
 	. = ..()
 
 /datum/component/rot/corpse/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+		return
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	..()
 	if(has_world_trait(/datum/world_trait/pestra_mercy))
@@ -84,7 +88,7 @@
 					findonerotten = TRUE
 	if(findonerotten)
 		var/turf/open/T = C.loc
-		if(istype(T) && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+		if(istype(T) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 			T.pollute_turf(/datum/pollutant/rot, 9)
 			if(soundloop && soundloop.stopped && !is_zombie)
 				soundloop.start()
@@ -117,7 +121,7 @@
 		if(soundloop && soundloop.stopped)
 			soundloop.start()
 		var/turf/open/T = get_turf(L)
-		if(istype(T)  && amount < 16 MINUTES && !(FACTION_MATTHIOS in L.faction))
+		if(istype(T)  && amount < 16 MINUTES && !L.has_faction(FACTION_MATTHIOS))
 			T.pollute_turf(/datum/pollutant/rot, 9)
 	if(amount > 20 MINUTES)
 		qdel(R)

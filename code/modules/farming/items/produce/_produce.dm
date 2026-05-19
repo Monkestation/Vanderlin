@@ -313,6 +313,7 @@
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
 	item_weight = 15 GRAMS
+	should_dry = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 	seed = null
@@ -347,6 +348,7 @@
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
 	item_weight  = 10 GRAMS
+	should_dry = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	seed = null
@@ -427,12 +429,11 @@
 	attacked_sound = 'sound/foley/hit_rock.ogg'
 	item_weight = 1 KILOGRAMS
 
-
-/obj/item/natural/cocaudo/deconstruct(disassembled = FALSE)
+/obj/item/natural/cocaudo/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
 	if(!disassembled)
-		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
-		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
-	qdel(src)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(drop_loc)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(drop_loc)
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato
@@ -796,6 +797,7 @@
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 	item_weight = 12 GRAMS
+	grind_results = list(/datum/reagent/caveweep = 5)
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
 	name = "borowiki"

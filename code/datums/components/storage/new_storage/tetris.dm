@@ -728,6 +728,8 @@
 			parent.add_fingerprint(user)
 			if(!prevent_warning)
 				mob_item_insertion_feedback(usr, user, storing)
+
+	storing.item_flags |= IN_STORAGE
 	if(grid)
 		var/coordinates = LAZYACCESS(modifiers, SCREEN_LOC)
 		var/grid_box_ratio = (world.icon_size/grid_box_size)
@@ -767,7 +769,6 @@
 		grid_add_item(storing, coordinates)
 
 	storing.on_enter_storage(master)
-	storing.item_flags |= IN_STORAGE
 	storing.mouse_opacity = MOUSE_OPACITY_OPAQUE //So you can click on the area around the item to equip it, instead of having to pixel hunt
 	if(ismovable(parent))
 		if(isliving(parent:loc))

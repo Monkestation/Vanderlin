@@ -41,7 +41,7 @@
 		var/turf/spawn_turf = get_turf(target)
 		if(spawn_turf)
 			var/mob/living/simple_animal/hostile/retaliate/clone = new target.type(spawn_turf)
-			clone.faction = target.faction
+			clone.set_faction(target.get_faction())
 			clone.maxHealth = target.maxHealth * 0.1 // Weak clones
 			clone.health = clone.maxHealth
 			clone.melee_damage_lower = target.melee_damage_lower * 0.3

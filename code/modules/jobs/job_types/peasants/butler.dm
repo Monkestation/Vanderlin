@@ -57,6 +57,7 @@
 		TRAIT_KNOW_KEEP_DOORS,
 		TRAIT_ROYALSERVANT
 	)
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/butler
 	name = JOB_BUTLER

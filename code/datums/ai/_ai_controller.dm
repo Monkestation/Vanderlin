@@ -70,7 +70,11 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	var/interesting_dist = AI_DEFAULT_INTERESTING_DIST
 	///
 	var/movement_displacement_time = 0
-
+	/// TRUE if we're able to run, FALSE if we aren't
+	/// Should not be set manually, override get_get_able_to_run() instead
+	/// Make sure you hook update_get_able_to_run() in setup_get_able_to_run() to whatever parameters changing that you added
+	/// Otherwise we will not pay attention to them changing
+	var/able_to_run = FALSE
 
 /datum/ai_controller/New(atom/new_pawn)
 	change_ai_movement_type(ai_movement)
@@ -198,6 +202,9 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	RegisterSignal(pawn, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_changed_z_level))
 	RegisterSignal(pawn, COMSIG_MOB_LOGIN, PROC_REF(on_sentience_gained))
 	RegisterSignal(pawn, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_changed))
+	RegisterSignal(pawn, COMSIG_QDELETING, PROC_REF(on_pawn_qdeleted))
+	update_able_to_run()
+	setup_able_to_run()
 
 	our_cells = new(interesting_dist, interesting_dist, 1)
 	set_new_cells()
@@ -267,10 +274,10 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	recalculate_idle()
 
 /datum/ai_controller/proc/should_idle()
-	if(!can_idle)
+	if(!can_idle || isnull(our_cells))
 		return FALSE
 	for(var/datum/spatial_grid_cell/grid as anything in our_cells.member_cells)
-		if(length(grid.client_contents))
+		if(locate(/mob/living) in grid.client_contents)
 			return FALSE
 	return TRUE
 
@@ -316,7 +323,13 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 ///Proc for deinitializing the pawn to the old controller
 /datum/ai_controller/proc/UnpossessPawn(destroy)
-	UnregisterSignal(pawn, list(COMSIG_MOVABLE_Z_CHANGED, COMSIG_MOB_LOGIN, COMSIG_MOB_LOGOUT, COMSIG_MOB_STATCHANGE))
+	SHOULD_CALL_PARENT(TRUE)
+	if(isnull(pawn))
+		return // instantiated without an applicable pawn, fine
+
+	set_ai_status(AI_STATUS_OFF)
+	UnregisterSignal(pawn, list(COMSIG_MOVABLE_Z_CHANGED, COMSIG_MOB_LOGIN, COMSIG_MOB_LOGOUT, COMSIG_MOB_STATCHANGE, COMSIG_QDELETING))
+	clear_able_to_run()
 	var/turf/pawn_turf = get_turf(pawn)
 	if(pawn_turf)
 		GLOB.ai_controllers_by_zlevel[pawn_turf.z] -= src
@@ -329,10 +342,37 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if(destroy)
 		qdel(src)
 
+/datum/ai_controller/proc/setup_able_to_run()
+	// paused_until is handled by PauseAi() manually
+	RegisterSignals(pawn, list(SIGNAL_ADDTRAIT(TRAIT_AI_PAUSED), SIGNAL_REMOVETRAIT(TRAIT_AI_PAUSED)), PROC_REF(update_able_to_run))
+
+/datum/ai_controller/proc/clear_able_to_run()
+	UnregisterSignal(pawn, list(SIGNAL_ADDTRAIT(TRAIT_AI_PAUSED), SIGNAL_REMOVETRAIT(TRAIT_AI_PAUSED)))
+
+/datum/ai_controller/proc/update_able_to_run()
+	SIGNAL_HANDLER
+	var/run_flags = get_able_to_run()
+	if(run_flags & AI_UNABLE_TO_RUN)
+		able_to_run = FALSE
+		walk(pawn, 0) //stop moving
+		// GLOB.move_manager.stop_looping(pawn) //stop moving
+	else
+		able_to_run = TRUE
+	set_ai_status(get_expected_ai_status(), run_flags)
+
+///Returns TRUE if the ai controller can actually run at the moment, FALSE otherwise
+/datum/ai_controller/proc/get_able_to_run()
+	if(HAS_TRAIT(pawn, TRAIT_AI_PAUSED))
+		return AI_UNABLE_TO_RUN
+	if(world.time < paused_until)
+		return AI_UNABLE_TO_RUN
+	return NONE
+
 /// Turn the controller on or off based on if you're alive, we only register to this if the flag is present so don't need to check again
 /datum/ai_controller/proc/on_stat_changed(mob/living/source, new_stat)
 	SIGNAL_HANDLER
 	reset_ai_status()
+	update_able_to_run()
 
 /// Sets the AI on or off based on current conditions, call to reset after you've manually disabled it somewhere
 /datum/ai_controller/proc/reset_ai_status()
@@ -342,6 +382,10 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if(QDELETED(pawn))
 		return
 	var/mob/living/living_pawn = pawn
+	if(!able_to_run)
+		return FALSE
+	if(HAS_TRAIT(pawn, TRAIT_AI_MOVEMENT_HALTED))
+		return FALSE
 	if(HAS_TRAIT(living_pawn, TRAIT_INCAPACITATED))
 		return FALSE
 	if(ai_traits & STOP_MOVING_WHEN_PULLED && living_pawn.pulledby)
@@ -383,22 +427,14 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if("[pawn_turf?.z]" in GLOB.weatherproof_z_levels)
 		if(!length(SSmobs.clients_by_zlevel[pawn_turf?.z]))
 			return AI_STATUS_OFF
+	if(!able_to_run)
+		return AI_STATUS_OFF
 	if(should_idle())
 		return AI_STATUS_IDLE
 	return AI_STATUS_ON
 
-///Returns TRUE if the ai controller can actually run at the moment.
-/datum/ai_controller/proc/able_to_run()
-	if(world.time < paused_until)
-		return FALSE
-	return TRUE
-
 /// Generates a plan and see if our existing one is still valid.
 /datum/ai_controller/process(delta_time)
-	if(!able_to_run())
-		walk(pawn, 0) //stop moving
-		return //this should remove them from processing in the future through event-based stuff.
-
 	if(!LAZYLEN(current_behaviors) && idle_behavior)
 		idle_behavior.perform_idle_behavior(delta_time, src) //Do some stupid shit while we have nothing to do
 		return
@@ -537,6 +573,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 /datum/ai_controller/proc/PauseAi(time)
 	paused_until = world.time + time
+	update_able_to_run()
+	addtimer(CALLBACK(src, PROC_REF(update_able_to_run)), time)
 
 /datum/ai_controller/proc/modify_cooldown(datum/ai_behavior/behavior, new_cooldown)
 	behavior_cooldowns[behavior.type] = new_cooldown
@@ -603,6 +641,14 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	UnregisterSignal(pawn, COMSIG_MOB_LOGOUT)
 	set_ai_status(AI_STATUS_ON) //Can't do anything while player is connected
 	RegisterSignal(pawn, COMSIG_MOB_LOGIN, PROC_REF(on_sentience_gained))
+
+// Turn the controller off if the pawn has been qdeleted
+/datum/ai_controller/proc/on_pawn_qdeleted()
+	SIGNAL_HANDLER
+	set_ai_status(AI_STATUS_OFF)
+	set_movement_target(type, null)
+	if(ai_movement.moving_controllers[src])
+		ai_movement.stop_moving_towards(src)
 
 /// Use this proc to define how your controller defines what access the pawn has for the sake of pathfinding, this requires they either have a key or you give them the lockids you want them to open
 /datum/ai_controller/proc/get_access()

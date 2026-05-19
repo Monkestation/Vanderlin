@@ -12,30 +12,24 @@
 	grid_width = 32
 	flags_ai_inventory = AI_ITEM_POWDER
 
-/obj/item/reagent_containers/powder/return_recipe_data()
-	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
-	if(!length(milled_from_paths))
-		return null
+/// Basically if we act as though the reagent amount is a measure of how much powder there is
+/// we want to delete if we hit 0. so we wrap trans_to
+/obj/item/reagent_containers/powder/proc/transfer_powder(atom/transferring_to, amount, mob/living/user, method = NONE)
+	if(!transferring_to || amount)
+		return
 
-	var/list/data = list()
-	data["type"]         = "snack_processing"
-	data["name"]         = name
-	data["category"]     = "Processing"
-	data["_output_path"] = "[type]"
-	data["output_name"]  = name
-	data["output_icon"]  = "[icon]"
-	data["output_state"] = "[icon_state]"
+	if(!transferring_to.reagents)
+		return FALSE
 
-	var/list/milled_from = list()
-	for(var/atom/src_path as anything in milled_from_paths)
-		milled_from += list(list(
-			"name"       = initial(src_path.name),
-			"icon"       = "[initial(src_path.icon)]",
-			"icon_state" = "[initial(src_path.icon_state)]",
-			"_path"      = "[src_path]",
-		))
-	data["milled_from"] = milled_from
-	return data
+	if(transferring_to.reagents.holder_full())
+		return FALSE
+
+	reagents.trans_to(transferring_to, amount, transfered_by = user, method = method)
+
+	if(!reagents.total_volume)
+		qdel(src)
+
+	return TRUE
 
 /obj/item/reagent_containers/powder/canconsume(mob/eater, mob/user, silent)
 	. = ..()
@@ -96,6 +90,31 @@
 		record_round_statistic(STATS_DRUGS_SNORTED)
 	qdel(src)
 	return TRUE
+
+/obj/item/reagent_containers/powder/return_recipe_data()
+	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
+	if(!length(milled_from_paths))
+		return null
+
+	var/list/data = list()
+	data["type"] = "snack_processing"
+	data["name"] = name
+	data["category"] = "Processing"
+	data["_output_path"] = "[type]"
+	data["output_name"] = name
+	data["output_icon"] = "[icon]"
+	data["output_state"] = "[icon_state]"
+
+	var/list/milled_from = list()
+	for(var/atom/src_path as anything in milled_from_paths)
+		milled_from += list(list(
+			"name" = initial(src_path.name),
+			"icon" = "[initial(src_path.icon)]",
+			"icon_state" = "[initial(src_path.icon_state)]",
+			"_path" = "[src_path]",
+		))
+	data["milled_from"] = milled_from
+	return data
 
 /obj/item/reagent_containers/powder/spice
 	name = "spice"
@@ -171,7 +190,7 @@
 	taste_description = "a flash of white"
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 16
-	metabolization_rate = 0.2
+	metabolization_rate = 0.1
 
 /datum/reagent/ozium/on_mob_metabolize(mob/living/L)
 	. = ..()

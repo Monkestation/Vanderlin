@@ -45,7 +45,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/carpenter
 
 	traits = list()
-
+	book_type = /obj/item/recipe_book/carpentry
 
 /datum/outfit/carpenter
 	name = JOB_CARPENTER

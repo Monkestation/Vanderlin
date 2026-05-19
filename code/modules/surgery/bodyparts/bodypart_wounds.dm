@@ -118,20 +118,21 @@
 	return TRUE
 
 /// Returns the total bleed rate on this bodypart
-/obj/item/bodypart/proc/get_bleed_rate()
+/obj/item/bodypart/proc/get_bleed_rate(artifical = FALSE)
 	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return 0
 	if(!bleeds)
 		return 0
 	var/bleed_rate = 0
-	if(bandage && !GET_ATOM_BLOOD_DNA_LENGTH(bandage))
-		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += (wound.bleed_rate * owner.dna.species.bleed_mod)
 
 	for(var/datum/injury/injury as anything in injuries)
-		if(injury.is_bleeding())
-			bleed_rate += injury.get_bleed_rate()
+		if(!artifical)
+			if(injury.is_bleeding())
+				bleed_rate += injury.get_bleed_rate()
+		else
+			bleed_rate += injury.get_artifical_bleed_rate()
 
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(!embedded.embedding.embedded_bloodloss)
@@ -150,12 +151,27 @@
 			bleed_rate += 5
 	return bleed_rate
 
+/obj/item/bodypart/proc/skeletonized_mod(bclass)
+	if(!skeletonized)
+		return 1
+	switch(bclass)
+		if(WOUND_BLUNT)
+			return 1.25
+		if(WOUND_SLASH)
+			return 0.7
+		if(WOUND_BITE)
+			return 1.1
+		if(WOUND_PIERCE)
+			return 0.8
+		else
+			return 1
+
 /// Called in two cases, as an override to an attack after IE apply_damage on a zone. Or After an attack to return a wound.
 /obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list(), incoming_germ, organ_bonus, pre_applied = FALSE)
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return
 	dam *= damage_multiplier
-	if(dam < 5)
+	if(dam < 5 && bclass != WOUND_INTERNAL_BRUISE)
 		if(CEILING(dam, 1) < 5)
 			return
 		dam = CEILING(dam, 1)
@@ -194,10 +210,12 @@
 			if(BCLASS_LASHING)
 				wounding_type = WOUND_LASH
 
+	dam *= skeletonized_mod(wounding_type)
+
 	if(wounding_type == WOUND_NONE)
 		return
 
-	if((zone_precise in list(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_L_EYE)) && wounding_type == WOUND_PIERCE)
+	if((zone_precise in list(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE)) && wounding_type == WOUND_PIERCE)
 		organ_bonus = CANT_ORGAN
 
 	if(organ_bonus != CANT_ORGAN)
@@ -305,6 +323,9 @@
 		record_round_statistic(STATS_LEECHES_EMBEDDED)
 	LAZYADD(embedded_objects, embedder)
 	embedder.is_embedded = TRUE
+	if(istype(embedder.loc, /mob))
+		var/mob/living/liver = embedder.loc
+		liver.dropItemToGround(embedder, TRUE, TRUE)
 	embedder.forceMove(src)
 	embedder.embedded(owner, src)
 
@@ -372,7 +393,7 @@
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage_expire()
-	var/bleed_rate = get_bleed_rate()
+	var/bleed_rate = get_bleed_rate(TRUE)
 	if(!bandage)
 		return FALSE
 	if(!bleed_rate)

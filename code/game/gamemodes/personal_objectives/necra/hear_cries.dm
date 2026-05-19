@@ -36,7 +36,7 @@
 		return
 
 	var/amulet_found = FALSE
-	for(var/obj/item/clothing/neck/current_item in user.get_equipped_items(TRUE))
+	for(var/obj/item/clothing/neck/current_item in user.get_equipped_items(INCLUDE_POCKETS))
 		if(current_item.type in list(/obj/item/clothing/neck/psycross/silver/divine/necra))
 			amulet_found = TRUE
 

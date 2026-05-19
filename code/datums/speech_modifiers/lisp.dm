@@ -28,5 +28,5 @@
 	else
 		lisp_power = 100
 	//Remove if we have teeth (aka stopped being british)
-	if(!lisp_power || (jaw.get_teeth_amount() >= jaw.max_teeth))
+	if(!lisp_power || (jaw && (jaw.get_teeth_amount() >= jaw.max_teeth)))
 		remove_speech_modifier()

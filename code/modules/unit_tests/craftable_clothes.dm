@@ -182,6 +182,10 @@ abstract types are automatically excluded.
 	for(var/datum/artificer_recipe/recipe as anything in subtypesof(/datum/artificer_recipe))
 		clothes_list -= initial(recipe.created_item)
 
+	// artificer recipes
+	for(var/datum/arcyne_crafting_recipe/recipe as anything in subtypesof(/datum/arcyne_crafting_recipe))
+		clothes_list -= initial(recipe.output)
+
 	if(!clothes_list.len)
 		return
 

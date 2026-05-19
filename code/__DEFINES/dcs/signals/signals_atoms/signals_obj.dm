@@ -23,12 +23,17 @@
 /// From base of [obj/item/afterattack_secondary()]: (atom/target, mob/user, list/modifiers)
 #define COMSIG_ITEM_AFTERATTACK_SECONDARY "item_afterattack_secondary"
 
+#define COMSIG_GLOVES_POST_ATTACK_HAND "glove_post_attackhand"
+
 /// From base of obj/item/attack_qdeleted(): (atom/target, mob/user, list/modifiers)
 #define COMSIG_ITEM_ATTACK_QDELETED "item_attack_qdeleted"
 /// From base of datum/species/proc/spec_attacked_by: (atom/target, mob/user, list/modifiers)
 #define COMSIG_ITEM_SPEC_ATTACKEDBY "item_spec_attackedby"
+#define COMSIG_ITEM_POST_ATTACK_SIMPLE "item_post_attack_simple"
 
 #define COMSIG_ITEM_EQUIPPED "item_equip"						//from base of obj/item/equipped(): (/mob/equipper, slot)
+
+#define COMSIG_ITEM_EATEN "item_eaten"
 
 #define COMSIG_QUALITY_ADD_MATERIAL "quality_add_material"
 #define COMSIG_QUALITY_MODIFY "quality_modify"
@@ -66,6 +71,8 @@
 #define COMSIG_OBJ_UNFREEZE "obj_unfreeze"
 /// from /obj/machinery/obj_break(damage_flag): (damage_flag)
 #define COMSIG_MACHINERY_BROKEN "machinery_broken"
+///from /obj/machinery/set_occupant(atom/movable/O): (new_occupant)
+#define COMSIG_MACHINERY_SET_OCCUPANT "machinery_set_occupant"
 /// from base power_change() when power is lost
 #define COMSIG_MACHINERY_POWER_LOST "machinery_power_lost"
 /// from base power_change() when power is restored

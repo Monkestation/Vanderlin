@@ -72,7 +72,7 @@
 	. = ..()
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(("meat" in L.faction))
+		if(L.has_faction("meat"))
 			return
 		var/damage = 5 * spike_count
 		L.adjustBruteLoss(damage, damage_type = BCLASS_PIERCE)

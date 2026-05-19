@@ -75,6 +75,7 @@
 #include "lootpanel.dm"
 #include "map_landmarks.dm"
 #include "mapping.dm"
+#include "melting_material.dm"
 #include "mindbound_actions.dm"
 #include "movement_order_sanity.dm"
 #include "projectiles.dm"

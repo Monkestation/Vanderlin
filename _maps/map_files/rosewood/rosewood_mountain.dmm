@@ -47,6 +47,11 @@
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/carpet/red,
 /area/under/mountains/anvil/dungeon/lower)
+"aC" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt/ambush,
+/area/under/mountains/anvil/lower)
 "aD" = (
 /turf/closed/mineral/bedrock/cold,
 /area/under/mountains/anvil/lower)
@@ -281,10 +286,6 @@
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/lower)
-"cx" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/max,
-/turf/open/floor/grass/red,
-/area/under/mountains/anvil/dungeon/lower)
 "cy" = (
 /turf/open/water/river,
 /area/under/cavewet)
@@ -423,11 +424,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/carpet/red,
 /area/under/mountains/anvil/dungeon/lower)
-"dy" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/adv,
-/mob/living/simple_animal/hostile/retaliate/infernal/watcher,
-/turf/open/floor/herringbone,
-/area/under/mountains/anvil/dungeon/lower)
 "dz" = (
 /obj/item/ingot/silver,
 /obj/structure/closet/crate/chest/neu,
@@ -469,6 +465,22 @@
 /area/under/mountains/anvil/dungeon)
 "dQ" = (
 /turf/open/floor/cobble,
+/area/under/mountains/anvil/upper)
+"dR" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/mob/living/simple_animal/hostile/retaliate/elemental/warden{
+	name = "Guardian Warden"
+	},
+/turf/open/floor/herringbone,
+/area/under/mountains/anvil/dungeon)
+"dV" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/closet/crate/chest,
+/obj/item/reagent_containers/glass/bottle/elfblue,
+/obj/item/reagent_containers/glass/bottle/elfblue,
+/obj/item/reagent_containers/glass/bottle/elfred,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
+/turf/open/floor/dirt,
 /area/under/mountains/anvil/upper)
 "dX" = (
 /obj/item/chair/stool,
@@ -1586,10 +1598,6 @@
 /obj/item/natural/rock/mana_crystal,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
-"mD" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/teleport,
-/turf/open/floor/herringbone,
-/area/under/mountains/anvil/dungeon)
 "mG" = (
 /obj/structure/table/stone_small,
 /obj/item/weapon/surgery/saw,
@@ -2223,13 +2231,6 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/church,
 /area/under/mountains/anvil/lower)
-"rQ" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/mob/living/simple_animal/hostile/retaliate/elemental/warden{
-	name = "Guardian Warden"
-	},
-/turf/open/floor/herringbone,
-/area/under/mountains/anvil/dungeon)
 "rR" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -2807,6 +2808,11 @@
 /obj/effect/turf_decal/magedecal,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon)
+"wR" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/adv,
+/mob/living/simple_animal/hostile/retaliate/infernal/watcher,
+/turf/open/floor/herringbone,
+/area/under/mountains/anvil/dungeon/lower)
 "wX" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/item/clothing/face/facemask/goldmask,
@@ -2961,6 +2967,14 @@
 "yj" = (
 /turf/open/floor/snow,
 /area/outdoors/mountains/anvil/snowyforest)
+"yk" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/obj/effect/spawner/map_spawner/loot/common,
+/mob/living/simple_animal/hostile/retaliate/elemental/warden{
+	name = "Guardian Warden"
+	},
+/turf/open/floor/herringbone,
+/area/under/mountains/anvil/dungeon/lower)
 "yl" = (
 /obj/structure/spider/stickyweb{
 	dir = 8
@@ -3307,10 +3321,6 @@
 /obj/structure/mana_pylon,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/upper)
-"AZ" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt/ambush,
-/area/under/mountains/anvil/lower)
 "Ba" = (
 /obj/structure/chair/wood/alt/fancy{
 	dir = 4
@@ -3737,14 +3747,6 @@
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/mountains/anvil/dungeon/lower)
-"EH" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/closet/crate/chest,
-/obj/item/reagent_containers/glass/bottle/elfblue,
-/obj/item/reagent_containers/glass/bottle/elfblue,
-/obj/item/reagent_containers/glass/bottle/elfred,
-/turf/open/floor/grass/red,
-/area/under/mountains/anvil/upper)
 "EI" = (
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -4038,6 +4040,11 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon/lower)
+"Hg" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt/ambush,
+/area/under/mountains/anvil/lower)
 "Hh" = (
 /obj/machinery/anvil,
 /obj/item/clothing/shoes/boots/rare/elfplate/welfplate,
@@ -4559,6 +4566,10 @@
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon/lower)
+"KU" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/max,
+/turf/open/floor/grass/red,
+/area/under/mountains/anvil/dungeon/lower)
 "KV" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/rope/chain/bindingshackles/t4,
@@ -5052,10 +5063,6 @@
 	},
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
-"Ox" = (
-/obj/structure/closet/dirthole/closed,
-/turf/open/floor/dirt/ambush,
-/area/under/mountains/anvil/lower)
 "Oy" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 8
@@ -5319,6 +5326,13 @@
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
 /turf/open/floor/carpet/royalblack,
 /area/under/mountains/anvil/dungeon/lower)
+"QA" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/mob/living/simple_animal/hostile/retaliate/elemental/warden{
+	name = "Guardian Warden"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/upper)
 "QB" = (
 /obj/structure/closet/crate/chest,
 /obj/item/ore/cinnabar,
@@ -5858,6 +5872,14 @@
 /obj/structure/bed/mediocre,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/mountains/anvil/upper)
+"UI" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/statue/gold,
+/obj/item/statue/gold/loot,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
+/turf/open/floor/dirt,
+/area/under/mountains/anvil/dungeon/lower)
 "UK" = (
 /obj/structure/window/solid,
 /obj/structure/fluff/walldeco/vinez/red,
@@ -6043,13 +6065,6 @@
 /obj/structure/bookcase,
 /turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon)
-"Wi" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/statue/gold,
-/obj/item/statue/gold/loot,
-/turf/open/floor/grass/red,
-/area/under/mountains/anvil/dungeon/lower)
 "Wj" = (
 /obj/effect/spawner/map_spawner/loot/potion_ingredient,
 /turf/open/floor/herringbone,
@@ -6316,14 +6331,6 @@
 /obj/structure/bookcase,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/mountains/anvil/surface/building)
-"Yo" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/obj/effect/spawner/map_spawner/loot/common,
-/mob/living/simple_animal/hostile/retaliate/elemental/warden{
-	name = "Guardian Warden"
-	},
-/turf/open/floor/herringbone,
-/area/under/mountains/anvil/dungeon/lower)
 "Yt" = (
 /obj/structure/spider/stickyweb{
 	dir = 8
@@ -6362,13 +6369,6 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon/lower)
-"YG" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/mob/living/simple_animal/hostile/retaliate/elemental/warden{
-	name = "Guardian Warden"
-	},
-/turf/open/floor/cobblerock,
-/area/under/mountains/anvil/upper)
 "YH" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
@@ -6484,6 +6484,10 @@
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/carpet/red,
 /area/under/mountains/anvil/dungeon/lower)
+"ZL" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/teleport,
+/turf/open/floor/herringbone,
+/area/under/mountains/anvil/dungeon)
 "ZN" = (
 /obj/structure/bookcase/random,
 /obj/structure/spider/stickyweb,
@@ -9194,7 +9198,7 @@ tA
 ZA
 dI
 SL
-Yo
+yk
 SL
 dl
 QX
@@ -11948,7 +11952,7 @@ Bk
 Bk
 Xo
 lw
-Ox
+Hg
 Xo
 jD
 Xo
@@ -12964,7 +12968,7 @@ Bk
 iK
 iK
 iK
-AZ
+aC
 lw
 lw
 Bk
@@ -13350,7 +13354,7 @@ Xo
 iK
 iK
 iK
-Ox
+Hg
 Xo
 lw
 lw
@@ -14770,7 +14774,7 @@ iK
 iK
 iK
 iK
-Ox
+Hg
 lw
 lw
 lw
@@ -15186,7 +15190,7 @@ iK
 iK
 iK
 Xo
-Ox
+Hg
 Bk
 az
 az
@@ -15972,7 +15976,7 @@ Bk
 Bk
 lw
 Xo
-AZ
+aC
 iK
 Bk
 Yy
@@ -17794,7 +17798,7 @@ Bk
 Bk
 Bk
 iK
-Ox
+Hg
 iK
 iK
 OL
@@ -18775,7 +18779,7 @@ az
 Bk
 Bk
 iK
-Ox
+Hg
 Xo
 Bk
 Bk
@@ -19821,7 +19825,7 @@ Xo
 Xo
 Xo
 Xo
-Ox
+Hg
 Xo
 Xo
 iK
@@ -21001,7 +21005,7 @@ lw
 lw
 lw
 Xo
-AZ
+aC
 Xo
 Xo
 iK
@@ -21197,7 +21201,7 @@ az
 Bk
 Bk
 Xo
-Ox
+Hg
 Xo
 lw
 lw
@@ -21221,7 +21225,7 @@ az
 az
 az
 Xo
-AZ
+aC
 Bk
 az
 Bk
@@ -21434,7 +21438,7 @@ Bk
 az
 az
 Bk
-Ox
+Hg
 Xo
 Bk
 Bk
@@ -22235,7 +22239,7 @@ Bk
 az
 Bk
 Bk
-AZ
+aC
 Xo
 Bk
 Bk
@@ -24299,7 +24303,7 @@ iK
 iK
 iK
 Xo
-Ox
+Hg
 Xo
 Bk
 iK
@@ -25589,7 +25593,7 @@ cH
 cH
 cH
 cH
-cx
+KU
 cH
 cH
 cH
@@ -25713,7 +25717,7 @@ iK
 iK
 iK
 Xo
-AZ
+aC
 Bk
 Bk
 lw
@@ -26081,7 +26085,7 @@ iL
 iL
 Bk
 iK
-Ox
+Hg
 Xo
 Bk
 az
@@ -26465,7 +26469,7 @@ iL
 iL
 Th
 Xo
-AZ
+aC
 Th
 Th
 iL
@@ -28683,7 +28687,7 @@ Th
 Th
 iK
 Xo
-Ox
+Hg
 Xo
 Xo
 iK
@@ -29023,7 +29027,7 @@ SL
 dl
 SL
 SL
-dy
+wR
 SL
 SL
 dl
@@ -29096,7 +29100,7 @@ iK
 Xo
 Xo
 Xo
-AZ
+aC
 Xo
 Xo
 Xo
@@ -29300,7 +29304,7 @@ Th
 Th
 Xo
 jD
-Ox
+Hg
 Xo
 Bk
 Bk
@@ -29513,7 +29517,7 @@ az
 az
 az
 az
-Ox
+Hg
 Bk
 Bk
 Bk
@@ -33581,7 +33585,7 @@ iK
 Xo
 Xo
 Xo
-Ox
+Hg
 Xo
 lw
 lw
@@ -34385,7 +34389,7 @@ lw
 Xo
 Xo
 Xo
-Ox
+Hg
 Xo
 Bk
 az
@@ -35396,7 +35400,7 @@ iK
 iK
 Xo
 Xo
-AZ
+aC
 Bk
 Bk
 az
@@ -35598,7 +35602,7 @@ iK
 iK
 iK
 Xo
-AZ
+aC
 Xo
 Xo
 Bk
@@ -35611,7 +35615,7 @@ lw
 lw
 Xo
 Xo
-Ox
+Hg
 iK
 iK
 Bk
@@ -35802,7 +35806,7 @@ iK
 iK
 Xo
 Xo
-Ox
+Hg
 Xo
 Bk
 Bk
@@ -35979,7 +35983,7 @@ Xo
 Xo
 iK
 Xo
-Ox
+Hg
 lw
 Bk
 Bk
@@ -36014,7 +36018,7 @@ Bk
 Bk
 lw
 lw
-AZ
+aC
 Xo
 iK
 GU
@@ -36802,7 +36806,7 @@ Bk
 iK
 iK
 Xo
-Ox
+Hg
 Xo
 lw
 Bk
@@ -38098,7 +38102,7 @@ Jy
 cH
 cH
 cH
-Wi
+UI
 cH
 cH
 cH
@@ -38414,7 +38418,7 @@ Bk
 Bk
 iK
 Xo
-Ox
+Hg
 lw
 lw
 Bk
@@ -38810,7 +38814,7 @@ iK
 Bk
 Bk
 iK
-Ox
+Hg
 Xo
 lw
 Bk
@@ -56471,7 +56475,7 @@ YZ
 Be
 lJ
 lJ
-rQ
+dR
 lJ
 yb
 mZ
@@ -72525,7 +72529,7 @@ fa
 zM
 zM
 zM
-EH
+dV
 dQ
 dQ
 dQ
@@ -80252,7 +80256,7 @@ dQ
 dQ
 qe
 Af
-YG
+QA
 Af
 Ot
 dQ
@@ -83733,7 +83737,7 @@ mZ
 Be
 lJ
 lJ
-mD
+ZL
 lJ
 lJ
 Be

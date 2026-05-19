@@ -3,9 +3,9 @@
 	desc = "Accelerate the essence combination process through improved channeling techniques and optimized magical flow patterns."
 	prerequisites = list(/datum/thaumic_research_node/advanced_combiner_applications)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 20,
-		/datum/thaumaturgical_essence/energia = 15,
-		/datum/thaumaturgical_essence/fire = 10,
+		/datum/thaumaturgical_essence/motion = 10,
+		/datum/thaumaturgical_essence/energia = 7,
+		/datum/thaumaturgical_essence/fire = 8,
 	)
 	node_x = 280
 	node_y = 700
@@ -19,9 +19,9 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_speed)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 35,
-		/datum/thaumaturgical_essence/energia = 30,
-		/datum/thaumaturgical_essence/cycle = 20,
+		/datum/thaumaturgical_essence/motion = 20,
+		/datum/thaumaturgical_essence/energia = 12,
+		/datum/thaumaturgical_essence/cycle = 14,
 	)
 	node_x = 360
 	node_y = 800
@@ -34,10 +34,10 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_output/two)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 50,
-		/datum/thaumaturgical_essence/energia = 45,
-		/datum/thaumaturgical_essence/cycle = 35,
-		/datum/thaumaturgical_essence/magic = 25,
+		/datum/thaumaturgical_essence/motion = 30,
+		/datum/thaumaturgical_essence/energia = 20,
+		/datum/thaumaturgical_essence/cycle = 20,
+		/datum/thaumaturgical_essence/magic = 15,
 	)
 	node_x = 520
 	node_y = 780
@@ -50,11 +50,11 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_output/three)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 75,
-		/datum/thaumaturgical_essence/energia = 60,
-		/datum/thaumaturgical_essence/cycle = 50,
-		/datum/thaumaturgical_essence/magic = 40,
-		/datum/thaumaturgical_essence/void = 25,
+		/datum/thaumaturgical_essence/motion = 40,
+		/datum/thaumaturgical_essence/energia = 25,
+		/datum/thaumaturgical_essence/cycle = 25,
+		/datum/thaumaturgical_essence/magic = 20,
+		/datum/thaumaturgical_essence/void = 20,
 	)
 	node_x = 340
 	node_y = 640
@@ -67,12 +67,12 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_output/four)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 100,
-		/datum/thaumaturgical_essence/energia = 85,
-		/datum/thaumaturgical_essence/cycle = 75,
-		/datum/thaumaturgical_essence/magic = 60,
-		/datum/thaumaturgical_essence/void = 50,
-		/datum/thaumaturgical_essence/chaos = 40,
+		/datum/thaumaturgical_essence/motion = 50,
+		/datum/thaumaturgical_essence/energia = 35,
+		/datum/thaumaturgical_essence/cycle = 35,
+		/datum/thaumaturgical_essence/magic = 35,
+		/datum/thaumaturgical_essence/void = 30,
+		/datum/thaumaturgical_essence/chaos = 25,
 	)
 	node_x = 560
 	node_y = 680
