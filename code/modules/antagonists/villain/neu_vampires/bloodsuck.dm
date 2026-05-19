@@ -102,6 +102,9 @@
 		to_chat(sire, span_warning("[src] could not be sired."))
 		return
 
+	if(length(covens) == 1) //removing old covens for thralls
+		remove_coven(covens[1])
+
 	var/datum/clan/C = sire.clan
 	var/choice = tgui_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
 	if(QDELETED(src))
