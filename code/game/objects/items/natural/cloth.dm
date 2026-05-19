@@ -86,9 +86,6 @@
 		var/turf/T = target
 		T.add_liquid_from_reagents(reagents, amount = 1)
 	reagents.remove_all(1)
-	if(!reagents.total_volume)
-		bandage_health = initial(bandage_health)
-		bandage_effectiveness = initial(bandage_effectiveness)
 
 /obj/item/natural/cloth/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	. = ..()

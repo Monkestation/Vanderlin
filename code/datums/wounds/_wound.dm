@@ -152,6 +152,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	///how much we divide our calculated damage by for odds
 	var/damage_divisor = 6
 
+	var/required_bodypart_status
+
 /datum/wound/Destroy(force)
 	. = ..()
 	if(bodypart_owner)
@@ -252,7 +254,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Returns whether or not this wound can be applied to a given bodypart.
 /// Setting zone_precise will check whether its in viable_zones and if it matches limb body_zone
-/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise)
+/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, damage_bclass)
 	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
 	if(!ignore_bloody && !isnull(bleed_rate) && !affected.can_bloody_wound())
@@ -260,11 +262,11 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/datum/wound/other_wound as anything in affected.wounds)
 		if(!can_stack_with(other_wound))
 			return FALSE
-	if(!zone_precise)
-		return TRUE
-	if(length(viable_zones) && !(zone_precise in viable_zones))
+	if(required_bodypart_status && affected.status != required_bodypart_status)
+		return
+	if(zone_precise && length(viable_zones) && !(zone_precise in viable_zones))
 		return FALSE
-	if(deprecise_zone(zone_precise) != affected.body_zone)
+	if(zone_precise && deprecise_zone(zone_precise) != affected.body_zone)
 		return FALSE // we are in a weird place
 	return TRUE
 

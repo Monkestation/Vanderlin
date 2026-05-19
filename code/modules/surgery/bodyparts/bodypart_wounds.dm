@@ -247,7 +247,7 @@
 		var/datum/wound/primordial = GLOB.primordial_wounds[wound_type]
 		if(!primordial.can_roll)
 			continue
-		if(!primordial.can_apply_to_bodypart(src, zone_precise))
+		if(!primordial.can_apply_to_bodypart(src, zone_precise, bclass))
 			continue
 		var/chance = primordial.get_crit_prob(bclass, dam, damage_dividend, user, src, modifiers)
 		if(prob(chance))
@@ -415,6 +415,7 @@
 		return FALSE
 	if(!bandage)
 		return FALSE
+	bandage.bandage_health = 0
 	bandage.bandage_effectiveness = 1
 	unbandage_limb()
 	if(owner.stat < UNCONSCIOUS)

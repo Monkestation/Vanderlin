@@ -1732,20 +1732,20 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 							directional_blocked = TRUE
 							break
 			if((!target_table && !target_collateral_mob) || directional_blocked)
-				target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+				target.Knockdown(SHOVE_KNOCKDOWN_SOLID, prevent_drop = TRUE)
 				target.visible_message("<span class='danger'>[user.name] kicks [target.name], knocking them down!</span>",
 								"<span class='danger'>I'm knocked down from a kick by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>I kick [target.name], knocking them down!</span>")
 				log_combat(user, target, "kicked", "knocking them down")
 			else if(target_table)
-				target.Knockdown(SHOVE_KNOCKDOWN_TABLE)
+				target.Knockdown(SHOVE_KNOCKDOWN_TABLE, prevent_drop = TRUE)
 				target.visible_message("<span class='danger'>[user.name] kicked [target.name] onto \the [target_table]!</span>",
 								"<span class='danger'>I'm kicked onto \the [target_table] by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>I kick [target.name] onto \the [target_table]!</span>")
 				target.throw_at(target_table, 1, 1, null, FALSE) //1 speed throws with no spin are basically just forcemoves with a hard collision check
 				log_combat(user, target, "kicked", "onto [target_table] (table)")
 			else if(target_collateral_mob)
-				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
+				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN, prevent_drop = TRUE)
 				target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
 				target.visible_message("<span class='danger'>[user.name] kicks [target.name] into [target_collateral_mob.name]!</span>",
 					"<span class='danger'>I'm kicked into [target_collateral_mob.name] by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)

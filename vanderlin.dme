@@ -1201,6 +1201,7 @@
 #include "code\datums\elements\footstep_override.dm"
 #include "code\datums\elements\frozen.dm"
 #include "code\datums\elements\give_turf_traits.dm"
+#include "code\datums\elements\gun_launches_little_guy.dm"
 #include "code\datums\elements\hat_wearer.dm"
 #include "code\datums\elements\holy_weakness.dm"
 #include "code\datums\elements\immerse.dm"

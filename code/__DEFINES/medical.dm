@@ -293,6 +293,7 @@ DEFINE_BITFIELD(organ_flags, list(
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth
 #define ARTERY_CHEST /obj/item/organ/artery/chest
+#define ARTERY_HEART /obj/item/organ/artery/heart
 #define ARTERY_NECK /obj/item/organ/artery/neck
 #define ARTERY_L_ARM /obj/item/organ/artery/l_arm
 #define ARTERY_R_ARM /obj/item/organ/artery/r_arm

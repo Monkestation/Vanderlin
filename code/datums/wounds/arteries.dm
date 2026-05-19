@@ -12,17 +12,20 @@
 	aimed_intent_bonus = TRUE
 	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	var/artery_type_override
+	var/list/artery_type_blacklist = list(ARTERY_HEART)
 	viable_zones = list(\
 		BODY_ZONE_R_ARM, \
 		BODY_ZONE_R_LEG, \
 		BODY_ZONE_PRECISE_MOUTH, \
 		BODY_ZONE_L_LEG, \
 		BODY_ZONE_L_ARM, \
+		BODY_ZONE_CHEST, \
+		BODY_ZONE_PRECISE_NECK, \
 		BODY_ZONE_HEAD)
 
-/datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected)
-	if(affected.status == BODYPART_ROBOTIC)
-		return FALSE
+	required_bodypart_status = BODYPART_ORGANIC
+
+/datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, bclass)
 	if(!affected.get_cut(ignore_gauze = TRUE))
 		return FALSE
 	return ..()
@@ -40,6 +43,8 @@
 		if(possible_artery.damage >= possible_artery?.maxHealth)
 			continue
 		if(artery_type_override && !istype(possible_artery, artery_type_override))
+			continue
+		if(artery_type_blacklist && (possible_artery.type in artery_type_blacklist))
 			continue
 		artery = possible_artery
 		break
@@ -67,11 +72,11 @@
 	name = "Aortic Dissection"
 	severity = WOUND_SEVERITY_FATAL
 	artery_type_override = /obj/item/organ/artery/chest
-	associated_bclasses = ARTERY_HEART_BCLASSES
+	artery_type_blacklist = list(ARTERY_CHEST)
 	viable_zones = list(BODY_ZONE_CHEST)
 
-/datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected)
-	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
+/datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, bclass)
+	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture) && !(bclass in ARTERY_HEART_BCLASSES))
 		return FALSE
 	// Must be vitals zone
 	if(affected.body_zone != BODY_ZONE_CHEST)
