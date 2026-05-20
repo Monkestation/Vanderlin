@@ -181,11 +181,11 @@
 		if(arcshot && isopenspace(current))
 			// If this is null something is VERY wrong
 			var/turf/below = GET_TURF_BELOW(current)
-			if(current.can_zFall(src, 1, below))
+			if(can_z_move(DOWN, current, below, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 				var/turf/target
 				while(!target)
 					var/turf/potential = GET_TURF_BELOW(below)
-					if(!potential || !below.can_zFall(src, 1, potential))
+					if(!potential || !can_z_move(DOWN, below, potential, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 						target = below
 					else
 						below = potential
@@ -276,7 +276,7 @@
 			var/splatter_dir = dir
 			if(starting)
 				splatter_dir = get_dir(starting, target_loca)
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir, L.get_blood_type())
 			if(prob(33))
 				L.add_splatter_floor(target_loca)
 
@@ -546,7 +546,7 @@
  * Scan turf we're now in for anything we can/should hit. This is useful for hitting non dense objects the user
  * directly clicks on, as well as for PHASING projectiles to be able to hit things at all as they don't ever Bump().
  */
-/obj/projectile/Moved(atom/OldLoc, Dir)
+/obj/projectile/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!fired)
 		return
@@ -812,7 +812,7 @@
 		xo = targloc.x - curloc.x
 		setAngle(get_angle(src, targloc) + spread)
 
-	if(isliving(source) && modifiers)
+	if(isliving(source) && length(modifiers))
 		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, modifiers)
 		p_x = calculated[2]
 		p_y = calculated[3]

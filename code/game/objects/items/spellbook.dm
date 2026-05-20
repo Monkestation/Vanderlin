@@ -13,7 +13,7 @@
 	dropshrink = 0.6
 	drop_sound = 'sound/foley/dropsound/book_drop.ogg'
 	force = 5
-	associated_skill = /datum/skill/misc/reading
+	associated_skill = /datum/attribute/skill/misc/reading
 	name = "tome of the arcyne"
 	desc = "A crackling, glowing book, filled with runes and symbols that hurt the mind to stare at."
 	pages_to_mastery = 7
@@ -39,6 +39,7 @@
 	"Am I reading? Are these words, symbols or inane scribbles? I cannot be sure, yet with each one my eyes glaze over, I can feel the arcyne pulse within me...",
 	"A mystery is revealed before my very eyes. I do not read it, yet I am aware. Gems are the Root's natural arcyne energy, manifest. Perhaps I can use them to better my conceptualization...")
 	oneuse = FALSE
+	item_weight = 547 GRAMS
 	var/owner = null
 	var/list/allowed_readers = list()
 	var/stored_gem = FALSE
@@ -125,7 +126,7 @@
 	if(!picked)
 		var/list/designlist = list("green", "yellow", "brown")
 		var/mob/living/carbon/human/gamer = user
-		if(gamer.job == "Court Magician")
+		if(gamer.job == JOB_COURT_MAGE)
 			designlist = list("steel", "gem", "skin", "mimic")
 		var/the_time = world.time
 		var/design = input(user, "Select a design.","Spellbook Design") as null|anything in designlist
@@ -166,7 +167,7 @@
 		return
 	user.mind?.has_studied = TRUE
 	var/mob/living/reader = user
-	var/qualityoflearn = (reader.STAINT*2 + (user.get_skill_level(/datum/skill/misc/reading, TRUE)* 5) + (user.get_skill_level(/datum/skill/magic/arcane, TRUE)*5))
+	var/qualityoflearn = (GET_MOB_ATTRIBUTE_VALUE(reader, STAT_INTELLIGENCE)*2 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/reading)* 5) + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)*5))
 	if(reader.has_status_effect(/datum/status_effect/buff/weed))
 		to_chat(user, span_smallgreen("Swampweed truly does open one's third eye to the secrets of the arcyne..."))
 		qualityoflearn += 10
@@ -201,7 +202,7 @@
 	onlearned(user)
 	if(prob(55))
 		to_chat(user, span_notice("Confounded arcyne mysteries, my notes have gone in circles. I must sleep before I can bring myself to open this damned thing again..."))
-		user.mind?.add_sleep_experience(/datum/skill/misc/reading, reader.STAINT*10)
+		user.mind?.add_sleep_experience(/datum/attribute/skill/misc/reading, GET_MOB_ATTRIBUTE_VALUE(reader, STAT_INTELLIGENCE)*10)
 	to_chat(user, span_small("My notes include passages I've read before, but don't understand. I must sleep on their meaning..."))
 
 /obj/item/book/granter/spellbook/onlearned(mob/user)
@@ -299,7 +300,7 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/paper/scroll))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I add the first few pages to the leather cover..."))
@@ -315,7 +316,7 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/paper/scroll))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if(pages_left > 0)
 					playsound(src, 'sound/items/book_page.ogg', 100, TRUE)
@@ -343,7 +344,7 @@
 		return
 	if(istype(P, /obj/item/gem/violet))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if(isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -360,7 +361,7 @@
 			to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
 	if(istype(P, /obj/item/gem))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if(isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -379,7 +380,7 @@
 		var/obj/item/natural/stone/the_rock = P
 		if (the_rock.magic_power)
 			if(isturf(loc) && (found_table))
-				var/crafttime = ((130 - the_rock.magic_power) - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+				var/crafttime = ((130 - the_rock.magic_power) - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 				if(do_after(user, crafttime, target = src))
 					if (isarcyne(user))
 						playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -444,7 +445,7 @@
 			return ..()
 	else if (istype(P, /obj/item/natural/melded/t1))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -463,7 +464,7 @@
 		return ..()
 	else if (istype(P, /obj/item/natural/melded/t2))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -481,7 +482,7 @@
 					qdel(P)
 	else if (istype(P, /obj/item/natural/melded/t3))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -499,7 +500,7 @@
 					qdel(P)
 	else if (istype(P, /obj/item/natural/melded/t4))
 		if(isturf(loc) && (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				if (isarcyne(user))
 					playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
@@ -551,7 +552,7 @@
 		if(!stored_gem)
 			if(isarcyne(user))
 				var/obj/item/gem/gem = P
-				var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane, TRUE))*5))
+				var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 				if(do_after(user, crafttime, target = src))
 					playsound(src, 'sound/magic/glass.ogg', 100, TRUE)
 					to_chat(user, span_notice("Running my arcyne energy through this crystal, I imbue the tome with my natural essence, attuning it to my state of mind..."))

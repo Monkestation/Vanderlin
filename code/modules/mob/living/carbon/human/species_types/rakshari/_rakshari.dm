@@ -1,6 +1,14 @@
 /mob/living/carbon/human/species/rakshari
 	race = /datum/species/rakshari
 
+/datum/attribute_holder/sheet/job/species/rakshari
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_PERCEPTION = 2,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = 2,
+	)
+
 /datum/species/rakshari
 	name = "Rakshari"
 	id = SPEC_ID_RAKSHARI
@@ -31,8 +39,7 @@
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_KITTEN_MOM)
 
-	specstats_m = list(STATKEY_STR = -2, STATKEY_PER = 2, STATKEY_INT = 0, STATKEY_CON = -2, STATKEY_END = 0, STATKEY_SPD = 2, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -2, STATKEY_PER = 2, STATKEY_INT = 0, STATKEY_CON = -2, STATKEY_END = 0, STATKEY_SPD = 2, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/rakshari
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/rakshari.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/rakshari.dmi'
@@ -82,6 +89,7 @@
 	)
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/rakshari,

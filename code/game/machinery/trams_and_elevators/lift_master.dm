@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	new_lift_platform.lift_master_datum = src
 	LAZYADD(lift_platforms, new_lift_platform)
-	RegisterSignal(new_lift_platform, COMSIG_PARENT_QDELETING, PROC_REF(remove_lift_platforms))
+	RegisterSignal(new_lift_platform, COMSIG_QDELETING, PROC_REF(remove_lift_platforms))
 
 	check_for_landmarks(new_lift_platform)
 
@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	old_lift_platform.lift_master_datum = null
 	LAZYREMOVE(lift_platforms, old_lift_platform)
-	UnregisterSignal(old_lift_platform, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(old_lift_platform, COMSIG_QDELETING)
 	if(!length(lift_platforms))
 		qdel(src)
 
@@ -577,6 +577,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		horizontal_speed = 0.1
 		if(!platform.fake)
 			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
+			platform.RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 			platform.alpha = 0
 		for(var/atom/movable/movable in platform.lift_load)
 			if(ismob(movable))
@@ -593,6 +594,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			moving_platform.horizontal_speed = 0.1
 			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
+			moving_platform.RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 			moving_platform.alpha = 0
 
 /datum/lift_master/tram/proc/show_tram()
@@ -603,6 +605,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		horizontal_speed = 4
 		if(!platform.fake)
 			platform.obj_flags |= BLOCK_Z_OUT_DOWN
+			platform.AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 			platform.alpha = 255
 		for(var/atom/movable/movable in objects_pre_alpha)
 			movable.alpha = objects_pre_alpha[movable]
@@ -615,6 +618,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			moving_platform.horizontal_speed = 4
 			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
+			moving_platform.AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 			moving_platform.alpha = 255
 
 /datum/lift_master/tram/proc/try_process_order(fence = FALSE)
@@ -899,19 +903,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			if(istype(listed_atom, /obj/item/coin))
 				continue
-			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom.type))
+			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom))
 				continue
 
-			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price <= 0)
 				continue
 
 			total_coin_value += old_price
 			sold_count[initial(listed_atom.name)] += 1
 			sold_items[initial(listed_atom.name)] += old_price
-			SSmerchant.handle_selling(listed_atom.type)
+			SSmerchant.handle_selling(listed_atom)
 
-			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price != new_price)
 				SSmerchant.changed_sell_prices(listed_atom.type, old_price, new_price)
 
@@ -924,19 +928,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 					continue
 				if(istype(inside, /obj/item/coin))
 					continue
-				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside.type))
+				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside))
 					continue
 
-				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price <= 0)
 					continue
 
 				total_coin_value += old_inside_price
 				sold_count[initial(inside.name)] += 1
 				sold_items[initial(inside.name)] += old_inside_price
-				SSmerchant.handle_selling(inside.type)
+				SSmerchant.handle_selling(inside)
 
-				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price != new_inside_price)
 					SSmerchant.changed_sell_prices(inside.type, old_inside_price, new_inside_price)
 				qdel(inside)

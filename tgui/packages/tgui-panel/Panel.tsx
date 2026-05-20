@@ -43,7 +43,6 @@ export function Panel(props) {
               </Stack.Item>
               <Stack.Item>
                 <Button
-                  color="grey"
                   selected={audioVisible}
                   icon="music"
                   tooltip="Music player"

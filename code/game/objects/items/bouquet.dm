@@ -9,6 +9,7 @@
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 27 GRAMS
 
 /obj/item/bouquet/rosa
 	name = "rosa bouquet"
@@ -45,12 +46,19 @@
 
 	grid_width = 64
 	grid_height = 32
+	item_weight = 22 GRAMS
 
 /obj/item/clothing/head/flowercrown/rosa
 	name = "rosa crown"
 	desc = "A crown of rosas, often worn during weddings officiated by Eoran acolytes."
 	item_state = "rosa_crown"
 	icon_state = "rosa_crown"
+
+/obj/item/clothing/head/flowercrown/cursedrosa
+	name = "black briar rosa crown"
+	desc = ""
+	item_state = "cursedrosa_crown"
+	icon_state = "cursedrosa_crown"
 
 /obj/item/clothing/head/flowercrown/salvia
 	name = "salvia crown"

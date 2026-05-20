@@ -245,7 +245,7 @@
 					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
 						qdel(G)
 		stage_update()
-		attacking_shovel.heldclod = new(attacking_shovel)
+		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		is_consecrated = NOT_CONSECRATED // remove consecration levels
 

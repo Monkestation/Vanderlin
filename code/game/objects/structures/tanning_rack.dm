@@ -3,7 +3,7 @@
 	desc = "A drying rack for the preparation of food or curing of hides into leather, it can be moved with the help of a wooden stake."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "dryrack"
-	var/obj/item/natural/hide/hide
+	var/obj/item/stored_item
 	max_integrity = 200
 	density = TRUE
 	climbable = TRUE
@@ -14,54 +14,56 @@
 
 /obj/machinery/tanningrack/examine(mob/user)
 	. = ..()
-	if(hide)
-		. += span_warning("There is a piece of hide ready to be worked. I might need a knife for this.")
+	if(stored_item)
+		. += span_warning("There is a piece of [stored_item.name] ready to be worked. I might need a knife for this.")
 	if(!anchored)
 		. += span_warning("It is unanchored and able to be moved.")
 
 /obj/machinery/tanningrack/attack_hand(mob/user, list/modifiers)
-	if(hide)
-		var/obj/item/I = hide
-		hide = null
+	if(stored_item)
+		var/obj/item/I = stored_item
+		stored_item = null
 		I.loc = user.loc
 		user.put_in_active_hand(I)
 		update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/tanningrack/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(istype(I, /obj/item/natural/hide) && !istype(I, /obj/item/natural/hide/cured))
-		if(!hide)
+	if(istype(I, /obj/item/natural/hide) || istype(I, /obj/item/alch/sinew) && !istype(I, /obj/item/natural/hide/cured))
+		if(!stored_item)
 			I.forceMove(src)
-			hide = I
+			stored_item = I
 			update_appearance(UPDATE_OVERLAYS)
 			return
 		else
 			to_chat(user, span_warning("The rack is already occupied!"))
 			return
-	if((user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut) && hide)
+	if((user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut) && stored_item)
 		if(anchored)
-			var/skill_level = user.get_skill_level(/datum/skill/craft/tanning, TRUE)
+			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/tanning)
 			var/work_time = (12 SECONDS - (skill_level * 15))
 			var/pieces_to_spawn = rand(1, min(skill_level + 1, 6)) //Random number from 1 to skill level
 			var/sound_played = FALSE
-			to_chat(user, span_warning("I begin scraping the hide's skin..."))
+			to_chat(user, span_warning("I begin scraping [stored_item]..."))
 			if(!do_after(user, work_time))
 				return
 			playsound(src,pick('sound/items/book_open.ogg','sound/items/book_page.ogg'), 100, FALSE)
-			QDEL_NULL(hide)
-			user.mind.add_sleep_experience(/datum/skill/craft/tanning, user.STAINT * 2) //these numbers may need some revision
-			update_appearance(UPDATE_OVERLAYS)
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/tanning, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2) //these numbers may need some revision
 			for(var/i = 0; i < pieces_to_spawn; i++)
-				if(prob(skill_level + CLAMP((user.STALUC - 10)*2,0,100)))
+				if(prob(skill_level + CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100)))
 					new /obj/item/natural/cured/essence(get_turf(user))
 					if(!sound_played)
 						sound_played = TRUE
 						to_chat(user, span_warning("Dendor provides..."))
 						playsound(src,pick('sound/items/gem.ogg'), 100, FALSE)
-				else
+				if(istype(stored_item, /obj/item/natural/hide))
 					new /obj/item/natural/hide/cured(get_turf(user))
+				else if (istype(stored_item, /obj/item/alch/sinew))
+					new /obj/item/natural/fibers/sinew(get_turf(user))
+			QDEL_NULL(stored_item)
+			update_appearance(UPDATE_OVERLAYS)
 			return
 		else
-			to_chat(user, span_warning("I need to anchor this down with a wooden stake before I can work this hide."))
+			to_chat(user, span_warning("I need to anchor this down with a wooden stake before I can work this [stored_item.name]."))
 			return
 	if(istype(I, /obj/item/grown/log/tree/stake))
 		if(anchored)
@@ -76,9 +78,9 @@
 
 /obj/machinery/tanningrack/update_overlays()
 	. = ..()
-	if(!hide)
+	if(!stored_item)
 		return
-	var/obj/item/I = hide
+	var/obj/item/I = stored_item
 	I.pixel_x = I.base_pixel_x
 	I.pixel_y = I.base_pixel_y
 	var/mutable_appearance/M = new /mutable_appearance(I)

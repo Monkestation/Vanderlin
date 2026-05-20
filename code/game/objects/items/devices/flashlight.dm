@@ -14,6 +14,7 @@
 	light_power = 1
 	slot_flags = ITEM_SLOT_HIP
 	possible_item_intents = list(INTENT_GENERIC)
+	item_weight = 125 GRAMS
 	var/on = FALSE
 
 /obj/item/flashlight/Initialize()
@@ -188,6 +189,7 @@
 		turn_off()
 
 /obj/item/flashlight/flare/torch/extinguish()
+	. = ..()
 	if(on && prob(extinguish_prob))
 		turn_off()
 
@@ -276,6 +278,7 @@
 	extinguish_prob = 10
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	item_weight = 400 GRAMS
 
 /obj/item/flashlight/flare/torch/lantern/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
@@ -315,6 +318,7 @@
 	extinguish_prob = 0
 	melting_material = /datum/material/bronze
 	melt_amount = 75
+	item_weight = 453 GRAMS
 
 /obj/item/flashlight/flare/torch/lantern/copper
 	name = "copper lamptern"
@@ -331,6 +335,7 @@
 	extinguish_prob = 15
 	melting_material = /datum/material/copper
 	melt_amount = 75
+	item_weight = 375 GRAMS
 
 /obj/item/flashlight/flare/torch/lantern/copper/getonmobprop(tag)
 	. = ..()

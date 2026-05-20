@@ -32,6 +32,7 @@ var sdql2 = [];
 var permanent_tabs = []; // tabs that won't be cleared by wipes
 var imageRetryDelay = 500;
 var imageRetryLimit = 50;
+var topbar = document.getElementById("topbar");
 var menu = document.getElementById("menu");
 var statcontentdiv = document.getElementById("statcontent");
 var storedimages = [];
@@ -42,6 +43,42 @@ var split_admin_tabs = false;
 // a command has already taken focus for itself.
 function run_after_focus(callback) {
   setTimeout(callback, 0);
+}
+
+document.addEventListener("mouseup", restoreFocus);
+document.addEventListener("keyup", restoreFocus);
+
+window.onload = function () {
+  Byond.sendMessage("Update-Verbs");
+};
+
+function buildTopButtons() {
+  var names = {
+    "Changelog" : "changelog",
+    "Rules" : "rules",
+    "Wiki" : "wiki",
+    "GitHub" : "github",
+    "Report Issue" : "report-issue",
+  }
+
+  for(var name in names) {
+    createButton(name, names[name]);
+  }
+}
+
+function createButton(name, command) {
+  var button = document.createElement("DIV");
+
+  button.id = command;
+  button.textContent = name;
+  button.className = "top-item";
+  button.style.order = name.charCodeAt(0);
+
+  button.onclick = function () {
+    Byond.command(command);
+  }
+
+  topbar.appendChild(button);
 }
 
 function createStatusTab(name) {
@@ -676,17 +713,10 @@ function init_spells() {
   }
 }
 
-document.addEventListener("mouseup", restoreFocus);
-document.addEventListener("keyup", restoreFocus);
-
 if (!current_tab) {
   addPermanentTab("Status");
   tab_change("Status");
 }
-
-window.onload = function () {
-  Byond.sendMessage("Update-Verbs");
-};
 
 Byond.subscribeTo("update_spells", function (payload) {
   spell_tabs = payload.spell_tabs;
@@ -855,6 +885,22 @@ Byond.subscribeTo("update_tickets", function (T) {
     draw_tickets();
   }
 });
+
+Byond.subscribeTo("build_topbar", buildTopButtons);
+
+Byond.subscribeTo("unread_changelog", () => {
+  const changelog = document.getElementById("changelog");
+  if(changelog) {
+    changelog.className = "top-item unread";
+  }
+})
+
+Byond.subscribeTo("read_changelog", () => {
+  const changelog = document.getElementById("changelog");
+  if(changelog) {
+    changelog.className = "top-item";
+  }
+})
 
 Byond.subscribeTo("remove_sdql2", remove_sdql2);
 

@@ -249,7 +249,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += print_culinary_page(user)
 	var/datum/browser/popup = new(user, "culinary_customization", "<div align='center'>Culinary Preferences</div>", 360, 365)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/apply_culinary_preferences(mob/living/carbon/human/character)
 	if(!culinary_preferences)
@@ -298,7 +298,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/title = (preference_type == CULINARY_FAVOURITE_FOOD) ? "Select Favourite Food" : "Select Hated Food"
 	var/datum/browser/popup = new(user, "food_selection", "<div align='center'>[title]</div>", 400, 600)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/show_drink_selection_ui(mob/user, preference_type)
 	if(culinary_preferences[CULINARY_RANDOM_PREFERENCES])
@@ -333,7 +333,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/title = (preference_type == CULINARY_FAVOURITE_DRINK) ? "Select Favourite Drink" : "Select Hated Drink"
 	var/datum/browser/popup = new(user, "drink_selection", "<div align='center'>[title]</div>", 400, 600)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /proc/cmp_food_by_faretype_and_name(list/a, list/b)
 	var/faretype_a = a["faretype"]

@@ -8,16 +8,16 @@
 		return
 
 	unregister_triggers()
-	registered_signals += COMSIG_MOB_ADD_STRESS
-	RegisterSignal(target, COMSIG_MOB_ADD_STRESS, PROC_REF(on_stress_add))
+	registered_signals += COMSIG_CARBON_ADD_STRESS
+	RegisterSignal(target, COMSIG_CARBON_ADD_STRESS, PROC_REF(on_stress_add))
 
 /datum/chimeric_node/input/stress/proc/on_stress_add(datum/source, datum/stress_event/event)
 	SIGNAL_HANDLER
 	if(stress_needed > 0)
-		if(stress_needed > event.get_stress())
+		if(stress_needed > event.get_stress(src))
 			return FALSE
 	else
-		if(stress_needed < event.get_stress())
+		if(stress_needed < event.get_stress(src))
 			return FALSE
 	var/potency = node_purity / 100
 	trigger_output(potency)

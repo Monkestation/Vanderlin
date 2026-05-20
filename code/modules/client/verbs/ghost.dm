@@ -4,8 +4,7 @@
 
 	if(!isobserver(usr))
 		return
-
-	ghost_up()
+	up()
 
 /mob/dead/observer/verb/ghost_downward()
 	set name = "Ghost Down"
@@ -13,9 +12,7 @@
 
 	if(!isobserver(usr))
 		return
-
-	ghost_down()
-
+	down()
 
 /mob/verb/descend_to_underworld()
 	set name = "Journey to the Underworld"
@@ -60,6 +57,7 @@
 		to_chat(client, span_biginfo("Necra has guaranteed your passage to the next life. Your toll has been already paid."))
 
 	var/area/underworld/underworld = get_area(spawn_loc)
+
 	underworld.Entered(live_spirit, null)
 
 /mob/proc/can_enter_underworld()

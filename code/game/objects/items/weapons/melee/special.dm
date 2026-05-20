@@ -15,7 +15,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = FIRE_PROOF|LAVA_PROOF|ACID_PROOF // Nigh indestructible due to how important it is
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	smeltresult = null // No
 	melting_material = null
 	swingsound = BLUNTWOOSH_MED
@@ -25,6 +25,7 @@
 
 	grid_height = 96
 	grid_width = 32
+	item_weight = 800 GRAMS
 
 /datum/intent/lordbash
 	name = "bash"
@@ -69,13 +70,13 @@
 		var/mob/living/carbon/human/HU = user
 
 		if(!is_lord_job(HU.mind?.assigned_role))
-			to_chat(user, "<span class='danger'>The rod doesn't obey me.</span>")
+			to_chat(user, span_danger("The rod doesn't obey me."))
 			return
 
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 
-			user.visible_message("<span class='warning'>[user] points [src] at [target].</span>")
+			user.visible_message(span_warning("[user] points [src] at [target].</span>"))
 
 			if(H == HU)
 				return
@@ -117,6 +118,95 @@
 				COOLDOWN_START(src, scepter, 10 SECONDS)
 				return
 
+//................ Staff of the Testimonium ............... //
+/obj/item/weapon/polearm/woodstaff/aries
+	name = "staff of the testimonium"
+	desc = "A symbolic staff, granted to enlightened acolytes who have achieved and bear witnessed to the miracles of the Gods."
+	icon_state = "aries"
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	resistance_flags = FIRE_PROOF // Leniency for unique items
+	dropshrink = 0.6
+	sellprice = 100
+	possible_item_intents = list(POLEARM_BASH, /datum/intent/priest_smite, /datum/intent/priest_silence)
+	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood)
+	var/static/list/rod_jobs_priest = null
+	COOLDOWN_DECLARE(staff)
+	item_weight = 1.2 KILOGRAMS
+
+/datum/intent/priest_smite
+	name = "smite"
+	blade_class = null
+	icon_state = "inuse"
+	tranged = TRUE
+	noaa = TRUE
+
+/datum/intent/priest_silence
+	name = "silence"
+	blade_class = null
+	icon_state = "inuse"
+	tranged = TRUE
+	noaa = TRUE
+
+/obj/item/weapon/polearm/woodstaff/aries/afterattack(atom/target, mob/user, flag)
+	. = ..()
+	if(get_dist(user, target) > 7)
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+
+
+	if(!ishuman(user))
+		return
+
+	var/mob/living/carbon/human/HU = user
+
+	if(!is_priest_job(HU.mind?.assigned_role))
+		to_chat(user, span_danger("The staff doesn't obey me."))
+		return
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+
+		user.visible_message(span_warning("[user] points [src] at [target]."))
+
+		if(H == HU)
+			return
+
+		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
+			return
+
+		if(!rod_jobs_priest)
+			rod_jobs_priest = GLOB.church_positions | list(
+			/datum/job/monk::title,
+			/datum/job/templar::title,
+			/datum/job/churchling::title,
+			/datum/job/undertaker::title,
+			/datum/job/gmtemplar,
+			)
+
+		if(!((H.mind?.assigned_role.title in rod_jobs_priest)))
+			return
+
+		if(!COOLDOWN_FINISHED(src, staff))
+			to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+			return
+
+		if(istype(user.used_intent, /datum/intent/priest_smite))
+			HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
+			user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+			playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+			H.electrocute_act(5, src)
+			HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
+			to_chat(H, span_danger("I'm smitten by the staff!"))
+			COOLDOWN_START(src, staff, 20 SECONDS)
+			return
+
+		if(istype(user.used_intent, /datum/intent/priest_silence))
+			HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+			H.set_silence(20 SECONDS)
+			HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+			to_chat(H, span_danger("I'm silenced by the staff!"))
+			COOLDOWN_START(src, staff, 10 SECONDS)
+
 /obj/item/weapon/mace/stunmace
 	name = "stunmace"
 	icon = 'icons/roguetown/weapons/32/special.dmi'
@@ -129,6 +219,7 @@
 	possible_item_intents = list(/datum/intent/mace/strike/stunner, /datum/intent/mace/smash/stunner)
 	gripped_intents = null
 	minstr = 5
+	item_weight = 1.2 KILOGRAMS
 	w_class = WEIGHT_CLASS_NORMAL
 	var/charge = 100
 	var/on = FALSE
@@ -159,7 +250,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/mace/stunmace/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
+/obj/item/weapon/mace/stunmace/funny_attack_effects(mob/living/target, mob/living/user)
 	. = ..()
 	if(on)
 		target.electrocute_act(5, src)
@@ -214,6 +305,7 @@
 		playsound(src, pick('sound/items/stunmace_toggle (1).ogg','sound/items/stunmace_toggle (2).ogg','sound/items/stunmace_toggle (3).ogg'), 100, TRUE)
 
 /obj/item/weapon/mace/stunmace/extinguish()
+	. = ..()
 	if(on)
 		var/mob/living/user = loc
 		if(istype(user))
@@ -268,17 +360,19 @@
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	thrown_bclass = BCLASS_CUT
 	melting_material = /datum/material/steel
 	melt_amount = 75
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
 	name = "psydonian katar"
 	desc = "An exotic weapon taken from the hands of wandering monks, an esoteric design to the Grenzelhoftian nation. Special care was taken into account towards the user's knuckles: silver-tipped steel from tip to edges, and His holy cross reinforcing the heart of the weapon, with curved shoulders to allow its user to deflect incoming blows - provided they lead it in with the blade."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psykatar"
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver
@@ -289,6 +383,7 @@
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
+	item_weight = 350 GRAMS
 
 /datum/intent/knuckles/strike
 	name = "punch"
@@ -331,12 +426,15 @@
 	parrysound = list('sound/combat/parry/pugilism/unarmparry (1).ogg','sound/combat/parry/pugilism/unarmparry (2).ogg','sound/combat/parry/pugilism/unarmparry (3).ogg')
 	sharpness = IS_BLUNT
 	swingsound = list('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	associated_skill = /datum/attribute/skill/combat/unarmed
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	grid_width = 64
 	grid_height = 32
+
+	weapon_special = /datum/special_intent/upper_cut
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knuckles/getonmobprop(tag)
 	. = ..()
@@ -352,6 +450,7 @@
 	desc = "A simple piece of harm molded in a holy mixture of steel and silver, finished with three stumps - Psydon's crown - to crush the heretics' garments and armor into smithereens."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
@@ -363,3 +462,4 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eoraknuckle"
 	force = DAMAGE_KNUCKLES + 2
+	item_weight = 200 GRAMS

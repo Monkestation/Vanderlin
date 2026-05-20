@@ -77,7 +77,7 @@
 	var/datum/targetting_datum/targetting = controller.blackboard[BB_TARGETTING_DATUM]
 	var/list/possible_regen_spots = list()
 	for(var/turf/T in orange(10, flesh))
-		if((T.opacity || T.get_lumcount() < 0.3))
+		if((IS_OPAQUE_TURF(T) || T.get_lumcount() < 0.3))
 			if(!flesh.CanReach(T))
 				continue
 

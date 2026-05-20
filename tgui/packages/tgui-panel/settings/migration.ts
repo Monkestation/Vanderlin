@@ -77,7 +77,7 @@ export function startSettingsMigration(next: MergedSettings): void {
       ...defaultSettings,
       initialized: true,
     };
-    storage.set('panel-settings', initialized);
+    storage.set('rogue-panel-settings', initialized);
     store.set(settingsAtom, initialized);
     console.log('Initialized settings with defaults.');
     return;
@@ -104,7 +104,7 @@ export function startSettingsMigration(next: MergedSettings): void {
 
   // Just exit if no valid version was found
   if (!next.version) {
-    storage.set('panel-settings', { ...draftSettings, ...migratedHighlights });
+    storage.set('rogue-panel-settings', { ...draftSettings, ...migratedHighlights });
     return;
   }
 

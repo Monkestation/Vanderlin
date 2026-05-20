@@ -5,7 +5,7 @@
 	sound = 'sound/magic/soulsteal.ogg'
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "O'veta tela" // incantation in zizo chant
 	invocation_type = INVOCATION_WHISPER
 	charge_required = FALSE
@@ -20,7 +20,7 @@
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
-	aoe_radius = initial(aoe_radius) + owner.get_skill_level(associated_skill)
+	aoe_radius = initial(aoe_radius) + GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
 
 /datum/action/cooldown/spell/aoe/snuff/cast_on_thing_in_aoe(atom/victim, atom/caster)
 	if(isobj(victim))

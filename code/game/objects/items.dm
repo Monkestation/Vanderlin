@@ -31,6 +31,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/inhand_x_dimension = 64
 	var/inhand_y_dimension = 64
 
+	var/flags_ai_inventory = NONE
+
 	var/no_effect = FALSE
 
 	max_integrity = 200
@@ -119,6 +121,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/tool_behaviour = NONE
 	var/toolspeed = 1
+
+	/// Organ storage component requires this
+	var/atom/stored_in
 
 	var/block_chance = 0
 	//If you want to have something unrelated to blocking/armour piercing etc. Maybe not needed, but trying to think ahead/allow more freedom
@@ -258,6 +263,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/grid_width
 	/// Height we occupy on the hud - Keep null to generate based on w_class
 	var/grid_height
+	///this is used to see how many times we've been repaired via melding
+	var/integrity_restores = 0
 	///our melting material, basically if exists this is what we melt into in a crucible
 	var/datum/material/melting_material
 	///our metling amount
@@ -289,18 +296,134 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
+	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
+	var/toggle_state
 
-	var/toggle_state // Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
+/obj/item/Initialize(mapload)
+	if (attack_verb)
+		attack_verb = typelist("attack_verb", attack_verb)
 
-/obj/item/proc/set_quality(quality)
-	recipe_quality = clamp(quality, 0, 4)
-	update_appearance(UPDATE_OVERLAYS)
-	if(recipe_quality >= 3) // gold tier and above
-		AddComponent(/datum/component/particle_spewer/sparkle)
+	if(experimental_inhand)
+		var/props2gen = list("gen")
+		var/list/prop
+		if(force_wielded || gripped_intents)
+			props2gen += "wielded"
+		for(var/i in props2gen)
+			prop = getonmobprop(i)
+			if(prop)
+				getmoboverlay(i,prop,behind=FALSE,mirrored=FALSE)
+				getmoboverlay(i,prop,behind=TRUE,mirrored=FALSE)
+				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
+				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
+
+	if(experimental_onhip)
+		if(slot_flags & ITEM_SLOT_BELT)
+			var/i = "onbelt"
+			var/list/prop = getonmobprop(i)
+			if(prop)
+				getmoboverlay(i,prop,behind=FALSE,mirrored=FALSE)
+				getmoboverlay(i,prop,behind=TRUE,mirrored=FALSE)
+				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
+				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
+
+	if(experimental_onback)
+		if(slot_flags & ITEM_SLOT_BACK)
+			var/i = "onback"
+			var/list/prop = getonmobprop(i)
+			if(prop)
+				getmoboverlay(i,prop,behind=FALSE,mirrored=FALSE)
+				getmoboverlay(i,prop,behind=TRUE,mirrored=FALSE)
+				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
+				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
+
+	. = ..()
+	// Handle adding item associated actions
+	for(var/path in actions_types)
+		add_item_action(path)
+
+	actions_types = null
+
+	if(force_string)
+		item_flags |= FORCE_STRING_OVERRIDE
+
+	if(!hitsound)
+		if(damtype == "fire")
+			hitsound = list('sound/blank.ogg')
+		if(damtype == "brute")
+			hitsound = list("swing_hit")
+
+	if (!embedding)
+		embedding = getEmbeddingBehavior()
+	else if (islist(embedding))
+		embedding = getEmbeddingBehavior(arglist(embedding))
+	else if (!istype(embedding, /datum/embedding_behavior))
+		stack_trace("Invalid type [embedding.type] found in .embedding during /obj/item Initialize()")
+
+	if(sharpness) //give sharp objects butchering functionality, for consistency
+		AddComponent(/datum/component/butchering, 80 * toolspeed)
 	else
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+		max_blade_int = 0
+		blade_int = 0
+
+	//Randomizes blade sharpness on initialize to between 60-100%
+	if(max_blade_int && !blade_int)
+		blade_int = max_blade_int
+		if(randomize_blade_int)
+			blade_int += rand(-(max_blade_int * 0.4), 0)
+
+	if(!pixel_x && !pixel_y && !bigboy)
+		pixel_x = rand(-5,5)
+		pixel_y = rand(-5,5)
+
+	// Initalize addon for the var for custom inhands 32x32.
+	if(!experimental_inhand)
+		inhand_x_dimension = 32
+		inhand_y_dimension = 32
+
+	if(grid_width <= 0)
+		grid_width = (w_class * world.icon_size)
+	if(grid_height <= 0)
+		grid_height = (w_class * world.icon_size)
+
+	if(uses_lord_coloring)
+		if(GLOB.lordprimary && GLOB.lordsecondary)
+			lordcolor()
+		else
+			RegisterSignal(SSdcs, COMSIG_LORD_COLORS_SET, TYPE_PROC_REF(/obj/item, lordcolor))
+	else if(get_detail_color()) // Lord color does this
+		update_appearance(UPDATE_OVERLAYS)
+
+	if(slot_flags)
+		AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
+
+	update_transform()
+	apply_components()
+
+/obj/item/Destroy()
+	item_flags &= ~DROPDEL	//prevent reqdels
+	if(ismob(loc))
+		var/mob/m = loc
+		m.temporarilyRemoveItemFromInventory(src, TRUE)
+
+	// Handle cleaning up our actions list
+	for(var/datum/action/action as anything in actions)
+		remove_item_action(action)
+
+	if(is_embedded)
+		if(isbodypart(loc))
+			var/obj/item/bodypart/embedded_part = loc
+			embedded_part.remove_embedded_object(src)
+		else if(isliving(loc))
+			var/mob/living/embedded_mob = loc
+			embedded_mob.simple_remove_embedded_object(src)
+	if(artrecipe)
+		QDEL_NULL(artrecipe)
+	if(istype(loc, /obj/machinery/artificer_table))
+		var/obj/machinery/artificer_table/A = loc
+		A.material = null
+		A.update_appearance(UPDATE_OVERLAYS)
+	return ..()
+
 
 /obj/item/update_overlays()
 	. = ..()
@@ -395,127 +518,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				B.generate_appearance()
 				B.apply()
 
-/obj/item/Initialize(mapload)
-	if (attack_verb)
-		attack_verb = typelist("attack_verb", attack_verb)
-
-	if(experimental_inhand)
-		var/props2gen = list("gen")
-		var/list/prop
-		if(force_wielded || gripped_intents)
-			props2gen += "wielded"
-		for(var/i in props2gen)
-			prop = getonmobprop(i)
-			if(prop)
-				getmoboverlay(i,prop,behind=FALSE,mirrored=FALSE)
-				getmoboverlay(i,prop,behind=TRUE,mirrored=FALSE)
-				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
-				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
-
-	if(experimental_onhip)
-		if(slot_flags & ITEM_SLOT_BELT)
-			var/i = "onbelt"
-			var/list/prop = getonmobprop(i)
-			if(prop)
-				getmoboverlay(i,prop,behind=FALSE,mirrored=FALSE)
-				getmoboverlay(i,prop,behind=TRUE,mirrored=FALSE)
-				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
-				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
-
-	if(experimental_onback)
-		if(slot_flags & ITEM_SLOT_BACK)
-			var/i = "onback"
-			var/list/prop = getonmobprop(i)
-			if(prop)
-				getmoboverlay(i,prop,behind=FALSE,mirrored=FALSE)
-				getmoboverlay(i,prop,behind=TRUE,mirrored=FALSE)
-				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
-				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
-
-	. = ..()
-	// Handle adding item associated actions
-	for(var/path in actions_types)
-		add_item_action(path)
-
-	actions_types = null
-
-	if(force_string)
-		item_flags |= FORCE_STRING_OVERRIDE
-
-	if(!hitsound)
-		if(damtype == "fire")
-			hitsound = list('sound/blank.ogg')
-		if(damtype == "brute")
-			hitsound = list("swing_hit")
-
-	if (!embedding)
-		embedding = getEmbeddingBehavior()
-	else if (islist(embedding))
-		embedding = getEmbeddingBehavior(arglist(embedding))
-	else if (!istype(embedding, /datum/embedding_behavior))
-		stack_trace("Invalid type [embedding.type] found in .embedding during /obj/item Initialize()")
-
-	if(sharpness) //give sharp objects butchering functionality, for consistency
-		AddComponent(/datum/component/butchering, 80 * toolspeed)
-	else
-		max_blade_int = 0
-		blade_int = 0
-
-	//Randomizes blade sharpness on initialize to between 60-100%
-	if(max_blade_int && !blade_int)
-		blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
-
-
-	if(!pixel_x && !pixel_y && !bigboy)
-		pixel_x = rand(-5,5)
-		pixel_y = rand(-5,5)
-
-	// Initalize addon for the var for custom inhands 32x32.
-	if(!experimental_inhand)
-		inhand_x_dimension = 32
-		inhand_y_dimension = 32
-
-	if(grid_width <= 0)
-		grid_width = (w_class * world.icon_size)
-	if(grid_height <= 0)
-		grid_height = (w_class * world.icon_size)
-
-	if(uses_lord_coloring)
-		if(GLOB.lordprimary && GLOB.lordsecondary)
-			lordcolor()
-		else
-			RegisterSignal(SSdcs, COMSIG_LORD_COLORS_SET, TYPE_PROC_REF(/obj/item, lordcolor))
-	else if(get_detail_color()) // Lord color does this
-		update_appearance(UPDATE_OVERLAYS)
-
-	update_transform()
-	apply_components()
-
-/obj/item/Destroy()
-	item_flags &= ~DROPDEL	//prevent reqdels
-	if(ismob(loc))
-		var/mob/m = loc
-		m.temporarilyRemoveItemFromInventory(src, TRUE)
-
-	// Handle cleaning up our actions list
-	for(var/datum/action/action as anything in actions)
-		remove_item_action(action)
-
-	if(is_embedded)
-		if(isbodypart(loc))
-			var/obj/item/bodypart/embedded_part = loc
-			embedded_part.remove_embedded_object(src)
-		else if(isliving(loc))
-			var/mob/living/embedded_mob = loc
-			embedded_mob.simple_remove_embedded_object(src)
-	if(artrecipe)
-		QDEL_NULL(artrecipe)
-	if(istype(loc, /obj/machinery/artificer_table))
-		var/obj/machinery/artificer_table/A = loc
-		A.material = null
-		A.update_appearance(UPDATE_OVERLAYS)
-	return ..()
-
 /// Called when an action associated with our item is deleted
 /obj/item/proc/on_action_deleted(datum/source)
 	SIGNAL_HANDLER
@@ -539,7 +541,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		CRASH("item add_item_action got a type or instance of something that wasn't an action.")
 
 	LAZYADD(actions, action)
-	RegisterSignal(action, COMSIG_PARENT_QDELETING, PROC_REF(on_action_deleted))
+	RegisterSignal(action, COMSIG_QDELETING, PROC_REF(on_action_deleted))
 	if(ismob(loc))
 		// We're being held or are equipped by someone while adding an action?
 		// Then they should also probably be granted the action, given it's in a correct slot
@@ -553,7 +555,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!action)
 		return
 
-	UnregisterSignal(action, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(action, COMSIG_QDELETING)
 	LAZYREMOVE(actions, action)
 	qdel(action)
 
@@ -713,22 +715,34 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return
 
-	if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
-		return
+	if(stored_in)
+		if(SEND_SIGNAL(stored_in, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
+			return
+	else
+		if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
+			return
 
 	if(!ontable() && isturf(loc))
-		if(!do_after(user, 3 DECISECONDS, src))
-			return
+		if(stored_in)
+			if(!do_after(user, 3 DECISECONDS, stored_in))
+				return
+		else
+			if(!do_after(user, 3 DECISECONDS, src))
+				return
 
 	//If the item is in a storage item, take it out
 	var/outside_storage = !(item_flags & IN_STORAGE)
 	var/turf/storage_turf
-	if(!outside_storage)
+	if(!outside_storage || stored_in)
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
-			return
+		if(stored_in)
+			if(!SEND_SIGNAL(stored_in, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+				return
+		else
+			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+				return
 	if(QDELETED(src)) //moving it out of the storage destroyed it.
 		return
 
@@ -765,7 +779,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				C.visible_message(span_smallnotice("[C] starts taking off [src]..."), span_smallnotice("I start taking off [src]..."))
 
 			var/doafter_flags = edelay_type ? (IGNORE_USER_LOC_CHANGE) : (NONE)
-			return do_after(C, minone(unequip_delay_self-C.STASPD), timed_action_flags = doafter_flags)
+			return do_after(C, minone(unequip_delay_self-GET_MOB_ATTRIBUTE_VALUE(C, STAT_SPEED)), timed_action_flags = doafter_flags)
 
 	return TRUE
 
@@ -825,13 +839,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			animate(src, pixel_y = oldy, time = 0.5)
 	item_flags &= ~IN_INVENTORY
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED,user)
+	SEND_SIGNAL(user, COMSIG_MOB_DROPITEM,src)
 	if(!silent)
 		playsound(src, drop_sound, DROP_SOUND_VOLUME, TRUE, ignore_walls = FALSE)
 	toggle_altgrip(user, FALSE)
 	user.update_equipment_speed_mods()
-	if(isliving(user))
-		var/mob/living/living_user = user
-		living_user.encumbrance_to_speed()
 	update_transform()
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -849,15 +861,44 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTER_PICKUP, user)
 
-	if(isliving(user))
-		var/mob/living/L = user
-		L.encumbrance_to_speed()
-
 /obj/item/proc/afterdrop(mob/user)
 
 // called when "found" in pockets and storage items. Returns 1 if the search should end.
 /obj/item/proc/on_found(mob/finder)
 	return
+
+/obj/item/proc/get_carry_weight(atom/carrier)
+	. = item_weight
+	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
+	if(storage)
+		var/modifier = 1
+		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+			modifier = 0.5
+		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
+
+/obj/item/clothing/get_carry_weight(atom/carrier)
+	switch(armor_class)
+		if(AC_HEAVY)
+			if(carrier && !HAS_TRAIT(carrier, TRAIT_HEAVYARMOR))
+				. = item_weight * 2
+			else
+				. = item_weight
+		if(AC_MEDIUM)
+			if(carrier && !HAS_TRAIT(carrier, TRAIT_MEDIUMARMOR))
+				. = item_weight * 2
+			else
+				. = item_weight
+		if(AC_LIGHT)
+			. = item_weight
+		else
+			. = item_weight
+
+	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
+	if(storage)
+		var/modifier = 1
+		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+			modifier = 0.5
+		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
 
 // called after an item is placed in an equipment slot
 // user is mob that equipped it
@@ -985,7 +1026,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		)
 	if(is_human_victim)
 		var/mob/living/carbon/human/U = M
-		U.apply_damage(7, BRUTE, affecting)
+		U.apply_damage(7, BRUTE, affecting, damage_type = BCLASS_STAB)
 
 	else
 		M.take_bodypart_damage(7)
@@ -1245,7 +1286,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(tool_behaviour == TOOL_MINING && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		skill_modifier = H.get_skill_speed_modifier(/datum/skill/labor/mining)
+		skill_modifier = GET_MOB_SKILL_SPEED_MOD(H, /datum/attribute/skill/labor/mining)
 
 	delay *= toolspeed * skill_modifier
 
@@ -1340,6 +1381,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return TRUE
 
 /obj/item/proc/canStrip(mob/stripper, mob/owner)
+	if(HAS_TRAIT(loc, TRAIT_STUCKITEMS))
+		return FALSE
+	if(HAS_TRAIT(loc, TRAIT_HIGHVALUE_STUCK))
+		if(melting_material == /datum/material/steel)
+			return FALSE
+		if(item_flags & HIGH_VALUE)
+			return FALSE
+
 	return !HAS_TRAIT(src, TRAIT_NODROP)
 
 /obj/item/proc/doStrip(mob/stripper, mob/owner)
@@ -1355,7 +1404,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/proc/on_unwield(obj/item/source, mob/living/carbon/user)
 	wdefense -= 1
-	user.update_a_intents()
+	user?.update_a_intents()
+
+/obj/item/proc/is_wielded()
+	var/datum/component/two_handed/two_handed = GetComponent(/datum/component/two_handed)
+	return two_handed?.wielded
 
 /obj/item/proc/toggle_altgrip(mob/user, override_state)
 	if(!alt_intents)
@@ -1372,22 +1425,31 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			to_chat(user, span_notice("I wield [src] normally."))
 
-/obj/item/on_fall_impact(mob/living/impactee, fall_speed)
+/obj/item/onZImpact(turf/impacted_turf, levels, impact_flags)
 	. = ..()
-	if(!item_weight)
+
+	var/mass_kg = get_carry_weight()
+	if(!mass_kg)
+		return
+
+	var/mob/living/carbon/human/impactee = locate(/mob/living/carbon/human) in impacted_turf
+	if (isnull(impactee))
 		return
 
 	var/target_zone = BODY_ZONE_HEAD
-	/*
-	if(impactee.lying)
+	if(impactee.body_position == LYING_DOWN)
 		target_zone = BODY_ZONE_CHEST
-	*/
-	playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	// playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	add_blood_DNA(GET_ATOM_BLOOD_DNA(impactee))
-	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("A [src] hits you in your [target_zone]!"))
-	impactee.apply_damage(item_weight * fall_speed, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt", damage = item_weight * fall_speed))
+	var/fall_factor = sqrt(max(levels, 1))
+	var/impact_damage = mass_kg * fall_factor * FALL_DAMAGE_SCALE
+	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("[src] hits you in your [target_zone]!"))
+	impactee.apply_damage(impact_damage, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt"))
 
 /obj/item/proc/on_consume(mob/living/eater)
+	return
+
+/obj/item/proc/on_anti_consume(mob/living/eater)
 	return
 
 /obj/item/proc/get_displayed_price(mob/user)
@@ -1420,6 +1482,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(ismob(loc))
 		update_slot_icon()
+	if(clean_types & CLEAN_WASH)
+		set_germ_level(GERM_LEVEL_STERILE)
 
 /obj/item/proc/do_pickup_animation(atom/target, turf/source)
 	set waitfor = FALSE
@@ -1428,7 +1492,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(!istype(loc, /turf))
 			return
 		source = loc
-	var/image/pickup_animation = image(icon = src, layer = layer + 0.1)
+	var/mutable_appearance/pickup_animation = mutable_appearance(icon, icon_state, layer = layer + 0.1)
 	pickup_animation.plane = GAME_PLANE
 	pickup_animation.transform.Scale(0.75)
 	pickup_animation.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
@@ -1509,7 +1573,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(!get_precursor_data(src))
 		return
-	var/alch_skill = user.get_skill_level(/datum/skill/craft/alchemy)
+	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60
 	var/datum/natural_precursor/precursor = get_precursor_data(src)
 	if(precursor)
 		for(var/datum/thaumaturgical_essence/essence as anything in precursor.essence_yields)
@@ -1528,3 +1592,22 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
+/obj/item/proc/set_quality(quality)
+	recipe_quality = clamp(quality, 0, 4)
+	update_appearance(UPDATE_OVERLAYS)
+	if(recipe_quality >= 3) // gold tier and above
+		AddComponent(/datum/component/particle_spewer/sparkle)
+	else
+		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
+		if(particle_spewer)
+			particle_spewer.RemoveComponent()
+
+/obj/item/atom_break(damage_flag, silent)
+	. = ..()
+
+	if(!ismob(loc))
+		return
+
+	if(!silent)
+		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))

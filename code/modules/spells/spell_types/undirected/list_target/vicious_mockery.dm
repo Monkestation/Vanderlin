@@ -8,8 +8,8 @@
 	invocation = "Your mother was a hampster and your father smelt of elderberries!"
 
 	spell_type = NONE
-	associated_skill = /datum/skill/misc/music
-	associated_stat = STATKEY_INT
+	associated_skill = /datum/attribute/skill/misc/music
+	associated_stat = STAT_INTELLIGENCE
 
 	charge_required = FALSE
 	cooldown_time = 30 SECONDS
@@ -37,7 +37,7 @@
 			else
 				message = pick_list_replacements("bard.json", "default_mockery")
 	else
-		message = browser_input_text(owner, "How will I mock this fool?", "XYLIX")
+		message = tgui_input_text(owner, "How will I mock this fool?", "XYLIX")
 		if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 			return . | SPELL_CANCEL_CAST
 
@@ -45,7 +45,7 @@
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
-	invocation = message
+	invocation = SANITIZE_HEAR_MESSAGE(html_decode(message))
 
 /datum/action/cooldown/spell/vicious_mockery/cast(mob/living/cast_on)
 	. = ..()
@@ -59,7 +59,7 @@
 	id = "viciousmockery"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/viciousmockery
 	duration = 1 MINUTES
-	effectedstats = list(STATKEY_PER = -1, STATKEY_LCK = -1)
+	effectedstats = list(STAT_PERCEPTION = -1, STAT_FORTUNE = -1)
 
 /atom/movable/screen/alert/status_effect/debuff/viciousmockery
 	name = "Vicious Mockery"

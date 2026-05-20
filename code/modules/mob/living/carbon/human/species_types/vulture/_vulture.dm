@@ -1,6 +1,18 @@
 /mob/living/carbon/human/species/medicator
 	race = /datum/species/medicator
 
+/datum/attribute_holder/sheet/job/species/medicator
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/medicine = 10
+	)
+
+/datum/attribute_holder/sheet/job/species/medicator/stats
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = -1,
+		STAT_CONSTITUTION = -1
+	)
 /datum/species/medicator
 	name = "Medicator"
 	id = "medicator"
@@ -32,12 +44,9 @@
 
 	species_traits = list(NO_UNDERWEAR, HAIR, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_NASTY_EATER)
-	inherent_skills = list(
-		/datum/skill/misc/medicine = 1,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/medicator
 
-	specstats_m = list(STATKEY_PER = 1, STATKEY_INT = 2, STATKEY_SPD = -1, STATKEY_CON = -1)
-	specstats_f = list(STATKEY_PER = 1, STATKEY_INT = 2, STATKEY_SPD = -1, STATKEY_CON = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/medicator/stats
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/f/medicator.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/medicator.dmi'
@@ -71,6 +80,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,

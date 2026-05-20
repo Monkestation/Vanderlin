@@ -1,6 +1,6 @@
 /datum/round_event_control/antagonist/solo
 	typepath = /datum/round_event/antagonist/solo
-	max_occurrences = 2
+	max_occurrences = 1
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn
@@ -17,7 +17,11 @@
 	/// Can either be normal list or a weighted list.
 	var/list/extra_spawned_events
 	/// Similar to extra_spawned_events however these are only used by roundstart events and will only try and run if we have the points to do so
-	var/list/preferred_events
+	var/list/preferred_events = list(
+		/datum/round_event_control/antagonist/solo/wretch = 1.5,
+		/datum/round_event_control/antagonist/solo/aspirant = 1,
+		/datum/round_event_control/antagonist/solo/maniac = 1,
+	)
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
@@ -173,7 +177,7 @@
 
 	var/mob/living/carbon/human/new_character = new(create_at)
 	if(!create_at)
-		SSjob.SendToLateJoin(new_character)
+		SSjob.SendToBackupPoint(new_character)
 
 	old_mob.client.prefs.apply_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
@@ -182,6 +186,12 @@
 		qdel(old_mob)
 	return new_character
 
+/datum/round_event/antagonist/solo/ghost
+	startWhen = 35 SECONDS
+	endWhen = 35 SECONDS
+	announceWhen = 30 SECONDS
+	var/transfer_prefs = TRUE
+
 /datum/round_event/antagonist/solo/ghost/start()
 	for(var/datum/mind/antag_mind as anything in setup_minds)
 		add_datum_to_mind(antag_mind)
@@ -189,30 +199,22 @@
 /datum/round_event/antagonist/solo/ghost/setup()
 	var/datum/round_event_control/antagonist/solo/cast_control = control
 	antag_count = cast_control.get_antag_amount()
+	var/list/candidates = cast_control.get_candidates()
+	message_admins("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(candidates)], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
+	log_storyteller("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(candidates)], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
 	antag_flag = cast_control.antag_flag
 	antag_datum = cast_control.antag_datum
 	restricted_roles = cast_control.restricted_roles
 	prompted_picking = cast_control.prompted_picking
-	var/list/candidates = cast_control.get_candidates()
 
-	//guh
-	var/list/cliented_list = list()
-	for(var/mob/living/mob as anything in candidates)
-		cliented_list += mob.client
-
-	/*
 	if(prompted_picking)
-		candidates = SSpolling.poll_candidates(
-			question = "Would you like to be a [cast_control.name]?",
-			check_jobban = antag_flag,
-			role = antag_flag,
-			poll_time = 20 SECONDS,
+		candidates = pollCandidates(
+			Question = "Would you like to be \a [cast_control.name]?",
+			jobbanType = antag_flag,
+			poll_time = announceWhen,
+			ignore_category = "storyteller",
 			group = candidates,
-			alert_pic = antag_datum,
-			role_name_text = lowertext(cast_control.name),
-			chat_text_border_icon = antag_datum,
 		)
-	*/
 
 	var/selected_count = 0
 	while(length(candidates) && selected_count < antag_count)
@@ -224,25 +226,32 @@
 
 		if(!candidate.mind)
 			candidate.mind = new /datum/mind(candidate.key)
-		var/mob/living/carbon/human/new_human = make_body(candidate)
+		var/mob/living/carbon/human/new_human = make_body(candidate, transfer_prefs)
 		new_human.mind.special_role = antag_flag
 		new_human.mind.restricted_roles = restricted_roles
 		setup_minds += new_human.mind
 		selected_count++
 	setup = TRUE
+	startWhen = activeFor
 
 
 ///Uses stripped down and bastardized code from respawn character
-/proc/make_body(mob/dead/observer/ghost_player)
+/proc/make_body(mob/dead/observer/ghost_player, transfer_prefs)
 	if(!ghost_player || !ghost_player.key)
 		return
 
 	//First we spawn a dude.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	var/spawn_point = get_spawn_turf_for_job(JOB_ADVENTURER)
+	if(spawn_point)
+		new_character.forceMove(spawn_point)
+	else
+		SSjob.SendToBackupPoint(new_character)
 
-	ghost_player.client.prefs.safe_transfer_prefs_to(new_character)
+	if(transfer_prefs)
+		ghost_player.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
 	new_character.key = ghost_player.key
+	SEND_SOUND(new_character, sound(null))
 
 	return new_character

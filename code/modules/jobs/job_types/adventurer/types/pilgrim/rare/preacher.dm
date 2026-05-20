@@ -1,3 +1,11 @@
+/datum/attribute_holder/sheet/job/pilgrim/preacher
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20
+	)
+
 /datum/job/advclass/pilgrim/rare/preacher
 	title = "Preacher"
 	tutorial = "A devout follower of Psydon, you came to this land with nothing more than \
@@ -10,12 +18,7 @@
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
-	skills = list(
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/preacher
 
 	traits = list(
 		TRAIT_FOREIGNER

@@ -26,6 +26,6 @@
 		var/mob/living/L = target
 		L.apply_damage(5, BURN)
 		to_chat(L, span_warning("You feel a bone-chilling cold!"))
-		L.add_movespeed_modifier("frostbite", 0.5)
-		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, remove_movespeed_modifier), "frostbite"), 10 SECONDS)
+		L.add_movespeed_modifier(MOVESPEED_ID_FROSTBITE, multiplicative_slowdown = 0.5)
+		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, remove_movespeed_modifier), MOVESPEED_ID_FROSTBITE), 10 SECONDS)
 	last_used = world.time

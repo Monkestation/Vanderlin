@@ -4,7 +4,7 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/confirm = alert(src, "Make [M] drop everything?", "Message", "Yes", "No")
+	var/confirm = tgui_alert(src, "Make [M] drop everything?", "Message", list("Yes", "No"))
 	if(confirm != "Yes")
 		return
 
@@ -31,7 +31,7 @@
 	var/message
 
 	message_admins("[key_name_admin(user)] has started talking into [ADMIN_LOOKUPFLW(target)]'s head.")
-	var/option = alert(user, "What type of SubtlePM do you want?", "Type", "Voice", "Specific God")
+	var/option = tgui_alert(user, "What type of SubtlePM do you want?", "Type", list("Voice", "Specific God"))
 	switch(option)
 		if("Voice")
 			message = input("Message:", text("Subtle PM to [target.key]")) as text|null
@@ -54,11 +54,11 @@
 				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
 				return FALSE
 
-			var/first_time = alert(user, "Send a god unique 'feelings' message first?", "Atmosphere", "Yes", "No")
+			var/first_time = tgui_alert(user, "Send a god unique 'feelings' message first?", "Atmosphere", list("Yes", "No"))
 			if(first_time == "Yes")
 				first_time_message = get_god_atmosphere_message(chosen_god)
-			volume = alert(user, "How loud (big) should your message be?", "Volume", "Normal", "Loud", "Quiet")
-			message = input(user, "What will [chosen_god] say?", "Speak for [chosen_god]") as text|null
+			volume = tgui_alert(user, "How loud (big) should your message be?", "Volume", list("Normal", "Loud", "Quiet"))
+			message = tgui_input_text(user, "What will [chosen_god] say?", "Speak for [chosen_god]")
 			if(!message)
 				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
 				return FALSE
@@ -376,9 +376,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 		//check if they were a monkey
 		if(findtext(G_found.real_name,"monkey"))
-			if(alert("This character appears to have been a monkey. Would you like to respawn them as such?",,"Yes","No")=="Yes")
+			if(tgui_alert(usr, "This character appears to have been a monkey. Would you like to respawn them as such?", "Confirm", list("Yes","No")) == "Yes")
 				var/mob/living/carbon/monkey/new_monkey = new
-				SSjob.SendToLateJoin(new_monkey)
+				SSjob.SendToBackupPoint(new_monkey)
 				G_found.mind.transfer_to(new_monkey)	//be careful when doing stuff like this! I've already checked the mind isn't in use
 				new_monkey.key = G_found.key
 				to_chat(new_monkey, "You have been fully respawned. Enjoy the game.")
@@ -390,7 +390,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//Ok, it's not a xeno or a monkey. So, spawn a human.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	SSjob.SendToBackupPoint(new_character)
 
 	var/datum/data/record/record_found			//Referenced to later to either randomize or not randomize the character.
 	if(G_found.mind && !G_found.mind.active)	//mind isn't currently in use by someone/something
@@ -473,13 +473,50 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	admin_delete(A)
 
 /client/proc/cmd_admin_list_open_jobs()
-	set category = "Admin.Admin"
+	set category = "Admin.Jobs"
 	set name = "Manage Job Slots"
 
 	if(!check_rights(R_DEBUG))
 		return
 	holder.manage_free_slots()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Manage Job Slots") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/add_job_key_whitelist()
+	set category = "Admin.Jobs"
+	set name = "Whitelist a Job"
+
+	if(!check_rights(R_FUN))
+		return FALSE
+
+	var/list/job_list = list()
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
+		if(IS_ABSTRACT(job) || (job.title == "NOPE")) // Safety first.
+			continue
+		job_list += job.title
+
+	var/job_name = tgui_input_list(usr, "Which job do you wish to add a key whitelist to?", "Select Job", job_list)
+
+	var/datum/job/job_datum = SSjob.name_occupations[job_name]
+	var/new_key = ckey(tgui_input_text(usr, "What ckey do you want to add to the whitelist?", "New Key"))
+	if(!new_key)
+		return FALSE
+
+	if(new_key in job_datum.whitelisted_ckeys)
+		if(tgui_alert(usr, "[new_key] is already in the job whitelist, do you wish to remove them?", "Remove Key?", list("Yes", "No")) == "Yes")
+			job_datum.whitelisted_ckeys -= new_key
+			var/log_message = "[key_name(usr)] removed '[new_key]' from the Key Whitelist for '[job_datum.title]' job."
+			message_admins(log_message)
+			log_admin(log_message)
+			SSblackbox.record_feedback("tally", "admin_verb", 1, "Whitelist Job")
+			return TRUE
+
+	job_datum.whitelisted_ckeys += new_key
+	var/log_message = "[key_name(usr)] added '[new_key]' to the Key Whitelist for '[job_datum.title]' job."
+	message_admins(log_message)
+	log_admin(log_message)
+
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Whitelist Job") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	return TRUE
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in world)
 	set category = "GameMaster.Fun"
@@ -509,7 +546,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if ((devastation != -1) || (heavy != -1) || (light != -1) || (flash != -1) || (flames != -1) || (hotspots != -1))
 		if ((devastation > 20) || (heavy > 20) || (light > 20) || (flames > 20) || (hotspots > 20))
-			if (alert(src, "Are you sure you want to do this? It will laaag.", "Confirmation", "Yes", "No") == "No")
+			if(tgui_alert(src, "Are you sure you want to do this? It will laaag.", "Confirmation", list("Yes", "No")) == "No")
 				return
 
 		explosion(O, devastation, heavy, light, flash, null, null,flames,hotspots)
@@ -520,14 +557,14 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		return
 
-/client/proc/cmd_admin_gib(mob/M in GLOB.mob_list)
+/client/proc/cmd_admin_gib(mob/living/M in GLOB.mob_list)
 	set category = "GameMaster.Fun"
 	set name = "Gib"
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/confirm = alert(src, "Drop a brain?", "Confirm", "Yes", "No","Cancel")
+	var/confirm = tgui_alert(src, "Drop a brain?", "Confirm", list("Yes", "No","Cancel"))
 	if(confirm == "Cancel")
 		return
 	//Due to the delay here its easy for something to have happened to the mob
@@ -550,12 +587,15 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Gibself"
 	set category = "GameMaster.Fun"
 
-	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
+	if(!isliving(mob))
+		return
+	var/confirm = tgui_alert(src, "You sure?", "Confirm", list("Yes", "No"))
 	if(confirm == "Yes")
 		log_admin("[key_name(usr)] used gibself.")
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] used gibself.</span>")
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Gib Self") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		mob.gib(1, 1, 1)
+		var/mob/living/living_mob = mob
+		living_mob.gib(1, 1, 1)
 
 /client/proc/cmd_admin_check_contents(mob/living/M in GLOB.mob_list)
 	set category = "GameMaster.Equipping"
@@ -605,7 +645,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 
 
-	var/notifyplayers = alert(src, "Do you want to notify the players?", "Options", "Yes", "No", "Cancel")
+	var/notifyplayers = tgui_alert(src, "Do you want to notify the players?", "Options", list("Yes", "No", "Cancel"))
 	if(notifyplayers == "Cancel")
 		return
 
@@ -726,6 +766,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		ADMIN_PUNISHMENT_GODHAND,
 		ADMIN_PUNISHMENT_FORCECOLLAR,
 		ADMIN_PUNISHMENT_PSYDON,
+		ADMIN_PUNISHMENT_BLACK_BRIAR,
 	)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
@@ -833,6 +874,16 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			ADD_TRAIT(created_collar, TRAIT_NODROP, "adminabuse")
 			to_chat(target, span_userdanger("A ring of darkness restrains my neck, and a collar is made manifest!"))
 			H.add_stress(/datum/stress_event/collarcurse)
+		if(ADMIN_PUNISHMENT_BLACK_BRIAR)
+			var/obj/item/bodypart/chest/chest = target.get_bodypart()
+			var/datum/wound/black_briar_curse/chest/wound = chest?.add_wound(/datum/wound/black_briar_curse/chest)
+			if(!istype(wound))
+				to_chat(usr, span_warning("Invalid target!"))
+				return
+			wound.infection = BBC_TIME_MAX
+			wound.infection_percent = 1
+			target.death()
+
 
 	punish_log(target, punishment)
 
@@ -848,7 +899,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 
 	var/custom_message
-	var/check = browser_alert(usr, "Do you want a custom message for the heart attack?", "Confirmation", DEFAULT_INPUT_CHOICES)
+	var/check = tgui_alert(usr, "Do you want a custom message for the heart attack?", "Confirmation", DEFAULT_INPUT_CHOICES)
 	if(check == CHOICE_YES)
 		custom_message = browser_input_text(usr, "Write the Custom Message", "Custom Message")
 		if(!custom_message)

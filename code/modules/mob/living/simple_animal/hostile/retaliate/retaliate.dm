@@ -77,7 +77,7 @@
 /mob/living/simple_animal/hostile/retaliate
 	var/aggressive = 0
 
-/mob/living/simple_animal/hostile/retaliate/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE)
+/mob/living/simple_animal/hostile/retaliate/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, damage_type, skip_dtype, can_crit)
 	. = ..()
 	if(!.)
 		return
@@ -157,6 +157,8 @@
 						var/old_hunger_percentage = old_hunger.current_hunger / old_hunger.max_hunger
 						hunger.current_hunger = hunger.max_hunger * old_hunger_percentage
 
+					if(istype(genetics))
+						genetics?.copy_to(A)
 					qdel(src)
 					return
 

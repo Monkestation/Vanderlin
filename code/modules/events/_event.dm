@@ -93,7 +93,7 @@
 		if(string)
 			string += ", "
 		string += "Wrong Time of Day"
-	if(occurrences >= max_occurrences)
+	if(get_occurences() >= max_occurrences)
 		if(string)
 			string += ", "
 		string += "Cap Reached"
@@ -124,7 +124,7 @@
 	if(roundstart && (!SSgamemode.can_run_roundstart || (SSgamemode.ran_roundstart && !fake_check && !SSgamemode.current_storyteller?.ignores_roundstart)))
 		return FALSE
 
-	if(occurrences >= max_occurrences)
+	if(get_occurences() >= max_occurrences)
 		return FALSE
 	if(earliest_start > max(world.time - SSticker.round_start_time, 0))
 		return FALSE

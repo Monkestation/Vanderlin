@@ -73,9 +73,9 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		switch(human_owner.voice_type)
-			if(VOICE_TYPE_MASC)
+			if(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
 				blip_tone = BLIP_TONE_MASCULINE
-			if(VOICE_TYPE_FEM)
+			if(VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY)
 				blip_tone = BLIP_TONE_FEMININE
 
 	_extra_classes = extra_classes.Copy()
@@ -136,8 +136,9 @@
 	var/static/list/language_icons
 	// Register client who owns this message
 	owned_by = owner.client
-	RegisterSignal(owned_by, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_qdel))
-	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMGE, PROC_REF(on_parent_take_damage))
+
+	RegisterSignal(owned_by, COMSIG_QDELETING, PROC_REF(on_parent_qdel))
+	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_parent_take_damage))
 
 	// Clip message
 	var/maxlen = owned_by.prefs.max_chat_length

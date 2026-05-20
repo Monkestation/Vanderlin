@@ -51,7 +51,7 @@
 			if(slap)
 				playsound(M, "smallslash", 100, TRUE, -1)
 				cat_pawn.do_attack_animation(M, "claw")
-				M.adjustBruteLoss(1)
+				M.adjustBruteLoss(5, damage_type = BCLASS_CUT)
 
 			cat_pawn.dir = pick(GLOB.alldirs)
 			step(cat_pawn, cat_pawn.dir)

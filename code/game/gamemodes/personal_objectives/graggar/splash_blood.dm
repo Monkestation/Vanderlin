@@ -36,8 +36,10 @@
 
 /datum/objective/personal/blood_splash/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_STR, 1)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, STATKEY_CON, 1)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_BLESSING, list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION =1,
+	))
 
 /datum/objective/personal/blood_splash/update_explanation_text()
 	explanation_text = "There is much power in blood. Splash a bucket full of blood on yourself to appease Graggar!"

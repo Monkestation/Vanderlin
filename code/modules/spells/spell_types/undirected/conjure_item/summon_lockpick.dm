@@ -7,7 +7,7 @@
 
 	cooldown_time = 1 MINUTES
 	invocation_type = INVOCATION_NONE
-	associated_skill = /datum/skill/misc/lockpicking
+	associated_skill = /datum/attribute/skill/misc/lockpicking
 	item_type = /obj/item/lockpick
 	item_duration = 1 MINUTES
 	item_outline ="#1e202cff"
@@ -17,4 +17,4 @@
 
 /datum/action/cooldown/spell/undirected/conjure_item/summon_lockpick/cast(mob/living/cast_on)
 	. = ..()
-	cast_on.adjustBruteLoss(3) // This shit ain't free, man
+	cast_on.adjustBruteLoss(5, damage_type = BCLASS_PIERCE) // This shit ain't free, man

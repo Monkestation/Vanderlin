@@ -10,6 +10,15 @@
 /mob/living/carbon/human/species/elf/snow
 	race = /datum/species/elf/snow
 
+/datum/attribute_holder/sheet/job/species/snow
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 2,
+	)
+
 /datum/species/elf/snow
 	name = "Elf"
 	id = SPEC_ID_ELF
@@ -50,6 +59,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/elf,
@@ -104,8 +114,7 @@
 		OFFSET_UNDIES = list(0,1),\
 	)
 
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = 1, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 2, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -1, STATKEY_PER = 1, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 2, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/snow
 	enflamed_icon = "widefire"
 
 	body_markings = list(

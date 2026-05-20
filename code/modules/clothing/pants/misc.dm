@@ -7,6 +7,7 @@
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	salvage_result = /obj/item/natural/silk
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/pants/grenzelpants
 	name = "grenzelhoftian paumpers"
@@ -19,7 +20,7 @@
 	armor = ARMOR_PADDED
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
-	item_weight = 4
+	item_weight = 400 GRAMS
 
 /obj/item/clothing/pants/grenzelpants/update_overlays()
 	. = ..()

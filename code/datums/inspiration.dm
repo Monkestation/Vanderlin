@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 /datum/inspiration/New(mob/living/carbon/human/holder, bard_tier_override)
 	. = ..()
 	src.holder = holder
-	RegisterSignal(holder, COMSIG_PARENT_QDELETING, PROC_REF(on_holder_qdel))
+	RegisterSignal(holder, COMSIG_QDELETING, PROC_REF(on_holder_qdel))
 	RegisterSignal(holder, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_change))
 	add_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience))
 	set_inspiration_tier(bard_tier_override)
@@ -33,7 +33,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 		holder.inspiration = null
 	remove_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience, /mob/living/carbon/human/proc/picksongs))
 	holder.remove_spells(source = src)
-	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_CHANGE))
+	UnregisterSignal(holder, list(COMSIG_QDELETING, COMSIG_SKILL_RANK_CHANGE))
 	holder = null
 	. = ..()
 
@@ -42,10 +42,10 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	SIGNAL_HANDLER
 	qdel(src)
 
-/datum/inspiration/proc/on_skill_change(datum/source, datum/skill/skill_ref, new_level, old_level)
+/datum/inspiration/proc/on_skill_change(datum/source, datum/attribute/skill/skill_ref, new_level, old_level)
 	SIGNAL_HANDLER
 
-	if(!istype(skill_ref, /datum/skill/misc/music))
+	if(!ispath(skill_ref, /datum/attribute/skill/misc/music))
 		return
 	if(new_level <= old_level)
 		return
@@ -66,12 +66,12 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	if(tier_override)
 		target_tier = tier_override
 	else
-		switch(holder.get_skill_level(/datum/skill/misc/music))
-			if(SKILL_LEVEL_EXPERT)
+		switch(floor(GET_MOB_SKILL_VALUE_OLD(holder, /datum/attribute/skill/misc/music)))
+			if(SKILL_RANK_EXPERT)
 				target_tier = 1
-			if(SKILL_LEVEL_MASTER)
+			if(SKILL_RANK_MASTER)
 				target_tier = 2
-			if(SKILL_LEVEL_LEGENDARY)
+			if(SKILL_RANK_LEGENDARY to INFINITY)
 				target_tier = 3
 
 	LAZYINITLIST(available_song_tiers)
@@ -173,10 +173,10 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	if(get_spell(item , TRUE))
 		to_chat(src, span_warning("You already know this song!"))
 		return
-	if(alert(src, "[item.desc]", "[item.name]", "Learn", "Cancel") == "Cancel") //gives a preview of the spell's description to let people know what a spell does
+	if(tgui_alert(src, "[item.desc]", "[item.name]", list("Learn", "Cancel")) == "Cancel") //gives a preview of the spell's description to let people know what a spell does
 		return
 
 	add_spell(item, source = inspiration)
 	inspiration.available_song_tiers -= chosensongtier
 	if(!length(inspiration.available_song_tiers))
-		add_verb(src, /mob/living/carbon/human/proc/picksongs)
+		remove_verb(src, /mob/living/carbon/human/proc/picksongs)

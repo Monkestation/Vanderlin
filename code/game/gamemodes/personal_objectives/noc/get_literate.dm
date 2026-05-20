@@ -14,12 +14,12 @@
 	UnregisterSignal(owner.current, COMSIG_SKILL_RANK_CHANGE)
 	return ..()
 
-/datum/objective/personal/literacy/proc/on_skill_increased(datum/source, datum/skill/skill_ref, new_level, old_level)
+/datum/objective/personal/literacy/proc/on_skill_increased(datum/source, datum/attribute/skill/skill_ref, new_level, old_level)
 	SIGNAL_HANDLER
 	if(completed)
 		return
 
-	if(istype(skill_ref, /datum/skill/misc/reading) && old_level == SKILL_LEVEL_NONE && new_level > SKILL_LEVEL_NONE)
+	if(ispath(skill_ref, /datum/attribute/skill/misc/reading) && old_level == SKILL_RANK_NONE && new_level > SKILL_RANK_NONE)
 		complete_objective()
 
 /datum/objective/personal/literacy/complete_objective()
@@ -30,7 +30,7 @@
 
 /datum/objective/personal/literacy/reward_owner()
 	. = ..()
-	owner.current.adjust_skillrank(/datum/skill/labor/mathematics, 1)
+	owner.current.adjust_skill_level(/datum/attribute/skill/labor/mathematics, 10)
 
 /datum/objective/personal/literacy/update_explanation_text()
 	explanation_text = "Get rid of your ignorance! Learn to read to please Noc!"

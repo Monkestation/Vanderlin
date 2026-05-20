@@ -159,6 +159,14 @@ SUBSYSTEM_DEF(treasury)
 		bank_accounts[name] = 0
 	return TRUE
 
+/datum/controller/subsystem/treasury/proc/remove_bank_account(name)
+	if(!name)
+		return
+	if(!(name in bank_accounts))
+		return
+	bank_accounts -= name
+	return TRUE
+
 //increments the treasury directly (tax collection)
 /datum/controller/subsystem/treasury/proc/give_money_treasury(amt, source, silent = FALSE)
 	if(!amt)
@@ -230,7 +238,7 @@ SUBSYSTEM_DEF(treasury)
 	treasury_value += amt
 
 	if(character in bank_accounts)
-		if(HAS_TRAIT(character, TRAIT_NOBLE))
+		if(HAS_TRAIT(character, TRAIT_NOBLE_BLOOD))
 			bank_accounts[character] += amt
 		else
 			if(!untaxed_deposits[character])

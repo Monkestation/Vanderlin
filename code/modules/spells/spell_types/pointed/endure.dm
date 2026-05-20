@@ -26,7 +26,7 @@
 	sound = 'sound/magic/ENDVRE.ogg'
 	invocation = "LIVE, ENDURE!" // holy larp yelling for healing is silly
 	invocation_type = "none"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 30 SECONDS
 
 /datum/action/cooldown/spell/psydonendure/cast(mob/living/target)
@@ -68,7 +68,7 @@
 						psicross_bonus = 0.3
 					if(/obj/item/clothing/neck/psycross/silver)
 						psicross_bonus = 0.4
-					if(/obj/item/clothing/neck/psycross/g) // PURITY AFLOAT.
+					if(/obj/item/clothing/neck/psycross/gold) // PURITY AFLOAT.
 						psicross_bonus = 0.4
 		if(damtotal >= 300) // ARE THEY ENDURING MUCH, IN ONE WAY OR ANOTHER?
 			situational_bonus += 0.3
@@ -89,7 +89,7 @@
 		if (zcross_trigger)
 			user.visible_message(span_warning("[user] shuddered. Something's very wrong."), span_userdanger("Cold shoots through my spine. Something laughs at me for trying."))
 			user.playsound_local(user, 'sound/misc/zizo.ogg', 25, FALSE)
-			user.adjustBruteLoss(25)
+			user.adjustBruteLoss(25, damage_type = WOUND_DIVINE)
 			return FALSE
 
 		target.apply_status_effect(/datum/status_effect/buff/psyhealing, psyhealing)

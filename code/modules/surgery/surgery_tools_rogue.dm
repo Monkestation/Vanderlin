@@ -16,8 +16,8 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_POOR + 25
 	thrown_bclass = BCLASS_CUT
-	associated_skill = /datum/skill/combat/knives
-	anvilrepair = /datum/skill/craft/blacksmithing
+	associated_skill = /datum/attribute/skill/combat/knives
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	melting_material = /datum/material/iron
 	melt_amount = 25 //it takes 2 iron bars to make 8 surgical tools, 240/8 = 30, -5 because I reckon some is lost during the process
 	embedding = list(
@@ -112,7 +112,7 @@
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
 
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
@@ -178,7 +178,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
@@ -186,7 +186,7 @@
 /obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
-	if(user.get_skill_level(/datum/skill/misc/medicine) < 1)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine) < 10)
 		return ..()
 	if(ishuman(A))
 		if(A == user)

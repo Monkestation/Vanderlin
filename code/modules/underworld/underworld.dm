@@ -116,7 +116,7 @@
 
 /obj/structure/underworld/carriage/attack_hand(mob/living/carbon/spirit/user)
 	if(user.paid)
-		switch(alert("Are you ready to be judged?",,"Yes","No"))
+		switch(tgui_alert(user, "Are you ready to be judged?","Ready", list("Yes","No")))
 			if("Yes")
 				playsound(user, 'sound/misc/deadbell.ogg', 50, TRUE, -2, ignore_walls = TRUE)
 				add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_COIN_REVIVES, 1)

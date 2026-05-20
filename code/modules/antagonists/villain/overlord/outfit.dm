@@ -17,26 +17,8 @@
 	beltl = /obj/item/weapon/knife/dagger/steel
 	r_hand = /obj/item/weapon/polearm/woodstaff
 
-	H.set_skillrank(/datum/skill/misc/reading, 6, TRUE)
-	H.set_skillrank(/datum/skill/craft/alchemy, 5, TRUE)
-	H.set_skillrank(/datum/skill/magic/arcane, 5, TRUE)
-	H.set_skillrank(/datum/skill/misc/riding, 4, TRUE)
-	H.set_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.set_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.set_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	H.set_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.set_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.set_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 4, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.change_stat(STATKEY_STR, -1)
-	H.change_stat(STATKEY_INT, 5)
-	H.change_stat(STATKEY_CON, 5)
-	H.change_stat(STATKEY_END, -1)
-	H.change_stat(STATKEY_SPD, -1)
 	H.adjust_spell_points(17)
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)

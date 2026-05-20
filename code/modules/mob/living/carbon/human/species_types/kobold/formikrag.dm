@@ -1,6 +1,15 @@
 /mob/living/carbon/human/species/kobold/formikrag
 	race = /datum/species/kobold/formikrag
 
+/datum/attribute_holder/sheet/job/species/formikrag
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_PERCEPTION = -1,
+		STAT_INTELLIGENCE = -2,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -2
+	)
+
 /datum/species/kobold/formikrag
 	name = "Formikrag Kobold"
 	id = SPEC_ID_KOBOLD_FORMIKRAG
@@ -20,14 +29,14 @@
 	\n\n\
 	WARNING: THIS IS A HEAVILY DISCRIMINATED AGAINST CHALLENGE SPECIES WITH ACTIVE SPECIES DETRIMENTS. YOU CAN AND WILL DIE A LOT; PLAY AT YOUR OWN RISK!"
 
-	specstats_m = list(STATKEY_STR = -2, STATKEY_PER = -1, STATKEY_INT = -2, STATKEY_END = 1, STATKEY_SPD = -2)
-	specstats_f = list(STATKEY_STR = -2, STATKEY_PER = -1, STATKEY_INT = -2, STATKEY_END = 1, STATKEY_SPD = -2)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/formikrag
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/f/kobold_alt.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/kobold_alt.dmi'
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/smooth,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/kobold,

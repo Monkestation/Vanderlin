@@ -84,7 +84,7 @@
 		// Phase 3 chance for a cleave attack hitting adjacent targets
 		for(var/mob/living/L in range(1, boss))
 			if(L != boss && L != target && !L.faction_check_mob(boss))
-				L.adjustBruteLoss(boss.melee_damage_lower / 2)
+				L.adjustBruteLoss(boss.melee_damage_lower / 2, damage_type = BCLASS_BLUNT)
 				to_chat(L, "<span class='danger'>[boss] cleaves you with its attack!</span>")
 				new /obj/effect/temp_visual/minotaur_impact(get_turf(L))
 

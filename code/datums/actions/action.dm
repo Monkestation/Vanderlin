@@ -52,7 +52,7 @@
 /// Links the passed target to our action, registering any relevant signals
 /datum/action/proc/link_to(Target)
 	target = Target
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(clear_ref), override = TRUE)
+	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(clear_ref), override = TRUE)
 
 	if(isatom(target))
 		RegisterSignal(target, COMSIG_ATOM_UPDATED_ICON, PROC_REF(on_target_icon_update))
@@ -87,18 +87,22 @@
 		Remove(owner)
 	SEND_SIGNAL(src, COMSIG_ACTION_GRANTED, grant_to)
 	owner = grant_to
-	RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(clear_ref), override = TRUE)
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(clear_ref), override = TRUE)
 
 	// Register some signals based on our check_flags
 	// so that our button icon updates when relevant
 	if(check_flags & AB_CHECK_CONSCIOUS)
 		RegisterSignal(owner, COMSIG_MOB_STATCHANGE, PROC_REF(update_status_on_signal))
+	if(check_flags & AB_CHECK_INCAPACITATED)
+		RegisterSignals(owner, list(SIGNAL_ADDTRAIT(TRAIT_INCAPACITATED), SIGNAL_REMOVETRAIT(TRAIT_INCAPACITATED)), PROC_REF(update_status_on_signal))
 	if(check_flags & AB_CHECK_IMMOBILE)
 		RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED), PROC_REF(update_status_on_signal))
 	if(check_flags & AB_CHECK_HANDS_BLOCKED)
 		RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_HANDS_BLOCKED), PROC_REF(update_status_on_signal))
 	if(check_flags & AB_CHECK_LYING)
 		RegisterSignal(owner, COMSIG_LIVING_SET_BODY_POSITION, PROC_REF(update_status_on_signal))
+	if(check_flags & AB_CHECK_PHASED)
+		RegisterSignals(owner, list(SIGNAL_ADDTRAIT(TRAIT_MAGICALLY_PHASED), SIGNAL_REMOVETRAIT(TRAIT_MAGICALLY_PHASED)), PROC_REF(update_status_on_signal))
 
 	GiveAction(grant_to)
 
@@ -116,18 +120,25 @@
 	if(owner)
 		SEND_SIGNAL(src, COMSIG_ACTION_REMOVED, owner)
 		SEND_SIGNAL(owner, COMSIG_MOB_REMOVED_ACTION, src)
-		UnregisterSignal(owner, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(owner, COMSIG_QDELETING)
 
 		// Clean up our check_flag signals
 		UnregisterSignal(owner, list(
 			COMSIG_LIVING_SET_BODY_POSITION,
 			COMSIG_MOB_STATCHANGE,
+			COMSIG_MOVABLE_MOVED,
 			SIGNAL_ADDTRAIT(TRAIT_HANDS_BLOCKED),
 			SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED),
+			SIGNAL_ADDTRAIT(TRAIT_INCAPACITATED),
+			SIGNAL_ADDTRAIT(TRAIT_MAGICALLY_PHASED),
+			SIGNAL_REMOVETRAIT(TRAIT_HANDS_BLOCKED),
+			SIGNAL_REMOVETRAIT(TRAIT_IMMOBILIZED),
+			SIGNAL_REMOVETRAIT(TRAIT_INCAPACITATED),
+			SIGNAL_REMOVETRAIT(TRAIT_MAGICALLY_PHASED),
 		))
 
 		if(target == owner)
-			RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(clear_ref))
+			RegisterSignal(target, COMSIG_QDELETING, PROC_REF(clear_ref))
 		owner = null
 
 /// Actually triggers the effects of the action.
@@ -146,6 +157,8 @@
 	if((check_flags & AB_CHECK_HANDS_BLOCKED) && HAS_TRAIT(owner, TRAIT_HANDS_BLOCKED))
 		return FALSE
 	if((check_flags & AB_CHECK_IMMOBILE) && HAS_TRAIT(owner, TRAIT_IMMOBILIZED))
+		return FALSE
+	if((check_flags & AB_CHECK_INCAPACITATED) && HAS_TRAIT(owner, TRAIT_INCAPACITATED))
 		return FALSE
 	if((check_flags & AB_CHECK_LYING) && isliving(owner))
 		var/mob/living/action_user = owner

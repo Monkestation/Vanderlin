@@ -33,9 +33,33 @@
 @include meta.load-css('./tgchat/chat-dark.scss');
 
 :root {
-  --chat-text-color: hsl(210, 50%, 80%);
+  --chat-text-color: hsl(210, 30%, 91%);
 
-  --color-base: hsl(0, 0%, 12.5%);
+  // Base
+  --color-base: hsl(0, 0%, 6%);
+  --color-primary: hsl(0, 53%, 45%);
   --color-section: hsl(from var(--color-base) h s calc(l - 4.2));
+  --color-text: hsl(0, 77%, 86%);
+  --color-label: hsl(0, 3%, 52%);
+  --color-action: hsl(0, 6%, 50%);
+  --color-scrollbar-thumb: var(--color-light-gray);
+
+  --color-good: hsl(94, 60%, 21%);
+  --color-average: hsl(32, 65%, 35%);
+  --color-bad: hsl(0, 52%, 26%);
+
+  // Components
+  --button-color: hsl(0, 7%, 76%);
+  --button-background-selected: hsl(0, 53%, 45%);
+
+  --tab-color-selected: hsl(0, 18%, 78%);
+
+  --notice-box-color: hsl(0, 7%, 76%);
+
+  --section-title-color: hsl(0, 7%, 76%);
+
+  --input-color: hsl(0, 7%, 76%);
+  --input-background: var(--color-base);
+
   --base-gradient-spread: 0;
 }

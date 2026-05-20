@@ -140,6 +140,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/Destroy()
 	SSticker.minds -= src
 	QDEL_NULL(sleep_adv)
+	remove_all_uis()
+	QDEL_LIST(active_uis)
 	if(islist(antag_datums))
 		QDEL_LIST(antag_datums)
 	return ..()
@@ -280,7 +282,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/transfer_to(mob/new_character, force_key_move = 0)
 	if(current)	// remove ourself from our old body's mind variable
 		current.mind = null
-		UnregisterSignal(current, COMSIG_MOB_DEATH)
+		UnregisterSignal(current, COMSIG_LIVING_DEATH)
 		SStgui.on_transfer(current, new_character)
 
 	if(!language_holder)
@@ -311,7 +313,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
 
-	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
+	RegisterSignal(current, COMSIG_LIVING_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
 		current.key = key		//now transfer the key to link the client to our new body
 	current.update_fov_angles()
@@ -512,22 +514,42 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		to_chat(recipient, "<i>[output]</i>")
 
 /// Output current targets to the player
-/datum/mind/proc/recall_targets(mob/recipient, window=1)
-	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
-	for (var/mob/living/carbon in GLOB.mob_living_list)
-		if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
-			output += "<br><b>[carbon.real_name]</b>"
-			if (carbon.job)
-				output += " - [carbon.job]"
 
-			// Get the hunted quirk and display the reason
-			var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
-			if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
-				output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
-			else
-				output += "<br><i>Hunted for: Unknown reasons</i>"
+/datum/mind/proc/recall_targets(mob/recipient, window=1, var/type)
+	var/output
+	if(type == "Ordos")
+		output = "<B>[SSmapping.config.map_name] Scouting Report</B><br>"
+		for (var/mob/living/carbon in GLOB.mob_living_list)
+			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/suspicion) && (!istype(carbon, /mob/living/carbon/human/dummy))) && (carbon.real_name in GLOB.inquis_suspect_players)))
+				output += "<br><b>[carbon.real_name]</b>"
+				if (carbon.job)
+					output += " - [carbon.job]"
 
-	output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
+				// Get the suspicion quirk and display the reason
+				var/datum/quirk/vice/suspicion/suspicion_quirk = carbon.get_quirk(/datum/quirk/vice/suspicion)
+				if(suspicion_quirk && suspicion_quirk.customization_value && suspicion_quirk.customization_value != "")
+					output += "<br><i>Reason for suspicion: [suspicion_quirk.customization_value]</i>"
+				else
+					output += "<br><i>Reason for suspicion: General heretical conduct.</i>"
+
+		output += "<br><br>Our scouts have marked these people as suspected of heresy. Verify or disprove these reports and administer justice if need be."
+
+	else
+		output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
+		for (var/mob/living/carbon in GLOB.mob_living_list)
+			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
+				output += "<br><b>[carbon.real_name]</b>"
+				if (carbon.job)
+					output += " - [carbon.job]"
+
+				// Get the hunted quirk and display the reason
+				var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
+				if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
+					output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
+				else
+					output += "<br><i>Hunted for: Unknown reasons</i>"
+
+		output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 	if(window)
 		recipient << browse(output,"window=memory")
 
@@ -805,14 +827,14 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		return FALSE
 	amt *= GLOB.sleep_experience_modifier
 
-	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+	if(current.has_quirk(/datum/quirk/boon/quick_learner) || current.has_reagent(/datum/reagent/buff/herbal/scholar_focus))
 		amt *= 1.2
 
 	amt *= current.get_skill_exp_multiplier(skill)
 
 	if(check_apprentice)
-		current.adjust_apprentice_exp(skill, amt, silent)
-	if(sleep_adv.add_sleep_experience(skill, amt, silent))
+		current.attributes.adjust_apprentice_exp(skill, amt, silent)
+	if(sleep_adv.adjust_sleep_xp(skill, amt, silent))
 		return TRUE
 
 /datum/mind/proc/add_personal_objective(datum/objective/O)

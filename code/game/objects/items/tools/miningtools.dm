@@ -12,9 +12,10 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	toolspeed = 2
-	associated_skill = /datum/skill/labor/mining
+	associated_skill = /datum/attribute/skill/labor/mining
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	item_weight = 1.74 KILOGRAMS
 	var/pickmult = 1 // Multiplier of how much extra picking force we do to rocks.
 
 /obj/item/weapon/pick/getonmobprop(tag)
@@ -34,9 +35,10 @@
 	force = DAMAGE_PICK - 3
 	toolspeed = 3
 	pickmult = 0.8 // Worse pick
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/copper
 	melt_amount = 75
+	item_weight = 1.35 KILOGRAMS
 
 /obj/item/weapon/pick/steel
 	name = "steel pick"
@@ -59,6 +61,7 @@
 	anvilrepair = null
 	melting_material = null
 	pickmult = 0.7 // Worse pick
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/pick/drill
 	name = "clockwork drill"
@@ -77,6 +80,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	pickmult = 1.5
+	item_weight = 3.29 KILOGRAMS
 
 /obj/item/weapon/pick/drill/Initialize()
 	. = ..()

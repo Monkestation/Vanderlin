@@ -114,7 +114,7 @@
 	if(!do_after(user, 10 SECONDS, src))
 		return
 
-	victim.apply_damage(10 * (rotations_per_minute / 8), BRUTE, BODY_ZONE_HEAD)
+	victim.apply_damage(10 * (rotations_per_minute / 8), BRUTE, BODY_ZONE_HEAD, damage_type = BCLASS_BLUNT)
 	playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	bloodied = TRUE
 	update_animation_effect()
@@ -259,7 +259,7 @@
 	if(user.active_hand_index == 1)
 		body_zone = BODY_ZONE_L_ARM
 	if(working)
-		user.apply_damage(15 * (rotations_per_minute / 8), BRUTE, body_zone)
+		user.apply_damage(15 * (rotations_per_minute / 8), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
 		playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 		user.visible_message(span_danger("[user] gets their arm crushed by [src]!"), span_danger("You get your arm crushed by [src]!"))
 		bloodied = TRUE
@@ -269,13 +269,13 @@
 
 	switch(step_on)
 		if(STEP_FIDDLE)
-			user.apply_damage(5 * (rotations_per_minute / 8), BRUTE, body_zone)
+			user.apply_damage(5 * (rotations_per_minute / 8), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
 			playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 			user.visible_message(span_danger("[user] get their hand caught in [src]'s cogs!"), span_danger("You get your hand caught in [src]'s cogs!"))
 		if(STEP_LEVER)
 			return
 		if(STEP_BUTTON)
-			user.apply_damage(8 * (rotations_per_minute / 8), BRUTE, body_zone)
+			user.apply_damage(8 * (rotations_per_minute / 8), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
 			playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 			user.visible_message(span_danger("[user] gets their hand flattened by [src]!"), span_danger("You get your hand flattened by[src]!"))
 
@@ -293,7 +293,7 @@
 		var/body_zone = BODY_ZONE_R_ARM
 		if(user.active_hand_index == 1)
 			body_zone = BODY_ZONE_L_ARM
-		user.apply_damage(4 * max(1, (rotations_per_minute / 8)), BRUTE, body_zone)
+		user.apply_damage(4 * max(1, (rotations_per_minute / 8)), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
 		playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 		return
 

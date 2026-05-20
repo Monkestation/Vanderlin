@@ -12,6 +12,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 	possible_item_intents = list(/datum/intent/use)
+	item_weight = 3 GRAMS
 	var/datum/plant_def/plant_def_type
 
 	var/datum/plant_genetics/seed_genetics
@@ -41,6 +42,14 @@
 		visible_message(span_warning("[L] crushes [src] underfoot."))
 		qdel(src)
 
+/obj/item/neuFarm/seed/get_over_text_content(mob/user)
+	var/farming_value = user?.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) : 60
+	if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || farming_value >= SKILL_LEVEL_APPRENTICE)
+		var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
+		if(plant_def_instance)
+			return plant_def_instance.seed_identity
+	return ..()
+
 /obj/item/neuFarm/seed/examine(mob/user)
 	. = ..()
 	var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
@@ -50,7 +59,7 @@
 		if(seed_genetics_instance.seed_identity_modifier)
 			examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
 		. += span_info("I can tell these are [examine_name].")
-		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || user.get_skill_level(/datum/skill/labor/farming) >= 2)
+		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= 2)
 			. += plant_def_instance.get_examine_details()
 
 /obj/item/neuFarm/seed/attack_atom(atom/attacked_atom, mob/living/user)
@@ -67,7 +76,7 @@
 		if(located)
 			to_chat(user, span_notice("[located] is in the way!"))
 			return
-		if(!(user.get_skill_level(/datum/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
+		if(!(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
 			to_chat(user, span_notice("I don't know enough to make a mound without tools."))
 			return
 		to_chat(user, span_notice("I begin making a mound for the seeds..."))
@@ -100,6 +109,9 @@
 	plant_def_type = /datum/plant_def/oat
 	color = "#a3eca3"
 
+/obj/item/neuFarm/seed/sunreed
+	plant_def_type = /datum/plant_def/sunreed
+
 /obj/item/neuFarm/seed/manabloom
 	plant_def_type = /datum/plant_def/manabloom
 	color = "#a3cbec"
@@ -118,6 +130,12 @@
 
 /obj/item/neuFarm/seed/poison_berries
 	plant_def_type = /datum/plant_def/jacksberry_poison
+
+/obj/item/neuFarm/seed/tamto
+	plant_def_type = /datum/plant_def/tamto
+
+/obj/item/neuFarm/seed/pompkaun
+	plant_def_type = /datum/plant_def/pompkaun
 
 /obj/item/neuFarm/seed/cabbage
 	plant_def_type = /datum/plant_def/cabbage
@@ -182,6 +200,10 @@
 
 /obj/item/neuFarm/seed/pineapple
 	plant_def_type = /datum/plant_def/pineapple
+
+/obj/item/neuFarm/seed/cocaudo
+	plant_def_type = /datum/plant_def/cocaudo
+	icon_state = "cocaudo_seeds"
 
 //alchemical
 /obj/item/neuFarm/seed/atropa
@@ -265,3 +287,6 @@
 
 /obj/item/neuFarm/seed/spore/kirunabal
 	plant_def_type = /datum/plant_def/mushroom/kirunabal
+
+/obj/item/neuFarm/seed/spore/drowsbane
+	plant_def_type = /datum/plant_def/mushroom/drowsbane

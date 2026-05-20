@@ -25,7 +25,8 @@
 
 /datum/surgery_step/set_bone
 	name = "Set bones"
-	time = 6.4 SECONDS
+	minimum_time = 5 SECONDS
+	maximum_time = 7 SECONDS
 	accept_hand = TRUE
 	implements = list(
 		TOOL_BONESETTER = 80,

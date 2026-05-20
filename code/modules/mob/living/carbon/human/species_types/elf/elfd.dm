@@ -9,6 +9,25 @@
 /mob/living/carbon/human/species/elf/dark
 	race = /datum/species/elf/dark
 
+/datum/attribute_holder/sheet/job/species/dark
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = -1,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+	)
+
+/datum/attribute_holder/sheet/job/species/dark/female
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = -1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1
+	)
+
 /datum/species/elf/dark
 	name = "Dark Elf"
 	id = SPEC_ID_DROW
@@ -43,6 +62,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/elf,
@@ -107,8 +127,8 @@
 		OFFSET_UNDIES = list(0,1),\
 	)
 
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = -1, STATKEY_INT = 1, STATKEY_CON = 0, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 1, STATKEY_PER = -1, STATKEY_INT = 1, STATKEY_CON = 1, STATKEY_END = 1, STATKEY_SPD = 1, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/dark
+	statsheet_female = /datum/attribute_holder/sheet/job/species/dark/female
 	enflamed_icon = "widefire"
 
 	body_markings = list(

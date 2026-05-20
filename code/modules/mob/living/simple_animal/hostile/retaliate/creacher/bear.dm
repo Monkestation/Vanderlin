@@ -1,15 +1,15 @@
-/datum/component/riding/direbear/Initialize()
-	. = ..()
-	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(16, 14), TEXT_SOUTH = list(12, 8), TEXT_EAST = list(7, 12), TEXT_WEST = list(14, 12)))
-	set_vehicle_dir_layer(SOUTH, OBJ_LAYER)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)
+/datum/component/riding/direbear/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	return list(
+		TEXT_NORTH = list(16, 14, OBJ_LAYER),
+		TEXT_SOUTH = list(12, 8, OBJ_LAYER),
+		TEXT_EAST = list(7, 12, OBJ_LAYER),
+		TEXT_WEST = list(14, 12, OBJ_LAYER)
+	)
 
 /datum/status_effect/debuff/staggered
 	id = "staggered"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/staggered
-	effectedstats = list(STATKEY_PER = -2, STATKEY_SPD = -2, STATKEY_CON = -2)
+	effectedstats = list(STAT_PERCEPTION = -2, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
 	duration = 10 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/staggered

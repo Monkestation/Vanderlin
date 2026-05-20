@@ -18,6 +18,7 @@
 	resistance_flags = FLAMMABLE
 	grid_height = 32
 	grid_width = 32
+	item_weight = 200 GRAMS
 
 /obj/item/bait/Initialize()
 	. = ..()
@@ -27,7 +28,7 @@
 	. = ..()
 	user.visible_message("<span class='notice'>[user] begins deploying the bait...</span>", \
 						"<span class='notice'>I begin deploying the bait...</span>")
-	if(do_after(user, deploy_speed * (1/(user.get_skill_level(/datum/skill/craft/traps, TRUE) + 1)), src)) //rogtodo hunting skill
+	if(do_after(user, deploy_speed * (1/(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
 		user.dropItemToGround(src, TRUE)
 		START_PROCESSING(SSobj, src)
 		name = "bait"
@@ -38,7 +39,7 @@
 	if(deployed)
 		user.visible_message("<span class='notice'>[user] begins gathering up the bait...</span>", \
 							"<span class='notice'>I begin gathering up the bait...</span>")
-		if(do_after(user, deploy_speed * (1/(user.get_skill_level(/datum/skill/craft/traps, TRUE) + 1)), src)) //rogtodo hunting skill
+		if(do_after(user, deploy_speed * (1/(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
 			STOP_PROCESSING(SSobj, src)
 			name = initial(name)
 			deployed = 0
@@ -111,6 +112,7 @@
 							/mob/living/simple_animal/hostile/retaliate/saigabuck = 20,
 							/mob/living/simple_animal/hostile/retaliate/wolf = 10)
 
+	item_weight = 200 GRAMS
 
 /obj/item/bait/bloody
 	name = "bag of bloodbait"
@@ -122,6 +124,7 @@
 						/mob/living/simple_animal/hostile/retaliate/troll/axe = 5,
 						/mob/living/simple_animal/hostile/retaliate/troll/bog = 5,
 						/mob/living/simple_animal/hostile/retaliate/troll/caerbannog = 2.5)
+	item_weight = 250 GRAMS
 
 /obj/item/bait/forestdelight
 	name = "meat wrapped in strange herbs"
@@ -129,3 +132,4 @@
 	icon_state = "baitbriar"
 	attracted_types = list (/mob/living/simple_animal/hostile/retaliate/mole/briars = 50,
 						/mob/living/simple_animal/pet/cat/cabbit = 5) // cause get rabbited
+	item_weight = 150 GRAMS

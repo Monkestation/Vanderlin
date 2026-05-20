@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX 32
+#define SAVEFILE_VERSION_MAX 33
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -98,6 +98,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 				pref_species = new species_type()
 				WRITE_FILE(S["species"], pref_species.id)
 
+	if(current_version < 33)
+		switch(voice_type)
+			if("Masculine")
+				voice_type = VOICE_TYPE_MASC
+			if("Feminine")
+				voice_type = VOICE_TYPE_FEM
+		WRITE_FILE(S["voice_type"], voice_type)
+
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
 		return
@@ -147,6 +155,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["chat_toggles"]		>> chat_toggles
 	S["toggles"]			>> toggles
 	S["toggles_maptext"]	>> toggles_maptext
+	S["toggles_gameplay"] >> toggles_gameplay
 	S["ghost_form"]			>> ghost_form
 	S["ghost_orbit"]		>> ghost_orbit
 	S["ghost_accs"]			>> ghost_accs
@@ -181,8 +190,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		update_preferences(needs_update, S)		//needs_update = savefile_version if we need an update (positive integer)
 
 	//Sanitize
-	asaycolor = sanitize_ooccolor(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
-	ooccolor = sanitize_ooccolor(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
+	asaycolor = sanitize_color(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
+	ooccolor = sanitize_color(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style = sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
 	hotkeys = sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
@@ -197,6 +206,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT, initial(toggles))
 	chat_toggles = sanitize_integer(chat_toggles, 0, SHORT_REAL_LIMIT, initial(chat_toggles))
 	toggles_maptext = sanitize_integer(toggles_maptext, 0, SHORT_REAL_LIMIT, initial(toggles_maptext))
+	toggles_gameplay = sanitize_integer(toggles_gameplay, 0, SHORT_REAL_LIMIT, initial(toggles_gameplay))
 	clientfps = sanitize_integer(clientfps, 0, 1000, 0)
 	parallax = sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, null)
 	ambientocclusion = sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
@@ -256,6 +266,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["toggles"], toggles)
 	WRITE_FILE(S["chat_toggles"], chat_toggles)
 	WRITE_FILE(S["toggles_maptext"], toggles_maptext)
+	WRITE_FILE(S["toggles_gameplay"], toggles_gameplay)
 	WRITE_FILE(S["ghost_form"], ghost_form)
 	WRITE_FILE(S["ghost_orbit"], ghost_orbit)
 	WRITE_FILE(S["ghost_accs"], ghost_accs)
@@ -298,9 +309,25 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		loadout3 = null
 		return FALSE
 
-	for(var/i in 1 to 3)
-		if(!(vars["loadout[i]"] in GLOB.loadout_items)) // bite me
-			vars["loadout[i]"] = null
+	var/pass = TRUE
+	var/datum/loadout_item/testing_item
+	if(loadout1)
+		testing_item = GLOB.loadout_items[loadout1]
+		if(!testing_item.is_unlocked_for(parent))
+			loadout1 = null
+			pass = FALSE
+	if(loadout2)
+		testing_item = GLOB.loadout_items[loadout2]
+		if(!testing_item.is_unlocked_for(parent))
+			loadout2 = null
+			pass = FALSE
+	if(loadout3)
+		testing_item = GLOB.loadout_items[loadout3]
+		if(!testing_item.is_unlocked_for(parent))
+			loadout3 = null
+			pass = FALSE
+
+	return pass
 
 /datum/preferences/proc/_load_culinary_preferences(S)
 	var/list/loaded_culinary_preferences
@@ -321,6 +348,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["skin_tone"] >> skin_tone
 	S["culture"] >> culture
 	S["underwear"] >> underwear
+	S["underwear_color"] >> underwear_color
 	S["accessory"] >> accessory
 	S["detail"] >> detail
 	S["randomise"] >> randomise
@@ -375,10 +403,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
 	if(patron_typepath)
-		selected_patron = GLOB.patron_list[patron_typepath]
+		selected_patron = GLOB.patrons_by_type[patron_typepath]
 
 	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patron_list[default_patron]
+		selected_patron = GLOB.patrons_by_type[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -430,7 +458,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	eye_color = sanitize_hexcolor(eye_color, 3, 0)
 	voice_color = voice_color
 	pronouns = sanitize_text(pronouns, THEY_THEM)
-	voice_type = sanitize_text(voice_type, VOICE_TYPE_MASC)
+	voice_type = sanitize_inlist(voice_type, VOICE_TYPES_LIST, VOICE_TYPE_MASC)
 	skin_tone = skin_tone
 	family = family
 	gender_choice = gender_choice

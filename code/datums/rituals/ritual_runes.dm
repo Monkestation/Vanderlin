@@ -40,7 +40,7 @@
 	/// If a rune provides a bonus to a spell, or spellbook reading.
 	var/spellbonus = 0
 	/// Hhow much damage you take doing it
-	var/scribe_damage = 0.1
+	var/scribe_damage = 5
 	/// How much damage invokers take when invoking it
 	var/invoke_damage = 0
 	/// If the rune requires a keyword when scribed
@@ -64,16 +64,16 @@
 	var/takes_all_items = FALSE
 
 /proc/isarcyne(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/arcane) > SKILL_LEVEL_NONE)	//checks if person has arcane skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/arcane) > SKILL_LEVEL_NONE)	//checks if person has arcane skill
 
 /proc/isdivine(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/holy) > SKILL_LEVEL_NONE)	//checks if person has holy/divine skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/holy) > SKILL_LEVEL_NONE)	//checks if person has holy/divine skill
 
 /proc/isdruid(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/druidic) > SKILL_LEVEL_NONE)	//checks if person has druidic skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/druidic) > SKILL_LEVEL_NONE)	//checks if person has druidic skill
 
 /proc/isblood(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/blood) > SKILL_LEVEL_NONE)		//checks if person has blood magic skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/blood) > SKILL_LEVEL_NONE)		//checks if person has blood magic skill
 
 GLOBAL_LIST_INIT(rune_types, generate_rune_types())
 GLOBAL_LIST_INIT(t1rune_types, generate_t1rune_types())
@@ -747,7 +747,6 @@ GLOBAL_LIST(teleport_runes)
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
-		summoned_mob.move_resist = MOVE_RESIST_DEFAULT
 		summoned_mob.SetParalyzed(0)
 		summoned_mob = null
 		summoning = FALSE
@@ -764,7 +763,6 @@ GLOBAL_LIST(teleport_runes)
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
-		summoned_mob.move_resist = MOVE_RESIST_DEFAULT
 		summoned_mob.SetParalyzed(0)
 		summoned_mob = null
 		summoning = FALSE

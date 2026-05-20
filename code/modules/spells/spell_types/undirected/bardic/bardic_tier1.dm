@@ -26,10 +26,12 @@
 	. = ..()
 	to_chat(owner, span_notice("My steps feel lighter than normal."))
 	ADD_TRAIT(owner, TRAIT_LIGHT_STEP, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/inspiration/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_LIGHT_STEP, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/buff/song/furtive_fortissimo
 	name = "Furtive Fortissimo"
@@ -57,7 +59,7 @@
 	id = "intellectualinterval"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/intellectual_interval
 	duration = 60 SECONDS
-	effectedstats = list(STATKEY_INT = 3)
+	effectedstats = list(STAT_INTELLIGENCE = 3)
 
 /atom/movable/screen/alert/status_effect/buff/song/intellectual_interval
 	name = "Intellectual Interval"
@@ -86,7 +88,7 @@
 /datum/status_effect/inspiration/dirge_misfortune
 	id = "dirge_misfortune"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/song/dirge_misfortune
-	effectedstats = list(STATKEY_LCK = -2)
+	effectedstats = list(STAT_FORTUNE = -2)
 	duration = 30 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/song/dirge_misfortune

@@ -5,7 +5,7 @@
 
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	icon_state = "dock_bell"
-
+	layer = WALL_OBJ_LAYER
 
 	COOLDOWN_DECLARE(ring_bell)
 	COOLDOWN_DECLARE(outsider_ring_bell)

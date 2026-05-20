@@ -41,7 +41,7 @@
 	///the trait we check incase we are always revealed to the mob
 	var/always_revealed_trait
 	///the skill we care about
-	var/datum/skill/reveal_skill = /datum/skill/craft/alchemy
+	var/datum/attribute/skill/reveal_skill = /datum/attribute/skill/craft/alchemy
 	///do we give xp to those who find us?
 	var/adds_xp_on_reveal = FALSE
 
@@ -88,9 +88,9 @@
 		//diff += round((world.time - creation_time) / (60 SECONDS), 1) //Gets more difficult to spot the older.
 		diff += rand(0, 5) //Entropy.
 
-		var/competence = user.STAPER
+		var/competence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)
 		if(user.mind)
-			competence += 2 * user.get_skill_level(reveal_skill, TRUE)
+			competence += 2 * GET_MOB_SKILL_VALUE_OLD(user, reveal_skill)
 
 		if(competence >= diff)
 			success = TRUE
@@ -99,7 +99,7 @@
 	else
 		success = TRUE
 	if(success && user.mind && creator != user && adds_xp_on_reveal)
-		user.mind.add_sleep_experience(reveal_skill, (user.STAINT*2))
+		user.mind.add_sleep_experience(reveal_skill, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*2))
 	return success
 
 ///Handles revealing the track, including checking how well the tracker can analyze it.
@@ -110,9 +110,9 @@
 		var/diff = 11
 		diff += tracking_modifier
 		//diff += round((world.time - creation_time) / (60 SECONDS), 1)
-		var/competence = user.STAPER / 2
+		var/competence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) / 2
 		if(user.mind)
-			competence += 5 * user.get_skill_level(reveal_skill, TRUE) //Skill is much more relevant for analysis.
+			competence += 5 * GET_MOB_SKILL_VALUE_OLD(user, reveal_skill) //Skill is much more relevant for analysis.
 		switch(competence - diff)
 			if(18 to INFINITY)
 				analysis_result = ANALYSIS_PERFECT
@@ -133,12 +133,12 @@
 	known_by[tracker] = competence
 	if(tracker.client)
 		tracker.client.images |= real_image
-	RegisterSignal(tracker, COMSIG_PARENT_QDELETING, PROC_REF(remove_knower), override = TRUE)
+	RegisterSignal(tracker, COMSIG_QDELETING, PROC_REF(remove_knower), override = TRUE)
 
 ///Removes a knower from the known ones. Usually only done when qdeleted.
 /obj/effect/skill_tracker/proc/remove_knower(mob/living/tracker)
 	SIGNAL_HANDLER
-	UnregisterSignal(tracker, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(tracker, COMSIG_QDELETING)
 	if(tracker.client)
 		tracker.client.images -= real_image
 	known_by -= tracker
@@ -148,7 +148,7 @@
 ///Clears the reference to the creator. Is replaced by the above proc if the creator analyzes it.
 /obj/effect/skill_tracker/proc/clear_creator_reference(mob/living/creator_arg)
 	SIGNAL_HANDLER
-	UnregisterSignal(creator, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(creator, COMSIG_QDELETING)
 	creator = null
 
 #undef ANALYSIS_TERRIBLE

@@ -12,7 +12,7 @@
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_POOR
 	salvage_result = null
-	item_weight = 3
+	item_weight = 300 GRAMS
 
 /obj/item/clothing/gloves/leather/black
 	color = CLOTHING_SOOT_BLACK
@@ -24,15 +24,15 @@
 /obj/item/clothing/gloves/leather/advanced
 	name = "hardened leather gloves"
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your fingers."
-	max_integrity = INTEGRITY_STANDARD
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/gloves/leather/masterwork
 	name = "masterwork leather gloves"
 	desc = "These gloves are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/gloves/leather/masterwork/Initialize()
@@ -68,7 +68,9 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 
 /obj/item/clothing/gloves/leather/otavan/inqgloves
 	name = "inquisitorial leather gloves"
@@ -87,7 +89,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
-	item_weight = 4
+	item_weight = 500 GRAMS
 
 /obj/item/clothing/gloves/leather/courtphysician
 	name = "sanguine gloves"

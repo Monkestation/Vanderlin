@@ -1,4 +1,4 @@
-/mob/living/Moved()
+/mob/living/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	stop_looking()
 	update_turf_movespeed(loc)
@@ -61,7 +61,7 @@
 			mod = CONFIG_GET(number/movedelay/run_delay)
 		if(MOVE_INTENT_SNEAK)
 			mod = 6
-	var/spdchange = (10-STASPD)*0.1
+	var/spdchange = (10-GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED))*0.1
 	spdchange = clamp(spdchange, -0.5, 1)  //if this is not clamped, it can make you go faster than you should be able to.
 	mod = mod+spdchange
 	//maximum speed is achieved at 15 speed.
@@ -113,24 +113,71 @@
 
 	remove_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING)
 
-/mob/living/can_zFall(turf/T, levels)
+/mob/living/up()
+	if(stat >= UNCONSCIOUS)
+		return
+	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+		return
 	return ..()
 
-/mob/living/canZMove(dir, turf/target)
-	return can_zTravel(target, dir) && (movement_type & FLYING)
+/mob/living/down()
+	if(stat >= UNCONSCIOUS)
+		return
+	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+		return
+	return ..()
 
-/mob/living/can_safely_descend(turf/target)
-	target = GET_TURF_BELOW(target)
-	var/flags = NONE
-	for(var/atom/thing as anything in target)
-		flags |= thing.intercept_zImpact(src, 1)
-		if(flags & FALL_STOP_INTERCEPTING)
-			break
-	for(var/obj/structure/stairs/S in target)
-		return TRUE
-	if(flags & FALL_INTERCEPTED)
-		return TRUE
-	return FALSE
+/**
+ * We want to relay the zmovement to the buckled atom when possible
+ * and only run what we can't have on buckled.zMove() or buckled.can_z_move() here.
+ * This way we can avoid esoteric bugs, copypasta and inconsistencies.
+ */
+/mob/living/zMove(dir, turf/target, z_move_flags = ZMOVE_FLIGHT_FLAGS)
+	if(buckled)
+		if(buckled.currently_z_moving)
+			return FALSE
+		if(!(z_move_flags & ZMOVE_ALLOW_BUCKLED))
+			buckled.unbuckle_mob(src, force = TRUE, can_fall = FALSE)
+		else
+			if(!target)
+				target = can_z_move(dir, get_turf(src), null, z_move_flags, src)
+				if(!target)
+					return FALSE
+			return buckled.zMove(dir, target, z_move_flags) // Return value is a loc.
+	return ..()
+
+/mob/living/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)
+	if(z_move_flags & ZMOVE_LYING_CHECKS && body_position != STANDING_UP)
+		if(z_move_flags & ZMOVE_FEEDBACK)
+			to_chat(src, span_warning("I need to stand to do this!"))
+		return FALSE
+	if(z_move_flags & ZMOVE_INCAPACITATED_CHECKS && incapacitated())
+		if(z_move_flags & ZMOVE_FEEDBACK)
+			to_chat(rider || src, span_warning("[rider ? src : "I"] can't do that right now!"))
+		return FALSE
+	if(!buckled || !(z_move_flags & ZMOVE_ALLOW_BUCKLED))
+		if(!(z_move_flags & ZMOVE_FALL_CHECKS) && incorporeal_move && (!rider || rider.incorporeal_move))
+			//An incorporeal mob will ignore obstacles unless it's a potential fall (it'd suck hard) or is carrying corporeal mobs.
+			//Coupled with flying/floating, this allows the mob to move up and down freely.
+			//By itself, it only allows the mob to move down.
+			z_move_flags |= ZMOVE_IGNORE_OBSTACLES
+		return ..()
+	switch(SEND_SIGNAL(buckled, COMSIG_BUCKLED_CAN_Z_MOVE, direction, start, destination, z_move_flags, src))
+		if(COMPONENT_RIDDEN_ALLOW_Z_MOVE) // Can be ridden.
+			return buckled.can_z_move(direction, start, destination, z_move_flags, src)
+		if(COMPONENT_RIDDEN_STOP_Z_MOVE) // Is a ridable but can't be ridden right now. Feedback messages already done.
+			return FALSE
+		else
+			if(!(z_move_flags & ZMOVE_CAN_FLY_CHECKS) && !buckled.anchored)
+				return buckled.can_z_move(direction, start, destination, z_move_flags, src)
+			if(z_move_flags & ZMOVE_FEEDBACK)
+				to_chat(src, span_warning("Unbuckle from [buckled] first."))
+			return FALSE
+
+/mob/set_currently_z_moving(value)
+	if(buckled)
+		return buckled.set_currently_z_moving(value)
+	return ..()
 
 //* Updates a mob's sneaking status, rendering them invisible or visible in accordance to their status. TODO:Fix people bypassing the sneak fade by turning, and add a proc var to have a timer after resetting visibility.
 /mob/living/update_sneak_invis(reset = FALSE)
@@ -141,7 +188,7 @@
 	var/light_amount = T?.get_lumcount()
 	var/used_time = DEFAULT_MOB_SNEAK_TIME
 	var/light_threshold = rogue_sneaking_light_threshold
-	var/sneak_skill_level = get_skill_level(/datum/skill/misc/sneaking, TRUE)
+	var/sneak_skill_level = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/sneaking)
 	light_threshold += (sneak_skill_level / 200)
 
 	if(rogue_sneaking) //If sneaking, check if they should be revealed

@@ -23,7 +23,7 @@
 		var/mob/living/attacker = user
 
 		var/damage_dealt = 8
-		victim.apply_damage(damage_dealt, BRUTE)
+		victim.apply_damage(damage_dealt, BRUTE, damage_type = BCLASS_BITE)
 
 		var/heal_amount = damage_dealt / 2
 		attacker.heal_bodypart_damage(heal_amount, heal_amount)

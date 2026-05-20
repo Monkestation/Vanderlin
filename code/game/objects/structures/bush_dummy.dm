@@ -56,7 +56,7 @@
 	animate(pixel_y = old_y - 3, transform = T2, time = 1)
 	animate(pixel_y = old_y, transform = null, time = 1)
 
-	step(src, direction)
+	try_step_multiz(direction)
 	return 1
 
 /obj/effect/dummy/bush_disguise/proc/on_attacked(atom/attacker, damage)

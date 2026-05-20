@@ -25,6 +25,13 @@
 	var/datum/mind/mind
 	var/static/next_mob_id = 0
 
+	/// List of action speed modifiers applying to this mob
+	var/list/actionspeed_modification //Lazy list, see mob_movespeed.dm
+	/// List of action speed modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/actionspeed_mod_immunities //Lazy list, see mob_movespeed.dm
+	/// The calculated mob action speed slowdown based on the modifiers list
+	var/cached_multiplicative_actions_slowdown
+
 	///Cursor icon used when holding shift over things
 	var/examine_cursor_icon = 'icons/effects/mousemice/human_looking.dmi'
 
@@ -90,6 +97,12 @@
 	/// How many ticks this mob has been over reating
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 
+	var/uses_random_stats = TRUE
+	/// Skill holder
+	var/datum/attribute_holder/attributes = /datum/attribute_holder
+	/// Extra effort that can be spent on efforts
+	var/extra_effort = 0
+
 	/// The current intent of the mob
 	var/uses_intents = TRUE
 	var/datum/intent/a_intent = INTENT_HELP//Living
@@ -116,10 +129,8 @@
 	/// The last known IP of the client who was in this mob
 	var/lastKnownIP = null
 
-	/// movable atoms buckled to this mob
-	var/atom/movable/buckled = null//Living
 	/// movable atom we are buckled to
-	var/atom/movable/buckling
+	var/atom/movable/buckled = null//Living
 
 	//Hands
 	///What hand is the active hand
@@ -209,6 +220,9 @@
 
 	var/datum/focus //What receives our keyboard inputs. src by default
 
+	/// Used for tracking last uses of emotes for cooldown purposes
+	var/list/emotes_used
+
 	//Whether the mob is updating glide size when movespeed updates or not
 	var/updating_glide_size = TRUE
 
@@ -244,8 +258,6 @@
 
 	var/last_dodge = 0
 	var/last_parry = 0
-	var/next_emote = 0
-	var/next_me_emote = 0
 	var/lastpoint = 0
 
 	var/mobid = 0 //incremented on spawn
@@ -284,3 +296,13 @@
 
 	/// new title given by an admin.
 	var/admin_title = null
+	///if true we spawn this mob and look for data for guidebooks
+	var/indexed = FALSE
+
+	VAR_PROTECTED/base_strength = 10
+	VAR_PROTECTED/base_perception = 10
+	VAR_PROTECTED/base_endurance = 10
+	VAR_PROTECTED/base_constitution = 10
+	VAR_PROTECTED/base_intelligence = 10
+	VAR_PROTECTED/base_speed = 10
+	VAR_PROTECTED/base_fortune = 10

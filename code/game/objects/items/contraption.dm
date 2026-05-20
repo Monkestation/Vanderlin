@@ -8,6 +8,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	smeltresult = /obj/item/ingot/bronze
 	slot_flags = ITEM_SLOT_HIP
+	item_weight = 500 GRAMS
 	var/obj/item/accepted_power_source = /obj/item/gear/metal
 	/// This is the amount of charges we get per power source
 	var/charge_per_source = 5
@@ -54,7 +55,7 @@
 	if(!istype(user, /mob/living))
 		return
 	var/mob/living/player = user
-	var/skill = player.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(player, /datum/attribute/skill/craft/engineering)
 	if(current_charge)
 		. += span_warning("The contraption has [current_charge] charges left.")
 	if(!current_charge)
@@ -78,7 +79,7 @@
 	return
 
 /obj/item/contraption/proc/misfire(atom/A, mob/living/user)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT * 5))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 5))
 	to_chat(user, span_info("Oh fuck."))
 	playsound(src, 'sound/misc/bell.ogg', 100)
 	addtimer(CALLBACK(src, PROC_REF(misfire_result), A, user), rand(5, 30))
@@ -173,6 +174,7 @@
 	misfire_chance = 15
 	charge_per_source = 5
 	special_cog = TRUE
+	item_weight = 1.5 KILOGRAMS
 
 /obj
 	/// This is the result when the wood metalizer artifact is used on this item
@@ -197,7 +199,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 		return
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	if(istype(O, /obj/structure/door)) //This is to ensure the new door will retain its lock
 		var/obj/structure/door/door = O
 		var/obj/structure/door/new_door = new door.metalizer_result(get_turf(door))
@@ -216,8 +218,8 @@
 	charge_deduction(O, user, 1)
 	shake_camera(user, 1, 1)
 	playsound(src, 'sound/magic/swap.ogg', 100, TRUE)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 2))
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2))
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STAT_FORTUNE,2,10) - skill)))
 		misfire(O, user)
 	return
 
@@ -243,6 +245,7 @@
 	misfire_chance = 10
 	charge_per_source = 6
 	special_cog = TRUE
+	item_weight = 2 KILOGRAMS
 
 /obj/item/contraption/smelter/misfire_result()
 	misfiring = TRUE
@@ -289,7 +292,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 		return
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 3))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 3))
 	charge_deduction(O, user, 1)
 	flick(on_icon, src)
 	playsound(src, 'sound/misc/machinevomit.ogg', 50, TRUE)
@@ -297,11 +300,11 @@
 	return
 
 /obj/item/contraption/smelter/proc/smelt_part2(obj/O, mob/living/user)
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	var/turf/turf = get_turf(O)
 	playsound(O, pick('sound/combat/hits/burn (1).ogg','sound/combat/hits/burn (2).ogg'), 100)
 	O.moveToNullspace()
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STAT_FORTUNE,2,10) - skill)))
 		misfire(O, user)
 	addtimer(CALLBACK(O, PROC_REF(popcorn_smelt_result), turf), 20)
 	return
@@ -316,6 +319,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	smeltresult = /obj/item/ingot/bronze
 	charge_per_source = 4
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
@@ -354,7 +358,7 @@
 	if(patient.stat != DEAD && (patient.has_status_effect(/datum/status_effect/jitter) || patient.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
-	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering, TRUE) / 6)
+	var/skill_modifier = 1.5 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) / 6)
 	if(do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
 		playsound(patient, 'sound/misc/guillotine.ogg', 20, TRUE)
 		limb_snip_candidate.drop_limb()
@@ -374,6 +378,7 @@
 	charge_per_source = 10
 	grid_height = 96
 	grid_width = 96
+	item_weight = 800 GRAMS
 
 /obj/item/contraption/linker/hammer_action(obj/item/I, mob/user)
 	return
@@ -385,14 +390,14 @@
 
 /obj/item/contraption/linker/examine(mob/user)
 	. = ..()
-	if(HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || user.get_skill_level(/datum/skill/craft/engineering) >= 1)
+	if(HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) >= 1)
 		. += span_notice("Its buffer [buffer ? "contains [buffer]." : "is empty."]")
 	else
 		. += span_notice("All you can make out is a bunch of gibberish.")
 
 /obj/item/contraption/linker/attack_self(mob/user, list/modifiers)
 	. = ..()
-	if(user.get_skill_level(/datum/skill/craft/engineering) >= 1)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) >= 1)
 		to_chat(user, "You wipe [src] of its stored buffer.")
 		remove_buffer(src)
 	else
@@ -403,7 +408,7 @@
 		remove_buffer(src.buffer)
 	src.buffer = buffer
 	if(!QDELETED(buffer))
-		RegisterSignal(buffer, COMSIG_PARENT_QDELETING, PROC_REF(remove_buffer))
+		RegisterSignal(buffer, COMSIG_QDELETING, PROC_REF(remove_buffer))
 
 /**
  * Called when the buffer's stored object is deleted
@@ -414,7 +419,7 @@
 /obj/item/contraption/linker/proc/remove_buffer(datum/source)
 	SIGNAL_HANDLER
 	SEND_SIGNAL(src, COMSIG_MULTITOOL_REMOVE_BUFFER, source)
-	UnregisterSignal(buffer, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(buffer, COMSIG_QDELETING)
 	buffer = null
 
 /obj/item/folding_table_stored
@@ -426,6 +431,7 @@
 	resistance_flags = FIRE_PROOF
 	grid_height = 32
 	grid_width = 64
+	item_weight = 3 KILOGRAMS
 
 /obj/item/folding_table_stored/attack_self(mob/user)
 	. = ..()
@@ -523,6 +529,7 @@
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	grid_width = 32
 	grid_height = 64
+	item_weight = 4 KILOGRAMS
 
 /obj/item/mobilestove/attack_self(mob/user, list/modifiers)
 	..()

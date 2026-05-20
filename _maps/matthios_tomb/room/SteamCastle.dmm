@@ -864,7 +864,6 @@
 /area/under/tomb/indoors/royal)
 "jK" = (
 /obj/structure/winch{
-	gid = "FireGate3";
 	redstone_id = "FireGate3"
 	},
 /turf/open/floor/cobblerock,
@@ -1050,8 +1049,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "lQ" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush_meagre,
@@ -1761,8 +1759,7 @@
 /turf/open/openspace,
 /area/under/tomb)
 "um" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush,
@@ -1886,8 +1883,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "vR" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush/wall/tall,
@@ -1936,7 +1932,6 @@
 /area/under/tomb/indoors)
 "wI" = (
 /obj/structure/gate{
-	gid = "FireGate3";
 	redstone_id = "FireGate3"
 	},
 /turf/open/floor/cobble,
@@ -2400,8 +2395,7 @@
 "AQ" = (
 /obj/structure/winch{
 	name = "Hell Gate";
-	redstone_id = "FireGate1";
-	gid = "FireGate1"
+	redstone_id = "FireGate1"
 	},
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/darker,
@@ -2681,8 +2675,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
 "Dc" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush,
@@ -2725,7 +2718,6 @@
 /area/under/tomb/indoors)
 "DY" = (
 /obj/structure/gate{
-	gid = "FireGate1";
 	redstone_id = "FireGate1";
 	name = "Hell Gate"
 	},
@@ -3072,7 +3064,6 @@
 "Hp" = (
 /obj/structure/winch{
 	name = "Hearth Gate";
-	gid = "FireGate2";
 	redstone_id = "FireGate2"
 	},
 /turf/open/floor/ruinedwood/darker,
@@ -3738,8 +3729,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/wilds)
 "OR" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush/wall/tall,
@@ -4743,7 +4733,6 @@
 "Zx" = (
 /obj/structure/gate{
 	redstone_id = "FireGate2";
-	gid = "FireGate2";
 	name = "Hearth Gate"
 	},
 /turf/open/floor/cobble,

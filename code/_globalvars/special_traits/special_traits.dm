@@ -47,6 +47,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	if(!player)
 		player = character.client
 	apply_prefs_special(character, player)
+	apply_voicepacks(character, player)
 
 /proc/apply_prefs_special(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -60,6 +61,16 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	apply_special_trait_if_able(character, player, trait_type)
 	player.prefs.next_special_trait = null
+
+/proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
+	switch(player.prefs.voice_type)
+		if(VOICE_TYPE_MASC_FOP)
+			character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
+		if(VOICE_TYPE_FEM_DAINTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/dainty()
+		if(VOICE_TYPE_FEM_HAUGHTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/haughty()
+	return
 
 /proc/apply_loadouts(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -98,6 +109,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		if(!job)
 			return FALSE
 		if(!(job.type in special.allowed_jobs) && !(parent_job?.type in special.allowed_jobs))
+			return FALSE
+	if(istype(job, /datum/job/advclass))
+		var/datum/job/advclass/advjob = job
+		if(!isnull(special.allowed_ctags) && !length(advjob?.category_tags & special.allowed_ctags))
 			return FALSE
 	if(!isnull(special.restricted_jobs) && job && (job.type in special.restricted_jobs))
 		return FALSE

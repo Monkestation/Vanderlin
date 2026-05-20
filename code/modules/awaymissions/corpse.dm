@@ -40,7 +40,7 @@
 		return
 	if(QDELETED(src) || QDELETED(user))
 		return
-	var/ghost_role = alert("Become [mob_name]? (Warning, You can no longer be cloned!)",,"Yes","No")
+	var/ghost_role = tgui_alert(user, "Become [mob_name]? (Warning, You can no longer be cloned!)", "Join Mob", list("Yes","No"))
 	if(ghost_role == "No" || !loc)
 		return
 	log_game("[key_name(user)] became [mob_name]")
@@ -84,7 +84,7 @@
 		M.death(1) //Kills the new mob
 
 	M.adjustOxyLoss(oxy_damage)
-	M.adjustBruteLoss(brute_damage)
+	M.adjustBruteLoss(brute_damage, damage_type = pick(BCLASS_BITE, BCLASS_BLUNT, BCLASS_LASHING, BCLASS_CUT))
 	M.adjustFireLoss(burn_damage)
 	M.color = mob_color
 	equip(M)

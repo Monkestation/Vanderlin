@@ -230,9 +230,9 @@
 /obj/machinery/proc/can_be_overridden()
 	. = 1
 
-/obj/machinery/Exited(atom/movable/AM, atom/newloc)
+/obj/machinery/Exited(atom/movable/gone, direction)
 	. = ..()
-	if (AM == occupant)
+	if (gone == occupant)
 		occupant = null
 
 /obj/machinery/proc/adjust_item_drop_location(atom/movable/AM)	// Adjust item drop location to a 3x3 grid inside the tile, returns slot id from 0 to 8
@@ -248,14 +248,14 @@
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+			user.add_offsets("structure_climb", x_add = 0, y_add = climb_offset)
 
 /obj/machinery/Uncrossed(atom/movable/AM)
 	. = ..()
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.reset_offsets("structure_climb")
+			user.remove_offsets("structure_climb")
 
 /obj/machinery/MouseDrop_T(atom/movable/O, mob/user)
 	. = ..()
@@ -288,7 +288,7 @@
 	var/adjusted_climb_time = climb_time
 	if(HAS_TRAIT(user, TRAIT_HANDS_BLOCKED)) //climbing takes twice as long when restrained.
 		adjusted_climb_time *= 2
-	adjusted_climb_time -= user.STASPD * 2
+	adjusted_climb_time -= GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 2
 	adjusted_climb_time = max(adjusted_climb_time, 0)
 
 	structureclimber = user

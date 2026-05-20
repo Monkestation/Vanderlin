@@ -104,6 +104,10 @@
 	if(CONFIG_GET(flag/log_manifest))
 		WRITE_LOG(GLOB.world_manifest_log, "\[[TIMETOTEXT4LOGS]\] [ckey] \\ [body.real_name] \\ [mind.assigned_role.title] \\ [mind.special_role ? mind.special_role : "NONE"] \\ [latejoin ? "LATEJOIN":"ROUNDSTART"]")
 
+/proc/log_quest(ckey, datum/mind/mind, mob/body, text)
+	if (CONFIG_GET(flag/log_law))
+		WRITE_LOG(GLOB.world_game_log, "\[[TIMETOTEXT4LOGS]] QUEST: [ckey] \\ [body.real_name] \\ [text]")
+
 /proc/log_bomber(atom/user, details, atom/bomb, additional_details, message_admins = TRUE)
 	var/bomb_message = "\[[TIMETOTEXT4LOGS]\] [details][bomb ? " [bomb.name] at [AREACOORD(bomb)]": ""][additional_details ? " [additional_details]" : ""]."
 

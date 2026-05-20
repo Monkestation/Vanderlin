@@ -248,7 +248,8 @@
 	if(locked)
 		if(user && !stop_messages)
 			host.add_fingerprint(user)
-			to_chat(user, span_warning("[host] seems to be locked!"))
+			if(!silent)
+				to_chat(user, span_warning("[host] seems to be locked!"))
 		return FALSE
 	if(worn_check && !worn_check(parent, user))
 		host.add_fingerprint(user)
@@ -404,22 +405,23 @@
 /datum/component/storage/proc/should_block_user_take(obj/item/stored, mob/user, worn_check = FALSE, no_message = FALSE)
 	if(worn_check && !worn_check(parent, user, no_message))
 		return TRUE
-	var/atom/real_location = real_location()
-	var/atom/recursive_loc = real_location?.loc
-	var/depth = 0
-	while(isatom(recursive_loc) && !isturf(recursive_loc) && !isarea(recursive_loc))
-		var/datum/component/storage/biggerfish = recursive_loc.GetComponent(/datum/component/storage)
-		if(biggerfish)
-			depth++
-			if(!biggerfish.worn_check(biggerfish.parent, user, TRUE))
-				if(!no_message)
-					to_chat(user, span_warning("[recursive_loc] is in the way!"))
-				return TRUE
-			else if(biggerfish.maximum_depth <= depth)
-				if(!no_message)
-					to_chat(user, span_warning("[recursive_loc] is in the way!"))
-				return TRUE
-		recursive_loc = recursive_loc.loc
+	if(!istype(src, /datum/component/storage/concrete/organ))
+		var/atom/real_location = real_location()
+		var/atom/recursive_loc = real_location?.loc
+		var/depth = 0
+		while(isatom(recursive_loc) && !isturf(recursive_loc) && !isarea(recursive_loc))
+			var/datum/component/storage/biggerfish = recursive_loc.GetComponent(/datum/component/storage)
+			if(biggerfish && !istype(biggerfish, /datum/component/storage/concrete/organ))
+				depth++
+				if(!biggerfish.worn_check(biggerfish.parent, user, TRUE))
+					if(!no_message)
+						to_chat(user, span_warning("[recursive_loc] is in the way!"))
+					return TRUE
+				else if(biggerfish.maximum_depth < depth)
+					if(!no_message)
+						to_chat(user, span_warning("[recursive_loc] is in the way!"))
+					return TRUE
+			recursive_loc = recursive_loc.loc
 	return FALSE
 
 /datum/component/storage/proc/update_closer(rows = 0, cols = 0)
@@ -769,7 +771,7 @@
 	storing.mouse_opacity = MOUSE_OPACITY_OPAQUE //So you can click on the area around the item to equip it, instead of having to pixel hunt
 	if(ismovable(parent))
 		if(isliving(parent:loc))
-			parent:loc:encumbrance_to_speed()
+			parent:loc:update_carry_weight()
 	update_icon()
 	refresh_mob_views()
 	return TRUE

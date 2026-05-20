@@ -17,7 +17,7 @@
 	if(should_process)
 		START_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/Destroy(force, ...)
+/datum/enchantment/Destroy(force)
 	if(enchanted_item)
 		remove_item(enchanted_item)
 	if(should_process)
@@ -38,11 +38,11 @@
 /datum/enchantment/proc/register_triggers(atom/item)
 	if(!item)
 		return
-	registered_signals += COMSIG_PARENT_QDELETING
-	RegisterSignal(item, COMSIG_PARENT_QDELETING, PROC_REF(on_item_deleted))
+	registered_signals += COMSIG_QDELETING
+	RegisterSignal(item, COMSIG_QDELETING, PROC_REF(on_item_deleted))
 
-	registered_signals += COMSIG_PARENT_EXAMINE
-	RegisterSignal(item, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	registered_signals += COMSIG_ATOM_EXAMINE
+	RegisterSignal(item, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/enchantment/proc/unregister_triggers()
 	if(!enchanted_item || !length(registered_signals))

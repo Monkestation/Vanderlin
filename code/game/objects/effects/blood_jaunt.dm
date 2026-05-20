@@ -1,6 +1,6 @@
 
 /obj/effect/bloodcult_jaunt
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon = 'icons/effects/vampire/96x96.dmi'
 	icon_state ="cult_jaunt"
 	invisibility = SEE_INVISIBLE_LIVING
@@ -112,9 +112,6 @@
 			qdel(A)
 	packed = list()
 	. = ..()
-
-/obj/effect/bloodcult_jaunt/narsie_act()
-	return
 
 /obj/effect/bloodcult_jaunt/ex_act()
 	return

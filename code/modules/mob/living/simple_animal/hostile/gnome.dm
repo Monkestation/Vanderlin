@@ -1,7 +1,3 @@
-// ===============================
-// GNOME HOMUNCULUS MOB
-// ===============================
-
 /mob/living/simple_animal/hostile/gnome_homunculus
 	name = "gnome homunculus"
 	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy, and it seems eager to help with menial tasks."
@@ -11,6 +7,8 @@
 	icon_dead = "gnome_dead"
 
 	pass_flags = PASSMOB
+
+	animal_type = /datum/blood_type/putrid
 
 	maxHealth = 50
 	health = 50

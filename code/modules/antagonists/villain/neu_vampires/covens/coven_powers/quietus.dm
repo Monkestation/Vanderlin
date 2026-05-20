@@ -147,6 +147,7 @@
 	check_flags = COVEN_CHECK_CAPABLE | COVEN_CHECK_CONSCIOUS | COVEN_CHECK_IMMOBILE | COVEN_CHECK_LYING | COVEN_CHECK_FREE_HAND
 	violates_masquerade = TRUE
 	cooldown_length = 5 SECONDS
+	violates_masquerade = TRUE
 
 /datum/coven_power/quietus/scorpions_touch/activate()
 	. = ..()

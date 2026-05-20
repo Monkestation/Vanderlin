@@ -52,6 +52,8 @@
 #define COMSIG_MOB_BUTCHERED "mob_butchered"
 /// from /datum/species/proc/kicked() (mob/user, mob/target, zone_hit, damage_blocked)
 #define COMSIG_MOB_KICK "mob_kick"
+/// from /datum/species/proc/kicked() (mob/user, mob/target, zone_hut, damage_blocked)
+#define COMSIG_MOB_KICKED "mob_kicked"
 /// from /obj/structure/closet/dirthole/attackby() (mob/user)
 #define COMSIG_GRAVE_ROBBED "grave_robbed"
 /// from /datum/action/cooldown/spell/find_flaw/cast() (datum/charflaw/flaw, mob/target)

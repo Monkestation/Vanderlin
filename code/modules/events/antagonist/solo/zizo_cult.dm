@@ -4,6 +4,7 @@
 		TAG_ZIZO,
 		TAG_COMBAT,
 		TAG_VILLAIN,
+		TAG_MAGICAL
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_ZIZOIDCULTIST
@@ -11,9 +12,11 @@
 
 	base_antags = 1
 	maximum_antags = 4
+	denominator = (LOWPOP_THRESHOLD*0.5) * READYUP_AVG
+	min_players = LOWPOP_THRESHOLD * READYUP_AVG
+	cost = 0.9
 
-	min_players = 35
-	weight = 6
+	weight = 8
 
 	earliest_start = 0 SECONDS
 
@@ -33,7 +36,13 @@
 		/datum/job/adept,
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
+		/datum/job/gmtemplar,
 		/datum/job/templar,
+		/datum/job/archivist,
+		/datum/job/magician,
+		/datum/job/tomb_warden,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event/antagonist/solo/zizo_cultist

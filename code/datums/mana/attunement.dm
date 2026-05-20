@@ -139,7 +139,7 @@ GLOBAL_LIST_INIT(attunement_colors, list(
 /obj/effect/temp_visual/particle_up/Initialize(mapload, mob/target_mob, obj/spell_rune)
 	. = ..()
 	mob = WEAKREF(target_mob)
-	RegisterSignal(spell_rune, COMSIG_PARENT_QDELETING, PROC_REF(clean_up))
+	RegisterSignal(spell_rune, COMSIG_QDELETING, PROC_REF(clean_up))
 	overlays += emissive_appearance(icon, icon_state, alpha = src.alpha)
 
 /obj/effect/temp_visual/particle_up/Destroy(force)
@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(attunement_colors, list(
 
 	var/list/alignments = list() // no alignments by default
 
-/datum/attunement/Destroy(force, ...)
+/datum/attunement/Destroy(force)
 	stack_trace("Destroy called on [src], [src.type], a singleton attunement instance!")
 	if (!force)
 		return QDEL_HINT_LETMELIVE //should not be deleted, ever

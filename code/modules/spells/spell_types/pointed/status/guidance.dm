@@ -31,19 +31,19 @@
 	id = "guidance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/guidance
 	duration = 1 MINUTES
-	effectedstats = list(STATKEY_INT = 2)
+	effectedstats = list(STAT_INTELLIGENCE = 2)
 	var/static/mutable_appearance/guided = mutable_appearance('icons/effects/effects.dmi', "blessed")
 
 /datum/status_effect/buff/guidance/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_GUIDANCE, TRAIT_STATUS_EFFECT(id))
 	var/mob/living/target = owner
+	target.attributes?.add_diceroll_modifier(/datum/diceroll_modifier/guidance)
 	target.add_overlay(guided)
 
 /datum/status_effect/buff/guidance/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_GUIDANCE, TRAIT_STATUS_EFFECT(id))
 	var/mob/living/target = owner
+	target.attributes?.remove_diceroll_modifier(/datum/diceroll_modifier/guidance)
 	target.cut_overlay(guided)
 
 /atom/movable/screen/alert/status_effect/buff/guidance

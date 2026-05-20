@@ -86,9 +86,10 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	toggle_cork(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user)
+/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user, modify_nextmove = TRUE)
 	closed = !closed
-	user.changeNext_move(CLICK_CD_RAPID)
+	if(modify_nextmove)
+		user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
@@ -154,8 +155,8 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	list_reagents = list(/datum/reagent/toxin/acid = 30)
 
 /obj/item/reagent_containers/glass/bottle/welding_fuel
-	name = "naphta bottle"
-	list_reagents = list(/datum/reagent/fuel = 30)
+	name = "oil bottle"
+	list_reagents = list(/datum/reagent/blood/fuel = 30)
 
 // message in a bootl
 
@@ -250,3 +251,7 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	. = ..()
 	icon_state = "blackbottle"
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	name = "pot of cheese soup"
+	list_reagents = list(/datum/reagent/consumable/soup/cheese = 75)

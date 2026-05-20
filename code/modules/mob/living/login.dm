@@ -37,13 +37,9 @@
 /mob/living/proc/funeral_login()
 	if(QDELETED(src) || QDELETED(mind))
 		return FALSE
+
 	if(!client)
 		return FALSE
-
-	if(isroguespirit(src))
-		var/mob/living/carbon/spirit/spirit_mob = src
-		if(spirit_mob)
-			to_chat(src, span_rose("My toll to travel with the Carriageman has been paid for."))
 
 	if(stat >= DEAD)
 		if(ishuman(src))

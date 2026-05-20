@@ -108,7 +108,7 @@
 	if(!SSliquids)
 		CRASH("Liquid Turf created with the liquids sybsystem not yet initialized!")
 	RegisterSignal(my_turf, COMSIG_ATOM_ENTERED, PROC_REF(movable_entered))
-	RegisterSignal(my_turf, COMSIG_PARENT_EXAMINE, PROC_REF(examine_turf))
+	RegisterSignal(my_turf, COMSIG_ATOM_EXAMINE, PROC_REF(examine_turf))
 
 	for(var/direction in GLOB.cardinals)
 		var/turf/cardinal_turf = get_step(src, direction)
@@ -126,7 +126,7 @@
 			turf.liquids.update_appearance(UPDATE_ICON)
 
 /obj/effect/abstract/liquid_turf/Destroy(force)
-	UnregisterSignal(my_turf, list(COMSIG_ATOM_ENTERED, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(my_turf, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXAMINE))
 	if(!isnull(my_turf))
 		liquid_group?.remove_from_group(my_turf)
 		SSliquids.evaporation_queue -= my_turf
@@ -256,7 +256,7 @@
 	else if (isliving(AM))
 		var/mob/living/L = AM
 		if(liquid_group.slippery)
-			if(prob(7) && !(L.movement_type & FLYING) && L.body_position != LYING_DOWN)
+			if(prob(7) && !(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && L.body_position != LYING_DOWN)
 				L.slip(30, T, NO_SLIP_WHEN_WALKING, 0, TRUE)
 
 	if(fire_state)
@@ -272,8 +272,7 @@
 			else
 				liquid_group.transfer_to_atom(src, CHOKE_REAGENTS_INGEST_ON_FALL_AMOUNT, C)
 				C.adjustOxyLoss(5)
-				//C.emote("cough")
-				INVOKE_ASYNC(C, TYPE_PROC_REF(/mob, emote), "cough")
+				C.emote("cough")
 				to_chat(C, span_userdanger("You fall in and swallow some water!"))
 		else
 			to_chat(M, span_userdanger("You fall in the water!"))
@@ -293,7 +292,7 @@
 	RegisterSignal(my_turf, COMSIG_ATOM_ENTERED, PROC_REF(movable_entered))
 
 /**
- * Handles COMSIG_PARENT_EXAMINE for the turf.
+ * Handles COMSIG_ATOM_EXAMINE for the turf.
  *
  * Adds reagent info to examine text.
  * Arguments:

@@ -3,6 +3,20 @@
 /mob/living/carbon/human/species/harpy
 	race = /datum/species/harpy
 
+/datum/attribute_holder/sheet/job/species/harpy
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/music = 10
+	)
+
+/datum/attribute_holder/sheet/job/species/harpy/stats
+	raw_attribute_list = list(
+		STAT_STRENGTH = -4,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -4,
+		STAT_SPEED = 3,
+	)
+
 /datum/species/harpy
 	name = "Harpy"
 	id = SPEC_ID_HARPY
@@ -23,9 +37,7 @@
 
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
-	inherent_skills = list(
-		/datum/skill/misc/music = 1,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/harpy
 
 	use_skintones = TRUE
 	possible_ages = NORMAL_AGES_LIST_CHILD
@@ -80,13 +92,13 @@
 
 	inherent_traits = list(TRAIT_HOLLOWBONES, TRAIT_AMAZING_BACK, TRAIT_DODGEEXPERT)
 
-	specstats_m = list(STATKEY_STR = -4, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -4, STATKEY_END = 0, STATKEY_SPD = 3, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -4, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -4, STATKEY_END = 0, STATKEY_SPD = 3, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/harpy/stats
 
 	enflamed_icon = "widefire"
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
@@ -167,7 +179,7 @@
 
 /datum/species/harpy/on_species_gain(mob/living/carbon/foreign, datum/species/old_species)
 	..()
-	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE)
+	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE, _keeps_items = FALSE)
 	foreign.grant_language(/datum/language/common)
 
 /datum/species/harpy/get_skin_list()

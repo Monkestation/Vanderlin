@@ -47,6 +47,11 @@
 #define DISABLE_RUNECHAT (1<<0)
 #define DISABLE_HOVER_TEXT (1<<1)
 #define DISABLE_BALLOON_ALERTS (1<<3)
+#define DISABLE_BALLOON_COMBAT (1<<4)
+#define DISABLE_BALLOON_EXP (1<<5)
+
+// Gameplay toggles :(
+#define DISABLE_SPLIT_PERSONALITY (1<<0)
 
 #define PARALLAX_INSANE -1 //for show offs
 #define PARALLAX_HIGH    0 //default.
@@ -165,11 +170,14 @@
 
 // Voice types
 
-#define VOICE_TYPE_MASC		"Masculine"
-#define VOICE_TYPE_FEM		"Feminine"
+#define VOICE_TYPE_MASC		"Masculine (Species)"
+#define VOICE_TYPE_MASC_FOP "Masculine (Humen, Foppish)"
+#define VOICE_TYPE_FEM		"Feminine (Species)"
+#define VOICE_TYPE_FEM_DAINTY "Feminine (Humen, Dainty)"
+#define VOICE_TYPE_FEM_HAUGHTY "Feminine (Humen, Haughty)"
 #define VOICE_TYPE_ANDRO	"Androgynous"
 
-#define VOICE_TYPES_LIST list(VOICE_TYPE_MASC, VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)
+#define VOICE_TYPES_LIST list(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP, VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
 
 #define VOICE_TYPES_MASCANDRO list(VOICE_TYPE_MASC, VOICE_TYPE_ANDRO)
 #define VOICE_TYPES_FEMANDRO list(VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)
@@ -185,15 +193,17 @@
 #define ALIGNMENT_NE		"Neutral Evil"
 #define ALIGNMENT_CE		"Chaotic Evil"
 
-#define ALL_ALIGNMENTS_LIST list(ALIGNMENT_LG,\
-							ALIGNMENT_NG,\
-							ALIGNMENT_CG,\
-							ALIGNMENT_LN,\
-							ALIGNMENT_TN,\
-							ALIGNMENT_CN,\
-							ALIGNMENT_LE,\
-							ALIGNMENT_NE,\
-							ALIGNMENT_CE)
+#define ALL_ALIGNMENTS_LIST list(\
+	ALIGNMENT_LG,\
+	ALIGNMENT_NG,\
+	ALIGNMENT_CG,\
+	ALIGNMENT_LN,\
+	ALIGNMENT_TN,\
+	ALIGNMENT_CN,\
+	ALIGNMENT_LE,\
+	ALIGNMENT_NE,\
+	ALIGNMENT_CE,\
+)
 
 #define UI_PREFERENCE_LIGHT_MODE "light mode"
 #define UI_PREFERENCE_DARK_MODE "dark mode"
@@ -213,4 +223,8 @@ DEFINE_BITFIELD(toggles_maptext, list(
 	"Disable balloon alerts" = DISABLE_BALLOON_ALERTS,
 	//"Disable hover text" = DISABLE_HOVER_TEXT,
 	"Disable runechat" = DISABLE_RUNECHAT,
+))
+
+DEFINE_BITFIELD(toggles_gameplay, list(
+	"Disable random split personality" = DISABLE_SPLIT_PERSONALITY,
 ))

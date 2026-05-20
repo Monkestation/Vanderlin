@@ -59,6 +59,10 @@
 
 	ai_controller = /datum/ai_controller/saiga
 
+	genetics = /datum/animal_genetics/saiga
+	generate_genetics = TRUE
+	indexed = TRUE
+
 	var/can_breed = TRUE
 
 	var/static/list/pet_commands = list(
@@ -89,6 +93,26 @@
 
 /mob/living/simple_animal/hostile/retaliate/saiga/update_overlays()
 	. = ..()
+
+	if(istype(genetics))
+		var/datum/animal_gene/undercoat/UC = genetics.get_gene_by_exclusion_group(GENE_GROUP_UNDERCOAT)
+		var/datum/animal_gene/coat_color/CC = genetics.get_gene_by_exclusion_group(GENE_GROUP_COAT_COLOR)
+		var/datum/animal_gene/emissive = genetics.get_gene_by_exclusion_group(GENE_GROUP_EMISSIVE)
+
+		var/mutable_appearance/body = mutable_appearance(icon, "[icon_state]_reg1")
+		var/mutable_appearance/underbody = mutable_appearance(icon, "[icon_state]_reg2")
+		if(emissive)
+			var/mutable_appearance/glowing = emissive_appearance(icon, "[icon_state]_reg2")
+			. += glowing
+		if(CC)
+			body.color = CC.get_color()
+			if(!UC)
+				underbody.color = CC.get_color()
+			else
+				underbody.color = UC.get_color()
+		. += body
+		. += underbody
+
 	if(stat <= DEAD)
 		return
 	if(ssaddle)
@@ -114,8 +138,6 @@
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
 
-/mob/living/simple_animal/hostile/retaliate/saiga/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
 
 /mob/living/simple_animal/hostile/retaliate/saiga/get_sound(input)
 	switch(input)
@@ -159,6 +181,7 @@
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 3,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 1,
 						/obj/item/natural/hide = 5,
 						/obj/item/alch/sinew = 2,
@@ -198,6 +221,10 @@
 
 	ai_controller = /datum/ai_controller/saiga
 
+	genetics = /datum/animal_genetics/saiga
+	generate_genetics = TRUE
+	indexed = TRUE
+
 	var/static/list/pet_commands = list(
 		/datum/pet_command/idle,
 		/datum/pet_command/free,
@@ -226,6 +253,26 @@
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/update_overlays()
 	. = ..()
+
+	if(istype(genetics))
+		var/datum/animal_gene/undercoat/UC = genetics.get_gene_by_exclusion_group(GENE_GROUP_UNDERCOAT)
+		var/datum/animal_gene/coat_color/CC = genetics.get_gene_by_exclusion_group(GENE_GROUP_COAT_COLOR)
+		var/datum/animal_gene/emissive = genetics.get_gene_by_exclusion_group(GENE_GROUP_EMISSIVE)
+
+		var/mutable_appearance/body = mutable_appearance(icon, "[icon_state]_reg1")
+		var/mutable_appearance/underbody = mutable_appearance(icon, "[icon_state]_reg2")
+		if(emissive)
+			var/mutable_appearance/glowing = emissive_appearance(icon, "[icon_state]_reg2")
+			. += glowing
+		if(CC)
+			body.color = CC.get_color()
+			if(!UC)
+				underbody.color = CC.get_color()
+			else
+				underbody.color = UC.get_color()
+		. += body
+		. += underbody
+
 	if(stat <= DEAD)
 		return
 	if(ssaddle)
@@ -301,6 +348,8 @@
 
 	can_breed = FALSE
 
+	generate_genetics = FALSE
+
 	ai_controller = /datum/ai_controller/saiga_kid
 
 /mob/living/simple_animal/hostile/retaliate/saiga/saigakid/boy
@@ -318,9 +367,11 @@
 
 /mob/living/simple_animal/hostile/retaliate/saiga/tame
 	tame = TRUE
+	indexed = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame
 	tame = TRUE
+	indexed = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled/Initialize()
 	. = ..()

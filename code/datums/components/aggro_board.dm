@@ -29,15 +29,15 @@
 	START_PROCESSING(SSaggro, src)
 	// Register signals
 	RegisterSignal(parent, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
-	RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(on_death))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
-/datum/component/ai_aggro_system/Destroy(force, silent)
+/datum/component/ai_aggro_system/Destroy(force)
 	STOP_PROCESSING(SSaggro, src)
 
 	// Unregister signals
 	UnregisterSignal(parent, list(
 		COMSIG_ATOM_WAS_ATTACKED,
-		COMSIG_MOB_DEATH
+		COMSIG_LIVING_DEATH
 	))
 
 	return ..()
@@ -58,7 +58,7 @@
 	var/list/aggro_table = living_mob.ai_controller.blackboard[BB_MOB_AGGRO_TABLE]
 	if(!length(aggro_table))
 		add_threat(living_mob, target, amount)
-	var/aggro = aggro_table[living_mob]
+	var/aggro = aggro_table[target]
 	if(aggro >= cap)
 		return
 	amount -= aggro
@@ -116,12 +116,15 @@
 	// Update the aggro table
 	victim.ai_controller.blackboard[BB_MOB_AGGRO_TABLE] = aggro_table
 
+	if(!victim.ai_controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])
+		victim.ai_controller.set_blackboard_key(BB_BASIC_MOB_CURRENT_TARGET, attacker)
+
 	// Update highest threat mob
 	update_highest_threat(victim)
 
 /// Periodically decays threat levels
 /datum/component/ai_aggro_system/process()
-	var/decay_amount = default_decay_rate * 10
+	var/decay_amount = default_decay_rate
 	var/mob/living/living_mob = parent
 	if(!living_mob?.ai_controller)
 		return

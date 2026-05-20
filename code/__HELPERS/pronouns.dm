@@ -259,9 +259,7 @@
 	return gender
 
 /mob/living/carbon/human/get_visible_gender()
-	var/obscured = check_obscured_slots()
-	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
-	if((obscured & ITEM_SLOT_PANTS) && skipface)
+	if(!is_human_part_visible(src, HIDEFACE) && (check_obscured_slots() & ITEM_SLOT_PANTS))
 		return PLURAL
 	return gender
 

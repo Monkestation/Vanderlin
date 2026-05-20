@@ -33,7 +33,7 @@
 /datum/action/cooldown/spell/projectile/fireball/baali
 	name = "Infernal Fireball"
 
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 
 	spell_type = SPELL_BLOOD
 

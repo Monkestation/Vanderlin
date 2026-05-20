@@ -20,23 +20,42 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
-/datum/antagonist/vampire/New(datum/clan/incoming_clan = /datum/clan/nosferatu, forced_clan = FALSE)
+/datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
 	if(forced_clan)
-		if(!istype(incoming_clan))
+		if(!istype(incoming_clan) && ispath(incoming_clan))
 			incoming_clan = new incoming_clan()
 		forced = forced_clan
 		forcing_clan = incoming_clan
-	else
+	else if(incoming_clan)
 		default_clan = incoming_clan
+
+/datum/antagonist/vampire/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
+	. = ..()
+	if(!istype(examined))
+		return
+	if(NOBLOOD in examined.dna?.species?.species_traits)
+		return
+	var/vitae = 0
+	var/datum/blood_type/BT = examined.get_blood_type()
+	if(istype(BT) && BT.vitae)
+		vitae = round(examined.blood_volume * BT.vitae)
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "vamplesser"
 
+	clan_selected = TRUE
+	default_clan = /datum/clan/caitiff
+
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
+		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
+		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))
@@ -58,19 +77,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
-		vampdude.adv_hugboxing_cancel()
 		vampdude.hud_used?.shutdown_bloodpool()
 		vampdude.hud_used?.initialize_bloodpool()
 		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
 
-		if(!forced)
-			// Show clan selection interface
-			if(!clan_selected)
-				show_clan_selection(vampdude)
-			else
-				// Apply the selected clan
-				vampdude.set_clan(default_clan)
-		else
+		if(forced)
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
 
@@ -204,8 +215,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // LANDMARKS
 /obj/effect/landmark/start/vampirelord
 	name = "Vampire Lord"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirelord/Initialize()
 	. = ..()
@@ -213,8 +224,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampirespawn
 	name = "Vampire Spawn"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirespawn/Initialize()
 	. = ..()
@@ -222,9 +233,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampireknight
 	name = "Death Knight"
-	icon_state = "arrow"
-	jobspawn_override = list("Death Knight")
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	jobs_to_spawn = list("Death Knight")
+	custom_handling = TRUE
 
 /obj/effect/landmark/vteleport
 	name = "Teleport Destination"

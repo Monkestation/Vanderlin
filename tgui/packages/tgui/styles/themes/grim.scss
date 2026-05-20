@@ -1,13 +1,3 @@
-@font-face {
-  font-family: 'Pterra';
-  src: url('~fonts/pterra.ttf');
-}
-
-@font-face {
-  font-family: 'Blackmoor LET';
-  src: url('~fonts/blackmoor.ttf');
-}
-
 // Based on the generic browser UI, red and black mostly
 
 .theme-grim:root{
@@ -32,8 +22,8 @@
   .TitleBar {
     &__title {
       font-size: 1.4em;
-      font-weight: bold;
       font-family: 'Blackmoor LET';
+      font-weight: normal;
     }
     &__KitchenSink {
       background-color: hsl(

@@ -107,6 +107,8 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	var/gravity_velocity = -800
 	/// The acceleration of the bait while reeling
 	var/reeling_velocity = 1200
+	/// Maximum absolute bait velocity - prevents runaway speed on slow ticks or high reeling_velocity
+	var/max_bait_velocity = 1800
 	/// By how much the bait recoils back when hitting the bounds of the slider while idle. Should be never above 1
 	var/bait_bounce_mult = 0.6
 	/// The multiplier of deceleration of velocity that happens when the bait switches direction
@@ -128,8 +130,8 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	location = comp.parent
 	float = new(get_turf(location), location)
 	float.spin_frequency = rod.spin_frequency
-	RegisterSignal(location, COMSIG_PARENT_QDELETING, PROC_REF(on_spot_gone))
-	RegisterSignal(comp, COMSIG_PARENT_QDELETING, PROC_REF(on_spot_gone))
+	RegisterSignal(location, COMSIG_QDELETING, PROC_REF(on_spot_gone))
+	RegisterSignal(comp, COMSIG_QDELETING, PROC_REF(on_spot_gone))
 	register_reward_signals(comp.fish_source)
 	RegisterSignal(fish_source, COMSIG_FISHING_SOURCE_INTERRUPT_CHALLENGE, PROC_REF(interrupt_challenge))
 	background = comp.fish_source.background
@@ -165,10 +167,13 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 			special_effects |= FISHING_MINIGAME_RULE_KILL
 
 	//Finish the minigame faster at higher skill. The value modifiers for fishing are negative values btw.
-	completion_loss += user.get_skill_speed_modifier(/datum/skill/labor/fishing)
-	completion_gain -= user.get_skill_speed_modifier(/datum/skill/labor/fishing)
+	completion_loss += GET_MOB_SKILL_SPEED_MOD(user, /datum/attribute/skill/labor/fishing)
+	completion_gain -= GET_MOB_SKILL_SPEED_MOD(user, /datum/attribute/skill/labor/fishing)
+	// Floor so high skill can never make completion_loss zero or negative (minigame must remain losable)
+	completion_loss = max(1, completion_loss)
 
 	reeling_velocity *= rod.bait_speed_mult
+	max_bait_velocity *= rod.bait_speed_mult
 	completion_gain *= rod.completion_speed_mult
 	bait_bounce_mult *= rod.bounciness_mult
 	deceleration_mult *= rod.deceleration_mult
@@ -185,7 +190,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 		complete(win = FALSE)
 	if(fishing_line)
 		//Stops the line snapped message from appearing everytime the minigame is over.
-		UnregisterSignal(fishing_line, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(fishing_line, COMSIG_QDELETING)
 		QDEL_NULL(fishing_line)
 	QDEL_NULL(float)
 	SStgui.close_uis(src)
@@ -232,7 +237,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 		if(isnull(fishing_line)) //couldn't create a fishing line, probably because we don't have a good line of sight.
 			qdel(src)
 			return
-		RegisterSignal(fishing_line, COMSIG_PARENT_QDELETING, PROC_REF(on_line_deleted))
+		RegisterSignal(fishing_line, COMSIG_QDELETING, PROC_REF(on_line_deleted))
 	else //if the rod doesnt have a fishing line, then it ends when they move away
 		RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_float_or_user_move))
 		RegisterSignal(float, COMSIG_MOVABLE_MOVED, PROC_REF(on_float_or_user_move))
@@ -354,13 +359,17 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 
 	if(!QDELETED(user) && user.mind && start_time && !(special_effects & FISHING_MINIGAME_RULE_NO_EXP))
 		var/seconds_spent = (world.time - start_time) * 0.1
-		var/extra_exp_malus = user.get_skill_level(/datum/skill/labor/fishing, TRUE) - difficulty * 0.1
+		// Base XP: flat difficulty reward + small time component so longer fights still count
+		// This means a hard fish is worth more than an easy one regardless of how long it took,
+		// and winning gives the full difficulty bonus rather than penalising a clean fast win.
+		var/base_xp = (difficulty * 1.5) + (seconds_spent * 0.8)
+		var/extra_exp_malus = (GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/fishing) - difficulty) * 0.1
 		if(extra_exp_malus > 0)
 			experience_multiplier /= (1 + extra_exp_malus * EXPERIENCE_MALUS_MULT)
 		if(auto_handling)
 			experience_multiplier *= 0.5
 		experience_multiplier *= used_rod.experience_multiplier
-		user.mind.add_sleep_experience(/datum/skill/labor/fishing, round(seconds_spent * (2500 / 15 MINUTES * 0.1) * experience_multiplier))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/fishing, round(base_xp * experience_multiplier))
 
 	if(!win)
 		SEND_SIGNAL(user, COMSIG_MOB_COMPLETE_FISHING, src, FALSE)
@@ -382,12 +391,14 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	var/wait_time
 	last_baiting_click = world.time
 	if(penalty)
-		wait_time = min(timeleft(next_phase_timer) + rand(3 SECONDS, 5 SECONDS), 30 SECONDS)
+		var/remaining = timeleft(next_phase_timer)
+		deltimer(next_phase_timer)
+		wait_time = min(remaining + rand(3 SECONDS, 5 SECONDS), 30 SECONDS)
 	else
+		deltimer(next_phase_timer)
 		wait_time = rand(wait_time_range[1], wait_time_range[2])
 		if(special_effects & FISHING_MINIGAME_AUTOREEL && wait_time >= 15 SECONDS)
 			wait_time = max(wait_time - 7.5 SECONDS, 15 SECONDS)
-	deltimer(next_phase_timer)
 	phase = WAIT_PHASE
 	//Bobbing animation
 	animate(float, pixel_z = 1, time = 1 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
@@ -406,8 +417,11 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	playsound(location, 'sound/effects/fish_splash.ogg', 100)
 
 	send_alert("!!!")
-	animate(float, pixel_z = 3, time = 5, loop = -1, flags = ANIMATION_RELATIVE)
-	animate(pixel_z = -3, time = 5, flags = ANIMATION_RELATIVE)
+	//visual flair animation inbound
+	animate(float, pixel_z = 4, time = 0.6 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -4, time = 0.6 SECONDS, flags = ANIMATION_RELATIVE)
+	addtimer(CALLBACK(src, PROC_REF(escalate_float_animation)), 1 SECONDS, TIMER_DELETE_ME)
+	addtimer(CALLBACK(src, PROC_REF(peak_float_animation)), 2 SECONDS, TIMER_DELETE_ME)
 	if(special_effects & FISHING_MINIGAME_AUTOREEL)
 		addtimer(CALLBACK(src, PROC_REF(automatically_start_minigame)), 0.2 SECONDS)
 	// Setup next phase
@@ -415,6 +429,21 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	///If we're using a lure, we want the float to show a little green light during the minigame phase and not a red one.
 	float.spin_ready = TRUE
 	float.update_appearance(UPDATE_OVERLAYS)
+
+/// Float bobs a bit harder mid-biting-window
+/datum/fishing_challenge/proc/escalate_float_animation()
+	if(phase != BITING_PHASE)
+		return
+	animate(float, pixel_z = 6, time = 0.4 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -6, time = 0.4 SECONDS, flags = ANIMATION_RELATIVE)
+
+/// Float thrashes at peak - this is when clicking gives the best bonus
+/datum/fishing_challenge/proc/peak_float_animation()
+	if(phase != BITING_PHASE)
+		return
+	animate(float, pixel_z = 9, time = 0.25 SECONDS, loop = -1, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -9, time = 0.25 SECONDS, flags = ANIMATION_RELATIVE)
+	send_alert("now!")
 
 /datum/fishing_challenge/proc/automatically_start_minigame()
 	if(phase == BITING_PHASE)
@@ -469,8 +498,9 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	//early return if the difficulty is the same or we crush the minigame all the way to 0 difficulty
 	if(!get_difficulty() || difficulty == old_difficulty)
 		return
+	// Remove the old difficulty's XP contribution before re-applying with new difficulty
+	experience_multiplier -= old_difficulty * 0.015
 	bait_height = initial(bait_height) * used_rod.bait_height_mult
-	experience_multiplier -= difficulty * 0.015
 	mover.reset_difficulty_values()
 	adjust_to_difficulty()
 
@@ -763,6 +793,8 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 			complete(FALSE)
 
 	completion = clamp(completion, 0, 100)
+	// Hard cap on bait velocity to prevent runaway speed on laggy or fast ticks
+	bait_velocity = clamp(bait_velocity, -max_bait_velocity, max_bait_velocity)
 
 ///update the vertical pixel position of both fish and bait, and the icon state of the completion bar
 /datum/fishing_challenge/proc/update_visuals(seconds_per_tick)

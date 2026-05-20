@@ -8,12 +8,14 @@
 		/datum/coven/quietus,
 		/datum/coven/bloodheal
 	)
+	blood_preference = BLOOD_PREFERENCE_KIN | BLOOD_PREFERENCE_FANCY
+	blood_disgust = BLOOD_PREFERENCE_RATS | BLOOD_PREFERENCE_EUPHORIC
 	clane_traits = list(
 		TRAIT_STRONGBITE,
+		TRAIT_BLOODDRINKER,
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
 		TRAIT_NOSLEEP,
 		TRAIT_VAMPMANSION,
@@ -22,3 +24,6 @@
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_NOENERGY,
 	)
+
+/datum/clan/crimson_fang/get_blood_preference_string()
+	return "the blood of your kindred or nobility"

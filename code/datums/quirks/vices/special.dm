@@ -17,6 +17,10 @@
 		return "[desc]<br><br><b>Reason:</b> [reason]"
 	return "[desc]<br><br><b>Reason:</b> Unknown - a mystery from your past."
 
+/datum/quirk/vice/hunted/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Graggar's Prey..."))
+
 /datum/quirk/vice/hunted/on_life(mob/living/user)
 	if(!ishuman(user))
 		return
@@ -38,6 +42,10 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+
+/datum/quirk/vice/luxless/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Luxless..."))
 
 /datum/quirk/vice/luxless/on_spawn()
 	if(!ishuman(owner))
@@ -62,6 +70,10 @@
 
 	ADD_TRAIT(owner, TRAIT_PACIFISM, "[type]")
 
+/datum/quirk/vice/pacifist/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Pacifist..."))
+
 /datum/quirk/vice/pacifist/on_remove()
 	if(owner)
 		REMOVE_TRAIT(owner, TRAIT_PACIFISM, "[type]")
@@ -75,41 +87,11 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(BP.body_zone == BODY_ZONE_HEAD)
-			BP.chronic_pain = rand(17.5, 27.5)
-			BP.chronic_pain_type = CHRONIC_NERVE_DAMAGE
-			break
+	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_HEAD)
+	BP?.add_pain(rand(17.5, 27.5))
+	BP?.limb_flags |= BODYPART_CHRONIC_MIGRAINE
+	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
-
-/datum/quirk/vice/chronic_migraine/on_life(mob/living/user)
-	if(!ishuman(user))
-		return
-	var/mob/living/carbon/human/H = user
-
-	if(prob(2))
-		for(var/obj/item/bodypart/BP in H.bodyparts)
-			if(BP.body_zone == BODY_ZONE_HEAD)
-				BP.lingering_pain += rand(25, 40)
-				break
-
-		if(prob(30))
-			H.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
-			to_chat(H, span_boldwarning("A severe migraine strikes! Your vision blurs and your head pounds!"))
-		else
-			to_chat(H, span_warning("A migraine headache begins to build."))
-
-	if(prob(1))
-		var/obj/item/bodypart/head = null
-		for(var/obj/item/bodypart/BP in H.bodyparts)
-			if(BP.body_zone == BODY_ZONE_HEAD)
-				head = BP
-				break
-
-		if(head && head.lingering_pain > 20 && H.loc && H.loc.luminosity > 2)
-			head.lingering_pain += rand(5, 10)
-			to_chat(H, span_warning("The flickering flames make your migraine worse!"))
-
 
 /datum/quirk/vice/skill_issue
 	name = "Skill Issue"
@@ -120,9 +102,8 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	for(var/datum/skill/skill in SSskills.all_skills)
-		if(H.get_skill_level(skill) > SKILL_LEVEL_NONE)
-			H.adjust_skillrank(skill, -1, TRUE)
+	for(var/datum/attribute/skill/skill in SSskills.all_skills)
+		H.adjust_skill_level(skill, -10)
 
 /datum/quirk/vice/deaf
 	name = "Hard of Hearing"
@@ -152,16 +133,23 @@
 		/datum/species/halfling,
 		/datum/species/demihuman,
 		/datum/species/dwarf,
-		/datum/species/elf,
+		/datum/species/elf/snow,
+		/datum/species/elf/dark,
 		/datum/species/triton,
 		/datum/species/rakshari,
+		/datum/species/medicator,
 		/datum/species/kobold,
+		/datum/species/automaton,
 		/datum/oratorium,
 		"Nobles",
 	)
 
 	var/fear_type
 	var/next_scream_time = 0
+
+/datum/quirk/vice/traumatized/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Traumatized..."))
 
 /datum/quirk/vice/traumatized/on_spawn()
 	if(!ishuman(owner))
@@ -197,7 +185,7 @@
 				to_chat(H, span_userdanger("You see [human] and freeze in terror!"))
 				next_scream_time = world.time + 25 SECONDS
 				return
-	else
+	else if(fear_type == /datum/oratorium)
 		for(var/mob/living/carbon/human/human in view(5, user))
 			if(human == user)
 				continue
@@ -220,6 +208,10 @@
 	name = "Tortured"
 	desc = "You were once tortured by bandits, Drow raiders, or your own kingdom. You fear it happening again and always answer truthfully when tortured."
 	point_value = 2
+
+/datum/quirk/vice/tortured/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Tortured..."))
 
 /datum/quirk/vice/tortured/on_spawn()
 	if(!ishuman(owner))
@@ -274,7 +266,7 @@
 
 	var/turf/T
 	if(!H || QDELETED(H))
-		T = get_turf(pick(SSjob.latejoin_trackers))
+		T = get_turf(pick(SSjob.backup_join_landmarks))
 	else
 		T = get_turf(H)
 	if(!T)
@@ -303,6 +295,10 @@
 	incompatible_quirks = list(
 		/datum/quirk/boon/iron_will
 	)
+
+/datum/quirk/vice/weak_heart/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Weak-Hearted..."))
 
 /datum/quirk/vice/weak_heart/on_spawn()
 	if(!ishuman(owner))
@@ -438,3 +434,29 @@
 	else // Outlaw
 		GLOB.outlawed_players |= H.real_name
 		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))
+
+/datum/quirk/vice/suspicion
+	name = "Inquisitorial Suspicion"
+	desc = "The inquisition suspects me of heresy, whether truthfully or not... Expect a harder experience, as some only require a suspicion to administer Psydon's Justice."
+	point_value = 1
+	customization_type = QUIRK_TEXT
+	customization_label = "Why do they suspect me?"
+	customization_placeholder = "Spotted eating organs."
+
+/datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
+	var/reason = prefs?.quirk_customizations[type]
+	if(!reason)
+		reason = customization_value
+	if(reason && reason != "")
+		return "[desc]<br><br><b>Reason:</b> [reason]"
+	return "[desc]<br><br><b>Reason:</b> General heretical conduct."
+
+/datum/quirk/vice/suspicion/on_spawn()
+	if(!owner || !ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/H = owner
+
+	GLOB.inquis_suspect_players += H.real_name
+	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
+

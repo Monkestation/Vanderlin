@@ -154,7 +154,7 @@
 		return
 	if(!user.can_read(src))
 		if(info)
-			user.adjust_experience(/datum/skill/misc/reading, 2, FALSE)
+			user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
 		return
 	if(mailer)
 		return
@@ -418,7 +418,7 @@
 		return ..()
 
 	if(P.type == /obj/item/paper) //Make a manuscript
-		if(user.get_skill_level(/datum/skill/misc/reading) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/reading) <= 0)
 			to_chat(user, span_warning("I fumble with [src] and fail to form the manuscript!"))
 			user.changeNext_move(2 SECONDS, user.active_hand_index) //lmao
 			return

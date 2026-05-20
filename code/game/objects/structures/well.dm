@@ -7,7 +7,7 @@
 	icon_state = "welly"
 	anchored = TRUE
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 	climb_time = 40
 	climbable = TRUE
 	layer = 2.91
@@ -83,5 +83,4 @@
 		destination = locate(well.x, well.y, well.z - 1)
 	else
 		destination = locate(well.x, well.y, well.z + 1)
-	if(isliving(user))
-		movable_travel_z_level(user, destination)
+	user.zMove(target = destination, z_move_flags = ZMOVE_LADDER_FLAGS)

@@ -1,6 +1,29 @@
 /mob/living/carbon/human/species/triton
 	race = /datum/species/triton
 
+/datum/attribute_holder/sheet/job/species/triton
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/fishing = 30,
+		/datum/attribute/skill/misc/swimming = 40,
+	)
+
+/datum/attribute_holder/sheet/job/species/triton/male
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = -2,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = 1,
+		STAT_INTELLIGENCE = 2
+	)
+
+/datum/attribute_holder/sheet/job/species/triton/female
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = -4,
+		STAT_CONSTITUTION = 3,
+		STAT_SPEED = -3
+	)
+
 /datum/species/triton
 	name = "Triton"
 	id = SPEC_ID_TRITON
@@ -37,12 +60,9 @@
 	use_skintones = TRUE
 
 	species_traits = list(NO_UNDERWEAR, HAIR, FACEHAIR, OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WATER_BREATHING, TRAIT_GOOD_SWIM, TRAIT_FISHFACE)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_NODROWN, TRAIT_SWIMMER, TRAIT_FISHFACE)
 	inherent_traits_f = list(TRAIT_STRONGBITE)
-	inherent_skills = list(
-		/datum/skill/labor/fishing = 3,
-		/datum/skill/misc/swimming = 4,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/triton
 
 	allowed_voicetypes_f = list(
 		VOICE_TYPE_MASC,
@@ -52,8 +72,8 @@
 		VOICE_TYPE_ANDRO
 	)
 
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = -2, STATKEY_CON = -2, STATKEY_SPD = 1, STATKEY_INT = 2)
-	specstats_f = list(STATKEY_STR = 2, STATKEY_PER = -4, STATKEY_CON = 3, STATKEY_SPD = -3)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/triton/male
+	statsheet_female = /datum/attribute_holder/sheet/job/species/triton/female
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/triton.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/triton.dmi'
@@ -110,6 +130,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/triton,
@@ -140,6 +161,9 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/deepspeak)
+
+	var/obj/item/bodypart/mouth/jaw = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	jaw.replace_teeth(/obj/item/natural/bundle/teeth/fang)
 
 /datum/species/triton/after_creation(mob/living/carbon/C)
 	. = ..()

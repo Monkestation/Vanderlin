@@ -85,7 +85,7 @@
 			if(prob(10))
 				r_hand = /obj/item/weapon/sword/long/shotel/iron
 		if(7)
-			armor = /obj/item/clothing/armor/leather/heavy
+			armor = /obj/item/clothing/armor/leather/jerkin
 			l_hand = /obj/item/weapon/sword
 		if(8)
 			l_hand = /obj/item/weapon/knife/dagger/steel/special

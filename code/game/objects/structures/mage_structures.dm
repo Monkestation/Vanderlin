@@ -60,7 +60,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 			invisibility = INVISIBILITY_LEYLINES,
 		)
 
-		RegisterSignal(mana, COMSIG_PARENT_QDELETING, PROC_REF(beam_ended), movable)
+		RegisterSignal(mana, COMSIG_QDELETING, PROC_REF(beam_ended), movable)
 
 		LAZYADD(mana_beams, movable)
 
@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 			invisibility = INVISIBILITY_LEYLINES,
 		)
 
-		RegisterSignal(mana, COMSIG_PARENT_QDELETING, PROC_REF(beam_ended), movable)
+		RegisterSignal(mana, COMSIG_QDELETING, PROC_REF(beam_ended), movable)
 
 		LAZYADD(mana_beams, movable)
 

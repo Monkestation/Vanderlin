@@ -32,7 +32,8 @@
 		BODY_ZONE_L_LEG,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 6.4 SECONDS
+	minimum_time = 5.4 SECONDS
+	maximum_time = 7.4 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_BROKEN
 	requires_bodypart_type = NONE
 	skill_min = SKILL_LEVEL_APPRENTICE

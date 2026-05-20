@@ -1,3 +1,24 @@
+/datum/attribute_holder/sheet/job/desert_pirate
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/craft/traps = 10
+	)
+
 /datum/job/advclass/mercenary/desert_pirate
 	title = "Desert Rider"
 	tutorial = "A pirate of rakshari origin, hailing from the west dune-sea of Zaladin. Well-trained riders and experienced archers, these nomads live the life of marauders and raiders, taking what belongs to weaker settlements and caravans."
@@ -8,28 +29,7 @@
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/labor/taming = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/craft/traps = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/desert_pirate
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -44,7 +44,7 @@
 	name = "Desert Rider (Mercenary)"
 	pants = /obj/item/clothing/pants/trou/leather
 	beltr = /obj/item/weapon/sword/sabre
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	shoes = /obj/item/clothing/shoes/ridingboots
 	gloves = /obj/item/clothing/gloves/angle

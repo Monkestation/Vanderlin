@@ -166,11 +166,11 @@
 
 /datum/curse/xylix/on_gain(mob/living/carbon/human/owner)
 	. = ..()
-	owner.STALUC -= 10
+	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) -= 10
 
 /datum/curse/xylix/on_loss(mob/living/carbon/human/owner)
 	. = ..()
-	owner.STALUC += 10
+	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) += 10
 
 //////////////////////
 ///    ON LIFE     ///
@@ -192,7 +192,7 @@
 			owner.set_eye_blur_if_lower(20 SECONDS)
 		if(4)
 			var/obj/item/bodypart/BP = pick(owner.bodyparts)
-			BP.rotted = TRUE
+			BP.kill_limb()
 			owner.playsound_local(get_turf(owner), 'sound/foley/butcher.ogg', 80, FALSE, pressure_affected = FALSE)
 			owner.regenerate_icons()
 

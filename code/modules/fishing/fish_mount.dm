@@ -33,6 +33,7 @@
 
 /obj/structure/fish_mount/proc/load_trophy_fish(datum/source)
 	SIGNAL_HANDLER
+	SSpersistence.load_trophy_fish(src)
 	UnregisterSignal(SSfishing, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 	if(!mounted_fish)
 		add_first_fish()
@@ -41,10 +42,11 @@
 	var/obj/item/reagent_containers/food/snacks/fish/fish_path = pick(subtypesof(/obj/item/reagent_containers/food/snacks/fish))
 	if(fish_path.fish_id_redirect_path)
 		fish_path = fish_path.fish_id_redirect_path
-	var/fluff_name = pick("John Trasen III", "a nameless intern", "Pun Pun", AQUARIUM_COMPANY, "Unknown", "Central Command")
+	var/fluff_name = pick("John Trasen III", "a nameless fisher", "Pun Pun", AQUARIUM_COMPANY, "Unknown")
 	add_fish(new fish_path(loc), from_persistence = TRUE, catcher = fluff_name)
 	mounted_fish.randomize_size_and_weight()
 	mounted_fish.set_status(FISH_DEAD)
+	SSpersistence.save_trophy_fish(src)
 
 /obj/structure/fish_mount/Destroy(force)
 	mounted_fish?.forceMove(loc)
@@ -89,6 +91,12 @@
 
 	RegisterSignals(fish, list(COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_ATTACK_PAW), PROC_REF(on_fish_attack_hand))
 	rotate_fish(dir)
+
+	if(from_persistence)
+		persistence_loaded_fish = TRUE
+		fish.add_traits(list(TRAIT_FISH_LOW_PRICE), INNATE_TRAIT)
+	else if(persistence_id)
+		SSpersistence.save_trophy_fish(src)
 
 /obj/structure/fish_mount/proc/get_fish_beauty()
 	var/beauty = 100 + mounted_fish.beauty * 1.2
@@ -140,7 +148,7 @@
 		user.put_in_hands(mounted_fish)
 	balloon_alert_to_viewers("fish removed")
 
-/obj/structure/fish_mount/Exited(atom/movable/gone)
+/obj/structure/fish_mount/Exited(atom/movable/gone, direction)
 	if(gone != mounted_fish)
 		return ..()
 	if(!QDELETED(mounted_fish) && (!persistence_loaded_fish || roll_for_safe_removal()))
@@ -160,8 +168,8 @@
 
 	///the base success rate is calculated considering the item inventory size and the heaviness of the fish.
 	var/success_prob = 100/(mounted_fish.w_class + GET_FISH_WEIGHT_RANK(mounted_fish.weight))
-	var/fishing_prowess = user?.get_skill_level(/datum/skill/labor/fishing, TRUE)
-	success_prob += fishing_prowess * 4 // up to 28% fixed bonus chance to safely retrieve the trophy depending on skill.
+	var/fishing_prowess = user?.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/fishing) : 60
+	success_prob += fishing_prowess * 0.4 // up to 24% bonus chance to safely retrieve the trophy depending on skill.
 	if(!prob(success_prob))
 		qdel(mounted_fish)
 		return FALSE
@@ -169,5 +177,5 @@
 	persistence_loaded_fish = FALSE //this way we don't roll again on Exited()
 	return TRUE
 
-/obj/structure/fish_mount/bar
-	persistence_id = "Bar"
+/obj/structure/fish_mount/fishing_hut
+	persistence_id = "fish_hut"

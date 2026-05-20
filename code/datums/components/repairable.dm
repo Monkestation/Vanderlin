@@ -35,7 +35,7 @@
 	repair_skill_level = _repair_skill_level
 
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(attempt_repair))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_FIX, PROC_REF(on_parent_fix))
 	RegisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
 	RegisterSignal(parent, COMSIG_ATOM_BREAK, PROC_REF(on_parent_break))
@@ -43,12 +43,12 @@
 		RegisterSignal(parent, COMSIG_TURF_CHANGE, PROC_REF(on_turf_changed))
 
 /datum/component/repairable/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
+	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
 
 /datum/component/repairable/proc/attempt_repair(datum/source, obj/item/attacking_item, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
-	if(repair_skill && user.get_skill_level(repair_skill) < repair_skill_level)
+	if(repair_skill && GET_MOB_SKILL_VALUE_OLD(user, repair_skill) < repair_skill_level)
 		return
 
 	var/atom/atom_parent = parent
@@ -82,7 +82,7 @@
 	user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
 	var/repair_time = 10 SECONDS
 	if(repair_skill)
-		repair_time = 30 SECONDS / max(user.get_skill_level(repair_skill, TRUE), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
+		repair_time = 30 SECONDS / max(GET_MOB_SKILL_VALUE_OLD(user, repair_skill), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
 	interrupt_repair = FALSE
 	if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
 		interrupt_repair = FALSE

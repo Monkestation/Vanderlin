@@ -20,8 +20,8 @@
 
 	return armor
 
-
-/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+//simulate will cause no damage and play no sound
+/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	return 0
 
 //this returns the mob's protection against eye damage (number between -1 and 2) from bright lights
@@ -127,7 +127,8 @@
 					damagetype = BRUTE
 				if("fire", "acid")
 					damagetype = BURN
-			if(!apply_damage(I.throwforce, damagetype, zone, armor))
+			var/real_damage = apply_damage(I.throwforce, damagetype, zone, armor)
+			if(!real_damage)
 				nodmg = TRUE
 				next_attack_msg += span_warning(" Armor stops the damage.")
 			if(!nodmg)
@@ -137,7 +138,7 @@
 						var/throwee = null
 						if(throwingdatum)
 							throwee = isliving(throwingdatum.thrower) ? throwingdatum.thrower : null
-						affecting.bodypart_attacked_by(I.thrown_bclass, I.throwforce, throwee, affecting.body_zone, crit_message = TRUE)
+						affecting.bodypart_attacked_by(I.thrown_bclass, real_damage, throwee, affecting.body_zone, crit_message = TRUE, incoming_germ = I.germ_level, pre_applied = TRUE)
 					I.do_special_attack_effect(I.thrownby, affecting, null, src, zone, thrown = TRUE)
 				else
 					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone, crit_message = TRUE)
@@ -186,9 +187,9 @@
 	var/skill_diff = 0
 	var/combat_modifier = 1
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling, TRUE)) //NPCs don't use this
+		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling)) //NPCs don't use this
 	if(mind)
-		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling, TRUE))
+		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
 
 	if(user == src)
 		instant = TRUE
@@ -216,7 +217,7 @@
 		if(G.chokehold)
 			combat_modifier += 0.15
 
-	var/probby = clamp((((8 + (((user.STASTR - STASTR)/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
+	var/probby = clamp((((8 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH))/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
 
 	if(!prob(probby) && !instant && !stat && cmode)
 		var/self_message
@@ -226,11 +227,10 @@
 			self_message = span_warning("I struggle with [user]!")
 		visible_message(span_warning("[user] struggles with [src]!"), self_message, span_hear("I hear aggressive shuffling!"))
 		playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
-		user.Immobilize(1 SECONDS)
-		user.changeNext_move(1 SECONDS)
+		user.Immobilize(0.5 SECONDS)
+		user.changeNext_move(CLICK_CD_GRABBING)
 		user.adjust_stamina(rand(2,6))
-		src.Immobilize(0.5 SECONDS)
-		src.changeNext_move(0.5 SECONDS)
+		src.Immobilize(0.25 SECONDS)
 		return
 
 	if(!instant)

@@ -16,6 +16,7 @@
 
 	grid_height = 32
 	grid_width = 32
+	item_weight = 400 GRAMS
 
 	var/mob/current_owner
 	var/last_scry
@@ -27,13 +28,15 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scryeye"
 	cooldown = 5 MINUTES
+	item_weight = 200 GRAMS
 
 /obj/item/scrying/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(world.time < last_scry + cooldown)
 		to_chat(user, span_warning("I look into [src] but only see inky smoke. Maybe I should wait."))
 		return
-	var/input = stripped_input(user, "Who are you looking for?", "Scrying Orb")
+	var/input = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(user, "Who are you looking for?", "Scrying Orb")))
+
 	if(!input)
 		return
 	if(!user.key)
@@ -51,7 +54,7 @@
 			if(!T)
 				continue
 			if(HAS_TRAIT(HL, TRAIT_ANTISCRYING))
-				to_chat(user, span_warning("I peer into [src], but an impenetrable fog shrouds [input]."))
+				to_chat(user, span_warning("I peer into [src], but an impenetrable fog shrouds [HL.real_name]."))
 				to_chat(HL, span_warning("My magical shrouding reacted to something."))
 				return
 			log_game("SCRYING: [user.real_name] ([user.ckey]) has used the scrying orb to leer at [HL.real_name] ([HL.ckey])")
@@ -64,7 +67,7 @@
 			user.visible_message(span_danger("[user] stares into [src], [p_their()] eyes rolling back into [p_their()] head."))
 			addtimer(CALLBACK(S, TYPE_PROC_REF(/mob/dead/observer, reenter_corpse)), 8 SECONDS)
 			if(!HL.stat)
-				if(HL.STAPER >= 15)
+				if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 15)
 					if(HL.mind)
 						if(HL.mind.do_i_know(name=user.real_name))
 							to_chat(HL, span_warning("I can clearly see the face of [user.real_name] staring at me!"))
@@ -72,7 +75,7 @@
 							return
 					to_chat(HL, span_warning("I can clearly see the face of an unknown [user.gender == FEMALE ? "woman" : "man"] staring at me!"))
 					return
-				if(HL.STAPER >= 11)
+				if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 11)
 					to_chat(HL, span_warning("I feel a pair of unknown eyes on me."))
 			REMOVE_TRAIT(user, TRAIT_NOSSDINDICATOR, "scryingorb")
 			return
@@ -129,14 +132,14 @@
 				user.visible_message("<span class='danger'>[user] stares into [src], [p_their()] squinting and concentrating...</span>")
 				addtimer(CALLBACK(S, TYPE_PROC_REF(/mob/dead/observer, reenter_corpse)), 8 SECONDS)
 				if(!HL.stat)
-					if(HL.STAPER >= 15)
+					if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 15)
 						if(HL.mind)
 							if(HL.mind.do_i_know(name=user.real_name))
 								to_chat(HL, "<span class='warning'>I can clearly see the face of [user.real_name] staring at me!.</span>")
 								return
 						to_chat(HL, "<span class='warning'>I can clearly see the face of an unknown [user.gender == FEMALE ? "woman" : "man"] staring at me!</span>")
 						return
-					if(HL.STAPER >= 11)
+					if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 11)
 						to_chat(HL, "<span class='warning'>I feel a pair of unknown eyes on me.</span>")
 				return
 		to_chat(user, "<span class='warning'>I peer into the viewpiece, but Noc does not reveal where [input] is.</span>")

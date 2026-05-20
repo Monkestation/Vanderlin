@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+import { chatRenderer } from '../chat/renderer';
 import { FONTS_DISABLED } from './constants';
 import { setClientTheme } from './themes';
 import type { SettingsState } from './types';
@@ -77,6 +78,9 @@ export function generalSettingsHandler(update: SettingsState): void {
 
   // Update stat panel settings
   setStatTabsStyle(update.statTabsStyle);
+
+  chatRenderer.zebraHighlight = update.zebraHighlight;
+  chatRenderer.disableCombine = update.disableCombine;
 
   // Update global UI font size
   setGlobalFontSize(update.fontSize, update.statFontSize, update.statLinked);

@@ -69,9 +69,6 @@
 
 	handle_typing_indicator()
 
-	if(istype(loc, /turf/open/water))
-		handle_inwater(loc)
-
 	if(!client && (world.time - last_island_check) > 20 SECONDS)
 		last_island_check = world.time
 		update_island_cache()
@@ -130,10 +127,10 @@
 		return
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return
-	if((getBruteLoss() + getFireLoss()) < (STAEND * 10))
+	if((getBruteLoss() + getFireLoss()) < (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))
 		return
 
-	var/probby = 53 - (STAEND * 2)
+	var/probby = 53 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)
 	if(body_position == LYING_DOWN)
 		probby = probby - 20
 	if(prob(probby))

@@ -57,7 +57,7 @@
 		return
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
 	message = parsemarkdown_basic(message, limited = TRUE, barebones = TRUE)
-	usr.emote("me",1,message,TRUE, custom_me = TRUE)
+	usr.emote("me", 1, message, intentional = TRUE)
 
 ///The big me emote verb
 /mob/verb/me_big_verb()
@@ -81,17 +81,15 @@
 		return
 	message = trim(copytext_char(html_encode(message), 1, MAX_MESSAGE_BIGME))
 	message = parsemarkdown_basic(message, limited = TRUE, barebones = TRUE)
-	usr.emote("me", 1, message, TRUE, custom_me = TRUE)
+	usr.emote("me", 1, message, TRUE)
 
 ///Speak as a dead person (ghost etc)
 /mob/proc/say_dead(message)
-	return
-/*
-	var/name = real_name
-	var/alt_name = ""
+	if(!client)
+		return
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		to_chat(src, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 
 	var/jb = is_banned_from(ckey, "Deadchat")
@@ -102,16 +100,16 @@
 		to_chat(src, "<span class='danger'>I have been banned from deadchat.</span>")
 		return
 
-
-
-	if (src.client)
-		if(src.client.prefs.muted & MUTE_DEADCHAT)
+	if(client)
+		if(client.prefs.muted & MUTE_DEADCHAT)
 			to_chat(src, "<span class='danger'>I cannot talk in deadchat (muted).</span>")
 			return
 
-		if(src.client.handle_spam_prevention(message,MUTE_DEADCHAT))
+		if(client.handle_spam_prevention(message,MUTE_DEADCHAT))
 			return
 
+	var/name = real_name
+	var/alt_name = ""
 	var/mob/dead/observer/O = src
 	if(isobserver(src) && O.deadchat_name)
 		name = "[O.deadchat_name]"
@@ -126,16 +124,17 @@
 	var/spanned = say_quote(message)
 	var/source = "<span class='game'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name]"
 	var/rendered = " <span class='message'>[emoji_parse(spanned)]</span></span>"
-	log_talk(message, LOG_SAY, tag="DEAD")
+	log_talk(message, LOG_SAY, tag = "DEAD")
+
 	if(SEND_SIGNAL(src, COMSIG_MOB_DEADSAY, message) & MOB_DEADSAY_SIGNAL_INTERCEPT)
 		return
+
 	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = key)
-*/
 
 ///Check if this message is an emote
 /mob/proc/check_emote(message, forced)
 	if(copytext(message, 1, 2) == "*")
-		emote(copytext_char(message, 2), intentional = !forced, custom_me = TRUE)
+		emote(copytext_char(message, 2), intentional = !forced)
 		return 1
 
 /mob/proc/check_whisper(message, forced)

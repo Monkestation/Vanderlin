@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/blackoak
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+	)
+
 /datum/job/advclass/mercenary/blackoak
 	title = "Black Oak's Guardian"
 	tutorial = "A shady guardian of the Black Oaks, a mercenary band in all but official name. Commonly taking caravan contracts through the thickest of forests."
@@ -6,25 +22,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
 
-	// Base stats
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_SPD = 1
-	)
-
-	// Base skills
-	skills = list(
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/crafting = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/disciple
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -37,20 +35,22 @@
 
 /datum/job/advclass/mercenary/blackoak/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/static/list/selectableweapon = list( \
-		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Regal Elven Club" = /obj/item/weapon/mace/elvenclub/steel \
-		)
-	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon", title = "Black Oak's Guardian")
-	if(!choice)
-		return
-	switch(choice)
-		if("Spear")
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-		if("Regal Elven Club")
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 	spawned.merctype = 4
 
+
+/datum/job/advclass/mercenary/blackoak/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectableweapon = list(
+		"Spear" = /obj/item/weapon/polearm/spear,
+		"Regal Elven Club" = /obj/item/weapon/mace/elvenclub/steel,
+	)
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon", title = "Black Oak's Guardian")
+	switch(choice)
+		if("Spear")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 30)
+		if("Regal Elven Club")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30)
 
 /datum/outfit/mercenary/blackoak
 	name = "Black Oak's Guardian (Mercenary)"

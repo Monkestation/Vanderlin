@@ -66,7 +66,7 @@
 	if(ishuman(holder))
 		var/mob/living/carbon/human/H = holder
 		L[DNA_SKIN_TONE_BLOCK] = H.skin_tone
-		L[DNA_EYE_COLOR_BLOCK] = H.get_eye_color()
+		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.get_eye_color(), default="FFFFFF")
 
 	for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
 		if(L[i])

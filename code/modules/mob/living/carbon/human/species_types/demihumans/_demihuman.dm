@@ -9,6 +9,16 @@
 /mob/living/carbon/human/species/demihuman
 	race = /datum/species/demihuman
 
+/datum/attribute_holder/sheet/job/species/demihuman
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = -1
+	)
+
 /datum/species/demihuman
 	name = "Hollow-Kin"
 	id = SPEC_ID_HOLLOWKIN
@@ -97,13 +107,13 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_SPD = 1, STATKEY_LCK = -1)
-	specstats_f = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_SPD = 1, STATKEY_LCK = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/demihuman
 
 	enflamed_icon = "widefire"
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
@@ -112,8 +122,15 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TAIL = /obj/item/organ/tail,
+		ORGAN_SLOT_TAIL = /obj/item/organ/tail/demihuman,
+		ORGAN_SLOT_HORNS = /obj/item/organ/horns,
 	)
+
+	optional_organ_slots = list(
+		ORGAN_SLOT_HORNS,
+		ORGAN_SLOT_TAIL,
+	)
+
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,

@@ -14,6 +14,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
 	ambushable = TRUE //! DEPRECATED VAR, USE TRAIT_NOAMBUSH
+	maxHealth = BRAIN_DAMAGE_DEATH
 
 	voice_pitch = 1
 
@@ -65,8 +66,6 @@
 	var/worn_armor_class = ARMOR_CLASS_NONE
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
-
-	var/name_override //For temporary visible name changes
 
 	var/datum/physiology/physiology
 
