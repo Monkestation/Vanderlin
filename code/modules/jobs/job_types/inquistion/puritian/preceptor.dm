@@ -54,7 +54,9 @@
 		TRAIT_DODGEEXPERT,
 		TRAIT_DUALWIELDER,
 		TRAIT_FOREIGNER,
-		TRAIT_RECOGNIZED,
+        TRAIT_IGNOREDAMAGESLOWDOWN,
+        TRAIT_CRITICAL_RESISTANCE,
+        TRAIT_CIVILIZEDBARBARIAN,
 	)
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -93,4 +95,5 @@
 	neck = /obj/item/clothing/neck/psycross/gold
 	wrists = /obj/item/clothing/wrists/bracers/naledi
 	ring = /obj/item/clothing/ring/signet
+
 
