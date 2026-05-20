@@ -4,7 +4,6 @@
 		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 3,
 		STAT_INTELLIGENCE = -2,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
@@ -41,6 +40,8 @@
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
+        TRAIT_IGNOREDAMAGESLOWDOWN,
+        TRAIT_CRITICAL_RESISTANCE,
 	)
 
 	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
@@ -58,7 +59,6 @@
 /datum/job/advclass/sacrestant/disciple/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	// I Hate
 	var/static/list/weapons = list(
 		"Discipline - Unarmed" = /obj/item/clothing/gloves/bandages/pugilist,
 		"Katar" = /obj/item/weapon/katar/psydon,
@@ -66,16 +66,13 @@
 		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "TAKE UP PSYDON'S ARMS!")
-	spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE) // this will fail on the unarmed discipline
-	switch(weapon_choice)
 		if("Discipline - Unarmed")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
-			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
-			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
+			ADD_TRAIT(spawned, TRAIT_CIVILIZEDBARBARIAN) // Lets them target more bodyparts with punches/kicks. 
 		if("Katar")
-			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 		if("Knuckledusters")
-			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 		if("Quarterstaff")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/disciple/quarterstaff)
 
@@ -85,6 +82,7 @@
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
 	backl = /obj/item/storage/backpack/satchel/otavan
 	belt = /obj/item/storage/belt/leather/rope/dark
+	gloves = /obj/item/clothing/gloves/bandages/weighted
 	pants = /obj/item/clothing/pants/tights/colored/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	cloak = /obj/item/clothing/cloak/psydontabard/alt
@@ -97,4 +95,6 @@
 		/obj/item/key/inquisition = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
+	)
+
 	)
