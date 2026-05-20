@@ -2,8 +2,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_CONSTITUTION = 2,
-		STAT_ENDURANCE = 2,
-		STAT_SPEED = -1,
+		STAT_ENDURANCE = 2,          
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/whipsflails = 30,
@@ -30,12 +29,14 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+        TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
+        TRAIT_SHARPER_BLADES
 	)
 
 	voicepack_m = /datum/voicepack/male/knight
@@ -74,13 +75,13 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "TAKE UP PSYDON'S ARMS.")
 	switch(weapon_choice)
 		if("Psydonic Longsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 40, TRUE)
 		if("Psydonic War Axe", "Psydonic Mace", "Psydonic Poleaxe + Shortsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10, 40, TRUE)
 		if("Psydonic Whip", "Psydonic Flail")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 10, 40, TRUE)
 		if("Psydonic Spear + Handmace")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)
 
 /datum/outfit/psydoniantemplar
 	name = "Psydonian Templar (Sacrestants)"
@@ -100,4 +101,6 @@
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
+	)
+
 	)
