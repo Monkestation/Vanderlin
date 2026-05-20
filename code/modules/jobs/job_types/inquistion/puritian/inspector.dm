@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/knives = 40,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -55,7 +55,7 @@
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
-		TRAIT_RECOGNIZED,
+        TRAIT_LIGHTSTEP,
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/inspector
