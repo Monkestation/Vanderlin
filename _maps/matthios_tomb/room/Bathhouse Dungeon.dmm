@@ -1237,10 +1237,10 @@
 /turf/closed/mineral/bedrock,
 /area/under/tomb/indoors/royal)
 "zJ" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/weapon/shovel/small,
-/turf/open/floor/grass,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "zY" = (
 /turf/open/floor/blocks/green,

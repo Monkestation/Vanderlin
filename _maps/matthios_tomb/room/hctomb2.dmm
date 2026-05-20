@@ -7,6 +7,7 @@
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "aG" = (
@@ -45,6 +46,7 @@
 /obj/effect/spawner/map_spawner/loot/weapon,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "ew" = (
@@ -52,6 +54,7 @@
 /obj/item/clothing/neck/gorget/copper,
 /obj/item/clothing/head/helmet/coppercap,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "eK" = (
@@ -101,6 +104,7 @@
 /obj/effect/spawner/map_spawner/loot/armor,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /obj/structure/closet/burial_shroud,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "if" = (
@@ -108,6 +112,7 @@
 /obj/structure/closet/burial_shroud,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "in" = (
@@ -155,6 +160,7 @@
 /obj/structure/closet/burial_shroud,
 /obj/item/weapon/sword/coppermesser,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "mu" = (
@@ -192,6 +198,7 @@
 /obj/item/reagent_containers/food/snacks/produce/poppy{
 	pixel_x = 9
 	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "pr" = (
@@ -209,6 +216,7 @@
 "rr" = (
 /obj/structure/closet/dirthole/closed,
 /obj/item/clothing/armor/cuirass/copperchest,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "si" = (
@@ -218,6 +226,7 @@
 "sF" = (
 /obj/structure/closet/dirthole/closed,
 /obj/item/weapon/mace/spiked,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "tc" = (
@@ -256,6 +265,7 @@
 "wu" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "xc" = (
@@ -266,17 +276,19 @@
 /obj/structure/closet/dirthole/closed,
 /obj/effect/spawner/map_spawner/loot/common,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "xP" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "yG" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "yN" = (
@@ -302,8 +314,8 @@
 /turf/closed/mineral/bedrock,
 /area/under/tomb)
 "AG" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "AQ" = (
@@ -349,7 +361,12 @@
 /area/under/tomb/cave)
 "CZ" = (
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
+/area/under/tomb)
+"De" = (
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/closed/mineral/bedrock,
 /area/under/tomb)
 "Dz" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -445,6 +462,7 @@
 /obj/structure/closet/dirthole/grave,
 /obj/structure/closet/burial_shroud,
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "Lz" = (
@@ -483,6 +501,7 @@
 "OW" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "Pt" = (
@@ -493,11 +512,13 @@
 /obj/structure/closet/dirthole/closed,
 /obj/effect/landmark/chest_or_mimic,
 /obj/item/gem,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "Rk" = (
 /obj/structure/closet/dirthole/closed,
 /obj/item/weapon/shield/wood,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "Sk" = (
@@ -523,6 +544,7 @@
 /obj/item/weapon/mace/bludgeon/copper,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "TC" = (
@@ -570,6 +592,7 @@
 /area/under/tomb/cave)
 "Yg" = (
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 
@@ -1094,7 +1117,7 @@ XK
 XK
 in
 AG
-iR
+De
 iR
 qH
 XK

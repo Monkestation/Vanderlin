@@ -323,6 +323,9 @@
 		record_round_statistic(STATS_LEECHES_EMBEDDED)
 	LAZYADD(embedded_objects, embedder)
 	embedder.is_embedded = TRUE
+	if(istype(embedder.loc, /mob))
+		var/mob/living/liver = embedder.loc
+		liver.dropItemToGround(embedder, TRUE, TRUE)
 	embedder.forceMove(src)
 	embedder.embedded(owner, src)
 

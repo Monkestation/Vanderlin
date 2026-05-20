@@ -59,6 +59,9 @@ SUBSYSTEM_DEF(death_arena)
 		if(!spirit?.client)
 			remove_fighter(spirit)
 			continue
+		else if(!spirit?.paid)
+			remove_fighter(spirit)
+			continue
 
 	var/mob/living/carbon/spirit/first = pick(waiting_fighters)
 	remove_fighter(first)

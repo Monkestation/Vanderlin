@@ -63,3 +63,46 @@
   - image: changes the recipe books css to look like parchment
   aberrantQuesrist:
   - bugfix: Default priest mask restored.
+2026-05-13:
+  Ben10083:
+  - spellcheck: Spymaster Knife Fervor now has correct name.
+2026-05-17:
+  dwasint:
+  - bugfix: stumps no longer cry about location
+  - bugfix: fall damage applies localized damage
+  - bugfix: fall twist applies localized damage
+  - bugfix: edge cases of applying damage now pass in the body zone as a fallback
+      to prevent unnatural wounds
+2026-05-18:
+  Ben10083:
+  - rscadd: Items or People under stasis no longer rot.
+  SSensum13:
+  - bugfix: maniac skills now being given via "clamped_adjustment" to avoid them getting
+      100+ skill level, that should not be possible
+  The-Awful:
+  - rscadd: Added new grave quality system. With assistance from ben10083.
+  - rscadd: Refactored and expanded grave robbery curses. With assistance from ben10083.
+  - rscadd: Added decorations for graves.
+  - rscadd: Added new unique weapon for gravetenders. With assistance from AberrantQuerist.
+  - rscadd: Added passive devotion to gravetenders for burial. Credit to ben10083.
+  - rscadd: New grave recipe book given to gravetenders.
+  - rscadd: Grave inscriptions that read the deceased's spirit's parting words. Credit
+      to ben10083.
+  - code_imp: Ported timestop spell from monkestation.
+  - map: closed/loot and gravemarker replaced with gravespawner maphelper. Credit
+      to ben10083.
+  - bugfix: Fixed exhuming graves not putting clods of dirt on shovels.
+  - bugfix: fixes runtime relating to descending into Underworld, possibly fixing
+      death arena
+  - image: Added new icons for grave curses.
+  Trexdude:
+  - spellcheck: Fish tamto plates are now properly named
+2026-05-19:
+  CheffieGithub:
+  - rscadd: Blast powder can refill alchemical flasks.
+  - rscdel: Removed confessor mask breathing sounds
+  - bugfix: Fixed travelling merchant outfits
+  ta3754859-max:
+  - code_imp: Framework (if you can even call it that) for alternative examine names
+  - rscadd: alternative naming for inquisition items
+  - bugfix: Skin items such as disciple's skin no longer show up on examine
