@@ -4,16 +4,16 @@
 		STAT_ENDURANCE = 1,
 		STAT_PERCEPTION = 2,
 		STAT_STRENGTH = -2,
-		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/wrestling = 25,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/athletics = 35,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/misc/sneaking = 40,
 		/datum/attribute/skill/misc/stealing = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 35,
 	)
 
 /datum/attribute_holder/sheet/job/confessor/arbalist
@@ -61,6 +61,7 @@
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
+        TRAIT_LIGHT_STEP
 	)
 
 	languages = list(/datum/language/oldpsydonic)
@@ -139,3 +140,4 @@
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
 	)
+
