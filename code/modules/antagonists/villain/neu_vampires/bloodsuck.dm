@@ -102,9 +102,6 @@
 		to_chat(sire, span_warning("[src] could not be sired."))
 		return
 
-	if(length(covens) == 1) //removing old covens for thralls
-		remove_coven(covens[1])
-
 	var/datum/clan/C = sire.clan
 	var/choice = tgui_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
 	if(QDELETED(src))
@@ -119,6 +116,13 @@
 		return
 	grab_ghost(TRUE, TRUE)
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
+	if(src.mind.has_antag_datum(/datum/antagonist/ghoul)) //removing old covens for thralls
+		var/obj/item/bodypart/chest = src.get_bodypart(BODY_ZONE_CHEST)
+		if(chest)
+			for (var/datum/bodypart_feature/F in chest.bodypart_features)
+				if (istype(F, /datum/bodypart_feature/vamprire_seal))
+					chest.remove_bodypart_feature(F)
+		src.mind.remove_antag_datum(/datum/antagonist/ghoul)
 	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
 	var/datum/clan_hierarchy_node/new_clan_position = C.create_position(pick(C.new_members_titles), "A new member of clan [C.name]", sire.clan_position, 1)
 	new_clan_position.assign_member(src)

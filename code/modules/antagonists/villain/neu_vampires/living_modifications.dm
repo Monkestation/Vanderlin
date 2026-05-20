@@ -397,7 +397,6 @@
 	master.clan.add_non_vampire_member(src)
 	var/datum/clan_hierarchy_node/new_clan_position = master.clan.create_position("Thrall", "A mortal servant to the clan.", master.clan_position, 1)
 	new_clan_position.assign_member(src)
-	add_bodypart_feature(new /datum/bodypart_feature/vamprire_seal)
 	var/list/coven_options = list()
 
 	// Get all available covens
@@ -418,13 +417,8 @@
 	if(chosen_coven.max_level > 3)
 		chosen_coven.max_level = 3 //caps the level for thralls at 3
 
-	src.hud_used?.shutdown_bloodpool()
-	src.hud_used?.initialize_bloodpool()
-	src.hud_used?.bloodpool.set_fill_color("#510000")
-	maxbloodpool = 1500
-	set_bloodpool(500)
-	ADD_TRAIT(src, TRAIT_BLOODDRINKER, "clan")
 	give_coven(chosen_coven)
+	src.mind.add_antag_datum(/datum/antagonist/ghoul)
 
 
 
