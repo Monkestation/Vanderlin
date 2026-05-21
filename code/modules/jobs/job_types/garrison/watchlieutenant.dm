@@ -84,7 +84,7 @@
 	var/static/list/selectable = list( \
 		"Flail" = /obj/item/weapon/flail, \
 		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Sword" = /obj/item/weapon/sword/iron, \
+		"Sword" = /obj/item/weapon/shield/heater, \
 		"Warhammer" = /obj/item/weapon/mace/warhammer, \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "LIEUTENANT")
@@ -98,8 +98,8 @@
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron(), ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
-			spawned.put_in_hands(new /obj/item/weapon/scabbard/sword())
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword(), ITEM_SLOT_BELT_L, TRUE)
+			spawned.put_in_hands(new /obj/item/weapon/sword/iron())
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
 		if("Warhammer")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
@@ -117,10 +117,10 @@
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	cloak = /obj/item/clothing/cloak/stabard/jupon/lieutenant
 	backl = /obj/item/storage/backpack/satchel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
-		/obj/item/flashlight/flare/torch/lantern,
-		/obj/item/book/law/small = 1,
-		/obj/item/weapon/mace/cudgel
+		/obj/item/weapon/mace/cudgel,
+		/obj/item/book/law/small = 1
 	)
 
 /datum/outfit/lieutenant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

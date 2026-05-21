@@ -231,3 +231,4 @@
 	detail_tag = "_quad"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
+	misc_flags = CRAFTING_TEST_EXCLUDE

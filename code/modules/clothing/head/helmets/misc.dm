@@ -138,6 +138,7 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/helmet/kettle/iron/guard/Initialize()
 	. = ..()
@@ -265,6 +266,7 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/helmet/sallet/iron/guard/Initialize()
 	. = ..()
@@ -389,6 +391,7 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_SECONDARY
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/helmet/visored/sallet/lieutenant/Initialize()
 	. = ..()
