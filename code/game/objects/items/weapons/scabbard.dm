@@ -73,6 +73,34 @@
 	sellprice = 100
 	item_weight = 120 GRAMS
 
+/obj/item/weapon/scabbard/book
+	name = "Tome of Justice"
+	desc = "This seems to be a special edition.."
+	icon_state = "handtome"
+	force = DAMAGE_KNUCKLES - 7
+	throwforce = DAMAGE_KNUCKLES - 7
+	wdefense = MEDIOCRE_PARRY
+	wbalance = HARD_TO_DODGE
+	wlength = WLENGTH_SHORT
+	w_class = WEIGHT_CLASS_SMALL
+	slot_flags = ITEM_SLOT_HIP
+	associated_skill = /datum/attribute/skill/combat/unarmed
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
+	sellprice = 0
+	experimental_onhip = FALSE
+
+	grid_width = 32
+	grid_height = 64
+	item_weight = 280 GRAMS
+
+/obj/item/weapon/scabbard/book/apply_components()
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
+	AddComponent(/datum/component/storage/concrete/scabbard/book)
+
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."

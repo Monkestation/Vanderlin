@@ -248,7 +248,8 @@
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
-		/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded = 1,
+		/obj/item/weapon/scabbard/book,
+		scabbards = list(/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded),
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
