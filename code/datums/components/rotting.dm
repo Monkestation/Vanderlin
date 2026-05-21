@@ -22,6 +22,8 @@
 	return ..()
 
 /datum/component/rot/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+		return
 	var/amt2add = rot_amount_per_process
 	if(last_process)
 		amt2add = ((world.time - last_process)/10) * amt2add
@@ -35,6 +37,8 @@
 	. = ..()
 
 /datum/component/rot/corpse/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+		return
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	..()
 	if(has_world_trait(/datum/world_trait/pestra_mercy))

@@ -124,7 +124,7 @@
 
 /datum/antagonist/zombie/on_removal()
 	var/mob/living/carbon/human/zombie = owner?.current
-	if(!zombie)
+	if(!istype(zombie))
 		return
 
 	zombie.cut_overlay(rotflies)
