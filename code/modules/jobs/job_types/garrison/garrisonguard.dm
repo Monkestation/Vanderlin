@@ -30,13 +30,11 @@
 
 /datum/outfit/guardsman
 	name = "City Watchmen Base"
-	cloak = /obj/item/clothing/cloak/half/guard
+	cloak = /obj/item/clothing/cloak/stabard/shortcoat/guard
 	pants = /obj/item/clothing/pants/trou/leather/splint
-	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather/townguard
 	gloves = /obj/item/clothing/gloves/leather
-	cloak = /obj/item/clothing/cloak/half/guard
 
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -57,9 +55,11 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -67,6 +67,18 @@
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/reading = 10
+	)
+
+/datum/attribute_holder/sheet/job/garrison/footman/flail
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/whipsflails = list(20, 30)
+	)
+
+/datum/attribute_holder/sheet/job/garrison/footman/sword
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 30)
 	)
 
 /datum/job/advclass/garrison/footman
@@ -83,19 +95,38 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
+/datum/job/advclass/garrison/footman/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectable = list( \
+		"Sword" = /obj/item/weapon/scabbard/sword, \
+		"Mace" = /obj/item/weapon/mace, \
+		"Militia Flail" = /obj/item/weapon/flail/militia, \
+	)
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "WATCHMAN")
+	if(!choice)
+		return
+	switch(choice)
+		if("Militia Flail")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/garrison/footman/flail)
+		if("Sword")
+			spawned.put_in_hands(new /obj/item/weapon/sword/iron())
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/garrison/footman/sword)
+
 /datum/outfit/guardsman/footman
 	name = "City Watch Footman"
-	head = /obj/item/clothing/head/helmet/townbarbute
+	head = /obj/item/clothing/head/helmet/sallet/iron/guard
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = /obj/item/clothing/armor/gambeson/colored/guard
+	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/flashlight/flare/torch/metal
-	beltl = /obj/item/weapon/mace/bludgeon
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/book/law/small = 1
+		/obj/item/book/law/small = 1,
+		/obj/item/weapon/mace/bludgeon
 	)
 
 /datum/attribute_holder/sheet/job/garrison/archer
@@ -132,21 +163,21 @@
 
 /datum/outfit/guardsman/archer
 	name = "City Watch Archer"
-	head = /obj/item/clothing/head/helmet/townbarbute
-	neck = /obj/item/clothing/neck/gorget
-	armor = /obj/item/clothing/armor/gambeson/heavy/colored/guard
+	head = /obj/item/clothing/head/helmet/kettle/iron/guard
+	neck = /obj/item/clothing/neck/coif/cloth/colored/guard
+	armor = /obj/item/clothing/armor/leather
+	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/guard
+	wrists = /obj/item/weapon/scabbard/knife
 	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/book/law/small = 1
+		/obj/item/book/law/small = 1,
+		/obj/item/flashlight/flare/torch/lantern
 	)
 
-/datum/outfit/guardsman/archer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/guard, /obj/item/clothing/shirt/undershirt/colored/guardsecond)
 
 /datum/attribute_holder/sheet/job/garrison/pikeman
 	raw_attribute_list = list(
@@ -154,9 +185,9 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -180,13 +211,14 @@
 
 /datum/outfit/guardsman/pikeman
 	name = "City Watch Pikeman"
-	head = /obj/item/clothing/head/helmet/townbarbute
+	head = /obj/item/clothing/head/helmet/sallet/iron/guard
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = /obj/item/clothing/armor/gambeson/colored/guard
+	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	neck = /obj/item/clothing/neck/gorget
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	beltl = /obj/item/flashlight/flare/torch/metal
+	beltl = /obj/item/flashlight/flare/torch/lantern
 	beltr = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,

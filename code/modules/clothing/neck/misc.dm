@@ -183,6 +183,10 @@
 /obj/item/clothing/neck/coif/cloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
+/obj/item/clothing/neck/coif/cloth/colored/guard
+	color = CLOTHING_BLOOD_RED
+	uses_lord_coloring = LORD_SECONDARY
+
 /obj/item/clothing/neck/coif/cloth/colored/berryblue
 	color = CLOTHING_BERRY_BLUE
 

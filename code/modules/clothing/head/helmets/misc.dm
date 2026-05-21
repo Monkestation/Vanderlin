@@ -121,6 +121,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_HEAD
 	item_weight = 2.2 KILOGRAMS
+	can_add_cloth = TRUE
 
 /obj/item/clothing/head/helmet/kettle/iron
 	name = "iron kettle helmet"
@@ -132,6 +133,15 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/clothing/head/helmet/kettle/iron/guard
+	detail_tag = "_detail"
+	detail_color = CLOTHING_PLUM_PURPLE
+	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/head/helmet/kettle/iron/guard/Initialize()
+	. = ..()
+	update_icon()
 
 //................ Kettle Helmet (Slitted)............... //
 /obj/item/clothing/head/helmet/kettle/slit
@@ -238,6 +248,7 @@
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
+	can_add_cloth = TRUE
 
 /obj/item/clothing/head/helmet/sallet/iron
 	name = "iron sallet"
@@ -250,13 +261,22 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
 
+/obj/item/clothing/head/helmet/sallet/iron/guard
+	detail_tag = "_detail"
+	detail_color = CLOTHING_PLUM_PURPLE
+	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/head/helmet/sallet/iron/guard/Initialize()
+	. = ..()
+	update_icon()
+
 //................ Elf Sallet ............... //
 /obj/item/clothing/head/helmet/sallet/elven	// blackoak merc helmet
 	desc = "A steel helmet with a thin gold plating designed for Elven woodland guardians."
 	icon_state = "bascinet_novisor"
 	color = COLOR_ASSEMBLY_GOLD
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_MODEST
-
+	can_add_cloth = FALSE
 //	icon_state = "elven_barbute_winged"
 //	item_state = "elven_barbute_winged"
 
@@ -270,6 +290,7 @@
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	bloody_icon_state = "helmetblood_big"
+	can_add_cloth = FALSE
 
 //................ Bascinet ............... //
 /obj/item/clothing/head/helmet/bascinet
@@ -362,6 +383,17 @@
 	desc = "A steel helmet offering good overall protection. Its visor can be flipped over for higher visibility at the cost of eye protection."
 	icon_state = "sallet_visor"
 	item_weight = 3.25 KILOGRAMS
+	can_add_cloth = TRUE
+
+/obj/item/clothing/head/helmet/visored/sallet/lieutenant
+	detail_tag = "_detail"
+	detail_color = CLOTHING_PLUM_PURPLE
+	uses_lord_coloring = LORD_SECONDARY
+
+/obj/item/clothing/head/helmet/visored/sallet/lieutenant/Initialize()
+	. = ..()
+	update_icon()
+
 
 /obj/item/clothing/head/helmet/visored/sallet/iron
 	name = "visored iron sallet"
@@ -399,6 +431,7 @@
 
 	emote_environment = 3
 	item_weight = 4.45 KILOGRAMS
+	can_add_cloth = TRUE
 
 /obj/item/clothing/head/helmet/visored/knight/blk
 	color = CLOTHING_SOOT_BLACK
@@ -422,6 +455,7 @@
 	icon_state = "knightarmet"
 	emote_environment = 3
 	item_weight = 4.45 KILOGRAMS
+	can_add_cloth = TRUE
 
 //................. Captain's Helmet .............. //
 /obj/item/clothing/head/helmet/visored/captain
@@ -507,6 +541,7 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
+	can_add_cloth = FALSE
 
 //................. Zizo Barbute .............. //
 

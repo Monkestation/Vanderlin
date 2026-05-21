@@ -1,6 +1,7 @@
 
 /obj/item/clothing/cloak/stabard
 	name = "surcoat"
+	desc = "A sleeveless coat worn over armor, often colored for mere fashion or to show loyalty to a group."
 	icon_state = "stabard"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -10,25 +11,45 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	var/can_customize = TRUE //set false for tabards that do not have detail designs (split, quadrants, etc)
 	var/picked
 
-/obj/item/clothing/cloak/stabard/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/stabard/Initialize(mapload, ...)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	AddComponent(/datum/component/storage/concrete/grid/cloak)
+
+/obj/item/clothing/cloak/stabard/dropped(mob/living/carbon/human/user)
+	..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	if(STR)
+		var/list/things = STR.contents()
+		for(var/obj/item/I in things)
+			STR.remove_from_storage(I, get_turf(src))
+
+/obj/item/clothing/cloak/stabard/examine(mob/user)
+	. = ..()
+
+	if(can_customize && !picked)
+		. += span_notice("<b>Alt+click</b> to customize.")
+
+/obj/item/clothing/cloak/stabard/AltClick(mob/user, list/modifiers)
+	. = ..()
 	if(picked)
+		return
+	if(!can_customize)
 		return
 	var/the_time = world.time
 	var/design = input(user, "Select a design.","Tabard Design") as null|anything in list("None","Split", "Quadrants", "Boxes", "Diamonds")
 	if(!design)
 		return
-	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+	var/list/colors = GLOB.peasant_dyes | GLOB.noble_dyes | GLOB.royal_dyes
+
+	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in colors
 	if(!colorone)
 		return
 	var/colortwo
 	if(design != "None")
-		colortwo = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+		colortwo = input(user, "Select a secondary color.","Tabard Design") as null|anything in colors
 		if(!colortwo)
 			return
 	if(world.time > (the_time + 30 SECONDS))
@@ -67,58 +88,22 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
 
-/obj/item/clothing/cloak/stabard/guard/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(picked)
-		return
-	var/the_time = world.time
-	var/chosen = input(user, "Select a design.","Tabard Design") as null|anything in list("Split", "Quadrants", "Boxes", "Diamonds")
-	if(world.time > (the_time + 10 SECONDS))
-		return
-	if(!chosen)
-		return
-	switch(chosen)
-		if("Split")
-			detail_tag = "_spl"
-		if("Quadrants")
-			detail_tag = "_quad"
-		if("Boxes")
-			detail_tag = "_box"
-		if("Diamonds")
-			detail_tag = "_dim"
-	update_appearance(UPDATE_OVERLAYS)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
-		detail_tag = initial(detail_tag)
-		update_appearance(UPDATE_OVERLAYS)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
-		return
-	picked = TRUE
-
 /obj/item/clothing/cloak/stabard/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/cloak/stabard/colored/dungeon
 	color = CLOTHING_SOOT_BLACK
-
-/obj/item/clothing/cloak/stabard/colored/dungeon/attack_hand_secondary(mob/user, list/modifiers)
-	return
+	can_customize = FALSE
 
 /obj/item/clothing/cloak/stabard/mercenary
 	detail_tag = "_quad"
+	can_customize = FALSE
 
 /obj/item/clothing/cloak/stabard/mercenary/Initialize()
 	. = ..()
 	detail_tag = pick("_quad", "_spl", "_box", "_dim")
-	color = clothing_color2hex(pick(CLOTHING_COLOR_NAMES))
-	detail_color = clothing_color2hex(pick(CLOTHING_COLOR_NAMES))
+	color = clothing_color2hex(pick(GLOB.peasant_dyes))
+	detail_color = clothing_color2hex(pick(GLOB.peasant_dyes))
 	update_appearance(UPDATE_ICON)
 	if(ismob(loc))
 		var/mob/L = loc
@@ -128,6 +113,7 @@
 	detail_tag = "_box"
 	color = CLOTHING_MAGE_BLUE
 	detail_color = CLOTHING_BOG_GREEN
+	can_customize = FALSE
 
 //////////////////////////
 /// CRUSADER
@@ -140,6 +126,7 @@
 	icon = 'icons/roguetown/clothing/special/templar.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/templar.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/templar.dmi'
+	can_customize = FALSE
 
 /obj/item/clothing/cloak/stabard/templar/astrata
 	name = "surcoat of the solar order"
@@ -215,94 +202,32 @@
 
 /obj/item/clothing/cloak/stabard/jupon
 	name = "jupon"
+	desc = "A close fitting coat often worn over armor, often colored for mere fashion or to show loyalty to a group."
 	icon_state = "surcoat"
 
-/obj/item/clothing/cloak/stabard/jupon/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(picked)
-		return
-	var/the_time = world.time
-	var/design = input(user, "Select a design.","Tabard Design") as null|anything in list("None","Split", "Quadrants", "Boxes", "Diamonds")
-	if(!design)
-		return
-	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
-	if(!colorone)
-		return
-	var/colortwo
-	if(design != "None")
-		colortwo = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
-		if(!colortwo)
-			return
-	if(world.time > (the_time + 30 SECONDS))
-		return
-	switch(design)
-		if("Split")
-			detail_tag = "_spl"
-		if("Quadrants")
-			detail_tag = "_quad"
-		if("Boxes")
-			detail_tag = "_box"
-		if("Diamonds")
-			detail_tag = "_dim"
-	color = clothing_color2hex(colorone)
-	if(colortwo)
-		detail_color = clothing_color2hex(colortwo)
-	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
-		detail_color = initial(detail_color)
-		color = initial(color)
-		detail_tag = initial(detail_tag)
-		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
-		return
-	picked = TRUE
 
 /obj/item/clothing/cloak/stabard/jupon/guard
-	desc = "A jupon with the lord's heraldic colors."
+	desc = "A close fitting coat with the lord's heraldic colors. This one is worn typically by guards."
 	color = CLOTHING_BLOOD_RED
 	detail_tag = "_quad"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
 
-/obj/item/clothing/cloak/stabard/jupon/guard/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(picked)
-		return
-	var/the_time = world.time
-	var/chosen = input(user, "Select a design.","Tabard Design") as null|anything in list("Split", "Quadrants", "Boxes", "Diamonds")
-	if(world.time > (the_time + 10 SECONDS))
-		return
-	if(!chosen)
-		return
-	switch(chosen)
-		if("Split")
-			detail_tag = "_spl"
-		if("Quadrants")
-			detail_tag = "_quad"
-		if("Boxes")
-			detail_tag = "_box"
-		if("Diamonds")
-			detail_tag = "_dim"
-	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
-		detail_tag = initial(detail_tag)
-		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
-		return
-	picked = TRUE
+/obj/item/clothing/cloak/stabard/jupon/lieutenant
+	desc = "A close fitting coat with the lord's heraldic colors. This one is worn by the the Lieutenant of the City Watch."
+	color = CLOTHING_BLOOD_RED
+	detail_tag = "_dim"
+	detail_color = CLOTHING_PLUM_PURPLE
+	uses_lord_coloring = LORD_SECONDARY | LORD_DETAIL_AND_COLOR
+
+/obj/item/clothing/cloak/stabard/shortcoat
+	name = "short surcoat"
+	icon_state = "shortcoat"
+	desc = "A short sleeveless coat worn over armor, often colored for mere fashion or to show loyalty to a group."
+
+/obj/item/clothing/cloak/stabard/shortcoat/guard
+	desc = "A short sleevless coat with the lord's heraldic colors. This one is worn typically by guards."
+	color = CLOTHING_BLOOD_RED
+	detail_tag = "_quad"
+	detail_color = CLOTHING_PLUM_PURPLE
+	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR

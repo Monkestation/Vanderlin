@@ -235,6 +235,7 @@
 	icon_state = "eorahelm"
 	item_state = "eorahelm"
 	item_weight = 3.2 KILOGRAMS
+	can_add_cloth = FALSE
 
 
 //............... Pestra Helmet ............... //

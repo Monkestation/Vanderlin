@@ -1,9 +1,8 @@
 /datum/attribute_holder/sheet/job/lieutenant
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_ENDURANCE = 2,
+		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 2,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/polearms = 10,
@@ -107,18 +106,19 @@
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
-	head = /obj/item/clothing/head/helmet/sargebarbute //veteran who won a nice helmet
+	head = /obj/item/clothing/head/helmet/visored/sallet/lieutenant
 	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather/townguardlt
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	armor = /obj/item/clothing/armor/cuirass
+	wrists = /obj/item/rope/chain
 	pants = /obj/item/clothing/pants/trou/leather/splint
 	gloves = /obj/item/clothing/gloves/chain/iron
 	neck = /obj/item/clothing/neck/chaincoif/iron
-	cloak = /obj/item/clothing/cloak/half/guardsecond
+	cloak = /obj/item/clothing/cloak/stabard/jupon/lieutenant
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
-		/obj/item/rope/chain = 1,
+		/obj/item/flashlight/flare/torch/lantern,
 		/obj/item/book/law/small = 1,
 		/obj/item/weapon/mace/cudgel
 	)

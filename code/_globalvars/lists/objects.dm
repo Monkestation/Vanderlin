@@ -53,21 +53,29 @@ GLOBAL_LIST_INIT(noble_dyes, list(
 	"Blood Red" = CLOTHING_BLOOD_RED,
 	"Swampweed" = CLOTHING_SWAMPWEED,
 	"Ocean" = CLOTHING_OCEAN,
-))
-GLOBAL_PROTECT(noble_dyes)
-
-GLOBAL_LIST_INIT(royal_dyes, list(
-	"Royal Black" = CLOTHING_ROYAL_BLACK,
-	"Royal Red" = CLOTHING_ROYAL_RED,
-	"Royal Purple" = CLOTHING_ROYAL_PURPLE,
-	"Royal Majenta" = CLOTHING_ROYAL_MAJENTA,
-	"Royal Teal" = CLOTHING_ROYAL_TEAL,
-
 	"Bark Brown" = CLOTHING_BARK_BROWN,
 	"Bog Green" = CLOTHING_BOG_GREEN,
 	"Fyritius Orange" = CLOTHING_FYRITIUS_ORANGE,
 	"Pear Yellow" = CLOTHING_PEAR_YELLOW,
 	"Chalk White" = CLOTHING_CHALK_WHITE,
+))
+GLOBAL_PROTECT(noble_dyes)
+
+GLOBAL_LIST_INIT(royal_dyes, list(
+	"Royal Red" = CLOTHING_ROYAL_RED,
+	"Royal Majenta" = CLOTHING_ROYAL_MAJENTA,
+	"Royal Orange" = CLOTHING_ROYAL_ORANGE,
+	"Royal Purple" = CLOTHING_ROYAL_PURPLE,
+	"Royal Brown" = CLOTHING_ROYAL_BROWN,
+	"Royal Black" = CLOTHING_ROYAL_BLACK,
+	"Royal Green" = CLOTHING_ROYAL_GREEN,
+	"Royal Teal" = CLOTHING_ROYAL_TEAL,
+	"Royal Blue" = CLOTHING_ROYAL_BLUE,
+	"Royal Yellow" = CLOTHING_ROYAL_YELLOW,
+	"Royal White" = CLOTHING_ROYAL_WHITE,
+	"Royal Orange" = CLOTHING_ROYAL_ORANGE,
+
+
 ))
 GLOBAL_PROTECT(royal_dyes)
 
