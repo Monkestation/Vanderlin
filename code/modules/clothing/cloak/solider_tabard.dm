@@ -219,6 +219,7 @@
 	detail_tag = "_dim"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_SECONDARY | LORD_DETAIL_AND_COLOR
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/cloak/stabard/shortcoat
 	name = "short surcoat"
