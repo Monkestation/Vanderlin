@@ -1,5 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - bugfix: "ley linker now right size"
-  - bugfix: "amethyst can now be used to level arcane"

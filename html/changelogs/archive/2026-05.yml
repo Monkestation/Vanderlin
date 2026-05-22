@@ -106,3 +106,10 @@
   - code_imp: Framework (if you can even call it that) for alternative examine names
   - rscadd: alternative naming for inquisition items
   - bugfix: Skin items such as disciple's skin no longer show up on examine
+2026-05-21:
+  dwasint:
+  - bugfix: ley linker now right size
+  - bugfix: amethyst can now be used to level arcane
+2026-05-22:
+  ModDownloading:
+  - rscadd: Routes for the Bandit Camp to connect to the Bog and Malum's Anvil.
