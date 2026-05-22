@@ -1673,10 +1673,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "hI" = (
-/obj/structure/fluff/buysign{
-	name = "DIGGING OUT A CAVE-IN, DON'T GO THIS WAY!"
-	},
-/turf/open/floor/dirt,
+/turf/open/water/marsh,
 /area/outdoors/woods_safe)
 "hJ" = (
 /obj/structure/winch{
@@ -1886,6 +1883,10 @@
 /obj/item/neuFarm/seed/westleach,
 /obj/item/neuFarm/seed/westleach,
 /turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"iV" = (
+/obj/structure/flora/tree,
+/turf/open/floor/grass,
 /area/outdoors/woods_safe)
 "iX" = (
 /obj/structure/table/wood{
@@ -4028,9 +4029,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
 "ws" = (
-/obj/structure/closet/dirthole/closed,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
+/obj/structure/fluff/traveltile/exit_bandit,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "wz" = (
 /obj/structure/chair/bench/church,
 /obj/structure/fluff/walldeco/painting/skull{
@@ -4892,6 +4893,12 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
+"Cx" = (
+/obj/structure/fluff/buysign{
+	name = "To the Murderwoods"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "Cz" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchbrick,
@@ -4900,6 +4907,13 @@
 /obj/item/bin/water/gross,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
+"CD" = (
+/obj/structure/fluff/traveltile/exit_bandit{
+	aportalgoesto = "banditexit_bog";
+	aportalid = "banditin_bog"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "CE" = (
 /obj/item/weapon/sword,
 /obj/item/weapon/sword,
@@ -4987,7 +5001,7 @@
 /obj/structure/fluff/buysign{
 	name = "To the Bog"
 	},
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/outdoors/woods_safe)
 "Dn" = (
 /obj/effect/decal/cobbleedge/alt{
@@ -5126,6 +5140,10 @@
 /obj/item/weapon/sword/long/judgement,
 /turf/open/floor/cobble,
 /area/indoors)
+"Eu" = (
+/obj/structure/fluff/traveltile/exit_bandit,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "Ev" = (
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
@@ -9647,8 +9665,8 @@ Te
 Qy
 lP
 Te
-bz
-Sy
+Te
+CD
 Iw
 "}
 (10,1,1) = {"
@@ -9774,11 +9792,11 @@ Te
 so
 so
 xt
-hI
 Te
 Te
-bz
-Sy
+Te
+Te
+CD
 Iw
 "}
 (11,1,1) = {"
@@ -9908,7 +9926,7 @@ xt
 Te
 ge
 Te
-Sy
+dv
 Iw
 "}
 (12,1,1) = {"
@@ -10037,8 +10055,8 @@ xt
 xt
 Te
 ge
-Te
-Sy
+Dh
+hI
 Iw
 "}
 (13,1,1) = {"
@@ -10167,8 +10185,8 @@ xt
 so
 Te
 Te
-Te
-Sy
+hI
+hI
 Iw
 "}
 (14,1,1) = {"
@@ -10296,9 +10314,9 @@ xt
 xt
 MH
 Kn
-Dh
 so
 so
+iV
 Iw
 "}
 (15,1,1) = {"
@@ -10558,7 +10576,7 @@ xt
 xt
 xt
 xt
-dv
+ws
 Iw
 "}
 (17,1,1) = {"
@@ -10688,7 +10706,7 @@ Kn
 so
 FR
 FR
-dv
+Eu
 Iw
 "}
 (18,1,1) = {"
@@ -10818,7 +10836,7 @@ xt
 xt
 xt
 xt
-dv
+ws
 Iw
 "}
 (19,1,1) = {"
@@ -10947,8 +10965,8 @@ xt
 xt
 so
 so
+Cx
 xt
-dv
 Iw
 "}
 (20,1,1) = {"
@@ -11077,8 +11095,8 @@ so
 WX
 Wp
 xt
-so
-so
+xt
+xt
 Iw
 "}
 (21,1,1) = {"
@@ -11207,8 +11225,8 @@ so
 so
 xt
 xt
-XS
-so
+Ed
+Sy
 Iw
 "}
 (22,1,1) = {"
@@ -11596,7 +11614,7 @@ Kn
 Kn
 xt
 Te
-UG
+xt
 UG
 UG
 Iw
