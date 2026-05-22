@@ -300,6 +300,7 @@
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
+	examine_name = "satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
 	icon_state = "osatchel"
 	item_state = "osatchel"

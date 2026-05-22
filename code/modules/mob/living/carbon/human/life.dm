@@ -96,31 +96,9 @@
 		set_typing_indicator(FALSE)
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
-	handle_gas_mask_sound()
 
 	if(stat != DEAD)
 		return 1
-
-/mob/living/carbon/human/proc/handle_gas_mask_sound()
-	if(!istype(wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
-		if(breathe_tick)
-			breathe_tick = 0
-		return
-	if(stat == DEAD)
-		return
-	if(HAS_TRAIT(src, TRAIT_NOBREATH))
-		return
-	breathe_tick++
-	var/mask_sound
-	if(istype(wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
-		if(breathe_tick>=rand(3,5))
-			breathe_tick = 0
-			mask_sound = pick('sound/items/confessormask1.ogg', 'sound/items/confessormask2.ogg', 'sound/items/confessormask3.ogg',
-							'sound/items/confessormask4.ogg', 'sound/items/confessormask5.ogg', 'sound/items/confessormask6.ogg',
-							'sound/items/confessormask7.ogg', 'sound/items/confessormask8.ogg', 'sound/items/confessormask9.ogg',
-					 		'sound/items/confessormask10.ogg')
-			playsound(src, mask_sound, 90, FALSE, 4, 0)
-			return
 
 /mob/living/carbon/human/DeadLife(delta_time, times_fired)
 	set invisibility = 0

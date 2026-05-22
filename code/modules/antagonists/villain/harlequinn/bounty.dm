@@ -1506,12 +1506,11 @@
 		if(!grave_hole)
 			// Create a new dirthole for burial
 			grave_hole = new /obj/structure/closet/dirthole(burial_turf)
-			grave_hole.stage = 3 // Set to pit stage for burial
-			grave_hole.update_appearance(UPDATE_NAME | UPDATE_ICON)
+			grave_hole.stage = DIRTHOLE_PIT // Set to pit stage for burial
 
 		// Ensure the hole is at the right stage for burial
-		if(grave_hole.stage < 3)
-			grave_hole.stage = 3
+		if(grave_hole.stage < DIRTHOLE_PIT)
+			grave_hole.stage = DIRTHOLE_PIT
 			grave_hole.update_appearance(UPDATE_NAME | UPDATE_ICON)
 		// Open the grave if it's closed
 		if(!grave_hole.opened)
@@ -1519,26 +1518,27 @@
 
 		// Place the corpse in the grave
 		target_corpse.forceMove(burial_turf)
-		grave_hole.user_buckle_mob(target_corpse, harlequinn)
 
-		// Close and bless the grave
+		// Close the grave
+		grave_hole.stage = DIRTHOLE_GRAVE
+		grave_hole.climb_offset = 10
 		grave_hole.close()
 
-		// Set the buried flag properly
-		if(istype(target_corpse, /mob/living/carbon/human))
-			var/mob/living/carbon/human/buried_human = target_corpse
-			buried_human.buried = TRUE
-
-		// Create a grave marker for the blessed burial
-		var/obj/structure/gravemarker/marker = new(burial_turf)
-		marker.name = "grave of [target_corpse.real_name]"
+		// Create a grave marker for the blessed burial, and bless.
+		grave_hole.headstone = new /obj/item/gravedecor/headstone/crude()
+		grave_hole.update_quality()
+		grave_hole.is_consecrated = TRUE
+		grave_hole.update_appearance(UPDATE_NAME | UPDATE_ICON)
 
 		// Bless the burial - remove any curses and provide protection
 		if(harlequinn && isliving(harlequinn))
 			var/mob/living/living_harlequinn = harlequinn
 			// Remove curse status if they have the graverobber trait (blessed burial)
 			if(HAS_TRAIT(living_harlequinn, TRAIT_GRAVEROBBER))
-				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t4)
 				to_chat(harlequinn, span_notice("Necra smiles upon this proper burial. Any curses are lifted."))
 			else
 				to_chat(harlequinn, span_notice("The proper burial brings peace to the departed soul."))
