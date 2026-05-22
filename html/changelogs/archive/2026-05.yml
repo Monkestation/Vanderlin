@@ -110,3 +110,6 @@
   dwasint:
   - bugfix: ley linker now right size
   - bugfix: amethyst can now be used to level arcane
+2026-05-22:
+  ModDownloading:
+  - rscadd: Routes for the Bandit Camp to connect to the Bog and Malum's Anvil.
