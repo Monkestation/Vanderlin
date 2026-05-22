@@ -22048,6 +22048,13 @@
 "vru" = (
 /turf/open/floor/sand,
 /area/outdoors/bog/south/east)
+"vrx" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_bog";
+	aportalid = "banditexit_bog"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/south/west)
 "vrW" = (
 /turf/closed/wall/mineral/wooddark,
 /area/ship/topdeck)
@@ -25343,9 +25350,9 @@ wFG
 wFG
 wFG
 wFG
-krA
-krA
-krA
+vrx
+vrx
+vrx
 wFG
 wFG
 wFG

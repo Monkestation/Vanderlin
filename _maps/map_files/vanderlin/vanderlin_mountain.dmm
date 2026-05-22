@@ -13084,6 +13084,13 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
+"nHN" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_bog";
+	aportalid = "banditexit_bog"
+	},
+/turf/open/floor/cobble/snow,
+/area/outdoors/mountains/anvil/snowyforest)
 "nJN" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/cobblerock/alt,
@@ -14141,6 +14148,20 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
+"tQZ" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_bog";
+	aportalid = "banditexit_bog"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/snowyforest)
+"tRr" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_bog";
+	aportalid = "banditexit_bog"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/mountains/anvil/snowyforest)
 "tYn" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/tile/masonic{
@@ -67814,10 +67835,10 @@ adi
 adi
 adi
 adi
-adi
-adi
+apy
 acM
-aZR
+acM
+aig
 "}
 (63,1,2) = {"
 aqx
@@ -68017,9 +68038,9 @@ adi
 adi
 adi
 adi
-adi
-adi
-aZR
+auy
+apy
+tRr
 "}
 (64,1,2) = {"
 aqx
@@ -68220,8 +68241,8 @@ adi
 adi
 adi
 adi
-adi
-aZR
+auy
+nHN
 "}
 (65,1,2) = {"
 aqx
@@ -68422,8 +68443,8 @@ aFz
 aFz
 aFz
 adi
-adi
-aZR
+acM
+tQZ
 "}
 (66,1,2) = {"
 aqx
