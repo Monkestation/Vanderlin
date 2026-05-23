@@ -1516,12 +1516,6 @@
 		if(artery.damage)
 			return TRUE
 
-/obj/item/bodypart/proc/is_artery_dissected()
-	. = FALSE
-	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
-		if(artery.is_broken())
-			return TRUE
-
 /obj/item/bodypart/proc/get_incision(surgical_only = FALSE, ignore_gauze = FALSE)
 	if(!ignore_gauze && bandage)
 		return

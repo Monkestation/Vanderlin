@@ -30,7 +30,6 @@
 #define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
 #define BLOOD_VOLUME_BAD 		BLOOD_VOLUME_NORMAL * 0.4
 #define BLOOD_VOLUME_BLEEDOUT 	BLOOD_VOLUME_NORMAL * 0.35
-#define BLOOD_VOLUME_BLEEDOUT_PASSOUT BLOOD_VOLUME_NORMAL * 0.25
 #define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
 
 /// How efficiently humans regenerate blood.
@@ -389,6 +388,9 @@
 #define BLOOD_UPDATE_QUEUED (1<<4)
 /// This mob can have blood, cached value of [proc/can_have_blood]
 #define LIVING_CAN_HAVE_BLOOD (1<<5)
+
+/// Returns whether or not the given mob can succumb
+#define CAN_SUCCUMB(target) ((HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION) || HAS_TRAIT(target, TRAIT_DEATHS_DOOR)) && !HAS_TRAIT(target, TRAIT_NODEATH))
 
 // Body position defines.
 /// Mob is standing up, usually associated with lying_angle value of 0.

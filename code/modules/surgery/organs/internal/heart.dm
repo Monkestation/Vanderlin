@@ -12,7 +12,7 @@
 	organ_volume = 0.5
 	max_blood_storage = 100
 	current_blood = 100
-	blood_req = 10
+	blood_req = 5
 	oxygen_req = 5
 	nutriment_req = 3
 	hydration_req = 1.5
@@ -94,11 +94,6 @@
 			loose_names += node.name
 		. += span_warning("You can see a few humors loosely pressed against [src], [english_list(loose_names)].")
 
-/obj/item/organ/heart/is_working()
-	if(owner)
-		return (..() && beating)
-	return ..()
-
 /obj/item/organ/heart/is_failing()
 	if(owner)
 		return (..() || !beating)
@@ -108,7 +103,6 @@
 	. = ..()
 	if(!special)
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS)
-	owner?.stop_sound_channel(CHANNEL_HEARTBEAT)
 
 /obj/item/organ/heart/attack_self(mob/user)
 	. = ..()

@@ -17,26 +17,25 @@
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 	overdose_threshold = 35
 
-/datum/reagent/medicine/atropine/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/atropine/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
-	if(!iscarbon(L))
+	if(!iscarbon(affected_mob))
 		return
-	var/mob/living/carbon/C = L
-	var/numbing = min(50, CEILING(C.getShock(TRUE)/2, 1))
-	C.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
-	C.add_chem_effect(CE_PAINKILLER, numbing, "[type]")
-	C.add_chem_effect(CE_STABLE, 1, "[type]")
-	if(C.undergoing_cardiac_arrest() || C.undergoing_nervous_system_failure())
-		C.add_chem_effect(CE_ORGAN_REGEN, 1, "[type]")
+	var/mob/living/carbon/carbon_mob = affected_mob
+	var/numbing = min(50, CEILING(carbon_mob.getShock(FALSE)/2, 1))
+	carbon_mob.add_chem_effect(CE_PAINKILLER, numbing, "[type]")
+	carbon_mob.add_chem_effect(CE_STABLE, 1, "[type]")
+	carbon_mob.add_chem_effect(CE_ORGAN_REGEN, 1, "[type]")
+	carbon_mob.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
+	carbon_mob.add_chem_effect(CE_OXYGENATED, 1, "[type]")
 
-/datum/reagent/medicine/atropine/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/atropine/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
-	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
-	L.remove_chem_effect(CE_ORGAN_REGEN, "[type] ")
-	L.remove_chem_effect(CE_PAINKILLER, "[type]")
-	L.remove_chem_effect(CE_TOXIN, "[type]")
-	L.remove_chem_effect(CE_BLOCKAGE, "[type]")
-	L.remove_chem_effect(CE_STABLE, "[type]")
+	affected_mob.remove_chem_effect(CE_PAINKILLER, "[type]")
+	affected_mob.remove_chem_effect(CE_STABLE, "[type]")
+	affected_mob.remove_chem_effect(CE_ORGAN_REGEN, "[type] ")
+	affected_mob.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
+	affected_mob.remove_chem_effect(CE_OXYGENATED, "[type]")
 
 /datum/reagent/medicine/atropine/on_mob_life(mob/living/carbon/affected_mob, efficiency)
 	if(affected_mob.health <= affected_mob.crit_threshold)

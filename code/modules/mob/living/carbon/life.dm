@@ -30,20 +30,11 @@
 
 		handle_wounds()
 		handle_embedded_objects()
-		handle_roguebreath()
 		update_stress()
 		handle_nausea()
 
 		handle_shock(delta_time, times_fired)
 		handle_shock_stage(delta_time, times_fired)
-
-		if(!CAN_HAVE_BLOOD(src) || (get_blood_volume() > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
-			if(!heart_attacking)
-				if(oxyloss)
-					adjustOxyLoss(-5)
-			else
-				if(getOxyLoss() < 20)
-					heart_attacking = FALSE
 
 		handle_sleep()
 
@@ -69,115 +60,9 @@
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	return
 
-
-/mob/living/carbon/proc/handle_roguebreath()
-	return
-
-/mob/living/carbon/human/handle_roguebreath()
-	..()
-	if(HAS_TRAIT(src, TRAIT_NOBREATH))
-		return TRUE
-	if(istype(loc, /obj/structure/closet/dirthole))
-		adjustOxyLoss(5)
-	if(istype(loc, /obj/structure/closet/burial_shroud))
-		var/obj/O = loc
-		if(istype(O.loc, /obj/structure/closet/dirthole))
-			adjustOxyLoss(5)
-	if(isopenturf(loc))
-		var/turf/open/T = loc
-		if(reagents && T.pollution)
-			T.pollution.breathe_act(src)
-			if(HAS_TRAIT(src, TRAIT_DEADNOSE))
-				return
-			if(next_smell <= world.time)
-				next_smell = world.time + 30 SECONDS
-				T.pollution.smell_act(src)
-
 ///////////////
 // BREATHING //
 ///////////////
-
-/mob/living/carbon/handle_temperature()
-	var/turf/open/turf = get_turf(src)
-	if(!istype(turf))
-		return
-	var/temp = turf.return_temperature()
-
-	if(temp < 0 )
-		snow_shiver = world.time + 3 SECONDS + abs(temp)
-
-//Start of a breath chain, calls breathe()
-/mob/living/carbon/handle_breathing(times_fired)
-	var/breath_effect_prob = 0
-	var/turf/turf = get_turf(src)
-	var/turf_temp = turf ? turf.return_temperature() : BODYTEMP_NORMAL
-
-	// Breath visibility based on ambient temperature
-	// Only visible when it's actually cold enough for condensation
-	if(turf_temp <= -10)
-		breath_effect_prob = 100    // Always visible in extreme cold
-	else if(turf_temp <= -5)
-		breath_effect_prob = 90     // Very likely in freezing temps
-	else if(turf_temp <= 0)
-		breath_effect_prob = 40     // Common at freezing point
-	else if(turf_temp <= 5)
-		breath_effect_prob = 15     // Sometimes visible in cold
-
-	// Body temperature effects
-	if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT)
-		var/cold_severity = (BODYTEMP_COLD_DAMAGE_LIMIT - bodytemperature)
-		breath_effect_prob += min(cold_severity * 15, 40)
-
-	// Environmental modifiers
-	var/turf/snow_turf = get_turf(src)
-	if(snow_shiver > world.time || snow_turf?.snow)
-		breath_effect_prob = min(breath_effect_prob + 30, 100)
-
-	// Heavy breathing from exertion or cold body
-	if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT - 3)
-		breath_effect_prob = min(breath_effect_prob + 50, 100)
-		if(prob(15) && !is_mouth_covered())
-			to_chat(src, span_warning("Your breath comes out in heavy puffs of vapor."))
-
-	if(prob(breath_effect_prob) && !is_mouth_covered())
-		emit_breath_particle(/particles/fog/breath)
-
-	return
-
-/mob/living/proc/emit_breath_particle(particle_type)
-	ASSERT(ispath(particle_type, /particles))
-
-	var/obj/effect/abstract/particle_holder/holder = new(src, particle_type)
-	var/particles/breath_particle = holder.particles
-	var/breath_dir = dir
-
-	var/list/particle_grav = list(0, 0.1, 0)
-	var/list/particle_pos = list(0, 6, 0)
-	if(breath_dir & NORTH)
-		particle_grav[2] = 0.2
-		breath_particle.rotation = pick(-45, 45)
-		// Layer it behind the mob since we're facing away from the camera
-		holder.pixel_w -= 4
-		holder.pixel_y += 4
-	if(breath_dir & WEST)
-		particle_grav[1] = -0.2
-		particle_pos[1] = -5
-		breath_particle.rotation = -45
-	if(breath_dir & EAST)
-		particle_grav[1] = 0.2
-		particle_pos[1] = 5
-		breath_particle.rotation = 45
-	if(breath_dir & SOUTH)
-		particle_grav[2] = 0.2
-		breath_particle.rotation = pick(-45, 45)
-		// Shouldn't be necessary but just for parity
-		holder.pixel_w += 4
-		holder.pixel_y -= 4
-
-	breath_particle.gravity = particle_grav
-	breath_particle.position = particle_pos
-
-	QDEL_IN(holder, breath_particle.lifespan)
 
 /mob/living/carbon/proc/has_smoke_protection()
 	if(HAS_TRAIT(src, TRAIT_NOBREATH))
@@ -192,34 +77,31 @@
 /mob/living/carbon/proc/handle_organs(delta_time, times_fired)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
 		return
-	if(stat < DEAD)
-		var/list/already_processed_life = list()
-		var/list/organlist
-		var/obj/item/organ/organ
-		for(var/organ_slot in GLOB.organ_process_order)
+
+	// This is no longer tied to mob stat since organs can live on their own
+	var/list/already_processed_life = list()
+	for(var/organ_slot in GLOB.organ_process_order)
+		if(QDELETED(src))
+			break
+		var/list/organlist = LAZYACCESS(internal_organs_slot, organ_slot)
+		for(var/obj/item/organ/organ as anything in organlist)
 			if(QDELETED(src))
 				break
-			organlist = LAZYACCESS(internal_organs_slot, organ_slot)
-			for(var/thing in organlist)
-				if(QDELETED(src))
-					break
-				organ = thing
-				// This exists mostly because reagent metabolization can cause organ shuffling
-				if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
-					if(organ.needs_processing)
-						organ.on_life(delta_time, times_fired)
-					already_processed_life[organ] = TRUE
-		var/datum/organ_process/organ_process
+			// This exists mostly because reagent metabolization can cause organ shuffling
+			if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
+				if(organ.needs_processing)
+					organ.on_life(delta_time, times_fired)
+				already_processed_life[organ] = TRUE
+
+	if(stat < DEAD)
 		for(var/thing in GLOB.organ_process_datum_order)
 			if(QDELETED(src))
 				break
-			organ_process = GLOB.organ_processes_by_slot[thing]
+			var/datum/organ_process/organ_process = GLOB.organ_processes_by_slot[thing]
 			if(organ_process.needs_process(src))
 				organ_process.handle_process(src, delta_time, times_fired)
 	else
-		var/obj/item/organ/organ
-		for(var/thing in internal_organs)
-			organ = thing
+		for(var/obj/item/organ/organ as anything in internal_organs)
 			//Needed so organs decay while inside the body
 			organ.on_death(delta_time, times_fired)
 
@@ -486,6 +368,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	var/list/hearts = getorganslotlist(ORGAN_SLOT_HEART)
 	if(status)
 		pulse = PULSE_NONE
+		ADD_TRAIT(src, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 		for(var/obj/item/organ/heart/heart in hearts)
 			heart.Stop()
 	else

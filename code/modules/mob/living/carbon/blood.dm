@@ -1,7 +1,7 @@
 
 // bleedout checks
 /mob/living/carbon/proc/in_bleedout()
-	return (CHECK_BITFIELD(status_flags, BLEEDOUT))
+	return (CHECK_BITFIELD(status_flags, BLEEDOUT)) || undergoing_cardiac_arrest()
 
 /// Blood volume, affected by the heart
 /mob/living/carbon/proc/get_blood_circulation()
@@ -65,7 +65,7 @@
 	else
 		apparent_blood_volume = BLOOD_VOLUME_NORMAL
 
-	var/apparent_blood_volume_mod = max(0, 1 - getOxyLoss() / max(maxHealth, 1))
+	var/apparent_blood_volume_mod = max(0, 1 - (getOxyLoss() / max(maxHealth, 1)))
 	var/oxygenated = get_chem_effect(CE_OXYGENATED)
 	if(oxygenated == 1) // Tirimol
 		apparent_blood_volume_mod += 0.5

@@ -127,7 +127,7 @@
 /// Destroyed organs don't function and cannot be repaired, needs a transplant
 #define ORGAN_DESTROYED (1<<5)
 /// Not only is the organ failing, it is completely septic and spreading germs around
-#define ORGAN_DEAD (1<<6)
+#define ORGAN_NECROTIC (1<<6)
 /// Organ has been cut away from the owner and can be safely removed during surgery
 #define ORGAN_CUT_AWAY (1<<7)
 /// Organ should update limb efficiency when damaged or healed
@@ -139,7 +139,7 @@
 
 DEFINE_BITFIELD(organ_flags, list(
 	"ORGAN_DESTROYED" = ORGAN_DESTROYED,
-	"ORGAN_DEAD" = ORGAN_DEAD,
+	"ORGAN_NECROTIC" = ORGAN_NECROTIC,
 	"ORGAN_CUT_AWAY" = ORGAN_CUT_AWAY,
 	"ORGAN_FROZEN" = ORGAN_FROZEN,
 	"ORGAN_INDESTRUCTIBLE" = ORGAN_INDESTRUCTIBLE,

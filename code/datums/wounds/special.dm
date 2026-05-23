@@ -174,7 +174,7 @@
 		"The tongue flies off in an arc!"
 	)
 	woundpain = 8
-	bleed_rate = 2.5
+	bleed_rate = 1.25
 	can_cauterize = FALSE
 	critical = TRUE
 	associated_bclasses = ARTERY_BCLASSES

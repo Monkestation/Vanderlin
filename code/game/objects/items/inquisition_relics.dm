@@ -949,6 +949,7 @@
 	ADD_TRAIT(target, TRAIT_MUTE, "garroteCordage")
 	RegisterSignal(target, COMSIG_LIVING_RESIST_GRAB, PROC_REF(on_victim_resist))
 	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(reset_garrote))
+	RegisterSignal(target, COMSIG_CARBON_ATTEMPT_BREATHE, PROC_REF(block_breath))
 	RegisterSignal(user, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(reset_garrote))
 	victim = WEAKREF(target)
 	lastuser = WEAKREF(user)
@@ -965,6 +966,9 @@
 			take_damage(max_integrity * 0.05)
 		else
 			take_damage(max_integrity * 0.1)
+
+/obj/item/inqarticles/garrote/proc/block_breath(datum/source)
+	return BREATHE_SKIP_BREATH
 
 /obj/item/inqarticles/garrote/razor // To yische, who said not to give this out constantly, I respectfully disagree when it comes to assassin
 	name = "profane razor" // It's very not non lethal now.  Strangle your prey with glee

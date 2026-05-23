@@ -714,17 +714,19 @@
 		return
 	if(!reaper)
 		return
-	if (HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION))
-		log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
 
-		if(istype(src.loc, /turf/open/water) && !HAS_TRAIT(src, TRAIT_NOBREATH) && body_position == LYING_DOWN && client)
-			record_round_statistic(STATS_PEOPLE_DROWNED)
+	if (!CAN_SUCCUMB(src))
+		to_chat(src, span_warning("You are unable to succumb to death! This life continues."), type=MESSAGE_TYPE_INFO)
+		return
 
-		adjustOxyLoss(201)
-		updatehealth()
+	log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
+
+	adjustOxyLoss(201)
+	updatehealth()
 //		if(!whispered)
 //			to_chat(src, "<span class='userdanger'>I have given up life and succumbed to death.</span>")
-		death()
+	investigate_log("has succumbed to death.", INVESTIGATE_DEATHS)
+	death()
 
 /**
  * Checks if a mob is incapacitated

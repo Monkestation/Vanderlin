@@ -87,7 +87,7 @@
 	var/is_swimming_tile = TRUE
 	var/stamina_entry_cost
 	var/ticking_stamina_cost
-	var/ticking_oxy_damage = 4.2
+	var/ticking_oxy_damage = 2
 	var/exhaust_swimmer_prob = 100
 
 	/// Randomize direction when initializing

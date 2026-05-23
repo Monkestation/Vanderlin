@@ -104,7 +104,8 @@
 		TRAIT_NOSLEEP,
 		TRAIT_SLEEPIMMUNE,
 		TRAIT_TOXIMMUNE,
-		TRAIT_FEARLESS
+		TRAIT_FEARLESS,
+		TRAIT_NO_ORGAN_PROCESS
 	)
 
 	statsheet_male = /datum/attribute_holder/sheet/job/species/automaton

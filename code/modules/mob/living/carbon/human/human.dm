@@ -422,7 +422,7 @@
 					heart_exposed_mod += 5
 
 				/// Master (55) have a 5% chance of reviving through CPR each attempt.
-				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 19, context = DICE_CONTEXT_PHYSICAL)
+				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 20, context = DICE_CONTEXT_PHYSICAL)
 				looping = TRUE
 
 				if(diceroll <= DICE_CRIT_FAILURE) // can't even break ribs correctly

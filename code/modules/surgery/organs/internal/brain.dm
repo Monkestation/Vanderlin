@@ -29,10 +29,11 @@
 	organ_volume = 0.5
 	max_blood_storage = 100
 	current_blood = 100
-	blood_req = 5
-	oxygen_req = 5
+	blood_req = 2.5
+	oxygen_req = 6
 	nutriment_req = 3
 	hydration_req = 1.5
+	self_healing_effect = CE_BRAIN_REGEN
 
 	COOLDOWN_DECLARE(trauma_cooldown)
 
@@ -90,14 +91,18 @@
 	if(!blood_req)
 		return
 	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_SAFE))
-		current_blood = min(current_blood + (blood_req * 0.5 * delta_time), max_blood_storage)
+		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
 		return
+
 	if(in_bleedout)
-		current_blood = max(current_blood - (blood_req * 0.5 * delta_time), 0)
+		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
+		if(DT_PROB(5, delta_time))
+			owner.adjust_eye_blur_up_to(4, 4)
 	else
-		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * (0.5 * delta_time)), 0)
+		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
+
 	// When all blood is lost, take blood from blood vessels
-	if(!current_blood)
+	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SAFE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
 		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
@@ -107,7 +112,7 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * 0.5 * delta_time), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * delta_time * 2), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		//Don't apply damage, this is handled by the organ process datum, if necessary
 
@@ -300,26 +305,16 @@
 	return ..()
 
 /obj/item/organ/brain/can_self_heal(delta_time, times_fired)
-	. = TRUE
 	if(!owner)
 		return FALSE
 	if(healing_factor <= 0)
 		return FALSE
-
-	if(owner.get_chem_effect(CE_BRAIN_REGEN))
+	if(self_healing_effect && owner.get_chem_effect(self_healing_effect))
 		return TRUE
-
-	if(is_dead())
-		return FALSE
-	if(current_blood <= 0)
-		return FALSE
-	if(owner.undergoing_cardiac_arrest())
-		return FALSE
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	if(effective_blood_oxygenation < BLOOD_VOLUME_SAFE)
 		return FALSE
-	if(owner.stat >= DEAD)
-		return FALSE
+	return ..()
 
 /obj/item/organ/brain/proc/past_damage_threshold(threshold)
 	return (get_current_damage_threshold() > threshold)
