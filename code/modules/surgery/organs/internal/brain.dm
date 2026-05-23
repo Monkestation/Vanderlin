@@ -20,6 +20,9 @@
 	organ_flags = ORGAN_VITAL
 	attack_verb = list("attacked", "slapped", "whacked")
 
+	pain_multiplier = 0 // you can't feel your brain being fried
+	internal_damage_modifier = 0.25
+
 	maxHealth = BRAIN_DAMAGE_DEATH
 	healing_factor = BRAIN_DAMAGE_DEATH/200
 	low_threshold = BRAIN_DAMAGE_DEATH * 0.25
@@ -90,7 +93,8 @@
 		return
 	if(!blood_req)
 		return
-	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_SAFE))
+	// Very low blood, danger!!
+	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_BAD))
 		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
 		return
 
@@ -302,18 +306,6 @@
 	if(brainmob)
 		QDEL_NULL(brainmob)
 	QDEL_LIST(traumas)
-	return ..()
-
-/obj/item/organ/brain/can_self_heal(delta_time, times_fired)
-	if(!owner)
-		return FALSE
-	if(healing_factor <= 0)
-		return FALSE
-	if(self_healing_effect && owner.get_chem_effect(self_healing_effect))
-		return TRUE
-	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
-	if(effective_blood_oxygenation < BLOOD_VOLUME_SAFE)
-		return FALSE
 	return ..()
 
 /obj/item/organ/brain/proc/past_damage_threshold(threshold)
