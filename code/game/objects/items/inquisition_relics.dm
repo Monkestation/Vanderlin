@@ -805,6 +805,10 @@
 	desc = "Used to wrap around the target."
 	no_attack = TRUE
 
+/obj/item/inqarticles/garrote/Destroy()
+	reset_garrote()
+	. = ..()
+
 /obj/item/inqarticles/garrote/atom_break(damage_flag, silent)
 	. = ..()
 	if(!ismob(loc))
@@ -851,7 +855,7 @@
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(garrote_victim)
 		REMOVE_TRAIT(garrote_victim, TRAIT_MUTE, "garroteCordage")
-	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_QDELETING))
+	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_QDELETING, COMSIG_CARBON_ATTEMPT_BREATHE))
 	victim = null
 
 	var/mob/living/last_garrote_user = lastuser?.resolve()

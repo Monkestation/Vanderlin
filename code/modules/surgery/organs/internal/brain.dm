@@ -102,7 +102,7 @@
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
 
 	// When all blood is lost, take blood from blood vessels
-	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SAFE))
+	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
 		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))

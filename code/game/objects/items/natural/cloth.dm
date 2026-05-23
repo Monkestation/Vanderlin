@@ -32,7 +32,7 @@
 
 /obj/item/natural/cloth/examine(mob/user)
 	. = ..()
-	. += span_notice("[src] is [PERCENT(bandage_health/initial(bandage_health))]% soaked in blood.")
+	. += span_notice("[src] is [PERCENT((initial(bandage_health) - bandage_health)/initial(bandage_health))]% soaked in blood.")
 
 /obj/item/natural/cloth/Initialize(mapload, vol)
 	. = ..()
