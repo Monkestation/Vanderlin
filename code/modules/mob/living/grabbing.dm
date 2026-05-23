@@ -305,7 +305,7 @@
 					var/mob/living/carbon/C = M
 					var/obj/item/clothing/neck/neck_armor = C.wear_neck
 					var/throat_protected = FALSE
-					if(neck_armor)
+					if(istype(neck_armor))
 						throat_protected = (neck_armor.armor_class != ARMOR_CLASS_NONE)
 					if(C.head && istype(C.head, /obj/item/clothing/head/helmet/heavy/necked))
 						throat_protected = TRUE

@@ -173,7 +173,7 @@
 		// Less blood so breaths give you less oxygen
 		var/blood_modifier = 1
 		if(CAN_HAVE_BLOOD(breather))
-			blood_modifier = BLOOD_VOLUME_NORMAL / breather.get_blood_volume()
+			blood_modifier = breather.get_blood_volume() / BLOOD_VOLUME_NORMAL
 		var/oxygen_req_modifier = 0.97 + (30/max(breather.total_oxygen_req, 1)) * 0.03
 		breather.adjustOxyLoss(-5 * blood_modifier * lung_efficiency * oxygen_req_modifier * delta_time)
 

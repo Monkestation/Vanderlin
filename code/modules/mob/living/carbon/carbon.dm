@@ -252,7 +252,7 @@
 							return
 						thrown_thing = throwable_mob
 						thrown_speed = 1
-						thrown_range = round((GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)/GET_MOB_ATTRIBUTE_VALUE(throwable_mob, STAT_CONSTITUTION))*2)
+						thrown_range = round(( max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH), 1) / max(GET_MOB_ATTRIBUTE_VALUE(throwable_mob, STAT_CONSTITUTION), 1) ) * 2)
 						if(body_position == LYING_DOWN || (!HAS_TRAIT(thrown_thing, TRAIT_TINY) && throwable_mob.cmode && (throwable_mob.body_position != LYING_DOWN || GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 15)))
 							while(end_T.z > start_T.z)
 								end_T = GET_TURF_BELOW(end_T)
