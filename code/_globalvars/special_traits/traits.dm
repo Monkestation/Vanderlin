@@ -636,6 +636,45 @@
 	ADD_TRAIT(character, TRAIT_JESTERPHOBIA, "[type]") // purely for the info text
 	character.gain_trauma(/datum/brain_trauma/mild/phobia/jesters)
 
+
+/datum/attribute_holder/sheet/job/truejester //This is why Jesterphobic exists
+	attribute_variance = list(
+		STAT_SPEED = list(-8, 7),
+		STAT_CONSTITUTION = list(-6, 7),
+		STAT_ENDURANCE = list(-6, 7),
+		STAT_PERCEPTION = list(-7, 7),
+		STAT_INTELLIGENCE = list(-6, 7),
+		STAT_STRENGTH = list(-6, 7),
+		STAT_FORTUNE = list(-4, 4),
+		/datum/attribute/skill/combat/knives = list(-10, 20),
+		/datum/attribute/skill/combat/unarmed = list(-10, 20),
+		/datum/attribute/skill/misc/riding = list(0, 20),
+		/datum/attribute/skill/labor/fishing = list(0, 30),
+		/datum/attribute/skill/combat/wrestling = list(-10, 30),
+		/datum/attribute/skill/misc/reading = list(-10, 30),
+		/datum/attribute/skill/misc/sneaking = list(-20, 20),
+		/datum/attribute/skill/misc/stealing = list(-20, 20),
+		/datum/attribute/skill/misc/lockpicking = list(0, 20),
+		/datum/attribute/skill/misc/music = list(-10, 20),
+		/datum/attribute/skill/craft/cooking = list(-10, 20),
+		/datum/attribute/skill/combat/firearms = list(-10, 40),
+		/datum/attribute/skill/craft/bombs = list(-10, 40),
+		/datum/attribute/skill/misc/climbing = list(-10, 10),
+		/datum/attribute/skill/misc/athletics = list(-20, 10),
+	)
+
+/datum/special_trait/truejester
+	name = "True Jester"
+	greet_text = span_notice("My life has been the real joke, Xylix has influenced my body and mind!")
+	req_text = "Be THE Jester!
+	allowed_jobs = list(/datum/job/jester)
+	weight = 50
+
+/datum/special_trait/truejester/on_apply(mob/living/carbon/human/character)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/truejester)
+	if(GET_MOB_ATTRIBUTE_VALUE_RAW(character, STAT_STRENGTH) > 16)
+		character.cmode_music = 'sound/music/cmode/nobility/CombatJesterSTR.ogg'
+
 /datum/special_trait/wild_night
 	name = "Wild Night"
 	greet_text = span_boldwarning("I don't remember what I did last night, and now I'm lost!")

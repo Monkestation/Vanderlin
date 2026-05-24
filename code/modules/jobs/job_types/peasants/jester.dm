@@ -1,33 +1,32 @@
 /datum/attribute_holder/sheet/job/jester
 	attribute_variance = list(
-		STAT_SPEED = list(-9, 10),
-		STAT_CONSTITUTION = list(-9, 10),
-		STAT_ENDURANCE = list(-9, 10),
-		STAT_PERCEPTION = list(-9, 10),
-		STAT_INTELLIGENCE = list(-9, 10),
-		STAT_STRENGTH = list(-9, 10),
-		STAT_FORTUNE = list(-9, 10),
-		/datum/attribute/skill/combat/knives = list(-20, 50),
-		/datum/attribute/skill/combat/unarmed = list(-20, 50),
-		/datum/attribute/skill/misc/riding = list(-20, 50),
-		/datum/attribute/skill/labor/fishing = list(-20, 50),
-		/datum/attribute/skill/combat/wrestling = list(-20, 20),
-		/datum/attribute/skill/misc/reading = list(-20, 50),
-		/datum/attribute/skill/misc/sneaking = list(-20, 50),
-		/datum/attribute/skill/misc/stealing = list(-20, 50),
-		/datum/attribute/skill/misc/lockpicking = list(-20, 50),
-		/datum/attribute/skill/misc/music = list(-20, 50),
-		/datum/attribute/skill/craft/cooking = list(-20, 50),
-		/datum/attribute/skill/combat/firearms = list(-20, 50),
-		/datum/attribute/skill/craft/bombs = list(-20, 50),
-		/datum/attribute/skill/misc/climbing = list(-10, 10),
-		/datum/attribute/skill/misc/athletics = list(-20, 10),
+		STAT_SPEED = list(0, 2),
+		STAT_CONSTITUTION = list(-2, 2),
+		STAT_ENDURANCE = list(-2, 2),
+		STAT_PERCEPTION = list(-1, 2),
+		STAT_INTELLIGENCE = list(-2, 2),
+		STAT_STRENGTH = list(-2, 2),
+		STAT_FORTUNE = list(-5, 5),
+		/datum/attribute/skill/combat/knives = list(10, 30),
+		/datum/attribute/skill/combat/unarmed = list(10, 30),
+		/datum/attribute/skill/misc/riding = list(0, 30),
+		/datum/attribute/skill/labor/fishing = list(0, 20),
+		/datum/attribute/skill/combat/wrestling = list(10, 20),
+		/datum/attribute/skill/misc/reading = list(10, 20),
+		/datum/attribute/skill/misc/sneaking = list(20, 40),
+		/datum/attribute/skill/misc/stealing = list(20, 40),
+		/datum/attribute/skill/misc/lockpicking = list(0, 30),
+		/datum/attribute/skill/misc/music = list(10, 40),
+		/datum/attribute/skill/craft/cooking = list(10, 30),
+		/datum/attribute/skill/combat/firearms = list(0, 10),
+		/datum/attribute/skill/craft/bombs = list(0, 10),
+		/datum/attribute/skill/craft/carpentry = list (10,20),
+		/datum/attribute/skill/craft/crafting = list (10,20)
 	)
 
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/climbing = 40,
-		/datum/attribute/skill/misc/athletics = 40,
-
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/athletics = 40
 	)
 
 /datum/job/jester
@@ -80,10 +79,11 @@
 /datum/outfit/jester
 	name = JOB_JESTER
 	shoes = /obj/item/clothing/shoes/jester
-	pants = /obj/item/clothing/pants/tights
+	pants = /obj/item/clothing/pants/tights/colored/black
 	armor = /obj/item/clothing/shirt/jester
 	belt = /obj/item/storage/belt/leather
-	beltr = /obj/item/storage/keyring/jester
+	wrists =/obj/item/storage/keyring/jester
+	beltr = /obj/item/weapon/knife/villager
 	beltl = /obj/item/storage/belt/pouch
 	head = /obj/item/clothing/head/jester
 	neck = /obj/item/clothing/neck/coif
