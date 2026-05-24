@@ -273,7 +273,22 @@
 /datum/component/storage/concrete/grid/cup
 	screen_max_rows = 2
 	screen_max_columns = 1
-	max_w_class = WEIGHT_CLASS_TINY
+	max_w_class = WEIGHT_CLASS_SMALL
+
+/datum/component/storage/concrete/grid/cup/New(datum/P, ...)
+	. = ..()
+	//Going off the idea that giving cups storage grids was to smuggle things in them. Limiting what a cup can hold makes cloth work on them.
+	set_holdable(list(
+		/obj/item/weapon/knife,
+		/obj/item/gem,
+		/obj/item/coin,
+		/obj/item/paper,
+		/obj/item/clothing/ring,
+		/obj/item/reagent_containers/glass/bottle/vial,
+		/obj/item/reagent_containers/powder,
+		/obj/item/key,
+		/obj/item/collar_detonator
+		))
 
 /datum/component/storage/concrete/grid/bucket
 	screen_max_rows = 4
