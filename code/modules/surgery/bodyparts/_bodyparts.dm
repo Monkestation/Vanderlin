@@ -172,7 +172,7 @@
 	if(isnull(max_pain_damage))
 		max_pain_damage = max_damage * 1.5
 	if(isnull(organ_damage_requirement))
-		organ_damage_requirement = max_damage * 0.4
+		organ_damage_requirement = max_damage * 0.2
 	if(isnull(organ_damage_hit_minimum))
 		organ_damage_hit_minimum = ORGAN_MINIMUM_DAMAGE
 
@@ -534,6 +534,7 @@
 				new_injury.stages = list("surgical incision" = 0)
 				new_injury.desc_list = list("surgical incision")
 				new_injury.damage_list = list(0)
+				new_injury.autoheal_cutoff = 0
 			else
 				for(var/datum/injury/other in injuries)
 					if(other.can_merge(new_injury))

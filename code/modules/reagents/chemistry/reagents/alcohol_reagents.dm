@@ -24,7 +24,7 @@
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-boozepwr * 0.5)
 	affected_bodypart.adjust_germ_level(-boozepwr * 0.1)
-	. = ..()
+	return ..()
 
 /datum/reagent/consumable/ethanol/New()
 	. = ..()

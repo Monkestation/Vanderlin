@@ -89,6 +89,7 @@
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
 	affected_bodypart.disinfect_limb(20 SECONDS)
+	return FALSE
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)
 /datum/reagent/medicine/herbal/hypericum_tonic
@@ -404,6 +405,7 @@
 	if(affected_bodypart.heal_damage(0.5, 0.75, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
 	affected_bodypart.add_pain(-amount_to_transfer * 0.3)
+	return FALSE
 
 /datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M)
 	M.adjustToxLoss(0.5)
@@ -520,7 +522,7 @@
 
 /datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	affected_bodypart.add_pain(-(amount_to_transfer * 0.3))
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjust_stamina(1.5 * efficiency)

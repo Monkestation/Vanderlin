@@ -30,8 +30,15 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /datum/blood_type/New()
 	. = ..()
-	compatible_types |= type
+	compatible_types |= type_key()
 
+/**
+ * Key used to identify this blood type in compatible_types
+ *
+ * Allows for more complex or dynamically generated blood types
+ */
+/datum/blood_type/proc/type_key()
+	return type
 
 /// Gets data to pass to a reagent
 /datum/blood_type/proc/get_blood_data(mob/living/sampled_from)

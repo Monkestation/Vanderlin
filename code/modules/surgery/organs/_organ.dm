@@ -26,12 +26,13 @@
 	// DO NOT add slots with matching names to different zones - it will break internal_organs_slot list!
 	var/organ_flags = 0
 
-	/// Damage healed per second
-	var/healing_factor = STANDARD_ORGAN_HEALING
 	/// Minimum amount of germ_level we gain when rotting
-	var/min_decay_factor = MIN_ORGAN_DECAY_INFECTION
+	var/min_germ_factor = MIN_ORGAN_DECAY_INFECTION
 	/// Maximum amount of germ_level we gain when rotting
-	var/max_decay_factor = MAX_ORGAN_DECAY_INFECTION
+	var/max_germ_factor = MAX_ORGAN_DECAY_INFECTION
+	/// Healing factor and decay factor function on % of maxhealth, and do not work by applying a static number per tick
+	var/healing_factor = STANDARD_ORGAN_HEALING
+	var/decay_factor = STANDARD_ORGAN_DECAY
 	/// Maximum amount of damage we can suffer
 	var/maxHealth = STANDARD_ORGAN_THRESHOLD
 	/// Total damage this organ has sustained
@@ -89,7 +90,7 @@
 
 	/// How much blood (percent of BLOOD_VOLUME_NORMAL) an organ takes to funcion
 	var/blood_req = 0
-	/// If oxygen reqs are not satisfied, get debuffs and brain starts taking damage
+	/// Determines lung oxygen restoration and suffocation amount
 	var/oxygen_req = 0
 	/// Controls passive nutriment loss. Units are nutriment_req/100 per second
 	var/nutriment_req = 0
@@ -234,7 +235,10 @@
 			artery.current_blood = max(artery.current_blood - (blood_req * delta_time), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		if((current_blood <= 0) && !(organ_flags & ORGAN_LIMB_SUPPORTER))
-			applyOrganDamage(0.2 * delta_time)
+			var/temperature_mod = 1
+			if(owner?.bodytemperature > BODYTEMP_NORMAL)
+				temperature_mod += round((owner.bodytemperature - BODYTEMP_NORMAL) / (BODYTEMP_MAX_TEMPERATURE - BODYTEMP_NORMAL), 0.1)
+			applyOrganDamage(decay_factor * maxHealth * temperature_mod * delta_time)
 
 /obj/item/organ/proc/generate_chimeric_organ(mob/living/source_mob)
 	if(!source_mob)
@@ -361,7 +365,7 @@
 
 /// proper decaying
 /obj/item/organ/proc/decay(delta_time)
-	adjust_germ_level(rand(min_decay_factor,max_decay_factor) * delta_time)
+	adjust_germ_level(rand(min_germ_factor, max_germ_factor) * delta_time)
 
 /obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
@@ -382,8 +386,8 @@
 		organ_flags |= ORGAN_CUT_AWAY
 	if(can_decay())
 		decay(delta_time)
-	else
-		STOP_PROCESSING(SSobj, src)
+	// else
+	// 	STOP_PROCESSING(SSobj, src)
 
 /// Infection/rot checks
 /obj/item/organ/proc/can_decay()
@@ -451,7 +455,7 @@
 		//Cause organ damage about once every ~30 seconds
 		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
 		if(DT_PROB(2, delta_time))
-			applyOrganDamage(2)
+			applyOrganDamage(decay_factor * maxHealth * delta_time)
 
 	// Organ is just completely dead by this point
 	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 40)
@@ -501,7 +505,7 @@
 		failure_time = max(0, failure_time - delta_time)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time, times_fired) && damage)
+	if(can_self_heal(delta_time, times_fired))
 		handle_self_healing(delta_time, times_fired)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
@@ -651,7 +655,7 @@
 
 ///SETS an organ's damage to the amount "d", and in doing so clears or sets the failing flag, good for when you have an effect that should fix an organ if broken
 /obj/item/organ/proc/setOrganDamage(d)	//use mostly for admin heals
-	applyOrganDamage(d - damage)
+	return applyOrganDamage(d - damage)
 
 /// This should only be used by arteries, tendons and nerves
 /obj/item/organ/proc/tear()
@@ -672,40 +676,74 @@
 	if(damage == prev_damage)
 		return
 	var/delta = damage - prev_damage
+	var/message = ""
 	if(delta > 0)
-		if(damage >= maxHealth && prev_damage < maxHealth)
-			organ_flags |= ORGAN_FAILING
-			if(!(organ_flags & ORGAN_INDESTRUCTIBLE))
-				organ_flags |= ORGAN_DESTROYED
-			return now_failing
+		if(damage >= low_threshold && prev_damage < low_threshold)
+			on_low_damage_received()
+			message = low_threshold_passed
+		if(damage >= medium_threshold && prev_damage < medium_threshold)
+			on_medium_damage_received()
+			message = medium_threshold_passed
 		if(damage >= high_threshold && prev_damage < high_threshold)
 			organ_flags |= ORGAN_FAILING
-			return high_threshold_passed
-		if(damage >= medium_threshold && prev_damage < medium_threshold)
-			return medium_threshold_passed
-		if(damage >= low_threshold && prev_damage < low_threshold)
-			return low_threshold_passed
-	if(delta < 0)
-		if(prev_damage >= low_threshold && damage < low_threshold)
-			organ_flags &= ~ORGAN_FAILING
-			if(organ_flags & ORGAN_DESTROYED)
-				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
-				scar_organ(10, 60)
-			return low_threshold_cleared
-		if(prev_damage >= medium_threshold && damage < medium_threshold)
-			organ_flags &= ~ORGAN_FAILING
-			if(organ_flags & ORGAN_DESTROYED)
-				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
-				scar_organ(10, 60)
-			return medium_threshold_cleared
-		if(prev_damage >= high_threshold && damage < high_threshold)
-			organ_flags &= ~ORGAN_FAILING
-			if(organ_flags & ORGAN_DESTROYED)
-				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
-				scar_organ(10, 60)
-			return high_threshold_cleared
-		if(prev_damage >= maxHealth && damage < maxHealth)
-			return now_fixed
+			on_begin_failure()
+			message = high_threshold_passed
+		if(damage >= maxHealth && prev_damage < maxHealth)
+			if(!(organ_flags & ORGAN_INDESTRUCTIBLE))
+				organ_flags |= ORGAN_DESTROYED
+			on_destroy_damage()
+			message = now_failing
+		return message
+
+	if(prev_damage >= maxHealth && damage < maxHealth)
+		if(organ_flags & ORGAN_DESTROYED)
+			organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+			scar_organ(10, 60)
+		on_destroy_fixed()
+		message = now_fixed
+	if(prev_damage >= high_threshold && damage < high_threshold)
+		organ_flags &= ~ORGAN_FAILING
+		on_failure_recovery()
+		message = high_threshold_cleared
+	if(prev_damage >= medium_threshold && damage < medium_threshold)
+		on_medium_damage_healed()
+		message = medium_threshold_cleared
+	if(prev_damage >= low_threshold && damage < low_threshold)
+		on_low_damage_healed()
+		message = low_threshold_cleared
+	return message
+
+/**
+ * Called when the damage surpasses the low damage threshold.
+ *
+ * This and other procs like this one merely exist to make it easier to keep a standard on
+ * damage thresholds for organs. This doesn't mean you cannot make custom thresholds for various stuff,
+ * and you're more than welcome to improve or refactor any portion of the code around these mechanics
+ */
+/obj/item/organ/proc/on_low_damage_received()
+	return
+
+///Called when the damage goes below the low damage threshold
+/obj/item/organ/proc/on_low_damage_healed()
+	return
+
+/obj/item/organ/proc/on_medium_damage_received()
+	return
+
+/obj/item/organ/proc/on_medium_damage_healed()
+	return
+
+/obj/item/organ/proc/on_begin_failure()
+	return
+
+/obj/item/organ/proc/on_failure_recovery()
+	return
+
+/obj/item/organ/proc/on_destroy_damage()
+	return
+
+/obj/item/organ/proc/on_destroy_fixed()
+	return
 
 /obj/item/organ/on_enter_storage(datum/component/storage/concrete/S)
 	. = ..()

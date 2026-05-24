@@ -38,12 +38,15 @@
 	affected_mob.remove_chem_effect(CE_OXYGENATED, "[type]")
 
 /datum/reagent/medicine/atropine/on_mob_life(mob/living/carbon/affected_mob, efficiency)
-	if(affected_mob.health <= affected_mob.crit_threshold)
+	if(HAS_TRAIT(affected_mob, TRAIT_CRITICAL_CONDITION))
 		affected_mob.adjustToxLoss(-2 * REM * efficiency , FALSE)
 		affected_mob.adjustBruteLoss(-2* REM * efficiency, FALSE)
 		affected_mob.adjustFireLoss(-2 * REM * efficiency, FALSE)
 		affected_mob.adjustOxyLoss(-5 * REM * efficiency, FALSE)
 		. = TRUE
+	var/obj/item/organ/lungs/affected_lungs = affected_mob.getorganslot(ORGAN_SLOT_LUNGS)
+	if(affected_lungs)
+		affected_mob.losebreath = 0
 	if(prob(10))
 		affected_mob.set_dizzy(10 SECONDS * efficiency)
 		affected_mob.adjust_jitter(10 SECONDS * efficiency)
@@ -140,7 +143,7 @@
 /datum/reagent/medicine/coldvein_compress/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	if(affected_bodypart.heal_damage(0, 2 * REM, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/coldvein_compress/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -165,7 +168,7 @@
 /datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	if(affected_bodypart.heal_damage(3.5 * REM, 0, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/ashbinders_salve
 	name = "Ashbinder's Salve"
@@ -192,7 +195,7 @@
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
 	affected_bodypart.disinfect_limb(30 SECONDS)
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/vitalroot_draught
 	name = "Vitalroot Draught"
@@ -257,7 +260,7 @@
 		injury.adjust_germ_level(-20)
 	affected_bodypart.disinfect_limb(3 MINUTES)
 	affected_bodypart.adjust_germ_level(-25)
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/mirewort_compress/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -282,7 +285,7 @@
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
 	affected_bodypart.adjust_germ_level(-10)
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/woundwrack_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -415,7 +418,7 @@
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
 	affected_bodypart.adjust_germ_level(-15)
-	. = ..()
+	return ..()
 
 /datum/reagent/medicine/witchknit_paste/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)

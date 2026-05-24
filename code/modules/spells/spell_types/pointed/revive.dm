@@ -87,7 +87,7 @@
 		return
 	if(cast_on.health > HALFWAYCRITDEATH)
 		cast_on.adjustOxyLoss(cast_on.health - HALFWAYCRITDEATH)
-	ADJUSTBRAINLOSS(cast_on, -100)
+	cast_on.adjustOrganLoss(ORGAN_SLOT_BRAIN, -100)
 	cast_on.reagents.add_reagent(/datum/reagent/medicine/atropine, 20)
 	cast_on.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 	record_round_statistic(STATS_ASTRATA_REVIVALS)

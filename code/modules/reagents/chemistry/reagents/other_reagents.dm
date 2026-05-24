@@ -11,6 +11,7 @@
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
 	penetrates_skin = NONE
+	liver_chemical = FALSE
 	var/toxicity = 0.7 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
@@ -24,6 +25,9 @@
 	taste_description = "rot"
 	taste_mult = 1.8
 	toxicity = 3
+
+/datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	return FALSE
 
 /datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
 	if(!ismob(A))
@@ -162,13 +166,13 @@
 	affected_bodypart.undisinfect_limb()
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(SANITIZATION_PER_UNIT_WATER)
-	. = ..()
+	return ..()
 
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency)
-	..()
+	. = ..()
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
 	M.adjustToxLoss(1 * efficiency)

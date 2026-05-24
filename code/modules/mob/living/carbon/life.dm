@@ -358,14 +358,21 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		return FALSE
 	return TRUE
 
-/mob/living/proc/set_heartattack(status)
-	return
-
-/mob/living/carbon/set_heartattack(status)
-	if(!can_heartattack())
+/**
+ * Causes the mob to either start or stop having a heart attack.
+ *
+ * status - Pass TRUE to start a heart attack, or FALSE to stop one.
+ *
+ * Returns TRUE if heart status was changed (heart attack -> no heart attack, or visa versa)
+ */
+/mob/living/carbon/proc/set_heartattack(status)
+	if(status && !can_heartattack())
 		return FALSE
 
 	var/list/hearts = getorganslotlist(ORGAN_SLOT_HEART)
+	if(!length(hearts))
+		return FALSE
+
 	if(status)
 		pulse = PULSE_NONE
 		ADD_TRAIT(src, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
@@ -375,6 +382,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		pulse = PULSE_NORM
 		for(var/obj/item/organ/heart/heart in hearts)
 			heart.Restart()
+	return TRUE
 
 /// Brain is poopy (hardcrit)
 /mob/living/proc/undergoing_nervous_system_failure()

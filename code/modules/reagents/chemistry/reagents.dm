@@ -34,7 +34,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/random_reagent_color = FALSE
 	var/alpha = 255
 	var/can_synth = TRUE // can this reagent be synthesized? (for example: odysseus syringe gun)
-	var/metabolization_rate = REAGENTS_METABOLISM //how fast the reagent is metabolized by the mob
+	/// How fast the reagent is metabolized by the mob
+	var/metabolization_rate = REAGENTS_METABOLISM
 	var/overrides_metab = 0
 	var/overdose_threshold = 0
 	var/addiction_threshold = 0
@@ -103,16 +104,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/reaction_turf(turf/T, volume)
 	return
 
-/// Call parent to simulate transfering reagent to the mob and instantly metabolizing it. This seems awful.
+/// Return TRUE if reagent should be transfered to affected_mob when absorbed through a bodypart
 /datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	volume = amount_to_transfer
-	if(!affected_mob)
-		return
-	on_mob_add(affected_mob)
-	on_mob_metabolize(affected_mob)
-	on_mob_life(affected_mob, efficiency = 1)
-	on_mob_end_metabolize(affected_mob)
-	on_mob_delete(affected_mob)
+	return TRUE
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency)
 	SHOULD_CALL_PARENT(TRUE)

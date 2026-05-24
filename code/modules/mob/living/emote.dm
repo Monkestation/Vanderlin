@@ -410,7 +410,6 @@
 	nomsg = TRUE
 	only_forced_audio = TRUE
 	ignore_silent = TRUE
-	stat_allowed = HARD_CRIT
 
 // ............... E ..................
 /datum/emote/living/embed

@@ -387,7 +387,7 @@
 					var/tackle_time = max(10 + (skill_diff * 2), 1)
 					M.Knockdown(tackle_time)
 					playsound(src,"genblunt",100,TRUE)
-					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state == GRAB_AGGRESSIVE )
+					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state >= GRAB_AGGRESSIVE)
 						M.visible_message(span_danger("[user] throws [M] to the ground!"), \
 						span_userdanger("[user] throws me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 					else

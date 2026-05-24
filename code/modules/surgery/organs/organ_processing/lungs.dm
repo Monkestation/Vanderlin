@@ -174,7 +174,8 @@
 		var/blood_modifier = 1
 		if(CAN_HAVE_BLOOD(breather))
 			blood_modifier = breather.get_blood_volume() / BLOOD_VOLUME_NORMAL
-		var/oxygen_req_modifier = 0.97 + (30/max(breather.total_oxygen_req, 1)) * 0.03
+
+		var/oxygen_req_modifier = clamp(30/max(breather.total_oxygen_req, 1), 0.5, 1.5)
 		breather.adjustOxyLoss(-5 * blood_modifier * lung_efficiency * oxygen_req_modifier * delta_time)
 
 /obj/item/organ/lungs/proc/breathe_pollution(mob/living/carbon/breather, breath, delta_time)

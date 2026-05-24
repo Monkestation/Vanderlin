@@ -1,6 +1,6 @@
 /obj/item/needle
 	name = "needle"
-	desc = "A firm needle affixed with a simple thread, Pestra's most favored tool."
+	desc = "A firm needle affixed with a simple thread, used to sew up cloth and wounds alike."
 	icon_state = "needle"
 	icon = 'icons/roguetown/items/misc.dmi'
 	w_class = WEIGHT_CLASS_TINY
@@ -281,7 +281,7 @@
 /obj/item/needle/thorn
 	name = "needle"
 	icon_state = "thornneedle"
-	desc = "This rough needle can be used to sew cloth and wounds."
+	desc = "This needle uses a rough thorn, limiting the amount of thread that can be threaded."
 	stringamt = 12
 	maxstring = 12
 	anvilrepair = null

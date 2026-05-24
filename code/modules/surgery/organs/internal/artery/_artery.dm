@@ -37,7 +37,7 @@
 /obj/item/organ/artery/on_life(delta_time, times_fired)
 	. = ..()
 	// Dead, pulseless or cryosleep people do not pump blood
-	if(!(is_bruised() || is_failing()) || !owner.pulse || (owner.bodytemperature <= -15))
+	if(!is_bruised() || !owner.pulse || (owner.bodytemperature <= -15))
 		return
 	var/bleed_mod = 1 * (damage/maxHealth)
 	var/obj/item/bodypart/limb = owner.get_bodypart(current_zone)

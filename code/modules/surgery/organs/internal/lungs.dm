@@ -27,22 +27,46 @@
 
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 
-/obj/item/organ/lungs/on_life(delta_time, times_fired)
+/obj/item/organ/lungs/applyOrganDamage(d, maximum)
 	. = ..()
-	if(failed)
-		if(!is_failing())
-			failed = FALSE
-			return
-	else if(is_failing())
-		if(owner.stat == CONSCIOUS)
-			owner.visible_message("<span class='danger'>[owner] grabs [owner.p_their()] throat, struggling for breath!</span>", \
-								"<span class='danger'>I suddenly feel like you can't breathe!</span>")
-		to_chat(owner, span_userdanger("I CAN'T BREATHE!"))
+	if(!.)
+		return
+
+	if(is_failing())
+		if(!owner?.incapacitated())
+			owner.visible_message(
+				span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"),
+				span_userdanger("You suddenly feel like you can't breathe!"),
+			)
 		failed = TRUE
-	if(damage >= low_threshold)
-		var/do_i_cough = DT_PROB((damage < high_threshold) ? 2.5 : 5, delta_time) // between : past high
-		if(do_i_cough)
-			owner.emote("cough")
+
+	else if(failed)
+		failed = FALSE
+
+/obj/item/organ/lungs/on_life(seconds_per_tick, times_fired)
+	. = ..()
+	if(!is_bruised())
+		return
+
+	var/cough_prob = 2.5
+	if(damage >= medium_threshold)
+		cough_prob = 5
+
+	if(!SPT_PROB(cough_prob, seconds_per_tick)) // between : past high
+		return
+
+	if((damage >= medium_threshold) && prob(33))
+		owner.visible_message(span_danger("[owner] coughs up blood!"), span_userdanger("You cough up blood!"))
+		var/obj/item/covering = owner.is_mouth_covered()
+		if(covering)
+			covering.add_mob_blood(owner)
+		else if(isturf(owner.loc))
+			owner.add_splatter_floor()
+		owner.bleed(round(damage / 8))
+		playsound(owner, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 33, TRUE)
+	else
+		owner.emote(pick("weeze", "cough"))
+	owner.losebreath = min(owner.losebreath + round(damage / 100, 0.1), 4)
 
 /obj/item/organ/lungs/on_owner_examine(datum/source, mob/user, list/examine_list)
 	if(!ishuman(owner))

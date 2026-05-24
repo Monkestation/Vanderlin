@@ -2211,7 +2211,7 @@
 		//	to_chat(src, span_warning("You can't climb into [over] whilst it's there."))
 		//	return
 		for(var/obj/item/grabbing/G in grabbedby)
-			if(G.grab_state == GRAB_AGGRESSIVE)
+			if(G.grab_state >= GRAB_AGGRESSIVE)
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
 		if(storage && !istype(storage, /datum/component/storage/concrete/organ))
@@ -2229,7 +2229,7 @@
 		if(incapacitated())
 			return
 		for(var/obj/item/grabbing/G in grabbedby)
-			if(G.grab_state == GRAB_AGGRESSIVE)
+			if(G.grab_state >= GRAB_AGGRESSIVE)
 				return
 		var/list/pickable_items = list()
 		for(var/obj/item/item in over.get_all_contents())

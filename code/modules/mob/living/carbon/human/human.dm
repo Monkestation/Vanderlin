@@ -466,8 +466,8 @@
 
 					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
 						looping = FALSE
-						if(GETBRAINLOSS(target) >= BRAIN_DAMAGE_DEATH)
-							SETBRAINLOSS(target, BRAIN_DAMAGE_DEATH - 1)
+						if(target.getOrganLoss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_DEATH)
+							target.setOrganLoss(ORGAN_SLOT_BRAIN, BRAIN_DAMAGE_DEATH - 1)
 						if(target.revive())
 							target.grab_ghost(TRUE)
 							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
@@ -660,7 +660,6 @@
 		hud_used.zone_select.update_appearance(UPDATE_OVERLAYS)
 
 /mob/living/carbon/human/fully_heal(heal_flags = HEAL_ALL)
-	// set_heartattack(FALSE)
 	if(heal_flags & HEAL_ESSENTIALS)
 		set_hygiene(HYGIENE_LEVEL_NORMAL)
 	return ..()
@@ -1150,7 +1149,7 @@
 		used_damage = total_tox
 	if(used_damage < total_oxy)
 		used_damage = total_oxy
-	set_health(maxHealth - GETBRAINLOSS(src))
+	set_health(maxHealth - getOrganLoss(ORGAN_SLOT_BRAIN))
 	update_stat()
 	update_pain()
 	update_shock()

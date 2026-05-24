@@ -393,15 +393,18 @@
 
 		if(cloth.reagents && cloth.reagents.total_volume > 0)
 			if(owner && owner.reagents)
-				for(var/datum/reagent/R in cloth.reagents.reagent_list)
-					var/amount_to_transfer = min(R.volume, R.metabolization_rate)
+				for(var/datum/reagent/reagent in cloth.reagents.reagent_list)
+					if(istype(reagent, /datum/reagent/blood))
+						continue
+					var/amount_to_transfer = min(reagent.volume, reagent.metabolization_rate)
 					if(amount_to_transfer > 0)
-
-						R.on_bodypart_absorb(owner, src, amount_to_transfer)
-						cloth.reagents.remove_reagent(R.type, amount_to_transfer)
+						if(reagent.on_bodypart_absorb(owner, src, amount_to_transfer))
+							cloth.reagents.trans_id_to(owner, reagent.type, amount_to_transfer)
+						else
+							cloth.reagents.remove_reagent(reagent.type, amount_to_transfer)
 
 		if(owner)
-			owner.transfer_blood_to(cloth, bleed_rate * 0.25)
+			owner.transfer_blood_to(cloth, bleed_rate * 0.1)
 
 		cloth.bandage_health -= bleed_rate
 		bandage_health = cloth.bandage_health

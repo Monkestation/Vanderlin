@@ -250,6 +250,7 @@
 	examine_text = "SUBJECTPRONOUN is covered in spider silk... eww!"
 	healing_on_tick = 1
 	outline_colour = "#4e4c4c00"
+	effect_color = "#4e4c4c00"
 	var/blood_healing_on_tick = 20
 
 /datum/status_effect/buff/healing/spider_cocoon/on_apply()
@@ -262,15 +263,10 @@
 	if(stat_bonus > 0)
 		healing_on_tick += stat_bonus
 		blood_healing_on_tick += (stat_bonus * 10)
-	var/filter = owner.get_filter(COCOON_FILTER)
-	if (!filter)
-		owner.add_filter(COCOON_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
 	return TRUE
 
 /datum/status_effect/buff/healing/spider_cocoon/tick()
 	. = ..()
-	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal_rogue(get_turf(owner))
-	H.color = "#4e4c4c00"
 	owner.adjust_blood_volume(blood_healing_on_tick, maximum = BLOOD_VOLUME_NORMAL)
 
 #undef COCOON_FILTER

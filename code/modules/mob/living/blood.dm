@@ -88,12 +88,20 @@
 		bleed_rate += bodypart.get_bleed_rate()
 	return bleed_rate
 
+/// Returns the reagent type this mob has for blood
+/mob/living/proc/get_blood_reagent()
+	if (!can_bleed())
+		return
+
+	var/datum/blood_type/blood_type = get_blood_type()
+	return blood_type?.reagent_type
+
 /// Check if a mob can bleed, and possibly if they're capable of leaving decals on turfs/mobs/items
 /mob/living/proc/can_bleed(bleed_flag = NONE)
 	if (!CAN_HAVE_BLOOD(src))
 		return BLEED_NONE
 
-	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+	if(!iscarbon(src) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return BLEED_NONE
 
 	if(!iscarbon(src))
@@ -164,8 +172,9 @@
 				BLOOD TRANSFERS
 ****************************************************/
 
-//Gets blood from mob to a container or other mob, preserving all data in it.
-/mob/living/proc/transfer_blood_to(atom/movable/receiver, amount, ignore_low_blood)
+/// Transfers blood from mob to a container or another mob, preserving all data in it.
+/// Returns how much blood was able to be transferred.
+/mob/living/proc/transfer_blood_to(atom/movable/receiver, amount, ignore_low_blood = FALSE, ignore_incompatibility = FALSE,)
 	var/cached_blood_volume = get_blood_volume()
 
 	if(!cached_blood_volume || !receiver.reagents || amount <= 0)
@@ -174,7 +183,12 @@
 	if(cached_blood_volume < BLOOD_VOLUME_BAD && !ignore_low_blood)
 		return 0
 
-	var/datum/blood_type/blood = get_blood_type()
+	var/datum/blood_type/blood_type = get_blood_type()
+	if (!blood_type)
+		return 0
+
+	var/blood_reagent = get_blood_reagent()
+	var/list/blood_data = get_blood_data()
 
 	// Caps the amount to how much blood we have.
 	amount = min(amount, get_blood_volume())
@@ -183,10 +197,32 @@
 		// Caps the amount to how much we can transfer before reaching low blood.
 		amount = min(amount, get_blood_volume() - BLOOD_VOLUME_BAD)
 
-	receiver.reagents.add_reagent(blood.reagent_type, amount, blood.get_blood_data(src), bodytemperature)
+	var/mob/living/target = receiver
+	if (!isliving(receiver) || target.get_blood_reagent() != blood_reagent)
+		// Further caps the amount to how much blood we were able to add to the target.
+		amount = receiver.reagents.add_reagent(blood_reagent, amount, blood_data, bodytemperature)
+		adjust_blood_volume(-amount)
+		return amount
+
+	if(!ignore_incompatibility && !(blood_type.type_key() in target.get_blood_type().compatible_types))
+		// Yes, we cap it to the amount of toxin. This is ridiculously niche, but we do it anyway.
+		amount = target.reagents.add_reagent(/datum/reagent/toxin, amount * 0.5) * 2
+		adjust_blood_volume(-amount)
+		return amount
+
+	receiver.reagents.add_reagent(blood_type.reagent_type, amount, blood_data, bodytemperature)
 
 	adjust_blood_volume(-amount)
 	return amount
+
+/mob/living/proc/get_blood_data()
+	SHOULD_CALL_PARENT(TRUE)
+	RETURN_TYPE(/list)
+
+	var/datum/blood_type/blood_type = get_blood_type()
+	if (!blood_type || !can_bleed())
+		return
+	return blood_type.get_blood_data(src)
 
 /// Transfers the blood of a mob factoring in the impure reagents in their blood
 /// Returns the actual amount of blood transferred
