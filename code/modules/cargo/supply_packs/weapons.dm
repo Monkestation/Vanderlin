@@ -373,7 +373,7 @@
 	cost = 100
 	contains = /obj/item/storage/belt/pouch/bullets
 
-/datum/supply_pack/weapons/ammo/bullets
+/datum/supply_pack/weapons/ammo/bulletflask
 	name = "Gunpowder Flask"
 	cost = 150
 	contains = /obj/item/reagent_containers/glass/bottle/aflask
