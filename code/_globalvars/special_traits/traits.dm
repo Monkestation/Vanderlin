@@ -666,7 +666,7 @@
 /datum/special_trait/truejester
 	name = "True Jester"
 	greet_text = span_notice("My life has been the real joke, Xylix has influenced my body and mind!")
-	req_text = "Be THE Jester!
+	req_text = "Be THE Jester!"
 	allowed_jobs = list(/datum/job/jester)
 	weight = 50
 
