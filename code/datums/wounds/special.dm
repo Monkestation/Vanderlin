@@ -8,7 +8,14 @@
 	sewn_bleed_rate = 0
 	can_cauterize = FALSE
 	critical = FALSE
+	associated_bclasses = STAB_BCLASSES
 	viable_zones = list(BODY_ZONE_HEAD)
+
+	// Most of these crits dismember organs and permanently hamper the target, so we're making them harder
+	min_damage = 10
+	min_damage_dividend = 0.5
+	dividend_multi = 10
+	damage_divisor = 12
 
 /datum/wound/facial/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial) && (type == other.type))
@@ -26,7 +33,6 @@
 	bleed_rate = 4
 	can_cauterize = TRUE
 	critical = TRUE
-	associated_bclasses = STAB_BCLASSES
 	viable_zones = list(BODY_ZONE_PRECISE_EARS)
 
 /datum/wound/facial/ears/can_apply_to_bodypart(obj/item/bodypart/affected)
@@ -177,7 +183,6 @@
 	bleed_rate = 1
 	can_cauterize = FALSE
 	critical = TRUE
-	associated_bclasses = ARTERY_BCLASSES
 	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/permanent = FALSE
 
@@ -219,7 +224,6 @@
 	can_sew = FALSE
 	can_cauterize = FALSE
 	critical = TRUE
-	associated_bclasses = STAB_BCLASSES
 	viable_zones = list(BODY_ZONE_HEAD)
 
 /datum/wound/facial/disfigurement/on_mob_gain(mob/living/affected)

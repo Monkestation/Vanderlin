@@ -10,8 +10,6 @@
 	side = RIGHT_SIDE
 	sellprice = DEFAULT_ORGAN_VALUE/2
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	organ_volume = 0.25
 	max_blood_storage = 2.5
 	current_blood = 2.5

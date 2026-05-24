@@ -8,8 +8,6 @@
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	organ_volume = 1
 	max_blood_storage = 20
 	current_blood = 20
@@ -86,8 +84,6 @@
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
 	organ_efficiency = list(ORGAN_SLOT_GUTS = 100)
-
-	healing_factor = STANDARD_ORGAN_HEALING
 	low_threshold_passed = "<span class='info'>My guts flashes with pain before subsiding.</span>"
 	high_threshold_passed = "<span class='warning'>My guts flares up with constant pain.</span>"
 	high_threshold_cleared = "<span class='info'>The pain in my guts die down for now.</span>"

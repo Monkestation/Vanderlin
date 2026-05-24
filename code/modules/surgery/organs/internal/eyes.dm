@@ -14,8 +14,6 @@
 	accessory_type = /datum/sprite_accessory/eyes/humanoid
 	organ_efficiency = list(ORGAN_SLOT_EYES = 100)
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	maxHealth = 0.5 * STANDARD_ORGAN_THRESHOLD		//half the normal health max since we go blind at 30, a permanent blindness at 50 therefore makes sense unless medicine is administered
 	high_threshold = 0.3 * STANDARD_ORGAN_THRESHOLD	//threshold at 30
 	low_threshold = 0.2 * STANDARD_ORGAN_THRESHOLD	//threshold at 20

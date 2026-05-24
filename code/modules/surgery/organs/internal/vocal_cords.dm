@@ -5,7 +5,6 @@
 	slot = ORGAN_SLOT_VOICE
 	organ_efficiency = list(ORGAN_SLOT_VOICE = 100)
 	gender = PLURAL
-	healing_factor = 0
 
 	organ_volume = 1
 	max_blood_storage = 10

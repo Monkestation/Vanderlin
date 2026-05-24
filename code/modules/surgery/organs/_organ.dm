@@ -642,16 +642,19 @@
 	return effective_efficiency
 
 ///Adjusts an organ's damage by the amount "d", up to a maximum amount, which is by default max damage
-/obj/item/organ/proc/applyOrganDamage(d, maximum = maxHealth)	//use for damaging effects
-	if(!d) //Micro-optimization.
-		return
+/obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth)	//use for damaging effects
+	if(!damage_amount) //Micro-optimization.
+		return FALSE
+	maximum = clamp(maximum, 0, maxHealth) // the logical max is, our max
 	if(maximum < damage)
-		return
-	damage = CLAMP(damage + d, 0, maximum)
-	var/mess = check_damage_thresholds(owner)
+		return FALSE
+	damage = clamp(damage + damage_amount, 0, maximum)
+	. = (prev_damage - damage) // return net damage
+	var/message = check_damage_thresholds()
 	prev_damage = damage
-	if(mess && owner)
-		to_chat(owner, mess)
+
+	if(message && owner)
+		to_chat(owner, message)
 
 ///SETS an organ's damage to the amount "d", and in doing so clears or sets the failing flag, good for when you have an effect that should fix an organ if broken
 /obj/item/organ/proc/setOrganDamage(d)	//use mostly for admin heals
