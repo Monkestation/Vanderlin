@@ -284,7 +284,6 @@
 		/obj/item/coin,
 		/obj/item/paper,
 		/obj/item/clothing/ring,
-		/obj/item/reagent_containers/glass/bottle/vial,
 		/obj/item/reagent_containers/powder,
 		/obj/item/key,
 		/obj/item/collar_detonator
