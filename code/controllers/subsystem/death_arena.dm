@@ -199,7 +199,7 @@ SUBSYSTEM_DEF(death_arena)
 /obj/structure/table/wood/fine/altar/after_added_effects(obj/item/item, mob/user)
 	if(!istype(item, /obj/item/bodypart/head))
 		return
-	add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_FIGHT_REVIVES, 1)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_FIGHT_REVIVES, 1)
 	record_round_statistic(STATS_UNDERWORLD_DUELS)
 	SSdeath_arena.process_fight_end(item, user)
 

@@ -113,3 +113,9 @@
 2026-05-22:
   ModDownloading:
   - rscadd: Routes for the Bandit Camp to connect to the Bog and Malum's Anvil.
+2026-05-24:
+  ModDownloading:
+  - rscadd: Bandit camp can once again go to the Murderwoods.
+  - bugfix: Malum's Anvil Bandit camp route works now.
+  aberrantQuesrist:
+  - rscadd: Two new masonic tile variants.
