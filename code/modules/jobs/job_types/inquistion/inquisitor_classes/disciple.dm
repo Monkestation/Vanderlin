@@ -68,7 +68,7 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "TAKE UP PSYDON'S ARMS!")
 		if("Discipline - Unarmed")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
-			ADD_TRAIT(spawned, TRAIT_CIVILIZEDBARBARIAN) // Lets them target more bodyparts with punches/kicks. 
+			ADD_TRAIT(spawned, TRAIT_CIVILIZEDBARBARIAN, JOB_TRAIT) // Lets them target more bodyparts with punches/kicks. 
 		if("Katar")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 		if("Knuckledusters")
