@@ -253,11 +253,6 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
-/mob/proc/haltyellorphan()
-	set name = "HALT!"
-	set category = "Emotes.Noises"
-	emote("haltyellorphan")
-
 /datum/attribute_holder/sheet/job/forestguard/ossland_scout
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -298,7 +293,7 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(
-		/mob/proc/haltyellorphan
+		/mob/proc/haltyell
 	)
 
 /datum/outfit/forestguard/ossland_scout
