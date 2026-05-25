@@ -209,8 +209,8 @@
 	return index && hand_bodyparts[index]
 
 //GetAllContents that is reasonable for carbons
-/mob/living/carbon/proc/get_all_gear()
-	var/list/processing_list = get_equipped_items(include_pockets = TRUE) + held_items
+/mob/living/proc/get_all_gear()
+	var/list/processing_list = get_equipped_items(INCLUDE_POCKETS|INCLUDE_HELD)
 	list_clear_nulls(processing_list) // handles empty hands
 	var/i = 0
 	while(i < length(processing_list))

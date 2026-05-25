@@ -167,20 +167,55 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/proc/reset_shocked()
 	obj_flags &= ~BEING_SHOCKED
 
-///the obj is deconstructed into pieces, whether through careful disassembly or when destroyed.
+/**
+ * The obj is deconstructed into pieces, whether through careful disassembly or when destroyed.
+ * Arguments
+ *
+ * * disassembled - TRUE means we cleanly took this atom apart using tools. FALSE means this was destroyed in a violent way
+ */
 /obj/proc/deconstruct(disassembled = TRUE)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	//allow objects to deconstruct themselves
+	handle_deconstruct(disassembled)
+
 	SEND_SIGNAL(src, COMSIG_OBJ_DECONSTRUCT, disassembled)
+
+	//delete our self
+	qdel(src)
+
+/**
+ * The interminate proc between deconstruct() & atom_deconstruct(). By default this delegates deconstruction to
+ * atom_deconstruct if NO_DEBRIS_AFTER_DECONSTRUCTION is absent but subtypes can override this to handle NO_DEBRIS_AFTER_DECONSTRUCTION in their
+ * own unique way. Override this if for example you want to dump out important content like mobs from the
+ * atom before deconstruction regardless if NO_DEBRIS_AFTER_DECONSTRUCTION is present or not
+ * Arguments
+ *
+ * * disassembled - TRUE means we cleanly took this atom apart using tools. FALSE means this was destroyed in a violent way
+ */
+/obj/proc/handle_deconstruct(disassembled = TRUE)
+	SHOULD_CALL_PARENT(FALSE)
+
+	if(!(obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION))
+		atom_deconstruct(disassembled)
+
+/**
+ * Custom behaviour per atom subtype on how they should deconstruct themselves
+ * Arguments
+ *
+ * * disassembled - TRUE means we cleanly took this atom apart using tools. FALSE means this was destroyed in a violent way
+ */
+/obj/proc/atom_deconstruct(disassembled = TRUE)
+	PROTECTED_PROC(TRUE)
 	if(islist(debris))
 		for(var/I in debris)
 			var/count = debris[I] + rand(-1,1)
 			if(count > 0)
 				for(var/i in 1 to count)
-					new I (get_turf(src))
-	if(islist(static_debris))
-		for(var/I in static_debris)
-			for(var/i in 1 to static_debris[I])
-				new I (get_turf(src))
-	qdel(src)
+					new I(loc)
+	else if(!isnull(debris))
+		new debris(loc)
+	return
 
 /obj/atom_break(damage_flag, silent)
 	. = ..()
@@ -193,9 +228,9 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 ///what happens when the obj's integrity reaches zero.
 /obj/atom_destruction(damage_flag)
 	. = ..()
-	if(damage_flag == "acid")
+	if(damage_flag == ACID)
 		acid_melt()
-	else if(damage_flag == "fire")
+	else if(damage_flag == FIRE)
 		burn()
 	else
 		if(destroy_sound)

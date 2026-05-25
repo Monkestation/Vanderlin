@@ -216,15 +216,15 @@
 			if (upd)
 				M.update_damage_overlays()
 
-/datum/reagent/water/blessed/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if (!istype(M))
+/datum/reagent/water/blessed/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+	if (!istype(exposed_mob))
 		return ..()
 
-	if (method & TOUCH)
-		if (M.mob_biotypes & MOB_UNDEAD)
-			M.adjustFireLoss(2*reac_volume, 0)
-			M.visible_message(span_warning("[M] erupts into angry fizzling and hissing!"), span_warning("BLESSED WATER!!! IT BURNS!!!"))
-			M.emote("scream")
+	if (methods & TOUCH)
+		if (exposed_mob.mob_biotypes & MOB_UNDEAD)
+			exposed_mob.adjustFireLoss(2*reac_volume, 0)
+			exposed_mob.visible_message(span_warning("[exposed_mob] erupts into angry fizzling and hissing!"), span_warning("BLESSED WATER!!! IT BURNS!!!"))
+			exposed_mob.emote("scream")
 
 	return ..()
 

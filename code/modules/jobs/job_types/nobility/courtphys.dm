@@ -61,6 +61,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_LEGENDARY_ALCHEMIST
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/courtphys/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

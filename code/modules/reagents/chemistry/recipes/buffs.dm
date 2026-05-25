@@ -31,7 +31,7 @@
 	required_reagents = list(
 		/datum/reagent/buff/speed/concentrated = 3,
 		/datum/reagent/buff/perception/concentrated = 3,
-		/datum/reagent/toxin/fyritiusnectar
+		/datum/reagent/toxin/fyritiusnectar = 1
 	)
 	results = list(/datum/reagent/skill_elixir/whip_hand = 10)
 
@@ -67,7 +67,7 @@
 	required_reagents = list(
 		/datum/reagent/buff/intelligence/concentrated = 4,
 		/datum/reagent/ash = 3,
-		/datum/reagent/toxin/fyritiusnectar,
+		/datum/reagent/toxin/fyritiusnectar = 1,
 	)
 	results = list(/datum/reagent/skill_elixir/craftsmans_wit = 10)
 

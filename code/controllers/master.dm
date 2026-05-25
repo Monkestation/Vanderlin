@@ -471,6 +471,8 @@ GLOBAL_REAL(Master, /datum/controller/master)
 		if (SS_flags & SS_NO_FIRE)
 			subsystemstocheck -= SS
 			continue
+		// If we're keeping timing and running behind,
+		// fire at most 25% faster then normal to try and make up the gap without spamming
 		if ((SS_flags & (SS_TICKER|SS_KEEP_TIMING)) == SS_KEEP_TIMING && SS.last_fire + (SS.wait * 0.75) > world.time)
 			continue
 		if (SS.postponed_fires >= 1)

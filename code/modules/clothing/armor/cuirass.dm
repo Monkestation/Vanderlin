@@ -5,8 +5,7 @@
 	icon_state = "cuirass"
 	item_state = "cuirass"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	boobed = FALSE
 	sellprice = VALUE_STEEL_ARMOR
 

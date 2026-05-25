@@ -39,6 +39,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
 	item_weight = 3.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -115,6 +118,9 @@
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
 	item_weight = 3 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -349,6 +355,9 @@
 	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -412,6 +421,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -444,6 +456,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -494,6 +509,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -518,6 +536,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()

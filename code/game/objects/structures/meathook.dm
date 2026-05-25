@@ -147,10 +147,9 @@
 			release_mob(L)
 	return ..()
 
-/obj/structure/meathook/deconstruct()
+/obj/structure/meathook/atom_deconstruct(disassembled)
 	new /obj/item/grown/log/tree/small(loc, 1)
 	new /obj/item/rope(loc, 1)
-	qdel(src)
 
 /obj/structure/meathook/proc/butchery(mob/living/user, mob/living/simple_animal/butchery_target)
 	var/list/butcher = list()

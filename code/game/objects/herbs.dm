@@ -185,6 +185,13 @@
 
 	herbtype = /obj/item/alch/herb/euphorbia
 
+/obj/structure/flora/grass/herb/necralily
+	name = "necran lily"
+	icon_state = "necralily2"
+	can_replenish = FALSE
+
+	herbtype = /obj/item/alch/herb/necralily
+
 /obj/structure/flora/grass/herb/cursedrosa
 	name = "black briar rosa"
 	icon_state = "cursedrosa2"

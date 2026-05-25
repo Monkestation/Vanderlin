@@ -108,7 +108,7 @@
 		var/turf/open/water/water_turf = owner_turf
 		if(water_turf.water_reagent)
 			var/datum/reagent/turf_reagent = new water_turf.water_reagent()
-			turf_reagent.reaction_mob(owner, TOUCH, 2)
+			turf_reagent.expose_mob(owner, TOUCH, 2)
 
 			if(ishuman(owner) && istype(water_turf, /turf/open/water/bath))
 				var/mob/living/carbon/human/human_owner = owner

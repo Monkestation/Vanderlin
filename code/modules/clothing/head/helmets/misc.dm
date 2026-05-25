@@ -3,15 +3,10 @@
 	desc = "A steel nasal helmet, usually worn by the guards of any respectable fief."
 	icon_state = "nasal"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = /datum/material/steel
-	melt_amount = 75
-
-
+	smeltresult = /obj/item/ingot/iron
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 2.3 KILOGRAMS
-
 
 //................ Gallowglass ............... //
 
@@ -20,11 +15,7 @@
 	desc = "Worn by proud fighters of remote clans."
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = /datum/material/steel
-	melt_amount = 75
-
-
+	smeltresult = /obj/item/ingot/steel_slag
 	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 2.5 KILOGRAMS
 
@@ -34,11 +25,7 @@
 	desc = "A typical style of helmet worn by Sea Elf pirates, this helmet comes with metal flaps that protects the cheeks."
 	icon_state = "coppergate"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = /datum/material/steel
-	melt_amount = 75
-
-
+	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 3.12 KILOGRAMS
@@ -49,11 +36,7 @@
 	desc = "Worn by proud Sea Elf clan leaders this decorative helmet design signifies wealth and authority."
 	icon_state = "decorative_coppergate"
 	sellprice = VALUE_STEEL_SMALL_ITEM+BONUS_VALUE_MODEST
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = /datum/material/steel
-	melt_amount = 75
-
-
+	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 3.12 KILOGRAMS
@@ -64,10 +47,9 @@
 	desc = "A humble iron helmet. The most standard and antiquated protection for one's head from harm."
 	icon_state = "skullcap"
 	sellprice = VALUE_CHEAP_IRON_HELMET
-	smeltresult = /obj/item/fertilizer/ash
+	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 75
-
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.5 KILOGRAMS
 
@@ -136,10 +118,7 @@
 	flags_inv = HIDEEARS
 	sellprice = VALUE_CHEAP_STEEL_HELMET
 	max_integrity = INTEGRITY_STRONGEST
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = /datum/material/steel
-	melt_amount = 75
-
+	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_HEAD
 	item_weight = 2.2 KILOGRAMS
 
@@ -152,8 +131,7 @@
 	armor = ARMOR_SCALE
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 
 //................ Kettle Helmet (Slitted)............... //
 /obj/item/clothing/head/helmet/kettle/slit
@@ -172,6 +150,7 @@
 	armor = ARMOR_SCALE
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
+	smeltresult = /obj/item/ingot/iron
 
 //................ Iron Pot Helmet ............... //
 /obj/item/clothing/head/helmet/ironpot
@@ -180,7 +159,6 @@
 	icon_state = "ironpot"
 	flags_inv = HIDEEARS
 	sellprice = VALUE_IRON_HELMET
-
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	item_weight = 2.85 KILOGRAMS
 
@@ -254,10 +232,8 @@
 	icon_state = "sallet"
 	desc = "A simple steel helmet with no attachments. Helps protect the ears."
 	flags_inv = HIDEEARS
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
-
 	armor =  ARMOR_PLATE
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
@@ -270,7 +246,6 @@
 	desc = "A simple iron helmet with no attachments. Helps protect the ears."
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET
-
 	armor =  ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
@@ -302,8 +277,7 @@
 	icon_state = "bascinet_novisor"
 	desc = "A simple steel bascinet without a visor. Makes up for what it lacks in protection in visibility."
 	flags_inv = HIDEEARS
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
 
 	body_parts_covered = COVERAGE_HEAD
@@ -332,10 +306,8 @@
 	block2add = FOV_BEHIND
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
-	melt_amount = 75
-	melting_material = /datum/material/steel // Most visored helmets are made of steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
-
 	armor = ARMOR_PLATE
 	body_parts_covered = FULL_HEAD
 	max_integrity = INTEGRITY_STRONG

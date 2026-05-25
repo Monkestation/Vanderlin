@@ -1,4 +1,6 @@
 /datum/component/particle_spewer/sparkle
+
+	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 	icon_file = 'icons/effects/particles/special_particles.dmi'
 	particle_state = "sparkle"
 
@@ -16,6 +18,19 @@
 		duration = 1.1 SECONDS
 		spawn_interval = 0.2 SECONDS
 		burst_amount = 2
+
+/datum/component/particle_spewer/sparkle/InheritComponent(datum/component/particle_spewer/sparkle/new_comp, i_am_original, shine_more)
+	if(!i_am_original)
+		return
+	src.shine_more = shine_more
+	if(shine_more)
+		duration = 1.1 SECONDS
+		spawn_interval = 0.2 SECONDS
+		burst_amount = 2
+	else
+		duration = initial(duration)
+		spawn_interval = initial(spawn_interval)
+		burst_amount = initial(burst_amount)
 
 /datum/component/particle_spewer/sparkle/animate_particle(obj/effect/abstract/particle/spawned)
 	var/matrix/first = matrix()
@@ -40,3 +55,11 @@
 
 	QDEL_IN(spawned, duration)
 
+/datum/component/particle_spewer/sparkle/turf_only
+
+/datum/component/particle_spewer/sparkle/turf_only/update_processing()
+	if(isturf(source_object.loc))
+		paused = FALSE
+	else
+		paused = TRUE
+	..()

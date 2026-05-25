@@ -1298,10 +1298,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
-"hV" = (
-/obj/structure/closet/dirthole/closed,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "hW" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/kneestingers,
@@ -1885,11 +1881,6 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"lW" = (
-/obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "lZ" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/grass,
@@ -1923,6 +1914,13 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"mj" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite{
+	force_consecrate = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "mk" = (
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
@@ -2135,6 +2133,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
+"nB" = (
+/obj/structure/closet/dirthole/grave,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "nC" = (
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -2253,13 +2255,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
-"oD" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/flora/grass/maneater/real,
-/obj/item/alch/herb/rosa,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness/safe)
 "oE" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -2358,14 +2353,6 @@
 /area/outdoors/wilderness/outpost/vanderlin)
 "pg" = (
 /turf/closed/wall/mineral/stone,
-/area/outdoors/wilderness/safe/gallowband_fort)
-"pj" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/skull{
-	pixel_x = 11;
-	pixel_y = -7
-	},
-/turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "pk" = (
 /obj/machinery/light/fueled/oven/west,
@@ -3075,11 +3062,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"th" = (
-/obj/structure/closet/dirthole/closed/loot,
-/mob/living/carbon/human/species/skeleton/npc/peasant,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "ti" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/darker,
@@ -3482,10 +3464,6 @@
 "vx" = (
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/safe)
-"vy" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "vz" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/clean/dirt,
@@ -3651,6 +3629,14 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"wt" = (
+/obj/structure/closet/dirthole/closed,
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon{
+	force_consecrate = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "wu" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/effect/decal/cleanable/dirt,
@@ -3966,6 +3952,12 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"yj" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/flora/grass/maneater/real,
+/obj/item/alch/herb/rosa,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness/safe)
 "yl" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -4097,6 +4089,12 @@
 	pixel_y = 8
 	},
 /turf/open/floor/herringbone,
+/area/indoors/dungeon)
+"yU" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/mob/living/simple_animal/hostile/retaliate/elemental/behemoth,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/cobble,
 /area/indoors/dungeon)
 "yV" = (
 /obj/structure/table/wood/treestump,
@@ -5112,12 +5110,6 @@
 /obj/structure/bookcase/random_recipes,
 /turf/open/floor/wood,
 /area/indoors/wilderness/gallowband/ship)
-"ED" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/mob/living/simple_animal/hostile/retaliate/elemental/behemoth,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/cobble,
-/area/indoors/dungeon)
 "EF" = (
 /obj/structure/bars/cemetery,
 /obj/structure/fluff/walldeco/vinez,
@@ -6667,6 +6659,13 @@
 /obj/structure/bookcase,
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
+"Oh" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite{
+	force_consecrate = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Oj" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/candle/yellow/lit/infinite{
@@ -7297,11 +7296,6 @@
 "RR" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/dungeon)
-"RS" = (
-/obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
-/turf/open/floor/grass,
-/area/outdoors/wilderness)
 "RU" = (
 /turf/open/floor/rooftop/green{
 	dir = 4
@@ -7354,11 +7348,6 @@
 "Sk" = (
 /turf/open/floor/carpet/red,
 /area/indoors/dungeon)
-"Sn" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/peasant,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "Sq" = (
 /mob/living/simple_animal/hostile/retaliate/raccoon,
 /turf/open/floor/naturalstone,
@@ -7892,6 +7881,13 @@
 "Vp" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
+/area/outdoors/wilderness)
+"Vr" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon{
+	force_consecrate = 1
+	},
+/turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "Vu" = (
 /obj/structure/rack,
@@ -11814,7 +11810,7 @@ Xt
 Xt
 kw
 kw
-lW
+ar
 Rk
 Xt
 kw
@@ -12425,7 +12421,7 @@ kw
 kw
 Xt
 kw
-oD
+yj
 Tc
 Mn
 ZV
@@ -21567,7 +21563,7 @@ An
 ZV
 Oz
 ZV
-pj
+Oz
 Kc
 Gs
 Xy
@@ -22373,7 +22369,7 @@ An
 An
 gr
 gr
-pj
+Oz
 gr
 Oz
 gr
@@ -37982,11 +37978,11 @@ Ck
 jv
 UX
 Sw
-lW
+ar
 kw
-RS
+nB
 kw
-RS
+nB
 kw
 kw
 wN
@@ -38588,11 +38584,11 @@ Ck
 ow
 UX
 Sw
-RS
+nB
 kw
-lW
+ar
 Xt
-lW
+ar
 Xt
 Nf
 hq
@@ -43861,7 +43857,7 @@ kw
 Xt
 kw
 Xt
-Sn
+wt
 kw
 Xt
 ar
@@ -44259,7 +44255,7 @@ gz
 Xt
 kw
 Xt
-Sn
+wt
 Xt
 Xt
 kw
@@ -44864,7 +44860,7 @@ gz
 SY
 Xt
 kw
-ar
+Vr
 Xt
 Xt
 bV
@@ -45068,14 +45064,14 @@ VQ
 gz
 Xt
 kw
-vy
+ar
 kw
 Xt
 kw
 ar
 kw
 kw
-Sn
+wt
 BG
 sx
 BG
@@ -45879,12 +45875,12 @@ sH
 nA
 gz
 gN
-th
+wt
 kw
 kw
 Xt
 kw
-vy
+Vr
 EF
 JI
 Xt
@@ -46696,7 +46692,7 @@ kw
 kw
 kw
 kw
-hV
+Vr
 MY
 kw
 Nf
@@ -47295,7 +47291,7 @@ Xt
 kw
 Xt
 Xt
-hV
+Vr
 kw
 kw
 fs
@@ -47493,7 +47489,7 @@ Nf
 Rk
 Nf
 Rk
-hV
+Vr
 kw
 bV
 kw
@@ -47704,7 +47700,7 @@ Xt
 kw
 Xt
 Xt
-th
+wt
 Xt
 Nf
 HK
@@ -47900,7 +47896,7 @@ Nf
 Nf
 Nf
 Nf
-th
+wt
 kw
 kw
 kw
@@ -72388,7 +72384,7 @@ Ra
 SJ
 lt
 ZL
-vy
+Oh
 Xt
 Xt
 kw
@@ -72800,7 +72796,7 @@ Xt
 Xt
 Xt
 kw
-vy
+Oh
 lC
 lC
 Ra
@@ -73194,7 +73190,7 @@ YM
 kN
 lC
 lC
-vy
+Oh
 Xt
 kw
 Za
@@ -74612,7 +74608,7 @@ lt
 SJ
 lt
 lt
-vy
+Oh
 lC
 lC
 lC
@@ -76035,7 +76031,7 @@ Ra
 lt
 JB
 lt
-vy
+mj
 kw
 kw
 lC
@@ -78445,7 +78441,7 @@ YM
 YM
 Ra
 kw
-vy
+Oh
 kw
 kw
 Xt
@@ -81886,7 +81882,7 @@ Hu
 HB
 xY
 uk
-ED
+yU
 xY
 Hu
 Cx

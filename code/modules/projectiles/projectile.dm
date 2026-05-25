@@ -237,7 +237,7 @@
  */
 /obj/projectile/proc/on_hit(atom/target, blocked = FALSE, pierce_hit)
 	if(fired_from)
-		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle)
+		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle, def_zone, damage)
 		SEND_SIGNAL(src, COMSIG_PROJECTILE_SELF_ON_HIT, firer, target, Angle)
 	var/turf/target_loca = get_turf(target)
 

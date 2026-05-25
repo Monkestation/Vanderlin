@@ -221,6 +221,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(new_character.client)
 		var/atom/movable/screen/splash/Spl = new(null, null, new_character.client, TRUE, FALSE)
 		Spl.Fade(TRUE)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MEMBER_JOINED, new_character, new_character.mind.assigned_role)
 	new_character = null
 	qdel(src)
 

@@ -81,7 +81,7 @@ GLOBAL_LIST_INIT(learnable_songs, list(
 
 	data["has_bardic_training"] = TRUE
 	var/music_level = floor(GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/music))
-	data["buff_slots_max"] = owner.get_max_instrument_buff_slots()
+	data["buff_slots_max"] = 1
 
 	var/list/available_buffs = list()
 	var/list/buff_options = list(
@@ -194,7 +194,7 @@ GLOBAL_LIST_INIT(learnable_songs, list(
 			if(path_str in selected)
 				selected.Remove(path_str)
 			else
-				if(selected.len >= owner.get_max_instrument_buff_slots())
+				if(selected.len >= 1)
 					return TRUE // At cap, silently reject
 				selected += path_str
 			return TRUE

@@ -2,6 +2,7 @@
 /// Unlike chemical reactions (which trigger on mixing), these only fire when the
 /// separator is actively boiling the correct reagent above required_temp.
 /datum/distillation_recipe
+	abstract_type = /datum/distillation_recipe
 	var/name = null
 	var/id = null
 	/// The primary reagent that gets distilled (vaporized). Must match separating_reagent.

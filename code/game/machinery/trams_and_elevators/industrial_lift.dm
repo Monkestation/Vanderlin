@@ -75,6 +75,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	var/list/moving_lifts = list()
 	///are we fake? if so we remove the z_fall block and such
 	var/fake = FALSE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/industrial_lift/Initialize(mapload)
 	. = ..()
@@ -83,9 +84,9 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	set_movement_registrations()
 	if(fake)
 		alpha = 0
-		obj_flags = CAN_BE_HIT
+		obj_flags &= ~BLOCK_Z_OUT_DOWN
 	else
-		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 	//since lift_master datums find all connected platforms when an industrial lift first creates it and then
 	//sets those platforms' lift_master_datum to itself, this check will only evaluate to true once per tram platform
@@ -663,6 +664,16 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	if(user.incapacitated(IGNORE_GRAB) || !user.Adjacent(src) || starting_loc != src.loc)
 		return FALSE
 	return TRUE
+
+/obj/structure/industrial_lift/proc/show_lift()
+	obj_flags |= BLOCK_Z_OUT_DOWN
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
+	alpha = 255
+
+/obj/structure/industrial_lift/proc/hide_lift()
+	obj_flags &= ~BLOCK_Z_OUT_DOWN
+	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
+	alpha = 0
 
 /obj/structure/industrial_lift/attack_hand(mob/user, list/modifiers)
 	. = ..()

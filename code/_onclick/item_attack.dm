@@ -194,7 +194,7 @@
 			adf = round(adf * 0.6)
 	user.changeNext_move(adf)
 
-	for(var/obj/item/clothing/worn_thing in get_equipped_items(include_pockets = TRUE))//checks clothing worn by src.
+	for(var/obj/item/clothing/worn_thing in get_equipped_items(INCLUDE_POCKETS))//checks clothing worn by src.
 	// Things that are supposed to be worn, being held = cannot block
 		if(isclothing(worn_thing))
 			if(worn_thing in held_items)
@@ -279,6 +279,7 @@
 
 	M.lastattacker = user.real_name
 	M.lastattackerckey = user.ckey
+	M.lastattacker_weakref = WEAKREF(user)
 	if(M.mind)
 		M.mind.attackedme[user.real_name] = world.time
 	if(!force)

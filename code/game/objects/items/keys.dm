@@ -1,5 +1,6 @@
 /obj/item/key
 	name = "old key"
+	examine_name = "key"
 	desc = "A simple key of simple uses."
 	icon_state = "brownkey"
 	icon = 'icons/roguetown/items/keys.dmi'
@@ -9,7 +10,7 @@
 	throwforce = 0
 	drop_sound = 'sound/items/gems (1).ogg'
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
-	grid_height = 64
+	grid_height = 32
 	grid_width = 32
 	slot_equipment_priority = list(
 		ITEM_SLOT_NECK,

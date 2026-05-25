@@ -11,6 +11,7 @@
 	bodyparts = list(/obj/item/bodypart/chest/spirit, /obj/item/bodypart/head/spirit, /obj/item/bodypart/l_arm/spirit,
 					/obj/item/bodypart/r_arm/spirit, /obj/item/bodypart/r_leg/spirit, /obj/item/bodypart/l_leg/spirit, /obj/item/bodypart/mouth)
 	hud_type = /datum/hud/spirit
+	/// If the ghost is able to enter the carriage (return to lobby). Also prevents them from participating in death arena.
 	var/paid = FALSE
 	var/beingmoved = FALSE //repurposed for speak with soul
 	var/livingname = null

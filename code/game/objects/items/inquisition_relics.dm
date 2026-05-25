@@ -768,7 +768,7 @@
 	throwforce = 15
 	force_wielded = 0
 	force = 0
-	obj_flags = CAN_BE_HIT
+	obj_flags = CAN_BE_HIT | NO_DEBRIS_AFTER_DECONSTRUCTION
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	experimental_inhand = TRUE
 	max_integrity = 400
@@ -826,9 +826,6 @@
 /obj/item/inqarticles/garrote/atom_fix()
 	. = ..()
 	update_appearance()
-
-/obj/item/inqarticles/garrote/deconstruct(disassembled)
-	return
 
 /obj/item/inqarticles/garrote/update_name(updates)
 	. = ..()

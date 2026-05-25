@@ -262,7 +262,7 @@
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 	return
 
 /turf/closed/wall/mineral/roofwall

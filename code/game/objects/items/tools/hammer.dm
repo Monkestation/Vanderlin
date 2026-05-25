@@ -19,18 +19,7 @@
 	grid_width = 32
 	grid_height = 64
 	item_weight = 1.24 KILOGRAMS
-	var/time_multiplier = 1
 	var/no_spark = FALSE	//for hammers that shouldn't make sparks on impact
-
-/obj/proc/unbreak()
-	return
-
-/atom/proc/onanvil()
-	if(!isturf(src.loc))
-		return FALSE
-	for(var/obj/machinery/anvil/T in src.loc)
-		return TRUE
-	return FALSE
 
 /obj/structure
 	var/hammer_repair
@@ -40,17 +29,21 @@
 		return ..()
 	if(!isliving(user) || !user.mind || user.cmode)
 		return ..()
-	var/obj/O = attacked_atom
 	var/datum/mind/blacksmith_mind = user.mind
-	var/repair_percent = 0.025 // 2.5% Repairing per hammer smack
+	var/repair_percent = 0.05 // 5% Repairing per hammer smack
 	/// Repairing is MUCH better with an anvil!
-	if(locate(/obj/machinery/anvil) in O.loc)
-		repair_percent *= 2 // Double the repair amount if we're using an anvil
+	if(locate(/obj/machinery/anvil) in attacked_atom.loc)
+		repair_percent *= 1.5
+	if(HAS_TRAIT(attacked_atom, TRAIT_NEEDS_QUENCH))
+		repair_percent *= 1.5
 
-	if(isbodypart(O))
+	if(isbodypart(attacked_atom))
 		. = TRUE
-		var/obj/item/bodypart/attacked_prosthetic = O
-		if(!attacked_prosthetic.anvilrepair || !isturf(attacked_prosthetic.loc))
+		var/obj/item/bodypart/attacked_prosthetic = attacked_atom
+		if(!attacked_prosthetic.anvilrepair)
+			return
+		if(!attacked_atom.ontable() && !istype(attacked_atom.loc, /obj/machinery/anvil))
+			to_chat(user, span_warning("I should put [attacked_atom] on a table or an anvil first."))
 			return
 		if(attacked_prosthetic.get_integrity() >= attacked_prosthetic.max_integrity && attacked_prosthetic.brute_dam == 0 && attacked_prosthetic.burn_dam == 0 && attacked_prosthetic.wounds == null && attacked_prosthetic.bodypart_disabled == BODYPART_NOT_DISABLED) //A mouthful
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
@@ -82,11 +75,15 @@
 			attacked_prosthetic.take_damage(attacked_prosthetic.max_integrity * 0.1, BRUTE, "blunt")
 		return
 
-	if(isitem(O))
+	if(isitem(attacked_atom))
 		. = TRUE
-		var/obj/item/attacked_item = O
-		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || !isturf(attacked_item.loc))
+		var/obj/item/attacked_item = attacked_atom
+		if(!attacked_item.anvilrepair || !attacked_item.max_integrity)
 			to_chat(user, span_warning("[attacked_item] cannot be repaired."))
+			return
+
+		if(!attacked_item.ontable() && !istype(attacked_atom.loc, /obj/machinery/anvil))
+			to_chat(user, span_warning("I should put [attacked_item] on a table or an anvil first."))
 			return
 
 		var/skill_value = GET_MOB_SKILL_VALUE(user, attacked_item.anvilrepair) // 0-60 range typically
@@ -108,9 +105,6 @@
 		else
 			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_item.anvilrepair)
 
-		if(locate(/obj/machinery/anvil) in O.loc)
-			repair_percent *= 2
-
 		// If the armor was fully broken, penalize max_integrity based on skill
 		// At skill 60 (master): ~5% max_integrity loss
 		// At skill 30 (middling): ~35% max_integrity loss
@@ -118,33 +112,30 @@
 		// At skill 0: ~65% max_integrity loss
 		// At skill -20: ~85% max_integrity loss
 		// At skill -60+: ~99% max_integrity loss (clamped)
+		attacked_item.repair_damage(attacked_item.max_integrity * repair_percent)
 		if(was_broken)
 			var/integrity_penalty
 			integrity_penalty = 0.65 - ((skill_value / SKILL_MASTER) * 0.60)
 			integrity_penalty = clamp(integrity_penalty, 0.05, 0.99)
 
 			var/integrity_loss = round(attacked_item.max_integrity * integrity_penalty)
-			attacked_item.max_integrity = max(1, attacked_item.max_integrity - integrity_loss)
-			attacked_item.obj_broken = FALSE
-			attacked_item.repair_damage(max(attacked_item.max_integrity * repair_percent, 10))
+			attacked_item.atom_fix()
+			attacked_item.modify_max_integrity(max(1, attacked_item.max_integrity - integrity_loss), FALSE)
 
-			to_chat(user, span_warning("You manage to repair [attacked_item], but the damage has left its mark — it will never be quite as strong as it once was."))
-			if(skill_value < SKILL_MIDDLING) // 30
-				to_chat(user, span_warning("Your inexperience made things worse. The repair is rough."))
-		else
-			attacked_item.repair_damage(attacked_item.max_integrity * repair_percent)
+			to_chat(user, span_warning("I manage to repair [attacked_item], but its integrity has been permanently damaged."))
+		else if(repair_percent)
 			user.visible_message(span_info("[user] repairs [attacked_item]!"))
 
 		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
-		if(repair_percent <= 0)
+		if(!repair_percent)
 			amt2raise *= 0.25
 		blacksmith_mind.add_sleep_experience(attacked_item.anvilrepair, amt2raise)
 		playsound(src, 'sound/items/bsmithfail.ogg', 40, FALSE)
 		return
 
-	if(isstructure(O))
+	if(isstructure(attacked_atom))
 		. = TRUE
-		var/obj/structure/attacked_structure = O
+		var/obj/structure/attacked_structure = attacked_atom
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
 			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
 			return
@@ -182,7 +173,7 @@
 	icon_state = "hammer_s"
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	time_multiplier = 0.8
+	toolspeed = 0.8
 	melt_amount = 50
 	melting_material = /datum/material/steel
 
@@ -197,7 +188,7 @@
 	experimental_onback = FALSE
 	smeltresult = /obj/item/fertilizer/ash
 	max_integrity = INTEGRITY_WORST
-	time_multiplier = 1.2
+	toolspeed = 1.2
 	no_spark = TRUE
 	item_weight = 654 GRAMS
 
@@ -218,7 +209,7 @@
 	force = DAMAGE_HAMMER - 2
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/copper
-	time_multiplier = 1.1
+	toolspeed = 1.1
 	no_spark = TRUE
 	item_weight = 1.12 KILOGRAMS
 
@@ -260,7 +251,7 @@
 	force_wielded = DAMAGE_HAMMER_WIELD + 10
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
-	time_multiplier = 1.5 //it's for crushing skulls not nails
+	toolspeed = 1.5 //it's for crushing skulls not nails
 	item_weight = 8.4 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer/war/malum
