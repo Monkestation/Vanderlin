@@ -70,7 +70,7 @@
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
 	head = /obj/item/clothing/head/helmet/leather
-	armor = /obj/item/clothing/shirt/undershirt/easttats/tribal
+	armor = /obj/item/clothing/armor/regenerating/skin/easttats/tribal
 	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown

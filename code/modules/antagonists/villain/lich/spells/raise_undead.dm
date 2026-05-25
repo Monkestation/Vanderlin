@@ -104,6 +104,7 @@
 	candodge = FALSE
 
 	skeletonize(FALSE)
+	cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 
 	skele_look()
 	grant_undead_eyes()

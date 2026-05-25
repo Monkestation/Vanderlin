@@ -24,6 +24,14 @@
 
 	var/inflamation_stage = 0
 
+/obj/item/organ/appendix/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s lower right abdomen looks visibly distended and taut.")
+	else if(inflamation_stage)
+		examine_list += span_warning("<b>[owner]</b>'s lower abdomen appears slightly swollen.")
+
 /obj/item/organ/appendix/update_name()
 	. = ..()
 	name = "[inflamation_stage ? "inflamed " : null][initial(name)]"

@@ -48,6 +48,11 @@
 	if(!allowed_areas?[T.loc?.type])
 		return
 
+	// Check if an excluded atom is present. Excluded atoms are atoms that rely on turf to remain the same, and should not be modified by mapgen.
+	// For now, only `obj/structure/closet/dirthole` is included. If we find more examples, we should refactor this to be a global atom list that is checked.
+	if(locate(/obj/structure/closet/dirthole) in T)
+		return
+
 	// cache these as local (non-datum) vars
 	var/list/spawnableTurfs = src.spawnableTurfs
 	var/list/spawnableAtoms = src.spawnableAtoms
