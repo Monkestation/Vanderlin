@@ -95,6 +95,7 @@
 #define ADVENTURER_TRAIT "adventurer"
 #define DEVOTION_TRAIT "devotion_trait"
 #define RAGE_TRAIT "rage_trait"
+#define GRAVE_TRAIT "grave_trait"
 
 /// From grabbing someone
 #define GRABBING_TRAIT "grabbing"

@@ -287,8 +287,6 @@
 		teeth_mod = new()
 		if(owner)
 			teeth_mod.add_speech_modifier(owner)
-	if(owner)
-		owner.Stun(2 SECONDS)
 	update_limb_efficiency()
 	return dropped
 

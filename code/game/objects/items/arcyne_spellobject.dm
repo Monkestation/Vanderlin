@@ -314,6 +314,19 @@
 	max_spells = 3
 	spellobject_flags = SPELLOBJECT_VISUAL
 
+/obj/item/arcyne_spellobject/spellstone/random/Initialize(mapload)
+	. = ..()
+	var/datum/action/cooldown/spell/spell_type_path = pick(subtypesof(/datum/action/cooldown/spell))
+	while(IS_ABSTRACT(spell_type_path) || initial(spell_type_path.spell_tier) < min_spell_tier || initial(spell_type_path.spell_tier) > max_spell_tier)
+		spell_type_path = pick(subtypesof(/datum/action/cooldown/spell))
+
+	var/datum/spellobject_entry/E = new()
+	E.spell_type = spell_type_path
+	E.spell_name = initial(spell_type_path.name)
+	E.charges = rand(1, 3)
+	stored_spells += E
+	update_appearance(UPDATE_OVERLAYS)
+
 /obj/item/arcyne_spellobject/spellstone/lesser
 	name = "lesser arcyne spellstone"
 	icon_state = "quartz"

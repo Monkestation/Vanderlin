@@ -763,6 +763,8 @@
 	desc = "A mystical tool used to bind mana pylons together, allowing mana to flow between them."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "dbrush"
+	grid_width = 32
+	grid_height = 64
 
 	var/obj/structure/mana_pylon/source_pylon
 

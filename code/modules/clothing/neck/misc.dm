@@ -395,6 +395,7 @@
 
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
+	examine_name = "gorget"
 	icon_state = "collar_of_servitude"
 	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
 		servile and obedient under threat of its explosive potential detonating on their necks."

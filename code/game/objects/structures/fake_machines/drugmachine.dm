@@ -168,8 +168,10 @@
 				SStreasury.give_money_treasury(tax_amt, "goldface import tax")
 				record_featured_stat(FEATURED_STATS_TAX_PAYERS, human_mob, tax_amt)
 				record_round_statistic(STATS_TAXES_COLLECTED, tax_amt)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TAXES_COLLECTED, tax_amt)
 			else
 				record_round_statistic(STATS_TAXES_EVADED, tax_amt)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TAXES_EVADED, tax_amt)
 		else
 			say("Not enough!")
 			return

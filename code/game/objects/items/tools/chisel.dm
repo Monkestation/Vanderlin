@@ -16,6 +16,7 @@
 	experimental_onhip = TRUE
 	dropshrink = 0.9
 	w_class = WEIGHT_CLASS_SMALL
+	wlength = WLENGTH_SHORT
 	blade_dulling = 0
 	slot_flags = ITEM_SLOT_HIP
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
