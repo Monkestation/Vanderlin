@@ -304,7 +304,7 @@
 			//if(!is_in_zweb(player_mob.z, source.z) || get_dist(player_mob, src) > message_range) //they're out of range of normal hearing
 
 			// For aghosts check prefs
-			if(holder && isobserver(player_mob))
+			if(player_mob.client.holder && isobserver(player_mob))
 				if(!player_mob.client.prefs)
 					continue
 				if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
