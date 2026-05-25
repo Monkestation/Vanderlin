@@ -452,3 +452,7 @@
 	else
 		to_chat(target, span_notice("You feel your [src] stabilize and resume functioning."))
 	return TRUE
+
+/obj/item/organ/heart/regenerate_organ()
+	. = ..()
+	Restart()

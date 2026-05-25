@@ -234,7 +234,7 @@
 	for(var/obj/item/organ/possible_artery in shuffle(getorganslotlist(ORGAN_SLOT_ARTERY)))
 		if(possible_artery.is_bruised())
 			if(get_cut(ignore_gauze = TRUE))
-				status += span_artery(uppertext("cut [parse_zone(possible_artery.zone)]"))
+				status += span_artery(uppertext("cut [possible_artery.name]"))
 			else
 				status += span_artery(uppertext("internal bleeding"))
 

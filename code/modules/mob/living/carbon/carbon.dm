@@ -1458,10 +1458,6 @@
 	eyes.Insert(src, TRUE)
 	update_eyes()
 
-	for(var/obj/item/organ/organs as anything in getorganslotlist(ORGAN_SLOT_EARS))
-		organs.setOrganDamage(0)
-		organs.set_germ_level(0) // this ensures we are good to hear
-
 /mob/living/carbon/wash(clean_types)
 	. = ..()
 

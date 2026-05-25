@@ -770,12 +770,8 @@
 
 		// Species regenerate organs doesn't ALWAYS handle healing the organs because it's dumb
 		for(var/obj/item/organ/organ as anything in internal_organs)
-			organ.setOrganDamage(0)
+			organ.regenerate_organ()
 		set_heartattack(FALSE)
-
-		// heal ears after healing traits, since ears check TRAIT_DEAF trait
-		// when healing.
-		restoreEars()
 
 		return
 
@@ -841,6 +837,12 @@
 	if(painkiller_included)
 		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
 	return max(FLOOR(constant_pain * pain_multiplier, DAMAGE_PRECISION), 0)
+
+/obj/item/organ/proc/regenerate_organ()
+	SHOULD_CALL_PARENT(TRUE)
+	setOrganDamage(0)
+	current_blood = max_blood_storage
+	set_germ_level(0)
 
 GLOBAL_LIST_INIT(all_organ_slots, get_all_slots())
 

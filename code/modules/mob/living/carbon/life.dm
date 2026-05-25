@@ -380,6 +380,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			heart.Stop()
 	else
 		pulse = PULSE_NORM
+		REMOVE_TRAIT(src, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 		for(var/obj/item/organ/heart/heart in hearts)
 			heart.Restart()
 	return TRUE

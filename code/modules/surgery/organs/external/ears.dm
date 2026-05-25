@@ -73,6 +73,10 @@
 /obj/item/organ/ears/proc/minimumDeafTicks(value)
 	deaf = max(deaf, value)
 
+/obj/item/organ/ears/regenerate_organ()
+	. = ..()
+	restoreEars()
+
 /obj/item/organ/ears/invincible
 	ear_damage_multiplier = 0
 

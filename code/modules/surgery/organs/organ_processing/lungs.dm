@@ -12,6 +12,8 @@
 
 /datum/organ_process/lungs/handle_process(mob/living/carbon/owner, delta_time, times_fired)
 	handle_breathing(owner, delta_time, times_fired)
+	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
+	lungs?.cough_blood(delta_time)
 	return TRUE
 
 /datum/organ_process/lungs/proc/handle_breathing(mob/living/carbon/owner, delta_time, times_fired)

@@ -34,6 +34,7 @@
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_NOPAIN,
+		TRAIT_STABLEHEART,
 		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
 		TRAIT_CHUNKYFINGERS,
@@ -116,11 +117,6 @@
 
 	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
 	zombie.AddComponent(/datum/component/ai_aggro_system)
-	zombie.status_flags &= ~BLEEDOUT
-	zombie.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
-	for(var/obj/item/organ/organ as anything in zombie.internal_organs)
-		organ.setOrganDamage(0)
-	zombie.update_eyes()
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
@@ -193,6 +189,14 @@
 		return
 	revived = TRUE //so we can die for real later
 	zombie.add_client_colour(/datum/client_colour/monochrome)
+
+	zombie.status_flags &= ~BLEEDOUT
+	zombie.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
+	// Don't call carbon.regenerate_organs() so we don't spawn new organs
+	for(var/obj/item/organ/organ as anything in zombie.internal_organs)
+		organ.regenerate_organ()
+	zombie.set_heartattack(FALSE)
+
 	for(var/trait_applied in traits_zombie)
 		ADD_TRAIT(zombie, trait_applied, "[type]")
 	if(HAS_TRAIT(zombie, TRAIT_DODGEEXPERT))
@@ -238,7 +242,6 @@
 	zombie.modifier_set_stat_to("[type]", STAT_CONSTITUTION, 15)
 
 	zombie.bloodpool = 0 // Again, just in case.
-	zombie.adjustOrganLoss(ORGAN_SLOT_BRAIN, -200)
 
 	zombie.ghostize()
 

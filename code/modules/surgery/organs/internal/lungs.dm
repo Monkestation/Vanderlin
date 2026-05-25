@@ -32,27 +32,23 @@
 	if(!.)
 		return
 
-	if(is_failing())
-		if(!owner?.incapacitated())
-			owner.visible_message(
-				span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"),
-				span_userdanger("You suddenly feel like you can't breathe!"),
-			)
+	if(failed && !is_failing())
+		failed = FALSE
+		return
+
+	if(is_failing() && owner.stat == CONSCIOUS)
+		owner.visible_message(span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"), span_userdanger("You suddenly feel like you can't breathe!"))
 		failed = TRUE
 
-	else if(failed)
-		failed = FALSE
-
-/obj/item/organ/lungs/on_life(seconds_per_tick, times_fired)
-	. = ..()
-	if(!is_bruised())
+/obj/item/organ/lungs/proc/cough_blood(delta_time)
+	if(!owner || !is_bruised())
 		return
 
 	var/cough_prob = 2.5
 	if(damage >= medium_threshold)
 		cough_prob = 5
 
-	if(!SPT_PROB(cough_prob, seconds_per_tick)) // between : past high
+	if(!SPT_PROB(cough_prob, delta_time)) // between : past high
 		return
 
 	if((damage >= medium_threshold) && prob(33))
@@ -85,6 +81,10 @@
 /obj/item/organ/lungs/prepare_eat()
 	var/obj/S = ..()
 	return S
+
+/obj/item/organ/lungs/regenerate_organ()
+	. = ..()
+	failed = FALSE
 
 /obj/item/organ/lungs/plasmaman
 	name = "plasma filter"
