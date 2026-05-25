@@ -803,7 +803,6 @@
 #include "code\datums\ai\subtrees\call_for_help.dm"
 #include "code\datums\ai\subtrees\cat_attack.dm"
 #include "code\datums\ai\subtrees\cat_food_for_babies.dm"
-#include "code\datums\ai\subtrees\cat_racism.dm"
 #include "code\datums\ai\subtrees\cat_rest.dm"
 #include "code\datums\ai\subtrees\cat_territory.dm"
 #include "code\datums\ai\subtrees\check_environment.dm"
