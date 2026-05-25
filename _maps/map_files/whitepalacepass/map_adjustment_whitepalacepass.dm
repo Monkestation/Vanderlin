@@ -13,6 +13,11 @@
 		/datum/job/advclass/pilgrim/rare/preacher,
 		/datum/job/advclass/combat/swordmaster,
 		/datum/job/advclass/royalknight/steam,
+		/datum/job/forestwarden,
+		/datum/job/forestguard,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
+		/datum/job/forestsupport,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)
@@ -20,9 +25,6 @@
 	slot_adjust = list(
 		/datum/job/feldsher = 2,
 		/datum/job/orthodoxist = 1,
-	)
-	ages_adjust = list(
-		/datum/job/forestguard = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	)
 
 	migrant_blacklist = list(
