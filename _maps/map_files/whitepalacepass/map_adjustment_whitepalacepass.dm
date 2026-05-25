@@ -25,6 +25,8 @@
 	slot_adjust = list(
 		/datum/job/feldsher = 2,
 		/datum/job/orthodoxist = 1,
+		/datum/job/forestwarden_classic = 1,
+		/datum/job/forestguard_classic = 4,
 	)
 
 	migrant_blacklist = list(

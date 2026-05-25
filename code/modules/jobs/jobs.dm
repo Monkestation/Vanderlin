@@ -37,6 +37,8 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/gatemaster::title,
 	/datum/job/dungeoneer::title,
 	/datum/job/town_elder::title,
+	/datum/job/forestwarden_classic::title,
+	/datum/job/forestguard_classic::title,
 	/datum/job/persistence/caravanguard::title,
 	))
 GLOBAL_PROTECT(garrison_positions)

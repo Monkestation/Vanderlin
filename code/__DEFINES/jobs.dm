@@ -60,7 +60,7 @@
 #define FACTION_BUMS		"Bums"
 #define FACTION_MATTHIOS	"Matthios"
 #define FACTION_VIKINGS     "Vikings"
-#define FACTION_GALLOWBAND "Gallowband"
+#define FACTION_GALLOWBAND  "Gallowband"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
@@ -272,6 +272,8 @@
 
 #define JOB_BOGWITCH "Bog Witch"
 #define JOB_BOGWITCH_APP "Bog Witch Apprentice"
+#define JOB_FOREST_WARDEN_CLASSIC "Forest Warden"
+#define JOB_FOREST_GUARD_CLASSIC "Forest Guard"
 #define JOB_FOREST_WARDEN "Warden of the Woods"
 #define JOB_FOREST_ENFORCER "Hersir"
 #define JOB_FOREST_PREACHER "Gothi"

@@ -398,7 +398,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/forestwarden
 	name = JOB_FOREST_WARDEN
-	jobs_to_spawn = list(JOB_FOREST_WARDEN)
+	jobs_to_spawn = list(JOB_FOREST_WARDEN, JOB_FOREST_WARDEN_CLASSIC)//Spawns Forest Warden on maps without Gallowband
 
 /obj/effect/landmark/start/forestenforcer
 	name = JOB_FOREST_ENFORCER
@@ -410,7 +410,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/forestguard
 	name = JOB_FOREST_GUARD
-	jobs_to_spawn = list(JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT)//Temp for compat purposes
+	jobs_to_spawn = list(JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT, JOB_FOREST_GUARD_CLASSIC)//Spawns Forest Guards on maps without Gallowband
 
 /obj/effect/landmark/start/forestsupport
 	name = JOB_FOREST_SUPPORT
