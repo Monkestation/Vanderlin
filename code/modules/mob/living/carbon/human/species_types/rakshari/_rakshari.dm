@@ -37,7 +37,7 @@
 	possible_ages = NORMAL_AGES_LIST_CHILD
 
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_KITTEN_MOM)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_KITTEN_MOM, TRAIT_NOFALLDAMAGE1)
 
 	statsheet_male = /datum/attribute_holder/sheet/job/species/rakshari
 
