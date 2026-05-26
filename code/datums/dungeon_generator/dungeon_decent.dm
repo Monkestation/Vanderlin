@@ -82,9 +82,7 @@ GLOBAL_LIST_INIT(descent_level_map, list()) // Maps z-levels to their descent ob
 		if(!do_after(user, 3 SECONDS, src))
 			return
 
-	// Move to random location near the target entry
-	var/turf/target_turf = get_turf(target)
-	movable_travel_z_level(user, target_turf)
+	user.zMove(target = get_turf(target), z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /obj/structure/dungeon_descent/proc/attempt_descent(mob/user, is_ghost = FALSE)
 	if(!is_ghost && !can_descend)

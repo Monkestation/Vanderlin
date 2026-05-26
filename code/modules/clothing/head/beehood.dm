@@ -18,3 +18,4 @@
 	max_integrity = 100
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
+	item_weight = 900 GRAMS

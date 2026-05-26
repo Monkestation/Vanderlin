@@ -64,6 +64,8 @@
 	happy_funtime_mob = TRUE
 	indexed = TRUE
 
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
+
 	var/can_breed = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/goat/Initialize()
@@ -105,8 +107,10 @@
 /mob/living/simple_animal/hostile/retaliate/goat/tamed(mob/user)
 	..()
 	deaggroprob = 50
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/gote)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gote)
 
 /// Called when we attack something in order to piece together the intent of the AI/user and provide desired behavior. The element might be okay here but I'd rather the fluff.
 /// Goats are really good at beating up plants by taking bites out of them, but we use the default attack for everything else
@@ -200,6 +204,8 @@
 	generate_genetics = TRUE
 	indexed = TRUE
 
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
+
 /mob/living/simple_animal/hostile/retaliate/goatmale/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
@@ -239,8 +245,10 @@
 /mob/living/simple_animal/hostile/retaliate/goatmale/tamed(mob/user)
 	..()
 	deaggroprob = 20
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/gote)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gote)
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/get_sound(input)
 	switch(input)

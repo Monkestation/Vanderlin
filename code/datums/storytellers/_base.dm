@@ -65,7 +65,7 @@
 	///have we done roundstart checks?
 	var/roundstart_checks = FALSE
 	///prob of roundstart antag
-	var/roundstart_prob = 85
+	var/roundstart_prob = 80
 	///do we ignore ran_roundstart
 	var/ignores_roundstart = FALSE
 	///is a storyteller always able to be voted for(also does not count for the amount of storytellers to pick from)
@@ -104,7 +104,7 @@
 		roundstart_checks = TRUE
 
 	if(roundstart_checks && SSgamemode.can_run_roundstart && !SSgamemode.ran_roundstart && SSgamemode.current_roundstart_event)
-		if(SSgamemode.current_roundstart_event.canSpawnEvent())
+		if(SSgamemode.current_roundstart_event.canSpawnEvent(get_active_player_count(afk_check = 1)))
 			buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION)
 			if(EVENT_TRACK_CHARACTER_INJECTION in SSgamemode.forced_next_events)
 				SSgamemode.forced_next_events[EVENT_TRACK_CHARACTER_INJECTION] = null

@@ -144,3 +144,19 @@
 	aportalid = "acid_in"
 	aportalgoesto = "acid_out"
 	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/inquisition
+	name = "To the Vanderlin Basin"
+	aportalid = "inq_exit"
+	aportalgoesto = "inq_enter"
+	required_trait = TRAIT_INQUISITION
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/exit_inquisition
+	name = "To the Inquisitorial Lodge"
+	aportalid = "inq_enter"
+	aportalgoesto = "inq_exit"
+	required_trait = TRAIT_INQUISITION
+	can_gain_with_sight = FALSE
+	can_gain_by_walking = FALSE
+	check_other_side = TRUE

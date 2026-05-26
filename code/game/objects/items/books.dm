@@ -23,6 +23,7 @@
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 493 GRAMS
 
 	var/random_cover
 	var/category = null

@@ -45,7 +45,6 @@
 	attack_verb_continuous = "jabs"
 	attack_verb_simple = "jab"
 	dodgetime = 60
-	aggressive = 1
 
 	ai_controller = /datum/ai_controller/sprite
 

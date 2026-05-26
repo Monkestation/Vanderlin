@@ -1,4 +1,4 @@
-/mob/living/carbon/Life()
+/mob/living/carbon/Life(delta_time = SSMOBS_DT, times_fired)
 	set invisibility = 0
 
 	if(grab_fatigue > 0)
@@ -20,30 +20,32 @@
 		. = ..()
 	else
 		//Reagent processing needs to come before breathing, to prevent edge cases.
-		handle_organs()
+		handle_organs(delta_time, times_fired)
+		handle_bodyparts(delta_time, times_fired)
 
 		. = ..()
 
 		if (QDELETED(src))
 			return
 
-		handle_lingering_pain()
 		handle_wounds()
 		handle_embedded_objects()
-		handle_blood()
 		handle_roguebreath()
 		update_stress()
 		handle_nausea()
+
+		handle_shock(delta_time, times_fired)
+		handle_shock_stage(delta_time, times_fired)
+
 		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
 				if(oxyloss)
-					adjustOxyLoss(-1.6)
+					adjustOxyLoss(-5)
 			else
 				if(getOxyLoss() < 20)
 					heart_attacking = FALSE
 
 		handle_sleep()
-		handle_brain_damage()
 
 	check_cremation()
 
@@ -61,117 +63,12 @@
 		return
 	handle_wounds()
 	handle_embedded_objects()
-	handle_blood()
 
 	check_cremation()
 
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
-	if(HAS_TRAIT(src, TRAIT_NOPAIN))
-		return
+	return
 
-	// Pain tolerance system - builds up to prevent infinite stunning
-	// High endurance characters build tolerance faster and lose it slower
-	var/tolerance_gain_rate = 1 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.25) // More endurance = faster adaptation
-	var/tolerance_decay_rate = max(1, 3 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.1)) // More endurance = slower decay
-
-	if(world.time - last_major_pain_time < 30 SECONDS)
-		pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)) // Higher max tolerance with endurance
-	else
-		pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
-
-	if(stat < UNCONSCIOUS)
-		var/current_shock = calculate_shock_stage()
-		var/effective_pain = get_pain_percent() * 100
-
-		// Endurance-based pain threshold - higher endurance means higher pain threshold
-		var/pain_threshold = 55 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1) // 1% higher threshold per endurance point
-		if(world.time > mob_timers[MT_PAINSTUN])
-			mob_timers[MT_PAINSTUN] = world.time + 10 SECONDS
-
-			// Base stun probability - endurance makes you much more resistant
-			var/probby = max(5, 50 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)) // 1% reduction per endurance point, minimum 5%
-
-			// Reduce stun probability based on shock stage and pain tolerance
-			if(current_shock >= 160)
-				probby *= 0.75 // Shock makes you less likely to be stunned by pain
-			if(body_position == LYING_DOWN || HAS_TRAIT(src, TRAIT_FLOORED))
-				if(prob(3) && (effective_pain >= 40))
-					emote("painmoan")
-			else
-				if(effective_pain >= pain_threshold) // Dynamic threshold based on endurance
-					if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT))
-						// Major pain event - increase tolerance
-						pain_tolerance += tolerance_gain_rate
-						last_major_pain_time = world.time
-						if(prob(25)) // PSYDONIC WEIGHTED COINFLIP. TWEAK THIS AS THOU WILT. DON'T LET THEM BE BROKEN, PSYDON WILLING. THROW CON-MAXXERS A BONE, TOO.
-							Immobilize(15) // EAT A MICROSTUN. YOU'RE AVOIDING A PAINCRIT.
-							if(HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT))
-								visible_message(span_info("[src] audibly grits their teeth. ENDURING through their pain."), span_info("Through my faith in HIM, I ENDURE."))
-							else
-								visible_message(span_info("[src] trembled for a moment, but they remain stood."), span_info("My strong constitution keeps me upright."))
-							stuttering += 5
-							emote("painmoan")
-							return
-
-					if(prob(probby) && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/buff/psyhealing))
-						// Major pain event - increase tolerance
-						pain_tolerance += tolerance_gain_rate
-						last_major_pain_time = world.time
-
-						// Endurance affects stun duration - tougher people recover faster
-						var/base_stun = 6 SECONDS
-						var/endurance_stun_reduction = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1 // 2 deciseconds per endurance point
-						var/stun_duration = max(30, base_stun - endurance_stun_reduction)
-
-						var/base_immobilize = 1 SECONDS
-						var/immobilize_duration = max(2, base_immobilize - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.05))
-
-						Immobilize(immobilize_duration)
-						emote("painscream")
-						stuttering += max(1, 5 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) // Less stuttering with high endurance
-						addtimer(CALLBACK(src, PROC_REF(Stun), stun_duration), immobilize_duration)
-						addtimer(CALLBACK(src, PROC_REF(Knockdown), stun_duration), immobilize_duration)
-
-						mob_timers[MT_PAINSTUN] = world.time + (10 SECONDS + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.25))
-					else
-						emote("painmoan")
-						stuttering += max(1, 5 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE))
-				else
-					// Lower threshold for minor pain with high endurance
-					var/minor_pain_threshold = 35 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)
-					if(effective_pain >= minor_pain_threshold)
-						if(prob(probby * 0.5)) // Reduced chance for minor pain reactions
-							emote("painmoan")
-
-		// Stress effects - endurance helps resist stress from pain
-		if(effective_pain >= pain_threshold)
-			if(current_shock < 160) // Only add stress if not in shock-induced numbness
-				// High endurance characters are less stressed by pain
-				if(prob(max(20, 100 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)))) // 2% less likely per endurance point (40% at 20 )
-					add_stress(/datum/stress_event/painmax)
-
-/// Returns the pain percent between 0 and 1.
-/mob/living/carbon/proc/get_pain_percent()
-	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-		return 0
-
-	// Calculate current shock level
-	var/raw_pain = get_complex_pain()
-	var/current_shock = calculate_shock_stage()
-
-	// Shock reduces pain perception (adrenaline effect)
-	if(current_shock >= 60)
-		var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
-		raw_pain *= (1.0 - shock_reduction)
-
-	// Max pain scales on endurance
-	var/painpercent = (raw_pain / max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 13, 1)) * 100
-
-	// Apply pain tolerance to reduce effective pain
-	painpercent *= (1 - (pain_tolerance * 0.01))
-
-	// Return normalized value between 0 and 1
-	return clamp(painpercent/100, 0, 1)
 
 /mob/living/carbon/proc/handle_roguebreath()
 	return
@@ -195,293 +92,6 @@
 			if(next_smell <= world.time)
 				next_smell = world.time + 30 SECONDS
 				T.pollution.smell_act(src)
-
-/mob/living/proc/handle_inwater(turf/open/water/W)
-	if(body_position == LYING_DOWN || W.water_height >= WATER_HEIGHT_DEEP)
-		SoakMob(FULL_BODY)
-	else if(W.water_height == WATER_HEIGHT_SHALLOW)
-		SoakMob(BELOW_CHEST)
-
-/mob/living/carbon/handle_inwater(turf/open/water/W)
-	. = ..()
-	if(stat == DEAD)
-		return
-	if(W.water_volume < 10 || !W.water_reagent)
-		return
-	var/react_volume = 2
-	var/react_type = TOUCH
-	var/is_laying = (body_position == LYING_DOWN)
-	var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 15 : 10) : 5
-	if(!is_laying)
-		if(W.water_height < WATER_HEIGHT_SHALLOW)
-			return
-		else if(W.water_height == WATER_HEIGHT_FULL && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
-			var/swimdrain = max(10 - GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/swimming), 1)
-			if(swimdrain < maximum_stamina - stamina)
-				adjust_stamina(swimdrain, "drown")
-				adjustOxyLoss(2)
-			else
-				adjustOxyLoss(drown_damage)
-				emote("drown")
-	if(is_laying && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
-		adjustOxyLoss(drown_damage)
-		if(stat == DEAD && client)
-			record_round_statistic(STATS_PEOPLE_DROWNED)
-			return
-		emote("drown")
-		react_volume = 5
-		react_type = INGEST
-	var/datum/reagents/reagents = new()
-	reagents.add_reagent(W.water_reagent, react_volume)
-	reagents.reaction(src, react_type, W.level / 2)
-
-/mob/living/carbon/human/handle_inwater()
-	. = ..()
-	if(body_position != LYING_DOWN)
-		if(istype(loc, /turf/open/water/bath))
-			if(!wear_armor && !wear_shirt && !wear_pants)
-				var/mob/living/carbon/V = src
-				V.add_stress(/datum/stress_event/bathwater)
-
-/mob/living/carbon/proc/get_complex_pain()
-	var/total_pain = 0
-
-	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		if(BP.status == BODYPART_ROBOTIC)
-			continue
-
-		var/bodypart_pain = 0
-
-		// Acute pain from current damage (immediate, sharp pain)
-		var/acute_pain = 0
-		acute_pain += ((BP.brute_dam / BP.max_damage) * 50)
-		acute_pain += ((BP.burn_dam / BP.max_damage) * 50)
-
-		// Wound-specific pain (can be higher intensity)
-		var/wound_pain = 0
-		for(var/datum/wound/WO as anything in BP.wounds)
-			if(WO.woundpain > 0)
-				wound_pain += WO.woundpain
-
-		// Lingering pain (decays over time, separate from current damage)
-		if(!BP.lingering_pain)
-			BP.lingering_pain = 0
-
-		// Chronic pain system
-		if(!BP.chronic_pain)
-			BP.chronic_pain = 0
-		if(!BP.chronic_pain_type)
-			BP.chronic_pain_type = null
-
-		// Develop chronic pain from repeated or severe injuries
-		//process_chronic_pain_development(BP, current_damage_percent) //TODO seperate TM for balancing this lol
-
-		// Calculate chronic pain contribution
-		var/chronic_pain_amount = get_chronic_pain_amount(BP)
-
-		// Combine all pain sources for this bodypart
-		bodypart_pain = acute_pain + wound_pain + BP.lingering_pain + chronic_pain_amount
-
-		// Apply species pain modifier
-		bodypart_pain *= (dna?.species?.pain_mod || 1)
-
-		total_pain += bodypart_pain
-
-	// Apply pain medications/modifiers
-	total_pain *= pain_resistance_multiplier()
-
-	return max(0, total_pain)
-
-/mob/living/carbon/proc/process_chronic_pain_development(obj/item/bodypart/BP, current_damage_percent)
-	// Don't develop chronic pain if you already have it at max level
-	if(BP.chronic_pain >= 100)
-		return
-
-	// Factors that increase chronic pain development
-	var/development_chance = 0
-
-	// Severe current damage
-	if(current_damage_percent > 80)
-		development_chance += 0.1
-	else if(current_damage_percent > 60)
-		development_chance += 0.05
-
-	// Recent severe injury history (within last hour)
-	if(BP.last_severe_injury_time && (world.time - BP.last_severe_injury_time) < 1 HOURS)
-		development_chance += 0.08
-
-	// High lingering pain suggests tissue damage
-	if(BP.lingering_pain > 30)
-		development_chance += 0.05
-
-	// Poor general health increases chronic pain risk
-	if(getToxLoss() > 20 || nutrition < 200)
-		development_chance += 0.03
-
-	// Random chance to develop chronic pain
-	if(prob(development_chance * 100))
-		// Determine chronic pain type based on injury pattern
-		if(!BP.chronic_pain_type)
-			if(BP.brute_dam > BP.burn_dam)
-				BP.chronic_pain_type = prob(50) ? CHRONIC_OLD_FRACTURE : CHRONIC_SCAR_TISSUE
-			else
-				BP.chronic_pain_type = prob(50) ? CHRONIC_NERVE_DAMAGE : CHRONIC_SCAR_TISSUE
-
-		// Increase chronic pain level slowly
-		BP.chronic_pain = min(BP.chronic_pain + rand(1, 3), 100)
-
-		// Notify player when chronic pain develops significantly
-		if(BP.chronic_pain == 25 || BP.chronic_pain == 50 || BP.chronic_pain == 75)
-			var/bodypart_name = BP.name
-			var/pain_desc = get_chronic_pain_description(BP.chronic_pain_type, BP.chronic_pain)
-			to_chat(src, span_warning("You feel [pain_desc] developing in your [bodypart_name]."))
-
-/mob/living/carbon/proc/get_chronic_pain_amount(obj/item/bodypart/BP)
-	if(!BP.chronic_pain || !BP.chronic_pain_type)
-		return 0
-
-	var/base_pain = BP.chronic_pain * 0.3 // Base chronic pain
-
-	// Weather effects (if your game has weather)
-	/*
-	if(SSweather?.current_weather?.pressure == "low")
-		base_pain *= 1.3 // Arthritis flares up in low pressure
-	*/
-
-	// Activity level affects chronic pain
-	if(body_position == LYING_DOWN)
-		base_pain *= 0.8 // Rest helps
-	else if(m_intent == MOVE_INTENT_RUN)
-		base_pain *= 1.4 // Running aggravates chronic pain
-
-	// Time of day effects (morning stiffness)
-	var/game_hour = world.time / (1 HOURS) % 24
-	if(game_hour >= 6 && game_hour <= 8) // Morning hours
-		base_pain *= 1.2
-
-	// Chronic pain type modifiers
-	switch(BP.chronic_pain_type)
-		if(CHRONIC_ARTHRITIS)
-			// Worse when cold, better when warm
-			if(bodytemperature < BODYTEMP_NORMAL - 10)
-				base_pain *= 1.5
-			else if(bodytemperature > BODYTEMP_NORMAL + 10)
-				base_pain *= 0.8
-
-		if(CHRONIC_NERVE_DAMAGE)
-			// Consistent pain, hard to treat
-			base_pain *= 1.1
-
-		if(CHRONIC_OLD_FRACTURE)
-			// Worse with activity and weather
-			if(m_intent == MOVE_INTENT_RUN)
-				base_pain *= 1.3
-
-		if(CHRONIC_SCAR_TISSUE)
-			// Causes stiffness, worse with movement
-			if(m_intent != MOVE_INTENT_WALK)
-				base_pain *= 1.2
-
-	return base_pain
-
-/mob/living/carbon/proc/get_chronic_pain_description(pain_type, severity)
-	var/intensity = ""
-	switch(severity)
-		if(1 to 25)
-			intensity = "a mild ache"
-		if(26 to 50)
-			intensity = "a persistent discomfort"
-		if(51 to 75)
-			intensity = "a chronic pain"
-		if(76 to 100)
-			intensity = "a severe chronic condition"
-
-	switch(pain_type)
-		if(CHRONIC_ARTHRITIS)
-			return "[intensity] and stiffness"
-		if(CHRONIC_NERVE_DAMAGE)
-			return "[intensity] and tingling sensation"
-		if(CHRONIC_OLD_FRACTURE)
-			return "[intensity] from old bone damage"
-		if(CHRONIC_SCAR_TISSUE)
-			return "[intensity] from scar tissue"
-
-	return "[intensity]"
-
-/mob/living/carbon/proc/handle_lingering_pain()
-	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		if(BP.status == BODYPART_ROBOTIC)
-			continue
-
-		// Process lingering pain decay
-		if(BP.lingering_pain > 0)
-			var/decay_rate = max(0.5, BP.lingering_pain * 0.02)
-
-			if(nutrition > 300 && !has_status_effect(/datum/status_effect/debuff/sleepytime))
-				decay_rate *= 1.25
-			if(getToxLoss() > 20 || getOxyLoss() > 20)
-				decay_rate *= 0.75
-
-			BP.lingering_pain = max(0, BP.lingering_pain - decay_rate)
-
-		// Chronic pain can very slowly improve with good care
-		if(BP.chronic_pain > 0)
-			// Chance for improvement if healthy and well-cared for
-			if(nutrition > 400 && getToxLoss() < 10 && getOxyLoss() < 10 && !has_status_effect(/datum/status_effect/debuff/sleepytime))
-				if(prob(0.1)) // Very small chance
-					BP.chronic_pain = max(0, BP.chronic_pain - 1)
-					if(BP.chronic_pain == 0)
-						BP.chronic_pain_type = null
-						to_chat(src, span_green("The chronic pain in your [BP.name] seems to have finally subsided."))
-	update_damage_hud()
-
-/mob/living/carbon/proc/pain_resistance_multiplier()
-	var/multiplier = 1.0
-
-	// Check for pain medications in bloodstream
-	if(reagents)
-		// Ozium
-		if(has_reagent(/datum/reagent/ozium))
-			multiplier *= 0.6 // 40% pain reduction
-
-		if(has_reagent(/datum/reagent/buff/herbal/battle_stim))
-			multiplier *= 0.8 // 20% pain reduction
-
-		// Alcohol (mild pain relief)
-		if(has_reagent(/datum/reagent/consumable/ethanol))
-			var/alcohol_amount = reagents.get_reagent_amount(/datum/reagent/consumable/ethanol)
-			multiplier *= max(0.8, 1.0 - (alcohol_amount * 0.01)) // Diminishing returns
-
-	return multiplier
-
-
-/mob/living/carbon/proc/calculate_shock_stage()
-	var/shock = 0
-
-	// Physical trauma contributes to shock
-	shock += getBruteLoss() * 0.7
-	shock += getFireLoss() * 0.8
-	shock += getToxLoss() * 0.4
-
-	// Blood loss is a major shock factor
-	var/shock_threshold = BLOOD_VOLUME_NORMAL / 2
-	if(blood_volume < shock_threshold)
-		shock += max(0, shock_threshold - blood_volume) * 0.5
-
-	// Gradually reduce shock over time if conditions improve
-	if(shock < shock_stage)
-		shock_stage -= max(0.5, shock_stage * 0.02)
-		shock_stage = max(shock, shock_stage)
-	else
-		shock_stage = shock
-
-	return shock_stage
-
-
-/mob/living/carbon/human/get_complex_pain()
-	. = ..()
-	if(physiology)
-		. *= physiology.pain_mod
 
 ///////////////
 // BREATHING //
@@ -574,13 +184,47 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/proc/handle_organs()
-	if(stat != DEAD)
-		for(var/obj/item/organ/O as anything in internal_organs)
-			O.on_life()
+/mob/living/carbon/proc/handle_bodyparts(delta_time, times_fired)
+	for(var/I in bodyparts)
+		var/obj/item/bodypart/BP = I
+		if(BP.needs_processing)
+			. |= BP.on_life(delta_time, times_fired)
+
+
+/mob/living/carbon/proc/handle_organs(delta_time, times_fired)
+	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
+		return
+	if(stat < DEAD)
+		var/list/already_processed_life = list()
+		var/list/organlist
+		var/obj/item/organ/organ
+		for(var/organ_slot in GLOB.organ_process_order)
+			if(QDELETED(src))
+				break
+			organlist = LAZYACCESS(internal_organs_slot, organ_slot)
+			for(var/thing in organlist)
+				if(QDELETED(src))
+					break
+				organ = thing
+				// This exists mostly because reagent metabolization can cause organ shuffling
+				if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
+					if(organ.needs_processing)
+						organ.on_life(delta_time, times_fired)
+					already_processed_life[organ] = TRUE
+		var/datum/organ_process/organ_process
+		for(var/thing in GLOB.organ_process_datum_order)
+			if(QDELETED(src))
+				break
+			organ_process = GLOB.organ_processes_by_slot[thing]
+			if(organ_process.needs_process(src))
+				organ_process.handle_process(src, delta_time, times_fired)
 	else
-		for(var/obj/item/organ/O as anything in internal_organs)
-			O.on_death() //Needed so organs decay while inside the body.
+		var/obj/item/organ/organ
+		for(var/thing in internal_organs)
+			organ = thing
+			//Needed so organs decay while inside the body
+			organ.on_death(delta_time, times_fired)
+
 
 /mob/living/carbon/handle_embedded_objects()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -715,30 +359,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 	return fullness
 
-/////////
-//LIVER//
-/////////
-
-///Decides if the liver is failing or not.
-/mob/living/carbon/proc/handle_liver()
-	if(!dna)
-		return
-	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(!liver)
-		liver_failure()
-
-/mob/living/carbon/proc/undergoing_liver_failure()
-	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(liver && (liver.organ_flags & ORGAN_FAILING))
-		return TRUE
-
-/mob/living/carbon/proc/liver_failure()
-	reagents.end_metabolization(src, keep_liverless = TRUE) //Stops trait-based effects on reagents, to prevent permanent buffs
-	reagents.metabolize(src, can_overdose=FALSE, liverless = TRUE)
-	if(HAS_TRAIT(src, TRAIT_NOMETABOLISM))
-		return
-	adjustToxLoss(4, TRUE,  TRUE)
-
 
 /////////////
 //CREMATION//
@@ -863,11 +483,26 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!can_heartattack())
 		return FALSE
 
-	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!istype(heart))
-		return
+	var/list/hearts = getorganslotlist(ORGAN_SLOT_HEART)
+	if(status)
+		pulse = PULSE_NONE
+		for(var/obj/item/organ/heart/heart in hearts)
+			heart.Stop()
+	else
+		pulse = PULSE_NORM
+		for(var/obj/item/organ/heart/heart in hearts)
+			heart.Restart()
 
-	heart.beating = !status
+/// Brain is poopy (hardcrit)
+/mob/living/proc/undergoing_nervous_system_failure()
+	return FALSE
+
+/mob/living/carbon/undergoing_nervous_system_failure()
+	var/obj/item/organ/brain/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!brain)
+		return TRUE
+	if(brain.is_failing())
+		return TRUE
 
 /// Handles sleep. Mobs with no_sleep trait cannot sleep.
 /*
@@ -908,7 +543,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			adjust_energy(sleepy_mod * (max_energy * 0.004))
 		if(hydration > 0 || yess)
 			if(!bleed_rate)
-				blood_volume = min(blood_volume + (4 * sleepy_mod), BLOOD_VOLUME_NORMAL)
+				adjust_bloodvolume(4 * sleepy_mod, BLOOD_VOLUME_NORMAL)
 			for(var/obj/item/bodypart/affecting as anything in bodyparts)
 				//for context, it takes 5 small cuts (0.4 x 5) or 3 normal cuts (0.8 x 3) for a bodypart to not be able to heal itself
 				if(affecting.get_bleed_rate() >= 2)

@@ -2,46 +2,6 @@
 	. = new_angle - old_angle
 	Turn(.) //BYOND handles cases such as -270, 360, 540 etc. DOES NOT HANDLE 180 TURNS WELL, THEY TWEEN AND LOOK LIKE SHIT
 
-/**
- * Proc called when you want the atom to spin around the center of its icon (or where it would be if its transform var is translated)
- * By default, it makes the atom spin forever and ever at a speed of 60 rpm.
- *
- * Arguments:
- * * speed: how much it takes for the atom to complete one 360° rotation
- * * loops: how many times do we want the atom to rotate
- * * clockwise: whether the atom ought to spin clockwise or counter-clockwise
- * * segments: in how many animate calls the rotation is split. Probably unnecessary, but you shouldn't set it lower than 3 anyway.
- * * parallel: whether the animation calls have the ANIMATION_PARALLEL flag, necessary for it to run alongside concurrent animations.
- */
-/atom/proc/SpinAnimation(speed = 1 SECONDS, loops = -1, clockwise = TRUE, segments = 3, parallel = TRUE)
-	if(!segments)
-		return
-	var/segment = 360/segments
-	if(!clockwise)
-		segment = -segment
-	do_spin_animation(speed, loops, segments, segment, parallel)
-
-///Animates source spinning around itself. For docmentation on the args, check atom/proc/SpinAnimation()
-/atom/proc/do_spin_animation(speed = 1 SECONDS, loops = -1, segments = 3, angle = 120, parallel = TRUE)
-	var/list/matrices = list()
-	for(var/i in 1 to segments-1)
-		var/matrix/segment_matrix = matrix(transform)
-		segment_matrix.Turn(angle*i)
-		matrices += segment_matrix
-	var/matrix/last = matrix(transform)
-	matrices += last
-
-	speed /= segments
-
-	if(parallel)
-		animate(src, transform = matrices[1], time = speed, loop = loops, flags = ANIMATION_PARALLEL)
-	else
-		animate(src, transform = matrices[1], time = speed, loop = loops)
-	for(var/i in 2 to segments) //2 because 1 is covered above
-		animate(transform = matrices[i], time = speed)
-		//doesn't have an object argument because this is "Stacking" with the animate call above
-		//3 billion% intentional
-
 //Dumps the matrix data in format a-f
 /matrix/proc/tolist()
 	. = list()
@@ -109,15 +69,6 @@ list(-1,0,0,0, 0,-1,0,0, 0,0,-1,0, 0,0,0,1, 1,1,1,0)
 list(0.393,0.349,0.272,0, 0.769,0.686,0.534,0, 0.189,0.168,0.131,0, 0,0,0,1, 0,0,0,0)
 */
 
-//Does nothing
-/proc/color_matrix_identity()
-	return list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
-
-//Adds/subtracts overall lightness
-//0 is identity, 1 makes everything white, -1 makes everything black
-/proc/color_matrix_lightness(power)
-	return list(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1, power,power,power,0)
-
 //Changes distance hues have from grey while maintaining the overall lightness. Greys are unaffected.
 //1 is identity, 0 is greyscale, >1 oversaturates colors
 /proc/color_matrix_saturation(value)
@@ -127,12 +78,6 @@ list(0.393,0.349,0.272,0, 0.769,0.686,0.534,0, 0.189,0.168,0.131,0, 0,0,0,1, 0,0
 	var/B = round(LUMA_B * inv, 0.001)
 
 	return list(R + value,R,R,0, G,G + value,G,0, B,B,B + value,0, 0,0,0,1, 0,0,0,0)
-
-//Changes distance colors have from rgb(127,127,127) grey
-//1 is identity. 0 makes everything grey >1 blows out colors and greys
-/proc/color_matrix_contrast(value)
-	var/add = (1 - value) / 2
-	return list(value,0,0,0, 0,value,0,0, 0,0,value,0, 0,0,0,1, add,add,add,0)
 
 //Moves all colors angle degrees around the color wheel while maintaining intensity of the color and not affecting greys
 //0 is identity, 120 moves reds to greens, 240 moves reds to blues
@@ -166,9 +111,9 @@ round(cos_inv_third+sqrt3_sin, 0.001), round(cos_inv_third-sqrt3_sin, 0.001), ro
 //Returns a matrix addition of A with B
 /proc/color_matrix_add(list/A, list/B)
 	if(!istype(A) || !istype(B))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	if(A.len != 20 || B.len != 20)
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	var/list/output = list()
 	output.len = 20
 	for(var/value in 1 to 20)
@@ -178,9 +123,9 @@ round(cos_inv_third+sqrt3_sin, 0.001), round(cos_inv_third-sqrt3_sin, 0.001), ro
 //Returns a matrix multiplication of A with B
 /proc/color_matrix_multiply(list/A, list/B)
 	if(!istype(A) || !istype(B))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	if(A.len != 20 || B.len != 20)
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	var/list/output = list()
 	output.len = 20
 	var/x = 1
@@ -200,7 +145,7 @@ round(cos_inv_third+sqrt3_sin, 0.001), round(cos_inv_third-sqrt3_sin, 0.001), ro
 			CRASH("Invalid/unsupported color format argument in color_to_full_rgba_matrix()")
 		return list(L[1]/255,0,0,0, 0,L[2]/255,0,0, 0,0,L[3]/255,0, 0,0,0,L.len>3?L[4]/255:1, 0,0,0,0)
 	else if(!islist(color)) //invalid format
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	var/list/L = color
 	switch(L.len)
 		if(3 to 5) // row-by-row hexadecimals

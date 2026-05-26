@@ -1552,7 +1552,7 @@ SUBSYSTEM_DEF(gamemode)
 		if(!roundstart)
 			if(living.patron)
 				GLOB.patron_follower_counts[living.patron.name]++
-				if(living.job == "Monarch")
+				if(living.job == JOB_MONARCH)
 					force_set_round_statistic(STATS_MONARCH_PATRON, living.patron.name)
 		if(living.mind.has_antag_datum(/datum/antagonist/werewolf))
 			record_round_statistic(STATS_WEREVOLVES)
@@ -1564,7 +1564,7 @@ SUBSYSTEM_DEF(gamemode)
 			var/mob/living/carbon/human/human_mob = client.mob
 			current_valid_humans += human_mob
 			record_round_statistic(STATS_TOTAL_POPULATION)
-			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(TRUE))
+			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(INCLUDE_POCKETS))
 				if(current_item.type in list(/obj/item/clothing/neck/psycross, /obj/item/clothing/neck/psycross/silver, /obj/item/clothing/neck/psycross/gold))
 					record_round_statistic(STATS_PSYCROSS_USERS)
 					break

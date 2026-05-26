@@ -9,6 +9,7 @@
 	throw_speed = 1
 	throw_range = 7
 	resistance_flags = FLAMMABLE
+	item_weight = 65 GRAMS
 
 /obj/item/teleportation_scroll/apprentice
 	name = "lesser scroll of teleportation"
@@ -59,7 +60,7 @@
 	smoke.start()
 	var/list/L = list()
 	for(var/turf/T in get_area_turfs(thearea.type))
-		if(!is_blocked_turf(T))
+		if(!T.is_blocked_turf())
 			L += T
 
 	if(!L.len)

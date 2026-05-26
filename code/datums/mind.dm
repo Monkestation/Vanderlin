@@ -282,7 +282,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/transfer_to(mob/new_character, force_key_move = 0)
 	if(current)	// remove ourself from our old body's mind variable
 		current.mind = null
-		UnregisterSignal(current, COMSIG_MOB_DEATH)
+		UnregisterSignal(current, COMSIG_LIVING_DEATH)
 		SStgui.on_transfer(current, new_character)
 
 	if(!language_holder)
@@ -313,7 +313,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
 
-	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
+	RegisterSignal(current, COMSIG_LIVING_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
 		current.key = key		//now transfer the key to link the client to our new body
 	current.update_fov_angles()
@@ -430,8 +430,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/enslave_mind_to_creator(mob/living/creator)
 	enslaved_to = creator
 
-	current.faction |= creator.faction
-	creator.faction |= current.faction
+	current.add_faction(creator.get_faction())
+	creator.add_faction(current.get_faction())
 
 	if(creator.mind.special_role)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
@@ -827,7 +827,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		return FALSE
 	amt *= GLOB.sleep_experience_modifier
 
-	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+	if(current.has_quirk(/datum/quirk/boon/quick_learner) || current.has_reagent(/datum/reagent/buff/herbal/scholar_focus))
 		amt *= 1.2
 
 	amt *= current.get_skill_exp_multiplier(skill)

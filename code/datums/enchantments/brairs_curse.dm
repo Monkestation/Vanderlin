@@ -23,5 +23,6 @@
 		return
 	if(isliving(target))
 		var/mob/living/carbon/targeted = user
-		targeted.adjustBruteLoss(10)
+		var/obj/item/bodypart/hand = targeted.get_active_hand()
+		hand.bodypart_attacked_by(BCLASS_BITE, 10)
 		to_chat(user, span_notice("[source] gouges you with it's sharp edges!"))

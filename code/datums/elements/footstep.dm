@@ -1,7 +1,7 @@
 
 //Footstep element. Plays footsteps at parents location when it is appropriate.
 /datum/element/footstep
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
 	///A list containing living mobs and the number of steps they have taken since the last time their footsteps were played.
 	var/list/steps_for_living = list()
 	///volume determines the extra volume of the footstep. This is multiplied by the base volume, should there be one.
@@ -56,7 +56,7 @@
 	if(!istype(turf))
 		return
 
-	if(!turf.footstep || source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED))
+	if(source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED) || CHECK_MOVE_LOOP_FLAGS(source, MOVEMENT_LOOP_OUTSIDE_CONTROL))
 		return
 
 	if(source.body_position == LYING_DOWN) //play crawling sound if we're lying
@@ -76,13 +76,25 @@
 		steps_for_living[source] = 0
 		steps = 0
 
-	if(steps % 2)
+	if(steps % 2 && !turf.force_footstep_sound)
 		return
 
-	. = list(FOOTSTEP_MOB_SHOE = turf.footstep, FOOTSTEP_MOB_BAREFOOT = turf.barefootstep, FOOTSTEP_MOB_HEAVY = turf.heavyfootstep, FOOTSTEP_MOB_METAL = turf.heavyfootstep, FOOTSTEP_MOB_CLAW = turf.clawfootstep, STEP_SOUND_PRIORITY = STEP_SOUND_NO_PRIORITY)
-	SEND_SIGNAL(source, COMSIG_MOB_PREPARE_STEP_SOUND, .) // Used to override shoe material before turf
-	SEND_SIGNAL(turf, COMSIG_TURF_PREPARE_STEP_SOUND, .)
-	return .
+	var/list/footstep_data = list(
+		FOOTSTEP_MOB_SHOE = turf.footstep,
+		FOOTSTEP_MOB_BAREFOOT = turf.barefootstep,
+		FOOTSTEP_MOB_HEAVY = turf.heavyfootstep,
+		FOOTSTEP_MOB_METAL = turf.heavyfootstep,
+		FOOTSTEP_MOB_CLAW = turf.clawfootstep,
+		STEP_SOUND_PRIORITY = STEP_SOUND_NO_PRIORITY,
+	)
+	var/sigreturn = SEND_SIGNAL(turf, COMSIG_TURF_PREPARE_STEP_SOUND, footstep_data)
+	if(sigreturn & FOOTSTEP_OVERRIDEN)
+		return footstep_data
+	if(isnull(turf.footstep))
+		// The turf has no footstep sound (e.g. open space)
+		// and none of the objects on that turf overrides it
+		return null
+	return footstep_data
 
 /datum/element/footstep/proc/play_simplestep(mob/living/source, atom/oldloc, direction, forced)
 	SIGNAL_HANDLER
@@ -138,14 +150,17 @@
 	var/feetCover = (H.wear_armor && (H.wear_armor.body_parts_covered & FEET)) || (H.wear_pants && (H.wear_pants.body_parts_covered & FEET))
 	if ((humshoes && !humshoes?.is_barefoot) || feetCover)
 		// we are wearing shoes
-
 		var/shoestep_type = prepared_steps[FOOTSTEP_MOB_SHOE]
+		if(!shoestep_type)
+			return
 		heard_clients = playsound(source, pick(footstep_sounds[shoestep_type][1]),
 			footstep_sounds[shoestep_type][2] * volume * volume_multiplier,
 			TRUE,
 			footstep_sounds[shoestep_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary)
 	else
 		var/barefoot_type = prepared_steps[FOOTSTEP_MOB_BAREFOOT]
+		if(!barefoot_type)
+			return
 
 		var/list/bare_footstep_sounds = GLOB.barefootstep
 		heard_clients = playsound(source, pick(bare_footstep_sounds[barefoot_type][1]),
@@ -153,6 +168,7 @@
 			TRUE,
 			bare_footstep_sounds[barefoot_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary)
 
-	if(heard_clients)
+	if(!length(heard_clients))
 		return
-	// 	play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)
+	if(!source.rogue_sneaking && !HAS_TRAIT(source, TRAIT_LIGHT_STEP))
+		play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)

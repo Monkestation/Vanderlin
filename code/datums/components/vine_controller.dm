@@ -32,11 +32,11 @@
 		mutativeness = potency / 10
 
 /datum/component/vine_controller/RegisterWithParent()
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(endvines))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(endvines))
 
 /datum/component/vine_controller/UnregisterFromParent(datum/target, sig_type_or_types)
 	. = ..()
-	UnregisterSignal(parent, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(parent, COMSIG_QDELETING)
 
 /datum/component/vine_controller/vv_get_dropdown()
 	. = ..()
@@ -56,7 +56,7 @@
 /datum/component/vine_controller/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
 	for(var/obj/structure/vine/vine in vines)
-		UnregisterSignal(vine, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(vine, COMSIG_QDELETING)
 	vines = null
 	growth_queue = null
 	return ..()
@@ -67,7 +67,7 @@
 	var/obj/structure/vine/new_vine = new vine_type(location)
 	growth_queue += new_vine
 	vines += new_vine
-	RegisterSignal(new_vine, COMSIG_PARENT_QDELETING, PROC_REF(on_vine_deleted))
+	RegisterSignal(new_vine, COMSIG_QDELETING, PROC_REF(on_vine_deleted))
 	if(length(muts))
 		for(var/datum/vine_mutation/M in muts)
 			M.add_mutation_to_vinepiece(new_vine)
@@ -89,7 +89,7 @@
 /datum/component/vine_controller/proc/on_vine_deleted(obj/structure/vine/deleted_vine)
 	vines -= deleted_vine
 	growth_queue -= deleted_vine
-	UnregisterSignal(deleted_vine, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(deleted_vine, COMSIG_QDELETING)
 	if(!length(vines))
 		qdel(src)
 

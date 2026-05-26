@@ -7,6 +7,7 @@
 	multiple_accents = list(
 		"Dwarf Accent" = ACCENT_DWARF,
 		"Ossland Accent" = ACCENT_OSSLAND,
+		"Grenzelhoft Accent" = ACCENT_GRENZ,
 	)
 	changesource_flags = WABBAJACK
 	native_language = "Dwarfish"

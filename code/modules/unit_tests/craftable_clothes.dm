@@ -18,7 +18,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/roguehood/priest, // unattainable
 		/obj/item/clothing/face/facemask/prisoner,
 		/obj/item/clothing/head/priestmask, // unattainable
-		/obj/item/clothing/head/priesthat, // unattainable
 		/obj/item/clothing/head/leather/inqhat/vigilante, //Renegade Bullshit
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
@@ -182,6 +181,10 @@ abstract types are automatically excluded.
 	// artificer recipes
 	for(var/datum/artificer_recipe/recipe as anything in subtypesof(/datum/artificer_recipe))
 		clothes_list -= initial(recipe.created_item)
+
+	// artificer recipes
+	for(var/datum/arcyne_crafting_recipe/recipe as anything in subtypesof(/datum/arcyne_crafting_recipe))
+		clothes_list -= initial(recipe.output)
 
 	if(!clothes_list.len)
 		return

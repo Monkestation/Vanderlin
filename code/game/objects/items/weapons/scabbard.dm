@@ -40,6 +40,7 @@
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/scabbard/knife/apply_components()
 	. = ..()
@@ -63,12 +64,14 @@
 	desc = "A slingable sheath made of leather, enamored with elaborate silver decorations, often seen on the hips of nobles"
 	icon_state = "nsheath"
 	sellprice = 50
+	item_weight = 100 GRAMS
 
 /obj/item/weapon/scabbard/knife/royal
 	name = "gold decorated knife sheath"
 	desc = "A slingable sheath made of leather, enamored with exquisite golden decorations, often seen on the hips of royalty"
 	icon_state = "rsheath"
 	sellprice = 100
+	item_weight = 120 GRAMS
 
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
@@ -82,6 +85,7 @@
 	anvilrepair = /datum/attribute/skill/craft/carpentry
 	associated_skill = /datum/attribute/skill/combat/swords
 	sellprice = 10
+	item_weight = 300 GRAMS
 
 /obj/item/weapon/scabbard/sword/apply_components()
 	. = ..()
@@ -105,12 +109,14 @@
 	desc = "A scabbard designed to hold a sword. This one is decorated on a silver platter."
 	icon_state = "nscabbard"
 	sellprice = 50
+	item_weight = 350 GRAMS
 
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is lined with golden fittings, fit for a royal."
 	icon_state = "rscabbard"
 	sellprice = 100
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/scabbard/cane
 	name = "fancy cane"
@@ -125,6 +131,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/attribute/skill/craft/carpentry
 	associated_skill = /datum/attribute/skill/combat/swords
+	item_weight = 500 GRAMS
 
 /obj/item/weapon/scabbard/cane/courtphysician
 	name = "fancy cane"
@@ -213,6 +220,7 @@
 	associated_skill = /datum/attribute/skill/combat/shields
 	max_integrity = INTEGRITY_STANDARD
 	sellprice = 10
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/scabbard/kazengun/apply_components()
 	. = ..()
@@ -225,6 +233,7 @@
 	icon_state = "kazscab_steel"
 	item_state = "kazscab_steel"
 	max_integrity = INTEGRITY_STRONG
+	item_weight = 450 GRAMS
 
 /obj/item/weapon/scabbard/kazengun/gold
 	name = "gold-stained scabbard"
@@ -232,3 +241,4 @@
 	icon_state = "kazscab_gold"
 	item_state = "kazscab_gold"
 	max_integrity = INTEGRITY_STRONGEST
+	item_weight = 500 GRAMS

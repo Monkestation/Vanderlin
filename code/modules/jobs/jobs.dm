@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	/datum/job/archivist::title,
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
+	/datum/job/sunlord::title,
 ))
 GLOBAL_PROTECT(noble_positions)
 
@@ -24,6 +25,7 @@ GLOBAL_LIST_INIT(noble_courthand_positions, list(
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
 	/datum/job/adventurer/courtagent::title,
+	/datum/job/sunlord::title,
 ))
 GLOBAL_PROTECT(noble_positions)
 
@@ -33,7 +35,6 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/lieutenant::title,
 	/datum/job/men_at_arms::title,
 	/datum/job/gatemaster::title,
-	/datum/job/jailor::title,
 	/datum/job/dungeoneer::title,
 	/datum/job/town_elder::title,
 	/datum/job/forestwarden::title,
@@ -57,6 +58,7 @@ GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
+	/datum/job/sundweller::title,
 	))
 GLOBAL_PROTECT(church_positions)
 
@@ -79,7 +81,6 @@ GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/matron::title,
 	/datum/job/feldsher::title,
 	/datum/job/apothecary::title,
-	/datum/job/scribe::title,
 	/datum/job/tomb_warden::title,
 	/datum/job/butler::title,
 	/datum/job/persistence/carpenter::title,
@@ -141,7 +142,7 @@ GLOBAL_LIST_INIT(allmig_positions, list(
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(
-	"Adventurer",
+	JOB_ADVENTURER,
 	))
 
 GLOBAL_LIST_INIT(test_positions, list(

@@ -10,6 +10,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/adjust_personal_see_leylines,
 	/client/proc/spawn_liquid,
 	/client/proc/borbop_oopsie,
+	/client/proc/nya,
 	/client/proc/spawn_faction_trader,
 	/client/proc/crop_nutrient_debug,
 	/client/proc/remove_liquid,
@@ -201,8 +202,6 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/test_movable_UI,
 	/client/proc/test_snap_UI,
 	/client/proc/check_bomb_impacts,
-	/client/proc/recipe_tree_debug_menu,
-	/client/proc/family_tree_debug_menu,
 	/client/proc/debug_loot_tables,
 	/client/proc/debug_influences,
 	/client/proc/get_dynex_power,		//*debug verbs for dynex explosions.

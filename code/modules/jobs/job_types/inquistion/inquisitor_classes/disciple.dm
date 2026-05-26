@@ -47,6 +47,7 @@
 
 /datum/job/advclass/sacrestant/disciple/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Disciple")
 
 	var/datum/species/species = spawned.dna?.species
@@ -54,15 +55,15 @@
 		species.native_language = "Old Psydonic"
 		species.accent_language = species.get_accent(species.native_language)
 
-	if(!spawned.mind)
-		return
+/datum/job/advclass/sacrestant/disciple/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	// I Hate
 	var/static/list/weapons = list(
 		"Discipline - Unarmed" = /obj/item/clothing/gloves/bandages/pugilist,
 		"Katar" = /obj/item/weapon/katar/psydon,
 		"Knuckledusters" = /obj/item/weapon/knuckles/psydon,
-		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff,
+		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "TAKE UP PSYDON'S ARMS!")
 	spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE) // this will fail on the unarmed discipline
@@ -77,7 +78,6 @@
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Quarterstaff")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/disciple/quarterstaff)
-
 
 /datum/outfit/disciple
 	name = "Disciple (Sacrestants)"

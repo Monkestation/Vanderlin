@@ -15,7 +15,7 @@
 
 	//Already doing something or don't need healing
 	//And not in some enviro that will tick damage
-	if((pawn.doing()) || (pawn.get_bleed_rate() == 0) || (pawn.getBruteLoss() == 0) || (!cur_turf.can_traverse_safely(pawn)))
+	if((pawn.doing()) || (pawn.get_bleed_rate() == 0) || (pawn.getBruteLoss() == 0) || (!cur_turf.can_cross_safely(pawn)))
 		return
 	controller.queue_behavior(behavior, heal_message, bleed_clot, brute_heal)
 

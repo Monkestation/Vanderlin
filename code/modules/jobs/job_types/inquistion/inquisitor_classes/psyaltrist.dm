@@ -38,16 +38,18 @@
 		TRAIT_FOREIGNER,
 		)
 
-	spells = list(/datum/action/cooldown/spell/vicious_mockery)
+	spells = list(/datum/action/cooldown/spell/projectile/vicious_mockery)
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
 /datum/job/advclass/sacrestant/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
+	spawned.grant_inspiration()
 
-	spawned.inspiration = new /datum/inspiration(spawned)
-
+/datum/job/advclass/sacrestant/psyaltrist/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,

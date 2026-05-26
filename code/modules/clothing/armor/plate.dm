@@ -3,8 +3,7 @@
 	desc = "Steel plate armor with shoulder guards. An incomplete, bulky set of excellent armor."
 	icon_state = "halfplate"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
@@ -18,6 +17,7 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
 	stand_speed_reduction = 1.2
+	item_weight = 9 KILOGRAMS
 
 /obj/item/clothing/armor/plate/Initialize()
 	. = ..()
@@ -45,7 +45,7 @@
 
 	armor = ARMOR_PLATE
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 12 * STEEL_MULTIPLIER
+	item_weight = 17 KILOGRAMS
 
 /obj/item/clothing/armor/plate/full/iron
 	name = "iron plate armor"
@@ -57,7 +57,7 @@
 
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 12 * IRON_MULTIPLIER
+	item_weight = 17 KILOGRAMS
 
 //................ Rusted Half-plate ............... //
 /obj/item/clothing/armor/plate/rust
@@ -72,7 +72,7 @@
 	sellprice = VALUE_IRON_ARMOR/2
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STANDARD
-	item_weight = 12 * IRON_MULTIPLIER
+	item_weight = 8.75 KILOGRAMS
 
 
 /obj/item/clothing/armor/plate/blkknight
@@ -86,7 +86,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
-	item_weight = 12 * BLACKSTEEL_MULTIPLIER
+	item_weight = 20.45 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
 
@@ -148,7 +148,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor = ARMOR_PLATE_SILVER
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 12 * SILVER_MULTIPLIER
+	item_weight = 22 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)

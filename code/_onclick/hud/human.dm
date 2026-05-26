@@ -46,11 +46,6 @@
 
 	//Rogue Slots /////////////////////////////////
 
-	scannies = new /atom/movable/screen/scannies(null, src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70
-
 	action_intent = new /atom/movable/screen/act_intent/rogintent(null, src)
 	action_intent.screen_loc = rogueui_intents
 	static_inventory += action_intent
@@ -81,7 +76,7 @@
 	give_intent = new /atom/movable/screen/give_intent(null, src)
 	static_inventory += give_intent
 
-	backhudl =  new /atom/movable/screen/backhudl(null, src)
+	backhudl =  new /atom/movable/screen/backhudl/human(null, src)
 	static_inventory += backhudl
 
 	hsover =  new /atom/movable/screen/heatstamover(null, src)
@@ -89,12 +84,6 @@
 
 	mana_over =  new /atom/movable/screen/mana_over(null, src)
 	static_inventory += mana_over
-
-	fov = new /atom/movable/screen/fov(null, src)
-	static_inventory += fov
-
-	fov_blocker = new /atom/movable/screen/fov_blocker(null, src)
-	static_inventory += fov_blocker
 
 	cdleft = new /atom/movable/screen/action_bar/clickdelay/left(null, src)
 	cdleft.screen_loc = "WEST-3:-16,SOUTH+7"

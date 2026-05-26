@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 	set hidden = FALSE
 	if(!holder)
 		return
-	GLOB.OOC_COLOR = sanitize_ooccolor(newColor)
+	GLOB.OOC_COLOR = sanitize_color(newColor)
 	if(!check_rights(0))
 		return
 
@@ -322,7 +322,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 			to_chat(usr, span_warning("Invalid pronoun: [pronoun]. Valid pronouns are: [GLOB.oocpronouns_valid.Join(", ")]"))
 			return FALSE
 
-	if (length(pronouns) != length(uniqueList(pronouns)))
+	if (length(pronouns) != length(unique_list(pronouns)))
 		to_chat(usr, span_warning("You cannot use the same pronoun multiple times."))
 		return FALSE
 

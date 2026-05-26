@@ -10,7 +10,7 @@
 	icon_state = "unknown"
 	layer = AREA_LAYER
 	//Keeping this on the default plane, GAME_PLANE, will make area overlays fail to render on FLOOR_PLANE.
-	plane = BLACKNESS_PLANE
+	plane = AREA_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	invisibility = INVISIBILITY_LIGHTING
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
@@ -92,6 +92,8 @@
 
 	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
+	/// Used in `hole.dm`, grants bonus to a grave if buried here.
+	var/burial_grounds = FALSE
 
 /**
  * A list of teleport locations
@@ -422,11 +424,11 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /**
  * Called when an atom exits an area
  *
- * Sends signals COMSIG_AREA_EXITED and COMSIG_EXIT_AREA (to the atom)
+ * Sends signals COMSIG_AREA_EXITED and COMSIG_MOVABLE_EXITED_AREA (to the atom)
  */
-/area/Exited(atom/movable/gone, atom/new_loc)
-	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, new_loc)
-	SEND_SIGNAL(gone, COMSIG_EXIT_AREA, src, new_loc) //The atom that exits the area
+/area/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, direction)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_EXITED_AREA, src, direction)
 
 /**
  * Reset the played var to false on the client

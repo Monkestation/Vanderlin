@@ -6,20 +6,22 @@
 		TAG_COMBAT,
 		TAG_VILLAIN,
 	)
+
+	max_occurrences = 0
+
 	roundstart = TRUE
 	antag_flag = ROLE_PREBEL
 	shared_occurence_type = SHARED_HIGH_THREAT
 
 	base_antags = 1
 	maximum_antags = 4
+	min_players = (LOWPOP_THRESHOLD+5) * READYUP_AVG
 
 	earliest_start = 0 SECONDS
+	weight = 6
 
 	typepath = /datum/round_event/antagonist/solo/rebel
 	antag_datum = /datum/antagonist/prebel/head
-
-	min_players = LOWPOP_THRESHOLD + 10
-	weight = 6
 
 	restricted_roles = list(
 		/datum/job/lord,

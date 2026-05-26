@@ -936,10 +936,23 @@
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/vault)
 "ga" = (
-/obj/structure/table/wood/reinforced_alt{
-	dir = 8
-	},
-/obj/item/storage/belt/pouch/coins/poor,
+/obj/structure/closet/crate/crafted_closet/lord,
+/obj/item/clothing/face/spectacles/sglasses,
+/obj/item/clothing/face/spectacles,
+/obj/item/clothing/face/exoticsilkmask,
+/obj/item/clothing/armor/gambeson/arming,
+/obj/item/clothing/cloak/eastcloak2,
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/head/courtierhat,
+/obj/item/clothing/shoes/ridingboots,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/face/spectacles/inqglasses,
+/obj/item/clothing/shirt/undershirt/eastshirt2,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/armor/basiceast/crafteast,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/head/helmet/leather/tricorn,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
 "gc" = (
@@ -1324,7 +1337,7 @@
 /turf/open/openspace,
 /area/ship/topdeck)
 "is" = (
-/obj/effect/landmark/start/mercenarylate{
+/obj/effect/landmark/start/late/mercenary{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -2448,12 +2461,6 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/ship/nobledeck)
-"qB" = (
-/obj/effect/landmark/start/nightmaiden{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/ship/middeck)
 "qE" = (
 /obj/effect/landmark/start/cook{
 	dir = 4
@@ -2897,7 +2904,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "ta" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
 "tb" = (
@@ -3051,7 +3058,7 @@
 	dir = 1;
 	pixel_y = 14
 	},
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/twig,
 /area/outdoors/beach)
 "ud" = (
@@ -5184,6 +5191,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
+/obj/item/storage/belt/pouch/coins/poor,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
 "IZ" = (
@@ -6503,7 +6511,7 @@
 /area/ship/middeck)
 "RA" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/nightman{
+/obj/effect/landmark/start/apothecary{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/chevron,
@@ -6517,9 +6525,6 @@
 "RC" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
-	},
-/obj/effect/landmark/start/nightmaiden{
-	dir = 1
 	},
 /turf/open/floor/churchrough,
 /area/ship/middeck)
@@ -7864,7 +7869,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/landmark/start/orphanlate,
+/obj/effect/landmark/start/late/orphan,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
 "ZK" = (
@@ -13949,7 +13954,7 @@ RC
 tL
 uw
 Kc
-qB
+Kc
 kM
 Ve
 tL

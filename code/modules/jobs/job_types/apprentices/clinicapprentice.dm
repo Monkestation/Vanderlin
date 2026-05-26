@@ -25,7 +25,7 @@
 	)
 
 /datum/job/clinicapprentice
-	title = "Clinic Apprentice"
+	title = JOB_CLINIC_APP
 	tutorial = "You've been taken under as an apprentice by the Feldsher and Apothecary. \
 	You're both an assistant and student, helping the two of them in the more menial tasks. \
 	You hope to one dae open a Clinic of your own. \
@@ -70,10 +70,10 @@
 	exp_types_granted  = list(EXP_TYPE_MEDICAL)
 
 	skill_multipliers = list(/datum/attribute/skill/misc/medicine = 1.25, /datum/attribute/skill/craft/alchemy = 1.25)
-
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/clinicapprentice
-	name = "Clinic Apprentice"
+	name = JOB_CLINIC_APP
 	head = /obj/item/clothing/head/roguehood/colored/black
 	backl = /obj/item/storage/backpack/satchel/surgbag/shit
 	shoes = /obj/item/clothing/shoes/simpleshoes

@@ -412,7 +412,6 @@
 /obj/structure/spider/stickyweb/mirespider
 	opacity = 0
 	pass_flags = LETPASSTHROW
-	debris = null
 
 /obj/structure/spider/stickyweb/mirespider/CanPass(atom/movable/mover, turf/target)
 	. = ..()

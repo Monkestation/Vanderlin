@@ -104,6 +104,28 @@
 	desc = span_green("Down with the tyranny!")
 
 
+//Grave buffs.
+
+/datum/stress_event/saw_grave_1
+	stress_change = 0
+	desc = span_green("Better them than me.")
+	timer = 5 MINUTES
+
+/datum/stress_event/saw_grave_2
+	stress_change = -1
+	desc = span_green("It's good to see the dead treated with proper respect.")
+	timer = 5 MINUTES
+
+/datum/stress_event/saw_grave_3
+	stress_change = -1
+	desc = span_green("The dead rest easy here.")
+	timer = 8 MINUTES
+
+/datum/stress_event/saw_grave_4
+	stress_change = -2
+	desc = span_green("Whoever lies here must have been truly beloved...")
+	timer = 10 MINUTES
+
 //Hygiene
 
 /datum/stress_event/clean
@@ -424,3 +446,8 @@
 	timer = 5 MINUTES
 	stress_change = -5
 	desc = span_briar("I stare at Noc, and He stares back...")
+
+/datum/stress_event/xylix_laughed
+	timer = 10 MINUTES
+	stress_change = -5
+	desc = SPAN_GOD_XYLIX("Oh frabjous dae, calooh callay! The Silver-Tongue's guffaw keeps my troubles at bay!")

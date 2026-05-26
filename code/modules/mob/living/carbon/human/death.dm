@@ -42,6 +42,7 @@
 
 	if(client || mind)
 		record_round_statistic(STATS_DEATHS)
+		add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_DEATH, 1)
 		var/area_of_death = lowertext(get_area_name(src))
 		if(area_of_death == "wilderness")
 			record_round_statistic(STATS_FOREST_DEATHS)
@@ -63,19 +64,20 @@
 				zombie_check()
 
 	stop_sound_channel(CHANNEL_HEARTBEAT)
-	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
-	if(H)
-		H.beat = BEAT_NONE
+	pulse = PULSE_NONE
+	for(var/thing in getorganslotlist(ORGAN_SLOT_HEART))
+		var/obj/item/organ/heart/heart = thing
+		heart.Stop()
 
-	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
-		MOBTIMER_SET(src, MT_DEATHDIED)
-		if(H in SStreasury.bank_accounts)
-			for(var/obj/structure/fake_machine/camera/C in view(7, src))
-				var/area_name = A.name
-				var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
-				texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
-				SSroguemachine.death_queue += texty
-				break
+		if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
+			MOBTIMER_SET(src, MT_DEATHDIED)
+			if(heart in SStreasury.bank_accounts)
+				for(var/obj/structure/fake_machine/camera/C in view(7, src))
+					var/area_name = A.name
+					var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
+					texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
+					SSroguemachine.death_queue += texty
+					break
 
 		var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
 		if(buckled)
@@ -154,6 +156,7 @@
 	. = ..()
 	if(!.)
 		return
+	pump_heart(forced_pump = 1.3)
 	var/datum/job/human_job = SSjob.GetJob(job)
 	if(human_job)
 		switch(human_job.type)

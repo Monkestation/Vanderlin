@@ -5,6 +5,7 @@
 	cast_range = 1
 	point_cost = 4
 	attunements = list(/datum/attunement/blood)
+	essences = list(/datum/thaumaturgical_essence/water)
 
 /datum/action/cooldown/spell/essence/water_breathing/cast(atom/cast_on)
 	. = ..()
@@ -26,10 +27,10 @@
 
 /datum/status_effect/buff/water_breathing/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_WATER_BREATHING, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_NODROWN, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("You can now breathe underwater."))
 
 /datum/status_effect/buff/water_breathing/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_WATER_BREATHING, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_NODROWN, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("Your ability to breathe underwater fades."))

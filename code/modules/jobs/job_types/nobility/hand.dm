@@ -1,5 +1,5 @@
 /datum/job/hand
-	title = "Hand"
+	title = JOB_HAND
 	tutorial = "You owe everything to your liege. \
 	You are the most trusted of the ruler- their sibling, in fact. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, \
@@ -21,7 +21,7 @@
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600,
 		EXP_TYPE_NOBLE = 300,
@@ -37,16 +37,18 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 /datum/outfit/hand
-	name = "Hand"
+	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	beltr = /obj/item/storage/keyring/hand
 
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_OMMER), 10 SECONDS)
 	// i know this sucks, but due to how job loading is, we can't just get the agents to load before the hand without some reworks
 	if(SSticker.current_state < GAME_STATE_PLAYING)
@@ -89,7 +91,7 @@
 	)
 
 /datum/job/advclass/hand/hand
-	title = "Hand"
+	title = JOB_HAND
 	tutorial = "You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)

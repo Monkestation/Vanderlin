@@ -1,7 +1,7 @@
 // Mobs shouldn't consider their own ambush.
 // This should be it's own system. Please.
 
-GLOBAL_VAR_INIT(ambush_chance_pct, 20) // Please don't raise this over 100 admins :')
+GLOBAL_VAR_INIT(ambush_chance_pct, 10) // Please don't raise this over 100 admins :')
 GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each individual mob being considered for an ambush
 
 /mob/living/proc/ambushable()
@@ -65,7 +65,7 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 		V.mob_timers["ambushlast"] = world.time
 	if(TR)
 		TR.reduce_latent_ambush(1) // Remove one ambush from the ambient pool
-		COOLDOWN_START(TR, natural_ambush, 1 MINUTES)
+		COOLDOWN_START(TR, natural_ambush, 2 MINUTES)
 	var/list/mobs_to_spawn = list()
 	var/mobs_to_spawn_single = FALSE
 	var/max_spawns = 3
@@ -139,12 +139,12 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 		if(ishostile(spawnedmob))
 			var/mob/living/simple_animal/hostile/M = spawnedmob
 			M.del_on_deaggro = 44 SECONDS
-			M.faction += "ambush"
+			M.add_faction("ambush")
 		if(ishuman(spawnedmob))
 			var/mob/living/carbon/human/H = spawnedmob
 			H.del_on_deaggro = 44 SECONDS
 			H.last_aggro_loss = world.time
-			H.faction += "ambush"
+			H.add_faction("ambush")
 			addtimer(CALLBACK(H, PROC_REF(setup_equip_block)), 3 SECONDS)
 			mustype = 2
 	if(!spawns)

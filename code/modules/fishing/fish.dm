@@ -33,6 +33,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2)
+	item_weight = 300 GRAMS //idk about this one chief I'll come back
 
 	/// Flags for fish variables that would otherwise be TRUE/FALSE
 	var/fish_flags = FISH_FLAG_SHOW_IN_CATALOG|FISH_DO_FLOP_ANIM
@@ -271,9 +272,31 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
+/obj/item/reagent_containers/food/snacks/fish/pre_attack_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!HAS_TRAIT(interacting_with, TRAIT_CATCH_AND_RELEASE))
+		return ..()
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		balloon_alert(user, "[p_theyre()] stuck to your hand!")
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	balloon_alert(user, "releasing fish...")
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	balloon_alert(user, "fish released")
+	var/goodbye_text = ""
+	if(status == FISH_DEAD)
+		goodbye_text = "[src] sinks motionlessly into [interacting_with]..."
+	else
+		goodbye_text = "[src] dives into [interacting_with]!"
+	user.visible_message(span_notice("[user] releases [src] into [interacting_with]. [goodbye_text]"), \
+		span_notice("You release [src] into [interacting_with]. [goodbye_text]"), \
+		span_notice("You hear a splash."))
+	released(interacting_with, user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /obj/item/reagent_containers/food/snacks/fish/proc/released(atom/location, mob/living/user)
 	playsound(location, 'sound/effects/splash.ogg', 50)
 	SEND_SIGNAL(location, COMSIG_FISH_RELEASED_INTO, src, user)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, src)
 	qdel(src)
 
 ///Main proc that makes the fish edible.
@@ -322,7 +345,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/get_base_edible_reagents_to_add()
 	var/return_list = list(
 		/datum/reagent/consumable/nutriment = 2,
-		/datum/reagent/blood = 1,
 	)
 	if(required_fluid_type == FISH_FLUID_SALTWATER)
 		return_list[/datum/reagent/flour] = 0.4
@@ -410,7 +432,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	temp_size = round(clamp(gaussian(base_size, size_deviation), average_size * 1/MAX_FISH_DEVIATION_COEFF, average_size * MAX_FISH_DEVIATION_COEFF))
 	var/weight_deviation = 0.4 * base_weight
 	temp_weight = round(clamp(gaussian(base_weight, weight_deviation), average_weight * 1/MAX_FISH_DEVIATION_COEFF, average_weight * MAX_FISH_DEVIATION_COEFF))
-	set_max_size_and_weight(temp_size, temp_weight)
+	set_max_size_and_weight(temp_size, temp_weight, force = TRUE)
 	if(update)
 		update_size_and_weight(temp_size, temp_weight)
 
@@ -450,11 +472,12 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	set_quality(fish_quality)
 
-///Set the maximum size and weight a fish can reach from base size and weight args if they have't been set already.
-/obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight)
-	if(!maximum_size)
+///Set the maximum size and weight a fish can reach from base size and weight args.
+///Always updates if called from randomize_size_and_weight (force = TRUE), otherwise only sets if uninitialized.
+/obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight, force = FALSE)
+	if(!maximum_size || force)
 		maximum_size = min(base_size * 2, average_size * MAX_FISH_DEVIATION_COEFF)
-	if(!maximum_weight)
+	if(!maximum_weight || force)
 		maximum_weight = min(base_weight * 2, average_weight * MAX_FISH_DEVIATION_COEFF)
 
 ///Updates weight and size, along with weight class, number of fillets you can get and grind results.
@@ -479,10 +502,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 			w_class = WEIGHT_CLASS_NORMAL
 		if(FISH_SIZE_NORMAL_MAX to FISH_SIZE_BULKY_MAX)
 			w_class = WEIGHT_CLASS_BULKY
-		if(FISH_SIZE_BULKY_MAX to FISH_SIZE_HUGE_MAX)
+		if(FISH_SIZE_BULKY_MAX to INFINITY)
 			w_class = WEIGHT_CLASS_HUGE
-		if(FISH_SIZE_HUGE_MAX to INFINITY)
-			w_class = WEIGHT_CLASS_GIGANTIC
 
 	if(size > FISH_SIZE_TWO_HANDS_REQUIRED || (HAS_TRAIT(src, TRAIT_FISH_SHOULD_TWOHANDED) && w_class >= WEIGHT_CLASS_BULKY))
 		AddComponent(/datum/component/two_handed, require_twohands = TRUE)
@@ -761,7 +782,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	if(HAS_TRAIT(src, TRAIT_FISH_STASIS) || status != FISH_ALIVE)
 		return
 	do_fish_process(seconds_per_tick)
-	if(status != FISH_ALIVE || !is_type_in_typecache(loc, SSfishing.fish_safe_turfs_by_type[type]))
+	if(loc && !HAS_TRAIT(loc, TRAIT_CATCH_AND_RELEASE))
 		time_passed_on_safe_turf = 0 SECONDS
 		return
 	time_passed_on_safe_turf += seconds_per_tick SECONDS
@@ -1056,7 +1077,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 				vision_distance = DEFAULT_MESSAGE_RANGE - 3,
 			)
 		var/body_zone = pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
-		user.apply_damage((force * 0.2) + w_class * 2, BRUTE, body_zone, user.run_armor_check(body_zone))
+		user.apply_damage((force * 0.2) + w_class * 2, BRUTE, body_zone, user.run_armor_check(body_zone), damage_type = BCLASS_BITE)
 		playsound(src,'sound/items/weapons/bite.ogg', 45, TRUE, -1)
 	else
 		if(in_aquarium)
@@ -1234,7 +1255,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, list/modifiers)
 	..()
 	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/cooking))*0.8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))

@@ -91,54 +91,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	to_chat(target, span_userdanger("I am returned to serve. I will obey, so that I may return to rest."))
 	to_chat(target, span_userdanger("My master is [user]."))
 
-/datum/ritual/servantry/thecall
-	name = "The Call"
-	center_requirement = /obj/item/bedsheet
-
-	w_req = /obj/item/bodypart/l_leg
-	e_req = /obj/item/bodypart/r_leg
-
-/datum/ritual/servantry/thecall/invoke(mob/living/user, turf/center)
-	var/obj/item/paper/P = locate() in center
-	if(!P)
-		to_chat(user, span_warning("The ritual requires a parchment with a name."))
-		return
-	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
-	if(!user.mind?.do_i_know(name = paper_name))
-		to_chat(user, span_warning("I don't know anyone by that name."))
-		return
-	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
-		if(HL.real_name != paper_name)
-			continue
-		if(HL == SSticker.rulermob)
-			break
-		if(HL.mind?.assigned_role.title in GLOB.church_positions)
-			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
-			to_chat(user, span_danger("They are protected..."))
-			break
-		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
-			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
-			break
-		if(!HAS_TRAIT(HL, TRAIT_NOSLEEP))
-			to_chat(HL, span_userdanger("I'm so sleepy..."))
-			HL.SetSleeping(5 SECONDS)
-		else
-			to_chat(HL, span_userdanger("My eyes close on their own!"))
-			HL.set_eyes_closed(TRUE)
-		addtimer(CALLBACK(src, PROC_REF(kidnap), HL, center), 3 SECONDS)
-		qdel(P)
-		break
-
-/datum/ritual/servantry/thecall/proc/kidnap(mob/living/victim, turf/to_go)
-	if(QDELETED(victim))
-		return
-	if(to_go.is_blocked_turf(TRUE))
-		return
-	victim.SetSleeping(0)
-	to_chat(victim, span_warning("This isn't my bed... Where am I?!"))
-	victim.playsound_local(victim, pick('sound/misc/jumphumans (1).ogg','sound/misc/jumphumans (2).ogg','sound/misc/jumphumans (3).ogg'), 100)
-	victim.forceMove(to_go)
-
 /datum/ritual/servantry/falseappearance
 	name = "Falsified Appearance"
 	center_requirement = /mob/living/carbon/human
@@ -203,34 +155,36 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!P)
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
-	var/obj/item/weapon/knife/dagger/D = locate() in center.contents
-	if(!D)
-		to_chat(user, span_warning("A dagger is required as a sacrifice."))
-		return
 	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
 	if(!user.mind || !user.mind.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
 	var/mob/living/carbon/human/target
 	var/assassin_found = FALSE
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
-		if(HL.stat != DEAD)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
+		if(HL.stat == DEAD)
 			continue
 		if(HL.real_name == paper_name)
 			target = HL
-		else if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
+			continue
+		if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
 			assassin_found = TRUE
 			var/obj/item/weapon/knife/dagger/steel/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
-				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [target.real_name]!\"</span>")
+				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
 	if(!target || !assassin_found)
 		to_chat(user, span_warning("There has been no answer to your call to the Dark Sun. It seems his servants are far from here..."))
 		return
-	ADD_TRAIT(target, TRAIT_ZIZOID_HUNTED, TRAIT_GENERIC) // Gives the victim a trait to track that they are wanted dead.
-	log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
-	to_chat(target, span_danger("My hair stands on end. Has someone just said my name? I should watch my back."))
-	to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
-	qdel(D)
+	if(!target.get_quirk(/datum/quirk/vice/hunted))
+		target.add_quirk(/datum/quirk/vice/hunted)
+		var/datum/quirk/vice/hunted/quirk = target.get_quirk(/datum/quirk/vice/hunted)
+		quirk.desc = "You have been marked for death. You will be hunted and have assassination attempts made against you without any escalation."
+		quirk.customization_value = "Marked for death by the terrible Zizo."
+		to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
+		to_chat(target, span_warningbig("My hair stands on end. Has someone just said my name? I should watch my back."))
+		log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
+	else
+		to_chat(user, span_warning("Your target is already hunted by the Dark Sun's assassins."))
 	qdel(P)
 	target.playsound_local(target, 'sound/magic/marked.ogg', 100)
 
@@ -314,7 +268,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/obj/item/paper/P = locate() in center.contents
 	if(!P)
 		return
-	var/info = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
+	var/info = strip_html_full(P.info, MAX_NAME_LEN)
 	var/input = browser_input_text(user, "To whom do we send this message?", "ZIZO")
 	if(!input)
 		return
@@ -503,7 +457,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
 		return
-	target.faction = list(FACTION_UNDEAD)
+	target.set_faction(FACTION_UNDEAD)
 	target.add_spell(/datum/action/cooldown/spell/gravemark)
 	target.add_spell(/datum/action/cooldown/spell/control_undead)
 	target.add_spell(/datum/action/cooldown/spell/decompose)
@@ -683,16 +637,16 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	if(target.stat != DEAD)
 		return
-	target.take_overall_damage(500)
+	target.take_overall_damage(500, damage_type = BCLASS_PIERCE)
 	center.visible_message(span_danger("[target] is lifted up into the air and multiple scratches, incisions and deep cuts start etching themselves into their skin as all of their internal organs spill on the floor below!"))
 	var/atom/drop_location = target.drop_location()
 	for(var/obj/item/organ/organ as anything in target.internal_organs)
 		organ.Remove(target)
 		organ.forceMove(drop_location)
 	var/obj/item/bodypart/chest/cavity = target.get_bodypart(BODY_ZONE_CHEST)
-	if(cavity.cavity_item)
-		cavity.cavity_item.forceMove(drop_location)
-		cavity.cavity_item = null
+	for(var/atom/movable/item as anything in cavity.cavity_items)
+		item.forceMove(drop_location)
+		cavity.cavity_items -= item
 	for(var/obj/item/bodypart/part as anything in target.bodyparts)
 		part.drop_limb()
 

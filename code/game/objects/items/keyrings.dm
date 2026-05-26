@@ -15,8 +15,16 @@
 	dropshrink = 0.7
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	component_type = /datum/component/storage/concrete/grid/keyring
+	item_weight = 50 GRAMS
 	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
 	var/list/combined_access
+	slot_equipment_priority = list(
+		ITEM_SLOT_NECK,
+		ITEM_SLOT_WRISTS,
+		ITEM_SLOT_HIP,
+		ITEM_SLOT_MOUTH,
+	)
+
 
 /obj/item/storage/keyring/Initialize()
 	. = ..()
@@ -69,7 +77,7 @@
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	refresh_keys()
 
-/obj/item/storage/keyring/Exited(atom/movable/gone, atom/new_loc)
+/obj/item/storage/keyring/Exited(atom/movable/gone, direction)
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	refresh_keys()
@@ -104,7 +112,7 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/lockpickring
-	name = "lockpickring"
+	name = "lockpick ring"
 	desc = "A piece of bent wire to store lockpicking tools. Too bulky for fine work."
 	icon_state = "pickring0"
 	icon = 'icons/roguetown/items/keys.dmi'
@@ -117,6 +125,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK|ITEM_SLOT_MOUTH|ITEM_SLOT_WRISTS
 	experimental_inhand = FALSE
 	dropshrink = 0.7
+	item_weight = 40 GRAMS
 	var/how_many_lockpicks = 9
 
 /obj/item/lockpickring/Initialize()

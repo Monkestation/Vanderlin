@@ -45,7 +45,6 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	blood_data["blood_type"] = sampled_from.get_blood_type().type
 	blood_data["gender"] = sampled_from.gender
 	blood_data["real_name"] = sampled_from.real_name
-	blood_data["factions"] = sampled_from.faction
 
 	blood_data["preferences"] = get_blood_prefs(sampled_from)
 	blood_data["vitae"] = vitae
@@ -101,12 +100,16 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	var/datum/mind/M = sampled_from.mind || sampled_from.last_mind
 	blood_data["mind"] = M
 	blood_data["ckey"] = sampled_from.ckey || ckey(sampled_from.last_mind?.key)
-	blood_data["cloneable"] = !sampled_from.suiciding
+
+	// If we haven't suicided but the ghost cannot reenter, i.e. we ghosted, don't set ourselves as cloneable
+	var/mob/dead/observer/ghost = sampled_from.get_ghost(TRUE, TRUE)
+	if(!HAS_TRAIT(src, TRAIT_SUICIDED) && (!ghost || ghost.can_reenter_corpse))
+		blood_data["cloneable"] = TRUE
+
 	blood_data["blood_type"] = sampled_from.dna.human_blood_type
 	blood_data["gender"] = sampled_from.gender
 	blood_data["real_name"] = sampled_from.real_name
 	blood_data["features"] = sampled_from.dna.features
-	blood_data["factions"] = sampled_from.faction
 
 	blood_data["preferences"] = get_blood_prefs(sampled_from)
 	blood_data["vitae"] = vitae

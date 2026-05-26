@@ -68,8 +68,10 @@
 	return healed_any
 
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
-/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
-	if(!wound || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
+	if(!wound || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
@@ -178,9 +180,9 @@
 			dam += 10
 
 	var/list/crit_classes
-	if(bclass in GLOB.fracture_bclasses)
+	if(bclass in FRACTURE_BCLASSES)
 		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
+	if(bclass in ARTERY_BCLASSES)
 		LAZYADD(crit_classes, "artery")
 
 	if(!LAZYLEN(crit_classes))
@@ -199,7 +201,7 @@
 				LAZYADD(attempted_wounds, fracture_type)
 		if("artery")
 			if(user)
-				if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
+				if((bclass in ARTERY_STRONG_BCLASSES) && istype(user.rmb_intent, /datum/rmb_intent/strong))
 					dam += 30
 				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
