@@ -152,7 +152,7 @@
 	)
 
 	pack_contents = list(
-		/obj/item/clothing/head/fisherhat/head = ITEM_SLOT_HEAD,
+		/obj/item/clothing/head/fisherhat = ITEM_SLOT_HEAD,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/weapon/knife/hunting = ITEM_SLOT_MOUTH,
 		/obj/item/clothing/armor/gambeson/light/striped = ITEM_SLOT_ARMOR,
