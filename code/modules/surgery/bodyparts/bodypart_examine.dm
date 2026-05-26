@@ -231,7 +231,7 @@
 	wound_strings -= null
 	status += wound_strings
 
-	for(var/obj/item/organ/possible_artery in shuffle(getorganslotlist(ORGAN_SLOT_ARTERY)))
+	for(var/obj/item/organ/possible_artery in getorganslotlist(ORGAN_SLOT_ARTERY))
 		if(possible_artery.is_bruised())
 			if(get_cut(ignore_gauze = TRUE))
 				status += span_artery(uppertext("cut [possible_artery.name]"))

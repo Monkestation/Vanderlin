@@ -1279,7 +1279,12 @@
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]w-[BP.body_zone]") //apply wounded overlay
 			limby.alpha = (comparison*255)*2
 			. += limby
-			if(BP.get_bleed_rate())
+			var/artery_bleeding
+			for(var/obj/item/organ/possible_artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
+				if(possible_artery.is_bruised())
+					artery_bleeding = TRUE
+					break
+			if(artery_bleeding || BP.get_bleed_rate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
 		for(var/X in missing_bodyparts_zones)
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb

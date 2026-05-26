@@ -73,7 +73,5 @@
 				if(ghost)
 					to_chat(ghost, span_warning("My funeral rites were undone!"))
 		human.funeral = FALSE
-	if(target.stat < DEAD)
-		target.remove_client_colour(/datum/client_colour/monochrome/death)
 	target.take_bodypart_damage(null, burndam)
 	return TRUE

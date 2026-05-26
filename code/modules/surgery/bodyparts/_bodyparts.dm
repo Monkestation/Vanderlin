@@ -46,6 +46,7 @@
 	var/burnstate = 0
 	var/brute_dam = 0
 	var/burn_dam = 0
+	///The maximum brute OR burn damage a bodypart can take. Damage types have separate caps
 	var/max_damage = 0
 
 	/// Our current stored wound damage multiplier
@@ -1009,7 +1010,7 @@
 	if(surgery_flags & SURGERY_CLAMPED)
 		return set_disabled(BODYPART_DISABLED_CLAMPED)
 	var/total_dam = get_damage()
-	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
+	if((total_dam >= max_damage * 0.9) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
 		return set_disabled(BODYPART_DISABLED_DAMAGE)
 	return set_disabled(BODYPART_NOT_DISABLED)
 

@@ -171,15 +171,17 @@
 /datum/injury/proc/can_autoheal()
 	if(!parent_mob)
 		return FALSE
-	if(parent_mob?.stat == DEAD)
+	if(parent_mob.stat == DEAD)
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
+		return FALSE
+	if(LAZYLEN(embedded_objects))
+		return FALSE
+	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE
 	if(!can_heal())
 		return FALSE
 	if(parent_bodypart.is_retracted())
-		return FALSE
-	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE
 	return ((damage_per_injury() <= autoheal_cutoff) ? TRUE : (is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
 

@@ -197,8 +197,8 @@ DEFINE_BITFIELD(organ_flags, list(
 
 // ~efficiency defines
 #define ORGAN_OPTIMAL_EFFICIENCY 100
-#define ORGAN_BRUISED_EFFICIENCY 80
-#define ORGAN_FAILING_EFFICIENCY 50
+#define ORGAN_BRUISED_EFFICIENCY 50
+#define ORGAN_FAILING_EFFICIENCY 20
 #define ORGAN_DESTROYED_EFFICIENCY 0
 
 // ~organ failure defines
@@ -217,7 +217,7 @@ DEFINE_BITFIELD(organ_flags, list(
 
 #define GET_EFFECTIVE_BLOOD_VOL(num, total_blood_req) (max(num - DEFAULT_TOTAL_BLOOD_REQ + total_blood_req, 0))
 
-//The contant in the rate of reagent transfer on life ticks
+//The constant in the rate of reagent transfer on life ticks
 #define STOMACH_METABOLISM_CONSTANT 0.25
 
 // ~infection levels
