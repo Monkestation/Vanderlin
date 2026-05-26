@@ -61,10 +61,6 @@
 	. = ..()
 	if(prob(20))
 		head = /obj/item/clothing/head/knitcap
-	if(prob(5))
-		beltr = /obj/item/reagent_containers/powder/moondust
-	if(prob(10))
-		beltl = /obj/item/clothing/face/cigarette/rollie/cannabis
 	if(prob(10))
 		cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 	if(prob(10))
