@@ -116,6 +116,17 @@
 
 	if(href_list["switchtab"])
 		current_tab = text2num(href_list["switchtab"])
+	if(href_list["taxes"])
+		var/newtax = input(user, "Set a new tax percentage (1-99)", src, SStreasury.tax_value*100) as null|num
+		if(newtax)
+			if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())
+				return
+			if(findtext(num2text(newtax), "."))
+				return
+			newtax = CLAMP(newtax, 1, 99)
+			SStreasury.tax_value = newtax / 100
+			SStreasury.untaxed_deposits = list()
+			scom_announce("The new tax in Vanderlin shall be [newtax] percent.")
 	if(href_list["import"])
 		var/datum/stock/D = locate(href_list["import"]) in SStreasury.stockpile_datums
 		if(!D)
@@ -425,7 +436,9 @@
 			contents += "<center>Bank<BR>"
 			contents += "--------------<BR>"
 			contents += "Treasury: [SStreasury.treasury_value]m</center><BR>"
+			contents += "Lord's Tax: [SStreasury.tax_value*100]%</center><BR>"
 			contents += "<div style='margin-left:20px;'>"
+			contents += "<a href='byond://?src=\ref[src];taxes=1'>\[Set Taxes\]</a><BR><BR>"
 			contents += "<a href='byond://?src=\ref[src];payroll=1'>\[Pay by Class\]</a><BR><BR>"
 			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
 				if(ishuman(A))
