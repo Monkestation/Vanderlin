@@ -117,7 +117,7 @@
 	if(href_list["switchtab"])
 		current_tab = text2num(href_list["switchtab"])
 	if(href_list["taxes"])
-		var/newtax = input(user, "Set a new tax percentage (1-99)", src, SStreasury.tax_value*100) as null|num
+		var/newtax = input(usr, "Set a new tax percentage (1-99)", src, SStreasury.tax_value*100) as null|num
 		if(newtax)
 			if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())
 				return
