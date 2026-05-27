@@ -119,3 +119,10 @@
   - bugfix: Malum's Anvil Bandit camp route works now.
   aberrantQuesrist:
   - rscadd: Two new masonic tile variants.
+2026-05-26:
+  ModDownloading:
+  - bugfix: Archivist, Polyglot, and Somewhat Polyglot can now speak Osslandic and
+      Halfspeak.
+  realforest2001:
+  - bugfix: Fixed admin hear all.
+  - rscdel: Removed racist cats.
