@@ -433,11 +433,17 @@ class ChatRenderer {
             canon_name = TGUI_CHAT_ATTRIBUTES_TO_PROPS[canon_name];
             outputProps[canon_name] = working_value;
           }
+          const Element = TGUI_CHAT_COMPONENTS[targetName];
+          if (!Element) {
+            logger.error(
+              `Unknown chat component "${targetName}", leaving original HTML`,
+            );
+            continue;
+          }
           const oldHtml = { __html: childNode.innerHTML };
           while (childNode.firstChild) {
             childNode.removeChild(childNode.firstChild);
           }
-          const Element = TGUI_CHAT_COMPONENTS[targetName];
 
           const reactRoot = createRoot(childNode);
 
