@@ -297,6 +297,26 @@
   left: 78%;
 }
 
+.AttributeMenu__sealNode--strength .AttributeMenu__sealNodeName,
+.AttributeMenu__sealNode--perception .AttributeMenu__sealNodeName,
+.AttributeMenu__sealNode--intellect .AttributeMenu__sealNodeName,
+.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeName,
+.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeName,
+.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeName {
+  order: -2;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.AttributeMenu__sealNode--strength .AttributeMenu__sealNodeOrb,
+.AttributeMenu__sealNode--perception .AttributeMenu__sealNodeOrb,
+.AttributeMenu__sealNode--intellect .AttributeMenu__sealNodeOrb,
+.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeOrb,
+.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeOrb,
+.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeOrb {
+  order: -1;
+}
+
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--fallback3 {
   top: 61%;
