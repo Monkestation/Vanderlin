@@ -57,6 +57,12 @@
 	return null
 
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
+	if(isnull(ui))
+		var/datum/tgui/existing_ui = SStgui.get_open_ui(user, src)
+		if(existing_ui)
+			existing_ui.process_status()
+			if(existing_ui.status > UI_CLOSE)
+				return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AttributeMenu")

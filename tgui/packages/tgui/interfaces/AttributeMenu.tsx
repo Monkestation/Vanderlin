@@ -82,34 +82,57 @@ const IconSprite = (props: { icon?: string; size: 'small' | 'big' }) => {
   );
 };
 
-const AttributeSeal = (props: {
+const BodyFigure = () => (
+  <svg className="AttributeMenu__bodyFigure" viewBox="0 0 120 240" aria-hidden="true">
+    <ellipse className="AttributeMenu__figureAura" cx="60" cy="122" rx="25" ry="79" />
+    <circle className="AttributeMenu__figureFill" cx="60" cy="30" r="12" />
+    <path
+      className="AttributeMenu__figureStroke"
+      d="M60 45 L60 102 M43 63 L60 58 L77 63 M46 89 L60 103 L74 89 M60 102 L46 157 M60 102 L74 157 M46 157 L39 208 M74 157 L81 208"
+    />
+    <path
+      className="AttributeMenu__figureTrace"
+      d="M43 63 C35 85 34 112 42 139 M77 63 C86 85 86 112 78 139 M48 78 C55 83 65 83 72 78 M47 119 C55 126 66 126 74 119"
+    />
+    <path
+      className="AttributeMenu__figureVeins"
+      d="M60 58 L54 88 L60 103 L66 88 L60 58 M53 132 L46 157 M67 132 L74 157"
+    />
+  </svg>
+);
+
+const AttributeRingSeal = (props: {
   attribute: Attribute;
   selectedName?: string | null;
   act: any;
+  index: number;
 }) => {
-  const { attribute, selectedName, act } = props;
+  const { attribute, selectedName, act, index } = props;
   const selected = selectedName === attribute.name;
+  const ringClass = `AttributeMenu__ringSeal AttributeMenu__ringSeal--${index % 8}${
+    selected ? ' is-selected' : ''
+  }`;
 
   return (
-    <Tooltip content={attribute.desc || attribute.name} position="right">
+    <Tooltip content={attribute.desc || attribute.name} position="bottom">
       <button
-        className={`AttributeMenu__seal${selected ? ' is-selected' : ''}`}
+        className={ringClass}
         onClick={() => act('inspect_closely', { attribute_name: attribute.name })}
         type="button"
       >
-        <span className="AttributeMenu__wax">
+        <span className="AttributeMenu__ringWax">
           <IconSprite icon={attribute.icon} size="small" />
         </span>
-        <span className="AttributeMenu__sealText">
-          <span className="AttributeMenu__sealName">
+        <span className="AttributeMenu__ringText">
+          <span className="AttributeMenu__ringName">
             {attribute.name}
             {attribute.shorthand && (
-              <span className="AttributeMenu__sealShort"> ({attribute.shorthand})</span>
+              <span className="AttributeMenu__ringShort"> ({attribute.shorthand})</span>
             )}
           </span>
-          <span className="AttributeMenu__sealSub">Core attribute</span>
+          <span className="AttributeMenu__ringSub">Core attribute</span>
         </span>
-        <span className={`AttributeMenu__value ${valueTone(attribute.value, attribute.raw_value)}`}>
+        <span className={`AttributeMenu__ringValue ${valueTone(attribute.value, attribute.raw_value)}`}>
           {valuePair(attribute)}
         </span>
       </button>
@@ -131,18 +154,27 @@ const CoreAttributes = (props: {
         <div className="AttributeMenu__title">Core Attributes</div>
       </header>
       <div className="AttributeMenu__divider" />
-      <div className="AttributeMenu__scroll AttributeMenu__sealList">
+      <div className="AttributeMenu__constellation">
         {!stats.length && (
           <div className="AttributeMenu__empty">No attributes recorded.</div>
         )}
-        {stats.map((stat) => (
-          <AttributeSeal
-            key={stat.name}
-            attribute={stat}
-            selectedName={selectedName}
-            act={act}
-          />
-        ))}
+        {!!stats.length && (
+          <div className="AttributeMenu__ringStage">
+            <div className="AttributeMenu__ringOuter" />
+            <div className="AttributeMenu__ringMiddle" />
+            <div className="AttributeMenu__ringInner" />
+            <BodyFigure />
+            {stats.map((stat, index) => (
+              <AttributeRingSeal
+                key={stat.name}
+                attribute={stat}
+                selectedName={selectedName}
+                act={act}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -427,10 +459,10 @@ export const AttributeMenu = () => {
   return (
     <Window
       title={parent ? `${parent} Character Ledger` : 'Character Ledger'}
-      width={980}
-      height={560}
+      width={1180}
+      height={720}
     >
-      <Window.Content>
+      <Window.Content fitted>
         <Box className="AttributeMenu">
           <div className="AttributeMenu__backdrop">
             <CoreAttributes stats={stats} selectedName={selectedName} act={act} />
