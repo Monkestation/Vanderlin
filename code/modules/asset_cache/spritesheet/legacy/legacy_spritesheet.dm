@@ -418,6 +418,7 @@
 
 /datum/asset/spritesheet/attributes_big
 	name = "attributes_big"
+	load_immediately = TRUE
 
 /datum/asset/spritesheet/attributes_big/create_spritesheets()
 	var/list/to_insert = list()
@@ -439,6 +440,7 @@
 
 /datum/asset/spritesheet/attributes_small
 	name = "attributes_small"
+	load_immediately = TRUE
 
 /datum/asset/spritesheet/attributes_small/create_spritesheets()
 	var/list/to_insert = list()

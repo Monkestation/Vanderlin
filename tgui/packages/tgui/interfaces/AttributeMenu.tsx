@@ -1,7 +1,8 @@
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
-import { TutorialOverlay, TutorialStep, PP } from '../interfaces/_common/TutorialOverlay';
+
+type AttributeValue = number | string | null;
 
 interface AttributeModifier {
   id: string;
@@ -13,8 +14,8 @@ interface Attribute {
   shorthand?: string;
   desc?: string;
   icon?: string;
-  value: number | null;
-  raw_value: number | null;
+  value: AttributeValue;
+  raw_value: AttributeValue;
   difficulty?: string;
   governing_attribute?: string;
   default_value?: number;
@@ -35,373 +36,414 @@ interface AttributeData {
   closely_inspected_attribute: Attribute | null;
 }
 
-const TUTORIAL_STEPS: TutorialStep[] = [
-  {
-    title: 'Welcome to the Attribute Menu!',
-    body: "This menu shows your character's stats and skills at a glance. Let's walk through what everything means.",
-    popupAnchor: 'center',
-  },
-  {
-    title: 'Stats Panel',
-    body: 'The left column lists your core attributes: Strength, Perception, Intelligence, etc. These fundamental numbers govern how your character performs at nearly everything.',
-    highlight: { top: 0, left: 0, width: 40, height: 100 },
-    popupAnchor: 'right',
-  },
-  {
-    title: 'The (current / base) Display',
-    body: 'Each entry shows two numbers. The left is your effective value after all modifiers. Green = buffed above base. Red = debuffed below base. White = unmodified.',
-    highlight: { top: 8, left: 24, width: 16, height: 84 },
-    popupAnchor: 'right',
-  },
-  {
-    title: 'Skills Panel',
-    body: 'The right column lists skills grouped by category: Firearms, Medicine, Persuasion, etc. These are specific trained abilities separate from your raw stats.',
-    highlight: { top: 0, left: 40, width: 60, height: 100 },
-    popupAnchor: 'left',
-  },
-  {
-    title: '"All Skills" Toggle',
-    body: 'By default, only trained skills are shown. Tick "All Skills" to also reveal untrained ones so you can see everything available to improve.',
-    highlight: { top: 0, left: 62, width: 38, height: 14 },
-    popupAnchor: 'bottom',
-  },
-  {
-    title: 'Search Bar',
-    body: 'Type here to filter skills by name in real-time. Searching automatically reveals untrained skills so nothing is hidden.',
-    highlight: { top: 12, left: 40, width: 60, height: 13 },
-    popupAnchor: 'bottom',
-  },
-  {
-    title: 'Inspecting a Stat or Skill',
-    body: 'Click any stat or skill name to open a detailed view; showing the full description, difficulty rating, governing attribute, what it defaults to, and any active modifiers. Click the ribbon to go back.',
-    highlight: { top: 8, left: 0, width: 40, height: 84 },
-    popupAnchor: 'right',
-  },
-  {
-    title: 'Skill Tiers',
-    body: 'Unlike the old system where you only saw a tier name, you now see the raw numbers behind them. For reference: Novice was 10–19, Apprentice 20–29, Journeyman 30–39, Expert 40–49, Master 50–59, and Legendary was 60 and above.',
-    popupAnchor: 'center',
-  },
-  {
-    title: "That's everything!",
-    body: "You're all set. Use the stats panel to understand your core attributes, and the skills panel to track your expertise. Click any entry at any time to inspect it in detail.",
-    popupAnchor: 'center',
-  },
-];
+const isNumeric = (value: AttributeValue): value is number =>
+  typeof value === 'number' && Number.isFinite(value);
 
-const CloserInspection = (props: { data: AttributeData; act: any }) => {
-  const { data, act } = props;
-  const attribute = data.closely_inspected_attribute;
-  if (!attribute) return null;
+const valueTone = (value: AttributeValue, raw: AttributeValue) => {
+  if (!isNumeric(value) || !isNumeric(raw)) {
+    return 'is-muted';
+  }
+  if (value > raw) {
+    return 'is-buffed';
+  }
+  if (value < raw) {
+    return 'is-debuffed';
+  }
+  return 'is-even';
+};
 
-  const hasDefaults = !!attribute.defaults?.length;
-  const hasModifiers = !!attribute.modifiers?.length;
+const displayValue = (value: AttributeValue | undefined) => {
+  if (value === null || value === undefined || value === '') {
+    return 'NA';
+  }
+  return String(value);
+};
 
-  let mainHeight = '85%';
-  if (hasDefaults && hasModifiers) mainHeight = '42%';
-  else if (hasDefaults || hasModifiers) mainHeight = '52.5%';
-  const secondaryHeight = hasDefaults && hasModifiers ? '24%' : '32.5%';
+const valuePair = (attribute: Attribute) => {
+  const value = displayValue(attribute.value);
+  const raw = displayValue(attribute.raw_value);
+  if (value === 'NA' && raw === 'NA') {
+    return 'NA';
+  }
+  return `${value}/${raw}`;
+};
+
+const IconSprite = (props: { icon?: string; size: 'small' | 'big' }) => {
+  const { icon, size } = props;
+
+  if (!icon) {
+    return <span className={`AttributeMenu__iconFallback AttributeMenu__iconFallback--${size}`} />;
+  }
 
   return (
-    <Stack width="100%" height="100%" vertical>
-      <Stack.Item mb={0} height={mainHeight}>
-        <Box width="100%" className="PreferencesMenu__papersplease__header__left">
-          <Box textAlign="center" className="PreferencesMenu__papersplease__header__title" style={{ fontSize: '200%' }}>
-            <Box>
-              {attribute.name}
-              {attribute.shorthand && <span style={{ fontSize: '70%' }}> ({attribute.shorthand})</span>}
-            </Box>
-            <Tooltip content="Stop inspecting" position="top">
-              <Box className="PreferencesMenu__ribbon" onClick={() => act('inspect_closely')} />
-            </Tooltip>
-          </Box>
-        </Box>
-        <Box
-          overflowY="hidden" width="100%" height="100%"
-          className={hasDefaults || hasModifiers
-            ? 'PreferencesMenu__papersplease__leftbottomless'
-            : 'PreferencesMenu__papersplease__left'}
-          style={{ paddingTop: '8px', paddingBottom: '8px' }}>
-          <Stack>
-            <Stack.Item>
-              <Box height="128px" width="128px" className={`attributes_big128x128 ${attribute.icon}`} />
-            </Stack.Item>
-            <Stack.Item overflowX="hidden" overflowY="hidden" width="85%" height="128px">
-              <Box overflowX="hidden" overflowY="hidden" height="100%" width="100%"
-                className="PreferencesMenu__papersplease__dotted">
-                {attribute.desc}
-                <Box mt={1.5} style={{ fontSize: '120%' }}>
-                  {attribute.difficulty && <Box><b>Difficulty: </b>{attribute.difficulty}</Box>}
-                  {attribute.governing_attribute && <Box><b>Governing attribute: </b>{attribute.governing_attribute}</Box>}
-                </Box>
-              </Box>
-            </Stack.Item>
-          </Stack>
-        </Box>
-      </Stack.Item>
-
-      {hasDefaults && (
-        <>
-          <Stack.Item mt={0} mb={0}>
-            <Box height={1} className="PreferencesMenu__papersplease__gutterhorizontal" />
-          </Stack.Item>
-          <Stack.Item mt={0} height={secondaryHeight}>
-            <Box width="100%" className="PreferencesMenu__papersplease__header__leftnoradius">
-              <Box textAlign="center" className="PreferencesMenu__papersplease__header__title" style={{ fontSize: '175%' }}>
-                Defaults to:
-              </Box>
-            </Box>
-            <Box overflowX="hidden" overflowY="scroll" height="100%"
-              className={hasModifiers ? 'PreferencesMenu__papersplease__leftbottomless' : 'PreferencesMenu__papersplease__left'}
-              style={{ paddingLeft: '4px', paddingRight: '4px', paddingTop: '10px', paddingBottom: '8px' }}>
-              {attribute.defaults?.map((def) => (
-                <Stack.Item ml={1} mb={2} key={def.name} style={{ fontSize: '165%' }}
-                  onClick={() => act('inspect_closely', { attribute_name: def.name })}>
-                  <Tooltip position="bottom"
-                    content={<Box>{def.desc}{def.difficulty && <Box mt={0.5}>[{def.difficulty}]</Box>}</Box>}>
-                    <Stack>
-                      <Stack.Item>
-                        <Box>
-                          <Box mr={1} className={`attributes_small16x16 ${def.icon}`} />
-                          {def.name}
-                          {def.shorthand && <span style={{ fontSize: '65%' }}> ({def.shorthand})</span>}
-                        </Box>
-                      </Stack.Item>
-                      <Stack.Item ml={1}>
-                        <Box textAlign="right">{def.default_value}</Box>
-                      </Stack.Item>
-                    </Stack>
-                  </Tooltip>
-                </Stack.Item>
-              ))}
-            </Box>
-          </Stack.Item>
-        </>
-      )}
-
-      {hasModifiers && (
-        <>
-          <Stack.Item mt={0} mb={0}>
-            <Box height={1} className="PreferencesMenu__papersplease__gutterhorizontal" />
-          </Stack.Item>
-          <Stack.Item mt={0} height={secondaryHeight}>
-            <Box width="100%" className="PreferencesMenu__papersplease__header__leftnoradius">
-              <Box textAlign="center" className="PreferencesMenu__papersplease__header__title" style={{ fontSize: '175%' }}>
-                Active Modifiers
-              </Box>
-            </Box>
-            <Box overflowX="hidden" overflowY="scroll" height="100%"
-              className="PreferencesMenu__papersplease__left"
-              style={{ paddingLeft: '4px', paddingRight: '4px', paddingTop: '10px', paddingBottom: '8px' }}>
-              {attribute.modifiers?.map((mod) => (
-                <Stack.Item ml={1} mb={2} key={mod.id} style={{ fontSize: '165%' }}>
-                  <Stack>
-                    <Stack.Item grow>{mod.id}</Stack.Item>
-                    <Stack.Item mr={2}>
-                      <Box textAlign="right" style={{ color: mod.value >= 0 ? PP.green : PP.red }}>
-                        {mod.value >= 0 ? `+${mod.value}` : mod.value}
-                      </Box>
-                    </Stack.Item>
-                  </Stack>
-                </Stack.Item>
-              ))}
-            </Box>
-          </Stack.Item>
-        </>
-      )}
-    </Stack>
+    <span className={`AttributeMenu__sprite AttributeMenu__sprite--${size}`}>
+      <span className={`attributes_${size === 'big' ? 'big128x128' : 'small16x16'} ${icon}`} />
+    </span>
   );
 };
 
-const AttributeStack = (props: { data: AttributeData; act: any }) => {
-  const { data, act } = props;
-  const { show_bad_skills, skills_by_category = [], stats = [] } = data;
-  const [search, setSearch] = useLocalState('skill_search', '');
-  const [showTutorial, setShowTutorial] = useLocalState('show_attribute_tutorial', false);
+const AttributeSeal = (props: {
+  attribute: Attribute;
+  selectedName?: string | null;
+  act: any;
+}) => {
+  const { attribute, selectedName, act } = props;
+  const selected = selectedName === attribute.name;
 
-  const isSearching = search.trim().length > 0;
+  return (
+    <Tooltip content={attribute.desc || attribute.name} position="right">
+      <button
+        className={`AttributeMenu__seal${selected ? ' is-selected' : ''}`}
+        onClick={() => act('inspect_closely', { attribute_name: attribute.name })}
+        type="button"
+      >
+        <span className="AttributeMenu__wax">
+          <IconSprite icon={attribute.icon} size="small" />
+        </span>
+        <span className="AttributeMenu__sealText">
+          <span className="AttributeMenu__sealName">
+            {attribute.name}
+            {attribute.shorthand && (
+              <span className="AttributeMenu__sealShort"> ({attribute.shorthand})</span>
+            )}
+          </span>
+          <span className="AttributeMenu__sealSub">Core attribute</span>
+        </span>
+        <span className={`AttributeMenu__value ${valueTone(attribute.value, attribute.raw_value)}`}>
+          {valuePair(attribute)}
+        </span>
+      </button>
+    </Tooltip>
+  );
+};
 
-  const handleSearch = (val: string) => {
+const CoreAttributes = (props: {
+  stats: Attribute[];
+  selectedName?: string | null;
+  act: any;
+}) => {
+  const { stats, selectedName, act } = props;
+
+  return (
+    <section className="AttributeMenu__panel AttributeMenu__panel--seals">
+      <header className="AttributeMenu__panelHeader">
+        <div className="AttributeMenu__eyebrow">Character Seals</div>
+        <div className="AttributeMenu__title">Core Attributes</div>
+      </header>
+      <div className="AttributeMenu__divider" />
+      <div className="AttributeMenu__scroll AttributeMenu__sealList">
+        {!stats.length && (
+          <div className="AttributeMenu__empty">No attributes recorded.</div>
+        )}
+        {stats.map((stat) => (
+          <AttributeSeal
+            key={stat.name}
+            attribute={stat}
+            selectedName={selectedName}
+            act={act}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const SkillEntry = (props: {
+  skill: Attribute;
+  selectedName?: string | null;
+  act: any;
+}) => {
+  const { skill, selectedName, act } = props;
+  const selected = selectedName === skill.name;
+
+  return (
+    <Tooltip
+      position="bottom"
+      content={
+        <Box>
+          {skill.desc || skill.name}
+          {skill.difficulty && <Box mt={0.5}>[{skill.difficulty}]</Box>}
+        </Box>
+      }
+    >
+      <button
+        className={`AttributeMenu__skill${selected ? ' is-selected' : ''}`}
+        onClick={() => act('inspect_closely', { attribute_name: skill.name })}
+        type="button"
+      >
+        <span className="AttributeMenu__skillIcon">
+          <IconSprite icon={skill.icon} size="small" />
+        </span>
+        <span className="AttributeMenu__skillName">{skill.name}</span>
+        <span className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
+          {valuePair(skill)}
+        </span>
+      </button>
+    </Tooltip>
+  );
+};
+
+const SkillRegister = (props: {
+  data: AttributeData;
+  selectedName?: string | null;
+  act: any;
+}) => {
+  const { data, selectedName, act } = props;
+  const { show_bad_skills, skills_by_category = [] } = data;
+  const [search, setSearch] = useLocalState<string>('attribute_menu_search', '');
+  const [searchForcedAllSkills, setSearchForcedAllSkills] = useLocalState<boolean>(
+    'attribute_menu_search_forced_all_skills',
+    false,
+  );
+
+  const searchText = search.trim().toLowerCase();
+  const isSearching = searchText.length > 0;
+
+  const handleSearch = (value: string) => {
     const wasSearching = search.trim().length > 0;
-    const nowSearching = val.trim().length > 0;
-    setSearch(val);
-    if (nowSearching && !wasSearching && !show_bad_skills) act('enable_bad_skills');
-    else if (!nowSearching && wasSearching && !show_bad_skills) act('disable_bad_skills');
+    const nowSearching = value.trim().length > 0;
+
+    setSearch(value);
+
+    if (nowSearching && !wasSearching && !show_bad_skills) {
+      setSearchForcedAllSkills(true);
+      act('enable_bad_skills');
+    }
+
+    if (!nowSearching && wasSearching && searchForcedAllSkills) {
+      setSearchForcedAllSkills(false);
+      act('disable_bad_skills');
+    }
+  };
+
+  const toggleAllSkills = () => {
+    if (isSearching) {
+      if (show_bad_skills) {
+        setSearchForcedAllSkills(!searchForcedAllSkills);
+      } else {
+        setSearchForcedAllSkills(false);
+        act('enable_bad_skills');
+      }
+      return;
+    }
+
+    setSearchForcedAllSkills(false);
+    act(show_bad_skills ? 'disable_bad_skills' : 'enable_bad_skills');
   };
 
   const visibleCategories = skills_by_category
-    .map((cat) => ({
-      ...cat,
-      skills: cat.skills.filter(
-        (skill) => !isSearching || skill.name.toLowerCase().includes(search.toLowerCase())
-      ),
+    .map((category) => ({
+      ...category,
+      skills: category.skills.filter((skill) => {
+        if (!searchText) {
+          return true;
+        }
+        return (
+          skill.name.toLowerCase().includes(searchText) ||
+          (skill.desc || '').toLowerCase().includes(searchText) ||
+          category.name.toLowerCase().includes(searchText)
+        );
+      }),
     }))
-    .filter((cat) => cat.skills.length > 0);
+    .filter((category) => category.skills.length > 0);
 
   return (
-    <Box style={{ width: '100%', height: '100%' }}>
-      {showTutorial && (
-        <TutorialOverlay
-          steps={TUTORIAL_STEPS}
-          stateKey="attribute_menu_tutorial"
-          onClose={() => setShowTutorial(false)}
+    <section className="AttributeMenu__panel AttributeMenu__panel--register">
+      <header className="AttributeMenu__panelHeader AttributeMenu__panelHeader--row">
+        <div>
+          <div className="AttributeMenu__eyebrow">Guild Register</div>
+          <div className="AttributeMenu__title">Skills Book</div>
+        </div>
+        <Button.Checkbox
+          checked={show_bad_skills || isSearching}
+          onClick={toggleAllSkills}
+          className="AttributeMenu__toggle"
+        >
+          All Skills
+        </Button.Checkbox>
+      </header>
+
+      <div className="AttributeMenu__search">
+        <Input
+          fluid
+          placeholder="Search the register..."
+          value={search}
+          onChange={(value: string) => handleSearch(value)}
         />
-      )}
+      </div>
 
-      <Stack width="100%" height="100%">
-        <Stack.Item width="40%" height="100%">
-          <Box width="100%" className="PreferencesMenu__papersplease__header__left">
-            <Stack align="center" width="100%" className="PreferencesMenu__papersplease__header__title">
-              <Stack.Item grow textAlign="center" style={{ fontSize: '275%', paddingLeft: '28px' }}>
-                Stats
-              </Stack.Item>
-              <Stack.Item mr={1}>
-                <Tooltip content="Show tutorial" position="bottom">
-                  <Box
-                    onClick={() => setShowTutorial(true)}
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                      width: '20px', height: '20px', borderRadius: '50%',
-                      border: `1px solid ${PP.border}`, color: PP.textMuted,
-                      fontSize: '120%', fontWeight: 'bold', cursor: 'pointer',
-                      userSelect: 'none', lineHeight: 1, background: 'rgba(90,76,76,0.2)',
-                    }}>
-                    ?
-                  </Box>
-                </Tooltip>
-              </Stack.Item>
-            </Stack>
-          </Box>
-          <Box width="100%" overflowY="scroll" className="PreferencesMenu__papersplease__left"
-            style={{ paddingLeft: '4px', paddingRight: '4px', paddingTop: '8px', paddingBottom: '8px', fontSize: '150%' }}>
-            <Stack vertical>
-              {!stats.length && <Box>No stats!</Box>}
-              {stats.map((stat) => (
-                <Stack.Item mb={2} width="100%" key={stat.name}
-                  onClick={() => act('inspect_closely', { attribute_name: stat.name })}>
-                  <Tooltip position="bottom" content={<Box>{stat.desc}</Box>}>
-                    <Stack>
-                      <Stack.Item width="85%">
-                        <Box width="100%">
-                          <Box mr={1} className={`attributes_small16x16 ${stat.icon}`} />
-                          {stat.name}
-                          {stat.shorthand && <span style={{ fontSize: '65%' }}> ({stat.shorthand})</span>}
-                        </Box>
-                      </Stack.Item>
-                      <Stack.Item>
-                        <Box textAlign="right">
-                          (<span style={{
-                            color: (stat.value ?? 0) < (stat.raw_value ?? 0) ? PP.red
-                              : (stat.value ?? 0) > (stat.raw_value ?? 0) ? PP.green : '',
-                          }}>
-                            {stat.value}
-                          </span>/{stat.raw_value})
-                        </Box>
-                      </Stack.Item>
-                    </Stack>
-                  </Tooltip>
-                </Stack.Item>
-              ))}
-            </Stack>
-          </Box>
-        </Stack.Item>
+      <div className="AttributeMenu__divider" />
 
-        <Stack.Item width="60%" height="100%">
-          <Box width="100%" className="PreferencesMenu__papersplease__header__left">
-            <Stack align="center" width="100%" className="PreferencesMenu__papersplease__header__title">
-              <Stack.Item grow textAlign="center" style={{ fontSize: '275%' }}>
-                Skills
-              </Stack.Item>
-              <Stack.Item mr={1}>
-                <Tooltip content={show_bad_skills ? 'Hide untrained skills' : 'Show untrained skills'} position="bottom">
-                  <Button.Checkbox
-                    checked={show_bad_skills || isSearching}
-                    onClick={() => act(show_bad_skills ? 'disable_bad_skills' : 'enable_bad_skills')}
-                    style={{ fontSize: '120%' }}>
-                    All skills
-                  </Button.Checkbox>
-                </Tooltip>
-              </Stack.Item>
-            </Stack>
-            <Box px={1} pb={1}>
-              <Input fluid placeholder="Search skills..." value={search}
-                onInput={(e) => handleSearch(e.target.value)} />
-            </Box>
-          </Box>
-          <Box width="100%" height="85.5%" className="PreferencesMenu__papersplease__left"
-            style={{ paddingLeft: '4px', paddingRight: '4px', paddingBottom: '4px', fontSize: '150%' }}>
-            <Stack width="100%" height="100%" overflowX="hidden" overflowY="scroll" vertical>
-              {!visibleCategories.length && <Box>No skills!</Box>}
-              {visibleCategories.map((category) => (
-                <Stack vertical key={category.name}>
-                  <Stack.Item>
-                    <Box mt={2} style={{
-                      fontSize: '140%', fontWeight: 'bold',
-                      borderTop: '4px dotted rgba(90,76,76,0.7)',
-                      borderBottom: '4px dotted rgba(90,76,76,0.7)',
-                    }}>
-                      {category.name}
-                    </Box>
-                  </Stack.Item>
-                  {category.skills.map((skill) => (
-                    <Stack.Item ml={1} mb={2} width="100%" key={skill.name}
-                      onClick={() => act('inspect_closely', { attribute_name: skill.name })}>
-                      <Tooltip position="bottom"
-                        content={<Box>{skill.desc}{skill.difficulty && <Box mt={0.5}>[{skill.difficulty}]</Box>}</Box>}>
-                        <Stack>
-                          <Stack.Item width="85%">
-                            <Box width="100%">
-                              <Box mr={1} className={`attributes_small16x16 ${skill.icon}`} />
-                              {skill.name}
-                            </Box>
-                          </Stack.Item>
-                          <Stack.Item>
-                            <Box textAlign="right" mr={2}>
-                              {skill.value !== null && skill.raw_value !== null ? (
-                                <>(<span style={{
-                                  color: skill.value < skill.raw_value ? PP.red
-                                    : skill.value > skill.raw_value ? PP.green : '',
-                                }}>{skill.value}</span>/{skill.raw_value})</>
-                              ) : (
-                                <>
-                                  {typeof skill.value === 'number' && (
-                                    <>(<span style={{ color: PP.green }}>{skill.value}</span>/{skill.raw_value})</>
-                                  )}
-                                  {typeof skill.raw_value === 'number' && !skill.value && (
-                                    <>(<span style={{ color: PP.red }}>{skill.value}</span>/{skill.raw_value})</>
-                                  )}
-                                </>
-                              )}
-                            </Box>
-                          </Stack.Item>
-                        </Stack>
-                      </Tooltip>
-                    </Stack.Item>
-                  ))}
-                </Stack>
-              ))}
-            </Stack>
-          </Box>
-        </Stack.Item>
-      </Stack>
-    </Box>
+      <div className="AttributeMenu__scroll AttributeMenu__skillList">
+        {!visibleCategories.length && (
+          <div className="AttributeMenu__empty">No matching entries.</div>
+        )}
+        {visibleCategories.map((category) => (
+          <section className="AttributeMenu__category" key={category.name}>
+            <div className="AttributeMenu__categoryTitle">{category.name}</div>
+            {category.skills.map((skill) => (
+              <SkillEntry
+                key={skill.name}
+                skill={skill}
+                selectedName={selectedName}
+                act={act}
+              />
+            ))}
+          </section>
+        ))}
+      </div>
+    </section>
   );
 };
 
-export const AttributeMenu = (props, context) => {
-  const { act, data } = useBackend<AttributeData>(context);
-  const { parent, closely_inspected_attribute } = data;
+const DetailLine = (props: { label: string; value?: string | number | null }) => {
+  const { label, value } = props;
+
+  return (
+    <div className="AttributeMenu__detailLine">
+      <span>{label}</span>
+      <strong>{displayValue(value ?? null)}</strong>
+    </div>
+  );
+};
+
+const InspectionPanel = (props: {
+  attribute: Attribute | null;
+  act: any;
+}) => {
+  const { attribute, act } = props;
+
+  if (!attribute) {
+    return (
+      <section className="AttributeMenu__panel AttributeMenu__panel--notes">
+        <header className="AttributeMenu__panelHeader">
+          <div className="AttributeMenu__eyebrow">Marginal Notes</div>
+          <div className="AttributeMenu__title">Inspection</div>
+        </header>
+        <div className="AttributeMenu__divider" />
+        <div className="AttributeMenu__placeholder">
+          <div className="AttributeMenu__placeholderMark">Uninspected</div>
+          <p>Select a seal or guild entry to read the scribe's notes.</p>
+          <p>Values, defaults, modifiers, and governing attributes will appear here.</p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="AttributeMenu__panel AttributeMenu__panel--notes">
+      <button
+        className="AttributeMenu__closeNote"
+        onClick={() => act('clear_inspection')}
+        type="button"
+      >
+        x
+      </button>
+
+      <header className="AttributeMenu__panelHeader">
+        <div className="AttributeMenu__eyebrow">Marginal Notes</div>
+        <div className="AttributeMenu__title">
+          {attribute.name}
+          {attribute.shorthand && (
+            <span className="AttributeMenu__titleShort"> ({attribute.shorthand})</span>
+          )}
+        </div>
+      </header>
+
+      <div className="AttributeMenu__divider" />
+
+      <div className="AttributeMenu__noteScroll">
+        <Stack className="AttributeMenu__inspectionIntro">
+          <Stack.Item>
+            <span className="AttributeMenu__largeIcon">
+              <IconSprite icon={attribute.icon} size="big" />
+            </span>
+          </Stack.Item>
+          <Stack.Item grow>
+            <p className="AttributeMenu__description">
+              {attribute.desc || 'No description has been written by the scribe.'}
+            </p>
+          </Stack.Item>
+        </Stack>
+
+        <div className="AttributeMenu__valueCard">
+          <span>Current / Base</span>
+          <strong className={valueTone(attribute.value, attribute.raw_value)}>
+            {valuePair(attribute)}
+          </strong>
+        </div>
+
+        <div className="AttributeMenu__detailGrid">
+          <DetailLine label="Difficulty" value={attribute.difficulty || 'NA'} />
+          <DetailLine label="Governing" value={attribute.governing_attribute || 'NA'} />
+        </div>
+
+        {!!attribute.defaults?.length && (
+          <section className="AttributeMenu__noteBlock">
+            <h3>Defaults To</h3>
+            {attribute.defaults.map((def) => (
+              <button
+                className="AttributeMenu__defaultRow"
+                key={def.name}
+                onClick={() => act('inspect_closely', { attribute_name: def.name })}
+                type="button"
+              >
+                <IconSprite icon={def.icon} size="small" />
+                <span>{def.name}</span>
+                <strong>{displayValue(def.default_value ?? null)}</strong>
+              </button>
+            ))}
+          </section>
+        )}
+
+        {!!attribute.modifiers?.length && (
+          <section className="AttributeMenu__noteBlock">
+            <h3>Blessings And Curses</h3>
+            {attribute.modifiers.map((mod) => (
+              <div className="AttributeMenu__modifierRow" key={mod.id}>
+                <span>{mod.id || 'Unnamed modifier'}</span>
+                <strong className={mod.value >= 0 ? 'is-buffed' : 'is-debuffed'}>
+                  {mod.value >= 0 ? `+${mod.value}` : mod.value}
+                </strong>
+              </div>
+            ))}
+          </section>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export const AttributeMenu = () => {
+  const { act, data } = useBackend<AttributeData>();
+  const {
+    parent,
+    stats = [],
+    skills_by_category = [],
+    closely_inspected_attribute,
+  } = data;
+  const selectedName = closely_inspected_attribute?.name || null;
 
   return (
     <Window
-      title={parent ? `${parent} Attributes` : 'Attributes'}
-      width={800}
-      height={450}>
+      title={parent ? `${parent} Character Ledger` : 'Character Ledger'}
+      width={980}
+      height={560}
+    >
       <Window.Content>
-        <Box style={{ position: 'relative', width: '100%', height: '418px' }}>
-          {closely_inspected_attribute?.name
-            ? <CloserInspection data={data} act={act} />
-            : <AttributeStack data={data} act={act} />}
+        <Box className="AttributeMenu">
+          <div className="AttributeMenu__backdrop">
+            <CoreAttributes stats={stats} selectedName={selectedName} act={act} />
+            <SkillRegister
+              data={{
+                ...data,
+                skills_by_category,
+              }}
+              selectedName={selectedName}
+              act={act}
+            />
+            <InspectionPanel attribute={closely_inspected_attribute} act={act} />
+          </div>
         </Box>
       </Window.Content>
     </Window>

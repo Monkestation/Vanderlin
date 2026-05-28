@@ -2,6 +2,60 @@
 	var/datum/attribute/closely_inspected_attribute = null
 	var/show_bad_skills = FALSE
 
+/datum/attribute_holder/proc/return_raw_calculated_skill_cached(attribute_type, list/raw_cache)
+	if(attribute_type in raw_cache)
+		var/list/cached = raw_cache[attribute_type]
+		return cached["value"]
+
+	var/skill_value = raw_attribute_list[attribute_type]
+	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(attribute_type)
+	if(istype(skill) && !isnull(skill_value) && skill.governing_attribute)
+		var/governing_value = return_raw_calculated_skill_cached(skill.governing_attribute, raw_cache)
+		var/governing_multiplier = (governing_value >= 0) ? SKILL_GOVERNING_MULTIPLIER_POSITIVE : SKILL_GOVERNING_MULTIPLIER_NEGATIVE
+		skill_value += floor(governing_value * governing_multiplier)
+
+	raw_cache[attribute_type] = list("value" = skill_value)
+	return skill_value
+
+/datum/attribute_holder/proc/return_calculated_skill_cached(attribute_type, list/raw_cache, list/effective_cache)
+	if(attribute_type in effective_cache)
+		var/list/cached = effective_cache[attribute_type]
+		return cached["value"]
+
+	var/skill_value = attribute_list[attribute_type]
+	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(attribute_type)
+	if(istype(skill) && !isnull(skill_value) && skill.governing_attribute)
+		skill_value = max(skill.default_attributes[skill.governing_attribute], skill_value)
+		if(skill.default_attributes[skill.governing_attribute] \
+			&& (skill_value <= skill.default_attributes[skill.governing_attribute] * SKILL_GOVERNING_MULTIPLIER_POSITIVE))
+			effective_cache[attribute_type] = list("value" = null)
+			return
+		var/governing_raw = return_raw_calculated_skill_cached(skill.governing_attribute, raw_cache)
+		var/governing_effective = return_calculated_skill_cached(skill.governing_attribute, raw_cache, effective_cache)
+		var/governing_delta = governing_effective - governing_raw
+		if(governing_delta < 0)
+			skill_value += floor((governing_raw * SKILL_GOVERNING_MULTIPLIER_POSITIVE) + (governing_delta * SKILL_GOVERNING_MULTIPLIER_NEGATIVE))
+		else
+			skill_value += floor(governing_effective * SKILL_GOVERNING_MULTIPLIER_POSITIVE)
+
+	effective_cache[attribute_type] = list("value" = skill_value)
+	return skill_value
+
+/datum/attribute_holder/proc/get_attribute_ui_values(attribute_type, list/raw_cache, list/effective_cache)
+	var/list/values = list()
+	values["raw"] = return_raw_calculated_skill_cached(attribute_type, raw_cache)
+	values["effective"] = return_calculated_skill_cached(attribute_type, raw_cache, effective_cache)
+	return values
+
+/datum/attribute_holder/proc/get_attribute_by_ui_name(attribute_name)
+	if(!attribute_name)
+		return null
+	for(var/attribute_type in GLOB.all_attributes)
+		var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
+		if(attribute_datum.name == attribute_name)
+			return attribute_datum
+	return null
+
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -20,6 +74,8 @@
 
 /datum/attribute_holder/ui_data(mob/user)
 	var/list/data = list()
+	var/list/raw_value_cache = list()
+	var/list/effective_value_cache = list()
 
 	data["show_bad_skills"] = show_bad_skills
 	data["parent"] = parent?.name
@@ -45,8 +101,8 @@
 		if(istype(closely_inspected_attribute, STAT))
 			var/datum/attribute/stat/closely_inspected_stat = closely_inspected_attribute
 			closely_inspected["shorthand"] = closely_inspected_stat.shorthand
-			closely_inspected["raw_value"] = nulltozero(raw_attribute_list[closely_inspected.type])
-			closely_inspected["value"] = nulltozero(attribute_list[closely_inspected.type])
+			closely_inspected["raw_value"] = nulltozero(raw_attribute_list[closely_inspected_attribute.type])
+			closely_inspected["value"] = nulltozero(attribute_list[closely_inspected_attribute.type])
 		else if(istype(closely_inspected_attribute, SKILL))
 			var/datum/attribute/skill/closely_inspected_skill = closely_inspected_attribute
 			closely_inspected["difficulty"] = closely_inspected_skill.difficulty
@@ -70,14 +126,15 @@
 				closely_inspected["defaults"] = defaults
 			else
 				closely_inspected["defaults"] = null
-			var/raw_value = return_raw_calculated_skill(closely_inspected.type)
-			var/value = return_calculated_skill(closely_inspected.type)
+			var/list/values = get_attribute_ui_values(closely_inspected_attribute.type, raw_value_cache, effective_value_cache)
+			var/raw_value = values["raw"]
+			var/value = values["effective"]
 			closely_inspected["raw_value"] = isnull(raw_value) ? "NA" : raw_value
 			closely_inspected["value"] = isnull(value) ? "NA" : value
 
 		data["closely_inspected_attribute"] = closely_inspected
-
-		return data
+	else
+		data["closely_inspected_attribute"] = null
 
 	var/list/stats = list()
 	for(var/stat_type in GLOB.all_stats)
@@ -106,8 +163,9 @@
 			this_skill["desc"] = skill.desc
 			this_skill["icon"] = sanitize_css_class_name(skill.name)
 			this_skill["difficulty"] = skill.difficulty
-			var/raw_value = return_raw_calculated_skill(skill_type)
-			var/value = return_calculated_skill(skill_type)
+			var/list/values = get_attribute_ui_values(skill_type, raw_value_cache, effective_value_cache)
+			var/raw_value = values["raw"]
+			var/value = values["effective"]
 			this_skill["raw_value"] = isnull(raw_value) ? "NA" : raw_value
 			this_skill["value"] = isnull(value) ? "NA" : value
 
@@ -135,18 +193,12 @@
 			show_bad_skills = FALSE
 			return TRUE
 		if("inspect_closely")
-			var/old_attribute = closely_inspected_attribute
 			var/attribute_name = params["attribute_name"]
 			if(attribute_name)
-				for(var/attribute_type in GLOB.all_attributes)
-					var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
-					if(attribute_datum.name == attribute_name)
-						closely_inspected_attribute = attribute_datum
-						break
+				closely_inspected_attribute = get_attribute_by_ui_name(attribute_name)
 			else
 				closely_inspected_attribute = null
-			if(old_attribute != closely_inspected_attribute)
-				if(ui)
-					ui.close()
-				ui_interact(usr)
-			return FALSE
+			return TRUE
+		if("clear_inspection")
+			closely_inspected_attribute = null
+			return TRUE
