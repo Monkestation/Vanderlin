@@ -272,6 +272,8 @@ if (length(L) < I) { \
 	RETURN_TYPE(/list)
 	. = list()
 	for(var/atom/atom_checked as anything in atoms)
+		if(isnull(atom_checked))
+			continue
 		if (typecache[atom_checked.type])
 			. += atom_checked
 
