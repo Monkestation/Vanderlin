@@ -248,6 +248,7 @@
 }
 
 .AttributeMenu__sealNode {
+  --orb-offset: 18px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -280,21 +281,41 @@
 }
 
 .AttributeMenu__sealNode--strength,
+.AttributeMenu__sealNode--perception,
+.AttributeMenu__sealNode--intellect,
+.AttributeMenu__sealNode--fallback0,
+.AttributeMenu__sealNode--fallback1,
+.AttributeMenu__sealNode--fallback2 {
+  transform: translate(-50%, calc(-50% - var(--orb-offset)));
+}
+
+.AttributeMenu__sealNode--constitution,
+.AttributeMenu__sealNode--speed,
+.AttributeMenu__sealNode--endurance,
+.AttributeMenu__sealNode--fortune,
+.AttributeMenu__sealNode--fallback3,
+.AttributeMenu__sealNode--fallback4,
+.AttributeMenu__sealNode--fallback5,
+.AttributeMenu__sealNode--fallback6 {
+  transform: translate(-50%, calc(-50% + var(--orb-offset)));
+}
+
+.AttributeMenu__sealNode--strength,
 .AttributeMenu__sealNode--fallback0 {
-  top: 20%;
+  top: 19%;
   left: 50%;
 }
 
 .AttributeMenu__sealNode--perception,
 .AttributeMenu__sealNode--fallback1 {
-  top: 34%;
-  left: 22%;
+  top: 31%;
+  left: 26%;
 }
 
 .AttributeMenu__sealNode--intellect,
 .AttributeMenu__sealNode--fallback2 {
-  top: 34%;
-  left: 78%;
+  top: 31%;
+  left: 74%;
 }
 
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeName,
@@ -330,34 +351,34 @@
 
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--fallback3 {
-  top: 61%;
-  left: 16%;
+  top: 57%;
+  left: 20%;
 }
 
 .AttributeMenu__sealNode--speed,
 .AttributeMenu__sealNode--fallback4 {
-  top: 61%;
-  left: 84%;
+  top: 57%;
+  left: 80%;
 }
 
 .AttributeMenu__sealNode--endurance,
 .AttributeMenu__sealNode--fallback5 {
-  top: 85%;
-  left: 31%;
+  top: 78%;
+  left: 37%;
 }
 
 .AttributeMenu__sealNode--fortune,
 .AttributeMenu__sealNode--fallback6 {
-  top: 85%;
-  left: 69%;
+  top: 78%;
+  left: 63%;
 }
 
 .AttributeMenu__sealNodeOrb {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   background:
     radial-gradient(circle at 34% 24%, #c96a56, var(--am-wax) 54%, var(--am-wax-dark));
@@ -710,14 +731,15 @@
   }
 
   .AttributeMenu__sealNode {
+    --orb-offset: 21px;
     width: 150px;
     min-height: 96px;
     font-size: 13px;
   }
 
   .AttributeMenu__sealNodeOrb {
-    width: 53px;
-    height: 53px;
+    width: 40px;
+    height: 40px;
   }
 
   .AttributeMenu__sealNodeName {
@@ -768,14 +790,15 @@
   }
 
   .AttributeMenu__sealNode {
+    --orb-offset: 15px;
     width: 118px;
     min-height: 76px;
     font-size: 10px;
   }
 
   .AttributeMenu__sealNodeOrb {
-    width: 39px;
-    height: 39px;
+    width: 29px;
+    height: 29px;
   }
 
   .AttributeMenu__sealNodeName {

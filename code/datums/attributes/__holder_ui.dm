@@ -3,6 +3,143 @@
 	var/show_bad_skills = FALSE
 	var/datum/tgui/attribute_menu_ui = null
 
+GLOBAL_LIST_EMPTY(attribute_menu_static_payload)
+GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
+GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
+
+/proc/cached_sanitize_attribute_css(class_name)
+	if(isnull(class_name))
+		return null
+	var/cached = GLOB.attribute_menu_sanitized_css_cache[class_name]
+	if(cached)
+		return cached
+	cached = sanitize_css_class_name(class_name)
+	GLOB.attribute_menu_sanitized_css_cache[class_name] = cached
+	return cached
+
+/proc/attribute_menu_anchor_for(stat_name, stat_index)
+	var/lower_name = lowertext(stat_name)
+	if(findtext(lower_name, "strength"))
+		return "strength"
+	if(findtext(lower_name, "perception"))
+		return "perception"
+	if(findtext(lower_name, "intellect") || findtext(lower_name, "intelligence"))
+		return "intellect"
+	if(findtext(lower_name, "speed") || findtext(lower_name, "agility"))
+		return "speed"
+	if(findtext(lower_name, "constitution"))
+		return "constitution"
+	if(findtext(lower_name, "endurance"))
+		return "endurance"
+	if(findtext(lower_name, "fortune") || findtext(lower_name, "luck"))
+		return "fortune"
+	return "fallback[(stat_index - 1) % 7]"
+
+/proc/attribute_menu_seal_label_for(datum/attribute/stat/stat)
+	var/lower_name = lowertext(stat.name)
+	if(findtext(lower_name, "strength"))
+		return "Strength (STR)"
+	if(findtext(lower_name, "perception"))
+		return "Perception (PER)"
+	if(findtext(lower_name, "endurance"))
+		return "Endurance (END)"
+	if(findtext(lower_name, "constitution"))
+		return "Constitution (CON)"
+	if(findtext(lower_name, "intellect") || findtext(lower_name, "intelligence"))
+		return "Intellect (INT)"
+	if(findtext(lower_name, "speed") || findtext(lower_name, "agility"))
+		return "Speed (SPD)"
+	if(findtext(lower_name, "fortune") || findtext(lower_name, "luck"))
+		return "Fortune (FOR)"
+	return stat.shorthand ? "[stat.name] ([stat.shorthand])" : stat.name
+
+/proc/ensure_attribute_menu_static_payload()
+	if(length(GLOB.attribute_menu_static_payload))
+		return GLOB.attribute_menu_static_payload
+
+	var/list/payload = list()
+	var/list/name_to_datum = list()
+	var/list/attribute_meta_by_name = list()
+
+	var/list/stats_meta = list()
+	var/stat_index = 1
+	for(var/stat_type in GLOB.all_stats)
+		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
+		var/icon_class = cached_sanitize_attribute_css(stat.icon_state)
+		stats_meta += list(list(
+			"name" = stat.name,
+			"desc" = stat.desc,
+			"icon" = icon_class,
+			"shorthand" = stat.shorthand,
+			"anchor" = attribute_menu_anchor_for(stat.name, stat_index),
+			"seal_label" = attribute_menu_seal_label_for(stat),
+		))
+		name_to_datum[stat.name] = stat
+		attribute_meta_by_name[stat.name] = list(
+			"name" = stat.name,
+			"desc" = stat.desc,
+			"icon" = icon_class,
+			"shorthand" = stat.shorthand,
+			"kind" = "stat",
+		)
+		stat_index++
+
+	var/list/skill_categories_meta = list()
+	for(var/category in GLOB.all_skill_categories)
+		var/list/this_category_skills = list()
+		for(var/skill_type in GLOB.all_skill_categories[category])
+			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
+			var/icon_class = cached_sanitize_attribute_css(skill.icon_state)
+			this_category_skills += list(list(
+				"name" = skill.name,
+				"desc" = skill.desc,
+				"icon" = icon_class,
+				"difficulty" = skill.difficulty,
+			))
+			name_to_datum[skill.name] = skill
+
+			var/list/skill_meta = list(
+				"name" = skill.name,
+				"desc" = skill.desc,
+				"icon" = icon_class,
+				"difficulty" = skill.difficulty,
+				"kind" = "skill",
+			)
+			if(skill.governing_attribute)
+				var/datum/attribute/governing = GET_ATTRIBUTE_DATUM(skill.governing_attribute)
+				if(governing)
+					skill_meta["governing_attribute"] = governing.name
+
+			if(LAZYLEN(skill.default_attributes))
+				var/list/defaults_meta = list()
+				for(var/default_type in skill.default_attributes)
+					var/datum/attribute/default_attr = GET_ATTRIBUTE_DATUM(default_type)
+					if(!default_attr)
+						continue
+					defaults_meta += list(list(
+						"name" = default_attr.name,
+						"desc" = default_attr.desc,
+						"icon" = cached_sanitize_attribute_css(default_attr.icon_state),
+						"default_value" = skill.default_attributes[default_type],
+					))
+				skill_meta["defaults"] = defaults_meta
+
+			attribute_meta_by_name[skill.name] = skill_meta
+
+		skill_categories_meta += list(list(
+			"name" = category,
+			"skills" = this_category_skills,
+		))
+
+	payload["stats_meta"] = stats_meta
+	payload["skills_by_category_meta"] = skill_categories_meta
+	payload["attribute_meta_by_name"] = attribute_meta_by_name
+
+	GLOB.attribute_menu_static_payload = payload
+	GLOB.attribute_menu_name_to_datum = name_to_datum
+
+	return payload
+
 /datum/attribute_holder/proc/return_raw_calculated_skill_cached(attribute_type, list/raw_cache)
 	if(attribute_type in raw_cache)
 		var/list/cached = raw_cache[attribute_type]
@@ -47,15 +184,6 @@
 	values["raw"] = return_raw_calculated_skill_cached(attribute_type, raw_cache)
 	values["effective"] = return_calculated_skill_cached(attribute_type, raw_cache, effective_cache)
 	return values
-
-/datum/attribute_holder/proc/get_attribute_by_ui_name(attribute_name)
-	if(!attribute_name)
-		return null
-	for(var/attribute_type in GLOB.all_attributes)
-		var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
-		if(attribute_datum.name == attribute_name)
-			return attribute_datum
-	return null
 
 /datum/attribute_holder/proc/find_active_attribute_menu_ui(mob/user)
 	if(!user)
@@ -118,6 +246,9 @@
 		get_asset_datum(/datum/asset/spritesheet/attributes_small),
 	)
 
+/datum/attribute_holder/ui_static_data(mob/user)
+	return ensure_attribute_menu_static_payload()
+
 /datum/attribute_holder/ui_data(mob/user)
 	var/list/data = list()
 	var/list/raw_value_cache = list()
@@ -125,8 +256,40 @@
 
 	data["show_bad_skills"] = show_bad_skills
 	data["parent"] = parent?.name
+
+	var/list/stats_values = list()
+	for(var/stat_type in GLOB.all_stats)
+		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
+		stats_values[stat.name] = list(
+			"raw_value" = nulltozero(raw_attribute_list[stat_type]),
+			"value" = nulltozero(attribute_list[stat_type]),
+		)
+	data["stats_values"] = stats_values
+
+	var/list/skills_values = list()
+	for(var/category in GLOB.all_skill_categories)
+		for(var/skill_type in GLOB.all_skill_categories[category])
+			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
+			var/list/values = get_attribute_ui_values(skill_type, raw_value_cache, effective_value_cache)
+			skills_values[skill.name] = list(
+				"raw_value" = values["raw"],
+				"value" = values["effective"],
+			)
+	data["skills_values"] = skills_values
+
 	if(istype(closely_inspected_attribute))
-		var/list/closely_inspected = list()
+		var/list/closely_inspected_dynamic = list()
+		closely_inspected_dynamic["name"] = closely_inspected_attribute.name
+		closely_inspected_dynamic["desc_from_level"] = capitalize_like_old_man(closely_inspected_attribute.description_from_level(attribute_list[closely_inspected_attribute.type]))
+
+		if(istype(closely_inspected_attribute, STAT))
+			closely_inspected_dynamic["raw_value"] = nulltozero(raw_attribute_list[closely_inspected_attribute.type])
+			closely_inspected_dynamic["value"] = nulltozero(attribute_list[closely_inspected_attribute.type])
+		else if(istype(closely_inspected_attribute, SKILL))
+			var/list/values = get_attribute_ui_values(closely_inspected_attribute.type, raw_value_cache, effective_value_cache)
+			closely_inspected_dynamic["raw_value"] = values["raw"]
+			closely_inspected_dynamic["value"] = values["effective"]
+
 		var/list/modifiers = list()
 		for(var/key in get_attribute_modification())
 			var/datum/attribute_modifier/mod = attribute_modification[key]
@@ -135,95 +298,15 @@
 			var/mod_val = mod.attribute_list[closely_inspected_attribute.type]
 			if(isnull(mod_val) || mod_val == 0)
 				continue
-			var/list/this_mod = list()
-			this_mod["id"] = mod.id
-			this_mod["value"] = mod_val
-			modifiers += list(this_mod)
-		closely_inspected["modifiers"] = modifiers
-		closely_inspected["name"] = closely_inspected_attribute.name
-		closely_inspected["desc"] = closely_inspected_attribute.desc
-		closely_inspected["desc_from_level"] = capitalize_like_old_man(closely_inspected_attribute.description_from_level(attribute_list[closely_inspected_attribute.type]))
-		closely_inspected["icon"] = sanitize_css_class_name(closely_inspected_attribute.icon_state)
-		if(istype(closely_inspected_attribute, STAT))
-			var/datum/attribute/stat/closely_inspected_stat = closely_inspected_attribute
-			closely_inspected["shorthand"] = closely_inspected_stat.shorthand
-			closely_inspected["raw_value"] = nulltozero(raw_attribute_list[closely_inspected_attribute.type])
-			closely_inspected["value"] = nulltozero(attribute_list[closely_inspected_attribute.type])
-		else if(istype(closely_inspected_attribute, SKILL))
-			var/datum/attribute/skill/closely_inspected_skill = closely_inspected_attribute
-			closely_inspected["difficulty"] = closely_inspected_skill.difficulty
-			if(closely_inspected_skill.governing_attribute)
-				var/datum/attribute/governing_attribute = GET_ATTRIBUTE_DATUM(closely_inspected_skill.governing_attribute)
-				closely_inspected["governing_attribute"] = governing_attribute.name
-			if(LAZYLEN(closely_inspected_skill.default_attributes))
-				var/list/defaults = list()
+			modifiers += list(list(
+				"id" = mod.id,
+				"value" = mod_val,
+			))
+		closely_inspected_dynamic["modifiers"] = modifiers
 
-				for(var/attribute_type in closely_inspected_skill.default_attributes)
-					var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
-					var/list/this_attribute_default = list()
-
-					this_attribute_default["name"] = attribute_datum.name
-					this_attribute_default["desc"] = attribute_datum.desc
-					this_attribute_default["icon"] = sanitize_css_class_name(attribute_datum.icon_state)
-					this_attribute_default["default_value"] = closely_inspected_skill.default_attributes[attribute_type]
-
-					defaults += list(this_attribute_default)
-
-				closely_inspected["defaults"] = defaults
-			else
-				closely_inspected["defaults"] = null
-			var/list/values = get_attribute_ui_values(closely_inspected_attribute.type, raw_value_cache, effective_value_cache)
-			var/raw_value = values["raw"]
-			var/value = values["effective"]
-			closely_inspected["raw_value"] = isnull(raw_value) ? "NA" : raw_value
-			closely_inspected["value"] = isnull(value) ? "NA" : value
-
-		data["closely_inspected_attribute"] = closely_inspected
+		data["closely_inspected"] = closely_inspected_dynamic
 	else
-		data["closely_inspected_attribute"] = null
-
-	var/list/stats = list()
-	for(var/stat_type in GLOB.all_stats)
-		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
-
-		var/list/this_stat = list()
-		this_stat["name"] = stat.name
-		this_stat["desc"] = stat.desc
-		this_stat["icon"] = sanitize_css_class_name(stat.icon_state)
-		this_stat["shorthand"] = stat.shorthand
-		this_stat["raw_value"] = nulltozero(raw_attribute_list[stat_type])
-		this_stat["value"] = nulltozero(attribute_list[stat_type])
-
-		stats += list(this_stat)
-	var/list/skill_categories = list()
-	for(var/category in GLOB.all_skill_categories)
-		var/list/this_category = list()
-		var/list/this_category_skills = list()
-
-		this_category["name"] = category
-		for(var/skill_type in GLOB.all_skill_categories[category])
-			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
-
-			var/list/this_skill = list()
-			this_skill["name"] = skill.name
-			this_skill["desc"] = skill.desc
-			this_skill["icon"] = sanitize_css_class_name(skill.icon_state)
-			this_skill["difficulty"] = skill.difficulty
-			var/list/values = get_attribute_ui_values(skill_type, raw_value_cache, effective_value_cache)
-			var/raw_value = values["raw"]
-			var/value = values["effective"]
-			this_skill["raw_value"] = isnull(raw_value) ? "NA" : raw_value
-			this_skill["value"] = isnull(value) ? "NA" : value
-
-			if(!isnull(value) || show_bad_skills)
-				this_category_skills += list(this_skill)
- 		this_category["skills"] = this_category_skills
-
-		if(LAZYLEN(this_category["skills"]))
-			skill_categories += list(this_category)
-
-	data["stats"] = stats
-	data["skills_by_category"] = skill_categories
+		data["closely_inspected"] = null
 
 	return data
 
@@ -241,7 +324,8 @@
 		if("inspect_closely")
 			var/attribute_name = params["attribute_name"]
 			if(attribute_name)
-				closely_inspected_attribute = get_attribute_by_ui_name(attribute_name)
+				ensure_attribute_menu_static_payload()
+				closely_inspected_attribute = GLOB.attribute_menu_name_to_datum[attribute_name]
 			else
 				closely_inspected_attribute = null
 			return TRUE

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
@@ -10,32 +10,90 @@ interface AttributeModifier {
   value: number;
 }
 
-interface Attribute {
-  name: string;
-  shorthand?: string;
-  desc?: string;
-  icon?: string;
+interface AttributeValues {
   value: AttributeValue;
   raw_value: AttributeValue;
-  difficulty?: string;
-  governing_attribute?: string;
-  default_value?: number;
-  defaults?: Attribute[];
-  modifiers?: AttributeModifier[];
 }
 
-interface SkillCategory {
+interface StatMeta {
   name: string;
-  skills: Attribute[];
+  desc?: string;
+  icon?: string;
+  shorthand?: string;
+  anchor: string;
+  seal_label: string;
+}
+
+interface SkillMeta {
+  name: string;
+  desc?: string;
+  icon?: string;
+  difficulty?: string;
+}
+
+interface SkillCategoryMeta {
+  name: string;
+  skills: SkillMeta[];
+}
+
+interface DefaultMeta {
+  name: string;
+  desc?: string;
+  icon?: string;
+  default_value: number;
+}
+
+interface AttributeFullMeta {
+  name: string;
+  desc?: string;
+  icon?: string;
+  shorthand?: string;
+  difficulty?: string;
+  governing_attribute?: string;
+  defaults?: DefaultMeta[];
+  kind: 'stat' | 'skill';
+}
+
+interface CloselyInspectedDynamic {
+  name: string;
+  value: AttributeValue;
+  raw_value: AttributeValue;
+  desc_from_level?: string;
+  modifiers: AttributeModifier[];
+}
+
+interface ResolvedStat extends StatMeta, AttributeValues {}
+
+interface ResolvedSkill extends SkillMeta, AttributeValues {}
+
+interface ResolvedSkillCategory {
+  name: string;
+  skills: ResolvedSkill[];
+}
+
+interface ResolvedInspectedAttribute extends Partial<AttributeFullMeta> {
+  name: string;
+  value: AttributeValue;
+  raw_value: AttributeValue;
+  desc_from_level?: string;
+  modifiers: AttributeModifier[];
 }
 
 interface AttributeData {
+  // From ui_static_data (merged into `data` by tgui store):
+  stats_meta?: StatMeta[];
+  skills_by_category_meta?: SkillCategoryMeta[];
+  attribute_meta_by_name?: Record<string, AttributeFullMeta>;
+
+  // From ui_data:
   show_bad_skills: boolean;
   parent?: string;
-  skills_by_category: SkillCategory[];
-  stats: Attribute[];
-  closely_inspected_attribute: Attribute | null;
+  stats_values?: Record<string, AttributeValues>;
+  skills_values?: Record<string, AttributeValues>;
+  closely_inspected?: CloselyInspectedDynamic | null;
 }
+
+const EMPTY_VALUES: AttributeValues = { value: null, raw_value: null };
 
 const isNumeric = (value: AttributeValue): value is number =>
   typeof value === 'number' && Number.isFinite(value);
@@ -60,23 +118,14 @@ const displayValue = (value: AttributeValue | undefined) => {
   return String(value);
 };
 
-const valuePair = (attribute: Attribute) => {
-  const value = displayValue(attribute.value);
-  const raw = displayValue(attribute.raw_value);
-  if (value === 'NA' && raw === 'NA') {
+const valuePair = (value: AttributeValue, raw: AttributeValue) => {
+  const v = displayValue(value);
+  const r = displayValue(raw);
+  if (v === 'NA' && r === 'NA') {
     return 'NA';
   }
-  return `${value}/${raw}`;
+  return `${v}/${r}`;
 };
-
-const sameAttributePreview = (first: Attribute, second: Attribute) =>
-  first.name === second.name &&
-  first.shorthand === second.shorthand &&
-  first.desc === second.desc &&
-  first.icon === second.icon &&
-  first.value === second.value &&
-  first.raw_value === second.raw_value &&
-  first.difficulty === second.difficulty;
 
 const sameSelection = (
   first: string | null | undefined,
@@ -84,7 +133,7 @@ const sameSelection = (
   attributeName: string,
 ) => (first === attributeName) === (second === attributeName);
 
-const IconSprite = (props: { icon?: string; size: 'small' | 'big' }) => {
+const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
   const { icon, size } = props;
 
   if (!icon) {
@@ -96,65 +145,9 @@ const IconSprite = (props: { icon?: string; size: 'small' | 'big' }) => {
       <span className={`attributes_${size === 'big' ? 'big128x128' : 'small16x16'} ${icon}`} />
     </span>
   );
-};
+});
 
-const attributeAnchor = (attribute: Attribute, index: number) => {
-  const name = attribute.name.toLowerCase();
-
-  if (name.includes('strength')) {
-    return 'strength';
-  }
-  if (name.includes('perception')) {
-    return 'perception';
-  }
-  if (name.includes('intellect') || name.includes('intelligence')) {
-    return 'intellect';
-  }
-  if (name.includes('speed') || name.includes('agility')) {
-    return 'speed';
-  }
-  if (name.includes('constitution')) {
-    return 'constitution';
-  }
-  if (name.includes('endurance')) {
-    return 'endurance';
-  }
-  if (name.includes('fortune') || name.includes('luck')) {
-    return 'fortune';
-  }
-
-  return `fallback${index % 7}`;
-};
-
-const attributeSealLabel = (attribute: Attribute) => {
-  const name = attribute.name.toLowerCase();
-
-  if (name.includes('strength')) {
-    return 'Strength (STR)';
-  }
-  if (name.includes('perception')) {
-    return 'Perception (PER)';
-  }
-  if (name.includes('endurance')) {
-    return 'Endurance (END)';
-  }
-  if (name.includes('constitution')) {
-    return 'Constitution (CON)';
-  }
-  if (name.includes('intellect') || name.includes('intelligence')) {
-    return 'Intellect (INT)';
-  }
-  if (name.includes('speed') || name.includes('agility')) {
-    return 'Speed (SPD)';
-  }
-  if (name.includes('fortune') || name.includes('luck')) {
-    return 'Fortune (FOR)';
-  }
-
-  return attribute.shorthand ? `${attribute.name} (${attribute.shorthand})` : attribute.name;
-};
-
-const AnatomyFigure = () => (
+const AnatomyFigure = memo(() => (
   <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
     <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="360" />
     <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--middle" cx="500" cy="500" r="250" />
@@ -181,44 +174,43 @@ const AnatomyFigure = () => (
       d="M468 334 C486 358 514 358 532 334 M456 440 C485 468 515 468 544 440 M478 676 C492 704 508 704 522 676 M500 334 C486 424 486 560 500 676 M500 334 C514 424 514 560 500 676"
     />
   </svg>
-);
+));
 
 const AttributeSealNode = memo((props: {
-  attribute: Attribute;
-  selectedName?: string | null;
+  stat: ResolvedStat;
+  selected: boolean;
   act: any;
-  index: number;
 }) => {
-  const { attribute, selectedName, act, index } = props;
-  const selected = selectedName === attribute.name;
-  const anchor = attributeAnchor(attribute, index);
-  const label = attributeSealLabel(attribute);
-  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${anchor}${
+  const { stat, selected, act } = props;
+  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${stat.anchor}${
     selected ? ' is-selected' : ''
   }`;
 
   return (
-    <Tooltip content={attribute.desc || attribute.name} position="bottom">
+    <Tooltip content={stat.desc || stat.name} position="bottom">
       <button
         className={nodeClass}
-        onClick={() => act('inspect_closely', { attribute_name: attribute.name })}
+        onClick={() => act('inspect_closely', { attribute_name: stat.name })}
         type="button"
       >
         <span className="AttributeMenu__sealNodeOrb" />
-        <span className="AttributeMenu__sealNodeName">{label}</span>
-        <span className={`AttributeMenu__sealNodeValue ${valueTone(attribute.value, attribute.raw_value)}`}>
-          {valuePair(attribute)}
+        <span className="AttributeMenu__sealNodeName">{stat.seal_label}</span>
+        <span className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}>
+          {valuePair(stat.value, stat.raw_value)}
         </span>
       </button>
     </Tooltip>
   );
 }, (previous, next) =>
-  previous.index === next.index &&
-  sameSelection(previous.selectedName, next.selectedName, previous.attribute.name) &&
-  sameAttributePreview(previous.attribute, next.attribute));
+  previous.selected === next.selected &&
+  previous.stat.name === next.stat.name &&
+  previous.stat.value === next.stat.value &&
+  previous.stat.raw_value === next.stat.raw_value &&
+  previous.stat.anchor === next.stat.anchor &&
+  previous.stat.seal_label === next.stat.seal_label);
 
-const CoreAttributes = (props: {
-  stats: Attribute[];
+const CoreAttributes = memo((props: {
+  stats: ResolvedStat[];
   selectedName?: string | null;
   act: any;
 }) => {
@@ -238,13 +230,12 @@ const CoreAttributes = (props: {
         {!!stats.length && (
           <div className="AttributeMenu__ringStage">
             <AnatomyFigure />
-            {stats.map((stat, index) => (
+            {stats.map((stat) => (
               <AttributeSealNode
                 key={stat.name}
-                attribute={stat}
-                selectedName={selectedName}
+                stat={stat}
+                selected={selectedName === stat.name}
                 act={act}
-                index={index}
               />
             ))}
           </div>
@@ -252,15 +243,14 @@ const CoreAttributes = (props: {
       </div>
     </section>
   );
-};
+});
 
 const SkillEntry = memo((props: {
-  skill: Attribute;
-  selectedName?: string | null;
+  skill: ResolvedSkill;
+  selected: boolean;
   act: any;
 }) => {
-  const { skill, selectedName, act } = props;
-  const selected = selectedName === skill.name;
+  const { skill, selected, act } = props;
 
   return (
     <Tooltip
@@ -282,22 +272,28 @@ const SkillEntry = memo((props: {
         </span>
         <span className="AttributeMenu__skillName">{skill.name}</span>
         <span className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
-          {valuePair(skill)}
+          {valuePair(skill.value, skill.raw_value)}
         </span>
       </button>
     </Tooltip>
   );
 }, (previous, next) =>
-  sameSelection(previous.selectedName, next.selectedName, previous.skill.name) &&
-  sameAttributePreview(previous.skill, next.skill));
+  previous.selected === next.selected &&
+  previous.skill.name === next.skill.name &&
+  previous.skill.value === next.skill.value &&
+  previous.skill.raw_value === next.skill.raw_value &&
+  previous.skill.icon === next.skill.icon &&
+  previous.skill.difficulty === next.skill.difficulty &&
+  previous.skill.desc === next.skill.desc);
 
-const SkillRegister = (props: {
-  data: AttributeData;
+const SkillRegister = memo((props: {
+  categoriesMeta: SkillCategoryMeta[];
+  skillsValues: Record<string, AttributeValues>;
+  showBadSkills: boolean;
   selectedName?: string | null;
   act: any;
 }) => {
-  const { data, selectedName, act } = props;
-  const { show_bad_skills, skills_by_category = [] } = data;
+  const { categoriesMeta, skillsValues, showBadSkills, selectedName, act } = props;
   const [search, setSearch] = useLocalState<string>('attribute_menu_search', '');
   const [searchForcedAllSkills, setSearchForcedAllSkills] = useLocalState<boolean>(
     'attribute_menu_search_forced_all_skills',
@@ -313,7 +309,7 @@ const SkillRegister = (props: {
 
     setSearch(value);
 
-    if (nowSearching && !wasSearching && !show_bad_skills) {
+    if (nowSearching && !wasSearching && !showBadSkills) {
       setSearchForcedAllSkills(true);
       act('enable_bad_skills');
     }
@@ -326,7 +322,7 @@ const SkillRegister = (props: {
 
   const toggleAllSkills = () => {
     if (isSearching) {
-      if (show_bad_skills) {
+      if (showBadSkills) {
         setSearchForcedAllSkills(!searchForcedAllSkills);
       } else {
         setSearchForcedAllSkills(false);
@@ -336,24 +332,35 @@ const SkillRegister = (props: {
     }
 
     setSearchForcedAllSkills(false);
-    act(show_bad_skills ? 'disable_bad_skills' : 'enable_bad_skills');
+    act(showBadSkills ? 'disable_bad_skills' : 'enable_bad_skills');
   };
 
-  const visibleCategories = skills_by_category
-    .map((category) => ({
-      ...category,
-      skills: category.skills.filter((skill) => {
-        if (!searchText) {
-          return true;
+  const visibleCategories = useMemo<ResolvedSkillCategory[]>(() => {
+    const result: ResolvedSkillCategory[] = [];
+    for (const category of categoriesMeta) {
+      const categoryNameLower = category.name.toLowerCase();
+      const matchedSkills: ResolvedSkill[] = [];
+      for (const skill of category.skills) {
+        const values = skillsValues[skill.name] || EMPTY_VALUES;
+        if (!showBadSkills && values.value === null) {
+          continue;
         }
-        return (
-          skill.name.toLowerCase().includes(searchText) ||
-          (skill.desc || '').toLowerCase().includes(searchText) ||
-          category.name.toLowerCase().includes(searchText)
-        );
-      }),
-    }))
-    .filter((category) => category.skills.length > 0);
+        if (searchText) {
+          const nameHit = skill.name.toLowerCase().includes(searchText);
+          const descHit = (skill.desc || '').toLowerCase().includes(searchText);
+          const catHit = categoryNameLower.includes(searchText);
+          if (!nameHit && !descHit && !catHit) {
+            continue;
+          }
+        }
+        matchedSkills.push({ ...skill, ...values });
+      }
+      if (matchedSkills.length > 0) {
+        result.push({ name: category.name, skills: matchedSkills });
+      }
+    }
+    return result;
+  }, [categoriesMeta, skillsValues, showBadSkills, searchText]);
 
   return (
     <section className="AttributeMenu__panel AttributeMenu__panel--register">
@@ -363,7 +370,7 @@ const SkillRegister = (props: {
           <div className="AttributeMenu__title">Skills Book</div>
         </div>
         <Button.Checkbox
-          checked={show_bad_skills || isSearching}
+          checked={showBadSkills || isSearching}
           onClick={toggleAllSkills}
           className="AttributeMenu__toggle"
         >
@@ -393,7 +400,7 @@ const SkillRegister = (props: {
               <SkillEntry
                 key={skill.name}
                 skill={skill}
-                selectedName={selectedName}
+                selected={selectedName === skill.name}
                 act={act}
               />
             ))}
@@ -402,7 +409,7 @@ const SkillRegister = (props: {
       </div>
     </section>
   );
-};
+});
 
 const DetailLine = (props: { label: string; value?: string | number | null }) => {
   const { label, value } = props;
@@ -415,8 +422,8 @@ const DetailLine = (props: { label: string; value?: string | number | null }) =>
   );
 };
 
-const InspectionPanel = (props: {
-  attribute: Attribute | null;
+const InspectionPanel = memo((props: {
+  attribute: ResolvedInspectedAttribute | null;
   act: any;
 }) => {
   const { attribute, act } = props;
@@ -477,7 +484,7 @@ const InspectionPanel = (props: {
         <div className="AttributeMenu__valueCard">
           <span>Current / Base</span>
           <strong className={valueTone(attribute.value, attribute.raw_value)}>
-            {valuePair(attribute)}
+            {valuePair(attribute.value, attribute.raw_value)}
           </strong>
         </div>
 
@@ -520,17 +527,48 @@ const InspectionPanel = (props: {
       </div>
     </section>
   );
-};
+});
 
 export const AttributeMenu = () => {
   const { act, data } = useBackend<AttributeData>();
   const {
     parent,
-    stats = [],
-    skills_by_category = [],
-    closely_inspected_attribute,
+    stats_meta,
+    skills_by_category_meta,
+    attribute_meta_by_name,
+    stats_values,
+    skills_values,
+    show_bad_skills = false,
+    closely_inspected,
   } = data;
-  const selectedName = closely_inspected_attribute?.name || null;
+
+  const statsMetaSafe = stats_meta || [];
+  const skillsMetaSafe = skills_by_category_meta || [];
+  const attributeMetaSafe = attribute_meta_by_name || {};
+  const statsValuesSafe = stats_values || {};
+  const skillsValuesSafe = skills_values || {};
+
+  const stats = useMemo<ResolvedStat[]>(
+    () =>
+      statsMetaSafe.map((meta) => ({
+        ...meta,
+        ...(statsValuesSafe[meta.name] || EMPTY_VALUES),
+      })),
+    [statsMetaSafe, statsValuesSafe],
+  );
+
+  const inspectedAttribute = useMemo<ResolvedInspectedAttribute | null>(() => {
+    if (!closely_inspected) {
+      return null;
+    }
+    const meta = attributeMetaSafe[closely_inspected.name] || {};
+    return {
+      ...meta,
+      ...closely_inspected,
+    };
+  }, [closely_inspected, attributeMetaSafe]);
+
+  const selectedName = closely_inspected?.name ?? null;
 
   return (
     <Window
@@ -543,14 +581,13 @@ export const AttributeMenu = () => {
           <div className="AttributeMenu__backdrop">
             <CoreAttributes stats={stats} selectedName={selectedName} act={act} />
             <SkillRegister
-              data={{
-                ...data,
-                skills_by_category,
-              }}
+              categoriesMeta={skillsMetaSafe}
+              skillsValues={skillsValuesSafe}
+              showBadSkills={show_bad_skills}
               selectedName={selectedName}
               act={act}
             />
-            <InspectionPanel attribute={closely_inspected_attribute} act={act} />
+            <InspectionPanel attribute={inspectedAttribute} act={act} />
           </div>
         </Box>
       </Window.Content>
