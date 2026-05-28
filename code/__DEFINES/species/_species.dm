@@ -9,6 +9,7 @@
 #define SPEC_ID_HALF_DROW "halfdrow"
 #define SPEC_ID_TIEFLING "tiefling"
 #define SPEC_ID_HALF_ORC "halforc"
+#define SPEC_ID_HOBLIN "hoblin"
 #define SPEC_ID_RAKSHARI "rakshari"
 #define SPEC_ID_KOBOLD "kobold"
 #define SPEC_ID_KOBOLD_FORMIKRAG "kobold_formikrag"
@@ -45,6 +46,7 @@
 	SPEC_ID_HALF_ORC,\
 	SPEC_ID_ORC,\
 	SPEC_ID_GOBLIN,\
+	SPEC_ID_HOBLIN,\
 	SPEC_ID_ROUSMAN,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
@@ -67,6 +69,7 @@
 	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
+	SPEC_ID_HOBLIN,\
 )
 
 /// Species where males get underwear, identical to above, elves handled seperately
@@ -82,6 +85,7 @@
 	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
+	SPEC_ID_HOBLIN,\
 )
 
 // ============ USING NAME
@@ -105,6 +109,7 @@
 	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_HOBLIN,\
 )
 
 /// Species not considered discriminated against in Vanderlin. Used for nobility, etc.
@@ -147,6 +152,7 @@
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_HOBLIN,\
 )
 
 /// Species that lack lux. Any who have no ties to divinity anymore, whether it be their creation story or otherwise taken from them (Hollow-kin)
@@ -282,6 +288,7 @@
 	SPEC_ID_HALF_DROW,\
 	SPEC_ID_TIEFLING,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_HOBLIN,\
 	SPEC_ID_KOBOLD,\
 	SPEC_ID_RAKSHARI,\
 	SPEC_ID_HOLLOWKIN,\
@@ -322,6 +329,7 @@
 	SPEC_ID_TRITON,\
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_HOBLIN,\
 	SPEC_ID_ROUSMAN,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\

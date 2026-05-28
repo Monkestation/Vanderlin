@@ -3515,6 +3515,7 @@
 #include "code\modules\mob\living\carbon\human\species_types\other\halfdrow.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\halfelf.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\halforc.dm"
+#include "code\modules\mob\living\carbon\human\species_types\other\hoblin.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\tiefling.dm"
 #include "code\modules\mob\living\carbon\human\species_types\other\werewolf.dm"
 #include "code\modules\mob\living\carbon\human\species_types\rakshari\_rakshari.dm"
