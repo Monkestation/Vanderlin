@@ -303,9 +303,20 @@
 .AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeName,
 .AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeName,
 .AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeName {
+  order: -1;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.AttributeMenu__sealNode--strength .AttributeMenu__sealNodeValue,
+.AttributeMenu__sealNode--perception .AttributeMenu__sealNodeValue,
+.AttributeMenu__sealNode--intellect .AttributeMenu__sealNodeValue,
+.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeValue,
+.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeValue,
+.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeValue {
   order: -2;
   margin-top: 0;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 }
 
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeOrb,
@@ -314,7 +325,7 @@
 .AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeOrb {
-  order: -1;
+  order: 0;
 }
 
 .AttributeMenu__sealNode--constitution,
