@@ -126,6 +126,34 @@ const attributeAnchor = (attribute: Attribute, index: number) => {
   return `fallback${index % 7}`;
 };
 
+const attributeSealLabel = (attribute: Attribute) => {
+  const name = attribute.name.toLowerCase();
+
+  if (name.includes('strength')) {
+    return 'Strength (STR)';
+  }
+  if (name.includes('perception')) {
+    return 'Perception (PER)';
+  }
+  if (name.includes('endurance')) {
+    return 'Endurance (END)';
+  }
+  if (name.includes('constitution')) {
+    return 'Constitution (CON)';
+  }
+  if (name.includes('intellect') || name.includes('intelligence')) {
+    return 'Intellect (INT)';
+  }
+  if (name.includes('speed') || name.includes('agility')) {
+    return 'Speed (SPD)';
+  }
+  if (name.includes('fortune') || name.includes('luck')) {
+    return 'Fortune (FOR)';
+  }
+
+  return attribute.shorthand ? `${attribute.name} (${attribute.shorthand})` : attribute.name;
+};
+
 const AnatomyFigure = () => (
   <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
     <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="360" />
@@ -164,6 +192,7 @@ const AttributeSealNode = memo((props: {
   const { attribute, selectedName, act, index } = props;
   const selected = selectedName === attribute.name;
   const anchor = attributeAnchor(attribute, index);
+  const label = attributeSealLabel(attribute);
   const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${anchor}${
     selected ? ' is-selected' : ''
   }`;
@@ -175,15 +204,8 @@ const AttributeSealNode = memo((props: {
         onClick={() => act('inspect_closely', { attribute_name: attribute.name })}
         type="button"
       >
-        <span className="AttributeMenu__sealNodeOrb">
-          <IconSprite icon={attribute.icon} size="small" />
-        </span>
-        <span className="AttributeMenu__sealNodeName">
-          {attribute.name}
-          {attribute.shorthand && (
-            <span className="AttributeMenu__sealNodeShort"> ({attribute.shorthand})</span>
-          )}
-        </span>
+        <span className="AttributeMenu__sealNodeOrb" />
+        <span className="AttributeMenu__sealNodeName">{label}</span>
         <span className={`AttributeMenu__sealNodeValue ${valueTone(attribute.value, attribute.raw_value)}`}>
           {valuePair(attribute)}
         </span>

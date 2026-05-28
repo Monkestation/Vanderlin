@@ -253,11 +253,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 104px;
+  width: 132px;
   min-height: 86px;
   padding: 0;
   color: var(--am-ink);
   font: inherit;
+  font-size: 12px;
   text-align: center;
   cursor: pointer;
   background: transparent;
@@ -280,52 +281,52 @@
 
 .AttributeMenu__sealNode--strength,
 .AttributeMenu__sealNode--fallback0 {
-  top: 13%;
+  top: 20%;
   left: 50%;
 }
 
 .AttributeMenu__sealNode--perception,
 .AttributeMenu__sealNode--fallback1 {
-  top: 25%;
-  left: 18%;
+  top: 34%;
+  left: 22%;
 }
 
 .AttributeMenu__sealNode--intellect,
 .AttributeMenu__sealNode--fallback2 {
-  top: 25%;
-  left: 82%;
+  top: 34%;
+  left: 78%;
 }
 
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--fallback3 {
-  top: 60%;
-  left: 17%;
+  top: 61%;
+  left: 16%;
 }
 
 .AttributeMenu__sealNode--speed,
 .AttributeMenu__sealNode--fallback4 {
-  top: 60%;
-  left: 83%;
+  top: 61%;
+  left: 84%;
 }
 
 .AttributeMenu__sealNode--endurance,
 .AttributeMenu__sealNode--fallback5 {
-  top: 84%;
-  left: 32%;
+  top: 85%;
+  left: 31%;
 }
 
 .AttributeMenu__sealNode--fortune,
 .AttributeMenu__sealNode--fallback6 {
-  top: 84%;
-  left: 68%;
+  top: 85%;
+  left: 69%;
 }
 
 .AttributeMenu__sealNodeOrb {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background:
     radial-gradient(circle at 34% 24%, #c96a56, var(--am-wax) 54%, var(--am-wax-dark));
@@ -351,15 +352,10 @@
   width: 100%;
   margin-top: 5px;
   color: var(--am-ink);
-  font-size: 13px;
+  font-size: 1.08em;
   font-weight: bold;
   line-height: 1.1;
   text-shadow: 0 1px rgba(255, 237, 184, 0.46);
-}
-
-.AttributeMenu__sealNodeShort {
-  color: var(--am-ink-soft);
-  font-size: 10px;
 }
 
 .AttributeMenu__value,
@@ -373,7 +369,7 @@
 
 .AttributeMenu__sealNodeValue {
   margin-top: 1px;
-  font-size: 17px;
+  font-size: 1.42em;
   line-height: 1;
 }
 
@@ -683,13 +679,14 @@
   }
 
   .AttributeMenu__sealNode {
-    width: 122px;
+    width: 150px;
     min-height: 96px;
+    font-size: 13px;
   }
 
   .AttributeMenu__sealNodeOrb {
-    width: 60px;
-    height: 60px;
+    width: 53px;
+    height: 53px;
   }
 
   .AttributeMenu__sealNodeName {
@@ -740,24 +737,21 @@
   }
 
   .AttributeMenu__sealNode {
-    width: 86px;
+    width: 118px;
     min-height: 76px;
+    font-size: 10px;
   }
 
   .AttributeMenu__sealNodeOrb {
-    width: 44px;
-    height: 44px;
+    width: 39px;
+    height: 39px;
   }
 
   .AttributeMenu__sealNodeName {
     font-size: 11px;
   }
 
-  .AttributeMenu__sealNodeShort {
-    display: none;
-  }
-
   .AttributeMenu__sealNodeValue {
-    font-size: 15px;
+    font-size: 1.36em;
   }
 }
