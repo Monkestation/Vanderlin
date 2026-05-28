@@ -143,7 +143,7 @@
 		closely_inspected["name"] = closely_inspected_attribute.name
 		closely_inspected["desc"] = closely_inspected_attribute.desc
 		closely_inspected["desc_from_level"] = capitalize_like_old_man(closely_inspected_attribute.description_from_level(attribute_list[closely_inspected_attribute.type]))
-		closely_inspected["icon"] = sanitize_css_class_name(closely_inspected_attribute.name)
+		closely_inspected["icon"] = sanitize_css_class_name(closely_inspected_attribute.icon_state)
 		if(istype(closely_inspected_attribute, STAT))
 			var/datum/attribute/stat/closely_inspected_stat = closely_inspected_attribute
 			closely_inspected["shorthand"] = closely_inspected_stat.shorthand
@@ -164,7 +164,7 @@
 
 					this_attribute_default["name"] = attribute_datum.name
 					this_attribute_default["desc"] = attribute_datum.desc
-					this_attribute_default["icon"] = sanitize_css_class_name(attribute_datum.name)
+					this_attribute_default["icon"] = sanitize_css_class_name(attribute_datum.icon_state)
 					this_attribute_default["default_value"] = closely_inspected_skill.default_attributes[attribute_type]
 
 					defaults += list(this_attribute_default)
@@ -189,7 +189,7 @@
 		var/list/this_stat = list()
 		this_stat["name"] = stat.name
 		this_stat["desc"] = stat.desc
-		this_stat["icon"] = sanitize_css_class_name(stat.name)
+		this_stat["icon"] = sanitize_css_class_name(stat.icon_state)
 		this_stat["shorthand"] = stat.shorthand
 		this_stat["raw_value"] = nulltozero(raw_attribute_list[stat_type])
 		this_stat["value"] = nulltozero(attribute_list[stat_type])
@@ -207,7 +207,7 @@
 			var/list/this_skill = list()
 			this_skill["name"] = skill.name
 			this_skill["desc"] = skill.desc
-			this_skill["icon"] = sanitize_css_class_name(skill.name)
+			this_skill["icon"] = sanitize_css_class_name(skill.icon_state)
 			this_skill["difficulty"] = skill.difficulty
 			var/list/values = get_attribute_ui_values(skill_type, raw_value_cache, effective_value_cache)
 			var/raw_value = values["raw"]
