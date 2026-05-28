@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
@@ -68,6 +69,21 @@ const valuePair = (attribute: Attribute) => {
   return `${value}/${raw}`;
 };
 
+const sameAttributePreview = (first: Attribute, second: Attribute) =>
+  first.name === second.name &&
+  first.shorthand === second.shorthand &&
+  first.desc === second.desc &&
+  first.icon === second.icon &&
+  first.value === second.value &&
+  first.raw_value === second.raw_value &&
+  first.difficulty === second.difficulty;
+
+const sameSelection = (
+  first: string | null | undefined,
+  second: string | null | undefined,
+  attributeName: string,
+) => (first === attributeName) === (second === attributeName);
+
 const IconSprite = (props: { icon?: string; size: 'small' | 'big' }) => {
   const { icon, size } = props;
 
@@ -82,26 +98,64 @@ const IconSprite = (props: { icon?: string; size: 'small' | 'big' }) => {
   );
 };
 
-const BodyFigure = () => (
-  <svg className="AttributeMenu__bodyFigure" viewBox="0 0 120 240" aria-hidden="true">
-    <ellipse className="AttributeMenu__figureAura" cx="60" cy="122" rx="25" ry="79" />
-    <circle className="AttributeMenu__figureFill" cx="60" cy="30" r="12" />
+const attributeAnchor = (attribute: Attribute, index: number) => {
+  const name = attribute.name.toLowerCase();
+
+  if (name.includes('strength')) {
+    return 'strength';
+  }
+  if (name.includes('perception')) {
+    return 'perception';
+  }
+  if (name.includes('intellect') || name.includes('intelligence')) {
+    return 'intellect';
+  }
+  if (name.includes('speed') || name.includes('agility')) {
+    return 'speed';
+  }
+  if (name.includes('constitution')) {
+    return 'constitution';
+  }
+  if (name.includes('endurance')) {
+    return 'endurance';
+  }
+  if (name.includes('fortune') || name.includes('luck')) {
+    return 'fortune';
+  }
+
+  return `fallback${index % 7}`;
+};
+
+const AnatomyFigure = () => (
+  <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
+    <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="360" />
+    <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--middle" cx="500" cy="500" r="250" />
+    <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--inner" cx="500" cy="500" r="118" />
     <path
-      className="AttributeMenu__figureStroke"
-      d="M60 45 L60 102 M43 63 L60 58 L77 63 M46 89 L60 103 L74 89 M60 102 L46 157 M60 102 L74 157 M46 157 L39 208 M74 157 L81 208"
+      className="AttributeMenu__anatomyGeometry"
+      d="M500 140 L500 860 M140 500 L860 500 M245 245 L755 245 L755 755 L245 755 Z M500 140 L755 755 L245 755 Z M245 245 L755 755 M755 245 L245 755"
     />
     <path
-      className="AttributeMenu__figureTrace"
-      d="M43 63 C35 85 34 112 42 139 M77 63 C86 85 86 112 78 139 M48 78 C55 83 65 83 72 78 M47 119 C55 126 66 126 74 119"
+      className="AttributeMenu__anatomyArc"
+      d="M178 612 C250 748 366 826 500 826 C634 826 750 748 822 612"
     />
     <path
-      className="AttributeMenu__figureVeins"
-      d="M60 58 L54 88 L60 103 L66 88 L60 58 M53 132 L46 157 M67 132 L74 157"
+      className="AttributeMenu__bodyFill"
+      d="M468 334 C486 306 514 306 532 334 C552 406 547 526 522 676 L478 676 C453 526 448 406 468 334 Z"
+    />
+    <circle className="AttributeMenu__bodyHead" cx="500" cy="267" r="36" />
+    <path
+      className="AttributeMenu__bodyStroke"
+      d="M500 304 L500 676 M463 356 L363 516 M537 356 L637 516 M363 516 L344 544 M637 516 L656 544 M480 676 L425 844 M520 676 L575 844 M425 844 L386 860 M575 844 L614 860"
+    />
+    <path
+      className="AttributeMenu__bodyDetail"
+      d="M468 334 C486 358 514 358 532 334 M456 440 C485 468 515 468 544 440 M478 676 C492 704 508 704 522 676 M500 334 C486 424 486 560 500 676 M500 334 C514 424 514 560 500 676"
     />
   </svg>
 );
 
-const AttributeRingSeal = (props: {
+const AttributeSealNode = memo((props: {
   attribute: Attribute;
   selectedName?: string | null;
   act: any;
@@ -109,36 +163,37 @@ const AttributeRingSeal = (props: {
 }) => {
   const { attribute, selectedName, act, index } = props;
   const selected = selectedName === attribute.name;
-  const ringClass = `AttributeMenu__ringSeal AttributeMenu__ringSeal--${index % 8}${
+  const anchor = attributeAnchor(attribute, index);
+  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${anchor}${
     selected ? ' is-selected' : ''
   }`;
 
   return (
     <Tooltip content={attribute.desc || attribute.name} position="bottom">
       <button
-        className={ringClass}
+        className={nodeClass}
         onClick={() => act('inspect_closely', { attribute_name: attribute.name })}
         type="button"
       >
-        <span className="AttributeMenu__ringWax">
+        <span className="AttributeMenu__sealNodeOrb">
           <IconSprite icon={attribute.icon} size="small" />
         </span>
-        <span className="AttributeMenu__ringText">
-          <span className="AttributeMenu__ringName">
-            {attribute.name}
-            {attribute.shorthand && (
-              <span className="AttributeMenu__ringShort"> ({attribute.shorthand})</span>
-            )}
-          </span>
-          <span className="AttributeMenu__ringSub">Core attribute</span>
+        <span className="AttributeMenu__sealNodeName">
+          {attribute.name}
+          {attribute.shorthand && (
+            <span className="AttributeMenu__sealNodeShort"> ({attribute.shorthand})</span>
+          )}
         </span>
-        <span className={`AttributeMenu__ringValue ${valueTone(attribute.value, attribute.raw_value)}`}>
+        <span className={`AttributeMenu__sealNodeValue ${valueTone(attribute.value, attribute.raw_value)}`}>
           {valuePair(attribute)}
         </span>
       </button>
     </Tooltip>
   );
-};
+}, (previous, next) =>
+  previous.index === next.index &&
+  sameSelection(previous.selectedName, next.selectedName, previous.attribute.name) &&
+  sameAttributePreview(previous.attribute, next.attribute));
 
 const CoreAttributes = (props: {
   stats: Attribute[];
@@ -160,12 +215,9 @@ const CoreAttributes = (props: {
         )}
         {!!stats.length && (
           <div className="AttributeMenu__ringStage">
-            <div className="AttributeMenu__ringOuter" />
-            <div className="AttributeMenu__ringMiddle" />
-            <div className="AttributeMenu__ringInner" />
-            <BodyFigure />
+            <AnatomyFigure />
             {stats.map((stat, index) => (
-              <AttributeRingSeal
+              <AttributeSealNode
                 key={stat.name}
                 attribute={stat}
                 selectedName={selectedName}
@@ -180,7 +232,7 @@ const CoreAttributes = (props: {
   );
 };
 
-const SkillEntry = (props: {
+const SkillEntry = memo((props: {
   skill: Attribute;
   selectedName?: string | null;
   act: any;
@@ -213,7 +265,9 @@ const SkillEntry = (props: {
       </button>
     </Tooltip>
   );
-};
+}, (previous, next) =>
+  sameSelection(previous.selectedName, next.selectedName, previous.skill.name) &&
+  sameAttributePreview(previous.skill, next.skill));
 
 const SkillRegister = (props: {
   data: AttributeData;

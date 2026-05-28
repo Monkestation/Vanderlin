@@ -161,254 +161,209 @@
   align-items: center;
   justify-content: center;
   min-height: 0;
-  padding: 4px;
+  overflow: hidden;
+  padding: 8px;
 }
 
 .AttributeMenu__ringStage {
   position: relative;
+  flex: 0 1 auto;
   width: 100%;
-  height: 100%;
-  min-height: 350px;
+  max-width: 620px;
+  min-width: 300px;
+  min-height: 300px;
+  aspect-ratio: 1 / 1;
+  margin: auto;
 }
 
-.AttributeMenu__ringOuter,
-.AttributeMenu__ringMiddle,
-.AttributeMenu__ringInner {
+.AttributeMenu__anatomy {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  pointer-events: none;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.AttributeMenu__ringOuter {
-  width: 82%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  max-width: 430px;
-  border: 2px solid rgba(86, 48, 25, 0.48);
-  box-shadow:
-    inset 0 0 26px rgba(80, 42, 18, 0.18),
-    0 0 0 1px rgba(228, 188, 104, 0.16);
-}
-
-.AttributeMenu__ringMiddle {
-  width: 62%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  max-width: 330px;
-  border: 1px dashed rgba(86, 48, 25, 0.46);
-}
-
-.AttributeMenu__ringInner {
-  width: 41%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  max-width: 220px;
-  border: 1px solid rgba(86, 48, 25, 0.27);
-  background:
-    radial-gradient(circle, rgba(255, 238, 174, 0.2), transparent 67%),
-    radial-gradient(circle at 50% 50%, rgba(90, 48, 22, 0.16), transparent 72%);
-}
-
-.AttributeMenu__bodyFigure {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: 62%;
-  max-height: 300px;
+  inset: 7%;
+  width: 86%;
+  height: 86%;
   overflow: visible;
-  transform: translate(-50%, -49%);
 }
 
-.AttributeMenu__figureAura {
-  fill: rgba(255, 236, 169, 0.12);
-  stroke: rgba(74, 40, 20, 0.28);
+.AttributeMenu__anatomyCircle,
+.AttributeMenu__anatomyGeometry,
+.AttributeMenu__anatomyArc,
+.AttributeMenu__bodyStroke,
+.AttributeMenu__bodyDetail {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.AttributeMenu__anatomyCircle--outer {
+  stroke: rgba(86, 48, 25, 0.5);
+  stroke-width: 3;
+}
+
+.AttributeMenu__anatomyCircle--middle {
+  stroke: rgba(86, 48, 25, 0.36);
+  stroke-dasharray: 8 8;
   stroke-width: 1;
 }
 
-.AttributeMenu__figureFill {
-  fill: rgba(52, 32, 21, 0.62);
-  stroke: rgba(195, 146, 66, 0.75);
-  stroke-width: 1.8;
+.AttributeMenu__anatomyCircle--inner {
+  stroke: rgba(86, 48, 25, 0.25);
+  stroke-width: 1.3;
 }
 
-.AttributeMenu__figureStroke,
-.AttributeMenu__figureTrace,
-.AttributeMenu__figureVeins {
-  fill: none;
+.AttributeMenu__anatomyGeometry {
+  stroke: rgba(86, 48, 25, 0.23);
+  stroke-width: 1.4;
+}
+
+.AttributeMenu__anatomyArc {
+  stroke: rgba(117, 75, 38, 0.33);
+  stroke-width: 2.2;
+}
+
+.AttributeMenu__bodyFill {
+  fill: rgba(74, 43, 24, 0.11);
+  stroke: rgba(62, 38, 23, 0.7);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.AttributeMenu__bodyHead {
+  fill: rgba(74, 43, 24, 0.15);
+  stroke: rgba(62, 38, 23, 0.74);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.AttributeMenu__bodyStroke {
+  stroke: rgba(43, 28, 18, 0.86);
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-width: 9;
 }
 
-.AttributeMenu__figureStroke {
-  stroke: rgba(39, 24, 16, 0.86);
-  stroke-width: 7;
+.AttributeMenu__bodyDetail {
+  stroke: rgba(157, 112, 51, 0.58);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
 }
 
-.AttributeMenu__figureTrace {
-  stroke: rgba(195, 146, 66, 0.68);
-  stroke-width: 2.6;
-}
-
-.AttributeMenu__figureVeins {
-  stroke: rgba(117, 34, 27, 0.58);
-  stroke-width: 1.7;
-}
-
-.AttributeMenu__ringSeal {
+.AttributeMenu__sealNode {
   position: absolute;
-  display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  align-items: center;
-  gap: 1px 7px;
-  width: 31%;
-  min-width: 124px;
-  max-width: 174px;
-  min-height: 58px;
-  padding: 6px 7px;
-  color: var(--am-ink);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  background:
-    linear-gradient(90deg, rgba(255, 238, 181, 0.42), rgba(133, 83, 38, 0.16)),
-    rgba(255, 244, 205, 0.24);
-  border: 1px solid rgba(70, 38, 18, 0.4);
-  box-shadow:
-    inset 0 0 10px rgba(61, 30, 12, 0.13),
-    0 2px 6px rgba(46, 22, 10, 0.17);
-}
-
-.AttributeMenu__ringSeal:hover {
-  background-color: rgba(255, 235, 169, 0.4);
-}
-
-.AttributeMenu__ringSeal.is-selected {
-  border-color: rgba(130, 36, 28, 0.82);
-  box-shadow:
-    inset 0 0 10px rgba(119, 43, 25, 0.24),
-    0 0 0 1px rgba(190, 126, 50, 0.38),
-    0 3px 10px rgba(64, 28, 12, 0.22);
-}
-
-.AttributeMenu__ringSeal--0 {
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.AttributeMenu__ringSeal--1 {
-  top: 33%;
-  left: 88%;
-  transform: translate(-100%, -50%);
-}
-
-.AttributeMenu__ringSeal--2 {
-  top: 69%;
-  left: 14%;
-  transform: translate(0, -50%);
-}
-
-.AttributeMenu__ringSeal--3 {
-  top: 17%;
-  left: 76%;
-  transform: translate(-50%, -50%);
-}
-
-.AttributeMenu__ringSeal--4 {
-  top: 17%;
-  left: 24%;
-  transform: translate(-50%, -50%);
-}
-
-.AttributeMenu__ringSeal--5 {
-  top: 49%;
-  left: 5%;
-  transform: translate(0, -50%);
-}
-
-.AttributeMenu__ringSeal--6 {
-  top: 100%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-}
-
-.AttributeMenu__ringSeal--7 {
-  top: 75%;
-  left: 84%;
-  transform: translate(-100%, -50%);
-}
-
-.AttributeMenu__ringWax {
-  display: inline-flex;
-  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 104px;
+  min-height: 86px;
+  padding: 0;
+  color: var(--am-ink);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  transform: translate(-50%, -50%);
+}
+
+.AttributeMenu__sealNode:hover .AttributeMenu__sealNodeOrb {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.AttributeMenu__sealNode.is-selected .AttributeMenu__sealNodeOrb {
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.38),
+    0 0 0 2px rgba(139, 42, 30, 0.9),
+    0 0 0 5px rgba(198, 144, 57, 0.38),
+    0 6px 15px rgba(65, 29, 12, 0.32);
+}
+
+.AttributeMenu__sealNode--strength,
+.AttributeMenu__sealNode--fallback0 {
+  top: 13%;
+  left: 50%;
+}
+
+.AttributeMenu__sealNode--perception,
+.AttributeMenu__sealNode--fallback1 {
+  top: 25%;
+  left: 18%;
+}
+
+.AttributeMenu__sealNode--intellect,
+.AttributeMenu__sealNode--fallback2 {
+  top: 25%;
+  left: 82%;
+}
+
+.AttributeMenu__sealNode--constitution,
+.AttributeMenu__sealNode--fallback3 {
+  top: 60%;
+  left: 17%;
+}
+
+.AttributeMenu__sealNode--speed,
+.AttributeMenu__sealNode--fallback4 {
+  top: 60%;
+  left: 83%;
+}
+
+.AttributeMenu__sealNode--endurance,
+.AttributeMenu__sealNode--fallback5 {
+  top: 84%;
+  left: 32%;
+}
+
+.AttributeMenu__sealNode--fortune,
+.AttributeMenu__sealNode--fallback6 {
+  top: 84%;
+  left: 68%;
+}
+
+.AttributeMenu__sealNodeOrb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 34% 26%, #c25745, var(--am-wax) 58%, var(--am-wax-dark));
+    radial-gradient(circle at 34% 24%, #c96a56, var(--am-wax) 54%, var(--am-wax-dark));
   border: 1px solid var(--am-wax-dark);
   box-shadow:
-    inset 0 0 9px rgba(0, 0, 0, 0.34),
-    0 0 0 2px rgba(90, 30, 22, 0.12);
+    inset 0 0 12px rgba(0, 0, 0, 0.36),
+    0 0 0 3px rgba(95, 36, 25, 0.15),
+    0 4px 9px rgba(54, 24, 10, 0.24);
+  transition:
+    filter 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
 }
 
-.AttributeMenu__ringText {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-}
-
-.AttributeMenu__ringName,
+.AttributeMenu__sealNodeName,
 .AttributeMenu__skillName {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.AttributeMenu__ringName {
+.AttributeMenu__sealNodeName {
+  width: 100%;
+  margin-top: 5px;
   color: var(--am-ink);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
-  line-height: 1.05;
+  line-height: 1.1;
+  text-shadow: 0 1px rgba(255, 237, 184, 0.46);
 }
 
-.AttributeMenu__ringShort,
-.AttributeMenu__ringSub {
+.AttributeMenu__sealNodeShort {
   color: var(--am-ink-soft);
-}
-
-.AttributeMenu__ringShort {
-  font-size: 11px;
-}
-
-.AttributeMenu__ringSub {
-  overflow: hidden;
-  font-family: Verdana, sans-serif;
-  font-size: 8px;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.AttributeMenu__ringValue {
-  color: var(--am-ink);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 18px;
-  font-weight: bold;
-  grid-column: 2;
-  line-height: 1;
-  white-space: nowrap;
+  font-size: 10px;
 }
 
 .AttributeMenu__value,
-.AttributeMenu__ringValue {
+.AttributeMenu__sealNodeValue {
   color: var(--am-ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 15px;
@@ -416,26 +371,28 @@
   white-space: nowrap;
 }
 
-.AttributeMenu__ringValue {
-  font-size: 18px;
+.AttributeMenu__sealNodeValue {
+  margin-top: 1px;
+  font-size: 17px;
+  line-height: 1;
 }
 
 .AttributeMenu__value.is-buffed,
-.AttributeMenu__ringValue.is-buffed,
+.AttributeMenu__sealNodeValue.is-buffed,
 .AttributeMenu__valueCard strong.is-buffed,
 .AttributeMenu__modifierRow strong.is-buffed {
   color: var(--am-good);
 }
 
 .AttributeMenu__value.is-debuffed,
-.AttributeMenu__ringValue.is-debuffed,
+.AttributeMenu__sealNodeValue.is-debuffed,
 .AttributeMenu__valueCard strong.is-debuffed,
 .AttributeMenu__modifierRow strong.is-debuffed {
   color: var(--am-bad);
 }
 
 .AttributeMenu__value.is-muted,
-.AttributeMenu__ringValue.is-muted {
+.AttributeMenu__sealNodeValue.is-muted {
   color: var(--am-ink-soft);
 }
 
@@ -722,25 +679,38 @@
   }
 
   .AttributeMenu__ringStage {
-    min-height: 430px;
+    max-width: 720px;
   }
 
-  .AttributeMenu__ringSeal {
-    width: 28%;
-    min-width: 150px;
-    max-width: 205px;
+  .AttributeMenu__sealNode {
+    width: 122px;
+    min-height: 96px;
   }
 
-  .AttributeMenu__ringName {
-    font-size: 17px;
+  .AttributeMenu__sealNodeOrb {
+    width: 60px;
+    height: 60px;
+  }
+
+  .AttributeMenu__sealNodeName {
+    font-size: 15px;
+  }
+
+  .AttributeMenu__sealNodeValue {
+    font-size: 20px;
   }
 }
 
 @media (max-width: 1060px) {
   .AttributeMenu__backdrop {
     grid-template-columns: minmax(320px, 1fr) minmax(350px, 1.12fr);
-    grid-template-rows: minmax(360px, 52%) minmax(260px, 48%);
+    grid-template-rows: minmax(440px, auto) minmax(280px, auto);
     overflow-y: auto;
+  }
+
+  .AttributeMenu__ringStage {
+    max-width: 430px;
+    min-width: 280px;
   }
 
   .AttributeMenu__panel--seals {
@@ -765,21 +735,29 @@
   }
 
   .AttributeMenu__ringStage {
-    min-height: 340px;
+    min-width: 260px;
+    max-width: 400px;
   }
 
-  .AttributeMenu__ringSeal {
-    width: 34%;
-    min-width: 118px;
-    max-width: 152px;
+  .AttributeMenu__sealNode {
+    width: 86px;
+    min-height: 76px;
   }
 
-  .AttributeMenu__ringName {
-    font-size: 13px;
+  .AttributeMenu__sealNodeOrb {
+    width: 44px;
+    height: 44px;
   }
 
-  .AttributeMenu__ringShort,
-  .AttributeMenu__ringSub {
+  .AttributeMenu__sealNodeName {
+    font-size: 11px;
+  }
+
+  .AttributeMenu__sealNodeShort {
     display: none;
+  }
+
+  .AttributeMenu__sealNodeValue {
+    font-size: 15px;
   }
 }

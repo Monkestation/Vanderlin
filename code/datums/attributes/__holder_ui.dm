@@ -1,6 +1,7 @@
 /datum/attribute_holder
 	var/datum/attribute/closely_inspected_attribute = null
 	var/show_bad_skills = FALSE
+	var/datum/tgui/attribute_menu_ui = null
 
 /datum/attribute_holder/proc/return_raw_calculated_skill_cached(attribute_type, list/raw_cache)
 	if(attribute_type in raw_cache)
@@ -56,18 +57,57 @@
 			return attribute_datum
 	return null
 
+/datum/attribute_holder/proc/find_active_attribute_menu_ui(mob/user)
+	if(!user)
+		return null
+	if(attribute_menu_ui && !QDELETED(attribute_menu_ui) && attribute_menu_ui.user == user && !attribute_menu_ui.closing)
+		attribute_menu_ui.process_status()
+		if(attribute_menu_ui.status > UI_CLOSE)
+			return attribute_menu_ui
+		attribute_menu_ui = null
+	var/datum/tgui/found_ui = null
+	var/list/open_ui_list = user.tgui_open_uis ? user.tgui_open_uis.Copy() : null
+	for(var/datum/tgui/open_ui as anything in open_ui_list)
+		if(QDELETED(open_ui) || open_ui.closing || open_ui.interface != "AttributeMenu")
+			continue
+		open_ui.process_status()
+		if(open_ui.status <= UI_CLOSE || open_ui.src_object != src)
+			open_ui.close()
+			continue
+		if(found_ui)
+			open_ui.close()
+			continue
+		found_ui = open_ui
+	attribute_menu_ui = found_ui
+	return found_ui
+
+/datum/attribute_holder/proc/update_attribute_menu_ui()
+	if(!attribute_menu_ui && !LAZYLEN(open_uis))
+		return
+	var/datum/tgui/ui = find_active_attribute_menu_ui(parent)
+	if(ui)
+		ui.send_update()
+
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
 	if(isnull(ui))
-		var/datum/tgui/existing_ui = SStgui.get_open_ui(user, src)
+		var/datum/tgui/existing_ui = find_active_attribute_menu_ui(user)
 		if(existing_ui)
-			existing_ui.process_status()
-			if(existing_ui.status > UI_CLOSE)
-				return
+			return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AttributeMenu")
+		attribute_menu_ui = ui
 		ui.set_autoupdate(FALSE)
-		ui.open()
+		if(!ui.open())
+			if(attribute_menu_ui == ui)
+				attribute_menu_ui = null
+	else
+		attribute_menu_ui = ui
+
+/datum/attribute_holder/ui_close(mob/user)
+	. = ..()
+	if(attribute_menu_ui?.user == user)
+		attribute_menu_ui = null
 
 /datum/attribute_holder/ui_state(mob/user)
 	return GLOB.always_state
