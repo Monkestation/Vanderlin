@@ -3716,7 +3716,7 @@
 #include "code\modules\projectiles\guns\ballistic\blowgun.dm"
 #include "code\modules\projectiles\guns\ballistic\bow.dm"
 #include "code\modules\projectiles\guns\ballistic\crossbow.dm"
-#include "code\modules\projectiles\guns\ballistic\powder\blunderbluss.dm"
+#include "code\modules\projectiles\guns\ballistic\powder\blunderbuss.dm"
 #include "code\modules\projectiles\guns\ballistic\powder\musket.dm"
 #include "code\modules\projectiles\guns\ballistic\powder\puffer.dm"
 #include "code\modules\projectiles\projectile\bullets.dm"
