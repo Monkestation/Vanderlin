@@ -492,26 +492,18 @@
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/steel
 	name = "felling axe"
 	desc = "Not just a tool, weapon, or loyal companion of woodcutters, this is a true feller of wood, and the savage hate of the wild."
-	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "swoodcutter"
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_HEAVYAXE_WIELD
+	force = DAMAGE_AXE + 2
 	wlength = WLENGTH_LONG
-	gripped_intents = list(AXE_CUT, AXE_GRTCHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 8
+	minstr = 9
 
-	bigboy = TRUE
-	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
-	resistance_flags = FLAMMABLE
-	associated_skill = /datum/attribute/skill/combat/axesmaces
-	dropshrink = 0.95
 	axe_cut = 15
 	smeltresult = /obj/item/ingot/steel
 	melt_amount = 75
-	sellprice = 20
-	item_weight = 3 KILOGRAMS
+	sellprice = 50
+	item_weight = 4 KILOGRAMS
 
 	weapon_special = /datum/special_intent/axe_swing
 
