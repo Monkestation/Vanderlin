@@ -112,7 +112,9 @@
 						to_chat(user, "<span class='warning'>Necra turns a blind eye to my deeds.</span>")
 					else
 						to_chat(user, "<span class='warning'>Necra shuns my blasphemous deeds, I am cursed!</span>")
-						L.apply_status_effect(/datum/status_effect/debuff/cursed)
+						L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+						if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t3)) || !(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
+							L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
 				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 				sealed = FALSE
 				consecrated = FALSE

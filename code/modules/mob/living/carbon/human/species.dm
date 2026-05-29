@@ -2015,7 +2015,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 						H.flash_fullscreen("redflash3")
 			if(BP)
 				if(damage_type)
-					BP.bodypart_attacked_by(damage_type, damage_amount, modifiers = mods)
+					BP.bodypart_attacked_by(damage_type, damage_amount, null, def_zone, modifiers = mods)
 					H.update_damage_overlays()
 				else
 					if(BP.receive_damage(damage_amount, 0))

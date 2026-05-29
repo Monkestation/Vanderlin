@@ -1736,6 +1736,16 @@
 	craftdiff = 2
 	category = "Mask"
 
+/datum/repeatable_crafting_recipe/sewing/surg_sack
+	name = "physicker's masked sack"
+	output = /obj/item/clothing/face/sack/surgsack
+	requirements = list(
+		/obj/item/natural/cloth = 3,
+		/obj/item/clothing/face/phys = 1,
+	)
+	craftdiff = 1
+	category = "Mask"
+
 /datum/repeatable_crafting_recipe/sewing/bandaged_gloves
 	name = "Bandaged Gloves"
 	output = /obj/item/clothing/gloves/bandages
