@@ -2,6 +2,9 @@ import { memo, useCallback, useMemo, type CSSProperties } from 'react';
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
+import { resolveAsset } from '../assets';
+
+const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
 
 type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
 
@@ -347,34 +350,55 @@ const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
   );
 });
 
-const AnatomyFigure = memo(() => (
-  <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
-    <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="360" />
-    <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--middle" cx="500" cy="500" r="250" />
-    <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--inner" cx="500" cy="500" r="118" />
-    <path
-      className="AttributeMenu__anatomyGeometry"
-      d="M500 140 L500 860 M140 500 L860 500 M245 245 L755 245 L755 755 L245 755 Z M500 140 L755 755 L245 755 Z M245 245 L755 755 M755 245 L245 755"
-    />
-    <path
-      className="AttributeMenu__anatomyArc"
-      d="M178 612 C250 748 366 826 500 826 C634 826 750 748 822 612"
-    />
-    <path
-      className="AttributeMenu__bodyFill"
-      d="M468 334 C486 306 514 306 532 334 C552 406 547 526 522 676 L478 676 C453 526 448 406 468 334 Z"
-    />
-    <circle className="AttributeMenu__bodyHead" cx="500" cy="267" r="36" />
-    <path
-      className="AttributeMenu__bodyStroke"
-      d="M500 304 L500 676 M463 356 L363 516 M537 356 L637 516 M363 516 L344 544 M637 516 L656 544 M480 676 L425 844 M520 676 L575 844 M425 844 L386 860 M575 844 L614 860"
-    />
-    <path
-      className="AttributeMenu__bodyDetail"
-      d="M468 334 C486 358 514 358 532 334 M456 440 C485 468 515 468 544 440 M478 676 C492 704 508 704 522 676 M500 334 C486 424 486 560 500 676 M500 334 C514 424 514 560 500 676"
-    />
-  </svg>
-));
+const AnatomyFigure = memo(() => {
+  const figureUrl = resolveAsset(LEDGER_FIGURE_ASSET);
+  const hasFigure = figureUrl !== LEDGER_FIGURE_ASSET;
+
+  return (
+    <>
+      <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
+        <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="360" />
+        {hasFigure && (
+          <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--track" cx="500" cy="500" r="346" />
+        )}
+        {!hasFigure && (
+          <>
+            <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--middle" cx="500" cy="500" r="250" />
+            <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--inner" cx="500" cy="500" r="118" />
+            <path
+              className="AttributeMenu__anatomyGeometry"
+              d="M500 140 L500 860 M140 500 L860 500 M245 245 L755 245 L755 755 L245 755 Z M500 140 L755 755 L245 755 Z M245 245 L755 755 M755 245 L245 755"
+            />
+            <path
+              className="AttributeMenu__anatomyArc"
+              d="M178 612 C250 748 366 826 500 826 C634 826 750 748 822 612"
+            />
+            <path
+              className="AttributeMenu__bodyFill"
+              d="M468 334 C486 306 514 306 532 334 C552 406 547 526 522 676 L478 676 C453 526 448 406 468 334 Z"
+            />
+            <circle className="AttributeMenu__bodyHead" cx="500" cy="267" r="36" />
+            <path
+              className="AttributeMenu__bodyStroke"
+              d="M500 304 L500 676 M463 356 L363 516 M537 356 L637 516 M363 516 L344 544 M637 516 L656 544 M480 676 L425 844 M520 676 L575 844 M425 844 L386 860 M575 844 L614 860"
+            />
+            <path
+              className="AttributeMenu__bodyDetail"
+              d="M468 334 C486 358 514 358 532 334 M456 440 C485 468 515 468 544 440 M478 676 C492 704 508 704 522 676 M500 334 C486 424 486 560 500 676 M500 334 C514 424 514 560 500 676"
+            />
+          </>
+        )}
+      </svg>
+      {hasFigure && (
+        <div
+          className="AttributeMenu__figure"
+          style={{ backgroundImage: `url('${figureUrl}')` }}
+          aria-hidden="true"
+        />
+      )}
+    </>
+  );
+});
 
 const AttributeSealNode = memo((props: {
   stat: ResolvedStat;

@@ -2426,6 +2426,7 @@
 #include "code\modules\asset_cache\asset_list.dm"
 #include "code\modules\asset_cache\assets\_common.dm"
 #include "code\modules\asset_cache\assets\achievements.dm"
+#include "code\modules\asset_cache\assets\attribute_menu.dm"
 #include "code\modules\asset_cache\assets\changelog.dm"
 #include "code\modules\asset_cache\assets\chat.dm"
 #include "code\modules\asset_cache\assets\fontawesome.dm"

@@ -244,6 +244,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	return list(
 		get_asset_datum(/datum/asset/spritesheet/attributes_big),
 		get_asset_datum(/datum/asset/spritesheet/attributes_small),
+		get_asset_datum(/datum/asset/simple/attribute_menu),
 	)
 
 /datum/attribute_holder/ui_static_data(mob/user)
