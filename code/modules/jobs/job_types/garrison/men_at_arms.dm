@@ -46,6 +46,9 @@
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/manorguard
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 
 /datum/outfit/watchman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()
@@ -99,9 +102,6 @@
 	backr = /obj/item/weapon/polearm/spear/billhook
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
 
 /datum/attribute_holder/sheet/job/menatarms/axeman
 	raw_attribute_list = list(
@@ -145,9 +145,6 @@
 	gloves = /obj/item/clothing/gloves/chain
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/greataxe/steel
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
 
 /datum/attribute_holder/sheet/job/menatarms/ranger
 	raw_attribute_list = list(
@@ -186,9 +183,6 @@
 	name = "Archer Men-At-Arms"
 	armor = /obj/item/clothing/armor/leather/splint
 	beltr = /obj/item/weapon/mace/cudgel
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
 
 /datum/outfit/watchman/ranger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -242,6 +236,3 @@
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
