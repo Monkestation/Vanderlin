@@ -460,6 +460,7 @@
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
 	desc = "A halberd forged from silver, laying low the beasts of the nite."
+	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverhalberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
