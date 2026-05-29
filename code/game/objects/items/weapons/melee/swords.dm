@@ -106,6 +106,10 @@
 	sellprice = 60
 	item_weight = 650 GRAMS
 
+/obj/item/weapon/sword/short/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
@@ -1068,7 +1072,7 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 120
 
-/obj/item/weapon/sword/long/decorated/Initialize(mapload)
+/obj/item/weapon/sword/long/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
@@ -1437,6 +1441,10 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
 	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 //................ Terminus Est ............... //
 /obj/item/weapon/sword/long/exe/cloth

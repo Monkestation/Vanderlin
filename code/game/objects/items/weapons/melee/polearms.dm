@@ -119,6 +119,10 @@
 	melting_material = /datum/material/silver
 	melt_amount = 75
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
@@ -182,6 +186,10 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 60
 	item_weight = 2.7 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/polearm/spear/partizan
 	name = "partizan"
@@ -379,6 +387,10 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 0.8
 
+/obj/item/weapon/polearm/spear/stone/copper/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/weapon/polearm/spear/bone
 	name = "bone javelin"
 	desc = "Made by the tribes of the wilds for hunting, this spear has will eventually kill your prey, if aim remains true."
@@ -471,6 +483,10 @@
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 120
+
+/obj/item/weapon/polearm/halberd/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()
