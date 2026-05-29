@@ -283,12 +283,10 @@ interface ResolvedInspectedAttribute extends Partial<AttributeFullMeta> {
 }
 
 interface AttributeData {
-  // From ui_static_data (merged into `data` by tgui store):
   stats_meta?: StatMeta[];
   skills_by_category_meta?: SkillCategoryMeta[];
   attribute_meta_by_name?: Record<string, AttributeFullMeta>;
 
-  // From ui_data:
   show_bad_skills: boolean;
   parent?: string;
   stats_values?: Record<string, AttributeValues>;

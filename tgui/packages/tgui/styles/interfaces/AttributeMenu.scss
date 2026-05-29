@@ -5,14 +5,24 @@
   --am-parchment: #d9c18d;
   --am-parchment-light: #ead6a5;
   --am-parchment-deep: #b58a55;
-  --am-wood: #140c08;
-  --am-leather: #2b160f;
-  --am-gold: #947033;
-  --am-gold-bright: #c99a47;
-  --am-wax: #8a271f;
-  --am-wax-dark: #4e130f;
-  --am-good: #375f30;
-  --am-bad: #8a2c25;
+  --am-gold-mat: #ffcc33;
+  --am-copper: #b87333;
+  --am-bronze: #ccbc63;
+  --am-silver: #d1e6e3;
+  --am-steel: #5c5454;
+  --am-iron: #5f5b57;
+  --am-blacksteel: #3f352a;
+  --am-coke: #1c1c1c;
+  --am-fire: #ff9900;
+  --am-fire-deep: #c3630c;
+  --am-wood: #15140f;
+  --am-leather: #3f352a;
+  --am-gold: #b88a2a;
+  --am-gold-bright: #ffcc33;
+  --am-wax: #e07a1e;
+  --am-wax-dark: #aa4e0a;
+  --am-good: #9a6f12;
+  --am-bad: #9c4a22;
   position: relative;
   width: 100%;
   height: 100%;
@@ -35,13 +45,13 @@
   box-sizing: border-box;
   overflow: hidden;
   background:
-    radial-gradient(circle at 24% 12%, rgba(131, 79, 32, 0.22), transparent 34%),
-    radial-gradient(circle at 78% 80%, rgba(12, 6, 3, 0.7), transparent 38%),
-    linear-gradient(180deg, #25150d, #0c0705);
-  border: 1px solid #3a2114;
+    radial-gradient(circle at 24% 12%, rgba(255, 204, 51, 0.1), transparent 34%),
+    radial-gradient(circle at 78% 80%, rgba(8, 8, 7, 0.72), transparent 38%),
+    linear-gradient(180deg, #232220, #0c0c0b);
+  border: 1px solid var(--am-blacksteel);
   box-shadow:
     inset 0 0 34px rgba(0, 0, 0, 0.65),
-    inset 0 0 0 1px rgba(199, 150, 72, 0.16);
+    inset 0 0 0 1px rgba(255, 204, 51, 0.16);
 }
 
 .AttributeMenu__panel {
@@ -58,10 +68,10 @@
     radial-gradient(circle at 18% 10%, rgba(255, 238, 178, 0.28), transparent 28%),
     radial-gradient(circle at 85% 95%, rgba(74, 34, 14, 0.18), transparent 36%),
     linear-gradient(180deg, var(--am-parchment-light), var(--am-parchment-deep));
-  border: 2px solid #59351f;
+  border: 2px solid var(--am-gold);
   box-shadow:
     inset 0 0 24px rgba(70, 32, 10, 0.34),
-    0 0 0 1px rgba(244, 211, 130, 0.17);
+    0 0 0 1px rgba(255, 204, 51, 0.22);
 }
 
 .AttributeMenu__panel::before {
@@ -295,8 +305,8 @@
 .AttributeMenu__sealNode.is-selected .AttributeMenu__sealNodeOrb {
   box-shadow:
     inset 0 0 12px rgba(0, 0, 0, 0.38),
-    0 0 0 2px rgba(139, 42, 30, 0.9),
-    0 0 0 5px rgba(198, 144, 57, 0.38),
+    0 0 0 2px rgba(255, 153, 0, 0.92),
+    0 0 0 5px rgba(255, 204, 51, 0.42),
     0 6px 15px rgba(65, 29, 12, 0.32);
 }
 
@@ -415,11 +425,11 @@
   height: 35px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 34% 24%, #c96a56, var(--am-wax) 54%, var(--am-wax-dark));
+    radial-gradient(circle at 34% 24%, #ffe08a, var(--am-wax) 52%, var(--am-wax-dark));
   border: 1px solid var(--am-wax-dark);
   box-shadow:
     inset 0 0 12px rgba(0, 0, 0, 0.36),
-    0 0 0 3px rgba(95, 36, 25, 0.15),
+    0 0 0 3px rgba(255, 153, 0, 0.18),
     0 4px 9px rgba(54, 24, 10, 0.24);
   transition:
     filter 120ms ease,
@@ -612,7 +622,7 @@
 }
 
 .AttributeMenu__closeNote:hover {
-  background: #a73429;
+  background: var(--am-fire-deep);
 }
 
 .AttributeMenu__inspectionIntro {
@@ -969,7 +979,7 @@
 .AttributeMenu__tutorialHeader {
   position: relative;
   padding: 8px 32px 8px 12px;
-  background: linear-gradient(180deg, #2b160f, #140c08);
+  background: linear-gradient(180deg, var(--am-leather), var(--am-coke));
   border-bottom: 1px solid var(--am-gold-bright);
   color: var(--am-parchment-light);
 }
@@ -1089,6 +1099,6 @@
 
   &:hover {
     color: #fff5d6;
-    background: linear-gradient(180deg, #a73229, var(--am-wax));
+    background: linear-gradient(180deg, #ffae3a, var(--am-wax));
   }
 }
