@@ -126,3 +126,13 @@
   realforest2001:
   - bugfix: Fixed admin hear all.
   - rscdel: Removed racist cats.
+2026-05-27:
+  ta3754859-max:
+  - bugfix: Rare subclasses now appear in triumph buy classes menu
+2026-05-28:
+  Spitegremlin:
+  - rscadd: Added new mask
+  - rscadd: Added new Zigar
+  - image: added some zigar and zigbox sprites
+  - code_imp: Changed zigs to need westleach dust or swampweed dust along with their
+      leaf type

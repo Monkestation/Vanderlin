@@ -124,6 +124,11 @@
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
 
+/obj/item/clothing/face/sack/surgsack
+	name = "physicker's masked sack"
+	desc = "A brown sack, with a physickers mask on top of it, likely for more coverage."
+	icon_state = "surgsackmask"
+
 /obj/item/clothing/face/sack/psy
 	name = "psydonian sack mask"
 	desc = "An ordinary brown sack. This one has eyeholes cut into it, bearing a crude chalk drawing of Psydon's cross upon its visage. Unsettling for most."
