@@ -46,14 +46,14 @@
 		/obj/item/weapon/knife/villager = 1, //utility knife!
 		/obj/item/weapon/mace/cudgel //all of this spawns in their bag because of stuff that spawns things on your hip
 	)
-/datum/outfit/mercenary/grenzelhoft/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/mercenary/grenzelhoftzwei/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	if(H.gender == FEMALE)
 		H.underwear = "Femleotard"
 		H.underwear_color = CLOTHING_SOOT_BLACK
 		H.update_body()
 
-/datum/job/advclass/mercenary/grenzelhoft/after_spawn(mob/living/carbon/human/H)
+/datum/job/advclass/mercenary/grenzelhoftzwei/after_spawn(mob/living/carbon/human/H)
 	. = ..()
 	H.merctype = 2
 	if(H.dna?.species.id == SPEC_ID_HUMEN)

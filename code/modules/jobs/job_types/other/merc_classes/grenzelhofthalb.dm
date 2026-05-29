@@ -50,7 +50,7 @@
 		H.underwear_color = CLOTHING_SOOT_BLACK
 		H.update_body()
 
-/datum/job/advclass/mercenary/grenzelhoft/after_spawn(mob/living/carbon/human/H)
+/datum/job/advclass/mercenary/grenzelhofthalb/after_spawn(mob/living/carbon/human/H)
 	. = ..()
 	H.merctype = 2
 	if(H.dna?.species.id == SPEC_ID_HUMEN)

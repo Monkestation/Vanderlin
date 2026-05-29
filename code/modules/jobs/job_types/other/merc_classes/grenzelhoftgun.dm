@@ -44,14 +44,14 @@
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/cuirass/iron //shitty armor haha
 
-/datum/outfit/mercenary/grenzelhoft/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/mercenary/grenzelhoftgun/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	if(H.gender == FEMALE)
 		H.underwear = "Femleotard"
 		H.underwear_color = CLOTHING_SOOT_BLACK
 		H.update_body()
 
-/datum/job/advclass/mercenary/grenzelhoft/after_spawn(mob/living/carbon/human/H)
+/datum/job/advclass/mercenary/grenzelhoftgun/after_spawn(mob/living/carbon/human/H)
 	. = ..()
 	H.merctype = 2
 	if(H.dna?.species.id == SPEC_ID_HUMEN)
