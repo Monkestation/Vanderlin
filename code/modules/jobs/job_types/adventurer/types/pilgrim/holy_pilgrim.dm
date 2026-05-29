@@ -73,7 +73,7 @@
 
 /datum/job/advclass/pilgrim/holy_pilgrim
 	title = "Holy Pilgrim"
-	tutorial = "TODO"
+	tutorial = "You are a wandering pilgrim of the holy orders of the ten, you have been blessed with some miracles of your god and given divine purpose in the lands you travel to. You do not walk alone."
 	category_tags = list(CTAG_PILGRIM)
 	allowed_patrons = ALL_TEMPLE_PATRONS
 	total_positions = 4
@@ -163,6 +163,7 @@
 	shoes = /obj/item/clothing/shoes/sandals
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/storage/belt/pouch/coins/poor
+	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/reagent_containers/food/snacks/hardtack = 1
 	)
