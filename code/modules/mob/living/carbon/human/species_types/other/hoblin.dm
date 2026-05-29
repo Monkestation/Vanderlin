@@ -18,29 +18,27 @@
 		"Ossland Accent" = ACCENT_OSSLAND,
 	)
 	native_language = "Orcish"
-	desc = "The bastards of Graggar. \
+	desc = "Smaller cousins of Half-Orcs. \
 	\n\n\
-	Half-Orcs are the offspring of orcs and another species, half-orcs, \
-	or another species who has consumed much kinsflesh on their way to orcishness. \
-	An outsider cannot tell a half-orc product of heritage or cannibalism at a glance, leading to much social ostracization.\
+	Hoblins, also known as half-goblins, are the offspring of half-goblins and another species, \
+	or mostly those who's bodies were too small or frail to ascend into a proper half-orc during the consumption of kinflesh. \
 	\n\n\
-	Due to their parent's refusal to nurture them, \
-	as well as their other parent often rejecting or attacking them, most Half-Orcs will grow as orphans. \
-	Their rejection by the rest of society causes their growth to stunt, \
-	often making them hostile and prone to violence. Because of this, most will assume the worst in them, \
-	believing that they are cursed to follow their orcish parent's footsteps in the gorging of kin-flesh. \
+	A hoblin was an uncommon sight, until the second Goblin War caused an influx of them, as those dwarves captured by orcish forces where fed flesh of their fallen brothers. \
+	Made by Graggar into scouts for His armies, half-goblins have a inborn tendency for cunning sabotage, theft and even assassinations, leading to much social ostracisation. \
+	While half-orcs prefer to be live alone, hoblins often group up into thieving gangs, their size allowing them to hide from watchful gaze of any guard. \
+	Other greenskins look down on them, treating them as nothing more than pests unworthy of Graggar's blessing. \
+	Veterans of the war will remember them as the first sign of an orcish warband approaching. \
 	\n\n\
-	A Half-Orc may display Orcish features, sporting tusks and natural strength. \
-	Many are nigh-indistinguishable visually from full orcs, save for their remaining grasp on self-control.\
+	Hoblins, with their deceiving looks are quite good at taking a beating, yet they prefer to avoid any confrontation and run from consequence. \
 	\n\n\
 	THIS IS AN <I>EXTREMELY</I> DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
 
 	species_traits = list(EYECOLOR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_STINKY)
 
-	allowed_voicetypes_m = VOICE_TYPES_MASCANDRO
+	allowed_voicetypes_m = VOICE_TYPES_FEMANDRO
 
-	allowed_voicetypes_f = VOICE_TYPES_MASCANDRO
+	allowed_voicetypes_f = VOICE_TYPES_FEMANDRO
 
 	use_skintones = 1
 
@@ -123,7 +121,7 @@
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/nightmare,
-		ORGAN_SLOT_EARS = /obj/item/organ/ears,
+		ORGAN_SLOT_EARS = /obj/item/organ/ears/goblin,
 		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
@@ -160,9 +158,9 @@
 
 /datum/species/hoblin/get_skin_list()
 	return list(
-		"Beach" = SKIN_COLOR_SHELLCREST,
+		"Sea" = SKIN_COLOR_SHELLCREST,
 		"Infernal" = SKIN_COLOR_BLOOD_AXE,
-		"Cyan" = SKIN_COLOR_GROONN, //Changed name from Gronn, which no longer aligned with lore here or elsewhere.
+		"Beach" = SKIN_COLOR_GROONN,
 		"Cave" = SKIN_COLOR_BLACK_HAMMER,
 		"Mountain" = SKIN_COLOR_SKULL_SEEKER,
 		"Swamp" = SKIN_COLOR_CRESCENT_FANG,

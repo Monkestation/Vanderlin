@@ -447,12 +447,14 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					var/datum/dna/dna_cache = new()
 					graggar_lover.dna.copy_dna(dna_cache)
 					var/species = /datum/species/halforc
+					if(isdwarf(graggar_lover) || ishalfling(graggar_lover) || graggar_lover.age == AGE_CHILD)
+						species = /datum/species/hoblin
 					//if(ishalforc(M)) // when this works it can be used
 					//	species = /datum/species/orc
 					//else if(iskobold(M))
 					//	species = /datum/species/goblin
 					graggar_lover.set_species(species)
-					if(ishalforc(graggar_lover))
+					if(ishalforc(graggar_lover) || ishoblin(graggar_lover))
 						dna_cache.transfer_identity(graggar_lover, FALSE)
 					graggar_lover.real_name = dna_cache.real_name
 					graggar_lover.bloody_hands++

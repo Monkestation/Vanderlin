@@ -80,6 +80,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ishalfelf(A) (is_species(A, /datum/species/human/halfelf))
 #define istiefling(A) (is_species(A, /datum/species/tieberian))
 #define ishalforc(A) (is_species(A, /datum/species/halforc))
+#define ishoblin(A) (is_species(A, /datum/species/hoblin))
 #define iskobold(A) (is_species(A, /datum/species/kobold))
 #define israkshari(A) (is_species(A, /datum/species/rakshari))
 #define isaasimar(A) (is_species(A, /datum/species/aasimar))
