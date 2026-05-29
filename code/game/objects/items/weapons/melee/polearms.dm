@@ -499,7 +499,7 @@
 	wlength = WLENGTH_LONG
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONGEST
 	minstr = 8
 
 	bigboy = TRUE
