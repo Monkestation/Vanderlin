@@ -6,6 +6,7 @@
 	crafting_message = "starts shaping ammunition"
 	skillcraft = /datum/attribute/skill/combat/firearms
 	minimum_skill_level = 1
+	reward_experience = FALSE //stops people from farming xp
 
 /datum/repeatable_crafting_recipe/ammo/shardshot
 	name = "shard pellet"
