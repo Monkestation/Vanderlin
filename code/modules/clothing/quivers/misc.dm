@@ -72,7 +72,7 @@
 	icon_state = "javelinbag0"
 	item_state = "javelinbag"
 	slot_flags = ITEM_SLOT_BACK
-	max_storage = 8
+	max_storage = 12
 	ammo_type = list(/obj/item/weapon/polearm/spear/stone/copper, /obj/item/weapon/polearm/spear/stone/copper/iron, /obj/item/weapon/polearm/spear/stone/copper/steel, /obj/item/weapon/polearm/spear/stone/copper/silver, /obj/item/weapon/polearm/spear/bone, /obj/item/weapon/polearm/spear/trollbone)
 
 /obj/item/ammo_holder/javelin/bone
