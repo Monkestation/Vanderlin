@@ -6,6 +6,17 @@ import { resolveAsset } from '../assets';
 
 const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
 
+const SEAL_SPRITESHEET_CLASS = 'attribute_seals104x104';
+const SEAL_STATES = new Set([
+  'strength',
+  'constitution',
+  'endurance',
+  'speed',
+  'intellect',
+  'fortune',
+  'perception',
+]);
+
 type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
 
 interface TutorialHighlight {
@@ -355,9 +366,9 @@ const AnatomyFigure = memo(() => {
   return (
     <>
       <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
-        <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="360" />
+        <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="382" />
         {hasFigure && (
-          <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--track" cx="500" cy="500" r="346" />
+          <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--track" cx="500" cy="500" r="366" />
         )}
         {!hasFigure && (
           <>
@@ -408,6 +419,8 @@ const AttributeSealNode = memo((props: {
     selected ? ' is-selected' : ''
   }`;
 
+  const hasMedallion = SEAL_STATES.has(stat.anchor);
+
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
       <button
@@ -415,7 +428,13 @@ const AttributeSealNode = memo((props: {
         onClick={() => act('inspect_closely', { attribute_name: stat.name })}
         type="button"
       >
-        <span className="AttributeMenu__sealNodeOrb" />
+        {hasMedallion ? (
+          <span className="AttributeMenu__sealNodeMedallion">
+            <span className={`${SEAL_SPRITESHEET_CLASS} ${stat.anchor}`} />
+          </span>
+        ) : (
+          <span className="AttributeMenu__sealNodeOrb" />
+        )}
         <span className="AttributeMenu__sealNodeName">{stat.seal_label}</span>
         <span className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}>
           {valuePair(stat.value, stat.raw_value)}

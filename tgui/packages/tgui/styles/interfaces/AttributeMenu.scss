@@ -199,8 +199,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 54%;
-  height: 74%;
+  width: 48%;
+  height: 66%;
   transform: translate(-50%, -50%);
   background-repeat: no-repeat;
   background-position: center center;
@@ -332,20 +332,20 @@
 
 .AttributeMenu__sealNode--strength,
 .AttributeMenu__sealNode--fallback0 {
-  top: 19%;
+  top: 15%;
   left: 50%;
 }
 
 .AttributeMenu__sealNode--perception,
 .AttributeMenu__sealNode--fallback1 {
-  top: 31%;
-  left: 26%;
+  top: 29%;
+  left: 23%;
 }
 
 .AttributeMenu__sealNode--intellect,
 .AttributeMenu__sealNode--fallback2 {
-  top: 31%;
-  left: 74%;
+  top: 29%;
+  left: 77%;
 }
 
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeName,
@@ -375,32 +375,38 @@
 .AttributeMenu__sealNode--intellect .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeOrb,
-.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeOrb {
+.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeOrb,
+.AttributeMenu__sealNode--strength .AttributeMenu__sealNodeMedallion,
+.AttributeMenu__sealNode--perception .AttributeMenu__sealNodeMedallion,
+.AttributeMenu__sealNode--intellect .AttributeMenu__sealNodeMedallion,
+.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeMedallion,
+.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeMedallion,
+.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeMedallion {
   order: 0;
 }
 
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--fallback3 {
-  top: 57%;
-  left: 20%;
+  top: 56%;
+  left: 16%;
 }
 
 .AttributeMenu__sealNode--speed,
 .AttributeMenu__sealNode--fallback4 {
-  top: 57%;
-  left: 80%;
+  top: 56%;
+  left: 84%;
 }
 
 .AttributeMenu__sealNode--endurance,
 .AttributeMenu__sealNode--fallback5 {
-  top: 77%;
-  left: 34%;
+  top: 80%;
+  left: 32%;
 }
 
 .AttributeMenu__sealNode--fortune,
 .AttributeMenu__sealNode--fallback6 {
-  top: 77%;
-  left: 66%;
+  top: 80%;
+  left: 68%;
 }
 
 .AttributeMenu__sealNode--endurance .AttributeMenu__sealNodeName,
@@ -435,6 +441,39 @@
     filter 120ms ease,
     transform 120ms ease,
     box-shadow 120ms ease;
+}
+
+.AttributeMenu__sealNodeMedallion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  filter: drop-shadow(0 2px 4px rgba(34, 16, 4, 0.55));
+  transition:
+    filter 120ms ease,
+    transform 120ms ease;
+}
+
+.AttributeMenu__sealNodeMedallion > span {
+  display: block;
+  flex: 0 0 auto;
+  transform: scale(0.48);
+}
+
+.AttributeMenu__sealNode:hover .AttributeMenu__sealNodeMedallion {
+  filter:
+    drop-shadow(0 2px 4px rgba(34, 16, 4, 0.55))
+    drop-shadow(0 0 5px rgba(255, 178, 64, 0.7));
+  transform: translateY(-1px) scale(1.05);
+}
+
+.AttributeMenu__sealNode.is-selected .AttributeMenu__sealNodeMedallion {
+  filter:
+    drop-shadow(0 2px 4px rgba(34, 16, 4, 0.6))
+    drop-shadow(0 0 4px rgba(255, 204, 51, 0.95))
+    drop-shadow(0 0 9px rgba(255, 153, 0, 0.6));
 }
 
 .AttributeMenu__sealNodeName,
