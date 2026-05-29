@@ -67,3 +67,28 @@
 /obj/item/ammo_holder/dartpouch/poisondarts
 	fill_type = /obj/item/ammo_casing/caseless/dart/poison
 
+/obj/item/ammo_holder/javelin
+	name = "javelin sling"
+	icon_state = "javelinbag0"
+	item_state = "javelinbag"
+	slot_flags = ITEM_SLOT_BACK
+	max_storage = 8
+	ammo_type = list(/obj/item/weapon/polearm/spear/stone/copper, /obj/item/weapon/polearm/spear/stone/copper/iron, /obj/item/weapon/polearm/spear/stone/copper/steel, /obj/item/weapon/polearm/spear/stone/copper/silver, /obj/item/weapon/polearm/spear/bone, /obj/item/weapon/polearm/spear/trollbone)
+
+/obj/item/ammo_holder/javelin/bone
+	fill_type = /obj/item/weapon/polearm/spear/bone
+
+/obj/item/ammo_holder/javelin/trollbone
+	fill_type = /obj/item/weapon/polearm/spear/trollbone
+
+/obj/item/ammo_holder/javelin/copper
+	fill_type = /obj/item/weapon/polearm/spear/stone/copper
+
+/obj/item/ammo_holder/javelin/iron
+	fill_type = /obj/item/weapon/polearm/spear/stone/copper/iron
+
+/obj/item/ammo_holder/javelin/steel
+	fill_type = /obj/item/weapon/polearm/spear/stone/copper/steel
+
+/obj/item/ammo_holder/javelin/silver
+	fill_type = /obj/item/weapon/polearm/spear/stone/copper/silver

@@ -106,6 +106,18 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/silver
+	name = "silver quarterstaff"
+	desc = "A quarterstaff with silver reinforcements, more effective against supernatural foes than a steel quarterstaff."
+	icon_state = "quarterstaff_silver"
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 7
+	item_weight = 2.2 KILOGRAMS
+	smeltresult = null
+	melting_material = /datum/material/silver
+	melt_amount = 75
 
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
@@ -144,6 +156,43 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
+
+/obj/item/weapon/polearm/spear/steel
+	name = "steel spear"
+	desc = "A spear with a steel head, more durable and effective than a simple iron spear."
+	icon_state = "spear_sk"
+	force = DAMAGE_SPEARPLUS + 2
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	wbalance = GREAT_PARRY
+	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 200
+	smeltresult = /obj/item/ingot/steel_slag
+	sellprice = 40
+	item_weight = 2.7 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/silver
+	name = "silver spear"
+	desc = "A spear with a silver head, more effective against supernatural foes than a steel spear."
+	icon_state = "silverspear"
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_SPEAR_WIELD
+	wbalance = GREAT_PARRY
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_blade_int = 200
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 60
+	item_weight = 2.7 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/partizan
+	name = "partizan"
+	desc = "A spear with a heavy steel head, deisgned for stabbing and chopping"
+	icon_state = "partizan"
+	force = DAMAGE_SPEARPLUS + 3
+	force_wielded = DAMAGE_SPEAR_WIELD + 3
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST * 1.25
+	minstr = 9
+	sellprice = 50
 
 /obj/item/weapon/polearm/spear/abyssor
 	name = "depthseeker"
@@ -279,7 +328,7 @@
 	item_weight = 1.8 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/stone/copper
-	name = "javelin"
+	name = "copper javelin"
 	desc = "Made for throwing, long out of favor and using inferior metals, it still can kill when the aim is true."
 	icon_state = "cspear"
 	throwforce = DAMAGE_SPEAR_WIELD
@@ -302,6 +351,33 @@
 				return list("shrink" = 0.7,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("wielded")
 				return list("shrink" = 0.7,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+
+/obj/item/weapon/polearm/spear/stone/copper/iron
+	name = "iron javelin"
+	desc = "Heavier than acopper javelin, best suited for hunting beasts"
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "ijavelin"
+	throwforce = DAMAGE_SPEAR_WIELD + 2
+	max_blade_int = 80
+	max_integrity = INTEGRITY_STANDARD
+
+/obj/item/weapon/polearm/spear/stone/copper/steel
+	name = "steel javelin"
+	desc = "A sturdy javelin made from steel, suitable to hunt knightly foes."
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "javelin"
+	throwforce = DAMAGE_SPEAR_WIELD + 3
+	max_blade_int = 100
+	max_integrity = INTEGRITY_STANDARD * 1.25
+
+/obj/item/weapon/polearm/spear/stone/copper/silver
+	name = "silver javelin"
+	desc = "A sturdy javelin made from silver, suitable to hunt supernatural foes."
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "sjavelin"
+	throwforce = DAMAGE_SPEAR_WIELD + 3
+	max_blade_int = 100
+	max_integrity = INTEGRITY_STANDARD * 0.8
 
 /obj/item/weapon/polearm/spear/bone
 	name = "bone javelin"
@@ -380,6 +456,20 @@
 	melt_amount = 150
 	sellprice = 90
 	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/silver
+	name = "silver halberd"
+	desc = "A halberd forged from silver, laying low the beasts of the nite."
+	icon_state = "silverhalberd"
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_HALBERD_WIELD
+	wbalance = EASY_TO_DODGE
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_blade_int = 300
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 120
 
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()
@@ -545,6 +635,17 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/bardiche/glaive
+	name = "steel glaive"
+	desc = "A uniquely designed polearm, modeled after Deliverance. Excellent for chopping down your foes."
+	icon_state = "glaive"
+	force = DAMAGE_AXE + 2
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 150
 
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak

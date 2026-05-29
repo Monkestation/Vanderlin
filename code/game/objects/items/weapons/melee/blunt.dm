@@ -655,6 +655,22 @@
 	melt_amount = 150
 	item_weight = 2.2 KILOGRAMS
 
+/obj/item/weapon/mace/warhammer/steel/silver
+	name = "silver warhammer"
+	desc = "A silver warhammer, made to fight nite-creachers. It makes a satisfying sound when paired with a skeleton's skull."
+	icon_state = "silverhammer"
+	wdefense = GOOD_PARRY
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 90
+	item_weight = 2.3 KILOGRAMS
+
+/obj/item/weapon/mace/warhammer/steel/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //................ Elven Club  ............... //
 
 /obj/item/weapon/mace/elvenclub

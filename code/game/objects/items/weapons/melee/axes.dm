@@ -263,6 +263,25 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
+
+//------------------ Silver Axe ---------------//
+/obj/item/weapon/axe/steel/silver
+	name = "silver axe"
+	desc = "A silver axe, not as strong as steel but more effective against supernatural foes."
+	icon_state = "silveraxe"
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 6
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 80
+	axe_cut = 13
+	item_weight = 1.7 KILOGRAMS
+
+/obj/item/weapon/axe/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+
 //.................. Bearded Axe ...............//
 /obj/item/weapon/axe/steel/atgervi
 	name = "bearded axe"
@@ -486,6 +505,18 @@
 	melt_amount = 180
 	sellprice = 100
 	item_weight = 5.5 KILOGRAMS
+
+/obj/item/weapon/greataxe/steel/slayeraxe
+	name = "dragonslayer axe"
+	desc = "A mighty axe made of heavy, durable metal. The head alone is as big as a man, used to cleave headfs from beasts and men alike"
+	icon_state = "oath"
+	wbalance = EASY_TO_DODGE
+	possible_item_intents = list(AXE_CUT, AXE_CHOP, POLEARM_BASH)
+	gripped_intents = list(DBLGREATAXE_CUT, DBLGREATAXE_CHOP, POLEARM_BASH, GREATAXE_CLEAVE)
+	max_blade_int = 400
+	minstr = 13
+	max_integrity = INTEGRITY_STRONGEST * 1.25
+	item_weight = 12 KILOGRAMS
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
 	name = "vicious greataxe"

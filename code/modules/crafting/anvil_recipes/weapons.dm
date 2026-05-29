@@ -180,6 +180,19 @@
 	output_amount = 5
 	category = "Ammo"
 
+/datum/anvil_recipe/weapons/iron/javelin
+	name = "Iron Javelins (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/stone/copper/iron
+	output_amount = 2
+	category = "Ammo"
+
+/datum/anvil_recipe/weapons/iron/quarterstaff
+	name = "Iron Quarertstaff (+ Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
+
 /datum/anvil_recipe/weapons/iron/axe_iron
 	name = "Iron Axe (+Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -449,6 +462,32 @@
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/assegai/steel
 
+/datum/anvil_recipe/weapons/steel/javelin
+	name = "Steel Javelins (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/stone/copper/steel
+	output_amount = 2
+	category = "Ammo"
+/datum/anvil_recipe/weapons/steel/quarterstaff
+	name = "Steel Quarterstaff (+ Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
+
+/datum/anvil_recipe/weapons/steel/spear
+	name = "Steel Spears (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/steel
+	output_amount = 2
+
+/datum/anvil_recipe/weapons/steel/partizan
+	name = "Partizan (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/partizan
+
 /datum/anvil_recipe/weapons/steel/aruval
 	name = "Steel Aruval (+2 Steel Bar)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
@@ -587,6 +626,11 @@
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/knife/hunting/kukri
 
+/datum/anvil_recipe/weapons/steel/hackknife
+	name = "Hack-Knife"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/knife/cleaver/combat
+
 /datum/anvil_recipe/weapons/steel/knuckles
 	name = "Knuckles"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -709,6 +753,12 @@
 	created_item = /obj/item/weapon/polearm/halberd
 	craftdiff = 4
 
+/datum/anvil_recipe/weapons/steel/glaive
+	name = "Glaive (+Steel Bar, +Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/halberd/bardiche/glaive
+
 /datum/anvil_recipe/weapons/steel/huntknife
 	name = "Hunting Knife"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -800,6 +850,34 @@
 	craftdiff = 4
 ///////////////////////////////////////////////
 
+/datum/anvil_recipe/weapons/silver/javelin
+	name = "Silver Javelins (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/stone/copper/silver
+	output_amount = 2
+	category = "Ammo"
+
+/datum/anvil_recipe/weapons/silver/staff
+	name = "Silver Quarterstaff (+ Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/silver
+
+/datum/anvil_recipe/weapons/silver/spear
+	name = "Silver Spears (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/silver
+	output_amount = 2
+
+/datum/anvil_recipe/weapons/silver/halberd
+	name = "Silver Halberd (+Bar, +Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver,/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/halberd/silver
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/silver/dagger
 	name = "Silver Dagger"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -817,6 +895,12 @@
 	additional_items = list(/obj/item/ingot/silver)
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/whip/urumi/silver
+
+/datum/anvil_recipe/weapons/silver/silflail
+	name = "Silver Flail (+Chain, +Stick)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/rope/chain, /obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/flail/silflail
 
 /datum/anvil_recipe/weapons/silver/sword_silver
 	name = "Silver Sword"
@@ -845,6 +929,24 @@
 	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/gold)
 	created_item = /obj/item/weapon/sword/long/decorated
 
+/datum/anvil_recipe/weapons/silver/sillong
+	name = "Silver Longsword (+Silver bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/weapon/sword/long/silver
+
+/datum/anvil_recipe/weapons/silver/executioner
+	name = "Silver Executioner's Sword (+ 2 Silver bar"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/silver)
+	created_item = /obj/item/weapon/sword/long/exe/silver
+
+/datum/anvil_recipe/weapons/silver/broadsword
+	name = "Silver Broadsword (+ 2 Silver bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/weapon/sword/long/greatsword/claymore/silver
+
 /datum/anvil_recipe/weapons/silver/rungu
 	name = "Silver Rungu (+ Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -863,6 +965,19 @@
 	additional_items = list(/obj/item/ingot/gold)
 	created_item = /obj/item/weapon/mace/elvenclub/silver
 
+/datum/anvil_recipe/weapons/silver/silhammer
+	name = "Silver Warhammer (+1 Silver Bar)"
+	additional_items = list(/obj/item/ingot/silver)
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/mace/warhammer/steel/silver
+
+/datum/anvil_recipe/weapons/silver/silveraxe
+	name = "Silver Axe (+ Stick)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/axe/steel/silver
+
+// --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe
 	name = "Psydonian War Axe (+1 B. Silver, +1 Stick)"
 	required_material = /obj/item/ingot/silverblessed
@@ -940,6 +1055,8 @@
 	craftdiff = 3
 	created_item = /obj/item/weapon/whip/psydon
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
+
+// ------------------ Miscellaneous Weapons ------------------
 
 /datum/anvil_recipe/weapons/atgervi_shield
 	name = "kite shield"

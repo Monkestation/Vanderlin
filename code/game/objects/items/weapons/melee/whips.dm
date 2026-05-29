@@ -45,7 +45,7 @@
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
 	icon_state = "gwhip"
 	force = DAMAGE_WHIP + 4
-	minstr = 7
+	minstr = 4 // Why was this needing 7 STR
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel_slag
 	max_integrity = INTEGRITY_STRONG
