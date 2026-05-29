@@ -42,7 +42,7 @@
 	beltl = /obj/item/weapon/sword/sabre/dec
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
-	armor = /obj/item/clothing/armor/cuirass/iron //shitty armor haha
+	armor = /obj/item/clothing/armor/cuirass/grenzelhoft //bad stats so they cna keep the strong armor
 
 /datum/outfit/mercenary/grenzelhoftgun/pre_equip(mob/living/carbon/human/H)
 	. = ..()
