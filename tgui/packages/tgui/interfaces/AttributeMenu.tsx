@@ -1,7 +1,207 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo, type CSSProperties } from 'react';
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
+
+type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
+
+interface TutorialHighlight {
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+}
+
+interface TutorialStep {
+  title: string;
+  body: string;
+  highlight?: TutorialHighlight;
+  popupAnchor?: TutorialAnchor;
+}
+
+const TUTORIAL_STEPS: TutorialStep[] = [
+  {
+    title: 'Welcome to the Character Ledger',
+    body: "This ledger lays out your character's seals and the guild's register. Let me walk you through what each page holds.",
+    popupAnchor: 'center',
+  },
+  {
+    title: 'Character Seals',
+    body: 'The left page bears seven Core Attribute seals arranged around the figure: Strength, Perception, Intellect, Speed, Constitution, Endurance, and Fortune. These foundations govern almost everything you do.',
+    highlight: { top: 1, left: 0.5, width: 33, height: 98 },
+    popupAnchor: 'right',
+  },
+  {
+    title: 'Current / Base reading',
+    body: 'Each seal shows two numbers: current / base. Green means a blessing lifts you above your base. Red means a curse drags you below. Pale ink means it is unmodified.',
+    highlight: { top: 13, left: 13.5, width: 8, height: 12 },
+    popupAnchor: 'right',
+  },
+  {
+    title: 'Guild Register',
+    body: 'The middle page is the Skills Book — your trained crafts, grouped by guild. The current / base numbers behave just like the seals.',
+    highlight: { top: 1, left: 34, width: 38, height: 98 },
+    popupAnchor: 'left',
+  },
+  {
+    title: 'All Skills toggle',
+    body: 'By default only trained skills are shown. Tick All Skills to also reveal untrained ones, so you can see what is left to learn.',
+    highlight: { top: 1, left: 59, width: 12, height: 7 },
+    popupAnchor: 'bottom',
+  },
+  {
+    title: 'Search the Register',
+    body: 'Type a skill name here to filter the register in real time. Searching automatically reveals untrained skills so nothing stays hidden.',
+    highlight: { top: 10, left: 34, width: 38, height: 6 },
+    popupAnchor: 'bottom',
+  },
+  {
+    title: 'Marginal Notes',
+    body: 'Click any seal or guild entry and the scribe will note the details here: description, difficulty, governing attribute, defaults, and any active blessings or curses. Press the x to close the note.',
+    highlight: { top: 1, left: 72, width: 27.5, height: 98 },
+    popupAnchor: 'left',
+  },
+  {
+    title: 'Skill Tiers',
+    body: 'Numbers replace the old tier names: Novice was 10–19, Apprentice 20–29, Journeyman 30–39, Expert 40–49, Master 50–59, Legendary 60 and above.',
+    popupAnchor: 'center',
+  },
+  {
+    title: 'That is the ledger.',
+    body: 'Open the seals to inspect your stats, browse the register for your skills, and read the marginal notes whenever you want details. Press the ? at any time to revisit this walkthrough.',
+    popupAnchor: 'center',
+  },
+];
+
+const TUTORIAL_CARD_WIDTH = 270;
+const TUTORIAL_CARD_GAP = 12;
+
+const tutorialCardStyle = (
+  anchor: TutorialAnchor,
+  hl: TutorialHighlight | undefined,
+): CSSProperties => {
+  if (!hl || anchor === 'center') {
+    return {
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    };
+  }
+  switch (anchor) {
+    case 'right':
+      return {
+        top: `${hl.top + hl.height / 2}%`,
+        left: `calc(${hl.left + hl.width}% + ${TUTORIAL_CARD_GAP}px)`,
+        transform: 'translateY(-50%)',
+      };
+    case 'left':
+      return {
+        top: `${hl.top + hl.height / 2}%`,
+        left: `calc(${hl.left}% - ${TUTORIAL_CARD_WIDTH + TUTORIAL_CARD_GAP}px)`,
+        transform: 'translateY(-50%)',
+      };
+    case 'bottom':
+      return {
+        top: `calc(${hl.top + hl.height}% + ${TUTORIAL_CARD_GAP}px)`,
+        left: `${hl.left + hl.width / 2}%`,
+        transform: 'translateX(-50%)',
+      };
+    case 'top':
+      return {
+        top: `calc(${hl.top}% - ${TUTORIAL_CARD_GAP}px)`,
+        left: `${hl.left + hl.width / 2}%`,
+        transform: 'translate(-50%, -100%)',
+      };
+  }
+};
+
+const AttributeTutorial = (props: { onClose: () => void }) => {
+  const { onClose } = props;
+  const [step, setStep] = useLocalState<number>('attribute_menu_tutorial_step', 0);
+
+  const safe = Math.min(Math.max(step, 0), TUTORIAL_STEPS.length - 1);
+  const current = TUTORIAL_STEPS[safe];
+  const isFirst = safe === 0;
+  const isLast = safe === TUTORIAL_STEPS.length - 1;
+  const anchor = current.popupAnchor ?? 'center';
+  const hl = current.highlight;
+
+  const close = () => {
+    setStep(0);
+    onClose();
+  };
+
+  return (
+    <div className="AttributeMenu__tutorialOverlay">
+      <div className="AttributeMenu__tutorialBackdrop" onClick={close} />
+      {hl && (
+        <div
+          className="AttributeMenu__tutorialHighlight"
+          style={{
+            top: `${hl.top}%`,
+            left: `${hl.left}%`,
+            width: `${hl.width}%`,
+            height: `${hl.height}%`,
+          }}
+        />
+      )}
+      <div
+        className="AttributeMenu__tutorialCard"
+        style={{ width: `${TUTORIAL_CARD_WIDTH}px`, ...tutorialCardStyle(anchor, hl) }}
+      >
+        {hl && anchor !== 'center' && (
+          <div className={`AttributeMenu__tutorialCaret AttributeMenu__tutorialCaret--${anchor}`} />
+        )}
+        <div className="AttributeMenu__tutorialHeader">
+          <div className="AttributeMenu__tutorialEyebrow">
+            Step {safe + 1} of {TUTORIAL_STEPS.length}
+          </div>
+          <div className="AttributeMenu__tutorialTitle">{current.title}</div>
+          <button
+            type="button"
+            className="AttributeMenu__tutorialClose"
+            onClick={close}
+            aria-label="Close walkthrough"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="AttributeMenu__tutorialBody">{current.body}</div>
+        <div className="AttributeMenu__tutorialDots">
+          {TUTORIAL_STEPS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`AttributeMenu__tutorialDot${i === safe ? ' is-active' : ''}`}
+              onClick={() => setStep(i)}
+              aria-label={`Go to step ${i + 1}`}
+            />
+          ))}
+        </div>
+        <div className="AttributeMenu__tutorialFooter">
+          {isFirst ? (
+            <span style={{ minWidth: '70px', display: 'inline-block' }} />
+          ) : (
+            <button
+              type="button"
+              className="AttributeMenu__tutorialNav"
+              onClick={() => setStep(safe - 1)}
+            >
+              ← Back
+            </button>
+          )}
+          <button
+            type="button"
+            className={`AttributeMenu__tutorialNav${isLast ? ' AttributeMenu__tutorialNav--done' : ''}`}
+            onClick={isLast ? close : () => setStep(safe + 1)}
+          >
+            {isLast ? '✓ Done' : 'Next →'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 type AttributeValue = number | string | null;
 
@@ -213,11 +413,21 @@ const CoreAttributes = memo((props: {
   stats: ResolvedStat[];
   selectedName?: string | null;
   act: any;
+  onHelpClick: () => void;
 }) => {
-  const { stats, selectedName, act } = props;
+  const { stats, selectedName, act, onHelpClick } = props;
 
   return (
     <section className="AttributeMenu__panel AttributeMenu__panel--seals">
+      <button
+        type="button"
+        className="AttributeMenu__helpButton"
+        onClick={onHelpClick}
+        title="How to read this ledger"
+        aria-label="Open walkthrough"
+      >
+        ?
+      </button>
       <header className="AttributeMenu__panelHeader">
         <div className="AttributeMenu__eyebrow">Character Seals</div>
         <div className="AttributeMenu__title">Core Attributes</div>
@@ -570,6 +780,13 @@ export const AttributeMenu = () => {
 
   const selectedName = closely_inspected?.name ?? null;
 
+  const [showTutorial, setShowTutorial] = useLocalState<boolean>(
+    'attribute_menu_tutorial_open',
+    false,
+  );
+  const openTutorial = useCallback(() => setShowTutorial(true), []);
+  const closeTutorial = useCallback(() => setShowTutorial(false), []);
+
   return (
     <Window
       title={parent ? `${parent} Character Ledger` : 'Character Ledger'}
@@ -579,7 +796,12 @@ export const AttributeMenu = () => {
       <Window.Content fitted>
         <Box className="AttributeMenu">
           <div className="AttributeMenu__backdrop">
-            <CoreAttributes stats={stats} selectedName={selectedName} act={act} />
+            <CoreAttributes
+              stats={stats}
+              selectedName={selectedName}
+              act={act}
+              onHelpClick={openTutorial}
+            />
             <SkillRegister
               categoriesMeta={skillsMetaSafe}
               skillsValues={skillsValuesSafe}
@@ -589,6 +811,7 @@ export const AttributeMenu = () => {
             />
             <InspectionPanel attribute={inspectedAttribute} act={act} />
           </div>
+          {showTutorial && <AttributeTutorial onClose={closeTutorial} />}
         </Box>
       </Window.Content>
     </Window>
