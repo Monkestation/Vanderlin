@@ -240,4 +240,7 @@
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	backl = /obj/item/gun/ballistic/bow/short
 	cloak = /obj/item/clothing/cloak/stabard/jupon/guard
+
+/datum/outfit/squire/skirmisher/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
 	backpack_contents += /obj/item/weapon/knife/dagger/steel
