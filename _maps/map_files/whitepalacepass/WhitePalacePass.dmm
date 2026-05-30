@@ -2068,6 +2068,13 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
+"blZ" = (
+/obj/machinery/light/fueled/firebowl/standing{
+	pixel_x = 1;
+	pixel_y = 12
+	},
+/turf/open/floor/carpet/red,
+/area/indoors/town/tavern)
 "bmQ" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile/checker,
@@ -12533,11 +12540,11 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/basin)
 "hNs" = (
-/obj/structure/fake_machine/musicbox/tavern,
 /obj/structure/table/wood,
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
 	},
+/obj/structure/fake_machine/musicbox/tavern,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/tavern)
 "hOj" = (
@@ -20081,6 +20088,10 @@
 /obj/structure/door/swing,
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
+	},
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
@@ -100218,7 +100229,7 @@ eYX
 wcq
 eYX
 uJP
-uJP
+blZ
 vTy
 vTy
 gMe
