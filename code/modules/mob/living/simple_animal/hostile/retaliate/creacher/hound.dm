@@ -91,7 +91,7 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
-	var/color = pick("brown", "black", "white")
+	var/color = pick("grey", "black", "white")
 	icon_state = "hound_[color]"
 	icon_living = "hound_[color]"
 	icon_dead = "hound_[color]_dead"
