@@ -12,7 +12,7 @@
 
 /datum/job/sweeper
 	title = JOB_SWEEPER
-	tutorial = "You are the street cleaner of Vanderlin, the one who takes care of the rot and refuse."
+	tutorial = "You are the local sweeper and cleaner, the one who takes care of the rot and refuse."
 
 	department_flag = PEASANTS
 	display_order = JDO_SWEEPER
