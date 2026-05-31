@@ -86,6 +86,7 @@
 	UnregisterSignal(overlord_mob, COMSIG_LIVING_DEATH)
 	if(overlord_controller)
 		qdel(overlord_controller)
+	return ..()
 
 /datum/antagonist/overlord/greet()
 	. = ..()

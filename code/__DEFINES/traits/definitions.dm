@@ -492,6 +492,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
 #define TRAIT_NO_EXPERIENCE	"unlearning"
+#define TRAIT_NO_SKILLS "zero_skills"
 /// This mob should never be affected by `/obj/effect/timestop`
 #define TRAIT_TIME_STOP_IMMUNE "timestopimmune"
 /// This mob should never close UI even if it doesn't have a client

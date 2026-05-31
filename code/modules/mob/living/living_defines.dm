@@ -187,7 +187,8 @@
 	var/last_fatigued = 0
 	var/last_ps = 0
 
-	var/ambushable = 0
+	/// ONLY TO BE USED TO CONTROL INITIALIZING WITH AMBUSHABLE TRAIT
+	var/ambushable = FALSE
 
 	var/surrendering = 0
 

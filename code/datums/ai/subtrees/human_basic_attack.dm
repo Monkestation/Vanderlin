@@ -171,7 +171,7 @@
 	controller.clear_blackboard_key(BB_HUMAN_NPC_WEAKPOINT)
 
 	// Parity with npc_choose_attack_zone aimheight picks
-	if(pawn.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(pawn))
 		pawn.aimheight_change(pawn.deadite_get_aimheight(target))
 		return
 	if(!(pawn.mobility_flags & MOBILITY_STAND))
@@ -334,7 +334,7 @@
 	return null
 
 /datum/ai_behavior/basic_melee_attack/human_npc/proc/_try_backstep(mob/living/carbon/human/pawn, atom/target)
-	if(pawn.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(pawn))
 		return FALSE
 	if(pawn.body_position == LYING_DOWN)
 		return FALSE

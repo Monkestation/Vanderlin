@@ -63,7 +63,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	. = (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
 	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
 		. |= BLOOD_PREFERENCE_SLEEPING
-	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(sampled_from))
 		. &= ~BLOOD_PREFERENCE_LIVING
 		. |= BLOOD_PREFERENCE_DEAD
 	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))

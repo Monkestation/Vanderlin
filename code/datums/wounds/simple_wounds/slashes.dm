@@ -16,11 +16,7 @@
 	can_cauterize = TRUE
 	can_roll = FALSE
 	associated_bclasses = list(BCLASS_CUT, BCLASS_CHOP)
-
-/datum/wound/slash/can_apply_to_bodypart(obj/item/bodypart/affected)
-	. = ..()
-	if(affected.status == BODYPART_ROBOTIC)
-		return FALSE
+	required_bodypart_status = BODYPART_ORGANIC
 
 /datum/wound/slash/small
 	name = "small slash"

@@ -124,7 +124,7 @@
 		return
 	if(clan)
 		return
-	if(mind.has_antag_datum(/datum/antagonist/vampire) || mind.has_antag_datum(/datum/antagonist/zombie) || mind.has_antag_datum(/datum/antagonist/werewolf))
+	if(mind.has_antag_datum(/datum/antagonist/vampire) || IS_DEADITE(src) || mind.has_antag_datum(/datum/antagonist/werewolf))
 		return
 	if((FACTION_UNDEAD in faction) || (MOB_UNDEAD in mob_biotypes))
 		return

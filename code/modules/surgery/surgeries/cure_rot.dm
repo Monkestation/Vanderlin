@@ -36,7 +36,7 @@
 	var/burndam = 20
 	if(user.mind)
 		burndam -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) * 3)
-	var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
+	var/datum/antagonist/zombie/was_zombie = IS_DEADITE(target)
 	var/has_rot = was_zombie
 	if(!has_rot && iscarbon(target))
 		var/mob/living/carbon/stinky = target

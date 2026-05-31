@@ -770,7 +770,7 @@
 					human.werewolf_feed(C)
 
 			// TODO: Zombie Signal
-			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
+			if(IS_DEADITE(user))
 				var/mob/living/carbon/human/H = C
 				if(istype(H))
 					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))

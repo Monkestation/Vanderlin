@@ -99,11 +99,11 @@
 	copy_known_languages_from(master, TRUE)
 	mob_biotypes = MOB_UNDEAD
 	faction = list(FACTION_UNDEAD)
-	ambushable = FALSE
+	ADD_TRAIT(src, TRAIT_NOAMBUSH, TRAIT_GENERIC)
 	candodge = FALSE
 
 	skeletonize(FALSE)
-	cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
+	fully_heal(HEAL_TRAUMAS)
 
 	skele_look()
 	grant_undead_eyes()

@@ -508,7 +508,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	if(istype(AM, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		if(H.ambushable == TRUE && hole.already_ambushed == FALSE)
+		if(H.ambushable() && hole.already_ambushed == FALSE)
 			hole.ambush(H)
 
 ////////////////////////////////

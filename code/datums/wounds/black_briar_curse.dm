@@ -89,9 +89,9 @@
 	var/mob/living/carbon/C = affected
 	if(!CAN_HAVE_BLOOD(C))
 		return FALSE
-	if(is_species(C, /datum/species/werewolf) || C.mind?.has_antag_datum(/datum/antagonist/werewolf)) // Dendor protects
+	if(is_species(C, /datum/species/werewolf) || IS_WEREWOLF(C)) // Dendor protects
 		return FALSE
-	if(C.mind?.has_antag_datum(/datum/antagonist/vampire) || C.mind?.has_antag_datum(/datum/antagonist/zombie)) // weird/gross blood = cant live in it
+	if(C.mind?.has_antag_datum(/datum/antagonist/vampire) || IS_DEADITE(C)) // weird/gross blood = cant live in it
 		return FALSE
 	if(HAS_TRAIT(affected, TRAIT_TOXIMMUNE))
 		return FALSE

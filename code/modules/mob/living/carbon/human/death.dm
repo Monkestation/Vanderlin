@@ -55,13 +55,8 @@
 				record_round_statistic(STATS_CLERGY_DEATHS)
 			if(mind.has_antag_datum(/datum/antagonist/vampire))
 				record_round_statistic(STATS_VAMPIRES_KILLED)
-			if(mind.has_antag_datum(/datum/antagonist/zombie) || mind.has_antag_datum(/datum/antagonist/skeleton) || mind.has_antag_datum(/datum/antagonist/lich))
+			if(IS_DEADITE(src) || mind.has_antag_datum(/datum/antagonist/skeleton) || mind.has_antag_datum(/datum/antagonist/lich))
 				record_round_statistic(STATS_DEADITES_KILLED)
-
-	if(!gibbed)
-		if(!has_world_trait(/datum/world_trait/necra_requiem))
-			if(!is_in_roguetown(src) || has_world_trait(/datum/world_trait/zizo_defilement))
-				zombie_check()
 
 	stop_sound_channel(CHANNEL_HEARTBEAT)
 	heartbeat_sound = BEAT_NONE
@@ -120,7 +115,7 @@
 		SSblackbox.ReportDeath(src)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()])", LOG_ATTACK)
 
-/mob/living/carbon/human/proc/zombie_check()
+/mob/living/carbon/proc/zombie_check()
 	if(!mind)
 		return
 	var/datum/antagonist/zombie = mind.has_antag_datum(/datum/antagonist/zombie)

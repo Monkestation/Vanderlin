@@ -1585,7 +1585,7 @@
 		state2use = "mood_drunk"
 	if(H.InFullCritical())
 		state2use = "mood_fear"
-	if(H.stat == DEAD || H.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(H.stat == DEAD || IS_DEADITE(H))
 		state2use = "mood_dead"
 	. += state2use
 

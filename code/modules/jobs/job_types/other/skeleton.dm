@@ -56,7 +56,7 @@
 	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
 	spawned.update_a_intents()
 	spawned.grant_undead_eyes()
-	spawned.ambushable = FALSE
+	ADD_TRAIT(spawned, TRAIT_NOAMBUSH, JOB_TRAIT)
 	spawned.underwear = "Nude"
 	if(length(spawned.quirks))
 		spawned.clear_quirks()

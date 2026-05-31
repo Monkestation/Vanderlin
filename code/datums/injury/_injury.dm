@@ -388,7 +388,7 @@
 	return ((bleed_timer > 0 || damage_per_injury() > bleed_threshold) && current_stage <= max_bleeding_stage)
 
 /datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
-	if(!CAN_HAVE_BLOOD(parent_mob))
+	if(parent_mob && !CAN_HAVE_BLOOD(parent_mob))
 		return 0
 	if(!ignore_is_bleeding && !is_bleeding())
 		return 0

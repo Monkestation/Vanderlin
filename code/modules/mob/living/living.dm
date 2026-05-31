@@ -32,6 +32,8 @@
 	if(fovangle)
 		LoadComponent(/datum/component/field_of_vision, FOV_90_DEGREES, get_fov_angle(FOV_90_DEGREES))
 		update_fov_angles()
+	if(!ambushable)
+		ADD_TRAIT(src, TRAIT_NOAMBUSH, INNATE_TRAIT)
 	recalculate_stats()
 
 /mob/living/Destroy()
@@ -1074,6 +1076,7 @@
 		setFireLoss(0, FALSE, TRUE)
 	if(heal_flags & HEAL_STAM)
 		adjust_stamina(-maximum_stamina, internal_regen = FALSE)
+		adjust_energy(max_energy)
 	if(heal_flags & HEAL_PAIN_SHOCK)
 		setPainLoss(0, FALSE, TRUE)
 		setShockStage(0, FALSE, TRUE)

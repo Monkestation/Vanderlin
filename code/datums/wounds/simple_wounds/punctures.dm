@@ -16,11 +16,7 @@
 	can_cauterize = TRUE
 	associated_bclasses = list(BCLASS_STAB)
 	can_roll = FALSE
-
-/datum/wound/puncture/can_apply_to_bodypart(obj/item/bodypart/affected)
-	. = ..()
-	if(affected.status == BODYPART_ROBOTIC)
-		return FALSE
+	required_bodypart_status = BODYPART_ORGANIC
 
 /datum/wound/puncture/small
 	name = "small puncture"
