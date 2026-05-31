@@ -61,18 +61,19 @@
 		B.skeletonize(FALSE)
 	grant_undead_eyes()
 	update_body()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHYGIENE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NO_ORGAN_PROCESS, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOBLOOD, TRAIT_GENERIC)
+	add_traits(list(TRAIT_NOMOOD, \
+		TRAIT_NOHUNGER, \
+		TRAIT_NOBREATH, \
+		TRAIT_NOHYGIENE, \
+		TRAIT_NOPAIN, \
+		TRAIT_NOSLEEP, \
+		TRAIT_EASYDISMEMBER, \
+		TRAIT_TOXIMMUNE, \
+		TRAIT_LIMBATTACHMENT, \
+		TRAIT_CRITICAL_WEAKNESS, \
+		TRAIT_NO_ORGAN_PROCESS, \
+		TRAIT_NOBLOOD)
+		, SPECIES_TRAIT)
 	if(skel_outfit)
 		var/datum/outfit/OU = new skel_outfit
 		if(OU)
@@ -123,7 +124,7 @@
 	shoes = /obj/item/clothing/shoes/boots
 	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/greater)
 	H.set_patron(/datum/patron/inhumen/zizo)
-	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, JOB_TRAIT)
 	H.possible_rmb_intents = list(/datum/rmb_intent/feint,\
 	/datum/rmb_intent/aimed,\
 	/datum/rmb_intent/strong,\
@@ -138,13 +139,8 @@
 
 /mob/living/carbon/human/species/skeleton/npc/peasant/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/skeleton/npc/peasant)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -189,14 +185,9 @@
 
 /mob/living/carbon/human/species/skeleton/npc/ambush/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_HEAVYARMOR, INNATE_TRAIT)
 	equipOutfit(new /datum/outfit/species/skeleton/npc/random)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -231,14 +222,9 @@
 
 /mob/living/carbon/human/species/skeleton/npc/warrior/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_HEAVYARMOR, INNATE_TRAIT)
 	equipOutfit(new /datum/outfit/species/skeleton/npc/warrior)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -290,12 +276,8 @@
 
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/skeleton/npc/warrior)
 	d_intent = INTENT_PARRY
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 	configure_mind()
@@ -331,8 +313,7 @@
 /mob/living/carbon/human/species/skeleton/death_arena/after_creation()
 	..()
 	equipOutfit(new /datum/outfit/arena_skeleton)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOLIMBDISABLE, INNATE_TRAIT)
 	attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/arena)
 
 /mob/living/carbon/human/species/skeleton/death_arena/roll_mob_stats()

@@ -41,6 +41,8 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_NO_SKILLS,
 		TRAIT_NO_EXPERIENCE,
+		TRAIT_UNDODGING,
+		TRAIT_UNPARRYING
 	)
 
 	COOLDOWN_DECLARE(next_idle_sound)
@@ -54,8 +56,6 @@
 	var/list/base_intents
 	var/datum/language_holder/prev_language
 	var/datum/patron/patron
-	var/old_candodge
-	var/old_canparry
 	var/old_bloodpool
 
 	/// SET TO FALSE IF WE DON'T TURN INTO ROTMEN WHEN REMOVED
@@ -130,8 +130,6 @@
 	base_intents = zombie.base_intents
 	old_cmode_music = zombie.cmode_music
 	patron = zombie.patron
-	old_candodge = zombie.candodge
-	old_canparry = zombie.canparry
 	old_bloodpool = zombie.bloodpool
 
 	var/datum/language_holder/mob_language = zombie.get_language_holder()
@@ -152,8 +150,6 @@
 	zombie.cmode_music = old_cmode_music
 	zombie.set_patron(patron)
 	patron = null
-	zombie.candodge = old_candodge
-	zombie.canparry = old_canparry
 	zombie.bloodpool = old_bloodpool
 
 	zombie.language_holder = prev_language
@@ -182,8 +178,6 @@
 /datum/antagonist/zombie/proc/transform_zombie(mob/living/mob_override)
 	var/mob/living/carbon/human/zombie = mob_override || owner.current
 	zombie.bloodpool = 0  // Deadites have no vitae to drain from
-	zombie.candodge = FALSE
-	zombie.canparry = FALSE
 	zombie.cmode_music = 'sound/music/cmode/combat_weird.ogg'
 	zombie.set_patron(/datum/patron/inhumen/zizo)
 	zombie.mob_biotypes |= MOB_UNDEAD

@@ -99,6 +99,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 	update_config_movespeed()
 	update_movespeed(TRUE)
 	become_hearing_sensitive()
+	if(!canparry)
+		ADD_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
+	if(!candodge)
+		ADD_TRAIT(src, TRAIT_UNDODGING, INNATE_TRAIT)
 
 /// Attributes
 /mob/proc/attribute_initialize()

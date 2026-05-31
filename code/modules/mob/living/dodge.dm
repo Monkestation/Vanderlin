@@ -48,7 +48,7 @@
  * @return TRUE if dodge successful, FALSE otherwise
  */
 /mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user, can_dodge_see = TRUE)
-	if(!candodge)
+	if(HAS_TRAIT(src, TRAIT_UNDODGING))
 		return FALSE
 	if(intenty && !intenty.candodge)
 		return FALSE
@@ -208,8 +208,6 @@
 /mob/living/proc/calculate_dodge_score(mob/living/user)
 	if(HAS_TRAIT(src, TRAIT_EVASIVE))
 		return 99  // Effectively uncappable score, handled as special case
-	if(HAS_TRAIT(src, TRAIT_UNDODGING))
-		return -99 // Effectively impossible score
 
 	var/dodge_modifier = 0
 

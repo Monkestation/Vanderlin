@@ -157,8 +157,8 @@
 #undef CONSTITUTION_BLEEDRATE_MOD
 #undef BLOOD_DRIP_RATE_MOD
 
-/mob/living/carbon/human/bleed(amt)
-	amt *= physiology?.bleed_mod
+/mob/living/carbon/human/bleed(amount)
+	amount *= physiology?.bleed_mod
 	return ..()
 
 /mob/living/proc/restore_blood()

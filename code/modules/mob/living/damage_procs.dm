@@ -336,7 +336,7 @@
  * @return TRUE if defense successful, FALSE otherwise
  */
 /mob/living/proc/checkdefense(datum/intent/intenty, mob/living/user)
-	if(!cmode || stat || (!canparry && !candodge) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+	if(!cmode || stat || (HAS_TRAIT(src, TRAIT_UNPARRYING) && HAS_TRAIT(src, TRAIT_UNDODGING)) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(client && used_intent && client.charging && used_intent.tranged && !used_intent.tshield)
 		return FALSE
@@ -358,12 +358,8 @@
 	// Handle defense based on intent
 	switch(d_intent)
 		if(INTENT_PARRY)
-			if(HAS_TRAIT(src, TRAIT_UNPARRYING))
-				return FALSE
 			return attempt_parry(intenty, user, prob2defend)
 		if(INTENT_DODGE)
-			if(HAS_TRAIT(src, TRAIT_UNDODGING))
-				return FALSE
 			return attempt_dodge(intenty, user, can_dodge_see)
 
 	return FALSE

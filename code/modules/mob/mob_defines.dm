@@ -244,7 +244,9 @@
 	var/list/attack_grunts = null
 	var/list/takedamage_grunts = null
 
+	/// ONLY USED FOR INITIALIZING, DO NOT CHECK OR MODIFY DIRECTLY. USE TRAIT_UNPARRYING
 	var/canparry = FALSE
+	/// ONLY USED FOR INITIALIZING, DO NOT CHECK OR MODIFY DIRECTLY. USE TRAIT_UNDODGING
 	var/candodge = FALSE
 
 	var/dodge_sound = 'sound/combat/dodge.ogg'
