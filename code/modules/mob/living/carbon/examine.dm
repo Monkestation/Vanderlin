@@ -146,7 +146,7 @@
 			. += span_nicegreen("Ahh... my old friend!")
 			user.add_stress(/datum/stress_event/saw_old_party)
 		// Intolerant
-		else if(!HAS_TRAIT(user, TRAIT_TOLERANT)) // friendship is kinda like tolerance after all
+		else if(user.has_quirk(/datum/quirk/vice/paranoid))
 			if(!isdarkelf(user) && isdarkelf(src))
 				user.add_stress(/datum/stress_event/delf)
 			if(!istiefling(user) && istiefling(src))
@@ -178,7 +178,10 @@
 		// Foreigner
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			. += span_tinywarning("A foreigner.")
-			user.add_stress(/datum/stress_event/para/foreigner)
+			if(user.has_quirk(/datum/quirk/vice/paranoid))
+				user.add_stress(/datum/stress_event/para/foreigner)
+			else
+				user.add_stress(/datum/stress_event/foreigner)
 		// Thuild
 		if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
 			. += span_smallgreen("A member of the Thieves' Guild.")
@@ -362,10 +365,12 @@
 		switch(final_str - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
 			if(5 to INFINITY)
 				str_msg = span_bold("[P[THEY]] look[pl] much stronger than me.")
-				user.add_stress(/datum/stress_event/para/str)
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/para/str)
 			if(1 to 5)
 				str_msg = "[P[THEY]] look[pl] stronger than me."
-				user.add_stress(/datum/stress_event/para/str)
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/para/str)
 			if(0)
 				str_msg = "[P[THEY]] look[pl] about as strong as me."
 			if(-5 to -1)
