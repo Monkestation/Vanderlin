@@ -157,7 +157,6 @@
 	C.AddComponent(/datum/component/steam_life)
 	C.AddComponent(/datum/component/command_follower)
 	C.AddComponent(/datum/component/augmentable)
-	C.AddComponent(/datum/component/easy_repair)
 	C.AddComponent(/datum/component/damage_shutdown)
 	C.apply_status_effect(/datum/status_effect/automaton_unshackled)
 

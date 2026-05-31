@@ -328,10 +328,10 @@
 ////////////////////////////////////////////
 
 //Returns a list of damaged bodyparts
-/mob/living/carbon/proc/get_damaged_bodyparts(brute = FALSE, burn = FALSE, status)
+/mob/living/carbon/proc/get_damaged_bodyparts(brute = FALSE, burn = FALSE, status, forced)
 	var/list/obj/item/bodypart/parts = list()
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		if(status && (BP.status != status))
+		if(!forced && status && (BP.status != status))
 			continue
 		if((brute && BP.brute_dam) || (burn && BP.burn_dam) || length(BP.wounds))
 			parts += BP
@@ -374,7 +374,7 @@
 /mob/living/carbon/heal_overall_damage(brute = 0, burn = 0, required_status, updating_health = TRUE, forced = FALSE)
 	. = FALSE
 
-	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_status)
+	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_status, forced)
 	var/update = NONE
 	while(length(parts) && (brute > 0 || burn > 0))
 		var/obj/item/bodypart/picked = pick(parts)

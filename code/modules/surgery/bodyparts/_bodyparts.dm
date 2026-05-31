@@ -937,7 +937,7 @@
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, updating_health = TRUE, forced = FALSE, required_status)
 	update_HP()
-	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
+	if(!forced && required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
 	for(var/datum/injury/injury as anything in injuries)
@@ -952,9 +952,8 @@
 
 	return post_damage_change(updating_health)
 
-/// Call this after you damage or heal injuries to update the bodypart's damage properties properly. Returns whether limb need their overlays updated
+/// Call this after you damage or heal injuries to update the bodypart's damage properties properly. Returns whether owner need their overlays updated
 /obj/item/bodypart/proc/post_damage_change(updating_health = TRUE, updating_shock = FALSE)
-	. = FALSE
 	update_damages()
 
 	if(owner)
@@ -965,10 +964,9 @@
 			owner.updatehealth()
 		if(updating_shock && get_shock(FALSE) >= DAMAGE_PRECISION)
 			owner.update_shock()
-			. = TRUE
 	consider_processing()
 
-	return update_bodypart_damage_state() || .
+	return update_bodypart_damage_state()
 
 ///Proc to hook behavior associated to the change of the brute_dam variable's value.
 /obj/item/bodypart/proc/set_brute_dam(new_value)
