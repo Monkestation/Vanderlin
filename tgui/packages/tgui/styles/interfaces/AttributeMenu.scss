@@ -31,6 +31,14 @@
   --am-row-hover: rgba(255, 235, 169, 0.36);
   --am-row-line: rgba(70, 38, 18, 0.34);
   --am-title-shadow: rgba(255, 237, 184, 0.5);
+  --am-divider: rgba(72, 39, 18, 0.68);
+  --am-input-bg: rgba(72, 39, 18, 0.2);
+  --am-input-border: rgba(84, 45, 21, 0.72);
+  --am-input-placeholder: rgba(74, 47, 30, 0.72);
+  --am-scroll-track: rgba(55, 31, 14, 0.12);
+  --am-scroll-thumb: rgba(82, 45, 21, 0.58);
+  --am-card-bg: rgba(75, 42, 18, 0.13);
+  --am-card-border: rgba(70, 38, 18, 0.3);
   position: relative;
   width: 100%;
   height: 100%;
@@ -56,6 +64,14 @@
   --am-row-line: rgba(180, 150, 90, 0.22);
   --am-title-shadow: rgba(0, 0, 0, 0.55);
   --am-panel-sheen: rgba(255, 220, 150, 0.06);
+  --am-divider: rgba(180, 150, 90, 0.4);
+  --am-input-bg: rgba(0, 0, 0, 0.35);
+  --am-input-border: rgba(180, 150, 90, 0.5);
+  --am-input-placeholder: rgba(200, 180, 140, 0.5);
+  --am-scroll-track: rgba(0, 0, 0, 0.25);
+  --am-scroll-thumb: rgba(180, 150, 90, 0.45);
+  --am-card-bg: rgba(255, 226, 150, 0.06);
+  --am-card-border: rgba(180, 150, 90, 0.3);
   --am-good: #d8a83a;
   --am-bad: #d2622f;
 }
@@ -161,7 +177,7 @@
   flex: 0 0 auto;
   height: 1px;
   margin: 8px 0;
-  background: linear-gradient(90deg, transparent, rgba(72, 39, 18, 0.68), transparent);
+  background: linear-gradient(90deg, transparent, var(--am-divider), transparent);
 }
 
 .AttributeMenu__scroll,
@@ -182,12 +198,12 @@
 
 .AttributeMenu__scroll::-webkit-scrollbar-track,
 .AttributeMenu__noteScroll::-webkit-scrollbar-track {
-  background: rgba(55, 31, 14, 0.12);
+  background: var(--am-scroll-track);
 }
 
 .AttributeMenu__scroll::-webkit-scrollbar-thumb,
 .AttributeMenu__noteScroll::-webkit-scrollbar-thumb {
-  background: rgba(82, 45, 21, 0.58);
+  background: var(--am-scroll-thumb);
   border-radius: 2px;
 }
 
@@ -562,15 +578,15 @@
 }
 
 .AttributeMenu__search input {
-  background: rgba(72, 39, 18, 0.2) !important;
-  border: 1px solid rgba(84, 45, 21, 0.72) !important;
+  background: var(--am-input-bg) !important;
+  border: 1px solid var(--am-input-border) !important;
   color: var(--am-ink) !important;
   font-family: Georgia, 'Times New Roman', serif !important;
   font-size: 13px !important;
 }
 
 .AttributeMenu__search input::placeholder {
-  color: rgba(74, 47, 30, 0.72);
+  color: var(--am-input-placeholder);
 }
 
 .AttributeMenu__toggle {
@@ -721,8 +737,8 @@
   gap: 8px;
   margin-bottom: 9px;
   padding: 7px 8px;
-  background: rgba(75, 42, 18, 0.13);
-  border: 1px solid rgba(70, 38, 18, 0.3);
+  background: var(--am-card-bg);
+  border: 1px solid var(--am-card-border);
 }
 
 .AttributeMenu__valueCard span,
@@ -815,8 +831,8 @@
 
 .AttributeMenu__iconFallback {
   display: inline-block;
-  background: rgba(67, 38, 18, 0.25);
-  border: 1px solid rgba(67, 38, 18, 0.35);
+  background: var(--am-card-bg);
+  border: 1px solid var(--am-card-border);
 }
 
 .AttributeMenu__iconFallback--small {
@@ -1047,7 +1063,7 @@
   padding: 8px 32px 8px 12px;
   background: linear-gradient(180deg, var(--am-leather), var(--am-coke));
   border-bottom: 1px solid var(--am-gold-bright);
-  color: var(--am-parchment-light);
+  color: #f0e2c0;
 }
 
 .AttributeMenu__tutorialEyebrow {
@@ -1063,7 +1079,7 @@
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 16px;
   font-weight: bold;
-  color: var(--am-parchment-light);
+  color: #f0e2c0;
 }
 
 .AttributeMenu__tutorialClose {
@@ -1073,7 +1089,7 @@
   width: 22px;
   height: 22px;
   padding: 0;
-  color: var(--am-parchment);
+  color: #d9c3a0;
   font-size: 14px;
   line-height: 1;
   background: transparent;
@@ -1085,7 +1101,7 @@
     background 120ms ease;
 
   &:hover {
-    color: var(--am-wax);
+    color: var(--am-fire);
     background: rgba(218, 193, 141, 0.18);
   }
 }

@@ -18,25 +18,29 @@ const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
 
 type LedgerTheme = 'light' | 'dark';
 
-const useChatTheme = (): LedgerTheme => {
+const useChatTheme = (reloadKey: unknown): LedgerTheme => {
   const [theme, setTheme] = useState<LedgerTheme>('light');
   useEffect(() => {
     let cancelled = false;
     storage
       .get('rogue-panel-settings')
       .then((settings) => {
-        if (cancelled || !settings) {
+        if (cancelled) {
           return;
         }
-        if (settings.theme === 'dark' || settings.theme === 'light') {
-          setTheme(settings.theme);
-        }
+        const next =
+          settings && settings.theme === 'dark' ? 'dark' : 'light';
+        setTheme(next);
       })
-      .catch(() => {});
+      .catch(() => {
+        if (!cancelled) {
+          setTheme('light');
+        }
+      });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [reloadKey]);
   return theme;
 };
 
@@ -862,7 +866,7 @@ const InspectionPanel = memo((props: {
 });
 
 export const AttributeMenu = () => {
-  const { act, data } = useBackend<AttributeData>();
+  const { act, data, suspended } = useBackend<AttributeData>();
   const {
     parent,
     stats_meta,
@@ -909,7 +913,7 @@ export const AttributeMenu = () => {
   const openTutorial = useCallback(() => setShowTutorial(true), []);
   const closeTutorial = useCallback(() => setShowTutorial(false), []);
 
-  const theme = useChatTheme();
+  const theme = useChatTheme(suspended);
   const rootRef = useRef<HTMLDivElement>(null);
 
   return (
