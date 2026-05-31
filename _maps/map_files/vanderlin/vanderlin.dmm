@@ -1986,7 +1986,17 @@
 /turf/open/floor/blocks/paving,
 /area/indoors/town/bath)
 "aWB" = (
-/obj/structure/table/wood/plain_alt,
+/obj/structure/closet/crate/chest/crate,
+/obj/item/key/sweeper,
+/obj/item/broom,
+/obj/item/natural/bundle/cloth{
+	amount = 5;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/soap,
+/obj/item/soap,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
 "aWO" = (
@@ -17986,6 +17996,20 @@
 /area/indoors/town/keep/captain)
 "iGe" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
+/obj/structure/rack/shelf,
+/obj/item/storage/sack{
+	pixel_x = 6;
+	pixel_y = 39
+	},
+/obj/item/storage/sack{
+	pixel_x = -2;
+	pixel_y = 39
+	},
+/obj/item/storage/sack{
+	pixel_x = -10;
+	pixel_y = 39
+	},
+/obj/structure/fermentation_keg/water,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
 "iGp" = (
@@ -21557,7 +21581,8 @@
 /turf/open/floor/grass,
 /area/indoors/town/church/inquisition)
 "klY" = (
-/obj/machinery/light/fueled/torchholder/r,
+/obj/machinery/light/fueled/wallfire/candle/weak/r,
+/obj/effect/landmark/start/sweeper,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
 "kma" = (
@@ -23410,9 +23435,11 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "lec" = (
-/obj/structure/door/weak/bolt{
-	dir = 4
+/obj/structure/door{
+	name = "Sweeper's Quarters"
 	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/sweeper,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
 "leJ" = (
@@ -24163,6 +24190,23 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
+"lwR" = (
+/obj/structure/handcart,
+/obj/structure/rack/shelf,
+/obj/item/burial_shroud{
+	pixel_x = 6;
+	pixel_y = 38
+	},
+/obj/item/burial_shroud{
+	pixel_x = 0;
+	pixel_y = 38
+	},
+/obj/item/burial_shroud{
+	pixel_x = -7;
+	pixel_y = 38
+	},
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/town)
 "lwS" = (
 /obj/structure/fluff/walldeco/bath/wallpipes{
 	dir = 1;
@@ -29504,9 +29548,7 @@
 /turf/open/openspace,
 /area/indoors/town/garrison)
 "nYo" = (
-/obj/structure/chair/wood/alt/chair3{
-	dir = 4
-	},
+/obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
 "nYq" = (
@@ -151744,7 +151786,7 @@ biy
 biy
 xhZ
 nKC
-qcD
+lwR
 klY
 aWB
 pkd
