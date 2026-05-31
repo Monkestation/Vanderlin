@@ -27,7 +27,7 @@
 	var/quantity = 1
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
-	var/pellet_type
+	var/pellet_type = null
 
 /obj/item/coin/get_carry_weight(atom/carrier)
 	. = item_weight * quantity
@@ -123,7 +123,7 @@
 		. += span_info("[quantity_to_words(quantity)] [denomination] ([get_real_price()] mammon)")
 		return
 
-	if(quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= SKILL_LEVEL_NOVICE && pellet_type)
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= SKILL_LEVEL_NOVICE)
 		. += span_info("It looks like you could rig this up to be fired as ammunition.")
 
 	if(HAS_TRAIT(user, TRAIT_COIN_ILLITERATE))
