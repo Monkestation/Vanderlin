@@ -26,10 +26,10 @@
 	A hoblin was an uncommon sight, until the second Goblin War caused an influx of them, as those dwarves captured by orcish forces where fed flesh of their fallen brothers. \
 	Made by Graggar into scouts for His armies, half-goblins have a inborn tendency for cunning sabotage, theft and even assassinations, leading to much social ostracisation. \
 	While half-orcs prefer to be live alone, hoblins often group up into thieving gangs, their size allowing them to hide from watchful gaze of any guard. \
-	Other greenskins look down on them, treating them as nothing more than pests unworthy of Graggar's blessing. \
+	Other greenskins look down on them, treating them as nothing more than pests unworthy of Graggar's blessing, yet those who get theirs hands on manflesh might ascend into a proper orc. \
 	Veterans of the war will remember them as the first sign of an orcish warband approaching. \
 	\n\n\
-	Hoblins, with their deceiving looks are quite good at taking a beating, yet they prefer to avoid any confrontation and run from consequence. \
+	Hoblins easily outmanevour their opponents, yet are unable to stay too long in a fight without somebody else taking a beating for them. \
 	\n\n\
 	THIS IS AN <I>EXTREMELY</I> DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
 
@@ -45,8 +45,8 @@
 	possible_ages = NORMAL_AGES_LIST
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/goblin_male.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/goblin_female.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/hoblin.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/m/hoblin.dmi'
 
 	custom_id = "dwarf"
 	custom_clothes = TRUE
@@ -64,7 +64,7 @@
 		OFFSET_CLOAK = list(0,0),\
 		OFFSET_FACEMASK = list(0,-4),\
 		OFFSET_HEAD = list(0,-4),\
-		OFFSET_FACE = list(0,-4),\
+		OFFSET_FACE = list(0, 0),\
 		OFFSET_BELT = list(0,0),\
 		OFFSET_BACK = list(0,-4),\
 		OFFSET_NECK = list(0,-4),\
@@ -103,7 +103,7 @@
 
 	customizers = list(
 		/datum/customizer/organ/ears/goblin,
-		/datum/customizer/organ/eyes/humanoid,
+		/datum/customizer/organ/eyes/humanoid/,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
 		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
@@ -120,7 +120,7 @@
 		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
-		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/nightmare,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/nightmare/hoblin,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears/goblin,
 		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
