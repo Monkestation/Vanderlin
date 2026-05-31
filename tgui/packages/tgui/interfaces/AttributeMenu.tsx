@@ -1,10 +1,44 @@
-import { memo, useCallback, useMemo, type CSSProperties } from 'react';
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from 'react';
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
 import { resolveAsset } from '../assets';
+import { storage } from 'common/storage';
 
 const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
+
+type LedgerTheme = 'light' | 'dark';
+
+const useChatTheme = (): LedgerTheme => {
+  const [theme, setTheme] = useState<LedgerTheme>('light');
+  useEffect(() => {
+    let cancelled = false;
+    storage
+      .get('rogue-panel-settings')
+      .then((settings) => {
+        if (cancelled || !settings) {
+          return;
+        }
+        if (settings.theme === 'dark' || settings.theme === 'light') {
+          setTheme(settings.theme);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  return theme;
+};
 
 const SEAL_SPRITESHEET_CLASS = 'attribute_seals104x104';
 const SEAL_STATES = new Set([
@@ -19,17 +53,11 @@ const SEAL_STATES = new Set([
 
 type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
 
-interface TutorialHighlight {
-  top: number;
-  left: number;
-  width: number;
-  height: number;
-}
-
 interface TutorialStep {
   title: string;
   body: string;
-  highlight?: TutorialHighlight;
+  /** data-tour attribute of the element to spotlight, measured live from the DOM. */
+  target?: string;
   popupAnchor?: TutorialAnchor;
 }
 
@@ -42,37 +70,37 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   {
     title: 'Character Seals',
     body: 'The left page bears seven Core Attribute seals arranged around the figure: Strength, Perception, Intellect, Speed, Constitution, Endurance, and Fortune. These foundations govern almost everything you do.',
-    highlight: { top: 1, left: 0.5, width: 33, height: 98 },
+    target: 'seals-panel',
     popupAnchor: 'right',
   },
   {
     title: 'Current / Base reading',
     body: 'Each seal shows two numbers: current / base. Green means a blessing lifts you above your base. Red means a curse drags you below. Pale ink means it is unmodified.',
-    highlight: { top: 13, left: 13.5, width: 8, height: 12 },
+    target: 'seal-value',
     popupAnchor: 'right',
   },
   {
     title: 'Guild Register',
     body: 'The middle page is the Skills Book — your trained crafts, grouped by guild. The current / base numbers behave just like the seals.',
-    highlight: { top: 1, left: 34, width: 38, height: 98 },
+    target: 'register-panel',
     popupAnchor: 'left',
   },
   {
     title: 'All Skills toggle',
     body: 'By default only trained skills are shown. Tick All Skills to also reveal untrained ones, so you can see what is left to learn.',
-    highlight: { top: 1, left: 59, width: 12, height: 7 },
+    target: 'all-skills-toggle',
     popupAnchor: 'bottom',
   },
   {
     title: 'Search the Register',
     body: 'Type a skill name here to filter the register in real time. Searching automatically reveals untrained skills so nothing stays hidden.',
-    highlight: { top: 10, left: 34, width: 38, height: 6 },
+    target: 'register-search',
     popupAnchor: 'bottom',
   },
   {
     title: 'Marginal Notes',
     body: 'Click any seal or guild entry and the scribe will note the details here: description, difficulty, governing attribute, defaults, and any active blessings or curses. Press the x to close the note.',
-    highlight: { top: 1, left: 72, width: 27.5, height: 98 },
+    target: 'notes-panel',
     popupAnchor: 'left',
   },
   {
@@ -90,9 +118,16 @@ const TUTORIAL_STEPS: TutorialStep[] = [
 const TUTORIAL_CARD_WIDTH = 270;
 const TUTORIAL_CARD_GAP = 12;
 
+interface HighlightRect {
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+}
+
 const tutorialCardStyle = (
   anchor: TutorialAnchor,
-  hl: TutorialHighlight | undefined,
+  hl: HighlightRect | null,
 ): CSSProperties => {
   if (!hl || anchor === 'center') {
     return {
@@ -104,41 +139,82 @@ const tutorialCardStyle = (
   switch (anchor) {
     case 'right':
       return {
-        top: `${hl.top + hl.height / 2}%`,
-        left: `calc(${hl.left + hl.width}% + ${TUTORIAL_CARD_GAP}px)`,
+        top: `${hl.top + hl.height / 2}px`,
+        left: `${hl.left + hl.width + TUTORIAL_CARD_GAP}px`,
         transform: 'translateY(-50%)',
       };
     case 'left':
       return {
-        top: `${hl.top + hl.height / 2}%`,
-        left: `calc(${hl.left}% - ${TUTORIAL_CARD_WIDTH + TUTORIAL_CARD_GAP}px)`,
+        top: `${hl.top + hl.height / 2}px`,
+        left: `${hl.left - TUTORIAL_CARD_WIDTH - TUTORIAL_CARD_GAP}px`,
         transform: 'translateY(-50%)',
       };
     case 'bottom':
       return {
-        top: `calc(${hl.top + hl.height}% + ${TUTORIAL_CARD_GAP}px)`,
-        left: `${hl.left + hl.width / 2}%`,
+        top: `${hl.top + hl.height + TUTORIAL_CARD_GAP}px`,
+        left: `${hl.left + hl.width / 2}px`,
         transform: 'translateX(-50%)',
       };
     case 'top':
       return {
-        top: `calc(${hl.top}% - ${TUTORIAL_CARD_GAP}px)`,
-        left: `${hl.left + hl.width / 2}%`,
+        top: `${hl.top - TUTORIAL_CARD_GAP}px`,
+        left: `${hl.left + hl.width / 2}px`,
         transform: 'translate(-50%, -100%)',
       };
   }
 };
 
-const AttributeTutorial = (props: { onClose: () => void }) => {
-  const { onClose } = props;
+const AttributeTutorial = (props: {
+  onClose: () => void;
+  rootRef: React.RefObject<HTMLDivElement>;
+}) => {
+  const { onClose, rootRef } = props;
   const [step, setStep] = useLocalState<number>('attribute_menu_tutorial_step', 0);
+  const [rect, setRect] = useState<HighlightRect | null>(null);
 
   const safe = Math.min(Math.max(step, 0), TUTORIAL_STEPS.length - 1);
   const current = TUTORIAL_STEPS[safe];
   const isFirst = safe === 0;
   const isLast = safe === TUTORIAL_STEPS.length - 1;
   const anchor = current.popupAnchor ?? 'center';
-  const hl = current.highlight;
+  const target = current.target;
+
+  useLayoutEffect(() => {
+    if (!target || !rootRef.current) {
+      setRect(null);
+      return;
+    }
+    const measure = () => {
+      const root = rootRef.current;
+      if (!root) {
+        return;
+      }
+      const el = root.querySelector<HTMLElement>(`[data-tour="${target}"]`);
+      if (!el) {
+        setRect(null);
+        return;
+      }
+      const rootBox = root.getBoundingClientRect();
+      const box = el.getBoundingClientRect();
+      setRect({
+        top: box.top - rootBox.top,
+        left: box.left - rootBox.left,
+        width: box.width,
+        height: box.height,
+      });
+    };
+    measure();
+    const root = rootRef.current;
+    const observer = new ResizeObserver(measure);
+    observer.observe(root);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [target, safe, rootRef]);
+
+  const hl = rect;
 
   const close = () => {
     setStep(0);
@@ -152,10 +228,10 @@ const AttributeTutorial = (props: { onClose: () => void }) => {
         <div
           className="AttributeMenu__tutorialHighlight"
           style={{
-            top: `${hl.top}%`,
-            left: `${hl.left}%`,
-            width: `${hl.width}%`,
-            height: `${hl.height}%`,
+            top: `${hl.top}px`,
+            left: `${hl.left}px`,
+            width: `${hl.width}px`,
+            height: `${hl.height}px`,
           }}
         />
       )}
@@ -436,7 +512,10 @@ const AttributeSealNode = memo((props: {
           <span className="AttributeMenu__sealNodeOrb" />
         )}
         <span className="AttributeMenu__sealNodeName">{stat.seal_label}</span>
-        <span className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}>
+        <span
+          className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}
+          data-tour={stat.anchor === 'strength' ? 'seal-value' : undefined}
+        >
           {valuePair(stat.value, stat.raw_value)}
         </span>
       </button>
@@ -459,7 +538,7 @@ const CoreAttributes = memo((props: {
   const { stats, selectedName, act, onHelpClick } = props;
 
   return (
-    <section className="AttributeMenu__panel AttributeMenu__panel--seals">
+    <section className="AttributeMenu__panel AttributeMenu__panel--seals" data-tour="seals-panel">
       <button
         type="button"
         className="AttributeMenu__helpButton"
@@ -614,22 +693,24 @@ const SkillRegister = memo((props: {
   }, [categoriesMeta, skillsValues, showBadSkills, searchText]);
 
   return (
-    <section className="AttributeMenu__panel AttributeMenu__panel--register">
+    <section className="AttributeMenu__panel AttributeMenu__panel--register" data-tour="register-panel">
       <header className="AttributeMenu__panelHeader AttributeMenu__panelHeader--row">
         <div>
           <div className="AttributeMenu__eyebrow">Guild Register</div>
           <div className="AttributeMenu__title">Skills Book</div>
         </div>
-        <Button.Checkbox
-          checked={showBadSkills || isSearching}
-          onClick={toggleAllSkills}
-          className="AttributeMenu__toggle"
-        >
-          All Skills
-        </Button.Checkbox>
+        <span data-tour="all-skills-toggle">
+          <Button.Checkbox
+            checked={showBadSkills || isSearching}
+            onClick={toggleAllSkills}
+            className="AttributeMenu__toggle"
+          >
+            All Skills
+          </Button.Checkbox>
+        </span>
       </header>
 
-      <div className="AttributeMenu__search">
+      <div className="AttributeMenu__search" data-tour="register-search">
         <Input
           fluid
           placeholder="Search the register..."
@@ -681,7 +762,7 @@ const InspectionPanel = memo((props: {
 
   if (!attribute) {
     return (
-      <section className="AttributeMenu__panel AttributeMenu__panel--notes">
+      <section className="AttributeMenu__panel AttributeMenu__panel--notes" data-tour="notes-panel">
         <header className="AttributeMenu__panelHeader">
           <div className="AttributeMenu__eyebrow">Marginal Notes</div>
           <div className="AttributeMenu__title">Inspection</div>
@@ -697,7 +778,7 @@ const InspectionPanel = memo((props: {
   }
 
   return (
-    <section className="AttributeMenu__panel AttributeMenu__panel--notes">
+    <section className="AttributeMenu__panel AttributeMenu__panel--notes" data-tour="notes-panel">
       <button
         className="AttributeMenu__closeNote"
         onClick={() => act('clear_inspection')}
@@ -828,6 +909,9 @@ export const AttributeMenu = () => {
   const openTutorial = useCallback(() => setShowTutorial(true), []);
   const closeTutorial = useCallback(() => setShowTutorial(false), []);
 
+  const theme = useChatTheme();
+  const rootRef = useRef<HTMLDivElement>(null);
+
   return (
     <Window
       title={parent ? `${parent} Character Ledger` : 'Character Ledger'}
@@ -835,7 +919,7 @@ export const AttributeMenu = () => {
       height={720}
     >
       <Window.Content fitted>
-        <Box className="AttributeMenu">
+        <div className={`AttributeMenu AttributeMenu--theme-${theme}`} ref={rootRef}>
           <div className="AttributeMenu__backdrop">
             <CoreAttributes
               stats={stats}
@@ -852,8 +936,10 @@ export const AttributeMenu = () => {
             />
             <InspectionPanel attribute={inspectedAttribute} act={act} />
           </div>
-          {showTutorial && <AttributeTutorial onClose={closeTutorial} />}
-        </Box>
+          {showTutorial && (
+            <AttributeTutorial onClose={closeTutorial} rootRef={rootRef} />
+          )}
+        </div>
       </Window.Content>
     </Window>
   );
