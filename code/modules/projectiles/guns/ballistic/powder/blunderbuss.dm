@@ -52,7 +52,7 @@
 
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss/update_icon_state()
 	. = ..()
-	icon_state = "[base_icon_state][cocked ? "_cocked" : "_uncocked"][ramrod ? "_ramrod" : ""][bayonet ? "_bayonet" : ""]" // God weeps
+	icon_state = "[base_icon_state][cocked ? "_cocked" : ""][ramrod ? "_ramrod" : ""][bayonet ? "_bayonet" : ""]" // God weeps
 
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
 	. = ..()

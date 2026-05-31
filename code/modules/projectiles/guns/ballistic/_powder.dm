@@ -67,6 +67,10 @@
 	if(exited == ramrod)
 		ramrod = null
 
+/obj/item/gun/ballistic/powder/clear_chambered(datum/source)
+	. = ..()
+	bullet_rammed = FALSE
+
 /obj/item/gun/ballistic/powder/examine(mob/user)
 	. = ..()
 
