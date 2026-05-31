@@ -216,6 +216,7 @@
 		STAT_SPEED = -1,
 		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/firearms = 40,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -248,8 +249,6 @@
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
-		/obj/item/weapon/scabbard/book,
-		scabbards = list(/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded),
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
@@ -259,6 +258,8 @@
 	shoes = /obj/item/clothing/shoes/boots
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	scabbards = list(/obj/item/weapon/scabbard/cane/hand)
+	beltr =	/obj/item/weapon/scabbard/book
+	scabbards = list(/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded)
 
 /datum/attribute_holder/sheet/job/huntsmaster
 	attribute_variance = list(
