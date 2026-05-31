@@ -136,3 +136,11 @@
   - image: added some zigar and zigbox sprites
   - code_imp: Changed zigs to need westleach dust or swampweed dust along with their
       leaf type
+2026-05-30:
+  CheffieGithub:
+  - admin: Added a new verb called "Controller Overview" with an interface that lists
+      various stats of the subsystems and their cost as well as providing filtering
+      and access to VV.
+  ModDownloading:
+  - balance: You no longer gain stress from examining foreigners, Inhumen species,
+      or strong people, unless you're Paranoid.
