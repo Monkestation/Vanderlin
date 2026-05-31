@@ -44,6 +44,7 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/innkeep
 	name = JOB_INNKEEP

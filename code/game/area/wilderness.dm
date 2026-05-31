@@ -1,5 +1,6 @@
 /area/outdoors/wilderness
-	name = "wilderness"
+	name = "murderwood"
+	icon = 'icons/turf/areas/forest.dmi'
 	icon_state = "woods"
 	droning_index = DRONING_FOREST_DAY
 	droning_index_night = DRONING_FOREST_NIGHT
@@ -36,7 +37,7 @@
 	threat_region = THREAT_REGION_NORTHERN_GROVE
 
 /area/outdoors/wilderness/outpost/vanderlin
-	name = "abandoned outpost"
+	name = "thatchwood outpost"
 	first_time_text = "Thatchwood Outpost"
 	threat_region = THREAT_REGION_NORTHERN_GROVE
 
@@ -46,6 +47,7 @@
 
 /area/indoors/wilderness
 	name = "indoors - wilderness"
+	icon = 'icons/turf/areas/forest.dmi'
 	icon_state = "indoorwild"
 
 /area/indoors/wilderness/tavern
@@ -86,3 +88,45 @@
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/magiciantower
+
+
+/area/outdoors/wilderness/safe
+	ambush_mobs = null
+	icon_state = "woods_safe"
+
+/area/outdoors/wilderness/safe/gallowband_fort
+	name = "gallowband fort"
+	icon_state = "gallowband_outdoors"
+	first_time_text = "Gallowband Fort"
+
+/area/indoors/wilderness/gallowband
+	name = "gallowband camp"
+	icon_state = "gallowband_indoors"
+
+/area/indoors/wilderness/gallowband/garrison
+	name = "gallowband fort"
+	icon_state = "gallowband_garrison"
+	background_track = 'sound/music/area/manorgarri.ogg'
+	converted_type = /area/outdoors/exposed/manorgarri
+
+/area/indoors/wilderness/gallowband/garrison/gatehouse
+	name = "gallowband gatehouse"
+
+/area/indoors/wilderness/gallowband/garrison/watchtower
+	name = "gallowband watchtower"
+	first_time_text = "Gallowband Watchtower"
+
+/area/indoors/wilderness/gallowband/ship
+	name = "gallowband ship"
+	icon_state = "gallowband_ship"
+	first_time_text = "Gallowband Ship"
+
+/area/indoors/wilderness/gallowband/cell
+	name = "gallowband cell"
+	icon_state = "cell"
+	ambient_index = AMBIENCE_DUNGEON
+	ambient_index_night = AMBIENCE_DUNGEON
+	background_track = 'sound/music/area/manorgarri.ogg'
+	background_track_dusk = null
+	background_track_night = null
+	converted_type = /area/outdoors/exposed/cell

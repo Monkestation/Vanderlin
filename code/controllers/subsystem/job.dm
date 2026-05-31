@@ -641,7 +641,7 @@ SUBSYSTEM_DEF(job)
 	if(job.parent_job)
 		equipping.job_type = job.parent_job.type
 
-	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
+	SEND_SIGNAL(equipping, COMSIG_HUMAN_JOB_RECEIVED, job)
 
 	equipping.mind?.set_assigned_role(job)
 	job.pre_outfit_equip(equipping, player_client) // sigh
@@ -675,8 +675,8 @@ SUBSYSTEM_DEF(job)
 	// Ready up bonus
 	if(!equipping.islatejoin && player_client)
 		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		equipping.hydration = 800 // Set higher hydration
-		equipping.nutrition = 800
+		equipping.hydration = NUTRITION_LEVEL_WELL_FED // Set higher hydration
+		equipping.nutrition = HYDRATION_LEVEL_HYDRATED
 		var/triumphs = 1
 		if(is_lord_job(job)) //monarch bonus
 			to_chat(player_client, span_notice("Heavy is the weight of the crown. But you have the resolve to wear it high. In this, you TRIUMPH."))

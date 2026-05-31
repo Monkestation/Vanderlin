@@ -67,7 +67,7 @@
 					MOBTIMER_SET(src, MT_LEPERBLEED)
 					var/obj/item/bodypart/part = pick(bodyparts)
 					if(part)
-						part.add_wound(/datum/wound/slash/small)
+						part.create_injury(WOUND_SLASH, 5, TRUE)
 					adjustToxLoss(10)
 		update_stamina()
 		update_energy()
@@ -96,31 +96,9 @@
 		set_typing_indicator(FALSE)
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
-	handle_gas_mask_sound()
 
 	if(stat != DEAD)
 		return 1
-
-/mob/living/carbon/human/proc/handle_gas_mask_sound()
-	if(!istype(wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
-		if(breathe_tick)
-			breathe_tick = 0
-		return
-	if(stat == DEAD)
-		return
-	if(HAS_TRAIT(src, TRAIT_NOBREATH))
-		return
-	breathe_tick++
-	var/mask_sound
-	if(istype(wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
-		if(breathe_tick>=rand(3,5))
-			breathe_tick = 0
-			mask_sound = pick('sound/items/confessormask1.ogg', 'sound/items/confessormask2.ogg', 'sound/items/confessormask3.ogg',
-							'sound/items/confessormask4.ogg', 'sound/items/confessormask5.ogg', 'sound/items/confessormask6.ogg',
-							'sound/items/confessormask7.ogg', 'sound/items/confessormask8.ogg', 'sound/items/confessormask9.ogg',
-					 		'sound/items/confessormask10.ogg')
-			playsound(src, mask_sound, 90, FALSE, 4, 0)
-			return
 
 /mob/living/carbon/human/DeadLife(delta_time, times_fired)
 	set invisibility = 0
@@ -135,6 +113,7 @@
 	. = ..()
 	name = get_visible_name()
 	handle_organs(delta_time, times_fired)
+	handle_bodyparts(delta_time, times_fired)
 
 /mob/living/carbon/human/proc/on_daypass()
 	if(stat < 3) //not dead
@@ -250,6 +229,10 @@
 
 /mob/living/carbon/human/SoakMob(locations, dirty_water = FALSE, rain = FALSE)
 	var/coverhead
+	if(dirty_water)
+		var/list/bodyzones = bodyparts_from_coverage(locations)
+		adjust_germ_level_directed(10, body_zone = bodyzones)
+
 	//add belt slots to this for rusting
 	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, wear_ring)
 	for(var/bp in body_parts)

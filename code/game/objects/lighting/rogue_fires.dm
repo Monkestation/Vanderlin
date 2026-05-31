@@ -382,12 +382,12 @@
 	fueluse = 0
 	soundloop = null
 	crossfire = FALSE
-	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	obj_flags = parent_type::obj_flags | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	temperature_change = 5
 
 /obj/machinery/light/fueled/chand/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/machinery/light/fueled/chand/attack_hand(mob/user)
 	if(isliving(user) && on)
@@ -579,7 +579,7 @@
 	fueluse = 30 MINUTES
 	layer = BELOW_MOB_LAYER
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	dir = NORTH
 	buckle_requires_restraints = 1

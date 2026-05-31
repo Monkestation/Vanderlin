@@ -20,7 +20,7 @@
 	for(var/mob/living/carbon/human/ally in view(10, pawn))
 		if(ally == pawn)
 			continue
-		if(!faction_check(pawn.faction, ally.faction))
+		if(!pawn.faction_check_atom(ally))
 			continue
 		var/datum/ai_controller/human_npc/ally_ctrl = ally.ai_controller
 		if(!ally_ctrl)

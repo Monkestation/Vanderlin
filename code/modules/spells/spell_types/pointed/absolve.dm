@@ -68,25 +68,27 @@
 	// Transfer afflictions from the target to the caster
 
 	// Transfer damage
-	var/brute_transfer = H.getBruteLoss()
-	var/burn_transfer = H.getFireLoss()
 	var/tox_transfer = H.getToxLoss()
 	var/oxy_transfer = H.getOxyLoss()
 	var/clone_transfer = H.getCloneLoss()
 
 	// Heal the target
-	H.adjustBruteLoss(-brute_transfer)
-	H.adjustFireLoss(-burn_transfer)
 	H.adjustToxLoss(-tox_transfer)
 	H.adjustOxyLoss(-oxy_transfer)
 	H.adjustCloneLoss(-clone_transfer)
 
 	// Apply damage to the caster
-	user.adjustBruteLoss(brute_transfer)
-	user.adjustFireLoss(burn_transfer)
 	user.adjustToxLoss(tox_transfer)
 	user.adjustOxyLoss(oxy_transfer)
 	user.adjustCloneLoss(clone_transfer)
+
+	for(var/datum/injury/injury in H.all_injuries)
+		if(injury.damage_type == WOUND_DIVINE)
+			continue
+		injury.transfer_injury(user)
+
+	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
+		artery.applyOrganDamage(-artery.damage)
 
 	// Transfer blood
 	var/blood_transfer = 0

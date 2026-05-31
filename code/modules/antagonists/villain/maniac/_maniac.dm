@@ -7,15 +7,15 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 6,
 		STAT_CONSTITUTION = 6,
-		STAT_ENDURANCE = 6,
-
-		/datum/attribute/skill/combat/knives = 60,
-		/datum/attribute/skill/combat/wrestling = 50,
-		/datum/attribute/skill/combat/unarmed = 50,
-		/datum/attribute/skill/misc/climbing = 50,
-		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/medicine = 40
-
+		STAT_ENDURANCE = 6
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(60, 60),
+		/datum/attribute/skill/combat/wrestling = list(50, 50),
+		/datum/attribute/skill/combat/unarmed = list(50, 50),
+		/datum/attribute/skill/misc/climbing = list(50, 50),
+		/datum/attribute/skill/misc/athletics = list(40, 40),
+		/datum/attribute/skill/misc/medicine = list(40, 40)
 	)
 
 /datum/antagonist/maniac
@@ -136,6 +136,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.remove_curse(/datum/curse/zizo)
 			dreamer.AddComponent(/datum/component/theme_music)
 		//	dreamer.remove_client_colour(/datum/client_colour/maniac_marked)
+		RegisterSignal(owner.current, COMSIG_EMOTE_PRAY, PROC_REF(on_owner_pray))
 		owner.current.refresh_looping_ambience()
 		hallucinations = owner.current.overlay_fullscreen("maniac", /atom/movable/screen/fullscreen/maniac)
 	LAZYINITLIST(owner.learned_recipes)
@@ -147,9 +148,24 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		owner.announce_objectives()
 	START_PROCESSING(SSobj, src)
 
+/datum/antagonist/maniac/proc/on_owner_pray(mob/living/follower, message)
+	SIGNAL_HANDLER
+	if(text2num(message) == sum_keys)
+		INVOKE_ASYNC(src, PROC_REF(wake_up))
+
+/datum/patron/inhumen/graggar_zizo/hear_prayer(mob/living/follower, message)
+	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)
+	if(!dreamer)
+		return FALSE
+	if(text2num(message) == dreamer.sum_keys)
+		INVOKE_ASYNC(dreamer, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
+		return TRUE
+	. = ..()
+
 /datum/antagonist/maniac/on_removal()
 	STOP_PROCESSING(SSobj, src)
 	if(owner.current)
+		UnregisterSignal(owner.current, COMSIG_EMOTE_PRAY)
 		if(!silent)
 			to_chat(owner.current,span_danger("I am no longer a MANIAC!"))
 		if(ishuman(owner.current))
@@ -158,9 +174,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.set_patron(/datum/patron/inhumen/zizo)
 			dreamer.cmode_music = old_cm
 			dreamer.remove_stat_modifier("[type]")
-			var/datum/component/themesong = dreamer.GetComponent(/datum/component/theme_music)
-			if(themesong)
-				themesong.RemoveComponent()
+			qdel(dreamer.GetComponent(/datum/component/theme_music))
 			phy.bleed_mod *= 2
 			UnregisterSignal(dreamer, COMSIG_LIVING_DEATH)
 			var/client/client = dreamer?.client

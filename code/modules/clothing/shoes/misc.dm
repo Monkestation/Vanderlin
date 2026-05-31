@@ -165,6 +165,7 @@
 
 /obj/item/clothing/shoes/otavan/inqboots
 	name = "inquisitorial boots"
+	examine_name = "boots"
 	desc = "The steel-lined heels click."
 	icon_state = "inqboots"
 	item_state = "inqboots"
@@ -177,6 +178,7 @@
 
 /obj/item/clothing/shoes/psydonboots
 	name = "enduring boots"
+	examine_name = "boots"
 	desc = "A reliable pair of dark leather boots. Seems like they could endure the world!"
 	color = "#d5c2aa"
 	icon_state = "psydonboots"

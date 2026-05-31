@@ -254,7 +254,7 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/iron
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
@@ -265,7 +265,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
-	item_weight = 2.3 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -378,7 +378,6 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
 	smeltresult = /obj/item/ingot/iron
-	melting_material = /datum/material/iron
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
@@ -396,6 +395,7 @@
 
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
+	examine_name = "gorget"
 	icon_state = "collar_of_servitude"
 	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
 		servile and obedient under threat of its explosive potential detonating on their necks."
@@ -446,7 +446,7 @@
 		to_chat(user, "Collar is already unlocked!")
 
 
-/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
+/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
 
 	if(!ismob(loc))
@@ -501,7 +501,7 @@
 	throwforce = 0
 	drop_sound = 'sound/items/gems (1).ogg'
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
-	grid_height = 64
+	grid_height = 32
 	grid_width = 32
 
 /obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)

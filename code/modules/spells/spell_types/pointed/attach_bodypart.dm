@@ -29,6 +29,11 @@
 		limb.heal_damage(limb.brute_dam, limb.burn_dam)//heals the limb by the amount of burn and brute damage it has
 		for(var/datum/wound/limb_wounds as anything in limb.wounds)
 			qdel(limb_wounds)
+		for(var/datum/injury/limb_wounds as anything in limb.injuries)
+			if(limb_wounds.damage_type == WOUND_DIVINE)
+				continue
+			qdel(limb_wounds)
+		limb.update_damages()
 		cast_on.visible_message(
 			span_info("\The [limb] attaches itself to [cast_on]!"),
 			span_notice("\The [limb] attaches itself to me!")
@@ -83,16 +88,8 @@
 	cast_on.update_body()
 
 /datum/action/cooldown/spell/attach_bodypart/proc/get_organs(mob/living/carbon/target, mob/living/user)
-	var/list/missing_organs = list(
-		ORGAN_SLOT_EARS,
-		ORGAN_SLOT_EYES,
-		ORGAN_SLOT_TONGUE,
-		ORGAN_SLOT_HEART,
-		ORGAN_SLOT_LUNGS,
-		ORGAN_SLOT_LIVER,
-		ORGAN_SLOT_STOMACH,
-		ORGAN_SLOT_APPENDIX,
-	)
+	var/list/missing_organs = GLOB.organ_process_order
+
 	for(var/missing_organ_slot in missing_organs)
 		if(!target.getorganslot(missing_organ_slot))
 			continue

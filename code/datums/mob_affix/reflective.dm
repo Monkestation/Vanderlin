@@ -16,7 +16,7 @@
 		var/reflect_damage = round(damage * (0.3 * intensity))
 		last_damage = world.time + 10 SECONDS
 		for(var/mob/living/M in range(1, source))
-			if(M != source && !faction_check(source.faction, M.faction) && !(M in SSmatthios_mobs.matthios_mobs))
+			if(M != source && !source.faction_check_atom(M) && !(M in SSmatthios_mobs.matthios_mobs))
 				M.apply_damage(reflect_damage, BRUTE)
 				M.visible_message(span_warning("[M] is hurt by [source]'s reflective hide!"))
 				break // Only reflect to one nearby enemy

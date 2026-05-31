@@ -85,6 +85,7 @@
 		EXP_TYPE_MEDICAL = 300
 
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/feldsher
 	shoes = /obj/item/clothing/shoes/shortboots

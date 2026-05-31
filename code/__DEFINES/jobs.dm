@@ -168,6 +168,7 @@
 #define JDO_BOGWITCH 35.1
 #define JDO_BOGWITCH_APP 35.2
 
+#define JDO_SWEEPER 35.3
 #define JDO_VAGRANT 36
 #define JDO_ORPHAN 37
 #define JDO_SOILCHILD 38
@@ -228,6 +229,7 @@
 #define JOB_BARD "Bard"
 #define JOB_PRISONER "Prisoner"
 #define JOB_BEGGAR "Beggar"
+#define JOB_SWEEPER "Sweeper"
 
 
 #define JOB_SQUIRE "Squire"

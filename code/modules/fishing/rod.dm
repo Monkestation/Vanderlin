@@ -325,7 +325,7 @@
 	fishing_line = new(firer, target, icon_state = "fishing_line", beam_color = beam_color, emissive = FALSE, override_target_pixel_y = target_py, time = INFINITY, render_on_z_levels = TRUE)
 	fishing_line.lefthand = !(firer.get_held_index_of_item(src) % 2)
 	RegisterSignal(fishing_line, COMSIG_BEAM_BEFORE_DRAW, PROC_REF(check_los))
-	RegisterSignal(fishing_line, COMSIG_PARENT_QDELETING, PROC_REF(clear_line))
+	RegisterSignal(fishing_line, COMSIG_QDELETING, PROC_REF(clear_line))
 	INVOKE_ASYNC(fishing_line, TYPE_PROC_REF(/datum/beam/, Start))
 	if(QDELETED(fishing_line))
 		return null

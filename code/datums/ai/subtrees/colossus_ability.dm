@@ -42,6 +42,6 @@
 		var/atom/throw_target = get_edge_target_turf(behemoth_pawn, get_dir(behemoth_pawn, stomped)) //ill be real I got no idea why this worked.
 		var/mob/living/L = stomped
 		L.throw_at(throw_target, 7, 4)
-		L.adjustBruteLoss(20)
+		L.adjustBruteLoss(20, damage_type = BCLASS_BLUNT)
 
 	finish_action(controller, TRUE)

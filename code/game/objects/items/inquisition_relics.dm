@@ -360,7 +360,7 @@
 /datum/component/psyblessed/Initialize(preblessed = FALSE, force, blade_int, int, makesilver)
 	if(!istype(parent, /obj/item/weapon))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	pre_blessed = preblessed
 	added_force = force
 	added_blade_int = blade_int
@@ -768,7 +768,7 @@
 	throwforce = 15
 	force_wielded = 0
 	force = 0
-	obj_flags = CAN_BE_HIT
+	obj_flags = CAN_BE_HIT | NO_DEBRIS_AFTER_DECONSTRUCTION
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	experimental_inhand = TRUE
 	max_integrity = 400
@@ -827,9 +827,6 @@
 	. = ..()
 	update_appearance()
 
-/obj/item/inqarticles/garrote/deconstruct(disassembled)
-	return
-
 /obj/item/inqarticles/garrote/update_name(updates)
 	. = ..()
 	if(obj_broken)
@@ -860,7 +857,7 @@
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(garrote_victim)
 		REMOVE_TRAIT(garrote_victim, TRAIT_MUTE, "garroteCordage")
-	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_QDELETING))
 	victim = null
 
 	var/mob/living/last_garrote_user = lastuser?.resolve()
@@ -957,7 +954,7 @@
 	active = TRUE
 	ADD_TRAIT(target, TRAIT_MUTE, "garroteCordage")
 	RegisterSignal(target, COMSIG_LIVING_RESIST_GRAB, PROC_REF(on_victim_resist))
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(reset_garrote))
+	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(reset_garrote))
 	RegisterSignal(user, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(reset_garrote))
 	victim = WEAKREF(target)
 	lastuser = WEAKREF(user)
@@ -1330,7 +1327,7 @@
 	if(do_after(user, time_taken, attacked))
 		playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
 		attacked.flash_fullscreen("redflash3")
-		attacked.adjustBruteLoss(40)
+		attacked.adjustBruteLoss(40, damage_type = BCLASS_PIERCE)
 		attacked.adjust_bloodpool(-240)
 		attacked.handle_blood()
 		feeder = WEAKREF(attacked)

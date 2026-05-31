@@ -14,6 +14,11 @@
 #define BLOCK_Z_IN_DOWN			(1<<10) // Should this object block z falling from above?
 #define BLOCK_Z_IN_UP			(1<<11) // Should this object block z uprise from below?
 #define IGNORE_SINK				(1<<12)
+#define BLOCKS_CONSTRUCTION		(1<<13) //! Does this object prevent things from being built on it? For things that might change density.
+#define BLOCKS_CONSTRUCTION_DIR (1<<14) //! Does this object prevent same-direction things from being built on it?
+#define IGNORE_DENSITY			(1<<15) //! Can we ignore density when building on this object? (for example, directional windows and grilles)
+/// Atoms don't spawn anything when deconstructed (they just vanish)
+#define NO_DEBRIS_AFTER_DECONSTRUCTION (1<<16)
 
 // If you add new ones, be sure to add them to /obj/Initialize as well for complete mapping support
 
@@ -31,10 +36,11 @@
 #define IMMUTABLE_SLOW			(1<<10) // When players should not be able to change the slowdown of the item (Speed potions, etc)
 #define IN_STORAGE				(1<<11) //is this item in the storage item, such as backpack? used for tooltips
 #define SURGICAL_TOOL			(1<<12)	//Tool commonly used for surgery: won't attack targets in an active surgical operation on help intent (in case of mistakes)
-#define SHRINK_ENCHANT			(1<<13)
-#define ITEM_ONLY_BREAK 		(1<<14)
-#define HIGH_VALUE (1<<15)
-#define OBTAINED_DATA (1<<16)
+#define HAND_ITEM				(1<<13) // If an item is just your hand (circled hand, slapper) and shouldn't block things like riding
+#define SHRINK_ENCHANT			(1<<14)
+#define ITEM_ONLY_BREAK 		(1<<15)
+#define HIGH_VALUE (1<<16)
+#define OBTAINED_DATA (1<<17)
 
 // Flags for the clothing_flags var on /obj/item/clothing
 
@@ -58,3 +64,8 @@
 
 /// use on color subtypes for clothes, so the unit test for crafting doesn't scream at you.
 #define CRAFTING_TEST_EXCLUDE	(1<<0)
+
+/// Flags for specifically what kind of items to get in get_equipped_items
+#define INCLUDE_POCKETS (1<<0)
+#define INCLUDE_ACCESSORIES (1<<1)
+#define INCLUDE_HELD (1<<2)

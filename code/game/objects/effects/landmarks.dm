@@ -300,6 +300,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = JOB_BEGGAR
 	jobs_to_spawn = list(JOB_BEGGAR)
 
+/obj/effect/landmark/start/sweeper
+	name = JOB_SWEEPER
+	jobs_to_spawn = list(JOB_SWEEPER)
+
 /obj/effect/landmark/start/consort
 	name = JOB_CONSORT
 	jobs_to_spawn = list(JOB_CONSORT)
@@ -344,7 +348,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/outsider/Initialize(mapload)
 	. = ..()
 	GLOB.roundstart_landmarks += src
-	GLOB.latejoin_landmarks +=src
+	GLOB.latejoin_landmarks += src
+
+/obj/effect/landmark/start/late/gallowband
 
 /obj/effect/landmark/start/feldsher
 	name = JOB_FELDSHER

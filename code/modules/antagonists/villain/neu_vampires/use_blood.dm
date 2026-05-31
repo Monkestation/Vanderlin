@@ -142,13 +142,11 @@
 				var/mob/living/carbon/human/H = data[BLOODCOST_TARGET_GRAB]
 				H.adjust_bloodvolume(-data[BLOODCOST_AMOUNT_GRAB])
 				H.adjust_bloodpool(-data[BLOODCOST_AMOUNT_GRAB])
-				H.take_overall_damage(data[BLOODCOST_AMOUNT_GRAB] ? 0.1 : 0)
 		if (data[BLOODCOST_TARGET_BLEEDER])
 			data[BLOODCOST_TOTAL] += data[BLOODCOST_AMOUNT_BLEEDER]
 			var/mob/living/carbon/human/H = data[BLOODCOST_TARGET_BLEEDER]
 			H.adjust_bloodvolume(-data[BLOODCOST_AMOUNT_BLEEDER])
 			H.adjust_bloodpool(-data[BLOODCOST_AMOUNT_BLEEDER])
-			H.take_overall_damage(data[BLOODCOST_AMOUNT_BLEEDER] ? 0.1 : 0)
 		if (data[BLOODCOST_TARGET_HELD])
 			data[BLOODCOST_TOTAL] += data[BLOODCOST_AMOUNT_HELD]
 			var/obj/item/reagent_containers/G = data[BLOODCOST_TARGET_HELD]
@@ -177,7 +175,6 @@
 					to_chat(user, span_cult("You have trouble focusing, things will go bad if you keep using your blood.") )
 				else if (blood_before > BLOOD_VOLUME_SURVIVE && blood_after < BLOOD_VOLUME_SURVIVE)
 					to_chat(user, span_cult("It will be all over soon.") )
-				H.take_overall_damage(data[BLOODCOST_AMOUNT_USER] ? 0.1 : 0)
 			else if (ismonkey(user))
 				var/mob/living/carbon/C = user
 				var/blood_before = C.health

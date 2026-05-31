@@ -33,8 +33,8 @@
 	current_blood = 5
 	blood_req = 1
 	oxygen_req = 0.5
-	nutriment_req = 0.25
-	hydration_req = 0.25
+	nutriment_req = 0.15
+	hydration_req = 0.15
 
 	var/sight_flags = 0
 	var/see_in_dark = 8

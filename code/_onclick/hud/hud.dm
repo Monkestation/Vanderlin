@@ -301,9 +301,9 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 	if(!game_world_processing || (game_world_processing.chromatic_intensity == intensity))
 		return
 	game_world_processing.chromatic_intensity = intensity
-	game_world_processing.transition_filter("blue", time, list("x" = blue_x, "y" = blue_y), easing, loop)
-	game_world_processing.transition_filter("green", time, list("x" = green_x, "y" = green_y), easing, loop)
-	game_world_processing.transition_filter("red", time, list("x" = red_x, "y" = red_y), easing, loop)
+	game_world_processing.transition_filter("blue", list("x" = blue_x, "y" = blue_y), time, easing, loop)
+	game_world_processing.transition_filter("green", list("x" = green_x, "y" = green_y), time, easing, loop)
+	game_world_processing.transition_filter("red", list("x" = red_x, "y" = red_y), time, easing, loop)
 
 
 /datum/hud/proc/plane_masters_update()

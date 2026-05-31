@@ -26,7 +26,6 @@
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 
 	faction = list("kraken")
-	aggressive = TRUE
 	stat_attack = UNCONSCIOUS
 	deaggroprob = 0
 	del_on_deaggro = FALSE
@@ -118,7 +117,7 @@
 	var/mob/living/simple_animal/hostile/kraken_tentacle/tentacle = new tentacle_type(spawn_turf)
 	tentacle.parent_kraken = src
 	active_tentacles += tentacle
-	RegisterSignal(tentacle, COMSIG_PARENT_QDELETING, PROC_REF(on_tentacle_death))
+	RegisterSignal(tentacle, COMSIG_QDELETING, PROC_REF(on_tentacle_death))
 
 /mob/living/simple_animal/hostile/retaliate/swamp_kraken/proc/on_tentacle_death(datum/source)
 	SIGNAL_HANDLER
@@ -182,7 +181,7 @@
 	smoke.start()
 
 	for(var/mob/living/L in view(cloud_range, owner))
-		if(L == owner || L.faction == owner.faction)
+		if(L == owner || L.faction_check_atom(owner, TRUE))
 			continue
 		L.adjust_temp_blindness(6 SECONDS)
 		to_chat(L, span_danger("The ink stings your eyes!"))

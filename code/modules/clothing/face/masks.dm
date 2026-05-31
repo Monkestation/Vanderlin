@@ -36,7 +36,7 @@
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
 	block2add = FOV_BEHIND
-	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	slot_flags = ITEM_SLOT_MASK
 	experimental_onhip = TRUE
 	sewrepair = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
@@ -331,7 +331,7 @@
 	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 80, "fire" = 0, "acid" = 0)
 	desc = "A knightly steel mask that both conceals and protects the face. Usually paired with a bascinet."
 	max_integrity = 300
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 100
 
@@ -498,7 +498,8 @@
 	experimental_onhip = TRUE
 	sewrepair = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
+	melt_amount = 50
 	item_weight = 945 GRAMS
 
 //................ Druids Mask ............... //

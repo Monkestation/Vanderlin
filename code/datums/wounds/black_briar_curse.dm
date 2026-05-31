@@ -14,6 +14,7 @@
 	mob_overlay = null
 	overlay_on_skeleton = TRUE
 	use_blood_color = FALSE
+	can_roll = FALSE
 
 	// the body zones this curse type targets
 	var/list/body_zones
@@ -179,7 +180,7 @@
 					owner.emote("firescream")
 				else if(infection_percent >= BBC_STAGE_MID && prob(50))
 					owner.emote("agony")
-				bodypart_owner.lingering_pain += 5
+				bodypart_owner.add_pain(5)
 		if(/datum/patron/divine/dendor, /datum/patron/divine/pestra)
 			var/infection_min = 0
 			var/list/stages = list(BBC_STAGE_MID, BBC_STAGE_LATE, 1)
@@ -226,7 +227,7 @@
 			mob_overlay = infection_overlay
 			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, list(CRIT_MOD_CHANCE = -100))
 			playsound(owner, pick('sound/gore/flesh_eat_01.ogg', 'sound/gore/flesh_eat_02.ogg'), 70, FALSE, -1)
-			bodypart_owner.lingering_pain += 20
+			bodypart_owner.add_pain(20)
 			owner.update_damage_overlays()
 			bodypart_owner.LoadComponent(/datum/component/cursedrosa)
 	else

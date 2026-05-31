@@ -266,7 +266,7 @@
 
 /atom/movable/proc/on_hearing_sensitive_trait_loss()
 	SIGNAL_HANDLER
-	UnregisterSignal(src, COMSIG_ATOM_REMOVE_TRAIT)
+	UnregisterSignal(src, COMSIG_REMOVE_TRAIT)
 	for(var/atom/movable/location as anything in get_nested_locs(src) + src)
 		LAZYREMOVE(location.important_recursive_contents[RECURSIVE_CONTENTS_HEARING_SENSITIVE], src)
 
@@ -436,6 +436,8 @@
 			if(z_move_flags & ZMOVE_FEEDBACK)
 				to_chat(rider || src, span_warning("There's nowhere to go in that direction!"))
 			return FALSE
+	if(HAS_TRAIT(src, TRAIT_I_AM_INVISIBLE_ON_A_BOAT)) // VANDERLIN CHANGE
+		return FALSE
 	if(SEND_SIGNAL(src, COMSIG_CAN_Z_MOVE, start, destination) & COMPONENT_CANT_Z_MOVE)
 		return FALSE
 	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & MOVETYPES_NOT_TOUCHING_GROUND)))

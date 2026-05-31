@@ -6,7 +6,6 @@
 	base_state = "slamp"
 	brightness = 10
 	//nightshift_allowed = FALSE
-	fueluse = 0
 	bulb_colour = "#e4ff6c"
 	bulb_power = 1
 	resistance_flags = INDESTRUCTIBLE

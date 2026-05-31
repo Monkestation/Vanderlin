@@ -38,12 +38,26 @@
 	 */
 	var/missinghpbonus = 0
 
-/datum/surgery_step/heal/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
+/datum/surgery_step/heal/validate_target(mob/user, mob/living/carbon/target, target_zone, datum/intent/intent)
 	. = ..()
 	if(!.)
 		return
 	if(!((brutehealing && target.getBruteLoss()) || (burnhealing && target.getFireLoss())))
 		return FALSE
+	if(iscarbon(target))
+		var/brute
+		var/burn
+		for(var/datum/injury/injury as anything in target.all_injuries)
+			if(brute && burn)
+				break
+			if(injury.damage_type in list(WOUND_BLUNT, WOUND_INTERNAL_BRUISE, WOUND_LASH))
+				brute = TRUE
+				continue
+			if(injury.damage_type == WOUND_BURN)
+				burn = TRUE
+				continue
+		if(!((brutehealing && brute) || (burnhealing && burn)))
+			return FALSE
 
 /datum/surgery_step/heal/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/woundtype
@@ -58,7 +72,7 @@
 			"<span class='notice'>[user] attempts to patch some of [target]'s [woundtype].</span>")
 	return TRUE
 
-/datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+/datum/surgery_step/heal/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
 	var/tmsg = "[user] fixes some of [target]'s wounds" //see above
 	var/healing_multiplier = 0.7 + GET_MOB_SKILL_VALUE_OLD(user, skill_used) * 0.1
@@ -76,14 +90,21 @@
 		urhealedamt_burn *= 0.55
 		umsg += " as best as you can while they have clothing on"
 		tmsg += " as best as they can while [target] has clothing on"
-	target.heal_bodypart_damage(urhealedamt_brute,urhealedamt_burn, required_status = BODYPART_ORGANIC)
+	if(iscarbon(target))
+		for(var/datum/injury/injury as anything in target.all_injuries)
+			if(urhealedamt_burn && injury.damage_type == WOUND_BURN && injury.required_status == BODYPART_ORGANIC)
+				urhealedamt_burn = injury.heal_damage(urhealedamt_burn)
+			if(urhealedamt_brute && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)) && injury.required_status == BODYPART_ORGANIC)
+				urhealedamt_brute = injury.heal_damage(urhealedamt_brute)
+	else
+		target.heal_bodypart_damage(urhealedamt_brute, urhealedamt_burn, required_status = BODYPART_ORGANIC)
 	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)
 	display_results(user, target, "<span class='notice'>[umsg].</span>",
 		"[tmsg].",
 		"[tmsg].")
 	return TRUE
 
-/datum/surgery_step/heal/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+/datum/surgery_step/heal/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
 	display_results(user, target, "<span class='warning'>I screwed up!</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"<span class='notice'>[user] fixes some of [target]'s wounds.</span>", TRUE)
@@ -93,7 +114,14 @@
 		urdamageamt_brute += round((target.getBruteLoss()/(missinghpbonus*2)),0.1)
 		urdamageamt_burn += round((target.getFireLoss()/(missinghpbonus*2)),0.1)
 
-	target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn, required_status = BODYPART_ORGANIC)
+	if(iscarbon(target))
+		var/list/obj/item/bodypart/parts = target.get_damageable_bodyparts(BODYPART_ORGANIC)
+		if(!length(parts))
+			return
+		var/obj/item/bodypart/picked = pick(parts)
+		picked.bodypart_attacked_by(BCLASS_CUT, urdamageamt_burn + urdamageamt_brute, user, modifiers = list(CRIT_MOD_CHANCE = -100))
+	else
+		target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn, required_status = BODYPART_ORGANIC)
 	return TRUE
 
 /********************BRUTE STEPS********************/
@@ -110,7 +138,7 @@
 
 /********************COMBO STEPS********************/
 /datum/surgery_step/heal/combo
-	name = "Tend damage"
+	name = "Tend burns & bruises"
 	brutehealing = 6
 	burnhealing = 6
 	missinghpbonus = 5

@@ -67,7 +67,7 @@
 		owner.take_damage(15, TOX)
 		if(isliving(owner))
 			var/mob/living/living_owner = owner
-			living_owner.take_overall_damage(burn = 10)
+			living_owner.adjustFireLoss(15)
 			living_owner.apply_status_effect(/datum/status_effect/debuff/acidsplash)
 		StartCooldown()
 		return . | SPELL_CANCEL_CAST
@@ -101,7 +101,7 @@
 	id = "acid splash"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/acidsplash
 	duration = 10 SECONDS
-	var/damage_per_tick = 2
+	var/damage_per_tick = 6
 
 /datum/status_effect/debuff/acidsplash/New(atom/A, scaled_damage = 2)
 	. = ..()

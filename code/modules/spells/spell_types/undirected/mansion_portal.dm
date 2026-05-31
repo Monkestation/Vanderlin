@@ -23,7 +23,7 @@
 		return
 
 	var/obj/effect/portal/vampire/portal = new /obj/effect/portal/vampire(get_turf(owner), owner, 15 MINUTES, null, FALSE, get_turf(destination), FALSE)
-	portal.RegisterSignal(destination, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/obj/effect/portal/vampire, handle_portalmaker_destruction))
+	portal.RegisterSignal(destination, COMSIG_QDELETING, TYPE_PROC_REF(/obj/effect/portal/vampire, handle_portalmaker_destruction))
 
 /obj/effect/portal/vampire
 	name = "Eerie Portal"

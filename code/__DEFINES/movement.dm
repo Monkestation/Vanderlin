@@ -57,6 +57,7 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
  * currently_z_moving defines. Higher numbers mean higher priority.
  * This one is for falling down open space from stuff such as deleted tile, pit grate...
  */
+#define CURERENTLY_Z_CLIMBING_DOWN 0.5
 #define CURRENTLY_Z_FALLING 1
 /// currently_z_moving is set to this in zMove() if 0.
 #define CURRENTLY_Z_MOVING_GENERIC 2
@@ -106,7 +107,7 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 /// Used when using ladders.
 #define ZMOVE_LADDER_FLAGS (ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
 /// Used when climbing things that requires effort.
-#define Z_MOVE_CLIMBING_FLAGS (ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_LYING_CHECKS)
+#define Z_MOVE_CLIMBING_FLAGS (ZMOVE_LADDER_FLAGS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_LYING_CHECKS)
 /// Used for falling down open space.
 #define ZMOVE_FALL_FLAGS (ZMOVE_FALL_CHECKS|ZMOVE_ALLOW_BUCKLED)
 /// Used when swimming

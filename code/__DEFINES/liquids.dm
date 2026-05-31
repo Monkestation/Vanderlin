@@ -91,7 +91,3 @@
 
 GLOBAL_LIST_INIT(liquid_blacklist, list(
 ))
-
-///from base of [/datum/reagents/proc/del_reagent]: (/datum/reagent)
-#define COMSIG_REAGENTS_DEL_REAGENT "reagents_del_reagent"
-#define COMSIG_REAGENTS_EXPOSE_TEMPERATURE "reagents_expose_temperature"

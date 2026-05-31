@@ -60,7 +60,7 @@
 	/// Whether the tile has a current and moves atoms that enter the tile
 	var/river_current = FALSE
 	/// The time between movements of the tile. Base of 0.5 seconds
-	var/current_speed = 0.5
+	var/current_speed = 0.5 SECONDS
 	/// The actual direction that stuff moves. Defaults to dir.
 	var/movedir
 
@@ -242,6 +242,7 @@
 	baseturfs = /turf/open/water/river/creatable
 
 /turf/open/water/river/creatable/Initialize()
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 	var/list/viable_directions = list()
 	for(var/direction in GLOB.cardinals)
 		var/turf/open/water/water = get_step(src, direction)
@@ -266,7 +267,7 @@
 			if(!shovel.heldclod)
 				return
 			user.visible_message("[user] starts filling in [src].", "I start filling in [src].")
-			if(!do_after(user, 10 SECONDS * shovel.time_multiplier, src))
+			if(!do_after(user, 10 SECONDS * shovel.toolspeed, src))
 				return
 			QDEL_NULL(shovel.heldclod)
 			shovel.update_appearance(UPDATE_ICON_STATE)
@@ -353,7 +354,9 @@
 		return
 	var/datum/move_loop/move/moving_loop = SSmove_manager.processing_on(moving, SSconveyors)
 	var/current_direction = movedir || dir
-	var/speed = current_speed * 1 SECONDS
+	var/speed = current_speed
+	if(HAS_TRAIT(moving, TRAIT_SWIMMER)) // more time to swim against the current
+		speed *= 2
 	if(moving_loop)
 		moving_loop.direction = current_direction
 		moving_loop.delay = speed
@@ -408,7 +411,7 @@
 	if(water_volume < MINIMUM_WATER_VOLUME)
 		dry_up()
 		return
-	color = sanitize_hexcolor(water_reagent.color)
+	color = sanitize_hexcolor(water_reagent::color)
 	fill_up()
 
 /turf/open/water/proc/fill_up()
@@ -493,7 +496,7 @@
 		movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE)
 
 ///Makes movables fall when forceMove()'d to this turf.
-/turf/open/openspace/Entered(atom/movable/movable)
+/turf/open/water/Entered(atom/movable/movable)
 	. = ..()
 	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
 		return
@@ -645,6 +648,10 @@
 	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	cleanliness_factor = 5
+	footstep = FOOTSTEP_SHALLOW
+	barefootstep = FOOTSTEP_SHALLOW
+	clawfootstep = FOOTSTEP_SHALLOW
+	heavyfootstep = FOOTSTEP_SHALLOW
 	water_reagent = /datum/reagent/water
 	stamina_entry_cost = 1
 	ticking_stamina_cost = 0
@@ -934,12 +941,14 @@
 	force_open_above = TRUE
 
 /datum/reagent/water/salty
+	name = "Salt Water"
 	taste_description = "salt"
 	color = "#3e7459"
 
-/datum/reagent/water/salty/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
-		..()
+/datum/reagent/water/salty/expose_mob(mob/living/exposed_mob, methods, reac_volume)
+	if(!(methods & INGEST)) // Make sure you DRANK the salty water before losing hydration
+		return
+	. = ..()
 
 /datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))

@@ -239,7 +239,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 		stack_trace("shizohelp created without an owner!")
 		qdel(src)
 		return
-	RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(owner_qdeleted))
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(owner_qdeleted))
 	GLOB.schizohelps += src
 	src.owner = WEAKREF(owner)
 	if(timeout)
@@ -256,7 +256,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 		return
 	var/mob/schizo = owner.resolve()
 	if(schizo)
-		UnregisterSignal(schizo, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(schizo, COMSIG_QDELETING)
 	qdel(src)
 
 /datum/schizohelp/proc/decay()
