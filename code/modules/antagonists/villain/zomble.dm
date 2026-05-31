@@ -152,7 +152,7 @@
 	patron = null
 	zombie.bloodpool = old_bloodpool
 
-	zombie.language_holder = prev_language
+	zombie.copy_known_languages_from(prev_language, replace = TRUE)
 	prev_language = null
 
 	if(zombie.dna?.species)

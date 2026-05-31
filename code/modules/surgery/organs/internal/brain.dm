@@ -321,6 +321,8 @@
 /obj/item/organ/brain/applyOrganDamage(amount, maximum, silent)
 	. = ..()
 	var/delta_dam = . //for the sake of clarity
+	if(isnull(owner)) // no need to color it if it's in someone's noggin
+		update_brain_color()
 	if(delta_dam < 0 && damage >= BRAIN_DAMAGE_MILD && (-delta_dam >= TRAUMA_ROLL_THRESHOLD))
 		roll_for_brain_trauma(-delta_dam) // parent call returns negative numbers if take damage and positive if we heal
 
@@ -390,21 +392,30 @@
 
 /obj/item/organ/brain/check_damage_thresholds(mob/M)
 	. = ..()
-	if(owner)
-		if(damage >= BRAIN_DAMAGE_DEATH && prev_damage < BRAIN_DAMAGE_DEATH && (organ_flags & ORGAN_VITAL))
-			owner.death()
-			return
-		var/brain_message
-		if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
-			brain_message = span_warning("I feel lightheaded.")
-		else if(prev_damage < BRAIN_DAMAGE_SEVERE && damage >= BRAIN_DAMAGE_SEVERE)
-			brain_message = span_warning("I feel less in control of my thoughts.")
-		else if(prev_damage < (BRAIN_DAMAGE_DEATH - 20) && damage >= (BRAIN_DAMAGE_DEATH - 20) && damage < BRAIN_DAMAGE_DEATH)
-			brain_message = span_warning("I can feel my mind flickering on and off...")
-		if(.)
-			. += "\n[brain_message]"
-		else
-			return brain_message
+	if(!owner)
+		return
+
+	// If we're not more injured than before, return without gambling for a trauma
+	if(damage <= prev_damage)
+		return
+
+	if(damage >= BRAIN_DAMAGE_DEATH && prev_damage < BRAIN_DAMAGE_DEATH && (organ_flags & ORGAN_VITAL))
+		owner.death()
+		return
+
+	// Conscious or soft-crit
+	var/brain_message
+	if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
+		brain_message = span_warning("I feel lightheaded.")
+	else if(prev_damage < BRAIN_DAMAGE_SEVERE && damage >= BRAIN_DAMAGE_SEVERE)
+		brain_message = span_warning("I feel less in control of my thoughts.")
+	else if(prev_damage < (BRAIN_DAMAGE_DEATH - 20) && damage >= (BRAIN_DAMAGE_DEATH - 20) && damage < BRAIN_DAMAGE_DEATH)
+		brain_message = span_warning("I can feel my mind flickering on and off...")
+
+	if(.)
+		. += "\n[brain_message]"
+	else
+		return brain_message
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
