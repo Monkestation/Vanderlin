@@ -26,23 +26,46 @@
 	force = DAMAGE_KNIFE - 7
 	item_weight = 75 GRAMS
 
-/obj/item/ammo_casing/caseless/pelletshot/zenar
+/obj/item/ammo_casing/caseless/pelletshot/coin
+	var/coin_type = null
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/examine(mob/user)
+	. = ..()
+	. += span_info("It looks like you could rig this back up to regular coins.")
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/attack_self_secondary(mob/user, list/modifiers)
+	. = ..()
+	to_chat(user, span_notice("You start rigging up [src] back as tradable coins"))
+	playsound(src, 'sound/foley/lockrattle.ogg', 100, TRUE, -2)
+	if(coin_type)
+		if(!do_after(user, 3 SECONDS, src))
+			to_chat(user, span_warning("You stop rigging back [src]."))
+			return
+		var/obj/item/coin/coin_new = new coin_type(get_turf(src))
+		coin_new.set_quantity(pellets)
+		user.equip_to_slot_if_possible(coin_new, ITEM_SLOT_HANDS)
+		qdel(src)
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/zenar
 	name = "zenarshot"
 	desc = "A handful of pellet shots out of zenars, made to punch many holes into a packed bunch of enemies."
 	icon_state = "pellets_zenar"
 	projectile_type = /obj/projectile/bullet/pellet/zenar
+	coin_type = /obj/item/coin/gold
 
-/obj/item/ammo_casing/caseless/pelletshot/zil
+/obj/item/ammo_casing/caseless/pelletshot/coin/zil
 	name = "zilshot"
 	desc = "A handful of pellet shots out of zils, made to punch many holes into a packed bunch of enemies."
 	icon_state = "pellets_zenarii"
 	projectile_type = /obj/projectile/bullet/pellet/zil
+	coin_type = /obj/item/coin/silver
 
-/obj/item/ammo_casing/caseless/pelletshot/zenny
+/obj/item/ammo_casing/caseless/pelletshot/coin/zenny
 	name = "zennyshot"
 	desc = "A handful of pellet shots out of zennies, made to punch many holes into a packed bunch of enemies."
 	icon_state = "pellets_zenny"
 	projectile_type = /obj/projectile/bullet/pellet/zenny
+	coin_type = /obj/item/coin/copper
 
 /obj/item/ammo_casing/caseless/pelletshot/glass
 	name = "glasshot"

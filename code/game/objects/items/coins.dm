@@ -327,7 +327,7 @@
 			qdel(src)
 			return
 
-		var/obj/item/ammo_casing/caseless/pelletshot/new_pellet = new pellet_type(src, src)
+		var/obj/item/ammo_casing/caseless/pelletshot/coin/new_pellet = new pellet_type(src, src)
 		user.put_in_hands(new_pellet)
 		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
@@ -442,7 +442,7 @@
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
 	item_weight = 9 GRAMS
-	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/zenar
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenar
 
 
 // SILVER
@@ -454,7 +454,7 @@
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
 	item_weight = 11 GRAMS
-	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/zil
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zil
 
 
 // COPPER
@@ -465,7 +465,7 @@
 	sellprice = 1
 	base_type = CTYPE_COPP
 	plural_name = "zennies"
-	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/zenny
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenny
 
 /obj/item/coin/copper/pile/Initialize(mapload, coin_amount)
 	. = ..()
