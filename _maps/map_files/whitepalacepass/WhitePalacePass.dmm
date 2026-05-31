@@ -2032,11 +2032,11 @@
 /area/indoors/town/clinic_large/apothecary)
 "blq" = (
 /obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/recipe_book/gravemaking,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
-/obj/item/flint,
-/turf/open/floor/cobble,
+/turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "blA" = (
 /obj/structure/noose/gallows,
@@ -3820,16 +3820,6 @@
 	},
 /turf/open/floor/grass/cold,
 /area/outdoors/town/noble_manor/blue)
-"cnv" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/obj/effect/decal/cleanable/dirt/cobweb,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/closed/mineral,
-/area/under/cave)
 "cnL" = (
 /mob/living/simple_animal/pet/cat/cabbit{
 	name = "Tongs"
@@ -4219,16 +4209,6 @@
 	},
 /turf/open/floor/cobble,
 /area/under/cave)
-"cyl" = (
-/obj/structure/flora/grass/tundra,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/grass/cold,
-/area/outdoors/town)
 "cyK" = (
 /obj/item/storage/backpack/backpack,
 /obj/structure/rack/shelf/biggest,
@@ -6903,18 +6883,6 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
-"ejA" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/obj/item/clothing/head/peaceflower,
-/turf/closed/wall/mineral/stonebrick{
-	climbdiff = 1
-	},
-/area/indoors/town/church/crypt)
 "ejF" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -11045,16 +11013,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/clinic_large)
-"gGG" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/grass/cold,
-/area/outdoors/town)
 "gGR" = (
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/darker,
@@ -15289,17 +15247,6 @@
 	},
 /turf/open/floor/tile/diamond,
 /area/indoors/town/dwarfin)
-"jpM" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/grass/cold,
-/area/outdoors/town)
 "jqt" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 4
@@ -25058,16 +25005,6 @@
 /obj/item/clothing/shirt/dress/gen/colored/random,
 /turf/open/floor/tile/diamond/blue,
 /area/under/town/basement)
-"pJP" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/snow,
-/area/outdoors/town)
 "pJS" = (
 /obj/structure/winch{
 	redstone_id = "Event1"
@@ -28820,6 +28757,10 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
+"sju" = (
+/obj/structure/flora/grass/bush_meagre/tundra,
+/turf/open/floor/dirt/road,
+/area/outdoors/town/noble_manor/yellow)
 "sjy" = (
 /obj/item/bedsheet/cloth,
 /obj/structure/bed/mediocre,
@@ -33802,20 +33743,6 @@
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/grass/cold,
 /area/outdoors/basin)
-"vvP" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/recipe_book/gravemaking,
-/obj/item/recipe_book/gravemaking,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flint,
-/turf/open/floor/grass/cold,
-/area/outdoors/town/noble_manor/yellow)
 "vvR" = (
 /obj/structure/closet/dirthole/grave,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -36319,23 +36246,6 @@
 "xaC" = (
 /turf/open/water/swamp/deep,
 /area/outdoors/basin)
-"xaL" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table/wood/plain_alt,
-/obj/item/recipe_book/gravemaking,
-/obj/item/key/graveyard{
-	pixel_x = 5;
-	pixel_y = -6
-	},
-/obj/item/key/graveyard{
-	pixel_x = -6;
-	pixel_y = 12
-	},
-/turf/closed/wall/mineral/craftstone,
-/area/outdoors/town/noble_manor/yellow)
 "xaY" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -36380,6 +36290,7 @@
 	pixel_y = 7
 	},
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/recipe_book/gravemaking,
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "xcl" = (
@@ -36397,18 +36308,6 @@
 /obj/item/key/apartments/apartment5,
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
-"xdB" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/obj/effect/decal/cleanable/dirt/cobweb{
-	dir = 8
-	},
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/closed/mineral,
-/area/under/cave)
 "xdQ" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/hay,
@@ -81652,7 +81551,7 @@ nJJ
 nJJ
 nJJ
 nJJ
-cnv
+nJJ
 nJJ
 nJJ
 nJJ
@@ -82660,13 +82559,13 @@ unb
 klr
 klr
 wmk
-ejA
+epc
 nJJ
 nJJ
 nJJ
 nJJ
 nJJ
-xdB
+nJJ
 nJJ
 nJJ
 nJJ
@@ -120213,7 +120112,7 @@ rjc
 rjc
 hEy
 hEy
-gGG
+kKb
 rjc
 ppa
 ttd
@@ -120407,7 +120306,7 @@ nJJ
 nJJ
 nJJ
 nJJ
-jpM
+gSR
 kKb
 rjc
 rjc
@@ -121207,7 +121106,7 @@ qBL
 sIo
 jdS
 jdS
-vvP
+nvA
 sIo
 jfv
 wmE
@@ -121621,7 +121520,7 @@ hEy
 aZv
 aZv
 ulG
-pJP
+kEA
 aZv
 kKb
 kKb
@@ -122022,9 +121921,9 @@ nvA
 urZ
 rjc
 kKb
-cyl
 hEy
-gGG
+hEy
+kKb
 kKb
 kKb
 hEy
@@ -122423,7 +122322,7 @@ jdS
 jdS
 jdS
 jdS
-xaL
+hqb
 qLF
 rjc
 kKb
@@ -122824,7 +122723,7 @@ nvA
 sIo
 sIo
 nvA
-jdS
+sju
 jdS
 jdS
 fCK
@@ -123026,7 +122925,7 @@ nvA
 kQV
 sIo
 sIo
-jdS
+sju
 jdS
 jdS
 fCK
