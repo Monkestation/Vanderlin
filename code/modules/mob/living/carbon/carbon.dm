@@ -851,40 +851,40 @@
 	if(HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_NOCRITOVERLAY))
 		var/severity = 0
 		switch(health)
-			if(-20 to -10)
+			if(80 to 90)
 				severity = 1
-			if(-30 to -20)
+			if(70 to 80)
 				severity = 2
-			if(-40 to -30)
+			if(60 to 70)
 				severity = 3
-			if(-50 to -40)
+			if(50 to 60)
 				severity = 4
-			if(-50 to -40)
+			if(50 to 60)
 				severity = 5
-			if(-60 to -50)
+			if(40 to 50)
 				severity = 6
-			if(-70 to -60)
+			if(30 to 40)
 				severity = 7
-			if(-90 to -70)
+			if(10 to 30)
 				severity = 8
-			if(-95 to -90)
+			if(5 to 10)
 				severity = 9
-			if(-INFINITY to -95)
+			if(-INFINITY to 5)
 				severity = 10
-		if(!InFullCritical())
+		if(stat != HARD_CRIT)
 			var/visionseverity = 4
 			switch(health)
-				if(-8 to -4)
+				if(92 to 96)
 					visionseverity = 5
-				if(-12 to -8)
+				if(88 to 92)
 					visionseverity = 6
-				if(-16 to -12)
+				if(84 to 88)
 					visionseverity = 7
-				if(-20 to -16)
+				if(80 to 84)
 					visionseverity = 8
-				if(-24 to -20)
+				if(76 to 80)
 					visionseverity = 9
-				if(-INFINITY to -24)
+				if(-INFINITY to 76)
 					visionseverity = 10
 			overlay_fullscreen("critvision", /atom/movable/screen/fullscreen/crit/vision, visionseverity)
 		else

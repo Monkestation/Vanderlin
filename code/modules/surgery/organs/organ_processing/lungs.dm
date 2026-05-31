@@ -33,7 +33,6 @@
 		var/obj/location_as_object = owner.loc
 		location_as_object.handle_internal_lifeform(owner, 0)
 
-
 /*
 	var/lung_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_LUNGS)
 	var/effective_oxygenation = ((100 - owner.getOxyLoss()) * (lung_efficiency/optimal_threshold))
@@ -190,7 +189,6 @@
 	if(!breather_loc.pollution)
 		return
 
-
 	breather_loc.pollution.breathe_act(breather)
 	if(HAS_TRAIT(breather, TRAIT_DEADNOSE))
 		return
@@ -205,7 +203,7 @@
 	// Mob is suffocating.
 	suffocator.failed_last_breath = TRUE
 	// Give them a chance to notice something is wrong.
-	if(prob(20))
+	if(DT_PROB(5, delta_time))
 		suffocator.emote("gasp")
 	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * delta_time)
 
