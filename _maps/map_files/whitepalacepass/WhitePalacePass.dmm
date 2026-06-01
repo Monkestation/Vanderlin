@@ -3958,6 +3958,13 @@
 /obj/item/neuFarm/seed/wheat,
 /obj/item/neuFarm/seed/wheat,
 /obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/onion,
+/obj/item/neuFarm/seed/onion,
+/obj/item/neuFarm/seed/onion,
+/obj/item/neuFarm/seed/onion,
+/obj/item/neuFarm/seed/raspberry,
+/obj/item/neuFarm/seed/raspberry,
+/obj/item/neuFarm/seed/raspberry,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/soilsons)
 "cqI" = (
@@ -14731,6 +14738,18 @@
 	},
 /turf/open/floor/grass/cold,
 /area/indoors/town/orphanage)
+"iZV" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/soilsons)
 "jac" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -15985,6 +16004,14 @@
 /area/indoors/town/steward)
 "jRl" = (
 /obj/structure/table/wood/crafted,
+/obj/item/bottle_kit{
+	pixel_x = 7;
+	pixel_y = 4
+	},
+/obj/item/bottle_kit{
+	pixel_x = -2;
+	pixel_y = 3
+	},
 /turf/open/floor/blocks,
 /area/indoors/soilsons)
 "jRL" = (
@@ -16084,6 +16111,9 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
+/obj/item/neuFarm/seed/lemon,
+/obj/item/neuFarm/seed/lemon,
+/obj/item/neuFarm/seed/lemon,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/soilsons)
 "jSW" = (
@@ -17747,6 +17777,16 @@
 /obj/item/neuFarm/seed/apple,
 /obj/item/neuFarm/seed/apple,
 /obj/item/neuFarm/seed/apple,
+/obj/item/neuFarm/seed/tea,
+/obj/item/neuFarm/seed/turnip,
+/obj/item/neuFarm/seed/turnip,
+/obj/item/neuFarm/seed/turnip,
+/obj/item/neuFarm/seed/cabbage,
+/obj/item/neuFarm/seed/cabbage,
+/obj/item/neuFarm/seed/cabbage,
+/obj/item/neuFarm/seed/pear,
+/obj/item/neuFarm/seed/pear,
+/obj/item/neuFarm/seed/pear,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/soilsons)
 "lbS" = (
@@ -26972,6 +27012,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
+"rbK" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/neuFarm/seed/pompkaun,
+/obj/item/neuFarm/seed/pompkaun,
+/obj/item/neuFarm/seed/sunreed,
+/obj/item/neuFarm/seed/sunreed,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/soilsons)
 "rcd" = (
 /obj/structure/stairs{
 	dir = 8
@@ -37565,6 +37613,14 @@
 /area/indoors/town/noble_manor/blue)
 "yaA" = (
 /obj/structure/table/wood/crafted,
+/obj/item/recipe_book/cooking{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/recipe_book/cooking{
+	pixel_x = 6;
+	pixel_y = 5
+	},
 /turf/open/floor/concrete,
 /area/indoors/soilsons)
 "yaQ" = (
@@ -105016,7 +105072,7 @@ bqh
 lbN
 cpN
 pNJ
-cTp
+rbK
 xmB
 oIv
 bqh
@@ -106841,7 +106897,7 @@ bqh
 cQd
 cTp
 cTp
-cTp
+iZV
 rLd
 gxN
 qKv
