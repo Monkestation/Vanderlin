@@ -12076,6 +12076,13 @@
 /obj/item/ore/silver,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
+"hpQ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fake_machine/mail{
+	mailtag = "Red"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/town/noble_manor/red)
 "hpU" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/essence_node_jar{
@@ -20565,6 +20572,12 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
+"mQj" = (
+/obj/structure/fake_machine/mail{
+	mailtag = "Blue"
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/town/noble_manor/blue)
 "mQx" = (
 /obj/structure/fluff/walldeco/stone{
 	icon_state = "walldec6";
@@ -36777,6 +36790,12 @@
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
 /area/outdoors/town/keep)
+"xzw" = (
+/obj/structure/fake_machine/mail{
+	mailtag = "Green"
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/town/noble_manor/yellow)
 "xzM" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/tile/diamond/blue,
@@ -121945,7 +121964,7 @@ kzs
 ocI
 ifs
 qBL
-nvA
+xzw
 jdS
 jdS
 jdS
@@ -124635,8 +124654,8 @@ eTY
 kKb
 rjc
 rjc
-vQM
-dJS
+bSo
+mQj
 dJS
 dJS
 axS
@@ -145244,7 +145263,7 @@ eTY
 eTY
 xbS
 xbS
-hGF
+hpQ
 hGF
 dIC
 ltb
@@ -165036,7 +165055,7 @@ eTY
 eTY
 eTY
 eTY
-kpx
+enh
 kpx
 kpx
 kpx
