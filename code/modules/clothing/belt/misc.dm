@@ -536,6 +536,27 @@
 	//mob_overlay_icon = 'icons/roguetown/clothing/onmob/belts.dmi' //N/A uncomment when a mob_overlay icon is made and added
 	icon_state = "ironheadhook"
 	item_state = "ironheadhook"
+	w_class = WEIGHT_CLASS_NORMAL
+	slot_flags = ITEM_SLOT_HIP
+	w_class = WEIGHT_CLASS_NORMAL
+	max_integrity = 300
+	equip_sound = 'sound/blank.ogg'
+	bloody_icon_state = "bodyblood"
+
+	grid_width = 64
+	grid_height = 64
+
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
+	smeltresult = /obj/item/ingot/iron
+	component_type = /datum/component/storage/concrete/grid/headhook
+
+/obj/item/storage/hip/headhook/wood
+	name = "head hook"
+	desc = "an iron hook for storing 3 heads"
+	icon = 'icons/roguetown/clothing/belts.dmi'
+	//mob_overlay_icon = 'icons/roguetown/clothing/onmob/belts.dmi' //N/A uncomment when a mob_overlay icon is made and added
+	icon_state = "woodheadhook"
+	item_state = "woodheadhook"
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
 	max_integrity = 300
@@ -543,7 +564,7 @@
 	bloody_icon_state = "bodyblood"
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
-	component_type = /datum/component/storage/concrete/grid/headhook
+	component_type = /datum/component/storage/concrete/grid/headhook/wood
 
 /obj/item/storage/hip/headhook/bronze
 	name = "bronze head hook"

@@ -8,7 +8,7 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 	flee_in_pain = TRUE
 	d_intent = INTENT_DODGE
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
-	headprice = 15
+	headprice = 13
 
 /mob/living/carbon/human/species/elf/dark/drowraider/ambush
 	wander = TRUE

@@ -8,7 +8,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	flee_in_pain = TRUE
 	d_intent = INTENT_PARRY
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
-	headprice = 12
+	headprice = 9
 
 
 /mob/living/carbon/human/species/human/northern/highwayman/ambush

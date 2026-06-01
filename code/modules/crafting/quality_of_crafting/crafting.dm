@@ -99,6 +99,23 @@
 	output = /obj/item/clothing/head/antlerhood
 	craftdiff = 0
 
+/datum/repeatable_crafting_recipe/crafting/headhookwood
+	name = "head hook (wood)"
+	requirements = list(
+		/obj/item/grown/log/tree/small = 1,
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/fibers = 3,
+	)
+
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+
+	attacked_atom = /obj/item/grown/log/tree
+	starting_atom = /obj/item/weapon/knife
+	output = /obj/item/storage/hip/headhook/wood
+	craftdiff = 0
+
 /datum/repeatable_crafting_recipe/crafting/antlerhood/create_blacklisted_paths()
 	blacklisted_paths = subtypesof(/obj/item/natural/hide)
 

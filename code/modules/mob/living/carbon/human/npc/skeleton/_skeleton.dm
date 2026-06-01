@@ -16,7 +16,7 @@
 	stand_attempts = 4
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
 	var/should_have_aggro = TRUE
-	headprice = 7
+	headprice = 5
 
 /mob/living/carbon/human/species/skeleton/npc/no_equipment
 	skel_outfit = null

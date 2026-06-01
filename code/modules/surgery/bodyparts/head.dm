@@ -12,7 +12,7 @@
 	px_x = 0
 	px_y = -8
 	dismember_wound = /datum/wound/dismemberment/head
-	sellprice = 8
+	sellprice = 7
 
 	grid_width = 64
 	grid_height = 64
