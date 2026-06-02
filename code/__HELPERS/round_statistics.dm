@@ -9,6 +9,7 @@
 #define STATS_ALIVE_HALFLINGS "alive_halflings"
 #define STATS_VAMPIRES "vampires"
 #define STATS_ALIVE_GARRISON "alive_garrison"
+#define STATS_ALIVE_GALLOWBAND "alive_gallowband"
 #define STATS_ALIVE_CLERGY "alive_clergy"
 #define STATS_ALIVE_TRADESMEN "alive_tradesmen"
 #define STATS_MONARCH_PATRON "monarch_patron"

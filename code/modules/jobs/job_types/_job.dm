@@ -250,6 +250,9 @@
 		for(var/X in GLOB.garrison_positions)
 			peopleiknow += X
 			peopleknowme += X
+		for(var/X in GLOB.gallowband_positions)
+			peopleiknow += X
+			peopleknowme += X
 		for(var/X in GLOB.noble_positions)
 			peopleiknow += X
 			peopleknowme += X
