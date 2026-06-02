@@ -390,6 +390,15 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"ahx" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "ahz" = (
 /turf/open/floor/abyss_tile{
 	color = "#314C5D"
@@ -399,6 +408,12 @@
 /obj/structure/flora/rock/water,
 /turf/open/water/ocean,
 /area/under/cavewet)
+"ahF" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "ahU" = (
 /obj/item/reagent_containers/glass/bucket/pot/stone{
 	pixel_x = 5;
@@ -6367,6 +6382,18 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
+"eOS" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "eOY" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water,
@@ -6625,6 +6652,9 @@
 	},
 /turf/open/floor/abyss_sand,
 /area/outdoors/bog/north/west)
+"fcu" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/bog/witch)
 "fcE" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp/deep,
@@ -7487,6 +7517,12 @@
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/metal/alt,
 /area/indoors/shelter/bog/lich)
+"fTy" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/swamp,
+/area/outdoors/bog/witch)
 "fTB" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/wood/large/corner_new{
@@ -8424,6 +8460,12 @@
 /obj/effect/decal/shadow_floor,
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/shelter/bog/witch)
+"gRa" = (
+/obj/structure/bridge_stakes{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "gRj" = (
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -9468,6 +9510,23 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"hWT" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/machinery/light/fueled/firebowl/stumpb{
+	pixel_y = 10
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "hWU" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8
@@ -9905,9 +9964,24 @@
 /obj/item/natural/stone,
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/east)
+"ivZ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "iwd" = (
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
+"iwq" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "GALLOWBAND"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "iwI" = (
 /obj/structure/chair/hotspring_bench{
 	dir = 1
@@ -13162,6 +13236,12 @@
 /obj/structure/flora/ocean_plants,
 /turf/open/water/ocean,
 /area/under/cavewet)
+"lCb" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "lCw" = (
 /obj/effect/decal/shadow_floor{
 	dir = 6
@@ -19641,6 +19721,10 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"sYE" = (
+/obj/structure/flora/tree/burnt,
+/turf/open/water/swamp/deep,
+/area/outdoors/bog/witch)
 "sZe" = (
 /obj/item/soap/cult,
 /turf/open/water/bath,
@@ -20780,6 +20864,17 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"ujE" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "uki" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -24555,6 +24650,17 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/bath,
 /area/indoors/shelter/bog/lich)
+"xNQ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "xNT" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -41642,13 +41748,13 @@ cJo
 cJo
 cJo
 cJo
-cXD
-wKK
-uKN
-uKN
-wKK
-rLh
-rLh
+nuG
+neZ
+nuG
+nuG
+neZ
+vSz
+vSz
 rLh
 wKK
 wKK
@@ -41844,13 +41950,13 @@ cJo
 yfu
 cJo
 cJo
-cXD
-wKK
-wKK
-wKK
-wKK
-uKN
-uKN
+nuG
+neZ
+xNQ
+lCb
+ivZ
+vSz
+nuG
 jsZ
 rLh
 wKK
@@ -42046,13 +42152,13 @@ yfu
 yfu
 cJo
 cJo
-gmP
-uKN
-wKK
-wKK
-wKK
-wKK
-wKK
+sYE
+hWT
+fcu
+fcu
+fcu
+ujE
+neZ
 wKK
 uKN
 wKK
@@ -42248,13 +42354,13 @@ yfu
 cJo
 cJo
 cJo
-cJo
-wKK
-uKN
-uKN
-wKK
-wKK
-rLh
+neZ
+neZ
+eOS
+ahF
+ahx
+neZ
+vSz
 rLh
 wKK
 uKN
@@ -42453,9 +42559,9 @@ yfu
 neZ
 bKe
 bKe
+fTy
 fGz
-nuG
-neZ
+bKe
 neZ
 rLh
 rLh
@@ -42654,8 +42760,8 @@ yfu
 vSz
 neZ
 cwA
-ePU
-ePU
+iwq
+gRa
 cwA
 bdk
 neZ
