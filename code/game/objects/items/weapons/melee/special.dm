@@ -8,7 +8,6 @@
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(/datum/intent/lordbash, /datum/intent/lord_electrocute, /datum/intent/lord_silence)
 	gripped_intents = list(/datum/intent/lordbash)
-	minstr = 5
 
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
@@ -219,7 +218,6 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	possible_item_intents = list(/datum/intent/mace/strike/stunner, /datum/intent/mace/smash/stunner)
 	gripped_intents = null
-	minstr = 5
 	item_weight = 1.2 KILOGRAMS
 	w_class = WEIGHT_CLASS_NORMAL
 	var/charge = 100

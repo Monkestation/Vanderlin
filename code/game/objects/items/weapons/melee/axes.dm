@@ -94,7 +94,6 @@
 	wdefense = MEDIOCRE_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 6
 
 	smeltresult = /obj/item/ingot/iron
 	parrysound = "sword"
@@ -151,7 +150,6 @@
 	wdefense = MEDIOCRE_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 6
 
 	smeltresult = /obj/item/ingot/bronze
 	parrysound = "sword"
@@ -179,7 +177,6 @@
 	icon_state = "psyaxe"
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 6
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
 	smeltresult = /obj/item/ingot/silverblessed
@@ -220,7 +217,6 @@
 	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 6
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	associated_skill = /datum/attribute/skill/combat/axesmaces
@@ -245,7 +241,6 @@
 	icon_state = "saxe"
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 6
 	smeltresult = /obj/item/ingot/steel_slag
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
@@ -292,7 +287,6 @@
 	desc = "A steel axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
-	minstr = 8
 	sellprice = 45
 	item_weight = 1.9 KILOGRAMS
 
@@ -320,7 +314,6 @@
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 100
 	max_integrity = INTEGRITY_POOR
-	minstr = 6
 	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
 	melt_amount = 150
@@ -351,7 +344,6 @@
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
-	minstr = 8
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	item_weight = 900 GRAMS
@@ -378,7 +370,6 @@
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 150
 	max_integrity = INTEGRITY_WORST + 50
-	minstr = 8
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	item_weight = 900 GRAMS

@@ -18,7 +18,6 @@
 	alt_intents = list(DAZE_BASH, SWORD_STRIKE, POMMEL_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 7
 
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
@@ -65,7 +64,6 @@
 	possible_item_intents = list(SHORT_CUT, SHORT_THRUST)
 	gripped_intents = null
 	alt_intents = null
-	minstr = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
 	item_weight = 700 GRAMS
@@ -232,7 +230,6 @@
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
 	gripped_intents = null
 	alt_intents = null
-	minstr = 5
 	smeltresult = /obj/item/ingot/steel_slag
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
@@ -282,7 +279,6 @@
 	force = DAMAGE_SWORD + 2
 	wdefense = GREAT_PARRY
 	wbalance = HARD_TO_DODGE
-	minstr = 6
 	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/dadao
@@ -326,7 +322,6 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST)
-	minstr = 6
 
 	bigboy = TRUE
 	gripsprite = TRUE
@@ -390,7 +385,6 @@
 	gripped_intents = list(SWORD_CUT, AXE_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8 // Heavy blade used by orcs
 	smeltresult = /obj/item/ingot/iron
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
@@ -436,7 +430,6 @@
 	gripped_intents = list(SWORD_CUT, CURVED_THRUST)
 	alt_intents = null
 	swingsound = BLADEWOOSH_SMALL
-	minstr = 6
 	sellprice = 45
 	item_weight = 1.1 KILOGRAMS
 
@@ -456,7 +449,6 @@
 	icon_state = "sengese_silver"
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 7
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 30
 	item_weight = 1 KILOGRAMS
@@ -474,7 +466,6 @@
 	swingsound =  BLADEWOOSH_SMALL
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 6
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/scimitar/wodao/iron
@@ -501,7 +492,6 @@
 	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT)
 	gripped_intents = null
 	alt_intents = null
-	minstr = 6
 	smeltresult = /obj/item/ingot/steel_slag
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
@@ -1475,7 +1465,6 @@
 	gripped_intents = list(ESTOC_THRUST, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64

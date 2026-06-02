@@ -222,7 +222,6 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(MACE_HVYSTRIKE, MACE_HVYSMASH)
 	wbalance = EASY_TO_DODGE // Heavy
-	minstr = 8
 
 	gripsprite = TRUE
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK

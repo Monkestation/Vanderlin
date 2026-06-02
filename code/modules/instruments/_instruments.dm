@@ -12,7 +12,6 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
 	can_parry = FALSE
 	force = 0
-	minstr = 0
 	wbalance = 0
 	throwforce = 0
 	throw_range = 4
