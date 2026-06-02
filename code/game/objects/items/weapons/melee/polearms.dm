@@ -432,7 +432,6 @@
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SPEAR_THRUST)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
 
 	swingsound = BLADEWOOSH_MED
 	dropshrink = 0.95
@@ -490,7 +489,6 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = GOOD_PARRY
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST, PICK_INTENT)
-	minstr = 10
 
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
@@ -549,7 +547,6 @@
 	gripped_intents = list(POLEARM_BASH, POLEARM_THRUST, MACE_HVYSMASH, WARHM_IMPALE)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 11
 
 	slot_flags = ITEM_SLOT_BACK
 	dropshrink = 0.8

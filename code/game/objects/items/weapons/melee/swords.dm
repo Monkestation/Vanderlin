@@ -685,7 +685,6 @@
 	gripped_intents = null
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONG
-	minstr = 10 // Even though it's technically one-handed, you gotta have some muscle to wield this thing
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -1054,7 +1053,6 @@
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
-	minstr = 11
 
 	swingsound = BLADEWOOSH_HUGE
 	slot_flags = ITEM_SLOT_BACK
@@ -1084,7 +1082,6 @@
 	icon_state = "psygsword"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	minstr = 11
 	smeltresult = /obj/item/ingot/silverblessed
 	melt_amount = 150
 	sellprice = 150
@@ -1114,7 +1111,6 @@
 	force = DAMAGE_SWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
-	minstr = 9 //So the ordinator can use his sword as old.
 	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/broadsword/psy
@@ -1198,7 +1194,6 @@
 	name = "elven kriegsmesser"
 	desc = "A huge, curved elven blade. It's metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
 	icon_state = "kriegsmesser"
-	minstr = 10
 	sellprice = 120
 	item_weight = 2.3 KILOGRAMS
 
@@ -1221,7 +1216,6 @@
 	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
 	icon_state = "zizosword"
 	wdefense = ULTMATE_PARRY
-	minstr = 10
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.3 KILOGRAMS
 
@@ -1270,7 +1264,6 @@
 	desc = "A steel variant of the standard claymore."
 	icon_state = "steelclaymore"
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	minstr = 10
 	sellprice = 110
 	item_weight = 2.7 KILOGRAMS
 
@@ -1344,7 +1337,6 @@
 	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime, executions."
 	possible_item_intents = list(SWORD_STRIKE)
 	gripped_intents = list(SWORD_CHOP)
-	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	item_weight = 3.5 KILOGRAMS
 

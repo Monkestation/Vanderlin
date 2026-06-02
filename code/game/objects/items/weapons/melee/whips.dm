@@ -153,7 +153,6 @@
 	icon_state = "whip_chain"
 	force = DAMAGE_WHIP + 3
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
-	minstr = 9
 
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF

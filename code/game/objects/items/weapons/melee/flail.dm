@@ -154,7 +154,6 @@
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(FLAIL_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	minstr = 9
 	smeltresult = /obj/item/fertilizer/ash
 	pixel_y = -16
 	pixel_x = -16

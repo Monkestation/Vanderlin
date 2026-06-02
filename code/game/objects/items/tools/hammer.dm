@@ -263,7 +263,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 1.2
-	minstr = 10
 
 	pixel_y = -16
 	pixel_x = -16

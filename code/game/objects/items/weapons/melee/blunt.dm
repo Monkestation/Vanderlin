@@ -446,7 +446,6 @@
 	sharpness = IS_SHARP
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONG
-	minstr = 10
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -482,7 +481,6 @@
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD + 5
 	gripped_intents = list(MACE_HVYSMASH, MACE_HVYSTRIKE)
 	max_integrity = INTEGRITY_STRONGEST * 1.2
-	minstr = 11
 	item_weight = 2.5 KILOGRAMS
 
 //................ Grand mace ............... //
@@ -519,7 +517,6 @@
 	icon_state = "psymace"
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 11
 
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silverblessed
@@ -606,7 +603,6 @@
 	force_wielded = DAMAGE_CLUB_WIELD
 	slowdown = 1
 	max_integrity = INTEGRITY_POOR
-	minstr = 10
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	smeltresult = /obj/item/ingot/copper

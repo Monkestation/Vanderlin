@@ -64,7 +64,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 10 //meant to be a orc weapon or barbarian weapon
 
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
@@ -139,7 +138,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 150
-	minstr = 10
 	item_weight = 2.2 KILOGRAMS
 
 //................ Bronze ............... //
@@ -401,7 +399,6 @@
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP,  POLEARM_BASH)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
 
 	pixel_y = -16
 	pixel_x = -16
@@ -444,7 +441,6 @@
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP, MACE_STRIKE) //Axe-equivalent to the Godendag or Grand Mace.
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 11
 	smeltresult = /obj/item/ingot/silverblessed
 	item_weight = 3.8 KILOGRAMS
 
@@ -484,7 +480,6 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
 	alt_intents = list(AXE_CUT, AXE_CHOP)
-	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
 	sellprice = 0 // Graggarite axe, nobody wants this
 	item_weight = 5 KILOGRAMS
 
