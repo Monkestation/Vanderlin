@@ -497,3 +497,22 @@
 /datum/sprite_accessory/snout/thin_beak/hookbeakbig
 	name = "Hook Beak Big"
 	icon_state = "hookbeakbig"
+
+/datum/sprite_accessory/snout/nose/goblin/
+	abstract_type = /datum/sprite_accessory/snout/nose
+	icon = "icons/roguetown/mob/bodies/hoblin.dmi"
+
+/datum/sprite_accessory/snout/nose/goblin/nose
+	name = "Big nose"
+	icon_state = "hoblinnose"
+
+/datum/sprite_accessory/snout/nose/goblin/noseshark
+	name = "Shark nose"
+	icon_state = "sharknose"
+
+/datum/sprite_accessory/snout/nose/goblin/nosegoblin
+	name = "Goblin nose"
+	icon_state = "goblinnose"
+
+
+

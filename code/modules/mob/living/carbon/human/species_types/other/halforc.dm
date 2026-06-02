@@ -97,6 +97,7 @@
 
 	customizers = list(
 		/datum/customizer/organ/ears/halforc,
+		/datum/customizer/organ/snout/nose/goblin,
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
 		/datum/customizer/bodypart_feature/hair/facial/humanoid,
