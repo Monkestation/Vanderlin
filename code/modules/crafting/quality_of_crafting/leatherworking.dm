@@ -913,9 +913,11 @@
 /datum/repeatable_crafting_recipe/leather/standalone/huntergamb
 	name = "hunting gambeson"
 	output = /obj/item/clothing/armor/gambeson/hunts
-	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers/sinew = 1,
-				/obj/item/clothing/armor/gambeson)
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
+		/obj/item/clothing/armor/gambeson = 1,
+	)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/gloves
