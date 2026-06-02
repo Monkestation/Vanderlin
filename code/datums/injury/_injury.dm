@@ -376,7 +376,7 @@
 	return TRUE
 
 /datum/injury/proc/is_bleeding()
-	if(!CAN_HAVE_BLOOD(parent_mob))
+	if(parent_mob && !CAN_HAVE_BLOOD(parent_mob))
 		return
 	for(var/thing in embedded_objects)
 		var/obj/item/item = thing

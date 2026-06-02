@@ -170,7 +170,7 @@
 		return
 
 	if (target.stat)
-		if (do_after(pawn, 5 SECONDS, FALSE, target))
+		if (do_after(pawn, 5 SECONDS, target))
 			if (istype(target.loc, /obj/structure/spider/cocoon))
 				finish_action(controller, TRUE, target_key)
 				return

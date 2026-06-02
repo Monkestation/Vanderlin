@@ -126,9 +126,6 @@
 	if(QDELETED(user))
 		return FALSE
 
-	if(!can_run_emote(user, TRUE, intentional))
-		return FALSE
-
 	message = params
 	if(type_override)
 		emote_type = type_override

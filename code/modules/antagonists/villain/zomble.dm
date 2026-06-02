@@ -215,6 +215,8 @@
 
 /datum/antagonist/zombie/on_removal()
 	var/mob/living/carbon/human/zombie = owner.current
+	if (!istype(zombie))
+		return
 
 	restore_variables()
 	zombie.remove_faction(FACTION_UNDEAD)

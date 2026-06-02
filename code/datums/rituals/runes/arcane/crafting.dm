@@ -236,12 +236,12 @@
 
 	playsound(src, 'sound/magic/blink.ogg', 80, TRUE)
 
-	matched_recipe = null
 	animating = FALSE
 	rune_in_use = FALSE
 
 	user.mind.add_sleep_experience(/datum/attribute/skill/magic/arcane, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2) + matched_recipe.required_skill, FALSE)
 
+	matched_recipe = null
 	do_invoke_glow()
 
 /// Releases all staged items and resets state without crafting anything.

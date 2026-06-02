@@ -74,7 +74,7 @@
 
 /datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, delta_time, times_fired, next_breath = 4)
 	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
-	if((owner.pulledby?.grab_state >= GRAB_KILL) || (lungs.is_failing()))
+	if((owner.pulledby?.grab_state >= GRAB_KILL) || (lungs?.is_failing()))
 		owner.losebreath++  //You can't breath at all when being choked or if your lungs are failing, so you're going to miss a breath
 
 	var/pre_sig_return = SEND_SIGNAL(owner, COMSIG_CARBON_ATTEMPT_BREATHE, delta_time, times_fired)
