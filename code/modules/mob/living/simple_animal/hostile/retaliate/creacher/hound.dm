@@ -106,10 +106,6 @@
 		gender = FEMALE
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 
-/mob/living/simple_animal/hostile/retaliate/hound/death(gibbed)
-	..()
-	update_appearance(UPDATE_OVERLAYS)
-
 /mob/living/simple_animal/hostile/retaliate/hound/get_sound(input)
 	switch(input)
 		if("aggro")
