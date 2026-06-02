@@ -114,8 +114,8 @@
 /area/indoors/mountains)
 "at" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "au" = (
@@ -3540,7 +3540,7 @@
 /area/indoors/mountains)
 "tx" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "tz" = (
@@ -6285,9 +6285,9 @@
 /turf/open/floor/herringbone,
 /area/indoors/lich)
 "Hd" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "He" = (
@@ -110601,7 +110601,7 @@ Av
 bD
 bD
 Av
-bD
+tx
 Av
 Av
 at
@@ -111005,8 +111005,8 @@ cu
 Av
 bD
 bD
-tx
 bD
+Hl
 Av
 Hl
 Av

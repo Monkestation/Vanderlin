@@ -243,7 +243,7 @@
 		// If the thing is dense AND we're including mobs or the thing isn't a mob AND if there's a source atom and
 		// it cannot pass through the thing on the turf,  we consider the turf blocked.
 		if(movable_content.density && (!exclude_mobs || !ismob(movable_content)))
-			if(source_atom && movable_content.CanPass(source_atom, get_dir(src, source_atom)))
+			if(source_atom && movable_content.CanPass(source_atom, src))
 				continue
 			return TRUE
 	return FALSE
@@ -299,8 +299,8 @@
 	var/list/falling_mov_names = list()
 	for(var/atom/movable/falling_mov as anything in falling_movables)
 		falling_mov_names += falling_mov.name
-	for(var/i in contents)
-		var/atom/thing = i
+
+	for(var/atom/thing as anything in contents)
 		flags |= thing.intercept_zImpact(falling_movables, levels)
 		if(flags & FALL_STOP_INTERCEPTING)
 			break
@@ -308,8 +308,10 @@
 	if(prev_turf && !(flags & FALL_NO_MESSAGE))
 		for(var/mov_name in falling_mov_names)
 			prev_turf.visible_message(span_danger("\The [mov_name] falls through [prev_turf]!"))
+
 	if(!(flags & FALL_INTERCEPTED) && zFall(falling, levels + 1))
 		return FALSE
+
 	for(var/atom/movable/falling_mov as anything in falling_movables)
 		if(!(flags & FALL_RETAIN_PULL))
 			falling_mov.stop_pulling()
@@ -317,6 +319,7 @@
 			falling_mov.onZImpact(src, levels)
 		if(falling_mov.pulledby && (falling_mov.z != falling_mov.pulledby.z || get_dist(falling_mov, falling_mov.pulledby) > 1))
 			falling_mov.pulledby.stop_pulling()
+
 	return TRUE
 
 //There's a lot of QDELETED() calls here if someone can figure out how to optimize this but not runtime when something gets deleted by a Bump/CanPass/Cross call, lemme know or go ahead and fix this mess - kevinz000

@@ -41,15 +41,14 @@
 
 //................ Repenta En ............... //
 /obj/item/weapon/whip/antique
-	name = "Repenta En"
+	name = "\proper repenta en"
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
 	icon_state = "gwhip"
 	force = DAMAGE_WHIP + 4
 	minstr = 7
 	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	max_integrity = INTEGRITY_STRONG
-	melt_amount = 75
 	sellprice = 50
 	item_weight = 600 GRAMS
 
@@ -61,9 +60,8 @@
 	icon_state = "psywhip_lesser"
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	max_integrity = INTEGRITY_STRONG * 0.8
-	melt_amount = 100
 	last_used = 0
 	item_weight = 550 GRAMS
 
@@ -79,9 +77,8 @@
 	icon_state = "psywhip"
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silverblessed
 	max_integrity = INTEGRITY_STRONG * 0.8
-	melt_amount = 100
 	last_used = 0
 	item_weight = 550 GRAMS
 
@@ -164,8 +161,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
-	melting_material = /datum/material/iron
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/iron
 	item_weight = 1.5 KILOGRAMS
 
 //................ Xylix Whip ............... //
@@ -205,8 +201,7 @@
 	resistance_flags = FIRE_PROOF
 	sharpness = IS_SHARP
 	blade_dulling = DULLING_BASH
-	melting_material = /datum/material/steel
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/iron
@@ -215,7 +210,7 @@
 	force = DAMAGE_WHIP
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	item_weight = 850 GRAMS
 
 /obj/item/weapon/whip/urumi/bronze
@@ -224,7 +219,7 @@
 	force = DAMAGE_WHIP
 	max_blade_int = 100
 	max_integrity = INTEGRITY_POOR
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/silver
@@ -233,7 +228,7 @@
 	force = DAMAGE_WHIP + 1
 	max_blade_int = 160
 	max_integrity = INTEGRITY_STRONG * 0.8
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	item_weight = 750 GRAMS
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)

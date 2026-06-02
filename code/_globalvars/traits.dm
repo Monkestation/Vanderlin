@@ -5,6 +5,8 @@ quirks have it's own panel so we don't need them here.
 */
 GLOBAL_LIST_INIT(traits_by_type, list(
 	/atom = list(
+		"TRAIT_AI_MOVEMENT_HALTED" = TRAIT_AI_MOVEMENT_HALTED,
+		"TRAIT_AI_PAUSED" = TRAIT_AI_PAUSED,
 		"TRAIT_ALT_CLICK_BLOCKER" = TRAIT_ALT_CLICK_BLOCKER,
 	),
 	/atom/movable = list(
@@ -27,6 +29,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_EMOTEMUTE " = TRAIT_EMOTEMUTE,
 		"TRAIT_DEAF" = TRAIT_DEAF,
 		"TRAIT_HUSK" = TRAIT_HUSK,
+		"TRAIT_DO_NOT_SPLASH" = TRAIT_DO_NOT_SPLASH,
 		"TRAIT_DUMB" = TRAIT_DUMB,
 		"TRAIT_MONKEYLIKE" = TRAIT_MONKEYLIKE,
 		"TRAIT_PACIFISM" = TRAIT_PACIFISM,
@@ -35,6 +38,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_DEATHCOMA" = TRAIT_DEATHCOMA,
 		"TRAIT_FAKEDEATH" = TRAIT_FAKEDEATH,
 		"TRAIT_NEARSIGHTED_CORRECTED" = TRAIT_NEARSIGHTED_CORRECTED,
+		"TRAIT_NO_THROWING" = TRAIT_NO_THROWING,
 		"TRAIT_NO_TRANSFORM" = TRAIT_NO_TRANSFORM,
 		"TRAIT_STUNIMMUNE" = TRAIT_STUNIMMUNE,
 		"TRAIT_SUICIDED" = TRAIT_SUICIDED,
@@ -93,7 +97,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_DRUQK" = TRAIT_DRUQK,
 		"TRAIT_FINGERPRINT_PASSTHROUGH" = TRAIT_FINGERPRINT_PASSTHROUGH,
 		"TRAIT_SOUND_DEBUGGED" = TRAIT_SOUND_DEBUGGED,
+		"TRAIT_TIME_STOP_IMMUNE" = TRAIT_TIME_STOP_IMMUNE,
 		"TRAIT_CANNOT_BE_UNBUCKLED" = TRAIT_CANNOT_BE_UNBUCKLED,
+		"TRAIT_CANT_RIDE" = TRAIT_CANT_RIDE,
+		"TRAIT_UNDENSE" = TRAIT_UNDENSE,
 		//Rogue Traits Past here
 		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
 		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
@@ -210,6 +217,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 	),
 	/turf = list(
 		"TRAIT_AI_AVOID_TURF" = TRAIT_AI_AVOID_TURF,
+		"TRAIT_CHASM_STOPPED" = TRAIT_CHASM_STOPPED,
+		"TRAIT_IMMERSE_STOPPED" = TRAIT_IMMERSE_STOPPED,
 		"TRAIT_TURF_IGNORE_SLOWDOWN" = TRAIT_TURF_IGNORE_SLOWDOWN,
 	)
 ))
@@ -264,7 +273,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_LEECHIMMUNE = "Leeches are reluctant to drain my blood.",
 	TRAIT_ASSASSIN = "My soul has been tainted by Graggar, god of murder.",
 	TRAIT_BARDIC_TRAINING = "Xylixian inspiration grants my songs boons and ailments.",
-	TRAIT_GRAVEROBBER = "Necra favors my grim deeds, I can unearth graves without being cursed by her.",
+	TRAIT_GRAVEROBBER = "I know the rites to shield myself from the Undermaiden's gaze, and can unearth graves without the risk of drawing her ire.",
 	TRAIT_MISSING_NOSE = span_warning("I struggle to breathe."),
 	TRAIT_DISFIGURED = span_warning("No one can recognize me..."),
 	TRAIT_BEAUTIFUL = span_love("My face was shaped by the gods!"),

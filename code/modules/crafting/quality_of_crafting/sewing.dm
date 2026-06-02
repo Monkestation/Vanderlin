@@ -1152,6 +1152,7 @@
 	requirements = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/fibers = 1,
 				/obj/item/clothing/neck/chaincoif)
+	blacklisted_paths = list(/obj/item/clothing/neck/chaincoif/iron)
 	craftdiff = 4
 	category = "Hat"
 
@@ -1733,6 +1734,16 @@
 		/obj/item/natural/fibers = 1
 	)
 	craftdiff = 2
+	category = "Mask"
+
+/datum/repeatable_crafting_recipe/sewing/surg_sack
+	name = "physicker's masked sack"
+	output = /obj/item/clothing/face/sack/surgsack
+	requirements = list(
+		/obj/item/natural/cloth = 3,
+		/obj/item/clothing/face/phys = 1,
+	)
+	craftdiff = 1
 	category = "Mask"
 
 /datum/repeatable_crafting_recipe/sewing/bandaged_gloves

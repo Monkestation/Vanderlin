@@ -1,16 +1,16 @@
 /obj/item/storage/crucible
 	name = "crucible"
-	desc = "A crucible in which metal items can be molten down."
+	desc = "A large crucible in which metal items can be molten down."
 	layer = ABOVE_ALL_MOB_LAYER
 
 	icon = 'icons/roguetown/weapons/crucible.dmi'
 	icon_state = "crucible"
 	component_type = /datum/component/storage/concrete/grid/crucible
-	grid_width = 32
-	grid_height = 64
+	grid_width = 64
+	grid_height = 96
 
-	tool_flags = TOOL_USAGE_TONGS
 	item_weight = 2 KILOGRAMS
+	w_class = WEIGHT_CLASS_BULKY
 
 	var/crucible_temperature = 300
 
@@ -26,18 +26,25 @@
 	color = pick("#766f8c", "#565c5c", "#8d3a2d", "#4f3524")
 	START_PROCESSING(SSobj, src)
 
+/obj/item/storage/crucible/create_reagents(max_vol, flags)
+	. = ..()
+	RegisterSignal(reagents, COMSIG_REAGENTS_HOLDER_UPDATED, PROC_REF(on_reagent_change))
+
 /obj/item/storage/crucible/examine(mob/user)
 	. = ..()
 	if(crucible_temperature)
-		. += "The crucible is around [crucible_temperature - 271.3]C"
+		. += "The crucible is around [crucible_temperature - T0C]C"
 	if(length(melting_pot))
 		for(var/obj/item/atom in melting_pot)
 			var/datum/material/material = atom.melting_material
-			. += "<font color=[initial(material.color)]> [atom.name] </font> - [FLOOR((melting_pot[atom] / atom.melt_amount) * 100, 1)]% Melted"
+			var/total_amount = atom.melt_amount || 100
+			. += "<font color=[initial(material.color)]> [atom.name] </font> - [FLOOR((melting_pot[atom] / total_amount) * 100, 1)]% Melted"
 	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
-	for(var/datum/material/material in metal.data)
+	for(var/datum/material/material as anything in metal.data)
+		if(!ispath(material))
+			continue
 		var/tag = "Molten"
 		if(reagents.chem_temp < material.melting_point)
 			tag = "Hardened"
@@ -45,7 +52,7 @@
 		var/reagent_color = initial(material.color)
 		. += "It contains [UNIT_FORM_STRING(total_volume)] of <font color=[reagent_color]> [tag] [initial(material.name)].</font>"
 
-/obj/item/storage/crucible/process()
+/obj/item/storage/crucible/process(delta_time)
 	var/obj/machinery/light/fueled/smelter/smelter = loc
 	var/obj/machinery/light/fueled/light = locate(/obj/machinery/light/fueled) in get_turf(src)
 	if(istype(smelter) && smelter?.on)
@@ -75,13 +82,9 @@
 		if(crucible_temperature < initial(material.melting_point))
 			melting_pot -= item
 			continue
-		melting_pot |= item
-		melting_pot[item] += 5
+		melting_pot[item] += 5 * delta_time
 		if(melting_pot[item] >= melty)
 			melt_item(item)
-
-	if(reagents?.total_volume)
-		update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/storage/crucible/get_temperature()
 	return crucible_temperature
@@ -107,7 +110,7 @@
 	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
 	var/datum/material/largest = metal?.largest_metal
 
-	if(initial(largest?.red_hot) && reagents.chem_temp > initial(largest.melting_point))
+	if(initial(largest?.show_as_filling) && reagents.chem_temp > initial(largest.melting_point))
 		. += emissive_appearance(icon, "filling", alpha = used_alpha)
 
 /obj/item/storage/crucible/proc/melt_item(obj/item/item)
@@ -116,15 +119,16 @@
 	var/datum/material/material = item.melting_material
 	var/melty = item.melt_amount
 	if(!material)
-		var/obj/item/ingot/ingot = item.smeltresult
+		var/obj/item/ingot = item.smeltresult
 		material = initial(ingot.melting_material)
 		melty = 100
+	if(!material)
+		return
 
-	data |= material
 	data[material] = melty
 
 	// Get quality from the item
-	var/item_quality = 1
+	var/item_quality = SMELTERY_QUALITY_NORMAL
 	if(istype(item, /obj/item/ore))
 		var/obj/item/ore/ore_item = item
 		item_quality = ore_item.recipe_quality
@@ -140,6 +144,9 @@
 	reagents.add_reagent(/datum/reagent/molten_metal, melty, data, crucible_temperature)
 	melting_pot -= item
 	qdel(item)
+
+/obj/item/storage/crucible/proc/on_reagent_change(datum/reagents/holder, ...)
+	SIGNAL_HANDLER
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/storage/crucible/random/Initialize()
@@ -152,13 +159,14 @@
 		/datum/material/copper = 18,
 		/datum/material/tin = 2
 	)
-	var/temperature = 1500
 	crucible_temperature = 1500
 
 /obj/item/storage/crucible/test_crucible/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/molten_metal, 20, data = material_data_to_add, reagtemp = 4000)
-	update_appearance(UPDATE_OVERLAYS)
+	var/total_volume = 0
+	for(var/i in material_data_to_add)
+		total_volume += material_data_to_add[i]
+	reagents.add_reagent(/datum/reagent/molten_metal, total_volume, data = material_data_to_add, reagtemp = 4000)
 
 /obj/item/storage/crucible/test_crucible/bar
 	material_data_to_add = list(

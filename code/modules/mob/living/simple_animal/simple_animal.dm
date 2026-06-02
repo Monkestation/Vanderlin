@@ -14,6 +14,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	simpmob_attack = 45
 	simpmob_defend = 45
 	bloodpool = 0
+	buckle_delay = 0
 
 	var/icon_living = ""
 	///Icon when the animal is dead. Don't use animated icons for this.
@@ -123,16 +124,17 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	///If the creature should have an innate TRAIT_MOVE_FLYING trait added on init that is also toggled off/on on death/revival.
 	var/is_flying_animal = FALSE
 
-	///Domestication.
+	/// Domestication. Needed to prevent duplicate component application upon taming, use start_tamed to initialize with tamed status instead.
 	var/tame = FALSE
-	///What the mob eats, typically used for taming or animal husbandry.
+	/// If TRUE, calls tamed() in Initalize()
+	var/start_tamed = FALSE
+
+	///Typecache of what the mob eats, typically used for taming or animal husbandry.
 	var/list/food_type
-	///Starting success chance for taming.
+	///Starting success chance for taming. Non-number (null) values mean no possible taming
 	var/tame_chance
 	///Added success chance after every failed tame attempt.
 	var/bonus_tame_chance
-
-	var/mob/owner = null
 
 	///I don't want to confuse this with client registered_z.
 	var/my_z
@@ -190,6 +192,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(!loc)
 		stack_trace("Simple animal being instantiated in nullspace")
 	update_simplemob_varspeed()
+	food_type = typecacheof(food_type)
 	if(ai_controller && !length(ai_controller.blackboard[BB_BASIC_FOODS]))
 		ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_type))
 	if(footstep_type)
@@ -206,6 +209,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		genetics = new genetics(src)
 		genetics.roll_guaranteed_genes()
 		roll_initial_genetics()
+	if(start_tamed)
+		tamed()
 
 /mob/living/simple_animal/Destroy()
 	if(nest)
@@ -222,7 +227,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(!ispath(genetics))
 		QDEL_NULL(genetics)
 	return ..()
-
 
 /mob/living/simple_animal/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -285,69 +289,88 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		. += barding_above_overlay
 
 /mob/living/simple_animal/attackby(obj/item/O, mob/user, list/modifiers)
-	if(!is_type_in_list(O, food_type))
+	if(!is_type_in_typecache(O, food_type))
 		return ..()
 	else
-		if(try_tame(O, user))
+		if(attempt_feed(O, user))
 			SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY, O, user, modifiers) // for udder functionality
 			return TRUE
 	. = ..()
 
-/mob/living/simple_animal/proc/try_tame(obj/item/O, mob/living/carbon/human/user)
-	if(!stat)
-		user.visible_message("<span class='info'>[user] hand-feeds [O] to [src].</span>", "<span class='notice'>I hand-feed [O] to [src].</span>")
-		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-		SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
-		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
-		qdel(O)
-		if(tame && owner == user)
-			return TRUE
-		var/realchance = tame_chance
-		if(realchance)
-			if(user.mind)
-				realchance += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/taming) * 20)
-			if(prob(realchance))
-				tamed(user)
-				var/boon = user.get_learning_boon(/datum/attribute/skill/labor/taming)
-				user.adjust_experience(/datum/attribute/skill/labor/taming, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*10) * boon)
-			else
-				tame_chance += bonus_tame_chance
+/mob/living/simple_animal/proc/attempt_feed(obj/item/O, mob/living/carbon/human/user)
+	if(stat >= UNCONSCIOUS)
+		return FALSE
+
+	. = TRUE
+	qdel(O)
+	user.visible_message(span_info("[user] hand-feeds [O] to [src]."), span_notice("I hand-feed [O] to [src]."))
+	playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
+
+	SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
+	SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
+
+	try_tame(user)
+
+/mob/living/simple_animal/proc/try_tame(mob/user, additional_tame_chance)
+	if(has_ally(user))
+		return FALSE
+
+	if(!isnum(tame_chance))
+		return FALSE
+
+	var/realchance = tame_chance
+	realchance += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/taming) * 20)
+	realchance += additional_tame_chance
+
+	var/gained_xp = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+	gained_xp *= user.get_learning_boon(/datum/attribute/skill/labor/taming)
+	if(prob(realchance))
+		tamed(user)
+		user.adjust_experience(/datum/attribute/skill/labor/taming, gained_xp * 10)
 		return TRUE
 
-///Extra effects to add when the mob is tamed, such as adding a riding component
+	user.adjust_experience(/datum/attribute/skill/labor/taming, gained_xp)
+	tame_chance += bonus_tame_chance
+	return FALSE
+
+///Extra effects to add when the mob is tamed, such as adding a riding component. Returns TRUE if was tame before function was called.
 /mob/living/simple_animal/proc/tamed(mob/user)
-	INVOKE_ASYNC(src, PROC_REF(emote), "lower_head", null, null, null, TRUE)
-
-	if(ai_controller)
-		ai_controller.can_idle = FALSE
-
-		var/datum/ai_planning_subtree/pet_planning/subtree = locate() in ai_controller.planning_subtrees
-		if(subtree)
-			var/static/list/pet_commands = list(
-				/datum/pet_command/idle,
-				/datum/pet_command/free,
-				/datum/pet_command/good_boy,
-				/datum/pet_command/follow,
-				/datum/pet_command/attack,
-				/datum/pet_command/fetch,
-				/datum/pet_command/protect_owner,
-				/datum/pet_command/aggressive,
-				/datum/pet_command/calm,
-			)
-			if(!GetComponent(/datum/component/obeys_commands))
-				AddComponent(/datum/component/obeys_commands, pet_commands)
+	INVOKE_ASYNC(src, PROC_REF(emote), "lower_head", NONE, null, FALSE, FALSE, TRUE)
+	var/previous_tame_status = tame
 
 	tame = TRUE
+	tame_chance = initial(tame_chance)
+
+	if(!previous_tame_status)
+		pet_passive = TRUE
+
+		if(ai_controller)
+			ai_controller.can_idle = FALSE
+
+			var/datum/ai_planning_subtree/pet_planning/subtree = locate() in ai_controller.planning_subtrees
+			if(subtree)
+				var/static/list/pet_commands = list(
+					/datum/pet_command/idle,
+					/datum/pet_command/free,
+					/datum/pet_command/good_boy,
+					/datum/pet_command/follow,
+					/datum/pet_command/attack,
+					/datum/pet_command/fetch,
+					/datum/pet_command/protect_owner,
+					/datum/pet_command/aggressive,
+					/datum/pet_command/calm,
+				)
+				if(!GetComponent(/datum/component/obeys_commands))
+					AddComponent(/datum/component/obeys_commands, pet_commands)
+
 	if(user)
 		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 55)
 		befriend(user)
 		record_round_statistic(STATS_ANIMALS_TAMED)
 		SEND_SIGNAL(user, COMSIG_ANIMAL_TAMED, src)
-	pet_passive = TRUE
 
-	if(user)
-		owner = user
 	update_appearance()
+	return previous_tame_status
 
 //mob/living/simple_animal/examine(mob/user)
 //	. = ..()
@@ -538,6 +561,14 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	var/perfect_count = 0
 	var/normal_count = 0
 	var/bonus_count = 0 // Track bonus items from happiness
+
+	if(HAS_TRAIT(src, TRAIT_POISONBITE))
+		butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
+		butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
+		botched_butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
+		botched_butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
+		perfect_butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
+		perfect_butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
 
 	for(var/path in butcher_results)
 		var/amount = max(1, round(butcher_results[path] * genetic_butcher_scale, 1))
@@ -858,40 +889,33 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			M.visible_message("<span class='danger'>[M] falls off [src]!</span>")
 		else
 			return
-	..()
 	M.adjust_experience(/datum/attribute/skill/misc/riding, GET_MOB_ATTRIBUTE_VALUE(M, STAT_INTELLIGENCE), FALSE)
-	update_appearance(UPDATE_OVERLAYS)
+	return ..()
 
-/mob/living/simple_animal/hostile/user_buckle_mob(mob/living/M, mob/user)
-	if(user != M)
+/mob/living/simple_animal/hostile/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
+	if(user.incapacitated())
 		return
-	var/datum/component/riding/riding_datum = GetComponent(/datum/component/riding)
-	if(riding_datum)
-		var/time2mount = 12
-		riding_datum.vehicle_move_delay = move_to_delay
-		if(M.mind)
-			var/amt = GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/riding)
-			if(amt)
-				if(amt <= 3)
-					time2mount = 50 - (amt * 10)
-				else
-					time2mount = 0 // Instant at Master and above
-			else
-				time2mount = 50
+	// for(var/atom/movable/A in get_turf(src))
+	// 	if(A != src && A != M && A.density)
+	// 		return
+	// if(user != M)
+	// 	return
+	var/time2mount = 1.2 SECONDS
+	var/riding_skill = GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/riding)
+	if(riding_skill)
+		if(riding_skill <= 3)
+			time2mount = 5 SECONDS - (riding_skill * 10)
+		else
+			time2mount = 0 // Instant at Master and above
+	else
+		time2mount = 5 SECONDS
+	if(!do_after(M, time2mount, src))
+		return
 
-		if(!do_after(M, time2mount, src))
-			return
-		if(user.incapacitated())
-			return
-//		for(var/atom/movable/A in get_turf(src))
-//			if(A != src && A != M && A.density)
-//				return
-		M.forceMove(get_turf(src))
-		M.adjust_experience(/datum/attribute/skill/misc/riding, GET_MOB_ATTRIBUTE_VALUE(M, STAT_INTELLIGENCE), FALSE)
-		if(ssaddle)
-			playsound(src, 'sound/foley/saddlemount.ogg', 100, TRUE)
-	..()
-	update_appearance(UPDATE_OVERLAYS)
+	M.adjust_experience(/datum/attribute/skill/misc/riding, GET_MOB_ATTRIBUTE_VALUE(M, STAT_INTELLIGENCE) * 0.1, FALSE)
+	if(ssaddle)
+		playsound(src, 'sound/foley/saddlemount.ogg', 100, TRUE)
+	return ..()
 
 /mob/living/simple_animal/hostile
 	var/do_footstep = FALSE
@@ -937,49 +961,38 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		P.fire()
 		return P
 
-/mob/living/simple_animal/hostile/relaymove(mob/user, direction)
-	if (stat == DEAD)
+/mob/living/simple_animal/relaymove(mob/living/user, direction)
+	if(user.incapacitated())
 		return
-	var/oldloc = loc
-	var/datum/component/riding/riding_datum = GetComponent(/datum/component/riding)
-	if(tame && riding_datum)
-		if(riding_datum.handle_ride(user, direction))
-			riding_datum.vehicle_move_delay = move_to_delay
+	return relaydrive(user, direction)
+
+/mob/living/simple_animal/hostile/relaydrive(mob/living/user, direction)
+	var/loc_before_move = loc
+	. = ..()
+	if(!.)
+		return
+	var/turf/open/loc_after_move = loc
+	if(loc_before_move == loc_after_move)
+		return
+
+	if(istype(loc_after_move) && loc_after_move.footstep)
+		do_footstep = !do_footstep
+		if(do_footstep)
 			if(user.m_intent == MOVE_INTENT_RUN)
-				riding_datum.vehicle_move_delay -= 1
-				if(loc != oldloc)
-					var/turf/open/T = loc
-					if(!do_footstep && T.footstep)
-						do_footstep = TRUE
-						playsound(src,pick('sound/foley/footsteps/hoof/horserun (1).ogg','sound/foley/footsteps/hoof/horserun (2).ogg','sound/foley/footsteps/hoof/horserun (3).ogg'), 100, TRUE)
-					else
-						do_footstep = FALSE
+				playsound(src,pick('sound/foley/footsteps/hoof/horserun (1).ogg','sound/foley/footsteps/hoof/horserun (2).ogg','sound/foley/footsteps/hoof/horserun (3).ogg'), 100, TRUE)
 			else
-				if(loc != oldloc)
-					var/turf/open/T = loc
-					if(!do_footstep && T.footstep)
-						do_footstep = TRUE
-						playsound(src,pick('sound/foley/footsteps/hoof/horsewalk (1).ogg','sound/foley/footsteps/hoof/horsewalk (2).ogg','sound/foley/footsteps/hoof/horsewalk (3).ogg'), 100, TRUE)
-					else
-						do_footstep = FALSE
-			if(user.mind)
-				var/amt = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/riding)
-				if(amt)
-					amt = clamp(amt, 0, 4) //higher speed amounts are a little wild. Max amount achieved at expert riding.
-					riding_datum.vehicle_move_delay -= (amt/5 + 1.5)
-					riding_datum.vehicle_move_delay -= 3
-			if(loc != oldloc)
-				var/obj/structure/door/MD = locate() in loc
-				if(MD && !MD.ridethrough)
-					if(isliving(user))
-						var/mob/living/L = user
-						var/strong_thighs = GET_MOB_SKILL_VALUE_OLD(L, (/datum/attribute/skill/misc/riding))
-						if(prob(60 - (strong_thighs * 10))) // Legendary riders do not fall!
-							unbuckle_mob(L)
-							L.Paralyze(50)
-							L.Stun(50)
-							playsound(L, 'sound/foley/zfall.ogg', 100, FALSE)
-							L.visible_message(span_danger("[L] falls off [src]!"))
+				playsound(src,pick('sound/foley/footsteps/hoof/horsewalk (1).ogg','sound/foley/footsteps/hoof/horsewalk (2).ogg','sound/foley/footsteps/hoof/horsewalk (3).ogg'), 100, TRUE)
+
+	var/obj/structure/door/MD = locate() in loc_after_move
+	if(MD && !MD.ridethrough)
+		var/strong_thighs = GET_MOB_SKILL_VALUE_OLD(user, (/datum/attribute/skill/misc/riding))
+		if(prob(60 - (strong_thighs * 10))) // Legendary riders do not fall!
+			user.visible_message(span_warning("[user] falls off of [src]!"), \
+				span_warning("I fall off of [src]!"))
+			unbuckle_mob(user)
+			user.Paralyze(5 SECONDS)
+			user.Stun(5 SECONDS)
+			playsound(user, 'sound/foley/zfall.ogg', 100, FALSE)
 
 /mob/living/simple_animal/proc/violent_dismount(mob/living/user)
 	if(isliving(user))
@@ -998,7 +1011,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)
 	. = ..()
-	LoadComponent(/datum/component/riding)
 
 /mob/living/simple_animal/Life()
 	. = ..()

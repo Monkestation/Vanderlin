@@ -1,4 +1,3 @@
-
 /obj/effect/bloodcult_jaunt
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon = 'icons/effects/vampire/96x96.dmi'
@@ -9,8 +8,8 @@
 	pixel_x = -32
 	pixel_y = -32
 	animate_movement = 0
-	var/atom/movable/rider = null//lone user?
-	var/list/packed = list()//moving a lot of stuff?
+	var/atom/movable/rider = null
+	var/list/packed = list()
 
 	var/turf/starting = null
 	var/turf/target = null
@@ -27,7 +26,6 @@
 	var/override_target_X = 0
 	var/override_target_Y = 0
 
-	//update_pixel stuff
 	var/PixelX = 0
 	var/PixelY = 0
 
@@ -40,6 +38,8 @@
 	var/force_jaunt = FALSE
 
 	var/failsafe = 100
+
+	var/arriving = FALSE
 
 /obj/effect/bloodcult_jaunt/New(turf/loc, mob/user, turf/destination, turf/packup, mob/activator)
 	..()
@@ -63,7 +63,10 @@
 			rider = user
 			if (ismob(rider))
 				var/mob/M = rider
-				M.see_invisible = SEE_INVISIBLE_LIVING
+				if(HAS_TRAIT(M, TRAIT_SEE_LEYLINES))
+					M.see_invisible = SEE_INVISIBLE_LEYLINES
+				else
+					M.see_invisible = SEE_INVISIBLE_LIVING
 	if (packup)
 		var/list/noncult_victims = list()
 		for (var/atom/movable/AM in packup)
@@ -85,31 +88,32 @@
 				packed.Add(AM)
 				if (ismob(AM))
 					var/mob/M = AM
-					M.see_invisible = SEE_INVISIBLE_LIVING
+					if(HAS_TRAIT(M, TRAIT_SEE_LEYLINES))
+						M.see_invisible = SEE_INVISIBLE_LEYLINES
+					else
+						M.see_invisible = SEE_INVISIBLE_LIVING
 	starting = loc
 	target = destination
 	initial_pixel_x = pixel_x
 	initial_pixel_y = pixel_y
-	//first of all, if our target is off Z-Level, we're immediately teleporting to the edge of the map closest to the target
 	if (target?.z != z)
-		move_to_edge()
-	//quickly making sure that we're not jaunting to where we are
+		if(is_in_zweb(z, target.z))
+			move_via_zweb()
+		else
+			move_to_edge()
 	bump_target_check()
 	if (!src||!loc)
 		return
-	//calculating how many tiles we should have to cross so we can abort the jaunt if we go off-track
 	failsafe = abs(starting.x - target.x) + abs(starting.y - target.y)
-	//next, let's rotate the jaunter's sprite to face our destination
 	init_angle()
-	//now, let's launch the jaunter at our target
 	init_jaunt()
 
 /obj/effect/bloodcult_jaunt/Destroy()
-	if (rider)
-		QDEL_NULL(rider)
-	if (packed.len > 0)
-		for(var/atom/A in packed)
-			qdel(A)
+	if(rider)
+		rider.forceMove(target || loc)
+		rider = null
+	for(var/atom/movable/AM in packed)
+		AM.forceMove(target || loc)
 	packed = list()
 	. = ..()
 
@@ -120,6 +124,14 @@
 	. = ..()
 	forceMove(get_step(loc, dir))
 	bump_target_check()
+
+/obj/effect/bloodcult_jaunt/proc/move_via_zweb()
+	var/turf/T = locate(loc.x, loc.y, target.z)
+	if(!T)
+		move_to_edge()
+		return
+	starting = T
+	forceMove(T)
 
 /obj/effect/bloodcult_jaunt/proc/move_to_edge()
 	var/target_x
@@ -214,7 +226,7 @@
 		failsafe--
 		error += distA
 		bump_target_check()
-		return 0//so that we don't move twice slower in diagonals
+		return 0
 	else
 		var/atom/step = get_step(src, dA)
 		if(!step)
@@ -252,7 +264,10 @@
 		process_step()
 
 /obj/effect/bloodcult_jaunt/proc/bump_target_check()
+	if(arriving)
+		return
 	if (loc == target || failsafe <= 0)
+		arriving = TRUE
 		playsound(target, 'sound/effects/vampire/cultjaunt_land.ogg', 30, 0, -3)
 		if (force_jaunt)
 			playsound(target, 'sound/effects/vampire/convert_failure.ogg', 30, 0, -1)
@@ -260,14 +275,20 @@
 			rider.forceMove(target)
 			if (ismob(rider))
 				var/mob/M = rider
-				M.see_invisible = 0
+				if(HAS_TRAIT(M, TRAIT_SEE_LEYLINES))
+					M.see_invisible = SEE_INVISIBLE_LEYLINES
+				else
+					M.see_invisible = SEE_INVISIBLE_LIVING
 				var/jaunter = FALSE
 				for (var/obj/effect/blood_ritual/seer/seer_ritual in GLOB.seer_rituals)
 					if (seer_ritual.caster == M)
 						jaunter = TRUE
 						break
 				if (!jaunter)
-					M.see_invisible = 0
+					if(HAS_TRAIT(M, TRAIT_SEE_LEYLINES))
+						M.see_invisible = SEE_INVISIBLE_LEYLINES
+					else
+						M.see_invisible = SEE_INVISIBLE_LIVING
 
 			rider = null
 		if (packed.len > 0)
@@ -275,7 +296,10 @@
 				AM.forceMove(target)
 				if (ismob(AM))
 					var/mob/M = AM
-					M.see_invisible = SEE_INVISIBLE_LIVING
+					if(HAS_TRAIT(M, TRAIT_SEE_LEYLINES))
+						M.see_invisible = SEE_INVISIBLE_LEYLINES
+					else
+						M.see_invisible = SEE_INVISIBLE_LIVING
 					for (var/obj/effect/blood_ritual/seer/seer_ritual in GLOB.seer_rituals)
 						if (seer_ritual.caster == M)
 							break
@@ -295,5 +319,10 @@
 	..()
 
 /obj/effect/bloodcult_jaunt/visible
+	invisibility = 0
+	alpha = 255
+
+/obj/effect/bloodcult_jaunt/visible/ley
+	color = "#86c5ff"
 	invisibility = 0
 	alpha = 255

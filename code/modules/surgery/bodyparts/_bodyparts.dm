@@ -170,7 +170,7 @@
 	if(isnull(max_pain_damage))
 		max_pain_damage = max_damage * 1.5
 	if(isnull(organ_damage_requirement))
-		organ_damage_requirement = max_damage * 0.2
+		organ_damage_requirement = max_damage * 0.4
 	if(isnull(organ_damage_hit_minimum))
 		organ_damage_hit_minimum = ORGAN_MINIMUM_DAMAGE
 
@@ -246,30 +246,30 @@
 	if(!prob(2))
 		return
 	if(owner.encumbrance >= ENCUMBRANCE_HEAVY)
-		var/pain_amount = rand(8, 15)
+		var/pain_amount = rand(3, 5)
 		if(owner.encumbrance >= ENCUMBRANCE_EXTREME)
-			pain_amount = rand(15, 25)
+			pain_amount = rand(5, 7)
 			to_chat(owner, span_warning("Your heavy gear puts severe strain on your [name]!"))
 		else
 			to_chat(owner, span_warning("The weight of your equipment aggravates your chronic [name] pain!"))
 		add_pain(pain_amount)
 
 /obj/item/bodypart/proc/on_arthritis_life()
-	if(prob(2))
-		add_pain(rand(7, 14))
+	if(prob(2) && pain_dam < max_pain_damage * 0.1)
+		add_pain(rand(1, 2))
 		var/pain_msg = pick("Your [name] throbs with arthritic pain!",
 							"A sharp ache shoots through your [name]!",
 							"Your [name] feels stiff and painful!")
 		to_chat(owner, span_warning(pain_msg))
 
-	if(prob(1) && owner.loc)
+	if(prob(1) && owner.loc && pain_dam < max_pain_damage * 0.15)
 		if(SSParticleWeather.runningWeather && SSParticleWeather.runningWeather.can_weather(owner))
-			add_pain(rand(5, 10))
+			add_pain(rand(2, 3))
 			to_chat(owner, span_warning("The weather makes your arthritis act up."))
 
 /obj/item/bodypart/proc/on_migraine_life()
-	if(prob(2))
-		add_pain(rand(25, 40))
+	if(prob(2) && pain_dam < max_pain_damage * 0.2)
+		add_pain(rand(2, 3))
 
 		if(prob(30))
 			owner.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
@@ -278,8 +278,8 @@
 			to_chat(owner, span_warning("A migraine headache begins to build."))
 
 	if(prob(1))
-		if(pain_dam > 20 && owner.loc?.luminosity > 2)
-			add_pain(rand(5, 10))
+		if(pain_dam > max_pain_damage * 0.2 && owner.loc?.luminosity > 2)
+			add_pain(rand(3, 5))
 			to_chat(owner, span_warning("The flickering flames make your migraine worse!"))
 
 /obj/item/bodypart/proc/update_pain_coeff()
@@ -813,6 +813,7 @@
 		owner.update_shock()
 	if(can_be_disabled)
 		update_disabled()
+	consider_processing()
 	return TRUE
 
 /// Remove pain_dam from a bodypart
@@ -826,6 +827,7 @@
 		owner?.update_shock()
 	if(can_be_disabled)
 		update_disabled()
+	consider_processing()
 	return TRUE
 
 /// Make total pain equal amount
@@ -849,6 +851,10 @@
 		multiplier *= 0.75
 	if(multiplier <= 0)
 		return 0
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.dna?.species)
+			multiplier *= human_owner.dna?.species.pain_mod
 	var/constant_pain = 0
 	constant_pain += SHOCK_MOD_BRUTE * brute_dam
 	constant_pain += SHOCK_MOD_BURN * burn_dam
@@ -1406,8 +1412,11 @@
 
 	return LAZYACCESS(owner.organs_by_zone, body_zone)
 
-/obj/item/bodypart/deconstruct(disassembled = TRUE)
+/obj/item/bodypart/atom_deconstruct(disassembled = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+
 	drop_organs()
+
 	return ..()
 
 
@@ -1544,6 +1553,39 @@
 	if(!incision)
 		var/datum/injury/internal_incision
 		for(var/datum/injury/slash/slash in injuries)
+			if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
+				continue
+			if(strict && !slash.is_surgical()) //We don't need dirty ones
+				continue
+			if(!internal_incision)
+				internal_incision = slash
+				continue
+			if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
+				if(slash.damage > internal_incision.damage)
+					internal_incision = slash
+					break
+			else if(slash.is_surgical()) //otherwise surgical one takes priority
+				internal_incision = slash
+				break
+		return internal_incision
+	return incision
+
+
+/obj/item/bodypart/proc/get_cut(strict = FALSE, ignore_gauze = FALSE)
+	if(ignore_gauze && (bandage))
+		return
+	var/datum/wound/incision
+	for(var/datum/wound/slash/slash in wounds)
+		if(slash.is_sewn())
+			continue
+		incision = slash
+		break
+
+	if(!incision)
+		var/datum/injury/internal_incision
+		for(var/datum/injury/slash in injuries)
+			if(!(slash.damage_type in list(WOUND_SLASH, WOUND_BITE, WOUND_PIERCE)))
+				continue
 			if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
 				continue
 			if(strict && !slash.is_surgical()) //We don't need dirty ones

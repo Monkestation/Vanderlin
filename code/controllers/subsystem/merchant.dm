@@ -107,8 +107,8 @@ SUBSYSTEM_DEF(merchant)
 
 		if(output)
 			var/list/all_requirements = list()
-			if(recipe.req_bar)
-				all_requirements[recipe.req_bar] = recipe.num_of_materials
+			if(recipe.required_material)
+				all_requirements[recipe.required_material] = recipe.num_of_materials
 
 			if(length(recipe.additional_items))
 				for(var/item in recipe.additional_items)

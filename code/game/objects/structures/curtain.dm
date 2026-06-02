@@ -51,9 +51,6 @@
 		return
 	toggle(user)
 
-/obj/structure/curtain/deconstruct(disassembled = TRUE)
-	qdel(src)
-
 /obj/structure/curtain/dir
 	icon_state = MAP_SWITCH("bathroom-open", "curtaindir")
 	directional = TRUE

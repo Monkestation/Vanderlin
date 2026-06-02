@@ -5,6 +5,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item
 	name = "item"
+	var/examine_name = null
 	icon = 'icons/obj/items_and_weapons.dmi'
 	pass_flags_self = PASSITEM
 	pass_flags = PASSTABLE
@@ -15,6 +16,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
 	///Icon file for right inhand overlays
 	var/righthand_file = 'icons/mob/inhands/items_righthand.dmi'
+	///basically avoiding adding an atom var this is the we are indexed by the recipe book call
+	var/indexed = FALSE
 
 	///Icon file for mob worn overlays.
 	///no var for state because it should *always* be the same as icon_state
@@ -107,7 +110,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/list/attack_verb //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/list/species_exception = null	// list() of species types, if a species cannot put items in a certain slot, but species type is in list, it will be able to wear that item
 
-	var/mob/thrownby = null
+	///A weakref to the mob who threw the item
+	var/datum/weakref/thrownby = null //I cannot verbally describe how much I hate this var
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER //the icon to indicate this object is being dragged
 
@@ -120,6 +124,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/sharpness = IS_BLUNT
 
 	var/tool_behaviour = NONE
+	///How fast does the tool work
 	var/toolspeed = 1
 
 	/// Organ storage component requires this
@@ -237,8 +242,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/last_used = 0
 
-	// Boolean sanity var for smelteries to avoid runtimes. Is this is a bar smelted through ore for exp gain?
-	var/smelted = FALSE
 	// Can this be used against a training dummy to learn skills? Prevents dumb exploits.
 	var/istrainable = FALSE
 
@@ -265,14 +268,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/grid_height
 	///this is used to see how many times we've been repaired via melding
 	var/integrity_restores = 0
-	///our melting material, basically if exists this is what we melt into in a crucible
+	/// Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/datum/material/melting_material
-	///our metling amount
+	/// The melting amount. Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/melt_amount = 0
 	///our current in progress slapcraft
 	var/datum/orderless_slapcraft/in_progress_slapcraft
-	///these are flags of what tools can interact with this atom useful to stop hard coding interactions
-	var/tool_flags = NONE
 
 	var/list/attunement_values
 	///this is in KG
@@ -282,11 +283,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	/// Artificers Recipe
 	var/datum/artificer_recipe/artrecipe
+	/// Current anvil/forging recipe
+	var/datum/anvil_recipe/currecipe
 
 	/// angle of the icon, these are used for attack animations
 	var/icon_angle = 50 // most of our icons are angled
 	///the processing quality we have
-	var/recipe_quality = 1
+	var/recipe_quality
 
 	// Lock related
 
@@ -418,12 +421,16 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			embedded_mob.simple_remove_embedded_object(src)
 	if(artrecipe)
 		QDEL_NULL(artrecipe)
+	if(currecipe)
+		QDEL_NULL(currecipe)
 	if(istype(loc, /obj/machinery/artificer_table))
 		var/obj/machinery/artificer_table/A = loc
 		A.material = null
 		A.update_appearance(UPDATE_OVERLAYS)
 	return ..()
 
+/obj/item/proc/set_quality(quality)
+	recipe_quality = quality
 
 /obj/item/update_overlays()
 	. = ..()
@@ -434,19 +441,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(get_detail_color())
 			pic.color = get_detail_color()
 		. += pic
-
-	// Add quality overlay to the food item
-	if(recipe_quality <= 0 || !ismob(loc))
-		return
-	var/list/quality_icons = list(
-		null, // Regular has no overlay
-		// "bronze",
-		"silver",
-		"gold",
-		"diamond",
-	)
-	if(recipe_quality <= length(quality_icons) && quality_icons[recipe_quality])
-		. += mutable_appearance('icons/effects/crop_quality.dmi', quality_icons[recipe_quality])
 
 /**
  * Handles adding components to the item. Added in Initialize()
@@ -681,7 +675,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 
 	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
+		to_chat(user, span_warning("[src] is too hot to handle with your hands!"))
 		return
 
 	if(resistance_flags & ON_FIRE)
@@ -752,7 +746,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(throwing)
 		throwing.finalize(FALSE)
 	if(loc == user && outside_storage)
-		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src))
+		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src, source = user))
 			return
 
 	. = FALSE
@@ -1084,7 +1078,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum, damage_type = src.damage_type)
 
 /obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
-	thrownby = thrower
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		return
+	thrownby = WEAKREF(thrower)
 	callback = CALLBACK(src, PROC_REF(after_throw), callback) //replace their callback with our own
 	. = ..(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
@@ -1220,7 +1216,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/turf/T = get_turf(src)
 		var/ash_type = /obj/item/fertilizer/ash
 		if(w_class == WEIGHT_CLASS_HUGE || w_class == WEIGHT_CLASS_GIGANTIC)
-			ash_type = /obj/item/fertilizer/ash
+			ash_type = /obj/item/fertilizer/ash/large
 		var/obj/item/fertilizer/ash/A = new ash_type(T)
 		A.desc += "\nLooks like this used to be \an [name] some time ago."
 		..()
@@ -1392,7 +1388,17 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	return !HAS_TRAIT(src, TRAIT_NODROP)
 
 /obj/item/proc/doStrip(mob/stripper, mob/owner)
-	return owner.dropItemToGround(src)
+	return owner.dropItemToGround(src, source = stripper)
+
+///Called by the carbon throw_item() proc. Returns null if the item negates the throw, or a reference to the thing to suffer the throw else.
+/obj/item/proc/on_thrown(mob/living/carbon/user, atom/target)
+	if((item_flags & ABSTRACT) || HAS_TRAIT(src, TRAIT_NODROP))
+		return
+	user.dropItemToGround(src, silent = TRUE)
+	if(throwforce && (HAS_TRAIT(user, TRAIT_PACIFISM)) || HAS_TRAIT(user, TRAIT_NO_THROWING))
+		to_chat(user, span_notice("You set [src] down gently on the ground."))
+		return
+	return src
 
 /obj/item/update_appearance(updates)
 	. = ..()
@@ -1447,6 +1453,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	impactee.apply_damage(impact_damage, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt"))
 
 /obj/item/proc/on_consume(mob/living/eater)
+	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(src, COMSIG_ITEM_EATEN, eater)
 	return
 
 /obj/item/proc/on_anti_consume(mob/living/eater)
@@ -1571,6 +1579,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	if(currecipe)
+		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	if(!get_precursor_data(src))
 		return
 	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60
@@ -1593,15 +1603,15 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
 
-/obj/item/proc/set_quality(quality)
-	recipe_quality = clamp(quality, 0, 4)
-	update_appearance(UPDATE_OVERLAYS)
-	if(recipe_quality >= 3) // gold tier and above
-		AddComponent(/datum/component/particle_spewer/sparkle)
+/obj/item/get_examine_string(mob/user, thats = FALSE, examine_list_bool = FALSE)
+	if(examine_name && examine_list_bool)
+		var/display_name = article ? "[article] <b>[examine_name]</b>" : gender == PLURAL ? "some <b>[examine_name]</b>" : "\a <b>[examine_name]</b>"
+		var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+		if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+			display_name = override.Join("")
+		return "[thats ? ismob(src) ? "This is " : "That's " : ""][display_name]"
 	else
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+		return ..()
 
 /obj/item/atom_break(damage_flag, silent)
 	. = ..()
@@ -1611,3 +1621,74 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(!silent)
 		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
+
+
+/obj/item/return_recipe_data()
+	var/has_grind = length(grind_results)
+	var/has_juice = length(juice_results)
+	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
+	var/list/sliced_from_paths = GLOB.snack_slice_reverse[type]
+
+	if(!has_grind&& !has_juice && !length(milled_from_paths) && !length(sliced_from_paths))
+		return null
+
+	var/list/data = list()
+	data["type"] = "snack_processing"
+	data["name"] = name
+	data["category"] = "Processing"
+	data["_output_path"] = "[type]"
+	data["output_name"] = name
+	data["output_icon"] = "[icon]"
+	data["output_state"] = "[icon_state]"
+
+	if(has_grind)
+		var/list/grind = list()
+		for(var/datum/reagent/path as anything in grind_results)
+			grind += list(list("name" = initial(path.name), "amount" = grind_results[path]))
+		data["grind_results"] = grind
+
+	if(has_juice)
+		var/list/juice = list()
+		var/list/combined_path = juice_results
+		for(var/datum/reagent/path as anything in combined_path)
+			juice += list(list("name" = initial(path.name), "amount" = combined_path[path]))
+		data["juice_results"] = juice
+
+	if(length(sliced_from_paths))
+		var/list/sliced_from = list()
+		for(var/atom/src_path as anything in sliced_from_paths)
+			sliced_from += list(list(
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+				"_path" = "[src_path]",
+			))
+		data["sliced_from"] = sliced_from
+
+	if(length(milled_from_paths))
+		var/list/milled_from = list()
+		for(var/atom/src_path as anything in milled_from_paths)
+			milled_from += list(list(
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+				"_path" = "[src_path]",
+			))
+		data["milled_from"] = milled_from
+
+	if(length(obtained_from))
+		var/list/sources = list()
+		for(var/list/entry as anything in obtained_from)
+			if(!islist(entry) || length(entry) < 2) continue
+			var/label = entry[1]
+			var/atom/src_path = entry[2]
+			sources += list(list(
+				"label" = label,
+				"_path" = "[src_path]",
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+			))
+		data["sources"] = sources
+
+	return data

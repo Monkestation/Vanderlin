@@ -242,6 +242,7 @@
 	baseturfs = /turf/open/water/river/creatable
 
 /turf/open/water/river/creatable/Initialize()
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 	var/list/viable_directions = list()
 	for(var/direction in GLOB.cardinals)
 		var/turf/open/water/water = get_step(src, direction)
@@ -266,7 +267,7 @@
 			if(!shovel.heldclod)
 				return
 			user.visible_message("[user] starts filling in [src].", "I start filling in [src].")
-			if(!do_after(user, 10 SECONDS * shovel.time_multiplier, src))
+			if(!do_after(user, 10 SECONDS * shovel.toolspeed, src))
 				return
 			QDEL_NULL(shovel.heldclod)
 			shovel.update_appearance(UPDATE_ICON_STATE)
@@ -410,7 +411,7 @@
 	if(water_volume < MINIMUM_WATER_VOLUME)
 		dry_up()
 		return
-	color = sanitize_hexcolor(water_reagent.color)
+	color = sanitize_hexcolor(water_reagent::color)
 	fill_up()
 
 /turf/open/water/proc/fill_up()
@@ -495,7 +496,7 @@
 		movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE)
 
 ///Makes movables fall when forceMove()'d to this turf.
-/turf/open/openspace/Entered(atom/movable/movable)
+/turf/open/water/Entered(atom/movable/movable)
 	. = ..()
 	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
 		return
@@ -940,12 +941,14 @@
 	force_open_above = TRUE
 
 /datum/reagent/water/salty
+	name = "Salt Water"
 	taste_description = "salt"
 	color = "#3e7459"
 
-/datum/reagent/water/salty/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
-		..()
+/datum/reagent/water/salty/expose_mob(mob/living/exposed_mob, methods, reac_volume)
+	if(!(methods & INGEST)) // Make sure you DRANK the salty water before losing hydration
+		return
+	. = ..()
 
 /datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))

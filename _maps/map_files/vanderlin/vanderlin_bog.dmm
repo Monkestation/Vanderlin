@@ -841,11 +841,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"arp" = (
-/obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
-/turf/open/floor/grass,
-/area/outdoors/bog/central)
 "arE" = (
 /obj/structure/flora/ocean_plants,
 /mob/living/simple_animal/hostile/retaliate/shark{
@@ -1809,12 +1804,6 @@
 /obj/structure/flora/pillar,
 /turf/open/water/ocean,
 /area/under/cavewet)
-"aKT" = (
-/obj/structure/bonepile,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/turf/open/floor/blocks,
-/area/indoors/shelter/bog)
 "aLe" = (
 /obj/structure/stairs/stone/church{
 	color = "#7D9BAE"
@@ -2455,16 +2444,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"aZh" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/coin/gold/pile,
-/obj/item/ingot/silverblessed/bullion,
-/obj/item/ingot/silver,
-/obj/item/carvedgem/onyxa/obelisk,
-/obj/item/carvedgem/amber/sun,
-/obj/item/carvedgem/onyxa/vase,
-/turf/open/floor/abyss_sand,
-/area/under/cavewet)
 "aZi" = (
 /obj/item/rope/chain,
 /turf/open/floor/abyss_tile{
@@ -2590,6 +2569,11 @@
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
+"bfi" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/central)
 "bgj" = (
 /obj/effect/decal/shadow_floor{
 	dir = 10
@@ -2945,11 +2929,6 @@
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog/inhumen_camp)
-"bzb" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed,
-/turf/open/floor/grass,
-/area/outdoors/bog/central)
 "bzq" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/twig,
@@ -3345,6 +3324,12 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
+"bRp" = (
+/obj/structure/closet/dirthole/closed,
+/mob/living/simple_animal/hostile/retaliate/gator,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/central)
 "bRv" = (
 /obj/structure/kneestingers,
 /turf/open/water/river/dirt{
@@ -6079,6 +6064,26 @@
 	},
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/shelter/bog)
+"eCK" = (
+/obj/structure/closet/crate/crafted_closet/inn{
+	color = "#7D9BAE"
+	},
+/obj/item/broom,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/effect/spawner/map_spawner/loot/potion_poisons,
+/turf/open/floor/abyss_tile/three{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "eDb" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 1
@@ -7402,6 +7407,27 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/bog/e_highroad)
+"fPF" = (
+/obj/structure/table/stone_small{
+	color = "#7D9BAE"
+	},
+/obj/structure/closet/crate/chest/neu_fancy{
+	pixel_x = 0;
+	pixel_y = 10
+	},
+/obj/item/carvedgem/opal/fish,
+/obj/item/carvedgem/opal,
+/obj/item/ingot/silverblessed,
+/obj/item/ingot/silverblessed,
+/obj/item/ingot/silverblessed,
+/obj/item/coin/silver/pile,
+/obj/item/clothing/armor/plate/full/silver,
+/obj/item/clothing/pants/platelegs/silver,
+/obj/item/clothing/face/facemask/psydonmask,
+/turf/open/floor/abyss_tile{
+	color = "#314C5D"
+	},
+/area/under/tomb/indoors/magic)
 "fQk" = (
 /turf/open/floor/abyss_tile,
 /area/outdoors/bog/beach)
@@ -7748,26 +7774,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/south/east)
-"gjs" = (
-/obj/structure/closet/crate/crafted_closet/inn{
-	color = "#7D9BAE"
-	},
-/obj/item/broom,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/effect/spawner/map_spawner/loot/potion_poisons,
-/turf/open/floor/abyss_tile/three{
-	color = "#547285"
-	},
-/area/under/cavewet)
 "gjx" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /obj/effect/decal/cleanable/blood,
@@ -8758,27 +8764,6 @@
 /obj/item/clothing/wrists/gem/opalbracelet,
 /turf/open/floor/carpet/red,
 /area/indoors/ship)
-"hjp" = (
-/obj/structure/table/stone_small{
-	color = "#7D9BAE"
-	},
-/obj/structure/closet/crate/chest/neu_fancy{
-	pixel_x = 0;
-	pixel_y = 10
-	},
-/obj/item/carvedgem/opal/fish,
-/obj/item/carvedgem/opal,
-/obj/item/ingot/silverblessed/bullion,
-/obj/item/ingot/silverblessed/bullion,
-/obj/item/ingot/silverblessed,
-/obj/item/coin/silver/pile,
-/obj/item/clothing/armor/plate/full/silver,
-/obj/item/clothing/pants/platelegs/silver,
-/obj/item/clothing/face/facemask/psydonmask,
-/turf/open/floor/abyss_tile{
-	color = "#314C5D"
-	},
-/area/under/tomb/indoors/magic)
 "hjz" = (
 /turf/open/openspace,
 /area/indoors/shelter/bog)
@@ -9689,6 +9674,14 @@
 /obj/item/cooking/pan,
 /turf/open/floor/tile/kitchen,
 /area/under/cavewet)
+"ilk" = (
+/obj/structure/bonepile,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/obj/item/gravedecor/headstone,
+/obj/item/gravedecor/gravefence/block,
+/turf/open/floor/blocks,
+/area/indoors/shelter/bog)
 "ilm" = (
 /obj/structure/flora/pillar,
 /obj/machinery/light/fueled/wallfire/candle/blue{
@@ -10920,11 +10913,6 @@
 	},
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
-"jsB" = (
-/obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
-/turf/open/floor/dirt,
-/area/outdoors/bog/central)
 "jsZ" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
@@ -16653,6 +16641,16 @@
 /obj/structure/tent_wall,
 /turf/open/floor/concrete,
 /area/indoors/shelter/bog)
+"ptj" = (
+/obj/structure/inert_bonepile,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 4
+	},
+/obj/item/gravedecor/headstone,
+/obj/item/gravedecor/gravefence/block,
+/turf/open/floor/blocks,
+/area/indoors/shelter/bog)
 "ptt" = (
 /turf/open/floor/grass,
 /area/outdoors/bog/north/east)
@@ -16784,14 +16782,6 @@
 /obj/structure/spider/cocoon,
 /turf/open/floor/wood,
 /area/indoors/ship)
-"pDQ" = (
-/obj/structure/inert_bonepile,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/cobweb{
-	dir = 4
-	},
-/turf/open/floor/blocks,
-/area/indoors/shelter/bog)
 "pEK" = (
 /obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass,
@@ -16907,14 +16897,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
-"pNt" = (
-/obj/fae_trickery_trap/disorient,
-/turf/open/floor/abyss_tile/three{
-	color = "#29404E";
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/area/indoors/wilderness/magic)
 "pNu" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/bog/north/west)
@@ -17294,6 +17276,15 @@
 	},
 /turf/open/openspace,
 /area/outdoors/bog/e_highroad)
+"qny" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid{
+	pixel_x = -18;
+	pixel_y = -16
+	},
+/turf/open/floor/abyss_tile/three{
+	color = "#547285"
+	},
+/area/indoors/wilderness/magic)
 "qnR" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bucket/pot{
@@ -18541,6 +18532,10 @@
 	color = "#314C5D"
 	},
 /area/under/cavewet)
+"rDE" = (
+/obj/structure/closet/dirthole/grave,
+/turf/open/floor/grass,
+/area/outdoors/bog/central)
 "rDO" = (
 /obj/structure/lootable_structure/fish_barrel,
 /turf/open/floor/abyss_tile/three{
@@ -18997,18 +18992,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"snE" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid{
-	pixel_x = -18;
-	pixel_y = -16
-	},
-/mob/living/simple_animal/hostile/retaliate/elemental/warden{
-	faction = list("Hostile")
-	},
-/turf/open/floor/abyss_tile/three{
-	color = "#547285"
-	},
-/area/indoors/wilderness/magic)
 "sol" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -19384,12 +19367,6 @@
 /obj/effect/spawner/traveltile_spawner/vertical/vampire,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/west)
-"sIA" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed,
-/mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/floor/grass,
-/area/outdoors/bog/central)
 "sIL" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/twig,
@@ -20433,6 +20410,10 @@
 	color = "#314C5D"
 	},
 /area/under/cavewet)
+"tTk" = (
+/obj/structure/closet/dirthole/grave,
+/turf/open/floor/dirt,
+/area/outdoors/bog/central)
 "tTz" = (
 /obj/structure/stairs/stone/church{
 	color = "#7D9BAE"
@@ -22067,6 +22048,13 @@
 "vru" = (
 /turf/open/floor/sand,
 /area/outdoors/bog/south/east)
+"vrx" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_bog";
+	aportalid = "banditexit_bog"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/south/west)
 "vrW" = (
 /turf/closed/wall/mineral/wooddark,
 /area/ship/topdeck)
@@ -22457,6 +22445,12 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/witch)
+"vMl" = (
+/obj/fae_trickery_trap/disorient,
+/turf/open/floor/abyss_tile/three{
+	color = "#29404E"
+	},
+/area/indoors/wilderness/magic)
 "vMz" = (
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor,
@@ -22501,6 +22495,16 @@
 /obj/structure/flora/grass/water,
 /turf/open/floor/dirt,
 /area/outdoors/bog/north)
+"vOy" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/coin/gold/pile,
+/obj/item/ingot/silverblessed,
+/obj/item/ingot/silver,
+/obj/item/carvedgem/onyxa/obelisk,
+/obj/item/carvedgem/amber/sun,
+/obj/item/carvedgem/onyxa/vase,
+/turf/open/floor/abyss_sand,
+/area/under/cavewet)
 "vOJ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
@@ -25346,9 +25350,9 @@ wFG
 wFG
 wFG
 wFG
-krA
-krA
-krA
+vrx
+vrx
+vrx
 wFG
 wFG
 wFG
@@ -34483,7 +34487,7 @@ aWL
 aWL
 aWL
 aWL
-aZh
+vOy
 ake
 aWL
 aWL
@@ -43280,11 +43284,11 @@ jsZ
 vlh
 iCl
 iCl
-arp
+rDE
 hvj
-sIA
+bRp
 hvj
-jsB
+tTk
 hvj
 iCl
 hvj
@@ -43886,11 +43890,11 @@ vlh
 iCl
 mUM
 iCl
-bzb
+bfi
 hvj
-jsB
+tTk
 hvj
-arp
+rDE
 hvj
 hvj
 vlh
@@ -44899,7 +44903,7 @@ iCl
 gaq
 lyu
 iLz
-pDQ
+ptj
 khM
 iCl
 iCl
@@ -45301,7 +45305,7 @@ iCl
 iCl
 iCl
 lnv
-aKT
+ilk
 dQH
 agQ
 pHJ
@@ -82545,7 +82549,7 @@ bDJ
 iUc
 ltt
 pFA
-pNt
+vMl
 apu
 nNT
 oyM
@@ -86369,7 +86373,7 @@ tyT
 tyT
 tyT
 aeQ
-gjs
+eCK
 aeI
 aqR
 aeQ
@@ -122946,7 +122950,7 @@ foi
 dey
 fPp
 lJf
-snE
+qny
 nWL
 nqF
 ltt
@@ -123148,7 +123152,7 @@ psq
 dey
 beb
 apu
-ltt
+fkm
 eet
 qRB
 sSY
@@ -133459,7 +133463,7 @@ aWL
 aWL
 aqi
 ajL
-hjp
+fPF
 eOH
 aIf
 eOH

@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - qol: "The Hand no longer is assigned an offscreen NPC spouse roundstart."

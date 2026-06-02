@@ -19,7 +19,6 @@
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	axe_cut = 10	// bonus damage to trees
-	melt_amount = 75
 	grid_height = 64
 	grid_width = 32
 
@@ -42,7 +41,6 @@
 	max_integrity = INTEGRITY_WORST / 2
 
 	smeltresult = /obj/item/fertilizer/ash //is a wooden log and a stone hammered in the top
-	melting_material = null
 	sellprice = 10
 	item_weight = 800 GRAMS
 
@@ -70,6 +68,7 @@
 
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -97,8 +96,7 @@
 	max_integrity = INTEGRITY_STRONG
 	minstr = 6
 
-	melting_material = /datum/material/iron
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/iron
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
@@ -121,7 +119,6 @@
 	desc = "An iron axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_iron"
-	melt_amount = 75
 	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/nsapo/getonmobprop(tag)
@@ -156,8 +153,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 6
 
-	melting_material = /datum/material/bronze
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/bronze
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
@@ -186,8 +182,7 @@
 	minstr = 6
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
-	melting_material = /datum/material/silver
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/silverblessed
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
@@ -229,6 +224,7 @@
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	associated_skill = /datum/attribute/skill/combat/axesmaces
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 175
 	sharpness = IS_SHARP
@@ -250,9 +246,7 @@
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 6
-
-	melting_material = /datum/material/steel
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/steel_slag
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
 	axe_cut = 15 // Better than iron
@@ -299,7 +293,6 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
 	minstr = 8
-	melt_amount = 75
 	sellprice = 45
 	item_weight = 1.9 KILOGRAMS
 
@@ -328,7 +321,7 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_POOR
 	minstr = 6
-
+	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
 	melt_amount = 150
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
@@ -359,7 +352,6 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	minstr = 8
-
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	item_weight = 900 GRAMS
@@ -387,7 +379,6 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_WORST + 50
 	minstr = 8
-
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	item_weight = 900 GRAMS
@@ -431,6 +422,7 @@
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	slot_flags = ITEM_SLOT_BACK
+	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 60
@@ -462,7 +454,7 @@
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 11
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silverblessed
 	item_weight = 3.8 KILOGRAMS
 
 /obj/item/weapon/greataxe/psy/Initialize(mapload)
@@ -476,6 +468,7 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90
@@ -490,7 +483,6 @@
 	gripped_intents = list(DBLGREATAXE_CUT, DBLGREATAXE_CHOP, POLEARM_BASH)
 	max_blade_int = 400
 	minstr = 12
-
 	melt_amount = 180
 	sellprice = 100
 	item_weight = 5.5 KILOGRAMS
@@ -514,8 +506,7 @@
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 250
 	minstr = 13
-
-	melting_material = /datum/material/gold
+	smeltresult = /obj/item/ingot/gold
 	sellprice = 0
 	item_weight = 5 KILOGRAMS
 

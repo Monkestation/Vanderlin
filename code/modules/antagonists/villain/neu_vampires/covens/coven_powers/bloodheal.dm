@@ -49,9 +49,19 @@
 	var/bashing_lethal_heal = HEAL_BASHING_LETHAL * level
 	var/aggravated_heal = HEAL_AGGRAVATED * level
 
-	// Heal different damage types
-	owner.heal_overall_damage(bashing_lethal_heal, aggravated_heal)
 	owner.adjustToxLoss(-aggravated_heal * 0.5)
+
+	// Heal different damage types
+	for(var/datum/injury/injury in owner.all_injuries)
+		if(!bashing_lethal_heal && !aggravated_heal)
+			break
+		if(injury.damage_type == WOUND_DIVINE)
+			continue
+		if(injury.damage_type == WOUND_BURN)
+			aggravated_heal = injury.heal_damage(aggravated_heal)
+		else
+			bashing_lethal_heal = injury.heal_damage(bashing_lethal_heal)
+
 	if(owner.blood_volume <= BLOOD_VOLUME_NORMAL)
 		owner.adjust_bloodvolume(vitae_cost)
 

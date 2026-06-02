@@ -139,7 +139,7 @@
 		)
 	pooptype = /obj/item/natural/poo/horse
 	remains_type = /obj/effect/decal/remains/pig
-	tame = TRUE
+	start_tamed = TRUE
 
 	base_intents = list(/datum/intent/simple/headbutt)
 	attack_verb_continuous = "bites"
@@ -154,10 +154,10 @@
 	buckle_lying = FALSE
 	can_saddle = TRUE
 
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
+
 	ai_controller = /datum/ai_controller/pig
 	indexed = TRUE
-
-
 
 	var/static/list/pet_commands = list(
 			/datum/pet_command/idle,
@@ -218,8 +218,10 @@
 /mob/living/simple_animal/hostile/retaliate/trufflepig/tamed(mob/user)
 	..()
 	deaggroprob = 20
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/pig)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/pig)
 
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/Life()

@@ -55,6 +55,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_SEEDKNOW
 	)
+	book_type = /obj/item/recipe_book/agriculture
 
 /datum/outfit/farmer/map_override(mob/living/carbon/human/H)
 	if(SSmapping.config.map_name != "Voyage")

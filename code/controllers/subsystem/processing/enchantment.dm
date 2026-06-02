@@ -3,17 +3,57 @@ PROCESSING_SUBSYSTEM_DEF(enchantment)
 	priority = FIRE_PRIORITY_ENCHANTMENT
 	flags = SS_BACKGROUND
 	wait = 2 SECONDS
-	var/list/enchantment_types = list() // cache of enchantment type paths and their properties
+	var/list/enchantment_types = list()
 
 /datum/controller/subsystem/processing/enchantment/Initialize()
 	. = ..()
-	for(var/datum/enchantment/enchantment_path as anything in subtypesof(/datum/enchantment))
-		var/weight = initial(enchantment_path.random_enchantment_weight)
-		var/list/required = initial(enchantment_path.required_type)
-		enchantment_types[enchantment_path] = list(
-			"weight" = weight,
-			"required_type" = required
-		)
+	for(var/enchantment_path as anything in subtypesof(/datum/enchantment))
+		var/datum/enchantment/e = new enchantment_path
+		enchantment_types[enchantment_path] = e
+		if(e.should_process)
+			STOP_PROCESSING(SSenchantment, e)
+
+/datum/controller/subsystem/processing/enchantment/proc/can_enchant(atom/item, datum/enchantment/enchantment_path)
+	if(!item || !enchantment_path)
+		return FALSE
+	if(!(enchantment_path in enchantment_types))
+		return FALSE
+	var/datum/enchantment/singleton = enchantment_types[enchantment_path]
+	var/required_type = singleton.required_type
+	if(required_type)
+		if(islist(required_type))
+			var/type_matched = FALSE
+			for(var/type_path in required_type)
+				if(istype(item, type_path))
+					type_matched = TRUE
+					break
+			if(!type_matched)
+				return FALSE
+		else if(!istype(item, required_type))
+			return FALSE
+	return singleton.can_enchant(item)
+
+/datum/controller/subsystem/processing/enchantment/proc/get_valid_enchantments(atom/item)
+	var/list/valid = list()
+	for(var/enchantment_path in enchantment_types)
+		if(can_enchant(item, enchantment_path))
+			var/datum/enchantment/singleton = enchantment_types[enchantment_path]
+			valid[enchantment_path] = singleton.random_enchantment_weight
+	return valid
+
+/datum/controller/subsystem/processing/enchantment/proc/enchant_item(atom/item, datum/enchantment/enchantment_path)
+	if(!item || !enchantment_path)
+		return FALSE
+	if(!can_enchant(item, enchantment_path))
+		return FALSE
+	if(has_enchantment(item, enchantment_path))
+		return FALSE
+	var/datum/enchantment/new_enchantment = new enchantment_path()
+	if(!new_enchantment)
+		return FALSE
+	LAZYADD(item.enchantments, new_enchantment)
+	new_enchantment.add_item(item)
+	return new_enchantment
 
 /datum/controller/subsystem/processing/enchantment/proc/has_enchantment(atom/item, datum/enchantment/path)
 	if(!item || !path)
@@ -43,7 +83,6 @@ PROCESSING_SUBSYSTEM_DEF(enchantment)
 		return FALSE
 	if(!item.enchantments || !(enchantment_instance in item.enchantments))
 		return FALSE
-
 	enchantment_instance.remove_item(item)
 	item.enchantments -= enchantment_instance
 	qdel(enchantment_instance)
@@ -56,53 +95,6 @@ PROCESSING_SUBSYSTEM_DEF(enchantment)
 	for(var/datum/enchantment/E in enchantments_copy)
 		remove_enchantment(item, E)
 	return TRUE
-
-/datum/controller/subsystem/processing/enchantment/proc/can_enchant(atom/item, datum/enchantment/enchantment_path)
-	if(!item || !enchantment_path)
-		return FALSE
-
-	if(!(enchantment_path in enchantment_types))
-		return FALSE
-
-	var/list/type_data = enchantment_types[enchantment_path]
-	var/required_type = type_data["required_type"]
-
-	if(!required_type)
-		return TRUE
-
-	if(islist(required_type))
-		for(var/type_path in required_type)
-			if(istype(item, type_path))
-				return TRUE
-		return FALSE
-	else
-		return istype(item, required_type)
-
-/datum/controller/subsystem/processing/enchantment/proc/enchant_item(atom/item, datum/enchantment/enchantment_path)
-	if(!item || !enchantment_path)
-		return FALSE
-
-	if(!can_enchant(item, enchantment_path))
-		return FALSE
-
-	if(has_enchantment(item, enchantment_path))
-		return FALSE
-
-	var/datum/enchantment/new_enchantment = new enchantment_path()
-	if(!new_enchantment)
-		return FALSE
-
-	LAZYADD(item.enchantments, new_enchantment)
-	new_enchantment.add_item(item)
-
-	return TRUE
-
-/datum/controller/subsystem/processing/enchantment/proc/get_valid_enchantments(atom/item)
-	var/list/valid = list()
-	for(var/enchantment_path in enchantment_types)
-		if(can_enchant(item, enchantment_path))
-			valid[enchantment_path] = enchantment_types[enchantment_path]["weight"]
-	return valid
 
 /obj/item/proc/enchant(datum/enchantment/path)
 	if(!path)

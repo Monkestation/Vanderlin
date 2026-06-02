@@ -17,6 +17,7 @@
 	critical = TRUE
 	sleep_healing = 0
 	can_roll = FALSE
+	viable_zones = list(BODY_ZONE_CHEST)
 
 /datum/wound/dismemberment/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dismemberment) && (type == other.type))

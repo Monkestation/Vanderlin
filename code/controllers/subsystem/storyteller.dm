@@ -1564,7 +1564,7 @@ SUBSYSTEM_DEF(gamemode)
 			var/mob/living/carbon/human/human_mob = client.mob
 			current_valid_humans += human_mob
 			record_round_statistic(STATS_TOTAL_POPULATION)
-			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(TRUE))
+			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(INCLUDE_POCKETS))
 				if(current_item.type in list(/obj/item/clothing/neck/psycross, /obj/item/clothing/neck/psycross/silver, /obj/item/clothing/neck/psycross/gold))
 					record_round_statistic(STATS_PSYCROSS_USERS)
 					break
@@ -1593,6 +1593,8 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ALIVE_NOBLES)
 			if(human_mob.mind.assigned_role.title in GLOB.garrison_positions)
 				record_round_statistic(STATS_ALIVE_GARRISON)
+			if(human_mob.mind.assigned_role.title in GLOB.gallowband_positions)
+				record_round_statistic(STATS_ALIVE_GALLOWBAND)
 			if((human_mob.mind.assigned_role.title in GLOB.church_positions) || (human_mob.mind.assigned_role.title in GLOB.inquisition_positions))
 				record_round_statistic(STATS_ALIVE_CLERGY)
 			if((human_mob.mind.assigned_role.title in GLOB.serf_positions) || (human_mob.mind.assigned_role.title in GLOB.peasant_positions) || (human_mob.mind.assigned_role.title in GLOB.company_positions))

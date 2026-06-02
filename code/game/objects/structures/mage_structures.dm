@@ -203,7 +203,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	if(last_process + time_between_uses > world.time)
 		to_chat(user, span_notice("The leyline appears to be drained of energy."))
 		return
-	if(!isarcyne(user))
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		if(!active)
 			to_chat(user, span_notice("I wave a hand through the circle of rocks. Nothing happens."))
 			return

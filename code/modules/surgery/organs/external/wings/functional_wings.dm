@@ -124,22 +124,24 @@
 	human.update_body_parts()
 
 	human.physiology.stun_mod *= 0.5
-	remove_signals(human)
 	passtable_off(human, SPECIES_FLIGHT_TRAIT)
 
 	deltimer(flight_timer)
 	QDEL_NULL(shadow)
 
+	// /datum/element/movetype_handler will zFall owner when removing TRAIT_MOVE_FLOATING
+	// In order to prevent fall damage, remove signals after TRAIT_MOVE_FLOATING is removed.
 	if(!drop_flyer)
 		var/turf/old_turf = get_turf(human)
-		old_turf.zFall(human)
+		REMOVE_TRAIT(human, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)
+		remove_signals(human)
 		if(old_turf != get_turf(human))
 			flight_animation(human)
 	else
-		to_chat(human, span_notice("My wings give out, and I suddenly stop flying!"))
+		to_chat(human, span_userdanger("My wings give out, and I suddenly stop flying!"))
+		remove_signals(human)
+		REMOVE_TRAIT(human, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)
 
-	// /datum/element/movetype_handler will zFall owner when removing TRAIT_MOVE_FLOATING
-	REMOVE_TRAIT(human, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)
 	playsound(human, 'sound/mobs/wingflap.ogg', 75, FALSE)
 	fly?.build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
@@ -158,13 +160,15 @@
 	RegisterSignal(carbon_owner, COMSIG_MOVABLE_MOVED, PROC_REF(check_movement))
 	RegisterSignal(carbon_owner, COMSIG_LIVING_SET_BODY_POSITION, PROC_REF(check_laying))
 	RegisterSignal(carbon_owner, SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED), PROC_REF(fall))
+	RegisterSignal(carbon_owner, COMSIG_LIVING_Z_IMPACT, PROC_REF(z_impact_react))
 
 /obj/item/organ/wings/flight/proc/remove_signals(mob/living/carbon/carbon_owner)
 	UnregisterSignal(carbon_owner, list(
 		COMSIG_MOB_APPLY_DAMAGE,
 		COMSIG_MOVABLE_MOVED,
 		COMSIG_LIVING_SET_BODY_POSITION,
-		SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED)
+		SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED),
+		COMSIG_LIVING_Z_IMPACT
 	))
 
 /obj/item/organ/wings/flight/proc/check_damage(datum/source, damage, damagetype, def_zone)
@@ -219,6 +223,10 @@
 	if((old_pos == STANDING_UP) && (old_pos == new_pos))
 		return
 	stop_flying(source, TRUE)
+
+/obj/item/organ/wings/flight/proc/z_impact_react(datum/source, levels, turf/fell_on)
+	SIGNAL_HANDLER
+	return ZIMPACT_CANCEL_DAMAGE
 
 /obj/item/organ/wings/flight/harpy
 	name = "harpy wings"

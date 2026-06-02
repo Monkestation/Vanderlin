@@ -1,6 +1,6 @@
-/** PUNCTURES **/
 /datum/injury/puncture
 	bleed_threshold = 10
+	bleed_rate = 3
 	damage_type = WOUND_PIERCE
 
 /datum/injury/puncture/can_worsen(damage_type, damage)

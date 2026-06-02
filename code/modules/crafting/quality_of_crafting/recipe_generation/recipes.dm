@@ -20,16 +20,16 @@
 	return out
 
 /datum/proc/tools_list(list/L, subtypes_ok = FALSE)
-    var/list/out = list()
-    for(var/atom/path as anything in L)
-        out += list(list(
-            "name" = initial(path.name),
-            "icon" = "[initial(path.icon)]",
-            "icon_state" = "[initial(path.icon_state)]",
-            "any" = subtypes_ok,
-            "_path" = "[path]",
-        ))
-    return out
+	var/list/out = list()
+	for(var/atom/path as anything in L)
+		out += list(list(
+			"name" = initial(path.name),
+			"icon" = "[initial(path.icon)]",
+			"icon_state" = "[initial(path.icon_state)]",
+			"any" = subtypes_ok,
+			"_path" = "[path]",
+		))
+	return out
 
 /// Converts a reagent typepath=amount assoc list
 /datum/proc/reagents_list(list/L)
@@ -260,16 +260,16 @@
 	data["name"] = name
 	data["category"] = category
 
-	data["bar_name"] = initial(req_bar.name)
-	data["bar_icon"] = "[initial(req_bar.icon)]"
-	data["bar_state"] = "[initial(req_bar.icon_state)]"
-	data["_bar_path"] = "[req_bar]"
+	data["bar_name"] = initial(required_material.name)
+	data["bar_icon"] = "[initial(required_material.icon)]"
+	data["bar_state"] = "[initial(required_material.icon_state)]"
+	data["_bar_path"] = "[required_material]"
 	data["extras"] = items_list(additional_items)
 
 	data["output_name"] = initial(created_item.name)
 	data["output_icon"] = "[initial(created_item.icon)]"
 	data["output_state"] = "[initial(created_item.icon_state)]"
-	data["output_count"] = createditem_extra + 1
+	data["output_count"] = output_amount
 	data["_output_path"] = "[created_item]"
 
 	return data
@@ -429,7 +429,7 @@
 
 	return data
 
-/datum/essence_infusion_recipe/return_recipe_data()
+/datum/infusion_recipe/return_recipe_data()
 	var/list/data = list()
 	data["type"] = "essence_infusion"
 	data["name"] = name
@@ -463,7 +463,7 @@
 		yields += list(list("name" = path.name, "amount" = essence_yields[path]))
 		yield_names += path.name
 	data["yields"] = yields
-	data["yield_names"] = yield_names  // flat list for essence picker indexing
+	data["yield_names"] = yield_names // flat list for essence picker indexing
 	data["search_data"] = yield_names.Join(",")
 
 	var/list/splits = list()
@@ -478,7 +478,7 @@
 	// Use the first path as _output_path for the main lookup key.
 	if(length(split_paths))
 		data["_output_path"] = split_paths[1]
-		data["_extra_output_paths"] = split_paths  // all paths for multi-registration
+		data["_extra_output_paths"] = split_paths // all paths for multi-registration
 
 	return data
 
@@ -544,8 +544,8 @@
 
 		if(S.skill_used && S.skill_min)
 			step_e["skill_name"] = initial(S.skill_used.name)
-			step_e["skill_min"] = SSskills.level_names[S.skill_min]
-			step_e["skill_median"] = SSskills.level_names[S.skill_median]
+			step_e["skill_min"] = SSskills.level_names[FLOOR(S.skill_min * 0.1, 1)]
+			step_e["skill_median"] = SSskills.level_names[FLOOR(S.skill_median * 0.1, 1)]
 
 		if(length(S.chems_needed))
 			step_e["chems"] = S.get_chem_string()
@@ -580,23 +580,23 @@
 	data["desc"] = desc
 
 	var/sev_text = "Unknown"
-	var/sev_color = "white"
+	var/sev_color = "slategray"
 	switch(severity)
 		if(WOUND_SEVERITY_LIGHT)
 			sev_text = "Light"
-			sev_color = "green"
+			sev_color = "forestgreen"
 		if(WOUND_SEVERITY_MODERATE)
 			sev_text = "Moderate"
-			sev_color = "yellow"
+			sev_color = "goldenrod"
 		if(WOUND_SEVERITY_SEVERE)
 			sev_text = "Severe"
-			sev_color = "orange"
+			sev_color = "sienna"
 		if(WOUND_SEVERITY_CRITICAL)
 			sev_text = "Critical"
-			sev_color = "red"
+			sev_color = "firebrick"
 		if(WOUND_SEVERITY_BIOHAZARD)
 			sev_text = "BIOHAZARD"
-			sev_color = "purple"
+			sev_color = "rebeccapurple"
 
 	data["severity_text"] = sev_text
 	data["severity_color"] = sev_color
@@ -653,17 +653,17 @@
 	data["desc"] = desc
 
 	var/slot_name = "Unknown"
-	var/slot_color = "white"
+	var/slot_color = "slategray"
 	switch(slot)
 		if(INPUT_NODE)
 			slot_name = "Input Node"
-			slot_color = "cyan"
+			slot_color = "cadetblue"
 		if(OUTPUT_NODE)
 			slot_name = "Output Node"
-			slot_color = "orange"
+			slot_color = "sienna"
 		if(SPECIAL_NODE)
 			slot_name = "Special Node"
-			slot_color = "purple"
+			slot_color = "rebeccapurple"
 
 	data["slot_name"] = slot_name
 	data["slot_color"] = slot_color
@@ -714,11 +714,11 @@
 		var/likelihood
 		if(w <= 0)
 			likelihood = "Very Unlikely"
-		else if(w < 5)  likelihood = "Unlikely"
+		else if(w < 5) likelihood = "Unlikely"
 		else if(w < 10) likelihood = "Less Likely"
 		else if(w < 15) likelihood = "Likely"
 		else if(w < 25) likelihood = "More Likely"
-		else            likelihood = "Very Likely"
+		else likelihood = "Very Likely"
 		out += list(list("name" = initial(path.name), "likelihood" = likelihood))
 	return out
 
@@ -788,5 +788,111 @@
 		data["nutriment_req"] = nutriment_req
 	if(hydration_req)
 		data["hydration_req"] = hydration_req
+
+	return data
+
+/datum/chemical_reaction/return_recipe_data()
+	var/list/data = list()
+	data["type"] = "chemical_reaction"
+	data["name"] = name
+	data["category"] = "Chemistry"
+
+	// Results: list(reagent_type_path = unit_amount)
+	var/list/result_list = list()
+	for(var/reagent_type in results)
+		result_list += list(list(
+			"name" = initial(reagent_type:name),
+			"amount" = results[reagent_type]
+		))
+	data["results"] = result_list
+
+	// Required reagents
+	var/list/req_list = list()
+	for(var/reagent_type in required_reagents)
+		req_list += list(list(
+			"name" = initial(reagent_type:name),
+			"amount" = required_reagents[reagent_type]
+		))
+	data["required_reagents"] = req_list
+
+	// Catalysts (present but not consumed)
+	var/list/cat_list = list()
+	for(var/reagent_type in required_catalysts)
+		cat_list += list(list(
+			"name" = initial(reagent_type:name),
+			"amount" = required_catalysts[reagent_type]
+		))
+	data["required_catalysts"] = cat_list
+
+	data["required_temp"] = required_temp // 0 = no temp needed
+	data["is_cold_recipe"] = is_cold_recipe // 1 = must be BELOW temp
+	data["mob_react"] = mob_react
+
+	if(required_container)
+		data["required_container"] = initial(required_container:name)
+	if(mix_message)
+		data["mix_message"] = mix_message
+
+	return data
+
+/datum/distillation_recipe/return_recipe_data()
+	var/list/data = list()
+	data["type"] = "distillation"
+	data["name"] = name
+	data["category"] = "Distillation"
+
+	// Primary input that gets vaporized
+	data["distilled_reagent_name"] = initial(distilled_reagent:name)
+	data["required_temp"] = required_temp
+	data["consume_reagents"] = consume_reagents
+
+	// Optional co-reagents that must be present
+	var/list/req_list = list()
+	for(var/reagent_type in required_reagents)
+		req_list += list(list(
+			"name" = initial(reagent_type:name),
+			"amount" = required_reagents[reagent_type]
+		))
+	data["required_reagents"] = req_list
+
+	// Output reagents: list(reagent_type = amount_per_unit_distilled)
+	var/list/result_list = list()
+	for(var/reagent_type in results)
+		result_list += list(list(
+			"name" = initial(reagent_type:name),
+			"amount" = results[reagent_type]
+		))
+	data["results"] = result_list
+
+	if(distill_message)
+		data["distill_message"] = distill_message
+
+	return data
+
+/datum/arcyne_crafting_recipe/return_recipe_data()
+	var/list/data = list()
+	data["type"] = "arcyne_crafting"
+	data["name"] = name ? name : initial(output:name) // fallback to output name
+	data["category"] = "Arcyne Crafting"
+
+	// Ingredients — unordered item typepaths
+	var/list/ing_list = list()
+	for(var/item_type in ingredients)
+		ing_list += list(list(
+			"name" = initial(item_type:name),
+			"icon" = "[initial(item_type:icon)]",
+			"icon_state" = "[initial(item_type:icon_state)]",
+			"_path" = "[item_type]"
+		))
+	data["ingredients"] = ing_list
+
+	// Output item
+	data["output_name"] = initial(output:name)
+	data["output_icon"] = "[initial(output:icon)]"
+	data["output_state"] = "[initial(output:icon_state)]"
+	data["_output_path"] = "[output]"
+
+	// Skill gate — expose the raw numeric level so the UI can label it
+	data["required_skill"] = required_skill
 
 	return data

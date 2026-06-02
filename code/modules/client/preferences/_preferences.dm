@@ -108,7 +108,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/socks = "Nude"
 
 	/// Skin color.
-	var/skin_tone = "caucasian1"
+	var/skin_tone = SKIN_COLOR_CONTINENTAL
 
 	/// Eye color.
 	var/eye_color = "000"
@@ -952,6 +952,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			var/list/omegalist = list(
 				GLOB.noble_courthand_positions,
 				GLOB.garrison_positions,
+				GLOB.gallowband_positions,
 				GLOB.church_positions,
 				GLOB.peasant_positions,
 				GLOB.apprentices_positions,
@@ -991,6 +992,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						cat_name = "Nobles"
 					if(GARRISON)
 						cat_name = "Garrison"
+					if(GALLOWBAND)
+						cat_name = "Gallowband"
 					if(SERFS)
 						cat_name = "Yeomanry"
 					if(CHURCHMEN)
@@ -1664,7 +1667,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						if(color_hex2num(new_voice) < 230)
 							to_chat(user, "<font color='red'>This voice color is too dark for mortals.</font>")
 							return
-						voice_color = sanitize_hexcolor(new_voice)
+						voice_color = sanitize_hexcolor(new_voice, include_crunch = FALSE)
 
 				if("headshot")
 					if(!donator)

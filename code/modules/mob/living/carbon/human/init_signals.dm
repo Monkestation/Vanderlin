@@ -6,6 +6,9 @@
 	RegisterSignal(src, SIGNAL_ADDCHEMEFFECT(CE_STIMULANT), PROC_REF(receive_actionboost))
 	RegisterSignal(src, SIGNAL_REMOVECHEMEFFECT(CE_STIMULANT), PROC_REF(remove_actionboost))
 
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PSYDONIAN_GRIT), PROC_REF(on_psydonian_gain))
+	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PSYDONIAN_GRIT), PROC_REF(on_psydonian_lose))
+
 
 /**
  * On gain of TRAIT_NO_SPLIT_PERSONALITY
@@ -23,3 +26,9 @@
 
 /mob/living/carbon/proc/remove_actionboost(mob/living/carbon/source, chem_effect)
 	remove_actionspeed_modifier(/datum/actionspeed_modifier/stimulants, TRUE)
+
+/mob/living/carbon/proc/on_psydonian_gain()
+	add_chem_effect(CE_PAINKILLER, 20, TRAIT_PSYDONIAN_GRIT)
+
+/mob/living/carbon/proc/on_psydonian_lose()
+	remove_chem_effect(CE_PAINKILLER, TRAIT_PSYDONIAN_GRIT)
