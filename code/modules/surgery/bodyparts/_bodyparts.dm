@@ -528,7 +528,7 @@
 	if(!.)
 		var/new_injury_type = get_injury_type(injury_type, damage)
 		if(new_injury_type)
-			var/datum/injury/new_injury = new new_injury_type()
+			var/datum/injury/new_injury = new new_injury_type(damage)
 			// Check whether we can add the wound to an existing wound
 			if(surgical)
 				new_injury.injury_flags |= INJURY_SURGICAL
@@ -540,9 +540,10 @@
 				for(var/datum/injury/other in injuries)
 					if(other.can_merge(new_injury))
 						other.merge_injury(new_injury)
+						post_damage_change()
 						return other
 			// Apply the injury
-			new_injury.apply_injury(damage, src)
+			new_injury.apply_to_bodypart(src)
 			last_injury = new_injury
 			. = new_injury
 
@@ -572,10 +573,11 @@
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
-			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.005
-			if(owner?.IsSleeping())
-				heal_amt *= 3
+			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.01
+			// if(owner?.IsSleeping())
+			// 	heal_amt *= 3
 		if(heal_amt)
+			heal_amt *= injury.amount
 			injury.heal_damage(heal_amt * delta_time)
 
 	if(post_damage_change())
@@ -1529,13 +1531,13 @@
 	for(var/datum/injury/slash/slash in injuries)
 		if(surgical_only && !slash.is_surgical()) //We don't need dirty ones
 			continue
-		if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
+		if(slash.is_bandaged() || slash.damage_per_injury() <= slash.bleed_threshold) // Shit's unusable
 			continue
 		if(!internal_incision)
 			internal_incision = slash
 			continue
 		if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
-			if(slash.damage > internal_incision.damage)
+			if(slash.damage_per_injury() > internal_incision.damage_per_injury())
 				internal_incision = slash
 				break
 		else if(slash.is_surgical()) //otherwise surgical one takes priority
@@ -1556,7 +1558,7 @@
 	for(var/datum/injury/slash in injuries)
 		if(!(slash.damage_type & CUT_WOUND_TYPES))
 			continue
-		if(slash.is_sutured() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
+		if(slash.is_sutured() || slash.damage_per_injury() <= slash.bleed_threshold) // Shit's unusable
 			continue
 		if(surgical_only && !slash.is_surgical()) //We don't need dirty ones
 			continue
@@ -1564,7 +1566,7 @@
 			internal_incision = slash
 			continue
 		if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
-			if(slash.damage > internal_incision.damage)
+			if(slash.damage_per_injury() > internal_incision.damage_per_injury())
 				internal_incision = slash
 				break
 		else if(slash.is_surgical()) //otherwise surgical one takes priority

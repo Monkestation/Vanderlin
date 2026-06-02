@@ -721,6 +721,10 @@
 	bleed_suppressing = 1
 	var/last_drink
 
+/obj/item/grabbing/bite/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+
 /obj/item/grabbing/bite/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(!valid_check())

@@ -249,7 +249,7 @@
 			continue
 		if(injury.is_sutured())
 			continue
-		var/time = 2 SECONDS + min(injury.damage * 0.1, 2 SECONDS)
+		var/time = 2 SECONDS + min(injury.damage_per_injury() * 0.1, 2 SECONDS)
 		time *= perception_mod * doctor_mod
 		playsound(target, 'sound/foley/sewflesh.ogg', 65, FALSE)
 		if(!do_after(user, time, target))
@@ -261,14 +261,15 @@
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine)
 		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise)
 		. = TRUE
-		var/injury_heal = min(10, injury.damage_per_injury() - injury.autoheal_cutoff)
+		var/injury_heal = min(10, injury.damage - injury.autoheal_cutoff)
+		/// We don't abs() injury_heal because we don't want to heal injuries below autoheal_cutoff
 		injury.heal_damage(injury_heal, TRUE)
 		if(injury.damage_per_injury() > injury.autoheal_cutoff)
-			user.visible_message(span_green("<b>[user]</b> partially stitches \a [injury.get_desc()] on <b>[target]</b>'s [affecting.name] with \the [src]."), \
-								span_green("I partially stitch \a [injury.get_desc()] on \the [affecting.name] with \the [src]."))
+			user.visible_message(span_green("<b>[user]</b> partially stitches \a [injury.get_desc(FALSE)] on <b>[target]</b>'s [affecting.name] with \the [src]."), \
+								span_green("I partially stitch \a [injury.get_desc(FALSE)] on \the [affecting.name] with \the [src]."))
 		else
-			user.visible_message(span_green("<b>[user]</b> stitches \a [injury.get_desc()] shut on <b>[target]</b>'s [affecting.name] with \the [src]."), \
-								span_green("I stitch \a [injury.get_desc()] shut on \the [affecting.name] with \the [src]."))
+			user.visible_message(span_green("<b>[user]</b> stitches \a [injury.get_desc(FALSE)] shut on <b>[target]</b>'s [affecting.name] with \the [src]."), \
+								span_green("I stitch \a [injury.get_desc(FALSE)] shut on \the [affecting.name] with \the [src]."))
 			injury.suture_injury()
 			break
 

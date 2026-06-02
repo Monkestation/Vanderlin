@@ -321,10 +321,13 @@
 /obj/item/organ/brain/applyOrganDamage(amount, maximum, silent)
 	. = ..()
 	var/delta_dam = . //for the sake of clarity
-	if(isnull(owner)) // no need to color it if it's in someone's noggin
-		update_brain_color()
+
 	if(delta_dam < 0 && damage >= BRAIN_DAMAGE_MILD && (-delta_dam >= TRAUMA_ROLL_THRESHOLD))
 		roll_for_brain_trauma(-delta_dam) // parent call returns negative numbers if take damage and positive if we heal
+
+	if(isnull(owner)) // no need to color it if it's in someone's noggin
+		update_brain_color()
+		return
 
 	if(-delta_dam >= 10)
 		var/damage_side_effect = CEILING(-delta_dam / 2, 1)

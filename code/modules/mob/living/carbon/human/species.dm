@@ -1845,6 +1845,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
 		if(selzone != user.zone_selected)
 			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+			affecting = H.get_bodypart(check_zone(selzone))
 
 	var/item_force = get_complex_damage(I, user) //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 

@@ -21,7 +21,6 @@
 		"brand scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 2
 
 /datum/injury/divine/severe
 	stages = list(
@@ -31,7 +30,6 @@
 		"deep brand scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 3
 
 /datum/injury/divine/wrath
 	stages = list(
@@ -41,7 +39,6 @@
 		"wrath scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 3
 
 /datum/injury/divine/condemned
 	stages = list(
@@ -50,4 +47,3 @@
 		"condemnation scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 4

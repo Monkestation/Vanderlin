@@ -282,10 +282,10 @@
 	var/list/injury_descriptors = list()
 	for(var/thing in injuries)
 		var/datum/injury/injury = thing
-		var/this_injury_desc = injury.get_desc(TRUE)
+		var/this_injury_desc = injury.get_desc()
 		if(!this_injury_desc)
 			continue
-		if(injury.can_autoheal() && (injury.current_stage >= length(injury.stages)) && (injury.damage < 5))
+		if(injury.can_autoheal() && (injury.current_stage >= length(injury.stages)) && (injury.damage_per_injury() < 5))
 			this_injury_desc = "<span style='color: [COLOR_PALE_RED_GRAY];'>[this_injury_desc]</span>"
 		if(injury.is_bleeding())
 			if(is_artery_torn())
@@ -327,13 +327,9 @@
 		var/clean_final = ""
 		final_text += injury
 		clean_final = injury
-		if(injury_descriptors[injury] > 1)
-			if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
-				final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
-				clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
-			else
-				final_text += "s"
-				clean_final += "s"
+		if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
+			final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
+			clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
 		switch(injury_descriptors[injury])
 			if(-INFINITY to 1)
 				final_text = ""
