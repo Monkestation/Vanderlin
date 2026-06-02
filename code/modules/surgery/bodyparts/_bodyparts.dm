@@ -532,10 +532,12 @@
 			// Check whether we can add the wound to an existing wound
 			if(surgical)
 				new_injury.injury_flags |= INJURY_SURGICAL
+				new_injury.autoheal_cutoff = 0
+				new_injury.bleed_threshold = 0
 				new_injury.stages = list("surgical incision" = 0)
 				new_injury.desc_list = list("surgical incision")
 				new_injury.damage_list = list(0)
-				new_injury.autoheal_cutoff = 0
+				new_injury.init_stage(damage) // reinitialize stage stuff
 			else
 				for(var/datum/injury/other in injuries)
 					if(other.can_merge(new_injury))

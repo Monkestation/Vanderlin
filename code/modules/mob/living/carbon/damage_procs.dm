@@ -258,9 +258,9 @@
 	if(!silent)
 		var/final_sound = special_sound || 'sound/heart/combatcocktail.ogg'
 		if(local_sound)
-			playsound_local(src, final_sound, 80, FALSE)
+			playsound_local(src, final_sound, 40, FALSE)
 		else
-			playsound(src, final_sound, 80, FALSE)
+			playsound(src, final_sound, 40, FALSE)
 
 
 /**
