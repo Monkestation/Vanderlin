@@ -98,10 +98,10 @@
 	desc = "It has never, ever, been your dae. -5 to -9 Fortune."
 	point_value = 5
 
-/datum/quirk/boon/unlucky/on_spawn()
+/datum/quirk/vice/unlucky/on_spawn()
 	owner.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
 
-/datum/quirk/boon/unlucky/on_remove()
+/datum/quirk/vice/unlucky/on_remove()
 	owner?.remove_stat_modifier(STATMOD_UNLUCKY)
 
 /datum/quirk/vice/skill_issue
