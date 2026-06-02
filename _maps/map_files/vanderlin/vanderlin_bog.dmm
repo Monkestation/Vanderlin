@@ -3280,6 +3280,10 @@
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/north)
+"bOi" = (
+/obj/structure/flora/tree/burnt,
+/turf/open/water/swamp/deep,
+/area/outdoors/bog/witch)
 "bOm" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/lich)
@@ -4932,6 +4936,9 @@
 	},
 /turf/open/floor/metal,
 /area/indoors/shelter/bog/lich)
+"dxk" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/bog/witch)
 "dyM" = (
 /obj/structure/flora/rock,
 /turf/open/water/swamp,
@@ -7477,11 +7484,6 @@
 "fSG" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/bog/lich)
-"fST" = (
-/obj/effect/decal/cleanable/dirt,
-/mob/living/carbon/human/species/zizombie/npc/grenzel,
-/turf/open/floor/wood,
-/area/indoors/ship)
 "fTa" = (
 /obj/structure/stairs/stone,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -7671,6 +7673,12 @@
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"geh" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "gfq" = (
 /obj/structure/roguerock,
 /turf/open/water/river/dirt{
@@ -9390,6 +9398,17 @@
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter/bog)
+"hTo" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "hTC" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -9502,6 +9521,13 @@
 "iaU" = (
 /obj/structure/bridge,
 /turf/open/water/swamp,
+/area/outdoors/bog/witch)
+"icm" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "GALLOWBAND"
+	},
+/turf/open/floor/dirt/road,
 /area/outdoors/bog/witch)
 "icB" = (
 /obj/structure/bookcase{
@@ -9635,6 +9661,12 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"iiS" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/swamp,
+/area/outdoors/bog/witch)
 "ijb" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -10199,6 +10231,14 @@
 	},
 /turf/open/floor/metal/alt,
 /area/indoors/shelter/bog/lich)
+"iKp" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "iKM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -10494,6 +10534,23 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
+"iWR" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/machinery/light/fueled/firebowl/stumpb{
+	pixel_y = 10
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "iXp" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood/turned,
@@ -13897,13 +13954,6 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
-"mqu" = (
-/obj/structure/chair/wood/alt/chair_noble/purple{
-	dir = 1
-	},
-/mob/living/carbon/human/species/zizombie/npc/grenzel,
-/turf/open/floor/carpet/royalblack,
-/area/indoors/shelter/bog/lich)
 "mrh" = (
 /obj/structure/door/abyss{
 	color = "#406379"
@@ -15214,6 +15264,13 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"nNa" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 1
+	},
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
+/turf/open/floor/carpet/royalblack,
+/area/indoors/shelter/bog/lich)
 "nNq" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/carvedgem/shell/turtle,
@@ -16812,6 +16869,15 @@
 	color = "#7D9BAE"
 	},
 /area/indoors/wilderness/magic)
+"pFN" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "pHf" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -17463,6 +17529,18 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/cavewet)
+"qwX" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "qxv" = (
 /obj/structure/flora/grass/water,
 /obj/structure/kneestingers,
@@ -20240,6 +20318,11 @@
 "tKk" = (
 /turf/open/floor/abyss_sand/path,
 /area/outdoors/bog/south/east)
+"tKt" = (
+/obj/effect/decal/cleanable/dirt,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
+/turf/open/floor/wood,
+/area/indoors/ship)
 "tKu" = (
 /turf/open/floor/twig,
 /area/outdoors/bog/east)
@@ -21688,6 +21771,12 @@
 "uZN" = (
 /turf/open/water/swamp,
 /area/outdoors/bog/west)
+"vak" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "vaB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -22250,6 +22339,17 @@
 /mob/living/simple_animal/hostile/retaliate/troll/bog,
 /turf/open/floor/dirt,
 /area/outdoors/bog/south/east)
+"vBh" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "vBE" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
@@ -23542,6 +23642,12 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog)
+"wOF" = (
+/obj/structure/bridge_stakes{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "wON" = (
 /obj/structure/lootable_structure/fish_barrel,
 /turf/open/floor/wood,
@@ -41642,13 +41748,13 @@ cJo
 cJo
 cJo
 cJo
-cXD
-wKK
-uKN
-uKN
-wKK
-rLh
-rLh
+nuG
+neZ
+nuG
+nuG
+neZ
+vSz
+vSz
 rLh
 wKK
 wKK
@@ -41844,13 +41950,13 @@ cJo
 yfu
 cJo
 cJo
-cXD
-wKK
-wKK
-wKK
-wKK
-uKN
-uKN
+nuG
+neZ
+vBh
+vak
+iKp
+vSz
+nuG
 jsZ
 rLh
 wKK
@@ -42046,13 +42152,13 @@ yfu
 yfu
 cJo
 cJo
-gmP
-uKN
-wKK
-wKK
-wKK
-wKK
-wKK
+bOi
+iWR
+dxk
+dxk
+dxk
+hTo
+neZ
 wKK
 uKN
 wKK
@@ -42248,13 +42354,13 @@ yfu
 cJo
 cJo
 cJo
-cJo
-wKK
-uKN
-uKN
-wKK
-wKK
-rLh
+neZ
+neZ
+qwX
+geh
+pFN
+neZ
+vSz
 rLh
 wKK
 uKN
@@ -42453,9 +42559,9 @@ yfu
 neZ
 bKe
 bKe
+iiS
 fGz
-nuG
-neZ
+bKe
 neZ
 rLh
 rLh
@@ -42654,8 +42760,8 @@ yfu
 vSz
 neZ
 cwA
-ePU
-ePU
+icm
+wOF
 cwA
 bdk
 neZ
@@ -60522,7 +60628,7 @@ bHc
 sCF
 iKM
 pue
-fST
+tKt
 cnM
 rNI
 ece
@@ -102206,7 +102312,7 @@ uCr
 uUR
 ghb
 jvo
-mqu
+nNa
 ghb
 odp
 fQn
