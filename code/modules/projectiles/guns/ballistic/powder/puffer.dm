@@ -23,10 +23,6 @@
 	spread = 3
 
 /obj/item/gun/ballistic/powder/wheellock/puffer/preloaded
-	name = "puffer"
-	desc = "A result of Dwarven and Humen cooperation on the Eastern continent. It uses alchemical blastpowder to propel metal balls for devastating effect."
-
-	sellprice = 200
 
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
 
