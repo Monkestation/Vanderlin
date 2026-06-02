@@ -307,6 +307,7 @@
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "grass1"
 	base_icon_state = "grass"
+	layer = BELOW_OBJ_LAYER
 	num_random_icons = 6
 	attacked_sound = "plantcross"
 	destroy_sound = "plantcross"
