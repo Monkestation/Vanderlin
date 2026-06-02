@@ -35,16 +35,16 @@
 
 /obj/item/ammo_casing/caseless/pelletshot/coin/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
-	to_chat(user, span_notice("You start rigging up [src] back as tradable coins"))
-	playsound(src, 'sound/foley/lockrattle.ogg', 100, TRUE, -2)
-	if(coin_type)
-		if(!do_after(user, 3 SECONDS, src))
-			to_chat(user, span_warning("You stop rigging back [src]."))
-			return
-		var/obj/item/coin/coin_new = new coin_type(get_turf(src))
-		coin_new.set_quantity(pellets)
-		user.equip_to_slot_if_possible(coin_new, ITEM_SLOT_HANDS)
-		qdel(src)
+	if(!coin_type)
+		return
+	if(!do_after(user, 3 SECONDS, src))
+		to_chat(user, span_warning("You stop rigging back [src]."))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	var/obj/item/coin/coin_new = new coin_type(get_turf(src))
+	coin_new.set_quantity(pellets)
+	user.equip_to_slot_if_possible(coin_new, ITEM_SLOT_HANDS)
+	qdel(src)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/ammo_casing/caseless/pelletshot/coin/zenar
 	name = "zenarshot"
