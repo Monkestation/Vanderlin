@@ -125,7 +125,3 @@
 
 /mob/living/simple_animal/hostile/retaliate/hound/taunted(mob/user)
 	emote("aggro")
-	return
-
-/mob/living/simple_animal/hostile/retaliate/hound/simple_limb_hit(zone)
-	return ..()
