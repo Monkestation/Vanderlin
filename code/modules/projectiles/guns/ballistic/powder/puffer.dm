@@ -30,7 +30,7 @@
 	wound = TRUE
 	bullet_rammed = TRUE
 
-/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
+/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/blastpowder, powder_required)
 
