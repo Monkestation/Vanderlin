@@ -492,7 +492,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	passive_healing = max(passive_healing, 1)
 	if(mob_overlay != old_overlay)
 		owner?.update_damage_overlays()
-	record_round_statistic(STATS_WOUNDS_SEWED)
+	record_round_statistic(STATS_WOUNDS_FIXED)
 	return TRUE
 
 /// Checks if this wound has a special infection (zombie or werewolf)
@@ -512,6 +512,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!isnull(clotting_threshold) && bleed_rate > clotting_threshold)
 		bleed_rate = clotting_threshold
 	heal_wound(40)
+	record_round_statistic(STATS_WOUNDS_FIXED)
 	return TRUE
 
 /// Checks if this wound is sewn

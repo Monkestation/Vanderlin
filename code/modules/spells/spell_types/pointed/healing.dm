@@ -225,7 +225,7 @@
 
 				//Holding the head of an animal can restore blood.
 				var/obj/item/natural/head/animal_head = owner.get_active_held_item()
-				if(animal_head)
+				if(istype(animal_head))
 					if(!animal_head.blood_value)
 						to_chat(owner, span_warning("This head is not valuable enough to aid in healing!"))
 					else
@@ -267,7 +267,8 @@
 		to_chat(owner, span_danger("[C] is missing their [affecting]!"))
 		return
 
-	affecting.heal_wounds(amount_healed * wound_modifier, src)
+	if(affecting.heal_wounds(amount_healed * wound_modifier, src))
+		record_round_statistic(STATS_WOUNDS_FIXED)
 	if(affecting.heal_damage(brute = amount_healed, burn = amount_healed))
 		C.update_damage_overlays()
 

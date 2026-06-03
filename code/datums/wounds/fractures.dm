@@ -91,6 +91,7 @@
 	passive_healing = max(passive_healing, 1)
 	heal_wound(initial(whp)/1.6) //heal a little more than of maximum fracture
 	can_set = FALSE
+	record_round_statistic(STATS_WOUNDS_FIXED)
 	return TRUE
 
 /datum/wound/fracture/head
