@@ -59,7 +59,7 @@
 
 /datum/job/advclass/mercenary/grenzelhofthalb/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/static/list/armor = list("Grenzelhoft Cuirass & Grenzelhoft Plume Hat", "Steel Cuirass + Sallet")
+	var/static/list/armor = list("Grenzelhoft Cuirass & Grenzelhoft Plume Hat", "Steel Cuirass & Sallet")
 	var/armor_choice = tgui_input_list(player_client,"CHOOSE YOUR MAILLE", "GO EARN SOME COIN.", armor)
 	switch(armor_choice)
 		if("Grenzelhoft Cuirass & Grenzelhoft Plume Hat")
