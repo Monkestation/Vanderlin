@@ -36,9 +36,9 @@
 	viable_zones = list(BODY_ZONE_PRECISE_EARS)
 
 /datum/wound/facial/ears/can_apply_to_bodypart(obj/item/bodypart/affected)
-	. = ..()
 	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
 		return FALSE
+	. = ..()
 
 /datum/wound/facial/ears/can_apply_to_mob(mob/living/affected)
 	. = ..()
@@ -271,13 +271,12 @@
 	min_damage = 5
 	viable_zones = list(BODY_ZONE_PRECISE_GROIN)
 
-/datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
-	if(!(bclass in associated_bclasses))
-		return 0
-	if(length(viable_zones) && !(zone_precise in viable_zones))
-		return 0
+/datum/wound/cbt/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, damage_bclass)
 	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
-		return 0
+		return
+	. = ..()
+
+/datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
 	var/cbt_multiplier = HAS_TRAIT(user, TRAIT_NUTCRACKER) ? 2 : 1
 	return round(dam / 5) * cbt_multiplier // ignores standard formula entirely
 
@@ -359,12 +358,11 @@
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 80
 	woundpain = 30
-	can_sew = FALSE
-	can_cauterize = FALSE
 	disabling = TRUE
 	critical = TRUE
 	sleep_healing = 0
 	associated_bclasses = WHIPPING_BCLASSES
+	strong_intent_bonus = TRUE
 	var/gain_emote = "paincrit"
 
 /datum/wound/scarring/on_mob_gain(mob/living/affected)

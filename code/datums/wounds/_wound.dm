@@ -330,7 +330,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(disabling && affected.can_be_disabled)
 		affected.update_disabled()
 
-/// Returns whether or not this wound can be applied to a given mob
+/// Returns whether or not this wound can be applied to a given mob with TRAIT_SIMPLE_WOUNDS
 /datum/wound/proc/can_apply_to_mob(mob/living/affected)
 	if(bodypart_owner || owner || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
@@ -339,7 +339,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 			return FALSE
 	return TRUE
 
-/// Adds this wound to a given mob
+/// Adds this wound to a given mob with TRAIT_SIMPLE_WOUNDS
 /datum/wound/proc/apply_to_mob(mob/living/affected, silent = FALSE, crit_message = FALSE)
 	if(QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE

@@ -24,8 +24,11 @@
 		message = "damaged metal"
 	if(affecting.heal_damage(brute_heal, burn_heal, required_bodytype))
 		update_damage_overlays()
-	if(!affecting.brute_dam && !affecting.burn_dam)
-		affecting.heal_wounds(INFINITY, item_source)
+	if(length(affecting.wounds))
+		if(user == src)
+			affecting.heal_wounds(2, item_source)
+		else
+			affecting.heal_wounds(10, item_source)
 	user.visible_message(span_notice("[user] fixes some of the [message] [src]'s [affecting.name]."), \
 		span_notice("You fix some of the [message] [src == user ? "your" : "[src]'s"] [affecting.name]."), \
 		vision_distance = COMBAT_MESSAGE_RANGE)

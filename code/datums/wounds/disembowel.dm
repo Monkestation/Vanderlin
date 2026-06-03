@@ -36,10 +36,10 @@
 	return TRUE
 
 /datum/wound/slash/disembowel/can_apply_to_bodypart(obj/item/bodypart/new_limb)
+	if(HAS_TRAIT(new_limb.owner, TRAIT_CRITICAL_RESISTANCE))
+		return FALSE
 	. = ..()
 	if(!.)
-		return FALSE
-	if(HAS_TRAIT(new_limb.owner, TRAIT_CRITICAL_RESISTANCE))
 		return FALSE
 	var/gaping_wound = FALSE
 	for(var/datum/wound/other_wound as anything in new_limb.wounds)

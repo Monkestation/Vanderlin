@@ -267,6 +267,7 @@
 		to_chat(owner, span_danger("[C] is missing their [affecting]!"))
 		return
 
+	affecting.heal_wounds(amount_healed * wound_modifier, src)
 	if(affecting.heal_damage(brute = amount_healed, burn = amount_healed))
 		C.update_damage_overlays()
 
