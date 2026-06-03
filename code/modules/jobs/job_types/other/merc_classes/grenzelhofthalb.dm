@@ -65,6 +65,6 @@
 		if("Grenzelhoft Cuirass & Grenzelhoft Plume Hat")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass/grenzelhoft, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/skullcap/grenzelhoft, ITEM_SLOT_HEAD, TRUE)
-		if("Steel Cuirass + Sallet")
+		if("Steel Cuirass & Sallet")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/sallet, ITEM_SLOT_HEAD, TRUE)
