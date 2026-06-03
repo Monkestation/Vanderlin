@@ -9,8 +9,7 @@
 		/datum/attribute/skill/misc/athletics = 35, // slight bonus, they use big sword
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/whipsflails = 10,
-		/datum/attribute/skill/combat/shields = 10,
+		/datum/attribute/skill/combat/axesmaces = 25, // cudgel
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/medicine = 10,
     )
