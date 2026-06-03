@@ -14,6 +14,6 @@
 #define BLEED_SPLATTER 2
 
 /// Checks if the mob can have blood
-#define CAN_HAVE_BLOOD(mob) (mob.living_flags & LIVING_CAN_HAVE_BLOOD)
+#define CAN_HAVE_BLOOD(mob) (mob?.living_flags & LIVING_CAN_HAVE_BLOOD)
 /// Queues a blood update for the next life tick for the mob
 #define QUEUE_BLOOD_UPDATE(mob) mob.living_flags |= BLOOD_UPDATE_QUEUED

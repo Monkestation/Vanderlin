@@ -376,7 +376,7 @@
 	return TRUE
 
 /datum/injury/proc/is_bleeding()
-	if(parent_mob && !CAN_HAVE_BLOOD(parent_mob))
+	if(!CAN_HAVE_BLOOD(parent_mob))
 		return
 	for(var/thing in embedded_objects)
 		var/obj/item/item = thing
@@ -389,7 +389,7 @@
 	return (bleed_timer > 0 || damage_per_injury() > bleed_threshold)
 
 /datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
-	if(parent_mob && !CAN_HAVE_BLOOD(parent_mob))
+	if(!CAN_HAVE_BLOOD(parent_mob))
 		return 0
 	if(!ignore_is_bleeding && !is_bleeding())
 		return 0
