@@ -1784,7 +1784,7 @@
 /area/outdoors/wilderness/safe/gallowband_fort)
 "kz" = (
 /obj/structure/winch{
-	name = NorthWaterlock;
+	name = "North Waterlock";
 	redstone_id = "fgwaterlocknorth"
 	},
 /turf/open/floor/ruinedwood/spiralfade,
@@ -5899,7 +5899,7 @@
 /area/outdoors/wilderness/safe/gallowband_fort)
 "GZ" = (
 /obj/structure/winch{
-	name = SouthWaterlock;
+	name = "South Waterlock";
 	redstone_id = "fgwaterlocksouth"
 	},
 /turf/open/floor/ruinedwood/darker,
