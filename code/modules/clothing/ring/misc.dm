@@ -333,6 +333,7 @@
 
 /obj/item/clothing/ring/signet/silver
 	name = "silver signet ring"
+	examine_name = "silver ring"
 	icon_state = "signet_silver"
 	desc = "A ring of blessed silver, bearing the Archbishop's symbol. By dipping it in melted redtallow, it can seal writs of religious importance."
 	sellprice = 90

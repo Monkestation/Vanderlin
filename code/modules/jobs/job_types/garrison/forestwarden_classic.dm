@@ -1,4 +1,4 @@
-/datum/attribute_holder/sheet/job/forestwarden
+/datum/attribute_holder/sheet/job/forestwarden_classic
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_PERCEPTION = 1,
@@ -24,8 +24,8 @@
 	)
 
 
-/datum/job/forestwarden
-	title = JOB_FOREST_WARDEN
+/datum/job/forestwarden_classic
+	title = JOB_FOREST_WARDEN_CLASSIC
 	tutorial = "You were born in the forest. Alone, you've always felt home in the woods. \
 	In your tenure with the garrison, you've cleaved through the wildlife-- \
 	and for your service in the short-lived Goblin War, the king has granted you nobility. \
@@ -34,8 +34,8 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	display_order = JDO_FORWARDEN
 	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
@@ -50,7 +50,7 @@
 		EXP_TYPE_GARRISON = 900
 	)
 
-	outfit = /datum/outfit/forestwarden
+	outfit = /datum/outfit/forestwarden_classic
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
 	give_bank_account = 45
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
@@ -58,7 +58,7 @@
 	job_bitflag = BITFLAG_GARRISON
 	honorary = "Warden"
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestwarden
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestwarden_classic
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -69,7 +69,7 @@
 		/mob/proc/haltyell
 	)
 
-/datum/outfit/forestwarden
+/datum/outfit/forestwarden_classic
 	name = JOB_FOREST_WARDEN
 	cloak = /obj/item/clothing/cloak/wardencloak
 	armor = /obj/item/clothing/armor/plate

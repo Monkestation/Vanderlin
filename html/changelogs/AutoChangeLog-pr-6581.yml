@@ -1,0 +1,5 @@
+author: "Archeonan"
+delete-after: True
+changes:
+  - rscadd: "Added 3 new Grenzelhoft Mercenary classes"
+  - rscdel: "Removed old Grenzelhoft Mercenary"

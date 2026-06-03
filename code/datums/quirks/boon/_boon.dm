@@ -81,6 +81,7 @@
 		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
+		/datum/language/gronnic,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()

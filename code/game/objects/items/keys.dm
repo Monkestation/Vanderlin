@@ -1,5 +1,6 @@
 /obj/item/key
 	name = "old key"
+	examine_name = "key"
 	desc = "A simple key of simple uses."
 	icon_state = "brownkey"
 	icon = 'icons/roguetown/items/keys.dmi'
@@ -184,6 +185,12 @@
 	desc = "This bronze key should open the Miner's quarters."
 	icon_state = "brownkey"
 	lockids = list(ACCESS_MINER)
+
+/obj/item/key/sweeper
+	name = "sweeper's key"
+	desc = "This key opens the Sweeper's room. It smells foul."
+	icon_state = "rustkey"
+	lockids = list(ACCESS_SWEEPER)
 
 // Residents
 

@@ -14,7 +14,8 @@
 	var/open_wear = FALSE
 
 /obj/item/clothing/cloak/psydontabard/alt
-	name = "open grenzelhoftian tabard"
+	name = "inquisitorial tabard"
+	examine_name = "monk tabard"
 	desc = "Used by more radical followers of the Inquisition"
 	body_parts_covered = null
 	icon_state = "psydontabardalt"
@@ -25,6 +26,7 @@
 	switch(open_wear)
 		if(FALSE)
 			name = "inquisitorial tabard"
+			examine_name = "monk tabard"
 			desc = "A long vest bearing Psydonian symbology"
 			body_parts_covered = null
 			icon_state = "psydontabardalt"
@@ -33,6 +35,7 @@
 			to_chat(usr, span_warning("Now wearing ENDURINGLY!"))
 		if(TRUE)
 			name = "inquisitorial tabard"
+			examine_name = "inquisitorial tabard"
 			desc = "A long vest bearing Psydonian symbology"
 			body_parts_covered = CHEST|GROIN
 			icon_state = "psydontabard"

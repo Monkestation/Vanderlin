@@ -418,6 +418,7 @@
 
 /obj/item/clothing/head/roguehood/psydon/confessor
 	name = "confessional hood"
+	examine_name = "hood"
 	desc = "A loose-fitting piece of leatherwear that can be tightened on the move. Keeps rain, blood, and the tears of the sullied away."
 	icon_state = "confessorhood"
 	item_state = "confessorhood"
