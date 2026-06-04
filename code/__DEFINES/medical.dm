@@ -365,4 +365,4 @@ DEFINE_BITFIELD(organ_flags, list(
 #define BLEED_RATE_NOTICABLE	1.5
 
 /// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
-#define BLEED_DAMAGE_RATIO 30
+#define BLEED_DAMAGE_RATIO 25

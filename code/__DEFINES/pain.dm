@@ -36,8 +36,8 @@
 /// Divisor used in pain calculations, since carbon pain is a flat amount and spread across bodyparts
 #define PAINKILLER_DIVISOR 1.5
 
-/// Use this to keep the speed of pain-related systems consistent relatively
-#define PAIN_SYSTEM_SPEED_MODIFIER 3
+/// Use this to keep the speed of pain-related systems consistent across the board
+#define PAIN_SYSTEM_SPEED_MODIFIER 4
 
 /// Cooldown before resetting the injury penalty
 #define SHOCK_PENALTY_COOLDOWN_DURATION 5 SECONDS

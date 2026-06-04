@@ -260,7 +260,7 @@
 		add_pain(pain_amount)
 
 /obj/item/bodypart/proc/on_arthritis_life()
-	if(prob(2) && pain_dam < SHOCK_STAGE_1)
+	if(prob(2) && pain_dam < SHOCK_STAGE_2)
 		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 		var/pain_msg = pick("Your [name] throbs with arthritic pain!",
 							"A sharp ache shoots through your [name]!",

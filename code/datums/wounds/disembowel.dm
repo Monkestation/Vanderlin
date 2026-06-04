@@ -15,8 +15,8 @@
 	sewn_clotting_rate = 0.02
 	clotting_threshold = 10
 	sewn_clotting_threshold = 0.5
-	woundpain = 25
-	sewn_woundpain = 10
+	woundpain = 50
+	sewn_woundpain = 20
 	sew_threshold = 150 //absolutely awful to sew up
 	critical = TRUE
 	associated_bclasses = ARTERY_BCLASSES
