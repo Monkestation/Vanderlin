@@ -3141,6 +3141,7 @@
 /area/indoors/town)
 "bAZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/essence/extractor,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "bBc" = (
@@ -28658,6 +28659,21 @@
 	icon_state = "largetable"
 	},
 /obj/item/reagent_containers/powder/spice,
+/obj/item/essence_vial{
+	pixel_y = 6;
+	pixel_x = -1
+	},
+/obj/item/essence_vial{
+	pixel_y = -4
+	},
+/obj/item/essence_vial{
+	pixel_x = 9;
+	pixel_y = 11
+	},
+/obj/item/essence_vial{
+	pixel_x = 7;
+	pixel_y = 3
+	},
 /turf/open/floor/carpet,
 /area/under/town/basement)
 "nBh" = (
@@ -33380,6 +33396,7 @@
 	pixel_x = 1;
 	pixel_y = 10
 	},
+/obj/item/essence_connector,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "pHI" = (
@@ -34069,6 +34086,10 @@
 /obj/structure/fluff/millstone,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"pYd" = (
+/obj/machinery/light/fueled/oven/south,
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "pYe" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/structure/bed/shit,
@@ -45867,7 +45888,7 @@
 	icon_state = "largetable"
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/reagent_containers/glass/bottle/poison,
+/obj/machinery/essence/reservoir,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "vqn" = (
@@ -79851,7 +79872,7 @@ pGp
 wpU
 wpU
 jEQ
-ejU
+pYd
 nXJ
 nXJ
 gir
@@ -80058,7 +80079,7 @@ jEQ
 uek
 wvw
 tVX
-nXJ
+poD
 jEQ
 utb
 qhd
