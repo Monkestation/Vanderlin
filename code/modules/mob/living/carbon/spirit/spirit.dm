@@ -200,12 +200,14 @@
 	. = FALSE
 	if(QDELETED(corpse) || (corpse.stat != DEAD))
 		return
-	// funeral + buried will make Journey to Underworld function as return to lobby
 	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
 		if(!human_corpse.funeral)
 			human_corpse.funeral = TRUE
 			. = TRUE
+	// Animals have no mind so we have no ghost or spirit to talk to. They still are 'pacified' though.
+	else if(isanimal(corpse))
+		return TRUE
 	var/datum/mind/corpse_mind = get_mind(corpse, include_last = TRUE)
 	if(corpse_mind?.remove_antag_datum(/datum/antagonist/zombie))
 		. = TRUE

@@ -646,6 +646,7 @@ GLOBAL_PROTECT(no_child_icons)
 
 	apply_overlay(HEAD_LAYER)
 	update_body() //hoodies
+	update_body_parts(redraw = TRUE)
 
 /mob/living/carbon/human/update_inv_belt(hide_experimental = FALSE)
 	remove_overlay(BELT_LAYER)
@@ -814,6 +815,7 @@ GLOBAL_PROTECT(no_child_icons)
 				overlays_standing[MASK_LAYER] = mask_overlay
 
 	apply_overlay(MASK_LAYER)
+	update_body_parts(redraw = TRUE)
 
 /mob/living/carbon/human/update_inv_back(hide_experimental = FALSE)
 	remove_overlay(BACK_LAYER)

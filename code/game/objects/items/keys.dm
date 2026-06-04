@@ -186,6 +186,12 @@
 	icon_state = "brownkey"
 	lockids = list(ACCESS_MINER)
 
+/obj/item/key/sweeper
+	name = "sweeper's key"
+	desc = "This key opens the Sweeper's room. It smells foul."
+	icon_state = "rustkey"
+	lockids = list(ACCESS_SWEEPER)
+
 // Residents
 
 /obj/item/key/matron
