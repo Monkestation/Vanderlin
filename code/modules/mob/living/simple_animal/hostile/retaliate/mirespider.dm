@@ -67,6 +67,7 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_KNEESTINGER_IMMUNITY, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_POISONBITE, INNATE_TRAIT)
 
 	addtimer(CALLBACK(src, PROC_REF(find_lurker_to_follow)), 10)
 

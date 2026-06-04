@@ -463,7 +463,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	GLOB.respawncounts[character.ckey] += 1
 
 	if(humanc)
-		try_apply_character_post_equipment(humanc)
+		try_apply_character_post_equipment(humanc, client)
 
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
 

@@ -122,6 +122,18 @@
 	body_parts_covered = COVERAGE_HEAD
 	item_weight = 2.2 KILOGRAMS
 
+/obj/item/clothing/head/helmet/kettle/jingasa
+	name = "jingasa"
+	desc = "A steel-reinforced conical hat with a decorative rim of fabric. It protects the head and ears as much as it shields the eyes from the sun."
+	icon_state = "kazengunmedhelm"
+	item_state = "kazengunmedhelm"
+	detail_tag = "_detail"
+	detail_color = "#FFFFFF"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	flags_inv = HIDEEARS|HIDEHAIR
+	worn_x_dimension = 32
+	worn_y_dimension = 32
+
 /obj/item/clothing/head/helmet/kettle/iron
 	name = "iron kettle helmet"
 	desc = "A lightweight iron helmet generally worn by crossbowmen and garrison archers."
@@ -132,6 +144,17 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
+
+/obj/item/clothing/head/helmet/kettle/aalloy
+	name = "decrepit kettle helmet"
+	desc = "A frayed, bronze helmet which protects the top and sides of the head. Atop a resurrected levyman's scalp, it's a sign that forces-most-foul are soon to besiege; and atop a fleshless ballistaeman's skull, it's a sign that you should probably duck."
+	icon_state = "ancientkettle"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	body_parts_covered = HEAD|HAIR|EARS
+	material_category = ARMOR_MAT_PLATE
+	anvilrepair = null
+	worn_x_dimension = 32
+	worn_y_dimension = 32
 
 //................ Kettle Helmet (Slitted)............... //
 /obj/item/clothing/head/helmet/kettle/slit
@@ -239,6 +262,20 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
 
+/obj/item/clothing/head/helmet/sallet/beastskull
+	name = "beast skull"
+	desc = "The skull of a horned beast, carved and fashioned into a helmet. An steel skull cap has been inserted on the inside."
+	icon_state = "marauder_head"
+	body_parts_covered = HEAD|EARS|HAIR
+	max_integrity = INTEGRITY_STRONG + 50
+	smeltresult = /obj/item/ingot/steel_slag
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 3.5 KILOGRAMS
+
 /obj/item/clothing/head/helmet/sallet/iron
 	name = "iron sallet"
 	icon_state = "isallet"
@@ -249,6 +286,20 @@
 	armor =  ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
+
+/obj/item/clothing/head/helmet/sallet/iron/banded
+	name = "banded iron helmet"
+	desc = "A menacing horned half-face iron helmet worn primarily by mercenaries hailing from an unaligned conflict-ridden enclave near the borders of Ossland. \
+	A helmet of this kind was notoriously worn by an unknown person said to kill the last Great Drakyn inhabiting the mountains of Hammerhold."
+	max_integrity = ARMOR_INT_HELMET_HEAVY_IRON
+	armor_class = AC_MEDIUM
+	flags_inv = HIDEEARS|HIDEFACE
+	flags_cover = HEADCOVERSEYES
+	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
+	block2add = FOV_BEHIND
+	icon_state = "ibandedhelm"
+	item_state = "ibandedhelm"
+
 
 //................ Elf Sallet ............... //
 /obj/item/clothing/head/helmet/sallet/elven	// blackoak merc helmet
@@ -313,13 +364,14 @@
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_CRITICAL_HITS
 	abstract_type = /obj/item/clothing/head/helmet/visored
+	var/raise_state = "_raised"
 
 /obj/item/clothing/head/helmet/visored/AdjustClothes(mob/user)
 	if(loc == user)
 		playsound(user, "sound/items/visor.ogg", 100, TRUE, -1)
 		if(adjustable == CAN_CADJUST)
 			adjustable = CADJUSTED
-			icon_state = "[initial(icon_state)]_raised"
+			icon_state = "[initial(icon_state)][raise_state]"
 			body_parts_covered = COVERAGE_HEAD
 			flags_inv = HIDEEARS
 			flags_cover = null
@@ -400,6 +452,28 @@
 	emote_environment = 3
 	item_weight = 4.45 KILOGRAMS
 
+/obj/item/clothing/head/helmet/visored/knight/owl
+	name = "strigidae armet"
+	desc = "An armet of distinct bird like design with a pronounced beak. \
+		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
+		This one used to be in the hands of a pale elf and may be fitted with a great plume atop, to bear heraldic colors."
+	icon_state = "armetowl"
+	raise_state = "_t"
+
+/obj/item/clothing/head/helmet/visored/knight/aalloy
+	name = "decrepit bascinet"
+	desc = "A chipped greathelm of frayed bronze. The fittings squeal with nauseous annoyance, whenever you move to lift its half-rusted visor up and down. Add a feather to show the colors of your family or allegiance."
+	icon_state = "ancientknight"
+	item_state = "ancientknight"
+	max_integrity = ARMOR_INT_HELMET_HEAVY_DECREPIT
+	material_category = ARMOR_MAT_PLATE
+	anvilrepair = null
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi' //Uses the new 'greatplume + orle' system. If this glitches out, I made sure to include a fully-prepared 32x32 version - with details - in head.dmi.
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	raise_state = "_t"
+
 /obj/item/clothing/head/helmet/visored/knight/blk
 	color = CLOTHING_SOOT_BLACK
 
@@ -414,6 +488,46 @@
 
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
+
+
+/obj/item/clothing/head/helmet/visored/gold
+	name = "golden knight's armet"
+	desc = "A resplendant armet, masterfully forged from pure gold. Hexagrammic etchings of a holy sigil line its visor, and its interior is fitted with a besilked arming cap. Even in absolute darkness, the polished surface sparkles with imbued sunlight."
+	icon_state = "goldknight"
+	armor = ARMOR_HEAD_HELMET_VISOR //Renders its wearer completely invulnerable to damage. The caveat is, however..
+	max_integrity = ARMOR_INT_HELMET_HEAVY_IRON // ..is that it's extraordinarily fragile. To note, this is lower than even Decrepit-tier armor.
+	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
+	anvilrepair = null
+	melting_material = /datum/material/gold
+	grid_height = 96 //Prevents 'armorstacking'. That, and it's like.. carrying a golden watermelon.
+	grid_width = 96
+	sellprice = 200
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	raise_state = "_t"
+	item_weight = 5.6 KILOGRAMS
+
+/obj/item/clothing/head/helmet/visored/gold/attackby(obj/item/W, mob/living/user, params)
+	..()
+	if(istype(W, /obj/item/natural/feather) && !detail_tag)
+		var/choice = input(user, "Choose a color.", "Greatplume") as anything in COLOR_MAP
+		detail_color = COLOR_MAP[choice]
+		detail_tag = "_detail"
+		user.visible_message(span_warning("[user] adds [W] to [src]."))
+		user.transferItemToLoc(W, src, FALSE, FALSE)
+		update_icon()
+		if(loc == user && ishuman(user))
+			var/mob/living/carbon/H = user
+			H.update_inv_head()
+
+/obj/item/clothing/head/helmet/visored/gold/king
+	name = "royal golden armet"
+	desc = "A resplendant armet, masterfully forged from pure gold. Hexagrammic etchings of a holy sigil line its visor, and its interior is fitted with a besilked arming cap. The dorpeled crown atop its brow invokes authority, be it misbegotten or endowed."
+	icon_state = "goldknight_crown"
+	sellprice = 300
+
 
 //................. Royal Knight's helmet .............. //
 /obj/item/clothing/head/helmet/visored/royalknight
@@ -616,3 +730,59 @@
 	else
 		user.visible_message(span_warning("[user] stops reshaping [src]."))
 		return
+
+/obj/item/clothing/head/helmet/bronze
+	name = "bronze illyriahelm"
+	desc = "A helmet of bronze, older-in-design than you could possibly imagine. Mounted to its crest is a decorative sigil that has \
+	sparked scholarly debates for the better part of a millennium; is it a star, a vortex, or the Sun? </br>A notch behind the sigil \
+	allows for the joint mounting of a plume. Nock a feather into it to show off your alliegence's colors."
+	max_integrity = ARMOR_INT_HELMET_IRON - 25 //Close, but no cigar.
+	material_category = ARMOR_MAT_PLATE
+	body_parts_covered = HEAD|HAIR|EARS
+	icon_state = "bronzehelmet"
+	item_state = "bronzehelmet"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	melting_material = /datum/material/bronze
+
+/obj/item/clothing/head/helmet/bronze/attackby(obj/item/W, mob/living/user, params)
+	..()
+	if(istype(W, /obj/item/natural/feather) && !detail_tag)
+		var/choice = input(user, "Choose a color.", "Greatplume") as anything in COLOR_MAP
+		detail_color = COLOR_MAP[choice]
+		detail_tag = "_detail"
+		user.visible_message(span_warning("[user] adds [W] to [src]."))
+		user.transferItemToLoc(W, src, FALSE, FALSE)
+		update_icon()
+		if(loc == user && ishuman(user))
+			var/mob/living/carbon/H = user
+			H.update_inv_head()
+
+/obj/item/clothing/head/helmet/bronzegladiator
+	name = "bronze murmillo"
+	desc = "A bronze helmet that veils the wearer's face behind a perforated visor; a distant ancestor to both the sallet and sayovard, \
+	providing excellent coverage while ensuring one doesn't suffocate on their own adrenal huffs. </br>Out of all actorial labors, none surpass \
+	the reenactment of Ravox's duel against Graggar atop Ur-Syon's ruins - mythologized not as a tentacled star, but as a towering doppelganger-champion; \
+	sculpted by the followers of evil to be the inverse to all who stood for justice and chivalry."
+	max_integrity = ARMOR_INT_HELMET_IRON - 100
+	armor_class = AC_LIGHT
+	material_category = ARMOR_MAT_PLATE
+	body_parts_covered = FULL_HEAD
+	icon_state = "bronzemurmillo"
+	item_state = "bronzemurmillo"
+	melting_material = /datum/material/bronze
+
+/obj/item/clothing/head/helmet/bronzegladiator/attackby(obj/item/W, mob/living/user, params)
+	..()
+	if(istype(W, /obj/item/natural/cloth) && !detail_tag)
+		var/choice = input(user, "Choose a color.", "Orle") as anything in COLOR_MAP
+		user.visible_message(span_warning("[user] adds [W] to [src]."))
+		user.transferItemToLoc(W, src, FALSE, FALSE)
+		detail_color = COLOR_MAP[choice]
+		detail_tag = "_detail"
+		update_icon()
+		if(loc == user && ishuman(user))
+			var/mob/living/carbon/H = user
+			H.update_inv_head()

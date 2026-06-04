@@ -433,6 +433,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return null
 
 	GLOB.clients += src
+	GLOB.key_list += ckey
 	GLOB.keys_by_ckey[ckey] = key
 	GLOB.directory[ckey] = src
 
@@ -475,6 +476,20 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	twitch = new(src)
 	native_say = new(src)
 
+	///because we do award validation on login for certain things this needs to exist
+	var/full_version = "[byond_version].[byond_build ? byond_build : "xxx"]"
+	var/reconnecting = FALSE
+	if(GLOB.player_details[ckey])
+		reconnecting = TRUE
+		player_details = GLOB.player_details[ckey]
+		player_details.byond_version = full_version
+		player_details.byond_build = byond_build
+	else
+		player_details = new(ckey)
+		player_details.byond_version = full_version
+		player_details.byond_build = byond_build
+		GLOB.player_details[ckey] = player_details
+
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
 	prefs = GLOB.preferences_datums[ckey]
 	if(prefs)
@@ -496,7 +511,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(fexists(roundend_report_file()))
 		add_verb(src, /client/proc/show_previous_roundend_report)
 
-	var/full_version = "[byond_version].[byond_build ? byond_build : "xxx"]"
 	log_access("Login: [key_name(src)] from [address ? address : "localhost"]-[computer_id] || BYOND v[full_version]")
 
 	var/alert_mob_dupe_login = FALSE
@@ -531,18 +545,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		show_popup_menus = TRUE
 
 	set_right_click_menu_mode(TRUE)
-
-	var/reconnecting = FALSE
-	if(GLOB.player_details[ckey])
-		reconnecting = TRUE
-		player_details = GLOB.player_details[ckey]
-		player_details.byond_version = full_version
-		player_details.byond_build = byond_build
-	else
-		player_details = new(ckey)
-		player_details.byond_version = full_version
-		player_details.byond_build = byond_build
-		GLOB.player_details[ckey] = player_details
 
 
 	. = ..()	//calls mob.Login()
@@ -769,6 +771,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		GLOB.admins -= src
 
 	GLOB.clients -= src
+	GLOB.key_list -= ckey
 	GLOB.directory -= ckey
 
 	QDEL_NULL(tgui_panel)

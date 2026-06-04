@@ -11,6 +11,7 @@
 	#define ELASCAT_COMBAT "combat"
 	#define ELASCAT_CRAFTING "crafting"
 	#define ELASCAT_ECONOMY "economy"
+	#define ELASCAT_SHOP "shop"
 	#define ELASCAT_STORYTELLER "storyteller"
 	#define ELASCAT_BALANCE "balance"
 	#define ELASCAT_MEDICAL "medical"

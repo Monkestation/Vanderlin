@@ -3,6 +3,9 @@
 /datum/config_entry/string/elastic_endpoint
 	protection = CONFIG_ENTRY_HIDDEN
 
+/datum/config_entry/string/shop_endpoint
+	protection = CONFIG_ENTRY_HIDDEN
+
 /datum/config_entry/string/combat_endpoint
 	protection = CONFIG_ENTRY_HIDDEN
 

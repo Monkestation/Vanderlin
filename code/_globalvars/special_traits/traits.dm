@@ -19,6 +19,7 @@
 	var/list/restricted_races
 	var/list/restricted_jobs
 	var/allowed_flaw
+	var/cost_modifier = 2
 
 /// check if this characters can be applied this special_trait
 /datum/special_trait/proc/can_apply(mob/living/carbon/human/character)

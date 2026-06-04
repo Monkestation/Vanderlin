@@ -1,0 +1,12 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - refactor: "Loadout, Be Special, and Triumph Buy menu combined with new UI."
+  - qol: "Loadouts can now be made by non-donators, using TRIUMPHs to purchase items to use."
+  - qol: "Many loadout items now support dying and detailing"
+  - balance: "Be Special is now saved until used, and will not go away until you play a round with it."
+  - balance: "Be Special now allows you to purchase specific specials at the cost of TRIUMPHs, donators get a discount."
+  - rscadd: "wedding bands & other rings, can be crafted at an anvil with the respective metal & gem"
+  - rscadd: "new tailorable clothes to mirror new items in the loadout shop"
+  - rscadd: "new smelt results for items that previously lacked them like ancient armors"
+  - rscadd: "new gold armor set that can be smithed with gold ingots"
