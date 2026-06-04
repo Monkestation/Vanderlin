@@ -214,7 +214,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/herald
 
 	traits = list(
-		TRAIT_BARDIC_TRAINING
+		TRAIT_BARDIC_TRAINING,
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER
 	)
