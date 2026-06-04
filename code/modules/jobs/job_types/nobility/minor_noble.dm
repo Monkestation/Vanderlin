@@ -55,11 +55,6 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/minor_noble
 
-	traits = list(
-		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
-	)
-
 /datum/attribute_holder/sheet/job/former_commander
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -94,6 +89,8 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_HEAVYARMOR,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 
@@ -134,6 +131,8 @@
 	traits = list(
 		TRAIT_SEEPRICES,
 		TRAIT_FAT,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 
@@ -216,6 +215,8 @@
 
 	traits = list(
 		TRAIT_BARDIC_TRAINING
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/outfit/minornoble/herald
@@ -249,6 +250,10 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vassal
 
+	traits = list(
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
+	)
 
 /datum/outfit/minornoble/vassal
 	name = "Vassal (noble)"
