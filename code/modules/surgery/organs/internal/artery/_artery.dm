@@ -23,13 +23,14 @@
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
 	/// If torn, this is basically the time until we gush again
 	COOLDOWN_DECLARE(next_squirt)
-	// On average 2 seconds, like life ticks
 	/// Minimum time until we squirt again
-	var/squirt_delay_min_seconds = 1.5 SECONDS
+	var/squirt_delay_min_seconds = 4 SECONDS
 	/// Maximum time until we squirt again
-	var/squirt_delay_max_seconds = 2.5 SECONDS
+	var/squirt_delay_max_seconds = 10 SECONDS
 	///squirting sound
 	var/squirt_sound = list('sound/gore/artery1.ogg', 'sound/gore/artery2.ogg', 'sound/gore/artery3.ogg')
+	/// Kill the owner if they have TRAIT_CRITICAL_WEAKNESS and the artery is dissected
+	var/crit_weakness_lethal = FALSE
 
 /obj/item/organ/artery/can_self_heal(delta_time, times_fired)
 	return FALSE
@@ -71,26 +72,26 @@
 		return
 	if(owner.stat < UNCONSCIOUS)
 		owner.emote("scream")
-	owner.bleed(blood_flow)
 	current_blood = 0
 	applyOrganDamage(maxHealth * 0.5)
-	var/cd_time = rand(squirt_delay_min_seconds, squirt_delay_max_seconds)
-	COOLDOWN_START(src, next_squirt, cd_time)
+	owner.bleed(blood_flow)
+	COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds))
 
 /obj/item/organ/artery/dissect()
 	if(!owner)
 		return
 	if(owner.stat < UNCONSCIOUS)
 		owner.emote("scream")
-	owner.bleed(blood_flow)
 	current_blood = 0
 	applyOrganDamage(maxHealth)
-	var/cd_time = rand(squirt_delay_min_seconds, squirt_delay_max_seconds)
-	COOLDOWN_START(src, next_squirt, cd_time)
+	owner.bleed(blood_flow)
+	COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds))
+	if(crit_weakness_lethal && HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+		owner.death()
 
 /obj/item/organ/artery/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
 	. = ..()
-	if(damage <= 0)
+	if(. < 0 && damage <= 0)
 		mend()
 
 /obj/item/organ/artery/proc/squirt(amount = 1, force = FALSE)

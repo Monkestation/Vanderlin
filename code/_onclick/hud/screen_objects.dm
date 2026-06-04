@@ -1280,7 +1280,7 @@
 			limby.alpha = (comparison*255)*2
 			. += limby
 			var/artery_bleeding
-			for(var/obj/item/organ/possible_artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
+			for(var/obj/item/organ/possible_artery in BP.getorganslotlist(ORGAN_SLOT_ARTERY))
 				if(possible_artery.is_bruised())
 					artery_bleeding = TRUE
 					break

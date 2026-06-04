@@ -36,6 +36,7 @@
 	desc = "Shot through the heart, and you're to blame - Darlin', you give love a bad name."
 	zone = BODY_ZONE_CHEST
 	blood_flow = ARTERIAL_BLOOD_FLOW * 2.5
+	crit_weakness_lethal = TRUE
 
 /obj/item/organ/artery/heart/tear()
 	. = ..()
@@ -47,17 +48,25 @@
 		"MY HEART IS TORN!",
 		"MY HEART IS BLEEDING!",
 	)
-	to_chat(owner, "<span class='userdanger'>[pick(heartaches)]</span>")
+	to_chat(owner, span_userdanger("[pick(heartaches)]"))
 
 /obj/item/organ/artery/heart/dissect()
 	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
-		owner.death()
+	owner.vomit(blood = TRUE)
+	var/static/list/heartaches = list(
+		"OOHHHH MY HEART!",
+		"MY HEART! IT HURTS!",
+		"I AM DYING!",
+		"MY HEART IS TORN!",
+		"MY HEART IS BLEEDING!",
+	)
+	to_chat(owner, span_userdanger("[pick(heartaches)]"))
 
 /obj/item/organ/artery/neck
 	name = "carotid artery"
 	zone = BODY_ZONE_PRECISE_NECK
 	blood_flow = ARTERIAL_BLOOD_FLOW * 2
+	crit_weakness_lethal = TRUE
 
 /obj/item/organ/artery/neck/mend()
 	. = ..()
@@ -66,8 +75,6 @@
 /obj/item/organ/artery/neck/dissect()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_GARGLE_SPEECH, "[type]")
-	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
-		owner.death()
 
 /obj/item/organ/artery/neck/tear()
 	. = ..()

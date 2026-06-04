@@ -12,7 +12,7 @@
 	aimed_intent_bonus = TRUE
 	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	var/artery_type_override
-	var/list/artery_type_blacklist = list(ARTERY_HEART)
+	var/list/artery_type_blacklist = list(ARTERY_HEART, ARTERY_NECK)
 	viable_zones = list(\
 		BODY_ZONE_R_ARM, \
 		BODY_ZONE_R_LEG, \
@@ -21,9 +21,7 @@
 		BODY_ZONE_L_ARM, \
 		BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_GROIN, \
 		BODY_ZONE_CHEST, \
-		BODY_ZONE_PRECISE_NECK, \
 		BODY_ZONE_HEAD)
-
 	required_bodypart_status = BODYPART_ORGANIC
 
 /datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, bclass)
@@ -53,28 +51,30 @@
 		qdel(src)
 		return FALSE
 	var/dissection = (severity >= WOUND_SEVERITY_CRITICAL) || (artery?.damage >= (artery?.maxHealth * 0.5))
-	if(artery)
-		if(dissection)
-			artery.dissect()
-		else
-			artery.tear()
+	if(dissection)
+		artery.dissect()
+	else
+		artery.tear()
 	. = ..()
 	affected.temporary_crit_paralysis(10 SECONDS)
 	qdel(src)
 
 /datum/wound/artery/neck_slice
 	severity = WOUND_SEVERITY_CRITICAL
-	artery_type_override = /obj/item/organ/artery/neck
-	can_roll = FALSE //snowflake used for neck slit
-	show_in_book = FALSE
+	artery_type_override = ARTERY_NECK
+	artery_type_blacklist = list(ARTERY_HEAD)
 	viable_zones = list(BODY_ZONE_PRECISE_NECK)
+	show_in_book = FALSE
+	crit_message = "Blood sprays from %VICTIM's throat!"
 
 /datum/wound/artery/heart
 	name = "Aortic Dissection"
 	severity = WOUND_SEVERITY_FATAL
-	artery_type_override = /obj/item/organ/artery/chest
+	artery_type_override = ARTERY_HEART
 	artery_type_blacklist = list(ARTERY_CHEST)
 	viable_zones = list(BODY_ZONE_CHEST)
+	show_in_book = FALSE
+	crit_message = "A fountain of blood erupts from %VICTIM!"
 
 /datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, bclass)
 	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture) && !(bclass in ARTERY_HEART_BCLASSES))

@@ -11,9 +11,9 @@
 					return
 				playsound(src, 'sound/surgery/scalpel1.ogg', 100, TRUE, -1)
 				if(user == src)
-					user.visible_message("<span class='danger'>[user] starts to slit [user.p_their()] throat with [held_item].</span>")
+					user.visible_message(span_userdanger("[user] starts to slit [user.p_their()] throat with [held_item]!"))
 				else
-					user.visible_message("<span class='danger'>[user] starts to slit [src]'s throat with [held_item].</span>")
+					user.visible_message(span_userdanger("[user] starts to slit [src]'s throat with [held_item]!"))
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/slash)
@@ -684,7 +684,7 @@
 	if(blood && !CAN_HAVE_BLOOD(src) && !HAS_TRAIT(src, TRAIT_TOXINLOVER))
 		if(message)
 			visible_message("<span class='warning'>[src] dry heaves!</span>", \
-							"<span class='danger'>I try to throw up, but there's nothing in your stomach!</span>")
+							span_danger("I try to throw up, but there's nothing in your stomach!"))
 		if(stun)
 			Immobilize(200)
 		return 1
