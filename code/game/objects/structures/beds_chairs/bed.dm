@@ -37,11 +37,10 @@
 	if(sheet)
 		sheet_on = TRUE
 
-/obj/structure/bed/deconstruct(disassembled = TRUE)
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(buildstacktype)
-			new buildstacktype(loc,buildstackamount)
-	..()
+/obj/structure/bed/atom_deconstruct(disassembled)
+	. = ..()
+	if(buildstacktype)
+		new buildstacktype(loc, buildstackamount)
 
 /obj/structure/bed/attack_paw(mob/user)
 	return attack_hand(user)

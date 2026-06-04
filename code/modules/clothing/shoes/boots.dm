@@ -269,6 +269,12 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
+// variant with no armor, just drip.
+/obj/item/clothing/shoes/boots/armor/matthios/lord
+	name = "lordly boots"
+	desc = "Boots terribly befitting of that of a tyrannical lord. Has a fake metal veneer to strike fear into the hearts of peasants."
+	armor = null
+
 /obj/item/clothing/shoes/boots/armor/graggar
 	name = "vicious boots"
 	desc = "A menacing pair of plate boots, caked in blood and brain matter. Known for crushing skulls."

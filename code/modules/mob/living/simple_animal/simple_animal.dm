@@ -565,6 +565,11 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(HAS_TRAIT(src, TRAIT_POISONBITE))
 		butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
 		butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
+		botched_butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
+		botched_butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
+		perfect_butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
+		perfect_butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
+
 	for(var/path in butcher_results)
 		var/amount = max(1, round(butcher_results[path] * genetic_butcher_scale, 1))
 		if(!do_after(user, time_per_cut, target = src))

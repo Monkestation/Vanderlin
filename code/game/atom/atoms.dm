@@ -168,6 +168,7 @@
 	 */
 	var/germ_level = GERM_LEVEL_AMBIENT
 
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -447,7 +448,7 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+/atom/proc/get_examine_name(mob/user, use_article = TRUE)
 	if(use_article)
 		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
 	return "<b>[name]</b>"

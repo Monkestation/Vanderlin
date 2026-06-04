@@ -32,7 +32,7 @@
 
 /obj/structure/ice_zone/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	propagate_temp_change(-30, 8, 0.9, 2) // Cooling effect
 
 /obj/structure/ice_zone/Crossed(atom/movable/AM)

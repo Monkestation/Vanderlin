@@ -217,6 +217,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return 0
 	if(dam < min_damage)
 		return 0
+	if(deprecise_zone(zone_precise) != affected.body_zone)
+		return 0 // we are in a weird place
 	if(damage_dividend < min_damage_dividend)
 		if(!(brittle_bonus && HAS_TRAIT(affected, TRAIT_BRITTLE))) // brittle skips the dividend gate
 			return 0

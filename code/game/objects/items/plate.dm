@@ -46,7 +46,7 @@
 				cloth_check.reagents.remove_all(1)
 				dirty = FALSE
 				update_appearance(UPDATE_OVERLAYS)
-				AddComponent(/datum/component/particle_spewer/sparkle)
+				AddComponent(/datum/component/particle_spewer/sparkle/turf_only)
 				user.nobles_seen_servant_work()
 				fork_usages = 0
 				cleaned = TRUE

@@ -25,7 +25,7 @@
 	var/sit_bonus2 = 0
 	var/psicross_bonus = 0
 
-	for(var/obj/item/clothing/neck/current_item in H.get_equipped_items(TRUE))
+	for(var/obj/item/clothing/neck/current_item in H.get_equipped_items(INCLUDE_POCKETS))
 		if(istype(current_item, /obj/item/clothing/neck/psycross))
 			switch(current_item.type) // Worn Psicross Piety bonus. For fun.
 				if(/obj/item/clothing/neck/psycross)

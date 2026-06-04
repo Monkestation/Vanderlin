@@ -28,8 +28,8 @@
 
 	blade_dulling = DULLING_BASHCHOP
 
+	/// Dropped upon atom_deconstruct() with a +1/-1 random amount
 	var/debris = null
-	var/static_debris = null
 	var/destroy_sound = 'sound/foley/breaksound.ogg'
 	var/destroy_message = null
 

@@ -168,10 +168,10 @@
 
 /obj/structure/mirror/atom_break(damage_flag, silent, mapload)
 	. = ..()
-	if(!(flags_1 & NODECONSTRUCT_1))
+	if(!(obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION))
 		icon_state = "[icon_state]1"
 		if(!mapload)
-			new /obj/item/natural/glass/shard (get_turf(src))
+			new /obj/item/natural/glass/shard(loc)
 
 /obj/structure/mirror/atom_fix()
 	. = ..()

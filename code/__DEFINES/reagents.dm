@@ -38,13 +38,10 @@
 /// Used for direct snorting of reagents
 #define SNORT (1<<5)
 
-
-//defines passed through to the on_reagent_change proc
-#define DEL_REAGENT		1	// reagent deleted (fully cleared)
-#define ADD_REAGENT		2	// reagent added
-#define REM_REAGENT		3	// reagent removed (may still exist)
-#define CLEAR_REAGENTS	4	// all reagents were cleared
-#define REACT_REAGENTS	5	// a reaction occured
+///The smallest amount of volume allowed - prevents tiny numbers
+#define CHEMICAL_VOLUME_MINIMUM 0.001
+///The maximum temperature a reagent holder can attain
+#define CHEMICAL_MAXIMUM_TEMPERATURE 99999
 
 #define MIMEDRINK_SILENCE_DURATION 30  //ends up being 60 seconds given 1 tick every 2 seconds
 //used by chem masters and pill presses

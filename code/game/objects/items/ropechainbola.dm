@@ -15,6 +15,8 @@
 	possible_item_intents = list(/datum/intent/tie)
 	firefuel = 5 MINUTES
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	grid_height = 64
+	grid_width = 32
 	item_weight = 300 GRAMS
 	var/legcuff_multiplicative_slowdown = 3
 
@@ -221,9 +223,11 @@
 	density = FALSE
 	layer = ABOVE_MOB_LAYER
 	plane = GAME_PLANE_UPPER
-	static_debris = list(/obj/item/rope = 1)
 	breakoutextra = 10 MINUTES
 	buckleverb = "tie"
+
+/obj/structure/noose/atom_deconstruct(disassembled)
+	new /obj/item/rope(loc)
 
 /obj/structure/noose/gallows
 	name = "gallows"

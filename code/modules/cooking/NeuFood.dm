@@ -285,9 +285,7 @@
 		usages +=1
 	if(usages >= max_usages && !dirty)
 		dirty = TRUE
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			qdel(particle_spewer)
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle/turf_only))
 		update_appearance(UPDATE_OVERLAYS)
 	playsound(src, 'sound/misc/eat.ogg', rand(30, 60), TRUE)
 	user.visible_message(span_info("[user] eats from [src]."), \

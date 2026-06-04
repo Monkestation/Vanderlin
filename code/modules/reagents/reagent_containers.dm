@@ -74,10 +74,39 @@
 		soaking_item = null
 	return ..()
 
+/obj/item/reagent_containers/create_reagents(max_vol, flags)
+	. = ..()
+	RegisterSignal(reagents, COMSIG_REAGENTS_HOLDER_UPDATED, PROC_REF(on_reagent_change))
+
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()
 	if(has_variable_transfer_amount && length(possible_transfer_amounts) > 1)
 		. += span_notice("Alt Left-click or right-click in-hand to increase or decrease its transfer amount.")
+
+/obj/item/reagent_containers/weather_act_on(weather_trait, severity)
+	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, weather_act_cooldown))
+		return
+	if(!isturf(loc))
+		return
+	reagents.add_reagent(/datum/reagent/water, clamp(severity * 0.5, 1, 5))
+	COOLDOWN_START(src, weather_act_cooldown, 10 SECONDS)
+
+/obj/item/reagent_containers/ex_act()
+	if(reagents)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			R.on_ex_act()
+	if(QDELETED(src))
+		return
+	return ..()
+
+/obj/item/reagent_containers/fire_act(added, maxstacks)
+	reagents.expose_temperature(added)
+	return ..()
+
+/obj/item/reagent_containers/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum, do_splash = TRUE)
+	. = ..()
+	if(do_splash)
+		SplashReagents(hit_atom, TRUE)
 
 /**
  * Reagent container interactions clicked by
@@ -595,6 +624,63 @@
 	balloon_alert(user, "transferring [UNIT_FORM_STRING(amount_per_transfer_from_this)].")
 	mode_change_message(user)
 
+/obj/item/reagent_containers/pre_attack(atom/target, mob/living/user, list/modifiers)
+	if(HAS_TRAIT(target, TRAIT_DO_NOT_SPLASH))
+		return ..()
+	if(try_splash(user, target))
+		return TRUE
+
+	return ..()
+
+/// Tries to splash the target.
+/obj/item/reagent_containers/proc/try_splash(mob/user, atom/target)
+	if (!spillable)
+		return FALSE
+	if (!reagents?.total_volume)
+		return FALSE
+	if(user.used_intent.type != INTENT_SPLASH)
+		return FALSE
+	if(!user.Adjacent(target))
+		return FALSE
+
+	var/punctuation = ismob(target) ? "!" : "."
+	var/reagent_text
+
+	user.visible_message(
+		span_danger("[user] splashes the contents of [src] onto [target][punctuation]"),
+		span_danger("You splash the contents of [src] onto [target][punctuation]"),
+		ignored_mobs = target)
+	if(ismob(target) && user != target)
+		var/mob/target_mob = target
+		target_mob.show_message(
+			span_userdanger("[user] splash the contents of [src] onto you!"),
+			MSG_VISUAL,
+			span_userdanger("You feel drenched!"))
+
+	var/mutable_appearance/splash_animation = mutable_appearance('icons/effects/effects.dmi', "splash")
+	if(isturf(target))
+		splash_animation.icon_state = "splash_floor"
+	splash_animation.color = mix_color_from_reagents(reagents.reagent_list)
+	target.flick_overlay_view(splash_animation, 1 SECONDS)
+
+	playsound(target, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 25, FALSE)
+
+	for(var/datum/reagent/reagent as anything in reagents.reagent_list)
+		reagent_text += "[reagent] ([num2text(reagent.volume)]),"
+
+	var/mob/thrown_by = thrownby?.resolve()
+	if(isturf(target) && reagents.reagent_list.len && thrown_by)
+		log_combat(thrown_by, target, "splashed (thrown) [english_list(reagents.reagent_list)]")
+		message_admins("[ADMIN_LOOKUPFLW(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] at [ADMIN_VERBOSEJMP(target)].")
+
+	SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, target, reagents.reagent_list)
+	reagents.reaction(target, TOUCH)
+	chem_splash(get_turf(target), 2, list(reagents))
+	log_combat(user, target, "splashed", reagent_text)
+	reagents.clear_reagents()
+
+	return TRUE
+
 /obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user, silent = FALSE)
 	if(!iscarbon(eater))
 		return FALSE
@@ -619,13 +705,15 @@
 
 /obj/item/reagent_containers/proc/bartender_check(atom/target)
 	. = FALSE
-	if(target.CanPass(src, get_turf(src)) && thrownby && HAS_TRAIT(thrownby, TRAIT_BOOZE_SLIDER))
+	var/mob/thrown_by = thrownby?.resolve()
+	if(target.CanPass(src, get_dir(target, src)) && thrown_by && HAS_TRAIT(thrown_by, TRAIT_BOOZE_SLIDER))
 		. = TRUE
 
 /obj/item/reagent_containers/proc/SplashReagents(atom/target, thrown = FALSE)
 	if(!reagents || !reagents.total_volume || !spillable)
 		return
 
+	var/mob/thrown_by = thrownby?.resolve()
 	if(ismob(target) && target.reagents)
 		if(thrown)
 			reagents.total_volume *= rand(5,10) * 0.1 //Not all of it makes contact with the target
@@ -636,8 +724,8 @@
 		for(var/datum/reagent/A in reagents.reagent_list)
 			R += "[A.type]  ([num2text(A.volume)]),"
 
-		if(thrownby)
-			log_combat(thrownby, M, "splashed", R)
+		if(thrown_by)
+			log_combat(thrown_by, M, "splashed", R)
 		reagents.reaction(target, TOUCH)
 
 	else if(bartender_check(target) && thrown)
@@ -649,10 +737,10 @@
 			var/turf/target_turf = target
 			if(istype(target_turf, /turf/open))
 				target_turf.add_liquid_from_reagents(reagents, FALSE, reagents.chem_temp)
-			if(reagents.reagent_list.len && thrownby)
-				log_combat(thrownby, target, "splashed (thrown) [english_list(reagents.reagent_list)]", "in [AREACOORD(target)]")
-				log_game("[key_name(thrownby)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [AREACOORD(target)].")
-				message_admins("[ADMIN_LOOKUPFLW(thrownby)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [ADMIN_VERBOSEJMP(target)].")
+			if(reagents.reagent_list.len && thrown_by)
+				log_combat(thrown_by, target, "splashed (thrown) [english_list(reagents.reagent_list)]", "in [AREACOORD(target)]")
+				log_game("[key_name(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [AREACOORD(target)].")
+				message_admins("[ADMIN_LOOKUPFLW(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [ADMIN_VERBOSEJMP(target)].")
 		visible_message("<span class='notice'>[src] spills its contents all over [target].</span>")
 		reagents.reaction(target, TOUCH)
 		if(QDELETED(src))

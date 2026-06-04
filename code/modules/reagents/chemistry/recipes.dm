@@ -1,4 +1,5 @@
 /datum/chemical_reaction
+	abstract_type = /datum/chemical_reaction
 	var/name = null
 	var/id = null
 	var/list/results = new/list()

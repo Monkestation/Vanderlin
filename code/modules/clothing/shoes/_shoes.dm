@@ -134,7 +134,7 @@
 			AddComponent(/datum/component/particle_spewer/sparkle)
 			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
-			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 5 MINUTES, shine_more = TRUE)
 			to_chat(user, span_notice("I polish \the [name]."))
 
 		return ITEM_INTERACT_SUCCESS
@@ -171,7 +171,5 @@
 
 /obj/item/clothing/shoes/proc/lose_shine()
 	if(polished == 1 || polished == 2)
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			qdel(particle_spewer)
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle))
 		polished = 0

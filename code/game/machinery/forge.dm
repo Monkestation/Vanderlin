@@ -18,17 +18,13 @@
 		var/obj/item/weapon/tongs/tongs = tool
 		if(!tongs.held_item)
 			return ITEM_INTERACT_BLOCKING
-		var/time = world.time
-		tongs.hott = time
-		tongs.proxy_heat(150, 1500)
-		addtimer(CALLBACK(tongs, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), 5 SECONDS), 100)
-		tongs.update_appearance(UPDATE_ICON_STATE)
-		user.visible_message("<span class='info'>[user] heats the bar.</span>")
+		tongs.heat_held_item(source = "tongs", duration = 30 SECONDS, incoming = 150, max_heat = 1500)
+		user.visible_message(span_info("[user] heats [tongs.held_item] with [tongs]."))
 		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/storage/crucible))
 		if(!user.temporarilyRemoveItemFromInventory(tool))
 			return ITEM_INTERACT_BLOCKING
-		user.visible_message("<span class='info'>[user] places the [tool] onto [src].</span>")
-		tool.forceMove(get_turf(src))
+		user.visible_message("<span class='info'>[user] places [attacking_item] onto [src].</span>")
+		user.transferItemToLoc(attacking_item, get_turf(src), silent = TRUE)
 		return ITEM_INTERACT_SUCCESS

@@ -40,6 +40,7 @@
 	traits = list(
 		TRAIT_STEELHEARTED
 	)
+	book_type = /obj/item/recipe_book/agriculture
 
 /datum/outfit/beastmaster
 	name = JOB_BUTCHER

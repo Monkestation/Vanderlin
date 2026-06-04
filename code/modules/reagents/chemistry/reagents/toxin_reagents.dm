@@ -33,9 +33,9 @@
 	color = "#8228A0"
 	toxpwr = 3
 
-/datum/reagent/toxin/plasma/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume / 5)
+/datum/reagent/toxin/plasma/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
+	if((methods & TOUCH) || (methods & VAPOR))
+		exposed_mob.adjust_fire_stacks(reac_volume / 5)
 		return
 	..()
 
@@ -157,20 +157,21 @@
 	taste_description = "acid"
 	self_consuming = TRUE
 
-/datum/reagent/toxin/acid/reaction_mob(mob/living/carbon/C, method=TOUCH, reac_volume)
-	if(!istype(C))
+/datum/reagent/toxin/acid/expose_mob(mob/living/carbon/exposed_mob, methods = TOUCH, reac_volume)
+	. = ..()
+	if(!istype(exposed_mob))
 		return
 	reac_volume = round(reac_volume,0.1)
-	if(method & INGEST)
-		C.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
+	if(methods & INGEST)
+		exposed_mob.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
-	if(method & INJECT)
-		C.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
+	if(methods & INJECT)
+		exposed_mob.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
-	C.acid_act(acidpwr, reac_volume)
+	exposed_mob.acid_act(acidpwr, reac_volume)
 
-	if(method & TOUCH)
-		C.try_skin_burn(reac_volume)
+	if(methods & TOUCH)
+		exposed_mob.try_skin_burn(reac_volume)
 
 /datum/reagent/toxin/acid/reaction_obj(obj/O, reac_volume)
 	if(ismob(O.loc)) //handled in human acid_act()
@@ -293,10 +294,10 @@
 	harmful = TRUE
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 
-/datum/reagent/poison/heatcramp_oil/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/heatcramp_oil/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH))
-		M.set_jitter(10 SECONDS)
+	if(methods & TOUCH)
+		exposed_mob.set_jitter(10 SECONDS)
 
 /datum/reagent/poison/heatcramp_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjust_jitter(4 SECONDS * efficiency)
@@ -314,14 +315,14 @@
 	scent_description = "dry fungal spores"
 	harmful = TRUE
 
-/datum/reagent/poison/blinding_spore/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/blinding_spore/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH) || (method & VAPOR))
+	if(methods & (TOUCH|VAPOR))
 		if(reac_volume >= 3)
-			M.adjust_eye_blur(5)
-			M.adjust_dizzy(15 SECONDS)
+			exposed_mob.adjust_eye_blur(5)
+			exposed_mob.adjust_dizzy(15 SECONDS)
 			if(show_message)
-				M.visible_message(span_danger("[M] staggers, clutching at their eyes!"), span_userdanger("Your eyes burn and your vision whites out!"))
+				exposed_mob.visible_message(span_danger("[exposed_mob] staggers, clutching at their eyes!"), span_userdanger("Your eyes burn and your vision whites out!"))
 
 /datum/reagent/poison/blinding_spore/on_mob_life(mob/living/carbon/M, efficiency)
 	M.set_eye_blur_if_lower(4 * efficiency)
@@ -365,11 +366,11 @@
 	scent_description = "acid and rust"
 	harmful = TRUE
 
-/datum/reagent/poison/ironblight/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/ironblight/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjustBruteLoss(reac_volume * 0.5, 0, damage_type = BCLASS_BLUNT)
-		for(var/obj/item/clothing/clothes in get_all_worn_items(M))
+	if(methods & (TOUCH|VAPOR))
+		exposed_mob.adjustBruteLoss(reac_volume * 0.5, 0, damage_type = BCLASS_BLUNT)
+		for(var/obj/item/clothing/clothes in get_all_worn_items(exposed_mob))
 			if(!clothes.smeltresult && !clothes.melting_material)
 				continue
 			if(!ispath(clothes.smeltresult, /obj/item/ingot))
@@ -415,13 +416,13 @@
 	harmful = TRUE
 	boiling_point = T0C + 120
 
-/datum/reagent/poison/mirrorwaste/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/mirrorwaste/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if(M.mob_biotypes & MOB_UNDEAD)
-		M.adjustBruteLoss(reac_volume * 1.5, 0, damage_type = BCLASS_LASHING)
-		M.adjustFireLoss(reac_volume * 1.5, 0)
+	if(exposed_mob.mob_biotypes & MOB_UNDEAD)
+		exposed_mob.adjustBruteLoss(reac_volume * 1.5, 0, damage_type = BCLASS_LASHING)
+		exposed_mob.adjustFireLoss(reac_volume * 1.5, 0)
 		if(show_message)
-			M.visible_message(span_danger("[M] writhes as the silvery liquid disrupts their form!"), span_userdanger("The liquid tears at your very existence!"))
+			exposed_mob.visible_message(span_danger("[exposed_mob] writhes as the silvery liquid disrupts their form!"), span_userdanger("The liquid tears at your very existence!"))
 
 /datum/reagent/poison/mirrorwaste/on_mob_life(mob/living/carbon/M, efficiency)
 	if(M.mob_biotypes & MOB_UNDEAD)
@@ -442,10 +443,10 @@
 	harmful = TRUE
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
 
-/datum/reagent/poison/hexblood_poison/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/hexblood_poison/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH) || (method & VAPOR))
-		var/mob/living/carbon/carbon = M
+	if(methods & (TOUCH|VAPOR))
+		var/mob/living/carbon/carbon = exposed_mob
 		if(istype(carbon))
 			if(!length(carbon.all_injuries))
 				return
@@ -453,7 +454,7 @@
 				injury.open_injury(reac_volume * 0.25)
 				injury.adjust_germ_level(reac_volume)
 		else
-			M.adjustBruteLoss(reac_volume * 3, 0)
+			exposed_mob.adjustBruteLoss(reac_volume * 3, 0)
 
 /datum/reagent/poison/rotwater
 	name = "Rotwater"
@@ -475,10 +476,10 @@
 	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 	REMOVE_TRAIT(L, TRAIT_IMMUNITY_CRIPPLED, "[type]")
 
-/datum/reagent/poison/rotwater/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/rotwater/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH) || (method & VAPOR))
-		var/mob/living/carbon/carbon = M
+	if(methods & (TOUCH|VAPOR))
+		var/mob/living/carbon/carbon = exposed_mob
 		if(istype(carbon))
 			if(!length(carbon.all_injuries))
 				return
@@ -524,11 +525,11 @@
 	scent_description = "burning hair and char"
 	harmful = TRUE
 
-/datum/reagent/poison/ashfall_dust/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/ashfall_dust/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume * 0.5)
-		M.adjustFireLoss(reac_volume, 0)
+	if(methods & (TOUCH|VAPOR))
+		exposed_mob.adjust_fire_stacks(reac_volume * 0.5)
+		exposed_mob.adjustFireLoss(reac_volume, 0)
 
 /datum/reagent/poison/ashfall_dust/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjustFireLoss(2 * REM * efficiency, 0)
@@ -543,12 +544,12 @@
 	scent_description = "acidic rot"
 	harmful = TRUE
 
-/datum/reagent/poison/blistergall/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/poison/blistergall/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjustFireLoss(reac_volume * 1.5, 0)
+	if(methods & (TOUCH|VAPOR))
+		exposed_mob.adjustFireLoss(reac_volume * 1.5, 0)
 		if(show_message)
-			M.visible_message(span_danger("[M]'s skin erupts in blistering welts!"), span_userdanger("Your skin erupts in boiling blisters!"))
+			exposed_mob.visible_message(span_danger("[exposed_mob]'s skin erupts in blistering welts!"), span_userdanger("Your skin erupts in boiling blisters!"))
 
 /datum/reagent/poison/blistergall/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjustFireLoss(3 * REM * efficiency, 0)

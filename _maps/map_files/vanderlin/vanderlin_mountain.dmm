@@ -1273,17 +1273,6 @@
 /obj/item/chair/stool,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"afY" = (
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/natural/poo{
-	pixel_y = 4
-	},
-/obj/item/natural/poo{
-	pixel_y = -7;
-	pixel_x = 9
-	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "agb" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/naturalstone,
@@ -2536,13 +2525,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"alZ" = (
-/obj/effect/landmark/hammer/dev_text{
-	name = "Cool dragon fight"
-	},
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/max,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "ama" = (
 /obj/structure/gearbox,
 /turf/open/floor/metal/alt,
@@ -3497,12 +3479,6 @@
 "aqV" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/mountains/anvil/keep)
-"aqW" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aqX" = (
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/carpet/lord/left,
@@ -4057,14 +4033,6 @@
 /area/under/mountains/anvil/lower)
 "atN" = (
 /obj/structure/bookcase/random/apocrypha,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
-"atO" = (
-/obj/structure/closet/dirthole/closed/loot{
-	dir = 1;
-	pixel_y = 4
-	},
-/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "atP" = (
@@ -5504,17 +5472,6 @@
 	dir = 8
 	},
 /area/outdoors/mountains/anvil/snowyforest)
-"azW" = (
-/obj/structure/nocdevice{
-	pixel_y = 11;
-	pixel_x = -7;
-	name = " defunct Magical Artillery device"
-	},
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/obj/effect/decal/cleanable/roguerune/arcyne/wallgreater,
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/adv,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "azX" = (
 /turf/open/floor/cobblerock,
 /area/under/cave/spider)
@@ -6322,11 +6279,6 @@
 /obj/item/ore/coal,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
-"aDz" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/leylines,
-/obj/item/weapon/hammer/sledgehammer/war/malum,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "aDA" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8;
@@ -7036,10 +6988,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aHj" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "aHk" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
@@ -7520,12 +7468,6 @@
 	},
 /turf/open/water/blood,
 /area/indoors/mountains/anvil/keep)
-"aJG" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/effect/spawner/map_spawner/loot/coin/med,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aJI" = (
 /obj/structure/fluff/walldeco/gear{
 	pixel_x = -5;
@@ -7795,12 +7737,6 @@
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
-"aKT" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/empowerment{
-	pixel_y = -47
-	},
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "aKU" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/snow,
@@ -7980,12 +7916,6 @@
 /obj/structure/chair/stool,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
-"aLP" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/effect/spawner/map_spawner/loot/coin/med,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aLQ" = (
 /obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8104,13 +8034,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
-"aMp" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/adv,
-/obj/effect/decal/cleanable/roguerune/arcyne/attunement,
-/obj/item/riddleofsteel,
-/mob/living/simple_animal/hostile/retaliate/voiddragon/red,
-/turf/open/floor/plasteel/maniac,
-/area/indoors/mountains/anvil/keep)
 "aMr" = (
 /obj/item/reagent_containers/food/snacks/meat/strange,
 /obj/item/reagent_containers/food/snacks/rotten/sausage,
@@ -8608,11 +8531,6 @@
 /obj/item/plate/gold,
 /turf/open/floor/tile/masonic,
 /area/indoors/mountains/anvil/upperkeep)
-"aOL" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aON" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -8998,12 +8916,6 @@
 /obj/structure/chair/wood/alt/chair_noble,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/mountains/anvil/keep)
-"aQI" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/clothing/pants/loincloth,
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/mountains/anvil/upperkeep)
 "aQK" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow,
@@ -9846,14 +9758,6 @@
 /obj/structure/door/iron/bars,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"aUI" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/clothing/pants/loincloth,
-/obj/effect/decal/cleanable/debris/stone,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/mountains/anvil/upperkeep)
 "aUJ" = (
 /obj/item/chair/stool,
 /turf/open/floor/carpet/royalblack,
@@ -10237,12 +10141,6 @@
 /obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
-"aWH" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/clothing/pants/loincloth,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
 "aWI" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/mountains/anvil/keep)
@@ -10622,11 +10520,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"aYh" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aYi" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -10759,13 +10652,6 @@
 /obj/item/organ/eyes,
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
-"aYR" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/clothing/pants/loincloth,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/mountains/anvil/upperkeep)
 "aYT" = (
 /obj/item/organ/heart,
 /obj/item/organ/heart,
@@ -11112,10 +10998,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/upper)
-"bKV" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/enchantment,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
 "bRz" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/tile/masonic{
@@ -11289,11 +11171,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"cGo" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/peak)
 "cGM" = (
 /obj/item/weapon/shovel,
 /obj/effect/decal/cleanable/debris/stone,
@@ -11377,11 +11254,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
-"cWU" = (
-/obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/peak)
 "cXi" = (
 /turf/open/floor/plasteel/maniac{
 	dir = 5
@@ -11434,6 +11306,13 @@
 /obj/item/gun/ballistic/bow/cross,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
+"djc" = (
+/obj/effect/landmark/hammer/dev_text{
+	name = "Cool dragon fight"
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/max,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "djF" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -11478,6 +11357,13 @@
 /obj/item/ingot/steel_slag,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/outdoors/mountains/anvil/peak)
+"dwN" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/knowledge,
+/turf/open/floor/cobblerock,
+/area/indoors/mountains/anvil/upperkeep)
 "dyp" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/dirt,
@@ -11528,10 +11414,6 @@
 	},
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
-"dCQ" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/peak)
 "dDL" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -11732,6 +11614,12 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
+"esO" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/leylines,
+/obj/machinery/essence/enchantment_altar,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/upperkeep)
 "etu" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 1
@@ -11787,6 +11675,12 @@
 /obj/structure/table/wood/counter/end,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"eMM" = (
+/obj/structure/closet/dirthole/closed,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "eNR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/lootable_structure/fish_barrel,
@@ -11814,6 +11708,14 @@
 /obj/structure/chair/bench/throne/stone,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
+/area/indoors/mountains/anvil/upperkeep)
+"ffT" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/clothing/pants/loincloth,
+/obj/effect/decal/cleanable/debris/stone,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "flo" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
@@ -11885,13 +11787,6 @@
 	pixel_y = 11
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
-"fQl" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/roguerune/arcyne/knowledge,
-/turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
 "fRO" = (
 /obj/structure/table/stone_small,
@@ -11966,6 +11861,12 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
+"gsu" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/clothing/pants/loincloth,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/mountains/anvil/upperkeep)
 "gtB" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
@@ -12057,10 +11958,6 @@
 	},
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"gPn" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/peak)
 "gSH" = (
 /turf/open/water/river,
 /area/indoors/mountains/anvil/upperkeep)
@@ -12219,6 +12116,11 @@
 "hBu" = (
 /turf/closed/mineral/random/cold/high,
 /area/outdoors/mountains/anvil/peak)
+"hBX" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/mountains/anvil/peak)
 "hGQ" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -12354,6 +12256,10 @@
 /obj/item/essence_vial,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"imG" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "imL" = (
 /obj/structure/bridge{
 	dir = 4
@@ -12369,6 +12275,12 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/upper)
+"itk" = (
+/obj/structure/closet/dirthole/closed,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "iwn" = (
 /obj/structure/carpet/cyan,
 /obj/structure/chair/stool/bar,
@@ -12799,12 +12711,6 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"lkK" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/leylines,
-/obj/machinery/essence/enchantment_altar,
-/obj/effect/decal/cleanable/debris/stone,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
 "lkR" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -12820,6 +12726,24 @@
 /obj/structure/water_pipe,
 /turf/open/openspace,
 /area/indoors/town/clocktower)
+"ltv" = (
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/natural/poo{
+	pixel_y = 4
+	},
+/obj/item/natural/poo{
+	pixel_y = -7;
+	pixel_x = 9
+	},
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/keep)
+"lwi" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/spawner/map_spawner/loot/coin/med,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "lwP" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 8
@@ -12862,6 +12786,12 @@
 	},
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
+"lHc" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/clothing/pants/loincloth,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/upperkeep)
 "lIA" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/peak)
@@ -13154,6 +13084,13 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
+"nHN" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_mountain";
+	aportalid = "banditexit_mountain"
+	},
+/turf/open/floor/cobble/snow,
+/area/outdoors/mountains/anvil/snowyforest)
 "nJN" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/cobblerock/alt,
@@ -13185,6 +13122,13 @@
 /obj/item/reagent_containers/powder/blastpowder,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"nYl" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/spawner/map_spawner/loot/coin/med,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "nYY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -13259,6 +13203,12 @@
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/upper)
+"otw" = (
+/obj/structure/closet/dirthole/closed,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "ouq" = (
 /turf/open/floor/carpet/lord/corrner_inner{
 	dir = 4
@@ -13660,6 +13610,13 @@
 /mob/living/simple_animal/hostile/orc/ranged,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"qRJ" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "qWN" = (
 /obj/machinery/anvil,
 /obj/effect/decal/cleanable/debris/stone,
@@ -13702,6 +13659,11 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/indoors/mountains/anvil/upperkeep)
+"rfy" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/leylines,
+/obj/item/weapon/hammer/sledgehammer/war/malum,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "rfQ" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -13714,6 +13676,13 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"rjA" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/adv,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/attunement,
+/obj/item/riddleofsteel,
+/mob/living/simple_animal/hostile/retaliate/voiddragon/red,
+/turf/open/floor/plasteel/maniac,
+/area/indoors/mountains/anvil/keep)
 "rlV" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 4
@@ -13757,6 +13726,11 @@
 /obj/item/candle/gcandelabra/lit,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
+"rCI" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/mountains/anvil/peak)
 "rDI" = (
 /obj/structure/table/wood/counter/end{
 	dir = 8
@@ -13780,11 +13754,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
-"rGB" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/peak)
 "rHr" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -13797,6 +13766,17 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"rOq" = (
+/obj/structure/nocdevice{
+	pixel_y = 11;
+	pixel_x = -7;
+	name = " defunct Magical Artillery device"
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/wallgreater,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/adv,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/keep)
 "rRw" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
@@ -13805,6 +13785,12 @@
 /obj/structure/fluff/walldeco/wallshield,
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/mountains/anvil/upperkeep)
+"rUq" = (
+/obj/structure/closet/dirthole/closed,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
+/turf/open/floor/dirt,
+/area/indoors/mountains/anvil/keep)
 "rVz" = (
 /obj/item/statue/bronze/comb,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -13829,6 +13815,13 @@
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/snow,
 /area/under/mountains/anvil/upper)
+"sid" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/clothing/pants/loincloth,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/mountains/anvil/upperkeep)
 "sjb" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -14155,6 +14148,20 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
+"tQZ" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_mountain";
+	aportalid = "banditexit_mountain"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/snowyforest)
+"tRr" = (
+/obj/structure/fluff/traveltile/bandit{
+	aportalgoesto = "banditin_mountain";
+	aportalid = "banditexit_mountain"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/mountains/anvil/snowyforest)
 "tYn" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/tile/masonic{
@@ -14249,6 +14256,12 @@
 	layer = 3.0
 	},
 /turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
+"uum" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/empowerment{
+	pixel_y = -47
+	},
+/turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "uuP" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
@@ -14861,6 +14874,10 @@
 	},
 /turf/open/water/bath,
 /area/indoors/town/clocktower)
+"yeI" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/upperkeep)
 "yeU" = (
 /obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/debris/stone,
@@ -35132,7 +35149,7 @@ aeg
 aeg
 aEY
 aJv
-aDz
+rfy
 aRn
 aJv
 aJv
@@ -35140,14 +35157,14 @@ aEN
 aJv
 aJv
 aJv
-alZ
+djc
 aJv
 aJv
 aJv
 aEN
 aJv
 aJv
-aHj
+imG
 aJv
 aJv
 anp
@@ -36957,7 +36974,7 @@ aeg
 aEY
 aJv
 aJv
-aKT
+uum
 aki
 aJv
 aJv
@@ -67818,10 +67835,10 @@ adi
 adi
 adi
 adi
-adi
-adi
+apy
 acM
-aZR
+acM
+aig
 "}
 (63,1,2) = {"
 aqx
@@ -68021,9 +68038,9 @@ adi
 adi
 adi
 adi
-adi
-adi
-aZR
+auy
+apy
+tRr
 "}
 (64,1,2) = {"
 aqx
@@ -68224,8 +68241,8 @@ adi
 adi
 adi
 adi
-adi
-aZR
+auy
+nHN
 "}
 (65,1,2) = {"
 aqx
@@ -68426,8 +68443,8 @@ aFz
 aFz
 aFz
 adi
-adi
-aZR
+acM
+tQZ
 "}
 (66,1,2) = {"
 aqx
@@ -70733,7 +70750,7 @@ afn
 afn
 afn
 afn
-afY
+ltv
 afn
 adn
 aWI
@@ -75541,7 +75558,7 @@ afn
 afn
 afn
 afn
-azW
+rOq
 afn
 afn
 afn
@@ -79616,7 +79633,7 @@ ayN
 aZG
 aHg
 aZG
-aMp
+rjA
 aZG
 aHg
 aZG
@@ -82200,13 +82217,13 @@ afn
 afn
 afn
 aWI
-aOL
+otw
 aWI
-aJG
+lwi
 aWI
-aOL
+otw
 aWI
-aOL
+itk
 aWI
 aWI
 aWI
@@ -83408,17 +83425,17 @@ acL
 aWI
 aWI
 aWI
-atO
+rUq
 aWI
-atO
+eMM
 aWI
-aqW
+qRJ
 aWI
-aLP
+nYl
 aWI
-aYh
+rUq
 aWI
-aYh
+rUq
 aWI
 aWI
 afn
@@ -109294,15 +109311,15 @@ akR
 aRk
 aMS
 aEZ
-aQI
+gsu
 aRk
 aEQ
 aBr
-aYR
+sid
 aRk
 aMS
 aUt
-aWH
+lHc
 aRk
 aQP
 aSD
@@ -109710,7 +109727,7 @@ aiv
 aRk
 auk
 aXI
-aUI
+ffT
 aRk
 aVq
 awo
@@ -110518,7 +110535,7 @@ akR
 aRk
 akm
 aEf
-aYR
+sid
 aRk
 aet
 axC
@@ -111326,7 +111343,7 @@ akR
 aRk
 aiv
 aIv
-aQI
+gsu
 aRk
 aUt
 ans
@@ -112134,7 +112151,7 @@ akR
 aRk
 aiv
 aEf
-aYR
+sid
 aRk
 aby
 aUt
@@ -112713,7 +112730,7 @@ aqd
 adK
 tpH
 ilR
-bKV
+yeI
 aet
 aOh
 aTj
@@ -112878,7 +112895,7 @@ wAI
 wAI
 vqN
 vqN
-dCQ
+hBX
 vqN
 dyp
 aRk
@@ -113117,7 +113134,7 @@ aet
 aet
 tpH
 awo
-lkK
+esO
 aHs
 aet
 aUe
@@ -113283,7 +113300,7 @@ wAI
 vqN
 sKc
 lDl
-cGo
+hBX
 lDl
 lDl
 vqN
@@ -113488,7 +113505,7 @@ lDl
 vqN
 lDl
 igq
-rGB
+rCI
 lDl
 igq
 lDl
@@ -113723,7 +113740,7 @@ aby
 aet
 ojO
 aPe
-fQl
+dwN
 aXm
 ann
 aPe
@@ -114091,7 +114108,7 @@ wAI
 wAI
 wAI
 vqN
-cWU
+vSY
 lDl
 vqN
 vqN
@@ -114499,7 +114516,7 @@ vqN
 lDl
 lDl
 vqN
-gPn
+rCI
 lDl
 vqN
 waD
@@ -117726,7 +117743,7 @@ wAI
 wAI
 lDl
 lDl
-cGo
+rCI
 vqN
 vqN
 vqN
@@ -117931,7 +117948,7 @@ lDl
 vqN
 vqN
 vqN
-cGo
+rCI
 lDl
 vqN
 lDl
@@ -118735,7 +118752,7 @@ lDl
 vqN
 vqN
 vqN
-gPn
+hBX
 lDl
 lDl
 dyp

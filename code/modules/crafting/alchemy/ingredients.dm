@@ -93,11 +93,8 @@
 		/datum/attunement/life = -0.1,
 		/datum/attunement/light = -0.1,
 	)
-
-/obj/item/alch/bone/Initialize(mapload)
-	. = ..()
-	create_reagents(20)
-	reagents.add_reagent(/datum/reagent/consumable/nutriment/bone_marrow, 20)
+	grind_results = list(/datum/reagent/consumable/nutriment/bone_marrow = 20)
+	indexed = TRUE
 
 /obj/item/alch/horn
 	name = "troll horn"
@@ -220,6 +217,12 @@
 /obj/item/alch/herb/lavender // Not obtainable currently, will correct later
 	name = "lavender"
 	icon_state = "lavender"
+
+/obj/item/alch/herb/necralily
+	name = "necran lily"
+	desc = "The un-initiated are forbidden from picking this holy flower, which is said to watch over the graves near where it blooms. A sign that the deceased are now in a better place..."
+	dropshrink = 0.75
+	icon_state = "necralily"
 
 /obj/item/alch/thaumicdust
 	name = "thaumic iron dust"

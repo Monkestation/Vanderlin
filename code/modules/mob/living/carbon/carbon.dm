@@ -80,10 +80,10 @@
 	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //13% damage reduction per level
 	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
 	damage *= skill_modifier
-	if(damage && apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, BLUNT), damage_type = BCLASS_BLUNT))
+	if(damage && apply_damage(damage, BRUTE, affecting.body_zone, run_armor_check(affecting, BLUNT), damage_type = BCLASS_BLUNT))
 		if(levels > 1)
 			//absurd damage to guarantee a crit
-			affecting.try_crit(BCLASS_TWIST, 300)
+			affecting.try_crit(BCLASS_TWIST, 300, null, affecting.body_zone)
 
 	if(chat_message)
 		to_chat(src, chat_message)
@@ -632,7 +632,7 @@
 			if(T)
 				T.add_vomit_floor(src, VOMIT_TOXIC)//toxic barf looks different
 		T = get_step(T, dir)
-		if (is_blocked_turf(T))
+		if (T.is_blocked_turf())
 			break
 	return TRUE
 

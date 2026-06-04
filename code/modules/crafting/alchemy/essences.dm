@@ -28,7 +28,7 @@
 	if(extract_amount >= max_essence)
 		extract_amount = 1
 	else
-		if(extract_amount == 1)
+		if(extract_amount == 1 && max_essence > 10)
 			extract_amount = 0
 		extract_amount += increments
 

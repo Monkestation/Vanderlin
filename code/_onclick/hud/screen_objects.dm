@@ -160,11 +160,15 @@
 /atom/movable/screen/craft/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(modifiers["middle"])
-		if(QDELETED(book))
-			book = new(null)
 		var/mob/M = usr
 		for(var/datum/recipe as anything in M.mind?.learned_recipes)
 			book.types |= recipe.type
+		var/datum/job/job = SSjob.GetJob(M.job)
+		if(job && !book)
+			book = new job.book_type(null)
+		else if(QDELETED(book))
+			book = new(null)
+
 		book.ui_interact(usr)
 		return
 	if(world.time < lastclick + 3 SECONDS)

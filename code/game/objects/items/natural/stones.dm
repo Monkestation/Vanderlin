@@ -280,6 +280,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 
 	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
 	var/item = user.get_inactive_held_item()
+
 	if(!istype(user.used_intent, /datum/intent/chisel) || !is_type_in_typecache(item, offhand_types))
 		return NONE
 
@@ -393,18 +394,22 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(atom_integrity <= 0)
 		record_featured_stat(FEATURED_STATS_MINERS, user)
 
-/obj/item/natural/rock/deconstruct(disassembled = FALSE)
-	if(!disassembled)
-		if(mineralType && mineralAmt)
-			if(has_world_trait(/datum/world_trait/malum_diligence))
-				mineralAmt += is_ascendant(MALUM) ? rand (2,3) : rand(1,2)
-			new mineralType(src.loc, mineralAmt)
-		for(var/i in 1 to rand(1,3))
-			var/obj/item/S = new /obj/item/natural/stone(src.loc)
-			S.pixel_x = S.base_pixel_x + rand(25,-25)
-			S.pixel_y = S.base_pixel_y + rand(25,-25)
-		record_round_statistic(STATS_ROCKS_MINED)
-	qdel(src)
+/obj/item/natural/rock/handle_deconstruct(disassembled)
+	. = ..()
+	record_round_statistic(STATS_ROCKS_MINED)
+
+/obj/item/natural/rock/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
+	if(mineralType && mineralAmt)
+		if(has_world_trait(/datum/world_trait/malum_diligence))
+			mineralAmt += is_ascendant(MALUM) ? rand (2,3) : rand(1,2)
+		new mineralType(drop_loc, mineralAmt)
+	if(disassembled)
+		return
+	for(var/i in 1 to rand(1,3))
+		var/obj/item/S = new /obj/item/natural/stone(drop_loc)
+		S.pixel_x = S.base_pixel_x + rand(25,-25)
+		S.pixel_y = S.base_pixel_y + rand(25,-25)
 
 /obj/item/natural/rock/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
@@ -429,7 +434,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/work_time = (10 SECONDS - (skill_level * 5))
 	if(istype(tool, /obj/item/weapon/chisel))
 		var/obj/item/weapon/chisel/chisel = tool
-		work_time *= chisel.time_multiplier
+		work_time *= chisel.toolspeed
 
 	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 	user.visible_message("<span class='info'>[user] begins chiseling a part of [src] off.</span>")
@@ -466,6 +471,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			var/turf/front = get_step(user,user.dir)
 			S.set_up(1, 1, front)
 			S.start()
+
 		user.changeNext_move(CLICK_CD_FAST)
 		return ITEM_INTERACT_SUCCESS
 

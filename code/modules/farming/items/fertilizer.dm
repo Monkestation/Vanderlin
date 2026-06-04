@@ -83,3 +83,10 @@
 				return
 	else
 		return ..()
+
+/obj/item/fertilizer/ash/large
+	name = "large pile of ashes"
+	icon_state = "big_ash"
+	w_class = WEIGHT_CLASS_NORMAL
+	phosphorus_content = 40
+	potassium_content = 100

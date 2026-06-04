@@ -55,6 +55,7 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 	attribute_sheet = /datum/attribute_holder/sheet/job/fisher
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/fisher/old
+	book_type = /obj/item/recipe_book/survival
 
 /datum/outfit/fisher
 	name = JOB_FISHER

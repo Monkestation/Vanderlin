@@ -187,9 +187,7 @@
 
 /obj/item/clothing/ring/active/nomag/demagicify()
 	. = ..()
-	var/datum/component/magcom = GetComponent(/datum/component/anti_magic)
-	if(magcom)
-		magcom.RemoveComponent()
+	qdel(GetComponent(/datum/component/anti_magic))
 
 // ................... Ring of Protection ....................... (rare treasure, not for purchase)
 /obj/item/clothing/ring/gold/protection
@@ -335,6 +333,7 @@
 
 /obj/item/clothing/ring/signet/silver
 	name = "silver signet ring"
+	examine_name = "silver ring"
 	icon_state = "signet_silver"
 	desc = "A ring of blessed silver, bearing the Archbishop's symbol. By dipping it in melted redtallow, it can seal writs of religious importance."
 	sellprice = 90

@@ -650,7 +650,7 @@
 	timer = 3 MINUTES
 
 /datum/stress_event/slipped
-	desc = "<span class='warning'>I slipped. I should be more careful next timer...</span>\n"
+	desc = "<span class='warning'>I slipped. I should be more careful next time...</span>\n"
 	stress_change = 2
 	timer = 3 MINUTES
 
@@ -828,6 +828,11 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I've been covered in shite! Disgusting!")
+
+/datum/stress_event/bad_grave
+	stress_change = 1
+	desc = span_red("Can the dead find true rest within such a poorly made grave..?")
+	timer = 5 MINUTES
 
 /datum/stress_event/malaguero
 	timer = 1 MINUTES

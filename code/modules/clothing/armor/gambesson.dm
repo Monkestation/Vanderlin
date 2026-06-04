@@ -179,6 +179,7 @@
 
 /obj/item/clothing/armor/gambeson/heavy/inq
 	name = "inquisitorial leather tunic"
+	examine_name = "leather tunic"
 	desc = "The finest leather tunic. Made to ENDURE, Made to Inquire, come heretic or hellfire."
 	icon_state = "leathertunic"
 	color = null
