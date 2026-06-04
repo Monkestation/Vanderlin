@@ -1211,6 +1211,26 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(!silent)
 		to_chat(user, "<font color='red'>Culture reset.</font>")
 
+/datum/preferences/proc/get_available_accent_choices()
+	var/list/available = list()
+	available["Species Accent"] = ACCENT_DEFAULT
+	
+	var/list/species_accents
+	if(pref_species)
+		species_accents = pref_species.multiple_accents
+		
+	if(istype(species_accents))
+		var/list/species_accent_list = species_accents.Copy()
+		for(var/accent_name in species_accent_list)
+			available[accent_name] = species_accent_list[accent_name]
+			
+	if(culture)
+		var/culture_accent = culture::accent
+		if(culture_accent && !available[culture_accent])
+			available[culture_accent] = culture_accent
+		
+	return available
+
 /datum/preferences/proc/reset_last_class(mob/user)
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
@@ -1896,23 +1916,26 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						skin_tone = listy[new_s_tone]
 
 				if("selected_accent")
-					if(length(pref_species.multiple_accents))
+					var/list/available_accents = get_available_accent_choices()
+					if(length(available_accents) > 1)
 						change_accent = TRUE
 					else
 						change_accent = FALSE
+						
 					if(!donator && !change_accent)
-						to_chat(user, "Sorry, this option is Donator-exclusive or unavailable to your race.")
+						to_chat(user, "Sorry, this option is Donator-exclusive or unavailable to your race and culture.")
 						selected_accent = ACCENT_DEFAULT
 						return
+						
 					var/accent
 					if(donator)
 						accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", GLOB.accent_list, selected_accent)
 						if(accent)
 							selected_accent = accent
 					else if(change_accent)
-						accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", pref_species.multiple_accents, selected_accent)
+						accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", available_accents, selected_accent)
 						if(accent)
-							selected_accent = pref_species.multiple_accents[accent]
+							selected_accent = available_accents[accent]
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference", ooccolor) as color|null
 					if(new_ooccolor)
@@ -2356,16 +2379,28 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		if(is_misc_banned(parent.ckey, BAN_MISC_PUNISHMENT_CURSE))
 			ADD_TRAIT(character, TRAIT_PUNISHMENT_CURSE, TRAIT_BAN_PUNISHMENT)
 
-	if(pref_species.multiple_accents && length(pref_species.multiple_accents))
+	var/list/available_accents = get_available_accent_choices()
+	if(length(available_accents) > 1)
 		change_accent = TRUE
 	else
 		change_accent = FALSE
 
 	if(donator)
 		character.accent = selected_accent
-	if(change_accent && !donator)
-		character.accent = selected_accent
+	else if(change_accent)
+		var/valid_accent = FALSE
+		for(var/accent_key in available_accents)
+			if(available_accents[accent_key] == selected_accent)
+				valid_accent = TRUE
+				break
+				
+		if(valid_accent)
+			character.accent = selected_accent
+		else
+			character.accent = ACCENT_DEFAULT
 		change_accent = FALSE
+	else
+		character.accent = ACCENT_DEFAULT
 
 	/* :V */
 

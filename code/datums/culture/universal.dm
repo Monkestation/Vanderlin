@@ -31,16 +31,19 @@
 	name = "Zaladin"
 	description = "Both feared and respected for the sheer might of their armies, \
 	whether slaves or conscripts. Zaladinian heros may walk willingly into shackles for a chance at glory in their gladiator sports."
+	accent = ACCENT_ZALAD
 
 /datum/culture/universal/wintermare
 	name = "Wintermare"
 	description = "Proud, typically wealthy snow-dwellers. Known for their fashion and arcyne academia. \
 	Never ask them their opinions of Grenzelhoft."
+	accent = ACCENT_WINTERMARE
 
 /datum/culture/universal/grenzelhoft
 	name = "Grenzelhoft"
 	description = "Known for their mighty weiners, meals, and talented jesters. \
 	Potentially some of the most grim, bigoted people one could ever meet. Never ask them their opinions of Wintermare."
+	accent = ACCENT_GRENZ
 
 /datum/culture/universal/amber_hollow
 	name = "Amber Hollow"
@@ -62,3 +65,4 @@
 	name = "Ossland"
 	description = "Known for their barbaric traditions and morbid faith, these folk are proud and strong. \
 	Never, NEVER touch their skull helms."
+	accent = ACCENT_OSSLAND

@@ -5,6 +5,7 @@
 	var/description = "A culture"
 	/// string to add before examine strings, should include spaces
 	var/pre_append = ""
+	var/accent = null
 
 /// If selectable based on preferences (remove when datumised prefs)
 /datum/culture/proc/is_selectable(datum/preferences/prefs)
