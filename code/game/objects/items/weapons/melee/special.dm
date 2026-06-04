@@ -25,6 +25,10 @@
 	grid_width = 32
 	item_weight = 800 GRAMS
 
+/obj/item/weapon/lordscepter/Initialize()
+	. = ..()
+	AddElement(/datum/element/walking_stick)
+
 /datum/intent/lordbash
 	name = "bash"
 	blade_class = BCLASS_BLUNT
@@ -51,7 +55,7 @@
 	if(tag)
 		switch(tag)
 			if("gen")
-				return list("shrink" = 0.6,"sx" = -6,"sy" = -10,"nx" = 7,"ny" = -5,"wx" = -2,"wy" = -10,"ex" = 2,"ey" = -10,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -45,"sturn" = -45,"wturn" = -45,"eturn" = 45,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+				return list("shrink" = 0.6,"sx" = -6,"sy" = -10,"nx" = 7,"ny" = -5,"wx" = -2,"wy" = -10,"ex" = 2,"ey" = -10,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -45,"sturn" = -45,"wturn" = -45,"eturn" = -45,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.5,"sx" = -1,"sy" = -4,"nx" = 1,"ny" = -3,"wx" = -1,"wy" = -6,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 20,"wturn" = 18,"eturn" = -19,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 			if("wielded")
