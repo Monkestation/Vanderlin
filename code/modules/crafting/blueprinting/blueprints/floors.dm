@@ -317,6 +317,22 @@
 	result_type = /turf/open/floor/tile/masonic/spiral
 	craftdiff = 3
 
+/datum/blueprint_recipe/floor/masonic/full
+	name = "Masonic White Tile"
+	result_type = /turf/open/floor/tile/masonic/full
+
+/datum/blueprint_recipe/floor/masonic/full/inverted
+	name = "Masonic Black Tile"
+	result_type = /turf/open/floor/tile/masonic/full/inverted
+
+/datum/blueprint_recipe/floor/masonic/arrow
+	name = "Masonic Arrow"
+	result_type = /turf/open/floor/tile/masonic/arrow
+
+/datum/blueprint_recipe/floor/masonic/arrow/inverted
+	name = "Inverted Masonic Arrow"
+	result_type = /turf/open/floor/tile/masonic/arrow/inverted
+
 /datum/blueprint_recipe/floor/brick
 	name = "Brick Tile"
 	desc = "Brick flooring."

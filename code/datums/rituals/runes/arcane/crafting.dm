@@ -55,7 +55,19 @@
 			. = ..()
 		return
 
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/attack_hand_secondary(mob/living/user, list/modifiers)
+	if(animating)
+		to_chat(user, span_notice("The rune is already working..."))
+		return
+	if(!length(slots))
+		return ..()
+	abort_ritual()
+	to_chat(user, span_cultsmall("The items clatter free from the rune."))
+	playsound(src, 'sound/magic/glass.ogg', 40, TRUE)
+
 /obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/attackby(obj/item/W, mob/user, list/modifiers)
+	if(istype(W, /obj/item/melee/touch_attack))
+		return ..()
 	if(animating)
 		to_chat(user, span_notice("The rune is already working..."))
 		return
@@ -166,6 +178,11 @@
 		to_chat(user, span_hierophant_warning("My arcyne is not refined enough to complete this working..."))
 		abort_ritual()
 		return
+	if(user.mana_pool.amount < matched_recipe.mana_cost)
+		to_chat(user, span_hierophant_warning("My mana is lacking..."))
+		abort_ritual()
+		return
+	user.mana_pool.adjust_mana(-matched_recipe.mana_cost)
 
 	user.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 	playsound(src, 'sound/magic/cosmic_expansion.ogg', 60, TRUE)
@@ -202,6 +219,7 @@
 
 	//spawn output invisible and floating, then fade it in.
 	var/obj/item/result = new matched_recipe.output(center)
+	result.OnCrafted(dir, user)
 	result.alpha = 0
 	var/saved_transform = result.transform
 	result.transform = matrix() * 0.1
@@ -221,6 +239,9 @@
 	matched_recipe = null
 	animating = FALSE
 	rune_in_use = FALSE
+
+	user.mind.add_sleep_experience(/datum/attribute/skill/magic/arcane, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2) + matched_recipe.required_skill, FALSE)
+
 	do_invoke_glow()
 
 /// Releases all staged items and resets state without crafting anything.

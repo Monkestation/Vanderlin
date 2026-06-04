@@ -339,6 +339,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			return strings("accents/pirate_replacement.json", "pirate")
 		if("Zizo Chant")
 			return
+		if("Osslandic")
+			return strings("accents/ossland_replacement.json", "ossland")
 	return
 
 /datum/species/proc/get_pain_emote(power)
@@ -2015,7 +2017,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 						H.flash_fullscreen("redflash3")
 			if(BP)
 				if(damage_type)
-					BP.bodypart_attacked_by(damage_type, damage_amount, modifiers = mods)
+					BP.bodypart_attacked_by(damage_type, damage_amount, null, def_zone, modifiers = mods)
 					H.update_damage_overlays()
 				else
 					if(BP.receive_damage(damage_amount, 0))

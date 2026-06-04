@@ -11,7 +11,7 @@ export const DetailChimericNode = ({ r }: { r: Recipe }) => (
     <Box className="RecipeBook__step-block">
       {r.allowed_slots?.length ? (
         <>
-          <Box className="RecipeBook__step-row" style={{ color: 'cyan' }}>Can ONLY be installed in:</Box>
+          <Box className="RecipeBook__step-row" style={{ color: 'steelblue' }}>Can ONLY be installed in:</Box>
           {r.allowed_slots.map((s, i) => (
             <Box key={i} className="RecipeBook__step-row">• {s}</Box>
           ))}
@@ -24,7 +24,7 @@ export const DetailChimericNode = ({ r }: { r: Recipe }) => (
           ))}
         </>
       ) : (
-        <Box className="RecipeBook__step-row" style={{ color: 'green' }}>✓ Can be installed in any organ</Box>
+        <Box className="RecipeBook__step-row" style={{ color: 'mediumseagreen' }}>✓ Can be installed in any organ</Box>
       )}
     </Box>
   </>

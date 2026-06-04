@@ -26,6 +26,7 @@
 		base_state = icon_state
 	AddComponent(/datum/component/storage/concrete/grid/bin)
 	update_appearance(UPDATE_ICON)
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 
 /obj/item/bin/Destroy()
 	layer = 2.8
@@ -144,7 +145,7 @@
 //We need to use this or the object will be put in storage instead of attacking it
 /obj/item/bin/StorageBlock(obj/item/I, mob/user)
 	if(user?.used_intent)
-		if(user.used_intent.type in list(/datum/intent/fill,/datum/intent/pour,/datum/intent/splash))
+		if(user.used_intent.type in list(/datum/intent/fill,/datum/intent/pour, /datum/intent/splash))
 			return TRUE
 	if(istype(I, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = I

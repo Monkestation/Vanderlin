@@ -2708,7 +2708,7 @@
 	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate/fish
-	name = "sausage tamto plate"
+	name = "fish tamto plate"
 	desc = "A deliciously greasy fish half-pie originating from the trade-capital of Vanderlin, long may it reign!"
 	slice_path = /obj/item/reagent_containers/food/snacks/tamtoplate_slice/fish
 	icon_state = "fish_pizza"

@@ -4507,12 +4507,13 @@
 /area/under/tomb/indoors/magic)
 "WQ" = (
 /obj/structure/flora/grass/bush,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/alch/golddust,
 /obj/item/alch/golddust,
 /obj/item/ore/gold,
 /obj/item/ore/gold,
 /obj/item/reagent_containers/glass/cup/golden,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "WR" = (
