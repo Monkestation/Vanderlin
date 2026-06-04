@@ -170,20 +170,20 @@
 	canparry = TRUE
 
 /datum/intent/prestidigitation/clean
-	name = "touch"
-	icon_state = "intouch"
+	name = "clean"
+	icon_state = "inclean"
 
 /datum/intent/prestidigitation/gather
 	name = "grab"
 	icon_state = "ingrab"
 
 /datum/intent/prestidigitation/spark
-	name = "shove"
-	icon_state = "inshove"
+	name = "spark"
+	icon_state = "inspark"
 
 /datum/intent/prestidigitation/mote
-	name = "use"
-	icon_state = "inuse"
+	name = "light"
+	icon_state = "inlight"
 
 /obj/effect/wisp/prestidigitation
 	name = "minor magelight mote"
