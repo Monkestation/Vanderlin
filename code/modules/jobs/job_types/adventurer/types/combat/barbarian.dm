@@ -53,10 +53,10 @@
 /datum/job/advclass/combat/barbarian/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Greatsword", "Greataxe", "Goedendag", "Dual Axes", "WHO NEEDS A WEAPON?")
+	var/static/list/weapons = list("Claymore", "Greataxe", "Goedendag", "Dual Axes", "WHO NEEDS A WEAPON?")
 	var/weapon_choice = tgui_input_list(player_client, "CHOOSE YOUR WEAPON", "SPILL SOME BLOOD!", weapons)
 	switch(weapon_choice)
-		if("Greatsword")
+		if("Claymore")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/long/greatsword/claymore/iron, ITEM_SLOT_BACK_R, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 20)
 		if("Greataxe")
