@@ -151,9 +151,9 @@
 /obj/structure/table/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)
 		return NONE
-	if(I.item_flags & ABSTRACT || HAS_TRAIT(I, TRAIT_NODROP))
+	if(tool.item_flags & ABSTRACT || HAS_TRAIT(tool, TRAIT_NODROP))
 		return NONE
-	if(!user.transferItemToLoc(I, drop_location(), silent = FALSE))
+	if(!user.transferItemToLoc(tool, drop_location(), silent = FALSE))
 		return ITEM_INTERACT_BLOCKING
 	var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
@@ -161,13 +161,13 @@
 	if(!icon_x || !icon_y)
 		return
 	//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
-	I.pixel_x = I.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size/2), world.icon_size/2)
-	I.pixel_y = I.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size/2), world.icon_size/2)
-	after_added_effects(I, user)
+	tool.pixel_x = tool.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size/2), world.icon_size/2)
+	tool.pixel_y = tool.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size/2), world.icon_size/2)
+	after_added_effects(tool, user)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/wrench_act(mob/living/user, obj/item/tool)
-	if(flags_1 & NODECONSTRUCT_1)
+	if(!deconstruction_ready)
 		return NONE
 
 	if(!deconstruction_ready)

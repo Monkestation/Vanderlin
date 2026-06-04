@@ -203,7 +203,6 @@
 	. = ..()
 	if(smelt_quality)
 		recipe_quality = smelt_quality
-		smelted = TRUE
 	var/datum/quality_calculator/metallurgy/metal_calc = new()
 	metal_calc.apply_quality_to_item(src, TRUE, recipe_quality)
 	qdel(metal_calc)
@@ -222,7 +221,6 @@
 
 	forceMove(T)
 	T.held_item = src
-	T.hott = null
 	T.update_appearance(UPDATE_ICON_STATE)
 
 	return ITEM_INTERACT_SUCCESS

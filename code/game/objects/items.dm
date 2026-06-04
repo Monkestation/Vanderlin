@@ -429,9 +429,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		A.update_appearance(UPDATE_OVERLAYS)
 	return ..()
 
-/obj/item/proc/set_quality(quality)
-	recipe_quality = quality
-
 /obj/item/update_overlays()
 	. = ..()
 	//details tags for items/clothes
@@ -668,7 +665,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 	return attempt_pickup(user)
 
-/obj/item/proc/attempt_pickup(mob/user)
+/obj/item/proc/attempt_pickup(mob/living/user)
 	. = TRUE
 
 	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH) && iscarbon(user))
@@ -678,11 +675,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(resistance_flags & ON_FIRE)
 		var/can_handle_hot = FALSE
-		if(!istype(C))
-			can_handle_hot = TRUE
-		else if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
-			can_handle_hot = TRUE
-		else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
+				can_handle_hot = TRUE
+			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+				can_handle_hot = TRUE
+		else
 			can_handle_hot = TRUE
 
 		if(can_handle_hot)
@@ -691,9 +690,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
 			extinguish()
-			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-			if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-				C.update_damage_overlays()
+			var/obj/item/bodypart/affecting = user.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))		// 5 burn damage
+				user.update_damage_overlays()
 			return
 
 	if(resistance_flags & ON_FIRE)
@@ -1660,7 +1659,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(!silent)
 		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
-
 
 /obj/item/return_recipe_data()
 	var/has_grind = length(grind_results)

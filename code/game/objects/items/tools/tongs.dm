@@ -105,8 +105,9 @@
 		return FALSE
 
 	held_item.forceMove(get_turf(A))
+	held_item.remove_quench()
 	held_item = null
-	hott = 0
+
 	update_appearance(UPDATE_ICON_STATE)
 
 	return TRUE
@@ -139,8 +140,8 @@
 		|| HAS_TRAIT(item, TRAIT_NEEDS_QUENCH)
 		|| item.melting_material || item.anvilrepair || item.smeltresult
 	)
-		user.visible_message(span_info("[user] picks up [attacked_item] with [src]."))
-		set_held_item(attacked_item)
+		user.visible_message(span_info("[user] picks up [interacting_with] with [src]."))
+		set_held_item(interacting_with)
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/tongs/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)

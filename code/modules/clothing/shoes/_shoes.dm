@@ -131,10 +131,10 @@
 		if(do_after(user, 2 SECONDS, src))
 			rag.reagents.remove_all(1)
 			polished = 1
-			AddComponent(/datum/component/particle_spewer/sparkle)
+			AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
 			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
-			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 5 MINUTES, shine_more = TRUE)
+			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 5 MINUTES)
 			to_chat(user, span_notice("I polish \the [name]."))
 
 		return ITEM_INTERACT_SUCCESS

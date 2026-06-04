@@ -25,6 +25,6 @@
 	if(istype(tool, /obj/item/storage/crucible))
 		if(!user.temporarilyRemoveItemFromInventory(tool))
 			return ITEM_INTERACT_BLOCKING
-		user.visible_message("<span class='info'>[user] places [attacking_item] onto [src].</span>")
-		user.transferItemToLoc(attacking_item, get_turf(src), silent = TRUE)
+		user.visible_message("<span class='info'>[user] places [tool] onto [src].</span>")
+		user.transferItemToLoc(tool, get_turf(src), silent = TRUE)
 		return ITEM_INTERACT_SUCCESS

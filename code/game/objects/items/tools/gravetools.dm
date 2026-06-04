@@ -148,7 +148,7 @@
 			return ITEM_INTERACT_BLOCKING
 		if(istype(turf, /turf/open/floor/dirt))
 			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
-			if(!do_after(user, 5 SECONDS * time_multiplier, turf))
+			if(!do_after(user, 5 SECONDS * toolspeed, turf))
 				return ITEM_INTERACT_BLOCKING
 
 			new /obj/structure/irrigation_channel(turf)

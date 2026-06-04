@@ -288,7 +288,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/work_time = (4 SECONDS - (skill_level * 5))
 	if(istype(tool, /obj/item/weapon/chisel))
 		var/obj/item/weapon/chisel/chisel = tool
-		work_time *= chisel.time_multiplier
+		work_time *= chisel.toolspeed
 
 	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 	user.visible_message("<span class='info'>[user] begins chiseling [src] into blocks.</span>")

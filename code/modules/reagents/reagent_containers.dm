@@ -232,6 +232,8 @@
 		return NONE
 
 	if(user.used_intent.type == INTENT_SPLASH)
+		if(HAS_TRAIT(interacting_with, TRAIT_DO_NOT_SPLASH))
+			return NONE
 		if(try_splash(user, interacting_with))
 			return ITEM_INTERACT_SUCCESS
 
@@ -623,63 +625,6 @@
 	amount_per_transfer_from_this = possible_transfer_amounts[index]
 	balloon_alert(user, "transferring [UNIT_FORM_STRING(amount_per_transfer_from_this)].")
 	mode_change_message(user)
-
-/obj/item/reagent_containers/pre_attack(atom/target, mob/living/user, list/modifiers)
-	if(HAS_TRAIT(target, TRAIT_DO_NOT_SPLASH))
-		return ..()
-	if(try_splash(user, target))
-		return TRUE
-
-	return ..()
-
-/// Tries to splash the target.
-/obj/item/reagent_containers/proc/try_splash(mob/user, atom/target)
-	if (!spillable)
-		return FALSE
-	if (!reagents?.total_volume)
-		return FALSE
-	if(user.used_intent.type != INTENT_SPLASH)
-		return FALSE
-	if(!user.Adjacent(target))
-		return FALSE
-
-	var/punctuation = ismob(target) ? "!" : "."
-	var/reagent_text
-
-	user.visible_message(
-		span_danger("[user] splashes the contents of [src] onto [target][punctuation]"),
-		span_danger("You splash the contents of [src] onto [target][punctuation]"),
-		ignored_mobs = target)
-	if(ismob(target) && user != target)
-		var/mob/target_mob = target
-		target_mob.show_message(
-			span_userdanger("[user] splash the contents of [src] onto you!"),
-			MSG_VISUAL,
-			span_userdanger("You feel drenched!"))
-
-	var/mutable_appearance/splash_animation = mutable_appearance('icons/effects/effects.dmi', "splash")
-	if(isturf(target))
-		splash_animation.icon_state = "splash_floor"
-	splash_animation.color = mix_color_from_reagents(reagents.reagent_list)
-	target.flick_overlay_view(splash_animation, 1 SECONDS)
-
-	playsound(target, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 25, FALSE)
-
-	for(var/datum/reagent/reagent as anything in reagents.reagent_list)
-		reagent_text += "[reagent] ([num2text(reagent.volume)]),"
-
-	var/mob/thrown_by = thrownby?.resolve()
-	if(isturf(target) && reagents.reagent_list.len && thrown_by)
-		log_combat(thrown_by, target, "splashed (thrown) [english_list(reagents.reagent_list)]")
-		message_admins("[ADMIN_LOOKUPFLW(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] at [ADMIN_VERBOSEJMP(target)].")
-
-	SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, target, reagents.reagent_list)
-	reagents.reaction(target, TOUCH)
-	chem_splash(get_turf(target), 2, list(reagents))
-	log_combat(user, target, "splashed", reagent_text)
-	reagents.clear_reagents()
-
-	return TRUE
 
 /obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user, silent = FALSE)
 	if(!iscarbon(eater))
