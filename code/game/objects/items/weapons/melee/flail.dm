@@ -90,7 +90,7 @@
 	item_weight = 1.4 KILOGRAMS
 
 //................ Silver Flail ............... //
-/obj/item/weapon/flail/silflail
+/obj/item/weapon/flail/silver
 	name = "silver flail"
 	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast"
 	icon_state = "silverflail"
