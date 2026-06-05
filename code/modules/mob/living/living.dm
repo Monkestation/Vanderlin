@@ -1794,9 +1794,11 @@
 				if(what == who.get_item_for_held_index(L[2]))
 					if(what.doStrip(src, who))
 						log_combat(src, who, "stripped [what] off")
+						SEND_SIGNAL(src, COMSIG_MOB_STRIPPED_ITEM, who, what)
 			if(what == who.get_item_by_slot(where))
 				if(what.doStrip(src, who))
 					log_combat(src, who, "stripped [what] off")
+					SEND_SIGNAL(src, COMSIG_MOB_STRIPPED_ITEM, who, what)
 
 	if(Adjacent(who)) //update inventory window
 		who.show_inv(src)

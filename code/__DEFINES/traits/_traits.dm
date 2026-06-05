@@ -10,6 +10,7 @@
 			_L = target.status_traits; \
 			_L[trait] = list(source); \
 			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(trait), trait); \
+			SEND_GLOBAL_SIGNAL(COMSIG_ADD_TRAIT, target, trait); \
 		} else { \
 			_L = target.status_traits; \
 			if (_L[trait]) { \
@@ -17,6 +18,7 @@
 			} else { \
 				_L[trait] = list(source); \
 				SEND_SIGNAL(target, SIGNAL_ADDTRAIT(trait), trait); \
+				SEND_GLOBAL_SIGNAL(COMSIG_ADD_TRAIT, target, trait); \
 			} \
 		} \
 	} while (0)
@@ -39,6 +41,7 @@
 			if (!length(_L[trait])) { \
 				_L -= trait; \
 				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
+				SEND_GLOBAL_SIGNAL(COMSIG_REMOVE_TRAIT, target, trait); \
 			}; \
 			if (!length(_L)) { \
 				target.status_traits = null \

@@ -40,6 +40,8 @@
 /// From base of /obj/item/reagent_containers/food/snacks/attack: (mob/living/M, mob/living/user, list/modifiers)
 #define COMSIG_MOB_FOOD_EAT "mob_food_ate"
 
+#define COMSIG_MOB_STRIPPED_ITEM "mob_stripped_item"
+
 //ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
 ///from base of mob/living/OffBalance() (amount, ignore_canstun)
 #define COMSIG_LIVING_STATUS_OFFBALANCED "living_offbalanced"

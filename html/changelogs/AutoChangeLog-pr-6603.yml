@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Khans and Nomads now have 20 points in Wrestling and Unarmed instead of 0."

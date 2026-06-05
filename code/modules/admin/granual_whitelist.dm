@@ -1,4 +1,13 @@
-GLOBAL_LIST_INIT(vessel_ids, list(WHITELIST_AUTOMATON))
+GLOBAL_LIST_INIT(vessel_ids, list(WHITELIST_AUTOMATON, HARLEQUINN_VESSEL_ID))
+GLOBAL_LIST_INIT(required_whitelists, setup_whitelist_ids())
+
+/proc/setup_whitelist_ids()
+	. = list(WHITELIST_AUTOMATON)
+	for(var/datum/job/job as anything in subtypesof(/datum/job))
+		if(!(initial(job.job_flags) & JOB_REQUIRE_WHITELIST))
+			continue
+		. += initial(job.title)
+	return .
 
 /datum/whitelist_panel
 	var/datum/admins/holder
@@ -18,7 +27,7 @@ GLOBAL_LIST_INIT(vessel_ids, list(WHITELIST_AUTOMATON))
 
 	if(selected_ckey)
 		dat += "<b>Current Whitelists for [selected_ckey]:</b><BR>"
-		var/list/all_whitelists = GLOB.vessel_ids
+		var/list/all_whitelists = GLOB.required_whitelists
 		for(var/wl_id in all_whitelists)
 			var/datum/save_manager/SM = get_save_manager(selected_ckey)
 			var/data = SM ? SM.get_data("whitelists", wl_id, null) : null
@@ -41,11 +50,6 @@ GLOBAL_LIST_INIT(vessel_ids, list(WHITELIST_AUTOMATON))
 	popup.set_content(dat.Join())
 	popup.open()
 
-/datum/whitelist_panel/proc/get_all_whitelist_ids()
-	return list(
-		WHITELIST_AUTOMATON,
-		//as we add more we can fill it out here
-	)
 
 /datum/whitelist_panel/Topic(href, list/href_list)
 	. = ..()
@@ -119,6 +123,8 @@ GLOBAL_LIST_INIT(vessel_ids, list(WHITELIST_AUTOMATON))
 	log_admin(msg)
 
 /client/proc/is_whitelisted(whitelist_id)
+	if(!(whitelist_id in GLOB.required_whitelists))
+		return TRUE
 	if(check_rights(R_ADMIN, FALSE))
 		return TRUE
 	var/datum/save_manager/SM = get_save_manager(ckey)

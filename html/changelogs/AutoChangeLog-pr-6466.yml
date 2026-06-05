@@ -1,5 +1,0 @@
-author: "Monkeke2"
-delete-after: True
-changes:
-  - rscadd: "Adds the Street Sweeper class"
-  - map: "Changed the empty room above & north of the clinic into the sweeper's closet."

@@ -494,6 +494,21 @@
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/divine
 
+/datum/artificer_recipe/psycross/matthios
+	name = "Matthios Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/matthios
+
+/datum/artificer_recipe/psycross/graggar
+	name = "Graggar Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/graggar
+
+/datum/artificer_recipe/psycross/baotha
+	name = "Baotha Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/baotha
+
 /datum/artificer_recipe/psycross/noc
 	name = "Noc Psycross"
 	required_item = /obj/item/ingot/silver

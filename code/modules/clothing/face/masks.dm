@@ -345,6 +345,44 @@
 	icon_state = "steppemask_snout"
 	desc = "A steel mask shaped like a beast's face, worn by steppe riders to intimidate their enemies."
 
+/obj/item/clothing/face/facemask/steel/kazengun
+	name = "soldier's half-mask"
+	desc = "\"The first lesson of war is that it would be better to live in peace.\""
+	block2add = null
+	armor = ARMOR_PLATE // because it's only half
+	icon_state = "kazengunmouthguard"
+	item_state = "kazengunmouthguard"
+
+/obj/item/clothing/face/facemask/steel/kazengun/full
+	name = "ogre mask"
+	desc = "\"The second lesson: Rich men have dreams. Poor men die to make them come true.\""
+	icon_state = "kazengunfaceguard"
+	item_state = "kazengunfaceguard"
+
+/obj/item/clothing/face/facemask/steel/graggar
+	name = "vicious jawmask"
+	desc = "Shattered jaws, chipped teeth, sunken metal - fit for a skull of the same. It snarls in mimicry of the Sinistar's visage."
+	icon_state = "graggarplatemask_heavy"
+	block2add = null
+	body_parts_covered = MOUTH|NOSE
+	flags_inv = HIDEFACE
+
+/obj/item/clothing/face/facemask/bronze
+	name = "bronze mask"
+	desc = "Glimmering bronze, curved to veil its wearer's face from both judgement and harm."
+	armor_class = AC_LIGHT
+	icon_state = "bronzemask"
+	item_state = "bronzemask"
+	max_integrity = 150
+	melting_material = /datum/material/bronze
+	melt_amount = 75
+
+/obj/item/clothing/face/facemask/bronze/classic
+	name = "bronze death mask"
+	icon_state = "bronzemask_legacy"
+	item_state = "bronzemask_legacy"
+	desc = "Glimmering bronze, meticuliusly shaped to mimic the guise of another. One of civilization's oldest superstitions is the belief that donning such masks would impart a sliver of the mimicked facebearer's power unto its wearer."
+
 /obj/item/clothing/face/facemask/silver
 	name = "silver mask"
 	icon = 'icons/roguetown/clothing/special/adept.dmi'
@@ -562,3 +600,33 @@
 	resistance_flags = FLAMMABLE
 	item_weight = 356 GRAMS
 
+/obj/item/clothing/face/xylixmask
+	name = "jester mask"
+	item_state = "xylixmask"
+	icon_state = "xylixmask"
+	desc = "A ceramic mask, forever stuck with the joyful smile its patron god favors. While it will shatter easily from blows, its smug countenance shall taunt its foes."
+	max_integrity = 50
+	armor = null
+	flags_inv = HIDEFACE
+	body_parts_covered = FACE
+	block2add = FOV_BEHIND
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	smeltresult = null
+	sellprice = 0
+
+/obj/item/clothing/face/xylixmask/weathered
+	name = "weathered mask"
+	item_state = "xylix_weathered"
+	icon_state = "xylix_weathered"
+	desc = "An ancient ceramic face. It looks weathered, the sort molded by Xylixian worshippers of many yils past. Even when cast aside, it feels like the hardened clay has never left your hands. As if it always finds a way back into your palms."
+	// No armor anyways
+	max_integrity = 200
+	// Not messing with jester mask, but again, it has no armor. many other masks also don't block vision.
+	block2add = FOV_DEFAULT
+
+/obj/item/clothing/face/faceveil
+	name = "simple veil"
+	icon_state = "faceveil"
+	desc = "A remarkably plain veil meant to conceal ones face... if you wore this, a gust of wind would be all it takes to reveal your identity."
+	grid_width = 32
+	grid_height = 32

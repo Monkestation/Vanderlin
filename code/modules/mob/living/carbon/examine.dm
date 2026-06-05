@@ -104,6 +104,9 @@
 
 	// Species, just below the name
 	var/datum/species/species = dna?.species
+	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
+	if(spy)
+		species = spy.examine_species
 	if(species)
 		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")

@@ -103,7 +103,7 @@
 	belt = /obj/item/storage/belt/leather
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)
-	cloak = /obj/item/clothing/cloak/tabard/crusader
+	cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
 	wrists = /obj/item/clothing/neck/psycross/silver
 
 /datum/outfit/adventurer/inhumencleric/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -111,19 +111,14 @@
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)
 			if(/datum/patron/inhumen/graggar)
-				cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
 				head = /obj/item/clothing/head/helmet/horned
 				beltl = /obj/item/weapon/axe/boneaxe
 				beltr = /obj/item/weapon/axe/boneaxe
-			if(/datum/patron/inhumen/graggar_zizo)
-				cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
 			if(/datum/patron/inhumen/zizo)
-				cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
 				head = /obj/item/clothing/head/helmet/skullcap/cult
 				backr = /obj/item/weapon/shield/heater
 				beltl = /obj/item/weapon/sword/short/iron
 			if(/datum/patron/inhumen/matthios)
-				cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
 				backr = /obj/item/weapon/pitchfork
 			if(/datum/patron/inhumen/baotha)
 				head = /obj/item/clothing/head/crown/circlet

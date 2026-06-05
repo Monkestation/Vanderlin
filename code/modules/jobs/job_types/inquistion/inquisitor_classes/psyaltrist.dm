@@ -29,7 +29,8 @@
 		/datum/language/orcish
 	)
 
-	traits = list(	TRAIT_DODGEEXPERT,
+	traits = list(
+		TRAIT_DODGEEXPERT,
 		TRAIT_EMPATH,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,

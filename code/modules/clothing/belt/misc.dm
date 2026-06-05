@@ -18,6 +18,12 @@
 		for(var/obj/item/I in things)
 			STR.remove_from_storage(I, get_turf(src))
 
+/obj/item/storage/belt/leather/double
+	name = "pair of belts"
+	desc = "A pair of slim black belts worn around the waist."
+	icon_state = "belt_double"
+	item_state = "belt_double"
+
 /obj/item/storage/belt/leather/assassin // Assassin's super edgy and cool belt can carry normal items (for poison vial, lockpick).
 	empty_when_dropped = FALSE
 	component_type = /datum/component/storage/concrete/grid/belt/assassin
@@ -587,3 +593,33 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
+
+
+/obj/item/storage/belt/leather/breechcloth
+	name = "belt with breechcloth"
+	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechcloth"
+	sewrepair = FALSE
+	detail_tag = "_belt"
+
+/obj/item/storage/belt/leather/breechcloth/blackbelt
+	name = "black belt with breechcloth"
+	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechclothalt"
+	sewrepair = FALSE
+	detail_tag = "_belt"
+
+/obj/item/storage/belt/leather/slayer
+	name = "rugged dwarven belt"
+	desc = "The golden beard of the face plate doubles as a codpiece."
+	icon_state = "slayer"
+	item_state = "slayer"
+	sellprice = 50
+	detail_tag = "_belt"
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/shawl
+	name = "shawl"
+	desc = "A cloth shawl."
+	icon_state = "beltshawl"
+	item_state = "beltshawl"

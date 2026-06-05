@@ -1219,7 +1219,7 @@
 /turf/open/lava,
 /area/under/cavelava)
 "afL" = (
-/obj/item/clothing/shoes/boots/rare/dwarfplate,
+/obj/item/clothing/shoes/boots/armor/dwarven,
 /obj/item/reagent_containers/food/snacks/rotten/egg,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -3488,7 +3488,7 @@
 /area/indoors/town/church/inquisition)
 "aqZ" = (
 /obj/structure/rack,
-/obj/item/clothing/gloves/rare/dwarfplate,
+/obj/item/clothing/gloves/plate/dwarven,
 /turf/open/floor/sand,
 /area/indoors/mountains/anvil/keep)
 "ara" = (
@@ -9050,7 +9050,7 @@
 /area/under/mountains/anvil/upper)
 "aRq" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/clothing/head/rare/dwarfplate,
+/obj/item/clothing/head/helmet/heavy/dwarven,
 /obj/effect/spawner/map_spawner/loot/coin/med,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)

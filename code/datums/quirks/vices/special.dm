@@ -93,6 +93,17 @@
 	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
 
+/datum/quirk/vice/unlucky
+	name = "Unlucky"
+	desc = "It has never, ever, been your dae. -5 to -9 Fortune."
+	point_value = 5
+
+/datum/quirk/vice/unlucky/on_spawn()
+	owner.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
+
+/datum/quirk/vice/unlucky/on_remove()
+	owner?.remove_stat_modifier(STATMOD_UNLUCKY)
+
 /datum/quirk/vice/skill_issue
 	name = "Skill Issue"
 	desc = "You were never the best at anything, and it shows. Lose 1 point to all starting skills."
@@ -104,6 +115,15 @@
 	var/mob/living/carbon/human/H = owner
 	for(var/datum/attribute/skill/skill in SSskills.all_skills)
 		H.adjust_skill_level(skill, -10)
+
+/datum/quirk/vice/skill_bereft
+	name = "Skill Bereft"
+	desc = "You've had a profound sense of ignorance. Lose 3 points to all starting skills. This is likely to make you illiterate!"
+	point_value = 10
+
+/datum/quirk/vice/skill_bereft/on_spawn()
+	for(var/datum/attribute/skill/skill in SSskills.all_skills)
+		owner.adjust_skill_level(skill, -30)
 
 /datum/quirk/vice/deaf
 	name = "Hard of Hearing"
@@ -416,7 +436,7 @@
 	point_value = 2
 	customization_type = QUIRK_SELECT
 	customization_label = "Choose your mark"
-	customization_options = list("Heretic", "Outlaw")
+	customization_options = list("Heretic", "Outlaw", "Both!")
 	preview_render = FALSE
 
 /datum/quirk/vice/heretic_outlaw/on_spawn()
@@ -428,10 +448,10 @@
 	if(!customization_value)
 		customization_value = pick(customization_options)
 
-	if(customization_value == "Heretic")
+	if((customization_value == "Heretic") || (customization_value == "Both!"))
 		GLOB.excommunicated_players += H.real_name
 		to_chat(H, span_boldwarning("I've been denounced by the church for either reasons legitimate or not!"))
-	else // Outlaw
+	if((customization_value == "Outlaw") || (customization_value == "Both!"))
 		GLOB.outlawed_players |= H.real_name
 		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))
 

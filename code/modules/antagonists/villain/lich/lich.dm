@@ -242,8 +242,8 @@
 /obj/item/phylactery
 	name = "phylactery"
 	desc = "Looks like it is filled with some intense power."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "soulstone"
+	icon = 'icons/roguetown/items/gems.dmi'
+	icon_state = "necro_crystal"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
