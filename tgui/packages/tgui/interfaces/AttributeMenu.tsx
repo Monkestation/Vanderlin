@@ -1,7 +1,6 @@
 import {
   memo,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -12,37 +11,8 @@ import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
 import { resolveAsset } from '../assets';
-import { storage } from 'common/storage';
 
 const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
-
-type LedgerTheme = 'light' | 'dark';
-
-const useChatTheme = (reloadKey: unknown): LedgerTheme => {
-  const [theme, setTheme] = useState<LedgerTheme>('light');
-  useEffect(() => {
-    let cancelled = false;
-    storage
-      .get('rogue-panel-settings')
-      .then((settings) => {
-        if (cancelled) {
-          return;
-        }
-        const next =
-          settings && settings.theme === 'dark' ? 'dark' : 'light';
-        setTheme(next);
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setTheme('light');
-        }
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [reloadKey]);
-  return theme;
-};
 
 const SEAL_SPRITESHEET_CLASS = 'attribute_seals104x104';
 const SEAL_STATES = new Set([
@@ -387,36 +357,11 @@ interface AttributeData {
 
 const EMPTY_VALUES: AttributeValues = { value: null, raw_value: null };
 
-const isNumeric = (value: AttributeValue): value is number =>
-  typeof value === 'number' && Number.isFinite(value);
-
-const valueTone = (value: AttributeValue, raw: AttributeValue) => {
-  if (!isNumeric(value) || !isNumeric(raw)) {
-    return 'is-muted';
-  }
-  if (value > raw) {
-    return 'is-buffed';
-  }
-  if (value < raw) {
-    return 'is-debuffed';
-  }
-  return 'is-even';
-};
-
 const displayValue = (value: AttributeValue | undefined) => {
   if (value === null || value === undefined || value === '') {
     return 'NA';
   }
   return String(value);
-};
-
-const valuePair = (value: AttributeValue, raw: AttributeValue) => {
-  const v = displayValue(value);
-  const r = displayValue(raw);
-  if (v === 'NA' && r === 'NA') {
-    return 'NA';
-  }
-  return `${v}/${r}`;
 };
 
 const sameSelection = (
@@ -517,10 +462,10 @@ const AttributeSealNode = memo((props: {
         )}
         <span className="AttributeMenu__sealNodeName">{stat.seal_label}</span>
         <span
-          className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}
+          className="AttributeMenu__sealNodeValue"
           data-tour={stat.anchor === 'strength' ? 'seal-value' : undefined}
         >
-          {valuePair(stat.value, stat.raw_value)}
+          {displayValue(stat.value)}
         </span>
       </button>
     </Tooltip>
@@ -529,7 +474,6 @@ const AttributeSealNode = memo((props: {
   previous.selected === next.selected &&
   previous.stat.name === next.stat.name &&
   previous.stat.value === next.stat.value &&
-  previous.stat.raw_value === next.stat.raw_value &&
   previous.stat.anchor === next.stat.anchor &&
   previous.stat.seal_label === next.stat.seal_label);
 
@@ -605,8 +549,8 @@ const SkillEntry = memo((props: {
           <IconSprite icon={skill.icon} size="small" />
         </span>
         <span className="AttributeMenu__skillName">{skill.name}</span>
-        <span className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
-          {valuePair(skill.value, skill.raw_value)}
+        <span className="AttributeMenu__value">
+          {displayValue(skill.value)}
         </span>
       </button>
     </Tooltip>
@@ -615,7 +559,6 @@ const SkillEntry = memo((props: {
   previous.selected === next.selected &&
   previous.skill.name === next.skill.name &&
   previous.skill.value === next.skill.value &&
-  previous.skill.raw_value === next.skill.raw_value &&
   previous.skill.icon === next.skill.icon &&
   previous.skill.difficulty === next.skill.difficulty &&
   previous.skill.desc === next.skill.desc);
@@ -818,10 +761,8 @@ const InspectionPanel = memo((props: {
         </Stack>
 
         <div className="AttributeMenu__valueCard">
-          <span>Current / Base</span>
-          <strong className={valueTone(attribute.value, attribute.raw_value)}>
-            {valuePair(attribute.value, attribute.raw_value)}
-          </strong>
+          <span>Value</span>
+          <strong>{displayValue(attribute.value)}</strong>
         </div>
 
         <div className="AttributeMenu__detailGrid">
@@ -866,7 +807,7 @@ const InspectionPanel = memo((props: {
 });
 
 export const AttributeMenu = () => {
-  const { act, data, suspended } = useBackend<AttributeData>();
+  const { act, data } = useBackend<AttributeData>();
   const {
     parent,
     stats_meta,
@@ -913,7 +854,6 @@ export const AttributeMenu = () => {
   const openTutorial = useCallback(() => setShowTutorial(true), []);
   const closeTutorial = useCallback(() => setShowTutorial(false), []);
 
-  const theme = useChatTheme(suspended);
   const rootRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -923,7 +863,7 @@ export const AttributeMenu = () => {
       height={720}
     >
       <Window.Content fitted>
-        <div className={`AttributeMenu AttributeMenu--theme-${theme}`} ref={rootRef}>
+        <div className="AttributeMenu" ref={rootRef}>
           <div className="AttributeMenu__backdrop">
             <CoreAttributes
               stats={stats}

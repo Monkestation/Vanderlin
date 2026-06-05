@@ -1,44 +1,59 @@
 .AttributeMenu {
-  --am-ink: #2b1a12;
-  --am-ink-soft: #6e4d35;
-  --am-ink-faint: rgba(69, 38, 18, 0.42);
-  --am-parchment: #d9c18d;
-  --am-parchment-light: #ead6a5;
-  --am-parchment-deep: #b58a55;
-  --am-gold-mat: #ffcc33;
+  --rb-bg: #1a1209;
+  --rb-surface: #2b1f12;
+  --rb-surface-alt: #332517;
+  --rb-border: #5c3d1e;
+  --rb-border-faint: #3d2910;
+  --rb-accent: #b08d2e;
+  --rb-accent-dim: #8b5e08;
+  --rb-text: #c9b694;
+  --rb-text-muted: #8b7154;
+  --rb-highlight: rgba(200, 134, 10, 0.15);
+  --rb-hyperlink: #c99632;
+  --rb-hyperlink-h: #f0c15a;
+  --rb-section-bg: rgba(44, 28, 10, 0.7);
+  --rb-step-bg: rgba(30, 18, 5, 0.8);
+
+  --am-ink: var(--rb-text);
+  --am-ink-soft: var(--rb-text-muted);
+  --am-ink-faint: rgba(139, 113, 84, 0.5);
+  --am-parchment: var(--rb-surface);
+  --am-parchment-light: var(--rb-surface-alt);
+  --am-parchment-deep: var(--rb-surface);
+  --am-gold-mat: var(--rb-accent);
   --am-copper: #b87333;
   --am-bronze: #ccbc63;
   --am-silver: #d1e6e3;
   --am-steel: #5c5454;
   --am-iron: #5f5b57;
-  --am-blacksteel: #3f352a;
-  --am-coke: #1c1c1c;
-  --am-fire: #ff9900;
-  --am-fire-deep: #c3630c;
-  --am-wood: #15140f;
-  --am-leather: #3f352a;
-  --am-gold: #b88a2a;
-  --am-gold-bright: #ffcc33;
-  --am-wax: #e07a1e;
-  --am-wax-dark: #aa4e0a;
-  --am-good: #9a6f12;
-  --am-bad: #9c4a22;
-  --am-panel-top: var(--am-parchment-light);
-  --am-panel-bottom: var(--am-parchment-deep);
-  --am-panel-border: var(--am-gold);
-  --am-panel-sheen: rgba(255, 238, 178, 0.28);
-  --am-row-bg: rgba(255, 244, 205, 0.13);
-  --am-row-hover: rgba(255, 235, 169, 0.36);
-  --am-row-line: rgba(70, 38, 18, 0.34);
-  --am-title-shadow: rgba(255, 237, 184, 0.5);
-  --am-divider: rgba(72, 39, 18, 0.68);
-  --am-input-bg: rgba(72, 39, 18, 0.2);
-  --am-input-border: rgba(84, 45, 21, 0.72);
-  --am-input-placeholder: rgba(74, 47, 30, 0.72);
-  --am-scroll-track: rgba(55, 31, 14, 0.12);
-  --am-scroll-thumb: rgba(82, 45, 21, 0.58);
-  --am-card-bg: rgba(75, 42, 18, 0.13);
-  --am-card-border: rgba(70, 38, 18, 0.3);
+  --am-blacksteel: var(--rb-border);
+  --am-coke: var(--rb-bg);
+  --am-fire: var(--rb-hyperlink-h);
+  --am-fire-deep: var(--rb-accent-dim);
+  --am-wood: var(--rb-bg);
+  --am-leather: var(--rb-surface);
+  --am-gold: var(--rb-accent);
+  --am-gold-bright: var(--rb-hyperlink-h);
+  --am-wax: var(--rb-accent);
+  --am-wax-dark: var(--rb-accent-dim);
+  --am-good: #8da878;
+  --am-bad: #c08a8a;
+  --am-panel-top: var(--rb-surface);
+  --am-panel-bottom: var(--rb-bg);
+  --am-panel-border: var(--rb-border);
+  --am-panel-sheen: rgba(200, 134, 10, 0.05);
+  --am-row-bg: rgba(200, 134, 10, 0.04);
+  --am-row-hover: var(--rb-highlight);
+  --am-row-line: var(--rb-border-faint);
+  --am-title-shadow: rgba(0, 0, 0, 0.6);
+  --am-divider: var(--rb-border);
+  --am-input-bg: var(--rb-step-bg);
+  --am-input-border: var(--rb-border);
+  --am-input-placeholder: var(--rb-text-muted);
+  --am-scroll-track: transparent;
+  --am-scroll-thumb: var(--rb-border);
+  --am-card-bg: var(--rb-section-bg);
+  --am-card-border: var(--rb-accent-dim);
   position: relative;
   width: 100%;
   height: 100%;
@@ -46,34 +61,7 @@
   min-height: 0;
   overflow: hidden;
   color: var(--am-ink);
-  font-family: Georgia, 'Times New Roman', serif;
-}
-
-.AttributeMenu--theme-dark {
-  --am-ink: #e7d6b4;
-  --am-ink-soft: #b59a72;
-  --am-ink-faint: rgba(231, 214, 180, 0.32);
-  --am-parchment: #211d18;
-  --am-parchment-light: #2c2620;
-  --am-parchment-deep: #181410;
-  --am-panel-top: #2c2620;
-  --am-panel-bottom: #16120e;
-  --am-panel-border: #6f5320;
-  --am-row-bg: rgba(255, 226, 150, 0.05);
-  --am-row-hover: rgba(255, 204, 51, 0.12);
-  --am-row-line: rgba(180, 150, 90, 0.22);
-  --am-title-shadow: rgba(0, 0, 0, 0.55);
-  --am-panel-sheen: rgba(255, 220, 150, 0.06);
-  --am-divider: rgba(180, 150, 90, 0.4);
-  --am-input-bg: rgba(0, 0, 0, 0.35);
-  --am-input-border: rgba(180, 150, 90, 0.5);
-  --am-input-placeholder: rgba(200, 180, 140, 0.5);
-  --am-scroll-track: rgba(0, 0, 0, 0.25);
-  --am-scroll-thumb: rgba(180, 150, 90, 0.45);
-  --am-card-bg: rgba(255, 226, 150, 0.06);
-  --am-card-border: rgba(180, 150, 90, 0.3);
-  --am-good: #d8a83a;
-  --am-bad: #d2622f;
+  font-family: var(--rb-font-lore, Georgia, 'Times New Roman', serif);
 }
 
 .AttributeMenu__backdrop {
@@ -88,13 +76,13 @@
   box-sizing: border-box;
   overflow: hidden;
   background:
-    radial-gradient(circle at 24% 12%, rgba(255, 204, 51, 0.1), transparent 34%),
-    radial-gradient(circle at 78% 80%, rgba(8, 8, 7, 0.72), transparent 38%),
-    linear-gradient(180deg, #232220, #0c0c0b);
-  border: 1px solid var(--am-blacksteel);
+    radial-gradient(circle at 24% 12%, rgba(176, 141, 46, 0.08), transparent 34%),
+    radial-gradient(circle at 78% 80%, rgba(8, 8, 7, 0.6), transparent 38%),
+    var(--rb-bg);
+  border: 1px solid var(--rb-border);
   box-shadow:
-    inset 0 0 34px rgba(0, 0, 0, 0.65),
-    inset 0 0 0 1px rgba(255, 204, 51, 0.16);
+    inset 0 0 34px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(176, 141, 46, 0.12);
 }
 
 .AttributeMenu__panel {
@@ -109,12 +97,11 @@
   overflow: hidden;
   background:
     radial-gradient(circle at 18% 10%, var(--am-panel-sheen), transparent 28%),
-    radial-gradient(circle at 85% 95%, rgba(74, 34, 14, 0.18), transparent 36%),
     linear-gradient(180deg, var(--am-panel-top), var(--am-panel-bottom));
   border: 2px solid var(--am-panel-border);
   box-shadow:
-    inset 0 0 24px rgba(70, 32, 10, 0.34),
-    0 0 0 1px rgba(255, 204, 51, 0.22);
+    inset 0 0 24px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(176, 141, 46, 0.15);
 }
 
 .AttributeMenu__panel::before {
@@ -122,7 +109,7 @@
   position: absolute;
   inset: 5px;
   pointer-events: none;
-  border: 1px solid rgba(78, 42, 19, 0.22);
+  border: 1px solid var(--rb-border-faint);
 }
 
 .AttributeMenu__panel--seals {
@@ -262,59 +249,59 @@
 }
 
 .AttributeMenu__anatomyCircle--outer {
-  stroke: rgba(86, 48, 25, 0.5);
+  stroke: rgba(176, 141, 46, 0.55);
   stroke-width: 3;
 }
 
 .AttributeMenu__anatomyCircle--track {
-  stroke: rgba(86, 48, 25, 0.28);
+  stroke: rgba(176, 141, 46, 0.3);
   stroke-width: 1.2;
 }
 
 .AttributeMenu__anatomyCircle--middle {
-  stroke: rgba(86, 48, 25, 0.36);
+  stroke: rgba(176, 141, 46, 0.34);
   stroke-dasharray: 8 8;
   stroke-width: 1;
 }
 
 .AttributeMenu__anatomyCircle--inner {
-  stroke: rgba(86, 48, 25, 0.25);
+  stroke: rgba(176, 141, 46, 0.26);
   stroke-width: 1.3;
 }
 
 .AttributeMenu__anatomyGeometry {
-  stroke: rgba(86, 48, 25, 0.23);
+  stroke: rgba(176, 141, 46, 0.22);
   stroke-width: 1.4;
 }
 
 .AttributeMenu__anatomyArc {
-  stroke: rgba(117, 75, 38, 0.33);
+  stroke: rgba(176, 141, 46, 0.3);
   stroke-width: 2.2;
 }
 
 .AttributeMenu__bodyFill {
-  fill: rgba(74, 43, 24, 0.11);
-  stroke: rgba(62, 38, 23, 0.7);
+  fill: rgba(176, 141, 46, 0.08);
+  stroke: rgba(176, 141, 46, 0.6);
   stroke-width: 3;
   vector-effect: non-scaling-stroke;
 }
 
 .AttributeMenu__bodyHead {
-  fill: rgba(74, 43, 24, 0.15);
-  stroke: rgba(62, 38, 23, 0.74);
+  fill: rgba(176, 141, 46, 0.1);
+  stroke: rgba(176, 141, 46, 0.64);
   stroke-width: 3;
   vector-effect: non-scaling-stroke;
 }
 
 .AttributeMenu__bodyStroke {
-  stroke: rgba(43, 28, 18, 0.86);
+  stroke: rgba(201, 150, 50, 0.8);
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 9;
 }
 
 .AttributeMenu__bodyDetail {
-  stroke: rgba(157, 112, 51, 0.58);
+  stroke: rgba(176, 141, 46, 0.5);
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 3;
@@ -608,17 +595,15 @@
   z-index: 2;
   margin-bottom: 5px;
   padding: 4px 7px;
-  color: var(--am-ink-soft);
-  font-family: Verdana, sans-serif;
+  color: var(--rb-accent);
+  font-family: var(--rb-font-ui, Verdana, sans-serif);
   font-size: 10px;
   font-weight: bold;
-  letter-spacing: 0;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  background:
-    linear-gradient(90deg, rgba(73, 40, 18, 0.2), rgba(147, 103, 50, 0.08)),
-    var(--am-parchment);
-  border-top: 1px solid var(--am-row-line);
-  border-bottom: 1px solid var(--am-row-line);
+  background: var(--rb-surface);
+  border-top: 1px solid var(--rb-border-faint);
+  border-bottom: 1px solid var(--rb-border-faint);
 }
 
 .AttributeMenu__skill,
@@ -648,10 +633,10 @@
 }
 
 .AttributeMenu__skill.is-selected {
-  border-color: rgba(130, 36, 28, 0.78);
+  border-color: var(--rb-accent);
   box-shadow:
-    inset 0 0 10px rgba(119, 43, 25, 0.22),
-    0 0 0 1px rgba(190, 126, 50, 0.36);
+    inset 0 0 10px var(--rb-highlight),
+    0 0 0 1px rgba(176, 141, 46, 0.4);
 }
 
 .AttributeMenu__skillIcon {
@@ -678,7 +663,7 @@
 
 .AttributeMenu__placeholderMark {
   margin: 12px 0 18px;
-  color: rgba(84, 44, 22, 0.38);
+  color: rgba(176, 141, 46, 0.25);
   font-size: 32px;
   font-weight: bold;
   text-align: center;
@@ -718,9 +703,9 @@
   width: 76px;
   height: 76px;
   overflow: hidden;
-  background: rgba(255, 240, 196, 0.32);
-  border: 1px solid rgba(70, 38, 18, 0.55);
-  box-shadow: inset 0 0 12px rgba(61, 30, 12, 0.18);
+  background: var(--rb-step-bg);
+  border: 1px solid var(--rb-border);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .AttributeMenu__description {
