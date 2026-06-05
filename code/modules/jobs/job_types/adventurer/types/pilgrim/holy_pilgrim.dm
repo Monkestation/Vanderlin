@@ -204,6 +204,6 @@
 			robecolor = "#3d4139"
 		else //Enlightened Centrist
 			neck = /obj/item/clothing/neck/psycross/silver
-	var/obj/item/clothing/shirt/robe/colored/pilgrimrobe = new()
+	var/obj/item/clothing/shirt/robe/colored/pilgrimrobe = new(get_turf(equipped_human))
 	pilgrimrobe.color = robecolor
 	equipped_human.equip_to_slot(pilgrimrobe, ITEM_SLOT_ARMOR, TRUE)
