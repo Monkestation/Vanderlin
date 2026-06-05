@@ -21,6 +21,7 @@
 		remove_item(enchanted_item)
 	if(should_process)
 		STOP_PROCESSING(SSenchantment, src)
+	enchanted_item.enchantments -= src
 	enchanted_item = null
 	registered_signals = null
 	return ..()
