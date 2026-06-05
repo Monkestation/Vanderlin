@@ -14923,13 +14923,6 @@
 	dir = 8
 	},
 /area/outdoors/town/roofs)
-"jkd" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fake_machine/contractledger,
-/turf/open/floor/tile,
-/area/indoors/town/shop)
 "jkn" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/grass/cold,
@@ -19648,10 +19641,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
-"mpN" = (
-/obj/structure/fake_machine/contractledger,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/tavern)
 "mqj" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/closed/wall/mineral/wooddark,
@@ -98852,7 +98841,7 @@ dHp
 iFD
 kii
 xjj
-mpN
+cSl
 eoC
 oNt
 flM
@@ -107299,7 +107288,7 @@ rjc
 qvC
 kxS
 kxS
-jkd
+xGa
 fQn
 fQn
 pwn

@@ -15,13 +15,13 @@
 	var/should_keep_dated = FALSE
 
 /datum/elastic_shard/proc/should_fire()
-	return (REALTIMEOFDAY - last_fired) >= upload_frequency
+	return (world.time - last_fired) >= upload_frequency
 
 /datum/elastic_shard/proc/get_endpoint()
 	return CONFIG_GET(string/elastic_endpoint)
 
 /datum/elastic_shard/proc/fire(datum/controller/subsystem/elastic/SS)
-	last_fired = REALTIMEOFDAY
+	last_fired = world.time
 	var/compiled = get_compiled_data(SS)
 	if(!compiled)
 		return
@@ -29,7 +29,7 @@
 	reset()
 
 /datum/elastic_shard/proc/get_compiled_data(datum/controller/subsystem/elastic/SS)
-	if(!length(assoc_list_data) && (should_keep_dated && !length(abstract_information)))
+	if(!length(assoc_list_data) && !should_keep_dated)
 		return null
 	var/list/compiled = list()
 	compiled["@timestamp"] = time_stamp_metric()

@@ -152,6 +152,7 @@
 	icon_state = "butlershorts"
 	item_state = "butlershorts"
 	detail_color = CLOTHING_SOOT_BLACK
+	childcore = TRUE
 
 /obj/item/clothing/pants/trou/courtphysician
 	name = "sanguine trousers"
@@ -183,3 +184,22 @@
 	max_integrity = ARMOR_INT_LEG_HARDLEATHER
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+
+/obj/item/clothing/pants/trou/leather/shepherd
+	name = "shepherd's pants"
+	desc = "A pair of white pants decorated with red stripes and traditional patterning."
+	icon_state = "shepherdpants"
+
+/obj/item/clothing/pants/trou/leather/kazengun //no, not 'eastpants3', silly!
+	name = "gambeson trousers"
+	desc = "A form of Blackmeadow peasant's trousers. The fabric used in their manufacture is strong, and could probably turn away a few blows."
+	icon_state = "baggypants"
+	item_state = "baggypants"
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER - 50
+
+/obj/item/clothing/pants/trou/leather/pontifex
+	name = "pontifex's chaqchur"
+	desc = "A handmade pair of baggy, thin leather pants. They end in a tight stocking around the calf, ballooning out around the thigh."
+	icon_state = "monkpants"
+	item_state = "monkpants"
+	salvage_result = /obj/item/natural/hide/cured

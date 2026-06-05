@@ -1,0 +1,5 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Beggars now have 10 to 20 Crafting skill."
+  - bugfix: "Beggar stats restored to their previous (higher) values from pre skill-change."

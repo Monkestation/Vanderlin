@@ -180,6 +180,11 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: event whitelist, Player: [player], Job: [job.title]")
 		return FALSE
 
+	if((job.job_flags & JOB_REQUIRE_WHITELIST) && player.client?.is_whitelisted(initial(job.title)))
+		JobDebug("Eligibility failed: whitelist, Player: [player], Job: [job.title]")
+		return FALSE
+
+
 	// Activate triumph if we passed with it
 	if(dominated_species_check)
 		player.client?.activate_triumph_buy(TRIUMPH_BUY_RACE_ALL)
@@ -719,7 +724,7 @@ SUBSYSTEM_DEF(job)
 		var/banned = 0 //banned
 		var/young = 0 //account too young
 		for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
-			if(!(player.ready == PLAYER_READY_TO_PLAY && player.mind && !player.mind.assigned_role))
+			if(!(player.ready == PLAYER_READY_TO_PLAY))
 				continue //This player is not ready
 			if(is_role_banned(player.ckey, job.title) || QDELETED(player))
 				banned++
@@ -742,12 +747,16 @@ SUBSYSTEM_DEF(job)
 					low++
 				else
 					never++
-		SSblackbox.record_feedback("nested tally", "job_preferences", high, list("[job.title]", "high"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", medium, list("[job.title]", "medium"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", low, list("[job.title]", "low"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", never, list("[job.title]", "never"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", banned, list("[job.title]", "banned"))
-		SSblackbox.record_feedback("nested tally", "job_preferences", young, list("[job.title]", "young"))
+
+		record_job_preferences_full(
+			job.title,
+			high,
+			medium,
+			low,
+			never,
+			banned,
+			young,
+		)
 
 /datum/controller/subsystem/job/proc/PopcapReached()
 	var/hpc = CONFIG_GET(number/hard_popcap)

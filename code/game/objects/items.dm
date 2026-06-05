@@ -42,6 +42,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	obj_flags = NONE
 	var/item_flags = NONE
+	///do we have a child icon?
+	var/childcore = FALSE
 
 	var/list/hitsound
 	///Played when the item is used, for example tools

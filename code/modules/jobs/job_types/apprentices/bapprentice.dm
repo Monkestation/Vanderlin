@@ -52,16 +52,15 @@
 	beltr = /obj/item/key/blacksmith
 	beltl = /obj/item/weapon/hammer/iron
 	backr = /obj/item/storage/backpack/satchel
+	shoes = /obj/item/clothing/shoes/simpleshoes
 
 /datum/outfit/bapprentice/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/random
-		shoes = /obj/item/clothing/shoes/simpleshoes
 		armor = /obj/item/clothing/armor/leather/vest
 		wrists = /obj/item/clothing/wrists/bracers/leather
 	else
 		armor = /obj/item/clothing/shirt/dress/gen/colored/random
-		shoes = /obj/item/clothing/shoes/simpleshoes
 		shirt = /obj/item/clothing/shirt/undershirt
 		cloak = /obj/item/clothing/cloak/apron/brown

@@ -111,6 +111,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	///List of learned recipe TYPES.
 	var/list/learned_recipes
 	var/list/special_items = list()
+	var/list/loadout_item_colors = null
 
 	var/list/areas_entered = list()
 

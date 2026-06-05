@@ -1,0 +1,4 @@
+author: "The-Awful"
+delete-after: True
+changes:
+  - rscdel: "Removed barbarian faith restriction."

@@ -270,8 +270,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		OFFSET_NECK = list(0,-4),\
 		OFFSET_MOUTH = list(0,-4),\
 		OFFSET_PANTS = list(0,0),\
-		OFFSET_SHIRT = list(0,0),\
-		OFFSET_ARMOR = list(0,0),\
+		OFFSET_SHIRT = list(0,1),\
+		OFFSET_ARMOR = list(0,1),\
 		OFFSET_UNDIES = list(0,0),\
 	)
 

@@ -14,7 +14,7 @@
 	/// Whether this job is intended to give quests
 	var/is_quest_giver = FALSE
 	/// How many quests this job can take at once
-	var/max_active_quests = 3
+	var/max_active_quests = 1
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job

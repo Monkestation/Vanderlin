@@ -1,9 +1,10 @@
 SUBSYSTEM_DEF(regionthreat)
 	name = "Regional Threat"
-	wait = 15 MINUTES
+	wait = 5 MINUTES
 	flags = SS_KEEP_TIMING | SS_BACKGROUND
 	runlevels = RUNLEVEL_GAME
 	var/list/threat_regions = list()
+	COOLDOWN_DECLARE(harlequinn_spawn_cooldown)
 
 /datum/controller/subsystem/regionthreat/Initialize(start_timeofday)
 	for(var/datum/threat_region/region as anything in subtypesof(/datum/threat_region))
@@ -15,15 +16,40 @@ SUBSYSTEM_DEF(regionthreat)
 /datum/controller/subsystem/regionthreat/fire(resumed)
 	var/player_count = length(GLOB.player_list)
 	var/ishighpop = player_count >= HIGHPOP_THRESHOLD
+
 	for(var/datum/threat_region/TR as anything in threat_regions)
 		if(ishighpop)
 			TR.increase_latent_ambush(TR.highpop_tick)
 		else
 			TR.increase_latent_ambush(TR.lowpop_tick)
 
+		if(TR.latent_ambush >= TR.max_ambush)
+			trigger_invasion(TR)
+
+/datum/controller/subsystem/regionthreat/proc/trigger_invasion(datum/threat_region/TR)
+	if(!COOLDOWN_FINISHED(TR, invasion_cooldown))
+		return
+
+	COOLDOWN_START(TR, invasion_cooldown, 30 MINUTES)
+
+	log_game("THREAT: [TR.region_name] reached invasion threshold ([TR.latent_ambush]). Triggering invasion.")
+	message_admins("THREAT: [TR.region_name] has reached invasion threshold! Invasion triggered.")
+
+	TR.on_invasion_threshold()
+
+
 /datum/controller/subsystem/regionthreat/proc/get_region(region_name)
 	for(var/datum/threat_region/TR as anything in threat_regions)
 		if(TR.region_name == region_name)
+			return TR
+	return null
+
+/datum/controller/subsystem/regionthreat/proc/get_region_for_turf(turf/T)
+	if(!T)
+		return null
+	var/area/area = get_area(T)
+	for(var/datum/threat_region/TR as anything in threat_regions)
+		if(TR.region_name == area.threat_region)
 			return TR
 	return null
 
