@@ -1,53 +1,50 @@
 .AttributeMenu {
-  --rb-bg: #1a1209;
   --rb-surface: #2b1f12;
   --rb-surface-alt: #332517;
   --rb-border: #5c3d1e;
   --rb-border-faint: #3d2910;
   --rb-accent: #b08d2e;
   --rb-accent-dim: #8b5e08;
-  --rb-text: #c9b694;
+  --rb-text: #5a4632;
   --rb-text-muted: #8b7154;
   --rb-highlight: rgba(200, 134, 10, 0.15);
   --rb-hyperlink: #c99632;
   --rb-hyperlink-h: #f0c15a;
   --rb-section-bg: rgba(44, 28, 10, 0.7);
   --rb-step-bg: rgba(30, 18, 5, 0.8);
+  --rb-title: #8b1e1e;
+  --rb-parchment-top: #efe2c1;
+  --rb-parchment-bottom: #ddcda7;
+  --rb-parchment-texture:
+    radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(0, 0, 0, 0.02) 2px, transparent 2px);
+  --rb-font-ui: 'Verdana', sans-serif;
+  --rb-font-lore: Georgia, 'Times New Roman', serif;
 
   --am-ink: var(--rb-text);
   --am-ink-soft: var(--rb-text-muted);
-  --am-ink-faint: rgba(139, 113, 84, 0.5);
-  --am-parchment: var(--rb-surface);
-  --am-parchment-light: var(--rb-surface-alt);
-  --am-parchment-deep: var(--rb-surface);
-  --am-gold-mat: var(--rb-accent);
-  --am-copper: #b87333;
-  --am-bronze: #ccbc63;
-  --am-silver: #d1e6e3;
-  --am-steel: #5c5454;
-  --am-iron: #5f5b57;
-  --am-blacksteel: var(--rb-border);
-  --am-coke: var(--rb-bg);
-  --am-fire: var(--rb-hyperlink-h);
-  --am-fire-deep: var(--rb-accent-dim);
-  --am-wood: var(--rb-bg);
-  --am-leather: var(--rb-surface);
+  --am-ink-faint: rgba(90, 70, 50, 0.4);
   --am-gold: var(--rb-accent);
   --am-gold-bright: var(--rb-hyperlink-h);
+  --am-good: #4e7a3a;
+  --am-bad: #9c3a2a;
+  --am-parchment: var(--rb-parchment-bottom);
+  --am-parchment-light: var(--rb-parchment-top);
+  --am-parchment-deep: var(--rb-parchment-bottom);
   --am-wax: var(--rb-accent);
   --am-wax-dark: var(--rb-accent-dim);
-  --am-good: #8da878;
-  --am-bad: #c08a8a;
-  --am-panel-top: var(--rb-surface);
-  --am-panel-bottom: var(--rb-bg);
+  --am-fire: var(--rb-hyperlink-h);
+  --am-fire-deep: var(--rb-accent-dim);
+  --am-leather: var(--rb-surface);
+  --am-coke: var(--rb-surface-alt);
   --am-panel-border: var(--rb-border);
-  --am-panel-sheen: rgba(200, 134, 10, 0.05);
-  --am-row-bg: rgba(200, 134, 10, 0.04);
+  --am-panel-sheen: rgba(255, 255, 255, 0.18);
+  --am-row-bg: rgba(255, 255, 255, 0.12);
   --am-row-hover: var(--rb-highlight);
-  --am-row-line: var(--rb-border-faint);
-  --am-title-shadow: rgba(0, 0, 0, 0.6);
+  --am-row-line: rgba(92, 61, 30, 0.3);
+  --am-title-shadow: rgba(255, 247, 224, 0.5);
   --am-divider: var(--rb-border);
-  --am-input-bg: var(--rb-step-bg);
+  --am-input-bg: rgba(255, 255, 255, 0.25);
   --am-input-border: var(--rb-border);
   --am-input-placeholder: var(--rb-text-muted);
   --am-scroll-track: transparent;
@@ -76,13 +73,11 @@
   box-sizing: border-box;
   overflow: hidden;
   background:
-    radial-gradient(circle at 24% 12%, rgba(176, 141, 46, 0.08), transparent 34%),
-    radial-gradient(circle at 78% 80%, rgba(8, 8, 7, 0.6), transparent 38%),
-    var(--rb-bg);
+    var(--rb-parchment-texture),
+    linear-gradient(180deg, var(--rb-parchment-top), var(--rb-parchment-bottom));
+  background-size: 4px 4px, 8px 8px, 100% 100%;
   border: 1px solid var(--rb-border);
-  box-shadow:
-    inset 0 0 34px rgba(0, 0, 0, 0.55),
-    inset 0 0 0 1px rgba(176, 141, 46, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(92, 61, 30, 0.25);
 }
 
 .AttributeMenu__panel {
@@ -96,11 +91,12 @@
   box-sizing: border-box;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 10%, var(--am-panel-sheen), transparent 28%),
-    linear-gradient(180deg, var(--am-panel-top), var(--am-panel-bottom));
+    var(--rb-parchment-texture),
+    linear-gradient(180deg, var(--rb-parchment-top), var(--rb-parchment-bottom));
+  background-size: 4px 4px, 8px 8px, 100% 100%;
   border: 2px solid var(--am-panel-border);
   box-shadow:
-    inset 0 0 24px rgba(0, 0, 0, 0.34),
+    inset 0 0 24px rgba(92, 61, 30, 0.12),
     0 0 0 1px rgba(176, 141, 46, 0.15);
 }
 
@@ -137,16 +133,16 @@
 }
 
 .AttributeMenu__eyebrow {
-  color: var(--am-ink-soft);
-  font-family: Verdana, sans-serif;
+  color: var(--rb-accent);
+  font-family: var(--rb-font-ui, Verdana, sans-serif);
   font-size: 9px;
   font-weight: bold;
-  letter-spacing: 0;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .AttributeMenu__title {
-  color: var(--am-ink);
+  color: var(--rb-title);
   font-size: 22px;
   font-weight: bold;
   line-height: 1.1;
@@ -249,59 +245,59 @@
 }
 
 .AttributeMenu__anatomyCircle--outer {
-  stroke: rgba(176, 141, 46, 0.55);
+  stroke: rgba(92, 61, 30, 0.55);
   stroke-width: 3;
 }
 
 .AttributeMenu__anatomyCircle--track {
-  stroke: rgba(176, 141, 46, 0.3);
+  stroke: rgba(92, 61, 30, 0.32);
   stroke-width: 1.2;
 }
 
 .AttributeMenu__anatomyCircle--middle {
-  stroke: rgba(176, 141, 46, 0.34);
+  stroke: rgba(92, 61, 30, 0.38);
   stroke-dasharray: 8 8;
   stroke-width: 1;
 }
 
 .AttributeMenu__anatomyCircle--inner {
-  stroke: rgba(176, 141, 46, 0.26);
+  stroke: rgba(92, 61, 30, 0.28);
   stroke-width: 1.3;
 }
 
 .AttributeMenu__anatomyGeometry {
-  stroke: rgba(176, 141, 46, 0.22);
+  stroke: rgba(92, 61, 30, 0.24);
   stroke-width: 1.4;
 }
 
 .AttributeMenu__anatomyArc {
-  stroke: rgba(176, 141, 46, 0.3);
+  stroke: rgba(92, 61, 30, 0.32);
   stroke-width: 2.2;
 }
 
 .AttributeMenu__bodyFill {
-  fill: rgba(176, 141, 46, 0.08);
-  stroke: rgba(176, 141, 46, 0.6);
+  fill: rgba(92, 61, 30, 0.1);
+  stroke: rgba(74, 50, 26, 0.7);
   stroke-width: 3;
   vector-effect: non-scaling-stroke;
 }
 
 .AttributeMenu__bodyHead {
-  fill: rgba(176, 141, 46, 0.1);
-  stroke: rgba(176, 141, 46, 0.64);
+  fill: rgba(92, 61, 30, 0.14);
+  stroke: rgba(74, 50, 26, 0.74);
   stroke-width: 3;
   vector-effect: non-scaling-stroke;
 }
 
 .AttributeMenu__bodyStroke {
-  stroke: rgba(201, 150, 50, 0.8);
+  stroke: rgba(58, 40, 22, 0.85);
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 9;
 }
 
 .AttributeMenu__bodyDetail {
-  stroke: rgba(176, 141, 46, 0.5);
+  stroke: rgba(150, 110, 50, 0.55);
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 3;
@@ -663,7 +659,7 @@
 
 .AttributeMenu__placeholderMark {
   margin: 12px 0 18px;
-  color: rgba(176, 141, 46, 0.25);
+  color: rgba(92, 61, 30, 0.32);
   font-size: 32px;
   font-weight: bold;
   text-align: center;
@@ -722,23 +718,24 @@
   gap: 8px;
   margin-bottom: 9px;
   padding: 7px 8px;
-  background: var(--am-card-bg);
-  border: 1px solid var(--am-card-border);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--rb-border-faint);
 }
 
 .AttributeMenu__valueCard span,
 .AttributeMenu__detailLine span,
 .AttributeMenu__noteBlock h3 {
-  color: var(--am-ink-soft);
-  font-family: Verdana, sans-serif;
+  color: var(--rb-accent);
+  font-family: var(--rb-font-ui, Verdana, sans-serif);
   font-size: 9px;
   font-weight: bold;
-  letter-spacing: 0;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .AttributeMenu__valueCard strong {
   font-size: 26px;
+  color: var(--am-ink);
 }
 
 .AttributeMenu__detailGrid {
