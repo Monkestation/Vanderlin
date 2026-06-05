@@ -1834,7 +1834,7 @@
 /area/outdoors/wilderness)
 "Nc" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt/road,
 /area/under/cave)
 "Nh" = (

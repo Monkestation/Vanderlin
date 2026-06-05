@@ -369,6 +369,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	pixel_x = base_pixel_x + rand(-5, 5)
 	pixel_y = base_pixel_y + rand(-5, 5)
 
+//Cigars
+
+/obj/item/clothing/face/cigarette/rollie/nicotine/zigar
+	name = "zigar"
+	desc = "A strong, manly verison of the common zig, this isnt your average smokers treat- No, this is for the humble, the wise, the ones 'in' on it. You know who you are."
+	icon_state = "zigaroff"
+	icon_on = "zigaron"
+	type_butt = /obj/item/cigbutt/zigar
+	chem_volume = 120
+	list_reagents = list(/datum/reagent/drug/nicotine = 120)
+
+/obj/item/cigbutt/zigar
+	name = "zigar butt"
+
 /////////////////
 //SMOKING PIPES//
 /////////////////

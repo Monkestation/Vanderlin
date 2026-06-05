@@ -31,6 +31,10 @@
 	created_item = /obj/item/reagent_containers/glass/bowl/pewter
 	output_amount = 2
 
+/datum/anvil_recipe/tools/tin/zig
+	name = "tin zigbox"
+	created_item = /obj/item/storage/fancy/cigarettes/tinzig/empty
+
 // --------- COPPER -----------
 
 /datum/anvil_recipe/tools/copper
@@ -264,6 +268,11 @@
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/surgeontoolspawner
 
+/datum/anvil_recipe/tools/iron/gravefence_iron
+	name = "Iron Gravefence"
+	created_item = /obj/item/gravedecor/gravefence/iron
+	category = "Gravefences"
+
 /datum/anvil_recipe/tools/iron/bowl
 	name = "Bowl (iron)"
 	created_item = /obj/item/reagent_containers/glass/bowl/iron
@@ -356,6 +365,11 @@
 	name = "Platters (gold)"
 	created_item = /obj/item/plate/gold
 	craftdiff = 2
+
+/datum/anvil_recipe/tools/gold/headstone_astrata
+	name = "Golden Astratan Headstone"
+	created_item = /obj/item/gravedecor/headstone/astrata
+	category = "Headstones"
 
 // --------- CASTING TOOLS -----------
 /datum/anvil_recipe/tools/casting

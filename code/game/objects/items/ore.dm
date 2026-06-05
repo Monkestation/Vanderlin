@@ -329,3 +329,179 @@
 	melting_material = /datum/material/steel
 	sellprice = 40
 	item_weight = 5.5 KILOGRAMS
+
+/obj/item/ingot/aalloy
+	name = "decrepit ingot"
+	desc = "A decrepit slab of wrought bronze, uncomfortably cold to the touch. The gales shift into whispers, when held for long enough; 'progress commands sacrifice'."
+	icon_state = "ingotancient"
+	smeltresult = /obj/item/ingot/aaslag
+	melting_material = /datum/material/ancient_alloy
+	color = "#bb9696"
+	sellprice = 33
+	item_weight = 5.5 KILOGRAMS
+
+/obj/item/ingot/purifiedaalloy
+	name = "ancient alloy"
+	desc = "An ingot of polished gilbranze, teeming with forbidden knowledge. The reflection on its surface isn't yours; it smiles back at you with eternal malice."
+	icon_state = "ingotancient"
+	smeltresult = /obj/item/ingot/purifiedaalloy
+	melting_material = /datum/material/purified_alloy
+	sellprice = 111
+	item_weight = 5.5 KILOGRAMS
+
+/obj/item/ingot/aaslag
+	name = "glimmering slag"
+	desc = "A mass of wrought bronze, rendered lame from the forge's heat. Sometimes, dead is better. </br>Yet, perhaps alloying it in equal parts with another glimmering piece of ore could resurrect its secrets."
+	icon_state = "ancientslag"
+	smeltresult = /obj/item/ingot/aaslag
+	melting_material = /datum/material/glimmering_slag
+	sellprice = 6
+	item_weight = 6.15 KILOGRAMS
+
+/obj/item/ingot/aaslag/Initialize()
+	. = ..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#FF4500", "alpha" = 50, "size" = 1))
+
+//Anomalous Smeltings
+/obj/item/ingot/weeping
+	name = "enduring ingot"
+	desc = "A slab of metal, aged and bare. You finally know what it is, yet no word can be sired to describe it. </br>'..none will ever know the greatest truths; of Aeon's grasp, of Adonai's presence, of Psydon's fate..' </br>'..but, perhaps, that's for the better. The malaise is gone, but the evils of this world are still very real..' </br>'..find a way to give the remains a new life; a new vessel that may yet make the followers of evil weep..'"
+	icon_state = "ingotsilv"
+	smeltresult = /obj/item/ingot/weeping
+	melting_material = /datum/material/weeping
+	color = "#CECA9C"
+	sellprice = 222
+	item_weight = 6.65 KILOGRAMS
+
+/obj/item/ingot/weeping/Initialize()
+	. = ..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#8B0000", "alpha" = 100, "size" = 1))
+
+/obj/item/ingot/draconic
+	name = "draconic ingot"
+	desc = "A slab of obsidian, crackling with energy. Your fingers blister from the sheer heat, radiating off of its glassy surface. </br>'..no man, be-they a saint or sinner, can truly withstand such power..' </br>'..but, perhaps, you are different..' </br>'..find a way to give the remains a new life; a new vessel that may yet make the followers of evil weep..'"
+	icon_state = "ingotblacksteel"
+	smeltresult = /obj/item/ingot/draconic
+	melting_material = /datum/material/draconic
+	color = "#70b8ff"
+	sellprice = 333
+	item_weight = 5.5 KILOGRAMS
+
+/obj/item/ingot/draconic/Initialize()
+	. = ..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#FF4500", "alpha" = 100, "size" = 1))
+
+/obj/item/ingot/avantyne
+	name = "avantyne wafer"
+	desc = "This ingot, though borne of unholy circumstance, rumbles with otherworldly potential. Chiseled onto the darksteel is a forbidden iteration of the psycross; a foreboding sign for those who bow to lesser gods."
+	icon_state = "ingotavantyne"
+	smeltresult = null
+	sellprice = 130
+	smeltresult = /obj/item/ingot/avantyne
+	melting_material = /datum/material/avantyne
+
+/obj/item/ingot/ketryl
+	name = "ketryl ingot"
+	desc = "Named after its mythical status, this ingot is forged as per the dwarven standards etched in a small imprint on the ingot's surface. Ketryl is often folded in thin layers, stronger than steel, yet unusually light at the same time."
+	icon_state = "ingotketryl"
+	smeltresult = null
+	sellprice = 555
+	smeltresult = /obj/item/ingot/ketryl
+	melting_material = /datum/material/ketryl
+
+/obj/item/ingot/lithmyc
+	name = "lithmyc ingot"
+	desc = "A strange green ingot. It seems to be covered in an oily metal-liquid, though it refuses to leave the ingot-shape no matter how you much you try. No one in the region yet knows what the metal can be shaped into, as it's exceedingly stubborn. But, it sure seems priceless."
+	icon_state = "ingotlithmyc"
+	smeltresult = /obj/item/ingot/lithmyc
+	melting_material = /datum/material/lithmyc
+	sellprice = 444
+
+/obj/item/ingot/lithmyc/Initialize()
+	. = ..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#A0E65C", "alpha" = 100, "size" = 1))
+
+
+/obj/item/ingot/component //Root. Don't use under most circumstances.
+	name = "substanceless presence"
+	desc = "Something that you were likely never meant to see. Pray to a higher presence for assistance, before rendering it asunder in the forge's flames once more."
+	icon_state = "oreada"
+	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	sellprice = 1
+
+/obj/item/ingot/component/glutcrystal
+	name = "crystalline glut"
+	desc = "Fractal violence, gleaming with a crimson haze that beckons for its final purpose to be accomplished."
+	icon_state = "component_blood"
+	smeltresult = /obj/item/gem/blood_diamond //Ensures that it can be reused for any Glut-specific ritual, should one find this in its crystalline form.
+	sellprice = 33
+
+/obj/item/ingot/component/glutcrystal/examine(mob/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.patron.type == /datum/patron/inhumen/graggar)
+			. += span_danger("You know this gem well. They are born out of great violence, but only if it involves the mightiest of warriors. </br>Fleshcrafting it with the meat of whatever warrior birthed this gem will allow me to summon another of their kind into this world.  </br>Melting away its crystalline shell is ideal, if you wish to ensure no chance for error while conducting such a ritual.")
+
+/obj/item/ingot/component/glutcrystal/Initialize()
+	. = ..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#8B0000", "alpha" = 120, "size" = 1))
+
+/obj/item/ingot/component/heapofrawiron
+	name = "heap of raw iron"
+	desc = "A massive hunk, born from the incoherent fusion of molten iron. Chunks of ore-and-ingotry peak out from its jagged surface, yearning to be refined - be it into ingots, or something more purposeful."
+	icon_state = "component_berserkheap"
+	melting_material = /datum/material/iron
+	melt_amount = 300
+	sellprice = 44
+
+/obj/item/ingot/component/berserkswordblade
+	name = "blade of the berserkers sword"
+	desc = "A massive blade, forged from a raw heap of iron. The unique spike-styled tang seems to be longer than what'd be seen on most greatswords, stowable only by the innards of a fittingly large handle."
+	icon_state = "component_berserkblade"
+	melting_material = /datum/material/iron
+	melt_amount = 400
+	sellprice = 33
+
+/obj/item/ingot/component/berserkswordgrip
+	name = "handle of the berserkers sword"
+	desc = "A massive handle, assembled from the double-handed grip of an Executioner's Sword. The unique crescent-styled crossguard seems to have a slot, fittable only by the tang of a fittingly large blade."
+	icon_state = "component_berserkhandle"
+	sellprice = 33
+
+/obj/item/ingot/component/threadavantyne
+	name = "avantyne thread"
+	desc = "These strands, though borne of unholy circumstance, shimmer with otherworldly potential. Each wire of darksteel seem to twitch with vigor, whenever brought close to another alloy; like a parasite drawn to a host."
+	icon_state = "component_avantynethread"
+	sellprice = 66
+
+/obj/item/ingot/component/threadketryl
+	name = "ketryl thread"
+	desc = "Named after its mythical status, these glimmering strands are stronger than steel, yet unusually light at the same time."
+	icon_state = "component_ketrylthread"
+	sellprice = 111
+
+/obj/item/ingot/component/zizo
+	name = "avantyne fragment"
+	desc = "Whispering fragments of an otherworldly alloy. </br>Power always comes at a price."
+	icon_state = "component_zizo"
+	dropshrink = 0.7
+
+/obj/item/ingot/component/graggar
+	name = "vicious fragment"
+	desc = "Bleeding fragments of an otherworldly alloy. </br>Murder is nothing more than justice without arbitration."
+	icon_state = "component_graggar"
+	dropshrink = 0.7
+
+/obj/item/ingot/component/matthios
+	name = "gilded fragment"
+	desc = "Glimmering fragments of an otherworldly alloy. </br>Wealth drags even the noblest souls down to perdition."
+	icon_state = "component_matthios"
+	dropshrink = 0.7
+
+/obj/item/ingot/component/baotha
+	name = "saccharine fragment"
+	desc = "Aromatic fragments of an otherworldly alloy. </br>Despair is the gravest, most agonizing poison of them all."
+	icon_state = "component_baotha"
+	dropshrink = 0.7

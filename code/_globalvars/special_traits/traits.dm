@@ -19,6 +19,7 @@
 	var/list/restricted_races
 	var/list/restricted_jobs
 	var/allowed_flaw
+	var/cost_modifier = 2
 
 /// check if this characters can be applied this special_trait
 /datum/special_trait/proc/can_apply(mob/living/carbon/human/character)
@@ -302,6 +303,8 @@
 	character.grant_language(/datum/language/celestial)
 	character.grant_language(/datum/language/orcish)
 	character.grant_language(/datum/language/deepspeak)
+	character.grant_language(/datum/language/halfling)
+	character.grant_language(/datum/language/gronnic)
 	character.grant_language(/datum/language/newpsydonic)
 	character.grant_language(/datum/language/oldpsydonic)
 	character.grant_language(/datum/language/zalad)
@@ -345,6 +348,8 @@
 	character.grant_language(/datum/language/celestial)
 	character.grant_language(/datum/language/orcish)
 	character.grant_language(/datum/language/deepspeak)
+	character.grant_language(/datum/language/halfling)
+	character.grant_language(/datum/language/gronnic)
 	character.grant_language(/datum/language/newpsydonic)
 	character.grant_language(/datum/language/oldpsydonic)
 	character.grant_language(/datum/language/zalad)

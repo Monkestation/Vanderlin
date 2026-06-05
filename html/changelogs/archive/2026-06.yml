@@ -1,0 +1,33 @@
+2026-06-01:
+  Monkeke2:
+  - rscadd: Adds the Street Sweeper class
+  - map: Changed the empty room above & north of the clinic into the sweeper's closet.
+2026-06-02:
+  tired-wired:
+  - rscadd: Added the Gallowband roles.
+  - rscadd: Added Osslandic as a selectable language for the quirk.
+2026-06-03:
+  Archeonan:
+  - rscadd: Added 3 new Grenzelhoft Mercenary classes
+  - rscdel: Removed old Grenzelhoft Mercenary
+  Ben10083:
+  - code_imp: Improved logic to mapped in graves to have some bodies stored in a coffin
+      or sheet
+  - bugfix: Fixed graves not supporting simple animals.
+  ModDownloading:
+  - qol: The Hand no longer is assigned an offscreen NPC spouse roundstart.
+2026-06-05:
+  dwasint:
+  - refactor: Loadout, Be Special, and Triumph Buy menu combined with new UI.
+  - qol: Loadouts can now be made by non-donators, using TRIUMPHs to purchase items
+      to use.
+  - qol: Many loadout items now support dying and detailing
+  - balance: Be Special is now saved until used, and will not go away until you play
+      a round with it.
+  - balance: Be Special now allows you to purchase specific specials at the cost of
+      TRIUMPHs, donators get a discount.
+  - rscadd: wedding bands & other rings, can be crafted at an anvil with the respective
+      metal & gem
+  - rscadd: new tailorable clothes to mirror new items in the loadout shop
+  - rscadd: new smelt results for items that previously lacked them like ancient armors
+  - rscadd: new gold armor set that can be smithed with gold ingots

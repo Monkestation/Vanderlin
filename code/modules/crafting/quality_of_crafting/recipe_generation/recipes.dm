@@ -580,23 +580,23 @@
 	data["desc"] = desc
 
 	var/sev_text = "Unknown"
-	var/sev_color = "white"
+	var/sev_color = "slategray"
 	switch(severity)
 		if(WOUND_SEVERITY_LIGHT)
 			sev_text = "Light"
-			sev_color = "green"
+			sev_color = "forestgreen"
 		if(WOUND_SEVERITY_MODERATE)
 			sev_text = "Moderate"
-			sev_color = "yellow"
+			sev_color = "goldenrod"
 		if(WOUND_SEVERITY_SEVERE)
 			sev_text = "Severe"
-			sev_color = "orange"
+			sev_color = "sienna"
 		if(WOUND_SEVERITY_CRITICAL)
 			sev_text = "Critical"
-			sev_color = "red"
+			sev_color = "firebrick"
 		if(WOUND_SEVERITY_BIOHAZARD)
 			sev_text = "BIOHAZARD"
-			sev_color = "purple"
+			sev_color = "rebeccapurple"
 
 	data["severity_text"] = sev_text
 	data["severity_color"] = sev_color
@@ -653,17 +653,17 @@
 	data["desc"] = desc
 
 	var/slot_name = "Unknown"
-	var/slot_color = "white"
+	var/slot_color = "slategray"
 	switch(slot)
 		if(INPUT_NODE)
 			slot_name = "Input Node"
-			slot_color = "cyan"
+			slot_color = "cadetblue"
 		if(OUTPUT_NODE)
 			slot_name = "Output Node"
-			slot_color = "orange"
+			slot_color = "sienna"
 		if(SPECIAL_NODE)
 			slot_name = "Special Node"
-			slot_color = "purple"
+			slot_color = "rebeccapurple"
 
 	data["slot_name"] = slot_name
 	data["slot_color"] = slot_color

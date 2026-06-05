@@ -44,6 +44,17 @@
 		if(do_i_cough)
 			owner.emote("cough")
 
+/obj/item/organ/lungs/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s lips and fingertips have a faint bluish tinge, and [owner.p_their()] chest rises and falls in rapid, shallow heaves.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b>'s breathing is visibly rapid and labored.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b>'s breathing seems slightly faster than normal.")
+
+
 /obj/item/organ/lungs/get_availability(datum/species/S)
 	return !(TRAIT_NOBREATH in S.inherent_traits)
 

@@ -341,6 +341,8 @@
 		return FALSE
 	if(user.used_intent.type != INTENT_SPLASH)
 		return FALSE
+	if(!user.Adjacent(target))
+		return FALSE
 
 	var/punctuation = ismob(target) ? "!" : "."
 	var/reagent_text
@@ -374,7 +376,7 @@
 
 	SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, target, reagents.reagent_list)
 	reagents.reaction(target, TOUCH)
-	chem_splash(target.loc, 2, list(reagents))
+	chem_splash(get_turf(target), 2, list(reagents))
 	log_combat(user, target, "splashed", reagent_text)
 	reagents.clear_reagents()
 

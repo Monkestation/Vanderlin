@@ -151,7 +151,7 @@
 	return ..()
 
 /obj/machinery/light/fueled/smelter/process()
-	. = ..()
+	..()
 	if(!on || !length(contained_items))
 		return
 	if(smelting_progress < smelting_threshold)
