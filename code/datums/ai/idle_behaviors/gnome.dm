@@ -16,8 +16,6 @@
 
 /datum/idle_behavior/gnome_enhanced_idle/perform_idle_behavior(delta_time, datum/ai_controller/controller)
 	. = ..()
-	if(!controller.able_to_run())
-		return
 	var/mob/living/simple_animal/hostile/gnome_homunculus/gnome_pawn = controller.pawn
 	if(!istype(gnome_pawn))
 		return
@@ -30,8 +28,6 @@
 	if(controller.blackboard[BB_BASIC_MOB_FOOD_TARGET]) // this means we are likely eating a corpse
 		return
 	if(controller.blackboard[BB_RESISTING]) //we are trying to resist
-		return
-	if(controller.blackboard[BB_IS_BEING_RIDDEN])
 		return
 
 

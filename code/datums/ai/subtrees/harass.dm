@@ -141,7 +141,7 @@
 	var/retreat_dir = REVERSE_DIR(get_dir(pawn, target))
 	for(var/i in 1 to HARASS_RETREAT_DIST)
 		var/turf/next = get_step(retreat_turf, retreat_dir)
-		if(!next || !next.can_traverse_safely(pawn) || next.density)
+		if(!next || !next.can_cross_safely(pawn) || next.density)
 			break
 		retreat_turf = next
 	set_movement_target(controller, retreat_turf)

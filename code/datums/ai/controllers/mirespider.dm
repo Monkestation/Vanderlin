@@ -139,7 +139,7 @@
 				return SUBTREE_RETURN_FINISH_PLANNING
 
 	var/mob/living/simple_animal/hostile/mirespider_lurker/lurker = controller.pawn
-	if (lurker)
+	if (istype(lurker))
 		lurker.clear_followers_if_any()
 
 	controller.queue_behavior(ranged_attack_behavior, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETTING_DATUM, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)

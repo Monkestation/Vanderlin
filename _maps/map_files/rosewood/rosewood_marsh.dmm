@@ -114,8 +114,8 @@
 /area/indoors/mountains)
 "at" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "au" = (
@@ -1590,7 +1590,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/lich)
 "ir" = (
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
@@ -3540,7 +3540,7 @@
 /area/indoors/mountains)
 "tx" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "tz" = (
@@ -4549,7 +4549,7 @@
 /obj/structure/chair/wood/alt{
 	dir = 1
 	},
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
@@ -6285,9 +6285,9 @@
 /turf/open/floor/herringbone,
 /area/indoors/lich)
 "Hd" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "He" = (
@@ -7284,7 +7284,7 @@
 	pixel_x = 0;
 	pixel_y = -11
 	},
-/obj/effect/landmark/start/bogwitch_apprentice,
+/obj/effect/landmark/start/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "MR" = (
@@ -9395,7 +9395,7 @@
 /area/indoors/lich)
 "YJ" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
@@ -110601,7 +110601,7 @@ Av
 bD
 bD
 Av
-bD
+tx
 Av
 Av
 at
@@ -111005,8 +111005,8 @@ cu
 Av
 bD
 bD
-tx
 bD
+Hl
 Av
 Hl
 Av

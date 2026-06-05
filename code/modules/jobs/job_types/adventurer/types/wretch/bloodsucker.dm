@@ -5,18 +5,19 @@
 		STAT_CONSTITUTION = 1,
 		STAT_STRENGTH = 2,
 		STAT_INTELLIGENCE = -1,
-		/datum/attribute/skill/misc/swimming = 3,
-		/datum/attribute/skill/misc/climbing = 5,
-		/datum/attribute/skill/misc/riding = 3,
-		/datum/attribute/skill/misc/reading = 4,
-		/datum/attribute/skill/misc/music = 6,
-		/datum/attribute/skill/craft/cooking = 2,
-		/datum/attribute/skill/combat/wrestling = 3,
-		/datum/attribute/skill/combat/unarmed = 5,
-		/datum/attribute/skill/combat/knives = 2,
-		/datum/attribute/skill/misc/sewing = 2,
-		/datum/attribute/skill/craft/crafting = 2,
-		/datum/attribute/skill/craft/carpentry = 3,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 60,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 50,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/carpentry = 30,
 	)
 
 /datum/job/advclass/wretch/bloodsucker
@@ -57,7 +58,8 @@
 
 /datum/outfit/bloodsucker/post_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-	eyes?.glows = TRUE
-	eyes?.update_appearance(UPDATE_OVERLAYS)
+	var/list/eye_list = H.getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+		eyes?.glows = TRUE
+		eyes?.update_appearance(UPDATE_OVERLAYS)
 

@@ -14,6 +14,7 @@
 	sewrepair = null
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_STRONG
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/wrists/bracers/naledi
 	name = "sojourner's wrappings"
@@ -31,6 +32,7 @@
 	blocksound = SOFTHIT
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/wrists/bracers/iron
 	name = "iron plate vambraces"
@@ -89,6 +91,7 @@
 	dyeable = TRUE
 	salvage_result = null
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 650 GRAMS
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BRACERS ARE INTENDED
 //KEEP THIS IN MIND
@@ -98,14 +101,14 @@
 	name = "hardened leather bracers"
 	desc = "Hardened leather braces that will keep your wrists safe from bludgeoning."
 	armor = list("blunt" = 60, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST) //We're losing stab here
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD + 50
 
 /obj/item/clothing/wrists/bracers/leather/masterwork
 	name = "masterwork leather bracers"
 	desc = "These bracers are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST) //We're getting chop here
+	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STANDARD + 100
 
 /obj/item/clothing/wrists/bracers/leather/masterwork/Initialize()
@@ -140,6 +143,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
 	alternate_worn_layer = WRISTS_LAYER
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/clothing/wrists/bracers/psythorns/equipped(mob/user, slot)
 	. = ..()
@@ -156,7 +160,8 @@
 		if(user.is_holding(src))
 			user.dropItemToGround(src)
 			user.put_in_hands(P)
-		user.adjustBruteLoss(25)
+		var/obj/item/bodypart/arm = user.get_active_hand()
+		arm?.bodypart_attacked_by(BCLASS_CUT, 25)
 		qdel(src)
 	else
 		user.visible_message(span_warning("[user] stops reshaping [src]."))

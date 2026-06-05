@@ -29,12 +29,12 @@
 	new /obj/effect/temp_visual/gravity(get_turf(cast_on))
 	if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_STRENGTH) >= 13)
 		cast_on.OffBalance(3 SECONDS)
-		cast_on.adjustBruteLoss(15)
+		cast_on.adjustBruteLoss(15, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down, but your strength resists!"))
 	else
 		cast_on.Knockdown(3 SECONDS)
 		cast_on.Immobilize(3 SECONDS)
-		cast_on.adjustBruteLoss(30)
+		cast_on.adjustBruteLoss(30, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down and hit the ground!"))
 
 /obj/effect/temp_visual/gravity

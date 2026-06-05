@@ -52,10 +52,13 @@
 		user.visible_message(span_warning("[user] hammers the contraption."))
 		return
 
-/datum/artificer_recipe/proc/item_added(mob/user)
+/datum/artificer_recipe/proc/item_added(obj/item/added_item, mob/user)
 	user.visible_message(span_info("[user] adds [initial(needed_item.name)]."))
 	if(istype(needed_item, /obj/item/natural/wood/plank))
 		playsound(user, 'sound/misc/wood_saw.ogg', 100, TRUE)
 	needed_item = null
 	hammers_per_item = initial(hammers_per_item)
 	hammered = FALSE
+
+/datum/artificer_recipe/proc/item_created(obj/item/created)
+	return

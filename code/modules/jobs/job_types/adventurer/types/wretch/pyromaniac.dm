@@ -35,11 +35,12 @@
 		TRAIT_FORAGER
 	)
 
-/datum/job/advclass/wretch/pyromaniac/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/wretch/pyromaniac/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/selectableweapon = list(
-		"Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
-		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+		"Bow" = /obj/item/gun/ballistic/bow/short,
+		"Crossbow" = /obj/item/gun/ballistic/bow/cross,
 	)
 	var/weaponschoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
 	if(!weaponschoice)

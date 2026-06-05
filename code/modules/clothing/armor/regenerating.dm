@@ -78,6 +78,7 @@
 	repairmsg_continue = "My skin mends some of its abuse.."
 	repairmsg_stop = "My skin stops mending from the onslaught!"
 	repairmsg_end = "My skin has become taut with newfound vigor!"
+	item_weight = 0 KILOGRAMS
 
 /obj/item/clothing/armor/regenerating/skin/Initialize(mapload)
 	. = ..()
@@ -98,6 +99,19 @@
 	max_integrity = 300
 	repair_time = 20 SECONDS
 
+/obj/item/clothing/armor/regenerating/skin/easttats
+	name = "bouhoi bujeog tattoos"
+	desc = "A mystic style of tattoos used to honor the kin that fell generations ago, a sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. Its movement causes you to shudder."
+	icon_state = "easttats"
+	armor = list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
+	max_integrity = 300
+	repair_time = 20 SECONDS
+
 /obj/item/clothing/armor/regenerating/skin/disciple/sunlord
 	name = "The golden tan"
 	desc = "The sun's powerful light has infused my skin with an armor-like denseness."
+
+/obj/item/clothing/armor/regenerating/skin/easttats/tribal
+	name = "Tribal Tattoos"
+	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."

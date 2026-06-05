@@ -4,9 +4,9 @@
 	desc = "Techniques to increase the quantity of combined essences produced from each fusion process without a sacrifice in yield."
 	prerequisites = list(/datum/thaumic_research_node/advanced_combiner_applications)
 	required_essences = list(
-		/datum/thaumaturgical_essence/crystal = 25,
-		/datum/thaumaturgical_essence/order = 20,
-		/datum/thaumaturgical_essence/earth = 15,
+		/datum/thaumaturgical_essence/crystal = 10,
+		/datum/thaumaturgical_essence/order = 7,
+		/datum/thaumaturgical_essence/earth = 8,
 	)
 	node_x = 520
 	node_y = 880
@@ -20,9 +20,9 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_output)
 	required_essences = list(
-		/datum/thaumaturgical_essence/crystal = 40,
-		/datum/thaumaturgical_essence/order = 35,
-		/datum/thaumaturgical_essence/life = 20,
+		/datum/thaumaturgical_essence/crystal = 15,
+		/datum/thaumaturgical_essence/order = 10,
+		/datum/thaumaturgical_essence/life = 7,
 	)
 	node_x = 700
 	node_y = 840
@@ -35,10 +35,10 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_output/two)
 	required_essences = list(
-		/datum/thaumaturgical_essence/crystal = 60,
-		/datum/thaumaturgical_essence/order = 50,
-		/datum/thaumaturgical_essence/life = 40,
-		/datum/thaumaturgical_essence/magic = 30,
+		/datum/thaumaturgical_essence/crystal = 20,
+		/datum/thaumaturgical_essence/order = 15,
+		/datum/thaumaturgical_essence/life = 10,
+		/datum/thaumaturgical_essence/magic = 8,
 	)
 	node_x = 860
 	node_y = 760
@@ -51,10 +51,10 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/combiner_output/three)
 	required_essences = list(
-		/datum/thaumaturgical_essence/crystal = 100,
-		/datum/thaumaturgical_essence/magic = 75,
-		/datum/thaumaturgical_essence/void = 50,
-		/datum/thaumaturgical_essence/chaos = 50,
+		/datum/thaumaturgical_essence/crystal = 30,
+		/datum/thaumaturgical_essence/magic = 25,
+		/datum/thaumaturgical_essence/void = 20,
+		/datum/thaumaturgical_essence/chaos = 16,
 	)
 	node_x = 660
 	node_y = 740

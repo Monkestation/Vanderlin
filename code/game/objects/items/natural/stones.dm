@@ -141,6 +141,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	throwforce = 15
 	slot_flags = ITEM_SLOT_MOUTH
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 124 GRAMS
 	/// If our stone is magical, this lets us know -how- magical. Maximum is 15.
 	var/magic_power = 0
 	var/magicstone = FALSE
@@ -152,11 +153,16 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	stone_lore()
 
 /obj/item/natural/stone/on_consume(mob/living/eater)
+	. = ..()
+	eater.extra_mob_weight += get_carry_weight(eater)
 	if(!magic_power)
 		return
 	//eater.adjust_spell_points(magic_power * 0.1)
 	//eater.mana_pool?.adjust_mana(magic_power * 25)
 	//to_chat(eater, span_warning("I feel magic flowing from my stomach."))
+
+/obj/item/natural/stone/on_anti_consume(mob/living/eater)
+	eater.extra_mob_weight -= get_carry_weight(eater)
 
 /*
 	This right here is stone lore,
@@ -292,7 +298,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		var/work_time = (4 SECONDS - (skill_level * 5))
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
-			work_time *= chisel.time_multiplier
+			work_time *= chisel.toolspeed
 		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		user.visible_message("<span class='info'>[user] begins chiseling [src] into blocks.</span>")
 		var/stone_amount = rand(1, max(round(skill_level)/2, 1))
@@ -326,6 +332,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	max_integrity = 50
 	destroy_sound = 'sound/foley/smash_rock.ogg'
 	attacked_sound = 'sound/foley/hit_rock.ogg'
+	item_weight = 700 GRAMS
 
 /obj/item/natural/rock/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -350,18 +357,22 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(atom_integrity <= 0)
 		record_featured_stat(FEATURED_STATS_MINERS, user)
 
-/obj/item/natural/rock/deconstruct(disassembled = FALSE)
-	if(!disassembled)
-		if(mineralType && mineralAmt)
-			if(has_world_trait(/datum/world_trait/malum_diligence))
-				mineralAmt += is_ascendant(MALUM) ? rand (2,3) : rand(1,2)
-			new mineralType(src.loc, mineralAmt)
-		for(var/i in 1 to rand(1,3))
-			var/obj/item/S = new /obj/item/natural/stone(src.loc)
-			S.pixel_x = S.base_pixel_x + rand(25,-25)
-			S.pixel_y = S.base_pixel_y + rand(25,-25)
-		record_round_statistic(STATS_ROCKS_MINED)
-	qdel(src)
+/obj/item/natural/rock/handle_deconstruct(disassembled)
+	. = ..()
+	record_round_statistic(STATS_ROCKS_MINED)
+
+/obj/item/natural/rock/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
+	if(mineralType && mineralAmt)
+		if(has_world_trait(/datum/world_trait/malum_diligence))
+			mineralAmt += is_ascendant(MALUM) ? rand (2,3) : rand(1,2)
+		new mineralType(drop_loc, mineralAmt)
+	if(disassembled)
+		return
+	for(var/i in 1 to rand(1,3))
+		var/obj/item/S = new /obj/item/natural/stone(drop_loc)
+		S.pixel_x = S.base_pixel_x + rand(25,-25)
+		S.pixel_y = S.base_pixel_y + rand(25,-25)
 
 /obj/item/natural/rock/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
@@ -407,7 +418,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		var/work_time = (10 SECONDS - (skill_level * 5))
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
-			work_time *= chisel.time_multiplier
+			work_time *= chisel.toolspeed
 		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		user.visible_message("<span class='info'>[user] begins chiseling a part of [src] off.</span>")
 		if(do_after(user, work_time))
@@ -480,6 +491,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	w_class = WEIGHT_CLASS_SMALL
 	bundletype = /obj/item/natural/bundle/stoneblock
 	sellprice = 2
+	item_weight = 1.2 KILOGRAMS
 
 //................ Stone block stack	............... //
 /obj/item/natural/bundle/stoneblock

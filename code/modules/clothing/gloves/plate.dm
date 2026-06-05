@@ -23,7 +23,7 @@
 
 	grid_width = 64
 	grid_height = 32
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
 
@@ -34,6 +34,12 @@
 	sellprice = VALUE_IRON_ARMOR/2
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
+
+/obj/item/clothing/gloves/plate/iron/banded
+	name = "banded iron gauntlets"
+	desc = "A pair of leather gloves layered under a fur wrap with an iron plate hastily tightened together on both ends. It's primarily worn in the cold north, where armor has to sometimes be cobbled together due to logistical shortages."
+	icon_state = "bandedgloves"
+	item_state = "bandedgloves"
 
 /obj/item/clothing/gloves/plate/rust
 	name = "rusted riveted gauntlets"
@@ -59,7 +65,7 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD
-	item_weight = 7 * BLACKSTEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 /obj/item/clothing/gloves/plate/silver
@@ -68,7 +74,7 @@
 	icon_state = "silvergloves"
 	armor = ARMOR_PLATE_SILVER
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 12 * SILVER_MULTIPLIER
+	item_weight = 2.94 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 
 /obj/item/clothing/gloves/plate/silver/Initialize(mapload)
@@ -104,11 +110,38 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
+/obj/item/clothing/gloves/plate/graggar/heavy
+	name = "vicious plated gauntlets"
+	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the life that once was - and now, a stinging reminder of what could've been."
+	icon_state = "graggarplategloves_heavy"
+	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
+	icon = 'icons/roguetown/clothing/gloves.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
+
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn
 	name = "osslandic iron gauntlets"
 	desc = "Tough iron gauntlets, simple and protective in design. A single punch is said to leave a dozen bruises."
+	icon_state = "gronnplategloves"
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
-	icon_state = "gronnplategloves"
-	item_state = "gronnplategloves"
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+
+/obj/item/clothing/gloves/plate/kote
+	name = "jjajeungna gauntlets"
+	desc = "A set of reinforced Blackmeadow gauntlets. Difficult to do much other than fight in, but not entirely arresting."
+	icon_state = "kazengungauntlets"
+	item_state = "kazengungauntlets"
+	body_parts_covered = HANDS|ARMS
+	detail_tag = "_detail"
+
+/obj/item/clothing/gloves/plate/kote/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
+	var/playerchoice = COLOR_MAP[choice]
+	detail_color = playerchoice
+	update_appearance()
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_armor()
+		H.update_icon()

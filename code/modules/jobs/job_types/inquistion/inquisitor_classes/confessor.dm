@@ -67,9 +67,13 @@
 
 /datum/job/advclass/sacrestant/confessor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Confessor")
 
-	var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
+/datum/job/advclass/sacrestant/confessor/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP PSYDON'S ARMS.", weapons)
 
 	switch(weapon_choice)
@@ -86,7 +90,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/swords)
 
 	// Armor/archetype selection
-	var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
+	var/static/list/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARCHETYPE.", "TAKE UP PSYDON'S DUTY.", armors)
 
 	switch(armor_choice)
@@ -94,23 +98,23 @@
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/roguehood/psydon/confessor, ITEM_SLOT_HEAD, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/jacket/leathercoat/confessor, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/heavy/inq, ITEM_SLOT_SHIRT, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/slur, ITEM_SLOT_BELT_L, TRUE)
 		if("Arbalist - Crossbow, Lightweight Brigandine")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/headband, ITEM_SLOT_HEAD, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_L, TRUE)
 			REMOVE_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/arbalist)
 
 	// Bolt selection
-	var/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
+	var/static/list/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
 	var/boltchoice = browser_input_list(spawned, "CHOOSE YOUR MUNITIONS.", "TAKE UP PSYDON'S MISSILES.", quivers)
 
 	switch(boltchoice)
 		if("Bolts - Steel-Tipped")
-			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), ITEM_SLOT_BELT_L)
+			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), initial = TRUE)
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
-			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), ITEM_SLOT_BELT_L)
+			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), initial = TRUE)
 
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"

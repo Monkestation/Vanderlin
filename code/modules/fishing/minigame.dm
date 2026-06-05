@@ -130,8 +130,8 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	location = comp.parent
 	float = new(get_turf(location), location)
 	float.spin_frequency = rod.spin_frequency
-	RegisterSignal(location, COMSIG_PARENT_QDELETING, PROC_REF(on_spot_gone))
-	RegisterSignal(comp, COMSIG_PARENT_QDELETING, PROC_REF(on_spot_gone))
+	RegisterSignal(location, COMSIG_QDELETING, PROC_REF(on_spot_gone))
+	RegisterSignal(comp, COMSIG_QDELETING, PROC_REF(on_spot_gone))
 	register_reward_signals(comp.fish_source)
 	RegisterSignal(fish_source, COMSIG_FISHING_SOURCE_INTERRUPT_CHALLENGE, PROC_REF(interrupt_challenge))
 	background = comp.fish_source.background
@@ -190,7 +190,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 		complete(win = FALSE)
 	if(fishing_line)
 		//Stops the line snapped message from appearing everytime the minigame is over.
-		UnregisterSignal(fishing_line, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(fishing_line, COMSIG_QDELETING)
 		QDEL_NULL(fishing_line)
 	QDEL_NULL(float)
 	SStgui.close_uis(src)
@@ -237,7 +237,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 		if(isnull(fishing_line)) //couldn't create a fishing line, probably because we don't have a good line of sight.
 			qdel(src)
 			return
-		RegisterSignal(fishing_line, COMSIG_PARENT_QDELETING, PROC_REF(on_line_deleted))
+		RegisterSignal(fishing_line, COMSIG_QDELETING, PROC_REF(on_line_deleted))
 	else //if the rod doesnt have a fishing line, then it ends when they move away
 		RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_float_or_user_move))
 		RegisterSignal(float, COMSIG_MOVABLE_MOVED, PROC_REF(on_float_or_user_move))

@@ -77,7 +77,7 @@
 	///Sound to make while doing a retalitory attack
 	var/ranged_attack_sound = 'sound/combat/Ranged/flatbow-shot-01.ogg'
 	///Weapon path, for visuals
-	var/held_weapon_visual = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	var/held_weapon_visual = /obj/item/gun/ballistic/bow
 
 	///Type path for the trader datum to use for retrieving the traders wares, speech, etc
 	var/trader_data_path = /datum/trader_data

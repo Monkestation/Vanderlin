@@ -8,10 +8,12 @@
 	var/byond_version = "Unknown"
 	var/byond_build
 	var/datum/achievement_data/achievements
+	var/rerolls = 0
 
 /datum/player_details/New(key)
 	src.ckey = ckey(key)
 	achievements = new(key)
+	rerolls = CONFIG_GET(number/special_rerolls)
 
 /datum/player_details/Destroy(force)
 	if(!force)

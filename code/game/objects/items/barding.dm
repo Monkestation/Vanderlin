@@ -21,6 +21,7 @@
 	salvage_amount = 1
 	fiber_salvage = TRUE
 	integrity_failure = 0.1
+	item_weight = 3 KILOGRAMS
 
 /obj/item/clothing/barding/attack(mob/living/M, mob/living/user)
 	if(!istype(M, /mob/living/simple_animal))
@@ -69,11 +70,12 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sewrepair = null
 	salvage_result = null
 	salvage_amount = 0
 	fiber_salvage = FALSE
+	item_weight = 8 KILOGRAMS
 
 /obj/item/clothing/barding/honse
 	name = "padded barding"
@@ -85,6 +87,7 @@
 	valid_animal_types = list(
 		/mob/living/simple_animal/hostile/retaliate/honse
 	)
+	item_weight = 4 KILOGRAMS
 
 /obj/item/clothing/barding/honse/chain
 	name = "chainmail barding"
@@ -103,3 +106,4 @@
 	salvage_result = null
 	salvage_amount = 0
 	fiber_salvage = FALSE
+	item_weight = 10 KILOGRAMS

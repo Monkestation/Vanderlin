@@ -26,14 +26,14 @@
 		qdel(src)
 		return INITIALIZE_HINT_QDEL
 
-	RegisterSignal(floor_vine, COMSIG_PARENT_QDELETING, PROC_REF(on_floor_destroyed))
+	RegisterSignal(floor_vine, COMSIG_QDELETING, PROC_REF(on_floor_destroyed))
 
 	update_spike_visuals()
 	return .
 
 /obj/structure/meatvine/tentacle_spike/Destroy()
 	if(floor_vine)
-		UnregisterSignal(floor_vine, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(floor_vine, COMSIG_QDELETING)
 	floor_vine = null
 
 	QDEL_LIST(spike_visuals)
@@ -72,10 +72,10 @@
 	. = ..()
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(("meat" in L.faction))
+		if(L.has_faction("meat"))
 			return
 		var/damage = 5 * spike_count
-		L.adjustBruteLoss(damage)
+		L.adjustBruteLoss(damage, damage_type = BCLASS_PIERCE)
 		to_chat(L, "<span class='userdanger'>You are impaled by [src]!</span>")
 
 		for(var/obj/effect/spike_visual/spike in spike_visuals)

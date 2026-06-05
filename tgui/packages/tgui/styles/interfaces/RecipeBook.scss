@@ -9,13 +9,13 @@
   --rb-surface-alt: #332517;          // sidebar stripe
   --rb-border:      #5c3d1e;          // parchment edge
   --rb-border-faint:#3d2910;          // subtle divider
-  --rb-accent:      #c8860a;          // burnished gold
+  --rb-accent:      #B08D2E;          // burnished gold
   --rb-accent-dim:  #8b5e08;          // muted gold
-  --rb-text:        #e8d5b0;          // warm off-white
-  --rb-text-muted:  #9e815a;          // faded text
+  --rb-text:        #5A4632;
+  --rb-text-muted:  #8B7154;          // faded text
   --rb-highlight:   rgba(200,134,10,0.15);  // selection glow
-  --rb-hyperlink:   #e0a030;          // clickable link
-  --rb-hyperlink-h: #ffc857;          // hovered link
+  --rb-hyperlink:   #c99632;          // clickable link
+  --rb-hyperlink-h: #f0c15a;          // hovered link
   --rb-section-bg:  rgba(44,28,10,0.7);
   --rb-step-bg:     rgba(30,18,5,0.8);
 
@@ -24,6 +24,8 @@
 
   --rb-sidebar-w:   260px;
   --rb-radius:      4px;
+  height: 100%;
+  min-height: 0;
 }
 
 .RecipeBook__root {
@@ -222,7 +224,7 @@
 .RecipeBook__detail-title {
   font-size: 18px;
   font-weight: bold;
-  color: #ffdea0;
+  color: #8B1E1E;
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -304,7 +306,7 @@
   align-items: center;
   gap: 4px;
   padding: 2px 0;
-  color: var(--rb-text);
+  color: var(--rb-text-muted);
 
   img { image-rendering: pixelated; }
 }
@@ -351,7 +353,7 @@
   padding: 4px 8px;
   font-size: 11px;
   margin: 4px 0;
-  color: var(--rb-text-muted);
+  color: var(--rb-accent);
 
   strong { color: var(--rb-text); }
 }
@@ -370,7 +372,7 @@
 .RecipeBook__hint {
   font-style: italic;
   font-size: 11px;
-  color: #a0c080;
+  color: #8DA878;
   margin: 4px 0;
   padding: 3px 6px;
   background: rgba(0,50,0,0.2);
@@ -381,6 +383,7 @@
   font-weight: bold;
   margin: 3px 0;
   font-size: 11px;
+  color: #c08a8a,
 }
 
 .RecipeBook__desc {
@@ -397,7 +400,7 @@
 
 .RecipeBook__surgery-step-title {
   font-weight: bold;
-  color: #ffc090;
+  color: #6b7c93;
   margin-bottom: 3px;
 }
 
@@ -426,9 +429,9 @@
   line-height: 1.7;
   color: var(--rb-text);
 
-  h1, h2, h3 { color: #ffdea0; font-family: var(--rb-font-lore); }
+  h1, h2, h3 { color: #5a3d1f; font-family: var(--rb-font-lore); }
   p           { margin: 6px 0; }
-  strong      { color: #ffc857; }
+  strong      { color: #7a5528; }
 }
 
 .RecipeBook__extra-html {

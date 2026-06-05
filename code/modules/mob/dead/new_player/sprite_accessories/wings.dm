@@ -13,7 +13,7 @@
 	if(!owner || !can_open)
 		return ..()
 	var/obj/item/organ/wings/wings_organ = owner.getorganslot(ORGAN_SLOT_WINGS)
-	if(!wings_organ || !wings_organ.is_open)
+	if(!wings_organ || !wings_organ.wings_open)
 		return ..()
 	return "[icon_state]_open"
 

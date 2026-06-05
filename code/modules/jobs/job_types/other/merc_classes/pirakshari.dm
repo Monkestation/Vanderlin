@@ -44,7 +44,7 @@
 	name = "Desert Rider (Mercenary)"
 	pants = /obj/item/clothing/pants/trou/leather
 	beltr = /obj/item/weapon/sword/sabre
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	shoes = /obj/item/clothing/shoes/ridingboots
 	gloves = /obj/item/clothing/gloves/angle

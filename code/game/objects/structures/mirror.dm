@@ -150,11 +150,12 @@
 					should_update = TRUE
 
 		if("eye color")
-			var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-			var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
-			if(new_eyes)
-				eyes.eye_color = sanitize_hexcolor(new_eyes, 6, TRUE, "#FFFFFF")
-				should_update = TRUE
+			var/list/eye_list = H.getorganslotlist(ORGAN_SLOT_EYES)
+			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
+				if(new_eyes)
+					eyes.eye_color = sanitize_hexcolor(new_eyes, default = "#1753a8")
+					should_update = TRUE
 
 	if(should_update)
 		H.update_body()
@@ -167,17 +168,14 @@
 
 /obj/structure/mirror/atom_break(damage_flag, silent, mapload)
 	. = ..()
-	if(!(flags_1 & NODECONSTRUCT_1))
+	if(!(obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION))
 		icon_state = "[icon_state]1"
 		if(!mapload)
-			new /obj/item/natural/glass/shard (get_turf(src))
+			new /obj/item/natural/glass/shard(loc)
 
 /obj/structure/mirror/atom_fix()
 	. = ..()
 	icon_state = initial(icon_state)
-
-/obj/structure/mirror/deconstruct(disassembled = TRUE)
-	..()
 
 /obj/structure/mirror/welder_act(mob/living/user, obj/item/I)
 	..()

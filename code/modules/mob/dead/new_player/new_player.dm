@@ -379,10 +379,6 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
 
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!client.whitelisted()))
-			return JOB_UNAVAILABLE_GENERIC
-
 	if(is_role_banned(client.ckey, job.title))
 		return JOB_UNAVAILABLE_BANNED
 
@@ -467,7 +463,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	GLOB.respawncounts[character.ckey] += 1
 
 	if(humanc)
-		try_apply_character_post_equipment(humanc)
+		try_apply_character_post_equipment(humanc, client)
 
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
 
@@ -483,6 +479,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	var/static/list/omegalist = list(
 		GLOB.noble_positions,
 		GLOB.garrison_positions,
+		GLOB.gallowband_positions,
 		GLOB.church_positions,
 		GLOB.peasant_positions,
 		GLOB.apprentices_positions,
@@ -517,6 +514,8 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 					cat_name = "Nobles"
 				if (GARRISON)
 					cat_name = "Garrison"
+				if (GALLOWBAND)
+					cat_name = "Gallowband"
 				if (SERFS)
 					cat_name = "Yeomanry"
 				if (CHURCHMEN)

@@ -29,7 +29,7 @@
 
 	smeltresult = /obj/item/fertilizer/ash
 	sellprice = 5
-	item_weight = 4
+	item_weight = 0.9 KILOGRAMS
 
 	var/blood_state = BLOOD_STATE_NOT_BLOODY
 	var/list/bloody_shoes = list(BLOOD_STATE_MUD = 0, BLOOD_STATE_HUMAN = 0,BLOOD_STATE_XENO = 0, BLOOD_STATE_OIL = 0, BLOOD_STATE_NOT_BLOODY = 0)
@@ -137,9 +137,6 @@
 			polished = 2
 			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
-			var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-			if(particle_spewer)
-				qdel(particle_spewer)
 			AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
 			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
 			to_chat(user, ("You polished the [name]."))
@@ -156,7 +153,5 @@
 
 /obj/item/clothing/shoes/proc/lose_shine()
 	if(polished == 1 || polished == 2)
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			qdel(particle_spewer)
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle))
 		polished = 0

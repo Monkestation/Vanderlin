@@ -38,7 +38,7 @@
 	)
 
 /datum/job/feldsher
-	title = "Feldsher"
+	title = JOB_FELDSHER
 	tutorial = "You have seen countless wounds over your time. \
 	Stitched the sores of blades, sealed honey over the bubous of plague. \
 	A thousand deaths stolen from the Carriagemen, yet these people will still call you a charlatan. \
@@ -85,6 +85,7 @@
 		EXP_TYPE_MEDICAL = 300
 
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/feldsher
 	shoes = /obj/item/clothing/shoes/shortboots

@@ -212,7 +212,7 @@
 	RegisterSignal(clicker, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
 	RegisterSignal(clicker, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
 	RegisterSignal(picker, COMSIG_MOVABLE_MOVED, PROC_REF(close_lockpick))
-	RegisterSignal(picker, COMSIG_PARENT_EXAMINE, PROC_REF(mob_detection))
+	RegisterSignal(picker, COMSIG_ATOM_EXAMINE, PROC_REF(mob_detection))
 
 	//checks both for each just incase they switch hands for no reason mid lockpick
 	var/obj/item/held_lockmain = picker.get_active_held_item()

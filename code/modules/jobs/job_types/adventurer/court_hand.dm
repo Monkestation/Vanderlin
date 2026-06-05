@@ -1,5 +1,5 @@
 /datum/job/adventurer/courtagent
-	title = "Court Agent"
+	title = JOB_COURT_AGENT
 	tutorial = "Whether acquired by merit, shrewd negotiation or fulfilled bounties, \
 	you have found yourself under the underhanded employ of the Hand. \
 	Fulfill desires and whims of the court that they would rather not be publicly known. \

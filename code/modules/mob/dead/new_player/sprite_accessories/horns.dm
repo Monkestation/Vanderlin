@@ -11,6 +11,9 @@
 /datum/sprite_accessory/horns/adjust_appearance_list(list/appearance_list, obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	generic_gender_feature_adjust(appearance_list, organ, bodypart, owner, OFFSET_FACE)
 
+/datum/sprite_accessory/horns/get_icon_state(obj/item/organ/horns/horns, ...)
+	return (horns.side == RIGHT_SIDE) ? "[icon_state]_right" : "[icon_state]_left"
+
 /datum/sprite_accessory/horns/simple
 	name = "Simple"
 	icon_state = "simple"

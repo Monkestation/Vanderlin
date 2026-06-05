@@ -549,6 +549,16 @@
 	stress_change = 1
 	desc = span_red("That voice.. That old thief is calling for me, what is it now?")
 
+/datum/stress_event/orphan_calling
+	timer = 30 SECONDS
+	stress_change = 1
+	desc = span_red("That voice.. One of those brats are calling for me, what is it for this time?")
+
+/datum/stress_event/orphan_calling_help
+	timer = 1 MINUTES
+	stress_change = 2
+	desc = span_red("One of my brats are calling for help! Another mess I have to clean up no doubt...")
+
 /datum/stress_event/night_owl_dawn
 	desc = span_warning("I don't like the dae..")
 	stress_change = 1
@@ -640,7 +650,7 @@
 	timer = 3 MINUTES
 
 /datum/stress_event/slipped
-	desc = "<span class='warning'>I slipped. I should be more careful next timer...</span>\n"
+	desc = "<span class='warning'>I slipped. I should be more careful next time...</span>\n"
 	stress_change = 2
 	timer = 3 MINUTES
 
@@ -818,6 +828,11 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I've been covered in shite! Disgusting!")
+
+/datum/stress_event/bad_grave
+	stress_change = 1
+	desc = span_red("Can the dead find true rest within such a poorly made grave..?")
+	timer = 5 MINUTES
 
 /datum/stress_event/malaguero
 	timer = 1 MINUTES

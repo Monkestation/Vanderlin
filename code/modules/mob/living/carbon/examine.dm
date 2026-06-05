@@ -33,7 +33,7 @@
 
 	//The wrap-up. Anything else we need to do before we start spanning things, we do it here.
 	//Note that this also sends a copy of our subjective pronouns.
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_sections, P)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, examine_sections, P)
 
 
 	// round any decimal sections up to the rest of the group
@@ -146,7 +146,7 @@
 			. += span_nicegreen("Ahh... my old friend!")
 			user.add_stress(/datum/stress_event/saw_old_party)
 		// Intolerant
-		else if(!HAS_TRAIT(user, TRAIT_TOLERANT)) // friendship is kinda like tolerance after all
+		else if(user.has_quirk(/datum/quirk/vice/paranoid))
 			if(!isdarkelf(user) && isdarkelf(src))
 				user.add_stress(/datum/stress_event/delf)
 			if(!istiefling(user) && istiefling(src))
@@ -162,7 +162,7 @@
 
 		// Outlaws
 		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (real_name in GLOB.outlawed_players))
-			. += span_boldred(mind?.special_role == "Bandit" ? "BANDIT!" : "OUTLAW!")
+			. += span_boldred(mind?.special_role == ROLE_BANDIT ? "BANDIT!" : "OUTLAW!")
 
 		// Court Agents
 		var/list/known_frumentarii = user.mind?.cached_frumentarii
@@ -178,7 +178,10 @@
 		// Foreigner
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			. += span_tinywarning("A foreigner.")
-			user.add_stress(/datum/stress_event/para/foreigner)
+			if(user.has_quirk(/datum/quirk/vice/paranoid))
+				user.add_stress(/datum/stress_event/para/foreigner)
+			else
+				user.add_stress(/datum/stress_event/foreigner)
 		// Thuild
 		if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
 			. += span_smallgreen("A member of the Thieves' Guild.")
@@ -271,6 +274,8 @@
 	. = list()
 	var/list/unobscured = get_unobscured_items(FALSE)
 	for(var/obj/item/I as anything in unobscured)
+		if(istype(I, /obj/item/clothing/armor/regenerating/skin)) //disciple skin and similiar no longer show up on examining
+			continue
 		var/slot_title = null
 		switch(unobscured[I]) // this could probably be abstracted into its own proc at some point
 			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK, ITEM_SLOT_SHOES)
@@ -299,12 +304,12 @@
 				slot_title = " on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
 				slot_title = " on [P[THEIR]] right side"
-		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user)][slot_title]."
+		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user, FALSE, TRUE)][slot_title]."
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
 		var/wielding = I.is_wielded()
-		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user, FALSE, TRUE)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
 
 /// Things that are physical but do not need to see your face to establish.
@@ -360,10 +365,12 @@
 		switch(final_str - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
 			if(5 to INFINITY)
 				str_msg = span_bold("[P[THEY]] look[pl] much stronger than me.")
-				user.add_stress(/datum/stress_event/para/str)
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/para/str)
 			if(1 to 5)
 				str_msg = "[P[THEY]] look[pl] stronger than me."
-				user.add_stress(/datum/stress_event/para/str)
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/para/str)
 			if(0)
 				str_msg = "[P[THEY]] look[pl] about as strong as me."
 			if(-5 to -1)
@@ -493,12 +500,10 @@
 
 	// missing limbs
 	var/appears_dead = FALSE
-	var/is_clearly_dead = FALSE
 	for(var/t in get_missing_limbs())
 		var/limb_msg = "[capitalize(P[THEIR])] [parse_zone(t)] is gone."
 		if(t==BODY_ZONE_HEAD)
 			limb_msg = span_boldred(limb_msg)
-			is_clearly_dead = TRUE
 		else
 			limb_msg = span_boldwarning(limb_msg)
 		. += limb_msg
@@ -506,12 +511,12 @@
 	// Health statuses
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = TRUE
-		if(suiciding)
+		if(HAS_TRAIT(src, TRAIT_SUICIDED))
 			. += span_red("[P[THEY]] appear[pl] to have committed suicide... there is no hope of recovery.")
 		if(hellbound)
 			. += span_red("[P[THEIR]] soul seems to have been ripped out of [P[THEIR]] body. Revival is impossible.")
 
-	if(is_clearly_dead || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
+	if(!getorganslot(ORGAN_SLOT_BRAIN) || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
 		. += span_boldred("[P[THEYRE]] dead.")
 	else if(appears_dead || stat >= UNCONSCIOUS)
 		. += span_boldwarning("[P[THEYRE]] unconscious.")
@@ -589,6 +594,7 @@
 		if(O)
 			var/static/list/check_zones = list(
 				BODY_ZONE_HEAD,
+				BODY_ZONE_PRECISE_MOUTH,
 				BODY_ZONE_CHEST,
 				BODY_ZONE_R_ARM,
 				BODY_ZONE_L_ARM,

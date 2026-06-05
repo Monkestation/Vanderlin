@@ -15,7 +15,7 @@
 	)
 
 /datum/job/advclass/pilgrim/cheesemaker
-	title = "Cheesemaker"
+	title = JOB_CHEESEMAKER
 	tutorial = "Some say Dendor brings bountiful harvests - this much is true, but rot brings forth life. \
 	From life brings decay, and from decay brings life. Like your parents before you, you let milk rot into cheese. \
 	This is your duty, this is your call."

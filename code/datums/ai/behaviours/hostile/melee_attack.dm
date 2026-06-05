@@ -259,7 +259,7 @@
 		return
 	var/atom/throw_target = get_edge_target_turf(basic_mob, get_dir(basic_mob, target)) //ill be real I got no idea why this worked.
 	target.throw_at(throw_target, 7, 4)
-	target.adjustBruteLoss(20)
+	target.adjustBruteLoss(20, damage_type = BCLASS_BLUNT)
 
 /datum/ai_behavior/basic_melee_attack/species_hostile/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()

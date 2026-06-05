@@ -2509,7 +2509,7 @@
 /turf/open/water/marsh,
 /area/outdoors)
 "mB" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/dirt/road,
 /area/outdoors)
 "mC" = (
@@ -5638,7 +5638,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "CZ" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/dirt,
 /area/outdoors)
 "Df" = (

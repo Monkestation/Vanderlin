@@ -29,24 +29,16 @@
 	clothing_flags = CANT_SLEEP_IN
 	armor_class = AC_MEDIUM
 	body_parts_covered = HEAD|HAIR|NOSE
+	item_weight = 3.5 KILOGRAMS
+
 
 /obj/item/clothing/head/rare/elfplate/welfplate // Unique Bladesinger kit
 	desc = "A bizarrely lightweight helmet of alloyed elven steel, offering unparalleled protection for elite bladesingers."
 	icon_state = "welfhead"
 
 	body_parts_covered = HEAD|HAIR|NOSE|EYES
+	item_weight = 3.5 KILOGRAMS
 
-
-//............... Langobard Helmet ............... //
-/obj/item/clothing/head/rare/dwarfplate // Unique Longbeard kit
-	name = "langobard pot helm"
-	desc = "The Langobards are a cult of personality that are tasked by the Dwarven Kings to issue judgement, \
-			justice and order around the realms for dwarvenkind. This helmet is a respected symbol of authority."
-	icon_state = "dwarfhead"
-	allowed_race = list(SPEC_ID_DWARF)
-	flags_inv = HIDEEARS
-	clothing_flags = CANT_SLEEP_IN
-	body_parts_covered = HEAD_EXCEPT_MOUTH
 
 //............... Swordmaster Helmet ............... //
 /obj/item/clothing/head/rare/grenzelplate // Unique Swordmaster kit
@@ -59,6 +51,7 @@
 	flags_inv = HIDEEARS
 	clothing_flags = CANT_SLEEP_IN
 	body_parts_covered = HEAD|EARS|HAIR
+	item_weight = 3.5 KILOGRAMS
 
 
 //............... Kataphract/bastion/spear/zaladin Helmet ............... //
@@ -74,6 +67,7 @@
 	flags_inv = HIDEEARS|HIDEFACE
 	clothing_flags = CANT_SLEEP_IN
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|MOUTH
+	item_weight = 3.5 KILOGRAMS
 
 //............... Hoplite Helmet ............... //
 /obj/item/clothing/head/rare/hoplite // Unique Hoplite kit
@@ -90,3 +84,4 @@
 	clothing_flags = CANT_SLEEP_IN
 	body_parts_covered = HEAD|EARS|HAIR
 	smeltresult = /obj/item/ingot/bronze
+	item_weight = 2.9 KILOGRAMS

@@ -219,7 +219,7 @@ SUBSYSTEM_DEF(familytree)
 /datum/controller/subsystem/familytree/proc/GetCurrentMonarch()
 	// Find the monarch at generation 12 (current ruling generation)
 	for(var/datum/family_member/member in ruling_family.members)
-		if(member.generation == 12 && member.person.job == "Monarch")
+		if(member.generation == 12 && member.person.job == JOB_MONARCH)
 			return member
 	return null
 
@@ -238,16 +238,6 @@ SUBSYSTEM_DEF(familytree)
 			hand_member.AddParent(monarch_parent)
 		if(monarch_parent_second)
 			hand_member.AddParent(monarch_parent_second)
-
-		// Create a spouse for the hand
-		var/mob/living/carbon/human/dummy/spouse = new()
-		spouse.age = hand_member.person.age
-		spouse.gender = hand_member.person.gender == MALE ? FEMALE : MALE
-		spouse.real_name = GenerateRoyalName(spouse.gender, hand_member.generation)
-		set_species_type(spouse, ruling_family.dominant_species)
-		var/datum/family_member/hand_spouse = ruling_family.CreateFamilyMember(spouse)
-		hand_spouse.generation = hand_member.generation
-		ruling_family.MarryMembers(hand_member, hand_spouse)
 
 /datum/controller/subsystem/familytree/proc/GenerateRoyalLineage(datum/family_member/current_royal, status)
 	// Set as current generation

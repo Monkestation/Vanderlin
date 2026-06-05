@@ -1,5 +1,5 @@
 /datum/component/spawner
-	var/mob_types = list(/mob/living/simple_animal/hostile/werewolf)
+	var/mob_types = list(/mob/living/simple_animal/hostile/deepone)
 	var/spawn_time = 300 //30 seconds default
 	var/list/spawned_mobs = list()
 	var/spawn_delay = 0
@@ -19,7 +19,7 @@
 	if(_max_mobs)
 		max_mobs=_max_mobs
 
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(stop_spawning))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(stop_spawning))
 	START_PROCESSING(SSprocessing, src)
 
 /datum/component/spawner/process()
@@ -45,5 +45,5 @@
 	L.flags_1 |= (P.flags_1 & ADMIN_SPAWNED_1)
 	spawned_mobs += L
 	L.nest = src
-	L.faction = src.faction
+	L.set_faction(faction)
 	P.visible_message("<span class='danger'>[L] [spawn_text] [P].</span>")

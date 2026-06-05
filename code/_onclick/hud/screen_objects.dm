@@ -12,11 +12,28 @@
 	plane = HUD_PLANE
 	appearance_flags = APPEARANCE_UI
 	/// A reference to the object in the slot. Grabs or items, generally, but any datum will do.
+	/// A reference to the object in the slot. Grabs or items, generally, but any datum will do.
 	var/datum/weakref/master_ref = null
 	/// A reference to the owner HUD, if any.
-	var/datum/hud/hud = null
+	VAR_PRIVATE/datum/hud/hud = null
 	var/lastclick
+	/// Category for fullscreen shit
 	var/category
+	/**
+	 * Map name assigned to this object.
+	 * Automatically set by /client/proc/add_obj_to_map.
+	 */
+	var/assigned_map
+	/**
+	 * Mark this object as garbage-collectible after you clean the map
+	 * it was registered on.
+	 *
+	 * This could probably be changed to be a proc, for conditional removal.
+	 * But for now, this works.
+	 */
+	var/del_on_map_removal = TRUE
+	/// If FALSE, this will not be cleared when calling /client/clear_screen()
+	var/clear_with_screen = TRUE
 
 /atom/movable/screen/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -143,11 +160,15 @@
 /atom/movable/screen/craft/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(modifiers["middle"])
-		if(QDELETED(book))
-			book = new(null)
 		var/mob/M = usr
 		for(var/datum/recipe as anything in M.mind?.learned_recipes)
 			book.types |= recipe.type
+		var/datum/job/job = SSjob.GetJob(M.job)
+		if(job && !book)
+			book = new job.book_type(null)
+		else if(QDELETED(book))
+			book = new(null)
+
 		book.ui_interact(usr)
 		return
 	if(world.time < lastclick + 3 SECONDS)
@@ -1298,7 +1319,21 @@
 	if (ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.check_for_injuries(H)
-		to_chat(H, "I am [H.get_encumbrance() * 100]% encumbered.")
+		to_chat(H, "Encumbrance: [H.encumbrance_text()] (<b>[CEILING(H.carry_weight, 1)]kg[CEILING(H.carry_weight, 1) == 1 ? "" : "s"]</b>)")
+
+/mob/living/carbon/proc/encumbrance_text()
+	switch(encumbrance)
+		if(ENCUMBRANCE_EXTREME)
+			return span_userdanger(span_big("EXTRA-HEAVY!!"))
+		if(ENCUMBRANCE_HEAVY)
+			return span_userdanger("Heavy!")
+		if(ENCUMBRANCE_MEDIUM)
+			return span_boldnotice("Medium.")
+		if(ENCUMBRANCE_LIGHT)
+			return span_notice("Light.")
+		if(ENCUMBRANCE_NONE)
+			return span_tinynotice("None.")
+
 
 /atom/movable/screen/party_member_health
 	name = "party_health"
@@ -1372,7 +1407,7 @@
 		var/mob/living/carbon/human/user_mob = usr
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
 			user_mob.check_for_injuries(user_mob)
-			to_chat(user_mob, "I am [user_mob.get_encumbrance() * 100]% encumbered.")
+			to_chat(user_mob, "Encumbrance: [user_mob.encumbrance_text()] (<b>[CEILING(user_mob.carry_weight, 1)]kg[CEILING(user_mob.carry_weight, 1) == 1 ? "" : "s"]</b>)")
 		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			if(!user_mob.mind)
 				return
@@ -1487,23 +1522,31 @@
 //Roguehud objects
 
 /atom/movable/screen/backhudl
+	abstract_type = /atom/movable/screen/backhudl
+	name = ""
 	icon = 'icons/mob/roguehudback2.dmi'
 	icon_state = ""
-	name = " "
 	screen_loc = ui_backhudl
 	plane = FULLSCREEN_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	mouse_opacity = MOUSE_OPACITY_ICON // Not really ideal
 
 /atom/movable/screen/backhudl/Click()
 	return
 
+/atom/movable/screen/backhudl/human
+	icon_state = "human"
+
 /atom/movable/screen/backhudl/ghost
 	icon_state = "dead"
-	icon = 'icons/mob/roguehudbackghost.dmi'
 
-/atom/movable/screen/backhudl/obs
-	icon_state = "obs"
-	icon = 'icons/mob/roguehudbackghost.dmi'
+/atom/movable/screen/backhudl/obscured
+	icon_state = "obscured"
+
+/atom/movable/screen/backhudl/empty
+	icon_state = "empty"
+
+/atom/movable/screen/backhudl/empty_border
+	icon_state = "empty_border"
 
 /atom/movable/screen/aim
 	name = ""
@@ -1803,16 +1846,6 @@
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
 	plane = ABOVE_HUD_PLANE
-
-/atom/movable/screen/scannies
-	icon = 'icons/mob/roguehudback2.dmi'
-	icon_state = "crt"
-	name = ""
-	screen_loc = ui_backhudl
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	alpha = 0
-	plane = HUD_PLANE
-	blend_mode = BLEND_MULTIPLY
 
 /atom/movable/screen/char_preview
 	name = "Me."

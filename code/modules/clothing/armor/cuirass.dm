@@ -5,8 +5,7 @@
 	icon_state = "cuirass"
 	item_state = "cuirass"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	boobed = FALSE
 	sellprice = VALUE_STEEL_ARMOR
 
@@ -15,7 +14,7 @@
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 7 KILOGRAMS
 
 //................ Grenzelhoft Cuirass ............... //
 /obj/item/clothing/armor/cuirass/grenzelhoft
@@ -27,6 +26,7 @@
 	boobed = TRUE
 
 	armor = ARMOR_PLATE_GOOD
+	item_weight = 10 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/rare
 	abstract_type = /obj/item/clothing/armor/cuirass/rare
@@ -54,7 +54,7 @@
 	armor = ARMOR_PLATE_BAD
 	body_parts_covered = COVERAGE_VEST
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 6.5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/rust
@@ -90,7 +90,7 @@
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
-	item_weight = 5.5 * COPPER_MULTIPLIER
+	item_weight = 6.4 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/vampire
 	name = "ancient plate"
@@ -101,7 +101,7 @@
 	armor = ARMOR_PLATE_GOOD
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	item_weight = 5.5 * IRON_MULTIPLIER
+	item_weight = 7 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fencer
 	name = "fencer's cuirass"
@@ -132,3 +132,24 @@
 	icon_state = "ornatecuirass"
 	desc = "An ornate steel cuirass with tassets, favored by both the Oratorium Throni Vacui and the Order of the Silver Psycross. \
 			Made to endure."
+
+/obj/item/clothing/armor/cuirass/fluted/gold
+	name = "golden cuirass"
+	icon_state = "goldcuirass"
+	desc = "A resplendant cuirass of pure gold, fitted with tassets for additional coverage. It is dressed atop a besilked arming jacket to ensure the absolute comfort of its wearer, and the holy sigil has been meticulously formed from its slanted plates."
+	armor_class = AC_HEAVY
+	anvilrepair = null
+	melting_material = /datum/material/gold
+	melt_amount = 100
+	grid_height = 96
+	grid_width = 96
+	sellprice = 300
+
+/obj/item/clothing/armor/cuirass/fluted/gold/heroic
+	name = "golden heroic cuirass"
+	icon_state = "heroiccuirass"
+	desc = "A resplendant cuirass of pure gold, fitted with tassets for additional coverage. It has been meticulously waxed-and-assembled from dozens of smaller golden plates, in order to replicate the statuesque physique of Psydonia's legendary heroes."
+
+/obj/item/clothing/armor/cuirass/fluted/gold/king
+	name = "golden heroic cuirass"
+	sellprice = 400

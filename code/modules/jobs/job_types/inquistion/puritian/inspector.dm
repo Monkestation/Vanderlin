@@ -62,7 +62,11 @@
 
 /datum/job/advclass/puritan/inspector/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.venatari, 100)
+
+/datum/job/advclass/puritan/inspector/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/gear = list(
 		"Retribution (Rapier)",
@@ -89,7 +93,6 @@
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
 
-
 /datum/outfit/inquisitor/inspector
 	name = "Inspector (Herr Prafekt)"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
@@ -98,7 +101,7 @@
 	shoes = /obj/item/clothing/shoes/otavan/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr =  /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backl = /obj/item/gun/ballistic/bow/cross
 	beltr = /obj/item/ammo_holder/quiver/bolts
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair

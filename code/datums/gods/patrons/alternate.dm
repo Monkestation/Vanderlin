@@ -74,7 +74,10 @@
 		"CUT MY FLESH SO I MAY SPROUT!",
 		"OH NOC, SWEET NOC, YOUR GAZE IS THE NECTAR IN WHICH I DRINK!",
 	)
-	added_traits = list(TRAIT_BRIAR_HOST)
+
+/datum/patron/alternate/black_briar/on_gain(mob/living/pious)
+	. = ..()
+	pious.add_quirk(/datum/quirk/black_briar)
 
 //todo: unique prayer system?
 /datum/patron/alternate/black_briar/preference_accessible(datum/preferences/prefs)

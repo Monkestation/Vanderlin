@@ -91,7 +91,7 @@
 		return FALSE
 	return TRUE
 
-/obj/structure/fluff/railing/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/railing/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 
 	if(dir in CORNERDIRS)
@@ -100,7 +100,7 @@
 	if(isobserver(leaving))
 		return
 
-	if(get_dir(leaving.loc, new_location) != dir)
+	if(direction != dir)
 		return
 
 	if(leaving.movement_type & (FLOATING|FLYING))
@@ -287,15 +287,18 @@
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
 	redstone_structure = TRUE
 	var/togg = FALSE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	dir = pick(GLOB.cardinals)
 	return ..()
 
 /obj/structure/bars/grille/atom_break(damage_flag)
 	. = ..()
 	obj_flags = CAN_BE_HIT
+	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/bars/grille/redstone_triggered(mob/user)
 	if(obj_broken)
@@ -305,6 +308,7 @@
 	if(togg)
 		icon_state = "floorgrilleopen"
 		obj_flags = CAN_BE_HIT
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/mob/living/M in loc)
@@ -312,7 +316,7 @@
 	else
 		icon_state = "floorgrille"
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
-
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/plank
 	name = "plank"
@@ -325,6 +329,10 @@
 	damage_deflection = 5
 	blade_dulling = DULLING_BASHCHOP
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+
+/obj/structure/plank/Initialize()
+	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe
 	name = "bronze pipe"
@@ -343,7 +351,7 @@
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
-
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe/left
 	name = "bronze pipe"
@@ -403,17 +411,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/clock/examine(mob/user)
 	. = ..()
@@ -443,9 +442,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/clock/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/clock/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -657,17 +656,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/statue/CanPass(atom/movable/mover, turf/target)
 	. = ..()
@@ -675,9 +665,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/statue/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/statue/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1059,7 +1049,7 @@
 			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/polearms) > 2)
 				I = new /obj/item/weapon/polearm/spear/billhook(user.loc)
 			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) > 2)
-				I = new /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long(user.loc)
+				I = new /obj/item/gun/ballistic/bow/long(user.loc)
 			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords) > 2)
 				I = new /obj/item/weapon/sword/long(user.loc)
 			else
@@ -1088,7 +1078,7 @@
 	max_integrity = 100
 	sellprice = 40
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	breakoutextra = 10 MINUTES
 	dir = NORTH
@@ -1108,12 +1098,12 @@
 
 /obj/structure/fluff/psycross/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 2)
+	M.add_offsets(type, x_add = 0, y_add = 2)
 	M.setDir(SOUTH)
 
 /obj/structure/fluff/psycross/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
@@ -1121,9 +1111,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1209,7 +1199,7 @@
 		return
 	if(!divine)
 		return
-	if(!HAS_TRAIT(user, TRAIT_DIVINE_CENTRIST) || (HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && !(user.job == "Churchling")))
+	if(!HAS_TRAIT(user, TRAIT_DIVINE_CENTRIST) || (HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && !(user.job == JOB_CHURCHLING)))
 		return
 	if(user?.patron.type != /datum/patron/divine/centrist)
 		return
@@ -1434,18 +1424,6 @@
 	if(istype(living_user.patron, /datum/patron/psydon))
 		living_user.add_stress(/datum/stress_event/painful_reminder)
 		. += " Never forget those we have lost."
-
-/obj/structure/fluff/statue/shisha
-	name = "shisha pipe"
-	desc = "A traditional shisha pipe, this one is broken."
-	icon = 'icons/roguetown/misc/64x64.dmi'
-	icon_state = "zbuski"
-	density = FALSE
-	anchored = TRUE
-	layer = ABOVE_MOB_LAYER
-	plane = GAME_PLANE_UPPER
-	blade_dulling = DULLING_BASH
-	max_integrity = 300
 
 /obj/structure/fluff/statue/gaffer
 	name = "Subdued Statue"

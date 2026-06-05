@@ -11,16 +11,13 @@
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 35
-
 	base_antags = 1
 	maximum_antags = 2
+	min_players = (LOWPOP_THRESHOLD+5) * READYUP_AVG
+	denominator = LOWPOP_THRESHOLD * READYUP_AVG
 
 	weight = 12
-	cost = 1
-
 	earliest_start = 0 SECONDS
-	min_players = LOWPOP_THRESHOLD+10
 
 	typepath = /datum/round_event/antagonist/solo/werewolf
 	antag_datum = /datum/antagonist/werewolf
@@ -36,16 +33,18 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
 		/datum/job/tomb_warden,
-		/datum/job/bogwitch,
-		/datum/job/bog_apprentice,
 		/datum/job/magician,
 		/datum/job/archivist,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event_control/antagonist/solo/werewolf/valid_for_map()

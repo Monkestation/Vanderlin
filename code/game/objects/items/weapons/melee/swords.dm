@@ -29,11 +29,11 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	flags_1 = CONDUCT_1
 	thrown_bclass = BCLASS_CUT
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 30
 	grid_height = 96
 	grid_width = 64
+	item_weight = 1.2 KILOGRAMS
 
 	weapon_special = /datum/special_intent/shin_swipe
 
@@ -68,7 +68,8 @@
 	minstr = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
-
+	item_weight = 700 GRAMS
+	smeltresult = /obj/item/ingot/steel_slag
 	weapon_special = /datum/special_intent/triple_stab
 
 /obj/item/weapon/sword/short/iron
@@ -77,8 +78,9 @@
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 15
+	item_weight = 750 GRAMS
 
 /obj/item/weapon/sword/short/bronze
 	name = "bronze short sword"
@@ -87,8 +89,9 @@
 	wdefense = GOOD_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
 	sellprice = 10
+	item_weight = 700 GRAMS
 
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
@@ -98,6 +101,8 @@
 	force = DAMAGE_SHORTSWORD + 3
 	grid_width = 32
 	grid_height = 96
+	item_weight = 650 GRAMS
+	smeltresult = /obj/item/ingot/silverblessed
 
 /obj/item/weapon/sword/short/psy/Initialize(mapload)
 	. = ..()						//+2 force, +50 blade int, +50 int, +1 def, make silver
@@ -110,6 +115,7 @@
 	icon_state = "ida_steel"
 	force = DAMAGE_SHORTSWORD + 4
 	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
+	item_weight = 700 GRAMS
 
 /obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
@@ -118,6 +124,7 @@
 	icon_state = "ida_iron"
 	force = DAMAGE_SHORTSWORD + 2
 	possible_item_intents = list(SHORT_CUT, SWORD_THRUST)
+	item_weight = 750 GRAMS
 
 
 //................ Arming Sword ............... //
@@ -126,8 +133,10 @@
 	desc = "A trustworthy blade design, the first dedicated tool of war since before the age of history."
 	icon_state = "sword1"
 	sellprice = 30
+	smeltresult = /obj/item/ingot/steel_slag
 
 	weapon_special = /datum/special_intent/shin_swipe
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/arming/Initialize()
 	. = ..()
@@ -137,6 +146,7 @@
 /obj/item/weapon/sword/decorated
 	icon_state = "decsword1"
 	sellprice = 140
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/decorated/Initialize()
 	. = ..()
@@ -149,9 +159,10 @@
 	icon_state = "silversword"
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	sellprice = 45
 	last_used = 0
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/sword/silver/Initialize(mapload)
 	. = ..()
@@ -163,7 +174,8 @@
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/bronze
 	name = "bronze sword"
@@ -172,7 +184,8 @@
 	wdefense = GOOD_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/kaskara
 	name = "steel kaskara"
@@ -182,6 +195,8 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_CHOP)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_CHOP)
 	alt_intents = null
+	item_weight = 1.2 KILOGRAMS
+	smeltresult = /obj/item/ingot/steel_slag
 
 /obj/item/weapon/sword/kaskara/iron
 	name = "iron kaskara"
@@ -190,7 +205,8 @@
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/stone
 	name = "stone sword"
@@ -201,18 +217,8 @@
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 50
 	max_integrity = INTEGRITY_WORST / 4
-	melting_material = null
-
-/obj/item/weapon/sword/rapier/caneblade/courtphysician
-	name = "cane blade"
-	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. This one bears the visage of a vulture on its pommel."
-	icon = 'icons/roguetown/weapons/32/swords.dmi'
-	icon_state = "doccaneblade"
-
-/obj/item/weapon/sword/rapier/caneblade/hand
-	name = "cane blade"
-	desc = "A steel blade with a silver handle, intended to be concealed inside of a cane. This one bears a rontz on its pommel."
-	icon_state = "staffblade"
+	item_weight = 900 GRAMS
+	smeltresult = null
 
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
@@ -227,21 +233,24 @@
 	gripped_intents = null
 	alt_intents = null
 	minstr = 5
-
+	smeltresult = /obj/item/ingot/steel_slag
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
+	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/dec
 	name = "decorated sabre"
 	desc = "A sabre decorated with fashionable gold accents without sacrificing its lethal practicality."
 	icon_state = "decsaber"
 	sellprice = 140
+	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/captain
-	name = "Law"
+	name = "\proper law"
 	desc = "A sabre decorated with gold forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
 	icon_state = "capsaber"
 	sellprice = 140
+	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/stalker
 	name = "stalker sabre"
@@ -249,6 +258,7 @@
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spidersaber"
 	possible_item_intents = list(SWORD_CUT, SHORT_THRUST)
+	item_weight = 850 GRAMS
 
 /obj/item/weapon/sword/sabre/noc
 	name = "moonlight khopesh"
@@ -257,6 +267,8 @@
 	desc = "Glittering moonlight upon blued steel."
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_CHOP)
 	max_integrity = INTEGRITY_STRONGEST * 0.8
+	item_weight = 950 GRAMS
+	smeltresult = /obj/item/ingot/silver
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
@@ -271,6 +283,7 @@
 	wdefense = GREAT_PARRY
 	wbalance = HARD_TO_DODGE
 	minstr = 6
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/dadao
 	name = "steel dadao"
@@ -281,24 +294,27 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
 	gripped_intents = list(AXE_CHOP, CURVED_THRUST)
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/dadao/iron
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/dadao/bronze
 	name = "bronze dadao"
 	icon_state = "dadao_bronze"
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
+	item_weight = 1.1 KILOGRAMS
 
 //................ Shalal Sabre ............... //
 /obj/item/weapon/sword/sabre/shalal
-	name = "Zaladin riding sabre"
+	name = "zaladin riding sabre"
 	desc = "A fine weapon of Zaladin origin, used by those with mastery of mounted swordsmanship."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "marlin"
@@ -318,8 +334,8 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	dropshrink = 0.
 	sellprice = 80
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/shalal/getonmobprop(tag)
 	. = ..()
@@ -334,14 +350,13 @@
 			if("onbelt")
 				return list("shrink" = 0.5,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-
 /obj/item/weapon/sword/sabre/scythe
 	name = "scythe sword"
 	desc = "A farming tool blade has been fastened to a shorter wooden handle to create an improvised weapon."
 	icon_state = "scytheblade"
 	force = DAMAGE_SWORD - 2
 	wdefense = AVERAGE_PARRY
-
+	item_weight = 1 KILOGRAMS
 
 /*----------\
 | Scimitars |	Normal swords with a strong cutting emphasis.
@@ -353,6 +368,8 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
 	swingsound = BLADEWOOSH_LARGE
+	item_weight = 1.1 KILOGRAMS
+	smeltresult = /obj/item/ingot/steel_slag
 
 /obj/item/weapon/sword/scimitar/falchion
 	name = "falchion"
@@ -362,6 +379,7 @@
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
 	gripped_intents = list(SWORD_CUT, AXE_CHOP)
 	swingsound = BLADEWOOSH_HUGE
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/messer
 	name = "messer"
@@ -373,8 +391,9 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	minstr = 8 // Heavy blade used by orcs
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 20
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
 	name = "iron khopesh"
@@ -383,8 +402,9 @@
 	icon_state = "khopesh_iron"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 20
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh
 	name = "steel khopesh"
@@ -395,6 +415,7 @@
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CHOP, SWORD_THRUST)
 	sellprice = 45
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/sengese/iron
 	name = "iron sengese"
@@ -402,8 +423,9 @@
 	icon_state = "sengese_iron"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 20
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/sengese
 	name = "steel sengese"
@@ -416,6 +438,7 @@
 	swingsound = BLADEWOOSH_SMALL
 	minstr = 6
 	sellprice = 45
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/sengese/bronze
 	name = "bronze sengese"
@@ -423,8 +446,9 @@
 	icon_state = "sengese_bronze"
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
 	sellprice = 15
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/sengese/silver
 	name = "silver sengese"
@@ -433,8 +457,9 @@
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 7
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	sellprice = 30
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/scimitar/sengese/silver/Initialize(mapload)
 	. = ..()
@@ -450,7 +475,7 @@
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 6
-	melting_material = /datum/material/steel
+	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/scimitar/wodao/iron
 	name = "iron wo dao"
@@ -459,7 +484,8 @@
 	force_wielded = DAMAGE_SWORD_WIELD -1
 	max_blade_int = 160
 	max_integrity = INTEGRITY_STRONG * 0.8
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
+	item_weight = 950 GRAMS
 
 /*--------\
 | Rapiers |		Onehanded, slightly weaker cut, more AP thrust, harder to dodge.
@@ -476,7 +502,7 @@
 	gripped_intents = null
 	alt_intents = null
 	minstr = 6
-
+	smeltresult = /obj/item/ingot/steel_slag
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	parrysound = "rapier"
@@ -485,6 +511,7 @@
 	dropshrink = 0.8
 
 	weapon_special = /datum/special_intent/piercing_lunge
+	item_weight = 700 GRAMS
 
 /obj/item/weapon/sword/rapier/getonmobprop(tag)
 	. = ..()
@@ -567,6 +594,8 @@
 	icon_state = "psyrapier"
 	max_integrity = INTEGRITY_STRONG
 	max_blade_int = 300
+	item_weight = 700 GRAMS
+	smeltresult = /obj/item/ingot/silverblessed
 
 /obj/item/weapon/sword/rapier/psy/Initialize(mapload)
 	. = ..()
@@ -576,12 +605,14 @@
 /obj/item/weapon/sword/rapier/psy/relic
 	name = "retribution"
 	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
+	item_weight = 700 GRAMS
 
 /obj/item/weapon/sword/rapier/dec
 	name = "decorated rapier"
 	desc = "A rapier decorated with gold inlaid on its hilt. A regal weapon fit for nobility."
 	icon_state = "decrapier"
 	sellprice = 140
+	item_weight = 700 GRAMS
 
 /obj/item/weapon/sword/rapier/nimcha
 	name = "nimcha"
@@ -590,6 +621,7 @@
 	icon_state = "nimcha"
 	dropshrink = 0.8
 	sellprice = 140 // its made with gold and steel, thats pretty valuable
+	item_weight = 750 GRAMS
 
 /obj/item/weapon/sword/rapier/caneblade
 	name = "cane blade"
@@ -599,15 +631,28 @@
 	sellprice = 100 //Gold handle
 	bigboy = FALSE
 	SET_BASE_PIXEL(0, 0)
+	item_weight = 500 GRAMS
+
+/obj/item/weapon/sword/rapier/caneblade/courtphysician
+	name = "cane blade"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. This one bears the visage of a vulture on its pommel."
+	icon = 'icons/roguetown/weapons/32/swords.dmi'
+	icon_state = "doccaneblade"
+
+/obj/item/weapon/sword/rapier/caneblade/hand
+	name = "cane blade"
+	desc = "A steel blade with a silver handle, intended to be concealed inside of a cane. This one bears a rontz on its pommel."
+	icon_state = "staffblade"
 
 //................ Lord's Rapier ............... //
 /obj/item/weapon/sword/rapier/dec/lord
-	name = "Lord's Rapier"
+	name = "\proper lord's rapier"
 	desc = "Passed down through the ages, a weapon that once carved a kingdom out now relegated to a decorative piece."
 	icon_state = "lord_rapier"
 	force = DAMAGE_SWORD_WIELD
 	sellprice = 200
 	max_blade_int = 400
+	item_weight = 750 GRAMS
 
 /obj/item/weapon/sword/rapier/silver
 	name = "silver rapier"
@@ -617,19 +662,23 @@
 	melt_amount = 100
 	max_blade_int = 240 // .8 of base steel
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	sellprice = 45
 	last_used = 0
+	item_weight = 650 GRAMS
 
 /obj/item/weapon/sword/rapier/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/sword/rapier/eora
-	name = "The Heartstring"
+	name = "\proper heartstring"
 	desc = "For when soft words cannot be spoken more, and hearts are to be pierced."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eorarapier"
+	item_weight = 650 GRAMS
+	SET_BASE_PIXEL(0, 0)
+	bigboy = FALSE
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
@@ -654,9 +703,9 @@
 	dropshrink = 0.75
 	bigboy = TRUE // WHY DOES THIS FUCKING VARIABLE CONTROL WHETHER THE BLOOD OVERLAY WORKS ON 64x64 WEAPONS
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
 	sellprice = 200 // A noble collector would love to get his/her hands on one of these blades
-
+	item_weight = 1.3 KILOGRAMS
 
 
 /*-----------------\
@@ -675,7 +724,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-
+	smeltresult = /obj/item/ingot/steel_slag
 	swingsound = BLADEWOOSH_LARGE
 	parrysound = "largeblade"
 	pickup_sound = "brandish_blade"
@@ -691,6 +740,7 @@
 	grid_width = 64
 
 	weapon_special = /datum/special_intent/side_sweep
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/shotel
 	name = "steel shotel"
@@ -705,6 +755,7 @@
 	dropshrink = 0.8
 	sellprice = 80
 	max_integrity = INTEGRITY_STRONG - 50 //this thing is long as hell, it would be more likely to break over time
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/sword/long/shotel/getonmobprop(tag)
 	. = ..()
@@ -725,8 +776,9 @@
 	name = "iron shotel"
 	icon_state = "shotel_iron"
 	max_integrity = INTEGRITY_STANDARD - 50
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 60
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/death
 	color = CLOTHING_SOOT_BLACK
@@ -757,6 +809,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	dropshrink = 0.9
 	sellprice = 60
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/weapon/sword/long/aruval/getonmobprop(tag)
 	. = ..()
@@ -777,8 +830,9 @@
 	name = "iron aruval"
 	icon_state = "aruval_iron"
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 35
+	item_weight = 1.7 KILOGRAMS
 
 /obj/item/weapon/sword/long/aruval/iron/getonmobprop(tag)
 	. = ..()
@@ -824,12 +878,12 @@
 	max_integrity = INTEGRITY_STRONG
 	static_price = TRUE
 	sellprice = 45 // Old and chipped
-
+	item_weight = 1.5 KILOGRAMS
 
 // Repurposing this unused sword for the Paladin job as a heavy counter against vampires.
 /obj/item/weapon/sword/long/judgement// this sprite is a one handed sword, not a longsword.
-	icon_state = "judgement"
 	name = "judgement"
+	icon_state = "judgement"
 	desc = "A sword with a silvered grip, a jeweled hilt and a honed blade; a design fit for nobility."
 	force = DAMAGE_SWORD - 2
 	max_blade_int = 240
@@ -838,6 +892,7 @@
 	sellprice = 363
 	static_price = TRUE
 	last_used = 0
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/sword/long/judgement/Initialize(mapload)
 	. = ..()
@@ -862,19 +917,21 @@
 	name = "decimator"
 	desc = "A horrid sword with a silvered grip, a jeweled hilt and a honed blade; a design unfit for a true paladin."
 	color = CLOTHING_SOOT_BLACK
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
-	name = "\proper the Jaded Fang"
+	name = "\proper jaded fang"
 	desc = "An ancestral long blade with an ominous glow, serrated with barbs along its edges. Stained with a strange green tint."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	sellprice = 0
 	static_price = TRUE
 	randomize_blade_int = FALSE
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/vampiric)
+	enchant(/datum/enchantment/on_hit/vampiric)
 
 /obj/item/weapon/sword/long/vlord/getonmobprop(tag)
 	. = ..()
@@ -898,6 +955,7 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWDLONG_CHOP)
 	sellprice = 80
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/long/rider/steppe
 	name = "steppe sabre"
@@ -907,6 +965,7 @@
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
 	gripped_intents = null
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/long/rider/getonmobprop(tag)
 	. = ..()
@@ -931,9 +990,10 @@
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 	last_used = 0
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	melt_amount = 75
 	sellprice = 90
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/sword/long/forgotten/Initialize(mapload)
 	. = ..()
@@ -945,6 +1005,7 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "ravoxflamberge"
 	force = DAMAGE_SWORD + 2
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/psydon
 	name = "psydonian longsword"
@@ -952,16 +1013,18 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psysword"
 	last_used = 0
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silverblessed
 	sellprice = 100
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/psydon/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/sword/long/psydon/relic
-	name = "Rememberance"
+	name = "\proper rememberance"
 	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -979,7 +1042,7 @@
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 	last_used = 0
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	sellprice = 160
 
 /obj/item/weapon/sword/long/decorated/Initialize(mapload)
@@ -1008,6 +1071,7 @@
 	sellprice = 90
 
 	weapon_special = /datum/special_intent/greatsword_swing
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()
@@ -1031,9 +1095,10 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	minstr = 11
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silverblessed
 	melt_amount = 150
 	sellprice = 150
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/psydon/Initialize(mapload)
 	. = ..()
@@ -1053,25 +1118,29 @@
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic
-	name = "Crusade"
+	name = "\proper crusade"
 	desc = "The grandest blade of the Ordo Benetarus. Its unparalleled strength commands even the greatest of foes to fall. Wade through the unholy in Psydon’s name. Let none survive."
 	icon_state = "psygsword"
 	force = DAMAGE_SWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
 	minstr = 9 //So the ordinator can use his sword as old.
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/broadsword/psy
 	name = "old psydonian broadsword"
 	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Its edge remains as lethal as ever, however."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psybroadsword"
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	melt_amount = 150
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/broadsword/psy/relic
-	name = "Creed"
+	name = "\proper creed"
 	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You’re the light - show them the way."
+	item_weight = 2.5 KILOGRAMS
+	smeltresult = /obj/item/ingot/silverblessed
 
 /obj/item/weapon/sword/long/broadsword/psy/getonmobprop(tag)
 	. = ..()
@@ -1090,6 +1159,7 @@
 	name = "unforgotten blade"
 	desc = "High Inquisitor Archibald once recorded an expedition of seven brave order members into eastern snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
 	icon_state = "forgottenblade"
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/psydon/unforgotten/Initialize()
 	. = ..()					//+50 Blade int, +3 DMG, +50 int, +1 def, make it silver
@@ -1104,6 +1174,7 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	melt_amount = 300
 	sellprice = 120
+	item_weight = 2.8 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
@@ -1114,9 +1185,10 @@
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	melt_amount = 225
 	sellprice = 60
+	item_weight = 3 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/zwei/getonmobprop(tag)
 	. = ..()
@@ -1138,6 +1210,7 @@
 	icon_state = "kriegsmesser"
 	minstr = 10
 	sellprice = 120
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/elfgsword/getonmobprop(tag)
 	. = ..()
@@ -1160,6 +1233,7 @@
 	wdefense = ULTMATE_PARRY
 	minstr = 10
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/zizo/getonmobprop(tag)
 	. = ..()
@@ -1183,8 +1257,9 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 90
+	item_weight = 2.8 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/claymore/iron/getonmobprop(tag)
 	. = ..()
@@ -1207,6 +1282,7 @@
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	minstr = 10
 	sellprice = 110
+	item_weight = 2.7 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/claymore/getonmobprop(tag)
 	. = ..()
@@ -1228,6 +1304,7 @@
 	icon_state = "gsclaymore"
 	max_blade_int = INTEGRITY_STRONG + 50
 	sellprice = 200
+	item_weight = 2.8 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/claymore/gold/getonmobprop(tag)
 	. = ..()
@@ -1255,6 +1332,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 15
 	sellprice = 240
+	item_weight = 4 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/getonmobprop(tag)
 	. = ..()
@@ -1269,16 +1347,16 @@
 			if("wielded")
 				return list("shrink" = 0.7,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-
 //................ Executioners Sword ............... //
 /obj/item/weapon/sword/long/exe
-	icon_state = "exe"
 	name = "executioner's sword"
+	icon_state = "exe"
 	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime, executions."
 	possible_item_intents = list(SWORD_STRIKE)
 	gripped_intents = list(SWORD_CHOP)
 	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/exe/getonmobprop(tag)
 	. = ..()
@@ -1300,11 +1378,13 @@
 	icon_state = "astratasword"
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
+	item_weight = 3.5 KILOGRAMS
 
 //................ Terminus Est ............... //
 /obj/item/weapon/sword/long/exe/cloth
 	icon_state = "terminusest"
 	name = "Terminus Est"
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, list/modifiers)
 	// . = ..()
@@ -1341,8 +1421,9 @@
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.90
-	melting_material = /datum/material/copper
+	smeltresult = /obj/item/ingot/copper
 	sellprice = 10
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/weapon/sword/coppermesser/getonmobprop(tag)
 	. = ..()
@@ -1375,8 +1456,9 @@
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
 	slot_flags = ITEM_SLOT_BACK//how the fuck you could put this thing on your hip?
-	melting_material = /datum/material/copper
+	smeltresult = /obj/item/ingot/copper
 	sellprice = 25//lets make the two bars worth it
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/weapon/sword/rapier/ironestoc
 	name = "estoc"
@@ -1399,7 +1481,8 @@
 	inhand_y_dimension = 64
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	melting_material = /datum/material/iron
+	smeltresult = /obj/item/ingot/iron
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/estoc/getonmobprop(tag)
 	. = ..()
@@ -1465,8 +1548,9 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
 	dropshrink = 0.80
+	item_weight = 700 GRAMS
 
 //A weapon meant to be used with two hands.
 /obj/item/weapon/sword/katana
@@ -1483,7 +1567,8 @@
 	pickup_sound = "brandish_blade"
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/sword/katana/mulyeog
 	name = "foreign straight blade"
@@ -1509,6 +1594,7 @@
 	icon_state = "hook_sword"
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_STRIKE, SWORD_DISARM)
 	max_integrity = INTEGRITY_STRONG
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/hook/getonmobprop(tag)
 	. = ..()
@@ -1672,7 +1758,8 @@
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
 	dropshrink = 1
-	melting_material = /datum/material/gold
+	smeltresult = /obj/item/ingot/gold
+	item_weight = 2.2 KILOGRAMS
 
 /datum/intent/sword/cut/martyr
 		item_damage_type = "fire"

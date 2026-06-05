@@ -10,15 +10,13 @@
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	min_players = LOWPOP_THRESHOLD
-	weight = 12
-
-	denominator = 30
-
 	base_antags = 2
 	maximum_antags = 4
+	min_players = LOWPOP_THRESHOLD  * READYUP_AVG
+	denominator = (LOWPOP_THRESHOLD-5) * READYUP_AVG
 	cost = 0.9
 
+	weight = 12
 	earliest_start = 0 SECONDS
 
 	typepath = /datum/round_event/antagonist/solo/vampire
@@ -35,14 +33,16 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
 		/datum/job/magician,
 		/datum/job/archivist,
-		/datum/job/tomb_warden,,
+		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)

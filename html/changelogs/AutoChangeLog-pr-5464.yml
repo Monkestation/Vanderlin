@@ -1,0 +1,7 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Unlucky, a vice quirk that gives you -5 to -9 Fortune."
+  - rscadd: "Skill Bereft, a vice quirk that gives you -30 in all skills."
+  - rscadd: "Wanted quirk can now let you be both an Outlaw and a Heretic at the same time."
+  - balance: "Packmule quirk costs 4 points instead of 8."

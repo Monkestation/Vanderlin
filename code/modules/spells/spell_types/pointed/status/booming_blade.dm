@@ -62,7 +62,7 @@
 	var/damage = round(10 * strength_multiplier)  // Scale damage
 
 	explosion(owner, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire)
-	owner.adjustBruteLoss(damage)
+	owner.adjustBruteLoss(damage, damage_type = BCLASS_BLUNT)
 	owner.visible_message(span_warning("A thunderous boom emanates from [owner]!"), span_danger("A thunderous boom emanates from me!"))
 
 	boomed = TRUE

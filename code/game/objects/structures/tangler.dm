@@ -4,7 +4,7 @@
 	icon = 'icons/roguetown/mob/monster/tangler.dmi'
 	icon_state = "tangler_hidden"
 	num_random_icons = 0
-	var/faction = list(FACTION_PLANTS)
+	faction = list(FACTION_PLANTS)
 
 /obj/structure/flora/grass/tangler/real
 	max_integrity = 40
@@ -104,7 +104,7 @@
 		else
 			user.visible_message("<span class='warning'>[user] tries to break free of [src]!</span>")
 
-/obj/structure/flora/grass/tangler/real/user_buckle_mob(mob/living/M, mob/living/user)
+/obj/structure/flora/grass/tangler/real/user_buckle_mob(mob/living/M, mob/living/user, check_loc)
 	return
 
 /obj/structure/flora/grass/tangler/real/HasProximity(atom/movable/AM)
@@ -116,7 +116,7 @@
 		var/mob/living/L = AM
 		if(HAS_TRAIT(L, TRAIT_ENTANGLER_IMMUNITY))
 			return
-		if(FACTION_PLANTS in L.faction)
+		if(L.has_faction(FACTION_PLANTS))
 			return
 		if(!aggroed)
 			if(L.m_intent != MOVE_INTENT_RUN)

@@ -29,11 +29,8 @@
 		new_item.warming = min(5 MINUTES, average_freshness)
 
 		var/datum/quality_calculator/cooking/cook_calc = new(
-			base_qual = 0,
 			mat_qual = highest_quality,
 			skill_qual = cooking_skill,
-			perf_qual = 0,
-			diff_mod = 0,
 			components = 1,
 			fresh = average_freshness,
 			recipe_mod = 1.0

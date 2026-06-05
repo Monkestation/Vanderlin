@@ -47,7 +47,6 @@
 
 
 	dodgetime = 20
-	aggressive = 1
 //	stat_attack = UNCONSCIOUS
 	remains_type = /obj/effect/decal/remains/bogbug
 	body_eater = TRUE
