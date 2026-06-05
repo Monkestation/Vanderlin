@@ -2,8 +2,3 @@
   banned_variables:
   - icon
   - icon_state
-
-/mob:
-  banned_variables:
-  - icon
-  - icon_state
