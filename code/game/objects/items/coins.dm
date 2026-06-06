@@ -327,7 +327,7 @@
 			qdel(src)
 			return
 
-		var/obj/item/ammo_casing/caseless/pelletshot/coin/new_pellet = new pellet_type(src, src)
+		var/obj/item/ammo_casing/caseless/pelletshot/coin/new_pellet = new pellet_type(get_turf(user))
 		user.put_in_hands(new_pellet)
 		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
