@@ -11,8 +11,7 @@
 		/datum/attribute/skill/combat/firearms = 30,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/craft/bombs = 10,
     )
 /datum/job/advclass/mercenary/grenzelhoftgun
 	title = "Grenzelhoft Arkebusier"
