@@ -500,19 +500,20 @@
 
 /datum/sprite_accessory/snout/nose/goblin/
 	abstract_type = /datum/sprite_accessory/snout/nose
-	icon = "icons/roguetown/mob/bodies/hoblin.dmi"
+	use_static = TRUE
 
 /datum/sprite_accessory/snout/nose/goblin/nose
 	name = "Big nose"
-	icon_state = "hoblinnose"
+	icon = 'icons/mob/sprite_accessory/snouts/noses/hoblinnose.dmi'
+	icon_state = "nosehoblin"
 
 /datum/sprite_accessory/snout/nose/goblin/noseshark
 	name = "Shark nose"
-	icon_state = "sharknose"
+	icon = 'icons/mob/sprite_accessory/snouts/noses/sharknose.dmi'
+	icon_state = "noseshark"
 
 /datum/sprite_accessory/snout/nose/goblin/nosegoblin
 	name = "Goblin nose"
-	icon_state = "goblinnose"
-
-
+	icon = 'icons/mob/sprite_accessory/snouts/noses/goblinnose.dmi'
+	icon_state = "nosegoblin"
 
