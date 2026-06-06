@@ -141,7 +141,7 @@
 /mob/living/proc/getBruteLoss()
 	return bruteloss
 
-/mob/living/proc/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status, damage_type, can_crit = FALSE, true_heal = FALSE)
+/mob/living/proc/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status, damage_type, can_crit = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	bruteloss = CLAMP((bruteloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
@@ -304,9 +304,9 @@
 		updatehealth(brute + burn)
 
 // heal MANY bodyparts, in random order
-/mob/living/proc/heal_overall_damage(brute = 0, burn = 0, required_status, updating_health = TRUE)
-	adjustBruteLoss(-brute, FALSE) //zero as argument for no instant health update
-	adjustFireLoss(-burn, FALSE)
+/mob/living/proc/heal_overall_damage(brute = 0, burn = 0, required_status, updating_health = TRUE, forced = FALSE)
+	adjustBruteLoss(-brute, FALSE, forced = forced) //zero as argument for no instant health update
+	adjustFireLoss(-burn, FALSE, forced = forced)
 	if(updating_health)
 		updatehealth(brute + burn)
 
@@ -336,7 +336,7 @@
  * @return TRUE if defense successful, FALSE otherwise
  */
 /mob/living/proc/checkdefense(datum/intent/intenty, mob/living/user)
-	if(!cmode || stat || (!canparry && !candodge) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+	if(!cmode || stat || (HAS_TRAIT(src, TRAIT_UNPARRYING) && HAS_TRAIT(src, TRAIT_UNDODGING)) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(client && used_intent && client.charging && used_intent.tranged && !used_intent.tshield)
 		return FALSE
@@ -358,12 +358,8 @@
 	// Handle defense based on intent
 	switch(d_intent)
 		if(INTENT_PARRY)
-			if(HAS_TRAIT(src, TRAIT_UNPARRYING))
-				return FALSE
 			return attempt_parry(intenty, user, prob2defend)
 		if(INTENT_DODGE)
-			if(HAS_TRAIT(src, TRAIT_UNDODGING))
-				return FALSE
 			return attempt_dodge(intenty, user, can_dodge_see)
 
 	return FALSE

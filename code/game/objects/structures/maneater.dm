@@ -146,7 +146,7 @@
 			return
 		buckle_mob(L, TRUE, check_loc = FALSE)
 		START_PROCESSING(SSobj, src)
-		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
+		if(L.can_feel_pain())
 			L.emote("painscream", forced = TRUE)
 		visible_message(span_danger("[src] snatches [L]!"))
 		playsound(src, pick(attack_sounds), 100, FALSE, -1)

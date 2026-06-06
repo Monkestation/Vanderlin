@@ -29,7 +29,7 @@
 		return
 	REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, MAGIC_TRAIT)
 	summoned_mob.status_flags -= GODMODE
-	summoned_mob.candodge = TRUE
+	ADD_TRAIT(summoned_mob, TRAIT_UNDODGING, MAGIC_TRAIT)
 	summoned_mob.binded = FALSE
 	summoned_mob.SetParalyzed(0)
 	summoned_mob = null

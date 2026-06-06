@@ -1044,7 +1044,10 @@
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
 "dv" = (
-/obj/structure/fluff/traveltile/exit_bandit,
+/obj/structure/fluff/traveltile/exit_bandit{
+	aportalgoesto = "banditexit_bog";
+	aportalid = "banditin_bog"
+	},
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
 "dw" = (
@@ -1356,6 +1359,9 @@
 /obj/structure/bridge_stakes,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"fo" = (
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "fp" = (
 /obj/structure/gearbox,
 /turf/open/floor/grass/yel,
@@ -1666,6 +1672,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"hI" = (
+/turf/open/water/marsh,
+/area/outdoors/woods_safe)
 "hJ" = (
 /obj/structure/winch{
 	redstone_id = "vamplordthrone"
@@ -1874,6 +1883,10 @@
 /obj/item/neuFarm/seed/westleach,
 /obj/item/neuFarm/seed/westleach,
 /turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"iV" = (
+/obj/structure/flora/tree,
+/turf/open/floor/grass,
 /area/outdoors/woods_safe)
 "iX" = (
 /obj/structure/table/wood{
@@ -2239,6 +2252,13 @@
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"ly" = (
+/obj/structure/fluff/traveltile/exit_bandit{
+	aportalgoesto = "banditexit_mountain";
+	aportalid = "banditin_mountain"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "lB" = (
 /obj/structure/fluff/railing/border{
 	layer = 2
@@ -2275,6 +2295,9 @@
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"lP" = (
+/turf/open/floor/sand,
+/area/outdoors/woods_safe)
 "lS" = (
 /obj/structure/kneestingers,
 /obj/structure/fluff/railing/border{
@@ -2533,6 +2556,10 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/twig,
 /area/indoors/lich)
+"nC" = (
+/obj/structure/flora/rock/pile,
+/turf/open/floor/naturalstone,
+/area/outdoors/woods_safe)
 "nG" = (
 /obj/structure/fluff/statue/evil,
 /obj/machinery/light/fueled/firebowl/standing/blue,
@@ -3572,6 +3599,10 @@
 /obj/structure/mannequin/male,
 /turf/open/floor/wood,
 /area/indoors)
+"tV" = (
+/obj/structure/flora/rock,
+/turf/open/floor/naturalstone,
+/area/outdoors/woods_safe)
 "tW" = (
 /obj/structure/fluff/millstone{
 	pixel_x = -5;
@@ -3990,6 +4021,17 @@
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"wn" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "To the Coast"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"ws" = (
+/obj/structure/fluff/traveltile/exit_bandit,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "wz" = (
 /obj/structure/chair/bench/church,
 /obj/structure/fluff/walldeco/painting/skull{
@@ -4038,6 +4080,12 @@
 	},
 /turf/open/floor/blocks/paving,
 /area/indoors/vampire_manor)
+"wN" = (
+/obj/structure/fluff/buysign{
+	name = "DIGGING OUT A CAVE-IN, DON'T GO THIS WAY!"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/woods_safe)
 "wR" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
@@ -4313,6 +4361,10 @@
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
+"yX" = (
+/obj/structure/flora/rock/pile,
+/turf/open/floor/sand,
+/area/outdoors/woods_safe)
 "zb" = (
 /obj/structure/roguerock,
 /turf/open/water/swamp/deep,
@@ -4841,6 +4893,12 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
+"Cx" = (
+/obj/structure/fluff/buysign{
+	name = "To the Murderwoods"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "Cz" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchbrick,
@@ -4849,6 +4907,13 @@
 /obj/item/bin/water/gross,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
+"CD" = (
+/obj/structure/fluff/traveltile/exit_bandit{
+	aportalgoesto = "banditexit_bog";
+	aportalid = "banditin_bog"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "CE" = (
 /obj/item/weapon/sword,
 /obj/item/weapon/sword,
@@ -4932,6 +4997,12 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Dh" = (
+/obj/structure/fluff/buysign{
+	name = "To the Bog"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Dn" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 8
@@ -5015,6 +5086,10 @@
 /obj/item/weapon/sword/long/greatsword,
 /turf/open/floor/cobble,
 /area/indoors)
+"DR" = (
+/obj/structure/flora/starfish,
+/turf/open/floor/sand,
+/area/outdoors/woods_safe)
 "DT" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/shoes/simpleshoes/buckle,
@@ -5065,6 +5140,10 @@
 /obj/item/weapon/sword/long/judgement,
 /turf/open/floor/cobble,
 /area/indoors)
+"Eu" = (
+/obj/structure/fluff/traveltile/exit_bandit,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "Ev" = (
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
@@ -5214,6 +5293,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
+"FK" = (
+/obj/structure/fluff/signage{
+	dir = 4;
+	name = "To Malum's Anvil"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "FP" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 6
@@ -5579,10 +5665,10 @@
 	pixel_x = -24
 	},
 /obj/structure/mannequin/male,
-/obj/item/clothing/head/rare/dwarfplate,
-/obj/item/clothing/armor/rare/dwarfplate,
-/obj/item/clothing/shoes/boots/rare/dwarfplate,
-/obj/item/clothing/gloves/rare/dwarfplate,
+/obj/item/clothing/head/helmet/heavy/dwarven,
+/obj/item/clothing/shoes/boots/armor/dwarven,
+/obj/item/clothing/armor/plate/full/dwarven,
+/obj/item/clothing/gloves/plate/dwarven,
 /obj/machinery/light/fueled/torchholder/l{
 	pixel_x = 4
 	},
@@ -5816,6 +5902,9 @@
 	},
 /turf/open/water/bath,
 /area/indoors/lich)
+"Ji" = (
+/turf/open/floor/naturalstone,
+/area/outdoors/woods_safe)
 "Jk" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/rope/chain,
@@ -5960,6 +6049,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"Kp" = (
+/obj/structure/fluff/statue/gargoyle,
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "Kq" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/tree,
@@ -6095,6 +6188,10 @@
 "Lv" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/lich)
+"Lx" = (
+/obj/structure/flora/shells,
+/turf/open/floor/sand,
+/area/outdoors/woods_safe)
 "Ly" = (
 /obj/structure/fluff/railing/border{
 	dir = 10;
@@ -6695,6 +6792,9 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"PO" = (
+/turf/open/water/ocean,
+/area/outdoors/woods_safe)
 "PT" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/clothing/armor/chainmail/iron/orc,
@@ -6915,6 +7015,10 @@
 /obj/item/weapon/knife/hunting,
 /turf/open/floor/cobble,
 /area/indoors)
+"Rf" = (
+/obj/structure/flora/rock,
+/turf/open/water/ocean,
+/area/outdoors/woods_safe)
 "Rh" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -7476,6 +7580,10 @@
 "Uj" = (
 /turf/closed/wall/mineral/decostone/center,
 /area/indoors/lich)
+"Ul" = (
+/obj/structure/flora/rock/pile,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "Un" = (
 /obj/structure/table/wood{
 	dir = 6;
@@ -7546,6 +7654,9 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
+"UG" = (
+/turf/closed/mineral,
+/area/outdoors/woods_safe)
 "UI" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/herringbone,
@@ -8636,15 +8747,15 @@ Sy
 Sy
 Sy
 Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+Rf
+PO
+PO
+lP
+wN
+lP
+lP
+PO
+PO
 Sy
 Iw
 "}
@@ -8766,15 +8877,15 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+PO
+PO
+DR
+lP
+Qy
+Qy
+lP
+lP
+PO
 Sy
 Iw
 "}
@@ -8896,15 +9007,15 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+PO
+PO
+lP
+lP
+Qy
+Qy
+lP
+Lx
+yX
 Sy
 Iw
 "}
@@ -9027,14 +9138,14 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-Te
-Te
-bz
+Ul
+lP
+lP
+lP
+Qy
+lP
+lP
+lP
 Sy
 Iw
 "}
@@ -9157,13 +9268,13 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-Te
-ge
-ge
-Te
+so
+lP
+lP
+Qy
+Qy
+lP
+lP
 bz
 Sy
 Iw
@@ -9288,12 +9399,12 @@ bz
 bz
 bz
 bz
-bz
-so
-ge
-ge
-Te
-Te
+lP
+lP
+Qy
+Qy
+lP
+lP
 bz
 Sy
 Iw
@@ -9418,12 +9529,12 @@ Te
 bz
 bz
 bz
-bz
-bz
-so
-so
 Te
-bz
+lP
+Qy
+lP
+lP
+lP
 bz
 Sy
 Iw
@@ -9548,14 +9659,14 @@ Te
 Te
 Te
 bz
-bz
-bz
-bz
-so
+wn
 Te
-bz
-bz
-Sy
+Te
+Qy
+lP
+Te
+Te
+CD
 Iw
 "}
 (10,1,1) = {"
@@ -9680,12 +9791,12 @@ Te
 Te
 so
 so
+xt
 Te
 Te
 Te
 Te
-bz
-Sy
+CD
 Iw
 "}
 (11,1,1) = {"
@@ -9810,12 +9921,12 @@ ge
 ge
 Te
 Te
-Te
-Te
+xt
+xt
 Te
 ge
 Te
-Sy
+dv
 Iw
 "}
 (12,1,1) = {"
@@ -9938,14 +10049,14 @@ bz
 Te
 Te
 bz
-bz
-bz
-bz
-bz
+Te
+Te
+xt
+xt
 Te
 ge
-Te
-Sy
+Dh
+hI
 Iw
 "}
 (13,1,1) = {"
@@ -10068,14 +10179,14 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
+Te
+xt
+xt
 so
 Te
 Te
-Te
-Sy
+hI
+hI
 Iw
 "}
 (14,1,1) = {"
@@ -10197,15 +10308,15 @@ Sy
 Sy
 Sy
 Sy
-Sy
-Sy
-Sy
-Sy
+xt
+xt
+xt
+xt
 MH
 Kn
 so
 so
-so
+iV
 Iw
 "}
 (15,1,1) = {"
@@ -10465,7 +10576,7 @@ xt
 xt
 xt
 xt
-dv
+ws
 Iw
 "}
 (17,1,1) = {"
@@ -10595,7 +10706,7 @@ Kn
 so
 FR
 FR
-dv
+Eu
 Iw
 "}
 (18,1,1) = {"
@@ -10725,7 +10836,7 @@ xt
 xt
 xt
 xt
-dv
+ws
 Iw
 "}
 (19,1,1) = {"
@@ -10848,14 +10959,14 @@ Te
 XS
 so
 uy
-Sy
+xt
 so
 xt
 xt
 so
 so
+Cx
 xt
-dv
 Iw
 "}
 (20,1,1) = {"
@@ -10979,13 +11090,13 @@ Sy
 Sy
 Sy
 Sy
-Sy
+xt
 so
 WX
 Wp
 xt
-so
-so
+xt
+xt
 Iw
 "}
 (21,1,1) = {"
@@ -11109,13 +11220,13 @@ Sy
 Sy
 Sy
 Sy
+xt
+so
+so
+xt
+xt
+Ed
 Sy
-so
-so
-xt
-xt
-XS
-so
 Iw
 "}
 (22,1,1) = {"
@@ -11239,10 +11350,10 @@ Mg
 Mg
 xt
 Sy
-Sy
-Sy
-Te
-Te
+so
+xt
+so
+so
 so
 so
 Sy
@@ -11370,8 +11481,8 @@ Mg
 Mg
 Mg
 so
-so
-so
+xt
+xt
 so
 ge
 BM
@@ -11501,11 +11612,11 @@ so
 so
 Kn
 Kn
-so
-bz
-bz
-bz
-Sy
+xt
+Te
+xt
+UG
+UG
 Iw
 "}
 (25,1,1) = {"
@@ -11628,14 +11739,14 @@ Mg
 Mg
 so
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+FK
+Te
+Te
+Te
+UG
+UG
+UG
 Iw
 "}
 (26,1,1) = {"
@@ -11758,14 +11869,14 @@ Mg
 so
 Mg
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+Te
+Te
+Te
+Ji
+UG
+UG
+UG
 Iw
 "}
 (27,1,1) = {"
@@ -11888,14 +11999,14 @@ so
 so
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+Ji
+Ji
+Ji
+Ji
+UG
+UG
+UG
 Iw
 "}
 (28,1,1) = {"
@@ -12017,15 +12128,15 @@ Kq
 bz
 so
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+UG
+Ji
+Ji
+Ji
+Ji
+Ji
+UG
+UG
 Iw
 "}
 (29,1,1) = {"
@@ -12147,15 +12258,15 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+nC
+Ji
+Ji
+Ji
+Ji
+Ji
+tV
+UG
 Iw
 "}
 (30,1,1) = {"
@@ -12277,15 +12388,15 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+Ji
+Ji
+Ji
+Ji
+Ji
+YQ
+YQ
+UG
 Iw
 "}
 (31,1,1) = {"
@@ -12407,15 +12518,15 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+tV
+Ji
+Ji
+Ji
+YQ
+YQ
+YQ
+UG
 Iw
 "}
 (32,1,1) = {"
@@ -12537,15 +12648,15 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+UG
+UG
+Ji
+Ji
+Ji
+Ji
+YQ
+YQ
+UG
 Iw
 "}
 (33,1,1) = {"
@@ -12668,14 +12779,14 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+zf
+Kp
+fo
+Ji
+Ji
+Ji
+YQ
+UG
 Iw
 "}
 (34,1,1) = {"
@@ -12798,14 +12909,14 @@ bz
 bz
 bz
 bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Sy
+zf
+zf
+fo
+fo
+fo
+Ji
+nC
+UG
 Iw
 "}
 (35,1,1) = {"
@@ -12929,13 +13040,13 @@ Sy
 Sy
 Sy
 Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+zf
+ly
+ly
+ly
+ly
+zf
+zf
 Iw
 "}
 (36,1,1) = {"

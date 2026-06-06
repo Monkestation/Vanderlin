@@ -37,11 +37,10 @@
 	head = /obj/item/clothing/head/roguehood/colored/black
 
 	H.add_spell(/datum/action/cooldown/spell/undirected/shadow_step, TRUE)
-	H.add_spell(/datum/action/cooldown/spell/enhanced_mimicry, TRUE)
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/harlequin)
 
 	backpack_contents = list(
-		/obj/item/harlequinn_disguise_kit,
+		/obj/item/harlequin_disguise_kit,
 		/obj/item/reagent_containers/glass/bottle/poison,
 		/obj/item/lockpick,
 		/obj/item/rope,

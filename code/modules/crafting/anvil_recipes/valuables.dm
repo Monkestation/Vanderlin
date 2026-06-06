@@ -201,6 +201,48 @@
 	created_item = /obj/item/clothing/ring/silver/makers_guild
 	craftdiff = 6
 
+// --------- BS ------------
+/datum/anvil_recipe/valuables/blacksteel
+	required_material = /obj/item/ingot/blacksteel
+	abstract_type = /datum/anvil_recipe/valuables/blacksteel
+	craftdiff = 4
+
+/datum/anvil_recipe/valuables/blacksteel/dorpels
+	name = "Blacksteel Dorpel Ring"
+	additional_items = list(/obj/item/gem/diamond)
+	created_item = /obj/item/clothing/ring/diamondbs
+	craftdiff = 4
+
+/datum/anvil_recipe/valuables/blacksteel/blortzs
+	name = "Blacksteel Blortz Ring"
+	additional_items = list(/obj/item/gem/blue)
+	created_item = /obj/item/clothing/ring/quartzbs
+	craftdiff = 4
+
+/datum/anvil_recipe/valuables/blacksteel/saffiras
+	name = "Blacksteel Saffira Ring"
+	additional_items = list(/obj/item/gem/violet)
+	created_item = /obj/item/clothing/ring/sapphirebs
+	craftdiff = 4
+
+/datum/anvil_recipe/valuables/blacksteel/gemeralds
+	name = "Blacksteel Gemerald Ring"
+	additional_items = list(/obj/item/gem/green)
+	created_item = /obj/item/clothing/ring/emeraldbs
+	craftdiff = 4
+
+/datum/anvil_recipe/valuables/blacksteel/topers
+	name = "Blacksteel Toper Ring"
+	additional_items = list(/obj/item/gem/yellow)
+	created_item = /obj/item/clothing/ring/topazbs
+	craftdiff = 4
+
+/datum/anvil_recipe/valuables/blacksteel/rontzs
+	name = "Blacksteel Rontz Ring"
+	additional_items = list(/obj/item/gem/red)
+	created_item = /obj/item/clothing/ring/rubybs
+	craftdiff = 4
+
 // --------- GOLD -----------
 
 /datum/anvil_recipe/valuables/gold
@@ -359,23 +401,35 @@
 	created_item = /obj/item/clothing/head/crown/sparrowcrown
 	craftdiff = 6
 
+/datum/anvil_recipe/valuables/signet/unblessedsilver
+	name = "Silver Signet Ring"
+	required_material = /obj/item/ingot/silver
+	craftdiff = SKILL_LEVEL_EXPERT
+	created_item = /obj/item/clothing/ring/signet/silver
+
 /datum/anvil_recipe/valuables/signet
 	name = "Signet Ring"
 	required_material = /obj/item/ingot/gold
 	craftdiff = SKILL_LEVEL_EXPERT
 	created_item = /obj/item/clothing/ring/signet
 
+/datum/anvil_recipe/valuables/signet/psy/gold
+	name = "Gold Signet Ring"
+	craftdiff = SKILL_LEVEL_EXPERT
+	required_material = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/ring/signet/psy/g
+
 /datum/anvil_recipe/valuables/signet/silver
 	name = "Blessed Silver Signet Ring"
 	craftdiff = SKILL_LEVEL_MASTER
 	required_material = /obj/item/ingot/silverblessed
-	created_item = /obj/item/clothing/ring/signet/silver
+	created_item = /obj/item/clothing/ring/signet/psy
 
 /datum/anvil_recipe/valuables/signet/silver/inq
 	name = "Blessed Silver Signet Ring"
 	craftdiff = SKILL_LEVEL_MASTER
 	required_material = /obj/item/ingot/silverblessed
-	created_item = /obj/item/clothing/ring/signet/silver
+	created_item = /obj/item/clothing/ring/signet/psy
 
 // --------- BRONZE -----------
 
@@ -447,3 +501,33 @@
 	name = "Bronze Fish Figurines"
 	created_item = /obj/item/statue/bronze/fish
 	output_amount = 2
+
+/datum/anvil_recipe/valuables/weddingrings
+	name = "Weddingbands, Silver (x2)"
+	required_material = /obj/item/ingot/silver
+	created_item = /obj/item/clothing/ring/band
+	output_amount = 2
+
+/datum/anvil_recipe/valuables/weddingringg
+	name = "Weddingbands, Gold (x2)"
+	required_material = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/ring/band/gold
+	output_amount = 2
+
+/datum/anvil_recipe/valuables/weddingringb
+	name = "Weddingbands, Bronze (x2)"
+	required_material = /obj/item/ingot/bronze
+	created_item = /obj/item/clothing/ring/band/bronze
+	output_amount = 2
+
+/datum/anvil_recipe/valuables/weddingringp
+	name = "Weddingbands, Ancient (x2)"
+	required_material = /obj/item/ingot/purifiedaalloy
+	created_item = /obj/item/clothing/ring/band/paalloy
+	output_amount = 2
+
+/datum/anvil_recipe/valuables/draconic_ring
+	name = "Draconic Ring"
+	required_material = /obj/item/ingot/draconic
+	created_item = /obj/item/clothing/ring/dragon_ring
+	craftdiff = 4

@@ -1,5 +1,8 @@
 /datum/quest/kill/raid
 	quest_type = QUEST_RAID
+	quest_difficulty = QUEST_DIFFICULTY_HARD
+	minimum_payout = QUEST_REWARD_HARD_LOW
+	maximum_payout = QUEST_REWARD_HARD_HIGH
 	mob_types_to_spawn = QUEST_RAID_LIST
 	count_min = 4
 	count_max = 6

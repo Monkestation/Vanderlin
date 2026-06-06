@@ -263,6 +263,10 @@
 	name = "mourning pants"
 	output = /obj/item/clothing/pants/trou/leather/mourning
 
+/datum/repeatable_crafting_recipe/leather/pants/shepherd
+	name = "shepherd's pants"
+	output = /obj/item/clothing/pants/trou/leather/shepherd
+
 /datum/repeatable_crafting_recipe/leather/shoes
 	name = "leather shoes"
 	output_amount = 2
@@ -306,6 +310,14 @@
 	output = /obj/item/clothing/cloak/raincloak
 	craftdiff = 2
 
+/datum/repeatable_crafting_recipe/leather/cloak/bandolier
+	name = "bandolier"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/rope = 1,
+	)
+	output = /obj/item/clothing/cloak/bandolier
+
 /datum/repeatable_crafting_recipe/leather/cloakfur
 	name = "fur lined raincloak"
 	requirements = list(
@@ -331,6 +343,15 @@
 		/obj/item/natural/silk = 1,
 	)
 	output = /obj/item/clothing/cloak/graggar
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/heavy_graggar_cloak
+	name = "heavy vicious cloak"
+	requirements = list(
+		/obj/item/natural/hide/cured = 4,
+		/obj/item/natural/silk = 1,
+	)
+	output = /obj/item/clothing/cloak/graggar/heavy
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/savage_cloak
@@ -589,6 +610,15 @@
 	)
 	output = /obj/item/clothing/head/leather/inqhat
 	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/gravetenderhat
+	name = "gravetender's hat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/feather = 1,
+	)
+	output = /obj/item/clothing/head/leather/inqhat/gravehat
+	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/leather/nobleboots
 	name = "noble boots"
@@ -1248,6 +1278,26 @@
 	)
 	output = /obj/item/clothing/head/roguehood/leather
 	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/studdedleatherhood
+	name = "studded leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/head/roguehood/studded
+	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/studdedleatherhoodretinue
+	name = "guard studded leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 2,
+	)
+	output = /obj/item/clothing/head/roguehood/studded/retinue
+	craftdiff = 3
 	category = "Hat"
 
 /datum/repeatable_crafting_recipe/leather/sanguinejacket

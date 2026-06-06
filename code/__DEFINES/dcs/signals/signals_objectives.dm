@@ -66,3 +66,5 @@
 #define COMSIG_GLOBAL_FISH_RELEASED "global_fish_released"
 /// from base of /datum/action/cooldown/spell/undirected/list_target/convertrole/proc/convert() (mob/living/carbon/human/recruiter, mob/living/carbon/human/recruit, newrole)
 #define COMSIG_GLOBAL_ROLE_CONVERTED "role_converted"
+
+#define COMSIG_GHOST_VESSEL_POSSESSED "ghost_vessel_possessed"

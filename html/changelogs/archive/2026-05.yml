@@ -106,3 +106,41 @@
   - code_imp: Framework (if you can even call it that) for alternative examine names
   - rscadd: alternative naming for inquisition items
   - bugfix: Skin items such as disciple's skin no longer show up on examine
+2026-05-21:
+  dwasint:
+  - bugfix: ley linker now right size
+  - bugfix: amethyst can now be used to level arcane
+2026-05-22:
+  ModDownloading:
+  - rscadd: Routes for the Bandit Camp to connect to the Bog and Malum's Anvil.
+2026-05-24:
+  ModDownloading:
+  - rscadd: Bandit camp can once again go to the Murderwoods.
+  - bugfix: Malum's Anvil Bandit camp route works now.
+  aberrantQuesrist:
+  - rscadd: Two new masonic tile variants.
+2026-05-26:
+  ModDownloading:
+  - bugfix: Archivist, Polyglot, and Somewhat Polyglot can now speak Osslandic and
+      Halfspeak.
+  realforest2001:
+  - bugfix: Fixed admin hear all.
+  - rscdel: Removed racist cats.
+2026-05-27:
+  ta3754859-max:
+  - bugfix: Rare subclasses now appear in triumph buy classes menu
+2026-05-28:
+  Spitegremlin:
+  - rscadd: Added new mask
+  - rscadd: Added new Zigar
+  - image: added some zigar and zigbox sprites
+  - code_imp: Changed zigs to need westleach dust or swampweed dust along with their
+      leaf type
+2026-05-30:
+  CheffieGithub:
+  - admin: Added a new verb called "Controller Overview" with an interface that lists
+      various stats of the subsystems and their cost as well as providing filtering
+      and access to VV.
+  ModDownloading:
+  - balance: You no longer gain stress from examining foreigners, Inhumen species,
+      or strong people, unless you're Paranoid.

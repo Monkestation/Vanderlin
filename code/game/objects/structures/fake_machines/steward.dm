@@ -276,6 +276,7 @@
 				if(newtax < 1)
 					return
 				record_round_statistic(STATS_FINES_INCOME, newtax)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_FINE_INCOME, newtax)
 				SStreasury.give_money_account(-newtax, A)
 				break
 	if(href_list["payroll"])
@@ -303,6 +304,7 @@
 			var/datum/job/job_pay = SSjob.GetJob(job_to_pay)
 			if(job_check && job_check.type == job_pay.type)
 				record_round_statistic(STATS_WAGES_PAID, amount_to_pay)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_WAGES_PAID, amount_to_pay)
 				SStreasury.give_money_account(amount_to_pay, H)
 	if(href_list["compact"])
 		compact = !compact

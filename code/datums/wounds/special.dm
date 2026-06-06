@@ -8,7 +8,14 @@
 	sewn_bleed_rate = 0
 	can_cauterize = FALSE
 	critical = FALSE
+	associated_bclasses = STAB_BCLASSES
 	viable_zones = list(BODY_ZONE_HEAD)
+
+	// Most of these crits dismember organs and permanently hamper the target, so we're making them harder
+	min_damage = 10
+	min_damage_dividend = 0.5
+	dividend_multi = 10
+	damage_divisor = 12
 
 /datum/wound/facial/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial) && (type == other.type))
@@ -23,16 +30,15 @@
 		"The eardrums are ruptured!",
 	)
 	woundpain = 50
-	bleed_rate = 8
+	bleed_rate = 4
 	can_cauterize = TRUE
 	critical = TRUE
-	associated_bclasses = STAB_BCLASSES
 	viable_zones = list(BODY_ZONE_PRECISE_EARS)
 
 /datum/wound/facial/ears/can_apply_to_bodypart(obj/item/bodypart/affected)
-	. = ..()
 	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
 		return FALSE
+	. = ..()
 
 /datum/wound/facial/ears/can_apply_to_mob(mob/living/affected)
 	. = ..()
@@ -59,7 +65,7 @@
 		"The eye is destroyed!",
 	)
 	woundpain = 30
-	bleed_rate = 8
+	bleed_rate = 4
 	can_cauterize = FALSE
 	critical = TRUE
 	viable_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
@@ -174,10 +180,9 @@
 		"The tongue flies off in an arc!"
 	)
 	woundpain = 8
-	bleed_rate = 10
+	bleed_rate = 1
 	can_cauterize = FALSE
 	critical = TRUE
-	associated_bclasses = ARTERY_BCLASSES
 	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/permanent = FALSE
 
@@ -219,7 +224,6 @@
 	can_sew = FALSE
 	can_cauterize = FALSE
 	critical = TRUE
-	associated_bclasses = STAB_BCLASSES
 	viable_zones = list(BODY_ZONE_HEAD)
 
 /datum/wound/facial/disfigurement/on_mob_gain(mob/living/affected)
@@ -267,13 +271,12 @@
 	min_damage = 5
 	viable_zones = list(BODY_ZONE_PRECISE_GROIN)
 
-/datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
-	if(!(bclass in associated_bclasses))
-		return 0
-	if(length(viable_zones) && !(zone_precise in viable_zones) && viable_zones != ALL_BODYPARTS)
-		return 0
+/datum/wound/cbt/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, damage_bclass)
 	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
-		return 0
+		return
+	. = ..()
+
+/datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
 	var/cbt_multiplier = HAS_TRAIT(user, TRAIT_NUTCRACKER) ? 2 : 1
 	return round(dam / 5) * cbt_multiplier // ignores standard formula entirely
 
@@ -355,12 +358,11 @@
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 80
 	woundpain = 30
-	can_sew = FALSE
-	can_cauterize = FALSE
 	disabling = TRUE
 	critical = TRUE
 	sleep_healing = 0
 	associated_bclasses = WHIPPING_BCLASSES
+	strong_intent_bonus = TRUE
 	var/gain_emote = "paincrit"
 
 /datum/wound/scarring/on_mob_gain(mob/living/affected)
