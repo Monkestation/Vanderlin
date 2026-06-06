@@ -60,9 +60,9 @@
 		to_chat(user, span_warning("This wheel isn't connected to a ship!"))
 		return
 
-	ui_interact(user)
+	interact(user)
 
-/obj/structure/ship_wheel/ui_interact(mob/user)
+/obj/structure/ship_wheel/interact(mob/user)
 	user << browse_rsc('html/map.jpg')
 	var/datum/browser/popup = new(user, "ship_wheel", "Ship Navigation", ui_x, ui_y)
 	popup.set_content(get_ui_html(user))
@@ -767,7 +767,7 @@
 			START_PROCESSING(SSobj, src)
 			notify_crew("Auto-navigation engaged! Setting course for [target_island.island_name]!")
 
-	ui_interact(usr)
+	interact(usr)
 
 /obj/structure/ship_wheel/proc/calculate_course_to_target()
 	if(!target_island)

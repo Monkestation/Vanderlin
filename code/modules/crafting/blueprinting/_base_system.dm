@@ -27,7 +27,7 @@
 	holder.screen += buttons
 	holder.click_intercept = src
 	init_blueprint_recipes()
-	RegisterSignal(holder.mob, COMSIG_USER_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
+	RegisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
 	RegisterSignal(holder?.mob, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(on_mouse_moved_pre))
 
 /datum/blueprint_system/proc/quit()
@@ -39,7 +39,7 @@
 		recipe_browser.close()
 		recipe_browser = null
 	if(holder?.mob)
-		UnregisterSignal(holder.mob, COMSIG_USER_MOUSE_ENTERED)
+		UnregisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED)
 		UnregisterSignal(holder.mob, COMSIG_ATOM_MOUSE_ENTERED)
 	qdel(src)
 
@@ -621,14 +621,13 @@
 	selected_recipe = GLOB.blueprint_recipes[recipe_id]
 	build_dir = selected_recipe.default_dir
 	create_preview_appearance(selected_recipe)
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Selected blueprint: [selected_recipe.name]</span>")
 	if(selected_recipe.supports_directions)
 		to_chat(holder.mob, "<span class='info'>This blueprint can be rotated using the direction button.</span>")
 
-/datum/blueprint_system/proc/InterceptClickOn(mob/user, params, atom/object)
-	var/list/modifiers = params2list(params)
+/datum/blueprint_system/proc/InterceptClickOn(mob/user, list/modifiers, atom/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
@@ -644,6 +643,8 @@
 		if(right_click)
 			if(istype(object, /obj/structure/blueprint))
 				var/obj/structure/blueprint/print = object
+				if(!print.creator)
+					return TRUE
 				if(print.creator != user && world.time < print.time_when_placed + 3 MINUTES)
 					return TRUE
 				to_chat(user, span_red("[object.name] removed."))
@@ -659,7 +660,7 @@
 
 	var/atom/selected_output = selected_recipe.result_type
 
-	if(ispath(selected_output, /turf/closed) && (istype(get_area(final_location), /area/overlord_lair) && !("overlord" in user.faction)))
+	if(ispath(selected_output, /turf/closed) && (istype(get_area(final_location), /area/overlord_lair) && !user.has_faction("overlord")))
 		return
 
 	// Handle wall fixtures - place blueprint on adjacent floor when clicking on wall
@@ -761,6 +762,6 @@
 /datum/blueprint_system/proc/clear_selection()
 	selected_recipe = null
 	clear_preview()
-	recipe_button.update_name()
+	recipe_button.update_appearance(UPDATE_NAME)
 	dir_button.update_appearance()
 	to_chat(holder.mob, "<span class='notice'>Blueprint selection cleared.</span>")

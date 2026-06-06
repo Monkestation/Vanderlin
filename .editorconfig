@@ -16,7 +16,14 @@ end_of_line = crlf
 indent_style = space
 indent_size = 4
 
+[/tgui/**/*.{js,ts,tsx,jsx,scss,json,html}]
+indent_style = space
+indent_size = 2
+
 [*.yml]
 indent_style = space
 indent_size = 2
 
+[*.ts]
+indent_style = space
+indent_size =

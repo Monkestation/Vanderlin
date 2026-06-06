@@ -1,3 +1,17 @@
+/datum/attribute_holder/sheet/job/lancer
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+	)
+
 /datum/job/advclass/combat/lancer
 	title = "Lancer"
 	tutorial = "Working for many years as a famous mercenary in Zaladin, you have left your country to avoid the skeletons of your past. With your polearm by your side, you can face down any foe."
@@ -10,21 +24,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 	is_recognized = TRUE
 
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-	)
-
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/lancer
 
 	traits = list(
 		TRAIT_HEAVYARMOR,

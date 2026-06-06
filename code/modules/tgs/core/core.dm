@@ -133,8 +133,6 @@
 	return list()
 
 /world/TgsEndProcess()
-	SSplexora.restart_type = PLEXORA_SHUTDOWN_KILLDD
-	SSplexora._Shutdown()
 	var/datum/tgs_api/api = TGS_READ_GLOBAL(tgs)
 	if(api)
 		api.EndProcess()
@@ -179,3 +177,8 @@
 			parameters = list()
 
 		return api.TriggerEvent(event_name, parameters, wait_for_completion)
+
+/world/TgsTriggerDeployment()
+	var/datum/tgs_api/api = TGS_READ_GLOBAL(tgs)
+	if(api)
+		return api.TriggerDeployment()

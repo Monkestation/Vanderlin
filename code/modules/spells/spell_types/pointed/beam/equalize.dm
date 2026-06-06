@@ -7,7 +7,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	invocation_type = INVOCATION_NONE
 
 	charge_time = 4 SECONDS
@@ -52,13 +52,13 @@
 		qdel(active)
 		return
 	var/mob/living/carbon/human/C = owner
-	totalstatchange += (victim.STASPD - C.STASPD)
-	totalstatchange += ((victim.STASTR - C.STASTR)*2) // We're gonna weigh strength as double, being the strongest stat.
-	totalstatchange += (victim.STAEND - C.STAEND)
-	totalstatchange += (victim.STALUC - C.STALUC)
-	totalstatchange += (victim.STAINT - C.STAINT)
-	totalstatchange += (victim.STACON - C.STACON)
-	totalstatchange += (victim.STAPER - C.STAPER)
+	totalstatchange += (GET_MOB_ATTRIBUTE_VALUE(victim, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_SPEED))
+	totalstatchange += ((GET_MOB_ATTRIBUTE_VALUE(victim, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_STRENGTH))*2) // We're gonna weigh strength as double, being the strongest stat.
+	totalstatchange += (GET_MOB_ATTRIBUTE_VALUE(victim, STAT_ENDURANCE) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_ENDURANCE))
+	totalstatchange += (GET_MOB_ATTRIBUTE_VALUE(victim, STAT_FORTUNE) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_FORTUNE))
+	totalstatchange += (GET_MOB_ATTRIBUTE_VALUE(victim, STAT_INTELLIGENCE) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_INTELLIGENCE))
+	totalstatchange += (GET_MOB_ATTRIBUTE_VALUE(victim, STAT_CONSTITUTION) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_CONSTITUTION))
+	totalstatchange += (GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION) - GET_MOB_ATTRIBUTE_VALUE(C, STAT_PERCEPTION))
 	totalstatchange -= 3 // We need At least a 4 point disadvantage before we start siphoning
 	totalstatshift = CLAMP((totalstatchange), 0, 2) // We DO NOT WANT Matthian Clerics stealing 30 stats from Ascendants, Cap the statshift by 2
 	if(totalstatshift <1)
@@ -71,7 +71,7 @@
 		victim.add_filter(EQUALIZED_GLOW, 2, outline_filter(1, outline_colour))
 		to_chat(victim, span_danger("I feel my flame being siphoned!"))
 		to_chat(owner, "<font color='yellow'>The Equalizing link is made, I am siphoning flame!</font>")
-		var/list/statsmod = list(STATKEY_STR, STATKEY_PER, STATKEY_INT, STATKEY_END, STATKEY_CON, STATKEY_SPD, STATKEY_LCK)
+		var/list/statsmod = list(STAT_STRENGTH, STAT_PERCEPTION, STAT_INTELLIGENCE, STAT_ENDURANCE, STAT_CONSTITUTION, STAT_SPEED, STAT_FORTUNE)
 		for(var/stat_key in statsmod)
 			victim.set_stat_modifier(STATMOD_EQUALIZE, stat_key, -totalstatshift)
 			C.set_stat_modifier(STATMOD_EQUALIZE, stat_key, totalstatshift)

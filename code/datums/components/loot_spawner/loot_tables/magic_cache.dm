@@ -1,7 +1,7 @@
 /datum/loot_table/magic_cache
 	name = "magic cache"
 	loot_table = list(
-		/datum/skill/magic/arcane = list(
+		/datum/attribute/skill/magic/arcane = list(
 			/obj/item/chalk = 8,
 			/obj/item/reagent_containers/glass/bottle/manapot = 5,
 			4, // requires level 4 arcane for focus

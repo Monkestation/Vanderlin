@@ -10,8 +10,23 @@ SUBSYSTEM_DEF(skills)
 	///Dictionary of skill.type || skill ref
 	var/list/all_skills = list()
 	///Static assoc list of levels (ints) - strings
-	var/list/level_names = list(span_info("Weak"), span_info("Average"), span_biginfo("Skilled"), span_biginfo("Expert"), "<B>Master</B>", span_greentext("Legendary"))//This list is already in the right order, due to indexing
-
+	var/list/level_names = list(
+		span_info("Novice"), \
+		span_info("Apprentice"), \
+		span_biginfo("Journeyman"), \
+		span_biginfo("Expert"), \
+		"<B>Master</B>", \
+		span_greentext("Legendary"))//This list is already in the right order, due to indexing
+	/// All level plain names without span
+	var/static/alist/level_names_plain = alist(
+		SKILL_RANK_NONE = "None",
+		SKILL_RANK_NOVICE = "Novice",
+		SKILL_RANK_APPRENTICE = "Apprentice",
+		SKILL_RANK_JOURNEYMAN = "Journeyman",
+		SKILL_RANK_EXPERT = "Expert",
+		SKILL_RANK_MASTER = "Master",
+		SKILL_RANK_LEGENDARY = "Legendary",
+	)
 
 /datum/controller/subsystem/skills/Initialize(timeofday)
 	InitializeSkills()
@@ -19,8 +34,7 @@ SUBSYSTEM_DEF(skills)
 
 ///Ran on initialize, populates the skills dictionary
 /datum/controller/subsystem/skills/proc/InitializeSkills(timeofday)
-	for(var/type in subtypesof(/datum/skill))
-		var/datum/skill/ref = new type
-		if(is_abstract(type))
+	for(var/datum/attribute/skill/type as anything in subtypesof(/datum/attribute/skill))
+		if(IS_ABSTRACT(type))
 			continue
-		all_skills[type] = ref
+		all_skills[type] = new type()

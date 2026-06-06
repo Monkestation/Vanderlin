@@ -131,12 +131,12 @@
 #define INIT_ORDER_SPATIAL_GRID 43
 #define INIT_ORDER_ECONOMY 40
 #define INIT_ORDER_OUTPUTS 35
-#define INIT_ORDER_HOUSING 31
+#define INIT_ORDER_HOUSING 32
+#define INIT_ORDER_SKILLS 31
 #define INIT_ORDER_ATOMS 30
 #define INIT_ORDER_TREASURY 29
 #define INIT_ORDER_LANGUAGE	25
 #define INIT_ORDER_MACHINES	20
-#define INIT_ORDER_SKILLS 15
 #define INIT_ORDER_RANDOM_TILES	7
 #define INIT_ORDER_TIMER 1
 #define INIT_ORDER_DEFAULT 0
@@ -147,10 +147,12 @@
 #define INIT_ORDER_LIGHTING -20
 #define INIT_ORDER_OUTDOOR_EFFECTS -21
 #define INIT_ORDER_MINOR_MAPPING -40
+#define INIT_ORDER_OBJECTIVE_QUEST - 45
 #define INIT_ORDER_PATH -50
 #define INIT_ORDER_OW -55
 #define INIT_ORDER_PERSISTENCE -95
 #define INIT_ORDER_BAN_CACHE -98
+#define INIT_ORDER_STATPANEL -99
 #define INIT_ORDER_CHAT -100 // Should be last to ensure chat remains smooth during init.
 
 // Subsystem fire priority, from lowest to highest priority
@@ -166,6 +168,7 @@
 #define FIRE_PRIORITY_RESEARCH 10
 #define FIRE_PRIORITY_VIS 10
 #define FIRE_PRIORITY_AMBIENCE 10
+#define FIRE_PRIORITY_PARTICLE_SPEWERS 10
 #define FIRE_PRIORITY_GARBAGE 15
 #define FIRE_PRIORITY_INCONE 19
 #define FIRE_PRIORITY_MOUSECHARGE 20
@@ -190,6 +193,7 @@
 #define FIRE_PRIORITY_TGUI 110
 #define FIRE_PRIORITY_TICKER 120
 #define FIRE_PRIORITY_ATMOS_ADJACENCY 130
+#define FIRE_PRIORITY_STATPANEL 135
 #define FIRE_PRIORITY_CHAT 140
 #define FIRE_PRIORITY_RUNECHAT 150
 #define FIRE_PRIORITY_MOUSE_ENTERED 160
@@ -238,3 +242,5 @@
 	* * flags flags for this timer, see: code\__DEFINES\subsystems.dm
 */
 #define addtimer(args...) _addtimer(args, file = __FILE__, line = __LINE__)
+
+#define SSMOBS_DT (SSmobs.wait/10)

@@ -130,7 +130,7 @@
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/head/helmet/heavy/necked/noc,
 /obj/item/clothing/ring/silver/noc,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/herringbone,
 /area/outdoors/bog)
 "Q" = (

@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/phase_step
 	name = "Phase Step"
 	desc = "Allows brief passage through solid objects."
-	button_icon_state = "phase_step"
+	button_icon_state = "deathdoor"
 	cast_range = 0
 	point_cost = 6
 	attunements = list(/datum/attunement/aeromancy)
+	essences = list(/datum/thaumaturgical_essence/motion)
 	has_visual_effects = FALSE
 
 /datum/action/cooldown/spell/essence/phase_step/cast(atom/cast_on)

@@ -13,12 +13,12 @@
 			used = pick('sound/vo/mobs/rousman/ratidle1.ogg','sound/vo/mobs/rousman/ratidle2.ogg','sound/vo/mobs/rousman/ratidle3.ogg')
 		if("pain")
 			used = pick('sound/vo/mobs/rousman/ratpain1.ogg','sound/vo/mobs/rousman/ratpain2.ogg','sound/vo/mobs/rousman/ratpain3.ogg','sound/vo/mobs/rousman/ratpain4.ogg','sound/vo/mobs/rousman/ratpain5.ogg')
-		if("paincrit")
-			used = pick('sound/vo/mobs/rousman/ratpainscream1.ogg','sound/vo/mobs/rousman/ratpainscream2.ogg','sound/vo/mobs/rousman/ratpainscream3.ogg','sound/vo/mobs/rousman/ratpainscream4.ogg','sound/vo/mobs/rousman/ratpainscream5.ogg')
-		if("painscream")
+		if("paincrit", "painscream")
 			used = pick('sound/vo/mobs/rousman/ratpainscream1.ogg','sound/vo/mobs/rousman/ratpainscream2.ogg','sound/vo/mobs/rousman/ratpainscream3.ogg','sound/vo/mobs/rousman/ratpainscream4.ogg','sound/vo/mobs/rousman/ratpainscream5.ogg')
 		if("scream")
 			used = pick('sound/vo/mobs/rousman/ratscream1.ogg','sound/vo/mobs/rousman/ratscream2.ogg')
+		if("whimper")
+			used = 'sound/vo/mobs/rousman/ratpainscream6.ogg'
 		if("rage")
 			used = pick('sound/vo/mobs/rousman/ratrage1.ogg')
 		if("agony")
@@ -27,4 +27,6 @@
 			used = list('sound/vo/male/gen/drown (1).ogg','sound/vo/male/gen/drown (2).ogg','sound/vo/male/gen/drown (3).ogg')
 		if("snore")
 			used = list('sound/vo/male/gen/snore (1).ogg','sound/vo/male/gen/snore (2).ogg','sound/vo/male/gen/snore (3).ogg','sound/vo/male/gen/snore (4).ogg')
+		if("clap")
+			used = list('sound/vo/clap (1).ogg', 'sound/vo/clap (2).ogg', 'sound/vo/clap (3).ogg', 'sound/vo/clap (4).ogg')
 	return used

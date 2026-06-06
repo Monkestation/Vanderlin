@@ -25,6 +25,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/smoketime = 15 // 10 seconds
 	w_class = WEIGHT_CLASS_TINY
 	heat = 1000
+	item_weight = 2 GRAMS
 
 /obj/item/match/process()
 	smoketime--
@@ -68,20 +69,21 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/match/extinguish()
+	. = ..()
 	matchburnout()
 
 /obj/item/match/dropped(mob/user)
 	matchburnout()
 	. = ..()
 
-/obj/item/match/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/match/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
 	if(lit && !burnt)
 		A.spark_act()
 
-/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!isliving(M))
 		return
 //	if(lit && M.IgniteMob())
@@ -130,11 +132,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	slot_flags = ITEM_SLOT_MOUTH
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/mouth_items.dmi'
 	icon = 'icons/roguetown/items/lighting.dmi'
-	heat = 1000
+	heat = 570
 	spitoutmouth = FALSE
 
 	grid_width = 32
 	grid_height = 32
+	item_weight = 3 GRAMS
 
 	var/dragtime = 100
 	var/nextdragtime = 0
@@ -160,6 +163,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	create_reagents(chem_volume, INJECTABLE | NO_REACT)
 	if(list_reagents)
 		reagents.add_reagent_list(list_reagents)
+		for(var/datum/reagent/reagent_type as anything in list_reagents)
+			if(ispath(reagent_type, /datum/reagent/medicine))
+				flags_ai_inventory |= AI_ITEM_HEALING_DRINK
+
 	if(starts_lit)
 		light()
 	AddComponent(/datum/component/knockoff, 90, list(BODY_ZONE_PRECISE_MOUTH) ,list(ITEM_SLOT_MOUTH))//90% to knock off when wearing a mask
@@ -168,7 +175,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/attackby(obj/item/W, mob/user, params)
+/obj/item/clothing/face/cigarette/attackby(obj/item/W, mob/user, list/modifiers)
 	if(!lit && smoketime > 0)
 		var/lighting_text = W.ignition_effect(src, user)
 		if(lighting_text)
@@ -197,9 +204,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		e.start()
 		qdel(src)
 		return
-	if(reagents.get_reagent_amount(/datum/reagent/fuel)) // the fuel explodes, too, but much less violently
+	if(reagents.get_reagent_amount(/datum/reagent/blood/fuel)) // the fuel explodes, too, but much less violently
 		var/datum/effect_system/reagents_explosion/e = new()
-		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/fuel) / 5, 1), get_turf(src), 0, 0)
+		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/blood/fuel) / 5, 1), get_turf(src), 0, 0)
 		e.start()
 		qdel(src)
 		return
@@ -221,6 +228,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		playsound(src, 'sound/items/light_cig.ogg', 100, TRUE)
 
 /obj/item/clothing/face/cigarette/extinguish()
+	. = ..()
 	if(!lit)
 		return
 	attack_verb = null
@@ -279,7 +287,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			M.equip_to_slot_if_possible(butt, qdel_on_fail = FALSE, disable_warning = TRUE)
 	qdel(src)
 
-/obj/item/clothing/face/cigarette/attack_self(mob/user, params)
+/obj/item/clothing/face/cigarette/attack_self(mob/user, list/modifiers)
 	if(lit)
 		user.visible_message(span_notice("[user] calmly drops and treads on \the [src], putting it out instantly."))
 		new type_butt(user.loc)
@@ -287,7 +295,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		qdel(src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!istype(M))
 		return ..()
 	if(M.on_fire && !lit)
@@ -361,6 +369,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	pixel_x = base_pixel_x + rand(-5, 5)
 	pixel_y = base_pixel_y + rand(-5, 5)
 
+//Cigars
+
+/obj/item/clothing/face/cigarette/rollie/nicotine/zigar
+	name = "zigar"
+	desc = "A strong, manly verison of the common zig, this isnt your average smokers treat- No, this is for the humble, the wise, the ones 'in' on it. You know who you are."
+	icon_state = "zigaroff"
+	icon_on = "zigaron"
+	type_butt = /obj/item/cigbutt/zigar
+	chem_volume = 120
+	list_reagents = list(/datum/reagent/drug/nicotine = 120)
+
+/obj/item/cigbutt/zigar
+	name = "zigar butt"
+
 /////////////////
 //SMOKING PIPES//
 /////////////////
@@ -406,7 +428,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		smoketime = 0
 		extinguish()
 		return
-	smoketime--
+	if(!has_enchantment(/datum/enchantment/eternal_blunt))
+		smoketime--
 	if(smoketime >= 1)
 		if(reagents?.total_volume)
 			handle_reagents()
@@ -415,7 +438,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	packeditem = FALSE
 	extinguish()
 
-/obj/item/clothing/face/cigarette/pipe/attackby(obj/item/attacking_item, mob/user, params)
+/obj/item/clothing/face/cigarette/pipe/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(!istype(attacking_item, /obj/item/reagent_containers/food/snacks/produce) && !istype(attacking_item, /obj/item/reagent_containers/powder))
 		var/lighting_text = attacking_item.ignition_effect(src, user)
 		if(!lighting_text)
@@ -433,13 +456,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/list/reagent_list = list()
 	if(istype(attacking_item, /obj/item/reagent_containers/food/snacks/produce))
 		var/obj/item/reagent_containers/food/snacks/produce/to_smoke = attacking_item
-		if(!to_smoke.dry)
+		if(!to_smoke.dry && to_smoke.should_dry)
 			to_chat(user, span_warning("It has to be dried first!"))
 			return
-		reagent_list = to_smoke.pipe_reagents
+		if(to_smoke.pipe_reagents)
+			reagent_list = to_smoke.pipe_reagents
+		else
+			for(var/datum/reagent/reagent as anything in to_smoke.reagents?.reagent_list)
+				reagent_list |= reagent.type
+				reagent_list[reagent.type] = reagent.volume
 	else
 		var/obj/item/reagent_containers/powder/to_smoke = attacking_item
-		reagent_list = to_smoke.reagents?.reagent_list
+		for(var/datum/reagent/reagent as anything in to_smoke.reagents?.reagent_list)
+			reagent_list |= reagent.type
+			reagent_list[reagent.type] = reagent.volume
 	to_chat(user, span_notice("I stuff [attacking_item] into [src]."))
 	packeditem = TRUE
 	if(length(reagent_list))
@@ -453,7 +483,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	qdel(attacking_item)
 
-/obj/item/clothing/face/cigarette/pipe/attack_self(mob/user, params)
+/obj/item/clothing/face/cigarette/pipe/attack_self(mob/user, list/modifiers)
 	if(lit)
 		user.visible_message(span_notice("[user] puts out [src]."), span_notice("I put out [src]."))
 		extinguish()
@@ -536,9 +566,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/lighter/extinguish()
+	. = ..()
 	set_lit(FALSE)
 
-/obj/item/lighter/attack_self(mob/living/user, params)
+/obj/item/lighter/attack_self(mob/living/user, list/modifiers)
 	if(user.is_holding(src))
 		if(!lit)
 			set_lit(TRUE)
@@ -572,7 +603,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else
 		. = ..()
 
-/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(lit && M.IgniteMob())
 		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
 		log_game("[key_name(user)] set [key_name(M)] on fire with [src] at [AREACOORD(user)]")

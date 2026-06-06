@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/toxic_cleanse
 	name = "Toxic Cleanse"
 	desc = "Completely purges an area of all toxic substances and poisons."
-	button_icon_state = "toxic_cleanse"
+	button_icon_state = "detect_poison"
 	cast_range = 3
 	point_cost = 7
 	attunements = list(/datum/attunement/life, /datum/attunement/blood)
+	essences = list(/datum/thaumaturgical_essence/poison, /datum/thaumaturgical_essence/water)
 
 /datum/action/cooldown/spell/essence/toxic_cleanse/cast(atom/cast_on)
 	. = ..()
@@ -31,9 +32,9 @@
 
 /datum/status_effect/buff/toxin_immunity/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_TOXINLOVER, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_TOXINLOVER, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("Toxins cannot harm you!"))
 
 /datum/status_effect/buff/toxin_immunity/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_TOXINLOVER, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_TOXINLOVER, TRAIT_STATUS_EFFECT(id))

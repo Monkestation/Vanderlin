@@ -55,6 +55,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/toggles = TOGGLES_DEFAULT
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
 	var/toggles_maptext = NONE
+	var/toggles_gameplay = NONE
 	var/ghost_form = "ghost"
 	var/ghost_orbit = GHOST_ORBIT_CIRCLE
 	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION
@@ -107,7 +108,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/socks = "Nude"
 
 	/// Skin color.
-	var/skin_tone = "caucasian1"
+	var/skin_tone = SKIN_COLOR_CONTINENTAL
 
 	/// Eye color.
 	var/eye_color = "000"
@@ -233,8 +234,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/ui_scale
 	/// Assoc list of culinary preferences, where the key is the type of the culinary preference, and value is food/drink typepath
 	var/list/culinary_preferences = list()
-	///this is our chat scale
-	var/chat_scale = 1
 
 	/// Whether multi-character readying is enabled
 	var/multi_char_ready = FALSE
@@ -250,6 +249,24 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		"paper",
 		"parchment",
 	)
+
+	// I beg for datumised prefs
+	/// culture datum type
+	var/datum/culture/culture = /datum/culture/universal/ambiguous
+
+	/// Typepath strings the player has permanently purchased (persisted)
+	var/list/owned_loadout_items = list()
+	/// Up to 3 equipped slots (typepath strings); must be in owned_loadout_items
+	/// to survive validate_loadouts(). Persisted.
+	var/list/equipped_loadout = list()
+	/// Single-round rentals queued for this spawn only. NOT persisted.
+	var/list/single_round_loadout = list()
+
+	var/list/equipped_loadout_colors = list()
+	var/list/single_round_loadout_colors = list()
+
+	var/list/owned_tickets = list() // list of /datum/ticket subtypes
+	var/list/ticket_history = list() // list of assoc lists
 
 /datum/preferences/New(client/C)
 	parent = C
@@ -285,7 +302,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	//we couldn't load character data so just randomize the character appearance + name
 	randomise_appearance_prefs(include_donator = donator)		//let's create a random character then - rather than a fat, bald and naked man.
 	if(!selected_patron)
-		selected_patron = GLOB.patronlist[default_patron]
+		selected_patron = GLOB.patrons_by_type[default_patron]
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	if(isclient(C))
 		C.update_movement_keys()
@@ -294,12 +311,22 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		save_preferences()
 	save_character()		//let's save this new random character so it doesn't keep generating new ones.
 	menuoptions = list()
-	return
+
+// I don't think this ever runs currently, because the prefs window has can_close = FALSE by default
+// and we close it via a button which doesn't trigger this.
+/*
+/datum/preferences/Topic(href, href_list, hsrc) //yeah, gotta do this I guess..
+	. = ..()
+	if(href_list["close"])
+		var/client/C = usr.client
+		if(C)
+			C.clear_character_previews()
+*/
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
 
-/datum/preferences/proc/ShowChoices(mob/user, tabchoice)
+/datum/preferences/proc/show_choices(mob/user, tabchoice)
 	if(!user || !user.client)
 		return
 	if(slot_randomized)
@@ -311,7 +338,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 /datum/preferences/proc/build_and_show_menu(mob/user)
 	var/list/dat = list()
-	var/datum/faith/selected_faith = GLOB.faithlist[selected_patron.associated_faith]
+	var/datum/faith/selected_faith = GLOB.faith_list[selected_patron.associated_faith]
 	var/datum/job/high_job
 	for(var/job_type in job_preferences)
 		if(job_preferences[job_type] != JP_HIGH)
@@ -330,31 +357,30 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			height: 100vh;
+			height: 100%;
+			width: 100%;
 			margin: 0;
 			image-rendering: pixelated;
 		}
 		.ui-container {
 			position: relative;
 			width: 272px;
-			height: 293px;
+			height: 315px;
 			background-image: url('Charsheet_BG.1.png');
 			background-size: cover;
 			transform: scale(3);
-			zoom: [100 / user.client?.window_scaling]%;
 		}
 		.sprite { position: absolute; background-repeat: no-repeat; cursor: pointer; }
 
 		.header-bg   { top: 5px;   left: 6px;   width: 260px; height: 52px; background-image: url('0_header_bg.png'); }
-		.preview-bg  { top: 50px;  left: 8px;   width: 99px;  height: 83px; background-image: url('charpreview_bg.png'); }
 		.body-bg     { top: 58px;  left: 110px; width: 118px; height: 75px; background-image: url('0_body_bg.png'); }
 		.voice-bg    { top: 137px; left: 2px;   width: 107px; height: 41px; background-image: url('0_voice_bg.png'); }
 		.family-bg   { top: 137px; left: 114px; width: 86px;  height: 74px; background-image: url('0_family_bg.png'); }
-		.flavour-bg  { top: 137px; left: 201px; width: 65px;  height: 73px; background-image: url('0_flavour_bg.png'); }
+		.flavour-bg  { top: 137px; left: 201px; width: 65px;  height: 95px; background-image: url('0_flavour_bg.png'); }
 		.loadout-bg  { top: 181px; left: 3px;   width: 64px;  height: 74px; background-image: url('0_loadout_bg.png'); }
 		.triumphs-bg { top: 182px; left: 74px;  width: 37px;  height: 34px; background-image: url('0_triumphs_bg.png'); }
 		.headshot-bg { top: 213px; left: 119px; width: 76px;  height: 76px; background-image: url('headshot_bg.png'); }
-		.ooc-bg      { top: 214px; left: 201px; width: 54px;  height: 48px; background-image: url('0_ooc_bg.png'); }
+		.ooc-bg      { top: 236px; left: 201px; width: 54px;  height: 48px; background-image: url('0_ooc_bg.png'); }
 
 		.features-bg { top: 60px; left: 231px; width: 36px; height: 48px; background-image: url('0_features_bg.png'); }
 		#silhouette  { top: 3px;  left: 10px;  width: 15px; height: 28px; background-image: url('features_bodytype_f.png'); }
@@ -363,20 +389,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		.f-random    { top: 110px; left: 232px; width: 34px; height: 25px; background-image: url('features_random.png'); }
 		.f-random:hover { background-image: url('features_random_hover.png'); }
 
-		.flav-desc { top: 154px; left: 207px; width: 49px; height: 10px; background-image: url('flavour_descriptors.png'); }
+		.flav-desc { top: 174px; left: 207px; width: 49px; height: 10px; background-image: url('flavour_descriptors.png'); }
 		.flav-desc:hover { background-image: url('flavour_descriptors_hover.png'); }
-		.flav-text { top: 171px; left: 207px; width: 53px; height: 10px; background-image: url('flavour_text.png'); }
+		.flav-text { top: 192px; left: 207px; width: 53px; height: 10px; background-image: url('flavour_text.png'); }
 		.flav-text:hover { background-image: url('flavour_text_hover.png'); }
-		.flav-food { top: 188px; left: 207px; width: 45px; height: 10px; background-image: url('flavour_foodprefs.png'); }
+		.flav-food { top: 210px; left: 207px; width: 45px; height: 10px; background-image: url('flavour_foodprefs.png'); }
 		.flav-food:hover { background-image: url('flavour_foodprefs_hover.png'); }
-		.flav-prev { top: 204px; left: 215px; width: 34px; height: 10px; background-image: url('flavour_preview.png'); }
+		.flav-prev { top: 226px; left: 215px; width: 34px; height: 10px; background-image: url('flavour_preview.png'); }
 		.flav-prev:hover { background-image: url('flavour_preview_hover.png'); }
 
-		.ooc-notes { top: 230px; left: 207px; width: 41px; height: 10px; background-image: url('ooc_notes.png'); }
+		.ooc-notes { top: 252px; left: 207px; width: 41px; height: 10px; background-image: url('ooc_notes.png'); }
 		.ooc-notes:hover { background-image: url('ooc_notes_hover.png'); }
-		.ooc-extra { top: 248px; left: 207px; width: 40px; height: 10px; background-image: url('ooc_extra.png'); }
+		.ooc-extra { top: 270px; left: 207px; width: 40px; height: 10px; background-image: url('ooc_extra.png'); }
 		.ooc-extra:hover { background-image: url('ooc_extra_hover.png'); }
-		.btn-roles { top: 262px; left: 200px; width: 55px; height: 30px; background-image: url('ooc_specialroles.png'); }
+		.btn-roles { top: 284px; left: 200px; width: 55px; height: 30px; background-image: url('ooc_specialroles.png'); }
 		.btn-roles:hover { background-image: url('ooc_specialroles_hover.png'); }
 
 		.tri-shop { top: 202px; left: 75px; width: 34px; height: 26px; background-image: url('triumphs_shop.png'); }
@@ -431,8 +457,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 		.v-color-box { top: 136px; left: 34px; width: 48px; height: 15px; background-image: url('voice_colour.png'); }
 		.v-blob      { top: 4px;   left: 35px; width: 8px;  height: 7px;
-		               background-image: url('voice_colour_blob.png');
-		               background-blend-mode: multiply; }
+					   background-image: url('voice_colour_blob.png');
+					   background-blend-mode: multiply; }
 
 		.menu-keybinds {
 			top: 280px;
@@ -540,6 +566,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if('loadout2' in data) updateField('char-loadout2', data.loadout2 || 'None');
 			if('loadout3' in data) updateField('char-loadout3', data.loadout3 || 'None');
 			if('triumphs' in data) updateField('char-triumphs', data.triumphs || '0');
+			if('culture' in data) updateField('char-culture', data.culture || 'None');
 
 			if('headshot' in data) updateHeadshot(data.headshot);
 			if('bespecial' in data) updateBeSpecial(data.bespecial === '1');
@@ -550,7 +577,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				var silhouette = document.getElementById('silhouette');
 				silhouette.style.backgroundImage = "url('features_bodytype_" + data.gender + ".png')";
 				if (data.gender === "F") silhouette.style.width = "15px";
-    			if (data.gender === "M") silhouette.style.width = "18px";
+				if (data.gender === "M") silhouette.style.width = "18px";
 			}
 
 			// Update voice color blob
@@ -659,6 +686,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		<div id="char-spouse" class="clickable-text auto-shrink" style="width:73px; height:9px;">[setspouse ? setspouse : "None"]</div>
 	</div></a>
 
+	<a href='?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
+		<div id="char-culture" class="clickable-text auto-shrink" style="width:51px; height:9px;">[culture ? culture::name : "None"]</div>
+	</div></a>
+
 	<a href='?_src_=prefs;preference=voicetype;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">
 		<div id="char-voicetype" class="clickable-text auto-shrink" style="width:46px; height:9px;">[voice_type]</div>
 	</div></a>
@@ -715,15 +746,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	winshow(user, "stonekeep_prefwin", TRUE)
 	winshow(user, "stonekeep_prefwin.character_preview_map", TRUE)
-	user << browse(dat.Join(), "window=preferences_browser;size=[816*1]x[879*1]")
+	// This should really be a browser datum
+	user << browse(dat.Join(), "window=preferences_browser;size=816x950")
 	update_preview_icon()
-	onclose(user, "stonekeep_prefwin", src)
+	// onclose(user, "stonekeep_prefwin", src)
 
 /datum/preferences/proc/update_menu_data(mob/user, list/fields_to_update)
 	if(!winexists(user, "preferences_browser"))
 		return
 
-	var/datum/faith/selected_faith = GLOB.faithlist[selected_patron.associated_faith]
+	var/datum/faith/selected_faith = GLOB.faith_list[selected_patron.associated_faith]
 	var/datum/job/high_job
 	for(var/job_type in job_preferences)
 		if(job_preferences[job_type] != JP_HIGH)
@@ -767,11 +799,17 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(update_all || ("accent" in fields_to_update))
 		params["accent"] = selected_accent
 	if(update_all || ("loadout1" in fields_to_update))
-		params["loadout1"] = loadout1 ? loadout1.name : "None"
+		var/loadout1_str = _get_loadout_slot(1)
+		var/datum/loadout_item/loadout1_item = loadout1_str ? GLOB.loadout_items[text2path(loadout1_str)] : null
+		params["loadout1"] = loadout1_item ? loadout1_item.name : "None"
 	if(update_all || ("loadout2" in fields_to_update))
-		params["loadout2"] = loadout2 ? loadout2.name : "None"
+		var/loadout2_str = _get_loadout_slot(2)
+		var/datum/loadout_item/loadout2_item = loadout2_str ? GLOB.loadout_items[text2path(loadout2_str)] : null
+		params["loadout2"] = loadout2_item ? loadout2_item.name : "None"
 	if(update_all || ("loadout3" in fields_to_update))
-		params["loadout3"] = loadout3 ? loadout3.name : "None"
+		var/loadout3_str = _get_loadout_slot(3)
+		var/datum/loadout_item/loadout3_item = loadout3_str ? GLOB.loadout_items[text2path(loadout3_str)] : null
+		params["loadout3"] = loadout3_item ? loadout3_item.name : "None"
 	if(update_all || ("triumphs" in fields_to_update))
 		params["triumphs"] = user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "0"
 	if(update_all || ("headshot" in fields_to_update))
@@ -780,11 +818,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		params["voice_color"] = voice_color
 	if(update_all || ("bespecial" in fields_to_update))
 		params["bespecial"] = next_special_trait ? "1" : "0"
+	if(update_all || ("culture" in fields_to_update))
+		params["culture"] = culture::name
 
 	// Use list2params as BYOND expects for browser output
 	user << output(list2params(params), "preferences_browser:updateCharacterData")
 	update_preview_icon()
 
+/datum/preferences/proc/_get_loadout_slot(slot)
+    if(length(equipped_loadout) >= slot)
+        return equipped_loadout[slot]
+    var/rent_idx = slot - length(equipped_loadout)
+    if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
+        return single_round_loadout[rent_idx]
+    return null
 
 /datum/preferences/proc/set_ui_theme(new_theme)
 	if(new_theme in list("dusty", "grimshart", "paper", "parchment"))
@@ -795,7 +842,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 400, height = 620)
+/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list(JOB_GUARD_CAPTAIN, JOB_PRIEST, JOB_MERCHANT, JOB_BUTLER, "Village Elder"), widthPerColumn = 400, height = 620)
 	if(!SSjob)
 		return
 
@@ -810,7 +857,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		HTML += "<script type='text/javascript'>function setJobPrefRedirect(level, rank) { window.location.href='?_src_=prefs;preference=job;task=setJobLevel;level=' + level + ';text=' + encodeURIComponent(rank); return false; }</script>"
 		HTML += {"
 			<script type='text/javascript'>
-				function updateJobPreference() {
+				function update_job_preference() {
 					var data = {};
 					for(var i = 0; i < arguments.length; i++) {
 						var arg = arguments\[i\];
@@ -932,6 +979,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			var/list/omegalist = list(
 				GLOB.noble_courthand_positions,
 				GLOB.garrison_positions,
+				GLOB.gallowband_positions,
 				GLOB.church_positions,
 				GLOB.peasant_positions,
 				GLOB.apprentices_positions,
@@ -971,6 +1019,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						cat_name = "Nobles"
 					if(GARRISON)
 						cat_name = "Garrison"
+					if(GALLOWBAND)
+						cat_name = "Gallowband"
 					if(SERFS)
 						cat_name = "Yeomanry"
 					if(CHURCHMEN)
@@ -1008,10 +1058,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/available_in_days = job.available_in_days(user.client)
 						category_html += "[used_name]</td><td><font color=red> \[IN [(available_in_days)] DAYS\]</font></td></tr>"
 						continue
-					if(CONFIG_GET(flag/usewhitelist))
-						if(job.whitelist_req && (!user.client.whitelisted()))
-							category_html += "<font color=#6183a5>[used_name]</font></td><td> </td></tr>"
-							continue
 					var/lock_html = get_job_lock_html(job, user, used_name)
 					if(lock_html)
 						category_html += lock_html
@@ -1078,9 +1124,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup = new(user, "mob_occupation", "<div align='center'>Class Selection</div>", 1000, 700)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(HTML)
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
-/datum/preferences/proc/SetJobPreferenceLevel(datum/job/job, level)
+/datum/preferences/proc/set_job_preference_level(datum/job/job, level)
 	if(!job)
 		return FALSE
 	if(level == JP_HIGH)
@@ -1091,59 +1137,57 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	return TRUE
 
 
-/datum/preferences/proc/UpdateJobPreference(mob/user, role, desiredLvl)
-    if(!SSjob || !length(SSjob.joinable_occupations))
-        return
-    var/datum/job/job = SSjob.GetJob(role)
-    if(!job || !(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
-        user << browse(null, "window=mob_occupation")
-        update_menu_data(user, list("job"))
-        return
-    if(!isnum(desiredLvl))
-        to_chat(user, "<span class='danger'>UpdateJobPreference - desired level was not a number. Please notify coders!</span>")
-        CRASH("UpdateJobPreference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
+/datum/preferences/proc/update_job_preference(mob/user, role, desiredLvl)
+	if(!SSjob || !length(SSjob.joinable_occupations))
+		return
+	var/datum/job/job = SSjob.GetJob(role)
+	if(!job || !(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
+		user << browse(null, "window=mob_occupation")
+		update_menu_data(user, list("job"))
+		return
+	if(!isnum(desiredLvl))
+		to_chat(user, "<span class='danger'>update_job_preference - desired level was not a number. Please notify coders!</span>")
+		CRASH("update_job_preference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
 
-    var/jpval = null
-    // desiredLvl comes from the links: 1=High, 2=Medium, 3=Low, 4=NEVER
-    // JP constants: JP_LOW=1, JP_MEDIUM=2, JP_HIGH=3
-    switch(desiredLvl)
-        if(1)
-            jpval = JP_HIGH  // 3
-        if(2)
-            jpval = JP_MEDIUM  // 2
-        if(3)
-            jpval = JP_LOW  // 1
-        if(4)
-            jpval = null  // NEVER
+	var/jpval = null
+	// desiredLvl comes from the links: 1=High, 2=Medium, 3=Low, 4=NEVER
+	// JP constants: JP_LOW=1, JP_MEDIUM=2, JP_HIGH=3
+	switch(desiredLvl)
+		if(1)
+			jpval = JP_HIGH  // 3
+		if(2)
+			jpval = JP_MEDIUM  // 2
+		if(3)
+			jpval = JP_LOW  // 1
+		if(4)
+			jpval = null  // NEVER
 
-    var/was_high = (jpval == JP_HIGH)
-    var/previous_high_job = null
+	var/was_high = (jpval == JP_HIGH)
+	var/previous_high_job = null
 
-    if(was_high)
-        for(var/job_title in job_preferences)
-            if(job_preferences[job_title] == JP_HIGH)
-                previous_high_job = job_title
-                break
+	if(was_high)
+		for(var/job_title in job_preferences)
+			if(job_preferences[job_title] == JP_HIGH)
+				previous_high_job = job_title
+				break
 
-    SetJobPreferenceLevel(job, jpval)
+	set_job_preference_level(job, jpval)
 
-    // Send back the desiredLvl value directly since that's what JavaScript expects
-    update_job_display(user, role, desiredLvl)
+	// Send back the desiredLvl value directly since that's what JavaScript expects
+	update_job_display(user, role, desiredLvl)
 
-    if(was_high && previous_high_job && previous_high_job != role)
-        update_job_display(user, previous_high_job, 2)  // Medium
+	if(was_high && previous_high_job && previous_high_job != role)
+		update_job_display(user, previous_high_job, 2)  // Medium
 
-    update_menu_data(user, list("job"))
-    return 1
+	update_menu_data(user, list("job"))
+	return 1
 
-
-
-/datum/preferences/proc/ResetJobs(mob/user, silent = FALSE)
+/datum/preferences/proc/reset_jobs(mob/user, silent = FALSE)
 	job_preferences = list()
 	if(!silent)
 		to_chat(user, "<font color='red'>Classes reset.</font>")
 	if(winget(user, "mob_occupation", "is-visible"))
-		SetChoices(user)
+		set_choices(user)
 
 
 /datum/preferences/proc/update_job_display(mob/user, job_title, pref_level)
@@ -1154,9 +1198,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	params["jobTitle"] = job_title
 	params["prefLevel"] = pref_level
 
-	user << output(list2params(params), "mob_occupation.browser:updateJobPreference")
+	user << output(list2params(params), "mob_occupation.browser:update_job_preference")
 
-/datum/preferences/proc/CaptureKeybinding(mob/user, datum/keybinding/kb, old_key)
+/datum/preferences/proc/capture_keybinding(mob/user, datum/keybinding/kb, old_key)
 	var/HTML = {"
 	<div id='focus' style="outline: 0;" tabindex=0>Keybinding: [kb.full_name]<br>[kb.description]<br><br><b>Press any key to change<br>Press ESC to clear</b></div>
 	<script>
@@ -1178,19 +1222,27 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	winshow(user, "capturekeypress", TRUE)
 	var/datum/browser/noclose/popup = new(user, "capturekeypress", "<div align='center'>Keybindings</div>", 350, 300)
 	popup.set_content(HTML)
-	popup.open(FALSE)
-	onclose(user, "capturekeypress", src)
+	popup.open(use_onclose = FALSE)
+	// onclose(user, "capturekeypress", src) // this would act as if the main prefs window was closed, so it didn't actually do anything. plus use_onclose was false
 
-/datum/preferences/proc/ResetPatron(mob/user, silent = FALSE)
+/datum/preferences/proc/reset_patron(mob/user, silent = FALSE)
 	selected_patron = default_patron
 	if(!silent)
 		to_chat(user, "<font color='red'>Patron reset.</font>")
 
-/datum/preferences/proc/ResetLastClass(mob/user)
+/datum/preferences/proc/reset_culture(mob/user, silent = FALSE)
+	var/datum/culture/selected = GLOB.culture_singletons[culture]
+	if(selected.is_selectable(src))
+		return
+	culture = src::culture
+	if(!silent)
+		to_chat(user, "<font color='red'>Culture reset.</font>")
+
+/datum/preferences/proc/reset_last_class(mob/user)
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
-	if(browser_alert(user, "Use 2 TRIUMPHS to play as this class again?", "OUROBOROS", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
+	if(tgui_alert(user, "Use 2 TRIUMPHS to play as this class again?", "OUROBOROS", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
 		return
 	if(user.client?.prefs)
 		if(user.client.prefs.lastclass)
@@ -1201,7 +1253,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			user.client.prefs.lastclass = null
 			user.client.prefs.save_preferences()
 
-/datum/preferences/proc/SetKeybinds(mob/user)
+/datum/preferences/proc/set_keybinds(mob/user)
 	var/list/dat = list()
 	// Create an inverted list of keybindings -> key
 	var/list/user_binds = list()
@@ -1244,54 +1296,54 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup = new(user, "keybind_setup", "<div align='center'>Keybinds</div>", 600, 600) //no reason not to reuse the occupation window, as it's cleaner that way
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
-/datum/preferences/proc/SetAntag(mob/user)
+/datum/preferences/proc/set_antag(mob/user)
 	var/list/dat = list()
-
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
 	dat += "<center><a href='?_src_=prefs;preference=antag;task=close' style='display:block;margin-bottom:2px'>Done</a></center>"
 	dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Villains</h2>"
-
 	if(is_total_antag_banned(user.ckey))
 		dat += "<font color=red><b>I am banned from antagonist roles.</b></font><br>"
 		src.be_special = list()
-
 	for (var/i in GLOB.special_roles_rogue)
 		if(is_antag_banned(user.ckey, i))
 			dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
 		else
 			var/days_remaining = null
-			if(ispath(GLOB.special_roles_rogue[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs)) //If it's a game mode antag, check if the player meets the minimum age
+			if(ispath(GLOB.special_roles_rogue[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs))
 				days_remaining = get_remaining_days(user.client)
-
 			if(days_remaining)
-				dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS\]</font><br>"
+				dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS__~~\]~~__</font><br>"
 			else
 				dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
 
-	dat += "</body>"
+	var/list/vessel_ids = GLOB.vessel_ids
+	var/list/available_vessel_ids = list()
+	for(var/id in vessel_ids)
+		if(user.client.is_whitelisted(id))
+			available_vessel_ids += id
 
-	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340) //no reason not to reuse the occupation window, as it's cleaner that way
+	if(length(available_vessel_ids))
+		dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Vessels</h2>"
+		for(var/id in available_vessel_ids)
+			var/enabled = (id in be_special)
+			dat += "<b>[id]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[id]'>[enabled ? "Enabled" : "Disabled"]</a><br>"
+
+	dat += "</body>"
+	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
-/datum/preferences/proc/LorePopup(mob/user)
+/datum/preferences/proc/lore_popup(mob/user)
 	if(!user || !user.client)
 		return
 	var/list/dat = list()
 	var/datum/browser/noclose/popup  = new(user, "lore_primer", "<div align='center'>Lore Primer</div>", 650, 900)
 	dat += GLOB.roleplay_readme
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
-
-/datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
-	. = ..()
-	if(href_list["close"])
-		var/client/C = usr.client
-		if(C)
-			C.clear_character_previews()
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -1315,19 +1367,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		switch(href_list["task"])
 			if("close")
 				user << browse(null, "window=mob_occupation")
-				ShowChoices(user,4)
+				show_choices(user,4)
 			if("reset")
-				ResetJobs(user, TRUE)
+				reset_jobs(user, TRUE)
 
 			if("triumphthing")
-				ResetLastClass(user)
+				reset_last_class(user)
 			if("nojob")
 				switch(joblessrole)
 					if(RETURNTOLOBBY)
 						joblessrole = BERANDOMJOB
 					if(BERANDOMJOB)
 						joblessrole = RETURNTOLOBBY
-				SetChoices(user)
+				set_choices(user)
 			if("tutorial")
 				if(href_list["tut"])
 					to_chat(user, "<span class='info'>* ----------------------- *</span>")
@@ -1335,13 +1387,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					to_chat(user, "<span class='info'>* ----------------------- *</span>")
 			if("random")
 				joblessrole = BERANDOMJOB
-				SetChoices(user)
+				set_choices(user)
 			if("setJobLevel")
 				if(SSticker.job_change_locked)
 					return 1
-				UpdateJobPreference(user, href_list["text"], text2num(href_list["level"]))
+				update_job_preference(user, href_list["text"], text2num(href_list["level"]))
 			else
-				SetChoices(user)
+				set_choices(user)
 		return 1
 	else if(href_list["preference"] == "multi")
 		if(isnewplayer(user))
@@ -1361,11 +1413,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					be_special -= be_special_type
 				else
 					be_special += be_special_type
-				SetAntag(user)
+				set_antag(user)
 			if("update")
-				SetAntag(user)
+				set_antag(user)
 			else
-				SetAntag(user)
+				set_antag(user)
 
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
@@ -1396,18 +1448,18 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				user << browse(null, "window=keybind_setup")
 				update_menu_data(user)
 			if("update")
-				SetKeybinds(user)
+				set_keybinds(user)
 			if("keybindings_capture")
 				var/datum/keybinding/kb = GLOB.keybindings_by_name[href_list["keybinding"]]
 				var/old_key = href_list["old_key"]
-				CaptureKeybinding(user, kb, old_key)
+				capture_keybinding(user, kb, old_key)
 				return
 
 			if("keybindings_set")
 				var/kb_name = href_list["keybinding"]
 				if(!kb_name)
 					user << browse(null, "window=capturekeypress")
-					SetKeybinds(user)
+					set_keybinds(user)
 					return
 
 				var/clear_key = text2num(href_list["clear_key"])
@@ -1419,10 +1471,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 							key_bindings -= old_key
 					user << browse(null, "window=capturekeypress")
 					save_preferences()
-					SetKeybinds(user)
+					set_keybinds(user)
 					return
 
-				var/new_key = uppertext(href_list["key"])
+				var/new_key = normalize_keys(uppertext(href_list["key"]))
 				var/AltMod = text2num(href_list["alt"]) ? "Alt" : ""
 				var/CtrlMod = text2num(href_list["ctrl"]) ? "Ctrl" : ""
 				var/ShiftMod = text2num(href_list["shift"]) ? "Shift" : ""
@@ -1454,24 +1506,25 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				DIRECT_OUTPUT(user, browse(null, "window=capturekeypress"))
 				user.client.update_movement_keys()
 				save_preferences()
-				SetKeybinds(user)
+				set_keybinds(user)
 
 			if("keybindings_reset")
-				var/choice = browser_alert(user, "Do you really want to reset your keybindings?", "Setup keybindings", DEFAULT_INPUT_CONFIRMATIONS)
+				var/choice = tgui_alert(user, "Do you really want to reset your keybindings?", "Setup keybindings", DEFAULT_INPUT_CONFIRMATIONS)
 				if(choice != CHOICE_CONFIRM)
 					return
 				hotkeys = TRUE
 				key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key)
 				user.client.update_movement_keys()
-				SetKeybinds(user)
+				set_keybinds(user)
 			else
-				SetKeybinds(user)
+				set_keybinds(user)
 		return TRUE
 
 	else if(href_list["preference"] == "toggles")
 		var/list/toggles_list = list(
 			"Default Toggles" = list("toggles_default", toggles),
-			"Maptext Toggles" = list("toggles_maptext", toggles_maptext)
+			"Maptext Toggles" = list("toggles_maptext", toggles_maptext),
+			"Gameplay Toggles" = list("toggles_gameplay", toggles_gameplay),
 		)
 		var/toggle_type = browser_input_list(user, title = "Toggle Select", items = toggles_list)
 		if(!toggle_type)
@@ -1481,26 +1534,29 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		var/prefs_variable = toggles_data[2]
 		var/new_toggles = input_bitfield(user, toggle_type, bitfield, prefs_variable, nheight = 500)
 		if(!isnull(new_toggles))
-			if(toggle_type == "Default Toggles")
-				// Reset all fields we touch to 0 first because we don't use a full set to do toggles = X
-				// And don't want to override them
-				for(var/field in GLOB.bitfields[bitfield])
-					toggles &= ~GLOB.bitfields[bitfield][field]
-				toggles ^= new_toggles
-				if((prefs_variable & SOUND_LOBBY) && user.client && isnewplayer(user))
-					user.client.playtitlemusic()
-				else
-					user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+			switch(toggle_type)
+				if("Default Toggles")
+					// Reset all fields we touch to 0 first because we don't use a full set to do toggles = X
+					// And don't want to override them
+					for(var/field in GLOB.bitfields[bitfield])
+						toggles &= ~GLOB.bitfields[bitfield][field]
+					toggles ^= new_toggles
+					if((prefs_variable & SOUND_LOBBY) && user.client && isnewplayer(user))
+						user.client.playtitlemusic()
+					else
+						user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 
-				if((prefs_variable & SOUND_SHIP_AMBIENCE) && user.client && !isnewplayer(user))
-					user.refresh_looping_ambience()
-				else
-					user.cancel_looping_ambience()
+					if((prefs_variable & SOUND_SHIP_AMBIENCE) && user.client && !isnewplayer(user))
+						user.refresh_looping_ambience()
+					else
+						user.cancel_looping_ambience()
 
-				user.client?.update_ambience_pref()
+					user.client?.update_ambience_pref()
+				if("Maptext Toggles")
+					toggles_maptext = new_toggles
 
-			else if(toggle_type == "Maptext Toggles")
-				toggles_maptext = new_toggles
+				if("Gameplay Toggles")
+					toggles_gameplay = new_toggles
 
 	switch(href_list["task"])
 		if("change_customizer")
@@ -1558,7 +1614,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					var/new_age = browser_input_list(user, "SELECT YOUR HERO'S AGE", "YILS DEAD", pref_species.possible_ages, age)
 					if(new_age)
 						age = new_age
-						ResetJobs(user)
+						reset_jobs(user)
 				if ("pronouns")
 					var/list/allowed_pronouns = pref_species.allowed_pronouns
 					if(!allowed_pronouns || !length(allowed_pronouns))
@@ -1597,9 +1653,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						to_chat(user, span_warning("Your character will now vocalize with a [lowertext(voice_type)] affect."))
 				if("faith")
 					var/list/faiths_named = list()
-					for(var/path as anything in GLOB.preference_faiths)
-						var/datum/faith/faith = GLOB.faithlist[path]
-						if(!faith.name)
+					for(var/datum/faith/faith as anything in GLOB.faith_list)
+						faith = GLOB.faith_list[faith]
+						if(!faith.preference_accessible(src))
 							continue
 						faiths_named["\The [faith.name]"] = faith
 					var/faith_input = browser_input_list(user, "SELECT YOUR HERO'S BELIEF", "PUPPETS ON STRINGS", faiths_named, "\The [selected_patron.associated_faith::name]")
@@ -1607,30 +1663,30 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
-						selected_patron = GLOB.preference_patrons[faith.godhead] || GLOB.preference_patrons[pick(GLOB.patrons_by_faith[faith_input])]
+						selected_patron = GLOB.patrons_by_type[faith.godhead] || GLOB.patrons_by_type[pick(GLOB.patrons_by_faith[faith.type])]
 
 				if("patron")
 					var/list/patrons_named = list()
-					for(var/path as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
-						var/datum/patron/patron = GLOB.preference_patrons[path]
-						if(!patron.name)
+					for(var/datum/patron/patron as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
+						patron = GLOB.patrons_by_type[patron]
+						if(!patron.preference_accessible(src))
 							continue
-						if(patron.allowed_races)
-							if(!(user.client.prefs.pref_species.id in patron.allowed_races))
-								continue
 						var/pref_name = patron.display_name ? patron.display_name : patron.name
 						patrons_named[pref_name] = patron
-					var/datum/faith/current_faith = GLOB.faithlist[selected_patron.associated_faith] || GLOB.faithlist[initial(default_patron.associated_faith)]
-					var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
-					if(god_input)
-						selected_patron = patrons_named[god_input]
-						to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
-						to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
-						to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
-						to_chat(user, "<font color='purple'>Flawed aspects: [selected_patron.flaws]</font>")
-						to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron.worshippers]</font>")
-						to_chat(user, "<font color='red'>Considers these to be Sins: [selected_patron.sins]</font>")
-						to_chat(user, "<font color='white'>Blessed with boon(s): [selected_patron.boons]</font>")
+
+					if(length(patrons_named))
+						var/datum/faith/current_faith = GLOB.faith_list[selected_patron.associated_faith] || GLOB.faith_list[initial(default_patron.associated_faith)]
+						var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
+						if(god_input)
+							selected_patron = patrons_named[god_input]
+
+					to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
+					to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
+					to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
+					to_chat(user, "<font color='purple'>Flawed aspects: [selected_patron.flaws]</font>")
+					to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron.worshippers]</font>")
+					to_chat(user, "<font color='red'>Considers these to be Sins: [selected_patron.sins]</font>")
+					to_chat(user, "<font color='white'>Blessed with boon(s): [selected_patron.boons]</font>")
 
 				if("voice")
 					var/new_voice = input(user, "SELECT YOUR HERO'S VOICE COLOR", "THE THROAT","#"+voice_color) as color|null
@@ -1638,7 +1694,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						if(color_hex2num(new_voice) < 230)
 							to_chat(user, "<font color='red'>This voice color is too dark for mortals.</font>")
 							return
-						voice_color = sanitize_hexcolor(new_voice)
+						voice_color = sanitize_hexcolor(new_voice, include_crunch = FALSE)
 
 				if("headshot")
 					if(!donator)
@@ -1674,31 +1730,29 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					dat += "Minimum OOC Notes: <b>[MINIMUM_OOC_NOTES]</b> characters."
 					var/datum/browser/popup = new(user, "Formatting Help", width = 400, height = 350)
 					popup.set_content(dat.Join())
-					popup.open(FALSE)
+					popup.open(use_onclose = FALSE)
 				if("loadout_item")
-					var/list/loadouts_available = list("None" = null)
-					for(var/datum/loadout_item/item as anything in GLOB.loadout_items)
-						loadouts_available[item.name] += item
-
-					var/loadout_input = browser_input_list(
-						user,
-						"Choose your character's loadout item. RMB a tree, statue or clock to collect.",
-						"Loadout",
-						loadouts_available,
-						)
-
-					var/loadout_number = href_list["loadout_number"]
-
-					set_loadout(user, loadout_number, loadouts_available[loadout_input])
+					open_loadout_shop(user)
 
 				if("species")
 					selected_accent = ACCENT_DEFAULT
-					var/list/selectable = get_selectable_species(donator)
+
+					var/list/selectable = list()
+					for(var/species_id in GLOB.roundstart_species)
+						var/species_type = GLOB.species_list[species_id]
+
+						var/datum/species/species = new species_type()
+						if(!species.preference_accessible(src))
+							continue
+
+						selectable[species.name] = species.type
+
 					var/result = browser_input_list(user, "SELECT YOUR HERO'S PEOPLE:", "VANDERLIN FAUNA", selectable, pref_species)
 
 					if(result)
-						var/species = GLOB.species_list[result]
-						pref_species = new species
+						var/species_type = selectable[result]
+
+						pref_species = new species_type()
 
 						to_chat(user, "<em>[pref_species.name]</em>")
 						if(pref_species.desc)
@@ -1713,8 +1767,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 						//Now that we changed our species, we must verify that the mutant colour is still allowed.
 						real_name = pref_species.random_name(gender,1)
-						ResetJobs(user)
-						ResetPatron(user)
+						reset_jobs(user)
+						reset_patron(user)
+						reset_culture(user)
 						randomise_appearance_prefs(~(RANDOMIZE_SPECIES))
 						customizer_entries = list()
 						validate_customizer_entries()
@@ -1771,7 +1826,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						dat += "[ooc_extra]"
 					var/datum/browser/popup = new(user, "[real_name]", "<center>[real_name]</center>", width = 480, height = 700)
 					popup.set_content(dat.Join())
-					popup.open(FALSE)
+					popup.open(use_onclose = FALSE)
 				if("ooc_extra")
 					if(!donator)
 						to_chat(user, "This is a donator exclusive feature, your OOC Extra link will be applied but others will only be able to view it if you are a patreon supporter or Twitch Subscriber.")
@@ -1830,7 +1885,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						to_chat(user, span_notice("Successfully updated OOC Extra with [info]"))
 						log_game("[user] has set their OOC Extra to '[ooc_extra_link]'.")
 				if("s_tone")
-					var/listy = pref_species.get_skin_list()
+					var/list/listy = pref_species.get_skin_list()
 					var/new_s_tone = browser_input_list(user, "CHOOSE YOUR HERO'S [uppertext(pref_species.skin_tone_wording)]", "THE SUN", listy)
 					if(new_s_tone)
 						skin_tone = listy[new_s_tone]
@@ -1856,24 +1911,17 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference", ooccolor) as color|null
 					if(new_ooccolor)
-						ooccolor = sanitize_ooccolor(new_ooccolor)
+						ooccolor = sanitize_color(new_ooccolor)
 
 				if("asaycolor")
 					var/new_asaycolor = input(user, "Choose your ASAY color:", "Game Preference", asaycolor) as color|null
 					if(new_asaycolor)
-						asaycolor = sanitize_ooccolor(new_asaycolor)
+						asaycolor = sanitize_color(new_asaycolor)
 				if ("clientfps")
 					var/desiredfps = input(user, "Choose your desired fps. (0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
 					if (!isnull(desiredfps))
 						clientfps = desiredfps
 						parent.fps = desiredfps
-
-				if ("chat_scale")
-					var/desiredfps = input(user, "Choose your desired chat scale. (1 = default, 2 = doubled", "Character Preference", chat_scale)  as null|num
-					if(desiredfps > 0)
-						if (!isnull(desiredfps))
-							chat_scale = desiredfps
-						user.client?.native_say.refresh_channels()
 
 				if("ui")
 					var/pickedui = input(user, "Choose your UI style.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_styles)
@@ -1881,6 +1929,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						UI_style = "Rogue"
 						if (parent && parent.mob && parent.mob.hud_used)
 							parent.mob.hud_used.update_ui_style(ui_style2icon(UI_style))
+
+				if("culture")
+					var/list/cultures = list()
+					for(var/culture_type in GLOB.culture_singletons)
+						var/datum/culture/culture = GLOB.culture_singletons[culture_type]
+						if(!culture.is_selectable(src))
+							continue
+						cultures[culture.name] += culture.type
+					var/choice = browser_input_list(user, "CHOOSE YOUR HERO'S CULTURE", "CULTURE", cultures)
+					if(!choice)
+						return
+					culture = cultures[choice]
+					to_chat(user, span_notice("[culture::name]"))
+					to_chat(user, span_notice("[culture::description]"))
 		else
 			switch(href_list["preference"])
 				if ("max_chat_length")
@@ -1894,7 +1956,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if(pickedGender && pickedGender != gender)
 						gender = pickedGender
 						real_name = real_name = pref_species.random_name(gender,1)
-						ResetJobs(user)
+						reset_jobs(user)
 						randomise_appearance_prefs(RANDOMIZE_UNDERWEAR | RANDOMIZE_HAIRSTYLE)
 						accessory = "Nothing"
 						detail = "Nothing"
@@ -1904,29 +1966,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					else
 						domhand = 1
 				if("bespecial")
-					if(next_special_trait)
-						print_special_text(user, next_special_trait)
-						return
-					to_chat(user, span_boldwarning("You will become special for one round, this could be something negative, positive or neutral and could have a high impact on your character and your experience. You cannot back out from or reroll this, and it will not carry over to other rounds."))
-					if(!donator)
-						to_chat(user, span_boldwarning("THIS COSTS 1 TRIUMPH"))
-						if(user.get_triumphs() < 1)
-							to_chat(user, span_bignotice("YOU DON'T HAVE ENOUGH TRIUMPHS."))
-							return
-					var/result = alert(user, "You'll receive a unique trait for one round\n You cannot back out from or reroll this.\nDo you really wish to [donator ? "" : "spend 1 triumph and " ]proceed?", "Be Special", "Yes", "No")
-					if(result != "Yes")
-						return
-					if(!donator)
-						user.adjust_triumphs(-1)
-					if(next_special_trait)
-						return
-					next_special_trait = roll_random_special(user.client)
-					if(next_special_trait)
-						log_game("SPECIALS: Rolled [next_special_trait] for ckey: [user.ckey]")
-						print_special_text(user, next_special_trait)
-						user.playsound_local(user, 'sound/misc/alert.ogg', 100)
-						to_chat(user, span_warning("This will be applied on your next game join."))
-						to_chat(user, span_warning("You may switch your character and choose any role, if you don't meet the requirements (if any are specified) it won't be applied"))
+					open_loadout_shop(user)
 
 				if("family")
 					var/list/famtree_options_list = list(FAMILY_NONE, FAMILY_PARTIAL, FAMILY_NEWLYWED, FAMILY_FULL, "EXPLAIN THIS TO ME")
@@ -1948,10 +1988,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						setspouse = newspouse
 					else
 						setspouse = null
-				//Gender_choice is part of the family subsytem. It will check existing families members with the same preference of this character and attempt to place you in this family.
+
 				if("select_quirks")
 					open_quirk_menu(user)
 
+				//Gender_choice is part of the family subsytem. It will check existing families members with the same preference of this character and attempt to place you in this family.
 				if("gender_choice")
 					// If pronouns are neutral, lock to ANY_GENDER
 					if(pronouns == THEY_THEM || pronouns == IT_ITS)
@@ -2079,7 +2120,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("widescreenpref")
 					widescreenpref = !widescreenpref
-					user.client.view_size.setDefault(getScreenSize(widescreenpref))
+					var/datum/view_data/view = user.client.view_size
+					view.setDefault(view.getScreenSize(widescreenpref))
 
 				if("pixel_size")
 					switch(pixel_size)
@@ -2115,7 +2157,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						to_chat(user, span_warning("You are no longer a voice."))
 
 				if("loreprimer")
-					LorePopup(user)
+					lore_popup(user)
 
 				if("finished")
 					user << browse(null, "window=latechoices") //closes late choices window
@@ -2125,14 +2167,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					user << browse(null, "window=latechoices") //closes late job selection
 					user << browse(null, "window=migration") // Closes migrant menu
 
-					SStriumphs.remove_triumph_buy_menu(user.client)
-
 					winshow(user, "stonekeep_prefwin", FALSE)
 					user << browse(null, "window=preferences_browser")
+					user.client?.clear_character_previews() // browse null doesn't call on-close directly as far as i can tell
 					user << browse(null, "window=lobby_window")
 					return
 
 				if("save")
+					to_chat(user, span_info("Preferences Saved."))
 					save_preferences()
 					save_character()
 					if(isnewplayer(user))
@@ -2163,16 +2205,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if(choice)
 						choice = choices[choice]
 						if(!load_character(choice))
-							randomise_appearance_prefs(include_donator = donator)
+							randomise_appearance_prefs()
 							save_character()
 
 				if("randomiseappearanceprefs")
-					randomise_appearance_prefs(include_donator = donator)
+					randomise_appearance_prefs()
 					customizer_entries = list()
 					validate_customizer_entries()
 					reset_all_customizer_accessory_colors()
 					randomize_all_customizer_accessories()
-					ResetJobs(user)
+					reset_jobs(user)
 
 				if("tab")
 					if (href_list["tab"])
@@ -2185,8 +2227,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 /// Sanitization checks to be performed before using these preferences.
 /datum/preferences/proc/sanitize_chosen_prefs()
-	if(!(pref_species.name in get_selectable_species(donator)))
+	if(!pref_species || !pref_species.preference_accessible(src))
 		pref_species = new /datum/species/human/northern
+		customizer_entries = list()
+		validate_customizer_entries()
 		save_character()
 
 	if(CONFIG_GET(flag/humans_need_surnames) && (pref_species.id == SPEC_ID_HUMEN))
@@ -2209,8 +2253,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/apply_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE)
 	if(QDELETED(character) || !ishuman(character))
 		return
+	character.clear_quirks() // clear preexisting quirks to undo things like transform changes
+	character.transform = matrix() // reset transforms anyway just in case, to avoid drift from setting and unsetting small/large build
 	character.age = age
 	character.gender = gender
+	character.set_patron(selected_patron)
 	character.set_species(pref_species.type, icon_update = FALSE, pref_load = src)
 	if(real_name in GLOB.chosen_names)
 		character.real_name = pref_species.random_name(gender)
@@ -2221,13 +2268,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	character.dna.features = features.Copy()
 	character.dna.real_name = character.real_name
 
-	var/obj/item/organ/eyes/organ_eyes = character.getorgan(/obj/item/organ/eyes)
-	if(organ_eyes)
-		organ_eyes.eye_color = eye_color
-		organ_eyes.old_eye_color = eye_color
-
 	character.skin_tone = skin_tone
+	character.culture = GLOB.culture_singletons[culture]
 	character.underwear = underwear
+	character.underwear_color = underwear_color
 	character.undershirt = undershirt
 	character.detail = detail
 	character.socks = socks
@@ -2246,7 +2290,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	character.domhand = domhand
 	character.voice_color = voice_color
-	character.set_patron(selected_patron)
 	character.familytree_pref = family
 	character.gender_choice_pref = gender_choice
 	character.setspouse = setspouse
@@ -2347,22 +2390,22 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			<html>
 			<head>
 			  <style>
-			    body {
-			      background-color: #ffffff;
-			      color: #000000;
-			    }
+				body {
+				  background-color: #ffffff;
+				  color: #000000;
+				}
 
-			    a {
-			      color: #1a0dab;
-			    }
+				a {
+				  color: #1a0dab;
+				}
 
-			    a:visited {
-			      color: #660099;
-			    }
+				a:visited {
+				  color: #660099;
+				}
 
-			    hr {
-			      border-top: 1px solid #ccc;
-			    }
+				hr {
+				  border-top: 1px solid #ccc;
+				}
 			  </style>
 			</head>
 			</html>
@@ -2374,19 +2417,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			<html>
 			<head>
 			  <style>
-			    body {
-			      background-color: #121212;
-			      color: #e0e0e0;
-			    }
-			    a {
-			      color: #90caf9;
-			    }
-			    a:visited {
-			      color: #ce93d8;
-			    }
-			    hr {
-			      border-top: 1px solid #444;
-			    }
+				body {
+				  background-color: #121212;
+				  color: #e0e0e0;
+				}
+				a {
+				  color: #90caf9;
+				}
+				a:visited {
+				  color: #ce93d8;
+				}
+				hr {
+				  border-top: 1px solid #444;
+				}
 			  </style>
 			</head>
 			</html>
@@ -2453,9 +2496,38 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			to_chat(user, "[loadout.description]")
 
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
-	var/player_species = user.client.prefs.pref_species.id
-	var/fails_allowed = length(job.allowed_races) && !(player_species in job.allowed_races)
+	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
+	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
 	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+
+	if(length(job.whitelisted_ckeys) && !(user.ckey in job.whitelisted_ckeys))
+		return make_lock_row(
+			used_name,
+			"\[EVENT WHITELISTED\]",
+			"<b>This role has been whitelisted by staff for event purposes.</b>"
+		)
+
+	if(job.job_flags & JOB_REQUIRE_WHITELIST && !user.client?.is_whitelisted(initial(job.title)))
+		return make_lock_row(
+			used_name,
+			"\[WHITELISTED\]",
+			"<b>This role has been whitelisted.</b>"
+		)
+
+	if(job.required_playtime_remaining(user.client))
+		var/list/lines = list()
+		for(var/t in job.exp_requirements)
+			var/needed = job.exp_requirements[t]
+			var/have = user.client.calc_exp_type(t)
+			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
+		var/text = jointext(lines, "<br>")
+
+		return make_lock_row(
+			used_name,
+			"\[TIME LOCK\]",
+			"<b>Requirements:</b><br>[text]"
+		)
+
 	if(fails_allowed || fails_blacklist)
 		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			var/list/allowed_races = job.allowed_races.Copy()
@@ -2467,6 +2539,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				"\[SPECIES LOCK\]",
 				"<b>Species Needed:</b><br>[races_text]"
 			)
+
 	if(length(job.allowed_ages) && !(user.client.prefs.age in job.allowed_ages))
 		var/ages_text = jointext(job.allowed_ages, ", ")
 		return make_lock_row(
@@ -2474,6 +2547,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[AGE LOCK\]",
 			"<b>Ages Needed:</b><br>[ages_text]"
 		)
+
 	if(length(job.allowed_sexes) && !(user.client.prefs.gender in job.allowed_sexes))
 		var/sexes_text = jointext(job.allowed_sexes, ", ")
 		return make_lock_row(
@@ -2481,6 +2555,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[SEX LOCK\]",
 			"<b>Sexes Needed:</b><br>[sexes_text]"
 		)
+
 	if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
 		var/list/patron_list = list()
 		for(var/mult_patron in job.allowed_patrons)
@@ -2494,18 +2569,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
 		)
-	if(job.required_playtime_remaining(user.client))
-		var/list/lines = list()
-		for(var/t in job.exp_requirements)
-			var/needed = job.exp_requirements[t]
-			var/have = user.client.calc_exp_type(t)
-			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
-		var/text = jointext(lines, "<br>")
+
+	if(length(job.banned_patrons) && (user.client.prefs.selected_patron.type in job.banned_patrons))
+		var/list/patron_list = list()
+		for(var/mult_patron in job.banned_patrons)
+			var/datum/patron/P = new mult_patron
+			patron_list += (P.display_name ? P.display_name : P.name)
+			qdel(P)
+		var/patron_text = jointext(patron_list, ", ")
 
 		return make_lock_row(
 			used_name,
-			"\[TIME LOCK\]",
-			"<b>Requirements:</b><br>[text]"
+			"\[PATRON BAN\]",
+			"<b>Patrons Banned:</b><br>[patron_text]"
 		)
 	// No lock
 	return FALSE

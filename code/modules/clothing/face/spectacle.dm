@@ -7,6 +7,7 @@
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	gender = PLURAL
 	clothing_traits = list(TRAIT_NEARSIGHTED_CORRECTED)
 //	block2add = FOV_BEHIND
 
@@ -32,6 +33,7 @@
 	name = "silver monocle"
 	icon_state = "monocle"
 	max_integrity = 35
+	gender = NEUTER
 
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)
@@ -51,6 +53,7 @@
 
 /obj/item/clothing/face/spectacles/inq
 	name = "inquisitorial spectacles"
+	examine_name = "crimson spectacles"
 	icon_state = "bglasses"
 	desc = "Spectacles evoking the stained glass of Grenzelhoftian cathedrals. See all evil."
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
@@ -59,7 +62,7 @@
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HEAD
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	var/lensmoved = TRUE // starts with the lenses out of the way, night vision being off.
 
 /obj/item/clothing/face/spectacles/inq/examine(mob/user) // informs inquisition members of the night vision functionality.
@@ -79,7 +82,7 @@
 			ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 			return
 
-/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, params)
+/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
@@ -118,7 +121,13 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	armor = ARMOR_PADDED
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
+
+/obj/item/clothing/face/sack/surgsack
+	name = "physicker's masked sack"
+	desc = "A brown sack, with a physickers mask on top of it, likely for more coverage."
+	icon_state = "surgsackmask"
 
 /obj/item/clothing/face/sack/psy
 	name = "psydonian sack mask"
@@ -140,7 +149,8 @@
 	body_parts_covered = FACE|HEAD
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	armor = ARMOR_PADDED
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 
 /obj/item/clothing/face/facemask/steel/confessor
 	name = "strange mask"
@@ -150,14 +160,13 @@
 	equip_sound = 'sound/items/confessormaskon.ogg'
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	var/worn = FALSE
 	slot_flags = ITEM_SLOT_MASK
+	var/worn = FALSE
 
 /obj/item/clothing/face/facemask/steel/confessor/examine(mob/user) // informs inquisition members that nocshades can be installed in the mask.
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_INQUISITION) && !istype(src, /obj/item/clothing/face/facemask/steel/confessor/lensed))
 		. += span_info("This mask may have nocshades installed into it.")
-
 
 /obj/item/clothing/face/facemask/steel/confessor/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -171,7 +180,7 @@
 		worn = FALSE
 
 
-/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/clothing/face/spectacles/inq))
 		user.visible_message(span_warning("[user] starts to insert [I]'s lenses into [src]."))
@@ -207,7 +216,7 @@
 			user.update_sight()
 			return
 
-/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))

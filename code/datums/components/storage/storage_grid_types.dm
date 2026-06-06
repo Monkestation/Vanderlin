@@ -9,6 +9,10 @@
 	screen_max_rows = 3
 	screen_max_columns = 2
 
+/datum/component/storage/concrete/grid/satchel/cloth/big
+	screen_max_rows = 3
+	screen_max_columns = 3
+
 /datum/component/storage/concrete/grid/backpack
 	screen_max_rows = 7
 	screen_max_columns = 4
@@ -41,7 +45,7 @@
 	screen_max_columns = 1
 
 /datum/component/storage/concrete/grid/keyring
-	screen_max_rows = 4
+	screen_max_rows = 2
 	screen_max_columns = 5
 	max_w_class = WEIGHT_CLASS_SMALL
 	allow_dump_out = TRUE
@@ -83,6 +87,11 @@
 	max_w_class = WEIGHT_CLASS_HUGE
 	screen_max_rows = 10
 	screen_max_columns = 10
+
+/datum/component/storage/concrete/grid/bandolier
+	max_w_class = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 2
 
 /datum/component/storage/concrete/grid/mailmaster/show_to(mob/M)
 	. = ..()
@@ -215,11 +224,12 @@
 
 /datum/component/storage/concrete/grid/crucible
 	screen_max_rows = 5
-	screen_max_columns = 3
+	screen_max_columns = 5
 	max_w_class = WEIGHT_CLASS_HUGE
 	not_while_equipped = TRUE
+	allow_big_nesting = TRUE
 
-/datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, params, storage_click)
+/datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
 	if(!storing.melting_material)
 		var/obj/item/ingot/ingot = storing.smeltresult
 		if(!ispath(ingot, /obj/item/ingot))
@@ -237,7 +247,7 @@
 		return FALSE
 	. = ..()
 
-/datum/component/storage/concrete/grid/anvil_bin/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, params, storage_click)
+/datum/component/storage/concrete/grid/anvil_bin/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
 	var/obj/structure/material_bin/source = src.parent
 	if(!source.opened)
 		return FALSE
@@ -251,7 +261,7 @@
 /datum/component/storage/concrete/grid/kobold_storage/New(datum/P, ...)
 	. = ..()
 	set_holdable(list(
-		/obj/item/clothing/head/mob_holder,
+		/obj/item/mob_holder,
 		))
 
 /datum/component/storage/concrete/grid/zigbox
@@ -305,6 +315,7 @@
 				/obj/item/reagent_containers/powder,
 				/obj/item/organ,
 				/obj/item/neuFarm/seed,
+				/obj/item/mob_holder,
 				)
 			),
 		)

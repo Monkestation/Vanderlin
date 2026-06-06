@@ -9,7 +9,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/hide/cured
-	skillcraft = /datum/skill/craft/tanning
+	skillcraft = /datum/attribute/skill/craft/tanning
 	craftdiff = 0
 	subtypes_allowed = TRUE // so you can use any subtype of fur
 	category = "Leatherworking"
@@ -36,7 +36,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/ammo_holder/dartpouch
-	
+
 /datum/repeatable_crafting_recipe/leather/storage/bulletpouch
 	name = "bullet pouch"
 	requirements = list(
@@ -182,7 +182,7 @@
 	name = "physicker gloves"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers/sinew = 1
 	)
 	output = /obj/item/clothing/gloves/leather/phys
 
@@ -206,7 +206,7 @@
 	name = "inquisitor gloves"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/gloves/leather/otavan/inqgloves
 
@@ -230,7 +230,7 @@
 	name = "leather tights"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/pants/trou/leathertights
 
@@ -262,6 +262,10 @@
 /datum/repeatable_crafting_recipe/leather/pants/mourning
 	name = "mourning pants"
 	output = /obj/item/clothing/pants/trou/leather/mourning
+
+/datum/repeatable_crafting_recipe/leather/pants/shepherd
+	name = "shepherd's pants"
+	output = /obj/item/clothing/pants/trou/leather/shepherd
 
 /datum/repeatable_crafting_recipe/leather/shoes
 	name = "leather shoes"
@@ -306,6 +310,14 @@
 	output = /obj/item/clothing/cloak/raincloak
 	craftdiff = 2
 
+/datum/repeatable_crafting_recipe/leather/cloak/bandolier
+	name = "bandolier"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/rope = 1,
+	)
+	output = /obj/item/clothing/cloak/bandolier
+
 /datum/repeatable_crafting_recipe/leather/cloakfur
 	name = "fur lined raincloak"
 	requirements = list(
@@ -333,6 +345,23 @@
 	output = /obj/item/clothing/cloak/graggar
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/heavy_graggar_cloak
+	name = "heavy vicious cloak"
+	requirements = list(
+		/obj/item/natural/hide/cured = 4,
+		/obj/item/natural/silk = 1,
+	)
+	output = /obj/item/clothing/cloak/graggar/heavy
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/savage_cloak
+	name = "savage cloak"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/cloak/savage
+	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/cloakfur_black
 	name = "fur lined black cloak"
@@ -461,24 +490,53 @@
 	output = /obj/item/clothing/armor/leather/hide
 	craftdiff = 2
 
-/datum/repeatable_crafting_recipe/leather/hidearmor/steppe
+/datum/repeatable_crafting_recipe/leather/steppe
 	name = "frontier fur lined leather armor"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fur = 2,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	output = /obj/item/clothing/armor/leather/hide/steppe
 	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/leather/jerkin
+	name = "leather jerkin"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1
+	)
+	output = /obj/item/clothing/armor/leather/jerkin
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/jerkin_belted
+	name = "belted leather jerkin"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/armor/leather/jerkin/belted
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/jerkin_long
+	name = "leather jerkin coat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/armor/leather/jerkin/belted/long
+	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/whip
 	name = "leather whip"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	output = /obj/item/weapon/whip
 	craftdiff = 1
 
-/datum/repeatable_crafting_recipe/leather/furlinedboots
+/datum/repeatable_crafting_recipe/leather/furboots
 	name = "fur lined boots"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
@@ -552,6 +610,15 @@
 	)
 	output = /obj/item/clothing/head/leather/inqhat
 	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/gravetenderhat
+	name = "gravetender's hat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/feather = 1,
+	)
+	output = /obj/item/clothing/head/leather/inqhat/gravehat
+	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/leather/nobleboots
 	name = "noble boots"
@@ -711,7 +778,23 @@
 	name = "hardened leather boots"
 	output = /obj/item/clothing/shoes/boots/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/furboots
+	name = "hardened fur lined boots"
+	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fur = 2,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/hunterboots
+	name = "hunter boots"
+	output = /obj/item/clothing/shoes/boots/hunter
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fur = 1,
+				/obj/item/natural/fibers/sinew = 2)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/boots/watch
@@ -739,6 +822,13 @@
 /datum/repeatable_crafting_recipe/leather/standalone/leather_bracers
 	name = "hardened leather bracers"
 	output = /obj/item/clothing/wrists/bracers/leather/advanced
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/bracer_scabbard
+	name = "knife-sheath bracers"
+	output = /obj/item/clothing/wrists/bracers/leather/scabbard
 	requirements = list(/obj/item/natural/hide/cured = 1,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
@@ -854,14 +944,56 @@
 	name = "hardened leather gloves"
 	output = /obj/item/clothing/gloves/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/heavygloves
+	name = "hardened heavy leather gloves"
+	output = /obj/item/clothing/gloves/angle/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fur = 2,
+				/obj/item/natural/fibers/sinew = 1,
+	)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves/advanced
+	name = "hardened fur-lined leather gloves"
+	output = /obj/item/clothing/gloves/angle/atgervi/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fur = 2,
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/coat
 	name = "hardened leather coat"
 	output = /obj/item/clothing/armor/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_coat
+	name = "hardened shamanic coat"
+	output = /obj/item/clothing/armor/leather/atgervi/advanced
+	requirements = list(
+			/obj/item/natural/hide/cured = 2,
+			/obj/item/natural/fur = 2,
+			/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/hidearmor
+	name = "hardened fur lined leather armor"
+	output = /obj/item/clothing/armor/leather/hide/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+			/obj/item/natural/fur = 1,
+			/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/steppe
+	name = "hardened frontier fur lined leather armor"
+	output = /obj/item/clothing/armor/leather/hide/steppe/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+			/obj/item/natural/fur = 2,
+			/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/inquisitor_duster
@@ -875,21 +1007,37 @@
 	name = "forrester leather armor"
 	output = /obj/item/clothing/armor/leather/advanced/forrester
 	requirements = list(/obj/item/natural/hide/cured = 3,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/helmet
 	name = "hardened leather helmet"
 	output = /obj/item/clothing/head/helmet/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/leatherhood
+	name = "hardened leather hood"
+	output = /obj/item/clothing/head/roguehood/leather/advanced
+	requirements = list(/obj/item/natural/hide/cured = 1,
+			/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+	category = "Hat"
 
 /datum/repeatable_crafting_recipe/leather/standalone/chausses
 	name = "hardened leather chausses"
 	output = /obj/item/clothing/pants/trou/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/atgervi_pants/advanced
+	name = "hardened fur chausses"
+	output = /obj/item/clothing/pants/trou/leather/atgervi/advanced
+	requirements = list(/obj/item/natural/fur = 2,
+				/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers/sinew = 1,)
 	craftdiff = 4
 
 /// MASTERWORK
@@ -900,8 +1048,27 @@
 	attacked_atom = /obj/item/clothing/shoes/boots/leather
 	requirements = list(/obj/item/clothing/shoes/boots/leather = 1,
 				/obj/item/natural/cured/essence = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/furboots/masterwork
+	name = "masterwork fur lined boots"
+	output = /obj/item/clothing/shoes/boots/furlinedboots/masterwork
+	attacked_atom = /obj/item/clothing/shoes/boots/furlinedboots
+	requirements = list(/obj/item/clothing/shoes/boots/furlinedboots = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/hunterboots/masterwork
+	name = "masterwork hunter boots"
+	output = /obj/item/clothing/shoes/boots/hunter/masterwork
+	attacked_atom = /obj/item/clothing/shoes/boots/hunter
+	requirements = list(/obj/item/clothing/shoes/boots/hunter = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 2)
+	craftdiff = 5
+
 
 /datum/repeatable_crafting_recipe/leather/standalone/gloves/masterwork
 	name = "masterwork leather gloves"
@@ -909,7 +1076,25 @@
 	attacked_atom = /obj/item/clothing/gloves/leather
 	requirements = list(/obj/item/clothing/gloves/leather = 1,
 				/obj/item/natural/cured/essence = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/heavygloves/masterwork
+	name = "masterwork heavy leather gloves"
+	output = /obj/item/clothing/gloves/angle/masterwork
+	attacked_atom = /obj/item/clothing/gloves/angle
+	requirements = list(/obj/item/clothing/gloves/angle = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves/masterwork
+	name = "masterwork fur-lined leather gloves"
+	output = /obj/item/clothing/gloves/angle/atgervi/masterwork
+	attacked_atom = /obj/item/clothing/gloves/angle/atgervi
+	requirements = list(/obj/item/clothing/gloves/angle/atgervi = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/bracers
@@ -921,7 +1106,7 @@
 	attacked_atom = /obj/item/clothing/wrists/bracers/leather
 	requirements = list(/obj/item/clothing/wrists/bracers/leather = 1,
 				/obj/item/natural/cured/essence = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/coat/masterwork
@@ -930,8 +1115,44 @@
 	attacked_atom = /obj/item/clothing/armor/leather
 	requirements = list(/obj/item/clothing/armor/leather = 1,
 				/obj/item/natural/cured/essence = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/forest/masterwork
+	name = "masterwork forrester's armor"
+	output = /obj/item/clothing/armor/leather/advanced/forrester/masterwork
+	attacked_atom = /obj/item/clothing/armor/leather/advanced/forrester
+	requirements = list(/obj/item/clothing/armor/leather/advanced/forrester = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 2)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/hidearmor/masterwork
+	name = "masterwork fur lined leather armor"
+	output = /obj/item/clothing/armor/leather/hide/masterwork
+	attacked_atom = /obj/item/clothing/armor/leather/hide
+	requirements = list(/obj/item/clothing/armor/leather/hide = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/steppe/masterwork
+	name = "masterwork frontier fur lined leather armor"
+	output = /obj/item/clothing/armor/leather/hide/steppe/masterwork
+	attacked_atom = /obj/item/clothing/armor/leather/hide
+	requirements = list(/obj/item/clothing/armor/leather/hide/steppe = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_coat/masterwork
+	name = "masterwork shamanic coat"
+	output = /obj/item/clothing/armor/leather/atgervi/masterwork
+	attacked_atom = /obj/item/clothing/armor/leather/atgervi
+	requirements = list(/obj/item/clothing/armor/leather/atgervi = 1,
+			/obj/item/natural/cured/essence = 1,
+			/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/helmet/masterwork
 	name = "masterwork leather helmet"
@@ -939,8 +1160,18 @@
 	attacked_atom = /obj/item/clothing/head/helmet/leather
 	requirements = list(/obj/item/clothing/head/helmet/leather = 1,
 				/obj/item/natural/cured/essence = 1,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/leatherhood/masterwork
+	name = "masterwork leather hood"
+	output = /obj/item/clothing/head/roguehood/leather/masterwork
+	attacked_atom = /obj/item/clothing/head/roguehood/leather
+	requirements = list(/obj/item/clothing/head/roguehood/leather = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+	category = "Hat"
 
 /datum/repeatable_crafting_recipe/leather/standalone/chausses/masterwork
 	name = "masterwork leather chausses"
@@ -950,6 +1181,15 @@
 				/obj/item/natural/cured/essence = 1,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_pants/masterwork
+	name = "masterwork fur chausses"
+	output = /obj/item/clothing/pants/trou/leather/atgervi/masterwork
+	attacked_atom = /obj/item/clothing/pants/trou/leather/atgervi
+	requirements = list(/obj/item/clothing/pants/trou/leather/atgervi = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1,)
+	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/rumaclan
 	name = "raised sandals"
@@ -963,7 +1203,7 @@
 
 /datum/repeatable_crafting_recipe/leather/atgervi_coat
 	name = "shamanic coat"
-	output = /obj/item/clothing/armor/leather/heavy/atgervi
+	output = /obj/item/clothing/armor/leather/atgervi
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fur = 2
@@ -1015,7 +1255,7 @@
 	output = /obj/item/clothing/shoes/psydonboots
 	requirements = list(
 		/obj/item/natural/hide/cured = 3,
-		/obj/item/natural/fibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	craftdiff = 3
 	category = "Shoes"
@@ -1029,3 +1269,88 @@
 	output = /obj/item/clothing/armor/leather/studded/psyaltrist
 	craftdiff = 3
 	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/leatherhood
+	name = "leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/head/roguehood/leather
+	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/studdedleatherhood
+	name = "studded leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/head/roguehood/studded
+	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/studdedleatherhoodretinue
+	name = "guard studded leather hood"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 2,
+	)
+	output = /obj/item/clothing/head/roguehood/studded/retinue
+	craftdiff = 3
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/sanguinejacket
+	name = "sanguine jacket"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3
+	)
+	output = /obj/item/clothing/armor/leather/jacket/courtphysician/female
+	craftdiff = 3
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/sanguinegloves
+	name = "sanguine gloves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2
+	)
+	output = /obj/item/clothing/gloves/leather/courtphysician
+	craftdiff = 3
+	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/leather/sanguinesleeves
+	name = "sanguine sleeves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/silk = 2,
+	)
+	output = /obj/item/clothing/gloves/leather/courtphysician/female
+	craftdiff = 3
+	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/leather/sanguinecoat
+	name = "sanguine coat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3
+	)
+	output = /obj/item/clothing/armor/leather/jacket/courtphysician
+	craftdiff = 3
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/sanguineshoes
+	name = "sanguine shoes"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2
+	)
+	output = /obj/item/clothing/shoes/courtphysician
+	craftdiff = 3
+	category = "Shoes"
+
+/datum/repeatable_crafting_recipe/leather/sanguineheels
+	name = "sanguine heels"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2
+	)
+	output = /obj/item/clothing/shoes/courtphysician/female
+	craftdiff = 3
+	category = "Shoes"

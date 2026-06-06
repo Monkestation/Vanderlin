@@ -28,15 +28,15 @@
 	if(!window_id)
 		CRASH("created a browser with no window id")
 	src.user = user
-	RegisterSignal(user, COMSIG_PARENT_QDELETING, PROC_REF(user_deleted))
+	RegisterSignal(user, COMSIG_QDELETING, PROC_REF(user_deleted))
 	src.owner = owner
-	RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(owner_deleted))
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(owner_deleted))
 	src.window_id = window_id
 	src.title = format_text(title)
 	src.width = width
 	src.height = height
 
-/datum/browser/Destroy(force, ...)
+/datum/browser/Destroy(force)
 	if(!isnull(user))
 		var/client/user_client = isclient(user) ? user : user.client
 		UnregisterSignal(user_client, COMSIG_MOB_CLIENT_MOVED)
@@ -117,6 +117,8 @@
 		</html>"}
 
 /datum/browser/proc/open(use_onclose = TRUE)
+	if(!user)
+		return
 	if(isnull(window_id))	//null check because this can potentially nuke goonchat
 		stack_trace("Browser [title] tried to open with a null ID")
 		to_chat(user, "<span class='danger'>The [title] browser you tried to open failed a sanity check! Please report this on github!</span>")
@@ -130,9 +132,9 @@
 		window_size = "size=[width * scaling]x[height * scaling];"
 	var/datum/asset/simple/namespaced/common/common_asset = get_asset_datum(/datum/asset/simple/namespaced/common)
 	common_asset.send(user)
-	if (stylesheets.len)
+	if(length(stylesheets))
 		SSassets.transport.send_assets(user, stylesheets)
-	if (scripts.len)
+	if(length(scripts))
 		SSassets.transport.send_assets(user, scripts)
 	user << browse(build_page(), "window=[window_id];[window_size][window_options]")
 	if (use_onclose)

@@ -3,8 +3,8 @@
 
 ///mob_overlay_effect component. adds and removes
 /datum/element/mob_overlay_effect
-	element_flags = ELEMENT_BESPOKE | ELEMENT_DETACH
-	id_arg_index = 2
+	element_flags = ELEMENT_BESPOKE | ELEMENT_DETACH_ON_HOST_DESTROY
+	argument_hash_start_idx = 2
 
 	var/y_offset = 0
 	var/mask_y_offset = 0
@@ -18,23 +18,23 @@
 	mask_y_offset = _mask_y_offset
 	effect_alpha = _effect_alpha
 
-	RegisterSignal(get_turf(target), COMSIG_TURF_EXITED, PROC_REF(on_remove), override = TRUE)
+	RegisterSignal(get_turf(target), COMSIG_ATOM_EXITED, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(get_turf(target), COMSIG_TURF_ENTERED, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_REMOVE, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_UPDATE, PROC_REF(on_add), override = TRUE)
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(remove_all), override = TRUE)
+	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(remove_all), override = TRUE)
 
 /datum/element/mob_overlay_effect/Detach(datum/source)
 	. = ..()
 	UnregisterSignal(get_turf(source), list(
-		COMSIG_TURF_EXITED,
+		COMSIG_ATOM_EXITED,
 		COMSIG_TURF_ENTERED,
 		COMSIG_MOB_OVERLAY_FORCE_REMOVE,
 		COMSIG_MOB_OVERLAY_FORCE_UPDATE,
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 	))
 
-/datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target)
+/datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target, atom/new_loc)
 	SIGNAL_HANDLER
 
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))
@@ -56,6 +56,9 @@
 	for(var/obj/structure/S in get_turf(target))
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 			return
+
+	if(isitem(target))
+		return ///this is ALOT of filters
 
 	if(isobj(target))
 		var/obj/obj = target

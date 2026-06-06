@@ -132,7 +132,7 @@
 /**
  * Handle click in this mode
  */
-/datum/buildmode_mode/basic/handle_click(client/c, params, obj/object)
+/datum/buildmode_mode/basic/handle_click(client/c, list/modifiers, obj/object)
 	return FALSE
 
 /**
@@ -159,8 +159,7 @@
 /**
  * Handle click in this mode
  */
-/datum/buildmode_mode/advanced/handle_click(client/c, params, obj/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/advanced/handle_click(client/c, list/modifiers, obj/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 	var/middle_click = LAZYACCESS(modifiers, MIDDLE_CLICK)

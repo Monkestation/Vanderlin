@@ -1,14 +1,14 @@
 /datum/loot_table/powder_sack
 	name = "powder sack"
 	loot_table = list(
-		/datum/skill/misc/stealing = list(
+		/datum/attribute/skill/misc/stealing = list(
 			4,
 			/obj/item/reagent_containers/powder/ozium = 10,
 			5,
 			/obj/item/reagent_containers/powder/spice = 10,
 			/obj/item/reagent_containers/powder/moondust = 10,
 		),
-		/datum/skill/craft/alchemy = list(
+		/datum/attribute/skill/craft/alchemy = list(
 			4,
 			/obj/item/reagent_containers/powder/ozium = 10,
 			5,

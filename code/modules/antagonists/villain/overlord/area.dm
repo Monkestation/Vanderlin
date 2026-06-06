@@ -1,12 +1,12 @@
 /area/overlord_lair
 	name = "Phylactery Lair"
 
-/area/overlord_lair/Exit(atom/movable/AM, atom/newLoc)
+/area/overlord_lair/Exit(atom/movable/leaving, direction)
 	. = ..()
-	if(istype(AM, /mob/camera/strategy_controller))
-		AM.forceMove(get_turf(GLOB.lair_portal))
+	if(istype(leaving, /mob/camera/strategy_controller))
+		leaving.forceMove(get_turf(GLOB.lair_portal))
 
-/area/overlord_lair/Exited(atom/movable/M)
+/area/overlord_lair/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(istype(M, /mob/camera/strategy_controller))
-		M.forceMove(get_turf(GLOB.lair_portal))
+	if(istype(gone, /mob/camera/strategy_controller))
+		gone.forceMove(get_turf(GLOB.lair_portal))

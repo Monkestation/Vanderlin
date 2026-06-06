@@ -1,5 +1,5 @@
 /datum/job/pilgrim
-	title = "Pilgrim"
+	title = JOB_PILGRIM
 	tutorial = "As a Pilgrim, you begin far outside the safety of the city and must reach it in order to ply your trade. \
 	Alternatively, you can build your own settlement and enjoy the terrible dangers nature has to offer."
 	department_flag = OUTSIDERS
@@ -21,12 +21,15 @@
 
 	is_foreigner = TRUE
 	can_have_apprentices = TRUE
+	can_be_apprentice = TRUE
 
 	selection_color = "#a33096"
 
 /datum/job/advclass/pilgrim
 	abstract_type = /datum/job/advclass/pilgrim
 	category_tags = list(CTAG_PILGRIM)
+	spawn_with_torch = TRUE
+	department_flag = OUTSIDERS
 
 /datum/job/advclass/pilgrim/rare
 	abstract_type = /datum/job/advclass/pilgrim/rare

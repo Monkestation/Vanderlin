@@ -89,7 +89,7 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 
 GLOBAL_LIST_INIT(phobia_turfs, list(
 	"falling" = typecacheof(list(
-		/turf/open/transparent/openspace,
+		/turf/open/openspace,
 	)),
 ))
 

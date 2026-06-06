@@ -12,7 +12,6 @@
 	var/bonus_active = FALSE //If the faction damage bonus is active
 	var/list/nemesis_factions //Any mob with a faction that exists in this list will take bonus damage/effects
 	var/w_class_on = WEIGHT_CLASS_BULKY
-	var/clumsy_check = TRUE
 
 /obj/item/melee/transforming/Initialize()
 	. = ..()
@@ -25,18 +24,16 @@
 	if(sharpness)
 		AddComponent(/datum/component/butchering, 50, 100, 0, hitsound)
 
-/obj/item/melee/transforming/attack_self(mob/living/carbon/user, params)
+/obj/item/melee/transforming/attack_self(mob/living/carbon/user, list/modifiers)
 	transform_weapon(user)
 
-/obj/item/melee/transforming/attack(mob/living/target, mob/living/carbon/human/user)
+/obj/item/melee/transforming/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
 	var/nemesis_faction = FALSE
 	if(LAZYLEN(nemesis_factions))
-		for(var/F in target.faction)
-			if(F in nemesis_factions)
-				nemesis_faction = TRUE
-				force += faction_bonus_force
-				nemesis_effects(user, target)
-				break
+		if(target.has_faction(nemesis_factions))
+			nemesis_faction = TRUE
+			force += faction_bonus_force
+			nemesis_effects(user, target)
 	. = ..()
 	if(nemesis_faction)
 		force -= faction_bonus_force

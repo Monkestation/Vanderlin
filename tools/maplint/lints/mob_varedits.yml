@@ -1,0 +1,8 @@
+﻿/mob:
+  banned_variables:
+  - icon
+  - icon_state
+  - pixel_x
+  - pixel_y
+  - pixel_z
+  - pixel_w

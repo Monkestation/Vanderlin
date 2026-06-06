@@ -80,8 +80,7 @@
 			for(var/datum/action/A in client.player_details.player_actions)
 				A.Grant(src)
 
-		for(var/foo in client.player_details.post_login_callbacks)
-			var/datum/callback/CB = foo
+		for(var/datum/callback/CB as anything in client.player_details.post_login_callbacks)
 			CB.Invoke()
 		log_played_names(client.ckey,name,real_name)
 		auto_deadmin_on_login()
@@ -93,9 +92,10 @@
 	enable_client_mobs_in_contents(client)
 
 	SEND_SIGNAL(src, COMSIG_MOB_CLIENT_LOGIN, client)
+
+	client.init_verbs()
+
 	addtimer(CALLBACK(src, PROC_REF(send_pref_messages)), 2 SECONDS)
-	if(client.holder)
-		client.hearallasghost()
 	resend_all_uis()
 	if(client)
 		client.preload_music()

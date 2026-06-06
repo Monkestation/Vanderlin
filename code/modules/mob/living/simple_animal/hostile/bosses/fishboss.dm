@@ -34,7 +34,7 @@
 	projectilesound = 'sound/combat/wooshes/punch/punchwoosh (1).ogg'
 	patron = /datum/patron/divine/abyssor
 
-
+	animal_type = /datum/blood_type/human/triton
 	stat_attack = SOFT_CRIT
 	loot = list(/obj/item/weapon/mace/goden/deepduke)
 	ai_controller = /datum/ai_controller/fishboss
@@ -160,6 +160,8 @@
 	flag = "piercing"
 	speed = 10
 
+/obj/projectile/bullet/reusable/deepone/handle_drop()
+	return
 
 /mob/living/simple_animal/hostile/boss/fishboss/death()
 	visible_message("<span class='warning'>[src] convulses violently as eldritch energy pours from its wounds! The bloated, grotesque fishman explodes in a cataclysmic shower of gore and sea water!</span>")
@@ -220,13 +222,13 @@
 
 /datum/status_effect/abyssal_chill/on_apply()
 	. = ..()
-	owner.add_movespeed_modifier("abyssal_chill", 1.5)
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = 1.5)
 	owner.color = "#AADDFF"
 	return TRUE
 
 /datum/status_effect/abyssal_chill/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("abyssal_chill")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 	owner.color = initial(owner.color)
 
 /obj/effect/temp_visual/guardian/phase

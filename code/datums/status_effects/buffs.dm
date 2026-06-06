@@ -1,57 +1,3 @@
-//Largely beneficial effects go here, even if they have drawbacks. An example is provided in Shadow Mend.
-
-/datum/status_effect/shadow_mend
-	id = "shadow_mend"
-	duration = 30
-	alert_type = /atom/movable/screen/alert/status_effect/shadow_mend
-
-/atom/movable/screen/alert/status_effect/shadow_mend
-	name = "Shadow Mend"
-	desc = ""
-	icon_state = "shadow_mend"
-
-/datum/status_effect/shadow_mend/on_apply()
-	owner.visible_message("<span class='notice'>Violet light wraps around [owner]'s body!</span>", "<span class='notice'>Violet light wraps around my body!</span>")
-	playsound(owner, 'sound/blank.ogg', 50, TRUE)
-	return ..()
-
-/datum/status_effect/shadow_mend/tick()
-	owner.adjustBruteLoss(-15)
-	owner.adjustFireLoss(-15)
-
-/datum/status_effect/shadow_mend/on_remove()
-	. = ..()
-	owner.visible_message("<span class='warning'>The violet light around [owner] glows black!</span>", "<span class='warning'>The tendrils around you cinch tightly and reap their toll...</span>")
-	playsound(owner, 'sound/blank.ogg', 50, TRUE)
-	owner.apply_status_effect(STATUS_EFFECT_VOID_PRICE)
-
-/datum/status_effect/void_price
-	id = "void_price"
-	duration = 300
-	tick_interval = 30
-	alert_type = /atom/movable/screen/alert/status_effect/void_price
-
-/atom/movable/screen/alert/status_effect/void_price
-	name = "Void Price"
-	desc = ""
-	icon_state = "shadow_mend"
-
-/datum/status_effect/void_price/tick()
-	SEND_SOUND(owner, sound('sound/blank.ogg', volume = 25))
-	owner.adjustBruteLoss(3)
-
-
-/datum/status_effect/cyborg_power_regen
-	id = "power_regen"
-	duration = 100
-	alert_type = /atom/movable/screen/alert/status_effect/power_regen
-	var/power_to_give = 0 //how much power is gained each tick
-
-/datum/status_effect/cyborg_power_regen/on_creation(mob/living/new_owner, duration_override, new_power_per_tick)
-	. = ..()
-	if(. && isnum(new_power_per_tick))
-		power_to_give = new_power_per_tick
-
 /atom/movable/screen/alert/status_effect/power_regen
 	name = "Power Regeneration"
 	desc = ""
@@ -153,9 +99,9 @@
 
 /datum/status_effect/good_music/tick()
 	if(owner.can_hear())
-		owner.adjust_dizzy(-2)
-		owner.adjust_jitter(-2)
-		owner.adjust_confusion(-0.1 SECONDS)
+		owner.adjust_dizzy(-4 SECONDS)
+		owner.adjust_jitter(-4 SECONDS)
+		owner.adjust_confusion(-1 SECONDS)
 		owner.add_stress(/datum/stress_event/goodmusic)
 
 /atom/movable/screen/alert/status_effect/regenerative_core
@@ -185,18 +131,16 @@
 /datum/status_effect/antimagic
 	id = "antimagic"
 	duration = 10 SECONDS
+	examine_text = span_notice("SUBJECTPRONOUN seem to be covered in a dull, grey aura.")
 
 /datum/status_effect/antimagic/on_apply()
 	owner.visible_message("<span class='notice'>[owner] is coated with a dull aura!</span>")
-	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 	//glowing wings overlay
 	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	return ..()
 
-/datum/status_effect/antimagic/get_examine_text()
-	return span_notice("They seem to be covered in a dull, grey aura.")
-
 /datum/status_effect/antimagic/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_ANTIMAGIC, TRAIT_STATUS_EFFECT(id))
 	owner.visible_message("<span class='warning'>[owner]'s dull aura fades away...</span>")

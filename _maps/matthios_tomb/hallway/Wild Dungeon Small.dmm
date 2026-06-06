@@ -48,7 +48,7 @@
 /turf/open/floor/grass/mixyel,
 /area/under/tomb/wilds)
 "mL" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/wilds)
 "nF" = (
 /obj/effect/dungeon_directional_helper/north,

@@ -26,7 +26,7 @@
 
 /datum/objective/personal/ravox_duel/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_RAVOX_BLESSING, STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_RAVOX_BLESSING, list(STAT_STRENGTH = 1))
 
 /datum/objective/personal/ravox_duel/update_explanation_text()
 	explanation_text = "Win [duels_required] duel\s with honor against other warriors to prove your might!"
@@ -45,7 +45,7 @@
 	addtimer(CALLBACK(src, PROC_REF(end_duel)), 8 MINUTES, TIMER_DELETE_ME)
 	addtimer(CALLBACK(src, PROC_REF(check_duel)), 4 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
 
-/datum/duel/Destroy(force, ...)
+/datum/duel/Destroy(force)
 	challenger = null
 	challenged = null
 	return ..()

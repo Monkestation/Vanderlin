@@ -21,6 +21,7 @@
 	RegisterSignal(SSdcs, COMSIG_DISPATCH_CARGO, PROC_REF(dispatch_cargo))
 
 /obj/effect/landmark/tram/queued_path/cargo_map_enter/tram_reached_travel_point(datum/source, datum/lift_master/tram/tram)
+	tram.destination = null
 	held_tram = tram
 	SSmerchant.cargo_docked = TRUE
 

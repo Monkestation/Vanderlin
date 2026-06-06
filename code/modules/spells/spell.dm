@@ -61,6 +61,9 @@
 	/// Cost to cast based on [spell_type].
 	var/spell_cost = 0
 
+	///this is purely for etching
+	var/spell_tier = 1
+
 	/// The sound played on cast.
 	var/sound = 'sound/magic/whiteflame.ogg'
 
@@ -101,12 +104,14 @@
 	var/list/required_items
 
 	/// Skill associated with spell enhancements.
-	var/associated_skill = /datum/skill/magic/arcane
+	var/associated_skill = /datum/attribute/skill/magic/arcane
 	/// Stat associated with spell enchancements.
-	var/associated_stat = STATKEY_INT
+	var/associated_stat = STAT_INTELLIGENCE
 
 	/// Assoc list of [datum/attunement] to value.
 	var/list/attunements
+	///list of essences we can use as a sub for cost
+	var/list/essences
 	/// Value summed from caster and spell attunements to adjust some spell effects.
 	var/attuned_strength
 
@@ -163,7 +168,7 @@
 	// Experience gain is dependant on spell cost and the associated skill
 	/// Experience gain modifier, cost is multipled by this to get experience gain.
 	/// Set to 0 to stop experience gain.
-	var/experience_modifer = 0.4
+	var/experience_modifier = 0.4
 	/// Max skill level this spell can raise to.
 	var/experience_max_skill = SKILL_LEVEL_EXPERT
 	// Sleep exp variables are reliant on the caster having a mind
@@ -259,7 +264,7 @@
 	if(spell_type == SPELL_RAGE)
 		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
-	RegisterSignal(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
+	RegisterSignals(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
 /datum/action/cooldown/spell/Remove(mob/living/remove_from)
 	UnregisterSignal(remove_from, list(
@@ -345,8 +350,8 @@
 
 	return TRUE
 
-/datum/action/cooldown/spell/InterceptClickOn(mob/living/clicker, params, atom/click_target)
-	if(!LAZYACCESS(params2list(params), MIDDLE_CLICK))
+/datum/action/cooldown/spell/InterceptClickOn(mob/living/clicker, list/modifiers, atom/click_target)
+	if(!LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return
 
 	if(charge_required && !charged)
@@ -362,18 +367,23 @@
 			// If we didn't find a human, we settle for any living at all
 			aim_assist_target = locate(/mob/living) in click_target
 
-	return ..(clicker, params, aim_assist_target || click_target)
+	return ..(clicker, modifiers, aim_assist_target || click_target)
 
 // Where the cast chain starts
 /datum/action/cooldown/spell/PreActivate(atom/target)
 	charged = FALSE
+	if(SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_STARTED, src) & COMPONENT_BLOCK_ABILITY_START)
+		return
 	if(!is_valid_target(target))
 		if(charge_required && click_to_activate)
 			to_chat(owner, span_warning("I can't cast [src] on [target]!"))
 			RegisterSignal(owner.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(start_casting))
 		return FALSE
 
-	return Activate(target)
+	var/target_val = Activate(target)
+	if(!QDELETED(src) && !QDELETED(owner))
+		SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_FINISHED, src)
+	return target_val
 
 /// Adjust the base charge time based on the users stats
 /datum/action/cooldown/spell/proc/get_adjusted_charge_time()
@@ -383,7 +393,7 @@
 	var/mob/living/living_owner = owner
 	var/new_time = charge_time
 
-	new_time -= charge_time * living_owner.get_skill_level(associated_skill) * 0.05
+	new_time -= charge_time * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.05
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
@@ -403,17 +413,13 @@
 	if(cost_override)
 		new_cost = cost_override
 
-	new_cost -= spell_cost * living_owner.get_skill_level(associated_skill) * 0.03
+	new_cost -= spell_cost * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.03
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
 		new_cost -= spell_cost * (owner_stat - 10) * 0.02
 	else
 		new_cost += spell_cost * (10 - owner_stat) * 0.02
-
-	var/owner_encumbrance = living_owner.get_encumbrance()
-	if(owner_encumbrance > 0.4)
-		new_cost += spell_cost * owner_encumbrance * 0.5
 
 	return max(new_cost, 0)
 
@@ -755,7 +761,7 @@
 /// End the charging cycle
 /datum/action/cooldown/spell/proc/end_charging()
 	UnregisterSignal(owner.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
-	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_MOB_DEATH, COMSIG_MOVABLE_MOVED))
+	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_LIVING_DEATH, COMSIG_MOVABLE_MOVED))
 	currently_charging = FALSE
 	charge_started_at = null
 	charge_target_time = null
@@ -930,12 +936,12 @@
 			if(QDELETED(target) || !istype(target))
 				stack_trace("Essence spell checking cost without being assigned to an essence gauntlet!")
 				return FALSE
-			if(!gaunt.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
 				return FALSE
 			// Ditto
 			if(!length(gaunt.stored_vials))
 				return FALSE
-			if(!gaunt.can_consume_essence(used_cost, attunements))
+			if(!gaunt.can_consume_essence(used_cost, essences))
 				if(feedback)
 					owner.balloon_alert(owner, "Not enough essence!")
 				return FALSE
@@ -975,8 +981,8 @@
 		used_type = type_override
 
 	if(!re_run)
-		var/not_stamina_spell = (used_type != SPELL_STAMINA)
-		owner.adjust_stamina(-(used_cost / (1 + not_stamina_spell)))
+		if(used_type == SPELL_STAMINA)
+			owner.adjust_stamina(used_cost)
 
 	if(spell_type == NONE)
 		return // No return value == No exp
@@ -1000,7 +1006,11 @@
 
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
-			if(!gaunt?.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
+				return
+
+			if(!gaunt.can_consume_essence(used_cost, essences))
+				owner.balloon_alert(owner, "not enough essence!")
 				return
 
 			gaunt.consume_essence(used_cost, attunements)
@@ -1016,24 +1026,22 @@
 	return used_cost
 
 /datum/action/cooldown/spell/proc/handle_exp(cost_in)
-	if(experience_modifer <= 0 || !associated_skill)
+	if(experience_modifier <= 0 || !associated_skill)
 		return
 
 	if(!experience_max_skill)
 		experience_max_skill = SKILL_LEVEL_LEGENDARY
 
-	var/skill_level = owner.get_skill_level(associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_RAW(owner, associated_skill)
 	if(skill_level >= experience_max_skill)
 		return
 
 	var/mob/living/caster = owner
-	var/exp_to_gain = caster.get_stat(associated_stat) + (cost_in * experience_modifer) / 2
+	var/exp_to_gain = caster.get_stat(associated_stat) + (cost_in * experience_modifier) / 2
 
 	var/datum/mind/owner_mind = owner.mind
 	if(owner_mind && experience_sleep || (experience_sleep_threshold && (skill_level >= experience_sleep_threshold)))
-		// Check to make sure that experience max is adhered to even when using sleep exp
-		if(!owner_mind.sleep_adv.enough_sleep_xp_to_advance(associated_skill, experience_max_skill - skill_level))
-			owner_mind.add_sleep_experience(associated_skill, exp_to_gain)
+		owner_mind.add_sleep_experience(associated_skill, exp_to_gain)
 		return
 	owner.adjust_experience(associated_skill, exp_to_gain)
 
@@ -1065,7 +1073,7 @@
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignal(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
+	RegisterSignals(owner, list(COMSIG_LIVING_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
@@ -1106,15 +1114,46 @@
 	// At this point we DO care about the _target value
 	if(isnull(location) || istype(_target, /atom/movable/screen)) //Clicking on a screen object.
 		_target = parse_caught_click_modifiers(modifiers, get_turf(source.eye), source)
-		params = list2params(modifiers)
 		if(!_target)
 			CRASH("Failed to get the turf under clickcatcher")
 
 	// Call this directly to do all the relevant checks and aim assist
-	InterceptClickOn(owner, params, _target)
+	InterceptClickOn(owner, modifiers, _target)
 	source.click_intercept_time = 0
 
 /datum/action/cooldown/spell/proc/signal_cancel()
 	SIGNAL_HANDLER
 
 	cancel_casting()
+
+
+/**
+*Used to calculate bonuses to Great Hunt miracles/spells.
+*
+*Arguments:
+* * radial_source - Where we're starting the radial search for bonus ingredients. Defaults to spell owner.
+* * radius - The actual radius of the search. Default to 5.
+* * consume_chance - How likely it is the spell will consume the bonus ingredient. Default to 50.
+* * bonus_value - The number to return per bonus item. Defaults to zero as can be wildly different if needed for time bonuses.
+*/
+/datum/action/cooldown/spell/proc/check_hunt_bonuses(atom/radial_source, radius = 5, consume_chance = 50, bonus_value = 0)
+	var/static/list/alch_bodyparts = typecacheof(list(/obj/item/alch/bone, /obj/item/alch/sinew, /obj/item/alch/horn))
+	var/used_source = radial_source
+	var/bonus_total = 0
+	if(!used_source)
+		used_source = owner
+
+	for(var/obj/possible_bonus in oview(radius, used_source))
+		if(is_type_in_typecache(possible_bonus, alch_bodyparts))
+			bonus_total += bonus_value
+			if(prob(consume_chance))
+				consume_hunt_bonus(possible_bonus)
+
+	return bonus_total
+
+/datum/action/cooldown/spell/proc/consume_hunt_bonus(obj/target)
+	if(!target)
+		return FALSE
+	target.visible_message(span_warning("[target] disintegrates into a red mist."))
+	qdel(target)
+	return TRUE

@@ -22,7 +22,7 @@
 		return
 	parent.AddElement(/datum/element/ai_held_item)
 
-/datum/pet_command/fetch/Destroy(force, ...)
+/datum/pet_command/fetch/Destroy(force)
 	var/mob/living/parent = weak_parent.resolve()
 	if(parent)
 		parent.RemoveElement(/datum/element/ai_held_item)
@@ -122,3 +122,7 @@
 	// We got something to deliver and someone to deliver it to
 	controller.queue_behavior(/datum/ai_behavior/deliver_fetched_item, BB_FETCH_DELIVER_TO, BB_SIMPLE_CARRY_ITEM)
 	return SUBTREE_RETURN_FINISH_PLANNING
+
+/datum/pet_command/fetch/gnome
+	trigger_on_throw = FALSE
+	speech_commands = list()

@@ -14,33 +14,6 @@
 	pixel_x = base_pixel_x + rand(-12, 12)
 	pixel_y = base_pixel_y + rand(-9, 0)
 
-/atom/movable/screen/alert/status_effect/buff/playing_music
-	name = "Playing Music"
-	desc = "Let the world hear my craft."
-	icon_state = "buff"
-
-/datum/status_effect/buff/playing_music
-	id = "play_music"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/playing_music
-	var/effect_color
-	var/datum/stress_event/stress_to_apply
-	tick_interval = 10
-	duration = 5 SECONDS
-
-/datum/status_effect/buff/playing_music/on_creation(mob/living/new_owner, stress, colour)
-	stress_to_apply = stress
-	effect_color = colour
-	return ..()
-
-/datum/status_effect/buff/playing_music/tick()
-	var/obj/effect/temp_visual/music_rogue/M = new /obj/effect/temp_visual/music_rogue(get_turf(owner))
-	M.color = effect_color
-	for (var/mob/living/carbon/human/H in hearers(7, owner))
-		if (!H.client)
-			continue
-		if(!H.can_hear())
-			continue
-		H.add_stress(stress_to_apply)
 
 /obj/effect/temp_visual/songs
 	name = "songs"
@@ -58,7 +31,6 @@
 	var/matrix/m = matrix()
 	m.Scale(0.75, 0.75)
 	transform = m
-
 
 /obj/effect/temp_visual/songs/inspiration_dirget1
 	icon_state = "dirge_t1_base"
@@ -86,3 +58,70 @@
 
 /obj/effect/temp_visual/songs/inspiration_bardsongt3
 	icon_state = "bardsong_t3_base"
+
+/obj/effect/temp_visual/song_telltale
+	name = "music"
+	icon = 'icons/effects/music-note.dmi'
+	icon_state = "music_note"
+	duration = 20
+	plane = GAME_PLANE_UPPER
+	layer = ABOVE_ALL_MOB_LAYER
+	var/note_color = "#7f7f7f"
+
+/obj/effect/temp_visual/song_telltale/Initialize(mapload)
+	. = ..()
+	add_atom_colour(note_color, FIXED_COLOUR_PRIORITY)
+	alpha = 200
+	pixel_x = rand(-10, 10)
+	pixel_y = rand(14, 22) // Above the head
+
+/obj/effect/temp_visual/song_telltale/buff
+	note_color = "#5CB8E6"
+
+/obj/effect/temp_visual/song_telltale/debuff
+	note_color = "#CC3333"
+
+/atom/movable/screen/alert/status_effect/buff/playing_music
+	name = "Playing Music"
+	desc = "Let the world hear my craft."
+	icon_state = "play_music"
+
+/datum/status_effect/buff/playing_music
+	id = "play_music"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/playing_music
+	status_type = STATUS_EFFECT_REFRESH
+	var/effect_color
+	var/datum/stress_event/stress_to_apply
+	tick_interval = 10
+	duration = 5 SECONDS
+
+/datum/status_effect/buff/playing_music/on_creation(mob/living/new_owner, stress, colour)
+	stress_to_apply = stress
+	effect_color = colour
+	return ..()
+
+/datum/status_effect/buff/playing_music/tick()
+	var/obj/effect/temp_visual/music_rogue/M = new /obj/effect/temp_visual/music_rogue(get_turf(owner))
+	M.color = effect_color
+	for (var/mob/living/carbon/human/H in hearers(7, owner))
+		if (!H.client)
+			continue
+		if(!H.can_hear())
+			continue
+		H.add_stress(stress_to_apply)
+
+/obj/effect/temp_visual/songs
+	name = "songs"
+	icon = 'icons/mob/actions/bardsong_anims.dmi'
+	duration = 15
+	plane = GAME_PLANE_UPPER
+	layer = ABOVE_ALL_MOB_LAYER
+
+/obj/effect/temp_visual/songs/Initialize(mapload)
+	. = ..()
+	alpha = 140
+	pixel_x = rand(-18, 18)
+	pixel_y = rand(-16, 0)
+	var/matrix/m = matrix()
+	m.Scale(0.75, 0.75)
+	transform = m

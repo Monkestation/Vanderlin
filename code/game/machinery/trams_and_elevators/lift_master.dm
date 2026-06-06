@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	new_lift_platform.lift_master_datum = src
 	LAZYADD(lift_platforms, new_lift_platform)
-	RegisterSignal(new_lift_platform, COMSIG_PARENT_QDELETING, PROC_REF(remove_lift_platforms))
+	RegisterSignal(new_lift_platform, COMSIG_QDELETING, PROC_REF(remove_lift_platforms))
 
 	check_for_landmarks(new_lift_platform)
 
@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	old_lift_platform.lift_master_datum = null
 	LAZYREMOVE(lift_platforms, old_lift_platform)
-	UnregisterSignal(old_lift_platform, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(old_lift_platform, COMSIG_QDELETING)
 	if(!length(lift_platforms))
 		qdel(src)
 
@@ -541,9 +541,9 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			var/turf/T = get_step_multiz(lift_platform, check_dir)
 			if(!T)//the edges of multi-z maps
 				return FALSE
-			if(check_dir == UP && !istype(T, /turf/open/transparent/openspace)) // We don't want to go through the ceiling!
+			if(check_dir == UP && !istype(T, /turf/open/openspace)) // We don't want to go through the ceiling!
 				return FALSE
-			if(check_dir == DOWN && !istype(get_turf(lift_platform), /turf/open/transparent/openspace)) // No going through the floor!
+			if(check_dir == DOWN && !istype(get_turf(lift_platform), /turf/open/openspace)) // No going through the floor!
 				return FALSE
 	return TRUE
 
@@ -575,9 +575,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		platform.horizontal_speed = 0.1
 		base_horizontal_speed = 0.1
 		horizontal_speed = 0.1
-		if(!platform.fake)
-			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			platform.alpha = 0
+
 		for(var/atom/movable/movable in platform.lift_load)
 			if(ismob(movable))
 				platform.RemoveItemFromLift(movable)
@@ -588,12 +586,14 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.density = FALSE
 			movable.alpha = 0
 
+		if(!platform.fake)
+			platform.hide_lift()
+
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 0.1
-			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			moving_platform.alpha = 0
+			moving_platform.hide_lift()
 
 /datum/lift_master/tram/proc/show_tram()
 	ignore_pathing_obstacles = FALSE
@@ -602,20 +602,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		base_horizontal_speed = 4
 		horizontal_speed = 4
 		if(!platform.fake)
-			platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			platform.alpha = 255
-		for(var/atom/movable/movable in objects_pre_alpha)
-			movable.alpha = objects_pre_alpha[movable]
-			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
-			objects_pre_alpha -= movable
-			movable.density = initial(movable.density)
+			platform.show_lift()
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 4
-			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			moving_platform.alpha = 255
+			moving_platform.show_lift()
+
+		for(var/atom/movable/movable in objects_pre_alpha)
+			movable.alpha = objects_pre_alpha[movable]
+			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
+			objects_pre_alpha -= movable
+			movable.density = initial(movable.density)
 
 /datum/lift_master/tram/proc/try_process_order(fence = FALSE)
 	var/total_coin_value = 0
@@ -674,7 +673,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 							reputation_purchases[pack] = TRUE
 							// Calculate reputation cost
 							var/quantity = cargo_manifest.orders[pack] || 0
-							var/rep_cost = calculate_reputation_cost_for_processing(pack)
+							var/rep_cost = pack.calculate_reputation_cost()
 							total_reputation_cost += rep_cost * quantity
 
 				qdel(listed_atom)
@@ -695,7 +694,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 							if(cargo_manifest.reputation_orders[pack])
 								reputation_purchases[pack] = TRUE
 								var/quantity = cargo_manifest.orders[pack] || 0
-								var/rep_cost = calculate_reputation_cost_for_processing(pack)
+								var/rep_cost = pack.calculate_reputation_cost()
 								total_reputation_cost += rep_cost * quantity
 
 					qdel(inside)
@@ -798,21 +797,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	if(spent_amount)
 		record_round_statistic(STATS_TRADE_VALUE_IMPORTED, spent_amount)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_SPENT, spent_amount, 1)
-
-/datum/lift_master/tram/proc/calculate_reputation_cost_for_processing(datum/supply_pack/pack)
-	var/datum/world_faction/faction = SSmerchant.active_faction
-	if(!faction)
-		return 50
-
-	var/base_cost = pack.cost
-	var/tier = faction.get_reputation_tier()
-
-	// Base reputation cost scales with item value
-	// Higher tier = lower reputation costs (better relations = better deals)
-	var/reputation_multiplier = max(0.5, 1.5 - (tier * 0.15)) // 15% reduction per tier
-	var/reputation_cost = max(10, round(base_cost * reputation_multiplier))
-
-	return reputation_cost
+		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_IMPORT_VALUE, total_coin_value)
 
 /datum/lift_master/tram/proc/get_valid_turfs(obj/structure/industrial_lift/tram/platform)
 	var/list/valid_turfs = list()
@@ -906,6 +891,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			original_contents += resolved_contents
 		var/list/sold_items = list()
 		var/list/sold_count = list()
+		SSmerchant.handle_lift_contents(platform, platform.lift_load, destination) //this potentially nukes some items so its done here
 		for(var/atom/movable/listed_atom in platform.lift_load)
 			if(listed_atom in original_contents)
 				continue
@@ -913,19 +899,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			if(istype(listed_atom, /obj/item/coin))
 				continue
-			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom.type))
+			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom))
 				continue
 
-			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price <= 0)
 				continue
 
 			total_coin_value += old_price
 			sold_count[initial(listed_atom.name)] += 1
 			sold_items[initial(listed_atom.name)] += old_price
-			SSmerchant.handle_selling(listed_atom.type)
+			SSmerchant.handle_selling(listed_atom)
 
-			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price != new_price)
 				SSmerchant.changed_sell_prices(listed_atom.type, old_price, new_price)
 
@@ -938,25 +924,25 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 					continue
 				if(istype(inside, /obj/item/coin))
 					continue
-				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside.type))
+				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside))
 					continue
 
-				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price <= 0)
 					continue
 
 				total_coin_value += old_inside_price
 				sold_count[initial(inside.name)] += 1
 				sold_items[initial(inside.name)] += old_inside_price
-				SSmerchant.handle_selling(inside.type)
+				SSmerchant.handle_selling(inside)
 
-				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price != new_inside_price)
 					SSmerchant.changed_sell_prices(inside.type, old_inside_price, new_inside_price)
 				qdel(inside)
 
-			if(istype(listed_atom, /obj/item/clothing/head/mob_holder))
-				var/obj/item/clothing/head/mob_holder/holder = listed_atom
+			if(ismobholder(listed_atom))
+				var/obj/item/mob_holder/holder = listed_atom
 				for(var/obj/item/item in holder.held_mob.get_equipped_items())
 					item.forceMove(get_turf(holder))
 				to_chat(holder.held_mob, span_boldwarning("You have been sold."))
@@ -966,6 +952,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		var/atom/location = spawn_coins(total_coin_value, platform) // try_process_order will eat these coins, so don't spawn a chest
 		record_round_statistic(STATS_TRADE_VALUE_EXPORTED, total_coin_value)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_GAINED, total_coin_value)
+		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_EXPORT_VALUE, total_coin_value)
 		if(length(sold_items) && !fence)
 			var/scrolls_to_spawn = CEILING(length(sold_items) / 6, 1)
 			for(var/i = 1 to scrolls_to_spawn)

@@ -9,11 +9,13 @@
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	bloody_icon_state = "bodyblood"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	anvilrepair = null
 	abstract_type = /obj/item/clothing/cloak
 	smeltresult = /obj/item/fertilizer/ash
 
 	grid_width = 64
 	grid_height = 64
-	item_weight = 0.75
+	item_weight = 350 GRAMS

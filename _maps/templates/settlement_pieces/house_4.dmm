@@ -23,7 +23,7 @@
 /turf/closed/mineral/random,
 /area/template_noop)
 "J" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/template_noop)
 "K" = (
 /obj/effect/landmark/settlement_mob_spawn,

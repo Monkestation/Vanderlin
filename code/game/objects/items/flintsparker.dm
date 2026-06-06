@@ -12,9 +12,10 @@
 
 	grid_height = 32
 	grid_width = 32
+	item_weight = 50 GRAMS
 	var/flintcd = 0
 
-/obj/item/flint/attack_self(mob/living/user, params)
+/obj/item/flint/attack_self(mob/living/user, list/modifiers)
 	if(world.time < flintcd + 10)
 		return
 	flintcd = world.time
@@ -27,7 +28,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 
-/obj/item/flint/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flint/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

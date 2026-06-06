@@ -17,12 +17,14 @@
 						/obj/item/natural/hide = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 4,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 1,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 2,
 						/obj/item/reagent_containers/food/snacks/fat = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 2,
@@ -56,9 +58,13 @@
 	buckle_lying = FALSE
 	can_buckle = TRUE
 	remains_type = /obj/effect/decal/remains/cow
+	generate_genetics = TRUE
 
 	ai_controller = /datum/ai_controller/gote
 	happy_funtime_mob = TRUE
+	indexed = TRUE
+
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 	var/can_breed = TRUE
 
@@ -99,13 +105,12 @@
 			. += mounted
 
 /mob/living/simple_animal/hostile/retaliate/goat/tamed(mob/user)
-	..()
+	. = ..()
 	deaggroprob = 50
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/gote)
-
-/mob/living/simple_animal/hostile/retaliate/goat/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gote)
 
 /// Called when we attack something in order to piece together the intent of the AI/user and provide desired behavior. The element might be okay here but I'd rather the fluff.
 /// Goats are really good at beating up plants by taking bites out of them, but we use the default attack for everything else
@@ -148,12 +153,14 @@
 						/obj/item/alch/sinew = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 4,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 1,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 1,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 2,
 						/obj/item/reagent_containers/food/snacks/fat = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 2,
@@ -194,6 +201,10 @@
 
 	ai_controller = /datum/ai_controller/gote
 	happy_funtime_mob = TRUE
+	generate_genetics = TRUE
+	indexed = TRUE
+
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/Initialize()
 	. = ..()
@@ -232,10 +243,12 @@
 			. += mounted
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/tamed(mob/user)
-	..()
+	. = ..()
 	deaggroprob = 20
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/gote)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gote)
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/get_sound(input)
 	switch(input)
@@ -300,6 +313,7 @@
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/goat
 	can_buckle = FALSE
 	can_breed = FALSE
+	generate_genetics = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/goat/goatlet/udder_component()
 	return

@@ -25,11 +25,10 @@ SUBSYSTEM_DEF(pollution)
 
 /datum/controller/subsystem/pollution/Initialize()
 	//Initialize singletons
-	for(var/type in subtypesof(/datum/pollutant))
-		var/datum/pollutant/pollutant_cast = type
-		if(!length(pollutant_cast::name))
+	for(var/datum/pollutant/pollutant_cast as anything in subtypesof(/datum/pollutant))
+		if(!initial(pollutant_cast.name))
 			continue
-		singletons[type] = new type()
+		singletons[pollutant_cast] = new pollutant_cast()
 	return ..()
 
 /datum/controller/subsystem/pollution/fire(resumed = FALSE)
@@ -43,8 +42,8 @@ SUBSYSTEM_DEF(pollution)
 			current_run_cache.len--
 			processed_this_run[pollution] = TRUE
 			pollution.process_cell()
-			if(TICK_CHECK)
-				return
+			// if(TICK_CHECK)
+			// 	return
 		dissapation_ticker++
 		if(dissapation_ticker >= TICKS_TO_DISSIPATE)
 			pollution_task = POLLUTION_TASK_DISSIPATE

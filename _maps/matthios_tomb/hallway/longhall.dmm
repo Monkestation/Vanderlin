@@ -69,7 +69,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "z" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "A" = (
 /obj/effect/decal/cleanable/blood/footprints{

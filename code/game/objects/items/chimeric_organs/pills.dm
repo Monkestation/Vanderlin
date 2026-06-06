@@ -9,6 +9,7 @@
 	possible_transfer_amounts = list()
 	volume = 50
 	grind_results = list()
+	item_weight = 5 GRAMS
 	var/apply_type = INGEST
 	var/apply_method = "swallow"
 	var/rename_with_volume = FALSE
@@ -18,7 +19,7 @@
 /obj/item/reagent_containers/pill/attack_self(mob/user)
 	return
 
-/obj/item/reagent_containers/pill/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/pill/attack(mob/M, mob/user, list/modifiers)
 	if(!canconsume(M, user))
 		return FALSE
 
@@ -47,7 +48,7 @@
 	qdel(src)
 	return TRUE
 
-/obj/item/reagent_containers/pill/afterattack(obj/target, mob/user , proximity)
+/obj/item/reagent_containers/pill/afterattack(obj/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

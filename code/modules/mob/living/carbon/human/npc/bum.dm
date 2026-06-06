@@ -1,5 +1,5 @@
-GLOBAL_LIST_INIT(bum_quotes, world.file2list('strings/rt/bumlines.txt'))
-GLOBAL_LIST_INIT(bum_aggro, world.file2list('strings/rt/bumaggrolines.txt'))
+GLOBAL_LIST_INIT(bum_quotes, file2list('strings/rt/bumlines.txt'))
+GLOBAL_LIST_INIT(bum_aggro, file2list('strings/rt/bumaggrolines.txt'))
 
 /mob/living/carbon/human/species/human/northern/bum
 	ai_controller = /datum/ai_controller/human_bum
@@ -7,7 +7,6 @@ GLOBAL_LIST_INIT(bum_aggro, world.file2list('strings/rt/bumaggrolines.txt'))
 	ambushable = FALSE
 	dodgetime = 30
 	flee_in_pain = TRUE
-	possible_rmb_intents = list()
 
 	wander = FALSE
 
@@ -27,7 +26,7 @@ GLOBAL_LIST_INIT(bum_aggro, world.file2list('strings/rt/bumaggrolines.txt'))
 
 /mob/living/carbon/human/species/human/northern/bum/after_creation()
 	..()
-	job = "Beggar"
+	job = JOB_BEGGAR
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/vagrant)

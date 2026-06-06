@@ -40,6 +40,9 @@
 /datum/clan_menu_interface/proc/generate_welcome_screen_html()
 	var/clan_downside = "burn in sunlight"
 	var/blood_preference = "any blood"
+	var/reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> Drain someone's blood to critical levels to gain the option to embrace them as a new vampire.</div>"}
+	if(!user.clan_position?.can_assign_positions)
+		reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> You are unable to sire new vampires.</div>"}
 
 	if(user_clan)
 		clan_downside = user_clan.get_downside_string()
@@ -72,9 +75,7 @@
 			<div class="tip-item">
 				<strong>Coven Abilities:</strong> Right-click on any coven ability to switch between different powers from that coven.
 			</div>
-			<div class="tip-item">
-				<strong>Creating Progeny:</strong> Drain someone's blood to critical levels to gain the option to embrace them as a new vampire.
-			</div>
+			[reproduce_string]
 		</div>
 	</div>
 	"}
@@ -125,7 +126,7 @@
 				overflow: auto;
 				background: #1a1a1a;
 				height: calc(100% - 40px);
-				margin-bottom: 20px; 
+				margin-bottom: 20px;
 			}
 
 			.hierarchy-sidebar {

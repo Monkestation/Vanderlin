@@ -36,6 +36,8 @@
 	var/start_verb = "brewing"
 	///Quality modifier for this specific recipe (affects final quality)
 	var/quality_modifier = 1.0
+	///this is the skill type used for recipes
+	var/brewing_skill = /datum/attribute/skill/craft/cooking
 
 /datum/brewing_recipe/proc/after_finish_attackby(mob/living/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/bottle_kit))
@@ -82,15 +84,12 @@
 	// Get brewing skill for the quality calculator
 	var/brewing_skill = 0
 	if(user.mind)
-		brewing_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus() || 0
+		brewing_skill = GET_MOB_SKILL_VALUE_OLD(user, brewing_skill) + user.get_inspirational_bonus() || 0
 
 	// Create quality calculator with the calculated quality
 	var/datum/quality_calculator/brewing/brew_calc = new(
-		base_qual = 0,
 		mat_qual = quality,
 		skill_qual = brewing_skill,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = 0, // Freshness already factored into quality calculation
 		recipe_mod = quality_modifier
@@ -112,7 +111,7 @@
 	var/total_freshness = 0
 	var/ingredient_count = 0
 	var/highest_food_quality = 0
-	var/highest_input_reagent_quality = 0
+	var/highest_input_recipe_quality = 0
 	var/total_reagent_volume = 0
 
 	// Calculate average freshness and find highest quality food ingredient from crops
@@ -141,132 +140,28 @@
 		for(var/datum/reagent/R in keg.reagents.reagent_list)
 			if(R.volume > 0)
 				total_reagent_volume += R.volume
-				if(R.recipe_quality)
-					highest_input_reagent_quality = max(highest_input_reagent_quality, R.recipe_quality)
+				highest_input_recipe_quality = max(highest_input_recipe_quality, R.get_recipe_quality())
 
 	// Calculate average freshness
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 
 	// Get the user's brewing skill (with cooking as fallback)
-	var/brewing_skill = 0
+	var/brewing_skill_level = 0
 	if(user.mind)
-		brewing_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus() || 0
+		brewing_skill_level = GET_MOB_SKILL_VALUE_OLD(user, brewing_skill) + user.get_inspirational_bonus() || 0
 
 	// Use the quality calculator to determine final quality (matching cooking system)
 	var/datum/quality_calculator/brewing/brew_calc = new(
-		base_qual = 0,
-		mat_qual = max(highest_food_quality, highest_input_reagent_quality), // Use the higher of food or reagent quality
-		skill_qual = brewing_skill,
-		perf_qual = 0,
-		diff_mod = 0,
+		mat_qual = max(highest_food_quality, highest_input_recipe_quality), // Use the higher of food or reagent quality
+		skill_qual = brewing_skill_level,
 		components = 1,
 		fresh = average_freshness,
 		recipe_mod = quality_modifier,
-		reagent_qual = highest_input_reagent_quality
+		reagent_qual = highest_input_recipe_quality
 	)
 
 	var/final_quality = brew_calc.calculate_final_quality()
 	qdel(brew_calc)
 
-	return CLAMP(final_quality, 1, 4)
+	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
 
-/datum/brewing_recipe/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-	var/html = {"
-		<!DOCTYPE html>
-		<html lang="en">
-		<meta charset='UTF-8'>
-		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap');
-			body {
-				font-family: "Charm", cursive;
-				font-size: 1.2em;
-				text-align: center;
-				margin: 20px;
-				background-color: #f4efe6;
-				color: #3e2723;
-				background-color: rgb(31, 20, 24);
-				background:
-					url('[SSassets.transport.get_asset_url("try4_border.png")]'),
-					url('book.png');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-size: 100% 100%;
-
-			}
-			h1 {
-				text-align: center;
-				font-size: 2em;
-				border-bottom: 2px solid #3e2723;
-				padding-bottom: 10px;
-				margin-bottom: 10px;
-			}
-			.icon {
-				width: 64px;
-				height: 64px;
-				vertical-align: middle;
-				margin-right: 10px;
-			}
-		</style>
-		<body>
-		  <div>
-		    <h1>[name]</h1>
-		    <div>
-			  <h2>Brewing Time: [brew_time / 10] Seconds </h2>
-			  <h2>Requirements</h2>
-		"}
-	if(length(age_times))
-		html += "<h2>Will Continue to age after brewing.</h2>"
-	if(helpful_hints)
-		html += "<strong>[helpful_hints]</strong><br>"
-	if(pre_reqs)
-		html += "<strong>Requires that you have [initial(pre_reqs.name)] present.</strong><br>"
-	if(heat_required)
-		html += "<strong>Requires that this be made in a heated vessel thats at least [heat_required - 273.1]C.</strong><br>"
-
-	if(length(needed_crops) || length(needed_items))
-		html += "<h3>Items Required</h3>"
-		for(var/atom/path as anything in needed_crops)
-			var/count = needed_crops[path]
-			html += "[icon2html(new path, user)] [count] parts [initial(path.name)]<br>"
-		for(var/atom/path as anything in needed_items)
-			var/count = needed_items[path]
-			html += "[count] parts [initial(path.name)]<br>"
-		html += "<br>"
-	if(length(needed_reagents))
-		html += "<h3>Liquids Required</h3>"
-		for(var/atom/path as anything in needed_reagents)
-			var/count = needed_reagents[path]
-			html += "[UNIT_FORM_STRING(FLOOR(count, 1))] of [initial(path.name)]<br>"
-		html += "<br>"
-
-	if(brewed_amount)
-		html += "Produces: [UNIT_FORM_STRING(FLOOR((per_brew_amount * brewed_amount), 1))] of [name]"
-	if(brewed_item)
-		html += "Produces: [icon2html(new brewed_item, user)] [(brewed_item_count)] [initial(brewed_item.name)]"
-	html += {"
-		</div>
-		<div>
-		"}
-
-	if(length(age_times))
-		for(var/datum/reagent/path as anything in age_times)
-			html += "After aging for [age_times[path] * 0.1] Seconds, becomes [initial(path.name)].<br>"
-
-	html += {"
-		</div>
-		</div>
-	</body>
-	</html>
-	"}
-	return html
-
-/datum/brewing_recipe/proc/show_menu(mob/user)
-	user << browse(generate_html(user),"window=recipe;size=500x810")

@@ -1,14 +1,21 @@
 /mob/living/carbon/human/species/werewolf
 	race = /datum/species/werewolf
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	base_strength = 15
-	base_constitution = 15
-	base_endurance = 15
 
 	cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 	limb_destroyer = TRUE
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
+
+/datum/attribute_holder/sheet/job/species/werewolf
+	raw_attribute_list = list(
+		STAT_STRENGTH = 5,
+		STAT_PERCEPTION = 5,
+		STAT_INTELLIGENCE = -3,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = 5,
+		STAT_SPEED = 3,
+	)
 
 /datum/species/werewolf
 	name = "werewolf"
@@ -34,9 +41,9 @@
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_IGNORESLOWDOWN,
 		TRAIT_HARDDISMEMBER,
-		TRAIT_UNDODGING,
 		TRAIT_UNPARRYING,
-		TRAIT_LONGSTRIDER
+		TRAIT_LONGSTRIDER,
+		TRAIT_BLOODDRINKER,
 	)
 
 	inherent_biotypes = MOB_HUMANOID
@@ -49,13 +56,13 @@
 	soundpack_m = /datum/voicepack/werewolf
 	soundpack_f = /datum/voicepack/werewolf
 
-	specstats_m = list(STATKEY_STR = 5, STATKEY_PER = 5, STATKEY_INT = -3, STATKEY_CON = 5, STATKEY_END = 5, STATKEY_SPD = 3, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 5, STATKEY_PER = 5, STATKEY_INT = -3, STATKEY_CON = 5, STATKEY_END = 5, STATKEY_SPD = 3, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/werewolf
 
 	enflamed_icon = "widefire"
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/werewolf,
@@ -66,6 +73,8 @@
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
+
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 3)
 
 	changesource_flags = WABBAJACK
 	bleed_mod = 0.6
@@ -126,6 +135,6 @@
 	return "WEREVOLF"
 
 /datum/species/werewolf/check_species_weakness(obj/item, mob/living/attacker, mob/living/parent)
-	if(parent.has_status_effect(/datum/status_effect/debuff/silver_curse))
+	if(parent.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		return 0.75
 	return 0

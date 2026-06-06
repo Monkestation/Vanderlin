@@ -6,11 +6,10 @@
 	race = /datum/species/zizombie
 	gender = PLURAL
 	bodyparts = list(/obj/item/bodypart/chest/zizombie, /obj/item/bodypart/head/zizombie, /obj/item/bodypart/l_arm/zizombie,
-					/obj/item/bodypart/r_arm/zizombie, /obj/item/bodypart/r_leg/zizombie, /obj/item/bodypart/l_leg/zizombie)
+					/obj/item/bodypart/r_arm/zizombie, /obj/item/bodypart/r_leg/zizombie, /obj/item/bodypart/l_leg/zizombie, /obj/item/bodypart/mouth)
 	rot_type = /datum/component/rot/corpse/zizombie
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/kick)
-	possible_rmb_intents = list()
 
 /mob/living/carbon/human/species/zizombie/npc
 	ai_controller = /datum/ai_controller/human_npc
@@ -32,12 +31,8 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Ambush zizombie"
 	AddComponent(/datum/component/combat_noise, list("rage" = 1, "scream" = 1))
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -51,6 +46,8 @@
 	dismemberable = 1
 /obj/item/bodypart/l_leg/zizombie
 	dismemberable = 1
+/obj/item/bodypart/head/zizombie
+	sellprice = 5
 
 /obj/item/bodypart/head/zizombie/update_icon_dropped()
 	return
@@ -61,8 +58,6 @@
 /obj/item/bodypart/head/zizombie/skeletonize()
 	. = ..()
 	icon_state = "zizombie_head_s"
-	headprice = 2
-	sellprice = 2
 
 /mob/living/carbon/human/species/zizombie/update_body()
 	remove_overlay(BODY_LAYER)
@@ -99,16 +94,21 @@
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 
+/datum/attribute_holder/sheet/job/zizombie
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+	)
+
 /mob/living/carbon/human/species/zizombie/proc/configure_mind()
 	if(!mind)
 		mind = new /datum/mind(src)
+	attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie)
 
-	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 
 /mob/living/carbon/human/species/zizombie/after_creation()
 	..()
@@ -119,19 +119,25 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-			headdy.headprice = rand(15,40)
-			headdy.sellprice = rand(15,40)
 	src.grant_language(/datum/language/common)
-	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
+
+	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 		eyes.Remove(src,1)
 		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(src)
+
+	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+	LE.switch_side(LEFT_SIDE)
+
+	LE.Insert(src)
+	RE.Insert(src)
+
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()
 	update_body()
+	update_eyes()
 	faction = list(FACTION_UNDEAD)
 	var/turf/turf = get_turf(src)
 	if(SSterrain_generation.get_island_at_location(turf))
@@ -139,10 +145,7 @@
 	name = "zizombie"
 	real_name = "zizombie"
 	mob_biotypes |= MOB_UNDEAD
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
+	add_traits(list(TRAIT_NOSTAMINA, TRAIT_HEAVYARMOR, TRAIT_NOMOOD, TRAIT_NOHUNGER), SPECIES_TRAIT)
 //	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
 //	blue breathes underwater, need a new specific one for this maybe organ cheque
 //	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
@@ -205,10 +208,10 @@
 				should_update = TRUE
 	else if(amount > 12 MINUTES)
 		for(var/obj/item/bodypart/B in C.bodyparts)
-			if(!B.rotted)
-				B.rotted = TRUE
+			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
+				B.kill_limb()
 				should_update = TRUE
-			if(B.rotted && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 				var/turf/open/T = C.loc
 				if(istype(T))
 					T.pollute_turf(/datum/pollutant/rot, 4)
@@ -224,21 +227,21 @@
 
 /mob/living/carbon/human/species/zizombie/npc/peasant/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/peasant)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/zizombie/peasant
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -3,
+		STAT_ENDURANCE = 6
+	)
+
 /datum/outfit/species/zizombie/npc/peasant/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 9
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 16//the zombies shouldn't get tired after all
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/peasant)
 	H.recalculate_stats(FALSE)
 
 	shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
@@ -265,13 +268,8 @@
 ///////////////////////////////////////////////////////////// EVENTMIN ZIZOMBIES
 /mob/living/carbon/human/species/zizombie/npc/ambush/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -304,23 +302,20 @@
 
 /mob/living/carbon/human/species/zizombie/npc/warrior/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/warrior)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/zizombie/warrior
+	raw_attribute_list = list(
+		STAT_SPEED = -3,
+		STAT_ENDURANCE = 6
+	)
+
 /datum/outfit/species/zizombie/npc/warrior/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 10
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 16//the zizombies shouldn't get tired after all
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/warrior)
 
 	var/loadout = rand(1,6)
 	switch(loadout)
@@ -390,23 +385,14 @@
 ///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE MILITIA
 /mob/living/carbon/human/species/zizombie/npc/militiamen/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/militiamen)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
 /datum/outfit/species/zizombie/npc/militiamen/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 10
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 16//the zizombies shouldn't get tired after all
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/warrior)
 	var/loadout = rand(1,5)
 	switch(loadout)
 		if(1) //zizombie Warrior
@@ -465,29 +451,24 @@
 			cloak = /obj/item/clothing/cloak/stabard/guard
 			head = /obj/item/clothing/head/helmet/kettle
 
-///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE GRENZELHOFT MERCENARIES
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL/after_creation()
+///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE grenzelHOFT MERCENARIES
+/mob/living/carbon/human/species/zizombie/npc/grenzel/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/species/zizombie/npc/GRENZEL)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/grenzel)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/zizombie/grenzel
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = -3,
+		STAT_ENDURANCE = 10
+	)
 
-
-
-/datum/outfit/species/zizombie/npc/GRENZEL/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/grenzel/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 12
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 20//the zizombies shouldn't get tired after all
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/grenzel)
 	var/loadout = rand(1,5)
 	switch(loadout)
 		if(1) //zizombie Warrior

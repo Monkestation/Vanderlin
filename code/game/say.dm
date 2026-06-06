@@ -3,21 +3,6 @@
 	This file has the basic atom/movable level speech procs.
 	And the base of the send_speech() proc, which is the core of saycode.
 */
-GLOBAL_LIST_INIT(freqtospan, list(
-	"[FREQ_SCIENCE]" = "sciradio",
-	"[FREQ_MEDICAL]" = "medradio",
-	"[FREQ_ENGINEERING]" = "engradio",
-	"[FREQ_SUPPLY]" = "suppradio",
-	"[FREQ_SERVICE]" = "servradio",
-	"[FREQ_SECURITY]" = "secradio",
-	"[FREQ_COMMAND]" = "comradio",
-	"[FREQ_AI_PRIVATE]" = "aiprivradio",
-	"[FREQ_SYNDICATE]" = "syndradio",
-	"[FREQ_CENTCOM]" = "centcomradio",
-	"[FREQ_CTF_RED]" = "redteamradio",
-	"[FREQ_CTF_BLUE]" = "blueteamradio"
-	))
-
 /atom/movable/proc/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if(!can_speak())
 		return
@@ -35,16 +20,17 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return TRUE
 
 /atom/movable/proc/send_speech(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, list/message_mods = list(), original_message)
-	var/rendered = compose_message(src, message_language, message, , spans, message_mods)
+	var/rendered = compose_message(src, message_language, message, null, spans, message_mods)
 	for(var/atom/movable/hearing_movable as anything in get_hearers_in_view(range, source))
 		if(!hearing_movable) // theoretically this should use as anything because it shouldnt be able to get nulls but there are reports that it does.
 			stack_trace("somehow there's a null returned from get_hearers_in_view() in send_speech!")
 			continue
 		hearing_movable.Hear(rendered, src, message_language, message, , spans, message_mods, original_message)
+
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), face_name = FALSE)
 	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
 	//Basic span
-	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "say"]'>"
+	var/spanpart1 = "<span class='[radio_freq ? "radio" : "say"]'>"
 	//Start name span.
 	var/spanpart2 = "<span class='name'>"
 	//Radio freq/name display
@@ -53,15 +39,15 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/namepart = "[speaker.GetVoice()]"
 	if(speaker.get_alt_name())
 		namepart = "[speaker.get_alt_name()]"
-	var/colorpart = "<span style='text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+	var/colorpart = null
 	if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
 		if(face_name)
-			namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
+			namepart = "[H.get_visible_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
 		if(H.voice_color)
-			colorpart = "<span style='color:#[H.voice_color];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+			colorpart = "<span style='color:#[H.voice_color];'>"
 	if(speaker.voicecolor_override)
-		colorpart = "<span style='color:#[speaker.voicecolor_override];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+		colorpart = "<span style='color:#[speaker.voicecolor_override];'>"
 	//End name span.
 	var/endspanpart = "</span></span>"
 
@@ -119,14 +105,14 @@ GLOBAL_LIST_INIT(freqtospan, list(
 					// This isn't accurate purposely
 					var/appendage = "Figure"
 					switch(L.client?.prefs.voice_type)
-						if(VOICE_TYPE_FEM)
+						if(VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY)
 							appendage = "Woman"
-						if(VOICE_TYPE_MASC)
+						if(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
 							appendage = "Man"
 					namepart = "Unknown [appendage]"
 				else
 					namepart = "Unknown"
-			spanpart1 = "<span class='smallyell'>"
+			spanpart1 = "<span class='small yell'>"
 	var/languageicon = ""
 	var/datum/language/D = GLOB.language_datum_instances[message_language]
 	if(istype(D) && D.display_icon(src))
@@ -218,12 +204,6 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		return no_quote ? source.quoteless_say_quote(raw_message, spans, message_mods) : source.say_quote(raw_message, spans, message_mods)
 	else
 		return "makes a strange sound."
-
-/proc/get_radio_span(freq)
-	var/returntext = GLOB.freqtospan["[freq]"]
-	if(returntext)
-		return returntext
-	return "radio"
 
 /proc/get_radio_name(freq)
 	return freq

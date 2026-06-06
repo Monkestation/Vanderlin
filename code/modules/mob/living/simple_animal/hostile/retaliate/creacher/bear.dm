@@ -1,7 +1,7 @@
 /datum/status_effect/debuff/staggered
 	id = "staggered"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/staggered
-	effectedstats = list(STATKEY_PER = -2, STATKEY_SPD = -2, STATKEY_CON = -2)
+	effectedstats = list(STAT_PERCEPTION = -2, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
 	duration = 10 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/staggered
@@ -116,13 +116,20 @@
 	remains_type = /obj/effect/decal/remains/bear
 	attack_sound = list('sound/vo/mobs/direbear/direbear_attack1.wav','sound/vo/mobs/direbear/direbear_attack2.wav','sound/vo/mobs/direbear/direbear_attack3.wav')
 	dodgetime = 30
-	aggressive = 1
 	stat_attack = UNCONSCIOUS	//You falling unconcious won't save you, little one..
 	ai_controller = /datum/ai_controller/direbear
+	can_buckle = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/direbear/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
+
+/mob/living/simple_animal/hostile/retaliate/direbear/tamed(mob/user)
+	. = ..()
+	if(.) // was already tamed
+		return
+	if(can_buckle)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/direbear)
 
 /mob/living/simple_animal/hostile/retaliate/direbear/get_sound(input)
 	switch(input)

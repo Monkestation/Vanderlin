@@ -126,6 +126,8 @@
 			for(var/datum/ai_behavior/iter_behavior as anything in controller.current_behaviors)
 				if(iter_behavior.required_distance < minimum_distance)
 					minimum_distance = iter_behavior.required_distance
+			if(ispath(controller.movement_target_source, /datum/action_state_manager))
+				minimum_distance = 1
 
 			if(get_dist(movable_pawn, controller.current_movement_target) <= minimum_distance)
 				continue
@@ -193,7 +195,7 @@
 				if(!(used_ref in falling_back))
 					falling_back |= used_ref
 					falling_back[used_ref] = TRUE
-				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open/transparent) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
+				if(get_turf(movable_pawn) == next_step || (istype(next_step, /turf/open/openspace) && get_turf(movable_pawn) == GET_TURF_BELOW(next_step)))
 					controller.movement_path.Cut(1,2)
 					if(length(controller.movement_path))
 						var/turf/double_checked = controller.movement_path[1]
@@ -242,6 +244,7 @@
 				controller.pathing_attempts++
 				if(controller.pathing_attempts >= max_pathing_attempts)
 					controller.CancelActions()
+					SEND_SIGNAL(controller, COMSIG_AI_PATHING_FAILED)
 					continue
 				// Target doesnt exist anymore or we picked it up already
 				if(QDELETED(controller.current_movement_target) || controller.current_movement_target.loc == movable_pawn)

@@ -3,39 +3,51 @@
 \---------*/
 
 /obj/item/weapon/shovel
-	force = DAMAGE_STAFF - 5
-	force_wielded = DAMAGE_STAFF_WIELD - 3
-	possible_item_intents = list(/datum/intent/mace/strike/shovel)
-	gripped_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel, /datum/intent/axe/chop)
 	name = "shovel"
 	desc = ""
 	icon_state = "shovel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
+	force = DAMAGE_CLUB - 5
+	force_wielded = DAMAGE_CLUB_WIELD - 2
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(SHOVEL_STRIKE)
+	gripped_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE, AXE_CHOP)
+
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	max_integrity = INTEGRITY_STRONG
-	sharpness = IS_BLUNT
-	wdefense = MEDIOCRE_PARRY
-	wlength = WLENGTH_LONG
+	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
-	var/obj/item/natural/dirtclod/heldclod
-	smeltresult = /obj/item/ingot/iron
-	associated_skill = /datum/skill/combat/polearms
-	max_blade_int = 50
+	var/obj/item/natural/clod/heldclod
+	melting_material = /datum/material/iron
+	melt_amount = 75
+	associated_skill = /datum/attribute/skill/combat/polearms
+	max_blade_int = 100
 	grid_width = 32
 	grid_height = 96
-	var/time_multiplier = 1 //multipler to do_after times
+	item_weight = 1.54 KILOGRAMS
 
-/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(user.used_intent.type != /datum/intent/shovelscoop)
 		return
 	if(!istype(A, /obj/structure/snow))
-		return
+		var/obj/item/storage/sack/S = A
+		if(!istype(S))
+			return
+		if(!heldclod)
+			return
+		if(!SEND_SIGNAL(S, COMSIG_TRY_STORAGE_INSERT, src.heldclod, user, FALSE, FALSE))
+			return
+		heldclod = null
+		playsound(S,'sound/items/empty_shovel.ogg', 100, TRUE)
+		update_appearance(UPDATE_ICON_STATE)
+		return TRUE
 	var/turf/target_turf = get_turf(A)
 	playsound(A,'sound/items/dig_shovel.ogg', 100, TRUE)
 	qdel(A)
@@ -60,19 +72,9 @@
 
 /obj/item/weapon/shovel/update_icon_state()
 	. = ..()
-	icon_state = "[heldclod ? "dirt" : ""][initial(icon_state)]"
-
-/datum/intent/mace/strike/shovel
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("strikes", "hits")
-	hitsound = list('sound/combat/hits/blunt/shovel_hit.ogg', 'sound/combat/hits/blunt/shovel_hit2.ogg', 'sound/combat/hits/blunt/shovel_hit3.ogg')
-	chargetime = 0
-	penfactor = 10
-	swingdelay = 0
-	icon_state = "instrike"
-	misscost = 5
-	item_damage_type = "blunt"
+	icon_state = "[heldclod ? "[heldclod.clod_type]" : ""][initial(icon_state)]"
+	if(gripsprite)
+		toggle_state = "[heldclod ? "[heldclod.clod_type]" : ""][initial(icon_state)]"
 
 /datum/intent/shovelscoop
 	name = "scoop"
@@ -95,7 +97,7 @@
 	item_damage_type = "blunt"
 
 
-/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(. && heldclod && get_turf(M))
 		heldclod.forceMove(get_turf(M))
@@ -116,16 +118,16 @@
 		if(istype(T, /turf/open/floor/dirt))
 			var/turf/open/floor/dirt/D = T
 			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
-			if(!do_after(user, 5 SECONDS * time_multiplier, D))
+			if(!do_after(user, 5 SECONDS * toolspeed, D))
 				return
 			new /obj/structure/irrigation_channel(D)
 			return TRUE
 
 	else if(user.used_intent.type == /datum/intent/shovelscoop)
 		. = TRUE
-		if(istype(T, /turf/open/floor/dirt))
+		if(istype(T, /turf/open/floor/dirt) || istype(T, /turf/open/floor/sand))
 			var/obj/structure/closet/dirthole/holie = locate() in T
-			if(heldclod)
+			if(heldclod && heldclod.clod_type == "dirt")
 				if(holie && holie.stage < 4)
 					holie.attackby(src, user)
 				else
@@ -138,18 +140,25 @@
 					playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
 					update_appearance(UPDATE_ICON_STATE)
 					return
-			else
-				if(holie)
-					holie.attackby(src, user)
-				else
-					if(istype(T, /turf/open/floor/dirt/road))
-						new /obj/structure/closet/dirthole(T)
+			else if(!heldclod)
+				if(istype(T, /turf/open/floor/dirt/road) || istype(T, /turf/open/floor/dirt))
+					if(holie)
+						holie.attackby(src, user)
+						return
 					else
-						T.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
-					heldclod = new(src)
+						if(istype(T, /turf/open/floor/dirt/road))
+							new /obj/structure/closet/dirthole(T)
+						else
+							T.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
+						heldclod = new /obj/item/natural/clod/dirt(src)
+						playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+						update_appearance(UPDATE_ICON_STATE)
+						return
+				else
+					heldclod = new /obj/item/natural/clod/sand(src)
 					playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
 					update_appearance(UPDATE_ICON_STATE)
-			return
+					return
 		if(heldclod)
 			if(istype(T, /turf/open/water))
 				qdel(heldclod)
@@ -220,22 +229,25 @@
 // --------- SPADE -----------
 
 /obj/item/weapon/shovel/small
-	force = DAMAGE_STAFF - 8
-	force_wielded = DAMAGE_STAFF_WIELD - 10
-	possible_item_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel)
 	name = "spade"
 	icon_state = "spade"
 	item_state = "spade"
+	force = DAMAGE_STAFF - 8
+	force_wielded = DAMAGE_STAFF_WIELD - 10
+	wdefense = BAD_PARRY
+	wlength = WLENGTH_SHORT
+	possible_item_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE)
+	sharpness = IS_BLUNT
+	max_blade_int = 0
+
 	dropshrink = 1
 	gripped_intents = null
-	wlength = WLENGTH_SHORT
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	wdefense = BAD_PARRY
-	max_blade_int = 0
 	grid_height = 64
-	time_multiplier = 2
+	toolspeed = 2
 	smeltresult = null
+	item_weight = 792 GRAMS
 
 /obj/item/weapon/shovel/small/getonmobprop(tag)
 	. = ..()
@@ -246,6 +258,50 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
+// --------- BATTLESHOVEL -----------
+
+/obj/item/weapon/shovel/necran
+	name = "necran battle shovel"
+	desc = "This polearm esque great-shovel is granted for the completion of a gravetenders final initiation rites, for the wielder of this shovel shall rise no more, and with it in hand, neither shall their quarry."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "battleshovel"
+	SET_BASE_PIXEL(-16, -16)
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	bigboy = TRUE
+	gripsprite = TRUE
+	experimental_onhip = TRUE
+	experimental_onback = TRUE
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR_WIELD
+	wdefense = GREAT_PARRY
+	wbalance = EASY_TO_DODGE
+	wlength = WLENGTH_GREAT
+	sharpness = IS_SHARP
+	max_blade_int = 200
+
+	dropshrink = 0.75
+	gripped_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE, POLEARM_CHOP)
+	grid_height = 96
+	grid_width = 64
+	toolspeed = 0.8
+	smeltresult = null
+
+/obj/item/weapon/shovel/necran/Initialize()
+	. = ..()
+	AddElement(/datum/element/walking_stick)
+
+/obj/item/weapon/shovel/necran/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.5,"sx" = -5,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.5,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -3,"nx" = 4,"ny" = -3,"wx" = 0,"wy" = -3,"ex" = 2,"ey" = -1,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
 
 // --------- BURIAL SHROUD -----------
 
@@ -255,12 +311,13 @@
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "shroud_folded"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 125 GRAMS
 	var/unfoldedbag_path = /obj/structure/closet/burial_shroud
 
-/obj/item/burial_shroud/attack_self(mob/user, params)
+/obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity)
+/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))
@@ -333,12 +390,13 @@
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 184 GRAMS
 	var/unfoldedbag_path = /obj/structure/closet/body_bag
 
-/obj/item/bodybag/attack_self(mob/user, params)
+/obj/item/bodybag/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/bodybag/afterattack(atom/target, mob/user, proximity)
+/obj/item/bodybag/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))

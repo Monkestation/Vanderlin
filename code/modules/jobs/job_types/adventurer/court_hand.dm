@@ -1,5 +1,5 @@
 /datum/job/adventurer/courtagent
-	title = "Court Agent"
+	title = JOB_COURT_AGENT
 	tutorial = "Whether acquired by merit, shrewd negotiation or fulfilled bounties, \
 	you have found yourself under the underhanded employ of the Hand. \
 	Fulfill desires and whims of the court that they would rather not be publicly known. \
@@ -9,6 +9,8 @@
 	total_positions = 0
 	spawn_positions = 2
 	department_flag = NOBLEMEN
+
+	job_bitflag = BITFLAG_GARRISON // counts for antag shit
 
 	outfit = null
 	outfit_female = null

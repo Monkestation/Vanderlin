@@ -17,8 +17,8 @@
 	hud_type = /datum/hud/human
 
 /mob/living/carbon/monkey/Initialize(mapload, cubespawned=FALSE, mob/spawner)
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	// add_verb(src, /mob/living/proc/mob_sleep)
+	add_verb(src, /mob/living/proc/lay_down)
 
 	if(unique_name) //used to exclude pun pun
 		gender = pick(MALE, FEMALE)
@@ -57,13 +57,6 @@
 	internal_organs += new /obj/item/organ/stomach
 	..()
 
-/mob/living/carbon/monkey/on_reagent_change()
-	. = ..()
-	remove_movespeed_modifier(MOVESPEED_ID_MONKEY_REAGENT_SPEEDMOD, TRUE)
-	var/amount
-	if(amount)
-		add_movespeed_modifier(MOVESPEED_ID_MONKEY_REAGENT_SPEEDMOD, TRUE, 100, override = TRUE, multiplicative_slowdown = amount)
-
 /mob/living/carbon/monkey/updatehealth(amount)
 	. = ..()
 	var/slow = 0
@@ -79,15 +72,6 @@
 	if (bodytemperature < 283.222)
 		slow += ((283.222 - bodytemperature) / 10) * 1.75
 	add_movespeed_modifier(MOVESPEED_ID_MONKEY_TEMPERATURE_SPEEDMOD, TRUE, 100, override = TRUE, multiplicative_slowdown = slow)
-
-/mob/living/carbon/monkey/Stat()
-	..()
-	if(!client)
-		return
-	if(statpanel("Status"))
-		stat(null, "Intent: [a_intent]")
-		stat(null, "Move Mode: [m_intent]")
-	return
 
 /mob/living/carbon/monkey/IsAdvancedToolUser()//Unless its monkey mode monkeys can't use advanced tools
 	if(mind)
@@ -114,4 +98,3 @@
 	return 1
 
 /mob/living/carbon/monkey/angry
-	aggressive = TRUE

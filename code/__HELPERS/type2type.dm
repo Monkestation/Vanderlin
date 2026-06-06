@@ -10,7 +10,7 @@
 
 //Splits the text of a file at seperator and returns them in a list.
 //returns an empty list if the file doesn't exist
-/world/proc/file2list(filename, seperator="\n", trim = TRUE)
+/proc/file2list(filename, seperator="\n", trim = TRUE)
 	if (trim)
 		return splittext(trim(file2text(filename)),seperator)
 	return splittext(file2text(filename),seperator)
@@ -282,7 +282,7 @@
 	if(bpc & CHEST)
 		covered_parts |= list(BODY_ZONE_CHEST)
 	if(bpc & GROIN)
-		covered_parts |= list(BODY_ZONE_CHEST)
+		covered_parts |= list(BODY_ZONE_PRECISE_GROIN)
 	if(bpc & VITALS)
 		covered_parts |= list(BODY_ZONE_PRECISE_STOMACH)
 
@@ -454,7 +454,7 @@
 /proc/color_hex2color_matrix(string)
 	var/length = length(string)
 	if((length != 7 && length != 9) || length != length_char(string))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	var/r = hex2num(copytext(string, 2, 4))/255
 	var/g = hex2num(copytext(string, 4, 6))/255
 	var/b = hex2num(copytext(string, 6, 8))/255
@@ -462,7 +462,7 @@
 	if(length == 9)
 		a = hex2num(copytext(string, 8, 10))/255
 	if(!isnum(r) || !isnum(g) || !isnum(b) || !isnum(a))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	return list(r,0,0,0, 0,g,0,0, 0,0,b,0, 0,0,0,a, 0,0,0,0)
 
 //will drop all values not on the diagonal

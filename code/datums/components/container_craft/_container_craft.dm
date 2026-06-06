@@ -26,7 +26,7 @@
 		var/datum/container_craft/singleton = GLOB.container_craft_to_singleton[recipe]
 		if(!singleton)
 			continue
-		if(is_abstract(singleton))
+		if(IS_ABSTRACT(singleton))
 			continue
 
 		if(singleton.craft_priority)
@@ -39,13 +39,15 @@
 	on_craft_finished = success
 	RegisterSignal(parent, COMSIG_STORAGE_CLOSED, PROC_REF(async_start))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(async_start))
-	if(temperature_listener)
-		RegisterSignal(parent, COMSIG_REAGENTS_EXPOSE_TEMPERATURE, PROC_REF(async_start))
+	if(temperature_listener && isatom(parent))
+		var/atom/parent_atom = parent
+		RegisterSignal(parent_atom.reagents, COMSIG_REAGENTS_TEMP_CHANGE, PROC_REF(async_start))
 
 /**
  * Asynchronously start crafting
  */
 /datum/component/container_craft/proc/async_start(datum/source, mob/user)
+	SIGNAL_HANDLER
 	INVOKE_ASYNC(src, PROC_REF(attempt_crafts), source, user)
 
 /**
@@ -56,6 +58,9 @@
 	var/obj/item/host = parent
 	if(!length(host.contents))
 		return
+
+	if(!istype(user))
+		user = get_mob_by_ckey(host.fingerprintslast)
 
 	// Build list of all items in container by type
 	for(var/obj/item/item in host.contents)

@@ -7,7 +7,7 @@
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "smoke"
 	SET_BASE_PIXEL(-32, -32)
-	opacity = 1
+	opacity = TRUE
 	layer = FLY_LAYER
 	plane = GAME_PLANE_UPPER
 	anchored = TRUE
@@ -186,6 +186,8 @@
 /obj/effect/particle_effect/smoke/chem
 	lifetime = 10
 
+/obj/effect/particle_effect/smoke/chem/fast
+	lifetime = 3
 
 /obj/effect/particle_effect/smoke/chem/process()
 	if(..())
@@ -212,6 +214,9 @@
 	return 1
 
 
+
+/datum/effect_system/smoke_spread/chem/fast
+	effect_type = /obj/effect/particle_effect/smoke/chem/fast
 
 /datum/effect_system/smoke_spread/chem
 	var/obj/chemholder

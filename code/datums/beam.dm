@@ -188,7 +188,7 @@
 			Pixel_y %= 32
 
 		var/turf/check_turf = locate(final_x, final_y, origin.z)
-		var/is_open_space = istype(check_turf, /turf/open/transparent/openspace)
+		var/is_open_space = istype(check_turf, /turf/open/openspace)
 
 		for(var/z_level in z_levels)
 			if(z_level < origin.z && !is_open_space)

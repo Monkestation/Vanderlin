@@ -3,7 +3,7 @@
 /datum/admins/proc/admin_bless(mob/living/carbon/human/M in GLOB.mob_list)
 	set name = "Bless"
 	set desc = "Bless or lift a blessing from a character"
-	set category = "GameMaster"
+	set category = "GameMaster.Gods"
 
 	if(!check_rights())
 		return FALSE

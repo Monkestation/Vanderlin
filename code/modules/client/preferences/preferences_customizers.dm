@@ -1,6 +1,6 @@
 /datum/preferences/proc/validate_customizer_entries()
 	customizer_entries = SANITIZE_LIST(customizer_entries)
-	listclearnulls(customizer_entries)
+	list_clear_nulls(customizer_entries)
 	var/datum/species/species = pref_species
 	var/list/customizers = species.customizers
 	/// Check if we have any customizer entries that don't match.
@@ -181,7 +181,7 @@
 	dat += print_customizers_page()
 	var/datum/browser/popup = new(user, "customization", "<div align='center'>Customization</div>", 630, 730)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/get_hair_color()
 	var/datum/customizer_entry/hair/entry = get_customizer_entry_of_type(/datum/customizer_entry/hair/head)
@@ -197,12 +197,11 @@
 	else
 		return "FFFFFF"
 
-/datum/preferences/proc/get_eye_color()
+/datum/preferences/proc/get_eye_color(side = RIGHT_SIDE)
 	var/datum/customizer_entry/organ/eyes/entry = get_customizer_entry_of_type(/datum/customizer_entry/organ/eyes)
-	if(entry)
-		return entry.eye_color
-	else
+	if(!entry)
 		return "FFFFFF"
+	return (side == RIGHT_SIDE) ? entry.right_eye_color : entry.left_eye_color
 
 /datum/preferences/proc/get_chest_color()
 	var/list/zone_list = body_markings[BODY_ZONE_CHEST]

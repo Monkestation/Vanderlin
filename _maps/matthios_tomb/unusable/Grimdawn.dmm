@@ -16,7 +16,7 @@
 /area/under/tomb/indoors)
 "i" = (
 /obj/structure/bed/shit,
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors)
 "l" = (
@@ -31,7 +31,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors)
 "z" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "D" = (
 /obj/effect/decal/cleanable/vomit/old,

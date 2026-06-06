@@ -27,12 +27,12 @@
 /datum/component/bane/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_ITEM_AFTERATTACK)
 
-/datum/component/bane/proc/speciesCheck(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/component/bane/proc/speciesCheck(obj/item/source, atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag || !is_species(target, speciestype))
 		return
 	activate(source, target, user)
 
-/datum/component/bane/proc/mobCheck(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/component/bane/proc/mobCheck(obj/item/source, atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag || !istype(target, mobtype))
 		return
 	activate(source, target, user)

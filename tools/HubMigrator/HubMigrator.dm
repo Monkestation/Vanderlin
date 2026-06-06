@@ -123,17 +123,17 @@
 			medal_data[key][medal] = out_date.Join("/")
 
 	var/list/giant_list_of_ckeys = params2list(world.GetScores(null,null,hub_address,hub_password))
-	world << "Found [giant_list_of_ckeys.len] as upper scores count."
+	world << "Found [length(giant_list_of_ckeys)] as upper scores count."
 
 	var/list/scores_data = list()
 	for(var/score in valid_scores)
 		var/received_count = 0
 		while(1)
 			world << "Fetching [score] scores, offset :[received_count] of [score]"
-			var/list/batch = params2list(world.GetScores(giant_list_of_ckeys.len,received_count,score,hub_address,hub_password))
-			world << "Fetched [batch.len] scores for [score]."
-			received_count += batch.len
-			if(!batch.len)
+			var/list/batch = params2list(world.GetScores(length(giant_list_of_ckeys),received_count,score,hub_address,hub_password))
+			world << "Fetched [length(batch)] scores for [score]."
+			received_count += length(batch)
+			if(!length(batch))
 				break
 			for(var/value in batch)
 				var/key = ckey(value)
@@ -143,19 +143,19 @@
 					world << "NUMBER"
 					return
 				scores_data[key][score] = batch[value]
-			if(batch.len < 1000) //Out of scores anyway
+			if(length(batch) < 1000) //Out of scores anyway
 				break
 
 	var/i = 1
 	for(var/key in giant_list_of_ckeys)
-		world << "Generating entries for [key] [i]/[giant_list_of_ckeys.len]"
+		world << "Generating entries for [key] [i]/[length(giant_list_of_ckeys)]"
 		var/keyv = ckey(key) //Checkinf if you don't have any manually entered drop tables; juniors on your hub is good idea.
 		var/list/values = list()
 		for(var/cheevo in medal_data[keyv])
 			values += "('[keyv]','[cheevo]',1, '[medal_data[keyv][cheevo]]')"
 		for(var/score in scores_data[keyv])
 			values += "('[keyv]','[score]',[scores_data[keyv][score]],now())"
-		if(values.len)
+		if(length(values))
 			var/list/keyline = list("INSERT INTO [ach](ckey,achievement_key,value,last_updated) VALUES")
 			keyline += values.Join(",")
 			keyline += ";"

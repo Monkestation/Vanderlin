@@ -96,6 +96,19 @@
 	spawning = 1
 	friction = 0.75
 
+/particles/smoke/cig/big/steam
+	name = "cig_big"
+	icon_state = list("steam_1" = 1, "steam_2" = 2, "steam_3" = 2)
+	gravity = list(0, 0.5, 0)
+	velocity = list(0, 0.1, 0)
+	lifespan = generator(GEN_NUM, 1 SECONDS, 3.5 SECONDS)
+	fade = 1 SECONDS
+	grow = 0.1
+	scale = 0.75
+	spawning = 1
+	friction = 0.75
+	position = generator(GEN_VECTOR, list(-6, -6, 0), list(6, 6, 0), NORMAL_RAND)
+
 /particles/smoke/ash
 	name = "cig_ash"
 	icon_state = list("ash_1" = 2, "ash_2" = 2, "ash_3" = 1, "smoke_1" = 3, "smoke_2" = 2)

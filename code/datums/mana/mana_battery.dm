@@ -22,7 +22,7 @@
 	return /datum/mana_pool/mana_battery/mana_crystal
 
 // when we hit ourself with left click, we draw mana FROM the battery.
-/obj/item/mana_battery/attack_self(mob/user, modifiers)
+/obj/item/mana_battery/attack_self(mob/user, list/modifiers)
 	. = ..()
 
 	if (.)
@@ -46,7 +46,7 @@
 		mana_pool.transfer_specific_mana(user.mana_pool, drawn_mana, decrement_budget = TRUE)
 
 // when we hit ourself with right click, however, we send mana TO the battery.
-/obj/item/mana_battery/attack_hand_secondary(mob/user, params)
+/obj/item/mana_battery/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -71,6 +71,8 @@
 	name = MAGIC_MATERIAL_NAME + " crystal"
 	desc = "Crystalized mana." //placeholder desc
 	icon = 'icons/obj/crystals.dmi' //placeholder
+	grind_results = list(/datum/reagent/toxin/plasma = 40)
+	indexed = TRUE
 
 // Do not use, basetype
 /datum/mana_pool/mana_battery/mana_crystal
@@ -91,7 +93,7 @@
 	desc = "A stabilized Primordial Quartz Crystal, one of the few objects capable of stably storing mana without binding."
 	icon_state = "standard"
 
-/obj/item/mana_battery/mana_crystal/standard/attackby(obj/item/I, mob/living/user, params)
+/obj/item/mana_battery/mana_crystal/standard/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!istype(I, /obj/item/weapon/knife))
 		return
@@ -154,7 +156,7 @@
 /obj/item/clothing/neck/mana_star/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_star
 
-/obj/item/clothing/neck/mana_star/attack_self(mob/user, modifiers) // you can only draw by default.
+/obj/item/clothing/neck/mana_star/attack_self(mob/user, list/modifiers) // you can only draw by default.
 	. = ..()
 
 	if (.)
@@ -191,7 +193,7 @@
 		var/datum/attunement/attunement = mana_pool.network_attunement
 		. += span_blue("It is attuned to [initial(attunement.name)]")
 
-/obj/item/mana_battery/mana_crystal/small/focus/attackby(obj/item/I, mob/living/user, params)
+/obj/item/mana_battery/mana_crystal/small/focus/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!istype(I, /obj/item/gem))
 		return
@@ -218,6 +220,15 @@
 	amount = 0
 	ethereal_recharge_rate = 0
 	intrinsic_recharge_sources = MANA_ALL_LEYLINES
+	var/transfer_threshold = 0
+
+/datum/mana_pool/mana_pylon/transfer_specific_mana(datum/mana_pool/other_pool, amount_to_transfer, decrement_budget = TRUE)
+	if(istype(other_pool, /datum/mana_pool/mana_pylon))
+		if(amount - amount_to_transfer < transfer_threshold)
+			amount_to_transfer = max(0, amount - transfer_threshold)
+		if(!amount_to_transfer)
+			return 0
+	return ..()
 
 /datum/mana_pool/mana_fountain
 	maximum_mana_capacity = 1000

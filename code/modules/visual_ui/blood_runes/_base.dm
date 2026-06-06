@@ -45,7 +45,7 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	layer = VISUAL_UI_BUTTON
 	offset_x = 111
 	offset_y = 39
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 /obj/abstract/visual_ui_element/hoverable/draw_runes_manual/Click()
 	flick("rune_manual-click", src)
@@ -63,7 +63,7 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	layer = VISUAL_UI_BUTTON
 	offset_x = 111
 	offset_y = 39
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 /obj/abstract/visual_ui_element/hoverable/draw_runes_guided/Click()
 	if (!hover_state)
@@ -71,11 +71,9 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	flick("rune_guide-click", src)
 	var/mob/M = get_user()
 	if (M)
-
 		var/list/available_runes = list()
 		var/i = 1
-		for(var/blood_spell in subtypesof(/datum/rune_spell))
-			var/datum/rune_spell/instance = blood_spell
+		for(var/datum/rune_spell/instance as anything in subtypesof(/datum/rune_spell))
 			if (initial(instance.secret))
 				continue
 			available_runes.Add("[initial(instance.name)] - \Roman[i]")
@@ -100,7 +98,7 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	layer = VISUAL_UI_BUTTON
 	offset_x = 95
 	offset_y = 39
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 /obj/abstract/visual_ui_element/hoverable/erase_runes/Click()
 	flick("rune_erase-click", src)
@@ -137,7 +135,7 @@ GLOBAL_LIST_INIT(blood_communion, list())
 	layer = VISUAL_UI_BUTTON
 	offset_x = 143
 	offset_y = 39
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 	move_whole_ui = TRUE
 

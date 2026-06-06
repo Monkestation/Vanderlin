@@ -21,15 +21,19 @@
 
 /datum/action/cooldown/spell/strengthen_undead/cast(mob/living/cast_on)
 	. = ..()
+	if(cast_on.can_block_magic(antimagic_flags))
+		to_chat(owner, span_warning("A distortive field prevents your magic taking hold!"))
+		return
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		var/obj/item/bodypart/affecting = cast_on.get_bodypart(check_zone(owner.zone_selected))
 		if(affecting)
 			if(affecting.heal_damage(50, 50))
 				cast_on.update_damage_overlays()
-			if(affecting.heal_wounds(50))
+			if(affecting.heal_wounds(50, src))
+				record_round_statistic(STATS_WOUNDS_FIXED)
 				cast_on.update_damage_overlays()
 		cast_on.visible_message(span_danger("[cast_on] reforms under the vile energy!"), span_notice("I'm remade by dark magic!"))
 	else
 		cast_on.visible_message(span_info("Necrotic energy floods over [cast_on]!"), span_userdanger("I feel colder as the dark energy floods into me!"))
 		cast_on.Paralyze(5 SECONDS)
-		cast_on.adjustBruteLoss(20)
+		cast_on.adjustBruteLoss(20, damage_type = BCLASS_LASHING)

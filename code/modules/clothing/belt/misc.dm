@@ -18,6 +18,12 @@
 		for(var/obj/item/I in things)
 			STR.remove_from_storage(I, get_turf(src))
 
+/obj/item/storage/belt/leather/double
+	name = "pair of belts"
+	desc = "A pair of slim black belts worn around the waist."
+	icon_state = "belt_double"
+	item_state = "belt_double"
+
 /obj/item/storage/belt/leather/assassin // Assassin's super edgy and cool belt can carry normal items (for poison vial, lockpick).
 	empty_when_dropped = FALSE
 	component_type = /datum/component/storage/concrete/grid/belt/assassin
@@ -63,8 +69,8 @@
 // Bandit's belt starts with a bandage and a key to their guildhall.
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
-		/obj/item/natural/cloth,
-		/obj/item/key/mercenary,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/storage/keyring/mercenary,
 	)
 
 /obj/item/storage/belt/leather/mercenary/shalal
@@ -117,7 +123,7 @@
 	salvage_result = /obj/item/rope
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
-/obj/item/storage/belt/leather/rope/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/rope/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -146,7 +152,7 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
-/obj/item/storage/belt/leather/cloth/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/cloth/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -175,6 +181,18 @@
 	component_type = /datum/component/storage/concrete/grid/coin_pouch
 	grid_height = 64
 	grid_width = 32
+
+/obj/item/storage/belt/pouch/medicine
+	populate_contents = list(
+		/obj/item/needle,
+		/obj/item/natural/bundle/cloth/bandage/full,
+		/obj/item/reagent_containers/glass/bottle/healthpot
+	)
+
+/obj/item/storage/belt/pouch/food
+	populate_contents = list(
+		/obj/item/reagent_containers/food/snacks/hardtack,
+	)
 
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
 	. = ..()
@@ -278,14 +296,17 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth
 
-/obj/item/storage/backpack/satchel/heartfelt
-	populate_contents = list(
-		/obj/item/natural/feather,
-		/obj/item/paper/heartfelt,
-	)
+/obj/item/storage/backpack/satchel/cloth/big
+	name = "cloth rucksack"
+	desc = "A large but rudimentary cloth sack strapped to the back for storing a medium number of items."
+	icon_state = "rucksack"
+	item_state = "rucksack"
+	salvage_result = /obj/item/natural/cloth
+	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
+	examine_name = "satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
 	icon_state = "osatchel"
 	item_state = "osatchel"
@@ -329,13 +350,16 @@
 	icon_state = "artibackpack"
 	item_state = "artibackpack"
 	resistance_flags = FIRE_PROOF
-	sewrepair = FALSE
+	sewrepair = null
 	//for those curious, yes the artibackpack preserves organs and food. Check _organ.dm and snacks.dm
 
 /obj/item/storage/backpack/backpack/artibackpack/porter
 	name = "humdrum"
 	desc = "A absurdly oversized backpack with complex bronze pipework coursing through it. It hums and vibrates constantly."
-	sewrepair = TRUE //Kobold thing, trust.
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 2
+	dyeable = TRUE //Kobold thing, trust.
 	component_type = /datum/component/storage/concrete/grid/porter
 
 /obj/item/storage/backpack/satchel/surgbag
@@ -355,6 +379,7 @@
 		/obj/item/weapon/surgery/cautery,
 		/obj/item/natural/worms/leech/parasite,
 		/obj/item/weapon/surgery/hammer,
+		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
 
@@ -385,7 +410,6 @@
 		/obj/item/weapon/surgery/bonesetter,
 		/obj/item/weapon/surgery/cautery,
 		/obj/item/natural/worms/leech,
-		/obj/item/natural/worms/leech,
 		/obj/item/weapon/surgery/hammer,
 		/obj/item/natural/bundle/fibers/full,
 	)
@@ -404,7 +428,10 @@
 	item_state = "knife"
 	strip_delay = 20
 	var/max_storage = 8
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	component_type = /datum/component/storage/concrete/grid/belt/knife_belt
 	empty_when_dropped = FALSE
 
@@ -428,7 +455,7 @@
 		if(length(contents) < max_storage)
 			return SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, FALSE)
 
-/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, params)
+/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, list/modifiers)
 	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
 		if(SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, user, TRUE))
 			to_chat(usr, span_notice("I discreetly slip [A] into [src]."))
@@ -437,7 +464,7 @@
 		return TRUE
 	. = ..()
 
-/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, params)
+/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, list/modifiers)
 	if(length(contents))
 		var/list/knives = list()
 		SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE_TYPE, /obj/item/weapon/knife/throwingknife, drop_location(), amount = 1, check_adjacent = TRUE, user = user, inserted = knives)
@@ -519,7 +546,7 @@
 	max_integrity = 300
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 	component_type = /datum/component/storage/concrete/grid/headhook
 
@@ -535,12 +562,12 @@
 	max_integrity = 400
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/bronze
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
 
 
-/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, params)
+/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, list/modifiers)
 	. = ..()
 	user.visible_message("[user] tries to put [H] into [src].", "You try to put [H] into [src].")
 
@@ -562,6 +589,36 @@
 	equip_sound = 'sound/blank.ogg'
 	sellprice = 160
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
+
+
+/obj/item/storage/belt/leather/breechcloth
+	name = "belt with breechcloth"
+	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechcloth"
+	sewrepair = FALSE
+	detail_tag = "_belt"
+
+/obj/item/storage/belt/leather/breechcloth/blackbelt
+	name = "black belt with breechcloth"
+	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechclothalt"
+	sewrepair = FALSE
+	detail_tag = "_belt"
+
+/obj/item/storage/belt/leather/slayer
+	name = "rugged dwarven belt"
+	desc = "The golden beard of the face plate doubles as a codpiece."
+	icon_state = "slayer"
+	item_state = "slayer"
+	sellprice = 50
+	detail_tag = "_belt"
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/shawl
+	name = "shawl"
+	desc = "A cloth shawl."
+	icon_state = "beltshawl"
+	item_state = "beltshawl"

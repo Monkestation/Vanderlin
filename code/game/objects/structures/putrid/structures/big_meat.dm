@@ -57,7 +57,7 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 	evolving_mob.client?.eye = picker
 	picker.show_evolution_options()
 
-/obj/structure/meatvine/papameat/attackby(obj/item/I, mob/user, params)
+/obj/structure/meatvine/papameat/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!master)
 		return ..()
 
@@ -144,5 +144,5 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 	if(!istype(sacrifice) || sacrifice.stat == DEAD)
 		return FALSE
 	visible_message(span_danger("[sacrifice] throws itself into [src], being consumed alive!"))
-	sacrifice.adjustBruteLoss(sacrifice.health + 10)
+	sacrifice.adjustBruteLoss(sacrifice.health + 10, damage_type = BCLASS_BITE)
 	return consume_mob(sacrifice)
