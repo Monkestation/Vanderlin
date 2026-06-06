@@ -31,3 +31,38 @@
   - rscadd: new tailorable clothes to mirror new items in the loadout shop
   - rscadd: new smelt results for items that previously lacked them like ancient armors
   - rscadd: new gold armor set that can be smithed with gold ingots
+2026-06-06:
+  CheffieGithub:
+  - bugfix: Slurbow can be drawn while moving again
+  - rscadd: Added fortune to stat panel stats
+  ModDownloading:
+  - rscadd: The Holy Pilgrim advclass for Pilgrim, a non-combat miracle caster.
+  - balance: Ambush spawns no longer have rune-locked armor.
+  - rscadd: Unlucky, a vice quirk that gives you -5 to -9 Fortune.
+  - rscadd: Skill Bereft, a vice quirk that gives you -30 in all skills.
+  - rscadd: Wanted quirk can now let you be both an Outlaw and a Heretic at the same
+      time.
+  - balance: Packmule quirk costs 4 points instead of 8.
+  - rscadd: Khans and Nomads now have 20 points in Wrestling and Unarmed instead of
+      0.
+  - rscadd: Beggars now have 10 to 20 Crafting skill.
+  - bugfix: Beggar stats restored to their previous (higher) values from pre skill-change.
+  - code_imp: Removed redundant lines from class code.
+  PotatoTomahto:
+  - balance: potato tries to balance medical
+  Somniworld:
+  - qol: all sacrestant classes now have a keyring.
+  - balance: Psyaltrists no longer have expert Miracle skill, since they can't use
+      the damned thing.
+  - sound: The Psyaltrist now uses the sacrestant Cmode theme.
+  Sulaboy:
+  - bugfix: Jacksberries now require 20 farming skill or the Expert Forager trait
+      to identify.
+  The-Awful:
+  - rscdel: Removed barbarian faith restriction.
+  dwasint:
+  - rscadd: notice board, its now the central place to accept and turn in quests typically
+      found in the guild.
+  - rscadd: custom quests, players can create a pledge to make a custom quest. Which
+      can be handed in at notice boards
+  - bugfix: harlequin disguise has been reworked entirely and is no longer an ability
