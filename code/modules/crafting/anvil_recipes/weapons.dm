@@ -469,6 +469,7 @@
 	created_item = /obj/item/weapon/polearm/spear/javelin/steel
 	output_amount = 2
 	category = "Ammo"
+
 /datum/anvil_recipe/weapons/steel/quarterstaff
 	name = "Steel Quarterstaff (+ Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
