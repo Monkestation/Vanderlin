@@ -53,6 +53,7 @@
 
 /obj/item/clothing/face/spectacles/inq
 	name = "inquisitorial spectacles"
+	examine_name = "crimson spectacles"
 	icon_state = "bglasses"
 	desc = "Spectacles evoking the stained glass of Grenzelhoftian cathedrals. See all evil."
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
@@ -123,6 +124,11 @@
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
 
+/obj/item/clothing/face/sack/surgsack
+	name = "physicker's masked sack"
+	desc = "A brown sack, with a physickers mask on top of it, likely for more coverage."
+	icon_state = "surgsackmask"
+
 /obj/item/clothing/face/sack/psy
 	name = "psydonian sack mask"
 	desc = "An ordinary brown sack. This one has eyeholes cut into it, bearing a crude chalk drawing of Psydon's cross upon its visage. Unsettling for most."
@@ -154,14 +160,13 @@
 	equip_sound = 'sound/items/confessormaskon.ogg'
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	var/worn = FALSE
 	slot_flags = ITEM_SLOT_MASK
+	var/worn = FALSE
 
 /obj/item/clothing/face/facemask/steel/confessor/examine(mob/user) // informs inquisition members that nocshades can be installed in the mask.
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_INQUISITION) && !istype(src, /obj/item/clothing/face/facemask/steel/confessor/lensed))
 		. += span_info("This mask may have nocshades installed into it.")
-
 
 /obj/item/clothing/face/facemask/steel/confessor/equipped(mob/living/carbon/human/user, slot)
 	. = ..()

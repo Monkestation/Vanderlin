@@ -102,7 +102,6 @@
 
 	var/bubble_icon = "default" //what icon the mob uses for speechbubbles
 
-	var/last_bumped = 0
 	var/unique_name = 0 //if a mob's name should be appended with an id when created e.g. Mob (666)
 
 	var/list/butcher_results = null //these will be yielded from butchering with a probability chance equal to the butcher item's effectiveness
@@ -113,7 +112,13 @@
 
 	var/stun_absorption = null //converted to a list of stun absorption sources this mob has when one is added
 
-	var/blood_volume = BLOOD_VOLUME_NORMAL //how much blood the mob has
+	/// How much blood the mob currently has.
+	/// Don't read directly, use get_blood_volume() and get_blood_volume(apply_modifiers = TRUE).
+	/// Don't write directly either, use set_blood_volume() and adjust_blood_volume().
+	/// Also don't initialize this. Initialize default_blood_volume instead.
+	var/blood_volume = 0
+	/// The default blood volume of the mob. Used primarily for healing bloodloss.
+	var/default_blood_volume = BLOOD_VOLUME_NORMAL
 
 	var/see_override = 0 //0 for no override, sets see_invisible = see_override in silicon & carbon life process via update_sight()
 
@@ -133,8 +138,6 @@
 
 	var/list/implants = null
 
-	var/datum/riding/riding_datum
-
 	var/datum/language/selected_default_language
 
 	var/last_words	//used for database logging
@@ -145,6 +148,9 @@
 	var/losebreath = 0
 
 	var/slowed_by_drag = TRUE //Whether the mob is slowed down when dragging another prone mob
+
+	/// Is this mob allowed to be buckled/unbuckled to/from things?
+	var/can_buckle_to = TRUE
 
 	///The height offset of a mob's maptext due to their current size.
 	var/body_maptext_height_offset = 0
@@ -181,7 +187,8 @@
 	var/last_fatigued = 0
 	var/last_ps = 0
 
-	var/ambushable = 0
+	/// ONLY TO BE USED TO CONTROL INITIALIZING WITH AMBUSHABLE TRAIT
+	var/ambushable = FALSE
 
 	var/surrendering = 0
 
@@ -272,12 +279,12 @@
 	var/traumatic_shock = 0
 	/// Shock stage, as in how much our crit has progressed
 	var/shock_stage = 0
-	/// Last pain related message we have received - Used to prevent spam
-	var/last_pain_message = ""
 	/// Next time we are able to trigger custom_pain()
 	var/next_pain_time = 0
 	/// Next time we are able to send a custom_pain() chat message
 	var/next_pain_message_time = 0
+	/// Next time we are able to emote from pain
+	var/next_pain_emote_time = 0
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)

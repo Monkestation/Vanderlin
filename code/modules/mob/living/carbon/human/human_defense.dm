@@ -215,7 +215,7 @@
 	if(istype(AM, /obj/item))
 		I = AM
 		throwpower = I.throwforce
-		if(I.thrownby == src) //No throwing stuff at myself to trigger hit reactions
+		if(I.thrownby?.resolve() == src) //No throwing stuff at myself to trigger hit reactions
 			return ..()
 	if(check_shields(AM, throwpower, "\the [AM.name]", THROWN_PROJECTILE_ATTACK))
 		hitpush = FALSE
@@ -611,15 +611,16 @@
 	else
 		examination += "<span class='dead'>[m1] dead.</span>"
 
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			examination += "<span class='artery'>[m1] anemic.</span>"
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			examination += "<span class='artery'>[m1] a little anemic.</span>"
+	if(CAN_HAVE_BLOOD(src))
+		switch(get_blood_volume())
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				examination += "<span class='artery'>[m1] anemic.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				examination += "<span class='artery'>[m1] a little anemic.</span>"
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		if(HAS_TRAIT(src, TRAIT_NO_BITE))
@@ -651,7 +652,7 @@
 		var/list/mechanics_result = list()
 		for(var/wound_type in all_untreated)
 			switch(wound_type)
-				if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+				if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE)
 					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 				if(WOUND_BLUNT, WOUND_LASH)
 					mechanics_result += "Bandage bruises and lashes to allow them to heal."
@@ -660,7 +661,7 @@
 				if("germs")
 					mechanics_result += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
 				if("self_heal")
-					mechanics_result += "Small injuries will heal on their own."
+					mechanics_result += "Small injuries will heal on their own. Bandage to stop the bleed."
 
 		var/list/result = list()
 		if(length(mechanics_result))
@@ -772,3 +773,8 @@
 			if(C.body_parts_covered & def_zone.body_part)
 				covering_part += C
 	return covering_part
+
+/mob/living/carbon/human/getShock(painkiller_included)
+	. = ..()
+	if(dna?.species)
+		return . * dna?.species.pain_mod

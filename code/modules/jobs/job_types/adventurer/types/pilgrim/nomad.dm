@@ -6,6 +6,8 @@
 		/datum/attribute/skill/craft/tanning = 30,
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/taming = 40,

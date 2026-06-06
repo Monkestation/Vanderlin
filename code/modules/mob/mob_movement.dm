@@ -573,6 +573,8 @@
 	if(!silent)
 		playsound_local(src, 'sound/misc/click.ogg', 100)
 
+	SEND_SIGNAL(src, COMSIG_MOVE_INTENT_TOGGLED)
+
 /mob/proc/toggle_eye_intent(mob/user) //clicking the fixeye button either makes you fixeye or clears your target
 	if(fixedeye)
 		fixedeye = 0

@@ -179,7 +179,7 @@
 /obj
 	/// This is the result when the wood metalizer artifact is used on this item
 	var/metalizer_result
-	/// The smelting result, used by the smelter or by the portable smelter
+	/// The smelting result, used by the smelter or by the portable smelter. Setting this to an ingot is equivalent to melt_amount = 100
 	var/smeltresult
 
 /obj/item/contraption/wood_metalizer/attack_atom(atom/attacked_atom, mob/living/user)

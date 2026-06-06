@@ -37,6 +37,31 @@
 
 	material_category = ARMOR_MAT_PLATE
 
+/obj/item/clothing/shoes/boots/armor/gold
+	name = "golden greaves"
+	desc = "Resplendant sabatons of pure gold, adorned with angled greaves that proudly bare the holy sigil. Its besilked cuffs have remained surprisingly bereft of debris - not even a sprig of lint remains to be criticized."
+	icon_state = "goldgreaves"
+	item_state = "goldgreaves"
+	body_parts_covered = FEET | LEGS
+	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
+	anvilrepair = null
+	melting_material = /datum/material/gold
+	melt_amount = 75
+	grid_height = 96
+	grid_width = 96
+	sellprice = 200
+
+/obj/item/clothing/shoes/boots/armor/gold/king
+	name = "royal golden greaves"
+	sellprice = 300
+
+/obj/item/clothing/shoes/boots/armor/bronze
+	name = "bronze greaves"
+	desc = "Padded sabatons of bronze, tightly strapped together and padded with hide from a fearsome beaste. The sandals clack about, yet they do not feel obstructive; if anything, you've never felt more agile while beplated."
+	icon_state = "bronzegreaves"
+	body_parts_covered = FEET | LEGS
+	melting_material = /datum/material/bronze
+
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
 	icon_state = "soldierboots"
@@ -57,7 +82,7 @@
 	max_integrity = 200 //meant to be weaker than iron plated boots, better options are out there waiting at the smith
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
-	item_weight = 2.7 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75
@@ -269,6 +294,12 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
+// variant with no armor, just drip.
+/obj/item/clothing/shoes/boots/armor/matthios/lord
+	name = "lordly boots"
+	desc = "Boots terribly befitting of that of a tyrannical lord. Has a fake metal veneer to strike fear into the hearts of peasants."
+	armor = null
+
 /obj/item/clothing/shoes/boots/armor/graggar
 	name = "vicious boots"
 	desc = "A menacing pair of plate boots, caked in blood and brain matter. Known for crushing skulls."
@@ -292,3 +323,23 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 
+
+/obj/item/clothing/shoes/boots/leather/kazengun
+	name = "armored sandals"
+	desc = "Leather sandals, with steel ankle-protectors and socks of sturdy cloth."
+	icon_state = "kazengunboots"
+	item_state = "kazengunboots"
+	detail_tag = "_detail"
+	color = "#FFFFFF"
+	detail_tag = "_detail"
+
+/obj/item/clothing/shoes/boots/leather/kazengun/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
+	var/playerchoice = COLOR_MAP[choice]
+	detail_color = playerchoice
+	update_appearance()
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_armor()
+		H.update_icon()

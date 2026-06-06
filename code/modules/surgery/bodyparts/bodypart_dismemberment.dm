@@ -56,7 +56,7 @@
 		C.visible_message("<span class='danger'><B>[C] is [pick("BRUTALLY","VIOLENTLY","BLOODILY","MESSILY")] DECAPITATED!</B></span>")
 	else
 		C.visible_message("<span class='danger'><B>The [src.name] is [pick("torn off", "sundered", "severed", "separated", "unsewn")]!</B></span>")
-	if(!HAS_TRAIT(C, TRAIT_NOPAIN))
+	if(C.can_feel_pain())
 		C.emote("painscream")
 	src.add_mob_blood(C)
 	C.add_stress(/datum/stress_event/dismembered)
@@ -185,6 +185,7 @@
 		else
 			qdel(bandage)
 		bandage = null
+		unbandage_limb()
 
 	if(!special)
 		for(var/obj/item/organ/organ as anything in was_owner.internal_organs) //internal organs inside the dismembered limb are dropped.

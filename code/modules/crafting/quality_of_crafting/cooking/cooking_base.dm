@@ -123,11 +123,8 @@
 
 /datum/repeatable_crafting_recipe/cooking/proc/apply_food_quality(obj/item/reagent_containers/food/snacks/food_item, cooking_skill, ingredient_quality, freshness)
 	var/datum/quality_calculator/cooking/cook_calc = new(
-		base_qual = 0,
 		mat_qual = ingredient_quality,
 		skill_qual = cooking_skill,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = freshness,
 		recipe_mod = quality_modifier

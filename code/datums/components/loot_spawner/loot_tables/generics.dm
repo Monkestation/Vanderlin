@@ -337,3 +337,40 @@
 			/obj/item/reagent_containers/glass/bottle/vial/lucpot = 10
 		)
 	)
+
+/datum/loot_table/potion_skills
+	name = "skill elixirs"
+	loot_table = list(
+		list(
+			/obj/item/reagent_containers/glass/bottle/vial/bladeart = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/heavy_arms = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/whip_hand = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/marksmans_eye = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/shield_bearer = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/craftsmans_wit = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/smelters_patience = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/builders_draught = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/trappers_sense = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/alchemists_clarity = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/smiths_blood = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/skinners_elixir = 10,
+
+			/obj/item/reagent_containers/glass/bottle/vial/locksmiths_oil = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/cooks_brine = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/prep_hands_tonic = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/brewers_wort = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/seamstress_thimble_drop = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/miners_heart = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/farmers_almanac = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/beastwhisper = 10,
+
+			/obj/item/reagent_containers/glass/bottle/vial/miracle_water = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/vital_ichor = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/arcane_solvent = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/wild_draught = 10,
+
+			/obj/item/reagent_containers/glass/bottle/vial/athletes_brine = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/shadow_tonic = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/scholars_ink = 10
+		)
+	)

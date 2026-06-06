@@ -39,6 +39,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
 	item_weight = 3.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -72,9 +75,9 @@
 	if(check_zone(user.zone_selected) != BODY_ZONE_CHEST)
 		return
 	var/mob/living/carbon/human/H = target
-	var/heart_crit = H.has_wound(/datum/wound/artery/chest)
+	var/heart_crit = H.has_wound(/datum/wound/artery/heart)
 	var/dead = H.stat == DEAD
-	if((H.health < H.crit_threshold) || heart_crit || dead)
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) || heart_crit || dead)
 		var/fast = heart_crit || dead
 		var/obj/item/organ/heart/heart = H.getorganslot(ORGAN_SLOT_HEART)
 		if(!heart)
@@ -115,6 +118,9 @@
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
 	item_weight = 3 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -142,7 +148,7 @@
 	if(H.get_lux_status() != LUX_HAS_LUX)
 		return
 	var/dead = H.stat == DEAD
-	if((H.health < H.crit_threshold) || dead)
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) || dead)
 		var/speed = dead ? 3 SECONDS : 7 SECONDS
 		visible_message(user, span_notice("Neant lights up and begins to tear at [target]..."))
 		if(!do_after(user, speed, H))
@@ -152,10 +158,7 @@
 			return
 		playsound(user, 'sound/surgery/scalpel2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
-			var/datum/injury/ouchie = C.create_injury(WOUND_SLASH, C.max_damage * 0.3, TRUE)
-			if(!ouchie)
-				return
-			ouchie.injury_flags |= INJURY_SURGICAL
+			C.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO/6, surgical = TRUE)
 
 		playsound(user, 'sound/surgery/organ2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
@@ -349,6 +352,9 @@
 	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -412,6 +418,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -444,6 +453,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -494,6 +506,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -518,6 +533,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()

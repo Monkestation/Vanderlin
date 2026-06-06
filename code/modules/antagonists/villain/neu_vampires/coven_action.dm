@@ -51,7 +51,7 @@
 		SIGNAL_REMOVETRAIT(TRAIT_PACIFISM),
 	)
 
-	RegisterSignal(owner, relevant_signals, PROC_REF(update_mob_buttons))
+	RegisterSignals(owner, relevant_signals, PROC_REF(update_mob_buttons))
 
 /datum/action/coven/proc/update_mob_buttons()
 	owner.update_action_buttons()

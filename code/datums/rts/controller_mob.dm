@@ -89,7 +89,7 @@
 	var/turf/turf = get_turf(spawn_loc)
 	var/mob/living/new_mob = new worker_type(turf)
 	new_mob.controller_mind = new(new_mob, src)
-	new_mob.faction |= "overlord"
+	new_mob.add_faction("overlord")
 
 /mob/camera/strategy_controller/proc/try_setup_build(datum/building_datum/building)
 	if(held_build)

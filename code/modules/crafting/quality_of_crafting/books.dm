@@ -38,7 +38,7 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 // recipe_info_path, set this on any /atom to redirect hyperlink
 // lookups to a different typepath's return_recipe_data().
 // Example: /obj/item/ore/iron { recipe_info_path = /datum/ore_source/iron }
-// Example: /obj/item/hammer   { recipe_info_path = /obj/item/recipe_book/blacksmithing }
+// Example: /obj/item/hammer { recipe_info_path = /obj/item/recipe_book/blacksmithing }
 // When null the atom's own return_recipe_data() is called directly.
 /atom/var/recipe_info_path
 
@@ -53,15 +53,20 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	var/list/types = list()
 	var/open
 	var/can_spawn = TRUE
-	var/current_category = "All"      // Default selected category
-	var/current_recipe = null         // Currently viewed recipe
-	var/search_query = ""             // Current search query
+	var/current_category = "All" // Default selected category
+	var/current_recipe = null // Currently viewed recipe
+	var/search_query = "" // Current search query
 
 /obj/item/recipe_book/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new /datum/tgui(user, src, "RecipeBook", name)
 		ui.open()
+
+/obj/item/recipe_book/ui_state(mob/user)
+	if(!loc)
+		return GLOB.always_state
+	. = ..()
 
 /obj/item/recipe_book/attack_self(mob/user, list/modifiers)
 	. = ..()
@@ -178,26 +183,44 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 			if(!GLOB.mob_source_paths[mob_entry["_path"]])
 				continue
 			sources += list(list(
-				"label"      = mob_entry["source_label"],
-				"_path"      = mob_entry["_path"],
-				"name"       = mob_entry["name"],
-				"icon"       = mob_entry["icon"],
+				"label" = mob_entry["source_label"],
+				"_path" = mob_entry["_path"],
+				"name" = mob_entry["name"],
+				"icon" = mob_entry["icon"],
 				"icon_state" = mob_entry["icon_state"],
 			))
 		if(!length(sources))
 			continue
 		var/list/page = list(
-			"type"         = "obtained_from",
-			"name"         = initial(src_path.name),
-			"category"     = "Sources",
+			"type" = "obtained_from",
+			"name" = initial(src_path.name),
+			"category" = "Sources",
 			"_output_path" = "[src_path]",
-			"output_name"  = initial(src_path.name),
-			"output_icon"  = "[initial(src_path.icon)]",
+			"output_name" = initial(src_path.name),
+			"output_icon" = "[initial(src_path.icon)]",
 			"output_state" = "[initial(src_path.icon_state)]",
-			"sources"      = sources,
+			"sources" = sources,
 		)
 		GLOB.recipe_data_cache["[src_path]"] = page
 		linked += list(page)
+
+	for(var/key in GLOB.indexed_item_paths)
+		if(visited[key])
+			continue  // already picked up by get_source_page_data or obtained_from
+		var/atom/item_path = text2path(key)
+		if(!item_path)
+			continue
+		var/list/existing = get_cached_recipe_data(item_path)
+		if(existing)
+			continue
+		var/obj/item/inst = new item_path()
+		var/list/entry = inst.return_recipe_data()
+		qdel(inst)
+		if(!entry)
+			continue
+		GLOB.recipe_data_cache[key] = entry
+		linked += list(entry)
+
 
 	GLOB.linked_recipe_cache["[book_type]"] = linked
 	return linked
@@ -206,14 +229,14 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	var/list/drops = GLOB.obtained_from_reverse["[src_path]"]
 	if(!length(drops)) return null
 	return list(
-		"type"         = "source_page",
-		"name"         = initial(src_path.name),
-		"category"     = "Sources",
+		"type" = "source_page",
+		"name" = initial(src_path.name),
+		"category" = "Sources",
 		"_output_path" = "[src_path]",
-		"output_name"  = initial(src_path.name),
-		"output_icon"  = "[initial(src_path.icon)]",
+		"output_name" = initial(src_path.name),
+		"output_icon" = "[initial(src_path.icon)]",
 		"output_state" = "[initial(src_path.icon_state)]",
-		"drops"        = drops,
+		"drops" = drops,
 	)
 
 /obj/item/recipe_book/proc/get_mob_source_page_data(atom/mob_path)
@@ -227,26 +250,26 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 			if(!drop_path)
 				continue
 			drops += list(list(
-				"name"         = initial(drop_path.name),
-				"icon"         = "[initial(drop_path.icon)]",
-				"icon_state"   = "[initial(drop_path.icon_state)]",
-				"_path"        = "[drop_path]",
+				"name" = initial(drop_path.name),
+				"icon" = "[initial(drop_path.icon)]",
+				"icon_state" = "[initial(drop_path.icon_state)]",
+				"_path" = "[drop_path]",
 				"source_label" = entry["source_label"],
-				"amount"       = entry["amount"],
+				"amount" = entry["amount"],
 			))
 
 	if(!length(drops))
 		return null
 
 	return list(
-		"type"         = "source_page",
-		"name"         = initial(mob_path.name),
-		"category"     = "Sources",
+		"type" = "source_page",
+		"name" = initial(mob_path.name),
+		"category" = "Sources",
 		"_output_path" = "[mob_path]",
-		"output_name"  = initial(mob_path.name),
-		"output_icon"  = "[initial(mob_path.icon)]",
+		"output_name" = initial(mob_path.name),
+		"output_icon" = "[initial(mob_path.icon)]",
 		"output_state" = "[initial(mob_path.icon_state)]",
-		"drops"        = drops,
+		"drops" = drops,
 	)
 
 /// Returns cached recipe data for a typepath, computing and caching it if needed.
@@ -520,6 +543,7 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/book_entry/grimoire,
 		/datum/book_entry/attunement,
 		/datum/book_entry/mana_sources,
+		/datum/arcyne_crafting_recipe,
 		/datum/repeatable_crafting_recipe/arcyne,
 		/datum/blueprint_recipe/arcyne,
 		/datum/container_craft/cooking/arcyne,
@@ -537,9 +561,11 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/book_entry/gnome_homunculus,
 		/datum/book_entry/essence_crafting,
 		/datum/alch_cauldron_recipe,
+		/datum/chemical_reaction,
+		/datum/distillation_recipe,
 		/datum/essence_combination,
 		/datum/natural_precursor,
-		/datum/essence_infusion_recipe,
+		/datum/infusion_recipe,
 		/datum/container_craft/cooking/herbal_salve,
 		/datum/container_craft/cooking/herbal_tea,
 		/datum/container_craft/cooking/herbal_oil,
@@ -552,7 +578,8 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	name = "Survival"
 	can_spawn = FALSE
 	types = list(
-		/datum/repeatable_crafting_recipe/survival)
+		/datum/repeatable_crafting_recipe/survival
+	)
 
 /obj/item/recipe_book/agriculture
 	name = "The Farmers Almanac: Principles of Growth and Harvest"
@@ -601,4 +628,20 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/obj/item/organ/brain,
 		/obj/item/organ/tongue,
 		/obj/item/organ/appendix,
+	)
+
+/obj/item/recipe_book/gravemaking
+	name = "The Gravetender's Guide: Burials, Exhumations, and Unwanted Guests"
+	desc = "Penned by Chem and Terry Ditchdigger."
+	icon_state ="book6_0"
+	base_icon_state = "book6"
+
+	types = list(
+		/datum/book_entry/undertaker_manual,
+		/datum/anvil_recipe/tools/gold/headstone_astrata,
+		/datum/anvil_recipe/tools/iron/gravefence_iron,
+		/datum/repeatable_crafting_recipe/gravemaking,
+		/datum/container_craft/pan/fat_render,
+		/datum/repeatable_crafting_recipe/tallow/red
+
 	)

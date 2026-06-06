@@ -3,7 +3,7 @@
 	icon = 'icons/obj/questing.dmi'
 	icon_state = "quest_marker"
 	var/quest_difficulty = list(QUEST_DIFFICULTY_EASY, QUEST_DIFFICULTY_MEDIUM, QUEST_DIFFICULTY_HARD)
-	var/quest_type = list(QUEST_RETRIEVAL, QUEST_COURIER, QUEST_CLEAR_OUT, QUEST_RAID, QUEST_KILL_EASY, QUEST_BEACON, QUEST_OUTLAW)
+	var/quest_type = list(QUEST_RETRIEVAL, QUEST_COURIER, QUEST_CLEAR_OUT, QUEST_RAID, QUEST_KILL_EASY, QUEST_BEACON, QUEST_OUTLAW, QUEST_RECOVERY, QUEST_PLANAR)
 
 /obj/effect/landmark/quest_spawner/Initialize()
 	. = ..()
@@ -15,8 +15,8 @@
 
 /obj/effect/landmark/quest_spawner/proc/add_quest_faction_to_nearby_mobs(turf/center)
 	for(var/mob/living/M in view(7, center))
-		if(!M.ckey && !("quest" in M.faction))
-			M.faction |= "quest"
+		if(!M.ckey && !M.has_faction("quest"))
+			M.add_faction("quest")
 
 /obj/effect/landmark/quest_spawner/proc/get_safe_spawn_turf()
 	var/list/possible_landmarks = list()
@@ -48,17 +48,23 @@
 /obj/effect/landmark/quest_spawner/easy
 	name = "easy quest landmark"
 	icon_state = "quest_marker_low"
-	quest_difficulty = "Easy"
-	quest_type = list(QUEST_RETRIEVAL, QUEST_COURIER, QUEST_KILL_EASY, QUEST_BEACON)
+	quest_difficulty = QUEST_DIFFICULTY_EASY
+	quest_type = list(QUEST_RETRIEVAL, QUEST_COURIER, QUEST_KILL_EASY, QUEST_BEACON, QUEST_RECOVERY, QUEST_PLANAR)
 
 /obj/effect/landmark/quest_spawner/medium
 	name = "medium quest landmark"
 	icon_state = "quest_marker_mid"
-	quest_difficulty = "Medium"
-	quest_type = list(QUEST_KILL_EASY, QUEST_CLEAR_OUT, QUEST_BEACON)
+	quest_difficulty = QUEST_DIFFICULTY_MEDIUM
+	quest_type = list(QUEST_KILL_EASY, QUEST_CLEAR_OUT, QUEST_BEACON, QUEST_RECOVERY, QUEST_PLANAR)
 
 /obj/effect/landmark/quest_spawner/hard
 	name = "hard quest landmark"
 	icon_state = "quest_marker_high"
-	quest_difficulty = "Hard"
-	quest_type = list(QUEST_CLEAR_OUT, QUEST_RAID, QUEST_BEACON, QUEST_OUTLAW)
+	quest_difficulty = QUEST_DIFFICULTY_HARD
+	quest_type = list(QUEST_CLEAR_OUT, QUEST_RAID, QUEST_BEACON, QUEST_OUTLAW, QUEST_RECOVERY, QUEST_PLANAR)
+
+/obj/effect/landmark/quest_spawner/objective
+	name = "objective quest landmark"
+	icon_state = "quest_marker_high"
+	quest_difficulty = QUEST_DIFFICULTY_EASY
+	quest_type = list(QUEST_OBJECTIVE)

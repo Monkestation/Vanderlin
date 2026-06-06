@@ -8,7 +8,7 @@
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/craft/alchemy = 20,
-		/datum/attribute/skill/misc/medicine = 20
+		/datum/attribute/skill/misc/medicine = 30
 	)
 
 /datum/attribute_holder/sheet/job/clinicapprentice
@@ -21,7 +21,7 @@
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/craft/alchemy = 20,
-		/datum/attribute/skill/misc/medicine = 20
+		/datum/attribute/skill/misc/medicine = 35
 	)
 
 /datum/job/clinicapprentice
@@ -70,7 +70,7 @@
 	exp_types_granted  = list(EXP_TYPE_MEDICAL)
 
 	skill_multipliers = list(/datum/attribute/skill/misc/medicine = 1.25, /datum/attribute/skill/craft/alchemy = 1.25)
-
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/clinicapprentice
 	name = JOB_CLINIC_APP
@@ -84,3 +84,4 @@
 	neck = /obj/item/storage/belt/pouch/cloth
 	wrists = /obj/item/storage/keyring/clinicapprentice
 	belt = /obj/item/storage/belt/leather/rope
+	beltl = /obj/item/storage/fancy/ifak

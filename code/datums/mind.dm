@@ -111,6 +111,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	///List of learned recipe TYPES.
 	var/list/learned_recipes
 	var/list/special_items = list()
+	var/list/loadout_item_colors = null
 
 	var/list/areas_entered = list()
 
@@ -430,8 +431,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/enslave_mind_to_creator(mob/living/creator)
 	enslaved_to = creator
 
-	current.faction |= creator.faction
-	creator.faction |= current.faction
+	current.add_faction(creator.get_faction())
+	creator.add_faction(current.get_faction())
 
 	if(creator.mind.special_role)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")

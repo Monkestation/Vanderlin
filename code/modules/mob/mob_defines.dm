@@ -164,8 +164,7 @@
 	var/job = null//Living
 	var/datum/job/job_type
 
-	/// A list of factions that this mob is currently in, for hostile mob targetting, amongst other things
-	var/list/faction = list(FACTION_NEUTRAL)
+	faction = list(FACTION_NEUTRAL)
 
 	///The last mob/living/carbon to push/drag/grab this mob (exclusively used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
@@ -245,7 +244,9 @@
 	var/list/attack_grunts = null
 	var/list/takedamage_grunts = null
 
+	/// ONLY USED FOR INITIALIZING, DO NOT CHECK OR MODIFY DIRECTLY. USE TRAIT_UNPARRYING
 	var/canparry = FALSE
+	/// ONLY USED FOR INITIALIZING, DO NOT CHECK OR MODIFY DIRECTLY. USE TRAIT_UNDODGING
 	var/candodge = FALSE
 
 	var/dodge_sound = 'sound/combat/dodge.ogg'

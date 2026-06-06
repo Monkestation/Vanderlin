@@ -29,7 +29,7 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/treefall.ogg'
 	debris = list(/obj/item/grown/log/tree/stick = 2)
-	static_debris = list(/obj/item/grown/log/tree = 1)
+	var/list/static_debris = list(/obj/item/grown/log/tree = 1)
 	var/stump_type = /obj/structure/table/wood/treestump
 	metalizer_result = /obj/machinery/light/fueledstreet
 	smeltresult = /obj/item/ore/coal
@@ -38,16 +38,7 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/tree/attacked_by(obj/item/I, mob/living/user)
@@ -66,10 +57,13 @@
 		var/turf/T = loc
 		T.ChangeTurf(/turf/open/floor/dirt)
 
-/obj/structure/flora/tree/atom_destruction(damage_flag)
+/obj/structure/flora/tree/atom_deconstruct(disassembled)
+	. = ..()
 	if(stump_type)
 		new stump_type(loc)
-	return ..()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(loc)
 
 /obj/structure/flora/tree/evil
 	base_icon_state = "wv"
@@ -250,7 +244,7 @@
 								)
 			if(isunburnt)
 				new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
-			atom_destruction("brute")
+			atom_destruction(BRUTE)
 		return
 	return ..()
 
@@ -259,12 +253,15 @@
 	desc = "This stump is burnt. Maybe someone is trying to get coal the easy way."
 	icon = 'icons/roguetown/misc/tree.dmi'
 	icon_state = "st1"
-	static_debris = list(/obj/item/ore/coal = 1)
 	isunburnt = FALSE
 
 /obj/structure/table/wood/treestump/burnt/Initialize()
 	. = ..()
 	icon_state = "st[rand(1,2)]"
+
+/obj/structure/table/wood/treestump/burnt/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/ore/coal(loc)
 
 /*	.............   Ancient log   ................ */	// Functionally a sofa, slightly better than sleeping on the ground
 /obj/structure/chair/bench/ancientlog
@@ -273,7 +270,6 @@
 	icon = 'icons/roguetown/misc/foliagetall.dmi'
 	icon_state = "log1"
 	blade_dulling = DULLING_CUT
-	static_debris = list(/obj/item/grown/log/tree = 1)
 	max_integrity = 200
 	sleepy = 0.2
 	SET_BASE_PIXEL(-14, 7)
@@ -290,6 +286,10 @@
 /obj/structure/chair/bench/ancientlog/post_unbuckle_mob(mob/living/M)
 	..()
 	M.remove_offsets(type)
+
+/obj/structure/chair/bench/ancientlog/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/grown/log/tree(loc)
 
 //newbushes
 /obj/structure/flora/grass
@@ -475,21 +475,28 @@
 	else
 		to_chat(L, span_warning("I get stuck in \a [src]."))
 
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
-		if(was_hard_collision)
-			var/obj/item/bodypart/BP = pick(H.bodyparts)
-			BP.receive_damage(10)
-			to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
-			if((prob(20)) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-				var/obj/item/natural/thorn/TH = new(src.loc)
-				BP.add_embedded_object(TH, silent = TRUE)
-				to_chat(H, span_danger("\A [TH] impales my [BP.name]."))
-				if(!HAS_TRAIT(H, TRAIT_NOPAIN))
-					H.emote("painscream")
-					L.Stun(3 SECONDS) //that fucking hurt
-					H.consider_ambush()
+	if(!L.client)
+		return
+	if(L.m_intent != MOVE_INTENT_SNEAK && !HAS_TRAIT(L, TRAIT_MOVE_FLYING) && prob(20))
+		L.consider_ambush()
+
+	if(!ishuman(L))
+		return
+	var/mob/living/carbon/human/H = L
+	var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
+	if(!was_hard_collision)
+		return
+	var/obj/item/bodypart/BP = pick(H.bodyparts)
+	BP.receive_damage(10)
+	to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
+	if(HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+		return
+	var/obj/item/natural/thorn/TH = new(src.loc)
+	BP.add_embedded_object(TH, silent = TRUE)
+	to_chat(H, span_danger("\A [TH] impales my [BP.name]."))
+	if(H.can_feel_pain())
+		H.emote("painscream")
+		L.Stun(3 SECONDS) //that fucking hurt
 
 /obj/structure/flora/grass/bush/wall
 	name = "great bush"
@@ -522,7 +529,6 @@
 	SET_BASE_PIXEL(-16, 0)
 	num_random_icons = 2
 	debris = null
-	static_debris = null
 
 /obj/structure/flora/grass/bush/wall/tall/tundra
 	name = "tundra great bush"
@@ -581,22 +587,13 @@
 	SET_BASE_PIXEL(-16, 0)
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
-	static_debris = list(/obj/item/grown/log/tree/small = 1)
+	var/list/static_debris = list(/obj/item/grown/log/tree/small = 1)
 
 /obj/structure/flora/shroom_tree/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/shroom_tree/Initialize()
@@ -623,10 +620,16 @@
 	if(added > 5)
 		return ..()
 
-/obj/structure/flora/shroom_tree/atom_destruction(damage_flag)
+/obj/structure/flora/shroom_tree/handle_deconstruct(disassembled)
 	var/obj/structure/S = new /obj/structure/table/wood/treestump/shroomstump(loc)
 	S.icon_state = "stump_[icon_state]"
 	return ..()
+
+/obj/structure/flora/shroom_tree/atom_deconstruct(disassembled)
+	. = ..()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(loc)
 
 /obj/structure/table/wood/treestump/shroomstump
 	name = "shroom stump"
@@ -655,11 +658,14 @@
 	blade_dulling = DULLING_BASH
 	destroy_sound = 'sound/foley/smash_rock.ogg'
 	attacked_sound = 'sound/foley/hit_rock.ogg'
-	static_debris = list(/obj/item/natural/stone = 1)
 
 /obj/structure/roguerock/Initialize()
 	. = ..()
 	icon_state = "rock[rand(1, 4)]"
+
+/obj/structure/roguerock/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/natural/stone(loc)
 
 /*	..................   Thorn Bush   ................... */	// Updated to use searcher perception, can yield thorns
 /obj/structure/flora/grass/thorn_bush

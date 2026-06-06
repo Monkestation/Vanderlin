@@ -44,7 +44,7 @@
 		var/zcross_trigger = FALSE
 
 		// Bonuses! Flavour! SOVL!
-		for(var/obj/item/clothing/neck/current_item in target.get_equipped_items(TRUE))
+		for(var/obj/item/clothing/neck/current_item in target.get_equipped_items(INCLUDE_POCKETS))
 			if(istype(current_item, /obj/item/clothing/neck/psycross))
 				pp += 1
 				if(pp >= 12 & target == user) // A harmless easter-egg. Only applies on self-cast. You'd have to be pretty deliberate to wear 12 of them.

@@ -22,7 +22,8 @@
 	if(unique_name)
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
-	faction += "[REF(src)]"
+	update_blood_status()
+	add_ally(src)
 	GLOB.mob_living_list += src
 	AddElement(/datum/element/movetype_handler)
 	init_faith()
@@ -31,6 +32,8 @@
 	if(fovangle)
 		LoadComponent(/datum/component/field_of_vision, FOV_90_DEGREES, get_fov_angle(FOV_90_DEGREES))
 		update_fov_angles()
+	if(!ambushable)
+		ADD_TRAIT(src, TRAIT_NOAMBUSH, INNATE_TRAIT)
 	recalculate_stats()
 
 /mob/living/Destroy()
@@ -141,7 +144,7 @@
 	var/can_brace_fall = (!incapacitated(IGNORE_RESTRAINTS) && body_position == STANDING_UP)
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2) && can_brace_fall)
 		return . | ZIMPACT_CANCEL_DAMAGE
-	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1) && can_brace_fall && levels <= 2)
+	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1) && can_brace_fall && levels < 2)
 		return . | ZIMPACT_CANCEL_DAMAGE
 
 	if(can_brace_fall && GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing) >= 5) // Master climbers can fall down 2 levels without hurting themselves
@@ -171,6 +174,10 @@
 		var/mob/M = A
 		if(MobBump(M))
 			return
+	if(isturf(A))
+		var/turf/bump_turf = A
+		if(TurfBump(bump_turf))
+			return
 	if(isobj(A))
 		var/obj/O = A
 		if(ObjBump(O))
@@ -180,9 +187,6 @@
 		if(PushAM(AM, move_force))
 			return
 
-/mob/living/Bumped(atom/movable/AM)
-	..()
-	last_bumped = world.time
 
 //Called when we bump onto a mob
 /mob/living/proc/MobBump(mob/M)
@@ -191,6 +195,16 @@
 
 	if(now_pushing)
 		return TRUE
+
+	if(get_chem_effect(CE_BOUNCY))
+		visible_message("<span class='warning'>[src] bounces off [M]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(M, src))
+		var/atom/throw_target_mob = get_edge_target_turf(M, get_dir(src, M))
+
+		src.throw_at(throw_target, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
+		if(get_chem_effect(CE_BOUNCY) > 5)
+			M.throw_at(throw_target_mob, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
+
 
 	var/they_can_move = TRUE
 	if(isliving(M))
@@ -348,7 +362,19 @@
 				return
 //Called when we bump onto an obj
 /mob/living/proc/ObjBump(obj/O)
+	if(get_chem_effect(CE_BOUNCY))
+		visible_message("<span class='warning'>[src] bounces off [O]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(O, src))
+
+		src.throw_at(throw_target, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
 	return
+
+/mob/living/proc/TurfBump(turf/T)
+	if(get_chem_effect(CE_BOUNCY))
+		visible_message("<span class='warning'>[src] bounces off [T]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(T, src))
+
+		src.throw_at(throw_target, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
 
 //Called when we want to push an atom/movable
 /mob/living/proc/PushAM(atom/movable/AM, force = move_force)
@@ -690,17 +716,19 @@
 		return
 	if(!reaper)
 		return
-	if (InCritical() || health <= 0 || (blood_volume < BLOOD_VOLUME_SURVIVE))
-		log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
 
-		if(istype(src.loc, /turf/open/water) && !HAS_TRAIT(src, TRAIT_NOBREATH) && body_position == LYING_DOWN && client)
-			record_round_statistic(STATS_PEOPLE_DROWNED)
+	if (!CAN_SUCCUMB(src))
+		to_chat(src, span_warning("You are unable to succumb to death! This life continues."), type=MESSAGE_TYPE_INFO)
+		return
 
-		adjustOxyLoss(201)
-		updatehealth()
+	log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
+
+	adjustOxyLoss(201)
+	updatehealth()
 //		if(!whispered)
 //			to_chat(src, "<span class='userdanger'>I have given up life and succumbed to death.</span>")
-		death()
+	investigate_log("has succumbed to death.", INVESTIGATE_DEATHS)
+	death()
 
 /**
  * Checks if a mob is incapacitated
@@ -733,9 +761,6 @@
 	if (num_hands <= 0)
 		return FALSE
 	return TRUE
-
-/mob/living/proc/InCritical()
-	return (health <= crit_threshold && (stat == SOFT_CRIT || stat == UNCONSCIOUS || stat == HARD_CRIT))
 
 /mob/living/proc/InFullCritical()
 	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && (stat == UNCONSCIOUS  || stat == HARD_CRIT))
@@ -904,6 +929,12 @@
 	density = initial(density) // We were prone before, so we become dense and things can bump into us again.
 	remove_offsets(LYING_DOWN_TRAIT)
 
+/mob/living/proc/update_density()
+	if(HAS_TRAIT(src, TRAIT_UNDENSE))
+		set_density(FALSE)
+	else
+		set_density(TRUE)
+
 //Recursive function to find everything a mob is holding. Really shitty proc tbh, you should use get_all_gear for carbons.
 /mob/living/get_contents()
 	var/list/ret = list()
@@ -932,9 +963,9 @@
 	if(status_flags & GODMODE)
 		return
 	set_health(maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss())
-	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+	if(CAN_HAVE_BLOOD(src) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 		// You dont have any blood and your not bloodloss immune? Dead.
-		if(blood_volume <= 0)
+		if(get_blood_volume() <= 0)
 			set_health(NONE)
 	update_stat()
 	update_pain()
@@ -984,12 +1015,11 @@
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
 		timeofdeath = 0
 		updatehealth() //then we check if the mob should wake up.
-		// if(full_heal_flags & HEAL_ADMIN)
-		// 	get_up(TRUE)
+		if(full_heal_flags & HEAL_ADMIN)
+			get_up(TRUE)
 		update_sight()
 		clear_alert("not_enough_oxy")
 		reload_fullscreen()
-		remove_client_colour(/datum/client_colour/monochrome/death)
 		. = TRUE
 		if(mind)
 			mind.remove_antag_datum(/datum/antagonist/zombie)
@@ -1003,9 +1033,9 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
 			log_combat(src, src, "revived")
 
-	// else if(full_heal_flags & HEAL_ADMIN)
-	// 	updatehealth()
-	// 	get_up(TRUE)
+	else if(full_heal_flags & HEAL_ADMIN)
+		updatehealth()
+		get_up(TRUE)
 
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
@@ -1046,6 +1076,10 @@
 		setFireLoss(0, FALSE, TRUE)
 	if(heal_flags & HEAL_STAM)
 		adjust_stamina(-maximum_stamina, internal_regen = FALSE)
+		adjust_energy(max_energy)
+	if(heal_flags & HEAL_PAIN_SHOCK)
+		setPainLoss(0, FALSE, TRUE)
+		setShockStage(0, FALSE, TRUE)
 
 	if(heal_flags & HEAL_ESSENTIALS)
 		set_nutrition(NUTRITION_LEVEL_FED + 50)
@@ -1180,9 +1214,12 @@
 	// 			pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
 	// 			pulledby.moving_from_pull = null
 
-	if(moving_diagonally != FIRST_DIAG_STEP && isliving(pulledby))
-		var/mob/living/puller = pulledby
-		puller.set_pull_offsets(src, puller.grab_state)
+	if(moving_diagonally != FIRST_DIAG_STEP)
+		if(isliving(pulledby))
+			var/mob/living/puller = pulledby
+			puller.set_pull_offsets(src, puller.grab_state)
+		else if(isliving(pulling)) // EXPERIMENTAL: Set pulled person offsets when puller moves
+			set_pull_offsets(pulling, grab_state)
 
 //	if(active_storage && !(CanReach(active_storage.parent,view_only = TRUE)))
 	if(active_storage)
@@ -1215,32 +1252,33 @@
 		blood_exists = TRUE
 	if(isturf(start))
 		var/trail_type = getTrail()
-		if(trail_type)
-			var/brute_ratio = round(getBruteLoss() / maxHealth, 0.1)
-			if(blood_volume && blood_volume > max(BLOOD_VOLUME_NORMAL*(1 - brute_ratio * 0.25), 0))//don't leave trail if blood volume below a threshold
-				blood_volume = max(blood_volume - max(1, brute_ratio * 2), 0) 					//that depends on our brute damage.
-				var/newdir = get_dir(target_turf, start)
-				if(newdir != direction)
-					newdir = newdir | direction
-					if(newdir == 3) //N + S
-						newdir = NORTH
-					else if(newdir == 12) //E + W
-						newdir = EAST
-				if((newdir in GLOB.cardinals) && (prob(50)))
-					newdir = turn(get_dir(target_turf, start), 180)
-				if(!blood_exists)
-					new /obj/effect/decal/cleanable/trail_holder(start, get_blood_type().color)
+		if(!trail_type)
+			return
+		var/brute_ratio = round(getBruteLoss() / maxHealth, 0.1)
+		if(get_blood_volume() > max(BLOOD_VOLUME_NORMAL*(1 - brute_ratio * 0.25), 0))//don't leave trail if blood volume below a threshold
+			adjust_blood_volume(-max(1, brute_ratio * 2)) //that depends on our brute damage.
+			var/newdir = get_dir(target_turf, start)
+			if(newdir != direction)
+				newdir = newdir | direction
+				if(newdir == 3) //N + S
+					newdir = NORTH
+				else if(newdir == 12) //E + W
+					newdir = EAST
+			if((newdir in GLOB.cardinals) && (prob(50)))
+				newdir = turn(get_dir(target_turf, start), 180)
+			if(!blood_exists)
+				new /obj/effect/decal/cleanable/trail_holder(start, get_blood_type().color)
 
-				for(var/obj/effect/decal/cleanable/trail_holder/TH in start)
-					if((!(newdir in TH.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
-						TH.existing_dirs += newdir
-						var/image/bloodthing = image('icons/effects/blood.dmi', trail_type, dir = newdir)
-						bloodthing.color = get_blood_type().color
-						TH.add_overlay(bloodthing)
-						TH.transfer_mob_blood_dna(src)
+			for(var/obj/effect/decal/cleanable/trail_holder/TH in start)
+				if((!(newdir in TH.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
+					TH.existing_dirs += newdir
+					var/image/bloodthing = image('icons/effects/blood.dmi', trail_type, dir = newdir)
+					bloodthing.color = get_blood_type().color
+					TH.add_overlay(bloodthing)
+					TH.transfer_mob_blood_dna(src)
 
 /mob/living/carbon/human/makeTrail(turf/T)
-	if((NOBLOOD in dna.species.species_traits) || !bleed_rate || bleedsuppress)
+	if(!CAN_HAVE_BLOOD(src) || !bleed_rate || bleedsuppress)
 		return
 	..()
 
@@ -1762,9 +1800,11 @@
 				if(what == who.get_item_for_held_index(L[2]))
 					if(what.doStrip(src, who))
 						log_combat(src, who, "stripped [what] off")
+						SEND_SIGNAL(src, COMSIG_MOB_STRIPPED_ITEM, who, what)
 			if(what == who.get_item_by_slot(where))
 				if(what.doStrip(src, who))
 					log_combat(src, who, "stripped [what] off")
+					SEND_SIGNAL(src, COMSIG_MOB_STRIPPED_ITEM, who, what)
 
 	if(Adjacent(who)) //update inventory window
 		who.show_inv(src)
@@ -2175,7 +2215,7 @@
 		//	to_chat(src, span_warning("You can't climb into [over] whilst it's there."))
 		//	return
 		for(var/obj/item/grabbing/G in grabbedby)
-			if(G.grab_state == GRAB_AGGRESSIVE)
+			if(G.grab_state >= GRAB_AGGRESSIVE)
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
 		if(storage && !istype(storage, /datum/component/storage/concrete/organ))
@@ -2193,7 +2233,7 @@
 		if(incapacitated())
 			return
 		for(var/obj/item/grabbing/G in grabbedby)
-			if(G.grab_state == GRAB_AGGRESSIVE)
+			if(G.grab_state >= GRAB_AGGRESSIVE)
 				return
 		var/list/pickable_items = list()
 		for(var/obj/item/item in over.get_all_contents())
@@ -2311,6 +2351,9 @@
 			OXY:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
 			CLONE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
 			BRAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
+			PAIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=pain' id='pain'>[getPainLoss()]</a>
+			SHOCK:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock' id='shock'>[getShock()]</a>
+			SHOCK STAGE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock_stage' id='shock'>[getShockStage()]</a>
 		</font>
 	"}
 
@@ -2702,6 +2745,10 @@
 	. = ..()
 	if(isnull(.))
 		return
+
+	if(. <= UNCONSCIOUS || new_stat >= UNCONSCIOUS)
+		update_body() // to update eyes
+
 	switch(.) //Previous stat.
 		if(CONSCIOUS)
 			if(stat >= UNCONSCIOUS)
@@ -2713,10 +2760,15 @@
 			if(pulledby)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT)
 		if(UNCONSCIOUS)
-			cure_blind(UNCONSCIOUS_TRAIT)
+			if(stat != HARD_CRIT)
+				cure_blind(UNCONSCIOUS_TRAIT)
 		if(HARD_CRIT)
 			if(stat != UNCONSCIOUS)
 				cure_blind(UNCONSCIOUS_TRAIT)
+			REMOVE_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
+		if(DEAD)
+			REMOVE_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
+			remove_client_colour(/datum/client_colour/monochrome/death)
 	switch(stat) //Current stat.
 		if(CONSCIOUS)
 			if(. >= UNCONSCIOUS)
@@ -2731,19 +2783,24 @@
 			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 			log_combat(src, src, "entered soft crit")
 		if(UNCONSCIOUS)
-			become_blind(UNCONSCIOUS_TRAIT)
-			log_combat(src, src, "lost consciousness")
+			if(. != HARD_CRIT)
+				become_blind(UNCONSCIOUS_TRAIT)
 			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
 				ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 			else
 				REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			log_combat(src, src, "lost consciousness")
 		if(HARD_CRIT)
 			if(. != UNCONSCIOUS)
 				become_blind(UNCONSCIOUS_TRAIT)
 			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			ADD_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
+			log_combat(src, src, "entered hard crit")
 		if(DEAD)
 			REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			ADD_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 			log_combat(src, src, "died")
+			add_client_colour(/datum/client_colour/monochrome/death)
 	if(!can_hear())
 		stop_sound_channel(CHANNEL_AMBIENCE)
 	refresh_looping_ambience()
@@ -2765,10 +2822,9 @@
 /// Proc for giving a mob a new 'friend', generally used for AI control and targeting. Returns false if already friends.
 /mob/living/proc/befriend(mob/living/new_friend)
 	SHOULD_CALL_PARENT(TRUE)
-	var/friend_ref = REF(new_friend)
-	if (faction.Find(friend_ref))
+	if (has_ally(new_friend))
 		return FALSE
-	faction |= friend_ref
+	add_ally(new_friend)
 	ai_controller?.insert_blackboard_key_lazylist(BB_FRIENDS_LIST, new_friend)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
@@ -2783,10 +2839,9 @@
 /// Proc for removing a friend you added with the proc 'befriend'. Returns true if you removed a friend.
 /mob/living/proc/unfriend(mob/living/old_friend)
 	SHOULD_CALL_PARENT(TRUE)
-	var/friend_ref = REF(old_friend)
-	if (!faction.Find(friend_ref))
+	if (!has_ally(old_friend))
 		return FALSE
-	faction -= friend_ref
+	remove_ally(old_friend)
 	ai_controller?.remove_thing_from_blackboard_key(BB_FRIENDS_LIST, old_friend)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_UNFRIENDED, old_friend)
@@ -2801,9 +2856,6 @@
 	return
 
 /mob/proc/taunted(mob/user)
-	for(var/mob/living/simple_animal/hostile/retaliate/A in view(7,src))
-		if(A.owner == user)
-			A.emote("aggro")
 	return
 
 /mob/proc/shood(mob/user)

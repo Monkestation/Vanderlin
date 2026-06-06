@@ -36,14 +36,6 @@
 	icon_state = "welfhand"
 	item_weight = 1.65 KILOGRAMS
 
-/obj/item/clothing/gloves/rare/dwarfplate
-	name = "dwarvish plate gauntlets"
-	desc = "Plated gauntlets of masterwork dwarven smithing, the pinnacle of protection for one's hands."
-	icon_state = "dwarfhand"
-	allowed_race = list(SPEC_ID_DWARF)
-	allowed_sex = list(MALE, FEMALE)
-	item_weight = 1.65 KILOGRAMS
-
 /obj/item/clothing/gloves/rare/grenzelplate
 	name = "grenzelhoftian plate gauntlets"
 	desc = "Battling the Zaladins led to the exchange of military ideas. The Grenzelhoft adopted refined chain and plate armaments to better allow their knights unmatchable resilience against the enemies of their Empire."
