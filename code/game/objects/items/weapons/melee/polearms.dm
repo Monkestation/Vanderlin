@@ -391,7 +391,7 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 0.8
 
-/obj/item/weapon/polearm/spear/stone/copper/silver/Initialize(mapload)
+/obj/item/weapon/polearm/spear/javelin/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
