@@ -72,7 +72,7 @@
 				log_say("[src] put [final_words] for their final words.")
 
 /mob/proc/can_enter_underworld()
-	if(stat < DEAD && !mind.has_antag_datum(/datum/antagonist/zombie))
+	if(stat < DEAD && !IS_DEADITE(src))
 		to_chat(src, span_danger("You are not dead!"))
 		return FALSE
 

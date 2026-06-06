@@ -69,7 +69,7 @@
 			to_chat(user, span_warning("[src] is already bound to this bell."))
 		else if(H.is_dead())
 			to_chat(user, span_warning("What good is a dead servant?"))
-		else if(H.mind?.has_antag_datum(/datum/antagonist/zombie))
+		else if(IS_DEADITE(H))
 			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
 		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
 			to_chat(user, span_warning("The enchantment seems to fail."))

@@ -73,7 +73,7 @@
 #define BLEEDOUT (1<<6)
 
 //Health Defines
-#define HEALTH_THRESHOLD_CRIT 0
+#define HEALTH_THRESHOLD_CRIT 100
 #define HEALTH_THRESHOLD_FULLCRIT 0
 #define HEALTH_THRESHOLD_DEAD -100
 
@@ -116,6 +116,8 @@
 #define CRAWLING_ADD_SLOWDOWN 7
 //slowdown for dislocated limbs
 #define DISLOCATED_ADD_SLOWDOWN 2
+//slowdown for fractured limbs
+#define FRACTURED_ADD_SLOWDOWN 3
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1

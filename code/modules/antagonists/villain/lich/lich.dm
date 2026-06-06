@@ -97,6 +97,7 @@
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	return ..()
 
 /datum/antagonist/lich/greet()
 	. = ..()
@@ -121,18 +122,22 @@
 	L.mana_pool.set_intrinsic_recharge(MANA_SOULS)
 	L.mana_pool.ethereal_recharge_rate += 0.2
 
+	ADD_TRAIT(L, TRAIT_NOBLOOD, TRAIT_GENERIC)
+
+	L.set_faction(FACTION_UNDEAD)
+	L.mob_biotypes |= MOB_UNDEAD
+	L.grant_undead_eyes()
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
+	L.skeletonize(FALSE)
+
+	L.equipOutfit(/datum/outfit/lich)
+	L.set_patron(/datum/patron/inhumen/zizo)
+
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.set_faction(FACTION_UNDEAD)
 	if(length(L.quirks))
 		L.clear_quirks()
-	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
-	L.grant_undead_eyes()
-	L.skeletonize(FALSE)
-	L.equipOutfit(/datum/outfit/lich)
-	L.set_patron(/datum/patron/inhumen/zizo)
 
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -158,7 +163,7 @@
 		H.dna.species.native_language = "Zizo Chant"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
-	H.ambushable = FALSE
+	ADD_TRAIT(H, TRAIT_NOAMBUSH, JOB_TRAIT)
 
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), ROLE_LICH), 5 SECONDS)
 

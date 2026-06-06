@@ -1,0 +1,6 @@
+author: "Somniworld"
+delete-after: True
+changes:
+  - qol: "all sacrestant classes now have a keyring."
+  - balance: "Psyaltrists no longer have expert Miracle skill, since they can't use the damned thing."
+  - sound: "The Psyaltrist now uses the sacrestant Cmode theme."

@@ -725,7 +725,7 @@
 			user.dropItemToGround(src)
 			user.put_in_hands(P)
 		var/obj/item/bodypart/arm = user.get_active_hand()
-		arm?.bodypart_attacked_by(BCLASS_CUT, 25)
+		arm?.bodypart_attacked_by(BCLASS_CUT, 25, modifiers = list(CRIT_MOD_CHANCE = -100))
 		qdel(src)
 	else
 		user.visible_message(span_warning("[user] stops reshaping [src]."))

@@ -3,12 +3,33 @@
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NO_SPLIT_PERSONALITY), PROC_REF(on_no_split_personality_trait_gain))
 
+	//Traits that register add and remove
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOBLOOD), PROC_REF(on_noblood_trait_gain))
+	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_NOBLOOD), PROC_REF(on_noblood_trait_loss))
+
 	RegisterSignal(src, SIGNAL_ADDCHEMEFFECT(CE_STIMULANT), PROC_REF(receive_actionboost))
 	RegisterSignal(src, SIGNAL_REMOVECHEMEFFECT(CE_STIMULANT), PROC_REF(remove_actionboost))
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PSYDONIAN_GRIT), PROC_REF(on_psydonian_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PSYDONIAN_GRIT), PROC_REF(on_psydonian_lose))
 
+/**
+ * On gain of TRAIT_NOBLOOD
+ *
+ * This will make the mob update its blood state.
+ */
+/mob/living/carbon/proc/on_noblood_trait_gain(datum/source)
+	SIGNAL_HANDLER
+	update_blood_status()
+
+/**
+ * On removal of TRAIT_NOBLOOD
+ *
+ * This will make the mob update its blood state.
+ */
+/mob/living/carbon/proc/on_noblood_trait_loss(datum/source)
+	SIGNAL_HANDLER
+	update_blood_status()
 
 /**
  * On gain of TRAIT_NO_SPLIT_PERSONALITY

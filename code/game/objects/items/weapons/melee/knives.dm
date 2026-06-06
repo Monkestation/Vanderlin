@@ -447,7 +447,7 @@
 	. = ..()
 	if(!ishuman(target))
 		return
-	if(target.stat == DEAD || (target.health < target.crit_threshold)) // Trigger soul steal or identity theft if the target is either dead or in crit
+	if(target.stat == DEAD || HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION)) // Trigger soul steal or identity theft if the target is either dead or in crit
 		if(istype(user.used_intent, /datum/intent/peculate))
 			if(!ishuman(user)) // carbons don't have all features of a human
 				to_chat(user, span_danger("You can't do that!"))

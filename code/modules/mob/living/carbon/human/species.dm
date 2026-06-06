@@ -627,7 +627,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/used_neworgan = FALSE
 		var/should_have
 		if(neworgan)
-			should_have = neworgan.get_availability(src)
+			should_have = neworgan.get_availability(src, C)
 		else
 			should_have = TRUE
 
@@ -1015,7 +1015,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
 		H.setOxyLoss(0)
 		H.losebreath = 0
-	else if((H.health < H.crit_threshold) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
+	else if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
 		H.adjustOxyLoss(1)
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
@@ -1248,7 +1248,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
 	if(chem.type == exotic_bloodtype)
-		H.blood_volume = min(H.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		H.adjust_blood_volume(round(chem.volume, 0.1), maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 		H.reagents.del_reagent(chem.type)
 		return TRUE
 	if(chem.overdose_threshold && chem.volume >= chem.overdose_threshold)
@@ -1732,20 +1732,20 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 							directional_blocked = TRUE
 							break
 			if((!target_table && !target_collateral_mob) || directional_blocked)
-				target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+				target.Knockdown(SHOVE_KNOCKDOWN_SOLID, prevent_drop = TRUE)
 				target.visible_message("<span class='danger'>[user.name] kicks [target.name], knocking them down!</span>",
 								"<span class='danger'>I'm knocked down from a kick by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>I kick [target.name], knocking them down!</span>")
 				log_combat(user, target, "kicked", "knocking them down")
 			else if(target_table)
-				target.Knockdown(SHOVE_KNOCKDOWN_TABLE)
+				target.Knockdown(SHOVE_KNOCKDOWN_TABLE, prevent_drop = TRUE)
 				target.visible_message("<span class='danger'>[user.name] kicked [target.name] onto \the [target_table]!</span>",
 								"<span class='danger'>I'm kicked onto \the [target_table] by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>I kick [target.name] onto \the [target_table]!</span>")
 				target.throw_at(target_table, 1, 1, null, FALSE) //1 speed throws with no spin are basically just forcemoves with a hard collision check
 				log_combat(user, target, "kicked", "onto [target_table] (table)")
 			else if(target_collateral_mob)
-				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
+				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN, prevent_drop = TRUE)
 				target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
 				target.visible_message("<span class='danger'>[user.name] kicks [target.name] into [target_collateral_mob.name]!</span>",
 					"<span class='danger'>I'm kicked into [target_collateral_mob.name] by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
@@ -1845,6 +1845,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
 		if(selzone != user.zone_selected)
 			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+			affecting = H.get_bodypart(check_zone(selzone))
 
 	var/item_force = get_complex_damage(I, user) //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
@@ -1993,7 +1994,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.brute_mod
-			if(!HAS_TRAIT(H, TRAIT_NOPAIN))
+			if(H.can_feel_pain())
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
 					if(prob(damage_amount * 3))
@@ -2158,8 +2159,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(burn_damage > 0)
 			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod, 0, CONFIG_GET(number/per_tick/max_fire_damage))
 			H.apply_damage(final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
-			if(!H.has_smoke_protection())
-				H.apply_damage(final_damage/4, OXY, flashes = FALSE) // Smoke inhalation
+			// if(!H.has_smoke_protection())
+			// 	H.apply_damage(final_damage/4, OXY, flashes = FALSE) // Smoke inhalation
 			if(H.stat < UNCONSCIOUS && prob(burn_damage * 10 / 4))
 				H.emote("pain")
 		// Apply building heat debuffs

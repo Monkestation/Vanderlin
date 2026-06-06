@@ -7479,7 +7479,7 @@
 /area/outdoors/bog/lich)
 "fST" = (
 /obj/effect/decal/cleanable/dirt,
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/wood,
 /area/indoors/ship)
 "fTa" = (
@@ -13901,7 +13901,7 @@
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
 	},
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/shelter/bog/lich)
 "mrh" = (

@@ -2,7 +2,7 @@
 	name = "cloth"
 	desc = "A square of cloth mended from fibers."
 	icon_state = "cloth"
-	possible_item_intents = list(/datum/intent/use, /datum/intent/soak, /datum/intent/wring)
+	possible_item_intents = list(/datum/intent/use, INTENT_SOAK, INTENT_WRING)
 	force = 0
 	throwforce = 0
 	firefuel = 3 MINUTES
@@ -23,12 +23,16 @@
 	var/volume = 9
 
 	// Effectiveness when used as a bandage, how much it'll lower the bloodloss, bloodloss will get multiplied by this.
-	var/bandage_effectiveness = 0.5
+	var/bandage_effectiveness = 0 // EXPERIMENTAL CHANGE: BANDAGES STOP ALL BLEEDING
 	///how long it will take to bandage something with this
 	var/bandage_speed = 7 SECONDS
-	///How much you can bleed into the bandage until it needs to be changed (Blood loss is measured in 50% of the health)
-	var/bandage_health = 150
+	///How much you can bleed into the bandage until it needs to be changed
+	var/bandage_health = 250
 	obj_flags = CAN_BE_HIT //enables splashing on by containers
+
+/obj/item/natural/cloth/examine(mob/user)
+	. = ..()
+	. += span_notice("[src] is [PERCENT((initial(bandage_health) - bandage_health)/initial(bandage_health))]% soaked in blood.")
 
 /obj/item/natural/cloth/Initialize(mapload, vol)
 	. = ..()
@@ -76,13 +80,12 @@
 	return TRUE
 
 /obj/item/natural/cloth/proc/on_clean_success(datum/source, atom/target, mob/living/user, clean_succeeded)
-	if(clean_succeeded)
-		if(prob(50) && isturf(target)) // to prevent infinitely renewable water
-			var/turf/T = target
-			T.add_liquid_from_reagents(reagents, amount = 1)
-		reagents.remove_all(1)
-		bandage_health = initial(bandage_health)
-		bandage_effectiveness = initial(bandage_effectiveness)
+	if(!clean_succeeded)
+		return
+	if(prob(50) && isturf(target)) // to prevent infinitely renewable water
+		var/turf/T = target
+		T.add_liquid_from_reagents(reagents, amount = 1)
+	reagents.remove_all(1)
 
 /obj/item/natural/cloth/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	. = ..()
@@ -152,6 +155,8 @@
 				reagents.add_reagent(W.water_reagent, reagents.maximum_volume)
 				user.visible_message(span_small("[user] soaks \the [src] in \the [T]."), span_small("I soak \the [src] in \the [T]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
+				bandage_health = initial(bandage_health)
+				bandage_effectiveness = initial(bandage_effectiveness)
 		else
 			var/datum/liquid_group/lg = T.liquids?.liquid_group
 			if(!lg)
@@ -178,6 +183,8 @@
 			reagents.trans_to(O, reagents.total_volume, 1, transfered_by = user)
 			user.visible_message(span_small("[user] wrings out \the [src] in \the [O]."), span_small("I wring out \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
+			bandage_health = initial(bandage_health)
+			bandage_effectiveness = initial(bandage_effectiveness)
 	else if(isturf(target))
 		var/turf/T = target
 		if(istype(T, /turf/open/water))
@@ -191,6 +198,8 @@
 				reagents.clear_reagents()
 				user.visible_message(span_small("[user] wrings out \the [src]."), span_small("I wring out \the [src]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
+				bandage_health = initial(bandage_health)
+				bandage_effectiveness = initial(bandage_effectiveness)
 
 	update_appearance()
 
@@ -221,9 +230,9 @@
 	H.update_damage_overlays()
 
 	if(M == user)
-		user.visible_message("<span class='notice'>[user] bandages [user.p_their()] [affecting].</span>", "<span class='notice'>I bandage my [affecting].</span>")
+		user.visible_message(span_notice("[user] bandages [user.p_their()] [affecting.name]."), span_notice("I bandage my [affecting.name]."))
 	else
-		user.visible_message("<span class='notice'>[user] bandages [M]'s [affecting].</span>", "<span class='notice'>I bandage [M]'s [affecting].</span>")
+		user.visible_message(span_notice("[user] bandages [M]'s [affecting.name]."), span_notice("I bandage [M]'s [affecting.name]."))
 
 
 /obj/item/natural/cloth/update_overlays()

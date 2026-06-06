@@ -33,7 +33,6 @@
 	attack_sound = PUNCHWOOSH
 	harm_intent_damage = 5
 	environment_smash = ENVIRONMENT_SMASH_NONE
-	blood_volume = BLOOD_VOLUME_NORMAL
 
 	tame_chance = 0
 	retreat_distance = 10
