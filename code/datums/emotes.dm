@@ -24,7 +24,8 @@
 	var/stat_allowed = CONSCIOUS
 	var/sound //Sound to play when emote is called
 	var/vary = FALSE	//used for the honk borg emote
-	var/only_forced_audio = FALSE //can only code call this event instead of the player.
+	/// Can only code call this event instead of the player.
+	var/only_forced_audio = FALSE
 	/// The cooldown between the uses of the emote.
 	var/cooldown = 0.8 SECONDS
 	/// Blocks any intentional emote use for this time.
@@ -60,12 +61,17 @@
 /datum/emote/proc/adjacentaction(mob/user, mob/target)
 	return
 
+/**
+ * Handles the modifications and execution of emotes.
+ *
+ * Arguments:
+ * * user - Person that is trying to send the emote.
+ * * params - Parameters added after the emote.
+ * * type_override - Override to the current emote_type.
+ * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
+ * * targeted - The emote targets adjacent mobs. Runs asynchronously.
+ */
 /datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targeted = FALSE)
-	. = TRUE
-	if(!can_run_emote(user, TRUE, intentional))
-		return FALSE
-	if(only_forced_audio && intentional)
-		return FALSE
 	if(targeted)
 		INVOKE_ASYNC(src, PROC_REF(async_targeted_emote), user, params, type_override, intentional)
 		return
@@ -92,9 +98,9 @@
 	var/sound/tmp_sound = get_sound(user)
 	if(!istype(tmp_sound))
 		tmp_sound = sound(get_sfx(tmp_sound))
-	tmp_sound.frequency = pitch
-	if(tmp_sound && (!only_forced_audio || !intentional))
-		if (ishuman(user))
+	if(tmp_sound && should_play_sound(user, intentional))
+		tmp_sound.frequency = pitch
+		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			if(H.voice_type == VOICE_TYPE_ANDRO)
 				tmp_sound.frequency = pitch * 0.92
@@ -146,9 +152,6 @@
 		pitch_modifier += (10 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)) * 0.03
 	return clamp(final_pitch + pitch_modifier, 0.5, 2)
 
-
-
-
 /datum/emote/proc/get_env(mob/living/user)
 	return
 
@@ -161,50 +164,49 @@
 				return I.emote_environment
 
 /datum/emote/proc/get_sound(mob/living/user)
-	if(sound)
-		return sound
+	return sound //by default just return this var.
 
 /datum/emote/living/get_sound(mob/living/user)
 	if(sound)
 		return sound
-	else
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			var/used_sound
-			var/possible_sounds
-			var/modifier
-			if(H.age == AGE_OLD)
-				modifier = "old"
-			if(!ignore_silent && !H.can_speak() || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
-				modifier = "silenced"
-			if(user.gender == FEMALE && H.dna.species.soundpack_f)
-				possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
-			else if(H.dna.species.soundpack_m)
-				possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
-			if(H.voice_type)
-				switch (H.voice_type)
-					if (VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
-						possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
-					if (VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
-						if (H.dna.species.soundpack_f)
-							possible_sounds = H.dna.species.soundpack_f.get_sound(key, modifier)
-						else
-							possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
-			if(possible_sounds)
-				if(islist(possible_sounds))
-					var/list/PS = possible_sounds
-					if(PS.len > 1)
-						used_sound = pick_n_take(possible_sounds)
-						if(used_sound == H.last_sound)
-							used_sound = pick(possible_sounds)
+	else if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/used_sound
+		var/possible_sounds
+		var/modifier
+		if(H.age == AGE_OLD)
+			modifier = "old"
+		if(!ignore_silent && !H.can_speak() || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
+			modifier = "silenced"
+		if(user.gender == FEMALE && H.dna.species.soundpack_f)
+			possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
+		else if(H.dna.species.soundpack_m)
+			possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
+		if(H.voice_type)
+			switch (H.voice_type)
+				if (VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
+					possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
+				if (VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
+					if (H.dna.species.soundpack_f)
+						possible_sounds = H.dna.species.soundpack_f.get_sound(key, modifier)
 					else
-						used_sound = pick(possible_sounds)
-				else //direct file
-					used_sound = possible_sounds
-				H.last_sound = used_sound
-				return used_sound
-		else
-			return user.get_sound(key)
+						possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
+		if(!possible_sounds)
+			return
+		if(islist(possible_sounds))
+			var/list/PS = possible_sounds
+			if(PS.len > 1)
+				used_sound = pick_n_take(possible_sounds)
+				if(used_sound == H.last_sound)
+					used_sound = pick(possible_sounds)
+			else
+				used_sound = pick(possible_sounds)
+		else //direct file
+			used_sound = possible_sounds
+		H.last_sound = used_sound
+		return used_sound
+	else
+		return user.get_sound(key)
 
 /mob/living/proc/get_sound(input)
 	return

@@ -261,7 +261,7 @@ Transfer_mind is there to check if mob is being deleted/not going to have a body
 Works together with spawning an observer, noted above.
 */
 
-/mob/proc/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip)
+/mob/proc/ghostize(can_reenter_corpse = 1, drawskip)
 	if(key)
 		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
 		if(client)
@@ -293,18 +293,6 @@ Works together with spawning an observer, noted above.
 			return ghost
 		ghost.add_client_colour(/datum/client_colour/monochrome)
 		return ghost
-
-/mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE)
-	if(mind)
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
-			if(force_respawn)
-				mind.remove_antag_datum(/datum/antagonist/zombie)
-				return ..()
-			// if(!Z.revived)
-			// 	if(!(world.time % 5))
-			// 		to_chat(src, "<span class='warning'>I'm preparing to walk again.</span>")
-			// 	return
-	return ..()
 
 /mob/proc/scry_ghost()
 	if(key)
@@ -387,8 +375,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>My spirit has been snatched away by Graggar!</span>")
 		return
 	if(is_antag_banned(ckey, ROLE_ZOMBIE))
-		var/datum/antagonist/zombie/is_zombie = mind.has_antag_datum(/datum/antagonist/zombie)
-		if(is_zombie?.revived)
+		if(mind.has_antag_datum(/datum/antagonist/zombie))
 			to_chat(src, span_warning("I am banned from playing deadites."))
 			return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients

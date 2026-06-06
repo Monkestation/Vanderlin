@@ -10,7 +10,9 @@
 	slot_flags = ITEM_SLOT_HIP
 	populate_contents = list(
 		/obj/item/reagent_containers/syringe,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/natural/bundle/fibers/full,
 		/obj/item/storage/fancy/pilltin/sate,
 		/obj/item/storage/fancy/pilltin/devour,
 		/obj/item/candle/yellow,

@@ -1,4 +1,0 @@
-author: "Ben10083"
-delete-after: True
-changes:
-  - code_imp: "Improved logic to mapped in graves to have some bodies stored in a coffin or sheet"

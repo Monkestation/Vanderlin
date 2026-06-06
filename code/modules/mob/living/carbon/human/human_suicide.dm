@@ -17,7 +17,7 @@
 
 /mob/living/carbon/human/apply_suicide_damage(obj/item/suicide_tool, damage_type = NONE)
 	// if we don't have any damage_type passed in, default to parent.
-	if(damage_type == NONE)
+	if(damage_type & NONE)
 		return ..()
 
 	if(damage_type & MANUAL_SUICIDE_NONLETHAL)
