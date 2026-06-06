@@ -23,7 +23,7 @@
 	speed = 0.8
 
 /obj/projectile/bullet/pellet/zil
-	name = "zenar pellet"
+	name = "zil pellet"
 	armor_penetration = 95
 	speed = 0.75
 
