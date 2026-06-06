@@ -146,6 +146,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/set_dynex_scale,
+	/client/proc/open_ticket_granter,
 	/client/proc/drop_dynex_bomb,
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,
@@ -207,6 +208,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/get_dynex_power,		//*debug verbs for dynex explosions.
 	/client/proc/get_dynex_range,		//*debug verbs for dynex explosions.
 	/client/proc/set_dynex_scale,
+	/client/proc/open_ticket_granter,
 	/client/proc/cmd_display_del_log,
 	/client/proc/debug_huds,
 	/client/proc/map_export,
@@ -266,6 +268,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/get_dynex_range,
 	/client/proc/get_dynex_power,
 	/client/proc/set_dynex_scale,
+	/client/proc/open_ticket_granter,
 	/client/proc/cmd_admin_create_announcement,
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,

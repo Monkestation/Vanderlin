@@ -201,3 +201,31 @@
 /obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+/obj/item/clothing/head/roguehood/studded
+	name = "studded hood"
+	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however."
+	icon_state = "studhood"
+	item_state = "studhood"
+	body_parts_covered = NECK | HEAD | HAIR
+	slot_flags = ITEM_SLOT_HEAD
+	flags_inv = HIDEEARS|HIDEHAIR
+	blocksound = SOFTHIT
+	armor = ARMOR_LEATHER
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	block2add = null
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+
+	color = CLOTHING_BROWN
+
+/obj/item/clothing/head/roguehood/studded/retinue //For skirmisher
+	name = "guard studded hood"
+	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however. This one bears the heraldry of the local lord."
+	detail_tag = "_detail"
+	color = CLOTHING_AZURE
+	detail_color = CLOTHING_WHITE

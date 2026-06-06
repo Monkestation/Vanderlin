@@ -19,6 +19,12 @@
 ///from base of mob/update_transform()
 #define COMSIG_LIVING_POST_UPDATE_TRANSFORM "living_post_update_transform"
 
+/// From /mob/living/proc/update_blood_status(), sent when the return value of /mob/living/proc/can_have_blood() changes, but before the new blood status is applied : (had_blood, has_blood, old_blood_volume)
+#define COMSIG_LIVING_PRE_UPDATE_BLOOD_STATUS "living_pre_update_blood_status"
+
+/// From /mob/living/proc/update_blood_status(), sent when the return value of /mob/living/proc/can_have_blood() changes : (had_blood, has_blood, old_blood_volume, new_blood_volume)
+#define COMSIG_LIVING_UPDATE_BLOOD_STATUS "living_update_blood_status"
+
 ///Signal sent when a keybind is deactivated
 #define DEACTIVATE_KEYBIND(A) "[A]_DEACTIVATED"
 #define COMSIG_KB_LIVING_VIEW_PET_COMMANDS "keybinding_living_view_pet_commands"
@@ -39,6 +45,8 @@
 
 /// From base of /obj/item/reagent_containers/food/snacks/attack: (mob/living/M, mob/living/user, list/modifiers)
 #define COMSIG_MOB_FOOD_EAT "mob_food_ate"
+
+#define COMSIG_MOB_STRIPPED_ITEM "mob_stripped_item"
 
 //ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
 ///from base of mob/living/OffBalance() (amount, ignore_canstun)

@@ -1,5 +1,8 @@
 /datum/quest/kill/outlaw
 	quest_type = QUEST_OUTLAW
+	quest_difficulty = QUEST_DIFFICULTY_HARD
+	minimum_payout = QUEST_REWARD_HARD_LOW
+	maximum_payout = QUEST_REWARD_HARD_HIGH
 	mob_types_to_spawn = list(
 		/mob/living/carbon/human/species/human/northern/deranged_knight
 	)

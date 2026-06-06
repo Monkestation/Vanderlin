@@ -33,7 +33,7 @@
 
 	their_item.take_damage(max(damage, 1), BRUTE, our_item.damage_type)
 	visible_message(span_suicide("[src] ripostes [user] with \the [our_item]!"))
-	span_notice("[capitalize(user.p_theyre())] exposed!")
+	span_notice("[user.p_theyre(TRUE)] exposed!")
 	playsound(src, 'sound/combat/clash_struck.ogg', 100)
 
 	user.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)

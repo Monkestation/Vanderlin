@@ -99,6 +99,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 	update_config_movespeed()
 	update_movespeed(TRUE)
 	become_hearing_sensitive()
+	if(!canparry)
+		ADD_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
+	if(!candodge)
+		ADD_TRAIT(src, TRAIT_UNDODGING, INNATE_TRAIT)
 
 /// Attributes
 /mob/proc/attribute_initialize()
@@ -1156,34 +1160,34 @@ GLOBAL_VAR_INIT(mobids, 1)
 	H.open_language_menu(usr)
 
 ///Adjust the nutrition of a mob
-/mob/proc/adjust_nutrition(change) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		nutrition = NUTRITION_LEVEL_FULL
-	nutrition = max(0, nutrition + change)
-	if(nutrition > NUTRITION_LEVEL_FULL)
-		nutrition = NUTRITION_LEVEL_FULL
+/mob/proc/adjust_nutrition(change, forced) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		nutrition = NUTRITION_LEVEL_WELL_FED
+		return
+
+	nutrition = clamp(nutrition + change, 0, NUTRITION_LEVEL_FULL)
 
 ///Force set the mob nutrition
-/mob/proc/set_nutrition(change) //Seriously fuck you oldcoders.
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		nutrition = NUTRITION_LEVEL_FULL
-	nutrition = max(0, change)
-	if(nutrition > NUTRITION_LEVEL_FULL)
-		nutrition = NUTRITION_LEVEL_FULL
+/mob/proc/set_nutrition(set_to, forced) //Seriously fuck you oldcoders.
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		nutrition = NUTRITION_LEVEL_WELL_FED
+		return
 
-/mob/proc/adjust_hydration(change)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		hydration = HYDRATION_LEVEL_FULL
-	hydration = max(0, hydration + change)
-	if(hydration > HYDRATION_LEVEL_FULL)
-		hydration = HYDRATION_LEVEL_FULL
+	nutrition = clamp(set_to, 0, NUTRITION_LEVEL_FULL)
 
-/mob/proc/set_hydration(change)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		hydration = HYDRATION_LEVEL_FULL
-	hydration = max(0, change)
-	if(hydration > HYDRATION_LEVEL_FULL)
-		hydration = HYDRATION_LEVEL_FULL
+/mob/proc/adjust_hydration(change, forced)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		hydration = HYDRATION_LEVEL_HYDRATED
+		return
+
+	hydration = clamp(hydration + change, 0, HYDRATION_LEVEL_FULL)
+
+/mob/proc/set_hydration(set_to, forced)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		hydration = HYDRATION_LEVEL_HYDRATED
+		return
+
+	hydration = clamp(set_to, 0, HYDRATION_LEVEL_FULL)
 
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = equipped_speed_mods()

@@ -5665,10 +5665,10 @@
 	pixel_x = -24
 	},
 /obj/structure/mannequin/male,
-/obj/item/clothing/head/rare/dwarfplate,
-/obj/item/clothing/armor/rare/dwarfplate,
-/obj/item/clothing/shoes/boots/rare/dwarfplate,
-/obj/item/clothing/gloves/rare/dwarfplate,
+/obj/item/clothing/head/helmet/heavy/dwarven,
+/obj/item/clothing/shoes/boots/armor/dwarven,
+/obj/item/clothing/armor/plate/full/dwarven,
+/obj/item/clothing/gloves/plate/dwarven,
 /obj/machinery/light/fueled/torchholder/l{
 	pixel_x = 4
 	},

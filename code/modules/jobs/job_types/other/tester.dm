@@ -53,7 +53,6 @@
 	. = ..()
 	if(equipped_human.gender == FEMALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
-		beltr = /obj/item/weapon/sword/sabre
 	if(prob(50))
 		armor = /obj/item/clothing/armor/gambeson
 	if(prob(50))

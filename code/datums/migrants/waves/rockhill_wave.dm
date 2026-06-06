@@ -65,10 +65,8 @@
 	if(equipped_human.gender == FEMALE)
 		head = /obj/item/clothing/head/courtierhat
 		neck = /obj/item/storage/belt/pouch/coins/rich
-		cloak = /obj/item/clothing/cloak/raincloak/furcloak
 		beltr = /obj/item/weapon/sword/rapier
 		ring = /obj/item/clothing/ring/silver
-		shoes = /obj/item/clothing/shoes/nobleboot
 		backr = /obj/item/storage/backpack/satchel
 		backpack_contents = list(
 			/obj/item/storage/belt/pouch/coins/rich = 1,

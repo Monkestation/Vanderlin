@@ -58,3 +58,10 @@
 	unarmed_bonus = 1.25
 	max_integrity = 250
 	color = "#ffffff"
+
+/obj/item/clothing/gloves/angle/freifechter
+	name = "fencing gloves"
+	desc = "A pair of hardened leather gloves used by fencers who aren't exactly convinced of losing a finger to a particularly strong feder cut. The inside is padded for extra durability."
+	icon_state = "freigloves"
+	item_state = "freigloves"
+	max_integrity = ARMOR_INT_SIDE_HARDLEATHER + 50
