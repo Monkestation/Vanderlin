@@ -412,9 +412,18 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	if((player_prefs.lastclass == job.title) && !job.bypass_lastclass)
 		return JOB_UNAVAILABLE_LASTCLASS
 
+	if((job.job_flags & JOB_REQUIRE_WHITELIST) && !client?.is_whitelisted(initial(job.title)))
+		return JOB_UNAVAILABLE_GENERIC
+
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
+	// Multi-ready is pregame-only. If active, ignore cached slots and
+	// reload whichever character slot the player actually has selected.
+	if(client?.prefs?.multi_char_ready)
+		client.prefs.load_character(client.prefs.default_slot)
+		multi_ready_characters = list()
+
 	var/error = IsJobUnavailable(rank)
 	if(error != JOB_AVAILABLE)
 		alert(src, get_job_unavailable_error_message(error, rank))
@@ -463,7 +472,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	GLOB.respawncounts[character.ckey] += 1
 
 	if(humanc)
-		try_apply_character_post_equipment(humanc)
+		try_apply_character_post_equipment(humanc, client)
 
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
 

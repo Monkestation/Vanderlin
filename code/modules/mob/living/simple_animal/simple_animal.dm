@@ -342,6 +342,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	tame_chance = initial(tame_chance)
 
 	if(!previous_tame_status)
+		GLOB.tamed_mobs |= src
 		pet_passive = TRUE
 
 		if(ai_controller)
@@ -729,6 +730,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		nest.spawned_mobs -= src
 		nest = null
 	drop_loot()
+	GLOB.tamed_mobs -= src
 	if(dextrous)
 		drop_all_held_items()
 	if(!gibbed)

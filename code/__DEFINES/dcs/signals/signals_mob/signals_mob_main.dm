@@ -157,3 +157,5 @@
 #define COMSIG_ITEM_WEARERCROSSED "wearer_crossed"
 
 #define COMSIG_MOB_MOUSE_ENTERED "user_mouse_entered"
+
+#define COMSIG_MOB_WASHED_MESS "mob_mess_cleaned"

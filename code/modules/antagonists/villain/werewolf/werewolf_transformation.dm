@@ -15,7 +15,7 @@
 
 	if(transformed && !HAS_TRAIT(human_user, TRAIT_PARALYSIS) && !human_user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		if(human_user.rage_datum.check_rage(WW_RAGE_MEDIUM))
-			if(human_user.blood_volume > BLOOD_VOLUME_SURVIVE)
+			if(!CAN_HAVE_BLOOD(human_user) || human_user.get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in human_user.get_wounds())
 					wound.heal_wound(1.2)
 
@@ -83,7 +83,7 @@
 	new_werewolf.adjustToxLoss(human_user.getToxLoss() / 2)
 	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
 	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
-	new_werewolf.blood_volume = human_user.blood_volume
+	new_werewolf.set_blood_volume(human_user.blood_volume, minimum = BLOOD_VOLUME_SURVIVE)
 	human_user.fully_heal(HEAL_BLOOD|HEAL_WOUNDS|HEAL_RESTRAINTS)
 
 	playsound(new_werewolf, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)

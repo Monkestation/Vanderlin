@@ -17,13 +17,17 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	vessel_item_type = item_type
 	vessel_id = id
 
-	if(!vessel_item_type)
+	if(vessel_item_type)
+		return
+
+	if(SSticker.HasRoundStarted())
+		addtimer(CALLBACK(src, PROC_REF(begin_ghost_offer)), 5 SECONDS)
+	else
 		being_offered = TRUE
-		astype(parent, /atom).balloon_alert_to_viewers("This vessel awaits a soul...")
+		owner.balloon_alert_to_viewers("This vessel awaits a soul...")
 		if(!GLOB.active_ghost_vessels[vessel_id])
 			GLOB.active_ghost_vessels[vessel_id] = list()
-		GLOB.active_ghost_vessels[vessel_id] += parent  // store the mob, not the component
-		return
+		GLOB.active_ghost_vessels[vessel_id] += owner  // store the mob, not the component
 
 /datum/component/ghost_vessel/Destroy()
 	if(vessel_id && GLOB.active_ghost_vessels[vessel_id])
@@ -73,7 +77,7 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	var/mob/living/living_parent = parent
 
 	var/list/candidates = pollCandidatesForMobWhitelisted(
-		"A vessel at [living_parent.loc] awaits a soul. Do you wish to inhabit it?",
+		"A [vessel_id] vessel at [owner.loc] awaits a soul. Do you wish to inhabit it?",
 		null,
 		null,
 		null,
@@ -109,5 +113,5 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	var/new_name = browser_input_text(living_parent, "Choose a new Name", "New Name", living_parent.name)
 	if(new_name)
 		living_parent.real_name = new_name
-
+	SEND_SIGNAL(owner, COMSIG_GHOST_VESSEL_POSSESSED, src)
 	qdel(src)

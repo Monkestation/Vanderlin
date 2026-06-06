@@ -193,6 +193,7 @@
 		playsound(user, pick_n_take(wash), 100, FALSE)
 		to_chat(user, span_notice("I water the soil."))
 		adjust_water(water_amount)
+		SEND_SIGNAL(user, COMSIG_PLANT_WATERED)
 		return TRUE
 	return FALSE
 

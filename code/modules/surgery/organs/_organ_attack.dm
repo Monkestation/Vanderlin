@@ -78,7 +78,7 @@
 /obj/item/organ/proc/handle_healing_item(obj/item/tool, mob/living/user, list/modifiers)
 
 	/*
-	if(organ_flags & (ORGAN_DESTROYED|ORGAN_DEAD))
+	if(organ_flags & (ORGAN_DESTROYED|ORGAN_NECROTIC))
 		to_chat(user, span_warning("\The [src] is damaged beyond the point of no return."))
 		return
 	*/
@@ -178,6 +178,6 @@
 		vision_distance = COMBAT_MESSAGE_RANGE
 	)
 
-	set_germ_level(GERM_LEVEL_STERILE)
+	set_germ_level(0)
 
 	return TRUE

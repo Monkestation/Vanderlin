@@ -112,7 +112,13 @@
 
 	var/stun_absorption = null //converted to a list of stun absorption sources this mob has when one is added
 
-	var/blood_volume = BLOOD_VOLUME_NORMAL //how much blood the mob has
+	/// How much blood the mob currently has.
+	/// Don't read directly, use get_blood_volume() and get_blood_volume(apply_modifiers = TRUE).
+	/// Don't write directly either, use set_blood_volume() and adjust_blood_volume().
+	/// Also don't initialize this. Initialize default_blood_volume instead.
+	var/blood_volume = 0
+	/// The default blood volume of the mob. Used primarily for healing bloodloss.
+	var/default_blood_volume = BLOOD_VOLUME_NORMAL
 
 	var/see_override = 0 //0 for no override, sets see_invisible = see_override in silicon & carbon life process via update_sight()
 
@@ -181,7 +187,8 @@
 	var/last_fatigued = 0
 	var/last_ps = 0
 
-	var/ambushable = 0
+	/// ONLY TO BE USED TO CONTROL INITIALIZING WITH AMBUSHABLE TRAIT
+	var/ambushable = FALSE
 
 	var/surrendering = 0
 
@@ -272,8 +279,6 @@
 	var/traumatic_shock = 0
 	/// Shock stage, as in how much our crit has progressed
 	var/shock_stage = 0
-	/// Last pain related message we have received - Used to prevent spam
-	var/last_pain_message = ""
 	/// Next time we are able to trigger custom_pain()
 	var/next_pain_time = 0
 	/// Next time we are able to send a custom_pain() chat message

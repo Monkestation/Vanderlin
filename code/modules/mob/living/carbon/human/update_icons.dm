@@ -380,7 +380,7 @@ GLOBAL_PROTECT(no_child_icons)
 			else
 				offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_m
 
-			var/mutable_appearance/neck_overlay = wear_neck.build_worn_icon(age, NECK_LAYER, 'icons/roguetown/clothing/onmob/neck.dmi')
+			var/mutable_appearance/neck_overlay = wear_neck.build_worn_icon(age, NECK_LAYER, 'icons/roguetown/clothing/onmob/neck.dmi', force_child = TRUE)
 			if(LAZYACCESS(offsets, OFFSET_NECK))
 				neck_overlay.pixel_x += offsets[OFFSET_NECK][1]
 				neck_overlay.pixel_y += offsets[OFFSET_NECK][2]
@@ -415,7 +415,7 @@ GLOBAL_PROTECT(no_child_icons)
 		else
 			offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_m
 
-		var/mutable_appearance/ring_overlay = wear_ring.build_worn_icon(age, RING_LAYER, 'icons/roguetown/clothing/onmob/rings.dmi')
+		var/mutable_appearance/ring_overlay = wear_ring.build_worn_icon(age, RING_LAYER, 'icons/roguetown/clothing/onmob/rings.dmi', force_child = TRUE)
 		if(LAZYACCESS(offsets, OFFSET_RING))
 			ring_overlay.pixel_x += offsets[OFFSET_RING][1]
 			ring_overlay.pixel_y += offsets[OFFSET_RING][2]
@@ -636,7 +636,7 @@ GLOBAL_PROTECT(no_child_icons)
 		else
 			offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_m
 
-		overlays_standing[HEAD_LAYER] = head.build_worn_icon(age = age, default_layer = HEAD_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/head.dmi', coom = FALSE)
+		overlays_standing[HEAD_LAYER] = head.build_worn_icon(age = age, default_layer = HEAD_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/head.dmi', coom = FALSE, force_child = TRUE)
 		var/mutable_appearance/head_overlay = overlays_standing[HEAD_LAYER]
 		if(head_overlay)
 			if(LAZYACCESS(offsets, OFFSET_HEAD))
@@ -715,7 +715,7 @@ GLOBAL_PROTECT(no_child_icons)
 					standing_front += onbelt_overlay
 					standing_behind += onbelt_behind
 			else
-				onbelt_overlay = beltr.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belt_r.dmi')
+				onbelt_overlay = beltr.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belt_r.dmi', force_child = TRUE)
 				if(onbelt_overlay)
 					if(LAZYACCESS(offsets, OFFSET_BELT))
 						onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
@@ -755,7 +755,7 @@ GLOBAL_PROTECT(no_child_icons)
 					standing_front += onbelt_overlay
 					standing_behind += onbelt_behind
 			else
-				onbelt_overlay = beltl.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belt_l.dmi')
+				onbelt_overlay = beltl.build_worn_icon(age, BELT_LAYER, 'icons/roguetown/clothing/onmob/belt_l.dmi', force_child = TRUE)
 				if(onbelt_overlay)
 					if(LAZYACCESS(offsets, OFFSET_BELT))
 						onbelt_overlay.pixel_x += offsets[OFFSET_BELT][1]
@@ -797,7 +797,7 @@ GLOBAL_PROTECT(no_child_icons)
 	if(wear_mask)
 		update_hud_wear_mask(wear_mask)
 		if(!(ITEM_SLOT_MASK & check_obscured_slots()))
-			var/mutable_appearance/mask_overlay = wear_mask.build_worn_icon(default_layer = MASK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/masks.dmi')
+			var/mutable_appearance/mask_overlay = wear_mask.build_worn_icon(default_layer = MASK_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/masks.dmi', force_child = TRUE)
 			var/datum/species/species = dna?.species
 			var/use_female_sprites = FALSE
 			if(species.sexes)
@@ -876,7 +876,7 @@ GLOBAL_PROTECT(no_child_icons)
 					LAZYADD(overcloaks, back_overlay)
 					LAZYADD(backbehind, behindback_overlay)
 			else
-				back_overlay = backr.build_worn_icon(age, BACK_LAYER, 'icons/roguetown/clothing/onmob/back_r.dmi')
+				back_overlay = backr.build_worn_icon(age, BACK_LAYER, 'icons/roguetown/clothing/onmob/back_r.dmi', force_child = TRUE)
 				if(LAZYACCESS(offsets, OFFSET_BACK))
 					back_overlay.pixel_x += offsets[OFFSET_BACK][1]
 					back_overlay.pixel_y += offsets[OFFSET_BACK][2]
@@ -914,7 +914,7 @@ GLOBAL_PROTECT(no_child_icons)
 					LAZYADD(overcloaks, back_overlay)
 					LAZYADD(backbehind, behindback_overlay)
 			else
-				back_overlay = backl.build_worn_icon(age, BACK_LAYER, 'icons/roguetown/clothing/onmob/back_l.dmi')
+				back_overlay = backl.build_worn_icon(age, BACK_LAYER, 'icons/roguetown/clothing/onmob/back_l.dmi', force_child = TRUE)
 				if(LAZYACCESS(offsets, OFFSET_BACK))
 					back_overlay.pixel_x += offsets[OFFSET_BACK][1]
 					back_overlay.pixel_y += offsets[OFFSET_BACK][2]
@@ -1240,7 +1240,7 @@ GLOBAL_PROTECT(no_child_icons)
 				offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_f
 			else
 				offsets = (age == AGE_CHILD) ? species.offset_features_child : species.offset_features_m
-			var/mutable_appearance/mouth_overlay = mouth.build_worn_icon(age, MOUTH_LAYER, 'icons/roguetown/clothing/onmob/mouth_items.dmi')
+			var/mutable_appearance/mouth_overlay = mouth.build_worn_icon(age, MOUTH_LAYER, 'icons/roguetown/clothing/onmob/mouth_items.dmi', force_child = TRUE)
 			if(mouth_overlay)
 				if(LAZYACCESS(offsets, OFFSET_MOUTH))
 					mouth_overlay.pixel_x += offsets[OFFSET_MOUTH][1]
@@ -1363,11 +1363,17 @@ generate/load female uniform sprites matching all previously decided variables
 
 
 */
-/obj/item/proc/build_worn_icon(age = AGE_ADULT, default_layer = 0, default_icon_file = null, isinhands = FALSE, femaleuniform = NO_FEMALE_UNIFORM, override_state = null, coom = FALSE, customi = null, sleeveindex)
+/obj/item/proc/build_worn_icon(age = AGE_ADULT, default_layer = 0, default_icon_file = null, isinhands = FALSE, femaleuniform = NO_FEMALE_UNIFORM, override_state = null, coom = FALSE, customi = null, sleeveindex, force_child = FALSE)
 	var/t_state
 	var/sleevejazz = sleevetype
-	if(age == AGE_CHILD)
-		coom = FALSE
+
+	if(!childcore)
+		if(age == AGE_CHILD && (!is_type_in_list(src, GLOB.no_child_icons) || !force_child))
+			coom = TRUE
+			customi = SPEC_ID_DWARF
+	else
+		if(age == AGE_CHILD)
+			coom = FALSE
 	if(override_state)
 		t_state = override_state
 	else if(isinhands && item_state)
@@ -1383,8 +1389,9 @@ generate/load female uniform sprites matching all previously decided variables
 		if(sleevejazz)
 			sleevejazz += "_[customi]"
 	var/t_icon = mob_overlay_icon
-	if(age == AGE_CHILD && !is_type_in_list(src, GLOB.no_child_icons))
-		t_state += "_child"
+	if(childcore)
+		if(age == AGE_CHILD && !is_type_in_list(src, GLOB.no_child_icons))
+			t_state += "_child"
 	if(!t_icon)
 		t_icon = default_icon_file
 
@@ -1478,35 +1485,45 @@ generate/load female uniform sprites matching all previously decided variables
 
 	return standing
 
-/mob/living/carbon/proc/get_sleeves_layer(obj/item/I,sleeveindex,layer2use)
+/mob/living/carbon/proc/get_sleeves_layer(obj/item/I, sleeveindex, layer2use)
 	if(!I)
 		return
 	var/list/sleeves = list()
-
 	if(I.r_sleeve_status == SLEEVE_TORN || I.r_sleeve_status == SLEEVE_ROLLED)
 		if(sleeveindex == 4 || sleeveindex == 2)
 			sleeveindex -= 1
 	if(I.l_sleeve_status == SLEEVE_TORN || I.l_sleeve_status == SLEEVE_ROLLED)
 		if(sleeveindex == 4 || sleeveindex == 3)
 			sleeveindex -= 2
-
 	var/index = I.icon_state
 	var/mob/living/carbon/human/HM = src
-	if(istype(HM) && HM.age == AGE_CHILD && !is_type_in_list(I, GLOB.no_child_icons))
-		index += "_child"
+	var/coom = FALSE
+	var/customi = null
+	if(!I.childcore)
+		if(istype(HM) && HM.age == AGE_CHILD && (!is_type_in_list(I, GLOB.no_child_icons)))
+			coom = TRUE
+			customi = SPEC_ID_DWARF
+	else
+		if(istype(HM) && HM.age == AGE_CHILD)
+			coom = FALSE
+	if(coom)
+		index += "_f"
 	else if(gender == FEMALE ^ dna.species.swap_female_clothes)
 		index += "_f"
-	if(dna.species.custom_clothes)
+	if(customi)
+		index += "_[customi]"
+	else if(dna.species.custom_clothes)
 		index += "_[dna.species.custom_id ? dna.species.custom_id : dna.species.id]"
-
+	if(I.childcore)
+		if(istype(HM) && HM.age == AGE_CHILD && !is_type_in_list(I, GLOB.no_child_icons))
+			index += "_child"
 	var/static/list/bloody_r = list()
 	var/static/list/bloody_l = list()
-	if(I.nodismemsleeves && sleeveindex) //armor pauldrons that show up above arms but don't get dismembered
+	if(I.nodismemsleeves && sleeveindex)
 		sleeveindex = 4
-
 	var/leftused = FALSE
 	var/rightused = FALSE
-	if(I.inhand_mod) //cloak holding icons
+	if(I.inhand_mod)
 		for(var/obj/item/H in held_items)
 			var/rightorleft
 			rightorleft = get_held_index_of_item(H) % 2
@@ -1514,7 +1531,6 @@ generate/load female uniform sprites matching all previously decided variables
 				rightused = TRUE
 			else
 				leftused = TRUE
-
 	if(sleeveindex == 2 || sleeveindex == 4 || !sleeveindex)
 		var/used = "r_[index]"
 		if(!sleeveindex)
@@ -1524,24 +1540,21 @@ generate/load female uniform sprites matching all previously decided variables
 		r_sleeve.color = I.color
 		r_sleeve.alpha = I.alpha
 		sleeves += r_sleeve
-
 		if(I.get_detail_tag())
 			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
-//			pic.appearance_flags = RESET_COLOR
+//          pic.appearance_flags = RESET_COLOR
 			if(I.get_detail_color())
 				pic.color = I.get_detail_color()
 			sleeves += pic
-
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_r[used]
 			if(!blood_overlay)
 				blood_overlay = icon(I.sleeved, used)
-				blood_overlay.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
-				blood_overlay.Blend(icon(I.bloody_icon, I.bloody_icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
+				blood_overlay.Blend("#fff", ICON_ADD)
+				blood_overlay.Blend(icon(I.bloody_icon, I.bloody_icon_state), ICON_MULTIPLY)
 				bloody_r[used] = fcopy_rsc(blood_overlay)
 			var/mutable_appearance/pic = mutable_appearance(blood_overlay, layer=-layer2use)
 			sleeves += pic
-
 	if(sleeveindex == 3 || sleeveindex == 4 || !sleeveindex)
 		var/used = "l_[index]"
 		if(!sleeveindex)
@@ -1551,26 +1564,22 @@ generate/load female uniform sprites matching all previously decided variables
 		l_sleeve.color = I.color
 		l_sleeve.alpha = I.alpha
 		sleeves += l_sleeve
-
 		if(I.get_detail_tag())
 			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
-//			pic.appearance_flags = RESET_COLOR
+//          pic.appearance_flags = RESET_COLOR
 			if(I.get_detail_color())
 				pic.color = I.get_detail_color()
 			sleeves += pic
-
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_l[used]
 			if(!blood_overlay)
 				blood_overlay = icon(I.sleeved, used)
-				blood_overlay.Blend("#fff", ICON_ADD) 			//fills the icon_state with white (except where it's transparent)
-				blood_overlay.Blend(icon(I.bloody_icon, I.bloody_icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
+				blood_overlay.Blend("#fff", ICON_ADD)
+				blood_overlay.Blend(icon(I.bloody_icon, I.bloody_icon_state), ICON_MULTIPLY)
 				bloody_l[used] = fcopy_rsc(blood_overlay)
 			var/mutable_appearance/pic = mutable_appearance(blood_overlay, layer=-layer2use)
 			sleeves += pic
-
 	return sleeves
-
 
 /obj/item/proc/get_held_offsets()
 	var/list/L

@@ -17,6 +17,7 @@
 	item_weight = 4.5 KILOGRAMS
 
 	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
 	force = 10
 	can_parry = TRUE
 	wdefense = AVERAGE_PARRY
@@ -30,12 +31,16 @@
 
 	ramrod_type = /obj/item/ramrod/musket
 	powder_required = 10
+
 	/// The bayonet if affixed
 	var/obj/item/weapon/knife/dagger/bayonet/bayonet = null
 
 /obj/item/gun/ballistic/powder/musket/Initialize(mapload)
 	bayonet = new(src)
-	return ..()
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, SPEAR_THRUST)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_THRUST)
+	. = ..()
+	AddElement(/datum/element/gun_launches_little_guys, throwing_force = 1, throwing_range = 1)
 
 /obj/item/gun/ballistic/powder/musket/Destroy(force)
 	if(!QDELETED(bayonet))
@@ -61,6 +66,8 @@
 	balloon_alert(user, "attached!")
 	user.transferItemToLoc(tool, src)
 	bayonet = tool
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, SPEAR_THRUST)
+	user.update_a_intents()
 	update_appearance(UPDATE_ICON_STATE)
 	return ITEM_INTERACT_SUCCESS
 
@@ -74,15 +81,11 @@
 
 	balloon_alert(user, "removed!")
 	user.put_in_hands(bayonet)
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	user.update_a_intents()
 	update_appearance(UPDATE_ICON_STATE)
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-/obj/item/gun/ballistic/powder/musket/pre_attack(atom/target, mob/living/user, list/modifiers)
-	. = ..()
-	if(bayonet && user.cmode) // Bayonet acts as a proxy attacker if present
-		INVOKE_ASYNC(bayonet, TYPE_PROC_REF(/obj/item, melee_attack_chain), user, target, modifiers - RIGHT_CLICK)
-		return TRUE
 
 /obj/item/gun/ballistic/powder/musket/getonmobprop(tag)
 	. = ..()

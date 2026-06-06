@@ -32,11 +32,12 @@
 
 /datum/organ_process/heart/proc/handle_pulse(mob/living/carbon/owner, delta_time, times_fired)
 	// Pulse mod starts out as just the chemical effect amount
+	// Your heart will fail and stop beating if it runs out of current_blood. Pumping heart resets current_blood and heart beating.
 	var/heart_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_HEART)
-	var/is_stable = owner.get_chem_effect(CE_STABLE) || HAS_TRAIT(owner, TRAIT_STABLEHEART)
+	var/is_stable = owner.get_chem_effect(CE_STABLE)
 	var/pulse_mod = (is_stable ? 0 : owner.get_chem_effect(CE_PULSE))
 
-	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
+	// If you have enough heart pulse chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(DT_PROB(damage_chance / 2, delta_time))
@@ -61,14 +62,13 @@
 		owner.pulse = clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_FASTER) //Pretend that we're dead. unlike actual death, can be influenced by meds
 		return
 
-	// If our heart is stopped, it isn't going to restart itself randomly.
-	if(heart_efficiency < failing_threshold)
+	// If our heart is stopped or failed, it isn't going to restart itself randomly.
+	if(heart_efficiency < failing_threshold && !is_stable)
 		owner.set_heartattack(TRUE)
-		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 		return
-	if(owner.pulse <= PULSE_NONE)
-		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
-		return
+	// if(owner.pulse <= PULSE_NONE)
+	// 	ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
+	// 	return
 
 	// Pulse normally shouldn't go above PULSE_FASTER unless you get extremely doped up
 	if(pulse_mod < 5)
@@ -88,16 +88,15 @@
 		else
 			owner.pulse++
 
-	// Thready pulse can damage us
-	if(owner.pulse >= PULSE_THREADY)
-		if(DT_PROB(2.5, delta_time))
-			owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
-	else if(owner.pulse >= PULSE_FASTER)
-		if(DT_PROB(0.5, delta_time))
-			owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
+	// High pulse can cause heart damage
+	if(owner.pulse >= PULSE_THREADY && DT_PROB(2.5, delta_time))
+		owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
+	else if(owner.pulse >= PULSE_FASTER && DT_PROB(0.5, delta_time))
+		owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 
 	// Finally, check if we should go into cardiac arrest
 	// cardiovascular shock, not enough liquid to pump
+	/*
 	var/should_stop = (owner.get_blood_circulation() < GET_EFFECTIVE_BLOOD_VOL(BLOOD_VOLUME_SURVIVE, owner.total_blood_req)) && DT_PROB(40, delta_time)
 	// brain failing to work heart properly
 	should_stop = should_stop || DT_PROB(CEILING(max(0, GETBRAINLOSS(owner) - (owner.maxHealth * 0.5)) / 2, 1), delta_time)
@@ -113,17 +112,16 @@
 			if(heart.can_stop())
 				heart.Stop()
 				break
+	*/
 
 	// No pulse means we are already having a cardiac arrest moment
 	if(owner.pulse <= PULSE_NONE)
 		owner.set_heartattack(TRUE)
-		ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
-	// High pulse can cause heart damage
 	else
-		if((owner.pulse == PULSE_FASTER) && DT_PROB(0.5, delta_time))
-			owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
-		else if((owner.pulse >= PULSE_THREADY) && DT_PROB(2.5, delta_time))
-			owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
+		// if((owner.pulse == PULSE_FASTER) && DT_PROB(0.5, delta_time))
+		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
+		// else if((owner.pulse >= PULSE_THREADY) && DT_PROB(2.5, delta_time))
+		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 		REMOVE_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 
 /datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, delta_time, times_fired)
@@ -133,7 +131,7 @@
 
 	var/effective_blood_circulation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_circulation(), owner.total_blood_req)
 	switch(effective_blood_circulation)
-		if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
+		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAXIMUM)
 			owner.status_flags &= ~BLEEDOUT
 			if(DT_PROB(2.5, delta_time))
 				to_chat(owner, span_userdanger("Blood starts to tear my arteries apart!"))
@@ -148,41 +146,30 @@
 				to_chat(owner, span_userdanger("Not... Enough... Blood..."))
 		else
 			owner.status_flags &= ~BLEEDOUT
-	if((owner.status_flags & BLEEDOUT) && DT_PROB(5, delta_time))
-		owner.adjust_eye_blur_up_to(4, 4)
-
-	if((effective_blood_circulation <= BLOOD_VOLUME_BLEEDOUT_PASSOUT) && DT_PROB(10, delta_time))
-		owner.Unconscious(4 SECONDS)
 
 	var/temp_bleed = 0
 	var/bleed_mod = 1
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		if(human_owner.physiology)
-			bleed_mod *= human_owner.physiology.bleed_mod
 	for(var/obj/item/bodypart/bleed_part as anything in owner.bodyparts)
-		var/resulting_bleed = bleed_part.get_bleed_rate(TRUE) * 0.5 * delta_time
-		var/true_bleed = bleed_part.get_bleed_rate() * 0.5 * delta_time
+		var/true_bleed = bleed_part.get_bleed_rate() * delta_time
 		switch(owner.pulse)
 			if(PULSE_SLOW)
-				resulting_bleed *= 0.8
+				true_bleed *= 0.8
 			if(PULSE_FAST)
-				resulting_bleed *= 1.25
+				true_bleed *= 1.25
 			if(PULSE_FASTER, PULSE_THREADY)
-				resulting_bleed *= 1.5
-		resulting_bleed = CEILING(resulting_bleed * bleed_mod, 0.1)
+				true_bleed *= 1.5
+		true_bleed = CEILING(true_bleed * bleed_mod, 0.1)
+		temp_bleed += true_bleed
 		if(bleed_part.bandage)
 			bleed_part.try_bandage_expire()
-		else if(true_bleed > 0)
-			temp_bleed += true_bleed
-	if(temp_bleed)
-		if(owner.bleed(temp_bleed) && (temp_bleed >= 1.5))
+	if(temp_bleed > 0)
+		if(owner.bleed(temp_bleed) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"
-			if((temp_bleed > 1) && (owner.body_position == STANDING_UP))
-				playsound(owner, bleed_sound, 60, FALSE)
+			playsound(owner, bleed_sound, 60, FALSE)
 
-	if(!HAS_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE) && owner.stat != DEAD)
-		switch(owner.blood_volume)
+	// This is not effective_blood_circulation because it represents the physical trauma from not having enough blood
+	if(CAN_HAVE_BLOOD(owner) && !HAS_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE) && owner.stat != DEAD)
+		switch(owner.get_blood_volume())
 			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)
@@ -195,35 +182,35 @@
 				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 				owner.remove_status_effect(/datum/status_effect/debuff/bleeding)
 				owner.apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+			else
+				owner.remove_status_effect(/datum/status_effect/debuff/bleeding)
+				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+				owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/bleeding)
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 
-	var/bleed_rate = owner.get_bleed_rate()
-	if(bleed_rate)
+	if(owner.get_bleed_rate())
 		owner.add_stress(/datum/stress_event/bleeding)
 	else
 		owner.remove_stress(/datum/stress_event/bleeding)
 
 /datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, delta_time, times_fired)
-	var/cardiac_arrest = owner.undergoing_nervous_system_failure()
+	var/cardiac_arrest = owner.undergoing_cardiac_arrest()
 	var/nervous_failure = owner.undergoing_nervous_system_failure()
 	if((owner.heartbeat_sound != BEAT_SLOW) && (cardiac_arrest || nervous_failure))
 		owner.heartbeat_sound = BEAT_SLOW
 		SEND_SOUND(owner, slowbeat)
 		if(cardiac_arrest || nervous_failure)
 			to_chat(owner, span_notice("I feel the grim reaper's cold gaze..."))
-		return
-	if((owner.heartbeat_sound == BEAT_SLOW) && !cardiac_arrest && !nervous_failure)
+	else if((owner.heartbeat_sound == BEAT_SLOW) && !cardiac_arrest && !nervous_failure)
 		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
 		owner.heartbeat_sound = BEAT_NONE
-		return
-	if((owner.heartbeat_sound != BEAT_FAST) && (owner.has_status_effect(/datum/status_effect/jitter)) && !cardiac_arrest && !nervous_failure)
+	else if((owner.heartbeat_sound != BEAT_FAST) && (owner.has_status_effect(/datum/status_effect/jitter)) && !cardiac_arrest && !nervous_failure)
 		SEND_SOUND(owner, fastbeat)
 		owner.heartbeat_sound = BEAT_FAST
-		return
-	if((owner.heartbeat_sound == BEAT_FAST) && (owner.has_status_effect(/datum/status_effect/jitter)))
+	else if((owner.heartbeat_sound == BEAT_FAST) && (owner.has_status_effect(/datum/status_effect/jitter)))
 		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
 		owner.heartbeat_sound = BEAT_NONE
-		return
+

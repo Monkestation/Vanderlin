@@ -27,14 +27,14 @@
 		mod *= S.nextmove_modifier()
 		adj += S.nextmove_adjust()
 	if(!hand)
-		next_move = world.time + ((num + adj)*mod * (InCritical()? 3 : 1))
+		next_move = world.time + ((num + adj)*mod * (HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) ? 3 : 1))
 		hud_used?.cdmid?.mark_dirty()
 		return
 	if(hand == 1)
-		next_lmove = world.time + ((num + adj)*mod * (InCritical()? 3 : 1))
+		next_lmove = world.time + ((num + adj)*mod * (HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) ? 3 : 1))
 		hud_used?.cdleft?.mark_dirty()
 	else
-		next_rmove = world.time + ((num + adj)*mod * (InCritical()? 3 : 1))
+		next_rmove = world.time + ((num + adj)*mod * (HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) ? 3 : 1))
 		hud_used?.cdright?.mark_dirty()
 
 /*

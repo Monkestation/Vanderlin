@@ -230,7 +230,8 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 		return
 
 	item_to_buy = new item_to_buy(get_turf(customer))
-	customer.put_in_hands(item_to_buy)
+	if(isitem(item_to_buy))
+		customer.put_in_hands(item_to_buy)
 	playsound(trader, trader_data.sell_sound, 50, TRUE)
 	product_info[TRADER_PRODUCT_INFO_QUANTITY] -= 1
 	trader.say(trader_data.return_trader_phrase(BUY_PHRASE))
