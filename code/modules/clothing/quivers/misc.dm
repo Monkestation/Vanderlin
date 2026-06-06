@@ -73,7 +73,7 @@
 	item_state = "javelinbag"
 	slot_flags = ITEM_SLOT_BACK
 	max_storage = 12
-	ammo_type = list(/obj/item/weapon/polearm/spear/stone/copper, /obj/item/weapon/polearm/spear/stone/copper/iron, /obj/item/weapon/polearm/spear/stone/copper/steel, /obj/item/weapon/polearm/spear/stone/copper/silver, /obj/item/weapon/polearm/spear/bone, /obj/item/weapon/polearm/spear/trollbone)
+	ammo_type = list(/obj/item/weapon/polearm/spear/javelin, /obj/item/weapon/polearm/spear/javelin/iron, /obj/item/weapon/polearm/spear/javelin/steel, /obj/item/weapon/polearm/spear/javelin/silver, /obj/item/weapon/polearm/spear/bone, /obj/item/weapon/polearm/spear/trollbone)
 
 /obj/item/ammo_holder/javelin/bone
 	fill_type = /obj/item/weapon/polearm/spear/bone
@@ -82,13 +82,13 @@
 	fill_type = /obj/item/weapon/polearm/spear/trollbone
 
 /obj/item/ammo_holder/javelin/copper
-	fill_type = /obj/item/weapon/polearm/spear/stone/copper
+	fill_type = /obj/item/weapon/polearm/spear/javelin
 
 /obj/item/ammo_holder/javelin/iron
-	fill_type = /obj/item/weapon/polearm/spear/stone/copper/iron
+	fill_type = /obj/item/weapon/polearm/spear/javelin/iron
 
 /obj/item/ammo_holder/javelin/steel
-	fill_type = /obj/item/weapon/polearm/spear/stone/copper/steel
+	fill_type = /obj/item/weapon/polearm/spear/javelin/steel
 
 /obj/item/ammo_holder/javelin/silver
-	fill_type = /obj/item/weapon/polearm/spear/stone/copper/silver
+	fill_type = /obj/item/weapon/polearm/spear/javelin/silver

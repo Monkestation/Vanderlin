@@ -70,7 +70,7 @@
 	name = "Copper Javelins (+Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/stone/copper
+	created_item = /obj/item/weapon/polearm/spear/javelin
 	output_amount = 2
 
 /datum/anvil_recipe/weapons/copper/cfalx
@@ -184,7 +184,7 @@
 	name = "Iron Javelins (+Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/stone/copper/iron
+	created_item = /obj/item/weapon/polearm/spear/javelin/iron
 	output_amount = 2
 	category = "Ammo"
 
@@ -466,7 +466,7 @@
 	name = "Steel Javelins (+Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/stone/copper/steel
+	created_item = /obj/item/weapon/polearm/spear/javelin/steel
 	output_amount = 2
 	category = "Ammo"
 /datum/anvil_recipe/weapons/steel/quarterstaff
@@ -486,7 +486,7 @@
 	name = "Partizan (+Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/partizan
+	created_item = /obj/item/weapon/polearm/spear/steel/partizan
 
 /datum/anvil_recipe/weapons/steel/aruval
 	name = "Steel Aruval (+2 Steel Bar)"
@@ -854,7 +854,7 @@
 	name = "Silver Javelins (+Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/polearm/spear/stone/copper/silver
+	created_item = /obj/item/weapon/polearm/spear/javelin/silver
 	output_amount = 2
 	category = "Ammo"
 

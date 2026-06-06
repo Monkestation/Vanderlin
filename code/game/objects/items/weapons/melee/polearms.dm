@@ -191,15 +191,14 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/polearm/spear/partizan
+/obj/item/weapon/polearm/spear/steel/partizan
 	name = "partizan"
 	desc = "A spear with a heavy steel head, deisgned for stabbing and chopping"
 	icon_state = "partizan"
 	force = DAMAGE_SPEARPLUS + 3
-	force_wielded = DAMAGE_SPEAR_WIELD + 3
+	force_wielded = DAMAGE_SPEAR_WIELD + 5
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST * 1.25
-	minstr = 9
 	sellprice = 50
 
 /obj/item/weapon/polearm/spear/abyssor
@@ -335,14 +334,19 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 1.8 KILOGRAMS
 
-/obj/item/weapon/polearm/spear/stone/copper
+/obj/item/weapon/polearm/spear/javelin
 	name = "copper javelin"
 	desc = "Made for throwing, long out of favor and using inferior metals, it still can kill when the aim is true."
 	icon_state = "cspear"
+	force = DAMAGE_SPEAR - 2
+	force_wielded = DAMAGE_SPEAR + 2
+	wdefense = AVERAGE_PARRY
+	wlength = WLENGTH_LONG
+	max_blade_int = 50
+	max_integrity = INTEGRITY_WORST
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 70
 	max_integrity = INTEGRITY_POOR
-	minstr = 7
 	melting_material = /datum/material/copper
 	melt_amount = 75
 	dropshrink = 0.9
@@ -351,7 +355,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 	item_weight = 900 GRAMS
 
-/obj/item/weapon/polearm/spear/stone/copper/getonmobprop(tag)
+/obj/item/weapon/polearm/spear/javelin/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -360,16 +364,16 @@
 			if("wielded")
 				return list("shrink" = 0.7,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-/obj/item/weapon/polearm/spear/stone/copper/iron
+/obj/item/weapon/polearm/spear/javelin/iron
 	name = "iron javelin"
-	desc = "Heavier than acopper javelin, best suited for hunting beasts"
+	desc = "Heavier than a copper javelin, best suited for hunting beasts"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "ijavelin"
 	throwforce = DAMAGE_SPEAR_WIELD + 2
 	max_blade_int = 80
 	max_integrity = INTEGRITY_STANDARD
 
-/obj/item/weapon/polearm/spear/stone/copper/steel
+/obj/item/weapon/polearm/spear/javelin/steel
 	name = "steel javelin"
 	desc = "A sturdy javelin made from steel, suitable to hunt knightly foes."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
@@ -378,7 +382,7 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 1.25
 
-/obj/item/weapon/polearm/spear/stone/copper/silver
+/obj/item/weapon/polearm/spear/javelin/silver
 	name = "silver javelin"
 	desc = "A sturdy javelin made from silver, suitable to hunt supernatural foes."
 	icon = 'icons/roguetown/weapons/ammo.dmi'

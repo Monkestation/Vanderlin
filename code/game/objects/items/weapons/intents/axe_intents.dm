@@ -37,7 +37,7 @@
 	damfactor = 1.3 // Stronger
 	misscost = 18 // Costs more if you miss
 
-/datum/intent/axe/chop/greataxe/slayeraxe
+/datum/intent/axe/chop/greataxe/slayer
     name = "cleave"
     icon_state = "incleave"
     penfactor = AP_GREATAXE_CHOP + 10
