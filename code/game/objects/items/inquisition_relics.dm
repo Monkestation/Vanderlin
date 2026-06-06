@@ -612,11 +612,6 @@
 
 	if(!active)
 		to_chat(user, span_warning("It's not primed."))
-
-		return ITEM_INTERACT_BLOCKING
-
-	if(!CAN_HAVE_BLOOD(M) || !M.get_blood_volume())
-		to_chat(user, span_warning("They don't have any blood to sample."))
 		return ITEM_INTERACT_BLOCKING
 
 	if(full)
@@ -625,14 +620,9 @@
 
 	var/mob/living/L = interacting_with
 
-	if(HAS_TRAIT(L, TRAIT_BLOODLOSS_IMMUNE))
+	if(!CAN_HAVE_BLOOD(L) || !L.get_blood_volume())
 		to_chat(user, span_warning("[L] has no blood to sample."))
 		return ITEM_INTERACT_BLOCKING
-	else if(iscarbon(L))
-		var/mob/living/carbon/C = L
-		if((NOBLOOD in C.dna?.species?.species_traits))
-			to_chat(user, span_warning("They don't have any blood to sample."))
-			return ITEM_INTERACT_BLOCKING
 
 	visible_message(span_warning("[user] goes to jab [L] with [src]!"))
 

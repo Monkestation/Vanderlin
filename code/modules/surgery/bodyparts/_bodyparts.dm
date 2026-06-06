@@ -532,7 +532,7 @@
 		var/can_inflict = max_damage - get_damage()
 		damage = min(can_inflict, damage)
 
-	if(damage <= 0)F
+	if(damage <= 0)
 		return
 
 	// First check whether we can widen an existing wound
@@ -1549,22 +1549,32 @@
 		if(artery.damage)
 			return TRUE
 
-/obj/item/bodypart/proc/is_artery_dissected()
-	. = FALSE
-	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
-		if(artery.is_broken())
-			return TRUE
-
-/obj/item/bodypart/proc/get_incision(strict = FALSE, ignore_gauze = FALSE)
-	if(ignore_gauze && bandage)
+/obj/item/bodypart/proc/get_incision(surgical_only = FALSE, ignore_gauze = FALSE)
+	if(!ignore_gauze && bandage)
 		return
 
-	for(var/datum/injury/slash/slash in injuries)
-		if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
-			continue
-		if(strict && !slash.is_surgical()) //We don't need dirty ones
+	for(var/datum/wound/slash/slash in wounds)
+		if(slash.is_sewn())
 			continue
 		return slash
+
+	var/datum/injury/internal_incision
+	for(var/datum/injury/slash/slash in injuries)
+		if(surgical_only && !slash.is_surgical()) //We don't need dirty ones
+			continue
+		if(slash.is_bandaged() || slash.damage_per_injury() <= slash.bleed_threshold) // Shit's unusable
+			continue
+		if(!internal_incision)
+			internal_incision = slash
+			continue
+		if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
+			if(slash.damage_per_injury() > internal_incision.damage_per_injury())
+				internal_incision = slash
+				break
+		else if(slash.is_surgical()) //otherwise surgical one takes priority
+			internal_incision = slash
+			break
+	return internal_incision
 
 /// Add one or multiple surgical states to the bodypart
 /obj/item/bodypart/proc/add_surgical_state(new_states)
