@@ -35,11 +35,6 @@
 	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather/townguard
 	gloves = /obj/item/clothing/gloves/leather
-	backl = /obj/item/storage/backpack/satchel
-	beltl = /obj/item/weapon/mace/cudgel
-	backpack_contents = list(
-		/obj/item/rope/chain = 1
-	)
 
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -174,6 +169,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/guard
 	wrists = /obj/item/weapon/scabbard/knife
 	backr = /obj/item/gun/ballistic/bow
+	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
@@ -221,6 +217,7 @@
 	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	neck = /obj/item/clothing/neck/gorget
 	backr = /obj/item/weapon/polearm/spear
+	backl = /obj/item/storage/backpack/satchel
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	beltr = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
