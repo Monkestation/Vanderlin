@@ -146,9 +146,13 @@
 			balloon_alert(user, "nothing to cauterize!")
 			return ITEM_INTERACT_BLOCKING
 
+		// Hate
 		if(!length(part.wounds))
-			balloon_alert(user, "no wounds!")
-			return ITEM_INTERACT_BLOCKING
+			for(var/obj/item/organ/artery in part.getorganslotlist(ORGAN_SLOT_ARTERY))
+				if(artery.damage)
+					break
+				balloon_alert(user, "no wounds!")
+				return ITEM_INTERACT_BLOCKING
 
 		var/on_who = "my"
 		if(user != interacting_with)
@@ -166,7 +170,11 @@
 		for(var/datum/wound/bleeder as anything in part.wounds)
 			bleeder.cauterize_wound()
 
-		part.receive_damage(burn = 40) //painful, but the wounds go away eh?
+		for(var/obj/item/organ/artery in part.getorganslotlist(ORGAN_SLOT_ARTERY))
+			if(artery.damage)
+				artery.applyOrganDamage(-artery.damage)
+
+		part.bodypart_attacked_by(BCLASS_BURN, dam = 25, modifiers = list(CRIT_MOD_CHANCE = -100)) //painful, but the wounds go away eh?
 
 		C.emote("scream")
 

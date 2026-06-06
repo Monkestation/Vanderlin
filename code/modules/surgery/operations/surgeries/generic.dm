@@ -47,7 +47,7 @@
 	if(!limb.bleeds)
 		return ..()
 
-	limb.create_injury(WOUND_SLASH, 49, surgical = TRUE)
+	limb.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO / 6, surgical = TRUE)
 
 	display_results(
 		surgeon,

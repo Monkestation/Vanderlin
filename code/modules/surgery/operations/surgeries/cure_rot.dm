@@ -55,7 +55,7 @@
 		span_notice("[surgeon] burns the flesh of [limb_owner]'s [parse_zone(limb.body_zone)]."),
 	)
 
-	if(limb.body_zone == BODY_ZONE_CHEST && limb_owner?.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(limb.body_zone == BODY_ZONE_CHEST && IS_DEADITE(limb_owner))
 		limb_owner.mind.remove_antag_datum(/datum/antagonist/zombie)
 		limb_owner.death()
 
