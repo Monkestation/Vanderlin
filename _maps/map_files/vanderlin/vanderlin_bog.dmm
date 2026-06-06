@@ -4402,13 +4402,6 @@
 "cZk" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/bog/beach)
-"cZS" = (
-/obj/structure/table/wood/folding{
-	pixel_x = -1;
-	pixel_y = 12
-	},
-/turf/open/openspace,
-/area/outdoors/bog/central)
 "cZV" = (
 /turf/closed/wall/window/stained/alt{
 	color = "#7D9BAE"
@@ -20934,7 +20927,6 @@
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
 	},
-/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/shelter/bog/lich)
 "unu" = (
@@ -23957,11 +23949,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
 /area/outdoors/bog/north/west)
-"xgT" = (
-/obj/effect/decal/cleanable/dirt,
-/mob/living/carbon/human/species/zizombie/npc/grenzel,
-/turf/open/floor/wood,
-/area/indoors/ship)
 "xhb" = (
 /obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass,
@@ -60628,7 +60615,7 @@ bHc
 sCF
 iKM
 pue
-xgT
+xgh
 cnM
 rNI
 ece
@@ -82149,13 +82136,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-dcp
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
 dcp
 dcp
 dcp
@@ -82351,13 +82338,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-dcp
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
 dcp
 dcp
 dcp
@@ -82553,13 +82540,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-dcp
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
 dcp
 dcp
 dcp
@@ -82755,13 +82742,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-cZS
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+rIq
 dcp
 dcp
 dcp
