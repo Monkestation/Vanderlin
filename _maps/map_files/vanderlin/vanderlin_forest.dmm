@@ -1755,6 +1755,13 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/wilderness)
+"kn" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "WATERLOCK GATEHOUSE"
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "kq" = (
 /obj/structure/door/green,
 /turf/open/floor/tile/kitchen,
@@ -2571,6 +2578,13 @@
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison)
+"pd" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "WATERLOCK GATEHOUSE"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "pe" = (
 /obj/item/reagent_containers/glass/bucket/wooden{
 	name = "Poo bucket"
@@ -2700,6 +2714,14 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"pP" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/river{
+	dir = 8
+	},
+/area/outdoors/wilderness)
 "pS" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -8790,7 +8812,9 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe)
 "XI" = (
-/obj/structure/door/green,
+/obj/structure/door/green{
+	name = "Waterlock Gatehouse"
+	},
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/cobble,
 /area/indoors/wilderness/gallowband/garrison)
@@ -18373,7 +18397,7 @@ KW
 KW
 Gw
 xF
-Iz
+pd
 Iz
 ZV
 ZV
@@ -23032,7 +23056,7 @@ DC
 DC
 DC
 nw
-ZV
+kn
 Iz
 TE
 fT
@@ -39501,7 +39525,7 @@ sq
 mR
 uT
 uT
-NJ
+WB
 NJ
 uT
 NJ
@@ -39703,7 +39727,7 @@ PM
 NJ
 NJ
 NJ
-NJ
+WB
 PM
 NJ
 uT
@@ -39905,7 +39929,7 @@ NJ
 NJ
 Ck
 IS
-Ck
+pP
 Ck
 NJ
 uT
