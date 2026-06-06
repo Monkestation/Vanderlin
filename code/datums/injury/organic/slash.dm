@@ -1,13 +1,10 @@
 /** SLASHES **/
 /datum/injury/slash
-	bleed_threshold = 5
 	damage_type = WOUND_SLASH
 
 /datum/injury/slash/small
 	// link wound descriptions to amounts of damage
-	// Minor cuts have max_bleeding_stage set to the stage that bears the wound type's name.
-	// The major cut types have the max_bleeding_stage set to the clot stage (which is accordingly given the "blood soaked" descriptor).
-	max_bleeding_stage = 3
+	bleed_threshold = 5
 	stages = list(
 		"ugly ripped cut" = 20,
 		"ripped cut" = 10,
@@ -17,7 +14,7 @@
 		)
 
 /datum/injury/slash/deep
-	max_bleeding_stage = 3
+	bleed_threshold = 15
 	stages = list(
 		"ugly deep ripped cut" = 25,
 		"deep ripped cut" = 20,
@@ -29,7 +26,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/slash/flesh
-	max_bleeding_stage = 4
+	bleed_threshold = 15
 	stages = list(
 		"ugly ripped flesh wound" = 35,
 		"ugly flesh wound" = 30,
@@ -41,7 +38,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/slash/gaping
-	max_bleeding_stage = 3
+	bleed_threshold = 15
 	stages = list(
 		"gaping wound" = 50,
 		"large blood soaked clot" = 25,
@@ -52,7 +49,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/slash/gaping_big
-	max_bleeding_stage = 3
+	bleed_threshold = 25
 	stages = list(
 		"big gaping wound" = 60,
 		"healing gaping wound" = 40,
@@ -63,7 +60,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/slash/massive
-	max_bleeding_stage = 3
+	bleed_threshold = 25
 	stages = list(
 		"massive wound" = 70,
 		"massive healing wound" = 50,

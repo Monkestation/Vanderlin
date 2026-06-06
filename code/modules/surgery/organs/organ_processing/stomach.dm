@@ -31,23 +31,25 @@
 	if(owner.nutrition > 0)
 		// THEY HUNGER
 		var/hunger_rate = owner.total_nutriment_req
-		hunger_rate *= optimal_threshold/max(stomach_efficiency, 25)
 		// Whether we cap off our satiety or move it towards 0
 		if(owner.satiety > MAX_SATIETY)
 			owner.satiety = MAX_SATIETY
 		else if(owner.satiety > 0)
-			owner.satiety -= (0.5 * delta_time)
+			owner.satiety--
 		else if(owner.satiety < -MAX_SATIETY)
 			owner.satiety = -MAX_SATIETY
 		else if(owner.satiety < 0)
-			owner.satiety += (0.5 * delta_time)
-			hunger_rate *= 2
+			owner.satiety++
+			if(SPT_PROB(round(-owner.satiety/77), delta_time))
+				owner.set_jitter_if_lower(10 SECONDS)
+			hunger_rate *= 3
 		hunger_rate *= owner.physiology.hunger_mod
-		owner.adjust_nutrition(-hunger_rate * (0.5 * delta_time))
+		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
+		owner.adjust_nutrition(-hunger_rate * delta_time)
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req
-		thirst_rate *= optimal_threshold/max(stomach_efficiency, 25)
-		owner.adjust_hydration(-thirst_rate * (0.5 * delta_time))
+		thirst_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
+		owner.adjust_hydration(-thirst_rate  * delta_time)
 
 	if(owner.nutrition > NUTRITION_LEVEL_FULL)
 		if(owner.overeatduration < 20 MINUTES)
@@ -55,6 +57,25 @@
 	else if(owner.overeatduration > 0)
 		owner.overeatduration = max(owner.overeatduration - (2 SECONDS * delta_time), 0)
 
+	//metabolism change
+	if(owner.nutrition > NUTRITION_LEVEL_FAT)
+		owner.metabolism_efficiency = 1
+	else if(owner.nutrition > NUTRITION_LEVEL_FED && owner.satiety > 80)
+		if(owner.metabolism_efficiency != 1.25)
+			to_chat(owner, span_notice("You feel vigorous."))
+			owner.metabolism_efficiency = 1.25
+	else if(owner.nutrition < NUTRITION_LEVEL_STARVING + 50)
+		if(owner.metabolism_efficiency != 0.8)
+			to_chat(owner, span_notice("You feel sluggish."))
+		owner.metabolism_efficiency = 0.8
+	else
+		if(owner.metabolism_efficiency == 1.25)
+			to_chat(owner, span_notice("You no longer feel vigorous."))
+		owner.metabolism_efficiency = 1
+
+	handle_nutrition_hydration_state(owner, delta_time, times_fired)
+
+/datum/organ_process/stomach/proc/handle_nutrition_hydration_state(mob/living/carbon/human/owner, delta_time, times_fired)
 	switch(owner.nutrition)
 		if(NUTRITION_LEVEL_FED to INFINITY)
 			owner.remove_status_effect(/datum/status_effect/debuff/hungryt1)
