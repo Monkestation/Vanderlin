@@ -10,10 +10,11 @@
 
 	grid_width = 32
 	grid_height = 32
-	germ_level = GERM_LEVEL_STERILE
+	germ_level = 0
 
 	/// Time we have spent failing
 	var/failure_time = 0
+	/// The body zone this organ is supposed to inhabit.
 	var/zone = BODY_ZONE_CHEST
 	var/unique_slot
 	var/unique_side_sprite = FALSE
@@ -25,12 +26,13 @@
 	// DO NOT add slots with matching names to different zones - it will break internal_organs_slot list!
 	var/organ_flags = 0
 
-	/// Damage healed per second
-	var/healing_factor = STANDARD_ORGAN_HEALING
 	/// Minimum amount of germ_level we gain when rotting
-	var/min_decay_factor = MIN_ORGAN_DECAY_INFECTION
+	var/min_germ_factor = MIN_ORGAN_DECAY_INFECTION
 	/// Maximum amount of germ_level we gain when rotting
-	var/max_decay_factor = MAX_ORGAN_DECAY_INFECTION
+	var/max_germ_factor = MAX_ORGAN_DECAY_INFECTION
+	/// Healing factor and decay factor function on % of maxhealth, and do not work by applying a static number per tick
+	var/healing_factor = STANDARD_ORGAN_HEALING
+	var/decay_factor = STANDARD_ORGAN_DECAY
 	/// Maximum amount of damage we can suffer
 	var/maxHealth = STANDARD_ORGAN_THRESHOLD
 	/// Total damage this organ has sustained
@@ -78,7 +80,7 @@
 	/// Needs to get processed on next life() tick
 	var/needs_processing = TRUE
 
-	/// Efficiency attached to each slot
+	/// When an efficiency is associated with a slot, it is added to that zones internal_organs_slot. Efficiency varies from 0 to 100.
 	var/list/organ_efficiency = list()
 	///this is just an easy to access list of modification sources going slot = list(type = val)
 	var/list/organ_efficiency_modification
@@ -88,7 +90,7 @@
 
 	/// How much blood (percent of BLOOD_VOLUME_NORMAL) an organ takes to funcion
 	var/blood_req = 0
-	/// If oxygen reqs are not satisfied, get debuffs and brain starts taking damage
+	/// Determines lung oxygen restoration and suffocation amount
 	var/oxygen_req = 0
 	/// Controls passive nutriment loss. Units are nutriment_req/100 per second
 	var/nutriment_req = 0
@@ -97,7 +99,7 @@
 
 	/// The space we occupy inside a limb - unaffected by w_class for balance reasons
 	var/organ_volume = 0
-	/// How much blood an organ can store - Base is 5 * blood_req, so the organ can survive without blood for 10 seconds before taking damage (+ blood supply of arteries)
+	/// How much blood an organ can store - Base is 10 * blood_req, so the organ can survive without blood for 10 seconds before taking damage (+ blood supply of arteries)
 	var/max_blood_storage = 0
 	/// How much blood is currently in the organ
 	var/current_blood = 0
@@ -108,6 +110,11 @@
 	var/list/healing_items
 	/// The above, but for tool behaviors
 	var/list/healing_tools = list(TOOL_SUTURE)
+
+	/// Thresholds organs can naturally heal down to
+	var/self_heal_thresholds = list(0.3, 0.6, 0.9)
+	/// If the mob has this chem effect, ignore all other checks for can_self_heal and ignore self_heal_thresholds
+	var/self_healing_effect = CE_ORGAN_REGEN
 
 /obj/item/organ/Initialize()
 	. = ..()
@@ -155,32 +162,20 @@
 /obj/item/organ/proc/update_organ_efficiency(slot)
 	return
 
-/obj/item/organ/proc/is_working()
-	return (!CHECK_BITFIELD(organ_flags, ORGAN_FAILING|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_CUT_AWAY) && (damage < high_threshold) && (current_blood || !max_blood_storage))
-
-/obj/item/organ/proc/is_working_without_bleedout()
-	return (!CHECK_BITFIELD(organ_flags, ORGAN_FAILING|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_CUT_AWAY) && (damage < high_threshold))
-
 /obj/item/organ/proc/is_failing()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_CUT_AWAY) || (damage >= high_threshold) || (!current_blood && max_blood_storage))
+	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING|ORGAN_DESTROYED|ORGAN_NECROTIC|ORGAN_CUT_AWAY) || (damage >= high_threshold) || (!current_blood && max_blood_storage))
 
 /obj/item/organ/proc/is_failing_without_bleedout()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_CUT_AWAY) || (damage >= high_threshold))
+	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING|ORGAN_DESTROYED|ORGAN_NECROTIC|ORGAN_CUT_AWAY) || (damage >= high_threshold))
 
 /obj/item/organ/proc/is_dead()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_DESTROYED|ORGAN_DEAD) || (damage >= maxHealth))
+	return (CHECK_BITFIELD(organ_flags, ORGAN_DESTROYED|ORGAN_NECROTIC) || (damage >= maxHealth))
 
 /obj/item/organ/proc/is_bruised()
 	return (damage >= low_threshold)
 
-/obj/item/organ/proc/is_broken()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING) || (damage >= high_threshold))
-
-/obj/item/organ/proc/is_destroyed()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_DESTROYED))
-
 /obj/item/organ/proc/is_necrotic()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_DEAD) || (germ_level >= INFECTION_LEVEL_THREE))
+	return (CHECK_BITFIELD(organ_flags, ORGAN_NECROTIC) || (germ_level >= INFECTION_LEVEL_THREE))
 
 /obj/item/organ/proc/scar_organ(amount, cap)
 	for(var/slot in organ_efficiency)
@@ -196,15 +191,16 @@
 
 /obj/item/organ/proc/necrose_organ()
 	. = FALSE
-	if(!CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
+	if(!CHECK_BITFIELD(organ_flags, ORGAN_NECROTIC))
 		set_germ_level(INFECTION_LEVEL_THREE)
+		organ_flags |= ORGAN_NECROTIC
 		return TRUE
 
 /obj/item/organ/proc/unnecrose_organ()
 	. = FALSE
-	if(CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
-		set_germ_level(GERM_LEVEL_STERILE)
-		organ_flags &= ~ORGAN_DEAD
+	if(CHECK_BITFIELD(organ_flags, ORGAN_NECROTIC))
+		set_germ_level(0)
+		organ_flags &= ~ORGAN_NECROTIC
 		return TRUE
 
 /obj/item/organ/proc/handle_blood(delta_time, times_fired)
@@ -217,14 +213,14 @@
 		failer = is_failing()
 	if(arterial_efficiency && !failer && !in_bleedout)
 		// Arteries get an extra flat 10 blood regen
-		current_blood = min(current_blood + 5 * (0.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+		current_blood = min(current_blood + (2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 		return
 	if(!blood_req)
 		return
 	if(!in_bleedout)
-		current_blood = min(current_blood + (blood_req * (0.6 * delta_time)), max_blood_storage) //very slow refill
+		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage) //very slow refill
 		return
-	current_blood = max(current_blood - (blood_req * (0.5 * delta_time)), 0)
+	current_blood = max(current_blood - (blood_req * delta_time), 0)
 	// When all blood is lost, take blood from blood vessels
 	if(!current_blood)
 		var/obj/item/organ/artery
@@ -236,10 +232,13 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * 0.5 * delta_time), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * delta_time), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		if((current_blood <= 0) && !(organ_flags & ORGAN_LIMB_SUPPORTER))
-			applyOrganDamage(0.2 * delta_time)
+			var/temperature_mod = 1
+			if(owner?.bodytemperature > BODYTEMP_NORMAL)
+				temperature_mod += round((owner.bodytemperature - BODYTEMP_NORMAL) / (BODYTEMP_MAX_TEMPERATURE - BODYTEMP_NORMAL), 0.1)
+			applyOrganDamage(decay_factor * maxHealth * temperature_mod * delta_time)
 
 /obj/item/organ/proc/generate_chimeric_organ(mob/living/source_mob)
 	if(!source_mob)
@@ -366,11 +365,11 @@
 
 /// proper decaying
 /obj/item/organ/proc/decay(delta_time)
-	adjust_germ_level(rand(min_decay_factor,max_decay_factor) * delta_time)
+	adjust_germ_level(rand(min_germ_factor, max_germ_factor) * delta_time)
 
-/obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
-	if((germ_level >= INFECTION_LEVEL_THREE) && !CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
+	if((germ_level >= INFECTION_LEVEL_THREE) && !CHECK_BITFIELD(organ_flags, ORGAN_NECROTIC))
 		kill_organ()
 
 /obj/item/organ/proc/kill_organ()
@@ -387,15 +386,15 @@
 		organ_flags |= ORGAN_CUT_AWAY
 	if(can_decay())
 		decay(delta_time)
-	else
-		STOP_PROCESSING(SSobj, src)
+	// else
+	// 	STOP_PROCESSING(SSobj, src)
 
 /// Infection/rot checks
 /obj/item/organ/proc/can_decay()
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
 	check_cold()
-	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_DEAD|ORGAN_SYNTHETIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
+	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_SYNTHETIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
 		return FALSE
 	return TRUE
 
@@ -432,16 +431,16 @@
 	var/antibiotics = owner?.get_antibiotics()
 
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && DT_PROB(virus_immunity*0.15, delta_time))
-		adjust_germ_level(-1 * (0.5 * delta_time))
+		adjust_germ_level(-0.5 * delta_time)
 		return
 
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
 		if(antibiotics < 5 && DT_PROB(round(germ_level/6 * owner.immunity_weakness() * 0.005), delta_time))
 			if(virus_immunity > 0)
-				adjust_germ_level(clamp(round(1/virus_immunity), 1, 10) * (0.5 * delta_time)) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
+				adjust_germ_level(clamp(round(0.5/virus_immunity), 1, 10) * delta_time) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
-				adjust_germ_level(10 * (0.5 * delta_time))
+				adjust_germ_level(5 * delta_time)
 
 	if(germ_level >= INFECTION_LEVEL_ONE && antibiotics < 20)
 		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
@@ -452,11 +451,11 @@
 		if(bodypart)
 			//Spread germs
 			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || DT_PROB(owner.immunity_weakness() * 0.15, delta_time)))
-				bodypart.adjust_germ_level(1 * (0.5 * delta_time))
+				bodypart.adjust_germ_level(0.5 * delta_time)
 		//Cause organ damage about once every ~30 seconds
 		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
 		if(DT_PROB(2, delta_time))
-			applyOrganDamage(2)
+			applyOrganDamage(decay_factor * maxHealth * delta_time)
 
 	// Organ is just completely dead by this point
 	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 40)
@@ -464,7 +463,7 @@
 		if(bodypart)
 			// Spread germs really badly
 			if(antibiotics < 10 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_THREE))
-				bodypart.adjust_germ_level(1 * (0.5 * delta_time))
+				bodypart.adjust_germ_level(0.5 * delta_time)
 
 /// Antibiotics combating germs and stuff
 /obj/item/organ/proc/handle_antibiotics(delta_time, times_fired)
@@ -476,11 +475,11 @@
 		return
 
 	if((germ_level < INFECTION_LEVEL_ONE) && (antibiotics >= 20))
-		set_germ_level(GERM_LEVEL_STERILE)
+		set_germ_level(0)
 	else
-		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * (0.5 * delta_time))	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * delta_time)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		if(owner?.body_position == LYING_DOWN)
-			adjust_germ_level(-SANITIZATION_LYING * (0.5 * delta_time))
+			adjust_germ_level(-SANITIZATION_LYING * delta_time)
 
 /obj/item/organ/proc/on_life(delta_time, times_fired)	//repair organ damage if the organ is not failing
 	SHOULD_CALL_PARENT(TRUE)
@@ -506,8 +505,8 @@
 		failure_time = max(0, failure_time - delta_time)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_heal(delta_time, times_fired) && damage)
-		handle_healing(delta_time, times_fired)
+	if(can_self_heal(delta_time, times_fired))
+		handle_self_healing(delta_time, times_fired)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
 /obj/item/organ/proc/handle_failing_organ(delta_time, times_fired)
@@ -517,16 +516,17 @@
 	failure_time += delta_time
 	organ_failure(delta_time)
 
-
 /// healing checks
-/obj/item/organ/proc/can_heal(delta_time, times_fired)
+/obj/item/organ/proc/can_self_heal(delta_time, times_fired)
 	. = TRUE
 	if(!owner)
 		return FALSE
 	if(healing_factor <= 0)
 		return FALSE
-	if((damage > maxHealth/5) && !owner.get_chem_effect(CE_ORGAN_REGEN))
-		return FALSE
+
+	if(self_healing_effect && owner.get_chem_effect(self_healing_effect))
+		return TRUE
+
 	if(is_dead())
 		return FALSE
 	if(current_blood <= 0)
@@ -535,14 +535,33 @@
 		return FALSE
 	if(owner.get_chem_effect(CE_TOXIN))
 		return FALSE
+	if(owner.stat >= DEAD)
+		return FALSE
 
-/obj/item/organ/proc/handle_healing(delta_time, times_fired)
+/obj/item/organ/proc/handle_self_healing(delta_time, times_fired)
 	if(damage <= 0)
 		return
-	applyOrganDamage(-healing_factor * delta_time, damage)
+
+	///Damage decrements by a percent of its maxhealth
+	var/healing_amount = healing_factor * delta_time * maxHealth
+	///Damage decrements again by a percent of its maxhealth, depending on the owner's health
+	healing_amount += (owner.satiety > 0) ? (healing_factor * (owner.satiety / MAX_SATIETY)) : 0
+
+	if(self_healing_effect && !owner.get_chem_effect(self_healing_effect))
+		var/max_healing_amount = 0
+		for(var/i in self_heal_thresholds)
+			var/limit = i * maxHealth
+			if(damage >= limit)
+				max_healing_amount = damage - limit
+		if(max_healing_amount)
+			healing_amount = min(max_healing_amount, healing_amount)
+
+	if(healing_amount <= 0)
+		return
+	applyOrganDamage(-healing_amount, damage) // pass curent damage incase we are over cap
 	//this doesn't seem very right at all...
-	owner.adjust_nutrition(-nutriment_req/100 * (0.5 * delta_time))
-	owner.adjust_hydration(-hydration_req/100 * (0.5 * delta_time))
+	owner.adjust_nutrition(-nutriment_req/200 * delta_time)
+	owner.adjust_hydration(-hydration_req/200 * delta_time)
 
 /** organ_failure
  * generic proc for handling dying organs
@@ -623,20 +642,23 @@
 	return effective_efficiency
 
 ///Adjusts an organ's damage by the amount "d", up to a maximum amount, which is by default max damage
-/obj/item/organ/proc/applyOrganDamage(d, maximum = maxHealth)	//use for damaging effects
-	if(!d) //Micro-optimization.
-		return
+/obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth)	//use for damaging effects
+	if(!damage_amount) //Micro-optimization.
+		return FALSE
+	maximum = clamp(maximum, 0, maxHealth) // the logical max is, our max
 	if(maximum < damage)
-		return
-	damage = CLAMP(damage + d, 0, maximum)
-	var/mess = check_damage_thresholds(owner)
+		return FALSE
+	damage = clamp(damage + damage_amount, 0, maximum)
+	. = (prev_damage - damage) // return net damage
+	var/message = check_damage_thresholds()
 	prev_damage = damage
-	if(mess && owner)
-		to_chat(owner, mess)
+
+	if(message && owner)
+		to_chat(owner, message)
 
 ///SETS an organ's damage to the amount "d", and in doing so clears or sets the failing flag, good for when you have an effect that should fix an organ if broken
 /obj/item/organ/proc/setOrganDamage(d)	//use mostly for admin heals
-	applyOrganDamage(d - damage)
+	return applyOrganDamage(d - damage)
 
 /// This should only be used by arteries, tendons and nerves
 /obj/item/organ/proc/tear()
@@ -657,40 +679,74 @@
 	if(damage == prev_damage)
 		return
 	var/delta = damage - prev_damage
+	var/message = ""
 	if(delta > 0)
-		if(damage >= maxHealth && prev_damage < maxHealth)
-			organ_flags |= ORGAN_FAILING
-			if(!(organ_flags & ORGAN_INDESTRUCTIBLE))
-				organ_flags |= ORGAN_DESTROYED
-			return now_failing
+		if(damage >= low_threshold && prev_damage < low_threshold)
+			on_low_damage_received()
+			message = low_threshold_passed
+		if(damage >= medium_threshold && prev_damage < medium_threshold)
+			on_medium_damage_received()
+			message = medium_threshold_passed
 		if(damage >= high_threshold && prev_damage < high_threshold)
 			organ_flags |= ORGAN_FAILING
-			return high_threshold_passed
-		if(damage >= medium_threshold && prev_damage < medium_threshold)
-			return medium_threshold_passed
-		if(damage >= low_threshold && prev_damage < low_threshold)
-			return low_threshold_passed
-	if(delta < 0)
-		if(prev_damage >= low_threshold && damage < low_threshold)
-			organ_flags &= ~ORGAN_FAILING
-			if(organ_flags & ORGAN_DESTROYED)
-				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
-				scar_organ(10, 60)
-			return low_threshold_cleared
-		if(prev_damage >= medium_threshold && damage < medium_threshold)
-			organ_flags &= ~ORGAN_FAILING
-			if(organ_flags & ORGAN_DESTROYED)
-				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
-				scar_organ(10, 60)
-			return medium_threshold_cleared
-		if(prev_damage >= high_threshold && damage < high_threshold)
-			organ_flags &= ~ORGAN_FAILING
-			if(organ_flags & ORGAN_DESTROYED)
-				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
-				scar_organ(10, 60)
-			return high_threshold_cleared
-		if(prev_damage >= maxHealth && damage < maxHealth)
-			return now_fixed
+			on_begin_failure()
+			message = high_threshold_passed
+		if(damage >= maxHealth && prev_damage < maxHealth)
+			if(!(organ_flags & ORGAN_INDESTRUCTIBLE))
+				organ_flags |= ORGAN_DESTROYED
+			on_destroy_damage()
+			message = now_failing
+		return message
+
+	if(prev_damage >= maxHealth && damage < maxHealth)
+		if(organ_flags & ORGAN_DESTROYED)
+			organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+			scar_organ(10, 60)
+		on_destroy_fixed()
+		message = now_fixed
+	if(prev_damage >= high_threshold && damage < high_threshold)
+		organ_flags &= ~ORGAN_FAILING
+		on_failure_recovery()
+		message = high_threshold_cleared
+	if(prev_damage >= medium_threshold && damage < medium_threshold)
+		on_medium_damage_healed()
+		message = medium_threshold_cleared
+	if(prev_damage >= low_threshold && damage < low_threshold)
+		on_low_damage_healed()
+		message = low_threshold_cleared
+	return message
+
+/**
+ * Called when the damage surpasses the low damage threshold.
+ *
+ * This and other procs like this one merely exist to make it easier to keep a standard on
+ * damage thresholds for organs. This doesn't mean you cannot make custom thresholds for various stuff,
+ * and you're more than welcome to improve or refactor any portion of the code around these mechanics
+ */
+/obj/item/organ/proc/on_low_damage_received()
+	return
+
+///Called when the damage goes below the low damage threshold
+/obj/item/organ/proc/on_low_damage_healed()
+	return
+
+/obj/item/organ/proc/on_medium_damage_received()
+	return
+
+/obj/item/organ/proc/on_medium_damage_healed()
+	return
+
+/obj/item/organ/proc/on_begin_failure()
+	return
+
+/obj/item/organ/proc/on_failure_recovery()
+	return
+
+/obj/item/organ/proc/on_destroy_damage()
+	return
+
+/obj/item/organ/proc/on_destroy_fixed()
+	return
 
 /obj/item/organ/on_enter_storage(datum/component/storage/concrete/S)
 	. = ..()
@@ -714,12 +770,8 @@
 
 		// Species regenerate organs doesn't ALWAYS handle healing the organs because it's dumb
 		for(var/obj/item/organ/organ as anything in internal_organs)
-			organ.setOrganDamage(0)
+			organ.regenerate_organ()
 		set_heartattack(FALSE)
-
-		// heal ears after healing traits, since ears check TRAIT_DEAF trait
-		// when healing.
-		restoreEars()
 
 		return
 
@@ -767,15 +819,13 @@
  * they don't have many painkillers
  */
 /obj/item/organ/proc/can_feel_pain()
-	. = FALSE
 	if(pain_multiplier <= 0)
 		return FALSE
-	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY | ORGAN_DEAD))
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return FALSE
-	if(owner?.can_feel_pain())
-		return TRUE
+	return owner?.can_feel_pain()
 
 /obj/item/organ/proc/get_shock(painkiller_included = FALSE)
 	if(!can_feel_pain())
@@ -785,8 +835,14 @@
 		return round(maxHealth * pain_multiplier, DAMAGE_PRECISION)
 	var/constant_pain = damage
 	if(painkiller_included)
-		constant_pain -= (owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR)
+		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
 	return max(FLOOR(constant_pain * pain_multiplier, DAMAGE_PRECISION), 0)
+
+/obj/item/organ/proc/regenerate_organ()
+	SHOULD_CALL_PARENT(TRUE)
+	setOrganDamage(0)
+	current_blood = max_blood_storage
+	set_germ_level(0)
 
 GLOBAL_LIST_INIT(all_organ_slots, get_all_slots())
 

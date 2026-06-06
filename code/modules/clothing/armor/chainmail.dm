@@ -49,6 +49,14 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle)
 
+/obj/item/clothing/armor/chainmail/hauberk/aalloy
+	name = "decrepit hauberk"
+	desc = "Frayed bronze rings and rotting leather, woven together to form a sleeved maille-atekon. Once, the armored vestments of a paladin: now, the withered veil of Zizo's undying legionnaires."
+	icon_state = "ancienthauberk"
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_DECREPIT
+	material_category = ARMOR_MAT_CHAINMAIL
+	anvilrepair = null
+
 /obj/item/clothing/armor/chainmail/hauberk/fluted
 	name = "fluted hauberk"
 	desc = "A steel maille, of a pattern popularized by Psydonian templars."

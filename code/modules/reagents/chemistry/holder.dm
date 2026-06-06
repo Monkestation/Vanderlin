@@ -176,7 +176,7 @@
 
 	return master
 
-/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE, ignore_stomach = FALSE, list/ignored_reagents)
+/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = NONE, show_message = TRUE, round_robin = FALSE, ignore_stomach = FALSE, list/ignored_reagents)
 	//if preserve_data=0, the reagents data will be lost. Usefull if you use data for some strange stuff and don't want it to be transferred.
 	//if round_robin=TRUE, so transfer 5 from 15 water, 15 sugar and 15 plasma becomes 10, 15, 15 instead of 13.3333, 13.3333 13.3333. Good if you hate floating point errors
 	if(isliving(target) && transfered_by != target)
@@ -301,10 +301,19 @@
 	src.handle_reactions()
 	return amount
 
-/datum/reagents/proc/trans_id_to(obj/target, reagent, amount=1, preserve_data=1)//Not sure why this proc didn't exist before. It does now! /N
+/datum/reagents/proc/trans_id_to(atom/target, reagent, amount = 1, preserve_data = TRUE)//Not sure why this proc didn't exist before. It does now! /N
+	if(QDELETED(target) || !total_volume)
+		return FALSE
+
+	if(!IS_FINITE(amount))
+		stack_trace("non finite amount passed to trans_to [amount] amount of reagents")
+		return FALSE
+
+	if(!isnull(reagent) && !ispath(reagent))
+		stack_trace("invalid target reagent id [reagent] passed to trans_to")
+		return FALSE
+
 	var/list/cached_reagents = reagent_list
-	if (!target)
-		return
 	var/datum/reagents/R
 	if(!istype(target, /datum/reagents))
 		if (!target.reagents || src.total_volume<=0 || !src.get_reagent_amount(reagent))
@@ -735,32 +744,56 @@
 		var/amt = list_reagents[r_id]
 		add_reagent(r_id, amt, data)
 
-/datum/reagents/proc/remove_reagent(reagent, amount, safety)//Added a safety check for the trans_id_to
-	if(isnull(amount))
-		amount = 0
-		. = FALSE
-		CRASH("null amount passed to reagent code")
-
-	if(!isnum(amount))
+/**
+ * Removes a specific reagent. can supress reactions if needed
+ * Arguments
+ *
+ * * [reagent_type][datum/reagent] - the type of reagent
+ * * amount - the volume to remove
+ * * include_subtypes - if TRUE will remove the specified amount from all subtypes of reagent_type as well
+ */
+/datum/reagents/proc/remove_reagent(datum/reagent/reagent_type, amount, safety, include_subtypes = FALSE)//Added a safety check for the trans_id_to
+	if(!ispath(reagent_type))
+		stack_trace("invalid reagent passed to remove reagent [reagent_type]")
 		return FALSE
 
-	if(amount < 0)
+	if(!IS_FINITE(amount))
+		stack_trace("non finite amount passed to remove reagent [amount] [reagent_type]")
 		return FALSE
 
+	amount = round(amount, CHEMICAL_QUANTISATION_LEVEL)
+	if(amount <= 0)
+		return FALSE
+
+	var/total_removed_amount = 0
+	var/remove_amount = 0
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/cached_reagent as anything in cached_reagents)
-		if(cached_reagent.type == reagent)
-			//clamp the removal amount to be between current reagent amount
-			//and zero, to prevent removing more than the holder has stored
-			amount = clamp(amount, 0, cached_reagent.volume)
-			cached_reagent.volume -= amount
-			update_total()
-			if(!safety)//So it does not handle reactions when it need not to
-				handle_reactions()
-			SEND_SIGNAL(src, COMSIG_REAGENTS_REM_REAGENT, QDELING(cached_reagent) ? reagent : cached_reagent, amount)
-			return TRUE
+		//check for specific type or subtypes
+		if(!include_subtypes)
+			if(cached_reagent.type != reagent_type)
+				continue
+		else if(!istype(cached_reagent, reagent_type))
+			continue
 
-	return FALSE
+		//reduce the volume
+		remove_amount = min(cached_reagent.volume, amount)
+		cached_reagent.volume -= remove_amount
+
+		total_removed_amount += remove_amount
+
+		SEND_SIGNAL(src, COMSIG_REAGENTS_REM_REAGENT, QDELING(cached_reagent) ? reagent_type : cached_reagent, amount)
+
+		//if we reached here means we have found our specific reagent type so break
+		if(!include_subtypes)
+			break
+
+	//update the holder & handle reactions
+	update_total()
+	if(!safety)//So it does not handle reactions when it need not to
+		handle_reactions()
+
+	return total_removed_amount
 
 /**
  * Check if this holder contains this reagent.

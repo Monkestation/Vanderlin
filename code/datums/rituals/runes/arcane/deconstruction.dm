@@ -33,7 +33,19 @@
 			return ..()
 		return
 
+/obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/attack_hand_secondary(mob/living/user, list/modifiers)
+	if(animating)
+		to_chat(user, span_notice("The rune is already working..."))
+		return
+	if(!staged_item)
+		return ..()
+	abort_ritual()
+	to_chat(user, span_cultsmall("The item clatters free from the rune."))
+	playsound(src, 'sound/magic/glass.ogg', 40, TRUE)
+
 /obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/attackby(obj/item/W, mob/user, list/modifiers)
+	if(istype(W, /obj/item/melee/touch_attack))
+		return ..()
 	if(animating)
 		to_chat(user, span_notice("The rune is already working..."))
 		return

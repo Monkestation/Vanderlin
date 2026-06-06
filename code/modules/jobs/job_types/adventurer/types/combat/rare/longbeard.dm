@@ -40,11 +40,11 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/mace/goden/steel/warhammer
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	shoes = /obj/item/clothing/shoes/boots/rare/dwarfplate
-	gloves = /obj/item/clothing/gloves/rare/dwarfplate
+	shoes = /obj/item/clothing/shoes/boots/armor/dwarven
+	gloves = /obj/item/clothing/gloves/plate/dwarven
 	belt = /obj/item/storage/belt/leather
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
-	armor = /obj/item/clothing/armor/rare/dwarfplate
+	armor = /obj/item/clothing/armor/plate/full/dwarven
 	backl = /obj/item/storage/backpack/satchel
-	head = /obj/item/clothing/head/rare/dwarfplate
+	head = /obj/item/clothing/head/helmet/heavy/dwarven
 	neck = /obj/item/clothing/neck/chaincoif

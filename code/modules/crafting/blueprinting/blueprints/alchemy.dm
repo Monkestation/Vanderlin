@@ -93,3 +93,15 @@
 		/obj/item/natural/glass = 1
 	)
 	craftdiff = 1
+
+/datum/blueprint_recipe/alchemy/shisha
+	name = "Shisha Pipe"
+	desc = "A traditional water pipe for smoking herbs and other substances."
+	result_type = /obj/structure/fluff/statue/shisha
+	required_materials = list(
+		/obj/item/natural/wood/plank = 2,
+		/obj/item/natural/glass = 2,
+		/obj/item/natural/stone = 1
+	)
+	supports_directions = FALSE
+	craftdiff = 2

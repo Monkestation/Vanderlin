@@ -159,3 +159,72 @@
 	item_state = "vrobe"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
+
+
+/obj/item/clothing/shirt/fancyjacket
+	name = "fancy jacket"
+	desc = "My, so modern -- so elegant. Which fine hands sewed this?"
+	icon_state = "fancyjacket"
+	icon = 'icons/roguetown/clothing/shirts.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	boobed = FALSE
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
+
+/obj/item/clothing/shirt/explorer
+	name = "explorer's vest"
+	desc = "Vest belonging to those who seek knowledge!"
+	icon_state = "explorervest"
+	icon = 'icons/roguetown/clothing/shirts.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	boobed = TRUE
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	color = null
+
+/obj/item/clothing/shirt/saree
+	name = "saree"
+	desc = "Expertly made with a single swatch of fabric!"
+	icon_state = "saree"
+	icon = 'icons/roguetown/clothing/shirts.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+	detail_tag = "_detail"
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	boobed = TRUE
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	color = null
+
+/obj/item/clothing/shirt/dress/slit
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	name = "slitted dress"
+	desc = "A finely sewn dress with a slit to expose the thigh, how scandalous!"
+	icon_state = "slitdress"
+	item_state = "slitdress"
+	r_sleeve_status = SLEEVE_NOMOD
+	l_sleeve_status = SLEEVE_NOMOD
+
+/obj/item/clothing/shirt/dress/velvetdress
+	name = "velvet dress"
+	desc = "A garment made with embroidered velvet, both elegant and warm. Poetry made manifest in swaying fabric."
+	icon_state = "velvetdress"
+	item_state = "velvetdress"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+
+/obj/item/clothing/shirt/dress/nobledress
+	name = "noble's pinafore"
+	desc = "A comfortable dress adapted from simpler garments often worn by working-class women."
+	icon_state = "nobledress"
+	item_state = "nobledress"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE

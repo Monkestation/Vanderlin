@@ -18,7 +18,7 @@
 /datum/mapGeneratorModule/cavedirt
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/dirt)
-	spawnableAtoms = list(/obj/structure/flora/shroom_tree=16, /obj/structure/roguerock=8, /obj/structure/closet/dirthole/closed/loot=3, /obj/item/natural/stone=10, /obj/item/natural/rock=8, /obj/structure/kneestingers = 0, /obj/item/restraints/legcuffs/beartrap/armed/camouflage=0)
+	spawnableAtoms = list(/obj/structure/flora/shroom_tree=16, /obj/structure/roguerock=8, /obj/structure/closet/dirthole/closed=3, /obj/item/natural/stone=10, /obj/item/natural/rock=8, /obj/structure/kneestingers = 0, /obj/item/restraints/legcuffs/beartrap/armed/camouflage=0)
 	allowed_areas = list(/area/under/cave/spider,/area/indoors/cave,/area/under/cavewet,/area/under/cave,/area/under/cavelava)
 
 /obj/effect/landmark/mapGenerator/cave/lava

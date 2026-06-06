@@ -67,8 +67,78 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/menacing/mad_touched_treasure_hunter, //cursed
 		/obj/item/clothing/face/facemask/steel/mad_touched, //cursed
 		/obj/item/clothing/cloak/poncho/yellow,//No free colouring
+		/obj/item/clothing/cloak/ordinatorcape/lirvas,
+		/obj/item/clothing/cloak/minotaur,
+		/obj/item/clothing/cloak/psydontabard/black,
+		/obj/item/clothing/cloak/psydontabard/black/alt,
+		/obj/item/clothing/shoes/boots/armor/gold/king,
+		/obj/item/clothing/armor/cuirass/fluted/gold/king,
+		/obj/item/clothing/head/helmet/visored/gold/king,
+		/obj/item/clothing/neck/gorget/gold/king,
+		/obj/item/clothing/head/helmet/visored/gold/king,
+		/obj/item/clothing/shirt/robe/hag,
 
-		/obj/item/clothing/wrists/bracers/naledi //Inqstuff
+		/obj/item/clothing/head/helmet/heavy/dwarven,
+		/obj/item/clothing/head/helmet/heavy/dwarven/smith,
+		/obj/item/clothing/shoes/boots/armor/dwarven,
+		/obj/item/clothing/gloves/plate/dwarven,
+		/obj/item/clothing/armor/plate/full/dwarven,
+		/obj/item/clothing/armor/plate/full/dwarven/smith,
+
+		//stat rings
+		/obj/item/clothing/ring/statgemerald,
+		/obj/item/clothing/ring/statonyx,
+		/obj/item/clothing/ring/statamythortz,
+		/obj/item/clothing/ring/statrontz,
+		/obj/item/clothing/ring/statdorpel,
+
+		/obj/item/clothing/armor/heartfelt,
+		/obj/item/clothing/armor/heartfelt/hand,
+
+		/obj/item/clothing/armor/cuirass/fluted,
+
+		///these can probably have recipes?
+		/obj/item/clothing/face/xylixmask,
+		/obj/item/clothing/face/xylixmask/weathered,
+		/obj/item/clothing/ring/duelist,
+		/obj/item/clothing/cloak/stabard/templar/justice,
+		/obj/item/clothing/cloak/cape/inquisitorgold,
+		/obj/item/clothing/cloak/cape/inquisitorsilver,
+		/obj/item/clothing/cloak/sleevedtabard,
+		/obj/item/clothing/cloak/absolutionistrobe/black,
+		/obj/item/clothing/gloves/angle/freifechter,
+		/obj/item/clothing/head/dancer_headdress,
+		/obj/item/clothing/face/faceveil,
+
+		//we have no way to get aalloy yet
+		/obj/item/clothing/head/helmet/heavy/aalloy,
+		/obj/item/clothing/head/helmet/kettle/aalloy,
+		/obj/item/clothing/head/helmet/visored/knight/aalloy,
+		/obj/item/clothing/armor/chainmail/hauberk/aalloy,
+		/obj/item/clothing/ring/band/aalloy,
+
+		//funny clothes no recipe
+		/obj/item/clothing/gloves/plate/iron/banded,
+		/obj/item/clothing/head/helmet/sallet/beastskull,
+		/obj/item/clothing/head/helmet/sallet/iron/banded,
+		/obj/item/clothing/armor/plate/iron/banded,
+		/obj/item/clothing/gloves/plate/iron/banded,
+
+		///all blackmeadow are pending blackmeadow features
+		/obj/item/clothing/cloak/kazengun,
+		/obj/item/clothing/neck/gorget/kazengun,
+		/obj/item/clothing/shoes/boots/leather/kazengun,
+		/obj/item/clothing/pants/trou/leather/kazengun,
+		/obj/item/clothing/face/facemask/steel/kazengun,
+		/obj/item/clothing/face/facemask/steel/kazengun/full,
+		/obj/item/clothing/head/helmet/heavy/kabuto,
+		/obj/item/clothing/armor/plate/full/samsibsa,
+		/obj/item/clothing/gloves/plate/kote,
+		/obj/item/clothing/head/helmet/kettle/jingasa,
+		/obj/item/clothing/armor/brigandine/haraate,
+
+		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/pants/trou/leather/pontifex,
 	)
 	// these don't use misc_flags = CRAFTING_TEST_EXCLUDE because we want to explicitly know which paths we are excluding.
 	/// excludes paths along with their subtypes

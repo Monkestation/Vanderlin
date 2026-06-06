@@ -411,17 +411,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/clock/examine(mob/user)
 	. = ..()
@@ -665,17 +656,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/statue/CanPass(atom/movable/mover, turf/target)
 	. = ..()
@@ -1442,18 +1424,6 @@
 	if(istype(living_user.patron, /datum/patron/psydon))
 		living_user.add_stress(/datum/stress_event/painful_reminder)
 		. += " Never forget those we have lost."
-
-/obj/structure/fluff/statue/shisha
-	name = "shisha pipe"
-	desc = "A traditional shisha pipe, this one is broken."
-	icon = 'icons/roguetown/misc/64x64.dmi'
-	icon_state = "zbuski"
-	density = FALSE
-	anchored = TRUE
-	layer = ABOVE_MOB_LAYER
-	plane = GAME_PLANE_UPPER
-	blade_dulling = DULLING_BASH
-	max_integrity = 300
 
 /obj/structure/fluff/statue/gaffer
 	name = "Subdued Statue"

@@ -19,7 +19,7 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	minimum_time = 7 SECONDS
 	maximum_time = 9 SECONDS
-	surgery_flags = SURGERY_INCISED
+	surgery_flags = SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 	preop_sound = 'sound/surgery/cautery1.ogg'
@@ -36,7 +36,7 @@
 	var/burndam = 20
 	if(user.mind)
 		burndam -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) * 3)
-	var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
+	var/datum/antagonist/zombie/was_zombie = IS_DEADITE(target)
 	var/has_rot = was_zombie
 	if(!has_rot && iscarbon(target))
 		var/mob/living/carbon/stinky = target
@@ -73,7 +73,5 @@
 				if(ghost)
 					to_chat(ghost, span_warning("My funeral rites were undone!"))
 		human.funeral = FALSE
-	if(target.stat < DEAD)
-		target.remove_client_colour(/datum/client_colour/monochrome/death)
 	target.take_bodypart_damage(null, burndam)
 	return TRUE

@@ -12,7 +12,7 @@
 	buckle_lying = 0
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
-	ambushable = TRUE //! DEPRECATED VAR, USE TRAIT_NOAMBUSH
+	ambushable = TRUE
 	maxHealth = BRAIN_DAMAGE_DEATH
 
 	voice_pitch = 1
@@ -97,8 +97,12 @@
 
 	var/original_name = null
 
-	var/buried = FALSE // Whether the body is buried or not.
-	var/funeral = FALSE // Whether the body has received rites or not.
+	/// Whether the body is buried or not.
+	var/buried = FALSE
+	/// Whether the body has received rites or not.
+	var/funeral = FALSE
+	/// Final words to have displayed if body is buried, set by an observer that has went to the afterlife
+	var/final_words
 
 	var/datum/devotion/cleric = null // Used for cleric_holder for priests
 	var/datum/inspiration/inspiration = null

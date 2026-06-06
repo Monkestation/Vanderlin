@@ -22,6 +22,8 @@
 	var/stored_pixel_y = 0
 	var/stored_pixel_x = 0
 
+	var/list/stored_items = list()
+
 	var/tmp/time_when_placed
 
 /obj/structure/blueprint/Initialize(mapload)
@@ -34,6 +36,9 @@
 	addtimer(CALLBACK(src, PROC_REF(setup_blueprint), 1 SECONDS))
 
 /obj/structure/blueprint/Destroy()
+	for(var/obj/item/I in stored_items)
+		if(!QDELETED(I))
+			I.forceMove(get_turf(src))
 	GLOB.active_blueprints -= src
 	SSblueprints.remove_blueprint(src)
 	clear_all_viewers()
@@ -43,15 +48,100 @@
 	GLOB.active_blueprints |= src
 	SSblueprints.add_new_blueprint(src)
 
-/obj/structure/blueprint/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!istype(I, recipe.construct_tool))
+/obj/structure/blueprint/examine(mob/user)
+	. = ..()
+	if(!recipe || !length(recipe.required_materials))
 		return
-	try_construct(user, I)
+
+	. += "<br>"
+	. += span_notice("Staged materials:")
+
+	var/any_stored = FALSE
+	for(var/mat_type in recipe.required_materials)
+		var/needed = recipe.required_materials[mat_type]
+		var/stored = count_stored_of_type(mat_type)
+		var/atom/temp = mat_type
+
+		. += span_notice("  - [initial(temp.name)]: [stored]/[needed]")
+		if(stored > 0)
+			any_stored = TRUE
+
+	if(!any_stored)
+		. += span_warning("  No materials staged yet. Attack the blueprint with materials to pre-load them.")
+
+/obj/structure/blueprint/attackby(obj/item/I, mob/user, list/modifiers)
+	// Construct tool (or no tool required)
+	if(recipe?.construct_tool && istype(I, recipe.construct_tool))
+		try_construct(user, I)
+		return
+
+	if(!recipe?.construct_tool)
+		try_construct(user)
+		return
+
+	//try to stage the item into the blueprint for usage later (sovl)
+	if(try_stage_item(I, user))
+		return
+
+	return ..()
+
+/obj/structure/blueprint/proc/try_stage_item(obj/item/I, mob/user)
+	if(!recipe)
+		return FALSE
+
+	for(var/atom/mat_type as anything in recipe.required_materials)
+		if(!istype(I, mat_type))
+			continue
+
+		// Check we actually still need more of this
+		var/needed = recipe.required_materials[mat_type]
+		var/already_stored = count_stored_of_type(mat_type)
+		if(already_stored >= needed)
+			to_chat(user, span_warning("The blueprint already has enough [initial(mat_type.name)]."))
+			return TRUE
+
+		if(I in user.get_active_held_items())
+			user.dropItemToGround(I)
+
+		if(istype(I, /obj/item/natural/bundle))
+			var/obj/item/natural/bundle/B = I
+			var/can_take = needed - already_stored
+			var/taking = min(can_take, B.amount)
+			B.amount -= taking
+			// Store a new bundle of just what we're taking
+			var/obj/item/natural/bundle/stored_bundle = new B.type(src)
+			stored_bundle.amount = taking
+			stored_items += stored_bundle
+			if(B.amount <= 0)
+				qdel(B)
+			else
+				user.put_in_hand(B)
+		else
+			I.forceMove(src)
+			stored_items += I
+
+		to_chat(user, span_notice("You slot [I] into the blueprint. ([count_stored_of_type(mat_type)]/[needed] [initial(mat_type.name)])"))
+		return TRUE
+
+	return FALSE
+
+/obj/structure/blueprint/proc/count_stored_of_type(atom/mat_type)
+	var/count = 0
+	for(var/obj/item/I in stored_items)
+		if(!istype(I, mat_type))
+			continue
+		if(istype(I, /obj/item/natural/bundle))
+			var/obj/item/natural/bundle/B = I
+			count += B.amount
+		else
+			count += 1
+	return count
 
 /obj/structure/blueprint/attack_hand(mob/user)
 	if(recipe.construct_tool)
 		return
 	try_construct(user)
+
 /obj/structure/blueprint/proc/setup_blueprint()
 	if(!recipe)
 		return
@@ -294,23 +384,22 @@
 /obj/structure/blueprint/proc/get_materials_in_range(mob/user, range = 3)
 	var/list/materials = list()
 
-	var/list/range_stuff =  range(range, src)
+	var/list/range_stuff = range(range, src)
 	range_stuff += user.get_active_held_item()
 	range_stuff += user.get_inactive_held_item()
+	range_stuff += stored_items  // <<< new
 
 	for(var/obj/item/I in range_stuff)
-		// Check each material type in the recipe to see if this item matches
 		for(var/mat_type in recipe.required_materials)
 			if(istype(I, mat_type))
 				if(!materials[mat_type])
 					materials[mat_type] = 0
-
 				if(istype(I, /obj/item/natural/bundle))
 					var/obj/item/natural/bundle/S = I
 					materials[mat_type] += S.amount
 				else
 					materials[mat_type] += 1
-				break // Don't double-count items that match multiple types
+				break
 
 	for(var/obj/item/natural/bundle/B in range_stuff)
 		var/bundle_type = B.stacktype || B.type
@@ -327,37 +416,53 @@
 	for(var/mat_type in needed_materials)
 		var/needed_amount = needed_materials[mat_type]
 
-		var/list/materials = range(3, src)
-		materials += user.get_active_held_item()
-		materials += user.get_inactive_held_item()
-
-		// First consume from bundles
-		for(var/obj/item/natural/bundle/B in materials)
+		// Drain stored_items first
+		for(var/obj/item/I in stored_items)
 			if(needed_amount <= 0)
 				break
-			var/bundle_type = B.stacktype || B.type
-			if(istype(new bundle_type, mat_type) || bundle_type == mat_type)
+			if(!istype(I, mat_type))
+				continue
+			if(istype(I, /obj/item/natural/bundle))
+				var/obj/item/natural/bundle/B = I
 				var/consumed = min(needed_amount, B.amount)
 				B.amount -= consumed
 				if(B.amount <= 0)
-					materials -= B
-					qdel(B)
+					stored_items -= I
+					qdel(I)
 				needed_amount -= consumed
+			else
+				stored_items -= I
+				qdel(I)
+				needed_amount -= 1
 
 		if(needed_amount > 0)
-			for(var/obj/item/I in materials)
+			var/list/materials = range(3, src)
+			materials += user.get_active_held_item()
+			materials += user.get_inactive_held_item()
+
+			for(var/obj/item/natural/bundle/B in materials)
 				if(needed_amount <= 0)
 					break
-				if(istype(I, mat_type))
-					if(istype(I, /obj/item/natural/bundle))
-						var/obj/item/natural/bundle/S = I
-						var/consumed = min(needed_amount, S.amount)
-						S.amount -= consumed
-						if(S.amount <= 0)
-							materials -= S
-							qdel(S)
-						needed_amount -= consumed
-					else
-						materials -= I
-						qdel(I)
-						needed_amount -= 1
+				var/bundle_type = B.stacktype || B.type
+				if(istype(new bundle_type, mat_type) || bundle_type == mat_type)
+					var/consumed = min(needed_amount, B.amount)
+					B.amount -= consumed
+					if(B.amount <= 0)
+						qdel(B)
+					needed_amount -= consumed
+
+			if(needed_amount > 0)
+				for(var/obj/item/I in materials)
+					if(needed_amount <= 0)
+						break
+					if(istype(I, mat_type))
+						if(istype(I, /obj/item/natural/bundle))
+							var/obj/item/natural/bundle/S = I
+							var/consumed = min(needed_amount, S.amount)
+							S.amount -= consumed
+							if(S.amount <= 0)
+								qdel(S)
+							needed_amount -= consumed
+						else
+							qdel(I)
+							needed_amount -= 1

@@ -29,7 +29,8 @@
 
 /datum/surgery_step/bestow_lux/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	. = ..()
-
+	if(!.)
+		return
 	if(target.stat == DEAD)
 		return FALSE
 

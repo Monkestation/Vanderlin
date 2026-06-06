@@ -64,10 +64,15 @@
 	var/obj/item/stacktype = /obj/item/natural/fibers
 	var/stackname = "fibers"
 	var/bundle_verb = "bundle"
+	/// For every amount / items_per_increase, increase a storage dimension by 1.
 	var/items_per_increase = 5
 
 	var/base_width = 32
 	var/base_height = 32
+
+/obj/item/natural/bundle/Initialize(mapload)
+	. = ..()
+	update_bundle()
 
 /obj/item/natural/bundle/get_carry_weight(atom/carrier)
 	. = initial(stacktype.item_weight) * amount
@@ -204,18 +209,21 @@
 	else
 		if(icon3 != null)
 			icon_state = icon3
+
+	if(!items_per_increase)
+		return
+
 	var/increases = FLOOR(amount / items_per_increase, 1)
 
-	var/height = FALSE
+	var/dimension = FALSE
 	grid_height = base_height
 	grid_width = base_width
 	for(var/i = 1 to increases)
-		if(height)
-			height = FALSE
+		if(dimension)
 			grid_height += 32
 		else
-			height = TRUE
 			grid_width += 32
+		dimension = !dimension
 	if(item_flags & IN_STORAGE)
 		var/obj/item/location = loc
 		var/datum/component/storage/storage = location.GetComponent(/datum/component/storage)
