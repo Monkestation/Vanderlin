@@ -1,4 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - code_imp: "Removed redundant lines from class code."

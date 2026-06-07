@@ -147,7 +147,6 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 			H.del_on_deaggro = 44 SECONDS
 			H.last_aggro_loss = world.time
 			H.add_faction("ambush")
-			addtimer(CALLBACK(H, PROC_REF(setup_equip_block)), 3 SECONDS)
 			mustype = 2
 	if(!spawns)
 		return
