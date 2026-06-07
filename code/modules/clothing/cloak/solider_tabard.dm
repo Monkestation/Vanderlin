@@ -204,6 +204,14 @@
 	icon_state = "tabard_ravox"
 	item_state = "tabard_ravox"
 
+/obj/item/clothing/cloak/stabard/templar/justice
+	name = "surcoat of the justice order"
+	icon_state = "justicetabard"
+	item_state = "justicetabard"
+	icon = 'icons/roguetown/clothing/special/ravoxtemplar.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/ravoxtabard.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/ravoxtabard.dmi'
+
 /obj/item/clothing/cloak/stabard/templar/xylix
 	name = "surcoat of the xylixian order"
 	icon_state = "tabard_xylix"

@@ -1266,7 +1266,7 @@
 		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
 			if(BP.body_zone in missing_bodyparts_zones)
 				continue
-			if(HAS_TRAIT(H, TRAIT_NOPAIN))
+			if(!H.can_feel_pain())
 				var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]")
 				limby.color = "#78a8ba"
 				. += limby
@@ -1279,7 +1279,12 @@
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]w-[BP.body_zone]") //apply wounded overlay
 			limby.alpha = (comparison*255)*2
 			. += limby
-			if(BP.get_bleed_rate())
+			var/artery_bleeding
+			for(var/obj/item/organ/possible_artery in BP.getorganslotlist(ORGAN_SLOT_ARTERY))
+				if(possible_artery.is_bruised())
+					artery_bleeding = TRUE
+					break
+			if(artery_bleeding || BP.get_bleed_rate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
 		for(var/X in missing_bodyparts_zones)
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb
@@ -1580,7 +1585,7 @@
 		state2use = "mood_drunk"
 	if(H.InFullCritical())
 		state2use = "mood_fear"
-	if(H.stat == DEAD || H.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(H.stat == DEAD || IS_DEADITE(H))
 		state2use = "mood_dead"
 	. += state2use
 

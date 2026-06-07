@@ -20,6 +20,7 @@
 #define M_STEEL		M_IRON+W_MODERATE	// one steel bar
 #define M_SILVER	M_IRON*3	// one silver bar
 #define M_GOLD		M_IRON*5	// one gold bar
+#define M_BLACKSTEEL	M_IRON*7	// one blacksteel bar
 
 // Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit.
 #define SKILL_1		2

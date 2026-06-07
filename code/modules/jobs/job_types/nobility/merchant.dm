@@ -10,7 +10,8 @@
 		/datum/attribute/skill/misc/stealing = 60,
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/labor/mathematics = 50
+		/datum/attribute/skill/labor/mathematics = 50,
+		/datum/attribute/skill/combat/firearms = 20,
 	)
 
 /datum/job/merchant
@@ -21,6 +22,7 @@
 	department_flag = COMPANY
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MERCHANT
+	is_quest_giver = TRUE
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1

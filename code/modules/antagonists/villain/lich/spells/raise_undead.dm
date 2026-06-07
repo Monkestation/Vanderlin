@@ -83,7 +83,6 @@
 	mind.current.job = null
 	mind.add_antag_datum(/datum/antagonist/skeleton)
 
-	dna.species.species_traits |= NOBLOOD
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
@@ -100,11 +99,9 @@
 	copy_known_languages_from(master, TRUE)
 	mob_biotypes = MOB_UNDEAD
 	faction = list(FACTION_UNDEAD)
-	ambushable = FALSE
-	candodge = FALSE
 
 	skeletonize(FALSE)
-	cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
+	fully_heal(HEAL_TRAUMAS)
 
 	skele_look()
 	grant_undead_eyes()
@@ -115,17 +112,23 @@
 	if(length(quirks))
 		clear_quirks()
 
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOENERGY, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	add_traits(list(TRAIT_NOMOOD, \
+		TRAIT_NOHUNGER, \
+		TRAIT_NOBREATH, \
+		TRAIT_NOHYGIENE, \
+		TRAIT_NOPAIN, \
+		TRAIT_NOSLEEP, \
+		TRAIT_EASYDISMEMBER, \
+		TRAIT_TOXIMMUNE, \
+		TRAIT_LIMBATTACHMENT, \
+		TRAIT_CRITICAL_WEAKNESS, \
+		TRAIT_NO_ORGAN_PROCESS, \
+		TRAIT_NOBLOOD, \
+		TRAIT_NOENERGY, \
+		TRAIT_SHOCKIMMUNE, \
+		TRAIT_NOAMBUSH, \
+		TRAIT_UNDODGING)
+		, SPECIES_TRAIT)
 
 	update_body()
 

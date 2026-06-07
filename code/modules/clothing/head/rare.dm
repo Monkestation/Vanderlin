@@ -40,18 +40,6 @@
 	item_weight = 3.5 KILOGRAMS
 
 
-//............... Langobard Helmet ............... //
-/obj/item/clothing/head/rare/dwarfplate // Unique Longbeard kit
-	name = "langobard pot helm"
-	desc = "The Langobards are a cult of personality that are tasked by the Dwarven Kings to issue judgement, \
-			justice and order around the realms for dwarvenkind. This helmet is a respected symbol of authority."
-	icon_state = "dwarfhead"
-	allowed_race = list(SPEC_ID_DWARF)
-	flags_inv = HIDEEARS
-	clothing_flags = CANT_SLEEP_IN
-	body_parts_covered = HEAD_EXCEPT_MOUTH
-	item_weight = 3.5 KILOGRAMS
-
 //............... Swordmaster Helmet ............... //
 /obj/item/clothing/head/rare/grenzelplate // Unique Swordmaster kit
 	name = "chicklet sallet"

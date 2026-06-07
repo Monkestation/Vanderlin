@@ -25,6 +25,30 @@
 	sellprice = 0
 	experimental_onhip = TRUE
 
+
+/obj/item/clothing/neck/psycross/matthios
+	name = "amulet of Matthios"
+	desc = "He was but one flame in the dark. Together, his flock shall outblaze the tyrant sun."
+	icon_state = "matthios"
+	resistance_flags = FIRE_PROOF
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
+	smeltresult = null
+
+/obj/item/clothing/neck/psycross/graggar
+	name = "amulet of Graggar"
+	desc = "Blood leads only to glory, and violence begets divinity. Nothing less. Conquest is simply another name for victory."
+	icon_state = "graggar"
+	resistance_flags = FIRE_PROOF
+	smeltresult = null
+
+/obj/item/clothing/neck/psycross/baotha
+	name = "amulet of Baotha"
+	desc = "A hollow promise rendered in gold. It weighs heavy with the memory of sweet wine turned to poison, and the comfort of a sorrow that refuses to fade."
+	icon_state = "baotha"
+	resistance_flags = FIRE_PROOF
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
+	smeltresult = null
+
 /* // GRONN PSYCROSSES
 /obj/item/clothing/neck/psycross/gronn
 	name = "carved talisman" //plotting talisman

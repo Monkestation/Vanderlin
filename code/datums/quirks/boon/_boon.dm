@@ -81,6 +81,7 @@
 		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
+		/datum/language/gronnic,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
@@ -265,7 +266,7 @@
 /datum/quirk/boon/packmule
 	name = "Packmule"
 	desc = "There's no such thing as having too much storage! You start with a backpack."
-	point_value = -8
+	point_value = -4
 	preview_render = FALSE
 
 /datum/quirk/boon/packmule/after_job_spawn(datum/job/job)

@@ -1,0 +1,68 @@
+2026-06-01:
+  Monkeke2:
+  - rscadd: Adds the Street Sweeper class
+  - map: Changed the empty room above & north of the clinic into the sweeper's closet.
+2026-06-02:
+  tired-wired:
+  - rscadd: Added the Gallowband roles.
+  - rscadd: Added Osslandic as a selectable language for the quirk.
+2026-06-03:
+  Archeonan:
+  - rscadd: Added 3 new Grenzelhoft Mercenary classes
+  - rscdel: Removed old Grenzelhoft Mercenary
+  Ben10083:
+  - code_imp: Improved logic to mapped in graves to have some bodies stored in a coffin
+      or sheet
+  - bugfix: Fixed graves not supporting simple animals.
+  ModDownloading:
+  - qol: The Hand no longer is assigned an offscreen NPC spouse roundstart.
+2026-06-05:
+  dwasint:
+  - refactor: Loadout, Be Special, and Triumph Buy menu combined with new UI.
+  - qol: Loadouts can now be made by non-donators, using TRIUMPHs to purchase items
+      to use.
+  - qol: Many loadout items now support dying and detailing
+  - balance: Be Special is now saved until used, and will not go away until you play
+      a round with it.
+  - balance: Be Special now allows you to purchase specific specials at the cost of
+      TRIUMPHs, donators get a discount.
+  - rscadd: wedding bands & other rings, can be crafted at an anvil with the respective
+      metal & gem
+  - rscadd: new tailorable clothes to mirror new items in the loadout shop
+  - rscadd: new smelt results for items that previously lacked them like ancient armors
+  - rscadd: new gold armor set that can be smithed with gold ingots
+2026-06-06:
+  CheffieGithub:
+  - bugfix: Slurbow can be drawn while moving again
+  - rscadd: Added fortune to stat panel stats
+  ModDownloading:
+  - rscadd: The Holy Pilgrim advclass for Pilgrim, a non-combat miracle caster.
+  - balance: Ambush spawns no longer have rune-locked armor.
+  - rscadd: Unlucky, a vice quirk that gives you -5 to -9 Fortune.
+  - rscadd: Skill Bereft, a vice quirk that gives you -30 in all skills.
+  - rscadd: Wanted quirk can now let you be both an Outlaw and a Heretic at the same
+      time.
+  - balance: Packmule quirk costs 4 points instead of 8.
+  - rscadd: Khans and Nomads now have 20 points in Wrestling and Unarmed instead of
+      0.
+  - rscadd: Beggars now have 10 to 20 Crafting skill.
+  - bugfix: Beggar stats restored to their previous (higher) values from pre skill-change.
+  - code_imp: Removed redundant lines from class code.
+  PotatoTomahto:
+  - balance: potato tries to balance medical
+  Somniworld:
+  - qol: all sacrestant classes now have a keyring.
+  - balance: Psyaltrists no longer have expert Miracle skill, since they can't use
+      the damned thing.
+  - sound: The Psyaltrist now uses the sacrestant Cmode theme.
+  Sulaboy:
+  - bugfix: Jacksberries now require 20 farming skill or the Expert Forager trait
+      to identify.
+  The-Awful:
+  - rscdel: Removed barbarian faith restriction.
+  dwasint:
+  - rscadd: notice board, its now the central place to accept and turn in quests typically
+      found in the guild.
+  - rscadd: custom quests, players can create a pledge to make a custom quest. Which
+      can be handed in at notice boards
+  - bugfix: harlequin disguise has been reworked entirely and is no longer an ability
