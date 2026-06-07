@@ -82,7 +82,7 @@
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
-	w_class = WEIGHT_CLASS_SMALL
+	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	sewrepair = /datum/attribute/skill/craft/tanning/patching

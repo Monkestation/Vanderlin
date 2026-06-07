@@ -251,15 +251,15 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1
+		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/weapon/scabbard/book = 1,
+		/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded = 1
 	)
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/boots
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	scabbards = list(/obj/item/weapon/scabbard/cane/hand)
-	beltr =	/obj/item/weapon/scabbard/book
-	scabbards = list(/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded)
 
 /datum/attribute_holder/sheet/job/huntsmaster
 	attribute_variance = list(

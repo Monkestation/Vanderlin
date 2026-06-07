@@ -34,7 +34,7 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/blastpowder, powder_required)
 
-/obj/item/gun/ballistic/powder/wheellock/puffer/conjured
+/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded/conjured
 	name = "puffer"
 	desc = "A magically conjured copy of a eastern styled wheellock. \
 		It looks and functions exactly like the original, but seems to be held together by weak magick, it looks like it will crumble at any moment."
@@ -45,21 +45,17 @@
 
 	ramrod_type = null
 
-	cocked = TRUE
-	wound = TRUE
-	bullet_rammed = TRUE
-
 	var/breaking = FALSE
 
-/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
+/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded/conjured/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/blastpowder, powder_required)
 
-/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/can_shoot(mob/living/user)
+/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded/conjured/can_shoot(mob/living/user)
 	. = ..()
 	return (. && !breaking)
 
-/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/after_firing(atom/target, mob/living/user, empty_chamber, from_firing, chamber_next_round)
+/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded/conjured/after_firing(atom/target, mob/living/user, empty_chamber, from_firing, chamber_next_round)
 	. = ..()
 	if(!from_firing)
 		return
