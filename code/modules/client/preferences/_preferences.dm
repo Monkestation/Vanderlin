@@ -250,6 +250,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		"parchment",
 	)
 
+	var/list/role_preferences = list()
+
 	// I beg for datumised prefs
 	/// culture datum type
 	var/datum/culture/culture = /datum/culture/universal/ambiguous
@@ -1118,6 +1120,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		else
 			HTML += "<br>"
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>Reset</a></center>"
+		HTML += "<br><center><a href='?_src_=prefs;preference=role_settings'>Role Specific Preferences</a></center>"
 
 	HTML += "</center>"
 
@@ -1441,6 +1444,30 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		return
 	else if(href_list["preference"] == "triumph_buy_menu")
 		SStriumphs.startup_triumphs_menu(user.client)
+
+	else if(href_list["preference"] == "role_settings")
+		var/list/settings = list(
+			"Monarch Law" = "monarch_law",
+			"Monarch Decree" = "monarch_decree"
+		)
+		var/choice = input(user, "Select a role setting to modify:", "Role Settings") as null|anything in settings
+		if(choice)
+			var/setting_key = settings[choice]
+			var/current_val = role_preferences[setting_key]
+
+			var/prompt_msg = "Set value for [choice].\n(You can enter multiple lines. Clearing it will remove the setting.)"
+			if(choice == "Monarch Law")
+				prompt_msg += "\n\nExample:\nThou shalt ...\nThou shalt not ..."
+			else if(choice == "Monarch Decree")
+				prompt_msg += "\n\nExample:\nTaxes are hereby abolished.\nAll peasants must ..."
+
+			var/new_val = input(user, prompt_msg, choice, current_val) as message|null
+			if(!isnull(new_val))
+				if(new_val == "")
+					role_preferences -= setting_key
+				else
+					role_preferences[setting_key] = sanitize_text(new_val)
+		return TRUE
 
 	else if(href_list["preference"] == "keybinds")
 		switch(href_list["task"])

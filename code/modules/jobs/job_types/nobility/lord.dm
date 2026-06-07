@@ -138,6 +138,21 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
+	if(player_client?.prefs)
+		var/datum/preferences/prefs = player_client.prefs
+		
+		var/law_text = prefs.role_preferences["monarch_law"]
+		if(law_text)
+			for(var/line in splittext(law_text, "\n"))
+				if(trim(line))
+					GLOB.laws_of_the_land += trim(line)
+					
+		var/decree_text = prefs.role_preferences["monarch_decree"]
+		if(decree_text)
+			for(var/line in splittext(decree_text, "\n"))
+				if(trim(line))
+					GLOB.lord_decrees += trim(line)
+
 /datum/outfit/lord
 	name = JOB_MONARCH
 	head = /obj/item/clothing/head/crown/serpcrown

@@ -334,6 +334,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["gender_choice"] >> gender_choice
 	S["setspouse"] >> setspouse
 	S["selected_accent"] >> selected_accent
+	S["role_preferences"] >> role_preferences
+	if(!islist(role_preferences))
+		role_preferences = list()
 
 	voice_color = sanitize_hexcolor(voice_color, include_crunch = FALSE)
 
@@ -509,6 +512,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["gender_choice"], gender_choice)
 	WRITE_FILE(S["setspouse"], setspouse)
 	WRITE_FILE(S["selected_accent"], selected_accent)
+	WRITE_FILE(S["role_preferences"], role_preferences)
 
 	WRITE_FILE(S["equipped_loadout"], equipped_loadout)
 	WRITE_FILE(S["equipped_loadout_colors"], equipped_loadout_colors)
