@@ -22,7 +22,7 @@
 
 	for(var/wound_type in untreated_types)
 		switch(wound_type)
-			if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+			if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE)
 				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 			if(WOUND_BLUNT, WOUND_LASH)
 				. += "Bandage bruises and lashes to allow them to heal."
@@ -182,8 +182,8 @@
 /obj/item/bodypart/proc/get_injury_status(mob/user, advanced = FALSE)
 	var/list/status = list()
 
-	var/brute = brute_dam
-	var/burn = burn_dam
+	var/brute = round(brute_dam, DAMAGE_PRECISION)
+	var/burn = round(burn_dam, DAMAGE_PRECISION)
 
 	if(advanced)
 		if(brute)
@@ -191,7 +191,7 @@
 		if(burn)
 			status += "<span class='[burn >= 10 ? "danger" : "warning"]'>[burn] BURN</span>"
 	else
-		if(brute >= DAMAGE_PRECISION)
+		if(brute)
 			switch(brute/max_damage)
 				if(0.75 to INFINITY)
 					status += "<span class='userdanger'><B>[heavy_brute_msg]</B></span>"
@@ -201,8 +201,7 @@
 					status += "<span class='danger'>[medium_brute_msg]</span>"
 				else
 					status += "<span class='warning'>[light_brute_msg]</span>"
-
-		if(burn >= DAMAGE_PRECISION)
+		if(burn)
 			switch(burn/max_damage)
 				if(0.75 to INFINITY)
 					status += "<span class='userdanger'><B>[heavy_burn_msg]</B></span>"
@@ -215,10 +214,10 @@
 
 	var/bleed_rate = get_bleed_rate()
 	if(bleed_rate)
-		if(bleed_rate > 1) //Totally arbitrary value
-			status += "<span class='bloody'><B>BLEEDING</B></span>"
+		if(bleed_rate > BLEED_RATE_NOTICABLE) //Totally arbitrary value
+			status += span_bloody("<B>BLEEDING</B>")
 		else
-			status += "<span class='bloody'>BLEEDING</span>"
+			status += span_bloody("BLEEDING")
 
 	var/list/wound_strings = list()
 	for(var/datum/wound/wound as anything in wounds)
@@ -232,12 +231,12 @@
 	wound_strings -= null
 	status += wound_strings
 
-	for(var/obj/item/organ/possible_artery in shuffle(getorganslotlist(ORGAN_SLOT_ARTERY)))
+	for(var/obj/item/organ/possible_artery in getorganslotlist(ORGAN_SLOT_ARTERY))
 		if(possible_artery.is_bruised())
-			if(get_cut())
-				status += span_bloody("[possible_artery.name]'s been cut")
+			if(get_cut(ignore_gauze = TRUE))
+				status += span_artery(uppertext("cut [possible_artery.name]"))
 			else
-				status += span_bloody("internal bleeding")
+				status += span_artery(uppertext("internal bleeding"))
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"
@@ -278,22 +277,21 @@
 
 	return status
 
-
 /obj/item/bodypart/proc/get_injuries_desc()
 	var/list/flavor_text = list()
 	var/list/injury_descriptors = list()
 	for(var/thing in injuries)
 		var/datum/injury/injury = thing
-		var/this_injury_desc = injury.get_desc(TRUE)
+		var/this_injury_desc = injury.get_desc()
 		if(!this_injury_desc)
 			continue
-		if(injury.can_autoheal() && (injury.current_stage >= length(injury.stages)) && (injury.damage < 5))
+		if(injury.can_autoheal() && (injury.current_stage >= length(injury.stages)) && (injury.damage_per_injury() < 5))
 			this_injury_desc = "<span style='color: [COLOR_PALE_RED_GRAY];'>[this_injury_desc]</span>"
 		if(injury.is_bleeding())
 			if(is_artery_torn())
-				this_injury_desc = "<b><i><span class='artery'>blood-gushing</span></i></b> [this_injury_desc]"
+				this_injury_desc = span_artery("<b><i>blood-gushing</span></i></b> [this_injury_desc]")
 			//Completely arbitrary value
-			else if(injury.get_bleed_rate() > 1)
+			else if(injury.get_bleed_rate() > BLEED_RATE_NOTICABLE)
 				this_injury_desc = "<b><i>badly bleeding</i></b> [this_injury_desc]"
 			else
 				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
@@ -329,13 +327,9 @@
 		var/clean_final = ""
 		final_text += injury
 		clean_final = injury
-		if(injury_descriptors[injury] > 1)
-			if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
-				final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
-				clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
-			else
-				final_text += "s"
-				clean_final += "s"
+		if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
+			final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
+			clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
 		switch(injury_descriptors[injury])
 			if(-INFINITY to 1)
 				final_text = ""

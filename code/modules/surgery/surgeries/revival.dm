@@ -31,6 +31,8 @@
 
 /datum/surgery_step/infuse_lux/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	. = ..()
+	if(!.)
+		return
 	if(target.stat < DEAD)
 		to_chat(user, span_notice("They're not dead!"))
 		return FALSE

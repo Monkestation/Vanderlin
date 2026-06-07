@@ -31,7 +31,7 @@
  * @return TRUE if parry successful, FALSE otherwise
  */
 /mob/living/proc/attempt_parry(datum/intent/intenty, mob/living/user, prob2defend)
-	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS))
+	if(HAS_TRAIT(src, TRAIT_UNPARRYING))
 		return FALSE
 	if(intenty && !intenty.canparry)
 		return FALSE

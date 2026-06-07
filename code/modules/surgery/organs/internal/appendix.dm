@@ -17,7 +17,7 @@
 	organ_volume = 0.5
 	max_blood_storage = 2.5
 	current_blood = 2.5
-	blood_req = 0.5
+	blood_req = 0.25
 	oxygen_req = 0.25
 	nutriment_req = 0.35
 	hydration_req = 0.2

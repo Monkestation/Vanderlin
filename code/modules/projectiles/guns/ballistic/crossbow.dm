@@ -37,6 +37,7 @@
 	projectile_damage_multiplier = 0.6
 
 	pullback_time = 2 SECONDS
+	pullback_movement = TRUE
 
 /obj/item/gun/ballistic/bow/cross/getonmobprop(tag)
 	. = ..()

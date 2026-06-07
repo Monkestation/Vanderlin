@@ -98,7 +98,7 @@
 			return ..(carbon, force, FALSE)
 
 	for(var/obj/item/grabbing/G in M.grabbedby)
-		if(G.grab_state == GRAB_AGGRESSIVE)
+		if(G.grab_state >= GRAB_AGGRESSIVE)
 			return ..(M, force, FALSE)
 
 	to_chat(usr, span_warning("I must grab them more forcefully to put them in [src]."))

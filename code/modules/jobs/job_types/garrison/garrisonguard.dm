@@ -30,12 +30,18 @@
 
 /datum/outfit/guardsman
 	name = "City Watchmen Base"
+	head = /obj/item/clothing/head/helmet/townbarbute
 	cloak = /obj/item/clothing/cloak/half/guard
 	pants = /obj/item/clothing/pants/trou/leather/splint
 	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather/townguard
 	gloves = /obj/item/clothing/gloves/leather
+	backl = /obj/item/storage/backpack/satchel
+	beltl = /obj/item/weapon/mace/cudgel
+	backpack_contents = list(
+		/obj/item/rope/chain = 1
+	)
 
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -87,18 +93,12 @@
 
 /datum/outfit/guardsman/footman
 	name = "City Watch Footman"
-	head = /obj/item/clothing/head/helmet/townbarbute
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	backr = /obj/item/weapon/shield/heater
-	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/weapon/sword/short/iron
-	beltl = /obj/item/weapon/mace/cudgel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(
-		/obj/item/rope/chain = 1
-	)
 
 /datum/attribute_holder/sheet/job/garrison/archer
 	raw_attribute_list = list(
@@ -135,16 +135,10 @@
 
 /datum/outfit/guardsman/archer
 	name = "City Watch Archer"
-	head = /obj/item/clothing/head/helmet/townbarbute
 	neck = /obj/item/clothing/neck/chaincoif
 	armor = /obj/item/clothing/armor/gambeson/heavy
 	backr = /obj/item/gun/ballistic/bow
-	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	beltl = /obj/item/weapon/mace/cudgel
-	backpack_contents = list(
-		/obj/item/rope/chain = 1
-	)
 
 /datum/outfit/guardsman/archer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -184,18 +178,12 @@
 
 /datum/outfit/guardsman/pikeman
 	name = "City Watch Pikeman"
-	head = /obj/item/clothing/head/helmet/townbarbute
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	neck = /obj/item/clothing/neck/gorget
-	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	beltl = /obj/item/weapon/sword/short/iron
-	beltr = /obj/item/weapon/mace/cudgel
+	beltr = /obj/item/weapon/sword/short/iron
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(
-		/obj/item/rope/chain = 1
-	)
 
 /mob/proc/haltyell()
 	set name = "HALT!"
