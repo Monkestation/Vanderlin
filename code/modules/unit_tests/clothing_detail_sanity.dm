@@ -2,15 +2,21 @@
 /datum/unit_test/item_detail_sanity
 
 /datum/unit_test/item_detail_sanity/Run()
-	var/list/bad_types = list()
+	var/list/bad_colours = list()
+	var/list/bad_icons = list()
 	for(var/obj/item/thing as anything in subtypesof(/obj/item))
 		if(IS_ABSTRACT(thing))
 			continue
 		if(!thing.get_detail_tag())
 			continue
 		if(!thing.get_detail_color())
-			bad_types += thing.type
+			bad_colours += thing.type
+		if(!icon_exists(thing.icon, "[thing.icon_state][thing.get_detail_tag()]"))
+			bad_icons += thing.type
 
-	if(length(bad_types))
-		TEST_FAIL("Items types with detail_tag lacking detail_color:\n[bad_types.Join("\n")]")
+	if(length(bad_colours))
+		TEST_FAIL("Items types with detail_tag lacking detail_color:\n[bad_colours.Join("\n")]")
+
+	if(length(bad_icons))
+		TEST_FAIL("Items types with detail_tag lacking valid icon state:\n[bad_icons.Join("\n")]")
 
