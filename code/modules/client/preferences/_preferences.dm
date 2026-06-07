@@ -1238,24 +1238,29 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(!silent)
 		to_chat(user, "<font color='red'>Culture reset.</font>")
 
+/datum/preferences/proc/reset_accent(mob/user, silent = FALSE)
+	selected_accent = ACCENT_DEFAULT
+	if(!silent && user)
+		to_chat(user, "<font color='red'>Accent reset.</font>")
+
 /datum/preferences/proc/get_available_accent_choices()
 	var/list/available = list()
 	available["Species Accent"] = ACCENT_DEFAULT
-	
+
 	var/list/species_accents
 	if(pref_species)
 		species_accents = pref_species.multiple_accents
-		
+
 	if(istype(species_accents))
 		var/list/species_accent_list = species_accents.Copy()
 		for(var/accent_name in species_accent_list)
 			available[accent_name] = species_accent_list[accent_name]
-			
+
 	if(culture)
 		var/culture_accent = culture::accent
-		if(culture_accent && !available[culture_accent])
-			available[culture_accent] = culture_accent
-		
+		if(culture_accent)
+			available["Culture Accent"] = culture_accent
+
 	return available
 
 /datum/preferences/proc/reset_last_class(mob/user)
@@ -1790,6 +1795,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						reset_jobs(user)
 						reset_patron(user)
 						reset_culture(user)
+						reset_accent(user)
 						randomise_appearance_prefs(~(RANDOMIZE_SPECIES))
 						customizer_entries = list()
 						validate_customizer_entries()
@@ -1916,12 +1922,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						change_accent = TRUE
 					else
 						change_accent = FALSE
-						
 					if(!donator && !change_accent)
 						to_chat(user, "Sorry, this option is Donator-exclusive or unavailable to your race and culture.")
 						selected_accent = ACCENT_DEFAULT
 						return
-						
 					var/accent
 					if(donator)
 						accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", GLOB.accent_list, selected_accent)
@@ -1964,6 +1968,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					if(!choice)
 						return
 					culture = cultures[choice]
+					reset_accent(user)
 					to_chat(user, span_notice("[culture::name]"))
 					to_chat(user, span_notice("[culture::description]"))
 		else
@@ -2359,16 +2364,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(donator)
 		character.accent = selected_accent
 	else if(change_accent)
-		var/valid_accent = FALSE
-		for(var/accent_key in available_accents)
-			if(available_accents[accent_key] == selected_accent)
-				valid_accent = TRUE
-				break
-				
-		if(valid_accent)
-			character.accent = selected_accent
-		else
-			character.accent = ACCENT_DEFAULT
+		character.accent = selected_accent
 		change_accent = FALSE
 	else
 		character.accent = ACCENT_DEFAULT
