@@ -370,18 +370,10 @@
 /datum/job/advclass/hand/huntsmaster/after_spawn(mob/living/carbon/human/H)
 	. = ..()
 
-	if(!get_turf(H))
-		addtimer(CALLBACK(src, PROC_REF(after_spawn), H), 0.5 SECONDS)
-		return
-
-	if(!ishuman(H))
-		return
-
 	var/mob/living/simple_animal/hostile/retaliate/hound/pet = new(get_turf(H))
 
 	if(!pet)
 		return
-
-	if(pet)
-		pet.tamed(H)
-		ADD_TRAIT(pet, TRAIT_CRITICAL_RESISTANCE, "huntsmaster_hound")
+		
+	pet.tamed(H)
+	ADD_TRAIT(pet, TRAIT_CRITICAL_RESISTANCE, INNATE_TRAIT)
