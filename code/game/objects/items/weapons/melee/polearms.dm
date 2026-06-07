@@ -491,7 +491,7 @@
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/steel
 	name = "felling axe"
-	desc = "Not just a tool, weapon, or loyal companion of woodcutters, this is a true feller of wood, and the savage hate of the wild."
+	desc = "This is not just a tool, weapon, or loyal companion. It is a true feller of wood, able to drop the mightiest of trees and beasts."
 	icon_state = "swoodcutter"
 	force = DAMAGE_AXE + 2
 	wlength = WLENGTH_LONG
