@@ -88,7 +88,7 @@
 	name = "loyal remains"
 	gender = PLURAL
 	icon_state = "bones"
-	icon = 'icons/roguetown/mob/monster/greyhound.dmi'
+	icon = 'icons/roguetown/mob/greyhound.dmi'
 
 /mob/living/simple_animal/hostile/retaliate/hound/Initialize()
 	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands // due to signal overridings from pet commands
