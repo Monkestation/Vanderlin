@@ -15,7 +15,7 @@
 /// Basically if we act as though the reagent amount is a measure of how much powder there is
 /// we want to delete if we hit 0. so we wrap trans_to
 /obj/item/reagent_containers/powder/proc/transfer_powder(atom/transferring_to, amount, mob/living/user, method = NONE)
-	if(!transferring_to || amount)
+	if(!transferring_to || !amount)
 		return
 
 	if(!transferring_to.reagents)
