@@ -252,8 +252,7 @@
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1,
-		/obj/item/weapon/scabbard/book = 1,
-		/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded = 1
+		/obj/item/storage/belt/pouch/book/hollow
 	)
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -374,6 +373,6 @@
 
 	if(!pet)
 		return
-		
+
 	pet.tamed(H)
 	ADD_TRAIT(pet, TRAIT_CRITICAL_RESISTANCE, INNATE_TRAIT)

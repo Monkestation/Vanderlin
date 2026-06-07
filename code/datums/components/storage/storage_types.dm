@@ -33,10 +33,6 @@
 		else
 			I.icon_state += "-sheathed"
 
-/datum/component/storage/concrete/scabbard/book/New(list/raw_args)
-	. = ..()
-	set_holdable(list(/obj/item/gun/ballistic/powder/wheellock/puffer))
-
 /datum/component/storage/concrete/scabbard/knife/New(list/raw_args)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife))

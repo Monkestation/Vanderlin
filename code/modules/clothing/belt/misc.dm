@@ -194,6 +194,15 @@
 		/obj/item/reagent_containers/food/snacks/hardtack,
 	)
 
+/obj/item/storage/belt/pouch/book/hollow
+	name = "Tome of Justice"
+	desc = "This seems to be a special edition.."
+	icon_state = "handtome"
+	component_type = /datum/component/storage/concrete/grid/coin_pouch/book/hollow
+	populate_contents = list(
+		/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded,
+	)
+
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
 	. = ..()
 	var/obj/item/coin/silver/pile/H = new(loc)

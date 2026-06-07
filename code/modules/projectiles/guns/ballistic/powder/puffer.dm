@@ -26,6 +26,8 @@
 
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
 
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
+
 	cocked = TRUE
 	wound = TRUE
 	bullet_rammed = TRUE
@@ -40,8 +42,6 @@
 		It looks and functions exactly like the original, but seems to be held together by weak magick, it looks like it will crumble at any moment."
 
 	sellprice = 0 //Yeah, Let's not sell this.
-
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
 
 	ramrod_type = null
 
