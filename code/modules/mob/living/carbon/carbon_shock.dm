@@ -37,7 +37,7 @@
 	if(stat >= UNCONSCIOUS)
 		return
 
-	var/our_endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+	var/our_endurance = max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE), 1)
 
 	/*
 	if(traumatic_shock >= (PAIN_GIVES_IN * (our_endurance/ATTRIBUTE_MIDDLING)))
@@ -58,28 +58,32 @@
 	var/maxbpshock = 0
 	var/obj/item/bodypart/damaged_bodypart
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		var/bpshock = bodypart.get_shock(FALSE, TRUE)
+		var/bpshock = bodypart.get_shock(FALSE)
 		// make the choice of the organ depend on damage,
 		// but also sometimes use one of the less damaged ones
 		if((bpshock >= maxbpshock) && ((maxbpshock <= 0) || prob(70)) )
 			damaged_bodypart = bodypart
 			maxbpshock = bpshock
 
-	if(damaged_bodypart && (get_chem_effect(CE_PAINKILLER) < maxbpshock))
-		var/burning = (damaged_bodypart.burn_dam >= damaged_bodypart.brute_dam)
+	if(damaged_bodypart)
+		var/burning = (damaged_bodypart.burn_dam > damaged_bodypart.brute_dam)
 		var/message
+		var/message_prob = 1
 		switch(CEILING(maxbpshock, 1))
 			if(1 to 10)
 				message = "My [damaged_bodypart.name] [burning ? "burns" : "hurts"]."
 			if(11 to 90)
+				message_prob = 2
 				message = "My [damaged_bodypart.name] [burning ? "burns" : "hurts"] badly!"
 			if(91 to INFINITY)
-				message = "[pick("WHAT A PAIN!", "OH GOD!", "OH LORD!")]! My [damaged_bodypart.name] [damaged_bodypart.p_are()] [burning ? "on fire" : "hurting terribly"]!"
-		custom_pain(message, maxbpshock, TRUE, damaged_bodypart, TRUE)
+				message_prob = 2
+				message = "[pick("WHAT A PAIN!", "OH THE PAIN!!", "I SUFFER!")]! My [damaged_bodypart.name] [damaged_bodypart.p_are()] [burning ? "on fire" : "hurting terribly"]!"
+		if(message && DT_PROB(message_prob, delta_time))
+			custom_pain(message, maxbpshock, TRUE, damaged_bodypart, TRUE)
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/organ as anything in internal_organs)
-		if(DT_PROB(1, delta_time) && organ.can_feel_pain() && (organ.get_shock() >= 5))
+		if(DT_PROB(1, delta_time) && organ.get_shock(TRUE) >= 5)
 			var/obj/item/bodypart/parent = get_bodypart(organ.current_zone)
 			if(parent)
 				var/pain = 10
@@ -144,16 +148,16 @@
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 
 	if(traumatic_shock >= max(SHOCK_STAGE_2, 0.8 * shock_stage))
-		adjustShockStage(0.5 * delta_time * (ATTRIBUTE_MIDDLING/our_endurance))
+		adjustShockStage(delta_time * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
 		setShockStage(min(shock_stage, SHOCK_STAGE_7))
-		var/recovery = 0.5 * delta_time
+		var/recovery = delta_time
 		//Lower shock faster the less pain we feel
-		if(traumatic_shock < 0.5 * shock_stage)
-			recovery += 0.5 * delta_time
+		if(traumatic_shock < shock_stage)
+			recovery += 1
 		if(traumatic_shock < 0.25 * shock_stage)
-			recovery += 0.5 * delta_time
-		adjustShockStage(-recovery * (our_endurance/ATTRIBUTE_MIDDLING))
+			recovery += 1
+		adjustShockStage(-recovery * (our_endurance/ATTRIBUTE_MIDDLING) * PAIN_SYSTEM_SPEED_MODIFIER * 0.75)
 
 	//Shock makes us slow
 	if(shock_stage >= (SHOCK_STAGE_2 * (our_endurance/ATTRIBUTE_MIDDLING)))
@@ -171,76 +175,81 @@
 		 */
 		custom_pain("[pick("It hurts so much", "I really need some opium", "Ooh, the pain")]!", 10, nopainloss = TRUE)
 
-	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage < SHOCK_STAGE_2))
+	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage < SHOCK_STAGE_2)) // Crossed stage 2
 		emote("is having trouble keeping [p_their()] eyes open.")
-		//Attempt to inject combat cocktail for the first time
-		endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage >= SHOCK_STAGE_2))
 		if(DT_PROB(3, delta_time))
 			//adjust_eye_blur(rand(1, 2))
 			stuttering = max(stuttering, 5)
 
-	if((shock_stage >= SHOCK_STAGE_3) && (previous_shock_stage < SHOCK_STAGE_3))
+	if((shock_stage >= SHOCK_STAGE_3) && (previous_shock_stage < SHOCK_STAGE_3))  // Crossed stage 3
 		custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", 40, nopainloss = TRUE)
 		add_stress(/datum/stress_event/painmax)
 
-	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))
-		emote("becomes limp.")
+	/**
+	 * Stage 4 begins mimicking "soft crit"
+	 */
+	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))  // Crossed stage 4
+		// emote("freezes and goes limp.", intentional = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Immobilize(rand(2, 3) SECONDS)
-		//Attempt to inject combat cocktail a second time
-		endorphinate()
+			Immobilize(0.5 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage >= SHOCK_STAGE_4))
 		if(DT_PROB(1, delta_time))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Knockdown(2 SECONDS)
-		if(DT_PROB(2, delta_time))
-			emote("gasp")
+			endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_5) && (previous_shock_stage >= SHOCK_STAGE_5))
+		if(DT_PROB(2, delta_time))
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
+			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+				Knockdown(3 SECONDS)
+			endorphinate()
+		if(DT_PROB(0.5, delta_time))
+			emote("gasp")
+
+	if((shock_stage >= SHOCK_STAGE_6) && (previous_shock_stage >= SHOCK_STAGE_6))
 		if(DT_PROB(2.5, delta_time))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-				Paralyze(5 SECONDS)
-
-	if((shock_stage >= SHOCK_STAGE_6) && (previous_shock_stage >= SHOCK_STAGE_6))
+				Knockdown(5 SECONDS)
+			endorphinate()
 		if(DT_PROB(1, delta_time))
-			if(!IsUnconscious())
-				custom_pain("[pick("I black out", "I feel like I could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
-			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-				Unconscious(1 SECONDS)
+			emote("gasp")
 
-	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage < SHOCK_STAGE_7))
-		emote("gargle")
+	/**
+	 * Stage 7 begins mimicking "hard crit"
+	 */
+	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage < SHOCK_STAGE_7)) // Crossed stage 7
+		if(!IsUnconscious())
+			custom_pain("[pick("I feel like I could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Paralyze(5 SECONDS)
-		//Attempt to inject combat cocktail, even though at this point it won't help much
-		endorphinate()
+			// emote("agony")
+			Stun(rand(2, 3) SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
-		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Paralyze(5 SECONDS)
 		if(DT_PROB(1, delta_time))
-			Unconscious(5)
-		if(DT_PROB(4, delta_time))
-			emote("gargle")
+			Paralyze(5 SECONDS)
+			endorphinate(TRUE)
 
-	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8))
-		//Attempt to inject combat cocktail - ONE FINAL TIME
-		endorphinate()
+	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8)) // Crossed stage 8
+		if(!IsUnconscious())
+			visible_message(span_bolddanger("[src] scrunchs [p_their()] body and collapses!"), ignored_mobs = src)
+			custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 		//Death is near...
-		emote("scream")
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Unconscious(10 SECONDS)
+			Unconscious(5 SECONDS)
+			endorphinate(TRUE)
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage >= SHOCK_STAGE_8))
 		//How the fuck are we still alive?
-		if(!IsUnconscious())
-			visible_message(PAIN_KNOCKOUT_MESSAGE)
-			custom_pain(PAIN_KNOCKOUT_MESSAGE_SELF, 100, nopainloss = TRUE)
+		// if(!IsUnconscious())
+		// 	visible_message(span_bolddanger("[src] scrunchs [p_their()] body and collapses!"), ignored_mobs = src)
+		// 	custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 			//death_rattle()
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(15 SECONDS)
+			endorphinate(TRUE)

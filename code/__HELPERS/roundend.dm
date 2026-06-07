@@ -1,88 +1,6 @@
 #define POPCOUNT_SURVIVORS "survivors"					//Not dead at roundend
 #define POPCOUNT_ESCAPEES "escapees"					//Not dead and on centcom/shuttles marked as escaped
 
-/datum/controller/subsystem/ticker/proc/gather_roundend_feedback()
-	gather_antag_data()
-	var/json_file = file("[GLOB.log_directory]/round_end_data.json")
-	var/list/file_data = list("escapees" = list("humans" = list(), "silicons" = list(), "others" = list(), "npcs" = list()), "abandoned" = list("humans" = list(), "silicons" = list(), "others" = list(), "npcs" = list()), "ghosts" = list(), "additional data" = list())
-	var/num_survivors = 0
-	var/num_escapees = 0
-	for(var/mob/m in GLOB.mob_list)
-		var/escaped
-		var/category
-		var/list/mob_data = list()
-		if(isnewplayer(m))
-			continue
-		if(m.mind)
-			if(m.stat != DEAD && !isbrain(m) && !iscameramob(m))
-				num_survivors++
-			mob_data += list("name" = m.name, "ckey" = ckey(m.mind.key))
-			if(isobserver(m))
-				escaped = "ghosts"
-			else if(isliving(m))
-				var/mob/living/L = m
-				mob_data += list("location" = get_area(L), "health" = L.health)
-				if(ishuman(L))
-					var/mob/living/carbon/human/H = L
-					category = "humans"
-					mob_data += list("job" = H.mind.assigned_role.title, "species" = H.dna.species.name)
-			else
-				category = "others"
-				mob_data += list("typepath" = m.type)
-		if(!m.mind && (!ishuman(m)))
-			var/list/npc_nest = file_data["[escaped]"]["npcs"]
-			if(npc_nest.Find(initial(m.name)))
-				file_data["[escaped]"]["npcs"]["[initial(m.name)]"] += 1
-			else
-				file_data["[escaped]"]["npcs"]["[initial(m.name)]"] = 1
-		else
-			if(isobserver(m))
-				var/pos = length(file_data["[escaped]"]) + 1
-				file_data["[escaped]"]["[pos]"] = mob_data
-			else
-				if(!category)
-					category = "others"
-					mob_data += list("name" = m.name, "typepath" = m.type)
-				var/pos = length(file_data["[escaped]"]["[category]"]) + 1
-				file_data["[escaped]"]["[category]"]["[pos]"] = mob_data
-	WRITE_FILE(json_file, json_encode(file_data))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", num_survivors, list("survivors", "total"))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", num_escapees, list("escapees", "total"))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", GLOB.joined_player_list.len, list("players", "total"))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", GLOB.joined_player_list.len - num_survivors, list("players", "dead"))
-	. = list()
-	.[POPCOUNT_SURVIVORS] = num_survivors
-	.[POPCOUNT_ESCAPEES] = num_escapees
-
-/datum/controller/subsystem/ticker/proc/gather_antag_data()
-	var/team_gid = 1
-	var/list/team_ids = list()
-
-	for(var/datum/antagonist/A in GLOB.antagonists)
-		if(!A.owner)
-			continue
-
-		var/list/antag_info = list()
-		antag_info["key"] = A.owner.key
-		antag_info["name"] = A.owner.name
-		antag_info["antagonist_type"] = A.type
-		antag_info["antagonist_name"] = A.name //For auto and custom roles
-		antag_info["objectives"] = list()
-		antag_info["team"] = list()
-		var/datum/team/T = A.get_team()
-		if(T)
-			antag_info["team"]["type"] = T.type
-			antag_info["team"]["name"] = T.name
-			if(!team_ids[T])
-				team_ids[T] = team_gid++
-			antag_info["team"]["id"] = team_ids[T]
-
-		if(A.objectives.len)
-			for(var/datum/objective/O in A.objectives)
-				var/result = O.check_completion() ? "SUCCESS" : "FAIL"
-				antag_info["objectives"] += list(list("objective_type"=O.type,"text"=O.explanation_text,"result"=result))
-		SSblackbox.record_feedback("associative", "antagonists", 1, antag_info)
-
 /mob/proc/do_game_over()
 	if(SSticker.current_state != GAME_STATE_FINISHED)
 		return
@@ -115,7 +33,7 @@
 
 	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
 
-	to_chat(world, "<BR><BR><BR><span class='reallybig'>So ends this tale of Vanderlin.</span>")
+	to_chat(world, "<BR><BR><BR><span class='reallybig'>So ends this tale of [SSmapping.config?.map_name || "Vanderlin"].</span>")
 	get_end_reason()
 
 	var/list/key_list = list()
@@ -206,13 +124,13 @@
 
 	if(!check_for_lord(TRUE)) //TRUE forces the check, otherwise it will autofail.
 		end_reason = pick("Without a Monarch, the forces of Zizo grew ever bolder.",
-						"Without a Monarch, the settlement fell into turmoil.",
+						"Without a Monarch, [SSmapping.config?.map_name || "the settlement"] fell into turmoil.",
 						"Without a Monarch, some jealous rival reigned in tyranny.")
 
 	if(vampire_werewolf() == "vampire")
-		end_reason = "When the Vampires finished sucking the town dry, they moved on to the next one."
+		end_reason = "When the Vampires finished sucking [SSmapping.config?.map_name || "the town"] dry, they moved on to the next one."
 	if(vampire_werewolf() == "werewolf")
-		end_reason = "The Werevolves formed an unholy clan, marauding Rockhill until the end of its daes."
+		end_reason = "The Werevolves formed an unholy clan, marauding [SSmapping.config?.map_name || "the town"] until the end of its daes."
 
 	if(SSmapping.retainer.cult_ascended)
 		end_reason = "ZIZOZIZOZIZOZIZO"
@@ -222,9 +140,9 @@
 
 
 	if(end_reason)
-		to_chat(world, "<span class='big bold'>[end_reason].</span>")
+		to_chat(world, span_bigbold("[end_reason]."))
 	else
-		to_chat(world, "<span class='big bold'>The town has managed to survive another week.</span>")
+		to_chat(world, span_bigbold("[SSmapping.config?.map_name || "The town"] has managed to survive another week."))
 
 /datum/controller/subsystem/ticker/proc/gamemode_report()
 	//TODO: This is a copypaste of antag_report(), this should be deleted

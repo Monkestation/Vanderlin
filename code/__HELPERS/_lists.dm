@@ -267,28 +267,30 @@ if (length(L) < I) { \
 			L -= V //No return here so that it removes all strings of that type
 	return
 
-//returns a new list with only atoms that are in typecache L
+///returns a new list with only atoms that are in the typecache list
 /proc/typecache_filter_list(list/atoms, list/typecache)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/atom/A as anything in atoms)
-		if(isnull(A))
+	for(var/atom/atom_checked as anything in atoms)
+		if(isnull(atom_checked))
 			continue
-		if (typecache[A.type])
-			. += A
+		if (typecache[atom_checked.type])
+			. += atom_checked
 
+///return a new list with atoms that are not in the typecache list
 /proc/typecache_filter_list_reverse(list/atoms, list/typecache)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/atom/A as anything in atoms)
-		if(!typecache[A.type])
-			. += A
+	for(var/atom/atom_checked as anything in atoms)
+		if(!typecache[atom_checked.type])
+			. += atom_checked
 
+///similar to typecache_filter_list and typecache_filter_list_reverse but it supports an inclusion list and and exclusion list
 /proc/typecache_filter_multi_list_exclusion(list/atoms, list/typecache_include, list/typecache_exclude)
 	. = list()
-	for(var/atom/A as anything in atoms)
-		if(typecache_include[A.type] && !typecache_exclude[A.type])
-			. += A
+	for(var/atom/atom_checked as anything in atoms)
+		if(typecache_include[atom_checked.type] && !typecache_exclude[atom_checked.type])
+			. += atom_checked
 
 //Like typesof() or subtypesof(), but returns a typecache instead of a list
 /proc/typecacheof(path, ignore_root_path, only_root_path = FALSE)

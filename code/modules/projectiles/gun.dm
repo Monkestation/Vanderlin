@@ -101,12 +101,6 @@
 		QDEL_NULL(chambered)
 	return ..()
 
-/obj/item/gun/Exited(atom/movable/gone, atom/new_loc)
-	. = ..()
-	if(gone == chambered)
-		chambered = null
-		update_appearance()
-
 //called after the gun has successfully fired its chambered ammo.
 /obj/item/gun/proc/after_firing(atom/target, mob/living/user)
 	return FALSE
@@ -196,7 +190,7 @@
 
 	// This is essentially a workaround for no wielding, thank you TG
 	var/obj/item/bodypart/other_hand = user.has_hand_for_held_index(user.get_inactive_hand_index()) //returns non-disabled inactive hands
-	if(weapon_weight == WEAPON_HEAVY && (user.get_inactive_held_item() || !other_hand))
+	if(weapon_weight == WEAPON_HEAVY && !HAS_TRAIT(src, TRAIT_WIELDED) && (user.get_inactive_held_item() || !other_hand))
 		balloon_alert(user, "use both hands!")
 		return
 
@@ -262,8 +256,6 @@
 	if(user)
 		SEND_SIGNAL(user, COMSIG_MOB_FIRED_GUN, src, target, modifiers, zone_override)
 
-	SEND_SIGNAL(src, COMSIG_GUN_FIRED, user, target, modifiers, zone_override)
-
 	add_fingerprint(user)
 
 	var/real_spread = get_spread(user) + spread
@@ -276,6 +268,7 @@
 	if(burst_size > 1)
 		firing_burst = TRUE
 		fire_cd = TRUE
+		SEND_SIGNAL(src, COMSIG_GUN_FIRED, user, target, modifiers, zone_override)
 		for(var/i = 1 to burst_size)
 			addtimer(CALLBACK(src, PROC_REF(process_burst), user, target, message, modifiers, zone_override, total_random_spread, burst_spread_mult, i), burst_delay * (i - 1))
 			addtimer(CALLBACK(src, PROC_REF(reset_fire_cd)), fire_delay) // for the case of fire delay longer than burst
@@ -289,9 +282,11 @@
 				to_chat(user, span_warning("[src] is lethally chambered! You don't want to risk harming anyone..."))
 				return FALSE
 
-		var/sprd = round((rand(0, 1) - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * total_random_spread)
 		before_firing(target, user)
 
+		SEND_SIGNAL(src, COMSIG_GUN_FIRED, user, target, modifiers, zone_override)
+
+		var/sprd = round((rand(0, 1) - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * total_random_spread)
 		if(!chambered.fire_casing(target, user, modifiers, 0, FALSE, zone_override, sprd, src))
 			shoot_with_empty_chamber(user)
 			return FALSE

@@ -24,6 +24,12 @@
 /obj/structure
 	var/hammer_repair
 
+// Convert to interact_with_atom
+/obj/item/weapon/hammer/pre_attack(atom/interacting_with, mob/living/user, list/modifiers)
+	if(iscarbon(interacting_with) && !user.cmode && try_heal_loop(interacting_with, user)) // convert to interact_with_atom
+		return TRUE
+	. = ..()
+
 /obj/item/weapon/hammer/attack_atom(atom/attacked_atom, mob/living/user)
 	if(!isobj(attacked_atom))
 		return ..()
@@ -151,6 +157,34 @@
 		return
 
 	return ..()
+
+/obj/item/weapon/hammer/proc/try_heal_loop(atom/interacting_with, mob/living/user, repeating = FALSE)
+	var/mob/living/carbon/attacked_carbon = interacting_with
+	var/obj/item/bodypart/affecting = attacked_carbon.get_bodypart(check_zone(user.zone_selected))
+	if(isnull(affecting) || !(affecting.status == BODYPART_ROBOTIC))
+		return FALSE
+
+	if (!affecting.brute_dam && !affecting.burn_dam && !length(affecting.wounds))
+		balloon_alert(user, "limb not damaged")
+		return TRUE
+
+	user.visible_message(span_notice("[user] starts to fix some of the dents on [attacked_carbon == user ? user.p_their() : "[attacked_carbon]'s"] [affecting.name]."),
+		span_notice("You start fixing some of the dents on [attacked_carbon == user ? "your" : "[attacked_carbon]'s"] [affecting.name]."))
+	var/use_delay = repeating ? 1 SECONDS : 0.5 SECONDS
+	if(user == attacked_carbon)
+		use_delay = 5 SECONDS
+	use_delay *= toolspeed
+
+	if(!do_after(user, use_delay, target = interacting_with))
+		return TRUE
+
+	var/heal_value = force * max(1, (0.5 * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)))
+	if(!attacked_carbon.item_heal(user, brute_heal = heal_value, burn_heal = heal_value, heal_message_brute = "dents", heal_message_burn = "burnt metal", required_bodytype = BODYPART_ROBOTIC, item_source = src))
+		return TRUE
+
+	user.adjust_experience(/datum/attribute/skill/craft/engineering, 1)
+	INVOKE_ASYNC(src, PROC_REF(try_heal_loop), interacting_with, user, TRUE)
+	return TRUE
 
 /obj/item/weapon/hammer/getonmobprop(tag)
 	. = ..()

@@ -287,6 +287,14 @@
 	dyeable = TRUE
 	sellprice = 0 // See above comment
 
+/obj/item/clothing/cloak/graggar/heavy
+	name = "vicious halfcloak"
+	icon = 'icons/roguetown/clothing/cloaks.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	desc = "Sorrow begets spite; and when one has nothing else to lose, spite is all that's needed for Man to defy God."
+	icon_state = "graggarcloak_heavy"
+
 /obj/item/clothing/cloak/savage
 	name = "savage cloak"
 	desc = "A cloak covered in an predatory aura, it seeks to bring about the natural chaos of the wild to you, dripping in gore and bloodied fur."
@@ -352,3 +360,81 @@
 	item_state = "seecloak"
 	boobed = FALSE
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/bandolier
+	name = "bandolier"
+	desc = "A sash that's pelted with pouches, perfect for carrying plenty of pint-sized pieces. </br>'Hail to the King, baby.'"
+	color = null
+	icon_state = "bandolier"
+	item_state = "bandolier"
+	resistance_flags = FIRE_PROOF
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK //Same slots as the regular tabard, with the added bonus of being slingable on the rightmost backslot.
+	salvage_result = /obj/item/natural/hide/cured
+	grid_width = 64
+	grid_height = 96
+
+/obj/item/clothing/cloak/bandolier/Initialize(mapload, ...)
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/grid/bandolier)
+
+/obj/item/clothing/cloak/scaledcloak
+	name = "scaled cloak"
+	desc = "A light cloak covered in shimmering metal scales. Beautiful even if too light to protect it's wearer from more than other travel cloaks."
+	icon_state = "scalecloak"
+	item_state = "scalecloak"
+	alternate_worn_layer = CLOAK_BEHIND_LAYER
+	boobed = FALSE
+	slot_flags = ITEM_SLOT_CLOAK|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sleevetype = "shirt"
+	nodismemsleeves = TRUE
+	inhand_mod = TRUE
+	detail_tag = "_detail"
+	detail_color = "#405996"
+
+/obj/item/clothing/cloak/sleevedtabard
+	name = "sleeved tabard"
+	desc = "A tabard with a light sleeve and pauldron sewn on, it lacks the explicit detailing of other tabards in exchange."
+	color = null
+	boobed = TRUE
+	icon_state = "halfsurcoat"
+	item_state = "halfsurcoat"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_cloaks.dmi'
+	sleevetype = "shirt"
+
+/obj/item/clothing/cloak/minotaur
+	name = "minotaur cloak"
+	desc = "Minotaur fur and straw roughly sewn into a long mantle."
+	icon_state = "mino"
+	item_state = "mino"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 4
+
+/obj/item/clothing/cloak/poncho/fancycoat
+	name = "fancy coat"
+	desc = "A loose garment that is usually draped across ones upper body. No one's quite sure of its cultural origin but it does look fancy."
+	icon_state = "fancycoat"
+	item_state = "fancycoat"
+	alternate_worn_layer = TABARD_LAYER
+	boobed = FALSE
+	flags_inv = HIDEBOOB
+	slot_flags = ITEM_SLOT_CLOAK|ITEM_SLOT_ARMOR
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	nodismemsleeves = TRUE
+	color = CLOTHING_WHITE
+	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/cloak/kazengun
+	name = "jinbaori"
+	desc = "A simple kind of Blackmeadow surcoat, worn here in the distant battlefields of Azuria to differentiate friend from foe."
+	icon_state = "kazenguncoat"
+	item_state = "kazenguncoat"
+	detail_tag = "_detail"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+	color = "#FFFFFF"
+	detail_color = "#FFFFFF"

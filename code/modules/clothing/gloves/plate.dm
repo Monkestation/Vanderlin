@@ -35,6 +35,12 @@
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
 
+/obj/item/clothing/gloves/plate/iron/banded
+	name = "banded iron gauntlets"
+	desc = "A pair of leather gloves layered under a fur wrap with an iron plate hastily tightened together on both ends. It's primarily worn in the cold north, where armor has to sometimes be cobbled together due to logistical shortages."
+	icon_state = "bandedgloves"
+	item_state = "bandedgloves"
+
 /obj/item/clothing/gloves/plate/rust
 	name = "rusted riveted gauntlets"
 	desc = "Riveted gauntlets made out of iron. They're covered in rust.. at least the glove liner is good still."
@@ -104,6 +110,14 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
+/obj/item/clothing/gloves/plate/graggar/heavy
+	name = "vicious plated gauntlets"
+	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the life that once was - and now, a stinging reminder of what could've been."
+	icon_state = "graggarplategloves_heavy"
+	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
+	icon = 'icons/roguetown/clothing/gloves.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
+
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn
 	name = "osslandic iron gauntlets"
@@ -113,3 +127,21 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 
+/obj/item/clothing/gloves/plate/kote
+	name = "jjajeungna gauntlets"
+	desc = "A set of reinforced Blackmeadow gauntlets. Difficult to do much other than fight in, but not entirely arresting."
+	icon_state = "kazengungauntlets"
+	item_state = "kazengungauntlets"
+	body_parts_covered = HANDS|ARMS
+	detail_tag = "_detail"
+
+/obj/item/clothing/gloves/plate/kote/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
+	var/playerchoice = COLOR_MAP[choice]
+	detail_color = playerchoice
+	update_appearance()
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_armor()
+		H.update_icon()

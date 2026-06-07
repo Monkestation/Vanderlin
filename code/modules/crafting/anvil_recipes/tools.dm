@@ -31,6 +31,10 @@
 	created_item = /obj/item/reagent_containers/glass/bowl/pewter
 	output_amount = 2
 
+/datum/anvil_recipe/tools/tin/zig
+	name = "tin zigbox"
+	created_item = /obj/item/storage/fancy/cigarettes/tinzig/empty
+
 // --------- COPPER -----------
 
 /datum/anvil_recipe/tools/copper

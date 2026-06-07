@@ -88,6 +88,11 @@
 	screen_max_rows = 10
 	screen_max_columns = 10
 
+/datum/component/storage/concrete/grid/bandolier
+	max_w_class = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 2
+
 /datum/component/storage/concrete/grid/mailmaster/show_to(mob/M)
 	. = ..()
 	if(!.)
