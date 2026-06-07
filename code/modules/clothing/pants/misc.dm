@@ -21,13 +21,3 @@
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
 	item_weight = 400 GRAMS
-
-/obj/item/clothing/pants/grenzelpants/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic

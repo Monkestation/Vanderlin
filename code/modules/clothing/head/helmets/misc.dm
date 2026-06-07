@@ -65,16 +65,6 @@
 	colorgrenz = TRUE
 	sellprice = VALUE_FANCY_HAT
 
-/obj/item/clothing/head/helmet/skullcap/grenzelhoft/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
-
 //................ Cultist Hood ............... //
 /obj/item/clothing/head/helmet/skullcap/cult
 	name = "ominous hood"

@@ -6,21 +6,12 @@
 	icon_state = "tabard"
 	item_state = "tabard"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/detailed/tabards.dmi'
+	detail_tag = "_spl"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	boobed = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	var/picked
-
-/obj/item/clothing/cloak/tabard/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
 
 /obj/item/clothing/cloak/tabard/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
