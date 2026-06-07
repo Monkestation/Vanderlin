@@ -67,6 +67,7 @@
 	user.transferItemToLoc(tool, src)
 	bayonet = tool
 	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, SPEAR_THRUST)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_THRUST)
 	user.update_a_intents()
 	update_appearance(UPDATE_ICON_STATE)
 	return ITEM_INTERACT_SUCCESS
@@ -82,10 +83,16 @@
 	balloon_alert(user, "removed!")
 	user.put_in_hands(bayonet)
 	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
 	user.update_a_intents()
 	update_appearance(UPDATE_ICON_STATE)
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+// We're going to sacrifice unloading the musket so you can wield it. Sorry
+/obj/item/gun/ballistic/powder/musket/attack_self(mob/living/user, list/modifiers)
+	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
 
 /obj/item/gun/ballistic/powder/musket/getonmobprop(tag)
 	. = ..()
