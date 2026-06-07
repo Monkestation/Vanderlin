@@ -83,7 +83,7 @@
 		floater.apply_status_effect(/datum/status_effect/swimming, null, ticking_stamina_cost, ticking_oxy_damage, block_breathing)
 		return
 
-	if(!CHECK_MOVE_LOOP_FLAGS(floater, MOVEMENT_LOOP_CALLED_MOVE))
+	if(!CHECK_MOVE_LOOP_FLAGS(floater, MOVED_BY_MOVEMENT_LOOP))
 		var/swimming_skill = (GET_MOB_SKILL_VALUE(floater, /datum/attribute/skill/misc/swimming) / SKILL_LEVEL_LEGENDARY) * stamina_entry_cost
 		var/encumbrance_penalty = ENCUMBRANCE_TO_SIGMOID(floater.encumbrance) * stamina_entry_cost
 		var/effective_stamina_entry_cost = stamina_entry_cost - swimming_skill + encumbrance_penalty
