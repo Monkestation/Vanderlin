@@ -3121,6 +3121,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\carpenter.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\cheesemaker.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\fisher.dm"
+#include "code\modules\jobs\job_types\adventurer\types\pilgrim\holy_pilgrim.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\hunter.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\mason.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\miner.dm"
