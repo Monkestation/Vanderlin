@@ -1,10 +1,6 @@
 /datum/attribute_holder
 	var/datum/attribute/closely_inspected_attribute = null
 	var/show_bad_skills = FALSE
-	var/attribute_values_generation = 1
-	var/list/cached_attribute_values_payload = null
-	var/cached_attribute_values_generation = 0
-	var/list/attribute_values_gen_sent
 
 GLOBAL_LIST_EMPTY(attribute_menu_static_payload)
 GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
@@ -111,38 +107,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	return values
 
 /datum/attribute_holder/proc/update_attribute_menu_ui()
-	attribute_values_generation++
 	SStgui.update_uis(src)
-
-/datum/attribute_holder/proc/build_attribute_values_payload()
-	if(cached_attribute_values_payload && cached_attribute_values_generation == attribute_values_generation)
-		return cached_attribute_values_payload
-
-	var/list/stats_values = list()
-	for(var/stat_type in GLOB.all_stats)
-		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
-		stats_values[stat.name] = list(
-			"raw_value" = nulltozero(raw_attribute_list[stat_type]),
-			"value" = nulltozero(attribute_list[stat_type]),
-		)
-
-	var/list/skills_values = list()
-	for(var/category in GLOB.all_skill_categories)
-		for(var/skill_type in GLOB.all_skill_categories[category])
-			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
-			var/list/values = get_attribute_ui_values(skill_type)
-			skills_values[skill.name] = list(
-				"raw_value" = values["raw"],
-				"value" = values["effective"],
-				"trained" = values["trained"],
-			)
-
-	cached_attribute_values_payload = list(
-		"stats_values" = stats_values,
-		"skills_values" = skills_values,
-	)
-	cached_attribute_values_generation = attribute_values_generation
-	return cached_attribute_values_payload
 
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -150,10 +115,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 		ui = new(user, src, "AttributeMenu")
 		ui.set_autoupdate(FALSE)
 		ui.open()
-
-/datum/attribute_holder/ui_close(mob/user)
-	. = ..()
-	LAZYREMOVE(attribute_values_gen_sent, REF(user))
 
 /datum/attribute_holder/ui_state(mob/user)
 	return GLOB.always_state
@@ -175,12 +136,26 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	data["show_bad_skills"] = show_bad_skills
 	data["parent"] = parent?.name
 
-	var/user_key = REF(user)
-	if(LAZYACCESS(attribute_values_gen_sent, user_key) != attribute_values_generation)
-		var/list/values_payload = build_attribute_values_payload()
-		data["stats_values"] = values_payload["stats_values"]
-		data["skills_values"] = values_payload["skills_values"]
-		LAZYSET(attribute_values_gen_sent, user_key, attribute_values_generation)
+	var/list/stats_values = list()
+	for(var/stat_type in GLOB.all_stats)
+		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
+		stats_values[stat.name] = list(
+			"raw_value" = nulltozero(raw_attribute_list[stat_type]),
+			"value" = nulltozero(attribute_list[stat_type]),
+		)
+	data["stats_values"] = stats_values
+
+	var/list/skills_values = list()
+	for(var/category in GLOB.all_skill_categories)
+		for(var/skill_type in GLOB.all_skill_categories[category])
+			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
+			var/list/values = get_attribute_ui_values(skill_type)
+			skills_values[skill.name] = list(
+				"raw_value" = values["raw"],
+				"value" = values["effective"],
+				"trained" = values["trained"],
+			)
+	data["skills_values"] = skills_values
 
 	if(istype(closely_inspected_attribute))
 		var/list/closely_inspected_dynamic = list()
