@@ -293,10 +293,7 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "bB" = (
-/mob/living/simple_animal/hostile/retaliate/chicken{
-	pixel_x = -6;
-	pixel_y = 6
-	},
+/mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/woodturned,
 /area/outdoors)
 "bD" = (
@@ -1239,10 +1236,7 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "gq" = (
-/mob/living/simple_animal/hostile/retaliate/chicken{
-	pixel_x = -3;
-	pixel_y = 1
-	},
+/mob/living/simple_animal/hostile/retaliate/chicken,
 /obj/structure/flora/grass/tundra{
 	icon_state = "tundragrass2"
 	},
@@ -9067,10 +9061,7 @@
 /turf/open/floor/hay,
 /area/indoors/town)
 "Vg" = (
-/mob/living/simple_animal/hostile/retaliate/chicken{
-	pixel_x = 2;
-	pixel_y = 1
-	},
+/mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/dirt,
 /area/outdoors)
 "Vh" = (

@@ -34,8 +34,7 @@
 	beltr = /obj/item/weapon/knife/scissors
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	backpack_contents = list(
-		/obj/item/natural/cloth = 1,
-		/obj/item/natural/cloth = 1,
+		/obj/item/natural/cloth = 2,
 		/obj/item/natural/bundle/fibers = 1,
 		/obj/item/needle = 1
 	)

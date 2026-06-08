@@ -49,24 +49,14 @@
 	var/bashing_lethal_heal = HEAL_BASHING_LETHAL * level
 	var/aggravated_heal = HEAL_AGGRAVATED * level
 
-	owner.adjustToxLoss(-aggravated_heal * 0.5)
+	owner.adjustToxLoss(-aggravated_heal * 0.5, FALSE)
+	owner.adjustBruteLoss(-aggravated_heal, FALSE)
+	owner.adjustFireLoss(-bashing_lethal_heal, TRUE)
 
-	// Heal different damage types
-	for(var/datum/injury/injury in owner.all_injuries)
-		if(!bashing_lethal_heal && !aggravated_heal)
-			break
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
-		if(injury.damage_type == WOUND_BURN)
-			aggravated_heal = injury.heal_damage(aggravated_heal)
-		else
-			bashing_lethal_heal = injury.heal_damage(bashing_lethal_heal)
-
-	if(owner.blood_volume <= BLOOD_VOLUME_NORMAL)
-		owner.adjust_bloodvolume(vitae_cost)
+	owner.adjust_blood_volume(vitae_cost, maximum = BLOOD_VOLUME_NORMAL)
 
 	//this is quadratic so expect it to scale like crazy
-	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6, source=src)
+	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6, source = src)
 
 	for(var/obj/item/organ/artery/artery in owner.getorganslotlist(ORGAN_SLOT_ARTERY))
 		artery.applyOrganDamage(-(bashing_lethal_heal + aggravated_heal) * level)

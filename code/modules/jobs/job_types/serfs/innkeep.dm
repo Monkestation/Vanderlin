@@ -67,8 +67,3 @@
 	..()
 	if(equipped_human.gender == FEMALE)
 		armor = /obj/item/clothing/shirt/dress
-		shoes = /obj/item/clothing/shoes/shortboots
-		neck = /obj/item/storage/belt/pouch/coins/mid
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/keyring/innkeep
-		beltr = /obj/item/reagent_containers/glass/bottle/beer/blackgoat

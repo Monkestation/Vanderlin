@@ -18,12 +18,12 @@
 	if(enchanted_item.get_integrity() >= enchanted_item.max_integrity)
 		return
 	var/mob/living/carbon/carbon = enchanted_item.loc
-	if(NOBLOOD in carbon.dna?.species.species_traits)
+	if(!CAN_HAVE_BLOOD(carbon))
 		return
 
 	var/bleeding_bite = FALSE
 	for(var/datum/injury/injury in carbon.all_injuries)
-		if(injury.damage_type != WOUND_BITE)
+		if(!(injury.damage_type & WOUND_BITE))
 			continue
 		if(!injury.get_bleed_rate())
 			continue
@@ -44,7 +44,7 @@
 		bodypart?.bodypart_attacked_by(BCLASS_BITE, 20, modifiers = list(CRIT_MOD_CHANCE = -100))
 
 	var/missing_integrity = enchanted_item.max_integrity - enchanted_item.get_integrity()
-	carbon.adjust_bloodvolume(-missing_integrity * 0.5)
+	carbon.adjust_blood_volume(-missing_integrity * 0.5)
 	enchanted_item.update_integrity(enchanted_item.max_integrity)
 	playsound(enchanted_item,'sound/items/weapons/bite.ogg', 45, TRUE, -1)
 	to_chat(carbon, span_danger("[enchanted_item] gnaws at you!"))

@@ -45,26 +45,21 @@
 		amount -= (is_ascendant(PESTRA) ? 2.5 : 5) * time_elapsed
 
 	var/mob/living/carbon/C = parent
-	var/is_zombie
-	if(C.mind)
-		if(C.mind.has_antag_datum(/datum/antagonist/zombie))
-			is_zombie = TRUE
-	if(!is_zombie)
-		if(C.stat != DEAD)
-			qdel(src)
-			return
+	var/is_zombie = IS_DEADITE(C)
+	if(C.stat != DEAD && !is_zombie)
+		qdel(src)
+		return
 	if(!(C.mob_biotypes & (MOB_ORGANIC|MOB_UNDEAD)))
 		qdel(src)
 		return
-	if(amount > 2 MINUTES)
-		if(is_zombie)
-			var/datum/antagonist/zombie/Z = C.mind.has_antag_datum(/datum/antagonist/zombie)
-			if(Z && !Z.has_turned && !Z.revived && C.stat == DEAD)
-				if(istype(C.loc, /obj/structure/closet/dirthole) || istype(C.loc, /obj/structure/closet/crate/coffin))
-					if(amount > 3 MINUTES)
-						Z.wake_zombie()
-				else
-					Z.wake_zombie()
+
+	if(!is_zombie && amount > 2 MINUTES)
+		if(!has_world_trait(/datum/world_trait/necra_requiem) && (!is_in_roguetown(C) || has_world_trait(/datum/world_trait/zizo_defilement)))
+			if(istype(C.loc, /obj/structure/closet/dirthole) || istype(C.loc, /obj/structure/closet/crate/coffin))
+				if(amount > 3 MINUTES)
+					C.zombie_check()
+			else
+				C.zombie_check()
 
 	var/findonerotten = FALSE
 	var/shouldupdate = FALSE
@@ -80,8 +75,7 @@
 				if(amount > 45 MINUTES)
 					if(!is_zombie)
 						B.skeletonize()
-						if(C.dna && C.dna.species)
-							C.dna.species.species_traits |= NOBLOOD
+						ADD_TRAIT(C, TRAIT_NOBLOOD, TRAIT_GENERIC)
 						C.change_stat(STAT_CONSTITUTION, -99)
 						shouldupdate = TRUE
 				else

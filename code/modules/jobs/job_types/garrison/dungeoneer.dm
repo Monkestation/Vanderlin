@@ -69,7 +69,6 @@
 	name = JOB_DUNGEONEER
 	head = /obj/item/clothing/head/dungeoneer
 	neck = /obj/item/clothing/neck/coif
-	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/stabard/colored/dungeon
 	armor = /obj/item/clothing/armor/cuirass/iron/rust
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
