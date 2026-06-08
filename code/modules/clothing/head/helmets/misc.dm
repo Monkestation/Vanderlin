@@ -61,6 +61,7 @@
 	item_state = "grenzelhat"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_RED
 	dynamic_hair_suffix = ""
 	colorgrenz = TRUE
 	sellprice = VALUE_FANCY_HAT

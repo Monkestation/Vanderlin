@@ -16,6 +16,7 @@
 	item_state = "grenzelpants"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_RED
 	colorgrenz = TRUE
 	armor = ARMOR_PADDED
 	prevent_crits = MINOR_CRITICALS

@@ -165,6 +165,33 @@
 /obj/item/storage/belt/leather/cloth/bandit
 	color = "#ff0000"
 
+/obj/item/storage/belt/leather/breechcloth
+	name = "belt with breechcloth"
+	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbelt"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_TARAXACUM_YELLOW
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/breechcloth/blackbelt
+	name = "black belt with breechcloth"
+	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbeltalt"
+
+/obj/item/storage/belt/leather/slayer
+	name = "rugged dwarven belt"
+	desc = "The golden beard of the face plate doubles as a codpiece."
+	icon_state = "slayer"
+	item_state = "slayer"
+	sellprice = 50
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/shawl
+	name = "shawl"
+	desc = "A cloth shawl."
+	icon_state = "beltshawl"
+	item_state = "beltshawl"
+
 /obj/item/storage/belt/pouch
 	name = "pouch"
 	desc = "Usually used for holding coins."
@@ -592,33 +619,3 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
-
-
-/obj/item/storage/belt/leather/breechcloth
-	name = "belt with breechcloth"
-	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechcloth"
-	sewrepair = FALSE
-	detail_tag = "_belt"
-
-/obj/item/storage/belt/leather/breechcloth/blackbelt
-	name = "black belt with breechcloth"
-	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechclothalt"
-	sewrepair = FALSE
-	detail_tag = "_belt"
-
-/obj/item/storage/belt/leather/slayer
-	name = "rugged dwarven belt"
-	desc = "The golden beard of the face plate doubles as a codpiece."
-	icon_state = "slayer"
-	item_state = "slayer"
-	sellprice = 50
-	detail_tag = "_belt"
-	sewrepair = FALSE
-
-/obj/item/storage/belt/leather/shawl
-	name = "shawl"
-	desc = "A cloth shawl."
-	icon_state = "beltshawl"
-	item_state = "beltshawl"
