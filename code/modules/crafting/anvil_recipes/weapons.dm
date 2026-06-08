@@ -970,7 +970,7 @@
 	name = "Silver Warhammer (+1 Silver Bar)"
 	additional_items = list(/obj/item/ingot/silver)
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
-	created_item = /obj/item/weapon/mace/warhammer/steel/silver
+	created_item = /obj/item/weapon/mace/warhammer/silver
 
 /datum/anvil_recipe/weapons/silver/silveraxe
 	name = "Silver Axe (+ Stick)"

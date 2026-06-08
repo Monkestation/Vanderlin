@@ -174,6 +174,16 @@
 	sellprice = 40
 	item_weight = 2.7 KILOGRAMS
 
+/obj/item/weapon/polearm/spear/steel/partizan
+	name = "partizan"
+	desc = "A spear with a heavy steel head, deisgned for stabbing and chopping"
+	icon_state = "partizan"
+	force = DAMAGE_SPEARPLUS + 3
+	force_wielded = DAMAGE_SPEAR_WIELD + 5
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST * 1.25
+	sellprice = 50
+
 /obj/item/weapon/polearm/spear/silver
 	name = "silver spear"
 	desc = "A spear with a silver head, more effective against supernatural foes than a steel spear."
@@ -190,16 +200,6 @@
 /obj/item/weapon/polearm/spear/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
-
-/obj/item/weapon/polearm/spear/steel/partizan
-	name = "partizan"
-	desc = "A spear with a heavy steel head, deisgned for stabbing and chopping"
-	icon_state = "partizan"
-	force = DAMAGE_SPEARPLUS + 3
-	force_wielded = DAMAGE_SPEAR_WIELD + 5
-	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST * 1.25
-	sellprice = 50
 
 /obj/item/weapon/polearm/spear/abyssor
 	name = "depthseeker"
