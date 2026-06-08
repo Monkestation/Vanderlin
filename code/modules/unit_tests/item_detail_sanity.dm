@@ -1,4 +1,4 @@
-/// Test that every item with detail tags has a default colour
+/// Test that every item with detail tags has a default colour and icon
 /datum/unit_test/item_detail_sanity
 
 /datum/unit_test/item_detail_sanity/Run()
