@@ -415,3 +415,127 @@ GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
 	if((blood_state != BLOOD_STATE_OIL) && (blood_state != BLOOD_STATE_NOT_BLOODY))
 		return 1
 	return 0
+
+/obj/effect/decal/cleanable/blood/over_wall
+	name = "blood splatter"
+	icon_state = "splatter1"
+	plane = GAME_PLANE
+	layer = BULLET_HOLE_LAYER //For obvious reasons.
+	var/list/splattericons = list("splatter1", "splatter2", "splatter3", "splatter4", "splatter5", "splatter6")
+	// Incremental for more blood on a wall
+	var/spray_amounts = 1
+
+/obj/effect/decal/cleanable/blood/over_wall/proc/increase_gore()
+	if(spray_amounts >= 3)
+		return TRUE // too full do an splatter on the ground instead
+	spray_amounts++
+
+	switch(spray_amounts)
+		if(2)
+			name = "gruesome blood splatter"
+		if(3)
+			name = "BRUTAL blood splatter"
+
+	add_overlay(pick_n_take(splattericons))
+	return FALSE
+
+/obj/effect/decal/cleanable/blood/over_wall/Initialize(mapload)
+	. = ..()
+	icon_state = pick_n_take(splattericons)
+
+/obj/effect/decal/cleanable/blood/over_wall/replace_decal(obj/effect/decal/cleanable/C)
+	return
+
+/obj/effect/decal/cleanable/blood/wallsplatter
+	name = "flying blood splatter"
+	icon_state = "splatter1"
+	plane = GAME_PLANE
+	layer = BULLET_HOLE_LAYER //For obvious reasons.
+	random_icon_states = list("splatter1", "splatter2", "splatter3", "splatter4", "splatter5", "splatter6")
+
+	var/turf/prev_loc
+	/// Skip making the final blood splatter when we're done, like if we're not in a turf
+	var/skip = FALSE
+	/// How many tiles/items/people we can paint red
+	var/splatter_strength = 1
+	/// Insurance so that we don't keep moving once we hit a stoppoint
+	var/hit_endpoint = FALSE
+	/// How fast the splatter moves
+	var/splatter_speed = 0.1 SECONDS
+	/// Tracks what direction we're flying
+	var/flight_dir = NONE
+
+/obj/effect/decal/cleanable/blood/wallsplatter/Initialize(mapload, splatter_strength)
+	. = ..()
+	prev_loc = loc //Just so we are sure prev_loc exists
+	if(splatter_strength)
+		src.splatter_strength = splatter_strength
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/expire()
+	if(isturf(loc) && !skip)
+		playsound(src, 'sound/effects/wounds/splatter.ogg', 60, TRUE, -1)
+		loc.add_blood_DNA(GET_ATOM_BLOOD_DNA(src))
+	qdel(src)
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/fly_towards(turf/target_turf, range)
+	flight_dir = get_dir(src, target_turf)
+	var/datum/move_loop/loop = SSmove_manager.move_towards(src, target_turf, splatter_speed, timeout = splatter_speed * range, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_START_FAST)
+	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
+	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
+	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(loop_done))
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/pre_move(datum/move_loop/source)
+	SIGNAL_HANDLER
+	prev_loc = loc
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/post_move(datum/move_loop/source)
+	SIGNAL_HANDLER
+	if(loc == prev_loc || !isturf(loc))
+		return
+
+	for(var/atom/movable/iter_atom in loc)
+		if(hit_endpoint)
+			return
+		if(iter_atom == src || iter_atom.invisibility || iter_atom.alpha <= 0 || (isobj(iter_atom) && !iter_atom.density))
+			continue
+		if(splatter_strength <= 0)
+			break
+		iter_atom.add_blood_DNA(GET_ATOM_BLOOD_DNA(src))
+	splatter_strength--
+
+	if(splatter_strength <= 0)
+		expire()
+		return
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/loop_done(datum/source)
+	SIGNAL_HANDLER
+	if(!QDELETED(src))
+		expire()
+
+/obj/effect/decal/cleanable/blood/wallsplatter/Bump(atom/bumped_atom)
+	if(!iswallturf(bumped_atom) && !isclosedturf(bumped_atom) && !istype(bumped_atom, /obj/structure/window))
+		expire()
+		return
+
+	hit_endpoint = TRUE
+	if(!isturf(prev_loc)) // This will only happen if prev_loc is not even a turf, which is highly unlikely.
+		abstract_move(bumped_atom)
+		expire()
+		return
+
+	abstract_move(bumped_atom)
+	skip = TRUE
+
+	var/obj/effect/decal/cleanable/blood/over_wall/alreadysplatted = locate() in prev_loc //Don't spread foam where there's already foam!
+	if(alreadysplatted)
+		if(alreadysplatted.increase_gore())
+			return
+		expire()
+		return
+
+	var/obj/effect/decal/cleanable/blood/over_wall/final_splatter = new(prev_loc, null)
+	final_splatter.pixel_x = (dir == EAST ? 32 : (dir == WEST ? -32 : 0))
+	final_splatter.pixel_y = (dir == NORTH ? 32 : (dir == SOUTH ? -32 : 0))
+
+/obj/effect/decal/cleanable/blood/wallsplatter/replace_decal(obj/effect/decal/cleanable/C)
+	return //We don't want to replace decals for wall turfs since these are unique. May be changed in the future if it's too much.
