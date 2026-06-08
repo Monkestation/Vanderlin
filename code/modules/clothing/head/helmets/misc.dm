@@ -445,9 +445,6 @@
 	uses_lord_coloring = LORD_SECONDARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/head/helmet/visored/sallet/lieutenant/Initialize()
-	. = ..()
-	update_icon()
 
 
 /obj/item/clothing/head/helmet/visored/sallet/iron
