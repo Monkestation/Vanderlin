@@ -176,20 +176,20 @@
 	name = "silky dress"
 	desc = "Despite not actually being made of silk, the legendary expertise needed to sew this puts the quality on par."
 	body_parts_covered = null
-	slot_flags = ITEM_SLOT_ARMOR
 	icon_state = "silkydress"
 	item_state = "silkydress"
 	sleevetype = null
 	sleeved = null
 
 /obj/item/clothing/shirt/dress/gown
-	icon = 'icons/roguetown/clothing/shirts_gown.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts_gown.dmi'
 	name = "spring gown"
 	desc = "A delicate gown that captures the essence of the season’s renewal."
-	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	icon = 'icons/roguetown/clothing/shirts_gown.dmi'
 	icon_state = "springgown"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts_gown.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts_gown.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+
 	boobed = TRUE
 	detail_tag = "_detail"
 	detail_color = CLOTHING_SWAMPWEED
@@ -197,28 +197,25 @@
 	l_sleeve_status = SLEEVE_NORMAL
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	var/picked = FALSE
-	colorgrenz = TRUE
 
 /obj/item/clothing/shirt/dress/gown/summergown
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "summer gown"
 	desc = "A breezy, flowing gown fit for warm weathers."
 	icon_state = "summergown"
-	boobed = TRUE
-	detail_color = "#e395bb"
+	color = "#e395bb"
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
+	detail_tag = null
 
 /obj/item/clothing/shirt/dress/gown/wintergown
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "winter gown"
 	desc = "A warm, elegant gown adorned with soft fur for cold."
 	icon_state = "wintergown"
-	boobed = TRUE
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	detail_color = "#45749d"
 
 /obj/item/clothing/shirt/dress/gown/fallgown
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "fall gown"
 	desc = "A long sleeved, solemn gown signifies the season's nearing end."
 	icon_state = "fallgown"
-	boobed = TRUE
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	detail_color = "#8b3f00"
