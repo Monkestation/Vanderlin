@@ -75,16 +75,21 @@
 	taste_description = "bitter flowers"
 	scent_description = "marigold"
 
-/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in bodypart.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		if(!injury.can_heal())
+			continue
+		injury.adjust_germ_level(-5)
+		injury.salve_injury()
+		if(injury.damage_type & FIRE_WOUND_TYPES)
+			injury.heal_damage(3)
+		if(QDELETED(injury))
 			continue
 		injury.heal_damage(1)
-		injury.salve_injury()
-		if(injury.damage_type == WOUND_BURN)
-			injury.heal_damage(3)
-		injury.adjust_germ_level(-5)
-	bodypart.disinfect_limb(20 SECONDS)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
+	affected_bodypart.disinfect_limb(20 SECONDS)
+	return FALSE
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)
 /datum/reagent/medicine/herbal/hypericum_tonic
@@ -396,15 +401,11 @@
 	overdose_threshold = 30
 	taste_description = "bitter numbness"
 
-/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in bodypart.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
-		if(injury.damage_type == WOUND_BURN)
-			injury.heal_damage(0.5)
-		if(injury.damage_type != WOUND_BURN)
-			injury.heal_damage(0.75)
-	bodypart.add_pain(-amount_to_transfer * 0.3)
+/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(0.5, 0.75, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	affected_bodypart.add_pain(-amount_to_transfer * 0.3)
+	return FALSE
 
 /datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M)
 	M.adjustToxLoss(0.5)
@@ -439,19 +440,11 @@
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 
 /datum/reagent/medicine/herbal/herbalist_panacea/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustBruteLoss(-1.5*REM*efficiency)
-	M.adjustFireLoss(-1.5*REM*efficiency)
-	M.adjustToxLoss(-1*REM*efficiency)
-	M.adjustOxyLoss(-1*efficiency)
+	M.adjustBruteLoss(-1.5*REM*efficiency, FALSE)
+	M.adjustFireLoss(-1.5*REM*efficiency, FALSE)
+	M.adjustToxLoss(-1*REM*efficiency, FALSE)
+	M.adjustOxyLoss(-1*efficiency, TRUE)
 	M.adjust_stamina(2*REM*efficiency)
-	var/total_healing = 1.5 * efficiency * REM
-	for(var/datum/injury/injury in M.all_injuries)
-		if(!total_healing)
-			break
-		total_healing = injury.heal_damage(total_healing)
-
-	if(prob(15))
-		M.heal_bodypart_damage(1, 1, 0)
 	. = ..()
 
 // Anti-Poison Blend
@@ -527,8 +520,9 @@
 	metabolization_rate = 0.3
 	taste_description = "cooling mint"
 
-/datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
-	bodypart.add_pain(-(amount_to_transfer * 0.3))
+/datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.add_pain(-(amount_to_transfer * 0.3))
+	return ..()
 
 /datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjust_stamina(1.5 * efficiency)

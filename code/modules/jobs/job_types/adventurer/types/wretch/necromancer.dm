@@ -80,7 +80,6 @@
 	var/static/list/selectablehat = list(
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
 		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
