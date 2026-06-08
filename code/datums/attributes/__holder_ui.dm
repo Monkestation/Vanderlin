@@ -4,17 +4,6 @@
 
 GLOBAL_LIST_EMPTY(attribute_menu_static_payload)
 GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
-GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
-
-/proc/cached_sanitize_attribute_css(class_name)
-	if(isnull(class_name))
-		return null
-	var/cached = GLOB.attribute_menu_sanitized_css_cache[class_name]
-	if(cached)
-		return cached
-	cached = sanitize_css_class_name(class_name)
-	GLOB.attribute_menu_sanitized_css_cache[class_name] = cached
-	return cached
 
 /proc/ensure_attribute_menu_static_payload()
 	if(length(GLOB.attribute_menu_static_payload))
@@ -27,7 +16,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	var/list/stats_meta = list()
 	for(var/stat_type in GLOB.all_stats)
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
-		var/icon_class = cached_sanitize_attribute_css(stat.icon_state)
+		var/icon_class = sanitize_css_class_name(stat.icon_state)
 		stats_meta += list(list(
 			"name" = stat.name,
 			"desc" = stat.desc,
@@ -48,7 +37,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 		var/list/this_category_skills = list()
 		for(var/skill_type in GLOB.all_skill_categories[category])
 			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
-			var/icon_class = cached_sanitize_attribute_css(skill.icon_state)
+			var/icon_class = sanitize_css_class_name(skill.icon_state)
 			this_category_skills += list(list(
 				"name" = skill.name,
 				"desc" = skill.desc,
@@ -78,7 +67,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 					defaults_meta += list(list(
 						"name" = default_attr.name,
 						"desc" = default_attr.desc,
-						"icon" = cached_sanitize_attribute_css(default_attr.icon_state),
+						"icon" = sanitize_css_class_name(default_attr.icon_state),
 						"default_value" = skill.default_attributes[default_type],
 					))
 				skill_meta["defaults"] = defaults_meta
