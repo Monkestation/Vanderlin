@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = -2,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/labor/mining = 40,

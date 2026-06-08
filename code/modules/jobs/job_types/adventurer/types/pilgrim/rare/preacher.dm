@@ -1,9 +1,15 @@
 /datum/attribute_holder/sheet/job/pilgrim/preacher
 	raw_attribute_list = list(
+		STAT_ENDURANCE = 4,
 		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 20
+		/datum/attribute/skill/combat/unarmed = 30
 	)
 
 /datum/job/advclass/pilgrim/rare/preacher
@@ -21,6 +27,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/preacher
 
 	traits = list(
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER
 	)
 
