@@ -20,10 +20,15 @@ const SEAL_STATES = new Set([
   'constitution',
   'endurance',
   'speed',
-  'intellect',
+  'intelligence',
   'fortune',
   'perception',
 ]);
+
+const statAnchor = (name: string): string => name.toLowerCase();
+
+const statSealLabel = (name: string, shorthand?: string): string =>
+  shorthand ? `${name} (${shorthand})` : name;
 
 type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
 
@@ -284,8 +289,6 @@ interface StatMeta {
   desc?: string;
   icon?: string;
   shorthand?: string;
-  anchor: string;
-  seal_label: string;
 }
 
 interface SkillMeta {
@@ -440,11 +443,12 @@ const AttributeSealNode = memo((props: {
   act: any;
 }) => {
   const { stat, selected, act } = props;
-  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${stat.anchor}${
+  const anchor = statAnchor(stat.name);
+  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${anchor}${
     selected ? ' is-selected' : ''
   }`;
 
-  const hasMedallion = SEAL_STATES.has(stat.anchor);
+  const hasMedallion = SEAL_STATES.has(anchor);
 
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
@@ -455,15 +459,17 @@ const AttributeSealNode = memo((props: {
       >
         {hasMedallion ? (
           <span className="AttributeMenu__sealNodeMedallion">
-            <span className={`${SEAL_SPRITESHEET_CLASS} ${stat.anchor}`} />
+            <span className={`${SEAL_SPRITESHEET_CLASS} ${anchor}`} />
           </span>
         ) : (
           <span className="AttributeMenu__sealNodeOrb" />
         )}
-        <span className="AttributeMenu__sealNodeName">{stat.seal_label}</span>
+        <span className="AttributeMenu__sealNodeName">
+          {statSealLabel(stat.name, stat.shorthand)}
+        </span>
         <span
           className="AttributeMenu__sealNodeValue"
-          data-tour={stat.anchor === 'strength' ? 'seal-value' : undefined}
+          data-tour={anchor === 'strength' ? 'seal-value' : undefined}
         >
           {displayValue(stat.value)}
         </span>
@@ -474,8 +480,7 @@ const AttributeSealNode = memo((props: {
   previous.selected === next.selected &&
   previous.stat.name === next.stat.name &&
   previous.stat.value === next.stat.value &&
-  previous.stat.anchor === next.stat.anchor &&
-  previous.stat.seal_label === next.stat.seal_label);
+  previous.stat.shorthand === next.stat.shorthand);
 
 const CoreAttributes = memo((props: {
   stats: ResolvedStat[];
@@ -856,14 +861,51 @@ export const AttributeMenu = () => {
 
   const rootRef = useRef<HTMLDivElement>(null);
 
+  const [windowSize, setWindowSize] = useState<[number, number]>([1180, 720]);
+  useLayoutEffect(() => {
+    const pixelRatio = window.devicePixelRatio || 1;
+    const availW = Math.round(window.screen.availWidth * pixelRatio);
+    const availH = Math.round(window.screen.availHeight * pixelRatio);
+    setWindowSize([Math.max(900, availW), Math.max(600, availH)]);
+  }, []);
+
+  const [contentScale, setContentScale] = useLocalState<number>(
+    'attribute_menu_content_scale',
+    1,
+  );
+
+  const scaleButtons = (
+    <>
+      <Button
+        selected={contentScale === 0.75}
+        onClick={() => setContentScale(0.75)}
+        tooltip="Scale interface to 75%"
+      >
+        75%
+      </Button>
+      <Button
+        selected={contentScale === 1}
+        onClick={() => setContentScale(1)}
+        tooltip="Scale interface to 100%"
+      >
+        100%
+      </Button>
+    </>
+  );
+
   return (
     <Window
       title={parent ? `${parent} Character Ledger` : 'Character Ledger'}
-      width={1180}
-      height={720}
+      width={windowSize[0]}
+      height={windowSize[1]}
+      buttons={scaleButtons}
     >
       <Window.Content fitted>
-        <div className="AttributeMenu" ref={rootRef}>
+        <div
+          className="AttributeMenu"
+          ref={rootRef}
+          style={{ zoom: contentScale }}
+        >
           <div className="AttributeMenu__backdrop">
             <CoreAttributes
               stats={stats}

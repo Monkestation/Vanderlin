@@ -21,42 +21,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	GLOB.attribute_menu_sanitized_css_cache[class_name] = cached
 	return cached
 
-/proc/attribute_menu_anchor_for(stat_name, stat_index)
-	var/lower_name = lowertext(stat_name)
-	if(findtext(lower_name, "strength"))
-		return "strength"
-	if(findtext(lower_name, "perception"))
-		return "perception"
-	if(findtext(lower_name, "intellect") || findtext(lower_name, "intelligence"))
-		return "intellect"
-	if(findtext(lower_name, "speed") || findtext(lower_name, "agility"))
-		return "speed"
-	if(findtext(lower_name, "constitution"))
-		return "constitution"
-	if(findtext(lower_name, "endurance"))
-		return "endurance"
-	if(findtext(lower_name, "fortune") || findtext(lower_name, "luck"))
-		return "fortune"
-	return "fallback[(stat_index - 1) % 7]"
-
-/proc/attribute_menu_seal_label_for(datum/attribute/stat/stat)
-	var/lower_name = lowertext(stat.name)
-	if(findtext(lower_name, "strength"))
-		return "Strength (STR)"
-	if(findtext(lower_name, "perception"))
-		return "Perception (PER)"
-	if(findtext(lower_name, "endurance"))
-		return "Endurance (END)"
-	if(findtext(lower_name, "constitution"))
-		return "Constitution (CON)"
-	if(findtext(lower_name, "intellect") || findtext(lower_name, "intelligence"))
-		return "Intellect (INT)"
-	if(findtext(lower_name, "speed") || findtext(lower_name, "agility"))
-		return "Speed (SPD)"
-	if(findtext(lower_name, "fortune") || findtext(lower_name, "luck"))
-		return "Fortune (FOR)"
-	return stat.shorthand ? "[stat.name] ([stat.shorthand])" : stat.name
-
 /proc/ensure_attribute_menu_static_payload()
 	if(length(GLOB.attribute_menu_static_payload))
 		return GLOB.attribute_menu_static_payload
@@ -66,7 +30,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	var/list/attribute_meta_by_name = list()
 
 	var/list/stats_meta = list()
-	var/stat_index = 1
 	for(var/stat_type in GLOB.all_stats)
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
 		var/icon_class = cached_sanitize_attribute_css(stat.icon_state)
@@ -75,8 +38,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 			"desc" = stat.desc,
 			"icon" = icon_class,
 			"shorthand" = stat.shorthand,
-			"anchor" = attribute_menu_anchor_for(stat.name, stat_index),
-			"seal_label" = attribute_menu_seal_label_for(stat),
 		))
 		name_to_datum[stat.name] = stat
 		attribute_meta_by_name[stat.name] = list(
@@ -86,7 +47,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 			"shorthand" = stat.shorthand,
 			"kind" = "stat",
 		)
-		stat_index++
 
 	var/list/skill_categories_meta = list()
 	for(var/category in GLOB.all_skill_categories)
@@ -144,49 +104,10 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 
 	return payload
 
-/datum/attribute_holder/proc/return_raw_calculated_skill_cached(attribute_type, list/raw_cache)
-	if(attribute_type in raw_cache)
-		var/list/cached = raw_cache[attribute_type]
-		return cached["value"]
-
-	var/skill_value = raw_attribute_list[attribute_type]
-	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(attribute_type)
-	if(istype(skill) && !isnull(skill_value) && skill.governing_attribute)
-		var/governing_value = return_raw_calculated_skill_cached(skill.governing_attribute, raw_cache)
-		var/governing_multiplier = (governing_value >= 0) ? SKILL_GOVERNING_MULTIPLIER_POSITIVE : SKILL_GOVERNING_MULTIPLIER_NEGATIVE
-		skill_value += floor(governing_value * governing_multiplier)
-
-	raw_cache[attribute_type] = list("value" = skill_value)
-	return skill_value
-
-/datum/attribute_holder/proc/return_calculated_skill_cached(attribute_type, list/raw_cache, list/effective_cache)
-	if(attribute_type in effective_cache)
-		var/list/cached = effective_cache[attribute_type]
-		return cached["value"]
-
-	var/skill_value = attribute_list[attribute_type]
-	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(attribute_type)
-	if(istype(skill) && !isnull(skill_value) && skill.governing_attribute)
-		skill_value = max(skill.default_attributes[skill.governing_attribute], skill_value)
-		if(skill.default_attributes[skill.governing_attribute] \
-			&& (skill_value <= skill.default_attributes[skill.governing_attribute] * SKILL_GOVERNING_MULTIPLIER_POSITIVE))
-			effective_cache[attribute_type] = list("value" = null)
-			return
-		var/governing_raw = return_raw_calculated_skill_cached(skill.governing_attribute, raw_cache)
-		var/governing_effective = return_calculated_skill_cached(skill.governing_attribute, raw_cache, effective_cache)
-		var/governing_delta = governing_effective - governing_raw
-		if(governing_delta < 0)
-			skill_value += floor((governing_raw * SKILL_GOVERNING_MULTIPLIER_POSITIVE) + (governing_delta * SKILL_GOVERNING_MULTIPLIER_NEGATIVE))
-		else
-			skill_value += floor(governing_effective * SKILL_GOVERNING_MULTIPLIER_POSITIVE)
-
-	effective_cache[attribute_type] = list("value" = skill_value)
-	return skill_value
-
-/datum/attribute_holder/proc/get_attribute_ui_values(attribute_type, list/raw_cache, list/effective_cache)
+/datum/attribute_holder/proc/get_attribute_ui_values(attribute_type)
 	var/list/values = list()
-	values["raw"] = return_raw_calculated_skill_cached(attribute_type, raw_cache)
-	values["effective"] = return_calculated_skill_cached(attribute_type, raw_cache, effective_cache)
+	values["raw"] = return_raw_calculated_skill(attribute_type)
+	values["effective"] = return_calculated_skill(attribute_type)
 	return values
 
 /datum/attribute_holder/proc/find_active_attribute_menu_ui(mob/user)
@@ -215,18 +136,11 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 
 /datum/attribute_holder/proc/update_attribute_menu_ui()
 	attribute_values_generation++
-	if(!attribute_menu_ui && !LAZYLEN(open_uis))
-		return
-	var/datum/tgui/ui = find_active_attribute_menu_ui(parent)
-	if(ui)
-		ui.send_update()
+	SStgui.update_uis(src)
 
 /datum/attribute_holder/proc/build_attribute_values_payload()
 	if(cached_attribute_values_payload && cached_attribute_values_generation == attribute_values_generation)
 		return cached_attribute_values_payload
-
-	var/list/raw_value_cache = list()
-	var/list/effective_value_cache = list()
 
 	var/list/stats_values = list()
 	for(var/stat_type in GLOB.all_stats)
@@ -240,7 +154,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	for(var/category in GLOB.all_skill_categories)
 		for(var/skill_type in GLOB.all_skill_categories[category])
 			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
-			var/list/values = get_attribute_ui_values(skill_type, raw_value_cache, effective_value_cache)
+			var/list/values = get_attribute_ui_values(skill_type)
 			skills_values[skill.name] = list(
 				"raw_value" = values["raw"],
 				"value" = values["effective"],
@@ -303,8 +217,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 		LAZYSET(attribute_values_gen_sent, user_key, attribute_values_generation)
 
 	if(istype(closely_inspected_attribute))
-		var/list/raw_value_cache = list()
-		var/list/effective_value_cache = list()
 		var/list/closely_inspected_dynamic = list()
 		closely_inspected_dynamic["name"] = closely_inspected_attribute.name
 		closely_inspected_dynamic["desc_from_level"] = capitalize_like_old_man(closely_inspected_attribute.description_from_level(attribute_list[closely_inspected_attribute.type]))
@@ -313,7 +225,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 			closely_inspected_dynamic["raw_value"] = nulltozero(raw_attribute_list[closely_inspected_attribute.type])
 			closely_inspected_dynamic["value"] = nulltozero(attribute_list[closely_inspected_attribute.type])
 		else if(istype(closely_inspected_attribute, SKILL))
-			var/list/values = get_attribute_ui_values(closely_inspected_attribute.type, raw_value_cache, effective_value_cache)
+			var/list/values = get_attribute_ui_values(closely_inspected_attribute.type)
 			closely_inspected_dynamic["raw_value"] = values["raw"]
 			closely_inspected_dynamic["value"] = values["effective"]
 
