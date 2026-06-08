@@ -51,6 +51,7 @@
   --am-scroll-thumb: var(--rb-border);
   --am-card-bg: var(--rb-section-bg);
   --am-card-border: var(--rb-accent-dim);
+  --am-fz: 1;
   position: relative;
   width: 100%;
   height: 100%;
@@ -135,7 +136,7 @@
 .AttributeMenu__eyebrow {
   color: var(--rb-accent);
   font-family: var(--rb-font-ui, Verdana, sans-serif);
-  font-size: 9px;
+  font-size: calc(9px * var(--am-fz));
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -143,7 +144,7 @@
 
 .AttributeMenu__title {
   color: var(--rb-title);
-  font-size: 22px;
+  font-size: calc(22px * var(--am-fz));
   font-weight: bold;
   line-height: 1.1;
   text-shadow: 0 1px var(--am-title-shadow);
@@ -151,7 +152,7 @@
 
 .AttributeMenu__titleShort {
   color: var(--am-ink-soft);
-  font-size: 15px;
+  font-size: calc(15px * var(--am-fz));
 }
 
 .AttributeMenu__divider {
@@ -315,7 +316,7 @@
   padding: 0;
   color: var(--am-ink);
   font: inherit;
-  font-size: 12px;
+  font-size: calc(12px * var(--am-fz));
   text-align: center;
   cursor: pointer;
   background: transparent;
@@ -523,7 +524,7 @@
 .AttributeMenu__sealNodeValue {
   color: var(--am-ink);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 15px;
+  font-size: calc(15px * var(--am-fz));
   font-weight: bold;
   white-space: nowrap;
 }
@@ -537,14 +538,16 @@
 .AttributeMenu__value.is-buffed,
 .AttributeMenu__sealNodeValue.is-buffed,
 .AttributeMenu__valueCard strong.is-buffed,
-.AttributeMenu__modifierRow strong.is-buffed {
+.AttributeMenu__modifierRow strong.is-buffed,
+.AttributeMenu__defaultRow strong.is-buffed {
   color: var(--am-good);
 }
 
 .AttributeMenu__value.is-debuffed,
 .AttributeMenu__sealNodeValue.is-debuffed,
 .AttributeMenu__valueCard strong.is-debuffed,
-.AttributeMenu__modifierRow strong.is-debuffed {
+.AttributeMenu__modifierRow strong.is-debuffed,
+.AttributeMenu__defaultRow strong.is-debuffed {
   color: var(--am-bad);
 }
 
@@ -565,7 +568,7 @@
   border: 1px solid var(--am-input-border) !important;
   color: var(--am-ink) !important;
   font-family: Georgia, 'Times New Roman', serif !important;
-  font-size: 13px !important;
+  font-size: calc(13px * var(--am-fz)) !important;
 }
 
 .AttributeMenu__search input::placeholder {
@@ -593,7 +596,7 @@
   padding: 4px 7px;
   color: var(--rb-accent);
   font-family: var(--rb-font-ui, Verdana, sans-serif);
-  font-size: 10px;
+  font-size: calc(10px * var(--am-fz));
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -653,14 +656,14 @@
   z-index: 1;
   padding: 14px 4px;
   color: var(--am-ink-soft);
-  font-size: 14px;
+  font-size: calc(14px * var(--am-fz));
   line-height: 1.4;
 }
 
 .AttributeMenu__placeholderMark {
   margin: 12px 0 18px;
   color: rgba(92, 61, 30, 0.32);
-  font-size: 32px;
+  font-size: calc(32px * var(--am-fz));
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
@@ -707,7 +710,7 @@
 .AttributeMenu__description {
   margin: 0;
   color: var(--am-ink);
-  font-size: 13px;
+  font-size: calc(13px * var(--am-fz));
   line-height: 1.35;
 }
 
@@ -727,14 +730,14 @@
 .AttributeMenu__noteBlock h3 {
   color: var(--rb-accent);
   font-family: var(--rb-font-ui, Verdana, sans-serif);
-  font-size: 9px;
+  font-size: calc(9px * var(--am-fz));
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .AttributeMenu__valueCard strong {
-  font-size: 26px;
+  font-size: calc(26px * var(--am-fz));
   color: var(--am-ink);
 }
 
@@ -775,7 +778,7 @@
   gap: 6px;
   width: 100%;
   min-height: 25px;
-  padding: 3px 0;
+  padding: 3px 6px 3px 0;
   cursor: pointer;
   background: transparent;
   border-bottom: 1px dotted rgba(70, 38, 18, 0.26);
@@ -784,6 +787,11 @@
 .AttributeMenu__defaultRow span:nth-child(2) {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.AttributeMenu__defaultRow strong {
+  justify-self: end;
   white-space: nowrap;
 }
 
@@ -842,7 +850,7 @@
     --orb-offset: 21px;
     width: 150px;
     min-height: 96px;
-    font-size: 13px;
+    font-size: calc(13px * var(--am-fz));
   }
 
   .AttributeMenu__sealNodeOrb {
@@ -851,11 +859,11 @@
   }
 
   .AttributeMenu__sealNodeName {
-    font-size: 15px;
+    font-size: calc(15px * var(--am-fz));
   }
 
   .AttributeMenu__sealNodeValue {
-    font-size: 20px;
+    font-size: calc(20px * var(--am-fz));
   }
 }
 
@@ -901,7 +909,7 @@
     --orb-offset: 15px;
     width: 118px;
     min-height: 76px;
-    font-size: 10px;
+    font-size: calc(10px * var(--am-fz));
   }
 
   .AttributeMenu__sealNodeOrb {
@@ -910,7 +918,7 @@
   }
 
   .AttributeMenu__sealNodeName {
-    font-size: 11px;
+    font-size: calc(11px * var(--am-fz));
   }
 
   .AttributeMenu__sealNodeValue {
@@ -931,7 +939,7 @@
   padding: 0;
   color: var(--am-ink);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 14px;
+  font-size: calc(14px * var(--am-fz));
   font-weight: bold;
   line-height: 1;
   text-shadow: 0 1px rgba(255, 237, 184, 0.4);
@@ -1049,7 +1057,7 @@
 }
 
 .AttributeMenu__tutorialEyebrow {
-  font-size: 10px;
+  font-size: calc(10px * var(--am-fz));
   font-weight: bold;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1059,7 +1067,7 @@
 .AttributeMenu__tutorialTitle {
   margin-top: 2px;
   font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 16px;
+  font-size: calc(16px * var(--am-fz));
   font-weight: bold;
   color: #f0e2c0;
 }
@@ -1072,7 +1080,7 @@
   height: 22px;
   padding: 0;
   color: #d9c3a0;
-  font-size: 14px;
+  font-size: calc(14px * var(--am-fz));
   line-height: 1;
   background: transparent;
   border: 1px solid transparent;
@@ -1090,7 +1098,7 @@
 
 .AttributeMenu__tutorialBody {
   padding: 12px 14px 6px 14px;
-  font-size: 13px;
+  font-size: calc(13px * var(--am-fz));
   line-height: 1.45;
   color: var(--am-ink);
 }
@@ -1137,7 +1145,7 @@
   padding: 4px 12px;
   color: var(--am-ink);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 13px;
+  font-size: calc(13px * var(--am-fz));
   background: linear-gradient(180deg, var(--am-parchment-light), var(--am-parchment));
   border: 1px solid var(--am-ink-soft);
   border-radius: 2px;

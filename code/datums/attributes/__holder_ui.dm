@@ -106,8 +106,9 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 
 /datum/attribute_holder/proc/get_attribute_ui_values(attribute_type)
 	var/list/values = list()
-	values["raw"] = return_raw_calculated_skill(attribute_type)
-	values["effective"] = return_calculated_skill(attribute_type)
+	values["raw"] = return_raw_effective_skill(attribute_type)
+	values["effective"] = return_effective_skill(attribute_type)
+	values["trained"] = !isnull(return_calculated_skill(attribute_type))
 	return values
 
 /datum/attribute_holder/proc/find_active_attribute_menu_ui(mob/user)
@@ -158,6 +159,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 			skills_values[skill.name] = list(
 				"raw_value" = values["raw"],
 				"value" = values["effective"],
+				"trained" = values["trained"],
 			)
 
 	cached_attribute_values_payload = list(

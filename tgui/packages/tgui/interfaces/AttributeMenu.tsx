@@ -48,7 +48,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     title: 'Character Seals',
-    body: 'The left page bears seven Core Attribute seals arranged around the figure: Strength, Perception, Intellect, Speed, Constitution, Endurance, and Fortune. These foundations govern almost everything you do.',
+    body: 'The left page bears seven Core Attribute seals arranged around the figure: Strength, Perception, Intelligence, Speed, Constitution, Endurance, and Fortune. These foundations govern almost everything you do.',
     target: 'seals-panel',
     popupAnchor: 'right',
   },
@@ -282,6 +282,7 @@ interface AttributeModifier {
 interface AttributeValues {
   value: AttributeValue;
   raw_value: AttributeValue;
+  trained?: boolean;
 }
 
 interface StatMeta {
@@ -358,7 +359,11 @@ interface AttributeData {
   closely_inspected?: CloselyInspectedDynamic | null;
 }
 
-const EMPTY_VALUES: AttributeValues = { value: null, raw_value: null };
+const EMPTY_VALUES: AttributeValues = {
+  value: null,
+  raw_value: null,
+  trained: false,
+};
 
 const displayValue = (value: AttributeValue | undefined) => {
   if (value === null || value === undefined || value === '') {
@@ -366,6 +371,30 @@ const displayValue = (value: AttributeValue | undefined) => {
   }
   return String(value);
 };
+
+const isNumeric = (value: AttributeValue | undefined): value is number =>
+  typeof value === 'number' && Number.isFinite(value);
+
+const valueTone = (
+  value: AttributeValue | undefined,
+  raw: AttributeValue | undefined,
+) => {
+  if (!isNumeric(value) || !isNumeric(raw)) {
+    return 'is-muted';
+  }
+  if (value > raw) {
+    return 'is-buffed';
+  }
+  if (value < raw) {
+    return 'is-debuffed';
+  }
+  return 'is-muted';
+};
+
+const valuePair = (
+  value: AttributeValue | undefined,
+  raw: AttributeValue | undefined,
+) => `${displayValue(value)} / ${displayValue(raw)}`;
 
 const sameSelection = (
   first: string | null | undefined,
@@ -468,10 +497,10 @@ const AttributeSealNode = memo((props: {
           {statSealLabel(stat.name, stat.shorthand)}
         </span>
         <span
-          className="AttributeMenu__sealNodeValue"
+          className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}
           data-tour={anchor === 'strength' ? 'seal-value' : undefined}
         >
-          {displayValue(stat.value)}
+          {valuePair(stat.value, stat.raw_value)}
         </span>
       </button>
     </Tooltip>
@@ -480,6 +509,7 @@ const AttributeSealNode = memo((props: {
   previous.selected === next.selected &&
   previous.stat.name === next.stat.name &&
   previous.stat.value === next.stat.value &&
+  previous.stat.raw_value === next.stat.raw_value &&
   previous.stat.shorthand === next.stat.shorthand);
 
 const CoreAttributes = memo((props: {
@@ -554,8 +584,8 @@ const SkillEntry = memo((props: {
           <IconSprite icon={skill.icon} size="small" />
         </span>
         <span className="AttributeMenu__skillName">{skill.name}</span>
-        <span className="AttributeMenu__value">
-          {displayValue(skill.value)}
+        <span className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
+          {valuePair(skill.value, skill.raw_value)}
         </span>
       </button>
     </Tooltip>
@@ -564,6 +594,7 @@ const SkillEntry = memo((props: {
   previous.selected === next.selected &&
   previous.skill.name === next.skill.name &&
   previous.skill.value === next.skill.value &&
+  previous.skill.raw_value === next.skill.raw_value &&
   previous.skill.icon === next.skill.icon &&
   previous.skill.difficulty === next.skill.difficulty &&
   previous.skill.desc === next.skill.desc);
@@ -624,7 +655,7 @@ const SkillRegister = memo((props: {
       const matchedSkills: ResolvedSkill[] = [];
       for (const skill of category.skills) {
         const values = skillsValues[skill.name] || EMPTY_VALUES;
-        if (!showBadSkills && values.value === null) {
+        if (!showBadSkills && !values.trained) {
           continue;
         }
         if (searchText) {
@@ -766,8 +797,10 @@ const InspectionPanel = memo((props: {
         </Stack>
 
         <div className="AttributeMenu__valueCard">
-          <span>Value</span>
-          <strong>{displayValue(attribute.value)}</strong>
+          <span>Current / Base</span>
+          <strong className={valueTone(attribute.value, attribute.raw_value)}>
+            {valuePair(attribute.value, attribute.raw_value)}
+          </strong>
         </div>
 
         <div className="AttributeMenu__detailGrid">
@@ -778,18 +811,28 @@ const InspectionPanel = memo((props: {
         {!!attribute.defaults?.length && (
           <section className="AttributeMenu__noteBlock">
             <h3>Defaults To</h3>
-            {attribute.defaults.map((def) => (
-              <button
-                className="AttributeMenu__defaultRow"
-                key={def.name}
-                onClick={() => act('inspect_closely', { attribute_name: def.name })}
-                type="button"
-              >
-                <IconSprite icon={def.icon} size="small" />
-                <span>{def.name}</span>
-                <strong>{displayValue(def.default_value ?? null)}</strong>
-              </button>
-            ))}
+            {attribute.defaults.map((def) => {
+              const mod = def.default_value ?? 0;
+              const tone = mod >= 0 ? 'is-buffed' : 'is-debuffed';
+              const sign = mod >= 0 ? `+${mod}` : `${mod}`;
+              return (
+                <Tooltip
+                  key={def.name}
+                  position="bottom"
+                  content={`${def.name} sets a floor for this skill: its value plus this modifier, used when higher than your trained level.`}
+                >
+                  <button
+                    className="AttributeMenu__defaultRow"
+                    onClick={() => act('inspect_closely', { attribute_name: def.name })}
+                    type="button"
+                  >
+                    <IconSprite icon={def.icon} size="small" />
+                    <span>{def.name}</span>
+                    <strong className={tone}>{sign}</strong>
+                  </button>
+                </Tooltip>
+              );
+            })}
           </section>
         )}
 
@@ -861,13 +904,21 @@ export const AttributeMenu = () => {
 
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const [windowSize, setWindowSize] = useState<[number, number]>([1180, 720]);
+  const [maximized, setMaximized] = useLocalState<boolean>(
+    'attribute_menu_maximized',
+    false,
+  );
+  const [screenSize, setScreenSize] = useState<[number, number]>([1280, 720]);
   useLayoutEffect(() => {
-    const pixelRatio = window.devicePixelRatio || 1;
-    const availW = Math.round(window.screen.availWidth * pixelRatio);
-    const availH = Math.round(window.screen.availHeight * pixelRatio);
-    setWindowSize([Math.max(900, availW), Math.max(600, availH)]);
+    setScreenSize([window.screen.availWidth, window.screen.availHeight]);
   }, []);
+
+  const windowSize: [number, number] = maximized
+    ? [screenSize[0], screenSize[1]]
+    : [
+        Math.max(900, Math.round(screenSize[0] * 0.8)),
+        Math.max(600, Math.round(screenSize[1] * 0.9)),
+      ];
 
   const [contentScale, setContentScale] = useLocalState<number>(
     'attribute_menu_content_scale',
@@ -890,6 +941,12 @@ export const AttributeMenu = () => {
       >
         100%
       </Button>
+      <Button
+        icon={maximized ? 'compress' : 'expand'}
+        selected={maximized}
+        onClick={() => setMaximized(!maximized)}
+        tooltip={maximized ? 'Restore window size' : 'Maximize to full screen'}
+      />
     </>
   );
 
@@ -904,7 +961,12 @@ export const AttributeMenu = () => {
         <div
           className="AttributeMenu"
           ref={rootRef}
-          style={{ zoom: contentScale }}
+          style={
+            {
+              zoom: contentScale,
+              '--am-fz': (1 + contentScale) / (2 * contentScale),
+            } as CSSProperties
+          }
         >
           <div className="AttributeMenu__backdrop">
             <CoreAttributes
