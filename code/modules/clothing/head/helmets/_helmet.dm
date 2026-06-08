@@ -37,7 +37,7 @@
 		user.put_in_hands(refund_cloth)
 		detail_tag = null
 		detail_color = null
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 
 		if(ismob(loc))
 			var/mob/living/carbon/owner = loc
@@ -57,41 +57,12 @@
 	qdel(material)
 	detail_color = colors[choice]
 	detail_tag = "_detail"
-	update_icon()
+	update_appearance(UPDATE_OVERLAYS)
 	if(ismob(loc))
 		var/mob/living/carbon/H = loc
 		H.update_inv_head()
 
 
-/obj/item/clothing/head/helmet/update_icon()
-	..()
-	cut_overlays()
-
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon,"[icon_state][detail_tag]")
-		pic.appearance_flags = RESET_COLOR
-		if(get_detail_color())
-			pic.color = get_detail_color()
-		add_overlay(pic)
-
-/obj/item/clothing/head/helmet/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, dummy_block = FALSE)
-	. = ..()
-
-	if(!standing)
-		return .
-
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(
-			mob_overlay_icon,
-			"[icon_state][detail_tag]"
-		)
-
-		pic.appearance_flags = RESET_COLOR
-
-		if(get_detail_color())
-			pic.color = get_detail_color()
-
-		. += pic
 
 /obj/item/clothing/head/helmet/examine(mob/user)
 	. = ..()
