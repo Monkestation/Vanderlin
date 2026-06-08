@@ -106,9 +106,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_sanitized_css_cache)
 	values["trained"] = !isnull(return_calculated_skill(attribute_type))
 	return values
 
-/datum/attribute_holder/proc/update_attribute_menu_ui()
-	SStgui.update_uis(src)
-
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
