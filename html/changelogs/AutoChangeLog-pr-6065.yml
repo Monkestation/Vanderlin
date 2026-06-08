@@ -1,5 +1,0 @@
-author: "SagaStars"
-delete-after: True
-changes:
-  - rscadd: "Added blood splatter on wall from Caustic Cove - Azure Peak Port."
-  - rscadd: "Firearms always trigger an blood wall splatter"
