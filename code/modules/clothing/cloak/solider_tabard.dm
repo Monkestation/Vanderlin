@@ -212,6 +212,9 @@
 	name = "jupon"
 	desc = "A close fitting coat often worn over armor, often colored for mere fashion or to show loyalty to a group."
 	icon_state = "surcoat"
+	color = CLOTHING_MUSTARD_YELLOW
+	detail_tag = "_spl"
+	detail_color = CLOTHING_SOOT_BLACK
 
 
 /obj/item/clothing/cloak/stabard/jupon/guard

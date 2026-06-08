@@ -99,6 +99,7 @@
 	item_state = "whitepsydontabard"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	detail_tag = null
 	var/open_wear = FALSE
 
 /obj/item/clothing/cloak/tabard/toga/get_mechanics_examine(mob/user)

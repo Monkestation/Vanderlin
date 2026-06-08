@@ -330,16 +330,11 @@
 	icon_state = "kazengunboots"
 	item_state = "kazengunboots"
 	detail_tag = "_detail"
-	color = "#FFFFFF"
-	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/shoes/boots/leather/kazengun/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
 	var/playerchoice = COLOR_MAP[choice]
 	detail_color = playerchoice
-	update_appearance()
-	if(loc == user && ishuman(user))
-		var/mob/living/carbon/H = user
-		H.update_inv_armor()
-		H.update_icon()
+	update_appearance(UPDATE_ICON)

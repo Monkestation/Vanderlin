@@ -66,3 +66,14 @@
   - rscadd: custom quests, players can create a pledge to make a custom quest. Which
       can be handed in at notice boards
   - bugfix: harlequin disguise has been reworked entirely and is no longer an ability
+2026-06-08:
+  Archeonan:
+  - balance: Tweaked stats of Grenzelhoft Dopplehander and Arkebusier
+  CheffieGithub:
+  - rscdel: Removed youngling from minor noble
+  SagaStars:
+  - rscadd: Added blood splatter on wall from Caustic Cove - Azure Peak Port.
+  - rscadd: Firearms always trigger an blood wall splatter
+  Sulaboy:
+  - balance: Grass Fiber Drops changed from 0-2 to 1-3
+  - bugfix: Grass no longer covers dropped items

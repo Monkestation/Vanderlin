@@ -212,9 +212,10 @@
 
 /obj/item/clothing/cloak/tabard/blkknight
 	name = "blood sash"
-	icon_state = "bksash"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
+	icon_state = "bksash"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	detail_tag = null
 
 /obj/item/clothing/neck/blkknight
 	name = "dragonscale necklace"
@@ -419,14 +420,10 @@
 	icon_state = "fancycoat"
 	item_state = "fancycoat"
 	alternate_worn_layer = TABARD_LAYER
-	boobed = FALSE
 	flags_inv = HIDEBOOB
 	slot_flags = ITEM_SLOT_CLOAK|ITEM_SLOT_ARMOR
-	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	nodismemsleeves = TRUE
-	color = CLOTHING_WHITE
-	detail_tag = "_detail"
-	detail_color = CLOTHING_WHITE
+	detail_tag = null
 
 /obj/item/clothing/cloak/kazengun
 	name = "jinbaori"
