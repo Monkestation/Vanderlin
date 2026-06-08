@@ -224,6 +224,9 @@
 /obj/item/clothing/cloak/stabard/jupon
 	name = "jupon"
 	icon_state = "surcoat"
+	color = CLOTHING_MUSTARD_YELLOW
+	detail_tag = "_spl"
+	detail_color = CLOTHING_SOOT_BLACK
 
 /obj/item/clothing/cloak/stabard/jupon/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
