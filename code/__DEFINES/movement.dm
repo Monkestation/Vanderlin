@@ -37,13 +37,13 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 ///Do we not use the priority system?
 #define MOVEMENT_LOOP_IGNORE_PRIORITY (1<<1)
 ///Should we override the loop's glide?
-#define MOVEMENT_LOOP_IGNORE_GLIDE (1<<3)
+#define MOVEMENT_LOOP_IGNORE_GLIDE (1<<2)
 ///Should we not update our movables dir on move?
-#define MOVEMENT_LOOP_NO_DIR_UPDATE (1<<4)
+#define MOVEMENT_LOOP_NO_DIR_UPDATE (1<<3)
 ///Is the loop moving the movable outside its control, like it's an external force? e.g. footsteps won't play if enabled.
-#define MOVEMENT_LOOP_OUTSIDE_CONTROL (1<<5)
-///Was this Move() called because of the process() of move_loop? Allows for checking whether a move was made from a movement loop.
-#define MOVEMENT_LOOP_CALLED_MOVE (1<<6)
+#define MOVEMENT_LOOP_OUTSIDE_CONTROL (1<<4)
+///Added to the move packet `processing_move_loop_flags` so we know when a loop is behind movement even in absence of other flags
+#define MOVED_BY_MOVEMENT_LOOP (1<<6)
 
 #define DEFAULT_MOB_SNEAK_TIME 5 SECONDS
 

@@ -1,26 +1,17 @@
-
 /obj/item/clothing/cloak/tabard
 	name = "tabard"
 	desc = "A common short coat commonly worn by just about anyone."
-	color = null
 	icon_state = "tabard"
 	item_state = "tabard"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/detailed/tabards.dmi'
+	detail_tag = "_spl"
+	detail_color = CLOTHING_BERRY_BLUE
+	color = CLOTHING_PEAR_YELLOW
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	boobed = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	var/picked
-
-/obj/item/clothing/cloak/tabard/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
 
 /obj/item/clothing/cloak/tabard/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -81,6 +72,7 @@
 	picked = TRUE
 
 /obj/item/clothing/cloak/tabard/knight
+	detail_color = CLOTHING_RED_OCHRE
 	color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
@@ -88,11 +80,9 @@
 	return
 
 /obj/item/clothing/cloak/tabard/crusader
+	color = CLOTHING_MAGE_GREY
 	detail_tag = "_psy"
-
-/obj/item/clothing/cloak/tabard/crusader/Initialize()
-	. = ..()
-	update_appearance(UPDATE_ICON)
+	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -132,6 +122,11 @@
 		return
 	picked = TRUE
 
+/obj/item/clothing/cloak/tabard/crusader/tief
+	color = CLOTHING_BLOOD_RED
+	detail_tag = "_quad"
+	detail_color = CLOTHING_SOOT_BLACK
+
 /obj/item/clothing/cloak/tabard/crusader/tief/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -159,10 +154,6 @@
 		detail_color = initial(detail_color)
 		color = initial(color)
 		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
-		return
 	picked = TRUE
 
 /obj/item/clothing/cloak/tabard/knight/guard
@@ -211,10 +202,6 @@
 	detail_tag = "_psy"
 	color = CLOTHING_SOOT_BLACK
 	detail_color = CLOTHING_WHITE
-
-/obj/item/clothing/cloak/tabard/adept/Initialize()
-	. = ..()
-	update_appearance(UPDATE_ICON)
 
 /obj/item/clothing/cloak/tabard/adept/attack_hand_secondary(mob/user, list/modifiers)
 	return
