@@ -4248,6 +4248,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/structure/flora/grass/maneater/real,
 /obj/item/alch/herb/rosa,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe)
 "yl" = (
