@@ -2,18 +2,6 @@
 				BLOOD SYSTEM
 ****************************************************/
 
-/mob/living/proc/suppress_bloodloss(amount)
-	if(bleedsuppress)
-		return
-	else
-		bleedsuppress = TRUE
-		addtimer(CALLBACK(src, PROC_REF(resume_bleeding)), amount)
-
-/mob/living/proc/resume_bleeding()
-	bleedsuppress = 0
-	if(stat != DEAD && bleed_rate)
-		to_chat(src, span_warning("The blood soaks through my bandage."))
-
 /mob/living/proc/handle_blood()
 	if(!CAN_HAVE_BLOOD(src)) //cryosleep or husked people do not pump the blood.
 		bleed_rate = 0
