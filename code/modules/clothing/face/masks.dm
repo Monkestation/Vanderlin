@@ -464,7 +464,7 @@
 		user.regenerate_clothes()
 
 /obj/item/clothing/face/shepherd/colored
-	misc_flags = CRAFTING_TEST_EXCLUDE
+	abstract_type = /obj/item/clothing/face/shepherd/colored
 
 /obj/item/clothing/face/shepherd/colored/guard
 	color = CLOTHING_PLUM_PURPLE

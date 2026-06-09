@@ -28,7 +28,7 @@
 	item_weight = 3.5 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/colored
-	misc_flags = CRAFTING_TEST_EXCLUDE
+	abstract_type = /obj/item/clothing/armor/gambeson/colored
 
 /obj/item/clothing/armor/gambeson/colored/guard
 	color = CLOTHING_BLOOD_RED

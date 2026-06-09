@@ -12,7 +12,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor = ARMOR_PLATE_BAD
-	max_integrity = INTEGRITY_POOR //Looked like it was defaulting to integrity_worst from head.dm which gave some helmets the same durability has hats.
+	max_integrity = INTEGRITY_POOR
 	body_parts_covered = COVERAGE_SKULL
 	prevent_crits = ALL_EXCEPT_STAB
 
@@ -27,7 +27,7 @@
 	. = ..()
 	if(!can_add_cloth)
 		return
-	if(detail_tag)
+	if(get_detail_tag())
 		user.visible_message(span_warning("[user] starts removing the wreath from [src]."))
 		if(!do_after(user, 3 SECONDS, src))
 			return
@@ -39,9 +39,6 @@
 		detail_color = null
 		update_appearance(UPDATE_OVERLAYS)
 
-		if(ismob(loc))
-			var/mob/living/carbon/owner = loc
-			owner.update_inv_head()
 		return
 
 	var/obj/item/natural/cloth/material = user.get_active_held_item()
@@ -58,10 +55,6 @@
 	detail_color = colors[choice]
 	detail_tag = "_detail"
 	update_appearance(UPDATE_OVERLAYS)
-	if(ismob(loc))
-		var/mob/living/carbon/H = loc
-		H.update_inv_head()
-
 
 
 /obj/item/clothing/head/helmet/examine(mob/user)

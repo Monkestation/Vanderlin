@@ -101,13 +101,14 @@
 	var/static/list/selectable = list( \
 		"Sword" = /obj/item/weapon/scabbard/sword, \
 		"Mace" = /obj/item/weapon/mace, \
-		"Militia Flail" = /obj/item/weapon/flail/militia, \
+		"Axe" = /obj/item/weapon/axe/iron, \
+		"Flail" = /obj/item/weapon/flail/militia, \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "WATCHMAN")
 	if(!choice)
 		return
 	switch(choice)
-		if("Militia Flail")
+		if("Flail")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/garrison/footman/flail)
 		if("Sword")
 			spawned.put_in_hands(new /obj/item/weapon/sword/iron())

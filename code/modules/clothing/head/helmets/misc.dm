@@ -143,10 +143,6 @@
 	uses_lord_coloring = LORD_PRIMARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/head/helmet/kettle/iron/guard/Initialize()
-	. = ..()
-	update_icon()
-
 /obj/item/clothing/head/helmet/kettle/aalloy
 	name = "decrepit kettle helmet"
 	desc = "A frayed, bronze helmet which protects the top and sides of the head. Atop a resurrected levyman's scalp, it's a sign that forces-most-foul are soon to besiege; and atop a fleshless ballistaeman's skull, it's a sign that you should probably duck."
@@ -296,10 +292,6 @@
 	uses_lord_coloring = LORD_PRIMARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/head/helmet/sallet/iron/guard/Initialize()
-	. = ..()
-	update_icon()
-
 /obj/item/clothing/head/helmet/sallet/iron/banded
 	name = "banded iron helmet"
 	desc = "A menacing horned half-face iron helmet worn primarily by mercenaries hailing from an unaligned conflict-ridden enclave near the borders of Ossland. \
@@ -435,8 +427,6 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_SECONDARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
-
-
 
 /obj/item/clothing/head/helmet/visored/sallet/iron
 	name = "visored iron sallet"

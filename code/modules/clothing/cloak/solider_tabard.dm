@@ -39,17 +39,17 @@
 	if(!can_customize)
 		return
 	var/the_time = world.time
-	var/design = input(user, "Select a design.","Tabard Design") as null|anything in list("None","Split", "Quadrants", "Boxes", "Diamonds")
+	var/design = tgui_input_list(user, "Select a design.","Tabard Design", list("None","Split", "Quadrants", "Boxes", "Diamonds"))
 	if(!design)
 		return
 	var/list/colors = GLOB.peasant_dyes | GLOB.noble_dyes | GLOB.royal_dyes
 
-	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in colors
+	var/colorone = tgui_input_list(user, "Select a primary color.","Tabard Design", colors)
 	if(!colorone)
 		return
 	var/colortwo
 	if(design != "None")
-		colortwo = input(user, "Select a secondary color.","Tabard Design") as null|anything in colors
+		colortwo = tgui_input_list(user, "Select a secondary color.","Tabard Design", colors)
 		if(!colortwo)
 			return
 	if(world.time > (the_time + 30 SECONDS))
@@ -67,17 +67,11 @@
 	if(colortwo)
 		detail_color = clothing_color2hex(colortwo)
 	update_appearance(UPDATE_OVERLAYS)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		detail_tag = initial(detail_tag)
 		update_appearance(UPDATE_OVERLAYS)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
 		return
 	picked = TRUE
 
@@ -105,9 +99,6 @@
 	color = clothing_color2hex(pick(GLOB.peasant_dyes))
 	detail_color = clothing_color2hex(pick(GLOB.peasant_dyes))
 	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
 
 /obj/item/clothing/cloak/stabard/kaledon
 	detail_tag = "_box"
