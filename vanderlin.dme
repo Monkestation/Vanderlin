@@ -3018,6 +3018,7 @@
 #include "code\modules\farming\plant_def\fruit.dm"
 #include "code\modules\farming\plant_def\grain.dm"
 #include "code\modules\farming\plant_def\herb.dm"
+#include "code\modules\farming\plant_def\oleaceae.dm"
 #include "code\modules\farming\plant_def\root.dm"
 #include "code\modules\farming\plant_def\rosaceae.dm"
 #include "code\modules\farming\plant_def\rubiaceae.dm"
