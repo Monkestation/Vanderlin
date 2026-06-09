@@ -1943,9 +1943,6 @@
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/dirt,
 /area/outdoors/bog/beach)
-"aNP" = (
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/bog/witch)
 "aOd" = (
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
@@ -5053,23 +5050,6 @@
 /obj/item/natural/stone,
 /turf/open/floor/abyss_sand,
 /area/outdoors/bog/central)
-"dGz" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
-	},
-/obj/machinery/light/fueled/firebowl/stumpb{
-	pixel_y = 10
-	},
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "dGN" = (
 /turf/open/floor/abyss_tile,
 /area/outdoors/bog/north/west)
@@ -6940,6 +6920,20 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/bog/south/west)
+"frd" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "fro" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -13478,6 +13472,20 @@
 "lRQ" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/beach)
+"lRR" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/machinery/light/fueled/firebowl/stumpb{
+	pixel_y = 10
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "lSC" = (
 /turf/open/floor/dirt,
 /area/outdoors/bog/beach)
@@ -14258,17 +14266,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/bog/north/west)
-"mLt" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "mLA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/neu,
@@ -17602,12 +17599,6 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
-"qBB" = (
-/obj/structure/chair/wood/alt/chair_noble/purple{
-	dir = 1
-	},
-/turf/open/floor/carpet/royalblack,
-/area/indoors/shelter/bog/lich)
 "qBS" = (
 /obj/structure/door/red,
 /turf/open/floor/ruinedwood/darker,
@@ -19975,6 +19966,10 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/outdoors/bog/east)
+"tuX" = (
+/obj/structure/fluff/traveltile/bog_gallowband,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/bog/witch)
 "tvg" = (
 /mob/living/carbon/human/species/aasimar/base/very_skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -20929,6 +20924,12 @@
 "ulQ" = (
 /turf/open/floor/abyss_tile,
 /area/outdoors/bog/central)
+"umR" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/indoors/shelter/bog/lich)
 "unu" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/dirt/road,
@@ -21959,10 +21960,6 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
-"vjp" = (
-/obj/structure/flora/tree/burnt,
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/witch)
 "vjX" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/water/swamp,
@@ -42138,13 +42135,13 @@ cJo
 yfu
 yfu
 cJo
-cJo
-vjp
-dGz
-aNP
-aNP
-aNP
-mLt
+gmP
+neZ
+frd
+tuX
+tuX
+tuX
+lRR
 neZ
 wKK
 uKN
@@ -102299,7 +102296,7 @@ uCr
 uUR
 ghb
 jvo
-qBB
+umR
 ghb
 odp
 fQn
