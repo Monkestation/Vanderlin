@@ -16,6 +16,9 @@ SUBSYSTEM_DEF(processing)
 /datum/controller/subsystem/processing/fire(resumed = 0)
 	if (!resumed)
 		currentrun = processing.Copy()
+
+	var/seconds_per_tick = wait / (1 SECONDS)
+
 	//cache for sanic speed (lists are references anyways)
 	var/list/current_run = currentrun
 
@@ -24,7 +27,7 @@ SUBSYSTEM_DEF(processing)
 		current_run.len--
 		if(QDELETED(thing))
 			processing -= thing
-		else if(thing.process(wait * 0.1) == PROCESS_KILL)
+		else if(thing.process(seconds_per_tick) == PROCESS_KILL)
 			// fully stop so that a future START_PROCESSING will work
 			STOP_PROCESSING(src, thing)
 		if (MC_TICK_CHECK)

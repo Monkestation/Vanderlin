@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(island_mobs)
 	..("IM:[island_mobs.len]|AI:[active_islands.len]")
 
 /datum/controller/subsystem/island_mobs/fire(resumed = 0)
-	var/seconds = wait * 0.1
+	var/seconds_per_tick = wait / (1 SECONDS)
 
 	if (!resumed)
 		// Update active islands - only process mobs on islands with players
@@ -39,9 +39,9 @@ SUBSYSTEM_DEF(island_mobs)
 			continue
 
 		if(L.stat == DEAD)
-			L.DeadLife(seconds)
+			L.DeadLife(seconds_per_tick)
 		else
-			L.Life(seconds)
+			L.Life(seconds_per_tick)
 
 		if (MC_TICK_CHECK)
 			return

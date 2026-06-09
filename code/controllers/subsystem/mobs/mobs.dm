@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(mobs)
 		camera_players_by_zlevel.len--
 
 /datum/controller/subsystem/mobs/fire(resumed = 0)
-	var/seconds = wait * 0.1
+	var/seconds_per_tick = wait / (1 SECONDS)
 
 	if (!resumed)
 		src.currentrun = GLOB.mob_living_list.Copy()
@@ -55,9 +55,9 @@ SUBSYSTEM_DEF(mobs)
 			continue
 
 		if(L.stat == DEAD)
-			L.DeadLife(seconds)
+			L.DeadLife(seconds_per_tick)
 		else
-			L.Life(seconds)
+			L.Life(seconds_per_tick)
 
 		if (MC_TICK_CHECK)
 			return

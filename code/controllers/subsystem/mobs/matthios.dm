@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(matthios_mobs)
 	..("MM:[matthios_mobs.len]")
 
 /datum/controller/subsystem/matthios_mobs/fire(resumed = 0)
-	var/seconds = wait * 0.1
+	var/seconds_per_tick = wait / (1 SECONDS)
 	if(!length(dungeon_z) && !looked)
 		dungeon_z = SSmapping.levels_by_trait(ZTRAIT_MATTHIOS_DUNGEON)
 		looked = TRUE
@@ -51,9 +51,9 @@ SUBSYSTEM_DEF(matthios_mobs)
 			continue
 
 		if(L.stat == DEAD)
-			L.DeadLife(seconds)
+			L.DeadLife(seconds_per_tick)
 		else
-			L.Life(seconds)
+			L.Life(seconds_per_tick)
 
 		if (MC_TICK_CHECK)
 			return

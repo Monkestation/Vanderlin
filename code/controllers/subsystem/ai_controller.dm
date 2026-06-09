@@ -34,13 +34,14 @@ SUBSYSTEM_DEF(ai_controllers)
 
 /datum/controller/subsystem/ai_controllers/fire(resumed)
 	var/timer = TICK_USAGE_REAL
+	var/seconds_per_tick = wait / (1 SECONDS)
 	for(var/datum/ai_controller/ai_controller as anything in GLOB.ai_controllers_by_status[planning_status])
 		if(!COOLDOWN_FINISHED(ai_controller, failed_planning_cooldown))
 			continue
 
 		if(!ai_controller.able_to_plan())
 			continue
-		ai_controller.SelectBehaviors(wait * 0.1)
+		ai_controller.SelectBehaviors(seconds_per_tick)
 		if(!LAZYLEN(ai_controller.current_behaviors)) //Still no plan
 			COOLDOWN_START(ai_controller, failed_planning_cooldown, AI_FAILED_PLANNING_COOLDOWN)
 
