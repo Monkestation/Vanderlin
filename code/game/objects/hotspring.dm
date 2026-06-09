@@ -43,9 +43,6 @@
 	else
 		playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
 
-/turf/open/water/hotspring/dryup(forced)
-	return // no
-
 ///these were unfortunately requested to not be smoothed. I will likely create a smooth helper version aswell though
 ///the issue is they would need at least a 2x2 to smooth proper.
 /obj/structure/hotspring
