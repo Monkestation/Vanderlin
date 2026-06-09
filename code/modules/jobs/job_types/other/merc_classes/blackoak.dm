@@ -35,7 +35,7 @@
 
 /datum/job/advclass/mercenary/blackoak
 	title = "Redwood Mercenary"
-	tutorial = "A soldier from the Redwood Warband, pawned off to work at the mercenary guild to gather funds for your cause."
+	tutorial = "A soldier from the Redwood Warband, currently performing work at the mercenary guild to gather funds for your cause."
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/blackoak
 	category_tags = list(CTAG_MERCENARY)
