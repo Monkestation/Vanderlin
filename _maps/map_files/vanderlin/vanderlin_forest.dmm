@@ -7303,6 +7303,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
+"Pc" = (
+/obj/structure/fluff/traveltile/gallowband_bog,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Pd" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/grass,
@@ -13439,9 +13443,9 @@ rb
 rb
 rb
 UH
-cA
-cA
-cA
+Pc
+Pc
+Pc
 YW
 rb
 Gs
