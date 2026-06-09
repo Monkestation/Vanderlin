@@ -1,5 +1,4 @@
 /mob/living/carbon
-	blood_volume = BLOOD_VOLUME_NORMAL
 	gender = MALE
 	base_intents = list(INTENT_HELP, INTENT_HARM)
 	hud_possible = list(ANTAG_HUD)
@@ -17,10 +16,6 @@
 	var/obj/item/legcuffed = null  //Same as handcuffs but for legs. Bear traps use this.
 
 	COOLDOWN_DECLARE(adrenaline_burst)
-	/// Last time we got mouth to mouthed
-	COOLDOWN_DECLARE(last_mtom)
-	/// Last time we got CPR'd
-	COOLDOWN_DECLARE(last_cpr)
 
 	/// Pulse can't be handled on an organ-by-organ basis, since we can have multiple hearts
 	var/pulse = PULSE_NORM
@@ -67,7 +62,8 @@
 	var/datum/dna/dna = null//Carbon
 	var/datum/mind/last_mind = null //last mind to control this mob, for blood-based cloning
 
-	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+	///This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+	var/failed_last_breath = 0
 
 	var/co2overloadtime = null
 	var/obj/item/reagent_containers/food/snacks/meat/steak/type_of_meat = /obj/item/reagent_containers/food/snacks/meat/steak
@@ -120,6 +116,17 @@
 	var/total_nutriment_req = DEFAULT_TOTAL_NUTRIMENT_REQ
 	/// Total sum of organ and bodypart hydration requirement
 	var/total_hydration_req  = DEFAULT_TOTAL_HYDRATION_REQ
+
+	// ~INJURY PENALTIES
+	/// Timer for injury penalty, should reset if we take more damage
+	var/shock_penalty_timer = null
+	/// How much our injury penalty currently affects our DX and IQ
+	var/shock_penalty = 0
+
+	/// All injuries we have accumulated on our body
+	var/list/datum/injury/all_injuries
+	/// Descriptive string used in combat messages
+	var/wound_message = ""
 
 	/// if they get a mana pool
 	has_initial_mana_pool = TRUE

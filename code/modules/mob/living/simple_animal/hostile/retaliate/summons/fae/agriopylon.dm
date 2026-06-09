@@ -28,7 +28,6 @@
 		'sound/foley/plantcross2.ogg'
 	)
 
-	aggressive = 0
 	ai_controller = /datum/ai_controller/agriopylon
 	dendor_taming_chance = DENDOR_TAME_PROB_NONE
 	del_on_death = TRUE

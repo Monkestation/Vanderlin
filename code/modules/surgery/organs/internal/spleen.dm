@@ -16,12 +16,22 @@
 	organ_volume = 0.5
 	max_blood_storage = 20
 	current_blood = 20
-	blood_req = 2
+	blood_req = 1
 	oxygen_req = 2
 	nutriment_req = 2.4
 	hydration_req = 0.9
 
-	var/blood_regen_factor = 0.01 // how much blood the spleen regenerates per efficiency point, per 2 seconds
+	var/blood_regen_factor = BLOOD_REGEN_FACTOR // how much blood the spleen regenerates per efficiency point, per 2 seconds
 
-/obj/item/organ/spleen/get_availability(datum/species/S)
-	return (!(NOBLOOD in S.species_traits))
+/obj/item/organ/spleen/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b> is ashen-faced, with a waxy, bloodless pallor across [owner.p_their()] skin.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b> looks unusually pale and drawn.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b> looks a little wan.")
+
+/obj/item/organ/spleen/get_availability(datum/species/S, mob/living/carbon/owner_mob)
+	return !(TRAIT_NOBLOOD in S.inherent_traits)

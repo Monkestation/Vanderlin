@@ -30,9 +30,10 @@
 			if(affecting.heal_damage(50, 50))
 				cast_on.update_damage_overlays()
 			if(affecting.heal_wounds(50, src))
+				record_round_statistic(STATS_WOUNDS_FIXED)
 				cast_on.update_damage_overlays()
 		cast_on.visible_message(span_danger("[cast_on] reforms under the vile energy!"), span_notice("I'm remade by dark magic!"))
 	else
 		cast_on.visible_message(span_info("Necrotic energy floods over [cast_on]!"), span_userdanger("I feel colder as the dark energy floods into me!"))
 		cast_on.Paralyze(5 SECONDS)
-		cast_on.adjustBruteLoss(20)
+		cast_on.adjustBruteLoss(20, damage_type = BCLASS_LASHING)

@@ -30,111 +30,83 @@
 	H.equipOutfit(/datum/outfit/harlequin)
 
 /datum/antagonist/harlequinn/proc/give_objectives()
-	var/list/contract_choices = list()
-	for(var/datum/bounty_contract/contract in available_contracts)
-		if(!contract.assigned_to_harlequinn && !contract.completed && !contract.failed)
-			contract_choices[contract.get_description()] = contract
+	var/mob/living/carbon/human/H = owner?.current
+	if(!H)
+		return
 
-	if(!length(contract_choices))
+	var/list/available_types = list()
+	for(var/datum/quest/custom/harlequinn_objective/T as anything in subtypesof(/datum/quest/custom/harlequinn_objective))
+		if(IS_ABSTRACT(T))
+			continue
+		available_types += T
+
+	if(!length(available_types))
 		var/datum/objective/survive/surv = new()
 		surv.owner = owner
 		objectives += surv
 		return
 
-	var/contracts_selected = 0
-	while(contracts_selected < 3 && length(contract_choices))
-		var/choice = input(owner.current, "Select a contract (you can choose up to 3):", "Contract Selection") as null|anything in contract_choices + list("Finish Selection")
-
-		if(choice == "Finish Selection" || !choice)
+	available_types = shuffle(available_types)
+	var/assigned = 0
+	for(var/quest_type as anything in available_types)
+		if(assigned >= 3)
 			break
 
-		var/datum/bounty_contract/selected = contract_choices[choice]
-		selected.assigned_to_harlequinn = TRUE
-		active_contracts += selected
-		contract_choices -= choice
-		contracts_selected++
+		var/datum/quest/custom/harlequinn_objective/OQ = new quest_type()
+		OQ.owning_harlequinn = WEAKREF(src)
+		OQ.generate(null)
 
+		if(!OQ.setup_for_harlequinn(src))
+			qdel(OQ)
+			continue
+
+		// Set giver to the harlequinn themselves so scroll text makes sense
+		OQ.quest_giver_reference = WEAKREF(H)
+		OQ.quest_giver_name = "The Theatre"
+
+		// Create the quest scroll
+		var/obj/item/paper/scroll/quest/scroll = new(get_turf(H))
+		scroll.base_icon_state = OQ.get_scroll_icon()
+		scroll.assigned_quest = OQ
+		OQ.quest_scroll = scroll
+		OQ.quest_scroll_ref = WEAKREF(scroll)
+		OQ.quest_receiver_reference = WEAKREF(H)
+		OQ.quest_receiver_name = H.real_name
+		OQ.accepted_time = world.time
+		scroll.update_quest_text()
+
+		// Try belt first, then hands, then just leave it on the turf
+		var/stored = FALSE
+		var/obj/item/belt = H.get_item_by_slot(ITEM_SLOT_BELT)
+		if(belt)
+			SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, scroll, null, null, TRUE, TRUE)
+			stored = scroll.loc == belt // check it actually went in
+		if(!stored)
+			H.put_in_hands(scroll)
+
+		// Wrap in a standard objective for the antag panel
 		var/datum/objective/harlequinn_contract/obj = new()
 		obj.owner = owner
-		obj.contract = selected
-		obj.explanation_text = "Complete the contract: [selected.get_description()]"
+		obj.explanation_text = OQ.get_objective_text()
+		obj.linked_quest = WEAKREF(OQ)
 		objectives += obj
 
-/datum/bounty_contract/proc/get_description()
-	switch(contract_type)
-		if("theft")
-			return "Steal [target_name] for [payment] coins"
-		if("kidnapping")
-			return "Kidnap [target_name] and bring them to [delivery_location] for [payment] coins"
-		if("assassination")
-			return "Eliminate [target_name] for [payment] coins"
-		if("smuggling")
-			return "Transport contraband to [delivery_location] for [payment] coins"
-		if("sabotage")
-			return "Sabotage [target_name] for [payment] coins"
-		if("impersonation")
-			return "Impersonate [target_name] for [payment] coins"
-		if("burial")
-			return "Bury item at [delivery_location] for [payment] coins"
-	return "Unknown contract type"
+		active_contracts += OQ
+		assigned++
 
+	if(!assigned)
+		var/datum/objective/survive/surv = new()
+		surv.owner = owner
+		objectives += surv
 
 /datum/objective/harlequinn_contract
-	var/datum/bounty_contract/contract
+	var/datum/weakref/linked_quest // weakref to /datum/quest/custom/harlequinn_objective
 
 /datum/objective/harlequinn_contract/check_completion()
-	return contract?.completed || FALSE
-
-
-/obj/item/harlequinn_disguise_kit
-	name = "professional disguise kit"
-	desc = "A collection of makeup, prosthetics, and costume pieces for mundane disguises."
-	//icon = 'icons/obj/items.dmi'
-	icon_state = "disguise_kit"
-	w_class = WEIGHT_CLASS_NORMAL
-	grid_width = 32
-	grid_height = 32
-
-/obj/item/harlequinn_disguise_kit/attack_self(mob/user, list/modifiers)
-	var/list/options = list(
-		"Quick Disguise" = "quick",
-		"Detailed Disguise" = "detailed",
-		"Remove Disguise" = "remove"
-	)
-
-	var/choice = input(user, "What would you like to do?", "Disguise Kit") as null|anything in options
-	if(!choice)
-		return
-
-	switch(options[choice])
-		if("quick")
-			quick_disguise(user)
-		if("detailed")
-			detailed_disguise(user)
-		if("remove")
-			remove_disguise(user)
-
-/obj/item/harlequinn_disguise_kit/proc/quick_disguise(mob/user)
-	to_chat(user, span_notice("You quickly apply a basic disguise..."))
-	if(do_after(user, 30 SECONDS, target = user))
-		user.name = "Unknown"
-		to_chat(user, span_notice("You look like a different person, though the disguise won't fool close inspection."))
-
-/obj/item/harlequinn_disguise_kit/proc/detailed_disguise(mob/user)
-	var/new_name = browser_input_text(user, "What name should you appear as?", "DISGUISE", max_length = MAX_NAME_LEN)
-	if(!new_name)
-		return
-
-	to_chat(user, span_notice("You carefully apply an elaborate disguise..."))
-	if(do_after(user, 120 SECONDS, target = user))
-		user.name = new_name
-		to_chat(user, span_notice("Your disguise is convincing and should fool most observers."))
-
-/obj/item/harlequinn_disguise_kit/proc/remove_disguise(mob/user)
-	to_chat(user, span_notice("You remove your disguise..."))
-	if(do_after(user, 15 SECONDS, target = user))
-		user.name = user.real_name
-		to_chat(user, span_notice("You return to your normal appearance."))
+	var/datum/quest/custom/harlequinn_objective/OQ = linked_quest?.resolve()
+	if(OQ && !QDELETED(OQ))
+		return OQ.check_completion()
+	return TRUE
 
 /obj/structure/buried_cache
 	name = "buried cache"

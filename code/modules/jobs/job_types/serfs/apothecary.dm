@@ -74,7 +74,7 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600
 	)
-
+	book_type = /obj/item/recipe_book/alchemy
 
 /datum/job/apothecary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

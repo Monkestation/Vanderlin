@@ -31,6 +31,8 @@
 
 /datum/surgery_step/infuse_lux/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	. = ..()
+	if(!.)
+		return
 	if(target.stat < DEAD)
 		to_chat(user, span_notice("They're not dead!"))
 		return FALSE
@@ -60,6 +62,7 @@
 	if(!target.revive(excess_healing = 50))
 		to_chat(user, span_warning("Nothing happens."))
 		return FALSE
+	target.reagents.add_reagent(/datum/reagent/medicine/atropine, 20)
 	if(tainted_lux && !tainted_mob)
 		if(prob(50))
 			display_results(user, target,

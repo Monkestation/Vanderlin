@@ -139,6 +139,7 @@
 	volume = 15
 	list_reagents = list(/datum/reagent/lux_tainted = 5)
 	grind_results = list(/datum/reagent/lux_tainted = 5)
+	indexed = TRUE
 	sellprice = 25
 
 /datum/reagent/lux_tainted

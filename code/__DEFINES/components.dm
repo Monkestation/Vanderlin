@@ -7,7 +7,7 @@
 // /datum signals
 /// when a component is added to a datum: (/datum/component)
 #define COMSIG_COMPONENT_ADDED "component_added"
-/// before a component is removed from a datum because of RemoveComponent: (/datum/component)
+/// before a component is removed from a datum because of ClearFromParent: (/datum/component)
 #define COMSIG_COMPONENT_REMOVING "component_removing"
 
 #define COMSIG_TRAP_TRIGGERED "trap_triggered_parent"

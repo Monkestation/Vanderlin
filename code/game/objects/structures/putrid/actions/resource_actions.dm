@@ -283,7 +283,7 @@
 	controller.spawn_spacevine_piece(T, spread_type)
 	if(knockback)
 		for(var/mob/living/bumper in T)
-			if("meat" in bumper.faction)
+			if(bumper.has_faction("meat"))
 				continue
 
 			if(prob(GET_MOB_SKILL_VALUE_OLD(bumper, /datum/attribute/skill/misc/athletics) * 15))

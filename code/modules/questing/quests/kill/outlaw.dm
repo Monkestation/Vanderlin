@@ -1,5 +1,8 @@
 /datum/quest/kill/outlaw
 	quest_type = QUEST_OUTLAW
+	quest_difficulty = QUEST_DIFFICULTY_HARD
+	minimum_payout = QUEST_REWARD_HARD_LOW
+	maximum_payout = QUEST_REWARD_HARD_HIGH
 	mob_types_to_spawn = list(
 		/mob/living/carbon/human/species/human/northern/deranged_knight
 	)
@@ -30,7 +33,7 @@
 			continue
 		var/obj/effect/quest_spawn/spawn_effect = new /obj/effect/quest_spawn(spawn_turf)
 		var/mob/living/goon = new /mob/living/carbon/human/species/human/northern/highwayman/dk_goon(spawn_effect)
-		goon.faction |= "quest"
+		goon.add_faction("quest")
 		spawn_effect.contained_atom = goon
 		spawn_effect.AddComponent(/datum/component/quest_object/mob_spawner, src)
 		ADD_TRAIT(goon, TRAIT_FRESHSPAWN, "[type]")

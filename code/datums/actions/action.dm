@@ -46,6 +46,9 @@
 	/// This is the icon state for any FOREGROUND overlay icons on the button (such as borders)
 	var/overlay_icon_state
 
+	/// Can this action be shared with our rider?
+	var/can_be_shared = FALSE
+
 /datum/action/New(Target)
 	link_to(Target)
 

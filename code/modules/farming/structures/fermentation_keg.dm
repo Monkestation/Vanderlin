@@ -342,7 +342,6 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(selecting_recipe)
 		return
 	selecting_recipe = TRUE
-	addtimer(VARSET_CALLBACK(src, selecting_recipe, FALSE), 5 SECONDS)
 
 	var/list/options = list()
 	for(var/datum/brewing_recipe/path as anything in subtypesof(/datum/brewing_recipe))
@@ -362,10 +361,12 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 			options[initial(recipe.name)] = recipe
 
 	if(options.len == 0)
+		selecting_recipe = FALSE
 		return
 
 	var/choice = input(user,"What brew do you want to make?", name) as null|anything in options
 
+	selecting_recipe = FALSE
 	if(!choice)
 		return
 	if(!Adjacent(user))
@@ -382,7 +383,6 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	selected_recipe = new choice_to_spawn
 	to_chat(user, span_notice("You set the recipe to [selected_recipe.name]."))
 	recipe_completions = 0
-	selecting_recipe = FALSE
 
 	//Second stage brewing gives no refunds! - This is intented design to help make it so folks dont quit halfway through and still get a rebate
 	ready_to_bottle = FALSE
@@ -417,6 +417,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	brewing = FALSE
 	tapped = FALSE
 	ready_to_bottle = FALSE
+	reagents.flags |= REFILLABLE | DRAINABLE
 	icon_state = initial(icon_state)
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -432,6 +433,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	brewing = TRUE
 	ready_to_bottle = FALSE
 	tapped = FALSE
+	reagents.flags &= ~(REFILLABLE | DRAINABLE)
 
 	// Store the user who started brewing for quality calculation
 	if(user)

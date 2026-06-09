@@ -14,7 +14,10 @@
 	grid_height = 96
 	item_weight = 143 GRAMS
 	var/obj/item/held_item = null
-	var/hott = 0
+
+/obj/item/weapon/tongs/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 
 /obj/item/weapon/tongs/Initialize(mapload)
 	. = ..()
@@ -22,51 +25,92 @@
 
 /obj/item/weapon/tongs/examine(mob/user)
 	. = ..()
-	if(hott)
-		. += "<span class='warning'>The tip is hot to the touch.</span>"
+	if(held_item)
+		. += span_info("[src] is holding \a [held_item.name].")
+		if(HAS_TRAIT(held_item, TRAIT_NEEDS_QUENCH))
+			. += span_warning("The tip is hot to the touch.")
+
+/obj/item/weapon/tongs/Destroy()
+	place_item_to_atom(drop_location())
+	. = ..()
 
 /obj/item/weapon/tongs/get_temperature()
-	if(hott)
+	if(held_item && HAS_TRAIT(held_item, TRAIT_NEEDS_QUENCH))
 		return 150+T0C
 	return ..()
 
 /obj/item/weapon/tongs/fire_act(added, maxstacks)
 	. = ..()
-	hott = world.time
-	update_appearance(UPDATE_ICON_STATE)
-	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 30 SECONDS)
+	heat_held_item(source = "fire_act", duration = 10 SECONDS)
 
 /obj/item/weapon/tongs/update_icon_state()
 	. = ..()
 	if(!held_item)
 		icon_state = initial(icon_state)
 	else
-		icon_state = "[initial(icon_state)]i[hott ? "1" : "0"]"
+		var/hot_status = HAS_TRAIT(held_item, TRAIT_NEEDS_QUENCH)
+		icon_state = "[initial(icon_state)]i[hot_status ? "1" : "0"]"
 
-/obj/item/weapon/tongs/proc/proxy_heat(incoming, max_heat)
+/**
+ * Attempts to heat up the held item. Returns TRUE if successful, FALSE otherwise
+ *
+ * Arguments:
+ * source - the source that TRAIT_NEEDS_QUENCH is applied from
+ * duration - the time that TRAIT_NEEDS_QUENCH is applied for
+ * incoming - Value of added temperature. Currently only used for crucibles.
+ * max_heat - Value of the maximum that can be heated up to. Currently only used for crucibles.
+ */
+/obj/item/weapon/tongs/proc/heat_held_item(source, duration, incoming, max_heat)
+	if(!held_item)
+		return FALSE
 	if(istype(held_item, /obj/item/storage/crucible))
 		var/obj/item/storage/crucible/crucible = held_item
 		crucible.crucible_temperature = min(crucible.crucible_temperature + incoming, max_heat)
+		return TRUE
+	if(duration)
+		held_item.add_quench_requirement(source, duration)
+		return TRUE
+	return FALSE
 
-/obj/item/weapon/tongs/proc/make_unhot(input)
-	if(hott == input)
-		hott = 0
+/obj/item/weapon/tongs/proc/set_held_item(obj/item/new_held_item)
+	if(!QDELETED(held_item))
+		UnregisterSignal(held_item, list(\
+			SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH), \
+			COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
+	held_item = new_held_item
+	if(held_item)
+		held_item.forceMove(src)
+		RegisterSignals(held_item, list(SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH)), PROC_REF(update_icon_state_upon_signal))
+		RegisterSignals(held_item, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_item_on_signal))
 	update_appearance(UPDATE_ICON_STATE)
 
-///Places the ingot on the atom, this can be either a turf or a table
+/obj/item/weapon/tongs/proc/unset_item_on_signal(datum/source)
+	SIGNAL_HANDLER
+	set_held_item(null)
+
+/obj/item/weapon/tongs/proc/update_icon_state_upon_signal(datum/source, trait)
+	SIGNAL_HANDLER
+	update_appearance(UPDATE_ICON_STATE)
+
+/// Places the ingot on the atom, this can be either a turf or a table
 /obj/item/weapon/tongs/proc/place_item_to_atom(atom/A, mob/user)
-	if(held_item?.tong_interaction(A, user))
+	if(!held_item)
 		return
-	if(held_item && (isturf(A) || istype(A, /obj/structure/table)))
+
+	if(user && held_item.tong_interaction(A, user))
+		return
+	if(isturf(A) || istype(A, /obj/structure/table))
 		held_item.forceMove(get_turf(A))
-		held_item = null
-		hott = 0
-		update_appearance(UPDATE_ICON_STATE)
-	else if(held_item)
-		to_chat(user, "<span class='warning'>Cannot place [held_item] here!</span>")
+	else
+		to_chat(user, span_warning("Cannot place [held_item] here!"))
 
 /obj/item/weapon/tongs/attack_self(mob/user, list/modifiers)
+	. = ..()
 	place_item_to_atom(get_turf(user), user)
+
+/obj/item/weapon/tongs/equipped(mob/user, slot, initial)
+	. = ..()
+	place_item_to_atom(get_turf(src), user)
 
 /obj/item/weapon/tongs/dropped(mob/user)
 	. = ..()
@@ -79,21 +123,26 @@
 	place_item_to_atom(get_turf(A), user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, list/modifiers)
-	if(held_item?.tong_interaction(A, user))
+// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
+/obj/item/weapon/tongs/pre_attack(obj/item/attacked_item, mob/living/user, list/modifiers)
+	if(held_item?.tong_interaction(attacked_item, user))
 		return TRUE
 
-	if(!istype(A))
+	if(!istype(attacked_item))
 		return ..()
 
-	if(A.tool_flags & TOOL_USAGE_TONGS || HAS_TRAIT(A, TRAIT_NEEDS_QUENCH))
-		if(!held_item)
-			user.visible_message("<span class='info'>[user] picks up [A] with [src].</span>")
-			held_item = A
-			A.forceMove(src)
-			update_appearance(UPDATE_ICON_STATE)
-			return TRUE
-	return ..()
+	if(held_item)
+		return ..()
+
+	if(istype(attacked_item, /obj/item/storage/crucible))
+		. = TRUE
+	else if(HAS_TRAIT(attacked_item, TRAIT_NEEDS_QUENCH))
+		. = TRUE
+	else if(attacked_item.melting_material || attacked_item.anvilrepair || attacked_item.smeltresult)
+		. = TRUE
+	if(.)
+		user.visible_message(span_info("[user] picks up [attacked_item] with [src]."))
+		set_held_item(attacked_item)
 
 /obj/item/weapon/tongs/getonmobprop(tag)
 	. = ..()
@@ -112,5 +161,6 @@
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST / 5
 
+/// Called in pre_attack of tongs, used for items held by tongs. Return TRUE to stop attack chain early.
 /atom/proc/tong_interaction(atom/target, mob/user)
 	return FALSE

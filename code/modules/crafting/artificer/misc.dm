@@ -231,7 +231,7 @@
 /datum/artificer_recipe/contraptions/advanced_ingot_mold
 	name = "Advanced Ingot Mold (+1 Ingot Mold) (+1 Metal Gear) (+1 Bucket)"
 	required_item = /obj/item/ingot/bronze
-	additional_items = list(/obj/item/mould/ingot = 1, /obj/item/gear/metal = 1, /obj/item/reagent_containers/glass/bucket/wooden = 1)
+	additional_items = list(/obj/item/mould/ingot = 1, /obj/item/gear/metal = 1, /obj/item/reagent_containers/glass/bucket = 1)
 	created_item = /obj/item/mould/ingot/advanced
 	hammers_per_item = 6
 	craftdiff = 3
@@ -493,6 +493,21 @@
 	name = "Undivided Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/divine
+
+/datum/artificer_recipe/psycross/matthios
+	name = "Matthios Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/matthios
+
+/datum/artificer_recipe/psycross/graggar
+	name = "Graggar Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/graggar
+
+/datum/artificer_recipe/psycross/baotha
+	name = "Baotha Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/baotha
 
 /datum/artificer_recipe/psycross/noc
 	name = "Noc Psycross"

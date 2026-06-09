@@ -575,10 +575,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		platform.horizontal_speed = 0.1
 		base_horizontal_speed = 0.1
 		horizontal_speed = 0.1
-		if(!platform.fake)
-			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			platform.RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
-			platform.alpha = 0
+
 		for(var/atom/movable/movable in platform.lift_load)
 			if(ismob(movable))
 				platform.RemoveItemFromLift(movable)
@@ -589,13 +586,14 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.density = FALSE
 			movable.alpha = 0
 
+		if(!platform.fake)
+			platform.hide_lift()
+
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 0.1
-			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			moving_platform.RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
-			moving_platform.alpha = 0
+			moving_platform.hide_lift()
 
 /datum/lift_master/tram/proc/show_tram()
 	ignore_pathing_obstacles = FALSE
@@ -604,22 +602,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		base_horizontal_speed = 4
 		horizontal_speed = 4
 		if(!platform.fake)
-			platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			platform.AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
-			platform.alpha = 255
-		for(var/atom/movable/movable in objects_pre_alpha)
-			movable.alpha = objects_pre_alpha[movable]
-			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
-			objects_pre_alpha -= movable
-			movable.density = initial(movable.density)
+			platform.show_lift()
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 4
-			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			moving_platform.AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
-			moving_platform.alpha = 255
+			moving_platform.show_lift()
+
+		for(var/atom/movable/movable in objects_pre_alpha)
+			movable.alpha = objects_pre_alpha[movable]
+			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
+			objects_pre_alpha -= movable
+			movable.density = initial(movable.density)
 
 /datum/lift_master/tram/proc/try_process_order(fence = FALSE)
 	var/total_coin_value = 0
@@ -802,6 +797,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	if(spent_amount)
 		record_round_statistic(STATS_TRADE_VALUE_IMPORTED, spent_amount)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_SPENT, spent_amount, 1)
+		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_IMPORT_VALUE, total_coin_value)
 
 /datum/lift_master/tram/proc/get_valid_turfs(obj/structure/industrial_lift/tram/platform)
 	var/list/valid_turfs = list()
@@ -956,6 +952,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		var/atom/location = spawn_coins(total_coin_value, platform) // try_process_order will eat these coins, so don't spawn a chest
 		record_round_statistic(STATS_TRADE_VALUE_EXPORTED, total_coin_value)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_GAINED, total_coin_value)
+		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_EXPORT_VALUE, total_coin_value)
 		if(length(sold_items) && !fence)
 			var/scrolls_to_spawn = CEILING(length(sold_items) / 6, 1)
 			for(var/i = 1 to scrolls_to_spawn)
