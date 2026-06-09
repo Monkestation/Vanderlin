@@ -5,6 +5,9 @@
 GLOBAL_LIST_EMPTY(attribute_menu_static_payload)
 GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
+/proc/attribute_menu_should_show_stat(attribute_type)
+	return attribute_type != STAT_FORTUNE
+
 /proc/ensure_attribute_menu_static_payload()
 	if(length(GLOB.attribute_menu_static_payload))
 		return GLOB.attribute_menu_static_payload
@@ -15,6 +18,8 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
 	var/list/stats_meta = list()
 	for(var/stat_type in GLOB.all_stats)
+		if(!attribute_menu_should_show_stat(stat_type))
+			continue
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
 		var/icon_class = sanitize_css_class_name(stat.icon_state)
 		stats_meta += list(list(
@@ -53,7 +58,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 				"difficulty" = skill.difficulty,
 				"kind" = "skill",
 			)
-			if(skill.governing_attribute)
+			if(skill.governing_attribute && attribute_menu_should_show_stat(skill.governing_attribute))
 				var/datum/attribute/governing = GET_ATTRIBUTE_DATUM(skill.governing_attribute)
 				if(governing)
 					skill_meta["governing_attribute"] = governing.name
@@ -63,6 +68,8 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 				for(var/default_type in skill.default_attributes)
 					var/datum/attribute/default_attr = GET_ATTRIBUTE_DATUM(default_type)
 					if(!default_attr)
+						continue
+					if(ispath(default_type, STAT) && !attribute_menu_should_show_stat(default_type))
 						continue
 					defaults_meta += list(list(
 						"name" = default_attr.name,
@@ -124,6 +131,8 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
 	var/list/stats_values = list()
 	for(var/stat_type in GLOB.all_stats)
+		if(!attribute_menu_should_show_stat(stat_type))
+			continue
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
 		stats_values[stat.name] = list(
 			"raw_value" = nulltozero(raw_attribute_list[stat_type]),

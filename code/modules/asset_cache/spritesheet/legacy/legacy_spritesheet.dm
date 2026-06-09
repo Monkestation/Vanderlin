@@ -435,9 +435,11 @@
 	load_immediately = TRUE
 
 /datum/asset/spritesheet/attribute_seals/create_spritesheets()
-	var/seal_icon = 'icons/ui_icons/attribute_seals.dmi'
-	for(var/seal_state in icon_states(seal_icon))
-		Insert(seal_state, icon(seal_icon, icon_state = seal_state))
+	var/seal_icon = 'icons/ui_icons/attributes.dmi'
+	for(var/seal_state in list("strength", "dexterity", "endurance", "intelligence", "willpower", "perception"))
+		var/icon/seal = icon(seal_icon, icon_state = seal_state)
+		seal.Scale(104, 104)
+		Insert(seal_state, seal)
 
 /datum/asset/spritesheet/proc/insert_attribute_icons(scale)
 	var/list/to_insert = list()

@@ -17,11 +17,10 @@ const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
 const SEAL_SPRITESHEET_CLASS = 'attribute_seals104x104';
 const SEAL_STATES = new Set([
   'strength',
-  'constitution',
+  'dexterity',
   'endurance',
-  'speed',
   'intelligence',
-  'fortune',
+  'willpower',
   'perception',
 ]);
 
@@ -48,7 +47,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     title: 'Character Seals',
-    body: 'The left page bears seven Core Attribute seals arranged around the figure: Strength, Perception, Intelligence, Speed, Constitution, Endurance, and Fortune. These foundations govern almost everything you do.',
+    body: 'The left page bears six Core Attribute seals arranged around the figure: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
     target: 'seals-panel',
     popupAnchor: 'right',
   },
@@ -472,7 +471,8 @@ const AttributeSealNode = memo((props: {
     selected ? ' is-selected' : ''
   }`;
 
-  const hasMedallion = SEAL_STATES.has(anchor);
+  const sealState = stat.icon;
+  const hasMedallion = !!sealState && SEAL_STATES.has(sealState);
 
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
@@ -483,7 +483,7 @@ const AttributeSealNode = memo((props: {
       >
         {hasMedallion ? (
           <span className="AttributeMenu__sealNodeMedallion">
-            <span className={`${SEAL_SPRITESHEET_CLASS} ${anchor}`} />
+            <span className={`${SEAL_SPRITESHEET_CLASS} ${sealState}`} />
           </span>
         ) : (
           <span className="AttributeMenu__sealNodeOrb" />

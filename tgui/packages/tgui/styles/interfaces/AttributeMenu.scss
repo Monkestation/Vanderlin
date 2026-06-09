@@ -349,7 +349,6 @@
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--speed,
 .AttributeMenu__sealNode--endurance,
-.AttributeMenu__sealNode--fortune,
 .AttributeMenu__sealNode--fallback3,
 .AttributeMenu__sealNode--fallback4,
 .AttributeMenu__sealNode--fallback5,
@@ -359,20 +358,20 @@
 
 .AttributeMenu__sealNode--strength,
 .AttributeMenu__sealNode--fallback0 {
-  top: 15%;
+  top: 16%;
   left: 50%;
 }
 
 .AttributeMenu__sealNode--perception,
 .AttributeMenu__sealNode--fallback1 {
-  top: 29%;
-  left: 23%;
+  top: 31%;
+  left: 22%;
 }
 
 .AttributeMenu__sealNode--intelligence,
 .AttributeMenu__sealNode--fallback2 {
-  top: 29%;
-  left: 77%;
+  top: 31%;
+  left: 78%;
 }
 
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeName,
@@ -414,37 +413,27 @@
 
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--fallback3 {
-  top: 56%;
-  left: 16%;
+  top: 64%;
+  left: 22%;
 }
 
 .AttributeMenu__sealNode--speed,
 .AttributeMenu__sealNode--fallback4 {
-  top: 56%;
-  left: 84%;
+  top: 64%;
+  left: 78%;
 }
 
 .AttributeMenu__sealNode--endurance,
 .AttributeMenu__sealNode--fallback5 {
   top: 80%;
-  left: 32%;
+  left: 50%;
 }
 
-.AttributeMenu__sealNode--fortune,
 .AttributeMenu__sealNode--fallback6 {
   top: 80%;
   left: 68%;
 }
 
-.AttributeMenu__sealNode--endurance .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--endurance .AttributeMenu__sealNodeValue,
-.AttributeMenu__sealNode--fallback5 .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--fallback5 .AttributeMenu__sealNodeValue {
-  transform: translateX(-14px);
-}
-
-.AttributeMenu__sealNode--fortune .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--fortune .AttributeMenu__sealNodeValue,
 .AttributeMenu__sealNode--fallback6 .AttributeMenu__sealNodeName,
 .AttributeMenu__sealNode--fallback6 .AttributeMenu__sealNodeValue {
   transform: translateX(14px);
