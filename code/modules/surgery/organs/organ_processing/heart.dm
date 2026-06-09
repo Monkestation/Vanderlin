@@ -6,8 +6,8 @@
 
 /datum/organ_process/heart/handle_process(mob/living/carbon/owner, delta_time, times_fired)
 	if(owner.needs_heart())
-		handle_pulse(owner, delta_time, times_fired)
 		handle_heart_failure(owner, delta_time, times_fired)
+		handle_pulse(owner, delta_time, times_fired)
 		if(owner.pulse)
 			handle_heartbeat(owner, delta_time, times_fired)
 	handle_blood(owner, delta_time, times_fired)
@@ -197,20 +197,22 @@
 		owner.remove_stress(/datum/stress_event/bleeding)
 
 /datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, delta_time, times_fired)
-	var/cardiac_arrest = owner.undergoing_cardiac_arrest()
-	var/nervous_failure = owner.undergoing_nervous_system_failure()
-	if((owner.heartbeat_sound != BEAT_SLOW) && (cardiac_arrest || nervous_failure))
+	// Beyond deals with sound effects, so nothing needs to be done if no client
+	if(isnull(owner.client))
+		return
+
+	if(HAS_TRAIT(owner, TRAIT_CRITICAL_CONDITION) && owner.heartbeat_sound != BEAT_SLOW)
 		owner.heartbeat_sound = BEAT_SLOW
 		SEND_SOUND(owner, slowbeat)
-		if(cardiac_arrest || nervous_failure)
-			to_chat(owner, span_notice("I feel the grim reaper's cold gaze..."))
-	else if((owner.heartbeat_sound == BEAT_SLOW) && !cardiac_arrest && !nervous_failure)
-		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
-		owner.heartbeat_sound = BEAT_NONE
-	else if((owner.heartbeat_sound != BEAT_FAST) && (owner.has_status_effect(/datum/status_effect/jitter)) && !cardiac_arrest && !nervous_failure)
-		SEND_SOUND(owner, fastbeat)
-		owner.heartbeat_sound = BEAT_FAST
-	else if((owner.heartbeat_sound == BEAT_FAST) && (owner.has_status_effect(/datum/status_effect/jitter)))
+		to_chat(owner, span_notice("I feel the grim reaper's cold gaze..."))
+
+	if(owner.heartbeat_sound == BEAT_SLOW && !HAS_TRAIT(owner, TRAIT_CRITICAL_CONDITION))
 		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
 		owner.heartbeat_sound = BEAT_NONE
 
+	if(owner.has_status_effect(/datum/status_effect/jitter) && !HAS_TRAIT(owner, TRAIT_CRITICAL_CONDITION) && (!owner.heartbeat_sound || owner.heartbeat_sound == BEAT_SLOW))
+		SEND_SOUND(owner, fastbeat)
+		owner.heartbeat_sound = BEAT_FAST
+	else if(owner.heartbeat_sound == BEAT_FAST)
+		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
+		owner.heartbeat_sound = BEAT_NONE
