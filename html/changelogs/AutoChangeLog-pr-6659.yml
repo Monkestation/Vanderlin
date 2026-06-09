@@ -1,4 +1,0 @@
-author: "PatapoIIIa"
-delete-after: True
-changes:
-  - bugfix: "Fixed an unnecessary delay when opening the first TGUI window after joining."

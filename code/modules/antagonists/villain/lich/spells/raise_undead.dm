@@ -107,7 +107,7 @@
 	grant_undead_eyes()
 
 	for(var/obj/item/organ/organ as anything in internal_organs)
-		organ.setOrganDamage(0)
+		organ.regenerate_organ()
 
 	if(length(quirks))
 		clear_quirks()
