@@ -37,6 +37,7 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep_son
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/innkeep_son
 	name = JOB_INNKEEP_SON

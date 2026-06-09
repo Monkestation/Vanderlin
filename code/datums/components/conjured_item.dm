@@ -36,10 +36,10 @@
 	if(current_user)
 		src.current_user = WEAKREF(current_user)
 
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(clean_up))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(clean_up))
 
 	var/obj/item/I = parent
 	if(outline_color)

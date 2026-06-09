@@ -59,20 +59,20 @@
 /datum/action/cooldown/spell/heat_metal/proc/handle_tongs(obj/item/weapon/tongs/T) //Stole the code from smithing.
 	if(!T.held_item)
 		return
-	var/tyme = world.time + 20 SECONDS
-	T.hott = tyme
-	addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 30 SECONDS)
-	T.proxy_heat(150)
-	T.update_appearance(UPDATE_ICON_STATE)
+	// var/tyme = world.time + 20 SECONDS
+	// T.hott = tyme
+	// addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 30 SECONDS)
+	// T.proxy_heat(150)
+	// T.update_appearance(UPDATE_ICON_STATE)
 	T.visible_message("<font color='yellow'>After [owner]'s incantation, [T.held_item] inside [T] starts glowing from divine heat.</font>")
 
 /datum/action/cooldown/spell/heat_metal/proc/handle_anvil(obj/machinery/anvil/A) //Stole the code from smithing.
-	if(A.hingot)
-		A.hott = world.time
-		START_PROCESSING(SSmachines, A)
-	A.cool_time = 30 SECONDS
-	addtimer(VARSET_CALLBACK(A, cool_time, 10 SECONDS), 30 SECONDS)
-	A.update_appearance(UPDATE_ICON_STATE)
+	// if(A.hingot)
+	// 	A.hott = world.time
+	// 	START_PROCESSING(SSmachines, A)
+	// A.cool_time = 30 SECONDS
+	// addtimer(VARSET_CALLBACK(A, cool_time, 10 SECONDS), 30 SECONDS)
+	// A.update_appearance(UPDATE_ICON_STATE)
 	A.visible_message("<font color='yellow'>After [owner]'s incantation, [A] begins to glow from divine heat.</font>")
 
 /datum/action/cooldown/spell/heat_metal/proc/handle_living_entity(mob/target)
@@ -92,7 +92,9 @@
 		return
 
 	if(iscarbon(target))
-		if(target.is_holding(targeteditem))
+		if(target == owner)
+			handle_item_smelting(targeteditem)
+		else if(target.is_holding(targeteditem))
 			handle_heating_in_hand(target, targeteditem)
 		else
 			handle_heating_equipped(target, targeteditem)
@@ -156,6 +158,9 @@
 
 /datum/action/cooldown/spell/heat_metal/proc/get_targeted_item(mob/target)
 	var/target_item
+	if(target == owner)
+		target_item = owner.get_active_held_item()
+		return target_item
 	switch(owner.zone_selected)
 		if(BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_R_INHAND)
 			target_item = target.held_items[2]

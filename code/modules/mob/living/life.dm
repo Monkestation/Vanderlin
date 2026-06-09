@@ -32,7 +32,6 @@
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
 		//Breathing, if applicable
 		handle_temperature()
-		handle_breathing(times_fired)
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 			handle_wounds()
 			handle_embedded_objects()
@@ -50,7 +49,7 @@
 		if(!stat && HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
 			handle_wounds()
 			//passively heal wounds, but not if you're skullcracked OR DEAD.
-			if(blood_volume > BLOOD_VOLUME_SURVIVE)
+			if(!CAN_HAVE_BLOOD(src) || get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in get_wounds())
 					wound.heal_wound(wound.passive_healing * 0.25)
 
@@ -70,12 +69,12 @@
 
 	handle_typing_indicator()
 
-	if(istype(loc, /turf/open/water))
-		handle_inwater(loc)
-
 	if(!client && (world.time - last_island_check) > 20 SECONDS)
 		last_island_check = world.time
 		update_island_cache()
+
+	if (living_flags & BLOOD_UPDATE_QUEUED)
+		update_blood_effects()
 
 	if(stat != DEAD)
 		return 1
@@ -122,12 +121,9 @@
 /mob/living/proc/handle_temperature()
 	return
 
-/mob/living/proc/handle_breathing(times_fired)
-	return
-
 /mob/living/proc/handle_random_events()
 	//random painstun
-	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN) || !can_feel_pain())
 		return
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return

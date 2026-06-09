@@ -155,6 +155,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["chat_toggles"]		>> chat_toggles
 	S["toggles"]			>> toggles
 	S["toggles_maptext"]	>> toggles_maptext
+	S["toggles_gameplay"] >> toggles_gameplay
 	S["ghost_form"]			>> ghost_form
 	S["ghost_orbit"]		>> ghost_orbit
 	S["ghost_accs"]			>> ghost_accs
@@ -174,6 +175,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["tip_delay"]			>> tip_delay
 	S["ui_scale"]			>> ui_scale
 	S["multi_char_ready"] >> multi_char_ready
+	S["owned_loadout_items"] >> owned_loadout_items
+	S["next_special_trait"] >> next_special_trait
 
 	S["multi_ready_slots"] >> multi_ready_slots
 	if(!islist(multi_ready_slots))
@@ -182,6 +185,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
 
+	if(!islist(owned_loadout_items))
+		owned_loadout_items = list()
+
 	if(!char_theme)
 		char_theme = "grimshart"
 	//try to fix any outdated data if necessary
@@ -189,8 +195,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		update_preferences(needs_update, S)		//needs_update = savefile_version if we need an update (positive integer)
 
 	//Sanitize
-	asaycolor = sanitize_ooccolor(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
-	ooccolor = sanitize_ooccolor(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
+	asaycolor = sanitize_color(sanitize_hexcolor(asaycolor, default = initial(asaycolor)))
+	ooccolor = sanitize_color(sanitize_hexcolor(ooccolor, default = initial(ooccolor)))
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style = sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
 	hotkeys = sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
@@ -205,6 +211,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT, initial(toggles))
 	chat_toggles = sanitize_integer(chat_toggles, 0, SHORT_REAL_LIMIT, initial(chat_toggles))
 	toggles_maptext = sanitize_integer(toggles_maptext, 0, SHORT_REAL_LIMIT, initial(toggles_maptext))
+	toggles_gameplay = sanitize_integer(toggles_gameplay, 0, SHORT_REAL_LIMIT, initial(toggles_gameplay))
 	clientfps = sanitize_integer(clientfps, 0, 1000, 0)
 	parallax = sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, null)
 	ambientocclusion = sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
@@ -219,6 +226,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	key_bindings = sanitize_islist(key_bindings, list())
 
 	check_new_keybindings()
+
+	load_tickets(S)
 
 	//ROGUETOWN
 	parallax = PARALLAX_INSANE
@@ -264,6 +273,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["toggles"], toggles)
 	WRITE_FILE(S["chat_toggles"], chat_toggles)
 	WRITE_FILE(S["toggles_maptext"], toggles_maptext)
+	WRITE_FILE(S["toggles_gameplay"], toggles_gameplay)
 	WRITE_FILE(S["ghost_form"], ghost_form)
 	WRITE_FILE(S["ghost_orbit"], ghost_orbit)
 	WRITE_FILE(S["ghost_accs"], ghost_accs)
@@ -286,6 +296,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["multi_char_ready"], multi_char_ready)
 	WRITE_FILE(S["multi_ready_slots"], multi_ready_slots)
+	WRITE_FILE(S["owned_loadout_items"], owned_loadout_items)
+	WRITE_FILE(S["next_special_trait"], next_special_trait)
+	save_tickets(S)
 	return TRUE
 
 /datum/preferences/proc/_load_species(S)
@@ -293,38 +306,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!species_type)
 		species_type = /datum/species/human/northern
 	pref_species = new species_type()
-
-/datum/preferences/proc/_load_loadouts(S)
-	for(var/i in 1 to 3)
-		S["loadout[i]"]	>> vars["loadout[i]"]
-	validate_loadouts()
-
-/datum/preferences/proc/validate_loadouts()
-	if(!parent.patreon.has_access(ACCESS_ASSISTANT_RANK) && !parent.twitch.has_access(ACCESS_TWITCH_SUB_TIER_1))
-		loadout1 = null
-		loadout2 = null
-		loadout3 = null
-		return FALSE
-
-	var/pass = TRUE
-	var/datum/loadout_item/testing_item
-	if(loadout1)
-		testing_item = GLOB.loadout_items[loadout1]
-		if(!testing_item.is_unlocked_for(parent))
-			loadout1 = null
-			pass = FALSE
-	if(loadout2)
-		testing_item = GLOB.loadout_items[loadout2]
-		if(!testing_item.is_unlocked_for(parent))
-			loadout2 = null
-			pass = FALSE
-	if(loadout3)
-		testing_item = GLOB.loadout_items[loadout3]
-		if(!testing_item.is_unlocked_for(parent))
-			loadout3 = null
-			pass = FALSE
-
-	return pass
 
 /datum/preferences/proc/_load_culinary_preferences(S)
 	var/list/loaded_culinary_preferences
@@ -353,6 +334,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["gender_choice"] >> gender_choice
 	S["setspouse"] >> setspouse
 	S["selected_accent"] >> selected_accent
+
+	voice_color = sanitize_hexcolor(voice_color, include_crunch = FALSE)
 
 	// We load our list, but override everything to FALSE to stop a "tainted" save from making it random again.
 	randomise[RANDOM_BODY] = FALSE
@@ -385,7 +368,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Species
 	_load_species(S)
 
-	_load_loadouts(S)
+	load_triumph_shop_character_data(S)
 
 	_load_culinary_preferences(S)
 
@@ -452,7 +435,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	randomise = SANITIZE_LIST(randomise)
 
 	age = sanitize_inlist(age, pref_species.possible_ages)
-	eye_color = sanitize_hexcolor(eye_color, 3, 0)
+	eye_color = sanitize_hexcolor(eye_color, 3, include_crunch = FALSE)
 	voice_color = voice_color
 	pronouns = sanitize_text(pronouns, THEY_THEM)
 	voice_type = sanitize_inlist(voice_type, VOICE_TYPES_LIST, VOICE_TYPE_MASC)
@@ -526,6 +509,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["gender_choice"], gender_choice)
 	WRITE_FILE(S["setspouse"], setspouse)
 	WRITE_FILE(S["selected_accent"], selected_accent)
+
+	WRITE_FILE(S["equipped_loadout"], equipped_loadout)
+	WRITE_FILE(S["equipped_loadout_colors"], equipped_loadout_colors)
+	WRITE_FILE(S["single_round_loadout_colors"], single_round_loadout_colors)
+	WRITE_FILE(S["single_round_loadout"], single_round_loadout)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)

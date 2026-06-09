@@ -602,7 +602,7 @@
 	node_y = -500
 	is_passive = TRUE
 
-/datum/spell_node/gib/on_node_buy(mob/user)
+/datum/spell_node/gib/on_node_buy(mob/living/user)
 	. = ..()
 	user.gib()
 	for(var/mob/target in GLOB.player_list)

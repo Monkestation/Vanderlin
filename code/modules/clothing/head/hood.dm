@@ -181,3 +181,51 @@
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT
 	item_weight = 145 GRAMS
+
+/obj/item/clothing/head/roguehood/leather/advanced
+	name = "hardened leather hood"
+	desc = "A simple if foreboding hood made out of expertly treated leather. Worn more by those venturing out into the wilds, rather than street thugs and honest yeoman."
+	max_integrity = INTEGRITY_STRONG
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 70, "slash" = 60, "stab" = 35, "piercing" = 25, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/head/roguehood/leather/masterwork
+	name = "masterwork leather hood"
+	desc = "A simple if foreboding hood made out of masterfully treated and tanned leather. Worn by veteran hunters and adventurers venturing out into the wilds, this hood will keep out most anything, besides death, and fire."
+	max_integrity = INTEGRITY_STRONG + 100
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 45, "piercing" = 15, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+/obj/item/clothing/head/roguehood/studded
+	name = "studded hood"
+	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however."
+	icon_state = "studhood"
+	item_state = "studhood"
+	body_parts_covered = NECK | HEAD | HAIR
+	slot_flags = ITEM_SLOT_HEAD
+	flags_inv = HIDEEARS|HIDEHAIR
+	blocksound = SOFTHIT
+	armor = ARMOR_LEATHER
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	block2add = null
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+
+	color = CLOTHING_BROWN
+
+/obj/item/clothing/head/roguehood/studded/retinue //For skirmisher
+	name = "guard studded hood"
+	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however. This one bears the heraldry of the local lord."
+	detail_tag = "_detail"
+	color = CLOTHING_AZURE
+	detail_color = CLOTHING_WHITE

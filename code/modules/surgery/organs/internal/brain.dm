@@ -20,19 +20,26 @@
 	organ_flags = ORGAN_VITAL
 	attack_verb = list("attacked", "slapped", "whacked")
 
+	pain_multiplier = 0 // you can't feel your brain being fried
+
+	///The brain's organ variables are significantly more different than the other organs, with half the decay rate for balance reasons, and twice the maxHealth
+	decay_factor = STANDARD_ORGAN_DECAY * 0.5
+
 	maxHealth = BRAIN_DAMAGE_DEATH
-	healing_factor = BRAIN_DAMAGE_DEATH/200
+	healing_factor = 0.01 //1%
 	low_threshold = BRAIN_DAMAGE_DEATH * 0.25
+	medium_threshold = BRAIN_DAMAGE_DEATH * 0.5
 	high_threshold = BRAIN_DAMAGE_DEATH * 0.75
 
 	// the volume shouldn't worry you, the chest is full of organs - also getting shot in the heart sucks
 	organ_volume = 0.5
 	max_blood_storage = 100
 	current_blood = 100
-	blood_req = 5
-	oxygen_req = 5
-	nutriment_req = 5
-	hydration_req = 2.5
+	blood_req = 2.5
+	oxygen_req = 6
+	nutriment_req = 3
+	hydration_req = 1.5
+	self_healing_effect = CE_BRAIN_REGEN
 
 	/// This is stuff
 	var/damage_threshold_value = BRAIN_DAMAGE_DEATH/10
@@ -65,9 +72,12 @@
 
 	//Update the body's icon so it doesnt appear debrained anymore
 	C.update_body()
+	if(damage >= medium_threshold)
+		C.add_stress(/datum/stress_event/brain_damage)
 
 /obj/item/organ/brain/Remove(mob/living/carbon/C, special = 0, no_id_transfer = FALSE)
 	. = ..()
+	update_brain_color(animate = FALSE) // once it's out in the world we need to make sure it's the right color
 	for(var/datum/brain_trauma/BT as anything in traumas)
 		BT.on_lose(TRUE)
 		BT.owner = null
@@ -75,7 +85,7 @@
 	if((!gc_destroyed || (owner && !owner.gc_destroyed)) && !no_id_transfer)
 		transfer_identity(C)
 	C.update_body()
-
+	C.remove_stress(/datum/stress_event/brain_damage)
 
 /obj/item/organ/brain/handle_blood(delta_time, times_fired)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
@@ -83,19 +93,24 @@
 	var/in_bleedout = owner.in_bleedout()
 	if(arterial_efficiency && !is_failing())
 		// Arteries get an extra flat 5 blood regen
-		current_blood = min(current_blood + 5 * (0.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+		current_blood = min(current_blood + (2.5 * delta_time * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY)), max_blood_storage)
 		return
 	if(!blood_req)
 		return
-	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_SAFE))
-		current_blood = min(current_blood + (blood_req * (0.5 * delta_time)), max_blood_storage)
+	// Very low blood, danger!!
+	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_BAD))
+		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
 		return
+
 	if(in_bleedout)
-		current_blood = max(current_blood - (blood_req * (0.5 * delta_time)), 0)
+		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
+		if(DT_PROB(5, delta_time))
+			owner.adjust_eye_blur_up_to(4, 4)
 	else
-		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * (0.5 * delta_time)), 0)
+		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
+
 	// When all blood is lost, take blood from blood vessels
-	if(!current_blood)
+	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
 		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
@@ -105,7 +120,7 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * 0.5 * delta_time), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * delta_time * 2), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		//Don't apply damage, this is handled by the organ process datum, if necessary
 
@@ -146,9 +161,6 @@
 
 /obj/item/organ/brain/handle_healing_item(obj/item/tool, mob/living/user, params)
 	var/obj/item/natural/stack = tool
-	if(organ_flags & (ORGAN_DESTROYED|ORGAN_DEAD))
-		to_chat(user, span_warning("\The [src] is damaged beyond the point of no return."))
-		return
 	if(!damage && !length(traumas))
 		to_chat(user, span_notice("\The [src] is in pristine quality already."))
 		return
@@ -160,7 +172,7 @@
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
 
 	if(owner)
-		//owner.custom_pain("OH GOD! There are needles inside my [src]!", 30, FALSE, owner.get_bodypart(current_zone))
+		owner.custom_pain("OH GOD! There are needles inside my [src]!", 30, FALSE, owner.get_bodypart(current_zone))
 		if(!do_after(user, time, owner))
 			to_chat(user, span_warning("I must stand still!"))
 			return
@@ -182,7 +194,7 @@
 	user.visible_message(span_notice("<b>[user]</b> starts lobotomizing \the [src]..."), \
 					span_notice("I start lobotomizing \the [src]..."), \
 					vision_distance = COMBAT_MESSAGE_RANGE)
-	//owner.custom_pain("OH GOD! My [src] is being SLASHED IN TWAIN!", 30, FALSE, owner.get_bodypart(current_zone))
+	owner.custom_pain("OH GOD! My [src] is being SLASHED IN TWAIN!", 30, FALSE, owner.get_bodypart(current_zone))
 
 	var/time = 10 SECONDS
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
@@ -224,7 +236,7 @@
 	brainmob.name = L.real_name
 	brainmob.real_name = L.real_name
 	brainmob.timeofhostdeath = L.timeofdeath
-	brainmob.suiciding = suicided
+	brainmob.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(L.has_dna())
 		var/mob/living/carbon/C = L
 		if(!brainmob.stored_dna)
@@ -306,80 +318,107 @@
 /obj/item/organ/brain/proc/get_current_damage_threshold()
 	return FLOOR(damage / damage_threshold_value, 1)
 
+/obj/item/organ/brain/applyOrganDamage(amount, maximum, silent)
+	. = ..()
+	var/delta_dam = . //for the sake of clarity
+
+	if(delta_dam < 0 && damage >= BRAIN_DAMAGE_MILD && (-delta_dam >= TRAUMA_ROLL_THRESHOLD))
+		roll_for_brain_trauma(-delta_dam) // parent call returns negative numbers if take damage and positive if we heal
+
+	if(isnull(owner)) // no need to color it if it's in someone's noggin
+		update_brain_color()
+		return
+
+	if(-delta_dam >= 10)
+		var/damage_side_effect = CEILING(-delta_dam / 2, 1)
+		if(damage_side_effect >= 1)
+			//owner.flash_pain(damage_side_effect*4)
+			owner.adjust_eye_blur(damage_side_effect)
+			owner.adjust_confusion(damage_side_effect)
+			switch(rand(1,3))
+				if(1)
+					owner.stuttering += damage_side_effect
+				if(2)
+					owner.slurring += damage_side_effect
+				if(3)
+					owner.cultslurring += damage_side_effect
+			owner.CombatKnockdown(damage_side_effect*2, damage_side_effect, (damage_side_effect >= 5 ? damage_side_effect : null), damage_side_effect >= 5)
+
+/// Rolls a random chance to gain a brain trauma based on damage taken and current damage level
+/obj/item/organ/brain/proc/roll_for_brain_trauma(delta_dam)
+	var/is_boosted = FALSE
+	var/intelligence_modifier = (owner ? -(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)-ATTRIBUTE_MIDDLING) : 0)
+	if(damage >= BRAIN_DAMAGE_SEVERE)
+		// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
+		if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
+			if(prob(20 + (is_boosted * 30) - (intelligence_modifier * 2)))
+				gain_trauma_type(BRAIN_TRAUMA_SPECIAL, is_boosted ? TRAUMA_RESILIENCE_SURGERY : null, natural_gain = TRUE)
+			else
+				gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
+	else
+		// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
+		if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
+			gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
+
+#define BRAIN_DAMAGE_FILTER "brain_damage_color_filter"
+
+/// Updates the brain's color based on damage level - the more damaged, the darker and grayer it gets
+/obj/item/organ/brain/proc/update_brain_color(animate = TRUE)
+	if(damage <= 0)
+		if(get_filter(BRAIN_DAMAGE_FILTER))
+			if(animate)
+				transition_filter(BRAIN_DAMAGE_FILTER, color_matrix_filter("#ffffff"), time = 1 SECONDS)
+				addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, remove_filter), "brain_damage_color_filter"), 1.2 SECONDS, TIMER_UNIQUE)
+			else
+				remove_filter(BRAIN_DAMAGE_FILTER)
+		return
+
+	var/gradient = BlendRGB("#ffffff", "#7f7f7f", round(damage / maxHealth, 0.01))
+	if(animate)
+		if(!get_filter(BRAIN_DAMAGE_FILTER))
+			add_filter(BRAIN_DAMAGE_FILTER, 1, color_matrix_filter("#ffffff"))
+		transition_filter(BRAIN_DAMAGE_FILTER, color_matrix_filter(gradient), time = 1 SECONDS)
+	else if(get_filter(BRAIN_DAMAGE_FILTER))
+		modify_filter(BRAIN_DAMAGE_FILTER, color_matrix_filter(gradient))
+	else
+		add_filter(BRAIN_DAMAGE_FILTER, 1, color_matrix_filter(gradient))
+
+#undef BRAIN_DAMAGE_FILTER
+
+/obj/item/organ/brain/on_medium_damage_received()
+	. = ..()
+	owner?.add_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/on_medium_damage_healed()
+	. = ..()
+	owner?.remove_stress(/datum/stress_event/brain_damage)
 
 /obj/item/organ/brain/check_damage_thresholds(mob/M)
 	. = ..()
-	// if we're not more injured than before, return without gambling for a trauma
+	if(!owner)
+		return
+
+	// If we're not more injured than before, return without gambling for a trauma
 	if(damage <= prev_damage)
 		return
-	var/damage_delta = damage - prev_damage
-	// Safeguard to prevent traumas from low damage
-	if((damage_delta >= TRAUMA_ROLL_THRESHOLD) && (damage >= BRAIN_DAMAGE_MILD))
-		var/is_boosted = FALSE
-		var/intelligence_modifier = (owner ? -(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)-ATTRIBUTE_MIDDLING) : 0)
-		if(damage >= BRAIN_DAMAGE_SEVERE)
-			// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
-			if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
-				if(prob(20 + (is_boosted * 30) - (intelligence_modifier * 2)))
-					gain_trauma_type(BRAIN_TRAUMA_SPECIAL, is_boosted ? TRAUMA_RESILIENCE_SURGERY : null, natural_gain = TRUE)
-				else
-					gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
-		else
-			// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
-			if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
-				gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
-	if(owner)
-		if(damage >= BRAIN_DAMAGE_DEATH && prev_damage < BRAIN_DAMAGE_DEATH && (organ_flags & ORGAN_VITAL))
-			owner.death()
-			return
-		var/brain_message
-		if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
-			brain_message = span_warning("I feel lightheaded.")
-		else if(prev_damage < BRAIN_DAMAGE_SEVERE && damage >= BRAIN_DAMAGE_SEVERE)
-			brain_message = span_warning("I feel less in control of my thoughts.")
-		else if(prev_damage < (BRAIN_DAMAGE_DEATH - 20) && damage >= (BRAIN_DAMAGE_DEATH - 20) && damage < BRAIN_DAMAGE_DEATH)
-			brain_message = span_warning("I can feel my mind flickering on and off...")
-		if(.)
-			. += "\n[brain_message]"
-		else
-			return brain_message
 
-/obj/item/organ/brain/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
-	if(!amount) //Micro-optimization.
+	if(damage >= BRAIN_DAMAGE_DEATH && prev_damage < BRAIN_DAMAGE_DEATH && (organ_flags & ORGAN_VITAL))
+		owner.death()
 		return
-	if(maximum < damage)
-		damage = maximum
-	if(damage < 0 && owner?.get_chem_effect(CE_BRAIN_REGEN))
-		damage *= 2
-	prev_damage = damage
-	damage = clamp(damage + amount, 0, maximum)
-	var/mess = check_damage_thresholds(owner)
-	if(owner)
-		if(mess && !silent)
-			to_chat(owner, mess)
-		if(organ_flags & ORGAN_LIMB_SUPPORTER)
-			var/obj/item/bodypart/affected = owner.get_bodypart(current_zone)
-			affected?.update_limb_efficiency()
-		if(amount >= 10)
-			var/damage_side_effect = CEILING(amount/2, 1)
-			if(damage_side_effect >= 1)
-				//owner.flash_pain(damage_side_effect*4)
-				owner.adjust_eye_blur(damage_side_effect)
-				owner.adjust_confusion(damage_side_effect)
-				switch(rand(1,3))
-					if(1)
-						owner.stuttering += damage_side_effect
-					if(2)
-						owner.slurring += damage_side_effect
-					if(3)
-						owner.cultslurring += damage_side_effect
-				owner.CombatKnockdown(damage_side_effect*2, damage_side_effect, (damage_side_effect >= 5 ? damage_side_effect : null), damage_side_effect >= 5)
-		if(!is_failing())
-			REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, CRIT_HEALTH_TRAIT)
-	if(damage >= 60)
-		owner.add_stress(/datum/stress_event/brain_damage)
+
+	// Conscious or soft-crit
+	var/brain_message
+	if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
+		brain_message = span_warning("I feel lightheaded.")
+	else if(prev_damage < BRAIN_DAMAGE_SEVERE && damage >= BRAIN_DAMAGE_SEVERE)
+		brain_message = span_warning("I feel less in control of my thoughts.")
+	else if(prev_damage < (BRAIN_DAMAGE_DEATH - 20) && damage >= (BRAIN_DAMAGE_DEATH - 20) && damage < BRAIN_DAMAGE_DEATH)
+		brain_message = span_warning("I can feel my mind flickering on and off...")
+
+	if(.)
+		. += "\n[brain_message]"
 	else
-		owner.remove_stress(/datum/stress_event/brain_damage)
+		return brain_message
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
@@ -397,16 +436,17 @@
 /obj/item/organ/brain/proc/can_gain_trauma(datum/brain_trauma/trauma, resilience, natural_gain = FALSE)
 	if(!ispath(trauma))
 		trauma = trauma.type
+
 	if(!initial(trauma.can_gain))
 		return FALSE
+
 	if(!resilience)
 		resilience = initial(trauma.resilience)
 
 	var/resilience_tier_count = 0
-	for(var/X in traumas)
-		if(istype(X, trauma))
+	for(var/datum/brain_trauma/existing_trauma as anything in traumas)
+		if(istype(existing_trauma, trauma))
 			return FALSE
-		var/datum/brain_trauma/existing_trauma = X
 		if(resilience == existing_trauma.resilience)
 			resilience_tier_count++
 
@@ -427,6 +467,7 @@
 
 	if(natural_gain && resilience_tier_count >= max_traumas)
 		return FALSE
+
 	return TRUE
 
 /obj/item/organ/brain/proc/gain_trauma(datum/brain_trauma/trauma, resilience, ...)
@@ -449,7 +490,7 @@
 		actual_trauma = trauma
 
 	if(actual_trauma.brain) //we don't accept used traumas here
-		WARNING("gain_trauma was given an already active trauma.")
+		stack_trace("gain_trauma was given an already active trauma.")
 		return
 
 	traumas += actual_trauma
@@ -462,23 +503,38 @@
 	. = actual_trauma
 	SSblackbox.record_feedback("tally", "traumas", 1, actual_trauma.type)
 
-/obj/item/organ/brain/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience, natural_gain = FALSE)
+/**
+ * Completely randomly give a brain trauma from the selected type subtypes these should be defines
+ * from [_DEFINES/mob.dm]
+ *
+ * Arguments
+ * * brain_trauma_type - Type to poll for subtypes
+ * * resilience - How hard the trauma is to remove
+ * * natural_gain - Counts towards trauma limit
+ * * force_split_personality - Ignore split personality preference, though you should just use gain_trauma if you want to give it
+ */
+/obj/item/organ/brain/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience = NONE, natural_gain = FALSE, force_split_personality = FALSE)
 	var/list/datum/brain_trauma/possible_traumas = list()
-	for(var/trauma_type in subtypesof(brain_trauma_type))
-		var/datum/brain_trauma/brain_trauma = trauma_type
-		if(can_gain_trauma(brain_trauma, resilience, natural_gain) && initial(brain_trauma.random_gain))
+	for(var/datum/brain_trauma/brain_trauma as anything in subtypesof(brain_trauma_type))
+		if(IS_ABSTRACT(brain_trauma))
+			continue
+		if(!initial(brain_trauma.random_gain))
+			continue
+		if(ispath(brain_trauma, /datum/brain_trauma/severe/split_personality))
+			if(!force_split_personality && owner?.client?.prefs?.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
+				continue
+		if(can_gain_trauma(brain_trauma, resilience, natural_gain))
 			possible_traumas += brain_trauma
 
-	if(!LAZYLEN(possible_traumas))
+	if(!length(possible_traumas))
 		return
 
 	var/trauma_type = pick(possible_traumas)
 	return gain_trauma(trauma_type, resilience)
 
-
 /obj/item/organ/brain/proc/cure_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience = TRAUMA_RESILIENCE_BASIC)
 	var/list/traumas = get_traumas_type(brain_trauma_type, resilience)
-	if(LAZYLEN(traumas))
+	if(length(traumas))
 		qdel(pick(traumas))
 
 /obj/item/organ/brain/proc/cure_all_traumas(resilience = TRAUMA_RESILIENCE_BASIC)

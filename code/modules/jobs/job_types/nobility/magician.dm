@@ -66,6 +66,7 @@
 	job_bitflag = BITFLAG_ROYALTY
 	max_apprentices = 2
 	honorary = "Archmage"
+	book_type = /obj/item/recipe_book/arcyne
 
 	spells = list(
 		/datum/action/cooldown/spell/aoe/knock,

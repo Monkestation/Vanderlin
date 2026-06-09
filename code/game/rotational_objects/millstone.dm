@@ -62,7 +62,8 @@
 			visible_message(span_warning("[user] gets their arm stuck in [src]!"), span_warning("You get your arm caught in [src]"))
 			user.flash_fullscreen("redflash3")
 			user.emote("painscream")
-			user.take_overall_damage(4 + rotations_per_minute)
+			var/obj/item/bodypart/arm = user.get_active_hand()
+			arm.bodypart_attacked_by(BCLASS_BLUNT, 4 + rotations_per_minute)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/millstone/attack_hand(mob/user)

@@ -23,7 +23,7 @@
 
 	//now the rest
 	if (tr_flags & TR_KEEPITEMS)
-		var/Itemlist = get_equipped_items(TRUE)
+		var/Itemlist = get_equipped_items(INCLUDE_POCKETS)
 		Itemlist += held_items
 		for(var/obj/item/W in Itemlist)
 			dropItemToGround(W, TRUE)
@@ -59,8 +59,7 @@
 		O.real_name = O.dna.real_name
 	O.name = O.real_name
 
-	if(suiciding)
-		O.set_suicide(suiciding)
+	O.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(hellbound)
 		O.hellbound = hellbound
 

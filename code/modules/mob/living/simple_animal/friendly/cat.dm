@@ -53,6 +53,8 @@
 
 	ai_controller = /datum/ai_controller/cat
 
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
+
 	var/obj/item/held_item
 
 /mob/living/simple_animal/pet/cat/Initialize()
@@ -68,6 +70,7 @@
 			list(/mob/living/simple_animal/pet/cat/kitten = 100),\
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
+	add_traits(list(TRAIT_NOFALLDAMAGE2), INNATE_TRAIT)
 
 /mob/living/simple_animal/pet/cat/proc/drop_held_item()
 	held_item.forceMove(get_turf(src))

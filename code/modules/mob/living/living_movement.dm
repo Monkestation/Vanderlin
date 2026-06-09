@@ -113,57 +113,71 @@
 
 	remove_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING)
 
-/mob/living/canZMove(dir, turf/target, swimming = FALSE)
-	if(!swimming)
-		return can_zTravel(target, dir) && (movement_type & (FLYING|FLOATING))
-	if(!istype(target, /turf/open/water))
-		return FALSE
-	return can_zTravel(target, dir)
-
-/// Attempts to move the mob across z levels while swimming. Set forced TRUE if something other than the mob causes the move.
-/mob/living/proc/zSwim(dir, forced = FALSE)
-	if(!HAS_TRAIT(src, TRAIT_SUBMERGED))
+/mob/living/up()
+	if(stat >= UNCONSCIOUS)
 		return
-	if(!forced)
-		if(stat == DEAD)
-			return
-		if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
-			return
-		if(!COOLDOWN_FINISHED(src, cd_zswim))
-			return
-		if(dir == UP && HAS_TRAIT(src, TRAIT_SINKING))
-			to_chat(src, span_warning("You are sinking and cannot surface!"))
-		else if(zMove(dir, FALSE, TRUE))
-			var/zswim_time = 2 SECONDS - ((1 DECISECONDS * GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/swimming)) + (1 SECONDS * HAS_TRAIT(src, TRAIT_GOOD_SWIM)))
-			COOLDOWN_START(src, cd_zswim, zswim_time)
-			if(dir == UP)
-				to_chat(src, span_notice("You swim upward."))
-			else
-				to_chat(src, span_notice("You swim downward."))
-		else
-			if(dir == UP)
-				to_chat(src, span_warning("You are unable to swim any higher."))
-			else
-				to_chat(src, span_warning("You can't swim any further down."))
-	else
-		if(zMove(dir, FALSE, TRUE) && stat != DEAD)
-			if(dir == UP)
-				to_chat(src, span_warningbig("A strong current pushes you upward!"))
-			else
-				to_chat(src, span_warningbig("You sink beneath the water!"))
+	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+		return
+	return ..()
 
-/mob/living/can_safely_descend(turf/target)
-	target = GET_TURF_BELOW(target)
-	var/flags = NONE
-	for(var/atom/thing as anything in target)
-		flags |= thing.intercept_zImpact(src, 1)
-		if(flags & FALL_STOP_INTERCEPTING)
-			break
-	for(var/obj/structure/stairs/S in target)
-		return TRUE
-	if(flags & FALL_INTERCEPTED)
-		return TRUE
-	return FALSE
+/mob/living/down()
+	if(stat >= UNCONSCIOUS)
+		return
+	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+		return
+	return ..()
+
+/**
+ * We want to relay the zmovement to the buckled atom when possible
+ * and only run what we can't have on buckled.zMove() or buckled.can_z_move() here.
+ * This way we can avoid esoteric bugs, copypasta and inconsistencies.
+ */
+/mob/living/zMove(dir, turf/target, z_move_flags = ZMOVE_FLIGHT_FLAGS)
+	if(buckled)
+		if(buckled.currently_z_moving)
+			return FALSE
+		if(!(z_move_flags & ZMOVE_ALLOW_BUCKLED))
+			buckled.unbuckle_mob(src, force = TRUE, can_fall = FALSE)
+		else
+			if(!target)
+				target = can_z_move(dir, get_turf(src), null, z_move_flags, src)
+				if(!target)
+					return FALSE
+			return buckled.zMove(dir, target, z_move_flags) // Return value is a loc.
+	return ..()
+
+/mob/living/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)
+	if(z_move_flags & ZMOVE_LYING_CHECKS && body_position != STANDING_UP)
+		if(z_move_flags & ZMOVE_FEEDBACK)
+			to_chat(src, span_warning("I need to stand to do this!"))
+		return FALSE
+	if(z_move_flags & ZMOVE_INCAPACITATED_CHECKS && incapacitated())
+		if(z_move_flags & ZMOVE_FEEDBACK)
+			to_chat(rider || src, span_warning("[rider ? src : "I"] can't do that right now!"))
+		return FALSE
+	if(!buckled || !(z_move_flags & ZMOVE_ALLOW_BUCKLED))
+		if(!(z_move_flags & ZMOVE_FALL_CHECKS) && incorporeal_move && (!rider || rider.incorporeal_move))
+			//An incorporeal mob will ignore obstacles unless it's a potential fall (it'd suck hard) or is carrying corporeal mobs.
+			//Coupled with flying/floating, this allows the mob to move up and down freely.
+			//By itself, it only allows the mob to move down.
+			z_move_flags |= ZMOVE_IGNORE_OBSTACLES
+		return ..()
+	switch(SEND_SIGNAL(buckled, COMSIG_BUCKLED_CAN_Z_MOVE, direction, start, destination, z_move_flags, src))
+		if(COMPONENT_RIDDEN_ALLOW_Z_MOVE) // Can be ridden.
+			return buckled.can_z_move(direction, start, destination, z_move_flags, src)
+		if(COMPONENT_RIDDEN_STOP_Z_MOVE) // Is a ridable but can't be ridden right now. Feedback messages already done.
+			return FALSE
+		else
+			if(!(z_move_flags & ZMOVE_CAN_FLY_CHECKS) && !buckled.anchored)
+				return buckled.can_z_move(direction, start, destination, z_move_flags, src)
+			if(z_move_flags & ZMOVE_FEEDBACK)
+				to_chat(src, span_warning("Unbuckle from [buckled] first."))
+			return FALSE
+
+/mob/set_currently_z_moving(value)
+	if(buckled)
+		return buckled.set_currently_z_moving(value)
+	return ..()
 
 //* Updates a mob's sneaking status, rendering them invisible or visible in accordance to their status. TODO:Fix people bypassing the sneak fade by turning, and add a proc var to have a timer after resetting visibility.
 /mob/living/update_sneak_invis(reset = FALSE)

@@ -60,6 +60,7 @@
 #define COLOR_ASSEMBLY_BLUE    "#38559E"
 #define COLOR_ASSEMBLY_PURPLE  "#6F6192"
 
+#define DEFAULT_HEX_COLOR_LEN 6
 
 //roguetown
 // Expensive dyes ==========================
@@ -103,7 +104,7 @@
 #define CLOTHING_OLD_LEATHER "#473f39"
 #define CLOTHING_SPRING_GREEN "#41493a"
 #define CLOTHING_BERRY_BLUE "#39404d"
-#define CLOTHING_TARAXACUM_YELLOW "#63673c"
+#define CLOTHING_TARAXACUM_YELLOW "#7d853c"
 
 #define CLOTHING_ASH_GREY "#676262"
 #define CLOTHING_CANVAS "#858564"
@@ -150,6 +151,8 @@
 #define CLOTHING_WINE_RED			"#995264"
 #define CLOTHING_YELLOW_WELD		"#f4c430"
 #define CLOTHING_YARROW				"#f0cb76"
+
+#define GLOW_COLOR_BARDIC "#E8837C" // Warm rose, for bardic songs and cadences
 
 /// Deprecated macro, should be removed
 #define CLOTHING_COLOR_NAMES	list("Ash Grey","Chalk White","Cream","White","Dark Ink","Plum Purple","Salmon","Blood Red", "Maroon","Red Ochre","Russet","Chestnut","Mustard Yellow","Yellow Ochre","Forest Green","Sky Blue","Teal", "Royal Black","Soot Black","Winestain Red","Royal Red","Royal Majenta","Fyritius Orange","Bark Brown","Peasant Brown","Mud Brown","Pear Yellow","Spring Green","Bog Green","Royal Teal","Berry Blue", "Royal Blue", "Royal Purple","Dunked in Water" )

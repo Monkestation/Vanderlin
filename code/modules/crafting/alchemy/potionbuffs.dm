@@ -14,6 +14,10 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/strengthpot
 	effectedstats = list(STAT_STRENGTH = 3)
 
+/datum/status_effect/buff/alch/strengthpot/concentrated
+	id = "Concentrated Strength Potion"
+	effectedstats = list(STAT_STRENGTH = 6)
+
 /atom/movable/screen/alert/status_effect/buff/alch/strengthpot
 	name = "Strength"
 
@@ -26,6 +30,10 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/perceptionpot
 	effectedstats = list(STAT_PERCEPTION = 3)
 
+/datum/status_effect/buff/alch/perceptionpot/concentrated
+	id = "Concentrated Perception Potion"
+	effectedstats = list(STAT_PERCEPTION = 6)
+
 /atom/movable/screen/alert/status_effect/buff/alch/perceptionpot
 	name = "Perception"
 
@@ -33,6 +41,10 @@
 	id = "Intelligence Potion"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/intelligencepot
 	effectedstats = list(STAT_INTELLIGENCE = 3)
+
+/datum/status_effect/buff/alch/intelligencepot/concentrated
+	id = "Concentrated Intelligence Potion"
+	effectedstats = list(STAT_INTELLIGENCE = 6)
 
 /atom/movable/screen/alert/status_effect/buff/alch/intelligencepot
 	name = "Intelligence"
@@ -46,6 +58,10 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/constitutionpot
 	effectedstats = list(STAT_CONSTITUTION = 3)
 
+/datum/status_effect/buff/alch/constitutionpot/concentrated
+	id = "Concentrated Constitution Potion"
+	effectedstats = list(STAT_CONSTITUTION = 6)
+
 /atom/movable/screen/alert/status_effect/buff/alch/constitutionpot
 	name = "Constitution"
 
@@ -57,6 +73,10 @@
 	id = "Endurance Potion"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/endurancepot
 	effectedstats = list(STAT_ENDURANCE = 3)
+
+/datum/status_effect/buff/alch/endurancepot/concentrated
+	id = "Concentrated Endurance Potion"
+	effectedstats = list(STAT_ENDURANCE = 6)
 
 /atom/movable/screen/alert/status_effect/buff/alch/endurancepot
 	name = "Endurance"
@@ -75,6 +95,11 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/speedpot
 	effectedstats = list(STAT_SPEED = 3)
 
+/datum/status_effect/buff/alch/speedpot/concentrated
+	id = "Concentrated Speed Potion"
+	effectedstats = list(STAT_SPEED = 6)
+
+
 /atom/movable/screen/alert/status_effect/buff/alch/speedpot
 	name = "Speed"
 
@@ -82,6 +107,11 @@
 	id = "Fortune Potion"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/fortunepot
 	effectedstats = list(STAT_FORTUNE = 3)
+
+/datum/status_effect/buff/alch/fortunepot/concentrated
+	id = "Concentrated Fortune Potion"
+	effectedstats = list(STAT_FORTUNE = 6)
+
 
 /atom/movable/screen/alert/status_effect/buff/alch/fortunepot
 	name = "Fortune"

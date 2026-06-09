@@ -22,7 +22,6 @@
 	total_positions = 2
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE
-	var/merchant_type
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/merchant
 
@@ -33,17 +32,21 @@
 		TRAIT_FOREIGNER
 	)
 
-/datum/job/advclass/pilgrim/rare/merchant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pilgrim/rare/merchant/pre_outfit_equip(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/merchant_type = pickweight(list("FOOD" = 4, "HEAL" = 2, "SILK" = 1, "GEMS" = 1))
 	switch(merchant_type)
 		if("FOOD")
+			outfit = /datum/outfit/pilgrim/merchant/food
 			spawned.adjust_skill_level(/datum/attribute/skill/craft/cooking, 20)
 		if("HEAL")
+			outfit = /datum/outfit/pilgrim/merchant/heal
 			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
 		if("SILK")
+			outfit = /datum/outfit/pilgrim/merchant/silk
 			spawned.adjust_skill_level(/datum/attribute/skill/misc/sewing, 20)
 		if("GEMS")
+			outfit = /datum/outfit/pilgrim/merchant/gem
 			spawned.adjust_skill_level(/datum/attribute/skill/craft/blacksmithing, 10)
 
 /datum/outfit/pilgrim/merchant
@@ -68,45 +71,45 @@
 		cloak = /obj/item/clothing/cloak/half
 		head = pick(/obj/item/clothing/head/fancyhat, /obj/item/clothing/head/chaperon)
 
-	if(equipped_human.mind?.assigned_role.type == /datum/job/advclass/pilgrim/rare/merchant)
-		var/datum/job/advclass/pilgrim/rare/merchant/merchant = equipped_human.mind.assigned_role
-		switch(merchant.merchant_type)
-			if("FOOD")
-				backpack_contents = list(
-					/obj/item/reagent_containers/food/snacks/meat/salami = 1,
-					/obj/item/reagent_containers/food/snacks/cooked/coppiette = 1,
-					/obj/item/reagent_containers/food/snacks/cheddar = 1,
-					/obj/item/reagent_containers/food/snacks/saltfish = 1,
-					/obj/item/reagent_containers/food/snacks/hardtack = 1,
-					/obj/item/flint = 1,
-					/obj/item/weapon/knife/dagger = 1
-				)
-			if("HEAL")
-				backpack_contents = list(
-					/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-					/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-					/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-					/obj/item/reagent_containers/glass/bottle/manapot = 1,
-					/obj/item/flint = 1,
-					/obj/item/weapon/knife/dagger = 1
-				)
-			if("SILK")
-				backpack_contents = list(
-					/obj/item/natural/bundle/silk = 2,
-					/obj/item/natural/fur = 1,
-					/obj/item/natural/bundle/fibers = 2,
-					/obj/item/clothing/shirt/dress/silkdress = 1,
-					/obj/item/clothing/shirt/undershirt/puritan = 1,
-					/obj/item/flint = 1,
-					/obj/item/weapon/knife/dagger = 1
-				)
-			if("GEMS")
-				backpack_contents = list(
-					/obj/item/gem/yellow = 1,
-					/obj/item/gem/yellow = 1,
-					/obj/item/gem/green = 1,
-					/obj/item/gem/green = 1,
-					/obj/item/gem/violet = 1,
-					/obj/item/flint = 1,
-					/obj/item/weapon/knife/dagger = 1
-				)
+/datum/outfit/pilgrim/merchant/food
+	backpack_contents = list(
+		/obj/item/reagent_containers/food/snacks/meat/salami = 1,
+		/obj/item/reagent_containers/food/snacks/cooked/coppiette = 1,
+		/obj/item/reagent_containers/food/snacks/cheddar = 1,
+		/obj/item/reagent_containers/food/snacks/saltfish = 1,
+		/obj/item/reagent_containers/food/snacks/hardtack = 1,
+		/obj/item/flint = 1,
+		/obj/item/weapon/knife/dagger = 1
+	)
+
+/datum/outfit/pilgrim/merchant/heal
+	backpack_contents = list(
+		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/flint = 1,
+		/obj/item/weapon/knife/dagger = 1
+	)
+
+/datum/outfit/pilgrim/merchant/silk
+	backpack_contents = list(
+		/obj/item/natural/bundle/silk = 2,
+		/obj/item/natural/fur = 1,
+		/obj/item/natural/bundle/fibers = 2,
+		/obj/item/clothing/shirt/dress/silkdress = 1,
+		/obj/item/clothing/shirt/undershirt/puritan = 1,
+		/obj/item/flint = 1,
+		/obj/item/weapon/knife/dagger = 1
+	)
+
+/datum/outfit/pilgrim/merchant/gem
+	backpack_contents = list(
+		/obj/item/gem/yellow = 1,
+		/obj/item/gem/yellow = 1,
+		/obj/item/gem/green = 1,
+		/obj/item/gem/green = 1,
+		/obj/item/gem/violet = 1,
+		/obj/item/flint = 1,
+		/obj/item/weapon/knife/dagger = 1
+	)

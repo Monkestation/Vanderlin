@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(death_arena)
 		return
 	waiting_fighters += fighter
 	tollless_clients[fighter.client.key] = (world.time + 8 MINUTES) - (time_of_death == 0 ? 0 : (world.time - time_of_death))
-	RegisterSignal(fighter, COMSIG_PARENT_QDELETING, PROC_REF(remove_fighter), fighter)
+	RegisterSignal(fighter, COMSIG_QDELETING, PROC_REF(remove_fighter), fighter)
 
 /datum/controller/subsystem/death_arena/proc/remove_fighter(mob/living/fighter)
 	waiting_fighters -= fighter
@@ -57,6 +57,9 @@ SUBSYSTEM_DEF(death_arena)
 	fighting = TRUE
 	for(var/mob/living/carbon/spirit/spirit in waiting_fighters)
 		if(!spirit?.client)
+			remove_fighter(spirit)
+			continue
+		else if(!spirit?.paid)
 			remove_fighter(spirit)
 			continue
 
@@ -196,7 +199,7 @@ SUBSYSTEM_DEF(death_arena)
 /obj/structure/table/wood/fine/altar/after_added_effects(obj/item/item, mob/user)
 	if(!istype(item, /obj/item/bodypart/head))
 		return
-	add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_FIGHT_REVIVES, 1)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_FIGHT_REVIVES, 1)
 	record_round_statistic(STATS_UNDERWORLD_DUELS)
 	SSdeath_arena.process_fight_end(item, user)
 

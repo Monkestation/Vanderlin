@@ -120,10 +120,4 @@
 	return FALSE
 
 /datum/patron/inhumen/graggar_zizo/hear_prayer(mob/living/follower, message)
-	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)
-	if(!dreamer)
-		return FALSE
-	if(text2num(message) == dreamer.sum_keys)
-		INVOKE_ASYNC(dreamer, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
-		return TRUE
-	. = ..()
+	return TRUE // trey liam always hears

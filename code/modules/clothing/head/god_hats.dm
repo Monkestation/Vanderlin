@@ -126,17 +126,6 @@
 		user.update_fov_angles()
 		user.regenerate_clothes()
 
-/obj/item/clothing/head/roguehood/priest/equipped(mob/user, slot)
-	. = ..()
-	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-	else
-		REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
-/obj/item/clothing/head/roguehood/priest/dropped(mob/user)
-	. = ..()
-	REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
 /obj/item/clothing/head/roguehood/priest/pickup(mob/living/user)
 	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
 		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)

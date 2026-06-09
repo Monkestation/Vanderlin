@@ -44,15 +44,45 @@
 /datum/status_effect/incapacitating/knockdown
 	id = "knockdown"
 	alert_type = /atom/movable/screen/alert/status_effect/knocked_down
+	///Boolean that, if TRUE, will prevent the person getting this effect from dropping items.
+	var/prevent_drop = FALSE
+
+/datum/status_effect/incapacitating/knockdown/on_creation(mob/living/new_owner, duration_override, prevent_drop)
+	src.prevent_drop = prevent_drop
+	. = ..()
 
 /datum/status_effect/incapacitating/knockdown/on_apply()
 	. = ..()
 	if(!.)
 		return
+
+	// anti-drop logic (for shuttle dock or tripped)
+	if(prevent_drop)
+		for(var/obj/item/held_item in owner.held_items)
+			ADD_TRAIT(held_item, TRAIT_NODROP, TRAIT_STATUS_EFFECT(id))
+
+	// Apply floored trait so the mob falls over
 	ADD_TRAIT(owner, TRAIT_FLOORED, TRAIT_STATUS_EFFECT(id))
+
+	// Clean up no-drop immediately after application
+	if(prevent_drop)
+		addtimer(CALLBACK(src, PROC_REF(clear_prevent_drop)), 0)
+
+/datum/status_effect/incapacitating/knockdown/proc/clear_prevent_drop()
+	for(var/obj/item/held_item in owner.held_items)
+		REMOVE_TRAIT(held_item, TRAIT_NODROP, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/incapacitating/knockdown/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_FLOORED, TRAIT_STATUS_EFFECT(id))
+	// owner.knockdown_diminish = 1
+	return ..()
+
+// cleaner tripped version — now uses prevent_drop flag instead of the hack
+/datum/status_effect/incapacitating/knockdown/tripped
+	id = "tripped"
+
+/datum/status_effect/incapacitating/knockdown/tripped/on_apply()
+	prevent_drop = TRUE
 	return ..()
 
 /atom/movable/screen/alert/status_effect/knocked_down
@@ -179,7 +209,7 @@
 	human_owner?.drunkenness *= 0.997 //reduce drunkenness by 0.3% per tick, 6% per 2 seconds
 	if(prob(20))
 		carbon_owner?.handle_dreams()
-		if(prob(10) && owner.health > owner.crit_threshold)
+		if(prob(10) && !HAS_TRAIT(carbon_owner, TRAIT_CRITICAL_CONDITION))
 			owner.emote("snore")
 
 /atom/movable/screen/alert/status_effect/asleep

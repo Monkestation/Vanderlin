@@ -88,6 +88,8 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 20
 	item_weight = 3 GRAMS
+	indexed = TRUE
+	grind_results = list(/datum/reagent/thorn_essence = 10)
 
 /obj/item/natural/thorn/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")
@@ -128,11 +130,11 @@
 	stacktype = /obj/item/natural/fibers
 	icon1step = 3
 	icon2step = 6
+	items_per_increase = 7
 
 /obj/item/natural/bundle/fibers/full/Initialize()
-	. = ..()
 	amount = maxamount
-	update_bundle()
+	. = ..()
 
 /obj/item/natural/bundle/fibers/sinew
 	name = "sinew fiber bundle"

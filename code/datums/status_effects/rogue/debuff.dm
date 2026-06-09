@@ -200,6 +200,7 @@
 	effectedstats = null
 	duration = 4 SECONDS
 	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"
@@ -515,8 +516,7 @@
 
 /datum/status_effect/debuff/stinky_person/on_remove()
 	. = ..()
-	var/datum/component/stinky_component = GetComponent(/datum/component/rot/stinky_person)
-	stinky_component?.RemoveComponent()
+	qdel(GetComponent(/datum/component/rot/stinky_person))
 
 /datum/status_effect/debuff/tainted_lux
 	id = "tainted_lux"
@@ -591,6 +591,50 @@
 	name = "Electrified"
 	desc = "Your body is charged with unstable electricity!"
 	icon_state = "dazed"
+
+/datum/status_effect/debuff/cursed_t1
+	id = "necra_gaze"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t1
+	effectedstats = list(STAT_FORTUNE = -3)
+	duration = 5 MINUTES
+
+/datum/status_effect/debuff/cursed_t2
+	id = "necra_curse"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t2
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
+	duration = 10 MINUTES //Double the time, this grave had effort put in.
+
+/datum/status_effect/debuff/cursed_t3
+	id = "necra_ire"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t3
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
+	duration = 20 MINUTES
+
+/datum/status_effect/debuff/cursed_t4
+	id = "necra_rage"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t4
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
+	duration = -1
+
+/atom/movable/screen/alert/status_effect/debuff/curse_t1
+	name = "Necra's Gaze"
+	desc = "The Undermaiden's gaze falls lightly upon me, I've displeased her."
+	icon_state = "curse_necra_1"
+
+/atom/movable/screen/alert/status_effect/debuff/curse_t2
+	name = "Necra's Curse"
+	desc = "The Undermaiden's gaze falls upon me, I've upset her."
+	icon_state = "curse_necra_2"
+
+/atom/movable/screen/alert/status_effect/debuff/curse_t3
+	name = "Necra's Ire"
+	desc = "The Undermaiden's gaze falls upon me, I've angered her deeply!"
+	icon_state = "curse_necra_3"
+
+/atom/movable/screen/alert/status_effect/debuff/curse_t4
+	name = "Necra's Rage"
+	desc = "The Undermaiden's hateful gaze falls upon me, I've enraged her, and she will torment me till the day I enter her embrace!"
+	icon_state = "curse_necra_4"
 
 /datum/status_effect/debuff/cursed
 	id = "cursed"
