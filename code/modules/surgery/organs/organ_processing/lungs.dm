@@ -10,13 +10,13 @@
 		return FALSE
 	return ..()
 
-/datum/organ_process/lungs/handle_process(mob/living/carbon/owner, delta_time, times_fired)
-	handle_breathing(owner, delta_time, times_fired)
+/datum/organ_process/lungs/handle_process(mob/living/carbon/owner, delta_time)
+	handle_breathing(owner, delta_time)
 	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
 	lungs?.cough_blood(delta_time)
 	return TRUE
 
-/datum/organ_process/lungs/proc/handle_breathing(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/lungs/proc/handle_breathing(mob/living/carbon/owner, delta_time)
 	var/next_breath = 4
 	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
 	var/obj/item/organ/heart/heart = owner.getorganslot(ORGAN_SLOT_HEART)
@@ -26,9 +26,9 @@
 		next_breath--
 
 	var/owner_failed_breath = owner.failed_last_breath
-	if((times_fired % next_breath) == 0 || owner_failed_breath)
+	if((SSmobs.times_fired % next_breath) == 0 || owner_failed_breath)
 		// Breathe per 4 ticks if healthy, down to 2 if our lungs or heart are damaged, unless suffocating
-		breathe(owner, delta_time, times_fired, owner_failed_breath ? 1 : next_breath)
+		breathe(owner, delta_time, owner_failed_breath ? 1 : next_breath)
 	else if(isobj(owner.loc))
 		var/obj/location_as_object = owner.loc
 		location_as_object.handle_internal_lifeform(owner, 0)
@@ -72,12 +72,12 @@
 		sleep(1 SECONDS)
 */
 
-/datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, delta_time, times_fired, next_breath = 4)
+/datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, delta_time, next_breath = 4)
 	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
 	if((owner.pulledby?.grab_state >= GRAB_KILL) || (lungs?.is_failing()))
 		owner.losebreath++  //You can't breath at all when being choked or if your lungs are failing, so you're going to miss a breath
 
-	var/pre_sig_return = SEND_SIGNAL(owner, COMSIG_CARBON_ATTEMPT_BREATHE, delta_time, times_fired)
+	var/pre_sig_return = SEND_SIGNAL(owner, COMSIG_CARBON_ATTEMPT_BREATHE, delta_time)
 	if(pre_sig_return & COMSIG_CARBON_BLOCK_BREATH)
 		return
 	if(pre_sig_return & BREATHE_SKIP_BREATH)

@@ -5,7 +5,7 @@
 /datum/organ_process/spleen/needs_process(mob/living/carbon/owner)
 	return (..() && !HAS_TRAIT(owner, TRAIT_NOHUNGER) && CAN_HAVE_BLOOD(owner))
 
-/datum/organ_process/spleen/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/spleen/handle_process(mob/living/carbon/owner, delta_time)
 	if(owner.get_blood_volume() >= BLOOD_VOLUME_NORMAL)
 		return
 

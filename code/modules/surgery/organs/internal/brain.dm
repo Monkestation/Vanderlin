@@ -85,7 +85,7 @@
 	C.update_body()
 	C.remove_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/handle_blood(delta_time, times_fired)
+/obj/item/organ/brain/handle_blood(delta_time)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/in_bleedout = owner.in_bleedout()

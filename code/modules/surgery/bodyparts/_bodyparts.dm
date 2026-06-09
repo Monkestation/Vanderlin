@@ -394,7 +394,7 @@
 	update_limb_efficiency()
 
 /// Return TRUE to get whatever mob this is in to update health.
-/obj/item/bodypart/proc/on_life(delta_time, times_fired)
+/obj/item/bodypart/proc/on_life(delta_time)
 	if(pain_heal_tick)
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
@@ -402,9 +402,9 @@
 		remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE)
 	if(can_decay())
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
-			update_germs(delta_time, times_fired)
+			update_germs(delta_time)
 	if(number_injuries)
-		update_injuries(delta_time, times_fired)
+		update_injuries(delta_time)
 
 /// Check if we need to run on_life()
 /obj/item/bodypart/proc/consider_processing()
@@ -553,7 +553,7 @@
 		post_damage_change()
 
 /// Deal with injury healing and other updates
-/obj/item/bodypart/proc/update_injuries(delta_time, times_fired)
+/obj/item/bodypart/proc/update_injuries(delta_time)
 	var/toxins = 0
 	if(owner)
 		toxins = owner.get_chem_effect(CE_TOXIN)
@@ -602,16 +602,16 @@
 		number_injuries += injury.amount
 
 /// General handling of infections
-/obj/item/bodypart/proc/update_germs(delta_time, times_fired)
+/obj/item/bodypart/proc/update_germs(delta_time)
 	//Cryo stops germs from moving and doing their bad stuffs
 	if(owner.bodytemperature <= -15)
 		return
-	handle_germ_sync(delta_time, times_fired)
-	handle_germ_effects(delta_time, times_fired)
-	handle_antibiotics(delta_time, times_fired)
+	handle_germ_sync(delta_time)
+	handle_germ_effects(delta_time)
+	handle_antibiotics(delta_time)
 
 /// Try to sync wound/inuries etc with our germ level
-/obj/item/bodypart/proc/handle_germ_sync(delta_time, times_fired)
+/obj/item/bodypart/proc/handle_germ_sync(delta_time)
 	// If we have no wounds, nor injuries, nor germ level, no point in trying to update
 	if(!length(wounds) && !length(injuries) && (germ_level <= 0))
 		return
@@ -624,7 +624,7 @@
 	// Open injuries can become infected, regardless of antibiotics
 	if(istype(open_turf))
 		for(var/datum/injury/injury as anything in injuries)
-			if(injury.infection_check(delta_time, times_fired) && (max(open_turf.germ_level, owner_germ_level) > injury.germ_level))
+			if(injury.infection_check(delta_time) && (max(open_turf.germ_level, owner_germ_level) > injury.germ_level))
 				injury.adjust_germ_level(injury.infection_rate * delta_time)
 
 	// If we have sufficient antibiotics, then skip over this stuff, the infection is going away
@@ -640,7 +640,7 @@
 
 
 /// Handle infection effects
-/obj/item/bodypart/proc/handle_germ_effects(delta_time, times_fired)
+/obj/item/bodypart/proc/handle_germ_effects(delta_time)
 	var/immunity = owner.virus_immunity()
 	var/immunity_weakness = owner.immunity_weakness()
 	var/antibiotics = owner.get_antibiotics()
@@ -706,7 +706,7 @@
 						bodypart.adjust_germ_level(0.5 * delta_time)
 
 /// Handle the antibiotic chem effect
-/obj/item/bodypart/proc/handle_antibiotics(delta_time, times_fired)
+/obj/item/bodypart/proc/handle_antibiotics(delta_time)
 	if(!owner || (owner.stat >= DEAD) || (germ_level <= 0))
 		return
 

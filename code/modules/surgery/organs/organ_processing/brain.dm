@@ -1,7 +1,7 @@
 /datum/organ_process/brain
 	slot = ORGAN_SLOT_BRAIN
 
-/datum/organ_process/brain/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/brain/handle_process(mob/living/carbon/owner, delta_time)
 	var/obj/item/organ/brain/brain = owner.getorganslot(ORGAN_SLOT_BRAIN)
 	if(!brain)
 		return

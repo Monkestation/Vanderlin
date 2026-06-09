@@ -26,7 +26,6 @@ SUBSYSTEM_DEF(island_mobs)
 				src.currentrun += island_mob_list
 
 	var/list/currentrun = src.currentrun
-	var/times_fired = src.times_fired
 
 	while(currentrun.len)
 		var/mob/living/L = currentrun[currentrun.len]
@@ -40,9 +39,9 @@ SUBSYSTEM_DEF(island_mobs)
 			continue
 
 		if(L.stat == DEAD)
-			L.DeadLife(seconds, times_fired)
+			L.DeadLife(seconds)
 		else
-			L.Life(seconds, times_fired)
+			L.Life(seconds)
 
 		if (MC_TICK_CHECK)
 			return

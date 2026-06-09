@@ -114,7 +114,7 @@
 	owner.cure_blind(id)
 	return ..()
 
-/datum/status_effect/temporary_blindness/tick(seconds_between_ticks, times_fired)
+/datum/status_effect/temporary_blindness/tick(seconds_between_ticks)
 	if(owner.stat == DEAD)
 		return
 

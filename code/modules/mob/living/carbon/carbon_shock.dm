@@ -31,7 +31,7 @@
 	shock_penalty = 0
 	shock_penalty_timer = null
 
-/mob/living/carbon/proc/handle_shock(delta_time, times_fired)
+/mob/living/carbon/proc/handle_shock(delta_time)
 	if(!can_feel_pain())
 		return
 	if(stat >= UNCONSCIOUS)
@@ -129,7 +129,7 @@
 	if(general_damage_message && DT_PROB(general_message_prob, delta_time))
 		custom_pain(general_damage_message, general_damage)
 
-/mob/living/carbon/proc/handle_shock_stage(delta_time, times_fired)
+/mob/living/carbon/proc/handle_shock_stage(delta_time)
 	if(!can_feel_pain())
 		setShockStage(0)
 		remove_movespeed_modifier(MOVESPEED_ID_SHOCK, FALSE)

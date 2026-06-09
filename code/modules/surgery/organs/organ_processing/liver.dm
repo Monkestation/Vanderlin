@@ -9,7 +9,7 @@
 /datum/organ_process/liver/needs_process(mob/living/carbon/owner)
 	return (..() && !HAS_TRAIT(owner, TRAIT_NOMETABOLISM))
 
-/datum/organ_process/liver/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/liver/handle_process(mob/living/carbon/owner, delta_time)
 	var/liver_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_LIVER)
 	if(owner.stat == DEAD)
 		for(var/reagent in owner.reagents.reagent_list)

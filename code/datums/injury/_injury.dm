@@ -227,7 +227,7 @@
 
 // checks if injury is considered open for external infections
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if injury is bigger
-/datum/injury/proc/infection_check(delta_time = 2, times_fired)
+/datum/injury/proc/infection_check(delta_time = 2)
 	var/normalized_damage = damage_per_injury()
 	if((normalized_damage < 10) && germ_level < INFECTION_LEVEL_ONE)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
 		return FALSE

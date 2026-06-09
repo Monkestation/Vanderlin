@@ -203,7 +203,7 @@
 		organ_flags &= ~ORGAN_NECROTIC
 		return TRUE
 
-/obj/item/organ/proc/handle_blood(delta_time, times_fired)
+/obj/item/organ/proc/handle_blood(delta_time)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/in_bleedout = owner.in_bleedout()
 	var/failer
@@ -359,9 +359,9 @@
 	return
 
 /// Runs decay when outside of a person
-/obj/item/organ/process(delta_time, times_fired)
+/obj/item/organ/process(delta_time)
 	// Kinda hate doing it like this, but I really don't want to call process directly.
-	return on_death(delta_time, times_fired)
+	return on_death(delta_time)
 
 /// proper decaying
 /obj/item/organ/proc/decay(delta_time)
@@ -379,7 +379,7 @@
 		return TRUE
 
 /// Runs decay both inside and outside a person
-/obj/item/organ/proc/on_death(delta_time, times_fired)
+/obj/item/organ/proc/on_death(delta_time)
 	if(!owner && !isbodypart(loc))
 		if(isnull(loc))
 			STOP_PROCESSING(SSobj, src)
@@ -426,7 +426,7 @@
 
 
 /// Malus caused by germs
-/obj/item/organ/proc/handle_germ_effects(delta_time, times_fired)
+/obj/item/organ/proc/handle_germ_effects(delta_time)
 	var/virus_immunity = owner?.virus_immunity()
 	var/antibiotics = owner?.get_antibiotics()
 
@@ -466,7 +466,7 @@
 				bodypart.adjust_germ_level(0.5 * delta_time)
 
 /// Antibiotics combating germs and stuff
-/obj/item/organ/proc/handle_antibiotics(delta_time, times_fired)
+/obj/item/organ/proc/handle_antibiotics(delta_time)
 	if(!owner || (germ_level <= 0))
 		return
 
@@ -481,23 +481,23 @@
 		if(owner?.body_position == LYING_DOWN)
 			adjust_germ_level(-SANITIZATION_LYING * delta_time)
 
-/obj/item/organ/proc/on_life(delta_time, times_fired)	//repair organ damage if the organ is not failing
+/obj/item/organ/proc/on_life(delta_time)	//repair organ damage if the organ is not failing
 	SHOULD_CALL_PARENT(TRUE)
 	if(!owner)
 		return
 
 	/// Handle germs before anything else!
 	if(can_decay())
-		handle_germ_effects(delta_time, times_fired)
-		handle_antibiotics(delta_time, times_fired)
+		handle_germ_effects(delta_time)
+		handle_antibiotics(delta_time)
 	else
 		germ_level = 0
 
 	/// Handle blood
-	handle_blood(delta_time, times_fired)
+	handle_blood(delta_time)
 
 	if(is_failing())
-		handle_failing_organ(delta_time, times_fired)
+		handle_failing_organ(delta_time)
 		return
 
 	// Decrease failure time while healthy
@@ -505,11 +505,11 @@
 		failure_time = max(0, failure_time - delta_time)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time, times_fired))
-		handle_self_healing(delta_time, times_fired)
+	if(can_self_heal(delta_time))
+		handle_self_healing(delta_time)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
-/obj/item/organ/proc/handle_failing_organ(delta_time, times_fired)
+/obj/item/organ/proc/handle_failing_organ(delta_time)
 	if(!owner || owner.stat >= DEAD)
 		return
 
@@ -517,7 +517,7 @@
 	organ_failure(delta_time)
 
 /// healing checks
-/obj/item/organ/proc/can_self_heal(delta_time, times_fired)
+/obj/item/organ/proc/can_self_heal(delta_time)
 	. = TRUE
 	if(!owner)
 		return FALSE
@@ -538,7 +538,7 @@
 	if(owner.stat >= DEAD)
 		return FALSE
 
-/obj/item/organ/proc/handle_self_healing(delta_time, times_fired)
+/obj/item/organ/proc/handle_self_healing(delta_time)
 	if(damage <= 0)
 		return
 

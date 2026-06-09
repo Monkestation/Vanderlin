@@ -4,18 +4,18 @@
 	var/static/sound/slowbeat = sound('sound/heart/slowbeat.ogg', volume = 20, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 	var/static/sound/fastbeat = sound('sound/heart/fastbeat.ogg', volume = 10, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 
-/datum/organ_process/heart/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/handle_process(mob/living/carbon/owner, delta_time)
 	if(owner.needs_heart())
-		handle_heart_failure(owner, delta_time, times_fired)
-		handle_pulse(owner, delta_time, times_fired)
+		handle_heart_failure(owner, delta_time)
+		handle_pulse(owner, delta_time)
 		if(owner.pulse)
-			handle_heartbeat(owner, delta_time, times_fired)
-	handle_blood(owner, delta_time, times_fired)
+			handle_heartbeat(owner, delta_time)
+	handle_blood(owner, delta_time)
 	return TRUE
 
 /// Handles the failure messaging and cardiac arrest flagging for a failing heart.
 /// Separated from handle_pulse so the logic is readable and the failed flag is managed cleanly.
-/datum/organ_process/heart/proc/handle_heart_failure(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_heart_failure(mob/living/carbon/owner, delta_time)
 	for(var/thing in owner.getorganslotlist(ORGAN_SLOT_HEART))
 		var/obj/item/organ/heart/heart = thing
 		if(!istype(heart))
@@ -30,7 +30,7 @@
 			// Reset the flag once the heart recovers so the message can fire again next time
 			heart.failed = FALSE
 
-/datum/organ_process/heart/proc/handle_pulse(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_pulse(mob/living/carbon/owner, delta_time)
 	// Pulse mod starts out as just the chemical effect amount
 	// Your heart will fail and stop beating if it runs out of current_blood. Pumping heart resets current_blood and heart beating.
 	var/heart_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_HEART)
@@ -124,7 +124,7 @@
 		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 		REMOVE_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 
-/datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, delta_time)
 	// Dead or pulseless people do not pump blood
 	if(!owner.pulse)
 		return
@@ -196,7 +196,7 @@
 	else
 		owner.remove_stress(/datum/stress_event/bleeding)
 
-/datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, delta_time)
 	// Beyond deals with sound effects, so nothing needs to be done if no client
 	if(isnull(owner.client))
 		return

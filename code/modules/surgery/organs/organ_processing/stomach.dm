@@ -5,15 +5,15 @@
 /datum/organ_process/stomach/needs_process(mob/living/carbon/owner)
 	return (..() && !(NOSTOMACH in owner.dna.species.species_traits))
 
-/datum/organ_process/stomach/handle_process(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/handle_process(mob/living/carbon/human/owner, delta_time)
 	if(!HAS_TRAIT(owner, TRAIT_NOHUNGER))
-		handle_nutrition(owner, delta_time, times_fired)
-	handle_digestion(owner, delta_time, times_fired)
+		handle_nutrition(owner, delta_time)
+	handle_digestion(owner, delta_time)
 	owner.dna?.species?.handle_digestion(owner) //for halfling bs
-	handle_disgust(owner, delta_time, times_fired)
+	handle_disgust(owner, delta_time)
 	return TRUE
 
-/datum/organ_process/stomach/proc/handle_nutrition(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_nutrition(mob/living/carbon/human/owner, delta_time)
 	var/stomach_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_STOMACH)
 	//fat fuck friday
 	if(HAS_TRAIT_FROM(owner, TRAIT_FAT, OBESITY))
@@ -73,9 +73,9 @@
 			to_chat(owner, span_notice("You no longer feel vigorous."))
 		owner.metabolism_efficiency = 1
 
-	handle_nutrition_hydration_state(owner, delta_time, times_fired)
+	handle_nutrition_hydration_state(owner, delta_time)
 
-/datum/organ_process/stomach/proc/handle_nutrition_hydration_state(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_nutrition_hydration_state(mob/living/carbon/human/owner, delta_time)
 	switch(owner.nutrition)
 		if(NUTRITION_LEVEL_FED to INFINITY)
 			owner.remove_status_effect(/datum/status_effect/debuff/hungryt1)
@@ -124,7 +124,7 @@
 			if(CONFIG_GET(flag/dehydration_death))
 				owner.apply_status_effect(/datum/status_effect/debuff/thirstyt4)
 
-/datum/organ_process/stomach/proc/handle_digestion(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_digestion(mob/living/carbon/human/owner, delta_time)
 	var/stomachal_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_STOMACH)
 	var/list/stomachs = owner.getorganslotlist(ORGAN_SLOT_STOMACH)
 
@@ -163,7 +163,7 @@
 				to_chat(owner, span_warning("My [stomach.name] reels in pain as you're incapable of holding down all that food!"))
 				return
 
-/datum/organ_process/stomach/proc/handle_disgust(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_disgust(mob/living/carbon/human/owner, delta_time)
 	var/combined_disgust_metabolism = 0
 	for(var/thing in owner.getorganslotlist(ORGAN_SLOT_STOMACH))
 		var/obj/item/organ/stomach/stomach = thing

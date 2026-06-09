@@ -685,7 +685,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 /datum/reagent/medicine/endorphin/overdose_start(mob/living/M)
 	to_chat(M, span_userdanger("I feel EUPHORIC!"))
 
-/datum/reagent/medicine/endorphin/overdose_process(mob/living/M, delta_time, times_fired)
+/datum/reagent/medicine/endorphin/overdose_process(mob/living/M, delta_time)
 	. = ..()
 	if(DT_PROB(40, delta_time))
 		M.adjust_drowsiness(5)

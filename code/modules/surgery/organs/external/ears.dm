@@ -41,7 +41,7 @@
 	for(var/datum/wound/facial/ears/ear_wound in M.get_wounds())
 		qdel(ear_wound)
 
-/obj/item/organ/ears/on_life(delta_time, times_fired)
+/obj/item/organ/ears/on_life(delta_time)
 	. = ..()
 	if(!is_failing())
 		applyDeaf(-0.5 * delta_time)

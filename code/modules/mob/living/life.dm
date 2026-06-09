@@ -1,7 +1,7 @@
-/mob/living/proc/Life(seconds, times_fired)
+/mob/living/proc/Life(seconds)
 	set waitfor = FALSE
 
-	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds, times_fired)
+	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds)
 
 	if(signal_result & COMPONENT_LIVING_CANCEL_LIFE_PROCESSING) // mmm less work
 		return

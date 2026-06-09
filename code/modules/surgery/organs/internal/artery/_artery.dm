@@ -32,10 +32,10 @@
 	/// Kill the owner if they have TRAIT_CRITICAL_WEAKNESS and the artery is dissected
 	var/crit_weakness_lethal = FALSE
 
-/obj/item/organ/artery/can_self_heal(delta_time, times_fired)
+/obj/item/organ/artery/can_self_heal(delta_time)
 	return FALSE
 
-/obj/item/organ/artery/on_life(delta_time, times_fired)
+/obj/item/organ/artery/on_life(delta_time)
 	. = ..()
 	// Dead, pulseless or cryosleep people do not pump blood
 	if(!is_bruised() || !owner.pulse || (owner.bodytemperature <= -15))

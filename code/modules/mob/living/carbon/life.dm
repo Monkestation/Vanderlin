@@ -1,4 +1,4 @@
-/mob/living/carbon/Life(delta_time = SSMOBS_DT, times_fired)
+/mob/living/carbon/Life(delta_time = SSMOBS_DT)
 	set invisibility = 0
 
 	if(grab_fatigue > 0)
@@ -20,8 +20,8 @@
 		. = ..()
 	else
 		//Reagent processing needs to come before breathing, to prevent edge cases.
-		handle_organs(delta_time, times_fired)
-		handle_bodyparts(delta_time, times_fired)
+		handle_organs(delta_time)
+		handle_bodyparts(delta_time)
 
 		. = ..()
 
@@ -33,8 +33,8 @@
 		update_stress()
 		handle_nausea()
 
-		handle_shock(delta_time, times_fired)
-		handle_shock_stage(delta_time, times_fired)
+		handle_shock(delta_time)
+		handle_shock_stage(delta_time)
 
 		handle_sleep()
 
@@ -69,12 +69,12 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/proc/handle_bodyparts(delta_time, times_fired)
+/mob/living/carbon/proc/handle_bodyparts(delta_time)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		if(bodypart.needs_processing)
-			. |= bodypart.on_life(delta_time, times_fired)
+			. |= bodypart.on_life(delta_time)
 
-/mob/living/carbon/proc/handle_organs(delta_time, times_fired)
+/mob/living/carbon/proc/handle_organs(delta_time)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
 		return
 
@@ -90,7 +90,7 @@
 			// This exists mostly because reagent metabolization can cause organ shuffling
 			if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
 				if(organ.needs_processing)
-					organ.on_life(delta_time, times_fired)
+					organ.on_life(delta_time)
 				already_processed_life[organ] = TRUE
 
 	if(stat < DEAD)
@@ -99,11 +99,11 @@
 				break
 			var/datum/organ_process/organ_process = GLOB.organ_processes_by_slot[thing]
 			if(organ_process.needs_process(src))
-				organ_process.handle_process(src, delta_time, times_fired)
+				organ_process.handle_process(src, delta_time)
 	else
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			//Needed so organs decay while inside the body
-			organ.on_death(delta_time, times_fired)
+			organ.on_death(delta_time)
 
 
 /mob/living/carbon/handle_embedded_objects()
