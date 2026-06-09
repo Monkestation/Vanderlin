@@ -943,6 +943,7 @@
 #include "code\datums\brewing_recipes\gin.dm"
 #include "code\datums\brewing_recipes\limoncello.dm"
 #include "code\datums\brewing_recipes\mead.dm"
+#include "code\datums\brewing_recipes\oil.dm"
 #include "code\datums\brewing_recipes\onion_beer.dm"
 #include "code\datums\brewing_recipes\sugar.dm"
 #include "code\datums\brewing_recipes\tea.dm"
