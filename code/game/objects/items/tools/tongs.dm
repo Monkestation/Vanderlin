@@ -63,13 +63,18 @@
 /obj/item/weapon/tongs/proc/heat_held_item(source, duration, incoming, max_heat)
 	if(!held_item)
 		return FALSE
+
+	update_appearance(UPDATE_ICON_STATE)
+
 	if(istype(held_item, /obj/item/storage/crucible))
 		var/obj/item/storage/crucible/crucible = held_item
 		crucible.crucible_temperature = min(crucible.crucible_temperature + incoming, max_heat)
 		return TRUE
+
 	if(duration)
 		held_item.add_quench_requirement(source, duration)
 		return TRUE
+
 	return FALSE
 
 /obj/item/weapon/tongs/proc/set_held_item(obj/item/new_held_item)

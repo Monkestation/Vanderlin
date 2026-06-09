@@ -13,20 +13,24 @@
 	sellprice = 5
 	item_weight = 350 GRAMS
 
-/obj/item/natural/hide/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(P, /obj/item/paper/scroll))
-		return ..()
+/obj/item/natural/hide/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return NONE
+
 	if(!isturf(loc) || !locate(/obj/structure/table) in loc)
 		to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/crafttime = max(0, 100 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5)
 	if(!do_after(user, crafttime, target = src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 	to_chat(user, span_notice("I add the first few pages to the leather cover..."))
 	new /obj/item/spellbook_unfinished(loc)
-	qdel(P)
+	qdel(tool)
 	qdel(src)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/hide/cured
 	name = "cured leather"

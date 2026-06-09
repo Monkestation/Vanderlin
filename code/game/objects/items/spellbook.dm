@@ -238,24 +238,29 @@
 	var/mob/living/gamer = user
 	gamer.electrocute_act(5, src)
 
-/obj/item/book/granter/spellbook/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(P, /obj/item/gem))
-		return ..()
+/obj/item/book/granter/spellbook/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/gem))
+		return NONE
+
 	if(stored_gem)
 		to_chat(user, span_notice("This tome is already coursing with arcyne energies..."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		to_chat(user, span_notice("Why am I jamming a gem into a book? I must look like a fool!"))
-		return
-	var/obj/item/gem/gem = P
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/gem/gem = tool
 	var/crafttime = max(0, 60 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5)
 	if(!do_after(user, crafttime, target = src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	playsound(src, 'sound/magic/glass.ogg', 100, TRUE)
 	to_chat(user, span_notice("Running my arcyne energy through this crystal, I imbue the tome with my natural essence, attuning it to my state of mind..."))
 	stored_gem = gem.arcyne_potency
 	stored_attunement = gem.attuned
-	qdel(P)
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/book/granter/spellbook/horrible
 	name = "poorly made tome of the arcyne"

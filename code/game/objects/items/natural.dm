@@ -319,30 +319,34 @@
 	. = ..()
 	dir = pick(GLOB.cardinals)
 
-/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/weapon/shovel))
-		var/obj/item/weapon/shovel/S = W
-		if(user.used_intent.type == /datum/intent/shovelscoop)
-			if(!S.heldclod)
-				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-				var/obj/item/J = new dirt_type(S)
-				S.heldclod = J
-				W.update_appearance(UPDATE_ICON_STATE)
-				dirtamt--
-				if(dirtamt <= 0)
-					qdel(src)
-				return
-			else
-				playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
-				var/obj/item/I = S.heldclod
-				S.heldclod = null
-				qdel(I)
-				W.update_appearance(UPDATE_ICON_STATE)
-				dirtamt++
-				if(dirtamt > 5)
-					dirtamt = 5
-				return
-	return ..()
+/obj/structure/fluff/clodpile/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/shovel))
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/shovelscoop))
+		return NONE
+
+	var/obj/item/weapon/shovel/S = tool
+
+	if(!S.heldclod)
+		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+		var/obj/item/J = new dirt_type(S)
+		S.heldclod = J
+		S.update_appearance(UPDATE_ICON_STATE)
+		dirtamt--
+		if(dirtamt <= 0)
+			qdel(src)
+	else
+		playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
+		var/obj/item/I = S.heldclod
+		S.heldclod = null
+		qdel(I)
+		S.update_appearance(UPDATE_ICON_STATE)
+		dirtamt++
+		if(dirtamt > 5)
+			dirtamt = 5
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/infernalash//T1 mage summon loot
 	name = "infernal ash"

@@ -43,7 +43,7 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(tool.firefuel)
-		if(tgui_alert(user, "Fuel \the [name] with [tool]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
+		if(tgui_alert(user, "Fuel \the [name] with [tool]?", "VANDERLIN", list("Fuel", "Smelt")) == "Fuel")
 			return NONE
 
 	if(try_add_item(tool, user))

@@ -45,13 +45,12 @@
 		to_chat(user, span_warning("[src] is currently being worked on!"))
 		return ITEM_INTERACT_BLOCKING
 
-	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
 	var/obj/item/actual_attacking_item = tool
 	var/obj/item/weapon/tongs/tongs_used
 	if(istype(tool, /obj/item/weapon/tongs))
 		tongs_used = tool
 		if(tongs_used.held_item)
-			tool = tongs_used.held_item
+			actual_attacking_item = tongs_used.held_item
 
 	if(try_place_item(actual_attacking_item, user))
 		return ITEM_INTERACT_SUCCESS

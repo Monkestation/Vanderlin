@@ -154,18 +154,21 @@
 	. = ..()
 	filter(type="drop_shadow", x=0, y=0, size=2, offset=1, color=rgb(128, 0, 128, 1))
 
-/obj/item/weapon/knife/dagger/silver/attackby(obj/item/M, mob/user, list/modifiers)
-	if(istype(M,/obj/item/ore/cinnabar))
-		var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
-		if(do_after(user, crafttime, target = src))
-			playsound(src, 'sound/magic/scrapeblade.ogg', 100, TRUE)
-			to_chat(user, span_notice("I press arcyne magic into the blade and it throbs in a deep purple..."))
-			var/obj/arcyne_knife = new /obj/item/weapon/knife/dagger/silver/arcyne
-			qdel(M)
-			qdel(src)
-			user.put_in_active_hand(arcyne_knife)
-	else
-		return ..()
+/obj/item/weapon/knife/dagger/silver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/ore/cinnabar))
+		return NONE
+
+	var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)) * 5))
+	if(!do_after(user, crafttime, target = src))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/magic/scrapeblade.ogg', 100, TRUE)
+	to_chat(user, span_notice("I press arcyne magic into the blade and it throbs in a deep purple..."))
+	var/obj/arcyne_knife = new /obj/item/weapon/knife/dagger/silver/arcyne
+	qdel(tool)
+	qdel(src)
+	user.put_in_active_hand(arcyne_knife)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/knife/dagger/silver/arcyne/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)

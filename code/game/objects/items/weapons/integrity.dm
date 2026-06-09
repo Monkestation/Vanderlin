@@ -64,15 +64,6 @@
 			blade_int = max_blade_int
 		return TRUE
 
-/obj/structure/attackby(obj/item/I, mob/user, list/modifiers)
-	user.changeNext_move(user.used_intent.clickcd)
-	. = ..()
-
-
-/obj/machinery/attackby(obj/item/I, mob/user, list/modifiers)
-	user.changeNext_move(user.used_intent.clickcd)
-	. = ..()
-
 /obj/item/proc/restore_bintegrity()
 	max_blade_int = initial(max_blade_int)
 	blade_int = initial(max_blade_int)

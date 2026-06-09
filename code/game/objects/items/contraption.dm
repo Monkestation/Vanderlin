@@ -167,7 +167,7 @@
 		to_chat(user, span_info("The contraption beeps! It requires \a [initial(accepted_power_source.name)]!"))
 		playsound(src, 'sound/magic/magic_nulled.ogg', 100, TRUE)
 		return TRUE
-	. = ..()
+	return ..()
 
 /obj/item/contraption/wood_metalizer
 	name = "wood metalizer"
