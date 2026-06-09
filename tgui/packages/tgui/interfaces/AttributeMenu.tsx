@@ -34,7 +34,7 @@ type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
 interface TutorialStep {
   title: string;
   body: string;
-  /** data-tour attribute of the element to spotlight, measured live from the DOM. */
+  /** CSS selector of the element to spotlight, measured live from the DOM. */
   target?: string;
   popupAnchor?: TutorialAnchor;
 }
@@ -48,37 +48,37 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   {
     title: 'Character Seals',
     body: 'The left page bears six Core Attribute seals arranged around the figure: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
-    target: 'seals-panel',
+    target: '.AttributeMenu__panel--seals',
     popupAnchor: 'right',
   },
   {
     title: 'Reading a seal',
     body: 'Each seal shows its current value. Green means a blessing has lifted it, red means a curse has lowered it, and pale ink means it is unmodified.',
-    target: 'seal-value',
+    target: '.AttributeMenu__sealNodeValue',
     popupAnchor: 'right',
   },
   {
     title: 'Guild Register',
     body: 'The middle page is the Skills Book — your trained crafts, grouped by guild. Each entry shows its current value, colored the same way as the seals.',
-    target: 'register-panel',
+    target: '.AttributeMenu__panel--register',
     popupAnchor: 'left',
   },
   {
     title: 'All Skills toggle',
     body: 'By default only trained skills are shown. Tick All Skills to also reveal untrained ones, so you can see what is left to learn.',
-    target: 'all-skills-toggle',
+    target: '.AttributeMenu__toggle',
     popupAnchor: 'bottom',
   },
   {
     title: 'Search the Register',
     body: 'Type a skill name here to filter the register in real time. Searching automatically reveals untrained skills so nothing stays hidden.',
-    target: 'register-search',
+    target: '.AttributeMenu__search',
     popupAnchor: 'bottom',
   },
   {
     title: 'Marginal Notes',
     body: 'Click any seal or guild entry and the scribe will note the details here: description, difficulty, governing attribute, defaults, and any active blessings or curses. Press the x to close the note.',
-    target: 'notes-panel',
+    target: '.AttributeMenu__panel--notes',
     popupAnchor: 'left',
   },
   {
@@ -167,7 +167,7 @@ const AttributeTutorial = (props: {
       if (!root) {
         return;
       }
-      const el = root.querySelector<HTMLElement>(`[data-tour="${target}"]`);
+      const el = root.querySelector<HTMLElement>(target);
       if (!el) {
         setRect(null);
         return;
@@ -200,10 +200,10 @@ const AttributeTutorial = (props: {
   };
 
   return (
-    <div className="AttributeMenu__tutorialOverlay">
-      <div className="AttributeMenu__tutorialBackdrop" onClick={close} />
+    <Box className="AttributeMenu__tutorialOverlay">
+      <Box className="AttributeMenu__tutorialBackdrop" onClick={close} />
       {hl && (
-        <div
+        <Box
           className="AttributeMenu__tutorialHighlight"
           style={{
             top: `${hl.top}px`,
@@ -213,61 +213,55 @@ const AttributeTutorial = (props: {
           }}
         />
       )}
-      <div
+      <Box
         className="AttributeMenu__tutorialCard"
         style={{ width: `${TUTORIAL_CARD_WIDTH}px`, ...tutorialCardStyle(anchor, hl) }}
       >
         {hl && anchor !== 'center' && (
-          <div className={`AttributeMenu__tutorialCaret AttributeMenu__tutorialCaret--${anchor}`} />
+          <Box className={`AttributeMenu__tutorialCaret AttributeMenu__tutorialCaret--${anchor}`} />
         )}
-        <div className="AttributeMenu__tutorialHeader">
-          <div className="AttributeMenu__tutorialEyebrow">
+        <Box className="AttributeMenu__tutorialHeader">
+          <Box className="AttributeMenu__tutorialEyebrow">
             Step {safe + 1} of {TUTORIAL_STEPS.length}
-          </div>
-          <div className="AttributeMenu__tutorialTitle">{current.title}</div>
-          <button
-            type="button"
-            className="AttributeMenu__tutorialClose"
-            onClick={close}
-            aria-label="Close walkthrough"
-          >
+          </Box>
+          <Box className="AttributeMenu__tutorialTitle">{current.title}</Box>
+          <Box as="button" className="AttributeMenu__tutorialClose" onClick={close}>
             ✕
-          </button>
-        </div>
-        <div className="AttributeMenu__tutorialBody">{current.body}</div>
-        <div className="AttributeMenu__tutorialDots">
+          </Box>
+        </Box>
+        <Box className="AttributeMenu__tutorialBody">{current.body}</Box>
+        <Box className="AttributeMenu__tutorialDots">
           {TUTORIAL_STEPS.map((_, i) => (
-            <button
+            <Box
+              as="button"
               key={i}
-              type="button"
               className={`AttributeMenu__tutorialDot${i === safe ? ' is-active' : ''}`}
               onClick={() => setStep(i)}
-              aria-label={`Go to step ${i + 1}`}
             />
           ))}
-        </div>
-        <div className="AttributeMenu__tutorialFooter">
+        </Box>
+        <Box className="AttributeMenu__tutorialFooter">
           {isFirst ? (
-            <span style={{ minWidth: '70px', display: 'inline-block' }} />
+            <Box as="span" style={{ minWidth: '70px', display: 'inline-block' }} />
           ) : (
-            <button
-              type="button"
+            <Box
+              as="button"
               className="AttributeMenu__tutorialNav"
               onClick={() => setStep(safe - 1)}
             >
               ← Back
-            </button>
+            </Box>
           )}
-          <button
-            type="button"
+          <Box
+            as="button"
             className={`AttributeMenu__tutorialNav${isLast ? ' AttributeMenu__tutorialNav--done' : ''}`}
             onClick={isLast ? close : () => setStep(safe + 1)}
           >
             {isLast ? '✓ Done' : 'Next →'}
-          </button>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
@@ -390,23 +384,17 @@ const valueTone = (
   return 'is-muted';
 };
 
-const sameSelection = (
-  first: string | null | undefined,
-  second: string | null | undefined,
-  attributeName: string,
-) => (first === attributeName) === (second === attributeName);
-
 const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
   const { icon, size } = props;
 
   if (!icon) {
-    return <span className={`AttributeMenu__iconFallback AttributeMenu__iconFallback--${size}`} />;
+    return <Box as="span" className={`AttributeMenu__iconFallback AttributeMenu__iconFallback--${size}`} />;
   }
 
   return (
-    <span className={`AttributeMenu__sprite AttributeMenu__sprite--${size}`}>
-      <span className={`attributes_${size === 'big' ? 'big128x128' : 'small16x16'} ${icon}`} />
-    </span>
+    <Box as="span" className={`AttributeMenu__sprite AttributeMenu__sprite--${size}`}>
+      <Box as="span" className={`attributes_${size === 'big' ? 'big128x128' : 'small16x16'} ${icon}`} />
+    </Box>
   );
 });
 
@@ -450,10 +438,9 @@ const AnatomyFigure = memo(() => {
         )}
       </svg>
       {hasFigure && (
-        <div
+        <Box
           className="AttributeMenu__figure"
           style={{ backgroundImage: `url('${figureUrl}')` }}
-          aria-hidden="true"
         />
       )}
     </>
@@ -476,27 +463,30 @@ const AttributeSealNode = memo((props: {
 
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
+      {/* Raw button: Tooltip injects a ref into its child to anchor itself, and
+          Box does not forward refs. tgui Button would, but its chrome would change
+          the seal's bespoke look. */}
       <button
         className={nodeClass}
         onClick={() => act('inspect_closely', { attribute_name: stat.name })}
         type="button"
       >
         {hasMedallion ? (
-          <span className="AttributeMenu__sealNodeMedallion">
-            <span className={`${SEAL_SPRITESHEET_CLASS} ${sealState}`} />
-          </span>
+          <Box as="span" className="AttributeMenu__sealNodeMedallion">
+            <Box as="span" className={`${SEAL_SPRITESHEET_CLASS} ${sealState}`} />
+          </Box>
         ) : (
-          <span className="AttributeMenu__sealNodeOrb" />
+          <Box as="span" className="AttributeMenu__sealNodeOrb" />
         )}
-        <span className="AttributeMenu__sealNodeName">
+        <Box as="span" className="AttributeMenu__sealNodeName">
           {statSealLabel(stat.name, stat.shorthand)}
-        </span>
-        <span
+        </Box>
+        <Box
+          as="span"
           className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}
-          data-tour={anchor === 'strength' ? 'seal-value' : undefined}
         >
           {displayValue(stat.value)}
-        </span>
+        </Box>
       </button>
     </Tooltip>
   );
@@ -516,27 +506,21 @@ const CoreAttributes = memo((props: {
   const { stats, selectedName, act, onHelpClick } = props;
 
   return (
-    <section className="AttributeMenu__panel AttributeMenu__panel--seals" data-tour="seals-panel">
-      <button
-        type="button"
-        className="AttributeMenu__helpButton"
-        onClick={onHelpClick}
-        title="How to read this ledger"
-        aria-label="Open walkthrough"
-      >
+    <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--seals">
+      <Box as="button" className="AttributeMenu__helpButton" onClick={onHelpClick}>
         ?
-      </button>
-      <header className="AttributeMenu__panelHeader">
-        <div className="AttributeMenu__eyebrow">Character Seals</div>
-        <div className="AttributeMenu__title">Core Attributes</div>
-      </header>
-      <div className="AttributeMenu__divider" />
-      <div className="AttributeMenu__constellation">
+      </Box>
+      <Box as="header" className="AttributeMenu__panelHeader">
+        <Box className="AttributeMenu__eyebrow">Character Seals</Box>
+        <Box className="AttributeMenu__title">Core Attributes</Box>
+      </Box>
+      <Box className="AttributeMenu__divider" />
+      <Box className="AttributeMenu__constellation">
         {!stats.length && (
-          <div className="AttributeMenu__empty">No attributes recorded.</div>
+          <Box className="AttributeMenu__empty">No attributes recorded.</Box>
         )}
         {!!stats.length && (
-          <div className="AttributeMenu__ringStage">
+          <Box className="AttributeMenu__ringStage">
             <AnatomyFigure />
             {stats.map((stat) => (
               <AttributeSealNode
@@ -546,10 +530,10 @@ const CoreAttributes = memo((props: {
                 act={act}
               />
             ))}
-          </div>
+          </Box>
         )}
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 });
 
@@ -575,13 +559,13 @@ const SkillEntry = memo((props: {
         onClick={() => act('inspect_closely', { attribute_name: skill.name })}
         type="button"
       >
-        <span className="AttributeMenu__skillIcon">
+        <Box as="span" className="AttributeMenu__skillIcon">
           <IconSprite icon={skill.icon} size="small" />
-        </span>
-        <span className="AttributeMenu__skillName">{skill.name}</span>
-        <span className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
+        </Box>
+        <Box as="span" className="AttributeMenu__skillName">{skill.name}</Box>
+        <Box as="span" className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
           {displayValue(skill.value)}
-        </span>
+        </Box>
       </button>
     </Tooltip>
   );
@@ -671,41 +655,39 @@ const SkillRegister = memo((props: {
   }, [categoriesMeta, skillsValues, showBadSkills, searchText]);
 
   return (
-    <section className="AttributeMenu__panel AttributeMenu__panel--register" data-tour="register-panel">
-      <header className="AttributeMenu__panelHeader AttributeMenu__panelHeader--row">
-        <div>
-          <div className="AttributeMenu__eyebrow">Guild Register</div>
-          <div className="AttributeMenu__title">Skills Book</div>
-        </div>
-        <span data-tour="all-skills-toggle">
-          <Button.Checkbox
-            checked={showBadSkills || isSearching}
-            onClick={toggleAllSkills}
-            className="AttributeMenu__toggle"
-          >
-            All Skills
-          </Button.Checkbox>
-        </span>
-      </header>
+    <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--register">
+      <Box as="header" className="AttributeMenu__panelHeader AttributeMenu__panelHeader--row">
+        <Box>
+          <Box className="AttributeMenu__eyebrow">Guild Register</Box>
+          <Box className="AttributeMenu__title">Skills Book</Box>
+        </Box>
+        <Button.Checkbox
+          checked={showBadSkills || isSearching}
+          onClick={toggleAllSkills}
+          className="AttributeMenu__toggle"
+        >
+          All Skills
+        </Button.Checkbox>
+      </Box>
 
-      <div className="AttributeMenu__search" data-tour="register-search">
+      <Box className="AttributeMenu__search">
         <Input
           fluid
           placeholder="Search the register..."
           value={search}
           onChange={(value: string) => handleSearch(value)}
         />
-      </div>
+      </Box>
 
-      <div className="AttributeMenu__divider" />
+      <Box className="AttributeMenu__divider" />
 
-      <div className="AttributeMenu__scroll AttributeMenu__skillList">
+      <Box className="AttributeMenu__scroll AttributeMenu__skillList">
         {!visibleCategories.length && (
-          <div className="AttributeMenu__empty">No matching entries.</div>
+          <Box className="AttributeMenu__empty">No matching entries.</Box>
         )}
         {visibleCategories.map((category) => (
-          <section className="AttributeMenu__category" key={category.name}>
-            <div className="AttributeMenu__categoryTitle">{category.name}</div>
+          <Box as="section" className="AttributeMenu__category" key={category.name}>
+            <Box className="AttributeMenu__categoryTitle">{category.name}</Box>
             {category.skills.map((skill) => (
               <SkillEntry
                 key={skill.name}
@@ -714,10 +696,10 @@ const SkillRegister = memo((props: {
                 act={act}
               />
             ))}
-          </section>
+          </Box>
         ))}
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 });
 
@@ -725,10 +707,10 @@ const DetailLine = (props: { label: string; value?: string | number | null }) =>
   const { label, value } = props;
 
   return (
-    <div className="AttributeMenu__detailLine">
-      <span>{label}</span>
-      <strong>{displayValue(value ?? null)}</strong>
-    </div>
+    <Box className="AttributeMenu__detailLine">
+      <Box as="span">{label}</Box>
+      <Box as="strong">{displayValue(value ?? null)}</Box>
+    </Box>
   );
 };
 
@@ -740,72 +722,68 @@ const InspectionPanel = memo((props: {
 
   if (!attribute) {
     return (
-      <section className="AttributeMenu__panel AttributeMenu__panel--notes" data-tour="notes-panel">
-        <header className="AttributeMenu__panelHeader">
-          <div className="AttributeMenu__eyebrow">Marginal Notes</div>
-          <div className="AttributeMenu__title">Inspection</div>
-        </header>
-        <div className="AttributeMenu__divider" />
-        <div className="AttributeMenu__placeholder">
-          <div className="AttributeMenu__placeholderMark">Uninspected</div>
-          <p>Select a seal or guild entry to read the scribe's notes.</p>
-          <p>Values, defaults, modifiers, and governing attributes will appear here.</p>
-        </div>
-      </section>
+      <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--notes">
+        <Box as="header" className="AttributeMenu__panelHeader">
+          <Box className="AttributeMenu__eyebrow">Marginal Notes</Box>
+          <Box className="AttributeMenu__title">Inspection</Box>
+        </Box>
+        <Box className="AttributeMenu__divider" />
+        <Box className="AttributeMenu__placeholder">
+          <Box className="AttributeMenu__placeholderMark">Uninspected</Box>
+          <Box as="p">Select a seal or guild entry to read the scribe's notes.</Box>
+          <Box as="p">Values, defaults, modifiers, and governing attributes will appear here.</Box>
+        </Box>
+      </Box>
     );
   }
 
   return (
-    <section className="AttributeMenu__panel AttributeMenu__panel--notes" data-tour="notes-panel">
-      <button
-        className="AttributeMenu__closeNote"
-        onClick={() => act('clear_inspection')}
-        type="button"
-      >
+    <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--notes">
+      <Box as="button" className="AttributeMenu__closeNote" onClick={() => act('clear_inspection')}>
         x
-      </button>
+      </Box>
 
-      <header className="AttributeMenu__panelHeader">
-        <div className="AttributeMenu__eyebrow">Marginal Notes</div>
-        <div className="AttributeMenu__title">
+      <Box as="header" className="AttributeMenu__panelHeader">
+        <Box className="AttributeMenu__eyebrow">Marginal Notes</Box>
+        <Box className="AttributeMenu__title">
           {attribute.name}
           {attribute.shorthand && (
-            <span className="AttributeMenu__titleShort"> ({attribute.shorthand})</span>
+            <Box as="span" className="AttributeMenu__titleShort"> ({attribute.shorthand})</Box>
           )}
-        </div>
-      </header>
+        </Box>
+      </Box>
 
-      <div className="AttributeMenu__divider" />
+      <Box className="AttributeMenu__divider" />
 
-      <div className="AttributeMenu__noteScroll">
+      <Box className="AttributeMenu__noteScroll">
         <Stack className="AttributeMenu__inspectionIntro">
           <Stack.Item>
-            <span className="AttributeMenu__largeIcon">
+            <Box as="span" className="AttributeMenu__largeIcon">
               <IconSprite icon={attribute.icon} size="big" />
-            </span>
+            </Box>
           </Stack.Item>
           <Stack.Item grow>
-            <p className="AttributeMenu__description">
+            <Box as="p" className="AttributeMenu__description">
               {attribute.desc || 'No description has been written by the scribe.'}
-            </p>
+            </Box>
           </Stack.Item>
         </Stack>
 
-        <div className="AttributeMenu__valueCard">
-          <span>Value</span>
-          <strong className={valueTone(attribute.value, attribute.raw_value)}>
+        <Box className="AttributeMenu__valueCard">
+          <Box as="span">Value</Box>
+          <Box as="strong" className={valueTone(attribute.value, attribute.raw_value)}>
             {displayValue(attribute.value)}
-          </strong>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="AttributeMenu__detailGrid">
+        <Box className="AttributeMenu__detailGrid">
           <DetailLine label="Difficulty" value={attribute.difficulty || 'NA'} />
           <DetailLine label="Governing" value={attribute.governing_attribute || 'NA'} />
-        </div>
+        </Box>
 
         {!!attribute.defaults?.length && (
-          <section className="AttributeMenu__noteBlock">
-            <h3>Defaults To</h3>
+          <Box as="section" className="AttributeMenu__noteBlock">
+            <Box as="h3">Defaults To</Box>
             {attribute.defaults.map((def) => {
               const mod = def.default_value ?? 0;
               const tone = mod >= 0 ? 'is-buffed' : 'is-debuffed';
@@ -822,30 +800,30 @@ const InspectionPanel = memo((props: {
                     type="button"
                   >
                     <IconSprite icon={def.icon} size="small" />
-                    <span>{def.name}</span>
-                    <strong className={tone}>{sign}</strong>
+                    <Box as="span">{def.name}</Box>
+                    <Box as="strong" className={tone}>{sign}</Box>
                   </button>
                 </Tooltip>
               );
             })}
-          </section>
+          </Box>
         )}
 
         {!!attribute.modifiers?.length && (
-          <section className="AttributeMenu__noteBlock">
-            <h3>Blessings And Curses</h3>
+          <Box as="section" className="AttributeMenu__noteBlock">
+            <Box as="h3">Blessings And Curses</Box>
             {attribute.modifiers.map((mod) => (
-              <div className="AttributeMenu__modifierRow" key={mod.id}>
-                <span>{mod.id || 'Unnamed modifier'}</span>
-                <strong className={mod.value >= 0 ? 'is-buffed' : 'is-debuffed'}>
+              <Box className="AttributeMenu__modifierRow" key={mod.id}>
+                <Box as="span">{mod.id || 'Unnamed modifier'}</Box>
+                <Box as="strong" className={mod.value >= 0 ? 'is-buffed' : 'is-debuffed'}>
                   {mod.value >= 0 ? `+${mod.value}` : mod.value}
-                </strong>
-              </div>
+                </Box>
+              </Box>
             ))}
-          </section>
+          </Box>
         )}
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 });
 
@@ -932,8 +910,10 @@ export const AttributeMenu = () => {
       buttons={windowButtons}
     >
       <Window.Content fitted>
+        {/* Root keeps a real div: the tutorial measures it via a DOM ref, which
+            Box (a plain function component) does not forward. */}
         <div className="AttributeMenu" ref={rootRef}>
-          <div className="AttributeMenu__backdrop">
+          <Box className="AttributeMenu__backdrop">
             <CoreAttributes
               stats={stats}
               selectedName={selectedName}
@@ -948,7 +928,7 @@ export const AttributeMenu = () => {
               act={act}
             />
             <InspectionPanel attribute={inspectedAttribute} act={act} />
-          </div>
+          </Box>
           {showTutorial && (
             <AttributeTutorial onClose={closeTutorial} rootRef={rootRef} />
           )}
