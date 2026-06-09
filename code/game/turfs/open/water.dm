@@ -280,7 +280,7 @@
 			shovel.update_appearance(UPDATE_ICON_STATE)
 			ScrapeAway()
 			return TRUE
-	return .()
+	return ..()
 
 /turf/open/water/river/creatable/proc/try_modify_water(mob/user, obj/item/reagent_containers/glass/bucket/wooden/bucket)
 	if(user.used_intent.type != /datum/intent/splash)
