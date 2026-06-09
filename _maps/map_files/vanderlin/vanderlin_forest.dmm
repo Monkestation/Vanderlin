@@ -4026,10 +4026,6 @@
 	},
 /turf/open/floor/sand,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"wX" = (
-/obj/structure/fluff/traveltile/gallowband_bog,
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "xa" = (
 /obj/structure/roguerock{
 	icon_state = "rock2"
@@ -7243,14 +7239,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
-"Oz" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/skull{
-	pixel_x = 11;
-	pixel_y = -7
-	},
-/turf/open/floor/dirt,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "OB" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt/road,
@@ -7307,6 +7295,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
+"Pc" = (
+/obj/structure/fluff/traveltile/gallowband_bog,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Pd" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/grass,
@@ -7790,6 +7782,15 @@
 /area/under/cave)
 "Sg" = (
 /turf/closed/wall/mineral/stone/window,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"Sh" = (
+/obj/structure/closet/dirthole/closed,
+/obj/item/skull{
+	pixel_x = 11;
+	pixel_y = -7
+	},
+/obj/effect/mapping_helpers/structure/grave_spawner/great_hunt,
+/turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "Sj" = (
 /obj/structure/fluff/walldeco/painting/skull{
@@ -13443,9 +13444,9 @@ rb
 rb
 rb
 UH
-wX
-wX
-wX
+Pc
+Pc
+Pc
 YW
 rb
 Gs
@@ -22142,9 +22143,9 @@ nC
 An
 An
 ZV
-Oz
+Sh
 ZV
-Oz
+Sh
 Kc
 Gs
 Xy
@@ -22546,9 +22547,9 @@ nC
 An
 ub
 gr
-Oz
+Sh
 ZV
-Oz
+Sh
 ZV
 gr
 oZ
@@ -22950,9 +22951,9 @@ An
 An
 gr
 gr
-Oz
+Sh
 gr
-Oz
+Sh
 gr
 ZV
 Kc
