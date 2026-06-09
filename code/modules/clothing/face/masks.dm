@@ -465,6 +465,7 @@
 
 /obj/item/clothing/face/shepherd/colored
 	abstract_type = /obj/item/clothing/face/shepherd/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/face/shepherd/colored/guard
 	color = CLOTHING_PLUM_PURPLE

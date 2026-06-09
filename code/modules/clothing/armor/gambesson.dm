@@ -29,6 +29,7 @@
 
 /obj/item/clothing/armor/gambeson/colored
 	abstract_type = /obj/item/clothing/armor/gambeson/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/armor/gambeson/colored/guard
 	color = CLOTHING_BLOOD_RED
