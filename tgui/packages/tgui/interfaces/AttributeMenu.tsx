@@ -53,14 +53,14 @@ const TUTORIAL_STEPS: TutorialStep[] = [
     popupAnchor: 'right',
   },
   {
-    title: 'Current / Base reading',
-    body: 'Each seal shows two numbers: current / base. Green means a blessing lifts you above your base. Red means a curse drags you below. Pale ink means it is unmodified.',
+    title: 'Reading a seal',
+    body: 'Each seal shows its current value. Green means a blessing has lifted it, red means a curse has lowered it, and pale ink means it is unmodified.',
     target: 'seal-value',
     popupAnchor: 'right',
   },
   {
     title: 'Guild Register',
-    body: 'The middle page is the Skills Book — your trained crafts, grouped by guild. The current / base numbers behave just like the seals.',
+    body: 'The middle page is the Skills Book — your trained crafts, grouped by guild. Each entry shows its current value, colored the same way as the seals.',
     target: 'register-panel',
     popupAnchor: 'left',
   },
@@ -145,7 +145,7 @@ const tutorialCardStyle = (
 
 const AttributeTutorial = (props: {
   onClose: () => void;
-  rootRef: React.RefObject<HTMLDivElement>;
+  rootRef: React.RefObject<HTMLDivElement | null>;
 }) => {
   const { onClose, rootRef } = props;
   const [step, setStep] = useLocalState<number>('attribute_menu_tutorial_step', 0);
@@ -391,11 +391,6 @@ const valueTone = (
   return 'is-muted';
 };
 
-const valuePair = (
-  value: AttributeValue | undefined,
-  raw: AttributeValue | undefined,
-) => `${displayValue(value)} / ${displayValue(raw)}`;
-
 const sameSelection = (
   first: string | null | undefined,
   second: string | null | undefined,
@@ -500,7 +495,7 @@ const AttributeSealNode = memo((props: {
           className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}
           data-tour={anchor === 'strength' ? 'seal-value' : undefined}
         >
-          {valuePair(stat.value, stat.raw_value)}
+          {displayValue(stat.value)}
         </span>
       </button>
     </Tooltip>
@@ -585,7 +580,7 @@ const SkillEntry = memo((props: {
         </span>
         <span className="AttributeMenu__skillName">{skill.name}</span>
         <span className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
-          {valuePair(skill.value, skill.raw_value)}
+          {displayValue(skill.value)}
         </span>
       </button>
     </Tooltip>
@@ -797,9 +792,9 @@ const InspectionPanel = memo((props: {
         </Stack>
 
         <div className="AttributeMenu__valueCard">
-          <span>Current / Base</span>
+          <span>Value</span>
           <strong className={valueTone(attribute.value, attribute.raw_value)}>
-            {valuePair(attribute.value, attribute.raw_value)}
+            {displayValue(attribute.value)}
           </strong>
         </div>
 
@@ -920,34 +915,13 @@ export const AttributeMenu = () => {
         Math.max(600, Math.round(screenSize[1] * 0.9)),
       ];
 
-  const [contentScale, setContentScale] = useLocalState<number>(
-    'attribute_menu_content_scale',
-    1,
-  );
-
-  const scaleButtons = (
-    <>
-      <Button
-        selected={contentScale === 0.75}
-        onClick={() => setContentScale(0.75)}
-        tooltip="Scale interface to 75%"
-      >
-        75%
-      </Button>
-      <Button
-        selected={contentScale === 1}
-        onClick={() => setContentScale(1)}
-        tooltip="Scale interface to 100%"
-      >
-        100%
-      </Button>
-      <Button
-        icon={maximized ? 'compress' : 'expand'}
-        selected={maximized}
-        onClick={() => setMaximized(!maximized)}
-        tooltip={maximized ? 'Restore window size' : 'Maximize to full screen'}
-      />
-    </>
+  const windowButtons = (
+    <Button
+      icon={maximized ? 'compress' : 'expand'}
+      selected={maximized}
+      onClick={() => setMaximized(!maximized)}
+      tooltip={maximized ? 'Restore window size' : 'Maximize to full screen'}
+    />
   );
 
   return (
@@ -955,19 +929,10 @@ export const AttributeMenu = () => {
       title={parent ? `${parent} Character Ledger` : 'Character Ledger'}
       width={windowSize[0]}
       height={windowSize[1]}
-      buttons={scaleButtons}
+      buttons={windowButtons}
     >
       <Window.Content fitted>
-        <div
-          className="AttributeMenu"
-          ref={rootRef}
-          style={
-            {
-              zoom: contentScale,
-              '--am-fz': (1 + contentScale) / (2 * contentScale),
-            } as CSSProperties
-          }
-        >
+        <div className="AttributeMenu" ref={rootRef}>
           <div className="AttributeMenu__backdrop">
             <CoreAttributes
               stats={stats}
