@@ -36,10 +36,10 @@
 	. = ..()
 	name = "[inflamation_stage ? "inflamed " : null][initial(name)]"
 
-/obj/item/organ/appendix/organ_failure(delta_time)
+/obj/item/organ/appendix/organ_failure(seconds_per_tick)
 	. = ..()
 	inflamation_stage = TRUE
-	owner.adjustToxLoss(0.5 * delta_time, TRUE, TRUE) //forced to ensure people don't use it to gain tox as slime person
+	owner.adjustToxLoss(0.5 * seconds_per_tick, TRUE, TRUE) //forced to ensure people don't use it to gain tox as slime person
 
 /obj/item/organ/appendix/prepare_eat()
 	var/obj/S = ..()

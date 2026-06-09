@@ -158,6 +158,7 @@
 	if(!user.Adjacent(host_anvil))
 		end_minigame(FALSE)
 		return
+
 	for(var/note in anvil_presses)
 		if(anvil_presses[note] + 0.6 SECONDS > REALTIMEOFDAY)
 			continue

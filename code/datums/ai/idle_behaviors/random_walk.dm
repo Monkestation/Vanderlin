@@ -4,7 +4,7 @@
 	var/cooldown = 2 SECONDS
 	var/next_time = 0
 
-/datum/idle_behavior/idle_random_walk/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/idle_random_walk/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	if(next_time > world.time)
 		return

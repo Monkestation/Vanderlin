@@ -85,27 +85,27 @@
 	C.update_body()
 	C.remove_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/handle_blood(delta_time)
+/obj/item/organ/brain/handle_blood(seconds_per_tick)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/in_bleedout = owner.in_bleedout()
 	if(arterial_efficiency && !is_failing())
 		// Arteries get an extra flat 5 blood regen
-		current_blood = min(current_blood + (2.5 * delta_time * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY)), max_blood_storage)
+		current_blood = min(current_blood + (2.5 * seconds_per_tick * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY)), max_blood_storage)
 		return
 	if(!blood_req)
 		return
 	// Very low blood, danger!!
 	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_BAD))
-		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
+		current_blood = min(current_blood + (blood_req * seconds_per_tick), max_blood_storage)
 		return
 
 	if(in_bleedout)
-		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
-		if(DT_PROB(5, delta_time))
+		current_blood = max(current_blood - (blood_req * seconds_per_tick * 2), 0)
+		if(SPT_PROB(5, seconds_per_tick))
 			owner.adjust_eye_blur_up_to(4, 4)
 	else
-		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
+		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * seconds_per_tick * 2), 0)
 
 	// When all blood is lost, take blood from blood vessels
 	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
@@ -118,7 +118,7 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * delta_time * 2), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * seconds_per_tick * 2), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		//Don't apply damage, this is handled by the organ process datum, if necessary
 

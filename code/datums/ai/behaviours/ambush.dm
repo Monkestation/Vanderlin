@@ -10,7 +10,7 @@
 	set_movement_target(controller, target)
 	return TRUE
 
-/datum/ai_behavior/gator_ambush/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/gator_ambush/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/gator/gator_pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

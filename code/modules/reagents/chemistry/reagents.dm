@@ -165,13 +165,13 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 /// Called when a reagent is inside of a mob when they are dead
-/datum/reagent/proc/on_mob_dead(mob/living/carbon/C, delta_time)
+/datum/reagent/proc/on_mob_dead(mob/living/carbon/C, seconds_per_tick)
 	if(!dead_head)
 		return
 	current_cycle++
 	if(length(reagent_removal_skip_list))
 		return
-	holder.remove_reagent(type, metabolization_rate * C.metabolism_efficiency * delta_time)
+	holder.remove_reagent(type, metabolization_rate * C.metabolism_efficiency * seconds_per_tick)
 
 /datum/reagent/proc/on_move(mob/M)
 	return

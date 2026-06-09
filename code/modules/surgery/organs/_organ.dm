@@ -203,7 +203,7 @@
 		organ_flags &= ~ORGAN_NECROTIC
 		return TRUE
 
-/obj/item/organ/proc/handle_blood(delta_time)
+/obj/item/organ/proc/handle_blood(seconds_per_tick)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/in_bleedout = owner.in_bleedout()
 	var/failer
@@ -213,14 +213,14 @@
 		failer = is_failing()
 	if(arterial_efficiency && !failer && !in_bleedout)
 		// Arteries get an extra flat 10 blood regen
-		current_blood = min(current_blood + (2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+		current_blood = min(current_blood + (2.5 * seconds_per_tick) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 		return
 	if(!blood_req)
 		return
 	if(!in_bleedout)
-		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage) //very slow refill
+		current_blood = min(current_blood + (blood_req * seconds_per_tick), max_blood_storage) //very slow refill
 		return
-	current_blood = max(current_blood - (blood_req * delta_time), 0)
+	current_blood = max(current_blood - (blood_req * seconds_per_tick), 0)
 	// When all blood is lost, take blood from blood vessels
 	if(!current_blood)
 		var/obj/item/organ/artery
@@ -232,13 +232,13 @@
 				break
 		if(artery?.current_blood)
 			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * delta_time), 0)
+			artery.current_blood = max(artery.current_blood - (blood_req * seconds_per_tick), 0)
 			current_blood = max(prev_blood - artery.current_blood, 0)
 		if((current_blood <= 0) && !(organ_flags & ORGAN_LIMB_SUPPORTER))
 			var/temperature_mod = 1
 			if(owner?.bodytemperature > BODYTEMP_NORMAL)
 				temperature_mod += round((owner.bodytemperature - BODYTEMP_NORMAL) / (BODYTEMP_MAX_TEMPERATURE - BODYTEMP_NORMAL), 0.1)
-			applyOrganDamage(decay_factor * maxHealth * temperature_mod * delta_time)
+			applyOrganDamage(decay_factor * maxHealth * temperature_mod * seconds_per_tick)
 
 /obj/item/organ/proc/generate_chimeric_organ(mob/living/source_mob)
 	if(!source_mob)
@@ -359,13 +359,13 @@
 	return
 
 /// Runs decay when outside of a person
-/obj/item/organ/process(delta_time)
+/obj/item/organ/process(seconds_per_tick)
 	// Kinda hate doing it like this, but I really don't want to call process directly.
-	return on_death(delta_time)
+	return on_death(seconds_per_tick)
 
 /// proper decaying
-/obj/item/organ/proc/decay(delta_time)
-	adjust_germ_level(rand(min_germ_factor, max_germ_factor) * delta_time)
+/obj/item/organ/proc/decay(seconds_per_tick)
+	adjust_germ_level(rand(min_germ_factor, max_germ_factor) * seconds_per_tick)
 
 /obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
@@ -379,13 +379,13 @@
 		return TRUE
 
 /// Runs decay both inside and outside a person
-/obj/item/organ/proc/on_death(delta_time)
+/obj/item/organ/proc/on_death(seconds_per_tick)
 	if(!owner && !isbodypart(loc))
 		if(isnull(loc))
 			STOP_PROCESSING(SSobj, src)
 		organ_flags |= ORGAN_CUT_AWAY
 	if(can_decay())
-		decay(delta_time)
+		decay(seconds_per_tick)
 	// else
 	// 	STOP_PROCESSING(SSobj, src)
 
@@ -426,21 +426,21 @@
 
 
 /// Malus caused by germs
-/obj/item/organ/proc/handle_germ_effects(delta_time)
+/obj/item/organ/proc/handle_germ_effects(seconds_per_tick)
 	var/virus_immunity = owner?.virus_immunity()
 	var/antibiotics = owner?.get_antibiotics()
 
-	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && DT_PROB(virus_immunity*0.15, delta_time))
-		adjust_germ_level(-0.5 * delta_time)
+	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && SPT_PROB(virus_immunity*0.15, seconds_per_tick))
+		adjust_germ_level(-0.5 * seconds_per_tick)
 		return
 
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
-		if(antibiotics < 5 && DT_PROB(round(germ_level/6 * owner.immunity_weakness() * 0.005), delta_time))
+		if(antibiotics < 5 && SPT_PROB(round(germ_level/6 * owner.immunity_weakness() * 0.005), seconds_per_tick))
 			if(virus_immunity > 0)
-				adjust_germ_level(clamp(round(0.5/virus_immunity), 1, 10) * delta_time) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
+				adjust_germ_level(clamp(round(0.5/virus_immunity), 1, 10) * seconds_per_tick) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
-				adjust_germ_level(5 * delta_time)
+				adjust_germ_level(5 * seconds_per_tick)
 
 	if(germ_level >= INFECTION_LEVEL_ONE && antibiotics < 20)
 		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
@@ -450,12 +450,12 @@
 		var/obj/item/bodypart/bodypart = owner.get_bodypart(current_zone)
 		if(bodypart)
 			//Spread germs
-			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || DT_PROB(owner.immunity_weakness() * 0.15, delta_time)))
-				bodypart.adjust_germ_level(0.5 * delta_time)
+			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || SPT_PROB(owner.immunity_weakness() * 0.15, seconds_per_tick)))
+				bodypart.adjust_germ_level(0.5 * seconds_per_tick)
 		//Cause organ damage about once every ~30 seconds
 		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
-		if(DT_PROB(2, delta_time))
-			applyOrganDamage(decay_factor * maxHealth * delta_time)
+		if(SPT_PROB(2, seconds_per_tick))
+			applyOrganDamage(decay_factor * maxHealth * seconds_per_tick)
 
 	// Organ is just completely dead by this point
 	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 40)
@@ -463,10 +463,10 @@
 		if(bodypart)
 			// Spread germs really badly
 			if(antibiotics < 10 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_THREE))
-				bodypart.adjust_germ_level(0.5 * delta_time)
+				bodypart.adjust_germ_level(0.5 * seconds_per_tick)
 
 /// Antibiotics combating germs and stuff
-/obj/item/organ/proc/handle_antibiotics(delta_time)
+/obj/item/organ/proc/handle_antibiotics(seconds_per_tick)
 	if(!owner || (germ_level <= 0))
 		return
 
@@ -477,47 +477,47 @@
 	if((germ_level < INFECTION_LEVEL_ONE) && (antibiotics >= 20))
 		set_germ_level(0)
 	else
-		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * delta_time)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * seconds_per_tick)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		if(owner?.body_position == LYING_DOWN)
-			adjust_germ_level(-SANITIZATION_LYING * delta_time)
+			adjust_germ_level(-SANITIZATION_LYING * seconds_per_tick)
 
-/obj/item/organ/proc/on_life(delta_time)	//repair organ damage if the organ is not failing
+/obj/item/organ/proc/on_life(seconds_per_tick)	//repair organ damage if the organ is not failing
 	SHOULD_CALL_PARENT(TRUE)
 	if(!owner)
 		return
 
 	/// Handle germs before anything else!
 	if(can_decay())
-		handle_germ_effects(delta_time)
-		handle_antibiotics(delta_time)
+		handle_germ_effects(seconds_per_tick)
+		handle_antibiotics(seconds_per_tick)
 	else
 		germ_level = 0
 
 	/// Handle blood
-	handle_blood(delta_time)
+	handle_blood(seconds_per_tick)
 
 	if(is_failing())
-		handle_failing_organ(delta_time)
+		handle_failing_organ(seconds_per_tick)
 		return
 
 	// Decrease failure time while healthy
 	if(failure_time > 0)
-		failure_time = max(0, failure_time - delta_time)
+		failure_time = max(0, failure_time - seconds_per_tick)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time))
-		handle_self_healing(delta_time)
+	if(can_self_heal(seconds_per_tick))
+		handle_self_healing(seconds_per_tick)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
-/obj/item/organ/proc/handle_failing_organ(delta_time)
+/obj/item/organ/proc/handle_failing_organ(seconds_per_tick)
 	if(!owner || owner.stat >= DEAD)
 		return
 
-	failure_time += delta_time
-	organ_failure(delta_time)
+	failure_time += seconds_per_tick
+	organ_failure(seconds_per_tick)
 
 /// healing checks
-/obj/item/organ/proc/can_self_heal(delta_time)
+/obj/item/organ/proc/can_self_heal(seconds_per_tick)
 	. = TRUE
 	if(!owner)
 		return FALSE
@@ -538,12 +538,12 @@
 	if(owner.stat >= DEAD)
 		return FALSE
 
-/obj/item/organ/proc/handle_self_healing(delta_time)
+/obj/item/organ/proc/handle_self_healing(seconds_per_tick)
 	if(damage <= 0)
 		return
 
 	///Damage decrements by a percent of its maxhealth
-	var/healing_amount = healing_factor * delta_time * maxHealth
+	var/healing_amount = healing_factor * seconds_per_tick * maxHealth
 	///Damage decrements again by a percent of its maxhealth, depending on the owner's health
 	healing_amount += (owner.satiety > 0) ? (healing_factor * (owner.satiety / MAX_SATIETY)) : 0
 
@@ -560,16 +560,16 @@
 		return
 	applyOrganDamage(-healing_amount, damage) // pass curent damage incase we are over cap
 	//this doesn't seem very right at all...
-	owner.adjust_nutrition(-nutriment_req/200 * delta_time)
-	owner.adjust_hydration(-hydration_req/200 * delta_time)
+	owner.adjust_nutrition(-nutriment_req/200 * seconds_per_tick)
+	owner.adjust_hydration(-hydration_req/200 * seconds_per_tick)
 
 /** organ_failure
  * generic proc for handling dying organs
  *
  * Arguments:
- * delta_time - seconds since last tick
+ * seconds_per_tick - seconds since last tick
  */
-/obj/item/organ/proc/organ_failure(delta_time)
+/obj/item/organ/proc/organ_failure(seconds_per_tick)
 	return
 
 /obj/item/organ/examine(mob/user)

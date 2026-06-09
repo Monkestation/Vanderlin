@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/dragger_drag_victim
 
-/datum/ai_planning_subtree/dragger_drag_victim/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/dragger_drag_victim/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	var/mob/living/victim = controller.blackboard[BB_DRAGGER_VICTIM]
@@ -28,7 +28,7 @@
 
 	set_movement_target(controller, victim)
 
-/datum/ai_behavior/drag_victim/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/drag_victim/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn

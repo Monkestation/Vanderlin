@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/defend_leyline
 
-/datum/ai_planning_subtree/defend_leyline/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/defend_leyline/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/obj/structure/leyline/source = controller.blackboard[BB_LEYLINE_SOURCE]
 

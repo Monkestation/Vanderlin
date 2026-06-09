@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/defend_bonepile
 
-/datum/ai_planning_subtree/defend_bonepile/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/defend_bonepile/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/obj/structure/bonepile/source = controller.blackboard[BB_LEYLINE_SOURCE]
 

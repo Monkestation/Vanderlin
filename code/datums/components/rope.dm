@@ -60,7 +60,7 @@
 	UnregisterSignal(parent, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
 	UnregisterSignal(roped, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
 
-/datum/component/rope/process(delta_time)
+/datum/component/rope/process(seconds_per_tick)
 	var/atom/beam_origin = rope_beam.origin
 	var/atom/beam_target = rope_beam.target
 	if(!can_see(beam_origin, beam_target, maximum_rope_distance))

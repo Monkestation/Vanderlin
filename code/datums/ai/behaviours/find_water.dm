@@ -19,6 +19,6 @@
 		return TRUE
 	return FALSE
 
-/datum/ai_behavior/find_water_source/perform(delta_time, datum/ai_controller/controller, search_range)
+/datum/ai_behavior/find_water_source/perform(seconds_per_tick, datum/ai_controller/controller, search_range)
 	. = ..()
 	finish_action(controller, TRUE)

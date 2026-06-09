@@ -52,18 +52,19 @@
 		var/reagent_color = initial(material.color)
 		. += "It contains [UNIT_FORM_STRING(total_volume)] of <font color=[reagent_color]> [tag] [initial(material.name)].</font>"
 
-/obj/item/storage/crucible/process(delta_time)
+/obj/item/storage/crucible/process(seconds_per_tick)
 	var/obj/machinery/light/fueled/smelter/smelter = loc
 	var/obj/machinery/light/fueled/light = locate(/obj/machinery/light/fueled) in get_turf(src)
+
 	if(istype(smelter) && smelter?.on)
 		crucible_temperature = max(300, min(smelter.max_crucible_temperature, crucible_temperature + 100))
 	else if(light?.on)
 		if(crucible_temperature > 1300)
-			crucible_temperature = max(300, crucible_temperature - 1)
+			crucible_temperature = max(300, crucible_temperature - seconds_per_tick)
 		else
-			crucible_temperature = max(300, min(1300, crucible_temperature + 100))
+			crucible_temperature = max(300, min(1300, crucible_temperature + (50 * seconds_per_tick)))
 	else
-		crucible_temperature = max(300, crucible_temperature - 10)
+		crucible_temperature = max(300, crucible_temperature - (5 * seconds_per_tick))
 
 	reagents.expose_temperature(crucible_temperature, 1)
 
@@ -82,7 +83,8 @@
 		if(crucible_temperature < initial(material.melting_point))
 			melting_pot -= item
 			continue
-		melting_pot[item] += 5 * delta_time
+
+		melting_pot[item] += 5 * seconds_per_tick
 		if(melting_pot[item] >= melty)
 			melt_item(item)
 

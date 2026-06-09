@@ -31,7 +31,7 @@
 	shock_penalty = 0
 	shock_penalty_timer = null
 
-/mob/living/carbon/proc/handle_shock(delta_time)
+/mob/living/carbon/proc/handle_shock(seconds_per_tick)
 	if(!can_feel_pain())
 		return
 	if(stat >= UNCONSCIOUS)
@@ -78,12 +78,12 @@
 			if(91 to INFINITY)
 				message_prob = 2
 				message = "[pick("WHAT A PAIN!", "OH THE PAIN!!", "I SUFFER!")]! My [damaged_bodypart.name] [damaged_bodypart.p_are()] [burning ? "on fire" : "hurting terribly"]!"
-		if(message && DT_PROB(message_prob, delta_time))
+		if(message && SPT_PROB(message_prob, seconds_per_tick))
 			custom_pain(message, maxbpshock, TRUE, damaged_bodypart, TRUE)
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/organ as anything in internal_organs)
-		if(DT_PROB(1, delta_time) && organ.get_shock(TRUE) >= 5)
+		if(SPT_PROB(1, seconds_per_tick) && organ.get_shock(TRUE) >= 5)
 			var/obj/item/bodypart/parent = get_bodypart(organ.current_zone)
 			if(parent)
 				var/pain = 10
@@ -103,7 +103,7 @@
 		var/penalty = min(SHOCK_PENALTY_CAP, FLOOR(traumatic_shock/(our_endurance*3), 1))
 		if(penalty)
 			var/probability = CEILING(min(60, traumatic_shock/(2 * (our_endurance/ATTRIBUTE_MIDDLING))), 1)
-			if(DT_PROB(probability/2, delta_time))
+			if(SPT_PROB(probability/2, seconds_per_tick))
 				update_shock_penalty(penalty)
 
 	var/general_damage_message = null
@@ -126,10 +126,10 @@
 			general_message_prob = 3
 			general_damage_message = "My whole body aches, it's driving me mad!"
 
-	if(general_damage_message && DT_PROB(general_message_prob, delta_time))
+	if(general_damage_message && SPT_PROB(general_message_prob, seconds_per_tick))
 		custom_pain(general_damage_message, general_damage)
 
-/mob/living/carbon/proc/handle_shock_stage(delta_time)
+/mob/living/carbon/proc/handle_shock_stage(seconds_per_tick)
 	if(!can_feel_pain())
 		setShockStage(0)
 		remove_movespeed_modifier(MOVESPEED_ID_SHOCK, FALSE)
@@ -148,10 +148,10 @@
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 
 	if(traumatic_shock >= max(SHOCK_STAGE_2, 0.8 * shock_stage))
-		adjustShockStage(delta_time * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
+		adjustShockStage(seconds_per_tick * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
 		setShockStage(min(shock_stage, SHOCK_STAGE_7))
-		var/recovery = delta_time
+		var/recovery = seconds_per_tick
 		//Lower shock faster the less pain we feel
 		if(traumatic_shock < shock_stage)
 			recovery += 1
@@ -179,7 +179,7 @@
 		emote("is having trouble keeping [p_their()] eyes open.")
 
 	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage >= SHOCK_STAGE_2))
-		if(DT_PROB(3, delta_time))
+		if(SPT_PROB(3, seconds_per_tick))
 			//adjust_eye_blur(rand(1, 2))
 			stuttering = max(stuttering, 5)
 
@@ -196,28 +196,28 @@
 			Immobilize(0.5 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage >= SHOCK_STAGE_4))
-		if(DT_PROB(1, delta_time))
+		if(SPT_PROB(1, seconds_per_tick))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Knockdown(2 SECONDS)
 			endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_5) && (previous_shock_stage >= SHOCK_STAGE_5))
-		if(DT_PROB(2, delta_time))
+		if(SPT_PROB(2, seconds_per_tick))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Knockdown(3 SECONDS)
 			endorphinate()
-		if(DT_PROB(0.5, delta_time))
+		if(SPT_PROB(0.5, seconds_per_tick))
 			emote("gasp")
 
 	if((shock_stage >= SHOCK_STAGE_6) && (previous_shock_stage >= SHOCK_STAGE_6))
-		if(DT_PROB(2.5, delta_time))
+		if(SPT_PROB(2.5, seconds_per_tick))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Knockdown(5 SECONDS)
 			endorphinate()
-		if(DT_PROB(1, delta_time))
+		if(SPT_PROB(1, seconds_per_tick))
 			emote("gasp")
 
 	/**
@@ -231,7 +231,7 @@
 			Stun(rand(2, 3) SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
-		if(DT_PROB(1, delta_time))
+		if(SPT_PROB(1, seconds_per_tick))
 			Paralyze(5 SECONDS)
 			endorphinate(TRUE)
 

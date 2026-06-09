@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/fishboss_check_environment
 	var/datum/ai_behavior/fishboss_use_water/water_behavior = /datum/ai_behavior/fishboss_use_water
 
-/datum/ai_planning_subtree/fishboss_check_environment/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/fishboss_check_environment/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/boss = controller.pawn
 	if(!istype(boss) || boss.health > boss.maxHealth * 0.5)

@@ -5,7 +5,7 @@
 	var/bleed_clot = 0.02 	// 2% of mob's max hp bleed clotted every perform
 	var/brute_heal = 0.10  // 10% of mob's max hp healed every perform
 
-/datum/ai_planning_subtree/simple_self_recovery/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/simple_self_recovery/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/pawn = controller.pawn
 	var/turf/cur_turf = get_turf(pawn)

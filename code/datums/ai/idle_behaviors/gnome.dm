@@ -14,7 +14,7 @@
 	var/cooldown = 20 SECONDS
 	var/next_time = 0
 
-/datum/idle_behavior/gnome_enhanced_idle/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/gnome_enhanced_idle/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/gnome_homunculus/gnome_pawn = controller.pawn
 	if(!istype(gnome_pawn))

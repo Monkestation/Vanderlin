@@ -124,7 +124,7 @@
 /datum/ai_planning_subtree/basic_ranged_attack_subtree/mirespider_lurker
 	ranged_attack_behavior = /datum/ai_behavior/basic_ranged_attack
 
-/datum/ai_planning_subtree/basic_ranged_attack_subtree/mirespider_lurker/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/basic_ranged_attack_subtree/mirespider_lurker/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
@@ -190,7 +190,7 @@
 /datum/ai_planning_subtree/cocoon_target
 	var/datum/ai_behavior/cocoon_target/behavior = /datum/ai_behavior/cocoon_target
 
-/datum/ai_planning_subtree/cocoon_target/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/cocoon_target/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/obj/item/target = controller.blackboard[BB_BASIC_MOB_COCOON_TARGET]
 	if(QDELETED(target))

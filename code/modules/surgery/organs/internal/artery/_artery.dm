@@ -32,10 +32,10 @@
 	/// Kill the owner if they have TRAIT_CRITICAL_WEAKNESS and the artery is dissected
 	var/crit_weakness_lethal = FALSE
 
-/obj/item/organ/artery/can_self_heal(delta_time)
+/obj/item/organ/artery/can_self_heal(seconds_per_tick)
 	return FALSE
 
-/obj/item/organ/artery/on_life(delta_time)
+/obj/item/organ/artery/on_life(seconds_per_tick)
 	. = ..()
 	// Dead, pulseless or cryosleep people do not pump blood
 	if(!is_bruised() || !owner.pulse || (owner.bodytemperature <= -15))
@@ -59,7 +59,7 @@
 			bleed_mod *= 1.25
 		if(PULSE_FASTER, PULSE_THREADY)
 			bleed_mod *= 1.5
-	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * delta_time, 0.1)
+	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * seconds_per_tick, 0.1)
 	if(final_bleed_rate <= 0)
 		return
 	if(COOLDOWN_FINISHED(src, next_squirt))

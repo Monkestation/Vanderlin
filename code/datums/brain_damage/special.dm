@@ -64,7 +64,7 @@
 	if(!isturf(owner.loc))
 		return
 
-	if(prob(3))
+	if(SPT_PROB(1.5, seconds_per_tick))
 		fade_out()
 
 /datum/brain_trauma/special/existential_crisis/proc/fade_out()

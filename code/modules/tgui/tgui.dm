@@ -288,7 +288,7 @@
  * Run an update cycle for this UI. Called internally by SStgui
  * every second or so.
  */
-/datum/tgui/process(delta_time, force)
+/datum/tgui/process(seconds_per_tick, force)
 	if(closing)
 		return
 

@@ -3,7 +3,7 @@
 	required_distance = 1
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_REQUIRE_REACH
 
-/datum/ai_behavior/use_on_object/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/use_on_object/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/pawn = controller.pawn
 	var/obj/item/held_item =  pawn.get_active_held_item()

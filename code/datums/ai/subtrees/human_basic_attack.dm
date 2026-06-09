@@ -45,7 +45,7 @@
 	if(prob(HUMAN_NPC_WEAKPOINT_SCAN_CHANCE) && isliving(target))
 		_scan_for_weakpoint(controller, pawn, target)
 
-/datum/ai_behavior/basic_melee_attack/human_npc/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/human_npc/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	controller.behavior_cooldowns[src] = world.time + get_cooldown(controller) //we don't wanna call parent tbh
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

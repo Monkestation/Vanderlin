@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/sylph_special_abilities
 	var/datum/ai_behavior/sylph_create_shroom/shroom_behavior = /datum/ai_behavior/sylph_create_shroom
 
-/datum/ai_planning_subtree/sylph_special_abilities/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/sylph_special_abilities/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/current_time = world.time
 	var/shroom_cooldown = controller.blackboard[BB_SHROOM_COOLDOWN] || 0
@@ -14,7 +14,7 @@
 /datum/ai_behavior/sylph_create_shroom
 	action_cooldown = 25 SECONDS
 
-/datum/ai_behavior/sylph_create_shroom/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/sylph_create_shroom/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/sylph = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

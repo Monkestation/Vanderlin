@@ -17,7 +17,7 @@
 	)
 
 
-/datum/ai_planning_subtree/shade_burning_check/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/shade_burning_check/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/shade = controller.pawn
 	if(shade.on_fire)

@@ -7,7 +7,7 @@
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_REQUIRE_REACH | AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	sidesteps_after = TRUE
 
-/datum/ai_behavior/basic_melee_attack/dragger/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/dragger/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn

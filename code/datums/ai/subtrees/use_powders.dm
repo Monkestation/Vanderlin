@@ -4,7 +4,7 @@
 /datum/ai_planning_subtree/use_powder/bum
 	combat_locked = FALSE
 
-/datum/ai_planning_subtree/use_powder/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/use_powder/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	// ONLY use powder if we're actively fighting someone
 	if(!controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET] && combat_locked)
 		return
@@ -23,7 +23,7 @@
 	action_cooldown = 3 MINUTES // Very long cooldown, this is a rare treat
 	behavior_flags = AI_BEHAVIOR_MOVE_AND_PERFORM | AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION | AI_BEHAVIOR_EXECUTE_ALONGSIDE
 
-/datum/ai_behavior/use_powder/perform(delta_time, datum/ai_controller/controller, consumable_key, obj/item/powder)
+/datum/ai_behavior/use_powder/perform(seconds_per_tick, datum/ai_controller/controller, consumable_key, obj/item/powder)
 	controller.set_blackboard_key(BB_HELD_CONSUMABLE, powder)
 	if(!powder)
 		finish_action(controller, FALSE, consumable_key)

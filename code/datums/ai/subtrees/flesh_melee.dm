@@ -1,4 +1,4 @@
-/datum/ai_planning_subtree/flesh_advanced_melee_attack/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/flesh_advanced_melee_attack/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
@@ -32,7 +32,7 @@
 	set_movement_target(controller, target)
 	return TRUE
 
-/datum/ai_behavior/flesh_combat/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key)
+/datum/ai_behavior/flesh_combat/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 	var/mob/living/target = controller.blackboard[target_key]
@@ -120,7 +120,7 @@
 	set_movement_target(controller, target)
 	return TRUE
 
-/datum/ai_behavior/flesh_frenzy_attack/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key)
+/datum/ai_behavior/flesh_frenzy_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 	var/mob/living/target = controller.blackboard[target_key]

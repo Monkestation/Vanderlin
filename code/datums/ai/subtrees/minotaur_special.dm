@@ -1,5 +1,5 @@
 /datum/ai_planning_subtree/minotaur_special_attacks
-/datum/ai_planning_subtree/minotaur_special_attacks/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/minotaur_special_attacks/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
@@ -61,7 +61,7 @@
 	charge_stage = 0
 	return TRUE
 
-/datum/ai_behavior/minotaur_charge_attack/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/minotaur_charge_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/minotaur/boss = controller.pawn
 	if(!boss || boss.stat != CONSCIOUS)
@@ -203,7 +203,7 @@
 	set_movement_target(controller, target)
 	return TRUE
 
-/datum/ai_behavior/minotaur_fury_slam/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/minotaur_fury_slam/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/minotaur/boss = controller.pawn
 	if(!boss || boss.stat != CONSCIOUS)
@@ -279,7 +279,7 @@
 /datum/ai_behavior/minotaur_ground_slam
 	action_cooldown = 4 SECONDS
 
-/datum/ai_behavior/minotaur_ground_slam/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/minotaur_ground_slam/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/minotaur/boss = controller.pawn
 	if(!boss || boss.stat != CONSCIOUS)

@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/cat_rest_behavior
 
-/datum/ai_planning_subtree/cat_rest_behavior/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/cat_rest_behavior/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
@@ -22,7 +22,7 @@
 /datum/ai_behavior/cat_rest
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
-/datum/ai_behavior/cat_rest/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/cat_rest/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
 	cat_pawn.emote("me", 1, pick("stretches out for a belly rub.", "wags its tail.", "lies down."))
@@ -33,7 +33,7 @@
 /datum/ai_behavior/cat_sit
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
-/datum/ai_behavior/cat_sit/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/cat_sit/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
 	cat_pawn.emote("me", 1, pick("sits down.", "crouches on its hind legs.", "looks alert."))
@@ -44,7 +44,7 @@
 /datum/ai_behavior/cat_get_up
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
-/datum/ai_behavior/cat_get_up/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/cat_get_up/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
 	cat_pawn.emote("me", 1, pick("gets up and meows.", "walks around.", "stops resting."))
@@ -55,7 +55,7 @@
 /datum/ai_behavior/cat_groom
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
-/datum/ai_behavior/cat_groom/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/cat_groom/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
 	cat_pawn.emote("me", 1, pick("grooms its fur.", "twitches its whiskers.", "shakes out its coat."))

@@ -30,7 +30,7 @@
 /datum/action_state/transport/exit_state(datum/ai_controller/controller)
 	moving_to_target = FALSE
 
-/datum/action_state/transport/process_state(datum/ai_controller/controller, delta_time)
+/datum/action_state/transport/process_state(datum/ai_controller/controller, seconds_per_tick)
 	var/mob/living/pawn = controller.pawn
 
 	switch(current_task)

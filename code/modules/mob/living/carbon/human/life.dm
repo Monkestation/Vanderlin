@@ -100,7 +100,7 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/human/DeadLife(delta_time)
+/mob/living/carbon/human/DeadLife(seconds_per_tick)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -112,8 +112,8 @@
 
 	. = ..()
 	name = get_visible_name()
-	handle_organs(delta_time)
-	handle_bodyparts(delta_time)
+	handle_organs(seconds_per_tick)
+	handle_bodyparts(seconds_per_tick)
 
 /mob/living/carbon/human/proc/on_daypass()
 	if(stat < 3) //not dead

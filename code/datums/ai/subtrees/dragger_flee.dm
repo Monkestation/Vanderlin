@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/flee_target/dragger
 	flee_behaviour = /datum/ai_behavior/run_away_from_target/dragger
 
-/datum/ai_behavior/run_away_from_target/dragger/perform(delta_time, datum/ai_controller/controller, target_key, hiding_location_key)
+/datum/ai_behavior/run_away_from_target/dragger/perform(seconds_per_tick, datum/ai_controller/controller, target_key, hiding_location_key)
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn

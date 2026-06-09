@@ -102,7 +102,7 @@
 /datum/action_state/splitter/enter_state(datum/ai_controller/controller)
 	current_task = "finding_item"
 
-/datum/action_state/splitter/process_state(datum/ai_controller/controller, delta_time)
+/datum/action_state/splitter/process_state(datum/ai_controller/controller, seconds_per_tick)
 	var/extractor_mode = controller.blackboard[BB_GNOME_EXTRACTOR_MODE]
 	var/splitter_mode = controller.blackboard[BB_GNOME_SPLITTER_MODE]
 

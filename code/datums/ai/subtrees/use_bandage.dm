@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/use_bandage
 
-/datum/ai_planning_subtree/use_bandage/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/use_bandage/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(controller.blackboard[BB_HELD_CONSUMABLE] || controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])
 		return
 
@@ -26,7 +26,7 @@
 /datum/ai_behavior/apply_bandage
 	action_cooldown = 30 SECONDS
 
-/datum/ai_behavior/apply_bandage/perform(delta_time, datum/ai_controller/controller, consumable_key, obj/item/bandage)
+/datum/ai_behavior/apply_bandage/perform(seconds_per_tick, datum/ai_controller/controller, consumable_key, obj/item/bandage)
 	controller.set_blackboard_key(BB_HELD_CONSUMABLE, bandage)
 	if(!bandage)
 		finish_action(controller, FALSE, consumable_key)

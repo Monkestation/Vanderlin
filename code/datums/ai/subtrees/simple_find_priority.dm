@@ -1,4 +1,4 @@
 /datum/ai_planning_subtree/simple_find_priority
 
-/datum/ai_planning_subtree/simple_find_priority/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/simple_find_priority/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	controller.queue_behavior(/datum/ai_behavior/find_priority_targets, BB_BASIC_MOB_PRIORITY_TARGETS, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETTING_DATUM, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)

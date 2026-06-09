@@ -53,7 +53,7 @@
 	return
 
 // Called every tick while in this state
-/datum/action_state/proc/process_state(datum/ai_controller/controller, delta_time)
+/datum/action_state/proc/process_state(datum/ai_controller/controller, seconds_per_tick)
 	return ACTION_STATE_CONTINUE
 
 // Called when exiting this state

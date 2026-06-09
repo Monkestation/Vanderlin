@@ -46,7 +46,7 @@
 	set_movement_target(controller, get_turf(controller.pawn))
 	return ..()
 
-/datum/ai_behavior/run_away_from_target/perform(delta_time, datum/ai_controller/controller, target_key, hiding_location_key)
+/datum/ai_behavior/run_away_from_target/perform(seconds_per_tick, datum/ai_controller/controller, target_key, hiding_location_key)
 	. = ..()
 	var/atom/target = controller.blackboard[hiding_location_key] || controller.blackboard[target_key]
 	var/escaped =  !target || !can_see(controller.pawn, target, run_distance) // If we can't see it we got away

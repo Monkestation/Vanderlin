@@ -4,7 +4,7 @@
 /datum/idle_behavior/bless_crops
 	var/cooldown = 2 MINUTES
 
-/datum/idle_behavior/bless_crops/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/bless_crops/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	var/last_cooldown = controller.blackboard[BB_AGRIOPYLON_BLESS_COOLDOWN] || 0

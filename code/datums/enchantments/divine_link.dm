@@ -24,16 +24,20 @@
 	carbon.cleric.update_devotion(-50)
 
 
-/datum/enchantment/divine_link/process(delta_time)
+/datum/enchantment/divine_link/process(seconds_per_tick)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return
+
 	if(!ishuman(enchanted_item.loc))
 		return
+
 	var/obj/item/item = enchanted_item
 	if(item.obj_broken)
 		return
+
 	var/mob/living/carbon/human/carbon = enchanted_item.loc
 	if(!carbon.cleric)
 		return
-	carbon.cleric.update_devotion(2)
+
+	carbon.cleric.update_devotion(seconds_per_tick)

@@ -139,10 +139,10 @@
 			if(priority > GNOME_PRIORITY_NONE)
 				examine_list += span_notice(" - [state_name]: priority [priority]")
 
-/datum/ai_planning_subtree/priority_action_state_manager/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/priority_action_state_manager/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/datum/action_state_manager/manager = controller.blackboard[BB_ACTION_STATE_MANAGER]
 	if(!manager)
 		return
 
-	if(manager.process_machine(controller, delta_time))
+	if(manager.process_machine(controller, seconds_per_tick))
 		return SUBTREE_RETURN_FINISH_PLANNING

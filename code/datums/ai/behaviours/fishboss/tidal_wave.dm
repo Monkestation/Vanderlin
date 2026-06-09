@@ -2,7 +2,7 @@
 /datum/ai_behavior/fishboss_tidal_wave
 	action_cooldown = 0.5 SECONDS
 
-/datum/ai_behavior/fishboss_tidal_wave/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/fishboss_tidal_wave/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/boss = controller.pawn
 	if(!istype(boss))

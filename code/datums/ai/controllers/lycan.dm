@@ -22,7 +22,7 @@
 	idle_behavior = /datum/idle_behavior/guard_leyline
 
 
-/datum/idle_behavior/guard_leyline/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/guard_leyline/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/simple_animal/hostile/retaliate/leylinelycan/lycan = controller.pawn
 	var/obj/structure/leyline/source = controller.blackboard[BB_LEYLINE_SOURCE]
 

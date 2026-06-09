@@ -193,18 +193,17 @@
 	stop_smoking()
 
 
-/obj/structure/fluff/statue/shisha/process(delta_time)
+/obj/structure/fluff/statue/shisha/process(seconds_per_tick)
 	if(!current_smoker || !bowl_contents)
 		stop_smoking()
 		return PROCESS_KILL
 
-	smoke_timer += delta_time
+	smoke_timer += seconds_per_tick
 	if(smoke_timer < smoke_interval)
 		return
 
 	smoke_timer = 0
 	deliver_puff()
-
 
 /obj/structure/fluff/statue/shisha/proc/deliver_puff()
 	if(!bowl_contents || puffs_remaining <= 0)

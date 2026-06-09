@@ -2,7 +2,7 @@
 	var/energy_surge_behavior = /datum/ai_behavior/leyline_energy_surge
 	var/shockwave_behavior = /datum/ai_behavior/leyline_shockwave
 
-/datum/ai_planning_subtree/leyline_special_abilities/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/leyline_special_abilities/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	var/energy_cooldown = controller.blackboard[BB_ENERGY_SURGE_COOLDOWN]
@@ -52,7 +52,7 @@
 
 	set_movement_target(controller, target)
 
-/datum/ai_behavior/leyline_energy_surge/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/leyline_energy_surge/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/leylinelycan/lycan = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
@@ -101,7 +101,7 @@
 	action_cooldown = 15 SECONDS
 	behavior_flags = AI_BEHAVIOR_MOVE_AND_PERFORM
 
-/datum/ai_behavior/leyline_shockwave/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/leyline_shockwave/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/leylinelycan/lycan = controller.pawn
 	var/energy_level = controller.blackboard[BB_LEYLINE_ENERGY]

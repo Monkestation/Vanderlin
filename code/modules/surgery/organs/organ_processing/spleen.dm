@@ -5,7 +5,7 @@
 /datum/organ_process/spleen/needs_process(mob/living/carbon/owner)
 	return (..() && !HAS_TRAIT(owner, TRAIT_NOHUNGER) && CAN_HAVE_BLOOD(owner))
 
-/datum/organ_process/spleen/handle_process(mob/living/carbon/owner, delta_time)
+/datum/organ_process/spleen/handle_process(mob/living/carbon/owner, seconds_per_tick)
 	if(owner.get_blood_volume() >= BLOOD_VOLUME_NORMAL)
 		return
 
@@ -26,6 +26,6 @@
 	combined_nutrition_requirement *= blood_restore_multiplier
 	if(!blood_regen)
 		return
-	owner.adjust_nutrition(-combined_nutrition_requirement * nutrition_ratio * delta_time)
-	owner.adjust_blood_volume(CEILING(blood_regen * nutrition_ratio * delta_time, 0.1))
+	owner.adjust_nutrition(-combined_nutrition_requirement * nutrition_ratio * seconds_per_tick)
+	owner.adjust_blood_volume(CEILING(blood_regen * nutrition_ratio * seconds_per_tick, 0.1))
 	return TRUE

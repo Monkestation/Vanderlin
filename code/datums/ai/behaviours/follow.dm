@@ -3,7 +3,7 @@
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_MOVE_AND_PERFORM
 	required_distance = 1
 
-/datum/ai_behavior/follow/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/follow/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/living_pawn = controller.pawn
 	if(!istype(living_pawn) || !isturf(living_pawn.loc))

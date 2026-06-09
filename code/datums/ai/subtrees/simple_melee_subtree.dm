@@ -3,7 +3,7 @@
 	/// Is this the last thing we do? (if we set a movement target, this will usually be yes)
 	var/end_planning = TRUE
 
-/datum/ai_planning_subtree/basic_melee_attack_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/basic_melee_attack_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
@@ -17,7 +17,7 @@
 	var/min_dist = 3
 	var/datum/ai_behavior/basic_ranged_attack/ranged_attack_behavior = /datum/ai_behavior/basic_ranged_attack
 
-/datum/ai_planning_subtree/basic_ranged_attack_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/basic_ranged_attack_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
@@ -47,7 +47,7 @@
 	var/death_roll_damage = 15 // Extra damage from death roll
 	var/death_roll_cooldown = 45 SECONDS // Time between death rolls
 
-/datum/ai_behavior/basic_melee_attack/gator_attack/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/gator_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/gator/gator_pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
@@ -85,7 +85,7 @@
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/saiga
 	var/datum/ai_behavior/basic_melee_attack/opportunistic/alternative = /datum/ai_behavior/basic_melee_attack/opportunistic
 
-/datum/ai_planning_subtree/basic_melee_attack_subtree/saiga/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/basic_melee_attack_subtree/saiga/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
 		return
@@ -97,7 +97,7 @@
 	if (end_planning)
 		return SUBTREE_RETURN_FINISH_PLANNING //we are going into battle...no distractions.
 
-/datum/ai_planning_subtree/basic_melee_attack_subtree/no_flee/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/basic_melee_attack_subtree/no_flee/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(controller.blackboard[BB_BASIC_MOB_FLEEING])
 		return

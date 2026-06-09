@@ -9,12 +9,12 @@
 /datum/organ_process/liver/needs_process(mob/living/carbon/owner)
 	return (..() && !HAS_TRAIT(owner, TRAIT_NOMETABOLISM))
 
-/datum/organ_process/liver/handle_process(mob/living/carbon/owner, delta_time)
+/datum/organ_process/liver/handle_process(mob/living/carbon/owner, seconds_per_tick)
 	var/liver_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_LIVER)
 	if(owner.stat == DEAD)
 		for(var/reagent in owner.reagents.reagent_list)
 			var/datum/reagent/R = reagent
-			R.on_mob_dead(owner, delta_time)
+			R.on_mob_dead(owner, seconds_per_tick)
 		return TRUE
 
 	var/obj/item/organ/liver/liver = owner.getorganslot(ORGAN_SLOT_LIVER)
@@ -30,15 +30,15 @@
 			if(belly)
 				thisamount += belly.reagents.get_reagent_amount(T.type)
 			if(thisamount && thisamount <= liver.toxTolerance * (liver_efficiency * 0.01))
-				owner.reagents.remove_reagent(T.type, 1 * delta_time)
+				owner.reagents.remove_reagent(T.type, 1 * seconds_per_tick)
 			else
-				liver.applyOrganDamage(thisamount * liver.toxLethality * delta_time)
+				liver.applyOrganDamage(thisamount * liver.toxLethality * seconds_per_tick)
 				if(provide_pain_message != HAS_PAINFUL_TOXIN)
 					provide_pain_message = T.silent_toxin ? HAS_SILENT_TOXIN : HAS_PAINFUL_TOXIN
 
 	owner.reagents.metabolize(owner, can_overdose = TRUE, efficiency = liver_efficiency)
 
-	if(provide_pain_message == HAS_PAINFUL_TOXIN && liver.damage > 10 && DT_PROB(liver.damage / 3, delta_time))
+	if(provide_pain_message == HAS_PAINFUL_TOXIN && liver.damage > 10 && SPT_PROB(liver.damage / 3, seconds_per_tick))
 		to_chat(owner, "<span class='warning'>I feel a dull pain in my abdomen.</span>")
 
 	if(liver.damage > liver.maxHealth)

@@ -1,4 +1,4 @@
-/datum/ai_planning_subtree/polter/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/polter/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	controller.queue_behavior(/datum/ai_behavior/polter)
 
@@ -6,7 +6,7 @@
 	action_cooldown = 1 SECONDS
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 
-/datum/ai_behavior/polter/perform(delta_time, datum/ai_controller/controller, ...)
+/datum/ai_behavior/polter/perform(seconds_per_tick, datum/ai_controller/controller, ...)
 	. = ..()
 	var/mob/living/polter = controller.pawn
 	for(var/mob/living/carbon/human/H in view(15, polter))

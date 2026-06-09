@@ -25,7 +25,7 @@
 	/// Chance to sway in place when idle
 	var/sway_chance = 5
 
-/datum/idle_behavior/dragger_idle/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/dragger_idle/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn
 

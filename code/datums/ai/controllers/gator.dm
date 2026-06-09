@@ -27,7 +27,7 @@
 	var/ambush_pose_chance = 15 // Chance to enter an ambush pose while idle
 	var/ambush_pose_time = 10 SECONDS // How long to stay in ambush pose
 
-/datum/idle_behavior/gator_idle/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/gator_idle/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	if(controller.blackboard[BB_BASIC_MOB_FOOD_TARGET]) // this means we are likely eating a corpse
 		return
 	if(controller.blackboard[BB_RESISTING]) //we are trying to resist
@@ -62,7 +62,7 @@
 /datum/ai_planning_subtree/find_water
 	var/search_range = 10
 
-/datum/ai_planning_subtree/find_water/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/find_water/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/gator/gator_pawn = controller.pawn
 	if(!istype(gator_pawn))
@@ -78,7 +78,7 @@
 	var/return_to_water_chance = 60 // Percent chance to return to water when not in combat
 	var/ambush_cooldown = 30 SECONDS // Time between ambush attempts
 
-/datum/ai_planning_subtree/gator_behavior/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/gator_behavior/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/gator/gator_pawn = controller.pawn
 	if(!istype(gator_pawn))

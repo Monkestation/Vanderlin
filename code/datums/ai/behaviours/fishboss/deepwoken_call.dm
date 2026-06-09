@@ -2,7 +2,7 @@
 /datum/ai_behavior/fishboss_deep_call
 	action_cooldown = 1 SECONDS
 
-/datum/ai_behavior/fishboss_deep_call/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/fishboss_deep_call/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/boss = controller.pawn
 	if(!istype(boss))

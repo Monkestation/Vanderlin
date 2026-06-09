@@ -264,16 +264,18 @@
 		return
 	. = ..()
 
-/obj/machinery/light/fueled/process(delta_time)
-	. = ..()
-	if(on)
-		if(initial(fueluse) > 0)
-			if(fueluse > 0)
-				fueluse = max(fueluse - 1 SECONDS * delta_time, 0)
-			if(fueluse == 0)
-				burn_out()
-		if(length(contents)) // burn kobolds in ovens and smelters
-			for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
-				holder.held_mob?.adjust_fire_stacks(5)
-				holder.held_mob?.IgniteMob()
-				holder.update_appearance()
+/obj/machinery/light/fueled/process(seconds_per_tick)
+	if(!on)
+		return PROCESS_KILL
+
+	if(initial(fueluse) > 0)
+		if(fueluse > 0)
+			fueluse = max(fueluse - seconds_per_tick SECONDS, 0)
+		if(fueluse == 0)
+			burn_out()
+
+	if(length(contents)) // burn kobolds in ovens and smelters
+		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+			holder.held_mob?.adjust_fire_stacks(5)
+			holder.held_mob?.IgniteMob()
+			holder.update_appearance()

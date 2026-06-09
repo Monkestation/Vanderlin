@@ -4,7 +4,7 @@
 	var/wormhole_check_distance = 15 // How far to look for wormholes
 	var/wormhole_check_cooldown = 3 SECONDS
 
-/datum/ai_movement/hybrid_pathing/wormhole_aware/process(delta_time)
+/datum/ai_movement/hybrid_pathing/wormhole_aware/process(seconds_per_tick)
 	for(var/datum/ai_controller/controller as anything in moving_controllers)
 		var/datum/weakref/used_ref = WEAKREF(controller)
 		if(!(future_path_blackboard_key in controller.blackboard))

@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/leyline_teleport
 	var/teleport_behavior = /datum/ai_behavior/leyline_teleport
 
-/datum/ai_planning_subtree/leyline_teleport/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/leyline_teleport/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	var/cooldown = controller.blackboard[BB_TELEPORT_COOLDOWN]
@@ -25,7 +25,7 @@
 
 	set_movement_target(controller, target)
 
-/datum/ai_behavior/leyline_teleport/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/leyline_teleport/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/leylinelycan/lycan = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

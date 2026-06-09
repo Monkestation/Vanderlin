@@ -42,7 +42,7 @@
 		return pick(possible_lurk_spots)
 	return null
 
-/datum/idle_behavior/flesh_idle/perform_idle_behavior(delta_time, datum/ai_controller/controller)
+/datum/idle_behavior/flesh_idle/perform_idle_behavior(seconds_per_tick, datum/ai_controller/controller)
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 
 	if(prob(15) && !controller.blackboard[BB_FLESH_IS_REGENERATING])

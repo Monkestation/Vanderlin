@@ -1,7 +1,7 @@
 /datum/ai_behavior/fishboss_whirlpool
 	action_cooldown = 0.5 SECONDS
 
-/datum/ai_behavior/fishboss_whirlpool/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/fishboss_whirlpool/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/boss = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

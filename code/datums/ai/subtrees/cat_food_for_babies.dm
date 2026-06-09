@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/bring_food_to_babies
 	var/kitten_detection_range = 7 // How far the cat can detect kittens
 
-/datum/ai_planning_subtree/bring_food_to_babies/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/bring_food_to_babies/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
@@ -68,7 +68,7 @@
 	set_movement_target(controller, food)
 	return TRUE
 
-/datum/ai_behavior/fetch_food_for_kitten/perform(delta_time, datum/ai_controller/controller, food_key, kitten_key)
+/datum/ai_behavior/fetch_food_for_kitten/perform(seconds_per_tick, datum/ai_controller/controller, food_key, kitten_key)
 	. = ..()
 
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
@@ -105,7 +105,7 @@
 		return
 
 	// If we can't reach the food for some reason, give up after a timeout
-	if(delta_time > 10 SECONDS)
+	if(seconds_per_tick > 10 SECONDS)
 		finish_action(controller, FALSE)
 		return
 
@@ -131,7 +131,7 @@
 	set_movement_target(controller, kitten)
 	return TRUE
 
-/datum/ai_behavior/bring_food_to_kitten/perform(delta_time, datum/ai_controller/controller, food_key, kitten_key)
+/datum/ai_behavior/bring_food_to_kitten/perform(seconds_per_tick, datum/ai_controller/controller, food_key, kitten_key)
 	. = ..()
 
 	var/mob/living/simple_animal/pet/cat/cat_pawn = controller.pawn
@@ -169,7 +169,7 @@
 		return
 
 	// If we can't reach the kitten for some reason, give up after a timeout
-	if(delta_time > 10 SECONDS)
+	if(seconds_per_tick > 10 SECONDS)
 		finish_action(controller, FALSE)
 		return
 

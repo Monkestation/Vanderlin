@@ -20,7 +20,7 @@
 	var/max_basic_failures = 3 // How many consecutive basic movement failures before switching to A*
 	var/always_advanced = FALSE
 
-/datum/ai_movement/hybrid_pathing/process(delta_time)
+/datum/ai_movement/hybrid_pathing/process(seconds_per_tick)
 	if(world.time < next_resolve)
 		next_resolve = world.time + 5 MINUTES
 

@@ -146,10 +146,10 @@
 	brute_heal = 1
 	burn_heal = 1
 
-/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/affected_mob, delta_time)
+/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick)
 	. = ..()
 	if(affected_mob.satiety < MAX_SATIETY)
-		affected_mob.satiety += 15 * delta_time
+		affected_mob.satiety += 15 * seconds_per_tick
 
 /datum/reagent/consumable/nutriment/bone_marrow
 	name = "Bone Marrow"

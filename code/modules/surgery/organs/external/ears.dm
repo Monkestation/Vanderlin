@@ -41,10 +41,10 @@
 	for(var/datum/wound/facial/ears/ear_wound in M.get_wounds())
 		qdel(ear_wound)
 
-/obj/item/organ/ears/on_life(delta_time)
+/obj/item/organ/ears/on_life(seconds_per_tick)
 	. = ..()
 	if(!is_failing())
-		applyDeaf(-0.5 * delta_time)
+		applyDeaf(-0.5 * seconds_per_tick)
 
 /obj/item/organ/ears/get_slot_efficiency(slot)
 	if((slot == ORGAN_SLOT_EARS) && deaf)

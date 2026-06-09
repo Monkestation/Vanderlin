@@ -1,6 +1,6 @@
 /datum/ai_behavior/incubate_egg
 
-/datum/ai_behavior/incubate_egg/perform(delta_time, datum/ai_controller/controller, emote)
+/datum/ai_behavior/incubate_egg/perform(seconds_per_tick, datum/ai_controller/controller, emote)
 	var/mob/living/simple_animal/hostile/retaliate/chicken/living_pawn = controller.pawn
 	if(!istype(living_pawn))
 		return

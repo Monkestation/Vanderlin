@@ -1,7 +1,7 @@
 
 /datum/ai_planning_subtree/papameat_sacrifice
 
-/datum/ai_planning_subtree/papameat_sacrifice/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/papameat_sacrifice/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/obj/structure/meatvine/papameat/papameat = controller.blackboard[BB_PAPAMEAT_TARGET]
 
 	if(!papameat || QDELETED(papameat))
@@ -36,7 +36,7 @@
 
 /datum/ai_planning_subtree/papameat_feed_corpse
 
-/datum/ai_planning_subtree/papameat_feed_corpse/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/papameat_feed_corpse/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	// Don't try to feed if we're in combat or healing
 	if(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])
 		return
@@ -83,7 +83,7 @@
 
 /datum/ai_planning_subtree/papameat_defend
 
-/datum/ai_planning_subtree/papameat_defend/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/papameat_defend/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/obj/structure/meatvine/papameat/papameat = controller.blackboard[BB_PAPAMEAT_TARGET]
 
 	if(!papameat || QDELETED(papameat))
@@ -100,7 +100,7 @@
 
 /datum/ai_planning_subtree/meatvine_bridge
 
-/datum/ai_planning_subtree/meatvine_bridge/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/meatvine_bridge/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	// Don't bridge if we're doing critical tasks
 	if(controller.blackboard[BB_PAPAMEAT_HEALING])
 		return
@@ -136,7 +136,7 @@
 
 /datum/ai_planning_subtree/meatvine_destroy_obstacle
 
-/datum/ai_planning_subtree/meatvine_destroy_obstacle/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/meatvine_destroy_obstacle/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	// Don't attack obstacles if we're healing papameat
 	if(controller.blackboard[BB_PAPAMEAT_HEALING])
 		return
@@ -172,7 +172,7 @@
 
 /datum/ai_planning_subtree/meatvine_evolve
 
-/datum/ai_planning_subtree/meatvine_evolve/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/meatvine_evolve/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/mob/living/simple_animal/hostile/retaliate/meatvine/mob = controller.pawn
 
 	if(!istype(mob))
@@ -218,7 +218,7 @@
 
 /datum/ai_planning_subtree/use_personal_abilities
 
-/datum/ai_planning_subtree/use_personal_abilities/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/use_personal_abilities/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/mob/living/simple_animal/hostile/retaliate/meatvine/mob = controller.pawn
 
 	if(!istype(mob))
