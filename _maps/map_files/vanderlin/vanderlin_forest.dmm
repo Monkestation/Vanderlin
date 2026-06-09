@@ -2315,6 +2315,13 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/outpost/vanderlin)
+"nY" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/flora/grass/maneater/real,
+/obj/item/alch/herb/rosa,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness/safe)
 "ob" = (
 /mob/living/simple_animal/hostile/retaliate/leylinelycan{
 	name = "Saint's Guardian";
@@ -4244,12 +4251,6 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"yj" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/flora/grass/maneater/real,
-/obj/item/alch/herb/rosa,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness/safe)
 "yl" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -7239,6 +7240,15 @@
 	},
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"Oz" = (
+/obj/structure/closet/dirthole/closed,
+/obj/item/skull{
+	pixel_x = 11;
+	pixel_y = -7
+	},
+/obj/effect/mapping_helpers/structure/grave_spawner/great_hunt,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "OB" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt/road,
@@ -7782,15 +7792,6 @@
 /area/under/cave)
 "Sg" = (
 /turf/closed/wall/mineral/stone/window,
-/area/outdoors/wilderness/safe/gallowband_fort)
-"Sh" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/skull{
-	pixel_x = 11;
-	pixel_y = -7
-	},
-/obj/effect/mapping_helpers/structure/grave_spawner/great_hunt,
-/turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "Sj" = (
 /obj/structure/fluff/walldeco/painting/skull{
@@ -13003,7 +13004,7 @@ kw
 kw
 Xt
 kw
-yj
+nY
 Tc
 Mn
 ZV
@@ -22143,9 +22144,9 @@ nC
 An
 An
 ZV
-Sh
+Oz
 ZV
-Sh
+Oz
 Kc
 Gs
 Xy
@@ -22547,9 +22548,9 @@ nC
 An
 ub
 gr
-Sh
+Oz
 ZV
-Sh
+Oz
 ZV
 gr
 oZ
@@ -22951,9 +22952,9 @@ An
 An
 gr
 gr
-Sh
+Oz
 gr
-Sh
+Oz
 gr
 ZV
 Kc
