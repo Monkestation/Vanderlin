@@ -303,8 +303,7 @@
 //to add a splatter of blood or other mob liquid.
 /mob/living/proc/add_splatter_floor(turf/T)
 	if(!iscarbon(src))
-		if(!HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-			return
+		return
 	var/datum/blood_type/blood = get_blood_type()
 	if(isnull(blood))
 		return
@@ -325,6 +324,18 @@
 	splatter.update_appearance(UPDATE_ICON_STATE)
 	T?.pollute_turf(/datum/pollutant/metallic_scent, 30)
 	return TRUE
+
+//to add splatters of blood onto nearby walls. When provided a certain force amount, also increases the range at which blood can appear on the walls.
+//spill_amount also increases the amount of times to try and spill more blood; Particularly to give better feedback to dismembering something.
+/mob/living/proc/add_splatter_wall(force = 0, spill_amount = 1, splatter_direction = 1)
+	if(force <= 0) //If the force doesn't do enough damage then dont do anything.
+		return
+	if(!iscarbon(src) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return
+
+	var/obj/effect/decal/cleanable/blood/wallsplatter/our_splatter = new(loc, force)
+	var/turf/targ = get_ranged_target_turf(src, splatter_direction, force)
+	our_splatter.fly_towards(targ, force)
 
 /mob/living/proc/add_drip_floor(turf/T, amt)
 	if(!iscarbon(src))

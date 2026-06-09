@@ -426,6 +426,7 @@
 	item_weight = 4.45 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/decorated	// template
+	abstract_type = /obj/item/clothing/head/helmet/heavy/decorated
 	name = "a template"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	bloody_icon = 'icons/effects/blood64x64.dmi'
@@ -434,20 +435,8 @@
 	worn_y_dimension = 64
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
-	var/picked = FALSE
-
 	prevent_crits = ALL_CRITICAL_HITS
-	abstract_type = /obj/item/clothing/head/helmet/heavy/decorated
-
-/obj/item/clothing/head/helmet/heavy/decorated/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
+	var/picked = FALSE
 
 //............... Decorated Knight Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/decorated/knight
