@@ -548,7 +548,9 @@
 /obj/item/reagent_containers/temperature_expose(exposed_temperature, exposed_volume)
 	reagents.expose_temperature(exposed_temperature)
 
-/obj/item/reagent_containers/on_reagent_change(changetype)
+/obj/item/reagent_containers/proc/on_reagent_change(changetype)
+	SIGNAL_HANDLER
+
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/reagent_containers/update_overlays()
@@ -584,9 +586,8 @@
 
 	if(fill_icon_under_override)
 		filling.layer = layer - 0.01
-		. += filling
-	else
-		. += filling
+
+	. += filling
 
 	var/datum/reagent/master = reagents.get_master_reagent()
 	if(master?.glows)

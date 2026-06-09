@@ -344,7 +344,7 @@
 
 	filling_metal = biggest_metal
 
-/obj/item/mould/customizable/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
+/obj/item/mould/customizable/proc/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
 	if(cooling)
 		return
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)

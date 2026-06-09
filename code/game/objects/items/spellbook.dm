@@ -298,29 +298,3 @@
 	desc = "An incredible book that gives off glowing arcyne motes, it is filled with runes and arcyne theories that is hard for even masters of arcyne to understand. The arcyne script glows and practically whispers from the page..."
 	bookquality = 12
 	sellprice = 400
-
-// qualityoflearn buff shit
-
-/obj/item/gem
-	var/arcyne_potency = 20
-	var/datum/attunement/attuned
-
-/obj/item/gem/yellow
-	arcyne_potency = 5
-	attuned = /datum/attunement/light
-
-/obj/item/gem/green
-	arcyne_potency = 7
-	attuned = /datum/attunement/earth
-
-/obj/item/gem/violet
-	arcyne_potency = 10
-	attuned = /datum/attunement/electric
-
-/obj/item/gem/blue
-	arcyne_potency = 25
-	attuned = /datum/attunement/blood
-
-/obj/item/gem/diamond
-	arcyne_potency = 15
-	attuned = /datum/attunement/aeromancy

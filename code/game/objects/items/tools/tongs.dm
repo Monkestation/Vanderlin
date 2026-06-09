@@ -136,9 +136,9 @@
 
 	var/obj/item/item = interacting_with
 
-	if(istype(item, /obj/item/storage/crucible)
-		|| HAS_TRAIT(item, TRAIT_NEEDS_QUENCH)
-		|| item.melting_material || item.anvilrepair || item.smeltresult
+	if(istype(item, /obj/item/storage/crucible) \
+		|| HAS_TRAIT(item, TRAIT_NEEDS_QUENCH) \
+		|| item.melting_material || item.anvilrepair || item.smeltresult \
 	)
 		user.visible_message(span_info("[user] picks up [interacting_with] with [src]."))
 		set_held_item(interacting_with)
