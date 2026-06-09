@@ -8,7 +8,6 @@
   --rb-text: #5a4632;
   --rb-text-muted: #8b7154;
   --rb-highlight: rgba(200, 134, 10, 0.15);
-  --rb-hyperlink: #c99632;
   --rb-hyperlink-h: #f0c15a;
   --rb-section-bg: rgba(44, 28, 10, 0.7);
   --rb-step-bg: rgba(30, 18, 5, 0.8);
@@ -24,7 +23,6 @@
   --am-ink: var(--rb-text);
   --am-ink-soft: var(--rb-text-muted);
   --am-ink-faint: rgba(90, 70, 50, 0.4);
-  --am-gold: var(--rb-accent);
   --am-gold-bright: var(--rb-hyperlink-h);
   --am-good: #4e7a3a;
   --am-bad: #9c3a2a;
@@ -38,7 +36,6 @@
   --am-leather: var(--rb-surface);
   --am-coke: var(--rb-surface-alt);
   --am-panel-border: var(--rb-border);
-  --am-panel-sheen: rgba(255, 255, 255, 0.18);
   --am-row-bg: rgba(255, 255, 255, 0.12);
   --am-row-hover: var(--rb-highlight);
   --am-row-line: rgba(92, 61, 30, 0.3);
@@ -339,47 +336,34 @@
 
 .AttributeMenu__sealNode--strength,
 .AttributeMenu__sealNode--perception,
-.AttributeMenu__sealNode--intelligence,
-.AttributeMenu__sealNode--fallback0,
-.AttributeMenu__sealNode--fallback1,
-.AttributeMenu__sealNode--fallback2 {
+.AttributeMenu__sealNode--intelligence {
   transform: translate(-50%, calc(-50% - var(--orb-offset)));
 }
 
 .AttributeMenu__sealNode--constitution,
 .AttributeMenu__sealNode--speed,
-.AttributeMenu__sealNode--endurance,
-.AttributeMenu__sealNode--fallback3,
-.AttributeMenu__sealNode--fallback4,
-.AttributeMenu__sealNode--fallback5,
-.AttributeMenu__sealNode--fallback6 {
+.AttributeMenu__sealNode--endurance {
   transform: translate(-50%, calc(-50% + var(--orb-offset)));
 }
 
-.AttributeMenu__sealNode--strength,
-.AttributeMenu__sealNode--fallback0 {
+.AttributeMenu__sealNode--strength {
   top: 16%;
   left: 50%;
 }
 
-.AttributeMenu__sealNode--perception,
-.AttributeMenu__sealNode--fallback1 {
+.AttributeMenu__sealNode--perception {
   top: 31%;
   left: 22%;
 }
 
-.AttributeMenu__sealNode--intelligence,
-.AttributeMenu__sealNode--fallback2 {
+.AttributeMenu__sealNode--intelligence {
   top: 31%;
   left: 78%;
 }
 
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeName,
 .AttributeMenu__sealNode--perception .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeName {
+.AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeName {
   order: -1;
   margin-top: 0;
   margin-bottom: 4px;
@@ -387,10 +371,7 @@
 
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeValue,
 .AttributeMenu__sealNode--perception .AttributeMenu__sealNodeValue,
-.AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeValue,
-.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeValue,
-.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeValue,
-.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeValue {
+.AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeValue {
   order: -2;
   margin-top: 0;
   margin-bottom: 1px;
@@ -399,44 +380,25 @@
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--perception .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeOrb,
-.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeOrb,
-.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeOrb,
-.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeOrb,
 .AttributeMenu__sealNode--strength .AttributeMenu__sealNodeMedallion,
 .AttributeMenu__sealNode--perception .AttributeMenu__sealNodeMedallion,
-.AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeMedallion,
-.AttributeMenu__sealNode--fallback0 .AttributeMenu__sealNodeMedallion,
-.AttributeMenu__sealNode--fallback1 .AttributeMenu__sealNodeMedallion,
-.AttributeMenu__sealNode--fallback2 .AttributeMenu__sealNodeMedallion {
+.AttributeMenu__sealNode--intelligence .AttributeMenu__sealNodeMedallion {
   order: 0;
 }
 
-.AttributeMenu__sealNode--constitution,
-.AttributeMenu__sealNode--fallback3 {
+.AttributeMenu__sealNode--constitution {
   top: 64%;
   left: 22%;
 }
 
-.AttributeMenu__sealNode--speed,
-.AttributeMenu__sealNode--fallback4 {
+.AttributeMenu__sealNode--speed {
   top: 64%;
   left: 78%;
 }
 
-.AttributeMenu__sealNode--endurance,
-.AttributeMenu__sealNode--fallback5 {
+.AttributeMenu__sealNode--endurance {
   top: 80%;
   left: 50%;
-}
-
-.AttributeMenu__sealNode--fallback6 {
-  top: 80%;
-  left: 68%;
-}
-
-.AttributeMenu__sealNode--fallback6 .AttributeMenu__sealNodeName,
-.AttributeMenu__sealNode--fallback6 .AttributeMenu__sealNodeValue {
-  transform: translateX(14px);
 }
 
 .AttributeMenu__sealNodeOrb {

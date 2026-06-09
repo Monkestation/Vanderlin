@@ -42,7 +42,7 @@ interface TutorialStep {
 const TUTORIAL_STEPS: TutorialStep[] = [
   {
     title: 'Welcome to the Character Ledger',
-    body: "This ledger lays out your character's seals and the guild's register. Let me walk you through what each page holds.",
+    body: "This ledger lays out your character's seals and skill register. Let me walk you through what each page holds.",
     popupAnchor: 'center',
   },
   {
@@ -58,8 +58,8 @@ const TUTORIAL_STEPS: TutorialStep[] = [
     popupAnchor: 'right',
   },
   {
-    title: 'Guild Register',
-    body: 'The middle page is the Skills Book — your trained crafts, grouped by guild. Each entry shows its current value, colored the same way as the seals.',
+    title: 'Skill Register',
+    body: 'The middle page is the Skills Book — your skills, grouped by category. Each entry shows its current value, colored the same way as the seals.',
     target: '.AttributeMenu__panel--register',
     popupAnchor: 'left',
   },
@@ -77,7 +77,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     title: 'Marginal Notes',
-    body: 'Click any seal or guild entry and the scribe will note the details here: description, difficulty, governing attribute, defaults, and any active blessings or curses. Press the x to close the note.',
+    body: 'Click any seal or skill entry and the scribe will note the details here: description, difficulty, governing attribute, defaults, and any active blessings or curses. Press the x to close the note.',
     target: '.AttributeMenu__panel--notes',
     popupAnchor: 'left',
   },
@@ -463,9 +463,6 @@ const AttributeSealNode = memo((props: {
 
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
-      {/* Raw button: Tooltip injects a ref into its child to anchor itself, and
-          Box does not forward refs. tgui Button would, but its chrome would change
-          the seal's bespoke look. */}
       <button
         className={nodeClass}
         onClick={() => act('inspect_closely', { attribute_name: stat.name })}
@@ -658,7 +655,7 @@ const SkillRegister = memo((props: {
     <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--register">
       <Box as="header" className="AttributeMenu__panelHeader AttributeMenu__panelHeader--row">
         <Box>
-          <Box className="AttributeMenu__eyebrow">Guild Register</Box>
+          <Box className="AttributeMenu__eyebrow">Skill Register</Box>
           <Box className="AttributeMenu__title">Skills Book</Box>
         </Box>
         <Button.Checkbox
@@ -730,7 +727,7 @@ const InspectionPanel = memo((props: {
         <Box className="AttributeMenu__divider" />
         <Box className="AttributeMenu__placeholder">
           <Box className="AttributeMenu__placeholderMark">Uninspected</Box>
-          <Box as="p">Select a seal or guild entry to read the scribe's notes.</Box>
+          <Box as="p">Select a seal or skill entry to read the scribe's notes.</Box>
           <Box as="p">Values, defaults, modifiers, and governing attributes will appear here.</Box>
         </Box>
       </Box>
@@ -910,8 +907,6 @@ export const AttributeMenu = () => {
       buttons={windowButtons}
     >
       <Window.Content fitted>
-        {/* Root keeps a real div: the tutorial measures it via a DOM ref, which
-            Box (a plain function component) does not forward. */}
         <div className="AttributeMenu" ref={rootRef}>
           <Box className="AttributeMenu__backdrop">
             <CoreAttributes
