@@ -209,15 +209,6 @@
 	dyeable = TRUE
 	adjustable = CAN_CADJUST
 
-/obj/item/clothing/head/veiled/update_overlays()
-	. = ..()
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
-		pic.appearance_flags = RESET_COLOR
-		if(get_detail_color())
-			pic.color = get_detail_color()
-		. += pic
-
 /obj/item/clothing/head/veiled/loudmouth
 	name = "loudmouth's headcover"
 	desc = "Said to be worn by only the loudest and proudest. The mask is adjustable."

@@ -1937,6 +1937,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
 				if(istype(location))
 					H.add_splatter_floor(location)
+					H.add_splatter_wall(force = 2, splatter_direction = REVERSE_DIR(splatter_dir))
 				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(H)
 

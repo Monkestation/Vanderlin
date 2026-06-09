@@ -125,13 +125,12 @@
 	place_item_to_atom(get_turf(src), user)
 
 /obj/item/weapon/tongs/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(held_item?.tong_interaction(interacting_with, user))
-		return ITEM_INTERACT_SUCCESS
-
-	if(!isitem(interacting_with))
+	if(!istype(interacting_with) || !isturf(interacting_with.loc))
 		return NONE
 
-	if(!isturf(interacting_with.loc))
+	if(held_item)
+		if(held_item?.tong_interaction(interacting_with, user))
+			return ITEM_INTERACT_SUCCESS
 		return NONE
 
 	var/obj/item/item = interacting_with

@@ -38,20 +38,6 @@
 	detail_color = COLOR_WHITE
 	item_weight = 5.3 KILOGRAMS
 
-/obj/item/clothing/armor/medium/surcoat/Initialize()
-	. = ..()
-	update_appearance(UPDATE_ICON)
-
-/obj/item/clothing/armor/medium/surcoat/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
-
 //................ Armored surcoat (Heartfelt) ............... //
 /obj/item/clothing/armor/medium/surcoat/heartfelt
 	desc = "A lordly protection in Heartfelt colors. Masterfully crafted coat of plates, for important nobility."
