@@ -7245,6 +7245,7 @@
 	pixel_x = 11;
 	pixel_y = -7
 	},
+/obj/effect/mapping_helpers/structure/grave_spawner/great_hunt,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "OB" = (
