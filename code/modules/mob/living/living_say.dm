@@ -88,7 +88,7 @@
 	if(check_whisper(original_message, forced))
 		return
 
-	var/in_crit = InCritical()
+	var/in_crit = HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION)
 	if(in_crit) // There are cheaper ways to do this, but they're less flexible, and this isn't ran all that often
 		var/end = TRUE
 		for(var/index in message_mods)
@@ -234,7 +234,7 @@
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 	// voice muffling
-	if(stat == UNCONSCIOUS)
+	if(stat == UNCONSCIOUS || stat == HARD_CRIT)
 		message = "<I>... You can almost hear something ...</I>"
 	else if(isliving(speaker))
 		var/mob/living/living_speaker = speaker
@@ -300,17 +300,21 @@
 				listening |= player_mob
 				continue
 
+			/// This might be needed somewhere so I'm keeping it for now.
+			//if(!is_in_zweb(player_mob.z, source.z) || get_dist(player_mob, src) > message_range) //they're out of range of normal hearing
+
 			// For aghosts check prefs
-			if(holder && isobserver(player_mob))
-				if(!is_in_zweb(player_mob.z, source.z) || get_dist(player_mob, src) > message_range) //they're out of range of normal hearing
-					if(player_mob.client.prefs)
-						if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
-							continue
-						if(!(player_mob.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
-							continue
-					the_dead[player_mob] = TRUE
-					listening |= player_mob
+			if(player_mob.client.holder && isobserver(player_mob))
+				if(!player_mob.client.prefs)
 					continue
+				if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
+					continue
+				if(!(player_mob.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
+					continue
+				the_dead[player_mob] = TRUE
+				listening |= player_mob
+				continue
+
 
 	var/eavesdropping
 	var/eavesrendered
@@ -466,7 +470,7 @@
 		message = derpspeech(message, stuttering)
 
 	if(stuttering)
-		message = stutter(message)
+		message = stutter(message, stuttering)
 
 	if(slurring)
 		message = slur(message)
@@ -514,6 +518,7 @@
 	say("#[message]", bubble_type, spans, sanitize, language, ignore_spam, forced)
 
 /mob/living/get_language_holder(shadow=TRUE)
+	RETURN_TYPE(/datum/language_holder)
 	if(mind && shadow)
 		// Mind language holders shadow mob holders.
 		. = mind.get_language_holder()

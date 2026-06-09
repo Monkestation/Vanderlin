@@ -225,8 +225,7 @@
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 30
-	melting_material = /datum/material/steel
-	melt_amount = 90
+	smeltresult = /obj/item/ingot/steel_slag
 	design_chosen = FALSE
 	item_weight = 6 KILOGRAMS
 

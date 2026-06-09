@@ -238,6 +238,7 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 
 /mob/proc/do_after_coefficent() // This gets added to the delay on a do_after, default 1
 	. = 1
+	. *= cached_multiplicative_actions_slowdown
 	return
 
 /// Returns the total amount of do_afters this mob is taking part in
@@ -407,6 +408,19 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 		chosen = pick(mob_spawn_meancritters)
 	var/mob/living/simple_animal/C = new chosen(spawn_location)
 	return C
+
+/proc/passtable_on(target, source)
+	var/mob/living/L = target
+	if (!HAS_TRAIT(L, TRAIT_PASSTABLE) && L.pass_flags & PASSTABLE)
+		ADD_TRAIT(L, TRAIT_PASSTABLE, INNATE_TRAIT)
+	ADD_TRAIT(L, TRAIT_PASSTABLE, source)
+	L.pass_flags |= PASSTABLE
+
+/proc/passtable_off(target, source)
+	var/mob/living/L = target
+	REMOVE_TRAIT(L, TRAIT_PASSTABLE, source)
+	if(!HAS_TRAIT(L, TRAIT_PASSTABLE))
+		L.pass_flags &= ~PASSTABLE
 
 /proc/dance_rotate(atom/movable/AM, datum/callback/callperrotate, set_original_dir=FALSE)
 	set waitfor = FALSE

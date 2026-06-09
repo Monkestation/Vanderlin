@@ -18,6 +18,12 @@
 		for(var/obj/item/I in things)
 			STR.remove_from_storage(I, get_turf(src))
 
+/obj/item/storage/belt/leather/double
+	name = "pair of belts"
+	desc = "A pair of slim black belts worn around the waist."
+	icon_state = "belt_double"
+	item_state = "belt_double"
+
 /obj/item/storage/belt/leather/assassin // Assassin's super edgy and cool belt can carry normal items (for poison vial, lockpick).
 	empty_when_dropped = FALSE
 	component_type = /datum/component/storage/concrete/grid/belt/assassin
@@ -158,6 +164,33 @@
 
 /obj/item/storage/belt/leather/cloth/bandit
 	color = "#ff0000"
+
+/obj/item/storage/belt/leather/breechcloth
+	name = "belt with breechcloth"
+	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbelt"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_TARAXACUM_YELLOW
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/breechcloth/blackbelt
+	name = "black belt with breechcloth"
+	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbeltalt"
+
+/obj/item/storage/belt/leather/slayer
+	name = "rugged dwarven belt"
+	desc = "The golden beard of the face plate doubles as a codpiece."
+	icon_state = "slayer"
+	item_state = "slayer"
+	sellprice = 50
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/shawl
+	name = "shawl"
+	desc = "A cloth shawl."
+	icon_state = "beltshawl"
+	item_state = "beltshawl"
 
 /obj/item/storage/belt/pouch
 	name = "pouch"
@@ -300,6 +333,7 @@
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
+	examine_name = "satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
 	icon_state = "osatchel"
 	item_state = "osatchel"
@@ -372,6 +406,7 @@
 		/obj/item/weapon/surgery/cautery,
 		/obj/item/natural/worms/leech/parasite,
 		/obj/item/weapon/surgery/hammer,
+		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
 
@@ -401,7 +436,6 @@
 		/obj/item/weapon/surgery/retractor,
 		/obj/item/weapon/surgery/bonesetter,
 		/obj/item/weapon/surgery/cautery,
-		/obj/item/natural/worms/leech,
 		/obj/item/natural/worms/leech,
 		/obj/item/weapon/surgery/hammer,
 		/obj/item/natural/bundle/fibers/full,

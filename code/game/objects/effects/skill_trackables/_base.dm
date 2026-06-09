@@ -133,12 +133,12 @@
 	known_by[tracker] = competence
 	if(tracker.client)
 		tracker.client.images |= real_image
-	RegisterSignal(tracker, COMSIG_PARENT_QDELETING, PROC_REF(remove_knower), override = TRUE)
+	RegisterSignal(tracker, COMSIG_QDELETING, PROC_REF(remove_knower), override = TRUE)
 
 ///Removes a knower from the known ones. Usually only done when qdeleted.
 /obj/effect/skill_tracker/proc/remove_knower(mob/living/tracker)
 	SIGNAL_HANDLER
-	UnregisterSignal(tracker, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(tracker, COMSIG_QDELETING)
 	if(tracker.client)
 		tracker.client.images -= real_image
 	known_by -= tracker
@@ -148,7 +148,7 @@
 ///Clears the reference to the creator. Is replaced by the above proc if the creator analyzes it.
 /obj/effect/skill_tracker/proc/clear_creator_reference(mob/living/creator_arg)
 	SIGNAL_HANDLER
-	UnregisterSignal(creator, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(creator, COMSIG_QDELETING)
 	creator = null
 
 #undef ANALYSIS_TERRIBLE

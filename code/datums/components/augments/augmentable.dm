@@ -24,7 +24,7 @@
 	RegisterSignal(parent, COMSIG_AUGMENT_REPAIR, PROC_REF(repair))
 	RegisterSignal(parent, COMSIG_AUGMENT_GET_STABILITY, PROC_REF(get_stability))
 	RegisterSignal(parent, COMSIG_AUGMENT_GET_INSTALLED, PROC_REF(get_installed_augments))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examined))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examined))
 
 /datum/component/augmentable/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_AUGMENT_INSTALL)
@@ -32,7 +32,7 @@
 	UnregisterSignal(parent, COMSIG_AUGMENT_REPAIR)
 	UnregisterSignal(parent, COMSIG_AUGMENT_GET_STABILITY)
 	UnregisterSignal(parent, COMSIG_AUGMENT_GET_INSTALLED)
-	UnregisterSignal(parent, COMSIG_PARENT_EXAMINE)
+	UnregisterSignal(parent, COMSIG_ATOM_EXAMINE)
 
 
 /datum/component/augmentable/proc/modify_stability(amount, mob/user)

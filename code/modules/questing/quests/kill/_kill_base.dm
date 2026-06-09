@@ -1,5 +1,7 @@
 // Base for kill quests
 /datum/quest/kill
+	abstract_type = /datum/quest/kill
+	quest_difficulty = QUEST_DIFFICULTY_EASY
 	var/list/mob_types_to_spawn = list()
 	var/count_min = 1
 	var/count_max = 3
@@ -17,7 +19,7 @@
 
 		var/obj/effect/quest_spawn/spawn_effect = new /obj/effect/quest_spawn(spawn_turf)
 		var/mob/living/new_mob = new target_mob_type(spawn_effect)
-		new_mob.faction |= "quest"
+		new_mob.add_faction("quest")
 		new_mob.AddComponent(/datum/component/quest_object/kill, src)
 		ADD_TRAIT(new_mob, TRAIT_FRESHSPAWN, "[type]")
 		addtimer(TRAIT_CALLBACK_REMOVE(new_mob, TRAIT_FRESHSPAWN, "[type]"), 60 SECONDS)
@@ -26,7 +28,7 @@
 		spawn_effect.AddComponent(/datum/component/quest_object/mob_spawner, src)
 		add_tracked_atom(new_mob)
 		landmark.add_quest_faction_to_nearby_mobs(spawn_turf)
-		sleep(1)
+		sleep(0.5 SECONDS)
 
 /datum/quest/kill/get_additional_reward()
 	..()

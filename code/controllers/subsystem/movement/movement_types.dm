@@ -27,7 +27,7 @@
 	src.controller = controller
 	src.extra_info = extra_info
 	if(extra_info)
-		RegisterSignal(extra_info, COMSIG_PARENT_QDELETING, PROC_REF(info_deleted))
+		RegisterSignal(extra_info, COMSIG_QDELETING, PROC_REF(info_deleted))
 	src.moving = moving
 	src.priority = priority
 	src.flags = flags
@@ -85,20 +85,32 @@
 		return
 
 	var/visual_delay = controller.visual_delay
-	var/success = move()
+	var/old_dir = moving.dir
+	var/old_loc = moving.loc
 
-	SEND_SIGNAL(src, COMSIG_MOVELOOP_POSTPROCESS, success, delay * visual_delay)
+	owner?.processing_move_loop_flags = flags
+	owner?.processing_move_loop_flags |= MOVEMENT_LOOP_CALLED_MOVE
+	var/result = move() //Result is an enum value. Enums defined in __DEFINES/movement.dm
+	if(moving)
+		var/direction = get_dir(old_loc, moving.loc)
+		SEND_SIGNAL(moving, COMSIG_MOVABLE_MOVED_FROM_LOOP, src, old_dir, direction)
+	owner?.processing_move_loop_flags = NONE
+
+	SEND_SIGNAL(src, COMSIG_MOVELOOP_POSTPROCESS, result, delay * visual_delay)
 
 	timer = world.time + delay
-	if(QDELETED(src) || !success) //Can happen
+	if(QDELETED(src) || result != MOVELOOP_SUCCESS) //Can happen
+		return
+
+	if(flags & MOVEMENT_LOOP_IGNORE_GLIDE)
 		return
 
 	moving.set_glide_size(MOVEMENT_ADJUSTED_GLIDE_SIZE(delay, visual_delay))
 
 ///Handles the actual move, overriden by children
-///Returns FALSE if nothing happen, TRUE otherwise
+///Any return value that isn't MOVELOOP_SUCCESS makes nothing happen
 /datum/move_loop/proc/move()
-	return FALSE
+	return MOVELOOP_FAILURE
 
 ///Removes the atom from some movement subsystem. Defaults to SSmovement
 /datum/controller/subsystem/move_manager/proc/stop_looping(atom/movable/moving, datum/controller/subsystem/movement/subsystem = SSmovement)
@@ -137,9 +149,10 @@
 
 /datum/move_loop/move/move()
 	var/atom/old_loc = moving.loc
-	moving.Move(get_step(moving, direction), direction)
+	moving.Move(get_step(moving, direction), direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
-	return old_loc != moving.loc
+	// Moving also can be null on occasion, if the move deleted it and therefor us
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
  * Like move(), but it uses byond's pathfinding on a step by step basis
@@ -164,7 +177,7 @@
 /datum/move_loop/move/move_to/move()
 	var/atom/old_loc = moving.loc
 	step_to(moving, get_step(moving, direction))
-	return old_loc != moving.loc
+	return old_loc != moving.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 
 /**
@@ -190,7 +203,7 @@
 /datum/move_loop/move/force/move()
 	var/atom/old_loc = moving.loc
 	moving.forceMove(get_step(moving, direction))
-	return old_loc != moving.loc
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 
 /datum/move_loop/has_target
@@ -208,7 +221,7 @@
 	target = chasing
 
 	if(!isturf(target))
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
 
 /datum/move_loop/has_target/Destroy()
 	target = null
@@ -243,8 +256,7 @@
 /datum/move_loop/has_target/force_move/move()
 	var/atom/old_loc = moving.loc
 	moving.forceMove(get_step(moving, get_dir(moving, target)))
-	return old_loc != moving.loc
-
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 ///Base class of move_to and move_away, deals with the distance and target aspect of things
 /datum/move_loop/has_target/dist_bound
@@ -263,9 +275,8 @@
 /datum/move_loop/has_target/dist_bound/move()
 	if(!check_dist()) //If we're too close don't do the move
 		timer = world.time //Make sure to move as soon as possible
-		return FALSE
-	return TRUE
-
+		return MOVELOOP_FAILURE
+	return MOVELOOP_SUCCESS
 
 /**
  * Wrapper around walk_to()
@@ -297,8 +308,9 @@
 	if(!.)
 		return
 	var/atom/old_loc = moving.loc
-	step_to(moving, target)
-	return old_loc != moving?.loc
+	var/turf/next = get_step_to(moving, target)
+	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
  * Wrapper around walk_away()
@@ -330,9 +342,9 @@
 	if(!.)
 		return
 	var/atom/old_loc = moving.loc
-	step_away(moving, target)
-	return old_loc != moving.loc
-
+	var/turf/next = get_step_away(moving, target)
+	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
  * Helper proc for the move_towards datum
@@ -427,14 +439,14 @@
 	if(y_ticker >= 1)
 		y_ticker = MODULUS(x_ticker, 1)
 	var/atom/old_loc = moving.loc
-	moving.Move(moving_towards, get_dir(moving, moving_towards))
+	moving.Move(moving_towards, get_dir(moving, moving_towards), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 
 	//YOU FOUND THEM! GOOD JOB
 	if(home && get_turf(moving) == get_turf(target))
 		x_rate = 0
 		y_rate = 0
 		return
-	return old_loc != moving.loc
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /datum/move_loop/has_target/move_towards/proc/handle_move(source, atom/OldLoc, Dir, Forced = FALSE)
 	SIGNAL_HANDLER
@@ -509,9 +521,8 @@
 /datum/move_loop/has_target/move_towards_budget/move()
 	var/turf/target_turf = get_step_towards(moving, target)
 	var/atom/old_loc = moving.loc
-	moving.Move(target_turf, get_dir(moving, target_turf))
-	return old_loc != moving.loc
-
+	moving.Move(target_turf, get_dir(moving, target_turf), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
  * Helper proc for the move_rand datum
@@ -555,11 +566,11 @@
 		var/testdir = pick(potential_dirs)
 		var/turf/moving_towards = get_step(moving, testdir)
 		var/atom/old_loc = moving.loc
-		moving.Move(moving_towards, testdir)
-		if(old_loc != moving.loc)  //If it worked, we're done
-			return TRUE
+		moving.Move(moving_towards, testdir, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+		if(old_loc != moving?.loc)  //If it worked, we're done
+			return MOVELOOP_SUCCESS
 		potential_dirs -= testdir
-	return FALSE
+	return MOVELOOP_FAILURE
 
 /**
  * Wrapper around walk_rand(), doesn't actually result in a random walk, it's more like moving to random places in viewish
@@ -583,8 +594,9 @@
 
 /datum/move_loop/move_to_rand/move()
 	var/atom/old_loc = moving.loc
-	step_rand(moving)
-	return old_loc != moving.loc
+	var/turf/next = get_step_rand(moving)
+	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /datum/move_loop/minecart
 	var/direction
@@ -635,6 +647,6 @@
 			if(locate(/obj/structure/minecart_rail) in above_turf)
 				new_loc = above_turf
 
-	moving.Move(new_loc, direction)
+	moving.Move(new_loc, direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
-	return old_loc != moving.loc
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE

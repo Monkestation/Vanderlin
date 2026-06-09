@@ -505,8 +505,11 @@
 	else if(href_list["cryomob"])
 		if(!check_rights(R_ADMIN))
 			return
-
 		var/mob/M = locate(href_list["cryomob"])
+
+		if(tgui_alert(usr, "Are you sure you want to cryo [key_name(M)]?", "Message", list("Yes", "No")) != "Yes")
+			return
+
 		usr.client.send_to_cryo(M)
 
 	else if(href_list["revive"])
@@ -626,7 +629,7 @@
 				if(SOFT_CRIT)
 					status = "<font color='orange'><b>Dying</b></font>"
 				if(UNCONSCIOUS)
-					status = "<font color='orange'><b>[L.InCritical() ? "Unconscious and Dying" : "Unconscious"]</b></font>"
+					status = "<font color='orange'><b>[HAS_TRAIT(L, TRAIT_CRITICAL_CONDITION) ? "Unconscious and Dying" : "Unconscious"]</b></font>"
 				if(DEAD)
 					status = "<font color='red'><b>Dead</b></font>"
 			health_description = "Status = [status]"

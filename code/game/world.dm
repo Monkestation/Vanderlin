@@ -108,11 +108,8 @@ GLOBAL_PROTECT(tracy_init_reason)
 #endif
 
 	LoadVerbs(/datum/verbs/menu)
-	load_whitelist()
 
 	load_nameban()
-
-	load_bypassage()
 
 //	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
 
@@ -381,13 +378,13 @@ GLOBAL_PROTECT(tracy_init_reason)
 
 		if(do_hard_reboot)
 			log_world("World hard rebooted at [time_stamp()]")
+			SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 			shutdown_logging() // See comment below.
 			shutdown_byond_tracy()
-			SSplexora._Shutdown()
 			TgsEndProcess()
 			return ..()
 
-	SSplexora._Shutdown()
+	SSplexora.notify_shutdown()
 	log_world("World rebooted at [time_stamp()]")
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
 

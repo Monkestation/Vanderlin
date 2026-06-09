@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	// asset_cache
 	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
-		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
+		asset_cache_job = asset_cache_confirm_arrival(href_list["asset_cache_confirm_arrival"])
 		if(!asset_cache_job)
 			return
 
@@ -433,6 +433,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return null
 
 	GLOB.clients += src
+	GLOB.key_list += ckey
 	GLOB.keys_by_ckey[ckey] = key
 	GLOB.directory[ckey] = src
 
@@ -475,6 +476,20 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	twitch = new(src)
 	native_say = new(src)
 
+	///because we do award validation on login for certain things this needs to exist
+	var/full_version = "[byond_version].[byond_build ? byond_build : "xxx"]"
+	var/reconnecting = FALSE
+	if(GLOB.player_details[ckey])
+		reconnecting = TRUE
+		player_details = GLOB.player_details[ckey]
+		player_details.byond_version = full_version
+		player_details.byond_build = byond_build
+	else
+		player_details = new(ckey)
+		player_details.byond_version = full_version
+		player_details.byond_build = byond_build
+		GLOB.player_details[ckey] = player_details
+
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
 	prefs = GLOB.preferences_datums[ckey]
 	if(prefs)
@@ -496,7 +511,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(fexists(roundend_report_file()))
 		add_verb(src, /client/proc/show_previous_roundend_report)
 
-	var/full_version = "[byond_version].[byond_build ? byond_build : "xxx"]"
 	log_access("Login: [key_name(src)] from [address ? address : "localhost"]-[computer_id] || BYOND v[full_version]")
 
 	var/alert_mob_dupe_login = FALSE
@@ -531,18 +545,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		show_popup_menus = TRUE
 
 	set_right_click_menu_mode(TRUE)
-
-	var/reconnecting = FALSE
-	if(GLOB.player_details[ckey])
-		reconnecting = TRUE
-		player_details = GLOB.player_details[ckey]
-		player_details.byond_version = full_version
-		player_details.byond_build = byond_build
-	else
-		player_details = new(ckey)
-		player_details.byond_version = full_version
-		player_details.byond_build = byond_build
-		GLOB.player_details[ckey] = player_details
 
 
 	. = ..()	//calls mob.Login()
@@ -750,7 +752,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 		// Yes this is the same as what's found in qdel(). Yes it does need to be here
 		// Get off my back
-		SEND_SIGNAL(src, COMSIG_PARENT_QDELETING, TRUE)
+		SEND_SIGNAL(src, COMSIG_QDELETING, TRUE)
 		Destroy() //Clean up signals and timers.
 	return ..()
 
@@ -769,6 +771,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		GLOB.admins -= src
 
 	GLOB.clients -= src
+	GLOB.key_list -= ckey
 	GLOB.directory -= ckey
 
 	QDEL_NULL(tgui_panel)
@@ -1353,16 +1356,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(mob)
 		if(isliving(mob)) //no ghost can call this
 			mob.ghostize(can_reenter_corpse)
-
-/client/proc/whitelisted()
-	if(whitelisted != 2)
-		return whitelisted
-	else
-		if(check_whitelist(ckey))
-			whitelisted = 1
-		else
-			whitelisted = 0
-		return whitelisted
 
 /client/proc/has_triumph_buy(triumph_id, unactivated_check = FALSE)
 	if(!triumph_id)

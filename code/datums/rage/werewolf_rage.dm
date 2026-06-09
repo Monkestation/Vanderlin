@@ -17,13 +17,13 @@
 	if(!.)
 		return
 
-	RegisterSignal(holder_mob, COMSIG_MOB_ADD_STRESS, PROC_REF(on_stress_added))
+	RegisterSignal(holder_mob, COMSIG_CARBON_ADD_STRESS, PROC_REF(on_stress_added))
 	holder_mob.AddElement(/datum/element/relay_attackers)
 	RegisterSignal(holder_mob, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(upon_attacked))
 
 /datum/rage/werewolf/remove_holder()
 	holder_mob?.RemoveElement(/datum/element/relay_attackers)
-	UnregisterSignal(holder_mob, list(COMSIG_MOB_ADD_STRESS, COMSIG_ATOM_WAS_ATTACKED))
+	UnregisterSignal(holder_mob, list(COMSIG_CARBON_ADD_STRESS, COMSIG_ATOM_WAS_ATTACKED))
 	. = ..()
 
 /datum/rage/werewolf/grant_to_secondary(mob/living/carbon/human/secondary)
@@ -31,13 +31,13 @@
 	if(!.)
 		return
 
-	RegisterSignal(secondary_mob, COMSIG_MOB_ADD_STRESS, PROC_REF(on_stress_added))
+	RegisterSignal(secondary_mob, COMSIG_CARBON_ADD_STRESS, PROC_REF(on_stress_added))
 	secondary.AddElement(/datum/element/relay_attackers)
 	RegisterSignal(secondary_mob, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(upon_attacked))
 
 /datum/rage/werewolf/remove_secondary()
 	secondary_mob?.RemoveElement(/datum/element/relay_attackers)
-	UnregisterSignal(secondary_mob, list(COMSIG_MOB_ADD_STRESS, COMSIG_ATOM_WAS_ATTACKED))
+	UnregisterSignal(secondary_mob, list(COMSIG_CARBON_ADD_STRESS, COMSIG_ATOM_WAS_ATTACKED))
 	. = ..()
 
 /datum/rage/werewolf/update_rage(amount)

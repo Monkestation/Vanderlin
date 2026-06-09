@@ -42,6 +42,7 @@
 
 	if(client || mind)
 		record_round_statistic(STATS_DEATHS)
+		add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_DEATH, 1)
 		var/area_of_death = lowertext(get_area_name(src))
 		if(area_of_death == "wilderness")
 			record_round_statistic(STATS_FOREST_DEATHS)
@@ -54,28 +55,25 @@
 				record_round_statistic(STATS_CLERGY_DEATHS)
 			if(mind.has_antag_datum(/datum/antagonist/vampire))
 				record_round_statistic(STATS_VAMPIRES_KILLED)
-			if(mind.has_antag_datum(/datum/antagonist/zombie) || mind.has_antag_datum(/datum/antagonist/skeleton) || mind.has_antag_datum(/datum/antagonist/lich))
+			if(IS_DEADITE(src) || mind.has_antag_datum(/datum/antagonist/skeleton) || mind.has_antag_datum(/datum/antagonist/lich))
 				record_round_statistic(STATS_DEADITES_KILLED)
 
-	if(!gibbed)
-		if(!has_world_trait(/datum/world_trait/necra_requiem))
-			if(!is_in_roguetown(src) || has_world_trait(/datum/world_trait/zizo_defilement))
-				zombie_check()
-
 	stop_sound_channel(CHANNEL_HEARTBEAT)
-	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
-	if(H)
-		H.beat = BEAT_NONE
+	heartbeat_sound = BEAT_NONE
+	pulse = PULSE_NONE
+	for(var/thing in getorganslotlist(ORGAN_SLOT_HEART))
+		var/obj/item/organ/heart/heart = thing
+		heart.Stop()
 
-	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
-		MOBTIMER_SET(src, MT_DEATHDIED)
-		if(H in SStreasury.bank_accounts)
-			for(var/obj/structure/fake_machine/camera/C in view(7, src))
-				var/area_name = A.name
-				var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
-				texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
-				SSroguemachine.death_queue += texty
-				break
+		if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
+			MOBTIMER_SET(src, MT_DEATHDIED)
+			if(heart in SStreasury.bank_accounts)
+				for(var/obj/structure/fake_machine/camera/C in view(7, src))
+					var/area_name = A.name
+					var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
+					texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
+					SSroguemachine.death_queue += texty
+					break
 
 		var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
 		if(buckled)
@@ -117,7 +115,7 @@
 		SSblackbox.ReportDeath(src)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()])", LOG_ATTACK)
 
-/mob/living/carbon/human/proc/zombie_check()
+/mob/living/carbon/proc/zombie_check()
 	if(!mind)
 		return
 	var/datum/antagonist/zombie = mind.has_antag_datum(/datum/antagonist/zombie)

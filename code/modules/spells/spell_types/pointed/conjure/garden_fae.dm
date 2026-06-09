@@ -68,7 +68,6 @@
 	if(!gardener)
 		return
 	gardener.befriend(owner)
-	gardener.owner = owner
 	gardener_ref = WEAKREF(gardener)
 
 /datum/action/cooldown/spell/conjure/garden_fae/Destroy()

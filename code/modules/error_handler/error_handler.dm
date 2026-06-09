@@ -45,6 +45,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	// Proc calls are allowed past this point
 	else if(copytext(E.name, 1, 18) == "Out of resources!")//18 == length() of that string + 1
 		log_world("BYOND out of memory. Restarting ([E?.file]:[E?.line])")
+		SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_OOM)
 		TgsEndProcess()
 		. = ..()
 		Reboot(reason = 1)

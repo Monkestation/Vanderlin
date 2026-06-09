@@ -29,11 +29,13 @@
 	if(victim_brain.brain_death)
 		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is too damaged."))
 		return
-	if(victim.blood_volume > BLOOD_VOLUME_BAD)
+	if(!CAN_HAVE_BLOOD(victim))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] does not have blood."))
+		return
+	if(victim.get_blood_volume() > BLOOD_VOLUME_BAD)
 		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to be sired."))
 		return
-	var/datum/antagonist/zombie/Z = victim.mind.has_antag_datum(/datum/antagonist/zombie)
-	if(Z?.revived)
+	if(IS_DEADITE(victim))
 		to_chat(src, span_warning("The dead already walk. This one is the Dark Lady's servant."))
 	if(victim.clan || victim.mind.has_antag_datum(/datum/antagonist/vampire))
 		to_chat(src, span_warning("[victim] has already been sired."))

@@ -62,8 +62,6 @@
 		warning("[src] at [AREACOORD(src)] has both a deadbolt and a viewport, these will conflict as they both use attack_hand_secondary.")
 	if(has_bolt && lock?.uses_key)
 		warning("[src] at [AREACOORD(src)] has both a deadbolt and a keylock, while this will work it may produce unintended behaviour.")
-	if(isopenturf(loc))
-		RegisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(redirect_attack)) // redirect the attack to the door
 	set_init_layer()
 
 	var/static/list/loc_connections = list(
@@ -74,18 +72,17 @@
 	if(repair_thresholds || broken_repair)
 		AddComponent(/datum/component/repairable, repair_thresholds, broken_repair, 'sound/misc/wood_saw.ogg', repair_skill)
 
+	// Click on the floor to close doors
+	AddComponent(/datum/component/redirect_attack_hand_from_turf)
+
 /obj/structure/door/Destroy()
 	. = ..()
-	UnregisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(redirect_attack))
 
 /obj/structure/door/get_explosion_resistance()
 	if(!door_opened)
 		return max_integrity
 	else
 		return 0
-
-/obj/structure/door/proc/redirect_attack(turf/source, mob/user)
-	attack_hand(user)
 
 /obj/structure/door/proc/set_init_layer()
 	if(density)

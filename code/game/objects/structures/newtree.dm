@@ -12,7 +12,6 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
 	climbable = FALSE
-	static_debris = list(/obj/item/grown/log/tree = 1)
 	obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP | BLOCK_Z_OUT_DOWN
 	max_integrity = 300
 	var/burnt = FALSE
@@ -23,6 +22,7 @@
 /obj/structure/flora/newtree/Initialize()
 	. = ..()
 	GenerateTree()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/flora/newtree/Destroy()
 	SStreesetup.initialize_me -= src
@@ -40,54 +40,36 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/newtree/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		var/turf/target = GET_TURF_ABOVE(get_turf(user))
-		if(!istype(target, /turf/open/openspace))
-			to_chat(user, "<span class='warning'>I can't climb here.</span>")
-			return
-		if(!L.can_zTravel(target, UP))
-			to_chat(user, "<span class='warning'>I can't climb there.</span>")
-			return
-		var/used_time = 0
-		var/exp_to_gain = 0
-		if(L.mind)
-			var/myskill = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/climbing)
-			exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2) * L.get_learning_boon(/datum/attribute/skill/misc/climbing)
-			var/obj/structure/table/TA = locate() in L.loc
-			if(TA)
-				myskill += 1
-			else
-				var/obj/structure/chair/CH = locate() in L.loc
-				if(CH)
-					myskill += 1
-			used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 3), 3 SECONDS)
+	. = ..()
+	if(.)
+		return
+	if(isliving(user) && user.can_z_move(UP, get_turf(user), z_move_flags = Z_MOVE_CLIMBING_FLAGS|ZMOVE_FEEDBACK))
+		INVOKE_ASYNC(src, PROC_REF(start_traveling), user, UP)
+		return TRUE
+
+/obj/structure/flora/newtree/proc/start_traveling(mob/living/user, direction)
+	var/turf/target = get_step_multiz(user, direction)
+	var/myskill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/climbing)
+	if(locate(/obj/structure/table) in user.loc)
+		myskill += 1
+	if(locate(/obj/structure/chair) in user.loc)
+		myskill += 1
+	var/used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 3), 3 SECONDS)
+	if(user.m_intent != MOVE_INTENT_SNEAK)
 		playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-		user.visible_message("<span class='warning'>[user] starts to climb [src].</span>", "<span class='warning'>I start to climb [src]...</span>")
-		if(do_after(L, used_time, src))
-			var/pulling = user.pulling
-			if(ismob(pulling))
-				user.pulling.forceMove(target)
-			user.forceMove(target)
-			user.start_pulling(pulling,suppress_message = TRUE)
+	user.visible_message(span_warning("[user] starts to climb [src]."), span_warning("I start to climb [src]..."))
+	if(do_after(user, used_time, src, display_over_user = TRUE))
+		user.zMove(target = target, z_move_flags = Z_MOVE_CLIMBING_FLAGS)
+		if(user.m_intent != MOVE_INTENT_SNEAK)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-			if(L.mind)
-				L.adjust_experience(/datum/attribute/skill/misc/climbing, exp_to_gain, FALSE)
+		var/exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2) * user.get_learning_boon(/datum/attribute/skill/misc/climbing)
+		user.adjust_experience(/datum/attribute/skill/misc/climbing, exp_to_gain, FALSE)
+		var/turf/pitfall = user.loc
+		pitfall?.zFall(user)
 
 /obj/structure/flora/newtree/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
@@ -100,9 +82,12 @@
 	if(.)
 		burn_tree()
 
-/obj/structure/flora/newtree/deconstruct()
+/obj/structure/flora/newtree/handle_deconstruct(disassembled)
 	FellTree()
 	return ..()
+
+/obj/structure/flora/newtree/atom_deconstruct(disassembled)
+	new /obj/item/grown/log/tree(loc)
 
 /obj/structure/flora/newtree/proc/burn_tree()
 	name = "burnt tree"
@@ -192,31 +177,33 @@
 /obj/structure/flora/newtree/proc/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
+		if(locate(/obj/structure/stairs) in get_step_multiz(NT, DOWN))
+			continue
 		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
 			if(istype(NB, /turf/open/openspace) && prob(50))//make an ending branch
 				if(prob(50))
-					if(!locate(/obj/structure) in NB)
+					if(!(locate(/obj/structure) in NB) && !(locate(/obj/structure/stairs) in get_step_multiz(NB, DOWN)))
 						var/obj/structure/flora/newbranch/T = new(NB)
 						T.dir = D
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/connector/TC = new(NT)
 						TC.dir = D
 				else
-					if(!locate(/obj/structure) in NB)
+					if(!(locate(/obj/structure) in NB))
 						new /obj/structure/flora/newleaf(NB)
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/TC = new(NT)
 						TC.dir = D
 			else
-				if(!locate(/obj/structure) in NT)
+				if(!(locate(/obj/structure) in NT))
 					var/obj/structure/flora/newbranch/TC = new(NT)
 					TC.dir = D
 		else
 			if(prob(70))
 				if(isopenturf(NT))
 					if(!istype(loc, /turf/open/openspace)) //must be lowest
-						if(!locate(/obj/structure) in NT)
+						if(!(locate(/obj/structure) in NT))
 							var/obj/structure/flora/newbranch/leafless/T = new(NT)
 							T.dir = D
 
@@ -249,22 +236,24 @@
 /obj/structure/flora/newtree/snow/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
+		if(locate(/obj/structure/stairs) in get_step_multiz(NT, DOWN))
+			continue
 		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
 			if(istype(NB, /turf/open/openspace) && prob(50))
 				if(prob(50))
-					if(!locate(/obj/structure) in NB)
+					if(!(locate(/obj/structure) in NB) && !(locate(/obj/structure/stairs) in get_step_multiz(NB, DOWN)))
 						var/obj/structure/flora/newbranch/snow/T = new(NB)
 						T.dir = D
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/connector/snow/TC = new(NT)
 						TC.dir = D
 				else
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/snow/TC = new(NT)
 						TC.dir = D
 			else
-				if(!locate(/obj/structure) in NT)
+				if(!(locate(/obj/structure) in NT))
 					var/obj/structure/flora/newbranch/snow/TC = new(NT)
 					TC.dir = D
 
@@ -381,11 +370,12 @@
 	base_icon_state = "branch-end"
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
-	static_debris = list(/obj/item/grown/log/tree/stick = 1)
 	max_integrity = 30
 	num_random_icons = 2
 	var/underlay_base = "center-leaf"
 	var/num_underlay_icons = 2
+	layer = LATTICE_LAYER
+	plane = FLOOR_PLANE
 
 /obj/structure/flora/newbranch/Initialize(mapload, ...)
 	. = ..()
@@ -395,6 +385,7 @@
 		100,\
 		extrarange = SHORT_RANGE_SOUND_EXTRARANGE,\
 	)
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/flora/newbranch/update_overlays()
@@ -404,6 +395,9 @@
 	var/mutable_appearance/mutable = mutable_appearance(icon, "[underlay_base][rand(1, num_underlay_icons)]", layer - 0.01)
 	mutable.dir = dir
 	. += mutable
+
+/obj/structure/flora/newbranch/atom_deconstruct(disassembled)
+	new /obj/item/grown/log/tree/stick(loc)
 
 /obj/structure/flora/newbranch/snow
 	underlay_base = "center-leaf-cold"
@@ -417,7 +411,9 @@
 	icon_state = "branchburnt-end1"
 	base_icon_state = "branchburnt-end"
 	desc = "Cracked and hardened from a terrible fire."
-	static_debris = null
+
+/obj/structure/flora/newbranch/leafless/scorched/atom_deconstruct(disassembled)
+	return
 
 /obj/structure/flora/newbranch/connector
 	icon_state = "branch-extend"
@@ -442,6 +438,8 @@
 	base_icon_state = "center-leaf"
 	num_random_icons = 2
 	max_integrity = 10
+	layer = LATTICE_LAYER
+	plane = FLOOR_PLANE
 
 /obj/structure/flora/newleaf/attack_hand(mob/user)
 	if(isopenspace(loc))

@@ -88,11 +88,8 @@
 
 	// Create quality calculator with the calculated quality
 	var/datum/quality_calculator/brewing/brew_calc = new(
-		base_qual = 0,
 		mat_qual = quality,
 		skill_qual = brewing_skill,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = 0, // Freshness already factored into quality calculation
 		recipe_mod = quality_modifier
@@ -114,7 +111,7 @@
 	var/total_freshness = 0
 	var/ingredient_count = 0
 	var/highest_food_quality = 0
-	var/highest_input_reagent_quality = 0
+	var/highest_input_recipe_quality = 0
 	var/total_reagent_volume = 0
 
 	// Calculate average freshness and find highest quality food ingredient from crops
@@ -143,8 +140,7 @@
 		for(var/datum/reagent/R in keg.reagents.reagent_list)
 			if(R.volume > 0)
 				total_reagent_volume += R.volume
-				if(R.recipe_quality)
-					highest_input_reagent_quality = max(highest_input_reagent_quality, R.recipe_quality)
+				highest_input_recipe_quality = max(highest_input_recipe_quality, R.get_recipe_quality())
 
 	// Calculate average freshness
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
@@ -156,18 +152,16 @@
 
 	// Use the quality calculator to determine final quality (matching cooking system)
 	var/datum/quality_calculator/brewing/brew_calc = new(
-		base_qual = 0,
-		mat_qual = max(highest_food_quality, highest_input_reagent_quality), // Use the higher of food or reagent quality
+		mat_qual = max(highest_food_quality, highest_input_recipe_quality), // Use the higher of food or reagent quality
 		skill_qual = brewing_skill_level,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = average_freshness,
 		recipe_mod = quality_modifier,
-		reagent_qual = highest_input_reagent_quality
+		reagent_qual = highest_input_recipe_quality
 	)
 
 	var/final_quality = brew_calc.calculate_final_quality()
 	qdel(brew_calc)
 
-	return CLAMP(final_quality, 1, 4)
+	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
+

@@ -4,7 +4,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	whp = 75
 	sewn_whp = 25
-	bleed_rate = ARTERY_LIMB_BLEEDRATE
+	bleed_rate = 25
 	sewn_bleed_rate = 0.25
 	clotting_threshold = null
 	sewn_clotting_threshold = null
@@ -16,6 +16,8 @@
 	can_cauterize = TRUE
 	critical = TRUE
 	sleep_healing = 0
+	can_roll = FALSE
+	viable_zones = list(BODY_ZONE_CHEST)
 
 /datum/wound/dismemberment/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dismemberment) && (type == other.type))

@@ -41,10 +41,12 @@
 		adjustment_verb = "awarded"
 		if(counted)
 			record_round_statistic(STATS_TRIUMPHS_AWARDED, amount)
+			add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TRIUMPH_AWARDED, amount)
 	else
 		adjustment_verb = "lost"
 		if(counted)
 			record_round_statistic(STATS_TRIUMPHS_STOLEN, amount)
+			add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TRIUMPH_SPENT, amount)
 
 	var/final_text = "[abs(amount)] TRIUMPH\s [adjustment_verb]."
 	if(reason)

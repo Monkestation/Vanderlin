@@ -30,6 +30,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/try_apply_character_post_equipment(mob/living/carbon/human/character, client/player)
 	var/datum/job/job
+	apply_loadouts(character, player)
 	if(character.job)
 		job = SSjob.name_occupations[character.job]
 	if(!job)
@@ -41,7 +42,6 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	// Apply the stuff if we have a job that has no adv classes
 	apply_character_post_equipment(character, player)
-	apply_loadouts(arglist(args))
 
 /proc/apply_character_post_equipment(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -61,6 +61,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	apply_special_trait_if_able(character, player, trait_type)
 	player.prefs.next_special_trait = null
+	player.prefs.save_preferences()
 
 /proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
 	switch(player.prefs.voice_type)
@@ -71,16 +72,6 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		if(VOICE_TYPE_FEM_HAUGHTY)
 			character.dna.species.soundpack_f = new /datum/voicepack/female/haughty()
 	return
-
-/proc/apply_loadouts(mob/living/carbon/human/character, client/player)
-	if(!player)
-		player = character.client
-	if(!player?.prefs)
-		return
-	for(var/i in 1 to 3)
-		if(isnull(player.prefs.vars["loadout[i]"]))
-			continue
-		character.mind.special_items["[player.prefs.vars["loadout[i]"]:item_path:name]"] = player.prefs.vars["loadout[i]"]:item_path
 
 /proc/apply_special_trait_if_able(mob/living/carbon/human/character, client/player, trait_type)
 	if(!charactet_eligible_for_trait(character, player, trait_type))
@@ -109,6 +100,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		if(!job)
 			return FALSE
 		if(!(job.type in special.allowed_jobs) && !(parent_job?.type in special.allowed_jobs))
+			return FALSE
+	if(istype(job, /datum/job/advclass))
+		var/datum/job/advclass/advjob = job
+		if(!isnull(special.allowed_ctags) && !length(advjob?.category_tags & special.allowed_ctags))
 			return FALSE
 	if(!isnull(special.restricted_jobs) && job && (job.type in special.restricted_jobs))
 		return FALSE

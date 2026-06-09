@@ -29,8 +29,8 @@
 	return total_modifier
 
 
-/mob/living/carbon/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE)
-	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
+/mob/living/carbon/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, damage_type, skip_dtype, can_crit = TRUE)
+	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMAGE, damage, damagetype, def_zone)
 	var/hit_percent = 1
 	damage = max(damage-blocked,0)
 //	var/hit_percent = (100-blocked)/100
@@ -68,6 +68,11 @@
 			adjustOxyLoss(damage_amount, forced = forced)
 		if(CLONE)
 			adjustCloneLoss(damage_amount, forced = forced)
+		if(PAIN, SHOCK_PAIN)
+			if(BP)
+				BP.add_pain(damage_amount)
+			else
+				adjustPainLoss(damage_amount, forced = forced)
 	if(damage_amount)
 		return damage_amount
 	else
@@ -87,20 +92,20 @@
 		amount += BP.burn_dam
 	return amount
 
-/mob/living/carbon/setBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+/mob/living/carbon/setBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype, damage_type)
 	var/current = getBruteLoss()
 	var/diff = amount - current
 	if(!diff)
 		return
-	adjustBruteLoss(diff, updating_health, forced, required_bodytype)
+	adjustBruteLoss(diff, updating_health, forced, required_bodytype, damage_type)
 
-/mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
+/mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status, damage_type = WOUND_INTERNAL_BRUISE, can_crit = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(amount > 0)
-		take_overall_damage(amount, 0, updating_health, required_status)
+		take_overall_damage(amount, 0, updating_health, required_status, damage_type = damage_type, no_crit = can_crit)
 	else
-		heal_overall_damage(abs(amount), 0, required_status ? required_status : BODYPART_ORGANIC, updating_health)
+		heal_overall_damage(abs(amount), 0, required_status ? required_status : BODYPART_ORGANIC, updating_health, forced)
 	return amount
 
 /mob/living/carbon/setFireLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
@@ -123,12 +128,32 @@
 	if(!forced && HAS_TRAIT(src, TRAIT_TOXINLOVER)) //damage becomes healing and healing becomes damage
 		amount = -amount
 		if(amount > 0)
-			blood_volume -= 5*amount
+			adjust_blood_volume(-amount * 5)
 		else
-			blood_volume -= amount
+			adjust_blood_volume(-amount)
 	if(HAS_TRAIT(src, TRAIT_TOXIMMUNE)) //Prevents toxin damage, but not healing
 		amount = min(amount, 0)
 	return ..()
+
+/mob/living/carbon/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
+	. = ..()
+	if(isnull(.))
+		return
+	if(. <= 75)
+		if(getOxyLoss() > 75)
+			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+	else if(getOxyLoss() <= 75)
+		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+
+/mob/living/carbon/setOxyLoss(amount, updating_health = TRUE, forced = FALSE)
+	. = ..()
+	if(isnull(.))
+		return
+	if(. <= 75)
+		if(getOxyLoss() > 75)
+			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+	else if(getOxyLoss() <= 75)
+		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
 
 
 /** adjustOrganLoss
@@ -162,13 +187,151 @@
 	if(O)
 		return O.damage
 
+/mob/living/carbon/getPainLoss()
+	var/amount = 0
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		amount += bodypart.pain_dam * bodypart.pain_damage_coeff
+	return amount
+
+/mob/living/carbon/adjustPainLoss(amount, updating_health = TRUE, forced = FALSE, required_status = null)
+	if(!forced && (status_flags & GODMODE))
+		return 0
+	var/list/obj/item/bodypart/parts = get_painable_bodyparts(adding_pain = (amount > 0 ? TRUE : FALSE))
+	if(!length(parts))
+		return 0
+	var/old_amount = amount
+	. = old_amount
+	amount *= CONFIG_GET(number/damage_multiplier)
+	var/update = FALSE
+	var/pain_per_part = amount / length(parts)
+	if(pain_per_part < 0)
+		pain_per_part = FLOOR(pain_per_part, DAMAGE_PRECISION)
+	else
+		pain_per_part = CEILING(pain_per_part, DAMAGE_PRECISION)
+	while(length(parts))
+		var/obj/item/bodypart/picked = pick_n_take(parts)
+		if(pain_per_part < 0)
+			update |= picked.remove_pain(abs(pain_per_part))
+		else
+			update |= picked.add_pain(abs(pain_per_part))
+	if(updating_health)
+		updatehealth()
+	if(update)
+		update_damage_overlays()
+
+/mob/living/carbon/setPainLoss(amount, updating_health = TRUE, forced = FALSE)
+	var/current = getPainLoss()
+	var/diff = amount - current
+	if(!diff)
+		return
+	adjustPainLoss(diff, updating_health, forced)
+
+/mob/living/carbon/proc/InShock()
+	return (shock_stage >= SHOCK_STAGE_4)
+
+/mob/living/carbon/proc/InFullShock()
+	return (shock_stage >= SHOCK_STAGE_6)
+
+/mob/living/carbon/proc/get_painable_bodyparts(status, adding_pain)
+	var/list/obj/item/bodypart/parts = list()
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(status && (bodypart.status != status))
+			continue
+		if(adding_pain)
+			if(bodypart.pain_dam < bodypart.max_pain_damage)
+				parts += bodypart
+		else
+			if(bodypart.pain_dam)
+				parts += bodypart
+	return parts
+
+/mob/living/carbon/proc/endorphinate(forced = FALSE, silent = FALSE, local_sound = TRUE, flash = TRUE, special_sound)
+	if(!forced && (TIMER_COOLDOWN_CHECK(src, COOLDOWN_CARBON_ENDORPHINATION)))
+		return
+
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+	var/current_body_amount = reagents.get_reagent_amount(/datum/reagent/medicine/endorphin)
+	var/endorphin_amount = clamp(endurance, 10, 29)
+	endorphin_amount = min(endorphin_amount, 29 - current_body_amount)
+	reagents?.add_reagent(/datum/reagent/medicine/endorphin, endorphin_amount)
+	TIMER_COOLDOWN_START(src, COOLDOWN_CARBON_ENDORPHINATION, HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) ? ENDORPHINATION_COOLDOWN_DURATION * 0.75 : ENDORPHINATION_COOLDOWN_DURATION)
+	if(!silent)
+		var/final_sound = special_sound || 'sound/heart/combatcocktail.ogg'
+		if(local_sound)
+			playsound_local(src, final_sound, 40, FALSE)
+		else
+			playsound(src, final_sound, 40, FALSE)
+
+
+/**
+ * Adds pain onto a limb while giving the player a message styled depending on the powerf of the pain added.
+ *
+ * Arguments:
+ * * Message is the custom message to be displayed to the source
+ * * Power decides how much painkillers will stop the message, as well as how much pain it causes
+ * * Forced means it ignores anti-spam timer
+ */
+/mob/living/carbon/custom_pain(message, power, forced, obj/item/bodypart/affecting, nopainloss = FALSE, pain_emote = TRUE)
+	if((stat >= UNCONSCIOUS) || !can_feel_pain() || (world.time < next_pain_time))
+		return FALSE
+
+	if(affecting && !affecting.can_feel_pain())
+		return FALSE
+
+	// Share the pain
+	if(!nopainloss && power)
+		if(affecting)
+			affecting.add_pain(CEILING(power, 1))
+		else
+			adjustPainLoss(CEILING(power, 1))
+
+	// Take the edge off
+	power -= get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	if(power < PAIN_EMOTE_MINIMUM)
+		return FALSE
+
+	// Anti message spam checks
+	if(forced || world.time >= next_pain_message_time)
+		if(world.time >= next_pain_message_time)
+			to_chat(src, span_animatedpain("[message]"))
+			next_pain_message_time = world.time + PAIN_MESSAGE_COOLDOWN + power
+
+	if(pain_emote && world.time >= next_pain_emote_time)
+		var/force_emote
+		if(ishuman(src))
+			var/mob/living/carbon/human/human_src = src
+			if(human_src.dna?.species)
+				force_emote = human_src.dna.species.get_pain_emote(power)
+		if(force_emote && prob(power))
+			INVOKE_ASYNC(src, PROC_REF(emote), force_emote)
+			next_pain_emote_time = world.time + PAIN_EMOTE_COOLDOWN + power
+
+	// Briefly flash the pain overlay
+	//flash_pain(power)
+	next_pain_time = world.time + (rand(10 SECONDS, 15 SECONDS) + power)
+	return TRUE
+
+/mob/living/carbon/can_feel_pain()
+	return !HAS_TRAIT(src, TRAIT_NOPAIN)
+
+/mob/living/carbon/getShock(painkiller_included = TRUE)
+	if(!can_feel_pain())
+		return 0
+
+	var/shock = 0
+	shock += SHOCK_MOD_CLONE * getCloneLoss()
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		shock += bodypart.get_shock(painkiller_included)
+
+	return max(0, shock)
+
 ////////////////////////////////////////////
 
 //Returns a list of damaged bodyparts
-/mob/living/carbon/proc/get_damaged_bodyparts(brute = FALSE, burn = FALSE, status)
+/mob/living/carbon/proc/get_damaged_bodyparts(brute = FALSE, burn = FALSE, status, forced)
 	var/list/obj/item/bodypart/parts = list()
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		if(status && (BP.status != status))
+		if(!forced && status && (BP.status != status))
 			continue
 		if((brute && BP.brute_dam) || (burn && BP.burn_dam) || length(BP.wounds))
 			parts += BP
@@ -208,10 +371,10 @@
 		update_damage_overlays()
 
 //Heal MANY bodyparts, in random order
-/mob/living/carbon/heal_overall_damage(brute = 0, burn = 0, required_status, updating_health = TRUE)
+/mob/living/carbon/heal_overall_damage(brute = 0, burn = 0, required_status, updating_health = TRUE, forced = FALSE)
 	. = FALSE
 
-	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_status)
+	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_status, forced)
 	var/update = NONE
 	while(length(parts) && (brute > 0 || burn > 0))
 		var/obj/item/bodypart/picked = pick(parts)
@@ -220,7 +383,7 @@
 		var/burn_was = picked.burn_dam
 		. += picked.get_damage()
 
-		update |= picked.heal_damage(brute, burn, required_status, FALSE)
+		update |= picked.heal_damage(brute, burn, updating_health = FALSE, forced = forced, required_status = required_status)
 
 		. -= picked.get_damage() // return the net amount of damage healed
 
@@ -239,7 +402,7 @@
 		update_damage_overlays()
 
 // damage MANY bodyparts, in random order
-/mob/living/carbon/take_overall_damage(brute = 0, burn = 0, updating_health = TRUE, required_status = BODYPART_ORGANIC)
+/mob/living/carbon/take_overall_damage(brute = 0, burn = 0, updating_health = TRUE, required_status = BODYPART_ORGANIC, damage_type, no_crit = FALSE)
 	. = FALSE
 	if(status_flags & GODMODE)
 		return	//godmode
@@ -259,7 +422,20 @@
 		var/burn_was = picked.burn_dam
 		. += picked.get_damage()
 
-		update |= picked.receive_damage(brute_per_part, burn_per_part, blocked = FALSE, updating_health = FALSE, required_status = BODYPART_ORGANIC)
+		if(!burn && !damage_type)
+			stack_trace("Carbon has taken damage without a tied damage class! Defaulting to Internal Bruising.")
+			damage_type = WOUND_INTERNAL_BRUISE
+
+		if(damage_type || burn)
+			if(burn)
+				damage_type = BCLASS_BURN
+			update = TRUE
+			var/list/mods = list()
+			if(no_crit)
+				mods = list(CRIT_MOD_CHANCE = -100)
+			picked.bodypart_attacked_by(damage_type, brute + burn, null, picked.body_zone, modifiers = mods)
+		else
+			update |= picked.receive_damage(brute_per_part, burn_per_part, blocked = FALSE, updating_health = FALSE, required_status = BODYPART_ORGANIC)
 
 		. -= picked.get_damage() // return the net amount of damage healed
 

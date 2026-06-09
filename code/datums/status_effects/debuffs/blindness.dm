@@ -80,7 +80,10 @@
 /datum/status_effect/grouped/blindness/tick()
 	. = ..()
 	if(owner.stat == CONSCIOUS || owner.has_status_effect(STATUS_EFFECT_SLEEPING))
-		owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind)
+		if((length(sources) == 1) && (EYE_DAMAGE in sources))
+			owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind)
+		else
+			owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind/sleeper)
 	else
 		owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blackimageoverlay)
 

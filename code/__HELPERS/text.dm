@@ -7,9 +7,6 @@
  *			Text modification
  *			Misc
  */
-/// BYOND's string procs don't support being used on datum references (as in it doesn't look for a name for stringification)
-/// We just use this macro to ensure that we will only pass strings to this BYOND-level function without developers needing to really worry about it.
-#define LOWER_TEXT(thing) lowertext(UNLINT("[thing]"))
 
 /proc/format_table_name(table as text)
 	return CONFIG_GET(string/feedback_tableprefix) + table
@@ -80,14 +77,8 @@
 		return null
 	return text
 
-/**
- * stuff like `copytext(input, length(input))` will trim the last character of the input,
- * because DM does it so it copies until the char BEFORE the `end` arg, so we need to bump `end` by 1 in these cases.
- */
-#define PREVENT_CHARACTER_TRIM_LOSS(integer) (integer + 1) //thank you gummie
-
-/// Used to get a properly sanitized input, of max_length
-/// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
+// Used to get a properly sanitized input, of max_length
+// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
 /proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
 	var/name = input(user, message, title, default) as text|null
 	if(no_trim)

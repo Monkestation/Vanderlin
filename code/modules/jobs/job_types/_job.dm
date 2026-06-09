@@ -14,7 +14,7 @@
 	/// Whether this job is intended to give quests
 	var/is_quest_giver = FALSE
 	/// How many quests this job can take at once
-	var/max_active_quests = 3
+	var/max_active_quests = 1
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job
@@ -141,8 +141,6 @@
 	/// Lower number of attunemnets to grant
 	var/attunements_min
 
-	var/whitelist_req = FALSE //!
-
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
 
@@ -215,6 +213,7 @@
 	var/static/list/actors_list_blacklist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
+		/datum/job/skeleton/zizoid,
 	)
 
 	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
@@ -229,6 +228,9 @@
 	var/attribute_sheet_old
 	var/attribute_sheet_child
 	var/attribute_sheet_adult
+
+	///this is our book path given on middle clicking ui
+	var/obj/item/recipe_book/book_type = /obj/item/recipe_book/survival
 
 /datum/job/New()
 	. = ..()
@@ -246,6 +248,9 @@
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.garrison_positions)
+			peopleiknow += X
+			peopleknowme += X
+		for(var/X in GLOB.gallowband_positions)
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.noble_positions)
