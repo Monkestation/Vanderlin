@@ -5,7 +5,7 @@
 	taste_description = "raw meat so dense it almost chokes you"
 	scent_description = "blood and hot iron"
 
-/datum/reagent/buff/strength/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/strength/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/strength/concentrated, 2))
@@ -19,7 +19,7 @@
 	taste_description = "eye-watering acuity"
 	scent_description = "ozone and pine"
 
-/datum/reagent/buff/perception/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/perception/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/perception/concentrated, 2))
@@ -33,7 +33,7 @@
 	taste_description = "cold water from a very deep well"
 	scent_description = "old parchment and ink"
 
-/datum/reagent/buff/intelligence/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/intelligence/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/intelligence/concentrated, 2))
@@ -47,7 +47,7 @@
 	taste_description = "bile thick enough to stand a spoon in"
 	scent_description = "deep earth and old stone"
 
-/datum/reagent/buff/constitution/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/constitution/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/constitution/concentrated, 2))
@@ -61,7 +61,7 @@
 	taste_description = "sweat and salt and iron will"
 	scent_description = "exertion and dry heat"
 
-/datum/reagent/buff/endurance/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/endurance/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/endurance/concentrated, 2))
@@ -75,7 +75,7 @@
 	taste_description = "pure lightning on the tongue"
 	scent_description = "electric heat"
 
-/datum/reagent/buff/speed/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/speed/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/speed/concentrated, 2))
@@ -89,7 +89,7 @@
 	taste_description = "sweetness that defies explanation"
 	scent_description = "warm coin and morning air"
 
-/datum/reagent/buff/fortune/concentrated/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/fortune/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot/concentrated))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/fortune/concentrated, 2))

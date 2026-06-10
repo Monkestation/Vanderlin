@@ -7,5 +7,5 @@
 	for(var/obj/item/bodypart/bodypart as anything in hosted_carbon.bodyparts)
 		for(var/datum/wound/wound as anything in bodypart.wounds)
 			for(var/i = 1 to multiplier)
-				wound.on_life()
+				wound.on_life(seconds_per_tick = SSMOBS_DT)
 

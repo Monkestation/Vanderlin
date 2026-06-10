@@ -10,7 +10,7 @@
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 30
 
-/datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.set_drugginess(30 SECONDS * efficiency)
 	if(prob(5))
 		if(M.gender == FEMALE)
@@ -76,7 +76,7 @@
 	V.add_stress(/datum/stress_event/pweed)
 	..()
 
-/datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_quirk(/datum/quirk/vice/smoker))
 		M.sate_addiction(/datum/quirk/vice/smoker)
 	..()
@@ -96,7 +96,7 @@
 	taste_description = "the clouds"
 	overdose_threshold = 30
 
-/datum/reagent/drug/hallucinogen/on_mob_life(mob/living/carbon/psychonaut, efficiency)
+/datum/reagent/drug/hallucinogen/on_mob_life(mob/living/carbon/psychonaut, efficiency, seconds_per_tick)
 	. = ..()
 	psychonaut.slurring = max(psychonaut.slurring, 2.5 SECONDS * efficiency)
 
@@ -170,7 +170,7 @@
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 	taste_description = " something deeply wrong"
 
-/datum/reagent/drug/hallucinogen_concetrate/on_mob_life(mob/living/carbon/psychonaut, efficiency)
+/datum/reagent/drug/hallucinogen_concetrate/on_mob_life(mob/living/carbon/psychonaut, efficiency, seconds_per_tick)
 	. = ..()
 	// weaker version of base hallucinogen — slurring only, mild jitter at high cycle
 	psychonaut.slurring = max(psychonaut.slurring, 1 SECONDS * efficiency)

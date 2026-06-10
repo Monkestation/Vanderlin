@@ -16,7 +16,7 @@
 	var/hydration_factor = 0
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes
 
-/datum/reagent/consumable/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
@@ -88,7 +88,7 @@
 	var/brute_heal = 0
 	var/burn_heal = 0
 
-/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(prob(50))
 		M.heal_bodypart_damage(brute_heal * efficiency,burn_heal * efficiency, 0)
 		. = 1
@@ -220,7 +220,7 @@
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	taste_description = "mushroom"
 
-/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!M.slurring)
 		M.slurring = 1
 	switch(current_cycle)
@@ -258,7 +258,7 @@
 	metabolization_rate = 1 * REAGENTS_METABOLISM
 	taste_description = "sweetness"
 
-/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.reagents.add_reagent(/datum/reagent/consumable/sugar,3)
 	if(prob(55))
 		M.adjustBruteLoss(-1*REM * efficiency, 0)

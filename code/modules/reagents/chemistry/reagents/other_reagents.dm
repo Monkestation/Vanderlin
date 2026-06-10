@@ -150,7 +150,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/water/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/water/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
@@ -171,7 +171,7 @@
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
 
-/datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
@@ -277,7 +277,7 @@
 	color = "#484848" // rgb: 72, 72, 72A
 	taste_mult = 0 // apparently tasteless.
 
-/datum/reagent/mercury/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/mercury/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M, TRAIT_IMMOBILIZED))
 		step(M, pick(GLOB.cardinals))
 	if(prob(5))
@@ -296,7 +296,7 @@
 	can_synth = FALSE
 	metabolization_rate = REAGENTS_METABOLISM * 0.3
 
-/datum/reagent/yuck/on_mob_life(mob/living/carbon/C, efficiency)
+/datum/reagent/yuck/on_mob_life(mob/living/carbon/C, efficiency, seconds_per_tick)
 	if(HAS_TRAIT(C, TRAIT_NOHUNGER) || HAS_TRAIT(C, TRAIT_NASTY_EATER) || HAS_TRAIT(C, TRAIT_ROT_EATER)) //they can't puke
 		return ..()
 	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 2.5 * efficiency : 5 * efficiency)
@@ -343,7 +343,7 @@
 	alpha = 100
 	taste_mult = 2 // yuck!
 
-/datum/reagent/soap/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/soap/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	..()
 	if(ishuman(M))
 		M.add_stress(/datum/stress_event/mouthsoap)
@@ -370,7 +370,7 @@
 	glows = TRUE
 	overdose_threshold = 11
 
-/datum/reagent/devour/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/devour/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	SEND_SIGNAL(M, COMSIG_DEVOUR_OVERDRIVE)
 

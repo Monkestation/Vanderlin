@@ -2353,9 +2353,10 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 // FIRE //
 //////////
 
-/datum/species/proc/handle_fire(mob/living/carbon/human/H, no_protection = FALSE)
+/datum/species/proc/handle_fire(mob/living/carbon/human/H, no_protection = FALSE, seconds_per_tick = SSMOBS_DT)
 	if(!CanIgniteMob(H))
 		return TRUE
+
 	if(H.on_fire)
 		//the fire tries to damage the exposed clothes and items
 		var/list/burning_items = list()
@@ -2400,14 +2401,15 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			burning_items |= leg_clothes
 
 		for(var/obj/item/I as anything in burning_items)
-			I.fire_act(((H.fire_stacks + H.divine_fire_stacks) * 25)) //damage taken is reduced to 2% of this value by fire_act()
+			I.fire_act(((H.fire_stacks + H.divine_fire_stacks) * 12.5 * seconds_per_tick)) //damage taken is reduced to 2% of this value by fire_act()
 
 		var/thermal_protection = H.get_thermal_protection()
 
 		if(thermal_protection >= 30000 && !no_protection)
 			return
+
 		if(thermal_protection >= 30000 && !no_protection)
-			H.adjust_bodytemperature(5)
+			H.adjust_bodytemperature(2.5 * seconds_per_tick)
 		else
 			H.adjust_bodytemperature(BODYTEMP_HEATING_MAX + ((H.fire_stacks + H.divine_fire_stacks)* 12))
 			H.add_stress(/datum/stress_event/on_fire)

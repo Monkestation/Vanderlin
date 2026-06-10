@@ -328,7 +328,10 @@
 #define REAGENTS_METABOLISM 1 //How many units of reagent are consumed per second, by default.
 #define REAGENTS_INSANELY_SLOW_METABOLISM 0.01
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
+/// Shorthand for use in procs
 #define REM REAGENTS_EFFECT_MULTIPLIER
+/// Shorthand multiplier for reagent effects, REM * seconds_per_tick * liver efficiency
+#define REAGENTS_MODIFIER (REM * seconds_per_tick * efficiency)
 
 // Eye protection
 #define FLASH_PROTECTION_SENSITIVE -1

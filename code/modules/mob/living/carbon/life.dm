@@ -1,12 +1,12 @@
-/mob/living/carbon/Life(seconds_per_tick = SSMOBS_DT)
+/mob/living/carbon/Life(seconds_per_tick)
 	set invisibility = 0
 
 	if(grab_fatigue > 0)
 		if(!pulling)
 			// Exponential decay mostly
-			grab_fatigue -= max(grab_fatigue * 0.15, 0.5)
+			grab_fatigue -= max(grab_fatigue * 0.1 * seconds_per_tick, 0.5)
 		else
-			grab_fatigue -= 0.5
+			grab_fatigue -= 0.5 * seconds_per_tick
 		grab_fatigue = max(0, grab_fatigue)
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -25,20 +25,20 @@
 
 		. = ..()
 
-		if (QDELETED(src))
+		if(QDELETED(src))
 			return
 
-		handle_wounds()
+		handle_wounds(seconds_per_tick)
 		handle_embedded_objects(seconds_per_tick)
 		update_stress()
-		handle_nausea()
+		handle_nausea(seconds_per_tick)
 
 		handle_shock(seconds_per_tick)
 		handle_shock_stage(seconds_per_tick)
 
-		handle_sleep()
+		handle_sleep(seconds_per_tick)
 
-	check_cremation()
+	check_cremation(seconds_per_tick)
 
 	if(stat != DEAD)
 		return 1
@@ -50,14 +50,16 @@
 		return
 
 	. = ..()
-	if (QDELETED(src))
+
+	if(QDELETED(src))
 		return
-	handle_wounds()
+
+	handle_wounds(seconds_per_tick)
 	handle_embedded_objects(seconds_per_tick)
 
-	check_cremation()
+	check_cremation(seconds_per_tick)
 
-/mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
+/mob/living/carbon/handle_random_events(seconds_per_tick) //BP/WOUND BASED PAIN
 	return
 
 ///////////////
@@ -141,7 +143,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 */
 
 //this updates all special effects: stun, sleeping, knockdown, druggy, stuttering, etc..
-/mob/living/carbon/handle_status_effects()
+/mob/living/carbon/handle_status_effects(seconds_per_tick)
 	..()
 
 	// These should all be real status effects :)))))))))
@@ -243,7 +245,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /////////////
 //CREMATION//
 /////////////
-/mob/living/carbon/proc/check_cremation()
+/mob/living/carbon/proc/check_cremation(seconds_per_tick)
 	//Only cremate while actively on fire
 	if(!on_fire)
 		return
@@ -264,7 +266,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		limb = get_bodypart(zone)
 		if(limb && !limb.skeletonized)
 			if(limb.get_damage() >= (limb.max_damage - 5))
-				limb.cremation_progress += rand(2,5)
+				limb.cremation_progress += rand(2, 5)
 				if(CAN_HAVE_BLOOD(src))
 					adjust_blood_volume(-10)
 				if(limb.cremation_progress >= 50)
@@ -318,9 +320,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 //BRAIN DAMAGE//
 ////////////////
 
-/mob/living/carbon/proc/handle_brain_damage()
+/mob/living/carbon/proc/handle_brain_damage(seconds_per_tick)
 	for(var/datum/brain_trauma/BT as anything in get_traumas())
-		BT.on_life()
+		BT.on_life(seconds_per_tick)
 
 /////////////////////////////////////
 //MONKEYS WITH TOO MUCH CHOLOESTROL//
@@ -406,9 +408,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 *	Hunger and Hydration.
 */
 
-/mob/living/carbon/proc/handle_sleep()
+/mob/living/carbon/proc/handle_sleep(seconds_per_tick)
 	if(HAS_TRAIT(src, TRAIT_NOSLEEP))
 		return
+
 	var/cant_fall_asleep = FALSE
 	var/cause = "I just can't..."
 	var/list/equipped_items = get_equipped_items(FALSE)
@@ -424,7 +427,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 	//Healing while sleeping in a bed
 	if(stat >= UNCONSCIOUS)
-		var/sleepy_mod = buckled?.sleepy || 0.5
+		var/sleepy_mod = (buckled?.sleepy || 0.5) * seconds_per_tick
 		var/bleed_rate = get_bleed_rate()
 		var/yess = HAS_TRAIT(src, TRAIT_NOHUNGER)
 		if(nutrition > 0 || yess)
@@ -449,7 +452,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			adjustToxLoss(-(sleepy_mod * 0.15))
 			updatehealth()
 			if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
-				Sleeping(300)
+				Sleeping(30 SECONDS)
 		tiredness = 0
 	else if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 		// Resting on a bed or something
@@ -468,13 +471,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 							bed_check.sheet_tucked = FALSE
 
 				if(fallingas > 15)
-					Sleeping(300)
+					Sleeping(30 SECONDS)
 			else if(eyesclosed && fallingas >= 10 && cant_fall_asleep)
 				if(fallingas != 13)
 					to_chat(src, span_boldwarning("I can't sleep...[cause]"))
 				fallingas -= 5
 			else
-				adjust_energy(buckled.sleepy * (max_energy * 0.01))
+				adjust_energy(buckled.sleepy * (max_energy * 0.005) * seconds_per_tick)
 		// Resting on the ground (not sleeping or with eyes closed and about to fall asleep)
 		else if(body_position == LYING_DOWN)
 			if(eyesclosed && !cant_fall_asleep || (eyesclosed && !(fallingas >= 10 && cant_fall_asleep)))
@@ -482,13 +485,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					to_chat(src, span_warning("I'll fall asleep soon, although a bed would be more comfortable..."))
 				fallingas++
 				if(fallingas > 25)
-					Sleeping(300)
+					Sleeping(30 SECONDS)
 			else if(eyesclosed && fallingas >= 10 && cant_fall_asleep)
 				if(fallingas != 13)
 					to_chat(src, span_boldwarning("I can't sleep...[cause]"))
 				fallingas -= 5
 			else
-				adjust_energy((max_energy * 0.01))
+				adjust_energy(max_energy * 0.005 * seconds_per_tick)
 		else if(fallingas)
 			fallingas = 0
-		tiredness = min(tiredness + 1, 100)
+
+		tiredness = min(tiredness + seconds_per_tick, 100)

@@ -4,7 +4,7 @@
 	random_reagent_color = TRUE
 	overdose_threshold = 0
 
-/datum/reagent/medicine/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	current_cycle++
 	. = ..()
 
@@ -37,7 +37,7 @@
 	affected_mob.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 	affected_mob.remove_chem_effect(CE_OXYGENATED, "[type]")
 
-/datum/reagent/medicine/atropine/on_mob_life(mob/living/carbon/affected_mob, efficiency)
+/datum/reagent/medicine/atropine/on_mob_life(mob/living/carbon/affected_mob, efficiency, seconds_per_tick)
 	if(HAS_TRAIT(affected_mob, TRAIT_CRITICAL_CONDITION))
 		affected_mob.adjustToxLoss(-2 * REM * efficiency , FALSE)
 		affected_mob.adjustBruteLoss(-2* REM * efficiency, FALSE)
@@ -68,7 +68,7 @@
 	scent_description = "sulphurous fumes"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/ashwarden_brew/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/ashwarden_brew/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustFireLoss(-5 * REM * efficiency, 0)
 		M.adjustToxLoss(-1 * efficiency, 0)
@@ -86,7 +86,7 @@
 	scent_description = "briars and undergrowth"
 	metabolization_rate = REAGENTS_METABOLISM * 0.2  // Very slow metabolization
 
-/datum/reagent/medicine/thornmorrow_tincture/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/thornmorrow_tincture/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-1 * REM * efficiency, 0)
 		M.adjustFireLoss(-1 * REM * efficiency, 0)
@@ -117,7 +117,7 @@
 	L.remove_chem_effect(CE_STABLE, "[type]")
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/medicine/soulweave_distillate/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/soulweave_distillate/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -4 * REM * efficiency, 150)
 		M.adjustCloneLoss(-2 * REM * efficiency, 0)
@@ -145,7 +145,7 @@
 		affected_mob.update_damage_overlays()
 	return ..()
 
-/datum/reagent/medicine/coldvein_compress/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/coldvein_compress/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustFireLoss(-2 * REM * efficiency, 0)
 	. = ..()
@@ -159,7 +159,7 @@
 	scent_description = "rendered tallow"
 	metabolization_rate = REAGENTS_METABOLISM * 0.75
 
-/datum/reagent/medicine/ichor_of_mending/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/ichor_of_mending/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-3.5 * REM * efficiency, 0)
 		M.heal_wounds(4 * efficiency)
@@ -179,7 +179,7 @@
 	scent_description = "cooling embers"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/ashbinders_salve/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/ashbinders_salve/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustFireLoss(-4 * REM * efficiency, 0)
 	. = ..()
@@ -217,7 +217,7 @@
 	L.remove_chem_effect(CE_OXYGENATED, "[type]")
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/medicine/vitalroot_draught/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/vitalroot_draught/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustOxyLoss(-6 * efficiency, 0)
 		M.adjustOrganLoss(-2 * efficiency, ORGAN_SLOT_LUNGS)
@@ -240,7 +240,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
-/datum/reagent/medicine/tombsilt_tincture/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/tombsilt_tincture/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustToxLoss(-5 * efficiency, 0)
 		M.adjustCloneLoss(-2 * REM * efficiency, 0)
@@ -262,7 +262,7 @@
 	affected_bodypart.adjust_germ_level(-25)
 	return ..()
 
-/datum/reagent/medicine/mirewort_compress/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/mirewort_compress/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustToxLoss(1 * efficiency, 0)
 	. = ..()
@@ -287,7 +287,7 @@
 	affected_bodypart.adjust_germ_level(-10)
 	return ..()
 
-/datum/reagent/medicine/woundwrack_oil/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/woundwrack_oil/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-0.25 * REM * efficiency, 0)
 	. = ..()
@@ -312,7 +312,7 @@
 	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 	L.remove_chem_effect(CE_ORGAN_REGEN, "[type]")
 
-/datum/reagent/medicine/pale_serum/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/pale_serum/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3 * REM * efficiency, 150)
 		M.adjustOrganLoss(ORGAN_SLOT_EYES, -2 * REM * efficiency, 150)
@@ -342,7 +342,7 @@
 	L.remove_chem_effect(CE_SHRINKING, "[type]")
 	L.update_effect_scaling()
 
-/datum/reagent/medicine/spiritwood_elixir/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/spiritwood_elixir/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-2.5 * REM * efficiency, 0)
 		M.adjustFireLoss(-2.5 * REM * efficiency, 0)
@@ -368,7 +368,7 @@
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_ENERGETIC, "[type]")
 
-/datum/reagent/medicine/marrowbrew/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/marrowbrew/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-0.75 * REM * efficiency, 0)
 		M.adjustFireLoss(-0.75 * REM * efficiency, 0)
@@ -393,7 +393,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 
-/datum/reagent/medicine/mindclear_tonic/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/mindclear_tonic/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5 * REM * efficiency, 150)
 		M.adjust_confusion(-2 SECONDS * efficiency)
@@ -420,7 +420,7 @@
 	affected_bodypart.adjust_germ_level(-15)
 	return ..()
 
-/datum/reagent/medicine/witchknit_paste/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/witchknit_paste/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-1 * REM * efficiency, 0)
 	. = ..()
@@ -442,7 +442,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
-/datum/reagent/medicine/fever_oil/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/fever_oil/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustToxLoss(-3 * efficiency, 0)
 	if(prob(25))
@@ -459,7 +459,7 @@
 	scent_description = "wet stone"
 	metabolization_rate = REAGENTS_METABOLISM * 0.75
 
-/datum/reagent/medicine/stonevein_broth/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/stonevein_broth/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-2 * REM * efficiency, 0)
 		M.adjustCloneLoss(-1.5 * REM * efficiency, 0)
@@ -483,7 +483,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
-/datum/reagent/medicine/sunpetal_decoction/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/sunpetal_decoction/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustToxLoss(-2 * efficiency, 0)
 		M.adjustBruteLoss(-0.5 * REM * efficiency, 0)
@@ -508,7 +508,7 @@
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
 
-/datum/reagent/medicine/nervebind_extract/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/nervebind_extract/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(prob(15 * efficiency))
 		M.adjust_jitter(2 SECONDS * efficiency)
 	. = ..()
@@ -532,7 +532,7 @@
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/medicine/bloodelder_wine/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/bloodelder_wine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(prob(20))
 		M.adjust_dizzy(3 SECONDS * efficiency)
 	M.adjustOrganLoss(ORGAN_SLOT_HEART, -2 * efficiency)

@@ -23,7 +23,7 @@
 	..()
 	. = 1
 
-/datum/reagent/lux/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/lux/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
@@ -155,7 +155,7 @@
 	..()
 	. = 1
 
-/datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)

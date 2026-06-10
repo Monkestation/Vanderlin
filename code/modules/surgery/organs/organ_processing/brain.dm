@@ -45,5 +45,5 @@
 			if((brain.current_blood <= 0) && SPT_PROB(damprob, seconds_per_tick))
 				brain.applyOrganDamage(BRAIN_DAMAGE_LOWEST_OXYGENATION)
 
-	owner.handle_brain_damage()
+	owner.handle_brain_damage(seconds_per_tick)
 	return TRUE

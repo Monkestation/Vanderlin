@@ -20,7 +20,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	in_use = FALSE
 	return ..()
 
-/mob/living/carbon/human/dummy/Life()
+/mob/living/carbon/human/dummy/Life(seconds_per_tick)
 	return
 
 // no reason for these to ever be hearing sensitive, it just wastes time on spatial grid stuff

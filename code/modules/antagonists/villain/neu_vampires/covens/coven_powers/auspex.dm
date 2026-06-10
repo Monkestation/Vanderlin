@@ -215,19 +215,17 @@ GLOBAL_LIST_INIT(astral_projections, list())
 		anchor = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/astral_projection/Life()
+/mob/living/simple_animal/hostile/retaliate/astral_projection/Life(seconds_per_tick)
 	. = ..()
 
-	if (anchor)
-		var/turf/T = get_turf(anchor)
-		var/turf/U = get_turf(src)
-		if (T.z != U.z)
-			to_chat(src, span_warning("You cannot sustain the astral projection at such a distance.") )
-			death()
-			return
-	else
-		death()
+	if(!anchor)
 		return
+
+	var/turf/T = get_turf(anchor)
+	var/turf/U = get_turf(src)
+	if (T.z != U.z)
+		to_chat(src, span_warning("You cannot sustain the astral projection at such a distance.") )
+		death()
 
 /mob/living/simple_animal/hostile/retaliate/astral_projection/death(gibbed = FALSE)
 	INVOKE_ASYNC(src, PROC_REF(destroy_projection))

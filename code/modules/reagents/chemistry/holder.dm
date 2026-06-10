@@ -342,13 +342,14 @@
 	R.handle_reactions()
 	return amount
 
-/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE, efficiency = 100)
+/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE, efficiency = 100, seconds_per_tick = seconds_per_tick)
 	var/list/cached_reagents = reagent_list
 	var/list/cached_addictions = addiction_list
 	if(C)
 		expose_temperature(C.bodytemperature, 0.25)
 		if(HAS_TRAIT(C, TRAIT_CRACKHEAD))
 			can_overdose = FALSE
+
 	var/need_mob_update = 0
 	for(var/datum/reagent/R as anything in cached_reagents)
 		if(QDELETED(R.holder))
@@ -383,7 +384,7 @@
 								A.addiction_stage = -15 // you're satisfied for a good while.
 				if(!R.liver_chemical)
 					efficiency = 100
-				need_mob_update += R.on_mob_life(C, efficiency * 0.01)
+				need_mob_update += R.on_mob_life(C, efficiency / 100, seconds_per_tick)
 
 	if(can_overdose)
 		if(addiction_tick == 6)
@@ -403,9 +404,11 @@
 						if(40 to INFINITY)
 							remove_addiction(R)
 		addiction_tick++
+
 	if(C && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
 		C.updatehealth()
 		C.update_stamina()
+
 	update_total()
 
 /datum/reagents/proc/remove_addiction(datum/reagent/R)

@@ -26,7 +26,7 @@
 	L.remove_chem_effect(CE_ENERGETIC, "[type]")
 	..()
 
-/datum/reagent/drug/methamphetamine/on_mob_life(mob/living/carbon/affected_mob, efficiency)
+/datum/reagent/drug/methamphetamine/on_mob_life(mob/living/carbon/affected_mob, efficiency, seconds_per_tick)
 	. = ..()
 	var/high_message = pick("You feel hyper.", "You feel like you need to go faster.", "You feel like you can run the world.")
 	if(prob(2.5))

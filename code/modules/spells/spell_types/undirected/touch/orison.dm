@@ -202,7 +202,7 @@
 	name = "blessed water"
 	description = "A gift of Devotion. Very slightly heals wounds."
 
-/datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	if (M.mob_biotypes & MOB_UNDEAD)
 		M.adjustFireLoss(0.5*REM * efficiency)
@@ -232,7 +232,7 @@
 	name = "cursed water"
 	description = "A gift of Devotion. Very slightly heals wounds of the dead and the enlightened."
 
-/datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	if((M.mob_biotypes & MOB_UNDEAD))
 		M.adjustBruteLoss(-0.1*REM * efficiency)

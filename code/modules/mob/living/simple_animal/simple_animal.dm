@@ -430,7 +430,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			set_stat(CONSCIOUS)
 	// SEND_SIGNAL(src, COMSIG_MOB_STATCHANGE, stat)
 
-/mob/living/simple_animal/handle_status_effects()
+/mob/living/simple_animal/handle_status_effects(seconds_per_tick)
 	..()
 	if(stuttering)
 		stuttering = 0
@@ -753,14 +753,15 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		..()
 		// SEND_SIGNAL(src, COMSIG_MOB_STATCHANGE, DEAD)
 
-/mob/living/simple_animal/handle_fire()
+/mob/living/simple_animal/handle_fire(seconds_per_tick)
 	. = ..()
 	if(!on_fire)
 		return TRUE
+
 	if(fire_stacks + divine_fire_stacks > 0)
-		apply_damage(5, BURN)
+		apply_damage(2.5 * seconds_per_tick, BURN)
 		if(fire_stacks + divine_fire_stacks > 5)
-			apply_damage(10, BURN)
+			apply_damage(5 * seconds_per_tick, BURN)
 
 /mob/living/simple_animal/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
@@ -1014,14 +1015,16 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)
 	. = ..()
 
-/mob/living/simple_animal/Life()
+/mob/living/simple_animal/Life(seconds_per_tick)
 	. = ..()
-	if(.)
-		if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
-			pooprog += 0.5
-			if(pooprog >= 100)
-				pooprog = 0
-				poop()
+	if(!.)
+		return
+
+	if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
+		pooprog += 0.25 * seconds_per_tick
+		if(pooprog >= 100)
+			pooprog = 0
+			poop()
 
 /mob/living/simple_animal/proc/poop()
 	if(pooptype)

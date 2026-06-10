@@ -28,9 +28,9 @@
 	lose_text = "<span class='notice'>I feel alive again.</span>"
 	var/active = FALSE
 
-/datum/brain_trauma/special/death_whispers/on_life()
+/datum/brain_trauma/special/death_whispers/on_life(seconds_per_tick)
 	..()
-	if(!active && prob(2))
+	if(!active && SPT_PROB(1, seconds_per_tick))
 		whispering()
 
 /datum/brain_trauma/special/death_whispers/on_lose()

@@ -237,19 +237,21 @@
 	update_wounds()
 	update_pain_coeff()
 
-/obj/item/bodypart/proc/on_owner_life()
+/obj/item/bodypart/proc/on_owner_life(seconds_per_tick)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE))
-		on_chronic_fracture_life()
+		on_chronic_fracture_life(seconds_per_tick)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_ARTHRITIS))
-		on_arthritis_life()
+		on_arthritis_life(seconds_per_tick)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_MIGRAINE))
-		on_migraine_life()
+		on_migraine_life(seconds_per_tick)
 
-/obj/item/bodypart/proc/on_chronic_fracture_life()
-	if(!prob(2))
+/obj/item/bodypart/proc/on_chronic_fracture_life(seconds_per_tick)
+	if(!SPT_PROB(1, seconds_per_tick))
 		return
+
 	if(pain_dam >= SHOCK_STAGE_3)
 		return
+
 	if(owner.encumbrance >= ENCUMBRANCE_HEAVY)
 		var/pain_amount = rand(3, 5)
 		if(owner.encumbrance >= ENCUMBRANCE_EXTREME)
@@ -259,21 +261,21 @@
 			to_chat(owner, span_warning("The weight of your equipment aggravates your chronic [name] pain!"))
 		add_pain(pain_amount)
 
-/obj/item/bodypart/proc/on_arthritis_life()
-	if(prob(2) && pain_dam < SHOCK_STAGE_2)
+/obj/item/bodypart/proc/on_arthritis_life(seconds_per_tick)
+	if(SPT_PROB(1, seconds_per_tick) && pain_dam < SHOCK_STAGE_2)
 		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 		var/pain_msg = pick("Your [name] throbs with arthritic pain!",
 							"A sharp ache shoots through your [name]!",
 							"Your [name] feels stiff and painful!")
 		to_chat(owner, span_warning(pain_msg))
 
-	if(prob(1) && owner.loc && pain_dam < (SHOCK_STAGE_2 / 2))
+	if(SPT_PROB(0.5, seconds_per_tick) && owner.loc && pain_dam < (SHOCK_STAGE_2 / 2))
 		if(SSParticleWeather.runningWeather && SSParticleWeather.runningWeather.can_weather(owner))
 			add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 			to_chat(owner, span_warning("The weather makes your arthritis act up."))
 
-/obj/item/bodypart/proc/on_migraine_life()
-	if(prob(2) && pain_dam < SHOCK_STAGE_2)
+/obj/item/bodypart/proc/on_migraine_life(seconds_per_tick)
+	if(SPT_PROB(1, seconds_per_tick) && pain_dam < SHOCK_STAGE_2)
 		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_2 * 0.5))
 
 		if(prob(30))
@@ -282,7 +284,7 @@
 		else
 			to_chat(owner, span_warning("A migraine headache begins to build."))
 
-	if(prob(1))
+	if(SPT_PROB(0.5, seconds_per_tick))
 		if(pain_dam < SHOCK_STAGE_2 && owner.loc?.luminosity > 2)
 			add_pain(rand(SHOCK_STAGE_1 * 0.3, SHOCK_STAGE_1 * 0.5))
 			to_chat(owner, span_warning("The flickering flames make your migraine worse!"))

@@ -25,7 +25,7 @@
 	description = "If you see this, stop using moondust"
 	color = "#acaf01"
 	nutriment_factor = 2
-	metabolization_rate = 0.3 // 33% of normal metab
+	metabolization_rate = REAGENTS_METABOLISM * 0.33 // 33% of normal metab
 	taste_description = "relaxing texture, minty aftertaste"
 	taste_mult = 3
 	quality = 1
@@ -40,17 +40,19 @@
 	L.remove_chem_effect(CE_STABLE, "[type]")
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 
-/datum/reagent/consumable/tea/taraxamint/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/tea/taraxamint/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/taraxamint, 2) //No overhealing.
-	var/list/wCount = M.get_wounds()
-	if(wCount.len > 0)
-		M.heal_wounds(0.4 * efficiency) // Equals to 24 woundhealing distributed when you drink entire 20 units. Slow and not too much, but just enough to give you time to crawl to somewhere safe (lets be real, even the streets are a gamble)
+
+	M.heal_wounds(0.4 * REAGENTS_MODIFIER)
+
 	if(volume > 0.99)
-		M.adjustFireLoss(-0.75 * REM * efficiency, 0)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1 * REM * efficiency)
-		M.adjustToxLoss(-1 * efficiency, 0)
-	..()
+		M.adjustFireLoss(-0.75 * REAGENTS_MODIFIER, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1 * REAGENTS_MODIFIER)
+		M.adjustToxLoss(-1 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/consumable/tea/utricasalvia
 	name = "Urtica-Salvia tea"
@@ -72,7 +74,7 @@
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_ORGAN_REGEN, "[type]")
 
-/datum/reagent/consumable/tea/utricasalvia/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/tea/utricasalvia/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/utricasalvia, 2)
 	var/list/wCount = M.get_wounds()
@@ -103,7 +105,7 @@
 	L.remove_chem_effect(CE_BLOCKAGE, "[type]")
 	L.remove_chem_effect(CE_BREATHLOSS, "[type]")
 
-/datum/reagent/consumable/tea/badidea/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/tea/badidea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 5)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.add_nausea(1 * efficiency)
@@ -134,7 +136,7 @@
 	L.remove_chem_effect(CE_PULSE, "[type]")
 	L.remove_chem_effect(CE_ENERGETIC, "[type]")
 
-/datum/reagent/consumable/tea/fourtwenty/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/tea/fourtwenty/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 10)
 		M.reagents.add_reagent(/datum/reagent/drug/space_drugs, 2 * efficiency)
 	return ..()
@@ -157,7 +159,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 
-/datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/manabloom, 2) //No powerchuging for you, mage lad.
 		M.add_nausea(1 * efficiency)

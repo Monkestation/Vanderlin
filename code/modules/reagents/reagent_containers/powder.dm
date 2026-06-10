@@ -141,7 +141,7 @@
 	blend_mode = 0
 	show_when_dead = FALSE
 
-/datum/reagent/druqks/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/druqks/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	M.set_drugginess(30 SECONDS * efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
@@ -203,7 +203,7 @@
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 	L.remove_chem_effect(CE_STIMULANT, "[type]")
 
-/datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
@@ -248,7 +248,7 @@
 	animate(affected_mob.client)
 	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust_purest))
 		M.Sleeping(40, 0)
@@ -298,7 +298,7 @@
 	affected_mob.remove_status_effect(/datum/status_effect/buff/moondust_purest)
 	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust))
 		M.Sleeping(40 * efficiency, 0)

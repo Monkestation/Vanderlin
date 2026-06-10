@@ -7,7 +7,7 @@
 	glass_name = "glass of milk"
 	glass_desc = ""
 
-/datum/reagent/consumable/milk/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/milk/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.getBruteLoss() && prob(20))
 		M.heal_bodypart_damage(1 * efficiency,0, 0)
 		. = 1
@@ -33,7 +33,7 @@
 	M.adjust_jitter(5 SECONDS)
 	..()
 
-/datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.adjust_drowsiness(-10 SECONDS * efficiency)
 	M.adjust_drowsiness(-6 SECONDS * efficiency)
 	M.AdjustSleeping(-4 SECONDS * efficiency)
@@ -51,7 +51,7 @@
 	glass_name = "glass of ice"
 	glass_desc = ""
 
-/datum/reagent/consumable/ice/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/ice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.adjust_bodytemperature(-2 * TEMPERATURE_DAMAGE_COEFFICIENT * efficiency, BODYTEMP_NORMAL)
 	..()
 
@@ -68,7 +68,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/consumable/golden_calendula_tea/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/golden_calendula_tea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		M.adjust_stamina(-0.5 * efficiency, internal_regen = FALSE)
 	var/list/wCount = M.get_wounds()
@@ -88,7 +88,7 @@
 	color = "#3b9146"
 	quality = DRINK_FANTASTIC
 
-/datum/reagent/consumable/soothing_valerian_tea/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/soothing_valerian_tea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		M.adjust_stamina(-0.3 * efficiency, internal_regen = FALSE)
 	..()
@@ -99,7 +99,7 @@
 	hydration_factor = 5
 	overdose_threshold = 60
 
-/datum/reagent/consumable/caffeine/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/caffeine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	M.adjust_stamina(-5 * efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/vigor)

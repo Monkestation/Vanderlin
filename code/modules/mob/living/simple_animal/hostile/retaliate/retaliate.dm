@@ -101,13 +101,13 @@
 	. = ..()
 	del_on_deaggro = 0
 
-/mob/living/simple_animal/hostile/retaliate/Life()
+/mob/living/simple_animal/hostile/retaliate/Life(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return
 
 	if(adult_growth)
-		growth_prog += 0.5
+		growth_prog += 0.25 * seconds_per_tick
 		if(growth_prog >= 100)
 			if(isturf(loc))
 				var/mob/living/simple_animal/A = new adult_growth(loc)

@@ -49,12 +49,12 @@
 	log_game("[key_name(stranger_backseat)] became [key_name(owner)]'s split personality.")
 	message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
 
-/datum/brain_trauma/severe/split_personality/on_life()
+/datum/brain_trauma/severe/split_personality/on_life(seconds_per_tick)
 	if(owner.stat == DEAD)
 		if(current_controller != OWNER)
 			switch_personalities(TRUE)
 		qdel(src)
-	else if(prob(3))
+	else if(SPT_PROB(1.5, seconds_per_tick))
 		switch_personalities()
 
 	return ..()
@@ -142,7 +142,7 @@
 		trauma = _trauma
 	return ..()
 
-/mob/living/split_personality/Life()
+/mob/living/split_personality/Life(seconds_per_tick)
 	if(QDELETED(body))
 		qdel(src) //in case trauma deletion doesn't already do it
 

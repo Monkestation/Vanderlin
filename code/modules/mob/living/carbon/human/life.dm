@@ -21,7 +21,7 @@
 /mob/living/carbon/human
 	var/allmig_reward = 0
 
-/mob/living/carbon/human/Life(seconds_per_tick = SSMOBS_DT)
+/mob/living/carbon/human/Life(seconds_per_tick)
 //	set invisibility = 0
 	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE, seconds_per_tick)
 
@@ -104,21 +104,12 @@
 
 	if(mind)
 		for(var/datum/antagonist/A in mind.antag_datums)
-			A.on_life(src)
+			A.on_life(src, seconds_per_tick)
 
 	. = ..()
 	name = get_visible_name()
 	handle_organs(seconds_per_tick)
 	handle_bodyparts(seconds_per_tick)
-
-/mob/living/carbon/human/proc/on_daypass()
-	if(stat < 3) //not dead
-		if(dna?.species)
-			if(STUBBLE in dna.species.species_traits)
-				if(gender == MALE)
-					if(prob(50))
-						has_stubble = TRUE
-						update_body()
 
 /mob/living/proc/handle_environment(seconds_per_tick)
 	return
@@ -180,20 +171,20 @@
 	dna?.species.handle_hygiene(src, seconds_per_tick)
 
 ///FIRE CODE
-/mob/living/carbon/human/handle_fire()
+/mob/living/carbon/human/handle_fire(seconds_per_tick)
 	. = ..()
 	if(.) //if the mob isn't on fire anymore
 		return
 
 	if(dna)
-		. = dna.species.handle_fire(src) //do special handling based on the mob's species. TRUE = they are immune to the effects of the fire.
+		. = dna.species.handle_fire(src, seconds_per_tick = seconds_per_tick) //do special handling based on the mob's species. TRUE = they are immune to the effects of the fire.
 
 	if(!last_fire_update)
 		last_fire_update = fire_stacks + divine_fire_stacks
+
 	if((fire_stacks + divine_fire_stacks > 10 && last_fire_update <= 10) || (fire_stacks + divine_fire_stacks <= 10 && last_fire_update > 10))
 		last_fire_update = fire_stacks + divine_fire_stacks
 		update_fire()
-
 
 /mob/living/carbon/human/proc/get_thermal_protection()
 	var/thermal_protection = 0 //Simple check to estimate how protected we are against multiple temperatures
@@ -377,13 +368,16 @@
 
 	return min(1,thermal_protection)
 
-/mob/living/carbon/human/handle_random_events()
-	..()
+/mob/living/carbon/human/handle_random_events(seconds_per_tick)
+	. = ..()
 	//Puke if toxloss is too high
-	if(!stat)
-		if(prob(33) && getToxLoss() >= 75)
-			MOBTIMER_SET(src, MT_PUKE)
-			vomit(1, blood = TRUE)
+	if(stat || getToxLoss() < 75)
+		return
+
+	if(SPT_PROB(10, seconds_per_tick))
+		return
+
+	vomit(1, blood = TRUE)
 
 /mob/living/carbon/human/has_smoke_protection()
 	if(wear_mask)

@@ -25,7 +25,7 @@
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
 
-/datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
 	M.adjust_blood_volume(6 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
@@ -63,7 +63,7 @@
 	L.remove_chem_effect(CE_STABLE, "[type]")
 	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 
-/datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
 	M.adjust_blood_volume(10 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
@@ -86,7 +86,7 @@
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 
-/datum/reagent/medicine/rosawater/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/rosawater/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	if (M.mob_biotypes & MOB_BEAST)
 		M.adjustFireLoss(0.5*REM * efficiency)
@@ -110,7 +110,7 @@
 	metabolization_rate = REAGENTS_METABOLISM * 5
 	alpha = 173
 
-/datum/reagent/medicine/gender_potion/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/gender_potion/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	var/old_gender
 	if(!istype(M) || M.stat == DEAD)
 		to_chat(M, span_warning("The potion can only be used on living things!"))
@@ -141,14 +141,14 @@
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 
-/datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.mana_pool.adjust_mana(4 * efficiency)
 	..()
 
 /datum/reagent/medicine/manapot/weak
 	name = "Weak Mana Potion"
 
-/datum/reagent/medicine/manapot/weak/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/manapot/weak/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.mana_pool.adjust_mana(2 * efficiency)
 	..()
 
@@ -160,7 +160,7 @@
 	scent_description = "dry air"
 	metabolization_rate = REAGENTS_METABOLISM * 3
 
-/datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	M.mana_pool.adjust_mana(8 * efficiency)
 	..()
 
@@ -175,7 +175,7 @@
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 
-/datum/reagent/medicine/stampot/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/stampot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		M.adjust_stamina(-1.5 * efficiency, internal_regen = FALSE)
 	..()
@@ -188,7 +188,7 @@
 	scent_description = "grass"
 	metabolization_rate = REAGENTS_METABOLISM * 3
 
-/datum/reagent/medicine/strongstam/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/strongstam/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		M.adjust_stamina(-6 * efficiency, internal_regen = FALSE)
 	..()
@@ -202,7 +202,7 @@
 	scent_description = "rotten cheese"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/antidote/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/antidote/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustToxLoss(-4 * efficiency, 0)
 	..()
@@ -232,7 +232,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
-/datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.99)
 		M.adjustToxLoss(-16 * efficiency, 0)
 	..()
@@ -251,7 +251,7 @@
 	taste_description = "raw meat"
 	scent_description = "sour vomit"
 
-/datum/reagent/buff/strength/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/strength/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/strength, 4))
@@ -265,7 +265,7 @@
 	taste_description = "cat urine"
 	scent_description = "urine"
 
-/datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
 		return ..()
 	if(M.has_reagent((/datum/reagent/buff/perception), 4))
@@ -279,7 +279,7 @@
 	taste_description = "bog water"
 	scent_description = "moss"
 
-/datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot))
 		return ..()
 	if(M.has_reagent((/datum/reagent/buff/intelligence), 4))
@@ -293,7 +293,7 @@
 	taste_description = "acidic bile"
 	scent_description = "petrichor"
 
-/datum/reagent/buff/constitution/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/constitution/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot))
 		return ..()
 	if(M.has_reagent((/datum/reagent/buff/constitution), 4))
@@ -307,7 +307,7 @@
 	taste_description = "gote urine"
 	scent_description = "urine"
 
-/datum/reagent/buff/endurance/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/endurance/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot))
 		return ..()
 	if(M.has_reagent((/datum/reagent/buff/endurance), 4))
@@ -321,7 +321,7 @@
 	taste_description = "raw egg yolk"
 	scent_description = "sweat"
 
-/datum/reagent/buff/speed/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/speed/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot))
 		return ..()
 	if(M.has_reagent((/datum/reagent/buff/speed), 4))
@@ -335,7 +335,7 @@
 	taste_description = "sweet urine"
 	scent_description = "urine"
 
-/datum/reagent/buff/fortune/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/buff/fortune/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
 		return ..()
 	if(M.has_reagent((/datum/reagent/buff/fortune), 4))
@@ -355,7 +355,7 @@
 	var/naus = 3
 	var/tox = 2
 
-/datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.09)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.add_nausea((tox/3) * efficiency)
@@ -384,7 +384,7 @@
 	scent_description = "charcoal"
 	metabolization_rate = REAGENTS_METABOLISM / 10
 
-/datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.09)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.add_nausea(1 * efficiency)
@@ -405,7 +405,7 @@
 	metabolization_rate = REAGENTS_METABOLISM / 10
 	var/list/cannibalism_pool = ALL_RACES_LIST
 
-/datum/reagent/organpoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/organpoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!(M.dna?.species?.id in cannibalism_pool))
 		return ..()
 	if(HAS_TRAIT(M, TRAIT_NOHUNGER))
@@ -486,7 +486,7 @@
 	scent_description = "dust"
 	metabolization_rate = (REAGENTS_METABOLISM / 10) * 3
 
-/datum/reagent/stampoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/stampoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(0.75 * efficiency)
@@ -504,7 +504,7 @@
 	scent_description = "freezing dust"
 	metabolization_rate = (REAGENTS_METABOLISM / 10) * 9
 
-/datum/reagent/strongstampoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/strongstampoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(4.5 * efficiency)
@@ -526,7 +526,7 @@
 	scent_description = "nothing"
 	metabolization_rate = (REAGENTS_METABOLISM / 10) * 5
 
-/datum/reagent/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(5 * efficiency)
@@ -551,7 +551,7 @@
 	scent_description = "freezing dust"
 	metabolization_rate = REAGENTS_METABOLISM / 10
 
-/datum/reagent/killersice/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/killersice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.adjustToxLoss(5 * efficiency)
 	return ..()
@@ -567,7 +567,7 @@
 	var/tox = 1
 	var/oxy = 5
 
-/datum/reagent/drowsbane/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/drowsbane/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.09)
 		if(istiefling(M))
 			M.adjustBruteLoss(-1*REM * efficiency)
@@ -622,7 +622,7 @@
 	metabolization_rate = 0.5
 	boiling_point = T0C + 95
 
-/datum/reagent/toxin/fyritiusnectar/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/toxin/fyritiusnectar/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	if(volume > 0.49 && prob(33))
 		M.add_nausea(9 * efficiency)
 		M.adjustFireLoss(2 * efficiency, 0)

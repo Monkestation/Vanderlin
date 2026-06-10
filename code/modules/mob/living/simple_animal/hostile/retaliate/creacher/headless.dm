@@ -73,11 +73,12 @@
 			SwallowEnemy(target)
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/headless/Life()
+/mob/living/simple_animal/hostile/retaliate/headless/Life(seconds_per_tick)
 	if(isliving(swallowed_mob))
 		//Vomit your captive if you take 40 damage since swallowing them
 		if(health < health_at_swallow - 40)
 			SpitUp()
+
 		if(swallowed_mob)
 			if(stomach_burn_cooldown < world.time)
 				//Yes they take burn damage. No i wont explain why.

@@ -108,9 +108,11 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	return TRUE
 
-/datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick = SSMOBS_DT)
 	SHOULD_CALL_PARENT(TRUE)
+
 	current_cycle++
+
 	if(holder)
 		var/adjusted_metabolization_rate = metabolization_rate
 		if(istype(src, /datum/reagent/consumable/ethanol) && has_world_trait(/datum/world_trait/baotha_revelry))
@@ -125,6 +127,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 				record_round_statistic(STATS_ALCOHOL_CONSUMED, adjusted_metabolization_rate)
 			if(istype(src, /datum/reagent/water))
 				record_round_statistic(STATS_WATER_CONSUMED, adjusted_metabolization_rate)
+
 	return TRUE
 
 /datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered

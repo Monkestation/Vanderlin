@@ -36,7 +36,7 @@
 				if(provide_pain_message != HAS_PAINFUL_TOXIN)
 					provide_pain_message = T.silent_toxin ? HAS_SILENT_TOXIN : HAS_PAINFUL_TOXIN
 
-	owner.reagents.metabolize(owner, can_overdose = TRUE, efficiency = liver_efficiency)
+	owner.reagents.metabolize(owner, can_overdose = TRUE, efficiency = liver_efficiency, seconds_per_tick = seconds_per_tick)
 
 	if(provide_pain_message == HAS_PAINFUL_TOXIN && liver.damage > 10 && SPT_PROB(liver.damage / 3, seconds_per_tick))
 		to_chat(owner, "<span class='warning'>I feel a dull pain in my abdomen.</span>")

@@ -950,13 +950,13 @@
 		return
 	. = ..()
 
-/datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.adjust_hydration(-hydration * efficiency)  //saltwater dehydrates more than it hydrates
-		M.adjustToxLoss(0.25 * efficiency) // Slightly toxic
-		M.add_nausea(2 * efficiency)
-	..()
+		H.adjust_hydration(-hydration * REAGENTS_MODIFIER)  //saltwater dehydrates more than it hydrates
+		M.adjustToxLoss(0.25 * REAGENTS_MODIFIER) // Slightly toxic
+		M.add_nausea(2 * REAGENTS_MODIFIER)
 
 /// Piss
 /turf/open/water/river/sewer
