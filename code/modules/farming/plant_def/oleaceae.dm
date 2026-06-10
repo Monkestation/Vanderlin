@@ -1,4 +1,4 @@
-/datum/plant_def/olive
+/datum/plant_def/ollie
 	name = "ollie tree"
 	icon_state = "ollietree"
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/ollie
