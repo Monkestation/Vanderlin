@@ -90,18 +90,22 @@
 			return .
 		mark_victim(user)
 
-/obj/structure/wonder/process()
-	. = ..()
+/obj/structure/wonder/process(seconds_per_tick)
+	if(QDELETED(dream_master))
+		return PROCESS_KILL
+
+	if(!SPT_PROB(5, seconds_per_tick))
+		return
+
 	var/list/viewers = view(7, src)
-	if(!QDELETED(dream_master))
-		for(var/mob/living/carbon/human/victim in viewers)
-			var/manniaq = victim.mind?.has_antag_datum(/datum/antagonist/maniac)
-			if(!victim.mind || (victim.stat == DEAD) || manniaq)
-				continue
-			var/obj/item/organ/heart/heart = victim.getorganslot(ORGAN_SLOT_HEART)
-			if(heart && !(dream_master in heart.maniacs)) //duplicate check because this NEEDS to mark a valid victim if available
-				mark_victim(victim)
-				break
+	for(var/mob/living/carbon/human/victim in viewers)
+		var/manniaq = victim.mind?.has_antag_datum(/datum/antagonist/maniac)
+		if(!victim.mind || (victim.stat == DEAD) || manniaq)
+			continue
+		var/obj/item/organ/heart/heart = victim.getorganslot(ORGAN_SLOT_HEART)
+		if(heart && !(dream_master in heart.maniacs)) //duplicate check because this NEEDS to mark a valid victim if available
+			mark_victim(victim)
+			break
 
 /obj/structure/wonder/proc/mark_victim(mob/living/carbon/human/V)
 	var/obj/item/organ/heart/H = V.getorganslot(ORGAN_SLOT_HEART)

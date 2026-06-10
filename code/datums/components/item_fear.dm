@@ -11,7 +11,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/component/scared_of_item/process()
+/datum/component/scared_of_item/process(seconds_per_tick)
 	var/mob/living/simple_animal/basic_mob = parent
 
 	if(isliving(parent))
@@ -32,6 +32,7 @@
 				last_scared_by = human
 				was_scared = TRUE
 			return
+
 	basic_mob.ai_controller?.set_blackboard_key(BB_BASIC_MOB_STOP_FLEEING, TRUE)
 	if(was_scared)
 		SEND_SIGNAL(basic_mob, COMSIG_EMOTION_STORE, last_scared_by, EMOTION_HAPPY, "stopped chasing me with a whip.", 0)

@@ -7,13 +7,15 @@
 		/datum/thaumaturgical_essence/energia = 35,
 		/datum/thaumaturgical_essence/cycle = 25
 	)
-	var/regeneration_rate = 2
+	var/regeneration_rate = 1
 
-/datum/enchantment/mana_regeneration/process()
+/datum/enchantment/mana_regeneration/process(seconds_per_tick)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return
+
 	if(!iscarbon(enchanted_item?.loc))
 		return
+
 	var/mob/living/carbon/mob = enchanted_item.loc
-	mob.safe_adjust_personal_mana(regeneration_rate)
+	mob.safe_adjust_personal_mana(regeneration_rate * seconds_per_tick)

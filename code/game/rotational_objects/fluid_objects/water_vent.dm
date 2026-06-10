@@ -22,13 +22,14 @@
 		input = pipe
 		return TRUE
 
-/obj/structure/water_vent/process()
+/obj/structure/water_vent/process(seconds_per_tick)
 	if(length(input?.providers))
 		spew_water()
 
 /obj/structure/water_vent/proc/spew_water()
 	if(!water_spewer)
 		water_spewer = new(src, /particles/smoke/steam/water_vent)
+
 	var/datum/reagent/reagent = input.carrying_reagent
 	water_spewer.color = initial(reagent.color)
 
@@ -40,6 +41,7 @@
 			matrix.Turn(90)
 		if(WEST)
 			matrix.Turn(270)
+
 	water_spewer.transform = matrix
 
 	var/range = max(1, FLOOR(input.water_pressure * 0.1, 1))
@@ -97,8 +99,6 @@
 				send_pressure *= 0.25
 				send_pressure = round(send_pressure, 1)
 			pipe_turf.add_liquid(add_reagent, send_pressure)
-
-
 
 /obj/structure/water_vent/return_rotation_chat()
 	var/datum/reagent/reagent = input.carrying_reagent

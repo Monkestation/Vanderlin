@@ -233,4 +233,8 @@
 #define SPT_PROB_RATE(prob_per_second, seconds_per_tick) (1 - (1 - (prob_per_second)) ** (seconds_per_tick))
 
 /// Like SPT_PROB_RATE but easier to use, simply put `if(SPT_PROB(10, 5))`
-#define SPT_PROB(prob_per_second_percent, seconds_per_tick) (prob(100*SPT_PROB_RATE((prob_per_second_percent)/100, (seconds_per_tick))))
+#define SPT_PROB(prob_per_second_percent, seconds_per_tick) (prob(100 * SPT_PROB_RATE((prob_per_second_percent) / 100, (seconds_per_tick))))
+
+/// We generally want timers to use time macros but seconds_per_tick is directly in seconds, so we use this to convert for timers.
+/// Using this for clarity and convience over seconds_per_tick * (1 SECONDS) on it's own.
+#define SPT_TO_DECISECONDS(seconds_per_tick) (seconds_per_tick * (1 SECONDS))

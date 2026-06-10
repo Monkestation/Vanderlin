@@ -48,7 +48,7 @@
 	connected_pipe = null
 	return ..()
 
-/obj/structure/sprinkler/process()
+/obj/structure/sprinkler/process(seconds_per_tick)
 	if(!connected_pipe || QDELETED(connected_pipe))
 		active = FALSE
 		current_reagent = null
@@ -72,11 +72,11 @@
 		spray_water()
 		last_spray_time = world.time
 
-/obj/structure/sprinkler/proc/spray_water()
+/obj/structure/sprinkler/proc/spray_water(seconds_per_tick)
 	if(!active || !current_reagent || !connected_pipe)
 		return
 
-	connected_pipe.use_pressure(1)
+	connected_pipe.use_pressure(seconds_per_tick)
 
 	var/turf/center = get_turf(src)
 	var/obj/effect/temp_visual/sprinkler/effect = new /obj/effect/temp_visual/sprinkler(center)

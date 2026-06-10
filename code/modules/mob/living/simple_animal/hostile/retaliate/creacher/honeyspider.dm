@@ -262,7 +262,7 @@
 	. = ..()
 	disturb(user)
 
-/obj/structure/spider/nest/process()
+/obj/structure/spider/nest/process(seconds_per_tick)
 	if(total_processed >= process_cap)
 		return
 	if(!to_process)

@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(quest_scrolls)
 		icon_state = "[base_icon_state]_closed"
 
 
-/obj/item/paper/scroll/quest/process()
+/obj/item/paper/scroll/quest/process(seconds_per_tick)
 	if(world.time > last_whisper + WHISPER_COOLDOWN)
 		last_whisper = world.time
 		target_whisper()

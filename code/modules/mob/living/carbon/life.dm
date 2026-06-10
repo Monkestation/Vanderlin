@@ -29,7 +29,7 @@
 			return
 
 		handle_wounds()
-		handle_embedded_objects()
+		handle_embedded_objects(seconds_per_tick)
 		update_stress()
 		handle_nausea()
 
@@ -43,7 +43,7 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/DeadLife()
+/mob/living/carbon/DeadLife(seconds_per_tick)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -53,7 +53,7 @@
 	if (QDELETED(src))
 		return
 	handle_wounds()
-	handle_embedded_objects()
+	handle_embedded_objects(seconds_per_tick)
 
 	check_cremation()
 
@@ -106,10 +106,10 @@
 			organ.on_death(seconds_per_tick)
 
 
-/mob/living/carbon/handle_embedded_objects()
+/mob/living/carbon/handle_embedded_objects(seconds_per_tick)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		for(var/obj/item/embedded as anything in bodypart.embedded_objects)
-			if(embedded.on_embed_life(src, bodypart))
+			if(embedded.on_embed_life(src, bodypart, seconds_per_tick))
 				continue
 
 			if(prob(embedded.embedding.embedded_pain_chance))

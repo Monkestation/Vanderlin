@@ -1,5 +1,7 @@
 /atom/movable
 	layer = OBJ_LAYER
+	glide_size = 6
+	appearance_flags = TILE_BOUND|PIXEL_SCALE
 	var/last_move = null
 	var/last_move_time = 0
 	/// A list containing arguments for Moved().
@@ -35,9 +37,6 @@
 	var/lastcardinal = 0
 	var/lastcardpress = 0
 	var/list/acted_explosions	//for explosion dodging
-	glide_size = 6
-	appearance_flags = TILE_BOUND|PIXEL_SCALE
-	var/datum/forced_movement/force_moving = null	//handled soley by forced_movement.dm
 	///Holds information about any movement loops currently running/waiting to run on the movable. Lazy, will be null if nothing's going on
 	var/datum/movement_packet/move_packet
 	/**

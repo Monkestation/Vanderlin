@@ -107,7 +107,7 @@
 
 	return neighbors
 
-/obj/structure/redstone/comparator/process()
+/obj/structure/redstone/comparator/process(seconds_per_tick)
 	// 1. Get the current state of the container
 	var/current_storage_signal = get_storage_signal()
 

@@ -93,7 +93,7 @@
 				qdel(recipe)
 			return result
 
-/obj/machinery/essence/combiner/process()
+/obj/machinery/essence/combiner/process(seconds_per_tick)
 	// Pull raw essences from inbound links into input storage
 	pull_from_linked(storage)
 	// Push combined output through outbound links

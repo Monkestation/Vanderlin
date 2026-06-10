@@ -69,7 +69,7 @@
 	else
 		icon_state = "beebox-empty"
 
-/obj/structure/apiary/process()
+/obj/structure/apiary/process(seconds_per_tick)
 	validate_queen()
 	process_comb_gain()
 

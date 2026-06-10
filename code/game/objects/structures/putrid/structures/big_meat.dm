@@ -90,28 +90,28 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 		return TRUE
 	return ..()
 
-/obj/structure/meatvine/papameat/process()
-	var/integrity_percent = round(get_integrity()/max_integrity)
+/obj/structure/meatvine/papameat/process(seconds_per_tick)
+	var/integrity_percent = round(get_integrity() / max_integrity)
 	switch(integrity_percent)
 		if(75)
-			if(prob(10))
-				transfer_feromones(2)
+			if(SPT_PROB(10, seconds_per_tick))
+				transfer_feromones(20 * seconds_per_tick)
 		if(50)
-			if(prob(10))
-				transfer_feromones(5)
+			if(SPT_PROB(10, seconds_per_tick))
+				transfer_feromones(50 * seconds_per_tick)
 			if(prob(1))
 				var/mobtype = pick(/mob/living/simple_animal/hostile/retaliate/meatvine, /mob/living/simple_animal/hostile/retaliate/meatvine/range)
 				new mobtype(loc)
 			if(healed && (master.vines.len <= master.collapse_size) && master.reached_collapse_size)
 				master.reached_collapse_size = FALSE
 		if(25)
-			if(prob(20))
+			if(SPT_PROB(20, seconds_per_tick))
 				puff_gas(TRUE)
 			if(healed && (master.vines.len >= master.slowdown_size) && master.reached_slowdown_size)
 				master.reached_slowdown_size = FALSE
-	if(!healed)
-		if(!repair_damage(10))
-			healed = TRUE
+
+	if(!healed && repair_damage(100 * seconds_per_tick))
+		healed = TRUE
 
 /obj/structure/meatvine/papameat/grow()
 	return

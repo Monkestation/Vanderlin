@@ -53,7 +53,7 @@
 	set_light(0)
 	return ..()
 
-/obj/item/fake_machine/drugtrade/process()
+/obj/item/fake_machine/drugtrade/process(seconds_per_tick)
 	if(!anchored)
 		return TRUE
 	if(world.time > next_canister)

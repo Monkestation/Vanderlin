@@ -41,7 +41,7 @@
 	for(var/i in 1 to length(GLOB.laws_of_the_land))
 		. += span_info("[i]. [GLOB.laws_of_the_land[i]]")
 
-/obj/structure/fake_machine/scomm/process()
+/obj/structure/fake_machine/scomm/process(seconds_per_tick)
 	if(obj_broken)
 		return
 	if(world.time > next_decree)

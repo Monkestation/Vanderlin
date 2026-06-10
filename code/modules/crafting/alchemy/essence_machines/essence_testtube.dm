@@ -30,7 +30,7 @@
 		return list()
 	return list(/datum/thaumaturgical_essence/life = room)
 
-/obj/machinery/essence/test_tube/process()
+/obj/machinery/essence/test_tube/process(seconds_per_tick)
 	pull_from_linked(storage)
 
 /obj/machinery/essence/test_tube/attack_hand(mob/living/user)

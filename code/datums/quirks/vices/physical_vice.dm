@@ -369,7 +369,7 @@
 		return
 	START_PROCESSING(SSobj, src)
 
-/datum/quirk/vice/nightmares/process()
+/datum/quirk/vice/nightmares/process(seconds_per_tick)
 	if(!owner)
 		return
 

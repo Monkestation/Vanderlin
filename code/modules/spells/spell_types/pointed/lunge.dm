@@ -115,9 +115,9 @@
 	// Did I slip or get knocked unconscious?
 	if(user.body_position != STANDING_UP || user.incapacitated())
 		var/send_dir = get_dir(user, target_turf)
-		new /datum/forced_movement(user, get_ranged_target_turf(user, send_dir, 1), 1, FALSE)
-		user.spin(10)
+		user.AddComponent(/datum/component/force_move, get_ranged_target_turf(user, send_dir, 1), TRUE)
 		return
+
 	// Is my target a Monster hunter?
 	if(istype(target) && target.is_shove_knockdown_blocked())
 		owner.balloon_alert(owner, "pushed away!")

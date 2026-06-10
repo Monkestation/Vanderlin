@@ -39,7 +39,7 @@
 	if(input?.group_reagents?.total_volume)
 		. += "The connected channel contains molten metal ready to drain."
 
-/obj/structure/channel_connector/drain/process()
+/obj/structure/channel_connector/drain/process(seconds_per_tick)
 	// Check for moulds periodically
 	if(world.time >= last_check_time + check_interval)
 		find_target_mould()

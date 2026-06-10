@@ -79,7 +79,7 @@
 		START_PROCESSING(SSobj, src)
 		playsound(src, 'sound/misc/lava_death.ogg', 100, FALSE)
 
-/turf/open/lava/process()
+/turf/open/lava/process(seconds_per_tick)
 	if(!burn_stuff(null))
 		STOP_PROCESSING(SSobj, src)
 

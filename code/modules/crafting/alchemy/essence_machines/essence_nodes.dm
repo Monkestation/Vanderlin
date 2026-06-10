@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 	var/tier = 0 // 0 = common, 1 = rare
 	var/max_essence = 100
 	var/current_essence = 0
-	var/recharge_rate = 1 // Essence per minute
+	var/recharge_rate = 0.5 // Essence per second
 	var/last_recharge = 0
 
 	// Visual states
@@ -30,11 +30,11 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 	switch(tier)
 		if(0)
 			max_essence = rand(100, 150)
-			recharge_rate = rand(2, 3)
+			recharge_rate = rand(1, 1.5)
 			max_integrity = 100
 		if(1)
 			max_essence = rand(300, 400)
-			recharge_rate = rand(3, 6)
+			recharge_rate = rand(1.5, 3)
 			max_integrity = 200
 
 	current_essence = rand(max_essence * 0.3, max_essence * 0.8)
@@ -74,9 +74,9 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 				common_and_rare_essences |= essence
 		return pick(common_and_rare_essences)
 
-/obj/structure/essence_node/process()
+/obj/structure/essence_node/process(seconds_per_tick)
 	if(current_essence < max_essence && world.time >= last_recharge + 1 MINUTES)
-		current_essence = min(max_essence, current_essence + recharge_rate)
+		current_essence = min(max_essence, current_essence + (recharge_rate * seconds_per_tick))
 		last_recharge = world.time
 
 /obj/structure/essence_node/proc/can_harvest()
@@ -244,7 +244,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/essence_node_portable/process()
+/obj/item/essence_node_portable/process(seconds_per_tick)
 	if(current_essence < max_essence && world.time >= last_recharge + 1 MINUTES)
 		var/portable_penalty = 0.7
 		var/adjusted_recharge = max(1, round(recharge_rate * portable_penalty))
@@ -257,8 +257,8 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 		apply_carrying_penalties(holder)
 
 /obj/item/essence_node_portable/proc/apply_carrying_penalties(mob/living/holder)
-	if(!(src in holder.status_effects))
-		holder.add_movespeed_modifier(MOVESPEED_ID_CARRYING_ESSENCE, multiplicative_slowdown = 2)
+	holder.add_movespeed_modifier(MOVESPEED_ID_CARRYING_ESSENCE, multiplicative_slowdown = 2)
+
 	if(world.time >= last_stamina_drain + 1 MINUTES)
 		if(holder.stamina)
 			holder.stamina = max(0, holder.stamina - stamina_drain)

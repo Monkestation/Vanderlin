@@ -18,10 +18,11 @@
 			initial_reagents |= reagents.type
 			initial_reagents[reagents.type] = reagents.volume
 
-/datum/enchantment/eternal_blunt/process()
+/datum/enchantment/eternal_blunt/process(seconds_per_tick)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return
+
 	for(var/reagent_type in initial_reagents)
 		var/target_volume = initial_reagents[reagent_type]
 		var/datum/reagent/existing = enchanted_item.reagents.reagent_list[reagent_type]

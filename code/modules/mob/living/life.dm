@@ -1,7 +1,7 @@
-/mob/living/proc/Life(seconds)
+/mob/living/proc/Life(seconds_per_tick)
 	set waitfor = FALSE
 
-	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds)
+	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds_per_tick)
 
 	if(signal_result & COMPONENT_LIVING_CANCEL_LIFE_PROCESSING) // mmm less work
 		return
@@ -33,7 +33,7 @@
 		handle_temperature()
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 			handle_wounds()
-			handle_embedded_objects()
+			handle_embedded_objects(seconds_per_tick)
 			handle_blood()
 			//passively heal even wounds with no passive healing
 			for(var/datum/wound/wound as anything in get_wounds())
@@ -103,7 +103,7 @@
 	last_island_check = 0
 	update_island_cache()
 
-/mob/living/proc/DeadLife()
+/mob/living/proc/DeadLife(seconds_per_tick)
 	set invisibility = 0
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -111,7 +111,7 @@
 		return
 	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		handle_wounds()
-		handle_embedded_objects()
+		handle_embedded_objects(seconds_per_tick)
 		handle_blood()
 	update_sneak_invis()
 	handle_fire()
@@ -166,12 +166,12 @@
 	for(var/datum/wound/wound as anything in get_wounds())
 		wound.on_life()
 
-/obj/item/proc/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
+/obj/item/proc/on_embed_life(mob/living/user, obj/item/bodypart/bodypart, seconds_per_tick)
 	return
 
-/mob/living/proc/handle_embedded_objects()
+/mob/living/proc/handle_embedded_objects(seconds_per_tick)
 	for(var/obj/item/embedded in simple_embedded_objects)
-		if(embedded.on_embed_life(src))
+		if(embedded.on_embed_life(src, seconds_per_tick))
 			continue
 
 		if(prob(embedded.embedding.embedded_pain_chance))

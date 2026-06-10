@@ -27,7 +27,7 @@
 	return ..()
 
 // The splitter produces essence; it should push outward each tick rather than pull.
-/obj/machinery/essence/splitter/process()
+/obj/machinery/essence/splitter/process(seconds_per_tick)
 	if(!processing)
 		push_to_linked(storage)
 

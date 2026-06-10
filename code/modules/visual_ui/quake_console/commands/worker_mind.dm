@@ -63,7 +63,7 @@
 	parent_atom.client?.images -= turf_path
 	turf_path = list()
 
-/datum/component/worker_mind_renderer/process()
+/datum/component/worker_mind_renderer/process(seconds_per_tick)
 	if(!mind || !output)
 		return
 

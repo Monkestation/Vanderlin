@@ -288,7 +288,7 @@
 		to_chat(user, span_info("It is gone. You weep."))
 		user.emote("cry")
 
-/obj/item/flashlight/flare/torch/lantern/psycenser/process()
+/obj/item/flashlight/flare/torch/lantern/psycenser/process(seconds_per_tick)
 	if(on && next_smoke < world.time)
 		new /obj/effect/temp_visual/censer_dust(get_turf(src))
 		next_smoke = world.time + smoke_interval
@@ -637,24 +637,24 @@
 	w_class = WEIGHT_CLASS_SMALL
 	embedding = null
 	item_weight = 150 GRAMS
-	var/tallow
-	var/remaining
-	var/heatedup
-	var/messageshown = 1
 	sellprice = 0
+	var/tallow = 0
+	var/remaining = 0
+	var/heatedup = 0
+	var/messageshown = TRUE
 
 /obj/item/inqarticles/tallowpot/Initialize(mapload)
 	. = ..()
 	START_PROCESSING(SSobj, src)	// For making sure it melts.
 
 /obj/item/inqarticles/tallowpot/Destroy()
-	. = ..()
 	STOP_PROCESSING(SSobj, src)
+	return ..()
 
-/obj/item/inqarticles/tallowpot/process()
+/obj/item/inqarticles/tallowpot/process(seconds_per_tick)
 	if(heatedup > 0)
 		heatedup -= 4
-		remaining = max(remaining - 20, 0)
+		remaining = max(remaining - (SPT_TO_DECISECONDS(seconds_per_tick)), 0)
 		messageshown = 0
 	else
 		if(tallow)
@@ -662,10 +662,12 @@
 				visible_message(span_info("The redtallow in [src] hardens again."))
 				messageshown = 1
 			update_appearance(UPDATE_ICON_STATE)
+
 	if(remaining == 0)
 		qdel(tallow)
 		tallow = initial(tallow)
 		update_appearance(UPDATE_ICON_STATE)
+
 
 /obj/item/inqarticles/tallowpot/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
@@ -677,7 +679,7 @@
 			var/obj/item/reagent_containers/food/snacks/tallow/red/Q = I
 			tallow = Q
 			user.transferItemToLoc(Q, src, TRUE)
-			remaining = 300
+			remaining = 30 SECONDS
 			update_appearance(UPDATE_ICON_STATE)
 		else
 			to_chat(user, span_info("[src] already has redtallow in it."))

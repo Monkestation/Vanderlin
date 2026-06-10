@@ -6,19 +6,23 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 0
-	var/check_counter = 0
-	var/list/attracted_types = list(/mob/living/simple_animal/hostile/retaliate/bigrat = 10,
-										/mob/living/simple_animal/hostile/retaliate/goat = 33,
-									/mob/living/simple_animal/hostile/retaliate/goatmale = 33,
-									/mob/living/simple_animal/pet/cat/cabbit = 33,
-									/mob/living/simple_animal/hostile/retaliate/chicken = 55)
-	var/attraction_chance = 100
-	var/deployed = 0
-	var/deploy_speed = 10 SECONDS
 	resistance_flags = FLAMMABLE
 	grid_height = 32
 	grid_width = 32
 	item_weight = 200 GRAMS
+
+	var/check_counter = 0
+	var/list/attracted_types = list(
+		/mob/living/simple_animal/hostile/retaliate/bigrat = 10,
+		/mob/living/simple_animal/hostile/retaliate/goat = 33,
+		/mob/living/simple_animal/hostile/retaliate/goatmale = 33,
+		/mob/living/simple_animal/pet/cat/cabbit = 33,
+		/mob/living/simple_animal/hostile/retaliate/chicken = 55,
+	)
+
+	var/attraction_chance = 10
+	var/deployed = FALSE
+	var/deploy_speed = 10 SECONDS
 
 /obj/item/bait/Initialize()
 	. = ..()
@@ -26,80 +30,95 @@
 
 /obj/item/bait/attack_self(mob/user, list/modifiers)
 	. = ..()
-	user.visible_message("<span class='notice'>[user] begins deploying the bait...</span>", \
-						"<span class='notice'>I begin deploying the bait...</span>")
-	if(do_after(user, deploy_speed * (1/(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
-		user.dropItemToGround(src, TRUE)
-		START_PROCESSING(SSobj, src)
-		name = "bait"
-		icon_state = "[icon_state]1"
-		deployed = 1
+	user.visible_message(
+		"<span class='notice'>[user] begins deploying the bait...</span>", \
+		"<span class='notice'>I begin deploying the bait...</span>"
+	)
+	if(!do_after(user, deploy_speed * (1/(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
+		return
+
+	user.dropItemToGround(src, TRUE)
+	START_PROCESSING(SSobj, src)
+	name = "bait"
+	icon_state = "[icon_state]1"
+	deployed = TRUE
 
 /obj/item/bait/attack_hand(mob/user)
 	if(deployed)
-		user.visible_message("<span class='notice'>[user] begins gathering up the bait...</span>", \
-							"<span class='notice'>I begin gathering up the bait...</span>")
-		if(do_after(user, deploy_speed * (1/(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
-			STOP_PROCESSING(SSobj, src)
-			name = initial(name)
-			deployed = 0
-			icon_state = initial(icon_state)
-			..()
-	else
-		..()
+		return ..()
 
-/obj/item/bait/process()
-	if(deployed)
-		if(world.time > check_counter + 10 SECONDS)
-			check_counter = world.time
-			var/area/A = get_area(src)
-			if(A.outdoors)
-				var/list/possible_targets = list()
-				for(var/obj/item/bait/B in range(7, src))
-					if(B == src)
-						continue
-					if(can_see(src, B, 7))
-						possible_targets += B
-				if(possible_targets.len)
-					return
-				possible_targets = list()
-				var/list/objects = range(7, src)
-				for(var/obj/structure/flora/tree/RT in objects)
-					if(can_see(src, RT, 7))
-						possible_targets += RT
-				for(var/obj/structure/flora/grass/bush/RT in objects)
-					if(can_see(src, RT, 7))
-						possible_targets += RT
-				for(var/obj/structure/flora/grass/bush_meagre/RT in objects)
-					if(can_see(src, RT, 7))
-						possible_targets += RT
-				for(var/obj/structure/flora/grass/herb/RT in objects)
-					if(can_see(src, RT, 7))
-						possible_targets += RT
-				for(var/obj/structure/wild_plant/RT in objects)
-					if(can_see(src, RT, 7))
-						possible_targets += RT
-				for(var/obj/structure/chair/bench/ancientlog/RT in objects)
-					if(can_see(src, RT, 7))
-						possible_targets += RT
-				if(!possible_targets.len)
-					return
-				var/cume = 0
-				for(var/mob/living/carbon/human/L in viewers(src, 7))
-					if(L.stat == CONSCIOUS)
-						cume++
-				if(!cume)
-					if(prob(attraction_chance))
-//						var/turf/T = get_turf(pick(possible_targets))
-						var/turf/T = get_turf(src)
-						if(T)
-							var/mob/M = pickweight(attracted_types)
-							new M(T)
-							new /obj/item/natural/cloth(T)
-							qdel(src)
-					else
-						qdel(src)
-	..()
+	user.visible_message(
+		"<span class='notice'>[user] begins gathering up the bait...</span>", \
+		"<span class='notice'>I begin gathering up the bait...</span>"
+	)
+
+	if(!do_after(user, deploy_speed * (1/(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/traps) + 1)), src)) //rogtodo hunting skill
+		return
+
+	STOP_PROCESSING(SSobj, src)
+	name = initial(name)
+	deployed = FALSE
+	icon_state = initial(icon_state)
+
+/obj/item/bait/process(seconds_per_tick)
+	if(!deployed)
+		return PROCESS_KILL
+
+	if(world.time < check_counter + 10 SECONDS)
+		return
+
+	check_counter = world.time
+	var/area/A = get_area(src)
+	if(!A.outdoors)
+		return
+
+	var/list/possible_targets = list()
+	for(var/obj/item/bait/B in range(7, src))
+		if(B == src)
+			continue
+		if(can_see(src, B, 7))
+			possible_targets += B
+
+	if(possible_targets.len)
+		return
+
+	possible_targets = list()
+	var/list/objects = range(7, src)
+	for(var/obj/structure/flora/tree/RT in objects)
+		if(can_see(src, RT, 7))
+			possible_targets += RT
+	for(var/obj/structure/flora/grass/bush/RT in objects)
+		if(can_see(src, RT, 7))
+			possible_targets += RT
+	for(var/obj/structure/flora/grass/bush_meagre/RT in objects)
+		if(can_see(src, RT, 7))
+			possible_targets += RT
+	for(var/obj/structure/flora/grass/herb/RT in objects)
+		if(can_see(src, RT, 7))
+			possible_targets += RT
+	for(var/obj/structure/wild_plant/RT in objects)
+		if(can_see(src, RT, 7))
+			possible_targets += RT
+	for(var/obj/structure/chair/bench/ancientlog/RT in objects)
+		if(can_see(src, RT, 7))
+			possible_targets += RT
+
+	if(!possible_targets.len)
+		return
+
+	for(var/mob/living/carbon/human/L in viewers(src, 7))
+		if(L.stat == CONSCIOUS)
+			return
+
+	if(!SPT_PROB(attraction_chance, seconds_per_tick))
+		return
+
+	var/turf/T = get_turf(src)
+	var/mob/M = pickweight(attracted_types)
+	new M(T)
+	new /obj/item/natural/cloth(T)
+	qdel(src)
+	return PROCESS_KILL
 
 /obj/item/bait/sweet
 	name = "bag of sweetbait"

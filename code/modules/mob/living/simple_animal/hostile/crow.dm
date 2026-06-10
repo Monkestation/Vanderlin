@@ -70,13 +70,15 @@
 					return
 	..()
 
-/obj/item/reagent_containers/food/snacks/crow/process()
-	..()
+/obj/item/reagent_containers/food/snacks/crow/process(seconds_per_tick)
+	. = ..()
 	if(dead)
 		return
+
 	if(!isturf(loc)) //no floating out of bags
 		return
-	if(prob(8))
+
+	if(SPT_PROB(4, seconds_per_tick))
 		playsound(src, pick('sound/vo/mobs/bird/CROW_01.ogg','sound/vo/mobs/bird/CROW_02.ogg','sound/vo/mobs/bird/CROW_03.ogg'), 100, TRUE, -1)
 
 /obj/item/reagent_containers/food/snacks/crow/atom_destruction(damage_flag)

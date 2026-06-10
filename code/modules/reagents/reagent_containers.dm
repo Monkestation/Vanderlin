@@ -192,10 +192,11 @@
 	STOP_PROCESSING(SSobj, src)
 	to_chat(user, span_notice("You retrieve \the [returning] from \the [src]."))
 
-/obj/item/reagent_containers/process()
+/obj/item/reagent_containers/process(seconds_per_tick)
 	if(!soaking_item || !reagents || !reagents.total_volume)
 		return
-	var/splash_amount = max(0.2, reagents.total_volume * 0.01) //we lose 1% volume per process or 0.2 unit and multiply this by 10 on application so a preserving basin lasts atleast 500 seconds
+
+	var/splash_amount = max(0.2, reagents.total_volume * seconds_per_tick * 0.005) //we lose 0.5% volume per second or 0.2 unit and multiply this by 10 on application so a preserving basin lasts atleast 500 seconds
 	var/datum/reagents/splash_holder = new /datum/reagents(splash_amount)
 	splash_holder.my_atom = soaking_item
 	reagents.trans_to(splash_holder, splash_amount, 10, 1, 1)

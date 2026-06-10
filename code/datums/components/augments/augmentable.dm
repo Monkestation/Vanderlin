@@ -52,18 +52,16 @@
 	modify_stability(amount)
 
 /datum/component/augmentable/proc/update_stability_effects()
+	return
+
+/datum/component/augmentable/process(seconds_per_tick)
+	check_catastrophic_failure(seconds_per_tick)
+
+/datum/component/augmentable/proc/check_catastrophic_failure(seconds_per_tick)
 	var/mob/living/carbon/human/H = parent
 	if(!istype(H))
 		return
-
-/datum/component/augmentable/process()
-	check_catastrophic_failure()
-
-/datum/component/augmentable/proc/check_catastrophic_failure()
-	var/mob/living/carbon/human/H = parent
-	if(!istype(H))
-		return
-	if(current_stability <= 0 && prob(1))
+	if(current_stability <= 0 && SPT_PROB(0.5, seconds_per_tick))
 		catastrophic_failure(H)
 
 /datum/component/augmentable/proc/catastrophic_failure(mob/living/carbon/human/H)

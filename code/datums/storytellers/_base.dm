@@ -96,7 +96,7 @@
 		var/selected_stat = pick(current_set)
 		influence_factors[selected_stat] = current_set[selected_stat]
 
-/datum/storyteller/process()
+/datum/storyteller/process(seconds_per_tick)
 	if(!round_started || disable_distribution) // we are differing roundstarted ones until base roundstart so we can get cooler stuff
 		return
 
@@ -112,13 +112,13 @@
 			log_storyteller("Running SSgamemode.current_roundstart_event\[[SSgamemode.current_roundstart_event]\]")
 			SSgamemode.ran_roundstart = TRUE
 
-	add_points()
+	add_points(seconds_per_tick)
 	handle_tracks()
 
 /// Add points to all tracks while respecting the multipliers.
-/datum/storyteller/proc/add_points()
+/datum/storyteller/proc/add_points(seconds_per_tick)
 	var/datum/controller/subsystem/gamemode/mode = SSgamemode
-	var/base_point = EVENT_POINT_GAINED_PER_SECOND * mode.event_frequency_multiplier
+	var/base_point = EVENT_POINT_GAINED_PER_SECOND * mode.event_frequency_multiplier * seconds_per_tick
 	for(var/track in mode.event_track_points)
 		if(track == EVENT_TRACK_OMENS)
 			if(!length(GLOB.badomens))

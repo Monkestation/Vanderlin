@@ -74,7 +74,7 @@
 		var/mob/living/hygiene_target = target
 		hygiene_target.adjust_hygiene(10)
 
-	target.AddComponent(/datum/component/temporary_pollution_emission, fragrance_type, 5, 10 MINUTES)
+	target.AddComponent(/datum/component/temporary_pollution_emission, fragrance_type, 2.5, 10 MINUTES)
 
 /obj/item/perfume/proc/spawn_perfume_cloud(atom/target, mob/user)
 	user.visible_message(span_notice("[user] sprays \the [src] toward [target]."), span_notice("You spray \the [src] toward [target]."))

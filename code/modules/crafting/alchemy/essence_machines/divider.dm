@@ -12,7 +12,7 @@
 	storage.max_total = 500
 	storage.max_types = 15
 
-/obj/machinery/essence/divider/process()
+/obj/machinery/essence/divider/process(seconds_per_tick)
 	if(!storage.contents.len)
 		return
 

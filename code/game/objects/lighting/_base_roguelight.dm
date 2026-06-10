@@ -270,7 +270,7 @@
 
 	if(initial(fueluse) > 0)
 		if(fueluse > 0)
-			fueluse = max(fueluse - seconds_per_tick SECONDS, 0)
+			fueluse = max(fueluse - SPT_TO_DECISECONDS(seconds_per_tick), 0)
 		if(fueluse == 0)
 			burn_out()
 

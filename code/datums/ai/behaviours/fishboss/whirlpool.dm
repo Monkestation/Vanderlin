@@ -54,7 +54,7 @@
 	STOP_PROCESSING(SSfaster_obj, src)
 	return ..()
 
-/obj/effect/whirlpool/process()
+/obj/effect/whirlpool/process(seconds_per_tick)
 	for(var/mob/living/L in range(pull_range, src))
 		if(creator && creator.faction_check_atom(L))
 			continue

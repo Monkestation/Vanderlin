@@ -121,16 +121,16 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 
-/obj/effect/obeliskbeam/process()
+/obj/effect/obeliskbeam/process(seconds_per_tick)
 	var/atom/ignore = creator?.resolve()
 	for(var/mob/living/hit_mob in get_turf(src))
 		if(hit_mob == ignore)
 			continue
-		damage(hit_mob)
+		damage(hit_mob, seconds_per_tick)
 
 /// Hurt the passed mob
-/obj/effect/obeliskbeam/proc/damage(mob/living/hit_mob)
-	hit_mob.apply_damage(damage = 15, damagetype = BURN)
+/obj/effect/obeliskbeam/proc/damage(mob/living/hit_mob, seconds_per_tick)
+	hit_mob.apply_damage(damage = 120 * seconds_per_tick, damagetype = BURN)
 	to_chat(hit_mob, span_danger("You're damaged by [src]!"))
 
 /// Ignore damage dealt to this mob

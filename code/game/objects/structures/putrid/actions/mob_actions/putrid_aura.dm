@@ -11,7 +11,7 @@
 	/// Aura range
 	var/aura_range = 5
 	/// Healing per tick
-	var/aura_healing_amount = 5
+	var/aura_healing_amount = 2.5
 	/// Healing color
 	var/aura_healing_color = COLOR_GREEN
 	/// The aura component

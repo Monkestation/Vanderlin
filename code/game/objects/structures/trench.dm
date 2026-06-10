@@ -45,7 +45,7 @@
 			icon_state = null
 	. += "[new_overlay]"
 
-/obj/structure/trench/process()
+/obj/structure/trench/process(seconds_per_tick)
 	for(var/direction in GLOB.cardinals)
 		var/turf/cardinal_turf = get_step(src, direction)
 		if(!istype(cardinal_turf, /turf/open/water))
@@ -55,6 +55,7 @@
 		var/spreads_left = FLOOR(water.water_volume * 0.1, 1) - 1
 		if(!spreads_left)
 			continue
+
 		if(istype(water, /turf/open/water/river))
 			if(water.dir == direction)
 				continue
@@ -67,3 +68,4 @@
 		W.dir = REVERSE_DIR(direction)
 		playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
 		qdel(src)
+		return PROCESS_KILL

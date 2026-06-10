@@ -226,7 +226,7 @@
 	minstr = 5
 	item_weight = 1.2 KILOGRAMS
 	w_class = WEIGHT_CLASS_NORMAL
-	var/charge = 100
+	var/charge = 10 SECONDS
 	var/on = FALSE
 
 /datum/intent/mace/strike/stunner/afterchange()
@@ -291,12 +291,13 @@
 	update_appearance(UPDATE_ICON_STATE)
 	add_fingerprint(user)
 
-/obj/item/weapon/mace/stunmace/process()
+/obj/item/weapon/mace/stunmace/process(seconds_per_tick)
 	if(on)
-		charge--
+		charge -= seconds_per_tick
 	else
 		if(charge < 100)
-			charge++
+			charge += seconds_per_tick
+
 	if(charge <= 0)
 		on = FALSE
 		charge = 0

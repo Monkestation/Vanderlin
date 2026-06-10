@@ -1,6 +1,6 @@
 /datum/component/rot
 	var/amount = 0
-	var/rot_amount_per_process = 10 //1 second
+	var/rot_amount_per_process = 5
 	var/last_process = 0
 	var/datum/looping_sound/fliesloop/soundloop
 
@@ -21,22 +21,22 @@
 		QDEL_NULL(soundloop)
 	return ..()
 
-/datum/component/rot/process()
+/datum/component/rot/process(seconds_per_tick)
 	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
 		return
-	var/amt2add = rot_amount_per_process
+
+	var/amt2add = rot_amount_per_process * seconds_per_tick
 	if(last_process)
-		amt2add = ((world.time - last_process)/10) * amt2add
+		amt2add = ((world.time - last_process) / 10) * amt2add
 	last_process = world.time
 	amount += amt2add
-	return
 
 /datum/component/rot/corpse/Initialize()
 	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
 	. = ..()
 
-/datum/component/rot/corpse/process()
+/datum/component/rot/corpse/process(seconds_per_tick)
 	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
 		return
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
@@ -104,7 +104,7 @@
 /datum/component/rot/simple
 	rot_amount_per_process = 5
 
-/datum/component/rot/simple/process()
+/datum/component/rot/simple/process(seconds_per_tick)
 	..()
 	var/mob/living/L = parent
 	var/datum/component/rot/R = src
@@ -128,7 +128,7 @@
 	soundloop = null
 	var/static/list/clean_moodlets = list(/datum/stress_event/clean, /datum/stress_event/clean_plus)
 
-/datum/component/rot/stinky_person/process()
+/datum/component/rot/stinky_person/process(seconds_per_tick)
 	..()
 	var/mob/living/L = parent
 	var/turf/open/T = L.loc
@@ -137,7 +137,7 @@
 			var/mob/living/carbon/stinky = L
 			for(clean_moodlets in stinky.get_positive_stressors())
 				return
-		T.pollute_turf(/datum/pollutant/rot, 0.25)
+		T.pollute_turf(/datum/pollutant/rot, 0.125 * seconds_per_tick)
 
 /datum/looping_sound/fliesloop
 	mid_sounds = list('sound/misc/fliesloop.ogg')

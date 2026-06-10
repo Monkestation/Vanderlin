@@ -307,34 +307,34 @@
 	STOP_PROCESSING(SSobj, src)
 	M.remove_offsets(type)
 
-/obj/structure/noose/process()
+/obj/structure/noose/process(seconds_per_tick)
 	if(!has_buckled_mobs())
-		STOP_PROCESSING(SSobj, src)
-		return
+		return PROCESS_KILL
+
 	for(var/mob/living/buckled_mob as anything in buckled_mobs)
-		if(buckled_mob.get_bodypart("head"))
-			if(buckled_mob.stat != DEAD)
-				if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.
-					return
-				if(!HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
-					buckled_mob.adjustOxyLoss(10)
-					if(prob(20))
-						buckled_mob.emote("gasp")
-				if(prob(25))
-					var/flavor_text = list("<span class='danger'>[buckled_mob]'s legs flail for anything to stand on.</span>",\
-											"<span class='danger'>[buckled_mob]'s hands are desperately clutching the noose.</span>",\
-											"<span class='danger'>[buckled_mob]'s limbs sway back and forth with diminishing strength.</span>")
-					buckled_mob.visible_message(pick(flavor_text))
-				playsound(buckled_mob, 'sound/foley/noose_idle.ogg', 30, 1, -3)
-			else
-				if(prob(1))
-					var/obj/item/bodypart/head/head = buckled_mob.get_bodypart("head")
-					if(head.brute_dam >= 50)
-						if(head.dismemberable)
-							head.dismember()
-		else
+		if(!buckled_mob.get_bodypart("head"))
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] drops from the noose!</span>")
 			buckled_mob.Knockdown(60)
 			buckled_mob.pixel_y = buckled_mob.base_pixel_y
 			buckled_mob.pixel_x = buckled_mob.base_pixel_x
 			unbuckle_all_mobs(force=1)
+			break
+
+		if(buckled_mob.stat != DEAD)
+			if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.
+				return
+			if(!HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
+				buckled_mob.adjustOxyLoss(5 * seconds_per_tick)
+				if(SPT_PROB(10, seconds_per_tick))
+					buckled_mob.emote("gasp")
+			if(SPT_PROB(11, seconds_per_tick))
+				var/flavor_text = list("<span class='danger'>[buckled_mob]'s legs flail for anything to stand on.</span>",\
+										"<span class='danger'>[buckled_mob]'s hands are desperately clutching the noose.</span>",\
+										"<span class='danger'>[buckled_mob]'s limbs sway back and forth with diminishing strength.</span>")
+				buckled_mob.visible_message(pick(flavor_text))
+			playsound(buckled_mob, 'sound/foley/noose_idle.ogg', 30, 1, -3)
+		else if(SPT_PROB(0.5, seconds_per_tick))
+			var/obj/item/bodypart/head/head = buckled_mob.get_bodypart("head")
+			if(head.brute_dam >= 50)
+				if(head.dismemberable)
+					head.dismember()

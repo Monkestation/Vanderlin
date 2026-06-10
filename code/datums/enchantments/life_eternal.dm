@@ -25,8 +25,8 @@
 /datum/enchantment/life_eternal/proc/on_drop(obj/item/i, mob/living/user)
 	STOP_PROCESSING(SSobj, src)
 
-/datum/enchantment/life_eternal/process()
+/datum/enchantment/life_eternal/process(seconds_per_tick)
 	if(enchanted_item.loc && isliving(enchanted_item.loc))
 		var/mob/living/L = enchanted_item.loc
 		if(L.health < L.maxHealth)
-			L.heal_bodypart_damage(1, 1)
+			L.heal_bodypart_damage(seconds_per_tick, seconds_per_tick)

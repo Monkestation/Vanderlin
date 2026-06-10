@@ -1060,16 +1060,16 @@
 		soil_decay_time = SOIL_DECAY_TIME
 	else
 		// Otherwise, "decay" the soil
-		soil_decay_time = max(soil_decay_time - seconds_per_tick, 0)
+		soil_decay_time = max(soil_decay_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
 
 	if(!found_irrigation)
 		adjust_water(-seconds_per_tick * SOIL_WATER_DECAY_RATE, FALSE)
 	else
 		adjust_water(seconds_per_tick)
 
-	tilled_time = max(tilled_time - seconds_per_tick, 0)
-	blessed_time = max(blessed_time - seconds_per_tick, 0)
-	pollination_time = max(pollination_time - seconds_per_tick, 0)
+	tilled_time = max(tilled_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+	blessed_time = max(blessed_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+	pollination_time = max(pollination_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
 
 /obj/structure/soil/proc/decay_soil()
 	plant = null

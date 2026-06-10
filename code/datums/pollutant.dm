@@ -18,7 +18,7 @@
 	/// Scent of the smell
 	var/scent
 
-/datum/pollutant/proc/on_life(parent)
+/datum/pollutant/proc/on_life(parent, seconds_per_tick)
 	return
 
 ///When a pollutant touches an unprotected mob

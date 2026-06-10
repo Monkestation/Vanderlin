@@ -72,7 +72,7 @@
 	delay =  max(new_delay, world.tick_lag)
 	timer = world.time + delay
 
-/datum/move_loop/process()
+/datum/move_loop/process(seconds_per_tick)
 	var/old_delay = delay //The signal can sometimes change delay
 
 	if(SEND_SIGNAL(src, COMSIG_MOVELOOP_PREPROCESS_CHECK) & MOVELOOP_SKIP_STEP) //Chance for the object to react
@@ -616,7 +616,7 @@
 			minecart.handle_aerial_fall(freefall = TRUE)
 	. = ..()
 
-/datum/move_loop/minecart/process()
+/datum/move_loop/minecart/process(seconds_per_tick)
 	. = ..()
 	if(QDELETED(src) || QDELETED(moving))
 		return

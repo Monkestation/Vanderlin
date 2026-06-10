@@ -188,15 +188,13 @@
 	if(actual_value < 0)
 		negative_attunements[attunement_type] += amount
 
-
-
 // order of operations is as follows:
 // 1. we recharge
 // 2. we transfer mana
 // 3. we discharge excess mana
-/datum/mana_pool/process()
+/datum/mana_pool/process(seconds_per_tick)
 
-	donation_budget_this_tick = (max_donation_rate_per_second)
+	donation_budget_this_tick = (max_donation_rate_per_second * seconds_per_tick)
 
 	if (ethereal_recharge_rate != 0 && (amount < get_safe_softcap()))
 		adjust_mana(ethereal_recharge_rate, attunements_to_generate)

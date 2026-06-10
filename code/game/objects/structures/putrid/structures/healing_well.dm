@@ -11,10 +11,10 @@
 	layer = LOW_SIGIL_LAYER
 	var/obj/structure/meatvine/floor/floor_vine = null
 	var/heal_range = 3
-	var/brute_heal_amount = 2
-	var/burn_heal_amount = 2
-	var/toxin_heal_amount = 1
-	var/suffocation_heal_amount = 1
+	var/brute_heal_amount = 1
+	var/burn_heal_amount = 1
+	var/toxin_heal_amount = 0.5
+	var/suffocation_heal_amount = 0.5
 	var/is_being_drained = FALSE
 	var/mob/living/simple_animal/hostile/retaliate/meatvine/drainer = null
 

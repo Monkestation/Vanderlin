@@ -94,7 +94,7 @@
 /datum/component/martyr_weapon/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED, COMSIG_ITEM_AFTERATTACK, COMSIG_ITEM_ATTACK_SELF_SECONDARY, COMSIG_ATOM_EXAMINE))
 
-/datum/component/martyr_weapon/process()
+/datum/component/martyr_weapon/process(seconds_per_tick)
 	if(!is_active || !bound_user)
 		return PROCESS_KILL
 

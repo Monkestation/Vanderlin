@@ -205,7 +205,7 @@
 	charge_sound_instance = null
 	return ..()
 
-/datum/action/cooldown/spell/process()
+/datum/action/cooldown/spell/process(seconds_per_tick)
 	. = ..()
 	if(!currently_charging)
 		return

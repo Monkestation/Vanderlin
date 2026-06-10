@@ -201,7 +201,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		ADD_TRAIT(src, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT)
 	if(food_max)
 		var/initial_hunger = food_max * 0.75
-		AddComponent(/datum/component/generic_mob_hunger, food_max, 0.25, starting_hunger = initial_hunger)
+		AddComponent(/datum/component/generic_mob_hunger, food_max, 0.125, starting_hunger = initial_hunger)
 	if(happy_funtime_mob)
 		AddComponent(/datum/component/friendship_container, mob_friends, "friend")
 		AddComponent(/datum/component/happiness_container, 30, list(), list(), food_type)

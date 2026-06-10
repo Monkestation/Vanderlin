@@ -400,7 +400,7 @@
 			return
 	. += span_notice("It looks [depth_message]")
 
-/turf/open/water/process()
+/turf/open/water/process(seconds_per_tick)
 	if(cached_use)
 		adjust_originate_watervolume(cached_use)
 		cached_use = 0

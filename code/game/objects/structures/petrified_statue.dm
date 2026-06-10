@@ -29,7 +29,7 @@
 		STOP_PROCESSING(SSobj, src)
 		return
 
-	timer -= seconds_per_tick SECONDS
+	timer -= SPT_TO_DECISECONDS(seconds_per_tick)
 
 	petrified_mob.Stun(20 * seconds_per_tick) //So they can't do anything while petrified
 

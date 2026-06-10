@@ -52,7 +52,7 @@
 	set_light(0)
 	return ..()
 
-/obj/item/fake_machine/merchant/process()
+/obj/item/fake_machine/merchant/process(seconds_per_tick)
 	if(world.time > next_airlift)
 		next_airlift = world.time + rand(2 MINUTES, 3 MINUTES)
 #ifdef TESTSERVER

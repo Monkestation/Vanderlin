@@ -23,7 +23,7 @@
 	tick_yields = list()
 	return ..()
 
-/obj/machinery/essence/extractor/process()
+/obj/machinery/essence/extractor/process(seconds_per_tick)
 	push_to_linked(storage)
 	if(!processing)
 		return

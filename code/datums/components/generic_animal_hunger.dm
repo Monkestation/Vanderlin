@@ -8,7 +8,7 @@
 	var/feed_pause_end
 	var/remove_overfed_timer
 
-/datum/component/generic_mob_hunger/Initialize(max_hunger = 250, hunger_drain = 0.1, feed_pause_time = 1 MINUTES, starting_hunger)
+/datum/component/generic_mob_hunger/Initialize(max_hunger = 250, hunger_drain = 0.05, feed_pause_time = 1 MINUTES, starting_hunger)
 	. = ..()
 	src.hunger_drain = hunger_drain
 	src.max_hunger = max_hunger
@@ -87,7 +87,7 @@
 	SIGNAL_HANDLER
 	return (current_hunger / max_hunger) * 100
 
-/datum/component/generic_mob_hunger/process()
+/datum/component/generic_mob_hunger/process(seconds_per_tick)
 	if(hunger_paused || !hunger_drain || (feed_pause_end > world.time))
 		return
 
@@ -97,7 +97,7 @@
 			return
 
 	if(current_hunger >= hunger_drain)
-		current_hunger -= hunger_drain
+		current_hunger -= hunger_drain * seconds_per_tick
 		SEND_SIGNAL(parent, COMSIG_HUNGER_UPDATED, current_hunger, max_hunger)
 
 		var/hunger_precent = current_hunger / max_hunger

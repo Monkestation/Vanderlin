@@ -7,10 +7,11 @@
 	/// The harlequinn antag datum that owns this objective
 	var/datum/weakref/owning_harlequinn
 
-/datum/quest/custom/harlequinn_objective/process()
+/datum/quest/custom/harlequinn_objective/process(seconds_per_tick)
 	if(complete)
 		STOP_PROCESSING(SSslowobj, src)
 		return
+
 	if(check_completion())
 		mark_complete()
 		STOP_PROCESSING(SSslowobj, src)

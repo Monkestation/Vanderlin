@@ -45,7 +45,7 @@ Reel teleports the attached atom to the grabbed turf.
 	return ..()
 
 //Range check for both the tool itself and anything it has attached to the turf it's hooked to.
-/obj/item/grapplinghook/process()
+/obj/item/grapplinghook/process(seconds_per_tick)
 	if(in_use && grappled_turf)
 		if(get_dist(grappled_turf, src) > leash_range)
 			reset_tile()

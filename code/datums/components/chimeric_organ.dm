@@ -118,7 +118,7 @@
 	processing = FALSE
 	STOP_PROCESSING(SSobj, src)
 
-/datum/component/chimeric_organ/process()
+/datum/component/chimeric_organ/process(seconds_per_tick)
 	if(!organ_owner || failed)
 		return
 
@@ -133,7 +133,7 @@
 		return
 
 	// Organ is functioning properly
-	failed_precent = max(failed_precent - 1, 0)
+	failed_precent = max(failed_precent - seconds_per_tick, 0)
 
 /datum/component/chimeric_organ/proc/check_blood_requirements(datum/component/blood_stability/blood_stab)
 	if(HAS_TRAIT(organ_owner, TRAIT_SATE))

@@ -63,7 +63,7 @@
 			connected_pipe = pipe
 			return
 
-/obj/structure/fluid_drain/process()
+/obj/structure/fluid_drain/process(seconds_per_tick)
 	if(!connected_pipe || !active)
 		return
 

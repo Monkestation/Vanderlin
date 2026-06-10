@@ -133,7 +133,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "acid2"
 	layer = TURF_LAYER
-	var/damage_per_tick = 2
+	var/damage_per_second = 1
 	var/lifetime = 60 SECONDS
 
 /obj/effect/decal/cleanable/meatvine_acid/Initialize()
@@ -150,12 +150,12 @@
 	var/mob/living/M = O
 	if(!istype(M) || istype(M, /mob/living/simple_animal/hostile/retaliate/meatvine))
 		return
-	M.apply_damage(damage_per_tick, BURN, BODY_ZONE_L_LEG)
-	M.apply_damage(damage_per_tick, BURN, BODY_ZONE_R_LEG)
+	M.apply_damage(damage_per_second, BURN, BODY_ZONE_L_LEG)
+	M.apply_damage(damage_per_second, BURN, BODY_ZONE_R_LEG)
 
-/obj/effect/decal/cleanable/meatvine_acid/process()
+/obj/effect/decal/cleanable/meatvine_acid/process(seconds_per_tick)
 	for(var/mob/living/M in loc)
 		if(istype(M, /mob/living/simple_animal/hostile/retaliate/meatvine))
 			continue
-		M.apply_damage(damage_per_tick, BURN, BODY_ZONE_L_LEG)
-		M.apply_damage(damage_per_tick, BURN, BODY_ZONE_R_LEG)
+		M.apply_damage(damage_per_second * seconds_per_tick, BURN, BODY_ZONE_L_LEG)
+		M.apply_damage(damage_per_second * seconds_per_tick, BURN, BODY_ZONE_R_LEG)

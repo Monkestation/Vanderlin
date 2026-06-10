@@ -9,7 +9,7 @@
 	if(L?.client && update_to_mob(L))
 		START_PROCESSING(SShuds, src)
 
-/atom/movable/screen/action_bar/process()
+/atom/movable/screen/action_bar/process(seconds_per_tick)
 	var/mob/living/L = hud?.mymob
 	if(!L?.client || !update_to_mob(L))
 		return PROCESS_KILL
