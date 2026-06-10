@@ -199,6 +199,7 @@
 	//only four options
 	enhancements = shuffle(enhancements)
 	enhancements.Cut(5, 0)
+	enhancements += "Disguise Kit - Deceiving Meekness" //Always give this option
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
@@ -234,10 +235,10 @@
 			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
-		if("Obfuscating Dermis - Beautiful and Face-changing")
-			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+		if("Disguise Kit - Deceiving Meekness")
 			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
-			spawned.add_spell(/datum/action/cooldown/spell/enhanced_mimicry, silent = TRUE)
+			var/obj/item/harlequin_disguise_kit/kit = new(get_turf(spawned))
+			spawned.put_in_hands(kit)
 		if("Serpentine Glands - Thermal Vision and Venom")
 			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
