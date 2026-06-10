@@ -128,7 +128,7 @@
 
 /datum/attribute_holder/sheet/job/squire/footman/adult
 	raw_attribute_list = list(
-		STAT_CONSTUTION = 1,
+		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
