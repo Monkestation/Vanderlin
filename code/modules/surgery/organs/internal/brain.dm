@@ -48,8 +48,6 @@
 	var/mob/living/brain/brainmob = null
 	var/brain_death = FALSE //if the brainmob was intentionally killed by attacking the brain after removal, or by severe braindamage
 	var/decoy_override = FALSE	//if it's a fake brain with no brainmob assigned. Feedback messages will be faked as if it does have a brainmob. See changelings & dullahans.
-	//two variables necessary for calculating whether we get a brain trauma or not
-	var/damage_delta = 0
 
 	var/list/datum/brain_trauma/traumas = list()
 
@@ -322,15 +320,15 @@
 	. = ..()
 	var/delta_dam = . //for the sake of clarity
 
-	if(delta_dam < 0 && damage >= BRAIN_DAMAGE_MILD && (-delta_dam >= TRAUMA_ROLL_THRESHOLD))
-		roll_for_brain_trauma(-delta_dam) // parent call returns negative numbers if take damage and positive if we heal
+	if(delta_dam >= TRAUMA_ROLL_THRESHOLD && damage >= BRAIN_DAMAGE_MILD)
+		roll_for_brain_trauma(delta_dam) // parent call returns negative numbers if take damage and positive if we heal
 
 	if(isnull(owner)) // no need to color it if it's in someone's noggin
 		update_brain_color()
 		return
 
-	if(-delta_dam >= 10)
-		var/damage_side_effect = CEILING(-delta_dam / 2, 1)
+	if(delta_dam >= 10)
+		var/damage_side_effect = CEILING(delta_dam / 2, 1)
 		if(damage_side_effect >= 1)
 			//owner.flash_pain(damage_side_effect*4)
 			owner.adjust_eye_blur(damage_side_effect)
@@ -350,14 +348,14 @@
 	var/intelligence_modifier = (owner ? -(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)-ATTRIBUTE_MIDDLING) : 0)
 	if(damage >= BRAIN_DAMAGE_SEVERE)
 		// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
-		if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
+		if(prob((delta_dam+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
 			if(prob(20 + (is_boosted * 30) - (intelligence_modifier * 2)))
 				gain_trauma_type(BRAIN_TRAUMA_SPECIAL, is_boosted ? TRAUMA_RESILIENCE_SURGERY : null, natural_gain = TRUE)
 			else
 				gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
 	else
 		// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
-		if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
+		if(prob((delta_dam+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
 			gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
 
 #define BRAIN_DAMAGE_FILTER "brain_damage_color_filter"

@@ -511,7 +511,6 @@
 	. = ..()
 	M.add_stress(/datum/stress_event/pleasant_scent)
 
-
 /datum/reagent/medicine/herbal/mentha_oil
 	name = "Mentha Cooling Oil"
 	description = "A cooling oil that provides relief to sore muscles and joints."
@@ -525,10 +524,9 @@
 	return ..()
 
 /datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency)
+	. = ..()
 	M.adjust_stamina(1.5 * efficiency)
 	M.adjust_bodytemperature(-0.3 * efficiency, BODYTEMP_NORMAL - 2)
-
-	. = ..()
 
 // Dangerous Poisons
 
