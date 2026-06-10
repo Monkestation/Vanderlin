@@ -475,18 +475,18 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					else
 						emote("me", 2, pick(emote_hear))
 
-/mob/living/simple_animal/handle_environment()
+/mob/living/simple_animal/handle_environment(seconds_per_tick)
 	var/atom/A = src.loc
 	if(isturf(A))
 		var/areatemp = BODYTEMP_NORMAL
 		if( abs(areatemp - bodytemperature) > 5)
 			var/diff = areatemp - bodytemperature
-			diff = diff / 5
-			adjust_bodytemperature(diff)
+			diff = diff / 10
+			adjust_bodytemperature(diff * seconds_per_tick)
 
-	handle_temperature_damage()
+	handle_temperature_damage(seconds_per_tick)
 
-/mob/living/simple_animal/proc/handle_temperature_damage()
+/mob/living/simple_animal/proc/handle_temperature_damage(seconds_per_tick)
 	return
 
 /mob/living/simple_animal/MiddleClick(mob/living/user, list/modifiers)

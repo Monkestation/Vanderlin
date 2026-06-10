@@ -535,7 +535,7 @@
 	description = "A concentrated poison derived from deadly nightshade. Extremely lethal."
 	reagent_state = LIQUID
 	color = "#2f1b2c"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 	overdose_threshold = 10
 	taste_description = "bitter death"
 

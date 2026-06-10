@@ -1,8 +1,13 @@
-/datum/antagonist/werewolf/on_life(mob/user)
-	if(!user) return
+/datum/antagonist/werewolf/on_life(mob/living/user, seconds_per_tick)
+	if(!user)
+		return
+
 	var/mob/living/carbon/human/human_user = user
-	if(human_user.stat == DEAD) return
-	if(human_user.advsetup) return
+	if(human_user.stat == DEAD)
+		return
+	if(human_user.advsetup)
+		return
+
 	if(GLOB.tod == NIGHT)
 		var/turf/user_loc = human_user.loc
 		if(isturf(user_loc))
@@ -11,13 +16,13 @@
 					if(COOLDOWN_FINISHED(src, message_cooldown))
 						to_chat(human_user, span_userdanger("The moonlight scorns me, inflaming my rage!"))
 						COOLDOWN_START(src, message_cooldown, 5 SECONDS)
-				human_user.rage_datum.update_rage(10)
+				human_user.rage_datum.update_rage(5 * seconds_per_tick)
 
 	if(transformed && !HAS_TRAIT(human_user, TRAIT_PARALYSIS) && !human_user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		if(human_user.rage_datum.check_rage(WW_RAGE_MEDIUM))
 			if(!CAN_HAVE_BLOOD(human_user) || human_user.get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in human_user.get_wounds())
-					wound.heal_wound(1.2)
+					wound.heal_wound(0.6 * seconds_per_tick)
 
 /datum/antagonist/werewolf/proc/try_transform_checks()
 	if(QDELETED(src))

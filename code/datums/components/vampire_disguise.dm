@@ -9,7 +9,7 @@
 	var/cache_hair
 	/// Transform cooldown
 	COOLDOWN_DECLARE(transform_cooldown)
-	/// Bloodpool cost per life tick while disguised
+	/// Bloodpool cost per second while disguised
 	var/disguise_upkeep = 0
 	/// Minimum bloodpool required to maintain disguise
 	var/min_bloodpool = 50
@@ -40,7 +40,6 @@
 	if(H.client)
 		add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 
-
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
 	cache_skin = H.skin_tone
 	var/obj/item/organ/eyes/right_eye = LAZYACCESS(H.eye_organs, 2)
@@ -49,7 +48,7 @@
 	cache_eye_secondary = left_eye?.eye_color || cache_eyes
 	cache_hair = H.get_hair_color()
 
-/datum/component/vampire_disguise/proc/handle_disguise_upkeep(mob/living/carbon/human/source)
+/datum/component/vampire_disguise/proc/handle_disguise_upkeep(mob/living/carbon/human/source, seconds_per_tick)
 	SIGNAL_HANDLER
 
 	if(!disguised)
@@ -62,7 +61,7 @@
 		return
 
 	// Drain bloodpool
-	source.adjust_bloodpool(-disguise_upkeep)
+	source.adjust_bloodpool(-disguise_upkeep * seconds_per_tick)
 
 /datum/component/vampire_disguise/proc/apply_disguise(mob/living/carbon/human/H)
 	if(disguised)

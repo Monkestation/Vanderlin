@@ -21,7 +21,7 @@
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Graggar's Prey..."))
 
-/datum/quirk/vice/hunted/on_life(mob/living/user)
+/datum/quirk/vice/hunted/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
@@ -177,7 +177,7 @@
 		customization_value = /datum/species/goblin
 	fear_type = customization_value
 
-/datum/quirk/vice/traumatized/on_life(mob/living/user)
+/datum/quirk/vice/traumatized/on_life(mob/living/user, seconds_per_tick)
 	if(world.time < next_scream_time)
 		return
 	if(ispath(fear_type, /datum/species))
@@ -342,7 +342,7 @@
 		return
 	schedule_next_tremor()
 
-/datum/quirk/vice/tremors/on_life()
+/datum/quirk/vice/tremors/on_life(mob/living/user, seconds_per_tick)
 	if(!owner)
 		return
 

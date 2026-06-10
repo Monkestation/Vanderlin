@@ -343,13 +343,6 @@
 		M.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
 	return ..()
 
-
-//Poisons
-/* Tested this quite a bit. Heres the deal. Metabolism REAGENTS_SLOW_METABOLISM is 0.1 and needs to be that so poison isnt too fast working but
-still is dangerous. Toxloss of 3 at metabolism 0.1 puts you in dying early stage then stops for reference of these values.
-A dose of ingested potion is defined as 5u, projectile deliver at most 2u, you already do damage with projectile, a bolt can only feasible hold a tiny amount of poison, so much easier to deliver than ingested and so on.
-If you want to expand on poisons theres tons of fun effects TG chemistry has that could be added, randomzied damage values for more unpredictable poison, add trait based resists instead of the clunky race check etc.*/
-
 /datum/reagent/berrypoison	// Weaker poison, balanced to make you wish for death and incapacitate but not kill
 	name = "Berry Poison"
 	description = ""
@@ -358,7 +351,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	random_reagent_color = TRUE
 	taste_description = "bitterness"
 	scent_description = "charcoal"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 	var/naus = 3
 	var/tox = 2
 
@@ -389,7 +382,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	random_reagent_color = TRUE
 	taste_description = "burning"
 	scent_description = "charcoal"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 
 /datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.09)
@@ -409,7 +402,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	random_reagent_color = TRUE
 	taste_description = "sour meat"
 	scent_description = "metal"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 	var/list/cannibalism_pool = ALL_RACES_LIST
 
 /datum/reagent/organpoison/on_mob_life(mob/living/carbon/M, efficiency)
@@ -491,7 +484,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	random_reagent_color = TRUE
 	taste_description = "lint"
 	scent_description = "dust"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM * 3
+	metabolization_rate = (REAGENTS_METABOLISM / 10) * 3
 
 /datum/reagent/stampoison/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
@@ -509,7 +502,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	random_reagent_color = TRUE
 	taste_description = "frozen air"
 	scent_description = "freezing dust"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM * 9
+	metabolization_rate = (REAGENTS_METABOLISM / 10) * 9
 
 /datum/reagent/strongstampoison/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
@@ -531,7 +524,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	random_reagent_color = TRUE
 	taste_description = "the end"
 	scent_description = "nothing"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM * 5
+	metabolization_rate = (REAGENTS_METABOLISM / 10) * 5
 
 /datum/reagent/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
@@ -556,7 +549,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	color = "#c8c9e9"
 	taste_description = "cold needles"
 	scent_description = "freezing dust"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 
 /datum/reagent/killersice/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
@@ -570,7 +563,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	color = "#810e0e"
 	taste_description = "each tastebud individually burning to a crisp"
 	scent_description = "brimstone"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 	var/tox = 1
 	var/oxy = 5
 

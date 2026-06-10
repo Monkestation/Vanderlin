@@ -137,7 +137,7 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 	return
 
 /// Called every life tick if implemented
-/datum/quirk/proc/on_life(mob/living/user)
+/datum/quirk/proc/on_life(mob/living/user, seconds_per_tick)
 	return
 
 /// Check if this quirk is compatible with a list of existing quirks

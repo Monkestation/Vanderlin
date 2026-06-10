@@ -21,14 +21,14 @@
 /datum/component/malaguero/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE))
 
-/datum/component/malaguero/proc/stress_pulse(mob/living/carbon/human/harbinger)
+/datum/component/malaguero/proc/stress_pulse(mob/living/carbon/human/harbinger, seconds_per_tick)
 	SIGNAL_HANDLER
 
 	if(!COOLDOWN_FINISHED(src, pulse))
 		return
-		
+
 	COOLDOWN_START(src, pulse, pulse_cooldown)
-	
+
 	var/harbinger_stress = harbinger.get_stress_amount()
 	var/stress = 0
 	switch(harbinger_stress)
@@ -42,11 +42,11 @@
 			stress = -1
 		if(-INFINITY to STRESS_VGOOD)
 			stress = -2
-			
+
 	var/range = base_range + (stress * stress_range)
 	if(range <= 0)
 		return
-		
+
 	for(var/mob/afflicted as anything in viewers(harbinger, range))
 		if(afflicted == harbinger)
 			continue

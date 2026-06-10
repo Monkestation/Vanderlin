@@ -24,7 +24,7 @@
 
 	return ..()
 
-/datum/element/holy_weakness/proc/handle_church(mob/living/cursed_mob)
+/datum/element/holy_weakness/proc/handle_church(mob/living/cursed_mob, seconds_per_tick)
 	SIGNAL_HANDLER
 
 	// Holy weakness only triggers on entering churches
@@ -37,12 +37,12 @@
 		to_chat(cursed_mob, span_danger("Leave this holy place!"))
 		entered |= cursed_mob
 
-	if (!prob(6.25))
+	if(!SPT_PROB(3.125, seconds_per_tick))
 		return
 
 	to_chat(cursed_mob, span_warning("You don't belong in this holy place!"))
 
-	cursed_mob.apply_damage(20, BURN)
+	cursed_mob.apply_damage(10 * seconds_per_tick, BURN)
 	cursed_mob.adjust_fire_stacks(6)
 	cursed_mob.IgniteMob()
 

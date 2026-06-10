@@ -9,47 +9,6 @@
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
-/mob/living/carbon/spirit/handle_environment()
-	var/loc_temp = BODYTEMP_NORMAL
-	if(!on_fire) //If you're on fire, you do not heat up or cool down based on surrounding gases
-		if(loc_temp < bodytemperature)
-			adjust_bodytemperature(max((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR, BODYTEMP_COOLING_MAX))
-		else
-			adjust_bodytemperature(min((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR, BODYTEMP_HEATING_MAX))
-
-
-	if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !HAS_TRAIT(src, TRAIT_RESISTHEAT))
-		switch(bodytemperature)
-			if(360 to 400)
-				throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot, 1)
-				apply_damage(HEAT_DAMAGE_LEVEL_1, BURN, skip_dtype = TRUE)
-			if(400 to 460)
-				throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot, 2)
-				apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, skip_dtype = TRUE)
-			if(460 to INFINITY)
-				throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot, 3)
-				if(on_fire)
-					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, skip_dtype = TRUE)
-				else
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, skip_dtype = TRUE)
-
-	else if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !HAS_TRAIT(src, TRAIT_RESISTCOLD))
-		switch(bodytemperature)
-			if(200 to 260)
-				throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/cold, 1)
-				apply_damage(COLD_DAMAGE_LEVEL_1, BURN, skip_dtype = TRUE)
-			if(120 to 200)
-				throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/cold, 2)
-				apply_damage(COLD_DAMAGE_LEVEL_2, BURN, skip_dtype = TRUE)
-			if(-INFINITY to 120)
-				throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/cold, 3)
-				apply_damage(COLD_DAMAGE_LEVEL_3, BURN, skip_dtype = TRUE)
-
-	else
-		clear_alert("temp")
-
-	return
-
 /mob/living/carbon/spirit/handle_random_events()
 	..()
 	if (prob(1) && prob(2))

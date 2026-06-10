@@ -155,17 +155,24 @@
 	..()
 	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
 
-/datum/species/kobold/spec_life(mob/living/carbon/human/H)
+/datum/species/kobold/spec_life(mob/living/carbon/human/H, seconds_per_tick)
 	. = ..()
-	if(prob(1) && !(H.rogue_sneaking))
-		if(!COOLDOWN_FINISHED(src, kobold_cooldown))
-			return
-		var/emote = "sniff"
-		if(prob(35))
-			emote = "cough"
-		H.emote(emote, forced = TRUE)
+	if(H.rogue_sneaking)
+		return
 
-		COOLDOWN_START(src, kobold_cooldown, 5 MINUTES)
+	if(!COOLDOWN_FINISHED(src, kobold_cooldown))
+		return
+
+	if(!SPT_PROB(0.3, seconds_per_tick))
+		return
+
+	var/emote = "sniff"
+	if(prob(35))
+		emote = "cough"
+
+	H.emote(emote, forced = TRUE)
+
+	COOLDOWN_START(src, kobold_cooldown, 15 MINUTES)
 
 /datum/species/kobold/get_skin_list()
 	return sortList(list(

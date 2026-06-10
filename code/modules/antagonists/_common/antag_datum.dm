@@ -143,7 +143,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 		return FALSE
 	. = (QDELETED(M))
 
-/datum/antagonist/proc/on_life(mob/user)
+/datum/antagonist/proc/on_life(mob/user, seconds_per_tick)
 	return
 
 /datum/antagonist/proc/replace_banned_player()

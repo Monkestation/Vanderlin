@@ -21,27 +21,28 @@
 /mob/living/carbon/human
 	var/allmig_reward = 0
 
-/mob/living/carbon/human/Life()
+/mob/living/carbon/human/Life(seconds_per_tick = SSMOBS_DT)
 //	set invisibility = 0
-	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE)
+	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE, seconds_per_tick)
 
-	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
-		return
+	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
+		return TRUE
 
 	. = ..()
 
-	if (QDELETED(src))
-		return 0
+	if(QDELETED(src))
+		return FALSE
 
 	if(advsetup)
-		Stun(50)
+		Stun(25 * seconds_per_tick)
 
 	if(mind)
 		mind.sleep_adv.add_stress_cycle(get_stress_amount())
 		for(var/datum/antagonist/A in mind.antag_datums)
-			A.on_life(src)
+			A.on_life(src, seconds_per_tick)
 
-	handle_vamp_dreams()
+	handle_vamp_dreams(seconds_per_tick)
+
 	if(IsSleeping())
 		if(health > 0)
 			remove_status_effect(/datum/status_effect/debuff/trainsleep)
@@ -59,46 +60,41 @@
 						to_chat(src, span_danger("Nights Survived: \Roman[allmig_reward]"))
 						if(allmig_reward > 0 && allmig_reward % 2 == 0)
 							adjust_triumphs(1)
+
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
 		if(HAS_TRAIT(src, TRAIT_LEPROSY))
 			if(MOBTIMER_FINISHED(src, MT_LEPERBLEED, 12 MINUTES))
-				if(prob(5))
+				if(SPT_PROB(2.5, seconds_per_tick))
 					to_chat(src, span_warning("My skin opens up and bleeds..."))
 					MOBTIMER_SET(src, MT_LEPERBLEED)
 					var/obj/item/bodypart/part = pick(bodyparts)
 					if(part)
 						part.create_injury(WOUND_SLASH, 5, TRUE)
 					adjustToxLoss(10)
-		update_stamina()
-		update_energy()
-		handle_environment()
-		handle_hygiene()
+
+		update_stamina(seconds_per_tick)
+		update_energy(seconds_per_tick)
+		handle_environment(seconds_per_tick)
+		handle_hygiene(seconds_per_tick)
+
 		if(dna?.species)
-			dna.species.spec_life(src) // for mutantraces
+			dna.species.spec_life(src, seconds_per_tick) // for mutantraces
 
 	//heart attack stuff
-	handle_curses()
+	handle_curses(seconds_per_tick)
 
-	if(quirks && quirks.len)
+	if(length(quirks))
 		for(var/datum/quirk/Q in quirks)
-			Q.on_life(src)
-
-	if(!client && !HAS_TRAIT(src, TRAIT_NOSLEEP) && !ai_controller)
-		if(MOBTIMER_EXISTS(src, MT_SLO))
-			if(MOBTIMER_FINISHED(src, MT_SLO, 90 SECONDS)) //?????
-				Sleeping(100)
-		else
-			MOBTIMER_SET(src, MT_SLO)
-	else
-		MOBTIMER_UNSET(src, MT_SLO)
+			Q.on_life(src, seconds_per_tick)
 
 	if(!typing)
 		set_typing_indicator(FALSE)
+
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
 	if(stat != DEAD)
-		return 1
+		return TRUE
 
 /mob/living/carbon/human/DeadLife(seconds_per_tick)
 	set invisibility = 0
@@ -124,15 +120,16 @@
 						has_stubble = TRUE
 						update_body()
 
-/mob/living/proc/handle_environment()
+/mob/living/proc/handle_environment(seconds_per_tick)
 	return
 
-/mob/living/carbon/human/handle_environment()
-	dna?.species.handle_environment(src)
+/mob/living/carbon/human/handle_environment(seconds_per_tick)
+	dna?.species.handle_environment(src, seconds_per_tick)
 
-/mob/living/carbon/human/proc/handle_hygiene()
+/mob/living/carbon/human/proc/handle_hygiene(seconds_per_tick)
 	if(stat == DEAD || HAS_TRAIT(src, TRAIT_NOHYGIENE))
 		return
+
 	if(HAS_TRAIT(src, TRAIT_ALWAYS_CLEAN))
 		set_hygiene(HYGIENE_LEVEL_CLEAN)
 
@@ -142,45 +139,45 @@
 		//Are our clothes dirty?
 		var/obj/item/head = get_item_by_slot(ITEM_SLOT_HEAD)
 		if(head && HAS_BLOOD_DNA(head))
-			hygiene_adjustment -= 1 * HYGIENE_FACTOR
+			hygiene_adjustment -= seconds_per_tick * HYGIENE_FACTOR
 
 		var/obj/item/neck = get_item_by_slot(ITEM_SLOT_NECK)
 		if(neck && HAS_BLOOD_DNA(neck))
-			hygiene_adjustment -= 1 * HYGIENE_FACTOR
+			hygiene_adjustment -= seconds_per_tick * HYGIENE_FACTOR
 
 		var/obj/item/mask = get_item_by_slot(ITEM_SLOT_MASK)
 		if(mask && HAS_BLOOD_DNA(mask))
-			hygiene_adjustment -= 1 * HYGIENE_FACTOR
+			hygiene_adjustment -= seconds_per_tick * HYGIENE_FACTOR
 
 		var/obj/item/shirt = get_item_by_slot(ITEM_SLOT_SHIRT)
 		if(shirt && HAS_BLOOD_DNA(shirt))
-			hygiene_adjustment -= 2 * HYGIENE_FACTOR
+			hygiene_adjustment -= 2 * seconds_per_tick* HYGIENE_FACTOR
 
 		var/obj/item/cloak = get_item_by_slot(ITEM_SLOT_CLOAK)
 		if(cloak && HAS_BLOOD_DNA(cloak))
-			hygiene_adjustment -= 2 * HYGIENE_FACTOR
+			hygiene_adjustment -= 2 * seconds_per_tick * HYGIENE_FACTOR
 
 		var/obj/item/pants = get_item_by_slot(ITEM_SLOT_PANTS)
 		if(pants && HAS_BLOOD_DNA(pants))
-			hygiene_adjustment -= 3 * HYGIENE_FACTOR
+			hygiene_adjustment -= 3 * seconds_per_tick * HYGIENE_FACTOR
 
 		var/obj/item/armor = get_item_by_slot(ITEM_SLOT_ARMOR)
 		if(armor && HAS_BLOOD_DNA(armor))
-			hygiene_adjustment -= 3 * HYGIENE_FACTOR
+			hygiene_adjustment -= 3 * seconds_per_tick * HYGIENE_FACTOR
 
 		var/obj/item/shoes = get_item_by_slot(ITEM_SLOT_SHOES)
 		if(shoes && HAS_BLOOD_DNA(shoes))
-			hygiene_adjustment -= 0.5 * HYGIENE_FACTOR
+			hygiene_adjustment -= 0.5 * seconds_per_tick * HYGIENE_FACTOR
 
 		//Are we bathing?
 		var/current_turf = get_turf(src)
 		if(istype(current_turf, /turf/open/water))
 			var/turf/open/water/bathing_liquid = current_turf
-			hygiene_adjustment += bathing_liquid.cleanliness_factor
-
+			hygiene_adjustment += bathing_liquid.cleanliness_factor * seconds_per_tick
 
 		adjust_hygiene(hygiene_adjustment)
-	dna?.species.handle_hygiene(src)
+
+	dna?.species.handle_hygiene(src, seconds_per_tick)
 
 ///FIRE CODE
 /mob/living/carbon/human/handle_fire()
@@ -398,22 +395,29 @@
 			return TRUE
 	return ..()
 
-/mob/living/carbon/human/proc/handle_vamp_dreams()
+/mob/living/carbon/human/proc/handle_vamp_dreams(seconds_per_tick)
 	if(!HAS_TRAIT(src, TRAIT_VAMP_DREAMS))
 		return
+
 	if(!mind)
 		return
+
 	if(!has_status_effect(/datum/status_effect/debuff/vamp_dreams))
 		return
+
 	if(!eyesclosed)
 		return
+
 	if(body_position != LYING_DOWN)
 		return
+
 	if(!istype(loc, /obj/structure/closet/crate/coffin))
 		return
+
 	var/obj/structure/closet/crate/coffin/coffin = loc
 	if(coffin.opened)
 		return
+
 	remove_status_effect(/datum/status_effect/debuff/vamp_dreams)
 	mind.sleep_adv.advance_cycle()
 

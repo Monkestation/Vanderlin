@@ -97,13 +97,12 @@
 #define HUMAN_CRIT_MAX_OXYLOSS (SSmobs.wait/30)
 
 #define HEAT_DAMAGE_LEVEL_1 0 //Amount of damage applied when your body temperature just passes the 360.15k safety point
-#define HEAT_DAMAGE_LEVEL_2 0.1 //Amount of damage applied when your body temperature passes the 400K point
-#define HEAT_DAMAGE_LEVEL_3 0.2 //Amount of damage applied when your body temperature passes the 460K point and you are on fire
+#define HEAT_DAMAGE_LEVEL_2 0.05 //Amount of damage applied when your body temperature passes the 400K point
+#define HEAT_DAMAGE_LEVEL_3 0.1 //Amount of damage applied when your body temperature passes the 460K point and you are on fire
 
 #define COLD_DAMAGE_LEVEL_1 0 //Amount of damage applied when your body temperature just passes the 260.15k safety point
-#define COLD_DAMAGE_LEVEL_2 0.1 //Amount of damage applied when your body temperature passes the 200K point
-#define COLD_DAMAGE_LEVEL_3 0.2 //Amount of damage applied when your body temperature passes the 120K point
-
+#define COLD_DAMAGE_LEVEL_2 0.05 //Amount of damage applied when your body temperature passes the 200K point
+#define COLD_DAMAGE_LEVEL_3 0.1 //Amount of damage applied when your body temperature passes the 120K point
 
 //Note that gas heat damage is only applied once every FOUR ticks.
 #define HEAT_GAS_DAMAGE_LEVEL_1 1 //Amount of damage applied when the current breath's temperature just passes the 360.15k safety point
@@ -321,13 +320,12 @@
 #define OFFSET_UNDIES "underwear"
 
 /// Base factor at which mob nutrition decreases
-#define HUNGER_FACTOR		0.2
+#define HUNGER_FACTOR 0.2
 /// Base Factor at which mob hydration decreases
 #define THIRST_FACTOR 0.05
-#define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
+#define	HYGIENE_FACTOR 0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
-#define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
-#define REAGENTS_SLOW_METABOLISM 0.1 // needed to have poisons have powerful effect at low doses without making it too fast
+#define REAGENTS_METABOLISM 1 //How many units of reagent are consumed per second, by default.
 #define REAGENTS_INSANELY_SLOW_METABOLISM 0.01
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
 #define REM REAGENTS_EFFECT_MULTIPLIER

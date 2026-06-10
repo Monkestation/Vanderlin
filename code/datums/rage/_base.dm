@@ -28,13 +28,13 @@
 	remove_holder()
 	return ..()
 
-/datum/rage/proc/on_life(datum/source)
+/datum/rage/proc/on_life(datum/source, seconds_per_tick)
 	SIGNAL_HANDLER
 
 	if(holder_mob.stat >= DEAD)
 		return
 
-	update_rage(rage_change_on_life)
+	update_rage(rage_change_on_life, seconds_per_tick)
 
 /datum/rage/proc/grant_to_holder(mob/living/carbon/human/holder)
 	if(!ishuman(holder))
@@ -104,23 +104,27 @@
 	holder_mob.remove_spell(ability)
 	active_abilities -= ability
 
-/datum/rage/proc/update_rage(amount)
-	if(!amount) return
+/datum/rage/proc/update_rage(amount, seconds_per_tick)
+	if(!amount)
+		return
 
 	var/old_rage = rage
-	rage = clamp(rage + amount, 0, max_rage)
+	rage = clamp(rage + (amount * seconds_per_tick), 0, max_rage)
 
 	update_hud()
-	if(old_rage != rage)
-		check_rage_tier()
-		SEND_SIGNAL(holder_mob, COMSIG_RAGE_CHANGED, amount)
-		if(secondary_mob)
-			SEND_SIGNAL(secondary_mob, COMSIG_RAGE_CHANGED, amount)
 
-		if(rage <= 0)
-			SEND_SIGNAL(holder_mob, COMSIG_RAGE_BOTTOMED)
-		else if(rage >= max_rage)
-			SEND_SIGNAL(holder_mob, COMSIG_RAGE_OVERRAGE)
+	if(old_rage == rage)
+		return
+
+	check_rage_tier()
+	SEND_SIGNAL(holder_mob, COMSIG_RAGE_CHANGED, amount)
+	if(secondary_mob)
+		SEND_SIGNAL(secondary_mob, COMSIG_RAGE_CHANGED, amount)
+
+	if(rage <= 0)
+		SEND_SIGNAL(holder_mob, COMSIG_RAGE_BOTTOMED)
+	else if(rage >= max_rage)
+		SEND_SIGNAL(holder_mob, COMSIG_RAGE_OVERRAGE)
 
 /datum/rage/proc/update_hud()
 	if(holder_mob)
