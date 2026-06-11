@@ -763,7 +763,7 @@
 	return TRUE
 
 /mob/living/proc/InFullCritical()
-	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && (stat == UNCONSCIOUS  || stat == HARD_CRIT))
+	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && (stat == UNCONSCIOUS || stat == HARD_CRIT))
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
