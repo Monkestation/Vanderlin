@@ -30,6 +30,9 @@
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/pilgrimminer
+	traits = list(
+		TRAIT_AMAZING_BACK
+	)
 
 /datum/job/advclass/pilgrimminer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

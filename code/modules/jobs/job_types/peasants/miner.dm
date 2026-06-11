@@ -46,7 +46,9 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/miner
-	traits = TRAIT_AMAZING_BACK
+	traits = list(
+		TRAIT_AMAZING_BACK
+	)
 
 /datum/outfit/miner
 	name = JOB_MINER
