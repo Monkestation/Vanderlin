@@ -20,8 +20,6 @@
 	organ_flags = ORGAN_VITAL
 	attack_verb = list("attacked", "slapped", "whacked")
 
-	pain_multiplier = 0 // you can't feel your brain being fried
-
 	///The brain's organ variables are significantly more different than the other organs, with half the decay rate for balance reasons, and twice the maxHealth
 	decay_factor = STANDARD_ORGAN_DECAY * 0.5
 
@@ -40,6 +38,7 @@
 	nutriment_req = 3
 	hydration_req = 1.5
 	self_healing_effect = CE_BRAIN_REGEN
+	self_heal_thresholds = list()
 
 	/// This is stuff
 	var/damage_threshold_value = BRAIN_DAMAGE_DEATH/10
@@ -84,6 +83,14 @@
 		transfer_identity(C)
 	C.update_body()
 	C.remove_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/can_self_heal(delta_time, times_fired)
+	. = ..()
+	if(!.)
+		return
+	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
+	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
+		return FALSE
 
 /obj/item/organ/brain/handle_blood(delta_time, times_fired)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
@@ -417,6 +424,9 @@
 		. += "\n[brain_message]"
 	else
 		return brain_message
+
+/obj/item/organ/brain/get_shock(painkiller_included)
+	return 0 // you can't feel your brain being fried
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
