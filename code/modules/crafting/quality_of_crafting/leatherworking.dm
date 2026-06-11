@@ -103,6 +103,18 @@
 /datum/repeatable_crafting_recipe/leather/storage/backpack/create_blacklisted_paths()
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
+/datum/repeatable_crafting_recipe/leather/storage/orebag
+	name = "miner's satchel"
+	requirements = list(
+		/obj/item/natural/hide/cured= 3,
+		/obj/item/rope = 1,
+	)
+	output = /obj/item/storage/hip/orebag
+	craftdiff = 1
+
+/datum/repeatable_crafting_recipe/leather/storage/orebag/create_blacklisted_paths()
+	blacklisted_paths = subtypesof(/obj/item/rope)
+
 /datum/repeatable_crafting_recipe/leather/storage/knife_sheath
 	name = "knife sheath"
 	output = /obj/item/weapon/scabbard/knife

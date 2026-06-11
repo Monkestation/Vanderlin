@@ -623,8 +623,8 @@
 //////////////////////////////////////////
 
 /obj/item/storage/hip/orebag
-	name = "ore bag"
-	desc = "a bag designed to help miners quickly sort and store ore, minerals, and gems"
+	name = "miner's satchel"
+	desc = "a satchel designed to help miners quickly sort and store ore, minerals, and gems"
 	icon = 'icons/roguetown/clothing/storage.dmi'
 	icon_state = "minebag"
 	item_state = "minebag"
