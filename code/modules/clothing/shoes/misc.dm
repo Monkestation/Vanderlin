@@ -151,6 +151,13 @@
 	sellprice = 20
 	wetable = FALSE
 
+/obj/item/clothing/shoes/rare/grenzelhoft/freifechter
+	name = "fencing boots"
+	desc = "A pair of lightweight snugly fitting boots. They're reinforced along the toes and ankles and offer a measure of protection against missteps and glancing blows during close exchanges, often favoured by duelists and other itinerant swordsmen."
+	icon_state = "freiboots"
+	item_state = "freiboots"
+	max_integrity = ARMOR_INT_SIDE_HARDLEATHER + 50
+
 /obj/item/clothing/shoes/otavan
 	name = "grenzelhoftian leather boots"
 	desc = "Boots of outstanding craft, your fragile feet have never felt so protected and comfortable before."
@@ -193,15 +200,13 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	wetable = FALSE
 
 /obj/item/clothing/shoes/courtphysician/female
 	name = "sanguine heels"
 	desc = "Leather heels, the solemn tap of these bears grim news, or salvation."
 	icon_state = "docheels"
 	item_state = "docheels"
-	icon = 'icons/roguetown/clothing/courtphys.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY
-	wetable = FALSE

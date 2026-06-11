@@ -41,6 +41,8 @@
 	first_time_text = "Thatchwood Outpost"
 	threat_region = THREAT_REGION_NORTHERN_GROVE
 
+/area/outdoors/wilderness/beside_thatchwood
+
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"
 	first_time_text = "Salem Outpost"

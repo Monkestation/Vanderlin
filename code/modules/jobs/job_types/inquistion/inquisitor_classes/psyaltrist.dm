@@ -3,7 +3,6 @@
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 3,
 		/datum/attribute/skill/misc/music = 50,
-		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
@@ -29,7 +28,8 @@
 		/datum/language/orcish
 	)
 
-	traits = list(	TRAIT_DODGEEXPERT,
+	traits = list(
+		TRAIT_DODGEEXPERT,
 		TRAIT_EMPATH,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
@@ -40,7 +40,6 @@
 
 	spells = list(/datum/action/cooldown/spell/projectile/vicious_mockery)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
 /datum/job/advclass/sacrestant/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -79,7 +78,7 @@
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	ring = /obj/item/clothing/ring/signet/silver
 	backpack_contents = list(
-		/obj/item/key/inquisition = 1,
+		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
 	)

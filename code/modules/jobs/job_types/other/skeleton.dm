@@ -35,7 +35,8 @@
 		TRAIT_NOPAIN,
 		TRAIT_TOXIMMUNE,
 		TRAIT_NOSLEEP,
-		TRAIT_SHOCKIMMUNE
+		TRAIT_SHOCKIMMUNE,
+		TRAIT_NOBLOOD,
 	)
 
 
@@ -46,7 +47,6 @@
 	spawned.mind?.current.job = null
 
 	if(spawned.dna && spawned.dna.species)
-		spawned.dna.species.species_traits |= NOBLOOD
 		spawned.dna.species.soundpack_m = new /datum/voicepack/skeleton()
 		spawned.dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
@@ -56,7 +56,7 @@
 	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
 	spawned.update_a_intents()
 	spawned.grant_undead_eyes()
-	spawned.ambushable = FALSE
+	ADD_TRAIT(spawned, TRAIT_NOAMBUSH, JOB_TRAIT)
 	spawned.underwear = "Nude"
 	if(length(spawned.quirks))
 		spawned.clear_quirks()

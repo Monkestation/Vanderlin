@@ -47,7 +47,7 @@
 
 /datum/action/cooldown/spell/cure_rot/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	var/was_zombie = cast_on.mind?.has_antag_datum(/datum/antagonist/zombie)
+	var/was_zombie = IS_DEADITE(cast_on)
 	var/has_rot = FALSE
 	if(!was_zombie)
 		for(var/obj/item/bodypart/bodypart as anything in cast_on.bodyparts)

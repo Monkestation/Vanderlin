@@ -64,7 +64,6 @@
 /datum/outfit/steward
 	name = JOB_STEWARD
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
-	shirt = /obj/item/clothing/shirt/dress/stewarddress
 	head = /obj/item/clothing/head/stewardtophat
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/gambeson/steward
@@ -77,9 +76,3 @@
 		/obj/item/storage/belt/pouch/coins/rich = 1,
 		/obj/item/lockpickring/mundane = 1
 	)
-
-/datum/outfit/steward/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.gender == MALE)
-		shirt = /obj/item/clothing/shirt/undershirt/fancy
-		pants = /obj/item/clothing/pants/trou/leathertights
