@@ -18,6 +18,7 @@
 	item_weight = 4.5 KILOGRAMS
 
 	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH) //TODO: CHECK THIS
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
 	force = 10
 	can_parry = TRUE
 	wdefense = AVERAGE_PARRY
@@ -38,7 +39,10 @@
 
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss/Initialize(mapload)
 	bayonet = new(src)
-	return ..()
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, SPEAR_THRUST)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_THRUST)
+	. = ..()
+	AddElement(/datum/element/gun_launches_little_guys, throwing_force = 1, throwing_range = 1)
 
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss/Destroy(force)
 	if(!QDELETED(bayonet))
@@ -53,6 +57,11 @@
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state][cocked ? "_cocked" : ""][ramrod ? "_ramrod" : ""][bayonet ? "_bayonet" : ""]" // God weeps
+
+// We're going to sacrifice unloading the Blunderbuss so you can wield it. Sorry
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/attack_self(mob/living/user, list/modifiers)
+	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
 
 /obj/item/gun/ballistic/powder/wheellock/blunderbuss/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
 	. = ..()
@@ -72,6 +81,9 @@
 
 	balloon_alert(user, "removed!")
 	user.put_in_hands(bayonet)
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	user.update_a_intents()
 	update_appearance(UPDATE_ICON_STATE)
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
