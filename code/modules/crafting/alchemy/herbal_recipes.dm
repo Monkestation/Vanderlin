@@ -84,20 +84,26 @@
 	taste_description = "bitter flowers"
 	scent_description = "marigold"
 
-/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
-		injury.adjust_germ_level(-5)
+		injury.adjust_germ_level(-0.4 * REM * seconds_per_tick)
 		injury.salve_injury()
+
 		if(injury.damage_type & FIRE_WOUND_TYPES)
-			injury.heal_damage(3)
+			injury.heal_damage(0.6 * REM * seconds_per_tick)
+
 		if(QDELETED(injury))
 			continue
-		injury.heal_damage(1)
+
+		injury.heal_damage(0.2 * REM * seconds_per_tick)
+
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
-	affected_bodypart.disinfect_limb(20 SECONDS)
+
+	affected_bodypart.disinfect_limb(4 SECONDS * REM * seconds_per_tick)
+
 	return FALSE
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)
@@ -441,10 +447,14 @@
 	overdose_threshold = 30
 	taste_description = "bitter numbness"
 
-/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	if(affected_bodypart.heal_damage(0.5, 0.75, TRUE, required_status = BODYPART_ORGANIC))
+/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
+	if(affected_bodypart.heal_damage(0.1 * REM * seconds_per_tick, 0.15 * REM * seconds_per_tick, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	affected_bodypart.add_pain(-amount_to_transfer * 0.3)
+
+	affected_bodypart.add_pain(-amount_to_transfer * 0.06 * REM * seconds_per_tick)
+
 	return FALSE
 
 /datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M, efficiency, seconds_per_tick)
@@ -567,9 +577,10 @@
 	metabolization_rate = 0.3
 	taste_description = "cooling mint"
 
-/datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	affected_bodypart.add_pain(-(amount_to_transfer * 0.3))
-	return ..()
+/datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
+	affected_bodypart.add_pain(-(amount_to_transfer * 0.06  * REM * seconds_per_tick))
 
 /datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()

@@ -161,7 +161,8 @@
 		true_bleed = CEILING(true_bleed * bleed_mod, 0.1)
 		temp_bleed += true_bleed
 		if(bleed_part.bandage)
-			bleed_part.try_bandage_expire()
+			bleed_part.try_bandage_expire(seconds_per_tick)
+
 	if(temp_bleed > 0)
 		if(owner.bleed(temp_bleed) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"

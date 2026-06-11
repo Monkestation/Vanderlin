@@ -26,7 +26,7 @@
 	taste_mult = 1.8
 	toxicity = 3
 
-/datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+/datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
 	return FALSE
 
 /datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
@@ -165,11 +165,12 @@
 	color = "#98934bc6"
 	sanitization = -SANITIZATION_PER_UNIT_WATER
 
-/datum/reagent/water/gross/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+/datum/reagent/water/gross/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
 	affected_bodypart.undisinfect_limb()
 	for(var/datum/injury/injury in affected_bodypart.injuries)
-		injury.adjust_germ_level(SANITIZATION_PER_UNIT_WATER)
-	return ..()
+		injury.adjust_germ_level(SANITIZATION_PER_UNIT_WATER * REM * seconds_per_tick * 0.2)
 
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)

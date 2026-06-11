@@ -105,7 +105,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 /// Return TRUE if reagent should be transfered to affected_mob when absorbed through a bodypart
-/datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+/datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
 	return TRUE
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick = SSMOBS_DT)

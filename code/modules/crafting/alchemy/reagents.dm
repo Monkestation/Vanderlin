@@ -9,11 +9,6 @@
 	alpha = 173
 	liver_chemical = FALSE
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	if(affected_bodypart.heal_damage(1 * REM, 1 * REM, TRUE, required_status = BODYPART_ORGANIC))
-		affected_mob.update_damage_overlays()
-	return ..()
-
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
 	L.add_chem_effect(CE_BLOODRESTORE, 3, "[type]")
@@ -42,6 +37,12 @@
 
 	return TRUE
 
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
+	if(affected_bodypart.heal_damage(0.5 * REM * seconds_per_tick, 0.5 * REM * seconds_per_tick, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+
 /datum/reagent/medicine/stronghealth
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
@@ -50,11 +51,6 @@
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM * 2
 	liver_chemical = FALSE
-
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	if(affected_bodypart.heal_damage(3 * REM, 3 * REM, TRUE, required_status = BODYPART_ORGANIC))
-		affected_mob.update_damage_overlays()
-	return ..()
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -85,6 +81,12 @@
 	M.adjustFireLoss(-3.5 * REAGENTS_MODIFIER, TRUE, required_status = BODYPART_ORGANIC)
 
 	return TRUE
+
+/datum/reagent/medicine/stronghealth/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
+	if(affected_bodypart.heal_damage(1.5 * REM * seconds_per_tick, 1.5 * REM * seconds_per_tick, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
 
 /datum/reagent/medicine/rosawater
 	name = "Rosa Water"
@@ -234,13 +236,6 @@
 	scent_description = "saiga droppings"
 	metabolization_rate = REAGENTS_METABOLISM * 3
 
-/datum/reagent/medicine/diseasecure/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	affected_bodypart.disinfect_limb(20 MINUTES)
-	for(var/datum/injury/injury in affected_bodypart.injuries)
-		injury.adjust_germ_level(-30)
-	affected_bodypart.adjust_germ_level(-30)
-	return ..()
-
 /datum/reagent/medicine/diseasecure/on_mob_metabolize(mob/living/L)
 	. = ..()
 	L.add_chem_effect(CE_ANTIBIOTIC, 40, "[type]")
@@ -258,6 +253,16 @@
 	M.adjustToxLoss(-3.2 * REAGENTS_MODIFIER)
 
 	return TRUE
+
+/datum/reagent/medicine/diseasecure/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
+	affected_bodypart.disinfect_limb(4 MINUTES * REM * seconds_per_tick)
+
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		injury.adjust_germ_level(-6 * REM * seconds_per_tick)
+
+	affected_bodypart.adjust_germ_level(-6 * REM * seconds_per_tick)
 
 //Buff potions
 /datum/reagent/buff
