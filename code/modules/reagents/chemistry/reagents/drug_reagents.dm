@@ -11,15 +11,18 @@
 	overdose_threshold = 30
 
 /datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	M.set_drugginess(30 SECONDS * efficiency)
-	if(prob(5))
+	. = ..()
+
+	M.set_drugginess(6 SECONDS * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(2.5, seconds_per_tick))
 		if(M.gender == FEMALE)
-			M.emote(pick("twitch_s","giggle"))
+			M.emote(pick("twitch_s", "giggle"))
 		else
-			M.emote(pick("twitch_s","chuckle"))
+			M.emote(pick("twitch_s", "chuckle"))
+
 	if(M.has_quirk(/datum/quirk/vice/smoker))
 		M.sate_addiction(/datum/quirk/vice/smoker)
-	..()
 
 /datum/reagent/drug/space_drugs/on_mob_metabolize(mob/living/M)
 	..()
@@ -67,20 +70,16 @@
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM
 
 
-/datum/reagent/drug/nicotine/on_mob_end_metabolize(mob/living/M)
-//	M.remove_stress(/datum/stress_event/pweed)
-	..()
-
 /datum/reagent/drug/nicotine/on_mob_metabolize(mob/living/M)
 	var/mob/living/carbon/V = M
 	V.add_stress(/datum/stress_event/pweed)
 	..()
 
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(M.has_quirk(/datum/quirk/vice/smoker))
 		M.sate_addiction(/datum/quirk/vice/smoker)
-	..()
-	. = 1
 
 /datum/reagent/drug/nicotine/overdose_process(mob/living/M)
 	M.adjustToxLoss(0.1*REM, 0)
@@ -90,7 +89,7 @@
 
 /datum/reagent/drug/hallucinogen
 	name = "Hallucinogen"
-	description = "A stronghallucinogenic drug."
+	description = "A strong, hallucinogenic drug."
 	color = "#E700E7" // rgb: 231, 0, 231
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	taste_description = "the clouds"
@@ -98,19 +97,20 @@
 
 /datum/reagent/drug/hallucinogen/on_mob_life(mob/living/carbon/psychonaut, efficiency, seconds_per_tick)
 	. = ..()
-	psychonaut.slurring = max(psychonaut.slurring, 2.5 SECONDS * efficiency)
+
+	psychonaut.slurring = max(psychonaut.slurring, 0.5 SECONDS * REAGENTS_METABOLISM)
 
 	switch(current_cycle)
 		if(2 to 6)
-			if(SPT_PROB(5, 2))
+			if(SPT_PROB(5, seconds_per_tick))
 				psychonaut.emote(pick("twitch","giggle"))
 		if(6 to 11)
-			psychonaut.set_jitter_if_lower(50 SECONDS * efficiency)
-			if(SPT_PROB(10, 2))
+			psychonaut.set_jitter_if_lower(10 SECONDS * REAGENTS_METABOLISM)
+			if(SPT_PROB(10, seconds_per_tick))
 				psychonaut.emote(pick("twitch","giggle"))
 		if (11 to INFINITY)
-			psychonaut.set_jitter_if_lower(100 SECONDS * efficiency)
-			if(SPT_PROB(16, 2))
+			psychonaut.set_jitter_if_lower(20 SECONDS * REAGENTS_METABOLISM)
+			if(SPT_PROB(16, seconds_per_tick))
 				psychonaut.emote(pick("twitch","giggle"))
 
 /datum/reagent/drug/hallucinogen/on_mob_metabolize(mob/living/psychonaut)
@@ -172,7 +172,9 @@
 
 /datum/reagent/drug/hallucinogen_concetrate/on_mob_life(mob/living/carbon/psychonaut, efficiency, seconds_per_tick)
 	. = ..()
+
 	// weaker version of base hallucinogen — slurring only, mild jitter at high cycle
-	psychonaut.slurring = max(psychonaut.slurring, 1 SECONDS * efficiency)
+	psychonaut.slurring = max(psychonaut.slurring, 0.2 SECONDS * REAGENTS_METABOLISM)
+
 	if(current_cycle >= 8)
-		psychonaut.set_jitter_if_lower(20 SECONDS * efficiency)
+		psychonaut.set_jitter_if_lower(4 SECONDS * REAGENTS_METABOLISM)

@@ -615,7 +615,8 @@
 	. = ..()
 	if(SPT_PROB(16, seconds_per_tick))
 		M.adjust_confusion(6 SECONDS * REAGENTS_MODIFIER)
-	M.emote(pick("cough"))
+	if(SPT_PROB(20, seconds_per_tick))
+		M.emote(pick("cough"))
 
 /obj/item/reagent_containers/powder/flour/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/flour(get_turf(src))

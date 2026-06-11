@@ -6,12 +6,12 @@
 	scent_description = "blood and hot iron"
 
 /datum/reagent/buff/strength/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/strength/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/strengthpot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/strengthpot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/strength/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/strength/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/buff/perception/concentrated
 	name = "Concentrated Perception"
@@ -20,12 +20,12 @@
 	scent_description = "ozone and pine"
 
 /datum/reagent/buff/perception/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/perception/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/perception/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/perception/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/buff/intelligence/concentrated
 	name = "Concentrated Intelligence"
@@ -34,12 +34,12 @@
 	scent_description = "old parchment and ink"
 
 /datum/reagent/buff/intelligence/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/intelligence/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/intelligencepot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/intelligence/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/buff/constitution/concentrated
 	name = "Concentrated Constitution"
@@ -48,12 +48,12 @@
 	scent_description = "deep earth and old stone"
 
 /datum/reagent/buff/constitution/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/constitution/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/constitutionpot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/constitution/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/buff/endurance/concentrated
 	name = "Concentrated Endurance"
@@ -62,12 +62,12 @@
 	scent_description = "exertion and dry heat"
 
 /datum/reagent/buff/endurance/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/endurance/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/endurancepot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/endurancepot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/endurance/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/buff/speed/concentrated
 	name = "Concentrated Speed"
@@ -76,12 +76,12 @@
 	scent_description = "electric heat"
 
 /datum/reagent/buff/speed/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/speed/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/speedpot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/speedpot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/speed/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/speed/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/buff/fortune/concentrated
 	name = "Concentrated Fortune"
@@ -90,12 +90,12 @@
 	scent_description = "warm coin and morning air"
 
 /datum/reagent/buff/fortune/concentrated/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot/concentrated))
-		return ..()
-	if(M.has_reagent(/datum/reagent/buff/fortune/concentrated, 2))
+	. = ..()
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/fortunepot/concentrated))
 		M.apply_status_effect(/datum/status_effect/buff/alch/fortunepot/concentrated)
-		M.remove_reagent(/datum/reagent/buff/fortune/concentrated, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune/concentrated))
-	return ..()
+
+	M.remove_reagent(type, volume)
 
 /datum/reagent/skill_elixir
 	description = ""

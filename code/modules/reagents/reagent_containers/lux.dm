@@ -24,19 +24,24 @@
 	. = 1
 
 /datum/reagent/lux/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
+
 	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
 		M.remove_status_effect(/datum/status_effect/debuff/lux_drained)
 		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, apply_status_effect), /datum/status_effect/debuff/lux_drained), 5 MINUTES)
 		to_chat(M, span_green("I can feel my soul again, albeit temporarily!"))
+
 	if(M.has_status_effect(/datum/status_effect/debuff/flaw_lux_taken))
 		M.remove_status_effect(/datum/status_effect/debuff/flaw_lux_taken)
 		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, apply_status_effect), /datum/status_effect/debuff/flaw_lux_taken), 5 MINUTES)
 		to_chat(M, span_green("A small respite- I'm whole again... for now..."))
+
 	M.apply_status_effect(/datum/status_effect/buff/lux_drank)
-	..()
 
 /obj/item/reagent_containers/lux/pragmas
 	name = "luxus pragmas"
@@ -156,12 +161,14 @@
 	. = 1
 
 /datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-
+	. = ..()
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
+
 	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
 		to_chat(M, span_green("This tastes awful, it won't help me feel my soul again.."))
+
 	if(M.has_status_effect(/datum/status_effect/debuff/flaw_lux_taken))
 		to_chat(M, span_green("This tastes awful, it won't help me feel my soul again.."))
+
 	M.add_stress(/datum/stress_event/consumed_tainted_lux)
-	..()

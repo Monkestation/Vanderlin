@@ -126,15 +126,17 @@
 	description = "An ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	color = "#6a9295c6"
 	taste_description = "water"
-	var/cooling_temperature = 2
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassclear"
-	var/hydration = 12
-	var/sanitization = SANITIZATION_PER_UNIT_WATER
+
 	alpha = 100
 	taste_mult = 0.1
+
+	var/cooling_temperature = 2
+	var/hydration = 2.4
+	var/sanitization = SANITIZATION_PER_UNIT_WATER
 
 /datum/chemical_reaction/grosswaterify
 	name = "grosswater"
@@ -151,11 +153,12 @@
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_hydration(hydration * efficiency)
-	..()
+			H.adjust_hydration(hydration * REAGENTS_MODIFIER)
 
 /datum/reagent/water/gross
 	taste_description = "lead"
@@ -173,11 +176,13 @@
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
-	M.adjustToxLoss(1 * efficiency)
-	M.add_nausea(12 * efficiency) //Over 8 units will cause puking
 
+	M.adjustToxLoss(0.2 * REAGENTS_MODIFIER)
+	M.add_nausea(2.4 * REAGENTS_MODIFIER) //Over 8 units will cause puking
+	return TRUE
 
 /*
  *	Water reaction to turf
@@ -278,12 +283,15 @@
 	taste_mult = 0 // apparently tasteless.
 
 /datum/reagent/mercury/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	if(!HAS_TRAIT(M, TRAIT_IMMOBILIZED))
-		step(M, pick(GLOB.cardinals))
-	if(prob(5))
+	. = ..()
+
+	if(SPT_PROB(2.5, seconds_per_tick))
 		M.emote(pick("twitch","drool","moan"))
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN * efficiency, 1)
-	..()
+
+	if(volume > 5 && SPT_PROB(1, seconds_per_tick))
+		SSmove_manager.move_rand(M)
+
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.2 * REAGENTS_MODIFIER)
 
 /datum/reagent/yuck
 	name = "Rot"
@@ -297,10 +305,11 @@
 	metabolization_rate = REAGENTS_METABOLISM * 0.3
 
 /datum/reagent/yuck/on_mob_life(mob/living/carbon/C, efficiency, seconds_per_tick)
+	. = ..()
 	if(HAS_TRAIT(C, TRAIT_NOHUNGER) || HAS_TRAIT(C, TRAIT_NASTY_EATER) || HAS_TRAIT(C, TRAIT_ROT_EATER)) //they can't puke
-		return ..()
-	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 2.5 * efficiency : 5 * efficiency)
-	return ..()
+		return
+
+	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 0.5 * REAGENTS_MODIFIER : 1 * REAGENTS_MODIFIER)
 
 /datum/reagent/ash
 	name = "Ash"
@@ -344,7 +353,7 @@
 	taste_mult = 2 // yuck!
 
 /datum/reagent/soap/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
-	..()
+	. = ..()
 	if(ishuman(M))
 		M.add_stress(/datum/stress_event/mouthsoap)
 
@@ -373,6 +382,3 @@
 /datum/reagent/devour/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	SEND_SIGNAL(M, COMSIG_DEVOUR_OVERDRIVE)
-
-/datum/reagent/devour/overdose_process(mob/living/M)
-	. = ..()

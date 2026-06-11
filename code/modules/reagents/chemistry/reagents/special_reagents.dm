@@ -28,21 +28,22 @@
 
 /datum/reagent/drug/methamphetamine/on_mob_life(mob/living/carbon/affected_mob, efficiency, seconds_per_tick)
 	. = ..()
+
 	var/high_message = pick("You feel hyper.", "You feel like you need to go faster.", "You feel like you can run the world.")
-	if(prob(2.5))
+	if(SPT_PROB(2.5, seconds_per_tick))
 		to_chat(affected_mob, span_notice("[high_message]"))
-	affected_mob.AdjustStun(-40 * REM * efficiency)
-	affected_mob.AdjustKnockdown(-40 * REM * efficiency)
-	affected_mob.AdjustUnconscious(-40 * REM * efficiency)
-	affected_mob.AdjustParalyzed(-40 * REM * efficiency)
-	affected_mob.AdjustImmobilized(-40 * REM * efficiency)
-	affected_mob.set_jitter_if_lower(4 SECONDS * REM * efficiency)
-	if(overdosed) // MONKESTATION EDIT: Makes Unknown Methamphetamine Isomer actually safe. "safe" is false by default.
-		affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(1, 4) * REM * efficiency)
-	if(prob(2.5))
+
+	affected_mob.AdjustStun(-8 * REAGENTS_MODIFIER)
+	affected_mob.AdjustKnockdown(-8 * REAGENTS_MODIFIER)
+	affected_mob.AdjustUnconscious(-8 * REAGENTS_MODIFIER)
+	affected_mob.AdjustParalyzed(-8 * REAGENTS_MODIFIER)
+	affected_mob.AdjustImmobilized(-8 * REAGENTS_MODIFIER)
+	affected_mob.set_jitter_if_lower(0.8 SECONDS * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(2.5, seconds_per_tick))
 		affected_mob.emote(pick("twitch", "shiver"))
-	..()
-	. = TRUE
+
+	return TRUE
 
 /datum/reagent/drug/methamphetamine/overdose_process(mob/living/affected_mob)
 	if(!HAS_TRAIT(affected_mob, TRAIT_IMMOBILIZED) && !ismovable(affected_mob.loc))

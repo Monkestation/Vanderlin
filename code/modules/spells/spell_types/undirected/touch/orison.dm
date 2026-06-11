@@ -204,17 +204,16 @@
 
 /datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	if (M.mob_biotypes & MOB_UNDEAD)
-		M.adjustFireLoss(0.5*REM * efficiency)
-	else
-		M.adjustBruteLoss(-0.1*REM * efficiency)
-		M.adjustFireLoss(-0.1*REM * efficiency)
-		M.adjustOxyLoss(-0.1 * efficiency, 0)
-		var/list/our_wounds = M.get_wounds()
-		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1 * efficiency)
-			if (upd)
-				M.update_damage_overlays()
+	if(M.mob_biotypes & MOB_UNDEAD)
+		M.adjustFireLoss(0.25 * REAGENTS_MODIFIER)
+		return
+
+	M.adjustBruteLoss(-0.05 * REAGENTS_MODIFIER)
+	M.adjustFireLoss(-0.05 * REAGENTS_MODIFIER)
+	M.adjustOxyLoss(-0.02 * REAGENTS_MODIFIER)
+	M.heal_wounds(0.2 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/water/blessed/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
 	if (!istype(exposed_mob))
@@ -234,25 +233,14 @@
 
 /datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	if((M.mob_biotypes & MOB_UNDEAD))
-		M.adjustBruteLoss(-0.1*REM * efficiency)
-		M.adjustFireLoss(-0.1*REM * efficiency)
-		M.adjustOxyLoss(-0.1 * efficiency, 0)
-		var/list/our_wounds = M.get_wounds()
-		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1 * efficiency)
-			if (upd)
-				M.update_damage_overlays()
-	else
-		M.adjustBruteLoss(-0.1*REM * efficiency)
-		M.adjustFireLoss(-0.1*REM * efficiency)
-		M.adjustOxyLoss(-0.1 * efficiency, 0)
-		var/list/our_wounds = M.get_wounds()
-		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1 * efficiency)
-			if (upd)
-				M.update_damage_overlays()
-		M.adjust_stamina(0.5*REM * efficiency)
+
+	M.adjustBruteLoss(-0.05 * REAGENTS_MODIFIER)
+	M.adjustFireLoss(-0.05 * REAGENTS_MODIFIER)
+	M.adjustOxyLoss(-0.02 * REAGENTS_MODIFIER, 0)
+	M.heal_wounds(0.2 * REAGENTS_MODIFIER)
+	M.adjust_stamina(0.1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /atom/movable/screen/alert/status_effect/thaumaturgy
 	name = "Thaumaturgical Voice"

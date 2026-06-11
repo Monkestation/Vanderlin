@@ -142,17 +142,21 @@
 	show_when_dead = FALSE
 
 /datum/reagent/druqks/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	M.set_drugginess(30 SECONDS * efficiency)
+
+	M.set_drugginess(6 SECONDS * REAGENTS_MODIFIER)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
-	if(prob(5))
+
+	if(SPT_PROB(2.5, seconds_per_tick))
 		if(M.gender == FEMALE)
 			M.emote(pick("twitch_s","giggle"))
 		else
 			M.emote(pick("twitch_s","chuckle"))
+
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
-	..()
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -204,13 +208,13 @@
 	L.remove_chem_effect(CE_STIMULANT, "[type]")
 
 /datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
-	if(prob(5))
-		M.flash_fullscreen("whiteflash")
+
 	M.apply_status_effect(/datum/status_effect/buff/ozium)
-	..()
 
 /datum/reagent/ozium/overdose_process(mob/living/M)
 	M.adjustToxLoss(0.25*REM, 0)
@@ -249,15 +253,17 @@
 	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+
 	if(M.has_reagent(/datum/reagent/moondust_purest))
-		M.Sleeping(40, 0)
+		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER)
+
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
+
 	M.apply_status_effect(/datum/status_effect/buff/moondust)
-	if(prob(2))
-		M.flash_fullscreen("whiteflash")
-	..()
 
 /datum/reagent/moondust/overdose_process(mob/living/M)
 	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
@@ -299,15 +305,16 @@
 	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust))
-		M.Sleeping(40 * efficiency, 0)
+		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER, 0)
+
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
+
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
-	if(prob(20))
-		M.flash_fullscreen("whiteflash")
-	..()
 
 /datum/reagent/moondust_purest/overdose_process(mob/living/M)
 	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
