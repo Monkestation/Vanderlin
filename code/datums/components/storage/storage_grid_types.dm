@@ -237,12 +237,8 @@
 /datum/component/storage/concrete/grid/orebag/New(datum/P, ...)
 	. = ..()
 	set_holdable(
-		typecacheof(list(/obj/item/ore,
-						 /obj/item/gem,
-						 /obj/item/reagent_containers/powder/salt,
-						 /obj/item/mana_battery/mana_crystal/standard,
-						 				)
-							))
+		typecacheof(list(/obj/item/ore, /obj/item/gem, /obj/item/reagent_containers/powder/salt, /obj/item/mana_battery/mana_crystal/standard))
+		)
 
 /datum/component/storage/concrete/grid/crucible
 	screen_max_rows = 5

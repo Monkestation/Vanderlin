@@ -118,7 +118,7 @@
 
 	actions_types = list(/datum/action/item_action/toggle_light)
 
-	var/brightness_on = 5
+	var/brightness_on = 6
 	var/on = FALSE
 
 /obj/item/clothing/head/helmet/leather/minershelm/Initialize(mapload, ...)
