@@ -621,7 +621,7 @@
 
 /obj/item/inqarticles/tallowpot
 	name = "tallowpot"
-	desc = "A small metal pot meant for holding waxes or melted redtallow. Convenient for coating signet rings and making an imprint. The warmth of a torch or lamptern should be enough to melt the redtallow for stamping writs."
+	desc = "A small metal pot for holding waxes or melted redtallow. Convenient for coating signet rings and making an imprint. The warmth of a torch or lamptern should be enough to melt the redtallow for stamping writs."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "tallowpot"
 	item_state = "tallowpot"
@@ -638,85 +638,85 @@
 	embedding = null
 	item_weight = 150 GRAMS
 	sellprice = 0
-	var/tallow = 0
+	/// If the pot has tallow in it
+	var/tallow = FALSE
+	/// Amount of tallow remaining in deciseconds
 	var/remaining = 0
+	/// Heated time remaining in deciseconds
 	var/heatedup = 0
-	var/messageshown = TRUE
 
-/obj/item/inqarticles/tallowpot/Initialize(mapload)
-	. = ..()
-	START_PROCESSING(SSobj, src)	// For making sure it melts.
-
-/obj/item/inqarticles/tallowpot/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
+/obj/item/inqarticles/tallowpot/filled
+	tallow = TRUE
+	remaining = 2 MINUTES
 
 /obj/item/inqarticles/tallowpot/process(seconds_per_tick)
-	if(heatedup > 0)
-		heatedup -= 4
-		remaining = max(remaining - (SPT_TO_DECISECONDS(seconds_per_tick)), 0)
-		messageshown = 0
-	else
-		if(tallow)
-			if(!messageshown)
-				visible_message(span_info("The redtallow in [src] hardens again."))
-				messageshown = 1
-			update_appearance(UPDATE_ICON_STATE)
+	heatedup -= SPT_TO_DECISECONDS(seconds_per_tick)
+	remaining -= SPT_TO_DECISECONDS(seconds_per_tick)
 
-	if(remaining == 0)
-		qdel(tallow)
-		tallow = initial(tallow)
+	if(!heatedup)
+		visible_message(span_info("The redtallow in [src] hardens again."))
 		update_appearance(UPDATE_ICON_STATE)
+		return PROCESS_KILL
 
+	if(!remaining)
+		tallow = FALSE
+		heatedup = 0
+		update_appearance(UPDATE_ICON_STATE)
+		return PROCESS_KILL
 
-/obj/item/inqarticles/tallowpot/attacked_by(obj/item/I, mob/living/user)
-	. = ..()
+/obj/item/inqarticles/tallowpot/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/tallow))
 		if(!istype(I,/obj/item/reagent_containers/food/snacks/tallow/red)) // Tells players to make redtallow.
 			to_chat(user,span_warning("Normal tallow lacks the properties to act as wax. Add viscera to it first."))
 			return
-		if(!tallow)
-			var/obj/item/reagent_containers/food/snacks/tallow/red/Q = I
-			tallow = Q
-			user.transferItemToLoc(Q, src, TRUE)
-			remaining = 30 SECONDS
-			update_appearance(UPDATE_ICON_STATE)
-		else
-			to_chat(user, span_info("[src] already has redtallow in it."))
 
+		if(tallow)
+			to_chat(user, span_info("[src] already has redtallow in it."))
+			return
+
+		tallow = TRUE
+		qdel(I)
+		remaining = 2 MINUTES
+		update_appearance(UPDATE_ICON_STATE)
+		return
 
 	if(istype(I, /obj/item/flashlight/flare/torch))
-		heatedup = 28
+		heatedup = 40 SECONDS
+		START_PROCESSING(SSobj, src)
 		visible_message(span_info("[user] warms [src] with [I]."))
 		update_appearance(UPDATE_ICON_STATE)
+		return
 
 	if(istype(I, /obj/item/clothing/ring/signet))
 		if(tallow && heatedup)
 			var/obj/item/clothing/ring/signet/ring = I
 			ring.tallowed = TRUE
 			ring.update_appearance(UPDATE_ICON_STATE)
+			return
+
+	return ..()
 
 /obj/item/inqarticles/tallowpot/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!proximity_flag)
 		return
+
 	//Both static light sources and torches/lanterns have on bool so this invalid cast... it just works yeah
 	var/obj/machinery/light/fueled/F = target
 
-	if((istype(target, /obj/machinery/light/fueled) || istype(target, /obj/item/flashlight/flare/torch)) && F.on)
-		heatedup = 28
+	if(istype(F) && F.on)
+		heatedup = 20 SECONDS
+		START_PROCESSING(SSobj, src)
 		visible_message(span_info("[user] warms [src] using [target]."))
 		update_appearance(UPDATE_ICON_STATE)
 
-
 /obj/item/inqarticles/tallowpot/update_icon_state()
 	. = ..()
-	if(tallow)
-		icon_state = "[initial(icon_state)]_filled"
-		if(heatedup)
-			icon_state = "[initial(icon_state)]_melted"
-	else
+	if(!tallow)
 		icon_state = "[initial(icon_state)]"
+		return
+
+	icon_state = "[initial(icon_state)]_[heatedup ? "melted" : "filled"]"
 
 /obj/item/rope/inqarticles/inquirycord
 	name = "inquiry cordage"
