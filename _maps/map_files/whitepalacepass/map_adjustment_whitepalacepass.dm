@@ -8,7 +8,9 @@
 	map_file_name = "WhitePalacePass.dmm"
 	blacklist = list(
 		/datum/job/adept,
-		/datum/job/advclass/mercenary/grenzelhoft,
+		/datum/job/advclass/mercenary/grenzelhoftzwei,
+		/datum/job/advclass/mercenary/grenzelhofthalb,
+		/datum/job/advclass/mercenary/grenzelhoftgun,
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/preacher,
 		/datum/job/advclass/combat/swordmaster,

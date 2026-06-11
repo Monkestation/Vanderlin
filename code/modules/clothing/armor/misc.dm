@@ -68,6 +68,29 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_COAT_STEP)
 
+/obj/item/clothing/armor/brigandine/haraate
+	name = "hansimhae cuirass"
+	desc = "A more common form of Blackmeadow armor, consisting of several interlocking plates of blacksteel-coated steel. Much cheaper than a full set of armor, these are commonly seen on militia forces and standing armies alike."
+	icon_state = "kazengunmedium"
+	boobed = FALSE
+	item_state = "kazengunmedium"
+	detail_tag = "_detail"
+	color = "#FFFFFF"
+	detail_color = "#FFFFFF"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	detail_tag = "_detail"
+
+/obj/item/clothing/armor/brigandine/haraate/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
+	var/playerchoice = COLOR_MAP[choice]
+	detail_color = playerchoice
+	update_icon()
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_armor()
+		H.update_icon()
+
 //................ Abyssal Robe ............... //
 /obj/item/clothing/armor/brigandine/abyssor // This is only a brigandine subtype for balance reasons, it should be a cuirass variant.
 	name = "abyssal robe"
@@ -139,3 +162,25 @@
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
 	item_weight = 3.95 KILOGRAMS
+
+/obj/item/clothing/armor/plate/bronze
+	name = "bronze cuirass"
+	desc = "A chiseled breastplate of bronze, further padded with hide to comfort its championing bod. The plates have been carefully forged to mimic the statuesque physiques of Psydonia's ancient heroes. Wearing it bolsters you with determination."
+	body_parts_covered = CHEST | VITALS | LEGS
+	icon_state = "bronzecuirass"
+	armor = ARMOR_BRIGANDINE
+	melt_amount = 150
+	melting_material = /datum/material/bronze
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_SCALE
+	armor_class = AC_MEDIUM
+	boobed = FALSE
+
+/obj/item/clothing/armor/plate/bronze/light
+	name = "bronze cardiophylax"
+	desc = "A thick bronze plate, meticulously sculpted to fit its wearer's physique and guard their heart from all that'd seek to strike it. Unfortunately, it does little to riposte more emotional blows."
+	icon_state = "bronzeprotector"
+	item_state = "bronzeprotector"
+	body_parts_covered = CHEST | VITALS
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_SCALE //250 INT, or a little above Iron - and +100 INT over the Copper variant.
+	armor_class = AC_LIGHT
+	armor = ARMOR_BRIGANDINE

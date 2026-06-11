@@ -50,12 +50,17 @@
 		for(var/datum/injury/injury as anything in target.all_injuries)
 			if(brute && burn)
 				break
-			if(injury.damage_type in list(WOUND_BLUNT, WOUND_INTERNAL_BRUISE, WOUND_LASH))
-				brute = TRUE
+			if(injury.required_status != BODYPART_ORGANIC)
 				continue
-			if(injury.damage_type == WOUND_BURN)
+			if(!injury.can_heal())
+				continue
+			if(injury.is_surgical())
+				continue
+			if(injury.damage_type & FIRE_WOUND_TYPES)
 				burn = TRUE
-				continue
+			else if(injury.damage_type & BRUTE_WOUND_TYPES)
+				brute = TRUE
+
 		if(!((brutehealing && brute) || (burnhealing && burn)))
 			return FALSE
 
@@ -92,10 +97,26 @@
 		tmsg += " as best as they can while [target] has clothing on"
 	if(iscarbon(target))
 		for(var/datum/injury/injury as anything in target.all_injuries)
-			if(urhealedamt_burn && injury.damage_type == WOUND_BURN && injury.required_status == BODYPART_ORGANIC)
+			if(!urhealedamt_burn && !urhealedamt_brute)
+				break
+			if(injury.required_status != BODYPART_ORGANIC)
+				continue
+			if(!injury.can_heal())
+				continue
+			if(injury.is_surgical())
+				continue
+
+			if(injury.damage_type & FIRE_WOUND_TYPES)
 				urhealedamt_burn = injury.heal_damage(urhealedamt_burn)
-			if(urhealedamt_brute && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)) && injury.required_status == BODYPART_ORGANIC)
+			else if(injury.damage_type & BRUTE_WOUND_TYPES)
 				urhealedamt_brute = injury.heal_damage(urhealedamt_brute)
+
+		var/update_overlays = FALSE
+		for(var/obj/item/bodypart/bodypart as anything in target.bodyparts)
+			update_overlays |= bodypart.post_damage_change(FALSE)
+		if(update_overlays)
+			target.update_damage_overlays()
+		target.updatehealth()
 	else
 		target.heal_bodypart_damage(urhealedamt_brute, urhealedamt_burn, required_status = BODYPART_ORGANIC)
 	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)

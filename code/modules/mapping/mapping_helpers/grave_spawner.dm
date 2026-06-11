@@ -157,11 +157,12 @@
 /// HEAVILY effected by `decor_quality` to determine tier of 'loot'
 /obj/effect/mapping_helpers/structure/grave_spawner/proc/generate_loot()
 	// This will be (maybe) expanded in future, for now we will just generate a john doe with different clothes depending on tier (decor_quality)
-	generate_body()
+	var/body_container = generate_body()
 
-	return list(to_be_interred)
+	return list(body_container)
 
 /// Called by `generate_loot()`, handles spawning and clothing a mob to update `to_be_interred`
+/// Returns body or container with body inside
 /obj/effect/mapping_helpers/structure/grave_spawner/proc/generate_body()
 	// This will (maybe) be expanded to have different species. For now we will just spawn a human and an outfit.
 	var/mob/living/carbon/human/body = new /mob/living/carbon/human/species/human/northern(loc)
@@ -186,6 +187,25 @@
 	body.equipOutfit(pickweight(outfit_choices))
 
 	to_be_interred = body
+
+	var/body_container = to_be_interred
+	// Determine if body is to be contained within something (sheet, coffin)
+	if((decor_quality == 1 && prob(35)) || (decor_quality == 2 && prob(50))) // Sheet
+		var/obj/structure/closet/burial_shroud/bag = new /obj/structure/closet/burial_shroud(loc)
+		bag.contents = list(to_be_interred)
+		body_container = bag
+	else if(decor_quality >= 2)
+		// Spawn coffin and shove body in there
+		var/obj/structure/closet/crate/coffin/coffin = new /obj/structure/closet/crate/coffin(loc)
+		coffin.contents = list(to_be_interred)
+		if((decor_quality >= 3 && prob(50)) || (decor_quality == 2 && prob(10)))
+			// seal the coffin
+			coffin.sealed = TRUE
+			coffin.consecrated = TRUE
+			coffin.icon_state = "casketconsecrated"
+		body_container = coffin
+
+	return body_container
 
 // Subtypes for grave_spawner
 // If we want specific dieties, make new helpers!

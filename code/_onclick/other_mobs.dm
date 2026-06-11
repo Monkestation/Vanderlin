@@ -225,7 +225,7 @@
 				open_wound.werewolf_infect_attempt()
 				if(prob(30))
 					H.werewolf_feed(src)
-		if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
+		if(IS_DEADITE(user) && !IS_DEADITE(src))
 			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 
 

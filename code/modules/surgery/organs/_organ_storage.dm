@@ -343,7 +343,7 @@
 			update_insides()
 			return
 		var/mob/living/carbon/carbon_parent = parent
-		if(!carbon_parent.IsUnconscious() && (carbon_parent.get_chem_effect(CE_PAINKILLER) < 50))
+		if(!carbon_parent.IsUnconscious() && (carbon_parent.get_chem_effect(CE_PAINKILLER) < 30))
 			carbon_parent.emote("scream")
 			/*
 			if(!CHECK_BITFIELD(O.organ_flags, ORGAN_CUT_AWAY))

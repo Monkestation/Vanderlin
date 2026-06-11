@@ -56,7 +56,7 @@
 	if(!istype(turf))
 		return
 
-	if(source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED) || CHECK_MOVE_LOOP_FLAGS(source, MOVEMENT_LOOP_OUTSIDE_CONTROL))
+	if(source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED) || (CHECK_MOVE_LOOP_FLAGS(source, MOVEMENT_LOOP_OUTSIDE_CONTROL) && !turf.force_footstep_sound))
 		return
 
 	if(source.body_position == LYING_DOWN) //play crawling sound if we're lying
@@ -76,7 +76,7 @@
 		steps_for_living[source] = 0
 		steps = 0
 
-	if(steps % 2 && !turf.force_footstep_sound)
+	if(steps % 2)
 		return
 
 	var/list/footstep_data = list(

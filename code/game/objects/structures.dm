@@ -179,3 +179,20 @@
 		crumpled_mob.Stun(1)
 		crumpled_mob.AdjustKnockdown(levels * 20)
 		crumpled_mob.take_overall_damage(impact_damage, damage_type = BCLASS_BLUNT)
+
+/obj/structure/proc/try_fetch_special_item(mob/user)
+	if(!user.mind && isliving(user))
+		return FALSE
+
+	if(!length(user.mind.special_items))
+		return FALSE
+	var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
+	if(item)
+		if(user.Adjacent(src))
+			if(user.mind.special_items[item])
+				var/path2item = user.mind.special_items[item]
+				user.mind.special_items -= item
+				var/obj/item/I = new path2item(user.loc)
+				apply_item_colors(I, user.mind)
+				user.put_in_hands(I)
+	return TRUE
