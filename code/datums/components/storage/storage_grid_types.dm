@@ -45,8 +45,9 @@
 	screen_max_columns = 1
 
 /datum/component/storage/concrete/grid/coin_pouch/book/hollow
-	screen_max_rows = 1
-	screen_max_columns = 3
+	max_items = 1
+	max_w_class = WEIGHT_CLASS_BULKY
+	quickdraw = TRUE
 
 /datum/component/storage/concrete/grid/keyring
 	screen_max_rows = 2
