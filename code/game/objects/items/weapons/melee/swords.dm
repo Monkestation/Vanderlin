@@ -96,7 +96,7 @@
 /obj/item/weapon/sword/short/silver
 
 	name = "silver short sword"
-	desc = "A short silver sword, for those who fight the creatures of the nite"
+	desc = "A short silver sword, for those who fight the creatures of the nite."
 	icon_state = "silverswordshort"
 	force = DAMAGE_SHORTSWORD + 2
 	wdefense = GOOD_PARRY
@@ -271,7 +271,7 @@
 
 /obj/item/weapon/sword/sabre/stalker
 	name = "stalker sabre"
-	desc = "A once elegant blade of mythril, diminishing under the suns gaze"
+	desc = "A once elegant blade of mythril, diminishing under the suns gaze."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spidersaber"
 	possible_item_intents = list(SWORD_CUT, SHORT_THRUST)
@@ -642,7 +642,7 @@
 
 /obj/item/weapon/sword/rapier/caneblade
 	name = "cane blade"
-	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing."
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "caneblade"
 	sellprice = 100 //Gold handle
@@ -1389,7 +1389,7 @@
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab
 
 	name = "\proper volfslayer"
-	desc = "A great slab of a silver sword, its previous wielder was said to have slain a wolfman in a single blow, bisecting the beast"
+	desc = "A great slab of a silver sword, its previous wielder was said to have slain a wolfman in a single blow, bisecting the beast."
 	icon_state = "machaslayer"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
 	max_blade_int = INTEGRITY_STRONG + 50
@@ -1436,7 +1436,7 @@
 
 /obj/item/weapon/sword/long/exe/silver
 	name = "silver executioner's sword"
-	desc = "An executioner's sword made of silver, best used against beastst of the nite, to put them to rest."
+	desc = "An executioner's sword made of silver, best used against beasts of the nite, to put them to rest."
 	icon_state = "silverexealt"
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)

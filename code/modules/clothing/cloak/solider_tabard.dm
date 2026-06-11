@@ -113,6 +113,7 @@
 
 /obj/item/clothing/cloak/stabard/mercenary
 	detail_tag = "_quad"
+	detail_color = #000000
 
 /obj/item/clothing/cloak/stabard/mercenary/Initialize()
 	. = ..()

@@ -330,7 +330,7 @@
 //................ Copper Hatchet ............... //
 /obj/item/weapon/axe/copper
 	name = "copper hatchet"
-	desc = "A simple designed handaxe, an outdated weaponry from simpler times."
+	desc = "A simple designed handaxe, an outdated weapon from simpler times."
 	icon_state = "chatchet"
 	force = DAMAGE_BAD_AXE
 	force_wielded = DAMAGE_BAD_AXE_WIELD
@@ -361,7 +361,7 @@
 //................ Bone Axe ............... //
 /obj/item/weapon/axe/boneaxe
 	name = "bone axe"
-	desc = "A rough axe made of bones"
+	desc = "A rough axe made of bones."
 	icon_state = "boneaxe"
 	force = DAMAGE_BAD_AXE
 	force_wielded =	DAMAGE_BAD_AXE_WIELD
@@ -416,7 +416,7 @@
 //................ Great Axe ............... //
 /obj/item/weapon/greataxe
 	name = "greataxe"
-	desc = "An iron great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure.."
+	desc = "An iron great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "igreataxe"
 	force = DAMAGE_AXE
@@ -465,7 +465,7 @@
 
 /obj/item/weapon/greataxe/psy
 	name = "psydonic poleaxe"
-	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders have shifted their focus towards arming their paladins with longer-lasting greatweapons."
+	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords has become more apparent, the Psydonic Orders have shifted their focus towards arming their paladins with longer-lasting greatweapons."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.
@@ -508,7 +508,7 @@
 
 /obj/item/weapon/greataxe/steel/slayeraxe
 	name = "dragonslayer axe"
-	desc = "A mighty axe made of heavy, durable metal. The head alone is as big as a man, used to cleave headfs from beasts and men alike"
+	desc = "A mighty axe made of heavy, durable metal. The head alone is as big as a man, used to cleave heads from beasts and men alike."
 	icon_state = "oath"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, POLEARM_BASH)
