@@ -362,28 +362,35 @@
 			if(C.reagent_check(R) != TRUE)
 				if(liverless && !R.self_consuming) //need to be metabolized
 					continue
+
+				if(!R.liver_chemical || R.self_consuming)
+					efficiency = 100
+
 				if(!R.metabolizing)
 					R.metabolizing = TRUE
 					R.on_mob_metabolize(C)
+
 				if(can_overdose)
 					if(R.overdose_threshold)
 						if(R.volume >= R.overdose_threshold && !R.overdosed)
 							R.overdosed = 1
 							need_mob_update += R.overdose_start(C)
 							log_game("[key_name(C)] has started overdosing on [R.name] at [R.volume] units.")
+
 					if(R.addiction_threshold)
 						if(R.volume >= R.addiction_threshold && !is_type_in_list(R, cached_addictions))
 							var/datum/reagent/new_reagent = new R.type()
 							cached_addictions.Add(new_reagent)
 							log_game("[key_name(C)] has become addicted to [R.name] at [R.volume] units.")
+
 					if(R.overdosed)
-						need_mob_update += R.overdose_process(C)
+						need_mob_update += R.overdose_process(C, efficiency / 100, seconds_per_tick)
+
 					if(is_type_in_list(R,cached_addictions))
 						for(var/datum/reagent/A as anything in cached_addictions)
 							if(istype(R, A))
 								A.addiction_stage = -15 // you're satisfied for a good while.
-				if(!R.liver_chemical)
-					efficiency = 100
+
 				need_mob_update += R.on_mob_life(C, efficiency / 100, seconds_per_tick)
 
 	if(can_overdose)

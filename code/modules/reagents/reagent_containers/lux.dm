@@ -17,11 +17,13 @@
 	overdose_threshold = 10
 	metabolization_rate = 0.1
 
-/datum/reagent/lux/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25*REM)
-	M.adjustFireLoss(0.25*REM, 0)
-	..()
-	. = 1
+/datum/reagent/lux/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.125 * REAGENTS_MODIFIER)
+	M.adjustFireLoss(0.125 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/lux/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
@@ -154,11 +156,13 @@
 	overdose_threshold = 5
 	metabolization_rate = 0.1
 
-/datum/reagent/lux_tainted/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.5*REM)
-	M.adjustFireLoss(0.5*REM, 0)
-	..()
-	. = 1
+/datum/reagent/lux_tainted/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25 * REAGENTS_MODIFIER)
+	M.adjustFireLoss(0.25 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()

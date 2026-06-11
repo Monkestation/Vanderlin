@@ -389,9 +389,9 @@
 	M.adjust_drowsiness_up_to(2 SECONDS * REAGENTS_MODIFIER, sleep_power)
 	M.adjust_stamina(0.4 * REAGENTS_MODIFIER)
 
-/datum/reagent/medicine/herbal/valeriana_draught/overdose_process(mob/living/M)
+/datum/reagent/medicine/herbal/valeriana_draught/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.Unconscious(6 SECONDS)
+	M.Unconscious(1.2 SECONDS * REAGENTS_MODIFIER)
 
 // Stamina and Vigor Buffs
 
@@ -447,11 +447,14 @@
 	affected_bodypart.add_pain(-amount_to_transfer * 0.3)
 	return FALSE
 
-/datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.5)
-	if(prob(5))
-		to_chat(M, span_warning("You feel numbness spreading through your body..."))
+/datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+	if(SPT_PROB(2.5, seconds_per_tick))
+		to_chat(M, span_warning("You feel numbness spreading through your body..."))
+
+	M.adjustToxLoss(0.1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 // Multi-Herb Healing
 
@@ -588,18 +591,24 @@
 	. = ..()
 
 	M.adjustToxLoss(0.6 * REAGENTS_MODIFIER)
+
 	if(prob(20))
 		M.set_eye_blur_if_lower(1 SECONDS * REAGENTS_MODIFIER)
 		M.set_confusion_if_lower(0.5 SECONDS * REAGENTS_MODIFIER)
 
 	return TRUE
 
-/datum/reagent/poison/herbal/atropa_concentrate/overdose_process(mob/living/carbon/M)
-	M.adjustToxLoss(5)
-	M.vomit()
-	if(prob(10))
-		M.Unconscious(30)
+/datum/reagent/poison/herbal/atropa_concentrate/overdose_process(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustToxLoss(1 * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(4, seconds_per_tick))
+		M.Unconscious(0.6 SECONDS * REAGENTS_MODIFIER)
+	if(SPT_PROB(8, seconds_per_tick))
+		M.vomit()
+
+	return TRUE
 
 /datum/reagent/poison/herbal/swamp_miasma
 	name = "Swamp Miasma"

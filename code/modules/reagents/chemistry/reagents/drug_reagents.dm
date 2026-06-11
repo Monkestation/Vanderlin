@@ -53,10 +53,13 @@
 	. = ..()
 	to_chat(M, "<span class='danger'>I start tripping hard!</span>")
 
-/datum/reagent/drug/space_drugs/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.1*REM, 0)
-	M.adjustOxyLoss(1.1*REM, 0)
-	..()
+/datum/reagent/drug/space_drugs/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustToxLoss(0.05 * REAGENTS_MODIFIER)
+	M.adjustOxyLoss(0.6 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/drug/nicotine
 	name = "Nicotine"
@@ -81,11 +84,13 @@
 	if(M.has_quirk(/datum/quirk/vice/smoker))
 		M.sate_addiction(/datum/quirk/vice/smoker)
 
-/datum/reagent/drug/nicotine/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.1*REM, 0)
-	M.adjustOxyLoss(1.1*REM, 0)
-	..()
-	. = 1
+/datum/reagent/drug/nicotine/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustToxLoss(0.05 * REAGENTS_MODIFIER)
+	M.adjustOxyLoss(0.6 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/drug/hallucinogen
 	name = "Hallucinogen"
@@ -158,7 +163,7 @@
 	game_plane_master_controller.remove_filter("rainbow")
 	game_plane_master_controller.remove_filter("psilocybin_wave")
 
-/datum/reagent/drug/hallucinogen/overdose_process(mob/living/psychonaut, seconds_per_tick, metabolization_ratio)
+/datum/reagent/drug/hallucinogen/overdose_process(mob/living/psychonaut, efficiency, seconds_per_tick)
 	. = ..()
 	if(SPT_PROB(10, seconds_per_tick))
 		psychonaut.emote(pick("twitch","drool","moan"))

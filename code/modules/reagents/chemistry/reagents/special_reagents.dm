@@ -45,19 +45,26 @@
 
 	return TRUE
 
-/datum/reagent/drug/methamphetamine/overdose_process(mob/living/affected_mob)
-	if(!HAS_TRAIT(affected_mob, TRAIT_IMMOBILIZED) && !ismovable(affected_mob.loc))
-		for(var/i in 1 to round(4 * REM, 1))
-			step(affected_mob, pick(GLOB.cardinals))
-	if(prob(10))
+/datum/reagent/drug/methamphetamine/overdose_process(mob/living/affected_mob, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(SPT_PROB(5, seconds_per_tick))
+		SSmove_manager.move_rand(affected_mob)
+
+	if(SPT_PROB(5, seconds_per_tick))
 		affected_mob.emote("laugh")
-	if(prob(18))
-		affected_mob.visible_message(span_danger("[affected_mob]'s hands flip out and flail everywhere!"))
+
+	if(SPT_PROB(9, seconds_per_tick))
+		affected_mob.visible_message(
+			span_danger("[affected_mob]'s hands flip out and flail everywhere!"),
+			span_userdanger("My hands flail everywhere!"),
+		)
 		affected_mob.drop_all_held_items()
-	..()
-	affected_mob.adjustToxLoss(1 * REM, FALSE)
-	affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, (rand(5, 10) / 10) * REM)
-	. = TRUE
+
+	affected_mob.adjustToxLoss(0.5 * REAGENTS_MODIFIER, FALSE)
+	affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, (rand(2.5, 5) / 10) * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/drug/phlogiston_elasticum
 	name = "Phlogiston Elasticum"

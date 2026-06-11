@@ -173,10 +173,13 @@
 	if(affected_mob.client)
 		affected_mob.refresh_looping_ambience()
 
-/datum/reagent/druqks/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.25*REM)
-	M.adjustToxLoss(0.25*REM, 0)
+/datum/reagent/druqks/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.125 * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.125 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/druqks/overdose_start(mob/living/M)
 	M.visible_message(span_warning("Blood runs from [M]'s nose."))
@@ -216,9 +219,12 @@
 
 	M.apply_status_effect(/datum/status_effect/buff/ozium)
 
-/datum/reagent/ozium/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.25*REM, 0)
+/datum/reagent/ozium/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustToxLoss(0.125 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/ozium/overdose_start(mob/living/M)
 	M.playsound_local(get_turf(M), 'sound/misc/heroin_rush.ogg', 100, FALSE)
@@ -265,9 +271,10 @@
 
 	M.apply_status_effect(/datum/status_effect/buff/moondust)
 
-/datum/reagent/moondust/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
+/datum/reagent/moondust/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.125 * REAGENTS_MODIFIER)
 
 /datum/reagent/moondust/overdose_start(mob/living/M)
 	M.playsound_local(get_turf(M), 'sound/misc/heroin_rush.ogg', 100, FALSE)
@@ -316,9 +323,10 @@
 
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
 
-/datum/reagent/moondust_purest/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
+/datum/reagent/moondust_purest/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.125 * REAGENTS_MODIFIER)
 
 /datum/reagent/moondust_purest/overdose_start(mob/living/M)
 	M.playsound_local(get_turf(M), 'sound/misc/heroin_rush.ogg', 100, FALSE)

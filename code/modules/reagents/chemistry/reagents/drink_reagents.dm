@@ -31,9 +31,9 @@
 	glass_name = "glass of coffee"
 	glass_desc = ""
 
-/datum/reagent/consumable/coffee/overdose_process(mob/living/M)
-	M.adjust_jitter(5 SECONDS)
-	..()
+/datum/reagent/consumable/coffee/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+	M.adjust_jitter(1 SECONDS * REAGENTS_MODIFIER)
 
 /datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
@@ -42,8 +42,6 @@
 	M.adjust_drowsiness(-1.2 SECONDS * REAGENTS_MODIFIER)
 	M.AdjustSleeping(-0.6 SECONDS * REAGENTS_MODIFIER)
 	M.adjust_bodytemperature(0.4 * REAGENTS_MODIFIER, 0, BODYTEMP_NORMAL)
-
-	return TRUE
 
 /datum/reagent/consumable/ice
 	name = "Ice"
@@ -110,10 +108,12 @@
 	M.adjust_stamina(-1 * REAGENTS_MODIFIER)
 	M.apply_status_effect(/datum/status_effect/buff/vigor)
 
-/datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M)
+/datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.adjust_jitter(4 SECONDS)
-	if(prob(5))
+
+	M.adjust_jitter(0.8 SECONDS * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(2, seconds_per_tick))
 		M.heart_attack()
 
 /datum/reagent/consumable/caffeine/coffee

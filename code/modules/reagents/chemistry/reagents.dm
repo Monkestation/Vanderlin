@@ -212,7 +212,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 // Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
-/datum/reagent/proc/overdose_process(mob/living/M)
+/datum/reagent/proc/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	return
 
 /datum/reagent/proc/overdose_start(mob/living/M)

@@ -185,10 +185,9 @@
 	M.AdjustSleeping(600)
 	. = 1
 
-/datum/reagent/consumable/sugar/overdose_process(mob/living/M)
-	M.AdjustSleeping(40)
-	..()
-	. = 1
+/datum/reagent/consumable/sugar/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+	M.AdjustSleeping(0.8 SECONDS * REAGENTS_MODIFIER)
 
 /datum/reagent/consumable/sugar/molasses
 	name ="Molasses"

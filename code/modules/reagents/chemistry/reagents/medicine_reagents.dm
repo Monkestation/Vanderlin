@@ -51,12 +51,14 @@
 		affected_mob.set_dizzy(2 SECONDS * REAGENTS_MODIFIER)
 		affected_mob.adjust_jitter(2 SECONDS * REAGENTS_MODIFIER)
 
-/datum/reagent/medicine/atropine/overdose_process(mob/living/affected_mob)
-	affected_mob.adjustToxLoss(0.5 * REM, FALSE)
-	. = TRUE
-	affected_mob.set_dizzy(2 SECONDS * REM)
-	affected_mob.adjust_jitter(2 SECONDS * REM)
-	..()
+/datum/reagent/medicine/atropine/overdose_process(mob/living/affected_mob, efficiency, seconds_per_tick)
+	. = ..()
+
+	affected_mob.adjustToxLoss(0.25 * REAGENTS_MODIFIER)
+	affected_mob.set_dizzy(1 SECONDS * REAGENTS_MODIFIER)
+	affected_mob.adjust_jitter(1 SECONDS * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/medicine/ashwarden_brew
 	name = "Ashwarden Brew"
