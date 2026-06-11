@@ -9,6 +9,7 @@
 	var/enchantment_color = COLOR_BLUE_GRAY
 	var/list/essence_recipe = list()
 	var/required_type // Can be a single type or list of types
+	var/list/registered_signals = list()
 
 /datum/enchantment/New()
 	. = ..()
@@ -47,15 +48,16 @@
 	if(!item)
 		return
 
+	registered_signals += COMSIG_ATOM_EXAMINE
 	RegisterSignal(item, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/enchantment/proc/unregister_triggers()
 	SHOULD_CALL_PARENT(TRUE)
 
-	if(!enchanted_item)
+	if(!enchanted_item || !length(registered_signals))
 		return
 
-	UnregisterSignal(enchanted_item, COMSIG_ATOM_EXAMINE)
+	UnregisterSignal(enchanted_item, registered_signals)
 
 /datum/enchantment/proc/remove_item(atom/item)
 	if(!item || item != enchanted_item)
