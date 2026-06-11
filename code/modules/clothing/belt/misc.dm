@@ -619,3 +619,90 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
+
+//////////////////////////////////////////
+
+/obj/item/storage/hip/orebag
+	name = "ore bag"
+	desc = "a bag designed to help miners quickly sort and store ore, minerals, and gems"
+	icon = 'icons/roguetown/clothing/storage.dmi'
+	icon_state = "minebag"
+	item_state = "minebag"
+	slot_flags = ITEM_SLOT_HIP| ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_NORMAL
+	dropshrink = 0.7
+	max_integrity = 400
+	equip_sound = 'sound/blank.ogg'
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 2
+	salvage_result = /obj/item/natural/hide/cured
+	component_type = /datum/component/storage/concrete/grid/orebag
+	var/current_choice_index = 1
+	var/static/list/filter_options = list(
+	list(/obj/item/ore, /obj/item/gem, /obj/item/reagent_containers/powder/salt, /obj/item/mana_battery/mana_crystal/standard),
+	list(/obj/item/ore),
+	)
+
+/obj/item/storage/hip/orebag/equipped(mob/user, slot)
+	. = ..()
+	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_user_moved), TRUE)
+
+/obj/item/storage/hip/orebag/dropped(mob/user)
+	. = ..()
+	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
+
+/obj/item/storage/hip/orebag/proc/on_user_moved(mob/living/user)
+	SIGNAL_HANDLER
+	var/picked_up = FALSE
+	if(user.incapacitated() || !user.canUseStorage())
+		return
+
+
+	var/turf/orebagturf = get_turf(user)
+	if(!orebagturf)
+		return
+
+
+	var/datum/component/storage/orebagstorage = GetComponent(/datum/component/storage)
+	if(!orebagstorage)
+		return
+
+	for(var/obj/item/orebagitem in orebagturf)
+		if(orebagstorage.can_be_inserted(orebagitem, TRUE, user))
+			orebagstorage.handle_item_insertion(orebagitem, TRUE, user)
+			picked_up = TRUE
+	if(picked_up)
+		user.visible_message(span_info("[user] picks up the ore beneath them, placing it into the ore bag..."))
+////
+/obj/item/storage/hip/orebag/examine(mob/user)
+	. = ..()
+	var/str = "The bag is set to collect: "
+	switch(current_choice_index)
+		if(1)
+			str += "Everything"
+		if(2)
+			str += "Ore Only"
+	. += span_notice(str)
+
+/obj/item/storage/hip/orebag/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("Walking over or clicking on the tiles with selected items will automatically scoop them into the bag.")
+	. += span_notice("Alt+Left Clicking the bag will toggle between all mining drops, or just ores.")
+
+/obj/item/storage/hip/orebag/AltClick(mob/user, list/modifiers)
+	. = ..()
+	if(current_choice_index < length(filter_options))
+		current_choice_index++
+	else
+		current_choice_index = 1
+	var/list/filters = filter_options[current_choice_index]
+	var/datum/component/storage/concrete/grid/orebag/orestorage = GetComponent(/datum/component/storage/concrete/grid/orebag)
+	if(orestorage)
+		orestorage.set_holdable(filters)
+	var/str = "\The [src] will now collect: "
+	switch(current_choice_index)
+		if(1)
+			str += "Everything"
+		if(2)
+			str += "Ore Only"
+	to_chat(user, span_notice(str))

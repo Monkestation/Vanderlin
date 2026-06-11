@@ -71,4 +71,5 @@
 	belt = /obj/item/storage/belt/leather
 	neck = /obj/item/storage/belt/pouch/coins/mid
 	beltl = /obj/item/weapon/pick
+	beltr = /obj/item/storage/hip/orebag
 	backl = /obj/item/storage/backpack/backpack
