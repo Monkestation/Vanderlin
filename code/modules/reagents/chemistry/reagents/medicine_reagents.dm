@@ -207,7 +207,7 @@
 		if(!(injury.damage_type & FIRE_WOUND_TYPES))
 			continue
 		injury.adjust_germ_level(-2 * REM * seconds_per_tick)
-		injury.heal_damage(0.6 *  * REM * seconds_per_tick)
+		injury.heal_damage(0.6 * REM * seconds_per_tick)
 
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
