@@ -42,10 +42,10 @@
 //................ Repenta En ............... //
 /obj/item/weapon/whip/antique
 	name = "\proper repenta en"
-	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
+	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle."
 	icon_state = "gwhip"
 	force = DAMAGE_WHIP + 4
-	minstr = 7
+	minstr = 4 // Why was this needing 7 STR
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel_slag
 	max_integrity = INTEGRITY_STRONG
@@ -55,7 +55,7 @@
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
 	name = "silver whip"
-	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on Nitebeasts."
+	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on nitebeasts."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip_lesser"
 	force = DAMAGE_WHIP + 2

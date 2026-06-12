@@ -107,6 +107,8 @@
 	icon = 'icons/roguetown/clothing/special/crusader.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	detail_tag = null
+	detail_color = null
 
 /obj/item/clothing/cloak/stabard/crusader/t
 	name = "surcoat of the silver order"

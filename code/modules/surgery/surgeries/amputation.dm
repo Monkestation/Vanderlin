@@ -14,7 +14,7 @@
 		BODY_ZONE_R_LEG,
 		BODY_ZONE_L_LEG,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 
 /datum/surgery_step/amputate
 	name = "Amputate"
@@ -31,7 +31,7 @@
 		BODY_ZONE_R_LEG,
 		BODY_ZONE_L_LEG,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	minimum_time = 5.4 SECONDS
 	maximum_time = 7.4 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_BROKEN

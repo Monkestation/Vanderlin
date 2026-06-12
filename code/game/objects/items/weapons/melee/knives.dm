@@ -186,7 +186,7 @@
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
 	throwforce = DAMAGE_KNIFE + 6
-	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
+	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
@@ -328,7 +328,7 @@
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "\proper apathy"
-	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
+	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
 	item_weight = 220 GRAMS
