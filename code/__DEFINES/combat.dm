@@ -204,6 +204,7 @@
 #define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
 #define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
 #define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+#define GREATAXE_CLEAVE	    /datum/intent/axe/chop/greataxe/slayer
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear

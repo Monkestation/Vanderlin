@@ -100,7 +100,9 @@
 		cavity_items -= item
 
 	if(istype(location))
+		var/attack_direction = pick(GLOB.alldirs)
 		C.add_splatter_floor(location)
+		C.add_splatter_wall(force = 2, spill_amount = 3, splatter_direction = attack_direction) //Garunteed at least 2 tile distance of blood spattering on the walls, and up to 3 walls to splat.
 	var/direction = pick(GLOB.cardinals)
 	var/t_range = rand(2,max(throw_range/2, 2))
 	var/turf/target_turf = get_turf(src)
