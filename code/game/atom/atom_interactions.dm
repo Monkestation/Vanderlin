@@ -174,7 +174,7 @@
  * Return NONE to allow default interaction / tool handling.
  */
 /obj/item/proc/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
-	return interact_with_atom(interacting_with, user)
+	return interact_with_atom(interacting_with, user, modifiers)
 
 /*
  * Tool-specific behavior procs.

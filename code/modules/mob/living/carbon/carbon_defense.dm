@@ -188,16 +188,6 @@
 			used_limb = affecting.body_zone
 	return used_limb
 
-/mob/living/carbon/attack_hand_secondary(mob/user, list/modifiers)
-	if(ishuman(user) && istype(user.rmb_intent, /datum/rmb_intent/weak))
-		var/mob/living/carbon/human/human_user = user
-		if(human_user.zone_selected in list(BODY_ZONE_PRECISE_NECK, \
-									BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, \
-									BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND))
-			check_pulse(user)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	return ..()
-
 /// Checks which arm is grabbed using index. Returns the found grabbing item.
 /mob/proc/check_arm_grabbed(index)
 	return

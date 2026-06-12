@@ -484,17 +484,18 @@ All foods are distributed among various categories. Use common sense.
 		if(!plate_check)
 			if(HAS_TRAIT(eater, TRAIT_NOBLE_BLOOD))
 				eater.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
-		else if(plate_check.dirty)
-			eater.add_stress(/datum/stress_event/dirty_platter)
-		else if(faretype != FARE_LAVISH && !plate_check.dirty)
-			faretype += 1
-		plate_check.fork_usages +=1
-		if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
-			plate_check.dirty = TRUE
-			var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
-			if(particle_spewer)
-				qdel(particle_spewer)
-			plate_check.update_appearance(UPDATE_OVERLAYS)
+		else
+			if(plate_check.dirty)
+				eater.add_stress(/datum/stress_event/dirty_platter)
+			else if(faretype != FARE_LAVISH)
+				faretype += 1
+			plate_check.fork_usages +=1
+			if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
+				plate_check.dirty = TRUE
+				var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
+				if(particle_spewer)
+					qdel(particle_spewer)
+				plate_check.update_appearance(UPDATE_OVERLAYS)
 
 	if(eater == user)
 		switch(eater.nutrition)
@@ -506,27 +507,27 @@ All foods are distributed among various categories. Use common sense.
 				user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
 				eater.changeNext_move(CLICK_CD_MELEE * 0.5)
 	else
-		if(!isbrain(eater))
-			if(eater.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
-				eater.visible_message("<span class='warning'>[user] cannot force any more of [src] down [eater]'s throat!</span>", \
-									"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
-				return FALSE
-			else
-				eater.visible_message("<span class='danger'>[user] tries to feed [eater] [src].</span>", \
-									"<span class='danger'>[user] tries to feed me [src].</span>")
-			if(iscarbon(eater))
-				var/mob/living/carbon/C = eater
-				var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
-				if(C.cmode)
-					if(!CH.grabbedby)
-						to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
-						return FALSE
-			if(!do_after(user, 3 SECONDS, eater))
-				return
-			log_combat(user, eater, "fed", reagents.log_list())
-		else
+		if(isbrain(eater))
 			to_chat(user, "<span class='warning'>[eater] doesn't seem to have a mouth!</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
+
+		if(eater.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
+			eater.visible_message("<span class='warning'>[user] cannot force any more of [src] down [eater]'s throat!</span>", \
+								"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
+			return ITEM_INTERACT_BLOCKING
+		else
+			eater.visible_message("<span class='danger'>[user] tries to feed [eater] [src].</span>", \
+								"<span class='danger'>[user] tries to feed me [src].</span>")
+		if(iscarbon(eater))
+			var/mob/living/carbon/C = eater
+			var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
+			if(C.cmode)
+				if(!CH.grabbedby)
+					to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
+					return ITEM_INTERACT_BLOCKING
+		if(!do_after(user, 3 SECONDS, eater))
+			return ITEM_INTERACT_BLOCKING
+		log_combat(user, eater, "fed", reagents.log_list())
 
 	if(!reagents?.total_volume)
 		if(eater.satiety > -200)
@@ -547,12 +548,12 @@ All foods are distributed among various categories. Use common sense.
 
 	if(jaw_efficiency <= LIMB_EFFICIENCY_DISABLING)
 		to_chat(user, span_warning("[eater == user ? "Your" : "[eater]'s"] jaw disabled and can't bite!"))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
 
 	if(jaw_efficiency < LIMB_EFFICIENCY_OPTIMAL)
 		var/chew_time = lerp(3 SECONDS, 1 SECONDS, jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL)
 		if(!do_after(eater == user ? user : eater, chew_time, eater))
-			return FALSE
+			return ITEM_INTERACT_BLOCKING
 
 	if(eater.satiety > -200)
 		eater.satiety -= junkiness

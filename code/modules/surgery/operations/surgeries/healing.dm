@@ -192,13 +192,13 @@
 	var/skill_modifier = 1.0
 	switch(GET_MOB_SKILL_VALUE_OLD(surgeon, skill_used))
 		if(SKILL_LEVEL_JOURNEYMAN)
-			healing_multiplier = 1.1
+			skill_modifier = 1.1
 		if(SKILL_LEVEL_EXPERT)
-			healing_multiplier = 1.3
+			skill_modifier = 1.3
 		if(SKILL_LEVEL_MASTER)
-			healing_multiplier = 1.4
+			skill_modifier = 1.4
 		if(SKILL_LEVEL_LEGENDARY)
-			healing_multiplier = 1.5
+			skill_modifier = 1.5
 
 	var/brute_multiplier = operation_args[OPERATION_BRUTE_MULTIPLIER] * dead_multiplier * accessibility_modifier * skill_modifier
 	var/burn_multiplier = operation_args[OPERATION_BURN_MULTIPLIER] * dead_multiplier * accessibility_modifier * skill_modifier
@@ -213,8 +213,8 @@
 		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
 			if(injury.required_status != BODYPART_ORGANIC)
 				continue
-			if(injury.damage_type == WOUND_BURN)
-				injury.heal_damage(brute_healed)
+			if(burn_healed && injury.damage_type == WOUND_BURN)
+				injury.heal_damage(burn_healed)
 			if(brute_healed && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)))
 				injury.heal_damage(brute_healed)
 

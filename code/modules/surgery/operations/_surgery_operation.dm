@@ -560,7 +560,7 @@
 				dice_sides = dice_sides,
 			)
 
-		var/was_critical = (roll_result == DICE_CRIT_FAILURE) || (roll_result = DICE_CRIT_SUCCESS)
+		var/was_critical = (roll_result == DICE_CRIT_FAILURE) || (roll_result == DICE_CRIT_SUCCESS)
 
 		switch(roll_result)
 			if(DICE_FAILURE, DICE_CRIT_FAILURE)
