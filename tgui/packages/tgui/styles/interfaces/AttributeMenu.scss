@@ -85,9 +85,11 @@
   min-width: 0;
   min-height: 0;
   height: 100%;
+  margin: 0;
   padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
+  scrollbar-color: auto;
   background:
     var(--rb-parchment-texture),
     linear-gradient(180deg, var(--rb-parchment-top), var(--rb-parchment-bottom));
@@ -116,21 +118,51 @@
   border-bottom-right-radius: 7px;
 }
 
-.AttributeMenu__panelHeader {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 auto;
-  min-width: 0;
-}
-
-.AttributeMenu__panelHeader--row {
+.AttributeMenu__panel > .Section__title {
+  position: static;
   display: flex;
   align-items: center;
-  gap: 8px;
   justify-content: space-between;
+  gap: 8px;
+  flex: 0 0 auto;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border-bottom: 0;
+}
+
+.AttributeMenu__panel .Section__titleText {
+  display: block;
+  min-width: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.AttributeMenu__panel > .Section__title > .Section__buttons {
+  position: static;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.AttributeMenu__panel > .Section__rest {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.AttributeMenu__panel > .Section__rest > .Section__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  padding: 0;
 }
 
 .AttributeMenu__eyebrow {
+  display: block;
   color: var(--rb-accent);
   font-family: var(--rb-font-ui, Verdana, sans-serif);
   font-size: calc(9px * var(--am-fz));
@@ -140,6 +172,7 @@
 }
 
 .AttributeMenu__title {
+  display: block;
   color: var(--rb-title);
   font-size: calc(22px * var(--am-fz));
   font-weight: bold;
@@ -628,7 +661,9 @@
   right: 8px;
   width: 22px;
   height: 22px;
+  margin: 0;
   padding: 0;
+  text-align: center;
   color: #f3dbad;
   font: bold 14px Verdana, sans-serif;
   line-height: 20px;
@@ -887,6 +922,7 @@
   justify-content: center;
   width: 24px;
   height: 24px;
+  margin: 0;
   padding: 0;
   color: var(--am-ink);
   font-family: Georgia, 'Times New Roman', serif;
@@ -1029,10 +1065,12 @@
   right: 8px;
   width: 22px;
   height: 22px;
+  margin: 0;
   padding: 0;
   color: #d9c3a0;
   font-size: calc(14px * var(--am-fz));
   line-height: 1;
+  text-align: center;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 50%;
@@ -1065,6 +1103,7 @@
 .AttributeMenu__tutorialDot {
   width: 7px;
   height: 7px;
+  margin: 0;
   padding: 0;
   background: var(--am-ink-faint);
   border: 0;
@@ -1073,6 +1112,7 @@
   transition: background 120ms ease, transform 120ms ease;
 
   &:hover {
+    background: var(--am-ink-faint);
     transform: scale(1.18);
   }
 
@@ -1093,10 +1133,13 @@
 
 .AttributeMenu__tutorialNav {
   min-width: 70px;
+  margin: 0;
   padding: 4px 12px;
   color: var(--am-ink);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: calc(13px * var(--am-fz));
+  line-height: normal;
+  text-align: center;
   background: linear-gradient(180deg, var(--am-parchment-light), var(--am-parchment));
   border: 1px solid var(--am-ink-soft);
   border-radius: 2px;

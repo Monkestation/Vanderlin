@@ -8,7 +8,7 @@ import {
   type CSSProperties,
 } from 'react';
 import { useBackend, useLocalState } from '../backend';
-import { Box, Button, Input, Stack, Tooltip } from 'tgui-core/components';
+import { Box, Button, Input, Section, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
 import { resolveAsset } from '../assets';
 
@@ -225,16 +225,20 @@ const AttributeTutorial = (props: {
             Step {safe + 1} of {TUTORIAL_STEPS.length}
           </Box>
           <Box className="AttributeMenu__tutorialTitle">{current.title}</Box>
-          <Box as="button" className="AttributeMenu__tutorialClose" onClick={close}>
+          <Button
+            color="transparent"
+            className="AttributeMenu__tutorialClose"
+            onClick={close}
+          >
             ✕
-          </Box>
+          </Button>
         </Box>
         <Box className="AttributeMenu__tutorialBody">{current.body}</Box>
         <Box className="AttributeMenu__tutorialDots">
           {TUTORIAL_STEPS.map((_, i) => (
-            <Box
-              as="button"
+            <Button
               key={i}
+              color="transparent"
               className={`AttributeMenu__tutorialDot${i === safe ? ' is-active' : ''}`}
               onClick={() => setStep(i)}
             />
@@ -244,21 +248,21 @@ const AttributeTutorial = (props: {
           {isFirst ? (
             <Box as="span" style={{ minWidth: '70px', display: 'inline-block' }} />
           ) : (
-            <Box
-              as="button"
+            <Button
+              color="transparent"
               className="AttributeMenu__tutorialNav"
               onClick={() => setStep(safe - 1)}
             >
               ← Back
-            </Box>
+            </Button>
           )}
-          <Box
-            as="button"
+          <Button
+            color="transparent"
             className={`AttributeMenu__tutorialNav${isLast ? ' AttributeMenu__tutorialNav--done' : ''}`}
             onClick={isLast ? close : () => setStep(safe + 1)}
           >
             {isLast ? '✓ Done' : 'Next →'}
-          </Box>
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -463,6 +467,10 @@ const AttributeSealNode = memo((props: {
 
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
+      {/* Raw <button> (here and in the other Tooltip-wrapped rows): Tooltip
+          clones its child and injects a ref that must land on a DOM node, and
+          the row needs native button focus/keyboard semantics under a fully
+          bespoke skin that tgui Button's chrome would fight. */}
       <button
         className={nodeClass}
         onClick={() => act('inspect_closely', { attribute_name: stat.name })}
@@ -503,14 +511,26 @@ const CoreAttributes = memo((props: {
   const { stats, selectedName, act, onHelpClick } = props;
 
   return (
-    <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--seals">
-      <Box as="button" className="AttributeMenu__helpButton" onClick={onHelpClick}>
-        ?
-      </Box>
-      <Box as="header" className="AttributeMenu__panelHeader">
-        <Box className="AttributeMenu__eyebrow">Character Seals</Box>
-        <Box className="AttributeMenu__title">Core Attributes</Box>
-      </Box>
+    <Section
+      fill
+      className="AttributeMenu__panel AttributeMenu__panel--seals"
+      title={
+        <>
+          <Box as="span" className="AttributeMenu__eyebrow">Character Seals</Box>
+          <Box as="span" className="AttributeMenu__title">Core Attributes</Box>
+        </>
+      }
+      buttons={
+        <Button
+          color="transparent"
+          className="AttributeMenu__helpButton"
+          onClick={onHelpClick}
+          tooltip="How to read this ledger"
+        >
+          ?
+        </Button>
+      }
+    >
       <Box className="AttributeMenu__divider" />
       <Box className="AttributeMenu__constellation">
         {!stats.length && (
@@ -530,7 +550,7 @@ const CoreAttributes = memo((props: {
           </Box>
         )}
       </Box>
-    </Box>
+    </Section>
   );
 });
 
@@ -652,12 +672,16 @@ const SkillRegister = memo((props: {
   }, [categoriesMeta, skillsValues, showBadSkills, searchText]);
 
   return (
-    <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--register">
-      <Box as="header" className="AttributeMenu__panelHeader AttributeMenu__panelHeader--row">
-        <Box>
-          <Box className="AttributeMenu__eyebrow">Skill Register</Box>
-          <Box className="AttributeMenu__title">Skills Book</Box>
-        </Box>
+    <Section
+      fill
+      className="AttributeMenu__panel AttributeMenu__panel--register"
+      title={
+        <>
+          <Box as="span" className="AttributeMenu__eyebrow">Skill Register</Box>
+          <Box as="span" className="AttributeMenu__title">Skills Book</Box>
+        </>
+      }
+      buttons={
         <Button.Checkbox
           checked={showBadSkills || isSearching}
           onClick={toggleAllSkills}
@@ -665,8 +689,8 @@ const SkillRegister = memo((props: {
         >
           All Skills
         </Button.Checkbox>
-      </Box>
-
+      }
+    >
       <Box className="AttributeMenu__search">
         <Input
           fluid
@@ -683,7 +707,9 @@ const SkillRegister = memo((props: {
           <Box className="AttributeMenu__empty">No matching entries.</Box>
         )}
         {visibleCategories.map((category) => (
-          <Box as="section" className="AttributeMenu__category" key={category.name}>
+          // Raw <section>: a list grouping with a sticky title; the Section
+          // component's title/content wrappers would break the sticky flow.
+          <section className="AttributeMenu__category" key={category.name}>
             <Box className="AttributeMenu__categoryTitle">{category.name}</Box>
             {category.skills.map((skill) => (
               <SkillEntry
@@ -693,10 +719,10 @@ const SkillRegister = memo((props: {
                 act={act}
               />
             ))}
-          </Box>
+          </section>
         ))}
       </Box>
-    </Box>
+    </Section>
   );
 });
 
@@ -706,7 +732,7 @@ const DetailLine = (props: { label: string; value?: string | number | null }) =>
   return (
     <Box className="AttributeMenu__detailLine">
       <Box as="span">{label}</Box>
-      <Box as="strong">{displayValue(value ?? null)}</Box>
+      <strong>{displayValue(value ?? null)}</strong>
     </Box>
   );
 };
@@ -719,37 +745,51 @@ const InspectionPanel = memo((props: {
 
   if (!attribute) {
     return (
-      <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--notes">
-        <Box as="header" className="AttributeMenu__panelHeader">
-          <Box className="AttributeMenu__eyebrow">Marginal Notes</Box>
-          <Box className="AttributeMenu__title">Inspection</Box>
-        </Box>
+      <Section
+        fill
+        className="AttributeMenu__panel AttributeMenu__panel--notes"
+        title={
+          <>
+            <Box as="span" className="AttributeMenu__eyebrow">Marginal Notes</Box>
+            <Box as="span" className="AttributeMenu__title">Inspection</Box>
+          </>
+        }
+      >
         <Box className="AttributeMenu__divider" />
         <Box className="AttributeMenu__placeholder">
           <Box className="AttributeMenu__placeholderMark">Uninspected</Box>
-          <Box as="p">Select a seal or skill entry to read the scribe's notes.</Box>
-          <Box as="p">Values, defaults, modifiers, and governing attributes will appear here.</Box>
+          <p>Select a seal or skill entry to read the scribe's notes.</p>
+          <p>Values, defaults, modifiers, and governing attributes will appear here.</p>
         </Box>
-      </Box>
+      </Section>
     );
   }
 
   return (
-    <Box as="section" className="AttributeMenu__panel AttributeMenu__panel--notes">
-      <Box as="button" className="AttributeMenu__closeNote" onClick={() => act('clear_inspection')}>
-        x
-      </Box>
-
-      <Box as="header" className="AttributeMenu__panelHeader">
-        <Box className="AttributeMenu__eyebrow">Marginal Notes</Box>
-        <Box className="AttributeMenu__title">
-          {attribute.name}
-          {attribute.shorthand && (
-            <Box as="span" className="AttributeMenu__titleShort"> ({attribute.shorthand})</Box>
-          )}
-        </Box>
-      </Box>
-
+    <Section
+      fill
+      className="AttributeMenu__panel AttributeMenu__panel--notes"
+      title={
+        <>
+          <Box as="span" className="AttributeMenu__eyebrow">Marginal Notes</Box>
+          <Box as="span" className="AttributeMenu__title">
+            {attribute.name}
+            {attribute.shorthand && (
+              <Box as="span" className="AttributeMenu__titleShort"> ({attribute.shorthand})</Box>
+            )}
+          </Box>
+        </>
+      }
+      buttons={
+        <Button
+          color="transparent"
+          className="AttributeMenu__closeNote"
+          onClick={() => act('clear_inspection')}
+        >
+          x
+        </Button>
+      }
+    >
       <Box className="AttributeMenu__divider" />
 
       <Box className="AttributeMenu__noteScroll">
@@ -760,17 +800,17 @@ const InspectionPanel = memo((props: {
             </Box>
           </Stack.Item>
           <Stack.Item grow>
-            <Box as="p" className="AttributeMenu__description">
+            <p className="AttributeMenu__description">
               {attribute.desc || 'No description has been written by the scribe.'}
-            </Box>
+            </p>
           </Stack.Item>
         </Stack>
 
         <Box className="AttributeMenu__valueCard">
           <Box as="span">Value</Box>
-          <Box as="strong" className={valueTone(attribute.value, attribute.raw_value)}>
+          <strong className={valueTone(attribute.value, attribute.raw_value)}>
             {displayValue(attribute.value)}
-          </Box>
+          </strong>
         </Box>
 
         <Box className="AttributeMenu__detailGrid">
@@ -779,8 +819,8 @@ const InspectionPanel = memo((props: {
         </Box>
 
         {!!attribute.defaults?.length && (
-          <Box as="section" className="AttributeMenu__noteBlock">
-            <Box as="h3">Defaults To</Box>
+          <section className="AttributeMenu__noteBlock">
+            <h3>Defaults To</h3>
             {attribute.defaults.map((def) => {
               const mod = def.default_value ?? 0;
               const tone = mod >= 0 ? 'is-buffed' : 'is-debuffed';
@@ -798,29 +838,29 @@ const InspectionPanel = memo((props: {
                   >
                     <IconSprite icon={def.icon} size="small" />
                     <Box as="span">{def.name}</Box>
-                    <Box as="strong" className={tone}>{sign}</Box>
+                    <strong className={tone}>{sign}</strong>
                   </button>
                 </Tooltip>
               );
             })}
-          </Box>
+          </section>
         )}
 
         {!!attribute.modifiers?.length && (
-          <Box as="section" className="AttributeMenu__noteBlock">
-            <Box as="h3">Blessings And Curses</Box>
+          <section className="AttributeMenu__noteBlock">
+            <h3>Blessings And Curses</h3>
             {attribute.modifiers.map((mod) => (
               <Box className="AttributeMenu__modifierRow" key={mod.id}>
                 <Box as="span">{mod.id || 'Unnamed modifier'}</Box>
-                <Box as="strong" className={mod.value >= 0 ? 'is-buffed' : 'is-debuffed'}>
+                <strong className={mod.value >= 0 ? 'is-buffed' : 'is-debuffed'}>
                   {mod.value >= 0 ? `+${mod.value}` : mod.value}
-                </Box>
+                </strong>
               </Box>
             ))}
-          </Box>
+          </section>
         )}
       </Box>
-    </Box>
+    </Section>
   );
 });
 
