@@ -115,6 +115,9 @@
 	if(!ishuman(user) || user == src)
 		return
 
+	if(!mind)
+		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(length(user.return_apprentices()) >= user.return_max_apprentices())
