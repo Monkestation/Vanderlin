@@ -142,7 +142,7 @@
 	if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
 		return
 
-	to_chat(user, span_notice("You offer apprenticeship to [src]."))
+	to_chat(user, span_notice("I offer apprenticeship to [src]."))
 	user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
