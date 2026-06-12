@@ -702,7 +702,7 @@
 
 .AttributeMenu__valueCard {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 9px;
@@ -724,6 +724,7 @@
 
 .AttributeMenu__valueCard strong {
   font-size: calc(26px * var(--am-fz));
+  line-height: 1;
   color: var(--am-ink);
 }
 
@@ -947,6 +948,10 @@
     background: linear-gradient(180deg, #f4e3b1, var(--am-parchment-light));
     transform: translateY(-1px);
   }
+
+  > .Button__content {
+    align-self: center;
+  }
 }
 
 .AttributeMenu__tutorialOverlay {
@@ -1069,7 +1074,7 @@
   padding: 0;
   color: #d9c3a0;
   font-size: calc(14px * var(--am-fz));
-  line-height: 1;
+  line-height: 20px;
   text-align: center;
   background: transparent;
   border: 1px solid transparent;
