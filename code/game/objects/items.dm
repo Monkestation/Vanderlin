@@ -1644,10 +1644,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	return src
 
 /obj/item/proc/set_quality(quality)
-	recipe_quality = clamp(quality, 0, 4)
-	update_appearance(UPDATE_OVERLAYS)
-	if(recipe_quality >= 3) // gold tier and above
-		AddComponent(/datum/component/particle_spewer/sparkle)
+	recipe_quality = quality
 
 /obj/item/get_examine_string(mob/user, thats = FALSE, examine_list_bool = FALSE)
 	if(examine_name && examine_list_bool)
