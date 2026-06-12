@@ -124,7 +124,10 @@
 		return
 
 	var/datum/job/my_job = mind?.assigned_role
-	if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
+	if(!my_job?.can_be_apprentice)
+		return
+
+	if(my_job.parent_job && !my_job?.parent_job?.can_be_apprentice)
 		return
 
 	var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
