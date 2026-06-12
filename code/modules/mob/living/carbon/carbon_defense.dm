@@ -313,7 +313,7 @@
 
 	return TRUE //successful attack
 
-/mob/living/carbon/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/carbon/attack_paw(mob/living/carbon/M)
 	if(M.used_intent.type == INTENT_HELP)
 		help_shake_act(M)
 		return 0
