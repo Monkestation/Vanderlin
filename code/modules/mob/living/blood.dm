@@ -2,17 +2,6 @@
 				BLOOD SYSTEM
 ****************************************************/
 
-/mob/living/carbon/monkey/handle_blood()
-	if(!CAN_HAVE_BLOOD(src)) //cryosleep or husked people do not pump the blood.
-		adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - get_blood_volume()) * 0.02, 1))
-		return
-	//Blood regeneration if there is some space
-	if(get_blood_volume() < BLOOD_VOLUME_NORMAL && !bleed_rate)
-		adjust_blood_volume(0.1, maximum = BLOOD_VOLUME_SAFE_MAXIMUM) // regenerate blood VERY slowly
-		var/cached_blood_volume = get_blood_volume()
-		if((cached_blood_volume < BLOOD_VOLUME_OKAY) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
-			adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - cached_blood_volume) * 0.02, 1))
-
 /mob/living/proc/handle_blood()
 	if(!CAN_HAVE_BLOOD(src)) //cryosleep or husked people do not pump the blood.
 		bleed_rate = 0
