@@ -247,8 +247,7 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1,
-		/obj/item/storage/fancy/cigarettes/tinzig = 1
+		/obj/item/paper/scroll/frumentarii/roundstart = 1
 	)
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
