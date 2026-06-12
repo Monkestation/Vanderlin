@@ -507,7 +507,7 @@
 	sellprice = 100
 	item_weight = 5.5 KILOGRAMS
 
-/obj/item/weapon/greataxe/steel/slayeraxe
+/obj/item/weapon/greataxe/steel/slayer
 	name = "dragonslayer axe"
 	desc = "A mighty axe made of heavy, durable metal. The head alone is as big as a man, used to cleave heads from beasts and men alike."
 	icon_state = "oath"
