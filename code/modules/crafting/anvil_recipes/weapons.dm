@@ -976,7 +976,7 @@
 	name = "Silver Axe (+ Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/stick)
-	created_item = /obj/item/weapon/axe/steel/silver
+	created_item = /obj/item/weapon/axe/silver
 
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe

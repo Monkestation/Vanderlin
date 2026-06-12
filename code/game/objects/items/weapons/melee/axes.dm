@@ -265,7 +265,7 @@
 
 
 //------------------ Silver Axe ---------------//
-/obj/item/weapon/axe/steel/silver
+/obj/item/weapon/axe/silver
 	name = "silver axe"
 	desc = "A silver axe, not as strong as steel but more effective against supernatural foes."
 	icon_state = "silveraxe"
@@ -273,6 +273,7 @@
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 6
 	smeltresult = /obj/item/ingot/silver
+	resistance_flags = FIRE_PROOF
 	sellprice = 80
 	axe_cut = 13
 	item_weight = 1.7 KILOGRAMS
