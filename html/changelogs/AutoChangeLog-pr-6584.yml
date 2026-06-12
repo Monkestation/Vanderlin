@@ -1,0 +1,7 @@
+author: "Avalon-Proto"
+delete-after: True
+changes:
+  - rscadd: "Smiths can now produce MUCH more weaponry"
+  - rscadd: "Merchants can purchase iron and steel javelins"
+  - rscadd: "Inquisitition Cna purchase silver javelins"
+  - rscadd: "Two unique and currently unavailable massive weapons. Volfslayer and The Dragonslayer axe"

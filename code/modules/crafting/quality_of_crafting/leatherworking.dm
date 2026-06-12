@@ -29,6 +29,14 @@
 	)
 	output = /obj/item/ammo_holder/quiver
 
+/datum/repeatable_crafting_recipe/leather/storage/javelin
+	name = "javelin sheath"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 2,
+	)
+	output = /obj/item/ammo_holder/javelin
+
 /datum/repeatable_crafting_recipe/leather/storage/dartpouch
 	name = "dart pouch"
 	requirements = list(

@@ -87,3 +87,7 @@
       Monarch can using the Master of Nerves.
   PatapoIIIa:
   - bugfix: Fixed an unnecessary delay when opening the first TGUI window after joining.
+2026-06-12:
+  Somniworld:
+  - qol: You now know when you show someone a confession.
+  - bugfix: You no longer can ask the dead to confess.

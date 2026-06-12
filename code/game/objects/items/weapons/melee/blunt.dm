@@ -64,7 +64,7 @@
 
 /obj/item/weapon/mace/shishpar
 	name = "iron shishpar"
-	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but its capable of delivering devastating blows."
 	icon_state = "shishpar_iron"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 2
@@ -112,7 +112,7 @@
 
 /obj/item/weapon/mace/cane/merchant
 	name = "merchant's cane"
-	desc = "An expensive cane, decorated with gold and inlaid with a gem. A symbol of great wealth for the ownner"
+	desc = "An expensive cane, decorated with gold and inlaid with a gem. A symbol of great wealth for the owner."
 	icon_state = "merchant_cane"
 	sellprice = 300
 	item_weight = 500 GRAMS
@@ -655,6 +655,24 @@
 	melt_amount = 150
 	item_weight = 2.2 KILOGRAMS
 
+/obj/item/weapon/mace/warhammer/silver
+	name = "silver warhammer"
+	desc = "A silver warhammer, made to fight nite-creachers. It makes a satisfying sound when paired with a skeleton's skull."
+	icon_state = "silverhammer"
+	force = DAMAGE_MACE_WIELD
+	wdefense = GOOD_PARRY
+	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 90
+	item_weight = 2.1 KILOGRAMS
+
+/obj/item/weapon/mace/warhammer/steel/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //................ Elven Club  ............... //
 
 /obj/item/weapon/mace/elvenclub
@@ -672,7 +690,7 @@
 
 /obj/item/weapon/mace/elvenclub/steel
 	name = "steel elven war club"
-	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace, It is capable of delivering swift, painful blows"
+	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace, It is capable of delivering swift, painful blows."
 	icon_state = "elvenclubsteel"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD

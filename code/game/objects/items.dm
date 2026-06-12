@@ -422,14 +422,20 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else if(isliving(loc))
 			var/mob/living/embedded_mob = loc
 			embedded_mob.simple_remove_embedded_object(src)
+
+	remove_all_enchantments()
+
 	if(artrecipe)
 		QDEL_NULL(artrecipe)
+
 	if(currecipe)
 		QDEL_NULL(currecipe)
+
 	if(istype(loc, /obj/machinery/artificer_table))
 		var/obj/machinery/artificer_table/A = loc
 		A.material = null
 		A.update_appearance(UPDATE_OVERLAYS)
+
 	return ..()
 
 /obj/item/proc/set_quality(quality)
