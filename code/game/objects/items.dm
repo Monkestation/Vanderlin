@@ -125,7 +125,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	// All items with sharpness of IS_SHARP (1) or higher will automatically get the butchering component. See combat.dm for defines.
 	var/sharpness = IS_BLUNT
 
-	var/tool_behaviour = NONE
+	var/tool_behaviour = null
 	///How fast does the tool work
 	var/toolspeed = 1
 
