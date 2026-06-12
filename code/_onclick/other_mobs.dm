@@ -90,7 +90,7 @@
 	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
 		return ..()
 
-	user.perform_surgery(src, null, LAZYACCESS(modifiers, RIGHT_CLICK))
+	user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK))
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -113,8 +113,8 @@
 		)
 		if(user.zone_selected in zones)
 			check_pulse(user)
-
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ..()
 
 	if(!mind)
 		return

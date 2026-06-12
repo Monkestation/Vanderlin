@@ -30,8 +30,8 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		else
 			unlocked += operation_type
 
-/// Takes in a list of operation typepaths and returns their singleton instances. Optionally can filter out replaced surgeries and by certain operation flags.
-/datum/operation_holder/proc/get_instances_from(list/typepaths, filter_replaced = TRUE)
+/// Takes in a list of operation typepaths and returns their singleton instances.
+/datum/operation_holder/proc/get_instances_from(list/typepaths)
 	var/list/result = list()
 	for(var/datum/surgery_operation/operation_type as anything in typepaths)
 		var/datum/surgery_operation/operation = operations_by_typepath[operation_type]

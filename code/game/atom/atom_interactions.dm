@@ -12,7 +12,7 @@
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 	var/is_left_clicking = !is_right_clicking
 
-	if(!user.cmode && is_left_clicking && user.try_recipes(src, tool))
+	if(!user.cmode && isitem(src) && is_left_clicking && user.try_recipes(src, tool))
 		user?.changeNext_move(CLICK_CD_FAST)
 		return ITEM_INTERACT_SUCCESS
 
@@ -103,6 +103,9 @@
 
 	if(tool.item_flags & ABSTRACT)
 		return NONE
+
+	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return ..() // Call normal
 
 	if(src == user)
 		if(offered_item_ref)

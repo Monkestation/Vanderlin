@@ -77,7 +77,7 @@
 /datum/unit_test/verify_surgery_setup
 
 /datum/unit_test/verify_surgery_setup/Run()
-	for(var/datum/surgery_operation/operation as anything in GLOB.operations.get_instances_from(subtypesof(/datum/surgery_operation), filter_replaced = FALSE))
+	for(var/datum/surgery_operation/operation as anything in GLOB.operations.get_instances_from(subtypesof(/datum/surgery_operation)))
 		if (isnull(operation.name))
 			TEST_FAIL("Surgery operation [operation.type] has no name set")
 		if (isnull(operation.desc))
