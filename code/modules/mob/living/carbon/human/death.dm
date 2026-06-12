@@ -65,47 +65,47 @@
 		var/obj/item/organ/heart/heart = thing
 		heart.Stop()
 
-		if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
-			MOBTIMER_SET(src, MT_DEATHDIED)
-			if(heart in SStreasury.bank_accounts)
-				for(var/obj/structure/fake_machine/camera/C in view(7, src))
-					var/area_name = A.name
-					var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
-					texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
-					SSroguemachine.death_queue += texty
-					break
+	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
+		MOBTIMER_SET(src, MT_DEATHDIED)
+		if(src in SStreasury.bank_accounts)
+			for(var/obj/structure/fake_machine/camera/C in view(7, src))
+				var/area_name = A.name
+				var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
+				texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
+				SSroguemachine.death_queue += texty
+				break
 
-		var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
-		if(buckled)
-			if(istype(buckled, /obj/structure/fluff/psycross) || istype(buckled, /obj/machinery/light/fueled/campfire/pyre))
-				if((real_name in GLOB.excommunicated_players) || (real_name in GLOB.heretical_players))
-					yeae = FALSE
-				if(real_name in GLOB.outlawed_players)
-					yeae = FALSE
+	var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
+	if(buckled)
+		if(istype(buckled, /obj/structure/fluff/psycross) || istype(buckled, /obj/machinery/light/fueled/campfire/pyre))
+			if((real_name in GLOB.excommunicated_players) || (real_name in GLOB.heretical_players))
+				yeae = FALSE
+			if(real_name in GLOB.outlawed_players)
+				yeae = FALSE
 
-		if(mind && yeae)
-			// Omens are handled here
-			if((is_lord_job(mind.assigned_role)))
-				addomen(OMEN_NOLORD)
-				for(var/mob/living/carbon/human/HU in GLOB.player_list)
-					if(HU.stat <= CONSCIOUS && is_in_roguetown(HU))
-						HU.playsound_local(get_turf(HU), 'sound/music/lorddeath.ogg', 80, FALSE, pressure_affected = FALSE)
+	if(mind && yeae)
+		// Omens are handled here
+		if((is_lord_job(mind.assigned_role)))
+			addomen(OMEN_NOLORD)
+			for(var/mob/living/carbon/human/HU in GLOB.player_list)
+				if(HU.stat <= CONSCIOUS && is_in_roguetown(HU))
+					HU.playsound_local(get_turf(HU), 'sound/music/lorddeath.ogg', 80, FALSE, pressure_affected = FALSE)
 
-			if(is_priest_job(mind.assigned_role))
-				addomen(OMEN_NOPRIEST)
+		if(is_priest_job(mind.assigned_role))
+			addomen(OMEN_NOPRIEST)
 
-		if(!gibbed && yeae)
-			for(var/mob/living/carbon/human/HU in viewers(7, src))
-				if(HU != src && !HU.is_blind())
-					if(!HAS_TRAIT(HU, TRAIT_VILLAIN)) //temporary measure for npc skeletons
-						if(HU.dna?.species && dna?.species)
-							if(HU.dna.species.id == dna.species.id)
-								var/mob/living/carbon/D = HU
-								if(D.has_quirk(/datum/quirk/vice/maniac))
-									D.add_stress(/datum/stress_event/viewdeathmaniac)
-									D.sate_addiction(/datum/quirk/vice/maniac)
-								else
-									D.add_stress(/datum/stress_event/viewdeath)
+	if(!gibbed && yeae)
+		for(var/mob/living/carbon/human/HU in viewers(7, src))
+			if(HU != src && !HU.is_blind())
+				if(!HAS_TRAIT(HU, TRAIT_VILLAIN)) //temporary measure for npc skeletons
+					if(HU.dna?.species && dna?.species)
+						if(HU.dna.species.id == dna.species.id)
+							var/mob/living/carbon/D = HU
+							if(D.has_quirk(/datum/quirk/vice/maniac))
+								D.add_stress(/datum/stress_event/viewdeathmaniac)
+								D.sate_addiction(/datum/quirk/vice/maniac)
+							else
+								D.add_stress(/datum/stress_event/viewdeath)
 
 	dna.species.spec_death(gibbed, src) // parent call deletes dna
 

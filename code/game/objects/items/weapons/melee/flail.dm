@@ -92,7 +92,7 @@
 //................ Silver Flail ............... //
 /obj/item/weapon/flail/silver
 	name = "silver flail"
-	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast"
+	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast."
 	icon_state = "silverflail"
 	force = DAMAGE_GOOD_FLAIL - 1
 	max_integrity = INTEGRITY_STRONGEST * 0.8

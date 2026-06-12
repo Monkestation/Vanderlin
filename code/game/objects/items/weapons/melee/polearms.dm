@@ -176,7 +176,7 @@
 
 /obj/item/weapon/polearm/spear/steel/partizan
 	name = "partizan"
-	desc = "A spear with a heavy steel head, deisgned for stabbing and chopping"
+	desc = "A spear with a heavy steel head, designed for stabbing and chopping."
 	icon_state = "partizan"
 	force = DAMAGE_SPEARPLUS + 3
 	force_wielded = DAMAGE_SPEAR_WIELD + 5
@@ -366,7 +366,7 @@
 
 /obj/item/weapon/polearm/spear/javelin/iron
 	name = "iron javelin"
-	desc = "Heavier than a copper javelin, best suited for hunting beasts"
+	desc = "Heavier than a copper javelin, best suited for hunting beasts."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "ijavelin"
 	melting_material = /datum/material/iron
@@ -397,7 +397,7 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 0.8
 
-/obj/item/weapon/polearm/spear/javelin/silver/Initialize(mapload)
+/obj/item/weapon/polearm/spear/javelin/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
