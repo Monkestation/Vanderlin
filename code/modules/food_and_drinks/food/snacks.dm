@@ -556,6 +556,7 @@ All foods are distributed among various categories. Use common sense.
 
 	if(eater.satiety > -200)
 		eater.satiety -= junkiness
+
 	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 	user.changeNext_move(CLICK_CD_FAST)
 
