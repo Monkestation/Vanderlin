@@ -357,7 +357,8 @@
 		/obj/item/paper/scroll/frumentarii/roundstart = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
-		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1
+		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1,
+		/obj/item/storage/fancy/cigarettes/tinzig = 1
 	)
 	armor = /obj/item/clothing/armor/leather/jerkin/belted/long
 	pants = /obj/item/clothing/pants/trou/leathertights
