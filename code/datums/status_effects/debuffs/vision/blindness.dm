@@ -52,15 +52,12 @@
 
 /datum/status_effect/grouped/blindness/proc/make_blind(changed_source)
 	// have some extra logic to determine what overlay to use
-	// by default we use the noflicker overlay
-	// but if our one and only source is from "temp blindness", use flicker overlay
-	var/overlay_to_use = /atom/movable/screen/fullscreen/blind/noflicker
-	if(("eyelids" in sources) || ("[STATUS_EFFECT_SLEEPING]" in sources))
-		overlay_to_use = /atom/movable/screen/fullscreen/sleeper
-	else if(UNCONSCIOUS_TRAIT in sources)
-		overlay_to_use = /atom/movable/screen/fullscreen/blackimageoverlay
-	else if(changed_source == /datum/status_effect/temporary_blindness::id && length(sources) == 1)
+	// if our one and only source is from "temp blindness", use flicker overlay
+	var/overlay_to_use = /atom/movable/screen/fullscreen/blackimageoverlay
+	if(changed_source == /datum/status_effect/temporary_blindness::id && length(sources) == 1)
 		overlay_to_use = /atom/movable/screen/fullscreen/blind
+	else if(length(sources.Copy() - list(EYE_DAMAGE, TRAUMA_TRAIT))) // Sources other than eye damage or trauma
+		overlay_to_use = /atom/movable/screen/fullscreen/sleeper
 	owner.overlay_fullscreen(id, overlay_to_use)
 
 	// You are blind - at most, able to make out shapes near you

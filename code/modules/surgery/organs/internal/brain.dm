@@ -50,39 +50,70 @@
 
 	var/list/datum/brain_trauma/traumas = list()
 
-/obj/item/organ/brain/Insert(mob/living/carbon/C, special = FALSE, drop_if_replaced = FALSE, new_zone = null, no_id_transfer = FALSE)
+/obj/item/organ/brain/Insert(mob/living/carbon/brain_owner, special = FALSE, drop_if_replaced = FALSE, new_zone = null, no_id_transfer = FALSE)
 	. = ..()
 
-	name = "brain"
+	name = initial(name)
 
 	if(brainmob)
-		if(brainmob.mind)
-			brainmob.mind.transfer_to(C)
+		if(brainmob?.key)
+			stack_trace("Decoy override brain with a key assigned - This should never happen.")
+
 		else
-			C.key = brainmob.key
+			if(brain_owner.key)
+				brain_owner.ghostize()
+
+			if(brainmob.mind)
+				brainmob.mind.transfer_to(brain_owner)
+			else
+				brain_owner.PossessByPlayer(brainmob.key)
+
+			brain_owner.set_suicide(HAS_TRAIT(brainmob, TRAIT_SUICIDED))
 
 		QDEL_NULL(brainmob)
+	else
+		brain_owner.set_suicide(suicided)
 
-	for(var/datum/brain_trauma/BT as anything in traumas)
-		BT.owner = owner
-		BT.on_gain()
+	for(var/datum/brain_trauma/trauma as anything in traumas)
+		if(trauma.owner)
+			if(trauma.owner == brain_owner)
+				// if we're being special replaced, the trauma is already applied, so this is expected
+				// but if we're not... this is likely a bug, and should be reported
+				if(!special)
+					stack_trace("A brain trauma ([trauma]) is being re-applied to its owning mob ([brain_owner])!")
+				continue
+
+			stack_trace("A brain trauma ([trauma]) is being applied to a new mob ([brain_owner]) when it's owned by someone else ([trauma.owner])!")
+			continue
+
+		trauma.owner = brain_owner
+		if(!trauma.on_gain())
+			qdel(trauma)
 
 	//Update the body's icon so it doesnt appear debrained anymore
-	C.update_body()
+	brain_owner.update_body()
 	if(damage >= medium_threshold)
-		C.add_stress(/datum/stress_event/brain_damage)
+		brain_owner.add_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/Remove(mob/living/carbon/C, special = 0, no_id_transfer = FALSE)
+/obj/item/organ/brain/Remove(mob/living/carbon/organ_owner, special, no_id_transfer = FALSE)
 	. = ..()
 	update_brain_color(animate = FALSE) // once it's out in the world we need to make sure it's the right color
 	for(var/datum/brain_trauma/BT as anything in traumas)
 		BT.on_lose(TRUE)
 		BT.owner = null
 
-	if((!gc_destroyed || (owner && !owner.gc_destroyed)) && !no_id_transfer)
-		transfer_identity(C)
-	C.update_body()
-	C.remove_stress(/datum/stress_event/brain_damage)
+	if((!QDELETED(src) || !QDELETED(organ_owner)) && !no_id_transfer)
+		transfer_identity(organ_owner)
+	organ_owner.update_body()
+	organ_owner.remove_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/on_medium_damage_received()
+	. = ..()
+	owner.add_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/on_medium_damage_healed()
+	. = ..()
+	owner.remove_stress(/datum/stress_event/brain_damage)
 
 /obj/item/organ/brain/can_self_heal(delta_time, times_fired)
 	. = ..()

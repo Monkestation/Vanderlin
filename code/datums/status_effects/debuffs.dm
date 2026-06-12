@@ -173,14 +173,12 @@
 	. = ..()
 	if(!.)
 		return
-	owner.become_blind("[STATUS_EFFECT_SLEEPING]")
 	ADD_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 
 	owner.cmode = FALSE
 	owner.set_typing_indicator(FALSE)
 
 /datum/status_effect/incapacitating/sleeping/on_remove()
-	owner.cure_blind("[STATUS_EFFECT_SLEEPING]")
 	REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 	owner.refresh_looping_ambience()
 
