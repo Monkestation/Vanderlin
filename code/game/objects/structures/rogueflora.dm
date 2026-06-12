@@ -298,11 +298,12 @@
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "grass1"
 	base_icon_state = "grass"
+	layer = BELOW_OBJ_LAYER
 	num_random_icons = 6
 	attacked_sound = "plantcross"
 	destroy_sound = "plantcross"
 	max_integrity = 5
-	debris = list(/obj/item/natural/fibers = 1)
+	debris = list(/obj/item/natural/fibers = 2)
 	/// base % to find any useful thing in the bush, gets modded by perception
 	var/prob2findstuff
 	/// for harvestable

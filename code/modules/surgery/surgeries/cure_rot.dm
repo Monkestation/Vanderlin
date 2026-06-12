@@ -5,7 +5,7 @@
 		/datum/surgery_step/burn_rot,
 		/datum/surgery_step/cauterize
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_CHEST)
 
 /datum/surgery_step/burn_rot
@@ -16,7 +16,7 @@
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	minimum_time = 7 SECONDS
 	maximum_time = 9 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED

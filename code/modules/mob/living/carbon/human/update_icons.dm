@@ -1440,17 +1440,13 @@ generate/load female uniform sprites matching all previously decided variables
 		var/mutable_appearance/boob_overlay = mutable_appearance(file2use, "[t_state]_boob", -layer2use)
 		standing.overlays.Add(boob_overlay)
 
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon(file2use, "[t_state][get_detail_tag()]"), -layer2use)
-		pic.appearance_flags = RESET_COLOR
-		if(get_detail_color())
-			pic.color = get_detail_color()
+	var/detail_tag = get_detail_tag()
+	if(detail_tag)
+		var/mutable_appearance/pic = mutable_appearance(icon(file2use, "[t_state][detail_tag]"), -layer2use, color = get_detail_color(), appearance_flags = RESET_COLOR)
 		standing.overlays.Add(pic)
+
 		if(!isinhands && do_boob)
-			pic = mutable_appearance(icon(file2use, "[t_state]_boob[get_detail_tag()]"), -layer2use)
-			pic.appearance_flags = RESET_COLOR
-			if(get_detail_color())
-				pic.color = get_detail_color()
+			pic = mutable_appearance(icon(file2use, "[t_state]_boob[detail_tag]"), -layer2use, color = get_detail_color(), appearance_flags = RESET_COLOR)
 			standing.overlays.Add(pic)
 
 	if(!isinhands && GET_ATOM_BLOOD_DNA_LENGTH(src))
@@ -1540,11 +1536,10 @@ generate/load female uniform sprites matching all previously decided variables
 		r_sleeve.color = I.color
 		r_sleeve.alpha = I.alpha
 		sleeves += r_sleeve
-		if(I.get_detail_tag())
-			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
+		var/item_detail = I.get_detail_tag()
+		if(item_detail)
+			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][item_detail]"), layer = -layer2use, color = I.get_detail_color())
 //          pic.appearance_flags = RESET_COLOR
-			if(I.get_detail_color())
-				pic.color = I.get_detail_color()
 			sleeves += pic
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_r[used]
@@ -1564,11 +1559,10 @@ generate/load female uniform sprites matching all previously decided variables
 		l_sleeve.color = I.color
 		l_sleeve.alpha = I.alpha
 		sleeves += l_sleeve
-		if(I.get_detail_tag())
-			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
+		var/item_detail = I.get_detail_tag()
+		if(item_detail)
+			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][item_detail]"), layer = -layer2use, color = I.get_detail_color())
 //          pic.appearance_flags = RESET_COLOR
-			if(I.get_detail_color())
-				pic.color = I.get_detail_color()
 			sleeves += pic
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_l[used]

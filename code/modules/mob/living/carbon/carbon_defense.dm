@@ -281,7 +281,10 @@
 			I.add_mob_blood(src)
 			user.update_inv_hands()
 			var/turf/location = get_turf(src)
+			var/attack_direction = get_dir(user, src)
 			add_splatter_floor(location)
+			add_splatter_floor(location)
+			add_splatter_wall(force = 2, splatter_direction = attack_direction)
 			if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
 				user.add_mob_blood(src)
 			var/splatter_dir = get_dir(user, src)
@@ -344,7 +347,7 @@
 	return FALSE
 
 
-/mob/living/carbon/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/carbon/attack_paw(mob/living/carbon/M)
 	if(M.used_intent.type == INTENT_HELP)
 		help_shake_act(M)
 		return 0
