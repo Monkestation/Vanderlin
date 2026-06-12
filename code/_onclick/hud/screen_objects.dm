@@ -362,7 +362,7 @@
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE)
 
-/atom/movable/screen/give/Click()
+/atom/movable/screen/give/Click(location, control, params)
 	if(!isliving(usr))
 		return
 
@@ -372,6 +372,10 @@
 		return
 
 	L.playsound_local(L, 'sound/misc/click.ogg', 100)
+
+	if(LAZYACCESS(params2list(params), RIGHT_CLICK))
+		L.dropItemToGround(L.get_active_held_item(), silent = FALSE)
+		return
 
 	if(L.item_offering)
 		L.cancel_offering_item()

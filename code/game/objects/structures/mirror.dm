@@ -152,7 +152,7 @@
 		if("eye color")
 			var/list/eye_list = H.getorganslotlist(ORGAN_SLOT_EYES)
 			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
+				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference", eyes.eye_color) as color|null
 				if(new_eyes)
 					eyes.eye_color = sanitize_hexcolor(new_eyes, default = "#1753a8")
 					should_update = TRUE
