@@ -41,7 +41,7 @@
 		if(staged_object)
 			to_chat(user, span_notice("A spell object is already placed here."))
 			return ITEM_INTERACT_BLOCKING
-		if(user.temporarilyRemoveItemFromInventory(tool))
+		if(!user.temporarilyRemoveItemFromInventory(tool))
 			return ITEM_INTERACT_BLOCKING
 		tool.forceMove(get_turf(src))
 		tool.anchored = TRUE
@@ -55,7 +55,7 @@
 		if(staged_focus)
 			to_chat(user, span_notice("A spell focus is already placed here."))
 			return ITEM_INTERACT_BLOCKING
-		if(user.temporarilyRemoveItemFromInventory(tool))
+		if(!user.temporarilyRemoveItemFromInventory(tool))
 			return ITEM_INTERACT_BLOCKING
 		tool.forceMove(get_turf(src))
 		tool.anchored = TRUE
