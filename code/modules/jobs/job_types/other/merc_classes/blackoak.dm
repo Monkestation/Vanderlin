@@ -8,6 +8,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/reading = 10, 
 		/datum/attribute/skill/craft/crafting = 10, // no stats since its based on archetypes
 	)
 

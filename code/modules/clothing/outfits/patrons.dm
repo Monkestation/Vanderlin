@@ -77,7 +77,7 @@
 
 /obj/item/clothing/cloak/wardencloak
 	name = "warden cloak"
-	desc = "A cloak worn by the Wardens of Azuria's Forests"
+	desc = "A cloak worn by the Wardens of The Woods."
 	icon_state = "wardencloak"
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
@@ -102,7 +102,7 @@
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester cloak"
-	desc = "A cloak worn by the Black Oaks of Azuria."
+	desc = "A dark green cloak with a fur lined collar. It is stained in various places from many months of wear."
 	icon_state = "forestcloak"
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
@@ -117,7 +117,7 @@
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	name = "snow cloak"
-	desc = "A cloak meant to keep one's body warm in the cold of the mountains as well as the dampness of Azuria."
+	desc = "A white cloak with a fur lined collar. It is stained in various places from many months of wear."
 	icon_state = "snowcloak"
 
 /obj/item/clothing/cloak/templar/MiddleClick(mob/user)
