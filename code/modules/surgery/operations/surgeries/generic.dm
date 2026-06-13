@@ -148,16 +148,13 @@
 	return ..() + list("the limb must have skin")
 
 /datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
-	return LIMB_HAS_SKIN(limb)
+	return LIMB_HAS_SKIN(limb) && limb.get_incision()
 
 /datum/surgery_operation/limb/close_skin/tool_check(obj/item/tool)
 	if(istype(tool, /obj/item/needle))
 		return TRUE
 
 	return tool.get_temperature() > 0
-
-/datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
-	return limb.get_incision()
 
 /datum/surgery_operation/limb/close_skin/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(

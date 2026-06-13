@@ -208,7 +208,7 @@
 		return PROCESS_KILL
 
 	var/soak_amount = max(0.2, reagents.total_volume * 0.01) //we lose 1% volume per process or 0.2 unit and multiply this by 10 on application so a preserving basin lasts atleast 500 seconds
-	reagents.reaction(soaking_item, TOUCH, 0.1)
+	reagents.reaction(soaking_item, TOUCH, 10)
 	reagents.remove_all(soak_amount)
 
 /**
@@ -517,29 +517,6 @@
 
 /obj/item/reagent_containers/proc/apply_initial_label()
 	return
-
-/obj/item/reagent_containers/weather_act_on(weather_trait, severity)
-	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, weather_act_cooldown))
-		return
-	if(!isturf(loc))
-		return
-	reagents.add_reagent(/datum/reagent/water, clamp(severity * 0.5, 1, 5))
-	COOLDOWN_START(src, weather_act_cooldown, 10 SECONDS)
-
-/obj/item/reagent_containers/ex_act()
-	if(reagents)
-		for(var/datum/reagent/R in reagents.reagent_list)
-			R.on_ex_act()
-	if(!QDELETED(src))
-		..()
-
-/obj/item/reagent_containers/fire_act(added, maxstacks)
-	reagents.expose_temperature(added)
-	..()
-
-/obj/item/reagent_containers/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	. = ..()
-	SplashReagents(hit_atom, TRUE)
 
 /obj/item/reagent_containers/heating_act()
 	reagents.expose_temperature(1000)
