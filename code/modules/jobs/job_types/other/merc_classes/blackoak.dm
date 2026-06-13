@@ -36,7 +36,7 @@
 
 /datum/job/advclass/mercenary/blackoak
 	title = "Redwood Mercenary"
-	tutorial = "A soldier from the Redwood Warband, currently performing work at the mercenary guild to gather funds for your cause."
+	tutorial = "A hired blade from the Redwood mercenary company, known for carrying the seed of a red-wooded tree from the Crimsonlands, their homeland. When one mercenary falls, their seed is carried home and planted in the plains. One dae there will be forests of the dead, outnumbering even the orcish horde."
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/blackoak
 	category_tags = list(CTAG_MERCENARY)
