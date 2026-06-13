@@ -59,7 +59,7 @@
 /datum/outfit/mercenary/blackoak
 	name = "Black Oak's Guardian (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots/leather
-	cloak = /obj/item/clothing/cloak/raincloak
+	cloak = /obj/item/clothing/cloak/raincloak/colored/red
 	gloves = /obj/item/clothing/gloves/angle
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	backl = /obj/item/storage/backpack/satchel
@@ -81,24 +81,31 @@
 		if("Brute")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/plate, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/elvenclub/steel, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/heavy/decorated/bascinet, ITEM_SLOT_HEAD)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30)
 			ADD_TRAIT(spawned, TRAIT_HEAVYARMOR, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blackoak/heavy)
 		if("Glaive Master")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/spear/billhook, ITEM_SLOT_BACK_R, TRUE) // placeholder until the glaive is actually added
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/spear/billhook/glaive, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass, ITEM_SLOT_ARMOR, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/kettle/slit, ITEM_SLOT_HEAD, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 30)
 			ADD_TRAIT(spawned, TRAIT_MEDIUMARMOR, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blackoak/medium)
 		if("Ranger")
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_R)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/roguehood/leather/advanced, ITEM_SLOT_HEAD, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/advanced, ITEM_SLOT_ARMOR, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 30)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blackoak/light)
 
-
+	var/static/list/helmets = list("Slitted Kettle Helmet", "Reinforced Hood", "Barbute", "Winged Barbute")
+	var/helmet_choice = tgui_input_list(player_client, "Choose your helmet", "Protect your cranium!", helmets)
+	switch(helmet_choice)
+		if("Slitted Kettle Helmet")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/kettle/slit, ITEM_SLOT_HEAD, TRUE)
+		if("Reinforced Hood")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/roguehood/leather/advanced, ITEM_SLOT_HEAD, TRUE)
+		if("Barbute")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/elfbarbute, ITEM_SLOT_HEAD, TRUE)
+		if("Winged Barbute")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/elfbarbute/winged, ITEM_SLOT_HEAD, TRUE)

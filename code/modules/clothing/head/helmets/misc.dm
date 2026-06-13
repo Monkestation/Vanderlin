@@ -777,3 +777,22 @@
 		if(loc == user && ishuman(user))
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
+
+/obj/item/clothing/head/helmet/elfbarbute
+	name = "elven barbute"
+	desc = "A heavy barbute helmet designed by elven smiths, intended to fit comfortably over a elf's long ears."
+	icon_state = "elven_barbute_full"
+	item_state = "elven_barbute_full"
+	flags_inv = HIDEEARS|HIDEHAIR
+	max_integrity = INTEGRITY_STRONGEST
+	armor =ARMOR_PLATE
+	body_parts_covered = COVERAGE_HEAD_NOSE
+	item_weight = 2.7 KILOGRAMS
+	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
+
+/obj/item/clothing/head/helmet/elfbarbute/winged
+	name = "winged-elven barbute"
+	desc = "A heavy barbute helmet designed by elven smiths, intended to fit comfortably over a elf's long ears. This one has been decorated with wings."
+	icon_state = "elven_barbute_winged"
+	item_state = "elven_barbute_winged"

@@ -254,6 +254,15 @@
 	sellprice = 60
 	item_weight = 3 KILOGRAMS
 
+/obj/item/weapon/polearm/spear/billhook/glaive
+	name = "elven glaive"
+	desc = "A lightweight glaive crafted by elven smiths, designed to favor elegance and dexterity over brute strength."
+	icon_state = "glaive"
+	item_weight = 2.5 KILOGRAMS
+	gripsprite = FALSE
+	minstr = 7
+
+
 /obj/item/weapon/polearm/spear/billhook/ji
 	name = "steel dagger-ax"
 	desc = "An eastern polearm of ancient design. It's rarely seen on the battlefield these daes."
@@ -673,6 +682,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
+
 
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
