@@ -1342,13 +1342,13 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	return
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.body_position == STANDING_UP)
+	if(!(istype(user.rmb_intent, /datum/rmb_intent/weak)) && target.body_position == LYING_DOWN)
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaken")
 		return TRUE
 
-	if(istype(user.rmb_intent, /datum/rmb_intent/weak) && (user.zone_selected in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_MOUTH)))
+	else if(istype(user.rmb_intent, /datum/rmb_intent/weak) && (target.body_position == LYING_DOWN) && (user.zone_selected in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_MOUTH)))
 		user.do_cpr(target, user.zone_selected == BODY_ZONE_CHEST ? CPR_CHEST : CPR_MOUTH)
 		return TRUE
 
