@@ -120,6 +120,7 @@
 		if(!did_flash && (istype(grinding, /obj/item/ore) || istype(grinding, /obj/item/ingot)))
 			did_flash = TRUE
 
+		to_grind -= grinding
 		qdel(grinding)
 
 	if(did_flash)
@@ -127,8 +128,6 @@
 		var/datum/effect_system/spark_spread/S = new()
 		S.set_up(1, 1, get_turf(src))
 		S.start()
-
-	QDEL_NULL(to_grind)
 
 	user.adjust_experience(/datum/attribute/skill/craft/alchemy, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * user.get_learning_boon(/datum/attribute/skill/craft/alchemy), FALSE)
 
