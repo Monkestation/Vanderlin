@@ -549,51 +549,6 @@
 
 #undef BLOODRAGE_FILTER
 
-/atom/movable/screen/alert/status_effect/buff/matthioshealing
-	name = "Healing Miracle"
-	desc = "Strange Divine intervention relieves me of my ailments."
-	icon_state = "buff"
-
-#define MIRACLE_HEALING_FILTER "miracle_heal_glow"
-
-/datum/status_effect/buff/matthioshealing
-	id = "healing"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/matthioshealing
-	duration = 10 SECONDS
-	var/healing_on_tick = 1
-	var/outline_colour = "#c42424"
-
-/datum/status_effect/buff/matthioshealing/on_creation(mob/living/new_owner, new_healing_on_tick)
-	healing_on_tick = new_healing_on_tick
-	return ..()
-
-/datum/status_effect/buff/matthioshealing/on_apply()
-	. = ..()
-	owner.add_filter(MIRACLE_HEALING_FILTER, 2,  outline_filter(2, outline_colour))
-	return TRUE
-
-/datum/status_effect/buff/matthioshealing/on_remove()
-	. = ..()
-	owner.remove_filter(MIRACLE_HEALING_FILTER)
-	return TRUE
-
-/datum/status_effect/buff/matthioshealing/get_examine_text()
-	return "SUBJECTPRONOUN is bathed in a restorative aura!"
-
-/datum/status_effect/buff/matthioshealing/tick()
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume+10, BLOOD_VOLUME_NORMAL)
-	if(owner.get_wounds())
-		owner.heal_wounds(healing_on_tick)
-		owner.update_damage_overlays()
-		owner.adjustBruteLoss(-healing_on_tick, 0)
-		owner.adjustFireLoss(-healing_on_tick, FALSE)
-		owner.adjustOxyLoss(-healing_on_tick, FALSE)
-		owner.adjustToxLoss(-healing_on_tick, FALSE)
-		owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
-
-#undef MIRACLE_HEALING_FILTER //Why is this a thing?
-
 #define CRANKBOX_FILTER "crankboxbuff_glow"
 /atom/movable/screen/alert/status_effect/buff/churnerprotection
 	name = "Magick Distorted"

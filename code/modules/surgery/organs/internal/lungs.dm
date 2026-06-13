@@ -16,10 +16,10 @@
 	organ_volume = 1
 	max_blood_storage = 25
 	current_blood = 25
-	blood_req = 4
+	blood_req = 2
 	oxygen_req = 4
-	nutriment_req = 1.5
-	hydration_req = 1.5
+	nutriment_req = 1.2
+	hydration_req = 1.2
 
 	high_threshold_passed = "<span class='warning'>I feel some sort of constriction around my chest as my breathing becomes shallow and rapid.</span>"
 	now_fixed = "<span class='warning'>My lungs seem to once again be able to hold air.</span>"
@@ -27,22 +27,42 @@
 
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 
-/obj/item/organ/lungs/on_life(delta_time, times_fired)
+/obj/item/organ/lungs/applyOrganDamage(d, maximum)
 	. = ..()
-	if(failed)
-		if(!is_failing())
-			failed = FALSE
-			return
-	else if(is_failing())
-		if(owner.stat == CONSCIOUS)
-			owner.visible_message("<span class='danger'>[owner] grabs [owner.p_their()] throat, struggling for breath!</span>", \
-								"<span class='danger'>I suddenly feel like you can't breathe!</span>")
-		to_chat(owner, span_userdanger("I CAN'T BREATHE!"))
+	if(!.)
+		return
+
+	if(failed && !is_failing())
+		failed = FALSE
+		return
+
+	if(is_failing() && owner?.stat == CONSCIOUS)
+		owner.visible_message(span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"), span_userdanger("You suddenly feel like you can't breathe!"))
 		failed = TRUE
-	if(damage >= low_threshold)
-		var/do_i_cough = DT_PROB((damage < high_threshold) ? 2.5 : 5, delta_time) // between : past high
-		if(do_i_cough)
-			owner.emote("cough")
+
+/obj/item/organ/lungs/proc/cough_blood(delta_time)
+	if(!owner || !is_bruised())
+		return
+
+	var/cough_prob = 2.5
+	if(damage >= medium_threshold)
+		cough_prob = 5
+
+	if(!SPT_PROB(cough_prob, delta_time)) // between : past high
+		return
+
+	if((damage >= medium_threshold) && prob(33))
+		owner.visible_message(span_danger("[owner] coughs up blood!"), span_userdanger("You cough up blood!"))
+		var/obj/item/covering = owner.is_mouth_covered()
+		if(covering)
+			covering.add_mob_blood(owner)
+		else if(isturf(owner.loc))
+			owner.add_splatter_floor()
+		owner.bleed(round(damage / 8))
+		playsound(owner, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 33, TRUE)
+	else
+		owner.emote(pick("weeze", "cough"))
+	owner.losebreath = min(owner.losebreath + round(damage / 100, 0.1), 4)
 
 /obj/item/organ/lungs/on_owner_examine(datum/source, mob/user, list/examine_list)
 	if(!ishuman(owner))
@@ -61,6 +81,10 @@
 /obj/item/organ/lungs/prepare_eat()
 	var/obj/S = ..()
 	return S
+
+/obj/item/organ/lungs/regenerate_organ()
+	. = ..()
+	failed = FALSE
 
 /obj/item/organ/lungs/plasmaman
 	name = "plasma filter"

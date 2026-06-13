@@ -3010,7 +3010,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
 "qA" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/dirt,
 /area/indoors/lich)
 "qC" = (
@@ -5906,7 +5906,7 @@
 /turf/open/floor/ruinedwood,
 /area/outdoors/bog)
 "Fa" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "Fd" = (
@@ -6544,7 +6544,7 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/lich)
 "IG" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/lich)
 "IH" = (

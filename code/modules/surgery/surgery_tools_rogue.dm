@@ -190,11 +190,11 @@
 		return ..()
 	if(ishuman(A))
 		if(A == user)
-			user.visible_message("<span class='info'>[user] begins smacking themself with a small hammer.</span>")
+			user.visible_message(span_info("[user] begins smacking themself with a small hammer."))
 		else
-			user.visible_message("<span class='info'>[user] begins to smack [A] with a small hammer.</span>")
-		if(do_after(user, 2.5 SECONDS, A))
-			A.visible_message("<span class='info'>[A] jerks their knee after the hammer strikes!</span>")
+			user.visible_message(span_info("[user] begins to smack [A] with a small hammer."))
+		if(do_after(user, 1 SECONDS, A))
+			A.visible_message(span_info("[A] jerks their knee after the hammer strikes!"))
 			if(prob(1))
 				playsound(user, 'sound/misc/bonk.ogg', 100, FALSE, -1)
 			var/mob/living/carbon/human/human_target = A

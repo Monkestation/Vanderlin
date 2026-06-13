@@ -16,11 +16,14 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, SOULSTONE_TRAIT)
 	ADD_TRAIT(owner, TRAIT_HANDS_BLOCKED, SOULSTONE_TRAIT)
 	if(!vessel_item_type)
-		being_offered = TRUE
-		owner.balloon_alert_to_viewers("This vessel awaits a soul...")
-		if(!GLOB.active_ghost_vessels[vessel_id])
-			GLOB.active_ghost_vessels[vessel_id] = list()
-		GLOB.active_ghost_vessels[vessel_id] += owner  // store the mob, not the component
+		if(SSticker.HasRoundStarted())
+			addtimer(CALLBACK(src, PROC_REF(begin_ghost_offer)), 5 SECONDS)
+		else
+			being_offered = TRUE
+			owner.balloon_alert_to_viewers("This vessel awaits a soul...")
+			if(!GLOB.active_ghost_vessels[vessel_id])
+				GLOB.active_ghost_vessels[vessel_id] = list()
+			GLOB.active_ghost_vessels[vessel_id] += owner  // store the mob, not the component
 		return
 
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
@@ -54,7 +57,7 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	being_offered = TRUE
 
 	var/list/candidates = pollCandidatesForMobWhitelisted(
-		"A vessel at [owner.loc] awaits a soul. Do you wish to inhabit it?",
+		"A [vessel_id] vessel at [owner.loc] awaits a soul. Do you wish to inhabit it?",
 		null,
 		null,
 		null,
@@ -88,4 +91,5 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	var/new_name = browser_input_text(owner, "Choose a new Name", "New Name", owner.name)
 	if(new_name)
 		owner.real_name = new_name
+	SEND_SIGNAL(owner, COMSIG_GHOST_VESSEL_POSSESSED, src)
 	qdel(src)

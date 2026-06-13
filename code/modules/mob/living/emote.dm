@@ -126,9 +126,6 @@
 	if(QDELETED(user))
 		return FALSE
 
-	if(!can_run_emote(user, TRUE, intentional))
-		return FALSE
-
 	message = params
 	if(type_override)
 		emote_type = type_override
@@ -294,7 +291,7 @@
 
 /datum/emote/living/collapse/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && isliving(user))
+	if(isliving(user))
 		var/mob/living/L = user
 		L.SetKnockdown(40)
 
@@ -325,8 +322,6 @@
 
 /datum/emote/living/sickcough/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(!.)
-		return
 	for(var/mob/living/carbon/human/witness in hearers(user)) // yes, you can proc your own cough!
 		if(HAS_ANY_OF_TRAITS(witness, list(TRAIT_NOBREATH, TRAIT_NOMOOD, TRAIT_TOXIMMUNE, TRAIT_DISEASE_RESISTANCE)))
 			continue
@@ -387,7 +382,7 @@
 		message_simple = S.deathmessage
 	. = ..()
 	message_simple = initial(message_simple)
-	if(. && user.deathsound)
+	if(user.deathsound)
 		if(isliving(user))
 			var/mob/living/L = user
 			if(!L.can_speak_vocal() || L.oxyloss >= 50)
@@ -432,7 +427,7 @@
 
 /datum/emote/living/faint/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && iscarbon(user))
+	if(iscarbon(user))
 		var/mob/living/carbon/L = user
 		if(L.getPainLoss() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
 			L.setDir(2)
@@ -784,7 +779,7 @@
 
 /datum/emote/living/laugh/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && user.mind)
+	if(user.mind)
 		record_featured_stat(FEATURED_STATS_JOKESTERS, user)
 		record_round_statistic(STATS_LAUGHS_MADE)
 
@@ -895,7 +890,7 @@
 			else
 				message_param = "<span class='danger'>bumps [user.p_their()] head on the ground</span> trying to motion towards %t."
 				H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 5)
-	..()
+	. = ..()
 
 /datum/emote/living/pout
 	key = "pout"
@@ -1000,7 +995,7 @@
 
 /datum/emote/living/rage/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && user.mind)
+	if(user.mind)
 		record_round_statistic(STATS_WARCRIES)
 
 /mob/living/carbon/human/verb/emote_rage()
@@ -1030,7 +1025,7 @@
 				H.visible_message("<span class='warning'>[H] spits out [H.mouth].</span>")
 				H.dropItemToGround(H.mouth, silent = FALSE)
 			return
-	..()
+	. = ..()
 
 /datum/emote/living/spit/adjacentaction(mob/user, mob/target)
 	. = ..()
@@ -1077,7 +1072,8 @@
 		if(H.zone_selected == BODY_ZONE_PRECISE_GROIN)
 			message_param = "slaps %t on the ass!"
 
-	..()
+	. = ..()
+
 /mob/living/carbon/human/verb/emote_slap()
 	set name = "Slap"
 	set category = "Emotes.Silent"
@@ -1117,7 +1113,7 @@
 
 /datum/emote/living/scream/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && user.mind)
+	if(user.mind)
 		record_featured_stat(FEATURED_STATS_SCREAMERS, user)
 
 /datum/emote/living/scowl

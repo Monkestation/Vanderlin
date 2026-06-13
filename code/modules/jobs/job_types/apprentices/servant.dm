@@ -41,6 +41,7 @@
 	)
 
 /datum/job/servant
+	is_quest_giver = TRUE
 	title = JOB_SERVANT
 	tutorial = "You are the faceless, nameless labor that keeps the royal court fed, washed, and attended to. \
 	You work your fingers to the bone nearly every dae, \

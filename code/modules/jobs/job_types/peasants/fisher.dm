@@ -67,7 +67,7 @@
 	beltl = /obj/item/flint
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/fishingrod/fisher
-
+	shoes = /obj/item/clothing/shoes/boots/leather
 	backpack_contents = list(
 		/obj/item/weapon/shovel/small = 1,
 		/obj/item/natural/worms = 1
@@ -78,14 +78,12 @@
 	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/random
 		shirt = /obj/item/clothing/shirt/shortshirt/colored/random
-		shoes = /obj/item/clothing/shoes/boots/leather
 		backpack_contents += list(
 			/obj/item/weapon/knife/villager = 1,
 			/obj/item/recipe_book/survival = 1
 		)
 	else
 		shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-		shoes = /obj/item/clothing/shoes/boots/leather
 		backpack_contents += list(
 			/obj/item/weapon/knife/hunting = 1
 		)

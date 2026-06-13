@@ -2,11 +2,11 @@
 	name = "intestines"
 
 /mob/living/carbon/proc/gut_cut()
-	if(get_chem_effect(CE_PAINKILLER) < 100)
+	if(get_chem_effect(CE_PAINKILLER) < 80)
 		emote("scream")
 		CombatKnockdown(30)
 		var/obj/item/bodypart/vitals = get_bodypart(BODY_ZONE_CHEST)
-		vitals?.add_pain(25)
+		vitals?.add_pain(SHOCK_STAGE_2)
 
 /datum/wound/spill
 	name = "Spill"
@@ -41,9 +41,9 @@
 			break
 	var/gaping_injury = FALSE
 	for(var/datum/injury/injury as anything in new_limb.injuries)
-		if(injury.damage_type != WOUND_SLASH)
+		if(!(injury.damage_type & WOUND_SLASH))
 			continue
-		if(injury.damage && (injury.damage >= 30))
+		if(injury.damage_per_injury() >= 30)
 			gaping_wound = TRUE
 			break
 	if(!gaping_wound && !gaping_injury)
@@ -51,7 +51,7 @@
 	return TRUE
 
 /datum/wound/spill/gut/on_crit_applied(obj/item/bodypart/affected, mob/living/user, zone_precise, list/modifiers)
-	affected.add_wound(/datum/wound/slash/disembowel)
+	affected.add_wound(/datum/wound/slash/disembowel, crit_message = TRUE)
 
 /datum/wound/spill/gut/on_bodypart_gain(obj/item/bodypart/new_limb)
 	. = ..()
