@@ -98,3 +98,17 @@
 		return FALSE
 
 	return TRUE
+
+/mob/living/simple_animal/shade/can_enter_underworld()
+	if(!length(GLOB.underworldspiritspawns)) //That cant be good.
+		to_chat(src, span_danger("You are dead. Blood is fuel. Hell is somehow full. Alert an admin, as something is very wrong!"))
+		return FALSE
+
+	var/answer = tgui_alert(src, "Begin the long walk in the Underworld to your judgement?", "JUDGEMENT", DEFAULT_INPUT_CHOICES)
+	if(!answer || QDELETED(src))
+		return FALSE
+	if(answer == CHOICE_NO)
+		to_chat(src, span_warning("You have second thoughts."))
+		return FALSE
+
+	return TRUE

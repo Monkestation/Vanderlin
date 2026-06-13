@@ -204,7 +204,7 @@
 				death()
 	if(!target)
 		if(prob(3))
-			emote(pick("laugh", "moan", "whisper"), TRUE)
+			INVOKE_ASYNC(src, PROC_REF(emote), pick("laugh", "moan", "whisper"))
 
 /mob/living/simple_animal/hostile/haunt/get_sound(input)
 	switch(input)
