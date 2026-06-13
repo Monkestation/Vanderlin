@@ -284,8 +284,6 @@
 		marquevalue += 2
 		REMOVE_TRAIT(user, TRAIT_HAS_CONFESSED, TRAIT_GENERIC)
 		update_appearance()
-	else
-		return
 
 /obj/item/paper/inqslip/arrival
 	name = "arrival slip"
