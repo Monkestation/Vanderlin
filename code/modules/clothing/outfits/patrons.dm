@@ -75,20 +75,6 @@
 	icon_state = "seetabard"
 
 
-/obj/item/clothing/cloak/wardencloak
-	name = "warden cloak"
-	desc = "A cloak worn by the Wardens of The Woods."
-	icon_state = "wardencloak"
-	alternate_worn_layer = CLOAK_BEHIND_LAYER
-	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
-	sleevetype = "shirt"
-	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-
-/obj/item/clothing/cloak/wardencloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
 
 /obj/item/clothing/cloak/graggar
 	name = "vicious cloak"
@@ -99,26 +85,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-
-/obj/item/clothing/cloak/forrestercloak
-	name = "forrester cloak"
-	desc = "A dark green cloak with a fur lined collar. It is stained in various places from many months of wear."
-	icon_state = "forestcloak"
-	alternate_worn_layer = CLOAK_BEHIND_LAYER
-	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
-	sleevetype = "shirt"
-	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-
-/obj/item/clothing/cloak/forrestercloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
-
-/obj/item/clothing/cloak/forrestercloak/snow
-	name = "snow cloak"
-	desc = "A white cloak with a fur lined collar. It is stained in various places from many months of wear."
-	icon_state = "snowcloak"
 
 /obj/item/clothing/cloak/templar/MiddleClick(mob/user)
 	overarmor = !overarmor

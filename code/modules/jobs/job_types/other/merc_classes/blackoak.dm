@@ -8,7 +8,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 10, 
+		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10, // no stats since its based on archetypes
 	)
 
@@ -23,8 +23,8 @@
 /datum/attribute_holder/sheet/job/blackoak/medium
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 2,
-		STAT_SPEED = 1, // very basic polearm fighter
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 2, // speedy polearm fighters
 	)
 
 /datum/attribute_holder/sheet/job/blackoak/light
@@ -48,6 +48,10 @@
 	traits = list(
 		TRAIT_FORAGER, //survivalist mfs
 	)
+
+/datum/job/advclass/mercenary/blackoak/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.merctype = 4
 
 	exp_type = list(EXP_TYPE_LIVING)
 	exp_requirements = list(EXP_TYPE_LIVING = 600)
