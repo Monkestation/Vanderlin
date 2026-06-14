@@ -19825,10 +19825,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
-"mpN" = (
-/obj/structure/fake_machine/contractledger,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/tavern)
 "mqd" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 32
@@ -31178,11 +31174,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
-"tNt" = (
-/obj/structure/fake_machine/contractledger,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/shop)
 "tNG" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 8
@@ -99075,7 +99066,7 @@ dHp
 iFD
 kii
 xjj
-mpN
+cSl
 eoC
 oNt
 flM
@@ -104120,7 +104111,7 @@ vro
 lRz
 fQx
 bXt
-tNt
+xJM
 lRz
 doA
 bXt
