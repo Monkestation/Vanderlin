@@ -94,7 +94,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/armor/heartfelt,
 		/obj/item/clothing/armor/heartfelt/hand,
 
-		/obj/item/clothing/wrists/bracers/iron/concealed // watchmen drip special
+		/obj/item/clothing/wrists/bracers/iron/concealed, // watchmen drip special
 
 		///these can probably have recipes?
 		/obj/item/clothing/face/xylixmask,
