@@ -103,12 +103,11 @@
 		"Inhumen Stomach - Enhanced Endurance",
 		"Leviathanian Membrane - No Terrain Slowdown",
 		"Nerve Staple - No Mood",
-		"Nightmare Ward - No Sleep and Fast Learning",
-		"Obfuscating Dermis - Beautiful and Face-changing",
+		"Nightmare Ward - No Sleep and Anti-Scrying",
 		"Serpentine Glands - Thermal Vision and Venom",)
 	//only four options
 	enhancements = shuffle(enhancements)
-	enhancements.Cut(5, 0)
+	enhancements.Cut(4, 0)
 	enhancements += "Disguise Kit - Deceiving Meekness" //Always give this option
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
@@ -121,6 +120,12 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
 		if("Formikrag Liver - Reversed Toxin Damage")
 			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
+			/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
+			if(stomach)
+				stomach.Remove(spawned,1)
+				QDEL_NULL(stomach)
+			stomach = new /obj/item/organ/stomach/acid_spit
+			stomach.Insert(spawned)
 		if("Goblin Eyes - Nightvision")
 			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
 			if(eyes)

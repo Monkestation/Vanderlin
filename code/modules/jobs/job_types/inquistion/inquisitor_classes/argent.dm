@@ -56,40 +56,6 @@
 		/datum/attribute/skill/combat/whipsflails = list(30, 30)
 	)
 
-/datum/attribute_holder/sheet/job/argent/adrenal
-	raw_attribute_list = list(
-		STAT_CONSTITUTION = 1,
-	)
-
-/datum/attribute_holder/sheet/job/argent/atrophy
-	raw_attribute_list = list(
-		STAT_CONSTITUTION = -3,
-		STAT_SPEED = 4
-	)
-
-/datum/attribute_holder/sheet/job/argent/greenskin
-	raw_attribute_list = list(
-		STAT_ENDURANCE = -2,
-		STAT_STRENGTH = 2
-	)
-
-/datum/attribute_holder/sheet/job/argent/stomach
-	raw_attribute_list = list(
-		STAT_ENDURANCE = 2
-	)
-
-/datum/attribute_holder/sheet/job/argent/nerve
-	raw_attribute_list = list(
-		STAT_ENDURANCE = 3,
-		STAT_FORTUNE = -1
-	)
-
-/datum/attribute_holder/sheet/job/argent/nightmare
-	raw_attribute_list = list(
-		STAT_INTELLIGENCE = 2,
-		STAT_PERCEPTION = 1
-	)
-
 /datum/job/advclass/sacrestant/argent
 	title = "Argent"
 	tutorial = "A trained member of the Ordo Venatari, you have passed every test, prepared for every circumstance, and devoted your body and being alike to Psydon and his righteous cause. Enhanced with powers from the very monsters you are driven to vanquish, you are ready to face, and surpass, all those who would seek to hide in the nite."
@@ -193,12 +159,11 @@
 		"Inhumen Stomach - Enhanced Endurance",
 		"Leviathanian Membrane - No Terrain Slowdown",
 		"Nerve Staple - No Mood",
-		"Nightmare Ward - No Sleep and Fast Learning",
-		"Obfuscating Dermis - Beautiful and Face-changing",
+		"Nightmare Ward - No Sleep and Anti-Scrying",
 		"Serpentine Glands - Thermal Vision and Venom",)
 	//only four options
 	enhancements = shuffle(enhancements)
-	enhancements.Cut(5, 0)
+	enhancements.Cut(4, 0)
 	enhancements += "Disguise Kit - Deceiving Meekness" //Always give this option
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
@@ -211,6 +176,12 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
 		if("Formikrag Liver - Reversed Toxin Damage")
 			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
+			/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
+			if(stomach)
+				stomach.Remove(spawned,1)
+				QDEL_NULL(stomach)
+			stomach = new /obj/item/organ/stomach/acid_spit
+			stomach.Insert(spawned)
 		if("Goblin Eyes - Nightvision")
 			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
 			if(eyes)
