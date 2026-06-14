@@ -36,10 +36,12 @@
 		/datum/job/adept,
 		/datum/job/men_at_arms,
 		/datum/job/gatemaster,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)

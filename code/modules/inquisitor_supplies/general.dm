@@ -330,6 +330,14 @@
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/head/inqarticles/blackbag(src)
 
+/datum/inqports/equipment/javlins
+	name = "Bag Of Silver Javelins"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/javlins
+	marquescost = 12
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/javlins/populate_contents()
+	new  /obj/item/ammo_holder/javelin/silver(src)
+
 /datum/inqports/equipment/psydonhelms
 	name = "Helms of Psydon"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/psydonhelms

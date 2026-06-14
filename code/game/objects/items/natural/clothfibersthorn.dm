@@ -130,11 +130,11 @@
 	stacktype = /obj/item/natural/fibers
 	icon1step = 3
 	icon2step = 6
+	items_per_increase = 7
 
 /obj/item/natural/bundle/fibers/full/Initialize()
-	. = ..()
 	amount = maxamount
-	update_bundle()
+	. = ..()
 
 /obj/item/natural/bundle/fibers/sinew
 	name = "sinew fiber bundle"

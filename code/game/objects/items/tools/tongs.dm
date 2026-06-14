@@ -128,10 +128,10 @@
 	if(held_item?.tong_interaction(attacked_item, user))
 		return TRUE
 
-	if(!istype(attacked_item))
+	if(held_item)
 		return ..()
 
-	if(held_item)
+	if(!istype(attacked_item) || !isturf(attacked_item.loc))
 		return ..()
 
 	if(istype(attacked_item, /obj/item/storage/crucible))

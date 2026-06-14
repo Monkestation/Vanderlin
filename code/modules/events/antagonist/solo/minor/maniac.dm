@@ -23,11 +23,13 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
 		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)
@@ -49,7 +51,6 @@
 
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/wretch = 1,
-		/datum/round_event_control/antagonist/solo/rebel = 1,
 		/datum/round_event_control/antagonist/solo/vampires = 0.7,
 		/datum/round_event_control/antagonist/solo/werewolf = 0.7,
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 0.5,

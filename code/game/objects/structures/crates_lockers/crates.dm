@@ -84,7 +84,6 @@
 		if(!do_after(user, 5 SECONDS, src))
 			return
 		if(pacify_coffin(src, user))
-			add_overlay("graveconsecrated")
 			user.visible_message(span_rose("[user] seals and consecrates [src]."), span_rose("I seal the coffin, consecrating it. I may bury it to protect it's inhabitant further."))
 			SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 			record_round_statistic(STATS_GRAVES_CONSECRATED)
