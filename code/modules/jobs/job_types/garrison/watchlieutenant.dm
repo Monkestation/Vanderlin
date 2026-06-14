@@ -104,15 +104,15 @@
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
-	head = /obj/item/clothing/head/helmet/sargebarbute //veteran who won a nice helmet
-	wrists = /obj/item/clothing/wrists/bracers/jackchain
+	head = /obj/item/clothing/head/helmet/watchmen/lt
+	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
 	shoes = /obj/item/clothing/shoes/boots/leather
 	belt = /obj/item/storage/belt/leather
-	shirt = /obj/item/clothing/armor/chainmail/iron
-	armor = /obj/item/clothing/armor/cuirass/iron
-	pants = /obj/item/clothing/pants/chainlegs/iron
+	shirt = /obj/item/clothing/shirt/guard
+	armor = /obj/item/clothing/armor/cuirass/fluted/iron
+	pants = /obj/item/clothing/pants/guard
 	gloves = /obj/item/clothing/gloves/chain/iron
-	neck = /obj/item/clothing/neck/chaincoif/iron
+	neck = /obj/item/clothing/neck/gorget
 	beltl = /obj/item/weapon/mace/bludgeon
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(

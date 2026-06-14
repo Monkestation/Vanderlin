@@ -8,6 +8,8 @@
 	anvilrepair = null
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
+	// TODO: if that feature will be ever needed anywhere, move it to all clothings. 
+	var/alternate_sleeve_layer
 	fiber_salvage = FALSE
 	gender = PLURAL
 	grid_width = 32
