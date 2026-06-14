@@ -272,7 +272,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/reagent_containers/food/snacks/fish/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+/obj/item/reagent_containers/food/snacks/fish/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!HAS_TRAIT(interacting_with, TRAIT_CATCH_AND_RELEASE))
 		return NONE
 

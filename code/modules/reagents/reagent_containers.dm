@@ -159,6 +159,9 @@
 	if(GetComponent(/datum/component/storage))
 		return NONE
 
+	if(istype(tool, /obj/item/reagent_containers/syringe))
+		return NONE // special snowflake
+
 	if(is_type_in_list(user.used_intent, list(INTENT_SOAK, INTENT_WRING)))
 		return NONE // special snowflake
 

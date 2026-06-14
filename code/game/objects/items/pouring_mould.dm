@@ -54,13 +54,13 @@
 	if(user.cmode)
 		return NONE
 
-	if(try_fill(user, tool))
+	if(try_filling(user, tool))
 		user.changeNext_move(CLICK_CD_FAST)
 		return ITEM_INTERACT_SUCCESS
 
 	return ITEM_INTERACT_BLOCKING
 
-/obj/item/mould/proc/try_fill(mob/living/user, obj/item/storage/crucible)
+/obj/item/mould/proc/try_filling(mob/living/user, obj/item/storage/crucible)
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal || cooling)
 		return FALSE
@@ -344,7 +344,7 @@
 
 	filling_metal = biggest_metal
 
-/obj/item/mould/customizable/proc/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
+/obj/item/mould/customizable/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
 	if(cooling)
 		return
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)

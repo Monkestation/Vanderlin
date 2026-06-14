@@ -69,7 +69,7 @@
 
 /obj/item/natural/worms/leech/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!ishuman(interacting_with))
-		return NONE
+		return ..()
 
 	var/mob/living/carbon/human/H = interacting_with
 

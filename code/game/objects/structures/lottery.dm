@@ -31,17 +31,19 @@
 
 /obj/structure/fake_machine/lottery_roguetown/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
 
 	if(!ishuman(user) || stopgambling)
 		return
 
 	if(gamblingprice <= 0)
 		say("Poor thing, you are coinless.")
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(gamblingprice < 0)
 		say("Your peasant's tithe is NEGATIVE.")
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	// Build coin options
 	var/list/choicez = list()
@@ -53,7 +55,7 @@
 
 	var/selection = browser_input_list(user, "Make a Selection", src, choicez)
 	if(!selection)
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	// Calculate coin value
 	var/mod = 1
@@ -66,17 +68,18 @@
 	coin_amt = round(coin_amt)
 
 	if(coin_amt < 1)
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(!Adjacent(user) || stopgambling)
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if((coin_amt * mod) > gamblingprice)
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	budget2change(coin_amt * mod, user, selection)
 	gamblingprice -= coin_amt * mod
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fake_machine/lottery_roguetown/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)

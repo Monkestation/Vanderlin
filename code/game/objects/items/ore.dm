@@ -203,27 +203,9 @@
 	. = ..()
 	if(smelt_quality)
 		recipe_quality = smelt_quality
-	var/datum/quality_calculator/metallurgy/metal_calc = new()
-	metal_calc.apply_quality_to_item(src, TRUE, recipe_quality)
-	qdel(metal_calc)
-
-/obj/item/ingot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!istype(tool, /obj/item/weapon/tongs))
-		return NONE
-
-	var/obj/item/weapon/tongs/T = tool
-	if(T.held_item)
-		return ITEM_INTERACT_BLOCKING
-
-	if(item_flags & IN_STORAGE)
-		if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE))
-			return ITEM_INTERACT_BLOCKING
-
-	forceMove(T)
-	T.held_item = src
-	T.update_appearance(UPDATE_ICON_STATE)
-
-	return ITEM_INTERACT_SUCCESS
+		var/datum/quality_calculator/metallurgy/metal_calc = new()
+		metal_calc.apply_quality_to_item(src, TRUE, recipe_quality)
+		qdel(metal_calc)
 
 /obj/item/ingot/attack_hand_secondary(mob/user, list/modifiers)
 	if(currecipe)

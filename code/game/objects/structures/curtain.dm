@@ -44,8 +44,6 @@
 		deconstruct()
 		return ITEM_INTERACT_SUCCESS
 
-	return ..()
-
 /obj/structure/curtain/attack_hand(mob/user)
 	. = ..()
 	if(.)

@@ -61,9 +61,6 @@
 	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(modified)
-		return ..()
-
 	if(modified || !istype(tool, /obj/item/reagent_containers/peppermill))
 		return ..()
 

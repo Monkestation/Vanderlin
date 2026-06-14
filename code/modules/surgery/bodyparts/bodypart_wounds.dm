@@ -147,7 +147,7 @@
 	if(our_state & SURGERY_VESSELS_CLAMPED)
 		bleed_rate /= 2
 
-	if(bleed_rate < 0.2)
+	if(bleed_rate < 0.05)
 		return 0
 
 	return bleed_rate

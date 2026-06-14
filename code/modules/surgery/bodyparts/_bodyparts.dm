@@ -548,7 +548,7 @@
 		var/datum/injury/compatible_injury = pick(compatible_injuries)
 		compatible_injury.open_injury(damage)
 		last_injury = compatible_injury
-		return compatible_injury
+		. = compatible_injury
 
 
 	// Creating NEW injury
@@ -770,7 +770,10 @@
 	else
 		H.visible_message("<span class='warning'>[user] jams [src] into [H]'s empty socket!</span>",\
 		"<span class='notice'>[user] forces [src] into my empty socket, and it locks into place!</span>")
-	user.temporarilyRemoveItemFromInventory(src, TRUE)
+
+	if(!user.temporarilyRemoveItemFromInventory(src, TRUE))
+		return
+
 	attach_limb(C)
 
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)

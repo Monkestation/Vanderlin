@@ -50,17 +50,13 @@
 		to_chat(user, span_warning("[augmented] cannot be augmented!"))
 		return ITEM_INTERACT_BLOCKING
 
-	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
-	if(skill < contained_augment.engineering_difficulty)
-		to_chat(user, span_warning("You lack the engineering skill to install this augment!"))
-		return ITEM_INTERACT_BLOCKING
-
 	if(!istype(augmented.buckled, /obj/machinery/artificer_table))
 		to_chat(user, span_warning("[augmented] must be on an artificer's table!"))
 		return ITEM_INTERACT_BLOCKING
 
-	if(!SEND_SIGNAL(augmented, COMSIG_AUGMENT_GET_STABILITY))
-		to_chat(user, span_warning("[augmented] cannot be augmented!"))
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
+	if(skill < contained_augment.engineering_difficulty)
+		to_chat(user, span_warning("You lack the engineering skill to install this augment!"))
 		return ITEM_INTERACT_BLOCKING
 
 	to_chat(user, span_notice("You begin installing [contained_augment.name]..."))

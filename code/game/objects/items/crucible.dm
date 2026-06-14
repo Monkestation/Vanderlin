@@ -95,7 +95,7 @@
 
 	var/obj/item/mould/mould = interacting_with
 
-	mould.try_fill(user, src)
+	mould.try_filling(user, src)
 
 	return ITEM_INTERACT_SUCCESS
 

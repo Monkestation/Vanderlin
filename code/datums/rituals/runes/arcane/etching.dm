@@ -32,12 +32,12 @@
 		return
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/spell_focus))
+		return NONE
+
 	if(animating)
 		to_chat(user, span_notice("The seal is already working..."))
 		return ITEM_INTERACT_BLOCKING
-
-	if(!istype(tool, /obj/item/spell_focus))
-		return NONE
 
 	var/obj/item/spell_focus/focus = tool
 	if(focus.stored_spell_type)
