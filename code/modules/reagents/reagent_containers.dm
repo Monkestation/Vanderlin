@@ -237,7 +237,7 @@
 		if(try_splash(user, interacting_with))
 			return ITEM_INTERACT_SUCCESS
 
-		return ITEM_INTERACT_BLOCKING
+		return NONE
 
 	if(!interacting_with.reagents)
 		return NONE
@@ -250,13 +250,11 @@
 		else if(try_pour(user, interacting_with))
 			return ITEM_INTERACT_SUCCESS
 
-		return ITEM_INTERACT_BLOCKING
+		return NONE
 
 	if(istype(user.used_intent, INTENT_FILL))
 		if(try_fill(user, interacting_with))
 			return ITEM_INTERACT_SUCCESS
-
-		return ITEM_INTERACT_BLOCKING
 
 /obj/item/reagent_containers/proc/try_splash(mob/living/user, atom/target)
 	if(!is_open_container() || !spillable)
@@ -264,7 +262,7 @@
 
 	if(!reagents?.total_volume)
 		to_chat(user, span_danger("[src] is empty!"))
-		return FALSE
+		return TRUE
 
 	var/punctuation = ismob(target) ? "!" : "."
 
@@ -310,19 +308,19 @@
 
 	if(!reagents?.total_volume)
 		to_chat(user, span_danger("[src] is empty!"))
-		return FALSE
+		return TRUE
 
 	if(!canconsume(target, user))
-		return FALSE
+		return TRUE
 
 	if(target != user)
 		target.visible_message(span_danger("[user] attempts to feed [target] something."), \
 					span_danger("[user] attempts to feed you something."))
 		if(!do_after(user, 3 SECONDS, target))
-			return FALSE
+			return TRUE
 
 		if(!reagents?.total_volume)
-			return FALSE
+			return TRUE
 
 		target.visible_message(span_danger("[user] feeds [target] something."), \
 					span_danger("[user] feeds you something."))
@@ -361,16 +359,16 @@
 	if(!is_open_container() || !spillable)
 		return FALSE
 
-	if(!reagents?.total_volume)
-		to_chat(user, span_danger("[src] is empty!"))
-		return FALSE
-
 	if(!to_pour.is_refillable())
 		return FALSE
 
+	if(!reagents?.total_volume)
+		to_chat(user, span_danger("[src] is empty!"))
+		return TRUE
+
 	if(to_pour.reagents.holder_full())
 		to_chat(user, span_danger("[to_pour] is full."))
-		return FALSE
+		return TRUE
 
 	var/stealthy = user.rogue_sneaking
 
@@ -401,16 +399,16 @@
 	if(!is_open_container() || !spillable)
 		return FALSE
 
-	if(!filling_from.reagents?.total_volume)
-		to_chat(user, span_danger("[filling_from] is empty!"))
-		return FALSE
-
 	if(!filling_from.is_drainable())
 		return FALSE
 
+	if(!filling_from.reagents?.total_volume)
+		to_chat(user, span_danger("[filling_from] is empty!"))
+		return TRUE
+
 	if(reagents.holder_full())
 		to_chat(user, span_danger("[src] is full."))
-		return FALSE
+		return TRUE
 
 	var/stealthy = user.rogue_sneaking
 
