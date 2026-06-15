@@ -353,16 +353,12 @@
 		user.swap_hand(held_index)
 	return TRUE
 
-/atom/movable/screen/give
-	name = "give"
-	icon_state = "give_item"
+/atom/movable/screen/drop
+	name = "drop"
+	icon_state = "act_drop"
 	plane = HUD_PLANE
 
-/atom/movable/screen/give/Initialize(mapload, datum/hud/hud_owner)
-	. = ..()
-	update_appearance(UPDATE_ICON_STATE)
-
-/atom/movable/screen/give/Click(location, control, params)
+/atom/movable/screen/drop/Click(location, control, params)
 	if(!isliving(usr))
 		return
 
@@ -373,25 +369,7 @@
 
 	L.playsound_local(L, 'sound/misc/click.ogg', 100)
 
-	if(LAZYACCESS(params2list(params), RIGHT_CLICK))
-		L.dropItemToGround(L.get_active_held_item(), silent = FALSE)
-		return
-
-	if(L.item_offering)
-		L.cancel_offering_item()
-
-	L.item_offering = !L.item_offering
-	update_appearance(UPDATE_ICON_STATE)
-
-/atom/movable/screen/give/update_icon_state()
-	. = ..()
-
-	if(!isliving(hud?.mymob))
-		return
-
-	var/mob/living/living_hud_owner = hud.mymob
-
-	icon_state = "give_item[living_hud_owner.item_offering ? "_active" : ""]"
+	L.dropItemToGround(L.get_active_held_item(), silent = FALSE)
 
 /atom/movable/screen/act_intent
 	name = "intent"

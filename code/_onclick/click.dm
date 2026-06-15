@@ -116,12 +116,17 @@
 		if(atkswinging == MIDDLE_CLICK && mmb_intent?.get_chargetime())
 			if(mmb_intent.no_early_release && client?.chargedprog < 100)
 				changeNext_move(mmb_intent.clickcd)
+		else if(LAZYACCESS(modifiers, SHIFT_CLICKED))
+			ShiftMiddleClickOn(clicked_atom, modifiers)
 		else
 			MiddleClickOn(clicked_atom, modifiers)
 		return
 
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
-		ShiftClickOn(clicked_atom, modifiers)
+		if(LAZYACCESS(modifiers, CTRL_CLICKED))
+			CtrlShiftClickOn(clicked_atom, modifiers)
+		else
+			ShiftClickOn(clicked_atom, modifiers)
 		return
 
 	if(LAZYACCESS(modifiers, ALT_CLICKED)) // alt and alt-gr (rightalt)
@@ -485,10 +490,15 @@
 */
 /mob/proc/CtrlShiftClickOn(atom/clicked_atom, list/modifiers)
 	clicked_atom.CtrlShiftClick(src, modifiers)
-	return
 
 /atom/proc/CtrlShiftClick(mob/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_CLICK_CTRL_SHIFT, modifiers)
+
+/mob/living/CtrlShiftClick(mob/living/user, list/modifers)
+	if(!istype(user))
+		return
+
+	user.give(src)
 
 /mob/proc/AltRightClickOn(atom/clicked_atom, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_CLICK_ALT, clicked_atom, modifiers)

@@ -5,7 +5,7 @@
 	description = "Toggles the Quake-style console"
 	category = CATEGORY_CLIENT
 
-/datum/keybinding/client/toggle_console/down(client/user)
+/datum/keybinding/client/toggle_console/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(isdead(M) && !M.mind)

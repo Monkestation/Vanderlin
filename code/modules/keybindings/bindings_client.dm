@@ -1,6 +1,6 @@
 // Clients aren't datums so we have to define these procs indpendently.
 // These verbs are called for all key press and release events
-/client/verb/keyDown(_key as text)
+/client/verb/keyDown(_key as text, mousepos_x as num, mousepos_y as num, sizex as num, sizey as num)
 	set instant = TRUE
 	set hidden = TRUE
 
@@ -68,22 +68,23 @@
 			full_key = "[AltMod][CtrlMod][ShiftMod]"
 		else
 			full_key = "[AltMod][CtrlMod][ShiftMod][_key]"
+
+	var/list/click_data = get_loc_from_mousepos(mousepos_x, mousepos_y, sizex, sizey, src)
+
 	var/keycount = 0
 	for(var/kb_name in prefs.key_bindings[full_key])
 		keycount++
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
 		if(istype(kb, /datum/keybinding/client/say))
 			continue
-		if(kb)
-			if(kb.can_use(src) && kb.down(src) && keycount >= MAX_COMMANDS_PER_KEY)
-				break
-
+		if(kb && kb.can_use(src) && kb.down(src, click_data[1], click_data[2], click_data[3]) && keycount >= MAX_COMMANDS_PER_KEY)
+			break
 
 	holder?.key_down(_key, src)
 	mob.focus?.key_down(_key, src)
 	mob.update_mouse_pointer()
 
-/client/verb/keyUp(_key as text)
+/client/verb/keyUp(_key as text, mousepos_x as num, mousepos_y as num, sizex as num, sizey as num)
 	set instant = TRUE
 	set hidden = TRUE
 
@@ -102,15 +103,20 @@
 	if(!(next_move_dir_add & movement))
 		next_move_dir_sub |= movement
 
+	var/list/click_data
+	//manual calls of keyup
+	if(mousepos_x && mousepos_y)
+		click_data = get_loc_from_mousepos(mousepos_x, mousepos_y, sizex, sizey, src)
+
 	// We don't do full key for release, because for mod keys you
 	// can hold different keys and releasing any should be handled by the key binding specifically
 	for (var/kb_name in prefs.key_bindings[_key])
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
 		if(istype(kb, /datum/keybinding/client/say))
 			continue
-		if(kb)
-			if(kb.up(src))
-				break
+		if(kb && kb.can_use(src) && kb.up(src, click_data?[1]))
+			break
+
 	holder?.key_up(_key, src)
 	mob.focus?.key_up(_key, src)
 	mob.update_mouse_pointer()

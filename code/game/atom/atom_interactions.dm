@@ -97,45 +97,6 @@
 
 	return NONE
 
-/mob/living/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
-	if(user.cmode || !user.item_offering)
-		return NONE
-
-	if(tool.item_flags & ABSTRACT)
-		return NONE
-
-	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
-		return ..() // Call normal
-
-	if(src == user)
-		if(offered_item_ref)
-			cancel_offering_item()
-			return ITEM_INTERACT_SUCCESS
-		to_chat(user, span_warning("I can't offer myself an item!"))
-		return ITEM_INTERACT_BLOCKING
-
-	if(user.offered_item_ref)
-		var/obj/item/offered_item = user.offered_item_ref.resolve()
-		if(QDELETED(offered_item))
-			user.cancel_offering_item()
-			return ITEM_INTERACT_BLOCKING
-
-		if(offered_item == tool)
-			user.cancel_offering_item()
-			return ITEM_INTERACT_SUCCESS
-		else
-			to_chat(user, span_notice("I'm already offering [offered_item]!"))
-			return ITEM_INTERACT_SUCCESS
-
-	if(HAS_TRAIT(tool, TRAIT_NODROP))
-		to_chat(user, span_warning("I can't offer this."))
-		return ITEM_INTERACT_BLOCKING
-
-	if(!user.offer_item(src, tool))
-		return ITEM_INTERACT_BLOCKING
-
-	return ITEM_INTERACT_SUCCESS
-
 /**
  * Called when this atom has an item used on it.
  * IE, a mob is clicking on this atom with an item.

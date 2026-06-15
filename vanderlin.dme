@@ -3479,6 +3479,7 @@
 #include "code\modules\mob\living\living_defense.dm"
 #include "code\modules\mob\living\living_defines.dm"
 #include "code\modules\mob\living\living_descriptors.dm"
+#include "code\modules\mob\living\living_item_handling.dm"
 #include "code\modules\mob\living\living_movement.dm"
 #include "code\modules\mob\living\living_say.dm"
 #include "code\modules\mob\living\living_update_icons.dm"
