@@ -137,18 +137,18 @@
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
 		bleed_rate += embedded.embedding.embedded_bloodloss
+
 	if(!ignore_is_bleeding && bandage)
 		bleed_rate *= bandage?.bandage_effectiveness
+
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
-	bleed_rate = max(round(bleed_rate, 0.1), 0)
 
 	var/our_state = return_surgical_state()
 	if(our_state & SURGERY_VESSELS_CLAMPED)
 		bleed_rate /= 2
 
-	if(bleed_rate < 0.05)
-		return 0
+	bleed_rate = max(round(bleed_rate, 0.1), 0)
 
 	return bleed_rate
 
