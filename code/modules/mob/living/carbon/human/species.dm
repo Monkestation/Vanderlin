@@ -1861,7 +1861,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking >= 10)
 			H.next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
 			// Get extra damage as a percent of 50% extra based on skill
-			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
+			var/percentage = attacker_sneaking / SKILL_LEVEL_LEGENDARY
 			if(blunt)
 				knockout_modifier = FLOOR(15 * percentage, 1)
 			item_force += (item_force * 0.5) * percentage

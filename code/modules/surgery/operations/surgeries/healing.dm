@@ -190,7 +190,7 @@
 		target_msg += " as best as [surgeon.p_they()] can while [patient.p_they()] [patient.p_have()] clothing on"
 
 	var/skill_modifier = 1.0
-	switch(GET_MOB_SKILL_VALUE_OLD(surgeon, skill_used))
+	switch(GET_MOB_SKILL_VALUE(surgeon, skill_used))
 		if(SKILL_LEVEL_JOURNEYMAN)
 			skill_modifier = 1.1
 		if(SKILL_LEVEL_EXPERT)
