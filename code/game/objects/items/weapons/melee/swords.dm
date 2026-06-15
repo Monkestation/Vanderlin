@@ -1329,7 +1329,7 @@
 	desc = " A silver broadsword, wide and heavy, for dicing up the hordes of the undead."
 	icon_state = "silverbroadsword"
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	alt_intent = null
+	alt_intents = null
 	smeltresult = /obj/item/ingot/silver
 	melt_amount = 200
 	sellprice = 150
