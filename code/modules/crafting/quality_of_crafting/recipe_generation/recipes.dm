@@ -538,7 +538,7 @@
 
 	data["skill_name"] = skill_used::name
 	data["min_skill"] = SSskills.level_names[FLOOR(skill_min * 0.1, 1)]
-	data["median_skill"] = SSskills.level_names[skill_median]
+	data["median_skill"] = SSskills.level_names[FLOOR(skill_min * 0.1, 1)]
 
 	data["looping"] = (operation_flags & OPERATION_LOOPING)
 
