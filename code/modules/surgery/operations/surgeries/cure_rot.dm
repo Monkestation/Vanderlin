@@ -3,12 +3,12 @@
 	desc = "Cleanse a limb of rot, lethal to deadites when performed on the chest."
 
 	implements = list(
-		TOOL_CAUTERY = 1.2,
+		TOOL_CAUTERY = 1,
 		/obj/item/clothing/neck/psycross/silver = 1.4,
 		/obj/item = 1.55,
 	)
 
-	time = 2.5 SECONDS
+	time = 1.4 SECONDS
 
 	preop_sound = 'sound/surgery/cautery1.ogg'
 	success_sound = 'sound/surgery/cautery2.ogg'
@@ -55,9 +55,14 @@
 		span_notice("[surgeon] burns the flesh of [limb_owner]'s [parse_zone(limb.body_zone)]."),
 	)
 
-	if(limb.body_zone == BODY_ZONE_CHEST && IS_DEADITE(limb_owner))
-		limb_owner.mind.remove_antag_datum(/datum/antagonist/zombie)
-		limb_owner.death()
+	if(limb.body_zone == BODY_ZONE_CHEST)
+		if(ishuman(limb_owner))
+			var/mob/living/carbon/human/H = limb_owner
+			H?.funeral = FALSE
+
+		if(IS_DEADITE(limb_owner))
+			limb_owner.mind.remove_antag_datum(/datum/antagonist/zombie)
+			limb_owner.death()
 
 	limb.revive_limb()
 	limb.germ_level = 0
@@ -67,10 +72,8 @@
 	if(rot) // ew
 		rot.amount = 0
 
-	limb_owner?.update_body()
-
-	if(ishuman(limb_owner))
-		var/mob/living/carbon/human/H = limb_owner
-		H?.funeral = FALSE
+	for(var/obj/item/organ/organ in limb.get_organs())
+		if(organ.germ_level >= INFECTION_LEVEL_ONE * 0.2)
+			organ.set_germ_level(INFECTION_LEVEL_ONE * 0.2)
 
 	limb.receive_damage(burn = 20 - (GET_MOB_SKILL_VALUE(surgeon, skill_used) / 3))
