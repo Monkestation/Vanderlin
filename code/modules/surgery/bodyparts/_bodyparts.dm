@@ -575,7 +575,7 @@
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
-			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.01
+			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.005
 			// if(owner?.IsSleeping())
 			// 	heal_amt *= 3
 		if(heal_amt)
