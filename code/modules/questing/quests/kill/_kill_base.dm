@@ -1,5 +1,7 @@
 // Base for kill quests
 /datum/quest/kill
+	abstract_type = /datum/quest/kill
+	quest_difficulty = QUEST_DIFFICULTY_EASY
 	var/list/mob_types_to_spawn = list()
 	var/count_min = 1
 	var/count_max = 3
@@ -26,7 +28,7 @@
 		spawn_effect.AddComponent(/datum/component/quest_object/mob_spawner, src)
 		add_tracked_atom(new_mob)
 		landmark.add_quest_faction_to_nearby_mobs(spawn_turf)
-		sleep(1)
+		sleep(0.5 SECONDS)
 
 /datum/quest/kill/get_additional_reward()
 	..()

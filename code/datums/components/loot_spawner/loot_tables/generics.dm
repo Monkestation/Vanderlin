@@ -158,7 +158,7 @@
 			/obj/item/weapon/knife/copper = 15,
 			/obj/item/weapon/sword/long/rider/copper = 15,
 			/obj/item/weapon/sword/coppermesser = 15,
-			/obj/item/weapon/polearm/spear/stone/copper = 15,
+            /obj/item/weapon/polearm/spear/javelin = 15,
 			/obj/item/weapon/axe/iron = 10,
 			/obj/item/weapon/polearm/halberd/bardiche = 10,
 			/obj/item/weapon/sword/rapier/ironestoc = 10,

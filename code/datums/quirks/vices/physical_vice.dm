@@ -375,7 +375,7 @@
 	if(owner.stat == UNCONSCIOUS && owner.IsSleeping())
 		if(world.time >= next_scream)
 			next_scream = world.time + rand(30 SECONDS, 60 SECONDS)
-			owner.emote("scream")
+			owner.emote("scream", forced = TRUE)
 
 /datum/quirk/vice/nightmares/on_remove()
 	STOP_PROCESSING(SSobj, src)

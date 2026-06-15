@@ -42,14 +42,6 @@
 	icon_state = "welfchest"
 	item_weight = 17 KILOGRAMS
 
-/obj/item/clothing/armor/rare/dwarfplate
-	name = "dwarvish plate"
-	desc = "Plate armor made out of the sturdiest, finest dwarvish metal armor. It's as heavy and durable as it gets."
-	icon_state = "dwarfchest"
-	allowed_race = list(SPEC_ID_DWARF)
-	item_weight = 17 KILOGRAMS
-	stand_speed_reduction = 1.2
-
 /obj/item/clothing/armor/rare/grenzelplate
 	name = "grenzelhoftian plate regalia"
 	desc = "Engraved on this masterwork of humen metallurgy lies \"Thrice Fingered, Thrice Betrayed, Thrice Pronged\" alongside the symbol of Psydon in its neck guard. No one is certain what the third betrayal is meant to signify, yet Samantha's poetry is clear."

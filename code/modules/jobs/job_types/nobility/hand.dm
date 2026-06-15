@@ -216,6 +216,7 @@
 		STAT_SPEED = -1,
 		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/firearms = 40,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -250,7 +251,8 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1
+		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/storage/belt/hollow_book
 	)
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -355,11 +357,32 @@
 		/obj/item/paper/scroll/frumentarii/roundstart = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
+<<<<<<< HEAD
 		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1
+=======
+		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1,
+		/obj/item/storage/fancy/cigarettes/tinzig = 1
+>>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 	)
 	armor = /obj/item/clothing/armor/leather/jerkin/belted/long
 	pants = /obj/item/clothing/pants/trou/leathertights
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	beltl = /obj/item/ammo_holder/quiver/arrows
+<<<<<<< HEAD
 	beltr = /obj/item/weapon/sword/kaskara
 	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
+=======
+	beltr = /obj/item/weapon/sword/rapier/dec
+	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
+
+/datum/job/advclass/hand/huntsmaster/after_spawn(mob/living/carbon/human/H)
+	. = ..()
+
+	var/mob/living/simple_animal/hostile/retaliate/hound/pet = new(get_turf(H))
+
+	if(!pet)
+		return
+
+	pet.tamed(H)
+	ADD_TRAIT(pet, TRAIT_CRITICAL_RESISTANCE, INNATE_TRAIT)
+>>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3

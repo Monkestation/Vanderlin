@@ -153,6 +153,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOGUNS "no_guns"
 /// Doesn't use nutrition
 #define TRAIT_NOHUNGER "no_hunger"
+/// This carbon doesn't have blood
+#define TRAIT_NOBLOOD "noblood"
 /// Doesn't use hygine
 #define TRAIT_NOHYGIENE	"no_hygiene"
 /// Can't metabolise reagents
@@ -167,10 +169,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYLIMBDISABLE "easy_limb_disable"
 /// In some kind of critical condition. Is able to succumb.
 #define TRAIT_CRITICAL_CONDITION "critical-condition"
-/// In softcrit
-#define TRAIT_SOFT_CRITICAL_CONDITION "soft_critical_condition"
 /// Toxin damage heals, toxin healing does damage
 #define TRAIT_TOXINLOVER "toxinlover"
+/// Doesn't get overlays from being in critical.
+#define TRAIT_NOCRITOVERLAY "no_crit_overlay"
 /// Doesn't need to breathe
 #define TRAIT_NOBREATH "no_breath"
 #define TRAIT_HOLY "holy"
@@ -488,6 +490,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
 #define TRAIT_NO_EXPERIENCE	"unlearning"
+#define TRAIT_NO_SKILLS "zero_skills"
 /// This mob should never be affected by `/obj/effect/timestop`
 #define TRAIT_TIME_STOP_IMMUNE "timestopimmune"
 /// This mob should never close UI even if it doesn't have a client

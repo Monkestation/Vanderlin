@@ -44,6 +44,11 @@
 	screen_max_rows = 2
 	screen_max_columns = 1
 
+/datum/component/storage/concrete/hollow_book
+	max_items = 1
+	max_w_class = WEIGHT_CLASS_BULKY
+	quickdraw = TRUE
+
 /datum/component/storage/concrete/grid/keyring
 	screen_max_rows = 2
 	screen_max_columns = 5
@@ -87,6 +92,11 @@
 	max_w_class = WEIGHT_CLASS_HUGE
 	screen_max_rows = 10
 	screen_max_columns = 10
+
+/datum/component/storage/concrete/grid/bandolier
+	max_w_class = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 2
 
 /datum/component/storage/concrete/grid/mailmaster/show_to(mob/M)
 	. = ..()

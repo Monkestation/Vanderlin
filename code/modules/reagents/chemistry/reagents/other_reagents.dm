@@ -11,6 +11,7 @@
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
 	penetrates_skin = NONE
+	liver_chemical = FALSE
 	var/toxicity = 0.7 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
@@ -24,6 +25,9 @@
 	taste_description = "rot"
 	taste_mult = 1.8
 	toxicity = 3
+
+/datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	return FALSE
 
 /datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
 	if(!ismob(A))
@@ -48,22 +52,20 @@
 		exposed_mob.adjust_hydration(vitae * 0.1)
 
 	var/mob/living/carbon/exposed_carbon = exposed_mob
-	if(istype(exposed_carbon) && (NOBLOOD in exposed_carbon.dna?.species?.species_traits))
+	if(istype(exposed_carbon) && !CAN_HAVE_BLOOD(exposed_carbon))
 		return
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
 	if(methods & INJECT)
 		var/modifier = 1 //TODO: Borbop ~ Once we get a proper transfusion system this will become unneeded basically means instead of 5 units we inject 100 units which is 4 injections to suriving level. This is 100% blood duping but like... its this or 80 syringes of blood to get someone restarted
 		if(exposed_mob.stat >= DEAD)
-			modifier = 20
-		if(exposed_mob.blood_volume <= BLOOD_VOLUME_MAXIMUM)
-			exposed_mob.adjust_bloodvolume(round(reac_volume, 0.1) * modifier)
+			modifier = 10
+		exposed_mob.adjust_blood_volume(round(reac_volume, 0.1) * modifier, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 		return
 	if(methods & INGEST)
 		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(exposed_mob, TRAIT_BLOODDRINKER) || HAS_TRAIT(exposed_mob, TRAIT_NASTY_EATER))))
 			if(!HAS_TRAIT(exposed_mob, TRAIT_NOHUNGER))
 				exposed_mob.adjust_hydration(reac_volume * 0.2)
-			if(exposed_mob.blood_volume < BLOOD_VOLUME_NORMAL)
-				exposed_mob.adjust_bloodvolume(reac_volume * 0.2)
+			exposed_mob.adjust_blood_volume(reac_volume * 0.2, maximum = BLOOD_VOLUME_NORMAL)
 			return
 		var/tox = toxicity * reac_volume
 		if(HAS_TRAIT(exposed_carbon, TRAIT_POISON_RESILIENCE))
@@ -142,7 +144,7 @@
 
 /datum/reagent/water/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 0.1, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
 
 /datum/reagent/water/on_mob_end_metabolize(mob/living/L)
 	. = ..()
@@ -160,16 +162,17 @@
 	color = "#98934bc6"
 	sanitization = -SANITIZATION_PER_UNIT_WATER
 
-/datum/reagent/water/gross/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	BP.undisinfect_limb()
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/water/gross/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.undisinfect_limb()
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(SANITIZATION_PER_UNIT_WATER)
+	return ..()
 
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency)
-	..()
+	. = ..()
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
 	M.adjustToxLoss(1 * efficiency)
@@ -359,14 +362,7 @@
 	name = "SATE"
 	color = "#e46363"
 	glows = TRUE
-
-/datum/reagent/sate/on_mob_add(mob/living/L)
-	. = ..()
-	ADD_TRAIT(L, TRAIT_SATE, type)
-
-/datum/reagent/sate/on_mob_delete(mob/living/L)
-	. = ..()
-	REMOVE_TRAIT(L, TRAIT_SATE, type)
+	added_traits = list(TRAIT_SATE)
 
 /datum/reagent/devour
 	name = "DEVOUR"

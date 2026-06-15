@@ -1,4 +1,0 @@
-author: "ta3754859-max"
-delete-after: True
-changes:
-  - bugfix: "Rare subclasses now appear in triumph buy classes menu"

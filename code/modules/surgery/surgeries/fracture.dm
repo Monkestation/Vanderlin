@@ -1,6 +1,6 @@
 /datum/surgery/fix_bone
 	name = "Bone fixing"
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(
 		BODY_ZONE_PRECISE_SKULL,
 		BODY_ZONE_HEAD,
@@ -32,7 +32,7 @@
 		TOOL_BONESETTER = 80,
 		TOOL_HAND = 40,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_EXPERT

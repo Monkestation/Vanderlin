@@ -10,6 +10,8 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
+	detail_tag = "_quad"
+	detail_color = CLOTHING_RED
 	var/picked
 
 /obj/item/clothing/cloak/stabard/attack_hand_secondary(mob/user, list/modifiers)
@@ -111,18 +113,12 @@
 /obj/item/clothing/cloak/stabard/colored/dungeon/attack_hand_secondary(mob/user, list/modifiers)
 	return
 
-/obj/item/clothing/cloak/stabard/mercenary
-	detail_tag = "_quad"
-
 /obj/item/clothing/cloak/stabard/mercenary/Initialize()
 	. = ..()
 	detail_tag = pick("_quad", "_spl", "_box", "_dim")
 	color = clothing_color2hex(pick(CLOTHING_COLOR_NAMES))
 	detail_color = clothing_color2hex(pick(CLOTHING_COLOR_NAMES))
 	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
 
 /obj/item/clothing/cloak/stabard/kaledon
 	detail_tag = "_box"
@@ -140,6 +136,8 @@
 	icon = 'icons/roguetown/clothing/special/templar.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/templar.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/templar.dmi'
+	detail_tag = null
+	detail_color = null
 
 /obj/item/clothing/cloak/stabard/templar/astrata
 	name = "surcoat of the solar order"
@@ -204,6 +202,14 @@
 	icon_state = "tabard_ravox"
 	item_state = "tabard_ravox"
 
+/obj/item/clothing/cloak/stabard/templar/justice
+	name = "surcoat of the justice order"
+	icon_state = "justicetabard"
+	item_state = "justicetabard"
+	icon = 'icons/roguetown/clothing/special/ravoxtemplar.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/ravoxtabard.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/ravoxtabard.dmi'
+
 /obj/item/clothing/cloak/stabard/templar/xylix
 	name = "surcoat of the xylixian order"
 	icon_state = "tabard_xylix"
@@ -216,6 +222,9 @@
 /obj/item/clothing/cloak/stabard/jupon
 	name = "jupon"
 	icon_state = "surcoat"
+	color = CLOTHING_MUSTARD_YELLOW
+	detail_tag = "_spl"
+	detail_color = CLOTHING_SOOT_BLACK
 
 /obj/item/clothing/cloak/stabard/jupon/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

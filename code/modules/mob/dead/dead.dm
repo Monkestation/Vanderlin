@@ -237,8 +237,6 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	src << browse(null, "window=food_selection")
 	src << browse(null, "window=drink_selection")
 
-	SStriumphs.remove_triumph_buy_menu(client)
-
 	winshow(src, "stonekeep_prefwin", FALSE)
 	src << browse(null, "window=preferences_browser")
 	src << browse(null, "window=lobby_window")

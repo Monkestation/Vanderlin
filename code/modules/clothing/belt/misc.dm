@@ -18,6 +18,12 @@
 		for(var/obj/item/I in things)
 			STR.remove_from_storage(I, get_turf(src))
 
+/obj/item/storage/belt/leather/double
+	name = "pair of belts"
+	desc = "A pair of slim black belts worn around the waist."
+	icon_state = "belt_double"
+	item_state = "belt_double"
+
 /obj/item/storage/belt/leather/assassin // Assassin's super edgy and cool belt can carry normal items (for poison vial, lockpick).
 	empty_when_dropped = FALSE
 	component_type = /datum/component/storage/concrete/grid/belt/assassin
@@ -159,6 +165,33 @@
 /obj/item/storage/belt/leather/cloth/bandit
 	color = "#ff0000"
 
+/obj/item/storage/belt/leather/breechcloth
+	name = "belt with breechcloth"
+	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbelt"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_TARAXACUM_YELLOW
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/breechcloth/blackbelt
+	name = "black belt with breechcloth"
+	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbeltalt"
+
+/obj/item/storage/belt/leather/slayer
+	name = "rugged dwarven belt"
+	desc = "The golden beard of the face plate doubles as a codpiece."
+	icon_state = "slayer"
+	item_state = "slayer"
+	sellprice = 50
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/shawl
+	name = "shawl"
+	desc = "A cloth shawl."
+	icon_state = "beltshawl"
+	item_state = "beltshawl"
+
 /obj/item/storage/belt/pouch
 	name = "pouch"
 	desc = "Usually used for holding coins."
@@ -186,6 +219,26 @@
 /obj/item/storage/belt/pouch/food
 	populate_contents = list(
 		/obj/item/reagent_containers/food/snacks/hardtack,
+	)
+
+/obj/item/storage/belt/hollow_book
+	name = "Tome of Justice"
+	desc = "This seems to be a special edition.."
+	icon = 'icons/roguetown/clothing/storage.dmi'
+	mob_overlay_icon = null
+	icon_state = "handtome"
+	slot_flags = ITEM_SLOT_HIP
+	attack_verb = list("whips", "lashes")
+	w_class = WEIGHT_CLASS_NORMAL
+	max_integrity = 300
+	equip_sound = 'sound/blank.ogg'
+	bloody_icon_state = "bodyblood"
+	grid_height = 64
+	grid_width = 32
+
+	component_type = /datum/component/storage/concrete/hollow_book
+	populate_contents = list(
+		/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded,
 	)
 
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
@@ -249,6 +302,14 @@
 		/obj/item/ammo_casing/caseless/bullet,
 		/obj/item/ammo_casing/caseless/bullet,
 		/obj/item/ammo_casing/caseless/bullet,
+	)
+
+/obj/item/storage/belt/pouch/pellets
+	populate_contents = list(
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
 	)
 
 /obj/item/storage/belt/pouch/cloth
@@ -403,7 +464,6 @@
 		/obj/item/weapon/surgery/retractor,
 		/obj/item/weapon/surgery/bonesetter,
 		/obj/item/weapon/surgery/cautery,
-		/obj/item/natural/worms/leech,
 		/obj/item/natural/worms/leech,
 		/obj/item/weapon/surgery/hammer,
 		/obj/item/natural/bundle/fibers/full,

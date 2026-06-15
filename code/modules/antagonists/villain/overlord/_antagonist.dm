@@ -86,6 +86,7 @@
 	UnregisterSignal(overlord_mob, COMSIG_LIVING_DEATH)
 	if(overlord_controller)
 		qdel(overlord_controller)
+	return ..()
 
 /datum/antagonist/overlord/greet()
 	. = ..()
@@ -112,15 +113,16 @@
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.set_faction(FACTION_UNDEAD)
+	L.set_faction(list(FACTION_UNDEAD))
 	if(length(L.quirks))
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.grant_undead_eyes()
 	L.skeletonize(FALSE)
 	L.equipOutfit(/datum/outfit/overlord)
 	L.set_patron(/datum/patron/inhumen/zizo)
+	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
 
 /datum/antagonist/overlord/proc/on_death(datum/source)
 	SIGNAL_HANDLER

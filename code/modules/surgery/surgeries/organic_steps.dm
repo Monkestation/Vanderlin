@@ -28,11 +28,7 @@
 		"<span class='notice'>Blood pools around the incision in [target]'s [parse_zone(target_zone)].</span>")
 	var/obj/item/bodypart/gotten_part = target.get_bodypart(check_zone(target_zone))
 	if(gotten_part)
-		var/datum/injury/ouchie = gotten_part.create_injury(WOUND_SLASH, 49, TRUE)
-		gotten_part.update_damages()
-		if(!ouchie)
-			return
-		ouchie.injury_flags |= INJURY_SURGICAL
+		gotten_part.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO/6, surgical = TRUE)
 	return TRUE
 
 /// Clamping
@@ -112,7 +108,12 @@
 	. = ..()
 	if(!.)
 		return
-	return length(bodypart.wounds)
+	if(length(bodypart.wounds))
+		return TRUE
+	for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(artery.damage)
+			return TRUE
+	return FALSE
 
 /datum/surgery_step/cauterize/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to cauterize the wounds on [target]'s [parse_zone(target_zone)]...</span>",
@@ -128,7 +129,10 @@
 	if(bodypart)
 		for(var/datum/wound/bleeder in bodypart.wounds)
 			bleeder.cauterize_wound()
-		bodypart.receive_damage(burn = 40) //painful, but the wounds go away eh?
+		for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
+			if(artery.damage)
+				artery.applyOrganDamage(-artery.damage)
+		bodypart.bodypart_attacked_by(BCLASS_BURN, dam = 25, modifiers = list(CRIT_MOD_CHANCE = -100)) //painful, but the wounds go away eh?
 	target.emote("scream")
 	return TRUE
 

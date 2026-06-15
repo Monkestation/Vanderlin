@@ -31,7 +31,6 @@
 	var/mob/living/carbon/carbon = owner
 	if(!iscarbon(owner))
 		return
-	for(var/datum/injury/injury as anything in carbon.all_injuries)
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
-		injury.heal_damage(0.1)
+
+	carbon.adjustBruteLoss(0.1, FALSE)
+	carbon.adjustFireLoss(0.1, TRUE)

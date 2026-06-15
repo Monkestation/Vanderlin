@@ -38,16 +38,7 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/tree/attacked_by(obj/item/I, mob/living/user)
@@ -307,11 +298,12 @@
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "grass1"
 	base_icon_state = "grass"
+	layer = BELOW_OBJ_LAYER
 	num_random_icons = 6
 	attacked_sound = "plantcross"
 	destroy_sound = "plantcross"
 	max_integrity = 5
-	debris = list(/obj/item/natural/fibers = 1)
+	debris = list(/obj/item/natural/fibers = 2)
 	/// base % to find any useful thing in the bush, gets modded by perception
 	var/prob2findstuff
 	/// for harvestable
@@ -484,21 +476,28 @@
 	else
 		to_chat(L, span_warning("I get stuck in \a [src]."))
 
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
-		if(was_hard_collision)
-			var/obj/item/bodypart/BP = pick(H.bodyparts)
-			BP.receive_damage(10)
-			to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
-			if((prob(20)) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-				var/obj/item/natural/thorn/TH = new(src.loc)
-				BP.add_embedded_object(TH, silent = TRUE)
-				to_chat(H, span_danger("\A [TH] impales my [BP.name]."))
-				if(!HAS_TRAIT(H, TRAIT_NOPAIN))
-					H.emote("painscream")
-					L.Stun(3 SECONDS) //that fucking hurt
-					H.consider_ambush()
+	if(!L.client)
+		return
+	if(L.m_intent != MOVE_INTENT_SNEAK && !HAS_TRAIT(L, TRAIT_MOVE_FLYING) && prob(20))
+		L.consider_ambush()
+
+	if(!ishuman(L))
+		return
+	var/mob/living/carbon/human/H = L
+	var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
+	if(!was_hard_collision)
+		return
+	var/obj/item/bodypart/BP = pick(H.bodyparts)
+	BP.receive_damage(10)
+	to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
+	if(HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+		return
+	var/obj/item/natural/thorn/TH = new(src.loc)
+	BP.add_embedded_object(TH, silent = TRUE)
+	to_chat(H, span_danger("\A [TH] impales my [BP.name]."))
+	if(H.can_feel_pain())
+		H.emote("painscream")
+		L.Stun(3 SECONDS) //that fucking hurt
 
 /obj/structure/flora/grass/bush/wall
 	name = "great bush"
@@ -595,16 +594,7 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/shroom_tree/Initialize()
