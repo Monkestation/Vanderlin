@@ -281,6 +281,8 @@
 		if(M_turf)
 			M.playsound_local(M_turf, fire_sound, 100, 1, get_rand_frequency())
 
+	bullet_rammed = FALSE
+
 /obj/item/gun/ballistic/powder/postfire_empty_checks(last_shot_succeeded)
 	. = ..()
 	if(last_shot_succeeded)

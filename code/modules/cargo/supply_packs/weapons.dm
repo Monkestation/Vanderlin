@@ -283,6 +283,11 @@
 	cost = 500
 	contains = /obj/item/gun/ballistic/powder/wheellock/puffer
 
+/datum/supply_pack/weapons/ranged/blunderbuss
+	name = "Smuggled Blunderbuss"
+	cost = 650
+	contains = /obj/item/gun/ballistic/powder/wheellock/blunderbuss
+
 /datum/supply_pack/weapons/ranged/musket
 	name = "Smuggled Musket"
 	cost = 750 //needs balancing
