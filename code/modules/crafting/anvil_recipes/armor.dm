@@ -1053,7 +1053,7 @@
 // --------- GOLD -----------
 /datum/anvil_recipe/armor/gold
 	required_material = /obj/item/ingot/gold
-	craftdiff = 6 
+	craftdiff = 6
 	abstract_type = /datum/anvil_recipe/armor/gold
 ///////////////////////////////////////////////
 
