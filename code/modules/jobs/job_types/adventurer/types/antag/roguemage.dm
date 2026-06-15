@@ -84,7 +84,7 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/reagent_containers/glass/bottle/manapot
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/spectacles/sglasses, /obj/item/chalk = 1, /obj/item/book/granter/spellbook/apprentice = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/spectacles/sglasses, /obj/item/chalk = 1, /obj/item/book/granter/spellbook/apprentice = 1, /obj/item/clothing/face/shepherd/rag = 1)
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/coif
 	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
