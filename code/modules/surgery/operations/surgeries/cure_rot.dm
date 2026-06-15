@@ -56,6 +56,11 @@
 	)
 
 	if(limb.body_zone == BODY_ZONE_CHEST)
+		// I would rather not have this but afaik this is the only way to reduce this outside of the cure rot miracle
+		var/datum/component/rot/rot = limb_owner?.GetComponent(/datum/component/rot)
+		if(rot) // ew
+			rot.amount = 0
+
 		if(ishuman(limb_owner))
 			var/mob/living/carbon/human/H = limb_owner
 			H?.funeral = FALSE
@@ -66,11 +71,6 @@
 
 	limb.revive_limb()
 	limb.germ_level = 0
-
-	// I would rather not have this but afaik this is the only way to reduce this outside of the cure rot miracle
-	var/datum/component/rot/rot = limb_owner?.GetComponent(/datum/component/rot)
-	if(rot) // ew
-		rot.amount = 0
 
 	for(var/obj/item/organ/organ in limb.get_organs())
 		if(organ.germ_level >= INFECTION_LEVEL_ONE * 0.2)
