@@ -284,6 +284,14 @@
 		/obj/item/ammo_casing/caseless/bullet,
 	)
 
+/obj/item/storage/belt/pouch/pellets
+	populate_contents = list(
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+	)
+
 /obj/item/storage/belt/pouch/cloth
 	name = "cloth pouch"
 	desc = "Usually used for holding small amount of coins."

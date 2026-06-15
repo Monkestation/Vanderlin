@@ -74,6 +74,8 @@
 	///sound we use for crafting
 	var/crafting_sound
 	var/sound_volume = 40
+	///do we reward experience on craft?
+	var/reward_experience = TRUE
 
 /datum/repeatable_crafting_recipe/New()
 	. = ..()
@@ -866,7 +868,8 @@
 
 	clean_up_items(to_delete)
 
-	add_skill_experience(user)
+	if(reward_experience)
+		add_skill_experience(user)
 
 	move_products(outputs, user)
 
