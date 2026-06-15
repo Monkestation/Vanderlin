@@ -221,9 +221,8 @@
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine)
 		if(doctor.diceroll(doctor_skill - 1, context = DICE_CONTEXT_PHYSICAL) <= DICE_FAILURE)
 			to_chat(doctor, span_warning("My hand slips!"))
-			user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * 0.2)
 			return FALSE
-		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise)
+		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * 0.1)
 		doctor.visible_message(
 			span_green("<b>[doctor]</b> sutures <b>[patient]</b>'s [affecting.name] arteries with \the [src]."),
 			span_green("I suture <b>[patient]</b>'s [affecting.name] arteries with \the [src]."))
