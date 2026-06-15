@@ -36,7 +36,7 @@
 	full_name = "Move Upwards"
 	description = "Moves your character up a z-level if possible"
 
-/datum/keybinding/movement/zlevel_upwards/down(client/user, turf/target, mousepos_x, mousepos_y, turf/target, mousepos_x, mousepos_y)
+/datum/keybinding/movement/zlevel_upwards/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
@@ -49,7 +49,7 @@
 	full_name = "Move Downwards"
 	description = "Moves your character down a z-level if possible"
 
-/datum/keybinding/movement/zlevel_downwards/down(client/user, turf/target, mousepos_x, mousepos_y, turf/target, mousepos_x, mousepos_y)
+/datum/keybinding/movement/zlevel_downwards/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(.)
 		return
