@@ -98,6 +98,7 @@
 		/datum/supply_pack/weapons/ranged/whip,
 		/datum/supply_pack/weapons/steel/irumi,
 		/datum/supply_pack/weapons/iron/ikhopesh,
+		/datum/supply_pack/weapons/ranged/javeliniron,
 		// Food & Drink
 		/datum/supply_pack/food/drinks/beer,
 		/datum/supply_pack/food/drinks/onin,
@@ -157,6 +158,7 @@
 		/datum/supply_pack/weapons/ammo/Blowpouch,
 		/datum/supply_pack/weapons/steel/khopesh,
 		/datum/supply_pack/weapons/steel/steppesabre,
+		/datum/supply_pack/weapons/ranged/javelinsteel,
 		// Food
 		/datum/supply_pack/food/drinks/spottedhen,
 		/datum/supply_pack/food/roastedcoffee,
