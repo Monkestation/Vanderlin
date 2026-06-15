@@ -165,8 +165,8 @@
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return
 	dam *= damage_multiplier
-	if(dam < 5 && bclass != WOUND_INTERNAL_BRUISE)
-		dam = CEILING(dam, 1)
+	// if(dam < 5 && bclass != WOUND_INTERNAL_BRUISE)
+	// 	dam = CEILING(dam, 1)
 
 	var/do_crit = (modifiers[CRIT_MOD_CHANCE] <= -100) ? FALSE : TRUE
 	if(do_crit && ishuman(owner))
