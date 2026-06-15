@@ -118,6 +118,7 @@
 		return
 
 	living_user.give(offered)
+	return TRUE
 
 /datum/keybinding/carbon/bite_intent
 	hotkey_keys = list("H")
