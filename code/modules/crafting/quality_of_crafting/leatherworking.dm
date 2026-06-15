@@ -798,7 +798,7 @@
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/hunterboots
-	name = "hunter boots"
+	name = "hunting boots"
 	output = /obj/item/clothing/shoes/boots/hunter
 	requirements = list(/obj/item/natural/hide/cured = 2,
 				/obj/item/natural/fur = 1,
@@ -948,6 +948,16 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/standalone/huntergamb
+	name = "hunting gambeson"
+	output = /obj/item/clothing/armor/gambeson/hunts
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
+		/obj/item/clothing/armor/gambeson = 1,
+	)
+	craftdiff = 4
+
 /datum/repeatable_crafting_recipe/leather/standalone/gloves
 	name = "hardened leather gloves"
 	output = /obj/item/clothing/gloves/leather/advanced
@@ -1069,7 +1079,7 @@
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/hunterboots/masterwork
-	name = "masterwork hunter boots"
+	name = "masterwork hunting boots"
 	output = /obj/item/clothing/shoes/boots/hunter/masterwork
 	attacked_atom = /obj/item/clothing/shoes/boots/hunter
 	requirements = list(/obj/item/clothing/shoes/boots/hunter = 1,
