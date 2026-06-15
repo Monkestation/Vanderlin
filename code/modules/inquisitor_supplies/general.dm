@@ -257,6 +257,16 @@
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 
+/datum/inqports/equipment/blunderbuss
+	name = "1 Blunderbuss, 4 lead pellets and powder flask"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/blunderbuss
+	marquescost = 16
+	maximum = 1
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/blunderbuss/populate_contents()
+	new /obj/item/gun/ballistic/powder/wheellock/blunderbuss(src)
+	new /obj/item/storage/belt/pouch/pellets(src)
+	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 /*
 //Added this and then realized it wasn't actually in the bounty and I'm just stupid. It's staying here incase somebody wants it.
 

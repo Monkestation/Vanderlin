@@ -37,9 +37,7 @@
 	belt = /obj/item/storage/belt/leather/mercenary
 	shirt = /obj/item/clothing/shirt/grenzelhoft
 	backl = /obj/item/storage/backpack/satchel/musketeer
-	backr = /obj/item/gun/ballistic/powder/musket
 	beltl = /obj/item/weapon/sword/sabre/dec
-	beltr = /obj/item/ammo_holder/bullet/bullets
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/cuirass/grenzelhoft //bad stats so they cna keep the strong armor
 
@@ -49,6 +47,18 @@
 		H.underwear = "Femleotard"
 		H.underwear_color = CLOTHING_SOOT_BLACK
 		H.update_body()
+
+/datum/job/advclass/mercenary/grenzelhoftgun/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/static/list/weapons = list("Musket", "Blunderbuss")
+	var/weapon_choice = tgui_input_list(player_client,"CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.", weapons)
+	switch(weapon_choice)
+		if("Musket")
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/powder/musket, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/bullet/bullets, ITEM_SLOT_BELT_R, TRUE)
+		if("Blunderbuss")
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/powder/wheellock/blunderbuss, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/storage/belt/pouch/pellets, ITEM_SLOT_BELT_R, TRUE)
 
 /datum/job/advclass/mercenary/grenzelhoftgun/after_spawn(mob/living/carbon/human/H)
 	. = ..()

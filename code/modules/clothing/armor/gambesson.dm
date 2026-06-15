@@ -124,6 +124,7 @@
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
 
 //................ Padded Dress ............... //
 /obj/item/clothing/armor/gambeson/heavy/dress
