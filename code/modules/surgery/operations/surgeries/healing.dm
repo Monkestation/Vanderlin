@@ -48,9 +48,9 @@
 
 	var/mob/living/carbon/carbon_patient = patient
 	for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-		if(injury.damage_type in list(WOUND_BLUNT, WOUND_INTERNAL_BRUISE, WOUND_LASH))
+		if(injury.damage_type & (WOUND_BLUNT | WOUND_INTERNAL_BRUISE | WOUND_LASH))
 			return TRUE
-		if(injury.damage_type == WOUND_BURN)
+		if(injury.damage_type & WOUND_BURN)
 			return TRUE
 
 	return FALSE
@@ -213,9 +213,9 @@
 		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
 			if(injury.required_status != BODYPART_ORGANIC)
 				continue
-			if(burn_healed && injury.damage_type == WOUND_BURN)
+			if(burn_healed && injury.damage_type & WOUND_BURN)
 				injury.heal_damage(burn_healed)
-			if(brute_healed && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)))
+			if(brute_healed && (injury.damage_type & (WOUND_BLUNT | WOUND_LASH | WOUND_INTERNAL_BRUISE)))
 				injury.heal_damage(brute_healed)
 
 	user_msg += get_progress(surgeon, patient, brute_healed, burn_healed)

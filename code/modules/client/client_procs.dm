@@ -115,18 +115,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		asset_cache_preload_data(href_list["asset_cache_preload_data"])
 		return
 
-	// Keypress passthrough
-	if(href_list["__keydown"])
-		var/keycode = browser_keycode_to_byond(href_list["__keydown"])
-		if(keycode)
-			keyDown(keycode)
-		return
-	if(href_list["__keyup"])
-		var/keycode = browser_keycode_to_byond(href_list["__keyup"])
-		if(keycode)
-			keyUp(keycode)
-		return
-
 	// ANSWER SCHIZOHELP
 	if(href_list["schizohelp"])
 		var/datum/schizohelp/schizo = locate(href_list["schizohelp"])

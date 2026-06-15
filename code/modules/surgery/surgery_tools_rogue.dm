@@ -221,6 +221,10 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
 
+/obj/item/weapon/surgery/hammer/Initialize(mapload)
+	. = ..()
+	item_flags &= ~SURGICAL_TOOL
+
 /obj/item/weapon/surgery/hammer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.cmode)
 		return NONE

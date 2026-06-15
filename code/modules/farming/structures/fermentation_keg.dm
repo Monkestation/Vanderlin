@@ -155,8 +155,13 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 			return NONE
 
 		if(istype(user.used_intent, /datum/intent/fill))
+			if(!tapped)
+				return NONE
+
 			if(try_filling(user, tool))
 				return ITEM_INTERACT_SUCCESS
+		else if(istype(user.used_intent, /datum/intent/pour))
+			return NONE
 
 	if(heated)
 		if(istype(tool, /obj/item/ore/coal) || istype(tool, /obj/item/grown/log/tree))
