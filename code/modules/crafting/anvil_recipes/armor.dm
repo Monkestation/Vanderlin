@@ -1392,7 +1392,7 @@
 
 /datum/anvil_recipe/armor/gold
 	abstract_type = /datum/anvil_recipe/armor/gold
-	craftdiff = SKILL_LEVEL_LEGENDARY
+	craftdiff = 6
 	required_material = /obj/item/ingot/gold
 
 /datum/anvil_recipe/armor/gold/armet
