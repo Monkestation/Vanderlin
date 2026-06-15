@@ -85,11 +85,9 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(isitem(interacting_with))
-		. = TRUE
 		var/obj/item/attacked_item = interacting_with
 		if(!attacked_item.anvilrepair || !attacked_item.max_integrity)
-			to_chat(user, span_warning("[attacked_item] cannot be repaired."))
-			return ITEM_INTERACT_BLOCKING
+			return NONE
 
 		if(!attacked_item.ontable() && !istype(interacting_with.loc, /obj/machinery/anvil))
 			to_chat(user, span_warning("I should put [attacked_item] on a table or an anvil first."))
@@ -144,11 +142,9 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(isstructure(interacting_with))
-		. = TRUE
 		var/obj/structure/attacked_structure = interacting_with
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
-			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
-			return ITEM_INTERACT_BLOCKING
+			return NONE
 
 		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair) <= 0)
 			to_chat(user, span_warning("I don't know how to repair this.."))

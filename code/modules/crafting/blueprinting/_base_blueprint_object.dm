@@ -10,6 +10,7 @@
 	anchored = TRUE
 	density = FALSE
 	UUID_saving = TRUE
+	hammer_repair = FALSE
 
 	var/datum/blueprint_recipe/recipe
 	var/tmp/mob/creator
@@ -69,21 +70,19 @@
 	if(!any_stored)
 		. += span_warning("  No materials staged yet. Attack the blueprint with materials to pre-load them.")
 
-/obj/structure/blueprint/attackby(obj/item/I, mob/user, list/modifiers)
+/obj/structure/blueprint/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	// Construct tool (or no tool required)
-	if(recipe?.construct_tool && istype(I, recipe.construct_tool))
-		try_construct(user, I)
-		return
+	if(recipe?.construct_tool && istype(tool, recipe.construct_tool))
+		try_construct(user, tool)
+		return ITEM_INTERACT_SUCCESS
 
 	if(!recipe?.construct_tool)
 		try_construct(user)
-		return
+		return ITEM_INTERACT_SUCCESS
 
 	//try to stage the item into the blueprint for usage later (sovl)
-	if(try_stage_item(I, user))
-		return
-
-	return ..()
+	if(try_stage_item(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/blueprint/proc/try_stage_item(obj/item/I, mob/user)
 	if(!recipe)
