@@ -144,6 +144,10 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
 
+	// backup bleed rate if you max out on burn damage
+	if((burn_dam / max_damage) >= 0.9)
+		bleed_rate += BLEED_DAMAGE_RATIO / 5
+
 	var/our_state = return_surgical_state()
 	if(our_state & SURGERY_VESSELS_CLAMPED)
 		bleed_rate /= 2
