@@ -108,7 +108,7 @@
 	layer = BELOW_OBJ_LAYER
 	lock = /datum/lock/key/purity
 	var/list/held_items = list()
-	var/budget = 200
+	var/budget = 0
 	var/upgrade_flags
 	var/current_cat
 	var/list/available_categories = list("Narcotics", "Instruments", "Medicine")
