@@ -221,11 +221,22 @@
 		/obj/item/reagent_containers/food/snacks/hardtack,
 	)
 
-/obj/item/storage/belt/pouch/book/hollow
+/obj/item/storage/belt/hollow_book
 	name = "Tome of Justice"
 	desc = "This seems to be a special edition.."
+	icon = 'icons/roguetown/clothing/storage.dmi'
+	mob_overlay_icon = null
 	icon_state = "handtome"
-	component_type = /datum/component/storage/concrete/grid/coin_pouch/book/hollow
+	slot_flags = ITEM_SLOT_HIP
+	attack_verb = list("whips", "lashes")
+	w_class = WEIGHT_CLASS_NORMAL
+	max_integrity = 300
+	equip_sound = 'sound/blank.ogg'
+	bloody_icon_state = "bodyblood"
+	grid_height = 64
+	grid_width = 32
+
+	component_type = /datum/component/storage/concrete/hollow_book
 	populate_contents = list(
 		/obj/item/gun/ballistic/powder/wheellock/puffer/preloaded,
 	)
