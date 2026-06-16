@@ -6,7 +6,7 @@
 	else
 		recent_heart_pump = list("[world.time]" = (0.3 + CEILING(forced_pump, 0.1)))
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!heart.current_blood)
+	if(heart)
 		heart.current_blood = heart.max_blood_storage
 	set_heartattack(FALSE)
 	return TRUE

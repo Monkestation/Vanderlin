@@ -150,7 +150,6 @@
 	if(traumatic_shock >= max(SHOCK_STAGE_2, 0.8 * shock_stage))
 		adjustShockStage(delta_time * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
-		setShockStage(min(shock_stage, SHOCK_STAGE_7))
 		var/recovery = delta_time
 		//Lower shock faster the less pain we feel
 		if(traumatic_shock < shock_stage)

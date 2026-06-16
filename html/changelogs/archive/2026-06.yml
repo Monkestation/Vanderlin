@@ -98,3 +98,13 @@
   - rscadd: Inquisitition Cna purchase silver javelins
   - rscadd: Two unique and currently unavailable massive weapons. Volfslayer and The
       Dragonslayer axe
+2026-06-15:
+  Avalon-Proto:
+  - qol: The Apothecary's PURITY now has and a new category of items for sale
+  - balance: The Apothecary starts with more mammons for purchasing goods from PURITY.
+  Singul0:
+  - rscadd: Adds Blunderbusses into the game for Grenzelhoft Mercenaries to use.
+  Sulaboy:
+  - bugfix: Psyalter's Stole Sprite Fix
+  The-Awful:
+  - rscadd: New outfit for Malum Acolytes.
