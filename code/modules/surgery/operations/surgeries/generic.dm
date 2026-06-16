@@ -287,7 +287,7 @@
 	)
 	display_pain(limb.owner, "Something just broke in my [parse_zone(limb.body_zone)]!")
 
-	limb.owner.emote("scream", forced = "surgery")
+	limb.owner.emote("scream")
 
 /datum/surgery_operation/limb/saw_bones/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	display_results(
@@ -300,4 +300,4 @@
 	display_pain(limb.owner, "I feel my bones ache and crack in my [parse_zone(limb.body_zone)]!")
 
 	limb.receive_damage(30)
-	limb.owner.emote("scream", forced = "surgery")
+	limb.owner.emote("scream")

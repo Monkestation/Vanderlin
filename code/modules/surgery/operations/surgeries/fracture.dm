@@ -58,4 +58,4 @@
 	display_pain(limb.owner, "I feel a sharp pain in my [parse_zone(limb.body_zone)] as the bone slides back out of place!")
 
 	limb.receive_damage(25, flashes = TRUE)
-	limb.owner.emote("scream", forced = "Surgery")
+	limb.owner.emote("scream")

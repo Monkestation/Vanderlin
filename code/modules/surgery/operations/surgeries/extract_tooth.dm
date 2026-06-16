@@ -56,4 +56,4 @@
 	jaw.knock_out_teeth(1, pick(GLOB.alldirs))
 	jaw.add_pain(25)
 
-	patient.emote("scream", intentional = TRUE)
+	patient.emote("scream")
