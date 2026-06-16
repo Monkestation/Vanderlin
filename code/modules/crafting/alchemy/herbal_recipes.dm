@@ -605,6 +605,35 @@
 	. = ..()
 	M.Unconscious(20 SECONDS)
 
+/datum/reagent/poison/herbal/jaw
+	name = "Jaw Rot"
+	description = "Substance which rapidly destroys tissue in the mouth and jaw, popular among vampire hunters."
+	reagent_state = LIQUID
+	color = "#3e25ce"
+	metabolization_rate = 0.5
+	taste_description = "cavities and painfull sweetness"
+
+/datum/reagent/poison/herbal/jaw/on_mob_life(mob/living/L)
+	. = ..()
+	L.adjustFireLoss(0.1)
+	L.adjustOrganLoss(ORGAN_SLOT_JAW, 5)
+
+/datum/reagent/poison/herbal/erratique
+	name = "Erratique"
+	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity, and is extremely lethal over a long period of time if untreated."
+	color = "#ffffff"
+	metabolization_rate = 0.1
+	taste_description = "bitter thoughts"
+
+/datum/reagent/poison/herbal/erratique/on_mob_metabolize(mob/living/M)
+	. = ..()
+	ADD_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
+	L.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+
+/datum/reagent/poison/herbal/erratique/on_mob_end_metabolize(mob/living/M)
+	. = ..()
+	REMOVE_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
+
 /datum/reagent/poison/herbal/acid
 	name = "Flamekiss Liqeur"
 	description = "Burning liquid which is tailored to dissolve flesh."
@@ -682,6 +711,20 @@
 	M.apply_status_effect(/datum/status_effect/debuff/alch/pain)
 	M.add_stress(/datum/stress_event/souffrance)
 
+/datum/reagent/poison/herbal/gamble
+	name = "Desgracia"
+	description = "Concentrated demonic essence which purges luck from the consumer."
+	reagent_state = LIQUID
+	color = "#8b0000"
+	metabolization_rate = 0.5
+	overdose_threshold = 45
+	taste_description = "misfortune"
+
+/datum/reagent/poison/herbal/gamble/on_mob_metabolize(mob/living/M)
+	. = ..()
+	M.apply_status_effect(/datum/status_effect/debuff/alch/cards)
+	M.add_stress(/datum/stress_event/gambling)
+
 /datum/reagent/poison/herbal/rajaijah //Goonstation my beloved
 	name = "Dark sun's shine"
 	description = "Neurodegenerative brew which makes the user go temporarily insane with a craving for violence and blood."
@@ -698,6 +741,56 @@
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
+
+/datum/reagent/poison/herbal/tear
+	name = "Sunder Toxin"
+	description = "Toxin used by orc raiding bands to weaken enemies for battle. Not very harmfull on it's own, but corrodes joints to limbs."
+	color = "#9c5aa5"
+	metabolization_rate = 0.01
+	taste_description = "you just bit your cheek"
+
+/datum/reagent/poison/herbal/tear/on_mob_metabolize(mob/living/M)
+	. = ..()
+	ADD_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
+
+/datum/reagent/poison/herbal/tear/on_mob_end_metabolize(mob/living/M)
+	. = ..()
+	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
+
+/datum/reagent/poison/herbal/bioweapon
+	name = "NRSIV"
+	description = "Nonreproductive Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of rapidly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
+	color = "#00ff0d"
+	metabolization_rate = 0.01
+	taste_description = "death on a microscopic level"
+
+/datum/reagent/poison/bioweapon/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
+	. = ..()
+	if(methods & (TOUCH|VAPOR))
+		var/mob/living/carbon/carbon = exposed_mob
+		if(istype(carbon))
+			if(!length(carbon.all_injuries))
+				return
+			for(var/datum/injury/injury as anything in carbon.all_injuries)
+				if(!injury.can_heal())
+					continue
+				injury.adjust_germ_level(reac_volume * 20)
+
+/datum/reagent/poison/bioweapon/on_mob_life(mob/living/carbon/M, efficiency)
+	var/compound_rate = min(0.5 + (current_cycle * 5), 4)
+	M.adjustToxLoss(compound_rate * REM * efficiency, 0)
+	M.add_nausea(1 * efficiency)
+	if(current_cycle > 8)
+		M.add_chem_effect(CE_ANTIBIOTIC, -5, "[type]")
+	. = ..()
+
+/datum/reagent/poison/herbal/bioweapon/on_mob_metabolize(mob/living/M)
+	. = ..()
+	ADD_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
+
+/datum/reagent/poison/herbal/bioweapon/on_mob_end_metabolize(mob/living/M)
+	. = ..()
+	REMOVE_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane
 	name = "Kingsbane"
@@ -872,3 +965,8 @@
 /datum/stress_event/battle_stim
 	desc = "I feel ready for battle!"
 	stress_change = -2
+
+/datum/stress_event/gambling
+	desc = "I feel like my chances of making it big have decreased..."
+	stress_change = 1
+	timer = 10 MINUTES
