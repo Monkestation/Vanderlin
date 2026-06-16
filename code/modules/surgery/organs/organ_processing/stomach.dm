@@ -43,6 +43,8 @@
 			owner.satiety += (0.5 * delta_time)
 			hunger_rate *= 2
 		hunger_rate *= owner.physiology.hunger_mod
+		if (ishuman(owner))
+			hunger_rate *= owner.nutrition_mod
 		owner.adjust_nutrition(-hunger_rate * (0.5 * delta_time))
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req
