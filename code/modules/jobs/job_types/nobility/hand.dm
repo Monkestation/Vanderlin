@@ -357,21 +357,13 @@
 		/obj/item/paper/scroll/frumentarii/roundstart = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
-<<<<<<< HEAD
-		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1
-=======
 		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1,
 		/obj/item/storage/fancy/cigarettes/tinzig = 1
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 	)
 	armor = /obj/item/clothing/armor/leather/jerkin/belted/long
 	pants = /obj/item/clothing/pants/trou/leathertights
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	beltl = /obj/item/ammo_holder/quiver/arrows
-<<<<<<< HEAD
-	beltr = /obj/item/weapon/sword/kaskara
-	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
-=======
 	beltr = /obj/item/weapon/sword/rapier/dec
 	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
 
@@ -385,4 +377,3 @@
 
 	pet.tamed(H)
 	ADD_TRAIT(pet, TRAIT_CRITICAL_RESISTANCE, INNATE_TRAIT)
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
