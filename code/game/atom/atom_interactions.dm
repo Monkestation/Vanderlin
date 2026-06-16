@@ -12,7 +12,7 @@
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 	var/is_left_clicking = !is_right_clicking
 
-	if(!user.cmode && isitem(src) && is_left_clicking && user.try_recipes(src, tool))
+	if(!user.cmode && isobj(src) && is_left_clicking && user.try_recipes(src, tool))
 		user?.changeNext_move(CLICK_CD_FAST)
 		return ITEM_INTERACT_SUCCESS
 
