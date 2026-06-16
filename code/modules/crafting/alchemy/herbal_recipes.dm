@@ -613,14 +613,12 @@
 	metabolization_rate = 0.5
 	taste_description = "burning pain beyond description"
 
-/datum/reagent/poison/herbal/acid/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with acid HURTS
-	if(!isliving(M))
-		return
-	
-		if(method in list(TOUCH, VAPOR, PATCH))
-			M.adjustFireLoss(reac_volume / 15)
-		
-		return ..()
+/datum/reagent/poison/herbal/acid/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
+	. = ..()
+	if(methods & (TOUCH|VAPOR))
+		exposed_mob.adjustFireLoss(reac_volume * 5, 0)
+		if(show_message)
+			exposed_mob.visible_message(span_danger("[exposed_mob]'s skin is melted off!"), span_userdanger("Your skin melts off your flesh!"))
 
 /datum/reagent/poison/herbal/acid/on_mob_life(mob/living/L)
 	. = ..()
