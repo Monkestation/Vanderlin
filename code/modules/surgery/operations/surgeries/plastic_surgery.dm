@@ -48,16 +48,13 @@
 	for(var/i in 1 to 10)
 		names += species.random_name(patient.gender, TRUE)
 
-	if(!length(names))
-		return FALSE
-
 	var/choice = tgui_input_list(surgeon, "New name to assign", "Facial Reconstruction", names)
 
 	if(choice == "Custom")
 		choice = tgui_input_text(surgeon, "New name to assign", "Facial Reconstruction", patient.name, max_length = MAX_NAME_LEN)
 
 	if(!choice)
-		return
+		return FALSE
 
 	operation_args[OPERATION_NEW_NAME] = choice
 	return !!operation_args[OPERATION_NEW_NAME]
