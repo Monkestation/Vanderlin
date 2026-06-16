@@ -355,6 +355,7 @@
 #include "code\_globalvars\misc.dm"
 #include "code\_globalvars\phobia.dm"
 #include "code\_globalvars\plant_defs.dm"
+#include "code\_globalvars\recipes.dm"
 #include "code\_globalvars\regexes.dm"
 #include "code\_globalvars\roguetown.dm"
 #include "code\_globalvars\say.dm"
