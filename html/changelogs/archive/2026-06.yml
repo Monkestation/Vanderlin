@@ -91,3 +91,32 @@
   Somniworld:
   - qol: You now know when you show someone a confession.
   - bugfix: You no longer can ask the dead to confess.
+2026-06-13:
+  Avalon-Proto:
+  - rscadd: Smiths can now produce MUCH more weaponry
+  - rscadd: Merchants can purchase iron and steel javelins
+  - rscadd: Inquisitition Cna purchase silver javelins
+  - rscadd: Two unique and currently unavailable massive weapons. Volfslayer and The
+      Dragonslayer axe
+2026-06-15:
+  Avalon-Proto:
+  - qol: The Apothecary's PURITY now has and a new category of items for sale
+  - balance: The Apothecary starts with more mammons for purchasing goods from PURITY.
+  Singul0:
+  - rscadd: Adds Blunderbusses into the game for Grenzelhoft Mercenaries to use.
+  Sulaboy:
+  - bugfix: Psyalter's Stole Sprite Fix
+  The-Awful:
+  - rscadd: New outfit for Malum Acolytes.
+2026-06-16:
+  Spitegremlin:
+  - rscadd: Added Huntsmaster Hand subclass, along with their hound
+  - rscadd: Added new Gambeson. Hunting Gambeson
+  - rscadd: Added new trait called keen eyes, and gave it to hunters and huntsmaster
+  - rscadd: Added a trait called flip jump to Spymaster, doesnt do anything other
+      then let them flip when they jump
+  - balance: gave Advisor a glock
+  - balance: gave all hand subclasses a standard 8 since i was told too, and the default
+      hand class had 8
+  - balance: gave pilgrim hunter forager and keeneyes trait, to match with normal
+      hunter

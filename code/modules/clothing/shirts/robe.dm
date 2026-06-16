@@ -34,7 +34,7 @@
 /obj/item/clothing/shirt/robe/colored/black
 	color = CLOTHING_DARK_INK
 
-/obj/item/clothing/shirt/robe/colored/red//placeholder for malum & xylix acolyte robes
+/obj/item/clothing/shirt/robe/colored/red//placeholder for xylix acolyte robes
 	color = CLOTHING_WINESTAIN_RED
 
 /obj/item/clothing/shirt/robe/colored/purple
@@ -99,6 +99,11 @@
 	name = "mourning robe"
 	desc = "Black robes which cover the body not unlike those in depictions of the Carriageman himself."
 	icon_state = "necrarobe"
+
+/obj/item/clothing/shirt/robe/malum
+	name = "malumite robe"
+	desc = "Holy-duty work robes with an attached apron and rolled up sleeves, for those who toil endlessly."
+	icon_state = "malumrobe"
 
 /obj/item/clothing/shirt/robe/priest
 	name = "solar vestments"

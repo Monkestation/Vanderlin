@@ -672,14 +672,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/whipwine // dont ask
 	name = "Magickal Whip Wine"
-	description = "A recipe recently floated into the Peaks. Magickal Whip Wine is said to increase one's potence and stamina sevenfold."
+	description = "A dubious recent recipe from abroad. Magickal Whip Wine is said to increase one's potence and stamina sevenfold."
 	boozepwr = 10 // it's a whip. it's an actual whip.
 	taste_description = "leather, bitter herbs, and regret" // what did you expect
 	color = "#3a1d18"
 
 /datum/reagent/consumable/ethanol/komuchisake // if you put this outside the lich dungeon i'll kill you
 	name = "Divine Snake Wine"
-	description = "The True Form of the Whipwine. The Magickal Snake Wine was an exclusively produced medicinal wine from over three centuries ago in the Kazengun Shogunate..."
+	description = "The True Form of the Whipwine. The Magickal Snake Wine was an exclusively produced medicinal wine from over three centuries ago..."
 	boozepwr = 60 // ancient lichebrau...
 	taste_description = "bitterness, pain, iron, and ancient mistakes" // what did you expect [2]
 	color = "#553837"
