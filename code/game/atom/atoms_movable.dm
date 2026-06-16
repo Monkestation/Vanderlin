@@ -436,6 +436,8 @@
 			if(z_move_flags & ZMOVE_FEEDBACK)
 				to_chat(rider || src, span_warning("There's nowhere to go in that direction!"))
 			return FALSE
+	if(HAS_TRAIT(src, TRAIT_I_AM_INVISIBLE_ON_A_BOAT)) // VANDERLIN CHANGE
+		return FALSE
 	if(SEND_SIGNAL(src, COMSIG_CAN_Z_MOVE, start, destination) & COMPONENT_CANT_Z_MOVE)
 		return FALSE
 	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & MOVETYPES_NOT_TOUCHING_GROUND)))

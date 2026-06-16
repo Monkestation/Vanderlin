@@ -231,7 +231,7 @@
 				cloth_check.reagents.remove_all(1)
 				dirty = FALSE
 				update_appearance(UPDATE_OVERLAYS)
-				AddComponent(/datum/component/particle_spewer/sparkle)
+				AddComponent(/datum/component/particle_spewer/sparkle/turf_only)
 				user.nobles_seen_servant_work()
 				usages = 0
 				cleaned = TRUE
@@ -276,9 +276,7 @@
 		usages +=1
 	if(usages >= max_usages && !dirty)
 		dirty = TRUE
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			qdel(particle_spewer)
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle/turf_only))
 		update_appearance(UPDATE_OVERLAYS)
 	playsound(src, 'sound/misc/eat.ogg', rand(30, 60), TRUE)
 	user.visible_message(span_info("[user] eats from [src]."), \
@@ -410,7 +408,7 @@
 
 /datum/reagent/consumable/soup // so you get hydrated without the flavor system messing it up. Works like water with less hydration
 	name = "soup"
-	var/hydration = 5
+	hydration_factor = 5
 
 /datum/reagent/consumable/soup/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -419,13 +417,6 @@
 /datum/reagent/consumable/soup/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
-
-/datum/reagent/consumable/soup/on_mob_life(mob/living/carbon/M, efficiency)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_hydration(hydration * efficiency)
-	..()
 
 /datum/reagent/consumable/soup/oatmeal
 	name = "oatmeal"
@@ -436,7 +427,7 @@
 	metabolization_rate = 0.5 // half as fast as normal, last twice as long
 	taste_description = "oatmeal"
 	taste_mult = 3
-	hydration = 2
+	hydration_factor = 2
 
 /datum/reagent/consumable/soup/oatmeal/sunreed
 	name = "sweet-reed"
@@ -449,7 +440,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 7
 	taste_mult = 4
-	hydration = 8
+	hydration_factor = 8
 
 /datum/reagent/consumable/soup/veggie/potato
 	color = "#869256"
@@ -498,7 +489,7 @@
 	nutriment_factor = 12
 	taste_description = "creamy cheese"
 	taste_mult = 4
-	hydration = 4
+	hydration_factor = 4
 
 /datum/reagent/consumable/soup/stew // can all be made with mince ie half meat so has to stay nutrient poor
 	name = "thick stew"

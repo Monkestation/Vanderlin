@@ -166,7 +166,8 @@
 	/**
 	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
 	 */
-	var/germ_level = GERM_LEVEL_AMBIENT
+	var/germ_level = INFECTION_LEVEL_ONE
+
 
 /**
  * Called when an atom is created in byond (built in engine proc)
@@ -447,7 +448,7 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+/atom/proc/get_examine_name(mob/user, use_article = TRUE)
 	if(use_article)
 		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
 	return "<b>[name]</b>"
@@ -645,6 +646,16 @@
 		to_chat(user, span_warning("I should try resisting."))
 	return
 
+/**
+ * A special case of relaymove() in which the person relaying the move may be "driving" this atom
+ *
+ * This is a special case for vehicles and ridden animals where the relayed movement may be handled
+ * by the riding component attached to this atom. Returns TRUE as long as there's nothing blocking
+ * the movement, or FALSE if the signal gets a reply that specifically blocks the movement
+ */
+/atom/proc/relaydrive(mob/living/user, direction)
+	return !(SEND_SIGNAL(src, COMSIG_RIDDEN_DRIVER_MOVE, user, direction) & COMPONENT_DRIVER_BLOCK_MOVE)
+
 /// Handle what happens when your contents are exploded by a bomb
 /atom/proc/contents_explosion(severity, target)
 	return //For handling the effects of explosions on contents that would not normally be effected
@@ -692,7 +703,7 @@
 /mob/living/carbon/get_blood_dna_list()
 	if(isnull(dna)) // Xenos
 		return ..()
-	if(NOBLOOD in dna.species.species_traits) //no skeletons bleeding
+	if(!CAN_HAVE_BLOOD(src)) //no skeletons bleeding
 		return null
 	var/datum/blood_type/blood = get_blood_type()
 	return list("[dna.unique_enzymes]" = blood.type)
@@ -887,7 +898,7 @@
 	atom_colours[colour_priority] = null
 	update_atom_colour()
 
-/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 /// Force set the germ level
@@ -1270,6 +1281,15 @@
 /atom/proc/intercept_zImpact(list/falling_movables, levels = 1)
 	SHOULD_CALL_PARENT(TRUE)
 	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, falling_movables, levels)
+
+///Setter for the `density` variable to append behavior related to its changing.
+/atom/proc/set_density(new_value)
+	SHOULD_CALL_PARENT(TRUE)
+	if(density == new_value)
+		return
+	. = density
+	density = new_value
+	SEND_SIGNAL(src, COMSIG_ATOM_DENSITY_CHANGED)
 
 /obj/proc/propagate_temp_change(value, weight, falloff = 0.5, max_depth = 3)
 	var/key = REF(src)

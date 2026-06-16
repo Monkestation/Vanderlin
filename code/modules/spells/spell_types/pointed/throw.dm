@@ -95,7 +95,7 @@
 	owner.balloon_alert(owner, "you hurl [victim]!")
 	victim.balloon_alert(victim, "[owner] hurls you!")
 
-	victim.adjustBruteLoss(10)
+	victim.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 	victim.Knockdown(1 SECONDS)
 
 	var/throw_dist = min(get_dist(user, target_turf), throw_range)
@@ -110,7 +110,7 @@
 	if(!victim || QDELETED(victim))
 		return
 
-	victim.adjustBruteLoss(15)
+	victim.adjustBruteLoss(15, damage_type = BCLASS_BLUNT)
 	victim.Knockdown(2 SECONDS)
 	victim.Paralyze(0.5 SECONDS)
 
@@ -125,7 +125,7 @@
 		if(bystander == victim)
 			continue
 
-		bystander.adjustBruteLoss(10)
+		bystander.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 		bystander.Knockdown(1.5 SECONDS)
 		bystander.visible_message(
 			span_warning("[victim] crashes into [bystander]!"),

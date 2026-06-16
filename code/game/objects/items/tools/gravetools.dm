@@ -18,7 +18,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	max_integrity = INTEGRITY_STRONG
-	sharpness = IS_BLUNT
+	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
@@ -31,7 +31,6 @@
 	grid_width = 32
 	grid_height = 96
 	item_weight = 1.54 KILOGRAMS
-	var/time_multiplier = 1 //multipler to do_after times
 
 /obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
 	. = ..()
@@ -74,6 +73,8 @@
 /obj/item/weapon/shovel/update_icon_state()
 	. = ..()
 	icon_state = "[heldclod ? "[heldclod.clod_type]" : ""][initial(icon_state)]"
+	if(gripsprite)
+		toggle_state = "[heldclod ? "[heldclod.clod_type]" : ""][initial(icon_state)]"
 
 /datum/intent/shovelscoop
 	name = "scoop"
@@ -117,7 +118,7 @@
 		if(istype(T, /turf/open/floor/dirt))
 			var/turf/open/floor/dirt/D = T
 			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
-			if(!do_after(user, 5 SECONDS * time_multiplier, D))
+			if(!do_after(user, 5 SECONDS * toolspeed, D))
 				return
 			new /obj/structure/irrigation_channel(D)
 			return TRUE
@@ -236,6 +237,7 @@
 	wdefense = BAD_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE)
+	sharpness = IS_BLUNT
 	max_blade_int = 0
 
 	dropshrink = 1
@@ -243,7 +245,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 64
-	time_multiplier = 2
+	toolspeed = 2
 	smeltresult = null
 	item_weight = 792 GRAMS
 
@@ -255,6 +257,50 @@
 				return list("shrink" = 0.6,"sx" = -7,"sy" = -6,"nx" = 10,"ny" = -6,"wx" = -6,"wy" = -6,"ex" = 5,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 30,"sturn" = -15,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+// --------- BATTLESHOVEL -----------
+
+/obj/item/weapon/shovel/necran
+	name = "necran battle shovel"
+	desc = "This polearm esque great-shovel is granted for the completion of a gravetenders final initiation rites, for the wielder of this shovel shall rise no more, and with it in hand, neither shall their quarry."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "battleshovel"
+	SET_BASE_PIXEL(-16, -16)
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	bigboy = TRUE
+	gripsprite = TRUE
+	experimental_onhip = TRUE
+	experimental_onback = TRUE
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR_WIELD
+	wdefense = GREAT_PARRY
+	wbalance = EASY_TO_DODGE
+	wlength = WLENGTH_GREAT
+	sharpness = IS_SHARP
+	max_blade_int = 200
+
+	dropshrink = 0.75
+	gripped_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE, POLEARM_CHOP)
+	grid_height = 96
+	grid_width = 64
+	toolspeed = 0.8
+	smeltresult = null
+
+/obj/item/weapon/shovel/necran/Initialize()
+	. = ..()
+	AddElement(/datum/element/walking_stick)
+
+/obj/item/weapon/shovel/necran/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.5,"sx" = -5,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.5,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -3,"nx" = 4,"ny" = -3,"wx" = 0,"wy" = -3,"ex" = 2,"ey" = -1,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 
 // --------- BURIAL SHROUD -----------

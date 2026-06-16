@@ -46,7 +46,7 @@
 	var/is_leader = FALSE //does nothing except give you a cooler blade.
 
 /datum/outfit/mercenary/enforcer/pre_equip(mob/living/carbon/human/H)
-	shirt = /obj/item/clothing/shirt/undershirt/easttats
+	shirt = /obj/item/clothing/armor/regenerating/skin/easttats
 	belt = /obj/item/storage/belt/leather/mercenary
 	backr = /obj/item/storage/backpack/satchel
 	if(H.gender == MALE)

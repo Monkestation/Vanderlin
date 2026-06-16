@@ -268,8 +268,8 @@
  * * Will pass FALSE if the item can not be dropped due to TRAIT_NODROP via doUnEquip()
  * If the item can be dropped, it will be forceMove()'d to the ground and the turf's Entered() will be called.
 */
-/mob/proc/dropItemToGround(obj/item/I, force = FALSE, silent = TRUE)
-	. = doUnEquip(I, force, drop_location(), FALSE, silent = silent)
+/mob/proc/dropItemToGround(obj/item/I, force = FALSE, silent = TRUE, atom/source)
+	. = doUnEquip(I, force, drop_location(), FALSE, silent = silent, source = source)
 	if(. && I) //ensure the item exists and that it was dropped properly.
 		I.pixel_x = I.base_pixel_x + rand(-6,6)
 		I.pixel_y = I.base_pixel_x + rand(-6,6)
@@ -277,18 +277,18 @@
 		SEND_SIGNAL(I, COMSIG_ATOM_TEMPORARY_ANIMATION_START, 3)
 
 //for when the item will be immediately placed in a loc other than the ground
-/mob/proc/transferItemToLoc(obj/item/I, newloc = null, force = FALSE, silent = TRUE)
-	return doUnEquip(I, force, newloc, FALSE, silent = silent)
+/mob/proc/transferItemToLoc(obj/item/I, newloc = null, force = FALSE, silent = TRUE, atom/source)
+	return doUnEquip(I, force, newloc, FALSE, silent = silent, source = source)
 
 //visibly unequips I but it is NOT MOVED AND REMAINS IN SRC
 //item MUST BE FORCEMOVE'D OR QDEL'D
-/mob/proc/temporarilyRemoveItemFromInventory(obj/item/I, force = FALSE, idrop = TRUE)
-	return doUnEquip(I, force, null, TRUE, idrop, silent = TRUE)
+/mob/proc/temporarilyRemoveItemFromInventory(obj/item/I, force = FALSE, idrop = TRUE, atom/source)
+	return doUnEquip(I, force, null, TRUE, idrop, silent = TRUE, source = source)
 
 //DO NOT CALL THIS PROC
 //use one of the above 3 helper procs
 //you may override it, but do not modify the args
-/mob/proc/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE) //Force overrides TRAIT_NODROP for things like wizarditis and admin undress.
+/mob/proc/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE, atom/source) //Force overrides TRAIT_NODROP for things like wizarditis and admin undress.
 													//Use no_move if the item is just gonna be immediately moved afterward
 													//Invdrop is used to prevent stuff in pockets dropping. only set to false if it's going to immediately be replaced
 	if(!I) //If there's nothing to drop, the drop is automatically successful. If(unEquip) should generally be used to check for TRAIT_NODROP.
@@ -299,7 +299,7 @@
 	if(HAS_TRAIT(I, TRAIT_NODROP) && !force)
 		return FALSE
 
-	if((SEND_SIGNAL(I, COMSIG_ITEM_PRE_UNEQUIP, force, newloc, no_move, invdrop, silent) & COMPONENT_ITEM_BLOCK_UNEQUIP) && !force)
+	if((SEND_SIGNAL(I, COMSIG_ITEM_PRE_UNEQUIP, force, newloc, no_move, invdrop, silent, source) & COMPONENT_ITEM_BLOCK_UNEQUIP) && !force)
 		return FALSE
 
 	var/hand_index = get_held_index_of_item(I)
@@ -329,70 +329,34 @@
 	SEND_SIGNAL(src, COMSIG_MOB_UNEQUIPPED_ITEM, I, force, newloc, no_move, invdrop, silent)
 	return TRUE
 
-/mob/living/doUnEquip(obj/item/I, force, newloc, no_move, invdrop, silent)
+/mob/living/doUnEquip(obj/item/I, force, newloc, no_move, invdrop, silent, atom/source)
 	. = ..()
 	if(I)
 		if(IS_WEAKREF_OF(I, offered_item_ref))
 			stop_offering_item()
 
-//Outdated but still in use apparently. This should at least be a human proc.
-//Daily reminder to murder this - Remie.
-/mob/living/proc/get_equipped_items(include_pockets = FALSE)
-	return
+/**
+ * Used to return a list of equipped items on a mob; does not include held items (use get_all_gear)
+ *
+ * Argument(s):
+ * * Optional - include_flags, (see obj.flags.dm) describes which optional things to include or not (pockets, accessories, held items)
+ */
 
-/mob/living/carbon/get_equipped_items(include_pockets = FALSE)
+/mob/living/proc/get_equipped_items(include_flags = NONE)
 	var/list/items = list()
-	if(backr)
-		items += backr
-	if(backl)
-		items += backl
-	if(head)
-		items += head
-	if(wear_mask)
-		items += wear_mask
-	if(wear_neck)
-		items += wear_neck
-	if(shoes)
-		items += shoes
-	if(gloves)
-		items += gloves
-	if(mouth)
-		items += mouth
-	if(handcuffed)
-		items += handcuffed
-	if(legcuffed)
-		items += legcuffed
-	return items
-
-/mob/living/carbon/human/get_equipped_items(include_pockets = FALSE)
-	var/list/items = ..()
-	if(belt)
-		items += belt
-	if(beltr)
-		items += beltr
-	if(beltl)
-		items += beltl
-	if(wear_ring)
-		items += wear_ring
-	if(wear_wrists)
-		items += wear_wrists
-	if(wear_armor)
-		items += wear_armor
-	if(wear_pants)
-		items += wear_pants
-	if(cloak)
-		items += cloak
-	if(wear_shirt)
-		items += wear_shirt
+	for(var/obj/item/item_contents in contents)
+		if(item_contents.item_flags & IN_INVENTORY)
+			items += item_contents
+	if (!(include_flags & INCLUDE_HELD))
+		items -= held_items
 	return items
 
 /mob/living/proc/unequip_everything(silent = TRUE)
 	var/list/items = list()
-	items |= get_equipped_items(TRUE)
+	items |= get_equipped_items(INCLUDE_POCKETS)
 	for(var/I in items)
 		dropItemToGround(I, TRUE, silent)
 	drop_all_held_items(silent)
-
 
 /mob/living/carbon/proc/check_obscured_slots(transparent_protection)
 	var/obscured = NONE

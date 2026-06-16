@@ -26,6 +26,7 @@
 		base_state = icon_state
 	AddComponent(/datum/component/storage/concrete/grid/bin)
 	update_appearance(UPDATE_ICON)
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 
 /obj/item/bin/Destroy()
 	layer = 2.8
@@ -144,7 +145,7 @@
 //We need to use this or the object will be put in storage instead of attacking it
 /obj/item/bin/StorageBlock(obj/item/I, mob/user)
 	if(user?.used_intent)
-		if(user.used_intent.type in list(/datum/intent/fill,/datum/intent/pour,/datum/intent/splash))
+		if(user.used_intent.type in list(/datum/intent/fill,/datum/intent/pour, /datum/intent/splash))
 			return TRUE
 	if(istype(I, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = I
@@ -168,6 +169,7 @@
 	if(!reagents || !reagents.maximum_volume) //trash
 		return ..()
 
+	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
 	if(istype(I, /obj/item/weapon/tongs))
 		var/obj/item/weapon/tongs/T = I
 		if(T.held_item && HAS_TRAIT(T.held_item, TRAIT_NEEDS_QUENCH))
@@ -199,12 +201,16 @@
 		return
 	. = ..()
 
-/obj/item/proc/remove_quench()
-	if(!HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		return
-	REMOVE_TRAIT(src, TRAIT_NEEDS_QUENCH, "quench")
-	remove_filter("heated")
+/obj/item/proc/remove_quench(source)
+	// Source is null when removing all TRAIT_NEEDS_QUENCH
+	// If this is the only trait source we have, remove the filter.
+	if(isnull(source) || !HAS_TRAIT_NOT_FROM(src, TRAIT_NEEDS_QUENCH, source))
+		remove_filter("heated")
+	REMOVE_TRAIT(src, TRAIT_NEEDS_QUENCH, source)
 
-/obj/item/proc/add_quench_requirement()
-	ADD_TRAIT(src, TRAIT_NEEDS_QUENCH, "quench")
-	add_filter("heated", 1, list(type="color", color = list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))
+/obj/item/proc/add_quench_requirement(source, duration)
+	if(!HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
+		add_filter("heated", 1, list(type="color", color = list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))
+	ADD_TRAIT(src, TRAIT_NEEDS_QUENCH, source)
+	if(duration)
+		addtimer(CALLBACK(src, PROC_REF(remove_quench), source), duration, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_DELETE_ME)

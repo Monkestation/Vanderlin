@@ -217,7 +217,7 @@
 			var/new_color = color_pick_sanitized_lumi(user, "Choose your accessory color:", "Character Preference","[color_list[index]]")
 			if(!new_color)
 				return
-			color_list[index] = sanitize_hexcolor(new_color, 6, TRUE)
+			color_list[index] = sanitize_hexcolor(new_color)
 			entry.accessory_colors = color_list_to_string(color_list)
 		if("reset_colors")
 			if(!sprite_accessories || !allows_accessory_color_customization)

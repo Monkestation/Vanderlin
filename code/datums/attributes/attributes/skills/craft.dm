@@ -13,19 +13,6 @@
 		"...you feel grass under you feet as you peer onto a meadow, you prepare a campfire and a tent and drift off into deeper slumber.."
 	)
 
-/datum/attribute/skill/craft/smelting
-	name = "Smelting"
-	desc = "Represents your character's ability to smelt metal into ingots. The higher your skill in Smelting, the better the ingots you create, which affect the quality of the resulting item."
-	governing_attribute = STAT_ENDURANCE
-	default_attributes = list(
-		STAT_ENDURANCE = -4,
-		STAT_INTELLIGENCE = -5,
-	)
-	difficulty = SKILL_DIFFICULTY_EASY
-	dreams = list(
-		"...the heat brings warmth to you on this dreary night. your feet ache, and your arms remain sore - but the stress of the day melts away, along with the snow around you - becoming just another distant memory."
-	)
-
 /datum/attribute/skill/craft/carpentry
 	name = "Carpentry"
 	desc = "Represents your character's ability to craft wooden items. The higher your skill in Carpentry, the faster you can create wooden items and buildings."

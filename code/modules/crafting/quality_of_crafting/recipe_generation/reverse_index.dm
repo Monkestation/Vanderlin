@@ -8,6 +8,7 @@ GLOBAL_LIST_EMPTY(obtained_from_reverse)
 GLOBAL_VAR_INIT(obtained_from_built, FALSE)
 GLOBAL_LIST_EMPTY(mob_source_paths) // list of "[mob_typepath]" keys that have butcher drops
 GLOBAL_LIST_EMPTY(chimeric_mob_sources) // "[chimeric_table_path]" -> list of mob icon entries
+GLOBAL_LIST_EMPTY(indexed_item_paths)
 
 /proc/build_obtained_from_reverse()
 	var/list/list = list()
@@ -16,6 +17,8 @@ GLOBAL_LIST_EMPTY(chimeric_mob_sources) // "[chimeric_table_path]" -> list of mo
 	for(var/obj/item/item_type as anything in subtypesof(/obj/item))
 		if(IS_ABSTRACT(item_type))
 			continue
+		if(initial(item_type.indexed))
+			GLOB.indexed_item_paths["[item_type]"] = TRUE
 		if(!(initial(item_type.item_flags) & OBTAINED_DATA))
 			continue
 		var/obj/item/new_item = new item_type()

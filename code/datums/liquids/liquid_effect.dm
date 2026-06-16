@@ -272,8 +272,7 @@
 			else
 				liquid_group.transfer_to_atom(src, CHOKE_REAGENTS_INGEST_ON_FALL_AMOUNT, C)
 				C.adjustOxyLoss(5)
-				//C.emote("cough")
-				INVOKE_ASYNC(C, TYPE_PROC_REF(/mob, emote), "cough")
+				C.emote("cough")
 				to_chat(C, span_userdanger("You fall in and swallow some water!"))
 		else
 			to_chat(M, span_userdanger("You fall in the water!"))
@@ -314,7 +313,7 @@
 
 	var/liquid_state_template = liquid_state_messages["[liquid_group.group_overlay_state]"]
 
-	examine_list +=  "<hr>"
+	examine_list += "<hr>"
 
 	if(examiner.can_see_reagents())
 		examine_list +=  "<hr>"

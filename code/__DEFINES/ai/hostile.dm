@@ -92,5 +92,4 @@
 #define BB_DRAGON_EXPLOSION_COOLDOWN "dragon_explosion_cooldown"
 #define BB_DRAGON_PHASE_COOLDOWN "dragon_ohase_cooldown"
 
-#define BB_IS_BEING_RIDDEN "bb_is_ridden"
 #define BB_BASIC_MOB_SCARED_ITEM "scared_item"

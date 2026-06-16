@@ -133,7 +133,7 @@
 /datum/status_effect/proc/on_apply()
 	SHOULD_CALL_PARENT(TRUE)
 
-	owner.set_stat_modifier("[id]",effectedstats)
+	owner.set_stat_modifier("[id]", effectedstats)
 
 	if(mob_overlay_icon && mob_overlay_icon_state)
 		mob_visual = build_mob_icon()

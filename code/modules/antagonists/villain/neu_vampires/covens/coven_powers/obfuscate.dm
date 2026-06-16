@@ -61,7 +61,7 @@
 
 /datum/coven_power/obfuscate/cloak_of_shadows/activate()
 	. = ..()
-	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 
 	owner.alpha = 10

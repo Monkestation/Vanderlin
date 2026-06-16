@@ -30,6 +30,16 @@
 	taste_mult = 3
 	quality = 1
 
+/datum/reagent/consumable/tea/taraxamint/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_STABLE, 1, "[type]")
+	L.add_chem_effect(CE_PAINKILLER, 3, "[type]")
+
+/datum/reagent/consumable/tea/taraxamint/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_STABLE, "[type]")
+	L.remove_chem_effect(CE_PAINKILLER, "[type]")
+
 /datum/reagent/consumable/tea/taraxamint/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/taraxamint, 2) //No overhealing.
@@ -52,6 +62,16 @@
 	taste_mult = 2
 	quality = 3
 
+/datum/reagent/consumable/tea/utricasalvia/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BLOODRESTORE, 3, "[type]")
+	L.add_chem_effect(CE_ORGAN_REGEN, 1, "[type]")
+
+/datum/reagent/consumable/tea/utricasalvia/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
+	L.remove_chem_effect(CE_ORGAN_REGEN, "[type]")
+
 /datum/reagent/consumable/tea/utricasalvia/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/utricasalvia, 2)
@@ -72,6 +92,16 @@
 	taste_mult = 4
 	hydration_factor = 0
 	quality = 0
+
+/datum/reagent/consumable/tea/badidea/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BLOCKAGE, 3, "[type]")
+	L.add_chem_effect(CE_BREATHLOSS, 1, "[type]")
+
+/datum/reagent/consumable/tea/badidea/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_BLOCKAGE, "[type]")
+	L.remove_chem_effect(CE_BREATHLOSS, "[type]")
 
 /datum/reagent/consumable/tea/badidea/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 5)
@@ -94,6 +124,16 @@
 	hydration_factor = 2
 	quality = 1
 
+/datum/reagent/consumable/tea/fourtwenty/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_PULSE, 1, "[type]")
+	L.add_chem_effect(CE_ENERGETIC, 3, "[type]")
+
+/datum/reagent/consumable/tea/fourtwenty/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_PULSE, "[type]")
+	L.remove_chem_effect(CE_ENERGETIC, "[type]")
+
 /datum/reagent/consumable/tea/fourtwenty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 10)
 		M.reagents.add_reagent(/datum/reagent/drug/space_drugs, 2 * efficiency)
@@ -108,6 +148,14 @@
 	taste_description = "stinging, floral tones. Did it just cast something in your mouth?..."
 	taste_mult = 2
 	hydration_factor = 2
+
+/datum/reagent/consumable/tea/manabloom/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
+
+/datum/reagent/consumable/tea/manabloom/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 
 /datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
@@ -138,6 +186,16 @@
 	taste_mult = 4
 	nutriment_factor = 2
 	quality = 4
+
+/datum/reagent/consumable/tea/tiefbloodtea/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_STABLE, 1, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 3, "[type]")
+
+/datum/reagent/consumable/tea/tiefbloodtea/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_STABLE, "[type]")
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
 /datum/reagent/consumable/tea/waddle
 	name = "Waddle tea"

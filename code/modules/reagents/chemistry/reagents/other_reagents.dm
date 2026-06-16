@@ -1,6 +1,6 @@
 /datum/reagent/blood
 	// vitae is not the actual amount of vitae in the blood, it's a multiplier for how much vitae is in each unit of blood.
-	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=null, "vitae"=0)
+	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"quirks"=null,"preferences"=null, "vitae"=0)
 	name = "Blood"
 	color = COLOR_BLOOD
 	metabolization_rate = 20 //SUPER fast
@@ -10,6 +10,8 @@
 	glass_name = "glass of tomato juice"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
+	penetrates_skin = NONE
+	liver_chemical = FALSE
 	var/toxicity = 0.7 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
@@ -24,55 +26,61 @@
 	taste_mult = 1.8
 	toxicity = 3
 
+/datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	return FALSE
+
 /datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
 	if(!ismob(A))
 		data["preferences"] &= ~(BLOOD_PREFERENCE_LIVING|BLOOD_PREFERENCE_SLEEPING)
 	. = ..()
 
-/datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
+/datum/reagent/blood/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-	if(!(. && method & (INJECT|INGEST)))
-		return
-	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
-	var/datum/dna/L_dna = L.has_dna()
-	var/drinking_self = L_dna?.unique_enzymes && L_dna.unique_enzymes == data["blood_DNA"]
-	//if the dna matches, you're drinking your own blood freak.
-	if(!drinking_self && L.clan && data["vitae"] > 0)
-		var/vitae = L.clan.handle_bloodsuck(L, data["preferences"], reac_volume * data["vitae"])
-		L.adjust_bloodpool(vitae)
-		L.adjust_hydration(vitae * 0.1)
 
-	var/mob/living/carbon/C = L
-	if(istype(C) && (NOBLOOD in C.dna?.species?.species_traits))
+	if(methods & TOUCH)
+		exposed_mob.adjust_germ_level(GERM_PER_UNIT_BLOOD * reac_volume * 0.1)
+
+	if(!(methods & (INJECT|INGEST)))
+		return
+	SEND_SIGNAL(exposed_mob, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
+	var/datum/dna/exposed_mob_dna = exposed_mob.has_dna()
+	var/drinking_self = exposed_mob_dna?.unique_enzymes && exposed_mob_dna.unique_enzymes == data["blood_DNA"]
+	//if the dna matches, you're drinking your own blood freak.
+	if(!drinking_self && exposed_mob.clan && data["vitae"] > 0)
+		var/vitae = exposed_mob.clan.handle_bloodsuck(exposed_mob, data["preferences"], reac_volume * data["vitae"])
+		exposed_mob.adjust_bloodpool(vitae)
+		exposed_mob.adjust_hydration(vitae * 0.1)
+
+	var/mob/living/carbon/exposed_carbon = exposed_mob
+	if(istype(exposed_carbon) && !CAN_HAVE_BLOOD(exposed_carbon))
 		return
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
-	if(method & INJECT)
+	if(methods & INJECT)
 		var/modifier = 1 //TODO: Borbop ~ Once we get a proper transfusion system this will become unneeded basically means instead of 5 units we inject 100 units which is 4 injections to suriving level. This is 100% blood duping but like... its this or 80 syringes of blood to get someone restarted
-		if(L.stat >= DEAD)
-			modifier = 20
-		if(L.blood_volume <= BLOOD_VOLUME_MAXIMUM)
-			L.adjust_bloodvolume(round(reac_volume, 0.1) * modifier)
+		if(exposed_mob.stat >= DEAD)
+			modifier = 10
+		exposed_mob.adjust_blood_volume(round(reac_volume, 0.1) * modifier, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 		return
-	if(method & INGEST)
-		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER))))
-			if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
-				L.adjust_hydration(reac_volume * 0.2)
-			if(L.blood_volume < BLOOD_VOLUME_NORMAL)
-				L.adjust_bloodvolume(reac_volume * 0.2)
+	if(methods & INGEST)
+		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(exposed_mob, TRAIT_BLOODDRINKER) || HAS_TRAIT(exposed_mob, TRAIT_NASTY_EATER))))
+			if(!HAS_TRAIT(exposed_mob, TRAIT_NOHUNGER))
+				exposed_mob.adjust_hydration(reac_volume * 0.2)
+			exposed_mob.adjust_blood_volume(reac_volume * 0.2, maximum = BLOOD_VOLUME_NORMAL)
 			return
 		var/tox = toxicity * reac_volume
-		if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
+		if(HAS_TRAIT(exposed_carbon, TRAIT_POISON_RESILIENCE))
 			tox *= 0.5
-		L.adjustToxLoss(tox)
-		C.add_nausea(tox * 2)
+		exposed_mob.adjustToxLoss(tox)
+		exposed_carbon.add_nausea(tox * 2)
 
 /datum/reagent/blood/on_merge(list/mix_data, other_volume)
 	. = ..()
-	data["vitae"] = (data["vitae"] * volume + (mix_data?["vitae"] || 0) * other_volume) / (volume + other_volume) // weighted average of both vitae
-	data["preferences"] |= mix_data?["preferences"] // i have no idea how to effectively deal with this issue, this is gonna get weird sometimes.
-	if(mix_data && data["blood_DNA"] != mix_data["blood_DNA"])
-		data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
-	return 1
+	if(mix_data)
+		data["vitae"] = (data["vitae"] * volume + (mix_data?["vitae"] || 0) * other_volume) / (volume + other_volume) // weighted average of both vitae
+		data["preferences"] |= mix_data?["preferences"] // i have no idea how to effectively deal with this issue, this is gonna get weird sometimes.
+		if(mix_data && data["blood_DNA"] != mix_data["blood_DNA"])
+			data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
+	return TRUE
 
 /datum/reagent/blood/reaction_turf(turf/T, reac_volume)//splash the blood all over the place
 	if(!istype(T))
@@ -97,11 +105,11 @@
 	glass_desc = ""
 	toxicity = 3
 
-/datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume / 10)
+/datum/reagent/fuel/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((methods & TOUCH) || (methods & VAPOR))
+		exposed_mob.adjust_fire_stacks(reac_volume / 10)
 		return
-	..()
 
 /datum/reagent/blood/fuel/add_to_member(obj/effect/abstract/liquid_turf/adder)
 	. = ..()
@@ -136,11 +144,11 @@
 
 /datum/reagent/water/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 0.1, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
 
 /datum/reagent/water/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.remove_chem_effect("[type]")
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
@@ -154,11 +162,17 @@
 	color = "#98934bc6"
 	sanitization = -SANITIZATION_PER_UNIT_WATER
 
+/datum/reagent/water/gross/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.undisinfect_limb()
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		injury.adjust_germ_level(SANITIZATION_PER_UNIT_WATER)
+	return ..()
+
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency)
-	..()
+	. = ..()
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
 	M.adjustToxLoss(1 * efficiency)
@@ -210,7 +224,7 @@
 	for(var/atom/movable/thing as anything in T.contents)
 		if(ismob(thing))
 			var/mob/M = thing
-			reaction_mob(M, reac_volume)
+			expose_mob(M, reac_volume)
 		else if(isobj(thing))
 			var/obj/O = thing
 			reaction_obj(O, reac_volume)
@@ -245,14 +259,15 @@
  *	Water reaction to a mob
  */
 
-/datum/reagent/water/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with water can help put them out!
-	if(!istype(M))
+/datum/reagent/water/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with water can help put them out!
+	if(!istype(exposed_mob))
 		return
-	if(method & TOUCH)
-		var/turf/turf_check = get_turf(M)
+	if(methods & TOUCH)
+		var/turf/turf_check = get_turf(exposed_mob)
 		if(!istype(turf_check, /turf/open/water))
-			M.adjust_fire_stacks(-(reac_volume / 10))
-			M.SoakMob(FULL_BODY)
+			exposed_mob.adjust_fire_stacks(-(reac_volume / 10))
+			exposed_mob.SoakMob(FULL_BODY)
+		exposed_mob.adjust_germ_level(-reac_volume * sanitization * 0.1)
 	return ..()
 
 
@@ -294,6 +309,26 @@
 	color = "#515151"
 	taste_description = "ash"
 
+/datum/reagent/tree_sap
+	name = "Tree Sap"
+	description = "A thick substance left behind by dendor's blessed creations."
+	reagent_state = LIQUID
+	color = "#b85900"
+	taste_description = "sap"
+
+/datum/reagent/thorn_essence
+	name = "Thorn Essence"
+	description = "A component used in further refinement, sourced from thorns."
+	color = "#26490e"
+	taste_description = "the bog"
+
+/datum/reagent/caveweep
+	name = "Psydonian Tears"
+	description = "Tears from a caveweep. It has its uses in modern alchemy."
+	taste_description = "everything"
+	color = "#334274"
+	boiling_point = T0C + 150
+
 /datum/reagent/soap
 	name = "Soap"
 	description = "A combination of ash and animal fats used for cleaning."
@@ -327,14 +362,7 @@
 	name = "SATE"
 	color = "#e46363"
 	glows = TRUE
-
-/datum/reagent/sate/on_mob_add(mob/living/L)
-	. = ..()
-	ADD_TRAIT(L, TRAIT_SATE, type)
-
-/datum/reagent/sate/on_mob_delete(mob/living/L)
-	. = ..()
-	REMOVE_TRAIT(L, TRAIT_SATE, type)
+	added_traits = list(TRAIT_SATE)
 
 /datum/reagent/devour
 	name = "DEVOUR"

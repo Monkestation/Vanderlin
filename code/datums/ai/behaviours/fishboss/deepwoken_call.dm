@@ -19,7 +19,7 @@
 
 	// Buff all existing minions
 	for(var/mob/living/simple_animal/hostile/deepone/minion in range(15, boss))
-		if(boss.faction_check_mob(minion))
+		if(boss.faction_check_atom(minion))
 			minion.apply_status_effect(/datum/status_effect/deep_blessing)
 
 	// Summon stronger elite minions

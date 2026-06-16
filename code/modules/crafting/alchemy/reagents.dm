@@ -8,27 +8,34 @@
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	liver_chemical = FALSE
 
-/datum/reagent/consumable/healthpot/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(1 * REM, 1 * REM, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	return ..()
+
+/datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 3, "[type]")
+	L.add_chem_effect(CE_STABLE, 1, "[type]")
 
-/datum/reagent/consumable/healthpot/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
+	L.remove_chem_effect(CE_STABLE, "[type]")
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
-	var/list/wCount = M.get_wounds()
-	if(wCount.len > 0)
-		M.heal_wounds(3 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
+	M.adjust_blood_volume(6 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.heal_wounds(3 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
 	if(volume > 0.99)
-		M.adjustBruteLoss(-1.75*REM * efficiency, 0)
-		M.adjustFireLoss(-1.75*REM * efficiency, 0)
-		M.adjustOxyLoss(-1.25 * efficiency, 0)
-		M.adjustCloneLoss(-1.75*REM * efficiency, 0)
-	..()
+		M.adjustOxyLoss(-1.25 * efficiency, FALSE)
+		M.adjustCloneLoss(-1.25 * REM * efficiency, FALSE)
+		M.adjustBruteLoss(-1.75*REM * efficiency, FALSE, required_status = BODYPART_ORGANIC)
+		M.adjustFireLoss(-1.75*REM * efficiency, TRUE, required_status = BODYPART_ORGANIC)
+	. = ..()
 
 /datum/reagent/medicine/stronghealth
 	name = "Strong Health Potion"
@@ -36,27 +43,37 @@
 	color = "#820000be"
 	taste_description = "rich lifeblood"
 	scent_description = "metal"
-	metabolization_rate = REAGENTS_METABOLISM * 3
+	metabolization_rate = REAGENTS_METABOLISM * 2
+	liver_chemical = FALSE
 
-/datum/reagent/consumable/stronghealth/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(3 * REM, 3 * REM, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	return ..()
+
+/datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 15, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
+	L.add_chem_effect(CE_STABLE, 1, "[type]")
+	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 
-/datum/reagent/consumable/stronghealth/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/stronghealth/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
+	L.remove_chem_effect(CE_STABLE, "[type]")
+	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
+	M.adjust_blood_volume(10 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
 	M.heal_wounds(6 * efficiency) //at a motabalism of .5 U a tick this translates to 240WHP healing with 20 U Most wounds are unsewn 15-100.
 	if(volume > 0.99)
-		M.adjustBruteLoss(-7*REM * efficiency, 0)
-		M.adjustFireLoss(-7*REM * efficiency, 0)
-		M.adjustOxyLoss(-5 * efficiency, 0)
-		M.adjustCloneLoss(-7*REM * efficiency, 0)
-	..()
-	. = 1
+		M.adjustOxyLoss(-5 * efficiency, FALSE)
+		M.adjustCloneLoss(-5 * REM * efficiency, FALSE)
+		M.adjustBruteLoss(-7*REM * efficiency, FALSE, required_status = BODYPART_ORGANIC)
+		M.adjustFireLoss(-7*REM * efficiency, TRUE, required_status = BODYPART_ORGANIC)
+	. = ..()
 
 /datum/reagent/medicine/rosawater
 	name = "Rosa Water"
@@ -199,6 +216,21 @@
 	taste_description = "dirt"
 	scent_description = "saiga droppings"
 	metabolization_rate = REAGENTS_METABOLISM * 3
+
+/datum/reagent/medicine/diseasecure/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.disinfect_limb(20 MINUTES)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		injury.adjust_germ_level(-30)
+	affected_bodypart.adjust_germ_level(-30)
+	return ..()
+
+/datum/reagent/medicine/diseasecure/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_ANTIBIOTIC, 40, "[type]")
+
+/datum/reagent/medicine/diseasecure/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
 /datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -402,7 +434,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					if(prob(30))
 						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
-					bp?.lingering_pain += 10 * efficiency
+					bp?.add_pain(SHOCK_STAGE_1 * efficiency)
 					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12 * efficiency, null, BODY_ZONE_CHEST, crit_message = FALSE, modifiers = list(CRIT_MOD_CHANCE = -10))
 					M.do_jitter_animation(100 * efficiency)
 				if(60)
@@ -595,6 +627,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	reagent_state = LIQUID
 	color = "#ffc400"
 	metabolization_rate = 0.5
+	boiling_point = T0C + 95
 
 /datum/reagent/toxin/fyritiusnectar/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.49 && prob(33))
@@ -619,7 +652,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	L.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
 	L.add_chem_effect(CE_STIMULANT, 1, "[type]")
 	L.add_chem_effect(CE_PULSE, 1, "[type]")
-	L.add_chem_effect(CE_PAINKILLER, min(3*holder.get_reagent_amount(/datum/reagent/adrenaline), 25), "[type]")
+	L.add_chem_effect(CE_PAINKILLER, min(3*holder.get_reagent_amount(/datum/reagent/adrenaline), 10), "[type]")
 
 /datum/reagent/adrenaline/on_mob_end_metabolize(mob/living/carbon/M)
 	. = ..()
@@ -627,3 +660,35 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	M.remove_chem_effect(CE_STIMULANT, "[type]")
 	M.remove_chem_effect(CE_PULSE, "[type]")
 	M.remove_chem_effect(CE_PAINKILLER, "[type]")
+
+
+//Naturally synthesized painkiller, similar to epinephrine
+/datum/reagent/medicine/endorphin
+	name = "Endorphin"
+	description = "Endorphins are chemically similar to morphine, but naturally synthesized by the human body. \
+				They are typically produced as a bodily response to pain, but can also be produced under favorable circumstances. \
+				Overdosing will cause drowsyness and jitteriness."
+	reagent_state = LIQUID
+	color = "#ff799679"
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+	overdose_threshold = 30
+	taste_description = "euphoria"
+
+/datum/reagent/medicine/endorphin/on_mob_metabolize(mob/living/carbon/M)
+	. = ..()
+	M.add_chem_effect(CE_PAINKILLER, 20, "[type]")
+
+/datum/reagent/medicine/endorphin/on_mob_end_metabolize(mob/living/carbon/M)
+	. = ..()
+	M.remove_chem_effect(CE_PAINKILLER, "[type]")
+
+/datum/reagent/medicine/endorphin/overdose_start(mob/living/M)
+	to_chat(M, span_userdanger("I feel EUPHORIC!"))
+
+/datum/reagent/medicine/endorphin/overdose_process(mob/living/M, delta_time, times_fired)
+	. = ..()
+	if(DT_PROB(40, delta_time))
+		M.adjust_drowsiness(5)
+	if(DT_PROB(20, delta_time))
+		M.adjust_disgust(5)
+	M.adjust_jitter(3)

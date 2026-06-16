@@ -9,13 +9,10 @@
 	slot = ORGAN_SLOT_LIVER
 	desc = ""
 	organ_efficiency = list(ORGAN_SLOT_LIVER = 100)
-	maxHealth = STANDARD_ORGAN_THRESHOLD
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	organ_volume = 2
 	max_blood_storage = 25
 	current_blood = 25
-	blood_req = 4
+	blood_req = 2
 	oxygen_req = 4
 	nutriment_req = 1.2
 	hydration_req = 1.2

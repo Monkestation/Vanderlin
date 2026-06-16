@@ -283,6 +283,11 @@
 	cost = 500
 	contains = /obj/item/gun/ballistic/powder/wheellock/puffer
 
+/datum/supply_pack/weapons/ranged/blunderbuss
+	name = "Smuggled Blunderbuss"
+	cost = 650
+	contains = /obj/item/gun/ballistic/powder/wheellock/blunderbuss
+
 /datum/supply_pack/weapons/ranged/musket
 	name = "Smuggled Musket"
 	cost = 750 //needs balancing
@@ -327,6 +332,16 @@
 	name = "Steel Tossblade Belt"
 	cost = 120
 	contains = /obj/item/storage/belt/leather/knifebelt/black/steel
+
+/datum/supply_pack/weapons/ranged/javeliniron
+	name = "Iron Javelin Sling"
+	cost = 70
+	contains = /obj/item/ammo_holder/javelin/iron
+
+/datum/supply_pack/weapons/ranged/javelinsteel
+	name = "Steel Javelin Sling"
+	cost = 140
+	contains = /obj/item/ammo_holder/javelin/steel
 
 /datum/supply_pack/weapons/ranged/whip
 	name = "Leather Whip"

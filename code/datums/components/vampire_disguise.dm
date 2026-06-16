@@ -128,8 +128,8 @@
 	if(user == vampire)
 		return
 	if(!user.affects_masquerade(FALSE))
-		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_warningbig("[P[THEYRE]] in [P[THEIR]] true form."))
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_warningbig("[P[THEYRE]] in [P[THEIR]] true form."))
 		return
 	user.add_stress(/datum/stress_event/vampire_seen)
-	LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("MONSTER!"))
+	LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldannounce("MONSTER!"))
 	vampire.vampire_detected(length(vampire.CheckEyewitness(user)))

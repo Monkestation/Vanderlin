@@ -29,7 +29,7 @@
 
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
@@ -43,7 +43,7 @@
 /datum/job/advclass/mercenary/sworddancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 	spawned.merctype = 9
 
 /datum/job/advclass/mercenary/sworddancer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)

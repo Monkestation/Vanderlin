@@ -287,7 +287,7 @@
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
 	redstone_structure = TRUE
 	var/togg = FALSE
-	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
@@ -332,7 +332,7 @@
 
 /obj/structure/plank/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe
 	name = "bronze pipe"
@@ -351,7 +351,7 @@
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe/left
 	name = "bronze pipe"
@@ -411,17 +411,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/clock/examine(mob/user)
 	. = ..()
@@ -665,17 +656,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/statue/CanPass(atom/movable/mover, turf/target)
 	. = ..()
@@ -1096,7 +1078,7 @@
 	max_integrity = 100
 	sellprice = 40
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	breakoutextra = 10 MINUTES
 	dir = NORTH
@@ -1442,18 +1424,6 @@
 	if(istype(living_user.patron, /datum/patron/psydon))
 		living_user.add_stress(/datum/stress_event/painful_reminder)
 		. += " Never forget those we have lost."
-
-/obj/structure/fluff/statue/shisha
-	name = "shisha pipe"
-	desc = "A traditional shisha pipe, this one is broken."
-	icon = 'icons/roguetown/misc/64x64.dmi'
-	icon_state = "zbuski"
-	density = FALSE
-	anchored = TRUE
-	layer = ABOVE_MOB_LAYER
-	plane = GAME_PLANE_UPPER
-	blade_dulling = DULLING_BASH
-	max_integrity = 300
 
 /obj/structure/fluff/statue/gaffer
 	name = "Subdued Statue"

@@ -111,7 +111,7 @@
 			span_userdanger("You step on [parent]!")
 		)
 
-	digitigrade_fan.apply_damage(damage, BRUTE, picked_def_zone)
+	digitigrade_fan.apply_damage(damage, BRUTE, picked_def_zone, damage_type = BCLASS_PIERCE, can_crit = FALSE)
 
 	if(!(flags & CALTROP_NOSTUN)) // Won't set off the paralysis.
 		if(!HAS_TRAIT(digitigrade_fan, TRAIT_LIGHT_STEP))

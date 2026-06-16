@@ -61,6 +61,9 @@
 	/// Cost to cast based on [spell_type].
 	var/spell_cost = 0
 
+	///this is purely for etching
+	var/spell_tier = 1
+
 	/// The sound played on cast.
 	var/sound = 'sound/magic/whiteflame.ogg'
 
@@ -107,6 +110,8 @@
 
 	/// Assoc list of [datum/attunement] to value.
 	var/list/attunements
+	///list of essences we can use as a sub for cost
+	var/list/essences
 	/// Value summed from caster and spell attunements to adjust some spell effects.
 	var/attuned_strength
 
@@ -367,13 +372,18 @@
 // Where the cast chain starts
 /datum/action/cooldown/spell/PreActivate(atom/target)
 	charged = FALSE
+	if(SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_STARTED, src) & COMPONENT_BLOCK_ABILITY_START)
+		return
 	if(!is_valid_target(target))
 		if(charge_required && click_to_activate)
 			to_chat(owner, span_warning("I can't cast [src] on [target]!"))
 			RegisterSignal(owner.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(start_casting))
 		return FALSE
 
-	return Activate(target)
+	var/target_val = Activate(target)
+	if(!QDELETED(src) && !QDELETED(owner))
+		SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_FINISHED, src)
+	return target_val
 
 /// Adjust the base charge time based on the users stats
 /datum/action/cooldown/spell/proc/get_adjusted_charge_time()
@@ -926,12 +936,12 @@
 			if(QDELETED(target) || !istype(target))
 				stack_trace("Essence spell checking cost without being assigned to an essence gauntlet!")
 				return FALSE
-			if(!gaunt.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
 				return FALSE
 			// Ditto
 			if(!length(gaunt.stored_vials))
 				return FALSE
-			if(!gaunt.can_consume_essence(used_cost, attunements))
+			if(!gaunt.can_consume_essence(used_cost, essences))
 				if(feedback)
 					owner.balloon_alert(owner, "Not enough essence!")
 				return FALSE
@@ -996,7 +1006,11 @@
 
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
-			if(!gaunt?.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
+				return
+
+			if(!gaunt.can_consume_essence(used_cost, essences))
+				owner.balloon_alert(owner, "not enough essence!")
 				return
 
 			gaunt.consume_essence(used_cost, attunements)

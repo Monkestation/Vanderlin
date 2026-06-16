@@ -22,19 +22,20 @@
 	color = "#792300" // rgb: 121, 35, 0
 	toxpwr = 2.5
 	taste_description = "mushroom"
+	boiling_point = T0C + 120
 
 /datum/reagent/toxin/plasma
-	name = "Plasma"
-	description = "Plasma in its liquid form."
+	name = "Purple Aetherium"
+	description = "A strange liquid, it seems almost... alive."
 	taste_description = "bitterness"
 	specific_heat = SPECIFIC_HEAT_PLASMA
 	taste_mult = 1.5
 	color = "#8228A0"
 	toxpwr = 3
 
-/datum/reagent/toxin/plasma/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume / 5)
+/datum/reagent/toxin/plasma/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
+	if((methods & TOUCH) || (methods & VAPOR))
+		exposed_mob.adjust_fire_stacks(reac_volume / 5)
 		return
 	..()
 
@@ -52,8 +53,6 @@
 	color = "#7F8400" // rgb: 127, 132, 0
 	toxpwr = 0.1
 	taste_description = "green tea"
-
-
 
 /datum/reagent/medicine/soporpot
 	name = "Soporific Poison"
@@ -158,20 +157,21 @@
 	taste_description = "acid"
 	self_consuming = TRUE
 
-/datum/reagent/toxin/acid/reaction_mob(mob/living/carbon/C, method=TOUCH, reac_volume)
-	if(!istype(C))
+/datum/reagent/toxin/acid/expose_mob(mob/living/carbon/exposed_mob, methods = TOUCH, reac_volume)
+	. = ..()
+	if(!istype(exposed_mob))
 		return
 	reac_volume = round(reac_volume,0.1)
-	if(method & INGEST)
-		C.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr))
+	if(methods & INGEST)
+		exposed_mob.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
-	if(method & INJECT)
-		C.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr))
+	if(methods & INJECT)
+		exposed_mob.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
-	C.acid_act(acidpwr, reac_volume)
+	exposed_mob.acid_act(acidpwr, reac_volume)
 
-	if(method & TOUCH)
-		C.try_skin_burn(reac_volume)
+	if(methods & TOUCH)
+		exposed_mob.try_skin_burn(reac_volume)
 
 /datum/reagent/toxin/acid/reaction_obj(obj/O, reac_volume)
 	if(ismob(O.loc)) //handled in human acid_act()

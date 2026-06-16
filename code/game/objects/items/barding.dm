@@ -70,7 +70,7 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sewrepair = null
 	salvage_result = null
 	salvage_amount = 0

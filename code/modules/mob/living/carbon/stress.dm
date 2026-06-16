@@ -133,6 +133,7 @@
 		if(new_stress_level != stress_level)
 			stress_level = new_stress_level
 			attributes.add_or_update_variable_diceroll_modifier(/datum/diceroll_modifier/stress, stress_level)
+			add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/stress, -(stress_level * 0.1))
 
 	if(stress >= STRESS_INSANE && prob(5))
 		var/text = pick_list("stress_messages.json", "insanity")

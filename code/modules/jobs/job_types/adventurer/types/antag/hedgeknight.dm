@@ -50,4 +50,4 @@
 	beltr = /obj/item/weapon/sword/long
 	backr = /obj/item/storage/backpack/satchel/black
 	backl = /obj/item/weapon/shield/tower/metal
-	backpack_contents = list(/obj/item/weapon/knife/dagger = 1)
+	backpack_contents = list(/obj/item/weapon/knife/dagger = 1, /obj/item/clothing/face/shepherd/rag = 1)

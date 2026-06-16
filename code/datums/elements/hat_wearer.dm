@@ -70,8 +70,7 @@
 	SIGNAL_HANDLER
 	if(istype(source, /mob/living/simple_animal))
 		var/mob/living/simple_animal/mob = source
-		var/friend_ref = REF(attacker)
-		if (!mob.faction.Find(friend_ref))
+		if(!mob.has_ally(attacker))
 			return
 
 	if(!istype(item, /obj/item/clothing/head))
