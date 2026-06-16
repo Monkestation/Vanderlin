@@ -901,7 +901,7 @@
 	name = "Silver Flail (+Chain, +Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/rope/chain, /obj/item/grown/log/tree/stick)
-	created_item = /obj/item/weapon/flail/silflail
+	created_item = /obj/item/weapon/flail/silver
 
 /datum/anvil_recipe/weapons/silver/sword_silver
 	name = "Silver Sword"
