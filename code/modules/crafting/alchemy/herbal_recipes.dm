@@ -616,7 +616,10 @@
 /datum/reagent/poison/herbal/jaw/on_mob_life(mob/living/L)
 	. = ..()
 	L.adjustFireLoss(0.1)
-	L.adjustOrganLoss(ORGAN_SLOT_JAW, 5)
+	var/mob/living/carbon/C = L
+		var/obj/item/bodypart/head/toothies = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+		if(toothies)
+		part.add_wound(/datum/wound/teeth)
 
 /datum/reagent/poison/herbal/erratique
 	name = "Erratique"
