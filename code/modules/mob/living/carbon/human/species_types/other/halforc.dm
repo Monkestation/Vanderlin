@@ -8,7 +8,7 @@
 		STAT_INTELLIGENCE = -2,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED -1,
+		STAT_SPEED = -1,
 	)
 
 /datum/attribute_holder/sheet/job/species/halforc/female
