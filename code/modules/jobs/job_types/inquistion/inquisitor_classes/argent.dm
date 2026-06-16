@@ -176,7 +176,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
 		if("Formikrag Liver - Reversed Toxin Damage")
 			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
-			/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
+			var/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
 			if(stomach)
 				stomach.Remove(spawned,1)
 				QDEL_NULL(stomach)
