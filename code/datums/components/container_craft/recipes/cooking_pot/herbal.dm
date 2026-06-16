@@ -208,6 +208,127 @@
 
 // Complex Multi-Herb Recipes
 
+// Special Poisons
+/datum/container_craft/cooking/herbal_tea/tranq
+	name = "Liquid tranquility"
+	created_reagent = /datum/reagent/poison/herbal/tranq
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/medicine/herbal/valeriana_draught = 20,
+	)
+	requirements = list(
+		/obj/item/alch/herb/paris = 1,
+		/obj/item/alch/herb/valeriana = 1,
+		/obj/item/alch/herb/mentha = 1
+	)
+	output_amount = 20 // Small amount of sleepy juice
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The brew smells of oblivion and bitterness..."
+
+/datum/container_craft/cooking/herbal_tea/acid
+	name = "Flamekiss liqeur"
+	created_reagent = /datum/reagent/poison/herbal/acid
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/drowsbane = 10,
+	)
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3,
+	)
+	output_amount = 20 // LARGE amount of OH GOD IT BURNS
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of fire and hate..."
+
+/datum/container_craft/cooking/herbal_tea/weak_paralytic
+	name = "Paralytic preblend"
+	created_reagent = /datum/reagent/toxin/spidervenom_inert
+	water_conversion = 1
+	requirements = list(
+		/obj/item/reagent_containers/spidervenom_inert = 1,
+	)
+	output_amount = 20 // doesnt actually do anything, needed as a pre requisite
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of potential and hatred"
+
+/datum/container_craft/cooking/herbal_tea/paralytic
+	name = "Impuissance paralytic"
+	created_reagent = /datum/reagent/toxin/spidervenom_paralytic
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of helplessness and suffering..."
+
+/datum/container_craft/cooking/herbal_tea/pain
+	name = "Souffrance interrogation agent"
+	created_reagent = /datum/reagent/poison/herbal/pain
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/alch/herb/salvia = 2,
+		/obj/item/alch/herb/euphorbia = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of sweetness and deception..."
+
+/datum/container_craft/cooking/herbal_tea/ghoulpowder
+	name = "Astuce paralytic"
+	created_reagent = /datum/reagent/poison/herbal/ghoulpowder
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/alch/herb/calendula = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+/datum/container_craft/cooking/herbal_tea/rajaijah
+	name = "Shine of the Dark Sun"
+	created_reagent = /datum/reagent/poison/herbal/rajaijah
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/blood = 20,
+	)
+	requirements = list(
+		/obj/item/organ/heart = 1,
+		/obj/item/reagent_containers/lux_tainted = 1
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of fresh shed blood and saliva..."
+	
+/datum/container_craft/cooking/herbal_tea/kingsbane
+	name = "Bane of Kings"
+	created_reagent = /datum/reagent/poison/herbal/kingsbane
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/consumable/ethanol/elfblue = 20,
+	)
+	requirements = list(
+		/obj/item/alch/feaudust = 1,
+		/obj/item/reagent_containers/lux_tainted = 1
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of burnt metal and regret..."
+
 // Herbalist's Panacea (multiple healing herbs)
 /datum/container_craft/cooking/herbal_tea/herbalist_panacea
 	name = "Herbalist's Panacea"
