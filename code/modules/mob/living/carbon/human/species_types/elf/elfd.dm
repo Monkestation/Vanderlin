@@ -12,10 +12,11 @@
 /datum/attribute_holder/sheet/job/species/dark
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
-		STAT_PERCEPTION = -1,
 		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 2,
+		STAT_FORTUNE = -1,
 	)
 
 /datum/attribute_holder/sheet/job/species/dark/female
@@ -23,9 +24,9 @@
 		STAT_STRENGTH = 1,
 		STAT_PERCEPTION = -1,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1
+		STAT_FORTUNE = -1,
 	)
 
 /datum/species/elf/dark

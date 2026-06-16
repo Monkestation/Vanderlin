@@ -8,6 +8,7 @@
 		STAT_INTELLIGENCE = -2,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 1,
+		STAT_FORTUNE = -1,
 	)
 
 /datum/attribute_holder/sheet/job/species/halforc/female
@@ -17,6 +18,7 @@
 		STAT_INTELLIGENCE = -2,
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
+		STAT_FORTUNE = -1,
 	)
 
 /datum/species/halforc
