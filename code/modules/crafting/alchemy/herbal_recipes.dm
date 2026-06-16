@@ -713,8 +713,8 @@
 	ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane/on_mob_end_metabolize(mob/living/M)
-	. = ..()
 	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")	timer = 10 MINUTES
+	. = ..()
 
 // Magical Enhancement
 
