@@ -369,6 +369,9 @@
 	desc = "Heavier than a copper javelin, best suited for hunting beasts."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "ijavelin"
+	gripsprite = FALSE
+	force = DAMAGE_SPEAR - 1
+	force_wielded = DAMAGE_SPEAR + 3
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	throwforce = DAMAGE_SPEAR_WIELD + 2
@@ -383,6 +386,9 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	throwforce = DAMAGE_SPEAR_WIELD + 3
+	gripsprite = FALSE
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR + 3
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 1.25
 
@@ -391,6 +397,9 @@
 	desc = "A sturdy javelin made from silver, suitable to hunt supernatural foes."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "sjavelin"
+	gripsprite = FALSE
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR + 3
 	melting_material = /datum/material/silver
 	melt_amount = 75
 	throwforce = DAMAGE_SPEAR_WIELD + 3

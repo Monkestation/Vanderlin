@@ -108,3 +108,15 @@
   - bugfix: Psyalter's Stole Sprite Fix
   The-Awful:
   - rscadd: New outfit for Malum Acolytes.
+2026-06-16:
+  Spitegremlin:
+  - rscadd: Added Huntsmaster Hand subclass, along with their hound
+  - rscadd: Added new Gambeson. Hunting Gambeson
+  - rscadd: Added new trait called keen eyes, and gave it to hunters and huntsmaster
+  - rscadd: Added a trait called flip jump to Spymaster, doesnt do anything other
+      then let them flip when they jump
+  - balance: gave Advisor a glock
+  - balance: gave all hand subclasses a standard 8 since i was told too, and the default
+      hand class had 8
+  - balance: gave pilgrim hunter forager and keeneyes trait, to match with normal
+      hunter
