@@ -176,7 +176,7 @@
 		return NONE
 
 	var/datum/action/cooldown/spell/undirected/call_bird/spell = source_spell.resolve()
-	if(spell.owner != user || !prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 2))
+	if(spell.owner != user && !prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 2))
 		to_chat(user, "<span class='warning'>[src] gets away!</span>")
 		fly_away()
 		return NONE
