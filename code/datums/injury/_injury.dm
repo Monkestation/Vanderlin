@@ -274,7 +274,7 @@
 		current_stage++
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
-	if(!damage)
+	if(damage <= 0)
 		qdel(src)
 	if(update_bodypart && parent_bodypart?.post_damage_change(updating_health)) // no need to cache since qdel will update limbs and owner
 		parent_mob?.update_damage_overlays()
