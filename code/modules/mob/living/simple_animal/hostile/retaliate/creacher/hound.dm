@@ -1,9 +1,5 @@
 /mob/living/simple_animal/hostile/retaliate/hound
-<<<<<<< HEAD
-	icon = 'icons/roguetown/mob/monster/greyhound.dmi'
-=======
 	icon = 'icons/roguetown/mob/greyhound.dmi'
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 	name = "hound"
 	desc = "Loyal beasts, tamed cousins of the common volfs, there is hardly a better friend to have with you in the wild, or lying next to you by a warm fire."
 	icon_state = "hh"
@@ -18,23 +14,6 @@
 	vision_range = 9
 	aggro_vision_range = 9
 
-<<<<<<< HEAD
-	botched_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1,
-						/obj/item/natural/fur/volf = 1,
-						/obj/item/alch/bone = 1)
-	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 2,
-						/obj/item/natural/hide = 1,
-						/obj/item/natural/fur/volf = 2,
-						/obj/item/alch/sinew = 2,
-						/obj/item/alch/bone = 1)
-	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 2,
-						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
-						/obj/item/natural/hide = 2,
-						/obj/item/natural/fur/volf = 3,
-						/obj/item/alch/sinew = 2,
-						/obj/item/alch/bone = 2)
-//	head_butcher = /obj/item/natural/head/volf
-=======
 	botched_butcher_results = list(
 		/obj/item/reagent_containers/food/snacks/meat/steak = 1,
 		/obj/item/natural/fur/volf = 1,
@@ -55,19 +34,13 @@
 		/obj/item/alch/sinew = 2,
 		/obj/item/alch/bone = 2,
 	)
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 
 	indexed = TRUE
 	health = VOLF_HEALTH + 180
 	maxHealth = VOLF_HEALTH + 180
 	food_type = list(/obj/item/reagent_containers/food/snacks/meat,
 					/obj/item/bodypart,
-<<<<<<< HEAD
-					/obj/item/organ,
-					/obj/item/bone)
-=======
 					/obj/item/organ)
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 
 	base_intents = list(/datum/intent/simple/bite)
 	attack_sound = list('sound/vo/mobs/vw/attack (1).ogg','sound/vo/mobs/vw/attack (2).ogg','sound/vo/mobs/vw/attack (3).ogg','sound/vo/mobs/vw/attack (4).ogg')
@@ -77,14 +50,11 @@
 	base_constitution = 8
 	base_strength = 7
 	base_speed = 13
-<<<<<<< HEAD
-=======
 
 	simple_detect_bonus = 20
 	retreat_distance = 0
 	minimum_distance = 0
 	deaggroprob = 0
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 	defprob = 35
 	defdrain = 5
 	del_on_deaggro = FALSE
@@ -118,11 +88,7 @@
 	name = "loyal remains"
 	gender = PLURAL
 	icon_state = "bones"
-<<<<<<< HEAD
-	icon = 'icons/roguetown/mob/monster/greyhound.dmi'
-=======
 	icon = 'icons/roguetown/mob/greyhound.dmi'
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 
 /mob/living/simple_animal/hostile/retaliate/hound/Initialize()
 	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands // due to signal overridings from pet commands
@@ -130,11 +96,7 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
-<<<<<<< HEAD
-	var/color = pick("brown", "black", "white")
-=======
 	var/color = pick("grey", "black", "white")
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 	icon_state = "hound_[color]"
 	icon_living = "hound_[color]"
 	icon_dead = "hound_[color]_dead"
@@ -143,14 +105,6 @@
 	if(prob(33))
 		gender = FEMALE
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-<<<<<<< HEAD
-	update_appearance(UPDATE_OVERLAYS)
-
-/mob/living/simple_animal/hostile/retaliate/hound/death(gibbed)
-	..()
-	update_appearance(UPDATE_OVERLAYS)
-=======
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
 
 /mob/living/simple_animal/hostile/retaliate/hound/get_sound(input)
 	switch(input)
@@ -167,10 +121,3 @@
 
 /mob/living/simple_animal/hostile/retaliate/hound/taunted(mob/user)
 	emote("aggro")
-<<<<<<< HEAD
-	return
-
-/mob/living/simple_animal/hostile/retaliate/hound/simple_limb_hit(zone)
-	return ..()
-=======
->>>>>>> ff5f3a009c8bb3e19b4645f5f9fc4ed861aca7b3
