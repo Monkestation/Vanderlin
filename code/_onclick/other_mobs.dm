@@ -87,10 +87,12 @@
 	A.attack_hand(src, modifiers)
 
 /mob/living/attack_hand(mob/living/user, list/modifiers)
+	. = ..()
 	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
-		return ..()
+		return
 
-	user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK))
+	if(user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK)))
+		return TRUE
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
