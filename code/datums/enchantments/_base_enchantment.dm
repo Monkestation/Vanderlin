@@ -19,10 +19,11 @@
 /datum/enchantment/Destroy(force)
 	if(enchanted_item)
 		remove_item(enchanted_item)
+
 	if(should_process)
 		STOP_PROCESSING(SSenchantment, src)
+
 	enchanted_item = null
-	registered_signals = null
 	return ..()
 
 /datum/enchantment/proc/can_enchant(atom/item)
@@ -43,26 +44,20 @@
 
 /datum/enchantment/proc/register_triggers(atom/item)
 	SHOULD_CALL_PARENT(TRUE)
+
 	if(!item)
 		return
-	registered_signals += COMSIG_QDELETING
-	RegisterSignal(item, COMSIG_QDELETING, PROC_REF(on_item_deleted))
 
 	registered_signals += COMSIG_ATOM_EXAMINE
 	RegisterSignal(item, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/enchantment/proc/unregister_triggers()
 	SHOULD_CALL_PARENT(TRUE)
+
 	if(!enchanted_item || !length(registered_signals))
 		return
 
-	for(var/signal in registered_signals)
-		UnregisterSignal(enchanted_item, signal)
-	registered_signals.Cut()
-
-/datum/enchantment/proc/on_item_deleted(datum/source)
-	SIGNAL_HANDLER
-	qdel(src)
+	UnregisterSignal(enchanted_item, registered_signals)
 
 /datum/enchantment/proc/remove_item(atom/item)
 	if(!item || item != enchanted_item)

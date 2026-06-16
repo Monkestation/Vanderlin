@@ -27,6 +27,7 @@
 	var/quantity = 1
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
+	var/pellet_type = null
 
 /obj/item/coin/get_carry_weight(atom/carrier)
 	. = item_weight * quantity
@@ -121,6 +122,9 @@
 	if(isobserver(user))
 		. += span_info("[quantity_to_words(quantity)] [denomination] ([get_real_price()] mammon)")
 		return
+
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= SKILL_LEVEL_NOVICE)
+		. += span_info("It looks like you could rig this up to be fired as ammunition.")
 
 	if(HAS_TRAIT(user, TRAIT_COIN_ILLITERATE))
 		if(quantity <= 1)
@@ -309,6 +313,25 @@
 		INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return TRUE
 
+	//turn coins into pellets! fucking fuck whoever snowflaked coins quantity...
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= 10)
+		//crafting timer
+		to_chat(user, span_notice("You start rigging up [src] to be fired as ammunition..."))
+		playsound(src, 'sound/foley/lockrattle.ogg', 100, TRUE, -2)
+		if(!do_after(user, 3 SECONDS, src))
+			to_chat(user, span_warning("You stop rigging up [src]."))
+			return
+
+		quantity -= 6
+		if(!quantity)
+			qdel(src)
+			return
+
+		var/obj/item/ammo_casing/caseless/pelletshot/coin/new_pellet = new pellet_type(get_turf(user))
+		user.put_in_hands(new_pellet)
+		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+
+
 /obj/item/coin/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -419,6 +442,7 @@
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
 	item_weight = 9 GRAMS
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenar
 
 
 // SILVER
@@ -430,6 +454,7 @@
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
 	item_weight = 11 GRAMS
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zil
 
 
 // COPPER
@@ -440,6 +465,7 @@
 	sellprice = 1
 	base_type = CTYPE_COPP
 	plural_name = "zennies"
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenny
 
 /obj/item/coin/copper/pile/Initialize(mapload, coin_amount)
 	. = ..()

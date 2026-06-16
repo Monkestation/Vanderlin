@@ -265,10 +265,12 @@
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
 		if(/datum/patron/divine/malum)
-			head = /obj/item/clothing/head/headband/colored/red
+			head = /obj/item/clothing/head/padded/malumhood
 			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
-			shoes = /obj/item/clothing/shoes/boots
-			armor = /obj/item/clothing/shirt/robe/colored/red
+			gloves = /obj/item/clothing/gloves/leather
+			belt = /obj/item/storage/belt/leather
+			shoes = /obj/item/clothing/shoes/boots/leather
+			armor = /obj/item/clothing/shirt/robe/malum
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 			backpack_contents += /obj/item/weapon/hammer/iron
 		else

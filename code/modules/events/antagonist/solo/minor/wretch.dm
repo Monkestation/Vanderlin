@@ -43,7 +43,6 @@
 
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/lich = 1,
-		/datum/round_event_control/antagonist/solo/rebel = 1,
 		/datum/round_event_control/antagonist/solo/aspirant = 1,
 		/datum/round_event_control/antagonist/solo/maniac = 1,
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 1,

@@ -29,7 +29,7 @@
 		return FALSE
 	var/has_dead = FALSE
 	for(var/mob/mob in grave.get_all_contents())
-		if(mob.mind?.has_antag_datum(/datum/antagonist/zombie)) // Zombies are granted peace (death)
+		if(IS_DEADITE(mob)) // Zombies are granted peace (death)
 			var/mob/living/carbon/human/zombie = mob // We grab it since we know that only humans can be zombies, and mobs dont have a death()....
 			zombie.mind.remove_antag_datum(/datum/antagonist/zombie)
 			zombie.death()

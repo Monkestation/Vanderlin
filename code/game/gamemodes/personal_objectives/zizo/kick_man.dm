@@ -17,7 +17,7 @@
 
 /datum/objective/personal/kick_groin/proc/on_kick_attempted(datum/source, mob/living/target, zone_hit, damage_blocked)
 	SIGNAL_HANDLER
-	if(completed || target.gender != MALE || target.stat == DEAD || zone_hit != BODY_ZONE_PRECISE_GROIN)
+	if(completed || !target.client || target.gender != MALE || target.stat == DEAD || zone_hit != BODY_ZONE_PRECISE_GROIN)
 		return
 
 	if(damage_blocked)

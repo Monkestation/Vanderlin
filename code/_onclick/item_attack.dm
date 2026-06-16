@@ -661,7 +661,9 @@
 			if(user.used_intent.blade_class != BCLASS_BLUNT)
 				I.add_mob_blood(src)
 				var/turf/location = get_turf(src)
+				var/attack_direction = get_dir(src, user)
 				add_splatter_floor(location)
+				add_splatter_wall(force = 2, splatter_direction = attack_direction)
 				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(src)
 					user.adjust_hygiene(-10)
@@ -669,7 +671,10 @@
 			if(user.used_intent.blade_class == BCLASS_BLUNT)
 				I.add_mob_blood(src)
 				var/turf/location = get_turf(src)
+				var/attack_direction = get_dir(src, user)
 				add_splatter_floor(location)
+				add_splatter_floor(location)
+				add_splatter_wall(force = 2, splatter_direction = attack_direction)
 				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(src)
 					user.adjust_hygiene(-10)

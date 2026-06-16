@@ -76,4 +76,4 @@
 	neck = /obj/item/clothing/neck/coif
 	armor = /obj/item/clothing/armor/leather
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/shepherd/rag = 1)

@@ -259,8 +259,13 @@
 
 /obj/item/paper/inqslip/confession/attemptsign(mob/user, mob/living/carbon/human/M)
 	// Check if they've confessed via torture
+	to_chat(M, span_notice("You hold the confession paper up to [user.p_their()] bleeding wound."))
 
 	var/forced_signing = HAS_TRAIT(user, TRAIT_HAS_CONFESSED)
+
+	if(user.stat == DEAD)
+		to_chat(M, span_warning("This one has little to confess, other than being dead."))
+		return
 
 	if(paired)
 		if(paired.subject != user)

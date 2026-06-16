@@ -9,7 +9,6 @@
 	///The type of cleaning required to clean the decal. See __DEFINES/cleaning.dm for the options
 	var/clean_type = CLEAN_TYPE_LIGHT_DECAL
 	var/wash_precent = 0
-	COOLDOWN_DECLARE(wash_cooldown)
 
 /obj/effect/decal/cleanable/Initialize(mapload)
 	. = ..()
@@ -122,10 +121,9 @@
 	return .
 
 /obj/effect/decal/cleanable/weather_act_on(weather_trait, severity)
-	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, wash_cooldown))
+	if(weather_trait != PARTICLEWEATHER_RAIN)
 		return
-	COOLDOWN_START(src, wash_cooldown, 7.5 SECONDS)
-	wash_precent += min(25, severity / 2)
+	wash_precent += severity
 	alpha = 255 *((100 - wash_precent) * 0.01)
 	if(wash_precent >= 100)
 		wash(CLEAN_WASH)

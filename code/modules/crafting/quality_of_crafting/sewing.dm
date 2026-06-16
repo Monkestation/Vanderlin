@@ -1917,6 +1917,10 @@
 	skillcraft = /datum/attribute/skill/misc/medicine
 	blacklisted_paths = list(/obj/item/natural/cloth/bandage)
 
+// You do not get medical skill for making bandages
+/datum/repeatable_crafting_recipe/sewing/bandage/add_skill_experience(mob/user)
+	return
+
 /datum/repeatable_crafting_recipe/sewing/barding
 	name = "padded barding (saiga)"
 	category = "Armor"

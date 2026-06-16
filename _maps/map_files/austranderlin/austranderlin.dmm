@@ -23682,22 +23682,22 @@
 /area/indoors/town/noble_manor/yellow)
 "kVH" = (
 /obj/structure/rack,
-/obj/item/weapon/polearm/spear/stone/copper,
-/obj/item/weapon/polearm/spear/stone/copper,
-/obj/item/weapon/polearm/spear/stone/copper,
-/obj/item/weapon/polearm/spear/stone/copper{
+/obj/item/weapon/polearm/spear/javelin,
+/obj/item/weapon/polearm/spear/javelin,
+/obj/item/weapon/polearm/spear/javelin,
+/obj/item/weapon/polearm/spear/javelin{
 	pixel_x = -17;
 	pixel_y = -16
 	},
-/obj/item/weapon/polearm/spear/stone/copper{
+/obj/item/weapon/polearm/spear/javelin{
 	pixel_x = -23;
 	pixel_y = -13
 	},
-/obj/item/weapon/polearm/spear/stone/copper{
+/obj/item/weapon/polearm/spear/javelin{
 	pixel_x = -14;
 	pixel_y = -18
 	},
-/obj/item/weapon/polearm/spear/stone/copper{
+/obj/item/weapon/polearm/spear/javelin{
 	pixel_x = -20;
 	pixel_y = -14
 	},
