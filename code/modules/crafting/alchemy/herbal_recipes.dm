@@ -616,11 +616,14 @@
 /datum/reagent/poison/herbal/jaw/on_mob_life(mob/living/L)
 	. = ..()
 	L.adjustFireLoss(0.1)
-	var/mob/living/carbon/C = L
-		var/obj/item/bodypart/head/toothies = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		var/obj/item/bodypart/head/toothies = C.get_bodypart(BODY_ZONE_HEAD)
 		if(toothies)
-		part.add_wound(/datum/wound/teeth)
-
+			part.add_wound(/datum/wound/teeth)
+	else if(L.stat != DEAD)
+		L.death()
+		
 /datum/reagent/poison/herbal/erratique
 	name = "Erratique"
 	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity, and is extremely lethal over a long period of time if untreated."
@@ -761,8 +764,8 @@
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 
 /datum/reagent/poison/herbal/bioweapon
-	name = "NRSIV"
-	description = "Nonreproductive Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of rapidly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
+	name = "NCSIV"
+	description = "Noncontagious Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of rapidly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
 	color = "#00ff0d"
 	metabolization_rate = 0.01
 	taste_description = "death on a microscopic level"
