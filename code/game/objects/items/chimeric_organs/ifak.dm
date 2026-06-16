@@ -10,13 +10,16 @@
 	slot_flags = ITEM_SLOT_HIP
 	populate_contents = list(
 		/obj/item/reagent_containers/syringe,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/natural/bundle/fibers/full,
 		/obj/item/storage/fancy/pilltin/sate,
 		/obj/item/storage/fancy/pilltin/devour,
 		/obj/item/candle/yellow,
 		/obj/item/needle,
 	)
 	item_weight = 740 GRAMS
+	contents_tag = "item"
 
 /obj/item/storage/fancy/ifak/update_icon_state()
 	. = ..()
@@ -27,14 +30,6 @@
 			icon_state = "ifak_open"
 	else
 		icon_state = "ifak"
-
-/obj/item/storage/fancy/ifak/examine(mob/user)
-	. = ..()
-	if(is_open)
-		if(length(contents) == 1)
-			. += "There is one item left."
-		else
-			. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] items left."
 
 /obj/item/storage/fancy/ifak/attack_self(mob/user, list/modifiers)
 	. = ..()

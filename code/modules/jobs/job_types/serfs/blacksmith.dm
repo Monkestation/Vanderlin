@@ -56,7 +56,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blacksmith
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/blacksmith/old
-
+	book_type = /obj/item/recipe_book/blacksmithing
 
 /datum/outfit/blacksmith
 	name = JOB_BLACKSMITH
@@ -80,11 +80,6 @@
 	if(prob(50))
 		head = /obj/item/clothing/head/hatblu
 	if(equipped_human.gender == FEMALE)
-		pants = /obj/item/clothing/pants/trou
 		armor = /obj/item/clothing/shirt/dress/gen/colored/random
 		shoes = /obj/item/clothing/shoes/shortboots
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/belt/pouch/coins/poor
-		beltr = /obj/item/key/blacksmith
-		cloak = /obj/item/clothing/cloak/apron/brown
 

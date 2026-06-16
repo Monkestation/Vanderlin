@@ -8,6 +8,14 @@
 	sewn_bleed_rate = 0
 	can_cauterize = FALSE
 	critical = FALSE
+	associated_bclasses = STAB_BCLASSES
+	viable_zones = list(BODY_ZONE_HEAD)
+
+	// Most of these crits dismember organs and permanently hamper the target, so we're making them harder
+	min_damage = 10
+	min_damage_dividend = 0.5
+	dividend_multi = 10
+	damage_divisor = 12
 
 /datum/wound/facial/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial) && (type == other.type))
@@ -22,14 +30,22 @@
 		"The eardrums are ruptured!",
 	)
 	woundpain = 50
-	bleed_rate = 8
+	bleed_rate = 4
 	can_cauterize = TRUE
 	critical = TRUE
+	viable_zones = list(BODY_ZONE_PRECISE_EARS)
+
+/datum/wound/facial/ears/can_apply_to_bodypart(obj/item/bodypart/affected)
+	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
+		return FALSE
+	. = ..()
 
 /datum/wound/facial/ears/can_apply_to_mob(mob/living/affected)
 	. = ..()
 	if(!.)
 		return
+	if(affected.has_wound(/datum/wound/facial/ears))
+		return FALSE
 	return affected.getorganslot(ORGAN_SLOT_EARS)
 
 /datum/wound/facial/ears/on_mob_gain(mob/living/affected)
@@ -49,15 +65,10 @@
 		"The eye is destroyed!",
 	)
 	woundpain = 30
-	bleed_rate = 8
+	bleed_rate = 4
 	can_cauterize = FALSE
 	critical = TRUE
-
-/datum/wound/facial/eyes/can_apply_to_mob(mob/living/affected)
-	. = ..()
-	if(!.)
-		return
-	return affected.getorganslot(ORGAN_SLOT_EYES)
+	viable_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 
 /datum/wound/facial/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -72,25 +83,36 @@
 		"The right eye is gouged!",
 		"The right eye is destroyed!",
 	)
+	viable_zones = list(BODY_ZONE_PRECISE_R_EYE)
+
+/datum/wound/facial/eyes/right/can_apply_to_mob(mob/living/carbon/affected)
+	. = ..()
+	if(!.)
+		return
+	if(!istype(affected))
+		return
+	var/obj/item/organ/eyes/RE = LAZYACCESS(affected.eye_organs, 2)
+	return RE
 
 /datum/wound/facial/eyes/right/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial/eyes/right))
 		return FALSE
 	return TRUE
 
-/datum/wound/facial/eyes/right/on_mob_gain(mob/living/affected)
+/datum/wound/facial/eyes/right/on_mob_gain(mob/living/carbon/affected)
 	. = ..()
-	ADD_TRAIT(affected, TRAIT_CYCLOPS_RIGHT, "[type]")
+	var/obj/item/organ/eyes/RE = LAZYACCESS(affected.eye_organs, 2)
+	RE.applyOrganDamage(30)
 	affected.update_fov_angles()
 	if(affected.has_wound(/datum/wound/facial/eyes/left) && affected.has_wound(/datum/wound/facial/eyes/right))
-		var/obj/item/organ/my_eyes = affected.getorganslot(ORGAN_SLOT_EYES)
-		if(my_eyes)
-			my_eyes.Remove(affected)
-			my_eyes.forceMove(affected.drop_location())
+		var/list/eye_list = affected.eye_organs
+		for(var/obj/item/organ/eyes/my_eyes as anything in eye_list)
+			if(my_eyes)
+				my_eyes.Remove(affected)
+				my_eyes.forceMove(affected.drop_location())
 
 /datum/wound/facial/eyes/right/on_mob_loss(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_CYCLOPS_RIGHT, "[type]")
 	affected.update_fov_angles()
 
 /datum/wound/facial/eyes/right/permanent
@@ -99,6 +121,7 @@
 	woundpain = 0
 	bleed_rate = 0
 	can_sew = FALSE
+	can_roll = FALSE
 
 /datum/wound/facial/eyes/left
 	name = "left eye evisceration"
@@ -108,25 +131,36 @@
 		"The left eye is gouged!",
 		"The left eye is destroyed!",
 	)
+	viable_zones = list(BODY_ZONE_PRECISE_L_EYE)
+
+/datum/wound/facial/eyes/left/can_apply_to_mob(mob/living/carbon/affected)
+	. = ..()
+	if(!.)
+		return
+	if(!istype(affected))
+		return
+	var/obj/item/organ/eyes/LE = LAZYACCESS(affected.eye_organs, 1)
+	return LE
 
 /datum/wound/facial/eyes/left/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial/eyes/left))
 		return FALSE
 	return TRUE
 
-/datum/wound/facial/eyes/left/on_mob_gain(mob/living/affected)
+/datum/wound/facial/eyes/left/on_mob_gain(mob/living/carbon/affected)
 	. = ..()
-	ADD_TRAIT(affected, TRAIT_CYCLOPS_LEFT, "[type]")
+	var/obj/item/organ/eyes/LE = LAZYACCESS(affected.eye_organs, 1)
+	LE.applyOrganDamage(30)
 	affected.update_fov_angles()
 	if(affected.has_wound(/datum/wound/facial/eyes/left) && affected.has_wound(/datum/wound/facial/eyes/right))
-		var/obj/item/organ/my_eyes = affected.getorganslot(ORGAN_SLOT_EYES)
-		if(my_eyes)
-			my_eyes.Remove(affected)
-			my_eyes.forceMove(affected.drop_location())
+		var/list/eye_list = affected.eye_organs
+		for(var/obj/item/organ/eyes/my_eyes as anything in eye_list)
+			if(my_eyes)
+				my_eyes.Remove(affected)
+				my_eyes.forceMove(affected.drop_location())
 
 /datum/wound/facial/eyes/left/on_mob_loss(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_CYCLOPS_LEFT, "[type]")
 	affected.update_fov_angles()
 
 /datum/wound/facial/eyes/left/permanent
@@ -135,6 +169,7 @@
 	woundpain = 0
 	bleed_rate = 0
 	can_sew = FALSE
+	can_roll = FALSE
 
 /datum/wound/facial/tongue
 	name = "glossectomy"
@@ -145,9 +180,10 @@
 		"The tongue flies off in an arc!"
 	)
 	woundpain = 8
-	bleed_rate = 10
+	bleed_rate = 1
 	can_cauterize = FALSE
 	critical = TRUE
+	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/permanent = FALSE
 
 /datum/wound/facial/tongue/can_apply_to_mob(mob/living/affected)
@@ -166,6 +202,7 @@
 			qdel(tongue_loss)
 		else
 			tongue_loss.forceMove(affected.drop_location())
+	qdel(src)
 
 /datum/wound/facial/tongue/permanent
 	show_in_book = FALSE
@@ -174,6 +211,7 @@
 	bleed_rate = 0
 	can_sew = FALSE
 	permanent = TRUE
+	can_roll = FALSE
 
 /datum/wound/facial/disfigurement
 	name = "disfigurement"
@@ -186,6 +224,7 @@
 	can_sew = FALSE
 	can_cauterize = FALSE
 	critical = TRUE
+	viable_zones = list(BODY_ZONE_HEAD)
 
 /datum/wound/facial/disfigurement/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -203,6 +242,7 @@
 		"The nose is destroyed!",
 	)
 	mortal = TRUE
+	viable_zones = list(BODY_ZONE_PRECISE_NOSE)
 
 /datum/wound/facial/disfigurement/nose/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -227,6 +267,18 @@
 	disabling = TRUE
 	critical = TRUE
 	mortal = TRUE
+	associated_bclasses = CBT_BCLASSES
+	min_damage = 5
+	viable_zones = list(BODY_ZONE_PRECISE_GROIN)
+
+/datum/wound/cbt/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, damage_bclass)
+	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
+		return
+	. = ..()
+
+/datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
+	var/cbt_multiplier = HAS_TRAIT(user, TRAIT_NUTCRACKER) ? 2 : 1
+	return round(dam / 5) * cbt_multiplier // ignores standard formula entirely
 
 /datum/wound/cbt/can_apply_to_mob(mob/living/affected)
 	. = ..()
@@ -234,7 +286,6 @@
 		return
 	var/obj/item/bodypart/chest/chest = affected.get_bodypart(BODY_ZONE_CHEST)
 	return chest && chest.status == BODYPART_ORGANIC
-
 
 /datum/wound/cbt/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/cbt))
@@ -276,6 +327,7 @@
 		"The testicles are eviscerated!",
 	)
 	whp = null
+	can_roll = FALSE
 
 /datum/wound/cbt/permanent/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -306,11 +358,11 @@
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 80
 	woundpain = 30
-	can_sew = FALSE
-	can_cauterize = FALSE
 	disabling = TRUE
 	critical = TRUE
 	sleep_healing = 0
+	associated_bclasses = WHIPPING_BCLASSES
+	strong_intent_bonus = TRUE
 	var/gain_emote = "paincrit"
 
 /datum/wound/scarring/on_mob_gain(mob/living/affected)

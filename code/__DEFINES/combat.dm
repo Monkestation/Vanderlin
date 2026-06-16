@@ -10,6 +10,12 @@
 #define CLONE		"clone"
 #define STAMINA 	"stamina"
 #define BRAIN		"brain"
+/// Pain damage type
+#define PAIN "pain"
+/// Shock (technically just pain but might be useful i guess?)
+#define SHOCK_PAIN "shock"
+/// Shock stage damage type
+#define SHOCK_STAGE "shock_stage"
 
 //Damage flag defines //
 // STRING HERE NEEDS TO EXACTLY MATCH VAR NAME IN /datum/armor
@@ -27,6 +33,8 @@
 #define ACID "acid"
 /// protection against magical attacks (make this adjustable via rune enchantments or something)
 #define MAGIC "magic"
+///protection from internal damage to the organs
+#define WOUND "wound"
 
 /// Armor values that are used for damage
 #define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
@@ -62,10 +70,11 @@
 #define CANPUSH			(1<<3)
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
+#define BLEEDOUT (1<<6)
 
 //Health Defines
-#define HEALTH_THRESHOLD_CRIT 0
-#define HEALTH_THRESHOLD_FULLCRIT 0
+#define HEALTH_THRESHOLD_CRIT 100
+#define HEALTH_THRESHOLD_FULLCRIT 70
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
@@ -107,6 +116,8 @@
 #define CRAWLING_ADD_SLOWDOWN 7
 //slowdown for dislocated limbs
 #define DISLOCATED_ADD_SLOWDOWN 2
+//slowdown for fractured limbs
+#define FRACTURED_ADD_SLOWDOWN 3
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1
@@ -193,6 +204,7 @@
 #define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
 #define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
 #define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+#define GREATAXE_CLEAVE	    /datum/intent/axe/chop/greataxe/slayer
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear

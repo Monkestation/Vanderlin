@@ -56,6 +56,11 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/hunter/old
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/hunter
 
+	traits = list(
+		TRAIT_KEENEYES,
+		TRAIT_FORAGER
+	)
+
 /datum/outfit/pilgrim/hunter
 	name = "Hunter (Pilgrim)"
 	pants = /obj/item/clothing/pants/tights/colored/random

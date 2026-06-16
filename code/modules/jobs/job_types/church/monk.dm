@@ -59,6 +59,10 @@
 		/datum/attribute/skill/labor/fishing = 20,
 		/datum/attribute/skill/misc/swimming = 20
 	)
+/datum/attribute_holder/sheet/job/acolyte/patron/necra
+	raw_attribute_list = list(
+	/datum/attribute/skill/craft/masonry = 20
+	)
 
 /datum/attribute_holder/sheet/job/acolyte/patron/ravox
 	raw_attribute_list = list(
@@ -124,6 +128,7 @@
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/necra)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/necra)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
@@ -260,10 +265,12 @@
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
 		if(/datum/patron/divine/malum)
-			head = /obj/item/clothing/head/headband/colored/red
+			head = /obj/item/clothing/head/padded/malumhood
 			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
-			shoes = /obj/item/clothing/shoes/boots
-			armor = /obj/item/clothing/shirt/robe/colored/red
+			gloves = /obj/item/clothing/gloves/leather
+			belt = /obj/item/storage/belt/leather
+			shoes = /obj/item/clothing/shoes/boots/leather
+			armor = /obj/item/clothing/shirt/robe/malum
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 			backpack_contents += /obj/item/weapon/hammer/iron
 		else

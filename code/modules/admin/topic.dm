@@ -191,8 +191,6 @@
 				var/mob/living/carbon/human/newmob = M.change_mob_type( /mob/living/carbon/human , null, null, delmob )
 				if(posttransformoutfit && istype(newmob))
 					newmob.equipOutfit(posttransformoutfit)
-			if("monkey")
-				M.change_mob_type( /mob/living/carbon/monkey , null, null, delmob )
 			if("cat")
 				M.change_mob_type( /mob/living/simple_animal/pet/cat , null, null, delmob )
 
@@ -415,32 +413,6 @@
 		Game() // updates the main game menu
 		HandleFSecret()
 
-	else if(href_list["monkeyone"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["monkeyone"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.")
-			return
-
-		log_admin("[key_name_admin(usr)] attempting to monkeyize [key_name(H)].")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] attempting to monkeyize [key_name_admin(H)].</span>")
-		H.monkeyize()
-
-	else if(href_list["humanone"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/monkey/Mo = locate(href_list["humanone"])
-		if(!istype(Mo))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/monkey.")
-			return
-
-		log_admin("[key_name_admin(usr)] attempting to humanize [key_name(Mo)].")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] attempting to humanize [key_name_admin(Mo)].</span>")
-		Mo.humanize()
-
 	else if(href_list["forcespeech"])
 		if(!check_rights(R_FUN))
 			return
@@ -505,8 +477,11 @@
 	else if(href_list["cryomob"])
 		if(!check_rights(R_ADMIN))
 			return
-
 		var/mob/M = locate(href_list["cryomob"])
+
+		if(tgui_alert(usr, "Are you sure you want to cryo [key_name(M)]?", "Message", list("Yes", "No")) != "Yes")
+			return
+
 		usr.client.send_to_cryo(M)
 
 	else if(href_list["revive"])
@@ -626,7 +601,7 @@
 				if(SOFT_CRIT)
 					status = "<font color='orange'><b>Dying</b></font>"
 				if(UNCONSCIOUS)
-					status = "<font color='orange'><b>[L.InCritical() ? "Unconscious and Dying" : "Unconscious"]</b></font>"
+					status = "<font color='orange'><b>[HAS_TRAIT(L, TRAIT_CRITICAL_CONDITION) ? "Unconscious and Dying" : "Unconscious"]</b></font>"
 				if(DEAD)
 					status = "<font color='red'><b>Dead</b></font>"
 			health_description = "Status = [status]"

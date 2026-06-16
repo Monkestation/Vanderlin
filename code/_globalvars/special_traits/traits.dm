@@ -14,10 +14,12 @@
 	var/list/allowed_ages
 	var/list/allowed_patrons
 	var/list/allowed_jobs
+	var/list/allowed_ctags
 	var/list/restricted_traits
 	var/list/restricted_races
 	var/list/restricted_jobs
 	var/allowed_flaw
+	var/cost_modifier = 2
 
 /// check if this characters can be applied this special_trait
 /datum/special_trait/proc/can_apply(mob/living/carbon/human/character)
@@ -41,12 +43,11 @@
 	weight = 100
 
 /datum/special_trait/nightvision/on_apply(mob/living/carbon/human/character, silent)
-	var/obj/item/organ/eyes/eyes = character.getorganslot(ORGAN_SLOT_EYES)
-	if(!eyes)
-		return
-	eyes.see_in_dark = 3
-	eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
-	character.update_sight()
+	var/list/eye_list = character.getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+		eyes.see_in_dark = 3
+		eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+		character.update_sight()
 
 /datum/special_trait/thickskin
 	name = "Tough"
@@ -65,8 +66,8 @@
 	weight = 25
 
 /datum/special_trait/curseofcain/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_NOHUNGER, "[type]")
-	ADD_TRAIT(character, TRAIT_NOBREATH, "[type]")
+	ADD_TRAIT(character, TRAIT_NOHUNGER, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOBREATH, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/deadened
 	name = "Deadened"
@@ -117,16 +118,6 @@
 
 /datum/special_trait/night_owl/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NIGHT_OWL, "[type]")
-
-/datum/special_trait/beautiful
-	name = "Beautiful"
-	greet_text = span_notice("My face is a work of art")
-	weight = 100
-
-/datum/special_trait/beautiful/on_apply(mob/living/carbon/human/character, silent)
-	REMOVE_TRAIT(character, TRAIT_UGLY, BE_SPECIAL_TRAIT)
-	REMOVE_TRAIT(character, TRAIT_FISHFACE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_BEAUTIFUL, "[type]")
 
 //positive
 
@@ -312,6 +303,8 @@
 	character.grant_language(/datum/language/celestial)
 	character.grant_language(/datum/language/orcish)
 	character.grant_language(/datum/language/deepspeak)
+	character.grant_language(/datum/language/halfling)
+	character.grant_language(/datum/language/gronnic)
 	character.grant_language(/datum/language/newpsydonic)
 	character.grant_language(/datum/language/oldpsydonic)
 	character.grant_language(/datum/language/zalad)
@@ -355,6 +348,8 @@
 	character.grant_language(/datum/language/celestial)
 	character.grant_language(/datum/language/orcish)
 	character.grant_language(/datum/language/deepspeak)
+	character.grant_language(/datum/language/halfling)
+	character.grant_language(/datum/language/gronnic)
 	character.grant_language(/datum/language/newpsydonic)
 	character.grant_language(/datum/language/oldpsydonic)
 	character.grant_language(/datum/language/zalad)
@@ -595,15 +590,6 @@
 /datum/special_trait/nimrod/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat(STAT_INTELLIGENCE, -4)
 	character.set_hair_style(/datum/sprite_accessory/hair/head/nimrod, FALSE)
-
-/datum/special_trait/ugly
-	name = "Ugly"
-	greet_text = span_notice("People find me repulsive.")
-	weight = 100
-
-/datum/special_trait/ugly/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_UGLY, "[type]")
-	REMOVE_TRAIT(character, TRAIT_BEAUTIFUL, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/nopouch
 	name = "No Pouch"
@@ -850,7 +836,7 @@
 /datum/special_trait/skeleton
 	name = "Skeleton"
 	greet_text = span_boldwarning("I was... am... afflicted with a curse by a lich that left me without my flesh, but I still retained control of myself... (This is not an antagonist role, expect to be attacked unless wearing something to cover your head.)")
-	allowed_jobs = list(/datum/job/pilgrim)
+	allowed_ctags = list(CTAG_PILGRIM)
 	req_text = "Be a Pilgrim."
 	weight = 20
 
@@ -858,13 +844,23 @@
 	character.skeletonize(FALSE)
 	character.skele_look()
 	character.grant_undead_eyes()
-	ADD_TRAIT(character, TRAIT_NOLIMBDISABLE, "[type]")
-	ADD_TRAIT(character, TRAIT_EASYDISMEMBER, "[type]")
-	ADD_TRAIT(character, TRAIT_LIMBATTACHMENT, "[type]")
-	ADD_TRAIT(character, TRAIT_NOHUNGER, "[type]")
-	ADD_TRAIT(character, TRAIT_NOBREATH, "[type]")
-	ADD_TRAIT(character, TRAIT_NOPAIN, "[type]")
-	ADD_TRAIT(character, TRAIT_TOXIMMUNE, "[type]")
+
+	character.mob_biotypes |= MOB_UNDEAD
+	character.dna?.species?.inherent_traits |= TRAIT_NOBLOOD
+	character.dna?.species?.soundpack_m = new /datum/voicepack/skeleton()
+	character.dna?.species?.soundpack_f = new /datum/voicepack/skeleton()
+
+	ADD_TRAIT(character, TRAIT_NOLIMBDISABLE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_EASYDISMEMBER, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_LIMBATTACHMENT, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOHUNGER, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOBREATH, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_TOXIMMUNE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOSLEEP, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_SHOCKIMMUNE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOBLOOD, BE_SPECIAL_TRAIT)
+
 	character.update_body()
 
 /datum/special_trait/overcompensating
@@ -973,7 +969,7 @@
 	message = "burps gluttonously!"
 	snd_range = 4
 	snd_vol = 200
-	mute_time = 100 // little less spammable
+	cooldown = 10 SECONDS // little less spammable
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"
@@ -993,7 +989,7 @@
 
 /datum/special_trait/musical/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_BARDIC_TRAINING, BE_SPECIAL_TRAIT)
-	character.inspiration = new /datum/inspiration(character)
+	character.grant_inspiration()
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/muscial)
 
 /datum/special_trait/baothan
@@ -1020,3 +1016,33 @@
 
 /datum/special_trait/black_biar/on_apply(mob/living/carbon/human/character, silent)
 	character.add_quirk(/datum/quirk/black_briar)
+
+/datum/special_trait/king
+	name = "king"
+	greet_text = span_notice("i am king!")
+	weight = 30
+
+	req_text = "Be a beggar or a jester"
+	allowed_jobs = list(/datum/job/vagrant, /datum/job/jester)
+
+/datum/special_trait/king/on_apply(mob/living/carbon/human/character, silent)
+	character.honorary = lowertext(character.pronouns == SHE_HER ? SSmapping.config.monarch_title_f : SSmapping.config.monarch_title)
+
+/datum/special_trait/augmentable
+	name = "Chippin' In"
+	greet_text = span_notice("I crave the certainty of steel.")
+	weight = 15
+
+	req_text = "Be an artificer or a beggar"
+	allowed_jobs = list(/datum/job/artificer, /datum/job/vagrant)
+
+/datum/special_trait/augmentable/on_apply(mob/living/carbon/human/character, silent)
+	character.LoadComponent(/datum/component/augmentable)
+	character.clamped_adjust_skill_level(/datum/attribute/skill/craft/engineering, 20, 20, TRUE)
+
+/datum/special_trait/obese
+	name = "Fat"
+	weight = 70
+
+/datum/special_trait/obese/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_FAT, BE_SPECIAL_TRAIT)

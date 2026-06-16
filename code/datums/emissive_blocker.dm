@@ -23,7 +23,7 @@
 	render_source = source.render_target
 	src.color = GLOB.em_block_color
 
-	RegisterSignal(source, COMSIG_PARENT_QDELETING, PROC_REF(on_source_deleting))
+	RegisterSignal(source, COMSIG_QDELETING, PROC_REF(on_source_deleting))
 
 /atom/movable/emissive_blocker/Destroy()
 	render_source = null

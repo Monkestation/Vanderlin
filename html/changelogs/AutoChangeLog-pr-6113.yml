@@ -1,4 +1,0 @@
-author: "Monkeke2"
-delete-after: True
-changes:
-  - bugfix: "Zizo skeletons no longer show up in actors list"

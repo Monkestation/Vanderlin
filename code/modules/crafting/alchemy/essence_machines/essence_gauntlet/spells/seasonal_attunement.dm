@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/seasonal_attune
 	name = "Seasonal Attune"
 	desc = "Attunes the caster to natural cycles, providing minor benefits."
-	button_icon_state = "seasonal_attune"
+	button_icon_state = "lightning_sunder"
 	cast_range = 0
 	point_cost = 3
 	attunements = list(/datum/attunement/light)
+	essences = list(/datum/thaumaturgical_essence/cycle)
 
 /datum/action/cooldown/spell/essence/seasonal_attune/cast(atom/cast_on)
 	. = ..()

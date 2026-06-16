@@ -19,7 +19,7 @@
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/pet_planning,
 		/datum/ai_planning_subtree/flee_target,
-		/datum/ai_planning_subtree/action_state_manager,
+		/datum/ai_planning_subtree/priority_action_state_manager,
 
 	)
 

@@ -44,8 +44,13 @@
 	screen_max_rows = 2
 	screen_max_columns = 1
 
+/datum/component/storage/concrete/hollow_book
+	max_items = 1
+	max_w_class = WEIGHT_CLASS_BULKY
+	quickdraw = TRUE
+
 /datum/component/storage/concrete/grid/keyring
-	screen_max_rows = 4
+	screen_max_rows = 2
 	screen_max_columns = 5
 	max_w_class = WEIGHT_CLASS_SMALL
 	allow_dump_out = TRUE
@@ -87,6 +92,11 @@
 	max_w_class = WEIGHT_CLASS_HUGE
 	screen_max_rows = 10
 	screen_max_columns = 10
+
+/datum/component/storage/concrete/grid/bandolier
+	max_w_class = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 2
 
 /datum/component/storage/concrete/grid/mailmaster/show_to(mob/M)
 	. = ..()
@@ -219,9 +229,10 @@
 
 /datum/component/storage/concrete/grid/crucible
 	screen_max_rows = 5
-	screen_max_columns = 3
+	screen_max_columns = 5
 	max_w_class = WEIGHT_CLASS_HUGE
 	not_while_equipped = TRUE
+	allow_big_nesting = TRUE
 
 /datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
 	if(!storing.melting_material)

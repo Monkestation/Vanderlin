@@ -8,11 +8,12 @@
 		TOOL_SHARP = 60,
 	) // 60% success with any sharp item.
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/simple_animal)
-	time = 1.6 SECONDS
+	minimum_time = 1.2 SECONDS
+	maximum_time = 1.5 SECONDS
 	surgery_flags = SURGERY_BLOODY
 	surgery_flags_blocked = SURGERY_INCISED
-	skill_min = SKILL_RANK_NOVICE
-	skill_median = SKILL_RANK_APPRENTICE
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_APPRENTICE
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/scalpel2.ogg'
 
@@ -27,7 +28,7 @@
 		"<span class='notice'>Blood pools around the incision in [target]'s [parse_zone(target_zone)].</span>")
 	var/obj/item/bodypart/gotten_part = target.get_bodypart(check_zone(target_zone))
 	if(gotten_part)
-		gotten_part.add_wound(/datum/wound/slash/incision)
+		gotten_part.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO/6, surgical = TRUE)
 	return TRUE
 
 /// Clamping
@@ -38,10 +39,11 @@
 		TOOL_WIRECUTTER = 60,
 		TOOL_IMPROVISED_HEMOSTAT = 38,
 	)
-	time = 2.4 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 2.5 SECONDS
 	surgery_flags_blocked = SURGERY_CLAMPED
-	skill_min = SKILL_RANK_NOVICE
-	skill_median = SKILL_RANK_JOURNEYMAN
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 	preop_sound = 'sound/surgery/hemostat1.ogg'
 
 /datum/surgery_step/clamp/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
@@ -67,10 +69,11 @@
 		TOOL_IMPROVISED_RETRACTOR = 38,
 		TOOL_WIRECUTTER = 35,
 	)
-	time = 2.4 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 3.5 SECONDS
 	surgery_flags_blocked = SURGERY_RETRACTED
-	skill_min = SKILL_RANK_NOVICE
-	skill_median = SKILL_RANK_JOURNEYMAN
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 	preop_sound = 'sound/surgery/retractor1.ogg'
 
 /datum/surgery_step/retract/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
@@ -95,16 +98,22 @@
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
 	)
-	time = 2.4 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 3.5 SECONDS
 	surgery_flags = SURGERY_BLOODY
-	skill_min = SKILL_RANK_NOVICE
-	skill_median = SKILL_RANK_APPRENTICE
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_APPRENTICE
 
 /datum/surgery_step/cauterize/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	. = ..()
 	if(!.)
 		return
-	return length(bodypart.wounds)
+	if(length(bodypart.wounds))
+		return TRUE
+	for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(artery.damage)
+			return TRUE
+	return FALSE
 
 /datum/surgery_step/cauterize/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to cauterize the wounds on [target]'s [parse_zone(target_zone)]...</span>",
@@ -120,7 +129,10 @@
 	if(bodypart)
 		for(var/datum/wound/bleeder in bodypart.wounds)
 			bleeder.cauterize_wound()
-		bodypart.receive_damage(burn = 40) //painful, but the wounds go away eh?
+		for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
+			if(artery.damage)
+				artery.applyOrganDamage(-artery.damage)
+		bodypart.bodypart_attacked_by(BCLASS_BURN, dam = 25, modifiers = list(CRIT_MOD_CHANCE = -100)) //painful, but the wounds go away eh?
 	target.emote("scream")
 	return TRUE
 
@@ -148,11 +160,12 @@
 		BODY_ZONE_L_LEG,
 		BODY_ZONE_PRECISE_L_FOOT,
 	)
-	time = 5 SECONDS
+	minimum_time = 4.2 SECONDS
+	maximum_time = 5.5 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
 	surgery_flags_blocked = SURGERY_BROKEN
-	skill_min = SKILL_RANK_NOVICE
-	skill_median = SKILL_RANK_EXPERT
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_EXPERT
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/organ2.ogg'
 

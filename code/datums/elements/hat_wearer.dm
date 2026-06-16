@@ -3,7 +3,7 @@
  */
 /datum/element/hat_wearer
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	///offsets of hats we will wear
 	var/list/offsets
 
@@ -70,8 +70,7 @@
 	SIGNAL_HANDLER
 	if(istype(source, /mob/living/simple_animal))
 		var/mob/living/simple_animal/mob = source
-		var/friend_ref = REF(attacker)
-		if (!mob.faction.Find(friend_ref))
+		if(!mob.has_ally(attacker))
 			return
 
 	if(!istype(item, /obj/item/clothing/head))

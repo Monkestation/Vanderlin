@@ -37,6 +37,7 @@
 	init_slapcraft_steps()
 	init_slapcraft_recipes()
 	init_curse_names()
+	init_crafting_recipes_atoms()
 
 	GLOB.emote_list = init_emote_list()
 
@@ -100,3 +101,10 @@
 			continue
 		GLOB.curse_names |= initial(curse_type.name)
 		GLOB.curse_names[initial(curse_type.name)] = new curse_type
+
+/// Inits atoms used in crafting recipes
+/proc/init_crafting_recipes_atoms()
+	for(var/datum/anvil_recipe/recipe as anything in GLOB.anvil_recipes)
+		if(IS_ABSTRACT(recipe))
+			continue
+		GLOB.anvil_recipes_atom[recipe.created_item] = recipe.type

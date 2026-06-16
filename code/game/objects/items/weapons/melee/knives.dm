@@ -175,7 +175,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
-	melting_material = /datum/material/steel
 	melt_amount = 75
 	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
 	dropshrink = 0.9
@@ -187,9 +186,9 @@
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
 	throwforce = DAMAGE_KNIFE + 6
-	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
+	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
 	item_weight = 250 GRAMS
@@ -210,7 +209,6 @@
 	icon_state = "dagger_bronze"
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
-	melt_amount = 50
 	sellprice = 10
 	item_weight = 180 GRAMS
 
@@ -314,7 +312,7 @@
 	item_weight = 270 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
-	name ="plaguebringer sickle"
+	name = "plaguebringer sickle"
 	desc = "A wicked edge brings feculent delights."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "pestrasickle"
@@ -322,15 +320,15 @@
 	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand
-	name = "Fervor"
+	name = "\proper fervor"
 	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
 	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
-	name = "Apathy"
-	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
+	name = "\proper apathy"
+	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
 	item_weight = 220 GRAMS
@@ -352,7 +350,7 @@
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/baothagift)
+	enchant(/datum/enchantment/on_hit/baothagift)
 
 
 //................ Silver Dagger ............... //
@@ -388,6 +386,7 @@
 	max_blade_int = 300
 	icon_state = "pdagger"
 	melting_material = null
+	melt_amount = 0
 	embedding = list("embed_chance" = 0) // Embedding the cursed dagger has the potential to cause duping issues. Keep it like this unless you want to do a lot of bug hunting.
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
@@ -448,7 +447,7 @@
 	. = ..()
 	if(!ishuman(target))
 		return
-	if(target.stat == DEAD || (target.health < target.crit_threshold)) // Trigger soul steal or identity theft if the target is either dead or in crit
+	if(target.stat == DEAD || HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION)) // Trigger soul steal or identity theft if the target is either dead or in crit
 		if(istype(user.used_intent, /datum/intent/peculate))
 			if(!ishuman(user)) // carbons don't have all features of a human
 				to_chat(user, span_danger("You can't do that!"))
@@ -514,18 +513,23 @@
 				user.adjust_triumphs(1)
 				init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/target, mob/user)
+/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/victim, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 	record_round_statistic(STATS_ASSASSINATIONS)
-	var/mob/dead/observer/profane/S = new /mob/dead/observer/profane(src)
-	S.AddComponent(/datum/component/profaned, src)
-	S.name = "soul of [target.real_name]"
-	S.real_name = "soul of [target.real_name]"
-	S.deadchat_name = target.real_name
-	S.ManualFollow(src)
-	S.key = target.key
-	S.language_holder = target.language_holder.copy(S)
-	target.visible_message("<span class='danger'>[target]'s soul is pulled from their body and sucked into the profane dagger!</span>", "<span class='danger'>My soul is trapped within the profane dagger. Damnation!</span>")
+
+	var/mob/living/simple_animal/shade/soulstone_spirit = new /mob/living/simple_animal/shade(src)
+	soulstone_spirit.AddComponent(/datum/component/soulstoned, src)
+	soulstone_spirit.name = "soul of [victim.real_name]"
+	soulstone_spirit.real_name = "soul of [victim.real_name]"
+	soulstone_spirit.PossessByPlayer(victim.key)
+	victim.language_holder?.copy(soulstone_spirit)
+	if(user)
+		soulstone_spirit.language_holder?.copy_known_languages_from(user)
+	soulstone_spirit.get_language_holder().omnitongue = TRUE //Grants omnitongue
+
+	soulstone_spirit.cancel_camera()
+
+	victim.visible_message(span_danger("[victim]'s soul is pulled from their body and sucked into the profane dagger!"), span_danger("My soul is trapped within the profane dagger. Damnation!"))
 	playsound(src, 'sound/magic/soulsteal.ogg', 100, extrarange = 5)
 	blade_int = max_blade_int // Stealing a soul successfully sharpens the blade.
 	repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
@@ -545,28 +549,17 @@
 	qdel(chosen_ghost) // Get rid of that ghost!
 	return TRUE
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls(mob/user) // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
+/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls() // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
 	var/freed_souls = 0
-	for(var/mob/dead/observer/profane/A in src) // for every trapped soul in the dagger, whether they have left the game or not
-		to_chat(A, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")
-		A.returntolobby() //Send the trapped soul back to the lobby
-		user.visible_message("<span class='warning'>The [A.name] flows out from the profane dagger, finally free of its grasp.</span>")
+	for(var/mob/living/simple_animal/shade/shade in contents) // for every trapped soul in the dagger, whether they have left the game or not
+		to_chat(shade, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")
 		freed_souls += 1
-	user.visible_message("<span class='warning'>The profane dagger shatters into putrid smoke!</span>")
+		shade.returntolobby()
+		qdel(shade)
+		visible_message(span_warning("The [shade.name] flows out from the profane dagger, finally free of its grasp."))
+	visible_message(span_warning("The profane dagger shatters into putrid smoke!"))
 	qdel(src) // Delete the dagger. Forevermore.
 	return freed_souls
-
-/datum/component/profaned
-	var/atom/movable/container
-
-/datum/component/profaned/Initialize(atom/movable/container)
-	if(!istype(parent, /mob/dead/observer/profane))
-		return COMPONENT_INCOMPATIBLE
-	var/mob/dead/observer/profane/S = parent
-
-	src.container = container
-
-	S.forceMove(container)
 
 //................ Stone Knife ............... //
 /obj/item/weapon/knife/stone
@@ -580,6 +573,7 @@
 	max_blade_int = 50
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 0
 	sellprice = 5
 	item_weight = 150 GRAMS
 
@@ -623,7 +617,6 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
-	melt_amount = 50
 	sellprice = 10
 	item_weight = 180 GRAMS
 
@@ -697,7 +690,7 @@
 	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/throwcard
-	name = "Calling Card"
+	name = "\proper calling card"
 	desc = "A thin sheet of pig-iron stamped into a calling card, too thin and useless to be smelted. You've been had. From Heartfelt with love."
 	icon_state = "throwcard"
 	throw_speed = 5

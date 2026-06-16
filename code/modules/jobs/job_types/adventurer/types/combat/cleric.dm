@@ -159,15 +159,11 @@
 
 /datum/outfit/adventurer/cleric
 	name = "Cleric (Adventurer)"
-	head = /obj/item/clothing/head/helmet/skullcap
-	armor = /obj/item/clothing/armor/chainmail/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	gloves = /obj/item/clothing/gloves/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
-	neck = /obj/item/clothing/neck/chaincoif/iron
 	belt = /obj/item/storage/belt/leather/adventurer
-	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/tabard/crusader
 	wrists = /obj/item/clothing/neck/psycross/silver
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)

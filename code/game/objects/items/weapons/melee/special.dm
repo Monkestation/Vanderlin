@@ -7,7 +7,7 @@
 	force_wielded = DAMAGE_MACE
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(/datum/intent/lordbash, /datum/intent/lord_electrocute, /datum/intent/lord_silence)
-	gripped_intents = list(/datum/intent/lordbash)
+	gripped_intents = list(/datum/intent/lordbash, /datum/intent/lord_electrocute, /datum/intent/lord_silence)
 	minstr = 5
 
 	sharpness = IS_BLUNT
@@ -16,8 +16,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = FIRE_PROOF|LAVA_PROOF|ACID_PROOF // Nigh indestructible due to how important it is
 	associated_skill = /datum/attribute/skill/combat/axesmaces
-	smeltresult = null // No
-	melting_material = null
 	swingsound = BLUNTWOOSH_MED
 	blade_dulling = DULLING_BASHCHOP
 	var/static/list/rod_jobs = null
@@ -26,6 +24,10 @@
 	grid_height = 96
 	grid_width = 32
 	item_weight = 800 GRAMS
+
+/obj/item/weapon/lordscepter/Initialize()
+	. = ..()
+	AddElement(/datum/element/walking_stick)
 
 /datum/intent/lordbash
 	name = "bash"
@@ -36,16 +38,16 @@
 	item_damage_type = "blunt"
 
 /datum/intent/lord_electrocute
-	name = "electrocute"
+	name = "shock"
 	blade_class = null
-	icon_state = "inuse"
+	icon_state = "inshock"
 	tranged = TRUE
 	noaa = TRUE
 
 /datum/intent/lord_silence
 	name = "silence"
 	blade_class = null
-	icon_state = "inuse"
+	icon_state = "insilence"
 	tranged = TRUE
 	noaa = TRUE
 
@@ -53,11 +55,11 @@
 	if(tag)
 		switch(tag)
 			if("gen")
-				return list("shrink" = 0.6,"sx" = -10,"sy" = -7,"nx" = 11,"ny" = -6,"wx" = -1,"wy" = -6,"ex" = 3,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+				return list("shrink" = 0.6,"sx" = -6,"sy" = -10,"nx" = 7,"ny" = -5,"wx" = -2,"wy" = -10,"ex" = 2,"ey" = -10,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -45,"sturn" = -45,"wturn" = -45,"eturn" = -45,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.5,"sx" = -1,"sy" = -4,"nx" = 1,"ny" = -3,"wx" = -1,"wy" = -6,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 20,"wturn" = 18,"eturn" = -19,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 			if("wielded")
-				return list("shrink" = 0.6,"sx" = 0,"sy" = 2,"nx" = 1,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 4,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+				return list("shrink" = 0.6,"sx" = -10,"sy" = -7,"nx" = 11,"ny" = -6,"wx" = -1,"wy" = -6,"ex" = 3,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 
 /obj/item/weapon/lordscepter/afterattack(atom/target, mob/user, flag)
 	. = ..()
@@ -128,22 +130,25 @@
 	dropshrink = 0.6
 	sellprice = 100
 	possible_item_intents = list(POLEARM_BASH, /datum/intent/priest_smite, /datum/intent/priest_silence)
-	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood)
+	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood, /datum/intent/priest_smite, /datum/intent/priest_silence)
 	var/static/list/rod_jobs_priest = null
 	COOLDOWN_DECLARE(staff)
 	item_weight = 1.2 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/priest_smite
 	name = "smite"
 	blade_class = null
-	icon_state = "inuse"
+	icon_state = "inshock"
 	tranged = TRUE
 	noaa = TRUE
 
 /datum/intent/priest_silence
 	name = "silence"
 	blade_class = null
-	icon_state = "inuse"
+	icon_state = "insilence"
 	tranged = TRUE
 	noaa = TRUE
 
@@ -305,6 +310,7 @@
 		playsound(src, pick('sound/items/stunmace_toggle (1).ogg','sound/items/stunmace_toggle (2).ogg','sound/items/stunmace_toggle (3).ogg'), 100, TRUE)
 
 /obj/item/weapon/mace/stunmace/extinguish()
+	. = ..()
 	if(on)
 		var/mob/living/user = loc
 		if(istype(user))
@@ -362,8 +368,7 @@
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	thrown_bclass = BCLASS_CUT
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
@@ -372,6 +377,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psykatar"
 	item_weight = 400 GRAMS
+	smeltresult = /obj/item/ingot/silverblessed
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver

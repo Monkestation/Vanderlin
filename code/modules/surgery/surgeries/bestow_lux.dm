@@ -7,7 +7,7 @@
 		/datum/surgery_step/bestow_lux,
 		/datum/surgery_step/cauterize
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_CHEST)
 
 /datum/surgery_step/bestow_lux
@@ -16,11 +16,12 @@
 		/obj/item/reagent_containers/lux = 80,
 		/obj/item/reagent_containers/lux_tainted = 50,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 10 SECONDS
+	target_mobtypes = list(/mob/living/carbon/human)
+	minimum_time = 9.2 SECONDS
+	maximum_time = 12 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED | SURGERY_BROKEN
-	skill_min = SKILL_RANK_EXPERT
-	skill_median = SKILL_RANK_MASTER
+	skill_min = SKILL_LEVEL_EXPERT
+	skill_median = SKILL_LEVEL_MASTER
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 	var/tainted_lux = FALSE
@@ -28,7 +29,8 @@
 
 /datum/surgery_step/bestow_lux/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	. = ..()
-
+	if(!.)
+		return
 	if(target.stat == DEAD)
 		return FALSE
 

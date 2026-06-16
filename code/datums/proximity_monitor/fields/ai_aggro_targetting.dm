@@ -28,7 +28,7 @@
 	src.targeting_strategy_key = targeting_strategy_key
 	src.hiding_location_key = hiding_location_key
 	src.filter = controller.blackboard[targeting_strategy_key]
-	RegisterSignal(controller, COMSIG_PARENT_QDELETING, PROC_REF(controller_deleted))
+	RegisterSignal(controller, COMSIG_QDELETING, PROC_REF(controller_deleted))
 	RegisterSignal(controller, COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS, PROC_REF(controller_think))
 	RegisterSignal(controller, AI_CONTROLLER_BEHAVIOR_QUEUED(owning_behavior.type), PROC_REF(behavior_requeued))
 	RegisterSignal(controller, COMSIG_AI_BLACKBOARD_KEY_SET(targeting_strategy_key), PROC_REF(targeting_datum_changed))
