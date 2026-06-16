@@ -65,7 +65,7 @@
 	limb.drop_limb()
 
 /datum/surgery_operation/limb/amputate/pegleg
-	name = "Detach wooden limb"
+	name = "Detach Wooden Limb"
 	desc = "Saw off a patient's wooden leg."
 
 	required_bodytype = BODYPART_ROBOTIC

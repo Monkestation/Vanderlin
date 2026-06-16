@@ -1,8 +1,7 @@
 // Basic operations for moving back and forth between surgery states
 /// First step of every surgery, makes an incision in the skin
 /datum/surgery_operation/limb/incise_skin
-	name = "make skin incision"
-	// rnd_name = "Laparotomy / Craniotomy / Myotomy (Make Incision)" // Maybe we keep this one simple
+	name = "Make Skin Incision"
 	desc = "Make an incision in the patient's skin to access internal organs. \
 		Causes \"cut skin\" surgical state."
 
@@ -73,7 +72,7 @@
 
 /// Pulls the skin back to access internals
 /datum/surgery_operation/limb/retract_skin
-	name = "retract skin"
+	name = "Retract Skin"
 	desc = "Retract the patient's skin to access their internal organs. \
 		Causes \"skin open\" surgical state."
 
@@ -114,7 +113,7 @@
 
 /// Closes the skin
 /datum/surgery_operation/limb/close_skin
-	name = "mend skin incision"
+	name = "Mend Skin Incision"
 	desc = "Mend the incision in the patient's skin, closing it up. \
 		Clears most surgical states."
 
@@ -184,7 +183,7 @@
 
 /// Clamps bleeding blood vessels to prevent blood loss
 /datum/surgery_operation/limb/clamp_bleeders
-	name = "clamp bleeders"
+	name = "Clamp Bleeders"
 	desc = "Clamp bleeding blood vessels in the patient's body to prevent blood loss. \
 		Causes \"vessels clamped\" surgical state."
 
@@ -222,7 +221,7 @@
 
 /// Saws through bones to access organs
 /datum/surgery_operation/limb/saw_bones
-	name = "saw limb bone"
+	name = "Saw Limb Bone"
 	desc = "Saw through the patient's bones to access their internal organs. \
 		Causes \"bone sawed\" surgical state."
 

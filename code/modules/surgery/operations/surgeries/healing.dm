@@ -6,7 +6,7 @@
 #define COMBO_SURGERY (1<<2)
 
 /datum/surgery_operation/basic/tend_wounds
-	name = "tend wounds"
+	name = "Tend Wounds"
 	desc = "Perform superficial wound care on a patient's bruises and burns."
 	operation_flags = OPERATION_LOOPING | OPERATION_IGNORE_CLOTHES
 
@@ -66,7 +66,7 @@
 		if(!all_healing)
 			all_healing = new()
 			all_healing.image = image(/obj/item/natural/cloth/bandage)
-			all_healing.name = "tend bruises and burns"
+			all_healing.name = "Tend Bruises and Burns"
 			all_healing.info = "Heal a patient's superficial bruises, cuts, and burns."
 			LAZYSET(cached_healing_options, "[COMBO_SURGERY]", all_healing)
 
@@ -83,7 +83,7 @@
 		if(!brute_healing)
 			brute_healing = new()
 			brute_healing.image = image(/obj/item/needle)
-			brute_healing.name = "tend bruises"
+			brute_healing.name = "Tend Bruises"
 			brute_healing.info = "Heal a patient's superficial bruises and cuts."
 			LAZYSET(cached_healing_options, "[BRUTE_SURGERY]", brute_healing)
 
@@ -98,7 +98,7 @@
 		if(!burn_healing)
 			burn_healing = new()
 			burn_healing.image = image(/obj/item/natural/cloth)
-			burn_healing.name = "tend burns"
+			burn_healing.name = "Tend Burns"
 			burn_healing.info = "Heal a patient's superficial burns."
 			LAZYSET(cached_healing_options, "[BURN_SURGERY]", burn_healing)
 

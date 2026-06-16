@@ -1,5 +1,5 @@
 /datum/surgery_operation/limb/fix_bones
-	name = "fix limb bone"
+	name = "Fix Limb Bone"
 	desc = "Repair a patient's cut or broken bones. \
 		Clears \"bone sawed\" surgical state and repairs fractures."
 
