@@ -530,7 +530,7 @@
 
 /datum/reagent/poison/herbal/acid/on_mob_life(mob/living/L)
 	. = ..()
-	L.adjustFireLoss(20)
+	L.adjustFireLoss(5)
 	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
 
 /datum/reagent/head_explosion
@@ -572,6 +572,7 @@
 /datum/reagent/poison/herbal/ghoulpowder/overdose_start(mob/living/M)
 	ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
 	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+
 /datum/reagent/poison/herbal/pain
 	name = "Souffrance"
 	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm. Very good for torture and interrogation."
