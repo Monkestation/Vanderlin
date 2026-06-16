@@ -93,6 +93,23 @@
 	sellprice = 10
 	item_weight = 700 GRAMS
 
+/obj/item/weapon/sword/short/silver
+
+	name = "silver short sword"
+	desc = "A short silver sword, for those who fight the creatures of the nite."
+	icon_state = "silverswordshort"
+	force = DAMAGE_SHORTSWORD + 2
+	wdefense = GOOD_PARRY
+	max_blade_int = 250
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 60
+	item_weight = 650 GRAMS
+
+/obj/item/weapon/sword/short/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
 	desc = "Grenzelhoftian smiths worked with artificers, and an esoteric blade was born: a blade with an unique design, dismissing a crossguard in favor of a hollow beak to hook and draw harm away from its user. Short in length, yet lethally light in weight."
@@ -254,7 +271,7 @@
 
 /obj/item/weapon/sword/sabre/stalker
 	name = "stalker sabre"
-	desc = "A once elegant blade of mythril, diminishing under the suns gaze"
+	desc = "A once elegant blade of mythril, diminishing under the suns gaze."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spidersaber"
 	possible_item_intents = list(SWORD_CUT, SHORT_THRUST)
@@ -625,7 +642,7 @@
 
 /obj/item/weapon/sword/rapier/caneblade
 	name = "cane blade"
-	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
+	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing."
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "caneblade"
 	sellprice = 100 //Gold handle
@@ -1036,8 +1053,6 @@
 	desc = "A finely crafted silver longsword with a decorated golden hilt."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "declongsword"
-	force = DAMAGE_SWORD - 2
-	force_wielded = DAMAGE_LONGSWORD_WIELD - 2
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 
@@ -1045,7 +1060,19 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 160
 
-/obj/item/weapon/sword/long/decorated/Initialize(mapload)
+/obj/item/weapon/sword/long/silver
+	name = "silver longsword"
+	desc = "A finely crafted silver longsword"
+	icon = 'icons/roguetown/weapons/64/swords.dmi'
+	icon_state = "silverlongsword"
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+
+	last_used = 0
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 120
+
+/obj/item/weapon/sword/long/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
@@ -1297,6 +1324,28 @@
 			if("wielded")
 				return list("shrink" = 0.67,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
+/obj/item/weapon/sword/long/greatsword/claymore/silver
+	name = "silver broadsword"
+	desc = " A silver broadsword, wide and heavy, for dicing up the hordes of the undead."
+	icon_state = "silverbroadsword"
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	alt_intents = null
+	smeltresult = /obj/item/ingot/silver
+	melt_amount = 200
+	sellprice = 150
+	item_weight = 2.9 KILOGRAMS
+
+/obj/item/weapon/sword/long/greatsword/claymore/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/sword/long/greatsword/claymore/silver/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen") return list("shrink" = 0.5, "sx" = -14, "sy" = -8, "nx" = 15, "ny" = -7, "wx" = -10, "wy" = -5, "ex" = 7, "ey" = -6, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -13, "sturn" = 110, "wturn" = -60, "eturn" = -30, "nflip" = 1, "sflip" = 1, "wflip" = 8, "eflip" = 1)
+			if("wielded") return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
 
 /obj/item/weapon/sword/long/greatsword/claymore/gold //Uncraftable
 	name = "ravoxian claymore"
@@ -1324,6 +1373,7 @@
 	name = "berserker sword"
 	desc = "A huge sword constructed out of a slab of Iron."
 	icon_state = "gutsclaymore"
+	bigboy = TRUE
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
@@ -1346,6 +1396,36 @@
 				return list("shrink" = 0.7,"sx" = -1,"sy" = 2,"nx" = 0,"ny" = 2,"wx" = 2,"wy" = 1,"ex" = 0,"ey" = 1,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 15,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 			if("wielded")
 				return list("shrink" = 0.7,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+
+
+/obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab
+
+	name = "\proper volfslayer"
+	desc = "A great slab of a silver sword, its previous wielder was said to have slain a wolfman in a single blow, bisecting the beast."
+	icon_state = "machaslayer"
+	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
+	max_blade_int = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_STRONGEST
+	sellprice = 500
+	item_weight = 12 KILOGRAMS
+
+/obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -14,"sy" = -8,"nx" = 15,"ny" = -7,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -13,"sturn" = 110,"wturn" = -60,"eturn" = -30,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
+			if("altgrip")
+				return list("shrink" = 0.6,"sx" = -14,"sy" = -8,"nx" = 15,"ny" = -7,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 167,"sturn" = 290,"wturn" = 120,"eturn" = 150,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
+			if("onback")
+				return list("shrink" = 0.6,"sx" = -1,"sy" = 2,"nx" = 0,"ny" = 2,"wx" = 2,"wy" = 1,"ex" = 0,"ey" = 1,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 15,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 3,"sy" = 4,"nx" = -1,"ny" = 4,"wx" = -8,"wy" = 3,"ex" = 7,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+
 
 //................ Executioners Sword ............... //
 /obj/item/weapon/sword/long/exe
@@ -1379,6 +1459,18 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
 	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/sword/long/exe/silver
+	name = "silver executioner's sword"
+	desc = "An executioner's sword made of silver, best used against beasts of the nite, to put them to rest."
+	icon_state = "silverexealt"
+	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
+	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 //................ Terminus Est ............... //
 /obj/item/weapon/sword/long/exe/cloth

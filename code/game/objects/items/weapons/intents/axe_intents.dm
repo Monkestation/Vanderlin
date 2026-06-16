@@ -37,6 +37,18 @@
 	damfactor = 1.3 // Stronger
 	misscost = 18 // Costs more if you miss
 
+/datum/intent/axe/chop/greataxe/slayer
+    name = "cleave"
+    icon_state = "incleave"
+    penfactor = AP_GREATAXE_CHOP + 10
+    clickcd = 30
+    chargetime = 5
+    swingdelay = 2.5
+    damfactor = 2
+    misscost = 80
+    no_early_release = TRUE
+    acc_bonus = -5 // Hard to swing it at a standing target
+
 // AXE CUT INTENTS //
 /datum/intent/axe/cut
 	name = "cut"

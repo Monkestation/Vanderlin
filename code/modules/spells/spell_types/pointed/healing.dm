@@ -20,11 +20,11 @@
 	spell_cost = 10
 
 	/// Base healing before adjustments
-	var/base_healing = 25
+	var/base_healing = 12.5
 	/// Wound healing modifier
 	var/wound_modifier = 0.25
 	/// Blood healing amount
-	var/blood_restoration = 0
+	var/blood_restoration = BLOOD_VOLUME_SURVIVE / 6
 	/// Stuns undead
 	var/stun_undead = FALSE
 	/// What kind of healing is it?
@@ -225,7 +225,7 @@
 
 				//Holding the head of an animal can restore blood.
 				var/obj/item/natural/head/animal_head = owner.get_active_held_item()
-				if(animal_head)
+				if(istype(animal_head))
 					if(!animal_head.blood_value)
 						to_chat(owner, span_warning("This head is not valuable enough to aid in healing!"))
 					else
@@ -255,7 +255,7 @@
 	SEND_SIGNAL(owner, COMSIG_LIVING_HEALED_OTHER, amount_healed)
 	cast_on.adjustToxLoss(-amount_healed)
 	cast_on.adjustOxyLoss(-amount_healed)
-	cast_on.adjust_bloodvolume(blood_restoration + situational_blood, BLOOD_VOLUME_NORMAL)
+	cast_on.adjust_blood_volume(blood_restoration + situational_blood, maximum = BLOOD_VOLUME_NORMAL)
 	if(!iscarbon(cast_on))
 		cast_on.adjustBruteLoss(-amount_healed)
 		cast_on.adjustFireLoss(-amount_healed)
@@ -263,12 +263,13 @@
 
 	var/mob/living/carbon/C = cast_on
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(owner.zone_selected))
-	if(affecting)
-		affecting.heal_wounds(amount_healed * wound_modifier, src)
-		for(var/datum/injury/injury as anything in affecting.injuries)
-			if(injury.damage_type == WOUND_DIVINE)
-				continue
-			injury.heal_damage(amount_healed)
+	if(!affecting)
+		to_chat(owner, span_danger("[C] is missing their [affecting]!"))
+		return
+
+	if(affecting.heal_wounds(amount_healed * wound_modifier, src))
+		record_round_statistic(STATS_WOUNDS_FIXED)
+	if(affecting.heal_damage(brute = amount_healed, burn = amount_healed))
 		C.update_damage_overlays()
 
 	for(var/obj/item/organ/possible_organ in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
@@ -306,9 +307,9 @@
 	cooldown_time = 20 SECONDS
 	spell_cost = 45
 
-	base_healing = 50
+	base_healing = 25
 	wound_modifier = 0.5
-	blood_restoration = BLOOD_VOLUME_SURVIVE
+	blood_restoration = BLOOD_VOLUME_SURVIVE / 2
 	stun_undead = TRUE
 	patron_restrictive = TRUE
 

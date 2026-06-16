@@ -189,7 +189,7 @@
 			var/damage_to_apply = owner.maxHealth * ((caster_mob.maxHealth - caster_mob.health) / caster_mob.maxHealth)
 
 			owner.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE)
-			owner.blood_volume = caster_mob.blood_volume
+			owner.set_blood_volume(caster_mob.get_blood_volume())
 
 	for(var/datum/action/bodybound_action as anything in caster_mob.actions)
 		if(bodybound_action.target != caster_mob)
@@ -225,7 +225,7 @@
 		caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE)
 
 	if(iscarbon(owner))
-		caster_mob.blood_volume = owner.blood_volume
+		caster_mob.set_blood_volume(owner.get_blood_volume())
 
 /datum/status_effect/shapechange_mob/from_spell/on_shape_death(datum/source, gibbed)
 	var/datum/action/cooldown/spell/undirected/shapeshift/source_spell = source_weakref.resolve()

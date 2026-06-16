@@ -1,24 +1,22 @@
 // ~pain levels when using the custom_pain proc and shit
 #define PAIN_EMOTE_MINIMUM 10
-#define PAIN_LEVEL_1 0
-#define PAIN_LEVEL_2 10
-#define PAIN_LEVEL_3 40
-#define PAIN_LEVEL_4 70
+#define PAIN_MESSAGE_COOLDOWN 40 SECONDS
+#define PAIN_EMOTE_COOLDOWN 60 SECONDS
 
 // ~shock stages
-#define SHOCK_STAGE_1 10
-#define SHOCK_STAGE_2 30
-#define SHOCK_STAGE_3 40
-#define SHOCK_STAGE_4 60 // "Softcrit"
-#define SHOCK_STAGE_5 80
-#define SHOCK_STAGE_6 120 // "Hardcrit"
-#define SHOCK_STAGE_7 150
-#define SHOCK_STAGE_8 200
+#define SHOCK_STAGE_1 20
+#define SHOCK_STAGE_2 40
+#define SHOCK_STAGE_3 60
+#define SHOCK_STAGE_4 80 // "Softcrit"
+#define SHOCK_STAGE_5 130
+#define SHOCK_STAGE_6 160
+#define SHOCK_STAGE_7 200 // "Hardcrit"
+#define SHOCK_STAGE_8 250
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 
 // ~shock modifiers
-#define SHOCK_MOD_BRUTE 0.7
-#define SHOCK_MOD_BURN 0.8
+#define SHOCK_MOD_BRUTE 0.5
+#define SHOCK_MOD_BURN 0.75
 #define SHOCK_MOD_TOXIN 1
 #define SHOCK_MOD_CLONE 1.25
 
@@ -35,16 +33,14 @@
 /// Above or equal to this amount of pain, we can only speak in whispers
 #define PAIN_NO_SPEAK 250
 
-/// Divisor used in several pain calculations
-#define PAINKILLER_DIVISOR 4
+/// Divisor used in pain calculations, since carbon pain is a flat amount and spread across bodyparts
+#define PAINKILLER_DIVISOR 1.5
 
-#define PAIN_KNOCKDOWN_MESSAGE "<span class='bolddanger'>gives in to the pain!</span>"
-#define PAIN_KNOCKDOWN_MESSAGE_SELF "<span class='animatedpain'>I give in to the pain!</span>"
-#define PAIN_KNOCKOUT_MESSAGE "<span class='bolddanger'>caves in to the pain!</span>"
-#define PAIN_KNOCKOUT_MESSAGE_SELF "<span class='animatedpain'>OH LORD! The PAIN!</span>"
+/// Use this to keep the speed of pain-related systems consistent across the board
+#define PAIN_SYSTEM_SPEED_MODIFIER 4
 
 /// Cooldown before resetting the injury penalty
 #define SHOCK_PENALTY_COOLDOWN_DURATION 5 SECONDS
 #define COOLDOWN_CARBON_ENDORPHINATION "carbon_endorphination"
 /// Cooldown before our body endorphinates itself again
-#define ENDORPHINATION_COOLDOWN_DURATION 2 MINUTES
+#define ENDORPHINATION_COOLDOWN_DURATION 45 SECONDS

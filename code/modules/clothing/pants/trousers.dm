@@ -162,8 +162,6 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
-	detail_tag = "_detail"
-	uses_lord_coloring = LORD_PRIMARY
 
 //gronn trou
 /obj/item/clothing/pants/trou/leather/splint/gronn

@@ -1558,7 +1558,7 @@ SUBSYSTEM_DEF(gamemode)
 			record_round_statistic(STATS_WEREVOLVES)
 		if(living.mind.has_antag_datum(/datum/antagonist/vampire))
 			record_round_statistic(STATS_VAMPIRES)
-		if(living.mind.has_antag_datum(/datum/antagonist/zombie) || living.mind.has_antag_datum(/datum/antagonist/skeleton) || living.mind.has_antag_datum(/datum/antagonist/lich))
+		if(IS_DEADITE(living) || living.mind.has_antag_datum(/datum/antagonist/skeleton) || living.mind.has_antag_datum(/datum/antagonist/lich))
 			record_round_statistic(STATS_DEADITES_ALIVE)
 		if(ishuman(living))
 			var/mob/living/carbon/human/human_mob = client.mob

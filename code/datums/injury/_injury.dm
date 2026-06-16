@@ -1,3 +1,4 @@
+
 //This is basically the baystation wound datum, which i thought would synergize well with the TG wounds
 /****************************************************
 				INJURY DATUM
@@ -11,9 +12,9 @@
 	var/desc = "injury"
 	/// Number representing the current stage
 	var/current_stage = 0
-	/// Amount of damage this injury is currently causing
+	/// Amount of damage this injury is currently causing. Use damage_per_injury() rather than damage to determine the state of an injury.
 	var/damage = 0
-	/// How much we bleed on each tick per 10 damage
+	/// How much we bleed on each tick per BLEED_DAMAGE_RATIO damage
 	var/bleed_rate = 1
 	/// Ticks of bleeding left
 	var/bleed_timer = 0
@@ -25,12 +26,12 @@
 	var/injury_flags = (INJURY_SOUND_HINTS)
 	/// world.time when this injury was created
 	var/created = 0
-	/// Number of inuries stored in this datum
+	/// Number of injuries stored in this datum
 	var/amount = 1
 	/// Amount of germs in the injury
 	var/germ_level = 0
 	/// Rate of infection for this injury
-	var/infection_rate = 1
+	var/infection_rate = 0.5
 	/// Time it takes for the injury to fade away once healed up
 	var/fade_away_time = 1 MINUTES
 	/// The bodypart the injury is on, if on a bodypart
@@ -39,12 +40,12 @@
 	var/mob/living/carbon/parent_mob
 
 	// ~these are defined by the injury type and should not be changed here
-	/// Stages such as "cut", "deep cut", etc.
+	/// Stages such as "cut", "deep cut", etc. Stages should be listed in decreasing order of severity
 	var/list/stages
-	/// Maximum stage at which bleeding should still happen - Beyond this stage bleeding is prevented
-	var/max_bleeding_stage = 0
-	/// One of WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE, WOUND_BURN
+	/// One of WOUND_BLUNT, WOUND_SLASH, WOUND_PUNCTURE, WOUND_BURN
 	var/damage_type = WOUND_SLASH
+	/// The base amount of autoheal this injury has.
+	var/base_autoheal_amount = 0
 	/// The maximum amount of damage that this injury can have and still autoheal
 	var/autoheal_cutoff = 15
 	/// How much having this injury will add to all future check_wounding() rolls on this limb
@@ -60,7 +61,7 @@
 	// ~shit that got embedded on this injury
 	var/list/embedded_objects
 
-/datum/injury/New()
+/datum/injury/New(our_damage)
 	. = ..()
 	created = world.time
 	// reading from a list("stage" = damage) is pretty difficult, so build two separate
@@ -68,6 +69,12 @@
 	for(var/stage in stages)
 		desc_list += stage
 		damage_list += stages[stage]
+
+	if(our_damage)
+		damage = our_damage
+		//initialize with the appropriate stage and bleeding ticks
+		bleed_timer += damage * 2
+		init_stage(damage)
 
 /datum/injury/Destroy()
 	if(parent_bodypart)
@@ -83,7 +90,7 @@
 	return desc
 
 /datum/injury/proc/get_bleed_rate_of_change()
-	if((bleed_timer > 0 || damage_per_injury() > bleed_threshold) && current_stage <= max_bleeding_stage)
+	if(bleed_timer > 0 || damage_per_injury() > bleed_threshold)
 		return BLOOD_FLOW_STEADY
 	return BLOOD_FLOW_DECREASING
 
@@ -111,6 +118,8 @@
 	if(!parent_mob)
 		return
 	LAZYREMOVE(parent_mob.all_injuries, src)
+	parent_mob.updatehealth()
+	parent_mob.update_damage_overlays()
 	parent_mob = null
 
 /datum/injury/proc/remove_from_bodypart()
@@ -119,24 +128,20 @@
 	LAZYREMOVE(parent_bodypart.injuries, src)
 	if(parent_bodypart.last_injury == src)
 		parent_bodypart.last_injury = null
+	parent_bodypart.post_damage_change()
 	parent_bodypart = null
 
 //applies the injury on a limb proper
-/datum/injury/proc/apply_injury(our_damage, obj/item/bodypart/parent)
-	//aaaaaaaaah
-	damage = our_damage
+/datum/injury/proc/apply_to_bodypart(obj/item/bodypart/parent)
+	if(!istype(parent))
+		return
 
-	//initialize with the appropriate stage and bleeding ticks
-	bleed_timer += our_damage
-	init_stage(our_damage)
-
-	if(istype(parent))
-		set_bodypart(parent)
-		if(parent_bodypart.owner)
-			set_mob(parent_bodypart.owner)
+	set_bodypart(parent)
+	if(parent_bodypart.owner)
+		set_mob(parent_bodypart.owner)
 
 //increase or decrease infection
-/datum/injury/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/datum/injury/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 //makes the injury get infected more when the victim is moving around
@@ -165,40 +170,47 @@
 /datum/injury/proc/can_autoheal()
 	if(!parent_mob)
 		return FALSE
-	if(parent_mob?.stat == DEAD)
+	if(parent_mob.stat == DEAD)
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
 		return FALSE
-	if(parent_bodypart.is_retracted())
+	if(LAZYLEN(embedded_objects))
 		return FALSE
 	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE
-	return ((damage_per_injury() <= autoheal_cutoff) ? TRUE : (is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
+	if(!can_heal())
+		return FALSE
+	if(parent_bodypart.is_retracted())
+		return FALSE
+
+	if((is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
+		return TRUE
+	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 3 : 1)
 
 // checks whether the injury has been appropriately treated
 /datum/injury/proc/is_treated()
-	switch(damage_type)
-		if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
-			return (is_bandaged() || is_sutured() || parent_bodypart.bandage)
-		if(WOUND_BLUNT, WOUND_LASH, WOUND_DIVINE)
-			return (is_bandaged() || parent_bodypart.bandage)
-		if(WOUND_BURN)
-			return (is_salved() || (is_disinfected() && (is_bandaged() || parent_bodypart.bandage) ) )
+	if(damage_type & SEWABLE_WOUND_TYPES)
+		return is_bandaged() || is_sutured()
+	if(damage_type & (WOUND_BLUNT|WOUND_INTERNAL_BRUISE))
+		return is_bandaged()
+	if(damage_type & FIRE_WOUND_TYPES)
+		return is_salved() || is_bandaged()
+	return TRUE
 
 // Checks whether other other can be merged into src.
 /datum/injury/proc/can_merge(datum/injury/other)
-	if(other.damage_type != damage_type)
+	if(!(other.damage_type & damage_type))
 		return FALSE
 	if(other.type != type)
 		return FALSE
 	if(other.current_stage != current_stage)
 		return FALSE
-	if(other.can_autoheal() != can_autoheal())
-		return FALSE
+	// if(other.can_autoheal() != can_autoheal())
+	// 	return FALSE
 	if(other.injury_flags != injury_flags)
 		return FALSE
-	if(other.parent_bodypart != parent_bodypart)
-		return FALSE
+	// if(other.parent_bodypart != parent_bodypart)
+	// 	return FALSE
 	return TRUE
 
 /datum/injury/proc/merge_injury(datum/injury/other)
@@ -216,30 +228,30 @@
 // checks if injury is considered open for external infections
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if injury is bigger
 /datum/injury/proc/infection_check(delta_time = 2, times_fired)
-	if((damage < 10) && germ_level < INFECTION_LEVEL_ONE)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
+	var/normalized_damage = damage_per_injury()
+	if((normalized_damage < 10) && germ_level < INFECTION_LEVEL_ONE)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
 		return FALSE
-	if(is_treated() && damage < 25)	//anything less than a flesh injury (or equivalent) isn't infectable if treated properly
+	if(is_treated() && normalized_damage < 25)	//anything less than a flesh injury (or equivalent) isn't infectable if treated properly
 		return FALSE
 	if(is_disinfected())
 		return FALSE
 	if(required_status & BODYPART_ROBOTIC) //Robotic injury
 		return FALSE
 
-	if(damage_type == WOUND_BLUNT && !is_bleeding()) //bruises only infectable if bleeding
+	if(damage_type & WOUND_BLUNT && !is_bleeding()) //bruises only infectable if bleeding
 		return FALSE
-
 
 	switch(damage_type)
 		if(WOUND_BLUNT)
-			return DT_PROB(damage/2, delta_time)
+			return DT_PROB(normalized_damage/2, delta_time)
 		if(WOUND_BURN)
-			return DT_PROB(damage*2, delta_time)
+			return DT_PROB(normalized_damage*2, delta_time)
 		if(WOUND_SLASH)
-			return DT_PROB(damage, delta_time)
-		if(WOUND_PIERCE)
-			return DT_PROB(damage*1.25, delta_time)
+			return DT_PROB(normalized_damage, delta_time)
+		if(WOUND_PUNCTURE)
+			return DT_PROB(normalized_damage*1.25, delta_time)
 		if(WOUND_LASH)
-			return DT_PROB(damage * 1.15, delta_time)
+			return DT_PROB(normalized_damage * 1.15, delta_time)
 	return FALSE
 
 //bleeding from being dragged against the ground
@@ -248,10 +260,15 @@
 		return FALSE
 	return CEILING(get_bleed_rate() * 0.2, 0.1)
 
-// heal the given amount of damage, and if the given amount of damage was more
-// than what needed to be healed, return how much heal was left
-/datum/injury/proc/heal_damage(amount_heal)
-	var/healed_damage = min(src.damage, amount_heal)
+/datum/injury/proc/can_heal()
+	return !(damage_type & WOUND_DIVINE)
+
+/// Heal the given amount of damage and returns how much is left over from amount_heal.
+/// CAN QDELETE INJURY.
+/datum/injury/proc/heal_damage(amount_heal, update_bodypart = FALSE, updating_health = TRUE)
+	if(amount_heal <= 0)
+		return
+	var/healed_damage = min(damage, amount_heal)
 	damage -= healed_damage
 	while(damage_per_injury() < damage_list[current_stage] && current_stage < length(desc_list))
 		current_stage++
@@ -259,14 +276,15 @@
 	min_damage = damage_list[current_stage]
 	if(!damage)
 		qdel(src)
-
+	if(update_bodypart && parent_bodypart?.post_damage_change(updating_health)) // no need to cache since qdel will update limbs and owner
+		parent_mob?.update_damage_overlays()
 	// return amount of healing still leftover, can be used for other injuries
 	return (amount_heal - healed_damage)
 
 // returns whether this injury can absorb the given amount of damage.
 // this will prevent large amounts of damage being trapped in less severe injury types
 /datum/injury/proc/can_worsen(damage_type, damage)
-	if(src.damage_type != damage_type)
+	if(!(src.damage_type & damage_type))
 		return FALSE	//incompatible damage types
 
 	if(amount > 1)
@@ -283,19 +301,15 @@
 
 // closes the injury
 /datum/injury/proc/close_injury()
-	current_stage = min(max_bleeding_stage + 1, length(damage_list))
-	desc = desc_list[current_stage]
-	min_damage = damage_list[current_stage]
-	if(damage > min_damage)
-		heal_damage(damage-min_damage)
 	injury_flags &= ~INJURY_RETRACTED
-	parent_bodypart?.update_bodypart_damage_state()
-	parent_bodypart?.owner?.update_damage_overlays()
+	var/current_damage = damage_per_injury()
+	if(current_damage > bleed_threshold)
+		heal_damage(current_damage - bleed_threshold, TRUE)
 
 // opens the injury and worsens it
 /datum/injury/proc/open_injury(damage, retracting = FALSE)
 	src.damage += damage
-	bleed_timer += damage
+	bleed_timer += damage * 2
 
 	while(current_stage > 1 && damage_list[current_stage-1] < damage_per_injury())
 		current_stage--
@@ -306,8 +320,8 @@
 		injury_flags |= INJURY_RETRACTED
 	if(parent_bodypart)
 		parent_bodypart.last_injury = src
-		parent_bodypart.update_bodypart_damage_state()
-		parent_bodypart.owner?.update_damage_overlays()
+		if(parent_bodypart?.post_damage_change())
+			parent_bodypart?.owner?.update_damage_overlays()
 
 // disinfects the injury
 /datum/injury/proc/disinfect_injury()
@@ -362,59 +376,48 @@
 	return TRUE
 
 /datum/injury/proc/is_bleeding()
+	if(!CAN_HAVE_BLOOD(parent_mob))
+		return
 	for(var/thing in embedded_objects)
 		var/obj/item/item = thing
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
-	if(is_bandaged() || is_clamped() || is_sutured())
+	if(is_bandaged() || is_sutured())
 		return FALSE
 	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
-	return ((bleed_timer > 0 || damage_per_injury() > bleed_threshold) && current_stage <= max_bleeding_stage)
+	return (bleed_timer > 0 || damage_per_injury() > bleed_threshold)
 
-/datum/injury/proc/get_bleed_rate()
-	if(!is_bleeding())
+/datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
+	if(!CAN_HAVE_BLOOD(parent_mob))
+		return 0
+	if(!ignore_is_bleeding && !is_bleeding())
 		return 0
 	var/bad_embeddies = 0
 	for(var/obj/item/item in embedded_objects)
 		if((item.w_class < WEIGHT_CLASS_SMALL))
 			bad_embeddies += 1
-	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
-
-/datum/injury/proc/get_artifical_bleed_rate()
-	var/bad_embeddies = 0
-	for(var/obj/item/item in embedded_objects)
-		if((item.w_class < WEIGHT_CLASS_SMALL))
-			bad_embeddies += 1
-	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
-
+	var/bleed_modifier = damage/BLEED_DAMAGE_RATIO
+	if(is_clamped())
+		bleed_modifier *= (BLEED_DAMAGE_RATIO/200)
+	return max(0.1, (bleed_rate * bleed_modifier) + bad_embeddies)
 
 /datum/injury/proc/is_surgical()
-	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_SURGICAL)
 
 /datum/injury/proc/is_disinfected()
-	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) && (germ_level <= 0))
+	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) && germ_level <= 0)
 		return TRUE
 	return FALSE
 
 /datum/injury/proc/is_salved()
-	if(CHECK_BITFIELD(injury_flags, INJURY_SALVED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_SALVED)
 
 /datum/injury/proc/is_clamped()
-	if(CHECK_BITFIELD(injury_flags, INJURY_CLAMPED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_CLAMPED)
 
 /datum/injury/proc/is_sutured()
-	if(CHECK_BITFIELD(injury_flags, INJURY_SUTURED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_SUTURED)
 
 /datum/injury/proc/is_bandaged()
-	if(CHECK_BITFIELD(injury_flags, INJURY_BANDAGED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_BANDAGED)

@@ -1,3 +1,14 @@
+/datum/attribute_modifier/zombie
+	id = "Zombification"
+	attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = -9,
+		STAT_PERCEPTION = -5,
+		STAT_INTELLIGENCE = -9,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = 5
+	)
+
 /datum/antagonist/zombie
 	name = "Zombie"	// Deadite plague of Zizo
 	roundend_category = "Deadites"
@@ -7,33 +18,14 @@
 	show_name_in_check_antagonists = TRUE
 	show_in_roundend = FALSE
 	antag_flags = FLAG_FAKE_ANTAG
-	/// SET TO FALSE IF WE DON'T TURN INTO ROTMEN WHEN REMOVED
-	var/become_rotman = FALSE
-	var/zombie_start
-	var/revived = FALSE
-	var/next_idle_sound
-	// CACHE VARIABLES SO ZOMBIFICATION CAN BE CURED
-	var/was_i_undead = FALSE
-	var/special_role
-	var/ambushable = TRUE
-	var/soundpack_m
-	var/soundpack_f
-	var/old_cmode_music
-	var/list/base_intents
-	var/datum/language_holder/prev_language
-	var/datum/patron/patron
-	var/datum/attribute_holder/stored_holder
-	var/stored_experience
-	/// Whether or not we have been turned
-	var/has_turned = FALSE
-	// we don't use innate_traits here because zombies aren't meant to get their traits on_gain.
-	/// Traits applied to the owner mob when we turn into a zombie
-	var/static/list/traits_zombie = list(
+
+	innate_traits = list(
 		TRAIT_NOENERGY,
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_NOPAIN,
+		TRAIT_STABLEHEART,
 		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
 		TRAIT_CHUNKYFINGERS,
@@ -41,13 +33,33 @@
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLBLOCK,
 		TRAIT_BLOODLOSS_IMMUNE,
-		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
 		TRAIT_CABAL,
 		TRAIT_BLOODDRINKER,
 		TRAIT_NASTY_EATER,
 		TRAIT_NOMETABOLISM,
+		TRAIT_NOAMBUSH,
+		TRAIT_NO_SKILLS,
+		TRAIT_NO_EXPERIENCE,
+		TRAIT_UNDODGING,
+		TRAIT_UNPARRYING
 	)
+
+	COOLDOWN_DECLARE(next_idle_sound)
+
+	// CACHE VARIABLES SO ZOMBIFICATION CAN BE CURED
+	var/was_i_undead
+	var/old_special_role
+	var/soundpack_m
+	var/soundpack_f
+	var/old_cmode_music
+	var/list/base_intents
+	var/datum/language_holder/prev_language
+	var/datum/patron/patron
+	var/old_bloodpool
+
+	/// SET TO FALSE IF WE DON'T TURN INTO ROTMEN WHEN REMOVED
+	var/become_rotman = FALSE
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
 		TRAIT_EASYDISMEMBER,
@@ -67,182 +79,28 @@
 		if(!SEND_SIGNAL(examined_datum.owner, COMSIG_DISGUISE_STATUS))
 			return span_boldnotice("Not food, not right..")
 	if(istype(examined_datum, /datum/antagonist/zombie))
-		return "<span class='boldnotice'>Another deadite. My ally.</span>"
+		return span_boldnotice("Another deadite. My ally.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
-		return "<span class='boldnotice'>Another kind of deadite.</span>"
+		return span_boldnotice("Another kind of deadite.")
 
 /datum/antagonist/zombie/on_gain()
-	var/mob/living/carbon/human/zombie = owner?.current
-	if(!zombie)
-		qdel(src)
-		return
-	var/obj/item/bodypart/head = zombie.get_bodypart(BODY_ZONE_HEAD)
-	if(!head)
-		qdel(src)
-		return
-	zombie_start = world.time
-	was_i_undead = zombie.mob_biotypes & MOB_UNDEAD
-	special_role = zombie.mind?.special_role
-	ambushable = zombie.ambushable
-	if(zombie.dna?.species)
-		soundpack_m = zombie.dna.species.soundpack_m
-		soundpack_f = zombie.dna.species.soundpack_f
-		rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "deadite")
-		zombie.add_overlay(rotflies)
-	base_intents = zombie.base_intents
-	old_cmode_music = zombie.cmode_music
-	patron = zombie.patron
-	stored_holder = owner.current.attributes
-	owner.current.attributes = new /datum/attribute_holder(owner.current)
-
-	var/list/stat_values = list()
-	for(var/attr in stored_holder.attribute_list)
-		if(!ispath(attr, STAT))
-			continue
-		stat_values[attr] = stored_holder.attribute_list[attr] - ATTRIBUTE_DEFAULT
-	owner.current.set_stat_modifier("stored_stats", stat_values)
-
-	zombie.cmode_music ='sound/music/cmode/combat_weird.ogg'
-	zombie.bloodpool = 0 // Deadites have no vitae to drain from
-	zombie.candodge = FALSE
-	zombie.canparry = FALSE
-	var/datum/language_holder/mob_language = zombie.get_language_holder()
-	prev_language = mob_language.copy()
-	zombie.remove_all_languages()
-	zombie.grant_language(/datum/language/undead)
-	if(zombie.dna?.species)
-		zombie.dna.species.native_language = "Zizo Chant"
-		zombie.dna.species.accent_language = zombie.dna.species.get_accent(zombie.dna.species.native_language)
-
-	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
-	zombie.AddComponent(/datum/component/ai_aggro_system)
-	zombie.status_flags &= ~BLEEDOUT
-	zombie.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
-	for(var/obj/item/organ/organ as anything in zombie.internal_organs)
-		organ.setOrganDamage(0)
-	return ..()
-
-/datum/antagonist/zombie/on_removal()
-	var/mob/living/carbon/human/zombie = owner?.current
-	if(!istype(zombie))
-		return
-
-	zombie.cut_overlay(rotflies)
-	remove_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
-	zombie.mind?.special_role = special_role
-	zombie.ambushable = ambushable
-	if(zombie.dna?.species)
-		zombie.dna.species.soundpack_m = soundpack_m
-		zombie.dna.species.soundpack_f = soundpack_f
-	zombie.base_intents = base_intents
-	zombie.update_a_intents()
-	zombie.update_body()
-	zombie.remove_stat_modifier("[type]")
-	zombie.cmode_music = old_cmode_music
-	zombie.set_patron(patron)
-	zombie.candodge = TRUE
-	zombie.canparry = TRUE
-
-	qdel(owner.current.attributes)
-	owner.current.attributes = stored_holder
-
-	for(var/trait in traits_zombie)
-		REMOVE_TRAIT(zombie, trait, "[type]")
-	zombie.remove_client_colour(/datum/client_colour/monochrome)
-	if(has_turned && become_rotman)
-		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_CONSTITUTION, -5)
-		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_SPEED, -5)
-		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_INTELLIGENCE, -3)
-		for(var/trait in traits_rotman)
-			ADD_TRAIT(zombie, trait, "[type]")
-		to_chat(zombie, span_green("I no longer crave flesh... <i>But I still feel ill.</i>"))
-	else
-		if(!was_i_undead)
-			zombie.mob_biotypes &= ~MOB_UNDEAD
-		zombie.remove_faction(FACTION_UNDEAD)
-		zombie.add_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
-		zombie.regenerate_organs()
-		if(has_turned)
-			to_chat(zombie, span_green("I no longer crave flesh..."))
-	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
-		zombie_part.revive_limb()
-		zombie_part.germ_level = 0
-		if(zombie_part.can_be_disabled)
-			zombie_part.update_disabled()
-		zombie_part.update_limb()
-	zombie.update_body()
-	zombie.remove_language(/datum/language/hellspeak)
-	zombie.copy_known_languages_from(prev_language)
-	zombie.toggle_cmode()
-
-	// Bandaid to fix the zombie ghostizing not allowing you to re-enter
-	var/mob/dead/observer/ghost = zombie.get_ghost(TRUE)
-	if(ghost)
-		ghost.can_reenter_corpse = TRUE
-	return ..()
-
-/datum/antagonist/zombie/proc/transform_zombie()
+	. = ..()
 	var/mob/living/carbon/human/zombie = owner.current
-	if(!zombie)
+	if(!istype(zombie))
 		qdel(src)
 		return
 	var/obj/item/bodypart/head = zombie.get_bodypart(BODY_ZONE_HEAD)
 	if(!head)
 		qdel(src)
 		return
-	revived = TRUE //so we can die for real later
-	zombie.add_client_colour(/datum/client_colour/monochrome)
-	for(var/trait_applied in traits_zombie)
-		ADD_TRAIT(zombie, trait_applied, "[type]")
-	if(HAS_TRAIT(zombie, TRAIT_DODGEEXPERT))
-		REMOVE_TRAIT(zombie, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	if(zombie.mind)
-		special_role = zombie.mind.special_role
-		zombie.mind.special_role = name
-	if(zombie.dna?.species)
-		soundpack_m = zombie.dna.species.soundpack_m
-		soundpack_f = zombie.dna.species.soundpack_f
-		zombie.dna.species.soundpack_m = new /datum/voicepack/zombie/m()
-		zombie.dna.species.soundpack_f = new /datum/voicepack/zombie/f()
-	base_intents = zombie.base_intents
-	zombie.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
-	zombie.update_a_intents()
-	if(!zombie.client)
-		zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
-		zombie.AddComponent(/datum/component/ai_aggro_system)
 
-	zombie.grant_undead_eyes()
-	ambushable = zombie.ambushable
-	zombie.ambushable = FALSE
-
-	zombie.mob_biotypes |= MOB_UNDEAD
-	zombie.add_faction(FACTION_UNDEAD)
-	zombie.remove_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
-	add_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
-	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
-		if(!HAS_TRAIT(zombie_part, TRAIT_ROTTEN) && !zombie_part.skeletonized)
-			zombie_part.kill_limb()
-		if(zombie_part.can_be_disabled)
-			zombie_part.update_disabled()
-	zombie.update_body()
-	zombie.cmode_music = 'sound/music/cmode/combat_weird.ogg'
-	zombie.set_patron(/datum/patron/inhumen/zizo)
-
-	for(var/datum/status_effect/effect in zombie.status_effects) //necessary to prevent exploits
-		zombie.remove_status_effect(effect)
-
-	zombie.modifier_set_stat_to("[type]", STAT_STRENGTH, 12)
-	zombie.modifier_set_stat_to("[type]", STAT_SPEED, 1)
-	zombie.modifier_set_stat_to("[type]", STAT_INTELLIGENCE, 1)
-	zombie.modifier_set_stat_to("[type]", STAT_CONSTITUTION, 15)
-
-	zombie.bloodpool = 0 // Again, just in case.
-	zombie.adjustOrganLoss(ORGAN_SLOT_BRAIN, -200)
-
-	zombie.ghostize()
+	cache_variables()
+	if(zombie.stat >= DEAD)
+		wake_zombie()
+	transform_zombie()
 
 /datum/antagonist/zombie/greet()
-	to_chat(owner.current, "<span class='userdanger'>Death is not the end...</span>")
+	to_chat(owner.current, span_userdanger("Death is not the end..."))
 	return ..()
 
 /datum/antagonist/zombie/on_life(mob/user)
@@ -251,48 +109,163 @@
 	if(user.stat == DEAD)
 		return
 	var/mob/living/carbon/human/zombie = user
-	if(world.time > next_idle_sound)
+	if(COOLDOWN_FINISHED(src, next_idle_sound))
 		zombie.emote("zmoan")
-		next_idle_sound = world.time + rand(20 SECONDS, 40 SECONDS)
+		COOLDOWN_START(src, next_idle_sound, rand(20 SECONDS, 40 SECONDS))
 
-//Infected wake param is just a transition from living to zombie, via zombie_infect()
-//Previously you just died without warning in 3 minutes, now you just become an antag
-/datum/antagonist/zombie/proc/wake_zombie(infected_wake = FALSE)
-	if(!owner.current)
-		return
-	var/mob/living/carbon/human/zombie = owner.current
-	if(!zombie || !istype(zombie))
-		return
-	var/obj/item/bodypart/head = zombie.get_bodypart(BODY_ZONE_HEAD)
-	if(!head)
-		qdel(src)
-		return
-	if(zombie.stat != DEAD && !infected_wake)
-		qdel(src)
-		return
+/datum/antagonist/zombie/apply_innate_effects(mob/living/mob_override)
+	. = ..()
+	var/mob/living/current_mob = mob_override || owner.current
+	add_verb(current_mob, /mob/living/carbon/human/proc/zombie_seek)
 
-	record_round_statistic(STATS_DEADITES_WOKEN_UP)
-	zombie.blood_volume = BLOOD_VOLUME_NORMAL
-	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
-	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
-	if(!infected_wake) //if we died, heal all of this too
-		zombie.adjustBruteLoss(-INFINITY, updating_health = FALSE, forced = TRUE)
-		zombie.adjustFireLoss(-INFINITY, updating_health = FALSE, forced = TRUE)
-		zombie.heal_wounds(INFINITY) //Heal every wound that is not permanent
+/datum/antagonist/zombie/remove_innate_effects(mob/living/mob_override)
+	. = ..()
+	var/mob/living/current_mob = mob_override || owner.current
+	remove_verb(current_mob, /mob/living/carbon/human/proc/zombie_seek)
+
+/datum/antagonist/zombie/proc/cache_variables(mob/living/mob_override)
+	var/mob/living/carbon/human/zombie = mob_override || owner.current
+	was_i_undead = zombie.mob_biotypes & MOB_UNDEAD
+	old_special_role = zombie.mind.special_role
+	base_intents = zombie.base_intents
+	old_cmode_music = zombie.cmode_music
+	patron = zombie.patron
+	old_bloodpool = zombie.bloodpool
+
+	var/datum/language_holder/mob_language = zombie.get_language_holder()
+	prev_language = mob_language?.copy()
+
+	if(zombie.dna?.species)
+		soundpack_m = zombie.dna.species.soundpack_m
+		soundpack_f = zombie.dna.species.soundpack_f
+
+/// You should probably not call this before cache_variables, just saying.
+/datum/antagonist/zombie/proc/restore_variables(mob/living/mob_override)
+	var/mob/living/carbon/human/zombie = mob_override || owner.current
+	if(!was_i_undead)
+		zombie.mob_biotypes &= ~MOB_UNDEAD
+	zombie.mind.special_role = old_special_role
+	zombie.base_intents = base_intents
+	zombie.update_a_intents()
+	zombie.cmode_music = old_cmode_music
+	zombie.set_patron(patron)
+	patron = null
+	zombie.bloodpool = old_bloodpool
+
+	zombie.copy_known_languages_from(prev_language, replace = TRUE)
+	prev_language = null
+
+	if(zombie.dna?.species)
+		zombie.dna.species.soundpack_m = soundpack_m
+		zombie.dna.species.soundpack_f = soundpack_f
+
+/// Called when giving antag datum to dead people
+/datum/antagonist/zombie/proc/wake_zombie(mob/living/mob_override)
+	var/mob/living/carbon/human/zombie = mob_override || owner.current
+	zombie.fully_heal(HEAL_TRAUMAS|HEAL_BLOOD|HEAL_BRUTE|HEAL_BURN|HEAL_WOUNDS)
+	// Don't call carbon.regenerate_organs() so we don't spawn new organs
+	for(var/obj/item/organ/organ as anything in zombie.internal_organs)
+		organ.regenerate_organ()
+	zombie.status_flags &= ~BLEEDOUT
+	zombie.set_heartattack(FALSE)
 	zombie.set_stat(UNCONSCIOUS) //Start unconscious
 	zombie.updatehealth() //then we check if the mob should wake up
-	zombie.update_sight()
 	zombie.reload_fullscreen()
-	transform_zombie()
-	if(zombie.stat >= DEAD)
-		//could not revive
-		qdel(src)
+
+	record_round_statistic(STATS_DEADITES_WOKEN_UP)
+	zombie.ghostize()
+
+/datum/antagonist/zombie/proc/transform_zombie(mob/living/mob_override)
+	var/mob/living/carbon/human/zombie = mob_override || owner.current
+	zombie.bloodpool = 0  // Deadites have no vitae to drain from
+	zombie.cmode_music = 'sound/music/cmode/combat_weird.ogg'
+	zombie.set_patron(/datum/patron/inhumen/zizo)
+	zombie.mob_biotypes |= MOB_UNDEAD
+	zombie.add_faction(FACTION_UNDEAD)
+	zombie.remove_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
+	zombie.mind.special_role = name
+
+	zombie.base_intents = list(INTENT_DISARM, INTENT_GRAB, INTENT_HARM, /datum/intent/unarmed/claw)
+	zombie.update_a_intents()
+
+	zombie.remove_all_languages()
+	zombie.grant_language(/datum/language/undead)
+	if(zombie.dna?.species)
+		zombie.dna.species.native_language = "Zizo Chant"
+		zombie.dna.species.accent_language = zombie.dna.species.get_accent(zombie.dna.species.native_language)
+		zombie.dna.species.soundpack_m = new /datum/voicepack/zombie/m()
+		zombie.dna.species.soundpack_f = new /datum/voicepack/zombie/f()
+
+	zombie.fully_heal(HEAL_OXY|HEAL_TOX) //zombles dont breathe and are immune to poison
+	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
+		if(!HAS_TRAIT(zombie_part, TRAIT_ROTTEN) && !zombie_part.skeletonized)
+			zombie_part.kill_limb()
+		if(zombie_part.can_be_disabled)
+			zombie_part.update_disabled()
+	zombie.update_body()
+	zombie.grant_undead_eyes()
+
+	zombie.add_client_colour(/datum/client_colour/monochrome)
+	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
+	zombie.AddComponent(/datum/component/ai_aggro_system)
+	zombie.attributes?.add_attribute_modifier(/datum/attribute_modifier/zombie)
+
+	rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "deadite[pick(1,2)]")
+	zombie.add_overlay(rotflies)
+
+/datum/antagonist/zombie/on_removal()
+	var/mob/living/carbon/human/zombie = owner.current
+	if (!istype(zombie))
+		return
+
+	restore_variables()
+	zombie.remove_faction(FACTION_UNDEAD)
+	zombie.add_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
+
+	zombie.cut_overlay(rotflies)
+	zombie.attributes?.remove_attribute_modifier(/datum/attribute_modifier/zombie)
+	zombie.remove_client_colour(/datum/client_colour/monochrome)
+
+	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
+		zombie_part.revive_limb()
+		zombie_part.set_germ_level(0)
+		if(zombie_part.can_be_disabled)
+			zombie_part.update_disabled()
+		zombie_part.update_limb()
+	zombie.update_body()
+
+	var/datum/organ_dna/eyes/eye_dna = zombie.dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(eye_dna)
+		for(var/obj/item/organ/old_eye in zombie.getorganslotlist(ORGAN_SLOT_EYES))
+			old_eye.Remove(zombie, TRUE)
+		var/obj/item/organ/eyes/eyes_one = eye_dna.create_organ(species = zombie.dna.species)
+		eyes_one.Insert(zombie, TRUE)
+		var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = zombie.dna.species)
+		eyes_two.switch_side(eyes_two.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+		eyes_two.Insert(zombie, TRUE)
+
+	// Bandaid to fix the zombie ghostizing not allowing you to re-enter
+	var/mob/dead/observer/ghost = zombie.get_ghost(TRUE)
+	if(ghost)
+		ghost.can_reenter_corpse = TRUE
+
+	if(become_rotman)
+		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_CONSTITUTION, -5)
+		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_SPEED, -5)
+		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_INTELLIGENCE, -3)
+		for(var/trait in traits_rotman)
+			ADD_TRAIT(zombie, trait, TRAIT_ROTMAN)
+		to_chat(zombie, span_green("I no longer crave flesh... <i>But I still feel ill.</i>"))
+	else
+		to_chat(zombie, span_green("I no longer crave flesh..."))
+
+	return ..()
 
 /mob/living/carbon/human/proc/zombie_seek()
 	set name = "Seek Brains"
 	set category = "RoleUnique.Zizo"
 
-	if(!mind.has_antag_datum(/datum/antagonist/zombie))
+	if(!IS_DEADITE(src))
 		return FALSE
 	if(stat >= UNCONSCIOUS)
 		return FALSE
@@ -326,26 +299,18 @@
 /mob/living/carbon/human/proc/zombie_infect_attempt()
 	if(!prob(7))
 		return
-	var/datum/antagonist/zombie/zombie_antag = zombie_check()
-	if(!zombie_antag)
-		return
 	if(stat >= DEAD) //do shit the natural way i guess
 		return
 	to_chat(src, "<span class='danger'>I feel horrible... REALLY horrible after that...</span>")
-	if(blood_volume)
+	if(get_blood_volume())
 		MOBTIMER_SET(src, MT_PUKE)
 		vomit(1, blood = TRUE, stun = FALSE)
 	addtimer(CALLBACK(src, PROC_REF(wake_zombie)), 1 MINUTES)
-	return zombie_antag
+	return TRUE
 
 /mob/living/carbon/human/proc/wake_zombie()
-	var/datum/antagonist/zombie/zombie_antag = mind?.has_antag_datum(/datum/antagonist/zombie)
-	if(!zombie_antag)
-		return FALSE
 	flash_fullscreen("redflash3")
 	to_chat(src, "<span class='danger'>It hurts... Is this really the end for me?</span>")
 	emote("scream") // heres your warning to others bro
 	Knockdown(1)
-	zombie_antag.wake_zombie(TRUE)
-
-	return TRUE
+	return zombie_check()

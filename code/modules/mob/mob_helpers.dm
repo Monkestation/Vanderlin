@@ -327,28 +327,43 @@
 	return newphrase
 
 ///Adds stuttering to the message passed in
-/proc/stutter(n)
-	var/te = html_decode(n)
-	var/t = ""//placed before the message. Not really sure what it's for.
-	n = length(n)//length of the entire word
-	var/p = null
-	p = 1//1 is the start of any word
-	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
-		var/n_letter = copytext(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
-			if (prob(10))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
-			else
-				if (prob(20))
-					n_letter = text("[n_letter]-[n_letter]-[n_letter]")
-				else
-					if (prob(5))
-						n_letter = null
-					else
-						n_letter = text("[n_letter]-[n_letter]")
-		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
-		p++//for each letter p is increased to find where the next letter will be.
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+/proc/stutter(phrase, power = 5)
+    phrase = html_decode(phrase)
+    var/leng = length(phrase)
+    . = ""
+    var/newletter = ""
+    var/rawchar = ""
+    var/static/regex/nostutter = regex(@@[aeiouAEIOU ""''()[\]{}.!?,:;_`~-]@)
+    var/word_start = TRUE // track if we're at the start of a new word
+
+    for(var/i = 1, i <= leng, i += length(rawchar))
+        rawchar = newletter = phrase[i]
+
+        // spaces/punctuation reset the word boundary
+        if(nostutter.Find(rawchar))
+            if(rawchar == " ")
+                word_start = TRUE
+            . += newletter
+            continue
+
+        if(word_start)
+            word_start = FALSE
+            // stutter more aggressively on word-initial consonants
+            if(prob(50 + power))
+                if(prob(10) && power >= 10)
+                    newletter = "[newletter]-[newletter]-[newletter]-[newletter]"
+                else if(prob(25) && power >= 6)
+                    newletter = "[newletter]-[newletter]-[newletter]"
+                else
+                    newletter = "[newletter]-[newletter]"
+        else
+            // rare mid-word stutter, much lower chance
+            if(prob(1 + power))
+                newletter = "[newletter]-[newletter]"
+
+        . += newletter
+
+    return sanitize(.)
 
 ///Convert a message to derpy speak
 /proc/derpspeech(message, stuttering)
@@ -860,26 +875,6 @@
 					alert_overlay = new(source)
 				alert_overlay.plane = FLOAT_PLANE
 				A.add_overlay(alert_overlay)
-
-/**
- * Heal a robotic body part on a mob
- */
-/proc/item_heal_robotic(mob/living/carbon/human/H, mob/user, brute_heal, burn_heal)
-	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
-	if(affecting && affecting.status == BODYPART_ROBOTIC)
-		var/dam //changes repair text based on how much brute/burn was supplied
-		if(brute_heal > burn_heal)
-			dam = 1
-		else
-			dam = 0
-		if((brute_heal > 0 && affecting.brute_dam > 0) || (burn_heal > 0 && affecting.burn_dam > 0))
-			if(affecting.heal_damage(brute_heal, burn_heal, 0, BODYPART_ROBOTIC))
-				H.update_damage_overlays()
-			user.visible_message("<span class='notice'>[user] has fixed some of the [dam ? "dents on" : "burnt wires in"] [H]'s [affecting.name].</span>", \
-			"<span class='notice'>I fix some of the [dam ? "dents on" : "burnt wires in"] [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
-			return 1 //successful heal
-		else
-			to_chat(user, "<span class='warning'>[affecting] is already in good condition!</span>")
 
 ///Is the passed in mob an admin ghost
 /proc/IsAdminGhost(mob/user)

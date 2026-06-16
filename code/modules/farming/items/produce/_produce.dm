@@ -236,6 +236,7 @@
 	tastes = list("berry" = 1)
 	faretype = FARE_POOR
 	bitesize = 5
+	list_reagents = list(/datum/reagent/water = 4)
 	dropshrink = 0.75
 	var/color_index = "good"
 	rotprocess = SHELFLIFE_SHORT
@@ -290,7 +291,7 @@
 	. = ..()
 	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
 	if(!can_tell)
-		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
+		can_tell = user.attributes ? (GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) >= 20) : FALSE
 	if(can_tell)
 		if(poisonous)
 			. += span_warning("This berry looks suspicious. I sense it might be poisoned.")

@@ -2177,9 +2177,7 @@
 "aks" = (
 /obj/structure/fluff/statue/knight,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	dir = 4;
-	pixel_y = 1;
-	pixel_x = -7
+	dir = 4
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
@@ -2769,12 +2767,6 @@
 /obj/structure/lootable_structure/stockpile/mining_cache,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/lower)
-"anl" = (
-/mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	pixel_y = 27
-	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "ann" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -4162,9 +4154,7 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "aui" = (
-/mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	pixel_y = 27
-	},
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
@@ -6826,9 +6816,7 @@
 "aGu" = (
 /obj/structure/fluff/statue/knight/r,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	dir = 8;
-	pixel_y = 1;
-	pixel_x = 4
+	dir = 8
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
@@ -7751,15 +7739,6 @@
 	},
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
-"aKY" = (
-/obj/structure/fluff/statue/knight,
-/mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	dir = 4;
-	pixel_y = 3;
-	pixel_x = -6
-	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aLa" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -68727,7 +68706,7 @@ ahv
 ahv
 ahv
 aWI
-aKY
+aks
 afn
 aWI
 aWI
@@ -70554,7 +70533,7 @@ afn
 aWI
 apS
 aKq
-anl
+aaE
 aMC
 afn
 adn
@@ -70958,7 +70937,7 @@ afn
 aWI
 apS
 aKq
-anl
+aaE
 aMC
 aEF
 aui
@@ -71567,7 +71546,7 @@ afn
 akd
 aMC
 aKq
-anl
+aaE
 adn
 abZ
 abZ
@@ -71968,7 +71947,7 @@ afn
 aWI
 apS
 aEF
-anl
+aaE
 aMC
 afn
 afn
@@ -72574,7 +72553,7 @@ apS
 apS
 apS
 aEF
-anl
+aaE
 aMC
 abZ
 apS
