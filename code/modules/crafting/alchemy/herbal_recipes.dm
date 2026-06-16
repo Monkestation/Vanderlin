@@ -617,10 +617,10 @@
 	if(!isliving(M))
 		return
 	
-	if(method in list(TOUCH, VAPOR, PATCH))
-		M.adjustFireLoss(reac_volume / 15)
+		if(method in list(TOUCH, VAPOR, PATCH))
+			M.adjustFireLoss(reac_volume / 15)
 		
-	return ..()
+		return ..()
 
 /datum/reagent/poison/herbal/acid/on_mob_life(mob/living/L)
 	. = ..()
@@ -714,7 +714,7 @@
 
 /datum/reagent/poison/herbal/kingsbane/on_mob_end_metabolize(mob/living/M)
 	. = ..()
-	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")	timer = 10 MINUTES
+	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 	
 
 // Magical Enhancement
