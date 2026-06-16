@@ -88,6 +88,9 @@
 
 /mob/living/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
+	if(.)
+		return
+
 	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
 		return
 
