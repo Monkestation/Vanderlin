@@ -286,7 +286,7 @@
 	layer = 4.26
 	icon_state = "chains1"
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	breakoutextra = 10 MINUTES
 	buckleverb = "tie"

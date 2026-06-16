@@ -88,8 +88,8 @@
 	if(owner == new_owner)
 		return
 	if(owner)
-		UnregisterSignal(owner, list(COMSIG_PARENT_QDELETING, COMSIG_POWER_ACTIVATE))
-	RegisterSignal(new_owner, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_qdel))
+		UnregisterSignal(owner, list(COMSIG_QDELETING, COMSIG_POWER_ACTIVATE))
+	RegisterSignal(new_owner, COMSIG_QDELETING, PROC_REF(on_owner_qdel))
 	owner = new_owner
 	if(power_group != COVEN_POWER_GROUP_NONE)
 		RegisterSignal(owner, COMSIG_POWER_ACTIVATE, PROC_REF(on_other_power_activate))

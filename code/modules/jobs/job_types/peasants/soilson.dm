@@ -24,7 +24,7 @@
 	)
 
 /datum/job/farmer
-	title = "Soilson"
+	title = JOB_SOILSON
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \
@@ -55,6 +55,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_SEEDKNOW
 	)
+	book_type = /obj/item/recipe_book/agriculture
 
 /datum/outfit/farmer/map_override(mob/living/carbon/human/H)
 	if(SSmapping.config.map_name != "Voyage")
@@ -66,7 +67,7 @@
 	shoes = /obj/item/clothing/shoes/boots
 
 /datum/outfit/farmer
-	name = "Soilson"
+	name = JOB_SOILSON
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	belt = /obj/item/storage/belt/leather/rope
@@ -112,8 +113,8 @@
 	)
 
 /datum/job/soilchild
-	title = "Soilchild"
-	f_title = "Soilchild"
+	title = JOB_SOILCHILD
+	f_title = JOB_SOILCHILD
 	tutorial = "Born to the soil, raised by the land. \
 	Your parents teach you the ways of farming while you still find time to play. \
 	Though young, you already know the feel of dirt between your fingers and the joy of seeing seeds sprout. \
@@ -142,7 +143,7 @@
 	)
 
 /datum/outfit/soilchild
-	name = "Soilchild"
+	name = JOB_SOILCHILD
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	belt = /obj/item/storage/belt/leather/rope

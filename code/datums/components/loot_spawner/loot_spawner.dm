@@ -98,7 +98,7 @@
 	if(length(takers) >= max_spawns)
 		SEND_SIGNAL(parent, COMSIG_LOOT_SPAWNER_EMPTY)
 
-	SEND_SIGNAL(parent, COMSIG_PARENT_TRAP_TRIGGERED, user)
+	SEND_SIGNAL(parent, COMSIG_TRAP_TRIGGERED, user)
 
 /datum/component/loot_spawner/proc/start_reset(atom/source, obj/item/L, mob/living/user)
 	if(!do_after(user, action_time, source))

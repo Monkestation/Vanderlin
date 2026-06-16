@@ -23,26 +23,27 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
 		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)
 
-	denominator = 30
 
 	base_antags = 1
 	maximum_antags = 2
+	min_players = (LOWPOP_THRESHOLD*0.6) * READYUP_AVG
+	denominator = (LOWPOP_THRESHOLD*0.6) * READYUP_AVG
+	cost = 0.6
 
 	earliest_start = 0 SECONDS
-
-	cost = 0.8
-
-	min_players = 25
 	weight = 8
+
 	secondary_events = list(
 		/datum/round_event_control/antagonist/solo/wretch,
 	)
@@ -50,7 +51,6 @@
 
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/wretch = 1,
-		/datum/round_event_control/antagonist/solo/rebel = 1,
 		/datum/round_event_control/antagonist/solo/vampires = 0.7,
 		/datum/round_event_control/antagonist/solo/werewolf = 0.7,
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 0.5,

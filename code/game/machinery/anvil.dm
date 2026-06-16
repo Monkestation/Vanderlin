@@ -2,336 +2,305 @@
 	icon = 'icons/roguetown/misc/forge.dmi'
 	name = "anvil"
 	icon_state = "anvil"
-	var/hott = 0
-	var/obj/item/ingot/hingot
 	max_integrity = 2000
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
-	var/previous_material_quality = 0
-	var/cool_time = 30 SECONDS
 	var/smithing = FALSE // Is a minigame currently active?
 	var/obj/item/working_material // Reference to the material being worked
 	var/always_perfect = FALSE // Debug/admin flag
+
+/obj/machinery/anvil/Destroy()
+	if(working_material)
+		working_material.forceMove(drop_location())
+	. = ..()
 
 /obj/machinery/anvil/crafted
 	icon_state = "caveanvil"
 
 /obj/machinery/anvil/examine(mob/user)
 	. = ..()
-	if(hingot)
-		. += hingot.examine()
-		if(hott)
-			. += "<span class='warning'>[hingot] is too hot to touch.</span>"
+	if(working_material)
+		. += span_info("[src] has \a [working_material.name] on it.")
+		if(working_material.currecipe)
+			. += span_warning("It is currently being worked on to become \a [working_material.currecipe.name].")
+		if(HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+			. += span_warning("[working_material] is too hot to touch.")
 
 /obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
-	if(hingot)
-		return hingot.attack_hand_secondary(user, modifiers)
+	if(working_material && !smithing)
+		return working_material.attack_hand_secondary(user, modifiers)
+	return ..()
+
+/obj/machinery/anvil/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
+	if(smithing)
+		to_chat(user, span_warning("[src] is currently being worked on!"))
+		return TRUE
+
+	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
+	var/actual_attacking_item = attacking_item
+	var/obj/item/weapon/tongs/tongs_used
+	if(istype(attacking_item, /obj/item/weapon/tongs))
+		tongs_used = attacking_item
+		if(tongs_used.held_item)
+			actual_attacking_item = tongs_used.held_item
+
+	if(try_place_item(actual_attacking_item, user))
+		return TRUE
+
+	if(working_material)
+		if(istype(attacking_item, /obj/item/weapon/hammer))
+			. = TRUE
+			user.changeNext_move(CLICK_CD_MELEE)
+			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+				if(working_material.currecipe)
+					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
+					return
+				else
+					return working_material.attackby(attacking_item, user, modifiers)
+
+			if(!working_material.currecipe)
+				if(!choose_recipe(user))
+					return working_material.attackby(attacking_item, user, modifiers)
+			if(!working_material.currecipe.is_recipe_available(user))
+				return
+			// Start the minigame instead of direct hammering
+			start_minigame(user, attacking_item)
+			return
+
+		if(try_restore_material(actual_attacking_item, user))
+			return TRUE
+
+		if(tongs_used && !tongs_used.held_item)
+			tongs_used.set_held_item(working_material)
+			return TRUE
+
 	. = ..()
 
-/obj/machinery/anvil/attackby(obj/item/W, mob/living/user, list/modifiers)
-	if(istype(W, /obj/item/weapon/tongs))
-		var/obj/item/weapon/tongs/T = W
-		if(smithing)
-			to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
-			return
-		if(hingot)
-			if(T.held_item && istype(T.held_item, /obj/item/ingot))
-				if(hingot.currecipe && hingot.currecipe.needed_item && istype(T.held_item, hingot.currecipe.needed_item))
-					hingot.currecipe.item_added(user)
-					qdel(T.held_item)
-					T.held_item = null
-					T.update_appearance(UPDATE_ICON_STATE)
-					update_appearance(UPDATE_OVERLAYS)
-				return
-			else
-				hingot.forceMove(T)
-				T.held_item = hingot
-				hingot = null
-				T.update_appearance(UPDATE_ICON_STATE)
-				update_appearance(UPDATE_OVERLAYS)
-				return
-		else
-			if(T.held_item && istype(T.held_item, /obj/item/ingot))
-				var/obj/item/repair_target
-				for(var/obj/item/I in src.loc)
-					if(I.anvilrepair && I.max_integrity)
-						repair_target = I
-						break
+/obj/machinery/anvil/attack_hand(mob/living/user, list/modifiers)
+	if(smithing)
+		to_chat(user, span_warning("[src] is currently being worked on!"))
+		return TRUE
+	if(working_material)
+		return working_material.attack_hand(user, modifiers)
+	return ..()
 
-				if(repair_target && T.hott)
-					var/obj/item/ingot/used_ingot = T.held_item
+/obj/machinery/anvil/proc/try_place_item(obj/item/item, mob/living/user)
+	if(working_material?.currecipe?.item_added(item, user))
+		return TRUE
 
-					var/skill_value = GET_MOB_SKILL_VALUE(user, repair_target.anvilrepair)
-					if(skill_value <= 0)
-						to_chat(user, span_warning("You don't know enough about this craft to restore [repair_target]."))
-						return
-
-					var/expected_ingot_type
-					if(repair_target.melting_material)
-						var/datum/material/mat = GET_ATTRIBUTE_DATUM(repair_target.melting_material)
-						expected_ingot_type = mat?.ingot_type
-					else if(repair_target.smeltresult)
-						if(istype(repair_target.smeltresult, /obj/item/ingot))
-							expected_ingot_type = repair_target.smeltresult
-
-					if(!expected_ingot_type || !istype(used_ingot, expected_ingot_type))
-						to_chat(user, span_warning("This isn't the right material to restore [repair_target]."))
-						return
-
-					var/restores_done = repair_target.integrity_restores
-					var/base_restore = (skill_value / SKILL_MASTER) * 0.20
-					var/diminish_factor = max(0.1, 1.0 - (restores_done * 0.30))
-					var/restore_amount = round(repair_target.max_integrity * base_restore * diminish_factor)
-
-					if(restore_amount <= 0)
-						to_chat(user, span_warning("[repair_target] has been restored too many times. The metal no longer accepts new material."))
-						return
-
-					var/restore_cap = repair_target.max_integrity * (0.15 * diminish_factor)
-					restore_amount = min(restore_amount, restore_cap)
-
-					repair_target.max_integrity += restore_amount
-					repair_target.integrity_restores++
-
-					qdel(T.held_item)
-					T.held_item = null
-					T.update_appearance(UPDATE_ICON_STATE)
-
-					var/datum/mind/smith_mind = user.mind
-					var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
-					smith_mind.add_sleep_experience(repair_target.anvilrepair, amt2raise)
-
-					playsound(src, 'sound/items/bsmith3.ogg', 100, FALSE)
-					user.visible_message(span_info("[user] works new material into [repair_target], restoring some of its integrity."))
-
-					if(restores_done >= 2)
-						to_chat(user, span_warning("The metal is taking the new material less readily now. Further restorations will be less effective."))
-					return
-
-				// No repair target or tongs not hot, place as hingot normally
-				T.held_item.forceMove(src)
-				hingot = T.held_item
-				T.held_item = null
-				hott = T.hott
-				if(hott)
-					START_PROCESSING(SSmachines, src)
-				T.update_appearance(UPDATE_ICON_STATE)
-				update_appearance(UPDATE_OVERLAYS)
-				return
-
-	if(istype(W, /obj/item/ingot))
-		if(!hingot)
-			W.forceMove(src)
-			hingot = W
-			hott = 0
-			update_appearance(UPDATE_OVERLAYS)
-			return
-
-	if(istype(W, /obj/item/weapon/hammer))
-		var/obj/item/weapon/hammer/hammer = W
-		user.changeNext_move(CLICK_CD_MELEE)
-		if(!hingot)
-			return
-		if(!hott)
-			to_chat(user, "<span class='warning'>The bar has gone too cold to continue working on it.</span>")
-			return
-		if(smithing)
-			to_chat(user, "<span class='warning'>Already working on this!</span>")
-			return
-		if(!hingot.currecipe)
-			if(!choose_recipe(user))
-				return
-		if(has_world_trait(/datum/world_trait/delver))
-			if(!has_recipe_unlocked(user.key, hingot.currecipe.type))
-				return
-		start_minigame(user, hammer)
-		return
-
-	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(W, hingot.currecipe.needed_item))
-		hingot.currecipe.item_added(user)
-		if(istype(W, /obj/item/ingot))
-			var/obj/item/ingot/I = W
-			hingot.currecipe.material_quality += I.recipe_quality
-			previous_material_quality = I.recipe_quality
-		else
-			hingot.currecipe.material_quality += previous_material_quality
-		hingot.currecipe.num_of_materials += 1
-		qdel(W)
-		return
-
-	if(W.anvilrepair)
-		user.visible_message("<span class='info'>[user] places \a [W] on the anvil.</span>")
-		W.forceMove(src.loc)
-		return
-	..()
-
-/obj/machinery/anvil/proc/start_minigame(mob/living/user, obj/item/weapon/hammer/hammer)
-	if(!hingot || !hingot.currecipe)
-		return
-
-	smithing = TRUE
-	working_material = hingot
-
-	var/difficulty_modifier = hingot.currecipe.craftdiff
-
-	var/datum/anvil_challenge/challenge = new(src, hingot.currecipe, user, difficulty_modifier)
-	if(!challenge)
-		smithing = FALSE
-		working_material = null
-		return
-
-
-/obj/machinery/anvil/proc/process_minigame_result(quality_score, mob/living/user, total_fail)
-	if(!hingot || !hingot.currecipe)
-		return
-
-	var/datum/anvil_recipe/recipe = hingot.currecipe
-	var/breakthrough = quality_score >= 80
-	if(total_fail)
-		quality_score = 0
-	var/success = recipe.advance(user, breakthrough, quality_score)
-
-	if(!success)
-		shake_camera(user, 1, 1)
-		playsound(src, 'sound/items/bsmithfail.ogg', 100, FALSE)
-
-	if(success)
-		var/skill_boost = 0
-		if(quality_score >= 80)
-			skill_boost = quality_score * 2
-			recipe.numberofbreakthroughs++
-		else if(quality_score >= 60)
-			skill_boost = quality_score * 1.5
-		else if(quality_score >= 40)
-			skill_boost = quality_score
-		else if(quality_score >= 20)
-			skill_boost = quality_score * 0.5
-
-		recipe.skill_quality += skill_boost
-
-	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
-		complete_recipe(user, quality_score)
-
-	working_material = null
-
-/obj/machinery/anvil/proc/complete_recipe(mob/living/user, quality_score)
-	if(!hingot || !hingot.currecipe)
-		return
-
-	var/datum/anvil_recipe/recipe = hingot.currecipe
-	var/obj/item/I = new recipe.created_item(loc)
-
-	I.OnCrafted(user.dir, user)
-
-	var/skill_level = 0
-	if(user)
-		skill_level = GET_MOB_SKILL_VALUE_OLD(user, recipe.appro_skill)
-
-	recipe.handle_creation(I, quality_score, skill_level)
-	SEND_SIGNAL(user, COMSIG_ITEM_FORGED)
-
-	record_featured_stat(FEATURED_STATS_SMITHS, user)
-	record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, I.name)
-
-	for(var/i in 1 to recipe.createditem_extra)
-		var/obj/item/extra = new recipe.created_item(loc)
-		extra.OnCrafted(user.dir, user)
-		recipe.handle_creation(extra, quality_score, skill_level)
-
-	user?.visible_message(span_info("[user] finishes crafting [I]!"))
-
-	qdel(hingot)
-	hingot = null
-	update_appearance(UPDATE_OVERLAYS)
-
-/obj/machinery/anvil/proc/choose_recipe(mob/living/user)
-	if(!hingot || !hott)
-		return
-
-	var/list/valid_types = list()
-	for(var/datum/anvil_recipe/R as anything in GLOB.anvil_recipes)
-		if(IS_ABSTRACT(R))
-			continue
-
-		if(has_world_trait(/datum/world_trait/delver))
-			if(!has_recipe_unlocked(user.key, R))
-				continue
-
-		if(istype(hingot, R.req_bar))
-			if(!valid_types.Find(R.i_type))
-				valid_types += R.i_type
-
-	if(!length(valid_types))
-		return
-
-	var/i_type_choice
-	if(length(valid_types) == 1)
-		i_type_choice = valid_types[1]
-	else
-		i_type_choice = browser_input_list(user, "Choose a category", "Anvil", valid_types)
-	if(!i_type_choice)
-		return
-
-	var/list/appro_recipe = list()
-	for(var/datum/anvil_recipe/R as anything in GLOB.anvil_recipes)
-		if(IS_ABSTRACT(R))
-			continue
-		if(R.i_type == i_type_choice && istype(hingot, R::req_bar))
-			appro_recipe += R
-
-	for(var/datum/anvil_recipe/R as anything in appro_recipe)
-		if(!R::req_bar)
-			appro_recipe -= R
-		if(!istype(hingot, R::req_bar))
-			appro_recipe -= R
-
-	if(length(appro_recipe))
-		var/datum/chosen_recipe
-		chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortNames(appro_recipe.Copy()))
-		if(!hingot.currecipe && chosen_recipe)
-			hingot.currecipe = new chosen_recipe.type(hingot)
-			hingot.currecipe.material_quality += hingot.recipe_quality
-			previous_material_quality = hingot.recipe_quality
+	if(!working_material)
+		if(HAS_TRAIT(item, TRAIT_NEEDS_QUENCH) || item.melting_material || item.anvilrepair)
+			set_working_material(item)
 			return TRUE
 
 	return FALSE
 
-/obj/machinery/anvil/attack_hand(mob/user, list/modifiers)
-	if(smithing)
-		to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
-		return
-	if(hingot)
-		if(hott)
-			to_chat(user, "<span class='warning'>It's too hot to handle with your hands.</span>")
-			return
-		else
-			var/obj/item/I = hingot
-			hingot = null
-			I.loc = user.loc
-			user.put_in_active_hand(I)
-			update_appearance(UPDATE_OVERLAYS)
+/obj/machinery/anvil/proc/try_restore_material(obj/item/item, mob/living/user)
+	if(!istype(item, /obj/item/ingot))
+		return FALSE
+	if(!working_material || !working_material.anvilrepair || !working_material.uses_integrity)
+		return FALSE
 
-/obj/machinery/anvil/process()
-	if(hott)
-		if(world.time > hott + cool_time)
-			hott = 0
-			STOP_PROCESSING(SSmachines, src)
+	if(working_material.max_integrity >= initial(working_material.max_integrity))
+		to_chat(user, span_warning("[working_material] does not need to be restored."))
+		return FALSE
+
+	var/skill_value = GET_MOB_SKILL_VALUE(user, working_material.anvilrepair)
+	if(skill_value <= 0)
+		to_chat(user, span_warning("You don't know enough about this craft to restore [working_material]."))
+		return FALSE
+
+	var/expected_ingot_type
+	if(working_material.melting_material)
+		var/datum/material/mat = GET_ATTRIBUTE_DATUM(working_material.melting_material)
+		expected_ingot_type = mat?.solid_form
+	else if(working_material.smeltresult)
+		if(istype(working_material.smeltresult, /obj/item/ingot))
+			expected_ingot_type = working_material.smeltresult
+	if(!expected_ingot_type || !istype(item, expected_ingot_type))
+		to_chat(user, span_warning("This isn't the right material to restore [working_material]."))
+		return FALSE
+
+	if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+		to_chat(item, span_warning("[working_material] needs to be heated first to be mended!"))
+		return FALSE
+	if(!HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
+		to_chat(item, span_warning("[item] needs to be heated first to be used as mending material!"))
+		return FALSE
+
+	var/restores_done = working_material.integrity_restores
+	var/base_restore = (skill_value / SKILL_MASTER) * 0.20
+	var/diminish_factor = max(0.1, 1.0 - (restores_done * 0.30))
+	var/restore_amount = round(working_material.max_integrity * base_restore * diminish_factor)
+
+	if(restore_amount <= 0)
+		to_chat(user, span_warning("[working_material] has been restored too many times. It no longer accepts new material."))
+		return FALSE
+
+	var/new_max_integrity = min(working_material.max_integrity + restore_amount, initial(working_material.max_integrity))
+
+	working_material.modify_max_integrity(new_max_integrity, FALSE)
+	working_material.integrity_restores++
+
+	qdel(item)
+
+	var/datum/mind/smith_mind = user.mind
+	var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 0.25
+	smith_mind.add_sleep_experience(working_material.anvilrepair, amt2raise)
+
+	playsound(src, 'sound/items/bsmith3.ogg', 100, FALSE)
+	user.visible_message(span_info("[user] works new material into [working_material], restoring its maximum integrity."))
+
+	return TRUE
+
+/obj/machinery/anvil/proc/start_minigame(mob/living/user, obj/item/weapon/hammer/hammer)
+	if(!working_material || !working_material.currecipe)
+		return
+
+	if(!working_material.currecipe.can_advance(user))
+		shake_camera(user, 1, 1)
+		playsound(src, 'sound/items/bsmithfail.ogg', 100, FALSE)
+		return
+
+	smithing = TRUE
+
+	var/datum/anvil_challenge/challenge = new(src, working_material.currecipe, user)
+	if(!challenge)
+		smithing = FALSE
+		return
+
+/obj/machinery/anvil/proc/process_minigame_result(quality_score, mob/living/user)
+	if(!working_material || !working_material.currecipe)
+		return
+
+	var/datum/anvil_recipe/recipe = working_material.currecipe
+
+	if(quality_score >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
+		var/recipe_skill = recipe.appro_skill
+		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.5 // It would be impossible to level up otherwise
+		amt2raise *= user.get_learning_boon(recipe_skill)
+		if(HAS_TRAIT(user, TRAIT_MALUMFIRE) || GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
+			user.mind.add_sleep_experience(recipe_skill, amt2raise, FALSE)
+
+		// Breakthrough system for RNG success
+		var/obj/item/weapon/hammer/hammer = user.get_active_held_item()
+		var/total_chance = GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) * GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)/10
+		if(istype(hammer))
+			total_chance += (1 / hammer.toolspeed)
+		if(prob((1 + total_chance)))
+			user.flash_fullscreen("whiteflash")
+			quality_score = 100
+
+	var/success = recipe.advance(user, quality_score)
+	if(!success)
+		return
+
+	if(quality_score >= 80)
+		user.visible_message(span_greentext("[user] deftly strikes the bar!"))
+	else if(quality_score >= 40)
+		user.visible_message(span_info("[user] strikes the bar!"))
 	else
-		STOP_PROCESSING(SSmachines, src)
+		user.visible_message(span_warning("[user] fumbles the bar!"))
+
+	var/datum/effect_system/spark_spread/sparks = new()
+	var/turf/front = get_turf(src)
+	sparks.set_up(1, 1, front)
+	sparks.start()
+	user.adjust_stamina(user.maximum_stamina / 4)
+
+	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
+		complete_recipe(user, quality_score)
+
+/obj/machinery/anvil/proc/complete_recipe(mob/living/user, quality_score)
+	if(!working_material || !working_material.currecipe)
+		return
+
+	var/datum/anvil_recipe/recipe = working_material.currecipe
+	var/obj/item/output_item_path = recipe.created_item
+
+	SEND_SIGNAL(user, COMSIG_ITEM_FORGED, recipe.created_item)
+	record_featured_stat(FEATURED_STATS_SMITHS, user)
+	record_featured_object_stat(FEATURED_STATS_FORGED_ITEMS, initial(output_item_path.name))
+
+	recipe.handle_creation(loc, user)
+
+	user?.visible_message(span_info("[user] finishes crafting \the [initial(output_item_path.name)]!"))
+	qdel(working_material)
+
+/obj/machinery/anvil/proc/choose_recipe(mob/living/user)
+	if(!working_material || !HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH) || working_material.currecipe)
+		return
+
+	var/list/valid_types = list()
+	for(var/datum/anvil_recipe/recipe_instance as anything in GLOB.anvil_recipes)
+		var/datum/recipe_type = recipe_instance.type // necessary typecasting of type for macro
+		if(IS_ABSTRACT(recipe_type))
+			continue
+		if(!recipe_instance.is_recipe_available(user))
+			continue
+		if(!istype(working_material, recipe_instance.required_material))
+			continue
+
+		var/recipe_category = recipe_instance.category
+		if(!valid_types[recipe_category])
+			valid_types[recipe_category] = list()
+		valid_types[recipe_category] += recipe_instance
+
+	if(!length(valid_types))
+		return
+
+	var/category_choice
+	if(length(valid_types) == 1)
+		category_choice = valid_types[1]
+	else
+		category_choice = browser_input_list(user, "Choose a category", "Anvil", valid_types)
+	if(!category_choice)
+		return
+
+	var/list/chosen_category = valid_types[category_choice]
+	if(!length(chosen_category))
+		return
+
+	var/list/final_recipe_list = list()
+	for(var/datum/anvil_recipe/recipe_instance as anything in chosen_category)
+		var/modified_name = "[recipe_instance.name]"
+		if(recipe_instance.output_amount > 1)
+			modified_name += " ([recipe_instance.output_amount]x)"
+		final_recipe_list["[modified_name] \[[uppertext(SSskills.level_names_plain[recipe_instance.craftdiff])]\]"] = recipe_instance
+
+	var/datum/chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortList(final_recipe_list))
+
+	chosen_recipe = final_recipe_list[chosen_recipe]
+	if(!working_material.currecipe && chosen_recipe)
+		working_material.currecipe = new chosen_recipe.type(working_material)
+		return TRUE
+
+/obj/machinery/anvil/proc/set_working_material(obj/item/new_material)
+	if(!QDELETED(working_material))
+		UnregisterSignal(working_material, list(\
+			SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH), \
+			COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
+	working_material = new_material
+	if(working_material)
+		working_material.forceMove(src)
+		RegisterSignals(working_material, list(SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH)), PROC_REF(update_overlay_upon_signal))
+		RegisterSignals(working_material, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_material_on_signal))
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/machinery/anvil/proc/update_overlay_upon_signal(datum/source, trait)
+	SIGNAL_HANDLER
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/machinery/anvil/proc/unset_material_on_signal(datum/source, trait)
+	SIGNAL_HANDLER
+	set_working_material(null)
 
 /obj/machinery/anvil/update_overlays()
 	. = ..()
-	if(!hingot)
-		return
-	var/obj/item/I = hingot
-	I.pixel_x = I.base_pixel_x
-	I.pixel_y = I.base_pixel_y
-	var/mutable_appearance/M = new /mutable_appearance(I)
-	if(hott)
-		M.filters += filter(type="color", color = list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1))
-	M.transform *= 0.5
-	M.pixel_y = 5
-	M.pixel_x = 3
-	. += M
+	if(working_material)
+		var/mutable_appearance/M = new /mutable_appearance(working_material)
+		M.transform *= 0.5
+		M.pixel_y = 4
+		M.pixel_x = 3
+		. += M

@@ -5,8 +5,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/onmob_racial.dmi'
 	sleevetype = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	sellprice = VALUE_SNOWFLAKE_STEEL
@@ -42,14 +41,6 @@
 	desc = "A suit of steel interwoven, through honed elven technique, with hardened bark plates."
 	icon_state = "welfchest"
 	item_weight = 17 KILOGRAMS
-
-/obj/item/clothing/armor/rare/dwarfplate
-	name = "dwarvish plate"
-	desc = "Plate armor made out of the sturdiest, finest dwarvish metal armor. It's as heavy and durable as it gets."
-	icon_state = "dwarfchest"
-	allowed_race = list(SPEC_ID_DWARF)
-	item_weight = 17 KILOGRAMS
-	stand_speed_reduction = 1.2
 
 /obj/item/clothing/armor/rare/grenzelplate
 	name = "grenzelhoftian plate regalia"

@@ -62,9 +62,18 @@
 	bloody_icon_state = "helmetblood_big"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	resistance_flags = FIRE_PROOF // Made of metal
-	armor = ARMOR_WEAK
-	salvage_result = NUTRITION_LEVEL_HUNGRY
+	armor = ARMOR_MAILLE_IRON
+	blocksound = CHAINHIT
+	prevent_crits = CUT_AND_MINOR_CRITS
+	break_sound = 'sound/foley/breaksound.ogg'
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	body_parts_covered = FACE | NECK
+	hooded_body_parts_covered = HEAD_EXCEPT_MOUTH
+
+	max_integrity = INTEGRITY_STANDARD
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/astrata
 	name = "sun hood"
@@ -74,6 +83,13 @@
 
 	armor = ARMOR_MINIMAL
 	prevent_crits = MINOR_CRITICALS
+
+/obj/item/clothing/head/padded/malumhood
+	name = "sculptor's mask"
+	desc = "As Malum sculpts his great works, so does he sculpt his workers."
+	icon_state = "malumhood"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/priest
 	name = "solar visage"
@@ -117,19 +133,8 @@
 		user.update_fov_angles()
 		user.regenerate_clothes()
 
-/obj/item/clothing/head/roguehood/priest/equipped(mob/user, slot)
-	. = ..()
-	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-	else
-		REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
-/obj/item/clothing/head/roguehood/priest/dropped(mob/user)
-	. = ..()
-	REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
 /obj/item/clothing/head/roguehood/priest/pickup(mob/living/user)
-	if((user.job != "Priest") && (user.job != "Priestess"))
+	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
 		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		user.visible_message(span_reallybig("UNWORTHY HANDS TOUCH MY VISAGE, CEASE OR BE PUNISHED"))
 		spawn(30)
@@ -150,7 +155,7 @@
 	item_weight = 135 GRAMS
 
 /obj/item/clothing/head/priestmask/pickup(mob/living/user)
-	if((user.job != "Priest") && (user.job != "Priestess"))
+	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
 		to_chat(user, "<font color='yellow'>UNWORTHY HANDS TOUCH THE VISAGE, CEASE OR BE PUNISHED</font>")
 		spawn(30)
 			if(loc == user)

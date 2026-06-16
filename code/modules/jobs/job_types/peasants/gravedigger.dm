@@ -14,11 +14,12 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/craft/masonry = 30, //Crafting grave decorations
 		/datum/attribute/skill/labor/mathematics = 20
 	)
 
 /datum/job/undertaker
-	title = "Gravetender"
+	title = JOB_GRAVETENDER
 	tutorial = "As a servant of Necra, you embody the sanctity of her domain, \
 	ensuring the dead rest peacefully within the earth. \
 	You are the bane of grave robbers and necromancers, \
@@ -53,6 +54,7 @@
 	)
 
 	languages = list(/datum/language/celestial)
+	book_type = /obj/item/recipe_book/gravemaking
 
 /datum/job/undertaker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -64,17 +66,18 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/undertaker
-	name = "Gravetender"
+	name = JOB_GRAVETENDER
 	head = /obj/item/clothing/head/padded/deathshroud
 	neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 	pants = /obj/item/clothing/pants/trou/leather/mourning
 	armor = /obj/item/clothing/shirt/robe/necra
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/storage/keyring/gravetender
+	beltl = /obj/item/weapon/hammer/iron
 	beltr = /obj/item/storage/belt/pouch/coins/poor
-	backr = /obj/item/weapon/shovel
-	backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red) // Needed for coffin sanctification, they get enough for one, the rest they must source themselves.
+	backr = /obj/item/weapon/shovel/necran
+	wrists = /obj/item/storage/keyring/gravetender
+	backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red, /obj/item/weapon/chisel/iron)
 
 /datum/outfit/undertaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

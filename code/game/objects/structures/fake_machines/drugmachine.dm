@@ -111,7 +111,7 @@
 	var/budget = 0
 	var/upgrade_flags
 	var/current_cat
-	var/list/available_categories = list("Narcotics", "Instruments")
+	var/list/available_categories = list("Narcotics", "Instruments", "Medicine")
 
 /obj/structure/fake_machine/drugmachine/Initialize()
 	. = ..()
@@ -168,8 +168,10 @@
 				SStreasury.give_money_treasury(tax_amt, "goldface import tax")
 				record_featured_stat(FEATURED_STATS_TAX_PAYERS, human_mob, tax_amt)
 				record_round_statistic(STATS_TAXES_COLLECTED, tax_amt)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TAXES_COLLECTED, tax_amt)
 			else
 				record_round_statistic(STATS_TAXES_EVADED, tax_amt)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TAXES_EVADED, tax_amt)
 		else
 			say("Not enough!")
 			return
@@ -225,7 +227,7 @@
 	contents += "<a href='byond://?src=[REF(src)];change=1'>MAMMON LOADED:</a> [budget]<BR>"
 
 	var/mob/living/carbon/human/H = user
-	if(H.job == "Apothecary")
+	if(H.job == JOB_APOTHECARY)
 		if(canread)
 			contents += "<a href='byond://?src=[REF(src)];secrets=1'>Secrets</a>"
 		else

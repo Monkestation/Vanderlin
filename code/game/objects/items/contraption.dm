@@ -179,7 +179,7 @@
 /obj
 	/// This is the result when the wood metalizer artifact is used on this item
 	var/metalizer_result
-	/// The smelting result, used by the smelter or by the portable smelter
+	/// The smelting result, used by the smelter or by the portable smelter. Setting this to an ingot is equivalent to melt_amount = 100
 	var/smeltresult
 
 /obj/item/contraption/wood_metalizer/attack_atom(atom/attacked_atom, mob/living/user)
@@ -408,7 +408,7 @@
 		remove_buffer(src.buffer)
 	src.buffer = buffer
 	if(!QDELETED(buffer))
-		RegisterSignal(buffer, COMSIG_PARENT_QDELETING, PROC_REF(remove_buffer))
+		RegisterSignal(buffer, COMSIG_QDELETING, PROC_REF(remove_buffer))
 
 /**
  * Called when the buffer's stored object is deleted
@@ -419,7 +419,7 @@
 /obj/item/contraption/linker/proc/remove_buffer(datum/source)
 	SIGNAL_HANDLER
 	SEND_SIGNAL(src, COMSIG_MULTITOOL_REMOVE_BUFFER, source)
-	UnregisterSignal(buffer, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(buffer, COMSIG_QDELETING)
 	buffer = null
 
 /obj/item/folding_table_stored

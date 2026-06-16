@@ -33,15 +33,6 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 /mob/dead/canUseStorage()
 	return FALSE
 
-/mob/dead/dust(just_ash, drop_items, force)	//ghosts can't be vaporised.
-	return
-
-/mob/dead/gib()		//ghosts can't be gibbed.
-	return
-
-/mob/dead/ConveyorMove()	//lol
-	return
-
 /mob/dead/forceMove(atom/destination)
 	var/turf/old_turf = get_turf(src)
 	var/turf/new_turf = get_turf(destination)
@@ -93,7 +84,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 				continue
 			if(player.client.prefs.job_preferences[job.title] != JP_HIGH)
 				//i'm sorry for doing this
-				if(!istype(job, /datum/job/adventurer) || player.client.prefs.job_preferences["Court Agent"] != JP_HIGH)
+				if(!istype(job, /datum/job/adventurer) || player.client.prefs.job_preferences[JOB_COURT_AGENT] != JP_HIGH)
 					continue
 			if(player.ready != PLAYER_READY_TO_PLAY)
 				continue
@@ -230,6 +221,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(new_character.client)
 		var/atom/movable/screen/splash/Spl = new(null, null, new_character.client, TRUE, FALSE)
 		Spl.Fade(TRUE)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MEMBER_JOINED, new_character, new_character.mind.assigned_role)
 	new_character = null
 	qdel(src)
 
@@ -244,8 +236,6 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	src << browse(null, "window=culinary_customization")
 	src << browse(null, "window=food_selection")
 	src << browse(null, "window=drink_selection")
-
-	SStriumphs.remove_triumph_buy_menu(client)
 
 	winshow(src, "stonekeep_prefwin", FALSE)
 	src << browse(null, "window=preferences_browser")

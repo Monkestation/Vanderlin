@@ -150,11 +150,8 @@ GLOBAL_VAR(restart_counter)
 #endif
 
 	LoadVerbs(/datum/verbs/menu)
-	load_whitelist()
 
 	load_nameban()
-
-	load_bypassage()
 
 //	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
 
@@ -379,9 +376,11 @@ GLOBAL_VAR(restart_counter)
 		'sound/roundend/motherfuckers.ogg',
 		'sound/roundend/poppop.ogg',
 		'sound/roundend/cursedswords.ogg',
+		'sound/roundend/taffers.ogg',
+		'sound/roundend/hereyougo.ogg',
+		'sound/roundend/masterworks.ogg',
 		'sound/roundend/dwarfs.ogg',
 	)
-
 	for(var/client/thing as anything in GLOB.clients)
 		if(!thing)
 			continue
@@ -420,6 +419,7 @@ GLOBAL_VAR(restart_counter)
 
 		if(do_hard_reboot)
 			log_world("World hard rebooted at [time_stamp()]")
+			SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 			shutdown_logging() // See comment below.
 			QDEL_NULL(Tracy)
 			QDEL_NULL(Debugger)
@@ -427,7 +427,7 @@ GLOBAL_VAR(restart_counter)
 			TgsEndProcess()
 			return ..()
 
-	SSplexora._Shutdown()
+	SSplexora.notify_shutdown()
 	log_world("World rebooted at [time_stamp()]")
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
 

@@ -12,9 +12,10 @@
 		var/obj/item/bodypart/affecting = user.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
 		var/force = get_complex_damage(our_item, src)
 		var/armor_block = user.run_armor_check(BODY_ZONE_PRECISE_L_HAND, used_intent.item_damage_type, armor_penetration = used_intent.penfactor, damage = force)
-		if(user.apply_damage(force, our_item.damtype, affecting, armor_block))
+		var/real_damage = user.apply_damage(force, our_item.damtype, affecting, armor_block)
+		if(real_damage)
 			visible_message(span_suicide("[src] gores [user]'s hands with \the [our_item]!"))
-			affecting?.bodypart_attacked_by(used_intent.blade_class, force, crit_message = TRUE)
+			affecting?.bodypart_attacked_by(used_intent.blade_class, real_damage, crit_message = TRUE, incoming_germ = our_item.germ_level, pre_applied = TRUE)
 		else
 			visible_message(span_suicide("[src] clashes into [user]'s hands with \the [our_item]!"))
 
@@ -32,7 +33,7 @@
 
 	their_item.take_damage(max(damage, 1), BRUTE, our_item.damage_type)
 	visible_message(span_suicide("[src] ripostes [user] with \the [our_item]!"))
-	span_notice("[capitalize(user.p_theyre())] exposed!")
+	span_notice("[user.p_theyre(TRUE)] exposed!")
 	playsound(src, 'sound/combat/clash_struck.ogg', 100)
 
 	user.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)

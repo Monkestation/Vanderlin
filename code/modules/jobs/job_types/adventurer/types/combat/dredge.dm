@@ -488,7 +488,7 @@
 			In the dark corners of every room I see him. I can't sleep without a light-source.")
 			)
 		if("Bard")
-			spawned.inspiration = new /datum/inspiration(spawned)
+			spawned.grant_inspiration()
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/music, 3, TRUE)
 			spawned.change_stat(STAT_INTELLIGENCE, 1)
 			spawned.change_stat(STAT_ENDURANCE, 1)
@@ -900,7 +900,6 @@
 				armor = /obj/item/clothing/armor/cuirass/copperchest
 				mask = /obj/item/clothing/face/facemask/copper
 				wrists = /obj/item/clothing/wrists/bracers/copper
-				neck = /obj/item/clothing/neck/gorget/copper
 				shirt = /obj/item/clothing/armor/gambeson
 				pants = /obj/item/clothing/pants/chainlegs
 			if("BKnight") // RARE. DO NOT GIVE THEM BLACKSTEEL SHIT.
@@ -983,7 +982,7 @@
 			if("Fist")
 				wrists = /obj/item/clothing/wrists/bracers/leather
 			if("Gun")
-				beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+				beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 				beltr = /obj/item/storage/belt/pouch/bullets
 				r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 				backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 2)

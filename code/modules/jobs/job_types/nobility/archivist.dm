@@ -1,5 +1,5 @@
 /datum/job/archivist
-	title = "Archivist"
+	title = JOB_ARCHIVIST
 	tutorial = "A well-traveled and well-learned seeker of wisdom, the Archivist bears the mark of Noc's influence.\
 	Tasked with recording the court's events and educating the ungrateful whelps the monarch calls heirs.\
 	Your work may go unappreciated now, but one dae historians will sing of your dedication and insight."
@@ -37,6 +37,8 @@
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
+		/datum/language/halfling,
+		/datum/language/gronnic,
 		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,

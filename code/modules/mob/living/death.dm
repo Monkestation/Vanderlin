@@ -1,6 +1,6 @@
 GLOBAL_LIST_EMPTY(last_words)
 
-/mob/living/gib(no_brain, no_organs, no_bodyparts)
+/mob/living/proc/gib(no_brain, no_organs, no_bodyparts)
 	var/prev_lying = lying_angle
 	if(stat != DEAD)
 		death(TRUE)
@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(last_words)
 /mob/living/proc/spread_bodyparts()
 	return
 
-/mob/living/dust(just_ash, drop_items, force)
+/mob/living/proc/dust(just_ash, drop_items, force)
 	spill_embedded_objects()
 
 	if(drop_items)
@@ -60,7 +60,7 @@ GLOBAL_LIST_EMPTY(last_words)
 		new /obj/item/fertilizer/ash(loc)
 
 
-/mob/living/death(gibbed)
+/mob/living/proc/death(gibbed)
 	var/was_dead_before = stat == DEAD
 	set_stat(DEAD)
 	unset_machine()
@@ -92,9 +92,8 @@ GLOBAL_LIST_EMPTY(last_words)
 
 	to_chat(src, span_green("A bleak afterlife awaits... but the Gods may let you walk again in another shape! Spirit, you must descend in a Journey to the Underworld and wait there for judgment..."))
 
-	. = ..()
-
 	SEND_SIGNAL(src, COMSIG_LIVING_DEATH, gibbed)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_DEATH, src , gibbed)
 	if(client)
 		client.move_delay = initial(client.move_delay)
 		var/atom/movable/screen/gameover/hog/H = new()
@@ -103,14 +102,13 @@ GLOBAL_LIST_EMPTY(last_words)
 		H.Fade()
 		MOBTIMER_SET(src, MT_LASTDIED)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)
-		remove_client_colour(/datum/client_colour/monochrome/death)
-		add_client_colour(/datum/client_colour/monochrome/death)
 		if(last_words)
 			GLOB.last_words |= last_words
 
 	if(lastattacker_weakref)
 		var/mob/attacker = lastattacker_weakref.resolve()
-		SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
+		if(attacker)
+			SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
 
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(gibbed)

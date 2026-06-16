@@ -55,12 +55,13 @@
 	traits = list(
 		TRAIT_STEELHEARTED
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 
 /datum/job/advclass/mercenary/anthrax/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-
 	if(spawned.gender == FEMALE)
 		// Female: melee defense-oriented brute
 		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/anthrax/female)
@@ -105,7 +106,7 @@
 		gloves = /obj/item/clothing/gloves/fingerless/shadowgloves
 		mask = /obj/item/clothing/face/shepherd/shadowmask
 		neck = /obj/item/clothing/neck/chaincoif/iron
-		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+		backr = /obj/item/gun/ballistic/bow/short
 		beltr = /obj/item/ammo_holder/quiver/arrows
 		beltl = /obj/item/weapon/sword/sabre/stalker
 		scabbards = list(/obj/item/weapon/scabbard/sword)

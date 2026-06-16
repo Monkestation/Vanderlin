@@ -5,7 +5,7 @@
 		/datum/surgery_step/burn_rot,
 		/datum/surgery_step/cauterize
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_CHEST)
 
 /datum/surgery_step/burn_rot
@@ -16,11 +16,12 @@
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 8 SECONDS
-	surgery_flags = SURGERY_INCISED
-	skill_min = SKILL_RANK_APPRENTICE
-	skill_median = SKILL_RANK_JOURNEYMAN
+	target_mobtypes = list(/mob/living/carbon/human)
+	minimum_time = 7 SECONDS
+	maximum_time = 9 SECONDS
+	surgery_flags = SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 	preop_sound = 'sound/surgery/cautery1.ogg'
 	success_sound = 'sound/surgery/cautery2.ogg'
 
@@ -35,12 +36,12 @@
 	var/burndam = 20
 	if(user.mind)
 		burndam -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) * 3)
-	var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
+	var/datum/antagonist/zombie/was_zombie = IS_DEADITE(target)
 	var/has_rot = was_zombie
 	if(!has_rot && iscarbon(target))
 		var/mob/living/carbon/stinky = target
 		for(var/obj/item/bodypart/bodypart as anything in stinky.bodyparts)
-			if(bodypart.rotted)
+			if(HAS_TRAIT(bodypart, TRAIT_ROTTEN))
 				has_rot = TRUE
 				break
 	if(was_zombie)
@@ -53,7 +54,8 @@
 	if(iscarbon(target))
 		var/mob/living/carbon/stinky = target
 		for(var/obj/item/bodypart/rotty in stinky.bodyparts)
-			rotty.rotted = FALSE
+			rotty.revive_limb()
+			rotty.germ_level = 0
 			rotty.update_limb()
 			if(rotty.can_be_disabled)
 				rotty.update_disabled()
@@ -71,7 +73,5 @@
 				if(ghost)
 					to_chat(ghost, span_warning("My funeral rites were undone!"))
 		human.funeral = FALSE
-	if(target.stat < DEAD)
-		target.remove_client_colour(/datum/client_colour/monochrome/death)
 	target.take_bodypart_damage(null, burndam)
 	return TRUE

@@ -25,6 +25,8 @@
 #define JOB_NEW_PLAYER_JOINABLE (1<<3)
 /// Whether the job can be displayed on the actors list
 #define JOB_SHOW_IN_ACTOR_LIST (1<<4)
+/// if we require a whitelist
+#define JOB_REQUIRE_WHITELIST (1<<5)
 
 #define ALL_FACTIONS list( \
 	FACTION_NONE, \
@@ -41,7 +43,8 @@
 	FACTION_ORCS, \
 	FACTION_BUMS, \
 	FACTION_VIKINGS, \
-	FACTION_MATTHIOS \
+	FACTION_MATTHIOS, \
+	FACTION_GALLOWBAND \
 )
 
 #define FACTION_NONE		"None"
@@ -59,6 +62,7 @@
 #define FACTION_BUMS		"Bums"
 #define FACTION_MATTHIOS	"Matthios"
 #define FACTION_VIKINGS     "Vikings"
+#define FACTION_GALLOWBAND  "Gallowband"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
@@ -72,7 +76,7 @@
 #define INQUISITION 	(1<<9)
 
 #define UNDEAD			(1<<10)
-
+#define GALLOWBAND		(1<<11)
 
 #define JCOLOR_NOBLE "#9c40bf"
 #define JCOLOR_MERCHANT "#c2b449"
@@ -109,6 +113,9 @@
 #define JDO_SQUIRE 10
 #define JDO_FORWARDEN 11
 #define JDO_FORGUARD 11.1
+#define JDO_FORFORCER 11.2
+#define JDO_FORPREACH 11.3
+#define JDO_FORSUPP 11.4
 
 #define JDO_PRIEST 12
 #define JDO_GMTEMPLAR 12.1
@@ -168,6 +175,7 @@
 #define JDO_BOGWITCH 35.1
 #define JDO_BOGWITCH_APP 35.2
 
+#define JDO_SWEEPER 35.3
 #define JDO_VAGRANT 36
 #define JDO_ORPHAN 37
 #define JDO_SOILCHILD 38
@@ -184,5 +192,112 @@
 #define BITFLAG_CONSTRUCTOR (1<<2)
 #define BITFLAG_GARRISON (1<<3)
 
+
+#define JOB_MONARCH "Monarch"
+#define JOB_CONSORT "Consort"
+#define JOB_HAND "Hand"
+#define JOB_PRINCE "Prince"
+#define JOB_PRINCE_FEM "Princess"
+#define JOB_GUARD_CAPTAIN "Captain"
+#define JOB_STEWARD "Steward"
+#define JOB_COURT_MAGE "Court Magician"
+#define JOB_ARCHIVIST "Archivist"
+#define JOB_COURT_PHYSICIAN "Court Physician"
+#define JOB_MINOR_NOBLE "Noble"
+#define JOB_COURT_AGENT "Court Agent"
+
+
+#define JOB_ROYAL_KNIGHT "Royal Knight"
+#define JOB_CITY_WATCH "City Watchmen"
+#define JOB_CITY_WATCH_LIEUTENANT "City Watch Lieutenant"
+#define JOB_MAN_AT_ARMS "Man-at-arms"
+#define JOB_GATEMASTER "Gatemaster"
+#define JOB_DUNGEONEER "Dungeoneer"
+#define JOB_TOWN_ELDER "Town Elder"
+
+
+#define JOB_PRIEST "Priest"
+#define JOB_PRIEST_FEM "Priestess"
+#define JOB_GRANDMASTER_TEMPLAR "Grandmaster Templar"
+#define JOB_ACOLYTE "Acolyte"
+#define JOB_GRAVETENDER "Gravetender"
+#define JOB_TEMPLAR "Templar"
+
+
+#define JOB_TOWNER "Towner"
+#define JOB_SOILSON "Soilson"
+#define JOB_MINER "Miner"
+#define JOB_COOK "Cook"
+#define JOB_CARPENTER "Carpenter"
+#define JOB_MASON "Mason"
+#define JOB_JESTER "Jester"
+#define JOB_HUNTER "Hunter"
+#define JOB_FISHER "Fisher"
+#define JOB_BARD "Bard"
+#define JOB_PRISONER "Prisoner"
+#define JOB_BEGGAR "Beggar"
+#define JOB_SWEEPER "Sweeper"
+
+
+#define JOB_SQUIRE "Squire"
+#define JOB_SMITHY_APP "Smithy Apprentice"
+#define JOB_MAGIC_APP "Magician Apprentice"
+#define JOB_SERVANT "Servant"
+#define JOB_TAPSTER "Tapster"
+#define JOB_CLINIC_APP "Clinic Apprentice"
+
+
+#define JOB_INNKEEP "Innkeep"
+#define JOB_BLACKSMITH "Blacksmith"
+#define JOB_TAILOR "Tailor"
+#define JOB_ARTIFICER "Artificer"
+#define JOB_MATRON "Matron"
+#define JOB_FELDSHER "Feldsher"
+#define JOB_APOTHECARY "Apothecary"
+#define JOB_TOMB_WARDEN "Tomb Warden"
+#define JOB_BUTLER "Butler"
+
+
+#define JOB_MERCHANT "Merchant"
+#define JOB_SHOPHAND "Shophand"
+#define JOB_STEVEDORE "Stevedore"
+
+
+#define JOB_PILGRIM "Pilgrim"
+#define JOB_ADVENTURER "Adventurer"
+#define JOB_MERCENARY "Mercenary"
+
+
+#define JOB_INNKEEP_SON "Innkeepers Son"
+#define JOB_ORPHAN "Orphan"
+#define JOB_CHURCHLING "Churchling"
+#define JOB_SOILCHILD "Soilchild"
+
+
 #define JOB_BOGWITCH "Bog Witch"
 #define JOB_BOGWITCH_APP "Bog Witch Apprentice"
+#define JOB_FOREST_WARDEN_CLASSIC "Forest Warden"
+#define JOB_FOREST_GUARD_CLASSIC "Forest Guard"
+#define JOB_FOREST_WARDEN "Warden of the Woods"
+#define JOB_FOREST_ENFORCER "Hersir"
+#define JOB_FOREST_PREACHER "Gothi"
+#define JOB_FOREST_SUPPORT "Vinnumaour"
+#define JOB_FOREST_SUPPORT_FEM "Vinnukona"
+#define JOB_FOREST_GUARD "Gallowband"
+#define JOB_FOREST_GUARD_HUSKARL_SCOUT "Huskarl Scout"
+#define JOB_FOREST_GUARD_HUSKARL_FIGHTER "Huskarl Fighter"
+#define JOB_FOREST_GUARD_THEGN_REAVER "Thegn Reaver"
+#define JOB_FOREST_GUARD_THEGN_RAVAGER "Thegn Ravager"
+#define JOB_FOREST_GUARD_THEGN_RANGER "Thegn Ranger"
+
+
+#define JOB_PRAFEKT "Herr Prafekt"
+#define JOB_SACRESTANTS "Sacrestants"
+#define JOB_ABSOLVER "Absolver"
+#define JOB_ADEPT "Adept"
+
+
+#define JOB_ALCHEMIST "Alchemist"
+#define JOB_LUMBERJACK "Lumberjack"
+#define JOB_CHEESEMAKER "Cheesemaker"
+#define JOB_BUTCHER "Butcher"

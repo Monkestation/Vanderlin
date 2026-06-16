@@ -78,7 +78,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_bard
-	name = "Bard"
+	name = JOB_BARD
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_bard
@@ -119,7 +119,7 @@
 
 
 /datum/job_pack/assassin/assassin_beggar
-	name = "Beggar"
+	name = JOB_BEGGAR
 
 	pack_contents = list(
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
@@ -145,16 +145,19 @@
 	)
 
 /datum/job_pack/assassin/assassin_fisher
-	name = "Fisher"
+	name = JOB_FISHER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_fisher
 	)
 
 	pack_contents = list(
+		/obj/item/clothing/head/fisherhat = ITEM_SLOT_HEAD,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/weapon/knife/hunting = ITEM_SLOT_MOUTH,
 		/obj/item/clothing/armor/gambeson/light/striped = ITEM_SLOT_ARMOR,
+		/obj/item/clothing/shoes/boots/leather = ITEM_SLOT_SHOES,
+		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_NECK,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/fishingrod = ITEM_SLOT_BACK_R,
 		/obj/item/cooking/pan = ITEM_SLOT_BELT_R,
@@ -174,21 +177,9 @@
 		picker.equip_to_slot_or_del(pants, ITEM_SLOT_PANTS, TRUE)
 		var/obj/item/clothing/shirt/shortshirt/colored/random/shirt = new()
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
-		var/obj/item/clothing/shoes/boots/leather/shoes = new()
-		picker.equip_to_slot_or_del(shoes, ITEM_SLOT_SHOES, TRUE)
-		var/obj/item/storage/belt/pouch/coins/poor/neck = new()
-		picker.equip_to_slot_or_del(neck, ITEM_SLOT_NECK, TRUE)
-		var/obj/item/clothing/head/fisherhat/head = new()
-		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
 	else
 		var/obj/item/clothing/shirt/dress/gen/colored/random/shirt = new()
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
-		var/obj/item/clothing/shoes/boots/leather/shoes = new()
-		picker.equip_to_slot_or_del(shoes, ITEM_SLOT_SHOES, TRUE)
-		var/obj/item/storage/belt/pouch/coins/poor/neck = new()
-		picker.equip_to_slot_or_del(neck, ITEM_SLOT_NECK, TRUE)
-		var/obj/item/clothing/head/fisherhat/head = new()
-		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
 
 /datum/attribute_holder/sheet/job/pack/assassin_hunter
 	raw_attribute_list = list(
@@ -197,7 +188,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_hunter
-	name = "Hunter"
+	name = JOB_HUNTER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_hunter
@@ -206,7 +197,7 @@
 	pack_contents = list(
 		/obj/item/clothing/cloak/raincloak/furcloak/colored/brown = ITEM_SLOT_CLOAK,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_R,
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow = ITEM_SLOT_BACK_L,
+		/obj/item/gun/ballistic/bow = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/ammo_holder/quiver/arrows = ITEM_SLOT_BELT_R,
 		/obj/item/flashlight/flare/torch/lantern = ITEM_SLOT_BELT_L,
@@ -231,7 +222,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_miner
-	name = "Miner"
+	name = JOB_MINER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_miner
@@ -256,14 +247,18 @@
 	)
 
 /datum/job_pack/assassin/assassin_noble
-	name = "Noble"
+	name = JOB_MINOR_NOBLE
 
 	pack_contents = list(
+		/obj/item/clothing/head/fancyhat = ITEM_SLOT_HEAD,
 		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_NECK,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
+		/obj/item/gun/ballistic/bow = ITEM_SLOT_BACK_R,
+		/obj/item/ammo_holder/quiver/arrows = ITEM_SLOT_BELT_L,
 		/obj/item/clothing/ring/silver = ITEM_SLOT_RING,
+		/obj/item/clothing/cloak/raincloak/furcloak = ITEM_SLOT_CLOAK,
 	)
 
 	pack_backpack_contents = list(
@@ -288,32 +283,16 @@
 		picker.equip_to_slot_or_del(pants, ITEM_SLOT_PANTS, TRUE)
 		var/obj/item/clothing/shirt/tunic/colored/random/shirt = new()
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
-		var/obj/item/clothing/cloak/raincloak/furcloak/cloak = new()
-		picker.equip_to_slot_or_del(cloak, ITEM_SLOT_CLOAK, TRUE)
-		var/obj/item/clothing/head/fancyhat/head = new()
-		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/backr = new()
-		picker.equip_to_slot_or_del(backr, ITEM_SLOT_BACK_R, TRUE)
 		var/obj/item/weapon/sword/rapier/dec/beltr = new()
 		picker.equip_to_slot_or_del(beltr, ITEM_SLOT_BELT_R, TRUE)
-		var/obj/item/ammo_holder/quiver/arrows/beltl = new()
-		picker.equip_to_slot_or_del(beltl, ITEM_SLOT_BELT_L, TRUE)
 	else
 		picker.adjust_skill_level(/datum/attribute/skill/combat/bows, 10)
 		picker.adjust_skill_level(/datum/attribute/skill/combat/crossbows, -10)
 
 		var/obj/item/clothing/shirt/dress/silkdress/colored/random/shirt = new()
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
-		var/obj/item/clothing/head/fancyhat/head = new()
-		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
-		var/obj/item/clothing/cloak/raincloak/furcloak/cloak = new()
-		picker.equip_to_slot_or_del(cloak, ITEM_SLOT_CLOAK, TRUE)
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/backr = new()
-		picker.equip_to_slot_or_del(backr, ITEM_SLOT_BACK_R, TRUE)
 		var/obj/item/weapon/knife/dagger/steel/stiletto/beltr = new()
 		picker.equip_to_slot_or_del(beltr, ITEM_SLOT_BELT_R, TRUE)
-		var/obj/item/ammo_holder/quiver/arrows/beltl = new()
-		picker.equip_to_slot_or_del(beltl, ITEM_SLOT_BELT_L, TRUE)
 
 /datum/attribute_holder/sheet/job/pack/assassin_peasant
 	raw_attribute_list = list(
@@ -370,7 +349,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_carpenter
-	name = "Carpenter"
+	name = JOB_CARPENTER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_carpenter
@@ -433,7 +412,7 @@
 		/obj/item/clothing/wrists/bracers/leather = ITEM_SLOT_WRISTS,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/clothing/armor/leather/hide = ITEM_SLOT_ARMOR,
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow = ITEM_SLOT_BACK_R,
+		/obj/item/gun/ballistic/bow = ITEM_SLOT_BACK_R,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/flashlight/flare/torch/lantern = ITEM_SLOT_BELT_R,
 		/obj/item/ammo_holder/quiver/arrows = ITEM_SLOT_BELT_L,
@@ -484,7 +463,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_servant
-	name = "Servant"
+	name = JOB_SERVANT
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_servant

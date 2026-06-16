@@ -171,13 +171,13 @@
 	controller.clear_blackboard_key(BB_HUMAN_NPC_WEAKPOINT)
 
 	// Parity with npc_choose_attack_zone aimheight picks
-	if(pawn.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(pawn))
 		pawn.aimheight_change(pawn.deadite_get_aimheight(target))
 		return
 	if(!(pawn.mobility_flags & MOBILITY_STAND))
 		pawn.aimheight_change(rand(1, 4))
 		return
-	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE))
+	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE) || !CAN_HAVE_BLOOD(target))
 		pawn.aimheight_change(rand(12, 19))
 		return
 	pawn.aimheight_change(pick(rand(5, 8), rand(9, 11), rand(12, 19)))
@@ -334,13 +334,15 @@
 	return null
 
 /datum/ai_behavior/basic_melee_attack/human_npc/proc/_try_backstep(mob/living/carbon/human/pawn, atom/target)
-	if(pawn.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(pawn))
 		return FALSE
 	if(pawn.body_position == LYING_DOWN)
 		return FALSE
 	if(pawn.ai_controller.blackboard[BB_HUMAN_NPC_HARASS_MODE])
 		return FALSE
 	if(!target || !isturf(pawn.loc) || !isturf(target.loc))
+		return FALSE
+	if(!pawn.ai_controller.can_move())
 		return FALSE
 
 	if(world.time < pawn.ai_controller.blackboard[BB_HUMAN_NPC_JUKE_COOLDOWN])
@@ -354,7 +356,7 @@
 		return FALSE
 
 	pawn.tempfixeye = TRUE
-	pawn.atom_flags |= NO_DIR_CHANGE_ON_MOVE
+	pawn.face_mouse = TRUE
 	var/was_fixedeye = pawn.fixedeye
 	if(!was_fixedeye)
 		pawn.fixedeye = TRUE
@@ -368,7 +370,7 @@
 
 	var/turf/juke_turf = pick(candidates)
 	pawn.Move(juke_turf, get_dir(pawn, juke_turf), pawn.cached_multiplicative_slowdown)
-	pawn.atom_flags &= ~NO_DIR_CHANGE_ON_MOVE
+	pawn.face_mouse = FALSE
 	pawn.face_atom(target)
 
 	pawn.ai_controller.set_blackboard_key(BB_HUMAN_NPC_JUKE_COOLDOWN, world.time + 1.5 SECONDS)

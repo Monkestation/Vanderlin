@@ -60,7 +60,7 @@
 	use_skintones = TRUE
 
 	species_traits = list(NO_UNDERWEAR, HAIR, FACEHAIR, OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WATER_BREATHING, TRAIT_GOOD_SWIM, TRAIT_FISHFACE)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_NODROWN, TRAIT_SWIMMER, TRAIT_FISHFACE)
 	inherent_traits_f = list(TRAIT_STRONGBITE)
 	inherent_sheet = /datum/attribute_holder/sheet/job/species/triton
 
@@ -130,6 +130,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/triton,
@@ -163,6 +164,8 @@
 
 	var/obj/item/bodypart/mouth/jaw = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 	jaw.replace_teeth(/obj/item/natural/bundle/teeth/fang)
+	var/datum/action/innate/bioluminescence/action = new(C)
+	action.Grant(C)
 
 /datum/species/triton/after_creation(mob/living/carbon/C)
 	. = ..()
@@ -173,7 +176,10 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/deepspeak)
-
+	var/datum/action/innate/bioluminescence/action = locate() in C.actions
+	if(action)
+		qdel(action)
+		
 /datum/species/triton/check_roundstart_eligible()
 	return TRUE
 
@@ -210,4 +216,39 @@
 		"Photic" = HAIR_COLOR_PHOTIC,
 		"Turtle Egg" = HAIR_COLOR_TURTLE,
 	)
+
+/datum/action/innate/bioluminescence
+	name = "Bioluminescence"
+	desc = "Toggle a bright bioluminescent light from your body, moving with you."
+	button_icon_state = "shieldsparkles"
+
+	var/obj/effect/dummy/lighting_obj/moblight/our_light
+
+/datum/action/innate/bioluminescence/Destroy(force)
+	QDEL_NULL(our_light)
+	return ..()
+
+/datum/action/innate/bioluminescence/Activate()
+	. = ..()
+	if(!owner)
+		return FALSE
+		
+	if(!QDELETED(our_light))
+		our_light.set_light_on(TRUE)
+		our_light.update_light()
+	else
+		our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
+		
+	owner.visible_message(span_notice("[owner]'s body begins to glow with a deep blue bioluminescent light!"))
+	active = TRUE
+
+/datum/action/innate/bioluminescence/Deactivate()
+	. = ..()
+	if(!owner)
+		return FALSE
+	if(our_light)
+		our_light.set_light_on(FALSE)
+		our_light.update_light()
+	owner.visible_message(span_notice("[owner]'s bioluminescent glow fades away."))
+	active = FALSE
 

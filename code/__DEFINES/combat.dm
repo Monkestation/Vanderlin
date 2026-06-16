@@ -10,6 +10,12 @@
 #define CLONE		"clone"
 #define STAMINA 	"stamina"
 #define BRAIN		"brain"
+/// Pain damage type
+#define PAIN "pain"
+/// Shock (technically just pain but might be useful i guess?)
+#define SHOCK_PAIN "shock"
+/// Shock stage damage type
+#define SHOCK_STAGE "shock_stage"
 
 //Damage flag defines //
 // STRING HERE NEEDS TO EXACTLY MATCH VAR NAME IN /datum/armor
@@ -27,6 +33,8 @@
 #define ACID "acid"
 /// protection against magical attacks (make this adjustable via rune enchantments or something)
 #define MAGIC "magic"
+///protection from internal damage to the organs
+#define WOUND "wound"
 
 /// Armor values that are used for damage
 #define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
@@ -62,10 +70,11 @@
 #define CANPUSH			(1<<3)
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
+#define BLEEDOUT (1<<6)
 
 //Health Defines
-#define HEALTH_THRESHOLD_CRIT 0
-#define HEALTH_THRESHOLD_FULLCRIT 0
+#define HEALTH_THRESHOLD_CRIT 100
+#define HEALTH_THRESHOLD_FULLCRIT 70
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
@@ -107,6 +116,8 @@
 #define CRAWLING_ADD_SLOWDOWN 7
 //slowdown for dislocated limbs
 #define DISLOCATED_ADD_SLOWDOWN 2
+//slowdown for fractured limbs
+#define FRACTURED_ADD_SLOWDOWN 3
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1
@@ -193,6 +204,7 @@
 #define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
 #define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
 #define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+#define GREATAXE_CLEAVE	    /datum/intent/axe/chop/greataxe/slayer
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
@@ -369,13 +381,18 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define EMBEDDED_UNSAFE_REMOVAL_TIME			0	//A Time in ticks, total removal time = (this*item.w_class)
 
 //Gun weapon weight
+/// Default normal ol' gun. Akimboable, one handed.
 #define WEAPON_LIGHT 1
+/// Can't be used akimbo, but only needs one hand to fire
 #define WEAPON_MEDIUM 2
+/// Can't be used akimbo, and needs two hands to fire
 #define WEAPON_HEAVY 3
+
 //Gun trigger guards
 #define TRIGGER_GUARD_ALLOW_ALL -1
 #define TRIGGER_GUARD_NONE 0
 #define TRIGGER_GUARD_NORMAL 1
+
 //Gun bolt types
 ///Gun has a bolt, it stays closed while not cycling. The gun must be racked to have a bullet chambered when a mag is inserted.
 ///  Example: c20, shotguns, m90
@@ -389,6 +406,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 ///Gun has a bolt, it locks back when empty. It can be released to chamber a round if a magazine is in.
 ///  Example: Pistols with a slide lock, some SMGs
 #define BOLT_TYPE_LOCKING 4
+
 //Sawn off nerfs
 ///accuracy penalty of sawn off guns
 #define SAWN_OFF_ACC_PENALTY 25

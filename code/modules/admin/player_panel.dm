@@ -234,8 +234,6 @@
 							M_job = M.mind.assigned_role.parent_job.title
 						else
 							M_job = M.job
-					else if(ismonkey(M))
-						M_job = "Monkey"
 					else
 						M_job = "Carbon-based"
 

@@ -26,21 +26,3 @@
 
 // Gets the reference for the skill type that was given
 #define GetSkillRef(A) (SSskills.all_skills[A])
-
-//Blacksmith resultant skills
-#define BLACKSMITH_LEVEL_MIN -10
-#define BLACKSMITH_LEVEL_SPOIL -2 // Spoil bars and crude smithing skill
-#define BLACKSMITH_LEVEL_AWFUL -1 // Shit bars and crude skill
-#define BLACKSMITH_LEVEL_CRUDE 0
-#define BLACKSMITH_LEVEL_ROUGH 1
-#define BLACKSMITH_LEVEL_COMPETENT 2
-#define BLACKSMITH_LEVEL_FINE 3
-#define BLACKSMITH_LEVEL_FLAWLESS 4
-#define BLACKSMITH_LEVEL_LEGENDARY 5
-#define BLACKSMITH_LEVEL_MAX 10
-
-//Smelting quality results
-#define SMELTERY_LEVEL_SPOIL 0
-#define SMELTERY_LEVEL_POOR 1
-#define SMELTERY_LEVEL_NORMAL 2 // Average, same as it always was
-#define SMELTERY_LEVEL_GOOD 3

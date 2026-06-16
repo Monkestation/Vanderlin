@@ -269,7 +269,7 @@
 			if(wall_index <= length(tent_walls))
 				var/obj/structure/tent_wall/wall = tent_walls[wall_index]
 				wall.forceMove(wall_turf)
-				RegisterSignal(wall, COMSIG_PARENT_QDELETING, PROC_REF(part_destroyed))
+				RegisterSignal(wall, COMSIG_QDELETING, PROC_REF(part_destroyed))
 				RegisterSignal(wall, COMSIG_MOVABLE_MOVED, PROC_REF(part_moved))
 				wall_index++
 
@@ -280,7 +280,7 @@
 				wall.forceMove(upper_wall_turf)
 				wall.name = "tent roof wall"
 				wall.desc = "The sloped roof section of the tent, providing overhead protection."
-				RegisterSignal(wall, COMSIG_PARENT_QDELETING, PROC_REF(part_destroyed))
+				RegisterSignal(wall, COMSIG_QDELETING, PROC_REF(part_destroyed))
 				RegisterSignal(wall, COMSIG_MOVABLE_MOVED, PROC_REF(part_moved))
 				wall_index++
 
@@ -295,7 +295,7 @@
 			if(door_turf && door_index <= length(tent_doors))
 				var/obj/structure/roguetent/door = tent_doors[door_index]
 				door.forceMove(door_turf)
-				RegisterSignal(door, COMSIG_PARENT_QDELETING, PROC_REF(part_destroyed))
+				RegisterSignal(door, COMSIG_QDELETING, PROC_REF(part_destroyed))
 				RegisterSignal(door, COMSIG_MOVABLE_MOVED, PROC_REF(part_moved))
 				door_index++
 	else
@@ -313,7 +313,7 @@
 				var/obj/structure/roguetent/door = tent_doors[door_index]
 				door.forceMove(door_turf)
 				door.desc += " This tent provides overhead protection from the elements."
-				RegisterSignal(door, COMSIG_PARENT_QDELETING, PROC_REF(part_destroyed))
+				RegisterSignal(door, COMSIG_QDELETING, PROC_REF(part_destroyed))
 				RegisterSignal(door, COMSIG_MOVABLE_MOVED, PROC_REF(part_moved))
 				door_index++
 
@@ -341,7 +341,7 @@
 	for(var/obj/structure/tent_wall/wall in tent_walls)
 		var/turf/door_turf = get_turf(wall)
 		if(wall.loc != src) // If it's deployed
-			UnregisterSignal(wall, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
+			UnregisterSignal(wall, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 			wall.forceMove(src)
 			// Reset wall properties
 			wall.name = initial(wall.name)
@@ -352,7 +352,7 @@
 	for(var/obj/structure/roguetent/door in tent_doors)
 		var/turf/door_turf = get_turf(door)
 		if(door.loc != src) // If it's deployed
-			UnregisterSignal(door, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
+			UnregisterSignal(door, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 			door.forceMove(src)
 			// Reset door description
 			door.desc = initial(door.desc)

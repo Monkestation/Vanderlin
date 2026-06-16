@@ -264,7 +264,7 @@ SUBSYSTEM_DEF(migrants)
 			continue
 		if(islava(turf))
 			continue
-		if(is_blocked_turf(turf))
+		if(turf.is_blocked_turf())
 			continue
 		turfs += turf
 	turfs = shuffle(turfs)
@@ -677,8 +677,8 @@ SUBSYSTEM_DEF(migrants)
 
 /proc/get_spawn_turf_for_job(jobname)
 	var/list/landmarks = list()
-	for(var/obj/effect/landmark/start/sloc as anything in GLOB.start_landmarks_list)
-		if(!(jobname in sloc.jobspawn_override))
+	for(var/obj/effect/landmark/start/sloc as anything in GLOB.roundstart_landmarks)
+		if(!(jobname in sloc.jobs_to_spawn))
 			continue
 		landmarks += sloc
 	if(!length(landmarks))

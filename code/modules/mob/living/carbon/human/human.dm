@@ -6,14 +6,18 @@
 	if(user.cmode)
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_NECK))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+				if(HAS_TRAIT(user, TRAIT_PACIFISM) && user != src)
+					to_chat(user, span_warning("I can't slit [src]'s throat, I am a pacifist!"))
+					return
 				playsound(src, 'sound/surgery/scalpel1.ogg', 100, TRUE, -1)
 				if(user == src)
-					user.visible_message("<span class='danger'>[user] starts to slit [user.p_their()] throat with [held_item].</span>")
+					user.visible_message(span_userdanger("[user] starts to slit [user.p_their()] throat with [held_item]!"))
 				else
-					user.visible_message("<span class='danger'>[user] starts to slit [src]'s throat with [held_item].</span>")
+					user.visible_message(span_userdanger("[user] starts to slit [src]'s throat with [held_item]!"))
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
-					part.add_wound(/datum/wound/artery/neck)
+					part.add_wound(/datum/wound/slash)
+					part.add_wound(/datum/wound/artery/neck_slice)
 
 	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
 		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
@@ -96,9 +100,6 @@
 						shoes_check.polished = 2
 						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
-						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
-						if(particle_spewer)
-							qdel(particle_spewer)
 						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
 						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
 						target.add_stress(/datum/stress_event/extra_shiny_shoes)
@@ -125,6 +126,7 @@
 
 	. = ..()
 
+	AddElement(/datum/element/ridable, /datum/component/riding/creature/human)
 	AddElement(/datum/element/footstep, footstep_type, 1, -6)
 	GLOB.human_list += src
 	if(ai_controller && flee_in_pain)
@@ -135,45 +137,6 @@
 	culture = null
 	GLOB.human_list -= src
 	return ..()
-
-/mob/living/carbon/human/ZImpactDamage(turf/T, levels)
-	var/mob/living/carbon/V = src
-	var/obj/item/bodypart/affecting
-	var/dam = levels * rand(10,50)
-	V.add_stress(/datum/stress_event/felldown)
-	record_round_statistic(STATS_MOAT_FALLERS, -1) // If you get your ankles broken you fall. This makes sure only those that DIDN'T get damage get counted.
-	record_round_statistic(STATS_ANKLES_BROKEN)
-	var/chat_message
-	switch(rand(1,4))
-		if(1)
-			affecting = get_bodypart(pick(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
-			chat_message = "<span class='danger'>I fall on my [affecting]!</span>"
-		if(2)
-			affecting = get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM))
-			chat_message = "<span class='danger'>I fall on my arm!</span>"
-		if(3)
-			affecting = get_bodypart(BODY_ZONE_CHEST)
-			chat_message = "<span class='danger'>I fall flat! I'm winded!</span>"
-			emote("gasp")
-			adjustOxyLoss(50)
-		if(4)
-			affecting = get_bodypart(BODY_ZONE_HEAD)
-			chat_message = "<span class='danger'>I fall on my head!</span>"
-	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "blunt", damage = dam)))
-		update_damage_overlays()
-		if(levels >= 1)
-			//absurd damage to guarantee a crit
-			affecting.try_crit(BCLASS_TWIST, 300)
-
-	for(var/mob/living/M in T.contents)
-		visible_message("\The [src] hits \the [T]!")
-		M.AdjustKnockdown(levels * 20)
-		M.take_overall_damage(dam * 3.5)
-
-	if(chat_message)
-		to_chat(src, chat_message)
-
-	AdjustKnockdown(levels * 15)
 
 /mob/living/carbon/human/proc/setup_human_dna()
 	//initialize dna. for spawned humans; overwritten by other code
@@ -352,46 +315,176 @@
 		// Might need re-wording.
 		to_chat(user, "<span class='alert'>There is no exposed flesh or thin material [above_neck(target_zone) ? "on [p_their()] head" : "on [p_their()] body"].</span>")
 
-/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
-	CHECK_DNA_AND_SPECIES(C)
-
-	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
-		to_chat(src, "<span class='warning'>[C.name] is dead!</span>")
+/// Performs CPR on the target after a delay.
+/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/target, cpr_type = CPR_CHEST)
+	if(target == src)
 		return
-	if(is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove your mask first!</span>")
-		return 0
-	if(C.is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove [p_their()] mask first!</span>")
-		return 0
 
-	if(C.cpr_time < world.time + 30)
-		visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
-						"<span class='notice'>I try to perform CPR on [C.name]... Hold still!</span>")
-		if(!do_after(src, 3 SECONDS, C))
-			to_chat(src, "<span class='warning'>I fail to perform CPR on [C]!</span>")
-			return 0
+	var/medical_skill = max(GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/medicine), 0)
+	target.add_fingerprint(src)
 
-		var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
-		var/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
+	var/looping = FALSE
 
-		if(C.health > C.crit_threshold)
-			return
+	do
+		CHECK_DNA_AND_SPECIES(target)
 
-		src.visible_message("<span class='notice'>[src] performs CPR on [C.name]!</span>", "<span class='notice'>I perform CPR on [C.name].</span>")
-		add_stress(/datum/stress_event/perform_cpr)
-		C.cpr_time = world.time
-		log_combat(src, C, "CPRed")
+		if(DOING_INTERACTION_WITH_TARGET(src, target))
+			return FALSE
 
-		if(they_breathe && they_lung)
-			var/suff = min(C.getOxyLoss(), 7)
-			C.adjustOxyLoss(-suff)
-			C.updatehealth()
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air enter your lungs... It feels good...</span>")
-		else if(they_breathe && !they_lung)
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... but you don't feel any better...</span>")
-		else
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... which is a sensation you don't recognise...</span>")
+		switch(cpr_type)
+			if(CPR_MOUTH)
+				if(is_mouth_covered())
+					to_chat(src, span_warning("I need to uncover my mouth first!"))
+					return FALSE
+				if(target.is_mouth_covered())
+					to_chat(src, span_warning("I need to uncover [p_their()] mouth first!"))
+					return FALSE
+				if(!get_bodypart(BODY_ZONE_PRECISE_MOUTH))
+					to_chat(src, span_warning("I have no mouth!"))
+					return FALSE
+				if(!target.get_bodypart(BODY_ZONE_PRECISE_MOUTH))
+					to_chat(src, span_warning("[target] have no mouth!"))
+					return FALSE
+				if(HAS_TRAIT(src, TRAIT_NOBREATH))
+					to_chat(src, span_warning("I can't breathe!"))
+					return FALSE
+				if(!getorganslot(ORGAN_SLOT_LUNGS))
+					to_chat(src, span_warning("I have no lungs!"))
+					return FALSE
+
+				if(!looping)
+					visible_message(span_notice("[src] is trying to perform mouth to mouth on [target.name]!"), \
+					span_notice("I try to perform mouth to mouth on [target.name]... Hold still!"), \
+					vision_distance = COMBAT_MESSAGE_RANGE)
+
+				if(!do_after(src, 3 SECONDS, target))
+					return FALSE
+				log_combat(src, target, "M2Med")
+
+				visible_message(span_notice("<b>[src]</b> performs mouth to mouth on <b>[target]</b>!"), \
+								span_notice("I perform mouth to mouth on <b>[target]</b>."),
+								span_hear("I hear loud breathing."),
+								vision_distance = COMBAT_MESSAGE_RANGE,
+								ignored_mobs = target)
+
+				if(HAS_TRAIT(target, TRAIT_NOBREATH))
+					to_chat(target, span_unconscious("I feel a breath of fresh air... which is a sensation I don't recognise..."))
+				else if(!target.getorganslot(ORGAN_SLOT_LUNGS))
+					to_chat(target, span_unconscious("I feel a breath of fresh air... But I don't feel any better..."))
+				else
+					var/epinephrine_mod = 0
+					if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
+						epinephrine_mod += 5
+					target.adjustOxyLoss(-((medical_skill * 0.2) + epinephrine_mod))
+					to_chat(target, span_unconscious("I feel a breath of fresh air enter my lungs... It feels good..."))
+
+				looping = TRUE
+
+			if(CPR_CHEST)
+				var/obj/item/bodypart/chest/chest = target.get_bodypart(BODY_ZONE_CHEST)
+				var/obj/item/organ/heart/they_heart = target.getorganslot(ORGAN_SLOT_HEART)
+				var/mob/living/carbon/human/humie = target
+				if(istype(humie))
+					var/obj/item/clothing/suit = humie.wear_armor
+					var/obj/item/clothing/under = humie.wear_shirt
+					if(istype(under) && CHECK_BITFIELD(under.clothing_flags, THICKMATERIAL))
+						to_chat(src, span_warning("I need to take [humie.p_their()] [under] off!"))
+						return FALSE
+					else if(istype(suit) && CHECK_BITFIELD(suit.clothing_flags, THICKMATERIAL))
+						to_chat(src, span_warning("I need to take [humie.p_their()] [suit] off!"))
+						return FALSE
+
+				if(!looping)
+					visible_message(span_notice("[src] is trying to perform chest compressions on [target.name]!"), \
+					span_notice("I try to perform chest compressions on [target.name]... Hold still!"), \
+					vision_distance = COMBAT_MESSAGE_RANGE)
+
+				var/compression_time = 10 SECONDS
+				compression_time *= 1 - max(medical_skill * 0.01, 0.4)
+				if(!do_after(src, compression_time, target))
+					return FALSE
+				log_combat(src, target, "CPRed")
+
+				if (HAS_TRAIT(target, TRAIT_STABLEHEART))
+					to_chat(target, span_unconscious("I feel my heart being pumped..."))
+				else if(!target.getorganslot(ORGAN_SLOT_HEART))
+					to_chat(target, span_unconscious("I feel my chest being pumped... But I don't feel any better..."))
+					to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
+					return FALSE
+				else
+					to_chat(target, span_unconscious("I feel my chest being pushed on..."))
+
+				var/epinephrine_mod = 0
+				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
+					epinephrine_mod += 3
+				var/heart_exposed_mod = 0
+				if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
+					heart_exposed_mod += 5
+
+				/// Master (55) have a 5% chance of reviving through CPR each attempt.
+				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 20, context = DICE_CONTEXT_PHYSICAL)
+				looping = TRUE
+
+				if(diceroll <= DICE_CRIT_FAILURE) // can't even break ribs correctly
+					looping = FALSE
+					visible_message(span_danger("<b>[src]</b> botches the chest compressions!"), \
+								span_danger("I botch the chest compressions!"),
+								span_hear("I hear pushing."),
+								vision_distance = COMBAT_MESSAGE_RANGE, \
+								ignored_mobs = target)
+					if(target.stat >= DEAD)
+						/**
+						 * y = 15 * e^(-0.022x)
+						 * Aiming for points (0, 15) (30, 10) (50, 5)
+						 */
+						they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
+				else
+					if(heart_exposed_mod)
+						visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
+									span_notice("I massage <b>[target]</b>'s [they_heart]."), \
+									span_hear("I hear pushing."),
+									vision_distance = COMBAT_MESSAGE_RANGE, \
+									ignored_mobs = target)
+					else
+						visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
+									span_notice("I perform chest compressions on <b>[target]</b>."), \
+									span_hear("I hear pushing."),
+									vision_distance = COMBAT_MESSAGE_RANGE, \
+									ignored_mobs = target)
+
+					target.pump_heart(src)
+					if(target.stat < DEAD) // No point in running the revive check
+						return FALSE
+
+					chest.add_wound(/datum/wound/fracture/chest)
+					if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
+						to_chat(src, span_warning("Necra holds tight to this one."))
+						return FALSE
+					if(they_heart.is_failing_without_bleedout())
+						to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
+						return FALSE
+
+					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
+						looping = FALSE
+						if(target.getOrganLoss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_DEATH)
+							target.setOrganLoss(ORGAN_SLOT_BRAIN, BRAIN_DAMAGE_DEATH - 1)
+						if(target.revive())
+							target.grab_ghost(TRUE)
+							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
+											span_userdanger("My muscles spasm as i am brought back to life!"))
+							target.emote("breathgasp")
+							target.adjust_jitter(100 SECONDS)
+							add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
+							target.apply_status_effect(/datum/status_effect/debuff/revive)
+							record_round_statistic(STATS_CPR_REVIVALS, 1)
+							/**
+							 * y = 15 * e^(-0.022x)
+							 * Aiming for points (0, 15) (30, 10) (50, 5)
+							 */
+							they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
+						else
+							to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
+	while (looping)
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())
@@ -444,11 +537,13 @@
 		return
 	else
 		if(hud_used.bloods)
-			var/bloodloss = ((BLOOD_VOLUME_NORMAL - blood_volume) / BLOOD_VOLUME_NORMAL) * 100
+			var/bloodloss = 0
+			if(CAN_HAVE_BLOOD(src))
+				bloodloss = ((BLOOD_VOLUME_NORMAL - get_blood_volume()) / BLOOD_VOLUME_NORMAL) * 100
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (get_complex_pain() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
+			var/painpercent = (getPainLoss() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
 
 
 			var/usedloss = 0
@@ -565,7 +660,6 @@
 		hud_used.zone_select.update_appearance(UPDATE_OVERLAYS)
 
 /mob/living/carbon/human/fully_heal(heal_flags = HEAL_ALL)
-	// set_heartattack(FALSE)
 	if(heal_flags & HEAL_ESSENTIALS)
 		set_hygiene(HYGIENE_LEVEL_NORMAL)
 	return ..()
@@ -587,10 +681,10 @@
 	return TRUE
 
 /mob/living/carbon/human/vomit(lost_nutrition = 10, blood = 0, stun = 1, distance = 0, message = 1, toxic = 0)
-	if(blood && (NOBLOOD in dna.species.species_traits) && !HAS_TRAIT(src, TRAIT_TOXINLOVER))
+	if(blood && !CAN_HAVE_BLOOD(src) && !HAS_TRAIT(src, TRAIT_TOXINLOVER))
 		if(message)
 			visible_message("<span class='warning'>[src] dry heaves!</span>", \
-							"<span class='danger'>I try to throw up, but there's nothing in your stomach!</span>")
+							span_danger("I try to throw up, but there's nothing in your stomach!"))
 		if(stun)
 			Immobilize(200)
 		return 1
@@ -639,11 +733,11 @@
 				if(is_lord_job(HL.mind.assigned_role) || is_consort_job(HL.mind.assigned_role))
 					HL.mind.set_assigned_role(SSjob.GetJobType(/datum/job/villager))
 			//would be better to change their title directly, but that's not possible since the title comes from the job datum
-			if(HL.job == "Monarch")
+			if(HL.job == JOB_MONARCH)
 				HL.job = "Ex-Monarch"
 				HL.honorary = null
 				lord_job?.remove_spells(HL)
-			if(HL.job == "Consort")
+			if(HL.job == JOB_CONSORT)
 				HL.job = "Ex-Consort"
 				HL.honorary = null
 				consort_job?.remove_spells(HL)
@@ -652,7 +746,7 @@
 		coronated.mind.set_assigned_role(/datum/job/lord)
 		lord_job?.assign_honorary_titles(coronated)
 		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
-		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
+		coronated.job = JOB_MONARCH //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
 		SSticker.rulermob = coronated
 		GLOB.badomens -= OMEN_NOLORD
@@ -670,24 +764,6 @@
 			var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 			lord_job?.get_informed_title(src, TRUE, new_title)
 
-/mob/living/carbon/human/MouseDrop_T(mob/living/target, mob/living/user)
-	if(pulling == target && stat == CONSCIOUS)
-		//If they dragged themselves and we're currently aggressively grabbing them try to piggyback
-		if(user == target && can_piggyback(target))
-			if(cmode)
-				to_chat(target, span_warning("[src] is too alert to let you piggyback!"))
-				return FALSE
-			piggyback(target)
-			return TRUE
-		//If you dragged them to you and you're aggressively grabbing try to carry them
-		else if(user != target && can_be_firemanned(target))
-			var/obj/G = get_active_held_item()
-			if(G)
-				if(istype(G, /obj/item/grabbing))
-					fireman_carry(target)
-					return TRUE
-	. = ..()
-
 /mob/proc/return_accent_list()
 	if(!accent)
 		return
@@ -695,81 +771,90 @@
 		return
 	return GLOB.accent_list[accent]
 
+// THIS SUCKS. PORT STRIPPABLE ELEMENT
+/mob/living/carbon/human/MouseDrop_T(mob/living/target, mob/living/user)
+	if(mouse_buckle_handling(target, user))
+		return TRUE
+	. = ..()
+
+/mob/living/carbon/human/mouse_buckle_handling(mob/living/M, mob/living/user)
+	if(pulling != M || stat != CONSCIOUS)
+		return FALSE
+
+	//If they dragged themselves to you and you're currently grabbing them try to piggyback
+	if(user == M && can_piggyback(M))
+		if(cmode)
+			to_chat(M, span_warning("[src] is too alert to let you piggyback!"))
+			return FALSE
+		piggyback(M)
+		return TRUE
+
+	//If you dragged them to you and you're grabbing try to fireman carry them
+	if(can_be_firemanned(M) && istype(get_active_held_item(), /obj/item/grabbing))
+		fireman_carry(M)
+		return TRUE
+
 //src is the user that will be carrying, target is the mob to be carried
 /mob/living/carbon/human/proc/can_piggyback(mob/living/carbon/target)
-	return (istype(target) && target.stat == CONSCIOUS)
+	return istype(target) && target.stat == CONSCIOUS
 
-/mob/living/carbon/human/proc/can_be_firemanned(mob/living/carbon/target)
-	return (ishuman(target) && target.body_position == LYING_DOWN)
+/mob/living/carbon/human/proc/can_be_firemanned(mob/living/target)
+	return (ishuman(target) && target.body_position == LYING_DOWN) || (isanimal(target) && target.living_flags & CAN_BE_FIREMANNED)
 
 /mob/living/carbon/human/proc/fireman_carry(mob/living/carbon/target)
-	var/carrydelay = 5 SECONDS //if you have latex you are faster at grabbing
+	if(!can_be_firemanned(target) || incapacitated(IGNORE_GRAB))
+		to_chat(src, span_warning("I can't fireman carry [target] while [target.p_they()] [target.p_are()] standing!"))
+		return
 
-	var/backnotshoulder = FALSE
+	var/carrydelay = 5 SECONDS //if you have latex you are faster at grabbing
+	var/fitness_level = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) - 1
+	carrydelay -= fitness_level * (1/3) SECONDS
+
+	var/skills_space
+	if(carrydelay <= 3 SECONDS)
+		skills_space = " very quickly"
+	else if(carrydelay <= 4 SECONDS)
+		skills_space = " quickly"
+
+	var/region_name = "back"
 	if(r_grab && l_grab)
 		if(r_grab.grabbed == target)
 			if(l_grab.grabbed == target)
-				backnotshoulder = TRUE
+				region_name = "shoulder"
 
-	if(can_be_firemanned(target) && !incapacitated(IGNORE_GRAB))
-		if(backnotshoulder)
-			visible_message("<span class='notice'>[src] starts lifting [target] onto their back...</span>")
-		else
-			visible_message("<span class='notice'>[src] starts lifting [target] onto their shoulder...</span>")
-		if(do_after(src, carrydelay, target))
-			//Second check to make sure they're still valid to be carried
-			if(can_be_firemanned(target) && !incapacitated(IGNORE_GRAB))
-				buckle_mob(target, TRUE, TRUE, 90, 0, 0)
-				return
-	to_chat(src, "<span class='warning'>I fail to carry [target].</span>")
+	visible_message(span_notice("[src] starts[skills_space] lifting [target] onto [p_their()] [region_name]..."),
+		span_notice("You[skills_space] start to lift [target] onto your [region_name]..."))
+
+	if(!do_after(src, carrydelay, target))
+		visible_message(span_warning("[src] fails to fireman carry [target]!"))
+		return
+
+	//Second check to make sure they're still valid to be carried
+	if(!can_be_firemanned(target) || incapacitated(IGNORE_GRAB) || target.buckled)
+		visible_message(span_warning("[src] fails to fireman carry [target]!"))
+		return
+
+	return buckle_mob(target, TRUE, TRUE, CARRIER_NEEDS_ARM)
 
 /mob/living/carbon/human/proc/piggyback(mob/living/carbon/target)
-	if(can_piggyback(target))
-		visible_message("<span class='notice'>[target] starts to climb onto [src]...</span>")
-		if(do_after(target, 1.5 SECONDS, src))
-			if(can_piggyback(target))
-				if(target.incapacitated(IGNORE_GRAB) || incapacitated(IGNORE_GRAB))
-					to_chat(target, "<span class='warning'>I can't piggyback ride [src].</span>")
-					return
-				buckle_mob(target, TRUE, TRUE, FALSE, 0, 0)
-				update_carry_weight()
-	else
-		to_chat(target, "<span class='warning'>I can't piggyback ride [src].</span>")
-
-/mob/living/carbon/human/buckle_mob(mob/living/target, force = FALSE, check_loc = TRUE, lying_buckle = FALSE, hands_needed = 0, target_hands_needed = 0)
-	if(!force)//humans are only meant to be ridden through piggybacking and special cases
+	if(!can_piggyback(target))
+		to_chat(target, span_warning("I can't piggyback ride [src] right now!"))
 		return
-	if(!is_type_in_typecache(target, can_ride_typecache))
-		target.visible_message("<span class='warning'>[target] really can't seem to mount [src]...</span>")
-		return
-	buckle_lying = lying_buckle
-	var/datum/component/riding/human/riding_datum = LoadComponent(/datum/component/riding/human)
-	if(target_hands_needed)
-		riding_datum.ride_check_rider_restrained = TRUE
-	if(buckled_mobs && ((target in buckled_mobs) || (buckled_mobs.len >= max_buckled_mobs)) || buckled)
-		return
-	var/equipped_hands_self
-	var/equipped_hands_target
-	if(hands_needed)
-		equipped_hands_self = riding_datum.equip_buckle_inhands(src, hands_needed, target)
-	if(target_hands_needed)
-		equipped_hands_target = riding_datum.equip_buckle_inhands(target, target_hands_needed)
 
-	if(hands_needed || target_hands_needed)
-		if(hands_needed && !equipped_hands_self)
-			src.visible_message("<span class='warning'>[src] can't get a grip on [target] because their hands are full!</span>",
-				"<span class='warning'>I can't get a grip on [target] because your hands are full!</span>")
-			return
-		else if(target_hands_needed && !equipped_hands_target)
-			target.visible_message("<span class='warning'>[target] can't get a grip on [src] because their hands are full!</span>",
-				"<span class='warning'>I can't get a grip on [src] because your hands are full!</span>")
-			return
+	visible_message(span_notice("[target] starts to climb onto [src]..."))
+	if(!do_after(target, 1.5 SECONDS, target = src) || !can_piggyback(target))
+		visible_message(span_warning("[target] fails to climb onto [src]!"))
+		return
 
-	//stop_pulling()
-	riding_datum.handle_vehicle_layer()
-	. = ..(target, force, check_loc)
+	if(target.incapacitated(IGNORE_GRAB) || incapacitated(IGNORE_GRAB))
+		target.visible_message(span_warning("[target] can't hang onto [src]!"))
+		return
+
+	return buckle_mob(target, TRUE, TRUE, RIDER_NEEDS_ARMS)
 
 /mob/living/carbon/human/proc/is_shove_knockdown_blocked() //If you want to add more things that block shove knockdown, extend this
+	if(has_status_effect(/datum/status_effect/buff/malum_anvil))
+		return TRUE
 	var/list/body_parts = list(head, wear_mask, wear_armor, wear_pants, backl, backr, gloves, shoes, belt, wear_ring)
 	for(var/bp in body_parts)
 		if(istype(bp, /obj/item/clothing))
@@ -788,25 +873,18 @@
 	. = ..()
 	. *= physiology?.do_after_speed
 
-/mob/living/carbon/human/updatehealth(amount)
-	. = ..()
-	dna?.species.spec_updatehealth(src)
-	if(HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
-		return
-	var/health_deficiency = max((maxHealth - health), 0)
-	if(health_deficiency >= 80)
-		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN, override = TRUE, multiplicative_slowdown = (health_deficiency / 75), blacklisted_movetypes = FLOATING|FLYING)
-		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING, override = TRUE, multiplicative_slowdown = (health_deficiency / 25), movetypes = FLOATING)
-	else
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
-
 /mob/living/carbon/human/proc/skele_look()
 	dna.species.go_bald()
 	update_body_parts(redraw = TRUE)
 	underwear = "Nude"
+
+/mob/living/carbon/human/post_buckle_mob(mob/living/buckled_mob)
+	. = ..()
+	update_carry_weight()
+
+/mob/living/carbon/human/post_unbuckle_mob()
+	. = ..()
+	update_carry_weight()
 
 /mob/living/carbon/human/adjust_nutrition(change) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
@@ -899,7 +977,6 @@
 		REMOVE_TRAIT(src, TRAIT_ABOMINATION, TRAIT_GENERIC)
 
 	regenerate_icons()
-
 
 /mob/living/carbon/human/proc/copy_bodyparts(mob/living/carbon/human/target)
 	var/mob/living/carbon/human/self = src
@@ -1048,3 +1125,56 @@
 		for(var/mob/living/carbon/human/target as anything in nobles)
 			if(!target.has_stress_type(/datum/stress_event/noble_seen_servant_work))
 				target.add_stress(/datum/stress_event/noble_seen_servant_work)
+
+//OVERRIDE IGNORING PARENT RETURN VALUE
+/mob/living/carbon/human/updatehealth(amount)
+	if(status_flags & GODMODE)
+		return
+	var/total_burn	= 0
+//	var/total_brute	= 0
+	var/total_tox = getToxLoss()
+	var/total_oxy = getOxyLoss()
+	var/used_damage = 0
+	var/static/list/lethal_zones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+	)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts) //hardcoded to streamline things a bit
+		if(!(bodypart.body_zone in lethal_zones))
+			continue
+		var/my_burn = abs((bodypart.burn_dam / bodypart.max_damage) * DAMAGE_THRESHOLD_FIRE_CRIT)
+		total_burn = max(total_burn, my_burn)
+		used_damage = max(used_damage, my_burn)
+	if(used_damage < total_tox)
+		used_damage = total_tox
+	if(used_damage < total_oxy)
+		used_damage = total_oxy
+	set_health(maxHealth - getOrganLoss(ORGAN_SLOT_BRAIN))
+	update_stat()
+	update_pain()
+	update_shock()
+
+	if(stat == SOFT_CRIT)
+		add_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE, multiplicative_slowdown = SOFTCRIT_ADD_SLOWDOWN)
+	else
+		remove_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE)
+	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
+
+	dna?.species.spec_updatehealth(src)
+	if(HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
+		return
+	var/health_deficiency = max((maxHealth - health), 0)
+	if(health_deficiency >= 80)
+		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN, override = TRUE, multiplicative_slowdown = (health_deficiency / 75), blacklisted_movetypes = FLOATING|FLYING)
+		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING, override = TRUE, multiplicative_slowdown = (health_deficiency / 25), movetypes = FLOATING)
+	else
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
+
+/mob/living/carbon/human/getMaxHealth()
+	var/obj/item/organ/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	if(brain)
+		return brain.maxHealth
+	return BRAIN_DAMAGE_DEATH

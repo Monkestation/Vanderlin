@@ -12,11 +12,11 @@
 
 	base_antags = 1
 	maximum_antags = 4
-
-	denominator = 25
-	min_players = LOWPOP_THRESHOLD
-	weight = 7
+	denominator = (LOWPOP_THRESHOLD*0.5) * READYUP_AVG
+	min_players = LOWPOP_THRESHOLD * READYUP_AVG
 	cost = 0.9
+
+	weight = 8
 
 	earliest_start = 0 SECONDS
 
@@ -34,13 +34,15 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
 		/datum/job/archivist,
 		/datum/job/magician,
 		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)

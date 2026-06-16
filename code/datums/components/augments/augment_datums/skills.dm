@@ -7,6 +7,9 @@
 	stability_cost = 0 // Skills are zero-cost by default
 
 /datum/augment/skill/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	var/datum/attribute_modifier/existing_modifier = H.attributes.has_attribute_modifier(/datum/attribute_modifier/augment)
 	var/list/new_values
 	if(existing_modifier)
@@ -17,6 +20,9 @@
 	H.attributes.add_or_update_variable_attribute_modifier(/datum/attribute_modifier/augment, TRUE, new_values)
 
 /datum/augment/skill/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	var/datum/attribute_modifier/existing_modifier = H.attributes.has_attribute_modifier(/datum/attribute_modifier/augment)
 	var/list/new_values
 	if(existing_modifier)
@@ -46,6 +52,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/wrestling = 20, /datum/attribute/skill/combat/unarmed = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/blade_processor
 	name = "blade trajectory processor"
@@ -53,6 +60,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/swords = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 18 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/whip_servo
 	name = "whip articulation servo"
@@ -60,6 +68,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/whipsflails = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 18 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/polearm_stabilizer
 	name = "polearm stability enhancer"
@@ -67,6 +76,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/polearms = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 18 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/shield_actuator
 	name = "shield response actuator"
@@ -74,6 +84,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/shields = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/crossbow_targeting
 	name = "crossbow targeting system"
@@ -81,6 +92,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/crossbows = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 20 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/bow_stabilizer
 	name = "bow draw stabilizer"
@@ -88,6 +100,7 @@
 	skill_changes = list(/datum/attribute/skill/combat/bows = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 20 SECONDS
+	stability_cost = -10
 
 /datum/augment/skill/cooking_guide
 	name = "culinary guide"
@@ -95,6 +108,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/cooking = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/smithing_optimizer
 	name = "smithing precision optimizer"
@@ -102,6 +116,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/blacksmithing = 20, /datum/attribute/skill/craft/smelting = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/weaponcraft_matrix
 	name = "weapon fabrication matrix"
@@ -109,6 +124,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/weaponsmithing = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 18 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/armorcraft_matrix
 	name = "armor fabrication matrix"
@@ -116,6 +132,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/armorsmithing = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 18 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/carpentry_guide
 	name = "carpentry guidance system"
@@ -123,6 +140,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/carpentry = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/masonry_analyzer
 	name = "masonry structural analyzer"
@@ -130,6 +148,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/masonry = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/engineering_core
 	name = "advanced engineering core"
@@ -137,6 +156,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/engineering = 20)
 	engineering_difficulty = SKILL_RANK_MASTER
 	installation_time = 25 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/alchemy_database
 	name = "alchemical database"
@@ -144,6 +164,7 @@
 	skill_changes = list(/datum/attribute/skill/craft/alchemy = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 20 SECONDS
+	stability_cost = -5
 
 // Skill augments - Labor skills
 /datum/augment/skill/mining_efficiency
@@ -152,6 +173,7 @@
 	skill_changes = list(/datum/attribute/skill/labor/mining = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/farming_analyzer
 	name = "agricultural analysis system"
@@ -159,6 +181,7 @@
 	skill_changes = list(/datum/attribute/skill/labor/farming = 20)
 	engineering_difficulty = SKILL_RANK_APPRENTICE
 	installation_time = 12 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/butchering_guide
 	name = "butchering precision guide"
@@ -166,6 +189,7 @@
 	skill_changes = list(/datum/attribute/skill/labor/butchering = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/lumberjack_optimizer
 	name = "lumber harvesting optimizer"
@@ -173,6 +197,7 @@
 	skill_changes = list(/datum/attribute/skill/labor/lumberjacking = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/medicine_database
 	name = "medical knowledge database"
@@ -180,6 +205,7 @@
 	skill_changes = list(/datum/attribute/skill/misc/medicine = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 20 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/lockpick_analyzer
 	name = "lock mechanism analyzer"
@@ -187,6 +213,7 @@
 	skill_changes = list(/datum/attribute/skill/misc/lockpicking = 20)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/climbing_optimizer
 	name = "climbing optimization module"
@@ -194,6 +221,7 @@
 	skill_changes = list(/datum/attribute/skill/misc/climbing = 20)
 	engineering_difficulty = SKILL_RANK_APPRENTICE
 	installation_time = 12 SECONDS
+	stability_cost = -5
 
 /datum/augment/skill/stealth_dampener
 	name = "acoustic dampening system"
@@ -201,3 +229,4 @@
 	skill_changes = list(/datum/attribute/skill/misc/sneaking = 20)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 18 SECONDS
+	stability_cost = -5

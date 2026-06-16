@@ -60,7 +60,6 @@
 	food_max = 250
 
 	dodgetime = 50
-	aggressive = TRUE
 	dendor_taming_chance = DENDOR_TAME_PROB_HIGH
 
 	remains_type = /obj/effect/decal/remains/troll

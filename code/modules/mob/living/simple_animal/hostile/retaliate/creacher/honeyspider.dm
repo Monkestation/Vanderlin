@@ -47,11 +47,12 @@
 	defdrain = 5
 	retreat_health = 0.2
 
-	aggressive = TRUE
 	stat_attack = UNCONSCIOUS
 	body_eater = TRUE
 
 	ai_controller = /datum/ai_controller/spider
+
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 	var/production = 0
 
@@ -110,32 +111,20 @@
 		if(L.reagents)
 			L.reagents.add_reagent(/datum/reagent/toxin/venom, 1)
 
-/mob/living/simple_animal/hostile/retaliate/spider/try_tame(obj/item/O, mob/living/carbon/human/user)
-	if(!stat)
-		user.visible_message("<span class='info'>[user] hand-feeds [O] to [src].</span>", "<span class='notice'>I hand-feed [O] to [src].</span>")
-		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-		SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
-		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
-		qdel(O)
-		if(is_species(user, /datum/species/elf/dark))
-			production += 50
-		else
-			production += 25
-		if(tame && owner == user)
-			return TRUE
-		var/realchance = tame_chance
-		if(is_species(user, /datum/species/elf/dark))
-			realchance += 15
-		if(realchance)
-			if(user.mind)
-				realchance += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/taming) * 20)
-			if(prob(realchance))
-				tamed(user)
-				var/boon = user.get_learning_boon(/datum/attribute/skill/labor/taming)
-				user.adjust_experience(/datum/attribute/skill/labor/taming, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*10) * boon)
-			else
-				tame_chance += bonus_tame_chance
-		return TRUE
+/mob/living/simple_animal/hostile/retaliate/spider/attempt_feed(obj/item/O, mob/living/carbon/human/user)
+	. = ..()
+	if(!.)
+		return
+
+	if(is_species(user, /datum/species/elf/dark))
+		production += 50
+	else
+		production += 25
+
+/mob/living/simple_animal/hostile/retaliate/spider/try_tame(mob/user, additional_tame_chance)
+	if(is_species(user, /datum/species/elf/dark))
+		additional_tame_chance += 15
+	. = ..(user, additional_tame_chance)
 
 /mob/living/simple_animal/hostile/retaliate/spider/death(gibbed)
 	..()

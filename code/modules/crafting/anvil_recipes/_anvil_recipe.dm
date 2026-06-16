@@ -1,150 +1,150 @@
 /datum/anvil_recipe
 	abstract_type = /datum/anvil_recipe
 	var/name
+	/// Category of crafted item. Will determine how it shows up in menus.
 	var/category = "Misc"
-	var/list/additional_items = list() // List of the object(s) we need to complete this recipe.
-	var/material_quality = 0 // Quality of the bar(s) used. Accumulated per added ingot.
-	var/num_of_materials = 1 // Total number of materials used. Quality divided among them.
-	var/skill_quality = 0 // Accumulated per hit based on calculations, will decide final result.
-	var/appro_skill = /datum/attribute/skill/craft/blacksmithing // The skill that will be taken into account when crafting.
-	var/atom/req_bar // The material of the ingot we need to craft.
-	var/atom/created_item // The item created when the recipe is fulfilled. Takes an object path as argument, NEVER USE A LIST.
-	var/createditem_extra = 0 // How many EXTRA units this recipe will create. At 1, this creates 2 copies.
-	var/craftdiff = 0 // Difficulty of craft. Affects final item quality and chance to advance steps.
-	var/needed_item // What item(s) we need to add to proceed to the next step. Draws from the list on var/additional_items.
-	var/needed_item_text // Name of the object we need to slap on the anvil to proceed to the next step.
-	var/progress = 0 // 0 to 100%, percentage of completion on this step of crafting (or overall if no extra items required)
-	var/i_type // Category of crafted item. Will determine how it shows on the crafting menu window.
-	var/recipe_name // This is what will be shown when you
-	var/numberofhits = 0 // Increased every time you hit the bar, the more you have to hit the bar the less quality of the product.
-	var/numberofbreakthroughs = 0 // How many good hits we got on the metal, advances recipes 50% faster, reduces number of hits total, and restores bar_health
-	var/datum/parent // The ingot we're currently working on.
+	/// Quality of the bar(s) used. Accumulated per added ingot.
+	var/material_quality = 0
+	/// Total number of materials (with quality) used. Quality divided among them.
+	var/num_of_materials = 1
+	/// The skill that will be taken into account when crafting.
+	var/appro_skill = /datum/attribute/skill/craft/blacksmithing
+	/// The typepath of the material we need to start the recipe.
+	var/obj/item/required_material
+	/// The item created when the recipe is fulfilled. SHOULD BE A TYPEPATH
+	var/atom/created_item
+	/// How much of the item does this recipe create?
+	var/output_amount = 1
+	/// Difficulty of craft. Affects difficulty of minigame and amount of minigames.
+	var/craftdiff = 0
+	/// List of the object(s) we need to complete this recipe.
+	var/list/additional_items
+	/// What item we need to add to proceed to the next step. Draws from the list on var/additional_items.
+	var/obj/item/needed_item
+	/// 0 to 100%, percentage of completion on this step of crafting (or overall if no extra items required)
+	var/progress = 0
+	/// Based on the performance of each minigame attempt.
+	var/accumulated_quality = 0
+	/// Based on skill level of everyone who worked on this recipe.
+	var/skill_quality
+	/// Increased each time the minigame is played. Used to average accumulated_quality and skill_quality.
+	var/numberofhits = 0
+	/// The item that the recipe currently applies to
+	var/datum/parent
 	var/rotations_required = 1
+	/// Set to FALSE if needs to be learned first
+	var/always_available = TRUE
 
 /datum/anvil_recipe/New(datum/P, ...)
 	parent = P
+	if(parent)
+		process_parent(parent)
 	. = ..()
 
-/datum/anvil_recipe/Destroy(force)
-	additional_items.Cut()
+/datum/anvil_recipe/Destroy(force, ...)
+	LAZYNULL(additional_items)
 	parent = null
-	req_bar = null
+	required_material = null
 	created_item = null
 	return ..()
 
-/datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE, quality_score = 0)
-	var/moveup = 1
-	var/proab = 0 // Probability to not spoil the bar
-	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, appro_skill)
+/datum/anvil_recipe/proc/process_parent(parent)
+	if(isitem(parent))
+		material_quality += parent:recipe_quality
 
+/datum/anvil_recipe/proc/can_advance(mob/user)
 	if(progress == 100)
-		to_chat(user, "<span class='info'>It's ready.</span>")
-		user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
+		to_chat(user, span_info("It's ready."))
 		return FALSE
 
 	if(needed_item)
-		to_chat(user, "<span class='info'>Now it's time to add a [needed_item_text].</span>")
-		user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
+		to_chat(user, span_notice("Now it's time to add \a [needed_item.name]."))
 		return FALSE
 
-	if(!skill_level)
-		proab = 40
-	else if(skill_level < 4)
-		proab = 40 + (skill_level * 15) // More gradual increase
-	else
-		proab = 100
+	return TRUE
 
-	proab -= craftdiff // Crafting difficulty subtracts from your chance
-	var/quality_bonus = 0
-	if(quality_score > 0)
-		if(quality_score >= 80)
-			quality_bonus = 40 // Excellent performance almost guarantees success
-		else if(quality_score >= 60)
-			quality_bonus = 25
-		else if(quality_score >= 40)
-			quality_bonus = 15
-		else if(quality_score >= 20)
-			quality_bonus = 5
-		if(skill_level < craftdiff)
-			quality_bonus = FLOOR(quality_bonus * 0.50, 1)
-		proab = min(proab + quality_bonus, 100)
+// Keep this simple, we can do the math and randomization in quality_manager
+/datum/anvil_recipe/proc/advance(mob/user, quality_score = 0)
+	if(!can_advance(user))
+		return FALSE
 
-	if(has_world_trait(/datum/world_trait/delver))
-		proab = 100
+	numberofhits++
+	accumulated_quality += quality_score
+	var/skill_level_to_add = GET_MOB_SKILL_VALUE_OLD(user, appro_skill)
+	skill_quality += skill_level_to_add
 
-	// Roll the dice to see if the hit actually causes progress
-	if(prob(proab) && quality_score > 0)
-		moveup += round((min(50, skill_level * 12)) * (breakthrough ? 1.5 : 1))
-		moveup += quality_bonus
-		moveup -= craftdiff
-		progress = min(progress + max(0, moveup), 100)
-		numberofhits++
-	else
-		moveup = 0
-		numberofhits++
+	var/progress_to_add = 100
+	switch(craftdiff)
+		if(0)
+			progress_to_add /= 2
+		if(1)
+			progress_to_add /= 2
+		if(2)
+			progress_to_add /= 3
+		if(3)
+			progress_to_add /= 3
+		if(4)
+			progress_to_add /= 4
+		if(5)
+			progress_to_add /= 4
+		if(6)
+			progress_to_add /= 5
+	// Progress scales based on additional_items to prevent multi-item recipes from taking too long
+	progress_to_add *= LAZYLEN(additional_items)+1
+	if(quality_score < MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
+		progress /= 2
+	progress += progress_to_add
 
-	// This step is finished, check if more items are needed
-	if(progress == 100 && additional_items.len)
-		needed_item = pick(additional_items)
-		var/obj/item/I = new needed_item()
-		needed_item_text = I.name
-		qdel(I)
-		additional_items -= needed_item
-		progress = 0
-
-	if(!moveup)
-		if(!prob(proab)) // Roll again for consequences
-			user.visible_message("<span class='warning'>[user] strikes poorly!</span>")
-			skill_quality -= 0.5
-			return FALSE
+	if(progress >= 100)
+		if(length(additional_items))
+			needed_item = pick_n_take(additional_items)
+			to_chat(user, span_notice("Now it's time to add \a [needed_item.name]."))
+			progress = 0
 		else
-			user.visible_message("<span class='warning'>[user] almost fumbles but recovers!</span>")
-			return FALSE
-	else
-		if(user.mind && isliving(user))
-			var/mob/living/L = user
-			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
-			var/boon = user.get_learning_boon(appro_skill)
-			if(amt2raise > 0)
-				if(!HAS_TRAIT(user, TRAIT_MALUMFIRE))
-					skill_quality += (rand(skill_level*6, skill_level*15) * moveup) // Lesser quality for self-learned non-professional smiths by trade
-					if(skill_level < 3) // Non-blacksmith jobs can't level past 3. Ever.
-						user.mind.add_sleep_experience(appro_skill, floor(amt2raise * boon), FALSE)
-				else
-					skill_quality += (rand(skill_level*8, skill_level*17) * moveup)
-					if(skill_level < 3)
-						amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure
-						user.mind.add_sleep_experience(appro_skill, amt2raise * boon, FALSE)
-					else // Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
-						user.mind.add_sleep_experience(appro_skill, amt2raise, FALSE)
+			to_chat(user, span_info("It's ready."))
 
-		if(breakthrough)
-			user.visible_message(span_greentext("[user] deftly strikes the bar!"))
-		else
-			user.visible_message(span_info("[user] strikes the bar!"))
-		return TRUE
+	return TRUE
 
-/datum/anvil_recipe/proc/item_added(mob/user)
+/datum/anvil_recipe/proc/item_added(obj/item/added_item, mob/user)
+	if(!needed_item)
+		return FALSE
+	if(!istype(added_item, needed_item))
+		return FALSE
+	user.visible_message(span_info("[user] adds \a [added_item.name]."))
+	if(istype(added_item, /obj/item/ingot))
+		material_quality += added_item.recipe_quality
+		num_of_materials++
+	qdel(added_item)
 	needed_item = null
-	user.visible_message(span_info("[user] adds a [needed_item_text]."))
-	needed_item_text = null
+	return TRUE
 
-
-/datum/anvil_recipe/proc/handle_creation(obj/item/I, minigame_success = 30,skill_level = 0)
+/datum/anvil_recipe/proc/handle_creation(atom/output_location, mob/user)
 	var/datum/quality_calculator/blacksmithing/quality_calc = new(
-		base_qual = 0,
 		mat_qual = material_quality,
-		skill_qual = skill_level, // Pass the success score here
-		perf_qual = numberofhits,
+		skill_qual = skill_quality,
+		components = num_of_materials,
+		perf_qual = accumulated_quality,
 		diff_mod = craftdiff,
-		components = num_of_materials
+		mini_play = numberofhits
 	)
-	quality_calc.minigame_success = minigame_success
 
-	quality_calc.apply_quality_to_item(I, TRUE)
-	I.add_quench_requirement()
-	addtimer(CALLBACK(I, TYPE_PROC_REF(/obj/item, remove_quench)), 60 SECONDS)
+	for(var/i in 1 to output_amount)
+		var/obj/item/output_item = new created_item(output_location)
+		handle_output(output_item, quality_calc)
+		output_item.OnCrafted(user?.dir, user)
+
 	qdel(quality_calc)
 
-/datum/anvil_recipe/proc/get_display_name()
-	return recipe_name || name
+/datum/anvil_recipe/proc/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
+	quality_calculator.apply_quality_to_item(output_item, TRUE)
+	output_item.add_quench_requirement("recipe_creation", 60 SECONDS)
+
+/datum/anvil_recipe/proc/is_recipe_available(mob/user)
+	if(has_world_trait(/datum/world_trait/delver))
+		if(!has_recipe_unlocked(user.key, type))
+			return FALSE
+
+	if(!always_available && !(type in user?.mind?.learned_recipes))
+		return FALSE
+
+	return TRUE

@@ -50,7 +50,9 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
 
-#define istransparentturf(A) (HAS_TRAIT(A, TRAIT_Z_TRANSPARENT))
+#define istransparentturf(A) (HAS_TRAIT(A, TURF_Z_TRANSPARENT_TRAIT))
+
+#define iswaterturf(A) (istype(A, /turf/open/water))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -90,8 +92,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isgoblin(A) (is_species(A, /datum/species/goblin))
 #define isorc(A) (is_species(A, /datum/species/orc))
-//more carbon mobs
-#define ismonkey(A) (istype(A, /mob/living/carbon/monkey))
 
 //Simple animals
 #define isanimal(A) (istype(A, /mob/living/simple_animal))
@@ -136,6 +136,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isfuse(A) (istype(A, /obj/item/fuse))
 
 #define isscabbard(A) (istype(A, /obj/item/weapon/scabbard))
+
+#define isammocasing(A) (istype(A, /obj/item/ammo_casing))
 
 #define isstructure(A) (istype(A, /obj/structure))
 

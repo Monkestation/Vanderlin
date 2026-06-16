@@ -5,11 +5,21 @@
 	icon_state = "lungs"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_LUNGS
+	organ_efficiency = list(ORGAN_SLOT_LUNGS = 100)
 	gender = PLURAL
 	w_class = WEIGHT_CLASS_SMALL
 
-	healing_factor = STANDARD_ORGAN_HEALING
-	decay_factor = STANDARD_ORGAN_DECAY
+	maxHealth = STANDARD_ORGAN_THRESHOLD * 0.8
+	high_threshold = STANDARD_ORGAN_THRESHOLD * 0.4
+	low_threshold = STANDARD_ORGAN_THRESHOLD * 0.2
+
+	organ_volume = 1
+	max_blood_storage = 25
+	current_blood = 25
+	blood_req = 2
+	oxygen_req = 4
+	nutriment_req = 1.2
+	hydration_req = 1.2
 
 	high_threshold_passed = "<span class='warning'>I feel some sort of constriction around my chest as my breathing becomes shallow and rapid.</span>"
 	now_fixed = "<span class='warning'>My lungs seem to once again be able to hold air.</span>"
@@ -17,20 +27,64 @@
 
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 
-/obj/item/organ/lungs/on_life()
-	..()
-	if((!failed) && ((organ_flags & ORGAN_FAILING)))
-		if(owner.stat == CONSCIOUS)
-			owner.visible_message("<span class='danger'>[owner] grabs [owner.p_their()] throat, struggling for breath!</span>", \
-								"<span class='danger'>I suddenly feel like you can't breathe!</span>")
-		failed = TRUE
-	else if(!(organ_flags & ORGAN_FAILING))
+/obj/item/organ/lungs/applyOrganDamage(d, maximum)
+	. = ..()
+	if(!.)
+		return
+
+	if(failed && !is_failing())
 		failed = FALSE
-	return
+		return
+
+	if(is_failing() && owner?.stat == CONSCIOUS)
+		owner.visible_message(span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"), span_userdanger("You suddenly feel like you can't breathe!"))
+		failed = TRUE
+
+/obj/item/organ/lungs/proc/cough_blood(delta_time)
+	if(!owner || !is_bruised())
+		return
+
+	var/cough_prob = 2.5
+	if(damage >= medium_threshold)
+		cough_prob = 5
+
+	if(!SPT_PROB(cough_prob, delta_time)) // between : past high
+		return
+
+	if((damage >= medium_threshold) && prob(33))
+		owner.visible_message(span_danger("[owner] coughs up blood!"), span_userdanger("You cough up blood!"))
+		var/obj/item/covering = owner.is_mouth_covered()
+		if(covering)
+			covering.add_mob_blood(owner)
+		else if(isturf(owner.loc))
+			owner.add_splatter_floor()
+		owner.bleed(round(damage / 8))
+		playsound(owner, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 33, TRUE)
+	else
+		owner.emote(pick("weeze", "cough"))
+	owner.losebreath = min(owner.losebreath + round(damage / 100, 0.1), 4)
+
+/obj/item/organ/lungs/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s lips and fingertips have a faint bluish tinge, and [owner.p_their()] chest rises and falls in rapid, shallow heaves.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b>'s breathing is visibly rapid and labored.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b>'s breathing seems slightly faster than normal.")
+
+
+/obj/item/organ/lungs/get_availability(datum/species/S)
+	return !(TRAIT_NOBREATH in S.inherent_traits)
 
 /obj/item/organ/lungs/prepare_eat()
 	var/obj/S = ..()
 	return S
+
+/obj/item/organ/lungs/regenerate_organ()
+	. = ..()
+	failed = FALSE
 
 /obj/item/organ/lungs/plasmaman
 	name = "plasma filter"

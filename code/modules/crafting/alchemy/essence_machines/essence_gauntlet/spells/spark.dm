@@ -5,6 +5,7 @@
 	sound = 'sound/magic/fireball.ogg'
 	cast_range = 1
 	attunements = list(/datum/attunement/fire)
+	essences = list(/datum/thaumaturgical_essence/fire)
 
 /datum/action/cooldown/spell/essence/spark/cast(atom/cast_on)
 	. = ..()

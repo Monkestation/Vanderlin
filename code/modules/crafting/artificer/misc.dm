@@ -146,7 +146,7 @@
 /datum/artificer_recipe/weapons/crossbow
 	name = "Crossbow (+1 Steel) (+2 Fibers)"
 	required_item = /obj/item/natural/wood/plank
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	created_item = /obj/item/gun/ballistic/bow/cross
 	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/natural/fibers = 2)
 	hammers_per_item = 7
 	craftdiff = 4
@@ -162,7 +162,7 @@
 /datum/artificer_recipe/weapons/airgun
 	name = "Airgun (+2 Cured Leather) (+3 Bronze) (+4 Metal Gear)"
 	required_item = /obj/item/ingot/steel
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/airgun
+	created_item = /obj/item/gun/ballistic/airgun
 	additional_items = list(/obj/item/natural/hide/cured = 2, /obj/item/ingot/bronze = 3, /obj/item/gear/metal = 4)
 	hammers_per_item = 10
 	craftdiff = 5
@@ -231,7 +231,7 @@
 /datum/artificer_recipe/contraptions/advanced_ingot_mold
 	name = "Advanced Ingot Mold (+1 Ingot Mold) (+1 Metal Gear) (+1 Bucket)"
 	required_item = /obj/item/ingot/bronze
-	additional_items = list(/obj/item/mould/ingot = 1, /obj/item/gear/metal = 1, /obj/item/reagent_containers/glass/bucket/wooden = 1)
+	additional_items = list(/obj/item/mould/ingot = 1, /obj/item/gear/metal = 1, /obj/item/reagent_containers/glass/bucket = 1)
 	created_item = /obj/item/mould/ingot/advanced
 	hammers_per_item = 6
 	craftdiff = 3
@@ -303,6 +303,14 @@
 	name = "Lead Bullets 4x"
 	hammers_per_item = 4
 	created_item = /obj/item/ammo_casing/caseless/bullet
+	required_item = /obj/item/ingot/tin
+	craftdiff = 2
+	created_amount = 4
+
+/datum/artificer_recipe/ammo/lead_pellet
+	name = "Pellet shots 4x"
+	hammers_per_item = 4
+	created_item = /obj/item/ammo_casing/caseless/pelletshot
 	required_item = /obj/item/ingot/tin
 	craftdiff = 2
 	created_amount = 4
@@ -493,6 +501,21 @@
 	name = "Undivided Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/divine
+
+/datum/artificer_recipe/psycross/matthios
+	name = "Matthios Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/matthios
+
+/datum/artificer_recipe/psycross/graggar
+	name = "Graggar Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/graggar
+
+/datum/artificer_recipe/psycross/baotha
+	name = "Baotha Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/baotha
 
 /datum/artificer_recipe/psycross/noc
 	name = "Noc Psycross"

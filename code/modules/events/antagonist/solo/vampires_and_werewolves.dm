@@ -11,15 +11,14 @@
 	roundstart = TRUE
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
-	denominator = 40
 
 	base_antags = 4
 	maximum_antags = 4
-
 	cost = 1.1
+	min_players = HIGHPOP_THRESHOLD * READYUP_AVG
+	denominator = LOWPOP_THRESHOLD * READYUP_AVG
 
 	earliest_start = 0 SECONDS
-	min_players = HIGHPOP_THRESHOLD
 	weight = 8
 	secondary_prob = 0
 	typepath = /datum/round_event/antagonist/solo/vampires_and_werewolves
@@ -35,16 +34,18 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
 		/datum/job/magician,
 		/datum/job/archivist,
-		/datum/job/bogwitch,
-		/datum/job/bog_apprentice,,
 		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event_control/antagonist/solo/vampires_and_werewolves/valid_for_map()

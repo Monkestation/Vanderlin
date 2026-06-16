@@ -36,13 +36,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	if(!istype(examined))
 		return
-	if(NOBLOOD in examined.dna?.species?.species_traits)
+	if(!CAN_HAVE_BLOOD(examined))
 		return
+	var/cached_blood_volume = examined.get_blood_volume()
 	var/vitae = 0
 	var/datum/blood_type/BT = examined.get_blood_type()
 	if(istype(BT) && BT.vitae)
-		vitae = round(examined.blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
+		vitae = round(cached_blood_volume * BT.vitae)
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
@@ -215,8 +216,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // LANDMARKS
 /obj/effect/landmark/start/vampirelord
 	name = "Vampire Lord"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirelord/Initialize()
 	. = ..()
@@ -224,8 +225,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampirespawn
 	name = "Vampire Spawn"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirespawn/Initialize()
 	. = ..()
@@ -233,9 +234,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampireknight
 	name = "Death Knight"
-	icon_state = "arrow"
-	jobspawn_override = list("Death Knight")
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	jobs_to_spawn = list("Death Knight")
+	custom_handling = TRUE
 
 /obj/effect/landmark/vteleport
 	name = "Teleport Destination"

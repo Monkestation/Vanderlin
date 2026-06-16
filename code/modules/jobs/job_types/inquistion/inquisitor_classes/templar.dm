@@ -3,7 +3,7 @@
 		STAT_STRENGTH = 2,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 2,
-		STAT_SPEED = -2,
+		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/whipsflails = 30,
@@ -58,7 +58,7 @@
 
 	var/static/list/armors = list(
 		"Hauberk" = /obj/item/clothing/armor/chainmail/hauberk/fluted,
-		"Cuirass" = /obj/item/clothing/armor/cuirass/fluted,
+		"Cuirass" = /obj/item/clothing/armor/cuirass/ornate,
 	)
 	spawned.select_equippable(player_client, armors, message = "Choose your ARMOR.", title = "TAKE UP PSYDON'S MANTLE.")
 

@@ -39,6 +39,9 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
 	item_weight = 3.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -72,9 +75,9 @@
 	if(check_zone(user.zone_selected) != BODY_ZONE_CHEST)
 		return
 	var/mob/living/carbon/human/H = target
-	var/heart_crit = H.has_wound(/datum/wound/artery/chest)
+	var/heart_crit = H.has_wound(/datum/wound/artery/heart)
 	var/dead = H.stat == DEAD
-	if((H.health < H.crit_threshold) || heart_crit || dead)
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) || heart_crit || dead)
 		var/fast = heart_crit || dead
 		var/obj/item/organ/heart/heart = H.getorganslot(ORGAN_SLOT_HEART)
 		if(!heart)
@@ -86,7 +89,8 @@
 			heart.forceMove(H.drop_location())
 
 			H.add_splatter_floor()
-			H.adjustBruteLoss(20)
+			var/obj/item/bodypart/chest = H.get_bodypart(BODY_ZONE_CHEST)
+			chest.bodypart_attacked_by(BCLASS_PIERCE, 50, incoming_germ = germ_level)
 			to_chat(user, span_notice("I finish pulling the heart from [H]!"))
 	. = ..()
 
@@ -114,6 +118,9 @@
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
 	item_weight = 3 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -141,7 +148,7 @@
 	if(H.get_lux_status() != LUX_HAS_LUX)
 		return
 	var/dead = H.stat == DEAD
-	if((H.health < H.crit_threshold) || dead)
+	if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) || dead)
 		var/speed = dead ? 3 SECONDS : 7 SECONDS
 		visible_message(user, span_notice("Neant lights up and begins to tear at [target]..."))
 		if(!do_after(user, speed, H))
@@ -151,7 +158,7 @@
 			return
 		playsound(user, 'sound/surgery/scalpel2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
-			C.add_wound(/datum/wound/slash/incision)
+			C.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO/6, surgical = TRUE)
 
 		playsound(user, 'sound/surgery/organ2.ogg', 70)
 		if(do_after(user, 0.5 SECONDS, target))
@@ -165,7 +172,8 @@
 		record_round_statistic(STATS_LUX_HARVESTED)
 
 		H.add_splatter_floor()
-		H.adjustBruteLoss(20)
+		var/obj/item/bodypart/chest = H.get_bodypart(BODY_ZONE_CHEST)
+		chest.bodypart_attacked_by(BCLASS_PIERCE, 50, incoming_germ = germ_level)
 		visible_message(user, span_notice("Neant's blade draws the lux from [target]!"))
 
 /obj/item/weapon/polearm/neant/proc/handle_magick(mob/living/user, atom/target)
@@ -216,31 +224,14 @@
 	icon_state = "neantspecial"
 	duration = 4
 
-/datum/intent/shoot/neant
-	name = "shoot"
-	icon_state = "inshoot"
-	warnie = "aimwarn"
-	item_damage_type = "stab"
-	tranged = TRUE
-	chargetime = 2 SECONDS
-	no_early_release = TRUE
-	noaa = TRUE
-	charging_slowdown = 2
-
-/datum/intent/shoot/neant/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] aims [master_item]!</span>")
-
 //┌─────────────── TURBULENTA ───────────────┐//
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta
+/obj/item/gun/ballistic/bow/turbulenta
 	name = "turbulenta"
 	desc = "Rarely does she even care about combat, but when she does... Baotha was quite the markswoman."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "turbulenta"
-	base_icon = "turbulenta"
+	base_icon_state = "turbulenta"
 	slot_flags = ITEM_SLOT_BACK
 	SET_BASE_PIXEL(-16, -16)
 	bigboy = TRUE
@@ -248,15 +239,18 @@
 	fire_sound = 'sound/combat/Ranged/turbulentafire.ogg'
 	possible_item_intents = list(/datum/intent/shoot/bow/turbulenta, /datum/intent/arc/bow/turbulenta)
 	force = 12
-	damfactor = 1.1
+
+	projectile_damage_multiplier = 1.1
+
 	item_weight = 2 KILOGRAMS
+
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Initialize(mapload, ...)
+/obj/item/gun/ballistic/bow/turbulenta/Initialize(mapload, ...)
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/baotha, PUNISHMENT_STRESS, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/getonmobprop(tag)
+/obj/item/gun/ballistic/bow/turbulenta/getonmobprop(tag)
 	if(tag)
 		switch(tag)
 			if("gen")
@@ -308,63 +302,44 @@
 					"westabove" = FALSE,
 				)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Initialize(mapload, ...)
+/obj/item/gun/ballistic/bow/turbulenta/Initialize(mapload, ...)
 	. = ..()
 	FUCK = new(src)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Destroy(force)
+/obj/item/gun/ballistic/bow/turbulenta/Destroy(force)
 	QDEL_NULL(FUCK)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/attack_self(mob/living/user, list/modifiers)
+/obj/item/gun/ballistic/bow/turbulenta/attack_self(mob/living/user, list/modifiers)
 	if(chambered || !HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return ..()
 	FUCK.attack_self(user, modifiers)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/dropped(mob/user, silent)
+/obj/item/gun/ballistic/bow/turbulenta/dropped(mob/user, silent)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/pre_attack(atom/A, mob/living/user, list/modifiers)
+/obj/item/gun/ballistic/bow/turbulenta/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/before_firing(atom/target, mob/user)
+/obj/item/gun/ballistic/bow/turbulenta/before_firing(atom/target, mob/user)
 	if(!HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return
-	var/obj/projectile/arrow = chambered?.BB
+	var/obj/projectile/arrow = chambered?.loaded_projectile
 	var/old_dam
 	var/old_pen
 	if(arrow)
 		old_dam = arrow.damage
 		old_pen = arrow.armor_penetration
+		chambered.loaded_projectile = null
 		qdel(arrow)
-	arrow = new /obj/projectile/bullet/reusable/arrow/spiced
+	arrow = new /obj/projectile/bullet/reusable/arrow/spiced(chambered)
 	arrow.damage = old_dam || arrow.damage
 	arrow.armor_penetration = old_pen || arrow.armor_penetration
-	chambered.BB = arrow
-
-/obj/projectile/bullet/reusable/arrow/spiced
-	name = "spiced arrow"
-	desc = "A profane arrow infused with spice."
-	icon_state = "arrowspice_proj"
-	ammo_type = /obj/item/ammo_casing/caseless/arrow
-
-/obj/projectile/bullet/reusable/arrow/spiced/Initialize(mapload, ...)
-	. = ..()
-	reagents.add_reagent(/datum/reagent/druqks, 20)
-
-/datum/intent/shoot/bow/turbulenta
-	chargetime = 1
-	chargedrain = 1.5
-	charging_slowdown = 2.5
-
-/datum/intent/arc/bow/turbulenta
-	chargetime = 1
-	chargedrain = 1.5
-	charging_slowdown = 2.5
+	chambered.loaded_projectile = arrow
 
 //┌─────────────── PLEONEXIA ───────────────┐//
 /obj/item/weapon/sword/long/pleonexia
@@ -377,6 +352,9 @@
 	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -440,6 +418,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -472,6 +453,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -522,6 +506,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -546,6 +533,9 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()

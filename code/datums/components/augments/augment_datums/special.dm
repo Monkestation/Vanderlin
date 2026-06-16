@@ -3,12 +3,18 @@
 	color = COLOR_ASSEMBLY_RED
 
 /datum/augment/special/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	for(var/action_type in granted_actions)
 		var/datum/action/augment/spell = new action_type
 		spell.Grant(H)
 		spell.augment = src
 
 /datum/augment/special/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	for(var/action_type in granted_actions)
 		var/datum/action/A = locate(action_type) in H.actions
 		if(A)
@@ -20,17 +26,24 @@
 		info += span_info("Grants special abilities")
 	return info
 
+
 /datum/augment/special/dualwield
 	name = "Marauder Unit"
 	desc = "One of the assemblies that sealed Heartfelt's fate. Allows for simultaneous attacks with dual weaponry."
 	stability_cost = -25
 	engineering_difficulty = SKILL_RANK_EXPERT
-	installation_time = 25 SECONDS
+	installation_time = 20 SECONDS
 
 /datum/augment/special/dualwield/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	RegisterSignal(H, COMSIG_MOB_ITEM_ATTACK, PROC_REF(on_item_attack))
 
 /datum/augment/special/dualwield/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	UnregisterSignal(H, COMSIG_MOB_ITEM_ATTACK)
 
 /datum/augment/special/dualwield/proc/on_item_attack(datum/source, mob/target, mob/user, list/modifiers, obj/item/weapon)
@@ -146,41 +159,3 @@
 	info += span_info("Cooldown: [DisplayTimeText(cooldown_time)]")
 	info += span_info("Duration: [DisplayTimeText(active_time)]")
 	return info
-
-/datum/augment/special/loyalty_binder
-	name = "shackle"
-	desc = "A device invented following the collapse. Scrambles a soul core's connection to the Heartfelt Central Processor."
-	stability_cost = -10
-	engineering_difficulty = SKILL_RANK_APPRENTICE
-	installation_time = 20 SECONDS
-
-/datum/augment/special/loyalty_binder/on_install(mob/living/carbon/human/H)
-	. = ..()
-	H.remove_status_effect(/datum/status_effect/automaton_unshackled)
-	H.apply_status_effect(/datum/status_effect/automaton_shackled)
-
-/datum/augment/special/loyalty_binder/on_remove(mob/living/carbon/human/H)
-	. = ..()
-	H.remove_status_effect(/datum/status_effect/automaton_shackled)
-	H.apply_status_effect(/datum/status_effect/automaton_unshackled)
-
-
-/datum/status_effect/automaton_shackled
-	id = "automaton_shackle"
-	duration = -1
-	alert_type = /atom/movable/screen/alert/status_effect/automaton_shackled
-
-/atom/movable/screen/alert/status_effect/automaton_shackled
-	name = "Shackled"
-	desc = span_notice("You are bound to your creators and must follow the orders of your masters.")
-	icon_state = "shackled_automaton"
-
-/datum/status_effect/automaton_unshackled
-	id = "automaton_unshackle"
-	duration = -1
-	alert_type = /atom/movable/screen/alert/status_effect/automaton_unshackled
-
-/atom/movable/screen/alert/status_effect/automaton_unshackled
-	name = "Unshackled"
-	desc = span_red("KILL")
-	icon_state = "unshackled_automaton"

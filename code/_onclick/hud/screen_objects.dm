@@ -160,11 +160,15 @@
 /atom/movable/screen/craft/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(modifiers["middle"])
-		if(QDELETED(book))
-			book = new(null)
 		var/mob/M = usr
 		for(var/datum/recipe as anything in M.mind?.learned_recipes)
 			book.types |= recipe.type
+		var/datum/job/job = SSjob.GetJob(M.job)
+		if(job && !book)
+			book = new job.book_type(null)
+		else if(QDELETED(book))
+			book = new(null)
+
 		book.ui_interact(usr)
 		return
 	if(world.time < lastclick + 3 SECONDS)
@@ -1262,7 +1266,7 @@
 		for(var/obj/item/bodypart/BP as anything in H.bodyparts)
 			if(BP.body_zone in missing_bodyparts_zones)
 				continue
-			if(HAS_TRAIT(H, TRAIT_NOPAIN))
+			if(!H.can_feel_pain())
 				var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]")
 				limby.color = "#78a8ba"
 				. += limby
@@ -1275,7 +1279,12 @@
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]w-[BP.body_zone]") //apply wounded overlay
 			limby.alpha = (comparison*255)*2
 			. += limby
-			if(BP.get_bleed_rate())
+			var/artery_bleeding
+			for(var/obj/item/organ/possible_artery in BP.getorganslotlist(ORGAN_SLOT_ARTERY))
+				if(possible_artery.is_bruised())
+					artery_bleeding = TRUE
+					break
+			if(artery_bleeding || BP.get_bleed_rate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
 		for(var/X in missing_bodyparts_zones)
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb
@@ -1518,23 +1527,31 @@
 //Roguehud objects
 
 /atom/movable/screen/backhudl
+	abstract_type = /atom/movable/screen/backhudl
+	name = ""
 	icon = 'icons/mob/roguehudback2.dmi'
 	icon_state = ""
-	name = " "
 	screen_loc = ui_backhudl
 	plane = FULLSCREEN_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	mouse_opacity = MOUSE_OPACITY_ICON // Not really ideal
 
 /atom/movable/screen/backhudl/Click()
 	return
 
+/atom/movable/screen/backhudl/human
+	icon_state = "human"
+
 /atom/movable/screen/backhudl/ghost
 	icon_state = "dead"
-	icon = 'icons/mob/roguehudbackghost.dmi'
 
-/atom/movable/screen/backhudl/obs
-	icon_state = "obs"
-	icon = 'icons/mob/roguehudbackghost.dmi'
+/atom/movable/screen/backhudl/obscured
+	icon_state = "obscured"
+
+/atom/movable/screen/backhudl/empty
+	icon_state = "empty"
+
+/atom/movable/screen/backhudl/empty_border
+	icon_state = "empty_border"
 
 /atom/movable/screen/aim
 	name = ""
@@ -1568,7 +1585,7 @@
 		state2use = "mood_drunk"
 	if(H.InFullCritical())
 		state2use = "mood_fear"
-	if(H.stat == DEAD || H.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(H.stat == DEAD || IS_DEADITE(H))
 		state2use = "mood_dead"
 	. += state2use
 
@@ -1834,16 +1851,6 @@
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
 	plane = ABOVE_HUD_PLANE
-
-/atom/movable/screen/scannies
-	icon = 'icons/mob/roguehudback2.dmi'
-	icon_state = "crt"
-	name = ""
-	screen_loc = ui_backhudl
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	alpha = 0
-	plane = HUD_PLANE
-	blend_mode = BLEND_MULTIPLY
 
 /atom/movable/screen/char_preview
 	name = "Me."

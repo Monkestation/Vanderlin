@@ -22,7 +22,7 @@
 	)
 
 /datum/job/advclass/combat/bard
-	title = "Bard"
+	title = JOB_BARD
 	tutorial = "Bards make up one of the largest populations of \
 	registered adventurers in Vanderlin, mostly because they are \
 	the last ones in a party to die. Their wish is to experience \
@@ -43,13 +43,13 @@
 	)
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/combat/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'

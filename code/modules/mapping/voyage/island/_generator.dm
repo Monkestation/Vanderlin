@@ -647,7 +647,7 @@
 			var/chosen = pickweight(valid_fauna)
 			if(chosen)
 				var/mob/living/mob = new chosen(T)
-				mob.faction |= "islander"
+				mob.add_faction("islander")
 				SSisland_mobs.register_mob(mob)
 
 

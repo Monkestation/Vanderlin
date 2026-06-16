@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/vigor
 	name = "Vigor"
 	desc = "Increases physical strength and endurance temporarily."
-	button_icon_state = "vigor"
+	button_icon_state = "bat_transform"
 	cast_range = 1
 	point_cost = 4
 	attunements = list(/datum/attunement/life)
+	essences = list(/datum/thaumaturgical_essence/life)
 
 /datum/action/cooldown/spell/essence/vigor/cast(atom/cast_on)
 	. = ..()

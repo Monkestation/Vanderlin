@@ -35,11 +35,10 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/lieutenant::title,
 	/datum/job/men_at_arms::title,
 	/datum/job/gatemaster::title,
-	/datum/job/jailor::title,
 	/datum/job/dungeoneer::title,
 	/datum/job/town_elder::title,
-	/datum/job/forestwarden::title,
-	/datum/job/forestguard::title,
+	/datum/job/forestwarden_classic::title,
+	/datum/job/forestguard_classic::title,
 	/datum/job/persistence/caravanguard::title,
 	))
 GLOBAL_PROTECT(garrison_positions)
@@ -50,8 +49,20 @@ GLOBAL_LIST_INIT(garrison_no_rebellion, list(
 	/datum/job/lieutenant::title,
 	/datum/job/gatemaster::title,
 	/datum/job/forestwarden::title,
+	/datum/job/forestenforcer::title,
 ))
 GLOBAL_PROTECT(garrison_no_rebellion)
+
+GLOBAL_LIST_INIT(gallowband_positions, list(
+	/datum/job/forestwarden::title,
+	/datum/job/forestenforcer::title,
+	/datum/job/forestpreacher::title,
+	/datum/job/forestsupport::title,
+	/datum/job/forestguard::title,
+	/datum/job/bogwitch::title,
+	/datum/job/bog_apprentice::title,
+))
+GLOBAL_PROTECT(gallowband_positions)
 
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
@@ -82,7 +93,6 @@ GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/matron::title,
 	/datum/job/feldsher::title,
 	/datum/job/apothecary::title,
-	/datum/job/scribe::title,
 	/datum/job/tomb_warden::title,
 	/datum/job/butler::title,
 	/datum/job/persistence/carpenter::title,
@@ -103,6 +113,7 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	/datum/job/bard::title,
 	/datum/job/prisoner::title,
 	/datum/job/vagrant::title,
+	/datum/job/sweeper::title,
 	/datum/job/persistence/woodsman::title,
 	/datum/job/persistence/miner::title,
 	/datum/job/persistence/farmer::title,
@@ -135,8 +146,6 @@ GLOBAL_LIST_INIT(company_positions, list(
 GLOBAL_PROTECT(company_positions)
 
 GLOBAL_LIST_INIT(allmig_positions, list(
-	/datum/job/bogwitch::title,
-	/datum/job/bog_apprentice::title,
 	/datum/job/pilgrim::title,
 	/datum/job/adventurer::title,
 	/datum/job/mercenary::title,
@@ -144,7 +153,7 @@ GLOBAL_LIST_INIT(allmig_positions, list(
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(
-	"Adventurer",
+	JOB_ADVENTURER,
 	))
 
 GLOBAL_LIST_INIT(test_positions, list(
@@ -157,6 +166,7 @@ GLOBAL_LIST_EMPTY(job_assignment_order)
 	var/list/sorting_order = list()
 	sorting_order += GLOB.noble_positions
 	sorting_order += GLOB.garrison_positions
+	sorting_order += GLOB.gallowband_positions
 	sorting_order += GLOB.church_positions
 	sorting_order += GLOB.inquisition_positions
 	sorting_order += GLOB.serf_positions

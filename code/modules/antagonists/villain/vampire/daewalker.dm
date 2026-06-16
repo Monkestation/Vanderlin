@@ -108,12 +108,12 @@
 	blade.grant_language(/datum/language/oldpsydonic)
 	blade.add_quirk(/datum/quirk/vice/godfearing)
 
-	RegisterSignal(blade, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(blade, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/antagonist/vampire/lord/daewalker/on_removal()
 	if(owner.current)
 		owner.current.remove_stat_modifier("[type]")
-		UnregisterSignal(owner.current, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(owner.current, COMSIG_ATOM_EXAMINE)
 	. = ..()
 
 /datum/antagonist/vampire/lord/daewalker/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
@@ -171,7 +171,7 @@
 	ring =  /obj/item/clothing/ring/active/nomag
 
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	backl = /obj/item/storage/backpack/satchel/otavan
 	backr = /obj/item/weapon/scabbard/sword/noble
@@ -200,7 +200,7 @@
 
 /obj/item/weapon/sword/long/daewalker/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/vampiric)
+	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/silver)
 	RegisterSignal(src, COMSIG_ITEM_AFTER_PICKUP, PROC_REF(hands_off))
 

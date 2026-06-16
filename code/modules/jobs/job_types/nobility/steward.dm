@@ -13,7 +13,7 @@
 	)
 
 /datum/job/steward
-	title = "Steward"
+	title = JOB_STEWARD
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: \
 	You're addicted to it, and you hold the position as the King's personal treasurer of both coin and information. \
 	You know the power silver and gold has on a man's mortal soul, \
@@ -62,9 +62,8 @@
 	spawned.virginity = TRUE
 
 /datum/outfit/steward
-	name = "Steward"
+	name = JOB_STEWARD
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
-	shirt = /obj/item/clothing/shirt/dress/stewarddress
 	head = /obj/item/clothing/head/stewardtophat
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/gambeson/steward
@@ -77,9 +76,3 @@
 		/obj/item/storage/belt/pouch/coins/rich = 1,
 		/obj/item/lockpickring/mundane = 1
 	)
-
-/datum/outfit/steward/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.gender == MALE)
-		shirt = /obj/item/clothing/shirt/undershirt/fancy
-		pants = /obj/item/clothing/pants/trou/leathertights

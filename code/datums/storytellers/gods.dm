@@ -37,7 +37,7 @@
 	welcome_text = "The veil between realms shimmers in your presence."
 	weight = 4
 	always_votable = TRUE
-	roundstart_prob = 75
+	roundstart_prob = 70
 	follower_modifier = STANDARD_FOLLOWER_MODIFIER
 	color_theme = "#F0F0F0"
 
@@ -152,7 +152,7 @@
 	color_theme = "#AA8888"
 	event_repetition_multiplier = 0
 	forced = TRUE
-	roundstart_prob = 80
+	roundstart_prob = 75
 
 	tag_multipliers = list(
 		TAG_XYLIX = 3,
@@ -187,6 +187,9 @@
 		"Set 5" = list(
 			STATS_SONGS_PLAYED = list("name" = "Songs played:", "points" = 0.775, "capacity" = 70),
 			STATS_MOAT_FALLERS = list("name" = "Moat fallers:", "points" = 5, "capacity" = 50),
+		),
+		"Set 6" = list(
+			STATS_CRUEL_PRANKS = list("name" = "Cruel Pranks:", "points" = 80, "capacity" = 240)
 		)
 	)
 
@@ -197,7 +200,6 @@
 	weight = 4
 	always_votable = TRUE
 	color_theme = "#888888"
-	roundstart_prob = 80
 
 	tag_multipliers = list(
 		TAG_NECRA = 3,
@@ -253,7 +255,7 @@
 			STATS_ANIMALS_BRED = list("name" = "Animals bred:", "points" = 1.5, "capacity" = 60),
 		),
 		"Set 2" = list(
-			STATS_WOUNDS_SEWED = list("name" = "Wounds sewed up:", "points" = 0.75, "capacity" = 90),
+			STATS_WOUNDS_FIXED = list("name" = "Wounds sewed up:", "points" = 0.75, "capacity" = 90),
 		),
 		"Set 3" = list(
 			STATS_LUX_HARVESTED = list("name" = "Lux extracted:", "points" = 8, "capacity" = 70),

@@ -92,12 +92,8 @@
 	if(hoodtype)
 		MakeHood()
 
-
-/obj/item/clothing/Initialize(mapload, ...)
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
 	if(wetable)
 		wet = new(src)
-	return ..()
 
 /obj/item/clothing/Destroy()
 	user_vars_remembered = null //Oh god somebody put REFERENCES in here? not to worry, we'll clean it up
@@ -573,14 +569,14 @@ BLIND     // can't see anything
 	if(proper_drying && !C.has_stress_type(/datum/stress_event/washed_cloth))
 		C.add_stress(/datum/stress_event/washed_cloth)
 		proper_drying = FALSE
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle))
 
 	if(wet.use_water(0.7))
 		if(HAS_TRAIT(C, TRAIT_NOBLE_BLOOD) && wet.water_stacks == 0)
 			C.add_stress(/datum/stress_event/noble_tarnished_cloth)
 
+		if(wet.dirty_water)
+			C.adjust_germ_level_directed(0.5 * wet.water_stacks, body_zone = slot2body_zone(slot_flags))
 		if(C.mind?.assigned_role == /datum/job/farmer || C.mind?.assigned_role == /datum/job/soilchild || HAS_TRAIT(C, TRAIT_LEECHIMMUNE) || istriton(C))
 			return
 
