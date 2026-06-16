@@ -1,7 +1,7 @@
 #define OPERATION_NEW_NAME "chosen_name"
 
 /datum/surgery_operation/limb/plastic_surgery
-	name = "Plastic Surgery"
+	name = "Facial Reconstruction"
 	desc = "Reshape a patient's face to fix disfigurement or make them a new person."
 
 	implements = list(
@@ -41,15 +41,25 @@
 		var/mob/living/carbon/human/human_target = patient
 		species = human_target?.dna?.species
 
-	var/list/names = list()
+	if(!species)
+		return FALSE
+
+	var/list/names = list("Custom")
 	for(var/i in 1 to 10)
-		if(species)
-			names += species.random_name(patient.gender, TRUE)
+		names += species.random_name(patient.gender, TRUE)
 
 	if(!length(names))
 		return FALSE
 
-	operation_args[OPERATION_NEW_NAME] = tgui_input_list(surgeon, "New name to assign", "Plastic Surgery", names)
+	var/choice = tgui_input_list(surgeon, "New name to assign", "Facial Reconstruction", names)
+
+	if(choice == "Custom")
+		choice = tgui_input_text(surgeon, "New name to assign", "Facial Reconstruction", patient.name, max_length = MAX_NAME_LEN)
+
+	if(!choice)
+		return
+
+	operation_args[OPERATION_NEW_NAME] = choice
 	return !!operation_args[OPERATION_NEW_NAME]
 
 /datum/surgery_operation/limb/plastic_surgery/on_preop(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
