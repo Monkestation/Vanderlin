@@ -109,6 +109,8 @@
 	if(!new_bodypart)
 		return
 
+	injury_flags &= ~INJURY_BANDAGED|INJURY_CLAMPED|INJURY_RETRACTED
+
 	remove_from_bodypart()
 	remove_from_mob()
 	set_mob(new_owner, sound_hint)
