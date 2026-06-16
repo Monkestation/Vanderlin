@@ -423,7 +423,6 @@ GLOBAL_VAR(restart_counter)
 			shutdown_logging() // See comment below.
 			QDEL_NULL(Tracy)
 			QDEL_NULL(Debugger)
-			SSplexora._Shutdown()
 			TgsEndProcess()
 			return ..()
 
