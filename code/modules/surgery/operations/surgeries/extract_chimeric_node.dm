@@ -62,7 +62,7 @@
 
 	patient.adjustBruteLoss(30)
 	patient.adjustOxyLoss(30)
-	patient.emote("gasp", forced = TRUE)
+	patient.emote("gasp")
 
 	ADD_TRAIT(patient, TRAIT_NODE_EXTRACTED, "surgery")
 
@@ -78,4 +78,4 @@
 	)
 
 	patient.adjustBruteLoss(50)
-	patient.emote("painscream", forced = TRUE)
+	patient.emote("painscream")
