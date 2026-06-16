@@ -18,6 +18,8 @@
 	var/quality = GEM_REGULAR
 	var/datum/gem_effect/effect_template
 	var/is_cut = FALSE
+	var/arcyne_potency = 20
+	var/datum/attunement/attuned
 
 /obj/item/gem/Initialize()
 	. = ..()
@@ -167,6 +169,25 @@
 		if(GEM_PERFECT) return 1.6
 	return 1.0
 
+/obj/item/gem/blood_diamond
+	name = "glut"
+	icon_state = "blood"
+	sellprice = 188
+	desc = "Something about this gem just doesn't sit right with you. Holding it makes the blood leave your fingertips."
+	smeltresult = /obj/item/ingot/component/glutcrystal
+	dropshrink = 1
+
+/obj/item/gem/blood_diamond/examine(mob/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.patron.type == /datum/patron/inhumen/graggar)
+			. += span_danger("You know this gem well. They are born out of great violence, but only if it involves the mightiest of warriors. </br>Fleshcrafting it with the meat of whatever warrior birthed this gem will allow me to summon another of their kind into this world.")
+
+/obj/item/gem/blood_diamond/Initialize()
+	. = ..()
+	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#8B0000", "alpha" = 188, "size" = 1))
+
 /obj/item/gem/green
 	name = "gemerald"
 	desc = "Glints with verdant brilliance."
@@ -174,6 +195,7 @@
 	icon_state = "emerald_cut"
 	sellprice = 44
 	dropshrink = 0.4
+	arcyne_potency = 7
 	attuned = /datum/attunement/earth
 	effect_template = /datum/gem_effect/gemerald
 	item_weight = 24 GRAMS
@@ -185,6 +207,7 @@
 	icon_state = "quartz_cut"
 	sellprice = 88
 	dropshrink = 0.4
+	arcyne_potency = 25
 	attuned = /datum/attunement/ice
 	effect_template = /datum/gem_effect/blortz
 	item_weight = 18 GRAMS
@@ -196,6 +219,7 @@
 	icon_state = "topaz_cut"
 	sellprice = 25
 	dropshrink = 0.4
+	arcyne_potency = 5
 	attuned = /datum/attunement/electric
 	effect_template = /datum/gem_effect/toper
 	item_weight = 21 GRAMS
@@ -207,6 +231,7 @@
 	icon_state = "sapphire_cut"
 	sellprice = 56
 	dropshrink = 0.4
+	arcyne_potency = 10
 	attuned = /datum/attunement/arcyne
 	effect_template = /datum/gem_effect/saffira
 	item_weight = 21 GRAMS
@@ -218,6 +243,7 @@
 	icon_state = "diamond_cut"
 	sellprice = 121
 	dropshrink = 0.4
+	arcyne_potency = 15
 	attuned = /datum/attunement/light
 	effect_template = /datum/gem_effect/dorpel
 	item_weight = 15 GRAMS

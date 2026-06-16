@@ -43,11 +43,11 @@
 /datum/component/obeys_commands/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_LIVING_BEFRIENDED, PROC_REF(add_friend))
 	RegisterSignal(parent, COMSIG_LIVING_UNFRIENDED, PROC_REF(remove_friend))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(check_name))
 
 /datum/component/obeys_commands/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_LIVING_BEFRIENDED, COMSIG_LIVING_UNFRIENDED, COMSIG_PARENT_EXAMINE, COMSIG_CLICK_CTRL))
+	UnregisterSignal(parent, list(COMSIG_LIVING_BEFRIENDED, COMSIG_LIVING_UNFRIENDED, COMSIG_ATOM_EXAMINE, COMSIG_CLICK_CTRL))
 
 /// Add someone to our friends list
 /datum/component/obeys_commands/proc/add_friend(datum/source, mob/living/new_friend)
@@ -60,7 +60,7 @@
 
 /datum/component/obeys_commands/proc/on_key_unpressed(mob/living/source)
 	SIGNAL_HANDLER
-	UnregisterSignal(source, COMSIG_USER_MOUSE_ENTERED)
+	UnregisterSignal(source, COMSIG_MOB_MOUSE_ENTERED)
 
 /datum/component/obeys_commands/proc/remove_from_viewers(mob/living/source)
 	radial_viewers -= REF(source)
@@ -88,7 +88,7 @@
 
 /datum/component/obeys_commands/proc/on_key_pressed(mob/living/friend)
 	SIGNAL_HANDLER
-	RegisterSignal(friend, COMSIG_USER_MOUSE_ENTERED, PROC_REF(on_mouse_hover))
+	RegisterSignal(friend, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_hover))
 
 /datum/component/obeys_commands/proc/on_mouse_hover(mob/living/friend, atom/mouse_hovered)
 	SIGNAL_HANDLER

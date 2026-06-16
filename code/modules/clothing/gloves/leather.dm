@@ -24,15 +24,15 @@
 /obj/item/clothing/gloves/leather/advanced
 	name = "hardened leather gloves"
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your fingers."
-	max_integrity = INTEGRITY_STANDARD
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/gloves/leather/masterwork
 	name = "masterwork leather gloves"
 	desc = "These gloves are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/gloves/leather/masterwork/Initialize()
@@ -56,6 +56,7 @@
 
 /obj/item/clothing/gloves/leather/otavan
 	name = "grenzelhoftian leather gloves"
+	examine_name = "leather gloves"
 	desc = "A pair of heavy Grenzelhoftian leather gloves, commonly used by fencers, renowned for their quality."
 	icon_state = "fencergloves"
 	item_state = "fencergloves"
@@ -74,6 +75,7 @@
 
 /obj/item/clothing/gloves/leather/otavan/inqgloves
 	name = "inquisitorial leather gloves"
+	examine_name = "leather gloves"
 	desc = "Gloves of worn leather. Alas, the psydonian fetish wrapped around one is but a powerless replica."
 	icon_state = "inqgloves"
 	item_state = "inqgloves"
@@ -99,16 +101,12 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
-	detail_tag = "_detail"
-	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/gloves/leather/courtphysician/female
 	name = "sanguine sleeves"
 	desc = "Carefully sewn leather gloves with silk sleeves covering them, unrestricting to your ability to wield surgical tools, and stylish!"
 	icon_state = "docsleeves"
 	item_state = "docsleeves"
-	icon = 'icons/roguetown/clothing/courtphys.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY

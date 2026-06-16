@@ -63,6 +63,13 @@
 				return TRUE
 	return FALSE
 
+/// Get the bodypart for whatever hand we have active, Only relevant for carbons
+/mob/proc/get_active_hand()
+	return FALSE
+
+/mob/living/carbon/get_active_hand()
+	return LAZYACCESS(hand_bodyparts, active_hand_index)
+
 /mob/living/carbon/proc/get_missing_limbs()
 	RETURN_TYPE(/list)
 	var/list/full = list(
@@ -113,27 +120,6 @@
 			L = new /obj/item/bodypart/r_leg()
 		if(BODY_ZONE_CHEST)
 			L = new /obj/item/bodypart/chest()
-	if(L)
-		L.update_limb(fixed_icon, src)
-		if(robotic)
-			L.change_bodypart_status(BODYPART_ROBOTIC)
-	. = L
-
-/mob/living/carbon/monkey/newBodyPart(zone, robotic, fixed_icon)
-	var/obj/item/bodypart/L
-	switch(zone)
-		if(BODY_ZONE_L_ARM)
-			L = new /obj/item/bodypart/l_arm/monkey()
-		if(BODY_ZONE_R_ARM)
-			L = new /obj/item/bodypart/r_arm/monkey()
-		if(BODY_ZONE_HEAD)
-			L = new /obj/item/bodypart/head/monkey()
-		if(BODY_ZONE_L_LEG)
-			L = new /obj/item/bodypart/l_leg/monkey()
-		if(BODY_ZONE_R_LEG)
-			L = new /obj/item/bodypart/r_leg/monkey()
-		if(BODY_ZONE_CHEST)
-			L = new /obj/item/bodypart/chest/monkey()
 	if(L)
 		L.update_limb(fixed_icon, src)
 		if(robotic)

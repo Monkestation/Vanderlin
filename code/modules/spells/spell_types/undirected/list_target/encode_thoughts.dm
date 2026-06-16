@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/undirected/list_target/encode_thoughts
 	name = "Encode Thoughts"
 	desc = "Latch onto the mind of one who is nearby, weaving a particular thought into their mind."
-	button_icon_state = null
+	button_icon_state = "encode_thought"
 	sound = 'sound/magic/PSY.ogg'
 
 	point_cost = 1
@@ -21,7 +21,7 @@
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
-	message = browser_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]")
+	message = tgui_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]", timeout=20 SECONDS)
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 

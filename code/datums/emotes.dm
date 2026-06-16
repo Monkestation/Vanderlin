@@ -18,16 +18,25 @@
 	var/list/mob_type_allowed_typecache = /mob //Types that are allowed to use that emote
 	var/list/mob_type_blacklist_typecache //Types that are NOT allowed to use that emote
 	var/list/mob_type_ignore_stat_typecache
+	/// Trait that is required to use this emote.
+	var/trait_required
+	/// In which state can you use this emote? (Check stat.dm for a full list of them)
 	var/stat_allowed = CONSCIOUS
 	var/sound //Sound to play when emote is called
 	var/vary = FALSE	//used for the honk borg emote
-	var/only_forced_audio = FALSE //can only code call this event instead of the player.
+	/// Can only code call this event instead of the player.
+	var/only_forced_audio = FALSE
+	/// The cooldown between the uses of the emote.
+	var/cooldown = 0.8 SECONDS
+	/// Blocks any intentional emote use for this time.
+	var/mute_time = 3 SECONDS
+	/// Ignore emote block applied from mute_time. cooldown is still respected
+	var/ignore_mute_time
 	var/nomsg = FALSE
 	var/soundping = TRUE
 	var/ignore_silent = FALSE
 	var/snd_vol = 100
 	var/snd_range = -1
-	var/mute_time = 30//time after where someone can't do another emote
 	// Whether this should show on runechat
 	var/show_runechat = TRUE
 	// Explicitly defined runechat message, if it's not defined and `show_runechat` is TRUE then it will use `message` instaed
@@ -52,27 +61,21 @@
 /datum/emote/proc/adjacentaction(mob/user, mob/target)
 	return
 
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targetted = FALSE)
-	. = TRUE
-	if(!can_run_emote(user, TRUE, intentional))
-		return FALSE
-	if(only_forced_audio && intentional)
-		return FALSE
-	if(targetted)
-		var/list/mobsadjacent = list()
-		var/mob/chosenmob
-		for(var/mob/living/target_mob in view(user, 2))
-			if(target_mob == user)
-				continue
-			if(target_mob.rogue_sneaking) // No detecting sneaky people.
-				continue
-			mobsadjacent += target_mob
-		if(length(mobsadjacent))
-			chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
-		if(istype(chosenmob))
-			if(user.Adjacent(chosenmob))
-				params = chosenmob.name
-				adjacentaction(user, chosenmob)
+/**
+ * Handles the modifications and execution of emotes.
+ *
+ * Arguments:
+ * * user - Person that is trying to send the emote.
+ * * params - Parameters added after the emote.
+ * * type_override - Override to the current emote_type.
+ * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
+ * * targeted - The emote targets adjacent mobs. Runs asynchronously.
+ */
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targeted = FALSE)
+	if(targeted)
+		INVOKE_ASYNC(src, PROC_REF(async_targeted_emote), user, params, type_override, intentional)
+		return
+
 	var/raw_msg = select_message_type(user, intentional)
 	var/msg = raw_msg
 	if(params && message_param)
@@ -95,9 +98,9 @@
 	var/sound/tmp_sound = get_sound(user)
 	if(!istype(tmp_sound))
 		tmp_sound = sound(get_sfx(tmp_sound))
-	tmp_sound.frequency = pitch
-	if(tmp_sound && (!only_forced_audio || !intentional))
-		if (ishuman(user))
+	if(tmp_sound && should_play_sound(user, intentional))
+		tmp_sound.frequency = pitch
+		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			if(H.voice_type == VOICE_TYPE_ANDRO)
 				tmp_sound.frequency = pitch * 0.92
@@ -110,12 +113,30 @@
 			if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
 				M.show_message(msg)
 		var/runechat_msg_to_use = null
-		if(show_runechat && emote_type != EMOTE_AUDIBLE)
+		if(show_runechat && !(emote_type & EMOTE_AUDIBLE))
 			runechat_msg_to_use = runechat_msg ? runechat_msg : raw_msg
-		if(emote_type == EMOTE_AUDIBLE)
+		if(emote_type & EMOTE_AUDIBLE)
 			user.audible_message(msg, runechat_message = runechat_msg_to_use)
 		else
 			user.visible_message(msg, runechat_message = runechat_msg_to_use)
+
+	// SEND_SIGNAL(user, COMSIG_MOB_EMOTE, src, key, type_override, message, intentional)
+	// SEND_SIGNAL(user, COMSIG_MOB_EMOTED(key))
+
+/datum/emote/proc/async_targeted_emote(mob/user, params, type_override, intentional)
+	var/list/mobsadjacent = list()
+	var/mob/chosenmob
+	for(var/mob/living/target_mob in view(user, 2))
+		if(target_mob.rogue_sneaking) // No detecting sneaky people.
+			continue
+		mobsadjacent += target_mob
+	if(length(mobsadjacent))
+		chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
+	if(istype(chosenmob))
+		if(user.Adjacent(chosenmob))
+			params = chosenmob.name
+			adjacentaction(user, chosenmob)
+			run_emote(user, params, type_override, intentional, targeted = FALSE)
 
 /mob/living/proc/get_emote_pitch()
 	return clamp(voice_pitch, 0.5, 2)
@@ -131,9 +152,6 @@
 		pitch_modifier += (10 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)) * 0.03
 	return clamp(final_pitch + pitch_modifier, 0.5, 2)
 
-
-
-
 /datum/emote/proc/get_env(mob/living/user)
 	return
 
@@ -146,50 +164,49 @@
 				return I.emote_environment
 
 /datum/emote/proc/get_sound(mob/living/user)
-	if(sound)
-		return sound
+	return sound //by default just return this var.
 
 /datum/emote/living/get_sound(mob/living/user)
 	if(sound)
 		return sound
-	else
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			var/used_sound
-			var/possible_sounds
-			var/modifier
-			if(H.age == AGE_OLD)
-				modifier = "old"
-			if(!ignore_silent && !H.can_speak() || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
-				modifier = "silenced"
-			if(user.gender == FEMALE && H.dna.species.soundpack_f)
-				possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
-			else if(H.dna.species.soundpack_m)
-				possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
-			if(H.voice_type)
-				switch (H.voice_type)
-					if (VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
-						possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
-					if (VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
-						if (H.dna.species.soundpack_f)
-							possible_sounds = H.dna.species.soundpack_f.get_sound(key, modifier)
-						else
-							possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
-			if(possible_sounds)
-				if(islist(possible_sounds))
-					var/list/PS = possible_sounds
-					if(PS.len > 1)
-						used_sound = pick_n_take(possible_sounds)
-						if(used_sound == H.last_sound)
-							used_sound = pick(possible_sounds)
+	else if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/used_sound
+		var/possible_sounds
+		var/modifier
+		if(H.age == AGE_OLD)
+			modifier = "old"
+		if(!ignore_silent && !H.can_speak() || (!ignore_silent && HAS_TRAIT(H, TRAIT_MUTE)) || (!ignore_silent && HAS_TRAIT(H, TRAIT_BAGGED)))
+			modifier = "silenced"
+		if(user.gender == FEMALE && H.dna.species.soundpack_f)
+			possible_sounds = H.dna.species.soundpack_f.get_sound(key,modifier)
+		else if(H.dna.species.soundpack_m)
+			possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
+		if(H.voice_type)
+			switch (H.voice_type)
+				if (VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
+					possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
+				if (VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
+					if (H.dna.species.soundpack_f)
+						possible_sounds = H.dna.species.soundpack_f.get_sound(key, modifier)
 					else
-						used_sound = pick(possible_sounds)
-				else //direct file
-					used_sound = possible_sounds
-				H.last_sound = used_sound
-				return used_sound
-		else
-			return user.get_sound(key)
+						possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
+		if(!possible_sounds)
+			return
+		if(islist(possible_sounds))
+			var/list/PS = possible_sounds
+			if(PS.len > 1)
+				used_sound = pick_n_take(possible_sounds)
+				if(used_sound == H.last_sound)
+					used_sound = pick(possible_sounds)
+			else
+				used_sound = pick(possible_sounds)
+		else //direct file
+			used_sound = possible_sounds
+		H.last_sound = used_sound
+		return used_sound
+	else
+		return user.get_sound(key)
 
 /mob/living/proc/get_sound(input)
 	return
@@ -209,17 +226,15 @@
 		var/mob/living/carbon/C = user
 		if(!C.can_speak_vocal())
 			. = message_muffled
-		if(!muzzle_ignore && C.mouth?.muteinmouth && emote_type == EMOTE_AUDIBLE)
+		if(!muzzle_ignore && C.mouth?.muteinmouth && (emote_type & EMOTE_AUDIBLE))
 			. = message_muffled
-		if(!muzzle_ignore && emote_type == EMOTE_AUDIBLE && HAS_TRAIT(C, TRAIT_BAGGED))
+		if(!muzzle_ignore && (emote_type & EMOTE_AUDIBLE) && HAS_TRAIT(C, TRAIT_BAGGED))
 			. = message_muffled
 
-	if(!muzzle_ignore && HAS_TRAIT(user, TRAIT_MUTE) && emote_type == EMOTE_AUDIBLE)
+	if(!muzzle_ignore && HAS_TRAIT(user, TRAIT_MUTE) && (emote_type & EMOTE_AUDIBLE))
 		return "makes a [pick("strong ", "weak ", "")]noise."
 	if(user.mind && user.mind.miming && message_mime)
 		. = message_mime
-	else if(ismonkey(user) && message_monkey)
-		. = message_monkey
 	else if(isanimal(user) && message_simple)
 		. = message_simple
 
@@ -227,7 +242,8 @@
 	return replacetext(message_param, "%t", params)
 
 /datum/emote/proc/can_run_emote(mob/user, status_check = TRUE, intentional = FALSE)
-	. = TRUE
+	if(trait_required && !HAS_TRAIT(user, trait_required))
+		return FALSE
 	if(!is_type_in_typecache(user, mob_type_allowed_typecache))
 		return FALSE
 	if(is_type_in_typecache(user, mob_type_blacklist_typecache))
@@ -236,31 +252,53 @@
 		if(user.stat > stat_allowed)
 			if(!intentional)
 				return FALSE
-/*			switch(user.stat)
+			switch(user.stat)
 				if(SOFT_CRIT)
-					to_chat(user, "<span class='warning'>I cannot [key] while dying!</span>")
-				if(UNCONSCIOUS)
-					to_chat(user, "<span class='warning'>I cannot [key] while unconscious!</span>")
+					to_chat(user, span_warning("I cannot [key] while in a critical condition!"))
+				if(UNCONSCIOUS, HARD_CRIT)
+					to_chat(user, span_warning("I cannot [key] while unconscious!"))
 				if(DEAD)
-					to_chat(user, "<span class='warning'>I cannot [key] while dead!</span>")*/
+					to_chat(user, span_warning("I cannot [key] while dead!"))
 			return FALSE
 		if(restraint_check && HAS_TRAIT(user, TRAIT_RESTRAINED))
 			if(!intentional)
 				return FALSE
-			to_chat(user, "<span class='warning'>I cannot [key] while restrained!</span>")
+			to_chat(user, span_warning("I cannot [key] while restrained!"))
 			return FALSE
 		if(hands_use_check && HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 			if(!intentional)
 				return FALSE
-			to_chat(user, "<span class='warning'>I cannot use my hands to [key] right now!</span>")
+			to_chat(user, span_warning("I cannot use my hands to [key] right now!"))
 			return FALSE
 		if(incapacitated_check && HAS_TRAIT(user, TRAIT_INCAPACITATED))
 			if(!intentional)
 				return FALSE
-			// to_chat(user, "<span class='warning'>You cannot use your hands to [key] right now!</span>")
+			to_chat(user, span_warning("I cannot use your hands to [key] right now!"))
 			return FALSE
 
-	if(isliving(user))
-		var/mob/living/L = user
-		if(HAS_TRAIT(L, TRAIT_EMOTEMUTE))
+	if(HAS_TRAIT(user, TRAIT_EMOTEMUTE))
+		return FALSE
+
+	return TRUE
+
+/**
+ * Check to see if the user should play a sound when performing the emote.
+ *
+ * Arguments:
+ * * user - Person that is doing the emote.
+ * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
+ *
+ * Returns a bool about whether or not the user should play a sound when performing the emote.
+ */
+/datum/emote/proc/should_play_sound(mob/user, intentional = FALSE)
+	if(emote_type & EMOTE_AUDIBLE && !hands_use_check)
+		if(HAS_TRAIT(user, TRAIT_MUTE))
 			return FALSE
+		if(ishuman(user))
+			var/mob/living/carbon/human/loud_mouth = user
+			if(!loud_mouth.getorganslot(ORGAN_SLOT_TONGUE))
+				return FALSE
+
+	if(only_forced_audio && intentional)
+		return FALSE
+	return TRUE

@@ -38,35 +38,36 @@
 	if(!destroy_message)
 		destroy_message = span_warning("[pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")]")
 
-	if(ispath(weapon_special))
-		weapon_special = new weapon_special()
+	if(weapon_special)
+		weapon_special = new weapon_special
 
-	if(randomize_blade_int)
+/obj/item/weapon/equipped(mob/user, slot, initial)
+	. = ..()
+	if(initial && randomize_blade_int)
 		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
-	if(weapon_special)
+	if(istype(weapon_special))
 		QDEL_NULL(weapon_special)
 	return ..()
 
 /obj/item/weapon/attack_hand(mob/user)
 	if(is_species(user, /datum/species/werewolf)) //slop fix
-		return TRUE
-	. = ..()
+		return FALSE
 
-/obj/item/weapon/pickup(mob/user)
-	. = ..()
 	if(HAS_TRAIT(user, TRAIT_RAVOX_CURSE) && prob(33))
 		var/mob/living/carbon/human/H = user
 		to_chat(H, span_warning("The idea repulses me!"))
 		H.cursed_freak_out()
 		H.Paralyze(4 SECONDS)
-		return
+		return FALSE
+
+	. = ..()
 
 /obj/item/weapon/examine(mob/user)
 	. = ..()
 
-	if(weapon_special)
+	if(istype(weapon_special))
 		. += weapon_special.get_examine()
 
 /obj/item/weapon/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user)
@@ -105,7 +106,7 @@
 	if(affecting.body_zone == BODY_ZONE_HEAD) //Decapitations are harder to pull off in general
 		probability *= 0.5
 	var/hard_dismember = HAS_TRAIT(affecting, TRAIT_HARDDISMEMBER)
-	var/easy_dismember = affecting.rotted || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
+	var/easy_dismember = HAS_TRAIT(affecting, TRAIT_ROTTEN) || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
 	if(affecting.owner)
 		if(!hard_dismember)
 			hard_dismember = HAS_TRAIT(affecting.owner, TRAIT_HARDDISMEMBER)

@@ -39,7 +39,7 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(
-		/mob/living/carbon/human/proc/torture_victim
+		/mob/proc/haltyell
 	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)

@@ -101,8 +101,10 @@
 	sellprice = 0
 	blade_dulling = DULLING_CUT
 	rotprocess = null
-	static_debris = list(/obj/item/natural/feather=1)
 	var/datum/weakref/source_spell
+
+/obj/item/reagent_containers/food/snacks/messenger_bird/atom_deconstruct(disassembled)
+	new /obj/item/natural/feather(drop_location())
 
 /obj/item/reagent_containers/food/snacks/friedmessenger
 	name = "fried messenger"

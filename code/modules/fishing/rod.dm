@@ -286,31 +286,34 @@
 		var/obj/item/item = currently_hooked
 		var/turf/old_loc = get_turf(currently_hooked)
 		step_towards(item, our_turf)
-		if((old_loc == get_turf(currently_hooked)) && requires_vertical)
-			ADD_TRAIT(currently_hooked, "hooked", type)
-			currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
-			addtimer(CALLBACK(src, PROC_REF(remove_hooked), currently_hooked), 1 SECONDS)
+		if((old_loc == get_turf(item)) && requires_vertical)
+			ADD_TRAIT(item, TRAIT_MOVE_FLYING, type) //Otherwise they instantly fall back in
+			item.movement_type |= FLYING
+			item.forceMove(GET_TURF_ABOVE(old_loc))
+			step_towards(item, our_turf)
 		if(item.loc == user.loc && (item.interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))
 			user.put_in_inactive_hand(item)
 			QDEL_NULL(fishing_line)
+		REMOVE_TRAIT(item, TRAIT_MOVE_FLYING, type)
+		if(!HAS_TRAIT(item, TRAIT_MOVE_FLYING))
+			item.movement_type &= ~FLYING
 	//Not an item, so just delete the line if it's adjacent to the user.
 	else if(get_dist(currently_hooked,our_turf) > 1)
-		var/turf/old_loc = get_turf(currently_hooked)
-		step_towards(currently_hooked, our_turf)
-		if((old_loc == get_turf(currently_hooked)) && requires_vertical)
-			ADD_TRAIT(currently_hooked, "hooked", type)
-			currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
-			addtimer(CALLBACK(src, PROC_REF(remove_hooked), currently_hooked), 1 SECONDS)
-		if(get_dist(currently_hooked,our_turf) <= 1)
+		var/atom/movable/cached_currently_hooked = currently_hooked
+		var/turf/old_loc = get_turf(cached_currently_hooked)
+		step_towards(cached_currently_hooked, our_turf)
+		if((old_loc == get_turf(cached_currently_hooked)) && requires_vertical)
+			ADD_TRAIT(cached_currently_hooked, TRAIT_MOVE_FLYING, type) //Otherwise they instantly fall back in
+			cached_currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
+			step_towards(cached_currently_hooked, our_turf)
+		if(get_dist(cached_currently_hooked, our_turf) <= 1)
 			QDEL_NULL(fishing_line)
+		REMOVE_TRAIT(cached_currently_hooked, TRAIT_MOVE_FLYING, type)
 	else
 		QDEL_NULL(fishing_line)
 
 /obj/item/fishingrod/proc/fishing_line_check()
 	return !QDELETED(fishing_line)
-
-/obj/item/fishingrod/proc/remove_hooked(atom/movable/hooked)
-	REMOVE_TRAIT(hooked, "hooked", type)
 
 /// Generates the fishing line visual from the current user to the target and updates inhands
 /obj/item/fishingrod/proc/create_fishing_line(atom/movable/target, mob/living/firer, target_py = null)
@@ -322,7 +325,7 @@
 	fishing_line = new(firer, target, icon_state = "fishing_line", beam_color = beam_color, emissive = FALSE, override_target_pixel_y = target_py, time = INFINITY, render_on_z_levels = TRUE)
 	fishing_line.lefthand = !(firer.get_held_index_of_item(src) % 2)
 	RegisterSignal(fishing_line, COMSIG_BEAM_BEFORE_DRAW, PROC_REF(check_los))
-	RegisterSignal(fishing_line, COMSIG_PARENT_QDELETING, PROC_REF(clear_line))
+	RegisterSignal(fishing_line, COMSIG_QDELETING, PROC_REF(clear_line))
 	INVOKE_ASYNC(fishing_line, TYPE_PROC_REF(/datum/beam/, Start))
 	if(QDELETED(fishing_line))
 		return null

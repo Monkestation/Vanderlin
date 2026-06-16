@@ -41,11 +41,11 @@
 	if(get_dir(mover, loc) == dir)
 		return FALSE
 
-/obj/structure/chair/bench/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/chair/bench/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 	if(istype(leaving, /obj/projectile))
 		return
-	if(get_dir(new_location, leaving.loc) == dir)
+	if(direction == REVERSE_DIR(dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -200,14 +200,14 @@
 		qdel(src)
 		return FALSE
 
-/obj/structure/chair/wood/alt/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/chair/wood/alt/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 	if(!isliving(leaving))
 		return
 	var/mob/living/M = leaving
 	if(M.body_position == LYING_DOWN)
 		return
-	if(get_dir(leaving.loc, new_location) == REVERSE_DIR(dir))
+	if(direction == REVERSE_DIR(dir))
 		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
@@ -289,7 +289,7 @@
 /obj/structure/bed/inn/double/post_buckle_mob(mob/living/target)
 	. = ..()
 	if(length(buckled_mobs) > 1 && !goldilocks) //  Push the second buckled mob a bit higher from the normal lying position
-		target.set_mob_offsets("bed_buckle", _x = 0, _y = 12)
+		target.add_offsets(type, x_add = 0, y_add = 12)
 		goldilocks = target
 
 /obj/structure/bed/inn/double/post_unbuckle_mob(mob/living/target)
@@ -316,7 +316,7 @@
 /obj/structure/bed/wool/double/post_buckle_mob(mob/living/target)
 	. = ..()
 	if(length(buckled_mobs) > 1 && !goldilocks) //  Push the second buckled mob a bit higher from the normal lying position
-		target.set_mob_offsets("bed_buckle", _x = 0, _y = 12)
+		target.add_offsets(type, x_add = 0, y_add = 12)
 		goldilocks = target
 
 /obj/structure/bed/wool/double/post_unbuckle_mob(mob/living/target)
@@ -421,11 +421,11 @@
 
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0 + src.pixel_x, _y = src.pixel_y)
+	M.add_offsets(type, x_add = 0 + src.pixel_x, y_add = src.pixel_y)
 
 /obj/structure/bed/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/chair/wood/alt/chair3/crafted
 	item_chair = /obj/item/chair/chair3/crafted

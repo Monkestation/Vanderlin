@@ -65,7 +65,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/apothecary
 
 	outfit = /datum/outfit/apothecary
-	give_bank_account = 100
+	give_bank_account = 200
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
@@ -74,7 +74,7 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600
 	)
-
+	book_type = /obj/item/recipe_book/alchemy
 
 /datum/job/apothecary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

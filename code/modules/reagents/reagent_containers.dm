@@ -37,6 +37,8 @@
 	var/short_cooktime = FALSE
 	/// Long cooktime, when low cooking skill
 	var/long_cooktime = FALSE
+	///can we soak?
+	var/soaker = TRUE
 
 	/// Can be labelled by parchment
 	var/can_label_container = FALSE
@@ -46,6 +48,8 @@
 	var/labelled = FALSE
 	/// Auto label with proc [apply_initial_label] of course requires an override.
 	var/auto_label = FALSE
+
+	var/obj/item/soaking_item = null
 
 	COOLDOWN_DECLARE(weather_act_cooldown)
 
@@ -62,6 +66,10 @@
 	if(is_open_container())
 		GLOB.weather_act_upon_list |= src
 
+/obj/item/reagent_containers/create_reagents(max_vol, flags)
+	. = ..()
+	RegisterSignal(reagents, COMSIG_REAGENTS_HOLDER_UPDATED, PROC_REF(on_reagent_change))
+
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()
 	if(has_variable_transfer_amount && length(possible_transfer_amounts) > 1)
@@ -70,6 +78,9 @@
 /obj/item/reagent_containers/Destroy()
 	if(is_open_container())
 		GLOB.weather_act_upon_list -= src
+	if(soaking_item)
+		soaking_item.forceMove(drop_location())
+		soaking_item = null
 	return ..()
 
 /obj/item/reagent_containers/weather_act_on(weather_trait, severity)
@@ -91,9 +102,10 @@
 	reagents.expose_temperature(added)
 	..()
 
-/obj/item/reagent_containers/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/item/reagent_containers/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum, do_splash = TRUE)
 	. = ..()
-	SplashReagents(hit_atom, TRUE)
+	if(do_splash)
+		SplashReagents(hit_atom, TRUE)
 
 /obj/item/reagent_containers/heating_act()
 	reagents.expose_temperature(1000)
@@ -102,7 +114,8 @@
 /obj/item/reagent_containers/temperature_expose(exposed_temperature, exposed_volume)
 	reagents.expose_temperature(exposed_temperature)
 
-/obj/item/reagent_containers/on_reagent_change(changetype)
+/obj/item/reagent_containers/proc/on_reagent_change(datum/reagents/holder, ...)
+	SIGNAL_HANDLER
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/reagent_containers/update_overlays()
@@ -137,9 +150,77 @@
 	var/datum/reagent/master = reagents.get_master_reagent()
 	if(master?.glows)
 		. += emissive_appearance(filling.icon, filling.icon_state, alpha = filling.alpha)
+	if(!soaking_item)
+		return
+	var/mutable_appearance/item_overlay = mutable_appearance()
+	item_overlay.appearance = soaking_item.appearance
+	item_overlay.pixel_y += 4
+	item_overlay.layer = FLOAT_LAYER
+	item_overlay.plane = FLOAT_PLANE
+	item_overlay.transform = item_overlay.transform.Scale(0.5, 0.5)
+	. += item_overlay
+
+/obj/item/reagent_containers/attackby_secondary(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	if(GetComponent(/datum/component/storage) || !soaker)
+		return
+	if(!is_open_container() || !reagents || !reagents.total_volume && soaker)
+		to_chat(user, span_warning("\The [src] needs to be open and have reagents to soak something in."))
+		return
+	if(soaking_item)
+		to_chat(user, span_warning("There's already something soaking in \the [src]."))
+		return
+	if(I.w_class > WEIGHT_CLASS_NORMAL)
+		to_chat(user, span_warning("\The [I] is too large to fit in \the [src]."))
+		return
+	if(!user.transferItemToLoc(I, src))
+		return
+	soaking_item = I
+	update_icon()
+	START_PROCESSING(SSobj, src)
+	to_chat(user, span_notice("You submerge \the [I] in \the [src]."))
+
+/obj/item/reagent_containers/attack_hand_secondary(mob/living/user, list/modifiers)
+	. = ..()
+	if(!soaking_item)
+		return
+	var/obj/item/returning = soaking_item
+	soaking_item = null
+	update_icon()
+	returning.forceMove(get_turf(src))
+	user.put_in_hands(returning)
+	STOP_PROCESSING(SSobj, src)
+	to_chat(user, span_notice("You retrieve \the [returning] from \the [src]."))
+
+/obj/item/reagent_containers/process()
+	if(!soaking_item || !reagents || !reagents.total_volume)
+		return
+	var/splash_amount = max(0.2, reagents.total_volume * 0.01) //we lose 1% volume per process or 0.2 unit and multiply this by 10 on application so a preserving basin lasts atleast 500 seconds
+	var/datum/reagents/splash_holder = new /datum/reagents(splash_amount)
+	splash_holder.my_atom = soaking_item
+	reagents.trans_to(splash_holder, splash_amount, 10, 1, 1)
+	splash_holder.chem_temp = reagents.chem_temp
+	splash_holder.handle_reactions()
+	splash_holder.reaction(soaking_item, TOUCH, 1)
+	qdel(splash_holder)
 
 /obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
+	if(is_open_container() && reagents && reagents.total_volume > 0 && !GetComponent(/datum/component/storage) && soaker)
+		if(!istype(I, /obj/item/reagent_containers) && !istype(I, /obj/item/paper))
+			var/splash_amount = reagents.total_volume * 0.05
+			if(splash_amount < 1)
+				splash_amount = 1
+			var/datum/reagents/splash_holder = new /datum/reagents(splash_amount)
+			splash_holder.my_atom = I
+			reagents.trans_to(splash_holder, splash_amount, 4, 1, 1)
+			splash_holder.chem_temp = reagents.chem_temp
+			splash_holder.handle_reactions()
+			splash_holder.reaction(I, TOUCH, 1)
+			qdel(splash_holder)
+			to_chat(user, span_notice("You submerge \the [I] into [src]."))
+			return
+
 	if(!can_label_container || !(istype(I, /obj/item/paper) && !istype(I, /obj/item/paper/scroll)))
 		return
 	if(labelled)
@@ -244,6 +325,63 @@
 	balloon_alert(user, "transferring [UNIT_FORM_STRING(amount_per_transfer_from_this)].")
 	mode_change_message(user)
 
+/obj/item/reagent_containers/pre_attack(atom/target, mob/living/user, list/modifiers)
+	if(HAS_TRAIT(target, TRAIT_DO_NOT_SPLASH))
+		return ..()
+	if(try_splash(user, target))
+		return TRUE
+
+	return ..()
+
+/// Tries to splash the target.
+/obj/item/reagent_containers/proc/try_splash(mob/user, atom/target)
+	if (!spillable)
+		return FALSE
+	if (!reagents?.total_volume)
+		return FALSE
+	if(user.used_intent.type != INTENT_SPLASH)
+		return FALSE
+	if(!user.Adjacent(target))
+		return FALSE
+
+	var/punctuation = ismob(target) ? "!" : "."
+	var/reagent_text
+
+	user.visible_message(
+		span_danger("[user] splashes the contents of [src] onto [target][punctuation]"),
+		span_danger("You splash the contents of [src] onto [target][punctuation]"),
+		ignored_mobs = target)
+	if(ismob(target) && user != target)
+		var/mob/target_mob = target
+		target_mob.show_message(
+			span_userdanger("[user] splash the contents of [src] onto you!"),
+			MSG_VISUAL,
+			span_userdanger("You feel drenched!"))
+
+	var/mutable_appearance/splash_animation = mutable_appearance('icons/effects/effects.dmi', "splash")
+	if(isturf(target))
+		splash_animation.icon_state = "splash_floor"
+	splash_animation.color = mix_color_from_reagents(reagents.reagent_list)
+	target.flick_overlay_view(splash_animation, 1 SECONDS)
+
+	playsound(target, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 25, FALSE)
+
+	for(var/datum/reagent/reagent as anything in reagents.reagent_list)
+		reagent_text += "[reagent] ([num2text(reagent.volume)]),"
+
+	var/mob/thrown_by = thrownby?.resolve()
+	if(isturf(target) && reagents.reagent_list.len && thrown_by)
+		log_combat(thrown_by, target, "splashed (thrown) [english_list(reagents.reagent_list)]")
+		message_admins("[ADMIN_LOOKUPFLW(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] at [ADMIN_VERBOSEJMP(target)].")
+
+	SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, target, reagents.reagent_list)
+	reagents.reaction(target, TOUCH)
+	chem_splash(get_turf(target), 2, list(reagents))
+	log_combat(user, target, "splashed", reagent_text)
+	reagents.clear_reagents()
+
+	return TRUE
+
 /obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user, silent = FALSE)
 	if(!iscarbon(eater))
 		return FALSE
@@ -268,13 +406,15 @@
 
 /obj/item/reagent_containers/proc/bartender_check(atom/target)
 	. = FALSE
-	if(target.CanPass(src, get_turf(src)) && thrownby && HAS_TRAIT(thrownby, TRAIT_BOOZE_SLIDER))
+	var/mob/thrown_by = thrownby?.resolve()
+	if(target.CanPass(src, get_dir(target, src)) && thrown_by && HAS_TRAIT(thrown_by, TRAIT_BOOZE_SLIDER))
 		. = TRUE
 
 /obj/item/reagent_containers/proc/SplashReagents(atom/target, thrown = FALSE)
 	if(!reagents || !reagents.total_volume || !spillable)
 		return
 
+	var/mob/thrown_by = thrownby?.resolve()
 	if(ismob(target) && target.reagents)
 		if(thrown)
 			reagents.total_volume *= rand(5,10) * 0.1 //Not all of it makes contact with the target
@@ -285,8 +425,8 @@
 		for(var/datum/reagent/A in reagents.reagent_list)
 			R += "[A.type]  ([num2text(A.volume)]),"
 
-		if(thrownby)
-			log_combat(thrownby, M, "splashed", R)
+		if(thrown_by)
+			log_combat(thrown_by, M, "splashed", R)
 		reagents.reaction(target, TOUCH)
 
 	else if(bartender_check(target) && thrown)
@@ -298,10 +438,10 @@
 			var/turf/target_turf = target
 			if(istype(target_turf, /turf/open))
 				target_turf.add_liquid_from_reagents(reagents, FALSE, reagents.chem_temp)
-			if(reagents.reagent_list.len && thrownby)
-				log_combat(thrownby, target, "splashed (thrown) [english_list(reagents.reagent_list)]", "in [AREACOORD(target)]")
-				log_game("[key_name(thrownby)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [AREACOORD(target)].")
-				message_admins("[ADMIN_LOOKUPFLW(thrownby)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [ADMIN_VERBOSEJMP(target)].")
+			if(reagents.reagent_list.len && thrown_by)
+				log_combat(thrown_by, target, "splashed (thrown) [english_list(reagents.reagent_list)]", "in [AREACOORD(target)]")
+				log_game("[key_name(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [AREACOORD(target)].")
+				message_admins("[ADMIN_LOOKUPFLW(thrown_by)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] in [ADMIN_VERBOSEJMP(target)].")
 		visible_message("<span class='notice'>[src] spills its contents all over [target].</span>")
 		reagents.reaction(target, TOUCH)
 		if(QDELETED(src))

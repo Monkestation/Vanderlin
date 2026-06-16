@@ -258,7 +258,7 @@
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 	//render_target = GAME_PLANE_RENDER_TARGET
-	render_relay_plane = null
+	render_relay_plane = GAME_PLANE
 
 /atom/movable/screen/plane_master/leylines/backdrop(mob/mymob)
 	. = ..()

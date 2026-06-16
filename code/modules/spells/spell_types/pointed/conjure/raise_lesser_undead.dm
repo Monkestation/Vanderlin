@@ -44,7 +44,7 @@
 	var/mob/living/skeleton = summoned_object
 	skeleton.befriend(owner)
 	if(cabal_affine)
-		skeleton.faction |= FACTION_CABAL
+		skeleton.add_faction(FACTION_CABAL)
 
 	if(isliving(cast_on))
 		var/mob/living/L = cast_on

@@ -10,6 +10,7 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/nobleboot/apply_components()
 	. = ..()
@@ -21,6 +22,7 @@
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	wetable = FALSE
 
 /obj/item/clothing/shoes/shortboots
 	name = "shortboots"
@@ -32,6 +34,7 @@
 	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/ridingboots
 	name = "riding boots"
@@ -90,6 +93,7 @@
 	item_state = "gladiator"
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/sandals
 	name = "sandals"
@@ -99,6 +103,7 @@
 	item_state = "sandals"
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/rare
 	abstract_type = /obj/item/clothing/shoes/rare
@@ -109,6 +114,7 @@
 	icon_state = "aasimarfeet"
 	item_state = "aasimarfeet"
 	sellprice = 20
+	wetable = FALSE
 
 /obj/item/clothing/shoes/shalal
 	name = "babouche"
@@ -145,6 +151,13 @@
 	sellprice = 20
 	wetable = FALSE
 
+/obj/item/clothing/shoes/rare/grenzelhoft/freifechter
+	name = "fencing boots"
+	desc = "A pair of lightweight snugly fitting boots. They're reinforced along the toes and ankles and offer a measure of protection against missteps and glancing blows during close exchanges, often favoured by duelists and other itinerant swordsmen."
+	icon_state = "freiboots"
+	item_state = "freiboots"
+	max_integrity = ARMOR_INT_SIDE_HARDLEATHER + 50
+
 /obj/item/clothing/shoes/otavan
 	name = "grenzelhoftian leather boots"
 	desc = "Boots of outstanding craft, your fragile feet have never felt so protected and comfortable before."
@@ -159,9 +172,11 @@
 
 /obj/item/clothing/shoes/otavan/inqboots
 	name = "inquisitorial boots"
+	examine_name = "boots"
 	desc = "The steel-lined heels click."
 	icon_state = "inqboots"
 	item_state = "inqboots"
+	wetable = FALSE
 
 //Valorian Duelist Merc - On par with grenzelhoftian's stats.
 /obj/item/clothing/shoes/nobleboot/duelboots
@@ -170,10 +185,12 @@
 
 /obj/item/clothing/shoes/psydonboots
 	name = "enduring boots"
+	examine_name = "boots"
 	desc = "A reliable pair of dark leather boots. Seems like they could endure the world!"
 	color = "#d5c2aa"
 	icon_state = "psydonboots"
 	item_state = "psydonboots"
+	wetable = FALSE
 
 /obj/item/clothing/shoes/courtphysician
 	name = "sanguine shoes"
@@ -183,14 +200,13 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	wetable = FALSE
 
 /obj/item/clothing/shoes/courtphysician/female
 	name = "sanguine heels"
 	desc = "Leather heels, the solemn tap of these bears grim news, or salvation."
 	icon_state = "docheels"
 	item_state = "docheels"
-	icon = 'icons/roguetown/clothing/courtphys.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY

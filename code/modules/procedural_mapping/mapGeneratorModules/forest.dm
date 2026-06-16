@@ -26,7 +26,7 @@
 		/obj/structure/flora/grass/thorn_bush = 6,
 		/obj/item/natural/rock = 6,
 		/obj/structure/flora/grass/herb/random = 5,
-		/obj/structure/closet/dirthole/closed/loot = 5,
+		/obj/structure/closet/dirthole/closed = 5,
 		/obj/structure/flora/newtree = 5,
 		/obj/item/natural/stone = 5,
 		/obj/structure/essence_node = 0.4,

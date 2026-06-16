@@ -1,5 +1,5 @@
 /mob/living/carbon/slip(knockdown_amount, obj/O, lube, paralyze, force_drop)
-	if(movement_type & MOVETYPE_NOT_TOUCHING_GROUND)
+	if(movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 		return 0
 
 	if(!(lube & SLIDE_ICE))
@@ -10,6 +10,10 @@
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(. && !(movement_type & FLOATING)) //floating is easy
+		for(var/thing in all_injuries)
+			var/datum/injury/injury = thing
+			injury.movement_infect(src)
+
 		if(HAS_TRAIT(src, TRAIT_NOHUNGER))
 			set_nutrition(NUTRITION_LEVEL_FED - 1)	//just less than feeling vigorous
 			set_hydration(HYDRATION_LEVEL_START_MAX - 1)	//just less than feeling vigorous

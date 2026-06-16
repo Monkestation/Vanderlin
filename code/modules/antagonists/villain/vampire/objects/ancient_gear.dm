@@ -33,7 +33,7 @@
 	block2add = FOV_BEHIND
 	item_weight = 4.6 KILOGRAMS
 	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
 
 //................ Face ............... //

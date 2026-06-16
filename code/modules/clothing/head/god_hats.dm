@@ -84,6 +84,13 @@
 	armor = ARMOR_MINIMAL
 	prevent_crits = MINOR_CRITICALS
 
+/obj/item/clothing/head/padded/malumhood
+	name = "sculptor's mask"
+	desc = "As Malum sculpts his great works, so does he sculpt his workers."
+	icon_state = "malumhood"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
+
 /obj/item/clothing/head/roguehood/priest
 	name = "solar visage"
 	desc = "The sanctified headwear of the most devoted. The mask can be removed."
@@ -125,17 +132,6 @@
 					H.update_inv_head()
 		user.update_fov_angles()
 		user.regenerate_clothes()
-
-/obj/item/clothing/head/roguehood/priest/equipped(mob/user, slot)
-	. = ..()
-	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-	else
-		REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
-/obj/item/clothing/head/roguehood/priest/dropped(mob/user)
-	. = ..()
-	REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
 
 /obj/item/clothing/head/roguehood/priest/pickup(mob/living/user)
 	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))

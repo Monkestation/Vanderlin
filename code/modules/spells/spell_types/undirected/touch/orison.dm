@@ -16,13 +16,13 @@
 
 /datum/intent/orison/touch
 	reach = 7
-	name = "touch"
-	icon_state = "intouch"
+	name = "voice"
+	icon_state = "invoice"
 
 /datum/intent/orison/light
 	reach = 1
-	name = "use"
-	icon_state = "inuse"
+	name = "light"
+	icon_state = "inlight"
 
 /datum/action/cooldown/spell/undirected/touch/orison
 	name = "Orison"
@@ -202,29 +202,29 @@
 	name = "blessed water"
 	description = "A gift of Devotion. Very slightly heals wounds."
 
-/datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	if (M.mob_biotypes & MOB_UNDEAD)
-		M.adjustFireLoss(0.5*REM)
+		M.adjustFireLoss(0.5*REM * efficiency)
 	else
-		M.adjustBruteLoss(-0.1*REM)
-		M.adjustFireLoss(-0.1*REM)
-		M.adjustOxyLoss(-0.1, 0)
+		M.adjustBruteLoss(-0.1*REM * efficiency)
+		M.adjustFireLoss(-0.1*REM * efficiency)
+		M.adjustOxyLoss(-0.1 * efficiency, 0)
 		var/list/our_wounds = M.get_wounds()
 		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1)
+			var/upd = M.heal_wounds(1 * efficiency)
 			if (upd)
 				M.update_damage_overlays()
 
-/datum/reagent/water/blessed/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if (!istype(M))
+/datum/reagent/water/blessed/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+	if (!istype(exposed_mob))
 		return ..()
 
-	if (method & TOUCH)
-		if (M.mob_biotypes & MOB_UNDEAD)
-			M.adjustFireLoss(2*reac_volume, 0)
-			M.visible_message(span_warning("[M] erupts into angry fizzling and hissing!"), span_warning("BLESSED WATER!!! IT BURNS!!!"))
-			M.emote("scream")
+	if (methods & TOUCH)
+		if (exposed_mob.mob_biotypes & MOB_UNDEAD)
+			exposed_mob.adjustFireLoss(2*reac_volume, 0)
+			exposed_mob.visible_message(span_warning("[exposed_mob] erupts into angry fizzling and hissing!"), span_warning("BLESSED WATER!!! IT BURNS!!!"))
+			exposed_mob.emote("scream")
 
 	return ..()
 
@@ -232,27 +232,27 @@
 	name = "cursed water"
 	description = "A gift of Devotion. Very slightly heals wounds of the dead and the enlightened."
 
-/datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	if((M.mob_biotypes & MOB_UNDEAD))
-		M.adjustBruteLoss(-0.1*REM)
-		M.adjustFireLoss(-0.1*REM)
-		M.adjustOxyLoss(-0.1, 0)
+		M.adjustBruteLoss(-0.1*REM * efficiency)
+		M.adjustFireLoss(-0.1*REM * efficiency)
+		M.adjustOxyLoss(-0.1 * efficiency, 0)
 		var/list/our_wounds = M.get_wounds()
 		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1)
+			var/upd = M.heal_wounds(1 * efficiency)
 			if (upd)
 				M.update_damage_overlays()
 	else
-		M.adjustBruteLoss(-0.1*REM)
-		M.adjustFireLoss(-0.1*REM)
-		M.adjustOxyLoss(-0.1, 0)
+		M.adjustBruteLoss(-0.1*REM * efficiency)
+		M.adjustFireLoss(-0.1*REM * efficiency)
+		M.adjustOxyLoss(-0.1 * efficiency, 0)
 		var/list/our_wounds = M.get_wounds()
 		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1)
+			var/upd = M.heal_wounds(1 * efficiency)
 			if (upd)
 				M.update_damage_overlays()
-		M.adjust_stamina(0.5*REM)
+		M.adjust_stamina(0.5*REM * efficiency)
 
 /atom/movable/screen/alert/status_effect/thaumaturgy
 	name = "Thaumaturgical Voice"
@@ -313,10 +313,10 @@
 /datum/status_effect/light_buff/proc/add_light(mob/living/source)
 	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = source.mob_light(_power = potency)
 	LAZYSET(mobs_affected, source, mob_light_obj)
-	RegisterSignal(source, COMSIG_PARENT_QDELETING, PROC_REF(on_living_holder_deletion))
+	RegisterSignal(source, COMSIG_QDELETING, PROC_REF(on_living_holder_deletion))
 
 /datum/status_effect/light_buff/proc/remove_light(mob/living/source)
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_QDELETING)
 	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = LAZYACCESS(mobs_affected, source)
 	LAZYREMOVE(mobs_affected, source)
 	if(mob_light_obj)
@@ -330,6 +330,17 @@
 	to_chat(owner, span_notice("The miraculous light surrounding me has fled..."))
 	owner.remove_filter("blessing_of_light")
 	remove_light(owner)
+
+/// Similar to orison light but called when under the status effect `Malum's Anvil`
+/// Duration is handled by the status_effect that calls this
+/datum/status_effect/light_buff/malum_anvil
+	id = "malum_light_buff"
+	alert_type = null
+
+	outline_colour = "#cf991a"
+
+/datum/status_effect/light_buff/malum_anvil/get_examine_text()
+	return "SUBJECTPRONOUN is surrounded by an aura of warm light similar to heated metal."
 
 #undef ORISON_FILL
 #undef ORISON_TOUCH
