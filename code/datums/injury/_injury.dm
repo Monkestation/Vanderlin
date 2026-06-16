@@ -109,7 +109,7 @@
 	if(!new_bodypart)
 		return
 
-	injury_flags &= ~INJURY_BANDAGED|INJURY_CLAMPED|INJURY_RETRACTED
+	injury_flags &= ~(INJURY_BANDAGED|INJURY_CLAMPED|INJURY_RETRACTED)
 
 	remove_from_bodypart()
 	remove_from_mob()

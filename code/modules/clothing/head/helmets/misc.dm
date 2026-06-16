@@ -109,7 +109,9 @@
 	flags_inv = HIDEEARS
 	sellprice = VALUE_CHEAP_STEEL_HELMET
 	max_integrity = INTEGRITY_STRONGEST
-	smeltresult = /obj/item/ingot/steel_slag
+	smeltresult = null
+	melting_material = /datum/material/steel
+	melt_amount = 50
 	body_parts_covered = COVERAGE_HEAD
 	item_weight = 2.2 KILOGRAMS
 
@@ -134,7 +136,9 @@
 	armor = ARMOR_SCALE
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 50
 
 /obj/item/clothing/head/helmet/kettle/aalloy
 	name = "decrepit kettle helmet"
