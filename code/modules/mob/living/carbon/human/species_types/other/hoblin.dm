@@ -20,16 +20,12 @@
 	native_language = "Orcish"
 	desc = "Orkified dwarves. \
 	\n\n\
-	Hoblins, also known as half-goblins, are the offspring of half-goblins and another species, \
-	or mostly those who's bodies were too small or frail to ascend into a proper half-orc during the consumption of kinflesh. \
+	Often insultingly compared to goblins due to their size, are the offspring of dwarf-orc and another species, \
+	or mostly those dwarfs which decided to feast of kinflesh or were forced to do so. \
 	\n\n\
-	A hoblin was an uncommon sight, until the second Goblin War caused an influx of them, as those dwarves captured by orcish forces where fed flesh of their fallen brothers. \
-	Made by Graggar into scouts for His armies, half-goblins have a inborn tendency for cunning sabotage, theft and even assassinations, leading to much social ostracisation. \
-	While half-orcs prefer to be live alone, hoblins often group up into thieving gangs, their size allowing them to hide from watchful gaze of any guard. \
-	Other greenskins look down on them, treating them as nothing more than pests unworthy of Graggar's blessing, yet those who get theirs hands on manflesh might ascend into a proper orc. \
-	Veterans of the war will remember them as the first sign of an orcish warband approaching. \
-	\n\n\
-	Hoblins easily outmanevour their opponents, yet are unable to stay too long in a fight without somebody else taking a beating for them. \
+	A dwarvened orc was an uncommon sight, until the second Goblin War caused an influx of them, as those dwarves captured by orcish forces were fed flesh of their fallen brothers. \
+	Used mostly as cannon-fodder, as they were reluctant to fight their brothers. Some managed to escape captivity, yet they were not embraced as heroes but as potential spies. \
+	Outside of their size there is not much diffrence between a proper half-orc and dwarvened variant. Both posses unnatural strength, live mostly and isolation and are prone to violence. \
 	\n\n\
 	THIS IS AN <I>EXTREMELY</I> DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
 
