@@ -952,6 +952,7 @@
 #include "code\datums\brewing_recipes\items\cheese.dm"
 #include "code\datums\browser\_browser.dm"
 #include "code\datums\browser\modal\_modal.dm"
+#include "code\datums\browser\modal\alert.dm"
 #include "code\datums\browser\modal\input\input_list.dm"
 #include "code\datums\browser\modal\input\input_text.dm"
 #include "code\datums\carry_weight_modifiers\_carryweight_modifier.dm"
