@@ -950,6 +950,7 @@
 /datum/stress_event/battle_stim
 	desc = "I feel ready for battle!"
 	stress_change = -2
+	timer = 10 minutes
 
 /datum/stress_event/gambling
 	desc = "I feel like my chances of making it big have decreased..."
