@@ -188,9 +188,7 @@
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
 	icon_state = "isword"
-	wdefense = GREAT_PARRY
-	force = DAMAGE_SWORD - 2
-	force_wielded = DAMAGE_SWORD_WIELD - 2
+	wdefense = GOOD_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	smeltresult = /obj/item/ingot/iron
