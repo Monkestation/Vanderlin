@@ -157,12 +157,6 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	contains_lux = TRUE
 	used_table = /datum/chimeric_table/horc
 
-/datum/blood_type/human/hoblin
-	name = "Hoblin"
-	reagent_type = /datum/reagent/blood
-	contains_lux = TRUE
-	used_table = /datum/chimeric_table/hoblin
-
 /datum/blood_type/human/delf
 	name = "Dark Elf"
 	reagent_type = /datum/reagent/blood

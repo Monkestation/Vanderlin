@@ -105,24 +105,6 @@
 	node_purity_min = 30
 	node_purity_max = 45
 
-/datum/chimeric_table/hoblin
-	name = "Hoblin"
-	compatible_blood_types = list(
-		/datum/blood_type/human/horc,
-		/datum/blood_type/human/hoblin,
-	)
-	preferred_blood_types = list(
-		/datum/blood_type/human/hoblin,
-	)
-	input_nodes = list(
-		/datum/chimeric_node/input/gluttony/organ = 10
-	)
-	incompatible_blood_types = list()
-	base_blood_cost = 0.3
-	node_tier = 1
-	node_purity_min = 30
-	node_purity_max = 45
-
 /datum/chimeric_table/triton
 	name = "Triton"
 	compatible_blood_types = list(

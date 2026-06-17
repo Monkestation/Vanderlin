@@ -34,8 +34,3 @@
 	name = "Rakshari Eyes"
 	icon_state = "rakshari"
 	use_static = TRUE
-
-/datum/sprite_accessory/eyes/humanoid/hoblin
-	name = "Hoblin Eyes"
-	icon_state = "hoblin"
-	use_static = FALSE

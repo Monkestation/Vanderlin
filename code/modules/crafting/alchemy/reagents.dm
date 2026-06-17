@@ -422,7 +422,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.add_nausea(10 * (1 - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) / 20) * efficiency)
 		M.adjustToxLoss(0.5 * efficiency)
-	if(ishuman(M) && !ishalforc(M))
+	if(ishuman(M) && !ishalforc(M) && !ishoblin(M))
 		var/mob/living/carbon/human/graggar_lover = M
 		var/obj/item/organ/heart/H = graggar_lover.getorganslot(ORGAN_SLOT_HEART)
 		if(istype(H))
@@ -447,7 +447,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					var/datum/dna/dna_cache = new()
 					graggar_lover.dna.copy_dna(dna_cache)
 					var/species = /datum/species/halforc
-					if(isdwarf(graggar_lover) || ishalfling(graggar_lover) || graggar_lover.age == AGE_CHILD)
+					if(isdwarf(graggar_lover) || ishalfling(graggar_lover))
 						species = /datum/species/hoblin
 					//if(ishalforc(M)) // when this works it can be used
 					//	species = /datum/species/orc

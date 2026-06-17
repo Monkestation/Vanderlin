@@ -11,14 +11,14 @@
 	)
 
 /datum/species/hoblin
-	name = "Hoblin"
+	name = "Dwarven Hakf-Orc"
 	id = SPEC_ID_HOBLIN
 	multiple_accents = list(
 		"Half-Orc Accent" = ACCENT_HORC,
 		"Ossland Accent" = ACCENT_OSSLAND,
 	)
 	native_language = "Orcish"
-	desc = "Smaller cousins of Half-Orcs. \
+	desc = "Orkified dwarves. \
 	\n\n\
 	Hoblins, also known as half-goblins, are the offspring of half-goblins and another species, \
 	or mostly those who's bodies were too small or frail to ascend into a proper half-orc during the consumption of kinflesh. \
@@ -98,7 +98,7 @@
 
 	enflamed_icon = "widefire"
 
-	exotic_bloodtype = /datum/blood_type/human/hoblin
+	exotic_bloodtype = /datum/blood_type/human/horc
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/strange = 0.5)
 
 	customizers = list(
@@ -120,7 +120,7 @@
 		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
-		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/nightmare/hoblin,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears/goblin,
 		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
