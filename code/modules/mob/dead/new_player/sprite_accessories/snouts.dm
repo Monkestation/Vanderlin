@@ -498,22 +498,4 @@
 	name = "Hook Beak Big"
 	icon_state = "hookbeakbig"
 
-/datum/sprite_accessory/snout/nose/goblin/
-	abstract_type = /datum/sprite_accessory/snout/nose
-	use_static = TRUE
-
-/datum/sprite_accessory/snout/nose/goblin/nose
-	name = "Big nose"
-	icon = 'icons/mob/sprite_accessory/snouts/noses/hoblinnose.dmi'
-	icon_state = "nosehoblin"
-
-/datum/sprite_accessory/snout/nose/goblin/noseshark
-	name = "Shark nose"
-	icon = 'icons/mob/sprite_accessory/snouts/noses/sharknose.dmi'
-	icon_state = "noseshark"
-
-/datum/sprite_accessory/snout/nose/goblin/nosegoblin
-	name = "Goblin nose"
-	icon = 'icons/mob/sprite_accessory/snouts/noses/goblinnose.dmi'
-	icon_state = "nosegoblin"
 

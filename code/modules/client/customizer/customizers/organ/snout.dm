@@ -46,19 +46,3 @@
 	)
 
 
-/datum/customizer/organ/snout/nose/goblin
-	name = "Nose"
-	allows_disabling = TRUE
-	default_disabled = TRUE
-	customizer_choices = list(/datum/customizer_choice/organ/snout/nose)
-
-/datum/customizer_choice/organ/snout/nose
-	name = "Nose"
-	organ_type = /obj/item/organ/snout
-	default_accessory = /datum/sprite_accessory/snout/nose/goblin/nose
-	sprite_accessories = list(
-		/datum/sprite_accessory/snout/nose/goblin/nose,
-		/datum/sprite_accessory/snout/nose/goblin/noseshark,
-		/datum/sprite_accessory/snout/nose/goblin/nosegoblin,
-	)
-

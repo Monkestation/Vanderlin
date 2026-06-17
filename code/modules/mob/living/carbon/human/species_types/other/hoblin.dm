@@ -104,7 +104,6 @@
 	customizers = list(
 		/datum/customizer/organ/ears/goblin,
 		/datum/customizer/organ/eyes/humanoid/,
-		/datum/customizer/organ/snout/nose/goblin,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
 		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
@@ -128,7 +127,6 @@
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
-		ORGAN_SLOT_SNOUT = /obj/item/organ/snout,
 	)
 
 	hygiene_mod = 1.5
