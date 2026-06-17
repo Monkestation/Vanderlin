@@ -91,7 +91,6 @@
 	name = "Half-Orc"
 	compatible_blood_types = list(
 		/datum/blood_type/human/horc,
-		/datum/blood_type/human/hoblin,
 	)
 	preferred_blood_types = list(
 		/datum/blood_type/human/horc,
