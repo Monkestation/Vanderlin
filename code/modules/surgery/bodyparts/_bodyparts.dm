@@ -543,12 +543,11 @@
 		for(var/datum/injury/candidate_for_widening as anything in injuries)
 			if(candidate_for_widening.can_worsen(injury_type, damage))
 				compatible_injuries |= candidate_for_widening
-		if(!length(compatible_injuries))
-			return null
-		var/datum/injury/compatible_injury = pick(compatible_injuries)
-		compatible_injury.open_injury(damage)
-		last_injury = compatible_injury
-		. = compatible_injury
+		if(length(compatible_injuries))
+			var/datum/injury/compatible_injury = pick(compatible_injuries)
+			compatible_injury.open_injury(damage)
+			last_injury = compatible_injury
+			. = compatible_injury
 
 
 	// Creating NEW injury
