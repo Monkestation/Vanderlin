@@ -102,7 +102,7 @@
 	sellprice = 90
 	item_weight = 1 KILOGRAMS
 
-/obj/item/weapon/flail/silflail/Initialize(mapload)
+/obj/item/weapon/flail/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
