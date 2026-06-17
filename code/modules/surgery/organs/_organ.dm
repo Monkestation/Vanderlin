@@ -496,6 +496,10 @@
 	/// Handle blood
 	handle_blood(delta_time, times_fired)
 
+	// Damage decrements by a percent of maxhealth
+	if(can_self_heal(delta_time, times_fired))
+		handle_self_healing(delta_time, times_fired)
+
 	if(is_failing())
 		handle_failing_organ(delta_time, times_fired)
 		return
@@ -503,10 +507,6 @@
 	// Decrease failure time while healthy
 	if(failure_time > 0)
 		failure_time = max(0, failure_time - delta_time)
-
-	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time, times_fired))
-		handle_self_healing(delta_time, times_fired)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
 /obj/item/organ/proc/handle_failing_organ(delta_time, times_fired)

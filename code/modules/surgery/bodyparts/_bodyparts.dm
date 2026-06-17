@@ -899,7 +899,7 @@
 	if(!brute && !burn)
 		return FALSE
 
-	var/owner_endurance = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE)
+	var/owner_endurance = max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE), 1)
 
 	// We get the pain values before we scale damage down
 	// Pain does not care about your feelings, nor if your limb was already damaged

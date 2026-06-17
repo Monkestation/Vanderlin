@@ -66,4 +66,4 @@
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/storage/backpack/satchel/surgbag
-	backpack_contents = list(/obj/item/natural/worms/leech = 1, /obj/item/natural/cloth = 2)
+	backpack_contents = list(/obj/item/natural/worms/leech = 1, /obj/item/natural/cloth = 2, /obj/item/clothing/face/shepherd/rag = 1)
