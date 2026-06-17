@@ -45,8 +45,7 @@
 	body_parts_covered = FEET | LEGS
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
 	anvilrepair = null
-	melting_material = /datum/material/gold
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/gold
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -60,7 +59,7 @@
 	desc = "Padded sabatons of bronze, tightly strapped together and padded with hide from a fearsome beaste. The sandals clack about, yet they do not feel obstructive; if anything, you've never felt more agile while beplated."
 	icon_state = "bronzegreaves"
 	body_parts_covered = FEET | LEGS
-	melting_material = /datum/material/bronze
+	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
@@ -72,6 +71,7 @@
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/clothing/shoes/boots/armor/ironmaille
 	name = "chainmail boots"
@@ -83,7 +83,7 @@
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
 	item_weight = 1 KILOGRAMS
-	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
+	smeltresult = null
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75
 
