@@ -133,7 +133,7 @@
 /mob/living/carbon/human/proc/handle_hygiene()
 	if(stat == DEAD || HAS_TRAIT(src, TRAIT_NOHYGIENE))
 		return
-	var/dirt_factor = HYGIENE_FACTOR * hygiene_mod
+	var/dirt_factor = HYGIENE_FACTOR * dna.species.hygiene_mod
 	if(HAS_TRAIT(src, TRAIT_ALWAYS_CLEAN))
 		set_hygiene(HYGIENE_LEVEL_CLEAN)
 

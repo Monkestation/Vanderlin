@@ -31,21 +31,23 @@
 	if(owner.nutrition > 0)
 		// THEY HUNGER
 		var/hunger_rate = owner.total_nutriment_req
-		hunger_rate *= optimal_threshold/max(stomach_efficiency, 25)
 		// Whether we cap off our satiety or move it towards 0
 		if(owner.satiety > MAX_SATIETY)
 			owner.satiety = MAX_SATIETY
 		else if(owner.satiety > 0)
-			owner.satiety -= (0.5 * delta_time)
+			owner.satiety--
 		else if(owner.satiety < -MAX_SATIETY)
 			owner.satiety = -MAX_SATIETY
 		else if(owner.satiety < 0)
-			owner.satiety += (0.5 * delta_time)
-			hunger_rate *= 2
+			owner.satiety++
+			if(SPT_PROB(round(-owner.satiety/77), delta_time))
+				owner.set_jitter_if_lower(10 SECONDS)
+			hunger_rate *= 3
 		hunger_rate *= owner.physiology.hunger_mod
+		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
 		if (ishuman(owner))
-			hunger_rate *= owner.nutrition_mod
-		owner.adjust_nutrition(-hunger_rate * (0.5 * delta_time))
+			hunger_rate *= owner.dna.species.nutrition_mod
+		owner.adjust_nutrition(-hunger_rate * delta_time)
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req
 		thirst_rate *= optimal_threshold/max(stomach_efficiency, 25)
