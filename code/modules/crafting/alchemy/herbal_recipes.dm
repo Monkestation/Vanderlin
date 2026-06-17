@@ -604,25 +604,6 @@
 /datum/reagent/poison/herbal/tranq/overdose_start(mob/living/M)
 	. = ..()
 	M.Unconscious(20 SECONDS)
-
-/datum/reagent/poison/herbal/jaw
-	name = "Jaw Rot"
-	description = "Substance which rapidly destroys tissue in the mouth and jaw, popular among vampire hunters."
-	reagent_state = LIQUID
-	color = "#3e25ce"
-	metabolization_rate = 0.5
-	taste_description = "cavities and painfull sweetness"
-
-/datum/reagent/poison/herbal/jaw/on_mob_life(mob/living/L)
-	. = ..()
-	L.adjustFireLoss(0.1)
-	if(iscarbon(L))
-		var/mob/living/carbon/C = L
-		var/obj/item/bodypart/head/toothies = C.get_bodypart(BODY_ZONE_HEAD)
-		if(toothies)
-			part.add_wound(/datum/wound/teeth)
-	else if(L.stat != DEAD)
-		L.death()
 		
 /datum/reagent/poison/herbal/erratique
 	name = "Erratique"
@@ -709,7 +690,6 @@
 	reagent_state = LIQUID
 	color = "#8b0000"
 	metabolization_rate = 0.5
-	overdose_threshold = 45
 	taste_description = "deceptive sweetness, followed by burning"
 
 /datum/reagent/poison/herbal/pain/on_mob_metabolize(mob/living/M)
@@ -718,12 +698,11 @@
 	M.add_stress(/datum/stress_event/souffrance)
 
 /datum/reagent/poison/herbal/gamble
-	name = "Desgracia"
+	name = "Desgracia"   //The debuff to end all debuffs. 
 	description = "Concentrated demonic essence which purges luck from the consumer."
 	reagent_state = LIQUID
 	color = "#8b0000"
 	metabolization_rate = 0.5
-	overdose_threshold = 45
 	taste_description = "misfortune"
 
 /datum/reagent/poison/herbal/gamble/on_mob_metabolize(mob/living/M)
@@ -732,9 +711,9 @@
 	M.add_stress(/datum/stress_event/gambling)
 
 /datum/reagent/poison/herbal/rajaijah //Goonstation my beloved
-	name = "Dark sun's shine"
+	name = "Dark sun's shine"  //basically just forces people into the vamp frenzy untill it finishes metabolizing.  
 	description = "Neurodegenerative brew which makes the user go temporarily insane with a craving for violence and blood."
-	color = "#053604" // rgb: 102, 71, 0
+	color = "#053604" 
 	metabolization_rate = 0.1
 	taste_description = "pure, unrestrained hate and hunger"
 
@@ -749,13 +728,13 @@
 	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
 /datum/reagent/poison/herbal/tear
-	name = "Sunder Toxin"
+	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
 	description = "Toxin used by orc raiding bands to weaken enemies for battle. Not very harmfull on it's own, but corrodes joints to limbs."
 	color = "#9c5aa5"
 	metabolization_rate = 0.01
 	taste_description = "you just bit your cheek"
 
-/datum/reagent/poison/herbal/tear/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/herbal/tear/on_mob_metabolize(mob/living/M)/
 	. = ..()
 	ADD_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 
@@ -764,8 +743,8 @@
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 
 /datum/reagent/poison/herbal/bioweapon
-	name = "NCSIV"
-	description = "Noncontagious Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of rapidly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
+	name = "NCSIV" //basically anthrax, hyper lethal, will be almost impossible to craft
+	description = "Noncontagious Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of quickly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
 	color = "#00ff0d"
 	metabolization_rate = 0.01
 	taste_description = "death on a microscopic level"
@@ -787,7 +766,7 @@
 	M.adjustToxLoss(compound_rate * REM * efficiency, 0)
 	M.add_nausea(1 * efficiency)
 	if(current_cycle > 8)
-		M.add_chem_effect(CE_ANTIBIOTIC, -5, "[type]")
+		M.add_chem_effect(CE_ANTIBIOTIC, -10, "[type]")
 	. = ..()
 
 /datum/reagent/poison/herbal/bioweapon/on_mob_metabolize(mob/living/M)
@@ -799,7 +778,7 @@
 	REMOVE_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane
-	name = "Kingsbane"
+	name = "Kingsbane"  //more of a joke poison, just messes with nobles and money
 	description = "A poison used by cultists of matthios, causing the afflicted to be disgusted by money. Some say this is only the dilute version, with the real, potent one capable of ruining ones mind."
 	color = "#ffb300"
 	metabolization_rate = 0.01
