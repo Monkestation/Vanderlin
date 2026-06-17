@@ -100,7 +100,7 @@
 	)
 
 	statsheet_male = /datum/attribute_holder/sheet/job/species/hoblin
-	statsheet_female = /datum/attribute_holder/sheet/job/spieces/hoblin/female
+	statsheet_female = /datum/attribute_holder/sheet/job/species/hoblin/female
 
 	enflamed_icon = "widefire"
 
