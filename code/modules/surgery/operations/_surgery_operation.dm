@@ -461,8 +461,8 @@
 	// The order of the modifiers matter, latter entries override earlier ones
 	var/static/list/modifiers = zebra_typecacheof(list(
 		/obj/structure/table/optable = 1.0,
-		/obj/structure/table = 1.25,
-		/obj/structure/bed = 1.5,
+		/obj/structure/bed = 1.25,
+		/obj/structure/table = 1.5,
 	))
 
 	var/mod = 2.0
