@@ -114,14 +114,33 @@
 	. = ..()
 	if(!.)
 		return FALSE
+
 	var/brute_heal = operation_args[OPERATION_BRUTE_HEAL] > 0
 	var/burn_heal = operation_args[OPERATION_BURN_HEAL] > 0
 	if(brute_heal && burn_heal)
-		return patient.getBruteLoss() > 0 || patient.getFireLoss() > 0
+		if(!iscarbon(patient))
+			return patient.getBruteLoss() > 0 || patient.getFireLoss() > 0
+		var/mob/living/carbon/carbon_patient = patient
+		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
+			if(injury.damage_type & (WOUND_BLUNT | WOUND_INTERNAL_BRUISE | WOUND_LASH))
+				return TRUE
+			if(injury.damage_type & WOUND_BURN)
+				return TRUE
 	else if(brute_heal)
-		return patient.getBruteLoss() > 0
+		if(!iscarbon(patient))
+			return patient.getBruteLoss() > 0
+		var/mob/living/carbon/carbon_patient = patient
+		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
+			if(injury.damage_type & (WOUND_BLUNT | WOUND_INTERNAL_BRUISE | WOUND_LASH))
+				return TRUE
 	else if(burn_heal)
-		return patient.getFireLoss() > 0
+		if(!iscarbon(patient))
+			return patient.getFireLoss() > 0
+		var/mob/living/carbon/carbon_patient = patient
+		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
+			if(injury.damage_type & WOUND_BURN)
+				return TRUE
+
 	return FALSE
 
 /datum/surgery_operation/basic/tend_wounds/on_preop(mob/living/patient, mob/living/surgeon, tool, list/operation_args)
