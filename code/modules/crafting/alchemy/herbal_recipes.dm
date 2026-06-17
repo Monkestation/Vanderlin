@@ -734,7 +734,7 @@
 	metabolization_rate = 0.01
 	taste_description = "you just bit your cheek"
 
-/datum/reagent/poison/herbal/tear/on_mob_metabolize(mob/living/M)/
+/datum/reagent/poison/herbal/tear/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 
