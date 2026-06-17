@@ -21,11 +21,6 @@
 		client_keysend_amount = 0
 		next_keysend_reset = world.time + (1 SECONDS)
 
-	if(mob.focus && istype(mob.focus, /obj/abstract/visual_ui_element/console_input))
-		var/obj/abstract/visual_ui_element/console_input/console_input = mob.focus
-		if(console_input.handle_keydown(_key))
-			return
-
 	//The "tripped" system is to confirm that flooding is still happening after one spike
 	//not entirely sure how byond commands interact in relation to lag
 	//don't want to kick people if a lag spike results in a huge flood of commands being sent
