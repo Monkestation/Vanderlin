@@ -615,7 +615,7 @@
 /datum/reagent/poison/herbal/erratique/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
-	L.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
 
 /datum/reagent/poison/herbal/erratique/on_mob_end_metabolize(mob/living/M)
 	. = ..()
@@ -951,7 +951,7 @@
 	desc = "I feel ready for battle!"
 	stress_change = -2
 	timer = 10 MINUTES
-	
+
 /datum/stress_event/gambling
 	desc = "I feel like my chances of making it big have decreased..."
 	stress_change = 1
