@@ -53,7 +53,7 @@
 		choicez += "SILVER"
 	choicez += "BRONZE"
 
-	var/selection = browser_input_list(user, "Make a Selection", src, choicez)
+	var/selection = browser_input_list(user, "Make a Selection", "[name]", choicez)
 	if(!selection)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
