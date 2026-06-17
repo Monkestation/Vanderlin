@@ -249,6 +249,13 @@
 	color = "#29404E"
 	},
 /area/under/tomb/indoors/magic)
+"aef" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "GALLOWBAND"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "aek" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/abyss_tile/three{
@@ -1748,6 +1755,12 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"aJX" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "aKe" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -3283,6 +3296,10 @@
 "bOm" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/lich)
+"bOv" = (
+/obj/structure/fluff/traveltile/bog_gallowband,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/bog/witch)
 "bPL" = (
 /obj/structure/chair/stool,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4108,13 +4125,6 @@
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog/e_highroad_camp)
-"cJL" = (
-/obj/structure/fluff/signage{
-	dir = 1;
-	name = "GALLOWBAND"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/witch)
 "cJR" = (
 /obj/structure/flora/rock/coral,
 /turf/open/floor/abyss_sand/path,
@@ -5531,6 +5541,18 @@
 /obj/item/bedsheet/double_pelt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog)
+"eaR" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "ebH" = (
 /obj/structure/door/abyss{
 	color = "#CD7F32";
@@ -5955,6 +5977,14 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/shelter/bog/lich)
+"ewz" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "ewD" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/carpet/red,
@@ -6920,20 +6950,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/bog/south/west)
-"frd" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
-	},
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "fro" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -8201,18 +8217,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/south/east)
-"gEU" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "gEX" = (
 /obj/structure/door/weak/bolt,
 /turf/open/floor/twig,
@@ -8648,6 +8652,12 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
+"hbP" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "hbS" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile/three{
@@ -9398,17 +9408,6 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/metal/alt,
 /area/indoors/shelter/bog/lich)
-"hRs" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "hRu" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -9842,6 +9841,20 @@
 /obj/item/natural/stone,
 /turf/open/floor/abyss_sand,
 /area/outdoors/bog/south/east)
+"irL" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "isc" = (
 /turf/open/floor/metal,
 /area/indoors/shelter/bog/lich)
@@ -11637,12 +11650,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
 /area/indoors/shelter/bog)
-"kch" = (
-/obj/structure/bridge{
-	dir = 4
-	},
-/turf/open/water/swamp,
-/area/outdoors/bog/witch)
 "kcx" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -12454,6 +12461,12 @@
 /obj/structure/fluff/steamvent,
 /turf/open/floor/herringbone,
 /area/indoors/shelter/bog/lich)
+"kNs" = (
+/obj/structure/bridge_stakes{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "kNv" = (
 /turf/open/floor/rooftop{
 	dir = 8
@@ -13472,20 +13485,6 @@
 "lRQ" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/beach)
-"lRR" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/machinery/light/fueled/firebowl/stumpb{
-	pixel_y = 10
-	},
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "lSC" = (
 /turf/open/floor/dirt,
 /area/outdoors/bog/beach)
@@ -13635,6 +13634,12 @@
 	desc = "A Hard to destroy wall stands before you with the godly might of Abyssor coursing through it."
 	},
 /area/under/cavewet)
+"lYy" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/swamp,
+/area/outdoors/bog/witch)
 "lYI" = (
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/ruinedwood/darker,
@@ -13694,6 +13699,17 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog/witch)
+"mdJ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "mdT" = (
 /turf/closed/mineral/random/med,
 /area/outdoors/bog/west)
@@ -14168,6 +14184,20 @@
 /obj/structure/flora/rock/coral,
 /turf/open/floor/abyss_sand/path,
 /area/outdoors/bog/north/west)
+"mEw" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/machinery/light/fueled/firebowl/stumpb{
+	pixel_y = 10
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "mFF" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile,
@@ -15678,12 +15708,6 @@
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
 /area/outdoors/bog/south)
-"omi" = (
-/obj/structure/bridge_stakes{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "omn" = (
 /obj/structure/fluff/testportal{
 	pixel_x = 16;
@@ -16381,15 +16405,6 @@
 	color = "#7D9BAE"
 	},
 /area/under/tomb/indoors/magic)
-"paD" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
-	},
-/obj/structure/fluff/railing/wood,
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "pbg" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 5
@@ -16557,6 +16572,12 @@
 	},
 /turf/open/openspace,
 /area/outdoors/bog/central)
+"pld" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/indoors/shelter/bog/lich)
 "plt" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -16832,14 +16853,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
 /area/outdoors/bog/e_highroad)
-"pBU" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/obj/structure/fluff/railing/wood,
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "pCA" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/shelter/bog/e_highroad_camp)
@@ -19966,10 +19979,6 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/outdoors/bog/east)
-"tuX" = (
-/obj/structure/fluff/traveltile/bog_gallowband,
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/bog/witch)
 "tvg" = (
 /mob/living/carbon/human/species/aasimar/base/very_skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -20054,12 +20063,6 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
-"tyb" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
-/turf/open/floor/wood,
-/area/outdoors/bog/witch)
 "tyd" = (
 /obj/structure/fluff/testportal{
 	aportalloc = "Tower"
@@ -20924,12 +20927,6 @@
 "ulQ" = (
 /turf/open/floor/abyss_tile,
 /area/outdoors/bog/central)
-"umR" = (
-/obj/structure/chair/wood/alt/chair_noble/purple{
-	dir = 1
-	},
-/turf/open/floor/carpet/royalblack,
-/area/indoors/shelter/bog/lich)
 "unu" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/dirt/road,
@@ -21265,12 +21262,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/shelter/bog)
-"uBv" = (
-/obj/structure/bridge_stakes{
-	dir = 8
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/witch)
 "uBJ" = (
 /obj/structure/fluid_drain,
 /turf/open/floor/concrete,
@@ -22371,6 +22362,15 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/bog/beach/east)
+"vEj" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "vEx" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -41936,9 +41936,9 @@ cJo
 cJo
 nuG
 neZ
-hRs
-tyb
-pBU
+mdJ
+hbP
+ewz
 vSz
 nuG
 jsZ
@@ -42137,11 +42137,11 @@ yfu
 cJo
 gmP
 neZ
-frd
-tuX
-tuX
-tuX
-lRR
+irL
+bOv
+bOv
+bOv
+mEw
 neZ
 wKK
 uKN
@@ -42340,9 +42340,9 @@ cJo
 cJo
 neZ
 neZ
-gEU
-omi
-paD
+eaR
+aJX
+vEj
 neZ
 vSz
 rLh
@@ -42543,7 +42543,7 @@ yfu
 neZ
 bKe
 bKe
-kch
+lYy
 fGz
 bKe
 neZ
@@ -42744,8 +42744,8 @@ yfu
 vSz
 neZ
 cwA
-cJL
-uBv
+aef
+kNs
 cwA
 bdk
 neZ
@@ -102296,7 +102296,7 @@ uCr
 uUR
 ghb
 jvo
-umR
+pld
 ghb
 odp
 fQn
