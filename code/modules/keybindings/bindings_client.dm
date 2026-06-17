@@ -4,6 +4,11 @@
 	set instant = TRUE
 	set hidden = TRUE
 
+	if(mob.focus && istype(mob.focus, /obj/abstract/visual_ui_element/console_input))
+		var/obj/abstract/visual_ui_element/console_input/console_input = mob.focus
+		if(console_input.handle_keydown(_key))
+			return
+
 	// If not handled by console, continue with normal key handling
 	client_keysend_amount += 1
 
@@ -20,10 +25,6 @@
 		var/obj/abstract/visual_ui_element/console_input/console_input = mob.focus
 		if(console_input.handle_keydown(_key))
 			return
-
-	if(istype(click_intercept, /datum/buildmode) && (_key == "Shift"))
-		var/datum/buildmode/B = click_intercept
-		B.toggle_pixel_positioning_mode(TRUE)
 
 	//The "tripped" system is to confirm that flooding is still happening after one spike
 	//not entirely sure how byond commands interact in relation to lag
@@ -51,8 +52,8 @@
 		winset(src, null, "input.focus=true ; input.text=[url_encode(_key)]")
 		return
 
-	if(length(keys_held) >= MAX_HELD_KEYS && !keys_held[_key])
-		keyUp(keys_held[1], mousepos_x, mousepos_y, sizex, sizey) //We are going over the number of possible held keys, so let's remove the first one.
+	if(length(keys_held) > MAX_HELD_KEYS)
+		keys_held.Cut(1,2)
 
 	keys_held[_key] = TRUE
 	var/movement = movement_keys[_key]
@@ -79,7 +80,7 @@
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
 		if(istype(kb, /datum/keybinding/client/say))
 			continue
-		if(kb && kb.can_use(src) && kb.down(src, click_data[1], click_data[2], click_data[3]) && keycount >= MAX_COMMANDS_PER_KEY)
+		if(kb && kb.down(src, click_data[1], click_data[2], click_data[3]) && keycount >= MAX_COMMANDS_PER_KEY)
 			break
 
 	holder?.key_down(_key, src)
