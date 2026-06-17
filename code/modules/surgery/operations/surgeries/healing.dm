@@ -213,6 +213,8 @@
 		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
 			if(injury.required_status != BODYPART_ORGANIC)
 				continue
+			if(!injury.can_heal() || injury.is_surgical())
+				continue
 			if(burn_healed && injury.damage_type & WOUND_BURN)
 				injury.heal_damage(burn_healed)
 			if(brute_healed && (injury.damage_type & (WOUND_BLUNT | WOUND_LASH | WOUND_INTERNAL_BRUISE)))
