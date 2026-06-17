@@ -63,11 +63,11 @@
 /datum/anvil_challenge/proc/generate_anvil_beats(init = FALSE)
 	var/list/new_notes = list()
 
-	var/last_note_time = REALTIMEOFDAY + 0.5 SECONDS
-	for(var/i = 1 to min(rand(2,5), notes_left))
+	var/last_note_time = REALTIMEOFDAY + 1 SECONDS
+	for(var/i = 1 to notes_left)
 		notes_left--
 		var/atom/movable/screen/hud_note/hud_note = new(null, null, src)
-		var/time = rand(2, 4)
+		var/time = rand(5, 7)
 		if(difficulty >= 6)
 			time /= round((difficulty - 4) * 0.5)
 		hud_note.generate_click_type(difficulty)
