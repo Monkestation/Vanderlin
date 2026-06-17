@@ -98,3 +98,38 @@
   - rscadd: Inquisitition Cna purchase silver javelins
   - rscadd: Two unique and currently unavailable massive weapons. Volfslayer and The
       Dragonslayer axe
+2026-06-15:
+  Avalon-Proto:
+  - qol: The Apothecary's PURITY now has and a new category of items for sale
+  - balance: The Apothecary starts with more mammons for purchasing goods from PURITY.
+  Singul0:
+  - rscadd: Adds Blunderbusses into the game for Grenzelhoft Mercenaries to use.
+  Sulaboy:
+  - bugfix: Psyalter's Stole Sprite Fix
+  The-Awful:
+  - rscadd: New outfit for Malum Acolytes.
+2026-06-16:
+  Spitegremlin:
+  - rscadd: Added Huntsmaster Hand subclass, along with their hound
+  - rscadd: Added new Gambeson. Hunting Gambeson
+  - rscadd: Added new trait called keen eyes, and gave it to hunters and huntsmaster
+  - rscadd: Added a trait called flip jump to Spymaster, doesnt do anything other
+      then let them flip when they jump
+  - balance: gave Advisor a glock
+  - balance: gave all hand subclasses a standard 8 since i was told too, and the default
+      hand class had 8
+  - balance: gave pilgrim hunter forager and keeneyes trait, to match with normal
+      hunter
+2026-06-17:
+  Avalon-Proto:
+  - bugfix: Fixed some bugs with all the weapons added in my last PR
+  Magiy-Anne:
+  - bugfix: Gold Armor should now be much easier to make
+  ModDownloading:
+  - rscadd: Bandits now start with Halfmasks in addition to their other gear.
+  - rscadd: Rusted armor can now be found in random loot.
+  - balance: Steel masks are more common in random loot.
+  Severus840:
+  - map: WPP Church moved closer into town
+  - map: WPP Merchant moved closer into town
+  - map: WPP generally a lot of town changes, see PR for full changelog.

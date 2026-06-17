@@ -193,6 +193,7 @@
 		/datum/supply_pack/luxury/talkstone,
 		/datum/supply_pack/luxury/gold_plaque_belt,
 		/datum/supply_pack/weapons/ranged/puffer,
+		/datum/supply_pack/weapons/ranged/blunderbuss,
 		/datum/supply_pack/weapons/ammo/bullets,
 		/datum/supply_pack/weapons/ranged/musket
 	)
