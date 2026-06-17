@@ -226,7 +226,7 @@
 		Causes \"bone sawed\" surgical state."
 
 	implements = list(
-		TOOL_SAW = 1.15,
+		TOOL_SAW = 1,
 		TOOL_IMPROVISED_SAW = 1.35,
 		/obj/item/weapon/shovel = 1.6,
 		/obj/item = 3.33,

@@ -3,7 +3,7 @@
 	desc = "Grant a patient a dosage of lux to restore their own."
 
 	implements = list(
-		/obj/item/reagent_containers/lux = 1.15,
+		/obj/item/reagent_containers/lux = 1,
 		/obj/item/reagent_containers/lux_tainted = 1.4,
 	)
 

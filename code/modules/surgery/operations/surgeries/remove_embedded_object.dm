@@ -5,7 +5,7 @@
 	operation_flags = OPERATION_STANDING_ALLOWED
 
 	implements = list(
-		TOOL_HEMOSTAT = 1.2,
+		TOOL_HEMOSTAT = 1,
 		TOOL_IMPROVISED_HEMOSTAT = 1.35,
 		IMPLEMENT_HAND = 1.45,
 	)

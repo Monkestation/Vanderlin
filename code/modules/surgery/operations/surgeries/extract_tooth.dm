@@ -3,7 +3,7 @@
 	desc = "Pull a tooth from the patient's jaw."
 
 	implements = list(
-		/obj/item/weapon/tongs = 1.2,
+		/obj/item/weapon/tongs = 1,
 		/obj/item/weapon/surgery/hemostat = 1.35,
 	)
 

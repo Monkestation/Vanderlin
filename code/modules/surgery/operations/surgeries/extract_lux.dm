@@ -5,7 +5,7 @@
 	category = "Pestran"
 
 	implements = list(
-		TOOL_SCALPEL = 1.2,
+		TOOL_SCALPEL = 1,
 		TOOL_SAW = 1.6,
 		IMPLEMENT_HAND = 2.5,
 	)
