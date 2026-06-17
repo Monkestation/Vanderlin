@@ -3,11 +3,20 @@
 
 /datum/attribute_holder/sheet/job/species/hoblin
 	raw_attribute_list = list(
-		STAT_SPEED = 2,
-		STAT_ENDURANCE = 1,
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = -2,
 		STAT_INTELLIGENCE = -2,
-		STAT_CONSTITUTION = -2,
-		STAT_FORTUNE = -2,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
+	)
+
+/datum/attribute_holder/sheet/job/species/hoblin/female
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = -1,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
 	)
 
 /datum/species/hoblin
@@ -91,6 +100,7 @@
 	)
 
 	statsheet_male = /datum/attribute_holder/sheet/job/species/hoblin
+	statsheet_female = /datum/attribute_holder/sheet/job/spieces/hoblin/female
 
 	enflamed_icon = "widefire"
 
