@@ -15,7 +15,7 @@
 /// Basically if we act as though the reagent amount is a measure of how much powder there is
 /// we want to delete if we hit 0. so we wrap trans_to
 /obj/item/reagent_containers/powder/proc/transfer_powder(atom/transferring_to, amount, mob/living/user, method = NONE)
-	if(!transferring_to || amount)
+	if(!transferring_to || !amount)
 		return
 
 	if(!transferring_to.reagents)
@@ -132,6 +132,7 @@
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 16
 	metabolization_rate = 0.2
+	metabolized_traits = list(TRAIT_DRUQK)
 
 /atom/movable/screen/fullscreen/druqks
 	icon_state = "spa"
@@ -153,20 +154,20 @@
 		M.sate_addiction(/datum/quirk/vice/junkie)
 	..()
 
-/datum/reagent/druqks/on_mob_metabolize(mob/living/M)
-	M.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
-	M.set_drugginess(30 SECONDS)
-	if(M.client)
-		ADD_TRAIT(M, TRAIT_DRUQK, "based")
-		M.refresh_looping_ambience()
+/datum/reagent/druqks/on_mob_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
+	affected_mob.set_drugginess(30 SECONDS)
+	if(affected_mob.client)
+		affected_mob.refresh_looping_ambience()
 
-/datum/reagent/druqks/on_mob_end_metabolize(mob/living/M)
-	M.clear_fullscreen("druqk")
-	M.set_drugginess(0)
-	M.remove_status_effect(/datum/status_effect/buff/druqks)
-	if(M.client)
-		REMOVE_TRAIT(M, TRAIT_DRUQK, "based")
-		M.refresh_looping_ambience()
+/datum/reagent/druqks/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.clear_fullscreen("druqk")
+	affected_mob.set_drugginess(0)
+	affected_mob.remove_status_effect(/datum/status_effect/buff/druqks)
+	if(affected_mob.client)
+		affected_mob.refresh_looping_ambience()
 
 /datum/reagent/druqks/overdose_process(mob/living/M)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.25*REM)
@@ -194,7 +195,7 @@
 
 /datum/reagent/ozium/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_PAINKILLER, 100, "[type]")
+	L.add_chem_effect(CE_PAINKILLER, 20, "[type]")
 	L.add_chem_effect(CE_STIMULANT, 2, "[type]")
 
 /datum/reagent/ozium/on_mob_end_metabolize(mob/living/L)
@@ -235,15 +236,17 @@
 	overdose_threshold = 50
 	metabolization_rate = 0.2
 
-/datum/reagent/moondust/on_mob_metabolize(mob/living/M)
-	animate(M.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
+/datum/reagent/moondust/on_mob_metabolize(mob/living/affected_mob)
+	. = ..()
+	animate(affected_mob.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
 	animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
-	M.add_chem_effect(CE_PULSE, 1, "[type]")
+	affected_mob.add_chem_effect(CE_PULSE, 1, "[type]")
 
-/datum/reagent/moondust/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/moondust)
-	animate(M.client)
-	M.remove_chem_effect(CE_PULSE, "[type]")
+/datum/reagent/moondust/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/moondust)
+	animate(affected_mob.client)
+	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
@@ -280,18 +283,20 @@
 	overdose_threshold = 50
 	metabolization_rate = 0.2
 
-/datum/reagent/moondust_purest/on_mob_metabolize(mob/living/M)
-	M.playsound_local(M, 'sound/ravein/small/hello_my_friend.ogg', 100, FALSE)
-	M.overlay_fullscreen("purest_kaif", /atom/movable/screen/fullscreen/purest)
-	animate(M.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
+/datum/reagent/moondust_purest/on_mob_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.playsound_local(affected_mob, 'sound/ravein/small/hello_my_friend.ogg', 100, FALSE)
+	affected_mob.overlay_fullscreen("purest_kaif", /atom/movable/screen/fullscreen/purest)
+	animate(affected_mob.client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
 	animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
-	M.add_chem_effect(CE_PULSE, 2, "[type]")
+	affected_mob.add_chem_effect(CE_PULSE, 2, "[type]")
 
-/datum/reagent/moondust_purest/on_mob_end_metabolize(mob/living/M)
-	animate(M.client)
-	M.clear_fullscreen("purest_kaif")
-	M.remove_status_effect(/datum/status_effect/buff/moondust_purest)
-	M.remove_chem_effect(CE_PULSE, "[type]")
+/datum/reagent/moondust_purest/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	animate(affected_mob.client)
+	affected_mob.clear_fullscreen("purest_kaif")
+	affected_mob.remove_status_effect(/datum/status_effect/buff/moondust_purest)
+	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)

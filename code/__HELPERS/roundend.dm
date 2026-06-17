@@ -33,7 +33,7 @@
 
 	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
 
-	to_chat(world, "<BR><BR><BR><span class='reallybig'>So ends this tale of Vanderlin.</span>")
+	to_chat(world, "<BR><BR><BR><span class='reallybig'>So ends this tale of [SSmapping.config?.map_name || "Vanderlin"].</span>")
 	get_end_reason()
 
 	var/list/key_list = list()
@@ -124,13 +124,13 @@
 
 	if(!check_for_lord(TRUE)) //TRUE forces the check, otherwise it will autofail.
 		end_reason = pick("Without a Monarch, the forces of Zizo grew ever bolder.",
-						"Without a Monarch, the settlement fell into turmoil.",
+						"Without a Monarch, [SSmapping.config?.map_name || "the settlement"] fell into turmoil.",
 						"Without a Monarch, some jealous rival reigned in tyranny.")
 
 	if(vampire_werewolf() == "vampire")
-		end_reason = "When the Vampires finished sucking the town dry, they moved on to the next one."
+		end_reason = "When the Vampires finished sucking [SSmapping.config?.map_name || "the town"] dry, they moved on to the next one."
 	if(vampire_werewolf() == "werewolf")
-		end_reason = "The Werevolves formed an unholy clan, marauding Rockhill until the end of its daes."
+		end_reason = "The Werevolves formed an unholy clan, marauding [SSmapping.config?.map_name || "the town"] until the end of its daes."
 
 	if(SSmapping.retainer.cult_ascended)
 		end_reason = "ZIZOZIZOZIZOZIZO"
@@ -140,9 +140,9 @@
 
 
 	if(end_reason)
-		to_chat(world, "<span class='big bold'>[end_reason].</span>")
+		to_chat(world, span_bigbold("[end_reason]."))
 	else
-		to_chat(world, "<span class='big bold'>The town has managed to survive another week.</span>")
+		to_chat(world, span_bigbold("[SSmapping.config?.map_name || "The town"] has managed to survive another week."))
 
 /datum/controller/subsystem/ticker/proc/gamemode_report()
 	//TODO: This is a copypaste of antag_report(), this should be deleted

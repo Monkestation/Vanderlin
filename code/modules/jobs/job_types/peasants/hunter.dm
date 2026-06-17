@@ -71,6 +71,7 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/hunter/old
 
 	traits = list(
+		TRAIT_KEENEYES,
 		TRAIT_FORAGER
 	)
 
@@ -82,16 +83,12 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	head = /obj/item/clothing/head/brimmed
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
-
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/gun/ballistic/bow
-
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/storage/meatbag
-
 	gloves = /obj/item/clothing/gloves/leather
-
 	backpack_contents = list(
 		/obj/item/reagent_containers/powder/salt = 1,
 		/obj/item/flint = 1,

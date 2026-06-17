@@ -130,7 +130,7 @@
 	mask = /obj/item/clothing/face/facemask/steel/confessor
 	ring = /obj/item/clothing/ring/signet/silver
 	backpack_contents = list(
-		/obj/item/key/inquisition = 1,
+		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/rope/inqarticles/inquirycord = 1,
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/clothing/head/inqarticles/blackbag = 1,

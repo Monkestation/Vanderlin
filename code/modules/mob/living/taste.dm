@@ -14,16 +14,41 @@
 	else
 		. = 101 // can't taste anything without a tongue
 
+/**
+ * Check for anything blocking/overriding our tasting.
+ * Returns TRUE on a block, FALSE if not.
+ **/
+/mob/living/proc/check_tasting_blocks()
+	if(stat >= UNCONSCIOUS)
+		return TRUE
+
+	if(last_taste_time + 5 SECONDS >= world.time)
+		return TRUE
+
+	// Sometimes, try send a replacement message if we're hallucinating
+	/*
+	if(get_timed_status_effect_duration(/datum/status_effect/hallucination) > 100 SECONDS && prob(25))
+		var/text_output = pick("spiders","dreams","nightmares","the future","the past","victory",\
+			"defeat","pain","bliss","revenge","poison","time","space","death","life","truth","lies","justice","memory",\
+			"regrets","your soul","suffering","music","noise","blood","hunger","the american way")
+		send_taste_message(text_output)
+		return TRUE
+	*/
+
+	return FALSE
+
 // non destructively tastes a reagent container
 /mob/living/proc/taste(datum/reagents/from)
-	if(last_taste_time + 50 < world.time)
-		var/taste_sensitivity = get_taste_sensitivity()
-		var/text_output = from.generate_taste_message(src, taste_sensitivity)
-		if(text_output != last_taste_text || last_taste_time + 100 < world.time)
-			to_chat(src, "<span class='info'>I can taste [text_output].</span>")
-			// "something indescribable" -> too many tastes, not enough flavor.
+	if(check_tasting_blocks())
+		return
 
-			last_taste_time = world.time
-			last_taste_text = text_output
+	var/taste_sensitivity = get_taste_sensitivity()
+	var/text_output = from.generate_taste_message(src, taste_sensitivity)
+	if(text_output != last_taste_text || last_taste_time + 100 < world.time)
+		to_chat(src, "<span class='info'>I can taste [text_output].</span>")
+		// "something indescribable" -> too many tastes, not enough flavor.
+
+		last_taste_time = world.time
+		last_taste_text = text_output
 
 #undef DEFAULT_TASTE_SENSITIVITY

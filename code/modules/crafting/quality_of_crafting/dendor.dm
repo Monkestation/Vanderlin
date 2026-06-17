@@ -1,5 +1,6 @@
 /datum/repeatable_crafting_recipe/dendor
 	abstract_type = /datum/repeatable_crafting_recipe/dendor
+	subtypes_allowed = TRUE
 	category = "Dendor"
 
 /datum/repeatable_crafting_recipe/dendor/sacrifice_growing

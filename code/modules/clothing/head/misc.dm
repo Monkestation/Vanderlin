@@ -154,7 +154,7 @@
 	. = ..()
 	to_chat(user, span_warning ("The thorns prick me."))
 	var/obj/item/bodypart/arm = user.get_active_hand()
-	arm?.bodypart_attacked_by(BCLASS_CUT, 7)
+	arm?.bodypart_attacked_by(BCLASS_CUT, 7, modifiers = list(CRIT_MOD_CHANCE = -100))
 
 //................ Hennin ............... //
 /obj/item/clothing/head/hennin

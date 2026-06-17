@@ -88,7 +88,7 @@
 	if(check_whisper(original_message, forced))
 		return
 
-	var/in_crit = InCritical()
+	var/in_crit = HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION)
 	if(in_crit) // There are cheaper ways to do this, but they're less flexible, and this isn't ran all that often
 		var/end = TRUE
 		for(var/index in message_mods)
@@ -470,7 +470,7 @@
 		message = derpspeech(message, stuttering)
 
 	if(stuttering)
-		message = stutter(message)
+		message = stutter(message, stuttering)
 
 	if(slurring)
 		message = slur(message)

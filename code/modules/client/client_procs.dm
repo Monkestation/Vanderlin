@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	// asset_cache
 	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
-		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
+		asset_cache_job = asset_cache_confirm_arrival(href_list["asset_cache_confirm_arrival"])
 		if(!asset_cache_job)
 			return
 
