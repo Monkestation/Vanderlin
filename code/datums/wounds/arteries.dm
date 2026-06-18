@@ -10,11 +10,11 @@
 	min_damage_dividend = 0
 	strong_intent_bonus = TRUE
 	aimed_intent_bonus = TRUE
-	crit_message = list( \
-		"Blood sprays from %VICTIM's %BODYPART!", \
-		"Blood rushes from %VICTIM's %BODYPART!", \
-		"Blood starts to leak from %VICTIM's %BODYPART with a great force!", \
-		)
+	crit_message = list(
+		"Blood sprays from %VICTIM's %BODYPART!",
+		"Blood rushes from %VICTIM's %BODYPART!",
+		"Blood bursts from %VICTIM's %BODYPART with a great force!",
+	)
 	var/artery_type_override
 	var/list/artery_type_blacklist = list(ARTERY_HEART, ARTERY_NECK)
 	viable_zones = list(\
