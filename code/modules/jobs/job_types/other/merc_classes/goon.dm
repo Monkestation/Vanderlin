@@ -17,7 +17,7 @@
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 2,
 		STAT_STRENGTH = 2,
-		STAT_ENDURACNE = 3,
+		STAT_ENDURANCE = 3,
 		STAT_PERCEPTION = -1,
 		STAT_SPEED = -1
 	)
@@ -25,7 +25,7 @@
 /datum/attribute_holder/sheet/job/goon/light
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = -1,
-		STAT_ENDURACNE = 2,
+		STAT_ENDURANCE = 2,
 		STAT_PERCEPTION = 1,
 		STAT_SPEED = 2
 	)
