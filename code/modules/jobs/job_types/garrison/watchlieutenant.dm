@@ -83,30 +83,26 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Flail" = /obj/item/weapon/flail, \
+		"Flail" = list(/obj/item/weapon/flail, /obj/item/weapon/shield/heater), \
 		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Sword" = /obj/item/weapon/sword/iron, \
+		"Sword" = list(/obj/item/weapon/sword/iron, /obj/item/weapon/scabbard/sword, /obj/item/weapon/shield/heater), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
-		return
+		choice = pick(selectable)
 	switch(choice)
 		if("Flail")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/wood(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/flail)
 		if("Spear")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword(), ITEM_SLOT_BACK_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
 	head = /obj/item/clothing/head/helmet/watchmen/lt
 	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
-	shoes = /obj/item/clothing/shoes/boots/leather
+	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather
 	shirt = /obj/item/clothing/shirt/guard
 	armor = /obj/item/clothing/armor/cuirass/fluted/iron

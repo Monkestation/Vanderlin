@@ -30,28 +30,14 @@
 
 /datum/outfit/guardsman
 	name = "City Watchmen Base"
-	shirt = /obj/item/clothing/shirt/guard
-	pants = /obj/item/clothing/pants/guard
-	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
-	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather/townguard
 	gloves = /obj/item/clothing/gloves/leather
 	backl = /obj/item/storage/backpack/satchel
-	beltl = /obj/item/weapon/mace/cudgel
-	backpack_contents = list(
-		/obj/item/rope/chain = 1
-	)
 
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.dna && !(equipped_human.dna.species.id in RACES_PLAYER_NONDISCRIMINATED))
 		mask = /obj/item/clothing/face/shepherd
-
-/datum/outfit/guardsman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	. = ..()
-	if(H.wear_shirt && !findtext(H.wear_shirt.name, "([H.real_name])"))
-		H.wear_shirt.name = "[H.wear_shirt.name] ([H.real_name])"
-
 
 /datum/job/advclass/garrison
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
@@ -86,26 +72,17 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Sword & Cudgel" = /obj/item/weapon/sword/iron, \
-		"Axe & Cudgel" = /obj/item/weapon/axe/iron, \
-		"Mace & Shortsword" = /obj/item/weapon/mace, \
+		"Sword & Cudgel" = list(/obj/item/weapon/sword/iron, /obj/item/weapon/scabbard/sword, /obj/item/weapon/mace/cudgel), \
+		"Axe & Cudgel" = list(/obj/item/weapon/axe/iron, /obj/item/weapon/mace/cudgel), \
+		"Mace & Shortsword" = list(/obj/item/weapon/mace, /obj/item/weapon/sword/short, /obj/item/weapon/scabbard/sword), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
-	if(!choice)
-		choice = "Sword & Cudgel"
-		return
 	switch(choice)
 		if("Sword & Cudgel")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/iron(), ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel(), ITEM_SLOT_BELT_R, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
 		if("Axe & Cudgel")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/axe/iron(), ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel(), ITEM_SLOT_BELT_R, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 		if("Mace & Shortsword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace(), ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short(), ITEM_SLOT_BELT_R, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 
 /datum/attribute_holder/sheet/job/garrison/footman
@@ -130,15 +107,24 @@
 
 /datum/outfit/guardsman/footman
 	name = "City Watch Footman"
+	shirt = /obj/item/clothing/shirt/guard
+	pants = /obj/item/clothing/pants/guard
+	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
+	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	head = /obj/item/clothing/head/helmet/watchmen
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/cuirass/fluted/iron
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
-	
 	backpack_contents = list(
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1
 	)
+
+/datum/outfit/guardsman/footman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
+	. = ..()
+	if(H.wear_shirt && !findtext(H.wear_shirt.name, "([H.real_name])"))
+		H.wear_shirt.name = "[H.wear_shirt.name] ([H.real_name])"
 
 // City Watch Pikeman
 // Specialized in using spears and other polearms.
@@ -159,9 +145,8 @@
 
 /datum/job/advclass/garrison/pikeman/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
 	var/static/list/selectable = list( \
-		"Short Sword" = /obj/item/weapon/sword/short/iron, \
+		"Short Sword" = list(/obj/item/weapon/sword/short/iron, /obj/item/weapon/scabbard/sword), \
 		"Cudgel" = /obj/item/weapon/mace/cudgel, \
 	)
 	spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SIDE WEAPON", title = "PIKEMAN")
@@ -188,15 +173,24 @@
 
 /datum/outfit/guardsman/pikeman
 	name = "City Watch Pikeman"
+	shirt = /obj/item/clothing/shirt/guard
+	pants = /obj/item/clothing/pants/guard
+	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
+	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	head = /obj/item/clothing/head/helmet/watchmen
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/cuirass/fluted/iron
 	backr = /obj/item/weapon/polearm/spear
 	backl = /obj/item/storage/backpack/satchel
-	
 	backpack_contents = list(
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1
 	)
+
+/datum/outfit/guardsman/pikeman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
+	. = ..()
+	if(H.wear_shirt && !findtext(H.wear_shirt.name, "([H.real_name])"))
+		H.wear_shirt.name = "[H.wear_shirt.name] ([H.real_name])"
 
 // City Watch Archer
 // Mostly support watchmen role.
@@ -235,12 +229,25 @@
 
 /datum/outfit/guardsman/archer
 	name = "City Watch Archer"
+	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/brown
+	pants = /obj/item/clothing/pants/trou
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
+	shoes = /obj/item/clothing/shoes/boots/leather
 	head = /obj/item/clothing/head/helmet/watchmen
 	neck = /obj/item/clothing/neck/highcollier/iron
-	armor = /obj/item/clothing/armor/leather/splint
 	backr = /obj/item/gun/ballistic/bow
 	beltr = /obj/item/ammo_holder/quiver/arrows
+	beltl = /obj/item/weapon/mace/cudgel
+	backpack_contents = list(
+		/obj/item/rope/chain = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1
+	)
 
 /datum/outfit/guardsman/archer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/guard, /obj/item/clothing/shirt/undershirt/colored/guardsecond)
+	cloak = pick(/obj/item/clothing/cloak/half/guard, /obj/item/clothing/cloak/half/guardsecond)
+
+/datum/outfit/guardsman/archer/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
+	. = ..()
+	if(equipped_human.cloak && !findtext(equipped_human.cloak.name,"([equipped_human.real_name])"))
+		equipped_human.cloak.name = "[equipped_human.cloak.name]"+" "+"([equipped_human.real_name])"
