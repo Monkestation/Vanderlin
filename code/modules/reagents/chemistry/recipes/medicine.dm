@@ -410,5 +410,5 @@
 		/datum/reagent/water/gross = 5,
 		/datum/reagent/consumable/nutriment/bone_marrow = 5
 	)
-	results = list( = 15)
+	results = list(/datum/reagent/poison/tear = 15)
 	mix_message = "The reagents mix together to create a visually disgusting sludge."
