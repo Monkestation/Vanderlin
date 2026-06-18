@@ -13,7 +13,7 @@
 	)
 
 /datum/attribute_holder/sheet/job/blackoak/heavy
-		raw_attribute_list = list(
+	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 2,
