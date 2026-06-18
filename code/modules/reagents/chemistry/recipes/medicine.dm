@@ -348,16 +348,15 @@
 	results = list(/datum/reagent/poison/soulbane_ichor = 15)
 	mix_message = "The reagents collapse into a lightless black ichor that seems to absorb nearby illumination."
 
-/datum/chemical_reaction/
+/datum/chemical_reaction/gamble
 	name = ""
 	id = ""
 	required_reagents = list(
-		 = ,
-		 = ,
-		 = 
+		/datum/reagent/blood/tiefling = 10,
+		/datum/reagent/lux = 1
 	)
-	results = list( = 15)
-	mix_message = "."
+	results = list( /datum/reagent/poison/gamble = 10)
+	mix_message = "The blood changes hue slightly as the lux mixes, ever so slightly, and the glow vanishes."
 
 /datum/chemical_reaction/erratique
 	name = "Erratique Neurotoxin"
@@ -374,7 +373,7 @@
 	name = "NCSIV"  //I hope noone knows what this is at all and gets curious
 	id = "NCSIV"
 	required_reagents = list(
-		/datum/reagent/lux = 30,
+		/datum/reagent/lux = 20,
 		/datum/reagent/poison/rotwater = 20,
 		/datum/reagent/medicine/antidote = 5
 	)
@@ -385,7 +384,7 @@
 	name = "Kingsbane"
 	id = "kingsbane"
 	required_reagents = list(
-		/datum/reagent/lux = 5,
+		/datum/reagent/lux/tainted = 5,
 		/datum/reagent/consumable/ethanol/elfblue = 5,
 		/datum/reagent/mercury = 5
 	)
@@ -397,7 +396,7 @@
 	id = "rajaijah"
 	required_reagents = list(
 		/datum/reagent/blood = 20,
-		/datum/reagent/lux = 10,
+		/datum/reagent/lux/tainted = 10,
 		/datum/reagent/consumable/nutriment/bone_marrow = 5
 	)
 	results = list(/datum/reagent/poison/rajaijah = 20)
