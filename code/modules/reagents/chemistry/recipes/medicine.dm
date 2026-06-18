@@ -349,10 +349,11 @@
 	mix_message = "The reagents collapse into a lightless black ichor that seems to absorb nearby illumination."
 
 /datum/chemical_reaction/gamble
-	name = ""
-	id = ""
+	name = "Desgracia Luckbane"
+	id = "gamble"
 	required_reagents = list(
 		/datum/reagent/blood/tiefling = 10,
+		/datum/reagent/druqks = 10,
 		/datum/reagent/lux = 1
 	)
 	results = list( /datum/reagent/poison/gamble = 10)
@@ -363,7 +364,7 @@
 	id = "erratique"
 	required_reagents = list(
 		/datum/reagent/toxin/spidervenom_inert = 10,
-		/datum/reagent/spice = 5,
+		/datum/reagent/druqks = 5,
 		/datum/reagent/mercury = 5
 	)
 	results = list(/datum/reagent/poison/herbal/erratique = 20)
@@ -396,7 +397,7 @@
 	id = "rajaijah"
 	required_reagents = list(
 		/datum/reagent/blood = 20,
-		/datum/reagent/lux/tainted = 10,
+		/datum/reagent/lux_tainted = 5,
 		/datum/reagent/consumable/nutriment/bone_marrow = 5
 	)
 	results = list(/datum/reagent/poison/rajaijah = 20)
