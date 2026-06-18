@@ -1,3 +1,9 @@
+GLOBAL_VAR(harlequinn_hunt_quest) // weakref to active /datum/quest/custom/harlequinn_hunt
+
+#define HARLEQUINN_HUNT_COOLDOWN (35 MINUTES)
+#define HARLEQUINN_VESSEL_ID "Harlequinn"
+#define HARLEQUINN_HUNT_REWARD 500
+
 #define QUEST_DIFFICULTY_EASY "Easy"
 #define QUEST_DIFFICULTY_MEDIUM "Medium"
 #define QUEST_DIFFICULTY_HARD "Hard"
@@ -9,19 +15,37 @@
 #define QUEST_RAID "Raid"
 #define QUEST_OUTLAW "Outlaw"
 #define QUEST_BEACON "Beacon"
+#define QUEST_CUSTOM "Custom"
+#define QUEST_RECOVERY "Recovery"
+#define QUEST_PLANAR "Planar Assault"
+#define QUEST_OBJECTIVE "Decree"
 
-#define QUEST_REWARD_EASY_LOW 30
-#define QUEST_REWARD_EASY_HIGH 35
-#define QUEST_REWARD_MEDIUM_LOW 45
-#define QUEST_REWARD_MEDIUM_HIGH 65
-#define QUEST_REWARD_HARD_LOW 120
-#define QUEST_REWARD_HARD_HIGH 180
+#define QUEST_REWARD_EASY_LOW 5
+#define QUEST_REWARD_EASY_HIGH 15
+#define QUEST_REWARD_MEDIUM_LOW 30
+#define QUEST_REWARD_MEDIUM_HIGH 45
+#define QUEST_REWARD_HARD_LOW 50
+#define QUEST_REWARD_HARD_HIGH 90
 
 #define QUEST_DEPOSIT_EASY 5
 #define QUEST_DEPOSIT_MEDIUM 10
 #define QUEST_DEPOSIT_HARD 20
 
-#define QUEST_HANDLER_REWARD_MULTIPLIER 2
+#define QUESTBOARD_POOL_MAX_EASY 6
+#define QUESTBOARD_POOL_MAX_MEDIUM 4
+#define QUESTBOARD_POOL_MAX_HARD 2
+
+#define QUESTBOARD_COST_EASY 1 //3
+#define QUESTBOARD_COST_MEDIUM 2
+#define QUESTBOARD_COST_HARD 3
+
+#define QUESTBOARD_CUSTOM_ISSUE_FEE 20
+
+#define QUEST_THREAT_REDUCE_EASY 5
+#define QUEST_THREAT_REDUCE_MEDIUM 12
+#define QUEST_THREAT_REDUCE_HARD 25
+
+#define QUEST_HANDLER_REWARD_MULTIPLIER 1.25
 
 // Delivery quest additional reward scaling
 #define QUEST_DELIVERY_DISTANCE_DIVISOR 8 // Divides the distance for reward calculation
@@ -57,3 +81,10 @@
 	/mob/living/carbon/human/species/elf/dark/drowraider = 5, \
 	/mob/living/carbon/human/species/human/northern/bog_deserters = 5,\
 )
+
+/// This quest type can be issued directly from the notice board by a steward.
+#define CUSTOM_QUEST_NOTICEBOARD (1<<0)
+/// This quest type can be created via a player-written pledge scroll.
+#define CUSTOM_QUEST_PLEDGE (1<<1)
+// Can be issued as a harlequinn objective quest
+#define CUSTOM_QUEST_HARLEQUINN (1<<2)

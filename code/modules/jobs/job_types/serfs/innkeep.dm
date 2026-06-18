@@ -13,7 +13,7 @@
 	)
 
 /datum/job/innkeep
-	title = "Innkeep"
+	title = JOB_INNKEEP
 	tutorial = "Liquor, lodging, and lavish meals... your business is the beating heart of Vanderlin. \
 		You're the one who provides the hardworking townsfolk with a place to eat and drink their sorrows away, \
 		and accommodations for weary travelers passing through."
@@ -44,9 +44,10 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/innkeep
-	name = "Innkeep"
+	name = JOB_INNKEEP
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/shortboots
@@ -66,8 +67,3 @@
 	..()
 	if(equipped_human.gender == FEMALE)
 		armor = /obj/item/clothing/shirt/dress
-		shoes = /obj/item/clothing/shoes/shortboots
-		neck = /obj/item/storage/belt/pouch/coins/mid
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/keyring/innkeep
-		beltr = /obj/item/reagent_containers/glass/bottle/beer/blackgoat

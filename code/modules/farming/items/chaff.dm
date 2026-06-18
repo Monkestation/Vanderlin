@@ -3,6 +3,7 @@
 	desc = "Grain that has not yet been made suitable for grinding and baking."
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "chaff1"
+	item_weight = 200 GRAMS
 	var/foodextracted = null
 	var/canthresh = TRUE
 
@@ -17,6 +18,7 @@
 								span_notice("I shuck [src]."))
 			var/obj/item/G = new foodextracted(get_turf(src))
 			G.set_quality(recipe_quality)
+			G.AddElement(/datum/element/visual_quality, recipe_quality)
 			user.put_in_active_hand(G)
 			new /obj/item/natural/fibers(get_turf(src))
 			qdel(src)
@@ -26,6 +28,7 @@
 	if(foodextracted && canthresh)
 		var/obj/item/extracted = new foodextracted(loc)
 		extracted.set_quality(recipe_quality)
+		extracted.AddElement(/datum/element/visual_quality, recipe_quality)
 		new /obj/item/natural/fibers(loc)
 		qdel(src)
 
@@ -70,17 +73,20 @@
 	name = "wheat stalks"
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/wheat
 	dropshrink = 0.8
+	item_weight = 180 GRAMS
 
 /obj/item/natural/chaff/oat
 	name = "oat stalks"
 	icon_state = "oatchaff"
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/oat
+	item_weight = 200 GRAMS
 
 /obj/item/natural/chaff/sunreed
 	name = "ear of sunreed"
 	desc = "Despite its native origin of Valeria, locals very rarely farm or even eat this crop due to it's rock-hard kernels."
 	icon_state = "maizechaff"
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/sunreed
+	item_weight = 150 GRAMS
 
 /*
 /obj/item/natural/chaff/rice

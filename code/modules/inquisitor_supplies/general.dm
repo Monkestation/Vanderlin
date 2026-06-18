@@ -173,7 +173,7 @@
 
 /obj/structure/closet/crate/chest/inqreliquary/relic/bullion/populate_contents()
 	for(var/i in 1 to 6)
-		new /obj/item/ingot/silverblessed/bullion(src)
+		new /obj/item/ingot/silverblessed(src)
 
 //  ARTICLES  RIGHT HERE! THAT'S RIGHT!
 
@@ -253,10 +253,20 @@
 	maximum = 1
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/puffer/populate_contents()
-	new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol(src)
+	new /obj/item/gun/ballistic/powder/wheellock/puffer(src)
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 
+/datum/inqports/equipment/blunderbuss
+	name = "1 Blunderbuss, 4 lead pellets and powder flask"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/blunderbuss
+	marquescost = 16
+	maximum = 1
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/blunderbuss/populate_contents()
+	new /obj/item/gun/ballistic/powder/wheellock/blunderbuss(src)
+	new /obj/item/storage/belt/pouch/pellets(src)
+	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 /*
 //Added this and then realized it wasn't actually in the bounty and I'm just stupid. It's staying here incase somebody wants it.
 
@@ -267,7 +277,7 @@
 	maximum = 1
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/musket/PopulateContents()
-	new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket(src)
+	new /obj/item/gun/ballistic/powder/musket(src)
 	new /obj/item/weapon/knife/dagger/bayonet(src)
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
@@ -329,6 +339,14 @@
 /obj/structure/closet/crate/chest/inqcrate/equipment/blackbags/populate_contents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/head/inqarticles/blackbag(src)
+
+/datum/inqports/equipment/javlins
+	name = "Bag Of Silver Javelins"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/javlins
+	marquescost = 12
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/javlins/populate_contents()
+	new  /obj/item/ammo_holder/javelin/silver(src)
 
 /datum/inqports/equipment/psydonhelms
 	name = "Helms of Psydon"

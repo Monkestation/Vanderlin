@@ -493,11 +493,9 @@
 /turf/open/floor/dirt,
 /area/under/tomb)
 "uN" = (
-/obj/structure/gravemarker{
-	desc = "To my strong father, I will not let you down."
-	},
 /obj/structure/flora/grass/herb/salvia,
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "uP" = (
@@ -614,11 +612,9 @@
 	},
 /area/under/tomb)
 "BO" = (
-/obj/structure/gravemarker{
-	desc = "To my wisest mother, you did much for me."
-	},
 /obj/structure/flora/grass/herb/artemisia,
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "Ct" = (

@@ -56,6 +56,11 @@
 }
 
 @font-face {
+  font-family: 'SyneTactile';
+  src: url('SyneTactile.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Thief by The Riddler';
   src: url('Thief_by_The_Riddler.ttf') format('truetype');
 }
@@ -73,4 +78,9 @@
 @font-face {
   font-family: 'Yataghan';
   src: url('Yataghan.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Jorvik Informal';
+  src: url('JorvikInformal.ttf') format('truetype');
 }

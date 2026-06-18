@@ -5,6 +5,7 @@
 	icon_state = "tights"
 	item_state = "tights"
 	color = CLOTHING_LINEN
+	item_weight = 65 GRAMS
 
 /obj/item/clothing/pants/tights/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -62,3 +63,9 @@
 /obj/item/clothing/pants/tights/sailor
 	name = "pants"
 	icon_state = "sailorpants"
+
+/obj/item/clothing/pants/tights/explorerpants
+	name = "explorer's pants"
+	desc = "Practical and modest, you hope that it will survive the next cavedive."
+	icon_state = "explorerpants"
+	item_state = "explorerpants"

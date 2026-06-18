@@ -32,6 +32,7 @@
 
 	grid_height = 64
 	grid_width = 32
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/Initialize()
 	. = ..()
@@ -57,6 +58,7 @@
 	max_integrity = INTEGRITY_STRONG
 	melt_amount = 75
 	sellprice = 6
+	item_weight = 150 GRAMS
 
 /obj/item/weapon/knife/dagger/navaja
 	name = "navaja"
@@ -68,6 +70,7 @@
 	var/extended = 0
 	wdefense = TERRIBLE_PARRY
 	sellprice = 30 //shiny :o
+	item_weight = 100 GRAMS
 
 /obj/item/weapon/knife/dagger/navaja/attack_self(mob/user)
 	extended = !extended
@@ -98,6 +101,7 @@
 	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
 	max_integrity = INTEGRITY_POOR
 	melt_amount = 75
+	item_weight = 250 GRAMS
 
 /datum/intent/snip // The salvaging intent! Used only for the scissors for now!
 	name = "snip"
@@ -116,7 +120,7 @@
 		var/obj/item/item = A
 		if(item.sewrepair && item.salvage_result) // We can only salvage objects which can be sewn!
 			. = TRUE
-			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing)
+			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, item.sewrepair)
 			var/salvage_time = (7 SECONDS - (skill_level * 10))
 			if(!do_after(user, salvage_time, A))
 				return
@@ -130,7 +134,7 @@
 				to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
 				playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
 				qdel(item)
-				user.mind.add_sleep_experience(/datum/attribute/skill/misc/sewing, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //Getting exp for failing
+				user.mind.add_sleep_experience(item.sewrepair, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //Getting exp for failing
 				return //We are returning early if the skill check fails!
 			item.salvage_amount -= item.torn_sleeve_number
 			for(var/i = 1; i <= item.salvage_amount; i++) // We are spawning salvage result for the salvage amount minus the torn sleves!
@@ -139,7 +143,7 @@
 			user.visible_message(span_notice("[user] salvages [item] into usable materials."))
 			playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
 			qdel(item)
-			user.mind.add_sleep_experience(/datum/attribute/skill/misc/sewing, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //We're getting experience for salvaging!
+			user.mind.add_sleep_experience(item.sewrepair, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //We're getting experience for salvaging!
 			return
 	return ..()
 
@@ -150,6 +154,7 @@
 	force = DAMAGE_DAGGER
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
+	item_weight = 280 GRAMS
 
 //................ Cleaver ............... //
 /obj/item/weapon/knife/cleaver
@@ -170,10 +175,10 @@
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
-	melting_material = /datum/material/steel
 	melt_amount = 75
 	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
 	dropshrink = 0.9
+	item_weight = 350 GRAMS
 
 //................ Hack-Knife ............... //
 /obj/item/weapon/knife/cleaver/combat
@@ -181,11 +186,12 @@
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
 	throwforce = DAMAGE_KNIFE + 6
-	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
+	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
+	item_weight = 250 GRAMS
 
 /obj/item/weapon/knife/cleaver/combat/getonmobprop(tag)
 	. = ..()
@@ -203,8 +209,8 @@
 	icon_state = "dagger_bronze"
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
-	melt_amount = 50
 	sellprice = 10
+	item_weight = 180 GRAMS
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -216,6 +222,7 @@
 	sellprice = 12
 
 	weapon_special = /datum/special_intent/triple_stab
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
@@ -223,6 +230,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
 	dropshrink = 1.0
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/hunting/kukri/iron
 	name = "iron kukri"
@@ -232,6 +240,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
+	item_weight = 250 GRAMS
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
@@ -241,6 +250,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 12
 	dropshrink = 1.0
+	item_weight = 220 GRAMS
 
 //................ Steel Dagger ............... //
 /obj/item/weapon/knife/dagger/steel
@@ -252,6 +262,7 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"
@@ -260,6 +271,7 @@
 	icon_state = "jile_steel"
 	sellprice = 20
 	dropshrink = 1.0
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/njora
 	name = "steel seme"
@@ -270,6 +282,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 20
 	dropshrink = 1.0
+	item_weight = 240 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/special
 	icon_state = "sdaggeralt"
@@ -279,6 +292,7 @@
 	name = "decorated dagger"
 	icon_state = "gsdagger"
 	desc = "A dagger of refined steel with lavish gold decoration, even in the hands of most nobles it is considered overly decadent."
+	item_weight = 230 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/stiletto
 	name = "stiletto"
@@ -286,6 +300,7 @@
 	icon_state = "stiletto"
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 	melt_amount = 45
+	item_weight = 150 GRAMS
 
 /obj/item/weapon/knife/hunting/kukri
 	name = "steel kukri"
@@ -294,25 +309,29 @@
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
+	item_weight = 270 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
-	name ="plaguebringer sickle"
+	name = "plaguebringer sickle"
 	desc = "A wicked edge brings feculent delights."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "pestrasickle"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand
-	name = "Fervor"
+	name = "\proper fervor"
 	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
-	name = "Apathy"
-	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
+	name = "\proper apathy"
+	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
+	item_weight = 220 GRAMS
 
 //................ Fanged dagger ............... //
 /obj/item/weapon/knife/dagger/steel/dirk
@@ -320,16 +339,18 @@
 	desc = "A dagger modeled after the fang of an anthrax spider."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderdagger"
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha //this is a placeholder weapon until they actually receive a proper baothan weapon
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
 	color = "#f78ccc"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/baothagift)
+	enchant(/datum/enchantment/on_hit/baothagift)
 
 
 //................ Silver Dagger ............... //
@@ -342,6 +363,7 @@
 	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
+	item_weight = 210 GRAMS
 
 /obj/item/weapon/knife/dagger/silver/Initialize(mapload)
 	. = ..()
@@ -354,6 +376,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psydagger"
 	sellprice = 60
+	item_weight = 210 GRAMS
 
 //................ Profane Dagger ............... //
 /obj/item/weapon/knife/dagger/steel/profane
@@ -363,10 +386,12 @@
 	max_blade_int = 300
 	icon_state = "pdagger"
 	melting_material = null
+	melt_amount = 0
 	embedding = list("embed_chance" = 0) // Embedding the cursed dagger has the potential to cause duping issues. Keep it like this unless you want to do a lot of bug hunting.
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
 	sellprice = 250
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
 	. = ..()
@@ -422,7 +447,7 @@
 	. = ..()
 	if(!ishuman(target))
 		return
-	if(target.stat == DEAD || (target.health < target.crit_threshold)) // Trigger soul steal or identity theft if the target is either dead or in crit
+	if(target.stat == DEAD || HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION)) // Trigger soul steal or identity theft if the target is either dead or in crit
 		if(istype(user.used_intent, /datum/intent/peculate))
 			if(!ishuman(user)) // carbons don't have all features of a human
 				to_chat(user, span_danger("You can't do that!"))
@@ -488,18 +513,23 @@
 				user.adjust_triumphs(1)
 				init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/target, mob/user)
+/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/victim, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 	record_round_statistic(STATS_ASSASSINATIONS)
-	var/mob/dead/observer/profane/S = new /mob/dead/observer/profane(src)
-	S.AddComponent(/datum/component/profaned, src)
-	S.name = "soul of [target.real_name]"
-	S.real_name = "soul of [target.real_name]"
-	S.deadchat_name = target.real_name
-	S.ManualFollow(src)
-	S.key = target.key
-	S.language_holder = target.language_holder.copy(S)
-	target.visible_message("<span class='danger'>[target]'s soul is pulled from their body and sucked into the profane dagger!</span>", "<span class='danger'>My soul is trapped within the profane dagger. Damnation!</span>")
+
+	var/mob/living/simple_animal/shade/soulstone_spirit = new /mob/living/simple_animal/shade(src)
+	soulstone_spirit.AddComponent(/datum/component/soulstoned, src)
+	soulstone_spirit.name = "soul of [victim.real_name]"
+	soulstone_spirit.real_name = "soul of [victim.real_name]"
+	soulstone_spirit.PossessByPlayer(victim.key)
+	victim.language_holder?.copy(soulstone_spirit)
+	if(user)
+		soulstone_spirit.language_holder?.copy_known_languages_from(user)
+	soulstone_spirit.get_language_holder().omnitongue = TRUE //Grants omnitongue
+
+	soulstone_spirit.cancel_camera()
+
+	victim.visible_message(span_danger("[victim]'s soul is pulled from their body and sucked into the profane dagger!"), span_danger("My soul is trapped within the profane dagger. Damnation!"))
 	playsound(src, 'sound/magic/soulsteal.ogg', 100, extrarange = 5)
 	blade_int = max_blade_int // Stealing a soul successfully sharpens the blade.
 	repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
@@ -519,28 +549,17 @@
 	qdel(chosen_ghost) // Get rid of that ghost!
 	return TRUE
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls(mob/user) // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
+/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls() // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
 	var/freed_souls = 0
-	for(var/mob/dead/observer/profane/A in src) // for every trapped soul in the dagger, whether they have left the game or not
-		to_chat(A, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")
-		A.returntolobby() //Send the trapped soul back to the lobby
-		user.visible_message("<span class='warning'>The [A.name] flows out from the profane dagger, finally free of its grasp.</span>")
+	for(var/mob/living/simple_animal/shade/shade in contents) // for every trapped soul in the dagger, whether they have left the game or not
+		to_chat(shade, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")
 		freed_souls += 1
-	user.visible_message("<span class='warning'>The profane dagger shatters into putrid smoke!</span>")
+		shade.returntolobby()
+		qdel(shade)
+		visible_message(span_warning("The [shade.name] flows out from the profane dagger, finally free of its grasp."))
+	visible_message(span_warning("The profane dagger shatters into putrid smoke!"))
 	qdel(src) // Delete the dagger. Forevermore.
 	return freed_souls
-
-/datum/component/profaned
-	var/atom/movable/container
-
-/datum/component/profaned/Initialize(atom/movable/container)
-	if(!istype(parent, /mob/dead/observer/profane))
-		return COMPONENT_INCOMPATIBLE
-	var/mob/dead/observer/profane/S = parent
-
-	src.container = container
-
-	S.forceMove(container)
 
 //................ Stone Knife ............... //
 /obj/item/weapon/knife/stone
@@ -554,7 +573,9 @@
 	max_blade_int = 50
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 0
 	sellprice = 5
+	item_weight = 150 GRAMS
 
 /obj/item/weapon/knife/stone/kukri
 	name = "joapstone kukri"
@@ -566,6 +587,7 @@
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 75
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/stone/opal
 	name = "opaloise knife"
@@ -577,12 +599,15 @@
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 105
+	item_weight = 180 GRAMS
+
 //................ Villager Knife ............... //
 /obj/item/weapon/knife/villager
 	name = "villager knife"
 	desc = "The loyal companion of simple peasants, able to cut hard bread and carve wood. A versatile kitchen utensil and tool."
 	icon_state = "villagernife"
 	melt_amount = 25
+	item_weight = 120 GRAMS
 
 /obj/item/weapon/knife/copper
 	name = "copper knife"
@@ -592,8 +617,8 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
-	melt_amount = 50
 	sellprice = 10
+	item_weight = 180 GRAMS
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
@@ -609,6 +634,7 @@
 	melt_amount = 50
 	sellprice = 3
 	flags_ai_inventory = AI_ITEM_THROWING
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"
@@ -621,6 +647,7 @@
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
 	sellprice = 2
+	item_weight = 75 GRAMS
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"
@@ -632,6 +659,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
 	sellprice = 4
+	item_weight = 85 GRAMS
 
 /obj/item/weapon/knife/throwingknife/psydon
 	name = "psydonian tossblade"
@@ -644,6 +672,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/psydon/Initialize(mapload)
 	. = ..()
@@ -658,12 +687,14 @@
 	max_integrity = INTEGRITY_POOR
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
 	sellprice = 5
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/throwcard
-	name = "Calling Card"
+	name = "\proper calling card"
 	desc = "A thin sheet of pig-iron stamped into a calling card, too thin and useless to be smelted. You've been had. From Heartfelt with love."
 	icon_state = "throwcard"
 	throw_speed = 5
 	max_integrity = INTEGRITY_WORST - 50 // It's not about how effective it is, it's about sending a message.
 	embedding = list("embedded_pain_multiplier" = 2, "embed_chance" = 50, "embedded_fall_chance" = 5)
 	sellprice = 2
+	item_weight = 30 GRAMS

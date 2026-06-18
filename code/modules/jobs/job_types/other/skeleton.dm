@@ -35,7 +35,8 @@
 		TRAIT_NOPAIN,
 		TRAIT_TOXIMMUNE,
 		TRAIT_NOSLEEP,
-		TRAIT_SHOCKIMMUNE
+		TRAIT_SHOCKIMMUNE,
+		TRAIT_NOBLOOD,
 	)
 
 
@@ -46,7 +47,6 @@
 	spawned.mind?.current.job = null
 
 	if(spawned.dna && spawned.dna.species)
-		spawned.dna.species.species_traits |= NOBLOOD
 		spawned.dna.species.soundpack_m = new /datum/voicepack/skeleton()
 		spawned.dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
@@ -56,13 +56,13 @@
 	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
 	spawned.update_a_intents()
 	spawned.grant_undead_eyes()
-	spawned.ambushable = FALSE
+	ADD_TRAIT(spawned, TRAIT_NOAMBUSH, JOB_TRAIT)
 	spawned.underwear = "Nude"
 	if(length(spawned.quirks))
 		spawned.clear_quirks()
 	spawned.update_body()
 	spawned.mob_biotypes = MOB_UNDEAD
-	spawned.faction = list(FACTION_UNDEAD)
+	spawned.set_faction(list(FACTION_UNDEAD))
 
 
 
@@ -115,6 +115,10 @@
 	outfit = /datum/outfit/skeleton/zizoid
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton/zizo
+	verbs = list(
+		/mob/living/carbon/human/proc/praise,
+		/mob/living/carbon/human/proc/communicate,
+	)
 
 /datum/job/skeleton/zizoid/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -125,9 +129,6 @@
 	if(spawned.dna?.species)
 		spawned.dna.species.native_language = "Zizo Chant"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
-
-	add_verb(spawned, /mob/living/carbon/human/proc/praise)
-	add_verb(spawned, /mob/living/carbon/human/proc/communicate)
 
 
 /* BASIC SKELETON OUTFIT */

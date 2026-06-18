@@ -122,7 +122,10 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE // Made of leather
 	smeltresult = /obj/item/fertilizer/ash
@@ -132,6 +135,7 @@
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
+	item_weight = 850 GRAMS
 
 
 /obj/item/clothing/neck/coif/AdjustClothes(mob/user)
@@ -174,6 +178,7 @@
 	armor = ARMOR_PADDED
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/neck/coif/cloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -190,7 +195,10 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
@@ -198,6 +206,7 @@
 	armor = ARMOR_LEATHER
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
+	item_weight = 275 GRAMS
 
 /obj/item/clothing/neck/bellcollar
 	name = "bell collar"
@@ -208,7 +217,10 @@
 	pickup_sound = SFX_JINGLE_BELLS
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = SFX_JINGLE_BELLS
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
@@ -220,6 +232,20 @@
 /obj/item/clothing/neck/bellcollar/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = list(SFX_JINGLE_BELLS))
+
+/obj/item/clothing/neck/woolen
+	name = "woolen collar"
+	desc = "A comfortable and thick collar made of wools and cloth, not protective but it sure keeps your neck warm."
+	icon_state = "woolencollar"
+	item_state = "woolencollar"
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_MOUTH
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+	dropshrink = 0.5
+	muteinmouth = FALSE
+	spitoutmouth = FALSE
+	sewrepair = TRUE
+
 //..................................................................................................................................
 /*---------------\
 |			 	 |
@@ -242,7 +268,7 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/iron
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
@@ -252,6 +278,8 @@
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
+
+	item_weight = 1 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -335,10 +363,18 @@
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
+	item_weight = 1.13 KILOGRAMS
 
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+
+/obj/item/clothing/neck/bevor/bronze
+	name = "bronze gorgette"
+	desc = "A jutting slab of bronze, traditionally mounted atop a panoplic assembly to veil the neck from precise strikes. </br>To tip the chin up while grounded is an ancient gesture; one which willingly beckons for the 'gift of mercy'."
+	icon_state = "bbevor"
+	melt_amount = 75
+	melting_material = /datum/material/bronze
 
 /obj/item/clothing/neck/bevor/iron
 	name = "iron bevor"
@@ -363,7 +399,6 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
 	smeltresult = /obj/item/ingot/iron
-	melting_material = /datum/material/iron
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
@@ -373,13 +408,20 @@
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
+	item_weight = 900 GRAMS
 
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
+/obj/item/clothing/neck/gorget/kazengun
+	name = "blackmeadow gorget"
+	desc = "A series of interlocking rings of metal set around the throat. Used by the kouken of Blackmeadow for precisely the same reason as the knights of Psydonia."
+	icon_state = "kazengunneckguard"
+
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
+	examine_name = "gorget"
 	icon_state = "collar_of_servitude"
 	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
 		servile and obedient under threat of its explosive potential detonating on their necks."
@@ -430,7 +472,7 @@
 		to_chat(user, "Collar is already unlocked!")
 
 
-/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
+/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
 
 	if(!ismob(loc))
@@ -474,6 +516,21 @@
 
 	qdel(src)
 
+/obj/item/clothing/neck/gorget/gold
+	name = "golden gorget"
+	desc = "A series of resplendant golden plates designed to protect the neck, traditionally worn atop a jacket or cuirass. The holy sigil between its buckled halves promises to carry the flame of its wearer, no matter what strike's poised its way."
+	icon_state = "goldgorget"
+	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
+	melting_material = /datum/material/gold
+	melt_amount = 75
+	grid_height = 96
+	grid_width = 96
+	sellprice = 200
+
+/obj/item/clothing/neck/gorget/gold/king
+	name = "royal golden gorget"
+	sellprice = 300
+
 /obj/item/collar_detonator
 	name = "collar detonator"
 	desc = "What seems to be an ordinary key at first is actually an enchanted contraption designed to \
@@ -485,7 +542,7 @@
 	throwforce = 0
 	drop_sound = 'sound/items/gems (1).ogg'
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
-	grid_height = 64
+	grid_height = 32
 	grid_width = 32
 
 /obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
@@ -505,7 +562,6 @@
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
 	smeltresult = /obj/item/ingot/bronze
-	melting_material = /datum/material/bronze
 	armor = ARMOR_MAILLE_GOOD
 
 /obj/item/clothing/neck/highcollier
@@ -531,6 +587,7 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	material_category = ARMOR_MAT_CHAINMAIL
+	item_weight = 1.12 KILOGRAMS
 
 /obj/item/clothing/neck/highcollier/AdjustClothes(mob/user)
 	if(loc == user)

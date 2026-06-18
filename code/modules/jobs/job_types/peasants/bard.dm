@@ -20,7 +20,7 @@
 	)
 
 /datum/job/bard
-	title = "Bard"
+	title = JOB_BARD
 	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, \
 	mostly because they are the last ones in a party to die. \
 	Their wish is to experience the greatest adventures of the age and write amazing songs \
@@ -39,7 +39,7 @@
 	exp_types_granted = list(EXP_TYPE_BARD)
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
@@ -52,7 +52,16 @@
 
 /datum/job/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.select_equippable(player_client, list(
+
+	spawned.grant_inspiration()
+
+	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
+		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+
+/datum/job/bard/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -60,18 +69,13 @@
 		"Flute" = /obj/item/instrument/flute,
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola
-		),
-		message = "Choose your instrument.",
-		title = "XYLIX"
+		"Viola" = /obj/item/instrument/viola,
 	)
-	spawned.inspiration = new /datum/inspiration(spawned)
 
-	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
-		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.",title = "XYLIX")
 
 /datum/outfit/bard
-	name = "Bard"
+	name = JOB_BARD
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random

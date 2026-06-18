@@ -13,6 +13,7 @@
 	dropshrink = 0.7
 	grid_height = 32
 	grid_width = 32
+	item_weight = 245 GRAMS
 
 	/// associative list of the names of servants to a weakref to their brain
 	var/alist/bound_servants = list()
@@ -68,7 +69,7 @@
 			to_chat(user, span_warning("[src] is already bound to this bell."))
 		else if(H.is_dead())
 			to_chat(user, span_warning("What good is a dead servant?"))
-		else if(H.mind?.has_antag_datum(/datum/antagonist/zombie))
+		else if(IS_DEADITE(H))
 			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
 		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
 			to_chat(user, span_warning("The enchantment seems to fail."))
@@ -95,7 +96,7 @@
 	var/remove = browser_input_list(user, "Who will be relinquished of service?","Service Bell", all_servants)
 	if(remove)
 		if(remove == "Relinquish all")
-			var/choice = input(user,"Are you sure you want to clear the servant list?","Service Bell",null) as null|anything in list("Yes", "No")
+			var/choice = tgui_alert(user, "Are you sure you want to clear the servant list?", "Service Bell", list("Yes", "No"))
 			if(choice != "Yes")
 				return
 			for(var/s_name in servants)

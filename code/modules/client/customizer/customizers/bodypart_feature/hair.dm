@@ -20,9 +20,9 @@
 /datum/customizer_choice/bodypart_feature/hair/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
 	..()
 	var/datum/customizer_entry/hair/hair_entry = entry
-	hair_entry.hair_color = sanitize_hexcolor(hair_entry.hair_color, 6, TRUE, initial(hair_entry.hair_color))
-	hair_entry.natural_color = sanitize_hexcolor(hair_entry.natural_color, 6, TRUE, initial(hair_entry.natural_color))
-	hair_entry.dye_color = sanitize_hexcolor(hair_entry.dye_color, 6, TRUE, initial(hair_entry.dye_color))
+	hair_entry.hair_color = sanitize_hexcolor(hair_entry.hair_color, default = initial(hair_entry.hair_color))
+	hair_entry.natural_color = sanitize_hexcolor(hair_entry.natural_color, default = initial(hair_entry.natural_color))
+	hair_entry.dye_color = sanitize_hexcolor(hair_entry.dye_color, default = initial(hair_entry.dye_color))
 
 /datum/customizer_choice/bodypart_feature/hair/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	..()
@@ -55,7 +55,7 @@
 				new_color = hairs[new_hair]
 			if(!new_color)
 				return
-			hair_entry.hair_color = sanitize_hexcolor(new_color, 6, TRUE)
+			hair_entry.hair_color = sanitize_hexcolor(new_color)
 		if("natural_gradient")
 			if(!allows_natural_gradient)
 				return
@@ -70,7 +70,7 @@
 			var/new_color = color_pick_sanitized_lumi(user, "Choose your natural gradient color:", "Character Preference", hair_entry.natural_color)
 			if(!new_color)
 				return
-			hair_entry.natural_color = sanitize_hexcolor(new_color, 6, TRUE)
+			hair_entry.natural_color = sanitize_hexcolor(new_color)
 		if("dye_gradient")
 			if(!allows_dye_gradient)
 				return
@@ -85,7 +85,7 @@
 			var/new_color = color_pick_sanitized_lumi(user, "Choose your dye gradient color:", "Character Preference", hair_entry.dye_color)
 			if(!new_color)
 				return
-			hair_entry.dye_color = sanitize_hexcolor(new_color, 6, TRUE)
+			hair_entry.dye_color = sanitize_hexcolor(new_color)
 
 /datum/customizer_entry/hair
 	var/hair_color = "#FFFFFF"
@@ -346,7 +346,18 @@
 		/datum/sprite_accessory/hair/head/twistbun,
 		/datum/sprite_accessory/hair/head/longestcurls,
 		/datum/sprite_accessory/hair/head/sidebraid,
-		/datum/sprite_accessory/hair/head/wild_fluff
+		/datum/sprite_accessory/hair/head/wild_fluff,
+		/datum/sprite_accessory/hair/head/nimrod,
+		/datum/sprite_accessory/hair/head/curlylocs,
+		/datum/sprite_accessory/hair/head/farmday,
+		/datum/sprite_accessory/hair/head/curlybob,
+		/datum/sprite_accessory/hair/head/snowdriftbangs,
+		/datum/sprite_accessory/hair/head/poofypoms,
+		/datum/sprite_accessory/hair/head/wolfcut,
+		/datum/sprite_accessory/hair/head/triplebuns,
+		/datum/sprite_accessory/hair/head/nest,
+		/datum/sprite_accessory/hair/head/strand,
+		/datum/sprite_accessory/hair/head/sodden
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton
@@ -405,7 +416,7 @@
 	var/datum/species/species = return_species(prefs)
 	if(prefs.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
 		return FALSE
-	return (prefs.gender == MALE) || istype(species, /datum/species/dwarf) || istype(species, /datum/species/triton)
+	return (prefs.gender == MALE) || (istype(species, /datum/species/dwarf) && prefs.gender == FEMALE) || istype(species, /datum/species/triton)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid
 	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/facial/humanoid)
@@ -436,7 +447,15 @@
 		/datum/sprite_accessory/hair/facial/ranger,
 		/datum/sprite_accessory/hair/facial/vandyke,
 		/datum/sprite_accessory/hair/facial/burns,
+		/datum/sprite_accessory/hair/facial/bushyburns,
 		/datum/sprite_accessory/hair/facial/hermit,
+		/datum/sprite_accessory/hair/facial/gnomish,
+		/datum/sprite_accessory/hair/facial/newlywed,
+		/datum/sprite_accessory/hair/facial/anniversary,
+		/datum/sprite_accessory/hair/facial/longbraid,
+		/datum/sprite_accessory/hair/facial/pinnacle,
+		/datum/sprite_accessory/hair/facial/enchanter,
+		/datum/sprite_accessory/hair/facial/curlypom,
 	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari

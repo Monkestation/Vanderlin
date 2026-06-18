@@ -59,17 +59,15 @@
 	shoes = /obj/item/clothing/shoes/boots/leather
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/hide
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	wrists = /obj/item/clothing/wrists/bracers/leather
-
 	pants = /obj/item/clothing/pants/trou/leather  // Male default
 	shirt = /obj/item/clothing/shirt/undershirt
 	gloves = /obj/item/clothing/gloves/fingerless  // 77% default
 	cloak = /obj/item/clothing/cloak/raincloak/colored/brown  // 67% default
-
 	backpack_contents = list(
 		/obj/item/bait = 1,
 		/obj/item/weapon/knife/hunting = 1,

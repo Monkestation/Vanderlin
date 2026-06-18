@@ -1,8 +1,3 @@
-/datum/attribute_holder/sheet/job/
-	raw_attribute_list = list(
-
-	)
-
 /datum/attribute_holder/sheet/job/brigand
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -41,15 +36,15 @@
 		TRAIT_MEDIUMARMOR,
 	)
 
-/datum/job/advclass/bandit/brigand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/bandit/brigand/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/weapons = list(
 		"Battleaxe & Cudgel" = list(/obj/item/weapon/axe/battle, /obj/item/weapon/mace/cudgel),
 		"Flail & Shield" = list(/obj/item/weapon/shield/wood, /obj/item/weapon/flail),
 	)
 
 	spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")
-
 
 /datum/outfit/bandit/brigand
 	name = "Brigand (Bandit)"
@@ -58,7 +53,7 @@
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/shepherd/rag = 1)
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	head = /obj/item/clothing/head/helmet/leather/volfhelm

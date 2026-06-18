@@ -15,6 +15,7 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "start adding berries to the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/biscuit_berry/create_outputs(list/to_delete, mob/user)
 	var/output_path = output
@@ -57,6 +58,7 @@
 	crafting_sound = 'sound/foley/kneading_alt.ogg'
 	crafting_message = "incorporate fresh gote cheese into the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/cheesebun_wedge
 	name = "Raw Wedge Cheesebun"
@@ -72,6 +74,7 @@
 	crafting_sound = 'sound/foley/kneading_alt.ogg'
 	crafting_message = "incorporate cheese into the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/cheesebun_fresh
 	name = "Raw Fresh Cheesebun"
@@ -87,6 +90,7 @@
 	crafting_sound = 'sound/foley/kneading_alt.ogg'
 	crafting_message = "incorporate fresh cheese into the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/grenzelbun
 	name = "Grenzel Bun"
@@ -103,6 +107,8 @@
 	craft_time = 6 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
+
 
 /datum/repeatable_crafting_recipe/cooking/grenzelbun_cocaumole
 	category = "Tiefling Cuisine"
@@ -154,3 +160,4 @@
 	craft_time = 6 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking

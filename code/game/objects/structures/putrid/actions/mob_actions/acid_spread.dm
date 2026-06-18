@@ -25,7 +25,7 @@
 	for(var/mob/living/L in range(3, target))
 		if(L == mob || L.stat == DEAD)
 			continue
-		if(mob.faction_check_mob(L))
+		if(mob.faction_check_atom(L))
 			continue
 		nearby_enemies++
 

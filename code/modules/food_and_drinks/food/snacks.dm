@@ -41,27 +41,31 @@ All foods are distributed among various categories. Use common sense.
 	possible_item_intents = list(/datum/intent/food)
 	foodtype = GRAIN
 	list_reagents = list()
+	indexed = TRUE
 	var/nutrition = 1
+	var/vitamin = 0.25
 	w_class = WEIGHT_CLASS_SMALL
 	var/transfers_tastes = FALSE
 	var/bitesize = 3 // how many times you need to bite to consume it fully
 	var/bitecount = 0
 	var/trash = null
-	var/slice_path    // for sliceable food. path of the item resulting from the slicing
+	var/slice_path // for sliceable food. path of the item resulting from the slicing
+	var/slice_skill
 	var/slice_bclass = BCLASS_CUT
 	var/slices_num
 	var/slice_batch = TRUE
 	var/eatverb
 	var/dried_type = null
 	var/dry = 0
+	var/should_dry = FALSE
 	var/dunkable = FALSE // for dunkable food, make true
 	var/dunk_amount = 10 // how much reagent is transferred per dunk
 	var/filling_color = "#FFFFFF" //color to use when added to custom food.
-	var/custom_food_type = null  //for food customizing. path of the custom food to create
-	var/junkiness = 0  //for junk food. used to lower human satiety.
+	var/custom_food_type = null //for food customizing. path of the custom food to create
+	var/junkiness = 0 //for junk food. used to lower human satiety.
 	var/list/bonus_reagents //the amount of reagents (usually nutriment and vitamin) added to crafted/cooked snacks, on top of the ingredients reagents.
 	var/customfoodfilling = 1 // whether it can be used as filling in custom food
-	var/list/tastes  // for example list("crisps" = 2, "salt" = 1)
+	var/list/tastes // for example list("crisps" = 2, "salt" = 1)
 	var/naturalist = FALSE
 
 	var/cooking = 0
@@ -78,7 +82,7 @@ All foods are distributed among various categories. Use common sense.
 	var/rotprocess = FALSE
 	var/become_rot_type = null
 
-	var/mill_result = null
+	var/atom/mill_result = null
 
 	var/fertamount = 50
 
@@ -109,6 +113,95 @@ All foods are distributed among various categories. Use common sense.
 		QDEL_NULL(reagents)
 	deltimer(rot_away_timer)
 	return ..()
+
+/obj/item/reagent_containers/food/snacks/return_recipe_data()
+	var/has_mill = !isnull(mill_result)
+	var/has_grind = length(grind_results)
+	var/has_juice = length(juice_results)
+	var/has_slice = !isnull(slice_path)
+	var/has_list_reagents = length(list_reagents)
+	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
+	var/list/sliced_from_paths = GLOB.snack_slice_reverse[type]
+
+	if(!has_mill && !has_grind && !has_list_reagents && !has_juice && !has_slice && !length(milled_from_paths) && !length(sliced_from_paths))
+		return null
+
+	var/list/data = list()
+	data["type"] = "snack_processing"
+	data["name"] = name
+	data["category"] = "Processing"
+	data["_output_path"] = "[type]"
+	data["output_name"] = name
+	data["output_icon"] = "[icon]"
+	data["output_state"] = "[icon_state]"
+
+	if(has_mill)
+		data["mill_name"] = initial(mill_result.name)
+		data["mill_icon"] = "[initial(mill_result.icon)]"
+		data["mill_state"] = "[initial(mill_result.icon_state)]"
+		data["mill_path"] = "[mill_result]"
+
+	if(has_grind)
+		var/list/grind = list()
+		for(var/datum/reagent/path as anything in grind_results)
+			grind += list(list("name" = initial(path.name), "amount" = grind_results[path]))
+		data["grind_results"] = grind
+
+	if(has_juice || has_list_reagents)
+		var/list/juice = list()
+		var/list/combined_path = juice_results + list_reagents
+		for(var/datum/reagent/path as anything in combined_path)
+			juice += list(list("name" = initial(path.name), "amount" = combined_path[path]))
+		data["juice_results"] = juice
+
+	if(has_slice)
+		var/atom/slicer = slice_path
+		data["slice_name"] = initial(slicer.name)
+		data["slice_icon"] = "[initial(slicer.icon)]"
+		data["slice_state"] = "[initial(slicer.icon_state)]"
+		data["slice_path"] = "[slice_path]"
+		data["slice_num"] = slices_num
+		if(slice_skill)
+			data["slice_skill"] = initial(slicer.name)
+
+	if(length(sliced_from_paths))
+		var/list/sliced_from = list()
+		for(var/atom/src_path as anything in sliced_from_paths)
+			sliced_from += list(list(
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+				"_path" = "[src_path]",
+			))
+		data["sliced_from"] = sliced_from
+
+	if(length(milled_from_paths))
+		var/list/milled_from = list()
+		for(var/atom/src_path as anything in milled_from_paths)
+			milled_from += list(list(
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+				"_path" = "[src_path]",
+			))
+		data["milled_from"] = milled_from
+
+	if(length(obtained_from))
+		var/list/sources = list()
+		for(var/list/entry as anything in obtained_from)
+			if(!islist(entry) || length(entry) < 2) continue
+			var/label = entry[1]
+			var/atom/src_path = entry[2]
+			sources += list(list(
+				"label" = label,
+				"_path" = "[src_path]",
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+			))
+		data["sources"] = sources
+
+	return data
 
 /datum/intent/food
 	name = "feed"
@@ -143,7 +236,7 @@ All foods are distributed among various categories. Use common sense.
 	if(rotprocess)
 		var/turf/open/T = get_turf(src)
 		var/temp_modifier = 1.0
-		var/turf_temp =  T?.return_temperature()
+		var/turf_temp = T?.return_temperature()
 
 		var/obj/structure/closet/dirthole/dirtgrave = recursive_loc_check(src, /obj/structure/closet/dirthole)
 		var/obj/structure/closet/crate/chest/chest = recursive_loc_check(src, /obj/structure/closet/crate/chest)
@@ -167,9 +260,10 @@ All foods are distributed among various categories. Use common sense.
 		if (istype(A, /area/indoors/town/vault))
 			temp_modifier = 0
 
-		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in get_turf(src)
-		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack) || !istype(loc, /obj/structure/closet/crate/chest/magical))
-			var/obj/structure/table/located = locate(/obj/structure/table) in loc
+		var/turf/location = get_turf(src)
+		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in location
+		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack))
+			var/obj/structure/table/located = locate(/obj/structure/table) in location
 			if(located || vendor || chest)
 				warming -= 4 * temp_modifier
 			else
@@ -244,10 +338,15 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(nutrition)
-		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
+		if(vitamin)
+			reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition * (1-vitamin), length(tastes) ? list("tastes" = tastes) : null)
+			reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, nutrition * vitamin, length(tastes) ? list("tastes" = tastes) : null)
+		else
+			reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
 	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
+	. = ..()
 	if(!eater)
 		return
 
@@ -389,12 +488,10 @@ All foods are distributed among various categories. Use common sense.
 				plate_check.fork_usages +=1
 				if(plate_check.fork_usages >= plate_check.max_fork_usages && !plate_check.dirty)
 					plate_check.dirty = TRUE
-					var/datum/component/particle_spewer = plate_check.GetComponent(/datum/component/particle_spewer/sparkle)
-					if(particle_spewer)
-						qdel(particle_spewer)
+					qdel(plate_check.GetComponent(/datum/component/particle_spewer/sparkle/turf_only))
 					plate_check.update_appearance(UPDATE_OVERLAYS)
 
-		if(M == user)								//If you're eating it myself.
+		if(M == user)
 			switch(M.nutrition)
 				if(NUTRITION_LEVEL_FAT to INFINITY)
 					user.visible_message("<span class='notice'>[user] forces [M.p_them()]self to eat \the [src].</span>", "<span class='notice'>I force myself to eat \the [src].</span>")
@@ -404,7 +501,7 @@ All foods are distributed among various categories. Use common sense.
 					user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
 					M.changeNext_move(CLICK_CD_MELEE * 0.5)
 		else
-			if(!isbrain(M))		//If you're feeding it to someone else.
+			if(!isbrain(M))
 				if(M.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
 					M.visible_message("<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>", \
 										"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
@@ -426,11 +523,25 @@ All foods are distributed among various categories. Use common sense.
 				to_chat(user, "<span class='warning'>[M] doesn't seem to have a mouth!</span>")
 				return
 
-		if(reagents)								//Handle ingestion of the reagent.
+		if(reagents)
 			if(M.satiety > -200)
 				M.satiety -= junkiness
 			playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
 			if(reagents.total_volume)
+				var/jaw_efficiency = LIMB_EFFICIENCY_OPTIMAL
+				if(iscarbon(M))
+					var/obj/item/bodypart/jaw = M.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+					if(jaw)
+						jaw_efficiency = jaw.limb_efficiency
+				if(jaw_efficiency <= LIMB_EFFICIENCY_DISABLING)
+					to_chat(user, span_warning("[M == user ? "Your" : "[M]'s"] jaw is far too inefficient to take a bite."))
+					return FALSE
+
+				if(jaw_efficiency < LIMB_EFFICIENCY_OPTIMAL)
+					var/chew_time = lerp(3 SECONDS, 1 SECONDS, jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL)
+					if(!do_after(M == user ? user : M, chew_time, M))
+						return FALSE
+
 				SEND_SIGNAL(src, COMSIG_FOOD_EATEN, M, user)
 				SEND_SIGNAL(M, COMSIG_MOB_FOOD_EAT, src)
 				var/fraction = min(bitesize / reagents.total_volume, 1)
@@ -438,7 +549,7 @@ All foods are distributed among various categories. Use common sense.
 				if((bitecount >= bitesize) || (bitesize == 1))
 					amt2take = reagents.total_volume
 
-				reagents.trans_to(M, amt2take, transfered_by = user, method = INGEST)
+				reagents.trans_to(M, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
 
 				if(M.has_quirk(/datum/quirk/boon/naturalist) && naturalist)
 					for(var/datum/reagent/R in reagents.reagent_list)
@@ -517,9 +628,14 @@ All foods are distributed among various categories. Use common sense.
 	if(chopping_sound)
 		playsound(user, 'sound/foley/chopping_block.ogg', 60, TRUE, -1) // added some choppy sound
 	if(slice_batch)
+		var/batch_time = 3 SECONDS
+		if(slice_skill)
+			batch_time *= GET_MOB_SKILL_SPEED_MOD(user, slice_skill)
 		if(!do_after(user, 3 SECONDS, src))
 			return FALSE
 		var/reagents_per_slice = reagents.total_volume/slices_num
+		if(slice_skill)
+			user.adjust_experience(slice_skill, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		for(var/i in 1 to slices_num)
 			var/obj/item/reagent_containers/food/snacks/slice = new slice_path(loc)
 			slice.filling_color = filling_color
@@ -532,6 +648,8 @@ All foods are distributed among various categories. Use common sense.
 		initialize_slice(slice, reagents_per_slice)
 		slices_num--
 		if(slices_num == 1)
+			if(slice_skill)
+				user.adjust_experience(slice_skill, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			slice = new slice_path(loc)
 			slice.filling_color = filling_color
 			initialize_slice(slice, reagents_per_slice)
@@ -708,3 +826,18 @@ All foods are distributed among various categories. Use common sense.
 			name = "nice [name]"
 	filling_color = filling_color
 	update_snack_overlays(src)
+
+/obj/item/reagent_containers/food/snacks/poisonglands
+	name = "venom sac"
+	desc = "A swollen venom sac drawn from a foul beast, heavy with bitter humors. Its contents are sought by alchemists for the brewing of deadly draughts."
+	icon_state = "venomgland"
+	nutrition = SNACK_POOR
+	list_reagents = list(
+		/datum/reagent/toxin/venom = 20,
+		/datum/reagent/medicine/soporpot = 20,
+		)
+	filling_color = "#8B4513"
+	faretype = FARE_IMPOVERISHED
+	foodtype = GROSS
+	burntime = 0
+	cooktime = 0

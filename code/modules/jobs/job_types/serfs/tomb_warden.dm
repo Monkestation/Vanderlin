@@ -30,7 +30,7 @@
 	)
 
 /datum/job/tomb_warden
-	title = "Tomb Warden"
+	title = JOB_TOMB_WARDEN
 	department_flag = SERFS
 	faction = FACTION_TOWN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -101,7 +101,7 @@
 
 
 /datum/outfit/tomb_warden
-	name = "Tomb Warden"
+	name = JOB_TOMB_WARDEN
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/merctoken = 2,

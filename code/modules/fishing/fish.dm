@@ -33,6 +33,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2)
+	item_weight = 300 GRAMS //idk about this one chief I'll come back
 
 	/// Flags for fish variables that would otherwise be TRUE/FALSE
 	var/fish_flags = FISH_FLAG_SHOW_IN_CATALOG|FISH_DO_FLOP_ANIM
@@ -148,109 +149,27 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	var/matrix/base_transform
 
-/obj/item/reagent_containers/food/snacks/fish/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
+/obj/item/reagent_containers/food/snacks/fish/return_recipe_data()
+	var/list/data = list()
+	data["type"]       = "fish"
+	data["name"]       = name
+	data["category"]   = "Fish"
+	data["desc"]       = desc
+	data["avg_size"]   = average_size
+	data["avg_weight"] = average_weight
+	data["fluid_type"] = required_fluid_type
+	data["temp_min"]   = required_temperature_min
+	data["temp_max"]   = required_temperature_max
 
-	var/html = {"
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<link rel="stylesheet" type="text/css" href="slop_menustyle2.css">
-			<style>
-				.fish-entry {
-					border: 2px solid #4a90e2;
-					margin: 10px 0;
-					padding: 10px;
-					background-color: #1a1a2e;
-				}
-				.fish-stat {
-					margin: 5px 0;
-					padding-left: 10px;
-				}
-				.stat-label {
-					color: #4a90e2;
-					font-weight: bold;
-				}
-				.difficulty-easy { color: #5cb85c; }
-				.difficulty-medium { color: #f0ad4e; }
-				.difficulty-hard { color: #d9534f; }
-				.trait-item {
-					padding: 5px;
-					margin: 3px 0;
-					border-left: 3px solid #e94560;
-				}
-				.lure-item {
-					padding: 5px;
-					margin: 3px 0;
-					border-left: 3px solid #4a90e2;
-				}
-			</style>
-		</head>
-		<body>
-			<div class='book'>
-				<div class='page'>
-					<h1>[name]</h1>
-					<div class='info'>
-						<img src='\ref[icon]?state=[icon_state]&dir=2' style='display: block; margin: 0 auto; transform: scale(3);' />
-						<p class='desc'>[desc]</p>
-					</div>
-	"}
+	var/list/tips    = build_fishing_tips()
+	data["spots"]        = tips["spots"]
+	data["difficulty"]   = tips["difficulty"]
+	data["fav_bait"]     = tips["favorite_bait"]
+	data["dislike_bait"] = tips["disliked_bait"]
+	data["lures"]        = tips["lures"]
+	data["traits"]       = tips["traits"]
 
-	html += "<div class='section'><h2>Physical Properties</h2>"
-	html += "<div class='fish-stat'><span class='stat-label'>Average Size:</span> [average_size] cm</div>"
-	html += "<div class='fish-stat'><span class='stat-label'>Average Size:</span> [average_weight] g</div>"
-	html += "<div class='fish-stat'><span class='stat-label'>Beauty Score:</span> [SSfishing.fish_properties[type][FISH_PROPERTIES_BEAUTY_SCORE]]</div>"
-	html += "</div>"
-
-	html += "<div class='section'><h2>Environmental Requirements</h2>"
-	html += "<div class='fish-stat'><span class='stat-label'>Required Fluid:</span> [required_fluid_type]</div>"
-	html += "<div class='fish-stat'><span class='stat-label'>Temperature Range:</span> [required_temperature_min]°C - [required_temperature_max]°C</div>"
-	html += "</div>"
-
-	html += "<div class='section'><h2>Feeding</h2>"
-	var/datum/reagent/food_type = food
-	if(food_type != /datum/reagent/consumable/nutriment)
-		html += "<div class='fish-stat'><span class='stat-label'>Preferred Food:</span> [initial(food_type.name)]</div>"
-	else
-		html += "<div class='fish-stat'><span class='stat-label'>Preferred Food:</span> Fish Feed</div>"
-	html += "</div>"
-
-	var/list/fishing_tips = build_fishing_tips()
-	html += "<div class='section'><h2>Fishing Information</h2>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Found at:</span> [fishing_tips["spots"]]</div>"
-
-	var/difficulty_class = "difficulty-[lowertext(fishing_tips["difficulty"])]"
-	html += "<div class='fish-stat'><span class='stat-label'>Difficulty:</span> <span class='[difficulty_class]'>[fishing_tips["difficulty"]]</span></div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Favorite Bait:</span> [fishing_tips["favorite_bait"]]</div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Disliked Bait:</span> [fishing_tips["disliked_bait"]]</div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Compatible Lures & Bait:</span></div>"
-	for(var/lure_name in fishing_tips["lures"])
-		html += "<div class='lure-item'>• [lure_name]</div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Behavior:</span></div>"
-	for(var/trait_desc in fishing_tips["traits"])
-		html += "<div class='trait-item'>• [trait_desc]</div>"
-
-	html += "</div>"
-
-	html += {"
-				</div>
-			</div>
-		</body>
-		</html>
-	"}
-	return html
-
-/obj/item/reagent_containers/food/snacks/fish/proc/show_menu(mob/user)
-	user << browse(generate_html(user), "window=fish_catalog;size=600x900")
+	return data
 
 /obj/item/reagent_containers/food/snacks/fish/proc/bait_description(bait)
 	if(ispath(bait))
@@ -282,6 +201,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	.["spots"] = english_list(spot_descriptions, nothing_text = "Unknown")
 
 	var/list/fish_list_properties = SSfishing.fish_properties
+	if(!(type in fish_list_properties))
+		return
 	var/list/fav_bait = fish_list_properties[type][FISH_PROPERTIES_FAV_BAIT]
 	var/list/disliked_bait = fish_list_properties[type][FISH_PROPERTIES_BAD_BAIT]
 	var/list/bait_list = list()
@@ -351,9 +272,31 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
+/obj/item/reagent_containers/food/snacks/fish/pre_attack_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!HAS_TRAIT(interacting_with, TRAIT_CATCH_AND_RELEASE))
+		return ..()
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		balloon_alert(user, "[p_theyre()] stuck to your hand!")
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	balloon_alert(user, "releasing fish...")
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	balloon_alert(user, "fish released")
+	var/goodbye_text = ""
+	if(status == FISH_DEAD)
+		goodbye_text = "[src] sinks motionlessly into [interacting_with]..."
+	else
+		goodbye_text = "[src] dives into [interacting_with]!"
+	user.visible_message(span_notice("[user] releases [src] into [interacting_with]. [goodbye_text]"), \
+		span_notice("You release [src] into [interacting_with]. [goodbye_text]"), \
+		span_notice("You hear a splash."))
+	released(interacting_with, user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /obj/item/reagent_containers/food/snacks/fish/proc/released(atom/location, mob/living/user)
 	playsound(location, 'sound/effects/splash.ogg', 50)
 	SEND_SIGNAL(location, COMSIG_FISH_RELEASED_INTO, src, user)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, src)
 	qdel(src)
 
 ///Main proc that makes the fish edible.
@@ -402,7 +345,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/get_base_edible_reagents_to_add()
 	var/return_list = list(
 		/datum/reagent/consumable/nutriment = 2,
-		/datum/reagent/blood = 1,
 	)
 	if(required_fluid_type == FISH_FLUID_SALTWATER)
 		return_list[/datum/reagent/flour] = 0.4
@@ -490,7 +432,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	temp_size = round(clamp(gaussian(base_size, size_deviation), average_size * 1/MAX_FISH_DEVIATION_COEFF, average_size * MAX_FISH_DEVIATION_COEFF))
 	var/weight_deviation = 0.4 * base_weight
 	temp_weight = round(clamp(gaussian(base_weight, weight_deviation), average_weight * 1/MAX_FISH_DEVIATION_COEFF, average_weight * MAX_FISH_DEVIATION_COEFF))
-	set_max_size_and_weight(temp_size, temp_weight)
+	set_max_size_and_weight(temp_size, temp_weight, force = TRUE)
 	if(update)
 		update_size_and_weight(temp_size, temp_weight)
 
@@ -530,11 +472,12 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	set_quality(fish_quality)
 
-///Set the maximum size and weight a fish can reach from base size and weight args if they have't been set already.
-/obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight)
-	if(!maximum_size)
+///Set the maximum size and weight a fish can reach from base size and weight args.
+///Always updates if called from randomize_size_and_weight (force = TRUE), otherwise only sets if uninitialized.
+/obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight, force = FALSE)
+	if(!maximum_size || force)
 		maximum_size = min(base_size * 2, average_size * MAX_FISH_DEVIATION_COEFF)
-	if(!maximum_weight)
+	if(!maximum_weight || force)
 		maximum_weight = min(base_weight * 2, average_weight * MAX_FISH_DEVIATION_COEFF)
 
 ///Updates weight and size, along with weight class, number of fillets you can get and grind results.
@@ -559,10 +502,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 			w_class = WEIGHT_CLASS_NORMAL
 		if(FISH_SIZE_NORMAL_MAX to FISH_SIZE_BULKY_MAX)
 			w_class = WEIGHT_CLASS_BULKY
-		if(FISH_SIZE_BULKY_MAX to FISH_SIZE_HUGE_MAX)
+		if(FISH_SIZE_BULKY_MAX to INFINITY)
 			w_class = WEIGHT_CLASS_HUGE
-		if(FISH_SIZE_HUGE_MAX to INFINITY)
-			w_class = WEIGHT_CLASS_GIGANTIC
 
 	if(size > FISH_SIZE_TWO_HANDS_REQUIRED || (HAS_TRAIT(src, TRAIT_FISH_SHOULD_TWOHANDED) && w_class >= WEIGHT_CLASS_BULKY))
 		AddComponent(/datum/component/two_handed, require_twohands = TRUE)
@@ -733,7 +674,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 		var/datum/fish_trait/trait = GLOB.fish_traits[fish_trait_type]
 		trait.apply_to_fish(src)
 
-/obj/item/reagent_containers/food/snacks/fish/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+/obj/item/reagent_containers/food/snacks/fish/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	check_flopping()
 
@@ -841,7 +782,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	if(HAS_TRAIT(src, TRAIT_FISH_STASIS) || status != FISH_ALIVE)
 		return
 	do_fish_process(seconds_per_tick)
-	if(status != FISH_ALIVE || !is_type_in_typecache(loc, SSfishing.fish_safe_turfs_by_type[type]))
+	if(loc && !HAS_TRAIT(loc, TRAIT_CATCH_AND_RELEASE))
 		time_passed_on_safe_turf = 0 SECONDS
 		return
 	time_passed_on_safe_turf += seconds_per_tick SECONDS
@@ -1136,7 +1077,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 				vision_distance = DEFAULT_MESSAGE_RANGE - 3,
 			)
 		var/body_zone = pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
-		user.apply_damage((force * 0.2) + w_class * 2, BRUTE, body_zone, user.run_armor_check(body_zone))
+		user.apply_damage((force * 0.2) + w_class * 2, BRUTE, body_zone, user.run_armor_check(body_zone), damage_type = BCLASS_BITE)
 		playsound(src,'sound/items/weapons/bite.ogg', 45, TRUE, -1)
 	else
 		if(in_aquarium)
@@ -1314,7 +1255,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, list/modifiers)
 	..()
 	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/cooking))*0.8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
@@ -1324,7 +1265,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 				new /obj/item/reagent_containers/food/snacks/chocolate_carp(loc)
 				qdel(I)
 				qdel(src)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 
 /obj/item/reagent_containers/food/snacks/chocolate_carp
 	name = "le carp au chocolat"

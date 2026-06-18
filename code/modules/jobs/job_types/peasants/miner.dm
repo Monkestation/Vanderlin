@@ -25,7 +25,7 @@
 	)
 
 /datum/job/miner
-	title = "Miner"
+	title = JOB_MINER
 	tutorial = "The depths of the hills, the ends of the lands - deeper and deeper below, you seek salt, ores, rocks - \
 	the heat and encroaching darkness shepherds you, giving forth your living... Soon enough, the earth will swallow you whole."
 	department_flag = PEASANTS
@@ -48,19 +48,17 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/miner
 
 /datum/outfit/miner
-	name = "Miner"
+	name = JOB_MINER
 	head = /obj/item/clothing/head/armingcap
 	pants = /obj/item/clothing/pants/trou
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	shirt = /obj/item/clothing/shirt/undershirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots/leather
-
 	belt = /obj/item/storage/belt/leather
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/weapon/pick
 	backr = /obj/item/weapon/shovel
 	backl = /obj/item/storage/backpack/backpack
-
 	backpack_contents = list(
 		/obj/item/flint = 1,
 		/obj/item/weapon/knife/villager = 1,
@@ -70,7 +68,6 @@
 /datum/outfit/miner/map_override(mob/living/carbon/human/H)
 	if(SSmapping.config.map_name != "Voyage")
 		return
-	head = /obj/item/clothing/head/armingcap
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
 	shoes = /obj/item/clothing/shoes/boots

@@ -165,6 +165,10 @@ DEFINE_BITFIELD(antimagic_flags, list(
 
 #define SPELL_PSYDON (1 << 2)
 
+#define SPELL_TEMPORARY (1 << 3)
+
+#define SPELL_UNETCHABLE (1 << 4)
+
 // Bitflags for spell requirements
 /// Whether the spell requires wizard clothes to cast.
 #define SPELL_REQUIRES_WIZARD_GARB (1 << 0)
@@ -205,3 +209,26 @@ DEFINE_BITFIELD(spell_requirements, list(
  * as it encompasses more states in which a mob may be "incorporeal from magic"
  */
 #define is_jaunting(atom) (istype(atom.loc, /obj/effect/dummy/phased_mob))
+
+/// When set, the item hijacks afterattack and fires a spell via diceroll
+/// rather than passively granting spells to the holder.
+#define SPELLOBJECT_HIJACK_CLICK (1<<0)
+/// When set (alongside HIJACK_CLICK), aim-failure picks a random nearby mob
+/// instead of always backfiring onto the user, and spell names are obscured in examine.
+#define SPELLOBJECT_CHAOTIC (1<<1)
+/// When set, the item deletes itself when all spell charges are exhausted
+#define SPELLOBJECT_CONSUMABLE (1<<2)
+/// If set update overlays adds a small version to the object
+#define SPELLOBJECT_VISUAL (1<<3)
+/// If set we will always fire true
+#define SPELLOBJECT_STABLE (1<<4)
+
+/// Diceroll requirement at each arcane skill tier for aimed-fire
+/// Lower = easier to hit the intended target (roll-under system)
+#define SPELLOBJECT_AIM_REQ_NONE        6
+#define SPELLOBJECT_AIM_REQ_NOVICE      9
+#define SPELLOBJECT_AIM_REQ_APPRENTICE  11
+#define SPELLOBJECT_AIM_REQ_JOURNEYMAN  13
+#define SPELLOBJECT_AIM_REQ_EXPERT      15
+#define SPELLOBJECT_AIM_REQ_MASTER      16
+#define SPELLOBJECT_AIM_REQ_LEGENDARY   17

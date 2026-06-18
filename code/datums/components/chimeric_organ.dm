@@ -401,3 +401,118 @@
 				return
 			var/datum/chimeric_node/output/picked_output = pick(available_outputs)
 			injected_special.attached_output = picked_output
+
+/datum/component/chimeric_organ/proc/ui_disconnect_node(node_id, node_type, mob/user)
+	var/datum/chimeric_node/input/inp
+	var/datum/chimeric_node/output/out
+
+	if(node_type == "input")
+		for(var/datum/chimeric_node/input/N as anything in inputs)
+			if("[N]" == node_id)
+				inp = N
+				break
+		if(!inp)
+			return FALSE
+		out = inp.attached_output
+		if(!out)
+			return FALSE
+
+		inp.attached_output = null
+		out.attached_input = null
+
+		inputs  -= inp
+		outputs -= out
+		partnerless_inputs += inp
+		partnerless_outputs += out
+
+	else if(node_type == "output")
+		for(var/datum/chimeric_node/output/N as anything in outputs)
+			if("[N]" == node_id)
+				out = N
+				break
+		if(!out)
+			return FALSE
+		inp = out.attached_input
+		if(!inp)
+			return FALSE
+
+		inp.attached_output = null
+		out.attached_input = null
+
+		inputs  -= inp
+		outputs -= out
+		partnerless_inputs += inp
+		partnerless_outputs += out
+	else
+		return FALSE
+
+	if(organ_owner)
+		to_chat(organ_owner, span_warning("You feel the humors in your [parent] shift and unseat."))
+	return TRUE
+
+/datum/component/chimeric_organ/proc/ui_connect_nodes(input_id, output_id, mob/user)
+	var/datum/chimeric_node/input/inp
+	var/datum/chimeric_node/output/out
+
+	for(var/datum/chimeric_node/input/N as anything in (partnerless_inputs + inputs))
+		if("[N]" == input_id)
+			inp = N
+			break
+
+	for(var/datum/chimeric_node/output/N as anything in (partnerless_outputs + outputs))
+		if("[N]" == output_id)
+			out = N
+			break
+
+	if(!inp || !out)
+		return FALSE
+
+	var/tier_diff = abs(inp.tier - out.tier)
+	if(tier_diff > maximum_tier_difference)
+		if(organ_owner)
+			to_chat(organ_owner, span_warning("These humors are too different in tier to pair (difference: [tier_diff], max: [maximum_tier_difference])."))
+		return FALSE
+
+	if(inp.attached_output)
+		ui_disconnect_node(input_id, "input", user)
+	if(out.attached_input)
+		ui_disconnect_node(output_id, "output", user)
+
+	pair_input_output(inp, out)
+
+	if(organ_owner)
+		to_chat(organ_owner, span_notice("You feel the humors in your [parent] align with a wet click."))
+	return TRUE
+
+/datum/chimeric_node/input/proc/to_tgui()
+	return list(
+		"id" = "[src]",
+		"name"  = name,
+		"tier" = tier,
+		"purity"  = node_purity,
+		"partner_id" = attached_output ? "[attached_output]" : null,
+		"is_special" = is_special,
+	)
+
+/datum/chimeric_node/output/proc/to_tgui()
+	return list(
+		"id" = "[src]",
+		"name" = name,
+		"tier"  = tier,
+		"purity"  = node_purity,
+		"partner_id" = attached_input ? "[attached_input]" : null,
+		"is_special" = is_special,
+	)
+
+/datum/chimeric_node/special/proc/to_tgui()
+	var/attached_id = null
+	if(attached_input)  attached_id = "[attached_input]"
+	if(attached_output) attached_id = "[attached_output]"
+
+	return list(
+		"id" = "[src]",
+		"name" = name,
+		"needs_attachment" = needs_attachment,
+		"attachment_type" = attachement_type,
+		"attached_id" = attached_id,
+	)

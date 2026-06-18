@@ -15,6 +15,7 @@
 
 	grid_height = 32
 	grid_width = 64
+	item_weight = 14 GRAMS
 	var/list/colors = list()
 
 

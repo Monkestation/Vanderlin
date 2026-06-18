@@ -1,5 +1,5 @@
 /datum/job/men_at_arms
-	title = "Men-at-arms"
+	title = JOB_MAN_AT_ARMS
 	tutorial = "Chosen by the Captain and King, you're not like those shit stinking City Watchmen. \
 	Like a hound on a leash, you stand vigilant for your masters. \
 	You live better than the rest of the taffers in this kingdom-- \
@@ -30,19 +30,25 @@
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 600
 	)
-
-/datum/job/men_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/watchman
 	name = "Men-at-arms Base"
+	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	cloak = /obj/item/clothing/cloak/stabard/guard
+	shirt = /obj/item/clothing/armor/gambeson/arming
+	neck = /obj/item/clothing/neck/bevor
+	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	pants = /obj/item/clothing/pants/trou/leather/guard
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/manorguard
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 
 /datum/outfit/watchman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()
@@ -91,18 +97,11 @@
 
 /datum/outfit/watchman/pikeman
 	name = "Pikeman Men-At-Arms"
-	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	armor = /obj/item/clothing/armor/chainmail/hauberk
-	shirt = /obj/item/clothing/armor/gambeson/arming
-	neck = /obj/item/clothing/neck/bevor
-	gloves = /obj/item/clothing/gloves/leather
 	beltr = /obj/item/weapon/sword/arming
 	backr = /obj/item/weapon/polearm/spear/billhook
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
 
 /datum/attribute_holder/sheet/job/menatarms/axeman
 	raw_attribute_list = list(
@@ -141,16 +140,11 @@
 
 /datum/outfit/watchman/axeman
 	name = "Axeman Men-At-Arms"
-	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	armor = /obj/item/clothing/armor/brigandine
 	shirt = /obj/item/clothing/armor/gambeson/heavy
-	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/chain
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/greataxe/steel
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
 
 /datum/attribute_holder/sheet/job/menatarms/ranger
 	raw_attribute_list = list(
@@ -187,25 +181,18 @@
 
 /datum/outfit/watchman/ranger
 	name = "Archer Men-At-Arms"
-	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	armor = /obj/item/clothing/armor/leather/splint
-	shirt = /obj/item/clothing/armor/gambeson/arming
 	beltr = /obj/item/weapon/mace/cudgel
-	neck = /obj/item/clothing/neck/bevor
-	gloves = /obj/item/clothing/gloves/leather
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
 
 /datum/outfit/watchman/ranger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	var/weapontypec = pickweight(list("Bow" = 6, "Crossbow" = 4))
 	switch(weapontypec)
 		if("Bow")
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+			backl = /obj/item/gun/ballistic/bow/long
 			backr = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			backl = /obj/item/gun/ballistic/bow/cross
 			backr = /obj/item/ammo_holder/quiver/bolts
 
 /datum/attribute_holder/sheet/job/menatarms/swordsman
@@ -244,15 +231,8 @@
 
 /datum/outfit/watchman/swordsman
 	name = "Swordsman Men-At-Arms"
-	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	armor = /obj/item/clothing/armor/chainmail/hauberk
-	shirt = /obj/item/clothing/armor/gambeson/arming
-	neck = /obj/item/clothing/neck/bevor
-	gloves = /obj/item/clothing/gloves/leather
 	beltr = /obj/item/weapon/sword/arming
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)

@@ -33,8 +33,7 @@ GLOBAL_LIST_EMPTY(pending_party_invites) // Format: invitee_ckey = list(party, i
 	)
 
 	// Show invitation popup to invitee
-	var/response = alert(invitee, "[inviter.real_name] has invited you to join the party '[party.party_name]'. Do you accept?",
-						"Party Invitation", "Accept", "Decline")
+	var/response = tgui_alert(invitee, "[inviter.real_name] has invited you to join the party '[party.party_name]'. Do you accept?", "Accept", list("Party Invitation", "Accept", "Decline"))
 
 	// Clean up the pending invite
 	GLOB.pending_party_invites -= invitee_ckey

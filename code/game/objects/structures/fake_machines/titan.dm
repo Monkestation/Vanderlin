@@ -48,6 +48,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		"SILENCE!!",
 		"Cancel",
 	)
+	interaction_flags_atom = INTERACT_ATOM_NO_FINGERPRINT_INTERACT|INTERACT_ATOM_IGNORE_RESTRAINED
 
 /obj/structure/fake_machine/titan/Initialize(mapload)
 	. = ..()
@@ -274,7 +275,9 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(!perform_check(user, FALSE))
 		reset_mode()
 		return FALSE
-	priority_announce(html_decode(user.treat_message(message)), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
+
+	message = SANITIZE_HEAR_MESSAGE(message)
+	SScommunications.make_announcement(user, FALSE, message)
 	reset_mode()
 	return TRUE
 
@@ -344,6 +347,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Declares someone an outlaw
 /obj/structure/fake_machine/titan/proc/declare_outlaw(mob/living/carbon/human/user, message)
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // We only state this if someone's name matches. Should be safer to decode as we have protections with names
+
 	if(message in GLOB.outlawed_players)
 		say("That person is already an outlaw!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -370,6 +375,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Pardons an outlaw
 /obj/structure/fake_machine/titan/proc/pardon_outlaw(mob/living/carbon/human/user, message)
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // We only state this if someone's name matches. Should be safer to decode as we have protections with names
+
 	if(message in GLOB.outlawed_players)
 		GLOB.outlawed_players -= message
 		priority_announce("[message] is no longer an outlaw in Vanderlin lands.", "[user.real_name], The [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
@@ -402,10 +409,14 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Changes the job of a nearby mob
 /obj/structure/fake_machine/titan/proc/change_position(mob/living/carbon/human/user)
-	if(!Adjacent(user))
+	if(get_dist(user, src))
 		return
-	var/list/mob/possible_mobs = orange(2, src)
-	if(!possible_mobs)
+	var/list/mob/possible_mobs = list()
+	for(var/mob/living/carbon/C in orange(2, get_turf(src)))
+		if(C.get_face_name("",null,FALSE))
+			possible_mobs |= C
+
+	if(!length(possible_mobs))
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 		say("No one around!")
 		return
@@ -413,29 +424,46 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	say("Who should change their post?")
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 
-	var/mob/victim = input(user, "Who should change their post?", src, null) as null|mob in possible_mobs - user
-	if(isnull(victim) || !Adjacent(user))
+	var/mob/living/carbon/victim = tgui_input_list(user, "Who should change their post?", src, possible_mobs)
+	if(!victim)
+		return
+	if(QDELETED(victim) || QDELETED(src) || QDELETED(user))
+		return
+	if(!can_interact(user))
+		return
+	if(get_turf(src) != get_turf(user))
 		return
 
 	say("Select their new position.")
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
-	var/list/possible_positions = list()
-	possible_positions += GLOB.noble_positions
-	possible_positions += GLOB.garrison_positions
-	possible_positions += GLOB.serf_positions
-	possible_positions += GLOB.company_positions
-	possible_positions += GLOB.peasant_positions
-	possible_positions += GLOB.apprentices_positions
-	possible_positions += GLOB.youngfolk_positions
-	possible_positions += GLOB.allmig_positions
-	possible_positions -= list(
+	var/list/unfiltered_positions = list()
+	unfiltered_positions += GLOB.noble_positions
+	unfiltered_positions += GLOB.garrison_positions
+	unfiltered_positions += GLOB.serf_positions
+	unfiltered_positions += GLOB.company_positions
+	unfiltered_positions += GLOB.peasant_positions
+	unfiltered_positions += GLOB.apprentices_positions
+	unfiltered_positions += GLOB.youngfolk_positions
+	unfiltered_positions -= list(
 		/datum/job/lord::title,
 		/datum/job/innkeep_son::title,
-		/datum/job/wretch::title,
-		/datum/job/bandit::title,
+		/datum/job/churchling::title,
 	)
-	var/new_pos = input(user, "Select their new position", src, null) as anything in possible_positions
-	if(isnull(victim))
+	var/list/possible_positions = list()
+	for(var/j_title as anything in unfiltered_positions)
+		var/datum/job/pos = SSjob.GetJob(j_title)
+		if(pos.total_positions != 0 && pos.spawn_positions != 0)
+			possible_positions += j_title
+	var/new_pos = tgui_input_list(user, "Select their new position", src, possible_positions)
+	if(!new_pos)
+		return
+	if(QDELETED(victim) || QDELETED(user) || QDELETED(src))
+		return
+	if(!can_interact(user))
+		return
+	if(get_turf(src) != get_turf(user))
+		return
+	if(get_dist(src, victim) > 2)
 		return
 
 	victim.job = new_pos

@@ -115,8 +115,6 @@
 
 /datum/config_entry/flag/no_dead_vote	// dead people can't vote
 
-/datum/config_entry/flag/allow_metadata	// Metadata is supported.
-
 /datum/config_entry/flag/popup_admin_pm	// adminPMs to non-admins show in a pop-up 'reply' window when set
 
 /datum/config_entry/number/fps
@@ -179,12 +177,6 @@
 
 /datum/config_entry/flag/norespawn
 
-/datum/config_entry/flag/guest_jobban
-
-/datum/config_entry/flag/usewhitelist
-
-/datum/config_entry/flag/useblacklist
-
 /datum/config_entry/flag/use_age_restriction_for_jobs	//Do jobs use account age restrictions? --requires database
 
 /datum/config_entry/flag/use_account_age_for_jobs	//Uses the time they made the account for the job restriction stuff. New player joining alerts should be unaffected.
@@ -220,16 +212,8 @@
 
 /datum/config_entry/string/gamelogurl
 
-/datum/config_entry/number/githubrepoid
-	config_entry_value = null
-	min_val = 0
-
 /datum/config_entry/flag/guest_ban
 
-/datum/config_entry/number/id_console_jobslot_delay
-	config_entry_value = 30
-	integer = FALSE
-	min_val = 0
 
 /datum/config_entry/number/inactivity_period	//time in ds until a player is considered inactive
 	config_entry_value = 3000
@@ -428,12 +412,6 @@
 /datum/config_entry/number/error_msg_delay	// How long to wait between messaging admins about occurrences of a unique error
 	config_entry_value = 50
 	integer = FALSE
-
-/datum/config_entry/flag/irc_announce_new_game
-	deprecated_by = /datum/config_entry/string/chat_announce_new_game
-
-/datum/config_entry/flag/irc_announce_new_game/DeprecationUpdate(value)
-	return ""	//default broadcast
 
 /datum/config_entry/string/chat_announce_new_game
 	config_entry_value = null

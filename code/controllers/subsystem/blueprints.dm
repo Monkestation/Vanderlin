@@ -3,8 +3,8 @@ SUBSYSTEM_DEF(blueprints)
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/blueprints/Initialize(start_timeofday)
-	RegisterSignal(SSdcs, COMSIG_ATOM_ADD_TRAIT, PROC_REF(check_add_trait))
-	RegisterSignal(SSdcs, COMSIG_ATOM_REMOVE_TRAIT, PROC_REF(check_remove_trait))
+	RegisterSignal(SSdcs, COMSIG_ADD_TRAIT, PROC_REF(check_add_trait))
+	RegisterSignal(SSdcs, COMSIG_REMOVE_TRAIT, PROC_REF(check_remove_trait))
 	return ..()
 
 /datum/controller/subsystem/blueprints/proc/check_add_trait(datum/source, mob/living/target, trait)

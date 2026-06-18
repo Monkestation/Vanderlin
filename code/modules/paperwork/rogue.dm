@@ -170,7 +170,7 @@
 			if(signedname)
 				to_chat(user, span_warning("[signedname]"))
 				return
-			switch(alert("Sign your name?",,"Yes","No"))
+			switch(tgui_alert(usr, "Sign your name?","Sign", list("Yes","No")))
 				if("No")
 					return
 				if("Yes")
@@ -259,21 +259,26 @@
 
 /obj/item/paper/inqslip/confession/attemptsign(mob/user, mob/living/carbon/human/M)
 	// Check if they've confessed via torture
+	to_chat(M, span_notice("You hold the confession paper up to [user.p_their()] bleeding wound."))
 
 	var/forced_signing = HAS_TRAIT(user, TRAIT_HAS_CONFESSED)
+
+	if(user.stat == DEAD)
+		to_chat(M, span_warning("This one has little to confess, other than being dead."))
+		return
 
 	if(paired)
 		if(paired.subject != user)
 			to_chat(M, span_warning("Why am I trying to make them sign this with the wrong [paired] paired with it?"))
 			return
-		else if(forced_signing || (alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", "YES", "NO") != "NO"))
+		else if(forced_signing || (tgui_alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", list("YES", "NO")) != "NO"))
 			signed = TRUE
 			signee = user
 			marquevalue += 2
 			REMOVE_TRAIT(user, TRAIT_HAS_CONFESSED, TRAIT_GENERIC)
 			update_appearance()
 
-	else if(alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", "YES", "NO") != "NO")
+	else if(tgui_alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", list("YES", "NO")) != "NO")
 		signed = TRUE
 		signee = user
 		marquevalue += 2
@@ -296,7 +301,7 @@
 	marquevalue = 6
 
 /obj/item/paper/inqslip/proc/attemptsign(mob/user, mob/living/carbon/human/M)
-	if(alert(user, "SIGN THE SLIP?", "CONFIRM OR DENY", "YES", "NO") != "NO")
+	if(tgui_alert(user, "SIGN THE SLIP?", "CONFIRM OR DENY", list("YES", "NO")) != "NO")
 		signed = TRUE
 		signee = user
 		update_appearance()
@@ -375,6 +380,9 @@
 
 /obj/item/paper/inqslip/attacked_by(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/clothing/ring/signet))
+		if(waxed)
+			to_chat(user, span_warning("[src] has already been marked."))
+			return
 		var/obj/item/clothing/ring/signet/S = I
 		if(S.tallowed && sealed)
 			waxed = TRUE
@@ -507,7 +515,7 @@
 			to_chat(user, span_warning("I can't turn a member of the royal family into a finger."))
 			return
 
-	var/choice = input(attacked_target,"Do you wish to become one of the Hand's fingers?","Binding Contract",null) as null|anything in list("Yes", "No")
+	var/choice = tgui_alert(attacked_target, "Do you wish to become one of the Hand's fingers?", "Binding Contract", list("Yes", "No"))
 	if(choice != "Yes")
 		return
 
@@ -598,14 +606,14 @@
 	icon_state = "contractsigned"
 	var/list/sell_prices
 	var/writers_name
-	var/faction
+	var/merchant_faction
 
 /obj/item/paper/scroll/sell_price_changes/Initialize(mapload, list/prices, faction_name)
 	. = ..()
 
-	faction = faction_name
-	if(!faction)
-		faction = pick("Heartfelt", "Zalad", "Grenzelhoft", "Kingsfield")
+	merchant_faction = faction_name
+	if(!merchant_faction)
+		merchant_faction = pick("Heartfelt", "Zalad", "Grenzelhoft", "Kingsfield")
 
 	sell_prices = prices
 	if(!length(sell_prices))
@@ -644,7 +652,7 @@
 
 	info += "<br/></font>"
 
-	info += "<font size=\"2\" face=\"[FOUNTAIN_PEN_FONT]\" color=#27293f>[writers_name] Shipwright of [faction]</font>"
+	info += "<font size=\"2\" face=\"[FOUNTAIN_PEN_FONT]\" color=#27293f>[writers_name] Shipwright of [merchant_faction]</font>"
 	info += "<br/>"
 	info += "<font size=\"2\" face=\"[FOUNTAIN_PEN_FONT]\" color=#27293f>Time: [gameTimestamp("hh:mm:ss", world.time - SSticker.round_start_time)]</font>"
 	info += "</div>"

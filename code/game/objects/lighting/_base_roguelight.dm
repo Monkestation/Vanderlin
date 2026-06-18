@@ -2,12 +2,11 @@
 	icon = 'icons/roguetown/misc/lighting.dmi'
 	brightness = 8
 	nightshift_allowed = FALSE
-	fueluse = 60 MINUTES
+	var/fueluse = 60 MINUTES
 	bulb_colour = "#f9ad80"
 	bulb_power = 1
 	var/datum/looping_sound/soundloop = null // = /datum/looping_sound/fireloop
 	pass_flags_self = LETPASSTHROW
-	flags_1 = NODECONSTRUCT_1
 	var/cookonme = FALSE
 	var/crossfire = TRUE
 	var/can_damage = FALSE
@@ -48,7 +47,7 @@
 	. = ..()
 	if(Adjacent(user))
 		if(fueluse > 0)
-			var/minsleft = fueluse / 600
+			var/minsleft = fueluse / (1 MINUTES)
 			minsleft = round(minsleft)
 			if(minsleft <= 1)
 				minsleft = "less than a minute"
@@ -132,7 +131,7 @@
 					var/list/possible_recipes = list()
 					for(var/recipe_type in subtypesof(/datum/container_craft/pan))
 						var/datum/container_craft/recipe = new recipe_type
-						if(recipe.used_skill != /datum/attribute/skill/craft/cooking)
+						if(!ispath(recipe.used_skill, /datum/attribute/skill/craft/cooking))
 							continue // Only want cooking recipes
 
 						// Check if our food item matches any recipe requirement
@@ -229,17 +228,17 @@
 	if(W.firefuel)
 		if(initial(fueluse))
 			if(fueluse > initial(fueluse) - 5 SECONDS)
-				to_chat(user, "<span class='warning'>[src] is fully fueled.</span>")
+				to_chat(user, span_warning("[src] is fully fueled."))
 				return
 		else
 			if(!on)
 				return
-		if (alert(usr, "Feed [W] to the fire?", "VANDERLIN", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Feed [W] to the fire?", "VANDERLIN", list("Yes", "No")) != "Yes")
 			return
 		if(!(W in user.held_items)|| !user.temporarilyRemoveItemFromInventory(W))
 			return
 		qdel(W)
-		user.visible_message("<span class='warning'>[user] feeds [W] to [src].</span>")
+		user.visible_message(span_warning("[user] feeds [W] to [src]."))
 		if(initial(fueluse))
 			fueluse = fueluse + W.firefuel
 			if(fueluse > initial(fueluse)) //keep it at the max
@@ -265,10 +264,16 @@
 		return
 	. = ..()
 
-/obj/machinery/light/fueled/process()
+/obj/machinery/light/fueled/process(delta_time)
 	. = ..()
-	if(on && length(contents)) // burn kobolds in ovens and smelters
-		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
-			holder.held_mob?.adjust_fire_stacks(5)
-			holder.held_mob?.IgniteMob()
-			holder.update_appearance()
+	if(on)
+		if(initial(fueluse) > 0)
+			if(fueluse > 0)
+				fueluse = max(fueluse - 1 SECONDS * delta_time, 0)
+			if(fueluse == 0)
+				burn_out()
+		if(length(contents)) // burn kobolds in ovens and smelters
+			for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+				holder.held_mob?.adjust_fire_stacks(5)
+				holder.held_mob?.IgniteMob()
+				holder.update_appearance()

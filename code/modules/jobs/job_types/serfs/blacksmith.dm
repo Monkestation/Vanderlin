@@ -27,7 +27,7 @@
 	)
 
 /datum/job/blacksmith
-	title = "Blacksmith"
+	title = JOB_BLACKSMITH
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Blacksmith, \
 	a trade that certainly has seen a boom in revenue in recent times with many a bannerlord \
 	seeing the importance in maintaining a well-equipped army."
@@ -56,10 +56,10 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blacksmith
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/blacksmith/old
-
+	book_type = /obj/item/recipe_book/blacksmithing
 
 /datum/outfit/blacksmith
-	name = "Blacksmith"
+	name = JOB_BLACKSMITH
 	head = /obj/item/clothing/head/hatfur
 	ring = /obj/item/clothing/ring/silver/makers_guild
 	backl = /obj/item/weapon/hammer/sledgehammer
@@ -80,11 +80,6 @@
 	if(prob(50))
 		head = /obj/item/clothing/head/hatblu
 	if(equipped_human.gender == FEMALE)
-		pants = /obj/item/clothing/pants/trou
 		armor = /obj/item/clothing/shirt/dress/gen/colored/random
 		shoes = /obj/item/clothing/shoes/shortboots
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/belt/pouch/coins/poor
-		beltr = /obj/item/key/blacksmith
-		cloak = /obj/item/clothing/cloak/apron/brown
 

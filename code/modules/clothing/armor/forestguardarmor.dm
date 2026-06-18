@@ -6,7 +6,22 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "foresthide"
 	prevent_crits = ALL_EXCEPT_STAB
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
+
+/obj/item/clothing/armor/leather/advanced/forrester/masterwork
+	name = "masterwork forrester's armor"
+	desc = "Armour worn by few, those that live to hunt, to battle. \nThe soft, cloth linings with masterfully tanned leather make it easy to repair with a needle."
+	max_integrity = INTEGRITY_STRONG + 200
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/advanced/forrester/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester's cloak"
@@ -20,7 +35,10 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	icon_state = "snowcloak"
@@ -54,6 +72,7 @@
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	icon_state = "wardenhelm"
+	item_weight = 3.25 KILOGRAMS
 
 /obj/item/clothing/head/helmet/medium
 	abstract_type = /obj/item/clothing/head/helmet/medium
@@ -77,6 +96,7 @@
 	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_volf"
+	item_weight = 1.45 KILOGRAMS
 
 /obj/item/clothing/head/helmet/medium/decorated/skullmet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -100,3 +120,4 @@
 	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_ruffian"
+	item_weight = 1.45 KILOGRAMS

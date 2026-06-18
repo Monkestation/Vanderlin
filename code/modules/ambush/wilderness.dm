@@ -5,12 +5,12 @@
 
 /datum/ambush_config/lone_troll
     mob_types = list(
-        /mob/living/simple_animal/hostile/retaliate/troll/axe = 1
+        /mob/living/simple_animal/hostile/retaliate/troll = 1
     )
 
 /datum/ambush_config/troll_and_wolves
     mob_types = list(
-        /mob/living/simple_animal/hostile/retaliate/troll/axe = 1,
+        /mob/living/simple_animal/hostile/retaliate/troll = 1,
         /mob/living/simple_animal/hostile/retaliate/wolf = 2
     )
 

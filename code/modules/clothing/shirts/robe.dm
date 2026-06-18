@@ -13,6 +13,10 @@
 	resistance_flags = FLAMMABLE
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
+	slot_equipment_priority = list(
+		ITEM_SLOT_ARMOR,
+		ITEM_SLOT_SHIRT,
+	)
 
 	armor = ARMOR_MINIMAL
 	prevent_crits = list(BCLASS_TWIST)
@@ -30,7 +34,7 @@
 /obj/item/clothing/shirt/robe/colored/black
 	color = CLOTHING_DARK_INK
 
-/obj/item/clothing/shirt/robe/colored/red//placeholder for malum & xylix acolyte robes
+/obj/item/clothing/shirt/robe/colored/red//placeholder for xylix acolyte robes
 	color = CLOTHING_WINESTAIN_RED
 
 /obj/item/clothing/shirt/robe/colored/purple
@@ -96,6 +100,11 @@
 	desc = "Black robes which cover the body not unlike those in depictions of the Carriageman himself."
 	icon_state = "necrarobe"
 
+/obj/item/clothing/shirt/robe/malum
+	name = "malumite robe"
+	desc = "Holy-duty work robes with an attached apron and rolled up sleeves, for those who toil endlessly."
+	icon_state = "malumrobe"
+
 /obj/item/clothing/shirt/robe/priest
 	name = "solar vestments"
 	desc = "Holy vestments sanctified by divine hands. Caution is advised if not a faithful."
@@ -103,7 +112,7 @@
 	dropshrink = 0.8
 
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
-	if((user.job != "Priest") && (user.job != "Priestess"))
+	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
 		user.visible_message(span_reallybig("UNWORTHY HANDS TOUCH MY VISAGE, CEASE OR BE PUNISHED"))
 		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		spawn(30)
@@ -394,3 +403,36 @@
 	sleeved = null
 	sleevetype = null
 	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/shirt/robe/bared
+	name = "bared robe"
+	desc = "A robe of basic cloth, it's chest bared open to expose what lay underneath."
+	icon_state = "openrobe"
+	item_state = "openrobe"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	color = CLOTHING_WHITE
+
+/obj/item/clothing/shirt/robe/shepherdvest
+	name = "shepherd vest"
+	desc = "A vest of basic cloth, it's chest bared open to expose what lay underneath."
+	icon_state = "shepherdvest"
+	item_state = "shepherdvest"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	color = CLOTHING_WHITE
+
+/obj/item/clothing/shirt/robe/hag //Not a boon item, but nonetheless something they have
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
+	name = "wyrd robe"
+	desc = "A robe with an ancient design, unknown to tailors and sewers here."
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	icon_state = "hag"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	boobed = TRUE
+	color = null
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+

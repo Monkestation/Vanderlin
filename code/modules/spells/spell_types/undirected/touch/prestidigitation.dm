@@ -144,7 +144,7 @@
 
 	owner.adjust_stamina(fatigue_used + extra_fatigue)
 
-	var/skill_level = GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE(owner, associated_skill)
 	if (skill_level >= SKILL_LEVEL_EXPERT)
 		fatigue_used = 0 // we do this after we've actually changed fatigue because we're hard-capping the raises this gives to Expert
 
@@ -170,20 +170,20 @@
 	canparry = TRUE
 
 /datum/intent/prestidigitation/clean
-	name = "touch"
-	icon_state = "intouch"
+	name = "clean"
+	icon_state = "inclean"
 
 /datum/intent/prestidigitation/gather
 	name = "grab"
 	icon_state = "ingrab"
 
 /datum/intent/prestidigitation/spark
-	name = "shove"
-	icon_state = "inshove"
+	name = "spark"
+	icon_state = "inspark"
 
 /datum/intent/prestidigitation/mote
-	name = "use"
-	icon_state = "inuse"
+	name = "light"
+	icon_state = "inlight"
 
 /obj/effect/wisp/prestidigitation
 	name = "minor magelight mote"

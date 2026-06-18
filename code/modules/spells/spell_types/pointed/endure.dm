@@ -44,7 +44,7 @@
 		var/zcross_trigger = FALSE
 
 		// Bonuses! Flavour! SOVL!
-		for(var/obj/item/clothing/neck/current_item in target.get_equipped_items(TRUE))
+		for(var/obj/item/clothing/neck/current_item in target.get_equipped_items(INCLUDE_POCKETS))
 			if(istype(current_item, /obj/item/clothing/neck/psycross))
 				pp += 1
 				if(pp >= 12 & target == user) // A harmless easter-egg. Only applies on self-cast. You'd have to be pretty deliberate to wear 12 of them.
@@ -89,7 +89,7 @@
 		if (zcross_trigger)
 			user.visible_message(span_warning("[user] shuddered. Something's very wrong."), span_userdanger("Cold shoots through my spine. Something laughs at me for trying."))
 			user.playsound_local(user, 'sound/misc/zizo.ogg', 25, FALSE)
-			user.adjustBruteLoss(25)
+			user.adjustBruteLoss(25, damage_type = WOUND_DIVINE)
 			return FALSE
 
 		target.apply_status_effect(/datum/status_effect/buff/psyhealing, psyhealing)

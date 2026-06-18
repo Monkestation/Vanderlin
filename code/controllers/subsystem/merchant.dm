@@ -107,8 +107,8 @@ SUBSYSTEM_DEF(merchant)
 
 		if(output)
 			var/list/all_requirements = list()
-			if(recipe.req_bar)
-				all_requirements[recipe.req_bar] = recipe.num_of_materials
+			if(recipe.required_material)
+				all_requirements[recipe.required_material] = recipe.num_of_materials
 
 			if(length(recipe.additional_items))
 				for(var/item in recipe.additional_items)
@@ -262,12 +262,15 @@ SUBSYSTEM_DEF(merchant)
 	if(item_type in recipe_base_values)
 		return recipe_base_values[item_type]
 
+	// Check that we have a movable type.
+	if(!ismovable (item_type))
+		return 0
+
 	// Otherwise use sellprice directly
 	var/obj/item/temp = item_type
-	var/sellprice = initial(temp.sellprice)
 
-	if(sellprice && sellprice > 0)
-		return sellprice
+	if(temp.sellprice > 0)
+		return temp.sellprice
 
 	return 0
 

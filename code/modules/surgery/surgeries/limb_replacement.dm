@@ -14,7 +14,8 @@
 	implements = list(
 		/obj/item/bodypart = 80,
 	)
-	time = 3.2 SECONDS
+	minimum_time = 2.8 SECONDS
+	maximum_time = 3.5 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_EXPERT

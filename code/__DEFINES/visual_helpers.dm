@@ -13,7 +13,9 @@
 
 #define SET_BASE_VISUAL_PIXEL(w, z) \
 	pixel_w = w; \
+	base_pixel_w = w; \
 	pixel_z = z; \
+	base_pixel_z = z;
 
 #define _SET_BASE_PIXEL_VISUAL_NO_OFFSET(w, z) \
 	base_pixel_w = w; \
