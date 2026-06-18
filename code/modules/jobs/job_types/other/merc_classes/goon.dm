@@ -77,7 +77,7 @@
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5)
 
 	var/static/list/armors = list("Brute, Splint Armor", "Speedster, Leather Coat")
-	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARCHETYPE.", "TAKE UP PSYDON'S DUTY.", armors)
+	var/armor_choice = browser_input_list(spawned, "Choose your ARCHETYPE.", "FOR THE BOSS!", armors)
 
 	switch(armor_choice)
 		if("Brute, Splint Armor")
