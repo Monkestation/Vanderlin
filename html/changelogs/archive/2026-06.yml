@@ -133,3 +133,8 @@
   - map: WPP Church moved closer into town
   - map: WPP Merchant moved closer into town
   - map: WPP generally a lot of town changes, see PR for full changelog.
+2026-06-18:
+  CheffieGithub:
+  - bugfix: Fixed visual issue with report bug
+  Sulaboy:
+  - bugfix: Some smithing recipes
