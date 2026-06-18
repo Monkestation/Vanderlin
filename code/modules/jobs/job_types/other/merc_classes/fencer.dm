@@ -20,12 +20,10 @@
 	allowed_races = RACES_PLAYER_NO_KOBOLD
 	blacklisted_species = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/mercenary/fencer
-	cmode_music = 'sound/music/cmode/adventurer/combat_noble.ogg' 
+	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg' 
 	total_positions = 2
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/fencer
-
-	)
 
 /datum/job/advclass/mercenary/fencer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
