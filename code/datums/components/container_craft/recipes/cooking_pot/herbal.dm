@@ -297,37 +297,6 @@
 	output_amount = 20 
 	crafting_time = 15 SECONDS
 	finished_smell = /datum/pollutant/food/bitter
-/datum/container_craft/cooking/herbal_tea/rajaijah
-	name = "Shine of the Dark Sun"
-	created_reagent = /datum/reagent/poison/herbal/rajaijah
-	water_conversion = 1
-	reagent_requirements = list(
-		/datum/reagent/blood = 20,
-	)
-	requirements = list(
-		/obj/item/organ/heart = 1,
-		/obj/item/reagent_containers/lux_tainted = 1
-	)
-	output_amount = 20 
-	crafting_time = 15 SECONDS
-	finished_smell = /datum/pollutant/food/bitter
-	complete_message = "The fumes from the pot smell of fresh shed blood and saliva..."
-	
-/datum/container_craft/cooking/herbal_tea/kingsbane
-	name = "Bane of Kings"
-	created_reagent = /datum/reagent/poison/herbal/kingsbane
-	water_conversion = 1
-	reagent_requirements = list(
-		/datum/reagent/consumable/ethanol/elfblue = 20,
-	)
-	requirements = list(
-		/obj/item/alch/feaudust = 1,
-		/obj/item/reagent_containers/lux_tainted = 1
-	)
-	output_amount = 20 
-	crafting_time = 15 SECONDS
-	finished_smell = /datum/pollutant/food/bitter
-	complete_message = "The fumes from the pot smell of burnt metal and regret..."
 
 // Herbalist's Panacea (multiple healing herbs)
 /datum/container_craft/cooking/herbal_tea/herbalist_panacea

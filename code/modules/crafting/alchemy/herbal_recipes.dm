@@ -605,19 +605,19 @@
 	. = ..()
 	M.Unconscious(20 SECONDS)
 		
-/datum/reagent/poison/herbal/erratique
+/datum/reagent/poison/erratique
 	name = "Erratique"
 	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity, and is extremely lethal over a long period of time if untreated."
 	color = "#ffffff"
 	metabolization_rate = 0.1
 	taste_description = "bitter thoughts"
 
-/datum/reagent/poison/herbal/erratique/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
 
-/datum/reagent/poison/herbal/erratique/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/erratique/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
 
@@ -641,10 +641,10 @@
 	L.adjustFireLoss(5)
 	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
 
-/datum/reagent/head_explosion
+/datum/reagent/head_explosion  //admin only, unless someone gets lucky with humors
 	name = "Berry Juice"
 	description = "Berry juice. Totally will not make your head explode." 
-	reagent_state = LIQUID
+	reagent_state = LIQUID  //warning to whoever finds this, whether admin or guy with humors. This WILL KILL instantly. Use accordingly.
 	color = "#790404"  // dammit Avalon, youve gotten me again. 
 	metabolization_rate = 0.1
 	taste_description = "berry, with a hint of regret"
@@ -662,7 +662,7 @@
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state."
-	color = "#1b8600" // rgb: 102, 71, 0
+	color = "#1b8600" 
 	metabolization_rate = 0.05
 	overdose_threshold = 10
 	taste_description = "fleeing life"
@@ -697,7 +697,7 @@
 	M.apply_status_effect(/datum/status_effect/debuff/alch/pain)
 	M.add_stress(/datum/stress_event/souffrance)
 
-/datum/reagent/poison/herbal/gamble
+/datum/reagent/poison/gamble
 	name = "Desgracia"   //The debuff to end all debuffs. 
 	description = "Concentrated demonic essence which purges luck from the consumer."
 	reagent_state = LIQUID
@@ -705,44 +705,44 @@
 	metabolization_rate = 0.5
 	taste_description = "misfortune"
 
-/datum/reagent/poison/herbal/gamble/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/gamble/on_mob_metabolize(mob/living/M)
 	. = ..()
 	M.apply_status_effect(/datum/status_effect/debuff/alch/cards)
 	M.add_stress(/datum/stress_event/gambling)
 
-/datum/reagent/poison/herbal/rajaijah //Goonstation my beloved
+/datum/reagent/poison/rajaijah //Goonstation my beloved
 	name = "Dark sun's shine"  //basically just forces people into the vamp frenzy untill it finishes metabolizing.  
 	description = "Neurodegenerative brew which makes the user go temporarily insane with a craving for violence and blood."
-	color = "#053604" 
+	color = "#1f0068" 
 	metabolization_rate = 0.1
 	taste_description = "pure, unrestrained hate and hunger"
 
-/datum/reagent/poison/herbal/rajaijah/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/rajaijah/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
-/datum/reagent/poison/herbal/rajaijah/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/rajaijah/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
-/datum/reagent/poison/herbal/tear
+/datum/reagent/poison/tear
 	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
 	description = "Toxin used by orc raiding bands to weaken enemies for battle. Not very harmfull on it's own, but corrodes joints to limbs."
 	color = "#9c5aa5"
 	metabolization_rate = 0.01
 	taste_description = "you just bit your cheek"
 
-/datum/reagent/poison/herbal/tear/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/tear/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 
-/datum/reagent/poison/herbal/tear/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/tear/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 
-/datum/reagent/poison/herbal/bioweapon
+/datum/reagent/poison/bioweapon
 	name = "NCSIV" //basically anthrax, hyper lethal, will be almost impossible to craft
 	description = "Noncontagious Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of quickly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
 	color = "#00ff0d"
@@ -769,29 +769,29 @@
 		M.add_chem_effect(CE_ANTIBIOTIC, -10, "[type]")
 	. = ..()
 
-/datum/reagent/poison/herbal/bioweapon/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/bioweapon/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
 
-/datum/reagent/poison/herbal/bioweapon/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/bioweapon/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
 
-/datum/reagent/poison/herbal/kingsbane
+/datum/reagent/poison/kingsbane
 	name = "Kingsbane"  //more of a joke poison, just messes with nobles and money
 	description = "A poison used by cultists of matthios, causing the afflicted to be disgusted by money. Some say this is only the dilute version, with the real, potent one capable of ruining ones mind."
 	color = "#ffb300"
 	metabolization_rate = 0.01
 	taste_description = "cold gold"
 
-/datum/reagent/poison/herbal/kingsbane/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/kingsbane/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
-/datum/reagent/poison/herbal/kingsbane/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/kingsbane/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
-	
+
 
 // Magical Enhancement
 

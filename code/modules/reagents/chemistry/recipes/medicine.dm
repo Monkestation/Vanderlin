@@ -347,3 +347,69 @@
 	)
 	results = list(/datum/reagent/poison/soulbane_ichor = 15)
 	mix_message = "The reagents collapse into a lightless black ichor that seems to absorb nearby illumination."
+
+/datum/chemical_reaction/
+	name = ""
+	id = ""
+	required_reagents = list(
+		 = ,
+		 = ,
+		 = 
+	)
+	results = list( = 15)
+	mix_message = "."
+
+/datum/chemical_reaction/erratique
+	name = "Erratique Neurotoxin"
+	id = "erratique"
+	required_reagents = list(
+		/datum/reagent/toxin/spidervenom_inert = 10,
+		/datum/reagent/spice = 5,
+		/datum/reagent/mercury = 5
+	)
+	results = list(/datum/reagent/poison/herbal/erratique = 20)
+	mix_message = "The weakened venom foams as the drugs mix with it, before settling with a dizzying scent."
+
+/datum/chemical_reaction/bioweapon
+	name = "NCSIV"  //I hope noone knows what this is at all and gets curious
+	id = "NCSIV"
+	required_reagents = list(
+		/datum/reagent/lux = 30,
+		/datum/reagent/poison/rotwater = 20,
+		/datum/reagent/medicine/antidote = 5
+	)
+	results = list(/datum/reagent/poison/bioweapon	= 5)
+	mix_message = "The sludge thins out and bubbles as the lux is stirred in, ending with green freeflowing liquid. It smells surprisingly clean."
+
+/datum/chemical_reaction/kingsbane
+	name = "Kingsbane"
+	id = "kingsbane"
+	required_reagents = list(
+		/datum/reagent/lux = 5,
+		/datum/reagent/consumable/ethanol/elfblue = 5,
+		/datum/reagent/mercury = 5
+	)
+	results = list(/datum/reagent/poison/kingsbane = 15)
+	mix_message = "The solution fizzles violently, as it becomes a solid mettalic gold color."
+
+/datum/chemical_reaction/rajaijah
+	name = "Dark Suns Shine"
+	id = "rajaijah"
+	required_reagents = list(
+		/datum/reagent/blood = 20,
+		/datum/reagent/lux = 10,
+		/datum/reagent/consumable/nutriment/bone_marrow = 5
+	)
+	results = list(/datum/reagent/poison/rajaijah = 20)
+	mix_message = "The moment the 3 reagents mix, the solution violently bubbles, before slowly turning dark blue with and oily sheen. You feel angry looking at it."
+
+/datum/chemical_reaction/tear
+	name = "Sunder Toxin"
+	id = "tear"
+	required_reagents = list(
+		/datum/reagent/blood = 5,
+		/datum/reagent/water/gross = 5,
+		/datum/reagent/consumable/nutriment/bone_marrow = 5
+	)
+	results = list( = 15)
+	mix_message = "The reagents mix together to create a visually disgusting sludge."
