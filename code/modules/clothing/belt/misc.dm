@@ -665,11 +665,7 @@
 	salvage_amount = 2
 	salvage_result = /obj/item/natural/hide/cured
 	component_type = /datum/component/storage/concrete/grid/orebag
-	var/current_choice_index = 1
-	var/static/list/filter_options = list(
-	list(/obj/item/ore, /obj/item/gem, /obj/item/reagent_containers/powder/salt, /obj/item/mana_battery/mana_crystal/standard),
-	list(/obj/item/ore),
-	)
+	var/auto_pickup = TRUE
 
 /obj/item/storage/hip/orebag/equipped(mob/user, slot)
 	. = ..()
@@ -682,6 +678,10 @@
 /obj/item/storage/hip/orebag/proc/on_user_moved(mob/living/user)
 	SIGNAL_HANDLER
 	var/picked_up = FALSE
+
+	if(!auto_pickup)
+		return
+
 	if(user.incapacitated() || !user.canUseStorage())
 		return
 
@@ -704,33 +704,22 @@
 ////
 /obj/item/storage/hip/orebag/examine(mob/user)
 	. = ..()
-	var/str = "The bag is set to collect: "
-	switch(current_choice_index)
-		if(1)
-			str += "Everything"
-		if(2)
-			str += "Ore Only"
-	. += span_notice(str)
+
+	if(auto_pickup)
+		. += span_notice("You are ready to collect ores.")
+	else
+		. += span_notice("You are not ready to collect ores.")
 
 /obj/item/storage/hip/orebag/get_mechanics_examine(mob/user)
 	. = ..()
-	. += span_notice("Walking over or clicking on the tiles with selected items will automatically scoop them into the bag.")
-	. += span_notice("Alt+Left Clicking the bag will toggle between all mining drops, or just ores.")
+	. += span_notice("Walking over or clicking on the tiles with select items will automatically scoop them into the bag.")
+	. += span_notice("Alt+Left Clicking the bag can disable/enable picking up ores.")
 
 /obj/item/storage/hip/orebag/AltClick(mob/user, list/modifiers)
 	. = ..()
-	if(current_choice_index < length(filter_options))
-		current_choice_index++
+	auto_pickup = !auto_pickup
+
+	if(auto_pickup)
+		to_chat(user, span_notice("You ready yourself to collect ores with your satchel."))
 	else
-		current_choice_index = 1
-	var/list/filters = filter_options[current_choice_index]
-	var/datum/component/storage/concrete/grid/orebag/orestorage = GetComponent(/datum/component/storage/concrete/grid/orebag)
-	if(orestorage)
-		orestorage.set_holdable(filters)
-	var/str = "\The [src] will now collect: "
-	switch(current_choice_index)
-		if(1)
-			str += "Everything"
-		if(2)
-			str += "Ore Only"
-	to_chat(user, span_notice(str))
+		to_chat(user, span_notice("You will no longer collect ores with your satchel."))
