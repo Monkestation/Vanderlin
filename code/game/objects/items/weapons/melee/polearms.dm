@@ -262,7 +262,6 @@
 	gripsprite = FALSE
 	minstr = 7
 
-
 /obj/item/weapon/polearm/spear/billhook/ji
 	name = "steel dagger-ax"
 	desc = "An eastern polearm of ancient design. It's rarely seen on the battlefield these daes."
