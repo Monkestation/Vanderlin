@@ -163,6 +163,10 @@ All foods are distributed among various categories. Use common sense.
 				temp_modifier = max(0.2, 1.0 - ((20 -turf_temp) / 3) * 0.2)
 				// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
 
+		var/area/A = get_area(T)
+		if (istype(A, /area/indoors/town/vault))
+			temp_modifier = 0
+
 		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in get_turf(src)
 		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack) || !istype(loc, /obj/structure/closet/crate/chest/magical))
 			var/obj/structure/table/located = locate(/obj/structure/table) in loc
