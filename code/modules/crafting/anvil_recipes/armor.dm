@@ -1312,8 +1312,9 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/hauberk
-	name = "fluted hauberk"
+	name = "fluted hauberk (+ Bar)"
 	required_material = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/chainmail/hauberk/fluted
 	craftdiff = 3
 
