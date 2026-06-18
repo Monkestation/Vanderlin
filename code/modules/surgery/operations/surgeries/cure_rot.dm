@@ -78,10 +78,11 @@
 		patient.mind.remove_antag_datum(/datum/antagonist/zombie)
 		patient.death()
 
+	var/damage = max(20 - (GET_MOB_SKILL_VALUE(surgeon, skill_used) / 3), 0)
 	for(var/obj/item/bodypart/part as anything in patient.bodyparts)
 		part.revive_limb()
 		part.germ_level = 0
-		part.receive_damage(burn = 20 - (GET_MOB_SKILL_VALUE(surgeon, skill_used) / 3))
+		part.receive_damage(burn = damage)
 
 	for(var/obj/item/organ as anything in patient.internal_organs)
 		if(organ.germ_level >= INFECTION_LEVEL_ONE * 0.2)
