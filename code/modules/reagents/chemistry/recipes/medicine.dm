@@ -367,7 +367,7 @@
 		/datum/reagent/druqks = 5,
 		/datum/reagent/mercury = 5
 	)
-	results = list(/datum/reagent/poison/herbal/erratique = 20)
+	results = list(/datum/reagent/poison/erratique = 20)
 	mix_message = "The weakened venom foams as the drugs mix with it, before settling with a dizzying scent."
 
 /datum/chemical_reaction/bioweapon
@@ -385,7 +385,7 @@
 	name = "Kingsbane"
 	id = "kingsbane"
 	required_reagents = list(
-		/datum/reagent/lux/tainted = 5,
+		/datum/reagent/lux_tainted = 5,
 		/datum/reagent/consumable/ethanol/elfblue = 5,
 		/datum/reagent/mercury = 5
 	)
