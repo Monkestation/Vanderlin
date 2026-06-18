@@ -398,7 +398,7 @@ SUBSYSTEM_DEF(ticker)
 */
 
 	PostSetup()
-	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
+
 	log_game("GAME SETUP: postsetup success")
 
 	return TRUE

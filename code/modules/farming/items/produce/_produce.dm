@@ -594,6 +594,17 @@
 	..()
 	qdel(src)
 
+/obj/item/reagent_containers/food/snacks/produce/fruit/ollie
+	name = "ollie"
+	seed = /obj/item/neuFarm/seed/ollie
+	desc = "A small green fruit best made into oil."
+	icon_state = "ollie"
+	bitesize = 2
+	dropshrink = 0.6
+	tastes = list("bitterness" = 1)
+	rotprocess = SHELFLIFE_DECENT
+	item_weight = 15 GRAMS
+
 /obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun
 	name = "pompkaun"
 	seed = /obj/item/neuFarm/seed/pompkaun

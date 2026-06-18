@@ -4,8 +4,6 @@
 	mob_type_allowed_typecache = /mob/living
 	mob_type_blacklist_typecache = list(/mob/living/brain)
 
-
-
 // ............... Pray ..................
 /datum/emote/living/pray
 	key = "pray"
@@ -494,10 +492,12 @@
 	message = "giggles."
 	message_mime = "giggles silently!"
 	emote_type = EMOTE_AUDIBLE
+
 /mob/living/carbon/human/verb/emote_giggle()
 	set name = "Giggle"
 	set category = "Emotes.Noises"
 	emote("giggle", intentional = TRUE)
+
 /datum/emote/living/giggle/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
 	if(. && iscarbon(user))
@@ -1327,42 +1327,3 @@
 	set name = "Yawn"
 	set category = "Emotes.Noises"
 	emote("yawn", intentional = TRUE)
-
-/*
-/datum/emote/beep
-	key = "beep"
-	key_third_person = "beeps"
-	message = "beeps."
-	message_param = "beeps at %t."
-	sound = 'sound/blank.ogg'
-	mob_type_allowed_typecache = list(/mob/living/brain, /mob/living/silicon)
-
-/datum/emote/living/circle
-	key = "circle"
-	key_third_person = "circles"
-	restraint_check = TRUE
-
-/datum/emote/living/circle/run_emote(mob/user, params, type_override, intentional)
-	. = ..()
-	var/obj/item/circlegame/N = new(user)
-	if(user.put_in_hands(N))
-		to_chat(user, "<span class='notice'>I make a circle with your hand.</span>")
-	else
-		qdel(N)
-		to_chat(user, "<span class='warning'>I don't have any free hands to make a circle with.</span>")
-
-/datum/emote/living/slap
-	key = "slap"
-	key_third_person = "slaps"
-	restraint_check = TRUE
-
-/datum/emote/living/slap/run_emote(mob/user, params, type_override, intentional)
-	. = ..()
-	if(!.)
-		return
-	var/obj/item/slapper/N = new(user)
-	if(user.put_in_hands(N))
-		to_chat(user, "<span class='notice'>I ready your slapping hand.</span>")
-	else
-		to_chat(user, "<span class='warning'>You're incapable of slapping in your current state.</span>")
-*/

@@ -230,6 +230,14 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/polearm/spear/psydon/noblessing
+	item_weight = 2.5 KILOGRAMS
+
+//gives this spear the generic blessing the other Psydonic weapons get
+/obj/item/weapon/polearm/spear/psydon/noblessing/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
+
 /obj/item/weapon/polearm/spear/psydon/getonmobprop(tag)
 	. = ..()
 	if(tag)

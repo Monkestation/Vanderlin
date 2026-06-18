@@ -1504,6 +1504,36 @@
 	gender = NEUTER
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 
+/datum/sprite_accessory/hair/head/guildupdo
+	name = "Guild Up-do"
+	icon_state = "guildupdo"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/tapstersbun
+	name = "Tapster's Bun"
+	icon_state = "tapstersbun"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/thescientist
+	name = "The Scientist"
+	icon_state = "thescientist"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/sleek
+	name = "Sleek Up-do"
+	icon_state = "sleek"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/delver
+	name = "Delver"
+	icon_state = "delver"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
 /datum/sprite_accessory/hair/head/triton
 	name = "Base Triton"
 	abstract_type = /datum/sprite_accessory/hair/head/triton
