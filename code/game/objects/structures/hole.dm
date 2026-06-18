@@ -21,8 +21,6 @@
 	alternative_icon_handling = TRUE
 	/// How big the hole is, at 3 you can bury a body, at 4 theres something buried. Global defines in `misc.dm`
 	var/stage = DIRTHOLE_SHALLOW
-	/// Chance for attempt to increase `stage` fails, while still spawning dirt. Increments each fail and is skipped once it reaches 3
-	var/faildirt = 0
 
 	/// Present headstone. If this is empty, there isnt one.
 	var/obj/item/gravedecor/headstone/headstone
@@ -100,12 +98,10 @@
 
 /obj/structure/closet/dirthole/grave
 	stage = DIRTHOLE_PIT
-	faildirt = 3
 	icon_state = "grave"
 
 /obj/structure/closet/dirthole/closed
 	stage = DIRTHOLE_GRAVE
-	faildirt = 3
 	climb_offset = 10
 	icon_state = "gravecovered"
 	opened = FALSE
@@ -357,21 +353,13 @@
 		return ITEM_INTERACT_SUCCESS
 
 	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-	var/used_str = 10
-	if(iscarbon(user))
-		var/mob/living/carbon/C = user
-		if(C.domhand)
-			used_str = C.get_str_arms(C.used_hand)
-		C.adjust_stamina(max(60 - (used_str * 5), 1))
 
 	if(stage < DIRTHOLE_PIT)
-		if(faildirt < 2)
-			if(prob(used_str * 5))
-				stage++
-			else
-				faildirt++
-		else
-			stage++
+		stage++
+		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
+		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+		update_appearance(UPDATE_ICON | UPDATE_NAME)
+		return ITEM_INTERACT_SUCCESS
 
 	if(stage == DIRTHOLE_GRAVE)
 		if(gravequality >= 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
