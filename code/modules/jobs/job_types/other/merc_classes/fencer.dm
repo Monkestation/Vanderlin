@@ -24,6 +24,7 @@
 	total_positions = 2
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/fencer
+
 	)
 
 /datum/job/advclass/mercenary/fencer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
