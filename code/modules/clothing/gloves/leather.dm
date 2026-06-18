@@ -110,3 +110,9 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/gloves/leather/fencer
+	name = "fencing gloves"
+	desc = "Lightweight leather gloves designed for fencers, designed to ensure your fingers don't get chopped off."
+	icon_state = "fencergloves"
+	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)

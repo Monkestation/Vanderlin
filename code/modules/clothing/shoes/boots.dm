@@ -338,3 +338,8 @@
 	var/playerchoice = COLOR_MAP[choice]
 	detail_color = playerchoice
 	update_appearance(UPDATE_ICON)
+
+/obj/item/clothing/shoes/boots/fencer
+	name = "fencing boots"
+	desc = "Lightweight leather boots designed for fencing, designed to help keep your balance perfect in combat."
+	icon_state = "fencerboots"
