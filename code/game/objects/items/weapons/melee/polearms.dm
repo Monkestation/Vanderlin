@@ -682,7 +682,6 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 
-
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
 	name = "eagle's beak"
