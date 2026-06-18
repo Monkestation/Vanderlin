@@ -229,15 +229,6 @@
 	tint = TINT_BLIND
 	item_weight = 55 GRAMS
 
-/obj/item/clothing/head/sack/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(slot & ITEM_SLOT_HEAD)
-		user.become_blind("blindfold_[REF(src)]")
-
-/obj/item/clothing/head/sack/dropped(mob/living/carbon/human/user)
-	..()
-	user.cure_blind("blindfold_[REF(src)]")
-
 /obj/item/clothing/head/sack/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")

@@ -69,3 +69,5 @@
 #define INCLUDE_POCKETS (1<<0)
 #define INCLUDE_ACCESSORIES (1<<1)
 #define INCLUDE_HELD (1<<2)
+/// Include items that are not "real" items, such as hand items
+#define INCLUDE_ABSTRACT (1<<4)
