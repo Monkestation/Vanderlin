@@ -1004,11 +1004,11 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			return
-		if(undergoing_nervous_system_failure() && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+		if((health <= hardcrit_threshold || undergoing_nervous_system_failure()) && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
 			set_stat(HARD_CRIT)
 		else if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
-		else if(HAS_TRAIT(src, TRAIT_SOFT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
+		else if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
 			set_stat(SOFT_CRIT)
 		else
 			set_stat(CONSCIOUS)

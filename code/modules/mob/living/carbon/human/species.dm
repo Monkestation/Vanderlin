@@ -1012,12 +1012,6 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(H.stat == DEAD)
 		return
 
-	if(HAS_TRAIT(H, TRAIT_NOBREATH))
-		H.setOxyLoss(0)
-		H.losebreath = 0
-	else if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
-		H.adjustOxyLoss(1)
-
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
 	return
 
@@ -1937,6 +1931,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
 				if(istype(location))
 					H.add_splatter_floor(location)
+					H.add_splatter_wall(force = 2, splatter_direction = REVERSE_DIR(splatter_dir))
 				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(H)
 
@@ -2158,11 +2153,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		// Apply damage
 		if(burn_damage > 0)
 			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod, 0, CONFIG_GET(number/per_tick/max_fire_damage))
-			H.apply_damage(final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
-			// if(!H.has_smoke_protection())
-			// 	H.apply_damage(final_damage/4, OXY, flashes = FALSE) // Smoke inhalation
+			INVOKE_ASYNC(H, PROC_REF(apply_damage), final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
 			if(H.stat < UNCONSCIOUS && prob(burn_damage * 10 / 4))
-				H.emote("pain")
+				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob, emote), "pain")
 		// Apply building heat debuffs
 		apply_heat_debuffs(H, debuff_level)
 	// Cold damage and effects
@@ -2176,7 +2169,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		debuff_level = calculate_cold_debuff_level(cold_deficit)
 		// Apply damage
 		if(cold_damage > 0)
-			H.apply_damage(cold_damage * H.physiology.cold_mod, BURN, flashes = FALSE)
+			INVOKE_ASYNC(H, PROC_REF(apply_damage), cold_damage * H.physiology.cold_mod, BURN,  flashes = FALSE)
 		// Apply building cold debuffs
 		apply_cold_debuffs(H, debuff_level, cold_deficit)
 	// Clear effects when in safe range

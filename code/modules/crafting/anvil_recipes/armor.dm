@@ -1053,7 +1053,7 @@
 // --------- GOLD -----------
 /datum/anvil_recipe/armor/gold
 	required_material = /obj/item/ingot/gold
-	craftdiff = 3 // harder to work with. mostly jewelry
+	craftdiff = 6
 	abstract_type = /datum/anvil_recipe/armor/gold
 ///////////////////////////////////////////////
 
@@ -1324,8 +1324,9 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/hauberk
-	name = "fluted hauberk"
+	name = "fluted hauberk (+ Bar)"
 	required_material = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/chainmail/hauberk/fluted
 	craftdiff = 3
 
@@ -1389,11 +1390,6 @@
 	name = "Psydonic Chain Gloves"
 	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/gloves/chain/psydon
-
-/datum/anvil_recipe/armor/gold
-	abstract_type = /datum/anvil_recipe/armor/gold
-	craftdiff = SKILL_LEVEL_LEGENDARY
-	required_material = /obj/item/ingot/gold
 
 /datum/anvil_recipe/armor/gold/armet
 	name = "Golden Knight's Armet (+1 Gold, +2 Silk)"

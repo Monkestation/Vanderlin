@@ -3,8 +3,9 @@
 #define TAB_STOCK 3
 #define TAB_IMPORT 4
 #define TAB_BOUNTIES 5
-#define TAB_LOG 6
-#define TAB_CUSTOM 7
+#define TAB_JOBS 6
+#define TAB_LOG 7
+#define TAB_CUSTOM 8
 
 /datum/stock/stockpile/custom
 	abstract_type = /datum/stock/stockpile/custom
@@ -115,6 +116,17 @@
 
 	if(href_list["switchtab"])
 		current_tab = text2num(href_list["switchtab"])
+	if(href_list["taxes"])
+		var/newtax = input(usr, "Set a new tax percentage (1-99)", src, SStreasury.tax_value*100) as null|num
+		if(newtax)
+			if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())
+				return
+			if(findtext(num2text(newtax), "."))
+				return
+			newtax = CLAMP(newtax, 1, 99)
+			SStreasury.tax_value = newtax / 100
+			SStreasury.untaxed_deposits = list()
+			scom_announce("The new tax in Vanderlin shall be [newtax] percent.")
 	if(href_list["import"])
 		var/datum/stock/D = locate(href_list["import"]) in SStreasury.stockpile_datums
 		if(!D)
@@ -279,6 +291,48 @@
 				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_FINE_INCOME, newtax)
 				SStreasury.give_money_account(-newtax, A)
 				break
+	if(href_list["changejob"])
+		var/X = locate(href_list["changejob"])
+		if(!X)
+			return
+		for(var/mob/living/A in SStreasury.bank_accounts)
+			if(A == X)
+				var/list/jobs = list()
+				jobs += GLOB.noble_positions
+				jobs += GLOB.garrison_positions
+				jobs += GLOB.serf_positions
+				jobs += GLOB.company_positions
+				jobs += GLOB.peasant_positions
+				jobs += GLOB.apprentices_positions
+				jobs += GLOB.youngfolk_positions
+				jobs += GLOB.allmig_positions
+				jobs -= list(
+					/datum/job/lord::title,
+					/datum/job/innkeep_son::title,
+					/datum/job/bandit::title,
+				)
+				jobs += "Cancel"
+				var/new_pos = input(usr, "Select their new position", src, null) as anything in jobs
+				if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())
+					return
+				if(new_pos == "Cancel")
+					return
+				A.job = new_pos
+				A.mind?.set_assigned_role(new_pos)
+				if(ishuman(A))
+					var/mob/living/carbon/human/human = A
+					if(!HAS_TRAIT(human, TRAIT_RECRUITED) && HAS_TRAIT(human, TRAIT_FOREIGNER))
+						ADD_TRAIT(human, TRAIT_RECRUITED, TRAIT_GENERIC)
+
+				if(A.mind?.assigned_role)
+					new_pos = A.mind.assigned_role.get_informed_title(A)
+					A.mind.assigned_role.assign_honorary_titles(A)
+
+				if(!SScommunications.can_announce(usr))
+					return
+
+				scom_announce("[A.real_name] has been assigned the title of [new_pos].")
+				break
 	if(href_list["payroll"])
 		var/list/L = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.company_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.apprentices_positions) + list(GLOB.inquisition_positions)
 		var/list/jobs = list()
@@ -375,6 +429,7 @@
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_STOCK]'>\[Stockpile\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_IMPORT]'>\[Import\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_BOUNTIES]'>\[Bounties\]</a><BR>"
+			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_JOBS]'>\[Jobs\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_LOG]'>\[Log\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_CUSTOM]'>\[Custom Stocks\]</a><BR>"
 			contents += "</center>"
@@ -383,7 +438,9 @@
 			contents += "<center>Bank<BR>"
 			contents += "--------------<BR>"
 			contents += "Treasury: [SStreasury.treasury_value]m</center><BR>"
+			contents += "Lord's Tax: [SStreasury.tax_value*100]%</center><BR>"
 			contents += "<div style='margin-left:20px;'>"
+			contents += "<a href='byond://?src=\ref[src];taxes=1'>\[Set Taxes\]</a><BR><BR>"
 			contents += "<a href='byond://?src=\ref[src];payroll=1'>\[Pay by Class\]</a><BR><BR>"
 			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
 				if(ishuman(A))
@@ -464,6 +521,17 @@
 					contents += "Bounty Price: <a href='byond://?src=\ref[src];setbounty=\ref[A]'>[A.payout_price]%</a><BR><BR>"
 				else
 					contents += "Bounty Price: <a href='byond://?src=\ref[src];setbounty=\ref[A]'>[A.payout_price]</a><BR><BR>"
+			contents += "</div>"
+		if(TAB_JOBS)
+			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_MAIN]'>\[Return\]</a><BR>"
+			contents += "<center>Jobs<BR>"
+			contents += "--------------<BR>"
+			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
+				if(ishuman(A))
+					contents += "[A.real_name] ([A.get_role_title(steward_check = TRUE)])<BR>"
+				else
+					contents += "[A.real_name]<BR>"
+				contents += "<a href='byond://?src=\ref[src];changejob=\ref[A]'>\[Change Job\]</a><BR><BR>"
 			contents += "</div>"
 		if(TAB_LOG)
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_MAIN]'>\[Return\]</a><BR>"
@@ -548,5 +616,6 @@
 #undef TAB_STOCK
 #undef TAB_IMPORT
 #undef TAB_BOUNTIES
+#undef TAB_JOBS
 #undef TAB_LOG
 #undef TAB_CUSTOM

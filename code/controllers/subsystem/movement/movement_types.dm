@@ -88,8 +88,7 @@
 	var/old_dir = moving.dir
 	var/old_loc = moving.loc
 
-	owner?.processing_move_loop_flags = flags
-	owner?.processing_move_loop_flags |= MOVEMENT_LOOP_CALLED_MOVE
+	owner?.processing_move_loop_flags = (flags | MOVED_BY_MOVEMENT_LOOP)
 	var/result = move() //Result is an enum value. Enums defined in __DEFINES/movement.dm
 	if(moving)
 		var/direction = get_dir(old_loc, moving.loc)

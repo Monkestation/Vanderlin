@@ -113,7 +113,7 @@
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.set_faction(FACTION_UNDEAD)
+	L.set_faction(list(FACTION_UNDEAD))
 	if(length(L.quirks))
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
