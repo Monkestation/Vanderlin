@@ -1,5 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - rscadd: "Ollies, the equivalent for olives."
-  - bugfix: "Salted seeds recipe works properly now."

@@ -1,4 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - bugfix: "Per-species hunger and cleanliness modifiers actually function now."

@@ -82,7 +82,7 @@ GLOBAL_VAR(restart_counter)
 	_initialize_log_files("data/logs/config_error.[GUID()].log")
 
 	// Init the debugger first so we can debug Master
-	// Debugger = new
+	Debugger = new
 
 	// THAT'S IT, WE'RE DONE, THE. FUCKING. END.
 	Master = new

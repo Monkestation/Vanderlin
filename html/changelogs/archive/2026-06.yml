@@ -138,3 +138,15 @@
   - bugfix: Fixed visual issue with report bug
   Sulaboy:
   - bugfix: Some smithing recipes
+2026-06-19:
+  ModDownloading:
+  - rscadd: Argent, a new subclass for Sacrestants that focuses on all-around utility.
+  - rscadd: Enhancements, a loadout option for Inquisitor, Confessor, and Argent,
+      that affects stats and traits.
+  - rscadd: Adept now has two slots instead of one.
+  - balance: Inquisitor Prafekt subclass stats reduced to account for their selection
+      of Enhancements.
+  - refactor: Psyaltrist moved from Sacrestant to Adept, renamed "Rehabilitated Minstrel".
+  - rscadd: Ollies, the equivalent for olives.
+  - bugfix: Salted seeds recipe works properly now.
+  - bugfix: Per-species hunger and cleanliness modifiers actually function now.
