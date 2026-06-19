@@ -797,6 +797,13 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/standalone/fencerboots
+	name = "fencing boots"
+	output = /obj/item/clothing/shoes/boots/fencer
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
 /datum/repeatable_crafting_recipe/leather/standalone/furboots
 	name = "hardened fur lined boots"
 	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced

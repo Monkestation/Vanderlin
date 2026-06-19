@@ -17,10 +17,9 @@
 /datum/job/advclass/mercenary/fencer
 	title = "Fencer"
 	tutorial = "A expert fencer from a prestigious fencing school in Western Grenzelhoft, trained to use their wits in duels rather then brute strength or speed. These fencers are often hired by nobles to duel on their behalf."
-	allowed_races = RACES_PLAYER_NO_KOBOLD
-	blacklisted_species = list(SPEC_ID_DWARF)
+	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR, SPEC_ID_HALF_ELF)
 	outfit = /datum/outfit/mercenary/fencer
-	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg' 
+	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	total_positions = 2
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/fencer
