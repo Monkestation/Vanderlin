@@ -41,10 +41,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/goon
 
-	traits = list(
-		TRAIT_STEELHEARTED
-	)
-
+	traits = list(TRAIT_STEELHEARTED)
 
 /datum/outfit/mercenary/goon
 	name = "Goon (Mercenary)"
