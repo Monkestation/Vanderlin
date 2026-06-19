@@ -1,0 +1,8 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Argent, a new subclass for Sacrestants that focuses on all-around utility."
+  - rscadd: "Enhancements, a loadout option for Inquisitor, Confessor, and Argent, that affects stats and traits."
+  - rscadd: "Adept now has two slots instead of one."
+  - balance: "Inquisitor Prafekt subclass stats reduced to account for their selection of Enhancements."
+  - refactor: "Psyaltrist moved from Sacrestant to Adept, renamed \"Rehabilitated Minstrel\"."

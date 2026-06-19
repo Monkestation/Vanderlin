@@ -51,3 +51,4 @@
 #define FAMILY_THEACEAE  11    // Tea
 #define FAMILY_FRUIT  12       // Tropical Fruits
 #define FAMILY_DIKARYA 13      // Mushrooms
+#define FAMILY_OLEACEAE  14    // Olives

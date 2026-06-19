@@ -4,7 +4,11 @@
 #define SEND_SOUND(target, sound) DIRECT_OUTPUT(target, sound)
 #define SEND_TEXT(target, text) DIRECT_OUTPUT(target, text)
 #define WRITE_FILE(file, text) DIRECT_OUTPUT(file, text)
-#define WRITE_LOG(log, text) text2file(text,log) //rustg_log_write
+
+//This is an external call, "true" and "false" are how rust parses out booleans
+#define WRITE_LOG(log, text) rustg_log_write(log, text, "true")
+#define WRITE_LOG_NO_FORMAT(log, text) rustg_log_write(log, text, "false")
+
 #define TIMETOTEXT4LOGS time2text(world.timeofday,"hh:mm:ss")
 //print a warning message to world.log
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [UNLINT(src)] usr: [usr].")
@@ -77,10 +81,6 @@
 /proc/log_virus(text)
 	if (CONFIG_GET(flag/log_virus))
 		WRITE_LOG(GLOB.world_virus_log, "\[[TIMETOTEXT4LOGS]\] VIRUS: [text]")
-
-/proc/log_cloning(text, mob/initiator)
-	if(CONFIG_GET(flag/log_cloning))
-		WRITE_LOG(GLOB.world_cloning_log, "\[[TIMETOTEXT4LOGS]\] CLONING: [text]")
 
 /proc/log_paper(text)
 	WRITE_LOG(GLOB.world_paper_log, "\[[TIMETOTEXT4LOGS]\] PAPER: [text]")
@@ -218,6 +218,11 @@
 
 /proc/log_hunted(text)
 	WRITE_LOG(GLOB.hunted_log, text)
+
+/// Logging for game performance
+/proc/log_perf(list/perf_info)
+	. = "[perf_info.Join(",")]\n"
+	WRITE_LOG_NO_FORMAT(GLOB.perf_log, .)
 
 /* ui logging */
 /**

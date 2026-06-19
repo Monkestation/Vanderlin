@@ -16,34 +16,33 @@
 	from doing this unless you absolutely know what you are doing, and have defined a
 	conversion in savefile.dm
 */
-/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female, roundstart = FALSE, female_same = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
-	if(!istype(L))
-		L = list()
-	if(!istype(male))
-		male = list()
-	if(!istype(female))
-		female = list()
+
+/proc/init_sprite_accessory_subtypes(prototype)
+	var/list/all_accessories = list(
+		DEFAULT_SPRITE_LIST = list(),
+		MALE_SPRITE_LIST = list(),
+		FEMALE_SPRITE_LIST = list(),
+	)
 
 	for(var/datum/sprite_accessory/accessory as anything in subtypesof(prototype))
 		if(IS_ABSTRACT(accessory))
 			continue
 
-		accessory = new accessory()
-
-		if(roundstart && accessory.locked)
-			continue
-
-		L[accessory.name] = accessory
-
-		if(accessory.gender == MALE)
-			male[accessory.name] = accessory
-			if(female_same)
-				female[accessory.name] = accessory
-		else if(accessory.gender == FEMALE)
-			female[accessory.name] = accessory
+		if(accessory::icon_state)
+			all_accessories[DEFAULT_SPRITE_LIST][accessory::name] = new accessory()
 		else
-			male[accessory.name] = accessory
-			female[accessory.name] = accessory
+			all_accessories[DEFAULT_SPRITE_LIST] += accessory::name
+
+		switch(accessory::gender)
+			if(MALE)
+				all_accessories[MALE_SPRITE_LIST] += accessory::name
+			if(FEMALE)
+				all_accessories[FEMALE_SPRITE_LIST] += accessory::name
+			else
+				all_accessories[MALE_SPRITE_LIST] += accessory::name
+				all_accessories[FEMALE_SPRITE_LIST] += accessory::name
+
+	return all_accessories
 
 /datum/sprite_accessory
 	var/use_static		//determines if the accessory will be skipped by color preferences

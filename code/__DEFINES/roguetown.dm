@@ -8,8 +8,6 @@
 #define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha", "The Great Hunt", "The Black Briar")
 #define TEMPLE_PATRON_NAMES		list("Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora")
 
-GLOBAL_LIST_INIT(curse_names, list())
-
 #define TEN_CURSES list(\
 	/datum/curse/astrata,\
 	/datum/curse/noc,\
