@@ -235,10 +235,6 @@
 	zone = BODY_ZONE_PRECISE_L_EYE
 	side = LEFT_SIDE
 
-/obj/item/organ/eyes/night_vision/nightmare/hoblin/left
-	zone = BODY_ZONE_PRECISE_L_EYE
-	side = LEFT_SIDE
-
 /obj/item/organ/eyes/night_vision/mushroom
 	name = "fung-eye"
 	desc = ""

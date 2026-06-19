@@ -1,7 +1,7 @@
-/mob/living/carbon/human/species/hoblin
-	race = /datum/species/hoblin
+/mob/living/carbon/human/species/dwarf/dwarf/dworc
+	race = /datum/species/dwarf/dworc
 
-/datum/attribute_holder/sheet/job/species/hoblin
+/datum/attribute_holder/sheet/job/species/dwarf/dworc
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_PERCEPTION = -2,
@@ -10,7 +10,7 @@
 		STAT_ENDURANCE = 1,
 	)
 
-/datum/attribute_holder/sheet/job/species/hoblin/female
+/datum/attribute_holder/sheet/job/species/dwarf/dworc/female
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_PERCEPTION = -1,
@@ -19,21 +19,22 @@
 		STAT_ENDURANCE = 1,
 	)
 
-/datum/species/hoblin
-	name = "Dwarven Hakf-Orc"
-	id = SPEC_ID_HOBLIN
+/datum/species/dwarf/dworc
+	name = "Dwarven Half-Orc"
+	id = SPEC_ID_DWARF_ORC
 	multiple_accents = list(
 		"Half-Orc Accent" = ACCENT_HORC,
+		"Dwarf Accent" = ACCENT_DWARF,
 		"Ossland Accent" = ACCENT_OSSLAND,
 	)
 	native_language = "Orcish"
 	desc = "Orkified dwarves. \
 	\n\n\
-	Often insultingly compared to goblins due to their size, are the offspring of dwarf-orc and another species, \
-	or mostly those dwarfs which decided to feast of kinflesh or were forced to do so. \
+	Often insultingly called hoblins (half-goblins) due to their size, are the offspring of dwarf-orc and another species, \
+	or those dwarfs which decided to feast of kinflesh or were forced to do so. \
 	\n\n\
 	A dwarvened orc was an uncommon sight, until the second Goblin War caused an influx of them, as those dwarves captured by orcish forces were fed flesh of their fallen brothers. \
-	Used mostly as cannon-fodder, as they were reluctant to fight their brothers. Some managed to escape captivity, yet they were not embraced as heroes but as potential spies. \
+	Used mostly as cannon-fodder, as they were reluctant to fight their homeland. Some managed to escape captivity, yet they were rarely recognised and in turn shunned and treated like spies. \
 	Outside of their size there is not much diffrence between a proper half-orc and dwarvened variant. Both posses unnatural strength, live mostly and isolation and are prone to violence. \
 	\n\n\
 	THIS IS AN <I>EXTREMELY</I> DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
@@ -50,8 +51,8 @@
 	possible_ages = NORMAL_AGES_LIST
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/hoblin.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/m/hoblin.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/md.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fd.dmi'
 
 	custom_id = "dwarf"
 	custom_clothes = TRUE
@@ -69,7 +70,7 @@
 		OFFSET_CLOAK = list(0,0),\
 		OFFSET_FACEMASK = list(0,-4),\
 		OFFSET_HEAD = list(0,-4),\
-		OFFSET_FACE = list(0, 0),\
+		OFFSET_FACE = list(0,-4),\
 		OFFSET_BELT = list(0,0),\
 		OFFSET_BACK = list(0,-4),\
 		OFFSET_NECK = list(0,-4),\
@@ -77,7 +78,7 @@
 		OFFSET_PANTS = list(0,0),\
 		OFFSET_SHIRT = list(0,0),\
 		OFFSET_ARMOR = list(0,0),\
-		OFFSET_UNDIES = list(0,-4),\
+		OFFSET_UNDIES = list(0,0),\
 	)
 
 	offset_features_f = list(
@@ -96,11 +97,11 @@
 		OFFSET_PANTS = list(0,0),\
 		OFFSET_SHIRT = list(0,0),\
 		OFFSET_ARMOR = list(0,0),\
-		OFFSET_UNDIES = list(0,-4)\
+		OFFSET_UNDIES = list(0,0)\
 	)
 
-	statsheet_male = /datum/attribute_holder/sheet/job/species/hoblin
-	statsheet_female = /datum/attribute_holder/sheet/job/species/hoblin/female
+	statsheet_male = /datum/attribute_holder/sheet/job/species/dwarf/dworc
+	statsheet_female = /datum/attribute_holder/sheet/job/species/dwarf/dworc/female
 
 	enflamed_icon = "widefire"
 
@@ -137,32 +138,35 @@
 
 	hygiene_mod = 1.5
 
-/datum/species/hoblin/check_roundstart_eligible()
+/datum/species/dwarf/dworc/check_roundstart_eligible()
 	return TRUE
 
-/datum/species/hoblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+/datum/species/dwarf/dworc/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/orcish)
+	C.grant_language(/datum/language/dwarvish)
 
-/datum/species/hoblin/after_creation(mob/living/carbon/C)
+/datum/species/dwarf/dworc/after_creation(mob/living/carbon/C)
 	..()
 	C.grant_language(/datum/language/orcish)
+	C.grant_language(/datum/language/dwarvish)
 	to_chat(C, span_info("I can speak Orcish with ,o before my speech."))
 	if(ishuman(C)) //Horcs are STINKY
 		var/mob/living/carbon/human/stinky_horc = C
 		stinky_horc.hygiene = HYGIENE_LEVEL_DISGUSTING
 
-/datum/species/hoblin/on_species_loss(mob/living/carbon/C)
+/datum/species/dwarf/dworc/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/orcish)
+	C.remove_language(/datum/language/dwarvish)
 
-/datum/species/hoblin/qualifies_for_rank(rank, list/features)
+/datum/species/dwarf/dworc/qualifies_for_rank(rank, list/features)
 	return TRUE
 
-/datum/species/hoblin/get_skin_list()
+/datum/species/dwarf/dworc/get_skin_list()
 	return list(
 		"Sea" = SKIN_COLOR_SHELLCREST,
 		"Infernal" = SKIN_COLOR_BLOOD_AXE,
@@ -174,7 +178,7 @@
 		"Moon" = SKIN_COLOR_SHATTERHORN,
 	)
 
-/datum/species/hoblin/get_hairc_list()
+/datum/species/dwarf/dworc/get_hairc_list()
 	return sortList(list(
 		"brown - minotaur" = "58433b",
 		"brown - volf" = "48322a",
@@ -186,10 +190,10 @@
 		"black - charcoal" = "201616"
 	))
 
-/datum/species/hoblin/get_possible_names(gender = MALE)
-	var/static/list/male_names = file2list('strings/rt/names/other/halforcm.txt')
-	var/static/list/female_names = file2list('strings/rt/names/other/halforcf.txt')
+/datum/species/dwarf/dworc/get_possible_names(gender = MALE)
+	var/static/list/male_names = file2list('strings/rt/names/dwarf/dwarmm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/dwarf/dwarmf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
-/datum/species/hoblin/get_possible_surnames(gender = MALE)
+/datum/species/dwarf/dworc/get_possible_surnames(gender = MALE)
 	return null
