@@ -380,13 +380,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!culture)
 		culture = src::culture
 
-	var/patron_typepath
-	S["selected_patron"] >> patron_typepath
-	if(patron_typepath)
-		selected_patron = GLOB.patrons_by_type[patron_typepath]
+	S["selected_patron"] >> selected_patron
 
 	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patrons_by_type[default_patron]
+		selected_patron = default_patron
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -526,7 +523,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["job_preferences"], job_preferences)
 
 	//Patron
-	WRITE_FILE(S["selected_patron"], selected_patron.type)
+	WRITE_FILE(S["selected_patron"], selected_patron)
 
 	// Organs
 	WRITE_FILE(S["customizer_entries"], customizer_entries)

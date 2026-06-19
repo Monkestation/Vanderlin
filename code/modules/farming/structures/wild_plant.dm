@@ -239,6 +239,10 @@
 	icon_state = "mato2"
 	plant_type = /datum/plant_def/tamto
 
+/obj/structure/wild_plant/nospread/ollie
+	icon_state = "ollietree2"
+	plant_type = /datum/plant_def/ollie
+
 /obj/structure/wild_plant/nospread/cocaudo
 	icon_state = "cocaudo2"
 	plant_type = /datum/plant_def/cocaudo

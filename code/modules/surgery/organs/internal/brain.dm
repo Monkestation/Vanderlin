@@ -20,8 +20,6 @@
 	organ_flags = ORGAN_VITAL
 	attack_verb = list("attacked", "slapped", "whacked")
 
-	pain_multiplier = 0 // you can't feel your brain being fried
-
 	///The brain's organ variables are significantly more different than the other organs, with half the decay rate for balance reasons, and twice the maxHealth
 	decay_factor = STANDARD_ORGAN_DECAY * 0.5
 
@@ -40,6 +38,7 @@
 	nutriment_req = 3
 	hydration_req = 1.5
 	self_healing_effect = CE_BRAIN_REGEN
+	self_heal_thresholds = list()
 
 	/// This is stuff
 	var/damage_threshold_value = BRAIN_DAMAGE_DEATH/10
@@ -48,44 +47,81 @@
 	var/mob/living/brain/brainmob = null
 	var/brain_death = FALSE //if the brainmob was intentionally killed by attacking the brain after removal, or by severe braindamage
 	var/decoy_override = FALSE	//if it's a fake brain with no brainmob assigned. Feedback messages will be faked as if it does have a brainmob. See changelings & dullahans.
-	//two variables necessary for calculating whether we get a brain trauma or not
-	var/damage_delta = 0
 
 	var/list/datum/brain_trauma/traumas = list()
 
-/obj/item/organ/brain/Insert(mob/living/carbon/C, special = FALSE, drop_if_replaced = FALSE, new_zone = null, no_id_transfer = FALSE)
+/obj/item/organ/brain/Insert(mob/living/carbon/brain_owner, special = FALSE, drop_if_replaced = FALSE, new_zone = null, no_id_transfer = FALSE)
 	. = ..()
 
-	name = "brain"
+	name = initial(name)
 
 	if(brainmob)
-		if(brainmob.mind)
-			brainmob.mind.transfer_to(C)
+		if(brainmob?.key)
+			stack_trace("Decoy override brain with a key assigned - This should never happen.")
+
 		else
-			C.key = brainmob.key
+			if(brain_owner.key)
+				brain_owner.ghostize()
+
+			if(brainmob.mind)
+				brainmob.mind.transfer_to(brain_owner)
+			else
+				brain_owner.PossessByPlayer(brainmob.key)
+
+			brain_owner.set_suicide(HAS_TRAIT(brainmob, TRAIT_SUICIDED))
 
 		QDEL_NULL(brainmob)
+	else
+		brain_owner.set_suicide(suicided)
 
-	for(var/datum/brain_trauma/BT as anything in traumas)
-		BT.owner = owner
-		BT.on_gain()
+	for(var/datum/brain_trauma/trauma as anything in traumas)
+		if(trauma.owner)
+			if(trauma.owner == brain_owner)
+				// if we're being special replaced, the trauma is already applied, so this is expected
+				// but if we're not... this is likely a bug, and should be reported
+				if(!special)
+					stack_trace("A brain trauma ([trauma]) is being re-applied to its owning mob ([brain_owner])!")
+				continue
+
+			stack_trace("A brain trauma ([trauma]) is being applied to a new mob ([brain_owner]) when it's owned by someone else ([trauma.owner])!")
+			continue
+
+		trauma.owner = brain_owner
+		if(!trauma.on_gain())
+			qdel(trauma)
 
 	//Update the body's icon so it doesnt appear debrained anymore
-	C.update_body()
+	brain_owner.update_body()
 	if(damage >= medium_threshold)
-		C.add_stress(/datum/stress_event/brain_damage)
+		brain_owner.add_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/Remove(mob/living/carbon/C, special = 0, no_id_transfer = FALSE)
+/obj/item/organ/brain/Remove(mob/living/carbon/organ_owner, special, no_id_transfer = FALSE)
 	. = ..()
 	update_brain_color(animate = FALSE) // once it's out in the world we need to make sure it's the right color
 	for(var/datum/brain_trauma/BT as anything in traumas)
 		BT.on_lose(TRUE)
 		BT.owner = null
 
-	if((!gc_destroyed || (owner && !owner.gc_destroyed)) && !no_id_transfer)
-		transfer_identity(C)
-	C.update_body()
-	C.remove_stress(/datum/stress_event/brain_damage)
+	if((!QDELETED(src) || !QDELETED(organ_owner)) && !no_id_transfer)
+		transfer_identity(organ_owner)
+	organ_owner.update_body()
+	organ_owner.remove_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/on_medium_damage_received()
+	. = ..()
+	owner.add_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/on_medium_damage_healed()
+	. = ..()
+	owner.remove_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/can_self_heal(delta_time, times_fired)
+	. = ..()
+	if(!.)
+		return
+	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
+	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
+		return FALSE
 
 /obj/item/organ/brain/handle_blood(delta_time, times_fired)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
@@ -322,15 +358,15 @@
 	. = ..()
 	var/delta_dam = . //for the sake of clarity
 
-	if(delta_dam < 0 && damage >= BRAIN_DAMAGE_MILD && (-delta_dam >= TRAUMA_ROLL_THRESHOLD))
-		roll_for_brain_trauma(-delta_dam) // parent call returns negative numbers if take damage and positive if we heal
+	if(delta_dam >= TRAUMA_ROLL_THRESHOLD && damage >= BRAIN_DAMAGE_MILD)
+		roll_for_brain_trauma(delta_dam) // parent call returns negative numbers if take damage and positive if we heal
 
 	if(isnull(owner)) // no need to color it if it's in someone's noggin
 		update_brain_color()
 		return
 
-	if(-delta_dam >= 10)
-		var/damage_side_effect = CEILING(-delta_dam / 2, 1)
+	if(delta_dam >= 10)
+		var/damage_side_effect = CEILING(delta_dam / 2, 1)
 		if(damage_side_effect >= 1)
 			//owner.flash_pain(damage_side_effect*4)
 			owner.adjust_eye_blur(damage_side_effect)
@@ -350,14 +386,14 @@
 	var/intelligence_modifier = (owner ? -(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)-ATTRIBUTE_MIDDLING) : 0)
 	if(damage >= BRAIN_DAMAGE_SEVERE)
 		// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
-		if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
+		if(prob((delta_dam+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100))))
 			if(prob(20 + (is_boosted * 30) - (intelligence_modifier * 2)))
 				gain_trauma_type(BRAIN_TRAUMA_SPECIAL, is_boosted ? TRAUMA_RESILIENCE_SURGERY : null, natural_gain = TRUE)
 			else
 				gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
 	else
 		// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
-		if(prob((damage_delta+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
+		if(prob((delta_dam+intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100))))
 			gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
 
 #define BRAIN_DAMAGE_FILTER "brain_damage_color_filter"
@@ -419,6 +455,9 @@
 		. += "\n[brain_message]"
 	else
 		return brain_message
+
+/obj/item/organ/brain/get_shock(painkiller_included)
+	return 0 // you can't feel your brain being fried
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 

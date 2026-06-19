@@ -21,6 +21,9 @@
 	var/motd
 	var/policy
 
+	/// If the configuration is loaded
+	var/loaded = FALSE
+
 	var/static/regex/ic_filter_regex
 
 /datum/controller/configuration/proc/admin_reload()
@@ -55,6 +58,8 @@
 	LoadTMInfo()
 	LoadPolicy()
 	LoadRelays()
+
+	loaded = TRUE
 
 	if(Master)
 		Master.OnConfigLoad()

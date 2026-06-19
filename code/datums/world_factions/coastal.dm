@@ -87,6 +87,7 @@
 		/datum/supply_pack/seeds/avocado,
 		/datum/supply_pack/seeds/pineapple,
 		/datum/supply_pack/seeds/cocaudo,
+		/datum/supply_pack/seeds/ollie,
 		// Livestock - coastal communities
 		/datum/supply_pack/livestock/chicken,
 		/datum/supply_pack/livestock/cat

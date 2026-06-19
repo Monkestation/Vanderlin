@@ -89,6 +89,23 @@
 	icon_state = "necraflail"
 	item_weight = 1.4 KILOGRAMS
 
+//................ Silver Flail ............... //
+/obj/item/weapon/flail/silver
+	name = "silver flail"
+	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast."
+	icon_state = "silverflail"
+	force = DAMAGE_GOOD_FLAIL - 1
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 4
+	smeltresult = null
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 90
+	item_weight = 1 KILOGRAMS
+
+/obj/item/weapon/flail/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
 	name = "psydonian flail"

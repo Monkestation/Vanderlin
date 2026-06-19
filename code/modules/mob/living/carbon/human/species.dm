@@ -1,6 +1,3 @@
-// This code handles different species in the game.
-GLOBAL_LIST_EMPTY(roundstart_species)
-
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -517,10 +514,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	return " [pick(possible_surnames)]"
 
 /datum/species/proc/get_spec_undies_list(gender)
-	if(!GLOB.underwear_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
-
-	var/list/used_list = GLOB.underwear_list
+	var/list/used_list
 	if(gender == MALE)
 		used_list = GLOB.underwear_m
 	else if(gender == FEMALE)
@@ -530,7 +524,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	var/list/spec_undies = list()
 	for(var/name in used_list)
-		var/datum/sprite_accessory/accessory = used_list[name]
+		var/datum/sprite_accessory/accessory = GLOB.underwear_list[name]
+		if(!accessory)
+			continue
 		if(!accessory.roundstart)
 			continue
 		if(!(used_species_id in accessory.specuse))
@@ -1011,12 +1007,6 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	SHOULD_CALL_PARENT(TRUE)
 	if(H.stat == DEAD)
 		return
-
-	if(HAS_TRAIT(H, TRAIT_NOBREATH))
-		H.setOxyLoss(0)
-		H.losebreath = 0
-	else if(HAS_TRAIT(H, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE))
-		H.adjustOxyLoss(1)
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
 	return
@@ -2159,11 +2149,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		// Apply damage
 		if(burn_damage > 0)
 			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod, 0, CONFIG_GET(number/per_tick/max_fire_damage))
-			H.apply_damage(final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
-			// if(!H.has_smoke_protection())
-			// 	H.apply_damage(final_damage/4, OXY, flashes = FALSE) // Smoke inhalation
+			INVOKE_ASYNC(H, PROC_REF(apply_damage), final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
 			if(H.stat < UNCONSCIOUS && prob(burn_damage * 10 / 4))
-				H.emote("pain")
+				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob, emote), "pain")
 		// Apply building heat debuffs
 		apply_heat_debuffs(H, debuff_level)
 	// Cold damage and effects
@@ -2177,7 +2165,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		debuff_level = calculate_cold_debuff_level(cold_deficit)
 		// Apply damage
 		if(cold_damage > 0)
-			H.apply_damage(cold_damage * H.physiology.cold_mod, BURN, flashes = FALSE)
+			INVOKE_ASYNC(H, PROC_REF(apply_damage), cold_damage * H.physiology.cold_mod, BURN,  flashes = FALSE)
 		// Apply building cold debuffs
 		apply_cold_debuffs(H, debuff_level, cold_deficit)
 	// Clear effects when in safe range

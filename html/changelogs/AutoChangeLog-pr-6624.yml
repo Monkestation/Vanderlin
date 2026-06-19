@@ -1,6 +1,0 @@
-author: "Archeonan"
-delete-after: True
-changes:
-  - rscadd: "New weapon options to barbarian"
-  - rscadd: "Adventurer belt to barbarian"
-  - rscdel: "Removed old barbarian weapon options"

@@ -496,6 +496,10 @@
 	/// Handle blood
 	handle_blood(delta_time, times_fired)
 
+	// Damage decrements by a percent of maxhealth
+	if(can_self_heal(delta_time, times_fired))
+		handle_self_healing(delta_time, times_fired)
+
 	if(is_failing())
 		handle_failing_organ(delta_time, times_fired)
 		return
@@ -503,10 +507,6 @@
 	// Decrease failure time while healthy
 	if(failure_time > 0)
 		failure_time = max(0, failure_time - delta_time)
-
-	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time, times_fired))
-		handle_self_healing(delta_time, times_fired)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
 /obj/item/organ/proc/handle_failing_organ(delta_time, times_fired)
@@ -641,7 +641,7 @@
 	effective_efficiency = max(0, CEILING(effective_efficiency - (effective_efficiency * (damage/maxHealth)), 1))
 	return effective_efficiency
 
-///Adjusts an organ's damage by the amount "d", up to a maximum amount, which is by default max damage
+///Adjusts an organ's damage by the amount "damage_amount", up to a maximum amount, which is by default max damage. Returns the net change in organ damage.
 /obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth)	//use for damaging effects
 	if(!damage_amount) //Micro-optimization.
 		return FALSE
@@ -649,7 +649,7 @@
 	if(maximum < damage)
 		return FALSE
 	damage = clamp(damage + damage_amount, 0, maximum)
-	. = (prev_damage - damage) // return net damage
+	. = (damage - prev_damage) // return net damage
 	var/message = check_damage_thresholds()
 	prev_damage = damage
 
