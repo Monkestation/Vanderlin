@@ -171,6 +171,7 @@
 	name = "fencing shirt"
 	desc = "A comfortable padded shirt designed for fencers, providing a bit of protection to vital areas."
 	icon_state = "fencingshirt"
+
 //................ Stalker Robe ............... //
 /obj/item/clothing/armor/gambeson/shadowrobe
 	name = "stalker robe"
