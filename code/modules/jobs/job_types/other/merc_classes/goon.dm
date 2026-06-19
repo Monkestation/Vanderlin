@@ -60,29 +60,29 @@
 /datum/job/advclass/mercenary/goon/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Knuckleduster", "Katar", "Barehands")
-	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "FOR THE BOSS!", weapons)
+	var/static/list/weapons = list(
+		"Knuckleduster" = /obj/item/weapon/knuckles,
+		"Katar" = /obj/item/weapon/katar,
+		"Barehands" = /obj/item/clothing/gloves/bandages/pugilist
+	)
 
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "FOR THE BOSS.")
 	switch(weapon_choice)
-		if("Knuckleduster")
-			spawned.put_in_hands(new /obj/item/weapon/knuckles(get_turf(spawned)), TRUE)
-		if("Katar")
-			spawned.put_in_hands(new /obj/item/weapon/katar(get_turf(spawned)), TRUE)
 		if("Barehands")
-			spawned.put_in_hands(new /obj/item/clothing/gloves/bandages/pugilist(get_turf(spawned)), TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5)
 
-	var/static/list/armors = list("Brute, Splint Armor", "Speedster, Leather Coat")
-	var/armor_choice = browser_input_list(spawned, "Choose your ARCHETYPE.", "FOR THE BOSS!", armors)
+	var/static/list/armors = list(
+		"Brute, Splint Armor" = /obj/item/clothing/armor/leather/splint,
+		"Speedster, Leather Coat" = /obj/item/clothing/armor/leather/jacket/leathercoat,
+	)
 
+	var/armor_choice = spawned.select_equippable(player_client, armors, message = "Choose your ARCHETYPE.", title = "FOR THE BOSS.")
 	switch(armor_choice)
 		if("Brute, Splint Armor")
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/splint, ITEM_SLOT_ARMOR, TRUE)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goon/heavy)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_NOPAINSTUN, JOB_TRAIT)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goon/heavy)
 		if("Speedster, Leather Coat")
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/jacket/leathercoat, ITEM_SLOT_ARMOR, TRUE)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goon/light)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, JOB_TRAIT)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goon/light)
