@@ -108,3 +108,45 @@
   - bugfix: Psyalter's Stole Sprite Fix
   The-Awful:
   - rscadd: New outfit for Malum Acolytes.
+2026-06-16:
+  Spitegremlin:
+  - rscadd: Added Huntsmaster Hand subclass, along with their hound
+  - rscadd: Added new Gambeson. Hunting Gambeson
+  - rscadd: Added new trait called keen eyes, and gave it to hunters and huntsmaster
+  - rscadd: Added a trait called flip jump to Spymaster, doesnt do anything other
+      then let them flip when they jump
+  - balance: gave Advisor a glock
+  - balance: gave all hand subclasses a standard 8 since i was told too, and the default
+      hand class had 8
+  - balance: gave pilgrim hunter forager and keeneyes trait, to match with normal
+      hunter
+2026-06-17:
+  Avalon-Proto:
+  - bugfix: Fixed some bugs with all the weapons added in my last PR
+  Magiy-Anne:
+  - bugfix: Gold Armor should now be much easier to make
+  ModDownloading:
+  - rscadd: Bandits now start with Halfmasks in addition to their other gear.
+  - rscadd: Rusted armor can now be found in random loot.
+  - balance: Steel masks are more common in random loot.
+  Severus840:
+  - map: WPP Church moved closer into town
+  - map: WPP Merchant moved closer into town
+  - map: WPP generally a lot of town changes, see PR for full changelog.
+2026-06-18:
+  CheffieGithub:
+  - bugfix: Fixed visual issue with report bug
+  Sulaboy:
+  - bugfix: Some smithing recipes
+2026-06-19:
+  ModDownloading:
+  - rscadd: Argent, a new subclass for Sacrestants that focuses on all-around utility.
+  - rscadd: Enhancements, a loadout option for Inquisitor, Confessor, and Argent,
+      that affects stats and traits.
+  - rscadd: Adept now has two slots instead of one.
+  - balance: Inquisitor Prafekt subclass stats reduced to account for their selection
+      of Enhancements.
+  - refactor: Psyaltrist moved from Sacrestant to Adept, renamed "Rehabilitated Minstrel".
+  - rscadd: Ollies, the equivalent for olives.
+  - bugfix: Salted seeds recipe works properly now.
+  - bugfix: Per-species hunger and cleanliness modifiers actually function now.
