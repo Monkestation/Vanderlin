@@ -135,7 +135,7 @@
 	if(istype(interacting_with, /obj/machinery/light/fueled))
 		var/obj/machinery/light/fueled/forge = interacting_with
 		if(forge.on)
-			user.visible_message("<span class='info'>[user] heats [src].</span>")
+			user.visible_message(span_info("[user] heats [src]."))
 			fire_act(10)
 			return ITEM_INTERACT_SUCCESS
 
@@ -236,14 +236,14 @@
 		return ITEM_INTERACT_BLOCKING
 
 	if(interacting_with == user)
-		user.visible_message("<span class='info'>[user] begins smacking themself with a small hammer.</span>")
+		user.visible_message(span_info("[user] begins smacking themself with a small hammer."))
 	else
-		user.visible_message("<span class='info'>[user] begins to smack [interacting_with] with a small hammer.</span>")
+		user.visible_message(span_info("[user] begins to smack [interacting_with] with a small hammer."))
 
-	if(!do_after(user, 1 SECONDS, interacting_with))
+	if(!do_after(user, 0.5 SECONDS, interacting_with))
 		return ITEM_INTERACT_BLOCKING
 
-	interacting_with.visible_message("<span class='info'>[interacting_with] jerks their knee after the hammer strikes!</span>")
+	interacting_with.visible_message(span_info("[interacting_with] jerks their knee after the hammer strikes!"))
 
 	if(prob(1))
 		playsound(user, 'sound/misc/bonk.ogg', 100, FALSE, -1)

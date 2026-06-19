@@ -14,6 +14,7 @@
 		TOOL_SUTURE = 1,
 		TOOL_HEMOSTAT = 1.25,
 		TOOL_IMPROVISED_HEMOSTAT = 1.40,
+		/obj/item/natural/feather = 1.8,
 	)
 
 	time = 2.5 SECONDS
@@ -25,9 +26,8 @@
 	failure_sound = 'sound/surgery/organ2.ogg'
 
 	required_biotype = MOB_ORGANIC|MOB_HUMANOID
-	required_bodytype = NONE
 
-	any_surgery_states_required = ALL_SURGERY_SKIN_STATES
+	any_surgery_states_required = ALL_SURGERY_SKIN_STATES|SURGERY_VESSELS_CLAMPED
 
 	/// Radial slice datums for every healing option we can provide
 	VAR_PRIVATE/list/cached_healing_options
@@ -48,15 +48,36 @@
 
 	var/mob/living/carbon/carbon_patient = patient
 	for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-		if(injury.damage_type & (WOUND_BLUNT | WOUND_INTERNAL_BRUISE | WOUND_LASH))
-			return TRUE
-		if(injury.damage_type & WOUND_BURN)
+		if(injury.required_status != required_bodytype)
+			continue
+		if(!injury.can_heal() || injury.is_surgical())
+			continue
+		if(injury.damage_type & BRUTE_WOUND_TYPES|FIRE_WOUND_TYPES)
 			return TRUE
 
 	return FALSE
 
 /datum/surgery_operation/basic/tend_wounds/get_default_radial_image()
 	return image(/obj/item/natural/cloth)
+
+/datum/surgery_operation/basic/tend_wounds/proc/check_for_injuries(mob/living/carbon/patient, brute_check, burn_check)
+	if(!istype(patient))
+		return (brute_check && patient.getBruteLoss() > 0 || burn_check && patient.getFireLoss() > 0)
+	var/brute_found = !brute_check
+	var/burn_found = !burn_check
+	var/mob/living/carbon/carbon_patient = patient
+	for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
+		if(brute_found && burn_found)
+			break
+		if(injury.required_status != required_bodytype)
+			continue
+		if(!injury.can_heal() || injury.is_surgical())
+			continue
+		if(!brute_found && injury.damage_type & BRUTE_WOUND_TYPES)
+			brute_found = TRUE
+		if(!burn_found && injury.damage_type & FIRE_WOUND_TYPES)
+			burn_found = TRUE
+	return brute_found && burn_found
 
 /datum/surgery_operation/basic/tend_wounds/get_radial_options(mob/living/patient, obj/item/tool, operating_zone)
 	var/list/options = list()
@@ -78,7 +99,7 @@
 			"[OPERATION_BURN_MULTIPLIER]" = healing_multiplier,
 		)
 
-	if((can_heal & BRUTE_SURGERY) && patient.getBruteLoss() > 0)
+	if((can_heal & BRUTE_SURGERY) && check_for_injuries(patient, TRUE, FALSE))
 		var/datum/radial_menu_choice/brute_healing = LAZYACCESS(cached_healing_options, "[BRUTE_SURGERY]")
 		if(!brute_healing)
 			brute_healing = new()
@@ -93,7 +114,7 @@
 			"[OPERATION_BRUTE_MULTIPLIER]" = healing_multiplier,
 		)
 
-	if((can_heal & BURN_SURGERY) && patient.getFireLoss() > 0)
+	if((can_heal & BURN_SURGERY) && check_for_injuries(patient, FALSE, TRUE))
 		var/datum/radial_menu_choice/burn_healing = LAZYACCESS(cached_healing_options, "[BURN_SURGERY]")
 		if(!burn_healing)
 			burn_healing = new()
@@ -117,31 +138,10 @@
 
 	var/brute_heal = operation_args[OPERATION_BRUTE_HEAL] > 0
 	var/burn_heal = operation_args[OPERATION_BURN_HEAL] > 0
-	if(brute_heal && burn_heal)
-		if(!iscarbon(patient))
-			return patient.getBruteLoss() > 0 || patient.getFireLoss() > 0
-		var/mob/living/carbon/carbon_patient = patient
-		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-			if(injury.damage_type & (WOUND_BLUNT | WOUND_INTERNAL_BRUISE | WOUND_LASH))
-				return TRUE
-			if(injury.damage_type & WOUND_BURN)
-				return TRUE
-	else if(brute_heal)
-		if(!iscarbon(patient))
-			return patient.getBruteLoss() > 0
-		var/mob/living/carbon/carbon_patient = patient
-		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-			if(injury.damage_type & (WOUND_BLUNT | WOUND_INTERNAL_BRUISE | WOUND_LASH))
-				return TRUE
-	else if(burn_heal)
-		if(!iscarbon(patient))
-			return patient.getFireLoss() > 0
-		var/mob/living/carbon/carbon_patient = patient
-		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-			if(injury.damage_type & WOUND_BURN)
-				return TRUE
+	if(!iscarbon(patient))
+		return (brute_heal && patient.getBruteLoss() > 0) || (burn_heal && patient.getFireLoss() > 0)
 
-	return FALSE
+	return check_for_injuries(patient, brute_heal, burn_heal)
 
 /datum/surgery_operation/basic/tend_wounds/on_preop(mob/living/patient, mob/living/surgeon, tool, list/operation_args)
 	var/woundtype
@@ -201,7 +201,7 @@
 	var/brute_healed = operation_args[OPERATION_BRUTE_HEAL]
 	var/burn_healed = operation_args[OPERATION_BURN_HEAL]
 
-	var/dead_multiplier = patient.stat == DEAD ? 0.2 : 1.0
+	var/dead_multiplier = patient.stat == DEAD ? 0.5 : 1.0
 	var/accessibility_modifier = 1.0
 	if(!patient.is_location_accessible(BODY_ZONE_CHEST, IGNORED_OPERATION_CLOTHING_SLOTS))
 		accessibility_modifier = 0.55
@@ -226,19 +226,26 @@
 	burn_healed += round(patient.getFireLoss() * burn_multiplier, DAMAGE_PRECISION)
 
 	if(!iscarbon(patient))
-		patient.heal_bodypart_damage(brute_healed, burn_healed)
+		patient.heal_bodypart_damage(brute_healed, burn_healed, required_status = required_bodytype)
 	else
+		var/brute_heal_left = brute_healed
+		var/burn_heal_left = burn_healed
 		var/mob/living/carbon/carbon_patient = patient
 		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-			if(injury.required_status != BODYPART_ORGANIC)
+			if(!brute_heal_left <= 0 && !burn_heal_left <= 0)
+				break
+			if(injury.required_status != required_bodytype)
 				continue
 			if(!injury.can_heal() || injury.is_surgical())
 				continue
-			if(burn_healed && injury.damage_type & WOUND_BURN)
-				injury.heal_damage(burn_healed)
-			if(brute_healed && (injury.damage_type & (WOUND_BLUNT | WOUND_LASH | WOUND_INTERNAL_BRUISE)))
-				injury.heal_damage(brute_healed)
 
+			// Use injury.heal_damage() instead of heal_bodypart_damage() to return the amount of healing left over
+			if(brute_heal_left && injury.damage_type & BRUTE_WOUND_TYPES)
+				brute_heal_left = injury.heal_damage(brute_heal_left, TRUE, TRUE)
+			if(burn_heal_left && injury.damage_type & FIRE_WOUND_TYPES)
+				burn_heal_left = injury.heal_damage(burn_heal_left, TRUE, TRUE)
+
+	SEND_SIGNAL(surgeon, COMSIG_LIVING_HEALED_OTHER, brute_healed + burn_healed)
 	user_msg += get_progress(surgeon, patient, brute_healed, burn_healed)
 
 	display_results(
@@ -272,7 +279,7 @@
 		return
 
 	var/mob/living/carbon/carbon_patient = patient
-	var/list/obj/item/bodypart/parts = carbon_patient.get_damageable_bodyparts(BODYPART_ORGANIC)
+	var/list/obj/item/bodypart/parts = carbon_patient.get_damageable_bodyparts(required_bodytype)
 	if(!length(parts))
 		return
 

@@ -111,7 +111,7 @@
 	if(isnull(patient) || isnull(operating_on))
 		return FALSE
 
-	if(!(operation_flags & OPERATION_STANDING_ALLOWED) && !IS_LYING_OR_CANNOT_LIE(patient))
+	if(!(operation_flags & OPERATION_STANDING_ALLOWED) && !IS_LYING_OR_CANNOT_LIE(patient) && !patient.buckled)
 		return FALSE
 
 	if(operation_flags & OPERATION_NOT_SELF_OPERABLE && patient == surgeon)
