@@ -392,7 +392,6 @@
 #include "code\_globalvars\lists\preferences.dm"
 #include "code\_globalvars\lists\slapcrafting.dm"
 #include "code\_globalvars\lists\speech.dm"
-#include "code\_globalvars\lists\typecache.dm"
 #include "code\_globalvars\special_traits\special_traits.dm"
 #include "code\_globalvars\special_traits\traits.dm"
 #include "code\_js\byjax.dm"
