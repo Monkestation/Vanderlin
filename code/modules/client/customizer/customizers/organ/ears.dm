@@ -35,7 +35,7 @@
 		/datum/sprite_accessory/ears/goblin_small,
 		)
 
-/datum/customizer/organ/ears/goblin
+/datum/customizer/organ/ears/goblin //unused
 	customizer_choices = list(/datum/customizer_choice/organ/ears/goblin)
 	allows_disabling = FALSE
 

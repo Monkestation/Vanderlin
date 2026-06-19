@@ -51,16 +51,14 @@
 	possible_ages = NORMAL_AGES_LIST
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/md.dmi'
-	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fd.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/goblin_male.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/bodies/f/goblin_female.dmi'
 
 	custom_id = "dwarf"
 	custom_clothes = TRUE
 
-	swap_male_clothes = TRUE
-
-	soundpack_m = /datum/voicepack/male/elf
-	soundpack_f = /datum/voicepack/female/elf
+	soundpack_m = /datum/voicepack/male/dwarf
+	soundpack_f = /datum/voicepack/female/dwarf
 
 	offset_features_m = list(
 		OFFSET_RING = list(0,0),\
@@ -78,7 +76,7 @@
 		OFFSET_PANTS = list(0,0),\
 		OFFSET_SHIRT = list(0,0),\
 		OFFSET_ARMOR = list(0,0),\
-		OFFSET_UNDIES = list(0,0),\
+		OFFSET_UNDIES = list(0,-4),\
 	)
 
 	offset_features_f = list(
@@ -97,7 +95,7 @@
 		OFFSET_PANTS = list(0,0),\
 		OFFSET_SHIRT = list(0,0),\
 		OFFSET_ARMOR = list(0,0),\
-		OFFSET_UNDIES = list(0,0)\
+		OFFSET_UNDIES = list(0,-4)\
 	)
 
 	statsheet_male = /datum/attribute_holder/sheet/job/species/dwarf/dworc
@@ -109,7 +107,7 @@
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/strange = 0.5)
 
 	customizers = list(
-		/datum/customizer/organ/ears/goblin,
+		/datum/customizer/organ/ears/halforc,
 		/datum/customizer/organ/eyes/humanoid/,
 		/datum/customizer/bodypart_feature/hair/head/humanoid,
 		/datum/customizer/bodypart_feature/hair/facial/humanoid,
