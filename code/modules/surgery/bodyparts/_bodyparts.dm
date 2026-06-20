@@ -185,6 +185,9 @@
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))
 	update_HP()
 
+	if(is_robotic_limb())
+		ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
+
 /obj/item/bodypart/Destroy()
 	if(owner)
 		owner.remove_bodypart(src)
