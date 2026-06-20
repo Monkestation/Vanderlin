@@ -15,6 +15,7 @@
 		/obj/item/clothing/neck/psycross/silver = 85,
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
+		TOOL_FANG = 70,
 	)
 	target_mobtypes = list(/mob/living/carbon/human)
 	minimum_time = 7 SECONDS

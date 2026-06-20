@@ -175,9 +175,46 @@
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra
 	name = "amulet of Pestra"
-	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate."
+	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate. The amulet feels hollow, and you can barely see a tiny cap at the top."
 	icon_state = "pestra"
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = list(5)
+	volume = 15
+	fill_icon_thresholds = list(0, 10, 25, 50, 75, 100)
+	dropshrink = 0.8
+	obj_flags = CAN_BE_HIT
+	spillable = FALSE
+	closed = TRUE
+	w_class = WEIGHT_CLASS_SMALL
+	grid_width = 32
+	grid_height = 32
+	drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
+	fillsounds = list('sound/items/fillcup.ogg')
+	poursounds = list('sound/items/fillbottle.ogg')
 	resistance_flags = FIRE_PROOF
+	
+/obj/item/clothing/neck/psycross/silver/divine/pestra/Initialize()
+	. = ..()
+	icon_state = "pestra"
+	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/clothing/neck/psycross/silver/divine/pestra/attack_self_secondary(mob/user, list/modifiers)
+	closed = !closed
+	user.changeNext_move(CLICK_CD_RAPID)
+	if(closed)
+		reagent_flags &= ~TRANSFERABLE
+		reagents.flags = reagent_flags
+		desc = "A flask with a cap."
+		balloon_alert(user, "I screw the cap back on.")
+		spillable = FALSE
+	else
+		reagent_flags |= TRANSFERABLE
+		reagents.flags = reagent_flags
+		balloon_alert(user, "I unscrew the cap.")
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
+		desc = "An open flask, easy to drink quickly."
+		spillable = TRUE
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/clothing/neck/psycross/silver/divine/malum
 	name = "amulet of Malum"
