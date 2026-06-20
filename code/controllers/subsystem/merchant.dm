@@ -202,8 +202,14 @@ SUBSYSTEM_DEF(merchant)
 		if(output)
 			obtainable_items |= output
 
-	// Only include items that are both obtainable AND have a base value
+	// Only include sellable items that are both obtainable AND have a base value.
+	// Some obtainable atoms (e.g. machinery parts) have a sell price for other
+	// systems, but cannot actually be turned in at the selling lift. Keeping
+	// them out of bounties prevents the board from requesting unsellable items.
 	for(var/obj_type in obtainable_items)
+		if(!ispath(obj_type, /obj/item))
+			continue
+
 		var/base_value = get_item_base_value(obj_type)
 		if(base_value > 0)
 			valid_bounty_items |= obj_type
