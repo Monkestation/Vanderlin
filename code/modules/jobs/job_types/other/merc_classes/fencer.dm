@@ -33,14 +33,15 @@
 	shirt = /obj/item/clothing/armor/gambeson/arming/fencer
 	gloves = /obj/item/clothing/gloves/leather/fencer
 	pants = /obj/item/clothing/pants/fencer
-	shoes = /obj/item/clothing/shoes/boots/fencer
+	shoes = /obj/item/clothing/shoes/boots // placeholder until i can fix the boots
 	belt = /obj/item/storage/belt/leather/cloth_belt
 	beltl = /obj/item/weapon/scabbard/sword
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	backpack_contents = list(
 		/obj/item/natural/bundle/cloth/bandage/full = 1,
-		/obj/item/storage/keyring/mercenary = 1
+		/obj/item/storage/keyring/mercenary = 1,
+		/obj/item/weapon/knife/dagger/navaja = 1 // fancy folding dagger. it looks cool and makes a funny noise
 	)
 
 /datum/job/advclass/mercenary/fencer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)

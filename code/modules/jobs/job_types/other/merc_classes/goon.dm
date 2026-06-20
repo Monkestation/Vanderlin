@@ -41,7 +41,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/goon
 
-	traits = list(TRAIT_STEELHEARTED)
+	traits = list(TRAIT_STEELHEARTED, TRAIT_DODGEEXPERT)
 
 /datum/outfit/mercenary/goon
 	name = "Goon (Mercenary)"
@@ -54,7 +54,8 @@
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/needle = 1, // keep the boss alive
-		/obj/item/weapon/mace/cudgel/carpenter = 1 // thematic, their fists are better though
+		/obj/item/weapon/mace/cudgel/carpenter = 1, // thematic, their fists are better though
+		/obj/item/weapon/knife/dagger/navaja = 1 // same reason as fencer, funny noise
 	)
 
 /datum/job/advclass/mercenary/goon/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
@@ -84,5 +85,4 @@
 			ADD_TRAIT(spawned, TRAIT_NOPAINSTUN, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goon/heavy)
 		if("Speedster, Leather Coat")
-			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goon/light)
