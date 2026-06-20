@@ -17543,9 +17543,9 @@
 /obj/item/clothing/shirt/robe/phys,
 /obj/item/clothing/head/roguehood/phys,
 /obj/item/clothing/head/roguehood/phys,
-/obj/item/clothing/neck/psycross/silver/divine/pestra,
-/obj/item/clothing/neck/psycross/silver/divine/pestra,
-/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/obj/item/reagent_containers/glass/bottle/pestra,
+/obj/item/reagent_containers/glass/bottle/pestra,
+/obj/item/reagent_containers/glass/bottle/pestra,
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},

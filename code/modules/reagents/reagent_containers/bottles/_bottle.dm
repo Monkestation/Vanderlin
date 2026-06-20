@@ -262,12 +262,13 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	poursounds = list('sound/items/fillbottle.ogg')
 	label_prefix = "Flask of "
 
-/obj/item/reagent_containers/glass/bottle/vial/Initialize()
+/obj/item/reagent_containers/glass/bottle/pestra/Initialize()
 	. = ..()
+	enchant(/datum/enchantment/silver)
 	icon_state = "pestra"
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, list/modifiers)
+/obj/item/reagent_containers/glass/bottle/pestra/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
