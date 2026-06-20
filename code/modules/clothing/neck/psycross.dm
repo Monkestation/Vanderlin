@@ -173,10 +173,11 @@
 	love_target.apply_status_effect(/datum/status_effect/in_love, user)
 	qdel(src)
 
-/obj/item/clothing/neck/psycross/silver/divine/pestra
+/obj/item/reagent_containers/glass/pestra
 	name = "amulet of Pestra"
 	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate. The amulet feels hollow, and you can barely see a tiny cap at the top."
 	icon_state = "pestra"
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(5)
 	volume = 15
