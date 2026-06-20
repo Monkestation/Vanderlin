@@ -247,13 +247,13 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	amount_per_transfer_from_this = 3
 	possible_transfer_amounts = list(3)
 	volume = 15
-	fill_icon_thresholds = NULL
+	fill_icon_thresholds = null
 	dropshrink = 0.8
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_MOUTH
 	obj_flags = CAN_BE_HIT
 	spillable = FALSE
 	closed = TRUE
-	reagent_flags = NULL
+	reagent_flags = null
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
 	grid_height = 32

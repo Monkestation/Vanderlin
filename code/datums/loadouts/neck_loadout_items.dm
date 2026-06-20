@@ -12,7 +12,7 @@
 
 	triumph_cost_permanent = 25
 
-/datum/loadout_item/bell_collar
+/datum/loadout_item/bell_collar  //Man, WHY? WHY CAN YOU WEAR A COLLAR. I know the answer, but like why guys.
 	name = "Bell Collar"
 	item_path = /obj/item/clothing/neck/bellcollar
 	ui_category = "Neck"
@@ -133,7 +133,7 @@
 
 /datum/loadout_item/pestra_cross
 	name = "Amulet of Pestra"
-	item_path = /obj/item/clothing/neck/psycross/silver/divine/pestra
+	item_path = /obj/item/reagent_containers/glass/bottle/pestra
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 100

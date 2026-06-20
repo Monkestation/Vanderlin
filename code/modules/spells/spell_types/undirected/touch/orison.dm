@@ -225,7 +225,7 @@
 			if(victim.reagents.holder_full() || (user.cleric.devotion - fatigue_used <= 0))
 				break
 
-			var/water_qty = max(1, holy_skill) + 1
+			var/ethanol_qty = max(1, holy_skill) + 1
 			var/list/water_contents = list(/datum/reagent/consumable/ethanol = ethanol_qty)
 			var/datum/reagents/reagents_to_add = new()
 			reagents_to_add.add_reagent_list(water_contents)
