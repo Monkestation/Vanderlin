@@ -205,7 +205,6 @@
 	name = "Pestras Fang"
 	desc = "The fundamental teachings of the pestran sect returns to you, generate pure ethanol using devotion, or cut and seal flesh."
 	possible_item_intents = list(ORISON_ETHANOL)
-	tool_behaviour = TOOL_FANG
 
 /datum/action/cooldown/spell/undirected/touch/orison/proc/create_ethanol(atom/victim, mob/living/carbon/human/user)
 	if(victim.is_refillable())

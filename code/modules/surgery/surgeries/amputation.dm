@@ -23,7 +23,7 @@
 		TOOL_SAW = 60,
 		TOOL_IMPROVISED_SAW = 50,
 		TOOL_SHARP = 40,
-		TOOL_FANG = 60,
+		/obj/item/melee/touch_attack/orison/pestra = 60,
 	)
 	possible_locs = list(
 		BODY_ZONE_HEAD,
