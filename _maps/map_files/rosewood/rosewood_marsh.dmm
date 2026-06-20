@@ -192,7 +192,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
-/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/obj/item/reagent_containers/glass/bottle/pestra,
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "aV" = (
