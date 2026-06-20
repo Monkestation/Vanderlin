@@ -341,5 +341,6 @@
 
 /obj/item/clothing/shoes/boots/fencer
 	name = "fencing boots"
-	desc = "Lightweight leather boots designed for fencing, designed to help keep your balance perfect in combat."
-	icon_state = "fencerboots"
+	desc = "Lightweight leather boots designed for fencing, they'll help keep your balance perfect in combat."
+	icon_state = "freiboots"
+	item_state = "freiboots"

@@ -113,6 +113,6 @@
 
 /obj/item/clothing/gloves/leather/fencer
 	name = "fencing gloves"
-	desc = "Lightweight leather gloves designed for fencers, designed to ensure your fingers don't get chopped off."
+	desc = "Lightweight leather gloves designed for fencers, they'll hopefully protect your fingers from stray blows."
 	icon_state = "fencergloves"
 	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
