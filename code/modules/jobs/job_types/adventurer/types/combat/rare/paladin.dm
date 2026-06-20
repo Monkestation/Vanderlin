@@ -135,7 +135,7 @@
 			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
+			neck = /obj/item/reagent_containers/glass/bottle/pestra
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
 			neck = /obj/item/clothing/neck/psycross/silver/divine/malum

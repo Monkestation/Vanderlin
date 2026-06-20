@@ -68,6 +68,6 @@
 			if(/datum/patron/divine/necra)
 				wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
 			if(/datum/patron/divine/pestra)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
+				/obj/item/reagent_containers/glass/bottle/pestra
 			else
 				wrists = /obj/item/clothing/neck/silveramulet

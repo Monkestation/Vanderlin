@@ -159,7 +159,7 @@
 			cloak = /obj/item/clothing/cloak/stabard/templar/necra
 			beltl = /obj/item/weapon/flail/sflail/necraflail
 		if(/datum/patron/divine/pestra)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
+			wrists = /obj/item/reagent_containers/glass/bottle/pestra
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			backpack_contents += /obj/item/reagent_containers/glass/bottle/strongpoison

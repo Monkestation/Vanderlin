@@ -238,7 +238,7 @@
 			armor = /obj/item/clothing/shirt/robe/noc
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/padded/pestra
-			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
+			neck = /obj/item/reagent_containers/glass/bottle/pestra
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/pestra
 			backpack_contents += /obj/item/needle/blessed

@@ -197,7 +197,7 @@
 				wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 				cloak = /obj/item/clothing/cloak/stabard/templar/noc
 			if(/datum/patron/divine/pestra)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
+				wrists = /obj/item/reagent_containers/glass/bottle/pestra
 				cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			if(/datum/patron/divine/abyssor)
 				wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
