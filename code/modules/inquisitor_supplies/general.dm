@@ -305,7 +305,7 @@
 /datum/inqports/equipment/surgerybag
 	name = "1 Surgery Bag"
 	item_type = /obj/item/storage/backpack/satchel/surgbag
-	marquescost = 4
+	marquescost = 6
 
 /datum/inqports/equipment/psysack
 	name = "1 Identity Concealer"
