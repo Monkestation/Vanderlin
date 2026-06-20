@@ -181,11 +181,12 @@
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(5)
 	volume = 15
-	fill_icon_thresholds = list(0, 10, 25, 50, 75, 100)
+	fill_icon_thresholds = null
 	dropshrink = 0.8
 	obj_flags = CAN_BE_HIT
-	spillable = FALSE
-	closed = TRUE
+	var/spillable = FALSE
+	var/closed = TRUE
+	var/REAGENT_FLAGS = NULL
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
 	grid_height = 32
