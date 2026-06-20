@@ -334,7 +334,8 @@
 
 /obj/item/clothing/shoes/boots/leather/kazengun/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
-	var/playerchoice = COLOR_MAP[choice]
-	detail_color = playerchoice
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
 	update_appearance(UPDATE_ICON)

@@ -1,6 +1,6 @@
-GLOBAL_LIST_INIT(quirk_registry, list())
 GLOBAL_LIST_EMPTY(quirk_singletons)
 GLOBAL_LIST_EMPTY(quirk_points_by_type)
+GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 
 /proc/init_quirk_registry()
 	GLOB.quirk_registry = list()

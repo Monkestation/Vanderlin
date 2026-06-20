@@ -247,6 +247,17 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
+/datum/stock/stockpile/ollie
+	name = "Ollies"
+	desc = "A small green fruit best made into oil."
+	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/ollie
+	held_items = 5
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
+	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
 /datum/stock/stockpile/pompkaun
 	name = "Pompkauns"
 	desc = "A large, thick fruit favored by Dendorites and Pestrans."

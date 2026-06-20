@@ -295,7 +295,7 @@
 	required_table = TRUE
 	attacked_atom = /obj/item/reagent_containers/powder/salt
 	starting_atom = /obj/item/reagent_containers/food/snacks/roastseeds
-	output = /obj/item/reagent_containers/food/snacks/roastseeds
+	output = /obj/item/reagent_containers/food/snacks/saltseeds
 	output_amount = 3
 	craft_time = 8 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
@@ -317,6 +317,23 @@
 	craft_time = 2 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "adding glaze to the rib rack"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/cured_ollie
+	name = "Cured Ollie"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fruit/ollie = 3,
+		/obj/item/reagent_containers/powder/salt = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/ollie
+	starting_atom = /obj/item/reagent_containers/powder/salt
+	output_amount = 3
+	output = /obj/item/reagent_containers/food/snacks/fruit/cured_ollie
+	craft_time = 8 SECONDS
+	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
+	crafting_message = "curing the ollies with salt"
 	extra_chance = 100
 
 // Redtallow can be crafted using visceras (rendered from animal sinew)
