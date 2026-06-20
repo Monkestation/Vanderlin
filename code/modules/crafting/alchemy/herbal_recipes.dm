@@ -721,11 +721,13 @@
 	. = ..()
 	ADD_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
+	ADD_TRAIT(M, TRAIT_BLOOD_DRINKER, "[type]")
 
 /datum/reagent/poison/rajaijah/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
+	REMOVE_TRAIT(M, TRAIT_BLOOD_DRINKER, "[type]")
 
 /datum/reagent/poison/tear
 	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
