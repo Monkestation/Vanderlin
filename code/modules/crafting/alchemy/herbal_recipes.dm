@@ -727,7 +727,7 @@
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
-	REMOVE_TRAIT(M, TRAIT_BLOOD_DRINKER, "[type]")
+	REMOVE_TRAIT(M, TRAIT_BLOODDRINKER, "[type]")
 
 /datum/reagent/poison/tear
 	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
