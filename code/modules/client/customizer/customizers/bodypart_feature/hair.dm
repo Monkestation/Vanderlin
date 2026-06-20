@@ -357,7 +357,12 @@
 		/datum/sprite_accessory/hair/head/triplebuns,
 		/datum/sprite_accessory/hair/head/nest,
 		/datum/sprite_accessory/hair/head/strand,
-		/datum/sprite_accessory/hair/head/sodden
+		/datum/sprite_accessory/hair/head/sodden,
+		/datum/sprite_accessory/hair/head/guildupdo,
+		/datum/sprite_accessory/hair/head/tapstersbun,
+		/datum/sprite_accessory/hair/head/thescientist,
+		/datum/sprite_accessory/hair/head/sleek,
+		/datum/sprite_accessory/hair/head/delver
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton

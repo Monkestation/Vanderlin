@@ -140,11 +140,11 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: species blacklisted, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+	if(length(job.allowed_patrons) && !(player_prefs.selected_patron in job.allowed_patrons))
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if(length(job.banned_patrons) && (player_prefs.selected_patron.type in job.banned_patrons))
+	if(length(job.banned_patrons) && (player_prefs.selected_patron in job.banned_patrons))
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 
@@ -444,9 +444,9 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(!job.prefs_species_check(player_prefs))
 			continue
-		if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+		if(length(job.allowed_patrons) && !(player_prefs.selected_patron in job.allowed_patrons))
 			continue
-		if(length(job.banned_patrons) && (player_prefs.selected_patron.type in job.banned_patrons))
+		if(length(job.banned_patrons) && (player_prefs.selected_patron in job.banned_patrons))
 			continue
 		if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 			continue

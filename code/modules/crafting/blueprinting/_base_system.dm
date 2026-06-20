@@ -26,7 +26,6 @@
 	create_buttons()
 	holder.screen += buttons
 	holder.click_intercept = src
-	init_blueprint_recipes()
 	RegisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
 	RegisterSignal(holder?.mob, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(on_mouse_moved_pre))
 
