@@ -277,7 +277,7 @@
 	. = ..()
 
 /datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
-	var/cbt_multiplier = HAS_TRAIT(user, TRAIT_NUTCRACKER) ? 2 : 1
+	var/cbt_multiplier = (user && HAS_TRAIT(user, TRAIT_NUTCRACKER)) ? 2 : 1
 	return round(dam / 5) * cbt_multiplier // ignores standard formula entirely
 
 /datum/wound/cbt/can_apply_to_mob(mob/living/affected)
