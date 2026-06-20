@@ -160,7 +160,7 @@
 /datum/species/dwarf/dworc/qualifies_for_rank(rank, list/features)
 	return TRUE
 
-/datum/species/dwarf/dworc/get_skin_list()
+/datum/species/dwarf/dworc/get_skin_list() //same colors as half-orcs, renamed to be goblin-like
 	return list(
 		"Sea" = SKIN_COLOR_SHELLCREST,
 		"Infernal" = SKIN_COLOR_BLOOD_AXE,
