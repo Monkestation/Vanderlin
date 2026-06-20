@@ -25,6 +25,11 @@
 	name = "light"
 	icon_state = "inlight"
 
+/datum/intent/orison/fill/ethanol
+	reach = 1
+	name = "fill"
+	icon_state = "infill"
+
 /datum/action/cooldown/spell/undirected/touch/orison
 	name = "Orison"
 	desc = "The basic precept of holy magic orients around the power of prayer and soliciting a Divine Patron for a tiny sliver of Their might."
