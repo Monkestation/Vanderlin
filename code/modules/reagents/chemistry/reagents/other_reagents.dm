@@ -41,7 +41,7 @@
 			M.adjustToxLoss(1)
 		else
 			M.add_nausea(1)
-			M.adjustToxLoss(3)
+			M.adjustToxLoss(2.2)
 	return ..()
 
 /datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
