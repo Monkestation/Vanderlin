@@ -193,6 +193,8 @@
 	if(!user)
 		return
 	if(isturf(loc))
+		user.visible_message(span_warning("[user] kicks \the [src] down!"), \
+			span_notice("I kick \the [src] down!"))
 		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
