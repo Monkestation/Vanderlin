@@ -54,9 +54,11 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/butler
 
 	mind_traits = list(
-		TRAIT_CAREFULCHAIRS,
 		TRAIT_KNOW_KEEP_DOORS,
 		TRAIT_ROYALSERVANT
+	)
+	traits = list(
+		TRAIT_CAREFUL_CHAIRS
 	)
 	book_type = /obj/item/recipe_book/cooking
 

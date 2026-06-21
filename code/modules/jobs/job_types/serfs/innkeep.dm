@@ -35,11 +35,9 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep
 
-	mind_traits = list(
-		TRAIT_CAREFULCHAIRS
-	)
 	traits = list(
-		TRAIT_BOOZE_SLIDER
+		TRAIT_BOOZE_SLIDER,
+		TRAIT_CAREFUL_CHAIRS
 	)
 
 	exp_type = list(EXP_TYPE_LIVING)
