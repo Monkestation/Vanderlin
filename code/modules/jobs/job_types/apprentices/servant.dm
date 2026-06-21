@@ -66,6 +66,7 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/servant/old
 
 	mind_traits = list(
+		TRAIT_CAREFULCHAIRS,
 		TRAIT_ROYALSERVANT
 	)
 	book_type = /obj/item/recipe_book/cooking
@@ -143,6 +144,10 @@
 	outfit = /datum/outfit/tapster
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/tapster
+
+	mind_traits = list(
+		TRAIT_CAREFULCHAIRS
+	)
 
 	traits = list(
 		TRAIT_BOOZE_SLIDER

@@ -181,7 +181,7 @@
 		if((M.body_position != LYING_DOWN))
 			if(isturf(loc))
 				var/movefrom = get_dir(M.loc, loc)
-				if(movefrom == dir && item_chair != null)
+				if(movefrom == dir && item_chair != null && !(HAS_MIND_TRAIT(M, TRAIT_CAREFULCHAIRS)))
 					playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 					var/obj/item/I = new item_chair(loc)
 					item_chair = null
@@ -207,7 +207,7 @@
 	var/mob/living/M = leaving
 	if(M.body_position == LYING_DOWN)
 		return
-	if(direction == REVERSE_DIR(dir))
+	if(direction == REVERSE_DIR(dir) && !(HAS_MIND_TRAIT(M, TRAIT_CAREFULCHAIRS)))
 		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
