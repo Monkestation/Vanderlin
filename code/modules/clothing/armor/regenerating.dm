@@ -115,3 +115,7 @@
 /obj/item/clothing/armor/regenerating/skin/easttats/tribal
 	name = "Tribal Tattoos"
 	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
+
+/obj/item/clothing/armor/regenerating/skin/disciple/hardbody
+	name = "Hardened Physique"
+	desc = "You weren't born strong, you fought your war through blood, sweat, and tears for a glorious and unmatched body. Let no lesser being avert their gaze from your TRIUMPH!"

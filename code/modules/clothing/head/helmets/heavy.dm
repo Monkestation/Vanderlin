@@ -49,6 +49,14 @@
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
 
+/obj/item/clothing/head/helmet/heavy/horned
+	name = "horned barbute"
+	desc = "A simple horned iron barbute, used for it beautifully brutal nature."
+	icon_state = "ihornedbarbute"
+	item_state = "ihornedbarbute"
+	max_integrity = INTEGRITY_STRONG
+	block2add = FOV_BEHIND
+
 /obj/item/clothing/head/helmet/heavy/bronze
 	name = "bronze barbute"
 	desc = "A greathelm of bronze, who's nasalguard and mandibles leave the wearer's face cloaked in darkness. The heroes of yore have long since passed, yet their blood still courses through the veins of Psydonia's children; you are no different. Quiff a feather to its skullcap to bare your allegience with pride."

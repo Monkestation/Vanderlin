@@ -293,6 +293,12 @@
 	created_item = /obj/item/clothing/head/helmet/heavy/ironplate
 	craftdiff = 1
 
+/datum/anvil_recipe/armor/iron/hornedbarbute
+	name = "Horned Barbute (+Bar)"
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/head/helmet/heavy/horned
+	craftdiff = 1
+
 /datum/anvil_recipe/armor/iron/barred_helmet
 	name = "Barred Helmet (+Bar)"
 	additional_items = list(/obj/item/ingot/iron)

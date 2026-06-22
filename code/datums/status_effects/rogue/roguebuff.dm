@@ -261,6 +261,12 @@
 	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2) //endurance to boost pain treshold, not powerful enough to warrant total painkilling
 	duration = 30 SECONDS
 
+/datum/status_effect/buff/barbrage2
+	id = "barbrage2"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/barbrage
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 2, STAT_CONSTITUTION = 2, STAT_INTELLIGENCE = -2) //endurance to boost pain treshold, not powerful enough to warrant total painkilling
+	duration = 30 SECONDS
+
 /datum/status_effect/buff/adrenalinerush
 	id = "adrenalinerush"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/adrenalinerush

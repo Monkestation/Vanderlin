@@ -1,4 +1,4 @@
-/datum/action/cooldown/spell/undirected/barbrage
+/datum/action/cooldown/spell/undirected/barbrage2
 	name = "Rage"
 	desc = "Enter a state of martial fervor, increasing offensive capabilities at the cost of making yourself vulnerable."
 	button_icon_state = "bcry"
@@ -15,13 +15,13 @@
 	spell_type = SPELL_STAMINA
 	spell_cost = 10
 
-/datum/action/cooldown/spell/undirected/barbrage/is_valid_target(atom/cast_on)
+/datum/action/cooldown/spell/undirected/barbrage2/is_valid_target(atom/cast_on)
 	. = ..()
 	if(!.)
 		return
 	return isliving(owner)
 
-/datum/action/cooldown/spell/undirected/barbrage/cast(mob/living/cast_on)
+/datum/action/cooldown/spell/undirected/barbrage2/cast(mob/living/cast_on)
 	. = ..()
 	cast_on.emote("rage", forced = TRUE)
 	cast_on.reagents?.add_reagent(/datum/reagent/medicine/healthpot, 10)
