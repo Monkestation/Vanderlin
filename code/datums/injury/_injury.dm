@@ -101,8 +101,9 @@
 /datum/injury/proc/set_bodypart(obj/item/bodypart/new_owner, sound_hint = TRUE)
 	parent_bodypart = new_owner
 	LAZYADD(parent_bodypart.injuries, src)
+	new_owner.post_damage_change()
 
-/datum/injury/proc/transfer_injury(mob/living/carbon/new_owner, sound_hint = TRUE)
+/datum/injury/proc/transfer_injury(mob/living/carbon/new_owner)
 	var/obj/item/bodypart/old_bodypart = parent_bodypart
 
 	var/obj/item/bodypart/new_bodypart = new_owner.get_bodypart(old_bodypart.body_zone)
@@ -113,8 +114,7 @@
 
 	remove_from_bodypart()
 	remove_from_mob()
-	set_mob(new_owner, sound_hint)
-	set_bodypart(new_bodypart, sound_hint)
+	apply_to_bodypart(new_bodypart)
 
 /datum/injury/proc/remove_from_mob()
 	if(!parent_mob)

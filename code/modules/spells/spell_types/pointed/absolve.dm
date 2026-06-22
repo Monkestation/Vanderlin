@@ -86,6 +86,7 @@
 		if(!injury.can_heal())
 			continue
 		injury.transfer_injury(user)
+	H.updatehealth()
 
 	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
 		artery.applyOrganDamage(-artery.damage)
