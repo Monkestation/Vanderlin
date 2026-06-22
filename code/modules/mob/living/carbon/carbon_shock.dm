@@ -172,7 +172,7 @@
 		 * possibility of a feedback loop from custom_pain() being called with a positive power, incrementing pain on a limb,
 		 * which triggers this proc, which calls custom_pain(), etc. Make sure you call it with nopainloss = TRUE in these cases!
 		 */
-		custom_pain("[pick("It hurts so much", "I really need to dull the pain", "Ooh, the pain")]!", 10, nopainloss = TRUE)
+		custom_pain("[pick("The pain stings a little")]!", 10, nopainloss = TRUE)
 
 	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage < SHOCK_STAGE_2)) // Crossed stage 2
 		emote("is having trouble keeping [p_their()] eyes open.")
@@ -183,7 +183,7 @@
 			stuttering = max(stuttering, 5)
 
 	if((shock_stage >= SHOCK_STAGE_3) && (previous_shock_stage < SHOCK_STAGE_3))  // Crossed stage 3
-		custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", 40, nopainloss = TRUE)
+		custom_pain("[pick("The pain is starting to distract me")]!", 40, nopainloss = TRUE)
 		add_stress(/datum/stress_event/painmax)
 
 	/**
@@ -227,7 +227,7 @@
 			custom_pain("[pick("I feel like I could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			// emote("agony")
-			Stun(2 SECONDS)
+			Stun(0.5 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
 		if(DT_PROB(5, delta_time))
@@ -250,5 +250,5 @@
 		// 	custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 			//death_rattle()
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Unconscious(15 SECONDS)
+			Unconscious(10 SECONDS)
 			endorphinate(TRUE)

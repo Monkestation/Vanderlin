@@ -456,8 +456,8 @@
 	else
 		return brain_message
 
-/obj/item/organ/brain/get_shock(painkiller_included)
-	return 0 // you can't feel your brain being fried
+/obj/item/organ/brain/can_feel_pain()
+	return FALSE // you can't feel your brain being fried
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
