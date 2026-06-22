@@ -37812,9 +37812,9 @@
 /obj/item/clothing/shirt/robe/phys,
 /obj/item/clothing/head/roguehood/phys,
 /obj/item/clothing/head/roguehood/phys,
-/obj/item/reagent_containers/glass/bottle/pestra,
-/obj/item/reagent_containers/glass/bottle/pestra,
-/obj/item/reagent_containers/glass/bottle/pestra,
+/obj/item/reagent_containers/cross/pestra,
+/obj/item/reagent_containers/cross/pestra,
+/obj/item/reagent_containers/cross/pestra,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "raJ" = (
