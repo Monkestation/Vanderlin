@@ -106,9 +106,8 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/undirected/conjure_item/summon_leech/pestra),
 		CLERIC_T1 = /datum/action/cooldown/spell/diagnose/holy,
-		CLERIC_T2 = /datum/action/cooldown/spell/attach_bodypart,
+		CLERIC_T2 = /obj/item/melee/touch_attack/orison/pestra,		
 		CLERIC_T3 = /datum/action/cooldown/spell/cure_rot,
-		CLERIC_T4 = /obj/item/melee/touch_attack/orison/pestra,
 	)
 	viable_tasks = list(
 		/datum/devotion_task/pestra_heal,
