@@ -186,7 +186,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_MOUTH
 	obj_flags = CAN_BE_HIT
 	spillable = FALSE
-	closed = TRUE
+	var/closed = TRUE
 	reagent_flags = null
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
