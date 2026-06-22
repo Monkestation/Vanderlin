@@ -75,7 +75,7 @@
 		if(/datum/patron/divine/noc)
 			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 		if(/datum/patron/divine/pestra)
-			neck = /obj/item/reagent_containers/glass/bottle/pestra
+			neck = /obj/item/reagent_containers/cross/pestra
 		if(/datum/patron/divine/dendor)
 			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 		if(/datum/patron/divine/abyssor)

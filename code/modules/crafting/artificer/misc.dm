@@ -560,7 +560,7 @@
 /datum/artificer_recipe/psycross/pestra
 	name = "Pestra Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/reagent_containers/glass/bottle/pestra
+	created_item = /obj/item/reagent_containers/cross/pestra
 
 /datum/artificer_recipe/psycross/malum_silver
 	name = "Malum Psycross"

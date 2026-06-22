@@ -133,7 +133,7 @@
 
 /datum/loadout_item/pestra_cross
 	name = "Amulet of Pestra"
-	item_path = /obj/item/reagent_containers/glass/bottle/pestra
+	item_path = /obj/item/reagent_containers/cross/pestra
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 100
