@@ -205,7 +205,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"MY AFFLICTION IS MY TESTAMENT!",
 	)
 	storyteller = /datum/storyteller/pestra
-	associated_psycross = /obj/item/reagent_containers/glass/bottle/pestra
+	associated_psycross = /obj/item/reagent_containers/cross/pestra
 
 /datum/patron/divine/pestra/preference_accessible(datum/preferences/prefs)
 	. = ..()
