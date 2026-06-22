@@ -142,17 +142,5 @@
 	bloody_icon_state = "itemblood"
 	worn_x_dimension = 32
 	worn_y_dimension = 32
-
-/obj/item/clothing/cloak/cape/crusader/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak/lord)
-
-/obj/item/clothing/cloak/cape/crusader/dropped(mob/living/carbon/human/user)
-	..()
-	if(QDELETED(src))
-		return
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
+	storage_component_path = /datum/component/storage/concrete/grid/cloak/lord

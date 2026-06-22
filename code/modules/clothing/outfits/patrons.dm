@@ -1,17 +1,6 @@
 /obj/item/clothing/cloak/templar
 	var/overarmor = TRUE
-
-/obj/item/clothing/cloak/templar/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
-
-/obj/item/clothing/cloak/templar/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
 
 
 /obj/item/clothing/cloak/templar/astratan
@@ -85,10 +74,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-/obj/item/clothing/cloak/wardencloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/graggar
 	name = "vicious cloak"
@@ -110,10 +96,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-/obj/item/clothing/cloak/forrestercloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	name = "snow cloak"
