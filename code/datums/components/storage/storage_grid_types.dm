@@ -88,6 +88,11 @@
 /datum/component/storage/concrete/grid/cloak/lord
 	max_w_class = WEIGHT_CLASS_BULKY
 
+/datum/component/storage/concrete/grid/crusader_helm
+	max_w_class = WEIGHT_CLASS_BULKY
+	screen_max_rows = 2
+	screen_max_columns = 2
+
 /datum/component/storage/concrete/grid/mailmaster
 	max_w_class = WEIGHT_CLASS_HUGE
 	screen_max_rows = 10
