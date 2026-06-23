@@ -471,6 +471,9 @@
 	set name = "Release Lackey"
 	set category = "RoleUnique.Zizo"
 
+	if(!istype(src) || stat == DEAD)
+		return
+
 	var/list/mob/living/carbon/human/possible = list()
 	for(var/datum/mind/V in SSmapping.retainer.cultists)
 		if(V.special_role == "Zizoid Lackey")
