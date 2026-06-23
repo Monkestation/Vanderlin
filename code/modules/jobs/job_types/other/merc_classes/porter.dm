@@ -35,7 +35,7 @@
 	title = "Porter"
 	tutorial = "You are a jack-of-all-trades from the dank depth of subterra, You've survived by being useful. Whether it's carrying someone's burdens, mending their gears, stitching wounds, or even cooking a surprisingly edible meal, For a price, of course."
 	allowed_races = list(SPEC_ID_KOBOLD, SPEC_ID_HALFLING)
-	blacklisted_species = null
+	blacklisted_species = list(SPEC_ID_DWARF_SUBTERRAN)
 	outfit = /datum/outfit/mercenary/porter
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 2
