@@ -515,7 +515,7 @@
 	var/mob/living/carbon/soon_to_be_headless = loc
 	var/obj/item/bodypart/head/to_decap = soon_to_be_headless.get_bodypart(BODY_ZONE_HEAD)
 	if(to_decap)
-		to_decap.dismember(BRUTE) //its a NECK collar
+		to_decap.dismember(BRUTE, forced = TRUE) //its a NECK collar
 
 	qdel(src)
 
