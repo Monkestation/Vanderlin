@@ -1086,8 +1086,8 @@
 
 /datum/special_trait/divinelydespised
 	name = "Divinely Despised"
-	greet_text = span_notice("Divinity Despises me, I am cursed by the gods to die.")
-	weight = 30
+	greet_text = span_notice("Divinity Despises me, I am cursed by the gods to live a very short, painful life.")
+	weight = 15
 
 /datum/special_trait/divinelydespised/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character,TRAIT_PSYDON_CURSE , BE_SPECIAL_TRAIT)
