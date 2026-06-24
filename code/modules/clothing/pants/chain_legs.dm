@@ -37,10 +37,11 @@
 	icon_state = "ichain_legs"
 	name = "iron chain chausses"
 	desc = "Chain mail chausses made of iron rings woven together, offering protection against cuts and stabs."
-	smeltresult = /obj/item/ingot/iron
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.95 KILOGRAMS
+	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/pants/chainlegs/kilt
 	name = "steel chain kilt"
@@ -56,6 +57,7 @@
 	desc = "Interlinked metal rings that drape down all the way to the ankles."
 	icon_state = "ichainkilt"
 	item_state = "ichainkilt"
-	smeltresult = /obj/item/ingot/iron
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
+	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron

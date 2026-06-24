@@ -95,6 +95,7 @@
 	icon_state = "abyssal_robe"
 	item_state = "abyssal_robe"
 	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/clothing/armor/brigandine/abyssor/Initialize()
 	. = ..()
@@ -144,17 +145,14 @@
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/armor/brigandine/light
-	slot_flags = ITEM_SLOT_ARMOR
 	name = "lightweight brigandine"
 	desc = "A light riveted coat with plates concealed inside an exterior fabric. Susceptible to daggers being shoved into your ribs."
 	icon_state = "light_brigandine"
-	blocksound = SOFTHIT
 	body_parts_covered = COVERAGE_TORSO
-	armor = ARMOR_BRIGANDINE
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE
 	smeltresult = /obj/item/ingot/iron
-	equip_delay_self = 40
-	armor_class = AC_LIGHT//steel version of the studded leather armor now
+	melting_material = /datum/material/iron
+	armor_class = AC_LIGHT //steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
 	item_weight = 3.95 KILOGRAMS

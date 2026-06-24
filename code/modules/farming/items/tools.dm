@@ -174,6 +174,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "csickle"
 	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	item_weight = 354 GRAMS
 
 /*------\
