@@ -9,5 +9,6 @@
 		if(!item_material)
 			// This is because some things like spears don't give anything back intentionally
 			continue
-		if(!ispath(item_material, bar_type::melting_material))
-			TEST_FAIL("[created_item] melting material does not match input bar material.")
+		var/datum/material/bar_material = bar_type::melting_material
+		if(!ispath(item_material, bar_material))
+			TEST_FAIL("[created_item] melting material [item_material] does not match input bar material [bar_material].")
