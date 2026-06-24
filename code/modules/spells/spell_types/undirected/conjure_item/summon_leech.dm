@@ -24,7 +24,7 @@
 	desc = "Summon a leech by Pestra's will."
 	button_icon_state = "diagnose"
 
-	required_items = list(/obj/item/reagent_containers/cross/pestra)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/pestra)
 
 	invocation = "Pestra grant me the creacher to cleanse the blood!"
 	invocation_type = INVOCATION_WHISPER
