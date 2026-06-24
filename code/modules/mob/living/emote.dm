@@ -1116,6 +1116,13 @@
 	if(user.mind)
 		record_featured_stat(FEATURED_STATS_SCREAMERS, user)
 
+/datum/emote/living/strain
+	key = "strain"
+	message = "strains themself!"
+	emote_type = EMOTE_AUDIBLE
+	only_forced_audio = TRUE
+	show_runechat = FALSE
+
 /datum/emote/living/scowl
 	key = "scowl"
 	key_third_person = "scowls"
