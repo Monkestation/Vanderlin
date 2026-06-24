@@ -339,3 +339,9 @@
 		return
 	detail_color = GLOB.noble_dyes[choice]
 	update_appearance(UPDATE_ICON)
+
+/obj/item/clothing/shoes/boots/fencer
+	name = "fencing boots"
+	desc = "Lightweight leather boots designed for fencing, they'll help keep your balance perfect in combat."
+	icon_state = "freiboots"
+	item_state = "freiboots"

@@ -156,3 +156,30 @@
 2026-06-21:
   tired-wired:
   - rscadd: Added bible verses for the rest of the Ten
+2026-06-22:
+  Ben10083:
+  - balance: Embracing Death now prevents you from turning into a deadite.
+  Sulaboy:
+  - rscadd: Miner's Satchel (Given to miners, lets you walk onto tiles with ore to
+      pick them up)
+  - balance: All pickaxes can be two handed to increase force, Miner's Helmet gives
+      more light
+  - qol: Made smithing minigame faster, and take less stamina.
+  realforest2001:
+  - rscadd: Added storage to matron cloak.
+  - code_imp: Cleaned up the backend for cloaks that have storage.
+2026-06-24:
+  Archeonan:
+  - rscadd: The Fencer & The Goon Merc Classes
+  - rscadd: Three weapon options for ranger
+  - rscadd: New outfit for ranger
+  - rscdel: Removed ranger race restriction
+  - balance: Changed some of ranger's roundstart gear (no more bait, iron kukuri instead
+      of steel hunting knife)
+  Ben10083:
+  - rscadd: New mind trait to prevent knocking over chairs. Added to Servant, Butler,
+      Tapster and Innkeeper
+  Pidgey-chan:
+  - balance: adjusts the marque cost of several items
+  Sulaboy:
+  - bugfix: Orc armor sprites

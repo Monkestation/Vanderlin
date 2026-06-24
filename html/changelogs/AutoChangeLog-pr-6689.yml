@@ -1,5 +1,0 @@
-author: "Sulaboy"
-delete-after: True
-changes:
-  - rscadd: "Miner's Satchel (Given to miners, lets you walk onto tiles with ore to pick them up)"
-  - balance: "All pickaxes can be two handed to increase force, Miner's Helmet gives more light"
