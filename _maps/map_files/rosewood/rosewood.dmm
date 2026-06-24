@@ -24955,8 +24955,8 @@
 /area/indoors/town/clinic_large)
 "miF" = (
 /obj/structure/rack,
-/obj/item/reagent_containers/cross/pestra,
-/obj/item/reagent_containers/cross/pestra{
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/pestra{
 	pixel_y = 7;
 	pixel_x = 9
 	},

@@ -175,7 +175,7 @@
 			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 			robecolor = "#4e72a1"
 		if(/datum/patron/divine/pestra)
-			neck = /obj/item/reagent_containers/cross/pestra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			robecolor = "#517b27"
 		if(/datum/patron/divine/dendor)
 			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
