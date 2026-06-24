@@ -173,7 +173,7 @@
 	love_target.apply_status_effect(/datum/status_effect/in_love, user)
 	qdel(src)
 
-/obj/item/reagent_containers/cross/pestra
+/obj/item/clothing/neck/psycross/silver/divine/pestra
 	name = "Amulet of the Serpent"
 	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate. The amulet feels hollow, and you can barely see a tiny cap at the top."
 	icon = 'icons/roguetown/clothing/neck.dmi'
@@ -185,9 +185,9 @@
 	dropshrink = 0.8
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_MOUTH
 	obj_flags = CAN_BE_HIT
-	spillable = FALSE
+	var/spillable = FALSE
 	var/closed = TRUE
-	reagent_flags = null
+	var/reagent_flags = null
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
 	grid_height = 32
@@ -196,13 +196,13 @@
 	poursounds = list('sound/items/fillbottle.ogg')
 	label_prefix = "Flask of "
 
-/obj/item/reagent_containers/cross/pestra/Initialize()
+/obj/item/clothing/neck/psycross/silver/divine/pestra/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/silver)
 	icon_state = "pestra"
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/cross/pestra/attack_self_secondary(mob/user, list/modifiers)
+/obj/item/clothing/neck/psycross/silver/divine/pestra/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
