@@ -133,7 +133,7 @@
 
 /datum/loadout_item/pestra_cross
 	name = "Amulet of Pestra"
-	item_path = //obj/item/clothing/neck/psycross/silver/divine/pestra
+	item_path = /obj/item/clothing/neck/psycross/silver/divine/pestra
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 100
