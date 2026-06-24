@@ -637,8 +637,8 @@
 	craftdiff = 4
 
 	/datum/anvil_recipe/armor/steel/bellow
-	name = "Bellow Sallet (+Bar x2)"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	name = "Bellow Sallet (+Bar)"
+	additional_items = list(/obj/item/ingot/steel)
 	created_item = (/obj/item/clothing/head/helmet/visored/bellow)
 	craftdiff = 4
 
