@@ -33,6 +33,7 @@
 	name = "silver monocle"
 	icon_state = "monocle"
 	max_integrity = 35
+	sellprice = 20
 	gender = NEUTER
 	grid_width = 32
 	grid_height = 32
