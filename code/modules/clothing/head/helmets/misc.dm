@@ -778,3 +778,16 @@
 	detail_color = GLOB.noble_dyes[choice]
 	detail_tag = "_detail"
 	update_appearance(UPDATE_ICON)
+
+/obj/item/clothing/head/helmet/visored/bellow
+	name = "Bellow Sallet"
+	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
+	icon_state = "sallet_bellow"
+	item_state = "sallet_bellow"
+	raise_state = "_t"
+	adjustable = CAN_CADJUST
+	armor = ARMOR_PLATE
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	bloody_icon_state = "helmetblood_big"
+	sellprice = VALUE_STEEL_HELMET
+	item_weight = 4.5 KILOGRAMS
