@@ -65,7 +65,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
 	detail_tag = "_detail"
-	detail_color = CLOTHING_RED
+	detail_color = CLOTHING_RED_OCHRE
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	var/picked = FALSE

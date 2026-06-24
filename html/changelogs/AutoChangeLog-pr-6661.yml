@@ -1,0 +1,7 @@
+author: "Archeonan"
+delete-after: True
+changes:
+  - rscadd: "Three weapon options for ranger"
+  - rscadd: "New outfit for ranger"
+  - rscdel: "Removed ranger race restriction"
+  - balance: "Changed some of ranger's roundstart gear (no more bait, iron kukuri instead of steel hunting knife)"

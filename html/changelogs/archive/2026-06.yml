@@ -138,3 +138,33 @@
   - bugfix: Fixed visual issue with report bug
   Sulaboy:
   - bugfix: Some smithing recipes
+2026-06-19:
+  ModDownloading:
+  - rscadd: Argent, a new subclass for Sacrestants that focuses on all-around utility.
+  - rscadd: Enhancements, a loadout option for Inquisitor, Confessor, and Argent,
+      that affects stats and traits.
+  - rscadd: Adept now has two slots instead of one.
+  - balance: Inquisitor Prafekt subclass stats reduced to account for their selection
+      of Enhancements.
+  - refactor: Psyaltrist moved from Sacrestant to Adept, renamed "Rehabilitated Minstrel".
+  - rscadd: Ollies, the equivalent for olives.
+  - bugfix: Salted seeds recipe works properly now.
+  - bugfix: Per-species hunger and cleanliness modifiers actually function now.
+2026-06-20:
+  ModDownloading:
+  - balance: Sewer Cave troll has been replaced with a Skullsplitter troll.
+2026-06-21:
+  tired-wired:
+  - rscadd: Added bible verses for the rest of the Ten
+2026-06-22:
+  Ben10083:
+  - balance: Embracing Death now prevents you from turning into a deadite.
+  Sulaboy:
+  - rscadd: Miner's Satchel (Given to miners, lets you walk onto tiles with ore to
+      pick them up)
+  - balance: All pickaxes can be two handed to increase force, Miner's Helmet gives
+      more light
+  - qol: Made smithing minigame faster, and take less stamina.
+  realforest2001:
+  - rscadd: Added storage to matron cloak.
+  - code_imp: Cleaned up the backend for cloaks that have storage.

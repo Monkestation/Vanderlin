@@ -1346,7 +1346,7 @@
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
 "aID" = (
-/mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
+/mob/living/simple_animal/hostile/retaliate/troll/axe,
 /turf/open/floor/blocks/paving,
 /area/under/town/sewer)
 "aIF" = (
