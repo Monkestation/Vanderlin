@@ -278,7 +278,7 @@
 	clamped_adjustment = list(
 		/datum/attribute/skill/misc/stealing = list(50, 50),
 		/datum/attribute/skill/misc/sneaking = list(40, 40),
-		/datum/attribute/skill/misc/climbing = list(30, 30),
+		/datum/attribute/skill/misc/climbing = list(50, 50),
 	)
 
 /datum/special_trait/thief
@@ -1046,3 +1046,59 @@
 
 /datum/special_trait/obese/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_FAT, BE_SPECIAL_TRAIT)
+
+/datum/special_trait/musclepriest
+	name = "My body is a TEMPLE!"
+	greet_text = span_notice("My body is a beacon for astrata's light, and it shall be KNOWN")
+	weight = 20
+
+	req_text = "Be the Priest"
+	allowed_jobs = list(/datum/job/priest)
+
+/datum/attribute_holder/sheet/job/musclepriest
+	raw_attribute_list = list(
+		STAT_STRENGTH = 8,
+		STAT_CONSTITUTION = 8,
+		STAT_ENDURANCE = 8,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/combat/wrestling = 50,
+        /datum/attribute/skill/combat/unarmed = 35,
+		/datum/attribute/skill/combat/polearms = -30,
+	)
+
+/datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_STRONG_GRABBER, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOPAINSTUN, BE_SPECIAL_TRAIT)
+	QDEL_NULL(character.wear_pants)
+	QDEL_NULL(character.wear_shirt)
+	QDEL_NULL(character.wear_armor)
+	QDEL_NULL(character.shoes)
+	QDEL_NULL(character.belt)
+	character.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/eastpants2(character), ITEM_SLOT_PANTS)
+	character.equip_to_slot_or_del(new/obj/item/clothing/armor/regenerating/skin/disciple/sunlord(character), ITEM_SLOT_ARMOR)
+	character.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist(character), ITEM_SLOT_HANDS)
+	character.equip_to_slot_or_del(new /obj/item/storage/belt/leather/steel(character), ITEM_SLOT_BELT)
+	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
+	character.equip_to_slot_or_del(new /obj/item/weapon/katar(character), ITEM_SLOT_BELT_R)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
+
+/datum/special_trait/divinelydespised
+	name = "Divinely Despised"
+	greet_text = span_notice("Divinity Despises me, I am cursed by the gods to die.")
+	weight = 30
+
+/datum/special_trait/divinelydespised/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character,TRAIT_PSYDON_CURSE , BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_ASTRATA_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOC_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_RAVOX_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NECRA_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_XYLIX_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_PESTRA_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_EORA_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_ZIZO_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_GRAGGAR_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_MATTHIOS_CURSE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_BAOTHA_CURSE, BE_SPECIAL_TRAIT)
