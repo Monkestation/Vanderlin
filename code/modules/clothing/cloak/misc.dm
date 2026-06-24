@@ -96,18 +96,7 @@
 	color = CLOTHING_SOOT_BLACK
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = SPECIES_BASE_BODY
-
-/obj/item/clothing/cloak/half/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
-
-/obj/item/clothing/cloak/half/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/half/guard
 	name = "guard's half cloak"
@@ -176,6 +165,7 @@
 	slot_flags = ITEM_SLOT_CLOAK
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_CLOAK
+	has_storage = TRUE
 
 //............... Battle Nun ........................... (unique kit for the role, tabard for aesthetics)
 /obj/item/clothing/cloak/battlenun
