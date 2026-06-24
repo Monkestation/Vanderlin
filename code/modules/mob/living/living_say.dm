@@ -106,7 +106,9 @@
 		if(end)
 			return
 
-	language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
+	// If language not set in proc, grab one.
+	if(!language)
+		language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
 	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
 	var/signed = speaker_language?.flags & SIGNLANG
 
