@@ -34,7 +34,29 @@
 	icon_state = "monocle"
 	max_integrity = 35
 	gender = NEUTER
+	grid_width = 32
+	grid_height = 32
 
+/obj/item/clothing/face/spectacles/monocle/examine()
+	. = ..()
+	. += span_info("Click on a turf or an item to see how much it is worth.")
+
+/obj/item/clothing/face/spectacles/monocle/afterattack(atom/A, mob/user, list/modifiers)
+	. = ..()
+	var/total_sellprice = 0
+
+	visible_message(span_notice("[user] evaluates [A] with a monocle."))
+
+	if(isturf(A))
+		for(var/obj/item/I in A.contents)
+			total_sellprice += I.sellprice
+		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
+	else if(istype(A, /obj/item))
+		var/obj/item/I = A
+		total_sellprice += I.sellprice
+		for(var/obj/item/item in I.contents)
+			total_sellprice += item.sellprice
+		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)
 	if(isliving(crosser) && !obj_broken)
