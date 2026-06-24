@@ -30,6 +30,7 @@
 			visible_message(span_suicide("[src] clashes into [assailant]'s hands with \the [our_item]!"))
 
 		playsound(src, pick(used_intent.hitsound), 80)
+		assailant.remove_status_effect(/datum/status_effect/buff/clash)
 		remove_status_effect(/datum/status_effect/buff/clash)
 		return TRUE
 
