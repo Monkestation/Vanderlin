@@ -63,7 +63,7 @@
 	pants = /obj/item/clothing/pants/trou
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/mercenary
 	beltr = /obj/item/storage/messkit
 	beltl = /obj/item/weapon/knife/cleaver
 	mask = /obj/item/clothing/face/goggles

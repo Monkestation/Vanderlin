@@ -79,7 +79,7 @@
 /datum/outfit/mercenary/anthrax
 	name = "Anthrax (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots
-	belt = /obj/item/storage/belt/leather/black
+	belt = /obj/item/storage/belt/leather/mercenary/black
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
