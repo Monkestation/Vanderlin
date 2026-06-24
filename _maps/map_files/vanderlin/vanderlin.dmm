@@ -922,6 +922,16 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
 /area/outdoors/town)
+"awQ" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_3";
+	property_id = "mercapt_3";
+	template_x = 5;
+	template_y = 5;
+	default_template = /datum/map_template/vanderlin_mercapt_3
+	},
+/turf/open/openspace,
+/area/indoors/town)
 "awW" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/grass/water,
@@ -21545,6 +21555,16 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
 /area/indoors/town/church/inquisition)
+"klT" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_2";
+	property_id = "mercapt_2";
+	template_x = 5;
+	template_y = 6;
+	default_template = /datum/map_template/vanderlin_mercapt_2
+	},
+/turf/open/openspace,
+/area/indoors/town)
 "kma" = (
 /obj/structure/chair/bench/church{
 	dir = 1
@@ -28959,6 +28979,16 @@
 "nKG" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/heir/heir1)
+"nKO" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_1";
+	property_id = "mercapt_1";
+	template_x = 5;
+	template_y = 6;
+	default_template = /datum/map_template/vanderlin_mercapt_1
+	},
+/turf/open/openspace,
+/area/indoors/town)
 "nKR" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 9
@@ -30095,6 +30125,16 @@
 /obj/item/clothing/shirt/robe/colored/courtmage,
 /turf/open/floor/greenstone,
 /area/indoors/town/keep/magician)
+"omR" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_4";
+	property_id = "mercapt_4";
+	template_x = 5;
+	template_y = 5;
+	default_template = /datum/map_template/vanderlin_mercapt_4
+	},
+/turf/open/openspace,
+/area/indoors/town)
 "omS" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/bookcase/random_recipes,
@@ -107235,18 +107275,18 @@ qFx
 qFx
 qFx
 qFx
-fXE
-fXE
-fXE
-fXE
-dHr
-fXE
-fXE
-jFd
-mIX
-fXE
-fXE
-jFd
+qXw
+qXw
+qXw
+qXw
+qXw
+nKO
+qXw
+qXw
+qXw
+qXw
+qXw
+klT
 mIX
 fXE
 fXE
@@ -107437,18 +107477,18 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 fXE
 iIB
 iIB
@@ -107639,18 +107679,18 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 fXE
 iIB
 qEU
@@ -107841,18 +107881,18 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 jFd
 mrm
 qEU
@@ -108043,18 +108083,18 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 dHr
 pox
 tCN
@@ -108649,16 +108689,16 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+omR
+qXw
+qXw
+qXw
+qXw
+awQ
 dHr
 eFj
 uHo
@@ -108851,16 +108891,16 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 fXE
 mAX
 uHo
@@ -109053,16 +109093,16 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 fXE
 qym
 uHo
@@ -109255,16 +109295,16 @@ qFx
 qFx
 qFx
 qFx
-fXE
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
-gNo
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 fXE
 oWS
 vea
@@ -109457,16 +109497,16 @@ qFx
 qFx
 qFx
 qFx
-fXE
-ylM
-ylM
-ylM
-ylM
-ylM
-ylM
-fXE
-fXE
-fXE
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
+qXw
 dHr
 wPW
 pqB

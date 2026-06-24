@@ -69,3 +69,28 @@
 	mappath = "_maps/map_files/vanderlin/house_templates/tailor.dmm"
 	width = 9
 	height = 9
+
+/datum/map_template/vanderlin_mercapt_1
+	name = "Vanderlin Mercenary Apartment One"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc1.dmm"
+	width = 5
+	height = 5
+
+/datum/map_template/vanderlin_mercapt_2
+	name = "Vanderlin Mercenary Apartment Two"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc2.dmm"
+	width = 5
+	height = 5
+
+/datum/map_template/vanderlin_mercapt_3
+	name = "Vanderlin Mercenary Apartment Three"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc3.dmm"
+	width = 5
+	height = 6
+
+/datum/map_template/vanderlin_mercapt_4
+	name = "Vanderlin Mercenary Apartment Four"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc4.dmm"
+	width = 5
+	height = 6
+
