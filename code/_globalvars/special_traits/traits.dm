@@ -1126,14 +1126,6 @@
 /datum/special_trait/hatesaffection/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_EORA_CURSE, BE_SPECIAL_TRAIT)
 
-/datum/special_trait/madnesstakesme
-	name = "Madness Takes Me"
-	greet_text = span_notice("The lines between reality and fantasy have blurred, and I feel as if I am losing my mind.")
-	weight = 30
-
-/datum/special_trait/madnesstakesme/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_ZIZO_CURSE, BE_SPECIAL_TRAIT)
-
 /datum/special_trait/kingsbane
 	name = "King's Bane"
 	greet_text = span_notice("A strange toxin was used on me, and the very feel of coins sends chills down my spine.")
