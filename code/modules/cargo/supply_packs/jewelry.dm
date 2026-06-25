@@ -80,5 +80,5 @@
 
 /datum/supply_pack/jewelry/mercatoreye
 	name = "Mercator's Eye"
-	cost = 35
+	cost = 100
 	contains = /obj/item/clothing/neck/mercator

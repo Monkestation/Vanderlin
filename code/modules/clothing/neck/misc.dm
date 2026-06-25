@@ -657,11 +657,11 @@
 	icon_state = "horus"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	sellprice = 30
+	sellprice = 75
 
 /obj/item/clothing/neck/mercator/examine()
 	. = ..()
-	. += span_info("Click on a turf or an item to see how much it is worth.")
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
 /obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
 	. = ..()
