@@ -618,6 +618,7 @@
 
 	axe_cut = 15
 	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 50
 	item_weight = 4 KILOGRAMS
