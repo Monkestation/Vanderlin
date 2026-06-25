@@ -18,6 +18,8 @@
 
 	var/picked_type = pick(spell_types)
 	var/datum/action/cooldown/spell/picked_spell = new picked_type
+	picked_spell.owner = hosted_carbon
+	picked_spell.spell_cost = 0
 	var/list/atoms_in_range = list()
 	for(var/atom/close_atom as anything in range(3, hosted_carbon))
 		if(isitem(close_atom))

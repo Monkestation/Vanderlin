@@ -273,7 +273,7 @@ Works together with spawning an observer, noted above.
 				ghost.key = key
 				return ghost
 //		if(client)
-//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
+//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.read_preference(/datum/preference/numeric/musicvol), channel = CHANNEL_MUSIC)
 //			play_priomusic(S)
 		var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
 		if(drawskip)
@@ -459,8 +459,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(source)
 			var/atom/movable/screen/alert/A = throw_alert("[REF(source)]_notify_cloning", /atom/movable/screen/alert/notify_cloning)
 			if(A)
-				if(client && client.prefs && client.prefs.UI_style)
-					A.icon = ui_style2icon(client.prefs.UI_style)
+				if(client && client.prefs && client.prefs.read_preference(/datum/preference/choiced/UI_style))
+					A.icon = ui_style2icon(client.prefs.read_preference(/datum/preference/choiced/UI_style))
 				A.desc = message
 				var/old_layer = source.layer
 				var/old_plane = source.plane
@@ -732,7 +732,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/update_sight()
 	if(client)
-		ghost_others = client.prefs.ghost_others //A quick update just in case this setting was changed right before calling the proc
+		ghost_others = client.prefs.read_preference(/datum/preference/choiced/ghost_others) //A quick update just in case this setting was changed right before calling the proc
 
 	if (!ghostvision)
 		see_invisible = SEE_INVISIBLE_LIVING
@@ -772,11 +772,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				client.images -= GLOB.ghost_images_default
 			if(GHOST_OTHERS_SIMPLE)
 				client.images -= GLOB.ghost_images_simple
-	lastsetting = client.prefs.ghost_others
+	lastsetting = client.prefs.read_preference(/datum/preference/choiced/ghost_others)
 	if(!ghostvision)
 		return
-	if(client.prefs.ghost_others != GHOST_OTHERS_THEIR_SETTING)
-		switch(client.prefs.ghost_others)
+	if(client.prefs.read_preference(/datum/preference/choiced/ghost_others) != GHOST_OTHERS_THEIR_SETTING)
+		switch(client.prefs.read_preference(/datum/preference/choiced/ghost_others))
 			if(GHOST_OTHERS_DEFAULT_SPRITE)
 				client.images |= (GLOB.ghost_images_default-ghostimage_default)
 			if(GHOST_OTHERS_SIMPLE)
@@ -921,9 +921,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	set_ghost_appearance()
 	if(client && client.prefs)
-		deadchat_name = client.prefs.real_name
-		mind.ghostname = client.prefs.real_name
-		name = client.prefs.real_name
+		deadchat_name = client.prefs.read_preference(/datum/preference/text/real_name)
+		mind.ghostname = client.prefs.read_preference(/datum/preference/text/real_name)
+		name = client.prefs.read_preference(/datum/preference/text/real_name)
 
 /mob/dead/observer/proc/set_ghost_appearance()
 	if(!client?.prefs)

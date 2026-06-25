@@ -446,7 +446,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					if(!wound.sleep_healing)
 						continue
 					wound.heal_wound(wound.sleep_healing * sleepy_mod)
-			adjustToxLoss(-(sleepy_mod * 0.15))
+			adjustToxLoss(-(sleepy_mod * 0.15), forced = TRUE)
 			updatehealth()
 			if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 				Sleeping(300)

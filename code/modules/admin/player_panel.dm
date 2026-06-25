@@ -204,7 +204,7 @@
 	"}
 
 
-	var/ui_mode = user.prefs.ui_theme
+	var/ui_mode = user.prefs.read_preference(/datum/preference/choiced/ui_theme)
 	var/dark_ui = FALSE
 	if(ui_mode == UI_PREFERENCE_DARK_MODE)
 		dark_ui = TRUE

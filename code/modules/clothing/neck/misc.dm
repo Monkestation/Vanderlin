@@ -183,6 +183,9 @@
 /obj/item/clothing/neck/coif/cloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
+/obj/item/clothing/neck/coif/cloth/colored/peasantbrown
+	color = CLOTHING_PEASANT_BROWN
+
 /obj/item/clothing/neck/coif/cloth/colored/berryblue
 	color = CLOTHING_BERRY_BLUE
 
@@ -268,8 +271,7 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel_slag
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/steel
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
@@ -509,10 +511,13 @@
 	if(!istype(loc, /mob/living/carbon))
 		qdel(src)
 		return
+
 	var/mob/living/carbon/soon_to_be_headless = loc
 	var/obj/item/bodypart/head/to_decap = soon_to_be_headless.get_bodypart(BODY_ZONE_HEAD)
 	if(to_decap)
-		to_decap.dismember(BRUTE) //its a NECK collar
+		if(!istype(to_decap))
+			stack_trace("get_bodypart(BODY_ZONE_HEAD) returned something that isn't a head.")
+		to_decap.dismember(BRUTE, zone_precise = BODY_ZONE_PRECISE_NECK, forced = TRUE) //its a NECK collar
 
 	qdel(src)
 
