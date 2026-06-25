@@ -76,24 +76,24 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
 			return
 
-	if(!(prefs.chat_toggles & CHAT_OOC))
+	if(!(prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_OOC))
 		to_chat(src, span_danger("I have OOC muted."))
 		return
 
 	mob.log_talk(raw_msg, LOG_OOC)
 
 	var/keyname = get_display_ckey(ckey)
-	var/color2use = prefs.voice_color
+	var/color2use = prefs.read_preference(/datum/preference/color/voice_color)
 	color2use = "#[color2use]"
 	var/msg_to_send = ""
-	var/admin_message_color = prefs.ooccolor
+	var/admin_message_color = prefs.read_preference(/datum/preference/color/ooccolor)
 	if(isnull(admin_message_color))
 		admin_message_color = GLOB.OOC_COLOR
 
 	for(var/client/C in GLOB.clients)
 		var/pre_keyfield = C.holder ? "[keyname]([key])" : keyname
-		var/keyfield = conditional_tooltip_alt(pre_keyfield, prefs.oocpronouns, length(prefs.oocpronouns) && !is_misc_banned(ckey, BAN_MISC_OOCPRONOUNS))
-		if(C.prefs.chat_toggles & CHAT_OOC)
+		var/keyfield = conditional_tooltip_alt(pre_keyfield, prefs.read_preference(/datum/preference/color/ooccolor), length(prefs.read_preference(/datum/preference/text/oocpronouns)) && !is_misc_banned(ckey, BAN_MISC_OOCPRONOUNS))
+		if(C.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_OOC)
 			msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <span class='message linkify'>[msg]</span>"
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
@@ -145,7 +145,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
 			return
 
-	if(!(prefs.chat_toggles & CHAT_OOC))
+	if(!(prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_OOC))
 		to_chat(src, span_danger("I have OOC muted."))
 		return
 
@@ -153,20 +153,20 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 
 	var/keyname = get_display_ckey(ckey)
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
-	var/color2use = prefs.voice_color
+	var/color2use = prefs.read_preference(/datum/preference/color/voice_color)
 	if(!color2use)
 		color2use = "#FFFFFF"
 	else
 		color2use = "#[color2use]"
 
 	var/msg_to_send = ""
-	var/admin_message_color = prefs.ooccolor
+	var/admin_message_color = prefs.read_preference(/datum/preference/color/ooccolor)
 	if(isnull(admin_message_color))
 		admin_message_color = GLOB.OOC_COLOR
 
 	for(var/client/C in GLOB.clients)
 		var/real_key = C.holder ? "([key])" : ""
-		if(C.prefs.chat_toggles & CHAT_OOC)
+		if(C.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_OOC)
 			if(!C.holder)
 				if(SSticker.current_state != GAME_STATE_FINISHED && !istype(C.mob, /mob/dead/new_player))
 					continue
@@ -343,24 +343,24 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		to_chat(src, span_danger("I have been banned from setting my OOC pronouns."))
 		return
 
-	var/old_pronouns = prefs.oocpronouns
+	var/old_pronouns = prefs.read_preference(/datum/preference/text/oocpronouns)
 	to_chat(src, span_notice("You can set up to [MAX_PRONOUNS] different pronouns, separated by slashes (/)."))
-	if (prefs.oocpronouns)
-		to_chat(src, span_notice("Your current OOC pronouns are: [prefs.oocpronouns]"))
+	if (prefs.read_preference(/datum/preference/text/oocpronouns))
+		to_chat(src, span_notice("Your current OOC pronouns are: [prefs.read_preference(/datum/preference/text/oocpronouns)]"))
 	else
 		to_chat(src, span_notice("You have not set any OOC pronouns yet."))
 
 	if (usr && is_admin(usr))
 		to_chat(src, span_notice("As staff, you can set this field however you like. But please use it in good faith."))
 
-	var/new_pronouns = input("Enter your OOC pronouns (separated by slashes):", "Set OOC Pronouns", prefs.oocpronouns) as text|null
+	var/new_pronouns = input("Enter your OOC pronouns (separated by slashes):", "Set OOC Pronouns", prefs.read_preference(/datum/preference/text/oocpronouns)) as text|null
 	if (isnull(new_pronouns))
 		return
 	if (!validate_oocpronouns(new_pronouns))
 		return
 	message_admins("OOC pronouns set by [usr] ([usr.ckey]) from [html_encode(old_pronouns)] to: [html_encode(new_pronouns)]")
 	log_game("OOC pronouns set by [usr] ([usr.ckey]) from [html_encode(old_pronouns)] to: [html_encode(new_pronouns)]")
-	prefs.oocpronouns = new_pronouns
+	prefs.update_preference(/datum/preference/text/oocpronouns, new_pronouns)
 	prefs.save_preferences()
 	if (new_pronouns == "")
 		to_chat(src, span_notice("Your OOC pronouns have been cleared."))
@@ -521,7 +521,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 
 /// Attempt to automatically fit the viewport, assuming the user wants it
 /client/proc/attempt_auto_fit_viewport()
-	if (!prefs?.auto_fit_viewport)
+	if (!prefs?.read_preference(/datum/preference/toggle/auto_fit_viewport))
 		return
 
 	INVOKE_ASYNC(src, VERB_REF(fit_viewport))

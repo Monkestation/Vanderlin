@@ -776,8 +776,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 	// Ensure the admin stops hearing ghosts like a mortal
 	if(prefs)
-		prefs.chat_toggles &= ~CHAT_GHOSTEARS   // Explicitly remove ghost hearing
-		prefs.chat_toggles &= ~CHAT_GHOSTWHISPER // Explicitly remove ghost whispers
+		prefs.preference_clear_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTEARS)   // Explicitly remove ghost hearing
+		prefs.preference_clear_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTWHISPER) // Explicitly remove ghost whispers
 		prefs.save_preferences()
 		to_chat(src, span_info("I will hear like a mortal."))
 

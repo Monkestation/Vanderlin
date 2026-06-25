@@ -430,7 +430,7 @@
 		var/exp_to_gain = GET_MOB_ATTRIBUTE_VALUE(thief, STAT_INTELLIGENCE) * 1.5
 		var/list/stealablezones = list(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
 		var/list/stealpos = list()
-		if(client?.prefs.showrolls)
+		if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(thief, span_info("Your stealing skill roll of [thiefskill]d6 is [stealroll]..."))
 		if(stealroll >= target_perception)
 			if(thief.get_active_held_item())

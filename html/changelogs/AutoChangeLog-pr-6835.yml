@@ -1,4 +1,0 @@
-author: "Ben10083"
-delete-after: True
-changes:
-  - rscadd: "New mind trait to prevent knocking over chairs. Added to Servant, Butler, Tapster and Innkeeper"
