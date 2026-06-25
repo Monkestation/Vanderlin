@@ -191,7 +191,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
 	grid_height = 32
-	/vardrinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
+	var/drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
 	var/fillsounds = list('sound/items/fillcup.ogg')
 	var/poursounds = list('sound/items/fillbottle.ogg')
 	var/label_prefix = "Flask of "
