@@ -74,9 +74,13 @@
 				continue
 			names |= initial(material.name)
 
-		var/choice = browser_input_list(user, "What metal to pour?", items = names)
-		if(!choice)
-			return FALSE
+		var/choice
+		if(length(names) == 1)
+			choice = names[1]
+		else
+			choice = browser_input_list(user, "What metal to pour?", items = names)
+			if(!choice)
+				return FALSE
 
 		for(var/datum/material/material as anything in metal.data)
 			if(!ispath(material))

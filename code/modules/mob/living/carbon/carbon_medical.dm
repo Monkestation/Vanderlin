@@ -1,7 +1,7 @@
 
 /mob/living/carbon/proc/pump_heart(mob/user, forced_pump)
 	if(!forced_pump)
-		var/heymedic = max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 0)/SKILL_MASTER
+		var/heymedic = user ? max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 0)/SKILL_MASTER : 0
 		recent_heart_pump = list("[world.time]" = (0.3 + CEILING(heymedic, 0.1)))
 	else
 		recent_heart_pump = list("[world.time]" = (0.3 + CEILING(forced_pump, 0.1)))

@@ -36,6 +36,7 @@
 
 	var/sight_flags = 0
 	var/see_in_dark = 8
+	/// How much innate tint these eyes have
 	var/tint = 0
 	var/eye_icon_state = "eye"
 	var/flash_protect = FLASH_PROTECTION_NONE
