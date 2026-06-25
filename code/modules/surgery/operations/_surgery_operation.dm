@@ -383,7 +383,7 @@
 
 /// Display roll to the surgeon
 /datum/surgery_operation/proc/display_roll(mob/living/surgeon, result_label, requirement)
-	if(!surgeon.client?.prefs.showrolls)
+	if(!surgeon.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		return
 
 	if(requirement != null)
