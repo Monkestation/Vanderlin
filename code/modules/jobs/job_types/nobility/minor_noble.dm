@@ -309,9 +309,7 @@
 				qdel(scabbard)
 		if("Bow")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/minor_bows)
-			var/arrows = new /obj/item/ammo_holder/quiver/arrows()
-			if(!spawned.equip_to_appropriate_slot(arrows))
-				qdel(arrows)
+			equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/arrows(), TRUE)
 
 /datum/outfit/noble
 	name = "Noble Base"
