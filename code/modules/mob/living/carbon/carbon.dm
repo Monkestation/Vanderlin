@@ -1399,7 +1399,7 @@
 	for(var/obj/item/worn_item as anything in (get_equipped_items(TRUE) + held_items))
 		if(isnull(worn_item))
 			continue
-		. += worn_item.get_carry_weight()
+		. += worn_item.get_carry_weight(src)
 	for(var/mob/living/carbon/human/friend in buckled_mobs)
 		//For now, let's assume our friend weighs 60kg
 		. += friend.get_mob_weight()

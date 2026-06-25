@@ -44,11 +44,11 @@
 	zoom = 0
 
 /datum/view_data/proc/resetFormat()//Cuck
-	winset(chief, "mapwindow.map", "zoom=[chief.prefs.pixel_size]")
+	winset(chief, "mapwindow.map", "zoom=[chief.prefs.read_preference(/datum/preference/numeric/pixel_size)]")
 	chief?.attempt_auto_fit_viewport() // If you change zoom mode, fit the viewport
 
 /datum/view_data/proc/setZoomMode()
-	winset(chief, "mapwindow.map", "zoom-mode=[chief.prefs.scaling_method]")
+	winset(chief, "mapwindow.map", "zoom-mode=[chief.prefs.read_preference(/datum/preference/choiced/scaling_method)]")
 
 /datum/view_data/proc/isZooming()
 	return (width || height)

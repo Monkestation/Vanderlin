@@ -91,7 +91,7 @@
 	var/defender_dualwielding = dual_wielding_check()
 
 	// Show roll info to defender
-	if(client?.prefs.showrolls)
+	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		var/text = "Roll to parry... (score: [parry_score])"
 		if(attacker_dualwielding)
 			if(defender_dualwielding)
@@ -108,7 +108,7 @@
 	var/roll_result = diceroll(effective_score, context = DICE_CONTEXT_PHYSICAL)
 
 	// Show attacker feedback
-	if(user.client?.prefs.showrolls && attacker_dualwielding)
+	if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls) && attacker_dualwielding)
 		var/attacker_feedback = "Attacking with advantage."
 		if(defender_dualwielding)
 			attacker_feedback += " Cancelled out!"
