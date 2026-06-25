@@ -256,10 +256,10 @@
 			head = /obj/item/clothing/head/helmet/heavy/necked/necra
 			cloak = /obj/item/clothing/cloak/stabard/templar/necra
 		if(/datum/patron/divine/pestra)
-			wrists = /obj/item/reagent_containers/cross/pestra
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
-			backpack_contents = /obj/item/clothing/neck/psycross/silver/divine/pestra
+			backpack_contents += /obj/item/reagent_containers/glass/bottle/poison
 			beltr = /obj/item/weapon/knife/dagger/steel/pestrasickle
 			beltl = /obj/item/weapon/knife/dagger/steel/pestrasickle
 		if(/datum/patron/divine/eora)
