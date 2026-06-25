@@ -428,7 +428,7 @@
 	craft_time = 5 SECONDS
 
 /datum/repeatable_crafting_recipe/crafting/stonepan
-	name "flat cooking stone"
+	name = "flat cooking stone"
 	requirements = list(
 		/obj/item/natural/rock = 1,
 	)
