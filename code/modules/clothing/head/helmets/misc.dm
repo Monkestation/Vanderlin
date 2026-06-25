@@ -423,7 +423,6 @@
 	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
 	icon_state = "sallet_bellow"
 	item_state = "sallet_bellow"
-	raise_state = "_t"
 	adjustable = CAN_CADJUST
 	armor = ARMOR_PLATE
 	sellprice = VALUE_STEEL_HELMET
