@@ -1,0 +1,104 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"c" = (
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town)
+"j" = (
+/obj/structure/bookcase,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"n" = (
+/obj/structure/table/wood/nice/decorated_alt,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"o" = (
+/obj/machinery/light/fueled/oven{
+	pixel_y = 31
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"p" = (
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"u" = (
+/obj/item/bedsheet/fabric_double,
+/obj/structure/bed/inn/double,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"w" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/flashlight/flare/torch/lantern,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"x" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 8
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"z" = (
+/obj/structure/door/violet,
+/turf/closed/basic,
+/area/indoors/town)
+"E" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 4
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town)
+"Y" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town)
+
+(1,1,1) = {"
+c
+p
+E
+p
+p
+j
+"}
+(2,1,1) = {"
+c
+o
+n
+p
+p
+a
+"}
+(3,1,1) = {"
+c
+p
+x
+p
+p
+a
+"}
+(4,1,1) = {"
+Y
+p
+p
+p
+p
+p
+"}
+(5,1,1) = {"
+z
+p
+p
+p
+p
+p
+"}
+(6,1,1) = {"
+c
+p
+p
+w
+u
+w
+"}
