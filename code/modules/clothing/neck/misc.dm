@@ -663,19 +663,30 @@
 	. = ..()
 	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
+/obj/item/clothing/neck/mercator/afterattack(atom/assess_target, mob/user, list/modifiers)
 	. = ..()
 	var/total_sellprice = 0
-	if(isturf(A))
-		for(var/obj/item/I in A.contents)
-			total_sellprice += I.sellprice
-		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
-	else if(istype(A, /obj/item))
-		var/obj/item/I = A
-		total_sellprice += I.sellprice
-		for(var/obj/item/item in I.contents)
+
+	if(isturf(assess_target))
+		visible_message(span_notice("[user] peers at the items on the [assess_target] through their amulet."))
+
+		for(var/obj/item/assessed_item in assess_target.contents)
+			total_sellprice += assessed_item.sellprice
+
+		var/display_price = total_sellprice
+		to_chat(user, span_notice("Everything on the ground is worth [display_price] mammons."))
+
+	else if(istype(assess_target, /obj/item))
+		visible_message(span_notice("[user] peers at the [assess_target] through their amulet."))
+
+		var/obj/item/assessed_item = assess_target
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
 			total_sellprice += item.sellprice
-		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+
+		var/display_price = total_sellprice
+		to_chat(user, span_notice("The item and its contents are worth [display_price] mammons."))
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"
