@@ -288,12 +288,8 @@ SUBSYSTEM_DEF(mapping)
 	var/pmv = CONFIG_GET(flag/preference_map_voting)
 	if(pmv)
 		for (var/client/c in GLOB.clients)
-			var/vote = c.prefs.preferred_map
-			if (!vote)
-				if (global.config.defaultmap)
-					mapvotes[global.config.defaultmap.map_name] += 1
-				continue
-			mapvotes[vote] += 1
+			if (global.config.defaultmap)
+				mapvotes[global.config.defaultmap.map_name] += 1
 	else
 		for(var/M in global.config.maplist)
 			mapvotes[M] = 1

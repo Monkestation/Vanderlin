@@ -30,6 +30,9 @@
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/pilgrimminer
+	traits = list(
+		TRAIT_AMAZING_BACK
+	)
 
 /datum/job/advclass/pilgrimminer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -42,21 +45,18 @@
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	shoes = /obj/item/clothing/shoes/boots/leather
 	belt = /obj/item/storage/belt/leather
-	neck = /obj/item/storage/belt/pouch/coins/poor
+	head = /obj/item/clothing/head/helmet/leather/minershelm
+	neck = /obj/item/clothing/neck/coif/cloth/colored/peasantbrown
 	beltl = /obj/item/weapon/pick
+	beltr = /obj/item/storage/hip/orebag
 	backr = /obj/item/weapon/shovel
 	backl = /obj/item/storage/backpack/backpack
 	backpack_contents = list(
 		/obj/item/flint = 1,
-		/obj/item/weapon/knife/villager = 1
+		/obj/item/weapon/knife/villager = 1,
+		/obj/item/storage/belt/pouch/coins/poor
 	)
 
 /datum/outfit/pilgrim/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	head = pick(/obj/item/clothing/head/armingcap, /obj/item/clothing/head/headband/colored/red, /obj/item/clothing/head/roguehood/colored/random)
 	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/random, /obj/item/clothing/shirt/shortshirt/colored/random)
-
-	if(equipped_human.dna.species.id == SPEC_ID_DWARF)
-		head = /obj/item/clothing/head/helmet/leather/minershelm
-	else
-		beltr = /obj/item/flashlight/flare/torch/lantern

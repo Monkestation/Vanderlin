@@ -52,7 +52,7 @@
 /datum/inqports/supplies/medical
 	name = "5 Rolls of Cloth and Needles"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/medical
-	marquescost = 8
+	marquescost = 4
 
 /obj/item/natural/bundle/cloth/roll/Initialize()
 	. = ..()
@@ -67,7 +67,7 @@
 /datum/inqports/supplies/chains
 	name = "2 Lengths of Chain"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/chains
-	marquescost = 6
+	marquescost = 2
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/chains/populate_contents()
 	for(var/i in 1 to 2)
@@ -150,7 +150,7 @@
 /datum/inqports/supplies/psybuns
 	name = "The Grenzelhoftian Bakery Special"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/psybuns
-	marquescost = 6
+	marquescost = 2
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/psybuns/populate_contents()
 	for(var/i in 1 to 5)
@@ -212,7 +212,7 @@
 /datum/inqports/articles/accusations
 	name = "3 Accusations"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/articles/accusations
-	marquescost = 8
+	marquescost = 4
 
 /obj/structure/closet/crate/chest/inqcrate/articles/accusations/populate_contents()
 	new /obj/item/paper/inqslip/accusation(src)
@@ -223,7 +223,7 @@
 /datum/inqports/articles/confessions
 	name = "3 Confessions"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/articles/confessions
-	marquescost = 12
+	marquescost = 4
 
 /obj/structure/closet/crate/chest/inqcrate/articles/confessions/populate_contents()
 	for(var/i in 1 to 3)
@@ -286,7 +286,7 @@
 /datum/inqports/equipment/lantern
 	name = "3 Iron Lamptern"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/lantern
-	marquescost = 16
+	marquescost = 4
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/lantern/populate_contents()
 	for(var/i in 1 to 3)
@@ -305,22 +305,22 @@
 /datum/inqports/equipment/strangemask
 	name = "1 Confessional Mask"
 	item_type = /obj/item/clothing/face/facemask/steel/confessor
-	marquescost = 10
+	marquescost = 6
 
 /datum/inqports/equipment/otavansatchel
 	name = "1 Grenzelhoftian Leather Satchel"
 	item_type = /obj/item/storage/backpack/satchel/otavan
-	marquescost = 8
+	marquescost = 2
 
 /datum/inqports/equipment/surgerybag
 	name = "1 Surgery Bag"
 	item_type = /obj/item/storage/backpack/satchel/surgbag
-	marquescost = 16
+	marquescost = 6
 
 /datum/inqports/equipment/psysack
 	name = "1 Identity Concealer"
 	item_type = /obj/item/clothing/face/sack/psy
-	marquescost = 6
+	marquescost = 4
 
 /datum/inqports/equipment/inqcordage
 	name = "2 Spools of Inquiry Cordage"
@@ -334,7 +334,7 @@
 /datum/inqports/equipment/blackbags
 	name = "3 Black Bags"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/blackbags
-	marquescost = 8
+	marquescost = 6
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/blackbags/populate_contents()
 	for(var/i in 1 to 3)

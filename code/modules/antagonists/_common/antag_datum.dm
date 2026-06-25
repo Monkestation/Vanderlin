@@ -133,7 +133,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(is_banned(owner.current) && replace_banned)
 		replace_banned_player()
 		return
-	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.toggles & DEADMIN_ANTAGONIST))
+	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.read_preference(/datum/preference/bitwise/toggles) & DEADMIN_ANTAGONIST))
 		owner.current.client.holder.auto_deadmin()
 	if(allow_preference_switching && owner.current.client?.prefs?.path)
 		switch_prefs(owner.current)

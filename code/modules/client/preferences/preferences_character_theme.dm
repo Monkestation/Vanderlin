@@ -1,5 +1,5 @@
 /datum/preferences/proc/send_character_ui_resources(mob/user)
-	switch(char_theme)
+	switch(read_preference(/datum/preference/choiced/char_theme))
 		if("dusty")
 			send_dusty_theme(user)
 		if("grimshart")

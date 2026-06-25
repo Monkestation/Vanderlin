@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/whipsflails = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/climbing = 10,

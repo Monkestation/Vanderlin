@@ -1700,7 +1700,7 @@
 	MOBTIMER_SET(pulledby, MT_RESIST_GRAB)
 
 	var/shitte = ""
-	if(client?.prefs.showrolls)
+	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		shitte = " ([resist_chance]%)"
 	if(prob(resist_chance))
 		visible_message("<span class='warning'>[src] breaks free of [pulledby]'s grip!</span>", \
@@ -2559,7 +2559,7 @@
 					MOBTIMER_SET(M, MT_FOUNDSNEAK)
 			else
 				if(M.m_intent == MOVE_INTENT_SNEAK)
-					if(M.client?.prefs.showrolls)
+					if(M.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 						to_chat(M, "<span class='warning'>[src] didn't find me... [probby]%</span>")
 					else
 						to_chat(M, "<span class='warning'>[src] didn't find me.</span>")

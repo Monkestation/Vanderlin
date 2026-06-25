@@ -183,6 +183,9 @@
 /obj/item/clothing/neck/coif/cloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
+/obj/item/clothing/neck/coif/cloth/colored/peasantbrown
+	color = CLOTHING_PEASANT_BROWN
+
 /obj/item/clothing/neck/coif/cloth/colored/berryblue
 	color = CLOTHING_BERRY_BLUE
 

@@ -222,7 +222,7 @@
 
 	if(!prob(probby) && !instant && !stat && cmode)
 		var/self_message
-		if(src.client?.prefs.showrolls)
+		if(src.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			self_message = span_warning("I struggle with [user]! ([probby]%)")
 		else
 			self_message = span_warning("I struggle with [user]!")

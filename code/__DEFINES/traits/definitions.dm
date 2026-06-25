@@ -431,6 +431,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MIRACULOUS_FORAGING "Miracle Foraging"	// makes bushes much more generous
 #define TRAIT_MISSING_NOSE "Missing Nose" //halved stamina regeneration
 #define TRAIT_DISFIGURED "Disfigured"
+/// Prevents knocking over chairs by bumping into them
+#define TRAIT_CAREFUL_CHAIRS "Careful Around Chairs"
 #define TRAIT_SPELLBLOCK "Bewitched" //prevents spellcasting
 #define TRAIT_ANTISCRYING "Anti-Scrying"
 #define TRAIT_SHOCKIMMUNE "Shock Immunity"
