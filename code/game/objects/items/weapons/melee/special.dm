@@ -456,6 +456,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
 	item_weight = 200 GRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
