@@ -496,7 +496,7 @@
 	new /obj/item/clothing/armor/cuirass/iron(src)
 	new /obj/item/clothing/armor/gambeson(src)
 	new /obj/item/clothing/shoes/boots/leather(src)
-	new /obj/item/clothing/neck/coif/iron(src)
+	new /obj/item/clothing/neck/chaincoif/iron(src)
 	new /obj/item/clothing/gloves/leather(src)
 	new /obj/item/storage/backpack/satchel(src)
 	new /obj/item/storage/belt/leather(src)
