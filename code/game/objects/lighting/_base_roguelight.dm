@@ -176,7 +176,7 @@
 							if(prob(prob2spoil))
 								var/obj/item/reagent_containers/food/snacks/S = W
 								user.visible_message("<span class='warning'>[user] burns [S].</span>")
-								if(user.client?.prefs.showrolls)
+								if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 									to_chat(user, "<span class='warning'>Critfail... [prob2spoil]%.</span>")
 								result = S.cooking(1000, null)
 							else if(chosen_recipe.output)
@@ -211,7 +211,7 @@
 							var/obj/item/C
 							if(prob(prob2spoil))
 								user.visible_message("<span class='warning'>[user] burns [S].</span>")
-								if(user.client?.prefs.showrolls)
+								if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 									to_chat(user, "<span class='warning'>Critfail... [prob2spoil]%.</span>")
 								C = S.cooking(1000, null)
 							else

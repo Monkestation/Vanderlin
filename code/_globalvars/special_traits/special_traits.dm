@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	player.prefs.save_preferences()
 
 /proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
-	switch(player.prefs.voice_type)
+	switch(player.prefs.read_preference(/datum/preference/choiced/voice_type))
 		if(VOICE_TYPE_MASC_FOP)
 			character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
 		if(VOICE_TYPE_FEM_DAINTY)

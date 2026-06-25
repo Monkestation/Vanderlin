@@ -161,7 +161,7 @@
 		"Leviathanian Membrane - No Terrain Slowdown",
 		"Nerve Staple - No Mood",
 		"Nightmare Ward - No Sleep and Anti-Scrying",
-		"Serpentine Glands - Thermal Vision and Venom",)
+		"Serpentine Glands - Thermal Vision and Venom")
 	//only four options
 	enhancements = shuffle(enhancements)
 	enhancements.Cut(4, 0)
@@ -205,6 +205,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
 		if("Nightmare Ward - No Sleep and Anti-Scrying")
 			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
 		if("Disguise Kit - Deceiving Meekness")
