@@ -2,6 +2,10 @@
 "a" = (
 /turf/open/floor/carpet/green,
 /area/indoors/town)
+"b" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
 "g" = (
 /obj/structure/sign/property_sign/claim,
 /turf/closed/wall/mineral/craftstone,
@@ -21,6 +25,10 @@
 /area/indoors/town)
 "v" = (
 /obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/apartment8{
+	lockids = list("merc6");
+	name = "mercenary apartment 6 key"
+	},
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "x" = (
@@ -29,8 +37,11 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "y" = (
-/obj/structure/door/violet,
-/turf/closed/basic,
+/obj/structure/door/violet{
+	name = "Mercenary Apartment 6";
+	lockid = "merc6"
+	},
+/turf/open/floor/carpet/green,
 /area/indoors/town)
 "F" = (
 /obj/structure/chair/wood/alt/chair_noble{
@@ -50,14 +61,24 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town)
+"O" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
 "U" = (
 /turf/closed/wall/mineral/craftstone,
+/area/indoors/town)
+"V" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/carpet/green,
 /area/indoors/town)
 
 (1,1,1) = {"
 a
 F
-a
+V
 a
 u
 U
@@ -87,7 +108,7 @@ a
 g
 "}
 (5,1,1) = {"
-a
+b
 a
 a
 a
@@ -97,7 +118,7 @@ y
 (6,1,1) = {"
 x
 h
-x
+O
 a
 a
 U

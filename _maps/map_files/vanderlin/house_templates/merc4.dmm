@@ -7,6 +7,10 @@
 /area/indoors/town)
 "i" = (
 /obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/apartment8{
+	lockids = list("merc4");
+	name = "mercenary apartment 4 key"
+	},
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "j" = (
@@ -29,8 +33,15 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town)
+"F" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/carpet/green,
+/area/indoors/town)
 "H" = (
-/obj/structure/door/violet,
+/obj/structure/door/violet{
+	name = "Mercenary Apartment 4";
+	lockid = "merc4"
+	},
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "M" = (
@@ -85,6 +96,6 @@ Z
 d
 i
 a
-a
+F
 j
 "}
