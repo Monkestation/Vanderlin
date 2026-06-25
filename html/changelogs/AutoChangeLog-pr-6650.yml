@@ -1,5 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - refactor: "preferences now use a datum system in the backend realistically no player facing changes"
-  - bugfix: "loadouts now correctly display the loadout items on first load."
