@@ -455,7 +455,7 @@
 
 	var/list/runes = list("Servantry", "Transmutation", "Fleshcrafting")
 
-	if(!bloody_hands || get_bleed_rate())
+	if(!bloody_hands && !get_bleed_rate())
 		to_chat(src, span_danger("My hands aren't bloody enough."))
 		return
 
@@ -470,6 +470,9 @@
 /mob/living/carbon/human/proc/release_minion()
 	set name = "Release Lackey"
 	set category = "RoleUnique.Zizo"
+
+	if(!istype(src) || stat == DEAD)
+		return
 
 	var/list/mob/living/carbon/human/possible = list()
 	for(var/datum/mind/V in SSmapping.retainer.cultists)
