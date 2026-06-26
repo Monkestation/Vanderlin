@@ -48,10 +48,14 @@
 	return examine_list
 
 /obj/item/mould/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!istype(tool, /obj/item/storage/crucible))
+	if(user.cmode)
 		return NONE
 
-	if(user.cmode)
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = tool
+		tool = tongs.held_item
+
+	if(!istype(tool, /obj/item/storage/crucible))
 		return NONE
 
 	if(try_filling(user, tool))
@@ -264,11 +268,17 @@
 
 	if(!moulded_recipe)
 		set_recipe(interacting_with, user)
-	else if(istype(interacting_with, /obj/item/storage/crucible))
-		try_filling(interacting_with, user)
 	else
-		try_adding(interacting_with, user)
-	return TRUE
+		if(istype(interacting_with, /obj/item/weapon/tongs))
+			var/obj/item/weapon/tongs/tongs = interacting_with
+			if(tongs.held_item)
+				interacting_with = tongs.held_item
+
+		if(istype(interacting_with, /obj/item/storage/crucible))
+			try_filling(interacting_with, user)
+		else
+			try_adding(interacting_with, user)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/mould/customizable/proc/set_recipe(obj/item/attacking_item, mob/living/user)
 	if(moulded_recipe)

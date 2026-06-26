@@ -102,9 +102,6 @@
 	if(!held_item)
 		return FALSE
 
-	if(user && held_item.tong_interaction(A, user))
-		return
-
 	if(!isturf(A) && !istype(A, /obj/structure/table))
 		to_chat(user, "<span class='warning'>Cannot place [held_item] here!</span>")
 		return FALSE
@@ -134,8 +131,6 @@
 		return NONE
 
 	if(held_item)
-		if(held_item?.tong_interaction(interacting_with, user))
-			return ITEM_INTERACT_SUCCESS
 		return NONE
 
 	var/obj/item/item = interacting_with
@@ -171,7 +166,3 @@
 	smeltresult = null
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST / 5
-
-/// Called in pre_attack of tongs, used for items held by tongs. Return TRUE to stop attack chain early.
-/atom/proc/tong_interaction(atom/target, mob/user)
-	return FALSE

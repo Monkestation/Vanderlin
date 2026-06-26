@@ -66,7 +66,7 @@
 
 			if(!working_material.currecipe)
 				if(!choose_recipe(user))
-					return tool.interact_with_atom(working_material, user, modifiers)
+					return ITEM_INTERACT_BLOCKING
 			if(!working_material.currecipe.is_recipe_available(user))
 				return ITEM_INTERACT_BLOCKING
 			// Start the minigame instead of direct hammering
