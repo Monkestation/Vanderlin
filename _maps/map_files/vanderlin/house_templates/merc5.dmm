@@ -3,74 +3,74 @@
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/key/apartments/merc5,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "c" = (
 /turf/closed/wall/mineral/craftstone,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "j" = (
 /obj/structure/bookcase,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "n" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "o" = (
 /obj/machinery/light/fueled/oven{
 	pixel_y = 31
 	},
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "p" = (
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "t" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "u" = (
 /obj/item/bedsheet/fabric_double,
 /obj/structure/bed/inn/double,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "w" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "x" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 8
 	},
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "z" = (
 /obj/structure/door/violet{
 	name = "Mercenary Apartment 5";
 	lockid = "merc5"
 	},
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "D" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "E" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4
 	},
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "J" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet/green,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 "Y" = (
 /obj/structure/sign/property_sign/claim,
 /turf/closed/wall/mineral/craftstone,
-/area/indoors/town)
+/area/indoors/town/merc_guild)
 
 (1,1,1) = {"
 c
