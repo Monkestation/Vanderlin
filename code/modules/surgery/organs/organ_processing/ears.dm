@@ -4,7 +4,7 @@
 
 /datum/organ_process/ears/handle_process(mob/living/carbon/owner, delta_time, times_fired)
 	var/ear_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_EARS)
-	if((ear_efficiency < bruised_threshold) && DT_PROB(((optimal_threshold - ear_efficiency)/optimal_threshold) * 2, delta_time))
+	if((ear_efficiency < bruised_threshold) && (ear_efficiency > failing_threshold) && DT_PROB(((optimal_threshold - ear_efficiency)/optimal_threshold) * 2, delta_time))
 		owner.sound_damage(0, 4 SECONDS)
 	if(ear_efficiency < failing_threshold)
 		ADD_TRAIT(owner, TRAIT_DEAF, NO_EARS)

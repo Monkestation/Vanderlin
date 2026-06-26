@@ -208,10 +208,10 @@ DEFINE_BITFIELD(organ_flags, list(
 #define MAX_ORGAN_DECAY_INFECTION 0.5
 
 
-// ~efficiency defines
+// ~efficiency defines. Keep parity with organ damage thresholds
 #define ORGAN_OPTIMAL_EFFICIENCY 100
-#define ORGAN_BRUISED_EFFICIENCY 50
-#define ORGAN_FAILING_EFFICIENCY 20
+#define ORGAN_BRUISED_EFFICIENCY ORGAN_OPTIMAL_EFFICIENCY * 0.8
+#define ORGAN_FAILING_EFFICIENCY ORGAN_OPTIMAL_EFFICIENCY * 0.2
 #define ORGAN_DESTROYED_EFFICIENCY 0
 
 // ~organ failure defines
