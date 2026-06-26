@@ -558,10 +558,14 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/weapon/polearm/halberd/psydon/relic
-	name = "Sanctum"
+	name = "\proper sanctum"
 	desc = "These silver-tipped polearms are the bulwark of the Ordo Venatari, borrowing techniques from the Ordo Benetarus. During the early sieges, the Ordos used these to hold the horrors at bay for forty days-and-nites. A time always comes to fight - strike true."
 	icon_state = "psyhalberd"
 	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 1, TRUE)
 
 //................ Bardiche ............... //
 /obj/item/weapon/polearm/halberd/bardiche
@@ -622,6 +626,25 @@
 				return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 4,"sflip" = 4,"wflip" = 1,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/halberd/bardiche/woodcutter/steel
+	name = "felling axe"
+	desc = "This is not just a tool, weapon, or loyal companion. It is a true feller of wood, able to drop the mightiest of the trees and beasts."
+	icon_state = "swoodcutter"
+	force = DAMAGE_AXE + 2
+	wlength = WLENGTH_LONG
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST
+	minstr = 9
+
+	axe_cut = 15
+	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
+	melt_amount = 75
+	sellprice = 50
+	item_weight = 4 KILOGRAMS
+
+	weapon_special = /datum/special_intent/axe_swing
 
 //................ War Axe ............... //
 //attempting to fix transformation issues//it worked wohoo, don't touch it.

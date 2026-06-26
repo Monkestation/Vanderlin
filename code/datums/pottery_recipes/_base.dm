@@ -45,7 +45,7 @@
 	if(rotations_per_minute > speed_sweetspot)
 		success_chance -= (rotations_per_minute - speed_sweetspot) * 2
 	if(!prob(success_chance))
-		if(user.client?.prefs.showrolls)
+		if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(user,span_danger("I've messed up \the [name]. (Success chance: [success_chance]%)"))
 			return
 		to_chat(user, span_danger("I've messed up \the [name]"))

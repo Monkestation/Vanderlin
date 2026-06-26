@@ -12,6 +12,7 @@
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_BULKY
 	can_parry = TRUE
+	istrainable = TRUE
 	associated_skill = /datum/attribute/skill/combat/bows
 	item_weight = 1 KILOGRAMS
 

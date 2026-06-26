@@ -392,7 +392,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		var/datum/preferences/A = new()
 		A.safe_transfer_prefs_to(new_character)
-		A.real_name = G_found.real_name
+		//A.real_name = G_found.real_name
 		new_character.dna.update_dna_identity()
 
 	new_character.name = new_character.real_name
@@ -672,7 +672,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	for(var/datum/atom_hud/antag/H in GLOB.huds) // add antag huds
 		(adding_hud) ? H.add_hud_to(usr) : H.remove_hud_from(usr)
 
-	if(prefs.toggles & COMBOHUD_LIGHTING)
+	if(prefs.read_preference(/datum/preference/bitwise/toggles) & COMBOHUD_LIGHTING)
 		if(adding_hud)
 			mob.lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
 		else

@@ -132,7 +132,7 @@
 		for(var/obj/item/organ/artery in bodypart.getorganslotlist(ORGAN_SLOT_ARTERY))
 			if(artery.damage)
 				artery.applyOrganDamage(-artery.damage)
-		bodypart.bodypart_attacked_by(BCLASS_BURN, dam = 25, modifiers = list(CRIT_MOD_CHANCE = -100)) //painful, but the wounds go away eh?
+		bodypart.bodypart_attacked_by(BCLASS_BURN, dam = 25, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT)) //painful, but the wounds go away eh?
 	target.emote("scream")
 	return TRUE
 

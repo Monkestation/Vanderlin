@@ -489,5 +489,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 // try_crit keys for modifiers
 /// Chance modifier
 #define CRIT_MOD_CHANCE "crit_mod"
+#define CANT_CRIT	-100
 /// Specifically knockout modifier for head crits
 #define CRIT_MOD_KNOCKOUT_CHANCE "knockout_mod"

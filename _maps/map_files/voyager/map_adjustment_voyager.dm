@@ -14,7 +14,6 @@
 		/datum/job/matron,
 		/datum/job/butler,
 		/datum/job/grabber,
-		/datum/job/undertaker,
 		/datum/job/captain,
 		/datum/job/consort,
 		/datum/job/courtphys,
@@ -47,4 +46,5 @@
 		/datum/job/farmer = 1000,
 		/datum/job/miner = 1000,
 		/datum/job/blacksmith = -1,
+		/datum/job/undertaker = -1,
 	)

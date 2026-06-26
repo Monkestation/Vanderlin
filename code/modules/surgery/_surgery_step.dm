@@ -372,7 +372,7 @@
 	user.mind.add_sleep_experience(/datum/attribute/skill/misc/medicine, GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * (skill_min / 3))
 
 /datum/surgery_step/proc/display_roll(mob/user, result_label, requirement)
-	if(!user.client?.prefs.showrolls)
+	if(!user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		return
 	if(requirement != null)
 		to_chat(user, span_warning("[result_label] (requirement was [requirement]/[dice_num * dice_sides])"))
