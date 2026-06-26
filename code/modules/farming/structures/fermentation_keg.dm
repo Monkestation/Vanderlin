@@ -186,6 +186,9 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		produce_list |= tool.contents
 		storage_list |= tool.contents
 
+	if(!length(produce_list) && !length(storage_list))
+		return NONE
+
 	var/dumps = FALSE
 	for(var/obj/item/reagent_containers/food/snacks/G in produce_list)
 		if(G.type in selected_recipe?.needed_crops)
