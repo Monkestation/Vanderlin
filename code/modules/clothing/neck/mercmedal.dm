@@ -25,7 +25,7 @@
 	icon_state = "compass"
 
 /obj/item/clothing/neck/mercmedal/blackoak
-	name = "black oak seedpouch"
+	name = "redwood seedpouch"
 	desc = "A dark acorn resting in a canvas pouch. May your final resting place be the one life you give back to this world."
 	icon_state = "seedpouch"
 

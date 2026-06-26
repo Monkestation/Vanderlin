@@ -63,19 +63,6 @@
 	desc = "The refuge of the TEN upon my back. An Undivided House, standing eternal against the encroaching darkness."
 	icon_state = "seetabard"
 
-
-/obj/item/clothing/cloak/wardencloak
-	name = "warden cloak"
-	desc = "A cloak worn by the Wardens of Azuria's Forests"
-	icon_state = "wardencloak"
-	alternate_worn_layer = CLOAK_BEHIND_LAYER
-	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
-	sleevetype = "shirt"
-	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-	has_storage = TRUE
-
 /obj/item/clothing/cloak/graggar
 	name = "vicious cloak"
 	desc = "The only motive force in this rotten world is violence. Be its wielder, not its victim."
@@ -85,23 +72,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-
-/obj/item/clothing/cloak/forrestercloak
-	name = "forrester cloak"
-	desc = "A cloak worn by the Black Oaks of Azuria."
-	icon_state = "forestcloak"
-	alternate_worn_layer = CLOAK_BEHIND_LAYER
-	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
-	sleevetype = "shirt"
-	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-	has_storage = TRUE
-
-/obj/item/clothing/cloak/forrestercloak/snow
-	name = "snow cloak"
-	desc = "A cloak meant to keep one's body warm in the cold of the mountains as well as the dampness of Azuria."
-	icon_state = "snowcloak"
 
 /obj/item/clothing/cloak/templar/MiddleClick(mob/user)
 	overarmor = !overarmor

@@ -77,7 +77,7 @@
 
 	var/static/list/weapons = list(
 		"Brute" = /obj/item/weapon/mace/elvenclub/steel,
-		"Glaive Master" = /obj/item/weapon/polearm/halberd,
+		"Glaive Master" = /obj/item/weapon/polearm/halberd/glaive,
 		"Ranger" = /obj/item/gun/ballistic/bow/long
 	)
 
@@ -85,7 +85,7 @@
 	switch(weapon_choice)
 		if("Brute")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 35)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/plate, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine, ITEM_SLOT_ARMOR, TRUE)
 			ADD_TRAIT(spawned, TRAIT_HEAVYARMOR, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_MEDIUMARMOR, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blackoak/heavy)
@@ -100,3 +100,11 @@
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blackoak/light)
+
+	var/static/list/helmets = list(
+		"Elven Barbute" = /obj/item/clothing/head/helmet/elfbarbute,
+		"Winged Elven Barbute" = /obj/item/clothing/head/helmet/elfbarbute/winged,
+		"Reinforced Hood" = /obj/item/clothing/head/roguehood/leather/advanced,
+		"Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit,
+	)
+	spawned.select_equippable(player_client, helmets, message = "Choose your HELMET.", title = "PROTECT YOUR HEAD.")

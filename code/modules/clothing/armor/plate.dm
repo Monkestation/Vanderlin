@@ -151,7 +151,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
-	item_weight = 20.45 KILOGRAMS
+	item_weight = 9 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
 
@@ -262,7 +262,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor = ARMOR_PLATE_SILVER
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 22 KILOGRAMS
+	item_weight = 17 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)

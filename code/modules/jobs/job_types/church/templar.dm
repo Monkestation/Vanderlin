@@ -222,7 +222,8 @@
 	name = JOB_TEMPLAR
 	head = /obj/item/clothing/head/helmet/heavy/necked
 	cloak = /obj/item/clothing/cloak/tabard/crusader/tief
-	armor = /obj/item/clothing/armor/brigandine
+	armor = /obj/item/clothing/armor/plate/silver
+	wrists = /obj/item/clothing/wrists/bracers
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/boots/armor/light
@@ -237,26 +238,26 @@
 	. = ..()
 	switch(equipped_human.patron?.type)
 		if(/datum/patron/divine/astrata)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
+			neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 			head = /obj/item/clothing/head/helmet/heavy/necked/astrata
 			cloak = /obj/item/clothing/cloak/stabard/templar/astrata
 			backr = /obj/item/weapon/sword/long/exe/astrata
 		if(/datum/patron/divine/noc)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
+			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
 			beltl = /obj/item/weapon/sword/sabre/noc
 		if(/datum/patron/divine/dendor)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 			head = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/dendor
 			backr = /obj/item/weapon/polearm/halberd/bardiche/dendor
 		if(/datum/patron/divine/necra)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 			head = /obj/item/clothing/head/helmet/heavy/necked/necra
 			cloak = /obj/item/clothing/cloak/stabard/templar/necra
 		if(/datum/patron/divine/pestra)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			backpack_contents += /obj/item/reagent_containers/glass/bottle/poison
@@ -265,24 +266,24 @@
 		if(/datum/patron/divine/eora)
 			head = /obj/item/clothing/head/helmet/sallet/eoran
 			mask = /obj/item/clothing/head/roguehood/eora
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/eora
+			neck = /obj/item/clothing/neck/psycross/silver/divine/eora
 			cloak = /obj/item/clothing/cloak/stabard/templar/eora
 		if(/datum/patron/divine/ravox)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
+			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 			head = /obj/item/clothing/head/helmet/heavy/necked/ravox
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			backr = /obj/item/weapon/sword/long/ravox
 		if(/datum/patron/divine/malum)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/malum
+			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 			head = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
 			cloak = /obj/item/clothing/cloak/stabard/templar/malum
 			backr = /obj/item/weapon/hammer/sledgehammer/war/malum
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/abyssor
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 		if(/datum/patron/divine/xylix)
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/xylix
+			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 			head = /obj/item/clothing/head/helmet/heavy/necked/xylix
 			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
 			beltl = /obj/item/weapon/whip/xylix

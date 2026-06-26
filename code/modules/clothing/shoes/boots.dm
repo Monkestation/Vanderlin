@@ -265,7 +265,7 @@
 	icon_state = "silverboots"
 	armor = ARMOR_PLATE_SILVER
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 3.4 KILOGRAMS
+	item_weight = 2.1 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 
 /obj/item/clothing/shoes/boots/armor/silver/Initialize(mapload)

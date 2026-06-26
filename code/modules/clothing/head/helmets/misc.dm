@@ -400,7 +400,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD
-	item_weight = 6.4 KILOGRAMS
+	item_weight = 3.25 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 //............... Visored Sallet ............... //
@@ -641,7 +641,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor = ARMOR_PLATE_SILVER
 	sellprice = VALUE_SILVER_ARMOR
-	item_weight = 6 KILOGRAMS
+	item_weight = 3.25 KILOGRAMS
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 
@@ -782,3 +782,22 @@
 	detail_color = GLOB.noble_dyes[choice]
 	detail_tag = "_detail"
 	update_appearance(UPDATE_ICON)
+
+/obj/item/clothing/head/helmet/elfbarbute
+	name = "elven barbute"
+	desc = "A heavy barbute helmet designed by elven smiths, intended to fit comfortably over a elf's long ears."
+	icon_state = "elven_barbute_full"
+	item_state = "elven_barbute_full"
+	flags_inv = HIDEEARS|HIDEHAIR
+	max_integrity = INTEGRITY_STRONGEST
+	armor =ARMOR_PLATE
+	body_parts_covered = COVERAGE_HEAD_NOSE
+	item_weight = 2.7 KILOGRAMS
+	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
+
+/obj/item/clothing/head/helmet/elfbarbute/winged
+	name = "winged-elven barbute"
+	desc = "A heavy barbute helmet designed by elven smiths, intended to fit comfortably over a elf's long ears. This one has been decorated with wings."
+	icon_state = "elven_barbute_winged"
+	item_state = "elven_barbute_winged"
