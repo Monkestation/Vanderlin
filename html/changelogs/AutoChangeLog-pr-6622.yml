@@ -1,6 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - rscadd: "Sewer drug den has an essence extractor and reservoir, as well as other things to do proper (ghetto) alchemy."
-  - rscadd: "Sewer kitchen has an oven, cleaver, and rolling pin now."
-  - rscadd: "Sewer smithy exists now. It only has the bare minimum of smithing equipment."
