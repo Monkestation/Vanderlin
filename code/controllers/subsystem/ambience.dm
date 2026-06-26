@@ -117,9 +117,9 @@ SUBSYSTEM_DEF(ambience)
 		cancel_looping_ambience()
 		return
 
-	var/music_enabled = client.prefs?.toggles & SOUND_SHIP_AMBIENCE
+	var/music_enabled = client.prefs?.read_preference(/datum/preference/bitwise/toggles) & SOUND_SHIP_AMBIENCE
 	var/area/my_area = get_area(src)
-	var/vol = client.prefs?.musicvol
+	var/vol = client.prefs?.read_preference(/datum/preference/numeric/musicvol)
 	var/used = buzz_to_use
 
 	if(!used && music_enabled)

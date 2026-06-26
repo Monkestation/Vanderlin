@@ -48,6 +48,11 @@
 	max_items = 1
 	max_w_class = WEIGHT_CLASS_BULKY
 	quickdraw = TRUE
+	allow_look_inside = FALSE
+
+/datum/component/storage/concrete/hollow_book/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/gun/ballistic/powder/wheellock/puffer))
 
 /datum/component/storage/concrete/grid/keyring
 	screen_max_rows = 2

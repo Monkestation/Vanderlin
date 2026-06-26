@@ -339,7 +339,7 @@
 		var/mob/M = C
 		if(M.client)
 			C = M.client
-	if(!C || (!C.prefs.windowflashing && !ignorepref))
+	if(!C || (!C.prefs.read_preference(/datum/preference/toggle/windowflashing) && !ignorepref))
 		return
 
 //Recursively checks if an item is inside a given type, even through layers of storage. Returns the atom if it finds it.

@@ -75,9 +75,13 @@
 				continue
 			names |= initial(material.name)
 
-		var/choice = input(user, "What metal to pour?", crucible) in names
-		if(!choice)
-			return
+		var/choice
+		if(length(names) == 1)
+			choice = names[1]
+		else
+			choice = input(user, "What metal to pour?", crucible) in names
+			if(!choice)
+				return
 		for(var/datum/material/material as anything in metal.data)
 			if(!ispath(material))
 				continue

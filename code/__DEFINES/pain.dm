@@ -8,17 +8,17 @@
 #define SHOCK_STAGE_2 40
 #define SHOCK_STAGE_3 60
 #define SHOCK_STAGE_4 80 // "Softcrit"
-#define SHOCK_STAGE_5 130
-#define SHOCK_STAGE_6 160
-#define SHOCK_STAGE_7 200 // "Hardcrit"
-#define SHOCK_STAGE_8 250
+#define SHOCK_STAGE_5 95
+#define SHOCK_STAGE_6 110
+#define SHOCK_STAGE_7 130 // "Hardcrit"
+#define SHOCK_STAGE_8 200
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 
 // ~shock modifiers
-#define SHOCK_MOD_BRUTE 0.5
-#define SHOCK_MOD_BURN 0.75
+#define SHOCK_MOD_BRUTE 0.6
+#define SHOCK_MOD_BURN 0.8
 #define SHOCK_MOD_TOXIN 1
-#define SHOCK_MOD_CLONE 1.25
+#define SHOCK_MOD_CLONE 1.2
 
 #define SHOCK_PENALTY_CAP 4
 
@@ -37,10 +37,10 @@
 #define PAINKILLER_DIVISOR 1.5
 
 /// Use this to keep the speed of pain-related systems consistent across the board
-#define PAIN_SYSTEM_SPEED_MODIFIER 4
+#define PAIN_SYSTEM_SPEED_MODIFIER 10
 
 /// Cooldown before resetting the injury penalty
 #define SHOCK_PENALTY_COOLDOWN_DURATION 5 SECONDS
 #define COOLDOWN_CARBON_ENDORPHINATION "carbon_endorphination"
 /// Cooldown before our body endorphinates itself again
-#define ENDORPHINATION_COOLDOWN_DURATION 45 SECONDS
+#define ENDORPHINATION_COOLDOWN_DURATION 60 SECONDS

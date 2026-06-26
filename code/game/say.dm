@@ -104,7 +104,7 @@
 					var/mob/living/L = speaker
 					// This isn't accurate purposely
 					var/appendage = "Figure"
-					switch(L.client?.prefs.voice_type)
+					switch(L.client?.prefs.read_preference(/datum/preference/choiced/voice_type))
 						if(VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY)
 							appendage = "Woman"
 						if(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)

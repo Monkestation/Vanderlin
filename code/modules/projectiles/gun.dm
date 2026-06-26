@@ -18,7 +18,7 @@
 	force = 5
 	item_flags = NEEDS_PERMIT
 	attack_verb = list("struck", "hit", "bashed")
-	istrainable = TRUE // For the moment I'll allow these to be traineable until a proper way to level up bows and crossbows is coded. - Foxtrot
+	istrainable = FALSE
 	flags_ai_inventory = AI_ITEM_GUN
 
 	associated_skill = /datum/attribute/skill/combat/firearms
