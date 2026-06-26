@@ -25,10 +25,7 @@
 /area/indoors/town)
 "v" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/key/apartments/apartment8{
-	lockids = list("merc6");
-	name = "mercenary apartment 6 key"
-	},
+/obj/item/key/apartments/merc6,
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "x" = (

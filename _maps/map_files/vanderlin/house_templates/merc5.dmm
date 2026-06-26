@@ -1,10 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/key/apartments/apartment8{
-	lockids = list("merc5");
-	name = "mercenary apartment 5 key"
-	},
+/obj/item/key/apartments/merc5,
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "c" = (
