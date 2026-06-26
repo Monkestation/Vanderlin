@@ -75,6 +75,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	armor = /obj/item/clothing/armor/medium/scale
 	head = /obj/item/clothing/head/helmet/winged
+	mask = /obj/item/clothing/face/facemask
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	wrists = /obj/item/clothing/wrists/bracers/ironjackchain

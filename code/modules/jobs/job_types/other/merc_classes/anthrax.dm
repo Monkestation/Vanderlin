@@ -19,7 +19,7 @@
 		STAT_INTELLIGENCE = -1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/whipsflails = 33,
 		/datum/attribute/skill/combat/shields = 30,
 	)
 
@@ -33,7 +33,7 @@
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/crossbows = 20,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/craft/crafting = 10,

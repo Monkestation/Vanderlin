@@ -3,7 +3,7 @@
 		STAT_PERCEPTION = 1,
 		STAT_SPEED = 2,
 		STAT_ENDURANCE = -1,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 36,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -66,7 +66,7 @@
 	name = "Sword Dancer (Mercenary)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
-	pants = /obj/item/clothing/pants/tights/colored/random
+	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	gloves = /obj/item/clothing/gloves/fingerless
 	belt = /obj/item/storage/belt/leather/mercenary

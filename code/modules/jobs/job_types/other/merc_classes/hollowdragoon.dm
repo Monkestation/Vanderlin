@@ -5,7 +5,7 @@
 		STAT_SPEED = -1,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 33,
 		/datum/attribute/skill/labor/taming = 30,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/swords = 20,

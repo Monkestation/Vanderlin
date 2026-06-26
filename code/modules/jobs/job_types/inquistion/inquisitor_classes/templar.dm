@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/shields = 35,
 		/datum/attribute/skill/misc/medicine = 10
 	)
 
@@ -74,13 +74,13 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "TAKE UP PSYDON'S ARMS.")
 	switch(weapon_choice)
 		if("Psydonic Longsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 37, 37, TRUE)
 		if("Psydonic War Axe", "Psydonic Mace", "Psydonic Poleaxe + Shortsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 37, 37, TRUE)
 		if("Psydonic Whip", "Psydonic Flail")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 37, 37, TRUE)
 		if("Psydonic Spear + Handmace")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 37, 37, TRUE)
 
 /datum/outfit/psydoniantemplar
 	name = "Psydonian Templar (Sacrestants)"

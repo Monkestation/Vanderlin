@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/polearms = 10,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 35,
 		/datum/attribute/skill/craft/tanning = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,

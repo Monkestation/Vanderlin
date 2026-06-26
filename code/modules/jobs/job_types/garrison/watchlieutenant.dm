@@ -4,11 +4,11 @@
 		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/swords = 10,
-		/datum/attribute/skill/combat/polearms = 10,
-		/datum/attribute/skill/combat/whipsflails = 10,
-		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/axesmaces = 33,
+		/datum/attribute/skill/combat/swords = 13,
+		/datum/attribute/skill/combat/polearms = 13,
+		/datum/attribute/skill/combat/whipsflails = 13,
+		/datum/attribute/skill/combat/shields = 33,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/wrestling = 30,
@@ -24,19 +24,19 @@
 /datum/attribute_holder/sheet/job/lieutenant/flail
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(20, 30)
+		/datum/attribute/skill/combat/whipsflails = list(20, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/polearm
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(20, 30)
+		/datum/attribute/skill/combat/polearms = list(20, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/sword
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(20, 30)
+		/datum/attribute/skill/combat/swords = list(20, 33)
 	)
 
 /datum/job/lieutenant

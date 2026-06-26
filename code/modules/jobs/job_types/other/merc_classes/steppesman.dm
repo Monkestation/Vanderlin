@@ -19,7 +19,7 @@
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/bows = 33,
 		/datum/attribute/skill/labor/taming = 30,
 	)
 

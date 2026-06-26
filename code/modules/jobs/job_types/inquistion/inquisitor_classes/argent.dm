@@ -29,31 +29,31 @@
 /datum/attribute_holder/sheet/job/argent/knives
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(30, 30)
+		/datum/attribute/skill/combat/knives = list(35, 35)
 	)
 
 /datum/attribute_holder/sheet/job/argent/axesmaces
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/axesmaces = list(30, 30)
+		/datum/attribute/skill/combat/axesmaces = list(35, 35)
 	)
 
 /datum/attribute_holder/sheet/job/argent/swords
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(30, 30)
+		/datum/attribute/skill/combat/swords = list(35, 35)
 	)
 
 /datum/attribute_holder/sheet/job/argent/polearms
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(30, 30)
+		/datum/attribute/skill/combat/polearms = list(35, 35)
 	)
 
 /datum/attribute_holder/sheet/job/argent/whipsflails
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(30, 30)
+		/datum/attribute/skill/combat/whipsflails = list(35, 35)
 	)
 
 /datum/job/advclass/sacrestant/argent

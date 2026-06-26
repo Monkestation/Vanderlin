@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/crossbows = 20,
-		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/bows = 33,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/labor/taming = 20,

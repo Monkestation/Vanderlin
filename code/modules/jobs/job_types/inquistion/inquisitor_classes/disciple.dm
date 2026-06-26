@@ -6,8 +6,8 @@
 		STAT_INTELLIGENCE = -2,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 35,
+		/datum/attribute/skill/combat/wrestling = 35,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/medicine = 20,
@@ -21,7 +21,7 @@
 		STAT_INTELLIGENCE = 1,
 	)
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(30, 30)
+		/datum/attribute/skill/combat/polearms = list(35, 35)
 	)
 
 /datum/job/advclass/sacrestant/disciple
@@ -69,7 +69,7 @@
 	spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE) // this will fail on the unarmed discipline
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 45)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 		if("Katar")
