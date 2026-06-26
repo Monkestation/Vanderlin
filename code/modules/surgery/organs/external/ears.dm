@@ -85,12 +85,12 @@
 ///Called when temporary deafness begins
 /obj/item/organ/ears/proc/on_deafened()
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(adjust_speech))
-	ADD_TRAIT(owner, TRAIT_DEAF, EAR_DAMAGE_REF(src))
+	ADD_TRAIT(owner, TRAIT_DEAF, EAR_DAMAGE)
 	SEND_SOUND(owner, ringing)
 
 ///Called when temporary deafness reaches zero. Has to have an 'organ_owner' arg, because by the time it's called on 'on_mob_remove', owner is already null
 /obj/item/organ/ears/proc/on_undeafened(mob/living/organ_owner = owner)
-	REMOVE_TRAIT(organ_owner, TRAIT_DEAF, EAR_DAMAGE_REF(src))
+	REMOVE_TRAIT(organ_owner, TRAIT_DEAF, EAR_DAMAGE)
 	UnregisterSignal(organ_owner, COMSIG_MOB_SAY)
 
 /// Being deafened by loud noises makes you shout
