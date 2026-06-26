@@ -1,5 +1,0 @@
-author: "DarthGP"
-delete-after: True
-changes:
-  - rscadd: "Made bow a selectable weapon for minor nobles"
-  - bugfix: "Fixed various issues with the classes"
