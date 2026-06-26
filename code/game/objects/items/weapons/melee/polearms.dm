@@ -380,10 +380,9 @@
 	gripsprite = FALSE
 	force = DAMAGE_SPEAR - 1
 	force_wielded = DAMAGE_SPEAR + 3
-	throwforce = DAMAGE_SPEAR_WIELD + 5
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	throwforce = DAMAGE_SPEAR_WIELD + 2
+	throwforce = DAMAGE_SPEAR_WIELD + 5
 	max_blade_int = 80
 	max_integrity = INTEGRITY_STANDARD
 	throw_speed = 4
@@ -396,11 +395,10 @@
 	icon_state = "javelin"
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	throwforce = DAMAGE_SPEAR_WIELD + 3
+	throwforce = DAMAGE_SPEAR_WIELD + 10
 	gripsprite = FALSE
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR + 3
-	throwforce = DAMAGE_SPEAR_WIELD + 10
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 1.25
 	throw_speed = 4
@@ -416,7 +414,7 @@
 	force_wielded = DAMAGE_SPEAR + 3
 	melting_material = /datum/material/silver
 	melt_amount = 75
-	throwforce = DAMAGE_SPEAR_WIELD + 3
+	throwforce = DAMAGE_SPEAR_WIELD + 8
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 0.8
 	throw_speed = 4
