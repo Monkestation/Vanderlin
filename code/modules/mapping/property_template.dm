@@ -96,12 +96,12 @@
 
 /datum/map_template/vanderlin_mercapt_5
 	name = "Vanderlin Mercenary Apartment Five"
-	mappath = "_maps/map_files/vanderlin/house_templates/merc4.dmm"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc5.dmm"
 	width = 6
 	height = 6
 
 /datum/map_template/vanderlin_mercapt_6
 	name = "Vanderlin Mercenary Apartment Six"
-	mappath = "_maps/map_files/vanderlin/house_templates/merc4.dmm"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc6.dmm"
 	width = 6
 	height = 6
