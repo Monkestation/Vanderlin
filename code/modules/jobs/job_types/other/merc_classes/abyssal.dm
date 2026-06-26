@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 33,
 		/datum/attribute/skill/combat/swords = 20,
 	)
 
@@ -77,7 +77,7 @@
 	head = /obj/item/clothing/head/helmet/winged
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	beltl = /obj/item/weapon/sword/sabre/cutlass
-	wrists = /obj/item/clothing/wrists/bracers/leather
+	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor,
