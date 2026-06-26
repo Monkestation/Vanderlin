@@ -93,7 +93,6 @@
 		/obj/item/needle,
 		/obj/item/reagent_containers/glass/bottle/vial/healthpot,
 		/obj/item/reagent_containers/glass/bottle/vial/healthpot,
-		/obj/item/reagent_containers/glass/bottle/vial/antidote,
-		/obj/item/reagent_containers/glass/bottle/vial/antidote,
+		/obj/item/reagent_containers/glass/bottle/diseasecure,
 	)
 	contents_tag = "items"
