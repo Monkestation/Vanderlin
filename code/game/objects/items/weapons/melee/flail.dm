@@ -125,10 +125,14 @@
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/flail/psydon/relic
-	name = "Consecratia"
+	name = "\proper consecratia"
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
 	item_weight = 1.5 KILOGRAMS
+
+/obj/item/weapon/flail/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
 
 
 //................ Peasant Flail ............... // A little confusing still

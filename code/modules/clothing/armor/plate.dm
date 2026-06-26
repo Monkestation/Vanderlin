@@ -129,19 +129,16 @@
 	item_weight = 8.75 KILOGRAMS
 
 /obj/item/clothing/armor/plate/silver
-	slot_flags = ITEM_SLOT_ARMOR
 	name = "templar's half-plate"
 	desc = "Noc's holy silver, one fifth. Steel, three fifths. Chosen Material, one fifth. The armor of the Templar, protector and warrior of the Ten's Faithful."
-	body_parts_covered = COVERAGE_TORSO
 	icon_state = "silverhalfplate"
-	item_state = "silverhalfplate"
+	body_parts_covered = COVERAGE_TORSO
 	armor = ARMOR_PLATE
 	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
 	allowed_sex = list(MALE, FEMALE)
-	melting_material = /datum/material/steel
+	melting_material = /datum/material/silver
 	melt_amount = 275
 	armor_class = AC_MEDIUM
-
 
 /obj/item/clothing/armor/plate/blkknight
 	name = "blacksteel plate"

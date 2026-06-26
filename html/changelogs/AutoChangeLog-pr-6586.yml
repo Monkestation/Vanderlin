@@ -1,0 +1,7 @@
+author: "Spitegremlin"
+delete-after: True
+changes:
+  - rscadd: "Added new axe and sprites"
+  - bugfix: "fixed scabbard and hand scabbard sprites and sprite names, also bone javelin had a stray pixel, also fixed bearded axe palette"
+  - image: "New axe sprites"
+  - code_imp: "Changed some code"
