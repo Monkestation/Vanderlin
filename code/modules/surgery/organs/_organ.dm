@@ -597,7 +597,7 @@
 	. += span_notice("It should be inserted in the [parse_zone(zone)].")
 
 	if(organ_flags & ORGAN_FAILING)
-		if(status == ORGAN_ROBOTIC)
+		if(IS_ROBOTIC_ORGAN(src))
 			. += span_warning("[src] seems to be broken.")
 			return
 		. += span_warning("[src] has decayed for too long, and has turned a sickly color. Only a skilled physican could restore this.")
@@ -794,6 +794,10 @@
 			organ.regenerate_organ()
 		set_heartattack(FALSE)
 
+		// Ears have aditional var "deaf", need to update it too
+		var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+		ears.adjust_temporary_deafness(-INFINITY)
+
 		return
 
 	// Default organ fixing handling
@@ -828,12 +832,8 @@
 	if(!ears)
 		ears = new()
 		ears.Insert(src)
-	// ears.adjustEarDamage(-INFINITY, -INFINITY) // actually do: set_organ_damage(0) and deaf = 0
-
-	// heal ears after healing traits, since ears check TRAIT_DEAF trait
-	// when healing.
-	restoreEars()
-
+	ears.setOrganDamage(0)
+	ears.adjust_temporary_deafness(-INFINITY)
 /**
  * Robotic organs do not feel pain, simply for balancing reasons
  * Thus lowering the shock of IPCs and other synths is easier, as

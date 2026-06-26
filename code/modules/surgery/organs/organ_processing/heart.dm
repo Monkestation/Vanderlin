@@ -17,8 +17,7 @@
 /// Handles the failure messaging and cardiac arrest flagging for a failing heart.
 /// Separated from handle_pulse so the logic is readable and the failed flag is managed cleanly.
 /datum/organ_process/heart/proc/handle_heart_failure(mob/living/carbon/owner, delta_time, times_fired)
-	for(var/thing in owner.getorganslotlist(ORGAN_SLOT_HEART))
-		var/obj/item/organ/heart/heart = thing
+	for(var/obj/item/organ/heart/heart as anything in owner.getorganslotlist(ORGAN_SLOT_HEART))
 		if(!istype(heart))
 			continue
 		if(heart.is_failing() && owner.needs_heart())
