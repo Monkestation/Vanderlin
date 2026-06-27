@@ -99,10 +99,6 @@
 	max_integrity = 300
 	repair_time = 20 SECONDS
 
-/obj/item/clothing/armor/regenerating/skin/disciple/Initialize(mapload) // Disciples get passive regen from their armour since it's their primary lifeline.
-	. = ..()
-	enchant(/datum/enchantment/life_eternal)
-
 /obj/item/clothing/armor/regenerating/skin/easttats
 	name = "bouhoi bujeog tattoos"
 	desc = "A mystic style of tattoos used to honor the kin that fell generations ago, a sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. Its movement causes you to shudder."

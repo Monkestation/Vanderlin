@@ -4,6 +4,7 @@
 		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 3,
 		STAT_INTELLIGENCE = -2,
+		STAT_SPEED = -1,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
