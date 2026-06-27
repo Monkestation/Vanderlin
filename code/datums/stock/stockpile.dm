@@ -258,7 +258,7 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
-/datum/stock/stockpile/pompkaun
+/datum/stock/stockpile/ollie
 	name = "Ollies"
 	desc = "Round, green fruits good for making into oil."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/ollie
