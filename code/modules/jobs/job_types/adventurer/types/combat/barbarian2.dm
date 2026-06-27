@@ -77,7 +77,7 @@
 	name = "Barbarian (Adventurer)"
 	head = /obj/item/clothing/head/helmet/heavy/horned
 	backl = /obj/item/storage/backpack/satchel
-	shirt = /obj/item/clothing/armor/regenerating/skin/disciple/hardbody
+	shirt = /obj/item/clothing/armor/regenerating/skin/easttats/hardbody
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	belt = /obj/item/storage/belt/leather/adventurer
 	shoes = /obj/item/clothing/shoes/boots/leather
