@@ -10,7 +10,7 @@
 	)
 	sound_effect = "wetbreak"
 	whp = 40
-	woundpain = 60
+	woundpain = 30
 	mob_overlay = "frac"
 	can_sew = FALSE
 	can_cauterize = FALSE
@@ -281,7 +281,7 @@
 		"The ribs are mauled!",
 		"The ribcage caves in!",
 	)
-	woundpain = 50
+	woundpain = 25
 	whp = 50
 	// Lose 224.6 blood over 18 ticks then clot
 	bleed_rate = 0.4
