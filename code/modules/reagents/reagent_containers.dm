@@ -108,6 +108,18 @@
 	if(do_splash)
 		SplashReagents(hit_atom, TRUE)
 
+/obj/item/reagent_containers/heating_act()
+	reagents.expose_temperature(1000)
+	return ..()
+
+/obj/item/reagent_containers/temperature_expose(exposed_temperature, exposed_volume)
+	reagents.expose_temperature(exposed_temperature)
+
+/obj/item/reagent_containers/proc/on_reagent_change(changetype)
+	SIGNAL_HANDLER
+
+	update_appearance(UPDATE_OVERLAYS)
+
 /**
  * Reagent container interactions clicked by
  *
@@ -519,20 +531,11 @@
 /obj/item/reagent_containers/proc/apply_initial_label()
 	return
 
-/obj/item/reagent_containers/heating_act()
-	reagents.expose_temperature(1000)
-	..()
-
-/obj/item/reagent_containers/temperature_expose(exposed_temperature, exposed_volume)
-	reagents.expose_temperature(exposed_temperature)
-
-/obj/item/reagent_containers/proc/on_reagent_change(changetype)
-	SIGNAL_HANDLER
-
-	update_appearance(UPDATE_OVERLAYS)
-
 /obj/item/reagent_containers/update_overlays()
 	. = ..()
+
+	underlays.Cut()
+
 	if(labelled)
 		. += mutable_appearance(icon, "[icon_state]_label")
 
@@ -563,9 +566,9 @@
 	filling.alpha = mix_alpha_from_reagents(reagents.reagent_list)
 
 	if(fill_icon_under_override)
-		filling.layer = layer - 0.01
-
-	. += filling
+		underlays += filling
+	else
+		. += filling
 
 	var/datum/reagent/master = reagents.get_master_reagent()
 	if(master?.glows)
