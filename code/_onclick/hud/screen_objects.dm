@@ -161,13 +161,15 @@
 	var/list/modifiers = params2list(params)
 	if(modifiers["middle"])
 		var/mob/M = usr
-		for(var/datum/recipe as anything in M.mind?.learned_recipes)
-			book.types |= recipe.type
+
 		var/datum/job/job = SSjob.GetJob(M.job)
 		if(job && !book)
 			book = new job.book_type(null)
 		else if(QDELETED(book))
 			book = new(null)
+
+		for(var/datum/recipe as anything in M.mind?.learned_recipes)
+			book.types |= recipe.type
 
 		book.ui_interact(usr)
 		return
