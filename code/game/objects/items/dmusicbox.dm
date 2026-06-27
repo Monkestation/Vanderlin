@@ -55,10 +55,12 @@
 		icon_state = "mbox[loaded]"
 
 /obj/item/dmusicbox/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!loaded)
+	if(loaded)
 		return NONE
+
 	if(!istype(tool, /obj/item/coin/gold))
 		return NONE
+
 	loaded = TRUE
 	qdel(tool)
 	update_appearance(UPDATE_ICON_STATE)
