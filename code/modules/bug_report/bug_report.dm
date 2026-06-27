@@ -142,3 +142,4 @@
 		return
 	//SEND_SOUND(user_client, 'sound/misc/compiler-stage2.ogg')
 	to_chat(user_client, span_notice("Bug submitted successfully."))
+	qdel(src)
