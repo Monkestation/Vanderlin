@@ -54,7 +54,14 @@
 	var/map = user_data["map"]
 
 	var/report_title = params["report_title"]
+	if(!report_title)
+		to_chat(user_client, span_danger("Please enter a title"))
+		return
+
 	var/report_content = params["report_body"]
+	if(!report_content)
+		to_chat(user_client, span_danger("Please enter a body"))
+		return
 
 	var/severity = params["severity"]
 	var/list/labels = params["labels"]
