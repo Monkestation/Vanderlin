@@ -173,12 +173,14 @@
 	. = ..()
 	if(!.)
 		return
+	owner.become_blind(id) // to apply static black blindness
 	ADD_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 
 	owner.cmode = FALSE
 	owner.set_typing_indicator(FALSE)
 
 /datum/status_effect/incapacitating/sleeping/on_remove()
+	owner.cure_blind(id)
 	REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 	owner.refresh_looping_ambience()
 

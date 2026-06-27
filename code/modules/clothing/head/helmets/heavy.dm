@@ -81,6 +81,7 @@
 	icon_state = "psydonbarbute"
 	item_state = "psydonbarbute"
 	block2add = FOV_BEHIND
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
@@ -88,6 +89,7 @@
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
 	block2add = FOV_BEHIND
+	melting_material = /datum/material/silver
 
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
@@ -96,6 +98,7 @@
 	icon_state = "ironplate"
 	flags_inv = HIDEEARS
 	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	block2add = FOV_BEHIND
 
@@ -409,6 +412,7 @@
 	icon_state = "deepabyssorhelm"
 	item_state = "deepabyssorhelm"
 	item_weight = 5.5 KILOGRAMS
+	melting_material = /datum/material/bronze
 
 //............... Sinistar (Graggar) Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/sinistar
@@ -614,7 +618,6 @@
 	desc = "Its shape confounds and confuses the enemies of Psydon. Offering unfound protection in its visage, the gaze is horrific to those without understanding."
 	icon_state = "absolutionisthelm"
 	item_state = "absolutionisthelm"
-	emote_environment = 3
 	block2add = null
 	body_parts_covered = FULL_HEAD|NECK
 	max_integrity = 450 // Worst vision. Yes.
@@ -624,6 +627,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	clothing_flags = NONE
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/heavy/psybucket
 	name = "psydonian bucket helmet"
@@ -634,6 +638,7 @@
 	adjustable = CAN_CADJUST
 	block2add = FOV_BEHIND
 	max_integrity = 400
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/heavy/psysallet
 	name = "psydonian sallet"
@@ -644,6 +649,7 @@
 	adjustable = CAN_CADJUST
 	block2add = FOV_BEHIND
 	max_integrity = 400
+	melting_material = /datum/material/silver
 
 //............... Gronn Heavy Helmet ...............//
 /obj/item/clothing/head/helmet/heavy/ironplate/gronn

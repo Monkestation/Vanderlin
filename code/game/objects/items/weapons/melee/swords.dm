@@ -1154,6 +1154,10 @@
 	minstr = 9 //So the ordinator can use his sword as old.
 	item_weight = 2.5 KILOGRAMS
 
+/obj/item/weapon/sword/long/greatsword/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 1, TRUE)
+
 /obj/item/weapon/sword/long/broadsword/psy
 	name = "old psydonian broadsword"
 	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Its edge remains as lethal as ever, however."
