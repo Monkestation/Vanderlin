@@ -75,7 +75,7 @@ export const BugReport = () => {
     if (value === title) {
       return;
     }
-    setTitle(title);
+    setTitle(value);
   }
 
   return (

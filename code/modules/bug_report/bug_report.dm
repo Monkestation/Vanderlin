@@ -33,14 +33,18 @@
 	if(action != "submit")
 		return
 
+	var/client/user_client = ui.user?.client
+	if(!user_client)
+		return
+
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(!githuburl)
-		to_chat(src, span_danger("The Github URL is not set in the server configuration."))
+		to_chat(user_client, span_danger("The Github URL is not set in the server configuration."))
 		return
 
 	var/issue_key = CONFIG_GET(string/issue_key)
 	if(!issue_key)
-		to_chat(src, span_danger("Issue Reporting is not properly configured."))
+		to_chat(user_client, span_danger("Issue Reporting is not properly configured."))
 		return
 
 	var/user_data = params["user_data"]
@@ -59,10 +63,6 @@
 		labels += severity
 	else
 		severity = null
-
-	var/real_labels = null
-	if(length(labels))
-		real_labels = labels.Join(",") // Github API requires this
 
 	// Keep a static version of the template to avoid reading file
 	var/static/issue_template = file2text(".github/ISSUE_TEMPLATE/bug_report.md")
@@ -101,12 +101,12 @@
 	var/list/body_structure = list(
 		"title" = issue_title,
 		"body" = local_template,
-		"labels" = real_labels,
+		"labels" = labels,
 	)
 
 	var/datum/http_request/issue_report = new
 	rustg_file_write(local_template, "[GLOB.log_directory]/issue_reports/[ckey]-[world.time]-[SANITIZE_FILENAME(issue_title)].txt")
-	message_admins("BUGREPORT: Bug report filed by [ADMIN_LOOKUPFLW(src)], Title: [strip_html(issue_title)]")
+	message_admins("BUGREPORT: Bug report filed by [ADMIN_LOOKUPFLW(user_client)], Title: [strip_html(issue_title)]")
 	issue_report.prepare(
 		RUSTG_HTTP_METHOD_POST,
 		"https://api.github.com/repos/[CONFIG_GET(string/issue_slug)]/issues",
@@ -117,14 +117,14 @@
 			"X-GitHub-Api-Version"="2022-11-28"
 		)
 	)
-	to_chat(src, span_notice("Sending issue report..."))
-	//SEND_SOUND(src, 'sound/misc/compiler-stage1.ogg')
+	to_chat(user_client, span_notice("Sending issue report..."))
+	//SEND_SOUND(user_client, 'sound/misc/compiler-stage1.ogg')
 	issue_report.begin_async()
-	UNTIL(issue_report.is_complete() || !src) //Client fuckery.
+	UNTIL(issue_report.is_complete() || !user_client) //Client fuckery.
 	var/datum/http_response/issue_response = issue_report.into_response()
 	if(issue_response.errored || issue_response.status_code != 201)
-		//SEND_SOUND(src, 'sound/misc/compiler-failure.ogg')
-		to_chat(src, "[span_alertwarning("Bug report FAILED!")]\n\
+		//SEND_SOUND(user_client, 'sound/misc/compiler-failure.ogg')
+		to_chat(user_client, "[span_alertwarning("Bug report FAILED!")]\n\
 		[span_warning("Please adminhelp immediately!")]\n\
 		[span_notice("Code:[issue_response.status_code || "9001 CATASTROPHIC ERROR"]")]")
 
@@ -140,5 +140,5 @@
 		)
 
 		return
-	//SEND_SOUND(src, 'sound/misc/compiler-stage2.ogg')
-	to_chat(src, span_notice("Bug submitted successfully."))
+	//SEND_SOUND(user_client, 'sound/misc/compiler-stage2.ogg')
+	to_chat(user_client, span_notice("Bug submitted successfully."))
