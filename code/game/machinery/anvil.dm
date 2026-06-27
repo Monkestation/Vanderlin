@@ -113,6 +113,8 @@
 	else if(working_material.smeltresult)
 		if(istype(working_material.smeltresult, /obj/item/ingot))
 			expected_ingot_type = working_material.smeltresult
+			if(istype(expected_ingot_type, /obj/item/ingot/steel_slag))
+				expected_ingot_type = /obj/item/ingot/steel
 	if(!expected_ingot_type || !istype(item, expected_ingot_type))
 		to_chat(user, span_warning("This isn't the right material to restore [working_material]."))
 		return FALSE
