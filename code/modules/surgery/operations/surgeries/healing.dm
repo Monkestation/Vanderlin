@@ -63,21 +63,21 @@
 /datum/surgery_operation/basic/tend_wounds/proc/check_for_injuries(mob/living/carbon/patient, brute_check, burn_check)
 	if(!istype(patient))
 		return (brute_check && patient.getBruteLoss() > 0 || burn_check && patient.getFireLoss() > 0)
-	var/brute_found = !brute_check
-	var/burn_found = !burn_check
+	var/brute_found = FALSE
+	var/burn_found = FALSE
 	var/mob/living/carbon/carbon_patient = patient
 	for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-		if(brute_found && burn_found)
+		if((!brute_check || brute_found) && (!burn_check || burn_found))
 			break
 		if(injury.required_status != required_bodytype)
 			continue
 		if(!injury.can_heal() || injury.is_surgical())
 			continue
-		if(!brute_found && injury.damage_type & BRUTE_WOUND_TYPES)
+		if(brute_check && injury.damage_type & BRUTE_WOUND_TYPES)
 			brute_found = TRUE
-		if(!burn_found && injury.damage_type & FIRE_WOUND_TYPES)
+		if(burn_check && injury.damage_type & FIRE_WOUND_TYPES)
 			burn_found = TRUE
-	return brute_found && burn_found
+	return (brute_check && brute_found) || (burn_check && burn_found)
 
 /datum/surgery_operation/basic/tend_wounds/get_radial_options(mob/living/patient, obj/item/tool, operating_zone)
 	var/list/options = list()
