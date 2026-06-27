@@ -223,5 +223,7 @@
 	penfactor = AP_SWORD_CHOP + 5
 	acc_bonus = -50 // Only good if target is on the ground
 	chargetime = 5
+	chargedrain = 2
+	no_early_release = TRUE
 	misscost = 50
 	swingdelay = 3
