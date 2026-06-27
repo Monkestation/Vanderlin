@@ -169,6 +169,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 //................ Iron Pot Helmet ............... //
 /obj/item/clothing/head/helmet/ironpot

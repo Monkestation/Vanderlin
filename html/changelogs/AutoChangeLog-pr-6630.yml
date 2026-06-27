@@ -1,6 +1,0 @@
-author: "Wrench-1"
-delete-after: True
-changes:
-  - rscadd: "Added Relic Psydonian Knuckles \"Confidence and Conviction,\" and Relic Psydonion Katars \"Anguish and Agony\" for Preceptor Prafekt"
-  - qol: "Consecratia, Crusade and Sanctum now comes pre-blessed"
-  - qol: "Removed Ordinators rich coin pouch, and moved it into the Prafekt's room so now every Prafekt can start with a good bit of money"
