@@ -537,6 +537,7 @@ All foods are distributed among various categories. Use common sense.
 		SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
 
 		on_consume(eater)
+		checkLiked(1, eater)
 
 		playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 		user.changeNext_move(CLICK_CD_FAST)
