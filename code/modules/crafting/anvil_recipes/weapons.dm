@@ -785,6 +785,12 @@
 	created_item = /obj/item/weapon/sword/long
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/steel/kriegsmesser
+	name = "KriegsMesser (+Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/kriegmesser
+
 /datum/anvil_recipe/weapons/steel/mace_steel
 	name = "Steel Mace (+Bar)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing

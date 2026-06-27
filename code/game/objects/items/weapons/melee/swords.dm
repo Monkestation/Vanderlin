@@ -884,6 +884,20 @@
 			if("onbelt")
 				return list("shrink" = 0.6,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
+
+//................Kriegmesser...................//
+/obj/item/weapon/sword/long/kriegmesser
+	name = "kriegmesser"
+	icon_state = "kriegmesser"
+	desc = "A long, single-edged sword with a crossguard and a long grip. It was designed to chop over stab, like a heavy cleaver."
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 3
+	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
+	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST
+	item_weight = 1.8 KILOGRAMS
+
 //................ Heirloom Sword ............... //
 /obj/item/weapon/sword/long/heirloom
 	icon_state = "heirloom"
@@ -1436,8 +1450,9 @@
 	name = "executioner's sword"
 	icon_state = "exe"
 	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime, executions."
-	possible_item_intents = list(SWORD_STRIKE)
-	gripped_intents = list(SWORD_CHOP)
+	force_wielded = DAMAGE_GREATSWORD_WIELD + 4
+	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
+	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
 	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	item_weight = 3.5 KILOGRAMS
@@ -1460,16 +1475,12 @@
 	desc = "This wicked executioner's blade calls for order."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "astratasword"
-	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
 	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/exe/silver
 	name = "silver executioner's sword"
 	desc = "An executioner's sword made of silver, best used against beasts of the nite, to put them to rest."
 	icon_state = "silverexealt"
-	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
 	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
