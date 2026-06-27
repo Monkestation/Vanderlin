@@ -233,3 +233,10 @@
       so now every Prafekt can start with a good bit of money
   tired-wired:
   - rscdel: Removed necran acolyte, play gravetender instead
+2026-06-27:
+  CheffieGithub:
+  - rscadd: Add missing strain sound and emote to guarding. credit to FreeStylaLT.
+  - balance: Guard stance is only bypassed by behind and out of range melee attacks
+      not fully stopped.
+  - bugfix: Fixed hefty swing being able to stack damage
+  - bugfix: Fixed being able to attack while guarding.

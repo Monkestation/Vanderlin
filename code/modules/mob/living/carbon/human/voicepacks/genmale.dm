@@ -78,6 +78,8 @@
 				used = list('sound/vo/male/gen/scream (1).ogg','sound/vo/male/gen/scream (2).ogg')
 				if(prob(1))
 					used = 'sound/vo/male/wilhelm_scream.ogg'
+			if("strain")
+				used = 'sound/vo/male/gen/strain.ogg'
 			if("shh")
 				used = 'sound/vo/male/gen/shh.ogg'
 			if("sickcough")
