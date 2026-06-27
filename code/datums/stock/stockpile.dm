@@ -258,6 +258,17 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
+/datum/stock/stockpile/pompkaun
+	name = "Ollies"
+	desc = "Round, green fruits good for making into oil."
+	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/ollie
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
+	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
 /datum/stock/stockpile/strawberry
 	name = "Strawberries"
 	desc = "A variety of sweet berry native to Wintermare."
@@ -425,13 +436,57 @@
 
 /datum/stock/stockpile/drowsbane
 	name = "Drowsbane"
-	desc = "A type of lichen known for it's fiery effects on the palate."
+	desc = "A type of lichen known for its fiery effects on the palate."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 6
 	export_price = 4
 	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/meat
+	name = "Meat"
+	desc = "A cut of red meat."
+	item_type = /obj/item/reagent_containers/food/snacks/meat/steak
+	held_items = 2
+	payout_price = 4
+	withdraw_price = 12
+	export_price = 8
+	importexport_amt = 10
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/poultry
+	name = "Poultry"
+	desc = "A whole plucked bird."
+	item_type = /obj/item/reagent_containers/food/snacks/meat/poultry
+	held_items = 2
+	payout_price = 3
+	withdraw_price = 9
+	export_price = 6
+	importexport_amt = 10
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/egg
+	name = "Egg"
+	desc = "An essential part of many breakfast and baking recipes."
+	item_type = /obj/item/reagent_containers/food/snacks/egg
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
+	importexport_amt = 10
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/fat
+	name = "Fat"
+	desc = "The parts of an animal best used for greasing and frying."
+	item_type = /obj/item/reagent_containers/food/snacks/fat
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
+	importexport_amt = 10
 	stockpile_id = STOCK_FOOD
 
 /datum/stock/stockpile/coal
