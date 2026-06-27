@@ -131,17 +131,17 @@
 		return
 
 	if(is_apprentice())
-		to_chat(user, span_notice("[p_they()] are under the tutelage of someone else."))
+		to_chat(user, span_notice("[p_they(TRUE)] are under the tutelage of someone else."))
 		return
 
 	var/datum/job/my_job = mind?.assigned_role
 	if(istype(my_job))
 		if(!my_job.can_be_apprentice)
-			to_chat(user, span_notice("[p_they()] cannot be tutored."))
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
 
 		if(my_job.parent_job && !my_job.parent_job.can_be_apprentice)
-			to_chat(user, span_notice("[p_they()] cannot be tutored."))
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
 
 	var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
