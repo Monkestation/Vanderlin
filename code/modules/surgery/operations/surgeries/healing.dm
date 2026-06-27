@@ -87,7 +87,7 @@
 		if(!all_healing)
 			all_healing = new()
 			all_healing.image = image(/obj/item/natural/cloth/bandage)
-			all_healing.name = "Tend Bruises and Burns"
+			all_healing.name = "Advanced Tend Bruises and Burns"
 			all_healing.info = "Heal a patient's superficial bruises, cuts, and burns."
 			LAZYSET(cached_healing_options, "[COMBO_SURGERY]", all_healing)
 
@@ -232,7 +232,7 @@
 		var/burn_heal_left = burn_healed
 		var/mob/living/carbon/carbon_patient = patient
 		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
-			if(!brute_heal_left <= 0 && !burn_heal_left <= 0)
+			if(brute_heal_left <= 0 && burn_heal_left <= 0)
 				break
 			if(injury.required_status != required_bodytype)
 				continue
