@@ -64,13 +64,11 @@
 	set desc = "Report an issue"
 	set hidden = 1
 
-	var/githuburl = CONFIG_GET(string/githuburl)
-	if(!githuburl)
+	if(!CONFIG_GET(string/githuburl))
 		to_chat(src, span_danger("The Github URL is not set in the server configuration."))
 		return
 
-	var/issue_key = CONFIG_GET(string/issue_key)
-	if(!issue_key)
+	if(!CONFIG_GET(string/issue_key))
 		to_chat(src, span_danger("Issue Reporting is not properly configured."))
 		return
 
@@ -85,83 +83,8 @@
 	if(browser_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
-	// Keep a static version of the template to avoid reading file
-	var/static/issue_template = file2text(".github/ISSUE_TEMPLATE/bug_report.md")
-
-	// Get a local copy of the template for modification
-	var/local_template = issue_template
-
-	local_template = replacetext(local_template, "## Map:\n", "## Map:\n[SSmapping.config.map_name]")
-
-	// Insert round
-	if(GLOB.round_id)
-		local_template = replacetext(local_template, "## Round ID:\n", "## Round ID:\n[GLOB.round_id]")
-
-	// Insert testmerges
-	if(length(GLOB.revdata.testmerge))
-		var/list/all_tms = list()
-		for(var/datum/tgs_revision_information/test_merge/tm as anything in GLOB.revdata.testmerge)
-			all_tms += "- \[[tm.title]\]([githuburl]/pull/[tm.number])"
-		var/all_tms_joined = all_tms.Join("\n") // for some reason this can't go in the []
-		local_template = replacetext(local_template, "## Testmerges:\n", "## Testmerges:\n[all_tms_joined]")
-
-	var/issue_title = browser_input_text(src, "Please give the issue a title", "Issue Title")
-	if(!issue_title)
-		return
-	var/user_description = browser_input_text(src, "Please describe the issue you are reporting", "Issue Body", multiline = TRUE)
-	if(!user_description)
-		return
-
-	local_template = replacetext(local_template, "## Reproduction:\n", "## Reproduction:\n[user_description]")
-
-	var/list/client_info = list()
-	client_info += "BYOND: [byond_version].[byond_build]"
-	client_info += "Ckey: [ckey]"
-
-	local_template = replacetext(local_template, "## Client Information:\n", "## Client Information:\n[client_info.Join("\n")]")
-
-	var/list/body_structure = list(
-		"title" = issue_title,
-		"body" = local_template,
-	)
-	var/datum/http_request/issue_report = new
-	rustg_file_write(local_template, "[GLOB.log_directory]/issue_reports/[ckey]-[world.time]-[SANITIZE_FILENAME(issue_title)].txt")
-	message_admins("BUGREPORT: Bug report filed by [ADMIN_LOOKUPFLW(src)], Title: [strip_html(issue_title)]")
-	issue_report.prepare(
-		RUSTG_HTTP_METHOD_POST,
-		"https://api.github.com/repos/[CONFIG_GET(string/issue_slug)]/issues",
-		json_encode(body_structure), //this is slow slow slow but no other options buckaroo
-		list(
-			"Accept"="application/vnd.github+json",
-			"Authorization"="Bearer [issue_key]",
-			"X-GitHub-Api-Version"="2022-11-28"
-		)
-	)
-	to_chat(src, span_notice("Sending issue report..."))
-	//SEND_SOUND(src, 'sound/misc/compiler-stage1.ogg')
-	issue_report.begin_async()
-	UNTIL(issue_report.is_complete() || !src) //Client fuckery.
-	var/datum/http_response/issue_response = issue_report.into_response()
-	if(issue_response.errored || issue_response.status_code != 201)
-		//SEND_SOUND(src, 'sound/misc/compiler-failure.ogg')
-		to_chat(src, "[span_alertwarning("Bug report FAILED!")]\n\
-		[span_warning("Please adminhelp immediately!")]\n\
-		[span_notice("Code:[issue_response.status_code || "9001 CATASTROPHIC ERROR"]")]")
-
-		log_runtime(
-			"Failed to send issue report. errored=[issue_response.errored], status_code=[isnull(issue_response.status_code) ? "(null)" : issue_response.status_code]",
-			list(
-				"status_code" = issue_response.status_code,
-				"errored" = issue_response.errored,
-				"headers" = issue_response.headers?.Copy(),
-				"error" = issue_response.error,
-				"body" = issue_report.body,
-			)
-		)
-
-		return
-	//SEND_SOUND(src, 'sound/misc/compiler-stage2.ogg')
-	to_chat(src, span_notice("Bug submitted successfully."))
+	var/datum/bug_report/reporter = new()
+	reporter.ui_interact(mob)
 
 /client/verb/mentorhelp()
 	set name = "Mentorhelp"
