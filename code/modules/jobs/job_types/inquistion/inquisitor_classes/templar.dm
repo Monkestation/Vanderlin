@@ -29,8 +29,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/psydoniantemplar
 
 	traits = list(
-		TRAIT_HEAVYARMOR, // they need both heavy and medium, using a baroque mix of both.
-		TRAIT_MEDIUMARMOR,
+		TRAIT_HEAVYARMOR,
 		TRAIT_STEELHEARTED,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
@@ -101,5 +100,4 @@
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
 	)
