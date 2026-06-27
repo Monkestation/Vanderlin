@@ -10,6 +10,7 @@
 	side = RIGHT_SIDE
 	sellprice = DEFAULT_ORGAN_VALUE/2
 
+	pain_multiplier = 0.35 / 2
 	organ_volume = 0.25
 	max_blood_storage = 2.5
 	current_blood = 2.5
