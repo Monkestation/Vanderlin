@@ -85,8 +85,7 @@
 		return NONE
 
 	if(!(tool.get_sharpness()))
-		to_chat(user, span_warning("\The [tool] is not sharp enough to engrave \the [src]!"))
-		return ITEM_INTERACT_BLOCKING
+		return NONE
 
 	var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [src]?", "Custom Inscription", custom_message, 150, TRUE)
 	if(!new_message || new_message == custom_message)
