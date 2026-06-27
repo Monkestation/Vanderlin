@@ -119,6 +119,8 @@
 	. = ..()
 	if(!.)
 		return
+	if(self_healing_effect && owner.get_chem_effect(self_healing_effect))
+		return TRUE
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
 		return FALSE
