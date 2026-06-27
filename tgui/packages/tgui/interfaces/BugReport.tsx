@@ -32,7 +32,7 @@ const SEVERITIES = [
   "Critical",
   "Major",
   "Minor",
-  "Trival",
+  "Trivial",
   SEVERITY_NONE,
 ]
 
