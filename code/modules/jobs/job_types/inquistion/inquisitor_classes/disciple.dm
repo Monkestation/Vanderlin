@@ -82,7 +82,7 @@
 /datum/outfit/disciple
 	name = "Disciple (Sacrestants)"
 	shoes = /obj/item/clothing/shoes/psydonboots
-	armor = /obj/item/clothing/armor/regenerating/skin/disciple // enchanted with "life eternal" for passive regen
+	armor = /obj/item/clothing/armor/regenerating/skin/disciple
 	backl = /obj/item/storage/backpack/satchel/otavan
 	belt = /obj/item/storage/belt/leather/rope/dark
 	pants = /obj/item/clothing/pants/tights/colored/black

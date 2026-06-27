@@ -75,13 +75,13 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "TAKE UP PSYDON'S ARMS.")
 	switch(weapon_choice)
 		if("Psydonic Longsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 30, 30, TRUE)
 		if("Psydonic War Axe", "Psydonic Mace", "Psydonic Poleaxe + Shortsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30, 30, TRUE)
 		if("Psydonic Whip", "Psydonic Flail")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 30, 30, TRUE)
 		if("Psydonic Spear + Handmace")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 30, 30, TRUE)
 
 /datum/outfit/psydoniantemplar
 	name = "Psydonian Templar (Sacrestants)"
