@@ -602,6 +602,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
 #define TRAIT_HARD_TO_STEAL "hard_to_steal"
+/// This item is a masterwork , used as a flag.
+#define TRAIT_MASTERWORK "masterwork"
 
 /// Turf is one that ai mobs will generally avoid pathing through
 /// Doesn't need to be applied to any turfs that override can_cross_safely

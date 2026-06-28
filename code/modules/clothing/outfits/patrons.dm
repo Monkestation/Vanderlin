@@ -322,8 +322,10 @@
 	max_integrity = ARMOR_INT_HELMET_HEAVY_STEEL - ARMOR_INT_HELMET_HEAVY_ADJUSTABLE_PENALTY
 	adjustable = CAN_CADJUST
 
-/obj/item/clothing/head/helmet/heavy/volfplate/puritan
+/obj/item/clothing/head/helmet/heavy/volfplate/beast
 	name = "volfskulle bascinet"
+	icon_state = "volfplate_avantyne"
+	item_state = "volfplate_avantyne"
 	desc = "A steel bascinet helmet with a snarling visor that protects the entire head and face. It mimics the guise of a terrible nitebeast; intimidating to the levyman, inspiring to the hunter."
 
 /obj/item/clothing/face/facemask/psydonmask

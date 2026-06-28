@@ -49,6 +49,12 @@
 		return TRUE
 
 	if(working_material)
+		if(istype(attacking_item, /obj/item/weapon/chisel))
+			. = TRUE
+			user.changeNext_move(CLICK_CD_MELEE)
+			handle_item_rename(user, working_material)
+			return
+
 		if(istype(attacking_item, /obj/item/weapon/hammer))
 			. = TRUE
 			user.changeNext_move(CLICK_CD_MELEE)
@@ -304,3 +310,18 @@
 		M.pixel_y = 4
 		M.pixel_x = 3
 		. += M
+
+/obj/machinery/anvil/proc/handle_item_rename(mob/user, /obj/item/working_material)
+	if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+		to_chat(user, span_warning("[working_material] its too cold to engrave."))
+		return
+	if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+		to_chat(user, span_warning("[working_material] its too cold to engrave."))
+		return
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/blacksmithing) < SKILL_LEVEL_EXPERT)
+		to_chat(user, span_warning("My hands are not steady enough for fine engraving."))
+		return
+	var/new_name = tgui_input_text(user, "What is the new name of this piece?", "ENGRAVING", max_length = 15, encode=FALSE)
+	if(new_name)
+		working_material.name = new_name
+		playsound(src, 'sound/items/bsmith_chisel.ogg', 50, TRUE)

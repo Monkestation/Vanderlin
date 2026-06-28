@@ -125,16 +125,6 @@
 	created_item = /obj/item/clothing/neck/gorget/hoplite
 	craftdiff = 0
 
-
-// BRONZE HELMET
-
-/datum/anvil_recipe/armor/bronze/helmet
-	name = "Deep Abyssor Helmet (+Bronze Bar)"
-	required_material = /obj/item/ingot/bronze
-	additional_items = list(/obj/item/ingot/bronze)
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/deepabyssor
-	craftdiff = 3
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 // --------- IRON -----------
 /datum/anvil_recipe/armor/iron
@@ -481,6 +471,13 @@
 	created_item = /obj/item/clothing/wrists/bracers/jackchain
 	output_amount = 2
 
+/datum/anvil_recipe/armor/steel/flutedhauberk
+	name = "fluted hauberk (+1 Hauberk + 1 Steel)"
+	required_material = /obj/item/ingot/steel
+	additional_items = list(/obj/item/clothing/armor/chainmail/hauberk, /obj/item/ingot/steel)
+	created_item = /obj/item/clothing/armor/chainmail/hauberk/fluted
+	craftdiff = 3
+
 /datum/anvil_recipe/armor/steel/platemask
 	name = "Steel Mask"
 	created_item = /obj/item/clothing/face/facemask/steel
@@ -505,13 +502,6 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/cloth)
 	created_item = /obj/item/clothing/armor/brigandine
 	craftdiff = 3
-/*
-/datum/anvil_recipe/armor/steel/brigadine
-	name = "Captain's brigandine (+Bar x2, +Cloth)"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/cloth)
-	created_item = /obj/item/clothing/armor/brigandine/captain
-	craftdiff = 6
-*/
 
 /datum/anvil_recipe/armor/steel/helmetbuc
 	name = "Great Helm"
@@ -524,71 +514,10 @@
 	additional_items = list(/obj/item/natural/cloth)
 	created_item = (/obj/item/clothing/head/helmet/heavy/bucket/keeper)
 
-/*
-/datum/anvil_recipe/armor/steel/sinistar
-	name = "Sinistar Helmet (+Steel Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/sinistar
-	additional_items = list(/obj/item/ingot/steel)
-*/
-
 /datum/anvil_recipe/armor/iron/shadow_plate_gauntlets
 	name = "Shadow Plate Gauntlets"
 	created_item = /obj/item/clothing/gloves/chain/iron/shadowgauntlets
 	craftdiff = 3
-
-/datum/anvil_recipe/armor/steel/templar
-	craftdiff = 3
-	abstract_type = /datum/anvil_recipe/armor/steel/templar
-
-/datum/anvil_recipe/armor/steel/templar/helmet_noc
-	name = "Noc Helmet (+Silver Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/noc
-	additional_items = list(/obj/item/ingot/silver)
-
-/datum/anvil_recipe/armor/steel/templar/gold_helmet
-	name = "Gold Helmet (+Gold Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/bucket/gold
-	additional_items = list(/obj/item/ingot/gold)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_astrata
-	name = "Astratan Helmet (+Gold Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/astrata
-	additional_items = list(/obj/item/ingot/gold)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_necra
-	name = "Necran Helmet (+Iron Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/necra
-	additional_items = list(/obj/item/ingot/iron)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_dendor
-	name = "Dendor Helmet (+Small Log)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
-	additional_items = list(/obj/item/grown/log/tree/small)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_pestra
-	name = "Pestran Helmet (+Iron Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-	additional_items = list(/obj/item/ingot/iron)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_malum
-	name = "Malum Helmet (+Iron Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
-	additional_items = list(/obj/item/ingot/iron)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_ravox
-	name = "Ravox Helmet (+Iron Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/ravox
-	additional_items = list(/obj/item/ingot/iron)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_xylix
-	name = "Xylix Helmet (+Iron Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/xylix
-	additional_items = list(/obj/item/ingot/iron)
-
-/datum/anvil_recipe/armor/steel/templar/helmet_abyssor
-	name = "Abyssor Helmet (+Bronze Bar)"
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
-	additional_items = list(/obj/item/ingot/bronze)
 
 /datum/anvil_recipe/armor/steel/chainleg
 	name = "Chain Chausses"
@@ -620,7 +549,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/steel/scalemail/steppe
-	name = "Lamellar (+Bar, +cured hide)"
+	name = "Lamellar Armor (+Bar, +cured hide)"
 	additional_items = list(/obj/item/ingot/steel,/obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/medium/scale/steppe
 	craftdiff = 3
@@ -652,6 +581,7 @@
 	craftdiff = 3
 
 // STEEL HELMETS
+
 /datum/anvil_recipe/armor/steel/nasal_helmet
 	name = "Nasal helmet"
 	created_item = /obj/item/clothing/head/helmet/nasal
@@ -716,23 +646,70 @@
 	created_item = /obj/item/clothing/head/helmet/heavy/viking
 	craftdiff = 3
 
+/datum/anvil_recipe/armor/steel/xylixhelm
+	name = "xylixian helmet (+1 Coin)"
+	additional_items = list(/obj/item/coin)
+	created_item = /obj/item/clothing/head/helmet/heavy/xylixhelm
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/steel/astratahelm
+	name = "astrata helmet (+1 Gold)"
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/clothing/head/helmet/heavy/astratahelm
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/steel/nochelm
+	name = "noc helmet (+1 Silver)"
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/head/helmet/heavy/nochelm
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/steel/necrahelm
+	name = "necra helmet (+1 Tallow)"
+	additional_items = list(/obj/item/reagent_containers/food/snacks/tallow)
+	created_item = /obj/item/clothing/head/helmet/heavy/necrahelm
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/steel/dendorhelm
+	name = "dendor helmet (+1 Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/clothing/head/helmet/heavy/dendorhelm
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/steel/abyssorgreathelm
+	name = "abyssorite helmet (+1 Bronze)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/clothing/head/helmet/heavy/abyssorgreathelm
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/steel/ravoxhelm
+	name = "justice eagle (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/heavy/ravoxhelm
+	craftdiff = 3
+
 /datum/anvil_recipe/armor/steel/helmetknight
-	name = "Knight's helmet (+Bar)"
+	name = "Knight's helmet (+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = (/obj/item/clothing/head/helmet/visored/knight)
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/steel/helmetsallv
-	name = "Visored sallet (+Bar)"
+	name = "Visored sallet (+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = (/obj/item/clothing/head/helmet/visored/sallet)
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/steel/hounskull
-	name = "Hounskull Helmet (+Bar x2)"
+	name = "Hounskull Helmet (+2 Steel)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = (/obj/item/clothing/head/helmet/visored/hounskull)
 	craftdiff = 4
+
+/datum/anvil_recipe/armor/steel/volfplate
+	name = "volf-face helm(+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/heavy/volfplate
 
 /datum/anvil_recipe/armor/steel/barding
 	name = "Saiga Barding, Chainmail (+1 Steel)"
@@ -746,25 +723,11 @@
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/barding/honse/chain
 
-/*
-/datum/anvil_recipe/armor/steel/warden_helm
-	name = "Warden Helmet (+Bar)"
-	additional_items = list(/obj/item/ingot/steel)
-	created_item = (/obj/item/clothing/head/helmet/visored/warden)
-	craftdiff = 6
-
 /datum/anvil_recipe/armor/steel/royal_knight_helm
-	name = "Royal Knight Helmet (+Bar x2)"
+	name = "Royal Knight Helmet (+2 Steel)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = (/obj/item/clothing/head/helmet/visored/royalknight)
 	craftdiff = 6
-
-/datum/anvil_recipe/armor/steel/captain_helm
-	name = "Captain's Helmet (+Bar x2)"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = (/obj/item/clothing/head/helmet/visored/captain)
-	craftdiff = 6
-*/
 
 // STEEL DECORATED HELMS
 /datum/anvil_recipe/armor/steel/decoratedbascinet
@@ -846,100 +809,82 @@
 	created_item = /obj/item/clothing/shoes/boots/armor
 	craftdiff = 4
 
-/*
-/datum/anvil_recipe/armor/steel/steam
-	craftdiff = 5
-	abstract_type = /datum/anvil_recipe/armor/steel/steam
-
-/datum/anvil_recipe/armor/steel/steam/helm
-	name = "Steamknight helm (+Bar, +Bronze cog)"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/gear/metal/bronze)
-	created_item = /obj/item/clothing/head/helmet/heavy/steam
-
-/datum/anvil_recipe/armor/steel/steam/gauntlets
-	name = "Steamknight gauntlets (+Bronze cog)"
-	additional_items = list(/obj/item/gear/metal/bronze)
-	created_item = /obj/item/clothing/gloves/plate/steam
-
-/datum/anvil_recipe/armor/steel/steam/body
-	name = "Steamknight plate (+Bar x2, +Bronze cog x3)"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/gear/metal/bronze, /obj/item/gear/metal/bronze, /obj/item/gear/metal/bronze)
-	created_item = /obj/item/clothing/armor/steam
-
-/datum/anvil_recipe/armor/steel/steam/boots
-	name = "Steamknight plate boots (+Bronze cog)"
-	additional_items = list(/obj/item/gear/metal/bronze)
-	created_item = /obj/item/clothing/shoes/boots/armor/steam
-*/
-
-/*
+////---------RARE STEEL-------------///
 /datum/anvil_recipe/armor/steel/rare
-	craftdiff = 5
+	craftdiff = 6
 	abstract_type = /datum/anvil_recipe/armor/steel/rare
+	required_material = /obj/item/ingot/steel
 
+/// DWARVEN SET//
 /datum/anvil_recipe/armor/steel/rare/dwarf_plate_helm
-	name = "Dwarven Plate Helm (+Bar)"
+	name = "Dwarven Plate Helm (+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/rare/dwarfplate
+	created_item = /obj/item/clothing/head/helmet/heavy/dwarven
 
 /datum/anvil_recipe/armor/steel/rare/dwarf_plate_torso
-	name = "Dwarven Plate (+Bar x2)"
+	name = "Dwarven Plate (+2 Steel)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/rare/dwarfplate
+	created_item = /obj/item/clothing/armor/plate/full/dwarven
 
 /datum/anvil_recipe/armor/steel/rare/dwarf_plate_boots
-	name = "Dwarven Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/rare/dwarfplate
+	name = "Dwarven Plate Boots (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/shoes/boots/armor/dwarven
 
 /datum/anvil_recipe/armor/steel/rare/dwarf_plate_gauntlets
-	name = "Dwarven Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/rare/dwarfplate
+	name = "Dwarven Plate Gauntlets (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/gloves/plate/dwarven
 
+/// GRENZEL SET///
 /datum/anvil_recipe/armor/steel/rare/grenzel_plate_gauntlets
-	name = "Grenzel Plate Gauntlets"
+	name = "Grenzel Plate Gauntlets (+1 Steel)"
 	created_item = /obj/item/clothing/gloves/rare/grenzelplate
 
 /datum/anvil_recipe/armor/steel/rare/grenzel_plate
-	name = "Grenzel Plate (+Bar x3)"
+	name = "Grenzel Plate (+3 Steel)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/rare/grenzelplate
 
 /datum/anvil_recipe/armor/steel/rare/grenzel_plate_boots
-	name = "Grenzel Plate Boots"
+	name = "Grenzel Plate Boots (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/shoes/boots/rare/grenzelplate
 
 /datum/anvil_recipe/armor/steel/rare/grenzel_plate_helm
-	name = "Grenzel Chicklet Plate Helm (+Bar)"
+	name = "Grenzel Chicklet Plate Helm (+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/rare/grenzelplate
 
+/// ZALADIN SET ///
 /datum/anvil_recipe/armor/steel/rare/zaladin_plate_helm
 	name = "Zaladin Bastion Plate Helm (+Bar)"
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/rare/zaladplate
 
-/datum/anvil_recipe/armor/steel/rare/hoplite_plate_helm
-	name = "Hoplite Plate Helm (+Bronze Bar, +Steel Bar)"
-	additional_items = list(/obj/item/ingot/bronze, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/rare/hoplite
-
 /datum/anvil_recipe/armor/steel/rare/zaladin_plate_gauntlets
 	name = "Zaladin Claw Plate Gauntlets"
 	created_item = /obj/item/clothing/gloves/rare/zaladplate
+
+/datum/anvil_recipe/armor/steel/rare/zaladin_plate_boots
+	name = "Zaladin Boots"
+	created_item = /obj/item/clothing/shoes/boots/rare/zaladplate
 
 /datum/anvil_recipe/armor/steel/rare/zaladin_plate
 	name = "Zaladin Kataphractoe Scaleskin (+Bar X3)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/rare/zaladplate
 
+/// HOPLITE ///
 /datum/anvil_recipe/armor/steel/rare/hoplite_plate
-	name = "Hoplite Plate (+Bar x2 +Bronze Bar x2)"
+	name = "Hoplite Plate (+2 Steel +2 Bronze)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/bronze, /obj/item/ingot/bronze)
 	created_item = /obj/item/clothing/armor/rare/hoplite
 
-/datum/anvil_recipe/armor/steel/rare/zaladin_plate_boots
-	name = "Zaladin Boots"
-	created_item = /obj/item/clothing/shoes/boots/rare/zaladplate
+/datum/anvil_recipe/armor/steel/rare/hoplite_plate_helm
+	name = "Hoplite Plate Helm (+Bronze Bar)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/clothing/head/rare/hoplite
 
 /datum/anvil_recipe/armor/steel/rare/hoplite_plate_bracers
 	name = "Hoplite Bracers (+Bronze Bar)"
@@ -951,57 +896,63 @@
 	additional_items = list(/obj/item/ingot/bronze)
 	created_item = /obj/item/clothing/shoes/rare/hoplite
 
-/datum/anvil_recipe/armor/steel/captain_plate_pants
-	name = "Captain Plate Chausses (+Bar)"
+/// BLADESINGER ///
+/datum/anvil_recipe/armor/steel/rare/elven_plate_boots
+	name = "Elven Plate Boots (+1 Black Steel)"
+	created_item = /obj/item/clothing/shoes/boots/rare/elfplate
+
+/datum/anvil_recipe/armor/steel/rare/elven_helm
+	name = "Elven Plate Helmet (+1 Black Steel)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/clothing/head/rare/elfplate
+
+/datum/anvil_recipe/armor/steel/rare/elven_plate_gloves
+	name = "Elven Plate Gauntlets (+1 Black Steel)"
+	created_item = /obj/item/clothing/gloves/rare/elfplate
+
+/datum/anvil_recipe/armor/steel/rare/elven_plate_chest
+	name = "Elven Plate Armor (+3 Black Steel)"
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	created_item = /obj/item/clothing/armor/rare/elfplate
+
+/// DROW PLATE ///
+/datum/anvil_recipe/armor/steel/rare/dark_elven_plate_boots
+	name = "Dark Elven Plate Boots (+1 Black Steel)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/clothing/shoes/boots/rare/elfplate/welfplate
+
+/datum/anvil_recipe/armor/steel/rare/dark_elven_helm
+	name = "Dark Elven Plate Helmet (+1 Black Steel)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/clothing/head/rare/elfplate/welfplate
+
+/datum/anvil_recipe/armor/steel/rare/dark_elven_plate_gloves
+	name = "Dark Elven Plate Gauntlets (+1 Black Steel)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/clothing/gloves/rare/elfplate/welfplate
+
+/datum/anvil_recipe/armor/steel/rare/dark_elven_plate_chest
+	name = "Dark Elven Plate Armor (+3 Black Steel)"
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	created_item = /obj/item/clothing/armor/rare/elfplate/welfplate
+
+/// ATERGVI PLATE ///
+
+/datum/anvil_recipe/armor/steel/rare/atgervi_hauberk
+	name = "vagarian hauberk(+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/pants/platelegs/captain
-	craftdiff = 6
+	created_item = /obj/item/clothing/armor/chainmail/hauberk/atgervi
 
-/datum/anvil_recipe/armor/steel/matthios_plate_pants
-	name = "Matthiosan Plate Chausses (+Bar)"
+/datum/anvil_recipe/armor/steel/rare/atgervi_claws
+	name = "beast claws(+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/pants/platelegs/matthios
-	craftdiff = 6
+	created_item = /obj/item/clothing/gloves/plate/atgervi
 
-/datum/anvil_recipe/armor/steel/graggarite_plate_pants
-	name = "Graggarite Plate Chausses (+Bar)"
+/datum/anvil_recipe/armor/steel/rare/atgervi_helmet
+	name = "owl helmet(+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/pants/platelegs/graggar
-	craftdiff = 6
+	created_item = /obj/item/clothing/head/helmet/bascinet/atgervi
 
-/datum/anvil_recipe/armor/steel/matthios_plate
-	name = "Matthiosan Plate Armor (+Bar x3)"
-	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/plate/full/matthios
-	craftdiff = 6
-
-/datum/anvil_recipe/armor/steel/graggar_plate
-	name = "Graggarite Plate Armor (+Bar x3)"
-	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/plate/full/graggar
-	craftdiff = 6
-
-/datum/anvil_recipe/armor/steel/matthios_plate_gauntlets
-	name = "Matthiosan Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/plate/matthios
-	craftdiff = 6
-
-/datum/anvil_recipe/armor/steel/graggar_plate_gauntlets
-	name = "Graggarite Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/plate/graggar
-	craftdiff = 6
-
-/datum/anvil_recipe/armor/steel/matthios_plate_boots
-	name = "Matthiosan Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/armor/matthios
-	craftdiff = 6
-
-/datum/anvil_recipe/armor/steel/graggar_plate_boots
-	name = "Graggarite Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/armor/graggar
-	craftdiff = 6
-
-*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // --------- SILVER -----------
@@ -1058,7 +1009,13 @@
 	abstract_type = /datum/anvil_recipe/armor/blacksteel
 ///////////////////////////////////////////////
 
-// --------- BLACKSTEEL -----------
+// BLACKSTEEL ARMOR //
+
+/datum/anvil_recipe/armor/blacksteel/volfplate_beast
+	name = "volfskulle bascinet(+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/heavy/volfplate/beast
+
 /datum/anvil_recipe/armor/blacksteel/grenzel_cuirass
 	name = "Grenzelhoft Cuirass (+Steel Bar)"
 	additional_items = list(/obj/item/ingot/steel)
@@ -1070,39 +1027,11 @@
 	created_item = /obj/item/clothing/armor/plate/blkknight
 	craftdiff = 5
 
-/*
-/datum/anvil_recipe/armor/blacksteel/zizo_plate_chest
-	name = "Darksteel Plate Armor (+Bar x3)"
-	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/armor/plate/full/zizo
-	craftdiff = 5
-
-/datum/anvil_recipe/armor/blacksteel/elven_plate_chest
-	name = "Elven Plate Armor (+Bar x3)"
-	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/armor/rare/elfplate
-	craftdiff = 5
-
-/datum/anvil_recipe/armor/blacksteel/dark_elven_plate_chest
-	name = "Dark Elven Plate Armor (+Bar x3)"
-	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/armor/rare/elfplate/welfplate
-	craftdiff = 5
-*/
-
 /datum/anvil_recipe/armor/blacksteel/platelegs
 	name = "Blacksteel Plate Chausses (+Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/clothing/pants/platelegs/blk
 	craftdiff = 5
-
-/*
-/datum/anvil_recipe/armor/blacksteel/zizo_plate_pants
-	name = "Darksteel Plate Chausses (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/pants/platelegs/zizo
-	craftdiff = 5
-*/
 
 /datum/anvil_recipe/armor/blacksteel/bucket
 	name = "Blacksteel Great Helm (+Bar)"
@@ -1115,319 +1044,303 @@
 	created_item = /obj/item/clothing/gloves/plate/blk
 	craftdiff = 5
 
-/*
-/datum/anvil_recipe/armor/blacksteel/zizo_plate_gloves
-	name = "Darksteel Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/plate/zizo
-	craftdiff = 5
-
-/datum/anvil_recipe/armor/blacksteel/elven_plate_gloves
-	name = "Elven Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/rare/elfplate
-	craftdiff = 5
-
-/datum/anvil_recipe/armor/blacksteel/dark_elven_plate_gloves
-	name = "Dark Elven Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/rare/elfplate/welfplate
-	craftdiff = 5
-*/
-
 /datum/anvil_recipe/armor/blacksteel/plateboots
 	name = "Blacksteel Plate Boots"
 	created_item = /obj/item/clothing/shoes/boots/armor/blkknight
 	craftdiff = 5
 
-/*
-/datum/anvil_recipe/armor/blacksteel/elven_plate_boots
-	name = "Elven Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/rare/elfplate
-	craftdiff = 5
+// --------- DARKSTEEL -----------
+/datum/anvil_recipe/armor/darksteel
+	required_material = /obj/item/ingot/darksteel
+	craftdiff = 5 // the unholy stuff
+	abstract_type = /datum/anvil_recipe/armor/darksteel
+///////////////////////////////////////////////
 
-/datum/anvil_recipe/armor/blacksteel/dark_elven_plate_boots
-	name = "Dark Elven Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/rare/elfplate/welfplate
-	craftdiff = 5
+///--------ZIZO-----------///
+/datum/anvil_recipe/armor/darksteel/zizo_plate_pants
+	name = "Darksteel Plate Chausses (+1 Darksteel)"
+	additional_items = list(/obj/item/ingot/darksteel)
+	created_item = /obj/item/clothing/pants/platelegs/zizo
 
-/datum/anvil_recipe/armor/blacksteel/zizo_plate_boots
+/datum/anvil_recipe/armor/darksteel/zizo_plate_gloves
+	name = "Darksteel Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/zizo
+
+/datum/anvil_recipe/armor/darksteel/zizo_plate_boots
 	name = "Darksteel Plate Boots"
 	created_item = /obj/item/clothing/shoes/boots/armor/zizo
-	craftdiff = 5
 
-/datum/anvil_recipe/armor/blacksteel/zizo_helm_visor
-	name = "Darksteel Barbute (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
+/datum/anvil_recipe/armor/darksteel/zizo_helm_visor
+	name = "Darksteel Barbute (+1 Darksteel)"
+	additional_items = list(/obj/item/ingot/darksteel)
 	created_item = /obj/item/clothing/head/helmet/visored/zizo
-	craftdiff = 5
 
-/datum/anvil_recipe/armor/blacksteel/zizo_helm
-	name = "Darksteel Frog Helm (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
+/datum/anvil_recipe/armor/darksteel/zizo_helm
+	name = "Darksteel Frog Helm (+1 Darksteel)"
+	additional_items = list(/obj/item/ingot/darksteel)
 	created_item = /obj/item/clothing/head/helmet/heavy/zizo
-	craftdiff = 5
 
-/datum/anvil_recipe/armor/blacksteel/matthios_helm
-	name = "Gilded Visage (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/heavy/matthios
-	craftdiff = 5
+/datum/anvil_recipe/armor/darksteel/zizo_plate_chest
+	name = "Darksteel Plate Armor (+3 Darksteel)"
+	additional_items = list(/obj/item/ingot/darksteel, /obj/item/ingot/darksteel, /obj/item/ingot/darksteel)
+	created_item = /obj/item/clothing/armor/plate/full/zizo
 
-/datum/anvil_recipe/armor/blacksteel/graggar_helm
-	name = "Vicious Helmet (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/heavy/graggar
-	craftdiff = 5
-
-/datum/anvil_recipe/armor/blacksteel/elven_helm
-	name = "Elven Plate Helmet (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/rare/elfplate
-	craftdiff = 5
-
-/datum/anvil_recipe/armor/blacksteel/dark_elven_helm
-	name = "Dark Elven Plate Helmet (+Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/rare/elfplate/welfplate
-	craftdiff = 5
-*/
-
-/datum/anvil_recipe/armor/anklets
-	name = "golden anklets"
-	required_material = /obj/item/ingot/gold
-	created_item = /obj/item/clothing/shoes/anklets
-	craftdiff = 2
-
-
-/datum/anvil_recipe/armor/holysee_plate
-	name = "holy silver plate"
-	required_material = /obj/item/ingot/silverblessed
-	additional_items = list(/obj/item/ingot/silverblessed, /obj/item/ingot/silverblessed)
-	created_item = /obj/item/clothing/armor/plate/full/holysee
-	craftdiff = 4
-
-/datum/anvil_recipe/armor/holysee_chausses
-	name = "holy silver chausses"
-	required_material = /obj/item/ingot/silverblessed
-	additional_items = list(/obj/item/ingot/silverblessed)
-	created_item = /obj/item/clothing/pants/platelegs/holysee
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/holysee_bascinet
-	name = "holy silver bascinet"
-	required_material = /obj/item/ingot/silverblessed
-	additional_items = list(/obj/item/ingot/silver)
-	created_item = /obj/item/clothing/head/helmet/heavy/holysee
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/naledi_mask
-	name = "war scholar's mask"
-	required_material = /obj/item/ingot/gold
-	created_item = /obj/item/clothing/face/lordmask/naledi
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/sojourner_mask
-	name = "sojourner's mask"
-	required_material = /obj/item/ingot/gold
+//-------MATTHIOS---------------///
+/datum/anvil_recipe/armor/darksteel/matthios_helm
+	name = "Gilded Visage (+1 gold bar)"
 	additional_items = list(/obj/item/ingot/gold)
-	created_item = /obj/item/clothing/face/lordmask/naledi/sojourner
-	craftdiff = 4
+	created_item = /obj/item/clothing/head/helmet/heavy/matthios
 
+/datum/anvil_recipe/armor/steel/matthios_plate_boots
+	name = "Matthiosan Plate Boots"
+	created_item = /obj/item/clothing/shoes/boots/armor/matthios
 
-/datum/anvil_recipe/armor/xylixhelm
-	name = "xylixian helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/xylixhelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/astratahelm
-	name = "astrata helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/astratahelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/nochelm
-	name = "noc helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/nochelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/necrahelm
-	name = "necra helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/necrahelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/dendorhelm
-	name = "dendor helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/dendorhelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/abyssorgreathelm
-	name = "abyssorite helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/abyssorgreathelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/ravoxhelm
-	name = "justice eagle"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/ravoxhelm
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/volfplate
-	name = "volf-face helm"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/heavy/volfplate
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/volfplate_puritan
-	name = "volfskulle bascinet"
-	required_material = /obj/item/ingot/steel
+/datum/anvil_recipe/armor/steel/matthios_plate_pants
+	name = "Matthiosan Plate Chausses (+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/volfplate/puritan
-	craftdiff = 4
+	created_item = /obj/item/clothing/pants/platelegs/matthios
 
-/datum/anvil_recipe/armor/atgervi_hauberk
-	name = "vagarian hauberk"
-	required_material = /obj/item/ingot/steel
+/datum/anvil_recipe/armor/steel/matthios_plate
+	name = "Matthiosan Plate Armor (+3 Steel)"
+	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/armor/plate/full/matthios
+
+/datum/anvil_recipe/armor/steel/matthios_plate_gauntlets
+	name = "Matthiosan Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/matthios
+
+//--------GRAGGAR---------------///
+/datum/anvil_recipe/armor/blacksteel/graggar_helm
+	name = "Vicious Helmet (+1 Steel)"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/chainmail/hauberk/atgervi
-	craftdiff = 3
+	created_item = /obj/item/clothing/head/helmet/heavy/graggar
 
-/datum/anvil_recipe/armor/atgervi_claws
-	name = "beast claws"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/gloves/plate/atgervi
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/atgervi_helmet
-	name = "owl helmet"
-	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/bascinet/atgervi
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/psydonboots
-	name = "crown of psydonian thorns"
-	required_material = /obj/item/ingot/blacksteel
-	created_item = /obj/item/clothing/head/helmet/blacksteel/psythorns
-	craftdiff = 3
-
-/datum/anvil_recipe/armor/hauberk
-	name = "fluted hauberk (+ Bar)"
-	required_material = /obj/item/ingot/steel
+/datum/anvil_recipe/armor/darksteel/sinistar
+	name = "Sinistar Helmet (+1 Steel)"
+	created_item = /obj/item/clothing/head/helmet/heavy/sinistar
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/chainmail/hauberk/fluted
-	craftdiff = 3
 
+/datum/anvil_recipe/armor/steel/graggar_plate
+	name = "Graggarite Plate Armor (+3 Steel)"
+	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/armor/plate/full/graggar
+
+/datum/anvil_recipe/armor/steel/graggar_plate_boots
+	name = "Graggarite Plate Boots"
+	created_item = /obj/item/clothing/shoes/boots/armor/graggar
+
+/datum/anvil_recipe/armor/steel/graggar_plate_gauntlets
+	name = "Graggarite Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/graggar
+
+/datum/anvil_recipe/armor/steel/graggarite_plate_pants
+	name = "Graggarite Plate Chausses (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/pants/platelegs/graggar
+
+///---------BLESSED SILVER---------------///
 /datum/anvil_recipe/armor/blessedsilver
+	required_material = /obj/item/ingot/silverblessed
 	abstract_type = /datum/anvil_recipe/armor/blessedsilver
+	craftdiff = 4
+
+///////////////////////////////////////
+
+/datum/anvil_recipe/armor/blessedsilver/psythorns
+	name = "crown of psydonian thorns(+1 Blacksteel)"
+	additional_items = list(/datum/anvil_recipe/armor/blacksteel)
+	created_item = /obj/item/clothing/head/helmet/blacksteel/psythorns
 
 /datum/anvil_recipe/armor/blessedsilver/psychestplate
 	name = "Psydonic Chestplate (+1 Cured Leather)"
-	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/cuirass/psydon
 
 /datum/anvil_recipe/armor/blessedsilver/psycuirass
 	name = "Psydonic Cuirass (+2 Cured Leather)"
-	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/cuirass/ornate
 
 /datum/anvil_recipe/armor/blessedsilver/armetpsy
 	name = "Psydonic Armet"
-	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/head/helmet/heavy/psydonhelm
 
 /datum/anvil_recipe/armor/blessedsilver/helmsallpsy
 	name = "Psydonic Sallet (+1 Blessed Silver)"
-	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/head/helmet/heavy/psysallet
 
 /datum/anvil_recipe/armor/blessedsilver/helmbucketpsy
 	name = "Psydonic Bucket Helm (+1 Blessed Silver)"
-	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/head/helmet/heavy/psybucket
 
 /datum/anvil_recipe/armor/blessedsilver/helmetabso
 	name = "Psydonian Conical Helm (+2 Blessed Silver)"
-	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/ingot/silverblessed, /obj/item/ingot/silverblessed)
 	created_item = /obj/item/clothing/head/helmet/heavy/absolver
 
 /datum/anvil_recipe/armor/blessedsilver/psyhalfplate
 	name = "Psydonic Half-Plate (+Psydonic Cuirass, +1 Blessed Silver, +2 Cured Leather)"
-	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/clothing/armor/cuirass/ornate, /obj/item/ingot/silverblessed, /obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/fluted/ornate
 
 /datum/anvil_recipe/armor/blessedsilver/psyfullplate
 	name = "Psydonic Full-Plate (+Psydonic Half-Plate, +1 Blessed Silver, +2 Cured Leather)"
-	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/clothing/armor/plate/fluted/ornate, /obj/item/ingot/silverblessed, /obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/fluted/ornate
 
 /datum/anvil_recipe/armor/blessedsilver/psyfullplatealt
 	name = "Psydonic Full-Plate, Hauberked (+Psydonic Hauberk, +2 Blessed Silver, +2 Cured Leather)"
-	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/clothing/armor/chainmail/hauberk/fluted, /obj/item/ingot/silverblessed, /obj/item/ingot/silverblessed, /obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/plate/fluted/ornate
 
 /datum/anvil_recipe/armor/blessedsilver/psydonmask
 	name = "Psydonic Mask"
-	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/face/facemask/psydonmask
 
 /datum/anvil_recipe/armor/blessedsilver/psydonic_gloves
 	name = "Psydonic Chain Gloves"
-	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/gloves/chain/psydon
 
+///----------GOLD-------------///
 /datum/anvil_recipe/armor/gold
 	required_material = /obj/item/ingot/gold
 	craftdiff = 5 // harder to work with. mostly jewelry
 	abstract_type = /datum/anvil_recipe/armor/gold
 
+///////////////////////////////
+
 /datum/anvil_recipe/armor/gold/mask
 	name = "Gold Mask"
 	created_item = /obj/item/clothing/face/facemask/goldmask
 
-/datum/anvil_recipe/armor/gold/armet
-	name = "Golden Knight's Armet (+1 Gold, +2 Silk)"
-	additional_items = list(/obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk)
-	created_item = /obj/item/clothing/head/helmet/visored/gold/king
+/datum/anvil_recipe/armor/gold/anklets
+	name = "golden anklets"
+	created_item = /obj/item/clothing/shoes/anklets
 
-/datum/anvil_recipe/armor/gold/armetcrown
-	name = "Golden Knight's Armet, Royal (+1 Gold, +2 Silk, +1 Dorpel)"
-	additional_items = list(/obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk, /obj/item/gem/diamond)
+/datum/anvil_recipe/armor/gold/buckethelm
+	name = "Gold Helmet (+1 Bucket helm)"
+	additional_items = list(/obj/item/clothing/head/helmet/heavy/bucket)
+	created_item = /obj/item/clothing/head/helmet/heavy/bucket/gold
+
+/datum/anvil_recipe/armor/gold/armet
+	name = "Golden Knight's Armet (1+ knight helmet, +1 Gold, +2 Silk)"
+	additional_items = list(/obj/item/clothing/head/helmet/visored/knight, /obj/item/natural/silk, /obj/item/natural/silk)
 	created_item = /obj/item/clothing/head/helmet/visored/gold
 
+/datum/anvil_recipe/armor/gold/armetcrown
+	name = "Golden Royal Armet (1+ Steel knight helmet, +1 Gold, +2 Silk, +1 Dorpel)"
+	additional_items = list(/obj/item/clothing/head/helmet/visored/knight, /obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk, /obj/item/gem/diamond)
+	created_item = /obj/item/clothing/head/helmet/visored/gold/king
+
 /datum/anvil_recipe/armor/gold/gorget
-	name = "Golden Gorget (+1 Gold, +2 Silk)"
-	additional_items = list(/obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk)
+	name = "Golden Gorget (+1 Gorget, +2 Silk)"
+	additional_items = list(/obj/item/clothing/neck/gorget, /obj/item/natural/silk, /obj/item/natural/silk)
 	created_item = /obj/item/clothing/neck/gorget/gold
 
 /datum/anvil_recipe/armor/gold/cuirass
-	name = "Golden Cuirass (+2 Gold, +2 Silk)"
-	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk)
+	name = "Golden Cuirass (+1 Steel Cuirass, +1 Gold , +2 Silk)"
+	additional_items = list(/obj/item/clothing/armor/cuirass, /obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk)
 	created_item = /obj/item/clothing/armor/cuirass/fluted/gold
 
 /datum/anvil_recipe/armor/gold/cuirasshero
-	name = "Golden Cuirass, Heroic (+2 Gold, +2 Silk, +1 Tallow)"
-	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk, /obj/item/reagent_containers/food/snacks/tallow)
+	name = "Golden Heroic Cuirass (+1 Steel Cuirass, +2 Gold, +2 Silk, +1 Tallow)"
+	additional_items = list(/obj/item/clothing/armor/cuirass, /obj/item/ingot/gold, /obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk, /obj/item/reagent_containers/food/snacks/tallow)
 	created_item = /obj/item/clothing/armor/cuirass/fluted/gold/heroic
 
 /datum/anvil_recipe/armor/gold/greaves
-	name = "Golden Greaves (+1 Gold, +2 Silk)"
-	additional_items = list(/obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk)
+	name = "Golden Greaves (+1 Steel plated boots +1 Gold, +2 Silk)"
+	additional_items = list(/obj/item/clothing/shoes/boots/armor, /obj/item/ingot/gold, /obj/item/natural/silk, /obj/item/natural/silk)
 	created_item = /obj/item/clothing/shoes/boots/armor/gold
 
+/datum/anvil_recipe/armor/gold/naledi_mask
+	name = "war scholar's mask"
+	created_item = /obj/item/clothing/face/lordmask/naledi
+
+/datum/anvil_recipe/armor/gold/sojourner_mask
+	name = "sojourner's mask(+1 Gold)"
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/clothing/face/lordmask/naledi/sojourner
+
+///-----------HOLY STEEL---------------///
 /datum/anvil_recipe/armor/holysteel
 	required_material = /obj/item/ingot/steelholy
 	craftdiff = 4
 	abstract_type = /datum/anvil_recipe/armor/holysteel
 
+/////////////////////////////////
+
 /datum/anvil_recipe/armor/holysteel/undividedtemplar_sallet
 	name = "Undivided Templar's Sallet (+1 Holy Steel, +1 Cured Leather)"
 	additional_items = list(/obj/item/ingot/steelholy, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/head/helmet/heavy/undivided
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_noc
+	name = "Noc Helmet (+1 Silver)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/noc
+	additional_items = list(/obj/item/ingot/silver)
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_astrata
+	name = "Astratan Helmet (+1 Gold)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/astrata
+	additional_items = list(/obj/item/ingot/gold)
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_necra
+	name = "Necran Helmet (+1 Tallow)"
+	additional_items = list(/obj/item/reagent_containers/food/snacks/tallow)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/necra
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_dendor
+	name = "Dendor Helmet (+1 Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_pestra
+	name = "Pestran Helmet (+1 needle)"
+	additional_items = list(/obj/item/needle)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_malum
+	name = "Malum Helmet (+1 Iron)"
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_ravox
+	name = "Ravox Helmet (+1 Steel)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/ravox
+
+/datum/anvil_recipe/armor/holyssteel/templar/helmet_xylix
+	name = "Xylix Helmet (+1 Coin)"
+	additional_items = list(/obj/item/coin)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/xylix
+
+/datum/anvil_recipe/armor/holysteel/templar/helmet_abyssor
+	name = "Abyssor Helmet (+1 Bronze)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
+
+/datum/anvil_recipe/armor/bronze/helmet
+	name = "Deep Abyssor Helmet (+2 Bronze)"
+	additional_items = list(/obj/item/ingot/bronze)
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/deepabyssor
+
+/datum/anvil_recipe/armor/holysteel/holysee_plate
+	name = "holy silver plate(+3 Silver)"
+	required_material = /obj/item/ingot/silverblessed
+	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/silver, /obj/item/ingot/silver)
+	created_item = /obj/item/clothing/armor/plate/full/holysee
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/holysteel/holysee_chausses
+	name = "holy silver chausses(+1 Silver)"
+	required_material = /obj/item/ingot/silverblessed
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/pants/platelegs/holysee
+	craftdiff = 3
+
+/datum/anvil_recipe/armor/holysteel/holysee_bascinet
+	name = "holy silver bascinet(+1 Silver)"
+	required_material = /obj/item/ingot/silverblessed
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/head/helmet/heavy/holysee
+	craftdiff = 3
