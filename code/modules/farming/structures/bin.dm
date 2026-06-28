@@ -176,6 +176,7 @@
 		if(T.held_item && HAS_TRAIT(T.held_item, TRAIT_NEEDS_QUENCH))
 			if(istype(T.held_item, /obj/item/ingot/steel) && reagents.has_reagent(/datum/reagent/water/blessed, 50))
 				holy_conversion(user, T)
+				return
 			if(!reagents.has_reagent(/datum/reagent/water, 5))
 				removereg = /datum/reagent/water/gross
 				if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
