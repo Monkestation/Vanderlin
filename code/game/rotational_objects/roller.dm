@@ -8,7 +8,7 @@
 	layer = BELOW_OPEN_DOOR_LAYER
 	rotation_structure = TRUE
 	stress_use = 0
-	initialize_dirs = CONN_DIR_LEFT | CONN_DIR_RIGHT | CONN_DIR_FORWARD | CONN_DIR_FLIP
+	initialize_dirs = CONN_DIR_LEFT | CONN_DIR_RIGHT
 
 	var/operating = FALSE
 	var/movedir
@@ -94,9 +94,9 @@
 	if(rotations_per_minute == rpm)
 		return FALSE
 
-	rotations_per_minute = rpm
+	rotations_per_minute = min(rpm, 32)
 
-	if(rpm > 0)
+	if(rotations_per_minute > 0)
 		operating = TRUE
 	else
 		operating = FALSE
