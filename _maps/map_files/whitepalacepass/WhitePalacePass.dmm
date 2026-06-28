@@ -11295,7 +11295,7 @@
 /area/outdoors/town)
 "gST" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/obj/structure/chair/stool,
+/obj/structure/notice_board,
 /turf/open/floor/cobble,
 /area/indoors/town/merc_guild)
 "gTw" = (
@@ -36442,7 +36442,6 @@
 /turf/open/floor/church,
 /area/under/town/basement)
 "xor" = (
-/obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/customflag{
 	name = "rosewood flag";
 	pixel_y = 27
