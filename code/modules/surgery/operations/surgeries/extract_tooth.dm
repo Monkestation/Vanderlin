@@ -14,6 +14,8 @@
 	skill_min = SKILL_LEVEL_EXPERT
 	skill_median = SKILL_LEVEL_MASTER
 
+	any_surgery_states_blocked = SURGERY_SKIN_OPEN
+
 /datum/surgery_operation/basic/extract_tooth/get_recommended_tool()
 	return "Tongs"
 

@@ -50,10 +50,10 @@
 	display_pain(limb.owner, "I feel a stabbing in my [parse_zone(limb.body_zone)].")
 
 /datum/surgery_operation/limb/incise_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	limb.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO / 6, surgical = TRUE)
+
 	if(!limb.bleeds)
 		return ..()
-
-	limb.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO / 6, surgical = TRUE)
 
 	display_results(
 		surgeon,
@@ -64,10 +64,10 @@
 	)
 
 /datum/surgery_operation/limb/incise_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
+	limb.create_injury(WOUND_SLASH, 65, surgical = TRUE)
+
 	if(!limb.bleeds)
 		return ..()
-
-	limb.create_injury(WOUND_SLASH, 65, surgical = TRUE)
 
 	display_results(
 		surgeon,

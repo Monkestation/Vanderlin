@@ -66,7 +66,7 @@
 
 /datum/surgery_operation/limb/amputate/pegleg
 	name = "Detach Wooden Limb"
-	desc = "Saw off a patient's wooden leg."
+	desc = "Saw off a patient's wooden limb."
 
 	required_bodytype = BODYPART_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
@@ -78,6 +78,8 @@
 	)
 
 	time = 3 SECONDS
+
+	skill_used = /datum/attribute/skill/craft/engineering
 
 	preop_sound = 'sound/foley/sewflesh.ogg'
 	success_sound = 'sound/items/wood_sharpen.ogg'
