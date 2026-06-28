@@ -543,7 +543,7 @@
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (getPainLoss() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
+			var/painpercent = (getShockStage() / SHOCK_STAGE_MAX) * 100 //what percent out of 100 to max pain
 
 
 			var/usedloss = 0

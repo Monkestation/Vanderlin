@@ -600,7 +600,7 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.getPainLoss() / 50
+		jadded += H.getShockStage() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1

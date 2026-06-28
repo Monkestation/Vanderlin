@@ -158,7 +158,7 @@
 	/// Point at which the limb is disabled due to pain
 	var/pain_disability_threshold = 0
 	/// Maximum amount of pain this limb can feel at once
-	var/max_pain_damage = 0
+	var/max_pain_damage
 
 	/// This stupid variable is used by two game mechanics - Brain spilling, gut spilling
 	var/spilled = FALSE
