@@ -174,14 +174,13 @@
 	qdel(src)
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra
-	name = "Amulet of the Serpent"
+	name = "Amulet of Pestra"
 	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate. The amulet feels hollow, and you can barely see a tiny cap at the top."
 	icon = 'icons/roguetown/clothing/neck.dmi'
 	icon_state = "pestra"
 	var/amount_per_transfer_from_this = 3
 	var/possible_transfer_amounts = list(3)
 	var/volume = 15
-	var/fill_icon_thresholds = null
 	dropshrink = 0.8
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_MOUTH
 	obj_flags = CAN_BE_HIT
@@ -194,13 +193,11 @@
 	var/drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
 	var/fillsounds = list('sound/items/fillcup.ogg')
 	var/poursounds = list('sound/items/fillbottle.ogg')
-	var/label_prefix = "Flask of "
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/silver)
-	icon_state = "pestra"
-	update_appearance(UPDATE_OVERLAYS)
+	list_reagents = list(/datum/reagent/consumable/ethanol = 15)
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
@@ -217,7 +214,6 @@
 		balloon_alert(user, "I silently screw the cap off.")
 		desc = "An open flask, easy to drink quickly."
 		spillable = TRUE
-	update_appearance(UPDATE_OVERLAYS)
 
 
 /obj/item/clothing/neck/psycross/silver/divine/malum

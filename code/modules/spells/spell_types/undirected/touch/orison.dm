@@ -206,6 +206,12 @@
 		<b>Fill</b>: Beseech your Divine to create a small quantity of holy water in a container that you touch for some devotion."
 	possible_item_intents = list(ORISON_FILL)
 
+/datum/action/cooldown/spell/undirected/touch/orison/pestra
+	name = "Lesser Orison"
+
+	hand_path = /obj/item/melee/touch_attack/orison/pestra
+	charges = 3
+
 /obj/item/melee/touch_attack/orison/pestra
 	name = "Pestras Fang"
 	desc = "The fundamental teachings of the pestran sect returns to you, generate pure ethanol using devotion, or cut and seal flesh."
