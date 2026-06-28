@@ -1,0 +1,4 @@
+author: "Avalon-Proto"
+delete-after: True
+changes:
+  - rscadd: "Dungeoneers now recieve fair medical knowledge alongside the kit to prevent someone in their care dying too quickly"
