@@ -327,6 +327,7 @@
 	icon_state = "volfplate_avantyne"
 	item_state = "volfplate_avantyne"
 	desc = "A steel bascinet helmet with a snarling visor that protects the entire head and face. It mimics the guise of a terrible nitebeast; intimidating to the levyman, inspiring to the hunter."
+	melting_material = /datum/material/blacksteel
 
 /obj/item/clothing/face/facemask/psydonmask
 	name = "psydonic mask"
