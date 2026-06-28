@@ -1614,10 +1614,6 @@
 	pixel_x = 1;
 	pixel_y = -8
 	},
-/obj/item/ore/iron{
-	pixel_x = 12;
-	pixel_y = -6
-	},
 /turf/open/floor/dirt,
 /area/under/cave)
 "aZv" = (
@@ -2404,13 +2400,6 @@
 "bvp" = (
 /turf/closed/wall/window/stained/yellow,
 /area/indoors/town/clocktower)
-"bvq" = (
-/obj/item/ore/iron{
-	pixel_x = -5;
-	pixel_y = 2
-	},
-/turf/open/floor/dirt,
-/area/under/cave)
 "bvz" = (
 /obj/item/gem,
 /turf/open/floor/tile,
@@ -3245,10 +3234,6 @@
 /obj/item/ore/iron{
 	pixel_x = -8;
 	pixel_y = 10
-	},
-/obj/item/ore/iron{
-	pixel_x = 3;
-	pixel_y = 7
 	},
 /turf/open/water/swamp,
 /area/under/cave)
@@ -4975,12 +4960,6 @@
 	dir = 4
 	},
 /turf/open/floor/blocks,
-/area/under/cave)
-"cYn" = (
-/obj/item/ore/iron{
-	pixel_y = 9
-	},
-/turf/open/water/swamp,
 /area/under/cave)
 "cYJ" = (
 /obj/structure/fake_machine/lottery_roguetown,
@@ -7445,17 +7424,6 @@
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/servant)
-"eua" = (
-/obj/item/ore/iron{
-	pixel_x = -7;
-	pixel_y = -3
-	},
-/obj/item/ore/iron{
-	pixel_x = -6;
-	pixel_y = 8
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "euB" = (
 /obj/structure/door{
 	name = "Sweeper's Quarters"
@@ -8152,13 +8120,6 @@
 "eSb" = (
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
-"eSU" = (
-/obj/item/ore/iron{
-	pixel_x = -7;
-	pixel_y = 11
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "eTb" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = -32;
@@ -8686,13 +8647,6 @@
 /obj/item/lipstick,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"fiR" = (
-/obj/item/ore/iron{
-	pixel_x = -1;
-	pixel_y = 9
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "fjl" = (
 /obj/structure/bars,
 /turf/open/floor/wood/nosmooth,
@@ -9044,12 +8998,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/concrete,
 /area/indoors/soilsons)
-"ftO" = (
-/obj/item/ore/iron{
-	pixel_x = 9
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "ftV" = (
 /obj/item/weapon/mace/church,
 /turf/open/floor/ruinedwood,
@@ -9575,13 +9523,6 @@
 	dir = 1
 	},
 /area/indoors/town/keep/throne)
-"fKB" = (
-/obj/item/ore/iron{
-	pixel_x = -2;
-	pixel_y = 8
-	},
-/turf/open/water/swamp,
-/area/under/cavewet)
 "fKE" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/pick{
@@ -12469,12 +12410,6 @@
 	},
 /turf/open/floor/cobble/alt,
 /area/indoors/town/vault)
-"hAl" = (
-/obj/item/ore/iron{
-	pixel_x = 6
-	},
-/turf/open/water/swamp,
-/area/under/cavewet)
 "hAu" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -13734,13 +13669,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/church)
-"ipK" = (
-/obj/item/ore/iron{
-	pixel_x = -8;
-	pixel_y = -7
-	},
-/turf/open/floor/dirt,
-/area/under/cave)
 "ipV" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
@@ -13927,6 +13855,13 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"iyx" = (
+/obj/item/ore/iron{
+	pixel_x = 12;
+	pixel_y = -6
+	},
+/turf/open/floor/dirt,
+/area/under/cave)
 "iyV" = (
 /obj/structure/fake_machine/scomm{
 	pixel_x = 32;
@@ -15338,10 +15273,6 @@
 /area/outdoors/town)
 "jth" = (
 /obj/item/ore/iron{
-	pixel_x = 10;
-	pixel_y = 8
-	},
-/obj/item/ore/iron{
 	pixel_x = -4;
 	pixel_y = 9
 	},
@@ -16364,10 +16295,6 @@
 /turf/open/floor/snow,
 /area/outdoors/town)
 "kau" = (
-/obj/item/ore/iron{
-	pixel_x = -4;
-	pixel_y = 4
-	},
 /obj/item/ore/iron{
 	pixel_x = 3;
 	pixel_y = 11
@@ -18895,12 +18822,6 @@
 /obj/structure/closet/crate/chest/crafted,
 /turf/open/floor/ruinedwood,
 /area/outdoors/river)
-"lLw" = (
-/obj/item/ore/iron{
-	pixel_x = -9
-	},
-/turf/open/floor/dirt,
-/area/under/cave)
 "lLB" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/town/garrison)
@@ -19208,6 +19129,10 @@
 /obj/structure/chair/wood/alt/chair3,
 /turf/open/floor/ruinedwood,
 /area/under/town/basement)
+"lVe" = (
+/obj/structure/notice_board,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "lVC" = (
 /obj/structure/table/wood/plain/alt,
 /obj/item/rope,
@@ -20054,6 +19979,7 @@
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = -32
 	},
+/obj/item/weapon/hoe,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "myM" = (
@@ -21657,6 +21583,10 @@
 "nvA" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/town/noble_manor/yellow)
+"nvO" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/cobblerock,
+/area/under/town/basement)
 "nvQ" = (
 /obj/structure/industrial_lift/tram{
 	icon_state = "vertw"
@@ -22651,17 +22581,6 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/blocks,
 /area/under/town/basement)
-"oek" = (
-/obj/item/ore/iron{
-	pixel_x = -5;
-	pixel_y = -5
-	},
-/obj/item/ore/iron{
-	pixel_x = -8;
-	pixel_y = 5
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "oen" = (
 /obj/effect/landmark/start/watchman{
 	dir = 4
@@ -25013,25 +24932,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
-"pHd" = (
-/obj/item/ore/iron{
-	pixel_x = 8;
-	pixel_y = -8
-	},
-/obj/item/ore/iron{
-	pixel_x = -5;
-	pixel_y = 11
-	},
-/obj/item/ore/iron{
-	pixel_x = 8;
-	pixel_y = 3
-	},
-/obj/item/ore/iron{
-	pixel_x = -6;
-	pixel_y = -8
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "pHe" = (
 /obj/structure/bed/wool,
 /obj/item/bedsheet/fabric,
@@ -27054,10 +26954,6 @@
 /area/under/cave)
 "rbi" = (
 /obj/item/ore/iron{
-	pixel_x = -2;
-	pixel_y = 9
-	},
-/obj/item/ore/iron{
 	pixel_x = -6;
 	pixel_y = -2
 	},
@@ -27783,17 +27679,6 @@
 /obj/structure/bookcase/random,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/keep/hand)
-"rxK" = (
-/obj/item/ore/iron{
-	pixel_x = -8;
-	pixel_y = 5
-	},
-/obj/item/ore/iron{
-	pixel_x = 5;
-	pixel_y = 8
-	},
-/turf/open/floor/dirt,
-/area/under/cave)
 "rxM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = 31;
@@ -27980,6 +27865,8 @@
 /area/indoors/town/keep/jester)
 "rEs" = (
 /obj/structure/door/iron/bars,
+/obj/effect/mapping_helpers/access/keyset/town/tailor,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "rEw" = (
@@ -30361,20 +30248,6 @@
 /obj/structure/toilet/filled,
 /turf/open/floor/wood,
 /area/indoors/town/cell)
-"tkC" = (
-/obj/item/ore/iron{
-	pixel_y = -8
-	},
-/obj/item/ore/iron{
-	pixel_x = 10;
-	pixel_y = 6
-	},
-/obj/item/ore/iron{
-	pixel_x = -6;
-	pixel_y = 12
-	},
-/turf/open/floor/dirt,
-/area/under/cave)
 "tkI" = (
 /obj/structure/door/window{
 	name = "Inn's Kitchen"
@@ -30538,18 +30411,6 @@
 "tqr" = (
 /obj/item/ore/iron{
 	pixel_x = 4
-	},
-/obj/item/ore/iron{
-	pixel_x = 1;
-	pixel_y = -6
-	},
-/obj/item/ore/iron{
-	pixel_x = -12;
-	pixel_y = 6
-	},
-/obj/item/ore/iron{
-	pixel_x = 5;
-	pixel_y = 8
 	},
 /turf/open/water/swamp,
 /area/under/cave)
@@ -31552,16 +31413,6 @@
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
-"tYM" = (
-/obj/item/ore/iron{
-	pixel_y = 10
-	},
-/obj/item/ore/iron{
-	pixel_x = -5;
-	pixel_y = -2
-	},
-/turf/open/water/swamp,
-/area/under/cave)
 "tYX" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/reagent_containers/food/snacks/produce/sugarcane,
@@ -34443,16 +34294,8 @@
 /area/under/town/basement)
 "vUm" = (
 /obj/item/ore/iron{
-	pixel_x = 2;
-	pixel_y = -3
-	},
-/obj/item/ore/iron{
 	pixel_x = 9;
 	pixel_y = 7
-	},
-/obj/item/ore/iron{
-	pixel_x = -7;
-	pixel_y = 6
 	},
 /turf/open/water/swamp,
 /area/under/cave)
@@ -35606,14 +35449,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/halls/w)
-"wGn" = (
-/obj/item/ore/iron{
-	pixel_x = -5;
-	pixel_y = 9
-	},
-/obj/effect/decal/remains/human,
-/turf/open/water/swamp,
-/area/under/cave)
 "wGy" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood,
@@ -36262,9 +36097,6 @@
 /obj/item/ore/iron{
 	pixel_x = -5;
 	pixel_y = -6
-	},
-/obj/item/ore/iron{
-	pixel_x = 10
 	},
 /obj/item/ore/iron{
 	pixel_x = -13;
@@ -47028,7 +46860,7 @@ nJJ
 nJJ
 vNi
 vpD
-ftO
+vpD
 vNi
 vNi
 nJJ
@@ -47203,7 +47035,7 @@ nJJ
 vNi
 pdm
 vUm
-cYn
+vpD
 vpD
 nJJ
 nJJ
@@ -47230,7 +47062,7 @@ nJJ
 nJJ
 vNi
 oAT
-tYM
+vpD
 bVH
 xCH
 nJJ
@@ -47403,8 +47235,8 @@ nJJ
 nJJ
 nJJ
 vNi
-ipK
-bvq
+vNi
+vNi
 vpD
 vNi
 nJJ
@@ -47432,7 +47264,7 @@ nJJ
 nJJ
 vNi
 vNi
-eua
+vpD
 jCT
 vNi
 nJJ
@@ -52645,7 +52477,7 @@ nJJ
 vpD
 tIr
 tqr
-fiR
+vpD
 ecl
 jLk
 bfB
@@ -52846,7 +52678,7 @@ jLk
 nJJ
 vNi
 vNi
-lLw
+vNi
 vpD
 wai
 jLk
@@ -53278,7 +53110,7 @@ nJJ
 nJJ
 vNi
 vNi
-rxK
+vNi
 kau
 vpD
 nJJ
@@ -53481,7 +53313,7 @@ nJJ
 vNi
 hnA
 rbi
-eSU
+vpD
 vpD
 nJJ
 nJJ
@@ -55285,7 +55117,7 @@ nJJ
 hnA
 aZq
 vpD
-vNi
+iyx
 vpD
 nJJ
 nJJ
@@ -55486,7 +55318,7 @@ nJJ
 nJJ
 vpD
 lEu
-pHd
+vpD
 vpD
 vpD
 nJJ
@@ -55688,8 +55520,8 @@ nJJ
 nJJ
 vpD
 vpD
-oek
-wGn
+vpD
+xCH
 vpD
 nJJ
 nJJ
@@ -59247,7 +59079,7 @@ nJJ
 oII
 oII
 nur
-fpa
+nvO
 nel
 nel
 nel
@@ -59449,7 +59281,7 @@ oII
 oII
 clW
 otK
-fpa
+nvO
 nel
 ljj
 nel
@@ -59651,7 +59483,7 @@ oII
 otK
 otK
 otK
-fpa
+nvO
 nel
 nel
 csi
@@ -60055,7 +59887,7 @@ oII
 wLq
 dRO
 dRO
-fpa
+nvO
 nel
 vgt
 nel
@@ -60257,7 +60089,7 @@ oII
 fvp
 njD
 dRO
-fpa
+nvO
 nel
 nel
 nel
@@ -60459,7 +60291,7 @@ oII
 fvp
 xAY
 dRO
-fpa
+nvO
 nel
 clk
 gmI
@@ -66444,7 +66276,7 @@ nJJ
 nJJ
 vNi
 ecl
-hAl
+ecl
 wai
 ecl
 jLk
@@ -66848,7 +66680,7 @@ nJJ
 nJJ
 vNi
 uGM
-fKB
+ecl
 ecl
 ecl
 jLk
@@ -72254,7 +72086,7 @@ nJJ
 nJJ
 vpD
 vpD
-tkC
+vNi
 put
 xCH
 nJJ
@@ -98037,7 +97869,7 @@ jvF
 jvF
 jvF
 jvF
-bwY
+lVe
 bwY
 abW
 uvK
