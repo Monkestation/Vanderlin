@@ -240,3 +240,6 @@
       not fully stopped.
   - bugfix: Fixed hefty swing being able to stack damage
   - bugfix: Fixed being able to attack while guarding.
+2026-06-28:
+  tired-wired:
+  - rscadd: Expanded the Crimsonlands-related class lore.
