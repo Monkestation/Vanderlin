@@ -81,17 +81,14 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/needle/proc/sew_item(obj/item/I, mob/living/user)
-	if(!(I.obj_flags & CAN_BE_HIT) && !istype(I, /obj/item/storage)) // to preserve old attack_obj behavior
+	if(!(I.obj_flags & CAN_BE_HIT) && !istype(I, /obj/item/storage))
 		return FALSE
 
 	if(!I.ontable() || !I.sewrepair)
 		return FALSE
 
-	if(!I.uses_integrity || I.obj_broken)
+	if(!I.uses_integrity)
 		to_chat(user, span_warning("[I] can't be repaired!"))
-		return FALSE
-
-	if(I.get_integrity() >= I.max_integrity)
 		return FALSE
 
 	if(stringamt < 1)
@@ -110,25 +107,25 @@
 	if(!I.obj_broken && I.get_integrity() >= I.max_integrity && (I.max_integrity != initial(I.max_integrity)))
 		if(!I.salvage_result)
 			to_chat(user, span_warning("[I] can't be melded with a needle."))
-			return TRUE
+			return FALSE
 
 		if(I.integrity_restores >= 3)
 			to_chat(user, span_warning("[I] has been melded too many times. The fabric won't take any more material."))
-			return TRUE
+			return FALSE
 
 		var/obj/item/patch = locate(I.salvage_result) in range(1, I.loc)
 		if(!patch)
 			to_chat(user, span_warning("You need [initial(I.salvage_result:name)] nearby to meld [I]."))
-			return TRUE
+			return FALSE
 
 		if(skill_level <= 0)
 			to_chat(user, span_warning("You don't know enough to meld [I]."))
-			return TRUE
+			return FALSE
 
 		playsound(src, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 		var/sewtime = (6 SECONDS - skill_level)
 		if(!do_after(user, sewtime, I))
-			return TRUE
+			return FALSE
 
 		var/restores_done = I.integrity_restores
 		var/base_restore = (skill_level / SKILL_MASTER) * 0.20
@@ -147,13 +144,61 @@
 		if(restores_done >= 2)
 			to_chat(user, span_warning("The fabric is taking the new material less readily now. Further melding will be less effective."))
 
-		use(1)
-
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25
 		user.mind.add_sleep_experience(I.sewrepair, amt2raise)
 		return TRUE
 
-	return FALSE
+	if(!I.obj_broken && I.get_integrity() >= I.max_integrity)
+		to_chat(user, span_warning("There is nothing to further repair on [I]."))
+		return FALSE
+
+	var/repair_percent = 0.025
+	if(skill_level <= 0)
+		if(prob(30))
+			repair_percent = 0.01
+			to_chat(user, span_warning("You are just barely able to repair this..."))
+		else
+			repair_percent = 0
+	else
+		repair_percent *= skill_level
+
+	if((armor_value == 0 && skill_level < 10) || (armor_value > 0 && skill_level < 20))
+		to_chat(user, span_warning("I should probably not be doing this..."))
+
+	playsound(src, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+	var/sewtime = (6 SECONDS - skill_level)
+	if(!do_after(user, sewtime, I))
+		return TRUE
+
+	var/was_broken = I.obj_broken
+	if(was_broken)
+		var/integrity_penalty = 0.65 - ((skill_level / SKILL_MASTER) * 0.60)
+		integrity_penalty = clamp(integrity_penalty, 0.05, 0.99)
+		var/integrity_loss = round(I.max_integrity * integrity_penalty)
+		I.max_integrity = max(1, I.max_integrity - integrity_loss)
+		I.obj_broken = FALSE
+		I.repair_damage(max(I.max_integrity * repair_percent, 10))
+		to_chat(user, span_warning("You patch [I] back together, but the damage has left its mark, it will never be quite as strong as it once was."))
+		if(skill_level < SKILL_MIDDLING)
+			to_chat(user, span_warning("Your inexperience made things worse. The repair is rough."))
+	else
+		if(repair_percent)
+			user.visible_message(span_info("[user] patches up [I]!"))
+			I.repair_damage(I.max_integrity * repair_percent)
+		else
+			I.take_damage(I.max_integrity * 0.1, BRUTE, "slash")
+			user.visible_message(span_warning("[user] damages [I] further!"))
+			playsound(src, 'sound/foley/cloth_rip.ogg', 50, TRUE)
+
+	use(1)
+
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25
+	if(repair_percent <= 0)
+		amt2raise *= 0.25
+
+	user.mind.add_sleep_experience(I.sewrepair, amt2raise)
+
+	return TRUE
 
 /obj/item/needle/proc/sew_wounds(mob/living/carbon/target, mob/living/user)
 	if(!istype(user) || !istype(target))

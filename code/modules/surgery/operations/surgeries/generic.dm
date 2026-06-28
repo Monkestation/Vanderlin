@@ -17,8 +17,6 @@
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/scalpel2.ogg'
 
-	any_surgery_states_blocked = ALL_SURGERY_SKIN_STATES
-
 /datum/surgery_operation/limb/incise_skin/get_any_tool()
 	return "Any sharp edged item"
 
@@ -31,6 +29,15 @@
 		return TRUE
 
 	return FALSE
+
+/datum/surgery_operation/limb/incise_skin/state_check(obj/item/bodypart/limb)
+	if(!LIMB_HAS_SKIN(limb)) // Already counts
+		return FALSE
+
+	if(limb.get_incision(surgical_only = TRUE))
+		return FALSE
+
+	return TRUE
 
 /datum/surgery_operation/limb/incise_skin/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
