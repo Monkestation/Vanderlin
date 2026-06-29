@@ -104,6 +104,9 @@
 /obj/effect/mapping_helpers/access/keyset/town/sweeper
 	accesses = list(ACCESS_SWEEPER)
 
+/obj/effect/mapping_helpers/access/keyset/town/hunter
+	accesses = list(ACCESS_HUNTER)
+
 // Town Garrison
 /obj/effect/mapping_helpers/access/keyset/garrison
 	color = "#b02323"
