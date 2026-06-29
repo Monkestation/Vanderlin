@@ -1,6 +1,6 @@
 /datum/migrant_role/khan
 	name = "Khan"
-	greet_text = "You are the khan of a horde of nomads, a warlord of the steppes, you have migrated to these lands with your horde"
+	greet_text = "You are the khan of a horde of nomads, a warlord of the Crimsonlands steppes. You have led your people here for relief from the orcs."
 	migrant_job = /datum/job/migrant/khan
 
 /datum/attribute_holder/sheet/job/migrant/khan
@@ -30,7 +30,7 @@
 
 /datum/job/migrant/khan
 	title = "Khan"
-	tutorial = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents"
+	tutorial = "The khan rides at the head of a small group of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents, solace from the frequent travel and danger of the steppes and the orcish tribes."
 	outfit = /datum/outfit/khan
 	allowed_races = RACES_PLAYER_FOREIGNNOBLE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
@@ -79,7 +79,7 @@
 
 /datum/job/migrant/nomadrider
 	title = "Nomad Rider"
-	tutorial = "You are a nomad riding behind the khan, his voice a compass his will the unyielding law that guides your path to these unknown lands"
+	tutorial = "You are a nomad riding behind the khan, their voice a compass, their will the unyielding law that guides your path to these unknown lands. Find rest and a better living here."
 	outfit = /datum/outfit/pilgrim/nomad
 	allowed_races = RACES_PLAYER_ALL
 
@@ -93,7 +93,7 @@
 		/datum/migrant_role/khan = 1,
 		/datum/migrant_role/nomadrider = 5,
 	)
-	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up your tents"
+	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up your tents, finding solace from the frequent travel and danger of the steppes."
 
 /datum/migrant_wave/nomad_migration_down
 	name = "The Khan's Migration"
@@ -104,7 +104,7 @@
 		/datum/migrant_role/khan = 1,
 		/datum/migrant_role/nomadrider = 4,
 	)
-	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents"
+	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents, finding solace from the frequent travel and danger of the steppes."
 
 /datum/migrant_wave/nomad_migration_down_one
 	name = "The Khan's Migration"
@@ -115,7 +115,7 @@
 		/datum/migrant_role/khan = 1,
 		/datum/migrant_role/nomadrider = 3,
 	)
-	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents"
+	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents, finding solace from the frequent travel and danger of the steppes."
 
 /datum/migrant_wave/nomad_migration_down_two
 	name = "The Khan's Migration"
@@ -126,7 +126,7 @@
 		/datum/migrant_role/khan = 1,
 		/datum/migrant_role/nomadrider = 2,
 	)
-	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents"
+	greet_text = "The khan rides at the head of a small horde of nomads, crossing into unfamiliar land in search of pasture and a place to set up tents, finding solace from the frequent travel and danger of the steppes."
 
 /datum/migrant_wave/nomad_migration_down_three
 	name = "The Khan's Migration"
@@ -137,7 +137,7 @@
 		/datum/migrant_role/khan = 1,
 		/datum/migrant_role/nomadrider = 1,
 	)
-	greet_text = "The khan rides with his most trusted warrior, crossing into unfamiliar land in search of pasture and a place to set up tents"
+	greet_text = "The khan rides with his most trusted warrior, crossing into unfamiliar land in search of pasture and a place to set up tents, finding solace from the frequent travel and danger of the steppes."
 
 /datum/migrant_wave/nomad_migration_down_four
 	name = "The Khan's Migration"
@@ -146,4 +146,4 @@
 	roles = list(
 		/datum/migrant_role/khan = 1,
 	)
-	greet_text = "The khan rides alone, crossing into unfamiliar land in search of pasture and a place to set up tents"
+	greet_text = "The khan rides alone, crossing into unfamiliar land in search of pasture and a place to set up tents, finding solace from the frequent travel and danger of the steppes."

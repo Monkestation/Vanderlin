@@ -1182,6 +1182,19 @@
 	stat_allowed = UNCONSCIOUS
 	snd_range = -4
 
+/datum/emote/living/snap
+	key = "snap"
+	key_third_person = "snaps their fingers."
+	message = "snaps their fingers."
+	message_muffled = "snaps their fingers."
+	restraint_check = TRUE
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_snap()
+	set name = "Snap"
+	set category = "Emotes.Noises"
+	emote("snap", intentional = TRUE)
+
 /datum/emote/living/stare
 	key = "stare"
 	key_third_person = "stares"

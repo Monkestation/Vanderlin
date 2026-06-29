@@ -25,7 +25,7 @@
 
 /datum/job/advclass/mercenary/steppesman
 	title = "Steppesman"
-	tutorial = "A mercenary hailing from the wild frontier steppes. There are three things you value most; saigas, freedom, and coin."
+	tutorial = "A mercenary hailing from the wild steppes of the Crimsonlands, well used to riding swiftly through and around orcish warring. There are three things you value most: saigas, freedom, and coin."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/mercenary/steppesman
 	category_tags = list(CTAG_MERCENARY)

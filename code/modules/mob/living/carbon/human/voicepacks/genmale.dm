@@ -86,6 +86,8 @@
 				used = list('sound/vo/male/gen/sickcough (1).ogg', 'sound/vo/male/gen/sickcough (2).ogg', 'sound/vo/male/gen/sickcough (3).ogg', 'sound/vo/male/gen/sickcough (4).ogg', 'sound/vo/male/gen/sickcough (5).ogg', 'sound/vo/male/gen/sickcough (6).ogg', 'sound/vo/male/gen/sickcough (7).ogg')
 			if("sigh")
 				used = 'sound/vo/male/gen/sigh.ogg'
+			if("snap")
+				used = list('sound/foley/fingersnap1.ogg', 'sound/foley/fingersnap2.ogg', 'sound/foley/fingersnap3.ogg', 'sound/foley/fingersnap4.ogg', 'sound/foley/fingersnap5.ogg', 'sound/foley/fingersnap6.ogg', 'sound/foley/fingersnap7.ogg')
 			if("snore")
 				used = list('sound/vo/male/gen/snore (1).ogg','sound/vo/male/gen/snore (2).ogg','sound/vo/male/gen/snore (3).ogg','sound/vo/male/gen/snore (4).ogg')
 			if("whimper")
