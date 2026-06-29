@@ -358,6 +358,7 @@
 	desc = "You suffer from terrible nitemares. You scream in your sleep and take longer to rest."
 	point_value = 1
 	var/next_scream = 0
+	var/comforted = FALSE
 
 /datum/quirk/vice/nightmares/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
@@ -371,11 +372,21 @@
 /datum/quirk/vice/nightmares/process()
 	if(!owner)
 		return
-
+	
 	if(owner.stat == UNCONSCIOUS && owner.IsSleeping())
+		var/mob/living/carbon/h = owner
+		for(var/datum/stress_event/event as anything in h.get_negative_stressors())
+			if(istype(event, /datum/stress_event/hug))
+				comforted = TRUE
+
 		if(world.time >= next_scream)
 			next_scream = world.time + rand(30 SECONDS, 60 SECONDS)
-			owner.emote("scream", forced = TRUE)
+			if(comforted)
+				to_chat(owner, span_green("I was comforted, so nitemares are not so vivid this time..."))
+			else
+				owner.emote("scream", forced = TRUE)
+	else
+		comforted = FALSE
 
 /datum/quirk/vice/nightmares/on_remove()
 	STOP_PROCESSING(SSobj, src)
@@ -445,3 +456,46 @@
 	var/to_remove = rand(6, 8)
 	jaw.remove_teeth(to_remove)
 	to_chat(H, span_warning("You run your tongue across the gaps where your teeth used to be."))
+
+/datum/quirk/vice/weak
+	name = "Weak"
+	desc = "You are simply weaker than your akins. You get -1 to Strength and -1 to Constitution."
+	point_value = 2
+
+/datum/quirk/vice/weak/on_spawn()
+	if(!ishuman(owner))
+		return
+	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1
+	))
+
+/datum/quirk/vice/weak/on_remove()
+	if(!ishuman(owner))
+		return
+	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 1
+	))
+
+/datum/quirk/vice/frail
+	name = "Frail"
+	desc = "Due injury, genetics or just any other reason, you are frailer than other people. You get -1 to Constitution and -1 to Strength."
+	point_value = 2
+
+/datum/quirk/vice/frail/on_spawn()
+	if(!ishuman(owner))
+		return
+	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
+		STAT_CONSTITUTION = -1,
+		STAT_STRENGTH = -1
+	))
+
+/datum/quirk/vice/frail/on_remove()
+	if(!ishuman(owner))
+		return
+	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
+		STAT_CONSTITUTION = 1,
+		STAT_STRENGTH = 1
+	))
+
