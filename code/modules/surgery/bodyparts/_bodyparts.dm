@@ -605,8 +605,8 @@
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
 			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.005
-			// if(owner?.IsSleeping())
-			// 	heal_amt *= 3
+			if(owner?.IsSleeping())
+				heal_amt *= 2
 		if(heal_amt)
 			heal_amt *= injury.amount
 			injury.heal_damage(heal_amt * delta_time)

@@ -187,7 +187,7 @@
 
 	if((is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
 		return TRUE
-	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 3 : 1)
+	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 2 : 1)
 
 // checks whether the injury has been appropriately treated
 /datum/injury/proc/is_treated()
