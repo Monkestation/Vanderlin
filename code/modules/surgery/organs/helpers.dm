@@ -117,26 +117,26 @@
 
 /mob/living/carbon/getorganslotlistzone(slot, zone)
 	. = list()
-	for(var/obj/item/organ/organ as anything in internal_organs_slot[slot])
+	var/obj/item/organ/organ
+	for(var/thing in internal_organs_slot[slot])
+		organ = thing
 		if(zone == check_zone(organ.current_zone))
 			. |= organ
 
 /mob/living/carbon/getorganslotefficiency(slot)
 	. = 0
-	var/count = 0
-	for(var/obj/item/organ/organ as anything in internal_organs_slot[slot])
+	var/obj/item/organ/organ
+	for(var/thing in internal_organs_slot[slot])
+		organ = thing
 		. += organ.get_slot_efficiency(slot)
-		count++
-	. /= max(count, 1)
 
 /mob/living/carbon/getorganslotefficiencyzone(slot, zone)
 	. = 0
-	var/count = 0
-	for(var/obj/item/organ/organ as anything in internal_organs_slot[slot])
+	var/obj/item/organ/organ
+	for(var/thing in internal_organs_slot[slot])
+		organ = thing
 		if(zone == check_zone(organ.current_zone))
 			. += organ.get_slot_efficiency(slot)
-			count++
-	. /= max(count, 1)
 
 /mob/living/carbon/update_organ_requirements()
 	if(status_flags & BUILDING_ORGANS)
@@ -145,7 +145,8 @@
 	total_oxygen_req = 0
 	total_nutriment_req = 0
 	total_hydration_req = 0
-	for(var/obj/item/organ/organ as anything in internal_organs)
+	for(var/thing in internal_organs)
+		var/obj/item/organ/organ = thing
 		total_blood_req += (organ.blood_req/50 * BLOOD_VOLUME_NORMAL)
 		total_oxygen_req += organ.oxygen_req
 		total_nutriment_req += (organ.nutriment_req/100)

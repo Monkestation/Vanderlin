@@ -5,7 +5,7 @@
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_EARS
 	slot = ORGAN_SLOT_EARS
-	organ_efficiency = list(ORGAN_SLOT_EARS = 100)
+	organ_efficiency = list(ORGAN_SLOT_EARS = 50)
 	gender = PLURAL
 	side = RIGHT_SIDE
 	sellprice = DEFAULT_ORGAN_VALUE/2
