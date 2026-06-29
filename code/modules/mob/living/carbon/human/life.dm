@@ -120,7 +120,7 @@
 	if(stat < 3) //not dead
 		if(dna?.species)
 			if(STUBBLE in dna.species.species_traits)
-				if(gender == MALE)
+				if(gender == MALE && (age != AGE_CHILD))
 					if(prob(50))
 						has_stubble = TRUE
 						update_body()

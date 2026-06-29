@@ -886,6 +886,7 @@
 /datum/species/proc/handle_body(mob/living/carbon/human/H)
 	H.remove_overlay(BODY_LAYER)
 	H.remove_overlay(ABOVE_BODY_FRONT_LAYER)
+	H.remove_overlay(HAIREXTRA_LAYER)
 
 	var/datum/species/species = H.dna?.species
 	var/use_female_sprites = FALSE
@@ -923,6 +924,16 @@
 			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -FRONT_MUTATIONS_LAYER)
 			bodyhair_overlay.color = H.get_hair_color()
 			standing += bodyhair_overlay
+
+		//stubble
+		S = GLOB.facial_hairstyles_list[H.facial_hairstyle]
+		var/fhair_state = S.icon_state
+		var/fhair_file = S.icon
+		var/mutable_appearance/facial_overlay = mutable_appearance(fhair_file, fhair_state, -HAIREXTRA_LAYER)
+		if((H.gender == MALE) && H.has_stubble && (STUBBLE in species_traits) && (age != AGE_CHILD))
+			var/mutable_appearance/stubble_underlay = mutable_appearance('icons/roguetown/mob/facial.dmi', "facial_stubble")
+			facial_overlay.underlays += stubble_underlay
+
 
 	//Underwear
 	if(!(NO_UNDERWEAR in species_traits))
