@@ -68,21 +68,34 @@
 			"Dagger",
 			"Rapier",
 			"Cane Blade",
-			)
-	var/choice = tgui_input_list(spawned, "CHOOSE YOUR WEAPON", "STEWARD", options)
+		)
+	var/choice = tgui_input_list(spawned, "CHOOSE YOUR WEAPON", "STEWARD", options, "Dagger")
+
 	if(!choice)
 		choice = "Dagger"
 
+	var/obj/item/weapon_choice
+	var/obj/item/weapon/scabbard/scabbard_choice
+
 	switch(choice)
 		if("Dagger")
-			spawned.put_in_hands(new /obj/item/weapon/knife/dagger/steel/royal())
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/knife/royal(), ITEM_SLOT_BELT_L, TRUE)
+			weapon_choice = new /obj/item/weapon/knife/dagger/steel/royal(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/knife/royal(spawned)
+
 		if("Rapier")
-			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/dec())
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword/royal(), ITEM_SLOT_BELT_L, TRUE)
+			weapon_choice = new /obj/item/weapon/sword/rapier/dec(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/sword/royal(spawned)
+
 		if("Cane Blade")
-			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/caneblade())
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/cane(), ITEM_SLOT_BELT_L, TRUE)
+			weapon_choice = new /obj/item/weapon/sword/rapier/caneblade(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/cane(spawned)
+
+	if(scabbard_choice && weapon_choice)
+		if(SEND_SIGNAL(scabbard_choice, COMSIG_TRY_STORAGE_INSERT, weapon_choice, null, TRUE, FALSE))
+			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
+		else
+			spawned.put_in_hands(weapon_choice)
+			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
 
 /datum/outfit/steward
 	name = JOB_STEWARD

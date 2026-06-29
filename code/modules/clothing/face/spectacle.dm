@@ -1,7 +1,8 @@
 /obj/item/clothing/face/spectacles
 	name = "spectacles"
-	icon_state = "glasses"
 	desc = "A pair of shaped lenses, worn with a bridge over the nose."
+	icon_state = "glasses"
+	w_class = WEIGHT_CLASS_SMALL
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	sellprice = 15
@@ -22,8 +23,8 @@
 
 /obj/item/clothing/face/spectacles/golden
 	name = "golden spectacles"
-	icon_state = "goggles"
 	desc = "A pair of shaped lenses, worn with a bridge over the nose. The frame of this one is golden."
+	icon_state = "goggles"
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	sellprice = 40
@@ -34,8 +35,8 @@
 
 /obj/item/clothing/face/spectacles/monocle
 	name = "silver monocle"
-	icon_state = "monocle"
 	desc = "A single shaped lens housed in silver. It is held in front of the eye by tensing the muscles around the eye socket. Using this allows you to better appraise items."
+	icon_state = "monocle"
 	max_integrity = 35
 	sellprice = 20
 	gender = NEUTER
@@ -51,7 +52,7 @@
 	var/total_sellprice = 0
 
 	if(isturf(assess_target))
-		visible_message(span_notice("[user] evaluates the items on [assess_target] with their monocle."))
+		visible_message(span_notice("[user] evaluates the items on the [assess_target] with their monocle."))
 
 		for(var/obj/item/assessed_item in assess_target.contents)
 			total_sellprice += assessed_item.sellprice
