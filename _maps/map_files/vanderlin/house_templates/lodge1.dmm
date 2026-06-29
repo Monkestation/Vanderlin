@@ -1,21 +1,102 @@
-"a" = (/turf/closed/wall/mineral/decowood,/area/indoors/town)
-"b" = (/obj/structure/table/wood/plain_alt,/obj/item/reagent_containers/glass/cup/wooden,/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"e" = (/obj/machinery/light/fueled/wallfire/candle{pixel_y = -32},/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"f" = (/obj/structure/table/wood/plain_alt,/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"g" = (/obj/structure/door,/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"p" = (/obj/structure/sign/property_sign/claim,/turf/closed/wall/mineral/decowood,/area/indoors/town)
-"u" = (/turf/closed/wall/mineral/wooddark/slitted,/area/indoors/town)
-"w" = (/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"x" = (/obj/structure/chair/wood/alt{dir = 8},/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"J" = (/obj/structure/bed/mediocre,/obj/item/bedsheet/cloth,/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"S" = (/obj/structure/closet/crate/crafted_closet/inn,/obj/item/broom,/turf/open/floor/ruinedwood/darker,/area/indoors/town)
-"U" = (/obj/structure/rack/shelf/biggest,/turf/open/floor/ruinedwood/darker,/area/indoors/town)
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"b" = (
+/turf/closed/wall/mineral/decowood,
+/area/indoors/town)
+"e" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"h" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"k" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/decowood,
+/area/indoors/town)
+"t" = (
+/obj/structure/chair/wood/alt{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"u" = (
+/obj/structure/door,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"K" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/cloth,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"L" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/broom,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"S" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"W" = (
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"Z" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/indoors/town)
 
 (1,1,1) = {"
-uuaaaa
-aJwUSa
-awwwwp
-afxwwg
-abwewa
-uaaaaa
+Z
+b
+b
+b
+b
+Z
+"}
+(2,1,1) = {"
+Z
+K
+a
+W
+h
+b
+"}
+(3,1,1) = {"
+b
+a
+a
+t
+a
+b
+"}
+(4,1,1) = {"
+b
+e
+a
+a
+S
+b
+"}
+(5,1,1) = {"
+b
+L
+a
+a
+a
+b
+"}
+(6,1,1) = {"
+b
+b
+k
+u
+b
+b
 "}
