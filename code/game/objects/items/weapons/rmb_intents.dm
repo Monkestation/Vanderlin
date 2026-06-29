@@ -243,7 +243,7 @@
 
 	if(!prob(perc))
 		playsound(user, 'sound/combat/feint.ogg', 100, TRUE)
-		if(user.client?.prefs.showrolls)
+		if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(user, span_warning("[defender.p_they(TRUE)] did not fall for my feint... [perc]%"))
 		user.apply_status_effect(/datum/status_effect/debuff/feintcd)
 		if(special_message)

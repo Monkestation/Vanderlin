@@ -73,12 +73,12 @@
 	var/clone_transfer = H.getCloneLoss()
 
 	// Heal the target
-	H.adjustToxLoss(-tox_transfer)
+	H.adjustToxLoss(-tox_transfer, forced = TRUE)
 	H.adjustOxyLoss(-oxy_transfer)
 	H.adjustCloneLoss(-clone_transfer)
 
 	// Apply damage to the caster
-	user.adjustToxLoss(tox_transfer)
+	user.adjustToxLoss(tox_transfer, forced = TRUE)
 	user.adjustOxyLoss(oxy_transfer)
 	user.adjustCloneLoss(clone_transfer)
 
@@ -86,6 +86,7 @@
 		if(!injury.can_heal())
 			continue
 		injury.transfer_injury(user)
+	H.updatehealth()
 
 	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
 		artery.applyOrganDamage(-artery.damage)

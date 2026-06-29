@@ -62,7 +62,7 @@
 	var/atom/movable/to_follow = speaker
 	var/link = FOLLOW_LINK(src, to_follow)
 	if(client?.prefs)
-		if(!(client?.prefs.toggles_maptext & DISABLE_RUNECHAT) && (client.prefs.see_chat_non_mob || ismob(speaker)))
+		if(!(client?.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT) && (client.prefs.read_preference(/datum/preference/toggle/see_chat_non_mob) || ismob(speaker)))
 			create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose the message, because it's scrambled by default
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)

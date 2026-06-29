@@ -2044,10 +2044,10 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			if(!job_check.prefs_species_check(prefs))
 				continue
 
-			if(length(job_check.allowed_sexes) && !(prefs.gender in job_check.allowed_sexes))
+			if(length(job_check.allowed_sexes) && !(prefs.read_preference(/datum/preference/choiced/gender) in job_check.allowed_sexes))
 				continue
 
-			if(length(job_check.allowed_ages) && !(prefs.age in job_check.allowed_ages))
+			if(length(job_check.allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in job_check.allowed_ages))
 				continue
 
 			// Valid assign this job
@@ -2136,11 +2136,11 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			job_fail += "Wrong species (disallowed: [job_check.blacklisted_species.Join(", ")])"
 
 		// Check allowed sexes
-		if(length(job_check.allowed_sexes) && !(prefs.gender in job_check.allowed_sexes))
+		if(length(job_check.allowed_sexes) && !(prefs.read_preference(/datum/preference/choiced/gender) in job_check.allowed_sexes))
 			job_fail += "Wrong sex (allowed: [job_check.allowed_sexes.Join(", ")])"
 
 		// Check allowed ages
-		if(length(job_check.allowed_ages) && !(prefs.age in job_check.allowed_ages))
+		if(length(job_check.allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in job_check.allowed_ages))
 			job_fail += "Wrong age (allowed: [job_check.allowed_ages.Join(", ")])"
 
 		// If no fails, player can join this wave

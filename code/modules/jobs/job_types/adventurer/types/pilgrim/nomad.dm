@@ -23,7 +23,7 @@
 
 /datum/job/advclass/pilgrim/nomad
 	title = "Nomadic Herder"
-	tutorial = "A nomad from the far steppes, you and your saigas have journeyed far to reach these lands."
+	tutorial = "A nomad from the far steppes of the Crimsonlands, you and your saigas have journeyed far to reach these lands."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/pilgrim/nomad
 	category_tags = list(CTAG_PILGRIM)

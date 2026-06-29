@@ -42,6 +42,40 @@
 		/datum/attribute/skill/combat/swords = list(30, 30)
 	)
 
+/datum/attribute_holder/sheet/job/confessor/adrenal
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+	)
+
+/datum/attribute_holder/sheet/job/confessor/atrophy
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = -3,
+		STAT_SPEED = 4
+	)
+
+/datum/attribute_holder/sheet/job/confessor/greenskin
+	raw_attribute_list = list(
+		STAT_ENDURANCE = -2,
+		STAT_STRENGTH = 2
+	)
+
+/datum/attribute_holder/sheet/job/confessor/stomach
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2
+	)
+
+/datum/attribute_holder/sheet/job/confessor/nerve
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 3,
+		STAT_FORTUNE = -1
+	)
+
+/datum/attribute_holder/sheet/job/confessor/nightmare
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_PERCEPTION = 1
+	)
+
 /datum/job/advclass/sacrestant/confessor
 	title = "Confessor"
 	tutorial = "Psydonite hunters, unmatched in the fields of subterfuge and investigation. There is no suspect too powerful to investigate, no room too guarded to infiltrate, and no weakness too hidden to exploit. The Ordo Venatari trained you, and this, your final hunt as a student, will prove the wisdom of their teachings."
@@ -115,6 +149,72 @@
 			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), initial = TRUE)
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
 			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), initial = TRUE)
+
+	// Enhancement selection
+	var/list/enhancements = list(
+		"Auxiliary Adrenal Glands - Pain Resist",
+		"Controlled Atrophy - Rapid Movement",
+		"Formikrag Liver - Reversed Toxin Damage",
+		"Goblin Eyes - Nightvision",
+		"Greenskin Hands - Strong Grip",
+		"Inhumen Stomach - Enhanced Endurance",
+		"Leviathanian Membrane - No Terrain Slowdown",
+		"Nerve Staple - No Mood",
+		"Nightmare Ward - No Sleep and Anti-Scrying",
+		"Serpentine Glands - Thermal Vision and Venom")
+	//only four options
+	enhancements = shuffle(enhancements)
+	enhancements.Cut(4, 0)
+	enhancements += "Disguise Kit - Deceiving Meekness" //Always give this option
+	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
+
+	switch(enhancement_choice)
+		if("Auxiliary Adrenal Glands - Pain Resist")
+			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/adrenal)
+		if("Controlled Atrophy - Rapid Movement")
+			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
+		if("Formikrag Liver - Reversed Toxin Damage")
+			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
+			var/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
+			if(stomach)
+				stomach.Remove(spawned,1)
+				QDEL_NULL(stomach)
+			stomach = new /obj/item/organ/stomach/acid_spit
+			stomach.Insert(spawned)
+		if("Goblin Eyes - Nightvision")
+			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
+			if(eyes)
+				eyes.Remove(spawned,1)
+				QDEL_NULL(eyes)
+			eyes = new /obj/item/organ/eyes/night_vision/nightmare
+			eyes.Insert(spawned)
+		if("Greenskin Hands - Strong Grip")
+			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
+		if("Inhumen Stomach - Enhanced Endurance")
+			ADD_TRAIT(spawned, TRAIT_NASTY_EATER, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/stomach)
+		if("Leviathanian Membrane - No Terrain Slowdown")
+			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_SWIMMER, TRAIT_GENERIC)
+		if("Nerve Staple - No Mood")
+			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
+		if("Nightmare Ward - No Sleep and Anti-Scrying")
+			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
+		if("Disguise Kit - Deceiving Meekness")
+			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+			var/obj/item/harlequin_disguise_kit/kit = new(get_turf(spawned))
+			spawned.put_in_hands(kit)
+		if("Serpentine Glands - Thermal Vision and Venom")
+			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
 
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"

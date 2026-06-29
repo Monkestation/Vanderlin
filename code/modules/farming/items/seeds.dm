@@ -134,6 +134,9 @@
 /obj/item/neuFarm/seed/tamto
 	plant_def_type = /datum/plant_def/tamto
 
+/obj/item/neuFarm/seed/ollie
+	plant_def_type = /datum/plant_def/ollie
+
 /obj/item/neuFarm/seed/pompkaun
 	plant_def_type = /datum/plant_def/pompkaun
 

@@ -66,7 +66,6 @@
 		/obj/item/storage/keyring/guard,
 	)
 
-// Bandit's belt starts with a bandage and a key to their guildhall.
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
 		/obj/item/natural/cloth/bandage,
@@ -80,7 +79,6 @@
 /obj/item/storage/belt/leather/mercenary/black
 	name = "black belt"
 	icon_state = "blackbelt"
-
 
 /obj/item/storage/belt/leather/plaquegold
 	name = "plaque belt"
@@ -647,3 +645,79 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
+
+//////////////////////////////////////////
+
+/obj/item/storage/hip/orebag
+	name = "miner's satchel"
+	desc = "a satchel designed to help miners quickly sort and store ore, minerals, and gems"
+	icon = 'icons/roguetown/clothing/storage.dmi'
+	icon_state = "minebag"
+	item_state = "minebag"
+	slot_flags = ITEM_SLOT_HIP| ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_NORMAL
+	dropshrink = 0.7
+	max_integrity = 400
+	equip_sound = 'sound/blank.ogg'
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 2
+	salvage_result = /obj/item/natural/hide/cured
+	component_type = /datum/component/storage/concrete/grid/orebag
+	var/auto_pickup = TRUE
+
+/obj/item/storage/hip/orebag/equipped(mob/user, slot)
+	. = ..()
+	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_user_moved), TRUE)
+
+/obj/item/storage/hip/orebag/dropped(mob/user)
+	. = ..()
+	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
+
+/obj/item/storage/hip/orebag/proc/on_user_moved(mob/living/user)
+	SIGNAL_HANDLER
+	var/picked_up = FALSE
+
+	if(!auto_pickup)
+		return
+
+	if(user.incapacitated() || !user.canUseStorage())
+		return
+
+
+	var/turf/orebagturf = get_turf(user)
+	if(!orebagturf)
+		return
+
+
+	var/datum/component/storage/orebagstorage = GetComponent(/datum/component/storage)
+	if(!orebagstorage)
+		return
+
+	for(var/obj/item/orebagitem in orebagturf)
+		if(orebagstorage.can_be_inserted(orebagitem, TRUE, user))
+			orebagstorage.handle_item_insertion(orebagitem, TRUE, user)
+			picked_up = TRUE
+	if(picked_up)
+		user.visible_message(span_info("[user] picks up the ore beneath them, placing it into the ore bag..."))
+////
+/obj/item/storage/hip/orebag/examine(mob/user)
+	. = ..()
+
+	if(auto_pickup)
+		. += span_notice("You are ready to collect ores.")
+	else
+		. += span_notice("You are not ready to collect ores.")
+
+/obj/item/storage/hip/orebag/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("Walking over or clicking on the tiles with select items will automatically scoop them into the bag.")
+	. += span_notice("Alt+Left Clicking the bag can disable/enable picking up ores.")
+
+/obj/item/storage/hip/orebag/AltClick(mob/user, list/modifiers)
+	. = ..()
+	auto_pickup = !auto_pickup
+
+	if(auto_pickup)
+		to_chat(user, span_notice("You ready yourself to collect ores with your satchel."))
+	else
+		to_chat(user, span_notice("You will no longer collect ores with your satchel."))

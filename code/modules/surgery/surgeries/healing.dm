@@ -140,7 +140,7 @@
 		if(!length(parts))
 			return
 		var/obj/item/bodypart/picked = pick(parts)
-		picked.bodypart_attacked_by(BCLASS_CUT, urdamageamt_burn + urdamageamt_brute, user, modifiers = list(CRIT_MOD_CHANCE = -100))
+		picked.bodypart_attacked_by(BCLASS_CUT, urdamageamt_burn + urdamageamt_brute, user, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 	else
 		target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn, required_status = BODYPART_ORGANIC)
 	return TRUE

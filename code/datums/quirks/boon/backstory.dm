@@ -137,9 +137,9 @@
 		return TRUE
 
 	// Check age restrictions
-	if(length(allowed_ages) && !(prefs.age in allowed_ages))
+	if(length(allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in allowed_ages))
 		return FALSE
-	if(prefs.age in blocked_ages)
+	if(prefs.read_preference(/datum/preference/choiced/age) in blocked_ages)
 		return FALSE
 
 	// Check species restrictions

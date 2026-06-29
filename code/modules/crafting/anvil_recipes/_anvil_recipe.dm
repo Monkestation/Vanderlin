@@ -59,6 +59,7 @@
 
 	if(needed_item)
 		to_chat(user, span_notice("Now it's time to add \a [needed_item.name]."))
+		user.balloon_alert(user, "Add \a [needed_item.name]!")
 		return FALSE
 
 	return TRUE
@@ -99,6 +100,7 @@
 		if(length(additional_items))
 			needed_item = pick_n_take(additional_items)
 			to_chat(user, span_notice("Now it's time to add \a [needed_item.name]."))
+			user.balloon_alert(user, "Add \a [needed_item.name]!")
 			progress = 0
 		else
 			to_chat(user, span_info("It's ready."))
