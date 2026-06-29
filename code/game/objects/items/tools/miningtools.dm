@@ -1,6 +1,8 @@
 /obj/item/weapon/pick
 	force = DAMAGE_PICK
+	force_wielded = DAMAGE_PICK_WIELD
 	possible_item_intents = list(PICK_INTENT)
+	gripped_intents = list(PICK_INTENT)
 	name = "pick"
 	desc = ""
 	icon_state = "pick"
@@ -23,6 +25,8 @@
 	if(tag)
 		switch(tag)
 			if("gen")
+				return list("shrink" = 0.6,"sx" = -10,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -8,"wy" = -7,"ex" = 7,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -80,"eturn" = 81,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
 				return list("shrink" = 0.7,"sx" = -10,"sy" = 0,"nx" = 11,"ny" = 0,"wx" = -8,"wy" = 1,"ex" = 4,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
@@ -33,6 +37,7 @@
 	icon_state = "cpick"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	force = DAMAGE_PICK - 3
+	force_wielded = DAMAGE_PICK_WIELD - 3
 	toolspeed = 3
 	pickmult = 0.8 // Worse pick
 	associated_skill = /datum/attribute/skill/combat/axesmaces
@@ -45,7 +50,7 @@
 	desc = "With a reinforced handle and sturdy shaft, this is a superior tool for delving in the darkness."
 	icon_state = "steelpick"
 	force = DAMAGE_PICK + 3
-	gripped_intents = list(PICK_INTENT)
+	force_wielded = DAMAGE_PICK_WIELD +3
 	max_integrity = INTEGRITY_STRONGEST + 100
 	melting_material = /datum/material/steel
 	melt_amount = 75
@@ -56,6 +61,7 @@
 	desc = "Stone versus sharp stone, who wins?"
 	icon_state = "stonepick"
 	force = DAMAGE_PICK - 6
+	force_wielded = DAMAGE_PICK_WIELD - 6
 	gripped_intents = list(PICK_INTENT)
 	max_integrity = INTEGRITY_STANDARD + 50
 	anvilrepair = null

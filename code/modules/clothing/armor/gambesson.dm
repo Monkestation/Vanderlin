@@ -112,6 +112,20 @@
 	detail_color = CLOTHING_ROYAL_PURPLE
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
+/obj/item/clothing/armor/gambeson/hunts
+	name = "hunting gambeson"
+	desc = "A thick, protective, rogueish looking gambeson, fashioned not for those looking to just look fancy- No, this is for a true hunter who knows exactly what they want, and how to get it, a hunter who knows what they need to protect them from stray thorns, and savage beasts."
+	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	icon_state = "handhunt"
+	item_state = "handhunt"
+	armor = ARMOR_PADDED_GOOD
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
+
 //................ Padded Dress ............... //
 /obj/item/clothing/armor/gambeson/heavy/dress
 	name = "padded dress"
@@ -152,6 +166,11 @@
 	sellprice = VALUE_GAMBESSON+BONUS_VALUE_MODEST
 
 	body_parts_covered =  COVERAGE_ALL_BUT_LEGS
+
+/obj/item/clothing/armor/gambeson/arming/fencer
+	name = "fencing shirt"
+	desc = "A comfortable padded shirt designed for fencers, providing a bit of protection to vital areas."
+	icon_state = "fencingshirt"
 
 //................ Stalker Robe ............... //
 /obj/item/clothing/armor/gambeson/shadowrobe

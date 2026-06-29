@@ -261,7 +261,7 @@ Transfer_mind is there to check if mob is being deleted/not going to have a body
 Works together with spawning an observer, noted above.
 */
 
-/mob/proc/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip)
+/mob/proc/ghostize(can_reenter_corpse = 1, drawskip)
 	if(key)
 		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
 		if(client)
@@ -273,7 +273,7 @@ Works together with spawning an observer, noted above.
 				ghost.key = key
 				return ghost
 //		if(client)
-//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
+//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.read_preference(/datum/preference/numeric/musicvol), channel = CHANNEL_MUSIC)
 //			play_priomusic(S)
 		var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
 		if(drawskip)
@@ -293,18 +293,6 @@ Works together with spawning an observer, noted above.
 			return ghost
 		ghost.add_client_colour(/datum/client_colour/monochrome)
 		return ghost
-
-/mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE)
-	if(mind)
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
-			if(force_respawn)
-				mind.remove_antag_datum(/datum/antagonist/zombie)
-				return ..()
-			// if(!Z.revived)
-			// 	if(!(world.time % 5))
-			// 		to_chat(src, "<span class='warning'>I'm preparing to walk again.</span>")
-			// 	return
-	return ..()
 
 /mob/proc/scry_ghost()
 	if(key)
@@ -387,8 +375,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>My spirit has been snatched away by Graggar!</span>")
 		return
 	if(is_antag_banned(ckey, ROLE_ZOMBIE))
-		var/datum/antagonist/zombie/is_zombie = mind.has_antag_datum(/datum/antagonist/zombie)
-		if(is_zombie?.revived)
+		if(mind.has_antag_datum(/datum/antagonist/zombie))
 			to_chat(src, span_warning("I am banned from playing deadites."))
 			return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
@@ -472,8 +459,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(source)
 			var/atom/movable/screen/alert/A = throw_alert("[REF(source)]_notify_cloning", /atom/movable/screen/alert/notify_cloning)
 			if(A)
-				if(client && client.prefs && client.prefs.UI_style)
-					A.icon = ui_style2icon(client.prefs.UI_style)
+				if(client && client.prefs && client.prefs.read_preference(/datum/preference/choiced/UI_style))
+					A.icon = ui_style2icon(client.prefs.read_preference(/datum/preference/choiced/UI_style))
 				A.desc = message
 				var/old_layer = source.layer
 				var/old_plane = source.plane
@@ -745,7 +732,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/update_sight()
 	if(client)
-		ghost_others = client.prefs.ghost_others //A quick update just in case this setting was changed right before calling the proc
+		ghost_others = client.prefs.read_preference(/datum/preference/choiced/ghost_others) //A quick update just in case this setting was changed right before calling the proc
 
 	if (!ghostvision)
 		see_invisible = SEE_INVISIBLE_LIVING
@@ -785,11 +772,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				client.images -= GLOB.ghost_images_default
 			if(GHOST_OTHERS_SIMPLE)
 				client.images -= GLOB.ghost_images_simple
-	lastsetting = client.prefs.ghost_others
+	lastsetting = client.prefs.read_preference(/datum/preference/choiced/ghost_others)
 	if(!ghostvision)
 		return
-	if(client.prefs.ghost_others != GHOST_OTHERS_THEIR_SETTING)
-		switch(client.prefs.ghost_others)
+	if(client.prefs.read_preference(/datum/preference/choiced/ghost_others) != GHOST_OTHERS_THEIR_SETTING)
+		switch(client.prefs.read_preference(/datum/preference/choiced/ghost_others))
 			if(GHOST_OTHERS_DEFAULT_SPRITE)
 				client.images |= (GLOB.ghost_images_default-ghostimage_default)
 			if(GHOST_OTHERS_SIMPLE)
@@ -822,7 +809,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return FALSE
 
 	target.key = key
-	target.set_faction(FACTION_NEUTRAL)
+	target.set_faction(list(FACTION_NEUTRAL))
 	return TRUE
 
 //this is a mob verb instead of atom for performance reasons
@@ -934,9 +921,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	set_ghost_appearance()
 	if(client && client.prefs)
-		deadchat_name = client.prefs.real_name
-		mind.ghostname = client.prefs.real_name
-		name = client.prefs.real_name
+		deadchat_name = client.prefs.read_preference(/datum/preference/text/real_name)
+		mind.ghostname = client.prefs.read_preference(/datum/preference/text/real_name)
+		name = client.prefs.read_preference(/datum/preference/text/real_name)
 
 /mob/dead/observer/proc/set_ghost_appearance()
 	if(!client?.prefs)

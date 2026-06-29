@@ -1,0 +1,4 @@
+author: "Sulaboy"
+delete-after: True
+changes:
+  - qol: "You can now alt click \"The Book\" to select an Event/God to read aloud about."

@@ -7,7 +7,7 @@
 		/datum/surgery_step/heal,
 		/datum/surgery_step/cauterize,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_CHEST)
 
 /datum/surgery_step/heal
@@ -18,7 +18,7 @@
 		TOOL_IMPROVISED_HEMOSTAT = 50,
 		TOOL_SCREWDRIVER = 50,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	minimum_time = 3.5 SECONDS
 	maximum_time = 5.1 SECONDS
 	replaced_by = /datum/surgery_step
@@ -50,12 +50,17 @@
 		for(var/datum/injury/injury as anything in target.all_injuries)
 			if(brute && burn)
 				break
-			if(injury.damage_type in list(WOUND_BLUNT, WOUND_INTERNAL_BRUISE, WOUND_LASH))
-				brute = TRUE
+			if(injury.required_status != BODYPART_ORGANIC)
 				continue
-			if(injury.damage_type == WOUND_BURN)
+			if(!injury.can_heal())
+				continue
+			if(injury.is_surgical())
+				continue
+			if(injury.damage_type & FIRE_WOUND_TYPES)
 				burn = TRUE
-				continue
+			else if(injury.damage_type & BRUTE_WOUND_TYPES)
+				brute = TRUE
+
 		if(!((brutehealing && brute) || (burnhealing && burn)))
 			return FALSE
 
@@ -92,10 +97,26 @@
 		tmsg += " as best as they can while [target] has clothing on"
 	if(iscarbon(target))
 		for(var/datum/injury/injury as anything in target.all_injuries)
-			if(urhealedamt_burn && injury.damage_type == WOUND_BURN && injury.required_status == BODYPART_ORGANIC)
+			if(!urhealedamt_burn && !urhealedamt_brute)
+				break
+			if(injury.required_status != BODYPART_ORGANIC)
+				continue
+			if(!injury.can_heal())
+				continue
+			if(injury.is_surgical())
+				continue
+
+			if(injury.damage_type & FIRE_WOUND_TYPES)
 				urhealedamt_burn = injury.heal_damage(urhealedamt_burn)
-			if(urhealedamt_brute && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)) && injury.required_status == BODYPART_ORGANIC)
+			else if(injury.damage_type & BRUTE_WOUND_TYPES)
 				urhealedamt_brute = injury.heal_damage(urhealedamt_brute)
+
+		var/update_overlays = FALSE
+		for(var/obj/item/bodypart/bodypart as anything in target.bodyparts)
+			update_overlays |= bodypart.post_damage_change(FALSE)
+		if(update_overlays)
+			target.update_damage_overlays()
+		target.updatehealth()
 	else
 		target.heal_bodypart_damage(urhealedamt_brute, urhealedamt_burn, required_status = BODYPART_ORGANIC)
 	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)
@@ -119,7 +140,7 @@
 		if(!length(parts))
 			return
 		var/obj/item/bodypart/picked = pick(parts)
-		picked.bodypart_attacked_by(BCLASS_CUT, urdamageamt_burn + urdamageamt_brute, user, modifiers = list(CRIT_MOD_CHANCE = -100))
+		picked.bodypart_attacked_by(BCLASS_CUT, urdamageamt_burn + urdamageamt_brute, user, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 	else
 		target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn, required_status = BODYPART_ORGANIC)
 	return TRUE

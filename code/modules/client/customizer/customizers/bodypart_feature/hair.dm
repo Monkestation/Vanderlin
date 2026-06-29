@@ -46,7 +46,7 @@
 		if("hair_color")
 			var/list/hairs
 			var/new_color
-			if(prefs.age == AGE_OLD && (OLDGREY in prefs.pref_species.species_traits))
+			if(prefs.read_preference(/datum/preference/choiced/age) == AGE_OLD && (OLDGREY in prefs.pref_species.species_traits))
 				hairs = prefs.pref_species.get_oldhc_list()
 			else
 				hairs = prefs.pref_species.get_hairc_list()
@@ -94,14 +94,20 @@
 	var/dye_gradient = /datum/hair_gradient/none
 	var/dye_color = "#FFFFFF"
 
-/datum/customizer_choice/bodypart_feature/hair/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
+/datum/customizer_choice/bodypart_feature/hair/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
 	return pick(sprite_accessories)
 
-/datum/customizer_choice/bodypart_feature/hair/get_random_color(datum/customizer_entry/entry, datum/preferences/prefs, accessory_type)
-	var/datum/species/species = return_species(prefs)
+/datum/customizer_choice/bodypart_feature/hair/get_random_color(datum/customizer_entry/entry, mob/living/carbon/human/human, accessory_type)
+	var/datum/species/species = return_species(human)
 	var/list/hairs
 	var/new_color
-	if(prefs.age == AGE_OLD)
+	var/age
+	if(istype(human))
+		age = human.age
+	else
+		var/datum/preferences/prefs = human
+		age = prefs.read_preference(/datum/preference/choiced/age)
+	if(age == AGE_OLD)
 		hairs = species.get_oldhc_list()
 	else
 		hairs = species.get_hairc_list()
@@ -357,7 +363,12 @@
 		/datum/sprite_accessory/hair/head/triplebuns,
 		/datum/sprite_accessory/hair/head/nest,
 		/datum/sprite_accessory/hair/head/strand,
-		/datum/sprite_accessory/hair/head/sodden
+		/datum/sprite_accessory/hair/head/sodden,
+		/datum/sprite_accessory/hair/head/guildupdo,
+		/datum/sprite_accessory/hair/head/tapstersbun,
+		/datum/sprite_accessory/hair/head/thescientist,
+		/datum/sprite_accessory/hair/head/sleek,
+		/datum/sprite_accessory/hair/head/delver
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton
@@ -412,11 +423,17 @@
 	abstract_type = /datum/customizer/bodypart_feature/hair/facial
 	name = "Facial Hair"
 
-/datum/customizer/bodypart_feature/hair/facial/is_allowed(datum/preferences/prefs)
-	var/datum/species/species = return_species(prefs)
-	if(prefs.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
-		return FALSE
-	return (prefs.gender == MALE) || (istype(species, /datum/species/dwarf) && prefs.gender == FEMALE) || istype(species, /datum/species/triton)
+/datum/customizer/bodypart_feature/hair/facial/is_allowed(mob/living/carbon/human/human)
+	var/datum/species/species = return_species(human)
+	if(istype(human))//shitcode but fuck man
+		if(human.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
+			return FALSE
+		return (human.gender == MALE) || (istype(species, /datum/species/dwarf) && human.gender == FEMALE) || istype(species, /datum/species/triton)
+	else
+		var/datum/preferences/pref = human
+		if(pref.read_preference(/datum/preference/choiced/age) == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
+			return FALSE
+		return (pref.read_preference(/datum/preference/choiced/gender) == MALE) || (istype(species, /datum/species/dwarf) && pref.read_preference(/datum/preference/choiced/gender) == FEMALE) || istype(species, /datum/species/triton)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid
 	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/facial/humanoid)
@@ -481,10 +498,15 @@
 		/datum/sprite_accessory/hair/facial/triton/catfish,
 	)
 
-/datum/customizer_choice/bodypart_feature/hair/facial/humanoid/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
-	var/datum/species/species = return_species(prefs)
-
-	if((prefs.gender == MALE) || istype(species, /datum/species/dwarf))
+/datum/customizer_choice/bodypart_feature/hair/facial/humanoid/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
+	var/datum/species/species = return_species(human)
+	var/age
+	if(istype(human))
+		age = human.age
+	else
+		var/datum/preferences/prefs = human
+		age = prefs.read_preference(/datum/preference/choiced/age)
+	if((age == MALE) || istype(species, /datum/species/dwarf))
 		return pick(sprite_accessories)
 	else
 		return /datum/sprite_accessory/hair/facial/shaved

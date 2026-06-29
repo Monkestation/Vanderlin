@@ -524,7 +524,7 @@
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
 "kz" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/royal)
 "kA" = (
@@ -1732,7 +1732,7 @@
 	},
 /area/under/tomb/sewer)
 "Ka" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "Kg" = (

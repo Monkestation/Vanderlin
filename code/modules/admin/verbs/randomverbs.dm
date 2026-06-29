@@ -372,22 +372,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(usr, "<font color='red'>There is no active key like that in the game or the person is not currently a ghost.</font>")
 		return
 
-	if(G_found.mind && !G_found.mind.active)	//mind isn't currently in use by someone/something
-
-		//check if they were a monkey
-		if(findtext(G_found.real_name,"monkey"))
-			if(tgui_alert(usr, "This character appears to have been a monkey. Would you like to respawn them as such?", "Confirm", list("Yes","No")) == "Yes")
-				var/mob/living/carbon/monkey/new_monkey = new
-				SSjob.SendToBackupPoint(new_monkey)
-				G_found.mind.transfer_to(new_monkey)	//be careful when doing stuff like this! I've already checked the mind isn't in use
-				new_monkey.key = G_found.key
-				to_chat(new_monkey, "You have been fully respawned. Enjoy the game.")
-				var/msg = "<span class='adminnotice'>[key_name_admin(usr)] has respawned [new_monkey.key] as a filthy xeno.</span>"
-				message_admins(msg)
-				admin_ticket_log(new_monkey, msg)
-				return	//all done. The ghost is auto-deleted
-
-
 	//Ok, it's not a xeno or a monkey. So, spawn a human.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
 	SSjob.SendToBackupPoint(new_character)
@@ -408,7 +392,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		var/datum/preferences/A = new()
 		A.safe_transfer_prefs_to(new_character)
-		A.real_name = G_found.real_name
+		//A.real_name = G_found.real_name
 		new_character.dna.update_dna_identity()
 
 	new_character.name = new_character.real_name
@@ -688,7 +672,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	for(var/datum/atom_hud/antag/H in GLOB.huds) // add antag huds
 		(adding_hud) ? H.add_hud_to(usr) : H.remove_hud_from(usr)
 
-	if(prefs.toggles & COMBOHUD_LIGHTING)
+	if(prefs.read_preference(/datum/preference/bitwise/toggles) & COMBOHUD_LIGHTING)
 		if(adding_hud)
 			mob.lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
 		else
@@ -1004,7 +988,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if("Remove")
 			if(!GLOB.trait_name_map)
 				GLOB.trait_name_map = generate_trait_name_map()
-			for(var/trait in D.status_traits)
+			for(var/trait in D._status_traits)
 				var/name = GLOB.trait_name_map[trait] || trait
 				availible_traits[name] = trait
 
@@ -1027,7 +1011,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				if("All")
 					source = null
 				if("Specific")
-					source = input("Source to be removed","Trait Remove/Add") as null|anything in sortList(D.status_traits[chosen_trait])
+					source = input("Source to be removed","Trait Remove/Add") as null|anything in sortList(D._status_traits[chosen_trait])
 					if(!source)
 						return
 			REMOVE_TRAIT(D,chosen_trait,source)

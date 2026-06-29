@@ -64,162 +64,64 @@
 
 //roguetown
 // Expensive dyes ==========================
-#define CLOTHING_DARK_INK "#392f2f"
-#define CLOTHING_PLUM_PURPLE "#4b3c54"
-#define CLOTHING_SALMON	 "#70545e"
 #define CLOTHING_BLOOD_RED "#763434"
-#define CLOTHING_OCEAN "#45749d"
-#define CLOTHING_SWAMPWEED "#00713d"
-
-#define CLOTHING_MAROON	 "#533727"
-#define CLOTHING_RED_OCHRE "#913831"
-#define CLOTHING_RUSSET	 "#80461B"
-#define CLOTHING_MUSTARD_YELLOW "#E1AD01"
-#define CLOTHING_YELLOW_OCHRE "#685e3b"
+#define CLOTHING_DARK_INK "#392f2f"
 #define CLOTHING_FOREST_GREEN "#45553f"
-#define CLOTHING_SKY_BLUE "#40445f"
 #define CLOTHING_MAGE_BLUE "#454fa6"
 #define CLOTHING_MAGE_GREEN "#60794a"
+#define CLOTHING_MAGE_GREY "#6c6c6c"
 #define CLOTHING_MAGE_ORANGE "#935329"
 #define CLOTHING_MAGE_YELLOW "#a79730"
+#define CLOTHING_MUSTARD_YELLOW "#E1AD01"
+#define CLOTHING_MAROON	 "#533727"
+#define CLOTHING_OCEAN "#45749d"
+#define CLOTHING_PLUM_PURPLE "#4b3c54"
+#define CLOTHING_RED_OCHRE "#913831"
+#define CLOTHING_RUSSET	 "#80461B"
+#define CLOTHING_SALMON	 "#70545e"
+#define CLOTHING_SCARLET "#a0171d"
+#define CLOTHING_SKY_BLUE "#40445f"
+#define CLOTHING_SWAMPWEED "#00713d"
+#define CLOTHING_VIOLET	"#411a68"
+#define CLOTHING_YELLOW_OCHRE "#685e3b"
 
 // Royal dyes ==========================
-#define CLOTHING_ROYAL_RED "#813434"
-#define CLOTHING_ROYAL_MAJENTA "#822b52"
-#define CLOTHING_FYRITIUS_ORANGE "#9b7540"
-#define CLOTHING_ROYAL_PURPLE "#865c9c"
-#define CLOTHING_BARK_BROWN "#685542"
-#define CLOTHING_ROYAL_BLACK "#2f352f"
 #define CLOTHING_BOG_GREEN "#4f693b"
+#define CLOTHING_BARK_BROWN "#685542"
+#define CLOTHING_CHALK_WHITE "#c7c0b5"
+#define CLOTHING_FYRITIUS_ORANGE "#9b7540"
+#define CLOTHING_ROYAL_BLACK "#2f352f"
+#define CLOTHING_ROYAL_MAJENTA "#822b52"
+#define CLOTHING_ROYAL_PURPLE "#865c9c"
+#define CLOTHING_ROYAL_RED "#813434"
 #define CLOTHING_ROYAL_TEAL "#3b817a"
 #define CLOTHING_PEAR_YELLOW "#a19f52"
-#define CLOTHING_CHALK_WHITE "#c7c0b5"
 
 // Cheap dyes ==========================
-#define CLOTHING_SOOT_BLACK "#414145"
-#define CLOTHING_WINESTAIN_RED "#673c3c"
-#define CLOTHING_PEASANT_BROWN "#634f44"
-#define CLOTHING_MUD_BROWN "#6f5f4d"
-#define CLOTHING_CHESTNUT "#604631"
-#define CLOTHING_OLD_LEATHER "#473f39"
-#define CLOTHING_SPRING_GREEN "#41493a"
-#define CLOTHING_BERRY_BLUE "#39404d"
-#define CLOTHING_TARAXACUM_YELLOW "#63673c"
-
 #define CLOTHING_ASH_GREY "#676262"
+#define CLOTHING_BERRY_BLUE "#39404d"
 #define CLOTHING_CANVAS "#858564"
+#define CLOTHING_CHESTNUT "#604631"
+#define CLOTHING_EGGPLANT "#5d4356"
 #define CLOTHING_LINEN "#a1a17a"
+#define CLOTHING_MUD_BROWN "#6f5f4d"
+#define CLOTHING_OLD_LEATHER "#473f39"
+#define CLOTHING_PEASANT_BROWN "#634f44"
+#define CLOTHING_PITCH "#2b292e"
+#define CLOTHING_SPRING_GREEN "#41493a"
+#define CLOTHING_SOOT_BLACK "#414145"
+#define CLOTHING_TARAXACUM_YELLOW "#7d853c"
 #define CLOTHING_WHITE "#ffffff"
+#define CLOTHING_WINESTAIN_RED "#673c3c"
+
 #define CLOTHING_WET "#afafaf"
 
-#define CLOTHING_RED				"#8b2323"
-#define CLOTHING_PURPLE				"#8747b1"
-#define CLOTHING_BLACK				"#2b292e"
-#define CLOTHING_GREY				"#6c6c6c"
-#define CLOTHING_BROWN				"#61462c"
-#define CLOTHING_GREEN				"#428138"
-#define CLOTHING_DARK_GREEN			"#264d26"
-#define CLOTHING_BLUE				"#173266"
-#define CLOTHING_YELLOW				"#ffcd43"
-#define CLOTHING_TEAL				"#249589"
-#define CLOTHING_AZURE				"#007fff"
-#define CLOTHING_ORANGE				"#df8405"
-#define CLOTHING_MAGENTA			"#962e5c"
-
-//extended dye
-#define CLOTHING_BURLAP				"#a09571"
-#define CLOTHING_CREAM				"#fffdd0"
-#define CLOTHING_DARK_GREY			"#505050"
-#define CLOTHING_DIRT				"#7c6d5c"
-#define CLOTHING_DUNKED_WATER		"#bbbbbb"
-#define CLOTHING_EGGPLANT			"#5d4356"
-#define CLOTHING_GOLD				"#f9a602"
-#define CLOTHING_GOLD_METALLIC		"#b0955d"
-#define CLOTHING_GULF_BLUE			"#7bb6b0"
-#define CLOTHING_LIGHT_GREY			"#999999"
-#define CLOTHING_MADDER				"#d74c34"
-#define CLOTHING_MAGE_GREY			"#6c6c6c"
-#define CLOTHING_MUDDY_YELLOW		"#b5b004"
-#define CLOTHING_OLIVE				"#98bf64"
-#define CLOTHING_ORCHIL				"#66023c"
-#define CLOTHING_PERIWINKLE_BLUE	"#8f99fb"
-#define CLOTHING_SCARLET			"#b8252c"
-#define CLOTHING_TAN				"#d6a790"
-#define CLOTHING_VIOLET				"#5b2294"
-#define CLOTHING_WOAD_BLUE			"#597fb9"
-#define CLOTHING_WISTERIA			"#b07bb6"
-#define CLOTHING_WINE_RED			"#995264"
-#define CLOTHING_YELLOW_WELD		"#f4c430"
-#define CLOTHING_YARROW				"#f0cb76"
-
 #define GLOW_COLOR_BARDIC "#E8837C" // Warm rose, for bardic songs and cadences
-
-/// Deprecated macro, should be removed
-#define CLOTHING_COLOR_NAMES	list("Ash Grey","Chalk White","Cream","White","Dark Ink","Plum Purple","Salmon","Blood Red", "Maroon","Red Ochre","Russet","Chestnut","Mustard Yellow","Yellow Ochre","Forest Green","Sky Blue","Teal", "Royal Black","Soot Black","Winestain Red","Royal Red","Royal Majenta","Fyritius Orange","Bark Brown","Peasant Brown","Mud Brown","Pear Yellow","Spring Green","Bog Green","Royal Teal","Berry Blue", "Royal Blue", "Royal Purple","Dunked in Water" )
-
-/proc/clothing_color2hex(input)
-	var/static/list/all_colors = GLOB.peasant_dyes + GLOB.noble_dyes + GLOB.royal_dyes
-	return all_colors[input]
 
 #define CM_COLOR_SAT_MIN 0.6
 #define CM_COLOR_SAT_MAX 0.7
 #define CM_COLOR_LUM_MIN 0.65
 #define CM_COLOR_LUM_MAX 0.75
-
-
-#define CLOTHING_COLOR_MAP list(	\
-	"Red" = CLOTHING_RED,			\
-	"Purple" = CLOTHING_PURPLE,		\
-	"Black" = CLOTHING_BLACK,		\
-	"Brown" = CLOTHING_BROWN,		\
-	"Green" = CLOTHING_GREEN,		\
-	"Blue" = CLOTHING_BLUE,			\
-	"Yellow" = CLOTHING_YELLOW,		\
-	"Teal" = CLOTHING_TEAL,			\
-	"Azure" = CLOTHING_AZURE,		\
-	"White" = CLOTHING_WHITE,		\
-	"Orange" = CLOTHING_ORANGE,		\
-	"Magenta" = CLOTHING_MAGENTA	\
-)
-/* Extended */
-#define EXTENDED_COLOR_MAP list(					\
-	"Burlap" = CLOTHING_BURLAP,						\
-	"Chalk White" = CLOTHING_CHALK_WHITE,			\
-	"Chestnut" = CLOTHING_CHESTNUT,					\
-	"Cream" = CLOTHING_CREAM,						\
-	"Dark Grey" = CLOTHING_DARK_GREY,				\
-	"Dirt" = CLOTHING_DIRT,							\
-	"Dunked in Water" = CLOTHING_DUNKED_WATER,		\
-	"Eggplant" = CLOTHING_EGGPLANT,					\
-	"Gold" = CLOTHING_GOLD,							\
-	"Gold Metallic" = CLOTHING_GOLD_METALLIC,		\
-	"Gulf Blue" = CLOTHING_GULF_BLUE,				\
-	"Light Grey" = CLOTHING_LIGHT_GREY,				\
-	"Madder" = CLOTHING_MADDER,						\
-	"Mage Blue" = CLOTHING_MAGE_BLUE,				\
-	"Mage Green" = CLOTHING_MAGE_GREEN,				\
-	"Mage Grey" = CLOTHING_MAGE_GREY,				\
-	"Mage Yellow" = CLOTHING_MAGE_YELLOW,			\
-	"Muddy Yellow" = CLOTHING_MUDDY_YELLOW,			\
-	"Maroon" = CLOTHING_MAROON,						\
-	"Olive" = CLOTHING_OLIVE,						\
-	"Orchil" = CLOTHING_ORCHIL,						\
-	"Peasant Brown" = CLOTHING_PEASANT_BROWN,		\
-	"Periwinkle Blue" = CLOTHING_PERIWINKLE_BLUE,	\
-	"Red Ochre" = CLOTHING_RED_OCHRE,				\
-	"Russet" = CLOTHING_RUSSET,						\
-	"Scarlet" = CLOTHING_SCARLET,					\
-	"Tan" = CLOTHING_TAN,							\
-	"Violet" = CLOTHING_VIOLET,						\
-	"Woad Blue" = CLOTHING_WOAD_BLUE,				\
-	"Wisteria" = CLOTHING_WISTERIA,					\
-	"Wine Red" = CLOTHING_WINE_RED,					\
-	"Yellow Ochre" = CLOTHING_YELLOW_OCHRE,			\
-	"Yellow Weld" = CLOTHING_YELLOW_WELD,			\
-	"Yarrow" = CLOTHING_YARROW						\
-)
-
-#define COLOR_MAP (CLOTHING_COLOR_MAP + EXTENDED_COLOR_MAP)
 
 /**
  * Gets a color for a name, will return the same color for a given string consistently within a round.atom

@@ -6,6 +6,8 @@
 		/datum/attribute/skill/craft/tanning = 30,
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/taming = 40,
@@ -21,7 +23,7 @@
 
 /datum/job/advclass/pilgrim/nomad
 	title = "Nomadic Herder"
-	tutorial = "A nomad from the far steppes, you and your saigas have journeyed far to reach these lands."
+	tutorial = "A nomad from the far steppes of the Crimsonlands, you and your saigas have journeyed far to reach these lands."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/pilgrim/nomad
 	category_tags = list(CTAG_PILGRIM)

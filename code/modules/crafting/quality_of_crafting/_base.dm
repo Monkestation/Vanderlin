@@ -74,6 +74,8 @@
 	///sound we use for crafting
 	var/crafting_sound
 	var/sound_volume = 40
+	///do we reward experience on craft?
+	var/reward_experience = TRUE
 
 /datum/repeatable_crafting_recipe/New()
 	. = ..()
@@ -856,7 +858,7 @@
 		return FAIL_END_CRAFT
 
 	if(!prob(prob2craft))
-		if(user.client?.prefs.showrolls)
+		if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(user, "<span class='danger'>I've failed to craft \the [name]. (Success chance: [prob2craft]%)</span>")
 		else
 			to_chat(user, "<span class='danger'>I've failed to craft \the [name].</span>")
@@ -866,7 +868,8 @@
 
 	clean_up_items(to_delete)
 
-	add_skill_experience(user)
+	if(reward_experience)
+		add_skill_experience(user)
 
 	move_products(outputs, user)
 

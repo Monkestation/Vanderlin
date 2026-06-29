@@ -207,7 +207,7 @@
 	var/turf/front = get_turf(src)
 	sparks.set_up(1, 1, front)
 	sparks.start()
-	user.adjust_stamina(user.maximum_stamina / 4)
+	user.adjust_stamina(user.maximum_stamina / 20)
 
 	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
 		complete_recipe(user, quality_score)

@@ -89,12 +89,14 @@
 	owner.announce_objectives()
 
 /datum/antagonist/aspirant/supporter/on_gain()
+	SHOULD_CALL_PARENT(FALSE)
 	owner.special_role = "Supporter"
 	SSmapping.retainer.aspirant_supporters |= owner
 	create_objectives()
 	owner.announce_objectives()
 
 /datum/antagonist/aspirant/ruler/on_gain()
+	SHOULD_CALL_PARENT(FALSE)
 	create_objectives()
 
 /datum/antagonist/aspirant/greet()

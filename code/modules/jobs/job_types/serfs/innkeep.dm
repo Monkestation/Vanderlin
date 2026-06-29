@@ -36,7 +36,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep
 
 	traits = list(
-		TRAIT_BOOZE_SLIDER
+		TRAIT_BOOZE_SLIDER,
+		TRAIT_CAREFUL_CHAIRS
 	)
 
 	exp_type = list(EXP_TYPE_LIVING)
@@ -67,8 +68,3 @@
 	..()
 	if(equipped_human.gender == FEMALE)
 		armor = /obj/item/clothing/shirt/dress
-		shoes = /obj/item/clothing/shoes/shortboots
-		neck = /obj/item/storage/belt/pouch/coins/mid
-		belt = /obj/item/storage/belt/leather
-		beltl = /obj/item/storage/keyring/innkeep
-		beltr = /obj/item/reagent_containers/glass/bottle/beer/blackgoat

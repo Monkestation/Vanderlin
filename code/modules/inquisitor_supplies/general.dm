@@ -52,7 +52,7 @@
 /datum/inqports/supplies/medical
 	name = "5 Rolls of Cloth and Needles"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/medical
-	marquescost = 8
+	marquescost = 4
 
 /obj/item/natural/bundle/cloth/roll/Initialize()
 	. = ..()
@@ -67,7 +67,7 @@
 /datum/inqports/supplies/chains
 	name = "2 Lengths of Chain"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/chains
-	marquescost = 6
+	marquescost = 2
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/chains/populate_contents()
 	for(var/i in 1 to 2)
@@ -150,7 +150,7 @@
 /datum/inqports/supplies/psybuns
 	name = "The Grenzelhoftian Bakery Special"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/psybuns
-	marquescost = 6
+	marquescost = 2
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/psybuns/populate_contents()
 	for(var/i in 1 to 5)
@@ -212,7 +212,7 @@
 /datum/inqports/articles/accusations
 	name = "3 Accusations"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/articles/accusations
-	marquescost = 8
+	marquescost = 4
 
 /obj/structure/closet/crate/chest/inqcrate/articles/accusations/populate_contents()
 	new /obj/item/paper/inqslip/accusation(src)
@@ -223,7 +223,7 @@
 /datum/inqports/articles/confessions
 	name = "3 Confessions"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/articles/confessions
-	marquescost = 12
+	marquescost = 4
 
 /obj/structure/closet/crate/chest/inqcrate/articles/confessions/populate_contents()
 	for(var/i in 1 to 3)
@@ -257,6 +257,16 @@
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 
+/datum/inqports/equipment/blunderbuss
+	name = "1 Blunderbuss, 4 lead pellets and powder flask"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/blunderbuss
+	marquescost = 16
+	maximum = 1
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/blunderbuss/populate_contents()
+	new /obj/item/gun/ballistic/powder/wheellock/blunderbuss(src)
+	new /obj/item/storage/belt/pouch/pellets(src)
+	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 /*
 //Added this and then realized it wasn't actually in the bounty and I'm just stupid. It's staying here incase somebody wants it.
 
@@ -276,7 +286,7 @@
 /datum/inqports/equipment/lantern
 	name = "3 Iron Lamptern"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/lantern
-	marquescost = 16
+	marquescost = 4
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/lantern/populate_contents()
 	for(var/i in 1 to 3)
@@ -295,22 +305,22 @@
 /datum/inqports/equipment/strangemask
 	name = "1 Confessional Mask"
 	item_type = /obj/item/clothing/face/facemask/steel/confessor
-	marquescost = 10
+	marquescost = 6
 
 /datum/inqports/equipment/otavansatchel
 	name = "1 Grenzelhoftian Leather Satchel"
 	item_type = /obj/item/storage/backpack/satchel/otavan
-	marquescost = 8
+	marquescost = 2
 
 /datum/inqports/equipment/surgerybag
 	name = "1 Surgery Bag"
 	item_type = /obj/item/storage/backpack/satchel/surgbag
-	marquescost = 16
+	marquescost = 6
 
 /datum/inqports/equipment/psysack
 	name = "1 Identity Concealer"
 	item_type = /obj/item/clothing/face/sack/psy
-	marquescost = 6
+	marquescost = 4
 
 /datum/inqports/equipment/inqcordage
 	name = "2 Spools of Inquiry Cordage"
@@ -324,11 +334,19 @@
 /datum/inqports/equipment/blackbags
 	name = "3 Black Bags"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/blackbags
-	marquescost = 8
+	marquescost = 6
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/blackbags/populate_contents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/head/inqarticles/blackbag(src)
+
+/datum/inqports/equipment/javlins
+	name = "Bag Of Silver Javelins"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/equipment/javlins
+	marquescost = 12
+
+/obj/structure/closet/crate/chest/inqcrate/equipment/javlins/populate_contents()
+	new  /obj/item/ammo_holder/javelin/silver(src)
 
 /datum/inqports/equipment/psydonhelms
 	name = "Helms of Psydon"

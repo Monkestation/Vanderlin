@@ -73,29 +73,31 @@
 	var/clone_transfer = H.getCloneLoss()
 
 	// Heal the target
-	H.adjustToxLoss(-tox_transfer)
+	H.adjustToxLoss(-tox_transfer, forced = TRUE)
 	H.adjustOxyLoss(-oxy_transfer)
 	H.adjustCloneLoss(-clone_transfer)
 
 	// Apply damage to the caster
-	user.adjustToxLoss(tox_transfer)
+	user.adjustToxLoss(tox_transfer, forced = TRUE)
 	user.adjustOxyLoss(oxy_transfer)
 	user.adjustCloneLoss(clone_transfer)
 
 	for(var/datum/injury/injury in H.all_injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+		if(!injury.can_heal())
 			continue
 		injury.transfer_injury(user)
+	H.updatehealth()
 
 	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
 		artery.applyOrganDamage(-artery.damage)
 
 	// Transfer blood
 	var/blood_transfer = 0
-	if(H.blood_volume < BLOOD_VOLUME_NORMAL)
-		blood_transfer = BLOOD_VOLUME_NORMAL - H.blood_volume
-		H.blood_volume = BLOOD_VOLUME_NORMAL
-		user.blood_volume -= blood_transfer
+	var/cached_blood_volume = H.get_blood_volume()
+	if(CAN_HAVE_BLOOD(H) && cached_blood_volume < BLOOD_VOLUME_NORMAL)
+		blood_transfer = BLOOD_VOLUME_NORMAL - cached_blood_volume
+		H.set_blood_volume(BLOOD_VOLUME_NORMAL)
+		user.adjust_blood_volume(-blood_transfer)
 		to_chat(user, span_warning("You feel your blood drain into [H]!"))
 		to_chat(H, span_notice("You feel your blood replenish!"))
 

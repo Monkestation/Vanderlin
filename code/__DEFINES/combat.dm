@@ -73,8 +73,8 @@
 #define BLEEDOUT (1<<6)
 
 //Health Defines
-#define HEALTH_THRESHOLD_CRIT 0
-#define HEALTH_THRESHOLD_FULLCRIT 0
+#define HEALTH_THRESHOLD_CRIT 100
+#define HEALTH_THRESHOLD_FULLCRIT 70
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
@@ -116,6 +116,8 @@
 #define CRAWLING_ADD_SLOWDOWN 7
 //slowdown for dislocated limbs
 #define DISLOCATED_ADD_SLOWDOWN 2
+//slowdown for fractured limbs
+#define FRACTURED_ADD_SLOWDOWN 3
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1
@@ -202,6 +204,7 @@
 #define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
 #define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
 #define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+#define GREATAXE_CLEAVE	    /datum/intent/axe/chop/greataxe/slayer
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
@@ -486,5 +489,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 // try_crit keys for modifiers
 /// Chance modifier
 #define CRIT_MOD_CHANCE "crit_mod"
+#define CANT_CRIT	-100
 /// Specifically knockout modifier for head crits
 #define CRIT_MOD_KNOCKOUT_CHANCE "knockout_mod"

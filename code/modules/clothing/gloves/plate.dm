@@ -134,14 +134,12 @@
 	item_state = "kazengungauntlets"
 	body_parts_covered = HANDS|ARMS
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ASH_GREY
 
 /obj/item/clothing/gloves/plate/kote/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
-	var/playerchoice = COLOR_MAP[choice]
-	detail_color = playerchoice
-	update_appearance()
-	if(loc == user && ishuman(user))
-		var/mob/living/carbon/H = user
-		H.update_inv_armor()
-		H.update_icon()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)

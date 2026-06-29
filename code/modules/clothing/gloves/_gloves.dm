@@ -1,10 +1,9 @@
 /obj/item/clothing/gloves
+	abstract_type = /obj/item/clothing/gloves
 	name = "gloves"
-	gender = PLURAL //Carn: for grammarically correct text-parsing
-	w_class = WEIGHT_CLASS_SMALL
+	icon = 'icons/roguetown/clothing/gloves.dmi'
 
 	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
-	icon = 'icons/roguetown/clothing/gloves.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
 	bloody_icon_state = "bloodyhands"
 	sleevetype = "shirt"
@@ -13,6 +12,9 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+
+	gender = PLURAL
+	w_class = WEIGHT_CLASS_SMALL
 
 	siemens_coefficient = 1
 	max_heat_protection_temperature = 361
@@ -41,7 +43,6 @@
 	item_weight = 300 GRAMS
 
 	var/transfer_prints = FALSE
-	abstract_type = /obj/item/clothing/gloves
 	var/unarmed_bonus = 1
 
 /obj/item/clothing/gloves/Initialize(mapload, ...)

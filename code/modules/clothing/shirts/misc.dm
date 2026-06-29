@@ -65,7 +65,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
 	detail_tag = "_detail"
-	detail_color = CLOTHING_WHITE
+	detail_color = CLOTHING_RED_OCHRE
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	var/picked = FALSE
@@ -197,12 +197,12 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_CHESTNUT
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	boobed = TRUE
 	flags_inv = HIDEBOOB
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-	color = null
 
 /obj/item/clothing/shirt/dress/slit
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT

@@ -87,7 +87,7 @@
 	var/is_swimming_tile = TRUE
 	var/stamina_entry_cost
 	var/ticking_stamina_cost
-	var/ticking_oxy_damage = 4.2
+	var/ticking_oxy_damage = 2
 	var/exhaust_swimmer_prob = 100
 
 	/// Randomize direction when initializing
@@ -695,7 +695,7 @@
 			return
 		if(iscarbon(arrived))
 			var/mob/living/carbon/C = arrived
-			if(C.blood_volume <= 0)
+			if(!C.get_blood_volume())
 				return
 			var/list/zonee = list(BODY_ZONE_R_LEG,BODY_ZONE_L_LEG)
 			for(var/i = 1, i <= zonee.len, i++)
@@ -745,7 +745,7 @@
 			return
 		if(iscarbon(arrived))
 			var/mob/living/carbon/C = arrived
-			if(C.blood_volume <= 0)
+			if(!C.get_blood_volume())
 				return
 			var/list/zonee = list(BODY_ZONE_R_LEG,BODY_ZONE_L_LEG)
 			for(var/i = 1, i <= zonee.len, i++)

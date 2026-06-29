@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	// asset_cache
 	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
-		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
+		asset_cache_job = asset_cache_confirm_arrival(href_list["asset_cache_confirm_arrival"])
 		if(!asset_cache_job)
 			return
 
@@ -498,12 +498,12 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		prefs = new /datum/preferences(src)
 		GLOB.preferences_datums[ckey] = prefs
 	if(!holder)
-		prefs.chat_toggles &= ~CHAT_GHOSTEARS
-		prefs.chat_toggles &= ~CHAT_GHOSTWHISPER
+		prefs.preference_clear_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTEARS)
+		prefs.preference_clear_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTWHISPER)
 		prefs.save_preferences()
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
-	fps = prefs.clientfps
+	fps = prefs.read_preference(/datum/preference/numeric/clientfps)
 
 	// Instantiate tgui panel
 	tgui_panel = new(src, "browseroutput")
@@ -731,7 +731,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	loot_panel = new(src)
 
 	view_size = new(src)
-	toggle_fullscreeny((prefs.toggles & TOGGLE_FULLSCREEN), logging_in = TRUE)
+	toggle_fullscreeny((prefs.read_preference(/datum/preference/bitwise/toggles) & TOGGLE_FULLSCREEN), logging_in = TRUE)
 	view_size.resetFormat()
 	view_size.setZoomMode()
 	view_size.apply()
@@ -973,7 +973,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				CRASH("Key check regex failed for [ckey]")
 
 /client/proc/update_ambience_pref()
-	if(prefs.toggles & SOUND_AMBIENCE)
+	if(prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_AMBIENCE)
 		if(SSambience.ambience_listening_clients[src] > world.time)
 			return // If already properly set we don't want to reset the timer.
 		SSambience.ambience_listening_clients[src] = world.time + 10 SECONDS //Just wait 10 seconds before the next one aight mate? cheers.
@@ -1188,7 +1188,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(!QDELETED(object) && TRY_QUEUE_VERB(VERB_CALLBACK(object, TYPE_PROC_REF(/atom, _Click), location, control, params), VERB_HIGH_PRIORITY_QUEUE_THRESHOLD, SSinput, control))
 		return
 
-	if (prefs.hotkeys)
+	if (prefs.read_preference(/datum/preference/toggle/hotkeys))
 		// If hotkey mode is enabled, then clicking the map will automatically
 		// unfocus the text bar. This removes the red color from the text bar
 		// so that the visual focus indicator matches reality.
@@ -1291,7 +1291,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if (isliving(mob))
 		var/mob/living/M = mob
 		M.update_damage_hud()
-	if (prefs.auto_fit_viewport)
+	if (prefs.read_preference(/datum/preference/toggle/auto_fit_viewport))
 		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS)) //Delayed to avoid wingets from Login calls.
 
 	SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_CHANGE_VIEW, src, getviewsize(old_view), getviewsize(view))
@@ -1308,7 +1308,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	void.UpdateGreed(actualview[1],actualview[2])
 
 /client/proc/AnnouncePR(announcement)
-	if(prefs && prefs.chat_toggles & CHAT_PULLR)
+	if(prefs && prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_PULLR)
 		to_chat(src, announcement)
 
 /client/proc/show_character_previews(mutable_appearance/MA)
@@ -1414,8 +1414,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 /// This grabs the DPI of the user per their skin
 /client/proc/acquire_dpi()
-	if(prefs && (prefs.toggles & UI_SCALE))
-		window_scaling = prefs.ui_scale
+	if(prefs && (prefs.read_preference(/datum/preference/bitwise/toggles) & UI_SCALE))
+		window_scaling = prefs.read_preference(/datum/preference/numeric/ui_scale)
 	else if(isnull(window_scaling))
 		window_scaling = text2num(winget(src, null, "dpi"))
 	debug_admins("scalies: [window_scaling]")
@@ -1484,14 +1484,14 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	set category = "Preferences.Options"
 
 	if(prefs)
-		prefs.toggles ^= TOGGLE_FULLSCREEN
-		toggle_fullscreeny(prefs.toggles & TOGGLE_FULLSCREEN)
+		prefs.preference_toggle_flag(/datum/preference/bitwise/toggles, TOGGLE_FULLSCREEN)
+		toggle_fullscreeny(prefs.preference_has_flag(/datum/preference/bitwise/toggles, TOGGLE_FULLSCREEN))
 
 /client/proc/toggle_fullscreeny(new_value, logging_in = FALSE)
 	//no need to set every login to not fullscreen, they already aren't.
 	//we also dont need to call attempt_auto_fit_viewport, Login does that for us.
 	if(logging_in)
-		var/fullscreen = (prefs.toggles & TOGGLE_FULLSCREEN)
+		var/fullscreen = (prefs.read_preference(/datum/preference/bitwise/toggles) & TOGGLE_FULLSCREEN)
 		if(fullscreen)
 			winset(src, "mainwindow", "menu=;is-fullscreen=[fullscreen ? "true" : "false"]")
 		return

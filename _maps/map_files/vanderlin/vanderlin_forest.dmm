@@ -1042,7 +1042,7 @@
 /turf/open/floor/cobble,
 /area/indoors/wilderness/garrison)
 "gq" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "gr" = (

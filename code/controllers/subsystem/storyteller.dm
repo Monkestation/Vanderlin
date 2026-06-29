@@ -1539,7 +1539,8 @@ SUBSYSTEM_DEF(gamemode)
 		if(roundstart && istype(client?.mob, /mob/dead/new_player))
 			var/mob/dead/new_player/player = client.mob
 			if(player.ready == PLAYER_READY_TO_PLAY)
-				GLOB.patron_follower_counts[client.prefs.selected_patron.name]++
+				var/datum/patron/pref_patron = client.prefs.read_preference(/datum/preference/choiced/patron)
+				GLOB.patron_follower_counts[pref_patron.name]++
 
 		var/mob/living/living = client.mob
 		if(!istype(living))
@@ -1558,7 +1559,7 @@ SUBSYSTEM_DEF(gamemode)
 			record_round_statistic(STATS_WEREVOLVES)
 		if(living.mind.has_antag_datum(/datum/antagonist/vampire))
 			record_round_statistic(STATS_VAMPIRES)
-		if(living.mind.has_antag_datum(/datum/antagonist/zombie) || living.mind.has_antag_datum(/datum/antagonist/skeleton) || living.mind.has_antag_datum(/datum/antagonist/lich))
+		if(IS_DEADITE(living) || living.mind.has_antag_datum(/datum/antagonist/skeleton) || living.mind.has_antag_datum(/datum/antagonist/lich))
 			record_round_statistic(STATS_DEADITES_ALIVE)
 		if(ishuman(living))
 			var/mob/living/carbon/human/human_mob = client.mob

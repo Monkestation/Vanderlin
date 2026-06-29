@@ -10,12 +10,10 @@
 	side = RIGHT_SIDE
 	sellprice = DEFAULT_ORGAN_VALUE/2
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	organ_volume = 0.25
 	max_blood_storage = 2.5
 	current_blood = 2.5
-	blood_req = 0.5
+	blood_req = 0.25
 	oxygen_req = 0.5
 	nutriment_req = 0.15
 	hydration_req = 0.15
@@ -74,6 +72,10 @@
 
 /obj/item/organ/ears/proc/minimumDeafTicks(value)
 	deaf = max(deaf, value)
+
+/obj/item/organ/ears/regenerate_organ()
+	. = ..()
+	restoreEars()
 
 /obj/item/organ/ears/invincible
 	ear_damage_multiplier = 0

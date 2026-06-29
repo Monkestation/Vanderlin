@@ -85,7 +85,7 @@
 	icon_state = "hunger4"
 
 /datum/status_effect/debuff/hungryt4/tick()
-	owner.adjustToxLoss(CONFIG_GET(number/starvation_damage_per_tick))
+	owner.adjustToxLoss(CONFIG_GET(number/starvation_damage_per_tick), forced = TRUE)
 
 /datum/status_effect/debuff/hungryt4/on_apply()
 	. = ..()
@@ -187,7 +187,7 @@
 	icon_state = "thirst4"
 
 /datum/status_effect/debuff/thirstyt4/tick()
-	owner.adjustToxLoss(CONFIG_GET(number/dehydration_damage_per_tick))
+	owner.adjustToxLoss(CONFIG_GET(number/dehydration_damage_per_tick), forced = TRUE)
 
 /datum/status_effect/debuff/thirstyt4/on_apply()
 	. = ..()

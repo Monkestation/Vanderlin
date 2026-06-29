@@ -302,6 +302,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_SCARLET
 	boobed = FALSE
 	uses_lord_coloring = LORD_PRIMARY
 	alternate_worn_layer = 19
@@ -311,17 +312,10 @@
 	desc = "An elegant jacket made of silk and padded with leather on the inside. It would be a shame to dirty this, but it is inevitable."
 	icon_state = "docjacket"
 	item_state = "docjacket"
-	icon = 'icons/roguetown/clothing/courtphys.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
-	detail_tag = "_detail"
-	boobed = FALSE
-	uses_lord_coloring = LORD_PRIMARY
-	alternate_worn_layer = 19
+	detail_color = CLOTHING_ROYAL_MAJENTA
 
 /obj/item/clothing/armor/leather/jacket/courtphysician/drifter
 	uses_lord_coloring = FALSE
-	detail_color = CLOTHING_SCARLET
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/armor/leather/jacket/leathercoat
@@ -427,3 +421,12 @@
 	armor = ARMOR_GRONN_LIGHT
 	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
+/obj/item/clothing/armor/leather/fencer
+	name = "fencer's jacket"
+	desc = "A lightweight leather jacket made from hardened leather, designed to comfortably protect vital areas."
+	icon_state = "freijacket"
+	detail_tag = "_detail"
+	color = "#5E4440"
+	detail_color = "#c08955"
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)

@@ -1,0 +1,6 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Meat, Poultry, Eggs, Fat, and Ollies are now in the stockpile."
+  - balance: "Prices of most fruit items have been normalized to account for their lack of rarity."
+  - balance: "The vault, including the stockpile, now completely stops food from rotting."
