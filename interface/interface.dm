@@ -64,6 +64,33 @@
 	set desc = "Report an issue"
 	set hidden = 1
 
+	if(!CONFIG_GET(string/githuburl))
+		to_chat(src, span_danger("The Github URL is not set in the server configuration."))
+		return
+
+	if(!CONFIG_GET(string/issue_key))
+		to_chat(src, span_danger("Issue Reporting is not properly configured."))
+		return
+
+	var/testmerge_data = GLOB.revdata.testmerge
+	var/has_testmerge_data = (length(testmerge_data) != 0)
+
+	var/message = "This will start reporting an issue, gathering some information from the server and your client, before submitting it to github."
+	if(has_testmerge_data)
+		message += "<br>The following experimental changes are active and may be the cause of any new or sudden issues:<br>"
+		message += GLOB.revdata.GetTestMergeInfo(FALSE)
+
+	if(browser_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+		return
+
+	var/datum/bug_report/reporter = new()
+	reporter.ui_interact(mob)
+
+/client/verb/reportissue_legacy()
+	set name = "report-issue-legacy"
+	set desc = "Report an issue without TGUI."
+	set category = "OOC"
+
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(!githuburl)
 		to_chat(src, span_danger("The Github URL is not set in the server configuration."))

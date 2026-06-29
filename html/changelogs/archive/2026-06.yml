@@ -243,3 +243,26 @@
 2026-06-28:
   tired-wired:
   - rscadd: Expanded the Crimsonlands-related class lore.
+2026-06-29:
+  Avalon-Proto:
+  - rscadd: Dungeoneers now recieve fair medical knowledge alongside the kit to prevent
+      someone in their care dying too quickly
+  CheffieGithub:
+  - rscadd: Added bug report TGUI. Legacy version available under OOC verbs.
+  - bugfix: Revival grants up to of 40% blood to organs like it's meant to
+  ModDownloading:
+  - rscadd: Meat, Poultry, Eggs, Fat, and Ollies are now in the stockpile.
+  - balance: Prices of most fruit items have been normalized to account for their
+      lack of rarity.
+  - balance: The vault, including the stockpile, now completely stops food from rotting.
+  SmokingCrackForChrist:
+  - rscadd: New fingersnap emote, *snap.
+  - rscadd: New footstep sounds for three-of-the-four inhumen pantheon armorsets.
+  - bugfix: Fixes Patron selection for Renegade / Antiquarian Wretch subclasses. You
+      can now respectively shoot or throw calling cards at people like gambit again
+      without needing to worship a specific patron on character-creation. Your patronage
+      is still forced.
+  Snack-Max:
+  - rscadd: Fighters and Clerics now always spawn with regular satchels
+  Sulaboy:
+  - qol: You can now alt click "The Book" to select an Event/God to read aloud about.

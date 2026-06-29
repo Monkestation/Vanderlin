@@ -1029,8 +1029,11 @@
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			organ.applyOrganDamage(excess_healing * -1)
 
-	for(var/obj/item/organ/parent in internal_organs)//we treat this like the initial heart beat filling all the arteries with blood again
-		parent.current_blood = min(parent.current_blood, (parent.current_blood + (parent.max_blood_storage * 0.4)))
+	for(var/obj/item/organ/organ as anything in internal_organs)//we treat this like the initial heart beat filling all the arteries with blood again
+		var/current_blood = organ.current_blood
+		var/adjust_to = current_blood + (organ.max_blood_storage * 0.4)
+		organ.current_blood = clamp(adjust_to, current_blood, organ.max_blood_storage)
+
 	pump_heart(forced_pump = 1.3)
 
 	return ..()

@@ -420,6 +420,14 @@
 							'sound/foley/footsteps/armor/heavy-footstep (4).ogg',\
 							'sound/foley/footsteps/armor/heavy-footstep (5).ogg'\
 							)
+			if(SFX_EVIL_BOOT_STEP)
+				soundin = pick('sound/foley/footsteps/armor/evilassfootstep1.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep2.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep3.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep4.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep5.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep6.ogg'\
+							)
 			if(SFX_CAT_MEOW)
 				soundin = pickweight(list(
 					'sound/vo/cat/cat_meow1.ogg' = 33,
