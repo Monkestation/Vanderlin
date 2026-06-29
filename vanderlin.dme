@@ -3038,7 +3038,6 @@
 #include "code\modules\events\moderate\herb_spreading.dm"
 #include "code\modules\events\moderate\herb_wither.dm"
 #include "code\modules\events\moderate\hostile_animal_migration.dm"
-#include "code\modules\events\moderate\town_fire.dm"
 #include "code\modules\events\moderate\trade_requests.dm"
 #include "code\modules\events\moderate\wild_crop_spread.dm"
 #include "code\modules\events\omens\goblininvasion.dm"
