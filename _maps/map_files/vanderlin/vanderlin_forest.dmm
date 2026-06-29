@@ -7478,7 +7478,7 @@
 	},
 /area/outdoors/wilderness)
 "PD" = (
-/obj/structure/bars/passage{
+/obj/structure/bars/passage/open{
 	redstone_id = "gallowbridge"
 	},
 /turf/open/floor/ruinedwood/darker,
@@ -7895,7 +7895,7 @@
 /turf/open/floor/cobble,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Sc" = (
-/obj/structure/bars/passage{
+/obj/structure/bars/passage/open{
 	redstone_id = "gallowbridge"
 	},
 /turf/open/floor/ruinedwood/spiralfade,
