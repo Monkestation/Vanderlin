@@ -220,7 +220,15 @@
 	SPEC_ID_HALF_ORC,\
 )
 
-/// Vanderlin royalty
+/// Vanderlin monarch
+#define RACES_PLAYER_MONARCH list(\
+	SPEC_ID_HUMEN,\
+	SPEC_ID_HALF_ELF,\
+	SPEC_ID_ELF,\
+	SPEC_ID_DWARF,\
+)
+
+/// Vanderlin non-monarch royalty
 #define RACES_PLAYER_ROYALTY list(\
 	SPEC_ID_HUMEN,\
 	SPEC_ID_HALF_ELF,\
