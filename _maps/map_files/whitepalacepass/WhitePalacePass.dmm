@@ -23888,6 +23888,61 @@
 /area/indoors/town/clinic_large)
 "oXY" = (
 /obj/structure/rack/shelf/biggest,
+/obj/item/kitchen/spoon,
+/obj/item/kitchen/spoon{
+	pixel_x = -2;
+	pixel_y = -2
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = 6;
+	pixel_y = 1
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = -7;
+	pixel_y = 0
+	},
+/obj/item/kitchen/fork,
+/obj/item/kitchen/fork{
+	pixel_x = 4;
+	pixel_y = -2
+	},
+/obj/item/kitchen/fork{
+	pixel_x = 6;
+	pixel_y = 0
+	},
+/obj/item/kitchen/fork{
+	pixel_x = -5;
+	pixel_y = 0
+	},
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/glass/bowl{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_x = -6;
+	pixel_y = -8
+	},
+/obj/item/plate{
+	pixel_x = 2;
+	pixel_y = -3
+	},
+/obj/item/plate{
+	pixel_x = -4;
+	pixel_y = -3
+	},
+/obj/item/plate{
+	pixel_x = 6;
+	pixel_y = 5
+	},
+/obj/item/plate{
+	pixel_x = -6;
+	pixel_y = 8
+	},
 /turf/open/floor/blocks,
 /area/indoors/town/garrison)
 "oYy" = (
