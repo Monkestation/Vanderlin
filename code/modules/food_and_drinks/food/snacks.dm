@@ -574,6 +574,8 @@ All foods are distributed among various categories. Use common sense.
 	if(bitecount >= bitesize || bitesize == 1)
 		amt2take = reagents.total_volume
 
+	checkLiked(fraction, eater)
+
 	reagents.trans_to(eater, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
 
 	bitecount++
@@ -583,8 +585,6 @@ All foods are distributed among various categories. Use common sense.
 
 	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 	user.changeNext_move(CLICK_CD_FAST)
-
-	checkLiked(min(bitesize / reagents.total_volume, 1), eater)
 
 	on_consume(eater)
 
