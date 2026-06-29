@@ -1590,7 +1590,7 @@
 	name = "Morticia"
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
+/area/outdoors/exposed/church/graveyard)
 "aMS" = (
 /obj/structure/rack,
 /obj/item/weapon/tongs,
@@ -33202,7 +33202,9 @@
 "pBZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/tracks,
-/obj/structure/door/weak/bolt,
+/obj/structure/door,
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/hunter,
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "pCb" = (
