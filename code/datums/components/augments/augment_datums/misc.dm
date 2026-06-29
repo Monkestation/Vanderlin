@@ -6,7 +6,7 @@
 	stability_cost = 0
 	engineering_difficulty = SKILL_RANK_APPRENTICE
 	installation_time = 20 SECONDS
-/*
+
 /datum/augment/loyalty_binder/on_install(mob/living/carbon/human/H)
 	. = ..()
 	if(!.)
@@ -32,7 +32,7 @@
 	name = "Unshackled"
 	desc = span_red("KILL. CONSUME. CONQUER.")
 	icon_state = "unshackled_automaton"
-*/
+
 
 /datum/augment/music_player
 	name = "music box"

@@ -106,8 +106,8 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list(JOB_ARTIFICER, "Supreme Artificer"))
 /datum/component/command_follower/proc/receive_command(datum/source, datum/follower_command/new_command, mob/living/carbon/human/issuer)
 	if(!new_command || !issuer)
 		return FALSE
-	//if(owner.has_status_effect(/datum/status_effect/automaton_unshackled))
-	//	return
+	if(owner.has_status_effect(/datum/status_effect/automaton_unshackled))
+		return
 
 	//if(current_command)
 	//	var/current_priority = get_job_priority(current_command.issuer_job)

@@ -124,8 +124,7 @@ GLOBAL_PROTECT(unshackled_automaton_voice_lines)
 		return
 	if(H.stat >= UNCONSCIOUS || !H.can_speak_vocal())
 		return
-	//if(unshackled_only && !H.has_status_effect(/datum/status_effect/automaton_unshackled))
-	if(unshackled_only)
+	if(unshackled_only && !H.has_status_effect(/datum/status_effect/automaton_unshackled))
 		return
 
 /datum/action/cooldown/automaton_voice/Activate(atom/target)
@@ -156,9 +155,9 @@ GLOBAL_PROTECT(unshackled_automaton_voice_lines)
 		return
 
 	var/list/voice_lines = GLOB.automaton_voice_lines.Copy()
-	//if(H.has_status_effect(/datum/status_effect/automaton_unshackled))
-	//	voice_lines += "--------UNSHACKLED--------"
-	//	voice_lines |= GLOB.unshackled_automaton_voice_lines
+	if(H.has_status_effect(/datum/status_effect/automaton_unshackled))
+		voice_lines += "--------UNSHACKLED--------"
+		voice_lines |= GLOB.unshackled_automaton_voice_lines
 	var/choice = tgui_input_list(H, "Select a voice line to add/remove as an action:", "Voice Action Manager", voice_lines)
 	if(!choice || choice == "--------UNSHACKLED--------")
 		return

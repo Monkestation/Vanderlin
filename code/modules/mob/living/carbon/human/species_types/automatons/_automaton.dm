@@ -158,7 +158,7 @@
 	C.AddComponent(/datum/component/augmentable)
 	C.AddComponent(/datum/component/easy_repair)
 	C.AddComponent(/datum/component/damage_shutdown)
-	//C.apply_status_effect(/datum/status_effect/automaton_unshackled)
+	C.apply_status_effect(/datum/status_effect/automaton_unshackled)
 
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	RegisterSignal(C, COMSIG_MOB_TOGGLE_CMODE, PROC_REF(cmode_changed))
