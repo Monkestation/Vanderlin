@@ -533,16 +533,20 @@ All foods are distributed among various categories. Use common sense.
 	if(!reagents || !reagents.total_volume)
 		if(eater.satiety > -200)
 			eater.satiety -= junkiness
+
 		SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
 		SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
 
-		on_consume(eater)
 		checkLiked(1, eater)
 
 		playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 		user.changeNext_move(CLICK_CD_FAST)
 
-		qdel(src)
+		on_consume(eater)
+
+		if(!QDELETED(src))
+			qdel(src)
+
 		return ITEM_INTERACT_SUCCESS
 
 	var/jaw_efficiency = LIMB_EFFICIENCY_OPTIMAL
@@ -565,14 +569,6 @@ All foods are distributed among various categories. Use common sense.
 	if(eater.satiety > -200)
 		eater.satiety -= junkiness
 
-	SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
-	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
-
-	on_consume(eater)
-
-	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
-	user.changeNext_move(CLICK_CD_FAST)
-
 	var/fraction = min(bitesize / reagents.total_volume, 1)
 	var/amt2take = reagents.total_volume / (bitesize - bitecount)
 	if(bitecount >= bitesize || bitesize == 1)
@@ -582,7 +578,15 @@ All foods are distributed among various categories. Use common sense.
 
 	bitecount++
 
-	checkLiked(fraction, eater)
+	SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
+	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
+
+	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
+	user.changeNext_move(CLICK_CD_FAST)
+
+	checkLiked(min(bitesize / reagents.total_volume, 1), eater)
+
+	on_consume(eater)
 
 	if(bitecount >= bitesize && !QDELETED(src))
 		qdel(src)
