@@ -186,9 +186,9 @@
 	desc = "A golden tropical fruit bursting with sweet, juicy flesh."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/mango
 	held_items = 2
-	payout_price = 9
-	withdraw_price = 23
-	export_price = 18
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -197,9 +197,9 @@
 	desc = "A tropical fruit with a thick purple rind and white segments within."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen
 	held_items = 2
-	payout_price = 9
-	withdraw_price = 23
-	export_price = 18
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -208,9 +208,9 @@
 	desc = "A verdant tropical fruit known for its smooth and creamy flesh."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/avocado
 	held_items = 2
-	payout_price = 6
-	withdraw_price = 15
-	export_price = 12
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -219,9 +219,9 @@
 	desc = "A spiky fruit with a pink skin and white flesh."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit
 	held_items = 2
-	payout_price = 9
-	withdraw_price = 23
-	export_price = 18
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -230,9 +230,9 @@
 	desc = "A spiky, tangy fruit with golden skin."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/pineapple
 	held_items = 2
-	payout_price = 9
-	withdraw_price = 23
-	export_price = 18
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -269,14 +269,25 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
+/datum/stock/stockpile/ollie
+	name = "Ollies"
+	desc = "Round, green fruits good for making into oil."
+	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/ollie
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
+	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
 /datum/stock/stockpile/strawberry
 	name = "Strawberries"
 	desc = "A variety of sweet berry native to Wintermare."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry
 	held_items = 2
-	payout_price = 4
-	withdraw_price = 10
-	export_price = 8
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -395,9 +406,9 @@
 	desc = "A strange and foreign vegetable that's near impossible to break into."
 	item_type = /obj/item/natural/cocaudo
 	held_items = 2
-	payout_price = 8
-	withdraw_price = 20
-	export_price = 16
+	payout_price = 2
+	withdraw_price = 5
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -428,21 +439,65 @@
 	desc = "A mushroom that grows close to the coastline, known for a briny flavor."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/caveweep
 	held_items = 2
-	payout_price = 6
-	withdraw_price = 18
-	export_price = 12
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
 /datum/stock/stockpile/drowsbane
 	name = "Drowsbane"
-	desc = "A type of lichen known for it's fiery effects on the palate."
+	desc = "A type of lichen known for its fiery effects on the palate."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
 	held_items = 2
-	payout_price = 6
-	withdraw_price = 18
-	export_price = 12
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
 	importexport_amt = 20
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/meat
+	name = "Meat"
+	desc = "A cut of red meat."
+	item_type = /obj/item/reagent_containers/food/snacks/meat/steak
+	held_items = 2
+	payout_price = 4
+	withdraw_price = 12
+	export_price = 8
+	importexport_amt = 10
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/poultry
+	name = "Poultry"
+	desc = "A whole plucked bird."
+	item_type = /obj/item/reagent_containers/food/snacks/meat/poultry
+	held_items = 2
+	payout_price = 3
+	withdraw_price = 9
+	export_price = 6
+	importexport_amt = 10
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/egg
+	name = "Egg"
+	desc = "An essential part of many breakfast and baking recipes."
+	item_type = /obj/item/reagent_containers/food/snacks/egg
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
+	importexport_amt = 10
+	stockpile_id = STOCK_FOOD
+
+/datum/stock/stockpile/fat
+	name = "Fat"
+	desc = "The parts of an animal best used for greasing and frying."
+	item_type = /obj/item/reagent_containers/food/snacks/fat
+	held_items = 2
+	payout_price = 2
+	withdraw_price = 6
+	export_price = 4
+	importexport_amt = 10
 	stockpile_id = STOCK_FOOD
 
 /datum/stock/stockpile/coal
