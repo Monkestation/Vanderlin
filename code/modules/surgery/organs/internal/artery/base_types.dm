@@ -6,6 +6,7 @@
 /obj/item/organ/artery/r_leg
 	name = "right femoral arteries"
 	zone = BODY_ZONE_R_LEG
+	blood_flow = ARTERIAL_BLOOD_FLOW * 0.75
 
 /obj/item/organ/artery/mouth
 	name = "facial arteries"
@@ -14,6 +15,7 @@
 /obj/item/organ/artery/l_leg
 	name = "left femoral arteries"
 	zone = BODY_ZONE_L_LEG
+	blood_flow = ARTERIAL_BLOOD_FLOW * 0.75
 
 /obj/item/organ/artery/l_arm
 	name = "left brachial arteries"

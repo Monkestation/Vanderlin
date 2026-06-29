@@ -3,33 +3,48 @@
 #define USE_TRACY_PARAMETER "tracy"
 
 GLOBAL_VAR(restart_counter)
-GLOBAL_VAR(tracy_log)
-GLOBAL_PROTECT(tracy_log)
-GLOBAL_VAR(tracy_initialized)
-GLOBAL_PROTECT(tracy_initialized)
-GLOBAL_VAR(tracy_init_error)
-GLOBAL_PROTECT(tracy_init_error)
-GLOBAL_VAR(tracy_init_reason)
-GLOBAL_PROTECT(tracy_init_reason)
-/**
- * World creation
- *
- * Here is where a round itself is actually begun and setup, lots of important config changes happen here
- * * db connection setup
- * * config loaded from files
- * * loads admins
- * * Sets up the dynamic menu system
- * * and most importantly, calls initialize on the master subsystem, starting the game loop that causes the rest of the game to begin processing and setting up
- *
- * Note this happens after the Master subsystem is created (as that is a global datum), this means all the subsystems exist,
- * but they have not been Initialized at this point, only their New proc has run
- *
- * Nothing happens until something moves. ~Albert Einstein
- *
- */
-/world/proc/_()
-	var/static/_ = world.Genesis()
 
+/**
+ * WORLD INITIALIZATION
+ * THIS IS THE INIT ORDER:
+ *
+ * BYOND =>
+ * - (secret init native) =>
+ *   - world.Genesis() =>
+ *     - world.init_byond_tracy()
+ *     - (Start native profiling)
+ *     - world.init_debugger()
+ *     - Master =>
+ *       - config *unloaded
+ *       - (all subsystems) PreInit()
+ *       - GLOB =>
+ *         - make_datum_reference_lists()
+ *   - (/static variable inits, reverse declaration order)
+ * - (all pre-mapped atoms) /atom/New()
+ * - world.New() =>
+ *   - config.Load()
+ *   - world.InitTgs() =>
+ *     - TgsNew() *may sleep
+ *     - GLOB.rev_data.load_tgs_info()
+ *   - world.ConfigLoaded() =>
+ *     - SSdbcore.InitializeRound()
+ *     - world.SetupLogs()
+ *     - load_admins()
+ *     - ...
+ *   - Master.Initialize() =>
+ *     - (all subsystems) Initialize()
+ *     - Master.StartProcessing() =>
+ *       - Master.Loop() =>
+ *         - Failsafe
+ *   - world.RunUnattendedFunctions()
+ *
+ * Now listen up because I want to make something clear:
+ * If something is not in this list it should almost definitely be handled by a subsystem Initialize()ing
+ * If whatever it is that needs doing doesn't fit in a subsystem you probably aren't trying hard enough tbhfam
+ *
+ * GOT IT MEMORIZED?
+ * - Dominion/Cyberboss
+ */
 
 /**
  * THIS !!!SINGLE!!! PROC IS WHERE ANY FORM OF INIITIALIZATION THAT CAN'T BE PERFORMED IN MASTER/NEW() IS DONE
@@ -42,41 +57,68 @@ GLOBAL_PROTECT(tracy_init_reason)
 	RETURN_TYPE(/datum/controller/master)
 
 	if(!tracy_initialized)
-		GLOB.tracy_initialized = FALSE
-#ifndef OPENDREAM
-	if(!tracy_initialized)
+		Tracy = new
 #ifdef USE_BYOND_TRACY
-#warn USE_BYOND_TRACY is enabled
-		var/should_init_tracy = TRUE
-		GLOB.tracy_init_reason = "USE_BYOND_TRACY defined"
+		if(Tracy.enable("USE_BYOND_TRACY defined"))
+			Genesis(tracy_initialized = TRUE)
+			return
 #else
-		var/should_init_tracy = FALSE
+		var/tracy_enable_reason
 		if(USE_TRACY_PARAMETER in params)
-			should_init_tracy = TRUE
-			GLOB.tracy_init_reason = "world.params"
+			tracy_enable_reason = "world.params"
 		if(fexists(TRACY_ENABLE_PATH))
-			GLOB.tracy_init_reason ||= "enabled for round"
+			tracy_enable_reason ||= "enabled for round"
 			SEND_TEXT(world.log, "[TRACY_ENABLE_PATH] exists, initializing byond-tracy!")
-			should_init_tracy = TRUE
 			fdel(TRACY_ENABLE_PATH)
-#endif
-		if(should_init_tracy)
-			init_byond_tracy()
+		if(!isnull(tracy_enable_reason) && Tracy.enable(tracy_enable_reason))
 			Genesis(tracy_initialized = TRUE)
 			return
 #endif
+
+	Profile(PROFILE_RESTART)
+	Profile(PROFILE_RESTART, type = "sendmaps")
+
+	// Write everything to this log file until we get to SetupLogs() later
+	_initialize_log_files("data/logs/config_error.[GUID()].log")
+
+	// Init the debugger first so we can debug Master
+	Debugger = new
+
 	// THAT'S IT, WE'RE DONE, THE. FUCKING. END.
 	Master = new
 
 #undef USE_TRACY_PARAMETER
 
+/**
+ * World creation
+ *
+ * Here is where a round itself is actually begun and setup.
+ * * db connection setup
+ * * config loaded from files
+ * * loads admins
+ * * Sets up the dynamic menu system
+ * * and most importantly, calls initialize on the master subsystem, starting the game loop that causes the rest of the game to begin processing and setting up
+ *
+ *
+ * Nothing happens until something moves. ~Albert Einstein
+ *
+ * For clarity, this proc gets triggered later in the initialization pipeline, it is not the first thing to happen, as it might seem.
+ *
+ * Initialization Pipeline:
+ * Global vars are new()'ed, (including config, glob, and the master controller will also new and preinit all subsystems when it gets new()ed)
+ * Compiled in maps are loaded (mainly centcom). all areas/turfs/objs/mobs(ATOMs) in these maps will be new()ed
+ * world/New() (You are here)
+ * Once world/New() returns, client's can connect.
+ * 1 second sleep
+ * Master Controller initialization.
+ * Subsystem initialization.
+ * Non-compiled-in maps are maploaded, all atoms are new()ed
+ * All atoms in both compiled and uncompiled maps are initialized()
+ */
 /world/New()
-
 	log_world("World loaded at [time_stamp()]!")
 
 	GLOB.config_error_log = GLOB.world_manifest_log = GLOB.world_pda_log = GLOB.world_job_debug_log = GLOB.sql_error_log = GLOB.world_href_log = GLOB.world_runtime_log = GLOB.world_attack_log = GLOB.world_game_log = "data/logs/config_error.[GUID()].log" //temporary file used to record errors with loading config, moved to log directory once logging is set bl
-
-	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
 	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
 
@@ -89,7 +131,7 @@ GLOBAL_PROTECT(tracy_init_reason)
 	//SetupLogs depends on the RoundID, so lets check
 	//DB schema and set RoundID if we can
 //	SSdbcore.CheckSchemaVersion()
-	SSdbcore.SetRoundID()
+	SSdbcore.InitializeRound()
 	var/timestamp = replacetext(time_stamp(), ":", ".")
 
 	if(!GLOB.round_id) // we do not have a db connected, back to pointless random numbers
@@ -169,15 +211,12 @@ GLOBAL_PROTECT(tracy_init_reason)
 		GLOB.picture_logging_prefix = "O_[override_dir]_"
 		GLOB.picture_log_directory = "data/picture_logs/[override_dir]"
 
-	if(GLOB.tracy_log)
-		rustg_file_write("[GLOB.tracy_log]", "[GLOB.log_directory]/tracy.loc")
-	else if(!isnull(GLOB.tracy_init_error))
-		stack_trace("byond-tracy failed to initialize: [GLOB.tracy_init_error]")
+	if(Tracy.trace_path)
+		rustg_file_write("[Tracy.trace_path]", "[GLOB.log_directory]/tracy.loc")
 
 	GLOB.world_game_log = "[GLOB.log_directory]/game.log"
 	GLOB.world_mecha_log = "[GLOB.log_directory]/mecha.log"
 	GLOB.world_virus_log = "[GLOB.log_directory]/virus.log"
-	GLOB.world_cloning_log = "[GLOB.log_directory]/cloning.log"
 	GLOB.world_asset_log = "[GLOB.log_directory]/asset.log"
 	GLOB.world_attack_log = "[GLOB.log_directory]/attack.log"
 	GLOB.world_pda_log = "[GLOB.log_directory]/pda.log"
@@ -325,22 +364,24 @@ GLOBAL_PROTECT(tracy_init_reason)
 	qdel(src)	//shut it down
 
 /world/Reboot(reason = 0, fast_track = FALSE)
-	var/round_end_sound = pick('sound/roundend/knave.ogg',
-	'sound/roundend/twohours.ogg',
-	'sound/roundend/rest.ogg',
-	'sound/roundend/gather.ogg',
-	'sound/roundend/bravery.ogg',
-	'sound/roundend/enjoy.ogg',
-	'sound/roundend/fatcuppapiss.ogg',
-	'sound/roundend/intermission.ogg',
-	'sound/roundend/motherfuckers.ogg',
-	'sound/roundend/poppop.ogg',
-	'sound/roundend/cursedswords.ogg',
-	'sound/roundend/taffers.ogg',
-	'sound/roundend/hereyougo.ogg',
-	'sound/roundend/masterworks.ogg',
-	'sound/roundend/dwarfs.ogg')
-	for(var/client/thing in GLOB.clients)
+	var/round_end_sound = pick(
+		'sound/roundend/knave.ogg',
+		'sound/roundend/twohours.ogg',
+		'sound/roundend/rest.ogg',
+		'sound/roundend/gather.ogg',
+		'sound/roundend/bravery.ogg',
+		'sound/roundend/enjoy.ogg',
+		'sound/roundend/fatcuppapiss.ogg',
+		'sound/roundend/intermission.ogg',
+		'sound/roundend/motherfuckers.ogg',
+		'sound/roundend/poppop.ogg',
+		'sound/roundend/cursedswords.ogg',
+		'sound/roundend/taffers.ogg',
+		'sound/roundend/hereyougo.ogg',
+		'sound/roundend/masterworks.ogg',
+		'sound/roundend/dwarfs.ogg',
+	)
+	for(var/client/thing as anything in GLOB.clients)
 		if(!thing)
 			continue
 		thing << sound(round_end_sound)
@@ -380,7 +421,8 @@ GLOBAL_PROTECT(tracy_init_reason)
 			log_world("World hard rebooted at [time_stamp()]")
 			SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_KILLDD)
 			shutdown_logging() // See comment below.
-			shutdown_byond_tracy()
+			QDEL_NULL(Tracy)
+			QDEL_NULL(Debugger)
 			TgsEndProcess()
 			return ..()
 
@@ -388,8 +430,11 @@ GLOBAL_PROTECT(tracy_init_reason)
 	log_world("World rebooted at [time_stamp()]")
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
 
+	QDEL_NULL(Tracy)
+	QDEL_NULL(Debugger)
+
 	TgsReboot() // TGS can decide to kill us right here, so it's important to do it last
-	shutdown_byond_tracy()
+
 	..()
 #endif
 
@@ -416,7 +461,8 @@ GLOBAL_PROTECT(tracy_init_reason)
 	return s
 
 /world/Del()
-	shutdown_byond_tracy()
+	QDEL_NULL(Tracy)
+	QDEL_NULL(Debugger)
 	. = ..()
 /*
 /world/proc/update_status()
@@ -481,20 +527,10 @@ GLOBAL_PROTECT(tracy_init_reason)
 		hub_password = "SORRYNOPASSWORD"
 
 /**
-
-
  * Handles incresing the world's maxx var and intializing the new turfs and assigning them to the global area.
-
-
  * If map_load_z_cutoff is passed in, it will only load turfs up to that z level, inclusive.
-
-
  * This is because maploading will handle the turfs it loads itself.
-
-
  */
-
-
 /world/proc/increase_max_x(new_maxx, map_load_z_cutoff = maxz)
 	if(new_maxx <= maxx)
 		return
@@ -510,22 +546,6 @@ GLOBAL_PROTECT(tracy_init_reason)
 	SSmobs.MaxZChanged()
 	SSai_controllers.on_max_z_changed()
 
-
-/*
-#ifdef TESTING
-/client/verb/maxzcdec()
-	set category = "DEBUGTEST"
-	set name = "decr"
-	set desc = ""
-	world.decrementMaxZ()
-	to_chat(src, "\n<font color='purple'>Maxz [world.maxz]</font>")
-#endif
-
-/world/proc/decrementMaxZ()
-	maxz = 1
-//	SSmobs.MaxZDec()
-//	SSidlenpcpool.MaxZdec()
-*/
 /world/proc/change_fps(new_value = 20)
 	if(new_value <= 0)
 		CRASH("change_fps() called with [new_value] new_value.")
@@ -534,7 +554,6 @@ GLOBAL_PROTECT(tracy_init_reason)
 
 	fps = new_value
 	on_tickrate_change()
-
 
 /world/proc/change_tick_lag(new_value = 0.5)
 	if(new_value <= 0)
@@ -545,45 +564,11 @@ GLOBAL_PROTECT(tracy_init_reason)
 	tick_lag = new_value
 	on_tickrate_change()
 
-
 /world/proc/on_tickrate_change()
 	SStimer?.reset_buckets()
 
-/world/proc/init_byond_tracy()
-	if(!fexists(TRACY_DLL_PATH))
-		SEND_TEXT(world.log, "Error initializing byond-tracy: [TRACY_DLL_PATH] not found!")
-		CRASH("Error initializing byond-tracy: [TRACY_DLL_PATH] not found!")
-
-	var/init_result = call_ext(TRACY_DLL_PATH, "init")("block")
-	if(length(init_result) != 0 && init_result[1] == ".") // if first character is ., then it returned the output filename
-		SEND_TEXT(world.log, "byond-tracy initialized (logfile: [init_result])")
-		GLOB.tracy_initialized = TRUE
-		return GLOB.tracy_log = init_result
-	else if(init_result == "already initialized")
-		GLOB.tracy_initialized = TRUE
-		SEND_TEXT(world.log, "byond-tracy already initialized ([GLOB.tracy_log ? "logfile: [GLOB.tracy_log]" : "no logfile"])")
-	else if(init_result != "0")
-		GLOB.tracy_init_error = init_result
-		SEND_TEXT(world.log, "Error initializing byond-tracy: [init_result]")
-		CRASH("Error initializing byond-tracy: [init_result]")
-	else
-		GLOB.tracy_initialized = TRUE
-		SEND_TEXT(world.log, "byond-tracy initialized (no logfile)")
-
-/world/proc/shutdown_byond_tracy()
-	if(GLOB.tracy_initialized)
-		SEND_TEXT(world.log, "Shutting down byond-tracy")
-		GLOB.tracy_initialized = FALSE
-		call_ext(TRACY_DLL_PATH, "destroy")()
-
-/world/proc/flush_byond_tracy()
-	// if GLOB.tracy_log is set, that means we're using para-tracy, which should have this.
-	if(GLOB.tracy_initialized && GLOB.tracy_log)
-		SEND_TEXT(world.log, "Flushing byond-tracy log")
-		var/flush_result = call_ext(TRACY_DLL_PATH, "flush")()
-		if(flush_result != "0")
-			SEND_TEXT(world.log, "Error flushing byond-tracy log: [flush_result]")
-			CRASH("Error flushing byond-tracy log: [flush_result]")
-		SEND_TEXT(world.log, "Flushed byond-tracy log")
+/world/Profile(command, type, format)
+	if((command & PROFILE_STOP) || !global.config?.loaded || !CONFIG_GET(flag/forbid_all_profiling))
+		. = ..()
 
 #undef RESTART_COUNTER_PATH

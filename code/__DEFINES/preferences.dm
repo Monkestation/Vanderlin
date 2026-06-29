@@ -53,12 +53,6 @@
 // Gameplay toggles :(
 #define DISABLE_SPLIT_PERSONALITY (1<<0)
 
-#define PARALLAX_INSANE -1 //for show offs
-#define PARALLAX_HIGH    0 //default.
-#define PARALLAX_MED     1
-#define PARALLAX_LOW     2
-#define PARALLAX_DISABLE 3 //this option must be the highest number
-
 #define PIXEL_SCALING_AUTO 0
 #define PIXEL_SCALING_1X 1
 #define PIXEL_SCALING_1_2X 1.5
@@ -228,3 +222,46 @@ DEFINE_BITFIELD(toggles_maptext, list(
 DEFINE_BITFIELD(toggles_gameplay, list(
 	"Disable random split personality" = DISABLE_SPLIT_PERSONALITY,
 ))
+
+
+
+/// Species applies first so external organs / bodyparts can reference it.
+#define PREF_PRIORITY_SPECIES 1
+
+/// Bodypart-related prefs (head_flags etc.) apply after species.
+#define PREF_PRIORITY_BODYPARTS 2
+
+/// Gender is resolved before names so randomisation is sex-aware.
+#define PREF_PRIORITY_GENDER 3
+
+/// Body type after gender so "use gender" option works.
+#define PREF_PRIORITY_BODY_TYPE 4
+
+/// Names are resolved last among character prefs.
+#define PREF_PRIORITY_NAMES 5
+
+/// Modifications that adjust the name chosen by PREF_PRIORITY_NAMES.
+#define PREF_PRIORITY_NAME_MODS 6
+
+// Priorities must be in order!
+/// The default priority level
+#define PREF_PRIORITY_DEFAULT 7
+
+/// Keep this equal to the highest priority above.
+#define MAX_PREF_PRIORITY PREF_PRIORITY_DEFAULT
+
+// ---- Savefile identifier tokens ----
+/// This preference is stored per-character (under /character[N]).
+#define PREF_CHARACTER "character"
+/// This preference is stored per-player (under /).
+#define PREF_PLAYER "player"
+
+
+#define ROLE_SETTING_LIST_PICK "picker"
+#define ROLE_SETTING_TEXT "freetext"
+/// The non gender specific list that we get from init_sprite_accessory_subtypes()
+#define DEFAULT_SPRITE_LIST "default_sprites"
+/// The male specific list that we get from init_sprite_accessory_subtypes()
+#define MALE_SPRITE_LIST "male_sprites"
+/// The female specific list that we get from init_sprite_accessory_subtypes()
+#define FEMALE_SPRITE_LIST "female_sprites"

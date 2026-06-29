@@ -51,12 +51,12 @@
 	if(length(symbol_types))
 		possible_detail_types += list("Symbol" = null)
 
-	var/chosen_design = input(user, "Select a design.", "Caparison Design") as null|anything in possible_detail_types
+	var/chosen_design = tgui_input_list(user, "Select a design.", "Caparison Design", possible_detail_types)
 	if(!chosen_design)
 		return
 
 	if(chosen_design == "Symbol")
-		var/chosen_symbol = input(user, "Select a symbol.", "Caparison Design") as null|anything in symbol_types
+		var/chosen_symbol = tgui_input_list(user, "Select a symbol.", "Caparison Design", symbol_types)
 		if(!chosen_symbol)
 			return
 		detail_state = symbol_types[chosen_symbol]
@@ -64,21 +64,23 @@
 		detail_state = detail_types[chosen_design]
 
 	var/list/colors_to_pick = list()
+
 	if(GLOB.lordprimary)
 		colors_to_pick["Primary Keep Color"] = GLOB.lordprimary
+
 	if(GLOB.lordsecondary)
 		colors_to_pick["Secondary Keep Color"] = GLOB.lordsecondary
-	var/list/color_map_list = COLOR_MAP
-	colors_to_pick += color_map_list.Copy()
 
-	var/primary_color = input(user, "Select a primary color.", "Caparison Design") as null|anything in colors_to_pick
+	colors_to_pick += GLOB.noble_dyes
+
+	var/primary_color = tgui_input_list(user, "Select a primary color.", "Caparison Design", colors_to_pick)
 	if(!primary_color)
 		return
 	color = colors_to_pick[primary_color]
 
 	if(chosen_design != "None")
 		if(chosen_design != "Symbol")
-			var/secondary_color = input(user, "Select a secondary color.", "Caparison Design") as null|anything in colors_to_pick
+			var/secondary_color = tgui_input_list(user, "Select a secondary color.", "Caparison Design", colors_to_pick)
 			if(!secondary_color)
 				return
 			detail_color = colors_to_pick[secondary_color]

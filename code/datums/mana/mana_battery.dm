@@ -92,6 +92,8 @@
 	name = "stabilized primordial quartz crystal"
 	desc = "A stabilized Primordial Quartz Crystal, one of the few objects capable of stably storing mana without binding."
 	icon_state = "standard"
+	grid_height = 64
+	grid_width = 32
 
 /obj/item/mana_battery/mana_crystal/standard/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
@@ -116,6 +118,8 @@
 	desc = "A miniaturized Primordial Quartz Crystal, formed using the run-off of cutting larger ones. Able to hold mana still, although not as much as a proper formation."
 	icon_state = "small"
 	w_class = WEIGHT_CLASS_SMALL
+	grid_height = 32
+	grid_width = 32
 
 /obj/item/mana_battery/mana_crystal/small/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_battery/mana_crystal/small

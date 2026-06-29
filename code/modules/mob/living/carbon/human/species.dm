@@ -1,6 +1,3 @@
-// This code handles different species in the game.
-GLOBAL_LIST_EMPTY(roundstart_species)
-
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -517,10 +514,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	return " [pick(possible_surnames)]"
 
 /datum/species/proc/get_spec_undies_list(gender)
-	if(!GLOB.underwear_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
-
-	var/list/used_list = GLOB.underwear_list
+	var/list/used_list
 	if(gender == MALE)
 		used_list = GLOB.underwear_m
 	else if(gender == FEMALE)
@@ -530,7 +524,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	var/list/spec_undies = list()
 	for(var/name in used_list)
-		var/datum/sprite_accessory/accessory = used_list[name]
+		var/datum/sprite_accessory/accessory = GLOB.underwear_list[name]
+		if(!accessory)
+			continue
 		if(!accessory.roundstart)
 			continue
 		if(!(used_species_id in accessory.specuse))
@@ -1984,7 +1980,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/damage_amount = damage
 	var/list/mods = list()
 	if(!can_crit)
-		mods = list(CRIT_MOD_CHANCE = -100)
+		mods = list(CRIT_MOD_CHANCE = CANT_CRIT)
 	switch(damagetype)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
@@ -2038,7 +2034,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 					if(BP.receive_damage(0, damage_amount, flashes = flashes))
 						H.update_damage_overlays()
 				else
-					BP.bodypart_attacked_by(BCLASS_BURN, damage_amount, modifiers = list(CRIT_MOD_CHANCE = -100)) // burns can't crit
+					BP.bodypart_attacked_by(BCLASS_BURN, damage_amount, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT)) // burns can't crit
 					H.update_damage_overlays()
 			else
 				H.adjustFireLoss(damage_amount)

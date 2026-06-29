@@ -518,11 +518,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patrons_by_type)
+	for(var/god in GLOB.patron_list)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patrons_by_type[god]
+		var/datum/patron/P = GLOB.patron_list[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -705,7 +705,7 @@
 /mob/living/carbon/human/apply_prefs_job(client/player_client, datum/job/job, latejoining = FALSE)
 	var/fully_randomize = is_banned_from(player_client.ckey, "Appearance")
 	var/mob/dead/new_player/np = player_client?.mob
-	if(istype(np) && player_client?.prefs?.multi_char_ready && !latejoining)
+	if(istype(np) && player_client?.prefs?.read_preference(/datum/preference/toggle/multi_char_ready) && !latejoining)
 		np.ensure_multi_ready_character_loaded()
 	if(!player_client)
 		return // Disconnected while checking for the appearance ban.
@@ -717,7 +717,7 @@
 		var/is_antag = (player_client.mob.mind in GLOB.pre_setup_antags)
 		player_client.prefs.safe_transfer_prefs_to(src, TRUE, is_antag)
 		if(CONFIG_GET(flag/force_random_names))
-			player_client.prefs.real_name = player_client.prefs.pref_species.random_name(player_client.prefs.gender, TRUE)
+			player_client.prefs.write_preference(/datum/preference/text/real_name, player_client.prefs.pref_species.random_name(player_client.prefs.read_preference(/datum/preference/choiced/gender), TRUE))
 	dna.update_dna_identity()
 
 /datum/job/proc/adjust_current_positions(offset)
@@ -976,7 +976,8 @@
 		return FALSE
 
 	// Subterran dwarves can only be outsiders if they follow the wurm
-	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(prefs.selected_patron, /datum/patron/alternate/wurm))
+	var/datum/patron/pref_patron = prefs.read_preference(/datum/preference/choiced/patron)
+	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(pref_patron, /datum/patron/alternate/wurm))
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
 		if(!(tested.department_flag & OUTSIDERS))
 			return FALSE
