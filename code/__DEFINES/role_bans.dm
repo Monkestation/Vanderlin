@@ -5,7 +5,7 @@
 #define BAN_MISC_LUNATIC "Lunatic"
 #define BAN_MISC_LEPROSY "Leprosy"
 /// Bans the ckey from publishing books, paintings, and other persistent media
-#define BAN_MISC_PUBLISH "Publishing"
+#define BAN_MISC_PUBLISH "Publishing/Uploading"
 #define BAN_MISC_OOC "OOC"
 #define BAN_MISC_OOCPRONOUNS "OOC Pronouns"
 #define BAN_MISC_DEADCHAT "Deadchat"
