@@ -422,10 +422,6 @@
 	name = "Bellow Sallet"
 	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
 	icon_state = "sallet_bellow"
-	item_state = "sallet_bellow"
-	adjustable = CAN_CADJUST
-	armor = ARMOR_PLATE
-	sellprice = VALUE_STEEL_HELMET
 	item_weight = 4.5 KILOGRAMS
 
 //............... Hounskull ............... //
