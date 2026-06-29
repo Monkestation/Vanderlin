@@ -1,9 +1,8 @@
 /datum/attribute_holder/sheet/job/lieutenant
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 1,
-		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/polearms = 10,
@@ -114,7 +113,10 @@
 	backpack_contents = list(
 		/obj/item/storage/keyring/lieutenant = 1,
 		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/book/law = 1,
+		/obj/item/weapon/mace/cudgel = 1
 	)
 
 /datum/outfit/lieutenant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
