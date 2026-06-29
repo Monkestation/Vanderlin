@@ -240,6 +240,9 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+	incompatible_quirks = list(
+		/datum/quirk/vice/luxless
+	)
 
 /datum/quirk/vice/tainted_soul/on_spawn()
 	if(!ishuman(owner))
