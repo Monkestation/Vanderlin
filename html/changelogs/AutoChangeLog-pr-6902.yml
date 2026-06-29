@@ -1,0 +1,4 @@
+author: "CheffieGithub"
+delete-after: True
+changes:
+  - bugfix: "Revival grants up to of 40% blood to organs like it's meant to"

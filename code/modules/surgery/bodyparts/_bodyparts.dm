@@ -147,7 +147,7 @@
 	/// Multiplier for incoming pain damage
 	var/incoming_pain_mult = 1
 	/// Amount of pain damage we heal per on_life() tick
-	var/pain_heal_tick = 1
+	var/pain_heal_tick = 0.5
 	/// How much we multiply pain_heal_tick by if the owner is lying down
 	var/pain_heal_rest_multiplier = 3
 	/// Point at which the limb is disabled due to pain
@@ -184,6 +184,9 @@
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))
 	update_HP()
+
+	if(is_robotic_limb())
+		ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
 
 /obj/item/bodypart/Destroy()
 	if(owner)
@@ -575,7 +578,7 @@
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
-			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.01
+			heal_amt += max(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION), 1) * 0.005
 			// if(owner?.IsSleeping())
 			// 	heal_amt *= 3
 		if(heal_amt)
@@ -811,7 +814,7 @@
 	if(!can_feel_pain())
 		return
 	amount = min(max_pain_damage - pain_dam, amount)
-	amount -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	// amount -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
 	if(amount <= 0)
 		return
 	pain_dam = round(pain_dam + amount, DAMAGE_PRECISION)

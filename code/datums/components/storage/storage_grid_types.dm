@@ -48,6 +48,11 @@
 	max_items = 1
 	max_w_class = WEIGHT_CLASS_BULKY
 	quickdraw = TRUE
+	allow_look_inside = FALSE
+
+/datum/component/storage/concrete/hollow_book/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/gun/ballistic/powder/wheellock/puffer))
 
 /datum/component/storage/concrete/grid/keyring
 	screen_max_rows = 2
@@ -408,7 +413,10 @@
 			/obj/item/reagent_containers/syringe,
 			/obj/item/reagent_containers/pill,
 			/obj/item/storage/fancy/pilltin,
-			/obj/item/candle/yellow
+			/obj/item/candle/yellow,
+			/obj/item/reagent_containers/glass,
+			/obj/item/natural/bundle/fibers,
+			/obj/item/natural/fibers
 			)
 		)
 	)

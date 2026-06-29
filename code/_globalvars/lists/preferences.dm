@@ -1,23 +1,36 @@
-GLOBAL_LIST_EMPTY(underwear_m)
-GLOBAL_LIST_EMPTY(underwear_f)
-GLOBAL_LIST_INIT(underwear_list, init_underwear_list())
+/// Assoc list: preference_type -> instantiated /datum/preference
+GLOBAL_LIST_INIT(preference_entries, init_preference_entries())
 
-/proc/init_underwear_list()
-	var/list/underwear = init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear)
+/// Assoc list: savefile_key -> instantiated /datum/preference
+GLOBAL_LIST_INIT(preference_entries_by_key, init_preference_entries_by_key())
 
-	GLOB.underwear_m = underwear[MALE_SPRITE_LIST]
-	GLOB.underwear_f = underwear[FEMALE_SPRITE_LIST]
+GLOBAL_LIST_INIT(preferences_in_priority_order, build_preferences_in_priority_order())
 
-	return underwear[DEFAULT_SPRITE_LIST]
+/proc/init_preference_entries()
+	var/list/output = list()
+	for (var/datum/preference/T as anything in subtypesof(/datum/preference))
+		if (initial(T.abstract_type) == T)
+			continue
+		output[T] = new T
+	return output
 
-GLOBAL_LIST_EMPTY(undershirt_m)
-GLOBAL_LIST_EMPTY(undershirt_f)
-GLOBAL_LIST_INIT(undershirt_list, init_undershirt_list())
+/proc/init_preference_entries_by_key()
+	var/list/output = list()
+	for (var/datum/preference/T as anything in subtypesof(/datum/preference))
+		if (initial(T.abstract_type) == T)
+			continue
+		output[initial(T.savefile_key)] = GLOB.preference_entries[T]
+	return output
 
-/proc/init_undershirt_list()
-	var/list/undershirts = init_sprite_accessory_subtypes(/datum/sprite_accessory/undershirt)
-
-	GLOB.undershirt_m = undershirts[MALE_SPRITE_LIST]
-	GLOB.undershirt_f = undershirts[FEMALE_SPRITE_LIST]
-
-	return undershirts[DEFAULT_SPRITE_LIST]
+/// Returns a flat list of all Vanderlin preferences sorted by priority.
+/proc/build_preferences_in_priority_order()
+	var/list/by_priority[MAX_PREF_PRIORITY]
+	for (var/T in GLOB.preference_entries)
+		var/datum/preference/pref = GLOB.preference_entries[T]
+		LAZYADD(by_priority[pref.priority], pref)
+	var/list/flat = list()
+	for (var/i in 1 to MAX_PREF_PRIORITY)
+		if (!by_priority[i])
+			continue
+		flat += by_priority[i]
+	return flat

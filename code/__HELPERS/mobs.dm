@@ -336,8 +336,8 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 
 		if(M.client?.prefs)
 			var/datum/preferences/prefs = M.client?.prefs
-			chat_toggles = prefs.chat_toggles
-			toggles = prefs.toggles
+			chat_toggles = prefs.read_preference(/datum/preference/bitwise/chat_toggles)
+			toggles = prefs.read_preference(/datum/preference/bitwise/toggles)
 			ignoring = prefs.ignoring
 
 		var/override = FALSE

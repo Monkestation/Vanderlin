@@ -34,11 +34,11 @@
 		if(check_zone(zone) == zone)
 			return zone
 
-		if(user.client?.prefs.showrolls)
+		if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(user, "<span class='warning'>Accuracy fail! [chance2hit]%</span>")
 		return check_zone(zone)
 
-	if(user.client?.prefs.showrolls)
+	if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		to_chat(user, "<span class='warning'>Ultra accuracy fail! [chance2hit]%</span>")
 	return BODY_ZONE_CHEST
 

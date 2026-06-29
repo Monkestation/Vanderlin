@@ -456,8 +456,8 @@
 	else
 		return brain_message
 
-/obj/item/organ/brain/get_shock(painkiller_included)
-	return 0 // you can't feel your brain being fried
+/obj/item/organ/brain/can_feel_pain()
+	return FALSE // you can't feel your brain being fried
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
@@ -560,7 +560,7 @@
 		if(!initial(brain_trauma.random_gain))
 			continue
 		if(ispath(brain_trauma, /datum/brain_trauma/severe/split_personality))
-			if(!force_split_personality && owner?.client?.prefs?.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
+			if(!force_split_personality && owner?.client?.prefs?.read_preference(/datum/preference/bitwise/toggles_gameplay) & DISABLE_SPLIT_PERSONALITY)
 				continue
 		if(can_gain_trauma(brain_trauma, resilience, natural_gain))
 			possible_traumas += brain_trauma
