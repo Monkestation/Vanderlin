@@ -72,30 +72,34 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Sword & Cudgel" = list(/obj/item/weapon/sword/iron, /obj/item/weapon/scabbard/sword, /obj/item/weapon/mace/cudgel), \
-		"Axe & Cudgel" = list(/obj/item/weapon/axe/iron, /obj/item/weapon/mace/cudgel), \
-		"Mace & Shortsword" = list(/obj/item/weapon/mace, /obj/item/weapon/sword/short, /obj/item/weapon/scabbard/sword), \
+		"Sword" = list(/obj/item/weapon/sword/iron, /obj/item/weapon/scabbard/sword), \
+		"Axe" = /obj/item/weapon/axe/iron, \
+		"Mace" = /obj/item/weapon/mace, \
+		"Flail" = /obj/item/weapon/flail/militia, \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
 	switch(choice)
-		if("Sword & Cudgel")
+		if("Sword")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
-		if("Axe & Cudgel")
+		if("Axe")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
-		if("Mace & Shortsword")
+		if("Mace")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+		if("Flail")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 20)
 
 /datum/attribute_holder/sheet/job/garrison/footman
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/whipsflails = 10,
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -118,7 +122,9 @@
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/book/law/small = 1,
+		/obj/item/weapon/mace/cudgel = 1
 	)
 
 /datum/outfit/guardsman/footman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
@@ -143,19 +149,11 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
-/datum/job/advclass/garrison/pikeman/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	var/static/list/selectable = list( \
-		"Short Sword" = list(/obj/item/weapon/sword/short/iron, /obj/item/weapon/scabbard/sword), \
-		"Cudgel" = /obj/item/weapon/mace/cudgel, \
-	)
-	spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SIDE WEAPON", title = "PIKEMAN")
-
 /datum/attribute_holder/sheet/job/garrison/pikeman
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/axesmaces = 20,
@@ -184,7 +182,9 @@
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/book/law/small = 1,
+		/obj/item/weapon/mace/cudgel = 1
 	)
 
 /datum/outfit/guardsman/pikeman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
@@ -237,10 +237,11 @@
 	neck = /obj/item/clothing/neck/highcollier/iron
 	backr = /obj/item/gun/ballistic/bow
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	beltl = /obj/item/weapon/mace/cudgel
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/book/law/small = 1,
+		/obj/item/weapon/mace/cudgel = 1
 	)
 
 /datum/outfit/guardsman/archer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

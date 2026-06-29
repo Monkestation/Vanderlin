@@ -563,7 +563,7 @@
 	desc = "An old helmet of iron, offers great visibility and suits well. This one have a feather on top, informing everybody, that wearer is a leader of city watch."
 	icon_state = "watchhelm_feather"
 	detail_tag = "_detail"
-	detail_color = CLOTHING_RED
+	detail_color = CLOTHING_WHITE
 	uses_lord_coloring = LORD_PRIMARY
 
 // It will stay here to make sure nothing breaks

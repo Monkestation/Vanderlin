@@ -65,8 +65,8 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
 	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
 	detail_tag = "_detail"
-	color = CLOTHING_RED
-	detail_color = CLOTHING_BLUE
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_SOOT_BLACK
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
