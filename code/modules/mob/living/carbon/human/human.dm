@@ -543,7 +543,7 @@
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (getShockStage() / SHOCK_STAGE_MAX) * 100 //what percent out of 100 to max pain
+			var/painpercent = can_feel_pain() ? (getShockStage() / SHOCK_STAGE_MAX) * 100 : 0 //what percent out of 100 to max pain
 
 
 			var/usedloss = 0

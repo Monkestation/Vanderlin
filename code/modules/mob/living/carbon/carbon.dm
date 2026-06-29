@@ -898,7 +898,7 @@
 	else
 		clear_fullscreen("oxy")
 
-	var/hurtdamage = (getShockStage() / SHOCK_STAGE_MAX) * 100 //what percent out of 100 to max pain
+	var/hurtdamage = can_feel_pain() ? (getShockStage() / SHOCK_STAGE_MAX) * 100 : 0 //what percent out of 100 to max pain
 	if(hurtdamage)
 		var/severity = 0
 		switch(hurtdamage)
