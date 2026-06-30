@@ -112,7 +112,7 @@
 		var/datum/keybinding/kb = GLOB.keybindings_by_name[kb_name]
 		if(istype(kb, /datum/keybinding/client/say))
 			continue
-		if(kb && kb.can_use(src) && kb.up(src, click_data?[1]))
+		if(kb && kb.up(src, click_data?[1]))
 			break
 
 	holder?.key_up(_key, src)
