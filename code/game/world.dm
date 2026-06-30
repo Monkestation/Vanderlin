@@ -79,7 +79,9 @@ GLOBAL_VAR(restart_counter)
 	Profile(PROFILE_RESTART, type = "sendmaps")
 
 	// Write everything to this log file until we get to SetupLogs() later
-	_initialize_log_files("data/logs/config_error.[GUID()].log")
+	var/config_error = "data/logs/config_error.[GUID()].log"
+	_initialize_log_files(config_error)
+	GLOB.config_error_log = config_error
 
 	// Init the debugger first so we can debug Master
 	Debugger = new
@@ -117,8 +119,6 @@ GLOBAL_VAR(restart_counter)
  */
 /world/New()
 	log_world("World loaded at [time_stamp()]!")
-
-	GLOB.config_error_log = GLOB.world_manifest_log = GLOB.world_pda_log = GLOB.world_job_debug_log = GLOB.sql_error_log = GLOB.world_href_log = GLOB.world_runtime_log = GLOB.world_attack_log = GLOB.world_game_log = "data/logs/config_error.[GUID()].log" //temporary file used to record errors with loading config, moved to log directory once logging is set bl
 
 	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
 
@@ -216,6 +216,7 @@ GLOBAL_VAR(restart_counter)
 		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
 #endif
 
+	// We temporarily set the config log in world/Genesis, here we write it properly
 	if(fexists(GLOB.config_error_log))
 		fcopy(GLOB.config_error_log, "[GLOB.log_directory]/config_error.log")
 		fdel(GLOB.config_error_log)
