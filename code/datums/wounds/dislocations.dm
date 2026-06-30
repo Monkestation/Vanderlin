@@ -20,9 +20,9 @@
 	passive_healing = 0.25
 	qdel_on_droplimb = TRUE
 
-	werewolf_infection_probability = 0
 	associated_bclasses = DISLOCATION_BCLASSES
 	min_damage_dividend = 0.4
+
 	/// Whether or not we can be surgically relocated
 	var/can_relocate = TRUE
 

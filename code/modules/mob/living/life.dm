@@ -32,6 +32,9 @@
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
 		//Breathing, if applicable
 		handle_temperature()
+		handle_breathing(times_fired)
+		handle_diseases()
+
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 			handle_wounds()
 			handle_embedded_objects()
@@ -119,6 +122,12 @@
 	handle_typing_indicator()
 
 /mob/living/proc/handle_temperature()
+	return
+
+/mob/living/proc/handle_breathing(times_fired)
+	return
+
+/mob/living/proc/handle_diseases()
 	return
 
 /mob/living/proc/handle_random_events()

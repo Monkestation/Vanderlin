@@ -499,6 +499,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
+#define TRAIT_WASTING_SICKNESS "Wasting Sickness"
+#define TRAIT_HALE "Hale"
 
 /// applied to orphans
 #define TRAIT_ORPHAN "Orphan"

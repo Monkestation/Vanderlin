@@ -32,20 +32,24 @@
 	. += get_chem_effect(CE_ANTIBIOTIC)
 
 /mob/living/carbon/proc/check_equipment_cover_flags(flags = NONE)
-	for(var/obj/item/thing in get_equipped_items())
+	for(var/obj/item/thing as anything in get_equipped_items())
 		if(thing.flags_cover & flags)
 			return thing
+
 	return null
 
 /mob/living/carbon/is_mouth_covered(check_flags = ALL)
 	for(var/obj/item/grabbing/grab in grabbedby)
 		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
 			return TRUE
+
 	var/needed_coverage = NONE
 	if(check_flags & ITEM_SLOT_HEAD)
 		needed_coverage |= HEADCOVERSMOUTH
+
 	if(check_flags & ITEM_SLOT_MASK)
 		needed_coverage |= MASKCOVERSMOUTH
+
 	return check_equipment_cover_flags(needed_coverage)
 
 /mob/living/carbon/is_eyes_covered(check_glasses = TRUE, check_head = TRUE, check_mask = TRUE)

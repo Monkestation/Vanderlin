@@ -32,10 +32,8 @@
 		handle_embedded_objects()
 		update_stress()
 		handle_nausea()
-
 		handle_shock(delta_time, times_fired)
 		handle_shock_stage(delta_time, times_fired)
-
 		handle_sleep()
 
 	check_cremation()
@@ -59,10 +57,6 @@
 
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	return
-
-///////////////
-// BREATHING //
-///////////////
 
 /mob/living/carbon/proc/has_smoke_protection()
 	if(HAS_TRAIT(src, TRAIT_NOBREATH))
@@ -105,6 +99,14 @@
 			//Needed so organs decay while inside the body
 			organ.on_death(delta_time, times_fired)
 
+
+/mob/living/carbon/handle_diseases()
+	for(var/datum/disease/disease as anything in diseases)
+		if(QDELETED(disease)) //Got cured/deleted while the loop was still going.
+			continue
+
+		if(stat != DEAD || disease.process_dead)
+			disease.stage_act()
 
 /mob/living/carbon/handle_embedded_objects()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)

@@ -763,13 +763,14 @@
 	if(real_damage)
 		playsound(C, "smallslash", 100, FALSE, -1)
 		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, real_damage, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
-		if(user.mind)
-			//TODO: Werewolf Signal
-			var/datum/antagonist/werewolf/werewolf_antag = user.mind.has_antag_datum(/datum/antagonist/werewolf)
-			if(werewolf_antag && werewolf_antag.transformed)
+		if(user.mind && C.mind)
+			if(is_species(user, /datum/species/werewolf))
 				var/mob/living/carbon/human/human = user
 				if(istype(caused_wound))
-					caused_wound?.werewolf_infect_attempt()
+					// Accounts for arteries and scaling dynamic wounds
+					var/infection_probability = (caused_wound.whp / 4) + (caused_wound.bleed_rate / 2)
+					if(prob(infection_probability))
+						C.contract_disease(/datum/disease/lycanthropy)
 				if(prob(30))
 					human.werewolf_feed(C)
 

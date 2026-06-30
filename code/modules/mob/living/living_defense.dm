@@ -43,13 +43,15 @@
  *
  * Retuns a truthy value (a ref to what is covering mouth), or a falsy value (null)
  */
-/mob/living/proc/is_mouth_covered(head_only = 0, mask_only = 0)
+/mob/living/proc/is_mouth_covered(check_flags = ALL)
 	return FALSE
 
 /mob/living/proc/is_eyes_covered(check_glasses = 1, check_head = 1, check_mask = 1)
 	return FALSE
+
 /mob/living/proc/is_pepper_proof(check_head = TRUE, check_mask = TRUE)
 	return FALSE
+
 /mob/living/proc/on_hit(obj/projectile/P)
 	return BULLET_ACT_HIT
 
@@ -338,7 +340,7 @@
 			to_chat(M, "<span class='info'>I don't want to hurt anyone!</span>")
 			return FALSE
 
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
+		if(M.is_muzzled() || M.is_mouth_covered(ITEM_SLOT_MASK))
 			to_chat(M, "<span class='warning'>I can't bite with my mouth covered!</span>")
 			return FALSE
 		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
@@ -354,9 +356,6 @@
 							"<span class='danger'>I avoid [M.name]'s bite!</span>", "<span class='hear'>I hear the sound of jaws snapping shut!</span>", COMBAT_MESSAGE_RANGE, M)
 			to_chat(M, "<span class='warning'>My bite misses [src]!</span>")
 	return FALSE
-
-/mob/living/ex_act(severity, target)
-	..()
 
 /mob/living/acid_act(acidpwr, acid_volume)
 	take_bodypart_damage(acidpwr * min(1, acid_volume * 0.1))

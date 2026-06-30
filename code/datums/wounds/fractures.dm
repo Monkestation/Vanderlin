@@ -26,17 +26,16 @@
 
 	limb_efficiency_reduction = 30
 
-	var/set_bleed_rate = 0.5
-
 	ignore_bloody = TRUE
 
-	werewolf_infection_probability = 0
 	associated_bclasses = FRACTURE_BCLASSES
 	viable_zones = GENERIC_FRACTURE_BODYPARTS
 
 	min_damage_dividend = 0.6
 	strong_intent_bonus = TRUE
 	brittle_bonus = TRUE
+
+	var/set_bleed_rate = 0.5
 
 	/// Whether or not we can be surgically set
 	var/can_set = TRUE
