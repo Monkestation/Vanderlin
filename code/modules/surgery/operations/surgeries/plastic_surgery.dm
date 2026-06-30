@@ -14,7 +14,7 @@
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_EXPERT
 
-	operation_flags = OPERATION_NOTABLE | OPERATION_NOT_SELF_OPERABLE
+	operation_flags = OPERATION_NOTABLE
 
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/scalpel2.ogg'
