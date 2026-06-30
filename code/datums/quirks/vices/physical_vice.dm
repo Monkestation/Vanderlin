@@ -373,7 +373,7 @@
 	if(!owner)
 		return
 	if(owner.stat == UNCONSCIOUS && owner.IsSleeping())
-		if(user.has_stress_type(/datum/stress_event/hug))
+		if(owner.has_stress_type(/datum/stress_event/hug))
 			comforted = TRUE
 
 		if(world.time >= next_scream)
