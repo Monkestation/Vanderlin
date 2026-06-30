@@ -202,8 +202,11 @@ SUBSYSTEM_DEF(merchant)
 		if(output)
 			obtainable_items |= output
 
-	// Only include items that are both obtainable AND have a base value
+	// Only include items that are both obtainable and can actually be sold.
 	for(var/obj_type in obtainable_items)
+		var/obj/item/item_template = obj_type
+		if(!item_template || item_template.sellprice <= 0)
+			continue
 		var/base_value = get_item_base_value(obj_type)
 		if(base_value > 0)
 			valid_bounty_items |= obj_type
