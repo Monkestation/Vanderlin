@@ -645,8 +645,33 @@
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
 	item_weight = 40 GRAMS
-	var/obj/item/book/granter/spellbook/melded_quality = /obj/item/book/granter/spellbook/adept
 	var/shock_damage = 20
+	var/obj/item/book/granter/spellbook/melded_quality = /obj/item/book/granter/spellbook/adept
+
+/obj/item/natural/melded/proc/fusion_meld_spellbook(mob/living/carbon/human/user, obj/item/targetbook, isupgrade)
+	if(!do_after(user, max(0, 100 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5), target = src))
+		return
+
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) > SKILL_LEVEL_NONE)
+		var/obj/item/spellbook_unfinished/pre_arcyne/newbook
+		newbook = isupgrade ? new(get_turf(targetbook)) : targetbook
+
+		user.visible_message(
+			span_warning("[user] imbues [user.p_their()] [src]! It fuses into the [newbook]. [isupgrade == TRUE ? "Old scribings dissipated in the air as the pages flipped quickly" : ""]"),
+			span_notice("I join my arcyne energy with that of the [src] in my hands, which shudders briefly before dissolving into motes of energy.[isupgrade == TRUE ? " Old scribings dissipated in the air as the pages flipped quickly..." : ""] Runes and symbols of an unknowable language cover its pages now...")
+		)
+		to_chat(user, span_notice("...yet even for an enigma of the arcyne, these characters are unlike anything I've seen before. They're going to be -much- harder to understand..."))
+		if (isupgrade)
+			qdel(targetbook)
+
+		newbook.finish_book(user, src, melded_quality)
+	else
+		user.visible_message(
+			span_warning("[user] sets down [src] upon the surface of [targetbook] and watches expectantly. Without warning, the [src] violently explodes!"),
+			span_notice("I should have known messing with the arcyne was dangerous!")
+		)
+		user.electrocute_act(shock_damage, targetbook)
+		qdel(src)
 
 /obj/item/natural/melded/t1
 	name = "arcanic meld"
@@ -689,7 +714,7 @@
 	desc = "A melding of arcyne fusion and voidstone. It pulses erratically, power coiled tightly within and dangerous. Many would be afraid of going near this, let alone holding it."
 	item_weight = 80 GRAMS
 	melded_quality = /obj/item/book/granter/spellbook/legendary
-	shock_damage = 40
+	shock_damage = 100
 
 /obj/structure/soul
 	name = "soul"

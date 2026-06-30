@@ -53,7 +53,7 @@
 		user.visible_message(span_notice("I run my arcyne energy into the crystal. Its artificial lattices pulse and then fall dormant. It must not be strong enough to make a spellbook with!"))
 		return
 
-	if(isturf(loc) && !found_table)
+	if(!isturf(loc) || !found_table)
 		to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
 		return TRUE
 
@@ -75,7 +75,7 @@
 
 	if(istype(P, /obj/item/natural/melded))
 		var/obj/item/natural/melded/meld = P
-		apply_melded_catalyst(user, P, meld.melded_quality, meld.shock_damage)
+		meld.fusion_meld_spellbook(user, src, FALSE)
 		return
 	return ..()
 
@@ -83,7 +83,6 @@
 /obj/item/spellbook_unfinished/pre_arcyne/proc/finish_book(mob/user, obj/item/catalyst, book_type, born_of_rock = FALSE, extra_desc = null)
 	playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
 	var/obj/item/book/granter/spellbook/newbook = new book_type(get_turf(loc))
-	var/atom/old_loc = loc
 	newbook.owner = user
 	if(born_of_rock)
 		newbook.born_of_rock = TRUE
@@ -91,9 +90,6 @@
 		newbook.desc += extra_desc
 	qdel(catalyst)
 	qdel(src)
-	if(ismob(old_loc))
-		var/mob/living/mob = old_loc
-		mob.put_in_hands(newbook)
 
 /// Handles gem catalysts. Unskilled readers just get a cosmetic press.
 /obj/item/spellbook_unfinished/pre_arcyne/proc/apply_gem_catalyst(mob/user, obj/item/gem/gem, book_type, found_table)
@@ -150,21 +146,4 @@
 		return /obj/item/book/granter/spellbook/mid
 	return /obj/item/book/granter/spellbook/horrible
 
-/// Handles melded catalysts. Unskilled users take escalating shock damage.
-/obj/item/spellbook_unfinished/pre_arcyne/proc/apply_melded_catalyst(mob/living/user, obj/item/P, book_type, shock_damage)
-	if(!do_after(user, max(0, 100 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5), target = src))
-		return
-	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) > SKILL_LEVEL_NONE)
-		user.visible_message(
-			span_warning("[user] imbues [user.p_their()] [P]! It fuses into the [src]."),
-			span_notice("I join my arcyne energy with that of the [P] in my hands, which shudders briefly before dissolving into motes of energy. Runes and symbols of an unknowable language cover its pages now...")
-		)
-		to_chat(user, span_notice("...yet even for an enigma of the arcyne, these characters are unlike anything I've seen before. They're going to be -much- harder to understand..."))
-		finish_book(user, P, book_type)
-	else
-		user.visible_message(
-			span_warning("[user] sets down [P] upon the surface of [src] and watches expectantly. Without warning, the [P] violently explodes!"),
-			span_notice("I should have known messing with the arcyne was dangerous!")
-		)
-		user.electrocute_act(shock_damage, src)
-		qdel(P)
+/// Melded fusion catalysts are handled in their obj path

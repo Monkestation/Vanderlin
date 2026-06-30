@@ -233,6 +233,22 @@
 	gamer.electrocute_act(5, src)
 
 /obj/item/book/granter/spellbook/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
+	// Tome Upgrading/Degrading
+	if (istype(P, /obj/item/natural/melded))
+		var/mob/living/carbon/human/gamer = user
+		if(gamer != owner && !allowed_readers.Find(gamer))
+			to_chat(user, span_notice("You yield no right for this book!!"))
+			recoil(user)
+			return
+
+		var/found_table = locate(/obj/structure/table) in (loc)
+		if(!isturf(loc) || !(found_table))
+			to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
+			return
+
+		var/obj/item/natural/melded/meld = P
+		meld.fusion_meld_spellbook(user, src, TRUE)
+
 	if(!istype(P, /obj/item/gem))
 		return ..()
 	if(stored_gem)

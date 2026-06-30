@@ -2006,7 +2006,7 @@
 #include "code\game\objects\items\toys.dm"
 #include "code\game\objects\items\trash.dm"
 #include "code\game\objects\items\undies.dm"
-#include "code\game\objects\items\unfiinshed_spellbook.dm"
+#include "code\game\objects\items\unfinished_spellbook.dm"
 #include "code\game\objects\items\waterskins.dm"
 #include "code\game\objects\items\weaponry.dm"
 #include "code\game\objects\items\chimeric_organs\chimeric_node.dm"
