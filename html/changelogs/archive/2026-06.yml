@@ -233,3 +233,67 @@
       so now every Prafekt can start with a good bit of money
   tired-wired:
   - rscdel: Removed necran acolyte, play gravetender instead
+2026-06-27:
+  CheffieGithub:
+  - rscadd: Add missing strain sound and emote to guarding. credit to FreeStylaLT.
+  - balance: Guard stance is only bypassed by behind and out of range melee attacks
+      not fully stopped.
+  - bugfix: Fixed hefty swing being able to stack damage
+  - bugfix: Fixed being able to attack while guarding.
+2026-06-28:
+  tired-wired:
+  - rscadd: Expanded the Crimsonlands-related class lore.
+2026-06-29:
+  Avalon-Proto:
+  - rscadd: Dungeoneers now recieve fair medical knowledge alongside the kit to prevent
+      someone in their care dying too quickly
+  CheffieGithub:
+  - rscadd: Added bug report TGUI. Legacy version available under OOC verbs.
+  - bugfix: Revival grants up to of 40% blood to organs like it's meant to
+  ModDownloading:
+  - rscadd: Meat, Poultry, Eggs, Fat, and Ollies are now in the stockpile.
+  - balance: Prices of most fruit items have been normalized to account for their
+      lack of rarity.
+  - balance: The vault, including the stockpile, now completely stops food from rotting.
+  SmokingCrackForChrist:
+  - rscadd: New fingersnap emote, *snap.
+  - rscadd: New footstep sounds for three-of-the-four inhumen pantheon armorsets.
+  - bugfix: Fixes Patron selection for Renegade / Antiquarian Wretch subclasses. You
+      can now respectively shoot or throw calling cards at people like gambit again
+      without needing to worship a specific patron on character-creation. Your patronage
+      is still forced.
+  Snack-Max:
+  - rscadd: Fighters and Clerics now always spawn with regular satchels
+  Sulaboy:
+  - qol: You can now alt click "The Book" to select an Event/God to read aloud about.
+2026-06-30:
+  Ben10083:
+  - rscadd: Adds random player created paintings to archivist chamber in Vanderlin
+  - qol: Praise Zizo verb changed from an emote to a forced say (You now actually
+      praise Zizo)
+  - refactor: say proc now allows you to force a message in a certain language
+  - bugfix: Fixes minor chat weirdness involving improper use of say proc
+  Snack-Max:
+  - rscadd: New Bellow Sallet
+  Somniworld:
+  - rscadd: 'The inquisition gets 2 new sets of clothing in their Hermes. These are
+      disguise sets of clothing allowing you to blend in better, don''t expect something
+      too crazy however.
+
+      :cl:
+
+      ## Pre-Merge Checklist
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      ## Change images :
+
+      Standard disguise kit''s content, I did also test the armored one but didn''t
+      take pictures and now I''m lazy :
+
+      <img width="706" height="211" alt="image" src="https://github.com/user-attachments/assets/a76e0c55-65a5-4889-9062-5b3b6fad5f54"
+      />'
