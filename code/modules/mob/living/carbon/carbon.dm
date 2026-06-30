@@ -1029,8 +1029,11 @@
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			organ.applyOrganDamage(excess_healing * -1)
 
-	for(var/obj/item/organ/parent in internal_organs)//we treat this like the initial heart beat filling all the arteries with blood again
-		parent.current_blood = min(parent.current_blood, (parent.current_blood + (parent.max_blood_storage * 0.4)))
+	for(var/obj/item/organ/organ as anything in internal_organs)//we treat this like the initial heart beat filling all the arteries with blood again
+		var/current_blood = organ.current_blood
+		var/adjust_to = current_blood + (organ.max_blood_storage * 0.4)
+		organ.current_blood = clamp(adjust_to, current_blood, organ.max_blood_storage)
+
 	pump_heart(forced_pump = 1.3)
 
 	return ..()
@@ -1176,6 +1179,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)
 	. = ..()
@@ -1264,6 +1268,11 @@
 		cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 		log_admin("[key_name(usr)] has cured all traumas from [key_name(src)].")
 		message_admins("<span class='notice'>[key_name_admin(usr)] has cured all traumas from [key_name_admin(src)].</span>")
+	if(href_list[VV_HK_SHOW_RELATIONS])
+		if(!check_rights(NONE))
+			return
+		var/mob/user = usr
+		mind?.display_relations(user)
 
 /mob/living/carbon/can_resist()
 	return bodyparts.len > 2 && ..()

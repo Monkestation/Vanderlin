@@ -413,7 +413,10 @@
 			/obj/item/reagent_containers/syringe,
 			/obj/item/reagent_containers/pill,
 			/obj/item/storage/fancy/pilltin,
-			/obj/item/candle/yellow
+			/obj/item/candle/yellow,
+			/obj/item/reagent_containers/glass,
+			/obj/item/natural/bundle/fibers,
+			/obj/item/natural/fibers
 			)
 		)
 	)

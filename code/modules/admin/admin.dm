@@ -44,7 +44,7 @@
 	body += "html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden;}"
 	body += "#container { display: flex; flex-direction: row; align-items: flex-start; width: 100%; overflow-x: hidden; flex-wrap: nowrap;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#left { flex: 2; padding-right: 10px; min-width: 0; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]}"
-	body += "#quirks-section, #languages-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
+	body += "#quirks-section, #languages-section, #gossip-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
 	body += "#right { flex: 1; border-left: 2px solid black; padding-left: 10px; max-height: 500px; overflow-y: auto; width: 250px; min-width: 250px; box-sizing: border-box; position: relative;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#right-header { display: flex; justify-content: space-around; padding: 5px; background: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-bottom: 2px solid black; position: sticky; top: 0; z-index: 10; }"
 	body += "#right-header button { flex: 1; margin: 2px; padding: 5px; cursor: pointer; font-weight: bold; border: none; background-color: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-radius: 5px; }"
@@ -56,7 +56,8 @@
 	body += "function toggleSection(section) {"
 	body += "    localStorage.setItem('activeSection', section);"
 	body += "    document.getElementById('languages-section').style.display = (section === 'languages') ? 'block' : 'none';"
-	body += "	 document.getElementById('quirks-section').style.display = (section === 'quirks') ? 'block' : 'none';"
+	body += "    document.getElementById('quirks-section').style.display = (section === 'quirks') ? 'block' : 'none';"
+	body += "    document.getElementById('gossip-section').style.display = (section === 'gossip') ? 'block' : 'none';"
 	body += "}"
 
 	body += "function refreshAndKeepSection(section) {"
@@ -146,7 +147,6 @@
 	body += "<a href='?priv_msg=[M.ckey]'>PM</a> - "
 	body += "<a href='?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>SM</a> - "
 	body += "<a href='?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(M)]'>FLW</a> - "
-	//Default to client logs if available
 	var/source = LOGSRC_MOB
 	if(M.client)
 		source = LOGSRC_CLIENT
@@ -184,7 +184,6 @@
 	body += "<A href='?_src_=holder;[HrefToken()];traitor=[REF(M)]'>Traitor panel</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];narrateto=[REF(M)]'>Narrate to</A> | "
 	body += "<A href='?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>Subtle message</A> | "
-	//body += "<A href='?_src_=holder;[HrefToken()];languagemenu=[REF(M)]'>Language Menu</A>"
 
 	body += "</div>"
 
@@ -192,6 +191,7 @@
 	body += "<div id='right-header'>"
 	body += "<button onclick=\"toggleSection('languages')\">Languages</button>"
 	body += "<button onclick=\"toggleSection('quirks')\">Quirks</button>"
+	body += "<button onclick=\"toggleSection('gossip')\">Gossip</button>"
 	body += "</div>"
 
 	body += "<div id='languages-section'>"
@@ -210,7 +210,6 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 
-		// Display current quirks
 		if(length(H.quirks))
 			body += "<h4>Current Quirks:</h4><ul>"
 			for(var/datum/quirk/Q in H.quirks)
@@ -220,12 +219,10 @@
 		else
 			body += "<p><i>No quirks</i></p>"
 
-		// Add new quirk dropdown
 		body += "<h4>Add Quirk:</h4>"
 		body += "<select id='quirk-select'>"
 		body += "<option value=''>-- Select Quirk --</option>"
 
-		// Group quirks by category
 		for(var/category in list(QUIRK_BOON, QUIRK_VICE, QUIRK_PECULIARITY))
 			var/category_name = ""
 			switch(category)
@@ -247,7 +244,6 @@
 		body += "</select>"
 		body += " <button class='skill-btn' onclick='addQuirk()'>Add</button>"
 
-		// JavaScript for adding quirks
 		body += "<script>"
 		body += "function addQuirk() {"
 		body += "    var select = document.getElementById('quirk-select');"
@@ -260,16 +256,42 @@
 
 	body += "</ul></div>"
 
-	body += "</div>"
+	// Gossip section
+	body += "<div id='gossip-section'>"
+	body += "<h3>Gossip & Rumors</h3>"
+	if(M.client?.prefs)
+		var/list/rumors = M.client.prefs.read_preference(/datum/preference/list_type/rumors)
+		var/list/noble_gossip = M.client.prefs.read_preference(/datum/preference/list_type/noble_gossip)
+
+		body += "<h4>Rumors</h4>"
+		if(rumors?.len)
+			body += "<ul>"
+			for(var/text in rumors)
+				body += "<li><i>\"...[html_encode(text)]\"</i></li>"
+			body += "</ul>"
+		else
+			body += "<p><i>No rumors set.</i></p>"
+
+		body += "<h4>Noble Gossip</h4>"
+		if(noble_gossip?.len)
+			body += "<ul>"
+			for(var/text in noble_gossip)
+				body += "<li><i>\"...[html_encode(text)]\"</i></li>"
+			body += "</ul>"
+		else
+			body += "<p><i>No noble gossip set.</i></p>"
+	else
+		body += "<p><i>No preferences available.</i></p>"
 	body += "</div>"
 
+	body += "</div>"
+	body += "</div>"
 
 	body += "<br>"
 	body += "</body>"
 
 	usr << browse(body, "window=adminplayeropts-[REF(M)];size=800x600")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel")
 
 /datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
 	set name = "Heal Mob"
