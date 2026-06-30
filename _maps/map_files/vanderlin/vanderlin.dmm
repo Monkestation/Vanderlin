@@ -9345,6 +9345,8 @@
 /area/under/cave)
 "eum" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/easel,
+/obj/item/canvas/random_painting,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/jester)
 "eup" = (
@@ -42255,6 +42257,14 @@
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/vault)
 "tFG" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/tile/checkeralt,
 /area/indoors/town/keep/archivist)

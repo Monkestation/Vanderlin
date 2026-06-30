@@ -1,0 +1,5 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - qol: "Praise Zizo verb changed from an emote to a forced say (You now actually praise Zizo)"
+  - refactor: "say proc now allows you to force a message in a certain language"

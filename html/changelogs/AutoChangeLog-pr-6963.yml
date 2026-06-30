@@ -1,0 +1,4 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - bugfix: "Fixes minor chat weirdness involving improper use of say proc"
