@@ -49,7 +49,7 @@
 
 /datum/job/advclass/combat/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.grant_inspiration(BARD_T2)
+	spawned.grant_inspiration()
 
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'

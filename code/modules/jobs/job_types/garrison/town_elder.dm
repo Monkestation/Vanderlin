@@ -551,7 +551,7 @@
 
 /datum/job/advclass/town_elder/lorekeeper/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.grant_inspiration(BARD_T2)
+	spawned.grant_inspiration()
 
 /datum/outfit/town_elder/lorekeeper
 	name = "Lorekeeper (Town Elder)"
