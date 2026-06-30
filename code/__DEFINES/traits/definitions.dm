@@ -557,6 +557,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_KNOW_INQUISITION_DOORS "know_inquisition_doors"
 #define TRAIT_KNOW_THIEF_DOORS "know_thief_doors"
 #define TRAIT_KNOW_ROUS_DOORS "know_rous_doors" //Event purposes.
+#define TRAIT_GALLOWBAND_SECRETS "know_gallowband_secrets"
 
 // JOB RELATED TRAITS
 #define TRAIT_MALUMFIRE "Professional Smith"

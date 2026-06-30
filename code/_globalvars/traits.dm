@@ -207,6 +207,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS

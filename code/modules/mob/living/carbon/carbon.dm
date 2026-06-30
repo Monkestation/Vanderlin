@@ -1179,6 +1179,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)
 	. = ..()
@@ -1267,6 +1268,11 @@
 		cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 		log_admin("[key_name(usr)] has cured all traumas from [key_name(src)].")
 		message_admins("<span class='notice'>[key_name_admin(usr)] has cured all traumas from [key_name_admin(src)].</span>")
+	if(href_list[VV_HK_SHOW_RELATIONS])
+		if(!check_rights(NONE))
+			return
+		var/mob/user = usr
+		mind?.display_relations(user)
 
 /mob/living/carbon/can_resist()
 	return bodyparts.len > 2 && ..()

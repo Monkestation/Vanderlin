@@ -66,6 +66,7 @@
 		/mob/proc/haltyell
 	)
 
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)

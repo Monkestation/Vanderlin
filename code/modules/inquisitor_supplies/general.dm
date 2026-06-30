@@ -469,3 +469,34 @@
 	new /obj/item/clothing/shirt/dress/royal(src)
 	new /obj/item/clothing/wrists/royalsleeves(src)
 	new /obj/item/clothing/shirt/dress/royal/prince(src)
+
+
+/datum/inqports/wardrobe/standarddisguise //basic, cheap disguises for when you are outlawed roundstart.
+	name = "Standard disguise set - contains cloak"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/standarddisguise
+	marquescost = 2
+
+/obj/structure/closet/crate/chest/inqcrate/wardrobe/standarddisguise/populate_contents()
+	new /obj/item/clothing/cloak/raincloak/colored/random(src)
+	new /obj/item/clothing/armor/gambeson(src)
+	new /obj/item/clothing/shirt/dress/gen/colored/random(src)
+	new /obj/item/clothing/shirt/undershirt(src)
+	new /obj/item/storage/backpack/satchel(src)
+	new /obj/item/clothing/shoes/simpleshoes(src)
+	new /obj/item/storage/belt/leather(src)
+
+
+/datum/inqports/wardrobe/armoureddisguise // contains basic, nondescript armour.
+	name = "Medium armour disguise crate - no cloak, bad armour"
+	item_type = /obj/structure/closet/crate/chest/inqcrate/wardrobe/armoureddisguise
+	marquescost = 2 // the armour is objectively bad
+
+/obj/structure/closet/crate/chest/inqcrate/wardrobe/armoureddisguise/populate_contents()
+	new /obj/item/clothing/head/helmet/ironpot(src)
+	new /obj/item/clothing/armor/cuirass/iron(src)
+	new /obj/item/clothing/armor/gambeson(src)
+	new /obj/item/clothing/shoes/boots/leather(src)
+	new /obj/item/clothing/neck/chaincoif/iron(src)
+	new /obj/item/clothing/gloves/leather(src)
+	new /obj/item/storage/backpack/satchel(src)
+	new /obj/item/storage/belt/leather(src)

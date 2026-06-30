@@ -176,6 +176,7 @@
 		"Knight Helmet" = /obj/item/clothing/head/helmet/visored/knight,
 		"Decorated Knight Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/knight,
 		"Visored Sallet" = /obj/item/clothing/head/helmet/visored/sallet,
+		"Bellow Sallet" = /obj/item/clothing/head/helmet/visored/bellow,
 		"Decorated Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
 	)
 
