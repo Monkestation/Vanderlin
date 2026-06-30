@@ -1,4 +1,0 @@
-author: "Somniworld"
-delete-after: True
-changes:
-  - rscadd: "The inquisition gets 2 new sets of clothing in their Hermes. These are disguise sets of clothing allowing you to blend in better, don't expect something too crazy however.\n:cl:\n## Pre-Merge Checklist\n- [x] You tested this on a local server.\n- [x] This code did not runtime during testing.\n- [x] You documented all of your changes.\n## Change images :\nStandard disguise kit's content, I did also test the armored one but didn't take pictures and now I'm lazy :\n<img width=\"706\" height=\"211\" alt=\"image\" src=\"https://github.com/user-attachments/assets/a76e0c55-65a5-4889-9062-5b3b6fad5f54\" />"
