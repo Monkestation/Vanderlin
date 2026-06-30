@@ -1060,6 +1060,10 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 160
 
+/obj/item/weapon/sword/long/silver/decorated/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/weapon/sword/long/silver
 	name = "silver longsword"
 	desc = "A finely crafted silver longsword"
