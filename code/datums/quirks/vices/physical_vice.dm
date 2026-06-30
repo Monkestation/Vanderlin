@@ -372,12 +372,9 @@
 /datum/quirk/vice/nightmares/process()
 	if(!owner)
 		return
-	
 	if(owner.stat == UNCONSCIOUS && owner.IsSleeping())
-		var/mob/living/carbon/h = owner
-		for(var/datum/stress_event/event as anything in h.get_negative_stressors())
-			if(istype(event, /datum/stress_event/hug))
-				comforted = TRUE
+		if(user.has_stress_type(/datum/stress_event/hug))
+			comforted = TRUE
 
 		if(world.time >= next_scream)
 			next_scream = world.time + rand(30 SECONDS, 60 SECONDS)
