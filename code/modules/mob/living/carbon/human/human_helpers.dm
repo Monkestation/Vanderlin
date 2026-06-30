@@ -215,6 +215,6 @@
 
 	return highest_ac
 
-/mob/living/carbon/human/proc/grant_inspiration(tier = BARD_T1)
+/mob/living/carbon/human/proc/grant_inspiration(tier = BARD_T2)
 	inspiration = new /datum/inspiration(src)
 	inspiration.grant_inspiration(src, tier)
