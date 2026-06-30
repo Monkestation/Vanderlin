@@ -534,6 +534,12 @@
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/weapon/axe/steel
 
+/datum/anvil_recipe/weapons/steel/felling_axe
+	name = "Felling Axe (+Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/halberd/bardiche/woodcutter/steel
+
 /datum/anvil_recipe/weapons/steel/greataxe
 	name = "Greataxe (+Bar, +Small Log)"
 	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
@@ -901,7 +907,7 @@
 	name = "Silver Flail (+Chain, +Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/rope/chain, /obj/item/grown/log/tree/stick)
-	created_item = /obj/item/weapon/flail/silflail
+	created_item = /obj/item/weapon/flail/silver
 
 /datum/anvil_recipe/weapons/silver/sword_silver
 	name = "Silver Sword"

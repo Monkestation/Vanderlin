@@ -35,11 +35,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-
-/obj/item/clothing/cloak/psyaltrist/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/head/spellcasterhat
 	name = "spellsinger hat"

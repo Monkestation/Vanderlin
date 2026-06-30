@@ -186,19 +186,22 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "mysterybox"
 	detail_tag = "_detail"
-	var/datum/quirk/peculiarity/mystery_box/linked_quirk
-	var/listening = TRUE
+	detail_color = CLOTHING_YELLOW_OCHRE
 	dropshrink = 0.8
 	item_weight = 750 GRAMS
+
+	var/datum/quirk/peculiarity/mystery_box/linked_quirk
+	var/listening = TRUE
 
 /obj/item/mystery/Initialize()
 	. = ..()
 	become_hearing_sensitive()
-	detail_color = pick_assoc(COLOR_MAP)
+	detail_color = pick_assoc(GLOB.noble_dyes)
 	update_appearance()
 
 /obj/item/mystery/Destroy()
 	lose_hearing_sensitivity()
+	linked_quirk = null
 	return ..()
 
 /obj/item/mystery/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, original_message)

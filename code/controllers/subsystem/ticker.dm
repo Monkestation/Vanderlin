@@ -352,6 +352,10 @@ SUBSYSTEM_DEF(ticker)
 	log_game("GAME SETUP: equip characters success")
 	transfer_characters()	//transfer keys to the new mobs
 	log_game("GAME SETUP: transfer characters success")
+	SSrelations.run_rival_matchmaking()
+	log_game("GAME SETUP: rival matchmaking success")
+	SSrelations.spread_gossip()
+	log_game("GAME SETUP: gossip spreading success")
 
 	for(var/datum/callback/cb as anything in round_start_events)
 		cb.InvokeAsync()
@@ -398,7 +402,7 @@ SUBSYSTEM_DEF(ticker)
 */
 
 	PostSetup()
-	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
+
 	log_game("GAME SETUP: postsetup success")
 
 	return TRUE

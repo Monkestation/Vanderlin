@@ -427,6 +427,18 @@
 	output = /obj/item/kitchen/rollingpin
 	craft_time = 5 SECONDS
 
+/datum/repeatable_crafting_recipe/crafting/stonepan
+	name = "flat cooking stone"
+	requirements = list(
+		/obj/item/natural/rock = 1,
+	)
+	attacked_atom = /obj/item/natural/rock
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/cooking/pan/stone
+	output_amount = 1
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/woodbowl
 	name = "wooden bowl"
 	requirements = list(
@@ -742,6 +754,18 @@
 	requirements = list(
 		/obj/item/natural/cloth = 1,
 		/obj/item/reagent_containers/food/snacks/meat = 2,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/meat
+	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
+
+/datum/repeatable_crafting_recipe/crafting/greaseballbait
+	name = "grease bait"
+	output = /obj/item/bait/greasy
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/meat = 1,
+		/obj/item/reagent_containers/food/snacks/fat = 1,
+		/obj/item/natural/cloth = 1,
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/meat
 	attacked_atom = /obj/item/natural/cloth

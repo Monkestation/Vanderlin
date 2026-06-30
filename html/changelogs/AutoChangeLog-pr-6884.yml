@@ -1,0 +1,6 @@
+author: "Spitegremlin"
+delete-after: True
+changes:
+  - rscadd: "Added new stone pan called hotrock"
+  - rscadd: "Added new bait called greasebait"
+  - balance: "added more possible animals to bait, and put more dangerous ones in the highest tier bait"

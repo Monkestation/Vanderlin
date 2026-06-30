@@ -1,6 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - rscadd: "Bandits now start with Halfmasks in addition to their other gear."
-  - rscadd: "Rusted armor can now be found in random loot."
-  - balance: "Steel masks are more common in random loot."

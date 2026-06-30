@@ -181,7 +181,7 @@
 		if((M.body_position != LYING_DOWN))
 			if(isturf(loc))
 				var/movefrom = get_dir(M.loc, loc)
-				if(movefrom == dir && item_chair != null)
+				if(movefrom == dir && item_chair != null && !(HAS_TRAIT(M, TRAIT_CAREFUL_CHAIRS)))
 					playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 					var/obj/item/I = new item_chair(loc)
 					item_chair = null
@@ -193,6 +193,8 @@
 	if(!user)
 		return
 	if(isturf(loc))
+		user.visible_message(span_warning("[user] kicks \the [src] down!"), \
+			span_notice("I kick \the [src] down!"))
 		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null
@@ -207,7 +209,7 @@
 	var/mob/living/M = leaving
 	if(M.body_position == LYING_DOWN)
 		return
-	if(direction == REVERSE_DIR(dir))
+	if(direction == REVERSE_DIR(dir) && !(HAS_TRAIT(M, TRAIT_CAREFUL_CHAIRS)))
 		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null

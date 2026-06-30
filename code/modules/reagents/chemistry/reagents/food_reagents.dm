@@ -212,6 +212,11 @@
 	// no color (ie, black)
 	taste_description = "pepper"
 
+/datum/reagent/consumable/ollie_oil
+	name = "Ollie Oil"
+	description = "Vanderlin's preferred way to consume its ollies."
+	color = "#555f41"
+	taste_description = "peppery oil"
 
 /datum/reagent/drug/mushroomhallucinogen
 	name = "Mushroom Hallucinogen"
