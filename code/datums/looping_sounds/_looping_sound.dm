@@ -286,7 +286,7 @@ GLOBAL_LIST_EMPTY(created_sound_groups)
 	if(parent)
 		if(ismob(parent))
 			var/mob/mob_parent = parent
-			mob_parent?.client.played_loops -= src
+			mob_parent.client?.played_loops -= src
 		UnregisterSignal(parent, COMSIG_QDELETING)
 	parent = new_parent
 	if(parent)
