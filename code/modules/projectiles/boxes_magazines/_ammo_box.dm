@@ -135,8 +135,9 @@
 /obj/item/ammo_box/proc/can_load(mob/user)
 	return TRUE
 
-/obj/item/ammo_box/attackby(obj/item/A, mob/user, list/modifiers)
-	try_load(user, A)
+/obj/item/ammo_box/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	try_load(user, tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/ammo_box/proc/try_load(mob/living/user, obj/item/tool, silent = FALSE, replace_spent = FALSE)
 	var/num_loaded = 0

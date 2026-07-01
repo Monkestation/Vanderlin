@@ -1,0 +1,9 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - map: "Added a covered bridge/gatehouse to the Southern perimeter of the Gallowband camp, along with strategic palisades."
+  - map: "Added a travel point designed to directly reach the Bog Witch and the Gallowband, usable only by the Bog Witch and Gallowband, on both the Forest and Bog maps."
+  - map: "Hardened the northern walls of the Gallowband's camp."
+  - map: "Added a waterlock to the western coast of the Gallowband's camp to introduce difficulties for travel by water (sorry Tritons)."
+  - map: "Added a barracks for the lower-ranked Gallowband members east of the northern Gatehouse, on the small mountain present."
+  - map: "Fixed the eastern bridge leading to the outpost."

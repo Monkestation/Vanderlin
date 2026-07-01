@@ -17,19 +17,7 @@
   lmenvs:
   - bugfix: fixed a bug where praying swear words to Psydon caused divine punishment
   snowyseshi:
-  - rscadd: 'chain coif and language to dark itenerant knight.\n<!-- Both :cl:''s
-      are required for the changelog to work! You can put your name to the right of
-      the first :cl: if you want to overwrite your GitHub username as author ingame.
-      -->\n<!-- You can use multiple of the same prefix (they''re only used for the
-      icon ingame) and delete the unneeded ones. Despite some of the tags, changelogs
-      should generally represent how a player might be affected by the changes rather
-      than a summary of the PR''s contents. -->\n## Pre-Merge Checklist\n<!-- Don''t
-      bother filling these in while creating your Pull Request, just click the checkboxes
-      after the Pull Request is opened and you are redirected to the page. -->\n-
-      [ ] You tested this on a local server.\n- [ ] This code did not runtime during
-      testing.\n- [ ] You documented all of your changes.\n<!-- Neither the compiler
-      nor workflow checks are perfect at detecting runtimes and errors. It is important
-      to test your code/feature/fix locally. -->'
+  - rscadd: chain coif and language to dark itenerant knight.
   wgtjunior743:
   - rscdel: Void Corruption from the Red Dragon
 2025-09-02:
@@ -123,19 +111,7 @@
   snowyseshi:
   - rscadd: Vampire throne room with minor manor tweaks.
   - bugfix: Vampire manor doors not having keys assigned to them
-  - image: 'The Vampire Throne (vthrone.dmi)\n<!-- Both :cl:''s are required for the
-      changelog to work! You can put your name to the right of the first :cl: if you
-      want to overwrite your GitHub username as author ingame. -->\n<!-- You can use
-      multiple of the same prefix (they''re only used for the icon ingame) and delete
-      the unneeded ones. Despite some of the tags, changelogs should generally represent
-      how a player might be affected by the changes rather than a summary of the PR''s
-      contents. -->\n## Pre-Merge Checklist\n<!-- Don''t bother filling these in while
-      creating your Pull Request, just click the checkboxes after the Pull Request
-      is opened and you are redirected to the page. -->\n- [x] You tested this on
-      a local server.\n- [x] This code did not runtime during testing.\n- [x] You
-      documented all of your changes.\n<!-- Neither the compiler nor workflow checks
-      are perfect at detecting runtimes and errors. It is important to test your code/feature/fix
-      locally. -->'
+  - image: The Vampire Throne (vthrone.dmi)
 2025-09-10:
   Bloo4420:
   - rscadd: gave peddlers the ability say their currently stocked wares out loud
@@ -357,19 +333,7 @@
   - rscadd: Silver Amulet can also protect you from the WW infection
 2025-09-25:
   7erracotta:
-  - rscadd: 'fixed some item descriptions, added new lore to the lore primer,\n<!--
-      Both :cl:''s are required for the changelog to work! You can put your name to
-      the right of the first :cl: if you want to overwrite your GitHub username as
-      author ingame. -->\n<!-- You can use multiple of the same prefix (they''re only
-      used for the icon ingame) and delete the unneeded ones. Despite some of the
-      tags, changelogs should generally represent how a player might be affected by
-      the changes rather than a summary of the PR''s contents. -->\n## Pre-Merge Checklist\n<!--
-      Don''t bother filling these in while creating your Pull Request, just click
-      the checkboxes after the Pull Request is opened and you are redirected to the
-      page. -->\n- [x] You tested this on a local server.\n- [x] This code did not
-      runtime during testing.\n- [x] You documented all of your changes.\n<!-- Neither
-      the compiler nor workflow checks are perfect at detecting runtimes and errors.
-      It is important to test your code/feature/fix locally. -->'
+  - rscadd: fixed some item descriptions, added new lore to the lore primer
   CactusMouth:
   - map: Adds the Old Watchtower to the Forest.
   CheffieGithub:

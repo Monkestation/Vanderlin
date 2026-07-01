@@ -44,6 +44,7 @@
 		TRAIT_NOBLE_POWER,
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'

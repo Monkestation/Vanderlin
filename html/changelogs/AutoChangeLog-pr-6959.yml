@@ -1,0 +1,4 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - balance: "All classes that start with medium armour have medium training."

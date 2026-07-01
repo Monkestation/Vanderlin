@@ -107,20 +107,22 @@
 	else
 		..()
 
-/obj/item/fishingrod/attackby(obj/item/I, mob/user, list/modifiers)
+/obj/item/fishingrod/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(baited && reel && hook && line)
-		return ..()
+		return NONE
 
-	if(istype(I, /obj/item/fishing/lure) || istype(I, /obj/item/natural/worms) || istype(I, /obj/item/natural/bundle/worms) || istype(I, /obj/item/fishing/lure) || istype(I, /obj/item/reagent_containers/food/snacks))
-		if(istype(I, /obj/item/fishing/lure) || istype(I, /obj/item/natural/worms) || istype(I, /obj/item/fishing/lure))
+	// This is disgusting
+	if(istype(tool, /obj/item/fishing/lure) || istype(tool, /obj/item/natural/worms) || istype(tool, /obj/item/natural/bundle/worms) || istype(tool, /obj/item/fishing/lure) || istype(tool, /obj/item/reagent_containers/food/snacks))
+		if(istype(tool, /obj/item/fishing/lure) || istype(tool, /obj/item/natural/worms) || istype(tool, /obj/item/fishing/lure))
 			if(!baited)
-				I.forceMove(src)
-				baited = I
-				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [I] to [src].</span>")
+				tool.forceMove(src)
+				baited = tool
+				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [tool] to [src].</span>")
 				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
-		else if(istype(I, /obj/item/natural/bundle/worms))
+			return ITEM_INTERACT_SUCCESS
+		else if(istype(tool, /obj/item/natural/bundle/worms))
 			if(!baited)
-				var/obj/item/natural/bundle/worms/W = I
+				var/obj/item/natural/bundle/worms/W = tool
 				baited = new W.stacktype(src)
 				W.amount--
 				if(W.amount == 1)
@@ -128,31 +130,35 @@
 					qdel(W)
 				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [W.stacktype] to [src].</span>")
 				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
-		else
-			if(!baited)
-				I.forceMove(src)
-				baited = I
-				user.visible_message("<span class='notice'>[user] hooks something to the line.</span>", "<span class='notice'>I hook [I] to my line.</span>")
-				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
+			return ITEM_INTERACT_SUCCESS
+		else if(!baited)
+			tool.forceMove(src)
+			baited = tool
+			user.visible_message("<span class='notice'>[user] hooks something to the line.</span>", "<span class='notice'>I hook [tool] to my line.</span>")
+			playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
+			return ITEM_INTERACT_SUCCESS
 
-	else if(istype(I, /obj/item/fishing)) //bait has a null attachtype and is accounted for in the previous check so i don't have to worry about it
-		var/obj/item/fishing/T = I
+	else if(istype(tool, /obj/item/fishing)) //bait has a null attachtype and is accounted for in the previous check so i don't have to worry about it
+		var/obj/item/fishing/T = tool
 		switch(T.attachtype)
 			if("line")
 				if(!line)
-					I.forceMove(src)
-					line = I
-					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
+					tool.forceMove(src)
+					line = tool
+					to_chat(user, "<span class='notice'>I add [tool] to [src]...</span>")
 			if("hook")
 				if(!hook)
-					I.forceMove(src)
-					hook = I
-					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
+					tool.forceMove(src)
+					hook = tool
+					to_chat(user, "<span class='notice'>I add [tool] to [src]...</span>")
 			if("reel")
 				if(!reel)
-					I.forceMove(src)
-					reel = I
-					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
+					tool.forceMove(src)
+					reel = tool
+					to_chat(user, "<span class='notice'>I add [tool] to [src]...</span>")
+
+		return ITEM_INTERACT_SUCCESS
+
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/fishingrod/attack_hand_secondary(mob/user, list/modifiers)
