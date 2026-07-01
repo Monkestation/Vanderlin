@@ -40,6 +40,8 @@
 
 	/// Whether or not we can be surgically set
 	var/can_set = TRUE
+	/// If we have been set
+	var/bone_set = FALSE
 	/// Emote we use when applied
 	var/gain_emote = "paincrit"
 
@@ -84,13 +86,13 @@
 	shake_camera(affected, 2, 2)
 
 /datum/wound/fracture/proc/set_bone()
-	if(!can_set)
+	if(!can_set || bone_set)
 		return FALSE
+	bone_set = TRUE
 	bleed_rate = set_bleed_rate
 	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
 	heal_wound(initial(whp)/1.6) //heal a little more than of maximum fracture
-	can_set = FALSE
 	record_round_statistic(STATS_WOUNDS_FIXED)
 	return TRUE
 
@@ -113,6 +115,9 @@
 	/// Brain case fractures (Depressed Cranium, Temporal) cause paralysis
 	var/paralysis = FALSE
 	var/knockout = 15 SECONDS
+
+/datum/wound/fracture/head/surgical
+	knockout = 0
 
 /datum/wound/fracture/head/on_mob_gain(mob/living/affected)
 	. = ..()

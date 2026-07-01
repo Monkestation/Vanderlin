@@ -23,7 +23,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
-	var/obj/item/natural/clod/heldclod
+	var/obj/item/natural/clod/dirt/heldclod
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	associated_skill = /datum/attribute/skill/combat/polearms
@@ -31,32 +31,6 @@
 	grid_width = 32
 	grid_height = 96
 	item_weight = 1.54 KILOGRAMS
-
-/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
-	. = ..()
-	if(user.used_intent.type != /datum/intent/shovelscoop)
-		return
-	if(!istype(A, /obj/structure/snow))
-		var/obj/item/storage/sack/S = A
-		if(!istype(S))
-			return
-		if(!heldclod)
-			return
-		if(!SEND_SIGNAL(S, COMSIG_TRY_STORAGE_INSERT, src.heldclod, user, FALSE, FALSE))
-			return
-		heldclod = null
-		playsound(S,'sound/items/empty_shovel.ogg', 100, TRUE)
-		update_appearance(UPDATE_ICON_STATE)
-		return TRUE
-	var/turf/target_turf = get_turf(A)
-	playsound(A,'sound/items/dig_shovel.ogg', 100, TRUE)
-	qdel(A)
-	for(var/dir in GLOB.cardinals)
-		var/turf/card = get_step(target_turf, dir)
-		if(card.snow)
-			card.snow.update_corners()
-	user.changeNext_move(CLICK_CD_MELEE)
-	return TRUE
 
 /obj/item/weapon/shovel/Destroy()
 	if(heldclod)
@@ -97,82 +71,89 @@
 	item_damage_type = "blunt"
 
 
-/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user, list/modifiers)
-	. = ..()
-	if(. && heldclod && get_turf(M))
-		heldclod.forceMove(get_turf(M))
-		heldclod = null
-		update_appearance(UPDATE_ICON_STATE)
+/obj/item/weapon/shovel/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/weapon/shovel/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
-	var/turf/T = attacked_atom
-	user.changeNext_move(user.used_intent.clickcd)
-	if(user.used_intent.type == /datum/intent/irrigate)
-		. = TRUE
-		var/obj/structure/soil/located = locate(/obj/structure/soil) in T
-		if(located)
-			to_chat(user, span_notice("[located] is in the way!"))
-			return
-		if(istype(T, /turf/open/floor/dirt))
-			var/turf/open/floor/dirt/D = T
-			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
-			if(!do_after(user, 5 SECONDS * toolspeed, D))
-				return
-			new /obj/structure/irrigation_channel(D)
-			return TRUE
+	if(istype(interacting_with, /obj/structure/snow))
+		user.changeNext_move(CLICK_CD_MELEE)
 
-	else if(user.used_intent.type == /datum/intent/shovelscoop)
-		. = TRUE
-		if(istype(T, /turf/open/floor/dirt) || istype(T, /turf/open/floor/sand))
-			var/obj/structure/closet/dirthole/holie = locate() in T
-			if(heldclod && heldclod.clod_type == "dirt")
-				if(holie && holie.stage < 4)
-					holie.attackby(src, user)
+		playsound(interacting_with,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+		var/turf/target_turf = get_turf(interacting_with)
+		qdel(interacting_with)
+		target_turf.snow = null //ffs
+
+		for(var/turf/turf as anything in get_adjacent_open_turfs(interacting_with))
+			var/obj/structure/snow/snow = locate() in turf
+			snow?.update_corners()
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(!isturf(interacting_with))
+		return NONE
+
+	if(!isturf(user.loc))
+		return ITEM_INTERACT_ANY_BLOCKER
+
+	var/turf/turf = interacting_with
+
+	var/datum/intent/used_intent = user.used_intent
+
+	if(istype(used_intent, /datum/intent/shovelscoop))
+		var/obj/structure/closet/dirthole/holie = locate() in turf
+		if(!heldclod)
+			if(holie)
+				holie.item_interaction(user, src, modifiers)
+			else if(istype(turf, /turf/open/floor/sand))
+				new /obj/item/natural/clod/sand(src)
+				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
+				update_appearance(UPDATE_ICON_STATE)
+			else
+				if(istype(turf, /turf/open/floor/dirt/road))
+					new /obj/structure/closet/dirthole(turf)
 				else
-					if(istype(T, /turf/open/floor/dirt/road))
-						qdel(heldclod)
-						T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
-					else
-						heldclod.forceMove(T)
-					heldclod = null
-					playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
-					update_appearance(UPDATE_ICON_STATE)
-					return
-			else if(!heldclod)
-				if(istype(T, /turf/open/floor/dirt/road) || istype(T, /turf/open/floor/dirt))
-					if(holie)
-						holie.attackby(src, user)
-						return
-					else
-						if(istype(T, /turf/open/floor/dirt/road))
-							new /obj/structure/closet/dirthole(T)
-						else
-							T.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
-						heldclod = new /obj/item/natural/clod/dirt(src)
-						playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-						update_appearance(UPDATE_ICON_STATE)
-						return
-				else
-					heldclod = new /obj/item/natural/clod/sand(src)
-					playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-					update_appearance(UPDATE_ICON_STATE)
-					return
-		if(heldclod)
-			if(istype(T, /turf/open/water))
+					turf.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
+				heldclod = new(src)
+				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
+				update_appearance(UPDATE_ICON_STATE)
+			return ITEM_INTERACT_SUCCESS
+
+		if(!istype(turf, /turf/open/floor/dirt) && !istype(turf, /turf/open/floor/sand))
+			if(istype(turf, /turf/open/water))
 				qdel(heldclod)
 			else
-				heldclod.forceMove(T)
+				heldclod.forceMove(turf)
 			heldclod = null
-			playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
+			playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
 			update_appearance(UPDATE_ICON_STATE)
-			return
-		if(istype(T, /turf/open/floor/grass))
-			to_chat(user, "<span class='warning'>There is grass in the way.</span>")
-			return
-		return
-	return ..()
+			return ITEM_INTERACT_SUCCESS
+
+		if(holie && holie.stage < 4)
+			holie.item_interaction(user, src, modifiers)
+		else if(istype(turf, /turf/open/floor/dirt/road))
+			qdel(heldclod)
+			turf.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
+		else
+			heldclod.forceMove(turf)
+		heldclod = null
+		playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
+		update_appearance(UPDATE_ICON_STATE)
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(used_intent, /datum/intent/irrigate))
+		var/obj/structure/soil/located = locate(/obj/structure/soil) in turf
+		if(located)
+			to_chat(user, span_notice("[located] is in the way!"))
+			return ITEM_INTERACT_BLOCKING
+		if(istype(turf, /turf/open/floor/dirt))
+			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
+			if(!do_after(user, 5 SECONDS * toolspeed, turf))
+				return ITEM_INTERACT_BLOCKING
+
+			new /obj/structure/irrigation_channel(turf)
+
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/shovel/getonmobprop(tag)
 	. = ..()
@@ -317,20 +298,18 @@
 /obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(proximity)
-		if(isopenturf(target))
-			deploy_bodybag(user, target)
+/obj/item/burial_shroud/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isopenturf(interacting_with))
+		deploy_bodybag(user, interacting_with)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/burial_shroud/proc/deploy_bodybag(mob/user, atom/location)
-	var/obj/structure/closet/body_bag/R = new unfoldedbag_path(location)
+	var/obj/structure/closet/burial_shroud/R = new unfoldedbag_path(location)
 	R.open(user)
 	R.add_fingerprint(user)
 	R.foldedbag_instance = src
 	moveToNullspace()
 	user.update_a_intents()
-
 
 /obj/structure/closet/burial_shroud
 	name = "winding sheet"
@@ -350,9 +329,7 @@
 	drag_slowdown = 0
 	horizontal = TRUE
 	var/foldedbag_path = /obj/item/burial_shroud
-	var/obj/item/bodybag/foldedbag_instance = null
-
-
+	var/obj/item/burial_shroud/foldedbag_instance = null
 
 /obj/structure/closet/burial_shroud/Destroy()
 	// If we have a stored bag, and it's in nullspace (not in someone's hand), delete it.
@@ -380,94 +357,6 @@
 			to_chat(usr, "<span class='warning'>There are too many things inside of [src] to fold it up!</span>")
 			return
 		visible_message("<span class='notice'>[usr] folds up [src].</span>")
-		var/obj/item/bodybag/B = foldedbag_instance || new foldedbag_path
-		usr.put_in_hands(B)
-		qdel(src)
-
-/obj/item/bodybag
-	name = "body bag"
-	desc = ""
-	icon = 'icons/obj/bodybag.dmi'
-	icon_state = "bodybag_folded"
-	w_class = WEIGHT_CLASS_SMALL
-	item_weight = 184 GRAMS
-	var/unfoldedbag_path = /obj/structure/closet/body_bag
-
-/obj/item/bodybag/attack_self(mob/user, list/modifiers)
-	deploy_bodybag(user, user.loc)
-
-/obj/item/bodybag/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(proximity)
-		if(isopenturf(target))
-			deploy_bodybag(user, target)
-
-/obj/item/bodybag/proc/deploy_bodybag(mob/user, atom/location)
-	var/obj/structure/closet/body_bag/R = new unfoldedbag_path(location)
-	R.open(user)
-	R.add_fingerprint(user)
-	R.foldedbag_instance = src
-	moveToNullspace()
-
-/obj/item/bodybag/suicide_act(mob/user)
-	if(isopenturf(user.loc))
-		user.visible_message("<span class='suicide'>[user] is crawling into [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-		var/obj/structure/closet/body_bag/R = new unfoldedbag_path(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
-		user.forceMove(R)
-		playsound(src, 'sound/blank.ogg', 15, TRUE, -3)
-		return (OXYLOSS)
-	..()
-
-
-/obj/structure/closet/body_bag
-	name = "body bag"
-	desc = ""
-	icon = 'icons/obj/bodybag.dmi'
-	icon_state = "bodybag"
-	density = FALSE
-	mob_storage_capacity = 2
-	open_sound = 'sound/blank.ogg'
-	close_sound = 'sound/blank.ogg'
-	open_sound_volume = 15
-	close_sound_volume = 15
-	integrity_failure = 0
-	anchorable = FALSE
-	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
-	drag_slowdown = 0
-	var/foldedbag_path = /obj/item/bodybag
-	var/obj/item/bodybag/foldedbag_instance = null
-
-/obj/structure/closet/body_bag/Destroy()
-	// If we have a stored bag, and it's in nullspace (not in someone's hand), delete it.
-	if (foldedbag_instance && !foldedbag_instance.loc)
-		QDEL_NULL(foldedbag_instance)
-	return ..()
-
-/obj/structure/closet/body_bag/open(mob/living/user)
-	. = ..()
-	if(.)
-		mouse_drag_pointer = MOUSE_INACTIVE_POINTER
-
-/obj/structure/closet/body_bag/close()
-	. = ..()
-	if(.)
-		density = FALSE
-		mouse_drag_pointer = MOUSE_ACTIVE_POINTER
-
-/obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
-	. = ..()
-	if(over_object == usr && Adjacent(usr) && (in_range(src, usr) || usr.contents.Find(src)))
-		if(!ishuman(usr))
-			return
-		if(opened)
-			to_chat(usr, "<span class='warning'>I wrestle with [src], but it won't fold while unzipped.</span>")
-			return
-		if(contents.len)
-			to_chat(usr, "<span class='warning'>There are too many things inside of [src] to fold it up!</span>")
-			return
-		visible_message("<span class='notice'>[usr] folds up [src].</span>")
-		var/obj/item/bodybag/B = foldedbag_instance || new foldedbag_path
+		var/obj/item/burial_shroud/B = foldedbag_instance || new foldedbag_path
 		usr.put_in_hands(B)
 		qdel(src)

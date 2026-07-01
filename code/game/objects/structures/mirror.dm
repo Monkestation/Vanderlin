@@ -152,7 +152,7 @@
 		if("eye color")
 			var/list/eye_list = H.getorganslotlist(ORGAN_SLOT_EYES)
 			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
+				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference", eyes.eye_color) as color|null
 				if(new_eyes)
 					eyes.eye_color = sanitize_hexcolor(new_eyes, default = "#1753a8")
 					should_update = TRUE
@@ -176,23 +176,3 @@
 /obj/structure/mirror/atom_fix()
 	. = ..()
 	icon_state = initial(icon_state)
-
-/obj/structure/mirror/welder_act(mob/living/user, obj/item/I)
-	..()
-	if(user.used_intent.type == INTENT_HARM)
-		return FALSE
-
-	if(!obj_broken)
-		return TRUE
-
-	if(!I.tool_start_check(user, amount=0))
-		return TRUE
-
-	to_chat(user, "<span class='notice'>I begin repairing [src]...</span>")
-	if(I.use_tool(src, user, 10, volume=50))
-		to_chat(user, "<span class='notice'>I repair [src].</span>")
-		atom_fix()
-		icon_state = initial(icon_state)
-		desc = initial(desc)
-
-	return TRUE
