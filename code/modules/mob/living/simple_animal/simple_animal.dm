@@ -288,28 +288,28 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		. += barding_base_overlay
 		. += barding_above_overlay
 
-/mob/living/simple_animal/attackby(obj/item/O, mob/user, list/modifiers)
-	if(!is_type_in_typecache(O, food_type))
-		return ..()
-	else
-		if(attempt_feed(O, user))
-			SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY, O, user, modifiers) // for udder functionality
-			return TRUE
-	. = ..()
+/mob/living/simple_animal/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!is_type_in_typecache(tool, food_type))
+		return NONE
 
-/mob/living/simple_animal/proc/attempt_feed(obj/item/O, mob/living/carbon/human/user)
+	if(!attempt_feed(user, tool))
+		return ITEM_INTERACT_BLOCKING
+
+	return ITEM_INTERACT_SUCCESS
+
+/mob/living/simple_animal/proc/attempt_feed(mob/living/user, obj/item/feed)
 	if(stat >= UNCONSCIOUS)
 		return FALSE
 
-	. = TRUE
-	qdel(O)
-	user.visible_message(span_info("[user] hand-feeds [O] to [src]."), span_notice("I hand-feed [O] to [src]."))
+	user.visible_message(span_info("[user] hand-feeds [feed] to [src]."), span_notice("I hand-feed [feed] to [src]."))
 	playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 
-	SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
+	SEND_SIGNAL(src, COMSIG_MOB_FEED, feed, 30, user)
 	SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
 
+	qdel(feed)
 	try_tame(user)
+	return TRUE
 
 /mob/living/simple_animal/proc/try_tame(mob/user, additional_tame_chance)
 	if(has_ally(user))
@@ -922,7 +922,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/hostile
 	var/do_footstep = FALSE
 
-/mob/living/simple_animal/hostile/RangedAttack(atom/A, list/modifiers) //Player firing
+/mob/living/simple_animal/hostile/ranged_attack(atom/A, list/modifiers) //Player firing
 	if(!ai_controller && ranged && ranged_cooldown <= world.time)
 		target = A
 		OpenFire(A)

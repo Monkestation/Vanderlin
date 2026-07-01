@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/list/areas_entered = list()
 
-	var/list/known_people = list() //contains person, their job, and their voice color
+	var/list/relations = list()
 
 	var/list/notes = list() //RTD add notes button
 
@@ -161,115 +161,220 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		if(is_role)
 			. += M
 
-/// Gives our identity to a target mind, and gives theirs to us.
+/// Returns the relation datum of a given type this mind has toward target,
+/// or null if none exists.
+/datum/mind/proc/get_relation(datum/mind/target, relation_type)
+	for(var/datum/relation/R in relations)
+		if(R.other == target && istype(R, relation_type))
+			return R
+	return null
+
+/// Returns TRUE if this mind has any relation toward target.
+/datum/mind/proc/knows(datum/mind/target)
+	for(var/datum/relation/R in relations)
+		if(R.other == target)
+			return TRUE
+	return FALSE
+
+/// Returns TRUE if this mind has the named relation toward target.
+/datum/mind/proc/knows_as(datum/mind/target, relation_type)
+	return !isnull(get_relation(target, relation_type))
+
+/// Add a symmetric relation between src and target.
+/// Creates mirror datums on both minds. Skips if incompatible relation exists.
+/// Returns the created datum or null on failure.
+/datum/mind/proc/add_relation(datum/mind/target, relation_type)
+	if(!target || target == src)
+		return null
+
+	var/datum/relation/template = new relation_type()
+
+	var/list/to_dissolve = list()
+	var/list/inherited_history = null
+	var/list/old_snapshot = null
+	for(var/datum/relation/R in relations)
+		if(R.other == target && template.upgrades_relation(R))
+			if(R.relation_history)
+				if(!inherited_history)
+					inherited_history = list()
+				inherited_history += R.relation_history
+			if(R.snapshot && !old_snapshot)
+				old_snapshot = R.snapshot
+			to_dissolve += R
+	for(var/datum/relation/R in to_dissolve)
+		R.dissolve()
+
+	// Incompatibility check on both sides.
+	for(var/datum/relation/R in relations)
+		if(R.other == target && template.conflicts_with(R))
+			qdel(template)
+			return null
+	for(var/datum/relation/R in target.relations)
+		if(R.other == src && template.conflicts_with(R))
+			qdel(template)
+			return null
+
+	// Build our side.
+	template.holder = src
+	template.other = target
+	if(old_snapshot)
+		template.snapshot = old_snapshot.Copy()
+	if(inherited_history)
+		template.relation_history = inherited_history.Copy()
+	template.refresh_snapshot()
+	LAZYADD(relations, template)
+
+	if(template.symmetric)
+		// Check for inherited history/snapshot on target's side too,
+		// in case their copy of the old relation had its own data.
+		var/list/mirror_inherited_history = null
+		var/list/mirror_old_snapshot = null
+		var/list/mirror_to_dissolve = list()
+		for(var/datum/relation/R in target.relations)
+			if(R.other == src && template.upgrades_relation(R))
+				if(R.relation_history)
+					if(!mirror_inherited_history)
+						mirror_inherited_history = list()
+					mirror_inherited_history += R.relation_history
+				if(R.snapshot && !mirror_old_snapshot)
+					mirror_old_snapshot = R.snapshot
+				mirror_to_dissolve += R
+		for(var/datum/relation/R in mirror_to_dissolve)
+			R.dissolve()
+
+		var/datum/relation/mirror = new relation_type()
+		mirror.holder = target
+		mirror.other = src
+		if(mirror_old_snapshot)
+			mirror.snapshot = mirror_old_snapshot.Copy()
+		else if(old_snapshot)
+			mirror.snapshot = old_snapshot.Copy()
+		if(mirror_inherited_history)
+			mirror.relation_history = mirror_inherited_history.Copy()
+		mirror.refresh_snapshot()
+		LAZYADD(target.relations, mirror)
+		template.on_created()
+		mirror.on_created()
+	else
+		template.on_created()
+
+	return template
+
+/// Remove all relations this mind has toward target,
+/// and remove the mirror entries from target.
+/datum/mind/proc/remove_relations_with(datum/mind/target)
+	for(var/datum/relation/R in relations)
+		if(R.other == target)
+			R.dissolve()
+
+/// Clear all relations entirely (both directions).
+/datum/mind/proc/clear_all_relations()
+	for(var/datum/mind/M in SSrelations.all_minds())
+		remove_relations_with(M)
+	relations = list()
+
+/// Refresh identity snapshots on all relations pointing at this mind.
+/// Call this when a mob's name/job/appearance changes.
+/datum/mind/proc/broadcast_identity_update()
+	for(var/datum/mind/M in SSrelations.all_minds())
+		for(var/datum/relation/R in M.relations)
+			if(R.other == src)
+				R.refresh_snapshot()
+
+/// Display the relation list to user. Replaces display_known_people().
+/datum/mind/proc/display_relations(mob/user)
+	if(!user)
+		return
+	if(!length(relations))
+		to_chat(user, span_notice("[name] doesn't know anyone yet."))
+		return
+
+	var/datum/tgui_relations/menu = new(src)
+	menu.ui_interact(user)
+
 /datum/mind/proc/share_identities(datum/mind/target_mind)
 	if(!target_mind || !ismind(target_mind))
 		return
 	if(target_mind == src)
 		return
-
 	learn_target_identity(target_mind)
 	give_source_identity(target_mind)
 
-/// Learn the identity of a target mind (and their mob).
+/// Refresh or create our snapshot of target. Replaces learn_target_identity().
 /datum/mind/proc/learn_target_identity(datum/mind/target_mind)
 	if(!target_mind || !ismind(target_mind))
 		return
 	if(target_mind == src)
 		return
-	if(ishuman(target_mind.current))
-		var/mob/living/carbon/human/target_mob = target_mind.current
-		if(!known_people[target_mob.real_name])
-			known_people[target_mob.real_name] = list()
-		known_people[target_mob.real_name]["VCOLOR"] = target_mob.voice_color
-		var/used_title = target_mob.get_role_title()
-		if(!used_title)
-			used_title = "Unknown"
-		known_people[target_mob.real_name]["FJOB"] = used_title
-		known_people[target_mob.real_name]["FGENDER"] = target_mob.gender
-		known_people[target_mob.real_name]["FAGE"] = target_mob.age
+	// Refresh snapshot on any existing relation we have toward them.
+	var/found = FALSE
+	for(var/datum/relation/R in relations)
+		if(R.other == target_mind)
+			R.refresh_snapshot()
+			found = TRUE
+	// If we have no relation at all, create a minimal "acquaintance" record
+	// so identity data has somewhere to live.
+	if(!found)
+		_ensure_acquaintance(target_mind)
 
-/// Give the identity of source mind (and mob) to target mind.
+/// Give our identity to target's relation entries pointing at us.
+/// Replaces give_source_identity().
 /datum/mind/proc/give_source_identity(datum/mind/target_mind)
 	if(!target_mind || !ismind(target_mind))
 		return
 	if(target_mind == src)
 		return
-	if(target_mind.known_people)
-		if(ishuman(current))
-			var/mob/living/carbon/human/source_mob = current
-			if(!target_mind.known_people[source_mob.real_name])
-				target_mind.known_people[source_mob.real_name] = list()
-			target_mind.known_people[source_mob.real_name]["VCOLOR"] = source_mob.voice_color
-			var/used_title
-			if(source_mob.job)
-				var/datum/job/job = SSjob.GetJob(source_mob.job)
-				used_title = job.get_informed_title(source_mob)
-			if(!used_title)
-				used_title = "Unknown"
-			target_mind.known_people[source_mob.real_name]["FJOB"] = used_title
-			target_mind.known_people[source_mob.real_name]["FGENDER"] = source_mob.gender
-			target_mind.known_people[source_mob.real_name]["FAGE"] = source_mob.age
+	var/found = FALSE
+	for(var/datum/relation/R in target_mind.relations)
+		if(R.other == src)
+			R.refresh_snapshot()
+			found = TRUE
+	if(!found)
+		target_mind._ensure_acquaintance(src)
+
+/// Creates a minimal acquaintance relation so identity can be stored
+/// without implying friendship/rivalry/etc.
+/// Does nothing if any relation already exists toward target.
+/datum/mind/proc/_ensure_acquaintance(datum/mind/target_mind)
+	if(knows(target_mind))
+		return
+	var/datum/relation/acquaintance/A = new()
+	A.holder = src
+	A.other = target_mind
+	A.refresh_snapshot()
+	LAZYADD(relations, A)
 
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
 	if(!person && !name)
 		return FALSE
 	if(person)
-		var/mob/living/carbon/human/H = person.current
-		if(!istype(H))
-			return
-		for(var/P in known_people)
-			if(lowertext(H.real_name) == lowertext(P))
-				return TRUE
-	else if(name)
-		for(var/P in known_people)
-			if(lowertext(name) == lowertext(P))
+		return knows(person)
+	// Name-only fallback: scan snapshots.
+	if(name)
+		for(var/datum/relation/R in relations)
+			if(R.snapshot && lowertext(R.snapshot["name"]) == lowertext(name))
 				return TRUE
 	return FALSE
 
 /// we are removed from X's known people
-/datum/mind/proc/forget_source_identity(person)
-	if(!person)
+/datum/mind/proc/forget_source_identity(datum/mind/person)
+	if(!person || person == src)
 		return
-	if(person == src)
-		return
-	var/datum/mind/M = person
-	var/mob/living/carbon/human/H = current
-	if(M.known_people && istype(H))
-		if(M.known_people[H.real_name])
-			M.known_people[H.real_name] = null
+	for(var/datum/relation/R in person.relations)
+		if(R.other == src)
+			person.relations -= R
+			// Clean up counterpart link if asymmetric.
+			if(R.counterpart)
+				R.counterpart.counterpart = null
 
 /// Removes everyone from known list, and clears you from theirs.
 /datum/mind/proc/forget_and_be_forgotten()
-	for(var/datum/mind/found_mind in get_minds())
-		forget_source_identity(found_mind)
-	known_people = list()
+	clear_all_relations()
 
 /// show known people to the player
 /datum/mind/proc/display_known_people(mob/user)
-	if(!user)
-		return
-	if(!known_people.len)
-		return
-	var/contents = "<center>People that [name] knows:</center><BR>"
-	for(var/P in known_people)
-		if(!length(known_people[P]))
-			known_people -= P
-			continue
-		var/fcolor = known_people[P]["VCOLOR"]
-		if(!fcolor)
-			continue
-		var/fjob = known_people[P]["FJOB"]
-		var/fgender = known_people[P]["FGENDER"]
-		var/fage = known_people[P]["FAGE"]
-		if(fcolor && fjob)
-			contents += "<B><font color=#[fcolor];text-shadow:0 0 10px #8d5958, 0 0 20px #8d5958, 0 0 30px #8d5958, 0 0 40px #8d5958, 0 0 50px #e60073, 0 0 60px #8d5958, 0 0 70px #8d5958;>[P]</font></B><BR>[fjob], [capitalize(fgender)], [fage]"
-			contents += "<BR>"
-
-	var/datum/browser/popup = new(user, "PEOPLEIKNOW", "", 260, 400)
-	popup.set_content(contents)
-	popup.open()
+	display_relations(user)
 
 /// returns the language holder of this mind
 /datum/mind/proc/get_language_holder()

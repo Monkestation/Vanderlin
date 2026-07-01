@@ -80,8 +80,8 @@
 
 	/// Screen shake when the weapon is fired
 	var/recoil = 0
-	/// A multiplier of the duration the recoil takes to go back to normal view, this is (recoil*recoil_backtime_multiplier)+1
-	var/recoil_backtime_multiplier = 1.5
+	/// A multiplier of the duration the recoil takes to go back to normal view, this is (recoil*recoil_backtoolspeed)+1
+	var/recoil_backtoolspeed = 1.5
 	/// This is how much deviation the gun recoil can have, recoil pushes the screen towards the reverse angle you shot + some deviation which this is the max.
 	var/recoil_deviation = 20
 	/// Used as the min value when calculating recoil
@@ -237,7 +237,7 @@
 		actual_angle -= 360
 
 	if(total_recoil > 0)
-		user.recoil_camera(total_recoil + 1, (total_recoil * recoil_backtime_multiplier) + 1, total_recoil, actual_angle)
+		user.recoil_camera(total_recoil + 1, (total_recoil * recoil_backtoolspeed) + 1, total_recoil, actual_angle)
 
 /// Get the base spread, probably based off the user's skills
 /obj/item/gun/proc/get_spread(mob/living/user)

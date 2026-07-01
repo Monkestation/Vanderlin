@@ -235,4 +235,4 @@
 		. += span_green("You know the words to open this box: \"[linked_quirk.passcode]\"")
 	else
 		. += span_notice("It seems to respond to spoken words. Perhaps [linked_quirk?.keeper ? linked_quirk.keeper.real_name : "someone"] knows how to open it.")
-	. += span_notice("Right-click to get a hint about who might know the passcode.")
+	. += span_notice("Click in-hand to get a hint about who might know the passcode.")

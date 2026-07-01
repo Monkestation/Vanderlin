@@ -1,4 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/stairs,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "ab" = (
 /obj/item/natural/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -18,6 +22,10 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/marsh,
 /area/under/cave)
+"ah" = (
+/obj/structure/rack,
+/turf/open/floor/twig,
+/area/indoors/wilderness/gallowband)
 "ai" = (
 /obj/structure/flora/grass/bush_meagre/yellow,
 /obj/structure/flora/grass,
@@ -123,6 +131,12 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"aN" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe)
 "aO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -199,6 +213,13 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/sand,
 /area/outdoors/wilderness)
+"bs" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/water/marsh,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "bt" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass,
@@ -264,6 +285,25 @@
 /mob/living/simple_animal/hostile/retaliate/infernal/imp,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"bP" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness/safe)
+"bQ" = (
+/obj/structure/gate/bars{
+	redstone_id = "fgwaterlocksouth"
+	},
+/turf/open/water/sewer,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"bT" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/obj/machinery/light/fueled/lanternpost/fixed,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "bU" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -297,17 +337,8 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
-"ce" = (
-/turf/closed/wall/mineral/wooddark/end,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "cf" = (
 /turf/open/water/river,
-/area/outdoors/wilderness/safe/gallowband_fort)
-"cg" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/turf/open/floor/sand,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "ch" = (
 /turf/open/floor/ruinedwood/alt,
@@ -336,6 +367,19 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/wood,
 /area/indoors/wilderness/gallowband/ship)
+"cr" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5;
+	pixel_y = -5
+	},
+/obj/effect/decal/cobbleedge{
+	dir = 10;
+	icon_state = "cobbleedge-w";
+	pixel_y = 8
+	},
+/obj/structure/rack,
+/turf/open/floor/dirt/road,
+/area/indoors/wilderness/gallowband)
 "cs" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -346,12 +390,6 @@
 /obj/structure/flora/tree/evil,
 /turf/open/water/swamp,
 /area/outdoors/wilderness)
-"cu" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 4
-	},
-/turf/open/water/clean/dirt,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "cw" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/ruinedwood/darker,
@@ -369,6 +407,12 @@
 "cA" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"cB" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "cC" = (
 /mob/living/simple_animal/hostile/retaliate/fox,
 /obj/effect/decal/cleanable/debris/stone,
@@ -446,6 +490,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"cT" = (
+/obj/structure/fluff/traveltile/gallowband_bog,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "cU" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -484,6 +532,9 @@
 /obj/structure/stone_tile/center/cracked,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"dg" = (
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "dh" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
@@ -508,11 +559,22 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"dm" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/flora/newtree,
+/turf/open/floor/grass,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "do" = (
 /obj/structure/table/wood/bar,
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"dp" = (
+/obj/structure/rack,
+/turf/open/floor/cobble,
+/area/indoors/wilderness/gallowband)
 "dr" = (
 /obj/structure/door/stone,
 /obj/structure/trap/shock,
@@ -573,14 +635,16 @@
 /obj/structure/pillory/reinforced,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"dC" = (
-/obj/structure/flora/grass/maneater/real,
-/turf/open/floor/sand,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "dE" = (
 /obj/structure/flora/grass/water,
 /turf/closed/mineral/bedrock,
 /area/outdoors/wilderness)
+"dF" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/water/clean/dirt,
+/area/outdoors/wilderness/safe)
 "dH" = (
 /obj/item/natural/rock/random_ore,
 /obj/effect/decal/cleanable/debris/stone,
@@ -784,12 +848,6 @@
 /obj/item/ammo_holder/quiver/arrows,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/watchtower)
-"eX" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/turned,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "eZ" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/ruinedwood/alt,
@@ -797,6 +855,23 @@
 "fd" = (
 /obj/structure/flora/grass/maneater/real,
 /turf/open/floor/grass,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"fe" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/machinery/light/fueled/firebowl/stumpb{
+	pixel_y = 10
+	},
+/turf/open/floor/wood,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "ff" = (
 /obj/effect/decal/cleanable/debris/wood,
@@ -812,6 +887,9 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"fk" = (
+/turf/closed/wall/mineral/stone/window/moss,
+/area/indoors/wilderness/gallowband/garrison)
 "fm" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -858,6 +936,16 @@
 /mob/living/simple_animal/hostile/retaliate/infernal/imp,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"fx" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "fy" = (
 /turf/closed/wall/window/stained,
 /area/indoors/dungeon)
@@ -1200,6 +1288,12 @@
 "hm" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/wilderness)
+"ho" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "hp" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/cobble,
@@ -1218,12 +1312,6 @@
 "hv" = (
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
-"hx" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 4
-	},
-/turf/open/floor/sand,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "hy" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/ruinedwood/alt,
@@ -1367,6 +1455,16 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"il" = (
+/turf/open/floor/carpet/green,
+/area/indoors/wilderness/gallowband/garrison)
+"im" = (
+/obj/structure/lever/wall{
+	dir = 4;
+	redstone_id = "gallowbridge"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "io" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/fishingrod,
@@ -1482,6 +1580,12 @@
 "iV" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/wilderness/gallowband/garrison/watchtower)
+"iW" = (
+/obj/structure/gate/bars{
+	redstone_id = "fgwaterlocknorth"
+	},
+/turf/open/water/sewer,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "iX" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -1499,6 +1603,26 @@
 /obj/item/candle/yellow/lit/infinite,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"ja" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/east,
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
+"jb" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"jd" = (
+/obj/structure/stairs/stone,
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "je" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/marsh/deep,
@@ -1540,6 +1664,13 @@
 	dir = 1
 	},
 /area/outdoors/wilderness)
+"jw" = (
+/obj/structure/winch{
+	name = "North Waterlock";
+	redstone_id = "fgwaterlocknorth"
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "jx" = (
 /obj/item/natural/stone,
 /turf/open/floor/naturalstone,
@@ -1549,13 +1680,6 @@
 /obj/structure/fluff/walldeco/bath/wallrope,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/dungeon)
-"jA" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/cobble,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "jD" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/reagent_containers/glass/cup/teacup/fancy,
@@ -1659,6 +1783,11 @@
 /obj/structure/trap/spike,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"kh" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/pelt,
+/turf/open/floor/carpet/green,
+/area/indoors/wilderness/gallowband/garrison)
 "ki" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /mob/living/simple_animal/hostile/retaliate/fae/sprite,
@@ -1690,6 +1819,10 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/wilderness)
+"ko" = (
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband)
 "kq" = (
 /obj/structure/door/green,
 /turf/open/floor/tile/kitchen,
@@ -1794,6 +1927,12 @@
 "kY" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/wilderness)
+"kZ" = (
+/obj/structure/chair/wood/alt/uncomfortable{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "la" = (
 /obj/structure/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
@@ -1856,6 +1995,12 @@
 "lC" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
+"lI" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/twig{
+	dir = 8
+	},
+/area/indoors/wilderness/gallowband)
 "lJ" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/grass,
@@ -1869,6 +2014,10 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/wilderness/tavern)
+"lN" = (
+/obj/structure/table/map/vanderlin,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "lP" = (
 /obj/item/ore/iron,
 /obj/item/ore/iron,
@@ -2038,23 +2187,6 @@
 	dir = 8
 	},
 /area/indoors/wilderness/gallowband/ship)
-"mO" = (
-/obj/effect/decal/cobbleedge{
-	dir = 5;
-	pixel_y = -5
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 10;
-	icon_state = "cobbleedge-w";
-	pixel_y = 8
-	},
-/obj/structure/rack,
-/obj/item/mould/ingot,
-/obj/item/mould/ingot{
-	pixel_y = -9
-	},
-/turf/open/floor/dirt/road,
-/area/indoors/wilderness/gallowband)
 "mR" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/clean/dirt,
@@ -2121,17 +2253,15 @@
 /obj/structure/carpet/red,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/wilderness/gallowband)
-"np" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "nt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"nu" = (
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "nv" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
@@ -2176,6 +2306,19 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/dungeon)
+"nJ" = (
+/obj/structure/table/map/vanderlin{
+	dir = 5
+	},
+/obj/item/plate/clay,
+/obj/item/kitchen/fork{
+	pixel_x = 7
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = -7
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "nO" = (
 /obj/structure/table/wood/crafted,
 /obj/item/alch/transisdust,
@@ -2286,6 +2429,12 @@
 "oF" = (
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/tavern)
+"oH" = (
+/obj/structure/chair/wood/alt/uncomfortable{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "oL" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 13;
@@ -2326,12 +2475,6 @@
 /obj/structure/spider/stickyweb/mirespider,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"oV" = (
-/obj/structure/rack,
-/obj/item/weapon/shovel,
-/obj/item/weapon/thresher,
-/turf/open/floor/twig,
-/area/indoors/wilderness/gallowband)
 "oW" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -2364,6 +2507,10 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"pc" = (
+/obj/effect/decal/woodpath,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "pe" = (
 /obj/item/reagent_containers/glass/bucket/wooden{
 	name = "Poo bucket"
@@ -2377,10 +2524,18 @@
 "pg" = (
 /turf/closed/wall/mineral/stone,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"pi" = (
+/obj/structure/bars,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "pk" = (
 /obj/machinery/light/fueled/oven/west,
 /turf/open/floor/twig,
 /area/indoors/wilderness)
+"pl" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/water/marsh/deep,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "pn" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -2397,6 +2552,10 @@
 "pq" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/wilderness/gallowband)
+"pr" = (
+/obj/structure/stairs,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "pt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2477,6 +2636,12 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"pR" = (
+/obj/structure/table/map/vanderlin{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "pS" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -2533,20 +2698,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"qh" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/turned,
-/area/outdoors/wilderness/safe/gallowband_fort)
-"qj" = (
-/obj/structure/flora/grass/water,
-/obj/structure/kneestingers,
-/turf/open/water/marsh,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "qk" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river/dirt{
@@ -2561,6 +2712,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"qp" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "qs" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -2780,6 +2938,10 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"rv" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "rw" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/grass,
@@ -2890,14 +3052,15 @@
 /obj/structure/trap/wall_projectile,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/dungeon)
+"rY" = (
+/obj/structure/closet/crate/chest/wicker,
+/turf/open/floor/twig,
+/area/indoors/wilderness/gallowband)
 "rZ" = (
 /obj/structure/closet/crate/coffin,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
-"sd" = (
-/turf/closed/wall/mineral/wooddark,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "sg" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -2968,6 +3131,12 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"sy" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "sz" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/dirt,
@@ -3024,6 +3193,9 @@
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"sP" = (
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "sQ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -3062,6 +3234,12 @@
 	},
 /turf/open/floor/sandstone_tile,
 /area/indoors/dungeon)
+"sW" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/water/river,
+/area/outdoors/wilderness/safe)
 "sY" = (
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -3125,6 +3303,10 @@
 /obj/item/clothing/cloak/templar/astratan,
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
+"tt" = (
+/obj/structure/pillory/reinforced,
+/turf/open/floor/grass,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "tu" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/wilderness/gallowband)
@@ -3160,6 +3342,40 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/wilderness/safe)
+"tA" = (
+/obj/structure/rack,
+/obj/item/rope,
+/obj/item/rope{
+	pixel_x = 4;
+	pixel_y = -3
+	},
+/obj/item/rope{
+	pixel_x = -1;
+	pixel_y = 2
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain{
+	pixel_x = 2;
+	pixel_y = -5
+	},
+/obj/item/rope/chain{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
+"tC" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve,
+/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve,
+/obj/item/reagent_containers/glass/bottle/beer/butterhairs,
+/obj/item/reagent_containers/glass/bottle/beer/butterhairs,
+/obj/item/reagent_containers/glass/bottle/beer/ratkept,
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "tD" = (
 /obj/structure/kneestingers,
 /turf/open/water/clean/dirt,
@@ -3168,12 +3384,6 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
-"tH" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 8
-	},
-/turf/open/water/marsh,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "tI" = (
 /turf/open/water/marsh,
 /area/under/cave)
@@ -3183,6 +3393,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"tK" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "tL" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/volcanic,
@@ -3231,6 +3445,22 @@
 /obj/item/weapon/sickle,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/shop)
+"tZ" = (
+/obj/structure/closet/crate/chest/wicker{
+	name = "Farm Seeds"
+	},
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "ua" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
@@ -3357,6 +3587,19 @@
 "uJ" = (
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband)
+"uK" = (
+/obj/structure/table/map/vanderlin{
+	dir = 6
+	},
+/obj/item/plate/clay,
+/obj/item/kitchen/fork{
+	pixel_x = 7
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = -7
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "uL" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -3420,11 +3663,6 @@
 /obj/item/clothing/head/fisherhat,
 /turf/open/floor/sand,
 /area/outdoors/wilderness/beside_thatchwood)
-"ve" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 4
-	},
-/area/outdoors/wilderness/safe/gallowband_fort)
 "vf" = (
 /obj/structure/door/viewport{
 	dir = 1
@@ -3463,10 +3701,6 @@
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
-"vn" = (
-/obj/structure/flora/grass/thorn_bush,
-/turf/open/floor/grass,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "vo" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -3495,6 +3729,9 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
+"vw" = (
+/turf/closed/wall/mineral/craftstone,
+/area/outdoors/wilderness/safe)
 "vx" = (
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/safe)
@@ -3576,6 +3813,19 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"vU" = (
+/obj/structure/table/map/vanderlin{
+	dir = 10
+	},
+/obj/item/plate/clay,
+/obj/item/kitchen/fork{
+	pixel_x = 7
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = -7
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "vW" = (
 /turf/closed/basic,
 /area/outdoors/wilderness)
@@ -3697,6 +3947,14 @@
 	dir = 8
 	},
 /area/under/cave)
+"wz" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/river{
+	dir = 8
+	},
+/area/outdoors/wilderness)
 "wB" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/grass,
@@ -3757,10 +4015,26 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"wT" = (
+/turf/closed/mineral/bedrock,
+/area/indoors/wilderness/gallowband/garrison)
 "wU" = (
 /obj/structure/closet/crate/chest/wicker/random_soilson,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/outpost/vanderlin)
+"wW" = (
+/obj/structure/table/map/vanderlin{
+	dir = 9
+	},
+/obj/item/plate/clay,
+/obj/item/kitchen/fork{
+	pixel_x = 7
+	},
+/obj/item/kitchen/spoon{
+	pixel_x = -7
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "xa" = (
 /obj/structure/roguerock{
 	icon_state = "rock2"
@@ -3813,6 +4087,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/wilderness/tavern)
+"xq" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "xr" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -3913,13 +4191,6 @@
 "xM" = (
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
-"xN" = (
-/obj/structure/rack,
-/obj/item/weapon/hammer,
-/obj/item/weapon/tongs,
-/obj/item/flint,
-/turf/open/floor/cobble,
-/area/indoors/wilderness/gallowband)
 "xO" = (
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
@@ -3941,6 +4212,13 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
+"xV" = (
+/obj/structure/door/green{
+	name = "Waterlock Gatehouse"
+	},
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/turf/open/floor/cobble,
+/area/indoors/wilderness/gallowband/garrison)
 "xX" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone/moss,
@@ -3948,6 +4226,12 @@
 "xY" = (
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"xZ" = (
+/obj/effect/decal/woodpath{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "ya" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -3997,12 +4281,6 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"yj" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/flora/grass/maneater/real,
-/obj/item/alch/herb/rosa,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness/safe)
 "yl" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -4052,6 +4330,10 @@
 /turf/open/water/river/dirt{
 	dir = 8
 	},
+/area/outdoors/wilderness/safe/gallowband_fort)
+"yu" = (
+/obj/structure/bars,
+/turf/open/floor/ruinedwood/darker,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "yw" = (
 /obj/item/natural/rock,
@@ -4115,15 +4397,9 @@
 	},
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/dungeon)
-"yR" = (
-/obj/structure/closet/keyrack,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/wilderness/gallowband/ship)
+"yS" = (
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/wilderness/gallowband/garrison)
 "yT" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = -12;
@@ -4168,6 +4444,13 @@
 /obj/item/fishingrod/crafted,
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/shop)
+"zc" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/flora/grass/maneater/real,
+/obj/item/alch/herb/rosa,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness/safe)
 "zd" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/grass,
@@ -4199,6 +4482,12 @@
 /obj/item/natural/rock,
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
+"zi" = (
+/obj/structure/bridge_stakes{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "zj" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /obj/effect/decal/cleanable/blood/old,
@@ -4218,6 +4507,10 @@
 	dir = 1
 	},
 /area/indoors/wilderness/gallowband)
+"zp" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/openspace,
+/area/indoors/wilderness/gallowband/garrison)
 "zq" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
@@ -4266,6 +4559,9 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"zB" = (
+/turf/closed/wall/mineral/stone/window/moss,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "zC" = (
 /turf/open/water/river/dirt{
 	dir = 1
@@ -4293,6 +4589,27 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"zJ" = (
+/obj/effect/decal/cobbleedge{
+	dir = 6
+	},
+/obj/structure/rack,
+/turf/open/floor/dirt/road,
+/area/indoors/wilderness/gallowband)
+"zQ" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"zR" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe)
 "zU" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -4315,6 +4632,7 @@
 /area/outdoors/wilderness)
 "Ab" = (
 /obj/structure/fluff/walldeco/vinez/l,
+/obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "Ac" = (
@@ -4422,6 +4740,15 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/shop)
+"AB" = (
+/obj/structure/closet/dirthole/closed,
+/obj/item/skull{
+	pixel_x = 11;
+	pixel_y = -7
+	},
+/obj/effect/mapping_helpers/structure/grave_spawner/great_hunt,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "AD" = (
 /obj/structure/stairs{
 	dir = 8
@@ -4451,19 +4778,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/beside_thatchwood)
 "AP" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/neuFarm/seed/wheat,
-/obj/item/neuFarm/seed/wheat,
-/obj/item/neuFarm/seed/wheat,
-/obj/item/neuFarm/seed/wheat,
-/obj/item/neuFarm/seed/wheat,
-/obj/item/neuFarm/seed/oat,
-/obj/item/neuFarm/seed/oat,
-/obj/item/neuFarm/seed/oat,
-/obj/item/neuFarm/seed/oat,
-/obj/item/neuFarm/seed/oat,
-/turf/open/floor/twig,
-/area/indoors/wilderness/gallowband)
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/carpet/green,
+/area/indoors/wilderness/gallowband/garrison)
 "AQ" = (
 /obj/effect/decal/cleanable/dirt,
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
@@ -4473,6 +4790,11 @@
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/outpost/vanderlin)
+"AS" = (
+/obj/structure/flora/grass/water,
+/obj/structure/kneestingers,
+/turf/open/water/river/dirt,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "AT" = (
 /turf/open/floor/grass,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -4499,6 +4821,9 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/watchtower)
+"Bb" = (
+/turf/closed/wall/mineral/stone/window,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Bc" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4507,6 +4832,14 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Bd" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/water/river{
+	dir = 8
+	},
+/area/outdoors/wilderness/safe)
 "Be" = (
 /obj/structure/rack,
 /obj/item/weapon/mace/woodclub/train_sword,
@@ -4541,6 +4874,10 @@
 "Bm" = (
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/gallowband)
+"Bn" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/water/marsh,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Bo" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -4599,6 +4936,12 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"BD" = (
+/obj/structure/chair/wood/alt/uncomfortable{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "BE" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -4719,35 +5062,10 @@
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
-"Co" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Cr" = (
 /obj/structure/fluff/railing/tall,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/watchtower)
-"Cs" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/egg,
-/obj/item/reagent_containers/food/snacks/meat/fatty,
-/obj/item/reagent_containers/food/snacks/meat/fatty,
-/obj/item/reagent_containers/food/snacks/meat/fatty,
-/obj/item/reagent_containers/food/snacks/meat/fatty,
-/obj/item/reagent_containers/food/snacks/meat/fatty,
-/obj/item/reagent_containers/food/snacks/meat/poultry,
-/obj/item/reagent_containers/food/snacks/meat/poultry,
-/obj/item/reagent_containers/food/snacks/meat/poultry,
-/obj/item/reagent_containers/food/snacks/meat/poultry,
-/obj/item/reagent_containers/food/snacks/meat/poultry,
-/turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Ct" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/cheesecake_slice/poison,
@@ -4797,6 +5115,12 @@
 "CP" = (
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
+"CQ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "CS" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -4865,11 +5189,23 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"Dj" = (
+/obj/structure/chair/wood/alt/uncomfortable{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Dl" = (
 /obj/structure/stone_tile/surrounding/burnt,
 /obj/structure/stone_tile/center/burnt,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Dn" = (
+/obj/machinery/light/fueled/torchholder/metal_torch{
+	pixel_y = 32
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "Do" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/structure/door/stone,
@@ -4971,16 +5307,6 @@
 /obj/item/clothing/gloves/angle/atgervi,
 /turf/open/floor/wood,
 /area/indoors/wilderness/gallowband/ship)
-"DI" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "DJ" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -5017,6 +5343,10 @@
 /obj/structure/inert_bonepile,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"DQ" = (
+/obj/structure/closet/crate/chest/crafted,
+/turf/open/floor/cobble,
+/area/indoors/wilderness/gallowband)
 "DR" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/sand,
@@ -5130,6 +5460,15 @@
 "Er" = (
 /turf/open/floor/cobble,
 /area/outdoors/wilderness)
+"Eu" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Ex" = (
 /obj/item/candle/infinite{
 	anchored = 1;
@@ -5255,6 +5594,9 @@
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobble,
 /area/indoors/wilderness/gallowband)
+"Fp" = (
+/turf/closed/wall/mineral/decowood,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Fr" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/closed/mineral/random,
@@ -5377,6 +5719,16 @@
 /obj/structure/flora/tree,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness)
+"FW" = (
+/obj/structure/rack,
+/obj/item/natural/bundle/cloth/bandage/full,
+/obj/item/needle/thorn,
+/obj/item/needle/thorn{
+	pixel_x = 4;
+	pixel_y = -3
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "FX" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -5487,6 +5839,19 @@
 "Gx" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/wilderness)
+"Gz" = (
+/obj/structure/rack,
+/obj/item/reagent_containers/glass/bottle/waterskin,
+/obj/item/reagent_containers/glass/bottle/waterskin{
+	pixel_x = -6;
+	pixel_y = -10
+	},
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette{
+	pixel_x = 10
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "GA" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
@@ -5521,6 +5886,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
 /area/indoors/wilderness/garrison)
+"GL" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe)
 "GM" = (
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/grass,
@@ -5552,6 +5921,40 @@
 /obj/structure/minecart_rail,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Hb" = (
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/structure/closet/crate/chest/crafted{
+	name = "Forge Supplies"
+	},
+/obj/item/flint,
+/obj/item/weapon/tongs,
+/obj/item/weapon/hammer,
+/obj/item/mould/ingot{
+	pixel_y = -9
+	},
+/obj/item/mould/ingot,
+/obj/item/storage/crucible/random{
+	pixel_x = -5
+	},
+/obj/item/storage/crucible/random{
+	pixel_x = 6
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "Hf" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/grass,
@@ -5615,6 +6018,17 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/dungeon)
+"Hx" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Hy" = (
 /turf/open/floor/rooftop{
 	dir = 4
@@ -5673,6 +6087,11 @@
 /turf/open/floor/rooftop{
 	dir = 4
 	},
+/area/outdoors/wilderness/safe/gallowband_fort)
+"HP" = (
+/obj/structure/flora/grass/water/reeds,
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/water/marsh/deep,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "HR" = (
 /obj/structure/window/openclose,
@@ -5774,6 +6193,12 @@
 /obj/item/burial_shroud,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
+"Ix" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/marsh,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Iz" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -5796,32 +6221,14 @@
 "ID" = (
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"IH" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "II" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
-"IK" = (
-/obj/structure/rack,
-/obj/item/rope,
-/obj/item/rope{
-	pixel_x = 4;
-	pixel_y = -3
-	},
-/obj/item/rope{
-	pixel_x = -1;
-	pixel_y = 2
-	},
-/obj/item/rope/chain,
-/obj/item/rope/chain{
-	pixel_x = 2;
-	pixel_y = -5
-	},
-/obj/item/rope/chain{
-	pixel_x = -4;
-	pixel_y = 3
-	},
-/turf/open/floor/wood,
-/area/indoors/wilderness/gallowband/ship)
 "IL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -5849,6 +6256,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"IQ" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "IR" = (
 /turf/open/floor/sandstone_tile/five,
 /area/indoors/dungeon)
@@ -5904,6 +6317,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Jg" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/machinery/light/fueled/oven/south,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Jh" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -5952,6 +6372,24 @@
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/wilderness/gallowband)
+"Js" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/obj/effect/decal/woodpath{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"Jt" = (
+/obj/structure/closet/keyrack,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/turf/open/floor/carpet/green,
+/area/indoors/wilderness/gallowband/garrison)
 "Ju" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/railing/wood{
@@ -5960,6 +6398,26 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"Jv" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/poultry,
+/obj/item/reagent_containers/food/snacks/meat/poultry,
+/obj/item/reagent_containers/food/snacks/meat/poultry,
+/obj/item/reagent_containers/food/snacks/meat/poultry,
+/obj/item/reagent_containers/food/snacks/meat/poultry,
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "Jw" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/chair/stool/bar,
@@ -6003,6 +6461,18 @@
 "JJ" = (
 /turf/closed/indestructible/wooddark/hull,
 /area/indoors/wilderness/gallowband/ship)
+"JL" = (
+/obj/structure/closet/crate/chest/wicker/random_soilson{
+	name = "Farm Tools"
+	},
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/weapon/shovel,
+/obj/item/weapon/thresher,
+/obj/item/weapon/pitchfork,
+/obj/item/weapon/hoe,
+/obj/item/weapon/sickle,
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "JM" = (
 /turf/open/floor/twig,
 /area/outdoors/wilderness)
@@ -6089,6 +6559,10 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/wilderness/gallowband/ship)
+"Kn" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Kp" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/weapon/shield/wood,
@@ -6113,11 +6587,6 @@
 	},
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
-"Ku" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 1
-	},
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Kv" = (
 /obj/structure/table/wood/plain/alt,
 /obj/structure/fluff/millstone,
@@ -6154,6 +6623,11 @@
 /obj/item/painting/queen,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
+"KH" = (
+/obj/structure/fluff/walldeco/vinez/l,
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/grass,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "KJ" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
@@ -6165,20 +6639,17 @@
 "KM" = (
 /turf/open/water/blood,
 /area/indoors/cave/late)
-"KN" = (
-/obj/structure/rack,
-/obj/item/natural/bundle/cloth/bandage/full,
-/obj/item/needle/thorn,
-/obj/item/needle/thorn{
-	pixel_x = 4;
-	pixel_y = -3
-	},
-/turf/open/floor/wood,
-/area/indoors/wilderness/gallowband/ship)
 "KP" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
+"KS" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "WATERLOCK GATEHOUSE"
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "KT" = (
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/churchbrick,
@@ -6198,13 +6669,6 @@
 "KW" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison)
-"KX" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "KZ" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
@@ -6221,17 +6685,17 @@
 	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/dungeon)
+"Le" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Lg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /turf/open/floor/grass,
-/area/outdoors/wilderness/safe/gallowband_fort)
-"Lh" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "Li" = (
 /turf/closed/wall/mineral/wooddark/end{
@@ -6285,6 +6749,9 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"Lu" = (
+/turf/open/water/sewer,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Lv" = (
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/herringbone,
@@ -6302,6 +6769,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"LC" = (
+/turf/open/floor/twig{
+	dir = 8
+	},
+/area/outdoors/wilderness/safe/gallowband_fort)
 "LD" = (
 /turf/open/floor/volcanic,
 /area/indoors/cave/late)
@@ -6344,11 +6816,6 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
-"LP" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 8
-	},
-/area/outdoors/wilderness/safe/gallowband_fort)
 "LQ" = (
 /obj/item/ore/coal,
 /obj/item/ore/coal,
@@ -6391,6 +6858,13 @@
 "LW" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/shop)
+"LX" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/water/marsh/deep,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "LY" = (
 /obj/effect/decal/cobbleedge{
 	dir = 10;
@@ -6597,6 +7071,15 @@
 "Ni" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/cave)
+"Nj" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"Nk" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/twig{
+	dir = 8
+	},
+/area/indoors/wilderness/gallowband)
 "Nl" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/marsh/deep,
@@ -6619,12 +7102,6 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/river,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"Nx" = (
-/obj/structure/chair/wood/alt/uncomfortable{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Ny" = (
 /obj/effect/decal/borderfall{
 	dir = 1;
@@ -6641,6 +7118,13 @@
 "NB" = (
 /turf/open/floor/sandstone_tile,
 /area/indoors/dungeon)
+"NE" = (
+/obj/structure/table/wood/reinf_long,
+/obj/structure/fluff/millstone{
+	pixel_y = 11
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "NG" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/floor/dirt,
@@ -6698,6 +7182,17 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decowood,
 /area/indoors/wilderness/garrison)
+"NX" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "NY" = (
 /obj/structure/rack,
 /obj/item/weapon/polearm/woodstaff,
@@ -6719,6 +7214,13 @@
 /obj/structure/bookcase,
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
+"Og" = (
+/obj/structure/winch{
+	name = "South Waterlock";
+	redstone_id = "fgwaterlocksouth"
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Oh" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/_tennite{
@@ -6832,14 +7334,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
-"Oz" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/skull{
-	pixel_x = 11;
-	pixel_y = -7
-	},
-/turf/open/floor/dirt,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "OB" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt/road,
@@ -6851,6 +7345,9 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"OI" = (
+/turf/closed/wall/mineral/decorstone/window,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "OK" = (
 /obj/structure/chair/stool,
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
@@ -6859,14 +7356,6 @@
 "OM" = (
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
-"OO" = (
-/obj/structure/stairs/stone,
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "OP" = (
 /turf/open/lava,
 /area/under/cave)
@@ -6908,13 +7397,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
-"Pc" = (
-/obj/structure/stairs/stone,
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Pd" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/grass,
@@ -6935,6 +7417,13 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Pm" = (
+/obj/structure/fluff/railing/tall/palisade,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Pn" = (
 /obj/item/candle/infinite{
 	pixel_x = 11;
@@ -6965,6 +7454,10 @@
 	},
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
+"Pv" = (
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Pz" = (
 /turf/open/floor/carpet/purple,
 /area/indoors/dungeon)
@@ -6984,6 +7477,12 @@
 	dir = 4
 	},
 /area/outdoors/wilderness)
+"PD" = (
+/obj/structure/bars/passage/open{
+	redstone_id = "gallowbridge"
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "PE" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/decal/cobbleedge{
@@ -7014,6 +7513,11 @@
 "PO" = (
 /turf/open/floor/sand,
 /area/under/cave)
+"PP" = (
+/obj/item/bedsheet/pelt,
+/obj/structure/bed/mediocre,
+/turf/open/floor/carpet/green,
+/area/indoors/wilderness/gallowband/garrison)
 "PQ" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/herringbone,
@@ -7022,6 +7526,14 @@
 /turf/open/water/river{
 	dir = 8
 	},
+/area/outdoors/wilderness/safe/gallowband_fort)
+"PS" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "PT" = (
 /obj/structure/fluff/railing/tall/palisade,
@@ -7041,6 +7553,18 @@
 /obj/structure/bars/grille,
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"PX" = (
+/obj/machinery/light/fueled/torchholder/c{
+	dir = 1
+	},
+/turf/closed/wall/mineral/stone,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"PY" = (
+/obj/structure/fluff/signage{
+	name = "BOG WITCH"
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "PZ" = (
 /turf/open/floor/twig,
 /area/indoors/wilderness)
@@ -7067,25 +7591,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/dungeon)
-"Qk" = (
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/copper,
-/obj/item/ore/copper,
-/obj/item/ore/copper,
-/obj/item/ore/copper,
-/obj/item/ore/copper,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/structure/closet/crate/chest/crafted,
-/turf/open/floor/cobble,
-/area/indoors/wilderness/gallowband)
 "Ql" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 4
@@ -7177,11 +7682,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"QN" = (
-/obj/machinery/light/fueled/hearth,
-/obj/item/cooking/pan,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "QO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/natural/wood/plank,
@@ -7287,9 +7787,6 @@
 /obj/structure/bars,
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/garrison)
-"Rr" = (
-/turf/closed/wall/mineral/wooddark/horizontal,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Rs" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/naturalstone,
@@ -7321,6 +7818,12 @@
 /obj/item/clothing/face/jademask,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"RF" = (
+/obj/structure/gate/bars{
+	redstone_id = "fgwaterlocksouth"
+	},
+/turf/open/water/sewer,
+/area/outdoors/wilderness/safe)
 "RJ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -7333,11 +7836,6 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/grass/mixyel,
 /area/indoors/dungeon)
-"RM" = (
-/obj/structure/rack,
-/obj/item/natural/bundle/cloth/full,
-/turf/open/floor/wood,
-/area/indoors/wilderness/gallowband/ship)
 "RN" = (
 /obj/structure/lever/hidden{
 	redstone_id = "ForestAstrataTemple"
@@ -7396,6 +7894,19 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/cobble,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"Sc" = (
+/obj/structure/bars/passage/open{
+	redstone_id = "gallowbridge"
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"Sd" = (
+/obj/structure/flora/grass/water,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/water/clean/dirt,
+/area/outdoors/wilderness/safe)
 "Se" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -7588,6 +8099,17 @@
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"Tg" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = 6
+	},
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = -4
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "Th" = (
 /turf/closed/wall/mineral/tent,
 /area/under/cave)
@@ -7619,6 +8141,24 @@
 /obj/item/reagent_containers/glass/bowl/amber,
 /turf/open/floor/tile,
 /area/indoors/dungeon)
+"To" = (
+/obj/structure/door/iron/bars,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"Tp" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"Ts" = (
+/obj/structure/flora/grass/water/reeds,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/water/marsh/deep,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Tt" = (
 /obj/item/candle/infinite{
 	anchored = 1;
@@ -7652,6 +8192,15 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/wilderness/tavern)
+"TB" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/cooking/pan,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
+"TD" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "TE" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/dirt/road,
@@ -7707,6 +8256,35 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"TX" = (
+/obj/structure/rack,
+/obj/item/flashlight/flare/torch/lantern{
+	pixel_y = -2
+	},
+/obj/item/flashlight/flare/torch/lantern{
+	pixel_x = -8;
+	pixel_y = 3
+	},
+/obj/item/flashlight/flare/torch/lantern{
+	pixel_x = 7
+	},
+/obj/item/flint,
+/obj/item/flint{
+	pixel_x = 6
+	},
+/obj/item/flint{
+	pixel_y = -3;
+	pixel_x = -6
+	},
+/obj/machinery/light/fueled/torchholder/metal_torch{
+	pixel_y = 32
+	},
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
+"TY" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/turf/open/floor/carpet/green,
+/area/indoors/wilderness/gallowband/garrison)
 "Ub" = (
 /obj/structure/door/green,
 /turf/open/floor/ruinedwood/darker,
@@ -7825,6 +8403,9 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/sand,
 /area/indoors/dungeon)
+"UL" = (
+/turf/closed/indestructible/wooddark,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "UM" = (
 /obj/structure/handcart{
 	dir = 8
@@ -7848,6 +8429,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"US" = (
+/obj/structure/bars/grille,
+/turf/open/openspace,
+/area/indoors/wilderness/gallowband/garrison)
 "UU" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -7930,6 +8515,16 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
+"Vj" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/turf/open/floor/naturalstone,
+/area/indoors/wilderness/gallowband/garrison)
 "Vk" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/naturalstone,
@@ -7956,28 +8551,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
-"Vu" = (
-/obj/structure/rack,
-/obj/item/flashlight/flare/torch/lantern{
-	pixel_y = -2
-	},
-/obj/item/flashlight/flare/torch/lantern{
-	pixel_x = -8;
-	pixel_y = 3
-	},
-/obj/item/flashlight/flare/torch/lantern{
-	pixel_x = 7
-	},
-/obj/item/flint,
-/obj/item/flint{
-	pixel_x = 6
-	},
-/obj/item/flint{
-	pixel_y = -3;
-	pixel_x = -6
-	},
-/turf/open/floor/wood,
-/area/indoors/wilderness/gallowband/ship)
 "Vv" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/decal/cleanable/dirt,
@@ -8008,12 +8581,6 @@
 "VB" = (
 /turf/closed/wall/mineral/stone/window/moss,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
-"VC" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "VE" = (
 /turf/open/water/river{
 	dir = 8
@@ -8100,19 +8667,6 @@
 /obj/item/weapon/tongs/stone,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
-"Wg" = (
-/obj/effect/decal/cobbleedge{
-	dir = 6
-	},
-/obj/structure/rack,
-/obj/item/storage/crucible/random{
-	pixel_x = -5
-	},
-/obj/item/storage/crucible/random{
-	pixel_x = 6
-	},
-/turf/open/floor/dirt/road,
-/area/indoors/wilderness/gallowband)
 "Wh" = (
 /obj/structure/door/green,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
@@ -8122,6 +8676,10 @@
 /obj/item/bodypart/head/goblin,
 /turf/open/floor/dirt,
 /area/indoors/wilderness/gallowband/cell)
+"Wk" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Wm" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river,
@@ -8237,9 +8795,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"WO" = (
-/turf/closed/wall/mineral/wooddark/vertical,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "WP" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/darker,
@@ -8305,6 +8860,14 @@
 	},
 /turf/open/floor/sand,
 /area/outdoors/wilderness/beside_thatchwood)
+"Xg" = (
+/obj/structure/door/green{
+	name = "forest garrison barracks"
+	},
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Xh" = (
 /obj/structure/bridge,
 /turf/open/water/river,
@@ -8313,6 +8876,15 @@
 /obj/item/weapon/whip/psydon,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/dungeon)
+"Xj" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 1
+	},
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "Xk" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/bandit,
 /turf/open/floor/dirt/road,
@@ -8323,6 +8895,10 @@
 	dir = 8
 	},
 /area/outdoors/wilderness)
+"Xn" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "Xo" = (
 /mob/living/simple_animal/hostile/retaliate/fae/glimmerwing,
 /turf/open/floor/grass,
@@ -8353,13 +8929,6 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/wilderness/safe/gallowband_fort)
-"Xw" = (
-/obj/structure/rack,
-/obj/item/weapon/sickle,
-/obj/item/weapon/hoe,
-/obj/item/weapon/pitchfork,
-/turf/open/floor/twig,
-/area/indoors/wilderness/gallowband)
 "Xx" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/grass,
@@ -8392,11 +8961,12 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe)
-"XI" = (
-/obj/structure/door/green,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
-/turf/open/floor/cobble,
-/area/indoors/wilderness/gallowband/garrison)
+"XJ" = (
+/obj/structure/gate/bars{
+	redstone_id = "fgwaterlocknorth"
+	},
+/turf/open/water/sewer,
+/area/outdoors/wilderness/safe)
 "XL" = (
 /obj/structure/table/wood/crafted,
 /obj/item/candle/skull,
@@ -8454,15 +9024,6 @@
 /obj/structure/kneestingers,
 /turf/open/water/swamp,
 /area/under/cave)
-"Yj" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Yk" = (
 /turf/closed/indestructible/wooddark/mast,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -8510,6 +9071,12 @@
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"Yw" = (
+/obj/structure/chair/wood/alt/uncomfortable{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Yx" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 1
@@ -8594,10 +9161,24 @@
 "YT" = (
 /turf/open/floor/dirt/road,
 /area/indoors/wilderness/shop)
+"YU" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "WATERLOCK GATEHOUSE"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "YV" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
+"YX" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/bars/grille,
+/turf/open/openspace,
+/area/indoors/wilderness/gallowband/garrison)
 "YY" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -8678,12 +9259,21 @@
 /obj/item/carvedgem/amber/sun,
 /turf/open/floor/sandstone_tile,
 /area/indoors/dungeon)
+"ZF" = (
+/obj/structure/fermentation_keg/water,
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "ZH" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
 	pixel_y = 0
 	},
 /turf/open/floor/dirt,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"ZJ" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "ZL" = (
 /obj/structure/flora/grass/thorn_bush,
@@ -8721,6 +9311,9 @@
 "ZV" = (
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"ZW" = (
+/turf/open/water/sewer,
+/area/outdoors/wilderness/safe)
 "ZX" = (
 /turf/closed/mineral/bedrock,
 /area/under/cave)
@@ -9054,37 +9647,37 @@ rW
 rW
 rW
 rW
-rW
-eK
-eK
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-rW
-bg
-bg
-rW
-rW
-rW
-rW
-rW
-rW
+vJ
+je
+je
+vJ
+vJ
+vJ
+vJ
+vJ
+vJ
+vw
+vw
+vw
+vJ
+vJ
+vJ
+vJ
+vJ
+vJ
+vw
+vw
+vw
+vJ
+vJ
+HE
+HE
+vJ
+vJ
+vJ
+vJ
+vJ
+vJ
 rW
 rW
 rW
@@ -9256,37 +9849,37 @@ bg
 rW
 rW
 rW
-eK
-eK
-rW
-eK
-eK
-bg
-bg
-bg
-rW
-eK
-eK
-rW
-rW
-bg
-bg
-bg
-bg
-bg
-bg
-bg
-rW
-rW
-rW
-rW
-bg
-bg
-oM
-oM
-eK
-eK
-eK
+je
+je
+vJ
+je
+je
+HE
+HE
+HE
+vJ
+je
+vw
+vJ
+vJ
+HE
+HE
+HE
+HE
+HE
+HE
+vw
+vJ
+vJ
+vJ
+vJ
+HE
+HE
+LK
+LK
+je
+je
+je
 eK
 rW
 rW
@@ -9468,16 +10061,16 @@ je
 je
 je
 vJ
-vJ
-je
-je
-je
+XJ
 vJ
 vJ
 vJ
 vJ
 vJ
-HE
+vJ
+vJ
+vJ
+RF
 vJ
 vJ
 vJ
@@ -9670,17 +10263,17 @@ vJ
 vJ
 vJ
 vJ
+ZW
 vJ
 vJ
 vJ
 vJ
-je
-je
-je
 vJ
 vJ
 vJ
-HE
+vJ
+ZW
+vJ
 vJ
 vJ
 vJ
@@ -9872,7 +10465,7 @@ vJ
 vJ
 vJ
 HE
-HE
+ZW
 vJ
 vJ
 vJ
@@ -9881,8 +10474,8 @@ vJ
 je
 vJ
 vJ
-HE
-HE
+ZW
+vJ
 vJ
 vJ
 vJ
@@ -10074,16 +10667,16 @@ rb
 rb
 rb
 rb
-jW
-jW
+iW
 rb
 rb
 rb
 rb
 rb
 rb
-jW
-jW
+rb
+rb
+bQ
 rb
 rb
 rb
@@ -10276,16 +10869,16 @@ rb
 rb
 rb
 rb
-rb
-jW
-rb
+Lu
 rb
 rb
 rb
 rb
-jW
-jW
 rb
+rb
+rb
+rb
+Lu
 rb
 MQ
 rb
@@ -10478,21 +11071,21 @@ rb
 rb
 rb
 rb
+Lu
 rb
 rb
 rb
 rb
 rb
-rb
-jW
-ec
-MQ
 rb
 rb
 MQ
+Lu
+rb
+MQ
 jW
 ec
-Nl
+rb
 ec
 rb
 MQ
@@ -10680,7 +11273,7 @@ Gs
 Gs
 Gs
 Gs
-jW
+mU
 rb
 rb
 rb
@@ -10689,7 +11282,7 @@ rb
 rb
 rb
 rb
-MQ
+mU
 jW
 ec
 ec
@@ -10882,16 +11475,16 @@ Gs
 An
 An
 Xy
-Xy
-Xy
-Xy
+mU
+Gs
+Gs
 Gs
 Gs
 Gs
 Gs
 rb
 rb
-rb
+mU
 MQ
 rb
 rb
@@ -11084,16 +11677,16 @@ An
 An
 An
 An
-Xy
+mU
 An
 An
-An
-An
-An
+bT
+Le
+Le
+Tp
+VX
 Gs
-Gs
-Gs
-Gs
+mU
 Gs
 kJ
 kJ
@@ -11102,9 +11695,9 @@ Gs
 Gs
 Gs
 Gs
-An
-An
-An
+Xj
+mw
+Pm
 Gs
 Gs
 Gs
@@ -11285,31 +11878,31 @@ ZV
 Iz
 Iz
 Iz
-An
-cg
-An
+mU
+mU
+mU
 ZV
-ZV
-gr
+CQ
+sP
+sP
+Tp
 An
-An
-An
-An
-dC
-An
-An
+mU
+mU
+mU
+qp
 Gs
 Gs
 Gs
+Xj
+mw
+mw
 An
 An
 An
-An
-An
-An
-dC
-An
-An
+mw
+mw
+Pm
 Gs
 Gs
 Gs
@@ -11487,33 +12080,33 @@ ZV
 Iz
 Iz
 La
-gW
+bZ
 Sa
 bZ
-MM
+An
+CQ
+sP
+sP
+Tp
 ZV
 ZV
-ZV
-nw
-SO
-nw
 nw
 nw
 An
-An
-An
-An
+mw
+mw
+mw
 An
 IA
 An
-fd
+ZV
 nw
 tk
 MM
 An
 IA
-An
-An
+mw
+Pm
 Gs
 Gs
 rb
@@ -11692,12 +12285,12 @@ bZ
 iU
 KW
 gW
-nw
-vn
+ZV
+ZV
 gr
 gr
 gr
-tk
+gr
 tk
 nw
 nw
@@ -11715,8 +12308,8 @@ tk
 An
 An
 An
-An
-An
+nu
+qp
 Gs
 Gs
 Gs
@@ -11890,7 +12483,7 @@ ZV
 ZV
 Iz
 gW
-Gw
+jw
 KW
 Gw
 xF
@@ -11913,14 +12506,14 @@ nw
 ZV
 Jo
 ZV
-Gs
+An
 nw
 An
 An
 An
 An
-An
-An
+mw
+qp
 Gs
 Gs
 Gs
@@ -12114,17 +12707,17 @@ tk
 ZV
 ZV
 ZV
-kJ
-An
-An
-An
-An
-An
-An
-An
-An
-An
-An
+pc
+pc
+pc
+pc
+pc
+pc
+pc
+pc
+xZ
+mw
+qp
 Gs
 Gs
 rb
@@ -12294,7 +12887,7 @@ ZV
 gr
 Iz
 gW
-KW
+Og
 KW
 Gw
 gS
@@ -12316,18 +12909,18 @@ gr
 gr
 gr
 ZV
-Gs
-Gs
 An
-Gs
-Gs
-Gs
+An
 An
 An
 IA
 An
 An
+PY
+Js
 An
+An
+qp
 Gs
 Gs
 ec
@@ -12488,7 +13081,7 @@ kw
 kw
 Xt
 kw
-yj
+zc
 Tc
 Mn
 ZV
@@ -12499,7 +13092,7 @@ gS
 bZ
 ze
 Gw
-XI
+xV
 Iz
 Iz
 ih
@@ -12518,19 +13111,19 @@ ZV
 tk
 ZV
 An
-An
+nu
 kJ
 kJ
 Gs
-rb
+Gs
 Gs
 kJ
-kJ
-kJ
+Gs
+Ix
 kJ
 Gs
 An
-An
+qp
 Gs
 rb
 ec
@@ -12699,7 +13292,7 @@ ZV
 Iz
 Iz
 Sa
-gW
+bZ
 ba
 bZ
 Iz
@@ -12716,24 +13309,24 @@ ZV
 gr
 ZV
 gr
+ZV
+ZV
+An
+An
+kJ
+kJ
+rb
 Gs
-kJ
-An
-An
-kJ
-kJ
+Gs
+Gs
 rb
-rb
-rb
-rb
-rb
-rb
-rb
-rb
+Hx
+zi
+PS
 kJ
 kJ
 Gs
-An
+qp
 rb
 rb
 MQ
@@ -12901,16 +13494,16 @@ gr
 Iz
 Iz
 Iz
+Se
 Iz
-sd
 yi
 Iz
 Iz
 ui
 Bw
+lI
 bw
-bw
-bw
+lI
 sh
 zo
 gr
@@ -12919,20 +13512,20 @@ ZV
 gr
 nw
 gr
-Gs
-Gs
+An
+An
 kJ
 kJ
 rb
 rb
-jW
-jW
-jW
-jW
 rb
 rb
 rb
-rb
+fe
+cT
+cT
+cT
+NX
 rb
 Gs
 Gs
@@ -13103,8 +13696,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Mu
 Iz
 Iz
@@ -13126,16 +13719,16 @@ Gs
 kJ
 rb
 jW
-jW
-jW
 rb
 rb
 rb
 rb
-jW
-jW
-jW
-jW
+rb
+jb
+lr
+Eu
+rb
+rb
 rb
 rb
 Gs
@@ -13305,16 +13898,16 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
 ui
 Bw
+Nk
 bw
-bw
-bw
+Nk
 tx
 zo
 gr
@@ -13507,8 +14100,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -13709,8 +14302,8 @@ gr
 Iz
 Iz
 Iz
-Iz
-Ku
+Se
+Se
 Iz
 Iz
 Iz
@@ -13909,11 +14502,11 @@ ZV
 gr
 Iz
 Iz
-Iz
 fi
-Rr
-sd
-Rr
+Se
+Se
+Se
+Se
 Iz
 Iz
 ul
@@ -14113,8 +14706,8 @@ gr
 Iz
 Iz
 Iz
-Iz
-ce
+Se
+Se
 Iz
 Iz
 Iz
@@ -14140,8 +14733,8 @@ Mv
 Mv
 LQ
 Il
-RM
-KN
+ei
+ei
 GH
 sG
 GP
@@ -14315,8 +14908,8 @@ ZV
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -14339,7 +14932,7 @@ rb
 rb
 Mv
 Mv
-IK
+ei
 sG
 ge
 ge
@@ -14347,7 +14940,7 @@ ge
 ge
 ge
 GP
-yR
+ge
 ge
 ge
 ge
@@ -14517,8 +15110,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -14719,8 +15312,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -14743,7 +15336,7 @@ rb
 rb
 mN
 mN
-Vu
+ei
 sG
 ge
 ge
@@ -14921,8 +15514,8 @@ dc
 Iz
 Iz
 Iz
-Iz
-Ku
+Se
+Se
 Iz
 Iz
 Iz
@@ -15121,11 +15714,11 @@ gr
 gr
 gr
 Iz
-Iz
 fi
-Rr
-sd
-Rr
+Se
+Se
+Se
+Se
 Iz
 Iz
 Iz
@@ -15325,8 +15918,8 @@ ZV
 Iz
 Iz
 Iz
-Iz
-ce
+Se
+Se
 Iz
 Iz
 zr
@@ -15527,8 +16120,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -15566,7 +16159,7 @@ rb
 jW
 rb
 rb
-jW
+Ts
 jW
 jW
 jW
@@ -15729,8 +16322,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -15767,7 +16360,7 @@ rb
 jW
 rb
 rb
-jW
+HP
 jW
 rb
 rb
@@ -15931,8 +16524,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -15969,7 +16562,7 @@ rb
 rb
 rb
 jW
-jW
+HP
 rb
 rb
 jW
@@ -16133,8 +16726,8 @@ ZV
 Iz
 Iz
 Iz
-Iz
-Ku
+Se
+Se
 Iz
 Iz
 Iz
@@ -16171,7 +16764,7 @@ rb
 rb
 rb
 jW
-rb
+pl
 jW
 jW
 jW
@@ -16333,11 +16926,11 @@ YR
 ZV
 ZV
 Iz
-Iz
 fi
-Rr
-sd
-Rr
+Se
+Se
+Se
+Se
 Iz
 Iz
 aF
@@ -16373,7 +16966,7 @@ rb
 rb
 jW
 jW
-jW
+HP
 rb
 rb
 rb
@@ -16537,8 +17130,8 @@ gr
 Iz
 Iz
 Iz
-Iz
-ce
+Se
+Se
 Iz
 Iz
 Iz
@@ -16575,7 +17168,7 @@ jW
 jW
 jW
 rb
-rb
+pl
 rb
 rb
 rb
@@ -16739,8 +17332,8 @@ ZV
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -16778,7 +17371,7 @@ rb
 rb
 rb
 rb
-rb
+LX
 rb
 rb
 rb
@@ -16941,8 +17534,8 @@ ZV
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -16967,10 +17560,10 @@ An
 An
 gr
 An
-An
+TD
 zH
 uz
-An
+TD
 IA
 An
 An
@@ -16980,7 +17573,7 @@ Gs
 Gs
 Gs
 rb
-rb
+pl
 rb
 rb
 rb
@@ -17143,8 +17736,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -17182,7 +17775,7 @@ An
 Gs
 Gs
 Gs
-kJ
+Bn
 rb
 rb
 rb
@@ -17345,8 +17938,8 @@ ZV
 Iz
 Iz
 Iz
+Se
 Iz
-sd
 Iz
 Iz
 Iz
@@ -17384,7 +17977,7 @@ An
 An
 An
 An
-Gs
+Bn
 kJ
 Gs
 rb
@@ -17547,7 +18140,7 @@ ZV
 Iz
 Iz
 La
-gW
+bZ
 Sa
 bZ
 Iz
@@ -17587,7 +18180,7 @@ gr
 An
 An
 IA
-An
+qp
 Gs
 MQ
 rb
@@ -17789,7 +18382,7 @@ Ci
 ih
 ZV
 An
-An
+Wk
 kJ
 Gs
 eG
@@ -17954,7 +18547,7 @@ KW
 KW
 Gw
 xF
-Iz
+YU
 Iz
 ZV
 ZV
@@ -17992,9 +18585,9 @@ zo
 gr
 ZV
 An
-An
-Gs
+qp
 eG
+wO
 HZ
 wO
 HZ
@@ -18194,9 +18787,9 @@ zo
 gr
 gr
 An
-An
-qj
-eG
+Wk
+AS
+wO
 HZ
 HZ
 wO
@@ -18397,8 +18990,8 @@ ZV
 An
 An
 Gs
-Gs
 eG
+wO
 wO
 wO
 wO
@@ -18759,7 +19352,7 @@ ZV
 Iz
 Iz
 Sa
-gW
+bZ
 ba
 bZ
 Mu
@@ -18961,8 +19554,8 @@ gr
 Iz
 Iz
 Iz
+Se
 Iz
-sd
 Iz
 Iz
 Iz
@@ -19163,8 +19756,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -19365,8 +19958,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -19567,8 +20160,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -19609,7 +20202,7 @@ aQ
 wO
 zC
 Gs
-kJ
+bs
 An
 An
 An
@@ -19769,8 +20362,8 @@ gr
 Iz
 Iz
 Iz
-Iz
-Ku
+Se
+Se
 Iz
 Iz
 Iz
@@ -19811,7 +20404,7 @@ wO
 HZ
 zC
 Gs
-An
+Wk
 An
 gr
 Ke
@@ -19969,11 +20562,11 @@ gr
 ZV
 SH
 Iz
-Iz
 fi
-Rr
-sd
-Rr
+Se
+Se
+Se
+Se
 Iz
 Iz
 gr
@@ -20013,7 +20606,7 @@ wO
 zC
 kJ
 Gs
-An
+Wk
 gr
 gr
 ZV
@@ -20173,8 +20766,8 @@ gr
 Iz
 Iz
 Iz
-Iz
-ce
+Se
+Se
 Iz
 Iz
 Iz
@@ -20215,7 +20808,7 @@ wO
 zC
 Gs
 An
-An
+Wk
 SH
 gr
 ZV
@@ -20375,8 +20968,8 @@ ZV
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -20414,10 +21007,10 @@ Gs
 eG
 wO
 wO
-tH
-tH
-mw
-pS
+Gs
+Gs
+An
+Kc
 gr
 gr
 ZV
@@ -20577,8 +21170,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -20586,7 +21179,7 @@ ui
 DE
 Ks
 Ks
-Qk
+DQ
 zo
 gr
 gr
@@ -20779,8 +21372,8 @@ ZV
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -20981,8 +21574,8 @@ gr
 Iz
 Iz
 Iz
-Iz
-Ku
+Se
+Se
 Iz
 Iz
 Iz
@@ -20997,10 +21590,10 @@ ZV
 ZV
 ZV
 ZV
-AP
-Xw
-oV
+rY
 cN
+ah
+ah
 bK
 Iz
 Iz
@@ -21181,15 +21774,15 @@ gr
 SH
 gr
 Iz
-Iz
 fi
-Rr
-sd
-Rr
+Se
+Se
+Se
+Se
 Iz
 Iz
 ui
-xN
+dp
 Ks
 Ks
 Fl
@@ -21385,16 +21978,16 @@ gr
 Iz
 Iz
 Iz
-Iz
-ce
+Se
+Se
 Iz
 Iz
 Iz
 ih
-Wg
+zJ
 ee
 ee
-mO
+cr
 ih
 gr
 gr
@@ -21587,8 +22180,8 @@ gr
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -21628,9 +22221,9 @@ nC
 An
 An
 ZV
-Oz
+AB
 ZV
-Oz
+AB
 Kc
 Gs
 Xy
@@ -21789,8 +22382,8 @@ ZV
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
 Iz
@@ -21991,11 +22584,11 @@ Ke
 Iz
 Iz
 Iz
+zB
 Iz
-Lh
 Iz
 Iz
-WO
+Se
 Iz
 Iz
 Iz
@@ -22032,9 +22625,9 @@ nC
 An
 ub
 gr
-Oz
+AB
 ZV
-Oz
+AB
 ZV
 gr
 oZ
@@ -22193,14 +22786,14 @@ ZV
 Iz
 Iz
 Iz
-Iz
-Ku
-Iz
+Se
+Se
+Se
 Iz
 Iz
 Iz
 ZV
-WO
+Se
 MV
 eC
 ZV
@@ -22211,13 +22804,13 @@ Iz
 Iz
 Iz
 Iz
-Iz
-Iz
 TE
 YG
 YG
 Lr
-GX
+zQ
+Iz
+Iz
 Iz
 Iz
 gr
@@ -22393,17 +22986,17 @@ gr
 dc
 gr
 Iz
-Iz
 fi
-Rr
-sd
-ve
-Gq
-Gq
-Gq
-ve
-sd
-LP
+Se
+Se
+Se
+Se
+zB
+zB
+zB
+Se
+Se
+Se
 ZV
 ZV
 ZV
@@ -22411,8 +23004,6 @@ ZV
 UM
 UM
 ZV
-Iz
-Iz
 Iz
 Iz
 TE
@@ -22421,7 +23012,9 @@ fT
 Aj
 GX
 Iz
-gr
+Iz
+Iz
+gd
 An
 An
 nC
@@ -22436,9 +23029,9 @@ An
 An
 gr
 gr
-Oz
+AB
 gr
-Oz
+AB
 gr
 ZV
 Kc
@@ -22604,7 +23197,7 @@ Iz
 Iz
 Iz
 Iz
-WO
+Se
 DC
 DC
 DC
@@ -22613,15 +23206,15 @@ DC
 DC
 DC
 nw
-ZV
-Iz
-Iz
+KS
 Iz
 TE
 fT
 ld
 Aj
 GX
+Iz
+Iz
 Iz
 Iz
 An
@@ -22817,13 +23410,13 @@ DC
 DC
 ZV
 Iz
-Iz
-Iz
 TE
 fT
 fT
 Aj
 GX
+Iz
+Iz
 Iz
 gr
 An
@@ -23019,15 +23612,15 @@ jQ
 DC
 ZV
 Iz
-Iz
-Iz
 TE
 bE
 bE
 Zb
-GX
+zQ
 Iz
-An
+Iz
+Iz
+MM
 An
 Tu
 cf
@@ -23230,7 +23823,7 @@ Iz
 Iz
 Iz
 An
-Tu
+nC
 Tu
 rO
 PR
@@ -23427,10 +24020,10 @@ Iz
 Iz
 Iz
 Iz
+im
 Iz
 Iz
 Iz
-gr
 An
 An
 Tu
@@ -23627,14 +24220,14 @@ gr
 Iz
 Iz
 Iz
-ZV
 Iz
 Iz
-Iz
-Iz
-tk
-An
-Tu
+PX
+Bb
+To
+Bb
+pg
+nC
 Tu
 Nv
 PR
@@ -23828,23 +24421,23 @@ gd
 Iz
 Iz
 Iz
-hd
-nw
 Iz
 Iz
 Iz
-Iz
-ZV
-An
-fB
+yu
+Nj
+Nj
+sP
+PX
+pg
 Nv
 Nv
 PR
 PR
 PR
 ia
-Tu
-An
+pg
+pg
 dc
 gd
 ZV
@@ -24030,13 +24623,13 @@ Iz
 Iz
 Iz
 Iz
-nw
-ZV
-hd
 Iz
 Iz
 Iz
-Iz
+Sc
+sP
+Nj
+sP
 VS
 pg
 vz
@@ -24233,12 +24826,12 @@ Iz
 Iz
 Iz
 Iz
-ZV
 Iz
 Iz
-Iz
-Iz
-Iz
+PD
+sP
+Nj
+sP
 VS
 pg
 vz
@@ -24437,10 +25030,10 @@ Iz
 Iz
 Iz
 Iz
-Iz
-Iz
-Iz
-Iz
+Sc
+sP
+Nj
+Nj
 VS
 pg
 vz
@@ -24639,20 +25232,20 @@ Iz
 Iz
 Iz
 Iz
-Iz
-Iz
-ZV
-gr
-An
-vz
+pi
+Nj
+sP
+sP
+PX
+pg
 vz
 CL
 PR
 cf
 PR
 KV
-vz
-An
+pg
+pg
 An
 gd
 ZV
@@ -24841,11 +25434,11 @@ Iz
 Iz
 Iz
 Iz
-Iz
-gr
-ZV
-gr
-An
+PX
+Bb
+Bb
+Bb
+pg
 An
 vz
 cf
@@ -25043,10 +25636,10 @@ Iz
 Iz
 Iz
 Iz
-dB
+gr
 gr
 ZV
-nw
+ZV
 gr
 An
 vz
@@ -25241,14 +25834,14 @@ dw
 LJ
 iz
 gr
-gr
+wq
 Iz
 Iz
 Iz
 ZV
 ZV
 gr
-nw
+ZV
 gr
 An
 Tu
@@ -25653,7 +26246,7 @@ ZV
 ZV
 nw
 tk
-ZV
+nw
 An
 Tu
 rO
@@ -26055,7 +26648,7 @@ Iz
 ZV
 ZV
 Iz
-ZV
+nw
 ZV
 tk
 An
@@ -26254,7 +26847,7 @@ YA
 iz
 Iz
 Iz
-wq
+tt
 ZV
 ZV
 tk
@@ -26458,7 +27051,7 @@ Iz
 Iz
 ZV
 gr
-gr
+gd
 ZV
 ZV
 gr
@@ -26663,7 +27256,7 @@ yp
 gr
 ZV
 nw
-gr
+tk
 tk
 ZV
 An
@@ -26864,7 +27457,7 @@ HC
 yp
 ZV
 gr
-gr
+tk
 tk
 gr
 ZV
@@ -27687,9 +28280,9 @@ PR
 PR
 PR
 uF
-cu
-hx
-kx
+nC
+An
+ZV
 kx
 kx
 kx
@@ -27891,7 +28484,7 @@ PR
 vI
 nC
 An
-An
+Wk
 hd
 ZV
 SH
@@ -28093,7 +28686,7 @@ Uq
 uF
 nC
 vz
-An
+Wk
 gr
 ZV
 ZV
@@ -28295,7 +28888,7 @@ PR
 Uq
 uF
 nC
-An
+Wk
 gr
 gr
 ZV
@@ -28457,11 +29050,11 @@ Xt
 Xt
 ud
 ud
-ud
-ud
-ud
-ud
-ud
+wT
+wT
+wT
+wT
+wT
 ud
 ud
 ud
@@ -28497,7 +29090,7 @@ VE
 ol
 vx
 vx
-Jz
+zR
 ca
 wF
 Tc
@@ -28659,11 +29252,11 @@ bt
 Xt
 ud
 ud
-ud
-ud
-ud
-ud
-ud
+wT
+dg
+dg
+pr
+wT
 ud
 ud
 ud
@@ -28698,7 +29291,7 @@ VE
 VE
 cm
 vx
-Jz
+GL
 Jz
 Jz
 Jz
@@ -28861,11 +29454,11 @@ Xt
 kw
 ud
 ud
-ud
-ud
-ud
-ud
-ud
+wT
+dg
+dg
+pr
+wT
 ud
 ud
 ud
@@ -28890,17 +29483,17 @@ MS
 MS
 MS
 MS
-kk
-kk
-Jz
-Jz
-vx
-xk
-VE
-VE
-nD
-vx
-Jz
+bP
+bP
+aN
+aN
+dF
+sW
+Bd
+Bd
+Sd
+dF
+zR
 Jz
 Jz
 vx
@@ -29063,13 +29656,13 @@ kw
 kw
 ud
 ud
-ud
-ud
-ud
-ud
-ud
-ud
-ud
+wT
+Dn
+dg
+tC
+wT
+wT
+wT
 ud
 ud
 ud
@@ -29265,13 +29858,13 @@ yV
 Xt
 ud
 ud
-ud
-ud
-ud
-ud
-ud
-ud
-ud
+wT
+tA
+dg
+dg
+ja
+Hb
+wT
 ud
 ud
 ud
@@ -29467,13 +30060,13 @@ Xt
 kw
 Fw
 ud
-ud
-ud
-ud
-ud
-ud
-ud
-ud
+wT
+FW
+dg
+dg
+dg
+tZ
+wT
 ud
 ud
 ud
@@ -29669,13 +30262,13 @@ kw
 Fw
 Fw
 ud
-ud
-ud
-ud
-ud
-ud
-ud
-ud
+wT
+TX
+dg
+dg
+dg
+JL
+wT
 ud
 ud
 ud
@@ -29871,13 +30464,13 @@ Fw
 Fw
 Xt
 Xt
-ud
-ud
-ud
-ud
-ud
-ud
-ud
+wT
+wT
+Gz
+Vj
+Tg
+wT
+wT
 ud
 ud
 ud
@@ -30074,11 +30667,11 @@ Xt
 zd
 kw
 ud
-ud
-ud
-ud
-ud
-ud
+wT
+wT
+wT
+wT
+wT
 ud
 ud
 ud
@@ -39082,7 +39675,7 @@ sq
 mR
 uT
 uT
-NJ
+WB
 NJ
 uT
 NJ
@@ -39284,7 +39877,7 @@ PM
 NJ
 NJ
 NJ
-NJ
+WB
 PM
 NJ
 uT
@@ -39486,7 +40079,7 @@ NJ
 NJ
 Ck
 IS
-Ck
+wz
 Ck
 NJ
 uT
@@ -49464,18 +50057,18 @@ Mi
 Mi
 Mi
 Mi
+hD
+hD
+hD
 Mi
 Mi
 Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+hD
+hD
+hD
 Mi
 Mi
 Mi
@@ -49667,6 +50260,7 @@ Mi
 Mi
 Mi
 Mi
+hD
 Mi
 Mi
 Mi
@@ -49675,8 +50269,7 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
+hD
 Mi
 Mi
 Mi
@@ -51081,6 +51674,7 @@ JD
 JD
 JD
 JD
+mU
 JD
 JD
 JD
@@ -51089,8 +51683,7 @@ JD
 JD
 JD
 JD
-JD
-JD
+mU
 JD
 JD
 JD
@@ -51283,6 +51876,7 @@ JD
 JD
 JD
 JD
+mU
 JD
 JD
 JD
@@ -51291,8 +51885,7 @@ JD
 JD
 JD
 JD
-JD
-JD
+mU
 JD
 JD
 JD
@@ -51485,6 +52078,7 @@ JD
 JD
 JD
 JD
+mU
 JD
 JD
 JD
@@ -51493,8 +52087,7 @@ JD
 JD
 JD
 JD
-JD
-JD
+mU
 JD
 JD
 JD
@@ -51686,18 +52279,18 @@ JD
 JD
 JD
 JD
+mU
+mU
+mU
 JD
 JD
 JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
-JD
-JD
+mU
+mU
+mU
 JD
 JD
 JD
@@ -52091,7 +52684,7 @@ JD
 XR
 Bm
 GG
-xy
+ko
 pq
 JD
 JD
@@ -53301,8 +53894,8 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
 Tb
 JD
@@ -53503,7 +54096,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -53705,7 +54298,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 Lm
 JD
@@ -53907,7 +54500,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -54109,8 +54702,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 ix
 Ee
 JD
@@ -54311,10 +54904,10 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
 HF
-sd
+HF
+Se
 JD
 JD
 JD
@@ -54513,8 +55106,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 ix
 pn
 JD
@@ -54715,7 +55308,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -54917,7 +55510,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 Kx
 Qd
@@ -55119,7 +55712,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 Lm
 JD
@@ -55321,8 +55914,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 HF
 ya
 JD
@@ -55523,10 +56116,10 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
-sd
+Se
 JD
 JD
 JD
@@ -55725,8 +56318,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 HF
 Fe
 JD
@@ -55927,7 +56520,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -56129,7 +56722,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -56331,7 +56924,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 RA
 JD
@@ -56533,8 +57126,8 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
 ya
 JD
@@ -56735,10 +57328,10 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 ix
-sd
+Se
 JD
 JD
 JD
@@ -56937,8 +57530,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 HF
 pn
 JD
@@ -57139,7 +57732,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -57341,7 +57934,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -57543,7 +58136,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 Lm
 JD
@@ -57745,8 +58338,8 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
 SA
 JD
@@ -59361,8 +59954,8 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
 Tb
 JD
@@ -59563,7 +60156,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -59765,7 +60358,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 Lm
 JD
@@ -59967,7 +60560,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -60169,8 +60762,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 ix
 Ee
 JD
@@ -60371,10 +60964,10 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
 HF
-sd
+HF
+Se
 JD
 JD
 JD
@@ -60573,8 +61166,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 ix
 pn
 JD
@@ -60775,7 +61368,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -60977,7 +61570,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -61179,7 +61772,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 Lm
 JD
@@ -61381,8 +61974,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 HF
 ya
 JD
@@ -61583,10 +62176,10 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
-sd
+Se
 JD
 JD
 Qg
@@ -61785,8 +62378,8 @@ JD
 JD
 JD
 JD
-JD
-eX
+OI
+HF
 HF
 Fe
 JD
@@ -61987,7 +62580,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -62189,7 +62782,7 @@ JD
 JD
 JD
 JD
-JD
+Se
 ix
 RA
 JD
@@ -62391,12 +62984,12 @@ JD
 JD
 JD
 JD
-JD
+Se
 HF
 RA
 JD
 Jk
-sd
+Se
 SP
 JD
 JD
@@ -62593,8 +63186,8 @@ JD
 JD
 JD
 JD
-JD
-VC
+OI
+ix
 HF
 ef
 ix
@@ -62795,14 +63388,14 @@ JD
 JD
 JD
 JD
-JD
-qh
-Co
-Co
+OI
 HF
 ix
 ix
-Co
+HF
+ix
+ix
+ix
 ix
 HF
 HF
@@ -62997,15 +63590,15 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-sd
+OI
+OI
+OI
+OI
+Se
+Se
+Se
+OI
+Se
 DC
 Xb
 DC
@@ -63410,13 +64003,13 @@ JD
 JD
 JD
 VB
-Nx
+EH
 PG
 yo
 yo
 CS
 Di
-Cs
+Yw
 VB
 JD
 JD
@@ -63820,7 +64413,7 @@ yo
 yo
 yo
 PG
-QN
+Dj
 VB
 JD
 JD
@@ -64030,11 +64623,11 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
-JD
+UL
+Fp
+Fp
+Fp
+UL
 JD
 JD
 JD
@@ -64232,19 +64825,19 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
+Fp
+LC
+LC
+Fp
+UL
+pg
+pg
+Bb
+Bb
+Bb
+Bb
+pg
+pg
 JD
 JD
 JD
@@ -64434,19 +65027,19 @@ JD
 JD
 JD
 JD
+Fp
+LC
+LC
+Fp
 JD
-JD
-JD
-JD
-JD
-OO
-jA
-KX
-jA
+jd
+IH
+xH
 tM
 tM
-KX
-DI
+tM
+Kn
+ho
 JD
 JD
 JD
@@ -64636,10 +65229,10 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
+Fp
+LC
+LC
+Fp
 JD
 Ov
 xH
@@ -64838,19 +65431,19 @@ JD
 JD
 JD
 JD
+Fp
+LC
+LC
+Fp
 JD
-JD
-JD
-JD
-JD
-Pc
-np
+jd
+rv
 xH
-np
+xH
 tM
 tM
-np
-Yj
+rv
+ho
 JD
 JD
 JD
@@ -65040,19 +65633,19 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
-JD
+Fp
+LC
+LC
+Fp
+UL
+pg
+pg
+Bb
+Bb
+Bb
+Bb
+pg
+pg
 JD
 JD
 JD
@@ -65242,11 +65835,11 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
-JD
+UL
+Fp
+Fp
+Fp
+UL
 JD
 JD
 JD
@@ -66843,7 +67436,7 @@ JD
 UD
 ZV
 gr
-ZV
+nw
 Ab
 ZV
 Iz
@@ -67044,12 +67637,12 @@ JD
 JD
 ie
 ZV
-gr
+tk
 nw
 Iz
 Iz
 Iz
-Df
+KH
 DC
 DC
 DC
@@ -67246,7 +67839,7 @@ JD
 UD
 ZV
 gr
-ZV
+SO
 Iz
 Iz
 Iz
@@ -67259,7 +67852,7 @@ Df
 gr
 Df
 Bp
-xr
+dm
 tg
 gr
 iv
@@ -67451,7 +68044,7 @@ Iz
 Iz
 Iz
 Iz
-ZV
+Iz
 Iz
 Iz
 gr
@@ -67461,8 +68054,8 @@ ZV
 gr
 ZV
 ZV
-ZV
-ZV
+nw
+nw
 gr
 gr
 DM
@@ -67652,8 +68245,8 @@ gr
 Iz
 Iz
 Iz
-ZV
-ZV
+Iz
+Iz
 Iz
 Iz
 Iz
@@ -67664,7 +68257,7 @@ gr
 ZV
 gr
 gr
-ZV
+nw
 ZV
 ZV
 ZV
@@ -67854,10 +68447,10 @@ Iz
 Iz
 Iz
 Iz
-gr
-ZV
-ZV
 Iz
+xq
+Iz
+xq
 Iz
 Iz
 gr
@@ -68053,13 +68646,13 @@ JD
 ie
 Iz
 Iz
-Iz
-Iz
-Iz
-gr
-nw
-gr
-gr
+yS
+yS
+fk
+fk
+yS
+Xg
+yS
 Iz
 Iz
 Iz
@@ -68067,7 +68660,7 @@ rF
 ZV
 ZV
 ZV
-nw
+ZV
 HC
 HC
 HC
@@ -68255,20 +68848,20 @@ UD
 ZV
 Iz
 Iz
+yS
+Jv
+cB
+NE
+ZF
+il
+yS
+tK
 Iz
-Iz
-ZV
-ZV
-ZV
 gr
-Iz
-Iz
-Iz
-gr
 ZV
 ZV
 ZV
-nw
+ZV
 yp
 HC
 HC
@@ -68456,14 +69049,14 @@ JD
 ie
 Iz
 Iz
-Iz
-Iz
-Iz
-ZV
-gr
-gr
-gr
-Iz
+yS
+yS
+fx
+KW
+KW
+Gw
+Gw
+yS
 Iz
 rF
 ZV
@@ -68658,19 +69251,19 @@ UD
 ZV
 Iz
 Iz
+fk
+TB
+Pv
+Gw
+BD
+kZ
+KW
+fk
 Iz
-Iz
-Iz
-ZV
-ZV
-gr
-ZV
-Iz
-Iz
 ZV
 ZV
 ZV
-nw
+ZV
 yp
 HC
 HC
@@ -68860,17 +69453,17 @@ ie
 Iz
 Iz
 Iz
+yS
+Jg
+IQ
+KW
+wW
+vU
+Gw
+yS
 Iz
-Iz
-Iz
-gr
-gr
 ZV
-nw
-Iz
-Iz
 ZV
-nw
 ZV
 yp
 HC
@@ -69062,14 +69655,14 @@ ie
 Iz
 Iz
 Iz
-Iz
-Iz
-Iz
-gr
-ZV
-gr
-Iz
-Iz
+yS
+zp
+pr
+il
+pR
+lN
+Gw
+yS
 Iz
 ZV
 ZV
@@ -69264,15 +69857,15 @@ ie
 Iz
 Iz
 Iz
-ZV
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
+yS
+zp
+aa
+il
+nJ
+uK
+KW
+yS
+tK
 gr
 ZV
 yp
@@ -69466,14 +70059,14 @@ ie
 Iz
 Iz
 Iz
-tk
-ZV
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
+yS
+YX
+sy
+KW
+oH
+oH
+Gw
+yS
 Iz
 Iz
 ZV
@@ -69668,14 +70261,14 @@ zx
 ZV
 Iz
 Iz
-nw
-nw
-ZV
-ZV
-gr
-Iz
-Iz
-Iz
+fk
+US
+Xn
+KW
+KW
+Xn
+Gw
+fk
 Iz
 Iz
 Iz
@@ -69870,14 +70463,14 @@ JD
 ie
 Iz
 Iz
-Iz
-nw
-gr
-ZV
-gr
-nw
-ZV
-ZV
+yS
+bZ
+La
+Xg
+Sa
+Sa
+bZ
+yS
 Iz
 Iz
 Iz
@@ -70072,15 +70665,15 @@ JD
 zx
 Iz
 Iz
+yS
+yS
+Jt
+il
+AP
+il
+il
+yS
 Iz
-Iz
-gr
-ZV
-tk
-gr
-nw
-gr
-ZV
 Iz
 Iz
 Iz
@@ -70275,14 +70868,14 @@ JD
 ie
 Iz
 Iz
-Iz
-gr
-gr
-ZV
-gr
-nw
-tk
-Iz
+yS
+kh
+kh
+PP
+PP
+TY
+yS
+tK
 Iz
 Iz
 Iz
@@ -70477,19 +71070,19 @@ JD
 zx
 Iz
 Iz
+yS
+yS
+yS
+yS
+yS
+yS
+yS
 Iz
-ZV
-gr
-gr
+Iz
+Iz
+Iz
+Iz
 nw
-gr
-tk
-Iz
-Iz
-Iz
-Iz
-Iz
-ZV
 gr
 yp
 HC
@@ -70680,20 +71273,20 @@ JD
 ie
 Iz
 Iz
-ZV
-ZV
-nw
+ZJ
+Iz
+Iz
+Iz
+ZJ
+Iz
+Iz
+Iz
+Iz
+Iz
+Iz
 nw
 tk
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
-ZV
-gr
-ZV
+nw
 HC
 HC
 HC
@@ -70882,24 +71475,24 @@ JD
 ie
 Iz
 Iz
+Iz
+Iz
+Iz
+Iz
+Iz
+Iz
+Iz
+Iz
 ZV
-nw
+kx
+kx
 gr
 tk
-gr
-Iz
-Iz
-Iz
-ZV
-kx
-kx
-gr
-gr
-ZV
-ZV
-gr
-ZV
-ZV
+nw
+nw
+tk
+nw
+nw
 gr
 ZV
 Yt
@@ -71085,9 +71678,9 @@ ie
 Iz
 Iz
 Iz
-gr
-ZV
-ZV
+Iz
+Iz
+Iz
 Iz
 Iz
 Iz
@@ -71097,9 +71690,9 @@ JD
 JD
 xl
 kx
-gr
-gr
-gr
+tk
+tk
+tk
 tk
 tk
 gr
@@ -71288,7 +71881,7 @@ Iz
 Iz
 Iz
 Iz
-ZV
+Iz
 Iz
 Iz
 Iz
@@ -71300,7 +71893,7 @@ JD
 JD
 JD
 xl
-ZV
+nw
 tk
 tk
 gr

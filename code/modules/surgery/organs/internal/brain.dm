@@ -119,6 +119,8 @@
 	. = ..()
 	if(!.)
 		return
+	if(self_healing_effect && owner.get_chem_effect(self_healing_effect))
+		return TRUE
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
 		return FALSE
@@ -307,40 +309,50 @@
 		else
 			. += "<span class='info'>This one is completely devoid of life.</span>"
 
-/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user, list/modifiers)
-	if(!istype(C))
-		return ..()
+/obj/item/organ/brain/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
+	if(!iscarbon(interacting_with))
+		return ..() // Can't eat
+
+	var/mob/living/carbon/C = interacting_with
 
 	add_fingerprint(user)
 
 	if(user.zone_selected != BODY_ZONE_HEAD)
-		return ..()
+		return ITEM_INTERACT_BLOCKING
 
 	var/target_has_brain = C.getorgan(/obj/item/organ/brain)
 
 	if(!target_has_brain && C.is_eyes_covered())
 		to_chat(user, "<span class='warning'>You're going to need to remove [C.p_their()] head cover first!</span>")
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	if(!target_has_brain)
-		if(!C.get_bodypart(BODY_ZONE_HEAD) || !user.temporarilyRemoveItemFromInventory(src))
-			return
-		var/msg = "[C] has [src] inserted into [C.p_their()] head by [user]."
-		if(C == user)
-			msg = "[user] inserts [src] into [user.p_their()] head!"
+	if(target_has_brain)
+		return ITEM_INTERACT_BLOCKING
 
-		C.visible_message("<span class='danger'>[msg]</span>",
-						"<span class='danger'>[msg]</span>")
+	if(!C.get_bodypart(BODY_ZONE_HEAD) || !user.temporarilyRemoveItemFromInventory(src))
+		return ITEM_INTERACT_BLOCKING
 
-		if(C != user)
-			to_chat(C, "<span class='notice'>[user] inserts [src] into your head.</span>")
-			to_chat(user, "<span class='notice'>I insert [src] into [C]'s head.</span>")
-		else
-			to_chat(user, "<span class='notice'>I insert [src] into your head.</span>")
+	var/msg = "[C] has [src] inserted into [C.p_their()] head by [user]."
+	if(C == user)
+		msg = "[user] inserts [src] into [user.p_their()] head!"
 
-		Insert(C)
+	C.visible_message(
+		"<span class='danger'>[msg]</span>",
+		"<span class='danger'>[msg]</span>"
+	)
+
+	if(C != user)
+		to_chat(C, "<span class='notice'>[user] inserts [src] into your head.</span>")
+		to_chat(user, "<span class='notice'>I insert [src] into [C]'s head.</span>")
 	else
-		..()
+		to_chat(user, "<span class='notice'>I insert [src] into your head.</span>"	)
+
+	Insert(C)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/organ/brain/Destroy()
 	if(brainmob)
