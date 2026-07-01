@@ -29,7 +29,7 @@
 
 /obj/item/organ/artery/chest
 	name = "torso arteries"
-	desc = "These run through all torso, supplying organs and flesh with blood."
+	desc = "These run throughout the torso, supplying organs and flesh with blood."
 	tear_damage_multiplier = 0.25 // it is deadly, but one hit won't not kill you on spot
 	blood_flow = ARTERIAL_BLOOD_FLOW * 2
 	zone = BODY_ZONE_CHEST
