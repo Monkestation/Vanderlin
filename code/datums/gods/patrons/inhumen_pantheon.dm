@@ -1,20 +1,24 @@
 /datum/patron/inhumen
 	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
-
+	var/associated_psycross = /obj/item/clothing/neck/psycross/zizo //inverted psycross
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",
 		"THE TEN ARE DECEIVERS!"
 	)
 
-/datum/patron/inhumen/can_pray(mob/living/follower)
+/datum/patron/inhumen/can_pray(mob/living/carbon/human/follower)
 	for(var/obj/structure/fluff/psycross/cross in view(7, get_turf(follower)))
-		if(cross.divine && !cross.obj_broken)
-			to_chat(follower, span_danger("That accursed cross won't let me commune with the Forbidden One!"))
-			return FALSE
+		if(!cross.divine && !cross.obj_broken)
+			return TRUE
 
-	return TRUE
+	if(is_type_in_list(follower.wear_wrists, associated_psycross) || is_type_in_list(follower.wear_neck, associated_psycross) || is_type_in_list(follower.get_active_held_item(), associated_psycross))
+		return TRUE
+
+
+	to_chat(follower, span_danger("I need an amulet of my patron, or a nearby Inverted Cross, for my prayers to be heard..."))
+	return FALSE
 
 /* ----------------- */
 
@@ -39,6 +43,11 @@
 		/mob/living/carbon/human/proc/praise,
 	)
 
+	associated_psycross = list(
+	/obj/item/clothing/neck/psycross/zizo,
+	/obj/item/clothing/neck/psycross/zizo/wood
+	)
+
 /datum/patron/inhumen/graggar
 	name = GRAGGAR
 	domain = "Ascended God, the Dark Sini-Star of Unnatural Beasts, Unsated Consumption, and Unbridled Hatred"
@@ -55,6 +64,11 @@
 		"GRAGGAR BRINGS UNHOLY DESTRUCTION!"
 	)
 	storyteller = /datum/storyteller/graggar
+
+	associated_psycross = list(
+	/obj/item/clothing/neck/psycross/graggar,
+	/obj/item/clothing/neck/psycross/graggar/wood
+	)
 
 /datum/patron/inhumen/matthios
 	name = MATTHIOS
@@ -73,6 +87,11 @@
 	)
 	storyteller = /datum/storyteller/matthios
 
+	associated_psycross = list(
+	/obj/item/clothing/neck/psycross/matthios,
+	/obj/item/clothing/neck/psycross/matthios/wood
+	)
+
 /datum/patron/inhumen/baotha
 	name = BAOTHA
 	domain = "Goddess of Drugs, Self-Preservation, and Remorseless Joy"	//Bright-dyed hair falls within 'remorseless joy.' Joy for one's self at expense of the setting. Same for her music taste.
@@ -89,6 +108,11 @@
 		"BAOTHA'S WHISPERS CALM MY MIND!",
 	)
 	storyteller = /datum/storyteller/baotha
+
+	associated_psycross = list(
+	/obj/item/clothing/neck/psycross/baotha,
+	/obj/item/clothing/neck/psycross/baotha/wood
+	)
 
 /// Maniac Patron - Their mind is broken by secrets of Zizo/Graggar combined. They quite possibly know the reality of what happens outside the planet. They may think this is all a game. They are clearly insane.
 /datum/patron/inhumen/graggar_zizo

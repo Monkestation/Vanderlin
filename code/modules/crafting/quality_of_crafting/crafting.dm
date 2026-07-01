@@ -521,18 +521,243 @@
 	starting_atom  = /obj/item/natural/fibers
 	output = /obj/item/broom
 
-/datum/repeatable_crafting_recipe/crafting/wpsycross
-	name = "wooden psycross"
+/datum/repeatable_crafting_recipe/crafting/unfinishedamulet
+	name = "unfinished amulet"
 	requirements = list(
-		/obj/item/grown/log/tree/small= 1,
+		/obj/item/grown/log/tree/stick= 3,
 	)
 	tool_usage = list(
 		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
 	)
-	attacked_atom = /obj/item/grown/log/tree/small
+	attacked_atom = /obj/item/grown/log/tree/stick
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/unfinished
+	craft_time = 5 SECONDS
+
+
+/datum/repeatable_crafting_recipe/crafting/wpsycross
+	name = "wooden psycross"
+	requirements = list(
+		/obj/item/clothing/neck/psycross= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
 	output = /obj/item/clothing/neck/psycross
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wdivine
+	name = "wooden amulet of the ten"
+	requirements = list(
+		/obj/item/clothing/neck/psycross= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wastrata
+	name = "wooden amulet of Astrata"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/astrata
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wnoc
+	name = "wooden amulet of Noc"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/noc
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wdendor
+	name = "wooden amulet of Dendor"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/dendor
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wabyssor
+	name = "wooden amulet of Abyssor"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/abyssor
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wnecra
+	name = "wooden amulet of Necra"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/necra
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wravox
+	name = "wooden amulet of Ravox"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/ravox
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wxylix
+	name = "wooden amulet of Xylix"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/xylix
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/weora
+	name = "wooden amulet of Eora"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/eora
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wpestra
+	name = "wooden amulet of Pestra"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/pestra
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wmalum
+	name = "wooden amulet of Malum"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/divine/malum
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wzizo
+	name = "wooden amulet of Zizo"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/zizo/wood
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wgraggar
+	name = "wooden amulet of Graggar"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/graggar/wood
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wboatha
+	name = "wooden amulet of Baotha"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/baotha/wood
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/wmatthios
+	name = "wooden amulet of Matthios"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/matthios/wood
 	craft_time = 5 SECONDS
 
 /datum/repeatable_crafting_recipe/crafting/bone_amulet
