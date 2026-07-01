@@ -4,6 +4,7 @@
 	typepath = /datum/round_event/necra_requiem
 	weight = 8
 	earliest_start = 15 MINUTES
+	latest_start = 90 MINUTES
 	max_occurrences = 2
 	min_players = 20
 	dedicated_storytellers = list(/datum/storyteller/necra)

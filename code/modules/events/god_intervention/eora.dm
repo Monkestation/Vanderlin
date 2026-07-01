@@ -4,6 +4,7 @@
 	typepath = /datum/round_event/eora_matchmaking
 	weight = 8
 	earliest_start = 15 MINUTES
+	latest_start = 1 HOURS
 	max_occurrences = 1
 	min_players = 30
 	dedicated_storytellers = list(/datum/storyteller/eora)
