@@ -106,7 +106,7 @@
 		var/list/custom_data = print_custom_descriptor_customization(i)
 		if(custom_data)
 			dat += custom_data
-
+	dat +=  "<br><a href='?_src_=prefs;preference=gossip;task=gossip'>Rivals, Gossip & Rumors</a>"
 	dat += "<br><br><center>Descriptors can vary based on gender<br>Some don't appear if you don't match a requirement<center>"
 	return dat
 

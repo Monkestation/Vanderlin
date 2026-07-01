@@ -272,11 +272,11 @@
 	if(affecting.heal_damage(brute = amount_healed, burn = amount_healed))
 		C.update_damage_overlays()
 
-	for(var/obj/item/organ/possible_organ in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
-		possible_organ.applyOrganDamage(-amount_healed * wound_modifier	)
-	for(var/obj/item/organ/possible_organ in affecting.getorganlist(/obj/item/organ))
+	for(var/obj/item/organ/possible_organ as anything in affecting.getorganlist(/obj/item/organ))
+		if(ORGAN_SLOT_ARTERY in possible_organ.organ_efficiency)
+			possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
+			continue
 		if(possible_organ.scarred_below(40))
-			to_chat(owner, span_danger("[cast_on]'s \the [possible_organ] is too scarred for my powers."))
 			continue
 		if(possible_organ.organ_flags & ORGAN_DESTROYED)
 			possible_organ.organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.

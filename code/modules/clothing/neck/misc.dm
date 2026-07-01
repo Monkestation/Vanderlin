@@ -462,10 +462,9 @@
 	. = ..()
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
-	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
-		return
+/obj/item/clothing/neck/gorget/explosive/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/collar_detonator))
+		return NONE
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
@@ -473,6 +472,7 @@
 	else
 		to_chat(user, "Collar is already unlocked!")
 
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
@@ -550,17 +550,20 @@
 	grid_height = 32
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!iscarbon(target))
-		return
+/obj/item/collar_detonator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!iscarbon(interacting_with))
+		return NONE
 
-	var/mob/living/carbon/to_bomb = target
+	var/mob/living/carbon/to_bomb = interacting_with
+
 	var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
+
 	if(istype(collar))
 		collar.prepare_to_go_boom()
 	else
 		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"
@@ -665,19 +668,23 @@
 	. = ..()
 	. += span_info("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
-	. = ..()
-	var/total_sellprice = 0
-	if(isturf(A))
-		for(var/obj/item/I in A.contents)
+/obj/item/clothing/neck/mercator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isturf(interacting_with))
+		var/total_sellprice = 0
+		for(var/obj/item/I in interacting_with)
 			total_sellprice += I.sellprice
+
 		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
-	else if(istype(A, /obj/item))
-		var/obj/item/I = A
-		total_sellprice += I.sellprice
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(interacting_with, /obj/item))
+		var/obj/item/I = interacting_with
+		var/total_sellprice = I.sellprice
 		for(var/obj/item/item in I.contents)
 			total_sellprice += item.sellprice
+
 		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"

@@ -30,7 +30,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_MEDIUMARMOR, // temp until someone makes heavy armor training work
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,

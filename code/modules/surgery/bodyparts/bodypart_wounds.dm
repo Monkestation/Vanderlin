@@ -122,8 +122,10 @@
 /obj/item/bodypart/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
 	if(!CAN_HAVE_BLOOD(owner))
 		return 0
+
 	if(!bleeds)
 		return 0
+
 	var/bleed_rate = 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += wound.bleed_rate
@@ -135,14 +137,23 @@
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
 		bleed_rate += embedded.embedding.embedded_bloodloss
+
 	if(!ignore_is_bleeding && bandage)
 		bleed_rate *= bandage?.bandage_effectiveness
+
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
+
+	// backup bleed rate if you max out on burn damage
+	if((burn_dam / max_damage) >= 0.9)
+		bleed_rate += BLEED_DAMAGE_RATIO / 5
+
+	var/our_state = return_surgical_state()
+	if(our_state & SURGERY_VESSELS_CLAMPED)
+		bleed_rate /= 2
+
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
-	switch(burn_dam/max_damage) // backup bleed rate if you max out on burn damage
-		if(0.9 to INFINITY)
-			bleed_rate += BLEED_DAMAGE_RATIO / 5
+
 	return bleed_rate
 
 /obj/item/bodypart/proc/skeletonized_mod(bclass)
@@ -459,47 +470,3 @@
 	if(owner)
 		update_disabled()
 	return TRUE
-
-/// Returns surgery flags applicable to this bodypart
-/obj/item/bodypart/proc/get_surgery_flags()
-	var/returned_flags = NONE
-	if(can_bloody_wound())
-		returned_flags |= SURGERY_BLOODY
-
-	if(get_incision())
-		returned_flags |= SURGERY_INCISED
-
-	var/static/list/retracting_behaviors = list(
-		TOOL_RETRACTOR,
-		TOOL_CROWBAR,
-		TOOL_IMPROVISED_RETRACTOR,
-	)
-	var/static/list/clamping_behaviors = list(
-		TOOL_HEMOSTAT,
-		TOOL_WIRECUTTER,
-		TOOL_IMPROVISED_HEMOSTAT,
-	)
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
-			returned_flags |= SURGERY_RETRACTED
-		if((embedded.tool_behaviour in clamping_behaviors) || embedded.embedding?.clamp_limbs)
-			returned_flags |= SURGERY_CLAMPED
-	if(has_wound(/datum/wound/dislocation))
-		returned_flags |= SURGERY_DISLOCATED
-	if(has_wound(/datum/wound/fracture))
-		returned_flags |= SURGERY_BROKEN
-	if(skeletonized)
-		returned_flags |= SURGERY_INCISED //ehh... we have access to whatever organ is there
-	return returned_flags
-
-/obj/item/bodypart/proc/is_retracted()
-	var/static/list/retracting_behaviors = list(
-		TOOL_RETRACTOR,
-		TOOL_CROWBAR,
-		TOOL_IMPROVISED_RETRACTOR,
-	)
-
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
-			return TRUE
-	return FALSE

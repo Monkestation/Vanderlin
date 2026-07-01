@@ -51,7 +51,7 @@
 /datum/job/advclass/mercenary/grenzelhoftgun/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list("Musket", "Blunderbuss")
-	var/weapon_choice = tgui_input_list(player_client,"CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.", weapons)
+	var/weapon_choice = tgui_input_list(player_client, "CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.", weapons)
 	switch(weapon_choice)
 		if("Musket")
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/powder/musket, ITEM_SLOT_BACK_R, TRUE)

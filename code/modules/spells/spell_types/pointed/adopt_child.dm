@@ -33,7 +33,7 @@
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
-	if(cast_on.family_datum && length(cast_on.family_member_datum?.parents))
+	if(cast_on.family_datum && cast_on.family_member_datum?.has_parents())
 		to_chat(owner, span_warning("This child is not an orphan!"))
 		return . | SPELL_CANCEL_CAST
 
@@ -61,23 +61,25 @@
 	var/datum/heritage/family = adopter.family_datum
 	if(!family)
 		family = new /datum/heritage(owner)
-		SSfamilytree.families += family
 
-	var/datum/family_member/parent_member = family.GetFamilyMember(owner)
-	if(!parent_member)
-		parent_member = family.CreateFamilyMember(owner)
+	var/datum/family_member/parent1 = family.GetFamilyMember(owner)
+	if(!parent1)
+		parent1 = family.CreateFamilyMember(owner)
 
-	var/datum/family_member/child_member = family.CreateFamilyMember(cast_on)
-	child_member.AddParent(parent_member)
-	child_member.adoption_status = TRUE
-
+	var/datum/family_member/parent2 = null
 	if(adopter.spouse_mob)
-		var/datum/family_member/spouse_member = family.GetFamilyMember(adopter.spouse_mob)
-		if(!spouse_member)
-			spouse_member = family.CreateFamilyMember(adopter.spouse_mob)
-		child_member.AddParent(spouse_member)
+		parent2 = family.GetFamilyMember(adopter.spouse_mob)
+		if(!parent2)
+			parent2 = family.CreateFamilyMember(adopter.spouse_mob)
+
+	var/datum/family_member/child_member = family.AddToFamily(cast_on, parent1, parent2, adopt = TRUE)
+
+	if(!child_member)
+		to_chat(owner, span_warning("Something went wrong with the ritual; adoption failed."))
+		return FALSE
 
 	to_chat(owner, span_love("You have adopted [cast_on.real_name] as your child with Eora's blessing!"))
 	to_chat(cast_on, span_love("You have been adopted by [owner.real_name]!"))
 
 	SEND_SIGNAL(owner, COMSIG_ORPHAN_ADOPTED, cast_on)
+	return TRUE

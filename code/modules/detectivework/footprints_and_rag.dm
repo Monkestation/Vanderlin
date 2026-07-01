@@ -20,12 +20,9 @@
 	user.visible_message("<span class='suicide'>[user] is smothering [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (OXYLOSS)
 
-/obj/item/reagent_containers/glass/rag/afterattack(atom/A, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
-	if(iscarbon(A) && A.reagents && reagents.total_volume)
-		var/mob/living/carbon/C = A
+/obj/item/reagent_containers/glass/rag/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(iscarbon(interacting_with) && interacting_with.reagents && reagents.total_volume)
+		var/mob/living/carbon/C = interacting_with
 		var/reagentlist = pretty_string_from_reagent_list(reagents)
 		var/log_object = "containing [reagentlist]"
 		if(user.used_intent.type == INTENT_HARM && !C.is_mouth_covered())
@@ -37,9 +34,11 @@
 			reagents.clear_reagents()
 			C.visible_message("<span class='notice'>[user] has touched \the [C] with \the [src].</span>")
 			log_combat(user, C, "touched", src, log_object)
+		return ITEM_INTERACT_SUCCESS
 
-	else if(istype(A) && (src in user))
-		user.visible_message("<span class='notice'>[user] starts to wipe down [A] with [src]!</span>", "<span class='notice'>I start to wipe down [A] with [src]...</span>")
-		if(do_after(user, 3 SECONDS, A))
-			user.visible_message("<span class='notice'>[user] finishes wiping off [A]!</span>", "<span class='notice'>I finish wiping off [A].</span>")
-			SEND_SIGNAL(A, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_SCRUB)
+	else if(istype(interacting_with) && (src in user))
+		user.visible_message("<span class='notice'>[user] starts to wipe down [interacting_with] with [src]!</span>", "<span class='notice'>I start to wipe down [interacting_with] with [src]...</span>")
+		if(do_after(user, 3 SECONDS, interacting_with))
+			user.visible_message("<span class='notice'>[user] finishes wiping off [interacting_with]!</span>", "<span class='notice'>I finish wiping off [interacting_with].</span>")
+			SEND_SIGNAL(interacting_with, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_SCRUB)
+		return ITEM_INTERACT_SUCCESS

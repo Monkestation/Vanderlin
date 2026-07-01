@@ -47,24 +47,27 @@
 		examine_list += "[src] requires [UNIT_FORM_STRING(required_metal_amount)] of Molten Metal to form.</font>"
 	return examine_list
 
-/obj/item/mould/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	. = ..()
-	interact_with_atom(attacking_item, user, modifiers)
-	return TRUE
+/obj/item/mould/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/mould/proc/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!istype(interacting_with, /obj/item/storage/crucible))
-		return
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = tool
+		tool = tongs.held_item
 
-	try_filling(interacting_with, user)
-	return TRUE
+	if(!istype(tool, /obj/item/storage/crucible))
+		return NONE
 
-/obj/item/mould/proc/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
-	if(cooling)
-		return
+	if(try_filling(user, tool))
+		user.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
+
+	return ITEM_INTERACT_BLOCKING
+
+/obj/item/mould/proc/try_filling(mob/living/user, obj/item/storage/crucible)
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
-	if(!metal)
-		return
+	if(!metal || cooling)
+		return FALSE
 
 	if(!filling_metal)
 		var/list/names = list()
@@ -79,9 +82,10 @@
 		if(length(names) == 1)
 			choice = names[1]
 		else
-			choice = input(user, "What metal to pour?", crucible) in names
+			choice = browser_input_list(user, "What metal to pour?", items = names)
 			if(!choice)
-				return
+				return FALSE
+
 		for(var/datum/material/material as anything in metal.data)
 			if(!ispath(material))
 				continue
@@ -90,10 +94,9 @@
 			filling_metal = material
 			break
 
-	if(cooling)
-		return
 	if(!filling_metal || !(filling_metal in metal.data))
 		return
+
 	var/metal_amount = metal.data[filling_metal]
 	if(metal_amount > required_metal_amount - fufilled_metal)
 		metal_amount = required_metal_amount - fufilled_metal
@@ -107,6 +110,7 @@
 	metal.data[filling_metal] -= metal_amount
 	if(!metal.data[filling_metal])
 		metal.data -= filling_metal
+
 	crucible.reagents.remove_reagent(/datum/reagent/molten_metal, metal_amount)
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
@@ -135,6 +139,8 @@
 
 	icon_state = "[base_icon_state]_mould"
 	fill_icon_state = "[base_icon_state]_filling"
+
+	return TRUE
 
 /obj/item/mould/update_overlays()
 	. = ..()
@@ -262,11 +268,17 @@
 
 	if(!moulded_recipe)
 		set_recipe(interacting_with, user)
-	else if(istype(interacting_with, /obj/item/storage/crucible))
-		try_filling(interacting_with, user)
 	else
-		try_adding(interacting_with, user)
-	return TRUE
+		if(istype(interacting_with, /obj/item/weapon/tongs))
+			var/obj/item/weapon/tongs/tongs = interacting_with
+			if(tongs.held_item)
+				interacting_with = tongs.held_item
+
+		if(istype(interacting_with, /obj/item/storage/crucible))
+			try_filling(interacting_with, user)
+		else
+			try_adding(interacting_with, user)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/mould/customizable/proc/set_recipe(obj/item/attacking_item, mob/living/user)
 	if(moulded_recipe)
