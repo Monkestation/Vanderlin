@@ -199,7 +199,7 @@
 /datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
 	var/static/list/weapons = list("Bow", "Crossbow")
-	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "AIM TRUE.", weapons)
+	var/weapon_choice = browser_input_list(equipped_human, "CHOOSE YOUR WEAPON.", "AIM TRUE.", weapons)
 	switch(weapon_choice)
 		if("Bow")
 			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_L, TRUE)

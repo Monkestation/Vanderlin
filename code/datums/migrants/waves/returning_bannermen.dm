@@ -337,7 +337,7 @@
 /datum/job/migrant/pikeman_bannerman/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
 	var/static/list/weapons = list("Spear", "Bardiche")
-	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "FOR THE CROWN.", weapons)
+	var/weapon_choice = browser_input_list(equipped_human, "CHOOSE YOUR WEAPON.", "FOR THE CROWN.", weapons)
 	switch(weapon_choice)
 		if("Spear")
 			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/polearm/spear, ITEM_SLOT_BACK_R, TRUE)
