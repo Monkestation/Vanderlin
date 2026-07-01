@@ -239,7 +239,6 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 		spillable = TRUE
 	update_appearance(UPDATE_OVERLAYS)
 
-
 /obj/item/reagent_containers/glass/bottle/black
 	name = "wine pot"
 	desc = "A wine pot made of glazed clay."
