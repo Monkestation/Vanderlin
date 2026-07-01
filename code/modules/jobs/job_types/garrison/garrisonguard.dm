@@ -72,7 +72,7 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Sword" = list(/obj/item/weapon/sword/iron, /obj/item/weapon/scabbard/sword), \
+		"Sword" = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
 		"Axe" = /obj/item/weapon/axe/iron, \
 		"Mace" = /obj/item/weapon/mace, \
 		"Flail" = /obj/item/weapon/flail/militia, \
@@ -120,9 +120,9 @@
 	armor = /obj/item/clothing/armor/cuirass/fluted/iron
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1,
 		/obj/item/book/law/small = 1,
 		/obj/item/weapon/mace/cudgel = 1
 	)
@@ -180,11 +180,11 @@
 	armor = /obj/item/clothing/armor/cuirass/fluted/iron
 	backr = /obj/item/weapon/polearm/spear
 	backl = /obj/item/storage/backpack/satchel
+	beltr = /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/weapon/mace/cudgel
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1,
-		/obj/item/book/law/small = 1,
-		/obj/item/weapon/mace/cudgel = 1
+		/obj/item/book/law/small = 1
 	)
 
 /datum/outfit/guardsman/pikeman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
@@ -215,7 +215,7 @@
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/crossbows = 30, // Because why not? If they somehow will get a crossbow, let them use it to the fullest.
 		/datum/attribute/skill/combat/knives = 30, 
-		/datum/attribute/skill/combat/wrestling = 20, 
+		/datum/attribute/skill/combat/wrestling = 30, 
 		/datum/attribute/skill/combat/axesmaces = 20, // Just to be able to non-lethaly detain someone using a cugel
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/swords = 10,
@@ -237,11 +237,11 @@
 	neck = /obj/item/clothing/neck/highcollier/iron
 	backr = /obj/item/gun/ballistic/bow
 	beltr = /obj/item/ammo_holder/quiver/arrows
+	beltl = /obj/item/weapon/mace/cudgel
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
 		/obj/item/flashlight/flare/torch/lantern = 1,
-		/obj/item/book/law/small = 1,
-		/obj/item/weapon/mace/cudgel = 1
+		/obj/item/book/law/small = 1
 	)
 
 /datum/outfit/guardsman/archer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

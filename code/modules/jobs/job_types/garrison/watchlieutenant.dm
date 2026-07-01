@@ -82,9 +82,9 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Flail" = list(/obj/item/weapon/flail, /obj/item/weapon/shield/heater), \
+		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail), \
 		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Sword" = list(/obj/item/weapon/sword/iron, /obj/item/weapon/scabbard/sword, /obj/item/weapon/shield/heater), \
+		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
@@ -102,20 +102,17 @@
 	head = /obj/item/clothing/head/helmet/watchmen/lt
 	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
 	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/lieutenant
 	shirt = /obj/item/clothing/shirt/guard
 	armor = /obj/item/clothing/armor/cuirass/fluted/iron
 	pants = /obj/item/clothing/pants/guard
 	gloves = /obj/item/clothing/gloves/chain/iron
 	neck = /obj/item/clothing/neck/gorget
-	beltl = /obj/item/weapon/mace/bludgeon
 	backl = /obj/item/storage/backpack/satchel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
-		/obj/item/storage/keyring/lieutenant = 1,
-		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1,
-		/obj/item/book/law = 1,
+		/obj/item/book/law/small = 1,
 		/obj/item/weapon/mace/cudgel = 1
 	)
 
