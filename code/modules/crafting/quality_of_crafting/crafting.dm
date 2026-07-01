@@ -525,6 +525,7 @@
 	name = "unfinished amulet"
 	requirements = list(
 		/obj/item/grown/log/tree/stick= 3,
+		/obj/item/natural/fibers = 2,
 	)
 	tool_usage = list(
 		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
