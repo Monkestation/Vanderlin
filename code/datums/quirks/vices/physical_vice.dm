@@ -457,7 +457,7 @@
 /datum/quirk/vice/weak
 	name = "Weak"
 	desc = "You are simply weaker than your akins. You get -1 to Strength and -1 to Constitution."
-	point_value = 2
+	point_value = 1
 
 /datum/quirk/vice/weak/on_spawn()
 	if(!ishuman(owner))
@@ -478,7 +478,7 @@
 /datum/quirk/vice/frail
 	name = "Frail"
 	desc = "Due injury, genetics or just any other reason, you are frailer than other people. You get -1 to Constitution and -1 to Strength."
-	point_value = 2
+	point_value = 1
 
 /datum/quirk/vice/frail/on_spawn()
 	if(!ishuman(owner))
