@@ -56,7 +56,7 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(working_material)
-		if(istype(attacking_item, /obj/item/weapon/chisel))
+		if(istype(tool, /obj/item/weapon/chisel))
 			user.changeNext_move(CLICK_CD_MELEE)
 			handle_item_rename(user, working_material)
 			return

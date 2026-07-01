@@ -182,6 +182,9 @@
 
 /obj/item/bin/proc/quench(obj/item/tool, mob/living/user)
 	var/removereg = /datum/reagent/water
+	if(reagents.has_reagent(/datum/reagent/water/blessed, 50))
+		holy_conversion(tool,user)
+		return TRUE
 	if(!reagents.has_reagent(/datum/reagent/water, 5))
 		removereg = /datum/reagent/water/gross
 		if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
@@ -196,7 +199,7 @@
 
 	return TRUE
 
-/obj/item/bin/proc/holy_conversion(mob/user, obj/item/weapon/tongs/tonger)
+/obj/item/bin/proc/holy_conversion(obj/item/weapon/tongs/tonger, mob/user)
 	reagents.remove_reagent(/datum/reagent/water/blessed, 50)
 	playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 50, FALSE)
 	playsound(src,'sound/magic/bless.ogg', 20, FALSE)
