@@ -14,7 +14,7 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	toolspeed = 2
-	associated_skill = /datum/attribute/skill/labor/mining
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	item_weight = 1.74 KILOGRAMS
@@ -40,7 +40,6 @@
 	force_wielded = DAMAGE_PICK_WIELD - 3
 	toolspeed = 3
 	pickmult = 0.8 // Worse pick
-	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/copper
 	melt_amount = 75
 	item_weight = 1.35 KILOGRAMS
