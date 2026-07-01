@@ -196,8 +196,7 @@
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
-	list_reagents = list(/datum/reagent/consumable/ethanol = 15)
+	enchant(/datum/enchantment/silver) //while I could make it contain ethanol, I want it to be a flask wich can be filled with anything and refilled, so more customization in fluid is good
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
