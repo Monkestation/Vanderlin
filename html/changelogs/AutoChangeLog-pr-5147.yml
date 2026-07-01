@@ -1,7 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - refactor: "Refactored attack chain code, report any issues with clicking on things with other things."
-  - refactor: "Refactored surgery code, report any cases of surgery issues."
-  - rscadd: "Giving is now done by ctrl+shift click or the hotkey \"G\""
-  - rscadd: "Some interactions have been changed that will not be listed here, check the PR page before reporting things."
