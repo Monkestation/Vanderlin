@@ -47,36 +47,37 @@
 	. = ..()
 	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/face/spectacles/monocle/afterattack(atom/assess_target, mob/user, list/modifiers)
+/obj/item/clothing/face/spectacles/monocle/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	. = ..()
 	var/total_sellprice = 0
 
-	if(isturf(assess_target))
-		visible_message(span_notice("[user] evaluates the items on the [assess_target] with their monocle."))
+	if(isturf(interacting_with))
+		visible_message("[user] evaluates the items on the [interacting_with] with their monocle.")
 
-		for(var/obj/item/assessed_item in assess_target.contents)
+		for(var/obj/item/assessed_item in interacting_with)
 			total_sellprice += assessed_item.sellprice
 
-		var/display_price = total_sellprice
 		if(!HAS_TRAIT(user, TRAIT_SEEPRICES))
-			display_price = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
+			total_sellprice = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
 
-		to_chat(user, span_notice("Everything on the ground is worth [display_price] mammons."))
+		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
-	else if(istype(assess_target, /obj/item))
-		visible_message(span_notice("[user] evaluates the [assess_target] with their monocle."))
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] evaluates the [interacting_with] with their monocle.")
 
-		var/obj/item/assessed_item = assess_target
+		var/obj/item/assessed_item = interacting_with
 		total_sellprice += assessed_item.sellprice
 
 		for(var/obj/item/item in assessed_item.contents)
 			total_sellprice += item.sellprice
 
-		var/display_price = total_sellprice
 		if(!HAS_TRAIT(user, TRAIT_SEEPRICES))
-			display_price = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
+			total_sellprice = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
 
-		to_chat(user, span_notice("The item and its contents are worth [display_price] mammons."))
+		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
+
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)
 	if(isliving(crosser) && !obj_broken)
