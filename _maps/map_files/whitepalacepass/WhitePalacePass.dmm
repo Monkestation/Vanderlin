@@ -10884,6 +10884,12 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
+"gzg" = (
+/obj/structure/fake_machine/mail/r{
+	mailtag = "Ministry of Acquisitions"
+	},
+/turf/open/floor/herringbone,
+/area/indoors/town/keep/courtagent)
 "gzQ" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/north,
 /turf/open/floor/ruinedwood/darker,
@@ -18392,6 +18398,11 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep)
+"lin" = (
+/obj/structure/chair/stool,
+/obj/structure/fake_machine/scomm/l,
+/turf/open/floor/tile/masonic/single,
+/area/indoors/town/keep/courtagent)
 "lio" = (
 /obj/structure/table/wood/crafted,
 /obj/item/bin/water/gross{
@@ -24669,6 +24680,10 @@
 /obj/item/key/graveyard,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church)
+"pii" = (
+/obj/structure/fluff/statue/knight/r,
+/turf/open/floor/herringbone,
+/area/under/town/basement)
 "pij" = (
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/concrete,
@@ -29511,6 +29526,10 @@
 /obj/machinery/light/fueledstreet/orange/wall,
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"soR" = (
+/obj/structure/fake_machine/scomm/r,
+/turf/open/floor/herringbone,
+/area/indoors/town/keep/courtagent)
 "soT" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -129408,7 +129427,7 @@ odL
 uus
 saW
 sdh
-ebf
+lin
 lcx
 fGx
 ihR
@@ -131635,8 +131654,8 @@ alY
 dfl
 alY
 dfl
-alY
-alY
+soR
+gzg
 iCP
 saW
 uQw
@@ -132643,7 +132662,7 @@ nJJ
 uus
 mos
 mos
-mos
+pii
 mos
 mos
 uus
@@ -132844,9 +132863,9 @@ nJJ
 nJJ
 uus
 uus
-uus
-uus
-uus
+mos
+mos
+mos
 uus
 uus
 nJJ
@@ -133045,11 +133064,11 @@ uus
 nJJ
 nJJ
 nJJ
-nJJ
-nJJ
-nJJ
-nJJ
-nJJ
+uus
+uus
+uus
+uus
+uus
 nJJ
 nJJ
 nJJ

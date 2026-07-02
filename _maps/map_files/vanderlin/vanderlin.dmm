@@ -1995,6 +1995,10 @@
 /obj/item/weapon/polearm/woodstaff,
 /turf/open/floor/dirt,
 /area/under/cave)
+"aVT" = (
+/obj/structure/fluff/traveltile/courtagent_sewers,
+/turf/open/water/sewer,
+/area/under/town/basement)
 "aWc" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -7316,6 +7320,10 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town)
+"dte" = (
+/obj/structure/fluff/traveltile/sewers_courtagent,
+/turf/open/water/sewer,
+/area/under/town/sewer)
 "dtj" = (
 /obj/structure/spider/cocoon,
 /obj/structure/fluff/walldeco/painting/queen{
@@ -8836,6 +8844,10 @@
 /obj/machinery/essence/test_tube,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
+"efI" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "efL" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/storage/belt/pouch/coins/mid,
@@ -9874,6 +9886,10 @@
 /obj/item/natural/cloth,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
+"eHU" = (
+/obj/structure/fake_machine/scomm/r,
+/turf/open/floor/tile,
+/area/indoors/town/keep/courtagent)
 "eIa" = (
 /turf/open/floor/rooftop,
 /area/indoors/town)
@@ -10016,6 +10032,11 @@
 "eJM" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/clocktower)
+"eJZ" = (
+/obj/effect/decal/cleanable/generic,
+/obj/structure/bars,
+/turf/open/floor/greenstone,
+/area/under/town/sewer)
 "eKd" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -11178,11 +11199,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
 /area/indoors/town/garrison/lieutenant)
-"flt" = (
-/obj/machinery/light/fueled/torchholder/c,
-/obj/effect/decal/cleanable/dirt/cobweb,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "flF" = (
 /obj/structure/rack/shelf/biggest,
 /obj/structure/fluff/walldeco/gear{
@@ -17844,6 +17860,11 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/town/noble_manor/blue)
+"ivr" = (
+/obj/structure/kneestingers,
+/obj/structure/bars,
+/turf/open/water/sewer,
+/area/under/town/sewer)
 "ivu" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
@@ -21040,6 +21061,10 @@
 /obj/structure/water_vent,
 /turf/open/openspace,
 /area/outdoors/town/roofs)
+"jNY" = (
+/obj/structure/fake_machine/scomm/l,
+/turf/open/floor/tile,
+/area/indoors/town/keep/courtagent)
 "jOb" = (
 /obj/machinery/light/fueled/wallfire/candle/l{
 	pixel_x = 0;
@@ -25623,6 +25648,14 @@
 "lWB" = (
 /turf/open/water/river,
 /area/outdoors/river)
+"lWH" = (
+/obj/structure/door/iron/bars{
+	name = "Spare Equipment"
+	},
+/obj/effect/mapping_helpers/access/keyset/manor/courtagent,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks,
+/area/under/town/basement)
 "lWK" = (
 /obj/structure/rack/shelf/biggest,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -30324,6 +30357,10 @@
 "oho" = (
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
+"ohp" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/dirt/road,
+/area/under/town/basement)
 "ohv" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -33166,6 +33203,14 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
+"pqm" = (
+/obj/structure/door/iron/bars{
+	name = "Dungeon of the Damned"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/courtagent,
+/turf/open/floor/greenstone,
+/area/under/town/sewer)
 "pqB" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
@@ -42125,6 +42170,11 @@
 "toR" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/blue)
+"tpb" = (
+/obj/machinery/light/fueled/torchholder/r,
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "tpq" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/woodturned,
@@ -50489,6 +50539,10 @@
 "wRR" = (
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/town/noble_manor/blue)
+"wRS" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "wRT" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -52545,6 +52599,12 @@
 /obj/structure/closet/crate/chest/neu,
 /turf/open/floor/metal/alt,
 /area/indoors/town/shop)
+"xKv" = (
+/obj/structure/fake_machine/mail/l{
+	mailtag = "Ministry of Acquisitions"
+	},
+/turf/open/floor/tile,
+/area/indoors/town/keep/courtagent)
 "xKy" = (
 /obj/structure/bars/cemetery,
 /turf/open/water/clean/dirt,
@@ -72310,9 +72370,9 @@ dLs
 pGp
 pGp
 wpU
-wpU
 qvf
 qvf
+pqm
 ndP
 qvf
 qvf
@@ -72509,12 +72569,12 @@ cyz
 qFx
 qFx
 dLs
-pGp
-pGp
-wpU
-qvf
+fsi
+fsi
+fsi
+dte
 cAA
-crf
+ivr
 cAA
 cAA
 cAA
@@ -72716,7 +72776,7 @@ dLs
 wpU
 ndP
 cAA
-ndP
+eJZ
 qvf
 qvf
 qvf
@@ -78745,13 +78805,13 @@ dID
 dID
 dID
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+dID
+dID
+dID
+dID
+dID
+dID
+dID
 ido
 jEQ
 jEQ
@@ -78948,12 +79008,12 @@ qFx
 dID
 dID
 dID
-dID
-qFx
-qFx
-qFx
-qFx
-qFx
+ido
+ido
+ido
+ido
+ido
+ido
 ido
 jEQ
 jEQ
@@ -79150,12 +79210,12 @@ qFx
 qFx
 qFx
 qFx
-dID
-dID
-dID
-qFx
-qFx
-qFx
+ido
+nxW
+eVO
+nxW
+efI
+eVO
 ido
 jEQ
 jEQ
@@ -79352,15 +79412,15 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-dID
-dID
-qFx
-qFx
 ido
-jEQ
-jEQ
+wRS
+gsU
+gsU
+gsU
+aVT
+dHC
+dHC
+dHC
 jEQ
 ido
 ozq
@@ -79555,11 +79615,11 @@ vjK
 vjK
 vjK
 vjK
-qFx
-qFx
-dID
-dID
-qFx
+nxW
+nxW
+nxW
+tpb
+nxW
 ido
 jEQ
 jEQ
@@ -79752,16 +79812,16 @@ qne
 vjK
 hge
 mxe
-uYR
+jNY
 ssb
-uYR
+xKv
 bxc
 vjK
-qFx
-qFx
-qFx
-dID
-qFx
+eoP
+dKb
+eoP
+ido
+ido
 ido
 jEQ
 jEQ
@@ -79959,10 +80019,10 @@ uYR
 uYR
 uYR
 vjK
-qFx
-qFx
-qFx
-dID
+ohp
+dKb
+eoP
+ido
 dID
 ido
 jEQ
@@ -80161,10 +80221,10 @@ jEg
 jNy
 uYR
 vjK
-qFx
-qFx
-qFx
-qFx
+cLd
+lWH
+cLd
+ido
 dID
 ido
 jEQ
@@ -80363,9 +80423,9 @@ jEb
 jNy
 bRK
 ido
-ido
-ido
-ido
+tVX
+tVX
+tVX
 ido
 dID
 ido
@@ -80565,7 +80625,7 @@ xjz
 utI
 uYR
 ido
-flt
+krr
 tVX
 itS
 ido
@@ -81172,7 +81232,7 @@ jNy
 bRK
 ido
 ido
-ido
+qBO
 ido
 ido
 dID
@@ -81373,9 +81433,9 @@ gxf
 jNy
 uYR
 vjK
-qFx
-qFx
-qFx
+ido
+ido
+ido
 qFx
 dID
 ido
@@ -82984,7 +83044,7 @@ fkH
 bSq
 fkH
 wbm
-uYR
+eHU
 wbm
 dGy
 vjK
