@@ -1048,7 +1048,7 @@
 	//Pre-blessed, +5 force +100 Blade int, +100 int, +1 def, make it silver
 	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 1, TRUE)
 
-/obj/item/weapon/sword/long/decorated
+/obj/item/weapon/sword/long/silver/decorated
 	name = "decorated silver longsword"
 	desc = "A finely crafted silver longsword with a decorated golden hilt."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
