@@ -1065,3 +1065,16 @@
 			return X
 
 #undef CHEMICAL_QUANTISATION_LEVEL
+
+//===============================Logging==========================================
+/// Outputs a log-friendly list of reagents based on the internal reagent_list.
+/datum/reagents/proc/get_reagent_log_string()
+	if(!length(reagent_list))
+		return "no reagents"
+
+	var/list/data = list()
+
+	for(var/datum/reagent/reagent as anything in reagent_list)
+		data += "[reagent.type] [reagent.volume]u"
+
+	return english_list(data)

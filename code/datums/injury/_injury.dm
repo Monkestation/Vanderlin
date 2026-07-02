@@ -176,18 +176,18 @@
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
 		return FALSE
+	if(parent_bodypart.return_surgical_state() & SURGERY_VESSELS_CLAMPED)
+		return FALSE
 	if(LAZYLEN(embedded_objects))
 		return FALSE
 	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE
 	if(!can_heal())
 		return FALSE
-	if(parent_bodypart.is_retracted())
-		return FALSE
 
 	if((is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
 		return TRUE
-	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 3 : 1)
+	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 2 : 1)
 
 // checks whether the injury has been appropriately treated
 /datum/injury/proc/is_treated()

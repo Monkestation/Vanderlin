@@ -102,6 +102,10 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		stack_trace("[pawn]'s current movement target is not an atom, rather a [target.type]! Did you accidentally set it to a weakref?")
 		CancelActions()
 		return
+	if(target != current_movement_target)
+		var/datum/ai_movement/hybrid_pathing/hybrid = ai_movement
+		if(istype(hybrid))
+			hybrid.using_closest_approach -= WEAKREF(src)
 	movement_target_source = source
 	current_movement_target = target
 	if(!isnull(current_movement_target))

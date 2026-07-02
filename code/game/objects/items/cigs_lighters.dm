@@ -83,22 +83,24 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit && !burnt)
 		A.spark_act()
 
-/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
-	if(!isliving(M))
-		return
-//	if(lit && M.IgniteMob())
-//		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
-//		log_game("[key_name(user)] set [key_name(M)] on fire with [src] at [AREACOORD(user)]")
+/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user)
+	if(!istype(M))
+		return ..()
+
+	if(lit && M.IgniteMob())
+		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
+		user.log_message("set [key_name(M)] on fire with [src]", LOG_ATTACK)
+
 	var/obj/item/clothing/face/cigarette/cig = help_light_cig(M)
-	if(lit && cig && user.used_intent.type == INTENT_HELP)
-		if(cig.lit)
-			to_chat(user, span_warning("[cig] is already lit!"))
-		if(M == user)
-			cig.attackby(src, user)
-		else
-			cig.light(span_notice("[user] holds [src] out for [M], and lights [cig]."))
+	if(!lit || !cig || user.cmode)
+		return ..()
+
+	if(cig.lit)
+		to_chat(user, span_warning("[cig] is already lit!"))
+	if(M == user)
+		cig.attackby(src, user)
 	else
-		..()
+		cig.light(span_notice("[user] holds [src] out for [M], and lights [cig]."))
 
 /obj/item/proc/help_light_cig(mob/living/M)
 	var/mask_item = M.get_item_by_slot(ITEM_SLOT_MOUTH)
@@ -295,22 +297,25 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		qdel(src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
+/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M))
 		return ..()
+
 	if(M.on_fire && !lit)
 		light(span_notice("[user] lights [src] with [M]'s burning body. What a cold-blooded badass."))
 		return
+
 	var/obj/item/clothing/face/cigarette/cig = help_light_cig(M)
-	if(lit && cig && user.used_intent.type == INTENT_HELP)
-		if(cig.lit)
-			to_chat(user, span_warning("The [cig.name] is already lit!"))
-		if(M == user)
-			cig.attackby(src, user)
-		else
-			cig.light(span_notice("[user] holds the [name] out for [M], and lights [M.p_their()] [cig.name]."))
+	if(!lit || !cig || user.cmode)
+		..()
+		return
+
+	if(cig.lit)
+		to_chat(user, span_warning("[cig] is already lit!"))
+	if(M == user)
+		cig.attackby(src, user)
 	else
-		return ..()
+		cig.light(span_notice("[user] holds [src] out for [M], and lights [cig]."))
 
 /obj/item/clothing/face/cigarette/fire_act(added, maxstacks)
 	light()
@@ -603,23 +608,26 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else
 		. = ..()
 
-/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
+/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user)
+	if(!istype(M))
+		return ..()
+
 	if(lit && M.IgniteMob())
 		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
-		log_game("[key_name(user)] set [key_name(M)] on fire with [src] at [AREACOORD(user)]")
+		user.log_message("set [key_name(M)] on fire with [src]", LOG_ATTACK)
+
 	var/obj/item/clothing/face/cigarette/cig = help_light_cig(M)
-	if(lit && cig && user.used_intent.type == INTENT_HELP)
-		if(cig.lit)
-			to_chat(user, span_warning("The [cig.name] is already lit!"))
-		if(M == user)
-			cig.attackby(src, user)
-		else
-			if(fancy)
-				cig.light(span_rose("[user] whips the [name] out and holds it for [M]. [user.p_their(TRUE)] arm is as steady as the unflickering flame [user.p_they()] light[user.p_s()] \the [cig] with."))
-			else
-				cig.light(span_notice("[user] holds the [name] out for [M], and lights [M.p_their()] [cig.name]."))
+	if(!lit || !cig || user.cmode)
+		return ..()
+
+	if(cig.lit)
+		to_chat(user, span_warning("[cig] is already lit!"))
+	if(M == user)
+		cig.attackby(src, user)
+	else if(fancy)
+		cig.light(span_rose("[user] whips the [name] out and holds it for [M]. [user.p_their(TRUE)] arm is as steady as the unflickering flame [user.p_they()] light[user.p_s()] \the [cig] with."))
 	else
-		..()
+		cig.light(span_notice("[user] holds the [name] out for [M], and lights [M.p_their()] [cig.name]."))
 
 /obj/item/lighter/process()
 	open_flame()

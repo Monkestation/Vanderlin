@@ -349,4 +349,3 @@
 	attacked_atom = /obj/item/reagent_containers/food/snacks/tallow
 	output = /obj/item/reagent_containers/food/snacks/tallow/red
 	craft_time = 1 SECONDS
-	subtypes_allowed = TRUE

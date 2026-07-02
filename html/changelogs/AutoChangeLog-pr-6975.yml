@@ -1,4 +1,0 @@
-author: "SSensum13"
-delete-after: True
-changes:
-  - bugfix: "Bards now have actual verbs to check and clear audience."

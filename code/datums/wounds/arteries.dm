@@ -10,7 +10,11 @@
 	min_damage_dividend = 0
 	strong_intent_bonus = TRUE
 	aimed_intent_bonus = TRUE
-	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
+	crit_message = list(
+		"Blood sprays from %VICTIM's %BODYPART!",
+		"Blood rushes from %VICTIM's %BODYPART!",
+		"Blood bursts from %VICTIM's %BODYPART with a great force!",
+	)
 	var/artery_type_override
 	var/list/artery_type_blacklist = list(ARTERY_HEART, ARTERY_NECK)
 	viable_zones = list(\
@@ -50,7 +54,7 @@
 	if(!artery)
 		qdel(src)
 		return FALSE
-	var/dissection = (severity >= WOUND_SEVERITY_CRITICAL) || (artery?.damage >= (artery?.maxHealth * 0.5))
+	var/dissection = (severity >= WOUND_SEVERITY_CRITICAL) || ((artery?.maxHealth - artery?.damage) <= (artery?.maxHealth * artery?.tear_damage_multiplier))
 	if(dissection)
 		artery.dissect()
 	else
