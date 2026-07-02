@@ -292,8 +292,8 @@
 /area/indoors/town)
 "aix" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv1";
-	property_id = "adv1";
+	save_id = "advapt_1";
+	property_id = "advapt_1";
 	template_x = 3;
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_1
@@ -6673,8 +6673,8 @@
 /area/indoors/town)
 "deA" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv2";
-	property_id = "adv2";
+	save_id = "advapt_2";
+	property_id = "advapt_2";
 	template_x = 3;
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_2
@@ -14801,11 +14801,11 @@
 /area/indoors/town)
 "hez" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv1";
-	property_id = "adv1";
+	save_id = "mercapt_1";
+	property_id = "mercapt_1";
 	template_x = 3;
 	template_y = 4;
-	default_template = /datum/map_template/vanderlin_adv1
+	default_template = /datum/map_template/vanderlin_mercapt_1
 	},
 /turf/open/openspace,
 /area/indoors/town/merc_guild)
@@ -16973,8 +16973,8 @@
 /area/outdoors/town)
 "ifN" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv3";
-	property_id = "adv3";
+	save_id = "advapt_3";
+	property_id = "advapt_3";
 	template_x = 3;
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_3
@@ -26385,8 +26385,8 @@
 /area/under/cave)
 "mwa" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv4";
-	property_id = "adv4";
+	save_id = "advapt_4";
+	property_id = "advapt_4";
 	template_x = 3;
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_4
@@ -38574,8 +38574,8 @@
 /area/indoors/town/keep/library)
 "rQz" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv6";
-	property_id = "adv6";
+	save_id = "advapt_6";
+	property_id = "advapt_6";
 	template_x = 3;
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_6
@@ -42416,8 +42416,8 @@
 /area/outdoors/town/roofs)
 "tEK" = (
 /obj/effect/landmark/house_spot{
-	save_id = "adv5";
-	property_id = "adv5";
+	save_id = "advapt_5";
+	property_id = "advapt_5";
 	template_x = 3;
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_5
