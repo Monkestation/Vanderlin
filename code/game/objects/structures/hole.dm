@@ -21,8 +21,6 @@
 	alternative_icon_handling = TRUE
 	/// How big the hole is, at 3 you can bury a body, at 4 theres something buried. Global defines in `misc.dm`
 	var/stage = DIRTHOLE_SHALLOW
-	/// Chance for attempt to increase `stage` fails, while still spawning dirt. Increments each fail and is skipped once it reaches 3
-	var/faildirt = 0
 
 	/// Present headstone. If this is empty, there isnt one.
 	var/obj/item/gravedecor/headstone/headstone
@@ -100,12 +98,10 @@
 
 /obj/structure/closet/dirthole/grave
 	stage = DIRTHOLE_PIT
-	faildirt = 3
 	icon_state = "grave"
 
 /obj/structure/closet/dirthole/closed
 	stage = DIRTHOLE_GRAVE
-	faildirt = 3
 	climb_offset = 10
 	icon_state = "gravecovered"
 	opened = FALSE
@@ -162,6 +158,7 @@
 		else
 			user.put_in_active_hand(new item_to_remove.type())
 		gravefence = null
+
 	update_quality()
 	update_appearance(UPDATE_ICON)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -173,136 +170,148 @@
 		for(var/obj/structure/closet/C in contents)
 			return FALSE
 		return TRUE
-	. = ..()
+	return ..()
 
 /obj/structure/closet/dirthole/toggle(mob/living/user)
 	return
 
+/obj/structure/closet/dirthole/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	//If you want to add in more items that arent a gravedecor subtype but do have an associated gravedecoration, add them here.
+	//In the future, an associated list can be made between any non-gravedecor items, and their associated decoration. We only have one such case, so that isnt necessary.
+	if(istype(tool, /obj/item/grown/log/tree/stick))
+		if(headstone)
+			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
+			return ITEM_INTERACT_BLOCKING
+		if(stage != DIRTHOLE_GRAVE)
+			to_chat(user, "<span class='warning'>I can't tie a grave marker on an open grave.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
+		if(!do_after(user, 10 SECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+
+		//We're checking this istype twice in case any other headstone without the gravedecor path is added.
+		if(istype(tool, /obj/item/grown/log/tree/stick))
+			headstone = new /obj/item/gravedecor/headstone/crude(null, tool.type)
+
+		if(pacify_coffin(src, user))
+			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
+			if(!is_consecrated)
+				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
+				record_round_statistic(STATS_GRAVES_CONSECRATED)
+
+		update_quality()
+		update_appearance(UPDATE_ICON)
+		qdel(tool)
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/gravedecor))
+		return interaction_decor(tool, user)
+	else if(istype(tool, /obj/item/weapon/shovel))
+		return interaction_shovel(tool, user)
+	else if(istype(tool, /obj/item/reagent_containers/glass/bucket))
+		return attemptwatermake(tool, user)
+	else if(!user.cmode && !is_consecrated && headstone && tool.wlength == WLENGTH_SHORT)
+		if(!(tool.get_sharpness()))
+			to_chat(user, span_warning("\The [tool] is not sharp enough to engrave \the [headstone] on \the [src]!"))
+			return ITEM_INTERACT_BLOCKING
+		return inscribe(tool, user)
+
 /obj/structure/closet/dirthole/proc/attemptwatermake(obj/item/reagent_containers/bucket, mob/living/user)
-	if(user.used_intent.type == /datum/intent/splash)
-		if(bucket.reagents)
-			var/datum/reagent/master_reagent = bucket.reagents.get_master_reagent()
-			var/reagent_volume = master_reagent.volume
-			if(do_after(user, 10 SECONDS, src))
-				if(bucket.reagents.remove_reagent(master_reagent.type, clamp(master_reagent.volume, 1, 100)))
-					var/turf/structure_turf = get_turf(src)
-					var/turf/open/water/W = structure_turf.PlaceOnTop(/turf/open/water/river/creatable)
-					if(!W) // how did this happen
-						return
-					W.water_reagent = master_reagent.type
-					W.water_volume = clamp(reagent_volume, 1, 100)
-					W.handle_water()
-					playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
-					QDEL_NULL(src)
+	if(!istype(user.used_intent, /datum/intent/splash))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!bucket.reagents?.total_volume)
+		return ITEM_INTERACT_BLOCKING
+
+	if(!do_after(user, 10 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	var/datum/reagent/master_reagent = bucket.reagents.get_master_reagent()
+	var/reagent_volume = master_reagent.volume
+	if(!bucket.reagents.remove_reagent(master_reagent.type, clamp(master_reagent.volume, 1, 100)))
+		return ITEM_INTERACT_BLOCKING
+
+	var/turf/structure_turf = get_turf(src)
+	var/turf/open/water/W = structure_turf.PlaceOnTop(/turf/open/water/river/creatable)
+	if(!W) // how did this happen
+		return ITEM_INTERACT_BLOCKING
+
+	W.water_reagent = master_reagent.type
+	W.water_volume = clamp(reagent_volume, 1, 100)
+	W.handle_water()
+	playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
+	QDEL_NULL(src)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/closet/dirthole/proc/inscribe(obj/item/sharp, mob/user)
 	var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [headstone]?", "Custom Inscription", headstone.custom_message, 150, TRUE)
 	if(!new_message || new_message == headstone.custom_message)
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(span_info("[user] begins to engrave a message into \the [headstone] with \a [sharp]."), span_info("You begin to engrave a message into \the [headstone]."), span_info("You hear someone cutting into stone."))
 	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 	if(!do_after(user, 5 SECONDS, src, progress=TRUE, display_over_user=TRUE))
-		return
-	else
-		user.visible_message(span_info("[user] finishes working on \the [headstone]."), span_info("You finish engraving \the [headstone] with your message."))
-		headstone.custom_message = new_message
-		return
+		return ITEM_INTERACT_BLOCKING
 
-/obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
-//If you want to add in more items that arent a gravedecor subtype but do have an associated gravedecoration, add them here.
-//In the future, an associated list can be made between any non-gravedecor items, and their associated decoration. We only have one such case, so that isnt necessary.
-	if(istype(attacking_item, /obj/item/grown/log/tree/stick))
-		if(headstone)
-			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
-			return
-		if(stage != DIRTHOLE_GRAVE)
-			to_chat(user, "<span class='warning'>I can't tie a grave marker on an open grave.</span>")
-
-		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
-		if(!do_after(user, 10 SECONDS, src))
-			return
-		//We're checking this istype twice in case any other headstone without the gravedecor path is added.
-		if(istype(attacking_item, /obj/item/grown/log/tree/stick))
-			headstone = new /obj/item/gravedecor/headstone/crude(null, attacking_item.type)
-		if(pacify_coffin(src, user))
-			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
-			if(!is_consecrated)
-				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
-				record_round_statistic(STATS_GRAVES_CONSECRATED)
-
-		update_quality()
-		update_appearance(UPDATE_ICON)
-		qdel(attacking_item)
-		return
-
-	if(istype(attacking_item, /obj/item/gravedecor))
-		attack_decor(attacking_item, user)
-	else if(istype(attacking_item, /obj/item/weapon/shovel))
-		attack_shovel(attacking_item, user)
-	else if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
-		attemptwatermake(attacking_item, user)
-	else if(!user.cmode && !is_consecrated && headstone && attacking_item.wlength == WLENGTH_SHORT)
-		if(!(attacking_item.get_sharpness()))
-			to_chat(user, span_warning("\The [attacking_item] is not sharp enough to engrave \the [headstone] on \the [src]!"))
-			return
-		inscribe(attacking_item, user)
-	else
-		return ..()
+	user.visible_message(span_info("[user] finishes working on \the [headstone]."), span_info("You finish engraving \the [headstone] with your message."))
+	headstone.custom_message = new_message
+	return ITEM_INTERACT_SUCCESS
 
 /// Called by `attackby()`, handles interactions with gravedecor objects
-/obj/structure/closet/dirthole/proc/attack_decor(obj/item/gravedecor/attacking_item, mob/user)
-	if(istype(attacking_item, /obj/item/gravedecor/headstone))
+/obj/structure/closet/dirthole/proc/interaction_decor(obj/item/gravedecor/tool, mob/user)
+	if(istype(tool, /obj/item/gravedecor/headstone))
 		if(headstone)
 			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 		if(stage != DIRTHOLE_GRAVE)
 			to_chat(user, "<span class='warning'>I can't put a headstone on an open grave.</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 		if(!do_after(user, 5 SECONDS, src))
-			return
+			return ITEM_INTERACT_BLOCKING
 
-		headstone = attacking_item
+		headstone = tool
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
 			if(!is_consecrated)
 				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 
-		qdel(attacking_item)
+		qdel(tool)
 		update_quality()
 		update_appearance(UPDATE_ICON)
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(istype(attacking_item, /obj/item/gravedecor/gravefence))
+	if(istype(tool, /obj/item/gravedecor/gravefence))
 		if(gravefence)
 			to_chat(user, "<span class='warning'>This grave already has a fence.</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 		if(stage != DIRTHOLE_GRAVE)
 			to_chat(user, "<span class='warning'>I can't put a gravefence on an open grave.</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 		if(!do_after(user, 5 SECONDS, src))
-			return
-		gravefence = attacking_item
+			return ITEM_INTERACT_BLOCKING
+		gravefence = tool
 
-		qdel(attacking_item)
+		qdel(tool)
 		update_quality()
 		update_appearance(UPDATE_ICON)
+		return ITEM_INTERACT_SUCCESS
 
 /// Called by `attackby()`. Handles interactions with shovels.
-/obj/structure/closet/dirthole/proc/attack_shovel(obj/item/weapon/shovel/attacking_shovel, mob/user)
+/obj/structure/closet/dirthole/proc/interaction_shovel(obj/item/weapon/shovel/attacking_shovel, mob/user)
 	if(user.used_intent.type != /datum/intent/shovelscoop)
-		return
+		return NONE
 
 	if(attacking_shovel.heldclod)
 		playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
 		if(stage == DIRTHOLE_PIT) //close grave
 			if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) //can't have nice things can we
-				return
+				return ITEM_INTERACT_BLOCKING
 			stage = DIRTHOLE_GRAVE
 			climb_offset = 10
 			close()
@@ -324,66 +333,61 @@
 				qdel(src)
 		QDEL_NULL(attacking_shovel.heldclod)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		return
-	else
-		if(stage == DIRTHOLE_PIT)
-			var/turf/our_turf = get_turf(src)
-			var/turf/under_turf = GET_TURF_BELOW(our_turf)
-			if(under_turf && our_turf && isopenturf(under_turf))
-				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-				user.visible_message("[user] starts digging out the bottom of [src]", "I start digging out the bottom of [src].")
-				if(!do_after(user, 10 SECONDS * attacking_shovel.toolspeed, src))
-					return TRUE
-				attacking_shovel.heldclod = new(attacking_shovel)
-				attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-				playsound(our_turf,'sound/items/dig_shovel.ogg', 100, TRUE)
-				our_turf.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-				qdel(src)
-				return
-			to_chat(user, "<span class='warning'>I think that's deep enough.</span>")
-			return
-		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		var/used_str = 10
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.domhand)
-				used_str = C.get_str_arms(C.used_hand)
-			C.adjust_stamina(max(60 - (used_str * 5), 1))
-		if(stage < DIRTHOLE_PIT)
-			if(faildirt < 2)
-				if(prob(used_str * 5))
-					stage++
-				else
-					faildirt++
-			else
-				stage++
-		if(stage == DIRTHOLE_GRAVE)
-			if(gravequality == 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
-				to_chat(user, span_boldwarning("You feel a chill as you begin to dig at the grave, as if something <span class='god_necra'>ancient</span> is watching you... are you prepared to face the consequences if you continue?"))
-			if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) // WE CANT HAVE NICE THINGS CAN WE
-				return
-			stage = DIRTHOLE_PIT
-			climb_offset = 0
-			open()
-			if(headstone)
-				if(headstone.sourceitem)
-					new headstone.sourceitem(get_turf(src))
-				else
-					// We need to perserve custom_message and inscription
-					var/obj/item/gravedecor/headstone/replacement = new headstone.type(get_turf(src))
-					replacement.inscription = headstone.inscription
-					replacement.custom_message = headstone.custom_message
-				headstone = null
-			if(gravefence)
-				if(gravefence.sourceitem)
-					new gravefence.sourceitem(get_turf(src))
-				else
-					new gravefence.type(get_turf(src))
-				gravefence = null
-			if(is_consecrated)
-				handle_curse(user)
+		return ITEM_INTERACT_SUCCESS
 
-			unstasis() // if no longer stage 4, unfreeze the bodies
+	if(stage == DIRTHOLE_PIT)
+		var/turf/our_turf = get_turf(src)
+		var/turf/under_turf = GET_TURF_BELOW(our_turf)
+		if(under_turf && our_turf && isopenturf(under_turf))
+			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+			user.visible_message("[user] starts digging out the bottom of [src]", "I start digging out the bottom of [src].")
+			if(!do_after(user, 10 SECONDS * attacking_shovel.toolspeed, src))
+				return ITEM_INTERACT_BLOCKING
+			attacking_shovel.heldclod = new(attacking_shovel)
+			attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+			playsound(our_turf,'sound/items/dig_shovel.ogg', 100, TRUE)
+			our_turf.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
+			qdel(src)
+			return ITEM_INTERACT_BLOCKING
+		to_chat(user, "<span class='warning'>I think that's deep enough.</span>")
+		return ITEM_INTERACT_SUCCESS
+
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+	if(stage < DIRTHOLE_PIT)
+		stage++
+		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
+		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+		update_appearance(UPDATE_ICON | UPDATE_NAME)
+		return ITEM_INTERACT_SUCCESS
+
+	if(stage == DIRTHOLE_GRAVE)
+		if(gravequality >= 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
+			to_chat(user, span_boldwarning("You feel a chill as you begin to dig at the grave, as if something <span class='god_necra'>ancient</span> is watching you... are you prepared to face the consequences if you continue?"))
+		if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) // WE CANT HAVE NICE THINGS CAN WE
+			return ITEM_INTERACT_BLOCKING
+		stage = DIRTHOLE_PIT
+		climb_offset = 0
+		open()
+		if(headstone)
+			if(headstone.sourceitem)
+				new headstone.sourceitem(get_turf(src))
+			else
+				// We need to perserve custom_message and inscription
+				var/obj/item/gravedecor/headstone/replacement = new headstone.type(get_turf(src))
+				replacement.inscription = headstone.inscription
+				replacement.custom_message = headstone.custom_message
+			headstone = null
+		if(gravefence)
+			if(gravefence.sourceitem)
+				new gravefence.sourceitem(get_turf(src))
+			else
+				new gravefence.type(get_turf(src))
+			gravefence = null
+		if(is_consecrated)
+			handle_curse(user)
+
+		unstasis() // if no longer stage 4, unfreeze the bodies
 
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
@@ -391,6 +395,7 @@
 		update_appearance(UPDATE_ICON | UPDATE_NAME)
 		update_quality()
 		adjust_grave_necra_devotion()
+		return ITEM_INTERACT_SUCCESS
 
 /// A blessed grave curses you if you don't have the graverobber trait, otherwise just sends alarms after a delay
 /obj/structure/closet/dirthole/proc/handle_curse(mob/user)
@@ -417,63 +422,63 @@
 			record_round_statistic(STATS_GRAVES_ROBBED)
 			SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 			if(gravequality >= 7)
-				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20,90) SECONDS) // Delayed alert
-		//Logic thread for curses.
-	else
-		switch(gravequality)
-			if(0 to 3)
-				L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
-				"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I can feel myself age a little...</span>", \
-				"<span class='hear'>I hear a loud whoosh!</span>")
-				if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t2))
-					L.apply_status_effect(/datum/status_effect/debuff/cursed_t1)
-			if(4 to 6)
-				L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
-				"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I feel myself age a few years...</span>", \
-				"<span class='hear'>I hear a loud whoosh!</span>")
-				L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
-				if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3))
-					L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
-			if(7 to 9)
-				L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as whispers of alarm flutter out in every direction.</span>", \
-				"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
+				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20, 90) SECONDS) // Delayed alert
+		return
+
+	switch(gravequality)
+		if(0 to 3)
+			L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
+			"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I can feel myself age a little...</span>", \
+			"<span class='hear'>I hear a loud whoosh!</span>")
+			if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t2))
+				L.apply_status_effect(/datum/status_effect/debuff/cursed_t1)
+		if(4 to 6)
+			L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
+			"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I feel myself age a few years...</span>", \
+			"<span class='hear'>I hear a loud whoosh!</span>")
+			L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+			if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3))
+				L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
+		if(7 to 9)
+			L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as whispers of alarm flutter out in every direction.</span>", \
+			"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
+			"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+			var/turf/T = get_turf(src)
+			new /obj/effect/timestop(T, 2, 5 SECONDS, null, MAGIC_RESISTANCE_HOLY)
+			L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+			L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
+			if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
+				L.apply_status_effect(/datum/status_effect/debuff/cursed_t3)
+			robbery_alert() // Now the entire church knows what you done!
+		if(10) // Max curse...
+			var/obj/item/bodypart/left_arm = L.get_bodypart(BODY_ZONE_L_ARM)
+			var/obj/item/bodypart/right_arm = L.get_bodypart(BODY_ZONE_R_ARM)
+			if(((!left_arm || left_arm.skeletonized) && (!right_arm || right_arm.skeletonized)))
+				L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place and whispers of alarm flutter out in every direction.</span>", \
+				"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can feel my arms age as whispers of alarm go out in every direction!</span>", \
 				"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-				var/turf/T = get_turf(src)
-				new /obj/effect/timestop(T, 2, 5 SECONDS, null, MAGIC_RESISTANCE_HOLY)
-				L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
-				L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
-				if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
-					L.apply_status_effect(/datum/status_effect/debuff/cursed_t3)
-				robbery_alert() // Now the entire church knows what you done!
-			if(10) // Max curse...
-				var/obj/item/bodypart/left_arm = L.get_bodypart(BODY_ZONE_L_ARM)
-				var/obj/item/bodypart/right_arm = L.get_bodypart(BODY_ZONE_R_ARM)
-				if(((!left_arm || left_arm.skeletonized) && (!right_arm || right_arm.skeletonized)))
-					L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place and whispers of alarm flutter out in every direction.</span>", \
-					"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can feel my arms age as whispers of alarm go out in every direction!</span>", \
-					"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-				else
-					L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as their arms wither to bone, and whispers of alarm flutter out in every direction.</span>", \
-					"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! </span>\n\ <span class='warning big'>While it freezes me in place, I can feel my arms wither to bone as whispers of alarm go out in every direction!</span>", \
-					"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-					if(left_arm)
-						var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_L_ARM)
-						part_to_bonify.skeletonize(FALSE)
-					if(right_arm)
-						var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_R_ARM)
-						part_to_bonify.skeletonize(FALSE)
-					L.emote("painscream")
-					L.update_body_parts()
-				var/turf/T = get_turf(src)
-				new /obj/effect/timestop(T, 2, 15 SECONDS, null, MAGIC_RESISTANCE_HOLY)
-				L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
-				L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
-				L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
-				L.apply_status_effect(/datum/status_effect/debuff/cursed_t4)
-				robbery_alert() // Now the entire church knows what you done!
-		record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-		record_round_statistic(STATS_GRAVES_ROBBED)
-		SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+			else
+				L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as their arms wither to bone, and whispers of alarm flutter out in every direction.</span>", \
+				"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! </span>\n\ <span class='warning big'>While it freezes me in place, I can feel my arms wither to bone as whispers of alarm go out in every direction!</span>", \
+				"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+				if(left_arm)
+					var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_L_ARM)
+					part_to_bonify.skeletonize(FALSE)
+				if(right_arm)
+					var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_R_ARM)
+					part_to_bonify.skeletonize(FALSE)
+				L.emote("painscream")
+				L.update_body_parts()
+			var/turf/T = get_turf(src)
+			new /obj/effect/timestop(T, 2, 15 SECONDS, null, MAGIC_RESISTANCE_HOLY)
+			L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+			L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
+			L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
+			L.apply_status_effect(/datum/status_effect/debuff/cursed_t4)
+			robbery_alert() // Now the entire church knows what you done!
+	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+	record_round_statistic(STATS_GRAVES_ROBBED)
+	SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 
 /// Alerts all clergy (except non-necran acoyltes) of a robbery!
 /obj/structure/closet/dirthole/proc/robbery_alert(mob/robber, var/delay = FALSE)

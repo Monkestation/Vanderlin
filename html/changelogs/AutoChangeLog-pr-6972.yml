@@ -1,0 +1,4 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - bugfix: "setspouse will now lock you out of any family not matching that spouse forever"

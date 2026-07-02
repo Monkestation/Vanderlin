@@ -1,0 +1,8 @@
+author: "Severus840"
+delete-after: True
+changes:
+  - map: "Added Quest Notice board to WPP town square and merc guild"
+  - map: "Extended the WPP keep's tomb to the east so you can dig into it from the caves"
+  - map: "Changed the Tailor's beespider farm's Iron Fences to railings"
+  - map: "Added Quest Markers to Rosewood Forest and Bog since their used by WPP"
+  - map: "Fixed some broken areas"

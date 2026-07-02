@@ -35,6 +35,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_NOBLE_POWER
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)

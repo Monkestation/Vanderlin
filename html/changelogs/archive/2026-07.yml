@@ -1,0 +1,39 @@
+2026-07-01:
+  Avalon-Proto:
+  - rscdel: Fire safety is taken more seriously; random town fires no longer occur
+  CheffieGithub:
+  - refactor: Refactored attack chain code, report any issues with clicking on things
+      with other things.
+  - refactor: Refactored surgery code, report any cases of surgery issues.
+  - rscadd: Giving is now done by ctrl+shift click or the hotkey "G"
+  - rscadd: Some interactions have been changed that will not be listed here, check
+      the PR page before reporting things.
+  MissyNym:
+  - map: Added a covered bridge/gatehouse to the Southern perimeter of the Gallowband
+      camp, along with strategic palisades.
+  - map: Added a travel point designed to directly reach the Bog Witch and the Gallowband,
+      usable only by the Bog Witch and Gallowband, on both the Forest and Bog maps.
+  - map: Hardened the northern walls of the Gallowband's camp.
+  - map: Added a waterlock to the western coast of the Gallowband's camp to introduce
+      difficulties for travel by water (sorry Tritons).
+  - map: Added a barracks for the lower-ranked Gallowband members east of the northern
+      Gatehouse, on the small mountain present.
+  - map: Fixed the eastern bridge leading to the outpost.
+  SSensum13:
+  - bugfix: Bards now have actual verbs to check and clear audience.
+  SmokingCrackForChrist:
+  - balance: Gives Vile Highwayman (Adept) a Canesword.
+  Spitegremlin:
+  - rscadd: Added new stone pan called hotrock
+  - rscadd: Added new bait called greasebait
+  - balance: added more possible animals to bait, and put more dangerous ones in the
+      highest tier bait
+  Sulaboy:
+  - balance: buffs rolling pin
+  dwasint:
+  - balance: All classes that start with medium armour have medium training.
+  - refactor: known players, they now use actual tags for how you know them that upgrade
+      and change
+  - refactor: family, it now supports species, role, and faith filtering aswell as
+      allowing the setting of divorced status and who you want as a child
+  - bugfix: numerous bugs relating to family code
