@@ -934,7 +934,7 @@
 	name = "Decorated Silver Longsword (+Silver Bar, +Gold Bar)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/gold)
-	created_item = /obj/item/weapon/sword/long/decorated
+	created_item = /obj/item/weapon/sword/long/silver/decorated
 
 /datum/anvil_recipe/weapons/silver/sillong
 	name = "Silver Longsword (+Silver Bar)"
