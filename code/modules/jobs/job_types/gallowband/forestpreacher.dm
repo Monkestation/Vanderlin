@@ -53,7 +53,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestpreacher
 
 	traits = list(
-		TRAIT_FORAGER
+		TRAIT_FORAGER,
 		TRAIT_GALLOWBAND
 	)
 

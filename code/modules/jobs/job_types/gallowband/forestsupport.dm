@@ -48,7 +48,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestsupport
 
 	traits = list(
-		TRAIT_FORAGER
+		TRAIT_FORAGER,
 		TRAIT_GALLOWBAND
 	)
 
