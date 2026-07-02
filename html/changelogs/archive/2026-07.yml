@@ -37,3 +37,16 @@
   - refactor: family, it now supports species, role, and faith filtering aswell as
       allowing the setting of divorced status and who you want as a child
   - bugfix: numerous bugs relating to family code
+2026-07-02:
+  SSensum13:
+  - balance: chest arteries now have 4 bleed stages instead of 2.
+  Severus840:
+  - map: Added Quest Notice board to WPP town square and merc guild
+  - map: Extended the WPP keep's tomb to the east so you can dig into it from the
+      caves
+  - map: Changed the Tailor's beespider farm's Iron Fences to railings
+  - map: Added Quest Markers to Rosewood Forest and Bog since their used by WPP
+  - map: Fixed some broken areas
+  dwasint:
+  - bugfix: setspouse will now lock you out of any family not matching that spouse
+      forever
