@@ -635,7 +635,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(can_parry)
 		inspect_list += "\n<b>PARRY:</b> [wdefense]"
 
-	if(!can_parry)
+	else
 		inspect_list +=  "\n<b>PARRY:</b> Cannot Parry"
 
 	if(wbalance)
