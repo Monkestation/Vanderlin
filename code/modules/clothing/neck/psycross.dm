@@ -123,7 +123,7 @@
 
 /obj/item/clothing/neck/psycross/baotha/wood
 	name = "wooden amulet of Baotha"
-	desc = "A hollow promise rendered in gold. It weighs heavy with the memory of sweet wine turned to poison, and the comfort of a sorrow that refuses to fade."
+	desc = "A promise as hollow as the wood it was carved from. It weighs heavy with the memory of sweet wine turned to poison, and the comfort of a sorrow that refuses to fade."
 	icon_state = "baotha_wood"
 
 /* // GRONN PSYCROSSES
