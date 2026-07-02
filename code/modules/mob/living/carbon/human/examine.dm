@@ -74,7 +74,10 @@
 		// Know check
 		if(!is_family && !O)
 			if(do_i_know)
-				. += span_tinynotice("I know [P[THEM]].")
+				if(user.mind?.knows_as(src.mind, /datum/relation/rival))
+					. += "<span class='tinynotice'> I know [P[THEM]]...</span><span class='tinywarning'> they are my rival!</span>"
+				else
+					. += span_tinynotice("I know [P[THEM]].")
 			else
 				. += span_tinywarning("I do not know [P[THEM]].")
 
