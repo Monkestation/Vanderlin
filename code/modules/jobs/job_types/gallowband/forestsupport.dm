@@ -49,6 +49,7 @@
 
 	traits = list(
 		TRAIT_FORAGER
+		TRAIT_GALLOWBAND
 	)
 
 	mind_traits = list(TRAIT_GALLOWBAND_SECRETS)

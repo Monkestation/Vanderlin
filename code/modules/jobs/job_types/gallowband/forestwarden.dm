@@ -62,6 +62,7 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER
+		TRAIT_GALLOWBAND
 	)
 	verbs = list(
 		/mob/proc/haltyell
