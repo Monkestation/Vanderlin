@@ -33,7 +33,7 @@
 
 /datum/attribute_holder/sheet/job/templar/patron/necra
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/whipsflails = 40
+		/datum/attribute/skill/craft/masonry = 20 //For making graves.
 	)
 
 /datum/attribute_holder/sheet/job/templar/patron/pestra
@@ -82,6 +82,16 @@
 		/datum/attribute/skill/combat/unarmed = 20
 	)
 
+/datum/attribute_holder/sheet/job/templar/patron/necra/flail
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/whipsflails = 40
+	)
+
+/datum/attribute_holder/sheet/job/templar/patron/necra/shovel
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 40
+	)
+
 /datum/job/templar
 	title = JOB_TEMPLAR
 	tutorial = "Templars are warriors who have forsaken wealth and station in the service of the church, either from fervent zeal or remorse for past sins.\
@@ -115,6 +125,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_STEELHEARTED,
+		TRAIT_MEDIUMARMOR,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
@@ -151,6 +162,18 @@
 			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
+			var/static/list/selectable = list(
+				"Necran Battleshovel (Polearm)" = /obj/item/weapon/shovel/necran,
+				"Swift Journey (Flail)" = /obj/item/weapon/flail/sflail/necraflail,
+			)
+			var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
+			if(!choice)
+				return
+			switch(choice)
+				if("Necran Battleshovel (Polearm)")
+					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/necra/shovel)
+				if("Swift Journey (Flail)")
+					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/necra/flail)
 		if(/datum/patron/divine/pestra)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/pestra)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
@@ -233,7 +256,6 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
 			head = /obj/item/clothing/head/helmet/heavy/necked/necra
 			cloak = /obj/item/clothing/cloak/stabard/templar/necra
-			beltl = /obj/item/weapon/flail/sflail/necraflail
 		if(/datum/patron/divine/pestra)
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
@@ -258,7 +280,6 @@
 			backr = /obj/item/weapon/hammer/sledgehammer/war/malum
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/abyssor
-			armor = /obj/item/clothing/armor/brigandine/abyssor
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 		if(/datum/patron/divine/xylix)

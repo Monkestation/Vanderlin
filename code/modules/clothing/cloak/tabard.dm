@@ -1,58 +1,54 @@
-
 /obj/item/clothing/cloak/tabard
 	name = "tabard"
 	desc = "A common short coat commonly worn by just about anyone."
-	color = null
 	icon_state = "tabard"
 	item_state = "tabard"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/detailed/tabards.dmi'
+	detail_tag = "_spl"
+	detail_color = CLOTHING_BERRY_BLUE
+	color = CLOTHING_PEAR_YELLOW
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	boobed = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	var/picked
 
-/obj/item/clothing/cloak/tabard/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
-
 /obj/item/clothing/cloak/tabard/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(picked)
 		return
+
 	var/the_time = world.time
-	var/design = input(user, "Select a design.","Tabard Design") as null|anything in list("None", "Symbol", "Split", "Quadrants", "Boxes", "Diamonds")
+
+	var/design = tgui_input_list(user, "Select a design.", "Tabard Design", list("None", "Split", "Quadrants", "Boxes", "Diamonds"))
 	if(!design)
 		return
-	if(world.time > (the_time + 30 SECONDS))
-		return
+
 	if(design == "Symbol")
 		design = null
-		design = input(user, "Select a symbol.","Tabard Design") as null|anything in list("chalice","psy","peace","z","imp","skull","widow","arrow")
+		design = tgui_input_list(user, "Select a symbol.", "Tabard Design", list("chalice", "psy", "peace", "z", "imp", "skull", "widow", "arrow"))
 		if(!design)
 			return
 		design = "_[design]"
-	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+
+	var/colorone = tgui_input_list(user, "Select a primary color.", "Tabard Design", GLOB.noble_dyes)
 	if(!colorone)
 		return
+
 	var/colortwo
 	if(design != "None")
-		colortwo = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+		colortwo = tgui_input_list(user, "Select a primary color.", "Tabard Design", GLOB.noble_dyes)
 		if(!colortwo)
 			return
+
 	if(world.time > (the_time + 30 SECONDS))
 		return
-	if(design != "None")
-		detail_tag = design
+
 	switch(design)
 		if("Split")
 			detail_tag = "_spl"
@@ -62,25 +58,24 @@
 			detail_tag = "_box"
 		if("Diamonds")
 			detail_tag = "_dim"
-	color = clothing_color2hex(colorone)
+
+	color = GLOB.noble_dyes[colorone]
 	if(colortwo)
-		detail_color = clothing_color2hex(colortwo)
-	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
+		detail_color = GLOB.noble_dyes[colortwo]
+
+	update_appearance(UPDATE_OVERLAYS)
+
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
+		detail_color = initial(detail_color)
 		color = initial(color)
 		detail_tag = initial(detail_tag)
-		detail_color = initial(detail_color)
-		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
+		update_appearance(UPDATE_OVERLAYS)
 		return
+
 	picked = TRUE
 
 /obj/item/clothing/cloak/tabard/knight
+	detail_color = CLOTHING_RED_OCHRE
 	color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
@@ -88,11 +83,9 @@
 	return
 
 /obj/item/clothing/cloak/tabard/crusader
+	color = CLOTHING_MAGE_GREY
 	detail_tag = "_psy"
-
-/obj/item/clothing/cloak/tabard/crusader/Initialize()
-	. = ..()
-	update_appearance(UPDATE_ICON)
+	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -132,6 +125,11 @@
 		return
 	picked = TRUE
 
+/obj/item/clothing/cloak/tabard/crusader/tief
+	color = CLOTHING_BLOOD_RED
+	detail_tag = "_quad"
+	detail_color = CLOTHING_SOOT_BLACK
+
 /obj/item/clothing/cloak/tabard/crusader/tief/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -159,10 +157,6 @@
 		detail_color = initial(detail_color)
 		color = initial(color)
 		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
-		return
 	picked = TRUE
 
 /obj/item/clothing/cloak/tabard/knight/guard
@@ -211,10 +205,6 @@
 	detail_tag = "_psy"
 	color = CLOTHING_SOOT_BLACK
 	detail_color = CLOTHING_WHITE
-
-/obj/item/clothing/cloak/tabard/adept/Initialize()
-	. = ..()
-	update_appearance(UPDATE_ICON)
 
 /obj/item/clothing/cloak/tabard/adept/attack_hand_secondary(mob/user, list/modifiers)
 	return

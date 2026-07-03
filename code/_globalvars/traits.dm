@@ -5,6 +5,8 @@ quirks have it's own panel so we don't need them here.
 */
 GLOBAL_LIST_INIT(traits_by_type, list(
 	/atom = list(
+		"TRAIT_AI_MOVEMENT_HALTED" = TRAIT_AI_MOVEMENT_HALTED,
+		"TRAIT_AI_PAUSED" = TRAIT_AI_PAUSED,
 		"TRAIT_ALT_CLICK_BLOCKER" = TRAIT_ALT_CLICK_BLOCKER,
 	),
 	/atom/movable = list(
@@ -27,6 +29,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_EMOTEMUTE " = TRAIT_EMOTEMUTE,
 		"TRAIT_DEAF" = TRAIT_DEAF,
 		"TRAIT_HUSK" = TRAIT_HUSK,
+		"TRAIT_DO_NOT_SPLASH" = TRAIT_DO_NOT_SPLASH,
 		"TRAIT_DUMB" = TRAIT_DUMB,
 		"TRAIT_MONKEYLIKE" = TRAIT_MONKEYLIKE,
 		"TRAIT_PACIFISM" = TRAIT_PACIFISM,
@@ -35,6 +38,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_DEATHCOMA" = TRAIT_DEATHCOMA,
 		"TRAIT_FAKEDEATH" = TRAIT_FAKEDEATH,
 		"TRAIT_NEARSIGHTED_CORRECTED" = TRAIT_NEARSIGHTED_CORRECTED,
+		"TRAIT_NO_THROWING" = TRAIT_NO_THROWING,
 		"TRAIT_NO_TRANSFORM" = TRAIT_NO_TRANSFORM,
 		"TRAIT_STUNIMMUNE" = TRAIT_STUNIMMUNE,
 		"TRAIT_SUICIDED" = TRAIT_SUICIDED,
@@ -62,10 +66,12 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOLIMBDISABLE" = TRAIT_NOLIMBDISABLE,
 		"TRAIT_EASYLIMBDISABLE" = TRAIT_EASYLIMBDISABLE,
 		"TRAIT_TOXINLOVER" = TRAIT_TOXINLOVER,
+		"TRAIT_NOBLOOD" = TRAIT_NOBLOOD,
 		"TRAIT_NOBREATH" = TRAIT_NOBREATH,
 		"TRAIT_HOLY" = TRAIT_HOLY,
 		"TRAIT_NOAMBUSH" = TRAIT_NOAMBUSH,
 		"TRAIT_NOCRITDAMAGE" = TRAIT_NOCRITDAMAGE,
+		"TRAIT_NOCRITOVERLAY" = TRAIT_NOCRITOVERLAY,
 		"TRAIT_NOSLIPWATER" = TRAIT_NOSLIPWATER,
 		"TRAIT_NOSLIPALL" = TRAIT_NOSLIPALL,
 		"TRAIT_NODEATH" = TRAIT_NODEATH,
@@ -83,7 +89,6 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOMOBSWAP" = TRAIT_NOMOBSWAP,
 		"TRAIT_XRAY_VISION" = TRAIT_XRAY_VISION,
 		"TRAIT_THERMAL_VISION" = TRAIT_THERMAL_VISION,
-		"TRAIT_SURGEON" = TRAIT_SURGEON,
 		"TRAIT_STRONG_GRABBER" = TRAIT_STRONG_GRABBER,
 		"TRAIT_MAGIC_CHOKE" = TRAIT_MAGIC_CHOKE,
 		"TRAIT_SOOTHED_THROAT" = TRAIT_SOOTHED_THROAT,
@@ -93,7 +98,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_DRUQK" = TRAIT_DRUQK,
 		"TRAIT_FINGERPRINT_PASSTHROUGH" = TRAIT_FINGERPRINT_PASSTHROUGH,
 		"TRAIT_SOUND_DEBUGGED" = TRAIT_SOUND_DEBUGGED,
+		"TRAIT_TIME_STOP_IMMUNE" = TRAIT_TIME_STOP_IMMUNE,
 		"TRAIT_CANNOT_BE_UNBUCKLED" = TRAIT_CANNOT_BE_UNBUCKLED,
+		"TRAIT_CANT_RIDE" = TRAIT_CANT_RIDE,
+		"TRAIT_UNDENSE" = TRAIT_UNDENSE,
 		//Rogue Traits Past here
 		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
 		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
@@ -189,6 +197,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Endless Slumber" = TRAIT_TORPOR,
 		"Boundless Energy" = TRAIT_NOENERGY,
 		"Keen Ears"	= TRAIT_KEENEARS,
+		"Keen Eyes" = TRAIT_KEENEYES,
 		"Poison Resilience" = TRAIT_POISON_RESILIENCE,
 		"Expert Forager" = TRAIT_FORAGER,
 		"Seed Finder" = TRAIT_SEED_FINDER,
@@ -197,6 +206,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -210,6 +220,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 	),
 	/turf = list(
 		"TRAIT_AI_AVOID_TURF" = TRAIT_AI_AVOID_TURF,
+		"TRAIT_CHASM_STOPPED" = TRAIT_CHASM_STOPPED,
+		"TRAIT_IMMERSE_STOPPED" = TRAIT_IMMERSE_STOPPED,
 		"TRAIT_TURF_IGNORE_SLOWDOWN" = TRAIT_TURF_IGNORE_SLOWDOWN,
 	)
 ))
@@ -264,7 +276,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_LEECHIMMUNE = "Leeches are reluctant to drain my blood.",
 	TRAIT_ASSASSIN = "My soul has been tainted by Graggar, god of murder.",
 	TRAIT_BARDIC_TRAINING = "Xylixian inspiration grants my songs boons and ailments.",
-	TRAIT_GRAVEROBBER = "Necra favors my grim deeds, I can unearth graves without being cursed by her.",
+	TRAIT_GRAVEROBBER = "I know the rites to shield myself from the Undermaiden's gaze, and can unearth graves without the risk of drawing her ire.",
 	TRAIT_MISSING_NOSE = span_warning("I struggle to breathe."),
 	TRAIT_DISFIGURED = span_warning("No one can recognize me..."),
 	TRAIT_BEAUTIFUL = span_love("My face was shaped by the gods!"),
@@ -322,6 +334,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding."),
 	TRAIT_NOENERGY = span_info("I don't need rest; I won't ever feel fatigue."),
 	TRAIT_KEENEARS = span_info("I've a good pair of ears, and can tell who is speaking, even when they're out of sight. I can also hear whispers from further away."),
+	TRAIT_KEENEYES = span_info("Years of hunting and tracking have honed your sight. You're better at noticing details and spotting hidden things."),
 	TRAIT_POISON_RESILIENCE	= span_info("I'm more resilient to poisons."),
 	TRAIT_FORAGER = span_info("I can tell which jacksberries are poisonous."),
 	TRAIT_SEED_FINDER = span_info("I find seeds more easily."),

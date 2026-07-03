@@ -35,6 +35,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 
@@ -69,14 +70,12 @@
 
 /datum/outfit/adventurer/profanepaladin
 	name = "Profane Paladin (Adventurer)"
-
 	shirt = /obj/item/clothing/armor/chainmail
 	belt = /obj/item/storage/belt/leather/steel
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	ring = /obj/item/clothing/ring/silver/toper
 	neck = /obj/item/clothing/neck/chaincoif
 	backl = /obj/item/weapon/sword/long/judgement/evil
-
 	head = /obj/item/clothing/head/helmet/heavy/bucket
 	armor = /obj/item/clothing/armor/plate
 	gloves = /obj/item/clothing/gloves/plate

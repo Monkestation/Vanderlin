@@ -22,7 +22,7 @@
 		/mob/living/carbon/human/proc/demand_submission,
 		/mob/living/carbon/human/proc/punish_spawn
 	)
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Lord"
 	vitae_bonus = 500 // Extra vitae for lords
 	ascended = FALSE

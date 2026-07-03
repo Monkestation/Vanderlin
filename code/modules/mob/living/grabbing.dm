@@ -305,7 +305,7 @@
 					var/mob/living/carbon/C = M
 					var/obj/item/clothing/neck/neck_armor = C.wear_neck
 					var/throat_protected = FALSE
-					if(neck_armor)
+					if(istype(neck_armor))
 						throat_protected = (neck_armor.armor_class != ARMOR_CLASS_NONE)
 					if(C.head && istype(C.head, /obj/item/clothing/head/helmet/heavy/necked))
 						throat_protected = TRUE
@@ -387,7 +387,7 @@
 					var/tackle_time = max(10 + (skill_diff * 2), 1)
 					M.Knockdown(tackle_time)
 					playsound(src,"genblunt",100,TRUE)
-					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state == GRAB_AGGRESSIVE )
+					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state >= GRAB_AGGRESSIVE)
 						M.visible_message(span_danger("[user] throws [M] to the ground!"), \
 						span_userdanger("[user] throws me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 					else
@@ -490,10 +490,10 @@
 	var/damage = H.get_punch_dmg()
 	C.next_attack_msg.Cut()
 	playsound(C, "genblunt", 100, FALSE, -1)
-	C.apply_damage(damage*1.5, , Chead, armor_block)
-	Chead.bodypart_attacked_by(BCLASS_SMASH, damage*1.5, H, crit_message=TRUE)
-	H.apply_damage(damage, BRUTE, Hhead, armor_block_user)
-	Hhead.bodypart_attacked_by(BCLASS_SMASH, damage/1.2, H, crit_message=TRUE)
+	var/head_damage = C.apply_damage(damage*1.5, , Chead, armor_block)
+	Chead.bodypart_attacked_by(BCLASS_SMASH, head_damage, H, crit_message=TRUE, pre_applied = TRUE)
+	var/hhead_damage = H.apply_damage(damage, BRUTE, Hhead, armor_block_user)
+	Hhead.bodypart_attacked_by(BCLASS_SMASH, hhead_damage, H, crit_message=TRUE, pre_applied = TRUE)
 
 	C.visible_message(span_danger("[H] headbutts [C]'s [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), \
 					span_userdanger("[H] headbutts my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE, H)
@@ -601,7 +601,7 @@
 	var/damage = user.get_punch_dmg()
 	C.next_attack_msg.Cut()
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
-		limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, damage, user, sublimb_grabbed, crit_message = TRUE)
+		limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, damage, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE)
 		playsound(C, "smashlimb", 100, FALSE, -1)
 	else
 		C.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
@@ -721,6 +721,10 @@
 	bleed_suppressing = 1
 	var/last_drink
 
+/obj/item/grabbing/bite/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+
 /obj/item/grabbing/bite/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(!valid_check())
@@ -755,9 +759,10 @@
 		damage = damage*2
 	user.do_attack_animation(C, ATTACK_EFFECT_BITE, used_item = FALSE)
 	C.next_attack_msg.Cut()
-	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
+	var/real_damage = C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
+	if(real_damage)
 		playsound(C, "smallslash", 100, FALSE, -1)
-		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, damage, user, sublimb_grabbed, crit_message = TRUE)
+		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, real_damage, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
 		if(user.mind)
 			//TODO: Werewolf Signal
 			var/datum/antagonist/werewolf/werewolf_antag = user.mind.has_antag_datum(/datum/antagonist/werewolf)
@@ -769,7 +774,7 @@
 					human.werewolf_feed(C)
 
 			// TODO: Zombie Signal
-			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
+			if(IS_DEADITE(user))
 				var/mob/living/carbon/human/H = C
 				if(istype(H))
 					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))

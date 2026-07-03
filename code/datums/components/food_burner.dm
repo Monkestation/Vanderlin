@@ -28,7 +28,7 @@
 
 	START_PROCESSING(SSprocessing, src)
 
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_STORAGE_REMOVED_ITEM, PROC_REF(on_item_removed))
 	RegisterSignal(parent, COMSIG_CONTAINER_CRAFT_COMPLETE, PROC_REF(on_craft_complete))
 

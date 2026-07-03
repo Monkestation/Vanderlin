@@ -73,17 +73,9 @@
 	boobed = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDEBOOB
-	var/overarmor = TRUE
 	sellprice = 300
-
-
-/obj/item/clothing/cloak/holysee/Initialize(mapload, ...)
-	. = ..()
-	create_storage(type = /datum/storage/cloak)
-
-/obj/item/clothing/cloak/holysee/dropped(mob/user, silent)
-	. = ..()
-	atom_storage?.remove_all(get_turf(src))
+	has_storage = TRUE
+	var/overarmor = TRUE
 
 /obj/item/clothing/cloak/holysee/MiddleClick(mob/user)
 	overarmor = !overarmor

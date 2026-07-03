@@ -108,12 +108,14 @@
 	. = ..()
 	if(!proximity)
 		return
-	if(on)
-		if(prob(50) || (user.used_intent.type == /datum/intent/use))
-			if(ismob(A))
-				A.spark_act()
-			else
-				A.fire_act(3,3)
+
+	if(!on)
+		return
+
+	if(ismob(A))
+		A.spark_act()
+	else
+		A.fire_act(3,3)
 
 /obj/item/flashlight/flare/light/spark_act()
 	fire_act()

@@ -102,13 +102,15 @@ SUBSYSTEM_DEF(merchant)
 
 	// Process ALL anvil recipes
 	for(var/datum/anvil_recipe/recipe_type as anything in subtypesof(/datum/anvil_recipe))
+		if(IS_ABSTRACT(recipe_type))
+			continue
 		var/datum/anvil_recipe/recipe = new recipe_type()
 		var/output = recipe.created_item
 
 		if(output)
 			var/list/all_requirements = list()
-			if(recipe.req_bar)
-				all_requirements[recipe.req_bar] = recipe.num_of_materials
+			if(recipe.required_material)
+				all_requirements[recipe.required_material] = recipe.num_of_materials
 
 			if(length(recipe.additional_items))
 				for(var/item in recipe.additional_items)
@@ -193,6 +195,8 @@ SUBSYSTEM_DEF(merchant)
 			obtainable_items |= output
 
 	for(var/datum/anvil_recipe/recipe as anything in subtypesof(/datum/anvil_recipe))
+		if(IS_ABSTRACT(recipe))
+			continue
 		var/output = initial(recipe.created_item)
 		if(output)
 			obtainable_items |= output

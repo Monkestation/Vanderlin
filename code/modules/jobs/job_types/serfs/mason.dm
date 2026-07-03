@@ -41,6 +41,7 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/mason
+	book_type = /obj/item/recipe_book/masonry
 
 /datum/job/mason/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -49,12 +50,10 @@
 
 /datum/outfit/mason
 	name = JOB_MASON
-	head = /obj/item/clothing/head/hatfur
 	armor = /obj/item/clothing/armor/leather/vest
 	cloak = /obj/item/clothing/cloak/apron/waist/colored/brown
 	neck = /obj/item/storage/belt/pouch/coins/mid
 	pants = /obj/item/clothing/pants/trou
-	shirt = /obj/item/clothing/shirt/undershirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots/leather
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/hammer

@@ -11,10 +11,6 @@
 	if(melting_material)
 		color = initial(melting_material.color)
 
-/obj/item/ore/dust/set_quality(quality)
-	..()
-	mill_yield_bonus = (recipe_quality - 1) * 0.3
-
 /obj/item/ore/dust/gold
 	name = "gold dust"
 	desc = "Fine particles of gold ore."

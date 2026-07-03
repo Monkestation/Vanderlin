@@ -21,16 +21,19 @@
 #define SUBMIT_INTENT 1
 
 //Blood levels
+#define BLOOD_VOLUME_MAXIMUM BLOOD_VOLUME_NORMAL * 3.5
 #define BLOOD_VOLUME_MAX_LETHAL BLOOD_VOLUME_NORMAL * 3
 #define BLOOD_VOLUME_EXCESS BLOOD_VOLUME_NORMAL * 2.5
-#define BLOOD_VOLUME_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
+#define BLOOD_VOLUME_SAFE_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
 #define BLOOD_VOLUME_NORMAL		1200
 #define BLOOD_VOLUME_SAFE		BLOOD_VOLUME_NORMAL * 0.8
 #define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
 #define BLOOD_VOLUME_BAD 		BLOOD_VOLUME_NORMAL * 0.4
 #define BLOOD_VOLUME_BLEEDOUT 	BLOOD_VOLUME_NORMAL * 0.35
-#define BLOOD_VOLUME_BLEEDOUT_PASSOUT BLOOD_VOLUME_NORMAL * 0.25
 #define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
+
+/// How efficiently humans regenerate blood.
+#define BLOOD_REGEN_FACTOR 0.01
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
@@ -69,12 +72,6 @@
 #define CHRONIC_NERVE_DAMAGE 2
 #define CHRONIC_OLD_FRACTURE 3
 #define CHRONIC_SCAR_TISSUE 4
-
-#define ORGAN_ORGANIC   1
-#define ORGAN_ROBOTIC   2
-
-#define BODYPART_ORGANIC   1
-#define BODYPART_ROBOTIC   2
 
 #define BODYPART_NOT_DISABLED 0
 #define BODYPART_DISABLED_DAMAGE 1
@@ -317,13 +314,15 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.2	//factor at which mob nutrition decreases
-/// Factor at which mob hydration decreases
+/// Base factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.2
+/// Base Factor at which mob hydration decreases
 #define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_SLOW_METABOLISM 0.1 // needed to have poisons have powerful effect at low doses without making it too fast
+#define REAGENTS_INSANELY_SLOW_METABOLISM 0.01
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
@@ -371,9 +370,21 @@
 
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
+/// Possible value of [/atom/movable/buckle_dir]. If set to a different (positive-or-zero) value than this, the buckling thing will force a dir on the buckled.
+#define BUCKLE_MATCH_DIR -1
 
 /// Simple mob trait, indicating it may follow continuous move actions controlled by code instead of by user input.
 #define MOVES_ON_ITS_OWN (1<<0)
+/// Simple mob trait, can be fireman carried
+#define CAN_BE_FIREMANNED (1<<1)
+/// Blood volume or status has changed since the last [proc/update_blood_effects] call.
+/// Nowhere near guaranteed to happen only once per life tick, or at all.
+#define BLOOD_UPDATE_QUEUED (1<<4)
+/// This mob can have blood, cached value of [proc/can_have_blood]
+#define LIVING_CAN_HAVE_BLOOD (1<<5)
+
+/// Returns whether or not the given mob can succumb
+#define CAN_SUCCUMB(target) ((HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION) || HAS_TRAIT(target, TRAIT_DEATHS_DOOR)) && !HAS_TRAIT(target, TRAIT_NODEATH))
 
 // Body position defines.
 /// Mob is standing up, usually associated with lying_angle value of 0.

@@ -16,18 +16,23 @@
 	item_state = "grenzelpants"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_RED_OCHRE
 	colorgrenz = TRUE
 	armor = ARMOR_PADDED
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
 	item_weight = 400 GRAMS
 
-/obj/item/clothing/pants/grenzelpants/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
+/obj/item/clothing/pants/fencer
+	name = "fencing breeches"
+	desc = "Comfortable padded breeches designed for fencers, providing a bit of protection to the legs while not restricting movement."
+	icon_state = "fencingbreeches"
+	item_state = "fencingbreeches"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_pants.dmi'
+	sleevetype = "leg"
+	detail_tag = "_detail"
+	detail_color = "#5E4440"
+	armor = ARMOR_PADDED
+	prevent_crits = MINOR_CRITICALS
+	max_integrity = INTEGRITY_STANDARD
+	item_weight = 400 GRAMS

@@ -48,7 +48,7 @@
 		return
 
 	RegisterSignal(entered, SIGNAL_ADDTRAIT(TRAIT_IMMERSED), PROC_REF(dip_in))
-	RegisterSignal(entered, COMSIG_PARENT_QDELETING, PROC_REF(on_content_del))
+	RegisterSignal(entered, COMSIG_QDELETING, PROC_REF(on_content_del))
 	if(isliving(entered))
 		RegisterSignal(entered, SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), PROC_REF(dip_out))
 	wet_dogs |= entered
@@ -75,7 +75,7 @@
 
 /datum/element/watery_tile/proc/on_content_del(atom/movable/source)
 	SIGNAL_HANDLER
-	UnregisterSignal(source, list(SIGNAL_ADDTRAIT(TRAIT_IMMERSED), SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), COMSIG_PARENT_QDELETING))
+	UnregisterSignal(source, list(SIGNAL_ADDTRAIT(TRAIT_IMMERSED), SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), COMSIG_QDELETING))
 	wet_dogs -= source
 
 /datum/element/watery_tile/proc/dip_out(mob/living/source)
@@ -108,7 +108,7 @@
 		var/turf/open/water/water_turf = owner_turf
 		if(water_turf.water_reagent)
 			var/datum/reagent/turf_reagent = new water_turf.water_reagent()
-			turf_reagent.reaction_mob(owner, TOUCH, 2)
+			turf_reagent.expose_mob(owner, TOUCH, 2)
 
 			if(ishuman(owner) && istype(water_turf, /turf/open/water/bath))
 				var/mob/living/carbon/human/human_owner = owner

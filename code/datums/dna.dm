@@ -66,7 +66,7 @@
 	if(ishuman(holder))
 		var/mob/living/carbon/human/H = holder
 		L[DNA_SKIN_TONE_BLOCK] = H.skin_tone
-		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.get_eye_color(), default="FFFFFF")
+		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.get_eye_color(), include_crunch = FALSE, default="FFFFFF")
 
 	for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
 		if(L[i])
@@ -159,7 +159,7 @@
 
 /mob/living/carbon/human/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null)
 	if(pref_load)
-		skin_tone = pref_load.skin_tone
+		skin_tone = pref_load.read_preference(/datum/preference/choiced/skin_tone)
 	..()
 	if(icon_update)
 		update_body()

@@ -173,6 +173,7 @@
 	icon_state = "dochat1"
 	item_state = "dochat1"
 	detail_tag = "_detail"
+	detail_color = CLOTHING_SCARLET
 	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/head/courtphysician/female
@@ -181,6 +182,7 @@
 	icon_state = "dochat2"
 	item_state = "dochat2"
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/head/maidband

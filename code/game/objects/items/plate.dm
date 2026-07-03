@@ -46,7 +46,7 @@
 				cloth_check.reagents.remove_all(1)
 				dirty = FALSE
 				update_appearance(UPDATE_OVERLAYS)
-				AddComponent(/datum/component/particle_spewer/sparkle)
+				AddComponent(/datum/component/particle_spewer/sparkle/turf_only)
 				user.nobles_seen_servant_work()
 				fork_usages = 0
 				cleaned = TRUE
@@ -80,24 +80,13 @@
 	else
 		return ..()
 
-/obj/item/plate/pre_attack(atom/A, mob/living/user, list/modifiers)
-	if(!iscarbon(A))
-		return
-	if(!contents.len)
-		return
-	if(user.used_intent.type != /datum/intent/food)
-		return
-	var/obj/item/object_to_eat = contents[1]
-	A.attackby(object_to_eat, user)
-	return TRUE //No normal attack
-
 ///This proc adds the food to viscontents and makes sure it can deregister if this changes.
 /obj/item/plate/proc/AddToPlate(obj/item/item_to_plate)
 	vis_contents += item_to_plate
 	item_to_plate.flags_1 |= IS_ONTOP_1
 	item_to_plate.vis_flags |= (VIS_INHERIT_PLANE | VIS_INHERIT_LAYER)
 	RegisterSignal(item_to_plate, COMSIG_MOVABLE_MOVED, PROC_REF(ItemMoved))
-	RegisterSignal(item_to_plate, COMSIG_PARENT_QDELETING, PROC_REF(ItemMoved))
+	RegisterSignal(item_to_plate, COMSIG_QDELETING, PROC_REF(ItemMoved))
 	// We gotta offset ourselves via pixel_w/z, so we don't end up z fighting with the plane
 	item_to_plate.pixel_w = item_to_plate.pixel_x
 	item_to_plate.pixel_z = item_to_plate.pixel_y
@@ -114,7 +103,7 @@
 	removed_item.vis_flags &= ~VIS_INHERIT_PLANE
 	removed_item.vis_flags &= ~VIS_INHERIT_LAYER
 	vis_contents -= removed_item
-	UnregisterSignal(removed_item, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(removed_item, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
 	// Resettt
 	removed_item.pixel_x = removed_item.pixel_w
 	removed_item.pixel_y = removed_item.pixel_z

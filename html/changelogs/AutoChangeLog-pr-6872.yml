@@ -1,0 +1,5 @@
+author: "Sulaboy"
+delete-after: True
+changes:
+  - rscadd: "Silver Monocles can now check the price of items or all items on a tile by clicking. Steward spawns with one."
+  - balance: "Stewards can choose their weapon"

@@ -1130,6 +1130,37 @@
 	throwforce = 1
 	possible_item_intents = list(/datum/intent/use, /datum/intent/mace/strike/wood)
 	var/verses_file = "strings/bibble.txt"
+	var/can_select_verse_ranges = TRUE
+	var/current_verse_range = "Random Verse"
+	var/list/verse_ranges = list(           // Patron divied up by line in txt file
+		"Seperation" = list(1, 4),
+		"Heavens" = list(5, 9),
+		"Astrata" = list(10, 12),
+		"Dendor" = list(13, 15),
+		"Necra" = list(16, 19),
+		"Noc" = list(20, 22),
+		"Malum" = list(23, 26),
+		"Ravox" = list(27, 29),
+		"Eora" = list(30, 32),
+		"Xylix" = list(33, 36),
+		"Pestra" = list(37, 39),
+		"Abyssor" = list(40, 42),
+		"Random Verse" = null
+		)
+
+/obj/item/book/bibble/examine(mob/user)
+	. = ..()
+
+	if(current_verse_range == "Random Verse")
+		. += span_notice("I'm ready to read a random verse.")
+	else
+		. += span_notice("I'm ready to read a verse from the [current_verse_range] section.")
+
+/obj/item/book/bibble/get_mechanics_examine(mob/user)
+	. = ..()
+	if(!can_select_verse_ranges)
+		return
+	. += span_notice("Alt click this book to select which section to read verses from.")
 
 /obj/item/book/bibble/read(mob/user)
 	if(!open)
@@ -1144,20 +1175,53 @@
 		return
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
-		var/m
-		var/list/verses = file2list(verses_file)
-		m = pick(verses)
-		if(m)
-			user.say(m)
 
-/obj/item/book/bibble/attack(mob/living/M, mob/user, list/modifiers)
-	if(is_priest_job(user.mind?.assigned_role))
-		if(!user.can_read(src))
-			return
-		M.apply_status_effect(/datum/status_effect/buff/blessed)
-		user.visible_message(span_notice("[user] blesses [M]."))
-		playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
+	var/list/verses = file2list(verses_file)
+
+	if(!verses || !verses.len)
 		return
+
+	var/selected_verse
+	var/list/range = verse_ranges[current_verse_range]
+
+	if(!range)
+		selected_verse = pick(verses)
+	else
+		var/start = range[1]
+		var/end = min(range[2], verses.len)
+
+		if(start <= verses.len)
+			selected_verse = pick(verses.Copy(start, end + 1))
+
+	if(selected_verse)
+		user.say(selected_verse)
+
+/obj/item/book/bibble/AltClick(mob/user, list/modifiers)
+	if(!can_select_verse_ranges)
+		return ..()
+
+	var/choice = tgui_input_list(user, "Choose a section:", title, verse_ranges)
+	if(!choice)
+		return
+
+	current_verse_range = choice
+
+	to_chat(user, span_notice("You will read a section from [choice]."))
+
+/obj/item/book/bibble/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with) || !is_priest_job(user.mind?.assigned_role))
+		return NONE
+
+	if(!user.can_read(src))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/M = interacting_with
+
+	M.apply_status_effect(/datum/status_effect/buff/blessed)
+	user.visible_message(span_notice("[user] blesses [M]."), span_notice("I bless [M]."))
+	playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /datum/status_effect/buff/blessed
 	id = "blessed"
@@ -1434,20 +1498,24 @@
 	for(var/obj/item/paper/page as anything in pages)
 		compiled_pages += "<p>[page.info]</p>\n"
 
-/obj/item/manuscript/attackby(obj/item/I, mob/living/user, list/modifiers)
+/obj/item/manuscript/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	// why is a book crafting kit using the craft system, but crafting a book isn't?
 	// Well, *for some reason*, the crafting system is made in such a way
 	// as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
-	if(istype(I, /obj/item/book_crafting_kit))
-		var/obj/item/book/playerbook/PB = new /obj/item/book/playerbook(get_turf(I.loc), TRUE, user, compiled_pages)
-		qdel(I)
+	if(istype(tool, /obj/item/book_crafting_kit))
+		var/obj/item/book/playerbook/PB = new /obj/item/book/playerbook(get_turf(tool), TRUE, user, compiled_pages)
+		qdel(tool)
 		if(user.Adjacent(PB))
 			PB.add_fingerprint(user)
 			user.put_in_hands(PB)
-		return qdel(src)
+		qdel(src)
+		return ITEM_INTERACT_SUCCESS
 
-	if((I.type == /obj/item/paper) || (I.type == /obj/item/paper/scroll))
-		var/obj/item/paper/inserted_paper = I
+	if((tool.type == /obj/item/paper) || (tool.type == /obj/item/paper/scroll))
+		var/obj/item/paper/inserted_paper = tool
 		if(length(pages) == 8)
 			to_chat(user, span_warning("I can not find a place to put [inserted_paper] into [src]..."))
 			return
@@ -1457,8 +1525,41 @@
 		to_chat(user, span_notice("I put [inserted_paper] into [src]."))
 		update_pages()
 		updateUsrDialog()
+		return ITEM_INTERACT_SUCCESS
 
-	return ..()
+/obj/item/manuscript/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/natural/feather))
+		return NONE
+
+	if(written)
+		to_chat(user, "<span class='notice'>The manuscript has already been authored and titled.</span>")
+		return ITEM_INTERACT_BLOCKING
+
+	// Prompt user to populate manuscript fields
+	var/newtitle = dd_limittext(SANITIZE_HEAR_MESSAGE(input(user, "Enter the title of the manuscript:") as text|null), MAX_CHARTER_LEN)
+	var/newauthor = dd_limittext(SANITIZE_HEAR_MESSAGE(input(user, "Enter the author's name:") as text|null), MAX_CHARTER_LEN)
+	var/newcategory = input(user, "Select the category of the manuscript:") in list("Apocrypha & Grimoires", "Myths & Tales", "Legends & Accounts", "Thesis", "Eoratica")
+	var/newicon = book_icons[input(user, "Choose a book style", "Book Style") as anything in book_icons]
+
+	if(newtitle && newauthor && newcategory)
+		name = newtitle
+		author = newauthor
+		category = newcategory
+		ckey = user.ckey
+		select_icon = newicon
+		icon_state = "paperwrite"
+		to_chat(user, "<span class='notice'>You have successfully authored and titled the manuscript.</span>")
+		var/complete = tgui_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
+		SEND_SIGNAL(user, COMSIG_BOOK_WRITTEN)
+		if(complete == CHOICE_YES && compiled_pages)
+			written = TRUE
+	else
+		to_chat(user, "<span class='notice'>You must fill out all fields to complete the manuscript.</span>")
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/manuscript/examine(mob/user)
 	. = ..()
@@ -1519,39 +1620,6 @@
 	dat += "<a href='byond://?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 	user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=0;")
 	onclose(user, "reading", src)
-
-
-/obj/item/manuscript/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-
-	if(istype(I, /obj/item/natural/feather))
-		if(written)
-			to_chat(user, "<span class='notice'>The manuscript has already been authored and titled.</span>")
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		// Prompt user to populate manuscript fields
-		var/newtitle = dd_limittext(SANITIZE_HEAR_MESSAGE(input(user, "Enter the title of the manuscript:") as text|null), MAX_CHARTER_LEN)
-		var/newauthor = dd_limittext(SANITIZE_HEAR_MESSAGE(input(user, "Enter the author's name:") as text|null), MAX_CHARTER_LEN)
-		var/newcategory = input(user, "Select the category of the manuscript:") in list("Apocrypha & Grimoires", "Myths & Tales", "Legends & Accounts", "Thesis", "Eoratica")
-		var/newicon = book_icons[input(user, "Choose a book style", "Book Style") as anything in book_icons]
-
-		if(newtitle && newauthor && newcategory)
-			name = newtitle
-			author = newauthor
-			category = newcategory
-			ckey = user.ckey
-			select_icon = newicon
-			icon_state = "paperwrite"
-			to_chat(user, "<span class='notice'>You have successfully authored and titled the manuscript.</span>")
-			var/complete = tgui_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
-			SEND_SIGNAL(user, COMSIG_BOOK_WRITTEN)
-			if(complete == CHOICE_YES && compiled_pages)
-				written = TRUE
-		else
-			to_chat(user, "<span class='notice'>You must fill out all fields to complete the manuscript.</span>")
-
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/manuscript/update_icon_state()
 	. = ..()
@@ -1684,15 +1752,22 @@ ____________End of Example*/
 	title = "psydon bible"
 	dat = "gott.json"
 	verses_file = "strings/psybibble.txt"
+	can_select_verse_ranges = FALSE
 
-/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user, list/modifiers)
-	if(istype(user) && istype(user.patron, /datum/patron/psydon))
-		if(!user.can_read(src))
-			return
-		M.apply_status_effect(/datum/status_effect/buff/blessed)
-		user.visible_message(span_notice("[user] blesses [M]."))
-		playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
-		return
+/obj/item/book/bibble/psy/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with) || !istype(user.patron, /datum/patron/psydon))
+		return NONE
+
+	if(!user.can_read(src))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/M = interacting_with
+
+	M.apply_status_effect(/datum/status_effect/buff/blessed)
+	user.visible_message(span_notice("[user] blesses [M]."), span_notice("I bless [M]."))
+	playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /datum/status_effect/buff/blessed
 	id = "blessed"

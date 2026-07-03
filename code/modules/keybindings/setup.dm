@@ -60,7 +60,7 @@
 			break
 
 	if(!skip_macro_mode)
-		if(prefs.hotkeys)
+		if(prefs.read_preference(/datum/preference/toggle/hotkeys))
 			winset(src, null, "input.focus=true command=activeInput input.background-color=[COLOR_INPUT_ENABLED] input.text-color = #EEEEEE")
 		else
 			winset(src, null, "input.focus=true command=activeInput input.background-color=[COLOR_INPUT_DISABLED] input.text-color = #ad9eb4")

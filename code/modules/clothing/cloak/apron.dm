@@ -51,7 +51,7 @@
 	boobed = FALSE
 	grid_width = 64
 	grid_height = 64
-	pocket_storage_path = /datum/storage/cloak
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/apron/maid/Initialize(mapload, ...)
 	. = ..()

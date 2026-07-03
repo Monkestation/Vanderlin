@@ -22,7 +22,7 @@
 	RegisterSignal(get_turf(target), COMSIG_TURF_ENTERED, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_REMOVE, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_UPDATE, PROC_REF(on_add), override = TRUE)
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(remove_all), override = TRUE)
+	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(remove_all), override = TRUE)
 
 /datum/element/mob_overlay_effect/Detach(datum/source)
 	. = ..()
@@ -31,7 +31,7 @@
 		COMSIG_TURF_ENTERED,
 		COMSIG_MOB_OVERLAY_FORCE_REMOVE,
 		COMSIG_MOB_OVERLAY_FORCE_UPDATE,
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 	))
 
 /datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target, atom/new_loc)

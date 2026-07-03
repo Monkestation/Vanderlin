@@ -126,7 +126,7 @@
 		return FALSE
 	if(is_antag_banned(ckey, ROLE_WEREWOLF))
 		return FALSE
-	if(mind.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(src))
 		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
 		return FALSE
@@ -170,7 +170,7 @@
 		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
 		return
 	if(target.mind)
-		if(target.mind.has_antag_datum(/datum/antagonist/zombie))
+		if(IS_DEADITE(target))
 			to_chat(src, span_warning("I should not feed on rotten flesh."))
 			return
 		if(target.mind.has_antag_datum(/datum/antagonist/vampire))

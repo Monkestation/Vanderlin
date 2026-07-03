@@ -18,8 +18,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/whipsflails
-	melting_material = /datum/material/iron
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/iron
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -60,7 +59,6 @@
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash
-	melting_material = null
 	sellprice = 10
 	item_weight = 700 GRAMS
 
@@ -73,8 +71,8 @@
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 4
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = null
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 35
 	item_weight = 1.4 KILOGRAMS
 
@@ -91,6 +89,23 @@
 	icon_state = "necraflail"
 	item_weight = 1.4 KILOGRAMS
 
+//................ Silver Flail ............... //
+/obj/item/weapon/flail/silver
+	name = "silver flail"
+	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast."
+	icon_state = "silverflail"
+	force = DAMAGE_GOOD_FLAIL - 1
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 4
+	smeltresult = null
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 90
+	item_weight = 1 KILOGRAMS
+
+/obj/item/weapon/flail/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
 	name = "psydonian flail"
@@ -100,8 +115,7 @@
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 4
-	melting_material = /datum/material/silver
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/silverblessed
 	sellprice = 50
 	last_used = 0
 	item_weight = 1.4 KILOGRAMS
@@ -111,10 +125,14 @@
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/flail/psydon/relic
-	name = "Consecratia"
+	name = "\proper consecratia"
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
 	item_weight = 1.5 KILOGRAMS
+
+/obj/item/weapon/flail/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
 
 
 //................ Peasant Flail ............... // A little confusing still
@@ -163,7 +181,7 @@
 	possible_item_intents = list(FLAIL_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
 	minstr = 9
-
+	smeltresult = /obj/item/fertilizer/ash
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -188,7 +206,7 @@
 
 
 /obj/item/weapon/flail/peasantwarflail/matthios
-	name = "Gilded Flail"
+	name = "\proper gilded flail"
 	desc = "Weight of wealth in a deadly striking end."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
@@ -198,6 +216,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250

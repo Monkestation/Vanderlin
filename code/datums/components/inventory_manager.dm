@@ -31,11 +31,11 @@
 
 /datum/component/ai_inventory_manager/Destroy()
 	for(var/slot in container_refs)
-		UnregisterSignal(container_refs[slot], COMSIG_PARENT_QDELETING)
+		UnregisterSignal(container_refs[slot], COMSIG_QDELETING)
 
 	for(var/cat in inventory_map)
 		for(var/obj/item/it as anything in inventory_map[cat])
-			UnregisterSignal(it, COMSIG_PARENT_QDELETING)
+			UnregisterSignal(it, COMSIG_QDELETING)
 
 	container_refs = null
 	inventory_map = null
@@ -55,11 +55,11 @@
 	var/mob/living/carbon/human/managing = parent
 
 	for(var/slot in container_refs)
-		UnregisterSignal(container_refs[slot], COMSIG_PARENT_QDELETING)
+		UnregisterSignal(container_refs[slot], COMSIG_QDELETING)
 	container_refs = alist()
 	for(var/cat in inventory_map)
 		for(var/obj/item/it as anything in inventory_map[cat])
-			UnregisterSignal(it, COMSIG_PARENT_QDELETING)
+			UnregisterSignal(it, COMSIG_QDELETING)
 		inventory_map[cat] = list()
 
 	for(var/slot_flag in all_slot_flags)
@@ -87,7 +87,8 @@
 		return
 
 	container_refs[slot_flag] = candidate
-	RegisterSignal(candidate, COMSIG_PARENT_QDELETING, PROC_REF(on_container_delete), override = TRUE)
+
+	RegisterSignal(candidate, COMSIG_QDELETING, PROC_REF(on_container_delete), override = TRUE)
 	RegisterSignal(candidate, COMSIG_STORAGE_STORED_ITEM, PROC_REF(on_storage_added), override = TRUE)
 
 /datum/component/ai_inventory_manager/proc/on_storage_added(datum/source, obj/item/inserted)
@@ -100,7 +101,7 @@
 
 /// Classify a single item into all matching categories
 /datum/component/ai_inventory_manager/proc/_classify_item(obj/item/item, slot_flag)
-	RegisterSignal(item, COMSIG_PARENT_QDELETING, PROC_REF(on_item_delete), override = TRUE)
+	RegisterSignal(item, COMSIG_QDELETING, PROC_REF(on_item_delete), override = TRUE)
 
 	for(var/ai_flag in GLOB.ai_item_flags)
 		if(ai_flag & item.flags_ai_inventory)
@@ -130,7 +131,7 @@
 
 	_purge_slot(slot)
 	if(slot in container_refs)
-		UnregisterSignal(container_refs[slot], COMSIG_PARENT_QDELETING)
+		UnregisterSignal(container_refs[slot], COMSIG_QDELETING)
 		container_refs -= slot
 
 /datum/component/ai_inventory_manager/proc/on_drop(datum/source, obj/item/dropped)
@@ -141,7 +142,7 @@
 /datum/component/ai_inventory_manager/proc/on_item_delete(datum/source, force)
 	SIGNAL_HANDLER
 
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_QDELETING)
 	_remove_item(source)
 
 /datum/component/ai_inventory_manager/proc/on_container_delete(datum/source, force)
@@ -158,11 +159,11 @@
 	for(var/category in inventory_map)
 		for(var/obj/item/item as anything in inventory_map[category])
 			if(inventory_map[category][item] == slot_flag)
-				UnregisterSignal(item, COMSIG_PARENT_QDELETING)
+				UnregisterSignal(item, COMSIG_QDELETING)
 				inventory_map[category] -= item
 
 /datum/component/ai_inventory_manager/proc/_remove_item(obj/item/item)
-	UnregisterSignal(item, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(item, COMSIG_QDELETING)
 
 	for(var/category in inventory_map)
 		if(item in inventory_map[category])

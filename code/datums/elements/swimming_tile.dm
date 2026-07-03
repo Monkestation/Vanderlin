@@ -61,13 +61,13 @@
 		return
 
 	RegisterSignal(swimmer, SIGNAL_ADDTRAIT(TRAIT_IMMERSED), PROC_REF(dip_in))
-	RegisterSignal(swimmer, COMSIG_PARENT_QDELETING, PROC_REF(on_swimmer_del))
+	RegisterSignal(swimmer, COMSIG_QDELETING, PROC_REF(on_swimmer_del))
 	swimmers |= swimmer
 
 /// When something exits the water it probably shouldn't drowning
 /datum/element/swimming_tile/proc/out_of_water(atom/source, mob/living/landlubber)
 	SIGNAL_HANDLER
-	UnregisterSignal(landlubber, list(SIGNAL_ADDTRAIT(TRAIT_IMMERSED), COMSIG_PARENT_QDELETING))
+	UnregisterSignal(landlubber, list(SIGNAL_ADDTRAIT(TRAIT_IMMERSED), COMSIG_QDELETING))
 	swimmers -= landlubber
 
 /datum/element/swimming_tile/proc/on_swimmer_del(atom/source)
@@ -83,19 +83,15 @@
 		floater.apply_status_effect(/datum/status_effect/swimming, null, ticking_stamina_cost, ticking_oxy_damage, block_breathing)
 		return
 
-	if(CHECK_MOVE_LOOP_FLAGS(floater, MOVEMENT_LOOP_CALLED_MOVE))
-		return
+	if(!CHECK_MOVE_LOOP_FLAGS(floater, MOVED_BY_MOVEMENT_LOOP))
+		var/swimming_skill = (GET_MOB_SKILL_VALUE(floater, /datum/attribute/skill/misc/swimming) / SKILL_LEVEL_LEGENDARY) * stamina_entry_cost
+		var/encumbrance_penalty = ENCUMBRANCE_TO_SIGMOID(floater.encumbrance) * stamina_entry_cost
+		var/effective_stamina_entry_cost = stamina_entry_cost - swimming_skill + encumbrance_penalty
+		if(effective_stamina_entry_cost > 0 && !floater.adjust_stamina(effective_stamina_entry_cost, "drown"))
+			addtimer(CALLBACK(floater, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
 
-	var/swimming_skill = (GET_MOB_SKILL_VALUE(floater, /datum/attribute/skill/misc/swimming) / SKILL_LEVEL_LEGENDARY) * stamina_entry_cost
-
-	var/encumbrance_penalty = ENCUMBRANCE_TO_SIGMOID(floater.encumbrance) * stamina_entry_cost
-
-	var/effective_stamina_entry_cost = stamina_entry_cost - swimming_skill + encumbrance_penalty
-	if(effective_stamina_entry_cost > 0 && !floater.adjust_stamina(effective_stamina_entry_cost, "drown"))
-		addtimer(CALLBACK(floater, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
-
-	var/swimming_experience = stamina_entry_cost * GET_MOB_ATTRIBUTE_VALUE(floater, STAT_ENDURANCE) * 0.01
-	floater.adjust_experience(/datum/attribute/skill/misc/swimming, swimming_experience)
+		var/swimming_experience = stamina_entry_cost * GET_MOB_ATTRIBUTE_VALUE(floater, STAT_ENDURANCE) * 0.01
+		floater.adjust_experience(/datum/attribute/skill/misc/swimming, swimming_experience)
 
 	floater.apply_status_effect(/datum/status_effect/swimming, null, ticking_stamina_cost, ticking_oxy_damage, block_breathing) // Apply the status anyway for when they stop riding
 
@@ -155,8 +151,8 @@
 	if(!HAS_TRAIT(owner, TRAIT_SWIMMER) && COOLDOWN_FINISHED(src, ticking_stamina_pity))
 		var/effective_stamina_per_interval = stamina_per_interval
 
-		var/athletics_skill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/swimming)
-		var/final_stamina_cost = effective_stamina_per_interval - athletics_skill
+		var/swimming_skill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/swimming)
+		var/final_stamina_cost = effective_stamina_per_interval - swimming_skill
 
 		if(final_stamina_cost > 0 && !owner.adjust_stamina(final_stamina_cost, "drown"))
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
@@ -169,22 +165,18 @@
 		return
 
 	// You might not be swimming but you can breathe
-	if(HAS_TRAIT(owner, TRAIT_NODROWN) || HAS_TRAIT(owner, TRAIT_NOBREATH))
+	if(HAS_TRAIT(owner, TRAIT_NODROWN) || HAS_TRAIT(owner, TRAIT_NOBREATH) || (owner.mob_size >= MOB_SIZE_HUMAN && owner.body_position == STANDING_UP && !drowning_process_ignore_standing))
 		return
 
-	var/is_drowning = prob(drowning_process_probability)
-
-	if(owner.mob_size >= MOB_SIZE_HUMAN && owner.body_position == STANDING_UP)
-		if(drowning_process_ignore_standing && is_drowning)
-			owner.losebreath += floor(oxygen_per_interval / 2)
-		return
+	if(prob(50))
+		owner.emote("drown")
 
 	var/drowning_multiplier = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 3 : 2) : 1
-
-	owner.emote("drown")
 	owner.apply_damage(oxygen_per_interval * drowning_multiplier * seconds_between_ticks, OXY)
+
+	var/is_drowning = prob(drowning_process_probability)
 	if(is_drowning)
-		owner.losebreath += floor(oxygen_per_interval / 2)
+		owner.losebreath += oxygen_per_interval
 
 	if(iswaterturf(owner_turf))
 		var/turf/open/water/water_turf = owner_turf
@@ -196,6 +188,9 @@
 
 /datum/status_effect/swimming/proc/on_stat_change(mob/living/source, new_stat, old_stat)
 	if(!owner.client)
+		return
+
+	if(HAS_TRAIT(owner, TRAIT_NOBREATH))
 		return
 
 	if(old_stat == DEAD || new_stat != DEAD) // If you die while this status effect is active, we're going to assume you drowned

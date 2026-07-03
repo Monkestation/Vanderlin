@@ -114,10 +114,13 @@ GLOBAL_LIST_EMPTY(antagonists)
 /datum/antagonist/proc/create_team(datum/team/team)
 	return
 
-//Proc called when the datum is given to a mind.
+///Called by the add_antag_datum() mind proc after the instanced datum is added to the mind's antag_datums list.
 /datum/antagonist/proc/on_gain()
-	if(!owner?.current)
-		return
+	SHOULD_CALL_PARENT(TRUE)
+	if(!owner)
+		CRASH("[src] ran on_gain() without a mind")
+	if(!owner.current)
+		CRASH("[src] ran on_gain() on a mind without a mob")
 	if(!silent)
 		greet()
 	apply_innate_effects()
@@ -130,7 +133,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(is_banned(owner.current) && replace_banned)
 		replace_banned_player()
 		return
-	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.toggles & DEADMIN_ANTAGONIST))
+	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.read_preference(/datum/preference/bitwise/toggles) & DEADMIN_ANTAGONIST))
 		owner.current.client.holder.auto_deadmin()
 	if(allow_preference_switching && owner.current.client?.prefs?.path)
 		switch_prefs(owner.current)
@@ -155,6 +158,10 @@ GLOBAL_LIST_EMPTY(antagonists)
 		owner.current.key = C.key
 
 /datum/antagonist/proc/on_removal()
+	SHOULD_CALL_PARENT(TRUE)
+	if(!owner)
+		CRASH("Antag datum with no owner.")
+
 	remove_innate_effects()
 	clear_antag_stress()
 	remove_antag_hud(antag_hud_type, antag_hud_name)

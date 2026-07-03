@@ -89,6 +89,7 @@
 #define VV_HK_TRIGGER_EXPLOSION "explode"
 #define VV_HK_AUTO_RENAME "auto_rename"
 #define VV_HK_ADD_AI "add_ai"
+#define VV_HK_ADJUST_ANIMATIONS "adjust_animations"
 
 // /obj
 #define VV_HK_OSAY "osay"
@@ -116,6 +117,7 @@
 #define VV_HK_MARTIAL_ART "give_martial_art"
 #define VV_HK_GIVE_TRAUMA "give_trauma"
 #define VV_HK_CURE_TRAUMA "cure_trauma"
+#define VV_HK_SHOW_RELATIONS "show_relations"
 
 // /mob/living/carbon/human
 #define VV_HK_COPY_OUTFIT "copy_outfit"

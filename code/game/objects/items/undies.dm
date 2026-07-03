@@ -21,16 +21,26 @@
 	icon_state = "girlundies"
 	gendered = FEMALE
 
-/obj/item/undies/attack(mob/M, mob/user, list/modifiers)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.gender != gendered)
-			return
-		if(H.underwear == "Nude" && H.cached_underwear != "Nude")
-			user.visible_message("<span class='notice'>[user] tries to put [src] on [H]...</span>")
-			if(do_after(user, 5 SECONDS, H))
-				get_location_accessible(H, BODY_ZONE_PRECISE_GROIN)
-				H.underwear = H.cached_underwear
-				H.underwear_color = color
-				H.update_body()
-				qdel(src)
+/obj/item/undies/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ishuman(interacting_with))
+		return NONE
+
+	var/mob/living/carbon/human/H = interacting_with
+
+	if(H.gender != gendered)
+		return ITEM_INTERACT_BLOCKING
+
+	if(H.underwear != "Nude" || H.cached_underwear == "Nude")
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message("<span class='notice'>[user] tries to put [src] on [H]...</span>")
+	if(do_after(user, 5 SECONDS, H))
+		return ITEM_INTERACT_BLOCKING
+
+	get_location_accessible(H, BODY_ZONE_PRECISE_GROIN)
+	H.underwear = H.cached_underwear
+	H.underwear_color = color
+	H.update_body()
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS

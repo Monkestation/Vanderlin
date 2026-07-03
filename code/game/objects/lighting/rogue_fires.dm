@@ -382,12 +382,12 @@
 	fueluse = 0
 	soundloop = null
 	crossfire = FALSE
-	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	obj_flags = parent_type::obj_flags | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	temperature_change = 5
 
 /obj/machinery/light/fueled/chand/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/machinery/light/fueled/chand/attack_hand(mob/user)
 	if(isliving(user) && on)
@@ -422,20 +422,19 @@
 		QDEL_NULL(soundloop)
 	return ..()
 
-/obj/machinery/light/fueled/hearth/attackby(obj/item/I, mob/living/user, params)
+/obj/machinery/light/fueled/hearth/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(attachment)
-		if(!attachment.atom_storage.attempt_insert(I, user))
-			attachment.update_appearance(UPDATE_ICON)
-			return ..()
-		return
-
-	if(istype(I, /obj/item/cooking/pan) || istype(I, /obj/item/reagent_containers/glass/bucket/pot) || istype(I, /obj/item/reagent_containers/glass/carafe/teapot))
+		tool.melee_attack_chain(user, attachment, modifiers)
+		return ITEM_INTERACT_SUCCESS
+	else if(istype(tool, /obj/item/cooking/pan) || istype(tool, /obj/item/reagent_containers/glass/bucket/pot) || istype(tool, /obj/item/reagent_containers/glass/carafe/teapot))
 		playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
 
-		if(user.transferItemToLoc(I, src, silent = TRUE))
-			attachment = I
-			update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
-		return
+		if(!user.transferItemToLoc(tool, src, silent = TRUE))
+			return ITEM_INTERACT_BLOCKING
+
+		attachment = tool
+		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+		return ITEM_INTERACT_SUCCESS
 
 	return ..()
 
@@ -575,7 +574,7 @@
 	fueluse = 30 MINUTES
 	layer = BELOW_MOB_LAYER
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	dir = NORTH
 	buckle_requires_restraints = 1

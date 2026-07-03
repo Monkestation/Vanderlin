@@ -16,6 +16,12 @@
 
 	atom_storage?.remove_all(get_turf(src))
 
+/obj/item/storage/belt/leather/double
+	name = "pair of belts"
+	desc = "A pair of slim black belts worn around the waist."
+	icon_state = "belt_double"
+	item_state = "belt_double"
+
 /obj/item/storage/belt/leather/assassin // Assassin's super edgy and cool belt can carry normal items (for poison vial, lockpick).
 	empty_when_dropped = FALSE
 	storage_type = /datum/storage/belt/assassin
@@ -145,6 +151,33 @@
 /obj/item/storage/belt/leather/cloth/bandit
 	color = "#ff0000"
 
+/obj/item/storage/belt/leather/breechcloth
+	name = "belt with breechcloth"
+	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbelt"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_TARAXACUM_YELLOW
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/breechcloth/blackbelt
+	name = "black belt with breechcloth"
+	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
+	icon_state = "breechbeltalt"
+
+/obj/item/storage/belt/leather/slayer
+	name = "rugged dwarven belt"
+	desc = "The golden beard of the face plate doubles as a codpiece."
+	icon_state = "slayer"
+	item_state = "slayer"
+	sellprice = 50
+	sewrepair = FALSE
+
+/obj/item/storage/belt/leather/shawl
+	name = "shawl"
+	desc = "A cloth shawl."
+	icon_state = "beltshawl"
+	item_state = "beltshawl"
+
 /obj/item/storage/belt/pouch
 	name = "pouch"
 	desc = "Usually used for holding coins."
@@ -162,8 +195,18 @@
 	grid_height = 64
 	grid_width = 32
 
+/obj/item/storage/belt/pouch/medicinepopulate_contents()
+	new /obj/item/needle(src)
+	new /obj/item/natural/bundle/cloth/bandage/full(src)
+	new /obj/item/reagent_containers/glass/bottle/healthpot(src)
+
+/obj/item/storage/belt/pouch/food/populate_contents()
+	new /obj/item/reagent_containers/food/snacks/hardtack(src)
+
+/obj/item/storage/belt/hollow_book/populate_contents()
+	new /obj/item/gun/ballistic/powder/wheellock/puffer/preloaded(src)
+
 /obj/item/storage/belt/pouch/coins/mid/populate_contents()
-	. = ..()
 	new /obj/item/coin/copper/pile(src)
 	new /obj/item/coin/silver/pile(src)
 
@@ -197,6 +240,14 @@
 	for(var/i in 1 to 4)
 		new /obj/item/ammo_casing/caseless/bullet(src)
 
+/obj/item/storage/belt/pouch/pellets
+	populate_contents = list(
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+		/obj/item/ammo_casing/caseless/pelletshot,
+	)
+
 /obj/item/storage/belt/pouch/cloth
 	name = "cloth pouch"
 	desc = "Usually used for holding small amount of coins."
@@ -208,6 +259,23 @@
 /obj/item/storage/belt/pouch/pdarts/populate_contents()
 	for(var/i in 1 to 4)
 		new /obj/item/ammo_casing/caseless/dart/poison(src)
+
+/obj/item/storage/belt/hollow_book
+	name = "Tome of Justice"
+	desc = "This seems to be a special edition.."
+	icon = 'icons/roguetown/clothing/storage.dmi'
+	mob_overlay_icon = null
+	icon_state = "handtome"
+	slot_flags = ITEM_SLOT_HIP
+	attack_verb = list("whips", "lashes")
+	w_class = WEIGHT_CLASS_NORMAL
+	max_integrity = 300
+	equip_sound = 'sound/blank.ogg'
+	bloody_icon_state = "bodyblood"
+	grid_height = 64
+	grid_width = 32
+
+	component_type = /datum/component/storage/concrete/hollow_book
 
 /obj/item/storage/backpack/satchel
 	name = "satchel"
@@ -249,7 +317,6 @@
 /obj/item/storage/backpack/satchel/heartfelt/populate_contents()
 	new /obj/item/natural/feather(src)
 	new /obj/item/paper/heartfelt(src)
-
 
 /obj/item/storage/backpack/satchel/mule/populate_contents()
 	for(var/i in 1 to 3)
@@ -337,6 +404,7 @@
 	qdel(src)
 
 /obj/item/storage/backpack/satchel/surgbag/shit/populate_contents()
+	new /obj/item/needle(src)
 	new /obj/item/weapon/surgery/scalpel(src)
 	new /obj/item/weapon/surgery/saw(src)
 	new /obj/item/weapon/surgery/hemostat(src)
@@ -346,8 +414,7 @@
 	new /obj/item/weapon/surgery/cautery(src)
 	new /obj/item/weapon/surgery/hammer(src)
 	new /obj/item/natural/worms/leech(src)
-	new /obj/item/natural/worms/leech(src)
-	new /obj/item/natural/bundle/fibers/half(src)
+	new /obj/item/natural/bundle/fibers/full(src)
 
 /obj/item/storage/backpack/satchel/musketeer/populate_contents()
 	new /obj/item/weapon/knife/dagger/bayonet(src)
@@ -368,12 +435,13 @@
 	storage_type = /datum/storage/belt/knife_belt
 	empty_when_dropped = FALSE
 
-/obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, params)
-	if(istype(A, /obj/item/weapon/knife/throwingknife))
-		if(atom_storage.attempt_insert(A, user))
-			to_chat(user, span_notice("I discreetly slip [A] into [src]."))
-		return TRUE
-	. = ..()
+/obj/item/storage/belt/leather/knifebelt/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/knife/throwingknife))
+		return NONE
+
+	if(atom_storage.attempt_insert(tool, user))
+		to_chat(user, span_notice("I discreetly slip [tool] into [src]."))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/storage/belt/leather/knifebelt/examine(mob/user)
 	. = ..()
@@ -471,3 +539,80 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	storage_type = /datum/storage/headhook/bronze
+
+//////////////////////////////////////////
+
+/obj/item/storage/hip/orebag
+	name = "miner's satchel"
+	desc = "a satchel designed to help miners quickly sort and store ore, minerals, and gems"
+	icon = 'icons/roguetown/clothing/storage.dmi'
+	icon_state = "minebag"
+	item_state = "minebag"
+	slot_flags = ITEM_SLOT_HIP| ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_NORMAL
+	dropshrink = 0.7
+	max_integrity = 400
+	equip_sound = 'sound/blank.ogg'
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 2
+	salvage_result = /obj/item/natural/hide/cured
+	component_type = /datum/component/storage/concrete/grid/orebag
+	var/auto_pickup = TRUE
+
+/obj/item/storage/hip/orebag/equipped(mob/user, slot)
+	. = ..()
+	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_user_moved), TRUE)
+
+/obj/item/storage/hip/orebag/dropped(mob/user)
+	. = ..()
+	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
+
+/obj/item/storage/hip/orebag/proc/on_user_moved(mob/living/user)
+	SIGNAL_HANDLER
+	var/picked_up = FALSE
+
+	if(!auto_pickup)
+		return
+
+	if(user.incapacitated() || !user.canUseStorage())
+		return
+
+
+	var/turf/orebagturf = get_turf(user)
+	if(!orebagturf)
+		return
+
+
+	var/datum/component/storage/orebagstorage = GetComponent(/datum/component/storage)
+	if(!orebagstorage)
+		return
+
+	for(var/obj/item/orebagitem in orebagturf)
+		if(orebagstorage.can_be_inserted(orebagitem, TRUE, user))
+			orebagstorage.handle_item_insertion(orebagitem, TRUE, user)
+			picked_up = TRUE
+	if(picked_up)
+		user.visible_message(span_info("[user] picks up the ore beneath them, placing it into the ore bag..."))
+
+/obj/item/storage/hip/orebag/examine(mob/user)
+	. = ..()
+
+	if(auto_pickup)
+		. += span_notice("You are ready to collect ores.")
+	else
+		. += span_notice("You are not ready to collect ores.")
+
+/obj/item/storage/hip/orebag/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("Walking over or clicking on the tiles with select items will automatically scoop them into the bag.")
+	. += span_notice("Alt+Left Clicking the bag can disable/enable picking up ores.")
+
+/obj/item/storage/hip/orebag/AltClick(mob/user, list/modifiers)
+	. = ..()
+
+	auto_pickup = !auto_pickup
+
+	if(auto_pickup)
+		to_chat(user, span_notice("You ready yourself to collect ores with your satchel."))
+	else
+		to_chat(user, span_notice("You will no longer collect ores with your satchel."))

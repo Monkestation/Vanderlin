@@ -13,10 +13,18 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	liquid_fire_power = 10
 	hydration_factor = 10
+	boiling_point = T0C + 78 // Ethanol boils at 78.4C
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
 	var/datum/reagent/age_path
 	var/age_time = 10 MINUTES
 	var/age_timer
+
+/datum/reagent/consumable/ethanol/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.disinfect_limb(boozepwr)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		injury.adjust_germ_level(-boozepwr * 0.5)
+	affected_bodypart.adjust_germ_level(-boozepwr * 0.1)
+	return ..()
 
 /datum/reagent/consumable/ethanol/New()
 	. = ..()
@@ -37,11 +45,11 @@
 
 /datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.increase_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr * 0.3, "[type]")
 
 /datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr * 0.3, "[type]")
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
 	. = ..()
@@ -91,12 +99,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			O.visible_message("<span class='warning'>[O]'s ink is smeared by [name], but doesn't wash away!</span>")
 	return
 
-/datum/reagent/consumable/ethanol/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with ethanol isn't quite as good as fuel.
-	if(!isliving(M))
+/datum/reagent/consumable/ethanol/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with ethanol isn't quite as good as fuel.
+	if(!isliving(exposed_mob))
 		return
 
-	if(method in list(TOUCH, VAPOR, PATCH))
-		M.adjust_fire_stacks(reac_volume / 15)
+	if(methods in list(TOUCH, VAPOR, PATCH))
+		exposed_mob.adjust_fire_stacks(reac_volume / 15)
 
 	return ..()
 
@@ -584,8 +592,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	..()
 	. = 1
 
-/datum/reagent/consumable/ethanol/murkwine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/murkwine)
+/datum/reagent/consumable/ethanol/murkwine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/murkwine)
 
 /datum/reagent/consumable/ethanol/nocshine // wait, no, NOCSHINE
 	name = "Noc's Shine"
@@ -604,8 +613,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	..()
 	. = 1
 
-/datum/reagent/consumable/ethanol/nocshine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/nocshine)
+/datum/reagent/consumable/ethanol/nocshine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/nocshine)
 
 /datum/reagent/consumable/ethanol/luxwine // oh no.
 	name = "Luxintenebre" // lux left w/ sugar in a darkened place for quite some time... U could say... Light in Darkness.....
@@ -623,8 +633,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		M.adjustFireLoss(-1*REM * efficiency, 0)
 	..()
 
-/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/lux_drank)
+/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/lux_drank)
 
 /datum/reagent/consumable/ethanol/luxwine/aged
 	name = "Aged Luxintenebre"
@@ -661,14 +672,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/whipwine // dont ask
 	name = "Magickal Whip Wine"
-	description = "A recipe recently floated into the Peaks. Magickal Whip Wine is said to increase one's potence and stamina sevenfold."
+	description = "A dubious recent recipe from abroad. Magickal Whip Wine is said to increase one's potence and stamina sevenfold."
 	boozepwr = 10 // it's a whip. it's an actual whip.
 	taste_description = "leather, bitter herbs, and regret" // what did you expect
 	color = "#3a1d18"
 
 /datum/reagent/consumable/ethanol/komuchisake // if you put this outside the lich dungeon i'll kill you
 	name = "Divine Snake Wine"
-	description = "The True Form of the Whipwine. The Magickal Snake Wine was an exclusively produced medicinal wine from over three centuries ago in the Kazengun Shogunate..."
+	description = "The True Form of the Whipwine. The Magickal Snake Wine was an exclusively produced medicinal wine from over three centuries ago..."
 	boozepwr = 60 // ancient lichebrau...
 	taste_description = "bitterness, pain, iron, and ancient mistakes" // what did you expect [2]
 	color = "#553837"

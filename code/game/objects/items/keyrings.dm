@@ -113,7 +113,7 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/lockpickring
-	name = "lockpickring"
+	name = "lockpick ring"
 	desc = "A piece of bent wire to store lockpicking tools. Too bulky for fine work."
 	icon_state = "pickring0"
 	icon = 'icons/roguetown/items/keys.dmi'
@@ -181,15 +181,14 @@
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	return K
 
-/obj/item/lockpickring/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I,/obj/item/lockpick))
-		if(picks.len >= how_many_lockpicks)
+/obj/item/lockpickring/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/lockpick))
+		if(length(picks) >= how_many_lockpicks)
 			to_chat(user, span_warning("Too many lockpicks."))
 			return
-		user.dropItemToGround(I)
-		addtoring(I)
-	else
-		return ..()
+		user.dropItemToGround(tool)
+		addtoring(tool)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/lockpickring/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

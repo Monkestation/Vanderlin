@@ -19,14 +19,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	color = CLOTHING_BARK_BROWN
 	wetable = FALSE
-
-/obj/item/clothing/cloak/raincloak/Initialize(mapload, ...)
-	. = ..()
-	create_storage(type = /datum/storage/cloak)
-
-/obj/item/clothing/cloak/raincloak/dropped(mob/user, silent)
-	. = ..()
-	atom_storage?.remove_all(get_turf(src))
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/raincloak/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

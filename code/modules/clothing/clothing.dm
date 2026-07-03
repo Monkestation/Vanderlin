@@ -131,7 +131,7 @@
 	if(body_parts_covered)
 		. += "\n<u><b>COVERAGE:</b></u>\n"
 		var/list/parsed_zones = list()
-		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
+		for(var/zone in cover_flags2body_zones(body_parts_covered))
 			parsed_zones += "[parse_zone(zone)]"
 		. += parsed_zones.Join(" | ")
 
@@ -315,20 +315,23 @@
 	return FALSE
 
 /obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
-	if(M.on_fire)
-		if(user == M)
-			return
-		user.changeNext_move(CLICK_CD_MELEE)
-		M.visible_message(span_warning("[user] pats out the flames on [M] with [src]!"))
-		M.adjust_divine_fire_stacks(-2)
-		if(M.fire_stacks > 0)
-			M.adjust_fire_stacks(-2)
-		take_damage(10, BURN, "fire")
-	else
+	if(!M.on_fire)
 		return ..()
+
+	if(user == M)
+		return
+
+	user.changeNext_move(CLICK_CD_MELEE)
+	M.visible_message(span_warning("[user] pats out the flames on [M] with [src]!"))
+	M.adjust_divine_fire_stacks(-2)
+	if(M.fire_stacks > 0)
+		M.adjust_fire_stacks(-2)
+
+	take_damage(10, BURN, "fire")
 
 /obj/item/clothing/dropped(mob/user, silent)
 	. = ..()
+
 	if(!istype(user))
 		return
 
@@ -507,7 +510,6 @@ BLIND     // can't see anything
 	flags_cover = initial(flags_cover)
 	block2add = initial(block2add)
 	body_parts_covered = initial(body_parts_covered)
-	prevent_crits = initial(prevent_crits)
 	gas_transfer_coefficient = initial(gas_transfer_coefficient)
 
 /obj/item/clothing/equipped(mob/living/carbon/user, slot)
@@ -573,14 +575,14 @@ BLIND     // can't see anything
 	if(proper_drying && !C.has_stress_type(/datum/stress_event/washed_cloth))
 		C.add_stress(/datum/stress_event/washed_cloth)
 		proper_drying = FALSE
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle))
 
 	if(wet.use_water(0.7))
 		if(HAS_TRAIT(C, TRAIT_NOBLE_BLOOD) && wet.water_stacks == 0)
 			C.add_stress(/datum/stress_event/noble_tarnished_cloth)
 
+		if(wet.dirty_water)
+			C.adjust_germ_level_directed(0.5 * wet.water_stacks, body_zone = slot2body_zone(slot_flags))
 		if(C.mind?.assigned_role == /datum/job/farmer || C.mind?.assigned_role == /datum/job/soilchild || HAS_TRAIT(C, TRAIT_LEECHIMMUNE) || istriton(C))
 			return
 

@@ -102,14 +102,13 @@ GLOBAL_LIST_EMPTY(last_words)
 		H.Fade()
 		MOBTIMER_SET(src, MT_LASTDIED)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)
-		remove_client_colour(/datum/client_colour/monochrome/death)
-		add_client_colour(/datum/client_colour/monochrome/death)
 		if(last_words)
 			GLOB.last_words |= last_words
 
 	if(lastattacker_weakref)
 		var/mob/attacker = lastattacker_weakref.resolve()
-		SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
+		if(attacker)
+			SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
 
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(gibbed)

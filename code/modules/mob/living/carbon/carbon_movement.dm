@@ -10,6 +10,10 @@
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(. && !(movement_type & FLOATING)) //floating is easy
+		for(var/thing in all_injuries)
+			var/datum/injury/injury = thing
+			injury.movement_infect(src)
+
 		if(HAS_TRAIT(src, TRAIT_NOHUNGER))
 			set_nutrition(NUTRITION_LEVEL_FED - 1)	//just less than feeling vigorous
 			set_hydration(HYDRATION_LEVEL_START_MAX - 1)	//just less than feeling vigorous

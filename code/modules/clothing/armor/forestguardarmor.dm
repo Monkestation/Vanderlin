@@ -11,6 +11,17 @@
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 
+/obj/item/clothing/armor/leather/advanced/forrester/masterwork
+	name = "masterwork forrester's armor"
+	desc = "Armour worn by few, those that live to hunt, to battle. \nThe soft, cloth linings with masterfully tanned leather make it easy to repair with a needle."
+	max_integrity = INTEGRITY_STRONG + 200
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/advanced/forrester/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester's cloak"
 	desc = "A cloak worn by the forest guards."
@@ -27,13 +38,10 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	icon_state = "snowcloak"
-
-/obj/item/clothing/cloak/forrestercloak/Initialize(mapload, ...)
-	. = ..()
-	create_storage(type = /datum/storage/cloak)
 
 /obj/item/clothing/cloak/wardencloak
 	name = "warden's cloak"
@@ -46,10 +54,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-
-/obj/item/clothing/cloak/wardencloak/Initialize(mapload, ...)
-	. = ..()
-	create_storage(type = /datum/storage/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/head/helmet/visored/warden
 	name = "wardens's helmet"

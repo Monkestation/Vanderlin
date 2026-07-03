@@ -352,6 +352,10 @@ SUBSYSTEM_DEF(ticker)
 	log_game("GAME SETUP: equip characters success")
 	transfer_characters()	//transfer keys to the new mobs
 	log_game("GAME SETUP: transfer characters success")
+	SSrelations.run_rival_matchmaking()
+	log_game("GAME SETUP: rival matchmaking success")
+	SSrelations.spread_gossip()
+	log_game("GAME SETUP: gossip spreading success")
 
 	for(var/datum/callback/cb as anything in round_start_events)
 		cb.InvokeAsync()
@@ -398,7 +402,7 @@ SUBSYSTEM_DEF(ticker)
 */
 
 	PostSetup()
-	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
+
 	log_game("GAME SETUP: postsetup success")
 
 	return TRUE
@@ -469,7 +473,6 @@ SUBSYSTEM_DEF(ticker)
 
 	job_change_locked = FALSE
 
-	SStriumphs.fire_on_PostSetup()
 	for(var/obj/effect/landmark/start/S as anything in GLOB.roundstart_landmarks)
 		if(!istype(S))//we can not runtime here. not in this important of a proc.
 			stack_trace("[S] [S.type] found in roundstart landmarks list, which isn't a start landmark!")
@@ -533,7 +536,7 @@ SUBSYSTEM_DEF(ticker)
 			livings += living
 			GLOB.character_ckey_list[living.real_name] = living.ckey
 		if(ishuman(living))
-			try_apply_character_post_equipment(living)
+			try_apply_character_post_equipment(living, living.client)
 
 	if(livings.len)
 		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 30, TIMER_CLIENT_TIME)

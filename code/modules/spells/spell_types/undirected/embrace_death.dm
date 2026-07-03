@@ -32,6 +32,7 @@
 	playsound(owner, 'sound/magic/churn.ogg', 80)
 	ADD_TRAIT(owner, TRAIT_NECRA_CURSE, "necra_ritual")
 	ADD_TRAIT(owner, TRAIT_BURIED_COIN_GIVEN, "necra_ritual")
+	ADD_TRAIT(owner, TRAIT_ZOMBIE_IMMUNE, "necra_ritual")
 	var/mob/living/living_owner = owner
 	living_owner.death()
 

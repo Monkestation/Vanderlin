@@ -62,9 +62,9 @@
 	weapon = wep
 	RegisterSignals(targ, list(COMSIG_MOB_ATTACK_HAND, COMSIG_MOB_ITEM_ATTACK, COMSIG_MOB_FIRED_GUN, COMSIG_LIVING_RESIST_GRAB), PROC_REF(trigger_reaction))
 	RegisterSignal(targ, COMSIG_MOVABLE_MOVED, PROC_REF(check_deescalate))
-	RegisterSignal(targ, COMSIG_PARENT_QDELETING, PROC_REF(qdel), src)
+	RegisterSignal(targ, COMSIG_QDELETING, PROC_REF(qdel), src)
 
-	RegisterSignals(weapon, list(COMSIG_PARENT_QDELETING, COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_SPEC_ATTACKEDBY), PROC_REF(cancel))
+	RegisterSignals(weapon, list(COMSIG_QDELETING, COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_SPEC_ATTACKEDBY), PROC_REF(cancel))
 
 	captor.visible_message(span_danger("[captor] takes [target] hostage with [weapon]!"), \
 		span_danger("You take [target] hostage with [weapon]."), ignored_mobs = target, \

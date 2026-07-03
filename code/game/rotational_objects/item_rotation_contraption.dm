@@ -67,29 +67,30 @@
 	desc = initial(parent_type.desc)
 	placed_type = parent_type
 
-/obj/item/rotation_contraption/attack_atom(atom/attacked_atom, mob/living/user)
-	var/turf/T = get_turf(attacked_atom)
-	. = TRUE
-	for(var/obj/structure/structure in T.contents)
+/obj/item/rotation_contraption/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	var/turf/T = get_turf(interacting_with)
+
+	for(var/obj/structure/structure in T)
 		if(structure.rotation_structure && !ispath(placed_type, /obj/structure/water_pipe))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		if(structure.accepts_water_input && !ispath(placed_type, /obj/structure/rotation_piece))
 			if(place_behavior != PLACE_ON_PIPE)
-				return
+				return ITEM_INTERACT_BLOCKING
 			if((place_behavior == PLACE_ON_PIPE) && !istype(structure, /obj/structure/water_pipe))
-				return
+				return ITEM_INTERACT_BLOCKING
 
 		if(istype(structure, placed_type))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 	if(place_behavior == PLACE_ON_PIPE)
-		var/obj/structure/water_pipe/pipe = locate(/obj/structure/water_pipe) in T.contents
-		if(!pipe)
-			return
+		if(!(locate(/obj/structure/water_pipe) in T))
+			return ITEM_INTERACT_BLOCKING
+
 	visible_message("[user] starts placing down [src].", "You start to place [src].")
 	if(!do_after(user, 1.2 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering), T))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/obj/structure/structure = new placed_type(T)
 	if(place_behavior == PLACE_TOWARDS_USER)
 		if(get_turf(user) == T)
@@ -107,6 +108,8 @@
 		qdel(src)
 	else
 		update_appearance(UPDATE_NAME)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/rotation_contraption/update_name()
 	. = ..()

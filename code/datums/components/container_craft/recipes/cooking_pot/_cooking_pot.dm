@@ -74,7 +74,7 @@
 	var/total_freshness = 0
 	var/ingredient_count = 0
 	var/highest_food_quality = 0
-	var/highest_input_reagent_quality = 0
+	var/highest_input_recipe_quality = 0
 	var/total_reagent_volume = 0
 
 	// Calculate average freshness and find highest quality food ingredient
@@ -85,21 +85,21 @@
 			if(istype(food_item, /obj/item/reagent_containers/food/snacks))
 				var/obj/item/reagent_containers/food/snacks/F = food_item
 				total_freshness += max(0, (F.warming + F.rotprocess))
-				highest_food_quality = max(highest_food_quality, F.recipe_quality )
+				highest_food_quality = max(highest_food_quality, F.recipe_quality)
 
 			// Also check reagents in the food items
 			if(food_item.reagents && food_item.reagents.reagent_list)
 				for(var/datum/reagent/R in food_item.reagents.reagent_list)
 					if(R.volume > 0)
 						total_reagent_volume += R.volume
-						highest_input_reagent_quality = max(highest_input_reagent_quality, R.recipe_quality)
+						highest_input_recipe_quality = max(highest_input_recipe_quality, R.get_recipe_quality())
 
 	// Check reagent qualities already in the crafter container (like the water)
 	if(crafter.reagents && crafter.reagents.reagent_list)
 		for(var/datum/reagent/R in crafter.reagents.reagent_list)
 			if(R.volume > 0)
 				total_reagent_volume += R.volume
-				highest_input_reagent_quality = max(highest_input_reagent_quality, R.recipe_quality)
+				highest_input_recipe_quality = max(highest_input_recipe_quality, R.get_recipe_quality())
 
 	// Calculate average freshness
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
@@ -109,21 +109,18 @@
 
 	// Use the quality calculator to determine final quality
 	var/datum/quality_calculator/cooking/cook_calc = new(
-		base_qual = 0,
-		mat_qual = max(highest_food_quality, highest_input_reagent_quality), // Use the higher of food or reagent quality
+		mat_qual = max(highest_food_quality, highest_input_recipe_quality), // Use the higher of food or reagent quality
 		skill_qual = cooking_skill,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = average_freshness,
 		recipe_mod = quality_modifier,
-		reagent_qual = highest_input_reagent_quality
+		reagent_qual = highest_input_recipe_quality
 	)
 
 	var/final_quality = cook_calc.calculate_final_quality()
 	qdel(cook_calc)
 
-	return CLAMP(final_quality, 1, 4)
+	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
 
 /datum/container_craft/cooking/after_craft(atom/created_output, obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	. = ..()
@@ -151,8 +148,8 @@
 				extra_taste += " and [ingredient.name]"
 		found_product.name += extra_string
 		found_product.taste_description += extra_taste
-		found_product.add_data("custom_name", found_product.name)
-		found_product.add_data("custom_tastes", found_product.taste_description)
+		LAZYADDASSOC(found_product.data, "custom_name", found_product.name)
+		LAZYADDASSOC(found_product.data, "custom_tastes", found_product.taste_description)
 
 	// Optionally modify reagent properties based on quality
 	apply_quality_effects_to_reagent(found_product)
@@ -166,6 +163,8 @@
 	if(!reagent)
 		return
 
+	var/reagent_quality = reagent.get_recipe_quality()
+	/*
 	// Modify reagent properties based on quality
 	switch(reagent.recipe_quality)
 		if(1) // Poor quality
@@ -181,11 +180,13 @@
 		if(4) // Premium quality
 			// Premium quality is much more effective
 			reagent.metabolization_rate *= 0.75 // Metabolizes much slower (very effective)
-
+	*/
 	// Update description to reflect quality
-	var/quality_desc = reagent.get_recipe_quality_desc()
-	if(reagent.description && !findtext(reagent.description, quality_desc))
-		reagent.description += " This appears to be [quality_desc]."
+
+	// GLOB.food_quality_description[quality]
+	var/quality_desc = GLOB.food_quality_description[reagent_quality]
+	if(quality_desc && !findtext(reagent.description, quality_desc))
+		reagent.description += " The [lowertext(reagent.name)] is of [quality_desc] quality."
 
 /datum/container_craft/cooking/extra_html()
 	var/html

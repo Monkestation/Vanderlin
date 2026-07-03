@@ -21,6 +21,7 @@
 	max_cavity_volume = 8
 
 	artery_type = list(ARTERY_HEAD, ARTERY_NECK)
+	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
 
 	var/mob/living/brain/brainmob = null //The current occupant.
 	var/obj/item/organ/brain/brain = null //The brain organ
@@ -47,6 +48,26 @@
 /obj/item/bodypart/head/Initialize()
 	. = ..()
 	randomize_price()
+
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
+	if(length(contents) && I.get_sharpness() && !user.cmode)
+		add_fingerprint(user)
+		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
+		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
+			"<span class='notice'>You begin to cut open [src]...</span>")
+		if(do_after(user, 5 SECONDS, src))
+			drop_organs(user)
+			user.visible_message("<span class='danger'>[user] cuts [src] open!</span>",\
+				"<span class='notice'>You finish cutting [src] open.</span>")
+		return
+	return ..()
+
+/obj/item/bodypart/head/skeletonize(lethal = TRUE)
+	. = ..()
+
+	sellprice = round((sellprice || 0) * 0.2)
+	if(lethal && owner && CAN_HAVE_BLOOD(owner))
+		owner.death()
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
@@ -172,9 +193,8 @@
 			//Applies the debrained overlay if there is no brain
 			if(!brain)
 				var/image/debrain_overlay = image(layer = -HAIR_LAYER, dir = SOUTH)
-				if(!(NOBLOOD in species_flags_list))
-					debrain_overlay.icon = 'icons/mob/human_face.dmi'
-					debrain_overlay.icon_state = "debrained"
+				debrain_overlay.icon = 'icons/mob/human_face.dmi'
+				debrain_overlay.icon_state = "debrained"
 				. += debrain_overlay
 			//ROGTODO add accessories (earrings, piercings) here
 

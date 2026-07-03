@@ -13,7 +13,6 @@ You can use the run_loc_bottom_left and run_loc_top_right to get turfs for testi
 
 GLOBAL_DATUM(current_test, /datum/unit_test)
 GLOBAL_VAR_INIT(failed_any_test, FALSE)
-GLOBAL_VAR(test_log)
 /// When unit testing, all logs sent to log_mapping are stored here and retrieved in log_mapping unit test.
 GLOBAL_LIST_EMPTY(unit_test_mapping_logs)
 
@@ -153,11 +152,14 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/obj/effect/fuse,
 		///shit that calls explosion() should probably not be called in empty space
 		/obj/effect/temp_visual/target/meteor,
-		/obj/structure/meatvine/papameat,
 		/obj/effect/meatvine_controller,
 	)
+	/// ???
+	ignore += typesof(/obj/effect/bombard_zone)
+	/// Spawns a lot of shit
+	ignore += typesof(/obj/structure/meatvine)
 	///this does some wonky things that we don't want in a test area
-	ignore += typesof(/obj/structure/stockpile_storage,)
+	ignore += typesof(/obj/structure/stockpile_storage)
 	//these are VERY situational and need info passed
 	ignore += typesof(/obj/effect/abstract)
 	//needs a lich passed

@@ -13,8 +13,17 @@
 /// From /mob/living/update_offsets(animate) : (new_x, new_y, new_w, new_z, animate)
 #define COMSIG_LIVING_UPDATE_OFFSETS "living_update_offsets"
 
+///Called when movement intent is toggled.
+#define COMSIG_MOVE_INTENT_TOGGLED "move_intent_toggled"
+
 ///from base of mob/update_transform()
 #define COMSIG_LIVING_POST_UPDATE_TRANSFORM "living_post_update_transform"
+
+/// From /mob/living/proc/update_blood_status(), sent when the return value of /mob/living/proc/can_have_blood() changes, but before the new blood status is applied : (had_blood, has_blood, old_blood_volume)
+#define COMSIG_LIVING_PRE_UPDATE_BLOOD_STATUS "living_pre_update_blood_status"
+
+/// From /mob/living/proc/update_blood_status(), sent when the return value of /mob/living/proc/can_have_blood() changes : (had_blood, has_blood, old_blood_volume, new_blood_volume)
+#define COMSIG_LIVING_UPDATE_BLOOD_STATUS "living_update_blood_status"
 
 ///Signal sent when a keybind is deactivated
 #define DEACTIVATE_KEYBIND(A) "[A]_DEACTIVATED"
@@ -34,16 +43,10 @@
 #define COMSIG_MOB_ACTIVE_PERCEPTION "comsig_mob_active_perception"	//sent from mob/living/proc/look_around(): (mob/living/source)
 #define COMSIG_LIVING_WOUND_GAINED "wound_gained"
 
-// Client
-/// sent when a mob/login() finishes: (client)
-#define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"
-/// from base of client/MouseDown(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEDOWN "client_mousedown"
-/// from base of client/MouseUp(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEUP "client_mouseup"
-	#define COMPONENT_CLIENT_MOUSEUP_INTERCEPT (1<<0)
-/// from base of client/MouseUp(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEDRAG "client_mousedrag"
+/// From base of /obj/item/reagent_containers/food/snacks/attack: (mob/living/M, mob/living/user, list/modifiers)
+#define COMSIG_MOB_FOOD_EAT "mob_food_ate"
+
+#define COMSIG_MOB_STRIPPED_ITEM "mob_stripped_item"
 
 //ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
 ///from base of mob/living/OffBalance() (amount, ignore_canstun)
@@ -134,3 +137,6 @@
 
 /// From [mob/living/MiddleClickOn] before a middle mouse intent is performed
 #define COMSIG_MOB_PRE_SPECIAL_MIDDLE "pre_special_middle"
+
+/// Sent to a mob when one of their bodypart's surgery state changes, OR sent from the basic_surgery_state holder when its surgery state changes (old_state, new_state, changed_states)
+#define COMSIG_LIVING_UPDATING_SURGERY_STATE "carbon_updating_surgery_state"

@@ -169,7 +169,8 @@
 	/**
 	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
 	 */
-	var/germ_level = GERM_LEVEL_AMBIENT
+	var/germ_level = INFECTION_LEVEL_ONE
+
 
 /**
  * Called when an atom is created in byond (built in engine proc)
@@ -453,7 +454,7 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+/atom/proc/get_examine_name(mob/user, use_article = TRUE)
 	if(use_article)
 		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
 	return "<b>[name]</b>"
@@ -484,7 +485,7 @@
  * Default behaviour is to get the name and icon of the object and it's reagents where
  * the TRANSPARENT flag is set on the reagents holder
  *
- * Produces a signal COMSIG_PARENT_EXAMINE
+ * Produces a signal COMSIG_ATOM_EXAMINE
  */
 /atom/proc/examine(mob/user)
 	var/examine_string = get_examine_string(user, thats = TRUE)
@@ -538,7 +539,7 @@
 							full_reagents += "[lowertext(R.name)]"
 					if(length(full_reagents))
 						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
 /atom/proc/get_mechanics_examine(mob/user)
 	return list()
@@ -651,6 +652,16 @@
 		to_chat(user, span_warning("I should try resisting."))
 	return
 
+/**
+ * A special case of relaymove() in which the person relaying the move may be "driving" this atom
+ *
+ * This is a special case for vehicles and ridden animals where the relayed movement may be handled
+ * by the riding component attached to this atom. Returns TRUE as long as there's nothing blocking
+ * the movement, or FALSE if the signal gets a reply that specifically blocks the movement
+ */
+/atom/proc/relaydrive(mob/living/user, direction)
+	return !(SEND_SIGNAL(src, COMSIG_RIDDEN_DRIVER_MOVE, user, direction) & COMPONENT_DRIVER_BLOCK_MOVE)
+
 /// Handle what happens when your contents are exploded by a bomb
 /atom/proc/contents_explosion(severity, target)
 	return //For handling the effects of explosions on contents that would not normally be effected
@@ -698,7 +709,7 @@
 /mob/living/carbon/get_blood_dna_list()
 	if(isnull(dna)) // Xenos
 		return ..()
-	if(NOBLOOD in dna.species.species_traits) //no skeletons bleeding
+	if(!CAN_HAVE_BLOOD(src)) //no skeletons bleeding
 		return null
 	var/datum/blood_type/blood = get_blood_type()
 	return list("[dna.unique_enzymes]" = blood.type)
@@ -735,20 +746,46 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
 
 /**
- * Respond to an emag being used on our atom
+ * Implement the behaviour for when a user click drags a storage object to your atom
  *
- * Default behaviour is to send COMSIG_ATOM_EMAG_ACT and return
+ * This behaviour is usually to mass transfer, but this is no longer a used proc as it just
+ * calls the underyling /datum/component/storage dump act if a component exists
+ *
+ * TODO these should be purely component items that intercept the atom clicks higher in the
+ * call chain
  */
-/atom/proc/emag_act(mob/user)
-	SEND_SIGNAL(src, COMSIG_ATOM_EMAG_ACT, user)
+/atom/proc/storage_contents_dump_act(obj/item/storage/src_object, mob/user)
+	if(GetComponent(/datum/component/storage))
+		return component_storage_contents_dump_act(src_object, user)
+	return FALSE
 
 /**
- * Respond to narsie eating our atom
+ * Implement the behaviour for when a user click drags another storage item to you
  *
- * Default behaviour is to send COMSIG_ATOM_NARSIE_ACT and return
+ * In this case we get as many of the tiems from the target items compoent storage and then
+ * put everything into ourselves (or our storage component)
+ *
+ * TODO these should be purely component items that intercept the atom clicks higher in the
+ * call chain
  */
-/atom/proc/narsie_act()
-	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
+/atom/proc/component_storage_contents_dump_act(datum/component/storage/src_object, mob/user)
+	if(src_object.parent == src)
+		return
+	var/list/things = src_object.contents()
+	var/datum/progressbar/progress = new(user, things.len, src)
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	while(do_after(user, 1 SECONDS, src, NONE, FALSE, CALLBACK(STR, TYPE_PROC_REF(/datum/component/storage, handle_mass_item_insertion), things, src_object, user, progress)))
+		stoplag(1)
+	progress.end_progress()
+	to_chat(user, "<span class='notice'>I dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as I can.</span>")
+	STR.orient2hud(user)
+	STR.update_icon()
+	src_object.update_icon()
+	src_object.orient2hud(user)
+	if(user.active_storage) //refresh the HUD to show the transfered contents
+		user.active_storage.close(user)
+		user.active_storage.show_to(user)
+	return TRUE
 
 ///Get the best place to dump the items contained in the source storage item?
 /atom/proc/get_dumping_location()
@@ -867,7 +904,7 @@
 	atom_colours[colour_priority] = null
 	update_atom_colour()
 
-/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 /// Force set the germ level
@@ -1045,71 +1082,6 @@
 /atom/Exited(atom/movable/gone, direction)
 	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
 
-/**
- *Tool behavior procedure. Redirects to tool-specific procs by default.
- *
- * You can override it to catch all tool interactions, for use in complex deconstruction procs.
- *
- * Must return  parent proc ..() in the end if overridden
- */
-/atom/proc/tool_act(mob/living/user, obj/item/I, tool_type)
-	switch(tool_type)
-		if(TOOL_CROWBAR)
-			. |= crowbar_act(user, I)
-		if(TOOL_MULTITOOL)
-			. |= multitool_act(user, I)
-		if(TOOL_SCREWDRIVER)
-			. |= screwdriver_act(user, I)
-		if(TOOL_WRENCH)
-			. |= wrench_act(user, I)
-		if(TOOL_WIRECUTTER)
-			. |= wirecutter_act(user, I)
-		if(TOOL_WELDER)
-			. |= welder_act(user, I)
-		if(TOOL_ANALYZER)
-			. |= analyzer_act(user, I)
-	if(. & COMPONENT_BLOCK_TOOL_ATTACK)
-		return TRUE
-
-//! Tool-specific behavior procs. They send signals, so try to call ..()
-///
-
-///Crowbar act
-/atom/proc/crowbar_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_CROWBAR_ACT, user, I)
-
-///Multitool act
-/atom/proc/multitool_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_MULTITOOL_ACT, user, I)
-
-///Check if the multitool has an item in it's data buffer
-/atom/proc/multitool_check_buffer(user, obj/item/I, silent = FALSE)
-	if(!istype(I, /obj/item/multitool))
-		if(user && !silent)
-			to_chat(user, "<span class='warning'>[I] has no data buffer!</span>")
-		return FALSE
-	return TRUE
-
-///Screwdriver act
-/atom/proc/screwdriver_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_SCREWDRIVER_ACT, user, I)
-
-///Wrench act
-/atom/proc/wrench_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_WRENCH_ACT, user, I)
-
-///Wirecutter act
-/atom/proc/wirecutter_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_WIRECUTTER_ACT, user, I)
-
-///Welder act
-/atom/proc/welder_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_WELDER_ACT, user, I)
-
-///Analyzer act
-/atom/proc/analyzer_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_ANALYSER_ACT, user, I)
-
 ///Generate a tag for this atom
 /atom/proc/GenerateTag()
 	return
@@ -1250,6 +1222,15 @@
 /atom/proc/intercept_zImpact(list/falling_movables, levels = 1)
 	SHOULD_CALL_PARENT(TRUE)
 	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, falling_movables, levels)
+
+///Setter for the `density` variable to append behavior related to its changing.
+/atom/proc/set_density(new_value)
+	SHOULD_CALL_PARENT(TRUE)
+	if(density == new_value)
+		return
+	. = density
+	density = new_value
+	SEND_SIGNAL(src, COMSIG_ATOM_DENSITY_CHANGED)
 
 /obj/proc/propagate_temp_change(value, weight, falloff = 0.5, max_depth = 3)
 	var/key = REF(src)

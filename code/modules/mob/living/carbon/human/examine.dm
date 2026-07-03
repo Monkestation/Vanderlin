@@ -1,6 +1,9 @@
 /mob/living/carbon/human/get_examine_string(mob/user, thats = FALSE)
 	. = ..()
 	var/used_title = get_role_title(src)
+	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
+	if(spy)
+		used_title = spy.examine_title
 	if(!used_title)
 		return
 	if(!IsAdminGhost(user))
@@ -35,11 +38,17 @@
 	var/do_i_know = user.mind?.do_i_know(src.mind, real_name)
 
 	// Skin tone procs on face but shows up with species
-	var/datum/species/species = dna?.species
-	if(species?.use_skintones)
+	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
+	if(spy)
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-			"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
-			is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
+				"[capitalize(P[THEIR])] [lowertext(spy.examine_species.skin_tone_wording || "skin tone")] \
+				is [find_key_by_value(spy.examine_species.get_skin_list(), spy.examine_tone) || "incomprehensible"].")
+	else
+		var/datum/species/species = dna?.species
+		if(species?.use_skintones)
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
+				"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
+				is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
 	. = list()
 
@@ -108,9 +117,9 @@
 
 	if(!HAS_TRAIT(src, TRAIT_FACELESS))
 		// Headshots ALWAYS go last.
+		if(headshot_link)
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
 		if(client?.is_donator())
-			if(headshot_link)
-				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
 			if(flavortext || headshot_link || ooc_extra_link) // only show flavor text if there is a flavor text and we show headshot
 				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>")

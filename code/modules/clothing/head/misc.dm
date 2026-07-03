@@ -150,10 +150,11 @@
 	icon_state = "briarthorns"
 	item_weight = 95 GRAMS
 
-/obj/item/clothing/head/padded/briarthorns/pickup(mob/living/user)
+/obj/item/clothing/head/padded/briarthorns/pickup(mob/living/carbon/user)
 	. = ..()
 	to_chat(user, span_warning ("The thorns prick me."))
-	user.adjustBruteLoss(4)
+	var/obj/item/bodypart/arm = user.get_active_hand()
+	arm?.bodypart_attacked_by(BCLASS_CUT, 7, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 
 //................ Hennin ............... //
 /obj/item/clothing/head/hennin
@@ -228,15 +229,6 @@
 	tint = TINT_BLIND
 	item_weight = 55 GRAMS
 
-/obj/item/clothing/head/sack/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(slot & ITEM_SLOT_HEAD)
-		user.become_blind("blindfold_[REF(src)]")
-
-/obj/item/clothing/head/sack/dropped(mob/living/carbon/human/user)
-	..()
-	user.cure_blind("blindfold_[REF(src)]")
-
 /obj/item/clothing/head/sack/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
@@ -289,6 +281,12 @@
 
 /obj/item/clothing/head/headdress/alt
 	icon_state = "headdressalt"
+
+/obj/item/clothing/head/dancer_headdress // egyptian
+	name = "dancer's headdress"
+	desc = ""
+	icon_state = "headdress_dance"
+	item_weight = 77 GRAMS
 
 /obj/item/clothing/head/armingcap/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -417,6 +415,7 @@
 
 /obj/item/clothing/head/roguehood/psydon/confessor
 	name = "confessional hood"
+	examine_name = "hood"
 	desc = "A loose-fitting piece of leatherwear that can be tightened on the move. Keeps rain, blood, and the tears of the sullied away."
 	icon_state = "confessorhood"
 	item_state = "confessorhood"
@@ -431,3 +430,29 @@
 	toggle_icon_state = TRUE
 	max_integrity = 200
 	item_weight = 145 GRAMS
+
+/obj/item/clothing/head/archercap
+	name = "archer's cap"
+	desc = "For the merry men."
+	icon_state = "archercap"
+
+/obj/item/clothing/head/fedora
+	name = "archeologist's hat"
+	desc = "A strangely-shaped hat with dust caked onto its aged leather."
+	icon_state = "curator"
+	item_state = "curator"
+	sewrepair = TRUE
+	salvage_result = /obj/item/natural/hide/cured
+
+/obj/item/clothing/head/leather/inqhat/gravehat
+	name = "gravetender's hat"
+	desc = "A fine leather slouch fitted with a hidden steel skull cap. It serves as a reminder that Necra's grasp is never too far."
+	icon_state = "gravehat"
+	item_state = "gravehat"
+
+/obj/item/clothing/head/explorerhat
+	name = "explorer's hat"
+	desc = "How many secrets can I uncover this week?"
+	icon_state = "explorerhat"
+	item_state = "explorerhat"
+	sewrepair = TRUE
