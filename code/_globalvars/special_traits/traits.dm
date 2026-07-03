@@ -1057,18 +1057,16 @@
 
 /datum/attribute_holder/sheet/job/musclepriest
 	raw_attribute_list = list(
-		STAT_STRENGTH = 8,
-		STAT_CONSTITUTION = 8,
-		STAT_ENDURANCE = 8,
+		STAT_CONSTITUTION = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = -3,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/climbing = 50,
-		/datum/attribute/skill/combat/wrestling = 50,
-        /datum/attribute/skill/combat/unarmed = 35,
-		/datum/attribute/skill/combat/polearms = -30,
+		/datum/attribute/skill/combat/wrestling = 30,
+        /datum/attribute/skill/combat/unarmed = 25,
 	)
 
 /datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_STRONG_GRABBER, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOPAINSTUN, BE_SPECIAL_TRAIT)
 	QDEL_NULL(character.wear_pants)
@@ -1078,8 +1076,10 @@
 	QDEL_NULL(character.belt)
 	character.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/eastpants2(character), ITEM_SLOT_PANTS)
 	character.equip_to_slot_or_del(new/obj/item/clothing/armor/regenerating/skin/disciple/sunlord(character), ITEM_SLOT_ARMOR)
-	character.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist(character), ITEM_SLOT_HANDS)
+	character.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist(character), ITEM_SLOT_GLOVES)
 	character.equip_to_slot_or_del(new /obj/item/storage/belt/leather/steel(character), ITEM_SLOT_BELT)
 	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
 	character.equip_to_slot_or_del(new /obj/item/weapon/katar(character), ITEM_SLOT_BELT_R)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
+	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
+	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
