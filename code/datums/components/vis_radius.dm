@@ -37,7 +37,7 @@
 	radius_img.transform = M
 
 /datum/component/vis_radius/proc/show_radius(datum/sourse, mob_or_mobs)
-	radius_obj.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/people, "visible_radius", radius_img, mob_or_mobs)
+	radius_obj.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/people, "visible_radius", radius_img, NONE, mob_or_mobs)
 
 /datum/component/vis_radius/proc/hide_radius()
 	radius_obj?.remove_alt_appearance("visible_radius")
