@@ -115,37 +115,56 @@
 	releasedrain = 0
 	blade_class = BCLASS_PUNCH
 
-/obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, list/modifiers)
-	if(user.used_intent.type == /datum/intent/snip && isitem(A))
-		var/obj/item/item = A
-		if(item.sewrepair && item.salvage_result) // We can only salvage objects which can be sewn!
-			. = TRUE
-			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, item.sewrepair)
-			var/salvage_time = (7 SECONDS - (skill_level * 10))
-			if(!do_after(user, salvage_time, A))
-				return
-			if(item.fiber_salvage) //We're getting fiber as base if fiber is present on the item
-				new /obj/item/natural/fibers(get_turf(item))
-			if(istype(item, /obj/item/storage))
-				var/obj/item/storage/bag = item
-				bag.emptyStorage()
-			var/probability = max(0, 50 - (skill_level * 10))
-			if(prob(probability)) // We are dumb and we failed!
-				to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
-				playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
-				qdel(item)
-				user.mind.add_sleep_experience(item.sewrepair, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //Getting exp for failing
-				return //We are returning early if the skill check fails!
-			item.salvage_amount -= item.torn_sleeve_number
-			for(var/i = 1; i <= item.salvage_amount; i++) // We are spawning salvage result for the salvage amount minus the torn sleves!
-				var/obj/item/Sr = new item.salvage_result(get_turf(item))
-				Sr.color = item.color
-			user.visible_message(span_notice("[user] salvages [item] into usable materials."))
-			playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
-			qdel(item)
-			user.mind.add_sleep_experience(item.sewrepair, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //We're getting experience for salvaging!
-			return
-	return ..()
+/obj/item/weapon/knife/scissors/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!isitem(interacting_with))
+		return NONE
+
+	if(!isturf(interacting_with.loc))
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/snip))
+		return NONE
+
+	var/obj/item/item = interacting_with
+
+	if(!item.sewrepair || !item.salvage_result) // We can only salvage objects which can be sewn!
+		return NONE
+
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing)
+
+	var/salvage_time = (7 SECONDS - (skill_level * 10))
+	if(!do_after(user, salvage_time, item))
+		return ITEM_INTERACT_BLOCKING
+
+	if(item.fiber_salvage) //We're getting fiber as base if fiber is present on the item
+		new /obj/item/natural/fibers(get_turf(item))
+
+	if(istype(item, /obj/item/storage))
+		var/obj/item/storage/bag = item
+		bag.emptyStorage()
+
+	var/probability = max(0, 50 - (skill_level * 10))
+	if(prob(probability))
+		to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
+		playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
+		qdel(item)
+		user.mind.add_sleep_experience(item.sewrepair, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)) //Getting exp for failing
+		return ITEM_INTERACT_SUCCESS
+
+	item.salvage_amount -= item.torn_sleeve_number
+	for(var/i in 1 to item.salvage_amount)
+		var/obj/item/Sr = new item.salvage_result(get_turf(item))
+		Sr.color = item.color
+
+	user.visible_message(span_notice("[user] salvages [item] into usable materials."))
+	playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
+	qdel(item)
+	user.mind.add_sleep_experience(item.sewrepair, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/knife/scissors/steel
 	name = "steel scissors"
@@ -160,15 +179,10 @@
 /obj/item/weapon/knife/cleaver
 	name = "cleaver"
 	desc = "A chef's tool turned armament, cleave off cumbersome flesh with rudimentary ease."
-	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
-	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "cleav"
-	item_state = "cleav"
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
-	throwforce = DAMAGE_KNIFE + 5
-	experimental_inhand = FALSE
-	experimental_onhip = FALSE
-	experimental_onback = FALSE
+	force = DAMAGE_KNIFE + 1
+	throwforce = DAMAGE_KNIFE + 6
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	max_integrity = INTEGRITY_POOR
@@ -185,22 +199,14 @@
 	name = "hack-knife"
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
-	throwforce = DAMAGE_KNIFE + 6
+	force = DAMAGE_KNIFE + 3
+	throwforce = DAMAGE_KNIFE + 5
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
 	item_weight = 250 GRAMS
-
-/obj/item/weapon/knife/cleaver/combat/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.5,"sx" = -10,"sy" = 0,"nx" = 13,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 5,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 21,"sturn" = -18,"wturn" = -18,"eturn" = 21,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("onbelt")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 //................ Bronze Dagger ............... //s
 /obj/item/weapon/knife/dagger/bronze

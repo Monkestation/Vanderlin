@@ -105,8 +105,7 @@
 		to_chat(src, span_warning("[H] needs time to recover before being tortured again!"))
 		return
 
-	var/painpercent = (H.getPainLoss() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
-	if(painpercent < 100)
+	if(H.getShockStage() < SHOCK_STAGE_4)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
 	if(!do_after(src, 4 SECONDS, H))
@@ -160,8 +159,7 @@
 		to_chat(src, span_warning("[H] needs time to recover before being tortured again!"))
 		return
 
-	var/painpercent = (H.getPainLoss() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
-	if(painpercent < 2)
+	if(H.getShockStage() < SHOCK_STAGE_4)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
 	if(!do_after(src, 4 SECONDS, H))

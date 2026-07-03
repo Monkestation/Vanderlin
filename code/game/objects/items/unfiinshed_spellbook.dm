@@ -20,21 +20,25 @@
 	icon_state = "spellbook_unfinished"
 	desc = "A fully bound tome of scroll paper. It's lacking a certain arcyne energy."
 
-/obj/item/spellbook_unfinished/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(P, /obj/item/paper/scroll))
-		return ..()
+/obj/item/spellbook_unfinished/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return NONE
+
 	if(!isturf(loc) || !locate(/obj/structure/table) in loc)
 		to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/crafttime = max(0, 60 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5)
 	if(!do_after(user, crafttime, target = src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	pages_left--
 	if(pages_left > 0)
 		playsound(src, 'sound/items/book_page.ogg', 100, TRUE)
 		to_chat(user, span_notice("[pages_left] left..."))
-		qdel(P)
-		return
+		qdel(tool)
+		return ITEM_INTERACT_SUCCESS
+
 	//promote to pre_arcyne.
 	playsound(src, 'sound/items/book_open.ogg', 100, TRUE)
 	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) > SKILL_LEVEL_NONE)
@@ -42,42 +46,40 @@
 	else
 		to_chat(user, span_notice("I've made an empty book of thick, useless scroll paper. I can't even thumb through it!"))
 	new /obj/item/spellbook_unfinished/pre_arcyne(loc)
-	qdel(P)
+	qdel(tool)
 	qdel(src)
+	return ITEM_INTERACT_SUCCESS
 
-
-/obj/item/spellbook_unfinished/pre_arcyne/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	var/found_table = locate(/obj/structure/table) in loc
-
-	if(istype(P, /obj/item/gem/amethyst))
+/obj/item/spellbook_unfinished/pre_arcyne/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/gem/amethyst))
 		user.visible_message(span_notice("I run my arcyne energy into the crystal. Its artificial lattices pulse and then fall dormant. It must not be strong enough to make a spellbook with!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
+	var/found_table = locate(/obj/structure/table) in loc
 	if(isturf(loc) && !found_table)
 		to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
-		return TRUE
+		return ITEM_INTERACT_SUCCESS
 
-	if(istype(P, /obj/item/gem/violet))
-		apply_gem_catalyst(user, P, /obj/item/book/granter/spellbook/expert, found_table)
-		return
+	if(istype(tool, /obj/item/gem/violet))
+		apply_gem_catalyst(user, tool, /obj/item/book/granter/spellbook/expert, found_table)
+		return ITEM_INTERACT_SUCCESS
 
-	if(istype(P, /obj/item/gem))
-		apply_gem_catalyst(user, P, /obj/item/book/granter/spellbook/adept, found_table)
-		return
+	if(istype(tool, /obj/item/gem))
+		apply_gem_catalyst(user, tool, /obj/item/book/granter/spellbook/adept, found_table)
+		return  ITEM_INTERACT_SUCCESS
 
-	if(istype(P, /obj/item/natural/stone))
-		var/obj/item/natural/stone/the_rock = P
+	if(istype(tool, /obj/item/natural/stone))
+		var/obj/item/natural/stone/the_rock = tool
 		if(!the_rock.magic_power)
 			to_chat(user, span_notice("This is a mere rock — it has no arcyne potential. Bah!"))
-			return ..()
+			return ITEM_INTERACT_BLOCKING
 		apply_stone_catalyst(user, the_rock, found_table)
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(istype(P, /obj/item/natural/melded))
-		var/obj/item/natural/melded/meld = P
-		apply_melded_catalyst(user, P, meld.melded_quality, meld.shock_damage)
-		return
-	return ..()
+	if(istype(tool, /obj/item/natural/melded))
+		var/obj/item/natural/melded/meld = tool
+		apply_melded_catalyst(user, tool, meld.melded_quality, meld.shock_damage)
+		return ITEM_INTERACT_SUCCESS
 
 /// Spawns a finished book, sets owner, and cleans up catalyst + self.
 /obj/item/spellbook_unfinished/pre_arcyne/proc/finish_book(mob/user, obj/item/catalyst, book_type, born_of_rock = FALSE, extra_desc = null)

@@ -131,15 +131,25 @@
 	LAZYNULL(organ_efficiency_modification)
 	return ..()
 
-/obj/item/organ/attack(mob/living/carbon/M, mob/user, list/modifiers)
-	if(M == user && ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(status == ORGAN_ORGANIC)
-			var/obj/item/reagent_containers/food/snacks/S = prepare_eat(H)
-			if(S && H.put_in_active_hand(S))
-				S.attack(H, H)
-	else
-		..()
+/obj/item/organ/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
+	if(interacting_with != user)
+		return NONE
+
+	if(status != ORGAN_ORGANIC)
+		return NONE
+
+	var/obj/item/reagent_containers/food/snacks/S = prepare_eat()
+	if(!S)
+		return ITEM_INTERACT_BLOCKING
+
+	user.put_in_active_hand(S)
+
+	S.interact_with_atom(user, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/organ/item_action_slot_check(slot,mob/user)
 	return //so we don't grant the organ's action to mobs who pick up the organ.

@@ -2,7 +2,7 @@
  * This is the proc that handles the order of an item_attack.
  *
  * The order of procs called is:
- * * [/atom/proc/tool_act] on the target. If it returns TRUE, the chain will be stopped.
+ * * [/atom/proc/tool_act] on the target. If it returns ITEM_INTERACT_SUCCESS or ITEM_INTERACT_BLOCKING, the chain will be stopped.
  * * [/obj/item/proc/pre_attack] on src. If this returns TRUE, the chain will be stopped.
  * * [/atom/proc/attackby] on the target. If it returns TRUE, the chain will be stopped.
  * * [/obj/item/proc/afterattack]. The return value does not matter.
@@ -28,8 +28,11 @@
 
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 
-	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
+	var/item_interact_result = target.base_item_interaction(user, src, modifiers)
+	if(item_interact_result & ITEM_INTERACT_SUCCESS)
 		return TRUE
+	if(item_interact_result & ITEM_INTERACT_BLOCKING)
+		return FALSE
 
 	var/pre_attack_result
 	if(is_right_clicking)
@@ -169,14 +172,14 @@
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
-/obj/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(!user.cmode)
-		if(user.try_recipes(src, I, user))
-			user.changeNext_move(CLICK_CD_FAST)
-			return TRUE
-	if(I.obj_flags_ignore)
-		return I.attack_atom(src, user)
-	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_atom(src, user))
+/obj/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+	if(..())
+		return TRUE
+
+	if(!attacking_item.obj_flags_ignore && !(obj_flags & CAN_BE_HIT))
+		return FALSE
+
+	return attacking_item.attack_atom(src, user, modifiers)
 
 /turf/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(liquids && I.heat)
@@ -225,35 +228,6 @@
 			user.changeNext_move(adf)
 
 		return result
-
-	if(weapon.item_flags & ABSTRACT)
-		return
-
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(src == user)
-		if(offered_item_ref)
-			cancel_offering_item()
-		else
-			to_chat(user, span_warning("I can't offer myself an item!"))
-		return
-
-	var/obj/offered_item
-	if(user.offered_item_ref)
-		offered_item = user.offered_item_ref.resolve()
-		if(offered_item == weapon)
-			user.cancel_offering_item()
-			return
-		else
-			to_chat(user, span_notice("I'm already offering [offered_item]!"))
-			return
-
-	offered_item = user.get_active_held_item()
-
-	if(HAS_TRAIT(offered_item, TRAIT_NODROP))
-		to_chat(user, span_warning("I can't offer this."))
-		return
-	user.offer_item(src, offered_item)
 
 /**
  * Called from [/mob/living/proc/attackby]
@@ -389,8 +363,10 @@
 /obj/item/proc/attack_atom(atom/attacked_atom, mob/living/user)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_OBJ, attacked_atom, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
+
 	if(item_flags & NOBLUDGEON)
-		return TRUE
+		return FALSE
+
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(attacked_atom.attacked_by(src, user) && !isopenturf(attacked_atom)) // this check is due to attack animations in /obj/item/proc/afterattack()
 		user.do_attack_animation(attacked_atom, used_item = src, used_intent = user.used_intent)

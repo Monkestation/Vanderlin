@@ -5,14 +5,6 @@
  *						*
  * * * * * * * * * * * **/
 
-
-/proc/get_soil_on_turf(turf/target_turf)
-	for(var/atom/movable/movable as anything in target_turf.contents)
-		// Soil does not have subtypes
-		if(movable.type == /obj/structure/soil)
-			return movable
-	return null
-
 /proc/get_farming_effort_divisor(mob/user)
 	return (1 / get_farming_effort_multiplier(user))
 

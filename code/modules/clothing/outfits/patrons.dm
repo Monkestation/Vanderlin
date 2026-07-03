@@ -281,9 +281,8 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 
-/obj/item/clothing/head/helmet/heavy/ravoxhelm/attackby(obj/item/W, mob/living/user, params)
-	..()
-	var/list/colorlist = list(
+/obj/item/clothing/head/helmet/heavy/ravoxhelm/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	var/static/list/colorlist = list(
 		"PURPLE"="#865c9c",
 		"RED"="#8f3636",
 		"BLACK"="#2f352f",
@@ -297,16 +296,20 @@
 		"MAJENTA"="#822b52",
 	)
 
-	if(istype(W, /obj/item/natural/feather) && !detail_tag)
-		var/choice = input(user, "Choose a color.", "Plume") as anything in colorlist
+	if(detail_tag)
+		return NONE
+
+	if(istype(tool, /obj/item/natural/feather))
+		var/choice = tgui_input_list(user, "Choose a color.", "Plume", colorlist)
 		detail_color = colorlist[choice]
 		detail_tag = "_detail"
-		user.visible_message(span_warning("[user] adds [W] to [src]."))
-		user.transferItemToLoc(W, src, FALSE, FALSE)
+		user.visible_message(span_warning("[user] adds [tool] to [src]."))
+		user.transferItemToLoc(tool, src, FALSE, FALSE)
 		update_appearance(UPDATE_OVERLAYS)
 		if(loc == user && ishuman(user))
 			var/mob/living/carbon/H = user
 			H.update_inv_head()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/head/helmet/heavy/volfplate
 	name = "volf-face helm"

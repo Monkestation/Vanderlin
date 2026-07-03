@@ -1,0 +1,4 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - qol: "Candidate TGUI alert now timeouts when offer expires."
