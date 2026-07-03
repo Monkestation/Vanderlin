@@ -308,17 +308,20 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
  */
-/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial)
+/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial = FALSE)
 	if(!istype(W) || QDELETED(W)) //This qdeleted is to prevent stupid behavior with things that qdel during init, like say stacks
 		return FALSE
-	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self))
+
+	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self || initial))
 		if(qdel_on_fail)
 			qdel(W)
 		else if(!disable_warning)
 			to_chat(src, span_warning("I can't equip that!"))
 		return FALSE
+
 	equip_to_slot(W, slot, initial, redraw_mob) //This proc should not ever fail.
 	update_a_intents()
+
 	return TRUE
 
 /**
@@ -1234,7 +1237,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return choice
 
 	for(var/obj/item/spawn_item as anything in spawn_items)
-		equip_to_appropriate_slot(new spawn_item(), TRUE)
+		equip_to_appropriate_slot(new spawn_item(), TRUE, TRUE)
 
 	return choice
 
