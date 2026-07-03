@@ -93,10 +93,13 @@
 	using = new /atom/movable/screen/ghost/orbit(null, src)
 	static_inventory += using
 
-	using = new /atom/movable/screen/ghost/teleport(null, src)
+	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
 	static_inventory += using
 
-	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
+	using = new /atom/movable/screen/ghost/set_final_words(null, src)
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/teleport(null, src)
 	static_inventory += using
 
 	using = new /atom/movable/screen/ghost/ghost_up(null, src)
