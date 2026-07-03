@@ -411,10 +411,8 @@ const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
 
 const RingFigure = memo(() => (
   <>
-    <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
-      <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="382" />
-      <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--track" cx="500" cy="500" r="366" />
-    </svg>
+    <div className="AttributeMenu__ringCircle AttributeMenu__ringCircle--outer" />
+    <div className="AttributeMenu__ringCircle AttributeMenu__ringCircle--track" />
     <Tooltip content={CAT_TOOLTIP} position="bottom">
       <div className="AttributeMenu__catFigure">
         <span className={`${CAT_SPRITESHEET_CLASS} cat_rest`} />
