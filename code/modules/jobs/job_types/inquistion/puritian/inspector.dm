@@ -9,7 +9,6 @@
 		/datum/attribute/skill/combat/knives = 40,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -168,14 +167,15 @@
 	shoes = /obj/item/clothing/shoes/otavan/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr =  /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/bow/cross
-	beltr = /obj/item/ammo_holder/quiver/bolts
+	beltl = /obj/item/ammo_holder/bullet/bullets
+	beltr = /obj/item/gun/ballistic/powder/wheellock/puffer
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	wrists = /obj/item/clothing/neck/psycross/silver
 	ring = /obj/item/clothing/ring/signet/silver
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored
+	r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/lockpickring/mundane = 1,
