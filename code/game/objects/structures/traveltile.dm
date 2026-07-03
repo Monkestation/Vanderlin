@@ -139,8 +139,9 @@
 		var/mob/living/L = AM
 		if(HAS_CHARACTER_TRAIT(L, required_trait))
 			return TRUE
+		return FALSE
 
-	return FALSE
+	return TRUE
 
 /atom/movable
 	var/recent_travel = 0

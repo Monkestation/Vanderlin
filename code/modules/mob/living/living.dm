@@ -2200,9 +2200,9 @@
 		else
 			registered_z = null
 
-/mob/living/onTransitZ(old_z,new_z)
-	..()
-	update_z(new_z)
+/mob/living/onTransitZ(turf/old_turf, turf/new_turf)
+	. = ..()
+	update_z(new_turf.z)
 
 /mob/living/MouseDrop(mob/over)
 	. = ..()

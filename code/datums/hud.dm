@@ -139,29 +139,30 @@ GLOBAL_LIST_INIT(huds, list(
 	if(!new_viewer)
 		return
 
-	if(!hud_users_all_z_levels[new_viewer])
-		hud_users_all_z_levels[new_viewer] = 1
-
-		RegisterSignal(new_viewer, COMSIG_QDELETING, PROC_REF(unregister_atom), override = TRUE) //both hud users and hud atoms use these signals
-		RegisterSignal(new_viewer, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_atom_or_user_z_level_changed), override = TRUE)
-		RegisterSignal(new_viewer, COMSIG_LIVING_LOOK_Z_CHANGE, PROC_REF(on_look_z_level_changed), override = TRUE)
-
-		var/turf/their_turf = get_turf(new_viewer)
-		if(!their_turf)
-			return
-		hud_users[their_turf.z][new_viewer] = TRUE
-
-		if(next_time_allowed[new_viewer] > world.time)
-			if(!queued_to_see[new_viewer])
-				addtimer(CALLBACK(src, PROC_REF(show_hud_images_after_cooldown), new_viewer), next_time_allowed[new_viewer] - world.time)
-				queued_to_see[new_viewer] = TRUE
-
-		else
-			next_time_allowed[new_viewer] = world.time + show_to_COOLDOWN
-			for(var/atom/hud_atom_to_add as anything in get_hud_atoms_for_z_level(their_turf.z))
-				add_atom_to_single_mob_hud(new_viewer, hud_atom_to_add)
-	else
+	if(hud_users_all_z_levels[new_viewer])
 		hud_users_all_z_levels[new_viewer] += 1 //increment the number of times this hud has been added to this hud user
+		return
+
+	hud_users_all_z_levels[new_viewer] = 1
+
+	RegisterSignal(new_viewer, COMSIG_QDELETING, PROC_REF(unregister_atom), override = TRUE) //both hud users and hud atoms use these signals
+	RegisterSignal(new_viewer, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_atom_or_user_z_level_changed), override = TRUE)
+	RegisterSignal(new_viewer, COMSIG_LIVING_LOOK_Z_CHANGE, PROC_REF(on_look_z_level_changed), override = TRUE)
+
+	var/turf/their_turf = get_turf(new_viewer)
+	if(!their_turf)
+		return
+
+	hud_users[their_turf.z][new_viewer] = TRUE
+
+	if(next_time_allowed[new_viewer] > world.time)
+		if(!queued_to_see[new_viewer])
+			addtimer(CALLBACK(src, PROC_REF(show_hud_images_after_cooldown), new_viewer), next_time_allowed[new_viewer] - world.time)
+			queued_to_see[new_viewer] = TRUE
+	else
+		next_time_allowed[new_viewer] = world.time + show_to_COOLDOWN
+		for(var/atom/hud_atom_to_add as anything in get_hud_atoms_for_z_level(their_turf.z))
+			add_atom_to_single_mob_hud(new_viewer, hud_atom_to_add)
 
 ///Hides the images in this hud from former_viewer
 ///If absolute is set to true, this will forcefully remove the hud, even if sources in theory remain

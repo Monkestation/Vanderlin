@@ -45,15 +45,15 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 
 /// Wrapper for applying this alt hud to the passed mob (if they should see it)
 /datum/atom_hud/alternate_appearance/proc/apply_to_new_mob(mob/applying_to)
-	if(!mob_should_See(applying_to))
+	if(!mob_should_see(applying_to))
 		return FALSE
 
-	if(!hud_users_all_z_levels[applying_to])
+	if(!hud_users_all_z_levels?[applying_to])
 		show_to(applying_to)
 
 	return TRUE
 
-/datum/atom_hud/alternate_appearance/proc/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/proc/mob_should_see(mob/M)
 	return FALSE
 
 /datum/atom_hud/alternate_appearance/show_to(mob/new_viewer)
@@ -106,7 +106,7 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	/// Image to show over the atom
 	var/image/image
 	/// If true we create an image that ghosts can see
-	var/add_ghost_version = FALSE
+	var/add_ghost_version = TRUE
 	/// Reference to the created ghost appearance if any
 	var/datum/atom_hud/alternate_appearance/basic/observers/ghost_appearance
 	///List of signals we hook onto which we'll update HUDs when we receive this.
@@ -168,20 +168,18 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	image.copy_overlays(other, cut_old)
 
 /datum/atom_hud/alternate_appearance/basic/everyone
-	add_ghost_version = TRUE
 
-/datum/atom_hud/alternate_appearance/basic/everyone/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/basic/everyone/mob_should_see(mob/M)
 	return !isdead(M)
 
 /datum/atom_hud/alternate_appearance/basic/observers
 	add_ghost_version = FALSE //just in case, to prevent infinite loops
 
-/datum/atom_hud/alternate_appearance/basic/observers/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/basic/observers/mob_should_see(mob/M)
 	return isobserver(M)
 
 /// Only shows the image to one person
 /datum/atom_hud/alternate_appearance/basic/one_person
-	add_ghost_version = TRUE
 	/// Weakref to guy who gets to see the image
 	var/datum/weakref/seer
 
@@ -193,17 +191,16 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	seer = null
 	return ..()
 
-/datum/atom_hud/alternate_appearance/basic/one_person/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/basic/one_person/mob_should_see(mob/M)
 	return IS_WEAKREF_OF(M, seer)
 
 /// Shows the image to everyone but one person
 /datum/atom_hud/alternate_appearance/basic/one_person/reversed
 
-/datum/atom_hud/alternate_appearance/basic/one_person/reversed/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/basic/one_person/reversed/mob_should_see(mob/M)
 	return M != seer
 
 /datum/atom_hud/alternate_appearance/basic/people
-	add_ghost_version = TRUE
 	/// Weakrefs to guys who get to see the image
 	var/list/datum/weakref/seers
 
@@ -215,7 +212,7 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	src.seers = islist(seers) ? seers : list(seers)
 	return ..()
 
-/datum/atom_hud/alternate_appearance/basic/people/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/basic/people/mob_should_see(mob/M)
 	for(var/datum/weakref/ref as anything in seers)
 		if(IS_WEAKREF_OF(M, ref)) // Hope we aren't adding many here
 			return TRUE
@@ -223,14 +220,23 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	return FALSE
 
 /datum/atom_hud/alternate_appearance/basic/traits
-	add_ghost_version = TRUE
 	var/list/any_traits_required
 
 /datum/atom_hud/alternate_appearance/basic/traits/New(key, image/I, options = NONE, list/traits)
 	any_traits_required = traits
 	return ..()
 
-/datum/atom_hud/alternate_appearance/basic/traits/mob_should_See(mob/M)
+/datum/atom_hud/alternate_appearance/basic/traits/track_mob(mob/new_viewer)
+	. = ..()
+	for(var/trait in any_traits_required)
+		RegisterSignal(new_viewer, SIGNAL_REMOVETRAIT(trait), PROC_REF(trait_removed))
+
+/datum/atom_hud/alternate_appearance/basic/traits/proc/trait_removed(datum/source)
+	SIGNAL_HANDLER
+
+	hide_from(source)
+
+/datum/atom_hud/alternate_appearance/basic/traits/mob_should_see(mob/M)
 	for(var/trait in any_traits_required)
 		if(HAS_CHARACTER_TRAIT(M, trait))
 			return TRUE

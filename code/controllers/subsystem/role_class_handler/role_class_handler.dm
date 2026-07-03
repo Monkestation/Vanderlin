@@ -149,6 +149,10 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	apply_loadouts(H, H.client)
 
+	// These need to get updated for roundstart traits
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(H)
+
 // A dum helper to adjust the class amount, we could do it elsewhere but this will also inform any relevant class handlers open.
 /datum/controller/subsystem/role_class_handler/proc/adjust_class_amount(datum/job/advclass/target_datum, amount)
 	if(target_datum.total_positions == -1) // Is the class not set to infinite?
