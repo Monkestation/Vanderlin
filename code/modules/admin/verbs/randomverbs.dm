@@ -669,8 +669,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/adding_hud = !has_antag_hud()
 
-	for(var/datum/atom_hud/antag/H in GLOB.huds) // add antag huds
-		(adding_hud) ? H.show_to(usr) : H.hide_from(usr)
+	for(var/key in GLOB.huds) // add antag huds
+		var/datum/atom_hud/antag/hud = GLOB.huds[key]
+		adding_hud ? hud.show_to(usr) : hud.hide_from(usr)
 
 	if(prefs.read_preference(/datum/preference/bitwise/toggles) & COMBOHUD_LIGHTING)
 		if(adding_hud)
