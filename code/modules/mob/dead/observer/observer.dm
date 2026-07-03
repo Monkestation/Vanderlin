@@ -451,6 +451,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	to_chat(src, "<span class='boldnotice'>I can no longer be brought back into your body.</span>")
 	return TRUE
 
+/// Allows human ghosts to set their mob's final words variable.
 /mob/dead/observer/verb/set_final_words()
 	set category = "Spirit"
 	set name = "Set Final Words"
