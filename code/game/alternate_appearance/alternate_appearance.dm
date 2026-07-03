@@ -56,6 +56,12 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 /datum/atom_hud/alternate_appearance/proc/mob_should_See(mob/M)
 	return FALSE
 
+/datum/atom_hud/alternate_appearance/show_to(mob/new_viewer)
+	. = ..()
+	if(!new_viewer)
+		return
+	track_mob(new_viewer)
+
 /// Registers some signals to track the mob's state to determine if they should be seeing the hud still
 /datum/atom_hud/alternate_appearance/proc/track_mob(mob/new_viewer)
 	return
@@ -128,7 +134,7 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 		show_to(target)
 
 	if(add_ghost_version)
-		var/image/ghost_image = image(icon = I.icon , icon_state = I.icon_state, loc = I.loc)
+		var/image/ghost_image = image(icon = I.icon, icon_state = I.icon_state, loc = I.loc)
 		ghost_image.override = FALSE
 		ghost_image.alpha = 128
 		ghost_appearance = new /datum/atom_hud/alternate_appearance/basic/observers(key + "_observer", ghost_image, NONE)
@@ -175,9 +181,9 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 
 /// Only shows the image to one person
 /datum/atom_hud/alternate_appearance/basic/one_person
+	add_ghost_version = TRUE
 	/// Weakref to guy who gets to see the image
 	var/datum/weakref/seer
-	add_ghost_version = TRUE
 
 /datum/atom_hud/alternate_appearance/basic/one_person/New(key, image/I, options = NONE, mob/living/seer)
 	src.seer = WEAKREF(seer)
@@ -197,9 +203,9 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	return M != seer
 
 /datum/atom_hud/alternate_appearance/basic/people
+	add_ghost_version = TRUE
 	/// Weakrefs to guys who get to see the image
 	var/list/datum/weakref/seers
-	add_ghost_version = TRUE
 
 /datum/atom_hud/alternate_appearance/basic/people/Destroy(force)
 	seers = null
@@ -212,6 +218,21 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 /datum/atom_hud/alternate_appearance/basic/people/mob_should_See(mob/M)
 	for(var/datum/weakref/ref as anything in seers)
 		if(IS_WEAKREF_OF(M, ref)) // Hope we aren't adding many here
+			return TRUE
+
+	return FALSE
+
+/datum/atom_hud/alternate_appearance/basic/traits
+	add_ghost_version = TRUE
+	var/list/any_traits_required
+
+/datum/atom_hud/alternate_appearance/basic/traits/New(key, image/I, options = NONE, list/traits)
+	any_traits_required = traits
+	return ..()
+
+/datum/atom_hud/alternate_appearance/basic/traits/mob_should_See(mob/M)
+	for(var/trait in any_traits_required)
+		if(HAS_CHARACTER_TRAIT(M, trait))
 			return TRUE
 
 	return FALSE
