@@ -1050,7 +1050,7 @@
 /datum/special_trait/musclepriest
 	name = "My body is a TEMPLE!"
 	greet_text = span_notice("My body is a beacon for Astrata's light, and it shall be KNOWN")
-	weight = 20
+	weight = 30
 
 	req_text = "Be the Priest"
 	allowed_jobs = list(/datum/job/priest)
