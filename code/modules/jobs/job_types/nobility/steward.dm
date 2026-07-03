@@ -65,10 +65,10 @@
 /datum/job/steward/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/list/options = list(
-			"Dagger",
-			"Rapier",
-			"Cane Blade",
-		)
+		"Dagger",
+		"Rapier",
+		"Cane Blade",
+	)
 	var/choice = tgui_input_list(spawned, "CHOOSE YOUR WEAPON", "STEWARD", options, "Dagger")
 
 	if(!choice)

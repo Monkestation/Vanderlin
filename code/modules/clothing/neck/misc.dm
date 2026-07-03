@@ -669,7 +669,6 @@
 	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
 /obj/item/clothing/neck/mercator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	. = ..()
 	var/total_sellprice = 0
 
 	if(isturf(interacting_with))
