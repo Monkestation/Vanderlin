@@ -543,10 +543,6 @@ SUBSYSTEM_DEF(ticker)
 		if(ishuman(living))
 			try_apply_character_post_equipment(living, living.client)
 
-		// These need to get updated for roundstart traits
-		for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
-			alt_hud.apply_to_new_mob(living)
-
 	if(length(livings))
 		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 30, TIMER_CLIENT_TIME)
 

@@ -473,10 +473,6 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	if(humanc)
 		try_apply_character_post_equipment(humanc, client)
 
-	// These need to get updated for traits
-	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
-		alt_hud.apply_to_new_mob(character)
-
 	if(humanc?.mind)
 		SSrelations.try_late_join_rival(humanc.mind)
 
