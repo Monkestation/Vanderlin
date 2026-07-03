@@ -125,7 +125,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	// All items with sharpness of IS_SHARP (1) or higher will automatically get the butchering component. See combat.dm for defines.
 	var/sharpness = IS_BLUNT
 
-	var/tool_behaviour = NONE
+	var/tool_behaviour = null
 	///How fast does the tool work
 	var/toolspeed = 1
 
@@ -438,9 +438,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	return ..()
 
-/obj/item/proc/set_quality(quality)
-	recipe_quality = quality
-
 /obj/item/update_overlays()
 	. = ..()
 
@@ -675,23 +672,23 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 	return attempt_pickup(user)
 
-/obj/item/proc/attempt_pickup(mob/user)
+/obj/item/proc/attempt_pickup(mob/living/user)
 	. = TRUE
-	var/mob/living/carbon/C = user
-	if(C.has_status_effect(/datum/status_effect/tremor_grip_loss))
-		return
 
-	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		to_chat(user, span_warning("[src] is too hot to handle with your hands!"))
-		return
+	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH) && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(!C.can_touch_burning(src))
+			to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
 
 	if(resistance_flags & ON_FIRE)
 		var/can_handle_hot = FALSE
-		if(!istype(C))
-			can_handle_hot = TRUE
-		else if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
-			can_handle_hot = TRUE
-		else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
+				can_handle_hot = TRUE
+			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+				can_handle_hot = TRUE
+		else
 			can_handle_hot = TRUE
 
 		if(can_handle_hot)
@@ -700,18 +697,41 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
 			extinguish()
-			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-			if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-				C.update_damage_overlays()
+			var/obj/item/bodypart/affecting = user.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))		// 5 burn damage
+				user.update_damage_overlays()
 			return
 
-	if(acid_level > 20 && !ismob(loc))// so we can still remove the clothes on us that have acid.
-		if(istype(C))
-			if(!C.gloves || (!(C.gloves.resistance_flags & (UNACIDABLE|ACID_PROOF))))
-				to_chat(user, "<span class='warning'>The acid on [src] burns my hand!</span>")
-				var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-				if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-					C.update_damage_overlays()
+	if(resistance_flags & ON_FIRE)
+		var/can_handle_hot = TRUE
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(!C.can_touch_burning(src))
+				can_handle_hot = FALSE
+
+		extinguish()
+
+		if(can_handle_hot)
+			user.visible_message("<span class='warning'>[user] puts out the fire on [src].</span>")
+			return
+
+		user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
+		extinguish()
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))		// 5 burn damage
+				C.update_damage_overlays()
+
+		return
+
+	if(acid_level && iscarbon(user))// so we can still remove the clothes on us that have acid.
+		var/mob/living/carbon/C = user
+		if(!C.can_touch_acid(src))
+			to_chat(user, "<span class='warning'>The acid on [src] burns my hand!</span>")
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))
+				C.update_damage_overlays()
 
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return
@@ -1610,6 +1630,22 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
 
+/**
+ * Returns the atom(either itself or an internal module) that will interact/attack the target on behalf of us
+ * For example an object can have different `tool_behaviours` (e.g borg omni tool) but will return an internal reference of that tool to attack for us
+ * You can use it for general purpose polymorphism if you need a proxy atom to interact in a specific way
+ * with a target on behalf on this atom
+ *
+ * Currently used only in the object melee attack chain but can be used anywhere else or even moved up to the atom level if required
+ */
+/obj/item/proc/get_proxy_attacker_for(atom/target, mob/user)
+	RETURN_TYPE(/obj/item)
+
+	return src
+
+/obj/item/proc/set_quality(quality)
+	recipe_quality = quality
+
 /obj/item/get_examine_string(mob/user, thats = FALSE, examine_list_bool = FALSE)
 	if(examine_name && examine_list_bool)
 		var/display_name = article ? "[article] <b>[examine_name]</b>" : gender == PLURAL ? "some <b>[examine_name]</b>" : "\a <b>[examine_name]</b>"
@@ -1617,8 +1653,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
 			display_name = override.Join("")
 		return "[thats ? ismob(src) ? "This is " : "That's " : ""][display_name]"
-	else
-		return ..()
+	return ..()
 
 /obj/item/atom_break(damage_flag, silent)
 	. = ..()
@@ -1628,7 +1663,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(!silent)
 		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
-
 
 /obj/item/return_recipe_data()
 	var/has_grind = length(grind_results)

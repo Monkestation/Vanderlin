@@ -24,36 +24,35 @@
 /obj/structure
 	var/hammer_repair
 
-// Convert to interact_with_atom
-/obj/item/weapon/hammer/pre_attack(atom/interacting_with, mob/living/user, list/modifiers)
-	if(iscarbon(interacting_with) && !user.cmode && try_heal_loop(interacting_with, user)) // convert to interact_with_atom
-		return TRUE
-	. = ..()
-
-/obj/item/weapon/hammer/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/weapon/hammer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(user) || !user.mind || user.cmode)
-		return ..()
+		return NONE
+
+	if(iscarbon(interacting_with))
+		try_heal_loop(interacting_with, user)
+		return ITEM_INTERACT_SUCCESS
+
 	var/datum/mind/blacksmith_mind = user.mind
 	var/repair_percent = 0.05 // 5% Repairing per hammer smack
+
 	/// Repairing is MUCH better with an anvil!
-	if(locate(/obj/machinery/anvil) in attacked_atom.loc)
-		repair_percent *= 1.5
-	if(HAS_TRAIT(attacked_atom, TRAIT_NEEDS_QUENCH))
+	if(locate(/obj/machinery/anvil) in interacting_with.loc)
 		repair_percent *= 1.5
 
-	if(isbodypart(attacked_atom))
+	if(HAS_TRAIT(interacting_with, TRAIT_NEEDS_QUENCH))
+		repair_percent *= 1.5
+
+	if(isbodypart(interacting_with))
 		. = TRUE
-		var/obj/item/bodypart/attacked_prosthetic = attacked_atom
+		var/obj/item/bodypart/attacked_prosthetic = interacting_with
 		if(!attacked_prosthetic.anvilrepair)
-			return
-		if(!attacked_atom.ontable() && !istype(attacked_atom.loc, /obj/machinery/anvil))
-			to_chat(user, span_warning("I should put [attacked_atom] on a table or an anvil first."))
-			return
+			return NONE
+		if(!interacting_with.ontable() && !istype(interacting_with.loc, /obj/machinery/anvil))
+			to_chat(user, span_warning("I should put [interacting_with] on a table or an anvil first."))
+			return ITEM_INTERACT_BLOCKING
 		if(attacked_prosthetic.get_integrity() >= attacked_prosthetic.max_integrity && attacked_prosthetic.brute_dam == 0 && attacked_prosthetic.burn_dam == 0 && attacked_prosthetic.wounds == null && attacked_prosthetic.bodypart_disabled == BODYPART_NOT_DISABLED) //A mouthful
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair) <= 0)
 			if(prob(30))
@@ -64,6 +63,7 @@
 			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair)
 
 		playsound(src,'sound/items/bsmith3.ogg', 100, FALSE)
+
 		if(repair_percent)
 			var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
 			attacked_prosthetic.repair_damage(attacked_prosthetic.max_integrity * repair_percent)
@@ -79,25 +79,26 @@
 		else
 			user.visible_message(span_warning("[user] fumbles trying to repair [attacked_prosthetic]!"))
 			attacked_prosthetic.take_damage(attacked_prosthetic.max_integrity * 0.1, BRUTE, "blunt")
-		return
 
-	if(isitem(attacked_atom))
-		. = TRUE
-		var/obj/item/attacked_item = attacked_atom
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(isitem(interacting_with))
+		var/obj/item/attacked_item = interacting_with
 		if(!attacked_item.anvilrepair || !attacked_item.max_integrity)
-			to_chat(user, span_warning("[attacked_item] cannot be repaired."))
-			return
+			return NONE
 
-		if(!attacked_item.ontable() && !istype(attacked_atom.loc, /obj/machinery/anvil))
+		if(!attacked_item.ontable() && !istype(interacting_with.loc, /obj/machinery/anvil))
 			to_chat(user, span_warning("I should put [attacked_item] on a table or an anvil first."))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		var/skill_value = GET_MOB_SKILL_VALUE(user, attacked_item.anvilrepair) // 0-60 range typically
 		var/was_broken = attacked_item.obj_broken
 
 		if(!was_broken && attacked_item.get_integrity() >= attacked_item.max_integrity)
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_item]."))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		if(skill_value <= 0)
 			if(prob(30))
@@ -137,26 +138,29 @@
 			amt2raise *= 0.25
 		blacksmith_mind.add_sleep_experience(attacked_item.anvilrepair, amt2raise)
 		playsound(src, 'sound/items/bsmithfail.ogg', 40, FALSE)
-		return
+		user.changeNext_move(CLICK_CD_MELEE)
+		return ITEM_INTERACT_SUCCESS
 
-	if(isstructure(attacked_atom))
-		. = TRUE
-		var/obj/structure/attacked_structure = attacked_atom
+	if(isstructure(interacting_with))
+		var/obj/structure/attacked_structure = interacting_with
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
-			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
-			return
+			return NONE
+
 		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair) <= 0)
 			to_chat(user, span_warning("I don't know how to repair this.."))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
 		repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair)
+
 		attacked_structure.repair_damage(attacked_structure.max_integrity * repair_percent)
 		blacksmith_mind.add_sleep_experience(attacked_structure.hammer_repair, amt2raise)
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		user.visible_message(span_info("[user] repairs [attacked_structure]!"))
-		return
 
-	return ..()
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/hammer/proc/try_heal_loop(atom/interacting_with, mob/living/user, repeating = FALSE)
 	var/mob/living/carbon/attacked_carbon = interacting_with

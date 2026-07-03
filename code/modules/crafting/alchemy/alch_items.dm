@@ -24,18 +24,11 @@
 	sellprice = 1
 	item_weight = 34 GRAMS
 
-/obj/item/reagent_containers/glass/alchemical/attackby(obj/item/I, mob/user, list/modifiers)
-	if(reagents.total_volume)
-		return
+/obj/item/reagent_containers/glass/alchemical/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(closed)
-		return
-	else
-		return ..()
+		return NONE
 
-/obj/item/reagent_containers/glass/alchemical/update_overlays()
-	. = ..()
-	if(closed)
-		. += mutable_appearance(icon, "vial_cork")
+	return ..()
 
 /obj/item/reagent_containers/glass/alchemical/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -58,3 +51,9 @@
 		desc += "The cork appears to be off."
 	update_appearance(UPDATE_OVERLAYS)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+
+/obj/item/reagent_containers/glass/alchemical/update_overlays()
+	. = ..()
+	if(closed)
+		. += mutable_appearance(icon, "vial_cork")

@@ -5,7 +5,7 @@
 	description = "Opens OOC"
 	category = CATEGORY_CLIENT
 
-/datum/keybinding/client/ooc/down(client/user)
+/datum/keybinding/client/ooc/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.open_ooc()
 	return TRUE
@@ -24,7 +24,7 @@
 	description = "Opens Me channel"
 	category = CATEGORY_CLIENT
 
-/datum/keybinding/client/me/down(client/user)
+/datum/keybinding/client/me/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.open_me()
 	return TRUE

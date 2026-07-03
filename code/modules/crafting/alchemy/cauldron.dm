@@ -58,8 +58,6 @@
 		var/beam_color = (link.source == src) ? "#88CCFF" : "#FFAA44"
 		owner.Beam(other_turf, icon_state = "light_beam", time = 1.5 SECONDS, beam_color = beam_color)
 
-
-
 /obj/machinery/light/fueled/cauldron
 	name = "cauldron"
 	desc = "Bubble, Bubble, toil and trouble. A great iron cauldron for brewing potions from alchemical essences."
@@ -87,8 +85,6 @@
 	essence_node = new /obj/machinery/essence/cauldron_node(null, src) // nullspace
 
 /obj/machinery/light/fueled/cauldron/Destroy()
-	chem_splash(loc, 2, list(reagents))
-	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
 	if(essence_node && !QDELETED(essence_node))
 		qdel(essence_node)
 	essence_node = null
@@ -139,47 +135,46 @@
 	else
 		to_chat(user, span_info("Auto-repeat disabled."))
 
-/obj/machinery/light/fueled/cauldron/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(!istype(I, /obj/item/essence_connector))
-		return
-	if(!essence_node || QDELETED(essence_node))
+/obj/machinery/light/fueled/cauldron/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/essence_vial))
+		return NONE
+
+	var/obj/item/essence_vial/vial = tool
+	if(!vial.contained_essence || vial.essence_amount <= 0)
+		to_chat(user, span_warning("The vial is empty."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(essence_contents.len >= max_essence_types)
+		to_chat(user, span_warning("The cauldron cannot hold any more essence types."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/essence_type = vial.contained_essence.type
+	essence_contents[essence_type] = (essence_contents[essence_type] || 0) + vial.essence_amount
+
+	to_chat(user, span_info("You pour the [vial.contained_essence.name] into the cauldron."))
+	vial.contained_essence = null
+	vial.essence_amount = 0
+	vial.update_appearance(UPDATE_OVERLAYS)
+
+	brewing = 0
+	lastuser = WEAKREF(user)
+	update_appearance(UPDATE_OVERLAYS)
+	playsound(src, "bubbles", 100, TRUE)
+	return ITEM_INTERACT_SUCCESS
+
+/obj/machinery/light/fueled/cauldron/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode || !istype(tool, /obj/item/essence_connector))
+		return NONE
+
+	if(QDELETED(essence_node))
 		to_chat(user, span_warning("The cauldron has no essence conduit."))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ITEM_INTERACT_BLOCKING
+
 	essence_node.show_link_menu(user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-/obj/machinery/light/fueled/cauldron/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/essence_connector)) // just return
-		return
-
-	if(istype(I, /obj/item/essence_vial))
-		var/obj/item/essence_vial/vial = I
-		if(!vial.contained_essence || vial.essence_amount <= 0)
-			to_chat(user, span_warning("The vial is empty."))
-			return
-
-		if(essence_contents.len >= max_essence_types)
-			to_chat(user, span_warning("The cauldron cannot hold any more essence types."))
-			return
-
-		var/essence_type = vial.contained_essence.type
-		essence_contents[essence_type] = (essence_contents[essence_type] || 0) + vial.essence_amount
-
-		to_chat(user, span_info("You pour the [vial.contained_essence.name] into the cauldron."))
-		vial.contained_essence = null
-		vial.essence_amount = 0
-		vial.update_appearance(UPDATE_OVERLAYS)
-
-		brewing = 0
-		lastuser = WEAKREF(user)
-		update_appearance(UPDATE_OVERLAYS)
-		playsound(src, "bubbles", 100, TRUE)
-		return
-
-	return ..()
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/light/fueled/cauldron/proc/show_recipe_menu(mob/user)
 	var/list/recipes = list()

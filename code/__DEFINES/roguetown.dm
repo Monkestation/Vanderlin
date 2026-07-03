@@ -87,6 +87,15 @@ GLOBAL_LIST_EMPTY(accused)
 #define FAMILY_OMMER "Parents Sibling"
 #define FAMILY_INLAW "In Law"
 
+#define ROYAL_STATUS_CONSORT "consort"
+#define ROYAL_STATUS_PROGENY "progeny"
+#define ROYAL_STATUS_OMMER "ommer"
+
+#define FAMILY_MEMBER_PARENT "parent"
+#define FAMILY_MEMBER_CHILD "child"
+#define FAMILY_MEMBER_SIBLING "sibling"
+#define FAMILY_MEMBER_SPOUSE "spouse"
+
 GLOBAL_LIST_EMPTY(job_respawn_delays)
 
 //stress levels. Stress starts at 0.

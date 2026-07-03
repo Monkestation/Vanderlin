@@ -16,7 +16,7 @@
 		for(var/i in 1 to (brewed_item_count * number_of_repeats))
 			new brewed_item(get_turf(source))
 
-/datum/brewing_recipe/butter/after_finish_attackby(mob/living/user, obj/item/attacked_item, atom/source)
+/datum/brewing_recipe/butter/after_finish_interact(mob/living/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/grown/log/tree/stick))
 		return FALSE
 

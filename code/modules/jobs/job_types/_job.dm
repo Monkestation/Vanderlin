@@ -431,7 +431,6 @@
 		var/mob/living/carbon/human/H = spawned
 		H.pick_job_packs(src)
 
-
 /// this "mostly" removes the existence of a job from someone.
 /// the unfortunately reality is that even this is still a flawed removal
 /datum/job/proc/remove_job(mob/living/carbon/human/spawned)

@@ -345,6 +345,7 @@
 	icon_state = "ruby"
 	max_spells = 4
 	min_spell_tier = 2
+	max_spell_tier = 3
 
 /obj/item/arcyne_spellobject/wand
 	name = "arcyne wand"

@@ -375,7 +375,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>My spirit has been snatched away by Graggar!</span>")
 		return
 	if(is_antag_banned(ckey, ROLE_ZOMBIE))
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
+		if(IS_DEADITE(src))
 			to_chat(src, span_warning("I am banned from playing deadites."))
 			return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients

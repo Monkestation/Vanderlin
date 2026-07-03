@@ -32,7 +32,7 @@
 	if(!send_item)
 		return ..()
 
-	if(!length(owner.mind?.known_people))
+	if(!length(owner.mind?.relations))
 		to_chat(owner, span_warning("The falcon is confused... You know no one to send this item to."))
 		return FALSE
 	var/recipient = browser_input_text(owner, "Whose name shall the falcon seek?", "THE WINGS")
