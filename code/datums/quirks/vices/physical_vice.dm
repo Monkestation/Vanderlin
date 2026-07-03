@@ -454,6 +454,13 @@
 	jaw.remove_teeth(to_remove)
 	to_chat(H, span_warning("You run your tongue across the gaps where your teeth used to be."))
 
+
+/datum/attribute_holder/sheet/job/weak_quirk
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1
+	)
+
 /datum/quirk/vice/weak
 	name = "Weak"
 	desc = "You are simply weaker than your akins. You get -1 to Strength and -1 to Constitution."
@@ -462,18 +469,18 @@
 /datum/quirk/vice/weak/on_spawn()
 	if(!ishuman(owner))
 		return
-	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = -1
-	))
+	owner.attributes?.add_sheet(/datum/attribute_holder/sheet/job/weak_quirk)
 
 /datum/quirk/vice/weak/on_remove()
 	if(!ishuman(owner))
 		return
-	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
-		STAT_STRENGTH = 1,
-		STAT_CONSTITUTION = 1
-	))
+	owner.attributes?.subtract_sheet(/datum/attribute_holder/sheet/job/weak_quirk)
+
+/datum/attribute_holder/sheet/job/frail_quirk
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = -1,
+		STAT_STRENGTH = -1
+	)
 
 /datum/quirk/vice/frail
 	name = "Frail"
@@ -483,16 +490,10 @@
 /datum/quirk/vice/frail/on_spawn()
 	if(!ishuman(owner))
 		return
-	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
-		STAT_CONSTITUTION = -1,
-		STAT_STRENGTH = -1
-	))
+	owner.attributes?.add_sheet(/datum/attribute_holder/sheet/job/frail_quirk)
 
 /datum/quirk/vice/frail/on_remove()
 	if(!ishuman(owner))
 		return
-	owner.adjust_stat_modifier(STATMOD_QUIRK, list(
-		STAT_CONSTITUTION = 1,
-		STAT_STRENGTH = 1
-	))
+	owner.attributes?.remove_sheet(/datum/attribute_holder/sheet/job/frail_quirk)
 
