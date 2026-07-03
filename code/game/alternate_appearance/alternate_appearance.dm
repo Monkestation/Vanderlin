@@ -226,16 +226,6 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	any_traits_required = traits
 	return ..()
 
-/datum/atom_hud/alternate_appearance/basic/traits/track_mob(mob/new_viewer)
-	. = ..()
-	for(var/trait in any_traits_required)
-		RegisterSignal(new_viewer, SIGNAL_REMOVETRAIT(trait), PROC_REF(trait_removed), override = TRUE)
-
-/datum/atom_hud/alternate_appearance/basic/traits/proc/trait_removed(datum/source)
-	SIGNAL_HANDLER
-
-	hide_from(source)
-
 /datum/atom_hud/alternate_appearance/basic/traits/mob_should_see(mob/M)
 	for(var/trait in any_traits_required)
 		if(HAS_CHARACTER_TRAIT(M, trait))
