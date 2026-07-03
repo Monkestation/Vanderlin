@@ -198,7 +198,7 @@
 	for(var/K in alternate_appearances)
 		var/datum/atom_hud/alternate_appearance/AA = alternate_appearances[K]
 		if(AA.appearance_key == required_trait)
-			AA.add_hud_to(user)
+			AA.show_to(user)
 			revealed_to += user
 			break
 
@@ -208,6 +208,6 @@
 	for(var/K in alternate_appearances)
 		var/datum/atom_hud/alternate_appearance/AA = alternate_appearances[K]
 		if(AA.appearance_key == required_trait)
-			AA.remove_from_hud(user)
+			AA.remove_atom_from_hud(user)
 			revealed_to -= user
 			break
