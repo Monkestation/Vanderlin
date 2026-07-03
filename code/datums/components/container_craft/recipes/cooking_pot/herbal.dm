@@ -231,7 +231,7 @@
 	created_reagent = /datum/reagent/poison/herbal/acid
 	water_conversion = 1
 	reagent_requirements = list(
-		/datum/reagent/drowsbane = 10,
+		/datum/reagent/drowsbane = 50,
 	)
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3,

@@ -615,7 +615,7 @@
 /datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
 	. = ..()
 	ADD_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.5)
 
 /datum/reagent/poison/erratique/on_mob_end_metabolize(mob/living/M)
 	. = ..()
