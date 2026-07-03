@@ -160,7 +160,7 @@ GLOBAL_LIST_INIT(huds, list(
 			addtimer(CALLBACK(src, PROC_REF(show_hud_images_after_cooldown), new_viewer), next_time_allowed[new_viewer] - world.time)
 			queued_to_see[new_viewer] = TRUE
 	else
-		next_time_allowed[new_viewer] = world.time + show_to_COOLDOWN
+		next_time_allowed[new_viewer] = world.time + ADD_HUD_TO_COOLDOWN
 		for(var/atom/hud_atom_to_add as anything in get_hud_atoms_for_z_level(their_turf.z))
 			add_atom_to_single_mob_hud(new_viewer, hud_atom_to_add)
 
@@ -433,7 +433,7 @@ GLOBAL_LIST_INIT(huds, list(
 		return
 
 	queued_to_see -= queued_hud_user
-	next_time_allowed[queued_hud_user] = world.time + show_to_COOLDOWN
+	next_time_allowed[queued_hud_user] = world.time + ADD_HUD_TO_COOLDOWN
 
 	var/turf/user_turf = get_turf(queued_hud_user)
 	if(!user_turf)
