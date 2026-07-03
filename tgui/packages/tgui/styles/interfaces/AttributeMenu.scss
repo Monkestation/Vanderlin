@@ -252,25 +252,7 @@
   overflow: visible;
 }
 
-.AttributeMenu__figure {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 48%;
-  height: 66%;
-  transform: translate(-50%, -50%);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
-  pointer-events: none;
-  filter: drop-shadow(0 4px 10px rgba(40, 18, 6, 0.4));
-}
-
-.AttributeMenu__anatomyCircle,
-.AttributeMenu__anatomyGeometry,
-.AttributeMenu__anatomyArc,
-.AttributeMenu__bodyStroke,
-.AttributeMenu__bodyDetail {
+.AttributeMenu__anatomyCircle {
   fill: none;
   vector-effect: non-scaling-stroke;
 }
@@ -285,53 +267,23 @@
   stroke-width: 1.2;
 }
 
-.AttributeMenu__anatomyCircle--middle {
-  stroke: rgba(92, 61, 30, 0.38);
-  stroke-dasharray: 8 8;
-  stroke-width: 1;
+.AttributeMenu__catFigure {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 192px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 4px 10px rgba(40, 18, 6, 0.4));
 }
 
-.AttributeMenu__anatomyCircle--inner {
-  stroke: rgba(92, 61, 30, 0.28);
-  stroke-width: 1.3;
-}
-
-.AttributeMenu__anatomyGeometry {
-  stroke: rgba(92, 61, 30, 0.24);
-  stroke-width: 1.4;
-}
-
-.AttributeMenu__anatomyArc {
-  stroke: rgba(92, 61, 30, 0.32);
-  stroke-width: 2.2;
-}
-
-.AttributeMenu__bodyFill {
-  fill: rgba(92, 61, 30, 0.1);
-  stroke: rgba(74, 50, 26, 0.7);
-  stroke-width: 3;
-  vector-effect: non-scaling-stroke;
-}
-
-.AttributeMenu__bodyHead {
-  fill: rgba(92, 61, 30, 0.14);
-  stroke: rgba(74, 50, 26, 0.74);
-  stroke-width: 3;
-  vector-effect: non-scaling-stroke;
-}
-
-.AttributeMenu__bodyStroke {
-  stroke: rgba(58, 40, 22, 0.85);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 9;
-}
-
-.AttributeMenu__bodyDetail {
-  stroke: rgba(150, 110, 50, 0.55);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3;
+.AttributeMenu__catFigure > span {
+  flex: 0 0 auto;
+  transform: scale(0.75);
+  image-rendering: pixelated;
 }
 
 .AttributeMenu__sealNode {
@@ -461,6 +413,8 @@
   width: 50px;
   height: 50px;
   overflow: hidden;
+  border: 1px solid rgba(92, 61, 30, 0.6);
+  border-radius: 50%;
   filter: drop-shadow(0 2px 4px rgba(34, 16, 4, 0.55));
   transition:
     filter 120ms ease,
@@ -700,6 +654,14 @@
   line-height: 1.35;
 }
 
+.AttributeMenu__descriptionFlavor {
+  margin: 6px 0 0;
+  color: var(--am-ink-soft);
+  font-size: calc(12px * var(--am-fz));
+  font-style: italic;
+  line-height: 1.35;
+}
+
 .AttributeMenu__valueCard {
   display: flex;
   align-items: center;
@@ -852,6 +814,15 @@
   .AttributeMenu__sealNodeValue {
     font-size: calc(20px * var(--am-fz));
   }
+
+  .AttributeMenu__catFigure {
+    width: 256px;
+    height: 256px;
+  }
+
+  .AttributeMenu__catFigure > span {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 1060px) {
@@ -910,6 +881,15 @@
 
   .AttributeMenu__sealNodeValue {
     font-size: 1.36em;
+  }
+
+  .AttributeMenu__catFigure {
+    width: 154px;
+    height: 154px;
+  }
+
+  .AttributeMenu__catFigure > span {
+    transform: scale(0.6);
   }
 }
 

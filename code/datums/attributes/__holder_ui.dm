@@ -117,7 +117,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 		get_asset_datum(/datum/asset/spritesheet/attributes_big),
 		get_asset_datum(/datum/asset/spritesheet/attributes_small),
 		get_asset_datum(/datum/asset/spritesheet/attribute_seals),
-		get_asset_datum(/datum/asset/simple/attribute_menu),
+		get_asset_datum(/datum/asset/spritesheet/attribute_menu_cat),
 	)
 
 /datum/attribute_holder/ui_static_data(mob/user)

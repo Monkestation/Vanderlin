@@ -441,6 +441,15 @@
 		seal.Scale(104, 104)
 		Insert(seal_state, seal)
 
+/datum/asset/spritesheet/attribute_menu_cat
+	name = "attribute_menu_cat"
+	load_immediately = TRUE
+
+/datum/asset/spritesheet/attribute_menu_cat/create_spritesheets()
+	var/icon/cat = icon('icons/roguetown/mob/monster/pets.dmi', icon_state = "cat_rest")
+	cat.Scale(256, 256)
+	Insert("cat_rest", cat)
+
 /datum/asset/spritesheet/proc/insert_attribute_icons(scale)
 	var/list/to_insert = list()
 	var/list/seen = list()

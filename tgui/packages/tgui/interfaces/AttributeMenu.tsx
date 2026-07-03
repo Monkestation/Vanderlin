@@ -1,18 +1,20 @@
 import {
   memo,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
   type CSSProperties,
 } from 'react';
+import { storage } from 'common/storage';
 import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Section, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
-import { resolveAsset } from '../assets';
 
-const LEDGER_FIGURE_ASSET = 'attribute_ledger_figure.png';
+const CAT_SPRITESHEET_CLASS = 'attribute_menu_cat256x256';
+const CAT_TOOLTIP = "The scribe's cat, asleep at the center of it all.";
 
 const SEAL_SPRITESHEET_CLASS = 'attribute_seals104x104';
 const SEAL_STATES = new Set([
@@ -34,7 +36,6 @@ type TutorialAnchor = 'right' | 'left' | 'bottom' | 'top' | 'center';
 interface TutorialStep {
   title: string;
   body: string;
-  /** CSS selector of the element to spotlight, measured live from the DOM. */
   target?: string;
   popupAnchor?: TutorialAnchor;
 }
@@ -47,7 +48,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     title: 'Character Seals',
-    body: 'The left page bears six Core Attribute seals arranged around the figure: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
+    body: 'The left page bears six Core Attribute seals arranged around the sleeping cat: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
     target: '.AttributeMenu__panel--seals',
     popupAnchor: 'right',
   },
@@ -362,6 +363,12 @@ const EMPTY_VALUES: AttributeValues = {
   trained: false,
 };
 
+type SizeMode = 'small' | 'half' | 'full';
+
+const SIZE_MODES: SizeMode[] = ['small', 'half', 'full'];
+const SIZE_MODE_STORAGE_KEY = 'attribute-menu-size-mode';
+const SMALL_SIZE: [number, number] = [1100, 700];
+
 const displayValue = (value: AttributeValue | undefined) => {
   if (value === null || value === undefined || value === '') {
     return 'NA';
@@ -402,54 +409,19 @@ const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
   );
 });
 
-const AnatomyFigure = memo(() => {
-  const figureUrl = resolveAsset(LEDGER_FIGURE_ASSET);
-  const hasFigure = figureUrl !== LEDGER_FIGURE_ASSET;
-
-  return (
-    <>
-      <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
-        <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="382" />
-        {hasFigure && (
-          <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--track" cx="500" cy="500" r="366" />
-        )}
-        {!hasFigure && (
-          <>
-            <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--middle" cx="500" cy="500" r="250" />
-            <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--inner" cx="500" cy="500" r="118" />
-            <path
-              className="AttributeMenu__anatomyGeometry"
-              d="M500 140 L500 860 M140 500 L860 500 M245 245 L755 245 L755 755 L245 755 Z M500 140 L755 755 L245 755 Z M245 245 L755 755 M755 245 L245 755"
-            />
-            <path
-              className="AttributeMenu__anatomyArc"
-              d="M178 612 C250 748 366 826 500 826 C634 826 750 748 822 612"
-            />
-            <path
-              className="AttributeMenu__bodyFill"
-              d="M468 334 C486 306 514 306 532 334 C552 406 547 526 522 676 L478 676 C453 526 448 406 468 334 Z"
-            />
-            <circle className="AttributeMenu__bodyHead" cx="500" cy="267" r="36" />
-            <path
-              className="AttributeMenu__bodyStroke"
-              d="M500 304 L500 676 M463 356 L363 516 M537 356 L637 516 M363 516 L344 544 M637 516 L656 544 M480 676 L425 844 M520 676 L575 844 M425 844 L386 860 M575 844 L614 860"
-            />
-            <path
-              className="AttributeMenu__bodyDetail"
-              d="M468 334 C486 358 514 358 532 334 M456 440 C485 468 515 468 544 440 M478 676 C492 704 508 704 522 676 M500 334 C486 424 486 560 500 676 M500 334 C514 424 514 560 500 676"
-            />
-          </>
-        )}
-      </svg>
-      {hasFigure && (
-        <Box
-          className="AttributeMenu__figure"
-          style={{ backgroundImage: `url('${figureUrl}')` }}
-        />
-      )}
-    </>
-  );
-});
+const RingFigure = memo(() => (
+  <>
+    <svg className="AttributeMenu__anatomy" viewBox="0 0 1000 1000" aria-hidden="true">
+      <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--outer" cx="500" cy="500" r="382" />
+      <circle className="AttributeMenu__anatomyCircle AttributeMenu__anatomyCircle--track" cx="500" cy="500" r="366" />
+    </svg>
+    <Tooltip content={CAT_TOOLTIP} position="bottom">
+      <div className="AttributeMenu__catFigure">
+        <span className={`${CAT_SPRITESHEET_CLASS} cat_rest`} />
+      </div>
+    </Tooltip>
+  </>
+));
 
 const AttributeSealNode = memo((props: {
   stat: ResolvedStat;
@@ -467,10 +439,6 @@ const AttributeSealNode = memo((props: {
 
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
-      {/* Raw <button> (here and in the other Tooltip-wrapped rows): Tooltip
-          clones its child and injects a ref that must land on a DOM node, and
-          the row needs native button focus/keyboard semantics under a fully
-          bespoke skin that tgui Button's chrome would fight. */}
       <button
         className={nodeClass}
         onClick={() => act('inspect_closely', { attribute_name: stat.name })}
@@ -538,7 +506,7 @@ const CoreAttributes = memo((props: {
         )}
         {!!stats.length && (
           <Box className="AttributeMenu__ringStage">
-            <AnatomyFigure />
+            <RingFigure />
             {stats.map((stat) => (
               <AttributeSealNode
                 key={stat.name}
@@ -707,8 +675,6 @@ const SkillRegister = memo((props: {
           <Box className="AttributeMenu__empty">No matching entries.</Box>
         )}
         {visibleCategories.map((category) => (
-          // Raw <section>: a list grouping with a sticky title; the Section
-          // component's title/content wrappers would break the sticky flow.
           <section className="AttributeMenu__category" key={category.name}>
             <Box className="AttributeMenu__categoryTitle">{category.name}</Box>
             {category.skills.map((skill) => (
@@ -803,6 +769,11 @@ const InspectionPanel = memo((props: {
             <p className="AttributeMenu__description">
               {attribute.desc || 'No description has been written by the scribe.'}
             </p>
+            {attribute.desc_from_level && (
+              <p className="AttributeMenu__descriptionFlavor">
+                {attribute.desc_from_level}
+              </p>
+            )}
           </Stack.Item>
         </Stack>
 
@@ -865,7 +836,7 @@ const InspectionPanel = memo((props: {
 });
 
 export const AttributeMenu = () => {
-  const { act, data } = useBackend<AttributeData>();
+  const { act, data, config } = useBackend<AttributeData>();
   const {
     parent,
     stats_meta,
@@ -914,30 +885,62 @@ export const AttributeMenu = () => {
 
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const [maximized, setMaximized] = useLocalState<boolean>(
-    'attribute_menu_maximized',
-    false,
-  );
-  const [screenSize, setScreenSize] = useState<[number, number]>([1280, 720]);
-  useLayoutEffect(() => {
-    setScreenSize([window.screen.availWidth, window.screen.availHeight]);
+  const [sizeMode, setSizeMode] = useState<SizeMode | null>(null);
+  useEffect(() => {
+    storage.get(SIZE_MODE_STORAGE_KEY).then((saved) => {
+      setSizeMode(SIZE_MODES.includes(saved) ? saved : 'small');
+    });
   }, []);
 
-  const windowSize: [number, number] = maximized
-    ? [screenSize[0], screenSize[1]]
-    : [
-        Math.max(900, Math.round(screenSize[0] * 0.8)),
-        Math.max(600, Math.round(screenSize[1] * 0.9)),
-      ];
+  const geometryKey = config.window?.key || Byond.windowId;
+
+  const selectSizeMode = (mode: SizeMode) => {
+    storage.set(SIZE_MODE_STORAGE_KEY, mode);
+    if (mode === 'small') {
+      storage.remove(geometryKey);
+    } else {
+      storage.set(geometryKey, { pos: [0, 0] });
+    }
+    setSizeMode(mode);
+  };
+
+  const screenScale = config.window?.scale ? 1 : window.devicePixelRatio || 1;
+  const screenWidth = Math.round(window.screen.availWidth * screenScale);
+  const screenHeight = Math.round(window.screen.availHeight * screenScale);
+
+  const windowSize: [number, number] =
+    sizeMode === 'full'
+      ? [screenWidth, screenHeight]
+      : sizeMode === 'half'
+        ? [Math.round(screenWidth / 2), screenHeight]
+        : SMALL_SIZE;
 
   const windowButtons = (
-    <Button
-      icon={maximized ? 'compress' : 'expand'}
-      selected={maximized}
-      onClick={() => setMaximized(!maximized)}
-      tooltip={maximized ? 'Restore window size' : 'Maximize to full screen'}
-    />
+    <>
+      <Button
+        icon="compress"
+        selected={sizeMode === 'small'}
+        onClick={() => selectSizeMode('small')}
+        tooltip="Compact window"
+      />
+      <Button
+        icon="table-columns"
+        selected={sizeMode === 'half'}
+        onClick={() => selectSizeMode('half')}
+        tooltip="Left half of the screen"
+      />
+      <Button
+        icon="expand"
+        selected={sizeMode === 'full'}
+        onClick={() => selectSizeMode('full')}
+        tooltip="Fullscreen"
+      />
+    </>
   );
+
+  if (!sizeMode) {
+    return null;
+  }
 
   return (
     <Window
