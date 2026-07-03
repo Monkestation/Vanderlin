@@ -1765,10 +1765,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/closed/basic,
 /area/outdoors/wilderness/beside_thatchwood)
-"qR" = (
-/obj/structure/fluff/traveltile/exit_bandit,
-/turf/open/floor/grass/yel,
-/area/outdoors)
 "qY" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/cobble/mossy,
@@ -1909,10 +1905,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"tF" = (
-/obj/structure/fluff/traveltile/bandit,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "tI" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks,
@@ -2121,10 +2113,6 @@
 "xM" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/grass/yel,
-/area/outdoors)
-"ya" = (
-/obj/structure/fluff/traveltile/exit_bandit,
-/turf/open/floor/dirt/road,
 /area/outdoors)
 "ym" = (
 /obj/machinery/light/fueled/torchholder/c,
@@ -2471,10 +2459,6 @@
 	dir = 4
 	},
 /turf/open/floor/grass/yel,
-/area/outdoors)
-"BX" = (
-/obj/structure/fluff/traveltile/exit_bandit,
-/turf/open/floor/cobblerock,
 /area/outdoors)
 "CO" = (
 /obj/effect/landmark/observer_start,
@@ -3161,7 +3145,6 @@
 	pixel_y = 16;
 	pixel_x = -9
 	},
-/obj/structure/fluff/traveltile/bandit,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
 "Sc" = (
@@ -15433,7 +15416,7 @@ zg
 zg
 zg
 NR
-tF
+GB
 vD
 vD
 vD
@@ -15947,7 +15930,7 @@ vD
 Gt
 EQ
 fK
-tF
+GB
 vD
 Ta
 ua
@@ -77636,9 +77619,9 @@ pc
 pc
 Kh
 mO
-ya
-BX
-qR
+al
+Wr
+QN
 ai
 QN
 Wr
