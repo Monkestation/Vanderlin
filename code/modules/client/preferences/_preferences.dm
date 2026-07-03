@@ -522,12 +522,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	</div></a>
 
 	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:150px; left:120px; width:73px; height:9px; background-image: url('family_type.png');">
-		<div id="char-family" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/text/family) ? read_preference(/datum/preference/text/family) : "None"]</div>
+		<div id="char-family" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/family_mode) ? read_preference(/datum/preference/choiced/family_mode) : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=gender_choice'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
+	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
 		<div id="char-genderpref" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/gender_choice) ? read_preference(/datum/preference/choiced/gender_choice) : "Any"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=setspouse'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
+	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
 		<div id="char-spouse" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/text/setspouse) ? read_preference(/datum/preference/text/setspouse) : "None"]</div>
 	</div></a>
 
@@ -635,7 +635,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(update_all || ("gender" in fields_to_update))
 		params["gender"] = read_preference(/datum/preference/choiced/gender) == MALE ? "M" : "F"
 	if(update_all || ("family" in fields_to_update))
-		params["family"] = read_preference(/datum/preference/text/family) ? read_preference(/datum/preference/text/family) : "None"
+		params["family"] = read_preference(/datum/preference/choiced/family_mode) ? read_preference(/datum/preference/choiced/family_mode) : "None"
 	if(update_all || ("genderpref" in fields_to_update))
 		params["genderpref"] = read_preference(/datum/preference/choiced/gender_choice) ? read_preference(/datum/preference/choiced/gender_choice) : "Any"
 	if(update_all || ("spouse" in fields_to_update))
@@ -1210,6 +1210,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				expires = " The ban is for [DisplayTimeText(text2num(ban_details["duration"]) MINUTES)] and expires on [ban_details["expiration_time"]] (server time)."
 			to_chat(user, "<span class='danger'>You, or another user of this computer or connection ([ban_details["key"]]) is banned from playing [href_list["bancheck"]].<br>The ban reason is: [ban_details["reason"]]<br>This ban (BanID #[ban_details["id"]]) was applied by [ban_details["admin_key"]] on [ban_details["bantime"]] during round ID [ban_details["round_id"]].<br>[expires]</span>")
 			return
+
+	if(href_list["preference"] == "family")
+		var/datum/family_middleware/middleware = new /datum/family_middleware(src, user)
+		middleware.ui_interact(user)
+		return
+
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
 			if("close")
@@ -1265,6 +1271,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				set_antag(user)
 			else
 				set_antag(user)
+		return
 
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
@@ -1448,12 +1455,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					random_species()
 				if("all")
 					apply_character_randomization_prefs()
+			return
 
 		if("loadout_store")
 			open_loadout_shop(user)
+			return
+
+		if("gossip")
+			open_gossip(user)
+			return
 
 		if("select_quirks")
 			open_quirk_menu(user)
+			return
 
 		if("finished")
 			user << browse(null, "window=latechoices") //closes late choices window
@@ -1476,6 +1490,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if(isnewplayer(user))
 				var/mob/dead/new_player/player = user
 				player.cache_multi_ready_characters()
+			return
 
 		if("load")
 			load_preferences()
@@ -1483,6 +1498,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if(isnewplayer(user))
 				var/mob/dead/new_player/player = user
 				player.cache_multi_ready_characters()
+			return
 
 		if("changeslot")
 			write_preference(/datum/preference/choiced/selected_accent, ACCENT_DEFAULT)
@@ -1503,6 +1519,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if(!load_character(choice))
 					randomise_appearance_prefs()
 					save_character()
+			return
 
 		if("randomiseappearanceprefs")
 			randomise_appearance_prefs()
@@ -1511,6 +1528,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			reset_all_customizer_accessory_colors()
 			randomize_all_customizer_accessories()
 			reset_jobs(user)
+			return
 
 		if("ooc_preview")
 			var/list/dat = list()

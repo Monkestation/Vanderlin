@@ -25,6 +25,8 @@
 		var/datum/preference/list_type/role_setting/entry = GLOB.preference_entries[pref_type]
 		if(!istype(entry, /datum/preference/list_type/role_setting))
 			continue
+		if(!entry.is_role)
+			continue
 
 		var/list/current = preferences.read_preference(pref_type)
 		var/list/setting_data = list(

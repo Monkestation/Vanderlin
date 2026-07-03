@@ -16,7 +16,7 @@
 	RegisterSignal(target, COMSIG_ATOM_EXITED, PROC_REF(exited))
 	RegisterSignal(target, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))
-	RegisterSignal(target, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attack_by))
+	RegisterSignal(target, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_interact))
 
 /datum/element/hat_wearer/Detach(datum/target)
 	var/obj/item/hat = (locate(/obj/item/clothing/head) in target)
@@ -26,7 +26,7 @@
 		COMSIG_ATOM_UPDATE_OVERLAYS,
 		COMSIG_ATOM_EXITED,
 		COMSIG_ATOM_ENTERED,
-		COMSIG_ATOM_ATTACKBY,
+		COMSIG_ATOM_ITEM_INTERACTION,
 	))
 	return ..()
 
@@ -36,6 +36,7 @@
 	var/obj/item/hat = (locate(/obj/item/clothing/head) in source)
 	if(isnull(hat))
 		return
+
 	var/mutable_appearance/hat_overlay = mutable_appearance('icons/roguetown/clothing/onmob/head.dmi', hat.icon_state)
 	var/list/dir_offsets = offsets["[source.dir]"]
 	hat_overlay.dir = source.dir
@@ -55,31 +56,40 @@
 
 	if(!istype(arrived, /obj/item/clothing/head))
 		return
+
 	for(var/obj/item/clothing/head/already_worn in source)
 		if(already_worn == arrived)
 			continue
 		already_worn.forceMove(get_turf(source))
+
 	source.update_appearance(UPDATE_OVERLAYS)
 
 /datum/element/hat_wearer/proc/on_move(atom/movable/source)
 	SIGNAL_HANDLER
+
 	source.update_appearance(UPDATE_OVERLAYS)
 
-
-/datum/element/hat_wearer/proc/on_attack_by(atom/movable/source, obj/item/item, mob/living/attacker)
+/datum/element/hat_wearer/proc/on_item_interact(atom/movable/source, mob/living/user, obj/item/tool)
 	SIGNAL_HANDLER
+
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/clothing/head))
+		return NONE
+
 	if(istype(source, /mob/living/simple_animal))
 		var/mob/living/simple_animal/mob = source
-		if(!mob.has_ally(attacker))
-			return
+		if(!mob.has_ally(user))
+			return NONE
 
-	if(!istype(item, /obj/item/clothing/head))
-		return
-	INVOKE_ASYNC(src, PROC_REF(place_hat), source, item, attacker)
-	return COMPONENT_NO_AFTERATTACK
+	INVOKE_ASYNC(src, PROC_REF(place_hat), source, user, tool)
 
-/datum/element/hat_wearer/proc/place_hat(atom/movable/source, obj/item/item, mob/living/attacker)
-	if(!do_after(attacker, delay = 3 SECONDS, target = source))
-		source.balloon_alert(attacker, "must stay still!")
+	return ITEM_INTERACT_SUCCESS
+
+/datum/element/hat_wearer/proc/place_hat(atom/movable/source, mob/living/user, obj/item/tool)
+	if(!do_after(user, delay = 3 SECONDS, target = source))
+		source.balloon_alert(user, "must stay still!")
 		return
-	item.forceMove(source)
+
+	tool.forceMove(source)

@@ -85,6 +85,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/fix_death_area,
 	/datum/admins/proc/toggle_debug_pathfinding,
 	/datum/admins/proc/give_all_triumphs,
+	/client/proc/open_wave_creator,
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
@@ -963,13 +964,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/ShowAllFamilies()
 	set category = "GameMaster"
 	set name = "Show All Families"
-	var/dat = SSfamilytree.ReturnAllFamilies()
-	if(!dat)
-		to_chat(src, "<span class='interface'>Family List was Empty.</span>")
-		return
-	var/datum/browser/popup = new(usr, "ALLFAMILIES", "", 260, 400)
-	popup.set_content(dat)
-	popup.open()
+	to_chat(src, "<span class='interface'>TBA.</span>")
 
 /client/proc/tracy_next_round()
 	set name = "Toggle Tracy Next Round"

@@ -104,45 +104,63 @@
 /obj/item/proc/negates_gravity()
 	return FALSE
 
-/obj/item/clothing/shoes/attackby(obj/item/I, mob/living/carbon/user, params)
-	. = ..()
-	var/obj/item/clothing/shoes/shoes_check = locate(/obj/item/clothing/shoes) in list(user.shoes)
-	if(shoes_check)
-		return
-	if(istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && polished == 0)
-		var/obj/item/natural/cloth/cloth_check = I
-		if(cloth_check.reagents.total_volume < 0.1)
-			to_chat(user, span_warning("[cloth_check] is too dry to polish with!"))
-			return
-		var/dirty_water = cloth_check.reagents.get_reagent_amount(/datum/reagent/water/gross)
+/obj/item/clothing/shoes/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(item_flags & IN_INVENTORY)
+		return NONE
+
+	if(user.cmode)
+		return NONE
+
+	if(istype(tool, /obj/item/natural/cloth))
+		if(polished)
+			to_chat(user, span_notice("\The [name] are already polished."))
+			return ITEM_INTERACT_BLOCKING
+
+		var/obj/item/natural/cloth/rag = tool
+		if(rag.reagents.total_volume < 0.1)
+			to_chat(user, span_warning("[rag] is too dry to polish with!"))
+			return ITEM_INTERACT_BLOCKING
+
+		var/dirty_water = rag.reagents?.get_reagent_amount(/datum/reagent/water/gross)
 		if(dirty_water)
-			to_chat(user, span_warning("[cloth_check] water is too dirty to polish anything with it!"))
-			return
-		to_chat(user, ("You start polishing the [src] with the [cloth_check]"))
+			to_chat(user, span_warning("[rag] is too dirty to polish anything with it!"))
+			return ITEM_INTERACT_BLOCKING
+
+		to_chat(user, ("I start polishing \the [name] with \the [rag.name]"))
+
 		if(do_after(user, 2 SECONDS, src))
-			cloth_check.reagents.remove_all(1)
+			rag.reagents.remove_all(1)
 			polished = 1
-			AddComponent(/datum/component/particle_spewer/sparkle)
+			AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
 			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
-			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
-			to_chat(user, ("You polished the [name]."))
-		return
-	else if(istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && polished == 1)
-		to_chat(user, span_notice("The [name] are already polished."))
-		return
-	if(istype(I, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && polished == 1)
-		to_chat(user, ("You start polishing even more the [name] with the animal fat."))
+			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 5 MINUTES)
+			to_chat(user, span_notice("I polish \the [name]."))
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/fat))
+		if(!polished)
+			to_chat(user, span_notice("\the [name] needs to be cleaned with cloth before it can be shined."))
+			return ITEM_INTERACT_BLOCKING
+		else if(polished == 2) // we love magic numbers
+			to_chat(user, span_notice("You can't possibily make \the [name] shine more."))
+			return ITEM_INTERACT_BLOCKING
+
+		to_chat(user, span_notice("You start shining \the [name] with \the [tool.name]."))
+
 		if(do_after(user, 2 SECONDS, src))
 			polished = 2
 			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
-			AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
-			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
-			to_chat(user, ("You polished the [name]."))
-		return
-	if(istype(I, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && polished == 2)
-		to_chat(user, ("You can't possibily make it shine more."))
+			var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
+			if(particle_spewer)
+				qdel(particle_spewer)
+			AddComponent(/datum/component/particle_spewer/sparkle)
+			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 MINUTES)
+			to_chat(user, span_notice("You shined \the [name]."))
+
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/shoes/examine(mob/user)
 	. = ..()

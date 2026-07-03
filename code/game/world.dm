@@ -79,7 +79,9 @@ GLOBAL_VAR(restart_counter)
 	Profile(PROFILE_RESTART, type = "sendmaps")
 
 	// Write everything to this log file until we get to SetupLogs() later
-	_initialize_log_files("data/logs/config_error.[GUID()].log")
+	var/config_error = "data/logs/config_error.[GUID()].log"
+	_initialize_log_files(config_error)
+	GLOB.config_error_log = config_error
 
 	// Init the debugger first so we can debug Master
 	Debugger = new
@@ -118,8 +120,6 @@ GLOBAL_VAR(restart_counter)
 /world/New()
 	log_world("World loaded at [time_stamp()]!")
 
-	GLOB.config_error_log = GLOB.world_manifest_log = GLOB.world_pda_log = GLOB.world_job_debug_log = GLOB.sql_error_log = GLOB.world_href_log = GLOB.world_runtime_log = GLOB.world_attack_log = GLOB.world_game_log = "data/logs/config_error.[GUID()].log" //temporary file used to record errors with loading config, moved to log directory once logging is set bl
-
 	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
 
 	GLOB.revdata = new
@@ -141,13 +141,6 @@ GLOBAL_VAR(restart_counter)
 	SetupLogs()
 	if(CONFIG_GET(string/channel_announce_new_game_message))
 		send2chat(new /datum/tgs_message_content(CONFIG_GET(string/channel_announce_new_game_message)), CONFIG_GET(string/chat_announce_new_game))
-
-#ifndef USE_CUSTOM_ERROR_HANDLER
-	world.log = file("[GLOB.log_directory]/dd.log")
-#else
-	if (TgsAvailable())
-		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
-#endif
 
 	LoadVerbs(/datum/verbs/menu)
 
@@ -214,50 +207,21 @@ GLOBAL_VAR(restart_counter)
 	if(Tracy.trace_path)
 		rustg_file_write("[Tracy.trace_path]", "[GLOB.log_directory]/tracy.loc")
 
-	GLOB.world_game_log = "[GLOB.log_directory]/game.log"
-	GLOB.world_mecha_log = "[GLOB.log_directory]/mecha.log"
-	GLOB.world_virus_log = "[GLOB.log_directory]/virus.log"
-	GLOB.world_asset_log = "[GLOB.log_directory]/asset.log"
-	GLOB.world_attack_log = "[GLOB.log_directory]/attack.log"
-	GLOB.world_pda_log = "[GLOB.log_directory]/pda.log"
-	GLOB.world_telecomms_log = "[GLOB.log_directory]/telecomms.log"
-	GLOB.world_manifest_log = "[GLOB.log_directory]/manifest.log"
-	GLOB.world_href_log = "[GLOB.log_directory]/hrefs.log"
-	GLOB.sql_error_log = "[GLOB.log_directory]/sql.log"
-	GLOB.world_qdel_log = "[GLOB.log_directory]/qdel.log"
-	GLOB.world_map_error_log = "[GLOB.log_directory]/map_errors.log"
-	GLOB.character_list_log = "[GLOB.log_directory]/character_list.log"
-	GLOB.hunted_log = "[GLOB.log_directory]/hunted.log"
-	GLOB.world_runtime_log = "[GLOB.log_directory]/runtime.log"
-	GLOB.query_debug_log = "[GLOB.log_directory]/query_debug.log"
-	GLOB.world_job_debug_log = "[GLOB.log_directory]/job_debug.log"
-	GLOB.world_paper_log = "[GLOB.log_directory]/paper.log"
-	GLOB.tgui_log = "[GLOB.log_directory]/tgui.log"
-#ifdef REFERENCE_DOING_IT_LIVE
-	GLOB.harddel_log = "[GLOB.log_directory]/harddel.log"
-#endif
 	set_db_log_directory()
 
-#ifdef UNIT_TESTS
-	GLOB.test_log = file("[GLOB.log_directory]/tests.log")
-	start_log(GLOB.test_log)
+#ifndef USE_CUSTOM_ERROR_HANDLER
+	world.log = file("[GLOB.log_directory]/dd.log")
+#else
+	if(TgsAvailable())
+		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
 #endif
-	start_log(GLOB.world_game_log)
-	start_log(GLOB.world_attack_log)
-	start_log(GLOB.world_pda_log)
-	start_log(GLOB.world_telecomms_log)
-	start_log(GLOB.world_manifest_log)
-	start_log(GLOB.world_href_log)
-	start_log(GLOB.world_qdel_log)
-	start_log(GLOB.world_runtime_log)
-	start_log(GLOB.world_job_debug_log)
-	start_log(GLOB.tgui_log)
-	start_log(GLOB.character_list_log)
-	start_log(GLOB.hunted_log)
 
+	// We temporarily set the config log in world/Genesis, here we write it properly
 	if(fexists(GLOB.config_error_log))
 		fcopy(GLOB.config_error_log, "[GLOB.log_directory]/config_error.log")
 		fdel(GLOB.config_error_log)
+
+	world._initialize_log_files()
 
 	if(GLOB.round_id)
 		log_game("Round ID: [GLOB.round_id]")

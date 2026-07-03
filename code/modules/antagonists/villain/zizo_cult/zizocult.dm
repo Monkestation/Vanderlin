@@ -215,7 +215,7 @@
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
 	record_round_statistic(STATS_ZIZO_PRAISED)
-	src.say(SPAN_GOD_ZIZO(pick(LIST_PRAISE_ZIZO)), sanitize = FALSE, language = /datum/language/undead)
+	say(pick(LIST_PRAISE_ZIZO), spans = list("god_zizo"), sanitize = FALSE, language = /datum/language/undead)
 	playsound(src, 'sound/vo/cult/praise.ogg', 45, 1)
 	log_say("[src] has praised zizo! (zizo cultist verb)")
 

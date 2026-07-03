@@ -36,7 +36,8 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 	languages = list(/datum/language/oldpsydonic)

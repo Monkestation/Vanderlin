@@ -178,6 +178,143 @@ Actual Adjacent procs :
 	closed = null
 	return path
 
+/**
+ * Like get_path_to, but if the destination is unreachable, returns a path to the
+ * closest turf we *could* path to (lowest heuristic to end found during search).
+ * Useful for wave defense etc, where a point might be behind unbroken obstacles -
+ * mobs should still path as close as possible instead of giving up entirely.
+ */
+/proc/get_path_to_closest_approach(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+	var/l = SSpathfinder.mobs.getfree(requester)
+	while (!l)
+		stoplag(3)
+		if(QDELETED(requester))
+			return list()
+		l = SSpathfinder.mobs.getfree(requester)
+	var/list/path = AStarClosestApproach(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
+	SSpathfinder.mobs.found(l)
+	if (!path)
+		path = list()
+	return path
+
+/proc/AStarClosestApproach(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+	var/turf/end = get_turf(_end)
+	var/turf/start = get_turf(requester)
+	if (!start || !end)
+		stack_trace("Invalid A* start or destination")
+		return FALSE
+	if (start == end)
+		return FALSE
+	if (maxnodes && start.Distance3D(end) > maxnodes)
+		return FALSE
+	if(maxnodes)
+		maxnodedepth = maxnodes
+
+	var/list/open = list()
+	var/list/openc = new()
+	var/list/closed = new()
+	var/list/path = null
+
+	var/list/best_node = null
+	var/best_h = INFINITY
+
+	var/list/cur = ASTAR_NODE(start, 0, start.Distance3D(end), null, 0, ALL_CARDINALS)
+	var/list/insert_item = list(cur)
+	BINARY_INSERT_DEFINE_REVERSE(insert_item, open, SORT_VAR_NO_TYPE, cur, SORT_TOTAL_COST_F, COMPARE_KEY)
+	openc[start] = cur
+	// NOTE: deliberately do not seed best_node with start - we want an actual step, not "stand still"
+
+	while (!QDELETED(requester) && open.len && !path)
+		cur = open[open.len]
+		open.len--
+
+		var/turf/cur_turf = cur[ATURF]
+		openc -= cur_turf
+		closed[cur_turf] = ALL_CARDINALS
+
+		if(cur_turf != start && cur[HEURISTIC_H] < best_h)
+			best_h = cur[HEURISTIC_H]
+			best_node = cur
+
+		var/is_destination = (cur_turf == end)
+		var/closeenough = FALSE
+		if (!check_z_levels || cur_turf.z == end.z)
+			if (mintargetdist)
+				closeenough = cur_turf.Distance3D(end) <= mintargetdist
+			else
+				closeenough = cur_turf.Distance3D(end) < 1
+
+		if (is_destination || closeenough)
+			path = list(cur_turf)
+			var/list/prev = cur[PREV_NODE]
+			while (prev)
+				path.Add(prev[ATURF])
+				prev = prev[PREV_NODE]
+			break
+
+		if(maxnodedepth && (cur[NODE_TURN] > maxnodedepth))
+			CHECK_TICK
+			continue
+
+		for(var/dir_to_check in GLOB.cardinals)
+			if(!(cur[BLOCKED_FROM] & dir_to_check))
+				continue
+
+			var/turf/T = get_step(cur_turf, dir_to_check)
+
+			var/obj/structure/stairs/source_stairs = locate(/obj/structure/stairs) in cur_turf
+			if(source_stairs)
+				T = source_stairs.get_transit_destination(dir_to_check)
+
+			if(!T || T == exclude)
+				continue
+
+			var/reverse = REVERSE_DIR(dir_to_check)
+			if(closed[T] & reverse)
+				continue
+
+			if(!call(cur_turf, adjacent)(requester, T, id))
+				closed[T] |= reverse
+				// Even though we can't traverse INTO T, T itself might be closer to `end`
+				// than anything we can actually reach - but we can't path onto it, so
+				// the *current* turf (cur_turf) is our real best candidate to stand on.
+				// Just leave best_node tracking to the expanded-node check above; T itself
+				// is unusable as a path endpoint regardless of its heuristic.
+				continue
+
+			var/list/CN = openc[T]
+			var/newg = cur[DIST_FROM_START_G] + call(cur_turf, dist)(T, requester)
+
+			if(CN)
+				if(newg < CN[DIST_FROM_START_G])
+					var/list/old_item = list(CN)
+					open -= old_item
+					ASTAR_UPDATE_NODE(CN, cur, newg, CN[HEURISTIC_H], cur[NODE_TURN] + 1)
+					var/list/new_item = list(CN)
+					BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
+			else
+				CN = ASTAR_NODE(T, newg, call(T, dist)(end, requester), cur, cur[NODE_TURN] + 1, ALL_CARDINALS^reverse)
+				var/list/new_item = list(CN)
+				BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
+				openc[T] = CN
+
+		CHECK_TICK
+
+	if(!path && best_node)
+		path = list(best_node[ATURF])
+		var/list/prev = best_node[PREV_NODE]
+		while (prev)
+			path.Add(prev[ATURF])
+			prev = prev[PREV_NODE]
+
+	if (path)
+		for (var/i = 1 to round(0.5 * path.len))
+			path.Swap(i, path.len - i + 1)
+
+	openc = null
+	closed = null
+	return path
+
 /turf/proc/reachableTurftest(atom/movable/requester, turf/T, ID, simulated_only = TRUE, check_z_levels = TRUE)
 	if(!T || T.density)
 		return FALSE
