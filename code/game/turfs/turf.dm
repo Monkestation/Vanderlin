@@ -370,7 +370,6 @@
 
 /turf/Exited(atom/movable/gone, direction)
 	. = ..()
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
 
 // A proc in case it needs to be recreated or badmins want to change the baseturfs
 /turf/proc/assemble_baseturfs(turf/fake_baseturf_type)
