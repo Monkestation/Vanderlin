@@ -143,7 +143,7 @@
 	update_appearance()
 	if(owner && !old_beating)
 		to_chat(owner, span_userdanger("My [name] beats again!"))
-	current_blood = max(current_blood, 1)
+	current_blood = max(current_blood, 120)
 	consider_processing()
 	return TRUE
 
