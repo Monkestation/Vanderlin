@@ -241,7 +241,7 @@
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/book/granter/spellbook/adept = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1
+		/obj/item/reagent_containers/glass/bottle/manapot = 1,
 		/obj/item/chalk = 1,
 		/obj/item/speaker/agent = 1,
 		/obj/item/listeningdevice/agent = 2
