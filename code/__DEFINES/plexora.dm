@@ -31,3 +31,9 @@
 #define PLEXORA_ERROR_INVALIDSMITE "plx_invalidsmite"
 // Topic call bad parameter
 #define PLEXORA_ERROR_BAD_PARAM "plx_badparam"
+
+#define PLEXORA_SERVERID_MRP "3ea482a2"
+#define PLEXORA_SERVERID_MONKESPAW "bd02300d"
+#define PLEXORA_SERVERID_MONKERIS "d212eb11"
+#define PLEXORA_SERVERID_VANDERLIN "8c2bf7ef"
+
