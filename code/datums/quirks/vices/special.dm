@@ -42,6 +42,9 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+	incompatible_quirks = list(
+		/datum/quirk/vice/tainted_soul
+	)
 
 /datum/quirk/vice/luxless/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))

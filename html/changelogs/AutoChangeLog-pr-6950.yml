@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - bugfix: "Tainted Soul and Lux-less vices are now mutually exclusive."

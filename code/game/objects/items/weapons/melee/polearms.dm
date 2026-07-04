@@ -382,9 +382,11 @@
 	force_wielded = DAMAGE_SPEAR + 3
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	throwforce = DAMAGE_SPEAR_WIELD + 2
+	throwforce = DAMAGE_SPEAR_WIELD + 5
 	max_blade_int = 80
 	max_integrity = INTEGRITY_STANDARD
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 60, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
 /obj/item/weapon/polearm/spear/javelin/steel
 	name = "steel javelin"
@@ -393,12 +395,14 @@
 	icon_state = "javelin"
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	throwforce = DAMAGE_SPEAR_WIELD + 3
+	throwforce = DAMAGE_SPEAR_WIELD + 10
 	gripsprite = FALSE
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR + 3
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 1.25
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 75, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
 /obj/item/weapon/polearm/spear/javelin/silver
 	name = "silver javelin"
@@ -410,9 +414,11 @@
 	force_wielded = DAMAGE_SPEAR + 3
 	melting_material = /datum/material/silver
 	melt_amount = 75
-	throwforce = DAMAGE_SPEAR_WIELD + 3
+	throwforce = DAMAGE_SPEAR_WIELD + 8
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STANDARD * 0.8
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 70, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
 /obj/item/weapon/polearm/spear/javelin/Initialize(mapload)
 	. = ..()
