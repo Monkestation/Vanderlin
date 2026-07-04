@@ -494,7 +494,7 @@
 	greet_text = span_notice("I am beloved by the Ten, I have been blessed by all their boons.")
 	req_text = "Be Tennite"
 	weight = 7
-	allowed_patrons = ALL_TEMPLE_PATRONS
+	allowed_patrons = UNDIVIDED_TEMPLE_PATRONS
 
 /datum/special_trait/blessed/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_APRICITY, "[type]")

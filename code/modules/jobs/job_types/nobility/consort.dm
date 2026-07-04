@@ -21,6 +21,7 @@
 	noble_income = 22
 
 	honorary = JOB_CONSORT
+	tennite_triumph_exclusive = TRUE
 
 	job_bitflag = BITFLAG_ROYALTY
 
