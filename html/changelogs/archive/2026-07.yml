@@ -55,3 +55,31 @@
   - rscdel: deleted "OINK OINK" replacement for words like "smerd" and "gymza".
   SmokingCrackForChrist:
   - balance: Inspector has been given gun permissions back.
+2026-07-04:
+  Avalon-Proto:
+  - rscadd: Adds a Bunch of new Special traits - Mostly Evil
+  - balance: Thief special now gives Master Climbing
+  - rscadd: Added the Kriegmesser, and a new intent Cleave
+  - balance: Male Triton have recieved SMALL buffs to their stats
+  - bugfix: More weapon fixes done
+  Ben10083:
+  - qol: Candidate TGUI alert now timeouts when offer expires.
+  - admin: Admins can now ban ckeys from uploading books or paintings
+  - spellcheck: Master of Nerves Tax Announcement now uses map name.
+  - qol: Red tallow can now be crafted by clicking viscera with tallow
+  - bugfix: Red tallow no longer uses itself for crafting
+  CheffieGithub:
+  - rscadd: Added examine feedback for mortars to see items inside and mechanics examines
+  ModDownloading:
+  - bugfix: Tainted Soul and Lux-less vices are now mutually exclusive.
+  Sulaboy:
+  - rscadd: Silver Monocles can now check the price of items or all items on a tile
+      by clicking. Steward spawns with one.
+  - balance: Stewards can choose their weapon
+  dwasint:
+  - rscadd: headshots are free for all
+  - rscadd: Triumph subspecies available to donators
+  panvxv:
+  - balance: Rebalanced thrown force of cleavers and buffed force for cleavers
+  - image: Inhand and onmob icons for cleavers updated to use the same system as other
+      weapons
