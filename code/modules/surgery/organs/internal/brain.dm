@@ -361,12 +361,6 @@
 	QDEL_LIST(traumas)
 	return ..()
 
-/obj/item/organ/brain/proc/past_damage_threshold(threshold)
-	return (get_current_damage_threshold() > threshold)
-
-/obj/item/organ/brain/proc/get_current_damage_threshold()
-	return FLOOR(damage / damage_threshold_value, 1)
-
 /obj/item/organ/brain/applyOrganDamage(amount, maximum, silent)
 	. = ..()
 	var/delta_dam = . //for the sake of clarity

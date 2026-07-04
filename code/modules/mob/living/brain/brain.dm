@@ -17,8 +17,8 @@
 		OB.brainmob = src
 		forceMove(OB)
 
-		ADD_TRAIT(src, TRAIT_IMMOBILIZED, BRAIN_UNAIDED)
-		ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
+	ADD_TRAIT(src, TRAIT_IMMOBILIZED, BRAIN_UNAIDED)
+	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
 
 /mob/living/brain/Destroy()
 	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.

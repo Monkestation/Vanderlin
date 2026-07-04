@@ -972,7 +972,7 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			return
-		if((health <= hardcrit_threshold || undergoing_nervous_system_failure()) && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+		if(health <= hardcrit_threshold && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
 			set_stat(HARD_CRIT)
 		else if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
@@ -1011,6 +1011,7 @@
 		organ.current_blood = clamp(adjust_to, current_blood, organ.max_blood_storage)
 
 	pump_heart(forced_pump = 1.3)
+	set_heartattack(FALSE)
 
 	return ..()
 

@@ -1019,6 +1019,8 @@
 		set_suicide(FALSE)
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
 		timeofdeath = 0
+		if(getOrganLoss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_DEATH)
+			setOrganLoss(ORGAN_SLOT_BRAIN, BRAIN_DAMAGE_DEATH - 1)
 		updatehealth() //then we check if the mob should wake up.
 		if(full_heal_flags & HEAL_ADMIN)
 			get_up(TRUE)

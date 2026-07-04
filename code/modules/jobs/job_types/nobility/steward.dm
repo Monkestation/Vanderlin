@@ -48,7 +48,8 @@
 	traits = list(
 		TRAIT_SEEPRICES,
 		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
+		TRAIT_NOBLE_POWER,
+		TRAIT_VIRGIN
 	)
 
 /datum/outfit/steward/pre_equip(mob/living/carbon/human/H)
@@ -58,10 +59,6 @@
 	else
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		pants = /obj/item/clothing/pants/trou/leathertights
-
-/datum/job/steward/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.virginity = TRUE
 
 /datum/job/steward/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

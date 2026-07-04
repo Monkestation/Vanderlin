@@ -11,6 +11,7 @@
 
 /datum/quirk/vice/on_spawn()
 	next_sate = world.time + rand(10 MINUTES, 20 MINUTES)
+	return ..()
 
 /datum/quirk/vice/on_life(mob/living/user)
 	if(!ishuman(user))
