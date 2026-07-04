@@ -107,9 +107,8 @@
 
 /turf/open/openspace/zPassOut(direction)
 	if(direction == DOWN)
-		for(var/obj/contained_object in contents)
-			if(contained_object.obj_flags & BLOCK_Z_OUT_DOWN)
-				return FALSE
+		if(platform_atom_count)
+			return FALSE
 		return TRUE
 	if(direction == UP)
 		for(var/obj/contained_object in contents)

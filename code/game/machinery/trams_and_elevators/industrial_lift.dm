@@ -84,7 +84,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	set_movement_registrations()
 	if(fake)
 		alpha = 0
-		obj_flags &= ~BLOCK_Z_OUT_DOWN
+		set_is_platform(FALSE)
 	else
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
@@ -666,12 +666,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	return TRUE
 
 /obj/structure/industrial_lift/proc/show_lift()
-	obj_flags |= BLOCK_Z_OUT_DOWN
+	set_is_platform(TRUE)
 	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	alpha = 255
 
 /obj/structure/industrial_lift/proc/hide_lift()
-	obj_flags &= ~BLOCK_Z_OUT_DOWN
+	set_is_platform(FALSE)
 	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	alpha = 0
 

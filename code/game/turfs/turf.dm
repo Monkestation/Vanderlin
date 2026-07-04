@@ -66,6 +66,21 @@
 	///Lazylist of movable atoms providing opacity sources.
 	var/list/atom/movable/opacity_sources
 
+	///the chance this turf has to spread, basically 1% by default
+	var/spread_chance = 1
+	///means fires last at base 15 seconds
+	var/burn_power = 15
+	var/obj/effect/abstract/liquid_turf/liquids
+	var/liquid_height = 0
+	var/turf_height = 0
+
+	/// Weighting for AStar
+	var/path_weight = 50
+	/// How many dense climbable atoms does this turf have?
+	var/climbable_atom_count = 0
+	/// How many atoms on this turf act as platforms (have BLOCK_Z_OUT_DOWN)?
+	var/platform_atom_count = 0
+
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
 	if(var_name in banned_edits)
@@ -360,6 +375,13 @@
 	if(explosion_level && arrived.ex_check(explosion_id))
 		arrived.ex_act(explosion_level)
 
+	if(isstructure(arrived))
+		var/obj/structure/entered_structure = arrived
+		if(entered_structure.density && entered_structure.climbable)
+			climbable_atom_count += 1
+		if(entered_structure.obj_flags & BLOCK_Z_OUT_DOWN)
+			platform_atom_count += 1
+
 /turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	//melting
@@ -370,6 +392,13 @@
 
 /turf/Exited(atom/movable/gone, direction)
 	. = ..()
+
+	if(isstructure(gone))
+		var/obj/structure/exited_structure = gone
+		if(exited_structure.density && exited_structure.climbable)
+			climbable_atom_count -= 1
+		if(exited_structure.obj_flags & BLOCK_Z_OUT_DOWN)
+			platform_atom_count -= 1
 
 // A proc in case it needs to be recreated or badmins want to change the baseturfs
 /turf/proc/assemble_baseturfs(turf/fake_baseturf_type)
@@ -465,19 +494,16 @@
 /// Returns an additional distance factor based on slowdown and other factors.
 /turf/proc/get_heuristic_slowdown(mob/traverser, travel_dir)
 	. = get_slowdown(traverser)
-	// add cost from climbable obstacles
-	for(var/obj/structure/some_object in src)
-		if(some_object.density && some_object.climbable)
-			. += 1 // extra tile penalty
-			break
+
 	var/obj/structure/door/door = locate() in src
-	if(door && door.density && !door.locked() && door.anchored) // door will have to be opened
+	if(door?.density && !door.locked() && door.anchored) // door will have to be opened
 		. += 2 // try to avoid closed doors where possible
 
-	for(var/obj/structure/O in contents)
-		if(O.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
-	. += path_weight
+	// add cost from climbable obstacles
+	if(climbable_atom_count > 0)
+		. += 1
+	if(platform_atom_count <= 0)
+		. += path_weight
 
 // Like distance_cardinal, but includes additional weighting to make A* prefer turfs that are easier to pass through.
 /turf/proc/Heuristic_cardinal(turf/T, mob/traverser)

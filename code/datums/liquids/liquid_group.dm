@@ -988,11 +988,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 	if(isclosedturf(new_turf) || !source_turf.atmos_adjacent_turfs)
 		return
 	if(new_turf.turf_flags & TURF_NO_LIQUID_SPREAD)
-		var/has_block_z_out_down = FALSE
-		for(var/obj/structure/O in new_turf.contents)
-			if(O.obj_flags & BLOCK_Z_OUT_DOWN)
-				has_block_z_out_down = TRUE
-		if(!has_block_z_out_down)
+		if(new_turf.platform_atom_count)
 			return
 	if(!(new_turf in source_turf.atmos_adjacent_turfs)) //i hate that this is needed
 		return

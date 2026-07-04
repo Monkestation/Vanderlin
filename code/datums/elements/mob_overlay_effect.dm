@@ -53,9 +53,10 @@
 
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))
 		return
-	for(var/obj/structure/S in get_turf(target))
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
+
+	var/turf/target_turf = get_turf(target)
+	if(target_turf.platform_atom_count)
+		return
 
 	if(isitem(target))
 		return ///this is ALOT of filters

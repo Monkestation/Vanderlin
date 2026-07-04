@@ -36,23 +36,30 @@
 
 	var/turf/turf = get_turf(src)
 	turf.turf_flags |= TURF_NO_LIQUID_SPREAD
+
 	if(!edge)
-		turf.path_weight += 100
-		AddElement(/datum/element/mob_overlay_effect, 2, -2, 100)
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/hotspring/LateInitialize()
+	. = ..()
+
+	var/turf/turf = get_turf(src)
+	turf.path_weight += 100
+	AddElement(/datum/element/mob_overlay_effect, 2, -2, 100)
 
 /obj/structure/hotspring/Destroy()
 	var/turf/turf = get_turf(src)
 	turf.turf_flags &= ~TURF_NO_LIQUID_SPREAD
 	if(!edge)
 		turf.path_weight -= 100
-	. = ..()
-
+	return ..()
 
 /obj/structure/hotspring/Crossed(atom/movable/AM)
 	. = ..()
-	for(var/obj/structure/S in get_turf(src))
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
+
+	var/turf/turf = get_turf(src)
+	if(turf.platform_atom_count)
+		return
 
 	if(!edge)
 		playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 40, FALSE)

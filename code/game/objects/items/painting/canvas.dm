@@ -48,7 +48,7 @@
 	base = icon(icon, icon_state)
 	underlays += base
 	icon = draw
-	RegisterSignal(src, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_showers))
+	RegisterSignal(src, COMSIG_ATOM_EXITED, PROC_REF(remove_showers))
 
 /obj/item/canvas/Destroy()
 	for(var/mob/mob as anything in showers)
@@ -74,7 +74,7 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user?.client.screen += used_canvas
 	showers |= user
-	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
+	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(remove_shower))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/canvas/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
@@ -98,7 +98,7 @@
 
 	user?.client.screen += used_canvas
 	showers |= user
-	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
+	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(remove_shower))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_showers()
@@ -124,7 +124,7 @@
 /obj/item/canvas/proc/remove_shower(mob/source)
 	showers -= source
 	source.client?.screen -= used_canvas
-	UnregisterSignal(source, COMSIG_MOVABLE_TURF_ENTERED)
+	UnregisterSignal(source, COMSIG_MOVABLE_MOVED)
 
 /obj/item/canvas/proc/update_drawing(x, y, current_color)
 	if("[x][y]" in overlay_to_index)
