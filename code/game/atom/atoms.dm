@@ -1075,6 +1075,7 @@
  */
 /atom/Exited(atom/movable/gone, direction)
 	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
+	SEND_SIGNAL(gone, COMSIG_ATOM_EXITING, src, direction)
 
 ///Generate a tag for this atom
 /atom/proc/GenerateTag()

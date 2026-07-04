@@ -72,15 +72,19 @@ Actual Adjacent procs :
 /proc/AStar(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)
 	var/turf/start = get_turf(requester)
-	if (!start || !end)
+	if(!start || !end)
 		stack_trace("Invalid A* start or destination")
 		return FALSE
-	if (start == end)
+
+	if(start == end)
 		return FALSE
-	if (maxnodes && start.Distance3D(end) > maxnodes)
-		return FALSE
+
 	if(maxnodes)
-		maxnodedepth = maxnodes
+		//if start turf is farther than maxnodes from end turf, no need to do anything
+		if(start.Distance3D(end, caller) > maxnodes)
+			return FALSE
+
+		maxnodedepth = maxnodes //no need to consider path longer than maxnodes
 
 	var/list/open = list()  // Binary sorted list of nodes (lowest weight at end for easy Pop)
 	var/list/openc = new()  // turf -> node mapping for nodes in open list
@@ -93,9 +97,9 @@ Actual Adjacent procs :
 	BINARY_INSERT_DEFINE_REVERSE(insert_item, open, SORT_VAR_NO_TYPE, cur, SORT_TOTAL_COST_F, COMPARE_KEY)
 	openc[start] = cur
 
-	while (!QDELETED(requester) && open.len && !path)
+	while (!QDELETED(requester) && length(open) && !path)
 		// Pop from end (highest priority in reverse sorted list)
-		cur = open[open.len]
+		cur = open[length(open)]
 		open.len--
 
 		var/turf/cur_turf = cur[ATURF]
@@ -170,9 +174,10 @@ Actual Adjacent procs :
 
 		CHECK_TICK
 
-	if (path)
-		for (var/i = 1 to round(0.5 * path.len))
-			path.Swap(i, path.len - i + 1)
+	if(path)
+		var/path_length = length(path)
+		for(var/i = 1 to round(0.5 * path_length))
+			path.Swap(i, path_length - i + 1)
 
 	openc = null
 	closed = null
@@ -200,14 +205,16 @@ Actual Adjacent procs :
 /proc/AStarClosestApproach(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)
 	var/turf/start = get_turf(requester)
-	if (!start || !end)
+	if(!start || !end)
 		stack_trace("Invalid A* start or destination")
 		return FALSE
-	if (start == end)
+
+	if(start == end)
 		return FALSE
-	if (maxnodes && start.Distance3D(end) > maxnodes)
-		return FALSE
+
 	if(maxnodes)
+		if(maxnodes && start.Distance3D(end) > maxnodes)
+			return FALSE
 		maxnodedepth = maxnodes
 
 	var/list/open = list()
@@ -224,8 +231,8 @@ Actual Adjacent procs :
 	openc[start] = cur
 	// NOTE: deliberately do not seed best_node with start - we want an actual step, not "stand still"
 
-	while (!QDELETED(requester) && open.len && !path)
-		cur = open[open.len]
+	while (!QDELETED(requester) && length(open) && !path)
+		cur = open[length(open)]
 		open.len--
 
 		var/turf/cur_turf = cur[ATURF]
@@ -307,9 +314,10 @@ Actual Adjacent procs :
 			path.Add(prev[ATURF])
 			prev = prev[PREV_NODE]
 
-	if (path)
-		for (var/i = 1 to round(0.5 * path.len))
-			path.Swap(i, path.len - i + 1)
+	if(path)
+		var/path_length = length(path)
+		for(var/i = 1 to round(0.5 * path_length))
+			path.Swap(i, path_length - i + 1)
 
 	openc = null
 	closed = null

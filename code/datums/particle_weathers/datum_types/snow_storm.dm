@@ -355,8 +355,3 @@
 #undef CORNER_COUNTERCLOCKWISE
 #undef CORNER_DIAGONAL
 #undef CORNER_CLOCKWISE
-
-
-/turf/Exited(atom/movable/gone, direction)
-	. = ..()
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)

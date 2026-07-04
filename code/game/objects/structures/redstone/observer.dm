@@ -41,7 +41,7 @@
 	if(!observing_turf)
 		return
 	RegisterSignal(observing_turf, COMSIG_TURF_CHANGE, PROC_REF(on_observed_change))
-	RegisterSignal(observing_turf, COMSIG_TURF_ENTERED, PROC_REF(on_observed_change))
+	RegisterSignal(observing_turf, COMSIG_ATOM_ENTERED, PROC_REF(on_observed_change))
 	RegisterSignal(observing_turf, COMSIG_ATOM_EXITED, PROC_REF(on_observed_change))
 
 /obj/structure/redstone/observer/proc/unregister_observation_signals()

@@ -356,8 +356,6 @@
 
 /turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
-	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
 
 	if(explosion_level && arrived.ex_check(explosion_id))
 		arrived.ex_act(explosion_level)
@@ -369,6 +367,10 @@
 		var/obj/O = arrived
 		if(O.obj_flags & FROZEN)
 			O.make_unfrozen()
+
+/turf/Exited(atom/movable/gone, direction)
+	. = ..()
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
 
 // A proc in case it needs to be recreated or badmins want to change the baseturfs
 /turf/proc/assemble_baseturfs(turf/fake_baseturf_type)
@@ -478,10 +480,10 @@
 			return
 	. += path_weight
 
-// Like Distance_cardinal, but includes additional weighting to make A* prefer turfs that are easier to pass through.
+// Like distance_cardinal, but includes additional weighting to make A* prefer turfs that are easier to pass through.
 /turf/proc/Heuristic_cardinal(turf/T, mob/traverser)
 	var/travel_dir = get_dir(src, T)
-	. = Distance_cardinal(T, traverser) + get_heuristic_slowdown(traverser, travel_dir) + T.get_heuristic_slowdown(traverser, travel_dir)
+	. = distance_cardinal(T, traverser) + get_heuristic_slowdown(traverser, travel_dir) + T.get_heuristic_slowdown(traverser, travel_dir)
 
 /// A 3d-aware version of Heuristic_cardinal that just... adds the Z-axis distance with a multiplier.
 /turf/proc/Heuristic_cardinal_3d(turf/T, mob/traverser)
@@ -499,7 +501,7 @@
 //  This Distance proc assumes that only cardinal movement is
 //  possible. It results in more efficient (CPU-wise) pathing
 //  for bots and anything else that only moves in cardinal dirs.
-/turf/proc/Distance_cardinal(turf/T, mob/traverser)
+/turf/proc/distance_cardinal(turf/T, mob/traverser)
 	if(!src || !T)
 		return FALSE
 	return abs(x - T.x) + abs(y - T.y)

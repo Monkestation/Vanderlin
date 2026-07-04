@@ -19,7 +19,7 @@
 	effect_alpha = _effect_alpha
 
 	RegisterSignal(get_turf(target), COMSIG_ATOM_EXITED, PROC_REF(on_remove), override = TRUE)
-	RegisterSignal(get_turf(target), COMSIG_TURF_ENTERED, PROC_REF(on_add), override = TRUE)
+	RegisterSignal(get_turf(target), COMSIG_ATOM_ENTERED, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_REMOVE, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_UPDATE, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(remove_all), override = TRUE)
@@ -28,7 +28,7 @@
 	. = ..()
 	UnregisterSignal(get_turf(source), list(
 		COMSIG_ATOM_EXITED,
-		COMSIG_TURF_ENTERED,
+		COMSIG_ATOM_ENTERED,
 		COMSIG_MOB_OVERLAY_FORCE_REMOVE,
 		COMSIG_MOB_OVERLAY_FORCE_UPDATE,
 		COMSIG_QDELETING,
