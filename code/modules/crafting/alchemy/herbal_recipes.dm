@@ -663,7 +663,7 @@
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state."
 	color = "#1b8600" 
-	metabolization_rate = 0.05
+	metabolization_rate = 0.1
 	overdose_threshold = 10
 	taste_description = "fleeing life"
 
@@ -731,7 +731,7 @@
 	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
 	description = "Toxin used by orc raiding bands to weaken enemies for battle. Not very harmfull on it's own, but corrodes joints to limbs."
 	color = "#9c5aa5"
-	metabolization_rate = 0.01
+	metabolization_rate = 0.7
 	taste_description = "you just bit your cheek"
 
 /datum/reagent/poison/tear/on_mob_metabolize(mob/living/M)
