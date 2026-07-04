@@ -840,7 +840,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(item_flags & DROPDEL)
 		qdel(src)
-		return
+		return FALSE
+
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
 	if(isturf(loc))
@@ -848,6 +849,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			var/oldy = pixel_y
 			pixel_y += 5
 			animate(src, pixel_y = oldy, time = 0.5)
+
 	item_flags &= ~IN_INVENTORY
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED,user)
 	SEND_SIGNAL(user, COMSIG_MOB_DROPITEM,src)
@@ -857,6 +859,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	user.update_equipment_speed_mods()
 	update_transform()
 	update_appearance(UPDATE_OVERLAYS)
+
+	return TRUE
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)

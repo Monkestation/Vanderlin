@@ -182,8 +182,8 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(tool.type in selected_recipe?.needed_crops)
 		produce_list |= tool
 
-	if(I.atom_storage)
-		var/list/obj/item/items = I.atom_storage.return_inv()
+	if(tool.atom_storage)
+		var/list/obj/item/items = tool.atom_storage.return_inv()
 		produce_list |= items
 		storage_list |= items
 

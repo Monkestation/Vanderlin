@@ -75,6 +75,15 @@
 			act_result = is_left_clicking ? analyzer_act(user, tool) : analyzer_act_secondary(user, tool)
 
 	if(!act_result)
+		// We have to manually handle storage in item_interaction because storage is blocking in 99% of interactions, which stifles a lot
+		// Yeah it sucks not being able to signalize this, but the other option is to have a second signal here just for storage which is also not great
+		if(atom_storage)
+			if(is_left_clicking)
+				if(atom_storage.insert_on_attack)
+					return atom_storage.item_interact_insert(user, tool)
+			else
+				if(atom_storage.open_storage(user) && atom_storage.display_contents)
+					return ITEM_INTERACT_SUCCESS
 		return NONE
 
 	// A tooltype_act has completed successfully

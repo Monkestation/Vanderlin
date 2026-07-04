@@ -240,13 +240,9 @@
 	for(var/i in 1 to 4)
 		new /obj/item/ammo_casing/caseless/bullet(src)
 
-/obj/item/storage/belt/pouch/pellets
-	populate_contents = list(
-		/obj/item/ammo_casing/caseless/pelletshot,
-		/obj/item/ammo_casing/caseless/pelletshot,
-		/obj/item/ammo_casing/caseless/pelletshot,
-		/obj/item/ammo_casing/caseless/pelletshot,
-	)
+/obj/item/storage/belt/pouch/pellets/populate_contents()
+	for(var/i in 1 to 4)
+		new /obj/item/ammo_casing/caseless/pelletshot(src)
 
 /obj/item/storage/belt/pouch/cloth
 	name = "cloth pouch"
@@ -274,8 +270,7 @@
 	bloody_icon_state = "bodyblood"
 	grid_height = 64
 	grid_width = 32
-
-	component_type = /datum/component/storage/concrete/hollow_book
+	storage_type = /datum/storage/hollow_book
 
 /obj/item/storage/backpack/satchel
 	name = "satchel"
@@ -291,7 +286,6 @@
 	bloody_icon_state = "bodyblood"
 	alternate_worn_layer = UNDER_CLOAK_LAYER
 	storage_type = /datum/storage/satchel
-
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
@@ -556,7 +550,7 @@
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
 	salvage_amount = 2
 	salvage_result = /obj/item/natural/hide/cured
-	component_type = /datum/component/storage/concrete/grid/orebag
+	storage_type = /datum/storage/orebag
 	var/auto_pickup = TRUE
 
 /obj/item/storage/hip/orebag/equipped(mob/user, slot)
@@ -567,32 +561,30 @@
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
 
-/obj/item/storage/hip/orebag/proc/on_user_moved(mob/living/user)
+/obj/item/storage/hip/orebag/proc/on_user_moved(atom/movable/source, atom/old_loc, movement_dir, forced, list/old_locs)
 	SIGNAL_HANDLER
+
+	if(!auto_pickup || forced || source.loc == old_loc)
+		return
+
+	if(!isliving(source))
+		return
+
+	var/mob/living/holder = source
+
+	if(!isturf(holder.loc))
+		return
+
+	if(holder.incapacitated() || !holder.canUseStorage())
+		return
+
 	var/picked_up = FALSE
-
-	if(!auto_pickup)
-		return
-
-	if(user.incapacitated() || !user.canUseStorage())
-		return
-
-
-	var/turf/orebagturf = get_turf(user)
-	if(!orebagturf)
-		return
-
-
-	var/datum/component/storage/orebagstorage = GetComponent(/datum/component/storage)
-	if(!orebagstorage)
-		return
-
-	for(var/obj/item/orebagitem in orebagturf)
-		if(orebagstorage.can_be_inserted(orebagitem, TRUE, user))
-			orebagstorage.handle_item_insertion(orebagitem, TRUE, user)
+	for(var/obj/item/floor_item in holder.loc)
+		if(atom_storage.attempt_insert(floor_item, holder, override = TRUE, messages = FALSE))
 			picked_up = TRUE
+
 	if(picked_up)
-		user.visible_message(span_info("[user] picks up the ore beneath them, placing it into the ore bag..."))
+		holder.visible_message(span_info("[holder] picks up the ore beneath them, placing it into the ore bag..."))
 
 /obj/item/storage/hip/orebag/examine(mob/user)
 	. = ..()

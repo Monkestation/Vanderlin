@@ -96,6 +96,16 @@
 /datum/storage/cloak/lord
 	max_specific_storage = WEIGHT_CLASS_BULKY
 
+/datum/storage/crusader_helm
+	max_specific_storage = WEIGHT_CLASS_BULKY
+	screen_max_rows = 2
+	screen_max_columns = 2
+
+/datum/storage/bandolier
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 2
+
 /datum/storage/mailmaster
 	max_specific_storage = WEIGHT_CLASS_HUGE
 	screen_max_rows = 10
@@ -208,8 +218,10 @@
 
 /datum/storage/crucible
 	screen_max_rows = 5
-	screen_max_columns = 3
+	screen_max_columns = 5
 	max_specific_storage = WEIGHT_CLASS_HUGE
+	equipped_access_flags = STORAGE_ACCESS_INHANDS
+	allow_big_nesting = TRUE
 
 /datum/storage/crucible/can_insert(obj/item/to_insert, mob/user, messages, force, list/modifiers)
 	. = ..()
@@ -359,6 +371,9 @@
 		/obj/item/reagent_containers/pill,
 		/obj/item/storage/fancy/pilltin,
 		/obj/item/candle/yellow,
+		/obj/item/reagent_containers/glass,
+		/obj/item/natural/bundle/fibers,
+		/obj/item/natural/fibers,
 	))
 
 /datum/storage/drying_rack
@@ -389,5 +404,36 @@
 /datum/storage/messkit/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 
-	set_holdable(list(/obj/item/kitchen, /obj/item/folding_table_stored, /obj/item/cooking, /obj/item/reagent_containers/food/snacks, /obj/item/reagent_containers, /obj/item/mobilestove))
+	set_holdable(list(
+		/obj/item/kitchen,
+		/obj/item/folding_table_stored,
+		/obj/item/cooking,
+		/obj/item/reagent_containers/food/snacks,
+		/obj/item/reagent_containers,
+		/obj/item/mobilestove,
+	))
 
+/datum/storage/orebag
+	screen_max_rows = 4
+	screen_max_columns = 5
+	collection_mode = COLLECT_EVERYTHING
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+
+/datum/storage/orebag/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(list(
+		/obj/item/ore,
+		/obj/item/gem,
+		/obj/item/reagent_containers/powder/salt,
+		/obj/item/mana_battery/mana_crystal/standard,
+	))
+
+/datum/storage/no_interface/hollow_book
+	max_slots = 1
+
+/datum/storage/hollow_book/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(exception_hold_list = list(
+		/obj/item/gun/ballistic/powder/wheellock/puffer,
+	))

@@ -78,9 +78,9 @@
 		// Try belt first, then hands, then just leave it on the turf
 		var/stored = FALSE
 		var/obj/item/belt = H.get_item_by_slot(ITEM_SLOT_BELT)
-		if(belt)
-			SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, scroll, null, null, TRUE, TRUE)
-			stored = scroll.loc == belt // check it actually went in
+		if(belt?.atom_storage)
+			if(belt.atom_storage.attempt_insert(scroll, H, override = TRUE, messages = FALSE))
+				stored = TRUE
 		if(!stored)
 			H.put_in_hands(scroll)
 

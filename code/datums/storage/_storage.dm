@@ -189,7 +189,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_GHOST, PROC_REF(open_storage_on_signal))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(close_distance))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(update_actions))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(handle_examination))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(handle_examination))
 	RegisterSignal(parent, COMSIG_OBJ_DECONSTRUCT, PROC_REF(on_deconstruct))
 	RegisterSignal(parent, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(item_init))
 
@@ -207,7 +207,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 		UnregisterSignal(real_location, list(
 			COMSIG_ATOM_ENTERED,
 			COMSIG_ATOM_EXITED,
-			COMSIG_PARENT_QDELETING,
+			COMSIG_QDELETING,
 		))
 		real_location.flags_1 &= ~HAS_DISASSOCIATED_STORAGE_1
 		if(should_drop)
@@ -222,7 +222,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 
 	RegisterSignal(real_location, COMSIG_ATOM_ENTERED, PROC_REF(handle_enter))
 	RegisterSignal(real_location, COMSIG_ATOM_EXITED, PROC_REF(handle_exit))
-	RegisterSignal(real_location, COMSIG_PARENT_QDELETING, PROC_REF(real_location_deleted))
+	RegisterSignal(real_location, COMSIG_QDELETING, PROC_REF(real_location_deleted))
 
 /// Signal handler for when the real location is deleted.
 /datum/storage/proc/real_location_deleted(datum/deleting_real_location)
@@ -367,7 +367,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	var/obj/item/item_parent = parent
 	modeswitch_action = item_parent.add_item_action(/datum/action/item_action/storage_gather_mode)
 	RegisterSignal(modeswitch_action, COMSIG_ACTION_TRIGGER, PROC_REF(action_trigger))
-	RegisterSignal(modeswitch_action, COMSIG_PARENT_QDELETING, PROC_REF(action_deleted))
+	RegisterSignal(modeswitch_action, COMSIG_QDELETING, PROC_REF(action_deleted))
 
 /datum/storage/proc/action_trigger(datum/source, datum/action/triggered)
 	SIGNAL_HANDLER

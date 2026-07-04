@@ -28,9 +28,6 @@
 			to_chat(user, span_warning("...What?"))
 			return TRUE
 
-	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
-		return TRUE
-
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 
 	var/item_interact_result = target.base_item_interaction(user, src, modifiers)

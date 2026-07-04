@@ -745,48 +745,6 @@
 /atom/proc/acid_act(acidpwr, acid_volume)
 	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
 
-/**
- * Implement the behaviour for when a user click drags a storage object to your atom
- *
- * This behaviour is usually to mass transfer, but this is no longer a used proc as it just
- * calls the underyling /datum/component/storage dump act if a component exists
- *
- * TODO these should be purely component items that intercept the atom clicks higher in the
- * call chain
- */
-/atom/proc/storage_contents_dump_act(obj/item/storage/src_object, mob/user)
-	if(GetComponent(/datum/component/storage))
-		return component_storage_contents_dump_act(src_object, user)
-	return FALSE
-
-/**
- * Implement the behaviour for when a user click drags another storage item to you
- *
- * In this case we get as many of the tiems from the target items compoent storage and then
- * put everything into ourselves (or our storage component)
- *
- * TODO these should be purely component items that intercept the atom clicks higher in the
- * call chain
- */
-/atom/proc/component_storage_contents_dump_act(datum/component/storage/src_object, mob/user)
-	if(src_object.parent == src)
-		return
-	var/list/things = src_object.contents()
-	var/datum/progressbar/progress = new(user, things.len, src)
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	while(do_after(user, 1 SECONDS, src, NONE, FALSE, CALLBACK(STR, TYPE_PROC_REF(/datum/component/storage, handle_mass_item_insertion), things, src_object, user, progress)))
-		stoplag(1)
-	progress.end_progress()
-	to_chat(user, "<span class='notice'>I dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as I can.</span>")
-	STR.orient2hud(user)
-	STR.update_icon()
-	src_object.update_icon()
-	src_object.orient2hud(user)
-	if(user.active_storage) //refresh the HUD to show the transfered contents
-		user.active_storage.close(user)
-		user.active_storage.show_to(user)
-	return TRUE
-
 ///Get the best place to dump the items contained in the source storage item?
 /atom/proc/get_dumping_location()
 	return null
