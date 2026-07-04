@@ -521,9 +521,9 @@
 	if(!length(allowed_patrons) && !length(banned_patrons))
 		return
 
-	if(old_patron?.type in allowed_patrons)
+	if(length(allowed_patrons) && (old_patron?.type in allowed_patrons))
 		return
-	if(!(old_patron?.type in banned_patrons))
+	if(length(banned_patrons) && !(old_patron?.type in banned_patrons))
 		return
 
 	var/list/datum/patron/all_gods = list()
