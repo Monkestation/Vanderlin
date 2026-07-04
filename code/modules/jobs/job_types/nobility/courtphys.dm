@@ -69,19 +69,15 @@
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_DEADNOSE,
-		TRAIT_LEGENDARY_ALCHEMIST
+		TRAIT_LEGENDARY_ALCHEMIST,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 	)
 	book_type = /obj/item/recipe_book/medical
 
 /datum/job/courtphys/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.virginity = TRUE
-
-	if(spawned.dna?.species?.id != SPEC_ID_MEDICATOR)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, JOB_TRAIT)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_POWER, JOB_TRAIT)
-	else
-		spawned.honorary = null
 
 /datum/outfit/courtphys
 	name = "Court Physician Base"
