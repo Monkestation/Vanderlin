@@ -63,7 +63,7 @@
 /datum/status_effect/buff/druqks
 	id = "druqks"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list(STAT_INTELLIGENCE = 4, STAT_SPEED = 2, STAT_FORTUNE = -5)
+	effectedstats = list(STAT_INTELLIGENCE = 4, STAT_SPEED = 2, STAT_FORTUNE = -3)
 	duration = 2 MINUTES
 
 /datum/status_effect/buff/druqks/on_apply()

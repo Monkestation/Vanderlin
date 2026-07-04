@@ -127,7 +127,7 @@
 /datum/status_effect/debuff/alch/cards
 	id = "gamble"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/alch/cards
-	effectedstats = list(STATKEY_FORTUNE = -20) //Is this absurd? Yes. Don't drink concentrated hell/devil extract next time.
+	effectedstats = list(STATKEY_FORTUNE = -5) //Is this absurd? Yes. Don't drink concentrated hell/devil extract next time.
 
 /atom/movable/screen/alert/status_effect/debuff/alch/cards
 	name = "Bad luck!"
