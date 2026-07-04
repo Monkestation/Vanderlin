@@ -10032,11 +10032,6 @@
 "eJM" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/clocktower)
-"eJZ" = (
-/obj/effect/decal/cleanable/generic,
-/obj/structure/bars,
-/turf/open/floor/greenstone,
-/area/under/town/sewer)
 "eKd" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -17860,11 +17855,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/town/noble_manor/blue)
-"ivr" = (
-/obj/structure/kneestingers,
-/obj/structure/bars,
-/turf/open/water/sewer,
-/area/under/town/sewer)
 "ivu" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
@@ -33203,14 +33193,6 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
-"pqm" = (
-/obj/structure/door/iron/bars{
-	name = "Dungeon of the Damned"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/manor/courtagent,
-/turf/open/floor/greenstone,
-/area/under/town/sewer)
 "pqB" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
@@ -72165,9 +72147,9 @@ dLs
 dLs
 dLs
 dLs
-pGp
-pGp
-pGp
+wpU
+wpU
+wpU
 wpU
 wpU
 wpU
@@ -72367,12 +72349,12 @@ qFx
 qFx
 qFx
 dLs
-pGp
-pGp
 wpU
+ndP
 qvf
 qvf
-pqm
+qvf
+qvf
 ndP
 qvf
 qvf
@@ -72568,13 +72550,13 @@ ozq
 cyz
 qFx
 qFx
-dLs
-fsi
 fsi
 fsi
 dte
 cAA
-ivr
+cAA
+cAA
+crf
 cAA
 cAA
 cAA
@@ -72771,12 +72753,12 @@ ozq
 cyz
 llQ
 dLs
-dLs
-dLs
 wpU
-ndP
+qvf
 cAA
-eJZ
+ndP
+qvf
+ndP
 qvf
 qvf
 qvf
@@ -72972,9 +72954,9 @@ ozq
 ozq
 ozq
 qFx
-qFx
-qFx
-qFx
+pGp
+wpU
+wpU
 wpU
 wpU
 wpU
