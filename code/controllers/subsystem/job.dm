@@ -146,7 +146,7 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if(job.tennite_triumph_exclusive && !(pref_patron in UNDIVIDED_TEMPLE_PATRONS))
+	if(job.tennite_triumph_exclusive && !(pref_patron?.type in UNDIVIDED_TEMPLE_PATRONS))
 		if(player.client?.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE))
 			heretic_noble_check = TRUE
 		else
@@ -459,6 +459,8 @@ SUBSYSTEM_DEF(job)
 		if(length(job.allowed_patrons) && !(pref_patron.type in job.allowed_patrons))
 			continue
 		if(length(job.banned_patrons) && (pref_patron.type in job.banned_patrons))
+			continue
+		if(job.tennite_triumph_exclusive && !(pref_patron.type in UNDIVIDED_TEMPLE_PATRONS))
 			continue
 		if(length(job.allowed_ages) && !(player_prefs.read_preference(/datum/preference/choiced/age) in job.allowed_ages))
 			continue
