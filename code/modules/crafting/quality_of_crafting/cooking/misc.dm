@@ -344,8 +344,10 @@
 		/obj/item/alch/viscera = 1,
 		/obj/item/reagent_containers/food/snacks/tallow = 1,
 	)
-
+	blacklisted_paths = list(/obj/item/reagent_containers/food/snacks/tallow/red)
 	starting_atom = /obj/item/alch/viscera
 	attacked_atom = /obj/item/reagent_containers/food/snacks/tallow
 	output = /obj/item/reagent_containers/food/snacks/tallow/red
 	craft_time = 1 SECONDS
+	allow_inverse_start = TRUE
+	subtypes_allowed = TRUE
