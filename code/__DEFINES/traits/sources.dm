@@ -61,7 +61,7 @@
 #define OBJECTIVE_TRAIT "objective"
 
 // unique trait sources, still defines
-#define TRAIT_QUALITY "quality_trait"
+#define TRAIT_SOURCE_QUALITY "quality_trait"
 #define TRAIT_BESTIALSENSE "bestial-sense"
 #define TRAIT_DARKVISION "darkvision"
 #define TRAIT_NOCSHADES "Nocshaded"
