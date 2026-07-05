@@ -1097,7 +1097,7 @@
 	var/r_arm_index_next = 0
 	for(var/bodypart_path in bodyparts)
 		var/obj/item/bodypart/bodypart_instance = new bodypart_path()
-		bodypart_instance.set_owner(src)
+		bodypart_instance.update_owner(src)
 		bodyparts -= bodypart_path
 		add_bodypart(bodypart_instance)
 		switch(bodypart_instance.body_part)
@@ -1115,7 +1115,7 @@
 ///Proc to hook behavior on bodypart additions.
 /mob/living/carbon/proc/add_bodypart(obj/item/bodypart/new_bodypart)
 	bodyparts += new_bodypart
-	new_bodypart.set_owner(src)
+	new_bodypart.update_owner(src)
 
 	switch(new_bodypart.body_part)
 		if(LEG_LEFT, LEG_RIGHT)

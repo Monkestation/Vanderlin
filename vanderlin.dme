@@ -140,6 +140,7 @@
 #include "code\__DEFINES\objectives.dm"
 #include "code\__DEFINES\offer.dm"
 #include "code\__DEFINES\omens.dm"
+#include "code\__DEFINES\organ_movement.dm"
 #include "code\__DEFINES\pain.dm"
 #include "code\__DEFINES\particle_weather.dm"
 #include "code\__DEFINES\particles.dm"

@@ -2,17 +2,17 @@
 /obj/item/bodypart
 	name = "limb"
 	desc = ""
+	icon = 'icons/mob/human_parts.dmi'
+	icon_state = ""
+	flags_1 = PREVENT_CONTENTS_EXPLOSION_1 //actually mindblowing
 	force = 3
 	throwforce = 3
 	w_class = WEIGHT_CLASS_SMALL
-//	sellprice = 5
-	icon = 'icons/mob/human_parts.dmi'
-	icon_state = ""
 	layer = BELOW_MOB_LAYER //so it isn't hidden behind objects when on the floor
-
 	germ_level = 0
 
 	var/disinfects_in
+	/// DO NOT MODIFY DIRECTLY. Use update_owner()
 	var/mob/living/carbon/owner
 	var/mob/living/carbon/original_owner
 	/// a cache of the original owner's DNA unique identifier. only gets updated from shit like changeling absorb so it carries between owners
@@ -208,9 +208,9 @@
 		ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
 
 /obj/item/bodypart/Destroy()
-	if(owner)
-		owner.remove_bodypart(src)
-		set_owner(null)
+	if(owner && !QDELETED(owner))
+		forced_removal(special = FALSE, dismembered = TRUE, move_to_floor = FALSE)
+		update_owner(null)
 
 	for(var/obj/item/I as anything in embedded_objects)
 		remove_embedded_object(I)
@@ -221,18 +221,38 @@
 	for(var/injury in injuries)
 		qdel(injury) // injuries is a lazylist, and each injury removes itself from it on deletion.
 
-	last_injury = null
-
 	if(LAZYLEN(injuries))
 		stack_trace("[type] qdeleted with [LAZYLEN(injuries)] uncleared injuries!")
 		injuries.Cut()
 
+	last_injury = null
+
+	for(var/atom/movable/movable in contents)
+		qdel(movable)
+
 	if(bandage)
 		QDEL_NULL(bandage)
 
+	owner = null
 	embedded_objects = null
 	original_owner = null
 	return ..()
+
+/obj/item/bodypart/ex_act(severity, target)
+	if(owner) //trust me bro you dont want this
+		return FALSE
+	return ..()
+
+/obj/item/bodypart/proc/on_forced_removal(atom/old_loc, dir, forced, list/old_locs)
+	SIGNAL_HANDLER
+
+	forced_removal(special = FALSE, dismembered = TRUE, move_to_floor = FALSE)
+
+/// In-case someone, somehow only teleports someones limb
+/obj/item/bodypart/proc/forced_removal(special, dismembered, move_to_floor)
+	drop_limb(special, dismembered, move_to_floor)
+
+	update_icon_dropped()
 
 /obj/item/bodypart/proc/create_artery()
 	if(ispath(artery_type))
@@ -794,14 +814,24 @@
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
-	var/turf/T = get_turf(src)
-	if(status != BODYPART_ROBOTIC)
-		playsound(T, 'sound/blank.ogg', 50, TRUE, -1)
-	for(var/obj/item/I in src)
-		I.forceMove(T)
-	for(var/atom/movable/item as anything in cavity_items)
-		item.forceMove(drop_location())
-		cavity_items -= item
+	SHOULD_CALL_PARENT(TRUE)
+
+	var/atom/drop_loc = drop_location()
+	for(var/obj/item/organ/bodypart_organ in contents)
+		if(bodypart_organ.organ_flags & ORGAN_UNREMOVABLE)
+			continue
+		if(owner)
+			bodypart_organ.Remove(bodypart_organ.owner)
+		else
+			if(bodypart_organ.bodypart_remove(src))
+				if(drop_loc) //can be null if being deleted
+					bodypart_organ.forceMove(get_turf(drop_loc))
+
+	if(drop_loc) //can be null during deletion
+		for(var/atom/movable/movable as anything in src)
+			movable.forceMove(drop_loc)
+
+	update_icon_dropped()
 
 /obj/item/bodypart/proc/skeletonize(lethal = TRUE)
 	if(bandage)
@@ -1066,52 +1096,6 @@
 		owner.update_health_hud() //update the healthdoll
 		owner.update_body()
 
-/obj/item/bodypart/proc/reset_fingerprint()
-	if(status != BODYPART_ORGANIC)
-		fingerprint = null
-		return
-	if(owner?.dna?.unique_identity)
-		fingerprint = md5(owner.dna.unique_identity)
-	if(owner?.dna?.species)
-		food_type = owner.dna.species.meat
-
-///Proc to change the value of the `owner` variable and react to the event of its change.
-/obj/item/bodypart/proc/set_owner(mob/living/carbon/new_owner)
-	SHOULD_CALL_PARENT(TRUE)
-
-	if(owner == new_owner)
-		return FALSE //`null` is a valid option, so we need to use a num var to make it clear no change was made.
-	var/mob/living/carbon/old_owner = owner
-	owner = new_owner
-	var/needs_update_disabled = FALSE //Only really relevant if there's an owner
-	if(old_owner)
-		if(initial(can_be_disabled))
-			if(HAS_TRAIT(old_owner, TRAIT_NOLIMBDISABLE))
-				if(!owner || !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
-					set_can_be_disabled(initial(can_be_disabled))
-					needs_update_disabled = TRUE
-			UnregisterSignal(old_owner, list(
-				SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE),
-				SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE),
-				SIGNAL_ADDTRAIT(TRAIT_PARALYSIS),
-				SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS),
-				))
-	if(owner)
-		if(initial(can_be_disabled))
-			if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE)) // owner is new_owner, don't listen to owner TRAIT_PARALYSIS signals if TRAIT_NOLIMBDISABLE
-				set_can_be_disabled(FALSE)
-				needs_update_disabled = FALSE
-			else
-				RegisterSignal(new_owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_gain))
-				RegisterSignal(new_owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_loss))
-			RegisterSignal(new_owner, SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE), PROC_REF(on_owner_nolimbdisable_trait_loss))
-			RegisterSignal(new_owner, SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE), PROC_REF(on_owner_nolimbdisable_trait_gain))
-
-		if(needs_update_disabled)
-			update_disabled()
-
-	return old_owner
-
 ///Proc to change the value of the `can_be_disabled` variable and react to the event of its change.
 /obj/item/bodypart/proc/set_can_be_disabled(new_can_be_disabled)
 	if(can_be_disabled == new_can_be_disabled)
@@ -1132,6 +1116,78 @@
 				SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS),
 				))
 		set_disabled(FALSE)
+
+/obj/item/bodypart/proc/reset_fingerprint()
+	if(status != BODYPART_ORGANIC)
+		fingerprint = null
+		return
+	if(owner?.dna?.unique_identity)
+		fingerprint = md5(owner.dna.unique_identity)
+	if(owner?.dna?.species)
+		food_type = owner.dna.species.meat
+
+/// Proc to change the value of the `owner` variable and react to the event of its change.
+/obj/item/bodypart/proc/update_owner(new_owner)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	if(owner == new_owner)
+		return FALSE //`null` is a valid option, so we need to use a num var to make it clear no change was made.
+
+	SEND_SIGNAL(src, COMSIG_BODYPART_CHANGED_OWNER, new_owner, owner)
+
+	if(owner)
+		. = owner //return value is old owner
+		clear_ownership(owner)
+
+	if(new_owner)
+		apply_ownership(new_owner)
+
+/// Run all necessary procs to remove a limbs ownership and remove the appropriate signals and traits
+/obj/item/bodypart/proc/clear_ownership(mob/living/carbon/old_owner)
+	SHOULD_CALL_PARENT(TRUE)
+
+	owner = null
+
+	UnregisterSignal(old_owner, list(
+		SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE),
+		SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE),
+	))
+
+/// Apply ownership of a limb to someone, giving the appropriate traits, updates and signals
+/obj/item/bodypart/proc/apply_ownership(mob/living/carbon/new_owner)
+	SHOULD_CALL_PARENT(TRUE)
+
+	owner = new_owner
+
+	if(initial(can_be_disabled))
+		if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+			set_can_be_disabled(FALSE)
+	else
+		// Listen to disable traits being added
+		RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_NOLIMBDISABLE), PROC_REF(on_owner_nolimbdisable_trait_loss))
+		RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_NOLIMBDISABLE), PROC_REF(on_owner_nolimbdisable_trait_gain))
+
+	if(can_be_disabled)
+		update_disabled()
+
+	forceMove(owner)
+	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(on_forced_removal)) //this must be set after we moved, or we insta gib
+
+/// Called on addition of a bodypart
+/obj/item/bodypart/proc/on_adding(mob/living/carbon/new_owner)
+	SHOULD_CALL_PARENT(TRUE)
+
+	item_flags |= ABSTRACT
+	ADD_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
+
+/// Called on removal of a bodypart.
+/obj/item/bodypart/proc/on_removal(mob/living/carbon/old_owner)
+	SHOULD_CALL_PARENT(TRUE)
+
+	UnregisterSignal(src, COMSIG_MOVABLE_MOVED)
+
+	item_flags &= ~ABSTRACT
+	REMOVE_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
 
 //Updates limb efficiency based on tendons, nerves and arteries
 /obj/item/bodypart/proc/update_limb_efficiency()

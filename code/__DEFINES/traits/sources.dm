@@ -127,3 +127,5 @@
 #define MARTYR_TRAIT "martyr"
 /// Trait from wings
 #define WING_TRAIT "wings"
+/// Trait from an organ being inside a bodypart
+#define ORGAN_INSIDE_BODY_TRAIT "organ_inside_body"

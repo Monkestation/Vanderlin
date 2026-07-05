@@ -128,15 +128,15 @@
 
 //flags for the organ_flags var on /obj/item/organ
 /// Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
-#define ORGAN_SYNTHETIC			(1<<0)
+#define ORGAN_SYNTHETIC (1<<0)
 /// Frozen organs, don't deteriorate
-#define ORGAN_FROZEN			(1<<1)
+#define ORGAN_FROZEN (1<<1)
 /// Failing organs perform damaging effects until replaced or fixed
-#define ORGAN_FAILING			(1<<2)
+#define ORGAN_FAILING (1<<2)
 /// Was this organ implanted/inserted/etc, if true will not be removed during species change.
-#define ORGAN_EXTERNAL			(1<<3)
+#define ORGAN_EXTERNAL (1<<3)
 /// Currently only the brain - Removal of this organ immediately kills you
-#define ORGAN_VITAL				(1<<4)
+#define ORGAN_VITAL	(1<<4)
 /// Destroyed organs don't function and cannot be repaired, needs a transplant
 #define ORGAN_DESTROYED (1<<5)
 /// Not only is the organ failing, it is completely septic and spreading germs around
@@ -149,7 +149,8 @@
 #define ORGAN_NO_VIOLENT_DAMAGE (1<<9)
 /// Organ cannot ever become destroyed beyond repair
 #define ORGAN_INDESTRUCTIBLE (1<<10)
-
+/// Organ cannot be removed through normal means
+#define ORGAN_UNREMOVABLE (1<<11)
 DEFINE_BITFIELD(organ_flags, list(
 	"ORGAN_DESTROYED" = ORGAN_DESTROYED,
 	"ORGAN_NECROTIC" = ORGAN_NECROTIC,

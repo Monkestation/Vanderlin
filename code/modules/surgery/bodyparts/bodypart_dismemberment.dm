@@ -379,7 +379,7 @@
 
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special)
 	moveToNullspace()
-	set_owner(C)
+	update_owner(C)
 	update_chronic()
 
 	C.add_bodypart(src)
