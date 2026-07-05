@@ -126,11 +126,11 @@
 		var/atom/movable/screen/eye_intent/eyet = locate() in organ_owner.hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/organ/eyes/mob_insert(mob/living/carbon/receiver, special, movement_flags, new_zone)
+/obj/item/organ/eyes/mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
-	receiver.eye_organs[sight_index] = null
+	organ_owner.eye_organs[sight_index] = null
 
 /obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()

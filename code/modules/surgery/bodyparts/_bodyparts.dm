@@ -1159,6 +1159,9 @@
 
 	owner = new_owner
 
+	if(!original_owner)
+		original_owner = owner
+
 	if(initial(can_be_disabled))
 		if(HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
 			set_can_be_disabled(FALSE)
@@ -1269,7 +1272,7 @@
 	// No, xenos don't actually use bodyparts. Don't ask.
 	var/mob/living/carbon/human/human_owner = owner
 
-	if(human_owner != original_owner) //Foreign limb
+	if(original_owner && human_owner != original_owner) //Foreign limb
 		no_update = TRUE
 	else
 		no_update = FALSE

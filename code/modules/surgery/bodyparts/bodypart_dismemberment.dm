@@ -227,45 +227,42 @@
 
 	return TRUE
 
-
-/obj/item/organ/internal/eyes/on_bodypart_insert(obj/item/bodypart/head/head)
-	if(side == RIGHT_SIDE)
-		head.eyes_right = src
-	if(side == LEFT_SIDE)
-		head.eyes_left = src
-
-	return ..()
-
-/obj/item/organ/internal/ears/on_bodypart_insert(obj/item/bodypart/head/head)
-	head.ears = src
-	return ..()
-
-/obj/item/organ/internal/tongue/on_bodypart_insert(obj/item/bodypart/head/head)
-	head.tongue = src
-	return ..()
-
-/obj/item/organ/internal/brain/on_bodypart_insert(obj/item/bodypart/head/head)
-	head.brain = src
-	return ..()
-
-/obj/item/organ/internal/eyes/on_bodypart_remove(obj/item/bodypart/head/head)
-	if(side == RIGHT_SIDE)
-		head.eyes_right = null
-	if(side == LEFT_SIDE)
-		head.eyes_left = null
+/obj/item/organ/eyes/on_bodypart_insert(obj/item/bodypart/head/head)
+	if(istype(head))
+		if(side == RIGHT_SIDE)
+			head.eyes_right = src
+		if(side == LEFT_SIDE)
+			head.eyes_left = src
 
 	return ..()
 
-/obj/item/organ/internal/ears/on_bodypart_remove(obj/item/bodypart/head/head)
-	head.ears = null
+/obj/item/organ/ears/on_bodypart_insert(obj/item/bodypart/head/head)
+	if(istype(head))
+		head.ears = src
 	return ..()
 
-/obj/item/organ/internal/tongue/on_bodypart_remove(obj/item/bodypart/head/head)
-	head.tongue = null
+/obj/item/organ/brain/on_bodypart_insert(obj/item/bodypart/head/head)
+	if(istype(head))
+		head.brain = src
 	return ..()
 
-/obj/item/organ/internal/brain/on_bodypart_remove(obj/item/bodypart/head/head)
-	head.brain = null
+/obj/item/organ/eyes/on_bodypart_remove(obj/item/bodypart/head/head)
+	if(istype(head))
+		if(side == RIGHT_SIDE)
+			head.eyes_right = null
+		if(side == LEFT_SIDE)
+			head.eyes_left = null
+
+	return ..()
+
+/obj/item/organ/ears/on_bodypart_remove(obj/item/bodypart/head/head)
+	if(istype(head))
+		head.ears = null
+	return ..()
+
+/obj/item/organ/brain/on_bodypart_remove(obj/item/bodypart/head/head)
+	if(istype(head))
+		head.brain = null
 	return ..()
 
 /obj/item/bodypart/chest/drop_limb(special, dismembered, move_to_floor = TRUE)
@@ -418,7 +415,6 @@
 	new_limb_owner.update_damage_overlays()
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
-
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		H.lip_style = lip_style

@@ -634,7 +634,7 @@
 			if(slot == ORGAN_SLOT_BRAIN)
 				var/obj/item/organ/brain/brain = oldorgan
 				if(!brain.decoy_override)//"Just keep it if it's fake" - confucius, probably
-					brain.Remove(C,TRUE, TRUE) //brain argument used so it doesn't cause any... sudden death.
+					brain.Remove(C, TRUE, movement_flags = NO_ID_TRANSFER) //brain argument used so it doesn't cause any... sudden death.
 					QDEL_NULL(brain)
 					oldorgan = null //now deleted
 			else
@@ -647,7 +647,7 @@
 		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
 			if(neworgan)
-				neworgan.Insert(C, TRUE, FALSE)
+				neworgan.Insert(C, TRUE)
 				if(slot in PAIRED_ORGAN_SLOTS)
 					var/obj/item/organ/paired_organ = new neworgan.type()
 					paired_organ.switch_side(neworgan.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
@@ -658,7 +658,7 @@
 					if(pref_load)
 						pref_load.customize_organ(paired_organ)
 					if(!(initial(paired_organ.zone) in excluded_zones))
-						paired_organ.Insert(C, TRUE, FALSE)
+						paired_organ.Insert(C, TRUE)
 					else
 						qdel(paired_organ)
 		if(!used_neworgan)

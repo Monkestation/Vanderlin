@@ -768,8 +768,109 @@
 		see_invisible = SEE_INVISIBLE_LEYLINES
 	if(see_override)
 		see_invisible = see_override
-	. = ..()
+	return ..()
 
+/mob/living/carbon/proc/update_eyes()
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(eye_organs, 1)
+	var/left_damage
+	if(!left_eye || has_wound(/datum/wound/facial/eyes/left/permanent))
+		left_damage = 3
+	else
+		left_damage = left_eye.get_eye_damage_level()
+
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(eye_organs, 2)
+	var/right_damage
+	if(!right_eye || has_wound(/datum/wound/facial/eyes/right/permanent))
+		right_damage = 3
+	else
+		right_damage = right_eye.get_eye_damage_level()
+
+	if((left_damage >= 3) && (right_damage >= 3))
+		become_blind(EYE_DAMAGE)
+		return TRUE
+
+	cure_blind(EYE_DAMAGE)
+
+	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
+	if(!fov)
+		if(left_damage in 1 to 2)
+			overlay_fullscreen("left_eye_damage", /atom/movable/screen/fullscreen/impaired/left, left_damage)
+		else
+			clear_fullscreen("left_eye_damage")
+		if(right_damage in 1 to 2)
+			overlay_fullscreen("right_eye_damage", /atom/movable/screen/fullscreen/impaired/right, right_damage)
+		else
+			clear_fullscreen("right_eye_damage")
+
+	update_fov_angles()
+	return TRUE
+
+/mob/living/carbon/update_fov_angles()
+	fovangle = initial(fovangle)
+	if(!fovangle)
+		return
+
+	var/mob/living/carbon/human/H = src
+	var/obj/item/organ/eyes/LE = LAZYACCESS(H.eye_organs, 1)
+	var/obj/item/organ/eyes/RE = LAZYACCESS(H.eye_organs, 2)
+	var/left_damage = (LE ? LE.get_eye_damage_level() : 3)
+	var/right_damage = (RE ? RE.get_eye_damage_level() : 3)
+	if(left_damage >= 3)
+		fovangle |= FOV_LEFT
+	if(right_damage >= 3)
+		fovangle |= FOV_RIGHT
+
+	if(H.head?.block2add)
+		fovangle |= H.head.block2add
+
+	if(H.wear_mask?.block2add)
+		fovangle |= H.wear_mask.block2add
+
+	if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_PERCEPTION) < 5)
+		fovangle |= FOV_LEFT
+		fovangle |= FOV_RIGHT
+	else
+		if(HAS_TRAIT(src, TRAIT_CYCLOPS_LEFT))
+			fovangle |= FOV_RIGHT
+		if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
+			fovangle |= FOV_LEFT
+
+	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
+	if(!fov)
+		return
+
+	if(!(fovangle & FOV_DEFAULT))
+		fov.fov_holder?.alpha = 0
+		return
+
+	var/new_shadow_angle
+	var/new_angle
+
+	if(fovangle & FOV_RIGHT)
+		if(fovangle & FOV_LEFT)
+			new_shadow_angle = FOV_270_DEGREES
+			new_angle = 0
+		else if(fovangle & FOV_BEHIND)
+			new_shadow_angle = FOV_180PLUS45_DEGREES
+			new_angle = -45
+		else
+			new_shadow_angle = FOV_180PLUS45_DEGREES
+			new_angle = 45
+	else if(fovangle & FOV_LEFT)
+		if(fovangle & FOV_BEHIND)
+			new_shadow_angle = FOV_180MINUS45_DEGREES
+			new_angle = 45
+		else
+			new_shadow_angle = FOV_180MINUS45_DEGREES
+			new_angle = -45
+	else if(fovangle & FOV_BEHIND)
+		new_shadow_angle = FOV_180_DEGREES
+		new_angle = 0
+	else
+		new_shadow_angle = FOV_90_DEGREES
+		new_angle = 0
+
+	fov.generate_fov_holder(src, new_shadow_angle, new_angle, register = FALSE, delete_holder = TRUE)
 
 //to recalculate and update the mob's total tint from tinted equipment it's wearing.
 /mob/living/carbon/proc/update_tint()
