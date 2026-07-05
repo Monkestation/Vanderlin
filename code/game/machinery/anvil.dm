@@ -59,7 +59,7 @@
 		if(istype(tool, /obj/item/weapon/chisel))
 			user.changeNext_move(CLICK_CD_MELEE)
 			handle_item_rename(user, working_material)
-			return
+			return ITEM_INTERACT_SUCCESS
 		if(istype(tool, /obj/item/weapon/hammer))
 			user.changeNext_move(CLICK_CD_MELEE)
 			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
@@ -316,6 +316,7 @@
 	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/blacksmithing) < SKILL_LEVEL_EXPERT)
 		to_chat(user, span_warning("My hands are not steady enough for fine engraving."))
 		return
+
 	var/new_name = tgui_input_text(user, "What is the new name of this piece?", "ENGRAVING", max_length = 20, encode=FALSE)
 	if(new_name)
 		working_material.name = new_name

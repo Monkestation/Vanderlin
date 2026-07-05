@@ -1099,7 +1099,7 @@
 	additional_items = list(/obj/item/ingot/darksteel)
 	created_item = /obj/item/clothing/head/helmet/heavy/zizo
 
-/datum/anvil_recipe/armor/darksteel/chest/zizo_plate_chest
+/datum/anvil_recipe/armor/darksteel/chest/zizo_plate
 	name = "Darksteel Plate Armor (+3 Darksteel)"
 	additional_items = list(/obj/item/ingot/darksteel, /obj/item/ingot/darksteel, /obj/item/ingot/darksteel)
 	created_item = /obj/item/clothing/armor/plate/full/zizo
