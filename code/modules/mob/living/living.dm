@@ -53,8 +53,6 @@
 
 	stop_offering_item()
 
-	QDEL_LIST(surgeries)
-
 	GLOB.mob_living_list -= src
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(FALSE)
@@ -1968,7 +1966,7 @@
 	var/list/item_contents = list()
 
 	for(var/obj/item/item in src)
-		if(!dropItemToGround(item))
+		if(!dropItemToGround(item) && !(item.item_flags & ABSTRACT))
 			qdel(item)
 			continue
 		item_contents += item
