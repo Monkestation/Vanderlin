@@ -98,50 +98,57 @@
 	else
 		eyes_dna.second_color = eye_color
 
-/obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising, new_zone = null)
+/obj/item/organ/eyes/mob_insert(mob/living/carbon/receiver, special, movement_flags, new_zone)
 	. = ..()
-
-	var/new_side = (current_zone == BODY_ZONE_PRECISE_L_EYE ? LEFT_SIDE : (current_zone == BODY_ZONE_PRECISE_R_EYE ? RIGHT_SIDE : side))
-	switch_side(new_side)
+	if(!.)
+		return
 
 	// Place this eye in the correct slot of the owner's eye_organs list
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
-	M.eye_organs.len = max(length(M.eye_organs), sight_index)
-	M.eye_organs[sight_index] = src
+	receiver.eye_organs.len = max(length(receiver.eye_organs), sight_index)
+	receiver.eye_organs[sight_index] = src
 
-	if(ishuman(owner))
+/obj/item/organ/eyes/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
+	. = ..()
+
+	if(ishuman(organ_owner))
 		var/mob/living/carbon/human/HMN = owner
 		HMN.regenerate_icons()
 
-	M.update_eyes()
-	M.update_tint()
-	owner.update_sight()
-	if(M.has_dna() && ishuman(M))
-		M.dna.species.handle_body(M)
-	if(M.hud_used)
-		var/atom/movable/screen/eye_intent/eyet = locate() in M.hud_used.static_inventory
+	organ_owner.update_eyes()
+	organ_owner.update_tint()
+	organ_owner.update_sight()
+
+	if(organ_owner.has_dna())
+		organ_owner.dna.species.handle_body(organ_owner)
+
+	if(organ_owner.hud_used)
+		var/atom/movable/screen/eye_intent/eyet = locate() in organ_owner.hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/organ/eyes/mob_insert(mob/living/carbon/receiver, special, movement_flags, new_zone)
+	. = ..()
+
+	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
+	receiver.eye_organs[sight_index] = null
+
+/obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	. = ..()
+
+	organ_owner.update_eyes()
+	organ_owner.update_sight()
+	organ_owner.update_tint()
+
+	if(ishuman(organ_owner))
+		var/mob/living/carbon/human/HMN = organ_owner
+		HMN.regenerate_icons()
+
+	if(organ_owner.has_dna())
+		organ_owner.dna.species.handle_body(organ_owner)
 
 /obj/item/organ/eyes/handle_attaching_item(obj/item/tool, mob/living/user, params)
 	. = ..()
 	owner.update_eyes()
-
-/obj/item/organ/eyes/Remove(mob/living/carbon/M, special = 0)
-	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
-
-	. = ..()
-
-	M.eye_organs[sight_index] = null
-	M.update_eyes()
-	M.update_sight()
-	M.update_tint()
-
-	if(ishuman(M))
-		var/mob/living/carbon/human/HMN = M
-		HMN.regenerate_icons()
-
-	if(M.has_dna() && ishuman(M))
-		M.dna.species.handle_body(M)
 
 /obj/item/organ/eyes/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
 	. = ..()
