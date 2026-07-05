@@ -228,6 +228,18 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/mystic
 
+	spells = list(
+		/datum/action/cooldown/spell/undirected/message,
+		/datum/action/cooldown/spell/aoe/knock,
+		/datum/action/cooldown/spell/undirected/feather_falling,
+		/datum/action/cooldown/spell/undirected/longstrider,
+		/datum/action/cooldown/spell/conjure/phantom_ear,
+	)
+
+/datum/job/advclass/courtagent/mystic/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_spell_points(10)
+
 /datum/outfit/courtagent/mystic
 	name = "Mystic Spy"
 	head = /obj/item/clothing/head/roguehood/colored/black
@@ -240,7 +252,6 @@
 	beltl = /obj/item/storage/magebag/poor
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/book/granter/spellbook/adept = 1,
 		/obj/item/reagent_containers/glass/bottle/manapot = 1,
 		/obj/item/chalk = 1,
 		/obj/item/speaker/agent = 1,
