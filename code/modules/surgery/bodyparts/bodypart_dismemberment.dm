@@ -178,7 +178,7 @@
 	var/atom/drop_location = owner.drop_location()
 
 	remove_chronic()
-	update_limb(TRUE, owner)
+	update_limb(TRUE)
 	owner.remove_bodypart(src, special)
 
 	if(length(wounds))
@@ -208,7 +208,7 @@
 		unbandage_limb()
 
 	if(held_index)
-		phantom_owner.dropItemToGround(owner.get_item_for_held_index(held_index), force = TRUE)
+		phantom_owner.dropItemToGround(phantom_owner.get_item_for_held_index(held_index), force = TRUE)
 		phantom_owner.hand_bodyparts[held_index] = null
 
 	update_icon_dropped()

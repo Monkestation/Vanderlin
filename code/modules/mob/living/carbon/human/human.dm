@@ -111,6 +111,9 @@
 /mob/living/carbon/human/Initialize()
 	add_verb(src, /mob/living/proc/lay_down)
 
+	// Limbs require this
+	//attribute_initialize()
+
 	//initialize limbs first
 	create_bodyparts()
 
@@ -119,8 +122,6 @@
 	if(dna.species)
 		set_species(dna.species.type)
 
-	//initialise organs
-	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
 	culture = GLOB.culture_singletons[culture]
 

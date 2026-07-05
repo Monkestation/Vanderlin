@@ -1097,7 +1097,6 @@
 	var/r_arm_index_next = 0
 	for(var/bodypart_path in bodyparts)
 		var/obj/item/bodypart/bodypart_instance = new bodypart_path()
-		bodypart_instance.update_owner(src)
 		bodyparts -= bodypart_path
 		add_bodypart(bodypart_instance)
 		switch(bodypart_instance.body_part)
@@ -1109,8 +1108,6 @@
 				r_arm_index_next += 2
 				bodypart_instance.held_index = r_arm_index_next //2, 4, 6, 8...
 				hand_bodyparts += bodypart_instance
-		for(var/obj/item/organ/stored_organ in bodypart_instance)
-			stored_organ.Insert(src)
 
 ///Proc to hook behavior on bodypart additions.
 /mob/living/carbon/proc/add_bodypart(obj/item/bodypart/new_bodypart)
@@ -1119,7 +1116,6 @@
 	new_bodypart.on_adding(src)
 	bodyparts += new_bodypart
 	new_bodypart.update_owner(src)
-
 
 	for(var/obj/item/organ/organ in new_bodypart)
 		organ.mob_insert(src)
@@ -1157,10 +1153,6 @@
 			set_num_hands(num_hands - 1)
 			if(!old_bodypart.bodypart_disabled)
 				set_usable_hands(usable_hands - 1)
-
-/mob/living/carbon/proc/create_internal_organs()
-	for(var/obj/item/organ/I as anything in internal_organs)
-		I.Insert(src)
 
 /mob/living/carbon/vv_get_dropdown()
 	. = ..()

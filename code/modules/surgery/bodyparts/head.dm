@@ -131,31 +131,32 @@
 	sellprice = 0
 	return ..()
 
-/obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
-	var/mob/living/carbon/C
-	if(source)
-		C = source
-	else
-		C = owner
+/obj/item/bodypart/head/update_limb(dropping_limb)
+	if(!owner)
+		return
 
-	real_name = C.real_name
-	if(HAS_TRAIT(C, TRAIT_HUSK))
+	// There should technically to be an ishuman(owner) check here, but it is absent because no basetype carbons use bodyparts
+	// No, xenos don't actually use bodyparts. Don't ask.
+	var/mob/living/carbon/human/human_owner = owner
+
+	real_name = human_owner.real_name
+	if(HAS_TRAIT(human_owner, TRAIT_HUSK))
 		real_name = "Unknown"
 		lip_style = null
 
 	else if(!animal_origin)
-		var/mob/living/carbon/human/H = C
-		if(!H.dna || !H.dna.species)
+		if(!human_owner?.dna.species)
 			return ..()
-		var/datum/species/S = H.dna.species
+		var/datum/species/S = human_owner.dna.species
 		// lipstick
-		if(H.lip_style && (LIPS in S.species_traits))
-			lip_style = H.lip_style
-			lip_color = H.lip_color
+		if(human_owner.lip_style && (LIPS in S.species_traits))
+			lip_style = human_owner.lip_style
+			lip_color = human_owner.lip_color
 		else
 			lip_style = null
 			lip_color = "white"
-	..()
+
+	return ..()
 
 /obj/item/bodypart/head/update_icon_dropped()
 	var/list/standing = get_limb_icon(1)

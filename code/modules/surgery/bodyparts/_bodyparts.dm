@@ -431,7 +431,7 @@
 
 	germ_level = INFECTION_LEVEL_THREE
 	limb_flags |= BODYPART_DEAD
-	update_limb(!owner, owner)
+	update_limb(!owner)
 	update_limb_efficiency()
 
 ///Called when TRAIT_ROTTEN is removed from the limb.
@@ -439,7 +439,7 @@
 	SIGNAL_HANDLER
 
 	limb_flags &= ~BODYPART_DEAD
-	update_limb(!owner, owner)
+	update_limb(!owner)
 	update_limb_efficiency()
 
 /// Return TRUE to get whatever mob this is in to update health.
@@ -1058,9 +1058,9 @@
 
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled()
-	update_HP()
 	if(!owner)
 		return
+
 	if(!can_be_disabled)
 		set_disabled(FALSE)
 		CRASH("update_disabled called with can_be_disabled false")
@@ -1262,20 +1262,19 @@
 
 //we inform the bodypart of the changes that happened to the owner, or give it the informations from a source mob.
 /obj/item/bodypart/proc/update_limb(dropping_limb, mob/living/carbon/source)
-	var/mob/living/carbon/C
-	if(!should_render)
+	if(!should_render || !owner)
 		return
-	if(source)
-		C = source
-		if(!original_owner)
-			original_owner = source
-	else if(original_owner && owner != original_owner) //Foreign limb
+
+	// There should technically to be an ishuman(owner) check here, but it is absent because no basetype carbons use bodyparts
+	// No, xenos don't actually use bodyparts. Don't ask.
+	var/mob/living/carbon/human/human_owner = owner
+
+	if(human_owner != original_owner) //Foreign limb
 		no_update = TRUE
 	else
-		C = owner
 		no_update = FALSE
 
-	if(C && HAS_TRAIT(C, TRAIT_HUSK) && is_organic_limb())
+	if(human_owner && HAS_TRAIT(human_owner, TRAIT_HUSK) && is_organic_limb())
 		species_id = "husk" //overrides species_id
 		dmg_overlay_type = "" //no damage overlay shown when husked
 		should_draw_gender = FALSE
@@ -1286,27 +1285,25 @@
 		return
 
 	if(!animal_origin)
-		var/mob/living/carbon/human/H = C
 		should_draw_greyscale = FALSE
-		if(!H.dna?.species)
+		if(!human_owner.dna?.species)
 			return
-		var/datum/species/S = H.dna.species
+		var/datum/species/S = human_owner.dna.species
 		species_id = S.limbs_id
-		if(H.gender == MALE)
+		if(human_owner.gender == MALE)
 			species_icon = S.limbs_icon_m
 		else
 			species_icon = S.limbs_icon_f
-		if(H.age == AGE_CHILD)
+		if(human_owner.age == AGE_CHILD)
 			species_icon = S.child_icon
 
-
 		if(S.use_skintones)
-			skin_tone = H.skin_tone
+			skin_tone = human_owner.skin_tone
 			should_draw_greyscale = TRUE
 		else
 			skin_tone = ""
 
-		body_gender = H.gender
+		body_gender = human_owner.gender
 		should_draw_gender = S.sexes
 
 		species_color = ""
