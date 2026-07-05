@@ -190,6 +190,7 @@
 		/datum/supply_pack/armor/steel/half_plate,
 		/datum/supply_pack/jewelry/goldring,
 		/datum/supply_pack/rawmats/riddle_of_steel,
+		/datum/supply_pack/rawmats/rare_steel,
 		/datum/supply_pack/luxury/talkstone,
 		/datum/supply_pack/luxury/gold_plaque_belt,
 		/datum/supply_pack/weapons/ranged/puffer,

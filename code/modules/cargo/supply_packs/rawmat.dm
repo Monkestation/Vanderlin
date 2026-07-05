@@ -148,3 +148,13 @@
 	/obj/item/natural/bundle/stoneblock,
 	/obj/item/natural/bundle/stoneblock,
 	/obj/item/natural/bundle/stoneblock,)
+
+/datum/supply_pack/rawmats/rare_steel
+	name = "Rare Steel (3)"
+	group = "Special Materials"
+	cost = 400
+	contains = list(
+		/obj/item/ingot/steel/rare,
+		/obj/item/ingot/steel/rare,
+		/obj/item/ingot/steel/rare
+	)

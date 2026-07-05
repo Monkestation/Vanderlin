@@ -11,6 +11,7 @@
 	var/skill_quality = 0
 	var/num_components = 1
 	var/reagent_quality = 0
+	var/final_quality
 
 	/// AList of Quality descriptors - generalized now so we can give them better modifiers
 	var/alist/quality_descriptors = alist()
@@ -42,7 +43,7 @@
 	if(!target)
 		return FALSE
 
-	var/final_quality = quality_override ? quality_override : calculate_final_quality()
+	final_quality = quality_override ? quality_override : calculate_final_quality()
 	var/list/quality_data = get_quality_data(final_quality)
 	if(!quality_data)
 		return FALSE
@@ -70,6 +71,9 @@
 		track_item_creation(target, final_quality)
 
 	return quality_data // cheeky way to send quality_data list to child proc calls
+
+/datum/quality_calculator/proc/get_quality()
+	return final_quality
 
 /datum/quality_calculator/proc/track_item_creation(obj/item/target, final_quality)
 	return

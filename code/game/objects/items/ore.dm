@@ -299,6 +299,14 @@
 	sellprice = M_STEEL
 	item_weight = 5 KILOGRAMS
 
+/obj/item/ingot/steel/rare
+	name = "Elder Steel bar" // get a better name lore people
+	desc = "An ingot of extraordinary quality. Its flawless grain and impossible purity suggest techniques long forgotten, said to be the legacy of an ancient civilization where elves and dwarves once forged as one."
+	icon_state = "ingotketryl" // TODO new sprite , Steel but with markings on it
+	smeltresult = /obj/item/ingot/steel // if you smelt it you ruin it
+	melting_material = /datum/material/steel // if you melt it you ruin it
+	sellprice = M_STEEL * 5
+
 /obj/item/ingot/steelholy
 	name = "holy steel bar"
 	desc = "This ingot of steel has been touched by Malum. It radiates heat, even when outside a forge."
@@ -316,6 +324,15 @@
 	melting_material = /datum/material/silver //Smelting it removes the blessing
 	sellprice = M_SILVER * 1.5
 	item_weight = 6.65 KILOGRAMS
+
+/obj/item/ingot/darksteel
+	name = "darksteel bar"
+	desc = "An alloy of steel born from profane acts that defy all that is good."
+	icon_state = "ingotblacksteel"
+	sellprice = M_BLACKSTEEL
+	smeltresult = /obj/item/ingot/darksteel
+	melting_material = /datum/material/steel // smelting it removes its blessing (blood)
+	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/blacksteel
 	name = "blacksteel bar"

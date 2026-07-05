@@ -180,6 +180,7 @@
 /obj/item/clothing/head/helmet/heavy/bucket/gold
 	icon_state = "topfhelm_gold"
 	item_weight = 8.6 KILOGRAMS
+	melting_material = /datum/material/gold
 
 //............... Frog Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/frog
@@ -269,6 +270,7 @@
 	item_weight = 4.5 KILOGRAMS
 	block2add = FOV_BEHIND
 	sellprice = 0 // See above comment
+	melting_material = null
 
 /obj/item/clothing/head/helmet/heavy/graggar/skull
 	name = "vicious skullhelm"
@@ -427,7 +429,7 @@
 	dropshrink = 0.9
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	melt_amount = 75
-	melting_material = /datum/material/steel
+	melting_material = null
 	item_weight = 4.45 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/decorated	// template

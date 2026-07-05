@@ -606,6 +606,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
 #define TRAIT_HARD_TO_STEAL "hard_to_steal"
+/// This item is a masterwork , used as a flag.
+#define TRAIT_MASTERWORK "masterwork"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.

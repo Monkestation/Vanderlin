@@ -34,6 +34,24 @@
 	var/rotations_required = 1
 	/// Set to FALSE if needs to be learned first
 	var/always_available = TRUE
+	var/list/made_by_text = alist(
+    	BLACKSMITH_QUALITY_COMPETENT = list(
+        "Made by the blacksmith:",
+        "Forged by:",
+        "Smithed by:"
+    ),
+		BLACKSMITH_QUALITY_FLAWLESS = list(
+        "Made by the master blacksmith:",
+        "Perfected in the forge by:",
+        "A work of art made by:",
+    ),
+ 		BLACKSMITH_QUALITY_LEGENDARY = list(
+        "A legendary creation of:",
+        "Forged by the renowned master:",
+        "Born of the legendary forge of:",
+        "The unmistakable work of:"
+    )
+)
 
 /datum/anvil_recipe/New(datum/P, ...)
 	parent = P
@@ -132,13 +150,23 @@
 
 	for(var/i in 1 to output_amount)
 		var/obj/item/output_item = new created_item(output_location)
-		handle_output(output_item, quality_calc)
+		handle_output(output_item, quality_calc, user)
 		output_item.OnCrafted(user?.dir, user)
 
 	qdel(quality_calc)
 
-/datum/anvil_recipe/proc/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
+/datum/anvil_recipe/proc/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator, mob/user)
 	quality_calculator.apply_quality_to_item(output_item, TRUE)
+	var/quality = quality_calculator.get_quality()
+	switch(quality)
+		if(8 to INFINITY)
+			quality = BLACKSMITH_QUALITY_LEGENDARY
+		if(5 to 7)
+			quality = BLACKSMITH_QUALITY_FLAWLESS
+		else
+			quality = BLACKSMITH_QUALITY_COMPETENT
+	var/text = pick(made_by_text[quality])
+	output_item.desc += "\n\n<span class='notice'>[text] [user.real_name]</span>"
 	output_item.add_quench_requirement("recipe_creation", 60 SECONDS)
 
 /datum/anvil_recipe/proc/is_recipe_available(mob/user)
