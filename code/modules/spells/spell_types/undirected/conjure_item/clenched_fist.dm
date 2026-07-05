@@ -18,8 +18,6 @@
 	item_outline = null
 	attunements = null
 
-#define SPELL_CLOSECOMBAT /datum/action/cooldown/spell/undirected/conjure_item/closecombat
-
 /datum/action/cooldown/spell/undirected/conjure_item/closecombat/can_cast_spell(feedback)
 	. = ..()
 	if(!.)

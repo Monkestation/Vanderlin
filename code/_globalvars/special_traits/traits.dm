@@ -373,6 +373,8 @@
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tavernbrawler)
+	character.add_spell(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+	ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 
 /datum/attribute_holder/sheet/job/mastercraftsmen
 	raw_attribute_list = list(

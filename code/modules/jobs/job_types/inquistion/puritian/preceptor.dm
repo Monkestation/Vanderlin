@@ -55,7 +55,13 @@
 		TRAIT_DUALWIELDER,
 		TRAIT_FOREIGNER,
 		TRAIT_RECOGNIZED,
+		TRAIT_CLOSECOMBAT,
 	)
+
+	spells = list(
+		/datum/action/cooldown/spell/undirected/conjure_item/closecombat
+	)
+
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)

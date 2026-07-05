@@ -297,6 +297,10 @@
 		/mob/proc/haltyell
 	)
 
+	spells = list(
+		/datum/action/cooldown/spell/undirected/conjure_item/closecombat
+	)
+
 /datum/outfit/forestguard/ossland_scout
 	name = JOB_FOREST_GUARD_HUSKARL_SCOUT
 	head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
