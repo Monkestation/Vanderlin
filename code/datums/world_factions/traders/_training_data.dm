@@ -26,7 +26,7 @@
 /datum/training_data/blacksmith
 	learnable_recipes = list(
 		/datum/profession/blacksmith = list(
-			/datum/anvil_recipe/armor/iron/bevor = list(1, 20),
-			/datum/anvil_recipe/armor/iron/chainleg = list(1, 20)
+			/datum/anvil_recipe/armor/iron/neck/bevor = list(1, 20),
+			/datum/anvil_recipe/armor/iron/under/chainleg = list(1, 20)
 		)
 	)
