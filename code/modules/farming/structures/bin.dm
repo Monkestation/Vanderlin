@@ -183,7 +183,7 @@
 /obj/item/bin/proc/quench(obj/item/tool, mob/living/user)
 	var/removereg = /datum/reagent/water
 	if(reagents.has_reagent(/datum/reagent/water/blessed, 50))
-		holy_conversion(tool,user)
+		holy_conversion(tool, user)
 		return TRUE
 	if(!reagents.has_reagent(/datum/reagent/water, 5))
 		removereg = /datum/reagent/water/gross
