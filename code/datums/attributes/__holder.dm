@@ -61,6 +61,12 @@
 		remove_attribute_modifier(thing, FALSE) //they lazyremove themselves
 	closely_inspected_attribute = null
 
+/datum/attribute_holder/proc/return_raw_attribute(attribute_path)
+	if(!length(raw_attribute_list))
+		return 0
+
+	return raw_attribute_list[attribute_path]
+
 /**
  * Returns the raw value of a skill, taking into account the raw value of the governing attribute and defaulting
  */

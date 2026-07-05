@@ -111,8 +111,7 @@
 /mob/living/carbon/human/Initialize()
 	add_verb(src, /mob/living/proc/lay_down)
 
-	// Limbs require this
-	//attribute_initialize()
+	attribute_initialize()
 
 	//initialize limbs first
 	create_bodyparts()
