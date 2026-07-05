@@ -175,7 +175,7 @@
 
 	connected_rollers = list()
 	build_roller_chain()
-	return TRUE
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/roller/update_appearance()
 	. = ..()
@@ -308,23 +308,22 @@
 	. += span_notice("Attack items to add them to the sorting list.")
 	. += span_notice("Alt-Click to reset the sorting list.")
 
-/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
-	if(target == src || !proximity_flag)
-		return ..()
+/obj/item/roller_sorter_lister/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ismovable(interacting_with))
+		return NONE
 
-	if(!ismovable(target))
-		return ..()
-
-	if(is_type_in_list(target, current_sort))
-		to_chat(user, span_warning("[target] is already in the sorting list!"))
-		return
+	if(is_type_in_list(interacting_with, current_sort))
+		to_chat(user, span_warning("[interacting_with] is already in the sorting list!"))
+		return ITEM_INTERACT_BLOCKING
 
 	if(length(current_sort) >= max_items)
 		to_chat(user, span_warning("The sorting list is full!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	current_sort += target.type
-	to_chat(user, span_notice("[target] has been added to the sorting list."))
+	current_sort += interacting_with.type
+	to_chat(user, span_notice("[interacting_with] has been added to the sorting list."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/roller_sorter_lister/AltClick(mob/user, list/modifiers)
 	. = ..()

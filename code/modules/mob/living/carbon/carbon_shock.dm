@@ -147,7 +147,7 @@
 	else
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 
-	if(traumatic_shock > 0.8 * shock_stage)
+	if(traumatic_shock > 0.9 * shock_stage)
 		adjustShockStage(delta_time * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
 		var/recovery = delta_time

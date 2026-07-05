@@ -138,32 +138,6 @@
 	else
 		mode() // Activate held item
 
-/mob/living/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!user.cmode && (istype(user.rmb_intent, /datum/rmb_intent/weak) || istype(user.rmb_intent, /datum/rmb_intent/strong)))
-		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
-		var/list/possible_steps = list()
-		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
-			if(!surgery_step.name)
-				continue
-			if(surgery_step.can_do_step(user, src, user.zone_selected, I, user.used_intent))
-				possible_steps[surgery_step.name] = surgery_step
-		var/possible_len = length(possible_steps)
-		if(possible_len)
-			var/datum/surgery_step/done_step
-			if(possible_len > 1)
-				var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
-				if(input)
-					done_step = possible_steps[input]
-			else
-				done_step = possible_steps[possible_steps[1]]
-			if(done_step?.try_op(user, src, user.zone_selected, I, user.used_intent, try_to_fail))
-				return TRUE
-		if(I.item_flags & SURGICAL_TOOL)
-			to_chat(user, span_warning("You're unable to perform surgery!"))
-			return TRUE
-
-	return ..()
-
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	var/hurt = TRUE
@@ -924,7 +898,7 @@
 	else
 		clear_fullscreen("oxy")
 
-	var/hurtdamage = ((getPainLoss() / max(1, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))) * 100) //what percent out of 100 to max pain
+	var/hurtdamage = can_feel_pain() ? (getShockStage() / SHOCK_STAGE_MAX) * 100 : 0 //what percent out of 100 to max pain
 	if(hurtdamage)
 		var/severity = 0
 		switch(hurtdamage)
@@ -1321,18 +1295,6 @@
 	if(istype(loc, /turf/open/water) && body_position == LYING_DOWN)
 		return FALSE
 
-///Returns a list of all body_zones covered by clothing
-/mob/living/carbon/proc/get_covered_body_zones()
-	RETURN_TYPE(/list)
-	SHOULD_NOT_OVERRIDE(TRUE)
-
-	var/covered_flags = NONE
-	var/list/all_worn_items = get_all_worn_items(src)
-	for(var/obj/item/worn_item in all_worn_items)
-		covered_flags |= worn_item.body_parts_covered
-
-	return body_parts_covered2organ_names(covered_flags)
-
 /mob/living/carbon/proc/try_skin_burn(reaction_volume)
 	var/list/covered_zones = get_covered_body_zones()
 
@@ -1504,4 +1466,38 @@
 	if(to_dismember)
 		to_dismember.dismember()
 		return TRUE
+	return FALSE
+
+/**
+ * This proc is used to determine whether or not the mob can handle touching an acid affected object.
+ */
+/mob/living/carbon/proc/can_touch_acid(atom/acided_atom)
+	// So people can take their own clothes off
+	if((acided_atom == src) || (acided_atom.loc == src))
+		return TRUE
+
+	if(isitem(acided_atom))
+		var/obj/item/acided = acided_atom
+		if(acided.acid_level < 20)
+			return TRUE
+
+	if(gloves?.resistance_flags & (UNACIDABLE | ACID_PROOF))
+		return TRUE
+
+	return FALSE
+
+/**
+ * This proc is used to determine whether or not the mob can handle touching a burning object.
+ */
+/mob/living/carbon/proc/can_touch_burning(atom/burning_atom)
+	// So people can take their own clothes off
+	if((burning_atom == src) || (burning_atom.loc == src))
+		return TRUE
+
+	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS))
+		return TRUE
+
+	if(gloves?.max_heat_protection_temperature >= 360)
+		return TRUE
+
 	return FALSE

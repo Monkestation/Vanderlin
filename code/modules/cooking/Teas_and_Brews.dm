@@ -149,14 +149,6 @@
 	taste_mult = 2
 	hydration_factor = 2
 
-/datum/reagent/consumable/tea/manabloom/on_mob_metabolize(mob/living/L)
-	. = ..()
-	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
-
-/datum/reagent/consumable/tea/manabloom/on_mob_end_metabolize(mob/living/L)
-	. = ..()
-	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
-
 /datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/manabloom, 2) //No powerchuging for you, mage lad.

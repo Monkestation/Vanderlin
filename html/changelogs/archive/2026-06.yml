@@ -276,24 +276,6 @@
   Snack-Max:
   - rscadd: New Bellow Sallet
   Somniworld:
-  - rscadd: 'The inquisition gets 2 new sets of clothing in their Hermes. These are
+  - rscadd: The inquisition gets 2 new sets of clothing in their Hermes. These are
       disguise sets of clothing allowing you to blend in better, don''t expect something
       too crazy however.
-
-      :cl:
-
-      ## Pre-Merge Checklist
-
-      - [x] You tested this on a local server.
-
-      - [x] This code did not runtime during testing.
-
-      - [x] You documented all of your changes.
-
-      ## Change images :
-
-      Standard disguise kit''s content, I did also test the armored one but didn''t
-      take pictures and now I''m lazy :
-
-      <img width="706" height="211" alt="image" src="https://github.com/user-attachments/assets/a76e0c55-65a5-4889-9062-5b3b6fad5f54"
-      />'

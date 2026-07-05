@@ -23,56 +23,55 @@
 	var/exp_flash = 5
 	var/explode_sound = 'sound/misc/explode/bomb.ogg'
 
-/obj/item/breach_charge/afterattack(atom/movable/bomb_target, mob/user, flag, list/modifiers)
-	. = ..()
-
-	if(!flag)
-		return
-
+/obj/item/breach_charge/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	// Only works on destructable wall turfs.
-	if((!iswallturf(bomb_target)  && !ismineralturf(bomb_target)) || isindestructiblewall(bomb_target))
-		to_chat(user, span_warning("I can only use this on destructible walls!"))
-		return
+	if((!iswallturf(interacting_with)  && !ismineralturf(interacting_with)) || isindestructiblewall(interacting_with))
+		return NONE
 
 	user.visible_message(span_warning("[user] begins deploying [src]..."), \
 		span_warning("I begin deploying [src]..."))
 
-	if(do_after(user, deploy_time, target = bomb_target))
-		user.visible_message(span_warning("[user] deploys [src]."), \
-			span_warning("I deploy [src]."))
+	if(!do_after(user, deploy_time, target = interacting_with))
+		return ITEM_INTERACT_BLOCKING
 
-		user.dropItemToGround(src)
-		deployed = TRUE
-		icon_state = "[initial(icon_state)]_deployed"
-		aim_dir = get_dir(user, bomb_target)
+	user.visible_message(span_warning("[user] deploys [src]."), \
+		span_warning("I deploy [src]."))
 
-		// Offset sprite position towards target.
-		switch(aim_dir)
-			if (NORTH)
-				pixel_x = base_pixel_x
-				pixel_y = base_pixel_y + 8
-			if (NORTHEAST)
-				pixel_x = base_pixel_x + 8
-				pixel_y = base_pixel_y + 8
-			if (EAST)
-				pixel_x = base_pixel_x + 8
-				pixel_y = base_pixel_y
-			if (SOUTHEAST)
-				pixel_x = base_pixel_x + 8
-				pixel_y = base_pixel_y - 8
-			if (SOUTH)
-				pixel_x = base_pixel_x + 0
-				pixel_y = base_pixel_y - 8
-			if (SOUTHWEST)
-				pixel_x = base_pixel_x - 8
-				pixel_y = base_pixel_y - 8
-			if (WEST)
-				pixel_x = base_pixel_x - 8
-				pixel_y = base_pixel_y
-			if (NORTHWEST)
-				pixel_x = base_pixel_x - 8
-				pixel_y = base_pixel_y + 8
-		detonator = user
+	user.dropItemToGround(src)
+	deployed = TRUE
+	icon_state = "[initial(icon_state)]_deployed"
+	aim_dir = get_dir(user, interacting_with)
+
+	// Offset sprite position towards target.
+	switch(aim_dir)
+		if (NORTH)
+			pixel_x = base_pixel_x
+			pixel_y = base_pixel_y + 8
+		if (NORTHEAST)
+			pixel_x = base_pixel_x + 8
+			pixel_y = base_pixel_y + 8
+		if (EAST)
+			pixel_x = base_pixel_x + 8
+			pixel_y = base_pixel_y
+		if (SOUTHEAST)
+			pixel_x = base_pixel_x + 8
+			pixel_y = base_pixel_y - 8
+		if (SOUTH)
+			pixel_x = base_pixel_x + 0
+			pixel_y = base_pixel_y - 8
+		if (SOUTHWEST)
+			pixel_x = base_pixel_x - 8
+			pixel_y = base_pixel_y - 8
+		if (WEST)
+			pixel_x = base_pixel_x - 8
+			pixel_y = base_pixel_y
+		if (NORTHWEST)
+			pixel_x = base_pixel_x - 8
+			pixel_y = base_pixel_y + 8
+
+	detonator = user
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/breach_charge/spark_act()
 	fire_act()

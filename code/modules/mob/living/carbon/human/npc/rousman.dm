@@ -498,6 +498,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	var/obj/structure/rousman_hole/hole
 
 /obj/structure/rousman_alarm/Destroy()
+	hole?.all_alarms -= src
 	hole = null
 	return ..()
 

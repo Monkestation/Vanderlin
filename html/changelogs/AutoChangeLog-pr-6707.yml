@@ -1,6 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - refactor: "known players, they now use actual tags for how you know them that upgrade and change"
-  - refactor: "family, it now supports species, role, and faith filtering aswell as allowing the setting of divorced status and who you want as a child"
-  - bugfix: "numerous bugs relating to family code"

@@ -27,56 +27,6 @@
 		if(HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
 			. += span_warning("[working_material] is too hot to touch.")
 
-/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
-	if(working_material && !smithing)
-		return working_material.attack_hand_secondary(user, modifiers)
-	return ..()
-
-/obj/machinery/anvil/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	if(smithing)
-		to_chat(user, span_warning("[src] is currently being worked on!"))
-		return TRUE
-
-	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
-	var/actual_attacking_item = attacking_item
-	var/obj/item/weapon/tongs/tongs_used
-	if(istype(attacking_item, /obj/item/weapon/tongs))
-		tongs_used = attacking_item
-		if(tongs_used.held_item)
-			actual_attacking_item = tongs_used.held_item
-
-	if(try_place_item(actual_attacking_item, user))
-		return TRUE
-
-	if(working_material)
-		if(istype(attacking_item, /obj/item/weapon/hammer))
-			. = TRUE
-			user.changeNext_move(CLICK_CD_MELEE)
-			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
-				if(working_material.currecipe)
-					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
-					return
-				else
-					return working_material.attackby(attacking_item, user, modifiers)
-
-			if(!working_material.currecipe)
-				if(!choose_recipe(user))
-					return working_material.attackby(attacking_item, user, modifiers)
-			if(!working_material.currecipe.is_recipe_available(user))
-				return
-			// Start the minigame instead of direct hammering
-			start_minigame(user, attacking_item)
-			return
-
-		if(try_restore_material(actual_attacking_item, user))
-			return TRUE
-
-		if(tongs_used && !tongs_used.held_item)
-			tongs_used.set_held_item(working_material)
-			return TRUE
-
-	. = ..()
-
 /obj/machinery/anvil/attack_hand(mob/living/user, list/modifiers)
 	if(smithing)
 		to_chat(user, span_warning("[src] is currently being worked on!"))
@@ -84,6 +34,51 @@
 	if(working_material)
 		return working_material.attack_hand(user, modifiers)
 	return ..()
+
+/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
+	if(working_material && !smithing)
+		return working_material.attack_hand_secondary(user, modifiers)
+	return ..()
+
+/obj/machinery/anvil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(smithing)
+		to_chat(user, span_warning("[src] is currently being worked on!"))
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/actual_attacking_item = tool
+	var/obj/item/weapon/tongs/tongs_used
+	if(istype(tool, /obj/item/weapon/tongs))
+		tongs_used = tool
+		if(tongs_used.held_item)
+			actual_attacking_item = tongs_used.held_item
+
+	if(try_place_item(actual_attacking_item, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(working_material)
+		if(istype(tool, /obj/item/weapon/hammer))
+			user.changeNext_move(CLICK_CD_MELEE)
+			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+				if(working_material.currecipe)
+					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
+					return ITEM_INTERACT_BLOCKING
+				return tool.interact_with_atom(working_material, user, modifiers)
+
+			if(!working_material.currecipe)
+				if(!choose_recipe(user))
+					return ITEM_INTERACT_BLOCKING
+			if(!working_material.currecipe.is_recipe_available(user))
+				return ITEM_INTERACT_BLOCKING
+			// Start the minigame instead of direct hammering
+			start_minigame(user, tool)
+			return ITEM_INTERACT_SUCCESS
+
+		if(try_restore_material(actual_attacking_item, user))
+			return ITEM_INTERACT_SUCCESS
+
+		if(tongs_used && !tongs_used.held_item)
+			tongs_used.set_held_item(working_material)
+			return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/anvil/proc/try_place_item(obj/item/item, mob/living/user)
 	if(working_material?.currecipe?.item_added(item, user))
@@ -118,6 +113,8 @@
 	else if(working_material.smeltresult)
 		if(istype(working_material.smeltresult, /obj/item/ingot))
 			expected_ingot_type = working_material.smeltresult
+			if(istype(expected_ingot_type, /obj/item/ingot/steel_slag))
+				expected_ingot_type = /obj/item/ingot/steel
 	if(!expected_ingot_type || !istype(item, expected_ingot_type))
 		to_chat(user, span_warning("This isn't the right material to restore [working_material]."))
 		return FALSE

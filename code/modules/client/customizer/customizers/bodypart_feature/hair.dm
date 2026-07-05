@@ -112,7 +112,7 @@
 	else
 		hairs = species.get_hairc_list()
 	new_color = hairs[pick(hairs)]
-	return sanitize_hexcolor(new_color, 6, TRUE)
+	return sanitize_hexcolor(new_color)
 
 /datum/customizer_choice/bodypart_feature/hair/set_accessory_colors(datum/preferences/prefs, datum/customizer_entry/entry, color)
 	var/datum/customizer_entry/hair/hair_entry = entry

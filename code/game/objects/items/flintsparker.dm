@@ -12,15 +12,20 @@
 
 	grid_height = 32
 	grid_width = 32
+
+	COOLDOWN_DECLARE(flintcd)
+
 	item_weight = 50 GRAMS
-	var/flintcd = 0
 
 /obj/item/flint/attack_self(mob/living/user, list/modifiers)
-	if(world.time < flintcd + 10)
-		return
-	flintcd = world.time
+	if(!COOLDOWN_FINISHED(src, flintcd))
+		return NONE
+
+	COOLDOWN_START(src, flintcd, 1 SECONDS)
+
 	playsound(user, 'sound/items/flint.ogg', 100, FALSE)
 	flick("flintstrike", src)
+
 	if(prob(80))
 		user.flash_fullscreen("whiteflash")
 		var/datum/effect_system/spark_spread/S = new()
@@ -28,15 +33,17 @@
 		S.set_up(1, 1, front)
 		S.start()
 
-/obj/item/flint/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
-	if(world.time < flintcd + 10)
-		return
-	flintcd = world.time
+/obj/item/flint/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!COOLDOWN_FINISHED(src, flintcd))
+		return NONE
+
+	COOLDOWN_START(src, flintcd, 1 SECONDS)
+
 	playsound(user, 'sound/items/flint.ogg', 100, FALSE)
 	flick("flintstrike", src)
+
 	if(prob(50))
-		A.spark_act()
+		interacting_with.spark_act()
 		user.flash_fullscreen("whiteflash")
+
+	return ITEM_INTERACT_SUCCESS
