@@ -2,14 +2,13 @@
 	name = "Clench your fists"
 	desc = "Ready yourself ofr a fight and assume a stronger stance"
 	button_icon_state = "dendor"
-	invocation = "Beast-Lord, lend me the claws of a volf."
 	invocation_type = INVOCATION_EMOTE
 	invocation_self_message = "You clench your fist and ready yourself for a fight."
 	spell_type = SPELL_STAMINA
 	antimagic_flags = null
 	associated_skill = null
 	required_items = null
-	spell_cost = null
+	spell_cost = 5
 	item_duration = null
 	cooldown_time = null
 	item_type = /obj/item/weapon/clenched_fist
@@ -18,7 +17,8 @@
 	delete_old = TRUE
 	item_outline = null
 	attunements = null
-	)
+
+#define SPELL_CLOSECOMBAT /datum/action/cooldown/spell/undirected/conjure_item/closecombat
 
 /datum/action/cooldown/spell/undirected/conjure_item/closecombat/can_cast_spell(feedback)
 	. = ..()
@@ -26,7 +26,7 @@
 		return
 	if(!iscarbon(owner))
 		if(feedback)
-			owner.balloon_alert(owner, "Only mortals may use the briar claw!")
+			owner.balloon_alert(owner, "Need hands to clench your fists!")
 		return FALSE
 
 /datum/action/cooldown/spell/undirected/conjure_item/closecombat/before_cast(atom/cast_on)

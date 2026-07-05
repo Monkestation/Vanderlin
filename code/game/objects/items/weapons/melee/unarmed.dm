@@ -26,7 +26,7 @@
 	acc_bonus = 15
 	penfactor = 18
 	damfactor = 1.2
-	releasedrain = 5
+	misscost = 5
 
 /datum/intent/unarmed/punch/jab
 	name = "jab"
@@ -35,7 +35,7 @@
 	penfactor = 10
 	damfactor = 0.9
 	swingdelay = 0.7
-	releasedrain = 4
+	misscost = 4
 
 /datum/intent/unarmed/punch/slug
 	name = "slug"
@@ -45,6 +45,7 @@
 	damfactor = 1.2
 	swingdelay = 1.5
 	releasedrain = 8
+	misscost = 5
 
 /datum/intent/unarmed/punch/slam
 	name = "slam"
@@ -56,3 +57,4 @@
 	knockback = 2
 	chargetime = 3
 	releasedrain = 20
+	misscost = 10

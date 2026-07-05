@@ -290,6 +290,7 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
+		TRAIT_CLOSECOMBAT,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(

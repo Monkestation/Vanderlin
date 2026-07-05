@@ -72,6 +72,7 @@
 		if("Barehands")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 
 	var/static/list/armors = list(
 		"Brute, Splint Armor" = /obj/item/clothing/armor/leather/splint,
