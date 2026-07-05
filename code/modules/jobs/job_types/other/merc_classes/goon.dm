@@ -73,7 +73,7 @@
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
-			character.add_spell(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+			ADD_SPELL(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
 
 	var/static/list/armors = list(
 		"Brute, Splint Armor" = /obj/item/clothing/armor/leather/splint,

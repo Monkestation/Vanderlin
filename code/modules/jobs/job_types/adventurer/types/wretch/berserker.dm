@@ -59,7 +59,7 @@
 		if("MY BARE HANDS!!!")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 20)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
-			character.add_spell(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+			ADD_SPELL(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 			QDEL_NULL(character.gloves)
 			character.equip_to_slot_or_del(spawned, new /obj/item/clothing/gloves/bandages/pugilist, ITEM_SLOT_GLOVES, TRUE)
