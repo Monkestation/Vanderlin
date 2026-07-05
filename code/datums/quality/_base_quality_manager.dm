@@ -74,5 +74,6 @@
 
 /datum/quality_calculator/proc/get_quality()
 	return final_quality
+
 /datum/quality_calculator/proc/track_item_creation(obj/item/target, final_quality)
 	return
