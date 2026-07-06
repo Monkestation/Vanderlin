@@ -402,7 +402,8 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL) && !job.prefs_species_check(player_prefs))
 		return JOB_UNAVAILABLE_RACE
 
-	if(!client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && job.tennite_triumph_exclusive && !(player_prefs.read_preference(/datum/preference/choiced/patron) in UNDIVIDED_TEMPLE_PATRONS))
+	var/datum/patron/pref_patron = player_prefs.read_preference(/datum/preference/choiced/patron)
+	if(!client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && job.tennite_triumph_exclusive && !(pref_patron.type in UNDIVIDED_TEMPLE_PATRONS))
 		return JOB_UNAVAILABLE_DEITY
 
 	if(length(job.allowed_sexes) && !(player_prefs.read_preference(/datum/preference/choiced/gender) in job.allowed_sexes))
