@@ -51,7 +51,7 @@
 /datum/element/mob_overlay_effect/proc/on_add(datum/source, atom/movable/target)
 	SIGNAL_HANDLER
 
-	if(QDELTED(target))
+	if(QDELETED(target))
 		return
 
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))
