@@ -1,0 +1,5 @@
+author: "tired-wired"
+delete-after: True
+changes:
+  - rscadd: "Added a Rockhill accent."
+  - bugfix: "Fixed the Rockhill knight's hat. Now it's a helmet."
