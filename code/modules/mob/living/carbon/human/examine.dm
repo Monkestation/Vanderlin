@@ -6,18 +6,20 @@
 		used_title = spy.examine_title
 	if(!used_title)
 		return
+	var/self_inspect = user == src
 	if(!IsAdminGhost(user))
 		if(!get_face_name("")) // face covered?
 			return
 		var/is_family_member = FALSE
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			is_family_member = H.family_datum && H.family_datum != family_datum
-		if(!is_family_member)
-			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_ANY_OF_TRAITS(src, list(TRAIT_RECRUITED, TRAIT_RECOGNIZED)))
-				return
-			if(!user.mind?.do_i_know(mind, real_name))
-				return
+			is_family_member = H.family_datum && (H.family_datum == family_datum)
+		if(!self_inspect)
+			if(!is_family_member)
+				if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_ANY_OF_TRAITS(src, list(TRAIT_RECRUITED, TRAIT_RECOGNIZED)))
+					return
+				if(!user.mind?.do_i_know(mind, real_name))
+					return
 	. += ", the [used_title]"
 
 /mob/living/carbon/human/get_examine_list(mob/user, list/P)
