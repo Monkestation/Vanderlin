@@ -55,7 +55,7 @@
 		return
 
 	var/turf/target_turf = get_turf(target)
-	if(target_turf.platform_atom_count)
+	if(!target_turf || target_turf.platform_atom_count)
 		return
 
 	if(isitem(target))
