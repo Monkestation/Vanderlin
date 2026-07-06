@@ -23,4 +23,4 @@
 #define NOTIFY_ORBIT "orbit"
 
 /// cooldown for being shown the images for any particular data hud
-#define ADD_HUD_TO_COOLDOWN 20
+#define ADD_HUD_TO_COOLDOWN 2 SECONDS

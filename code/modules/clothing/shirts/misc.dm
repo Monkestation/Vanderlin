@@ -55,6 +55,25 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
+/obj/item/clothing/shirt/guard
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
+	name = "watchmen garb"
+	desc = "A fine looking shirt, with some padding."
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	icon_state = "guardshirt"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/watchmen_sleeves.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	detail_tag = "_detail"
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_SOOT_BLACK
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
+
+	armor_class = AC_LIGHT
+	armor = ARMOR_PADDED
+
 /obj/item/clothing/shirt/grenzelhoft
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "grenzelhoftian hip-shirt"

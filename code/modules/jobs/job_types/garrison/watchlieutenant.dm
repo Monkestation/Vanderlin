@@ -1,9 +1,8 @@
 /datum/attribute_holder/sheet/job/lieutenant
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 1,
-		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/polearms = 10,
@@ -83,42 +82,38 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Flail" = /obj/item/weapon/flail, \
+		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail), \
 		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Sword" = /obj/item/weapon/sword/iron, \
+		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
-		return
+		choice = pick(selectable)
 	switch(choice)
 		if("Flail")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/wood(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/flail)
 		if("Spear")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword(), ITEM_SLOT_BACK_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
-	head = /obj/item/clothing/head/helmet/sargebarbute //veteran who won a nice helmet
-	wrists = /obj/item/clothing/wrists/bracers/jackchain
-	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/leather
-	shirt = /obj/item/clothing/armor/chainmail/iron
-	armor = /obj/item/clothing/armor/cuirass/iron
-	pants = /obj/item/clothing/pants/chainlegs/iron
+	head = /obj/item/clothing/head/helmet/watchmen/lt
+	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
+	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
+	belt = /obj/item/storage/belt/leather/lieutenant
+	shirt = /obj/item/clothing/shirt/guard
+	armor = /obj/item/clothing/armor/cuirass/fluted/iron
+	pants = /obj/item/clothing/pants/guard
 	gloves = /obj/item/clothing/gloves/chain/iron
-	neck = /obj/item/clothing/neck/chaincoif/iron
-	beltl = /obj/item/weapon/mace/bludgeon
+	neck = /obj/item/clothing/neck/gorget
 	backl = /obj/item/storage/backpack/satchel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(
-		/obj/item/storage/keyring/lieutenant = 1,
-		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/book/law/small = 1,
+		/obj/item/weapon/mace/cudgel = 1
 	)
 
 /datum/outfit/lieutenant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

@@ -86,3 +86,22 @@
 2026-07-05:
   realforest2001:
   - bugfix: Fixed admin categories for leadership roles.
+2026-07-06:
+  Ben10083:
+  - map: Vanderlin Keep Garrison cloth bundle now holds 10 cloth
+  - qol: Now states on examine if you are examining your rival
+  CheffieGithub:
+  - bugfix: Shovels can no longer shovel any turf
+  - rscadd: You can still look up if the turf above has transparent neighbours
+  - bugfix: Fixed travel tiles sometimes disappearing
+  - bugfix: Travel tiles work off both traits and mind traits
+  - bugfix: Fix COMBO HUD not working
+  - bugfix: Fix some clothes not being equippable by select equippable even with the
+      correct species/gender
+  SSensum13:
+  - rscadd: Added new watchmen outfit clothings.
+  - rscadd: Added anvil and weaving recipes for new watchmen items.
+  - balance: Added weapon selection for City Watch's footmen and pikemen.
+  dwasint:
+  - bugfix: Rollers now properly pass rotational data through itself
+  - bugfix: waterwheels behave correctly in weirder situations
