@@ -91,9 +91,7 @@
 	var/skill_median = SKILL_LEVEL_JOURNEYMAN
 
 	/// Requirement threshold for the diceroll as a baseline
-	var/dice_requirement = 25
-	/// Crit window for the diceroll
-	var/dice_crit = 8
+	var/dice_requirement = 30
 	/// Number of dice rolled
 	var/dice_num = 3
 	/// Sides per die
@@ -359,7 +357,7 @@
 
 	return created_list
 
-/// Returns the result that must be rolled to succeed the surgery
+/// Returns the result that must be rolled to succeed the surgery. HIGHER REQUIREMENT = MORE SUCCESS
 /datum/surgery_operation/proc/get_roll_requirement(atom/movable/operating_on, mob/living/surgeon, tool)
 	var/requirement = dice_requirement
 
@@ -372,11 +370,11 @@
 	requirement += round((1 - tool_quality) * 6)
 
 	var/loc_mod = get_location_modifier(get_turf(operating_on))
-	requirement += round((loc_mod - 1) * 8, 1)
+	requirement += round((1 - loc_mod) * 8, 1)
 
 	var/overseer_bonus = get_overseer_bonus(surgeon)
-	if(overseer_bonus > 1)
-		requirement += overseer_bonus
+	if(overseer_bonus < 1)
+		requirement -= overseer_bonus
 		to_chat(surgeon, span_notice("You feel more confident with an experienced eye watching over you."))
 
 	return FLOOR(clamp(requirement, dice_num, dice_num * dice_sides), 1)
@@ -456,19 +454,17 @@
 /// Gets the surgery speed modifier for a given mob, based off what sort of table/bed/whatever is on their turf.
 /datum/surgery_operation/proc/get_location_modifier(turf/operation_turf)
 	PROTECTED_PROC(TRUE)
-
 	// Technically this IS a typecache, just not the usual kind :3
 	// The order of the modifiers matter, latter entries override earlier ones
 	var/static/list/modifiers = zebra_typecacheof(list(
-		/obj/structure/table/optable = 1.0,
-		/obj/structure/bed = 1.25,
-		/obj/structure/table = 1.5,
+		/obj/structure/table/optable = 0.75,
+		/obj/structure/bed = 1,
+		/obj/structure/table = 1.25,
 	))
 
 	var/mod = 2.0
 	for(var/obj/thingy in operation_turf)
 		mod = min(mod, modifiers[thingy.type] || 2.0)
-
 	return mod
 
 /**
@@ -555,7 +551,7 @@
 			roll_requirement = get_roll_requirement(operating_on, surgeon, tool)
 			roll_result = surgeon.diceroll(
 				requirement = roll_requirement,
-				crit = dice_crit,
+				crit = skill_min,
 				dice_num = dice_num,
 				dice_sides = dice_sides,
 			)
@@ -746,7 +742,8 @@
 	if(was_critical)
 		on_crit_success(operating_on, surgeon, tool, operation_args)
 
-	surgeon.mind?.add_sleep_experience(skill_used, GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE) * (skill_min / 30))
+	var/intelligence_modifier = max(GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE), 1) / 10
+	surgeon.mind?.add_sleep_experience(skill_used, surgeon.get_learning_boon(skill_used) * intelligence_modifier * skill_min / 2)
 
 /// Used to customize behavior when the operation is successful
 /datum/surgery_operation/proc/on_success(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
@@ -785,7 +782,8 @@
 	if(was_critical)
 		on_crit_failure(operating_on, surgeon, tool, operation_args)
 
-	surgeon.mind?.add_sleep_experience(skill_used, GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE) * (skill_min / 60))
+	var/intelligence_modifier = max(GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE), 1) / 10
+	surgeon.mind?.add_sleep_experience(skill_used, surgeon.get_learning_boon(skill_used) * intelligence_modifier * skill_min / 4)
 
 /// Used to customize behavior when the operation fails
 /datum/surgery_operation/proc/on_failure(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
