@@ -208,7 +208,7 @@
 		ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
 
 /obj/item/bodypart/Destroy()
-	if(owner && !QDELETED(owner))
+	if(!QDELETED(owner))
 		forced_removal(special = FALSE, dismembered = TRUE, move_to_floor = FALSE)
 		update_owner(null)
 
