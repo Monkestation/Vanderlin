@@ -294,11 +294,13 @@
 	if(emote_type & EMOTE_AUDIBLE && !hands_use_check)
 		if(HAS_TRAIT(user, TRAIT_MUTE))
 			return FALSE
-		if(ishuman(user))
-			var/mob/living/carbon/human/loud_mouth = user
-			if(!loud_mouth.getorganslot(ORGAN_SLOT_TONGUE))
-				return FALSE
+		if(iscarbon(user))
+			var/mob/living/carbon/loud_mouth = user
+			if(!HAS_TRAIT(loud_mouth, TRAIT_NO_ORGAN_PROCESS) && loud_mouth.dna?.species?.organs[ORGAN_SLOT_TONGUE]) // we dont need a tongue to speak
+				if(!loud_mouth.getorganslot(ORGAN_SLOT_TONGUE))
+					return FALSE
 
 	if(only_forced_audio && intentional)
 		return FALSE
+
 	return TRUE

@@ -511,7 +511,11 @@
 			hit_clothes.take_damage(damage_amount, damage_type, damage_flag, 0)
 
 /mob/living/carbon/can_hear()
-	. = FALSE
+	if(stat == DEAD || HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS))
+		return TRUE
+
 	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
-	if((istype(ears) && !ears.deaf) || (src.stat == DEAD)) // 2nd check so you can hear messages when beheaded
-		. = TRUE
+	if(!ears || ears.deaf) // 2nd check so you can hear messages when beheaded
+		return FALSE
+
+	return TRUE

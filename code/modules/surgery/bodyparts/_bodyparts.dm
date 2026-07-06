@@ -852,12 +852,22 @@
 	return dropped
 
 /obj/item/bodypart/proc/skeletonize(lethal = TRUE)
+	if(skeletonized)
+		return TRUE
+
 	if(bandage)
 		remove_bandage()
+
 	for(var/obj/item/I in embedded_objects)
 		remove_embedded_object(I)
-	for(var/obj/item/I in src) //dust organs
-		qdel(I)
+
+	for(var/atom/movable/thing as anything in src) //dust organs
+		if(isorgan(thing)) // don't delete the brain
+			var/obj/item/organ/organ = thing
+			if(organ.organ_flags & ORGAN_VITAL)
+				continue
+		qdel(thing)
+
 	skeletonized = TRUE
 
 /obj/item/bodypart/chest/skeletonize(lethal = TRUE)

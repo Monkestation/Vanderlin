@@ -16,7 +16,16 @@
 /obj/item/organ/proc/Insert(mob/living/carbon/receiver, special = FALSE, movement_flags = NONE, new_zone = null)
 	SHOULD_CALL_PARENT(TRUE)
 
-	mob_insert(receiver, special, movement_flags, new_zone)
+	if(!mob_insert(receiver, special, movement_flags))
+		return FALSE
+
+	if(bodypart_owner && loc == bodypart_owner && receiver == bodypart_owner.owner)
+		// ok this is a bit confusing but essentially, thanks to some EXTREME shenanigans
+		// (tl;dr mob_insert -> set_species -> replace_limb -> bodypart_insert)
+		// mob_insert can result in bodypart_insert being handled already
+		// to avoid double insertion, and potential bugs, we'll stop here
+		return TRUE
+
 	bodypart_insert(limb_owner = receiver, movement_flags = movement_flags)
 
 	return TRUE
@@ -45,11 +54,11 @@
 
 	if(!iscarbon(receiver))
 		stack_trace("Tried to insert organ into non-carbon: [receiver.type]")
-		return
+		return FALSE
 
 	if(owner == receiver)
 		stack_trace("Organ receiver is already organ owner")
-		return
+		return FALSE
 
 	current_zone = new_zone || zone
 

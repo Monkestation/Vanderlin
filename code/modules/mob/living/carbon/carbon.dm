@@ -1538,6 +1538,8 @@
 	eyes_two.Insert(src, TRUE)
 	eye_dna.organ_type = old_eye_type
 
+	update_eyes() // ??? why
+
 /mob/living/carbon/wash(clean_types)
 	. = ..()
 
