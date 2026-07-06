@@ -1,8 +1,3 @@
-#define CLOSECOMBAT_PUNCH /datum/intent/unarmed/punch/closecombat
-#define CLOSECOMBAT_JAB /datum/intent/unarmed/punch/jab
-#define CLOSECOMBAT_SLUG /datum/intent/unarmed/punch/slug
-#define CLOSECOMBAT_SLAM /datum/intent/unarmed/punch/slam
-
 /obj/item/weapon/clenched_fist
 	name = "clenched fist"
 	desc = "The fist was humenity's first weapon, and still a fine one."
