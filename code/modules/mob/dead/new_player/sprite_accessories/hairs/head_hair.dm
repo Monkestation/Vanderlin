@@ -29,6 +29,9 @@
 	if(!H)
 		H = bodypart.original_owner
 
+	if(!H)
+		return
+
 	if(H.head)
 		var/obj/item/I = H.head
 		if(isclothing(I))
