@@ -119,8 +119,8 @@
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
 	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
-	L.grant_undead_eyes()
 	L.skeletonize(FALSE)
+	L.grant_undead_eyes()
 	L.equipOutfit(/datum/outfit/overlord)
 	L.set_patron(/datum/patron/inhumen/zizo)
 	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
