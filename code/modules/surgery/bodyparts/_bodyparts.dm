@@ -1481,14 +1481,10 @@
 
 ///since organs aren't actually stored in the bodypart themselves while attached to a person, we have to query the owner for what we should have
 /obj/item/bodypart/proc/get_organs()
-	if(!owner)
-		. = list()
-		for(var/atom/thing as anything in contents)
-			if(isorgan(thing))
-				. |= thing
-		return
-
-	return LAZYACCESS(owner.organs_by_zone, body_zone)
+	. = list()
+	for(var/atom/movable/thing as anything in contents)
+		if(isorgan(thing))
+			. |= thing
 
 /obj/item/bodypart/atom_deconstruct(disassembled = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
