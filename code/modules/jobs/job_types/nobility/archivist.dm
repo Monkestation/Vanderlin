@@ -30,7 +30,6 @@
 
 	honorary = "Lord"
 	honorary_f = "Lady"
-	tennite_triumph_exclusive = TRUE
 
 	languages = list(
 		/datum/language/elvish,
