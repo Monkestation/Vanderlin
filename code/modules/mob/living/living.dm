@@ -2200,9 +2200,9 @@
 		else
 			registered_z = null
 
-/mob/living/onTransitZ(old_z,new_z)
-	..()
-	update_z(new_z)
+/mob/living/onTransitZ(turf/old_turf, turf/new_turf)
+	. = ..()
+	update_z(new_turf.z)
 
 /mob/living/MouseDrop(mob/over)
 	. = ..()
@@ -2517,6 +2517,56 @@
 	REMOVE_TRAIT(src, TRAIT_UI_BLOCKED, TRAIT_HANDS_BLOCKED)
 	REMOVE_TRAIT(src, TRAIT_PULL_BLOCKED, TRAIT_HANDS_BLOCKED)
 
+/atom/movable/looking_holder
+	invisibility = INVISIBILITY_MAXIMUM
+	///the direction we are operating in
+	var/look_direction
+	///actual atom on the turf, usually the owner
+	var/atom/movable/container
+	///the actual owner who is "looking"
+	var/mob/living/owner
+
+/atom/movable/looking_holder/Initialize(mapload, mob/living/owner, direction)
+	. = ..()
+	look_direction = direction
+	src.owner = owner
+	update_container()
+
+/atom/movable/looking_holder/Destroy()
+	owner = null
+	return ..()
+
+/atom/movable/looking_holder/proc/update_container()
+	SIGNAL_HANDLER
+
+	var/new_container = get_atom_on_turf(owner)
+	if(new_container == container)
+		return
+	if(container != owner)
+		UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
+	if(container)
+		UnregisterSignal(container, COMSIG_MOVABLE_MOVED)
+
+	container = new_container
+
+	RegisterSignal(new_container, COMSIG_MOVABLE_MOVED, PROC_REF(mirror_move))
+	if(new_container != owner)
+		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(update_container))
+
+/atom/movable/looking_holder/proc/mirror_move(mob/living/source, atom/oldloc, direction, Forced, old_locs)
+	SIGNAL_HANDLER
+
+	if(!isturf(owner.loc))
+		update_container()
+
+	set_glide_size(container.glide_size)
+	var/turf/looking_turf = owner.get_looking_turf(look_direction)
+	if(!looking_turf)
+		owner.stop_looking()
+		return
+
+	abstract_move(looking_turf)
+
 ///Checks if the user is incapacitated or on cooldown.
 /mob/living/proc/can_look_up()
 	return !((next_move > world.time) || incapacitated(IGNORE_RESTRAINTS|IGNORE_GRAB))
@@ -2603,6 +2653,73 @@
 	I.plane = ABOVE_LIGHTING_PLANE
 	flick_overlay(I, list(C), duration)
 
+/mob/living/proc/on_looking_z_level_change(turf/old_loc, turf/new_loc)
+	SEND_SIGNAL(src, COMSIG_LIVING_LOOK_Z_CHANGE, old_loc, new_loc)
+
+/mob/living/proc/get_looking_turf(direction, turf/center_turf)
+	//down needs to check this floor
+	var/turf/center = center_turf || get_turf(src)
+	var/turf/check_turf = get_step_multiz(center, direction == DOWN ? NONE : direction)
+	if(!get_step_multiz(center, direction)) //We are at the edge z-level.
+		var/turf/current = get_turf(src)
+		if(direction == DOWN || !current.can_see_sky())
+			to_chat(src, span_warning("There's nothing interesting there."))
+			return
+
+		switch(GLOB.forecast)
+			if("prerain")
+				to_chat(src, span_info("Dark clouds gather..."))
+			if("rain")
+				to_chat(src, span_info("The wet wind is blowing."))
+			if("rainbow")
+				to_chat(src, span_smallnotice("A beautiful rainbow!"))
+			if("fog")
+				to_chat(src, span_warning("I can't see anything, the fog has set in."))
+			else
+				to_chat(src, span_info("There is nothing special to say about this weather."))
+
+		if(GLOB.tod == NIGHT)
+			var/briar_notice = FALSE
+			for(var/datum/wound/black_briar_curse/briar in get_wounds())
+				briar.infection += (briar.max_infection * 0.01) // 1% added for looking at the moon
+				if(briar.can_examine)
+					briar_notice = TRUE
+
+			if(briar_notice)
+				to_chat(span_briar(span_big("His gaze is enrapturing...")))
+				add_stress(/datum/stress_event/black_briar_noc)
+				return
+
+		do_time_change()
+		return
+
+	if(!istransparentturf(check_turf)) //There is no turf we can look through above us
+		var/turf/front_hole = get_step(check_turf, dir)
+		if(istransparentturf(front_hole))
+			check_turf = front_hole
+		else
+			for(var/turf/checkhole in TURF_NEIGHBORS(check_turf))
+				if(istransparentturf(checkhole))
+					check_turf = checkhole
+					break
+		if(!istransparentturf(check_turf))
+			to_chat(src, span_warning("You can't see through the floor [direction == DOWN ? "below" : "above"] you."))
+			return
+
+	return direction == DOWN ? get_step_multiz(check_turf, DOWN) : check_turf
+
+/mob/living/proc/stop_looking()
+	if(client)
+		animate(client, pixel_x = 0, pixel_y = 0, 2, easing = SINE_EASING)
+	hud_used?.fov_holder?.screen_loc = "1,1"
+	update_cone_show()
+	reset_perspective()
+	looking_vertically = NONE
+	if(!looking_holder)
+		return
+	on_looking_z_level_change(looking_holder.loc, get_turf(src))
+	QDEL_NULL(looking_holder)
+
 /**
  * look_up Changes the perspective of the mob to any openspace turf above the mob
  *
@@ -2613,136 +2730,126 @@
 	return
 
 /mob/living/look_up()
-	if(client.perspective != MOB_PERSPECTIVE) //We are already looking up.
-		stop_looking()
+	if(looking_vertically == UP)
 		return
+
 	if(client.pixel_x || client.pixel_y)
 		stop_looking()
 		return
+
+	if(looking_vertically == DOWN)
+		stop_looking()
+		return
+
 	if(!can_look_up())
 		return
+
+	var/look_time = 1 SECONDS
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		look_time -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
+		if(look_time < 0)
+			look_time = 0
+
+	if(!do_after(src, look_time))
+		return
+
 	changeNext_move(CLICK_CD_MELEE)
+
+	var/turf/above_turf = get_looking_turf(UP)
+	if(!above_turf)
+		return
+
+	looking_vertically = UP
+	looking_holder = new(above_turf, src, UP)
+
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks up."))
-	var/turf/ceiling = get_step_multiz(src, UP)
-	var/turf/T = get_turf(src)
-	if(isnull(ceiling)) //Can't check what isn't there
-		return
-	if(!istransparentturf(ceiling)) //There is no turf we can look through above us
-		to_chat(src, span_warning("A ceiling above my head."))
-		return
 
-	var/ttime = 1 SECONDS
-	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
-		ttime -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
-		if(ttime < 0)
-			ttime = 0
-
-	if(!do_after(src, ttime))
-		return
-	reset_perspective(ceiling)
+	reset_perspective(looking_holder)
 	update_cone_show()
-	if(T.can_see_sky())
-		switch(GLOB.forecast)
-			if("prerain")
-				to_chat(src, span_info("Dark clouds gather..."))
-				return
-			if("rain")
-				to_chat(src, span_info("The wet wind is blowing."))
-				return
-			if("rainbow")
-				to_chat(src, span_smallnotice("A beautiful rainbow!"))
-				return
-			if("fog")
-				to_chat(src, span_warning("I can't see anything, the fog has set in."))
-				return
-		if(GLOB.tod == NIGHT)
-			var/briar_notice = FALSE
-			for(var/datum/wound/black_briar_curse/briar in get_wounds())
-				briar.infection += (briar.max_infection * 0.01) // 1% added for looking at the moon
-				if(briar.can_examine)
-					briar_notice = TRUE
-			if(briar_notice)
-				to_chat(span_briar(span_big("His gaze is enrapturing...")))
-				add_stress(/datum/stress_event/black_briar_noc)
-				return
-		to_chat(src, span_info("There is nothing special to say about this weather."))
-		do_time_change()
+	on_looking_z_level_change(get_turf(src), above_turf)
 
-/mob/living/proc/look_further(turf/T)
-	if(client.perspective != MOB_PERSPECTIVE)
-		stop_looking()
+/mob/proc/look_down(turf/T)
+	return
+
+/mob/living/look_down(turf/looking_into)
+	if(looking_vertically == DOWN)
 		return
+
 	if(client.pixel_x || client.pixel_y)
 		stop_looking()
 		return
+
+	if(looking_vertically == UP)
+		stop_looking()
+		return
+
+	if(!can_look_up()) //if we cant look up, we cant look down.
+		return
+
+	var/look_time = 1 SECONDS
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		look_time -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
+		if(look_time < 0)
+			look_time = 0
+
+	if(!do_after(src, look_time))
+		return
+
+	changeNext_move(CLICK_CD_MELEE)
+
+	var/turf/below_turf = get_looking_turf(DOWN, looking_into)
+	if(!below_turf)
+		return
+
+	looking_vertically = DOWN
+	looking_holder = new(get_looking_turf(DOWN), src, DOWN)
+
+	if(m_intent != MOVE_INTENT_SNEAK)
+		visible_message(span_info("[src] looks down."))
+
+	reset_perspective(looking_holder)
+	update_cone_show()
+	on_looking_z_level_change(get_turf(src), below_turf)
+
+/mob/living/proc/look_further(turf/T)
+	if(looking_vertically)
+		stop_looking()
+		return
+
+	if(client.pixel_x || client.pixel_y)
+		stop_looking()
+		return
+
 	if(!can_look_up())
 		return
+
 	if(!istype(T))
 		return
+
 	changeNext_move(CLICK_CD_MELEE)
-	var/_x = T.x-loc.x
-	var/_y = T.y-loc.y
+
+	var/_x = T.x - loc.x
+	var/_y = T.y - loc.y
 	if(_x > 7 || _x < -7)
 		return
+
 	if(_y > 7 || _y < -7)
 		return
+
 	var/transition_time = 1 SECONDS
 	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
 		transition_time = 10 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
 		if(transition_time < 0)
 			transition_time = 0
+
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks into the distance."))
-	var/x_offset = world.icon_size*_x
-	var/y_offset = world.icon_size*_y
+
+	var/x_offset = world.icon_size * _x
+	var/y_offset = world.icon_size * _y
 	animate(client, pixel_x = x_offset, pixel_y = y_offset, transition_time)
 	hud_used?.fov_holder?.screen_loc = "1:[-x_offset],1:[-y_offset]"
-	//update_cone_show()
-
-/mob/proc/look_down(turf/T)
-	return
-
-/mob/living/look_down(turf/T)
-	if(client.pixel_x || client.pixel_y)
-		stop_looking()
-		return
-	if(client.perspective != MOB_PERSPECTIVE)
-		stop_looking()
-		return
-	if(!can_look_up())
-		return
-	if(!istype(T))
-		return
-
-
-	var/turf/OS = get_step_multiz(T, DOWN)
-
-	if(!OS)
-		return
-	var/ttime = 1 SECONDS
-	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
-		ttime -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
-		if(ttime < 0)
-			ttime = 0
-
-	visible_message("<span class='info'>[src] looks down through [T].</span>")
-
-	if(!do_after(src, ttime))
-		return
-
-	changeNext_move(CLICK_CD_MELEE)
-	reset_perspective(OS)
-	update_cone_show()
-//	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking))
-
-/mob/living/proc/stop_looking()
-	if(client)
-		animate(client, pixel_x = 0, pixel_y = 0, 2, easing = SINE_EASING)
-	hud_used?.fov_holder?.screen_loc = "1,1"
-	reset_perspective()
-	update_cone_show()
-
 
 /mob/living/set_stat(new_stat)
 	. = ..()

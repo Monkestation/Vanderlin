@@ -101,7 +101,7 @@
 	point_value = 5
 
 /datum/quirk/vice/unlucky/on_spawn()
-	owner.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
+	owner.adjust_stat_modifier(STATMOD_UNLUCKY, list(STAT_FORTUNE = rand(-5, -9)))
 
 /datum/quirk/vice/unlucky/on_remove()
 	owner?.remove_stat_modifier(STATMOD_UNLUCKY)

@@ -142,7 +142,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
-	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+	if(!(accessor_trait && HAS_CHARACTER_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
 			return // nothing here!
