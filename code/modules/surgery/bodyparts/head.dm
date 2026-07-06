@@ -145,7 +145,7 @@
 		lip_style = null
 
 	else if(!animal_origin)
-		if(!human_owner?.dna.species)
+		if(!human_owner?.dna?.species)
 			return ..()
 		var/datum/species/S = human_owner.dna.species
 		// lipstick
