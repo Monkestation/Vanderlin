@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/undirected/conjure_item/closecombat
 	name = "Clench your fists"
 	desc = "Ready yourself ofr a fight and assume a stronger stance"
-	button_icon_state = "dendor"
+	button_icon_state = "giant_stregnth"
 	invocation_type = INVOCATION_EMOTE
 	invocation_self_message = "You clench your fist and ready yourself for a fight."
 	spell_type = SPELL_STAMINA
