@@ -51,11 +51,14 @@
 /datum/element/mob_overlay_effect/proc/on_add(datum/source, atom/movable/target)
 	SIGNAL_HANDLER
 
+	if(QDELTED(target))
+		return
+
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))
 		return
 
 	var/turf/target_turf = get_turf(target)
-	if(!target_turf || target_turf.platform_atom_count)
+	if(target_turf.platform_atom_count)
 		return
 
 	if(isitem(target))
