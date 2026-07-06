@@ -71,7 +71,7 @@
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5) //only a slight bonus compared to most unarmed classes due to the sheer amount of strength
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10)
-			ADD_SPELL(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+			spawned.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 
 /datum/outfit/adventurer/barbarian

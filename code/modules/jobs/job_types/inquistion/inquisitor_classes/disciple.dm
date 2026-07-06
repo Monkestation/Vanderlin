@@ -72,7 +72,7 @@
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
-			ADD_SPELL(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+			spawned.add_spell(spawned, /datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 		if("Katar")
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)

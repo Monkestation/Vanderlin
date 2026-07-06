@@ -45,6 +45,7 @@
 		TRAIT_NOENERGY,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_STRONG_GRABBER,
+		TRAIT_CLOSECOMBAT,
 	)
 	/// Traits that only get applied in the final sequence
 	var/static/list/final_traits = list(
