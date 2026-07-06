@@ -816,22 +816,40 @@
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
 	SHOULD_CALL_PARENT(TRUE)
 
+	var/list/dropped = list()
+
 	var/atom/drop_loc = drop_location()
-	for(var/obj/item/organ/bodypart_organ in contents)
+	for(var/atom/movable/movable as anything in src)
+		if(!isorgan(movable))
+			if(drop_loc)
+				movable.forceMove(drop_loc)
+				movable.screen_loc = null // organ storage
+				dropped += movable
+			continue
+
+		var/obj/item/organ/bodypart_organ = movable
 		if(bodypart_organ.organ_flags & ORGAN_UNREMOVABLE)
 			continue
+
 		if(owner)
 			bodypart_organ.Remove(bodypart_organ.owner)
 		else if(!bodypart_organ.bodypart_remove(src))
 			continue
-		if(drop_loc) //can be null if being deleted
-			bodypart_organ.forceMove(get_turf(drop_loc))
 
-	if(drop_loc) //can be null during deletion
-		for(var/atom/movable/movable as anything in src)
-			movable.forceMove(drop_loc)
+		if(!drop_loc) //can be null if being deleted
+			continue
+
+		if(violent_removal)
+			//bodypart_organ.applyOrganDamage(bodypart_organ.maxHealth * 0.5)
+			bodypart_organ.scar_organ(30, 60)
+
+		bodypart_organ.forceMove(get_turf(drop_loc))
+		bodypart_organ.screen_loc = null // organ storage
+		dropped += bodypart_organ
 
 	update_icon_dropped()
+
+	return dropped
 
 /obj/item/bodypart/proc/skeletonize(lethal = TRUE)
 	if(bandage)

@@ -38,7 +38,7 @@
 	var/see_in_dark = 8
 	/// How much innate tint these eyes have
 	var/tint = 0
-	var/eye_icon_state = "eye"
+	var/eye_icon_state = "eye-right"
 	var/flash_protect = FLASH_PROTECTION_NONE
 	var/see_invisible = SEE_INVISIBLE_LIVING
 	var/lighting_alpha
@@ -79,10 +79,10 @@
 	side = new_side
 	if(side == RIGHT_SIDE)
 		zone = BODY_ZONE_PRECISE_R_EYE
-		eye_icon_state = "[initial(eye_icon_state)]-right"
+		eye_icon_state = "eye-right"
 	else
 		zone = BODY_ZONE_PRECISE_L_EYE
-		eye_icon_state = "[initial(eye_icon_state)]-left"
+		eye_icon_state = "eye-left"
 	if(!owner)
 		current_zone = zone
 	update_appearance()

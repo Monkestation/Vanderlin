@@ -64,8 +64,8 @@
 
 // ~organ sides
 #define NO_SIDE 0
-#define RIGHT_SIDE (1<<0)
-#define LEFT_SIDE (1<<1)
+#define RIGHT_SIDE 1
+#define LEFT_SIDE 2
 
 //Organ defines for carbon mobs
 #define CHRONIC_ARTHRITIS 1

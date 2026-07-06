@@ -139,28 +139,16 @@
 		return FALSE
 
 	. = list()
-	var/organ_spilled = 0
 	if(isturf(chest_owner.loc))
 		chest_owner.add_splatter_floor(chest_owner.loc)
 	playsound(chest_owner, 'sound/combat/crit2.ogg', 100, FALSE, 5)
+
 	chest_owner.emote("painscream")
-	for(var/obj/item/organ/organ in contents)
-		var/org_zone = check_zone(organ.zone)
-		if(org_zone != BODY_ZONE_CHEST)
-			continue
-		organ.Remove(chest_owner)
-		organ.forceMove(chest_owner.loc)
-		organ.add_mob_blood(chest_owner)
-		organ_spilled = 1
-		. += organ
 
-	for(var/atom/movable/item as anything in cavity_items)
-		item.forceMove(drop_location())
-		cavity_items -= item
-
-	organ_spilled = 1
-
-	if(organ_spilled)
+	var/list/dropped_items = drop_organs()
+	if(length(dropped_items))
+		for(var/atom/movable/thing as anything in dropped_items)
+			thing.add_mob_blood(chest_owner)
 		chest_owner.visible_message("<span class='danger'><B>[chest_owner] spills [chest_owner.p_their()] guts!</B></span>")
 
 	return TRUE
