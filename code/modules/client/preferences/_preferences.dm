@@ -1801,25 +1801,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	return TRUE
 
-
-/datum/preferences/proc/set_loadout(mob/user, loadout_number, datum/loadout_item/loadout)
-	if(!loadout)
-		return
-	if(!donator)
-		to_chat(user, span_danger("This is a donator feature!"))
-		return FALSE
-
-	if(loadout == "None")
-		vars["loadout[loadout]"] = null
-		to_chat(user, span_notice("Who needs stuff anyway?"))
-	else
-		if(!(loadout in GLOB.loadout_items))
-			return
-		vars["loadout[loadout_number]"] = loadout
-		to_chat(user, span_notice("[loadout.name]"))
-		if(loadout.description)
-			to_chat(user, "[loadout.description]")
-
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)

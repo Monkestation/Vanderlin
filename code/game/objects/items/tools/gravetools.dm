@@ -100,6 +100,8 @@
 
 	var/datum/intent/used_intent = user.used_intent
 
+	user.changeNext_move(CLICK_CD_FAST)
+
 	if(istype(used_intent, /datum/intent/shovelscoop))
 		var/obj/structure/closet/dirthole/holie = locate() in turf
 		if(!heldclod)
@@ -107,16 +109,16 @@
 				holie.item_interaction(user, src, modifiers)
 			else if(istype(turf, /turf/open/floor/sand))
 				new /obj/item/natural/clod/sand(src)
-				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
-				update_appearance(UPDATE_ICON_STATE)
 			else
 				if(istype(turf, /turf/open/floor/dirt/road))
 					new /obj/structure/closet/dirthole(turf)
-				else
+				else if(istype(turf, /turf/open/floor/dirt))
 					turf.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
+				else
+					return ITEM_INTERACT_BLOCKING
 				heldclod = new(src)
-				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
-				update_appearance(UPDATE_ICON_STATE)
+			playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
+			update_appearance(UPDATE_ICON_STATE)
 			return ITEM_INTERACT_SUCCESS
 
 		if(!istype(turf, /turf/open/floor/dirt) && !istype(turf, /turf/open/floor/sand))
