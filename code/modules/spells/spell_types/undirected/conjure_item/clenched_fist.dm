@@ -4,6 +4,7 @@
 	button_icon_state = "giant_stregnth"
 	invocation_type = INVOCATION_EMOTE
 	invocation_self_message = "You clench your fist and ready yourself for a fight."
+	invocation_message = "[src] clenches their fists and readies themselves for a fight."
 	spell_type = SPELL_STAMINA
 	antimagic_flags = null
 	associated_skill = null
