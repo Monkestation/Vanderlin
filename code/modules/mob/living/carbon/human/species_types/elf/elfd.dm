@@ -11,7 +11,6 @@
 
 /datum/attribute_holder/sheet/job/species/dark
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
 		STAT_PERCEPTION = -1,
 		STAT_INTELLIGENCE = 1,
 		STAT_ENDURANCE = 2,
@@ -22,7 +21,6 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		STAT_PERCEPTION = -1,
-		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1

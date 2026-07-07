@@ -12,7 +12,6 @@
 
 /datum/attribute_holder/sheet/job/species/snow
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
 		STAT_PERCEPTION = 1,
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = -1,

@@ -11,7 +11,6 @@
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 2,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = -1,
 		STAT_SPEED = 1,
 		STAT_FORTUNE = -1
 	)
