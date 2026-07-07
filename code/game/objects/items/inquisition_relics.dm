@@ -158,7 +158,7 @@
 		SPAN_GOD_PSYDON("Don't expect thanks from me, servant of the betrayer...")
 	)
 
-	to_chat(savior, span_info("As \the [src] crumbles, you can faintly see fourteen souls slowly drift out and fade into the air. One seems to face you and begins to speak..."))
+	savior.visible_message(span_info("As \the [src] crumbles to dust, you can see a few faint lights float away and fade out."), span_info("As \the [src] crumbles, you can faintly see fourteen souls slowly drift out and fade into the air. One seems to face you and begins to speak..."), vision_distance = COMBAT_MESSAGE_RANGE)
 
 	sleep(1 SECONDS)
 	to_chat(savior, pick(soul_lines))
