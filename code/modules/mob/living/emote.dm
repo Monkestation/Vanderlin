@@ -427,7 +427,7 @@
 	. = ..()
 	if(iscarbon(user))
 		var/mob/living/carbon/L = user
-		if(L.getPainLoss() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
+		if(L.getShockStage() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
 			L.setDir(2)
 			L.SetUnconscious(200)
 		else

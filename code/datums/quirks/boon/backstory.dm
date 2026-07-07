@@ -33,13 +33,15 @@
 	var/datum/attribute/skill/granted_skill = initial(B.granted_skill)
 	var/stat_penalty = initial(B.stat_penalty)
 	var/stat_reduction = initial(B.stat_reduction)
+	var/skill_amount = initial(B.amount)
+	var/skill_clamp = initial(B.clamp)
 
 	base_desc += "<br><br><b>Selected: [initial(B.name)]</b>"
 	base_desc += "<br>[initial(B.desc)]"
 
 	// Add skill grant information
 	if(granted_skill)
-		base_desc += "<br><b>Grants:</b> +1 [initial(granted_skill.name)]"
+		base_desc += "<br><b>Grants:</b> +[skill_amount] [initial(granted_skill.name)] (MAX: [skill_clamp])"
 
 	// Add stat penalty information
 	if(stat_penalty && stat_reduction > 0)
@@ -82,7 +84,7 @@
 	var/mob/living/carbon/human/H = owner
 
 	if(initial(B.granted_skill))
-		H.clamped_adjust_skill_level(initial(B.granted_skill), 10, initial(B.clamp), TRUE)
+		H.clamped_adjust_skill_level(initial(B.granted_skill), B.amount, initial(B.clamp), TRUE)
 		H.adjust_skill_exp_multiplier(initial(B.granted_skill), initial(B.xp_multiplier))
 
 	// Apply stat penalty
@@ -117,6 +119,8 @@
 	var/stat_penalty
 	/// How much to reduce the stat
 	var/stat_reduction = 1
+	///ammount we give
+	var/amount = 10
 	///what we clamp to
 	var/clamp = 60
 	///how much of an xp multiplier we add
@@ -153,6 +157,7 @@
 /datum/backstory/combat
 	abstract_type = /datum/backstory/combat
 	desc = "A combat-focused background."
+	amount = 20
 	clamp = 20
 	xp_multiplier = 0.1
 

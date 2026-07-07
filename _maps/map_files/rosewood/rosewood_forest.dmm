@@ -618,6 +618,10 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
 /area/indoors)
+"mE" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "mG" = (
 /turf/open/floor/dirt/road,
 /area/indoors)
@@ -754,6 +758,10 @@
 "pJ" = (
 /turf/open/floor/snow,
 /area/indoors/cave)
+"pL" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/snow,
+/area/outdoors/wilderness)
 "pT" = (
 /turf/closed/mineral,
 /area/outdoors/wilderness)
@@ -1091,6 +1099,10 @@
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
+"xG" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "xH" = (
 /obj/structure/fluff/railing/wood{
@@ -1465,6 +1477,10 @@
 /obj/effect/spawner/traveltile_spawner/horizontal/jarosite,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"ER" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Fj" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -1742,6 +1758,10 @@
 	dir = 1
 	},
 /area/outdoors/wilderness)
+"KU" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/snow,
+/area/outdoors/wilderness)
 "La" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow/patchy,
@@ -1818,6 +1838,10 @@
 /obj/item/candle/yellow/lit/infinite/strong/skull,
 /turf/open/water/blood,
 /area/indoors/cave)
+"MC" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "MD" = (
 /obj/structure/rack,
 /turf/open/floor/herringbone,
@@ -1841,6 +1865,10 @@
 /obj/item/candle/yellow/lit/infinite/strong/skull,
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
+"Nj" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "Nr" = (
 /obj/structure/roguerock,
 /turf/open/water,
@@ -1866,6 +1894,10 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
+"NH" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
 "NJ" = (
 /obj/structure/rack/shelf/big,
@@ -1948,6 +1980,10 @@
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
+"PI" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "PJ" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -2012,6 +2048,10 @@
 /obj/structure/hotspring/border/three,
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/naturalstone,
+/area/outdoors/wilderness)
+"Rf" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
 "Ri" = (
 /obj/structure/rack,
@@ -2165,6 +2205,10 @@
 "TD" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
+"TF" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
 "TM" = (
 /obj/effect/falling_sakura,
@@ -2434,6 +2478,10 @@
 /obj/structure/door/weak/bolt,
 /turf/open/floor/wood/nosmooth,
 /area/indoors)
+"Zr" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "Zv" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/shelter/woods)
@@ -3900,7 +3948,7 @@ EE
 EE
 EE
 EE
-EE
+mE
 EE
 EE
 EE
@@ -6129,7 +6177,7 @@ EE
 EE
 EE
 EE
-EE
+mE
 EE
 EE
 cp
@@ -7583,7 +7631,7 @@ pb
 lY
 lY
 EE
-EE
+mE
 EE
 EE
 EE
@@ -9148,7 +9196,7 @@ lY
 lY
 EE
 EE
-EE
+Rf
 EE
 EE
 EE
@@ -10578,7 +10626,7 @@ EE
 EE
 EE
 EE
-EE
+Nj
 EE
 qL
 qL
@@ -12816,7 +12864,7 @@ lY
 EE
 EE
 EE
-EE
+mE
 EE
 EE
 EE
@@ -13608,7 +13656,7 @@ EE
 EE
 bO
 lv
-EE
+Rf
 lv
 bO
 EE
@@ -15215,7 +15263,7 @@ EE
 EE
 EE
 EE
-EE
+mE
 EE
 EE
 EE
@@ -16244,7 +16292,7 @@ EE
 EE
 qL
 EE
-qL
+ER
 qL
 rf
 EE
@@ -17643,7 +17691,7 @@ pb
 lY
 EE
 EE
-EE
+Nj
 EE
 EE
 EE
@@ -17865,7 +17913,7 @@ cp
 EE
 EE
 EE
-EE
+Nj
 EE
 cp
 EE
@@ -19473,7 +19521,7 @@ Jv
 Jv
 pb
 lY
-lY
+TF
 EE
 EE
 cp
@@ -20493,7 +20541,7 @@ EE
 EE
 EE
 EE
-EE
+mE
 EE
 EE
 EE
@@ -23475,7 +23523,7 @@ EE
 EE
 EE
 HM
-HM
+Zr
 EE
 EE
 EE
@@ -24691,7 +24739,7 @@ lY
 gn
 pb
 pb
-pb
+KU
 pb
 gn
 gn
@@ -26517,7 +26565,7 @@ EE
 EE
 EE
 HM
-EE
+Rf
 EE
 EE
 Jv
@@ -30259,7 +30307,7 @@ EE
 qL
 qL
 qL
-qL
+ER
 qL
 EE
 EE
@@ -30446,7 +30494,7 @@ EE
 qL
 qL
 qL
-qL
+xG
 qL
 EE
 EE
@@ -30615,7 +30663,7 @@ rf
 EE
 EE
 qL
-qL
+xG
 qL
 EE
 qL
@@ -31191,7 +31239,7 @@ EE
 EE
 EE
 EE
-pb
+pL
 pb
 pb
 pb
@@ -32258,7 +32306,7 @@ lY
 Jv
 cp
 EE
-EE
+mE
 EE
 EE
 cp
@@ -32269,7 +32317,7 @@ EE
 EE
 EE
 lY
-lY
+NH
 pb
 gn
 gn
@@ -33802,7 +33850,7 @@ EE
 EE
 HM
 EE
-EE
+mE
 EE
 EE
 qL
@@ -34238,7 +34286,7 @@ HM
 EE
 qL
 EE
-qL
+xG
 qL
 qL
 qL
@@ -34633,7 +34681,7 @@ EE
 EE
 EE
 EE
-EE
+Rf
 EE
 EE
 EE
@@ -34852,7 +34900,7 @@ qL
 qL
 qL
 qL
-qL
+ER
 qL
 qL
 qL
@@ -35016,7 +35064,7 @@ EE
 qL
 qL
 qL
-qL
+MC
 EE
 EE
 qL
@@ -35084,7 +35132,7 @@ qL
 EE
 EE
 EE
-EE
+Rf
 HR
 HR
 EE
@@ -35404,7 +35452,7 @@ EE
 EE
 EE
 EE
-EE
+Rf
 lY
 pb
 pb
@@ -35923,7 +35971,7 @@ VZ
 VZ
 qL
 qL
-EE
+mE
 EE
 EE
 EE
@@ -36643,7 +36691,7 @@ pb
 pb
 pb
 pb
-EE
+mE
 EE
 EE
 EE
@@ -38868,30 +38916,30 @@ EE
 EE
 EE
 EE
+Rf
+EE
+EE
+EE
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
+Ko
 EE
 EE
 EE
 EE
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
-Ko
 EE
-EE
-EE
-EE
-EE
-EE
+Nj
 EE
 EE
 lY
@@ -39929,7 +39977,7 @@ EE
 pb
 EE
 EE
-EE
+mE
 EE
 EE
 EE
@@ -40372,7 +40420,7 @@ pb
 EE
 HM
 HM
-HM
+Zr
 EE
 gn
 Jv
@@ -40746,7 +40794,7 @@ cp
 EE
 qL
 qL
-qL
+MC
 ra
 EE
 EE
@@ -40910,7 +40958,7 @@ gn
 gn
 gn
 qL
-qL
+ER
 qL
 qL
 qL
@@ -41183,7 +41231,7 @@ HM
 EE
 HM
 HM
-HM
+PI
 HM
 pb
 pb

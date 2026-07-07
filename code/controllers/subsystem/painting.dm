@@ -50,6 +50,8 @@ SUBSYSTEM_DEF(paintings)
 			if(!canvas.reject)
 				for(var/client/client in GLOB.clients)
 					if(client.ckey == author_ckey)
+						if(is_misc_banned(author_ckey, BAN_MISC_PUBLISH))
+							return "This author is banned from uploading!"
 						if(!(istext(painting_title) && istext(author) && istext(author_ckey)))
 							return "This painting is incorrectly formatted!"
 						var/replace = tgui_alert(client, "Someone wants to replace [painting_title] with another one by you, do you want to replace this?", "Confirm", list("Yes", "No"))

@@ -102,6 +102,10 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		stack_trace("[pawn]'s current movement target is not an atom, rather a [target.type]! Did you accidentally set it to a weakref?")
 		CancelActions()
 		return
+	if(target != current_movement_target)
+		var/datum/ai_movement/hybrid_pathing/hybrid = ai_movement
+		if(istype(hybrid))
+			hybrid.using_closest_approach -= WEAKREF(src)
 	movement_target_source = source
 	current_movement_target = target
 	if(!isnull(current_movement_target))
@@ -302,18 +306,20 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	to_chat(world, "[pawn_turf]")
 
 ///Called when the AI controller pawn changes z levels, we check if there's any clients on the new one and wake up the AI if there is.
-/datum/ai_controller/proc/on_changed_z_level(atom/source, old_z, new_z, same_z_layer, notify_contents)
+/datum/ai_controller/proc/on_changed_z_level(atom/source, turf/old_turf, turf/new_turf)
 	SIGNAL_HANDLER
-	if (ismob(pawn))
+
+	if(ismob(pawn))
 		var/mob/mob_pawn = pawn
 		if((mob_pawn?.client && !continue_processing_when_client))
 			return
-	if(old_z)
-		GLOB.ai_controllers_by_zlevel[old_z] -= src
 
-	if(new_z)
-		GLOB.ai_controllers_by_zlevel[new_z] += src
-		var/new_level_clients = SSmobs.clients_by_zlevel[new_z].len
+	if(old_turf)
+		GLOB.ai_controllers_by_zlevel[old_turf.z] -= src
+
+	if(new_turf)
+		GLOB.ai_controllers_by_zlevel[new_turf.z] += src
+		var/new_level_clients = length(SSmobs.clients_by_zlevel[new_turf.z])
 		if(new_level_clients)
 			set_ai_status(AI_STATUS_IDLE)
 

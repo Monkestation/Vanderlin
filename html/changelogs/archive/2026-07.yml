@@ -1,0 +1,107 @@
+2026-07-01:
+  Avalon-Proto:
+  - rscdel: Fire safety is taken more seriously; random town fires no longer occur
+  CheffieGithub:
+  - refactor: Refactored attack chain code, report any issues with clicking on things
+      with other things.
+  - refactor: Refactored surgery code, report any cases of surgery issues.
+  - rscadd: Giving is now done by ctrl+shift click or the hotkey "G"
+  - rscadd: Some interactions have been changed that will not be listed here, check
+      the PR page before reporting things.
+  MissyNym:
+  - map: Added a covered bridge/gatehouse to the Southern perimeter of the Gallowband
+      camp, along with strategic palisades.
+  - map: Added a travel point designed to directly reach the Bog Witch and the Gallowband,
+      usable only by the Bog Witch and Gallowband, on both the Forest and Bog maps.
+  - map: Hardened the northern walls of the Gallowband's camp.
+  - map: Added a waterlock to the western coast of the Gallowband's camp to introduce
+      difficulties for travel by water (sorry Tritons).
+  - map: Added a barracks for the lower-ranked Gallowband members east of the northern
+      Gatehouse, on the small mountain present.
+  - map: Fixed the eastern bridge leading to the outpost.
+  SSensum13:
+  - bugfix: Bards now have actual verbs to check and clear audience.
+  SmokingCrackForChrist:
+  - balance: Gives Vile Highwayman (Adept) a Canesword.
+  Spitegremlin:
+  - rscadd: Added new stone pan called hotrock
+  - rscadd: Added new bait called greasebait
+  - balance: added more possible animals to bait, and put more dangerous ones in the
+      highest tier bait
+  Sulaboy:
+  - balance: buffs rolling pin
+  dwasint:
+  - balance: All classes that start with medium armour have medium training.
+  - refactor: known players, they now use actual tags for how you know them that upgrade
+      and change
+  - refactor: family, it now supports species, role, and faith filtering aswell as
+      allowing the setting of divorced status and who you want as a child
+  - bugfix: numerous bugs relating to family code
+2026-07-02:
+  SSensum13:
+  - balance: chest arteries now have 4 bleed stages instead of 2.
+  Severus840:
+  - map: Added Quest Notice board to WPP town square and merc guild
+  - map: Extended the WPP keep's tomb to the east so you can dig into it from the
+      caves
+  - map: Changed the Tailor's beespider farm's Iron Fences to railings
+  - map: Added Quest Markers to Rosewood Forest and Bog since their used by WPP
+  - map: Fixed some broken areas
+  dwasint:
+  - bugfix: setspouse will now lock you out of any family not matching that spouse
+      forever
+2026-07-03:
+  SSensum13:
+  - rscdel: deleted "OINK OINK" replacement for words like "smerd" and "gymza".
+  SmokingCrackForChrist:
+  - balance: Inspector has been given gun permissions back.
+2026-07-04:
+  Avalon-Proto:
+  - rscadd: Adds a Bunch of new Special traits - Mostly Evil
+  - balance: Thief special now gives Master Climbing
+  - rscadd: Added the Kriegmesser, and a new intent Cleave
+  - balance: Male Triton have recieved SMALL buffs to their stats
+  - bugfix: More weapon fixes done
+  Ben10083:
+  - qol: Candidate TGUI alert now timeouts when offer expires.
+  - admin: Admins can now ban ckeys from uploading books or paintings
+  - spellcheck: Master of Nerves Tax Announcement now uses map name.
+  - qol: Red tallow can now be crafted by clicking viscera with tallow
+  - bugfix: Red tallow no longer uses itself for crafting
+  CheffieGithub:
+  - rscadd: Added examine feedback for mortars to see items inside and mechanics examines
+  ModDownloading:
+  - bugfix: Tainted Soul and Lux-less vices are now mutually exclusive.
+  Sulaboy:
+  - rscadd: Silver Monocles can now check the price of items or all items on a tile
+      by clicking. Steward spawns with one.
+  - balance: Stewards can choose their weapon
+  dwasint:
+  - rscadd: headshots are free for all
+  - rscadd: Triumph subspecies available to donators
+  panvxv:
+  - balance: Rebalanced thrown force of cleavers and buffed force for cleavers
+  - image: Inhand and onmob icons for cleavers updated to use the same system as other
+      weapons
+2026-07-05:
+  realforest2001:
+  - bugfix: Fixed admin categories for leadership roles.
+2026-07-06:
+  Ben10083:
+  - map: Vanderlin Keep Garrison cloth bundle now holds 10 cloth
+  - qol: Now states on examine if you are examining your rival
+  CheffieGithub:
+  - bugfix: Shovels can no longer shovel any turf
+  - rscadd: You can still look up if the turf above has transparent neighbours
+  - bugfix: Fixed travel tiles sometimes disappearing
+  - bugfix: Travel tiles work off both traits and mind traits
+  - bugfix: Fix COMBO HUD not working
+  - bugfix: Fix some clothes not being equippable by select equippable even with the
+      correct species/gender
+  SSensum13:
+  - rscadd: Added new watchmen outfit clothings.
+  - rscadd: Added anvil and weaving recipes for new watchmen items.
+  - balance: Added weapon selection for City Watch's footmen and pikemen.
+  dwasint:
+  - bugfix: Rollers now properly pass rotational data through itself
+  - bugfix: waterwheels behave correctly in weirder situations

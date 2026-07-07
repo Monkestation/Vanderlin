@@ -83,11 +83,6 @@
 	stress_change = -4
 	desc = span_blue("I'm so high, don't take away my sky.")
 
-/datum/stress_event/hug
-	timer = 30 MINUTES
-	stress_change = -1
-	desc = span_green("Somebody gave me a nice hug.")
-
 /datum/stress_event/stuffed
 	timer = 20 MINUTES
 	stress_change = -3

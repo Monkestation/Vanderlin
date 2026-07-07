@@ -4,6 +4,7 @@
 		STAT_INTELLIGENCE = 5,
 		STAT_CONSTITUTION = -2,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/stealing = 20,
@@ -61,17 +62,51 @@
 	. = ..()
 	spawned.virginity = TRUE
 
+/datum/job/steward/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/list/options = list(
+		"Dagger",
+		"Rapier",
+		"Cane Blade",
+	)
+	var/choice = tgui_input_list(spawned, "CHOOSE YOUR WEAPON", "STEWARD", options, "Dagger")
+
+	if(!choice)
+		choice = "Dagger"
+
+	var/obj/item/weapon_choice
+	var/obj/item/weapon/scabbard/scabbard_choice
+
+	switch(choice)
+		if("Dagger")
+			weapon_choice = new /obj/item/weapon/knife/dagger/steel/royal(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/knife/royal(spawned)
+
+		if("Rapier")
+			weapon_choice = new /obj/item/weapon/sword/rapier/dec(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/sword/royal(spawned)
+
+		if("Cane Blade")
+			weapon_choice = new /obj/item/weapon/sword/rapier/caneblade(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/cane(spawned)
+
+	if(scabbard_choice && weapon_choice)
+		if(SEND_SIGNAL(scabbard_choice, COMSIG_TRY_STORAGE_INSERT, weapon_choice, null, TRUE, FALSE))
+			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
+		else
+			spawned.put_in_hands(weapon_choice)
+			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
+
 /datum/outfit/steward
 	name = JOB_STEWARD
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
 	head = /obj/item/clothing/head/stewardtophat
+	mask = /obj/item/clothing/face/spectacles/monocle
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/gambeson/steward
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/steward
-	beltl = /obj/item/weapon/knife/dagger/steel
 	backr = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/knife)
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/rich = 1,
 		/obj/item/lockpickring/mundane = 1

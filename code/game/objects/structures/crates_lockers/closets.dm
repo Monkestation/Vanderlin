@@ -218,12 +218,15 @@
 	if(!obj_broken)
 		bust_open()
 
-/obj/structure/closet/attackby(obj/item/I, mob/user, list/modifiers)
+/obj/structure/closet/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user in src)
-		return TRUE
-	if(tool_interact(I, user))
-		return TRUE
-	return ..()
+		return ITEM_INTERACT_BLOCKING
+
+	if(user.cmode)
+		return NONE
+
+	if(tool_interact(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/closet/proc/tool_interact(obj/item/I, mob/user)//returns TRUE if attackBy call shouldnt be continued (because tool was used/closet was of wrong type), FALSE if otherwise
 	. = FALSE
