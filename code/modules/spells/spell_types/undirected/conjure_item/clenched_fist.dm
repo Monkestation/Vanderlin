@@ -1,16 +1,16 @@
 /datum/action/cooldown/spell/undirected/conjure_item/closecombat
 	name = "Clench your fists"
 	desc = "Ready yourself ofr a fight and assume a stronger stance"
-	button_icon_state = "giant_stregnth"
+	button_icon_state = "giants_stregnth"
 	invocation_type = INVOCATION_EMOTE
 	invocation_self_message = "You clench your fist and ready yourself for a fight."
-	invocation_message = "[src] clenches their fists and readies themselves for a fight."
+	invocation = "Someone clenches their fists and readies themselves for a fight."
 	spell_type = SPELL_STAMINA
 	antimagic_flags = null
 	associated_skill = null
 	required_items = null
 	spell_cost = 5
-	item_duration = null
+	item_duration = 120
 	cooldown_time = null
 	item_type = /obj/item/weapon/clenched_fist
 	uses_component = TRUE
