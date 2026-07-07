@@ -11,9 +11,15 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(CLOSECOMBAT_PUNCH, CLOSECOMBAT_JAB, CLOSECOMBAT_SLUG, CLOSECOMBAT_SLAM)
 	weapon_special = /datum/special_intent/upper_cut
+
 /obj/item/weapon/clenched_fist/Initialize()
 	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOEMBED, TRAIT_GENERIC)
+
+/obj/item/weapon/clenched_fist/attack_self(mob/living/user, params)
+	user.visible_message("<span class='warning'>[user] unclenches their fists.</span>")
+	qdel(src)
 
 /datum/intent/unarmed/punch/closecombat
 	name = "punch"

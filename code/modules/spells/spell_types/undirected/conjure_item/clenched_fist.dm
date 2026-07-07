@@ -10,7 +10,7 @@
 	associated_skill = null
 	required_items = null
 	spell_cost = 5
-	item_duration = 120
+	item_duration = null
 	cooldown_time = null
 	item_type = /obj/item/weapon/clenched_fist
 	uses_component = TRUE
