@@ -179,15 +179,10 @@
 /obj/item/weapon/knife/cleaver
 	name = "cleaver"
 	desc = "A chef's tool turned armament, cleave off cumbersome flesh with rudimentary ease."
-	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
-	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "cleav"
-	item_state = "cleav"
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
-	throwforce = DAMAGE_KNIFE + 5
-	experimental_inhand = FALSE
-	experimental_onhip = FALSE
-	experimental_onback = FALSE
+	force = DAMAGE_KNIFE + 1
+	throwforce = DAMAGE_KNIFE + 6
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	max_integrity = INTEGRITY_POOR
@@ -204,22 +199,14 @@
 	name = "hack-knife"
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
-	throwforce = DAMAGE_KNIFE + 6
+	force = DAMAGE_KNIFE + 3
+	throwforce = DAMAGE_KNIFE + 5
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
 	item_weight = 250 GRAMS
-
-/obj/item/weapon/knife/cleaver/combat/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.5,"sx" = -10,"sy" = 0,"nx" = 13,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 5,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 21,"sturn" = -18,"wturn" = -18,"eturn" = 21,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("onbelt")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 //................ Bronze Dagger ............... //s
 /obj/item/weapon/knife/dagger/bronze

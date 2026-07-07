@@ -38,6 +38,19 @@
 	if(gone in to_grind)
 		to_grind -= gone
 
+/obj/item/reagent_containers/glass/mortar/examine(mob/user)
+	. = ..()
+	if(!length(to_grind))
+		return
+
+	. += span_info("It contains:")
+	for(var/obj/item/thing in to_grind)
+		. += span_info("[thing.name]")
+
+/obj/item/reagent_containers/glass/mortar/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("Right clicking with an empty hand will remove all items inside the mortar.")
+
 /obj/item/reagent_containers/glass/mortar/attack_hand_secondary(mob/user, list/modifiers)
 	if(!length(to_grind))
 		return ..()

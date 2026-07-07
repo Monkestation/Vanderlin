@@ -140,3 +140,13 @@
 
 /// Sent to a mob when one of their bodypart's surgery state changes, OR sent from the basic_surgery_state holder when its surgery state changes (old_state, new_state, changed_states)
 #define COMSIG_LIVING_UPDATING_SURGERY_STATE "carbon_updating_surgery_state"
+
+/// From /mob/living/on_looking_z_level_change() : (turf/old_turf, turf/new_turf)
+#define COMSIG_LIVING_LOOK_Z_CHANGE "living_look_z_change"
+
+///from mind/transfer_to. Sent to the receiving mob.
+#define COMSIG_MOB_MIND_TRANSFERRED_INTO "mob_mind_transferred_into"
+///from mind/transfer_from. Sent to the mob the mind is being transferred out of.
+#define COMSIG_MOB_MIND_TRANSFERRED_OUT_OF "mob_mind_transferred_out_of"
+/// From /mob/proc/ghostize() Called when a mob successfully ghosts
+#define COMSIG_MOB_GHOSTIZED "mob_ghostized"

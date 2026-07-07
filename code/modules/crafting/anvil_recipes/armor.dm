@@ -266,6 +266,11 @@
 	created_item = /obj/item/clothing/armor/cuirass/iron
 	craftdiff = 0
 
+/datum/anvil_recipe/armor/iron/fluted_cuirass
+	name = "Iron Fluted Cuirass"
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/armor/cuirass/fluted/iron
+
 /datum/anvil_recipe/armor/iron/platefull
 	name = "Iron Plate Armor (+Bar x3)"
 	required_material = /obj/item/ingot/iron
@@ -435,13 +440,23 @@
 	created_item = /obj/item/clothing/shoes/boots/armor/light
 
 /datum/anvil_recipe/armor/iron/town_watch_helmet
-	name = "Town Watch helmet"
-	required_material = /obj/item/ingot/iron
+	name = "Town Watchmen helmet"
+	created_item = /obj/item/clothing/head/helmet/watchmen
+	craftdiff = 1
+
+/datum/anvil_recipe/armor/iron/town_watch_helmet_lt
+	name = "Town Watch Liutenant helmet"
+	additional_items = list(/obj/item/natural/feather)
+	created_item = /obj/item/clothing/head/helmet/watchmen/lt
+	craftdiff = 1
+
+/datum/anvil_recipe/armor/iron/old_watch_helmet
+	name = "Old Watch helmet"
 	created_item = /obj/item/clothing/head/helmet/townwatch
 	craftdiff = 1
 
-/datum/anvil_recipe/armor/iron/town_watch_helmet_alt
-	name = "Town Watch helmet (alt)"
+/datum/anvil_recipe/armor/iron/old_watch_helmet_alt
+	name = "Old Watch helmet (alt)"
 	required_material = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/head/helmet/townwatch/alt
 	craftdiff = 1
@@ -499,6 +514,11 @@
 /datum/anvil_recipe/armor/steel/cuirass
 	name = "Steel Cuirass"
 	created_item = /obj/item/clothing/armor/cuirass
+
+/datum/anvil_recipe/armor/steel/fluted_cuirass
+	name = "Steel Fluted Cuirass"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/armor/cuirass/fluted
 
 /datum/anvil_recipe/armor/steel/brigadine
 	name = "Brigandine (+Bar x2, +Cloth)"

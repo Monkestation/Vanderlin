@@ -106,7 +106,6 @@
 	aportalgoesto = "banditin"
 	required_trait = TRAIT_BANDITCAMP
 	can_gain_with_sight = TRUE
-	can_gain_by_walking = TRUE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_vampire	// must NOT be a traveltile/vampire child, because that one has a check for banditcamp trait. People should always be able to leave the camp.
@@ -118,7 +117,6 @@
 	aportalgoesto = "vampin"
 	required_trait = TRAIT_VAMPMANSION
 	can_gain_with_sight = TRUE
-	can_gain_by_walking = TRUE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_inhumen
@@ -130,8 +128,6 @@
 	aportalid = "inhumenexit"
 	aportalgoesto = "inhumenin"
 	required_trait = TRAIT_INHUMENCAMP
-	can_gain_with_sight = FALSE
-	can_gain_by_walking = FALSE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/to_acid_caves
@@ -157,8 +153,6 @@
 	aportalid = "inq_enter"
 	aportalgoesto = "inq_exit"
 	required_trait = TRAIT_INQUISITION
-	can_gain_with_sight = FALSE
-	can_gain_by_walking = FALSE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/gallowband_bog
@@ -173,6 +167,4 @@
 	aportalid = "bog_gallow"
 	aportalgoesto = "gallow_bog"
 	required_trait = TRAIT_GALLOWBAND_SECRETS
-	can_gain_with_sight = FALSE
-	can_gain_by_walking = FALSE
 	check_other_side = TRUE

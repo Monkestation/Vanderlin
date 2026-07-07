@@ -15,6 +15,7 @@
 #define ACCENT_ROUSMAN "Ratty Accent"
 #define ACCENT_WINTERMARE "Wintermare Accent"
 #define ACCENT_OSSLAND "Ossland Accent"
+#define ACCENT_ROCKHILL "Rockhill Accent"
 
 GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_NONE = list(),
@@ -34,4 +35,5 @@ GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_ROUSMAN = strings("accents/rousman_replacement.json", "rous"),
 	ACCENT_WINTERMARE = strings("accents/wintermare_replacement.json", "wintermare"),
 	ACCENT_OSSLAND = strings("accents/ossland_replacement.json", "ossland"),
+	ACCENT_ROCKHILL = strings("accents/rockhill_replacement.json", "rockhill"),
 ))

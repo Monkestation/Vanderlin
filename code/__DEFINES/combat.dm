@@ -183,6 +183,8 @@
 #define SWDLONG_CHOP	 /datum/intent/sword/chop/long
 #define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
 
+#define SWORD_CLEAVE     /datum/intent/sword/chop/cleave
+
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
 #define SWORD_DISARM	 /datum/intent/sword/disarm
 #define POMMEL_BASH		 /datum/intent/sword/bash

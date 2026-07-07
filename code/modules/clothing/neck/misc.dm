@@ -662,25 +662,31 @@
 	icon_state = "horus"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	sellprice = 30
+	sellprice = 75
 
 /obj/item/clothing/neck/mercator/examine()
 	. = ..()
-	. += span_info("Click on a turf or an item to see how much it is worth.")
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
 /obj/item/clothing/neck/mercator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	var/total_sellprice = 0
+
 	if(isturf(interacting_with))
-		var/total_sellprice = 0
-		for(var/obj/item/I in interacting_with)
-			total_sellprice += I.sellprice
+		visible_message("[user] peers at the items on the [interacting_with] through their amulet.")
+
+		for(var/obj/item/assessed_item in interacting_with)
+			total_sellprice += assessed_item.sellprice
 
 		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
 		return ITEM_INTERACT_SUCCESS
 
-	if(istype(interacting_with, /obj/item))
-		var/obj/item/I = interacting_with
-		var/total_sellprice = I.sellprice
-		for(var/obj/item/item in I.contents)
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] peers at the [interacting_with] through their amulet.")
+
+		var/obj/item/assessed_item = interacting_with
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
 			total_sellprice += item.sellprice
 
 		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))

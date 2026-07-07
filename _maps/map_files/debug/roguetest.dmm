@@ -2715,10 +2715,6 @@
 	},
 /turf/open/water/river/creatable,
 /area/outdoors)
-"Ik" = (
-/obj/structure/waterwheel,
-/turf/open/water/river,
-/area/outdoors)
 "Io" = (
 /obj/structure/carpet/cyan,
 /obj/structure/chair/stool,
@@ -19538,8 +19534,8 @@ ac
 ac
 at
 Yr
-Ik
-Ua
+xh
+QN
 QN
 ai
 jC
@@ -19796,7 +19792,7 @@ zg
 zg
 zg
 zg
-Ua
+at
 at
 QN
 at
