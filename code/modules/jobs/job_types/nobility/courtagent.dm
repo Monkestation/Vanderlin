@@ -78,8 +78,8 @@
 /datum/attribute_holder/sheet/job/courtagent/bruiser/barehanded
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/unarmed = list(40, 40)
-		/datum/attribute/skill/combat/wrestling = list (40, 40)
+		/datum/attribute/skill/combat/unarmed = list(35, 35),
+		/datum/attribute/skill/combat/wrestling = list (35, 35)
 	)
 
 /datum/job/advclass/courtagent/bruiser
