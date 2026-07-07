@@ -14,6 +14,7 @@
 	var/temperature_change = 20
 	var/temperature_weight = 1
 	var/temperature_falloff = 0.9
+	var/resting_range = 0
 
 /obj/machinery/light/fueled/Initialize()
 	if(soundloop)
@@ -277,3 +278,14 @@
 				holder.held_mob?.adjust_fire_stacks(5)
 				holder.held_mob?.IgniteMob()
 				holder.update_appearance()
+
+		if(resting_range > 0)
+			var/list/hearers_in_range = get_hearers_in_LOS(resting_range, src, RECURSIVE_CONTENTS_CLIENT_MOBS)
+			for(var/mob/living/carbon/human/human in hearers_in_range)
+				var/distance = get_dist(src, human)
+				if(distance > resting_range)
+					continue
+				if(!human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
+					to_chat(human, span_info("The warmth of the fire comforts me, affording me a short rest."))
+				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
+				human.add_stress(/datum/stress_event/campfire)
