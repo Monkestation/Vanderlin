@@ -43,6 +43,8 @@
 		/mob/living/carbon/human/proc/torture_victim
 	)
 
+	languages = list(/datum/language/thievescant)
+
 /datum/outfit/hand
 	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
@@ -163,8 +165,6 @@
 		TRAIT_DODGEEXPERT,
 		TRAIT_FLIP_JUMP
 	)
-
-	languages = list(/datum/language/thievescant)
 
 /datum/outfit/hand/spymaster
 	name = "Spymaster (Hand)"
