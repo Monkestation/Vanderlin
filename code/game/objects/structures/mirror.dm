@@ -39,7 +39,7 @@
 
 	var/list/options = list()
 	if(magick_mirror == TRUE && HAS_TRAIT(H, TRAIT_COURTAGENT))
-		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color", "honorific")
+		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color", "honorific", "cover job")
 	else
 		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color")
 
@@ -169,12 +169,36 @@
 
 		if("honorific")
 			var/list/honorifics = list("Lord", "Lady", "Sir", "Dame", "Ritter", "Ritterin", "Count", "Countess", "Emir", "Clear honorific")
-			var/chosenHonorific = browser_input_list(user, "Select False Honorific", "HONORIFICS", honorifics)
+			var/chosen_honorific = browser_input_list(user, "Select False Honorific", "HONORIFICS", honorifics)
 
-			if(chosenHonorific == "Clear honorific")
+			if(chosen_honorific == "Clear honorific")
 				H.honorary = null
 			else
-				H.honorary = chosenHonorific
+				H.honorary = chosen_honorific
+		if("cover job")
+			var/list/jobs = list()
+			jobs += /datum/job/minor_noble::title
+			jobs += GLOB.garrison_positions
+			jobs += list(/datum/job/monk::title, /datum/job/undertaker::title)
+			jobs += GLOB.serf_positions
+			jobs += GLOB.peasant_positions
+			jobs += GLOB.apprentices_positions
+			jobs += GLOB.allmig_positions
+			jobs -= list(
+				/datum/job/royalknight::title,
+				/datum/job/lieutenant::title,
+				/datum/job/town_elder::title,
+				/datum/job/matron::title,
+				/datum/job/tomb_warden::title,
+				/datum/job/bandit::title
+			)
+			jobs += "Cancel"
+
+			var/cover_job = browser_input_list(user, "Select Cover Job", "COVER JOB", jobs)
+			if(jobs == "Cancel")
+				return
+			H.job = cover_job
+			H.mind?.set_assigned_role(cover_job)
 
 	if(should_update)
 		H.update_body()
