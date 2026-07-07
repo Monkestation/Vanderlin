@@ -19,7 +19,6 @@
 	advclass_cat_rolls = list(CTAG_COURTAGENT = 20)
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
 	job_bitflag = BITFLAG_GARRISON // counts for antag shit
-	is_foreigner = TRUE
 
 	exp_type = list(EXP_TYPE_LIVING)
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT) //noble EXP as new Court Agents may want to transition to playing Hand with enough hours played
