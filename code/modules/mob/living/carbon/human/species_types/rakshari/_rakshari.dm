@@ -5,7 +5,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -2,
 		STAT_PERCEPTION = 2,
-		STAT_CONSTITUTION = -2,
+		STAT_CONSTITUTION = -1,
 		STAT_SPEED = 2,
 	)
 
