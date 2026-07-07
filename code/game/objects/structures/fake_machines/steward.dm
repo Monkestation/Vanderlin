@@ -296,6 +296,9 @@
 		if(!X)
 			return
 		for(var/mob/living/A in SStreasury.bank_accounts)
+			if(A.job == /datum/job/lord::title)
+				to_chat(usr, "<span class='warning'>The MASTER OF NERVES does not permit reassigning the current Monarch.</span>")
+				continue
 			if(A == X)
 				var/list/jobs = list()
 				jobs += GLOB.noble_positions
