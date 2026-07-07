@@ -108,16 +108,14 @@
 /datum/job/advclass/courtagent/bruiser/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Steel Knuckles", "Steel Katar", "Bare Handed")
-	var/weapon_choice = browser_input_list(spawned, "CHOSE YOUR WEAPON.", "SERVE THE CROWN.", weapons)
-
+	var/static/list/weapons = list("Steel Knuckles" = /obj/item/weapon/knuckles,
+	"Steel Katar" = /obj/item/weapon/katar,
+	"Bare Handed" = /obj/item/clothing/gloves/bandages/pugilist)
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
+	if(!weapon_choice)
+		return
 	switch(weapon_choice)
-		if("Steel Knuckles")
-			spawned.put_in_hands(new /obj/item/weapon/knuckles(spawned), TRUE)
-		if("Steel Katar")
-			spawned.put_in_hands(new /obj/item/weapon/katar(spawned), TRUE)
 		if("Bare Handed")
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist, ITEM_SLOT_GLOVES, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/bruiser/barehanded)
 
 /datum/attribute_holder/sheet/job/courtagent/hitman
@@ -181,16 +179,16 @@
 /datum/job/advclass/courtagent/hitman/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Shortbow", "Crossbow")
-	var/weapon_choice = browser_input_list(spawned, "CHOSE YOUR WEAPON.", "SERVE THE CROWN.", weapons)
-
+	var/static/list/weapons = list("Shortbow" = /obj/item/gun/ballistic/bow,
+	"Crossbow" = /obj/item/gun/ballistic/bow/cross)
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
+	if(!weapon_choice)
+		return
 	switch(weapon_choice)
 		if("Shortbow")
-			spawned.put_in_hands(new /obj/item/gun/ballistic/bow(spawned), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/hitman/shortbow)
 		if("Crossbow")
-			spawned.put_in_hands(new /obj/item/gun/ballistic/bow/cross(spawned), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/hitman/crossbow)
 
@@ -340,29 +338,29 @@
 /datum/job/advclass/courtagent/protector/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Sword & Shield", "Rapier", "Axe", "Mace", "Spear", "Flail", "Whip")
-	var/weapon_choice = browser_input_list(spawned, "CHOSE YOUR WEAPON.", "SERVE THE CROWN.", weapons)
-
+	var/static/list/weapons = list("Sword & Shield" = /obj/item/weapon/sword/scimitar/messer,
+	"Rapier" = /obj/item/weapon/sword/rapier,
+	"Axe" = /obj/item/weapon/axe/iron,
+	"Mace" = /obj/item/weapon/mace/spiked,
+	"Spear" = /obj/item/weapon/polearm/spear,
+	"Flail" = /obj/item/weapon/flail,
+	"Whip" = /obj/item/weapon/whip)
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
+	if(!weapon_choice)
+		return
 	switch(weapon_choice)
 		if("Sword & Shield")
 			spawned.put_in_hands(new /obj/item/weapon/shield/heater(spawned), TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/scimitar/messer, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/swordshield)
 		if("Rapier")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/rapier, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/rapier)
 		if("Axe")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/axe/iron, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/axesmaces)
 		if("Mace")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/spiked, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/axesmaces)
 		if("Spear")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/spear, ITEM_SLOT_BACK_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/spear)
 		if("Flail")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/flail, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/whipsflails)
 		if("Whip")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/whip, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/whipsflails)
