@@ -66,6 +66,12 @@
 		/obj/item/storage/keyring/guard,
 	)
 
+/obj/item/storage/belt/leather/lieutenant //they get their keys + dagger there
+	populate_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special,
+		/obj/item/storage/keyring/lieutenant,
+	)
+
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
 		/obj/item/natural/cloth/bandage,

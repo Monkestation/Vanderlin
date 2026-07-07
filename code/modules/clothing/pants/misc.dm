@@ -23,6 +23,22 @@
 	max_integrity = INTEGRITY_STANDARD
 	item_weight = 400 GRAMS
 
+/obj/item/clothing/pants/guard
+	name = "watchmen pantaloons"
+	desc = "Padded pants for extra comfort and protection, adorned in vibrant colors."
+	icon_state = "guardpants"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/watchmen_sleeves.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	detail_tag = "_detail"
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_SOOT_BLACK
+	armor = ARMOR_PADDED
+	prevent_crits = MINOR_CRITICALS
+	max_integrity = INTEGRITY_STANDARD
+	item_weight = 400 GRAMS
+	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
+
 /obj/item/clothing/pants/fencer
 	name = "fencing breeches"
 	desc = "Comfortable padded breeches designed for fencers, providing a bit of protection to the legs while not restricting movement."
