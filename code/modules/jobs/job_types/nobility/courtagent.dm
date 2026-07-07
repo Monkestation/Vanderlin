@@ -61,6 +61,7 @@
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 3,
+		STAT_INTELLIGENCE = -2,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/knives = 20,
@@ -78,6 +79,7 @@
 	raw_attribute_list = list()
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/unarmed = list(40, 40)
+		/datum/attribute/skill/combat/wrestling = list (40, 40)
 	)
 
 /datum/job/advclass/courtagent/bruiser
