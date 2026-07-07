@@ -521,6 +521,11 @@
 		return NONE
 
 	if(M.real_name in GLOB.court_agents)
+		balloon_alert(user, "already an agent!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(M.real_name in GLOB.ex_court_agents)
+		balloon_alert(user, "already an agent!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(length(GLOB.court_agents) >= max_agents)
@@ -548,34 +553,38 @@
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/frumentarii/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(!istype(I, /obj/item/natural/thorn) && !istype(I, /obj/item/natural/feather))
-		return ..()
+/obj/item/frumentarii/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	. = ..()
+	if(user.cmode)
+		return NONE
+	if(!istype(tool, /obj/item/natural/thorn) && !istype(tool, /obj/item/natural/feather))
+		return NONE
 	var/choice = tgui_alert(user, "What would you like to do?", "Reattach/Sever Finger", list("Reattach", "Sever"))
 	if(!choice)
 		return
 	if(choice == "Reattach")
 		if(length(GLOB.ex_court_agents) <= 0)
-			to_chat(user, span_warning("There are no Ex-Fingers to reattach."))
-			return
+			balloon_alert(user, "there are no Ex-Fingers to reattach.")
+			return ITEM_INTERACT_BLOCKING
 		else
 			var/reattachChoice = browser_input_list (user, "Reattach a Finger", "THE LIST", GLOB.ex_court_agents)
 			if(!reattachChoice || QDELETED(src) || QDELETED(user))
-				return
+				return ITEM_INTERACT_BLOCKING
 			GLOB.ex_court_agents -= reattachChoice
 			GLOB.court_agents += reattachChoice
 			playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
-			return
+			return ITEM_INTERACT_SUCCESS
 	if(length(GLOB.court_agents) <= 0)
-		to_chat(user, span_warning("There are no Fingers to sever."))
-		return
+		balloon_alert(user, "there are no Fingers to sever.")
+		return ITEM_INTERACT_BLOCKING
 	else
 		var/severChoice = browser_input_list (user, "Sever a Finger", "THE LIST", GLOB.court_agents)
 		if(!severChoice || QDELETED(src) || QDELETED (user))
-			return
+			return ITEM_INTERACT_BLOCKING
 		GLOB.court_agents -= severChoice
 		GLOB.ex_court_agents += severChoice
 		playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/paper/scroll/keep_plans
 	name = "keep architectural drawings"
