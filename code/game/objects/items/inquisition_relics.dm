@@ -160,7 +160,7 @@
 
 	to_chat(savior, span_info("As \the [src] crumbles, you can faintly see fourteen souls slowly drift out and fade into the air. One seems to face you and begins to speak..."))
 
-	sleep(2 SECONDS)
+	sleep(1 SECONDS)
 	to_chat(savior, pick(soul_lines))
 
 	savior.add_stress(/datum/stress_event/soulchurnerdestroyed)
