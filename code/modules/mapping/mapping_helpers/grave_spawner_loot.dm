@@ -114,10 +114,17 @@
 
 
 // SPECIAL OUTFITS, MAPPED IN ONLY!
-// NAME OF OUTFIT WILL REPLACE NAME OF PERSON, MAKE SURE TO CHANGE!
+
+/datum/outfit/grave/unique
+	/// Potential names for the body
+	var/list/mob_names
+	/// Mob buried
+	var/mob/living/carbon/human/mob_to_spawn = /mob/living/carbon/human/species/human/northern
+	/// Potential messages engraved on their headstone, if they have one
+	var/list/grave_messages
 
 /datum/outfit/grave/unique/ravox_saint
-	name = "Saint Placida"
+	name = "Ravox Saint (Deceased)"
 	head = /obj/item/clothing/head/flowercrown/salvia
 	neck = /obj/item/clothing/neck/chaincoif
 	armor = /obj/item/clothing/armor/plate/full/silver
@@ -133,3 +140,6 @@
 	gloves = /obj/item/clothing/gloves/plate/silver
 	wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 
+	mob_names = list("Saint Placida", "Saint Alexia", "Saint Paisley", "Saint Remington")
+	mob_to_spawn = /mob/living/carbon/human/species/human/northern
+	grave_messages = list("Served with distinction, died with honor.", "Pledged to devote their life to justice, and kept it.", "Hero of the Goblin Wars, may they be granted eternal rest beside Ravox himself.")

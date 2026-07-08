@@ -5361,8 +5361,7 @@
 	},
 /obj/effect/mapping_helpers/structure/grave_spawner/t3{
 	force_consecrate = 1;
-	outfit_override = /datum/outfit/grave/unique/ravox_saint;
-	to_be_interred = /mob/living/carbon/human/species/human/northern
+	outfit_override = /datum/outfit/grave/unique/ravox_saint
 	},
 /turf/open/floor/dirt/road,
 /area/indoors/dungeon)
