@@ -141,8 +141,6 @@
 	// Very low blood, danger!!
 	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_BLEEDOUT))
 		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
-		if(DT_PROB(5, delta_time))
-			owner.adjust_eye_blur_up_to(4, 4)
 	else
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
 	// When all blood is lost, take blood from blood vessels
