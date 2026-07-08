@@ -25,8 +25,10 @@
 	/// If set to TRUE, picks a random Gravefence, factors to affect this done in `payload()`. If FALSE, `payload()` will roll random chance to spawn one anyways if `decor_quality` is 2 or above.
 	var/spawn_gravefence = FALSE
 
-	/// The body that will be spawned, set by `generate_body()`, used to make inscription on a headstone if there is one.
+	/// The body that will be spawned, set by `generate_body()` if not set already, used to make inscription on a headstone if there is one.
 	var/mob/living/carbon/human/to_be_interred
+	/// If set, will force the provided outfit onto `to_be_interred`, useful for mapped in special graves
+	var/datum/outfit/outfit_override
 
 /obj/effect/mapping_helpers/structure/grave_spawner/LateInitialize()
 	var/turf/open/floor/dirt/T = loc
@@ -165,26 +167,35 @@
 /// Returns body or container with body inside
 /obj/effect/mapping_helpers/structure/grave_spawner/proc/generate_body()
 	// This will (maybe) be expanded to have different species. For now we will just spawn a human and an outfit.
-	var/mob/living/carbon/human/body = new /mob/living/carbon/human/species/human/northern(loc)
+	var/mob/living/carbon/human/body
+	if(!to_be_interred)
+		body = new /mob/living/carbon/human/species/human/northern(loc)
+	else
+		body = new to_be_interred.type(loc)
 	body.death()
 	ADD_TRAIT(body, TRAIT_STASIS, "Necra") // Body is dead and frozen, it was buried after all...
 
 	// Pick outfit
-	// List of available outfits for tier, unweighted and needs processed.
-	var/list/unprocessed_outfits
-	if(decor_quality == 1)
-		unprocessed_outfits = subtypesof(/datum/outfit/grave/t1)
-	else if(decor_quality == 2)
-		unprocessed_outfits = subtypesof(/datum/outfit/grave/t2)
+	if(!outfit_override)
+		// List of available outfits for tier, unweighted and needs processed.
+		var/list/unprocessed_outfits
+		if(decor_quality == 1)
+			unprocessed_outfits = subtypesof(/datum/outfit/grave/t1)
+		else if(decor_quality == 2)
+			unprocessed_outfits = subtypesof(/datum/outfit/grave/t2)
+		else
+			unprocessed_outfits = subtypesof(/datum/outfit/grave/t3)
+
+		// Weighted list that will be created and used to pick an outfit
+		var/list/outfit_choices = list()
+		for(var/datum/outfit/grave/possible_outfit as anything in unprocessed_outfits)
+			outfit_choices[possible_outfit] += possible_outfit.weight
+
+		body.equipOutfit(pickweight(outfit_choices))
 	else
-		unprocessed_outfits = subtypesof(/datum/outfit/grave/t3)
-
-	// Weighted list that will be created and used to pick an outfit
-	var/list/outfit_choices = list()
-	for(var/datum/outfit/grave/possible_outfit as anything in unprocessed_outfits)
-		outfit_choices[possible_outfit] += possible_outfit.weight
-
-	body.equipOutfit(pickweight(outfit_choices))
+		body.equipOutfit(outfit_override)
+		// we also replace name
+		body.fully_replace_character_name(body.name, outfit_override.name)
 
 	to_be_interred = body
 

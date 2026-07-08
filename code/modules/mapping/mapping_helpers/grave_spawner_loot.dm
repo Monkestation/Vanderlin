@@ -111,3 +111,25 @@
 	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
 		shirt = /obj/item/clothing/shirt/tunic/colored/random
+
+
+// SPECIAL OUTFITS, MAPPED IN ONLY!
+// NAME OF OUTFIT WILL REPLACE NAME OF PERSON, MAKE SURE TO CHANGE!
+
+/datum/outfit/grave/unique/ravox_saint
+	name = "Saint Placida"
+	head = /obj/item/clothing/head/flowercrown/salvia
+	neck = /obj/item/clothing/neck/chaincoif
+	armor = /obj/item/clothing/armor/plate/full/silver
+	cloak = /obj/item/clothing/cloak/pantheon
+	shirt = /obj/item/clothing/armor/chainmail
+	pants = /obj/item/clothing/pants/platelegs/silver
+	shoes = /obj/item/clothing/shoes/boots/armor/silver
+	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(/obj/item/storage/belt/pouch/coins/rich = 1, /obj/item/reagent_containers/glass/bottle/alchemical/blessedwater = 1)
+	backr = /obj/item/weapon/greataxe/steel/grandmaster
+	belt = /obj/item/storage/belt/leather/black
+	ring = /obj/item/clothing/ring/gold/ravox
+	gloves = /obj/item/clothing/gloves/plate/silver
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
+

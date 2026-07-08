@@ -5356,13 +5356,15 @@
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/outdoors/wilderness/outpost/vanderlin)
 "DU" = (
-/obj/structure/fluff/stonecoffin{
-	desc = "Stone Coffin holding the remains of a Ravox Saint";
-	name = "Saint's coffin"
+/obj/structure/closet/dirthole/closed{
+	bonusquality = 10
 	},
-/obj/item/clothing/head/flowercrown/salvia,
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
-/turf/open/floor/tile/masonic/spiral,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3{
+	force_consecrate = 1;
+	outfit_override = /datum/outfit/grave/unique/ravox_saint;
+	to_be_interred = /mob/living/carbon/human/species/human/northern
+	},
+/turf/open/floor/dirt/road,
 /area/indoors/dungeon)
 "DX" = (
 /obj/structure/bed/hay{
@@ -7733,7 +7735,6 @@
 "Rc" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/carvedgem/onyxa/snake,
-/obj/item/clothing/ring/gold/ravox,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
 "Rd" = (
