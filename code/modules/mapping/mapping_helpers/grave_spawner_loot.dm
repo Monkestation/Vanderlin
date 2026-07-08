@@ -142,4 +142,4 @@
 
 	mob_names = list("Saint Placida", "Saint Alexia", "Saint Paisley", "Saint Remington")
 	mob_to_spawn = /mob/living/carbon/human/species/human/northern
-	grave_messages = list("Served with distinction, died with honor.", "May their life be an example to all.", "Pledged to devote their life to justice, and kept it.", "Hero of the Goblin Wars, may they be granted eternal rest beside Ravox himself.")
+	grave_messages = list("Served with distinction, died with honor.", "May their life be an example to all.", "Pledged to devote their life to justice, and kept it.", "Hero of the Goblin Wars, gave their life in service to these lands.")
