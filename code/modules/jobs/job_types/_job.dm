@@ -518,12 +518,10 @@
 		but the path I tread todae proves only The Ten may rule!"))
 		return
 
-	if(!length(allowed_patrons) && !length(banned_patrons))
+	if(!length(allowed_patrons))
 		return
 
-	if(length(allowed_patrons) && (old_patron?.type in allowed_patrons))
-		return
-	if(length(banned_patrons) && !(old_patron?.type in banned_patrons))
+	if(old_patron?.type in allowed_patrons)
 		return
 
 	var/list/datum/patron/all_gods = list()
