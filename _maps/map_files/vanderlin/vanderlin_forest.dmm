@@ -5365,7 +5365,7 @@
 	},
 /turf/open/floor/dirt/road,
 /area/indoors/dungeon{
-	name = "saint's resting grounds"
+	name = "saint's rest"
 	})
 "DX" = (
 /obj/structure/bed/hay{
@@ -7115,7 +7115,9 @@
 /area/indoors/dungeon)
 "NA" = (
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Saint's Rest"
+	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "NB" = (
