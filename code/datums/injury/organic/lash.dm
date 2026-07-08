@@ -1,7 +1,7 @@
 /datum/injury/lash
 	damage_type = WOUND_LASH
 	autoheal_cutoff = 10
-	infection_rate = 1.15
+	infection_rate = 0.58
 	bleed_threshold = 20
 
 /datum/injury/lash/welt
@@ -11,6 +11,7 @@
 		"healing welt" = 2,
 		"fading welt" = 0
 	)
+	bleed_threshold = 5
 
 /datum/injury/lash/lash
 	stages = list(
@@ -20,7 +21,7 @@
 		"lash scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 2
+	bleed_threshold = 15
 
 /datum/injury/lash/severe
 	stages = list(
@@ -30,7 +31,6 @@
 		"deep lash scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 3
 
 /datum/injury/lash/deep
 	stages = list(
@@ -40,7 +40,6 @@
 		"flensed scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 3
 
 /datum/injury/lash/flayed
 	stages = list(
@@ -49,4 +48,3 @@
 		"massive lash scar" = 0
 	)
 	fade_away_time = INFINITY
-	max_bleeding_stage = 4

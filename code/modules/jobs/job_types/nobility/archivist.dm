@@ -37,6 +37,8 @@
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
+		/datum/language/halfling,
+		/datum/language/gronnic,
 		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,

@@ -159,17 +159,14 @@
 
 /datum/outfit/adventurer/cleric
 	name = "Cleric (Adventurer)"
-	head = /obj/item/clothing/head/helmet/skullcap
-	armor = /obj/item/clothing/armor/chainmail/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	gloves = /obj/item/clothing/gloves/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
-	neck = /obj/item/clothing/neck/chaincoif/iron
 	belt = /obj/item/storage/belt/leather/adventurer
-	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/tabard/crusader
 	wrists = /obj/item/clothing/neck/psycross/silver
+	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)
 
 /datum/outfit/adventurer/cleric/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -177,7 +174,6 @@
 	head = pick(/obj/item/clothing/head/helmet/skullcap, /obj/item/clothing/head/helmet/sallet/iron, /obj/item/clothing/head/helmet/leather/headscarf)
 	armor = pick(/obj/item/clothing/armor/chainmail/iron, /obj/item/clothing/armor/leather/splint, /obj/item/clothing/armor/cuirass/iron, /obj/item/clothing/armor/brigandine/light)
 	neck = pick(/obj/item/clothing/neck/chaincoif/iron, /obj/item/clothing/neck/gorget, /obj/item/clothing/neck/highcollier/iron, /obj/item/clothing/neck/coif/cloth, /obj/item/clothing/neck/coif)
-	backl = pick(/obj/item/storage/backpack/satchel, /obj/item/storage/backpack/satchel/cloth)
 
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)

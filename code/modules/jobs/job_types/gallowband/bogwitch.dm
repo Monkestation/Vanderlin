@@ -23,7 +23,7 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH
-	faction = FACTION_TOWN
+	faction = FACTION_GALLOWBAND
 	total_positions = 0
 	spawn_positions = 0
 	bypass_lastclass = TRUE
@@ -56,6 +56,7 @@
 		TRAIT_LEGENDARY_ALCHEMIST,
 		TRAIT_STEELHEARTED
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	selection_color = "#a33096"
 	languages = list(/datum/language/gronnic)
 

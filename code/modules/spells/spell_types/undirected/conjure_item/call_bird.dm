@@ -171,39 +171,35 @@
 		qdel(src)
 
 
-/obj/item/reagent_containers/food/snacks/messenger_bird/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!dead)
-		if(isliving(user))
-			var/mob/living/L = user
-			var/datum/action/cooldown/spell/undirected/call_bird/spell = source_spell.resolve()
-			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2) || spell.owner == user)
-				if(istype(I, /obj/item/paper) && spell.owner == user)
-					var/obj/item/paper/P = I
-					if(length(P.info) > 0)
-						to_chat(user, span_notice("You attach your note to the messenger bird."))
-						var/noble_info = "[user.key]/([user.real_name]) ([user.job])"
-						var/dest = input(user, "Where would you like the bird to go?", "Destination")  as anything in spell.destinations
+/obj/item/reagent_containers/food/snacks/messenger_bird/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(dead) // beating a dead bird
+		return NONE
 
-						if(dest == "Cancel")
-							to_chat(user, span_notice("You decide not to send the bird anywhere."))
-							return
+	var/datum/action/cooldown/spell/undirected/call_bird/spell = source_spell.resolve()
+	if(spell.owner != user && !prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 2))
+		to_chat(user, "<span class='warning'>[src] gets away!</span>")
+		fly_away()
+		return NONE
 
-						to_chat(user, span_notice("You tell the bird to go to [spell.destinations[dest]]"))
-						var/strip_info = STRIP_HTML_FULL(replacetext(P.info, "<br>", "\n"), MAX_MESSAGE_LEN)
-						log_game("LETTER SENT: from [key_name(user)] to [spell.destinations[dest]]:\n[strip_info]", LOG_GAME)
-						strip_info = replacetext(strip_info, "\n", "<br>")
-						message_admins("[noble_info] [ADMIN_BIRD_LETTER(user)] [ADMIN_FLW(user)] writes to [spell.destinations[dest]]: <br>[strip_info]")
-						fly_away()
-						qdel(P)
+	if(istype(tool, /obj/item/paper) && spell.owner == user)
+		var/obj/item/paper/P = tool
+		if(!length(P.info))
+			to_chat(user, span_warning("The note is blank!"))
+			return ITEM_INTERACT_BLOCKING
+		to_chat(user, span_notice("You attach your note to the messenger bird."))
+		var/noble_info = "[user.key]/([user.real_name]) ([user.job])"
+		var/dest = input(user, "Where would you like the bird to go?", "Destination")  as anything in spell.destinations
 
-						return
-					else
-						to_chat(user, span_warning("The note is blank!"))
-						return
-			else
-				to_chat(user, "<span class='warning'>[src] gets away!</span>")
-				fly_away()
-				return
-	..()
+		if(dest == "Cancel")
+			to_chat(user, span_notice("You decide not to send the bird anywhere."))
+			return
 
+		to_chat(user, span_notice("You tell the bird to go to [spell.destinations[dest]]"))
+		var/strip_info = STRIP_HTML_FULL(replacetext(P.info, "<br>", "\n"), MAX_MESSAGE_LEN)
+		log_game("LETTER SENT: from [key_name(user)] to [spell.destinations[dest]]:\n[strip_info]", LOG_GAME)
+		strip_info = replacetext(strip_info, "\n", "<br>")
+		message_admins("[noble_info] [ADMIN_BIRD_LETTER(user)] [ADMIN_FLW(user)] writes to [spell.destinations[dest]]: <br>[strip_info]")
+		fly_away()
+		qdel(P)
 
+		return ITEM_INTERACT_SUCCESS

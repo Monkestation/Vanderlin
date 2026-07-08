@@ -4,11 +4,10 @@
 #define ALL_TEMPLAR_PATRONS 	list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/eora, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/pestra, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/malum, /datum/patron/divine/xylix)
 #define ALL_PROFANE_PATRONS 	list(/datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 #define ALL_ICONOCLAST_PATRONS  list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
+#define ALL_ACOLYTE_PATRONS		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora) //No Necra because she has gravetenders
 
 #define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha", "The Great Hunt", "The Black Briar")
 #define TEMPLE_PATRON_NAMES		list("Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora")
-
-GLOBAL_LIST_INIT(curse_names, list())
 
 #define TEN_CURSES list(\
 	/datum/curse/astrata,\
@@ -88,6 +87,15 @@ GLOBAL_LIST_EMPTY(accused)
 #define FAMILY_OMMER "Parents Sibling"
 #define FAMILY_INLAW "In Law"
 
+#define ROYAL_STATUS_CONSORT "consort"
+#define ROYAL_STATUS_PROGENY "progeny"
+#define ROYAL_STATUS_OMMER "ommer"
+
+#define FAMILY_MEMBER_PARENT "parent"
+#define FAMILY_MEMBER_CHILD "child"
+#define FAMILY_MEMBER_SIBLING "sibling"
+#define FAMILY_MEMBER_SPOUSE "spouse"
+
 GLOBAL_LIST_EMPTY(job_respawn_delays)
 
 //stress levels. Stress starts at 0.
@@ -118,6 +126,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
 #define CTAG_HEIR "CAT_HEIR"
 #define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
+#define CTAG_MINOR_NOBLE "CAT_MINOR_NOBLE" // Minor Noble classes
 #define CTAG_CONSORT "CAT_CONSORT" // Consort classes
 #define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector
 #define CTAG_TOWN_ELDER "CAT_TOWN_ELDER" // Town Elder class - Handles Town Elder class selector

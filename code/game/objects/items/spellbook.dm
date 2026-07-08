@@ -140,26 +140,32 @@
 	update_appearance(UPDATE_ICON_STATE)
 	user.update_inv_hands()
 
-/obj/item/book/granter/spellbook/attack(mob/living/M, mob/living/carbon/human/user, list/modifiers)
-	if(M.stat == DEAD)
-		M.visible_message(span_danger("[user] smacks [M]'s lifeless corpse with [src]."))
+/obj/item/book/granter/spellbook/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
+	var/mob/living/target = interacting_with
+	if(target.stat == DEAD)
+		target.visible_message(span_danger("[user] smacks [target]'s lifeless corpse with [src]."))
 		playsound(src, "punch", 25, TRUE, -1)
 		return
-	if(user == M)
+
+	if(user == target)
 		to_chat(user, span_warning("I'm already chained to this tome!"))
 		return
-	if(!ishuman(M))
-		return
-	M.visible_message(
-		span_danger("[user] beats [M] over the head with [src]!"),
-		span_danger("[user] beats [M] over the head with [src]!")
+
+	target.visible_message(
+		span_danger("[user] beats [target] over the head with [src]!"),
+		span_danger("[user] beats [target] over the head with [src]!")
 	)
-	if(allowed_readers.len <= 2 && !allowed_readers.Find(M))
-		allowed_readers += M
-	else
-		to_chat(user, span_smallnotice("I can't chain this pleboid to my tome..."))
+
+	if(length(allowed_readers) > 2 || (target in allowed_readers))
+		to_chat(user, span_smallnotice("I can't chain [target.p_them()] to my tome..."))
+		return
+
+	allowed_readers += target
+
 	playsound(src, "punch", 25, TRUE, -1)
-	log_combat(user, M, "attacked", src)
 
 /obj/item/book/granter/spellbook/on_reading_start(mob/user)
 	to_chat(user, span_notice("Arcyne mysteries abound in this enigmatic tome, gift of Noc..."))
@@ -232,24 +238,29 @@
 	var/mob/living/gamer = user
 	gamer.electrocute_act(5, src)
 
-/obj/item/book/granter/spellbook/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(P, /obj/item/gem))
-		return ..()
+/obj/item/book/granter/spellbook/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/gem))
+		return NONE
+
 	if(stored_gem)
 		to_chat(user, span_notice("This tome is already coursing with arcyne energies..."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		to_chat(user, span_notice("Why am I jamming a gem into a book? I must look like a fool!"))
-		return
-	var/obj/item/gem/gem = P
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/gem/gem = tool
 	var/crafttime = max(0, 60 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5)
 	if(!do_after(user, crafttime, target = src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	playsound(src, 'sound/magic/glass.ogg', 100, TRUE)
 	to_chat(user, span_notice("Running my arcyne energy through this crystal, I imbue the tome with my natural essence, attuning it to my state of mind..."))
 	stored_gem = gem.arcyne_potency
 	stored_attunement = gem.attuned
-	qdel(P)
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/book/granter/spellbook/horrible
 	name = "poorly made tome of the arcyne"
@@ -292,8 +303,3 @@
 	desc = "An incredible book that gives off glowing arcyne motes, it is filled with runes and arcyne theories that is hard for even masters of arcyne to understand. The arcyne script glows and practically whispers from the page..."
 	bookquality = 12
 	sellprice = 400
-
-/obj/item/book/granter/spellbook/magician/Initialize()
-	. = ..()
-	var/mob/living/carbon/human/L = loc
-	owner = L

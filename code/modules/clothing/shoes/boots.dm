@@ -37,6 +37,30 @@
 
 	material_category = ARMOR_MAT_PLATE
 
+/obj/item/clothing/shoes/boots/armor/gold
+	name = "golden greaves"
+	desc = "Resplendant sabatons of pure gold, adorned with angled greaves that proudly bare the holy sigil. Its besilked cuffs have remained surprisingly bereft of debris - not even a sprig of lint remains to be criticized."
+	icon_state = "goldgreaves"
+	item_state = "goldgreaves"
+	body_parts_covered = FEET | LEGS
+	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
+	anvilrepair = null
+	smeltresult = /obj/item/ingot/gold
+	grid_height = 96
+	grid_width = 96
+	sellprice = 200
+
+/obj/item/clothing/shoes/boots/armor/gold/king
+	name = "royal golden greaves"
+	sellprice = 300
+
+/obj/item/clothing/shoes/boots/armor/bronze
+	name = "bronze greaves"
+	desc = "Padded sabatons of bronze, tightly strapped together and padded with hide from a fearsome beaste. The sandals clack about, yet they do not feel obstructive; if anything, you've never felt more agile while beplated."
+	icon_state = "bronzegreaves"
+	body_parts_covered = FEET | LEGS
+	smeltresult = /obj/item/ingot/bronze
+
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
 	icon_state = "soldierboots"
@@ -47,6 +71,7 @@
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/clothing/shoes/boots/armor/ironmaille
 	name = "chainmail boots"
@@ -58,7 +83,7 @@
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
 	item_weight = 1 KILOGRAMS
-	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
+	smeltresult = null
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75
 
@@ -259,6 +284,10 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 
+/obj/item/clothing/shoes/boots/armor/zizo/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
+
 /obj/item/clothing/shoes/boots/armor/matthios
 	name = "gilded boots"
 	desc = "Plate boots. A door kicked in, treasures to behold inside."
@@ -268,6 +297,10 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
+
+/obj/item/clothing/shoes/boots/armor/matthios/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
 
 // variant with no armor, just drip.
 /obj/item/clothing/shoes/boots/armor/matthios/lord
@@ -285,6 +318,10 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
+/obj/item/clothing/shoes/boots/armor/graggar/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
+
 //.............. Gronn Boots .................//
 
 /obj/item/clothing/shoes/boots/armor/gronn
@@ -298,3 +335,25 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 
+
+/obj/item/clothing/shoes/boots/leather/kazengun
+	name = "armored sandals"
+	desc = "Leather sandals, with steel ankle-protectors and socks of sturdy cloth."
+	icon_state = "kazengunboots"
+	item_state = "kazengunboots"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/shoes/boots/leather/kazengun/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)
+
+/obj/item/clothing/shoes/boots/fencer
+	name = "fencing boots"
+	desc = "Lightweight leather boots designed for fencing, they'll help keep your balance perfect in combat."
+	icon_state = "freiboots"
+	item_state = "freiboots"

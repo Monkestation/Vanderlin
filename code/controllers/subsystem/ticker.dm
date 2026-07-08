@@ -352,6 +352,10 @@ SUBSYSTEM_DEF(ticker)
 	log_game("GAME SETUP: equip characters success")
 	transfer_characters()	//transfer keys to the new mobs
 	log_game("GAME SETUP: transfer characters success")
+	SSrelations.run_rival_matchmaking()
+	log_game("GAME SETUP: rival matchmaking success")
+	SSrelations.spread_gossip()
+	log_game("GAME SETUP: gossip spreading success")
 
 	for(var/datum/callback/cb as anything in round_start_events)
 		cb.InvokeAsync()
@@ -398,7 +402,7 @@ SUBSYSTEM_DEF(ticker)
 */
 
 	PostSetup()
-	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
+
 	log_game("GAME SETUP: postsetup success")
 
 	return TRUE
@@ -469,13 +473,14 @@ SUBSYSTEM_DEF(ticker)
 
 	job_change_locked = FALSE
 
-	SStriumphs.fire_on_PostSetup()
 	for(var/obj/effect/landmark/start/S as anything in GLOB.roundstart_landmarks)
 		if(!istype(S))//we can not runtime here. not in this important of a proc.
 			stack_trace("[S] [S.type] found in roundstart landmarks list, which isn't a start landmark!")
+
 	for(var/obj/effect/landmark/start/S as anything in GLOB.latejoin_landmarks)
 		if(!istype(S))//we can not runtime here. not in this important of a proc.
 			stack_trace("[S] [S.type] found in latejoin landmarks list, which isn't a latejoin landmark!")
+
 	SSgamemode.refresh_alive_stats(first_post_roundstart_check = TRUE)
 
 //These callbacks will fire after roundstart key transfer
@@ -527,15 +532,18 @@ SUBSYSTEM_DEF(ticker)
 	var/list/livings = list()
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		var/mob/living = player.transfer_character()
-		if(living)
-			qdel(player)
-			ADD_TRAIT(living, TRAIT_NO_TRANSFORM, SS_TICKER_TRAIT)
-			livings += living
-			GLOB.character_ckey_list[living.real_name] = living.ckey
-		if(ishuman(living))
-			try_apply_character_post_equipment(living)
+		if(!living)
+			continue
 
-	if(livings.len)
+		qdel(player)
+		ADD_TRAIT(living, TRAIT_NO_TRANSFORM, SS_TICKER_TRAIT)
+		livings += living
+		GLOB.character_ckey_list[living.real_name] = living.ckey
+
+		if(ishuman(living))
+			try_apply_character_post_equipment(living, living.client)
+
+	if(length(livings))
 		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 30, TIMER_CLIENT_TIME)
 
 /datum/controller/subsystem/ticker/proc/release_characters(list/livings)

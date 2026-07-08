@@ -305,7 +305,7 @@
 					var/mob/living/carbon/C = M
 					var/obj/item/clothing/neck/neck_armor = C.wear_neck
 					var/throat_protected = FALSE
-					if(neck_armor)
+					if(istype(neck_armor))
 						throat_protected = (neck_armor.armor_class != ARMOR_CLASS_NONE)
 					if(C.head && istype(C.head, /obj/item/clothing/head/helmet/heavy/necked))
 						throat_protected = TRUE
@@ -387,7 +387,7 @@
 					var/tackle_time = max(10 + (skill_diff * 2), 1)
 					M.Knockdown(tackle_time)
 					playsound(src,"genblunt",100,TRUE)
-					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state == GRAB_AGGRESSIVE )
+					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state >= GRAB_AGGRESSIVE)
 						M.visible_message(span_danger("[user] throws [M] to the ground!"), \
 						span_userdanger("[user] throws me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 					else
@@ -721,6 +721,10 @@
 	bleed_suppressing = 1
 	var/last_drink
 
+/obj/item/grabbing/bite/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+
 /obj/item/grabbing/bite/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(!valid_check())
@@ -770,7 +774,7 @@
 					human.werewolf_feed(C)
 
 			// TODO: Zombie Signal
-			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
+			if(IS_DEADITE(user))
 				var/mob/living/carbon/human/H = C
 				if(istype(H))
 					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))

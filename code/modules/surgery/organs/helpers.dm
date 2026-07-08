@@ -90,6 +90,8 @@
 
 /mob/living/carbon/getorganslot(slot)
 	RETURN_TYPE(/obj/item/organ)
+	if(!(slot in internal_organs_slot)) // :(
+		return null
 	if(length(internal_organs_slot[slot]))
 		return pick(internal_organs_slot[slot])
 
@@ -143,7 +145,7 @@
 	total_hydration_req = 0
 	for(var/thing in internal_organs)
 		var/obj/item/organ/organ = thing
-		total_blood_req += (organ.blood_req/100 * BLOOD_VOLUME_NORMAL)
+		total_blood_req += (organ.blood_req/50 * BLOOD_VOLUME_NORMAL)
 		total_oxygen_req += organ.oxygen_req
 		total_nutriment_req += (organ.nutriment_req/100)
 		total_hydration_req += (organ.hydration_req/100)

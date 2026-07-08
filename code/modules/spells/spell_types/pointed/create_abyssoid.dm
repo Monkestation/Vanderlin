@@ -16,7 +16,7 @@
 		return FALSE
 
 	var/mob/living/follower = owner
-	if(follower.blood_volume < BLOOD_VOLUME_BAD)
+	if(follower.get_blood_volume() < BLOOD_VOLUME_BAD)
 		if(feedback)
 			to_chat(follower, span_warning("You don't have enough blood to sacrifice!"))
 		return FALSE
@@ -49,11 +49,11 @@
 		to_chat(follower, span_warning("You must keep holding the leech during the ritual!"))
 		return FALSE
 
-	if(follower.blood_volume < BLOOD_VOLUME_BAD)
+	if(follower.get_blood_volume() < BLOOD_VOLUME_BAD)
 		to_chat(follower, span_warning("You don't have enough blood to complete the ritual!"))
 		return FALSE
 
-	follower.blood_volume = max(follower.blood_volume - 70, 0)
+	follower.adjust_blood_volume(-70)
 	var/obj/item/natural/worms/leech/abyssoid/new_leech = new(owner.drop_location())
 	qdel(target)
 	follower.put_in_hands(new_leech)

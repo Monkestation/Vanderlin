@@ -83,23 +83,25 @@ export const RecipeDetail = ({ recipe: r, lookup, pickerMap, allRecipes, essence
   };
 
   return (
-    <Box style={{ padding: '8px 12px', height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box className="RecipeBook__breadcrumb">
-        {history.length > 0 && (
-          <span className="RecipeBook__breadcrumb-back" onClick={onBack} title="Go back">
-            ← {history[history.length - 1].name}
-          </span>
-        )}
-      </Box>
-      <Box className="RecipeBook__detail-title">
-        <Sprite icon={r.output_icon} icon_state={r.output_state} size={2} />
-        {r.name}
-        {r.output_count !== undefined && r.output_count > 1 ? ` ×${r.output_count}` : ''}
-      </Box>
-      <Badge>{r.category}</Badge>
-      <HR />
-      <Box overflowY="scroll" style={{ flex: 1 }}>
-        {renderBody()}
+    <Box className="RecipeBook">
+      <Box style={{ padding: '8px 12px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Box className="RecipeBook__breadcrumb">
+          {history.length > 0 && (
+            <span className="RecipeBook__breadcrumb-back" onClick={onBack} title="Go back">
+              ← {history[history.length - 1].name}
+            </span>
+          )}
+        </Box>
+        <Box className="RecipeBook__detail-title">
+          <Sprite icon={r.output_icon} icon_state={r.output_state} size={2} />
+          {r.name}
+          {r.output_count !== undefined && r.output_count > 1 ? ` ×${r.output_count}` : ''}
+        </Box>
+        <Badge>{r.category}</Badge>
+        <HR />
+        <Box overflowY="scroll" style={{ flex: 1, paddingBottom: '20px', }}>
+          {renderBody()}
+        </Box>
       </Box>
     </Box>
   );

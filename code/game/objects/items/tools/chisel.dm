@@ -16,6 +16,7 @@
 	experimental_onhip = TRUE
 	dropshrink = 0.9
 	w_class = WEIGHT_CLASS_SMALL
+	wlength = WLENGTH_SHORT
 	blade_dulling = 0
 	slot_flags = ITEM_SLOT_HIP
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
@@ -41,10 +42,12 @@
 /obj/item/weapon/chisel/iron
 	name = "iron chisel"
 	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	toolspeed = 1.1
 
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	toolspeed = 1.2
 	item_weight = 245 GRAMS

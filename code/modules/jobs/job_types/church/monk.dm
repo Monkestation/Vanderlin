@@ -103,7 +103,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONHERETICAL
-	allowed_patrons = ALL_TEMPLE_PATRONS
+	allowed_patrons = ALL_ACOLYTE_PATRONS
 
 	outfit = /datum/outfit/monk
 	give_bank_account = TRUE
@@ -123,10 +123,6 @@
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-		if(/datum/patron/divine/necra)
-			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
-			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
@@ -209,17 +205,6 @@
 			wrists = /obj/item/clothing/wrists/wrappings
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/astrata
-		if(/datum/patron/divine/necra)
-			head = /obj/item/clothing/head/padded/deathshroud
-			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
-			shoes = /obj/item/clothing/shoes/boots
-			pants = /obj/item/clothing/pants/trou/leather/mourning
-			armor = /obj/item/clothing/shirt/robe/necra
-			backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red) // Needed for coffin sanctification, they get enough for one, the rest they must source themselves.
-			if(equipped_human.age == AGE_OLD)
-				l_hand = /obj/item/weapon/mace/cane/necran
-			else
-				backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 		if(/datum/patron/divine/eora)
 			mask = /obj/item/clothing/face/operavisage
 			neck = /obj/item/clothing/neck/psycross/silver/divine/eora
@@ -260,10 +245,12 @@
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
 		if(/datum/patron/divine/malum)
-			head = /obj/item/clothing/head/headband/colored/red
+			head = /obj/item/clothing/head/padded/malumhood
 			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
-			shoes = /obj/item/clothing/shoes/boots
-			armor = /obj/item/clothing/shirt/robe/colored/red
+			gloves = /obj/item/clothing/gloves/leather
+			belt = /obj/item/storage/belt/leather
+			shoes = /obj/item/clothing/shoes/boots/leather
+			armor = /obj/item/clothing/shirt/robe/malum
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 			backpack_contents += /obj/item/weapon/hammer/iron
 		else

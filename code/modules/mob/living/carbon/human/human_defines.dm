@@ -12,8 +12,9 @@
 	buckle_lying = 0
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
-	ambushable = TRUE //! DEPRECATED VAR, USE TRAIT_NOAMBUSH
+	ambushable = TRUE
 	maxHealth = BRAIN_DAMAGE_DEATH
+	health = BRAIN_DAMAGE_DEATH
 
 	voice_pitch = 1
 
@@ -88,8 +89,17 @@
 	var/mob/living/carbon/spouse_mob
 	var/image/spouse_indicator
 	var/setspouse
+	var/setchild
+	var/setparent
 	var/gender_choice_pref = ANY_GENDER
 	var/familytree_pref = FAMILY_NONE
+	var/family_adoption_pref = FALSE
+	var/was_divorced          = FALSE
+	var/list/accepted_patron_faiths  = list()
+	var/list/accepted_family_species = list()
+	var/same_species_family   = FALSE
+	var/list/family_job_filter       = list()
+
 	var/datum/heritage/family_datum
 	var/list/temp_ui_list = list()
 
@@ -97,8 +107,12 @@
 
 	var/original_name = null
 
-	var/buried = FALSE // Whether the body is buried or not.
-	var/funeral = FALSE // Whether the body has received rites or not.
+	/// Whether the body is buried or not.
+	var/buried = FALSE
+	/// Whether the body has received rites or not.
+	var/funeral = FALSE
+	/// Final words to have displayed if body is buried, set by an observer that has went to the afterlife
+	var/final_words
 
 	var/datum/devotion/cleric = null // Used for cleric_holder for priests
 	var/datum/inspiration/inspiration = null

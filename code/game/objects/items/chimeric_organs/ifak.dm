@@ -4,13 +4,15 @@
 	desc = "Personal treatment pouch; has all you need to stop you or someone else from meeting Necra."
 	icon = 'icons/obj/medical.dmi'
 	icon_state = "ifak"
-	w_class = WEIGHT_CLASS_SMALL
+	w_class = WEIGHT_CLASS_NORMAL // So you can put stuff like bottles and Vials into it
 	component_type = /datum/component/storage/concrete/grid/ifak
 	throwforce = 1
 	slot_flags = ITEM_SLOT_HIP
 	populate_contents = list(
 		/obj/item/reagent_containers/syringe,
-		/obj/item/reagent_containers/syringe,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/natural/bundle/fibers/full,
 		/obj/item/storage/fancy/pilltin/sate,
 		/obj/item/storage/fancy/pilltin/devour,
 		/obj/item/candle/yellow,

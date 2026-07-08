@@ -1,17 +1,17 @@
 
 // bleedout checks
 /mob/living/carbon/proc/in_bleedout()
-	return (CHECK_BITFIELD(status_flags, BLEEDOUT))
+	return (CHECK_BITFIELD(status_flags, BLEEDOUT)) || undergoing_cardiac_arrest()
 
 /// Blood volume, affected by the heart
 /mob/living/carbon/proc/get_blood_circulation()
-	if(HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
-		return BLOOD_VOLUME_NORMAL
 	if(!needs_heart())
-		return blood_volume
+		return BLOOD_VOLUME_NORMAL
 
 	var/heart_efficiency = getorganslotefficiency(ORGAN_SLOT_HEART)
-	var/apparent_blood_volume = blood_volume
+	var/apparent_blood_volume = get_blood_volume()
+	if(HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+		apparent_blood_volume = max(apparent_blood_volume, BLOOD_VOLUME_NORMAL)
 
 	var/pulse_mod = 1
 	if(HAS_TRAIT(src, TRAIT_FAKEDEATH))
@@ -55,17 +55,14 @@
 
 /// Blood volume, affected by the condition of circulation organs, affected by the oxygen loss - What ultimately matters for brain.
 /mob/living/carbon/proc/get_blood_oxygenation()
-	if(HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+	if(!CAN_HAVE_BLOOD(src))
 		return BLOOD_VOLUME_NORMAL
 
 	var/apparent_blood_volume = get_blood_circulation()
-	if(blood_carries_oxygen())
-		if(!needs_lungs())
-			return apparent_blood_volume
-	else
-		apparent_blood_volume = BLOOD_VOLUME_NORMAL
+	if(!needs_lungs())
+		return apparent_blood_volume
 
-	var/apparent_blood_volume_mod = max(0, 1 - (getOxyLoss() * 0.1) /max(maxHealth, 1))
+	var/apparent_blood_volume_mod = max(0, 1 - (getOxyLoss() / max(maxHealth, 1)))
 	var/oxygenated = get_chem_effect(CE_OXYGENATED)
 	if(oxygenated == 1) // Tirimol
 		apparent_blood_volume_mod += 0.5
@@ -73,10 +70,6 @@
 		apparent_blood_volume_mod += 0.8
 	apparent_blood_volume = apparent_blood_volume * apparent_blood_volume_mod
 	return apparent_blood_volume
-
-/// Do we need blood to sustain the brain?
-/mob/living/carbon/proc/blood_carries_oxygen()
-	return TRUE
 
 /mob/living/carbon/proc/needs_lungs()
 	if(HAS_TRAIT(src, TRAIT_NOBREATH))

@@ -104,6 +104,9 @@
 
 	// Species, just below the name
 	var/datum/species/species = dna?.species
+	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
+	if(spy)
+		species = spy.examine_species
 	if(species)
 		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
@@ -146,7 +149,7 @@
 			. += span_nicegreen("Ahh... my old friend!")
 			user.add_stress(/datum/stress_event/saw_old_party)
 		// Intolerant
-		else if(!HAS_TRAIT(user, TRAIT_TOLERANT)) // friendship is kinda like tolerance after all
+		else if(user.has_quirk(/datum/quirk/vice/paranoid))
 			if(!isdarkelf(user) && isdarkelf(src))
 				user.add_stress(/datum/stress_event/delf)
 			if(!istiefling(user) && istiefling(src))
@@ -178,7 +181,10 @@
 		// Foreigner
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
 			. += span_tinywarning("A foreigner.")
-			user.add_stress(/datum/stress_event/para/foreigner)
+			if(user.has_quirk(/datum/quirk/vice/paranoid))
+				user.add_stress(/datum/stress_event/para/foreigner)
+			else
+				user.add_stress(/datum/stress_event/foreigner)
 		// Thuild
 		if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
 			. += span_smallgreen("A member of the Thieves' Guild.")
@@ -271,6 +277,8 @@
 	. = list()
 	var/list/unobscured = get_unobscured_items(FALSE)
 	for(var/obj/item/I as anything in unobscured)
+		if(istype(I, /obj/item/clothing/armor/regenerating/skin)) //disciple skin and similiar no longer show up on examining
+			continue
 		var/slot_title = null
 		switch(unobscured[I]) // this could probably be abstracted into its own proc at some point
 			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK, ITEM_SLOT_SHOES)
@@ -299,12 +307,12 @@
 				slot_title = " on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
 				slot_title = " on [P[THEIR]] right side"
-		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user)][slot_title]."
+		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user, FALSE, TRUE)][slot_title]."
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
 		var/wielding = I.is_wielded()
-		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user, FALSE, TRUE)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
 
 /// Things that are physical but do not need to see your face to establish.
@@ -360,10 +368,12 @@
 		switch(final_str - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
 			if(5 to INFINITY)
 				str_msg = span_bold("[P[THEY]] look[pl] much stronger than me.")
-				user.add_stress(/datum/stress_event/para/str)
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/para/str)
 			if(1 to 5)
 				str_msg = "[P[THEY]] look[pl] stronger than me."
-				user.add_stress(/datum/stress_event/para/str)
+				if(user.has_quirk(/datum/quirk/vice/paranoid))
+					user.add_stress(/datum/stress_event/para/str)
 			if(0)
 				str_msg = "[P[THEY]] look[pl] about as strong as me."
 			if(-5 to -1)
@@ -511,15 +521,19 @@
 
 	if(!getorganslot(ORGAN_SLOT_BRAIN) || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
 		. += span_boldred("[P[THEYRE]] dead.")
-	else if(appears_dead || stat >= UNCONSCIOUS)
+	else if(appears_dead || HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION))
 		. += span_boldwarning("[P[THEYRE]] unconscious.")
-	else if(InCritical())
-		. += span_warning("[P[THEYRE]] barely unconscious.")
+	else
+		switch(stat)
+			if(UNCONSCIOUS)
+				. += span_boldwarning("[P[THEYRE]] unconscious.")
+			if(SOFT_CRIT)
+				. += span_notice("[P[THEYRE]] barely conscious.")
 
 	// Blood volume
-	if(!SEND_SIGNAL(src, COMSIG_DISGUISE_STATUS))
+	if(!SEND_SIGNAL(src, COMSIG_DISGUISE_STATUS) && CAN_HAVE_BLOOD(src))
 		var/blood_lvl_msg
-		switch(blood_volume)
+		switch(get_blood_volume())
 			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 				blood_lvl_msg = html_tag("B", "[P[THEYRE]] extremely pale and sickly.")
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
@@ -533,6 +547,8 @@
 
 	// Bleeding
 	var/bleed_rate = get_bleed_rate()
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		bleed_rate += artery.blood_flow * (artery.damage/artery.maxHealth)
 	if(bleed_rate)
 		var/bleed_wording = "bleeding"
 		switch(bleed_rate)
