@@ -383,6 +383,18 @@
 	. = ..()						//+3 force, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
+/obj/item/weapon/katar/psydon/relic
+	name = "\proper anguish"
+	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May its blows cause naught but anguish to those who dare raise up arms against you."
+
+/obj/item/weapon/katar/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
+
+/obj/item/weapon/katar/psydon/relic/alt
+	name = "\proper agony"
+	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May the agony it inflicts upon your foes leave a mark, so that they never forget His name."
+
 /obj/item/weapon/katar/abyssor
 	name = "barotrauma"
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
@@ -456,10 +468,23 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
 	item_weight = 200 GRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
+
+/obj/item/weapon/knuckles/psydon/relic
+	name = "\proper confidence"
+	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your strikes be confident and true, and done in His name."
+
+/obj/item/weapon/knuckles/psydon/relic/Initialize(mapload)
+	. = ..()							//+5 force, +100 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
+
+/obj/item/weapon/knuckles/psydon/relic/alt
+	name = "\proper conviction"
+	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your convicition to the Faith be ever unwavering, lest you begin to doubt yourself and bring harm to your siblings."
 
 /obj/item/weapon/knuckles/eora
 	name = "close caress"

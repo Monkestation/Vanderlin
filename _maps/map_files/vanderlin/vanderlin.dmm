@@ -770,6 +770,10 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
+"asq" = (
+/obj/machinery/light/fueled/smelter,
+/turf/open/floor/naturalstone,
+/area/under/town/sewer)
 "ass" = (
 /obj/structure/closet/crate/chest,
 /obj/item/burial_shroud,
@@ -1590,7 +1594,14 @@
 	name = "Morticia"
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/exposed/church/graveyard)
+/area/outdoors/exposed/church)
+"aMS" = (
+/obj/structure/rack,
+/obj/item/weapon/tongs,
+/obj/item/weapon/hammer/iron,
+/obj/item/flint,
+/turf/open/floor/dirt/road,
+/area/under/town/sewer)
 "aMW" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -3161,6 +3172,7 @@
 /area/indoors/town)
 "bAZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/essence/splitter,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "bBc" = (
@@ -6701,6 +6713,16 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/keep/throne)
+"dgC" = (
+/obj/item/storage/crucible/random{
+	pixel_x = -7;
+	pixel_y = 14
+	},
+/obj/item/mould/ingot{
+	pixel_y = -7
+	},
+/turf/open/floor/cobblerock,
+/area/under/town/sewer)
 "dgR" = (
 /obj/structure/rack/shelf,
 /obj/structure/closet/crate/chest/old_crate,
@@ -9323,6 +9345,8 @@
 /area/under/cave)
 "eum" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/easel,
+/obj/item/canvas/random_painting,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/jester)
 "eup" = (
@@ -16311,6 +16335,10 @@
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
+"hQQ" = (
+/obj/structure/bars,
+/turf/open/floor/cobblerock,
+/area/under/town/sewer)
 "hRw" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -18184,6 +18212,8 @@
 /obj/item/reagent_containers/powder/flour,
 /obj/structure/closet/crate/chest/wicker,
 /obj/machinery/light/fueled/wallfire/candle/l,
+/obj/item/weapon/knife/cleaver,
+/obj/item/kitchen/rollingpin,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "iIU" = (
@@ -20122,6 +20152,10 @@
 /obj/structure/ladder,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/jester)
+"jzR" = (
+/obj/item/ore/copper,
+/turf/open/floor/dirt/road,
+/area/under/town/sewer)
 "jzT" = (
 /obj/structure/bars/pipe{
 	dir = 9
@@ -27525,6 +27559,10 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/blue)
+"mYl" = (
+/obj/machinery/anvil/crafted,
+/turf/open/floor/naturalstone,
+/area/under/town/sewer)
 "mYr" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -28761,6 +28799,21 @@
 	icon_state = "largetable"
 	},
 /obj/item/reagent_containers/powder/spice,
+/obj/item/essence_vial{
+	pixel_y = 6;
+	pixel_x = -1
+	},
+/obj/item/essence_vial{
+	pixel_y = -4
+	},
+/obj/item/essence_vial{
+	pixel_x = 9;
+	pixel_y = 11
+	},
+/obj/item/essence_vial{
+	pixel_x = 7;
+	pixel_y = 3
+	},
 /turf/open/floor/carpet,
 /area/under/town/basement)
 "nBh" = (
@@ -31516,6 +31569,7 @@
 	icon_state = "largetable"
 	},
 /obj/item/reagent_containers/glass/bottle/poison,
+/obj/item/reagent_containers/glass/bottle/poison,
 /obj/item/recipe_book/underworld{
 	pixel_x = -12;
 	pixel_y = -10
@@ -33514,6 +33568,7 @@
 	pixel_x = 1;
 	pixel_y = 10
 	},
+/obj/item/essence_connector,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "pHI" = (
@@ -34207,6 +34262,10 @@
 /obj/structure/fluff/millstone,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"pYd" = (
+/obj/machinery/light/fueled/oven/south,
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "pYe" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/structure/bed/shit,
@@ -36167,7 +36226,8 @@
 	},
 /obj/item/natural/bundle/cloth{
 	pixel_x = -32;
-	pixel_y = 7
+	pixel_y = 7;
+	amount = 10
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
@@ -39430,6 +39490,14 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
+"spm" = (
+/obj/item/ore/coal{
+	pixel_x = -6;
+	pixel_y = 7
+	},
+/obj/item/ore/copper,
+/turf/open/floor/dirt/road,
+/area/under/town/sewer)
 "spu" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood/nosmooth,
@@ -40714,6 +40782,10 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/hand)
+"sSm" = (
+/obj/item/weapon/shovel/small,
+/turf/open/floor/cobblerock,
+/area/under/town/sewer)
 "sSt" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -42186,6 +42258,14 @@
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/vault)
 "tFG" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
+/obj/item/canvas/random_painting,
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/tile/checkeralt,
 /area/indoors/town/keep/archivist)
@@ -45213,6 +45293,10 @@
 	},
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/yellow)
+"uWR" = (
+/obj/structure/pottery_lathe,
+/turf/open/floor/dirt/road,
+/area/under/town/sewer)
 "uWT" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/robe/astrata,
@@ -46174,7 +46258,7 @@
 	icon_state = "largetable"
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/reagent_containers/glass/bottle/poison,
+/obj/machinery/essence/reservoir,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "vqn" = (
@@ -80156,7 +80240,7 @@ pGp
 wpU
 wpU
 jEQ
-ejU
+pYd
 nXJ
 nXJ
 gir
@@ -80363,7 +80447,7 @@ jEQ
 uek
 wvw
 tVX
-nXJ
+poD
 jEQ
 utb
 qhd
@@ -80564,7 +80648,7 @@ pGp
 jEQ
 jEQ
 jEQ
-jEQ
+cLd
 jEQ
 jEQ
 pGp
@@ -80763,14 +80847,14 @@ pGp
 pGp
 pGp
 pGp
-pGp
-pGp
-pGp
-pGp
-pGp
+wpU
+wpU
+dgC
+mjx
+mjx
 wpU
 pGp
-pGp
+wRN
 qhd
 qhd
 aHG
@@ -80964,14 +81048,14 @@ fsi
 pGp
 pGp
 pGp
-pGp
-pGp
-pGp
-pGp
-pGp
-pGp
 wpU
-pGp
+wpU
+asq
+mjx
+mjx
+qhd
+dtN
+wRN
 mjx
 wRN
 mjx
@@ -81166,14 +81250,14 @@ fsi
 pGp
 pGp
 pGp
-pGp
-pGp
-pGp
-pGp
-pGp
-pGp
 wpU
-utb
+jzR
+spm
+wRN
+qhd
+mjx
+wRN
+wRN
 mjx
 krY
 wRN
@@ -81368,14 +81452,14 @@ fsi
 fsi
 fsi
 fsi
-pGp
-pGp
-pGp
-pGp
-pGp
-pGp
 wpU
-pGp
+wcs
+qhd
+mYl
+wRN
+mjx
+qhd
+qhd
 wpU
 wpU
 mjx
@@ -81570,13 +81654,13 @@ qvf
 qvf
 crf
 fsi
-pGp
-pGp
-pGp
-pGp
-pGp
-pGp
 wpU
+aMS
+wRN
+qhd
+wRN
+cAA
+cAA
 wpU
 wpU
 wpU
@@ -81772,13 +81856,13 @@ cAA
 cAA
 cAA
 fsi
-pGp
-pGp
-pGp
-pGp
 wpU
 wpU
+sSm
+uWR
 wpU
+hQQ
+cpf
 wpU
 wpU
 pGp
@@ -81975,12 +82059,12 @@ qvf
 qvf
 fsi
 pGp
-pGp
-pGp
-pGp
+wpU
+wpU
+wpU
 xDF
 qvf
-qvf
+cAA
 qvf
 qvf
 qvf

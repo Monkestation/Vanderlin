@@ -109,7 +109,9 @@
 	flags_inv = HIDEEARS
 	sellprice = VALUE_CHEAP_STEEL_HELMET
 	max_integrity = INTEGRITY_STRONGEST
-	smeltresult = /obj/item/ingot/steel_slag
+	smeltresult = null
+	melting_material = /datum/material/steel
+	melt_amount = 50
 	body_parts_covered = COVERAGE_HEAD
 	item_weight = 2.2 KILOGRAMS
 
@@ -134,7 +136,9 @@
 	armor = ARMOR_SCALE
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 50
 
 /obj/item/clothing/head/helmet/kettle/aalloy
 	name = "decrepit kettle helmet"
@@ -165,6 +169,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 //................ Iron Pot Helmet ............... //
 /obj/item/clothing/head/helmet/ironpot
@@ -417,6 +422,13 @@
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
 
+//............... Bellow Sallet ............... //
+/obj/item/clothing/head/helmet/visored/bellow
+	name = "Bellow Sallet"
+	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
+	icon_state = "sallet_bellow"
+	item_weight = 4.5 KILOGRAMS
+
 //............... Hounskull ............... //
 /obj/item/clothing/head/helmet/visored/hounskull
 	name = "hounskull" // "Pigface" is a modern term, hounskull is a c.1400 term.
@@ -538,8 +550,32 @@
 	item_weight = 4.45 KILOGRAMS
 
 //................. Town Watch Helmet .............. //
+
+/obj/item/clothing/head/helmet/watchmen
+	name = "town watchmen helmet"
+	desc = "An old helmet of iron, offers great visibility and suits well."
+	icon_state = "watchhelm"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	body_parts_covered = COVERAGE_HEAD
+	flags_inv = HIDEEARS|HIDEHAIR
+	max_integrity = INTEGRITY_STRONG
+	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
+	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ARMOR_UNUSUAL
+	item_weight = 3.7 KILOGRAMS
+
+/obj/item/clothing/head/helmet/watchmen/lt
+	name = "town watch liutenant helmet"
+	desc = "An old helmet of iron, offers great visibility and suits well. This one have a feather on top, informing everybody, that wearer is a leader of city watch."
+	icon_state = "watchhelm_feather"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_WHITE
+	uses_lord_coloring = LORD_PRIMARY
+
+// It will stay here to make sure nothing breaks
 /obj/item/clothing/head/helmet/townwatch
-	name = "town watch helmet"
+	name = "old watch helmet"
 	desc = "An old archaic helmet of a symbol long forgotten."
 	icon_state = "guardhelm"
 
@@ -716,7 +752,7 @@
 			user.dropItemToGround(src)
 			user.put_in_hands(P)
 		var/obj/item/bodypart/arm = user.get_active_hand()
-		arm?.bodypart_attacked_by(BCLASS_CUT, 25, modifiers = list(CRIT_MOD_CHANCE = -100))
+		arm?.bodypart_attacked_by(BCLASS_CUT, 25, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 		qdel(src)
 	else
 		user.visible_message(span_warning("[user] stops reshaping [src]."))
@@ -778,3 +814,4 @@
 	detail_color = GLOB.noble_dyes[choice]
 	detail_tag = "_detail"
 	update_appearance(UPDATE_ICON)
+

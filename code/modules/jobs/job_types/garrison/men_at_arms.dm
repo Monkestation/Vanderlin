@@ -135,6 +135,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 

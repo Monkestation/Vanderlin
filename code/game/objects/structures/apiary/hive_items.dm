@@ -7,39 +7,39 @@
 	var/treatment_type = "general"
 	var/treatment_strength = 30
 
-/obj/item/bee_treatment/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
+/obj/item/bee_treatment/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /obj/structure/apiary))
+		return NONE
 
-	if(istype(target, /obj/structure/apiary))
-		var/obj/structure/apiary/A = target
+	var/obj/structure/apiary/A = interacting_with
 
-		if(!A.has_disease)
-			to_chat(user, span_notice("The bees don't appear to need treatment."))
-			return
+	if(!A.has_disease)
+		to_chat(user, span_notice("The bees don't appear to need treatment."))
+		return ITEM_INTERACT_BLOCKING
 
-		to_chat(user, span_notice("You apply [src] to [A]."))
+	to_chat(user, span_notice("You apply [src] to [A]."))
 
-		var/effectiveness = treatment_strength
+	var/effectiveness = treatment_strength
 
-		if(A.disease && treatment_type == A.disease.name)
-			effectiveness *= 2
+	if(A.disease && treatment_type == A.disease.name)
+		effectiveness *= 2
 
-		A.treatment_progress += effectiveness
+	A.treatment_progress += effectiveness
 
-		if(A.treatment_progress >= 100)
-			A.has_disease = FALSE
-			A.disease = null
-			A.disease_severity = 0
-			A.treatment_progress = 0
-			to_chat(user, span_notice("The bees appear to be recovering!"))
-		else
-			to_chat(user, span_notice("The treatment seems to be having some effect."))
+	if(A.treatment_progress >= 100)
+		A.has_disease = FALSE
+		A.disease = null
+		A.disease_severity = 0
+		A.treatment_progress = 0
+		to_chat(user, span_notice("The bees appear to be recovering!"))
+	else
+		to_chat(user, span_notice("The treatment seems to be having some effect."))
 
-		A.agitate_bees(20, user)
+	A.agitate_bees(20, user)
 
-		qdel(src)
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/bee_treatment/antiviral
 	name = "bee antiviral"
@@ -114,15 +114,14 @@
 	. = ..()
 	icon_state = active ? "smoker_lit" : "smoker"
 
-/obj/item/bee_smoker/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/natural/bundle/cloth))
-		var/obj/item/natural/bundle/cloth/C = I
+/obj/item/bee_smoker/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/natural/bundle/cloth))
+		var/obj/item/natural/bundle/cloth/C = tool
 		if(C.amount >= 1 && fuel < max_fuel)
 			to_chat(user, span_notice("You stuff some cloth into [src]."))
 			C.use(1)
 			fuel = min(fuel + 5, max_fuel)
-			return TRUE
-	return ..()
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/magnifying_glass
 	name = "magnifying glass"
@@ -132,30 +131,27 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/magnifying_glass/attack(mob/living/M, mob/user, list/modifiers)
-	return
+/obj/item/magnifying_glass/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /obj/structure/apiary))
+		return NONE
 
-/obj/item/magnifying_glass/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(!proximity)
-		return
+	var/obj/structure/apiary/A = interacting_with
 
-	if(istype(target, /obj/structure/apiary))
-		var/obj/structure/apiary/A = target
+	to_chat(user, span_notice("You carefully inspect [A]."))
 
-		to_chat(user, span_notice("You carefully inspect [A]."))
+	if(A.has_disease && A.disease)
+		to_chat(user, A.disease.get_inspection_message())
+		to_chat(user, A.disease.get_severity_description(A.disease_severity))
+	else
+		to_chat(user, span_notice("The bees appear to be healthy."))
 
-		if(A.has_disease && A.disease)
-			to_chat(user, A.disease.get_inspection_message())
-			to_chat(user, A.disease.get_severity_description(A.disease_severity))
-		else
-			to_chat(user, span_notice("The bees appear to be healthy."))
+	if(A.bee_count + A.outside_bees == 0)
+		to_chat(user, span_warning("The hive is empty!"))
+	else if(A.bee_count + A.outside_bees < 5)
+		to_chat(user, span_warning("The colony is very small."))
+	else if(A.bee_count + A.outside_bees < 15)
+		to_chat(user, span_notice("The colony is moderate in size."))
+	else
+		to_chat(user, span_notice("The colony is thriving with many bees!"))
 
-		if(A.bee_count + A.outside_bees == 0)
-			to_chat(user, span_warning("The hive is empty!"))
-		else if(A.bee_count + A.outside_bees < 5)
-			to_chat(user, span_warning("The colony is very small."))
-		else if(A.bee_count + A.outside_bees < 15)
-			to_chat(user, span_notice("The colony is moderate in size."))
-		else
-			to_chat(user, span_notice("The colony is thriving with many bees!"))
+	return ITEM_INTERACT_SUCCESS

@@ -53,7 +53,7 @@
 	spawned.regenerate_limb(BODY_ZONE_R_ARM)
 	spawned.regenerate_limb(BODY_ZONE_L_ARM)
 	spawned.skeletonize()
-	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
+	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	spawned.update_a_intents()
 	spawned.grant_undead_eyes()
 	ADD_TRAIT(spawned, TRAIT_NOAMBUSH, JOB_TRAIT)

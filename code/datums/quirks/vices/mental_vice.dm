@@ -251,8 +251,8 @@
 
 	if(do_sleep)
 		if(next_sleep <= world.time)
-			var/pain = H.getPainLoss()
-			if(pain >= 40 && pain_pity_charges > 0)
+			var/pain = H.getShockStage()
+			if(pain >= SHOCK_STAGE_2 && pain_pity_charges > 0)
 				pain_pity_charges--
 				concious_timer = rand(1 MINUTES, 2 MINUTES)
 				to_chat(H, span_warning("The pain keeps me awake..."))

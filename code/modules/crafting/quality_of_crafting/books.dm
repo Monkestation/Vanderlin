@@ -616,7 +616,7 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/chimeric_table,
 		/datum/chimeric_node,
 		/datum/wound,
-		/datum/surgery,
+		/datum/surgery_operation,
 		/obj/item/organ/heart,
 		/obj/item/organ/spleen,
 		/obj/item/organ/stomach,

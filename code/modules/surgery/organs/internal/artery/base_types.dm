@@ -6,6 +6,7 @@
 /obj/item/organ/artery/r_leg
 	name = "right femoral arteries"
 	zone = BODY_ZONE_R_LEG
+	blood_flow = ARTERIAL_BLOOD_FLOW * 0.75
 
 /obj/item/organ/artery/mouth
 	name = "facial arteries"
@@ -14,6 +15,7 @@
 /obj/item/organ/artery/l_leg
 	name = "left femoral arteries"
 	zone = BODY_ZONE_L_LEG
+	blood_flow = ARTERIAL_BLOOD_FLOW * 0.75
 
 /obj/item/organ/artery/l_arm
 	name = "left brachial arteries"
@@ -26,10 +28,11 @@
 	zone = BODY_ZONE_HEAD
 
 /obj/item/organ/artery/chest
-	name = "intercostal arteries"
-	desc = "These run along the spaces between ribs."
+	name = "torso arteries"
+	desc = "These run throughout the torso, supplying organs and flesh with blood."
+	tear_damage_multiplier = 0.25 // it is deadly, but one hit won't not kill you on spot
+	blood_flow = ARTERIAL_BLOOD_FLOW * 2
 	zone = BODY_ZONE_CHEST
-	blood_flow = ARTERIAL_BLOOD_FLOW * 0.4
 
 /obj/item/organ/artery/heart
 	name = "thoracic aorta"

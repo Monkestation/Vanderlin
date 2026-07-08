@@ -271,8 +271,7 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel_slag
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/steel
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
@@ -463,10 +462,9 @@
 	. = ..()
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
-	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
-		return
+/obj/item/clothing/neck/gorget/explosive/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/collar_detonator))
+		return NONE
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
@@ -474,6 +472,7 @@
 	else
 		to_chat(user, "Collar is already unlocked!")
 
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
@@ -512,10 +511,13 @@
 	if(!istype(loc, /mob/living/carbon))
 		qdel(src)
 		return
+
 	var/mob/living/carbon/soon_to_be_headless = loc
 	var/obj/item/bodypart/head/to_decap = soon_to_be_headless.get_bodypart(BODY_ZONE_HEAD)
 	if(to_decap)
-		to_decap.dismember(BRUTE) //its a NECK collar
+		if(!istype(to_decap))
+			stack_trace("get_bodypart(BODY_ZONE_HEAD) returned something that isn't a head.")
+		to_decap.dismember(BRUTE, zone_precise = BODY_ZONE_PRECISE_NECK, forced = TRUE) //its a NECK collar
 
 	qdel(src)
 
@@ -548,17 +550,20 @@
 	grid_height = 32
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!iscarbon(target))
-		return
+/obj/item/collar_detonator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!iscarbon(interacting_with))
+		return NONE
 
-	var/mob/living/carbon/to_bomb = target
+	var/mob/living/carbon/to_bomb = interacting_with
+
 	var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
+
 	if(istype(collar))
 		collar.prepare_to_go_boom()
 	else
 		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"
@@ -657,25 +662,35 @@
 	icon_state = "horus"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	sellprice = 30
+	sellprice = 75
 
 /obj/item/clothing/neck/mercator/examine()
 	. = ..()
-	. += span_info("Click on a turf or an item to see how much it is worth.")
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
-	. = ..()
+/obj/item/clothing/neck/mercator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	var/total_sellprice = 0
-	if(isturf(A))
-		for(var/obj/item/I in A.contents)
-			total_sellprice += I.sellprice
+
+	if(isturf(interacting_with))
+		visible_message("[user] peers at the items on the [interacting_with] through their amulet.")
+
+		for(var/obj/item/assessed_item in interacting_with)
+			total_sellprice += assessed_item.sellprice
+
 		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
-	else if(istype(A, /obj/item))
-		var/obj/item/I = A
-		total_sellprice += I.sellprice
-		for(var/obj/item/item in I.contents)
+		return ITEM_INTERACT_SUCCESS
+
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] peers at the [interacting_with] through their amulet.")
+
+		var/obj/item/assessed_item = interacting_with
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
 			total_sellprice += item.sellprice
+
 		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"
