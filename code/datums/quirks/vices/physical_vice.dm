@@ -485,9 +485,10 @@
 	if(!ishuman(owner))
 		return
 	owner.attributes?.add_sheet(/datum/attribute_holder/sheet/job/frail_quirk)
+	return ..()
 
 /datum/quirk/vice/frail/on_remove()
 	if(!ishuman(owner))
 		return
 	owner.attributes?.subtract_sheet(/datum/attribute_holder/sheet/job/frail_quirk)
-
+	return ..()
