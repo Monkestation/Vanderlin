@@ -138,17 +138,20 @@
 
 	// Generate inscription
 	if(to_be_interred && grave.headstone)
-		var/custom_messages
+		var/custom_message
 		if(!outfit_override?.grave_messages)
-			custom_messages = file2list("strings/grave_messages.txt")
+			custom_message = pick(file2list("strings/grave_messages.txt"))
 		else
-			custom_messages = outfit_override.grave_messages
+			custom_message = pick(outfit_override.grave_messages)
 			// We don't need outfit_override anymore, qdel it since we spawned it
 			qdel(outfit_override)
+		grave.headstone.custom_message = custom_message
+
 		grave.headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[to_be_interred.real_name]</span>\
 		<br>\
 		<br>\
-		<span class='italics'>[pick(custom_messages)]</span>"
+		<span class='italics'>[custom_message]</span>\
+		[to_be_interred.final_words ? "<br><span class='god_necra'>[pick(to_be_interred.final_words)]</span>" : null]"
 
 	//Update Grave
 	grave.no_devotion = TRUE // No devotion from these graves
@@ -208,6 +211,10 @@
 		// We also replace name
 		if(outfit_override.mob_names)
 			body.fully_replace_character_name(body.name, pick(outfit_override.mob_names))
+
+	// Final words (if set)
+	if(outfit_override?.final_words)
+		body.final_words = pick(outfit_override.final_words)
 
 	to_be_interred = body
 

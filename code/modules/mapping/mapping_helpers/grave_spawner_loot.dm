@@ -122,6 +122,8 @@
 	var/mob/living/carbon/human/mob_to_spawn = /mob/living/carbon/human/species/human/northern
 	/// Potential messages engraved on their headstone, if they have one
 	var/list/grave_messages
+	/// Final words they can have
+	var/list/final_words
 
 /datum/outfit/grave/unique/ravox_saint
 	name = "Ravox Saint (Deceased)"
@@ -143,3 +145,4 @@
 	mob_names = list("Saint Placida", "Saint Alexia", "Saint Paisley", "Saint Remington")
 	mob_to_spawn = /mob/living/carbon/human/species/human/northern
 	grave_messages = list("Served with distinction, died with honor.", "May their life be an example to all.", "Pledged to devote their life to justice, and kept it.", "Hero of the Goblin Wars, gave their life in service to these lands.")
+	final_words = list(SPAN_GOD_RAVOX("May I serve justice in the lives to come..."), SPAN_GOD_RAVOX("I hope only that the virtues of Ravox live strong in the hearts of those who come after..."), SPAN_GOD_RAVOX("To those who gaze upon me now, know this; Justice shall always prevail in the end!"))
