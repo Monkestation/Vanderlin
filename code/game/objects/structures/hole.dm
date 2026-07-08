@@ -73,7 +73,7 @@
 /obj/structure/closet/dirthole/examine(mob/user)
 	. = ..()
 	if(headstone?.inscription)
-		. += span_info("\A [headstone] is ontop and reads the following...<br>")
+		. += span_info("\A [headstone] is ontop and reads the following...")
 		. += headstone.inscription
 	if(is_consecrated)
 		switch(gravequality)
