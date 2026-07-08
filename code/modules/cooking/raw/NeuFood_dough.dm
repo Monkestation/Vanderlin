@@ -1604,7 +1604,7 @@
 
 /obj/item/reagent_containers/food/snacks/grenzelbun
 	name = "grenzelbun"
-	desc = "" // handled upon examine
+	desc = "The classic wiener in a bun, a staple food of Grenzelhoft cuisine." // handled upon examine
 	icon_state = "grenzbun"
 	base_icon_state = "grenzbun"
 	bitesize = 5
@@ -1620,13 +1620,15 @@
 /obj/item/reagent_containers/food/snacks/grenzelbun/examine(mob/examiner)
 	. = ..()
 	if (!ishuman(examiner)) // avoid runtimes
-		. += span_info("The classic wiener in a bun, a staple food of Grenzelhoft cuisine.")
 		return
 	else
 		var/mob/living/carbon/human/user = examiner
 		if(user.culture.name == "Grenzelhoft")
-			. += span_info("(CULTURE : GRENZELHOFT) Shameless cultural appropriation in the form of a bun. \
-			Any true resident of the Black Empire knows sausages go best with mashed tatoes.")
+			var/str = "<details><summary><b>ANTHOLOGY:</b> [span_tooltip("You are from Grenzelhoft", user.culture.name)]</summary>"
+			str += "Shameless cultural appropriation in the form of a bun. \
+			Any true resident of the Black Empire knows sausages go best with mashed tatoes."
+			. += span_info(str)
+
 
 
 
