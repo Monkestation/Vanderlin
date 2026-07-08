@@ -465,6 +465,7 @@ All foods are distributed among various categories. Use common sense.
 		var/mob/living/simple_animal/animal = interacting_with
 		if(!animal.eat_food(src))
 			return ITEM_INTERACT_BLOCKING
+		animal.eat_food_after(src)
 		return ITEM_INTERACT_SUCCESS
 
 	if(!iscarbon(interacting_with))

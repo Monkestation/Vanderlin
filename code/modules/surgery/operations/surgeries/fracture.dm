@@ -20,7 +20,9 @@
 	return image(/obj/item/weapon/surgery/bonesetter)
 
 /datum/surgery_operation/limb/fix_bones/all_required_strings()
-	return ..() + list("the limb must have bones")
+	. = ..()
+	. += "the limb must have bones"
+	. += "the bone must be fractured"
 
 /datum/surgery_operation/limb/fix_bones/state_check(obj/item/bodypart/limb)
 	return LIMB_HAS_BONES(limb) && limb.has_wound(/datum/wound/fracture)

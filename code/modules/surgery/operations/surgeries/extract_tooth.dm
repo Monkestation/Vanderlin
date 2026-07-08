@@ -23,7 +23,8 @@
 	return image(/obj/item/weapon/tongs)
 
 /datum/surgery_operation/basic/extract_tooth/all_required_strings()
-	return list("patient needs teeth") + ..()
+	. = ..()
+	. += "patient must have teeth"
 
 /datum/surgery_operation/basic/extract_tooth/state_check(mob/living/patient)
 	var/obj/item/bodypart/mouth/mouth = patient.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
