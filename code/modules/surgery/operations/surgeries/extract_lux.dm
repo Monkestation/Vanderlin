@@ -23,17 +23,27 @@
 /datum/surgery_operation/basic/extract_lux/get_default_radial_image()
 	return image(/obj/item/reagent_containers/lux)
 
+/datum/surgery_operation/basic/extract_lux/all_required_strings()
+	. = ..()
+	. += "the patient must be alive"
+	. += "the patient must have lux"
+	. += "the patient must have a heart"
+
 /datum/surgery_operation/basic/extract_lux/state_check(mob/living/patient)
 	if(patient.stat == DEAD)
-		return FALSE
-
-	if(patient.get_lux_status() != LUX_HAS_LUX)
 		return FALSE
 
 	if(!patient.getorganslot(ORGAN_SLOT_HEART))
 		return FALSE
 
 	return TRUE
+
+/datum/surgery_operation/basic/extract_lux/pre_preop(mob/living/patient, mob/living/surgeon, tool, list/operation_args)
+	. = ..()
+
+	if(patient.get_lux_status() != LUX_HAS_LUX)
+		patient.balloon_alert(surgeon, "luxless!")
+		return FALSE
 
 /datum/surgery_operation/basic/extract_lux/on_preop(mob/living/patient, mob/living/surgeon, tool, list/operation_args)
 	display_results(
