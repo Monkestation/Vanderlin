@@ -1604,7 +1604,7 @@
 
 /obj/item/reagent_containers/food/snacks/grenzelbun
 	name = "grenzelbun"
-	desc = "The classic wiener in a bun, a staple food of Grenzelhoft cuisine."
+	desc = "" // handled upon examine
 	icon_state = "grenzbun"
 	base_icon_state = "grenzbun"
 	bitesize = 5
@@ -1616,6 +1616,14 @@
 	faretype = FARE_NEUTRAL
 	tastes = list("savory sausage" = 1, "bread" = 1)
 	item_weight = 180 GRAMS
+
+/obj/item/reagent_containers/food/snacks/grenzelbun
+	. = ..()
+	if(user.mind.culture == /datum/culture/universal/grenzelhoft)
+		. += SPAN_PSYDON_OLD("Shameless cultural appropriation. \
+		Any true resident of the Black Empire knows sausages go best with mashed tatoes.")
+	else
+		. += span_info("The classic wiener in a bun, a staple food of Grenzelhoft cuisine.")
 
 /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole
 	name = "grenzelbun with cocaumole"
