@@ -105,3 +105,35 @@
   dwasint:
   - bugfix: Rollers now properly pass rotational data through itself
   - bugfix: waterwheels behave correctly in weirder situations
+2026-07-08:
+  Banditwithdrugs:
+  - rscadd: Added a recipie for decorated dagger that uses one steel bar+iron bar
+      to craft 2 decorated daggers
+  Ben10083:
+  - map: The Saint's Coffin at Vanderlin Forest is now a custom grave with special
+      loot for would be robbers
+  - code_imp: Gravespawner map helper now supports custom outfits and/or bodies
+  CheffieGithub:
+  - bugfix: fixed infinite feeding the broodmother
+  - bugfix: Fixed siege skeletons not being able to claw people
+  ModDownloading:
+  - bugfix: Steward can no longer reassign the job of the current Monarch.
+  - bugfix: Extractor in the Sewer Drug Den is now a Splitter.
+  SSensum13:
+  - rscadd: Added 2 more vices (weak and frail), that gives you STR and CON debuffs.
+  - bugfix: Fixed Unlucky vice that was not giving you a stat debuff.
+  - balance: Now if you hug a person before or after they fall asleep - they will
+      not scream, if they have Nitemares vice.
+  - qol: Backstory boon now have better clarity on how much stats it gives and what
+      value acts as clamp.
+  - balance: Combat backstories now give you 20 skills, instead of 10, while still
+      being clamped to not go higher than 20.
+  Sulaboy:
+  - qol: Meat hooks have a mechanics tab for instructions. You can butcher on meat
+      hooks with more sharp items.
+  Wrench-1:
+  - bugfix: fixes examinations. people who are part of families can no longer see
+      the jobs of people they don't even know
+  tired-wired:
+  - rscadd: Added a Rockhill accent.
+  - bugfix: Fixed the Rockhill knight's hat. Now it's a helmet.
