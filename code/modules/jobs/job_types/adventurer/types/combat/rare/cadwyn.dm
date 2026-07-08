@@ -67,9 +67,6 @@
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
-/datum/job/advclass/combat/cadwyn/on_roundstart(mob/living/spawned, client/player_client)
-	. = ..()
-
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/cadwyn/patron/astrata)
