@@ -1,6 +1,7 @@
 /datum/attribute_holder
 	var/datum/attribute/closely_inspected_attribute = null
 	var/show_bad_skills = FALSE
+	var/preview_image_b64
 
 GLOBAL_LIST_EMPTY(attribute_menu_static_payload)
 GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
@@ -103,11 +104,24 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 	return values
 
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
+	preview_image_b64 = build_character_preview()
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AttributeMenu")
 		ui.set_autoupdate(FALSE)
 		ui.open()
+
+/datum/attribute_holder/proc/build_character_preview()
+	if(!parent)
+		return null
+	return "data:image/png;base64,[icon2base64(getFlatIcon(parent, SOUTH, no_anim = TRUE))]"
+
+/datum/attribute_holder/proc/on_parent_appearance_changed()
+	SIGNAL_HANDLER
+	if(!LAZYLEN(open_uis))
+		return
+	preview_image_b64 = build_character_preview()
+	SStgui.update_uis(src)
 
 /datum/attribute_holder/ui_state(mob/user)
 	return GLOB.always_state
@@ -117,7 +131,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 		get_asset_datum(/datum/asset/spritesheet/attributes_big),
 		get_asset_datum(/datum/asset/spritesheet/attributes_small),
 		get_asset_datum(/datum/asset/spritesheet/attribute_seals),
-		get_asset_datum(/datum/asset/spritesheet/attribute_menu_cat),
 	)
 
 /datum/attribute_holder/ui_static_data(mob/user)
@@ -128,6 +141,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
 	data["show_bad_skills"] = show_bad_skills
 	data["parent"] = parent?.name
+	data["preview_image"] = preview_image_b64
 
 	var/list/stats_values = list()
 	for(var/stat_type in GLOB.all_stats)

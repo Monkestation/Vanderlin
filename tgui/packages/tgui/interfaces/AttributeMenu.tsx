@@ -13,9 +13,6 @@ import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Input, Section, Stack, Tooltip } from 'tgui-core/components';
 import { Window } from '../layouts';
 
-const CAT_SPRITESHEET_CLASS = 'attribute_menu_cat256x256';
-const CAT_TOOLTIP = "The scribe's cat, asleep at the center of it all.";
-
 const SEAL_SPRITESHEET_CLASS = 'attribute_seals104x104';
 const SEAL_STATES = new Set([
   'strength',
@@ -48,7 +45,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     title: 'Character Seals',
-    body: 'The left page bears six Core Attribute seals arranged around the sleeping cat: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
+    body: 'The left page bears six Core Attribute seals arranged around your portrait: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
     target: '.AttributeMenu__panel--seals',
     popupAnchor: 'right',
   },
@@ -352,6 +349,7 @@ interface AttributeData {
 
   show_bad_skills: boolean;
   parent?: string;
+  preview_image?: string;
   stats_values?: Record<string, AttributeValues>;
   skills_values?: Record<string, AttributeValues>;
   closely_inspected?: CloselyInspectedDynamic | null;
@@ -409,17 +407,25 @@ const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
   );
 });
 
-const RingFigure = memo(() => (
-  <>
-    <div className="AttributeMenu__ringCircle AttributeMenu__ringCircle--outer" />
-    <div className="AttributeMenu__ringCircle AttributeMenu__ringCircle--track" />
-    <Tooltip content={CAT_TOOLTIP} position="bottom">
-      <div className="AttributeMenu__catFigure">
-        <span className={`${CAT_SPRITESHEET_CLASS} cat_rest`} />
-      </div>
-    </Tooltip>
-  </>
-));
+const RingFigure = memo((props: { previewImage?: string; subject?: string }) => {
+  const { previewImage, subject } = props;
+
+  return (
+    <>
+      <div className="AttributeMenu__ringCircle AttributeMenu__ringCircle--outer" />
+      <div className="AttributeMenu__ringCircle AttributeMenu__ringCircle--track" />
+      {previewImage && (
+        <Tooltip content={subject || 'Your character'} position="bottom">
+          <img
+            className="AttributeMenu__previewFigure"
+            src={previewImage}
+            alt={subject || 'Character portrait'}
+          />
+        </Tooltip>
+      )}
+    </>
+  );
+});
 
 const AttributeSealNode = memo((props: {
   stat: ResolvedStat;
@@ -473,8 +479,10 @@ const CoreAttributes = memo((props: {
   selectedName?: string | null;
   act: any;
   onHelpClick: () => void;
+  previewImage?: string;
+  subject?: string;
 }) => {
-  const { stats, selectedName, act, onHelpClick } = props;
+  const { stats, selectedName, act, onHelpClick, previewImage, subject } = props;
 
   return (
     <Section
@@ -504,7 +512,7 @@ const CoreAttributes = memo((props: {
         )}
         {!!stats.length && (
           <Box className="AttributeMenu__ringStage">
-            <RingFigure />
+            <RingFigure previewImage={previewImage} subject={subject} />
             {stats.map((stat) => (
               <AttributeSealNode
                 key={stat.name}
@@ -955,6 +963,8 @@ export const AttributeMenu = () => {
               selectedName={selectedName}
               act={act}
               onHelpClick={openTutorial}
+              previewImage={data.preview_image}
+              subject={parent}
             />
             <SkillRegister
               categoriesMeta={skillsMetaSafe}
