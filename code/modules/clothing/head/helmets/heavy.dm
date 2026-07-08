@@ -713,8 +713,3 @@
 	bloody_icon_state = "itemblood"
 	worn_x_dimension = 32
 	worn_y_dimension = 32
-
-/obj/item/clothing/cloak/cape/crusader
-	name = ...
-	desc = ...
-	has_storage = TRUE

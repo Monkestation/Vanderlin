@@ -67,6 +67,7 @@
 	if(ishumannorthern(spawned) && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
+	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/cadwyn/patron/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
