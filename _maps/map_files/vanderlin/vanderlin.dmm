@@ -3172,7 +3172,7 @@
 /area/indoors/town)
 "bAZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/machinery/essence/extractor,
+/obj/machinery/essence/splitter,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "bBc" = (
