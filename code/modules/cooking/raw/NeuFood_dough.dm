@@ -1617,13 +1617,19 @@
 	tastes = list("savory sausage" = 1, "bread" = 1)
 	item_weight = 180 GRAMS
 
-/obj/item/reagent_containers/food/snacks/grenzelbun
+/obj/item/reagent_containers/food/snacks/grenzelbun/examine(mob/examiner)
 	. = ..()
-	if(user.mind.culture == /datum/culture/universal/grenzelhoft)
-		. += SPAN_PSYDON_OLD("Shameless cultural appropriation. \
-		Any true resident of the Black Empire knows sausages go best with mashed tatoes.")
-	else
+	if (!ishuman(examiner)) // avoid runtimes
 		. += span_info("The classic wiener in a bun, a staple food of Grenzelhoft cuisine.")
+		return
+	else
+		var/mob/living/carbon/human/user = examiner
+		if(user.culture.name == "Grenzelhoft")
+			. += span_info("(CULTURE : GRENZELHOFT) Shameless cultural appropriation in the form of a bun. \
+			Any true resident of the Black Empire knows sausages go best with mashed tatoes.")
+
+
+
 
 /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole
 	name = "grenzelbun with cocaumole"
