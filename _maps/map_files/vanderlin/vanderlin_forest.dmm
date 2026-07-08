@@ -5364,7 +5364,9 @@
 	outfit_override = /datum/outfit/grave/unique/ravox_saint
 	},
 /turf/open/floor/dirt/road,
-/area/indoors/dungeon)
+/area/indoors/dungeon{
+	name = "saint's resting grounds"
+	})
 "DX" = (
 /obj/structure/bed/hay{
 	pixel_y = 14
@@ -7224,9 +7226,7 @@
 /area/indoors/wilderness/gallowband/garrison)
 "Oh" = (
 /obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite{
-	force_consecrate = 1
-	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "Oj" = (
