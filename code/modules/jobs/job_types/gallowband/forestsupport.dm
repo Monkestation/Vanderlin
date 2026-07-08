@@ -51,6 +51,7 @@
 		TRAIT_FORAGER
 	)
 
+	mind_traits = list(TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestsupport/set_spawn_and_total_positions(count)

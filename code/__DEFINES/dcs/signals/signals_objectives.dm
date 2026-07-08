@@ -28,7 +28,7 @@
 #define COMSIG_ROTTEN_FOOD_EATEN "rotten_food_eaten"
 /// from base of /datum/status_effect/buff/lux_drank/on_apply() ()
 #define COMSIG_LUX_TASTED "lux_tasted"
-/// from base of //mob/living/carbon/monkey/attack_hand() (victim)
+/// from base of //mob/living/carbon/attack_hand() (victim)
 #define COMSIG_HEAD_PUNCHED "head_punched"
 /// from base of /datum/action/cooldown/spell/transform_tree/cast() ()
 #define COMSIG_TREE_TRANSFORMED "tree_transformed"

@@ -14,15 +14,13 @@
 	accessory_type = /datum/sprite_accessory/eyes/humanoid
 	organ_efficiency = list(ORGAN_SLOT_EYES = 100)
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	maxHealth = 0.5 * STANDARD_ORGAN_THRESHOLD		//half the normal health max since we go blind at 30, a permanent blindness at 50 therefore makes sense unless medicine is administered
 	high_threshold = 0.3 * STANDARD_ORGAN_THRESHOLD	//threshold at 30
 	low_threshold = 0.2 * STANDARD_ORGAN_THRESHOLD	//threshold at 20
 
 	low_threshold_passed = "<span class='info'>Distant objects become somewhat less tangible.</span>"
 	high_threshold_passed = "<span class='info'>Everything starts to look a lot less clear.</span>"
-	now_failing = "<span class='warning'>Darkness envelops me, as my eye goes blind!</span>"
+	now_failing = "<span class='warning'>Darkness envelops me, as my eyes goes blind!</span>"
 	now_fixed = "<span class='info'>Color and shapes are once again perceivable.</span>"
 	high_threshold_cleared = "<span class='info'>My vision functions passably once more.</span>"
 	low_threshold_cleared = "<span class='info'>My vision is cleared of any ailment.</span>"
@@ -31,13 +29,14 @@
 	organ_volume = 0.25
 	max_blood_storage = 5
 	current_blood = 5
-	blood_req = 1
+	blood_req = 0.5
 	oxygen_req = 0.5
 	nutriment_req = 0.15
 	hydration_req = 0.15
 
 	var/sight_flags = 0
 	var/see_in_dark = 8
+	/// How much innate tint these eyes have
 	var/tint = 0
 	var/eye_icon_state = "eye"
 	var/flash_protect = FLASH_PROTECTION_NONE

@@ -170,10 +170,18 @@
 /mob/living/carbon/proc/update_eyes()
 	if(!client)
 		return
-	var/obj/item/organ/eyes/LE = LAZYACCESS(eye_organs, 1)
-	var/obj/item/organ/eyes/RE = LAZYACCESS(eye_organs, 2)
-	var/left_damage = (LE ? LE.get_eye_damage_level() : 3)
-	var/right_damage = (RE ? RE.get_eye_damage_level() : 3)
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(eye_organs, 1)
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(eye_organs, 2)
+	var/left_damage
+	if(!left_eye || has_wound(/datum/wound/facial/eyes/left/permanent))
+		left_damage = 3
+	else
+		left_damage = left_eye.get_eye_damage_level()
+	var/right_damage
+	if(!right_eye || has_wound(/datum/wound/facial/eyes/right/permanent))
+		right_damage = 3
+	else
+		right_damage = right_eye.get_eye_damage_level()
 	if((left_damage >= 3) && (right_damage >= 3))
 		become_blind(EYE_DAMAGE)
 		return TRUE

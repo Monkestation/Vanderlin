@@ -176,14 +176,6 @@
 			dat += "</table>"
 			usr << browse(dat, "window=fingerprints;size=440x410")
 
-		if("monkey")
-			if(!check_rights(R_FUN))
-				return
-			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Monkeyize All Humans"))
-			for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
-				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon, monkeyize))
-			ok = 1
-
 		if("allspecies")
 			if(!check_rights(R_FUN))
 				return

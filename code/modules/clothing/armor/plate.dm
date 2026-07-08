@@ -95,14 +95,11 @@
 
 /obj/item/clothing/armor/plate/full/samsibsa/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
-	var/playerchoice = COLOR_MAP[choice]
-	detail_color = playerchoice
-	update_icon()
-	if(loc == user && ishuman(user))
-		var/mob/living/carbon/H = user
-		H.update_inv_armor()
-		H.update_icon()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)
 
 /obj/item/clothing/armor/plate/full/iron
 	name = "iron plate armor"
@@ -132,19 +129,16 @@
 	item_weight = 8.75 KILOGRAMS
 
 /obj/item/clothing/armor/plate/silver
-	slot_flags = ITEM_SLOT_ARMOR
 	name = "templar's half-plate"
 	desc = "Noc's holy silver, one fifth. Steel, three fifths. Chosen Material, one fifth. The armor of the Templar, protector and warrior of the Ten's Faithful."
-	body_parts_covered = COVERAGE_TORSO
 	icon_state = "silverhalfplate"
-	item_state = "silverhalfplate"
+	body_parts_covered = COVERAGE_TORSO
 	armor = ARMOR_PLATE
 	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
 	allowed_sex = list(MALE, FEMALE)
-	melting_material = /datum/material/steel
+	melting_material = /datum/material/silver
 	melt_amount = 275
 	armor_class = AC_MEDIUM
-
 
 /obj/item/clothing/armor/plate/blkknight
 	name = "blacksteel plate"

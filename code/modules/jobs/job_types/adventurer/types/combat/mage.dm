@@ -63,8 +63,6 @@
 	beltr = /obj/item/storage/magebag/poor
 	beltl = /obj/item/reagent_containers/glass/bottle/manapot
 	r_hand = /obj/item/weapon/polearm/woodstaff
-
-
 	backpack_contents = list(
 		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1,

@@ -215,7 +215,7 @@
 			return ..(carbon, force, FALSE)
 
 	for(var/obj/item/grabbing/G in M.grabbedby)
-		if(G.grab_state == GRAB_AGGRESSIVE)
+		if(G.grab_state >= GRAB_AGGRESSIVE)
 			return ..(M, force, FALSE)
 
 	to_chat(usr, span_warning("I must grab them more forcefully to put them in [src]."))
@@ -250,32 +250,6 @@
 	M.remove_offsets(type)
 	M.layer -= GUILLOTINE_LAYER_DIFF
 	..()
-
-/obj/structure/guillotine/can_be_unfasten_wrench(mob/user, silent)
-	if (LAZYLEN(buckled_mobs))
-		if (!silent)
-			to_chat(user, "<span class='warning'>Can't unfasten, someone's strapped in!</span>")
-		return FAILED_UNFASTEN
-
-	if (current_action)
-		return FAILED_UNFASTEN
-
-	return ..()
-
-/obj/structure/guillotine/wrench_act(mob/living/user, obj/item/I)
-	. = ..()
-	if (current_action)
-		return
-
-	current_action = GUILLOTINE_ACTION_WRENCH
-
-	if (do_after(user, GUILLOTINE_WRENCH_DELAY, src))
-		current_action = 0
-		default_unfasten_wrench(user, I, 0)
-		setDir(SOUTH)
-		return TRUE
-	else
-		current_action = 0
 
 #undef GUILLOTINE_BLADE_MAX_SHARP
 #undef GUILLOTINE_DECAP_MIN_SHARP

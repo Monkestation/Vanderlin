@@ -154,3 +154,8 @@
 	name = "Drowsbane"
 	cost = 15
 	contains = /obj/item/neuFarm/seed/spore/drowsbane
+
+/datum/supply_pack/seeds/ollie
+	name = "Ollie"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/ollie

@@ -164,17 +164,22 @@
 	else
 		. += span_info("Its thorns have been trimmed.")
 
-/obj/item/ore/cursedrosa/attackby(obj/item/I, mob/living/user, params)
-	if(!user.cmode && istype(I, /obj/item/weapon/knife))
-		var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
-		if(QDELETED(thorns))
-			to_chat(user, span_warning("It has no thorns to trim."))
-		else
-			user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
-			playsound(I, 'sound/items/flint.ogg', 100, TRUE)
-			qdel(thorns)
-		return
-	return ..()
+/obj/item/ore/cursedrosa/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/weapon/knife))
+		return NONE
+
+	var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
+	if(QDELETED(thorns))
+		to_chat(user, span_warning("It has no thorns to trim."))
+	else
+		user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
+		playsound(tool, 'sound/items/flint.ogg', 100, TRUE)
+		qdel(thorns)
+
+	return ITEM_INTERACT_SUCCESS
 
 /* ............Ingots............ */
 /obj/item/ingot
@@ -223,7 +228,7 @@
 	icon_state = "ingotgold"
 	smeltresult = /obj/item/ingot/gold
 	melting_material = /datum/material/gold
-	sellprice = 100
+	sellprice = M_GOLD
 	item_weight = 12.25 KILOGRAMS
 
 /obj/item/ingot/iron
@@ -232,7 +237,7 @@
 	icon_state = "ingotiron"
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
-	sellprice = 25
+	sellprice = M_IRON
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/thaumic
@@ -242,7 +247,7 @@
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	smeltresult = /obj/item/ingot/thaumic
 	melting_material = /datum/material/thaumic_iron
-	sellprice = 25
+	sellprice = M_IRON
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/copper
@@ -251,7 +256,7 @@
 	icon_state = "ingotcop"
 	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
-	sellprice = 10
+	sellprice = M_IRON * 0.5
 	item_weight = 5.7 KILOGRAMS
 
 /obj/item/ingot/tin
@@ -260,7 +265,7 @@
 	icon_state = "ingottin"
 	smeltresult = /obj/item/ingot/tin
 	melting_material = /datum/material/tin
-	sellprice = 15
+	sellprice = M_IRON * 0.75
 	item_weight = 4.6 KILOGRAMS
 
 /obj/item/ingot/bronze
@@ -269,7 +274,7 @@
 	icon_state = "ingotbronze"
 	smeltresult = /obj/item/ingot/bronze
 	melting_material = /datum/material/bronze
-	sellprice = 30
+	sellprice = M_IRON * 2
 	item_weight = 5.55 KILOGRAMS
 
 /obj/item/ingot/silver
@@ -278,7 +283,7 @@
 	icon_state = "ingotsilv"
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
-	sellprice = 60
+	sellprice = M_SILVER
 	item_weight = 6.65 KILOGRAMS
 
 /obj/item/ingot/silver/Initialize(mapload)
@@ -291,7 +296,7 @@
 	icon_state = "ingotsteel"
 	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
-	sellprice = 40
+	sellprice = M_STEEL
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/steelholy
@@ -300,7 +305,7 @@
 	icon_state = "ingotsteelholy"
 	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel //Smelting it removes the blessing
-	sellprice = 60
+	sellprice = M_STEEL * 1.5
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/silverblessed
@@ -309,14 +314,14 @@
 	icon_state = "ingotsilvblessed"
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver //Smelting it removes the blessing
-	sellprice = 100
+	sellprice = M_SILVER * 1.5
 	item_weight = 6.65 KILOGRAMS
 
 /obj/item/ingot/blacksteel
 	name = "blacksteel bar"
 	desc = "Sacrificing the holy elements of silver for raw strength, this strange and powerful ingot's origin carries dark rumors..."
 	icon_state = "ingotblacksteel"
-	sellprice = 90
+	sellprice = M_BLACKSTEEL
 	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	item_weight = 5.2 KILOGRAMS
@@ -327,7 +332,7 @@
 	icon_state = "steel_slag"
 	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
-	sellprice = 40
+	sellprice = M_STEEL - 5
 	item_weight = 5.5 KILOGRAMS
 
 /obj/item/ingot/aalloy

@@ -1,6 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - rscadd: "notice board, its now the central place to accept and turn in quests typically found in the guild."
-  - rscadd: "custom quests, players can create a pledge to make a custom quest. Which can be handed in at notice boards"
-  - bugfix: "harlequin disguise has been reworked entirely and is no longer an ability"

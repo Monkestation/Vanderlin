@@ -156,7 +156,7 @@
 			B = mouth
 		else
 			B.bitelimb(src)
-		if(C.blood_volume <= 0 || HAS_TRAIT(C, TRAIT_HUSK) || (NOBLOOD in C.dna?.species?.species_traits))
+		if(HAS_TRAIT(C, TRAIT_HUSK) || !CAN_HAVE_BLOOD(C) || !C.get_blood_volume())
 			return
 		B.drinklimb(src)
 

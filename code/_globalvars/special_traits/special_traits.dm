@@ -49,6 +49,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	apply_prefs_special(character, player)
 	apply_voicepacks(character, player)
 
+	// These need to get updated for traits
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(character)
+
 /proc/apply_prefs_special(mob/living/carbon/human/character, client/player)
 	if(!player)
 		player = character.client
@@ -64,7 +68,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	player.prefs.save_preferences()
 
 /proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
-	switch(player.prefs.voice_type)
+	switch(player.prefs.read_preference(/datum/preference/choiced/voice_type))
 		if(VOICE_TYPE_MASC_FOP)
 			character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
 		if(VOICE_TYPE_FEM_DAINTY)

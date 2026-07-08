@@ -33,7 +33,8 @@
 	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity_flag) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
-	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers)
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
 
 	var/rmb_stam_penalty = 1
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
@@ -86,12 +87,16 @@
 
 	A.attack_hand(src, modifiers)
 
-/mob/living/attack_hand_secondary(mob/user, list/modifiers)
+/mob/living/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+	if(.)
 		return
 
-	user.changeNext_move(CLICK_CD_MELEE)
+	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return
+
+	if(user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK)))
+		return TRUE
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -99,24 +104,56 @@
 		return
 
 	if(user.cmode)
+		return SECONDARY_ATTACK_CALL_NORMAL // Punch
+
+	if(!ishuman(user) || user == src)
 		return
 
-	if(ishuman(user) && user != src)
-		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(length(user.return_apprentices()) >= user.return_max_apprentices())
+	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+		var/zones = list(
+			BODY_ZONE_PRECISE_NECK,
+			BODY_ZONE_L_ARM,
+			BODY_ZONE_R_ARM,
+			BODY_ZONE_PRECISE_L_HAND,
+			BODY_ZONE_PRECISE_R_HAND,
+		)
+		if(user.zone_selected in zones)
+			check_pulse(user)
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ..()
+
+	if(!mind)
+		return
+
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(length(user.return_apprentices()) >= user.return_max_apprentices())
+		to_chat(user, span_notice("I have too many apprentices."))
+		return
+
+	if(is_apprentice())
+		to_chat(user, span_notice("[p_they(TRUE)] are under the tutelage of someone else."))
+		return
+
+	var/datum/job/my_job = mind?.assigned_role
+	if(istype(my_job))
+		if(!my_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		if(is_apprentice())
+
+		if(my_job.parent_job && !my_job.parent_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		var/datum/job/my_job = mind?.assigned_role
-		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
-			return
-		var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
-		if(choice != CHOICE_CONFIRM)
-			return
-		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
-			return
-		to_chat(user, span_notice("You offer apprenticeship to [src]."))
-		user.make_apprentice(src)
+
+	var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+	if(choice != CHOICE_CONFIRM)
+		return
+
+	if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
+		return
+
+	to_chat(user, span_notice("I offer apprenticeship to [src]."))
+	user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
 	return
@@ -225,7 +262,7 @@
 				open_wound.werewolf_infect_attempt()
 				if(prob(30))
 					H.werewolf_feed(src)
-		if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
+		if(IS_DEADITE(user) && !IS_DEADITE(src))
 			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 
 
@@ -342,9 +379,9 @@
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	if(user.cmode)
-		if(user.rmb_intent?.special_attack(user, src))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(user.cmode && user.rmb_intent?.special_attack(user, src))
+		user.changeNext_move(CLICK_CD_MELEE)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -394,8 +431,7 @@
 		return ui_interact(user)
 	return FALSE
 
-
-/mob/living/carbon/human/RangedAttack(atom/A, list/modifiers)
+/mob/living/carbon/human/ranged_attack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
@@ -430,7 +466,7 @@
 		var/exp_to_gain = GET_MOB_ATTRIBUTE_VALUE(thief, STAT_INTELLIGENCE) * 1.5
 		var/list/stealablezones = list(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
 		var/list/stealpos = list()
-		if(client?.prefs.showrolls)
+		if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(thief, span_info("Your stealing skill roll of [thiefskill]d6 is [stealroll]..."))
 		if(stealroll >= target_perception)
 			if(thief.get_active_held_item())
@@ -565,7 +601,7 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.getPainLoss() / 50
+		jadded += H.getShockStage() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1
@@ -651,35 +687,6 @@
 
 /atom/proc/attack_animal(mob/user)
 	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, user)
-
-/*
-	Monkeys
-*/
-/mob/living/carbon/monkey/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		if(a_intent != INTENT_HARM || is_muzzled())
-			return
-		if(!iscarbon(A))
-			return
-		var/mob/living/carbon/victim = A
-		var/obj/item/bodypart/affecting = null
-		if(ishuman(victim))
-			var/mob/living/carbon/human/human_victim = victim
-			affecting = human_victim.get_bodypart(pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
-		var/armor = victim.run_armor_check(affecting, "melee")
-		if(prob(25))
-			victim.visible_message("<span class='danger'>[src]'s bite misses [victim]!</span>",
-				"<span class='danger'>You avoid [src]'s bite!</span>", "<span class='hear'>You hear jaws snapping shut!</span>", COMBAT_MESSAGE_RANGE, src)
-			to_chat(src, "<span class='danger'>Your bite misses [victim]!</span>")
-			return
-		victim.apply_damage(rand(1, 3), BRUTE, affecting, armor)
-		victim.visible_message("<span class='danger'>[name] bites [victim]!</span>",
-			"<span class='userdanger'>[name] bites you!</span>", "<span class='hear'>You hear a chomp!</span>", COMBAT_MESSAGE_RANGE, name)
-		to_chat(name, "<span class='danger'>You bite [victim]!</span>")
-		if(armor >= 2)
-			return
-		return
-	A.attack_paw(src)
 
 /atom/proc/attack_paw(mob/user)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_PAW, user) & COMPONENT_CANCEL_ATTACK_CHAIN)

@@ -138,32 +138,6 @@
 	else
 		mode() // Activate held item
 
-/mob/living/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!user.cmode && (istype(user.rmb_intent, /datum/rmb_intent/weak) || istype(user.rmb_intent, /datum/rmb_intent/strong)))
-		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
-		var/list/possible_steps = list()
-		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
-			if(!surgery_step.name)
-				continue
-			if(surgery_step.can_do_step(user, src, user.zone_selected, I, user.used_intent))
-				possible_steps[surgery_step.name] = surgery_step
-		var/possible_len = length(possible_steps)
-		if(possible_len)
-			var/datum/surgery_step/done_step
-			if(possible_len > 1)
-				var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
-				if(input)
-					done_step = possible_steps[input]
-			else
-				done_step = possible_steps[possible_steps[1]]
-			if(done_step?.try_op(user, src, user.zone_selected, I, user.used_intent, try_to_fail))
-				return TRUE
-		if(I.item_flags & SURGICAL_TOOL)
-			to_chat(user, span_warning("You're unable to perform surgery!"))
-			return TRUE
-
-	return ..()
-
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	var/hurt = TRUE
@@ -252,7 +226,7 @@
 							return
 						thrown_thing = throwable_mob
 						thrown_speed = 1
-						thrown_range = round((GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)/GET_MOB_ATTRIBUTE_VALUE(throwable_mob, STAT_CONSTITUTION))*2)
+						thrown_range = round(( max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH), 1) / max(GET_MOB_ATTRIBUTE_VALUE(throwable_mob, STAT_CONSTITUTION), 1) ) * 2)
 						if(body_position == LYING_DOWN || (!HAS_TRAIT(thrown_thing, TRAIT_TINY) && throwable_mob.cmode && (throwable_mob.body_position != LYING_DOWN || GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 15)))
 							while(end_T.z > start_T.z)
 								end_T = GET_TURF_BELOW(end_T)
@@ -422,7 +396,7 @@
 	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 10)
 		cuff_break = FAST_CUFFBREAK
 		breakouttime = I.breakouttime
-	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15 || IS_DEADITE(src))
 		cuff_break = INSTANT_CUFFBREAK
 
 	if(instant)
@@ -556,6 +530,7 @@
 	. += "CON: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)]"
 	. += "END: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)]"
 	. += "SPD: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)]"
+	. += "FOR: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_FORTUNE)]"
 	. += "PATRON: [uppertext(patron.name)]"
 
 /mob/living/carbon/attack_ui(slot)
@@ -625,7 +600,7 @@
 					var/mob/living/carbon/C = src
 					C.add_stress(/datum/stress_event/vomit)
 	else
-		if(NOBLOOD in dna?.species?.species_traits)
+		if(!CAN_HAVE_BLOOD(src))
 			return TRUE
 		if(message)
 			visible_message("<span class='danger'>[src] coughs up blood!</span>", "<span class='danger'>I cough up blood!</span>")
@@ -798,30 +773,22 @@
 
 //to recalculate and update the mob's total tint from tinted equipment it's wearing.
 /mob/living/carbon/proc/update_tint()
-	if(!GLOB.tinted_weldhelh)
-		return
-	tinttotal = 0
-	if(tinttotal >= TINT_BLIND)
+	var/tint = 0
+	for(var/obj/item/clothing/worn_item in get_equipped_items(INCLUDE_ABSTRACT))
+		tint += worn_item.tint
+
+	var/obj/item/organ/eyes/LE = LAZYACCESS(eye_organs, 1)
+	var/obj/item/organ/eyes/RE = LAZYACCESS(eye_organs, 2)
+	tint += LE?.tint + RE?.tint
+
+	if(tint >= TINT_BLIND)
 		become_blind(EYES_COVERED)
-	else if(tinttotal >= TINT_DARKENED)
+	else if(tint >= TINT_DARKENED)
 		cure_blind(EYES_COVERED)
 		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 2)
 	else
 		cure_blind(EYES_COVERED)
 		clear_fullscreen("tint", 0)
-
-/mob/living/carbon/proc/get_total_tint()
-	. = 0
-	if(isclothing(head))
-		. += head.tint
-	if(isclothing(wear_mask))
-		. += wear_mask.tint
-
-	var/obj/item/organ/eyes/LE = LAZYACCESS(eye_organs, 1)
-	var/obj/item/organ/eyes/RE = LAZYACCESS(eye_organs, 2)
-	if(!RE && !LE)
-		return INFINITY //we blind
-	. += LE?.tint + RE?.tint
 
 /mob/living/carbon/get_permeability_protection(list/target_zones = list(HANDS,CHEST,GROIN,LEGS,FEET,ARMS,HEAD))
 	var/list/tally = list()
@@ -848,43 +815,43 @@
 	else
 		clear_fullscreen("CMODE")
 
-	if(health <= crit_threshold || ((blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE)))
+	if(HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_NOCRITOVERLAY))
 		var/severity = 0
 		switch(health)
-			if(-20 to -10)
+			if(80 to 90)
 				severity = 1
-			if(-30 to -20)
+			if(70 to 80)
 				severity = 2
-			if(-40 to -30)
+			if(60 to 70)
 				severity = 3
-			if(-50 to -40)
+			if(50 to 60)
 				severity = 4
-			if(-50 to -40)
+			if(50 to 60)
 				severity = 5
-			if(-60 to -50)
+			if(40 to 50)
 				severity = 6
-			if(-70 to -60)
+			if(30 to 40)
 				severity = 7
-			if(-90 to -70)
+			if(10 to 30)
 				severity = 8
-			if(-95 to -90)
+			if(5 to 10)
 				severity = 9
-			if(-INFINITY to -95)
+			if(-INFINITY to 5)
 				severity = 10
-		if(!InFullCritical())
+		if(stat != HARD_CRIT)
 			var/visionseverity = 4
 			switch(health)
-				if(-8 to -4)
+				if(92 to 96)
 					visionseverity = 5
-				if(-12 to -8)
+				if(88 to 92)
 					visionseverity = 6
-				if(-16 to -12)
+				if(84 to 88)
 					visionseverity = 7
-				if(-20 to -16)
+				if(80 to 84)
 					visionseverity = 8
-				if(-24 to -20)
+				if(76 to 80)
 					visionseverity = 9
-				if(-INFINITY to -24)
+				if(-INFINITY to 76)
 					visionseverity = 10
 			overlay_fullscreen("critvision", /atom/movable/screen/fullscreen/crit/vision, visionseverity)
 		else
@@ -931,7 +898,7 @@
 	else
 		clear_fullscreen("oxy")
 
-	var/hurtdamage = ((getPainLoss() / max(1, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))) * 100) //what percent out of 100 to max pain
+	var/hurtdamage = can_feel_pain() ? (getShockStage() / SHOCK_STAGE_MAX) * 100 : 0 //what percent out of 100 to max pain
 	if(hurtdamage)
 		var/severity = 0
 		switch(hurtdamage)
@@ -1003,11 +970,11 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			return
-		if(undergoing_nervous_system_failure() && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+		if((health <= hardcrit_threshold || undergoing_nervous_system_failure()) && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
 			set_stat(HARD_CRIT)
 		else if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
-		else if(HAS_TRAIT(src, TRAIT_SOFT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
+		else if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
 			set_stat(SOFT_CRIT)
 		else
 			set_stat(CONSCIOUS)
@@ -1030,14 +997,18 @@
 
 /mob/living/carbon/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	if(excess_healing)
-		if(dna && !(NOBLOOD in dna.species.species_traits))
-			adjust_bloodvolume(excess_healing * 2)
+		if(CAN_HAVE_BLOOD(src))
+			adjust_blood_volume(excess_healing * 2)
 
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			organ.applyOrganDamage(excess_healing * -1)
 
-	for(var/obj/item/organ/parent in internal_organs)//we treat this like the initial heart beat filling all the arteries with blood again
-		parent.current_blood = min(parent.current_blood, (parent.current_blood + (parent.max_blood_storage * 0.4)))
+	for(var/obj/item/organ/organ as anything in internal_organs)//we treat this like the initial heart beat filling all the arteries with blood again
+		var/current_blood = organ.current_blood
+		var/adjust_to = current_blood + (organ.max_blood_storage * 0.4)
+		organ.current_blood = clamp(adjust_to, current_blood, organ.max_blood_storage)
+
+	pump_heart(forced_pump = 1.3)
 
 	return ..()
 
@@ -1182,6 +1153,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)
 	. = ..()
@@ -1270,6 +1242,11 @@
 		cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 		log_admin("[key_name(usr)] has cured all traumas from [key_name(src)].")
 		message_admins("<span class='notice'>[key_name_admin(usr)] has cured all traumas from [key_name_admin(src)].</span>")
+	if(href_list[VV_HK_SHOW_RELATIONS])
+		if(!check_rights(NONE))
+			return
+		var/mob/user = usr
+		mind?.display_relations(user)
 
 /mob/living/carbon/can_resist()
 	return bodyparts.len > 2 && ..()
@@ -1317,18 +1294,6 @@
 			return FALSE
 	if(istype(loc, /turf/open/water) && body_position == LYING_DOWN)
 		return FALSE
-
-///Returns a list of all body_zones covered by clothing
-/mob/living/carbon/proc/get_covered_body_zones()
-	RETURN_TYPE(/list)
-	SHOULD_NOT_OVERRIDE(TRUE)
-
-	var/covered_flags = NONE
-	var/list/all_worn_items = get_all_worn_items(src)
-	for(var/obj/item/worn_item in all_worn_items)
-		covered_flags |= worn_item.body_parts_covered
-
-	return body_parts_covered2organ_names(covered_flags)
 
 /mob/living/carbon/proc/try_skin_burn(reaction_volume)
 	var/list/covered_zones = get_covered_body_zones()
@@ -1397,7 +1362,7 @@
 	for(var/obj/item/worn_item as anything in (get_equipped_items(TRUE) + held_items))
 		if(isnull(worn_item))
 			continue
-		. += worn_item.get_carry_weight()
+		. += worn_item.get_carry_weight(src)
 	for(var/mob/living/carbon/human/friend in buckled_mobs)
 		//For now, let's assume our friend weighs 60kg
 		. += friend.get_mob_weight()
@@ -1452,14 +1417,16 @@
 	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
 	if(!eye_dna)
 		return
+	for(var/obj/item/organ/old_eye in getorganslotlist(ORGAN_SLOT_EYES))
+		old_eye.Remove(src, TRUE)
+	var/old_eye_type = eye_dna.organ_type
 	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
 	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
 	eyes.Insert(src, TRUE)
-	update_eyes()
-
-	for(var/obj/item/organ/organs as anything in getorganslotlist(ORGAN_SLOT_EARS))
-		organs.setOrganDamage(0)
-		organs.set_germ_level(0) // this ensures we are good to hear
+	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)
+	eyes_two.switch_side(eyes_two.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+	eyes_two.Insert(src, TRUE)
+	eye_dna.organ_type = old_eye_type
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()
@@ -1499,4 +1466,38 @@
 	if(to_dismember)
 		to_dismember.dismember()
 		return TRUE
+	return FALSE
+
+/**
+ * This proc is used to determine whether or not the mob can handle touching an acid affected object.
+ */
+/mob/living/carbon/proc/can_touch_acid(atom/acided_atom)
+	// So people can take their own clothes off
+	if((acided_atom == src) || (acided_atom.loc == src))
+		return TRUE
+
+	if(isitem(acided_atom))
+		var/obj/item/acided = acided_atom
+		if(acided.acid_level < 20)
+			return TRUE
+
+	if(gloves?.resistance_flags & (UNACIDABLE | ACID_PROOF))
+		return TRUE
+
+	return FALSE
+
+/**
+ * This proc is used to determine whether or not the mob can handle touching a burning object.
+ */
+/mob/living/carbon/proc/can_touch_burning(atom/burning_atom)
+	// So people can take their own clothes off
+	if((burning_atom == src) || (burning_atom.loc == src))
+		return TRUE
+
+	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS))
+		return TRUE
+
+	if(gloves?.max_heat_protection_temperature >= 360)
+		return TRUE
+
 	return FALSE

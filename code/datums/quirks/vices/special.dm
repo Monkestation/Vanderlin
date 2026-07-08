@@ -42,6 +42,9 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+	incompatible_quirks = list(
+		/datum/quirk/vice/tainted_soul
+	)
 
 /datum/quirk/vice/luxless/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
@@ -88,7 +91,6 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_HEAD)
-	BP?.add_pain(rand(17.5, 27.5))
 	BP?.limb_flags |= BODYPART_CHRONIC_MIGRAINE
 	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
@@ -99,7 +101,7 @@
 	point_value = 5
 
 /datum/quirk/vice/unlucky/on_spawn()
-	owner.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
+	owner.adjust_stat_modifier(STATMOD_UNLUCKY, list(STAT_FORTUNE = rand(-5, -9)))
 
 /datum/quirk/vice/unlucky/on_remove()
 	owner?.remove_stat_modifier(STATMOD_UNLUCKY)

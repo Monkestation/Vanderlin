@@ -31,12 +31,8 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Ambush zizombie"
 	AddComponent(/datum/component/combat_noise, list("rage" = 1, "scream" = 1))
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -149,10 +145,7 @@
 	name = "zizombie"
 	real_name = "zizombie"
 	mob_biotypes |= MOB_UNDEAD
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
+	add_traits(list(TRAIT_NOSTAMINA, TRAIT_HEAVYARMOR, TRAIT_NOMOOD, TRAIT_NOHUNGER), SPECIES_TRAIT)
 //	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
 //	blue breathes underwater, need a new specific one for this maybe organ cheque
 //	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
@@ -234,12 +227,8 @@
 
 /mob/living/carbon/human/species/zizombie/npc/peasant/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/peasant)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -279,13 +268,8 @@
 ///////////////////////////////////////////////////////////// EVENTMIN ZIZOMBIES
 /mob/living/carbon/human/species/zizombie/npc/ambush/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/random)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -318,13 +302,8 @@
 
 /mob/living/carbon/human/species/zizombie/npc/warrior/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/warrior)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -406,13 +385,8 @@
 ///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE MILITIA
 /mob/living/carbon/human/species/zizombie/npc/militiamen/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/species/zizombie/npc/militiamen)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -477,20 +451,13 @@
 			cloak = /obj/item/clothing/cloak/stabard/guard
 			head = /obj/item/clothing/head/helmet/kettle
 
-///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE GRENZELHOFT MERCENARIES
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL/after_creation()
+///////////////////////////////////////////////////////////// EVENTMIN ZOMBIE grenzelHOFT MERCENARIES
+/mob/living/carbon/human/species/zizombie/npc/grenzel/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	equipOutfit(new /datum/outfit/species/zizombie/npc/GRENZEL)
+	equipOutfit(new /datum/outfit/species/zizombie/npc/grenzel)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
-
-
 
 /datum/attribute_holder/sheet/job/zizombie/grenzel
 	raw_attribute_list = list(
@@ -499,7 +466,7 @@
 		STAT_ENDURANCE = 10
 	)
 
-/datum/outfit/species/zizombie/npc/GRENZEL/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/species/zizombie/npc/grenzel/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/grenzel)
 	var/loadout = rand(1,5)

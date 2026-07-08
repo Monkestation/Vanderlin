@@ -56,9 +56,10 @@
 			t_BP.remove_wound(targetwound.type)
 
 		for(var/datum/injury/injury in C_target.all_injuries)
-			if(injury.damage_type == WOUND_DIVINE)
+			if(!injury.can_heal())
 				continue
 			injury.transfer_injury(C_caster)
+		C_caster.updatehealth()
 
 	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
 		artery.applyOrganDamage(-artery.damage)

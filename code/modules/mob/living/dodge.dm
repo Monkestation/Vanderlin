@@ -48,7 +48,7 @@
  * @return TRUE if dodge successful, FALSE otherwise
  */
 /mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user, can_dodge_see = TRUE)
-	if(!candodge)
+	if(HAS_TRAIT(src, TRAIT_UNDODGING))
 		return FALSE
 	if(intenty && !intenty.candodge)
 		return FALSE
@@ -151,7 +151,7 @@
 	if(attacker_dualwielding && !defender_dualwielding)
 		effective_score = max(0, dodge_score - 2)
 
-	if(client?.prefs.showrolls)
+	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		var/text = "Roll to dodge... (score: [effective_score])"
 		if(attacker_dualwielding)
 			if(defender_dualwielding)
@@ -160,7 +160,7 @@
 				text += " Disadvantage! (score: [effective_score])"
 		to_chat(src, span_info("[text]"))
 
-	if(user.client?.prefs.showrolls && attacker_dualwielding)
+	if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls) && attacker_dualwielding)
 		var/attacker_feedback = "Attacking with advantage."
 		if(defender_dualwielding)
 			attacker_feedback += " Cancelled out!"
@@ -208,8 +208,6 @@
 /mob/living/proc/calculate_dodge_score(mob/living/user)
 	if(HAS_TRAIT(src, TRAIT_EVASIVE))
 		return 99  // Effectively uncappable score, handled as special case
-	if(HAS_TRAIT(src, TRAIT_UNDODGING))
-		return -99 // Effectively impossible score
 
 	var/dodge_modifier = 0
 

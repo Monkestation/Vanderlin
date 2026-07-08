@@ -61,6 +61,9 @@
 		TRAIT_KNOW_KEEP_DOORS,
 		TRAIT_ROYALSERVANT
 	)
+	traits = list(
+		TRAIT_CAREFUL_CHAIRS
+	)
 	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/butler
