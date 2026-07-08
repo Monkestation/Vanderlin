@@ -104,9 +104,9 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 	return values
 
 /datum/attribute_holder/ui_interact(mob/user, datum/tgui/ui)
-	preview_image_b64 = build_character_preview()
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
+		preview_image_b64 = build_character_preview()
 		ui = new(user, src, "AttributeMenu")
 		ui.set_autoupdate(FALSE)
 		ui.open()
@@ -114,10 +114,19 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 /datum/attribute_holder/proc/build_character_preview()
 	if(!parent)
 		return null
-	return "data:image/png;base64,[icon2base64(getFlatIcon(parent, SOUTH, no_anim = TRUE))]"
+	var/original_dir = parent.dir
+	parent.dir = SOUTH
+	var/icon/flat = getFlatIcon(parent, SOUTH, no_anim = TRUE)
+	parent.dir = original_dir
+	return "data:image/png;base64,[icon2base64(flat)]"
 
 /datum/attribute_holder/proc/on_parent_appearance_changed()
 	SIGNAL_HANDLER
+	if(!LAZYLEN(open_uis))
+		return
+	addtimer(CALLBACK(src, PROC_REF(refresh_preview_now)), 0, TIMER_UNIQUE)
+
+/datum/attribute_holder/proc/refresh_preview_now()
 	if(!LAZYLEN(open_uis))
 		return
 	preview_image_b64 = build_character_preview()
