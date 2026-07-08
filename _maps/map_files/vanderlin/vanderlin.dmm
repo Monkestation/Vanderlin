@@ -1668,10 +1668,10 @@
 /turf/open/floor/grass/yel,
 /area/outdoors/town)
 "aNu" = (
-/obj/structure/door/viewport{
-	name = "Mercenary Hideaway"
-	},
 /obj/effect/mapping_helpers/access/keyset/town/tombwarden,
+/obj/structure/door/viewport{
+	name = "Adventurer's Guild"
+	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/adv_guild)
 "aNv" = (
@@ -23561,6 +23561,12 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/garrison)
+"lch" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/merc_guild)
 "lcj" = (
 /obj/effect/mapping_helpers/access/keyset/town/elder,
 /obj/structure/door{
@@ -27674,6 +27680,12 @@
 /obj/item/neuFarm/seed/wheat,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
+"mWf" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "mWr" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
@@ -38173,7 +38185,7 @@
 /area/outdoors/beach)
 "rJl" = (
 /obj/structure/fluff/walldeco/chains,
-/turf/open/floor/dirt/road,
+/turf/open/water/marsh,
 /area/indoors/town/merc_guild)
 "rJv" = (
 /obj/structure/table/wood/plain_alt,
@@ -43282,7 +43294,7 @@
 /area/outdoors/eora)
 "uaR" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/turf/open/water/marsh,
+/turf/open/floor/dirt/road,
 /area/indoors/town/merc_guild)
 "uaW" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -46248,10 +46260,10 @@
 /turf/open/floor/dirt,
 /area/outdoors/town)
 "vlX" = (
-/obj/structure/door/violet{
-	name = "mercenary sleeping quarters"
-	},
 /obj/effect/mapping_helpers/access/keyset/town/tombwarden,
+/obj/structure/door/violet{
+	name = "adventurer sleeping quarters"
+	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/adv_guild)
 "vlZ" = (
@@ -48393,6 +48405,10 @@
 "wgo" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/river)
+"wgv" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/merc_guild)
 "wgz" = (
 /obj/structure/fluff/clock,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -107324,8 +107340,8 @@ gxD
 gxD
 gxD
 gxD
-kfU
-kfU
+eAL
+lch
 gxD
 gxD
 gxD
@@ -107729,7 +107745,7 @@ gxD
 xvP
 irX
 eAL
-kfU
+lch
 gxD
 gxD
 gxD
@@ -108537,7 +108553,7 @@ gxD
 gxD
 aNX
 eAL
-kfU
+lch
 gxD
 gxD
 gxD
@@ -108734,6 +108750,7 @@ irX
 eAL
 kfU
 kfU
+rhD
 kfU
 kfU
 kfU
@@ -108742,11 +108759,10 @@ kfU
 kfU
 kfU
 kfU
+rhD
 kfU
 kfU
-kfU
-kfU
-kfU
+rhD
 kfU
 kfU
 kfU
@@ -108939,12 +108955,12 @@ kfU
 kfU
 kfU
 kfU
+wgv
 kfU
 kfU
 kfU
 kfU
-kfU
-kfU
+wgv
 kfU
 kfU
 kfU
@@ -109558,7 +109574,7 @@ jcc
 tEt
 lfd
 kfU
-kfU
+lch
 fgR
 qFx
 qFx
@@ -110569,7 +110585,7 @@ tIj
 tIj
 lEi
 tIj
-tIj
+mWf
 fgR
 mxl
 kfU
