@@ -64,7 +64,7 @@
 		devotion.make_templar()
 		devotion.grant_to(spawned)
 
-	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
+	if(ishumannorthern(spawned) && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
 	switch(spawned.patron?.type)
