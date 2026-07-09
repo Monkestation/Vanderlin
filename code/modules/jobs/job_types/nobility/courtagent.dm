@@ -344,13 +344,15 @@
 /datum/job/advclass/courtagent/protector/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Sword & Shield" = /obj/item/weapon/sword/scimitar/messer,
-	"Rapier" = /obj/item/weapon/sword/rapier,
-	"Axe" = /obj/item/weapon/axe/iron,
-	"Mace" = /obj/item/weapon/mace/spiked,
-	"Spear" = /obj/item/weapon/polearm/spear,
-	"Flail" = /obj/item/weapon/flail,
-	"Whip" = /obj/item/weapon/whip)
+	var/static/list/weapons = list(
+		"Sword & Shield" = /obj/item/weapon/sword/scimitar/messer,
+		"Rapier" = /obj/item/weapon/sword/rapier,
+		"Axe" = /obj/item/weapon/axe/iron,
+		"Mace" = /obj/item/weapon/mace/spiked,
+		"Spear" = /obj/item/weapon/polearm/spear,
+		"Flail" = /obj/item/weapon/flail,
+		"Whip" = /obj/item/weapon/whip,
+	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
 	if(!weapon_choice)
 		return
