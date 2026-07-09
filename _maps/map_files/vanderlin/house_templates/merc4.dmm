@@ -2,36 +2,33 @@
 "a" = (
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"d" = (
+"k" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/merc_guild)
-"i" = (
+"t" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/key/apartments/merc4,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"j" = (
-/obj/structure/bed/inn,
-/obj/item/bedsheet/fabric,
+"u" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_4";
+	property_id = "mercapt_4";
+	template_x = 7;
+	template_y = 6;
+	default_template = /datum/map_template/vanderlin_mercapt_4
+	},
+/turf/closed/wall/mineral/stonebrick,
+/area/indoors/town/merc_guild)
+"y" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"t" = (
-/obj/structure/sign/property_sign/claim,
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/merc_guild)
-"z" = (
-/obj/structure/chair/wood/alt/fancy,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
-"D" = (
+"C" = (
 /obj/machinery/light/fueled/oven{
 	pixel_y = 31
 	},
-/turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
-"F" = (
-/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "H" = (
@@ -41,58 +38,85 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"M" = (
-/obj/structure/table/wood,
-/obj/item/flashlight/flare/torch/lantern,
-/turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
-"Q" = (
+"I" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/merc_guild)
-"Z" = (
+"M" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/merc_guild)
+"S" = (
+/obj/structure/chair/wood/alt/fancy,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"U" = (
 /obj/structure/closet/crate/drawer,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"W" = (
+/obj/structure/bed/inn,
+/obj/item/bedsheet/fabric,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"Y" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 
 (1,1,1) = {"
-Q
+I
 H
-t
-d
-d
+M
+k
+k
+u
 "}
 (2,1,1) = {"
-d
+k
 a
 a
-z
-M
+S
+y
+k
 "}
 (3,1,1) = {"
-d
+k
 a
 a
 a
 a
+k
 "}
 (4,1,1) = {"
-d
-D
+k
+C
 a
 a
 a
+k
 "}
 (5,1,1) = {"
-d
+k
 a
 a
 a
-Z
+U
+k
 "}
 (6,1,1) = {"
-d
-i
+k
+t
 a
-F
-j
+Y
+W
+k
+"}
+(7,1,1) = {"
+I
+I
+k
+k
+k
+k
 "}

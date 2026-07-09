@@ -5303,6 +5303,10 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass,
 /area/outdoors/town)
+"czS" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/open/openspace,
+/area/indoors/town/merc_guild)
 "czW" = (
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/tile,
@@ -6063,16 +6067,6 @@
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/dirt/road,
 /area/outdoors/basin/safe)
-"cOP" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_2";
-	property_id = "mercapt_2";
-	template_x = 5;
-	template_y = 6;
-	default_template = /datum/map_template/vanderlin_mercapt_2
-	},
-/turf/open/openspace,
-/area/indoors/town/merc_guild)
 "cOU" = (
 /obj/machinery/light/fueled/wallfire/candle/l{
 	pixel_x = 0;
@@ -13975,6 +13969,16 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"gEc" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_2";
+	property_id = "mercapt_2";
+	template_x = 6;
+	template_y = 7;
+	default_template = /datum/map_template/vanderlin_mercapt_2
+	},
+/turf/open/openspace,
+/area/indoors/town/merc_guild)
 "gEi" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/bouquet/calendula{
@@ -16609,6 +16613,16 @@
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
 /area/under/town/sewer)
+"hRg" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_3";
+	property_id = "mercapt_3";
+	template_x = 7;
+	template_y = 6;
+	default_template = /datum/map_template/vanderlin_mercapt_3
+	},
+/turf/open/openspace,
+/area/indoors/town/merc_guild)
 "hRw" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -18932,16 +18946,6 @@
 /obj/item/clothing/neck/opalamulet,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/heir/heir2)
-"iSk" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_6";
-	property_id = "mercapt_6";
-	template_x = 6;
-	template_y = 6;
-	default_template = /datum/map_template/vanderlin_mercapt_6
-	},
-/turf/open/openspace,
-/area/indoors/town/merc_guild)
 "iSl" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/blocks/newstone/alt,
@@ -21144,6 +21148,16 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
+"jOv" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_6";
+	property_id = "mercapt_6";
+	template_x = 7;
+	template_y = 7;
+	default_template = /datum/map_template/vanderlin_mercapt_6
+	},
+/turf/open/openspace,
+/area/indoors/town/merc_guild)
 "jOz" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/fluff/railing/wood{
@@ -22619,16 +22633,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
-"kAt" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_3";
-	property_id = "mercapt_3";
-	template_x = 5;
-	template_y = 5;
-	default_template = /datum/map_template/vanderlin_mercapt_3
-	},
-/turf/open/openspace,
-/area/indoors/town/merc_guild)
 "kAz" = (
 /obj/structure/table/wood/large/corner,
 /turf/open/floor/cobblerock,
@@ -30386,8 +30390,8 @@
 /obj/effect/landmark/house_spot{
 	save_id = "mercapt_4";
 	property_id = "mercapt_4";
-	template_x = 5;
-	template_y = 5;
+	template_x = 7;
+	template_y = 6;
 	default_template = /datum/map_template/vanderlin_mercapt_4
 	},
 /turf/open/openspace,
@@ -36742,16 +36746,6 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/church)
-"qTO" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_1";
-	property_id = "mercapt_1";
-	template_x = 3;
-	template_y = 4;
-	default_template = /datum/map_template/vanderlin_mercapt_1
-	},
-/turf/open/openspace,
-/area/indoors/town/merc_guild)
 "qUb" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/shoes/boots,
@@ -39354,6 +39348,16 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/shop)
+"rZm" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_5";
+	property_id = "mercapt_5";
+	template_x = 7;
+	template_y = 7;
+	default_template = /datum/map_template/vanderlin_mercapt_5
+	},
+/turf/open/openspace,
+/area/indoors/town/merc_guild)
 "rZn" = (
 /obj/machinery/light/fueled/torchholder/l{
 	dir = 8
@@ -43906,6 +43910,16 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
+"ucM" = (
+/obj/effect/landmark/house_spot{
+	save_id = "mercapt_1";
+	property_id = "mercapt_1";
+	template_x = 6;
+	template_y = 7;
+	default_template = /datum/map_template/vanderlin_mercapt_1
+	},
+/turf/open/openspace,
+/area/indoors/town/merc_guild)
 "ucP" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
 /obj/item/clothing/shoes/boots/leather,
@@ -49178,10 +49192,6 @@
 	},
 /turf/open/floor/metal,
 /area/indoors/town)
-"wlH" = (
-/obj/structure/fluff/walldeco/vinez,
-/turf/closed/wall/mineral/stonebrick,
-/area/under/cave)
 "wlU" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/instrument/drum,
@@ -53372,16 +53382,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"yaU" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_5";
-	property_id = "mercapt_5";
-	template_x = 6;
-	template_y = 6;
-	default_template = /datum/map_template/vanderlin_mercapt_5
-	},
-/turf/open/openspace,
-/area/indoors/town/merc_guild)
 "yaX" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/under/cave)
@@ -106756,22 +106756,22 @@ qFx
 qFx
 qFx
 qFx
-qtm
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+jOv
 irX
 irX
-irX
-irX
-irX
-qtm
-irX
-irX
-qtm
-irX
-irX
-irX
-irX
-irX
-qtm
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+rZm
 qFx
 pTy
 pTy
@@ -106958,13 +106958,13 @@ qFx
 qFx
 qFx
 qFx
-irX
 gxD
 gxD
 gxD
 gxD
 gxD
-iSk
+gxD
+gxD
 fjX
 fjX
 gxD
@@ -106972,8 +106972,8 @@ gxD
 gxD
 gxD
 gxD
-yaU
-irX
+gxD
+gxD
 qFx
 qFx
 pTy
@@ -107160,7 +107160,7 @@ qFx
 qFx
 qFx
 qFx
-irX
+gxD
 gxD
 gxD
 gxD
@@ -107175,7 +107175,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 qFx
 qFx
 pTy
@@ -107362,7 +107362,7 @@ qFx
 qFx
 qFx
 qFx
-irX
+gxD
 gxD
 gxD
 gxD
@@ -107377,7 +107377,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 qFx
 qFx
 wmF
@@ -107564,7 +107564,7 @@ qFx
 qFx
 qFx
 qFx
-irX
+gxD
 gxD
 gxD
 gxD
@@ -107579,7 +107579,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 qFx
 qFx
 qFx
@@ -107766,7 +107766,7 @@ qFx
 qFx
 qFx
 qFx
-irX
+gxD
 gxD
 gxD
 gxD
@@ -107781,7 +107781,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 qFx
 qFx
 qFx
@@ -107968,7 +107968,7 @@ qFx
 qFx
 qFx
 qFx
-irX
+gxD
 gxD
 gxD
 gxD
@@ -107983,7 +107983,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 qFx
 qFx
 qFx
@@ -108170,22 +108170,22 @@ qFx
 qFx
 qFx
 qFx
-qtm
-irX
-irX
-irX
-irX
-irX
-qtm
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+ucM
 hMu
 sGB
-qtm
-irX
-irX
-irX
-irX
-irX
-qtm
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gEc
 qFx
 qFx
 qFx
@@ -108377,8 +108377,8 @@ gxD
 gxD
 gxD
 gxD
-qTO
-irX
+gxD
+gxD
 xSU
 pDb
 gxD
@@ -108386,8 +108386,8 @@ gxD
 gxD
 gxD
 gxD
-cOP
-wut
+gxD
+czS
 irX
 irX
 hHE
@@ -108580,7 +108580,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 dwo
 dwo
 gxD
@@ -108589,7 +108589,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 fxO
 nMN
 riN
@@ -108782,7 +108782,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 dwo
 dwo
 gxD
@@ -108791,7 +108791,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 jln
 riN
 irf
@@ -108984,7 +108984,7 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
 dwo
 dwo
 gxD
@@ -108993,7 +108993,7 @@ gxD
 gxD
 gxD
 gxD
-hHE
+czS
 sSz
 riN
 riN
@@ -109186,7 +109186,7 @@ gxD
 gxD
 gxD
 gxD
-qtm
+gxD
 xSU
 pDb
 gxD
@@ -109195,7 +109195,7 @@ gxD
 gxD
 gxD
 gxD
-qtm
+gxD
 qfN
 nrE
 qfN
@@ -109788,7 +109788,7 @@ qFx
 qtm
 irX
 irX
-qtm
+gxD
 gxD
 gxD
 gxD
@@ -109798,8 +109798,8 @@ gxD
 gxD
 gxD
 gxD
-kAt
-qtm
+gxD
+hRg
 kNS
 uiK
 uiK
@@ -109990,7 +109990,6 @@ qFx
 qFx
 fjD
 fjD
-irX
 gxD
 gxD
 gxD
@@ -110001,7 +110000,8 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
+gxD
 wXy
 gfJ
 oEJ
@@ -110192,7 +110192,6 @@ qFx
 qFx
 fjD
 fjD
-irX
 gxD
 gxD
 gxD
@@ -110203,7 +110202,8 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
+gxD
 rTF
 vUd
 bvE
@@ -110394,7 +110394,6 @@ qFx
 qFx
 fjD
 fjD
-irX
 gxD
 gxD
 gxD
@@ -110405,7 +110404,8 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
+gxD
 jWu
 dDV
 djx
@@ -110596,7 +110596,6 @@ qFx
 qFx
 fjD
 fjD
-irX
 gxD
 gxD
 gxD
@@ -110607,7 +110606,8 @@ gxD
 gxD
 gxD
 gxD
-qtm
+gxD
+gxD
 jWu
 bZB
 bZB
@@ -110798,7 +110798,6 @@ qFx
 qFx
 fjD
 fjD
-irX
 gxD
 gxD
 gxD
@@ -110809,7 +110808,8 @@ gxD
 gxD
 gxD
 gxD
-irX
+gxD
+gxD
 yia
 jWu
 jWu
@@ -110998,20 +110998,20 @@ qAs
 uuQ
 kbY
 yaX
-wlH
-yaX
-yaX
+wut
 qtm
-irX
-irX
-irX
-irX
-qtm
-irX
-irX
-irX
-irX
-qtm
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
+gxD
 jWu
 jWu
 jWu
