@@ -451,4 +451,4 @@
 
 	desc = span_green("The warmth of the fire is comforting.")
 	stress_change = -1
-	timer = 5 MINUTES
+	timer = 1 MINUTES

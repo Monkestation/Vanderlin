@@ -985,7 +985,7 @@
 /datum/status_effect/buff/campfire_stamina
 	id = "stamina_campfire"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/campfire_stamina
-	duration = 5 SECONDS
+	duration = -1
 	var/outline_colour = "#7e6a3e"
 
 /datum/status_effect/buff/campfire_stamina/on_apply()

@@ -14,6 +14,7 @@
 	var/temperature_change = 20
 	var/temperature_weight = 1
 	var/temperature_falloff = 0.9
+	var/datum/proximity_monitor/proximity_monitor
 	var/resting_range = 0
 
 /obj/machinery/light/fueled/Initialize()
@@ -29,13 +30,32 @@
 	. = ..()
 
 /obj/machinery/light/fueled/Destroy()
-	if(soundloop)
-		QDEL_NULL(soundloop)
+	QDEL_NULL(proximity_monitor)
+	for(var/mob/living/carbon/human/human in range(resting_range, src))
+		human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
+	QDEL_NULL(soundloop)
+
+	GLOB.fires_list -= src
 	remove_temp_effect()
+
 	return ..()
+
 
 /obj/machinery/light/fueled/seton(s)
 	. = ..()
+	if(on)
+		if(resting_range && !proximity_monitor)
+			proximity_monitor = new(src, resting_range)
+
+			for(var/mob/living/carbon/human/human in range(resting_range, src))
+				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
+				human.add_stress(/datum/stress_event/campfire)
+
+	// else
+	// 	QDEL_NULL(proximity_monitor)
+	// 	for(var/mob/living/carbon/human/human in range(resting_range, src))
+	// 		human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
+
 	if(temperature_change)
 		propagate_temp_change(temperature_change, temperature_weight, temperature_falloff)
 
@@ -67,6 +87,10 @@
 	..()
 
 /obj/machinery/light/fueled/burn_out()
+	QDEL_NULL(proximity_monitor)
+	for(var/mob/living/carbon/human/human in range(resting_range, src))
+		human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
+
 	if(soundloop)
 		soundloop.stop()
 	if(on)
@@ -86,17 +110,11 @@
 	else
 		GLOB.fires_list -= src
 
-/obj/machinery/light/fueled/Destroy()
-	QDEL_NULL(soundloop)
-	GLOB.fires_list -= src
-	. = ..()
 
 /obj/machinery/light/fueled/fire_act(added, maxstacks)
 	if(!on && ((fueluse > 0) || (initial(fueluse) == 0)))
 		playsound(src, 'sound/items/firelight.ogg', 100)
-		on = TRUE
-		update()
-		update_appearance(UPDATE_ICON_STATE)
+		seton(TRUE)
 		if(soundloop)
 			soundloop.start()
 		return TRUE
@@ -279,13 +297,24 @@
 				holder.held_mob?.IgniteMob()
 				holder.update_appearance()
 
-		if(resting_range > 0)
-			var/list/hearers_in_range = get_hearers_in_LOS(resting_range, src, RECURSIVE_CONTENTS_CLIENT_MOBS)
-			for(var/mob/living/carbon/human/human in hearers_in_range)
-				var/distance = get_dist(src, human)
-				if(distance > resting_range)
-					continue
-				if(!human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
-					to_chat(human, span_info("The warmth of the fire comforts me, affording me a short rest."))
-				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
-				human.add_stress(/datum/stress_event/campfire)
+/obj/machinery/light/fueled/HasProximity(atom/movable/target)
+	if(!on || !ishuman(target))
+		return
+
+	var/mob/living/carbon/human/human = target
+
+	if(!human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
+		to_chat(human, span_info("The warmth of the fire comforts me, affording me a short rest."))
+
+	human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
+	human.add_stress(/datum/stress_event/campfire)
+
+//random bullshit I tried shit don't work
+
+// /datum/proximity_monitor/fueled/on_uncrossed(turf/source, atom/movable/exit, direction)
+// 	..()
+
+// 	if(ishuman(exit))
+// 		var/mob/living/carbon/human/human = exit
+// 		if(human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
+// 			human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
