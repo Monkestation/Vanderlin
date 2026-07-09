@@ -150,12 +150,12 @@
 	if(traumatic_shock > 0.9 * shock_stage)
 		adjustShockStage(seconds_per_tick * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
-		var/recovery = delta_time
+		var/recovery = seconds_per_tick
 		//Lower shock faster the less pain we feel
 		if(traumatic_shock < shock_stage)
-			recovery += 1
+			recovery += seconds_per_tick
 		if(traumatic_shock < 0.25 * shock_stage)
-			recovery += 1
+			recovery += seconds_per_tick
 		adjustShockStage(-recovery * (our_endurance/ATTRIBUTE_MIDDLING) * PAIN_SYSTEM_SPEED_MODIFIER * 0.75)
 
 	//Shock makes us slow

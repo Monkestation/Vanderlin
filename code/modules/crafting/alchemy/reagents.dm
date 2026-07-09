@@ -493,7 +493,7 @@
 			graggar_lover.real_name = dna_cache.real_name
 			graggar_lover.bloody_hands++
 			graggar_lover.update_inv_gloves()
-			playsoundgraggar_lover, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
+			playsound(graggar_lover, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
 			graggar_lover.spawn_gibs(TRUE)
 			graggar_lover.emote("agony")
 			graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))

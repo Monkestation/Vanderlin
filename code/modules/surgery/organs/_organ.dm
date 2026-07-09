@@ -507,8 +507,8 @@
 	handle_blood(seconds_per_tick)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time, times_fired))
-		handle_self_healing(delta_time, times_fired)
+	if(can_self_heal(seconds_per_tick))
+		handle_self_healing(seconds_per_tick)
 
 	if(is_failing())
 		handle_failing_organ(seconds_per_tick)
