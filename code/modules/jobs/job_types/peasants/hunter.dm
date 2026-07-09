@@ -71,6 +71,7 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/hunter/old
 
 	traits = list(
+		TRAIT_KEENEYES,
 		TRAIT_FORAGER
 	)
 

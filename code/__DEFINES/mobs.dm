@@ -73,12 +73,6 @@
 #define CHRONIC_OLD_FRACTURE 3
 #define CHRONIC_SCAR_TISSUE 4
 
-#define ORGAN_ORGANIC   1
-#define ORGAN_ROBOTIC   2
-
-#define BODYPART_ORGANIC   1
-#define BODYPART_ROBOTIC   2
-
 #define BODYPART_NOT_DISABLED 0
 #define BODYPART_DISABLED_DAMAGE 1
 #define BODYPART_DISABLED_PARALYSIS 2 //either a fall or twisting the limb

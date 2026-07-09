@@ -432,7 +432,7 @@
 			update = TRUE
 			var/list/mods = list()
 			if(no_crit)
-				mods = list(CRIT_MOD_CHANCE = -100)
+				mods = list(CRIT_MOD_CHANCE = CANT_CRIT)
 			picked.bodypart_attacked_by(damage_type, brute + burn, null, picked.body_zone, modifiers = mods)
 		else
 			update |= picked.receive_damage(brute_per_part, burn_per_part, blocked = FALSE, updating_health = FALSE, required_status = BODYPART_ORGANIC)

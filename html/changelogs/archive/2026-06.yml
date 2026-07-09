@@ -87,3 +87,195 @@
       Monarch can using the Master of Nerves.
   PatapoIIIa:
   - bugfix: Fixed an unnecessary delay when opening the first TGUI window after joining.
+2026-06-12:
+  Somniworld:
+  - qol: You now know when you show someone a confession.
+  - bugfix: You no longer can ask the dead to confess.
+2026-06-13:
+  Avalon-Proto:
+  - rscadd: Smiths can now produce MUCH more weaponry
+  - rscadd: Merchants can purchase iron and steel javelins
+  - rscadd: Inquisitition Cna purchase silver javelins
+  - rscadd: Two unique and currently unavailable massive weapons. Volfslayer and The
+      Dragonslayer axe
+2026-06-15:
+  Avalon-Proto:
+  - qol: The Apothecary's PURITY now has and a new category of items for sale
+  - balance: The Apothecary starts with more mammons for purchasing goods from PURITY.
+  Singul0:
+  - rscadd: Adds Blunderbusses into the game for Grenzelhoft Mercenaries to use.
+  Sulaboy:
+  - bugfix: Psyalter's Stole Sprite Fix
+  The-Awful:
+  - rscadd: New outfit for Malum Acolytes.
+2026-06-16:
+  Spitegremlin:
+  - rscadd: Added Huntsmaster Hand subclass, along with their hound
+  - rscadd: Added new Gambeson. Hunting Gambeson
+  - rscadd: Added new trait called keen eyes, and gave it to hunters and huntsmaster
+  - rscadd: Added a trait called flip jump to Spymaster, doesnt do anything other
+      then let them flip when they jump
+  - balance: gave Advisor a glock
+  - balance: gave all hand subclasses a standard 8 since i was told too, and the default
+      hand class had 8
+  - balance: gave pilgrim hunter forager and keeneyes trait, to match with normal
+      hunter
+2026-06-17:
+  Avalon-Proto:
+  - bugfix: Fixed some bugs with all the weapons added in my last PR
+  Magiy-Anne:
+  - bugfix: Gold Armor should now be much easier to make
+  ModDownloading:
+  - rscadd: Bandits now start with Halfmasks in addition to their other gear.
+  - rscadd: Rusted armor can now be found in random loot.
+  - balance: Steel masks are more common in random loot.
+  Severus840:
+  - map: WPP Church moved closer into town
+  - map: WPP Merchant moved closer into town
+  - map: WPP generally a lot of town changes, see PR for full changelog.
+2026-06-18:
+  CheffieGithub:
+  - bugfix: Fixed visual issue with report bug
+  Sulaboy:
+  - bugfix: Some smithing recipes
+2026-06-19:
+  ModDownloading:
+  - rscadd: Argent, a new subclass for Sacrestants that focuses on all-around utility.
+  - rscadd: Enhancements, a loadout option for Inquisitor, Confessor, and Argent,
+      that affects stats and traits.
+  - rscadd: Adept now has two slots instead of one.
+  - balance: Inquisitor Prafekt subclass stats reduced to account for their selection
+      of Enhancements.
+  - refactor: Psyaltrist moved from Sacrestant to Adept, renamed "Rehabilitated Minstrel".
+  - rscadd: Ollies, the equivalent for olives.
+  - bugfix: Salted seeds recipe works properly now.
+  - bugfix: Per-species hunger and cleanliness modifiers actually function now.
+2026-06-20:
+  ModDownloading:
+  - balance: Sewer Cave troll has been replaced with a Skullsplitter troll.
+2026-06-21:
+  tired-wired:
+  - rscadd: Added bible verses for the rest of the Ten
+2026-06-22:
+  Ben10083:
+  - balance: Embracing Death now prevents you from turning into a deadite.
+  Sulaboy:
+  - rscadd: Miner's Satchel (Given to miners, lets you walk onto tiles with ore to
+      pick them up)
+  - balance: All pickaxes can be two handed to increase force, Miner's Helmet gives
+      more light
+  - qol: Made smithing minigame faster, and take less stamina.
+  realforest2001:
+  - rscadd: Added storage to matron cloak.
+  - code_imp: Cleaned up the backend for cloaks that have storage.
+2026-06-24:
+  Archeonan:
+  - rscadd: The Fencer & The Goon Merc Classes
+  - rscadd: Three weapon options for ranger
+  - rscadd: New outfit for ranger
+  - rscdel: Removed ranger race restriction
+  - balance: Changed some of ranger's roundstart gear (no more bait, iron kukuri instead
+      of steel hunting knife)
+  Ben10083:
+  - rscadd: New mind trait to prevent knocking over chairs. Added to Servant, Butler,
+      Tapster and Innkeeper
+  Pidgey-chan:
+  - balance: adjusts the marque cost of several items
+  Sulaboy:
+  - bugfix: Orc armor sprites
+2026-06-25:
+  ModDownloading:
+  - bugfix: Venatari Nightmare Ward now stops your energy (not stamina) from decreasing,
+      as you have no way to regenerate it.
+  SSensum13:
+  - bugfix: fixed coif crit protection.
+  Sulaboy:
+  - balance: Raises Dungeoneer Sword Skill 10->20
+  dwasint:
+  - bugfix: Wild Magic output humor works now
+  - refactor: preferences now use a datum system in the backend realistically no player
+      facing changes
+  - bugfix: loadouts now correctly display the loadout items on first load.
+2026-06-26:
+  CheffieGithub:
+  - balance: Dummy training only works for bows and blowguns
+  - balance: amythortz can't be given to the bandit idol
+  - bugfix: Chicken legs no longer produce whole chickens.
+  - bugfix: Formikrag liver killing passively due to psydon buff
+  - bugfix: Can't dupe hide on tanning racks
+  - bugfix: Halfling can be porter
+  - bugfix: Cult leaders can't kill people as a ghost
+  - bugfix: explosive gorget not getting head to decap (I hope)
+  - bugfix: fix hand hollow book not allowing the puffer to be re-added
+  - bugfix: fix not being able to draw zizite runes
+  - bugfix: Some mercenaries no longer spawn with duplicate keys
+  - bugfix: Fix some of the mismatched smelting materials and ingot results, not a
+      catch all
+  DarthGP:
+  - rscadd: Made bow a selectable weapon for minor nobles
+  - bugfix: Fixed various issues with the classes
+  ModDownloading:
+  - rscadd: Sewer drug den has an essence extractor and reservoir, as well as other
+      things to do proper (ghetto) alchemy.
+  - rscadd: Sewer kitchen has an oven, cleaver, and rolling pin now.
+  - rscadd: Sewer smithy exists now. It only has the bare minimum of smithing equipment.
+  Spitegremlin:
+  - rscadd: Added new axe and sprites
+  - bugfix: fixed scabbard and hand scabbard sprites and sprite names, also bone javelin
+      had a stray pixel, also fixed bearded axe palette
+  - image: New axe sprites
+  - code_imp: Changed some code
+  Wrench-1:
+  - rscadd: Added Relic Psydonian Knuckles "Confidence and Conviction," and Relic
+      Psydonion Katars "Anguish and Agony" for Preceptor Prafekt
+  - qol: Consecratia, Crusade and Sanctum now comes pre-blessed
+  - qol: Removed Ordinators rich coin pouch, and moved it into the Prafekt's room
+      so now every Prafekt can start with a good bit of money
+  tired-wired:
+  - rscdel: Removed necran acolyte, play gravetender instead
+2026-06-27:
+  CheffieGithub:
+  - rscadd: Add missing strain sound and emote to guarding. credit to FreeStylaLT.
+  - balance: Guard stance is only bypassed by behind and out of range melee attacks
+      not fully stopped.
+  - bugfix: Fixed hefty swing being able to stack damage
+  - bugfix: Fixed being able to attack while guarding.
+2026-06-28:
+  tired-wired:
+  - rscadd: Expanded the Crimsonlands-related class lore.
+2026-06-29:
+  Avalon-Proto:
+  - rscadd: Dungeoneers now recieve fair medical knowledge alongside the kit to prevent
+      someone in their care dying too quickly
+  CheffieGithub:
+  - rscadd: Added bug report TGUI. Legacy version available under OOC verbs.
+  - bugfix: Revival grants up to of 40% blood to organs like it's meant to
+  ModDownloading:
+  - rscadd: Meat, Poultry, Eggs, Fat, and Ollies are now in the stockpile.
+  - balance: Prices of most fruit items have been normalized to account for their
+      lack of rarity.
+  - balance: The vault, including the stockpile, now completely stops food from rotting.
+  SmokingCrackForChrist:
+  - rscadd: New fingersnap emote, *snap.
+  - rscadd: New footstep sounds for three-of-the-four inhumen pantheon armorsets.
+  - bugfix: Fixes Patron selection for Renegade / Antiquarian Wretch subclasses. You
+      can now respectively shoot or throw calling cards at people like gambit again
+      without needing to worship a specific patron on character-creation. Your patronage
+      is still forced.
+  Snack-Max:
+  - rscadd: Fighters and Clerics now always spawn with regular satchels
+  Sulaboy:
+  - qol: You can now alt click "The Book" to select an Event/God to read aloud about.
+2026-06-30:
+  Ben10083:
+  - rscadd: Adds random player created paintings to archivist chamber in Vanderlin
+  - qol: Praise Zizo verb changed from an emote to a forced say (You now actually
+      praise Zizo)
+  - refactor: say proc now allows you to force a message in a certain language
+  - bugfix: Fixes minor chat weirdness involving improper use of say proc
+  Snack-Max:
+  - rscadd: New Bellow Sallet
+  Somniworld:
+  - rscadd: The inquisition gets 2 new sets of clothing in their Hermes. These are
+      disguise sets of clothing allowing you to blend in better, don''t expect something
+      too crazy however.

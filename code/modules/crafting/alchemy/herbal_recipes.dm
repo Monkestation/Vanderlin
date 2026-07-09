@@ -116,12 +116,10 @@
 
 /datum/reagent/medicine/herbal/hypericum_tonic/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 	L.add_chem_effect(CE_OXYGENATED, 1, "[type]")
 
 /datum/reagent/medicine/herbal/hypericum_tonic/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 	L.remove_chem_effect(CE_OXYGENATED, "[type]")
 
 /datum/reagent/medicine/herbal/hypericum_tonic/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
@@ -179,12 +177,10 @@
 
 /datum/reagent/buff/herbal/salvia_wisdom/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 	L.add_chem_effect(CE_PULSE, 1, "[type]")
 
 /datum/reagent/buff/herbal/salvia_wisdom/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 	L.remove_chem_effect(CE_PULSE, "[type]")
 
 /datum/reagent/buff/herbal/salvia_wisdom/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
@@ -539,13 +535,11 @@
 /datum/reagent/buff/herbal/scholar_focus/on_mob_metabolize(mob/living/M)
 	. = ..()
 	M.add_stress(/datum/stress_event/herbal_focus)
-	M.add_chem_effect(CE_BRAIN_REGEN, 2, "[type]")
 	M.add_chem_effect(CE_OXYGENATED, 1, "[type]")
 	M.add_chem_effect(CE_STABLE, 1, "[type]")
 
 /datum/reagent/buff/herbal/scholar_focus/on_mob_end_metabolize(mob/living/M)
 	. = ..()
-	M.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 	M.remove_chem_effect(CE_STABLE, "[type]")
 
@@ -676,14 +670,11 @@
 /datum/reagent/buff/herbal/moonwater_elixir/on_mob_metabolize(mob/living/M)
 	. = ..()
 	M.add_stress(/datum/stress_event/mystical_boost)
-	M.add_chem_effect(CE_BRAIN_REGEN, 2, "[type]")
 	M.add_chem_effect(CE_OXYGENATED, 1, "[type]")
 
 /datum/reagent/buff/herbal/moonwater_elixir/on_mob_end_metabolize(mob/living/M)
 	. = ..()
-	M.remove_chem_effect(CE_BRAIN_REGEN, "[type]")
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
-
 
 // Combat Enhancement
 

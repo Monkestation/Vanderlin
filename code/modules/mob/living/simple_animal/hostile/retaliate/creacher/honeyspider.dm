@@ -111,7 +111,7 @@
 		if(L.reagents)
 			L.reagents.add_reagent(/datum/reagent/toxin/venom, 1)
 
-/mob/living/simple_animal/hostile/retaliate/spider/attempt_feed(obj/item/O, mob/living/carbon/human/user)
+/mob/living/simple_animal/hostile/retaliate/spider/attempt_feed(mob/living/user, obj/item/feed)
 	. = ..()
 	if(!.)
 		return

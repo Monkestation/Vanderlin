@@ -55,6 +55,7 @@
 		TRAIT_SEEPRICES,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
 	)
@@ -124,7 +125,7 @@
 
 	ADD_TRAIT(L, TRAIT_NOBLOOD, TRAIT_GENERIC)
 
-	L.set_faction(FACTION_UNDEAD)
+	L.set_faction(list(FACTION_UNDEAD))
 	L.mob_biotypes |= MOB_UNDEAD
 	L.grant_undead_eyes()
 	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
@@ -237,7 +238,7 @@
 
 	lich_mob.skeletonize(FALSE)
 
-	lich_mob.set_faction(FACTION_UNDEAD)
+	lich_mob.set_faction(list(FACTION_UNDEAD))
 	if(length(lich_mob.quirks))
 		lich_mob.clear_quirks()
 	lich_mob.mob_biotypes |= MOB_UNDEAD

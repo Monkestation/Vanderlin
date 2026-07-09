@@ -30,16 +30,12 @@
 	name = "psyalter's stole"
 	desc = "A silk stole embroidered with silver filigree and with concealed pockets in its back worn over a hymnal-scroll. It is worn as the traditional garb of a graduate of the choir leaders of the cathedrals of Grenzelhoft, and is a symbol of their station."
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-	icon_state = "psaltertabard"
-	item_state = "psaltertabard"
+	icon_state = "psyaltertabard"
+	item_state = "psyaltertabard"
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-
-/obj/item/clothing/cloak/psyaltrist/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/head/spellcasterhat
 	name = "spellsinger hat"

@@ -66,7 +66,8 @@ SUBSYSTEM_DEF(librarian)
 		return "There is already a book by this title!"
 	if(!(istext(input) && istext(encoded_title) && istext(author) && istext(author_ckey) && istext(icon)))
 		return "This book is incorrectly formatted!"
-
+	if(is_misc_banned(author_ckey, BAN_MISC_PUBLISH))
+		return "This author is banned from uploading!"
 	var/list/contents = list("book_title" = "[book_title]", "author" = "[author]", "author_ckey" = "[author_ckey]", "icon" = "[icon]",  "text" = "[input]", "category" = category)
 	//url_encode should escape all the characters that do not belong in a file name. If not, god help us
 	text2file(json_encode(contents), "data/player_generated_books/[encoded_title].json")

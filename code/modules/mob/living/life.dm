@@ -1,5 +1,6 @@
 /mob/living/proc/Life(seconds_per_tick = SSMOBS_DT)
 	set waitfor = FALSE
+	SHOULD_NOT_SLEEP(TRUE)
 
 	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds_per_tick)
 
@@ -11,7 +12,7 @@
 		if(!T)
 			var/msg = "[ADMIN_LOOKUPFLW(src)] was found to have no .loc with an attached client, if the cause is unknown it would be wise to ask how this was accomplished."
 			message_admins(msg)
-			send2irc_adminless_only("Mob", msg, R_ADMIN)
+			INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(send2irc_adminless_only), "Mob", msg, R_ADMIN)
 			log_game("[key_name(src)] was found to have no .loc with an attached client.")
 
 		// This is a temporary error tracker to make sure we've caught everything
@@ -142,8 +143,8 @@
 		"<span class='warning'>[src] freezes in pain!</span>",
 		"<span class='warning'>I'm frozen in pain!</span>",
 	)
-	addtimer(CALLBACK(src, PROC_REF(Stun), 5 SECONDS * seconds_per_tick), 1 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(Knockdown), 5 SECONDS * seconds_per_tick), 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(Stun), 11 SECONDS), 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(Knockdown), 1 SECONDS), 1 SECONDS)
 
 /mob/living/proc/handle_fire(seconds_per_tick)
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly

@@ -418,7 +418,7 @@
 				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
 					epinephrine_mod += 3
 				var/heart_exposed_mod = 0
-				if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
+				if(istype(they_heart) && CHECK_MULTIPLE_BITFIELDS(chest.return_surgical_state(), SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED))
 					heart_exposed_mod += 5
 
 				/// Master (55) have a 5% chance of reviving through CPR each attempt.
@@ -543,7 +543,7 @@
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (getPainLoss() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
+			var/painpercent = can_feel_pain() ? (getShockStage() / SHOCK_STAGE_MAX) * 100 : 0 //what percent out of 100 to max pain
 
 
 			var/usedloss = 0

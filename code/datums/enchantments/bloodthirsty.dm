@@ -44,7 +44,7 @@
 		else
 			bodypart = carbon.get_bodypart(slot2body_zone(clothing.slot_flags))
 
-		bodypart?.bodypart_attacked_by(BCLASS_BITE, 10 * seconds_per_tick, modifiers = list(CRIT_MOD_CHANCE = -100))
+		bodypart?.bodypart_attacked_by(BCLASS_BITE, 12 * seconds_per_tick, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 
 	var/missing_integrity = enchanted_item.max_integrity - enchanted_item.get_integrity()
 	carbon.adjust_blood_volume(-missing_integrity * seconds_per_tick)

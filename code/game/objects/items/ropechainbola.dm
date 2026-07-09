@@ -247,18 +247,18 @@
 	return ..()
 
 /obj/structure/noose/attackby(obj/item/W, mob/user, list/modifiers)
-	if (W.get_sharpness())
-		if(do_after(user, 1 SECONDS, src))
-			new /obj/item/rope(loc)
-			playsound(src, 'sound/foley/dropsound/cloth_drop.ogg', 50, TRUE)
-			if (istype(src, /obj/structure/noose/gallows))
-				new /obj/machinery/light/fueled/lanternpost/unfixed(loc)
-				user.visible_message(span_notice("[user] cuts the noose down from the gallows."), span_notice("I cut the noose down from the gallows."), span_hear("I hear something snap."))
-			else
-				user.visible_message(span_notice("[user] cuts down the noose."), span_notice("I cut down the noose."), span_hear("I hear something snap."))
-			qdel(src)
-	else
+	if(!W.get_sharpness())
 		return ..()
+
+	if(do_after(user, 1 SECONDS, src))
+		new /obj/item/rope(loc)
+		playsound(src, 'sound/foley/dropsound/cloth_drop.ogg', 50, TRUE)
+		if (istype(src, /obj/structure/noose/gallows))
+			new /obj/machinery/light/fueled/lanternpost/unfixed(loc)
+			user.visible_message(span_notice("[user] cuts the noose down from the gallows."), span_notice("I cut the noose down from the gallows."), span_hear("I hear something snap."))
+		else
+			user.visible_message(span_notice("[user] cuts down the noose."), span_notice("I cut down the noose."), span_hear("I hear something snap."))
+		qdel(src)
 
 /obj/structure/noose/bullet_act(obj/projectile/P, def_zone, piercing_hit = FALSE)
 	. = ..()

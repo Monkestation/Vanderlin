@@ -549,9 +549,9 @@
 	update_z(null)
 	return ..()
 
-/mob/camera/onTransitZ(old_z,new_z)
-	..()
-	update_z(new_z)
+/mob/camera/onTransitZ(turf/old_turf, turf/new_turf)
+	. = ..()
+	update_z(new_turf.z)
 
 /mob/camera/proc/update_z(new_z) // 1+ to register, null to unregister
 	if (registered_z != new_z)

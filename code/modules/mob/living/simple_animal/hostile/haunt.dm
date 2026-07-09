@@ -194,6 +194,7 @@
 
 /mob/living/simple_animal/hostile/haunt/Life(seconds_per_tick)
 	. = ..()
+
 	if(slavepile && get_dist(src, slavepile) >= 8)
 		if(isturf(slavepile.loc))
 			forceMove(slavepile.loc)

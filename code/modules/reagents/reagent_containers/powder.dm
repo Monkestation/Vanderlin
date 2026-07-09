@@ -60,26 +60,31 @@
 				reagents.trans_to(C, 1, transfered_by = thrownthing.thrower, method = "swallow")
 				qdel(src)
 
-/obj/item/reagent_containers/powder/attack(mob/M, mob/user, list/modifiers)
+/obj/item/reagent_containers/powder/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
+	var/mob/living/M = interacting_with
+
 	if(!canconsume(M, user))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
 	if(M == user)
 		M.visible_message(span_notice("[user] sniffs [src]."))
-	else
-		if(iscarbon(M))
-			var/mob/living/carbon/C = M
-			var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
-			if(!CH)
-				to_chat(user, span_warning("[C.p_theyre(TRUE)] missing their head."))
-				return FALSE
-			C.visible_message(span_danger("[user] attempts to force [C] to inhale [src]."), \
-							span_danger("[user] attempts to force me to inhale [src]!"))
-			if(C.cmode)
-				if(!CH.grabbedby)
-					to_chat(user, span_info("[C.p_they(TRUE)] steals [C.p_their()] face from it."))
-					return FALSE
-			if(!do_after(user, 1 SECONDS, M))
-				return FALSE
+	else if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
+		if(!CH)
+			to_chat(user, span_warning("[C.p_theyre(TRUE)] missing their head."))
+			return ITEM_INTERACT_BLOCKING
+		C.visible_message(span_danger("[user] attempts to force [C] to inhale [src]."), \
+						span_danger("[user] attempts to force me to inhale [src]!"))
+		if(C.cmode)
+			if(!CH.grabbedby)
+				to_chat(user, span_info("[C.p_they(TRUE)] steals [C.p_their()] face from it."))
+				return ITEM_INTERACT_BLOCKING
+		if(!do_after(user, 1 SECONDS, M))
+			return ITEM_INTERACT_BLOCKING
 
 	playsound(M, 'sound/items/sniff.ogg', 100, FALSE)
 
@@ -88,8 +93,11 @@
 		SEND_SIGNAL(M, COMSIG_DRUG_SNIFFED, user)
 		record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 		record_round_statistic(STATS_DRUGS_SNORTED)
+
+	user.changeNext_move(CLICK_CD_MELEE)
 	qdel(src)
-	return TRUE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/powder/return_recipe_data()
 	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]

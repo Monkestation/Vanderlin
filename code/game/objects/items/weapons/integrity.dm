@@ -64,31 +64,6 @@
 			blade_int = max_blade_int
 		return TRUE
 
-/obj/structure/attackby(obj/item/I, mob/user, list/modifiers)
-	user.changeNext_move(user.used_intent.clickcd)
-	. = ..()
-
-
-/obj/machinery/attackby(obj/item/I, mob/user, list/modifiers)
-	user.changeNext_move(user.used_intent.clickcd)
-	. = ..()
-
-/obj/item/attackby(obj/item/I, mob/living/user, list/modifiers)
-	user.changeNext_move(user.used_intent.clickcd)
-	if(max_blade_int)
-		if(istype(I, /obj/item/natural/stone))
-			playsound(src, pick('sound/items/sharpen_long1.ogg','sound/items/sharpen_long2.ogg'), 100)
-			user.visible_message("<span class='notice'>[user] sharpens [src]!</span>")
-			degrade_bintegrity(1)
-			add_bintegrity(max_blade_int * 0.1, user)
-			if(prob(35))
-				var/datum/effect_system/spark_spread/S = new()
-				var/turf/front = get_step(user,user.dir)
-				S.set_up(1, 1, front)
-				S.start()
-			return
-	. = ..()
-
 /obj/item/proc/restore_bintegrity()
 	max_blade_int = initial(max_blade_int)
 	blade_int = initial(max_blade_int)

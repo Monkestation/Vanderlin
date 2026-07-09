@@ -59,27 +59,25 @@
 	tastes = list("dough" = 1)
 	item_weight = 150 GRAMS
 
-/obj/item/reagent_containers/food/snacks/dough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+/obj/item/reagent_containers/food/snacks/dough_slice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/kitchen/rollingpin))
+		return ..()
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	var/found_table = locate(/obj/structure/table) in (loc)
-	if(istype(I, /obj/item/kitchen/rollingpin))
-		if(isturf(loc)&& (found_table))
-			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
-			to_chat(user, span_notice("Rolling [src] into flatdough."))
-			if(do_after(user,long_cooktime, src))
-				new /obj/item/reagent_containers/food/snacks/dough_flat(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
-				user.nobles_seen_servant_work()
-				qdel(src)
-		else
-			to_chat(user, span_warning("Put [src] on a table before working it!"))
-		return TRUE
-/*	else
-		to_chat(user, span_warning("Put [src] on a table before working it!"))*/
+
+	if(isturf(loc) && (found_table))
+		playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+		to_chat(user, span_notice("Rolling [src] into flatdough."))
+		if(do_after(user,long_cooktime, src))
+			new /obj/item/reagent_containers/food/snacks/dough_flat(loc)
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.nobles_seen_servant_work()
+			qdel(src)
+	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/dough_flat
 	name = "flatdough"
@@ -95,27 +93,24 @@
 	tastes = list("dough" = 1)
 	item_weight = 120 GRAMS
 
-/obj/item/reagent_containers/food/snacks/dough_flat/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+/obj/item/reagent_containers/food/snacks/dough_flat/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!tool.get_sharpness())
+		return ..()
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	var/found_table = locate(/obj/structure/table) in (loc)
-	if(I.get_sharpness())
-		if(isturf(loc)&& (found_table))
-			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
-			to_chat(user, span_notice("Scoring lines into [src]..."))
-			if(do_after(user,long_cooktime, src))
-				new /obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
-				user.nobles_seen_servant_work()
-				qdel(src)
-		else
-			to_chat(user, span_warning("Put [src] on a table before working it!"))
-		return TRUE
+	if(isturf(loc)&& (found_table))
+		playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+		to_chat(user, span_notice("Scoring lines into [src]..."))
+		if(do_after(user,long_cooktime, src))
+			new /obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw(loc)
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.nobles_seen_servant_work()
+			qdel(src)
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /*------------\
 | Butterdough |
@@ -159,15 +154,11 @@
 	tastes = list("buttery dough" = 1)
 	item_weight = 175 GRAMS
 
-/obj/item/reagent_containers/food/snacks/butterdough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+/obj/item/reagent_containers/food/snacks/butterdough_slice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	var/found_table = locate(/obj/structure/table) in (loc)
-	if(isturf(loc)&& (found_table))
-		if(istype(I, /obj/item/kitchen/rollingpin))
+	if(isturf(loc) && (found_table))
+		if(istype(tool, /obj/item/kitchen/rollingpin))
 			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
 			to_chat(user, span_notice("Flattening [src]..."))
 			if(do_after(user, short_cooktime, src))
@@ -175,7 +166,7 @@
 				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
 				qdel(src)
-		if(istype(I, /obj/item/kitchen/spoon))
+		else if(istype(tool, /obj/item/kitchen/spoon))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
 			to_chat(user, span_notice("Pressing a divot into [src]..."))
 			if(do_after(user, short_cooktime, src))
@@ -183,7 +174,7 @@
 				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
 				qdel(src)
-		if(I.get_sharpness())
+		else if(tool.get_sharpness())
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
 			to_chat(user, span_notice("Cutting the dough into strips and making a prezzel..."))
 			if(do_after(user, short_cooktime, src))
@@ -194,6 +185,8 @@
 				qdel(src)
 				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
+		else
+			return ..()
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
@@ -300,8 +293,8 @@
 	tastes = list("bread" = 1)
 	item_weight = 80 GRAMS
 
-/obj/item/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
+/obj/item/reagent_containers/food/snacks/breadslice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !is_type_in_list(tool, list(
 		/obj/item/reagent_containers/food/snacks/meat/salami/slice,
 		/obj/item/reagent_containers/food/snacks/cheddarslice,
 		/obj/item/reagent_containers/food/snacks/cooked/egg,
@@ -309,11 +302,13 @@
 		/obj/item/reagent_containers/food/snacks/butterslice,
 		/obj/item/reagent_containers/food/snacks/meat/mince/beef/mett)))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
 	var/cooking = 5 SECONDS - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, cooking, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
@@ -324,28 +319,29 @@
 	foodtype |= S.foodtype
 	faretype++
 
-	if(istype(I, /obj/item/reagent_containers/food/snacks/meat/salami/slice))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/meat/salami/slice))
 		name = "[name] & salumoi"
 		desc = "[desc] A thick slice of salumoi has been added."
 		add_overlay("salumoid")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/cheddarslice))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/cheddarslice))
 		name = "[name] & cheese"
 		desc = "[desc] Fat cheese slices has been added."
 		add_overlay("cheesed")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/cooked/egg))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/cooked/egg))
 		name = "[name] & egg"
 		add_overlay("egged")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/fat/salo/slice))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/fat/salo/slice))
 		name = "[name] & salo"
 		add_overlay("salod")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
 		name = "buttered [name]"
 		add_overlay("buttered")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett))
 		name = "[name] & mett"
 		add_overlay("metted")
-	qdel(I)
-	return ..()
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/breadslice/toast
 	name = "toasted bread"
@@ -461,15 +457,17 @@
 	tastes = list("chewy butterdough" = 1)
 	item_weight = 90 GRAMS
 
-/obj/item/reagent_containers/food/snacks/bookbreadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
-		/obj/item/reagent_containers/food/snacks/butterslice)))
+/obj/item/reagent_containers/food/snacks/bookbreadslice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
+
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
@@ -480,8 +478,8 @@
 
 	name = "buttered [name]"
 	add_overlay("bookbread_buttered")
-	qdel(I)
-	return ..()
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /*	.................   Raspberry Bookbread   ................... */
 /obj/item/reagent_containers/food/snacks/raspberrybutterdough
@@ -936,27 +934,25 @@
 	tastes = list("semi-sweet dough" = 1)
 	item_weight = 140 GRAMS
 
-/obj/item/reagent_containers/food/snacks/masa_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking/baking))*8))
-	var/found_table = locate(/obj/structure/table) in (loc)
-	if(istype(I, /obj/item/kitchen/rollingpin))
-		if(isturf(loc)&& (found_table))
-			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
-			to_chat(user, span_notice("Flattening [src]..."))
-			if(do_after(user,long_cooktime, src))
-				new /obj/item/reagent_containers/food/snacks/masa_flat(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
-				user.nobles_seen_servant_work()
-				qdel(src)
-		else
-			to_chat(user, span_warning("Put [src] on a table before working it!"))
-		return TRUE
-	else
+/obj/item/reagent_containers/food/snacks/masa_slice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/kitchen/rollingpin))
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
+		return ..()
+
+	if(!isturf(loc) || !(locate(/obj/structure/table) in loc))
+		return ITEM_INTERACT_BLOCKING
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking/baking)) * 8))
+
+	playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+	to_chat(user, span_notice("Flattening [src]..."))
+	if(do_after(user,long_cooktime, src))
+		new /obj/item/reagent_containers/food/snacks/masa_flat(loc)
+		user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+		user.nobles_seen_servant_work()
+		qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/masa_flat
 	name = "sunreed flat-cake"
@@ -1063,16 +1059,18 @@
 	tastes = list("semi-sweet bread" = 1)
 	item_weight = 50 GRAMS
 
-/obj/item/reagent_containers/food/snacks/estrella/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
+/obj/item/reagent_containers/food/snacks/estrella/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !is_type_in_list(tool, list(
 		/obj/item/reagent_containers/food/snacks/sugar,
 		/obj/item/reagent_containers/food/snacks/chocolate/chunk)))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
 	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
@@ -1083,17 +1081,18 @@
 	foodtype |= S.foodtype
 	faretype++
 
-	if(istype(I, /obj/item/reagent_containers/food/snacks/sugar))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/sugar))
 		name = "sugar powdered [name]"
 		desc = "[desc] Its form holds the sugar excellently."
 		icon_state = "sugar_estrella"
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate/chunk))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/chocolate/chunk))
 		name = "chocolate dipped [name]"
 		desc = "[desc] It's form holds the chocolate drizzle excelently."
 		icon_state = "chocolate_estrella"
 		faretype++
-	qdel(I)
-	return ..()
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /*	.................   Huskbuns   ................... */
 
@@ -1151,16 +1150,19 @@
 	faretype = FARE_NEUTRAL
 	item_weight = 150 GRAMS
 
-/obj/item/reagent_containers/food/snacks/huskbun/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
+/obj/item/reagent_containers/food/snacks/huskbun/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !is_type_in_list(tool, list(
 		/obj/item/reagent_containers/food/snacks/cocaumole,
 		/obj/item/reagent_containers/food/snacks/drowsbanejam)))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
+
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
@@ -1171,16 +1173,17 @@
 	foodtype |= S.foodtype
 	faretype++
 
-	if(istype(I, /obj/item/reagent_containers/food/snacks/cocaumole))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/cocaumole))
 		name = "cocaumole smothered [name]"
 		desc = "[desc] It has a generous serving of cocaumole on top."
 		icon_state = "cocaudo_huskbun"
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/drowsbanejam))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/drowsbanejam))
 		name = "drowsbane smothered [name]"
 		desc = "[desc] It's coated in spicy drowsbane."
 		icon_state = "drowsbane_huskbun"
-	qdel(I)
-	return ..()
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /*	.................   Saigaitas   ................... */
 
@@ -1231,16 +1234,19 @@
 	faretype = FARE_NEUTRAL
 	item_weight = 120 GRAMS
 
-/obj/item/reagent_containers/food/snacks/saigaita_cooked/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
+/obj/item/reagent_containers/food/snacks/saigaita_cooked/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !is_type_in_list(tool, list(
 		/obj/item/reagent_containers/food/snacks/cocaumole,
 		/obj/item/reagent_containers/food/snacks/drowsbanejam)))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
+
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
@@ -1251,16 +1257,17 @@
 	foodtype |= S.foodtype
 	faretype++
 
-	if(istype(I, /obj/item/reagent_containers/food/snacks/cocaumole))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/cocaumole))
 		name = "cocaumole smothered [name]"
 		desc = "[desc] It even has a generous serving of cocaumole on top."
 		icon_state = "cocaudo_lilsaiga"
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/drowsbanejam))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/drowsbanejam))
 		name = "drowsbane smothered [name]"
 		desc = "[desc] It's even coated in spicy drowsbane."
 		icon_state = "drowsbane_lilsaiga"
-	qdel(I)
-	return ..()
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /*	.................   Eighthscake   ................... */
 
@@ -1374,24 +1381,25 @@
 	faretype = FARE_POOR
 	item_weight = 100 GRAMS
 
-/obj/item/reagent_containers/food/snacks/tostada/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
-	var/found_table = locate(/obj/structure/table) in (loc)
-	if(isturf(loc)&& (found_table))
-		if(istype(I, /obj/item/kitchen/rollingpin))
-			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 100, TRUE, -1)
-			to_chat(user, span_notice("Breaking up [src]..."))
-			if(do_after(user, short_cooktime, src))
-				new /obj/item/reagent_containers/food/snacks/chippile(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
-				user.nobles_seen_servant_work()
-				qdel(src)
-	else
+/obj/item/reagent_containers/food/snacks/tostada/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/kitchen/rollingpin))
+		return ..()
+
+	if(!isturf(loc) || !(locate(/obj/structure/table) in loc))
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
+		return ITEM_INTERACT_BLOCKING
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
+
+	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 100, TRUE, -1)
+	to_chat(user, span_notice("Breaking up [src]..."))
+	if(do_after(user, short_cooktime, src))
+		new /obj/item/reagent_containers/food/snacks/chippile(loc)
+		user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+		user.nobles_seen_servant_work()
+		qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/tostada_meat
 	name = "steak plato"
@@ -1404,19 +1412,22 @@
 	faretype = FARE_NEUTRAL
 	item_weight = 100 GRAMS
 
-/obj/item/reagent_containers/food/snacks/tostada_meat/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
+/obj/item/reagent_containers/food/snacks/tostada_meat/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !is_type_in_list(tool, list(
 		/obj/item/reagent_containers/food/snacks/cocaumole,
 		/obj/item/reagent_containers/food/snacks/drowsbanejam,
 		/obj/item/reagent_containers/food/snacks/cheddarslice)))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
+
 	modified = TRUE
-	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition * 0.75)
@@ -1425,20 +1436,21 @@
 	foodtype |= S.foodtype
 	faretype++
 
-	if(istype(I, /obj/item/reagent_containers/food/snacks/cocaumole))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/cocaumole))
 		name = "cocaumole smothered [name]"
 		desc = "[desc] It has cocaumole dripping over it."
 		add_overlay("tostada_cocaumole")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/drowsbanejam))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/drowsbanejam))
 		name = "drowsbane smothered [name]"
 		desc = "[desc] It's smothered in spicy drowsbane."
 		add_overlay("tostada_salsa")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/cheddarslice))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/cheddarslice))
 		name = "cheese covered [name]"
 		desc = "[desc] A thick slice of cheese has been put ontop."
 		add_overlay("tostada_cheese")
-	qdel(I)
-	return ..()
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/tostada_meat/chicken
 	name = "frybird plato"
@@ -2417,36 +2429,42 @@
 
 /*	.................   Griddlecake Condiments   ................... */
 
-/obj/item/reagent_containers/food/snacks/griddlecake/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(modified || !is_type_in_list(I, list(
+/obj/item/reagent_containers/food/snacks/griddlecake/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(modified || !is_type_in_list(tool, list(
 		/obj/item/reagent_containers/food/snacks/butterslice,
 		/obj/item/reagent_containers/food/snacks/spiderhoney,
 		/obj/item/reagent_containers/food/snacks/chocolate/chunk)))
 		return ..()
-	var/obj/item/reagent_containers/food/snacks/S = I
-	var/cooking = 5 SECONDS - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8
+
+	var/cooking = 5 SECONDS - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, cooking, src, display_over_user=TRUE))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/reagent_containers/food/snacks/S = tool
+
 	modified = TRUE
 	faretype++
-	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition * 0.75)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment/vitamin, S.nutrition * 0.25)
-	if(istype(I, /obj/item/reagent_containers/food/snacks/butterslice))
+	if(istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
 		name = "buttered [name]"
 		desc = "[desc] A melting pat of butter has been added."
 		add_overlay("griddlebutter")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/spiderhoney))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/spiderhoney))
 		name = "honey syruped [name]"
 		desc = "[desc] A generous serving of honey has been poured on top."
 		add_overlay("griddlehoney")
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
+	else if(istype(tool, /obj/item/reagent_containers/food/snacks/chocolate))
 		name = "chocolate drizzled [name]"
 		desc = "[desc] Luxurious chocolate has been drizzled on top."
 		add_overlay("griddlechocolate")
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /*----------\
 | Dot Tarts |

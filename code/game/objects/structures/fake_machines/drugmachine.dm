@@ -111,7 +111,7 @@
 	var/budget = 0
 	var/upgrade_flags
 	var/current_cat
-	var/list/available_categories = list("Narcotics", "Instruments")
+	var/list/available_categories = list("Narcotics", "Instruments", "Medicine")
 
 /obj/structure/fake_machine/drugmachine/Initialize()
 	. = ..()

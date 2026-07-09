@@ -21,6 +21,7 @@
 
 	/// How much blood we gush when torn. Multiplied by damage/maxHealth
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
+	var/tear_damage_multiplier = 0.5
 	/// If torn, this is basically the time until we gush again
 	COOLDOWN_DECLARE(next_squirt)
 	/// Minimum time until we squirt again
@@ -73,7 +74,7 @@
 	if(owner.stat < UNCONSCIOUS)
 		owner.emote("scream")
 	current_blood = 0
-	applyOrganDamage(maxHealth * 0.5)
+	applyOrganDamage(maxHealth * tear_damage_multiplier)
 	owner.bleed(blood_flow)
 	COOLDOWN_START(src, next_squirt, rand(squirt_delay_min_seconds, squirt_delay_max_seconds))
 

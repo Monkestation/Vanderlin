@@ -180,15 +180,14 @@
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	return K
 
-/obj/item/lockpickring/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I,/obj/item/lockpick))
-		if(picks.len >= how_many_lockpicks)
+/obj/item/lockpickring/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/lockpick))
+		if(length(picks) >= how_many_lockpicks)
 			to_chat(user, span_warning("Too many lockpicks."))
 			return
-		user.dropItemToGround(I)
-		addtoring(I)
-	else
-		return ..()
+		user.dropItemToGround(tool)
+		addtoring(tool)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/lockpickring/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
