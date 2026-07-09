@@ -183,8 +183,10 @@
 /datum/job/advclass/courtagent/hitman/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Shortbow" = /obj/item/gun/ballistic/bow,
-	"Crossbow" = /obj/item/gun/ballistic/bow/cross)
+	var/static/list/weapons = list(
+		"Shortbow" = /obj/item/gun/ballistic/bow,
+		"Crossbow" = /obj/item/gun/ballistic/bow/cross,
+	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
 	if(!weapon_choice)
 		return
