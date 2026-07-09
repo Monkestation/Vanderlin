@@ -110,9 +110,11 @@
 /datum/job/advclass/courtagent/bruiser/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Steel Knuckles" = /obj/item/weapon/knuckles,
-	"Steel Katar" = /obj/item/weapon/katar,
-	"Bare Handed" = /obj/item/clothing/gloves/bandages/pugilist)
+	var/static/list/weapons = list(
+		"Steel Knuckles" = /obj/item/weapon/knuckles,
+		"Steel Katar" = /obj/item/weapon/katar,
+		"Bare Handed" = /obj/item/clothing/gloves/bandages/pugilist,
+	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
 	if(!weapon_choice)
 		return
