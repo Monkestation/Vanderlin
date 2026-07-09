@@ -35,7 +35,7 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-			TRAIT_CRATEMOVER,
+		TRAIT_CRATEMOVER,
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sweeper
