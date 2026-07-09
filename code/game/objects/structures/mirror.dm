@@ -194,7 +194,7 @@
 			)
 			jobs += "Cancel"
 
-			var/cover_job = browser_input_list(user, "Select Cover Job", "COVER JOB", jobs)
+			var/cover_job = tgui_input_list(user, "Select Cover Job", "COVER JOB", jobs)
 			if(jobs == "Cancel")
 				return
 			H.job = cover_job
