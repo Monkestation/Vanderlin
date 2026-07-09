@@ -47,6 +47,7 @@
 	return ..()
 
 /datum/outfit/courtagent
+	abstract_type = /datum/outfit/courtagent
 	name = "Court Agent Base"
 	belt = /obj/item/storage/belt/leather/black/courtagent
 	pants = /obj/item/clothing/pants/trou/leather
