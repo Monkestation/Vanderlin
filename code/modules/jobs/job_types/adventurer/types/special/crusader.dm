@@ -36,7 +36,8 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 	languages = list(/datum/language/oldpsydonic)
@@ -145,7 +146,7 @@
 
 /obj/item/clothing/cloak/cape/crusader/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak/lord)
+	AddComponent(/datum/component/storage/concrete/grid/crusader_helm)
 
 /obj/item/clothing/cloak/cape/crusader/dropped(mob/living/carbon/human/user)
 	..()

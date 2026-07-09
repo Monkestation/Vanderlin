@@ -547,6 +547,8 @@
 
 	// Bleeding
 	var/bleed_rate = get_bleed_rate()
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		bleed_rate += artery.blood_flow * (artery.damage/artery.maxHealth)
 	if(bleed_rate)
 		var/bleed_wording = "bleeding"
 		switch(bleed_rate)

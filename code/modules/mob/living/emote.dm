@@ -73,7 +73,7 @@
 	for(var/client/admin_client in GLOB.admins)
 		if(check_rights_for(admin_client, R_ADMIN))
 			to_chat(admin_client, message)
-			if(admin_client.prefs.toggles & SOUND_PRAYERS)
+			if(admin_client.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_PRAYERS)
 				admin_client.mob.playsound_local(admin_client, 'sound/misc/yeoldebwoink.ogg', 100)
 
 
@@ -173,7 +173,7 @@
 		if(!M.client || isnewplayer(M))
 			continue
 		var/T = get_turf(user)
-		if(M.stat == DEAD && M.client && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
+		if(M.stat == DEAD && M.client && (M.client.prefs?.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_GHOSTSIGHT) && !(M in viewers(T, null)))
 			M.show_message(message)
 
 	user.visible_message("<i>[message]</i>", vision_distance = 1)
@@ -427,7 +427,7 @@
 	. = ..()
 	if(iscarbon(user))
 		var/mob/living/carbon/L = user
-		if(L.getPainLoss() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
+		if(L.getShockStage() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
 			L.setDir(2)
 			L.SetUnconscious(200)
 		else
@@ -1116,6 +1116,13 @@
 	if(user.mind)
 		record_featured_stat(FEATURED_STATS_SCREAMERS, user)
 
+/datum/emote/living/strain
+	key = "strain"
+	message = "strains themself!"
+	emote_type = EMOTE_AUDIBLE
+	only_forced_audio = TRUE
+	show_runechat = FALSE
+
 /datum/emote/living/scowl
 	key = "scowl"
 	key_third_person = "scowls"
@@ -1174,6 +1181,19 @@
 	emote_type = EMOTE_AUDIBLE
 	stat_allowed = UNCONSCIOUS
 	snd_range = -4
+
+/datum/emote/living/snap
+	key = "snap"
+	key_third_person = "snaps their fingers."
+	message = "snaps their fingers."
+	message_muffled = "snaps their fingers."
+	restraint_check = TRUE
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_snap()
+	set name = "Snap"
+	set category = "Emotes.Noises"
+	emote("snap", intentional = TRUE)
 
 /datum/emote/living/stare
 	key = "stare"

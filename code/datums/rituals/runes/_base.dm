@@ -53,8 +53,6 @@
 	var/tier = 1
 	/// Return value of the last ritual's on_finished_recipe
 	var/ritual_result
-	/// Atoms within runesize of the rune, populated at invoke time
-	var/list/atom/movable/atoms_in_range
 	/// The runeritual datum instantiated for the current invocation
 	var/datum/runerituals/pickritual
 	/// Atoms selected to satisfy the ritual's ingredient requirements
@@ -160,7 +158,7 @@
 	rune_in_use = FALSE
 
 	// Gather all movable, visible, non-abstract atoms in range.
-	atoms_in_range = list()
+	var/list/atoms_in_range = list()
 	for(var/atom/movable/close_atom as anything in range(runesize, src))
 		if(isitem(close_atom))
 			var/obj/item/close_item = close_atom
@@ -195,6 +193,8 @@
 		// Attunement items are always collected when takes_all_items is set.
 		if(takes_all_items && isitem(nearby) && length(nearby:attunement_values))
 			selected_atoms |= nearby
+
+	atoms_in_range = list() //no longer needed
 
 	// Report any unfulfilled requirements.
 	var/list/missing = list()

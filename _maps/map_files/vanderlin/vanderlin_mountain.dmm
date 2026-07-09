@@ -9362,6 +9362,7 @@
 "aSQ" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/neck/talkstone,
+/obj/item/storage/belt/pouch/coins/rich,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "aSR" = (

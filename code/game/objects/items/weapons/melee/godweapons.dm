@@ -67,6 +67,9 @@
 	if(!HAS_TRAIT(user, TRAIT_ORGAN_EATER))
 		force = 13
 		force_wielded = 23
+	else
+		force = initial(force)
+		force_wielded = initial(force_wielded)
 	return ..()
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)

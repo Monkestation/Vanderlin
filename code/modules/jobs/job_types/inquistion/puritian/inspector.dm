@@ -9,7 +9,6 @@
 		/datum/attribute/skill/combat/knives = 40,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -104,7 +103,7 @@
 		"Leviathanian Membrane - No Terrain Slowdown",
 		"Nerve Staple - No Mood",
 		"Nightmare Ward - No Sleep and Anti-Scrying",
-		"Serpentine Glands - Thermal Vision and Venom",)
+		"Serpentine Glands - Thermal Vision and Venom")
 	//only four options
 	enhancements = shuffle(enhancements)
 	enhancements.Cut(4, 0)
@@ -148,6 +147,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
 		if("Nightmare Ward - No Sleep and Anti-Scrying")
 			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
 		if("Disguise Kit - Deceiving Meekness")
@@ -167,14 +167,15 @@
 	shoes = /obj/item/clothing/shoes/otavan/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr =  /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/bow/cross
-	beltr = /obj/item/ammo_holder/quiver/bolts
+	beltl = /obj/item/ammo_holder/bullet/bullets
+	beltr = /obj/item/gun/ballistic/powder/wheellock/puffer
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	wrists = /obj/item/clothing/neck/psycross/silver
 	ring = /obj/item/clothing/ring/signet/silver
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored
+	r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/lockpickring/mundane = 1,

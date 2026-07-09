@@ -31,8 +31,8 @@
 	message_admins("[key_name_admin(src)] played sound [S]")
 
 	for(var/mob/M in GLOB.player_list)
-		if(M.client.prefs.toggles & SOUND_MIDI)
-			var/user_vol = M.client.prefs.musicvol
+		if(M.client.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_MIDI)
+			var/user_vol = M.client.prefs.read_preference(/datum/preference/numeric/musicvol)
 			if(user_vol)
 				admin_sound.volume = vol * (user_vol / 100)
 			SEND_SOUND(M, admin_sound)
@@ -45,27 +45,27 @@
 
 	if(prefs)
 /*		if(blacklisted() == 1)
-			var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
+			var/vol = input(usr, "Current music power: [prefs.read_preference(/datum/preference/numeric/musicvol)]",, 100) as null|num
 			vol = 100
-			prefs.musicvol = vol
+			prefs.read_preference(/datum/preference/numeric/musicvol) = vol
 			prefs.save_preferences()
-			mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
-			mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
-			mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
+			mob.update_music_volume(CHANNEL_MUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+			mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+			mob.update_music_volume(CHANNEL_ADMIN, prefs.read_preference(/datum/preference/numeric/musicvol))
 		else*/
-		var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
+		var/vol = input(usr, "Current music power: [prefs.read_preference(/datum/preference/numeric/musicvol)]",, 100) as null|num
 		if(!vol)
 			if(vol != 0)
 				return
 		vol = min(vol, 100)
-		prefs.musicvol = vol
+		prefs.write_preference(/datum/preference/numeric/musicvol, vol)
 		prefs.save_preferences()
 
-		mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_BUZZ, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_AMBIENCE, prefs.musicvol)
+		mob.update_music_volume(CHANNEL_MUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_ADMIN, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_BUZZ, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_AMBIENCE, prefs.read_preference(/datum/preference/numeric/musicvol))
 
 
 /client/verb/show_rolls()
@@ -73,9 +73,9 @@
 	set name = "ShowRolls"
 
 	if(prefs)
-		prefs.showrolls = !prefs.showrolls
+		prefs.write_preference(/datum/preference/toggle/showrolls, !prefs.read_preference(/datum/preference/toggle/showrolls))
 		prefs.save_preferences()
-		if(prefs.showrolls)
+		if(prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(src, "ShowRolls Enabled")
 		else
 			to_chat(src, "ShowRolls Disabled")
@@ -85,15 +85,15 @@
 	set name = "ChangeVolPower"
 
 	if(prefs)
-		var/vol = input(usr, "Current volume power: [prefs.mastervol]",, 100) as null|num
+		var/vol = input(usr, "Current volume power: [prefs.read_preference(/datum/preference/numeric/mastervol)]",, 100) as null|num
 		if(!vol)
 			if(vol != 0)
 				return
 		vol = min(vol, 100)
-		prefs.mastervol = vol
+		prefs.write_preference(/datum/preference/numeric/mastervol, vol)
 		prefs.save_preferences()
 
-		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.mastervol)
+		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.read_preference(/datum/preference/numeric/mastervol))
 
 /client/proc/play_local_sound(S as sound)
 	set category = "GameMaster.Sound"
@@ -179,7 +179,7 @@
 		if(web_sound_url || stop_web_sounds)
 			for(var/mob/M as anything in GLOB.player_list)
 				var/client/C = M.client
-				if((C.prefs.toggles & SOUND_MIDI))
+				if((C.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_MIDI))
 					SEND_SOUND(C, sound(null, channel = CHANNEL_LOBBYMUSIC))
 					SEND_SOUND(C, sound(null, channel = CHANNEL_ADMIN))
 					if(!stop_web_sounds)

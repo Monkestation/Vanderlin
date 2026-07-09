@@ -10,10 +10,10 @@
 /datum/attribute_holder/sheet/job/species/triton/male
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
-		STAT_PERCEPTION = -2,
+		STAT_PERCEPTION = -1,
 		STAT_CONSTITUTION = -2,
-		STAT_SPEED = 1,
-		STAT_INTELLIGENCE = 2
+		STAT_SPEED = 2,
+		STAT_INTELLIGENCE = 3
 	)
 
 /datum/attribute_holder/sheet/job/species/triton/female
@@ -179,7 +179,7 @@
 	var/datum/action/innate/bioluminescence/action = locate() in C.actions
 	if(action)
 		qdel(action)
-		
+
 /datum/species/triton/check_roundstart_eligible()
 	return TRUE
 
@@ -232,13 +232,13 @@
 	. = ..()
 	if(!owner)
 		return FALSE
-		
+
 	if(!QDELETED(our_light))
 		our_light.set_light_on(TRUE)
 		our_light.update_light()
 	else
 		our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
-		
+
 	owner.visible_message(span_notice("[owner]'s body begins to glow with a deep blue bioluminescent light!"))
 	active = TRUE
 

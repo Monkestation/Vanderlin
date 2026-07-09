@@ -244,7 +244,6 @@
 	light_burn_msg = "tempered"
 	no_burn_msg = "unburned"
 
-
 /obj/item/bodypart/chest/automaton
 	status = BODYPART_ROBOTIC
 	resistance_flags = FIRE_PROOF

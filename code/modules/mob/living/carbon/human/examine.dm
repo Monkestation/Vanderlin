@@ -6,13 +6,13 @@
 		used_title = spy.examine_title
 	if(!used_title)
 		return
-	if(!IsAdminGhost(user))
+	if(user != src && !IsAdminGhost(user))
 		if(!get_face_name("")) // face covered?
 			return
 		var/is_family_member = FALSE
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			is_family_member = H.family_datum && H.family_datum != family_datum
+			is_family_member = H.family_datum && (H.family_datum == family_datum)
 		if(!is_family_member)
 			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_ANY_OF_TRAITS(src, list(TRAIT_RECRUITED, TRAIT_RECOGNIZED)))
 				return
@@ -74,7 +74,10 @@
 		// Know check
 		if(!is_family && !O)
 			if(do_i_know)
-				. += span_tinynotice("I know [P[THEM]].")
+				if(user.mind?.knows_as(src.mind, /datum/relation/rival))
+					. += "<span class='tinynotice'> I know [P[THEM]]...</span><span class='tinywarning'> they are my rival!</span>"
+				else
+					. += span_tinynotice("I know [P[THEM]].")
 			else
 				. += span_tinywarning("I do not know [P[THEM]].")
 
@@ -117,9 +120,9 @@
 
 	if(!HAS_TRAIT(src, TRAIT_FACELESS))
 		// Headshots ALWAYS go last.
+		if(headshot_link)
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
 		if(client?.is_donator())
-			if(headshot_link)
-				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
 			if(flavortext || headshot_link || ooc_extra_link) // only show flavor text if there is a flavor text and we show headshot
 				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>")
