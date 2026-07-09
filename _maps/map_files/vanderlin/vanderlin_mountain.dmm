@@ -7003,25 +7003,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
-"aHq" = (
-/obj/structure/rack/shelf/biggest,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/listeningdevice,
-/obj/item/listeningdevice,
-/obj/item/speakerinq,
-/obj/item/inqarticles/bmirror,
-/turf/open/floor/churchbrick,
-/area/indoors/town/church/inquisition)
 "aHr" = (
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/cobblerock/snow,
@@ -9359,12 +9340,6 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
-"aSQ" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/clothing/neck/talkstone,
-/obj/item/storage/belt/pouch/coins/rich,
-/turf/open/floor/carpet/royalblack,
-/area/indoors/town/church/inquisition)
 "aSR" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -11702,6 +11677,25 @@
 /obj/item/ingot/gold,
 /turf/open/floor/tile/diamond/blue,
 /area/under/mountains/anvil/upper)
+"fuI" = (
+/obj/structure/rack/shelf/biggest,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/item/listeningdevice/inq,
+/obj/item/listeningdevice/inq,
+/obj/item/speaker/inq,
+/obj/item/inqarticles/bmirror,
+/turf/open/floor/churchbrick,
+/area/indoors/town/church/inquisition)
 "fvT" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/herringbone,
@@ -14667,6 +14661,12 @@
 "wAI" = (
 /turf/open/water,
 /area/outdoors/mountains/anvil/peak)
+"wBu" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/clothing/neck/talkstone,
+/obj/item/storage/belt/pouch/coins/rich,
+/turf/open/floor/carpet/royalblack,
+/area/indoors/town/church/inquisition)
 "wEG" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/grass/cold,
@@ -86594,7 +86594,7 @@ aVr
 aVr
 alC
 ado
-aHq
+fuI
 aIS
 awI
 aFz
@@ -129422,7 +129422,7 @@ aTv
 avU
 aer
 aer
-aSQ
+wBu
 aHa
 aHa
 aVr

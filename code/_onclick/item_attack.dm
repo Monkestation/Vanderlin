@@ -693,6 +693,7 @@
 	send_item_attack_message(I, user, hitlim)
 	next_attack_msg.Cut()
 	I.do_special_attack_effect(user, null, null, src, null)
+	return TRUE
 
 
 /mob/living/simple_animal/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, peeldivisor, intdamfactor = 1, used_weapon)

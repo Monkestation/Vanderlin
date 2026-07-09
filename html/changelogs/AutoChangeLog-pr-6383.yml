@@ -1,0 +1,5 @@
+author: "Wrench-1"
+delete-after: True
+changes:
+  - rscadd: "Reworked Court Agent, giving them unique subclasses and tools for intrigue and subterfuge (Sprites by Blumengama)"
+  - map: "added the Court Agent Hideout, located behind a hidden door in the Keep's Stables"

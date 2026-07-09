@@ -132,7 +132,7 @@
 	var/signedname
 	var/signedjob
 	var/list/orders = list()
-	var/list/reputation_orders = list()
+	var/datum/world_faction/buying_from
 	var/list/fufilled_orders = list()
 
 /obj/item/paper/scroll/cargo/Destroy()
@@ -186,16 +186,26 @@
 /obj/item/paper/scroll/cargo/proc/rebuild_info()
 	info = null
 	info += "<div style='vertical-align:top'>"
-	info += "<h2 style='color:#06080F;font-family:\"Segoe Script\"'>Shipping Order</h2>"
+
+	var/faction_header = buying_from ? "[buying_from.faction_name] Manifest" : "Shipping Order"
+	info += "<h2 style='color:#06080F;font-family:\"Segoe Script\"'>[faction_header]</h2>"
 	info += "<hr/>"
 
 	if(orders.len)
 		info += "<ul>"
 		for(var/datum/supply_pack/A in orders)
+			// Determine faction local price vs fallback core value
+			var/target_cost = A.cost
+			if(buying_from && islist(buying_from.faction_supply_packs) && buying_from.faction_supply_packs[A.type])
+				var/datum/supply_pack/faction_pack = buying_from.faction_supply_packs[A.type]
+				target_cost = faction_pack.cost
+
+			var/item_total = target_cost * orders[A]
+
 			if(!A.contraband)
-				info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[A.name] x[orders[A]] - [A.cost * orders[A]] mammons</li><br/>"
+				info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[A.name] x[orders[A]] - [item_total] mammons</li><br/>"
 			else
-				info += "<li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[A.name] x[orders[A]] - [A.cost * orders[A]] mammons</li><br/>"
+				info += "<li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[A.name] x[orders[A]] - [item_total] mammons</li><br/>"
 		info += "</ul>"
 
 	info += "<br/></font>"
@@ -481,30 +491,34 @@
 			playsound(src, 'sound/items/write.ogg', 100, FALSE)
 			return
 
-
-/obj/item/paper/scroll/frumentarii/roundstart/Initialize()
-	. = ..()
-	if(SSticker.current_state < GAME_STATE_PLAYING)
-		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(get_agents)))
-	else
-		get_agents()
-
-/obj/item/paper/scroll/frumentarii/roundstart/proc/get_agents()
-	for(var/CA in GLOB.roundstart_court_agents)
-		fingers[CA] = TRUE
-	rebuild_info()
-
-/obj/item/paper/scroll/frumentarii
+/obj/item/frumentarii
 	name = "frumentarii scroll"
-	desc = "A list of the hand's fingers. Strike a candidate with this to allow them servitude. Use a writing utensil to cross out a finger."
-	writable = FALSE
+	desc = "An enchanted scroll, showing a list of the hand's fingers. Strike a candidate with this to allow them servitude. Use a writing utensil to cross out a finger."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "frumentarii_scroll"
+	throwforce = 0
+	w_class = WEIGHT_CLASS_TINY
+	throw_range = 2
+	throw_speed = 1
+	slot_flags = null
 	resistance_flags = FIRE_PROOF // let's maybe not burn this
 
-	//assoc list of TRUE and FALSE. TRUE indicates the agent is an active finger while FALSE is a severed finger
-	var/list/fingers = list()
-	var/names = 5
+	var/max_agents = 5
 
-/obj/item/paper/scroll/frumentarii/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+/obj/item/frumentarii/examine(mob/user)
+	. = ..()
+	if(!HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		ADD_TRAIT(user.mind, TRAIT_KNOWCOURTAGENTS, TRAIT_GENERIC)
+		user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
+		to_chat(user, span_smallgreen("I now know the names and faces of the Court Agents working in the Kingdom"))
+	if(!length(GLOB.court_agents))
+		to_chat(user, span_notice("There are no agents on the list currently in the Kingdom"))
+	else
+		to_chat(user, span_notice("Here are the currently active agents:"))
+		for(var/name in GLOB.court_agents)
+			to_chat(user, span_notice(name))
+
+/obj/item/frumentarii/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
 		return NONE
 
@@ -516,10 +530,15 @@
 	if(!M.client)
 		return NONE
 
-	if(M.real_name in fingers)
+	if(M.real_name in GLOB.court_agents)
+		balloon_alert(user, "already an agent!")
 		return ITEM_INTERACT_BLOCKING
 
-	if(length(fingers) >= names)
+	if(M.real_name in GLOB.ex_court_agents)
+		balloon_alert(user, "already an agent!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(length(GLOB.court_agents) >= max_agents)
 		balloon_alert(user, "too many fingers!")
 		return ITEM_INTERACT_BLOCKING
 
@@ -533,49 +552,56 @@
 	if(choice != CHOICE_YES)
 		return
 
-	fingers[M.real_name] = TRUE
-	user.mind.cached_frumentarii = fingers
-	rebuild_info()
+	GLOB.court_agents += M.real_name
+	ADD_TRAIT(M, TRAIT_COURTAGENT, TRAIT_GENERIC)
+	ADD_TRAIT(M, TRAIT_KNOW_COURTAGENT_DOORS, TRAIT_GENERIC)
+
+	if(!HAS_TRAIT(M, TRAIT_KNOWCOURTAGENTS))
+		ADD_TRAIT(M.mind, TRAIT_KNOWCOURTAGENTS, TRAIT_GENERIC)
+		M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
+		to_chat(M, span_smallgreen("I now know the names and faces of the Court Agents working in the Kingdom"))
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/paper/scroll/frumentarii/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	. = ..()
-	if(istype(P, /obj/item/natural/thorn) || istype(P, /obj/item/natural/feather))
-		if(!open)
-			return
-		var/list/choices = list()
-		for(var/F in fingers)
-			if(fingers[F] == TRUE)
-				choices[F] = F
-			else
-				choices["<s>[F]</s>"] = F
-		var/choice = browser_input_list(user, "Reattach/Sever a Finger", "THE LIST", choices)
-		if(!choice || QDELETED(src) || QDELETED(user))
-			return
-		var/finger = choices[choice]
-		fingers[finger] = !fingers[finger]
-		user.mind.cached_frumentarii = fingers
-		playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
-	rebuild_info()
+/obj/item/frumentarii/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+    if(user.cmode)
+        return NONE
 
-/obj/item/paper/scroll/frumentarii/read(mob/user)
-	. = ..()
-	user.mind.cached_frumentarii += fingers
+    if(!istype(tool, /obj/item/natural/thorn) && !istype(tool, /obj/item/natural/feather))
+        return NONE
 
-/obj/item/paper/scroll/frumentarii/proc/rebuild_info()
-	info = null
-	info += "<div style='vertical-align:top'>"
-	info += "<h2 style='color:#06080F;font-family:\"Segoe Script\"'>Known Agents</h2>"
-	info += "<hr/>"
+    var/choice = tgui_alert(user, "What would you like to do?", "Reattach/Sever Finger", list("Reattach", "Sever"))
+    if(!choice)
+        return ITEM_INTERACT_BLOCKING
 
-	for(var/F in fingers)
-		if(fingers[F])
-			info += "<li style='color:#06080F;font-size:11px;font-family:\"Segoe Script\"'>[F]</li><br/>"
-		else
-			info += "<s><li style='color:#610018;font-size:11px;font-family:\"Segoe Script\"'>[F]</li></s><br/>"
-	info += "</div>"
+    switch(choice)
+        if("Reattach")
+            if(length(GLOB.ex_court_agents) <= 0)
+                balloon_alert(user, "there are no Ex-Fingers to reattach.")
+                return ITEM_INTERACT_BLOCKING
 
+            var/reattachChoice = tgui_input_list(user, "Reattach a Finger", "THE LIST", GLOB.ex_court_agents)
+            if(!reattachChoice || QDELETED(src) || QDELETED(user))
+                return ITEM_INTERACT_BLOCKING
+
+            GLOB.ex_court_agents -= reattachChoice
+            GLOB.court_agents += reattachChoice
+            playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
+            return ITEM_INTERACT_SUCCESS
+
+        if("Sever")
+            if(length(GLOB.court_agents) <= 0)
+                balloon_alert(user, "there are no Fingers to sever.")
+                return ITEM_INTERACT_BLOCKING
+
+            var/severChoice = tgui_input_list(user, "Sever a Finger", "THE LIST", GLOB.court_agents)
+            if(!severChoice || QDELETED(src) || QDELETED (user))
+                return ITEM_INTERACT_BLOCKING
+
+            GLOB.court_agents -= severChoice
+            GLOB.ex_court_agents += severChoice
+            playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
+            return ITEM_INTERACT_SUCCESS
 
 /obj/item/paper/scroll/keep_plans
 	name = "keep architectural drawings"
