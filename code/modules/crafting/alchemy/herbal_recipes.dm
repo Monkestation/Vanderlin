@@ -603,7 +603,7 @@
 	name = "Erratique"
 	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity."
 	color = "#ffffff"
-	metabolization_rate = 0.1
+	metabolization_rate = 0.05
 	taste_description = "bitter thoughts"
 
 /datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
@@ -633,24 +633,6 @@
 	. = ..()
 	L.adjustFireLoss(5)
 	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
-
-/datum/reagent/head_explosion  //admin only, unless someone gets lucky with humors
-	name = "Berry Juice"
-	description = "Berry juice. Totally will not make your head explode." 
-	reagent_state = LIQUID  //warning to whoever finds this, whether admin or guy with humors. This WILL KILL instantly. Use accordingly.
-	color = "#790404"  // dammit Avalon, youve gotten me again. 
-	metabolization_rate = 0.1
-	taste_description = "berry, with a hint of regret"
-
-/datum/reagent/head_explosion/on_mob_add(mob/living/L)
-	. = ..()
-	if(iscarbon(L))
-		var/mob/living/carbon/C = L
-		var/obj/item/bodypart/head/dead_head = C.get_bodypart(BODY_ZONE_HEAD)
-		if(dead_head)
-			qdel(dead_head)
-	else if(L.stat != DEAD)
-		L.death()
 
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
@@ -734,41 +716,6 @@
 /datum/reagent/poison/tear/on_mob_end_metabolize(mob/living/M)
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
-
-/datum/reagent/poison/bioweapon
-	name = "NCSIV" //basically anthrax, hyper lethal, will be almost impossible to craft
-	description = "Noncontagious Septicemia Inducing Viremia. First created by medicators, this is the second best anti personnel bioweapon known to psydonia before deaditism. Capable of quickly eliminating hostile individuals without risking spread to the deployer. Most effective when used as an aerosol or via intravaneus exposure/epidermis puncture."
-	color = "#00ff0d"
-	metabolization_rate = 0.01
-	taste_description = "death on a microscopic level"
-
-/datum/reagent/poison/bioweapon/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
-	. = ..()
-	if(methods & (TOUCH|VAPOR))
-		var/mob/living/carbon/carbon = exposed_mob
-		if(istype(carbon))
-			if(!length(carbon.all_injuries))
-				return
-			for(var/datum/injury/injury as anything in carbon.all_injuries)
-				if(!injury.can_heal())
-					continue
-				injury.adjust_germ_level(reac_volume * 20)
-
-/datum/reagent/poison/bioweapon/on_mob_life(mob/living/carbon/M, efficiency)
-	var/compound_rate = min(0.5 + (current_cycle * 5), 4)
-	M.adjustToxLoss(compound_rate * REM * efficiency, 0)
-	M.add_nausea(1 * efficiency)
-	if(current_cycle > 8)
-		M.add_chem_effect(CE_ANTIBIOTIC, -10, "[type]")
-	. = ..()
-
-/datum/reagent/poison/bioweapon/on_mob_metabolize(mob/living/M)
-	. = ..()
-	ADD_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
-
-/datum/reagent/poison/bioweapon/on_mob_end_metabolize(mob/living/M)
-	. = ..()
-	REMOVE_TRAIT(M, TRAIT_PESTRA_CURSE, "[type]")
 
 /datum/reagent/poison/kingsbane
 	name = "Kingsbane"  //more of a joke poison, just messes with nobles and money

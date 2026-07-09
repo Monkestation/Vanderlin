@@ -365,7 +365,7 @@
 	required_reagents = list(
 		/datum/reagent/toxin/spidervenom_inert = 10,
 		/datum/reagent/druqks = 5,
-		/datum/reagent/mercury = 5
+		/datum/reagent/medicine/antidote = 5
 	)
 	results = list(/datum/reagent/poison/erratique = 20)
 	mix_message = "The weakened venom foams as the drugs mix with it, before settling with a dizzying scent."
