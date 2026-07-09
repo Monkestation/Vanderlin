@@ -565,13 +565,13 @@ And it also helps for the character set panel
 		owner.add_stress(/datum/stress_event/good_blood)
 		owner.adjustBruteLoss(-5)
 
-/datum/status_effect/buff/blood_preference/tick()
-	. = ..()
-	owner.adjustBruteLoss(-2)
-
 /datum/status_effect/buff/blood_preference/on_remove()
 	. = ..()
 	owner.remove_stress(/datum/stress_event/good_blood)
+
+/datum/status_effect/buff/blood_preference/tick(seconds_between_ticks)
+	. = ..()
+	owner.adjustBruteLoss(-2 * seconds_between_ticks)
 
 /datum/stress_event/good_blood
 	desc = span_good("That blood was euphoric!")

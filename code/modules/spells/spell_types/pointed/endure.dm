@@ -108,34 +108,34 @@
 	id = "psyhealing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psyhealing
 	duration = 15 SECONDS
-	var/healing_on_tick = 1
+	var/healing_per_second = 1
 	var/outline_colour = "#d3d3d3"
 
-/datum/status_effect/buff/psyhealing/on_creation(mob/living/new_owner, new_healing_on_tick)
-	healing_on_tick = new_healing_on_tick
+/datum/status_effect/buff/psyhealing/on_creation(mob/living/new_owner, duration_override, healing_per_second)
+	src.healing_per_second = healing_per_second
 	return ..()
 
 /datum/status_effect/buff/psyhealing/on_apply()
 	. = ..()
 	var/filter = owner.get_filter(PSYDON_HEALING_FILTER)
-	if (!filter)
+	if(!filter)
 		owner.add_filter(PSYDON_HEALING_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
 	return TRUE
 
 /datum/status_effect/buff/psyhealing/get_examine_text()
 	return "They stir with a sense of ENDURING!"
 
-/datum/status_effect/buff/psyhealing/tick()
+/datum/status_effect/buff/psyhealing/tick(seconds_between_ticks)
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/psyheal_rogue(get_turf(owner))
 	H.color = "#d3d3d3"
 	var/list/wCount = owner.get_wounds()
 	if(wCount.len > 0)
-		owner.heal_wounds(healing_on_tick * 1.75)
+		owner.heal_wounds(healing_per_second * 1.75)
 		owner.update_damage_overlays()
-	owner.adjustOxyLoss(-healing_on_tick, 0)
-	owner.adjustToxLoss(-healing_on_tick, 0, forced = TRUE)
-	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
-	owner.adjustCloneLoss(-healing_on_tick, 0)
+	owner.adjustOxyLoss(-healing_per_second, 0)
+	owner.adjustToxLoss(-healing_per_second, 0, forced = TRUE)
+	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_per_second)
+	owner.adjustCloneLoss(-healing_per_second, 0)
 
 /datum/status_effect/buff/psyhealing/on_remove()
 	. = ..()
@@ -168,7 +168,7 @@
 /datum/status_effect/buff/psyvived/get_examine_text()
 	return "They move with an air of ABSOLUTION!"
 
-/datum/status_effect/buff/psyvived/tick()
+/datum/status_effect/buff/psyvived/tick(seconds_between_ticks)
 	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/psyheal_rogue(get_turf(owner))
 	H.color = "#aa1717"
 

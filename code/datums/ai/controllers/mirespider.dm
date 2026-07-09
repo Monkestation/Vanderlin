@@ -248,10 +248,9 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing/spider_cocoon
 	duration = 1800 SECONDS
 	examine_text = "SUBJECTPRONOUN is covered in spider silk... eww!"
-	healing_on_tick = 1
 	outline_colour = "#4e4c4c00"
 	effect_color = "#4e4c4c00"
-	var/blood_healing_on_tick = 20
+	var/blood_healing_per_second = 20
 
 /datum/status_effect/buff/healing/spider_cocoon/on_apply()
 	. = ..()
@@ -261,12 +260,12 @@
 	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_STRENGTH) - 10 ) * 0.05)
 	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 10 ) * 0.05)
 	if(stat_bonus > 0)
-		healing_on_tick += stat_bonus
-		blood_healing_on_tick += (stat_bonus * 10)
+		healing_per_second += stat_bonus
+		blood_healing_per_second += (stat_bonus * 10)
 	return TRUE
 
-/datum/status_effect/buff/healing/spider_cocoon/tick()
+/datum/status_effect/buff/healing/spider_cocoon/tick(seconds_between_ticks)
 	. = ..()
-	owner.adjust_blood_volume(blood_healing_on_tick, maximum = BLOOD_VOLUME_NORMAL)
+	owner.adjust_blood_volume(blood_healing_per_second * seconds_between_ticks, maximum = BLOOD_VOLUME_NORMAL)
 
 #undef COCOON_FILTER

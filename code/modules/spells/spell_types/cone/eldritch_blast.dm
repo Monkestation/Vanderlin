@@ -29,7 +29,7 @@
 	to_chat(owner, span_boldwarning("You feel filled with a rage that is not your own!"))
 	return TRUE
 
-/datum/status_effect/amok/tick()
+/datum/status_effect/amok/tick(seconds_between_ticks)
 	var/prev_combat_mode = owner.cmode
 	owner.cmode = TRUE
 

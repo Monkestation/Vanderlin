@@ -85,21 +85,27 @@
 	. = ..()
 	owner?.remove_stress(/datum/stress_event/infernal_pain)
 
-/datum/status_effect/demonic_torment/tick()
-	if(COOLDOWN_FINISHED(src, next_torment) && prob(5))
-		COOLDOWN_START(src, next_torment, rand(10 SECONDS, 30 SECONDS))
-		var/effect = rand(1, 3)
-		switch(effect)
-			if(1)
-				owner.apply_damage(rand(2, 5), BURN, null, 0, null, FALSE)
-				to_chat(owner, span_userdanger("Infernal flames sear your cursed flesh!"))
-				owner.add_stress(/datum/stress_event/infernal_pain)
-			if(2)
-				owner.emote("scream", forced = TRUE)
-				to_chat(owner, span_userdanger("The family curse torments you!"))
-			if(3)
-				owner.Knockdown(10)
-				to_chat(owner, span_userdanger("The agony of your bloodline overwhelms you!"))
+/datum/status_effect/demonic_torment/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_torment))
+		return
+
+	if(!SPT_PROB(5, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_torment, rand(10 SECONDS, 30 SECONDS))
+
+	var/effect = rand(1, 3)
+	switch(effect)
+		if(1)
+			owner.apply_damage(rand(2, 5) * seconds_between_ticks, BURN, null, 0, null, FALSE)
+			to_chat(owner, span_userdanger("Infernal flames sear your cursed flesh!"))
+			owner.add_stress(/datum/stress_event/infernal_pain)
+		if(2)
+			owner.emote("scream", forced = TRUE)
+			to_chat(owner, span_userdanger("The family curse torments you!"))
+		if(3)
+			owner.Knockdown(1 SECONDS * seconds_between_ticks)
+			to_chat(owner, span_userdanger("The agony of your bloodline overwhelms you!"))
 
 /datum/status_effect/demonic_despair
 	id = "demonic_despair"
@@ -108,19 +114,25 @@
 	effectedstats = list(STAT_CONSTITUTION = -1)
 	COOLDOWN_DECLARE(next_despair)
 
-/datum/status_effect/demonic_despair/tick()
-	if(COOLDOWN_FINISHED(src, next_despair) && prob(3))
-		COOLDOWN_START(src, next_despair, rand(20 SECONDS, 1 MINUTES))
-		var/list/despair_messages = list(
-			"The family curse weighs heavy on me...",
-			"Why was I born into this cursed bloodline?",
-			"There's no escape from our family's fate.",
-			"We're all doomed by our ancestors' sins.",
-			"Nothing can lift this hereditary burden.",
-			"Death would be a mercy from this curse."
-		)
-		owner.say(pick(despair_messages), forced = "family curse")
-		owner.add_stress(/datum/stress_event/cursed_despair)
+/datum/status_effect/demonic_despair/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_despair))
+		return
+
+	if(!SPT_PROB(3, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_despair, rand(20 SECONDS, 1 MINUTES))
+
+	var/list/despair_messages = list(
+		"The family curse weighs heavy on me...",
+		"Why was I born into this cursed bloodline?",
+		"There's no escape from our family's fate.",
+		"We're all doomed by our ancestors' sins.",
+		"Nothing can lift this hereditary burden.",
+		"Death would be a mercy from this curse."
+	)
+	owner.say(pick(despair_messages), forced = "family curse")
+	owner.add_stress(/datum/stress_event/cursed_despair)
 
 /datum/status_effect/demonic_wrath
 	id = "demonic_wrath"
@@ -129,26 +141,33 @@
 	effectedstats = list(STAT_STRENGTH = 1, STAT_INTELLIGENCE = -1)
 	COOLDOWN_DECLARE(next_wrath)
 
-/datum/status_effect/demonic_wrath/tick()
-	if(COOLDOWN_FINISHED(src, next_wrath) && prob(4))
-		COOLDOWN_START(src, next_wrath, rand(15 SECONDS, 40 SECONDS))
-		var/found_target = FALSE
-		for(var/mob/living/carbon/human/victim in view(2, owner))
-			if(victim == owner)
-				continue
-			owner.emote("rage", forced = TRUE)
-			to_chat(owner, span_userdanger("The family curse fills you with rage!"))
-			if(owner.get_active_held_item())
-				victim.attacked_by(owner.get_active_held_item(), owner)
-			else
-				victim.attacked_by(owner, owner)
-			found_target = TRUE
-			break
+/datum/status_effect/demonic_wrath/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_wrath))
+		return
 
-		if(!found_target && prob(40))
-			owner.apply_damage(rand(3, 6), BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
-			to_chat(owner, span_userdanger("In my cursed rage, I hurt myself!"))
-			owner.add_stress(/datum/stress_event/cursed_wrath)
+	if(!SPT_PROB(4, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_wrath, rand(15 SECONDS, 40 SECONDS))
+
+	var/found_target = FALSE
+	for(var/mob/living/carbon/human/victim in view(2, owner))
+		if(victim == owner)
+			continue
+
+		owner.emote("rage", forced = TRUE)
+		to_chat(owner, span_userdanger("The family curse fills you with rage!"))
+		if(owner.get_active_held_item())
+			victim.attacked_by(owner.get_active_held_item(), owner)
+		else
+			victim.attacked_by(owner, owner)
+		found_target = TRUE
+		break
+
+	if(!found_target && SPT_PROB(40, seconds_between_ticks))
+		owner.apply_damage(rand(3, 6), BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+		to_chat(owner, span_userdanger("In my cursed rage, I hurt myself!"))
+		owner.add_stress(/datum/stress_event/cursed_wrath)
 
 /datum/status_effect/demonic_paranoia
 	id = "demonic_paranoia"
@@ -157,19 +176,25 @@
 	effectedstats = list(STAT_PERCEPTION = 1, STAT_SPEED = -1)
 	COOLDOWN_DECLARE(next_paranoia)
 
-/datum/status_effect/demonic_paranoia/tick()
-	if(COOLDOWN_FINISHED(src, next_paranoia) && prob(3))
-		COOLDOWN_START(src, next_paranoia, rand(30 SECONDS, 80 SECONDS))
-		var/list/paranoid_messages = list(
-			"They know about our family's curse...",
-			"Everyone suspects what we really are.",
-			"They're watching our bloodline closely.",
-			"Our cursed heritage makes us targets.",
-			"I can't trust anyone outside the family.",
-			"They plot against our cursed kind."
-		)
-		owner.say(pick(paranoid_messages), forced = "family curse")
-		owner.add_stress(/datum/stress_event/cursed_paranoia)
+/datum/status_effect/demonic_paranoia/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_paranoia))
+		return
+
+	if(!SPT_PROB(3, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_paranoia, rand(30 SECONDS, 80 SECONDS))
+
+	var/list/paranoid_messages = list(
+		"They know about our family's curse...",
+		"Everyone suspects what we really are.",
+		"They're watching our bloodline closely.",
+		"Our cursed heritage makes us targets.",
+		"I can't trust anyone outside the family.",
+		"They plot against our cursed kind."
+	)
+	owner.say(pick(paranoid_messages), forced = "family curse")
+	owner.add_stress(/datum/stress_event/cursed_paranoia)
 
 /datum/status_effect/demonic_damnation
 	id = "demonic_damnation"
@@ -177,8 +202,8 @@
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_damnation
 	effectedstats = list(STAT_CONSTITUTION = -1)
 
-/datum/status_effect/demonic_damnation/tick()
-	if(prob(2))
+/datum/status_effect/demonic_damnation/tick(seconds_between_ticks)
+	if(SPT_PROB(2, seconds_between_ticks))
 		to_chat(owner, span_userdanger("You feel the weight of your family's damnation!"))
 		owner.add_stress(/datum/stress_event/cursed_damnation)
 
@@ -188,25 +213,31 @@
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_gluttony
 	COOLDOWN_DECLARE(next_hunger)
 
-/datum/status_effect/demonic_gluttony/tick()
-	if(COOLDOWN_FINISHED(src, next_hunger) && prob(4))
-		COOLDOWN_START(src, next_hunger, rand(20 SECONDS, 50 SECONDS))
-		var/list/nearby_food = list()
-		for(var/obj/item/reagent_containers/food/F in view(1, owner))
-			nearby_food += F
-		for(var/obj/item/reagent_containers/R in view(1, owner))
-			if(R.reagents && R.reagents.total_volume > 0)
-				nearby_food += R
+/datum/status_effect/demonic_gluttony/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_hunger))
+		return
 
-		if(nearby_food.len)
-			var/obj/item/target_food = pick(nearby_food)
-			if(owner.put_in_active_hand(target_food))
-				to_chat(owner, span_userdanger("The family curse compels me to consume this!"))
-				target_food.attack(owner, owner)
-		else
-			if(!owner.has_stress_type(/datum/stress_event/cursed_hunger))
-				to_chat(owner, span_userdanger("I hunger for anything to satisfy this cursed bloodline!"))
-			owner.add_stress(/datum/stress_event/cursed_hunger)
+	if(!SPT_PROB(4, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_hunger, rand(20 SECONDS, 50 SECONDS))
+
+	var/list/nearby_food = list()
+	for(var/obj/item/reagent_containers/food/F in view(1, owner))
+		nearby_food += F
+	for(var/obj/item/reagent_containers/R in view(1, owner))
+		if(R.reagents && R.reagents.total_volume > 0)
+			nearby_food += R
+
+	if(length(nearby_food))
+		var/obj/item/target_food = pick(nearby_food)
+		if(owner.put_in_active_hand(target_food))
+			to_chat(owner, span_userdanger("The family curse compels me to consume this!"))
+			target_food.attack(owner, owner)
+	else
+		if(!owner.has_stress_type(/datum/stress_event/cursed_hunger))
+			to_chat(owner, span_userdanger("I hunger for anything to satisfy this cursed bloodline!"))
+		owner.add_stress(/datum/stress_event/cursed_hunger)
 
 /datum/status_effect/demonic_pride
 	id = "demonic_pride"
@@ -215,18 +246,23 @@
 	effectedstats = list(STAT_CONSTITUTION = 1)
 	COOLDOWN_DECLARE(next_pride)
 
-/datum/status_effect/demonic_pride/tick()
-	if(COOLDOWN_FINISHED(src, next_pride) && prob(3))
-		COOLDOWN_START(src, next_pride, rand(40 SECONDS, 80 SECONDS))
-		var/list/pride_messages = list(
-			"Our bloodline is superior, curse and all.",
-			"We don't need help from lesser families.",
-			"This curse makes us stronger than them.",
-			"Our heritage sets us above the common folk.",
-			"I won't show weakness, despite the curse.",
-			"We bear this burden because we're chosen."
-		)
-		owner.say(pick(pride_messages), forced = "family curse")
+/datum/status_effect/demonic_pride/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_pride))
+		return
+
+	if(!SPT_PROB(3, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_pride, rand(40 SECONDS, 80 SECONDS))
+	var/list/pride_messages = list(
+		"Our bloodline is superior, curse and all.",
+		"We don't need help from lesser families.",
+		"This curse makes us stronger than them.",
+		"Our heritage sets us above the common folk.",
+		"I won't show weakness, despite the curse.",
+		"We bear this burden because we're chosen."
+	)
+	owner.say(pick(pride_messages), forced = "family curse")
 
 /datum/status_effect/demonic_isolation
 	id = "demonic_isolation"
@@ -235,29 +271,34 @@
 	effectedstats = list(STAT_SPEED = -2)
 	COOLDOWN_DECLARE(next_isolation)
 
-/datum/status_effect/demonic_isolation/tick()
-	if(COOLDOWN_FINISHED(src, next_isolation) && prob(4))
-		COOLDOWN_START(src, next_isolation, rand(30 SECONDS, 70 SECONDS))
-		var/found_people = FALSE
-		for(var/mob/living/carbon/human/victim in view(1, owner))
-			if(victim == owner)
-				continue
-			var/turf/away_turf = get_step_away(victim, owner)
-			if(away_turf)
-				victim.throw_at(away_turf, 1, 1)
-				to_chat(victim, span_warning("Something about [owner]'s cursed presence repels you!"))
-			found_people = TRUE
+/datum/status_effect/demonic_isolation/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_isolation))
+		return
 
-		if(prob(25))
-			var/list/lonely_messages = list(
-				"Our cursed bloodline dooms us to solitude...",
-				"The family curse drives everyone away.",
-				"We're destined to be alone because of what we are.",
-				"No one can stand to be near our cursed kind."
-			)
-			owner.say(pick(lonely_messages), forced = "family curse")
-			if(!found_people)
-				owner.add_stress(/datum/stress_event/cursed_isolation)
+	if(!SPT_PROB(2, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_isolation, rand(30 SECONDS, 70 SECONDS))
+	var/found_people = FALSE
+	for(var/mob/living/carbon/human/victim in view(1, owner))
+		if(victim == owner)
+			continue
+		var/turf/away_turf = get_step_away(victim, owner)
+		if(away_turf)
+			victim.throw_at(away_turf, 1, 1)
+			to_chat(victim, span_warning("Something about [owner]'s cursed presence repels you!"))
+		found_people = TRUE
+
+	if(prob(25))
+		var/list/lonely_messages = list(
+			"Our cursed bloodline dooms us to solitude...",
+			"The family curse drives everyone away.",
+			"We're destined to be alone because of what we are.",
+			"No one can stand to be near our cursed kind."
+		)
+		owner.say(pick(lonely_messages), forced = "family curse")
+		if(!found_people)
+			owner.add_stress(/datum/stress_event/cursed_isolation)
 
 /datum/status_effect/demonic_madness
 	id = "demonic_madness"
@@ -266,18 +307,23 @@
 	effectedstats = list(STAT_INTELLIGENCE = -2, STAT_PERCEPTION = 1)
 	COOLDOWN_DECLARE(next_madness)
 
-/datum/status_effect/demonic_madness/tick()
-	if(COOLDOWN_FINISHED(src, next_madness) && prob(3))
-		COOLDOWN_START(src, next_madness, rand(20 SECONDS, 1 MINUTES))
-		var/list/mad_messages = list(
-			"The voices in our blood speak to me...",
-			"I see the demons that cursed our ancestors!",
-			"Reality bends around our tainted heritage.",
-			"The curse shows me things others can't see!",
-			"Our bloodline carries whispers from Hell!",
-			"The family curse reveals hidden truths!"
-		)
-		owner.say(pick(mad_messages), forced = "family curse")
+/datum/status_effect/demonic_madness/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_madness))
+		return
+
+	if(!SPT_PROB(3, seconds_between_ticks))
+		return
+
+	COOLDOWN_START(src, next_madness, rand(20 SECONDS, 1 MINUTES))
+	var/list/mad_messages = list(
+		"The voices in our blood speak to me...",
+		"I see the demons that cursed our ancestors!",
+		"Reality bends around our tainted heritage.",
+		"The curse shows me things others can't see!",
+		"Our bloodline carries whispers from Hell!",
+		"The family curse reveals hidden truths!"
+	)
+	owner.say(pick(mad_messages), forced = "family curse")
 
 /datum/status_effect/demonic_decay
 	id = "demonic_decay"
@@ -286,31 +332,36 @@
 	effectedstats = list(STAT_CONSTITUTION = -2)
 	COOLDOWN_DECLARE(next_decay)
 
-/datum/status_effect/demonic_decay/tick()
-	if(COOLDOWN_FINISHED(src, next_decay) && prob(3))
-		var/cooldown_time = rand(40 SECONDS, 90 SECONDS)
-		var/effect = rand(1, 4)
-		switch(effect)
-			if(1)
-				if(iscarbon(owner))
-					var/mob/living/carbon/C = owner
-					C.vomit()
-				to_chat(owner, span_userdanger("The family curse sickens your body!"))
-			if(2)
-				owner.Unconscious(15)
-				to_chat(owner, span_userdanger("Your cursed heritage weakens you!"))
-			if(3)
-				owner.set_eye_blur_if_lower(16 SECONDS)
-				to_chat(owner, span_userdanger("The curse clouds your vision!"))
-			if(4)
-				if(ishuman(owner))
-					var/mob/living/carbon/human/H = owner
-					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					BP.adjust_germ_level(50)
-					H.regenerate_icons()
-				cooldown_time = 8 MINUTES
-				to_chat(owner, span_userdanger("Your cursed flesh begins to decay!"))
-		COOLDOWN_START(src, next_decay, cooldown_time)
+/datum/status_effect/demonic_decay/tick(seconds_between_ticks)
+	if(!COOLDOWN_FINISHED(src, next_decay))
+		return
+
+	if(!SPT_PROB(3, seconds_between_ticks))
+		return
+
+	var/cooldown_time = rand(40 SECONDS, 90 SECONDS)
+	var/effect = rand(1, 4)
+	switch(effect)
+		if(1)
+			if(iscarbon(owner))
+				var/mob/living/carbon/C = owner
+				C.vomit()
+			to_chat(owner, span_userdanger("The family curse sickens your body!"))
+		if(2)
+			owner.Unconscious(1.5 SECONDS * seconds_between_ticks)
+			to_chat(owner, span_userdanger("Your cursed heritage weakens you!"))
+		if(3)
+			owner.set_eye_blur_if_lower(16 SECONDS * seconds_between_ticks)
+			to_chat(owner, span_userdanger("The curse clouds your vision!"))
+		if(4)
+			if(ishuman(owner))
+				var/mob/living/carbon/human/H = owner
+				var/obj/item/bodypart/BP = pick(H.bodyparts)
+				BP.adjust_germ_level(50 * seconds_between_ticks)
+				H.regenerate_icons()
+			cooldown_time = 8 MINUTES
+			to_chat(owner, span_userdanger("Your cursed flesh begins to decay!"))
+	COOLDOWN_START(src, next_decay, cooldown_time)
 
 //////////////////////
 /// ALERT SCREENS ///

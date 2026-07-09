@@ -129,11 +129,11 @@
 	desc = "Terrorizing the world with my craft."
 	icon_state = "buff"
 
-
-/datum/status_effect/buff/playing_dirge/tick()
+/datum/status_effect/buff/playing_dirge/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/O = owner
 	if(!song_check_instrument(O))
 		return
+
 	pulse += 1
 	new effect(get_turf(owner))
 	// Spawn telltale notes on debuffed enemies every tick (2s) for visibility
@@ -142,7 +142,8 @@
 			for(var/datum/status_effect/debuff/song/S in H.status_effects)
 				new /obj/effect/temp_visual/song_telltale/debuff(get_turf(H))
 				break // One note per target per tick
-	if (pulse >= ticks_to_apply)
+
+	if(pulse >= ticks_to_apply)
 		pulse = 0
 		O.adjust_stamina(energytodrain)
 		apply_song_effects(O)
@@ -196,10 +197,11 @@
 	desc = "Healing the world with my craft."
 	icon_state = "buff"
 
-/datum/status_effect/buff/playing_melody/tick()
+/datum/status_effect/buff/playing_melody/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/O = owner
 	if(!song_check_instrument(O))
 		return
+
 	new effect(get_turf(owner))
 	var/base_range = 3
 	base_range += GET_MOB_SKILL_VALUE(owner, /datum/attribute/skill/misc/music) * 0.2

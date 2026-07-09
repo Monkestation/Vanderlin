@@ -170,30 +170,35 @@
 	effect_color = "#800000"
 	return ..()
 
-/datum/status_effect/buff/cranking_soulchurner/tick()
+/datum/status_effect/buff/cranking_soulchurner/tick(seconds_between_ticks)
 	var/obj/effect/temp_visual/music_rogue/M = new /obj/effect/temp_visual/music_rogue(get_turf(owner))
 	M.color = "#800000"
 	pulse += 1
-	if (pulse >= ticks_to_apply)
-		pulse = 0
-		if(!HAS_TRAIT(owner, TRAIT_INQUISITION))
-			owner.add_stress(/datum/stress_event/soulchurnerhorror)
-		for (var/mob/living/carbon/human/H in hearers(7, owner))
-			if (!H.client || !H.patron)
-				continue
-			if (!H.has_stress_type(/datum/stress_event/soulchurner))
-				var/list/lines = patron_lines[H.patron.type]
-				if(lines)
-					if(istype(H.patron, /datum/patron/psydon))
-						H.add_stress(/datum/stress_event/soulchurnerpsydon)
-						if(HAS_TRAIT(H, TRAIT_INQUISITION))
-							H.apply_status_effect(/datum/status_effect/buff/churnerprotection)
-					else
-						H.add_stress(/datum/stress_event/soulchurner)
-						if(!H.has_status_effect(/datum/status_effect/buff/churnernegative))
-							H.apply_status_effect(/datum/status_effect/buff/churnernegative)
-					to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
-					to_chat(H, (span_cultsmall(pick(lines))))
+	if(pulse < ticks_to_apply)
+		return
+
+	pulse = 0
+	if(!HAS_TRAIT(owner, TRAIT_INQUISITION))
+		owner.add_stress(/datum/stress_event/soulchurnerhorror)
+
+	for(var/mob/living/carbon/human/H in hearers(7, owner))
+		if(!H.client || !H.patron)
+			continue
+		if(H.has_stress_type(/datum/stress_event/soulchurner))
+			continue
+		var/list/lines = patron_lines[H.patron.type]
+		if(!length(lines))
+			continue
+		if(istype(H.patron, /datum/patron/psydon))
+			H.add_stress(/datum/stress_event/soulchurnerpsydon)
+			if(HAS_TRAIT(H, TRAIT_INQUISITION))
+				H.apply_status_effect(/datum/status_effect/buff/churnerprotection)
+		else
+			H.add_stress(/datum/stress_event/soulchurner)
+			if(!H.has_status_effect(/datum/status_effect/buff/churnernegative))
+				H.apply_status_effect(/datum/status_effect/buff/churnernegative)
+		to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
+		to_chat(H, (span_cultsmall(pick(lines))))
 
 /atom/movable/screen/alert/status_effect/buff/censerbuff
 	name = "Inspired by Psydon."

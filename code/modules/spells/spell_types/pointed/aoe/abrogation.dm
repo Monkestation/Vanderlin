@@ -65,10 +65,10 @@
 	examine_text = "<b>SUBJECTPRONOUN is wreathed in a wild frenzy of ghostly motes!</b>"
 	effectedstats = list(STAT_STRENGTH = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2)
 	status_type = STATUS_EFFECT_REFRESH
-	tick_interval = 2 DECISECONDS
+	tick_interval = 2 SECONDS
 	var/datum/weakref/debuffer
 	var/outline_colour = "#33cabc"
-	var/base_tick = 0.2
+	var/damage_per_second = 2
 	var/intensity = 1
 	var/range = 10
 
@@ -93,14 +93,14 @@
 	intensity += 1
 	to_chat(owner, span_boldwarning("The mists intensify, the glowing wisps steadily disrupting my body..."))
 
-/datum/status_effect/debuff/abrogation/tick()
+/datum/status_effect/debuff/abrogation/tick(seconds_between_ticks)
 	if(!owner)
 		return
 
-	if(prob(66))
-		owner.adjustFireLoss(base_tick * intensity)
+	if(SPT_PROB(38, seconds_between_ticks))
+		owner.adjustFireLoss(damage_per_second * intensity)
 
-	if(prob(10))
+	if(SPT_PROB(5, seconds_between_ticks))
 		to_chat(owner, span_warning("A frenzy of ghostly motes assail my form!"))
 		owner.emote("scream")
 

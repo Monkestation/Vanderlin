@@ -168,7 +168,7 @@
 	if(HAS_TRAIT(owner, TRAIT_NODROWN) || HAS_TRAIT(owner, TRAIT_NOBREATH) || (owner.mob_size >= MOB_SIZE_HUMAN && owner.body_position == STANDING_UP && !drowning_process_ignore_standing))
 		return
 
-	if(prob(50))
+	if(SPT_PROB(32, seconds_between_ticks))
 		owner.emote("drown")
 
 	var/drowning_multiplier = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 3 : 2) : 1

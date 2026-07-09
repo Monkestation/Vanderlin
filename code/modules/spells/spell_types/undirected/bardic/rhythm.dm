@@ -212,13 +212,13 @@
 	new /obj/effect/temp_visual/heal_rogue(get_turf(user))
 	to_chat(user, span_info("A soothing rhythm mends my wounds."))
 	playsound(user, 'sound/magic/heal.ogg', 40, TRUE)
-	..()
+	return ..()
 
 /datum/status_effect/buff/healing/rhythm_regen
 	id = "rhythm_regen"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
 	duration = RHYTHM_REGEN_DURATION
-	healing_on_tick = RHYTHM_REGEN_TICK
+	healing_per_second = RHYTHM_REGEN_TICK
 	outline_colour = GLOW_COLOR_BARDIC
 
 #undef RHYTHM_FILTER

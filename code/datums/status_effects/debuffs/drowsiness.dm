@@ -13,17 +13,17 @@
 	. = ..()
 	UnregisterSignal(owner, COMSIG_COMPONENT_CLEAN_FACE_ACT)
 
-/datum/status_effect/drowsiness/tick()
+/datum/status_effect/drowsiness/tick(seconds_between_ticks)
 	// You do not feel drowsy while unconscious or in stasis
 	if(owner.stat >= UNCONSCIOUS)
 		return
 
 	// Resting helps against drowsiness
 	// While resting, we lose 4 seconds of duration (2 additional ticks) per tick
-	if(owner.resting && remove_duration(2 * initial(tick_interval)))
+	if(owner.resting && remove_duration(2 * seconds_between_ticks))
 		return
 
-	owner.set_eye_blur_if_lower(4 SECONDS)
+	owner.set_eye_blur_if_lower(2 SECONDS * seconds_between_ticks)
 
-	if(prob(5))
-		owner.AdjustSleeping(10 SECONDS)
+	if(SPT_PROB(2.5, seconds_between_ticks))
+		owner.AdjustSleeping(5 SECONDS * seconds_between_ticks)
