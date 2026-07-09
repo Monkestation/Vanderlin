@@ -11,6 +11,7 @@
 /obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/Destroy()
 	if(summoning)
 		release_summon()
+	summoned_mob = null
 	.=..()
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/attack_hand(mob/living/user)
@@ -19,7 +20,8 @@
 		playsound(usr, 'sound/magic/teleport_diss.ogg', 75, TRUE)
 		do_invoke_glow()
 		sleep(20)
-		animate(summoned_mob, color = null, time = 5)
+		if(summoned_mob && !QDELETED(summoned_mob))
+			animate(summoned_mob, color = null, time = 5)
 		release_summon()
 		return
 	. = ..()

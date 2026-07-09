@@ -64,6 +64,9 @@
 /obj/item/clothing/armor/gambeson/heavy/colored/dark
 	color = CLOTHING_DARK_INK
 
+/obj/item/clothing/armor/gambeson/heavy/colored/brown
+	color = CLOTHING_MUD_BROWN
+
 /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	name = "robed jupon"
 	desc = "A thick, quilted jupon with an iron heart protector. It's great for the southern desert's heat and northern tundra's cold."

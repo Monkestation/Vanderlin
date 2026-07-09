@@ -249,4 +249,4 @@
 			head = /obj/item/clothing/head/helmet/heavy/bucket
 			wrists = /obj/item/clothing/neck/psycross/silver/divine
 			cloak = /obj/item/clothing/cloak/templar/undivided
-			beltr = /obj/item/weapon/sword/long/decorated
+			beltr = /obj/item/weapon/sword/long/silver/decorated

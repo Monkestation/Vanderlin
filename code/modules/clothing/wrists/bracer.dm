@@ -40,8 +40,14 @@
 	icon_state = "ibracers"
 	item_state = "ibracers"
 	armor = ARMOR_MAILLE
+	armor_class = AC_MEDIUM
 	max_integrity = INTEGRITY_STRONG
 
+/obj/item/clothing/wrists/bracers/iron/concealed
+	name = "concealed iron plate vambraces"
+	desc = "Thin and light forearm guards that offer good protection, while being able to be worn under sleeves."
+	alternate_worn_layer = SHIRT_LAYER + 0.1
+	alternate_sleeve_layer = SHIRTSLEEVE_LAYER + 0.1
 
 /obj/item/clothing/wrists/bracers/jackchain
 	name = "jack chains"

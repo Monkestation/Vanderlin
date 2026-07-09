@@ -3172,7 +3172,7 @@
 /area/indoors/town)
 "bAZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/machinery/essence/extractor,
+/obj/machinery/essence/splitter,
 /turf/open/floor/twig,
 /area/under/town/basement)
 "bBc" = (
@@ -36226,7 +36226,8 @@
 	},
 /obj/item/natural/bundle/cloth{
 	pixel_x = -32;
-	pixel_y = 7
+	pixel_y = 7;
+	amount = 10
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)

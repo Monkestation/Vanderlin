@@ -1253,6 +1253,14 @@
 	base_icon_state = "lawtome"
 	bookfile = "law.json"
 
+/obj/item/book/law/small
+	name = "Pocket Tome of Justice"
+	desc = "A copy of the Tome of Justice with smaller print for easier carrying."
+	icon_state ="lawtomesmall_0"
+	base_icon_state = "lawtomesmall"
+	grid_height = 32
+	item_weight = 200 GRAMS
+
 /obj/item/book/knowledge1
 	name = "Book of Knowledge"
 	desc = ""

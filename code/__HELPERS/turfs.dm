@@ -171,6 +171,11 @@
 	mousepos_x /= x_ratio
 	mousepos_y /= y_ratio
 
+	// We use 32x32 custom mice which make the X offset different from where the
+	// centre of the mouse is, so we account for that here
+	if(viewing_client?.mouse_pointer_icon)
+		mousepos_x -= ICON_SIZE_ALL / 4
+
 	// PURE SHIT CODE PLS FIX
 	// Even though screen is 15x15 it's actually 19x15 god knows why but it's load bearing
 	var/shitty_offet_x = ICON_SIZE_X * 2
