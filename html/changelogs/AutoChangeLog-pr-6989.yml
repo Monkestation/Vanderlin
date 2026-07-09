@@ -1,0 +1,4 @@
+author: "Somniworld"
+delete-after: True
+changes:
+  - balance: "The Sweeper now has the \"crate mover\" trait, and starts with an iron lamptern in their backpack."

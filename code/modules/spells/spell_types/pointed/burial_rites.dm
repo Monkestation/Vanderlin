@@ -95,6 +95,8 @@
 	if(headstone.custom_message)
 		headstone.inscription += span_italics("<br><br>\
 		[headstone.custom_message]")
+	else
+		headstone.inscription += "<br>"
 
 	// SECTION 3: Final Words
 	// We have the names of the mobs we buried, now we grab the mobs themselves and prepare a list of final_words
