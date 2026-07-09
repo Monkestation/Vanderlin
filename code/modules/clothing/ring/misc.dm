@@ -378,6 +378,6 @@
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
 
 /obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)
-	if(isobserver(user) || HAS_TRAIT(user, TRAIT_KNOWCOURTAGENTS) || get_dist(user, src) < 1)
+	if(isobserver(user) || HAS_TRAIT(user, TRAIT_COURTAGENT) || get_dist(user, src) < 1)
 		return ..()
 	return ma2html(mutable_appearance(icon, "ring_s"), user)

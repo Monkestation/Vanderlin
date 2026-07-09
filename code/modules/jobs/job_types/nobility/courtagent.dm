@@ -184,7 +184,7 @@
 	. = ..()
 
 	var/static/list/weapons = list(
-		"Shortbow" = /obj/item/gun/ballistic/bow,
+		"Shortbow" = /obj/item/gun/ballistic/bow/short,
 		"Crossbow" = /obj/item/gun/ballistic/bow/cross,
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "COURT AGENT")
