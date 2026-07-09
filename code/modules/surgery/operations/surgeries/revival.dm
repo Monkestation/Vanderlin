@@ -35,6 +35,16 @@
 
 	return TRUE
 
+/datum/surgery_operation/basic/revival/all_required_strings()
+	. = ..()
+	. += "the patient must be dead"
+	. += "the patient must have a heart"
+
+/datum/surgery_operation/basic/revival/all_blocked_strings()
+	. = ..()
+	. += "the patient must not be undead"
+	. += "the patient must not be cursed by the undermaiden"
+
 /datum/surgery_operation/basic/revival/state_check(mob/living/patient)
 	if(patient.stat != DEAD)
 		return FALSE
