@@ -118,6 +118,12 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 	parent.dir = SOUTH
 	var/icon/flat = getFlatIcon(parent, SOUTH, no_anim = TRUE)
 	parent.dir = original_dir
+	if(!flat)
+		return null
+	var/flat_w = flat.Width()
+	var/flat_h = flat.Height()
+	if(flat_w % 2 || flat_h % 2)
+		flat.Crop(1, 1, flat_w + (flat_w % 2), flat_h + (flat_h % 2))
 	return "data:image/png;base64,[icon2base64(flat)]"
 
 /datum/attribute_holder/proc/on_parent_appearance_changed()
