@@ -233,7 +233,7 @@ All foods are distributed among various categories. Use common sense.
 	..()
 	if(QDELETED(src))
 		return PROCESS_KILL
-	if(rotprocess)
+	if(rotprocess && !HAS_TRAIT(src, TRAIT_NO_ROT))
 		var/turf/open/T = get_turf(src)
 		var/temp_modifier = 1.0
 		var/turf_temp = T?.return_temperature()
@@ -255,10 +255,6 @@ All foods are distributed among various categories. Use common sense.
 				// Each 3 degrees below room temp decreases rot rate by 20%
 				temp_modifier = max(0.2, 1.0 - ((20 -turf_temp) / 3) * 0.2)
 				// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
-
-		var/area/A = get_area(T)
-		if (istype(A, /area/indoors/town/vault))
-			temp_modifier = 0
 
 		var/turf/location = get_turf(src)
 		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in location

@@ -305,6 +305,12 @@
 	icon_state = "cheesekey"
 	lockids = list(ACCESS_HAND)
 
+/obj/item/key/courtagent
+	name = "court agent hideout key"
+	desc = "This key should open the doors in the Court Agent's Hideout"
+	icon_state = "rustkey"
+	lockids = list(ACCESS_COURTAGENT)
+
 /obj/item/key/steward
 	name = "steward's key"
 	desc = "This key belongs to the Monarch's greedy Steward."

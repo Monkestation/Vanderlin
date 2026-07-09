@@ -39,6 +39,7 @@
 #define ACCESS_STEWARD "steward"
 #define ACCESS_DUNGEON "dungeon"
 #define ACCESS_HAND "hand"
+#define ACCESS_COURTAGENT "court agent"
 #define ACCESS_LORD "lord"
 #define ACCESS_VAULT "vault"
 #define ACCESS_ARCHIVE "archive"

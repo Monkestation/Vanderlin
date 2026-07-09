@@ -126,6 +126,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
 #define CTAG_HEIR "CAT_HEIR"
 #define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
+#define CTAG_COURTAGENT "CAT_COURT_AGENT"
 #define CTAG_MINOR_NOBLE "CAT_MINOR_NOBLE" // Minor Noble classes
 #define CTAG_CONSORT "CAT_CONSORT" // Consort classes
 #define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector
