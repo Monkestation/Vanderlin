@@ -601,19 +601,18 @@
 		
 /datum/reagent/poison/erratique
 	name = "Erratique"
-	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity, and is extremely lethal over a long period of time if untreated."
+	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity."
 	color = "#ffffff"
 	metabolization_rate = 0.1
 	taste_description = "bitter thoughts"
 
 /datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
 	. = ..()
-	ADD_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.5)
+	ADD_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")
 
 /datum/reagent/poison/erratique/on_mob_end_metabolize(mob/living/M)
 	. = ..()
-	REMOVE_TRAIT(M, TRAIT_SCHIZO_FLAW, "[type]")
+	REMOVE_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/acid
 	name = "Flamekiss Liqeur"
