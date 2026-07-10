@@ -695,7 +695,7 @@
 
 //............... Legacy Totod Order Helmets ...............//
 /obj/item/clothing/head/helmet/heavy/crusader
-	name = "winged bucket helm"
+	name = "winged crusader helm"
 	desc = "Proud knights of the Psydonic order displays their faith and their allegiance openly."
 	icon_state = "totodhelm"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
@@ -705,7 +705,7 @@
 	worn_y_dimension = 64
 
 /obj/item/clothing/head/helmet/heavy/crusader/t
-	name = "bucket helm"
+	name = "crusader helm"
 	desc = "A silver gilded bucket helm, inscriptions in old Psydonic are found embezeled on every inch of silver. Grenzelhoft specializes in these helmets."
 	icon_state = "crusader_helmt2"
 	icon = 'icons/roguetown/clothing/special/crusader.dmi'
