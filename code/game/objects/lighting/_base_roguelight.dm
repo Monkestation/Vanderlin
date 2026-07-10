@@ -45,7 +45,7 @@
 	. = ..()
 	if(on)
 		if(resting_range && !proximity_monitor)
-			proximity_monitor = new(src, resting_range)
+			proximity_monitor = new /datum/proximity_monitor/campfire(src, resting_range)
 
 			for(var/mob/living/carbon/human/human in range(resting_range, src))
 				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
@@ -309,12 +309,16 @@
 	human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
 	human.add_stress(/datum/stress_event/campfire)
 
-//random bullshit I tried shit don't work
+/datum/proximity_monitor/campfire
+	parent_type = /datum/proximity_monitor
 
-// /datum/proximity_monitor/fueled/on_uncrossed(turf/source, atom/movable/exit, direction)
-// 	..()
+/datum/proximity_monitor/campfire/on_uncrossed(atom/source, atom/movable/gone, direction)
 
-// 	if(ishuman(exit))
-// 		var/mob/living/carbon/human/human = exit
-// 		if(human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
-// 			human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
+	if(!ishuman(gone))
+		return
+
+	if(get_dist(gone, host) <= current_range)
+		return
+
+	var/mob/living/carbon/human/human = gone
+	human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
