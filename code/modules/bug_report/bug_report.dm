@@ -17,11 +17,7 @@
 	var/client/user_client = user.client
 	data["byond"] = "[user_client.byond_version].[user_client.byond_build]"
 	data["ckey"] = "[user_client.ckey]"
-	return data
-
-/datum/bug_report/ui_static_data(mob/user)
-	var/list/data = list()
-	data["roundid"] = GLOB.round_id || "Unknown"
+	data["round_id"] = GLOB.rogue_round_id || GLOB.round_id || "Unknown"
 	data["map"] = SSmapping.config.map_name
 	return data
 
@@ -79,9 +75,18 @@
 
 	local_template = replacetext(local_template, "## Map:\n", "## Map:\n[map]")
 
+	var/true_round_time = "[ROUND_TIME()]"
+	if(SSticker.HasRoundStarted())
+		true_round_time = "[DisplayTimeText(world.time - SSticker.round_start_time, 1)]"
+
+	var/list/round_info = list(
+		"Round ID: [round_id]",
+		"Round Time: [true_round_time]",
+	)
+
 	// Insert round
 	if(round_id != "Unknown")
-		local_template = replacetext(local_template, "## Round ID:\n", "## Round ID:\n[round_id]")
+		local_template = replacetext(local_template, "## Round Info:\n", "## Round Info:\n[round_info.Join("\n")]")
 
 	// Insert testmerges
 	if(length(GLOB.revdata.testmerge))
