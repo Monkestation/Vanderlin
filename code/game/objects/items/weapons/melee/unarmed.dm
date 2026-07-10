@@ -3,6 +3,7 @@
 	desc = "The fist was humenity's first weapon, and still a fine one."
 	icon = null
 	icon_state = null
+	item_flags = ABSTRACT | DROPDEL
 	force = 9
 	minstr = 1
 	item_weight = 100 GRAMS
