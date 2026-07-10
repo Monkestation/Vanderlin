@@ -107,17 +107,18 @@
 		return
 
 	if(!target)
-		return
+		return FALSE
 
 	var/mob/living/living_user = user.mob
 	if(!living_user.Adjacent(target))
-		return
+		return FALSE
 
 	var/mob/living/offered = locate() in target
 	if(!offered)
-		return
+		return FALSE
 
 	living_user.give(offered)
+
 	return TRUE
 
 /datum/keybinding/carbon/bite_intent

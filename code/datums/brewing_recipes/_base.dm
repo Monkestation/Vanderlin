@@ -60,7 +60,6 @@
 		var/obj/item/reagent_containers/glass/bottle/brewing_bottle/bottle_made = new /obj/item/reagent_containers/glass/bottle/brewing_bottle(get_turf(source))
 		bottle_made.icon_state = "[bottle_kit.glass_colour]"
 		bottle_made.name = "brewer's bottle of [bottle_name]"
-		bottle_made.sellprice = round(sell_value / brewed_amount)
 		bottle_made.desc = "A bottle of locally-brewed [SSmapping.config.map_name] [bottle_name]."
 
 		// Add reagent with quality

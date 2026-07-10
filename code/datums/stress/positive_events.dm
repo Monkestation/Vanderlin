@@ -446,3 +446,8 @@
 	timer = 10 MINUTES
 	stress_change = -5
 	desc = SPAN_GOD_XYLIX("Oh frabjous dae, calooh callay! The Silver-Tongue's guffaw keeps my troubles at bay!")
+
+/datum/stress_event/soulchurnerdestroyed
+	timer = 10 MINUTES
+	stress_change = -5
+	desc = span_green("That barbaric machine has been destroyed, I have done a great service todae!")
