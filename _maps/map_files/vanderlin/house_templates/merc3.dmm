@@ -38,16 +38,6 @@
 "H" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/merc_guild)
-"I" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_3";
-	property_id = "mercapt_3";
-	template_x = 7;
-	template_y = 6;
-	default_template = /datum/map_template/vanderlin_mercapt_3
-	},
-/turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/merc_guild)
 "J" = (
 /obj/structure/door/violet{
 	name = "Mercenary Apartment 3";
@@ -70,7 +60,7 @@ J
 P
 H
 H
-I
+C
 "}
 (2,1,1) = {"
 H

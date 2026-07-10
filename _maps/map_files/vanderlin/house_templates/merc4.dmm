@@ -10,16 +10,6 @@
 /obj/item/key/apartments/merc4,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"u" = (
-/obj/effect/landmark/house_spot{
-	save_id = "mercapt_4";
-	property_id = "mercapt_4";
-	template_x = 7;
-	template_y = 6;
-	default_template = /datum/map_template/vanderlin_mercapt_4
-	},
-/turf/closed/wall/mineral/stonebrick,
-/area/indoors/town/merc_guild)
 "y" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/flare/torch/lantern,
@@ -70,7 +60,7 @@ H
 M
 k
 k
-u
+I
 "}
 (2,1,1) = {"
 k
