@@ -35,6 +35,7 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
+		TRAIT_CRATEMOVER,
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sweeper
@@ -59,3 +60,6 @@
 	ring = /obj/item/key/sweeper
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/belt/pouch
+	backpack_contents = list(
+		/obj/item/flashlight/flare/torch/lantern = 1
+	)

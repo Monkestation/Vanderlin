@@ -254,7 +254,7 @@
 		if(S.item && !QDELETED(S.item))
 			S.item.anchored = FALSE
 			animate(S.item, pixel_x = 0, pixel_y = 0, time = 0.5 SECONDS, flags = ANIMATION_END_NOW)
-	slots.Cut()
+	QDEL_LIST(slots)
 	matched_recipe = null
 	animating = FALSE
 	rune_in_use = FALSE
@@ -271,3 +271,7 @@
 	var/px = 0
 	/// Pixel Y offset from the rune's tile center
 	var/py = 0
+
+/datum/crafting_slot/Destroy(force)
+	. = ..()
+	item = null

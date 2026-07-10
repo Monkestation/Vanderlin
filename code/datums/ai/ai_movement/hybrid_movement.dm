@@ -4,6 +4,10 @@
 	max_basic_failures = 2
 	always_advanced = TRUE
 
+/datum/ai_movement/hybrid_pathing/wave_defense
+	path_to_closest_on_fail = TRUE
+	always_advanced = TRUE
+
 /datum/ai_movement/hybrid_pathing
 	requires_processing = TRUE
 	max_pathing_attempts = 12
@@ -19,6 +23,10 @@
 	var/next_resolve = 0
 	var/max_basic_failures = 3 // How many consecutive basic movement failures before switching to A*
 	var/always_advanced = FALSE
+	/// If TRUE, when get_path_to fails (no path), fall back to a path toward the closest reachable point
+	var/path_to_closest_on_fail = FALSE
+	/// Per-controller: are we currently using a closest-approach fallback path (target confirmed unreachable)
+	var/list/using_closest_approach = list()
 
 /datum/ai_movement/hybrid_pathing/process(delta_time)
 	if(world.time < next_resolve)
@@ -130,6 +138,7 @@
 				minimum_distance = 1
 
 			if(get_dist(movable_pawn, controller.current_movement_target) <= minimum_distance)
+				using_closest_approach -= WEAKREF(controller)
 				continue
 
 			var/generate_path = FALSE
@@ -241,16 +250,46 @@
 			if(generate_path)
 				if(!COOLDOWN_FINISHED(controller, repath_cooldown))
 					continue
+
+				var/datum/weakref/weak_controller = WEAKREF(controller)
+				var/already_closest_approach = path_to_closest_on_fail && (weak_controller in using_closest_approach)
+
+				if(already_closest_approach)
+					// Don't burn pathing_attempts re-trying a path we already know fails -
+					// go straight back to closest-approach
+					if(QDELETED(controller.current_movement_target) || controller.current_movement_target.loc == movable_pawn)
+						continue
+					COOLDOWN_START(controller, repath_cooldown, 1.5 SECONDS)
+					controller.movement_path = get_path_to_closest_approach(movable_pawn, controller.current_movement_target, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d),
+						max_path_distance + 1, max_path_distance + 1, minimum_distance, id=controller.get_access())
+					controller.clear_blackboard_key(future_path_blackboard_key)
+					if(!length(controller.movement_path))
+						// Even closest-approach gives nothing now (e.g. truly boxed in) - give up this cycle
+						controller.CancelActions()
+						SEND_SIGNAL(controller, COMSIG_AI_PATHING_FAILED)
+					else
+						SEND_SIGNAL(controller.pawn, COMSIG_AI_PATH_GENERATED, controller.movement_path)
+					continue
+
 				controller.pathing_attempts++
 				if(controller.pathing_attempts >= max_pathing_attempts)
+					if(path_to_closest_on_fail)
+						controller.movement_path = get_path_to_closest_approach(movable_pawn, controller.current_movement_target, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d),
+							max_path_distance + 1, max_path_distance + 1, minimum_distance, id=controller.get_access())
+						controller.clear_blackboard_key(future_path_blackboard_key)
+						if(length(controller.movement_path))
+							controller.pathing_attempts = 0
+							using_closest_approach[weak_controller] = TRUE
+							SEND_SIGNAL(controller.pawn, COMSIG_AI_PATH_GENERATED, controller.movement_path)
+							continue
 					controller.CancelActions()
 					SEND_SIGNAL(controller, COMSIG_AI_PATHING_FAILED)
 					continue
-				// Target doesnt exist anymore or we picked it up already
+					// Target doesnt exist anymore or we picked it up already
 				if(QDELETED(controller.current_movement_target) || controller.current_movement_target.loc == movable_pawn)
 					continue
-				COOLDOWN_START(controller, repath_cooldown, 1.5 SECONDS) // Reduced from 2 seconds
+				COOLDOWN_START(controller, repath_cooldown, 1.5 SECONDS)
 				controller.movement_path = get_path_to(movable_pawn, controller.current_movement_target, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d),
 					max_path_distance + 1, max_path_distance + 1, minimum_distance, id=controller.get_access())
-				controller.clear_blackboard_key(future_path_blackboard_key) // Clear any future path as we have a fresh main path
+				controller.clear_blackboard_key(future_path_blackboard_key)
 				SEND_SIGNAL(controller.pawn, COMSIG_AI_PATH_GENERATED, controller.movement_path)

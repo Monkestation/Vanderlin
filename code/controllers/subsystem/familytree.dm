@@ -160,19 +160,24 @@ SUBSYSTEM_DEF(familytree)
 		var/mode = H.familytree_pref
 		if(!mode || mode == FAMILY_NONE)
 			continue
+
+		var/assigned = FALSE
 		switch(mode)
 			if(FAMILY_PARTIAL)
-				AssignToHouse(H, H.family_adoption_pref)
+				assigned = AssignToHouse(H, H.family_adoption_pref)
 			if(FAMILY_NEWLYWED)
 				if(H.age == AGE_CHILD)
-					AssignToHouse(H, H.family_adoption_pref)
+					assigned = AssignToHouse(H, H.family_adoption_pref)
 				else
-					AssignNewlyWed(H)
+					assigned = AssignNewlyWed(H)
 			if(FAMILY_FULL)
 				if(H.virginity || H.age == AGE_CHILD)
-					AssignToHouse(H, H.family_adoption_pref)
+					assigned = AssignToHouse(H, H.family_adoption_pref)
 				else
-					AssignToFamily(H)
+					assigned = AssignToFamily(H)
+
+		if(!assigned)
+			pending_latejoin += H
 
 /datum/controller/subsystem/familytree/proc/AddRoyal(mob/living/carbon/human/H, status)
 	if(!ruling_family.housename)
@@ -345,12 +350,23 @@ SUBSYSTEM_DEF(familytree)
 				MarryAndLink(H, member.person)
 			return TRUE
 
+		// A named spouse preference can ONLY be satisfied by marrying that
+		// specific person, found above. If we get here for this house and
+		// H has a setspouse, this house has nothing to offer them.
+		if(H.setspouse)
+			continue
+
 		if(!house.housename)
 			var/datum/family_member/new_member = house.CreateFamilyMember(H)
 			if(new_member)
 				house.founder = new_member
 				house.housename = house.SurnameFormatting(H)
 			return TRUE
+
+	// If H wants a specific spouse and we never found them, do not found
+	// a new house or otherwise place them.
+	if(H.setspouse)
+		return FALSE
 
 	if(species != /datum/species/aasimar)
 		families += new /datum/heritage(H, null, species)

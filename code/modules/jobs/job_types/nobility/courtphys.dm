@@ -2,28 +2,38 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 4,
+		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = -1,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/labor/farming = 30,
 	)
 
 /datum/attribute_holder/sheet/job/courtphys/old
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
-		STAT_INTELLIGENCE = 4,
+		STAT_INTELLIGENCE = 5,
+		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = -1,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/labor/farming = 30,
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
@@ -59,19 +69,15 @@
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_DEADNOSE,
-		TRAIT_LEGENDARY_ALCHEMIST
+		TRAIT_LEGENDARY_ALCHEMIST,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 	)
 	book_type = /obj/item/recipe_book/medical
 
 /datum/job/courtphys/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.virginity = TRUE
-
-	if(spawned.dna?.species?.id != SPEC_ID_MEDICATOR)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, JOB_TRAIT)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_POWER, JOB_TRAIT)
-	else
-		spawned.honorary = null
 
 /datum/outfit/courtphys
 	name = "Court Physician Base"

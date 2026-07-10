@@ -669,7 +669,7 @@
 	sellprice = 90
 	item_weight = 2.1 KILOGRAMS
 
-/obj/item/weapon/mace/warhammer/steel/silver/Initialize(mapload)
+/obj/item/weapon/mace/warhammer/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 

@@ -142,7 +142,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
-	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+	if(!(accessor_trait && HAS_CHARACTER_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
 			return // nothing here!
@@ -174,6 +174,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/hidden/thieves_guild
 	hidden_dc = 13
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
+
+/obj/structure/lever/hidden/courtagent
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
 
 /obj/structure/lever/hidden/rous
 	hidden_dc = 16

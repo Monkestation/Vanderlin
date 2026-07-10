@@ -49,6 +49,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	apply_prefs_special(character, player)
 	apply_voicepacks(character, player)
 
+	// These need to get updated for traits
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(character)
+
 /proc/apply_prefs_special(mob/living/carbon/human/character, client/player)
 	if(!player)
 		player = character.client

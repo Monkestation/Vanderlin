@@ -165,6 +165,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	remove_innate_effects()
 	clear_antag_stress()
 	remove_antag_hud(antag_hud_type, antag_hud_name)
+
 	if(owner)
 		LAZYREMOVE(owner.antag_datums, src)
 		if(owner.current)
@@ -175,9 +176,14 @@ GLOBAL_LIST_EMPTY(antagonists)
 				human_user.add_quirk(/datum/quirk/vice/pacifist)
 			if(!silent)
 				farewell()
+
 	var/datum/team/team = get_team()
 	if(team)
 		team.remove_member(owner)
+
+	if(owner.current)
+		SEND_SIGNAL(owner.current, COMSIG_MOB_ANTAGONIST_REMOVED, src)
+
 	qdel(src)
 
 /datum/antagonist/proc/greet()

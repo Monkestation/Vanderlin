@@ -338,6 +338,8 @@
 			return
 		if("Osslandic")
 			return strings("accents/ossland_replacement.json", "ossland")
+		if("Rockhill")
+			return strings("accents/rockhill_replacement.json", "rockhill")
 	return
 
 /datum/species/proc/get_pain_emote(power)
@@ -413,6 +415,7 @@
 				ACCENT_ROUSMAN,
 				ACCENT_WINTERMARE,
 				ACCENT_OSSLAND,
+				ACCENT_ROCKHILL,
 			)
 
 			///This will only trigger for donators

@@ -1271,6 +1271,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				set_antag(user)
 			else
 				set_antag(user)
+		return
 
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
@@ -1454,9 +1455,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					random_species()
 				if("all")
 					apply_character_randomization_prefs()
+			return
 
 		if("loadout_store")
 			open_loadout_shop(user)
+			return
 
 		if("gossip")
 			open_gossip(user)
@@ -1464,6 +1467,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 		if("select_quirks")
 			open_quirk_menu(user)
+			return
 
 		if("finished")
 			user << browse(null, "window=latechoices") //closes late choices window
@@ -1486,6 +1490,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if(isnewplayer(user))
 				var/mob/dead/new_player/player = user
 				player.cache_multi_ready_characters()
+			return
 
 		if("load")
 			load_preferences()
@@ -1493,6 +1498,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if(isnewplayer(user))
 				var/mob/dead/new_player/player = user
 				player.cache_multi_ready_characters()
+			return
 
 		if("changeslot")
 			write_preference(/datum/preference/choiced/selected_accent, ACCENT_DEFAULT)
@@ -1513,6 +1519,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if(!load_character(choice))
 					randomise_appearance_prefs()
 					save_character()
+			return
 
 		if("randomiseappearanceprefs")
 			randomise_appearance_prefs()
@@ -1521,6 +1528,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			reset_all_customizer_accessory_colors()
 			randomize_all_customizer_accessories()
 			reset_jobs(user)
+			return
 
 		if("ooc_preview")
 			var/list/dat = list()
@@ -1792,25 +1800,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		return FALSE
 
 	return TRUE
-
-
-/datum/preferences/proc/set_loadout(mob/user, loadout_number, datum/loadout_item/loadout)
-	if(!loadout)
-		return
-	if(!donator)
-		to_chat(user, span_danger("This is a donator feature!"))
-		return FALSE
-
-	if(loadout == "None")
-		vars["loadout[loadout]"] = null
-		to_chat(user, span_notice("Who needs stuff anyway?"))
-	else
-		if(!(loadout in GLOB.loadout_items))
-			return
-		vars["loadout[loadout_number]"] = loadout
-		to_chat(user, span_notice("[loadout.name]"))
-		if(loadout.description)
-			to_chat(user, "[loadout.description]")
 
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
