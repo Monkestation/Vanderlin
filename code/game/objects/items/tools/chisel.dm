@@ -44,6 +44,12 @@
 	smeltresult = /obj/item/ingot/iron
 	toolspeed = 1.1
 
+/obj/item/weapon/chisel/stone
+	name = "flint chisel"
+	icon_state = 'stonechisel'
+	smeltresult = /obj/item/natural/stone
+	toolspeed = 1.1
+
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
