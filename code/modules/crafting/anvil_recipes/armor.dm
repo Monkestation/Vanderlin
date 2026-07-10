@@ -329,13 +329,13 @@
 /datum/anvil_recipe/armor/steel/crusader_helm
 	name = "Crusader helm (+Bar X2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/crusader
+	created_item = /obj/item/clothing/head/helmet/heavy/crusader/t
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/totod_crusader_helm
-	name = "Totod Crusader helm (+Bar X2)"
+	name = "Winged Crusader helm (+Bar X2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/crusader/t
+	created_item = /obj/item/clothing/head/helmet/heavy/crusader
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/skullmet_helm
