@@ -312,7 +312,7 @@
 	return TRUE
 
 /mob/living/carbon/can_feel_pain()
-	return !HAS_TRAIT(src, TRAIT_NOPAIN)
+	return !HAS_TRAIT(src, TRAIT_NOPAIN) && !IsUnconscious()
 
 /mob/living/carbon/getShock(painkiller_included = TRUE)
 	if(!can_feel_pain())
