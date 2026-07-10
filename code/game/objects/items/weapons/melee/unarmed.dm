@@ -18,7 +18,10 @@
 	ADD_TRAIT(src, TRAIT_NOEMBED, INNATE_TRAIT)
 
 /obj/item/weapon/clenched_fist/attack_self(mob/living/user, params)
-	user.visible_message("<span class='warning'>[user] unclenches their fists.</span>")
+	user.visible_message(
+		span_warning("[user] unclenches [user.p_their()] fists."),
+		span_warning("I unclench my fists."),
+	)
 	qdel(src)
 
 /datum/intent/unarmed/punch/closecombat
