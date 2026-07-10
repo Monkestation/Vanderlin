@@ -268,7 +268,7 @@
 			if(istype(W, /obj/item/natural/clod))
 				if(!user.temporarilyRemoveItemFromInventory(W))
 					return
-				on = FALSE
+				burn_out()
 				update()
 				update_appearance(UPDATE_ICON_STATE)
 				qdel(W)
@@ -302,9 +302,6 @@
 		return
 
 	var/mob/living/carbon/human/human = target
-
-	if(!human.has_status_effect(/datum/status_effect/buff/campfire_stamina))
-		to_chat(human, span_info("The warmth of the fire comforts me, affording me a short rest."))
 
 	human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
 	human.add_stress(/datum/stress_event/campfire)
