@@ -2,25 +2,19 @@
 "a" = (
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"b" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
 "j" = (
 /obj/structure/table/wood/nice/decorated_alt,
-/turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
-"l" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "m" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 8
 	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"n" = (
+/obj/item/key/apartments/merc6,
+/obj/structure/closet/crate/crafted_closet/inn,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "r" = (
@@ -55,19 +49,22 @@
 "E" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/merc_guild)
-"H" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/key/apartments/merc6,
-/turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
 "K" = (
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/structure/closet/crate/drawer,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "L" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4
 	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"P" = (
+/obj/item/flashlight/flare/torch/lantern,
+/obj/structure/closet/crate/drawer,
+/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "Z" = (
@@ -90,7 +87,7 @@ a
 L
 Z
 a
-A
+n
 t
 "}
 (3,1,1) = {"
@@ -99,7 +96,7 @@ r
 j
 a
 a
-H
+n
 t
 "}
 (4,1,1) = {"
@@ -108,7 +105,7 @@ a
 m
 a
 a
-H
+A
 t
 "}
 (5,1,1) = {"
@@ -118,23 +115,23 @@ a
 a
 a
 a
-B
+y
 "}
 (6,1,1) = {"
 t
 K
+w
+P
 a
 a
-a
-a
-y
+B
 "}
 (7,1,1) = {"
+E
 t
-l
-w
-b
-a
-a
 t
+t
+t
+t
+E
 "}
