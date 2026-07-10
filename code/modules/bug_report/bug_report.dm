@@ -85,8 +85,7 @@
 	)
 
 	// Insert round
-	if(round_id != "Unknown")
-		local_template = replacetext(local_template, "## Round Info:\n", "## Round Info:\n[round_info.Join("\n")]")
+	local_template = replacetext(local_template, "## Round Info:\n", "## Round Info:\n[round_info.Join("\n")]")
 
 	// Insert testmerges
 	if(length(GLOB.revdata.testmerge))
