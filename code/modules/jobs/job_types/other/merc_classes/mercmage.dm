@@ -83,7 +83,7 @@
 
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
-	shirt = /obj/item/clothing/armor/gambeson
+	shirt = /obj/item/clothing/armor/chainmail/hauberk/iron
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary

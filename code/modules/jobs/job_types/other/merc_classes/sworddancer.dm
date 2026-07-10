@@ -66,7 +66,7 @@
 	name = "Sword Dancer (Mercenary)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
-	pants = /obj/item/clothing/pants/tights/colored/random
+	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	gloves = /obj/item/clothing/gloves/fingerless
 	belt = /obj/item/storage/belt/leather/mercenary

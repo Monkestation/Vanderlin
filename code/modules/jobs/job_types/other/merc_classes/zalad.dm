@@ -74,7 +74,7 @@
 	beltr = /obj/item/weapon/sword/long/rider
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
-	pants = /obj/item/clothing/pants/tights/colored/red
+	pants = /obj/item/clothing/pants/chainlegs/iron
 	neck = /obj/item/clothing/neck/keffiyeh/colored/red
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
