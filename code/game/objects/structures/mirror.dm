@@ -11,16 +11,21 @@
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	SET_BASE_PIXEL(0, 32)
+	var/magick_mirror = FALSE
 
 /obj/structure/mirror/fancy
 	icon_state = "fancymirror"
+
+/obj/structure/mirror/courtagent
+	name = "magick mirror"
+	magick_mirror = TRUE
 
 /obj/structure/mirror/Initialize(mapload)
 	. = ..()
 	if(icon_state == "mirror_broke" && !obj_broken)
 		atom_break(null, TRUE, mapload)
 
-/obj/structure/mirror/attack_hand(mob/user)
+/obj/structure/mirror/attack_hand(mob/living/user)
 	. = ..()
 	if(.)
 		return
@@ -32,7 +37,12 @@
 	var/mob/living/carbon/human/H = user
 
 
-	var/list/options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color")
+	var/list/options = list()
+	if(magick_mirror == TRUE && HAS_TRAIT(H, TRAIT_COURTAGENT))
+		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color", "honorific", "cover job")
+	else
+		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color")
+
 	var/chosen = browser_input_list(user, "Change what?", "VANDERLIN", options)
 	var/should_update
 	switch(chosen)
@@ -156,6 +166,39 @@
 				if(new_eyes)
 					eyes.eye_color = sanitize_hexcolor(new_eyes, default = "#1753a8")
 					should_update = TRUE
+
+		if("honorific")
+			var/list/honorifics = list("Lord", "Lady", "Sir", "Dame", "Ritter", "Ritterin", "Count", "Countess", "Emir", "Clear honorific")
+			var/chosen_honorific = browser_input_list(user, "Select False Honorific", "HONORIFICS", honorifics)
+
+			if(chosen_honorific == "Clear honorific")
+				H.honorary = null
+			else
+				H.honorary = chosen_honorific
+		if("cover job")
+			var/list/jobs = list()
+			jobs += /datum/job/minor_noble::title
+			jobs += GLOB.garrison_positions
+			jobs += list(/datum/job/monk::title, /datum/job/undertaker::title)
+			jobs += GLOB.serf_positions
+			jobs += GLOB.peasant_positions
+			jobs += GLOB.apprentices_positions
+			jobs += GLOB.allmig_positions
+			jobs -= list(
+				/datum/job/royalknight::title,
+				/datum/job/lieutenant::title,
+				/datum/job/town_elder::title,
+				/datum/job/matron::title,
+				/datum/job/tomb_warden::title,
+				/datum/job/bandit::title
+			)
+			jobs += "Cancel"
+
+			var/cover_job = tgui_input_list(user, "Select Cover Job", "COVER JOB", jobs)
+			if(jobs == "Cancel")
+				return
+			H.job = cover_job
+			H.mind?.set_assigned_role(cover_job)
 
 	if(should_update)
 		H.update_body()

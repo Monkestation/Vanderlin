@@ -1,8 +1,9 @@
-/proc/create_quality_item(obj/item/base_item, datum/quality_calculator/calculator)
+/proc/create_quality_item(obj/item/base_item, datum/quality_calculator/calculator, quality_override, track_creation = FALSE)
 	if(!calculator || !base_item)
 		return base_item
 
-	calculator.apply_quality_to_item(base_item)
+	calculator.apply_quality_to_item(base_item, track_creation, quality_override)
+	qdel(calculator)
 	return base_item
 
 /datum/quality_calculator
