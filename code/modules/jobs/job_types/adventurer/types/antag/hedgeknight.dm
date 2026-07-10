@@ -6,7 +6,7 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 35,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 30,

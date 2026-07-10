@@ -48,9 +48,9 @@
 	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon", title = "Black Oak's Guardian")
 	switch(choice)
 		if("Spear")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 30)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 35)
 		if("Regal Elven Club")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 35)
 
 /datum/outfit/mercenary/blackoak
 	name = "Black Oak's Guardian (Mercenary)"

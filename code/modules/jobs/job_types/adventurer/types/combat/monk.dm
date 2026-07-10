@@ -14,6 +14,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 30, //who the FUCK took away their athletics, holy shit?
 		/datum/attribute/skill/misc/climbing = 40,
 	)
 

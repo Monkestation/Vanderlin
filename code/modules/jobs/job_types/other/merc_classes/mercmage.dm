@@ -70,7 +70,8 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old
 
 	traits = list(
-		TRAIT_NOBLE_BLOOD
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/job/advclass/mercenary/sellmage/after_spawn(mob/living/carbon/human/spawned, client/player_client)

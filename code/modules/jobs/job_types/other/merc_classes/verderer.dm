@@ -8,7 +8,7 @@
 		STAT_STRENGTH = 2,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 36,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/craft/tanning = 20,
 		/datum/attribute/skill/combat/wrestling = 20,

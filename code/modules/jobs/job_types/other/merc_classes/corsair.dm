@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/labor/fishing = 30,

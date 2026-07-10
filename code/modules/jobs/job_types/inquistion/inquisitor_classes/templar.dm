@@ -4,9 +4,9 @@
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/swords = 37,
+		/datum/attribute/skill/combat/axesmaces = 37,
+		/datum/attribute/skill/combat/whipsflails = 37,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/shields = 35,
 		/datum/attribute/skill/misc/medicine = 10
 	)
 
@@ -81,7 +81,7 @@
 		if("Psydonic Whip", "Psydonic Flail")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 30, 30, TRUE)
 		if("Psydonic Spear + Handmace")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 30, 30, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 37, 37, TRUE)
 
 /datum/outfit/psydoniantemplar
 	name = "Psydonian Templar (Sacrestants)"

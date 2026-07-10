@@ -101,8 +101,8 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/axesmaces = 33,
+		/datum/attribute/skill/combat/whipsflails = 33,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/shields = 30,
@@ -159,8 +159,8 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 33,
+		/datum/attribute/skill/combat/crossbows = 33,
 		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/combat/axesmaces = 10,
 		/datum/attribute/skill/combat/wrestling = 10
@@ -217,7 +217,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/axesmaces = 30
+		/datum/attribute/skill/combat/axesmaces = 33
 	)
 
 /datum/job/advclass/forestguard/reaver
@@ -274,7 +274,7 @@
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/bows = 10,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/unarmed = 30
+		/datum/attribute/skill/combat/unarmed = 35
 	)
 
 /datum/job/advclass/forestguard/ossland_scout
@@ -327,7 +327,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/bows = 10,

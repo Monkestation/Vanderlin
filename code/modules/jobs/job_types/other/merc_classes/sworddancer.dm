@@ -3,7 +3,7 @@
 		STAT_PERCEPTION = 1,
 		STAT_SPEED = 2,
 		STAT_ENDURANCE = -1,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 36,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/athletics = 30,

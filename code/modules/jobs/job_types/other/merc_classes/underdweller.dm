@@ -21,14 +21,14 @@
 
 /datum/attribute_holder/sheet/job/underdweller/dwarf
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/axesmaces = 36,
+		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/craft/bombs = 40,
 	)
 
 /datum/attribute_holder/sheet/job/underdweller/other
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 36,
 	)
 
 /datum/job/advclass/mercenary/underdweller
