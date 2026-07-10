@@ -146,19 +146,22 @@
 	return ..()
 
 /obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!dead)
-		if(isliving(user))
-			var/mob/living/L = user
-			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
-				..()
-			else
-				if(isturf(loc))
-					dir = pick(GLOB.cardinals)
-					step(src, dir)
-					to_chat(user, "<span class='warning'>The vermin dodges my attack.</span>")
-					playsound(src, pick('sound/vo/mobs/rat/rat_life.ogg','sound/vo/mobs/rat/rat_life2.ogg','sound/vo/mobs/rat/rat_life3.ogg'), 100, TRUE, -1)
-					return
-	..()
+	if(dead)
+		return ..()
+
+	if(!isliving(user))
+		return
+
+	var/mob/living/L = user
+	if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
+		return ..()
+
+	if(isturf(loc))
+		dir = pick(GLOB.cardinals)
+		step(src, dir)
+		to_chat(user, "<span class='warning'>The vermin dodges my attack.</span>")
+		playsound(src, pick('sound/vo/mobs/rat/rat_life.ogg','sound/vo/mobs/rat/rat_life2.ogg','sound/vo/mobs/rat/rat_life3.ogg'), 100, TRUE, -1)
+
 ///For the Nosferatu Vampire Lord transformationn
 /mob/living/simple_animal/hostile/retaliate/smallrat
 	name = "rat"

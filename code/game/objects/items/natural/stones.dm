@@ -274,44 +274,81 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		to_chat(user, span_info("The [src] slips through dead fingers..."))
 		user.dropItemToGround(src, TRUE)
 
-/obj/item/natural/stone/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(istype(weapon, /obj/item/natural/stone))
-		playsound(src, pick('sound/items/stonestone.ogg'), 100)
-		if(prob(10))
-			user.visible_message(span_info("[user] strikes the stones together."))
-			var/datum/effect_system/spark_spread/S = new()
-			var/turf/front = get_step(user, user.dir)
-			S.set_up(1, 1, front)
-			S.start()
-		user.changeNext_move(CLICK_CD_FAST)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+/obj/item/natural/stone/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/natural/stone/attackby(obj/item/W, mob/living/user, list/modifiers)
 	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
 	var/item = user.get_inactive_held_item()
-	if(user.used_intent.type == /datum/intent/chisel && is_type_in_typecache(item, offhand_types))
-		user.changeNext_move(CLICK_CD_MELEE)
-		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/masonry)
-		var/work_time = (4 SECONDS - (skill_level * 5))
-		if(istype(W, /obj/item/weapon/chisel))
-			var/obj/item/weapon/chisel/chisel = W
-			work_time *= chisel.toolspeed
-		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
-		user.visible_message("<span class='info'>[user] begins chiseling [src] into blocks.</span>")
-		var/stone_amount = rand(1, max(round(skill_level)/2, 1))
-		if(do_after(user, work_time))
-			for(var/i in 1 to stone_amount)
-				new /obj/item/natural/stoneblock(get_turf(src.loc))
-			if(prob(10))
-				new /obj/effect/decal/cleanable/debris/stone(get_turf(src))
-			playsound(src, 'sound/foley/smash_rock.ogg', 100)
-			qdel(src)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/masonry, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
-		return TRUE
-	. = ..()
+
+	if(!istype(user.used_intent, /datum/intent/chisel) || !is_type_in_typecache(item, offhand_types))
+		return NONE
+
+	var/skill_level =  GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/masonry)
+	var/work_time = (4 SECONDS - (skill_level * 5))
+	if(istype(tool, /obj/item/weapon/chisel))
+		var/obj/item/weapon/chisel/chisel = tool
+		work_time *= chisel.toolspeed
+
+	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
+	user.visible_message("<span class='info'>[user] begins chiseling [src] into blocks.</span>")
+	var/stone_amount = rand(1, max(round(skill_level)/2, 1))
+
+	if(!do_after(user, work_time))
+		return ITEM_INTERACT_BLOCKING
+
+	for(var/i in 1 to stone_amount)
+		new /obj/item/natural/stoneblock(get_turf(src.loc))
+
+	if(prob(10))
+		new /obj/effect/decal/cleanable/debris/stone(get_turf(src))
+
+	playsound(src, 'sound/foley/smash_rock.ogg', 100)
+	qdel(src)
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/masonry, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2))
+
+	user.changeNext_move(CLICK_CD_MELEE)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/natural/stone/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/natural/stone))
+		return NONE
+
+	playsound(src, pick('sound/items/stonestone.ogg'), 100)
+
+	if(prob(10))
+		user.visible_message(span_info("[user] strikes the stones together."))
+		var/datum/effect_system/spark_spread/S = new()
+		var/turf/front = get_step(user, user.dir)
+		S.set_up(1, 1, front)
+		S.start()
+
+	user.changeNext_move(CLICK_CD_FAST)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/natural/stone/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isitem(interacting_with))
+		var/obj/item/sharpening = interacting_with
+		if(!sharpening.max_blade_int)
+			return NONE
+		playsound(src, pick('sound/items/sharpen_long1.ogg','sound/items/sharpen_long2.ogg'), 100)
+		user.visible_message("<span class='notice'>[user] sharpens [sharpening]!</span>")
+		sharpening.degrade_bintegrity(1)
+		sharpening.add_bintegrity(sharpening.max_blade_int * 0.1, user)
+		if(prob(35))
+			var/datum/effect_system/spark_spread/S = new()
+			var/turf/front = get_step(user,user.dir)
+			S.set_up(1, 1, front)
+			S.start()
+
+		user.changeNext_move(CLICK_CD_FAST)
+
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/rock
 	name = "rock"
@@ -384,12 +421,38 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 				S.set_up(1, 1, front)
 				S.start()
 
-/obj/item/natural/rock/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(istype(weapon, /obj/item/natural/stone))
+/obj/item/natural/rock/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
+	var/item = user.get_inactive_held_item()
+	if(!istype(user.used_intent, /datum/intent/chisel) || !is_type_in_typecache(item, offhand_types))
+		return NONE
+
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/masonry)
+	var/work_time = (10 SECONDS - (skill_level * 5))
+	if(istype(tool, /obj/item/weapon/chisel))
+		var/obj/item/weapon/chisel/chisel = tool
+		work_time *= chisel.toolspeed
+
+	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
+	user.visible_message("<span class='info'>[user] begins chiseling a part of [src] off.</span>")
+
+	if(!do_after(user, work_time))
+		return ITEM_INTERACT_BLOCKING
+
+	new /obj/item/natural/stoneblock(get_turf(loc))
+	take_damage(max_integrity / 2)
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/masonry, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/natural/rock/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(istype(tool, /obj/item/natural/stone))
 		playsound(src, 'sound/items/stonestone.ogg', 100)
 		if(prob(35))
 			user.visible_message(span_info("[user] strikes the stone against the rock.</span>"))
@@ -398,8 +461,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			S.set_up(1, 1, front)
 			S.start()
 		user.changeNext_move(CLICK_CD_FAST)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(istype(weapon, /obj/item/natural/rock))
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/natural/rock))
 		playsound(src, pick('sound/items/stonestone.ogg'), 100)
 		if(prob(10))
 			user.visible_message(span_info("[user] strikes the rocks together."))
@@ -407,26 +471,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			var/turf/front = get_step(user,user.dir)
 			S.set_up(1, 1, front)
 			S.start()
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/natural/rock/attackby(obj/item/W, mob/living/user, list/modifiers)
-	user.changeNext_move(CLICK_CD_MELEE)
-	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
-	var/item = user.get_inactive_held_item()
-	if(user.used_intent.type == /datum/intent/chisel && is_type_in_typecache(item, offhand_types))
-		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/masonry)
-		var/work_time = (10 SECONDS - (skill_level * 5))
-		if(istype(W, /obj/item/weapon/chisel))
-			var/obj/item/weapon/chisel/chisel = W
-			work_time *= chisel.toolspeed
-		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
-		user.visible_message("<span class='info'>[user] begins chiseling a part of [src] off.</span>")
-		if(do_after(user, work_time))
-			new /obj/item/natural/stoneblock(get_turf(src.loc))
-			take_damage(max_integrity/2)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/masonry, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
-		return TRUE
-	. = ..()
+		user.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
 
 //begin ore loot rocks
 /obj/item/natural/rock/gold

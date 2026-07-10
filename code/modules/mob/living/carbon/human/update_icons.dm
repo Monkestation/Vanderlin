@@ -540,7 +540,11 @@ GLOBAL_PROTECT(no_child_icons)
 		//add sleeve overlays, then offset
 		var/list/sleeves = list()
 		if(wear_wrists.sleeved && armsindex > 0)
-			sleeves = get_sleeves_layer(wear_wrists,armsindex,WRISTSLEEVE_LAYER)
+			var/obj/item/clothing/wrists/wrists_item = wear_wrists
+			var/wrists_sleeves_layer = WRISTSLEEVE_LAYER
+			if(istype(wrists_item) && wrists_item.alternate_sleeve_layer)
+				wrists_sleeves_layer = wrists_item.alternate_sleeve_layer
+			sleeves = get_sleeves_layer(wear_wrists, armsindex, wrists_sleeves_layer)
 
 		if(sleeves)
 			for(var/mutable_appearance/S as anything in sleeves)

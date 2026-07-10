@@ -669,8 +669,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/adding_hud = !has_antag_hud()
 
-	for(var/datum/atom_hud/antag/H in GLOB.huds) // add antag huds
-		(adding_hud) ? H.add_hud_to(usr) : H.remove_hud_from(usr)
+	for(var/key in GLOB.huds) // add antag huds
+		var/datum/atom_hud/antag/hud = GLOB.huds[key]
+		adding_hud ? hud.show_to(usr) : hud.hide_from(usr)
 
 	if(prefs.read_preference(/datum/preference/bitwise/toggles) & COMBOHUD_LIGHTING)
 		if(adding_hud)
@@ -688,7 +689,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 /client/proc/has_antag_hud()
 	var/datum/atom_hud/A = GLOB.huds[ANTAG_HUD_HIDDEN]
-	return A.hudusers[mob]
+	return A.hud_users_all_z_levels[mob]
 
 /client/proc/show_tip()
 	set category = "Admin.Admin"

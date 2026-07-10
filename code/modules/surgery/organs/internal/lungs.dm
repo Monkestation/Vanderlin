@@ -85,13 +85,3 @@
 /obj/item/organ/lungs/regenerate_organ()
 	. = ..()
 	failed = FALSE
-
-/obj/item/organ/lungs/plasmaman
-	name = "plasma filter"
-	desc = ""
-	icon_state = "lungs-plasma"
-
-
-/obj/item/organ/lungs/slime
-	name = "vacuole"
-	desc = ""

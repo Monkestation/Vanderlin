@@ -34,51 +34,57 @@
 	repair_skill = _repair_skill
 	repair_skill_level = _repair_skill_level
 
-	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(attempt_repair))
+	RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(attempt_repair))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_FIX, PROC_REF(on_parent_fix))
 	RegisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
 	RegisterSignal(parent, COMSIG_ATOM_BREAK, PROC_REF(on_parent_break))
+
 	if(isturf(parent))
 		RegisterSignal(parent, COMSIG_TURF_CHANGE, PROC_REF(on_turf_changed))
 
 /datum/component/repairable/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
+	UnregisterSignal(parent, list(COMSIG_ATOM_ITEM_INTERACTION, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
 
-/datum/component/repairable/proc/attempt_repair(datum/source, obj/item/attacking_item, mob/user, list/modifiers)
+/datum/component/repairable/proc/attempt_repair(datum/source, mob/living/user, obj/item/tool, list/modifiers)
 	SIGNAL_HANDLER
+
+	if(user.cmode)
+		return NONE
 
 	if(repair_skill && GET_MOB_SKILL_VALUE_OLD(user, repair_skill) < repair_skill_level)
 		return
 
 	var/atom/atom_parent = parent
 	if(broken_parent)
-		if(!istype(attacking_item, item_repair_broken))
-			return
+		if(!istype(tool, item_repair_broken))
+			return NONE
 
-		. = COMPONENT_NO_AFTERATTACK
-		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, modifiers)
-	else
-		var/parent_integrity = atom_parent.get_integrity() / atom_parent.max_integrity
+		INVOKE_ASYNC(src, PROC_REF(async_start), source, user, tool, modifiers)
+		return ITEM_INTERACT_SUCCESS
 
-		var/obj/item/repair_item_path
-		var/repair_value
-		for(var/item as anything in repair_thresholds)
-			if(parent_integrity < repair_thresholds[item])
-				repair_item_path = item
-				repair_value = repair_thresholds[item] * atom_parent.max_integrity
-				break
+	var/parent_integrity = atom_parent.get_integrity() / atom_parent.max_integrity
 
-		if(!repair_item_path || !istype(attacking_item, repair_item_path))
-			return
+	var/obj/item/repair_item_path
+	var/repair_value
+	for(var/item as anything in repair_thresholds)
+		if(parent_integrity < repair_thresholds[item])
+			repair_item_path = item
+			repair_value = repair_thresholds[item] * atom_parent.max_integrity
+			break
 
-		. = COMPONENT_NO_AFTERATTACK
-		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, modifiers, repair_value)
+	if(!repair_item_path || !istype(tool, repair_item_path))
+		return NONE
 
-/datum/component/repairable/proc/async_start(datum/source, obj/item/attacking_item, mob/user, list/modifiers, repair_threshold_value)
+	INVOKE_ASYNC(src, PROC_REF(async_start), source, user, tool, modifiers, repair_value)
+
+	return ITEM_INTERACT_SUCCESS
+
+/datum/component/repairable/proc/async_start(datum/source, mob/living/user, obj/item/tool, list/modifiers, repair_threshold_value)
 	var/atom/atom_parent = parent
 	if(repair_sound)
 		playsound(parent, repair_sound, 100, TRUE)
+
 	user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
 	var/repair_time = 10 SECONDS
 	if(repair_skill)
@@ -87,17 +93,20 @@
 	if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
 		interrupt_repair = FALSE
 		return
+
 	interrupt_repair = FALSE
 	if(repair_sound)
 		playsound(parent, repair_sound, 100, TRUE)
+
 	user.visible_message(span_notice("[user] finishes repairing [parent]."), span_notice("I finished repairing [parent]."))
-	qdel(attacking_item)
 
 	if(broken_parent)
 		var/repair_amount = (atom_parent.integrity_failure * atom_parent.max_integrity) - atom_parent.get_integrity() + 1
 		atom_parent.repair_damage(repair_amount)
 	else
 		atom_parent.repair_damage(repair_threshold_value - atom_parent.get_integrity())
+
+	qdel(tool)
 
 /datum/component/repairable/proc/can_repair(mob/user)
 	if(interrupt_repair)
@@ -111,27 +120,36 @@
 
 	if(broken_parent)
 		examine_list += span_notice("A [item_repair_broken.name] is needed to fix the broken [atom_parent.name] first.")
-	else
-		var/list/examine_strings = list()
-		var/parent_integrity = atom_parent.get_integrity() / atom_parent.max_integrity
-		for(var/obj/item as anything in repair_thresholds)
-			var/threshold = repair_thresholds[item]
-			if(parent_integrity < threshold)
-				examine_strings += "A [item.name] will repair [atom_parent.name] to [threshold * 100]%."
-		if(length(examine_strings))
-			examine_list += span_notice("[examine_strings.Join(" ")]")
+		return
+
+	var/list/examine_strings = list()
+	var/parent_integrity = atom_parent.get_integrity() / atom_parent.max_integrity
+	for(var/obj/item as anything in repair_thresholds)
+		var/threshold = repair_thresholds[item]
+		if(parent_integrity < threshold)
+			examine_strings += "A [item.name] will repair [atom_parent.name] to [threshold * 100]%."
+
+	if(length(examine_strings))
+		examine_list += span_notice("[examine_strings.Join(" ")]")
 
 /datum/component/repairable/proc/on_parent_fix(datum/source)
+	SIGNAL_HANDLER
+
 	broken_parent = FALSE
 
 /datum/component/repairable/proc/on_parent_break(datum/source, damage_flag)
+	SIGNAL_HANDLER
+
 	if(item_repair_broken)
 		broken_parent = TRUE
 
 /datum/component/repairable/proc/on_take_damage(datum/source, damage_amount)
+	SIGNAL_HANDLER
+
 	interrupt_repair = TRUE
 
 /// If the wall becomes any other turf, delete us. Transforming into a different works fine as a fix.
 /datum/component/repairable/proc/on_turf_changed()
 	SIGNAL_HANDLER
+
 	qdel(src)

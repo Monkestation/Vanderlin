@@ -1,4 +1,0 @@
-author: "SmokingCrackForChrist"
-delete-after: True
-changes:
-  - bugfix: "Fixes Patron selection for Renegade / Antiquarian Wretch subclasses. You can now respectively shoot or throw calling cards at people like gambit again without needing to worship a specific patron on character-creation. Your patronage is still forced."

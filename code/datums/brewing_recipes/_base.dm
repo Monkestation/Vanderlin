@@ -39,7 +39,7 @@
 	///this is the skill type used for recipes
 	var/brewing_skill = /datum/attribute/skill/craft/cooking
 
-/datum/brewing_recipe/proc/after_finish_attackby(mob/living/user, obj/item/attacked_item, atom/source)
+/datum/brewing_recipe/proc/after_finish_interact(mob/living/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/bottle_kit))
 		return FALSE
 	var/name_to_use = secondary_name ? secondary_name : name

@@ -250,6 +250,10 @@
 		icon_state = "passage0"
 		density = TRUE
 
+/obj/structure/bars/passage/open
+	icon_state = "passage1"
+	density = FALSE
+
 /obj/structure/bars/passage/shutter
 	icon_state = "shutter0"
 	density = TRUE

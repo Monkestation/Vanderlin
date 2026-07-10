@@ -153,6 +153,8 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		///shit that calls explosion() should probably not be called in empty space
 		/obj/effect/temp_visual/target/meteor,
 		/obj/effect/meatvine_controller,
+		//Single use case holder atom requiring a user
+		/atom/movable/looking_holder,
 	)
 	/// ???
 	ignore += typesof(/obj/effect/bombard_zone)
