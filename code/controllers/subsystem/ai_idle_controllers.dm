@@ -6,3 +6,4 @@ AI_CONTROLLER_SUBSYSTEM_DEF(ai_idle_controllers)
 	wait = 5 SECONDS
 	runlevels = RUNLEVEL_GAME
 	planning_status = AI_STATUS_IDLE
+	uses_cell_processing = TRUE

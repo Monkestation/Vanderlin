@@ -25,6 +25,7 @@
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_HALF_ELF,\
+		SPEC_ID_HALF_DROW,\
 		SPEC_ID_DWARF,\
 		SPEC_ID_HALF_ORC,\
 		SPEC_ID_TIEFLING,\
