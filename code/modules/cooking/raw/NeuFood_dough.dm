@@ -1609,28 +1609,14 @@
 	base_icon_state = "grenzbun"
 	bitesize = 5
 	w_class = WEIGHT_CLASS_NORMAL
-
 	nutrition = (RAWMEAT_NUTRITION + SMALLDOUGH_NUTRITION) * COOK_MOD
 	rotprocess = SHELFLIFE_EXTREME
 	foodtype = GRAIN | MEAT
 	faretype = FARE_NEUTRAL
 	tastes = list("savory sausage" = 1, "bread" = 1)
 	item_weight = 180 GRAMS
-
-/obj/item/reagent_containers/food/snacks/grenzelbun/examine(mob/examiner)
-	. = ..()
-	if (!ishuman(examiner)) // avoid runtimes
-		return
-	else
-		var/mob/living/carbon/human/user = examiner
-		if(user.culture.name == "Grenzelhoft")
-			var/str = "<details><summary><b>ANTHOLOGY:</b> [span_tooltip("You are from Grenzelhoft", user.culture.name)]</summary>"
-			str += "Shameless cultural appropriation in the form of a bun. \
-			Any true resident of the Black Empire knows sausages go best with mashed tatoes."
-			. += span_info(str)
-
-
-
+	culture_desc = list(list("Grenzelhoft", "Shameless cultural appropriation in the form of a bun. \
+			Any true resident of the Black Empire knows sausages go best with mashed tatoes"))
 
 
 /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole

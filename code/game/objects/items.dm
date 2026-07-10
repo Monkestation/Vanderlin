@@ -303,6 +303,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
+	///optional item's lore description, a list linking a human mob's culture.name var alongside a string. \
+	If the human mob has the prerequisite culture, they will see the corresponding string. \
+	For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have : \
+	list(list("Vanderlin", "This is a vanderlinian description."), list("Grenzelhoft", "this is a grenzelhoftian description"))
+	var/culture_desc[][2] = list(list("no_culture", "description"))
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -1608,6 +1613,15 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
+	/// Check for item culture descriptions.
+	if (ishuman(user) && culture_desc[1][1] != "no_culture") // make sure the mob has a culture to check for + avoid unecessary controls.
+		var/mob/living/carbon/human/humanexaminer = user
+		for(var/culture in culture_desc.len)
+			if(humanexaminer.culture.name == culture_desc[culture][1])
+				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [humanexaminer.culture.name]", humanexaminer.culture.name)]</summary>"
+				str += culture_desc[culture][2]
+				. += span_info(str)
+
 	if(!get_precursor_data(src))
 		return
 	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60
@@ -1629,6 +1643,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
 
 /**
  * Returns the atom(either itself or an internal module) that will interact/attack the target on behalf of us
