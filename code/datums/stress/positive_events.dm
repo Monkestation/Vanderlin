@@ -452,3 +452,8 @@
 	desc = span_green("The warmth of the fire is comforting.")
 	stress_change = -1
 	timer = 1 MINUTES
+
+/datum/stress_event/soulchurnerdestroyed
+	timer = 10 MINUTES
+	stress_change = -5
+	desc = span_green("That barbaric machine has been destroyed, I have done a great service todae!")

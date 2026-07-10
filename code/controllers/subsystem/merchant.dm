@@ -4,6 +4,31 @@ SUBSYSTEM_DEF(merchant)
 	init_order = INIT_ORDER_DEFAULT
 	runlevels = RUNLEVEL_SETUP | RUNLEVEL_GAME
 
+	var/static/list/group_batch_sizes = list(
+		"Raw Materials" = 30,
+		"Seeds" = 50,
+		"Food" = 15,
+		"Drinks" = 15,
+		"Narcotics" = 20,
+		"Livestock" = 2,
+		"Luxury" = 5,
+		"Jewelry" = 20,
+		"Armor" = 5,
+		"Armor(Light)" = 5,
+		"Armor(Steel)" = 5,
+		"Instruments" = 5,
+		"Storage" = 5,
+		"Tools" = 5,
+		"Medicine" = 20,
+		"Shields" = 5,
+		"Weapons" = 5,
+		"Weapons (Iron)" = 5,
+		"Weapons (Steel)" = 5,
+		"Weapons (Ranged)" = 5,
+		"Ammunition" = 100,
+		"Apparel" = 10,
+	)
+
 	var/list/supply_packs = list()
 	var/list/supply_cats = list()
 	var/list/shoppinglist = list()
@@ -12,6 +37,8 @@ SUBSYSTEM_DEF(merchant)
 	var/list/orderhistory = list()
 	var/list/trade_requests = list()
 	var/list/sending_stuff = list()
+	///the amount of currency generated when we spawn everything
+	var/extra_currency = 0
 
 	var/datum/lift_master/tram/cargo_boat
 	var/cargo_docked = TRUE
@@ -31,8 +58,6 @@ SUBSYSTEM_DEF(merchant)
 
 	/// Cache of recipe component costs to avoid recalculation
 	var/static/list/recipe_base_values = list()
-	/// Cached list of all valid bounty items (items that can be obtained through gameplay)
-	var/static/list/valid_bounty_items = list()
 	/// This is a static of possible bounty items
 	var/static/list/obtainable_items = list()
 	/// Cached list of exclusions for the craft requirements
@@ -44,13 +69,18 @@ SUBSYSTEM_DEF(merchant)
 		/obj/item/natural,
 	)
 
+	/// world.time at which the current active_faction will be rotated out
+	var/active_faction_rotation_time = 0
+	/// world.time at which a manual faction rotation becomes available again
+	var/manual_rotation_ready_time = 0
+	/// Cooldown between player-triggered faction rotations
+	var/manual_rotation_cooldown = 10 MINUTES
 
 
 /datum/controller/subsystem/merchant/Initialize(timeofday)
 	setup_map_nations()
 	// Initialize recipe values and bounty cache BEFORE factions cause they use it
 	initialize_recipe_values()
-	initialize_bounty_cache()
 
 	// Initialize supply packs
 	for(var/pack in subtypesof(/datum/supply_pack))
@@ -154,67 +184,6 @@ SUBSYSTEM_DEF(merchant)
 	log_game("Calculated recipe values for [length(recipe_base_values)] craftable items")
 
 /**
- * Initializes the cache of valid bounty items
- * This includes items that BOTH have sell values AND can be obtained through gameplay
- */
-/datum/controller/subsystem/merchant/proc/initialize_bounty_cache()
-	if(length(valid_bounty_items))
-		return
-
-	// Build obtainable items list
-	for(var/datum/supply_pack/pack_type as anything in subtypesof(/datum/supply_pack))
-		var/datum/supply_pack/pack = new pack_type()
-
-		if(islist(pack.contains))
-			for(var/item_type in pack.contains)
-				obtainable_items |= item_type
-		else if(pack.contains)
-			obtainable_items |= pack.contains
-
-		qdel(pack)
-
-	for(var/path in exclusion_subtypes)
-		obtainable_items |= subtypesof(path)
-
-	for(var/path in exclusions)
-		obtainable_items |= path
-
-	for(var/datum/repeatable_crafting_recipe/recipe as anything in subtypesof(/datum/repeatable_crafting_recipe))
-		var/output = initial(recipe.output)
-		if(output)
-			obtainable_items |= output
-
-	for(var/datum/container_craft/recipe as anything in subtypesof(/datum/container_craft))
-		var/output = initial(recipe.output)
-		if(output)
-			obtainable_items |= output
-
-	for(var/datum/orderless_slapcraft/recipe as anything in subtypesof(/datum/orderless_slapcraft))
-		var/output = initial(recipe.output_item)
-		if(output)
-			obtainable_items |= output
-
-	for(var/datum/anvil_recipe/recipe as anything in subtypesof(/datum/anvil_recipe))
-		if(IS_ABSTRACT(recipe))
-			continue
-		var/output = initial(recipe.created_item)
-		if(output)
-			obtainable_items |= output
-
-	for(var/datum/artificer_recipe/recipe as anything in subtypesof(/datum/artificer_recipe))
-		var/output = initial(recipe.created_item)
-		if(output)
-			obtainable_items |= output
-
-	// Only include items that are both obtainable AND have a base value
-	for(var/obj_type in obtainable_items)
-		var/base_value = get_item_base_value(obj_type)
-		if(base_value > 0)
-			valid_bounty_items |= obj_type
-
-	log_game("Initialized [length(valid_bounty_items)] valid bounty items (out of [length(obtainable_items)] obtainable items)")
-
-/**
  * Calculates the total cost of components in a recipe
  * Arguments:
  *   requirements - List of required items (path = amount)
@@ -278,15 +247,6 @@ SUBSYSTEM_DEF(merchant)
 
 	return 0
 
-/datum/controller/subsystem/merchant/proc/get_sell_price(atom/sell_type, datum/world_faction/faction, sell_modifier = 1)
-	if(!faction)
-		faction = active_faction
-
-	if(!faction)
-		return 0
-
-	return faction.get_actual_sell_price(sell_type, sell_modifier)
-
 /datum/controller/subsystem/merchant/proc/get_sell_modifier(atom/sell_type, datum/world_faction/faction)
 	if(!faction)
 		faction = active_faction
@@ -295,24 +255,6 @@ SUBSYSTEM_DEF(merchant)
 		return 1
 
 	return faction.return_sell_modifier(sell_type)
-
-/datum/controller/subsystem/merchant/proc/is_bounty_item(atom/item_type, datum/world_faction/faction)
-	if(!faction)
-		faction = active_faction
-
-	if(!faction)
-		return FALSE
-
-	return (item_type in faction.bounty_items)
-
-/datum/controller/subsystem/merchant/proc/get_bounty_multiplier(atom/item_type, datum/world_faction/faction)
-	if(!faction)
-		faction = active_faction
-
-	if(!faction || !(item_type in faction.bounty_items))
-		return 0
-
-	return faction.bounty_items[item_type]
 
 /datum/controller/subsystem/merchant/proc/register_sellable_item(atom/sell_type)
 	if(sell_type in staticly_setup_types)
@@ -328,9 +270,10 @@ SUBSYSTEM_DEF(merchant)
 		var/datum/world_faction/new_faction = new faction
 		if((SSmapping.config.map_name in new_faction.allowed_maps) || !length(new_faction.allowed_maps))
 			world_factions |= new_faction
+	shuffle(world_factions)
 
 	// Set initial active faction
-	active_faction = world_factions[rand(1, length(world_factions))]
+	active_faction = pick(world_factions)
 
 	// Schedule faction rotations (every 45 minutes)
 	var/rotation_time = 45 MINUTES
@@ -341,17 +284,43 @@ SUBSYSTEM_DEF(merchant)
 /datum/controller/subsystem/merchant/proc/rotate_active_faction()
 	var/datum/world_faction/next_faction
 	var/earliest_time = INFINITY
-
-	// Find the faction scheduled to be next
 	for(var/datum/world_faction/faction in faction_rotation_schedule)
 		var/scheduled_time = faction_rotation_schedule[faction]
 		if(scheduled_time <= world.time && scheduled_time < earliest_time)
 			earliest_time = scheduled_time
 			next_faction = faction
-
 	if(next_faction && next_faction != active_faction)
-		active_faction = next_faction
-		faction_rotation_schedule[next_faction] = world.time + (45 MINUTES * length(world_factions))
+		set_active_faction(next_faction)
+
+/datum/controller/subsystem/merchant/proc/reschedule_faction_queue(datum/world_faction/starting_faction)
+	// Rebuilds the round-robin queue so starting_faction is active now,
+	// with the remaining factions queued up in sequence afterward.
+	var/list/remaining = world_factions.Copy()
+	remaining -= starting_faction
+
+	var/index = 1
+	for(var/datum/world_faction/faction in remaining)
+		faction_rotation_schedule[faction] = world.time + (45 MINUTES * index)
+		index++
+
+	faction_rotation_schedule[starting_faction] = world.time + (45 MINUTES * length(world_factions))
+
+/// Central point for changing the active faction, whether by schedule or by player choice
+/datum/controller/subsystem/merchant/proc/set_active_faction(datum/world_faction/new_faction, manual = FALSE)
+	if(!new_faction)
+		return FALSE
+	active_faction = new_faction
+	if(manual)
+		reschedule_faction_queue(new_faction)
+		manual_rotation_ready_time = world.time + manual_rotation_cooldown
+	else
+		faction_rotation_schedule[new_faction] = world.time + (45 MINUTES * length(world_factions))
+
+	var/next_time = faction_rotation_schedule[new_faction]
+	for(var/faction in faction_rotation_schedule)
+		next_time = min(next_time, faction_rotation_schedule[faction])
+	active_faction_rotation_time = next_time
+	return TRUE
 
 /datum/controller/subsystem/merchant/fire(resumed)
 	// Update all factions
@@ -361,38 +330,153 @@ SUBSYSTEM_DEF(merchant)
 	// Check for faction rotation
 	rotate_active_faction()
 
+
+/datum/controller/subsystem/merchant/proc/get_active_faction_rotation_seconds_left()
+	if(!active_faction_rotation_time)
+		return 0
+	return max(0, round((active_faction_rotation_time - world.time) / 10))
+
+/datum/controller/subsystem/merchant/proc/can_manual_rotate()
+	return world.time >= manual_rotation_ready_time
+
+/datum/controller/subsystem/merchant/proc/get_manual_rotation_seconds_left()
+	return max(0, round((manual_rotation_ready_time - world.time) / 10))
+
+/datum/controller/subsystem/merchant/proc/manual_rotate_faction(datum/world_faction/chosen_faction, mob/user)
+	if(!can_manual_rotate())
+		if(user)
+			to_chat(user, "<span class='warning'>The trade routes can't be redirected again so soon.</span>")
+		return FALSE
+	if(!chosen_faction || !(chosen_faction in world_factions))
+		return FALSE
+	if(chosen_faction == active_faction)
+		if(user)
+			to_chat(user, "<span class='warning'>[chosen_faction.faction_name] is already the active trading faction.</span>")
+		return FALSE
+	set_active_faction(chosen_faction, manual = TRUE)
+	if(user)
+		to_chat(user, "<span class='notice'>You redirect the trade routes. [chosen_faction.faction_name] is now active.</span>")
+	return TRUE
+
 /datum/controller/subsystem/merchant/proc/prepare_cargo_shipment()
 	if(!cargo_boat || !cargo_docked)
 		return
 	draw_selling_changes()
 	cargo_boat.show_tram()
+
+	// Gather available flooring spaces from the lift system
 	var/list/boat_spaces = list()
 	for(var/obj/structure/industrial_lift/lift in cargo_boat.lift_platforms)
 		boat_spaces |= cargo_boat.get_valid_turfs(lift)
-	for(var/datum/supply_pack/requested as anything in requestlist)
-		if(!requestlist[requested])
-			continue
-		var/turf/boat_turf = pick_n_take(boat_spaces)
-		var/obj/structure/closet/crate/crate_to_use
-		for(var/i in 1 to requestlist[requested])
-			if(i == 1)
-				crate_to_use = requested.generate(boat_turf)
+
+	if(!length(boat_spaces))
+		return
+
+	var/list/items_by_group = list() // Format: list(group_name = list(item_type_paths_or_instances))
+	var/list/admin_flagged_types = list() // Track which types need admin flags (if applicable)
+
+	if(length(requestlist))
+		for(var/datum/supply_pack/requested as anything in requestlist)
+			var/quantity = requestlist[requested]
+			if(quantity <= 0 || !length(requested.contains))
+				continue
+
+			// Fallback to "General" if group is empty/unset
+			var/group_name = requested.group ? requested.group : "General"
+			if(!items_by_group[group_name])
+				items_by_group[group_name] = list()
+
+			// Unpack the items directly from the supply pack list data
+			for(var/i in 1 to quantity)
+				for(var/item_type in requested.contains)
+					if(!item_type)
+						continue
+
+					// Track if this instance stream needs admin item mapping
+					if(requested.admin_spawned)
+						admin_flagged_types += item_type
+
+					items_by_group[group_name] += item_type
+
+	if(length(items_by_group))
+		for(var/group_name in items_by_group)
+			var/list/group_items = items_by_group[group_name]
+			var/list/current_chest_batch = list()
+
+			var/max_batch_size = group_batch_sizes[group_name] ? group_batch_sizes[group_name] : 5
+
+			if(length(group_items))
+				for(var/item_type in group_items)
+					current_chest_batch += item_type
+
+					// Slice the batch according to the group's dynamic max size
+					if(length(current_chest_batch) == max_batch_size)
+						spawn_delivery_chest(group_name, current_chest_batch, boat_spaces, admin_flagged_types)
+						current_chest_batch.Cut()
+
+				// Wrap up remaining leftovers for this category group
+				if(length(current_chest_batch))
+					spawn_delivery_chest(group_name, current_chest_batch, boat_spaces, admin_flagged_types)
+
+	if(length(sending_stuff))
+		for(var/atom/movable/item as anything in sending_stuff)
+			if(QDELETED(item))
+				continue
+			var/turf/boat_turf = pick(boat_spaces)
+			if(ispath(item))
+				var/atom/movable/spawned_item = new item(boat_turf)
+				register_lift_cargo(spawned_item)
 			else
-				requested.fill(crate_to_use)
-		for(var/obj/structure/industrial_lift/lift in cargo_boat.lift_platforms)
-			lift.held_cargo |= crate_to_use
-	for(var/atom/movable/item as anything in sending_stuff)
-		if(QDELETED(item))
-			continue
-		var/turf/boat_turf = pick(boat_spaces)
-		if(ispath(item))
-			new item(boat_turf)
-		else
-			item.forceMove(boat_turf)
+				item.forceMove(boat_turf)
+				register_lift_cargo(item)
+
 	requestlist = list()
 	spawn_faction_traders()
 	cargo_docked = FALSE
 	SEND_GLOBAL_SIGNAL(COMSIG_DISPATCH_CARGO, cargo_boat)
+
+/**
+ * Assembles a physical chest on the deck, loads it with up to 5 items,
+ * and prints a parchment manifest lying over it.
+ */
+/datum/controller/subsystem/merchant/proc/spawn_delivery_chest(category, list/items_to_pack, list/boat_spaces)
+	if(!length(boat_spaces) || !length(items_to_pack))
+		return
+	var/turf/spawn_turf = pick(boat_spaces)
+	if(!spawn_turf)
+		return
+	var/obj/structure/closet/crate/chest/merchant/delivery_chest = new(spawn_turf)
+	delivery_chest.name = "[lowertext(category)] delivery chest"
+	register_lift_cargo(delivery_chest)
+	var/manifest_contents = "<h2>[category] Supply Division</h2><hr><b>Contained Cargo Manifest:</b><ul>"
+	for(var/item_type in items_to_pack)
+		var/atom/movable/item = item_type
+		if(ispath(item_type))
+			item = new item_type(delivery_chest)
+		else
+			item.forceMove(delivery_chest)
+		if(isitem(item))
+			var/list/calc_result = active_faction.get_faction_quality_calculator(item)
+			if(calc_result)
+				create_quality_item(item, calc_result[1], calc_result[2])
+		manifest_contents += "<li>[item.name]</li>"
+	manifest_contents += "</ul><hr><i>Seal of Authenticity - Approved Shipment.</i>"
+	var/obj/item/paper/manifest = new(spawn_turf)
+	manifest.name = "manifest parchment ([lowertext(category)])"
+	manifest.info = manifest_contents
+	manifest.update_appearance()
+	manifest.pixel_x = delivery_chest.pixel_x + rand(-3, 3)
+	manifest.pixel_y = delivery_chest.pixel_y + rand(-3, 3)
+	register_lift_cargo(manifest)
+
+/**
+ * Clean internal utility to link any instantiated delivery item back to the platform
+ */
+/datum/controller/subsystem/merchant/proc/register_lift_cargo(atom/movable/cargo_item)
+	if(!cargo_boat)
+		return
+	for(var/obj/structure/industrial_lift/lift in cargo_boat.lift_platforms)
+		lift.held_cargo |= cargo_item
 
 /datum/controller/subsystem/merchant/proc/send_cargo_ship_back()
 	var/obj/effect/landmark/tram/queued_path/cargo_stop/cargo_stop = cargo_boat.idle_platform
@@ -478,33 +562,30 @@ SUBSYSTEM_DEF(merchant)
 	if(!cargo_docked || !length(world_factions))
 		return
 
-	var/datum/world_faction/selected_faction
-	for(var/datum/world_faction/faction in world_factions)
-		if(faction.trader_schedule_generated && faction.next_boat_trader_count > 0)
-			selected_faction = faction
-			break
+	var/datum/world_faction/selected_faction = active_faction
+	if(!selected_faction.trader_schedule_generated || selected_faction.next_boat_trader_count <= 0)
+		selected_faction.reset_trader_schedule()
+		return
 
 	if(!selected_faction)
+		selected_faction.reset_trader_schedule()
 		return
 
 	// Find spawn location on or near the boat
 	var/list/possible_turfs = list()
 	for(var/obj/structure/industrial_lift/lift in cargo_boat.lift_platforms)
 		possible_turfs |= cargo_boat.get_valid_turfs(lift)
-	var/atom/spawn_turf = get_turf(pick(possible_turfs))
 
-	if(!spawn_turf)
+	if(!length(possible_turfs))
 		return
 
 	// Create all scheduled traders
-	var/list/new_traders = selected_faction.create_scheduled_traders(spawn_turf)
+	var/list/new_traders = selected_faction.create_scheduled_traders(possible_turfs)
 
 	for(var/mob/living/simple_animal/hostile/retaliate/trader/faction_trader/trader in new_traders)
 		active_faction_traders += trader
 		trader.ai_controller?.set_blackboard_key(BB_CURRENT_MIN_MOVE_DISTANCE, 0)
-		trader.ai_controller.PauseAi(1 MINUTES) // Wait a minute then they get off the boat
-
-	// Reset for next boat
+		trader.ai_controller.PauseUntil(COMSIG_MOB_CARGO_DOCKED, 1 MINUTES) // Wait a minute then they get off the boat
 	selected_faction.reset_trader_schedule()
 
 /datum/controller/subsystem/merchant/proc/unlock_supply_packs(list/incoming_packs)
@@ -513,16 +594,6 @@ SUBSYSTEM_DEF(merchant)
 			continue
 		pack.unlocked = TRUE
 
-/datum/controller/subsystem/merchant/proc/handle_lift_contents(obj/structure/industrial_lift/tram/platform, list/items, datum/nation/shipped_nation)
-	if(!length(nations))
-		return
-	if(shipped_nation)
-		shipped_nation.handle_import_shipment(items, platform)
-	for(var/datum/nation/other_nation in nations)
-		if(shipped_nation == other_nation)
-			continue
-		shipped_nation.handle_global_shipment(items)
-
 
 /obj/Initialize()
 	. = ..()
@@ -530,7 +601,3 @@ SUBSYSTEM_DEF(merchant)
 		if(!(type in SSmerchant.staticly_setup_types))
 			if(!istype(src, /obj/item/coin))
 				SSmerchant.set_faction_sell_values(type)
-
-/obj/item/proc/get_sell_price(datum/world_faction/faction, sell_modifier = 1)
-	return SSmerchant.get_sell_price(type, faction, sell_modifier)
-

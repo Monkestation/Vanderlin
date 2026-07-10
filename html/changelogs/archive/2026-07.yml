@@ -105,3 +105,60 @@
   dwasint:
   - bugfix: Rollers now properly pass rotational data through itself
   - bugfix: waterwheels behave correctly in weirder situations
+2026-07-08:
+  Banditwithdrugs:
+  - rscadd: Added a recipie for decorated dagger that uses one steel bar+iron bar
+      to craft 2 decorated daggers
+  Ben10083:
+  - map: The Saint's Coffin at Vanderlin Forest is now a custom grave with special
+      loot for would be robbers
+  - code_imp: Gravespawner map helper now supports custom outfits and/or bodies
+  CheffieGithub:
+  - bugfix: fixed infinite feeding the broodmother
+  - bugfix: Fixed siege skeletons not being able to claw people
+  ModDownloading:
+  - bugfix: Steward can no longer reassign the job of the current Monarch.
+  - bugfix: Extractor in the Sewer Drug Den is now a Splitter.
+  SSensum13:
+  - rscadd: Added 2 more vices (weak and frail), that gives you STR and CON debuffs.
+  - bugfix: Fixed Unlucky vice that was not giving you a stat debuff.
+  - balance: Now if you hug a person before or after they fall asleep - they will
+      not scream, if they have Nitemares vice.
+  - qol: Backstory boon now have better clarity on how much stats it gives and what
+      value acts as clamp.
+  - balance: Combat backstories now give you 20 skills, instead of 10, while still
+      being clamped to not go higher than 20.
+  Sulaboy:
+  - qol: Meat hooks have a mechanics tab for instructions. You can butcher on meat
+      hooks with more sharp items.
+  Wrench-1:
+  - bugfix: fixes examinations. people who are part of families can no longer see
+      the jobs of people they don't even know
+  tired-wired:
+  - rscadd: Added a Rockhill accent.
+  - bugfix: Fixed the Rockhill knight's hat. Now it's a helmet.
+2026-07-10:
+  Ben10083:
+  - rscadd: Inquisition music box can now be destroyed by casting Burial Rites.
+  ModDownloading:
+  - rscadd: Men-at-Arms Rangers and Returning Bannermen Pikemen can now select their
+      weapon rather than having it be random.
+  - rscdel: Automatons can no longer be unshackled.
+  Somniworld:
+  - balance: The Sweeper now has the "crate mover" trait, and starts with an iron
+      lamptern in their backpack.
+  Wrench-1:
+  - rscadd: Reworked Court Agent, giving them unique subclasses and tools for intrigue
+      and subterfuge (Sprites by Blumengama)
+  - map: added the Court Agent Hideout, located behind a hidden door in the Keep's
+      Stables
+  dwasint:
+  - qol: catacoma now stocks every pack by default
+  - refactor: bounties now use specific datums preventing bugs, and allowing post
+      bounty rewards.
+  - refactor: world reputation now affects market trends of things the faction supplies
+      instead of being a reputation buy system
+  - rscadd: merchants can choose 3 supply packs to come on the first ship in
+  - refactor: supplies now come in crates with a manifest of what each crate has over
+      individual crates
+  - refactor: movement is smoother now, you aren't slower this is purely visual

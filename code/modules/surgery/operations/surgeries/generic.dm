@@ -151,7 +151,8 @@
 	return image(/obj/item/weapon/surgery/cautery)
 
 /datum/surgery_operation/limb/close_skin/all_required_strings()
-	return ..() + list("the limb must have skin")
+	. = ..()
+	. += "the limb must have skin"
 
 /datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
 	return LIMB_HAS_SKIN(limb) && limb.get_incision()
