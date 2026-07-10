@@ -1978,8 +1978,20 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/obj/item/storage/backpack/satchel/surgbag,
 /obj/structure/table/wood/plain_alt,
+/obj/item/essence_connector{
+	pixel_x = -9;
+	pixel_y = 3
+	},
+/obj/item/recipe_book/alchemy{
+	pixel_x = 4;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/glass/mortar{
+	pixel_y = -3;
+	pixel_x = 9
+	},
+/obj/item/pestle,
 /turf/open/floor/churchrough,
 /area/indoors/town/keep/phys)
 "aVo" = (
@@ -9734,8 +9746,7 @@
 /turf/open/floor/cobblerock/alt,
 /area/indoors/town/noble_manor/yellow)
 "eFo" = (
-/obj/structure/table/wood/plain_alt,
-/obj/machinery/essence/reservoir,
+/obj/machinery/tanningrack,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
 "eFy" = (
@@ -10242,6 +10253,9 @@
 /obj/item/reagent_containers/glass/carafe/redwine{
 	pixel_x = -9;
 	pixel_y = 4
+	},
+/obj/item/storage/backpack/satchel/surgbag{
+	pixel_y = -2
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
@@ -13440,7 +13454,8 @@
 	dir = 8
 	},
 /obj/structure/fluff/walldeco/church/line,
-/obj/structure/chair/stool,
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/essence/reservoir,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
 "gtm" = (
@@ -24955,6 +24970,8 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/essence/reservoir,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
 "lJg" = (
@@ -36429,19 +36446,6 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/obj/structure/table/wood/plain_alt,
-/obj/item/essence_connector{
-	pixel_x = -9;
-	pixel_y = 3
-	},
-/obj/item/recipe_book/alchemy{
-	pixel_x = 4;
-	pixel_y = 5
-	},
-/obj/item/reagent_containers/glass/mortar{
-	pixel_y = 5
-	},
-/obj/item/pestle,
 /turf/open/floor/churchrough,
 /area/indoors/town/keep/phys)
 "qQB" = (
@@ -38726,8 +38730,8 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
-/obj/structure/table/wood/plain_alt,
-/obj/machinery/essence/reservoir,
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/churchrough,
 /area/indoors/town/keep/phys)
 "rQx" = (
@@ -42736,7 +42740,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/obj/structure/fermentation_keg/random/water,
+/obj/structure/fake_machine/mail/r{
+	mailtag = "Court Physician"
+	},
 /turf/open/floor/churchrough,
 /area/indoors/town/keep/phys)
 "tGt" = (
@@ -44732,9 +44738,7 @@
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
 "uxT" = (
-/obj/structure/fake_machine/mail/l{
-	mailtag = "Court Physician"
-	},
+/obj/structure/fermentation_keg/random/water,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
 "uym" = (
@@ -51642,7 +51646,6 @@
 /area/outdoors/mountains)
 "xoU" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
-/obj/machinery/tanningrack,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
 "xoW" = (
@@ -151743,7 +151746,7 @@ iIE
 ivn
 ivn
 aOV
-lYa
+eAU
 uIN
 kbg
 qFx
