@@ -1648,7 +1648,6 @@
 	name = "Crown"
 	icon_state = "crown"
 
-
 /datum/sprite_accessory/hair/head/rakshari
 	name = "Base Rakshari"
 	abstract_type = /datum/sprite_accessory/hair/head/rakshari
