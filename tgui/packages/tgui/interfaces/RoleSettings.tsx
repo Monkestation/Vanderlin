@@ -265,7 +265,7 @@ const PickerSection = ({ setting, act }) => {
         {selected.map((option) => (
           <Stack.Item key={option.value}>
             <Stack align="center">
-              {option.is_path && (
+              {!!option.is_path && (
                 <Stack.Item>
                   <DmIcon
                     icon={option.icon!}
@@ -302,7 +302,7 @@ const PickerSection = ({ setting, act }) => {
                 {available.map((option) => (
                   <Stack.Item key={option.value}>
                     <Stack align="center">
-                      {option.is_path && (
+                      {!!option.is_path && (
                         <Stack.Item>
                           <DmIcon
                             icon={option.icon!}
