@@ -1,8 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - qol: "catacoma now stocks every pack by default"
-  - refactor: "bounties now use specific datums preventing bugs, and allowing post bounty rewards."
-  - refactor: "world reputation now affects market trends of things the faction supplies instead of being a reputation buy system"
-  - rscadd: "merchants can choose 3 supply packs to come on the first ship in"
-  - refactor: "supplies now come in crates with a manifest of what each crate has over individual crates"
