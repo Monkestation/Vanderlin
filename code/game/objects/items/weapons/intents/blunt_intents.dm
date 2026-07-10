@@ -25,6 +25,11 @@
 	penfactor = 10
 	icon_state = "instrike"
 
+/datum/intent/mace/strike/polehammer
+	reach = 2
+	acc_bonus = 10
+	penfactor = 20
+
 // MACE SMASH INTENTS //
 /datum/intent/mace/smash
 	name = "smash"

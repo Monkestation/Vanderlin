@@ -1224,10 +1224,10 @@
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
 	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
-	icon_state = "steelzwei"
+	icon_state = "steelzwei_sk"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(ZWEI_CUT, ZWEI_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
+	gripped_intents = list(ZWEI_CUT_REACH, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	smeltresult = /obj/item/ingot/iron
@@ -1247,6 +1247,16 @@
 				return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 4,"sflip" = 4,"wflip" = 1,"eflip" = 0)
 			if("onback")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
+
+/obj/item/weapon/sword/long/greatsword/zwei/steel
+	name = "steel zweihander"
+	desc = "A zweihander forged from steel, the pride and joy of any mercenary who wields it. It looks like it could cleave a man in half with a single swing."
+	icon_state = "steelzwei"
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/steel
+	sellprice = 90
 
 //................ Kriegsmesser ............... //
 /obj/item/weapon/sword/long/greatsword/elfgsword

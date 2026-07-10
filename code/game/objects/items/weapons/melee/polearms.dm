@@ -726,12 +726,12 @@
 	desc = "A reinforced pole affixed with an ornate steel eagle's head, of which it's beak is intended to pierce with great harm."
 	icon_state = "eaglebeak"
 	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_SPEAR_WIELD
+	force_wielded = DAMAGE_HALBERD_WIELD -1
 	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
 	possible_item_intents = list(POLEARM_BASH, POLEARM_CHOP) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_BASH, POLEARM_THRUST, MACE_HVYSMASH, WARHM_IMPALE)
+	gripped_intents = list(POLEHAMMER_STRIKE, POLEARM_THRUST, MACE_HVYSMASH, DAZE_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 11
@@ -762,6 +762,7 @@
 	name = "lucerne"
 	desc = "A polehammer of simple iron, fracture bone and dissent with simple brute force."
 	icon_state = "polehammer"
+	force_wielded = DAMAGE_HALBERD_WIELD -3
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
 	max_integrity = INTEGRITY_STRONG

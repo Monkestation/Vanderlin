@@ -726,6 +726,13 @@
 	created_item = /obj/item/weapon/sword/long/greatsword/flamberge
 	craftdiff = 4
 
+/datum/anvil_recipe/weapons/steel/zweihander
+	name = "Zweihander (+Steel Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/greatsword/zwei/steel
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/steel/claymore
 	name = "Steel Claymore (+Steel Bar x2)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing

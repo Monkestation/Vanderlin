@@ -138,6 +138,12 @@
 	swingdelay = 1
 	item_damage_type = "slash"
 
+/datum/intent/sword/cut/zwei/reach
+	name = "cut"
+	reach = 2
+	swingdelay = 1
+	item_damage_type = "slash"
+
 /datum/intent/sword/cut/rapier
 	damfactor = 0.8
 	item_damage_type = "slash"
