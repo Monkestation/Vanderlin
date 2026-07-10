@@ -629,13 +629,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		inspect_list += "\n<b>MIN.STR:</b> [minstr]"
 
 	if(associated_skill)
-		var/datum/attribute/skill/skilltype = new associated_skill
-		inspect_list += "\n<b>SKILL:</b> [skilltype.name]"
+		inspect_list += "\n<b>SKILL:</b> [associated_skill::name]"
 
 	if(!istype(src, /obj/item/clothing))
 		if(can_parry)
 			inspect_list += "\n<b>PARRY:</b> [wdefense]"
-
 		else
 			inspect_list +=  "\n<b>PARRY:</b> Cannot Parry"
 
