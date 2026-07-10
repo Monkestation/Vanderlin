@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscdel: "Automatons can no longer be unshackled."

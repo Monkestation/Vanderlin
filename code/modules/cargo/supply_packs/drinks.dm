@@ -1,5 +1,6 @@
 /datum/supply_pack/food/drinks
 	group = "Drinks"
+	abstract_type = /datum/supply_pack/food/drinks
 
 /datum/supply_pack/food/drinks/water
 	name = "Water Bottle"

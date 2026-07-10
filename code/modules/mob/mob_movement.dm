@@ -156,18 +156,17 @@
 
 	. = ..()
 
+	var/scalar = 1
 	if((direct & (direct - 1)) && mob.loc == new_loc) //moved diagonally successfully
+		scalar = sqrt(2)
 		add_delay *= sqrt(2)
 
-	var/after_glide = 0
-	if(visual_delay)
-		after_glide = visual_delay
-	else
-		after_glide = DELAY_TO_GLIDE_SIZE(add_delay)
-
-	mob.set_glide_size(after_glide)
+	add_delay = round(add_delay, world.tick_lag)
+	mob.set_glide_size(MOVEMENT_ADJUSTED_GLIDE_SIZE(add_delay, scalar))
 
 	move_delay += add_delay
+	move_delay = round(move_delay, world.tick_lag)
+
 	if(.) // If mob is null here, we deserve the runtime
 		if(mob.throwing)
 			mob.throwing.finalize(FALSE)

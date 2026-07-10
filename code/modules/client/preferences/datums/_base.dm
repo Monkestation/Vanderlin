@@ -47,6 +47,11 @@
 	///if this is a preference we don't natively apply
 	var/should_apply = TRUE
 
+	///if this preference has special post job applications
+	var/post_job_pref = FALSE
+	///these are the jobs we actually care about
+	var/list/job_types
+
 /// Deserialise a raw savefile/UI value into the typed preference value.
 /// Must be overridden. May return null if the value is unusable.
 /datum/preference/proc/deserialize(input, datum/preferences/prefs)
@@ -110,6 +115,12 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_CALL_PARENT(FALSE)
 	CRASH("`apply_to_human()` not implemented on [type]!")
+
+/// Apply to a human mob after their job is spawned
+/datum/preference/proc/post_job_apply(mob/living/carbon/human/H, value, client/client)
+	SHOULD_NOT_SLEEP(TRUE)
+	SHOULD_CALL_PARENT(FALSE)
+	CRASH("`post_job_apply()` not implemented on [type]!")
 
 /// Returns UI data for this preference's current value.
 /datum/preference/proc/compile_ui_data(mob/user, value)

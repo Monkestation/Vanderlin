@@ -167,6 +167,10 @@
 	accesses = list(ACCESS_HAND)
 	difficulty = 2
 
+/obj/effect/mapping_helpers/access/keyset/manor/courtagent
+	accesses = list(ACCESS_COURTAGENT)
+	difficulty = 2
+
 /obj/effect/mapping_helpers/access/keyset/manor/lord
 	accesses = list(ACCESS_LORD)
 	difficulty = 1
