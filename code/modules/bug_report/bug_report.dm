@@ -75,13 +75,9 @@
 
 	local_template = replacetext(local_template, "## Map:\n", "## Map:\n[map]")
 
-	var/true_round_time = "[ROUND_TIME()]"
-	if(SSticker.HasRoundStarted())
-		true_round_time = "[DisplayTimeText(world.time - SSticker.round_start_time, 1)]"
-
 	var/list/round_info = list(
 		"Round ID: [round_id]",
-		"Round Time: [true_round_time]",
+		"Server Time: [time2text(world.timeofday, "hh:mm:ss", world.timezone)]",
 	)
 
 	// Insert round
