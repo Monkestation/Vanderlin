@@ -14,8 +14,8 @@
 
 /obj/item/weapon/clenched_fist/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOEMBED, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_NOEMBED, INNATE_TRAIT)
 
 /obj/item/weapon/clenched_fist/attack_self(mob/living/user, params)
 	user.visible_message("<span class='warning'>[user] unclenches their fists.</span>")
