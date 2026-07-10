@@ -603,10 +603,6 @@
 			qdel(injury)
 			continue
 
-		// Bleeding
-		if(owner)
-			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
-
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
