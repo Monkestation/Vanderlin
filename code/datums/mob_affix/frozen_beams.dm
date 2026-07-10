@@ -13,7 +13,7 @@
 	for(var/mob/mob in view(5, owner))
 		if(connected_mobs <= 0)
 			return
-		if((mob in SSmatthios_mobs.matthios_mobs) || faction_check(target.faction, mob.faction))
+		if((mob in SSmatthios_mobs.matthios_mobs) || target.faction_check_atom(mob))
 			connect(target, mob)
 			connected_mobs--
 	connect_timer = addtimer(CALLBACK(src, PROC_REF(try_connect), target), 3 SECONDS, TIMER_STOPPABLE)
@@ -22,7 +22,7 @@
 	for(var/mob/mob in view(5, owner))
 		if(connected_mobs <= 0)
 			return
-		if((mob in SSmatthios_mobs.matthios_mobs) || faction_check(target.faction, mob.faction))
+		if((mob in SSmatthios_mobs.matthios_mobs) || target.faction_check_atom(mob))
 			connect(target, mob)
 			connected_mobs--
 	connect_timer = addtimer(CALLBACK(src, PROC_REF(try_connect), target), 3 SECONDS, TIMER_STOPPABLE)
@@ -47,7 +47,7 @@
 /datum/mob_affix/interconnected/proc/beam_entered(datum/beam/source, obj/effect/ebeam/hit, mob/living/entered)
 	if(!isliving(entered))
 		return
-	if((entered in SSmatthios_mobs.matthios_mobs) || faction_check(owner.faction, entered.faction))
+	if((entered in SSmatthios_mobs.matthios_mobs) || owner.faction_check_atom(entered))
 		return
 	if(entered == owner)
 		return

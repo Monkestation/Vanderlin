@@ -1,5 +1,5 @@
 /client/proc/callproc()
-	set category = "Debug"
+	set category = "Debug.Core"
 	set name = "Advanced ProcCall"
 	set waitfor = FALSE
 	callproc_blocking()
@@ -12,7 +12,7 @@
 	var/targetselected = FALSE
 	var/returnval
 
-	switch(alert("Proc owned by something?",,"Yes","No"))
+	switch(tgui_alert(usr, "Proc owned by something?","Owned?", list("Yes","No")))
 		if("Yes")
 			targetselected = TRUE
 			var/list/value = vv_get_value(default_class = VV_ATOM_REFERENCE, classes = list(VV_ATOM_REFERENCE, VV_DATUM_REFERENCE, VV_MOB_REFERENCE, VV_CLIENT, VV_MARKED_DATUM, VV_TEXT_LOCATE, VV_PROCCALL_RETVAL))
@@ -125,7 +125,7 @@ GLOBAL_PROTECT(LastAdminCalledProc)
 #endif
 
 /client/proc/callproc_datum(datum/A as null|area|mob|obj|turf)
-	set category = "Debug"
+	set category = "Debug.Core"
 	set name = "Atom ProcCall"
 	set waitfor = 0
 

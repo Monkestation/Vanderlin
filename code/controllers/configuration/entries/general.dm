@@ -64,8 +64,6 @@
 
 /datum/config_entry/flag/log_virus	// log virology data
 
-/datum/config_entry/flag/log_cloning // log cloning actions.
-
 /datum/config_entry/flag/log_vote	// log voting
 
 /datum/config_entry/flag/log_whisper	// log client whisper
@@ -93,6 +91,8 @@
 
 /datum/config_entry/flag/allow_admin_asaycolor //Allows admins with relevant permissions to have a personalized asay color
 
+/datum/config_entry/flag/asay_simple_titles	// Use admin rank names as titles in asay/PMs
+
 /datum/config_entry/flag/allow_vote_restart	// allow votes to restart
 
 /datum/config_entry/flag/allow_vote_mode	// allow votes to change mode
@@ -112,8 +112,6 @@
 /datum/config_entry/flag/default_no_vote	// vote does not default to nochange/norestart
 
 /datum/config_entry/flag/no_dead_vote	// dead people can't vote
-
-/datum/config_entry/flag/allow_metadata	// Metadata is supported.
 
 /datum/config_entry/flag/popup_admin_pm	// adminPMs to non-admins show in a pop-up 'reply' window when set
 
@@ -177,12 +175,6 @@
 
 /datum/config_entry/flag/norespawn
 
-/datum/config_entry/flag/guest_jobban
-
-/datum/config_entry/flag/usewhitelist
-
-/datum/config_entry/flag/useblacklist
-
 /datum/config_entry/flag/use_age_restriction_for_jobs	//Do jobs use account age restrictions? --requires database
 
 /datum/config_entry/flag/use_account_age_for_jobs	//Uses the time they made the account for the job restriction stuff. New player joining alerts should be unaffected.
@@ -218,16 +210,8 @@
 
 /datum/config_entry/string/gamelogurl
 
-/datum/config_entry/number/githubrepoid
-	config_entry_value = null
-	min_val = 0
-
 /datum/config_entry/flag/guest_ban
 
-/datum/config_entry/number/id_console_jobslot_delay
-	config_entry_value = 30
-	integer = FALSE
-	min_val = 0
 
 /datum/config_entry/number/inactivity_period	//time in ds until a player is considered inactive
 	config_entry_value = 3000
@@ -427,12 +411,6 @@
 	config_entry_value = 50
 	integer = FALSE
 
-/datum/config_entry/flag/irc_announce_new_game
-	deprecated_by = /datum/config_entry/string/chat_announce_new_game
-
-/datum/config_entry/flag/irc_announce_new_game/DeprecationUpdate(value)
-	return ""	//default broadcast
-
 /datum/config_entry/string/chat_announce_new_game
 	config_entry_value = null
 
@@ -516,3 +494,19 @@
 //Endpoint for Github Issues, the `owner/repo` part.
 /datum/config_entry/string/issue_slug
 	protection = CONFIG_ENTRY_LOCKED
+
+/**
+ * Tgui ui_act payloads larger than 2kb are split into chunks a maximum of 1kb in size.
+ * This flag represents the maximum chunk count the server is willing to receive.
+ */
+/datum/config_entry/number/tgui_max_chunk_count
+	default = 32
+
+/datum/config_entry/flag/auto_profile
+
+/datum/config_entry/number/profiler_interval
+	default = 300 SECONDS
+
+/datum/config_entry/flag/forbid_all_profiling
+
+/datum/config_entry/flag/forbid_admin_profiling

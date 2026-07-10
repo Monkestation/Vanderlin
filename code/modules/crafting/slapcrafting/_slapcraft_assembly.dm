@@ -31,14 +31,14 @@
 	if(recipe.can_disassemble)
 		. += span_boldnotice("Right click to disassemble this back into components.")
 
-/obj/item/slapcraft_assembly/attackby(obj/item/item, mob/user, params)
+/obj/item/slapcraft_assembly/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	// Get the next step
-	var/datum/slapcraft_step/next_step = recipe.next_suitable_step(user, item, step_states)
+	var/datum/slapcraft_step/next_step = recipe.next_suitable_step(user, tool, step_states)
 	if(!next_step)
-		return ..()
+		return NONE
 	// Try and do it
-	next_step.perform(user, item, src)
-	return TRUE
+	next_step.perform(user, tool, src)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/slapcraft_assembly/update_overlays()
 	. = ..()
@@ -50,7 +50,7 @@
 		component_overlay.overlays = component.overlays
 		. += component_overlay
 
-/obj/item/slapcraft_assembly/attack_hand_secondary(mob/user, params)
+/obj/item/slapcraft_assembly/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -71,7 +71,7 @@
 	items_to_place_in_result -= gone
 	disassemble()
 
-/obj/item/slapcraft_assembly/Entered(atom/movable/arrived, direction)
+/obj/item/slapcraft_assembly/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 

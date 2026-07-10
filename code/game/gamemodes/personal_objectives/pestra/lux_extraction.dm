@@ -30,7 +30,7 @@
 
 /datum/objective/personal/lux_extraction/reward_owner()
 	. = ..()
-	owner.current.adjust_skillrank(/datum/skill/misc/medicine, 1)
+	owner.current.adjust_skill_level(/datum/attribute/skill/misc/medicine, 10)
 
 /datum/objective/personal/lux_extraction/update_explanation_text()
 	explanation_text = "Extract lux from a living being to sate Pestra's curiosity!"

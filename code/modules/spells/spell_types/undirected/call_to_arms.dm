@@ -6,8 +6,8 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/ravox)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/ravox)
 
 	invocation = "MAY THE FIGHT BE BLOODY!"
 	invocation_type = INVOCATION_SHOUT
@@ -19,7 +19,7 @@
 /datum/action/cooldown/spell/undirected/call_to_arms/cast(atom/cast_on)
 	. = ..()
 	for(var/mob/living/carbon/target in viewers(3, get_turf(owner)))
-		if(!owner.faction_check_mob(target))
+		if(!owner.faction_check_atom(target))
 			continue
 		if(!target.mind?.isactuallygood())
 			continue

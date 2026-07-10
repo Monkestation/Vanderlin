@@ -256,13 +256,13 @@
 	var/bloodiness = 20
 	var/dirt_amt = 3
 
-/turf/open/floor/dirt/attack_hand_secondary(mob/user, params)
+/turf/open/floor/dirt/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		var/obj/item/I = new /obj/item/natural/dirtclod(src)
+		var/obj/item/I = new /obj/item/natural/clod/dirt(src)
 		if(L.put_in_active_hand(I))
 			L.visible_message("<span class='warning'>[L] picks up some dirt.</span>")
 			dirt_amt--
@@ -357,7 +357,7 @@
 	slowdown = 0
 	path_weight = 10
 
-/turf/open/floor/dirt/road/attack_hand_secondary(mob/user, params)
+/turf/open/floor/dirt/road/attack_hand_secondary(mob/user, list/modifiers)
 	return
 
 /turf/open/floor/dirt/atom_destruction(damage_flag)
@@ -809,7 +809,7 @@
 	desc = ""
 	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "cobblestone_edges"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/cobbleedge/alt
 	icon_state = "cobblestonealt_edges"
@@ -825,7 +825,7 @@
 	desc = ""
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "cobble_edges"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/cobblerockedge/alt
 	icon_state = "cobblealt_edges"
@@ -833,6 +833,10 @@
 /obj/effect/decal/borderfall
 	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "borderfall"
+
+/obj/effect/decal/woodpath
+	icon = 'icons/turf/constructed/wood.dmi'
+	icon_state = "wooden_path"
 
 /*	..................   Miscellany   ................... */
 /turf/open/floor/tile
@@ -843,7 +847,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	footstepstealth = TRUE
 	damage_deflection = 10
 	max_integrity = 800
 
@@ -862,6 +865,18 @@
 
 /turf/open/floor/tile/masonic/spiral
 	icon_state = "masonicspiral"
+
+/turf/open/floor/tile/masonic/full
+	icon_state = "masonicfull_white"
+
+/turf/open/floor/tile/masonic/full/inverted
+	icon_state = "masonicfull_black"
+
+/turf/open/floor/tile/masonic/arrow
+	icon_state = "masonicarrow"
+
+/turf/open/floor/tile/masonic/arrow/inverted
+	icon_state = "masonicarrow_invert"
 
 /turf/open/floor/tile/brick
 	icon_state = "bricktile"
@@ -927,7 +942,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	footstepstealth = TRUE
 	damage_deflection = 16
 	max_integrity = 1400
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
@@ -1024,6 +1038,7 @@
 	icon_state = "abysstile-3"
 
 /turf/open/floor/sandstone
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "sandstone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -1103,6 +1118,19 @@
 /turf/open/floor/sand/Initialize()
 	. = ..()
 	dir = pick(GLOB.cardinals)
+
+/turf/open/floor/sand/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	if(isliving(user))
+		var/mob/living/L = user
+		var/obj/item/I = new /obj/item/natural/clod/sand(src)
+		if(L.put_in_active_hand(I))
+			L.visible_message("<span class='warning'>[L] picks up some sand.</span>")
+		else
+			qdel(I)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/floor/sand/sandstone
 	name = "sandstone gravel"

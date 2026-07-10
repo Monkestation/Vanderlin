@@ -5,6 +5,7 @@
 	icon_state = "perfume-bottle-empty"
 	w_class = WEIGHT_CLASS_TINY
 	item_flags = NOBLUDGEON
+	item_weight = 275 GRAMS
 	/// What fragrance is the perfume
 	var/datum/pollutant/fragrance/fragrance_type
 	/// How many uses remaining has it got
@@ -35,7 +36,7 @@
 	else
 		. += "It is empty."
 
-/obj/item/perfume/afterattack(atom/target, mob/user, proximity_flag)
+/obj/item/perfume/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(.)
 		return

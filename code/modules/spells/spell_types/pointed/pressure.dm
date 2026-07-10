@@ -4,7 +4,7 @@
 	sound = 'sound/foley/jumpland/waterland.ogg'
 
 	cast_range = 6
-	associated_skill = /datum/skill/magic/arcane
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	invocation = "Innkalle Vann!!"
 	invocation_type = INVOCATION_SHOUT

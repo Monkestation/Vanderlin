@@ -23,7 +23,7 @@
 	..()
 	. = 1
 
-/datum/reagent/lux/on_mob_life(mob/living/carbon/M)
+/datum/reagent/lux/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
@@ -47,7 +47,7 @@
 	icon = 'icons/obj/broodmother_32x.dmi'
 	icon_state = "broodmother_lux"
 
-/obj/item/reagent_containers/lux/pragmas/attack_self(mob/user, params)
+/obj/item/reagent_containers/lux/pragmas/attack_self(mob/user, list/modifiers)
 	. = ..()
 	var/datum/action/cooldown/spell/pragmas_charm/charm = new()
 	charm.Grant(user)
@@ -139,6 +139,7 @@
 	volume = 15
 	list_reagents = list(/datum/reagent/lux_tainted = 5)
 	grind_results = list(/datum/reagent/lux_tainted = 5)
+	indexed = TRUE
 	sellprice = 25
 
 /datum/reagent/lux_tainted
@@ -154,7 +155,7 @@
 	..()
 	. = 1
 
-/datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M)
+/datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M, efficiency)
 
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)

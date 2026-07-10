@@ -67,58 +67,72 @@
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
-		if(!affecting)
-			return
-		if(!get_location_accessible(H, check_zone(user.zone_selected)))
-			to_chat(user, "<span class='warning'>Something in the way.</span>") //ooooooooooooooo
-			return
-		var/used_time
-		if(completely_silent)
-			used_time = 0
-		else
-			used_time = (7 SECONDS - (H.get_skill_level(/datum/skill/misc/medicine) * 1 SECONDS))/2
-		if(!do_after(user, used_time, H))
-			return
-		if(!H)
-			return
-		user.dropItemToGround(src)
-		src.forceMove(H)
-		affecting.add_embedded_object(src, silent = TRUE, crit_message = FALSE)
-		if(completely_silent)
-			return
-		if(M == user)
+/obj/item/natural/worms/leech/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ishuman(interacting_with))
+		return ..()
+
+	var/mob/living/carbon/human/H = interacting_with
+
+	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
+	if(!affecting)
+		return ITEM_INTERACT_BLOCKING
+
+	if(!get_location_accessible(H, check_zone(user.zone_selected)))
+		to_chat(user, "<span class='warning'>Something in the way.</span>") //ooooooooooooooo
+		return ITEM_INTERACT_BLOCKING
+
+	var/used_time
+	if(completely_silent)
+		used_time = 0
+	else
+		used_time = (7 SECONDS - (GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/medicine) * 1 SECONDS)) / 2
+
+	if(!do_after(user, used_time, H))
+		return ITEM_INTERACT_BLOCKING
+
+	user.dropItemToGround(src)
+
+	forceMove(H)
+
+	affecting.add_embedded_object(src, silent = TRUE, crit_message = FALSE)
+
+	if(!completely_silent)
+		if(H == user)
 			user.visible_message("<span class='notice'>[user] places [src] on [user.p_their()] [affecting].</span>", "<span class='notice'>I place a leech on my [affecting].</span>")
 		else
-			user.visible_message("<span class='notice'>[user] places [src] on [M]'s [affecting].</span>", "<span class='notice'>I place a leech on [M]'s [affecting].</span>")
-		return
-	return ..()
+			user.visible_message("<span class='notice'>[user] places [src] on [H]'s [affecting].</span>", "<span class='notice'>I place a leech on [H]'s [affecting].</span>")
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
 	if(!user)
 		return
+	if(bodypart?.skeletonized || !bodypart?.is_organic_limb())
+		bodypart.remove_embedded_object(src)
+		return TRUE
+
+	if(!CAN_HAVE_BLOOD(user))
+		return TRUE
+
 	if(giving)
-		var/blood_given = min(BLOOD_VOLUME_MAXIMUM - user.blood_volume, blood_storage, blood_sucking)
-		user.blood_volume += blood_given
+		var/blood_given = min(BLOOD_VOLUME_NORMAL - user.get_blood_volume(), blood_storage, blood_sucking)
+		user.adjust_blood_volume(blood_given)
 		blood_storage = max(blood_storage - blood_given, 0)
-		if((blood_storage <= 0) || (user.blood_volume >= BLOOD_VOLUME_MAXIMUM))
+		if((blood_storage <= 0) || (user.get_blood_volume() >= BLOOD_VOLUME_SAFE_MAXIMUM))
 			if(bodypart)
 				bodypart.remove_embedded_object(src)
 			else
 				user.simple_remove_embedded_object(src)
 			return TRUE
 	else
-		var/modifier = bodypart.has_wound(/datum/wound/slash/incision) ? 1.5 : 1
+		var/modifier = bodypart.get_cut(TRUE, TRUE) ? 1.5 : 1 //ignore bandage because leech is embedded
 		user.adjustToxLoss(-1 * toxin_healing * modifier)
-		var/blood_extracted = min(blood_maximum - blood_storage, user.blood_volume, blood_sucking) * modifier
+		var/blood_extracted = min(blood_maximum - blood_storage, user.get_blood_volume(), blood_sucking) * modifier
 		if(HAS_TRAIT(user, TRAIT_LEECHIMMUNE))
 			blood_extracted *= 0.05 // 95% drain reduction
-		user.blood_volume = max(user.blood_volume - blood_extracted, 0)
+		user.adjust_blood_volume(-blood_extracted)
 		blood_storage += blood_extracted
-		if((blood_storage >= blood_maximum) || (user.blood_volume <= 0))
+		if((blood_storage >= blood_maximum) || (user.get_blood_volume() <= 0))
 			if(bodypart)
 				bodypart.remove_embedded_object(src)
 			else
@@ -216,7 +230,7 @@
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
-/obj/item/natural/worms/leech/parasite/attack_self(mob/user, params)
+/obj/item/natural/worms/leech/parasite/attack_self(mob/user, list/modifiers)
 	. = ..()
 	giving = !giving
 	if(giving)

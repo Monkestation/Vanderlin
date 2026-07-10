@@ -28,7 +28,7 @@
 	src.targeting_strategy_key = targeting_strategy_key
 	src.hiding_location_key = hiding_location_key
 	src.filter = controller.blackboard[targeting_strategy_key]
-	RegisterSignal(controller, COMSIG_PARENT_QDELETING, PROC_REF(controller_deleted))
+	RegisterSignal(controller, COMSIG_QDELETING, PROC_REF(controller_deleted))
 	RegisterSignal(controller, COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS, PROC_REF(controller_think))
 	RegisterSignal(controller, AI_CONTROLLER_BEHAVIOR_QUEUED(owning_behavior.type), PROC_REF(behavior_requeued))
 	RegisterSignal(controller, COMSIG_AI_BLACKBOARD_KEY_SET(targeting_strategy_key), PROC_REF(targeting_datum_changed))
@@ -38,10 +38,10 @@
 /datum/proximity_monitor/advanced/ai_aggro_tracking/Destroy()
 	. = ..()
 	if(!QDELETED(controller) && owning_behavior)
-		controller.modify_cooldown(owning_behavior, owning_behavior.get_cooldown(controller))
+		controller.modify_cooldown(owning_behavior, world.time + owning_behavior.get_cooldown(controller))
+		controller.clear_blackboard_key(BB_FIND_TARGETS_FIELD(owning_behavior.type))
 	owning_behavior = null
 	controller = null
-	target_key = null
 	targeting_strategy_key = null
 	hiding_location_key = null
 	filter = null
@@ -54,7 +54,13 @@
 	. = ..()
 	if(first_build)
 		return
-	owning_behavior.new_turf_found(target, controller, filter)
+	var/list/present = list()
+	for(var/atom/movable/AM in target)
+		present += AM
+	if(length(present))
+		owning_behavior.new_atoms_found(present, controller, target_key, filter, hiding_location_key)
+	else
+		owning_behavior.new_turf_found(target, controller, filter)
 
 /datum/proximity_monitor/advanced/ai_aggro_tracking/field_turf_crossed(atom/movable/movable, turf/location, turf/old_location)
 	if(!owning_behavior.atom_allowed(movable, filter, controller.pawn))

@@ -10,6 +10,12 @@
 #define CLONE		"clone"
 #define STAMINA 	"stamina"
 #define BRAIN		"brain"
+/// Pain damage type
+#define PAIN "pain"
+/// Shock (technically just pain but might be useful i guess?)
+#define SHOCK_PAIN "shock"
+/// Shock stage damage type
+#define SHOCK_STAGE "shock_stage"
 
 //Damage flag defines //
 // STRING HERE NEEDS TO EXACTLY MATCH VAR NAME IN /datum/armor
@@ -27,6 +33,8 @@
 #define ACID "acid"
 /// protection against magical attacks (make this adjustable via rune enchantments or something)
 #define MAGIC "magic"
+///protection from internal damage to the organs
+#define WOUND "wound"
 
 /// Armor values that are used for damage
 #define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
@@ -62,10 +70,11 @@
 #define CANPUSH			(1<<3)
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
+#define BLEEDOUT (1<<6)
 
 //Health Defines
-#define HEALTH_THRESHOLD_CRIT 0
-#define HEALTH_THRESHOLD_FULLCRIT 0
+#define HEALTH_THRESHOLD_CRIT 100
+#define HEALTH_THRESHOLD_FULLCRIT 70
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
@@ -87,6 +96,7 @@
 #define CLICK_CD_HANDCUFFED 10
 #define CLICK_CD_RESIST 20
 #define CLICK_CD_GRABBING 10
+#define CLICK_CD_THROW 8
 
 //Cuff resist speeds
 #define FAST_CUFFBREAK 1
@@ -107,6 +117,8 @@
 #define CRAWLING_ADD_SLOWDOWN 7
 //slowdown for dislocated limbs
 #define DISLOCATED_ADD_SLOWDOWN 2
+//slowdown for fractured limbs
+#define FRACTURED_ADD_SLOWDOWN 3
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1
@@ -157,12 +169,22 @@
 #define SWORD_CUT		 /datum/intent/sword/cut
 #define SHORT_CUT		 /datum/intent/sword/cut/short
 #define SWDLONG_CUT		 /datum/intent/sword/cut/long
+#define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define RAPIER_CUT		 /datum/intent/sword/cut/rapier
+
 #define SWORD_THRUST	 /datum/intent/sword/thrust
 #define SHORT_THRUST	 /datum/intent/sword/thrust/short
 #define SWDLONG_THRUST	 /datum/intent/sword/thrust/long
 #define CURVED_THRUST	 /datum/intent/sword/thrust/curved
+#define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
+#define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
+
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
 #define SWDLONG_CHOP	 /datum/intent/sword/chop/long
+#define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
+
+#define SWORD_CLEAVE     /datum/intent/sword/chop/cleave
+
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
 #define SWORD_DISARM	 /datum/intent/sword/disarm
 #define POMMEL_BASH		 /datum/intent/sword/bash
@@ -172,38 +194,29 @@
 #define KATANA_ARC		 /datum/intent/katana/arc
 #define KATANA_ONEHAND	 /datum/intent/katana/cut/one_hand_cut
 
-#define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
-#define ZWEI_CUT		 /datum/intent/sword/cut/zwei
-#define ZWEI_THRUST		 /datum/intent/sword/thrust/zwei
-#define RAPIER_THRUST	 /datum/intent/sword/thrust/rapier
-#define HOOK_THRUST		 /datum/intent/sword/thrust/hook
-#define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 #define ESTOC_LUNGE 	 /datum/intent/sword/lunge
 #define ESTOC_THRUST	 /datum/intent/sword/thrust/estoc
 
-
 #define AXE_CUT				/datum/intent/axe/cut
-#define AXE_THRUST			/datum/intent/axe/thrust
-#define AXE_CHOP			/datum/intent/axe/chop
-#define AXE_GRTCHOP			/datum/intent/axe/chop/great
-#define GREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe
-#define DBLGREATAXE_CUT		/datum/intent/axe/cut/battle/greataxe/doublehead
-#define GREATAXE_CHOP		/datum/intent/axe/chop/battle/greataxe
-#define DBLGREATAXE_CHOP	/datum/intent/axe/chop/battle/greataxe/doublehead
+#define GREATAXE_CUT		/datum/intent/axe/cut/greataxe
+#define DBLGREATAXE_CUT		/datum/intent/axe/cut/greataxe/doublehead
 
+#define AXE_THRUST			/datum/intent/axe/thrust
+
+#define AXE_CHOP			/datum/intent/axe/chop
+#define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
+#define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
+#define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+#define GREATAXE_CLEAVE	    /datum/intent/axe/chop/greataxe/slayer
+
+#define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
-#define POLEARM_BASHRNG		/datum/intent/polearm/bash/ranged
 #define POLEARM_BASH		/datum/intent/polearm/bash
 #define POLEARM_CHOP		/datum/intent/polearm/chop
 #define SPEAR_CUT			/datum/intent/polearm/cut
 
-#define POLEARM_THRUST		/datum/intent/polearm/thrust
-#define SCYTHE_CHOP			/datum/intent/axe/chop/scythe
-#define SCYTHE_CUT			/datum/intent/spear/cut/bardiche/scythe
-#define NAGI_CUT			/datum/intent/spear/cut/naginata
+#define NAGI_CUT			/datum/intent/polearm/cut/naginata
 #define NAGI_REND			/datum/intent/rend/reach
-
-#define MESSER_CHOP			/datum/intent/sword/chop/messer
 
 #define GUTS_CUT			/datum/intent/sword/cut/guts
 #define GUTS_THRUST			/datum/intent/sword/thrust/guts
@@ -213,13 +226,13 @@
 #define MACE_SMASH			/datum/intent/mace/smash
 #define MACE_HVYSMASH		/datum/intent/mace/smash/heavy
 #define MACE_WOODSMASH		/datum/intent/mace/smash/wood
+
 #define MACE_STRIKE			/datum/intent/mace/strike
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
-#define MACE_WDRANGE		/datum/intent/mace/smash/wood/ranged
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
-#define MACE_THRUST			/datum/intent/mace/thrust
 #define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
 
+#define MACE_THRUST			/datum/intent/mace/thrust
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
 #define WARHM_IMPALE		/datum/intent/mace/warhammer/impale
 
@@ -244,6 +257,8 @@
 #define CLEAVER_CHOP		/datum/intent/dagger/chop/cleaver
 #define SCISSOR_SNIP		/datum/intent/snip
 #define FACE_STEAL			/datum/intent/peculate
+#define STILETTO_CUT		/datum/intent/dagger/cut/stiletto
+#define STILETTO_THRUST		/datum/intent/dagger/thrust/stiletto
 
 #define KNUCKLE_STRIKE		/datum/intent/knuckles/strike
 #define KNUCKLE_SMASH		/datum/intent/knuckles/smash
@@ -276,8 +291,8 @@
 
 #define INTENT_USE			/datum/intent/use
 
-#define SHIELD_BASH		/datum/intent/shield/bash
-#define METAL_BASH		/datum/intent/shield/bash/metal
+#define SHIELD_BASH			/datum/intent/shield/bash
+#define METAL_BASH			/datum/intent/shield/bash/metal
 #define SHIELD_BLOCK		/datum/intent/shield/block
 #define METAL_BLOCK			/datum/intent/shield/block/metal
 
@@ -313,6 +328,13 @@
 #define WLENGTH_NORMAL		2		//can only attack legs from ground. dont need to grab. maces, short swords, kicks
 #define WLENGTH_LONG		3		//can attack chest and down from the ground. dont need to grab. swords 2h axes
 #define WLENGTH_GREAT		4		//can attack any bodypart from ground. think spears
+
+//Weapon Durability and Sharpness
+#define INTEG_PARRY_DECAY				1 //Integrity loss on parry
+#define INTEG_PARRY_DECAY_NOSHARP		5 //Integrity decay on parry for weapons with no sharpness OR for off-hand parries
+#define SHARPNESS_ONHIT_DECAY			3 //Sharpness loss on parry
+#define SHARPNESS_TIER1_THRESHOLD		0.8 // %-age threshold when damage starts to fall off, your damfactor and STR factor
+#define SHARPNESS_TIER2_THRESHOLD		0.25 // %-age threshold when damage really falls off, base damage of the weapon included.
 
 //attacktype
 #define DULLING_CUT 1
@@ -362,13 +384,18 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define EMBEDDED_UNSAFE_REMOVAL_TIME			0	//A Time in ticks, total removal time = (this*item.w_class)
 
 //Gun weapon weight
+/// Default normal ol' gun. Akimboable, one handed.
 #define WEAPON_LIGHT 1
+/// Can't be used akimbo, but only needs one hand to fire
 #define WEAPON_MEDIUM 2
+/// Can't be used akimbo, and needs two hands to fire
 #define WEAPON_HEAVY 3
+
 //Gun trigger guards
 #define TRIGGER_GUARD_ALLOW_ALL -1
 #define TRIGGER_GUARD_NONE 0
 #define TRIGGER_GUARD_NORMAL 1
+
 //Gun bolt types
 ///Gun has a bolt, it stays closed while not cycling. The gun must be racked to have a bullet chambered when a mag is inserted.
 ///  Example: c20, shotguns, m90
@@ -382,6 +409,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 ///Gun has a bolt, it locks back when empty. It can be released to chamber a round if a magazine is in.
 ///  Example: Pistols with a slide lock, some SMGs
 #define BOLT_TYPE_LOCKING 4
+
 //Sawn off nerfs
 ///accuracy penalty of sawn off guns
 #define SAWN_OFF_ACC_PENALTY 25
@@ -453,3 +481,17 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 
 /// If a carbon is thrown at a speed faster than normal and impacts something solid, they take extra damage for every extra speed up to this number (see [/mob/living/carbon/proc/throw_impact])
 #define CARBON_MAX_IMPACT_SPEED_BONUS 5
+
+/// Default penalty for parrying dicerolls, normally lasts PARRYING_PENALTY_COOLDOWN_DURATION
+#define PARRYING_PENALTY 2
+/// Default penalty for dodging dicerolls, normally lasts DODGING_PENALTY_COOLDOWN_DURATION
+#define DODGING_PENALTY 1
+/// A define so the cooldown on the baited status and the duration of the baitcd status are the same
+#define BAIT_COOLDOWN_TIME 15 SECONDS
+
+// try_crit keys for modifiers
+/// Chance modifier
+#define CRIT_MOD_CHANCE "crit_mod"
+#define CANT_CRIT	-100
+/// Specifically knockout modifier for head crits
+#define CRIT_MOD_KNOCKOUT_CHANCE "knockout_mod"

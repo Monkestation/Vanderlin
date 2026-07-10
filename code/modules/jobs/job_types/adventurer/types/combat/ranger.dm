@@ -1,47 +1,38 @@
+/datum/attribute_holder/sheet/job/ranger
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/crossbows = 10,
+		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/craft/traps = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/reading = 10,
+	)
+
 /datum/job/advclass/combat/ranger
 	title = "Ranger"
 	tutorial = "Humen and elf rangers often live among each other, as these bow-wielding \
 	adventurers are often scouting the lands for the same purpose."
-	allowed_races = list(\
-		SPEC_ID_HUMEN,\
-		SPEC_ID_ELF,\
-		SPEC_ID_HALF_ELF,\
-		SPEC_ID_TIEFLING,\
-		SPEC_ID_DROW,\
-		SPEC_ID_AASIMAR,\
-		SPEC_ID_HALF_ORC,\
-		SPEC_ID_RAKSHARI,\
-	)
 	outfit = /datum/outfit/adventurer/ranger
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_LIVING, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
 
-	skills = list(
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/craft/tanning = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/labor/taming = 2,
-		/datum/skill/misc/sewing = 3,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/craft/traps = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/reading = 1,
-	)
-
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_END = 1,
-		STATKEY_SPD = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/ranger
 
 	traits = list(
 		TRAIT_DODGEEXPERT
@@ -57,34 +48,44 @@
 /datum/outfit/adventurer/ranger
 	name = "Ranger (Adventurer)"
 	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/leather
-	armor = /obj/item/clothing/armor/leather/hide
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	belt = /obj/item/storage/belt/leather/adventurer
+	neck = /obj/item/clothing/neck/coif
+	armor = /obj/item/clothing/armor/leather/splint
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/flashlight/flare/torch/lantern
-	beltl = /obj/item/ammo_holder/quiver/arrows
 	wrists = /obj/item/clothing/wrists/bracers/leather
-
-	pants = /obj/item/clothing/pants/trou/leather  // Male default
-	shirt = /obj/item/clothing/shirt/undershirt
-	gloves = /obj/item/clothing/gloves/fingerless  // 77% default
-	cloak = /obj/item/clothing/cloak/raincloak/colored/brown  // 67% default
-
+	pants = /obj/item/clothing/pants/trou/leather
+	gloves = /obj/item/clothing/gloves/leather
+	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	backpack_contents = list(
-		/obj/item/bait = 1,
-		/obj/item/weapon/knife/hunting = 1,
+		/obj/item/weapon/knife/hunting/kukri/iron = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1, //no more roundstart bait. you're a adventurer, not a hunter.
 	)
 
-/datum/outfit/adventurer/ranger/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/job/advclass/combat/ranger/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(H.gender == FEMALE)
-		if(prob(50))
-			pants = /obj/item/clothing/pants/tights/colored/black
-		else
-			pants = /obj/item/clothing/pants/tights
 
-	if(prob(23))
-		gloves = /obj/item/clothing/gloves/leather
-
-	if(prob(33))
-		cloak = /obj/item/clothing/cloak/raincloak/colored/green
+	var/static/list/weapons = list("Bow", "Longbow", "Crossbow")
+	var/weapon_choice = tgui_input_list(player_client, "Take up arms", "Strike them from afar.", weapons)
+	switch(weapon_choice)
+		if("Bow") // worst choice, so you get some bonus stats/skills. bows are harder to make then real weapons.
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/iron, ITEM_SLOT_BELT_L)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson, ITEM_SLOT_SHIRT)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 25)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 20)
+			spawned.adjust_skill_level(/datum/attribute/skill/misc/athletics, 5) //slightly more athletics
+		if("Longbow") // objectively strongest choice, no bonuses.
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/shirt/undershirt, ITEM_SLOT_SHIRT)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 20)
+		if("Crossbow")
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/kettle/slit/iron, ITEM_SLOT_HEAD)
+			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short/iron, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/shirt/undershirt, ITEM_SLOT_SHIRT)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 25)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/crossbows, 20)
+			REMOVE_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)

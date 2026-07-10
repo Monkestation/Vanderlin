@@ -24,11 +24,14 @@
 /datum/action/cooldown/spell/undirected/list_target/ultimate_sacrifice/cast(mob/living/carbon/human/cast_on)
 	. = ..()
 
+	if(!isliving(owner))
+		return
+
 	if(HAS_TRAIT(cast_on, TRAIT_NECRA_CURSE))
 		to_chat(owner, span_warning("Necra holds tight to this one."))
 		return
 
-	var/confirm = browser_alert(owner, "Your life will be sacrificed to revive [cast_on.real_name]. You CANNOT be revived after this. Are you absolutely sure?", "Ultimate Sacrifice", list("Sacrifice Myself", "Cancel"))
+	var/confirm = tgui_alert(owner, "Your life will be sacrificed to revive [cast_on.real_name]. You CANNOT be revived after this. Are you absolutely sure?", "Ultimate Sacrifice", list("Sacrifice Myself", "Cancel"))
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 		return
 
@@ -50,11 +53,13 @@
 	owner.say("RAVOX, I GIVE MY LIFE FOR THEIRS!", forced = "ravox_ritual")
 	owner.emote("rage", forced = TRUE)
 
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ULTIMATE_REVIVE, 1)
 	cast_on.revive(HEAL_ALL)
 	cast_on.grab_ghost(force = TRUE, grab_spirit = TRUE)
 	playsound(owner, 'sound/magic/churn.ogg', 80)
 	ADD_TRAIT(owner, TRAIT_NECRA_CURSE, "ravox_ritual")
-	owner.death()
+	var/mob/living/living_owner = owner
+	living_owner.death()
 
 	if(owner.mind)
 		var/datum/objective/personal/ultimate_sacrifice/objective = target

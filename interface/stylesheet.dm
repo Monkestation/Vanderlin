@@ -68,7 +68,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .boldnotice				{color: #f1d669;	font-weight: bold;}
 .hear					{color: #6685f5;	font-style: italic;}
 .adminnotice			{color: #6685f5;}
-.adminhelp				{color: #ff0000;	font-weight: bold;}
+.adminhelp				{color: #ff0000;	font-weight: bold;	font-size: 120%}
 .unconscious			{color: #c9c1ba;	font-weight: bold;}
 .suicide				{color: #ff5050;	font-style: italic;}
 .green					{color: #80b077;}
@@ -107,10 +107,11 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .dwarf					{font-family: "MasonAlternate", Pterra;}
 .sandspeak				{font-family: "Arabolical", Pterra;}
 .delf					{font-family: "Dauphin", Pterra;}
+.kobold                 {font-family: "SyneTactile", Pterra;}
 .hellspeak				{font-family: "Nosfer", Pterra;}
 .undead					{font-family: "FriskyVampire", Pterra;}
 .orc					{font-family: "Thief by The Riddler", Pterra;}
-.otavan					{font-family: "Notredame", Pterra; font-size: 200%;}
+.gronnic				{font-family: "Jorvik Informal", Pterra;}
 .beast					{font-family: "Thief by The Riddler", Pterra;}
 .deepspeak				{font-family: "Underwater Love", Pterra;}
 
@@ -127,7 +128,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .clown					{color: #FF69Bf;	font-size: 3;	font-family: "Comic Sans MS", cursive, sans-serif;	font-weight: bold;}
 .singing				{font-family: "Trebuchet MS", cursive, sans-serif; font-style: italic;}
 .his_grace				{color: #15D512;	font-family: "Courier New", cursive, sans-serif;	font-style: italic;}
-.hypnophrase			{color: #3bb5d3;	font-weight: bold;	animation: hypnocolor 1500ms infinite;}
+.hypnophrase			{color: #3bb5d3;	font-weight: bold; }
 
 .phobia					{color: #dd0000;	font-weight: bold;}
 
@@ -147,4 +148,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .bone					{color: #e3dac9;}
 
 .silver					{color: #c0c0c0;}
+
+.prayer 				{color: #f1d55b; font-weight: bold;}
+
 </style>"}

@@ -6,6 +6,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	move_resist = INFINITY
 	throwforce = 0
+	attributes = null //please don't remove this...
 	/// For instant transfer once the round is set up
 	var/mob/living/new_character
 
@@ -20,7 +21,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	prepare_huds()
 
 	if(length(CONFIG_GET(keyed_list/cross_server)))
-		verbs += /mob/dead/proc/server_hop
+		add_verb(src, /mob/dead/proc/server_hop)
 	set_focus(src)
 	become_hearing_sensitive()
 	return INITIALIZE_HINT_NORMAL
@@ -32,24 +33,14 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 /mob/dead/canUseStorage()
 	return FALSE
 
-/mob/dead/dust(just_ash, drop_items, force)	//ghosts can't be vaporised.
-	return
-
-/mob/dead/gib()		//ghosts can't be gibbed.
-	return
-
-/mob/dead/ConveyorMove()	//lol
-	return
-
 /mob/dead/forceMove(atom/destination)
 	var/turf/old_turf = get_turf(src)
 	var/turf/new_turf = get_turf(destination)
 	if (old_turf?.z != new_turf?.z)
-		onTransitZ(old_turf?.z, new_turf?.z)
+		onTransitZ(old_turf, new_turf)
 	var/oldloc = loc
 	loc = destination
 	Moved(oldloc, NONE, TRUE)
-
 
 /mob/dead/new_player/proc/lobby_refresh()
 	set waitfor = 0
@@ -91,9 +82,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 			if(!player)
 				continue
 			if(player.client.prefs.job_preferences[job.title] != JP_HIGH)
-				//i'm sorry for doing this
-				if(!istype(job, /datum/job/adventurer) || player.client.prefs.job_preferences["Court Agent"] != JP_HIGH)
-					continue
+				continue
 			if(player.ready != PLAYER_READY_TO_PLAY)
 				continue
 
@@ -102,8 +91,8 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 			// But do we show them?
 
 			// We will show them
-			if(player.client.prefs.real_name)
-				var/thing = "[player.client.prefs.real_name]"
+			if(player.client.prefs.read_preference(/datum/preference/text/real_name))
+				var/thing = "[player.client.prefs.read_preference(/datum/preference/text/real_name)]"
 				PL += thing
 
 		var/list/PL2 = list()
@@ -143,7 +132,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	var/pick
 	switch(csa.len)
 		if(0)
-			verbs -= /mob/dead/proc/server_hop
+			add_verb(src, /mob/dead/proc/server_hop)
 			to_chat(src, "<span class='notice'>Server Hop has been disabled.</span>")
 		if(1)
 			pick = csa[1]
@@ -155,7 +144,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 
 	var/addr = csa[pick]
 
-	if(alert(src, "Jump to server [pick] ([addr])?", "Server Hop", "Yes", "No") != "Yes")
+	if(tgui_alert(src, "Jump to server [pick] ([addr])?", "Server Hop", list("Yes", "No")) != "Yes")
 		return
 
 	var/client/C = client
@@ -197,9 +186,9 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	update_z(null)
 	return ..()
 
-/mob/dead/onTransitZ(old_z,new_z)
-	..()
-	update_z(new_z)
+/mob/dead/onTransitZ(turf/old_turf, turf/new_turf)
+	. = ..()
+	update_z(new_turf.z)
 
 /// Creates a new playable mob for this client.
 /mob/dead/proc/create_character(atom/destination)
@@ -229,6 +218,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(new_character.client)
 		var/atom/movable/screen/splash/Spl = new(null, null, new_character.client, TRUE, FALSE)
 		Spl.Fade(TRUE)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MEMBER_JOINED, new_character, new_character.mind.assigned_role)
 	new_character = null
 	qdel(src)
 
@@ -243,8 +233,6 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	src << browse(null, "window=culinary_customization")
 	src << browse(null, "window=food_selection")
 	src << browse(null, "window=drink_selection")
-
-	SStriumphs.remove_triumph_buy_menu(client)
 
 	winshow(src, "stonekeep_prefwin", FALSE)
 	src << browse(null, "window=preferences_browser")

@@ -5,7 +5,7 @@
 	real_icon_state = "thieves_cant"
 	real_image = 150
 
-	reveal_skill = /datum/skill/misc/sneaking
+	reveal_skill = /datum/attribute/skill/misc/sneaking
 	always_revealed_trait = TRAIT_THIEVESGUILD
 
 	var/thieves_message

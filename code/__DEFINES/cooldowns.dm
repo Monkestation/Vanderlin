@@ -41,6 +41,8 @@
 /// Checks if a timer based cooldown is NOT finished.
 #define TIMER_COOLDOWN_RUNNING(cd_source, cd_index) LAZYACCESS(cd_source.cooldowns, cd_index)
 
+#define TIMER_COOLDOWN_CHECK(cd_source, cd_index) LAZYACCESS(cd_source.cooldowns, cd_index)
+
 /// Checks if a timer based cooldown is finished.
 #define TIMER_COOLDOWN_FINISHED(cd_source, cd_index) (!TIMER_COOLDOWN_RUNNING(cd_source, cd_index))
 
@@ -79,3 +81,8 @@
 #define COOLDOWN_STARTED(cd_source, cd_index) (cd_source.cd_index != 0)
 
 #define COOLDOWN_TIMELEFT(cd_source, cd_index) (max(0, cd_source.cd_index - world.time))
+
+/// Dodging penalty cooldown (penalties can be applied with feinting)
+#define DODGING_PENALTY_COOLDOWN_DURATION 0
+/// Cooldown before resetting the parrying penalty
+#define PARRYING_PENALTY_COOLDOWN_DURATION 4 SECONDS

@@ -46,17 +46,17 @@
 	else
 		. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] [contents_tag]s left."
 
-/obj/item/storage/fancy/attack_self(mob/user, params)
+/obj/item/storage/fancy/attack_self(mob/user, list/modifiers)
 	. = ..()
 	is_open = !is_open
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Exited()
+/obj/item/storage/fancy/Exited(atom/movable/gone, direction)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Entered()
+/obj/item/storage/fancy/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)
@@ -132,7 +132,7 @@
 	. = ..()
 	. += "<span class='notice'>Alt-click to extract contents.</span>"
 
-/obj/item/storage/fancy/cigarettes/AltClick(mob/living/carbon/user)
+/obj/item/storage/fancy/cigarettes/AltClick(mob/living/carbon/user, list/modifiers)
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
 	var/obj/item/clothing/face/cigarette/cig = locate() in contents
@@ -170,21 +170,26 @@
 		. += inserted_overlay
 		cig_position++
 
-/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/target, mob/living/carbon/user)
-	if(!istype(target))
-		return
+/obj/item/storage/fancy/cigarettes/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ishuman(interacting_with))
+		return NONE
+
+	var/mob/living/carbon/human/target = interacting_with
 
 	var/obj/item/clothing/face/cigarette/cig = locate() in contents
 	if(!cig)
 		to_chat(user, "<span class='notice'>There are no [contents_tag]s left in the pack.</span>")
-		return
-	if(target != user || !contents.len || user.mouth)
-		return ..()
+		return ITEM_INTERACT_BLOCKING
+
+	if(target != user || !length(contents) || target.mouth)
+		return ITEM_INTERACT_BLOCKING
 
 	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, cig, target)
 	target.equip_to_slot_if_possible(cig, ITEM_SLOT_MOUTH)
 	contents -= cig
 	to_chat(user, "<span class='notice'>You take \a [cig] out of the pack.</span>")
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/storage/fancy/cigarettes/zig
 	name = "zigbox"
@@ -194,6 +199,20 @@
 	contents_tag = "zig"
 	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine
 	component_type = /datum/component/storage/concrete/grid/zigbox
+	item_weight = 32 GRAMS
 
 /obj/item/storage/fancy/cigarettes/zig/empty
+	spawn_type = null
+
+/obj/item/storage/fancy/cigarettes/tinzig
+	name = "metal zigbox"
+	desc = ""
+	icon_state = "tinzig"
+	base_icon_state = "tinzig"
+	contents_tag = "zig"
+	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine/zigar
+	component_type = /datum/component/storage/concrete/grid/zigbox
+	item_weight = 84 GRAMS
+
+/obj/item/storage/fancy/cigarettes/tinzig/empty
 	spawn_type = null

@@ -10,7 +10,7 @@
 	grid_width = 32
 	impact_explode = FALSE
 
-	prob2fail = 5
+	prob2fail = 25
 
 	ex_dev = 1
 	ex_heavy = 3

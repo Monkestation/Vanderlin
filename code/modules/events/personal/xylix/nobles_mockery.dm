@@ -20,7 +20,7 @@
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(!istype(H) || H.stat == DEAD || !H.client || !istype(H.patron, /datum/patron/divine/xylix) || H.is_noble())
 			continue
-		if(H.get_spell(/datum/action/cooldown/spell/vicious_mockery))
+		if(H.get_spell(/datum/action/cooldown/spell/projectile/vicious_mockery))
 			return TRUE
 	return FALSE
 
@@ -30,7 +30,7 @@
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(!istype(H) || H.stat == DEAD || !H.client || !istype(H.patron, /datum/patron/divine/xylix) || H.is_noble())
 			continue
-		if(H.get_spell(/datum/action/cooldown/spell/vicious_mockery))
+		if(H.get_spell(/datum/action/cooldown/spell/projectile/vicious_mockery))
 			valid_targets += H
 
 	if(!length(valid_targets))
@@ -45,6 +45,6 @@
 		span_userdanger("YOU ARE XYLIX'S CHOSEN!"),
 		span_notice("Xylix demands entertainment! Viciously mock [new_objective.required_count] nobles to prove your wit and earn Xylix's favor!"),
 	))
-	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen_male_female.ogg', 100)
+	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/xylix_omen.ogg', 100)
 
 	chosen_one.mind.announce_personal_objectives()

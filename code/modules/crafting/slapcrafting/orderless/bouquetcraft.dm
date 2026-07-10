@@ -2,7 +2,7 @@
 	name = "Flower Bouquet"
 	starting_item = /obj/item/natural/cloth
 	finishing_item = /obj/item/natural/fibers
-	related_skill = /datum/skill/craft/crafting
+	related_skill = /datum/attribute/skill/craft/crafting
 	skill_xp_gained = 5
 	action_time = 2.5 SECONDS
 	requirements = list(
@@ -15,12 +15,12 @@
 	// UTTER JANK TO KEEP THIS PURE ORDERLESS SLAPCRAFT
 	if(!istype(hosted_source, /obj/item/bouquet))
 		var/old_host = hosted_source
-		UnregisterSignal(old_host, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(old_host, COMSIG_QDELETING)
 
 		var/obj/item/bouquet/incomplete_bouquet = new(get_turf(old_host))
 		hosted_source = incomplete_bouquet
 		incomplete_bouquet.in_progress_slapcraft = src
-		RegisterSignal(hosted_source, COMSIG_PARENT_QDELETING, PROC_REF(early_end))
+		RegisterSignal(hosted_source, COMSIG_QDELETING, PROC_REF(early_end))
 		starting_item = incomplete_bouquet.type
 
 		qdel(old_host)

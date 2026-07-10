@@ -59,7 +59,6 @@
 	retreat_health = 0.2
 
 	dodgetime = 17
-	aggressive = 1
 	food_max = 0
 
 	ai_controller = /datum/ai_controller/void_obelisk
@@ -92,7 +91,7 @@
 	QDEL_NULL(beam)
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/RangedAttack(atom/target, modifiers)
+/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/ranged_attack(atom/target, list/modifiers)
 	beam.Activate(target = target)
 
 /mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/get_sound(input)

@@ -5,11 +5,14 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/wrists.dmi'
 	sleevetype = "shirt"
 	resistance_flags = FLAMMABLE
-	sewrepair = TRUE
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
+	// TODO: if that feature will be ever needed anywhere, move it to all clothings. 
+	var/alternate_sleeve_layer
 	fiber_salvage = FALSE
+	gender = PLURAL
 	grid_width = 32
 	grid_height = 64
-	item_weight = 4
+	item_weight = 125 GRAMS
 	abstract_type = /obj/item/clothing/wrists

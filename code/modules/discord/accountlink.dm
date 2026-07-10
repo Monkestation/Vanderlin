@@ -1,6 +1,6 @@
 // Verb to link discord accounts to BYOND accounts
 /client/verb/linkdiscord()
-	set category = "OOC"
+	set category = "OOC.Links"
 	set name = "Verify Discord Account"
 	set desc = "Verify your discord account with your BYOND account"
 

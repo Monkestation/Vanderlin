@@ -5,6 +5,8 @@
 	icon = 'icons/paint_supplies/canvas_32.dmi'
 	icon_state = "canvas"
 
+	item_weight = 95 GRAMS
+
 	var/easel_offset = 9
 	var/canvas_size_x = 32
 	var/canvas_size_y = 32
@@ -64,7 +66,7 @@
 		to_chat(user, "I unmount [src].")
 		user.put_in_hands(src)
 
-/obj/item/canvas/attack_hand_secondary(mob/user, params)
+/obj/item/canvas/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -75,9 +77,8 @@
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/canvas/attackby(obj/item/I, mob/living/user, params)
-	. = ..()
-	if(istype(I, /obj/item/natural/feather))
+/obj/item/canvas/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/natural/feather))
 		author = browser_input_text(user, "Who's the author of this painting?", "NAME YOURSELF", max_length = MAX_NAME_LEN)
 		author_ckey = user.ckey
 		SEND_SIGNAL(user, COMSIG_ART_CREATED)
@@ -87,33 +88,38 @@
 		if(author)
 			desc = "Painted by: [author]."
 
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(!istype(I, /obj/item/paint_brush))
-		return
+	if(!istype(tool, /obj/item/paint_brush))
+		return NONE
+
 	if(user in showers)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user?.client.screen += used_canvas
 	showers |= user
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_showers()
 	for(var/mob/mob in showers)
 		remove_shower(mob)
 
-/obj/item/canvas/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isclosedturf(attacked_atom))
-		return ..()
+/obj/item/canvas/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isclosedturf(interacting_with))
+		return NONE
 
-	. = TRUE
-	to_chat(user, "I start mounting [src] to [attacked_atom]...")
-	if(!do_after(user, 3 SECONDS, attacked_atom))
-		return
+	to_chat(user, "I start mounting [src] to [interacting_with]...")
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
 	user.dropItemToGround(src)
-	forceMove(attacked_atom)
+	forceMove(interacting_with)
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
 	anchored = TRUE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_shower(mob/source)
 	showers -= source
@@ -153,6 +159,7 @@
 	icon = 'icons/paint_supplies/canvas/canvas_32x32.dmi'
 	icon_state = "canvas"
 	screen_loc = "6,6"
+	mouse_drag_pointer = MOUSE_INACTIVE_POINTER
 
 	var/obj/item/canvas/host
 	var/list/modified_areas = list()
@@ -163,6 +170,9 @@
 	var/list/overlay_to_index = list()
 	var/current_overlays = 0
 
+	var/is_drawing = FALSE
+	var/last_drag_x = 0
+	var/last_drag_y = 0
 
 /atom/movable/screen/canvas/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -179,6 +189,41 @@
 	. = ..()
 	if(host.item_flags & IN_STORAGE)
 		return
+	paint_at(params, right_click = !!(LAZYACCESS(params2list(params), RIGHT_CLICK)))
+	last_drag_x = 0
+	last_drag_y = 0
+
+/atom/movable/screen/canvas/MouseMove(location, control, params)
+	. = ..()
+
+/atom/movable/screen/canvas/MouseDrag(over_object, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	if(over_object != src)
+		return
+	if(host.item_flags & IN_STORAGE)
+		return
+	paint_at(params, is_dragging =TRUE)
+
+/atom/movable/screen/canvas/proc/paint_at(params, right_click = FALSE, is_dragging = FALSE)
+	var/list/modifiers = params2list(params)
+	var/x = text2num(LAZYACCESS(modifiers, ICON_X))
+	var/y = text2num(LAZYACCESS(modifiers, ICON_Y))
+
+	if(isnull(x) || isnull(y))
+		return
+
+	y = FLOOR(y / host.canvas_divider_y, 1)
+	x = FLOOR(x / host.canvas_divider_x, 1)
+
+	if(x < 0 || y < 0 || x >= host.canvas_size_x || y >= host.canvas_size_y)
+		return
+
+	if(x == last_drag_x && y == last_drag_y)
+		return
+	if(is_dragging)
+		last_drag_x = x
+		last_drag_y = y
+
 	var/obj/item/paint_brush/brush = usr.get_active_held_item()
 	if(!istype(brush))
 		return
@@ -186,21 +231,13 @@
 	if(!current_color)
 		return
 
-	var/list/modifiers = params2list(params)
-	var/x = text2num(LAZYACCESS(modifiers, ICON_X))
-	var/y = text2num(LAZYACCESS(modifiers, ICON_Y))
-
-	y = min(FLOOR(y / host.canvas_divider_y, 1), host.canvas_size_y-1)
-	x = min(FLOOR(x / host.canvas_divider_x, 1), host.canvas_size_x-1)
-
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+	if(right_click)
 		var/original_color = base_icon.GetPixel(x, y)
 		current_color = original_color
 		modified_areas -= "[x][y]"
 		if("[x][y]" in overlay_to_index)
 			cut_overlay(overlay_to_index["[x][y]"])
 	else
-
 		if("[x][y]" in modified_areas)
 			var/pre_merge = draw.GetPixel(x+1, y+1)
 			if(pre_merge != current_color)
@@ -213,7 +250,7 @@
 	MA.color = current_color
 	MA.pixel_x = (x) * host.canvas_divider_y
 	MA.pixel_y = (y) * host.canvas_divider_x
-	MA.layer = layer +1
+	MA.layer = layer + 1
 	MA.plane = plane
 	add_overlay(MA)
 	current_overlays++

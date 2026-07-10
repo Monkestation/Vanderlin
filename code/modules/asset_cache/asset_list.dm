@@ -16,6 +16,9 @@ GLOBAL_LIST_EMPTY(asset_datums)
 /datum/asset
 	abstract_type = /datum/asset
 
+	var/cached_serialized_url_mappings
+	var/cached_serialized_url_mappings_transport_type
+
 	/// Whether or not this asset should be loaded in the "early assets" SS
 	var/early = FALSE
 
@@ -40,6 +43,14 @@ GLOBAL_LIST_EMPTY(asset_datums)
 /datum/asset/proc/get_url_mappings()
 	return list()
 
+/// Returns a cached tgui message of URL mappings
+/datum/asset/proc/get_serialized_url_mappings()
+	if(isnull(cached_serialized_url_mappings) || cached_serialized_url_mappings_transport_type != SSassets.transport.type)
+		cached_serialized_url_mappings = TGUI_CREATE_MESSAGE("asset/mappings", get_url_mappings())
+		cached_serialized_url_mappings_transport_type = SSassets.transport.type
+
+	return cached_serialized_url_mappings
+
 /datum/asset/proc/register()
 	return
 
@@ -53,6 +64,8 @@ GLOBAL_LIST_EMPTY(asset_datums)
 /// Immediately regenerate the asset, overwriting any cache.
 /datum/asset/proc/regenerate()
 	unregister()
+	cached_serialized_url_mappings = null
+	cached_serialized_url_mappings_transport_type = null
 	register()
 
 /// Unregisters any assets from the transport.
@@ -66,11 +79,23 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	fdel(asset_path) // just in case, sadly we can't use rust_g stuff here.
 	fcopy(file_location, asset_path)
 
-//If you don't need anything complicated.
+/// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
+/proc/sanitize_css_class_name(name)
+	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")
+	return replacetext(name, regex, "")
+
+/// If you don't need anything complicated.
 /datum/asset/simple
 	abstract_type = /datum/asset/simple
-	var/assets = list() //! list of assets for this datum in the form of asset_filename = asset_file. At runtime the asset_file will be converted into a asset_cache datum.
-	var/legacy = FALSE //! set to true to have this asset also be sent via browse_rsc when cdn asset transports are enabled.
+	/// list of assets for this datum in the form of:
+	/// asset_filename = asset_file. At runtime the asset_file will be
+	/// converted into a asset_cache datum.
+	var/assets = list()
+	/// Set to true to have this asset also be sent via the legacy browse_rsc
+	/// system when cdn transports are enabled?
+	var/legacy = FALSE
+	/// TRUE for keeping local asset names when browse_rsc backend is used
+	var/keep_local_name = FALSE
 
 /datum/asset/simple/register()
 	for(var/asset_name in assets)
@@ -80,6 +105,8 @@ GLOBAL_LIST_EMPTY(asset_datums)
 			continue
 		if (legacy)
 			ACI.legacy = TRUE
+		if (keep_local_name)
+			ACI.keep_local_name = keep_local_name
 		assets[asset_name] = ACI
 
 /datum/asset/simple/send(client)
@@ -93,6 +120,10 @@ GLOBAL_LIST_EMPTY(asset_datums)
 /datum/asset/simple/unregister()
 	for (var/asset_name in assets)
 		SSassets.transport.unregister_asset(asset_name)
+
+// If you use a file(...) object, instead of caching the asset it will be loaded from disk every time it's requested.
+// This is useful for development, but not recommended for production.
+// And if TGS is defined, we're being run in a production environment.
 
 // For registering or sending multiple others at once
 /datum/asset/group
@@ -229,3 +260,26 @@ GLOBAL_LIST_EMPTY(asset_datums)
 
 /datum/asset/json/unregister()
 	SSassets.transport.unregister_asset("[name].json")
+
+/datum/asset/changelog_item
+	abstract_type = /datum/asset/changelog_item
+	var/item_filename
+
+/datum/asset/changelog_item/New(date)
+	item_filename = SANITIZE_FILENAME("[date].yml")
+	SSassets.transport.register_asset(item_filename, file("html/changelogs/archive/" + item_filename))
+
+/datum/asset/changelog_item/send(client)
+	if (!item_filename)
+		return
+	. = SSassets.transport.send_assets(client, item_filename)
+
+/datum/asset/changelog_item/get_url_mappings()
+	if (!item_filename)
+		return
+	. = list("[item_filename]" = SSassets.transport.get_asset_url(item_filename))
+
+/datum/asset/changelog_item/unregister()
+	if (!item_filename)
+		return
+	SSassets.transport.unregister_asset(item_filename)

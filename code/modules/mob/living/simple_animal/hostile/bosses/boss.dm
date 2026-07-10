@@ -1,4 +1,5 @@
 /mob/living/simple_animal/hostile/boss
+	abstract_type = /mob/living/simple_animal/hostile/boss
 	name = "A Perfectly Generic Boss Placeholder"
 	desc = ""
 	robust_searching = 1

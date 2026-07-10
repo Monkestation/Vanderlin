@@ -154,6 +154,7 @@
 /// Triggered on destroy of the component's offhand
 /datum/component/two_handed/proc/on_destroy(datum/source)
 	SIGNAL_HANDLER
+
 	offhand_item = null
 
 /// Triggered on attack self of the item containing the component
@@ -204,7 +205,6 @@
 		parent_item.force = force_wielded
 	// if(sharpened_increase)
 	// 	parent_item.force += sharpened_increase
-	parent_item.name += " (wielded)"
 	parent_item.update_appearance(UPDATE_ICON_STATE)
 
 	if(user.get_item_by_slot(ITEM_SLOT_BACK) == parent)
@@ -226,7 +226,7 @@
 		offhand_item.name = "[parent_item.name] - offhand"
 		offhand_item.desc = "Your second grip on [parent_item]."
 		RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
-		RegisterSignal(offhand_item, COMSIG_PARENT_QDELETING, PROC_REF(on_destroy))
+		RegisterSignal(offhand_item, COMSIG_QDELETING, PROC_REF(on_destroy))
 		user.put_in_inactive_hand(offhand_item)
 
 	to_chat(user, span_notice("I wield [parent] with both hands."))
@@ -257,13 +257,6 @@
 	else if(force_unwielded)
 		parent_item.force = force_unwielded
 
-	// update the items name to remove the wielded status
-	var/sf = findtext(parent_item.name, " (Wielded)", -10) // 10 == length(" (Wielded)")
-	if(sf)
-		parent_item.name = copytext(parent_item.name, 1, sf)
-	else
-		parent_item.name = "[initial(parent_item.name)]"
-
 	// Update icons
 	parent_item.update_appearance(UPDATE_ICON_STATE)
 
@@ -290,7 +283,7 @@
 
 	// Remove the object in the offhand
 	if(offhand_item)
-		UnregisterSignal(offhand_item, list(COMSIG_ITEM_DROPPED, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(offhand_item, list(COMSIG_ITEM_DROPPED, COMSIG_QDELETING))
 		qdel(offhand_item)
 	// Clear any old refrence to an item that should be gone now
 	offhand_item = null

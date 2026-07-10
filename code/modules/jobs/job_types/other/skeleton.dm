@@ -1,3 +1,14 @@
+/datum/attribute_holder/sheet/job/skeleton
+	attribute_variance = list(
+		STAT_STRENGTH = list(-2, 0),
+		STAT_SPEED = list(-3, 0),
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -9,
+		STAT_CONSTITUTION = -7,
+	)
+
+
 /datum/job/skeleton
 	title = "Skeleton"
 	tutorial = null
@@ -13,6 +24,8 @@
 	give_bank_account = FALSE
 	languages = list(/datum/language/undead)
 
+	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton
+
 	traits = list(
 		TRAIT_NOMOOD,
 		TRAIT_NOSTAMINA,
@@ -22,7 +35,8 @@
 		TRAIT_NOPAIN,
 		TRAIT_TOXIMMUNE,
 		TRAIT_NOSLEEP,
-		TRAIT_SHOCKIMMUNE
+		TRAIT_SHOCKIMMUNE,
+		TRAIT_NOBLOOD,
 	)
 
 
@@ -32,35 +46,37 @@
 	spawned.mind.special_role = "Skeleton"
 	spawned.mind?.current.job = null
 
-	// Randomize stats here
-	spawned.base_strength = rand(8,10)
-	spawned.base_speed = rand(7,10)
-	spawned.base_intelligence = 1
-	spawned.base_constitution = 3
-	spawned.recalculate_stats(FALSE)
-
 	if(spawned.dna && spawned.dna.species)
-		spawned.dna.species.species_traits |= NOBLOOD
 		spawned.dna.species.soundpack_m = new /datum/voicepack/skeleton()
 		spawned.dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
 	spawned.regenerate_limb(BODY_ZONE_R_ARM)
 	spawned.regenerate_limb(BODY_ZONE_L_ARM)
 	spawned.skeletonize()
-	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
+	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	spawned.update_a_intents()
 	spawned.grant_undead_eyes()
-	spawned.ambushable = FALSE
+	ADD_TRAIT(spawned, TRAIT_NOAMBUSH, JOB_TRAIT)
 	spawned.underwear = "Nude"
 	if(length(spawned.quirks))
 		spawned.clear_quirks()
 	spawned.update_body()
 	spawned.mob_biotypes = MOB_UNDEAD
-	spawned.faction = list(FACTION_UNDEAD)
+	spawned.set_faction(list(FACTION_UNDEAD))
 
 
 
 /* RAIDER SKELETONS */
+
+/datum/attribute_holder/sheet/job/skeleton/raider
+	attribute_variance = list(
+		STAT_STRENGTH = list(-2, 2),
+		STAT_SPEED = list(-3, 1),
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -9,
+		STAT_CONSTITUTION = -7,
+	)
 
 /datum/job/skeleton/raider
 	title = "Skeleton Raider"
@@ -68,6 +84,7 @@
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
 	antag_role = /datum/antagonist/skeleton
 
+	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton/raider
 	traits = list(
 		TRAIT_CRITICAL_WEAKNESS,
 		TRAIT_EASYDISMEMBER
@@ -81,21 +98,27 @@
 	spawned.remove_all_languages()
 	spawned.grant_language(/datum/language/hellspeak)
 
-	// Randomized stats
-	spawned.base_strength = rand(8,12)
-	spawned.base_speed = rand(7,11)
-	spawned.base_intelligence = 1
-	spawned.base_constitution = 3
-	spawned.recalculate_stats(FALSE)
-
-
-
 /* CULT SUMMONS */
+
+/datum/attribute_holder/sheet/job/skeleton/zizo
+	attribute_variance = list(
+		STAT_STRENGTH = list(-2, 7),
+		STAT_SPEED = list(-3, 0),
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -9,
+		STAT_CONSTITUTION = -7,
+	)
 
 /datum/job/skeleton/zizoid
 	title = "Cult Summon"
 	outfit = /datum/outfit/skeleton/zizoid
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton/zizo
+	verbs = list(
+		/mob/living/carbon/human/proc/praise,
+		/mob/living/carbon/human/proc/communicate,
+	)
 
 /datum/job/skeleton/zizoid/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -103,19 +126,9 @@
 	spawned.mind?.current.job = null
 	spawned.set_patron(/datum/patron/inhumen/zizo)
 
-	// Randomized stats
-	spawned.base_strength = rand(8,17)
-	spawned.base_speed = rand(7,10)
-	spawned.base_intelligence = 1
-	spawned.base_constitution = 3
-	spawned.recalculate_stats(FALSE)
-
 	if(spawned.dna?.species)
 		spawned.dna.species.native_language = "Zizo Chant"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
-
-	spawned.verbs |= /mob/living/carbon/human/proc/praise
-	spawned.verbs |= /mob/living/carbon/human/proc/communicate
 
 
 /* BASIC SKELETON OUTFIT */

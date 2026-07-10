@@ -14,17 +14,21 @@
 	name = "corset"
 	desc = "A leather binding to constrict one's figure... and lungs."
 	icon_state = "corset"
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	body_parts_covered = COVERAGE_VEST
+	item_weight = 230 GRAMS
 
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
 	name = "amazonian armor"
-	desc = "Fur skirt and maille chest holder, typically worn by warrior women of the isle of Issa."
+	desc = "Fur skirt and maille chest holder, it doesn't cover very much."
 	icon_state = "chainkini"
 	item_state = "chainkini"
 	allowed_sex = list(FEMALE)
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/fur
+	dyeable = TRUE
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	// It looks better without these
@@ -33,8 +37,10 @@
 	armor = ARMOR_LEATHER_GOOD
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 3.2 KILOGRAMS
 	min_cold_protection_temperature = 5 //this is like fur but also its a fucking bikini like???
+
+	material_category = ARMOR_MAT_CHAINMAIL
 
 //................ Brigandine ............... //
 /obj/item/clothing/armor/brigandine
@@ -44,7 +50,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE
@@ -55,12 +61,32 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 3.2 * IRON_MULTIPLIER
+	item_weight = 8 KILOGRAMS
 	stand_speed_reduction = 1.15
 
 /obj/item/clothing/armor/brigandine/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_COAT_STEP)
+
+/obj/item/clothing/armor/brigandine/haraate
+	name = "hansimhae cuirass"
+	desc = "A more common form of Blackmeadow armor, consisting of several interlocking plates of blacksteel-coated steel. Much cheaper than a full set of armor, these are commonly seen on militia forces and standing armies alike."
+	icon_state = "kazengunmedium"
+	boobed = FALSE
+	item_state = "kazengunmedium"
+	detail_tag = "_detail"
+	color = "#FFFFFF"
+	detail_color = "#FFFFFF"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	detail_tag = "_detail"
+
+/obj/item/clothing/armor/brigandine/haraate/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)
 
 //................ Abyssal Robe ............... //
 /obj/item/clothing/armor/brigandine/abyssor // This is only a brigandine subtype for balance reasons, it should be a cuirass variant.
@@ -69,11 +95,11 @@
 	icon_state = "abyssal_robe"
 	item_state = "abyssal_robe"
 	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/clothing/armor/brigandine/abyssor/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_COAT_STEP)
-
 
 /obj/item/clothing/armor/brigandine/captain
 	name = "captain's brigandine"
@@ -87,7 +113,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE
@@ -97,7 +123,6 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 7 * STEEL_MULTIPLIER
 	uses_lord_coloring = LORD_PRIMARY
 	stand_speed_reduction = 1.15
 
@@ -119,28 +144,37 @@
 
 	max_integrity = INTEGRITY_STRONG
 
-/obj/item/clothing/shirt/vampire
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
-	name = "regal silks"
-	desc = ""
-	body_parts_covered = CHEST|GROIN|LEGS|VITALS
-	prevent_crits = list(BCLASS_BITE, BCLASS_TWIST)
-	icon_state = "vrobe"
-	item_state = "vrobe"
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
-
-
 /obj/item/clothing/armor/brigandine/light
-	slot_flags = ITEM_SLOT_ARMOR
 	name = "lightweight brigandine"
 	desc = "A light riveted coat with plates concealed inside an exterior fabric. Susceptible to daggers being shoved into your ribs."
 	icon_state = "light_brigandine"
-	blocksound = SOFTHIT
 	body_parts_covered = COVERAGE_TORSO
-	armor = ARMOR_LEATHER_STUDDED
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE
 	smeltresult = /obj/item/ingot/iron
-	equip_delay_self = 40
-	armor_class = AC_LIGHT//steel version of the studded leather armor now
+	melting_material = /datum/material/iron
+	armor_class = AC_LIGHT //steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
+	prevent_crits = ALL_EXCEPT_STAB
+	item_weight = 3.95 KILOGRAMS
+
+/obj/item/clothing/armor/plate/bronze
+	name = "bronze cuirass"
+	desc = "A chiseled breastplate of bronze, further padded with hide to comfort its championing bod. The plates have been carefully forged to mimic the statuesque physiques of Psydonia's ancient heroes. Wearing it bolsters you with determination."
+	body_parts_covered = CHEST | VITALS | LEGS
+	icon_state = "bronzecuirass"
+	armor = ARMOR_BRIGANDINE
+	melt_amount = 150
+	melting_material = /datum/material/bronze
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_SCALE
+	armor_class = AC_MEDIUM
+	boobed = FALSE
+
+/obj/item/clothing/armor/plate/bronze/light
+	name = "bronze cardiophylax"
+	desc = "A thick bronze plate, meticulously sculpted to fit its wearer's physique and guard their heart from all that'd seek to strike it. Unfortunately, it does little to riposte more emotional blows."
+	icon_state = "bronzeprotector"
+	item_state = "bronzeprotector"
+	body_parts_covered = CHEST | VITALS
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_SCALE //250 INT, or a little above Iron - and +100 INT over the Copper variant.
+	armor_class = AC_LIGHT
+	armor = ARMOR_BRIGANDINE

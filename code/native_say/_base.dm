@@ -1,8 +1,5 @@
 /client/var/datum/native_say/native_say
 
-/client/New()
-	. = ..()
-	native_say = new /datum/native_say(src)
 
 /datum/native_say
 	var/client/client

@@ -1,5 +1,5 @@
 /client/proc/reestablish_db_connection()
-	set category = "Special"
+	set category = "Server"
 	set name = "Reestablish DB Connection"
 	if (!CONFIG_GET(flag/sql_enabled))
 		to_chat(usr, "<span class='adminnotice'>The Database is not enabled!</span>")
@@ -10,7 +10,7 @@
 			alert("The database is already connected! (Only those with +debug can force a reconnection)", "The database is already connected!")
 			return
 
-		var/reconnect = alert("The database is already connected! If you *KNOW* that this is incorrect, you can force a reconnection", "The database is already connected!", "Force Reconnect", "Cancel")
+		var/reconnect = tgui_alert(usr, "The database is already connected! If you *KNOW* that this is incorrect, you can force a reconnection", "The database is already connected!", list("Force Reconnect", "Cancel"))
 		if (reconnect != "Force Reconnect")
 			return
 
@@ -24,7 +24,7 @@
 			alert("The database is already connected! (Only those with +debug can force a reconnection)", "The database is already connected!")
 			return
 
-		var/reconnect = alert("The database is already connected! If you *KNOW* that this is incorrect, you can force a reconnection", "The database is already connected!", "Force Reconnect", "Cancel")
+		var/reconnect = tgui_alert(usr, "The database is already connected! If you *KNOW* that this is incorrect, you can force a reconnection", "The database is already connected!", list("Force Reconnect", "Cancel"))
 		if (reconnect != "Force Reconnect")
 			return
 

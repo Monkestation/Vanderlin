@@ -1,7 +1,10 @@
+GLOBAL_LIST_INIT(automaton_order_jobs, list(JOB_ARTIFICER, "Supreme Artificer"))
+
 /datum/component/command_follower
 	var/datum/follower_command/current_command
 	var/atom/movable/screen/command_display/hud_element
 	var/mob/living/carbon/human/owner
+	/*
 	var/list/order_priority = list(
 		/datum/job/lord = 1,
 		/datum/job/consort = 2,
@@ -19,7 +22,6 @@
 		/datum/job/town_elder = 18,
 		/datum/job/guardsman = 19,
 		/datum/job/gatemaster = 19,
-		/datum/job/jailor = 19,
 		/datum/job/dungeoneer = 19,
 		/datum/job/men_at_arms = 20,
 		/datum/job/forestwarden = 20,
@@ -32,14 +34,16 @@
 		/datum/job/monk = 28,
 		/datum/job/adept = 28
 	)
+	*/
 
 	var/list/available_commands = list(
 		/datum/follower_command/custom,
 		/datum/follower_command/protect,
 		/datum/follower_command/kill,
 		/datum/follower_command/guard_position,
-		/datum/follower_command/follow,
+	//	/datum/follower_command/follow,
 	)
+	COOLDOWN_DECLARE(command_cooldown)
 
 /datum/component/command_follower/Initialize(list/command_typepaths = list())
 	if(!ishuman(parent))
@@ -53,9 +57,10 @@
 
 	create_hud_element()
 	RegisterSignal(parent, COMSIG_MOB_LOGIN, PROC_REF(on_login))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_deleted))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_parent_deleted))
 	RegisterSignal(parent, COMSIG_PARENT_COMMAND_RECEIVED, PROC_REF(receive_command))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(on_ctrl_click))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/command_follower/Destroy()
 	clear_command()
@@ -67,7 +72,7 @@
 
 /datum/component/command_follower/proc/create_hud_element()
 	hud_element = new()
-	hud_element.screen_loc = "WEST+1,NORTH-1:14"
+	hud_element.screen_loc = "WEST+1,SOUTH+1:14"
 	if(owner?.client)
 		owner.client.screen += hud_element
 	update_hud()
@@ -101,17 +106,14 @@
 /datum/component/command_follower/proc/receive_command(datum/source, datum/follower_command/new_command, mob/living/carbon/human/issuer)
 	if(!new_command || !issuer)
 		return FALSE
-	if(current_command)
-		var/current_priority = get_job_priority(current_command.issuer_job)
-		var/new_priority = get_job_priority(issuer.job_type)
-		if(new_priority > current_priority)
-			owner.say("Command rejected: [issuer] lacks authority to override [current_command.issuer_name]'s command.", forced = TRUE)
+
 	clear_command()
 	current_command = new_command
 	current_command.issuer_name = issuer.real_name
 	current_command.issuer_job = issuer.job_type
 	current_command.component = src
-	current_command.execute(owner, issuer)
+	addtimer(CALLBACK(current_command, TYPE_PROC_REF(/datum/follower_command, execute), owner, issuer), 3 SECONDS)
+	COOLDOWN_START(src, command_cooldown, 10 SECONDS)
 	update_hud()
 	return TRUE
 
@@ -121,12 +123,14 @@
 		QDEL_NULL(current_command)
 	update_hud()
 
+/*
 /datum/component/command_follower/proc/get_job_priority(job_type)
 	if(!job_type)
 		return 999
 	if(job_type in order_priority)
 		return order_priority[job_type]
 	return 999
+*/
 
 /datum/component/command_follower/proc/on_ctrl_click(datum/source, mob/living/clicker)
 	SIGNAL_HANDLER
@@ -137,11 +141,23 @@
 		return
 
 	// Check if clicker has authority
+	/*
 	var/clicker_priority = get_job_priority(clicker.job_type)
 	if(clicker_priority >= 999)
 		to_chat(clicker, span_warning("You lack the authority to issue commands."))
 		return
+	*/
 
+	if(!owner.can_hear()) // their head was lopped off
+		return
+
+	if(!HAS_TRAIT(clicker, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(clicker, TRAIT_NOBLE_POWER) && !(clicker.job in GLOB.automaton_order_jobs))
+		to_chat(clicker, span_warning("You lack the authority to issue commands."))
+		return
+
+	if(!COOLDOWN_FINISHED(src, command_cooldown))
+		to_chat(clicker, span_warning("The automaton's buffer isn't ready for a new command yet."))
+		return
 	INVOKE_ASYNC(src, PROC_REF(show_command_menu), clicker)
 
 /datum/component/command_follower/proc/show_command_menu(mob/living/clicker)
@@ -150,8 +166,10 @@
 		choices += initial(cmd_name.command_name)
 		choices[initial(cmd_name.command_name)] = cmd_name
 
-	var/choice = browser_input_list(clicker, "Select a command to issue to [owner]:", "Issue Command", choices)
+	var/choice = tgui_input_list(clicker, "Select a command to issue to [owner]:", "Issue Command", choices)
 	if(!choice)
+		return
+	if(QDELETED(clicker) || QDELETED(owner))
 		return
 
 	var/command_path = choices[choice]
@@ -162,6 +180,12 @@
 		return
 
 	SEND_SIGNAL(owner, COMSIG_PARENT_COMMAND_RECEIVED, new_cmd, clicker)
+
+/datum/component/command_follower/proc/on_examine(datum/source, mob/user, list/examine_list)
+	var/examine = span_blue("Ctrl-Click to give it a direct command.")
+	if(!COOLDOWN_FINISHED(src, command_cooldown))
+		examine = span_blue("This mob can be commanded again in [round(COOLDOWN_TIMELEFT(src, command_cooldown)) * 0.1] seconds.")
+	LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, examine)
 
 /atom/movable/screen/command_display
 	name = "Command Display"

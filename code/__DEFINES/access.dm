@@ -10,14 +10,15 @@
 #define ACCESS_FELDSHER "doctor"
 #define ACCESS_MATRON "orphanage"
 #define ACCESS_ELDER "elder"
-#define ACCESS_VETERAN "veteran"
 #define ACCESS_MERC "mercenary"
-#define ACCESS_GAFFER "gaffer"
+#define ACCESS_TOMBWARDEN "tombwarden"
+#define ACCESS_TOMB "tomb"
 #define ACCESS_TOWER "tower"
 #define ACCESS_WAREHOUSE "warehouse"
 #define ACCESS_ARTIFICER "artificer"
 #define ACCESS_MINER "miner"
 #define ACCESS_BATHHOUSE "bathhouse"
+#define ACCESS_SWEEPER "sweeper"
 
 // Town Garrison (Including forest)
 #define ACCESS_GARRISON "garrison"
@@ -38,6 +39,7 @@
 #define ACCESS_STEWARD "steward"
 #define ACCESS_DUNGEON "dungeon"
 #define ACCESS_HAND "hand"
+#define ACCESS_COURTAGENT "court agent"
 #define ACCESS_LORD "lord"
 #define ACCESS_VAULT "vault"
 #define ACCESS_ARCHIVE "archive"
@@ -91,3 +93,6 @@
 #define ACCESS_APART_XVIII "apartment18"
 #define ACCESS_APART_XIX "apartment19"
 #define ACCESS_APART_XX "apartment20"
+
+// Other
+#define ACCESS_BOGWITCH "bogwitch"

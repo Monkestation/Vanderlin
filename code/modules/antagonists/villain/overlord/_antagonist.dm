@@ -35,6 +35,7 @@
 		TRAIT_SEEPRICES,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
 	)
@@ -86,6 +87,7 @@
 	UnregisterSignal(overlord_mob, COMSIG_LIVING_DEATH)
 	if(overlord_controller)
 		qdel(overlord_controller)
+	return ..()
 
 /datum/antagonist/overlord/greet()
 	. = ..()
@@ -102,9 +104,7 @@
 	L.skele_look()
 
 /datum/antagonist/overlord/proc/equip_overlord()
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
+	owner.forget_and_be_forgotten()
 	var/mob/living/carbon/human/L = owner.current
 
 	L.mana_pool.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES
@@ -114,15 +114,16 @@
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.faction = list(FACTION_UNDEAD)
+	L.set_faction(list(FACTION_UNDEAD))
 	if(length(L.quirks))
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.grant_undead_eyes()
 	L.skeletonize(FALSE)
 	L.equipOutfit(/datum/outfit/overlord)
 	L.set_patron(/datum/patron/inhumen/zizo)
+	ADD_TRAIT(L, TRAIT_NOBLOOD, SPECIES_TRAIT)
 
 /datum/antagonist/overlord/proc/on_death(datum/source)
 	SIGNAL_HANDLER
@@ -176,7 +177,7 @@
 	owner.transfer_to(overlord_mob, TRUE)
 
 	overlord_mob.skeletonize(FALSE)
-	overlord_mob.faction = list(FACTION_UNDEAD, "overlord")
+	overlord_mob.add_faction(list(FACTION_UNDEAD, "overlord"))
 	if(length(overlord_mob.quirks))
 		overlord_mob.clear_quirks()
 	overlord_mob.mob_biotypes |= MOB_UNDEAD

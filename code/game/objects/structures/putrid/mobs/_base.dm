@@ -1,5 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/meatvine
 	name = "Horrible creature"
+	abstract_type = /mob/living/simple_animal/hostile/retaliate/meatvine
 	desc = "What is that?!"
 	icon = 'icons/obj/cellular/meat.dmi'
 	icon_state = "bloodling_stage_1"
@@ -24,7 +25,6 @@
 	defprob = 35
 	defdrain = 5
 
-	aggressive = 1
 
 	hud_type = /datum/hud/putrid
 	see_in_dark = 10
@@ -33,6 +33,7 @@
 	stat_attack = 1
 
 	ai_controller = /datum/ai_controller/meatvine_defender
+	animal_type = /datum/blood_type/putrid
 
 	pass_flags = PASSTABLE
 	can_buckle = TRUE
@@ -120,8 +121,7 @@
 			to_chat(user, span_notice("You grab onto [L]."))
 		return
 
-/mob/living/simple_animal/hostile/retaliate/meatvine/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
-
+/mob/living/simple_animal/hostile/retaliate/meatvine/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(!istype(A, /obj/structure/meatvine/papameat) && !istype(A, /obj/structure/meatvine/intestine_wormhole))
 		return . = ..()
 

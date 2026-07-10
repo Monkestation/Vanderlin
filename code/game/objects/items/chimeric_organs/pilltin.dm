@@ -8,6 +8,7 @@
 	slot_flags = null
 	contents_tag = null
 	component_type = /datum/component/storage/concrete/grid/pilltin
+	item_weight = 55 GRAMS
 
 /obj/item/storage/fancy/pilltin/update_icon_state()
 	. = ..()
@@ -23,7 +24,7 @@
 	else
 		icon_state = "pilltin"
 
-/obj/item/storage/fancy/pilltin/MiddleClick(mob/user, params)
+/obj/item/storage/fancy/pilltin/MiddleClick(mob/user, list/modifiers)
 	is_open = !is_open
 	update_appearance(UPDATE_ICON_STATE)
 	to_chat(user, span_notice("[src] is now [is_open ? "open" : "closed"]."))

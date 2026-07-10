@@ -4,6 +4,7 @@
  * Pretty much pokes the MC to make sure it's still alive.
  **/
 
+// See initialization order in /code/game/world.dm
 GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 
 /datum/controller/failsafe // This thing pretty much just keeps poking the master controller
@@ -116,8 +117,6 @@ GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 /datum/controller/failsafe/proc/defcon_pretty()
 	return defcon
 
-/datum/controller/failsafe/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
-
-	stat("Failsafe Controller:", statclick.update("Defcon: [defcon_pretty()] (Interval: [Failsafe.processing_interval] | Iteration: [Failsafe.master_iteration])"))
+/datum/controller/failsafe/stat_entry(msg)
+	msg = "Defcon: [defcon_pretty()] (Interval: [Failsafe.processing_interval] | Iteration: [Failsafe.master_iteration])"
+	return msg

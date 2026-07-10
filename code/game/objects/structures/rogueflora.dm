@@ -1,3 +1,8 @@
+#define SEARCHTIME 1.2 SECONDS
+#define BUSH_PRIMARY_LOOT_CHANCE 88
+#define BUSH_BONUS_LOOT_CHANCE 66
+
+// Base Flora
 /obj/structure/flora
 	var/num_random_icons = 0
 	layer = FLORA_LAYER
@@ -8,7 +13,6 @@
 		icon_state = "[base_icon_state][rand(1, num_random_icons)]"
 
 //newtree
-
 /obj/structure/flora/tree
 	name = "old tree"
 	desc = "An old, wicked tree that not even elves could love."
@@ -25,25 +29,16 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/treefall.ogg'
 	debris = list(/obj/item/grown/log/tree/stick = 2)
-	static_debris = list(/obj/item/grown/log/tree = 1)
+	var/list/static_debris = list(/obj/item/grown/log/tree = 1)
 	var/stump_type = /obj/structure/table/wood/treestump
 	metalizer_result = /obj/machinery/light/fueledstreet
 	smeltresult = /obj/item/ore/coal
 
-/obj/structure/flora/tree/attack_hand_secondary(mob/user, params)
+/obj/structure/flora/tree/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/tree/attacked_by(obj/item/I, mob/living/user)
@@ -62,10 +57,13 @@
 		var/turf/T = loc
 		T.ChangeTurf(/turf/open/floor/dirt)
 
-/obj/structure/flora/tree/atom_destruction(damage_flag)
+/obj/structure/flora/tree/atom_deconstruct(disassembled)
+	. = ..()
 	if(stump_type)
 		new stump_type(loc)
-	return ..()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(loc)
 
 /obj/structure/flora/tree/evil
 	base_icon_state = "wv"
@@ -81,9 +79,6 @@
 /obj/structure/flora/tree/evil/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(controller)
-		controller.endvines()
-		controller = null
 	return ..()
 
 /obj/structure/flora/tree/wise
@@ -111,20 +106,20 @@
 	for(var/obj/structure/flora/tree/normal_tree in range(5, src))
 		if(normal_tree != src && !istype(normal_tree, /obj/structure/flora/tree/wise))
 			RegisterSignal(normal_tree, COMSIG_ATOM_ATTACKBY, TYPE_PROC_REF(/obj/structure/flora/tree/wise, protect_nearby_trees))
-			RegisterSignal(normal_tree, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
+			RegisterSignal(normal_tree, COMSIG_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
 	for(var/obj/structure/flora/newtree/new_tree in range(5, src))
 		if(!new_tree.burnt)
 			RegisterSignal(new_tree, COMSIG_ATOM_ATTACKBY, TYPE_PROC_REF(/obj/structure/flora/tree/wise, protect_nearby_trees))
-			RegisterSignal(new_tree, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
+			RegisterSignal(new_tree, COMSIG_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
 
 /obj/structure/flora/tree/wise/proc/cleanup_tree(datum/source)
-	UnregisterSignal(source, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(source, list(COMSIG_ATOM_ATTACKBY, COMSIG_QDELETING))
 
 /obj/structure/flora/tree/wise/Destroy()
 	for(var/obj/structure/flora/tree/normal_tree in range(5, src))
-		UnregisterSignal(normal_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(normal_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_QDELETING))
 	for(var/obj/structure/flora/newtree/new_tree in range(5, src))
-		UnregisterSignal(new_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(new_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_QDELETING))
 	return ..()
 
 /obj/structure/flora/tree/wise/proc/protect_nearby_trees(datum/source, obj/item/I, mob/user)
@@ -154,9 +149,9 @@
 	var/atom/throw_target = get_edge_target_turf(attacked_tree, get_dir(attacked_tree, target))
 	target.throw_at(throw_target, 4, 2)
 	target.Knockdown(2 SECONDS)
-	target.adjustBruteLoss(8)
+	target.adjustBruteLoss(8, damage_type = BCLASS_LASHING)
 
-/obj/structure/flora/tree/wise/attackby(obj/item/I, mob/user, params)
+/obj/structure/flora/tree/wise/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(activated && !cooldown)
 		retaliate(user)
@@ -234,34 +229,48 @@
 	var/isunburnt = TRUE // Var needed for the burnt stump
 	var/stump_loot = /obj/item/grown/log/tree/small
 
-/obj/structure/table/wood/treestump/Initialize()
+/obj/structure/table/wood/treestump/Initialize(mapload, ...)
 	. = ..()
 	icon_state = "stumpt[rand(1,4)]"
 
-/obj/structure/table/wood/treestump/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/weapon/shovel))
-		to_chat(user, "I start unearthing the stump...")
-		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, 5 SECONDS))
-			user.visible_message("<span class='notice'>[user] unearths \the [src].</span>", \
-								"<span class='notice'>I unearth \the [src].</span>")
-			if(isunburnt)
-				new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
-			atom_destruction("brute")
-		return
-	return ..()
+/obj/structure/table/wood/treestump/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/shovel))
+		return ..()
+
+	to_chat(user, "I start unearthing the stump...")
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+	if(!do_after(user, 5 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message(
+		span_notice("[user] unearths [src]."),
+		span_notice("I unearth [src].")
+	)
+
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+	if(isunburnt)
+		new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
+
+	atom_destruction(BRUTE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/wood/treestump/burnt
 	name = "tree stump"
 	desc = "This stump is burnt. Maybe someone is trying to get coal the easy way."
 	icon = 'icons/roguetown/misc/tree.dmi'
 	icon_state = "st1"
-	static_debris = list(/obj/item/ore/coal = 1)
 	isunburnt = FALSE
 
 /obj/structure/table/wood/treestump/burnt/Initialize()
 	. = ..()
 	icon_state = "st[rand(1,2)]"
+
+/obj/structure/table/wood/treestump/burnt/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/ore/coal(loc)
 
 /*	.............   Ancient log   ................ */	// Functionally a sofa, slightly better than sleeping on the ground
 /obj/structure/chair/bench/ancientlog
@@ -270,7 +279,6 @@
 	icon = 'icons/roguetown/misc/foliagetall.dmi'
 	icon_state = "log1"
 	blade_dulling = DULLING_CUT
-	static_debris = list(/obj/item/grown/log/tree = 1)
 	max_integrity = 200
 	sleepy = 0.2
 	SET_BASE_PIXEL(-14, 7)
@@ -282,31 +290,43 @@
 
 /obj/structure/chair/bench/ancientlog/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 5)
+	M.add_offsets(type, x_add = 0, y_add = 5)
 
 /obj/structure/chair/bench/ancientlog/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
+
+/obj/structure/chair/bench/ancientlog/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/grown/log/tree(loc)
 
 //newbushes
-
 /obj/structure/flora/grass
 	name = "grass"
 	desc = "The kindest blades you will ever meet in this world."
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "grass1"
 	base_icon_state = "grass"
+	layer = BELOW_OBJ_LAYER
 	num_random_icons = 6
 	attacked_sound = "plantcross"
 	destroy_sound = "plantcross"
 	max_integrity = 5
-	debris = list(/obj/item/natural/fibers = 1)
+	debris = list(/obj/item/natural/fibers = 2)
 	/// base % to find any useful thing in the bush, gets modded by perception
 	var/prob2findstuff
 	/// for harvestable
 	var/islooted = FALSE
 	///	for various luck based effects
 	var/luckydouble
+
+	var/list/looty = list()
+	var/res_replenish
+	var/bushtype
+
+	var/guaranteed_loot = null
+	var/bonus_loot = null
+
 
 /obj/structure/flora/grass/spark_act()
 	fire_act()
@@ -321,6 +341,58 @@
 	else if(prob(5))
 		new /obj/item/neuFarm/seed/mixed_seed(get_turf(src))
 	return ..()
+
+// Grass procs
+/obj/structure/flora/grass/proc/has_searchable_loot()
+	return bushtype || guaranteed_loot || bonus_loot
+
+/obj/structure/flora/grass/attack_hand(mob/user)
+	. = ..()
+	if(!isliving(user) || !has_searchable_loot())
+		return
+	start_search_loop(user)
+
+/obj/structure/flora/grass/proc/grass_replenish_loot()
+	if(bushtype && !(bushtype in looty))
+		looty += bushtype
+
+	if(guaranteed_loot)
+		for(var/path in guaranteed_loot)
+			looty += path
+
+	if(bonus_loot && prob(BUSH_BONUS_LOOT_CHANCE))
+		looty += pick(bonus_loot)
+
+/obj/structure/flora/grass/proc/start_search_loop(mob/living/user)
+	while(!QDELETED(src) && !QDELETED(user))
+		user.changeNext_move(CLICK_CD_MELEE)
+		playsound(src, "plantcross", 80, FALSE, -1)
+
+		if(!length(looty))
+			if(world.time > res_replenish)
+				grass_replenish_loot()
+			else
+				to_chat(user, span_warning("Picked clean... I should try later."))
+				return
+
+		if(!do_after(user, SEARCHTIME, target = src) || QDELETED(src) || QDELETED(user))
+			return
+
+		if(!prob(50))
+			user.visible_message(span_warning("[user] rummages through [src]..."))
+			continue
+
+		var/obj/item/item_path = pick_n_take(looty)
+		if(!item_path)
+			return
+
+		var/obj/item/found_item = new item_path(user.loc)
+		user.put_in_hands(found_item)
+		user.visible_message(span_notice("[user] finds [found_item] in [src]."))
+
+		if(!length(looty))
+			res_replenish = world.time + 8 MINUTES
+		return
 
 /obj/structure/flora/grass/tundra
 	name = "tundra grass"
@@ -345,7 +417,14 @@
 	dir = pick(GLOB.cardinals)
 
 /datum/component/grass/Initialize()
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	if(!ismovableatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
+
+/datum/component/grass/Destroy(force)
+	UnregisterSignal(parent, COMSIG_MOVABLE_CROSSED)
+	return ..()
 
 /datum/component/grass/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent
@@ -371,9 +450,9 @@
 	layer = ABOVE_ALL_MOB_LAYER
 	max_integrity = 35
 	debris = list(/obj/item/natural/fibers = 1, /obj/item/grown/log/tree/stick = 1)
-	var/res_replenish
-	var/list/looty = list()
-	var/bushtype
+
+	guaranteed_loot = list(/obj/item/natural/fibers)
+	bonus_loot = list(/obj/item/natural/thorn)
 
 /obj/structure/flora/grass/bush/tundra
 	name = "tundra bush"
@@ -381,39 +460,12 @@
 
 /obj/structure/flora/grass/bush/Initialize()
 	. = ..()
-	if(prob(88))
+	if(prob(BUSH_PRIMARY_LOOT_CHANCE))
 		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry=5,
 					/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison=3,
 					/obj/item/reagent_containers/food/snacks/produce/westleach=2))
-	loot_replenish()
+	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-/obj/structure/flora/grass/bush/proc/loot_replenish()
-	if(bushtype)
-		looty += bushtype
-	if(prob(66))
-		looty += /obj/item/natural/thorn
-	looty += /obj/item/natural/fibers
-
-// normalbush looting
-/obj/structure/flora/grass/bush/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, rand(1,5) DECISECONDS, src))
-			if(prob(50) && looty.len)
-				if(looty.len == 1)
-					res_replenish = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty)
-				if(B)
-					B = new B(user.loc)
-					user.put_in_hands(B)
-					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
-					return
-			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
-			if(!looty.len)
-				to_chat(user, "<span class='warning'>Picked clean.</span>")
 
 // bush crossing
 /obj/structure/flora/grass/bush/Crossed(atom/movable/AM)
@@ -427,27 +479,34 @@
 	if(L.m_intent == MOVE_INTENT_RUN)
 		L.visible_message(span_warning("[L] crashes into \a [src]!"), span_danger("I run into \a [src]."))
 		log_combat(L, src, "ran into")
-	else if(L.atom_flags & Z_FALLING)
+	else if(L.currently_z_moving)
 		L.visible_message(span_warning("[L] falls onto \a [src]!"), span_danger("I fall onto \a [src]."))
 		log_combat(L, src, "ran into")
 	else
 		to_chat(L, span_warning("I get stuck in \a [src]."))
 
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.atom_flags & Z_FALLING)
-		if(was_hard_collision)
-			var/obj/item/bodypart/BP = pick(H.bodyparts)
-			BP.receive_damage(10)
-			to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
-			if((prob(20)) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-				var/obj/item/natural/thorn/TH = new(src.loc)
-				BP.add_embedded_object(TH, silent = TRUE)
-				to_chat(H, span_danger("\A [TH] impales my [BP.name]."))
-				if(!HAS_TRAIT(H, TRAIT_NOPAIN))
-					H.emote("painscream")
-					L.Stun(3 SECONDS) //that fucking hurt
-					H.consider_ambush()
+	if(!L.client)
+		return
+	if(L.m_intent != MOVE_INTENT_SNEAK && !HAS_TRAIT(L, TRAIT_MOVE_FLYING) && prob(20))
+		L.consider_ambush()
+
+	if(!ishuman(L))
+		return
+	var/mob/living/carbon/human/H = L
+	var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
+	if(!was_hard_collision)
+		return
+	var/obj/item/bodypart/BP = pick(H.bodyparts)
+	BP.receive_damage(10)
+	to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
+	if(HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+		return
+	var/obj/item/natural/thorn/TH = new(src.loc)
+	BP.add_embedded_object(TH, silent = TRUE)
+	to_chat(H, span_danger("\A [TH] impales my [BP.name]."))
+	if(H.can_feel_pain())
+		H.emote("painscream")
+		L.Stun(3 SECONDS) //that fucking hurt
 
 /obj/structure/flora/grass/bush/wall
 	name = "great bush"
@@ -480,7 +539,6 @@
 	SET_BASE_PIXEL(-16, 0)
 	num_random_icons = 2
 	debris = null
-	static_debris = null
 
 /obj/structure/flora/grass/bush/wall/tall/tundra
 	name = "tundra great bush"
@@ -501,42 +559,14 @@
 	base_icon_state = "pyroflower"
 	num_random_icons = 3
 	layer = ABOVE_ALL_MOB_LAYER
-	var/list/looty2 = list()
-	var/bushtype2
-	var/res_replenish2
+	bonus_loot = list(/obj/item/reagent_containers/food/snacks/produce/fyritius)
 
 /obj/structure/flora/grass/pyroclasticflowers/Initialize()
 	. = ..()
-	if(prob(88))
-		bushtype2 = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/fyritius = 1))
-	loot_replenish2()
+	if(prob(BUSH_PRIMARY_LOOT_CHANCE))
+		bushtype = /obj/item/reagent_containers/food/snacks/produce/fyritius
+	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-/obj/structure/flora/grass/pyroclasticflowers/proc/loot_replenish2()
-	if(bushtype2)
-		looty2 += bushtype2
-	if(prob(66))
-		looty2 += /obj/item/reagent_containers/food/snacks/produce/fyritius
-
-// pyroflower cluster looting
-/obj/structure/flora/grass/pyroclasticflowers/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, rand(1,5) DECISECONDS, src))
-			if(prob(50) && looty2.len)
-				if(looty2.len == 1)
-					res_replenish2 = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty2)
-				if(B)
-					B = new B(user.loc)
-					user.put_in_hands(B)
-					user.visible_message(span_notice("[user] finds [B] in [src]."))
-					return
-			user.visible_message(span_warning("[user] searches through [src]."))
-			if(!looty2.len)
-				to_chat(user, span_warning("Picked clean."))
 
 // swarmpweed bush
 /obj/structure/flora/grass/swampweed
@@ -545,41 +575,14 @@
 	icon_state = "swampweed1"
 	base_icon_state = "swampweed"
 	num_random_icons = 3
-	var/list/looty3 = list()
-	var/bushtype3
-	var/res_replenish3
+	bonus_loot = list(/obj/item/reagent_containers/food/snacks/produce/swampweed)
 
 /obj/structure/flora/grass/swampweed/Initialize()
 	. = ..()
-	if(prob(88))
-		bushtype3 = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/swampweed = 1))
-	loot_replenish3()
+	if(prob(BUSH_PRIMARY_LOOT_CHANCE))
+		bushtype = pickweight(list(/obj/item/reagent_containers/food/snacks/produce/swampweed = 1))
+	grass_replenish_loot()
 	pixel_x += rand(-3,3)
-
-/obj/structure/flora/grass/swampweed/proc/loot_replenish3()
-	if(bushtype3)
-		looty3 += bushtype3
-	if(prob(66))
-		looty3 += /obj/item/reagent_containers/food/snacks/produce/swampweed
-
-/obj/structure/flora/grass/swampweed/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src, "plantcross", 80, FALSE, -1)
-		if(do_after(L, rand(1,5) DECISECONDS, src))
-			if(prob(50) && looty3.len)
-				if(looty3.len == 1)
-					res_replenish3 = world.time + 8 MINUTES
-				var/obj/item/B = pick_n_take(looty3)
-				if(B)
-					B = new B(user.loc)
-					user.put_in_hands(B)
-					user.visible_message("<span class='notice'>[user] finds [B] in [src].</span>")
-					return
-			user.visible_message("<span class='warning'>[user] searches through [src].</span>")
-			if(!looty3.len)
-				to_chat(user, "<span class='warning'>Picked clean.</span>")
 
 /obj/structure/flora/shroom_tree
 	name = "shroom"
@@ -594,22 +597,13 @@
 	SET_BASE_PIXEL(-16, 0)
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
-	static_debris = list(/obj/item/grown/log/tree/small = 1)
+	var/list/static_debris = list(/obj/item/grown/log/tree/small = 1)
 
-/obj/structure/flora/shroom_tree/attack_hand_secondary(mob/user, params)
+/obj/structure/flora/shroom_tree/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/shroom_tree/Initialize()
@@ -626,9 +620,9 @@
 		return
 	return TRUE
 
-/obj/structure/flora/shroom_tree/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/flora/shroom_tree/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -636,10 +630,16 @@
 	if(added > 5)
 		return ..()
 
-/obj/structure/flora/shroom_tree/atom_destruction(damage_flag)
+/obj/structure/flora/shroom_tree/handle_deconstruct(disassembled)
 	var/obj/structure/S = new /obj/structure/table/wood/treestump/shroomstump(loc)
 	S.icon_state = "stump_[icon_state]"
 	return ..()
+
+/obj/structure/flora/shroom_tree/atom_deconstruct(disassembled)
+	. = ..()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(loc)
 
 /obj/structure/table/wood/treestump/shroomstump
 	name = "shroom stump"
@@ -668,11 +668,14 @@
 	blade_dulling = DULLING_BASH
 	destroy_sound = 'sound/foley/smash_rock.ogg'
 	attacked_sound = 'sound/foley/hit_rock.ogg'
-	static_debris = list(/obj/item/natural/stone = 1)
 
 /obj/structure/roguerock/Initialize()
 	. = ..()
 	icon_state = "rock[rand(1, 4)]"
+
+/obj/structure/roguerock/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/natural/stone(loc)
 
 /*	..................   Thorn Bush   ................... */	// Updated to use searcher perception, can yield thorns
 /obj/structure/flora/grass/thorn_bush
@@ -691,8 +694,8 @@
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, "plantcross", 80, FALSE, -1)
-	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
-	user.visible_message(span_noticesmall("[user] searches through [src]."))
+	prob2findstuff = prob2findstuff + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 4 )
+	user.visible_message(span_smallnotice("[user] searches through [src]."))
 
 	if(do_after(L, rand(5 DECISECONDS, 2 SECONDS), src))
 
@@ -709,7 +712,11 @@
 
 		else
 			if(!HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-				user.apply_damage(5, BRUTE)
+				var/obj/item/bodypart/hand = user.get_active_hand()
+				if(hand)
+					hand.bodypart_attacked_by(BCLASS_CUT, 5)
+				else
+					user.apply_damage(5, BRUTE, damage_type = BCLASS_CUT)
 			to_chat(user, span_warning("You cut yourself on the thorns!"))
 
 	prob2findstuff = 15
@@ -726,13 +733,13 @@
 				return
 			else
 				to_chat(L, span_warning("I'm scratched by the thorns."))
-				L.apply_damage(5, BRUTE)
+				L.apply_damage(5, BRUTE, damage_type = BCLASS_CUT, can_crit = FALSE)
 				L.Immobilize(10)
 
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			if(!ishuman(L))
-				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
-				L.apply_damage(5, BRUTE)
+				to_chat(L, span_warning("I'm cut on a thorn!"))
+				L.apply_damage(5, BRUTE, damage_type = BCLASS_CUT)
 			else
 				var/mob/living/carbon/human/H = L
 				if(prob(80))
@@ -741,11 +748,11 @@
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
-						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
+						to_chat(H, span_danger("\A [TH] impales my [BP.name]!"))
 						L.Paralyze(10)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")
+					to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
 					BP.receive_damage(10)
 					L.Immobilize(10)
 
@@ -806,10 +813,10 @@
 		L.Immobilize(5)
 		if(L.m_intent == MOVE_INTENT_WALK)
 			L.Immobilize(5)
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			if(!ishuman(L))
-				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
-				L.apply_damage(5, BRUTE)
+				to_chat(L, span_warning("I'm cut on a thorn!"))
+				L.apply_damage(5, BRUTE, damage_type = BCLASS_CUT)
 				L.Immobilize(5)
 			else
 				var/mob/living/carbon/human/H = L
@@ -819,21 +826,21 @@
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
-						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
+						to_chat(H, span_danger("\A [TH] impales my [BP.name]!"))
 						L.Paralyze(5)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")
+					to_chat(H, span_warning("A thorn [pick("slices","cuts","nicks")] my [BP.name]."))
 					BP.receive_damage(10)
 
 /obj/structure/flora/grass/bush_meagre/attack_hand(mob/living/user)
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, "plantcross", 80, FALSE, -1)
-	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
-	prob2findgoodie = prob2findgoodie + ( user.STALUC * 2 ) + ( user.STAPER * 2 )
-	luckydouble = ( user.STALUC * 2 )
-	user.visible_message(span_noticesmall("[user] searches through [src]."))
+	prob2findstuff = prob2findstuff + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 4 )
+	prob2findgoodie = prob2findgoodie + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) * 2 ) + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 2 )
+	luckydouble = ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) * 2 )
+	user.visible_message(span_smallnotice("[user] searches through [src]."))
 
 	if(do_after(L, rand(5 DECISECONDS, 2 SECONDS), src))
 
@@ -873,7 +880,7 @@
 					return
 
 		else
-			to_chat(user, span_noticesmall("Didn't find anything."))
+			to_chat(user, span_smallnotice("Didn't find anything."))
 	prob2findstuff = 18
 	prob2findgoodie = 15
 	luckydouble	= 3
@@ -885,7 +892,6 @@
 	SET_BASE_PIXEL(-16, -1)
 	num_random_icons = 0
 	silky = TRUE
-
 
 /obj/structure/flora/grass/mushroom
 	name = "leafy mushrooms"
@@ -914,3 +920,7 @@
 	icon_state = "livebush_1"
 	base_icon_state = "livebush_"
 	num_random_icons = 3
+
+#undef SEARCHTIME
+#undef BUSH_PRIMARY_LOOT_CHANCE
+#undef BUSH_BONUS_LOOT_CHANCE

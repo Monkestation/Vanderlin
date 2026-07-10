@@ -1,5 +1,5 @@
 /datum/migrant_role/lich
-	name = "Lich"
+	name = ROLE_LICH
 	antag_datum = /datum/antagonist/lich
 
 /datum/migrant_role/harlequinn
@@ -26,7 +26,7 @@
 	can_roll = FALSE
 
 /datum/migrant_role/advclass/adventurer/werewolf
-	name = "Adventurer"
+	name = JOB_ADVENTURER
 	antag_datum = /datum/antagonist/werewolf
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 15)
 
@@ -38,8 +38,8 @@
 	can_roll = FALSE
 
 /datum/migrant_role/advclass/adventurer/vampire
-	name = "Adventurer"
-	antag_datum = /datum/antagonist/vampire
+	name = JOB_ADVENTURER
+	antag_datum = /datum/antagonist/vampire/outcast
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 15)
 
 /datum/migrant_wave/vampire

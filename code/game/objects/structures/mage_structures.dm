@@ -32,7 +32,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	. = ..()
 	caster = summoner
 
-/obj/structure/door/arcyne/bolt/caster/attack_hand_secondary(mob/user, params)
+/obj/structure/door/arcyne/bolt/caster/attack_hand_secondary(mob/user, list/modifiers)
 	if(user != caster)
 		to_chat(user, span_warning("A magical force prevents me from interacting with [src]!"))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -60,7 +60,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 			invisibility = INVISIBILITY_LEYLINES,
 		)
 
-		RegisterSignal(mana, COMSIG_PARENT_QDELETING, PROC_REF(beam_ended), movable)
+		RegisterSignal(mana, COMSIG_QDELETING, PROC_REF(beam_ended), movable)
 
 		LAZYADD(mana_beams, movable)
 
@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 			invisibility = INVISIBILITY_LEYLINES,
 		)
 
-		RegisterSignal(mana, COMSIG_PARENT_QDELETING, PROC_REF(beam_ended), movable)
+		RegisterSignal(mana, COMSIG_QDELETING, PROC_REF(beam_ended), movable)
 
 		LAZYADD(mana_beams, movable)
 
@@ -126,7 +126,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
 
 
-/obj/structure/well/fountain/mana/attackby(obj/item/I, mob/user, params)
+/obj/structure/well/fountain/mana/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		var/obj/item/reagent_containers/glass/W = I
 		if(W.reagents.holder_full())
@@ -203,7 +203,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	if(last_process + time_between_uses > world.time)
 		to_chat(user, span_notice("The leyline appears to be drained of energy."))
 		return
-	if(!isarcyne(user))
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		if(!active)
 			to_chat(user, span_notice("I wave a hand through the circle of rocks. Nothing happens."))
 			return

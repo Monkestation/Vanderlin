@@ -8,20 +8,22 @@
 	static_price = TRUE
 	sellprice = 20
 	icon = 'icons/roguetown/misc/decoration.dmi'
+	item_weight = 1.5 KILOGRAMS
 	var/deployed_structure = /obj/structure/fluff/walldeco/painting
 
-/obj/item/painting/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isclosedturf(attacked_atom))
-		return ..()
+/obj/item/painting/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isclosedturf(interacting_with))
+		return NONE
 
-	var/direction = get_dir(attacked_atom,user)
+	var/direction = get_dir(interacting_with, user)
 	if(!(direction in GLOB.cardinals))
-		return ..()
+		return NONE
 
-	. = TRUE
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
 	to_chat(user, span_warning("I place [src] on the wall."))
-	if(!do_after(user, 3 SECONDS, attacked_atom))
-		return
+
 	var/obj/structure/S = new deployed_structure(user.loc)
 	switch(direction)
 		if(NORTH)
@@ -32,7 +34,10 @@
 			S.pixel_x = S.base_pixel_x + 32
 		if(EAST)
 			S.pixel_x = S.base_pixel_x - 32
+
 	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/fluff/walldeco/painting
 	name = "painting"
@@ -111,30 +116,3 @@
 	desc = "A painting of a kingly crown resting on a book."
 	icon_state = "crownpainting_deployed"
 	stolen_painting = /obj/item/painting/crown
-
-/obj/structure/fluff/walldeco/painting/lorehead1
-	desc = ""
-	icon_state = "crownpainting_deployed"
-	stolen_painting = /obj/item/painting/lorehead/one
-
-/obj/structure/fluff/walldeco/painting/lorehead1/examine(mob/user)
-	. = ..()
-	if(is_gaffer_job(user.mind.assigned_role))
-		. += "A trophy from my old days as an adventurer" //N/A change this examine text after sprites are made
-	else
-		. += "A trophy"
-
-
-/obj/item/painting/lorehead/one
-	icon_state = "crownpainting"
-	desc = ""
-	sellprice = 40
-	headprice = 5
-	deployed_structure = /obj/structure/fluff/walldeco/painting/crown
-
-/obj/item/painting/lorehead/one/examine(mob/user)
-	. = ..()
-	if(is_gaffer_job(user.mind.assigned_role))
-		. += "A trophy from my old days as an adventurer" //N/A change this examine text after sprites are made
-	else
-		. += "A trophy"

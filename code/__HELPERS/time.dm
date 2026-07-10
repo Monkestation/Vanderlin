@@ -7,8 +7,8 @@
 	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
 
 /proc/time_stamp_metric()
-	var/date_portion = time2text(world.timeofday, "YYYY-MM-DD")
-	var/time_portion = time2text(world.timeofday, "hh:mm:ss")
+	var/date_portion = time2text(world.timeofday, "YYYY-MM-DD", 0)
+	var/time_portion = time2text(world.timeofday, "hh:mm:ss", 0)
 	return "[date_portion]T[time_portion]"
 
 /proc/gameTimestamp(format = "hh:mm:ss", wtime=null)
@@ -32,7 +32,7 @@ GLOBAL_VAR_INIT(dayspassed, FALSE)
 	var/time = station_time()
 	var/oldtod = GLOB.tod
 	if(time >= SSnightshift.nightshift_start_time || time <= SSnightshift.nightshift_dawn_start)
-		GLOB.tod = "night"
+		GLOB.tod = NIGHT
 	if(time > SSnightshift.nightshift_dawn_start && time <= SSnightshift.nightshift_day_start)
 		GLOB.tod = "dawn"
 	if(time > SSnightshift.nightshift_day_start && time <= SSnightshift.nightshift_dusk_start)
@@ -95,7 +95,7 @@ GLOBAL_VAR_INIT(dayspassed, FALSE)
 		addtimer(CALLBACK(src, PROC_REF(clear_area_text), T), 35)
 	else if(GLOB.tod == "day")
 		playsound_local(src, 'sound/misc/midday.ogg', 100, FALSE)
-	else if(GLOB.tod == "night")
+	else if(GLOB.tod == NIGHT)
 		playsound_local(src, 'sound/misc/nightfall.ogg', 100, FALSE)
 
 	var/atom/movable/screen/daynight/D = new()

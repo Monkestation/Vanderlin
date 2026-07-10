@@ -1,7 +1,7 @@
-///// MANOR AREAS //////
+///// KEEP AREAS //////
 
 /area/indoors/town/keep
-	name = "Manor"
+	name = "Keep"
 	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor"
 	background_track = 'sound/music/area/manor.ogg'
@@ -38,6 +38,13 @@
 /area/indoors/town/keep/hand
 	name = "Hand's Room"
 	icon_state = "hand"
+
+/area/indoors/town/keep/courtagent
+	name = "Court Agent's Hideout"
+	icon_state = "court agent"
+	background_track = 'sound/music/area/manorgarri.ogg'
+	background_track_dusk = null
+	background_track_night = null
 
 /area/indoors/town/keep/phys
 	name = "Court Physician's Office"
@@ -156,7 +163,7 @@
 	icon_state = "manorgarri"
 
 /area/indoors/town/keep/gate
-	name = "Manor Gate"
+	name = "Keep Gate"
 	icon_state = "manorgate"
 	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null

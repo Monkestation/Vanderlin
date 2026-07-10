@@ -49,7 +49,7 @@
 	// See repairable component in repairable.dm for what these variables do
 	var/list/repair_thresholds = list(/obj/item/grown/log/tree/small = 1)
 	var/obj/item/broken_repair = /obj/item/grown/log/tree/small
-	var/repair_skill = /datum/skill/craft/carpentry
+	var/repair_skill = /datum/attribute/skill/craft/carpentry
 	metalizer_result = /obj/structure/door/iron
 	/// Handle bolting on right click
 	var/has_bolt = FALSE
@@ -62,8 +62,6 @@
 		warning("[src] at [AREACOORD(src)] has both a deadbolt and a viewport, these will conflict as they both use attack_hand_secondary.")
 	if(has_bolt && lock?.uses_key)
 		warning("[src] at [AREACOORD(src)] has both a deadbolt and a keylock, while this will work it may produce unintended behaviour.")
-	if(isopenturf(loc))
-		RegisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(redirect_attack)) // redirect the attack to the door
 	set_init_layer()
 
 	var/static/list/loc_connections = list(
@@ -74,18 +72,17 @@
 	if(repair_thresholds || broken_repair)
 		AddComponent(/datum/component/repairable, repair_thresholds, broken_repair, 'sound/misc/wood_saw.ogg', repair_skill)
 
+	// Click on the floor to close doors
+	AddComponent(/datum/component/redirect_attack_hand_from_turf)
+
 /obj/structure/door/Destroy()
 	. = ..()
-	UnregisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(redirect_attack))
 
 /obj/structure/door/get_explosion_resistance()
 	if(!door_opened)
 		return max_integrity
 	else
 		return 0
-
-/obj/structure/door/proc/redirect_attack(turf/source, mob/user)
-	attack_hand(user)
 
 /obj/structure/door/proc/set_init_layer()
 	if(density)
@@ -126,12 +123,12 @@
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.STASTR < initial(kickthresh))
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) < initial(kickthresh))
 			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks [src]! It's not effective."), \
 			span_notice("I kick [src]! It's not effective."))
 			return
-		if((prob(L.STASTR * 0.5) || kickthresh-- == 0))
+		if((prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 0.5) || kickthresh-- == 0))
 			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks open [src]!"), \
 				span_notice("I kick open [src]!"))
@@ -149,15 +146,19 @@
 	. = ..()
 	if(.)
 		return
+
 	if(obj_broken || switching_states)
 		return
+
 	if(!locked())
 		return TryToSwitchState(user)
+
 	if(user.used_intent.type == /datum/intent/unarmed/claw)
 		user.changeNext_move(CLICK_CD_MELEE)
 		to_chat(user, span_warning("I claw at [src]"))
 		take_damage(40, BRUTE, BCLASS_CUT, TRUE)
 		return
+
 	if(isliving(user) && world.time > last_bump + 1 SECONDS)
 		last_bump = world.time
 		var/mob/living/L = user
@@ -181,19 +182,29 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user)
-	if(switching_states)
-		return
-	if(I.can_lock_interact())
-		return (..() || attack_hand(user))
-	return ..()
+/// We failed to lock / unlock (signal handled it) so we try to close
+/obj/structure/door/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/structure/door/attack_hand_secondary(mob/user, params)
+	if(switching_states)
+		return NONE
+
+	if(!door_opened || obj_broken)
+		return NONE
+
+	attack_hand(user)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/structure/door/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	if(user.cmode)
 		return SECONDARY_ATTACK_CALL_NORMAL
+
 	user.changeNext_move(CLICK_CD_FAST)
 	if(has_bolt)
 		if(obj_broken)
@@ -204,6 +215,7 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		to_chat(user, span_notice("I can't reach the bolt from this side."))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(has_viewport)
 		if(obj_broken)
 			to_chat(user, span_warning("The viewport is broken!"))
@@ -486,7 +498,7 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 	repair_thresholds = list(/obj/item/ingot/iron = 1)
 	broken_repair = /obj/item/ingot/iron
-	repair_skill = /datum/skill/craft/blacksmithing
+	repair_skill = /datum/attribute/skill/craft/blacksmithing
 	metalizer_result = null
 
 /obj/structure/door/iron/bars
@@ -512,7 +524,7 @@
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
 	broken_repair = /obj/item/natural/stone
-	repair_skill = /datum/skill/craft/masonry
+	repair_skill = /datum/attribute/skill/craft/masonry
 	smeltresult = null
 	metalizer_result = null
 
@@ -532,7 +544,7 @@
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
 	broken_repair = /obj/item/natural/stone
-	repair_skill = /datum/skill/craft/masonry
+	repair_skill = /datum/attribute/skill/craft/masonry
 	smeltresult = null
 	metalizer_result = null
 

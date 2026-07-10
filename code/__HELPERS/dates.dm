@@ -44,4 +44,4 @@
 		m = 4
 	else
 		m = 3
-	return list("day" = d, "month" = m)
+	return list(DAY = d, "month" = m)

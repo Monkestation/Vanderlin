@@ -26,6 +26,21 @@
 	craftdiff = 0
 	subtypes_allowed = TRUE
 
+/datum/repeatable_crafting_recipe/zigarsmoke
+	name = "zigar"
+	output = /obj/item/clothing/face/cigarette/rollie/nicotine/zigar
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/dry_westleach
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/dry_westleach = 1,
+		/obj/item/alch/tobaccodust = 1
+	)
+	attacked_atom = /obj/item/alch/tobaccodust
+	allow_inverse_start = TRUE
+
+	craft_time = 10 SECONDS
+	crafting_message = "starts rolling up a strong zigar"
+	craftdiff = 3
+
 /datum/repeatable_crafting_recipe/canvas
 	name = "canvas"
 	output = /obj/item/canvas
@@ -87,17 +102,6 @@
 	)
 	starting_atom = /obj/item/rope
 	attacked_atom = /obj/item/grown/log/tree/small
-
-/datum/repeatable_crafting_recipe/militarythresher
-	name = "military flail"
-	output = /obj/item/weapon/thresher/military
-	requirements = list(
-		/obj/item/weapon/thresher = 1,
-		/obj/item/ingot/iron = 1
-	)
-	attacked_atom = /obj/item/weapon/thresher
-	starting_atom = /obj/item/ingot/iron
-
 
 /datum/repeatable_crafting_recipe/bee_treatment
 	name = "general bee treatment"

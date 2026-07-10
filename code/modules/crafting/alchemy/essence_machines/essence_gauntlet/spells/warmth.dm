@@ -5,6 +5,7 @@
 	cast_range = 1
 	point_cost = 3
 	attunements = list(/datum/attunement/fire)
+	essences = list(/datum/thaumaturgical_essence/fire)
 
 /datum/action/cooldown/spell/essence/warmth/cast(atom/cast_on)
 	. = ..()
@@ -26,11 +27,11 @@
 
 /datum/status_effect/buff/warmth/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_RESISTCOLD, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_RESISTCOLD, TRAIT_STATUS_EFFECT(id))
 	owner.bodytemperature = max(owner.bodytemperature, BODYTEMP_NORMAL)
 	to_chat(owner, span_notice("A gentle warmth spreads through your body."))
 
 /datum/status_effect/buff/warmth/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_RESISTCOLD, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_RESISTCOLD, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("The magical warmth fades away."))

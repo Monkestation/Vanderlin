@@ -7,8 +7,8 @@
 	invocation_type = INVOCATION_WHISPER
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/dendor)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	cooldown_time = 5 MINUTES
 	spell_cost = 50
 	charge_time = 2 SECONDS
@@ -68,7 +68,6 @@
 	if(!gardener)
 		return
 	gardener.befriend(owner)
-	gardener.owner = owner
 	gardener_ref = WEAKREF(gardener)
 
 /datum/action/cooldown/spell/conjure/garden_fae/Destroy()

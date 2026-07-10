@@ -1,15 +1,19 @@
 
 /datum/antagonist/bandit
-	name = "Bandit"
+	name = ROLE_BANDIT
 	roundend_category = "Bandits"
-	antagpanel_category = "Bandit"
+	antagpanel_category = ROLE_BANDIT
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_BANDIT
-	antag_hud_name = "bandit"
+	antag_hud_name = ROLE_BANDIT
 	var/tri_amt
 	var/contrib
 	antag_flags = FLAG_ANTAG_CAP_IGNORE
-	confess_lines = list("FREEDOM!!!", "I WILL NOT LIVE IN YOUR WALLS!", "I WILL NOT FOLLOW YOUR RULES!")
+	confess_lines = list(
+		"FREEDOM!!!",
+		"I WILL NOT LIVE IN YOUR WALLS!",
+		"I WILL NOT FOLLOW YOUR RULES!",
+	)
 
 	innate_traits = list(
 		TRAIT_BANDITCAMP,
@@ -31,7 +35,7 @@
 			return span_boldnotice("Fellow pardoned free man.")
 
 /datum/antagonist/bandit/on_gain()
-	owner.special_role = "Bandit"
+	owner.special_role = ROLE_BANDIT
 	owner.current?.purge_combat_knowledge()
 	move_to_spawnpoint()
 	owner.current.roll_mob_stats()
@@ -47,7 +51,7 @@
 	H.set_patron(/datum/patron/inhumen/matthios)
 
 /datum/antagonist/bandit/greet()
-	to_chat(owner.current, span_alertsyndie("I am a BANDIT!"))
+	to_chat(owner.current, span_alert("I am a BANDIT!"))
 	to_chat(owner.current, span_info("Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn."))
 	owner.announce_objectives()
 	..()
@@ -63,12 +67,10 @@
 
 /datum/antagonist/bandit/proc/equip_bandit()
 
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
-	for(var/datum/mind/MF in get_minds("Bandit"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
+	owner.forget_and_be_forgotten()
+
+	for(var/datum/mind/found_mind in get_minds(ROLE_BANDIT))
+		owner.share_identities(found_mind)
 
 	return TRUE
 

@@ -11,6 +11,7 @@
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_BACK
 	smeltresult = /obj/item/fertilizer/ash
+	item_weight = 548 GRAMS
 
 /obj/item/broom/apply_components()
 	AddElement(/datum/element/walking_stick)
@@ -50,13 +51,12 @@
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOVABLE_PRE_MOVE)
 
-/obj/item/broom/afterattack(atom/A, mob/user, proximity)
-	. = ..()
-	if(!proximity)
-		return
-	sweep(user, A, show_message = TRUE)
-	return
-	// return . | AFTERATTACK_PROCESSED_ITEM
+/obj/item/broom/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	sweep(user, interacting_with, show_message = TRUE)
+	return ITEM_INTERACT_SUCCESS
 
 /**
  *

@@ -236,7 +236,7 @@
 			color = key_source_list[used_define]
 		if(!color)
 			color = "#FFFFFF"
-		color = sanitize_hexcolor(color, 6, TRUE)
+		color = sanitize_hexcolor(color)
 		color_list += color
 	return color_list_to_string(color_list)
 
@@ -252,7 +252,7 @@
 /proc/color_key_source_list_from_prefs(datum/preferences/prefs)
 	if(istype(prefs))
 		var/list/sources = list()
-		sources[KEY_SKIN_COLOR] = prefs.skin_tone
+		sources[KEY_SKIN_COLOR] = prefs.read_preference(/datum/preference/choiced/skin_tone)
 		sources[KEY_EYE_COLOR] = prefs.get_eye_color()
 		sources[KEY_HAIR_COLOR] = prefs.get_hair_color()
 		sources[KEY_FACE_HAIR_COLOR] = prefs.get_facial_hair_color()

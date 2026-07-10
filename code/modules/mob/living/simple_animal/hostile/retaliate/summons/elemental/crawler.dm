@@ -39,7 +39,6 @@
 	attack_verb_continuous = "pounds"
 	attack_verb_simple = "pounds"
 	dodgetime = 0
-	aggressive = 1
 
 	base_constitution = 13
 	base_endurance = 13

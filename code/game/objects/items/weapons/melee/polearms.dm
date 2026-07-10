@@ -16,18 +16,15 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STRONG
 	minstr = 8
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = null
-	melt_amount = 75 //For the ones it paths to
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	dropshrink = 0.8
-	blade_dulling = DULLING_BASHCHOP
 	thrown_bclass = BCLASS_STAB
 	grid_height = 96
 	grid_width = 64
 	sellprice = 20
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/polearm/Initialize()
 	. = ..()
@@ -50,16 +47,17 @@
 	icon_state = "woodstaff"
 	force =  DAMAGE_STAFF
 	force_wielded =  DAMAGE_STAFF_WIELD - 1
-	wdefense = ULTMATE_PARRY
+	wdefense = GREAT_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
-
+	smeltresult = /obj/item/fertilizer/ash
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_BLUNT
 	sellprice = 5
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/woodstaff/getonmobprop(tag)
 	. = ..()
@@ -78,8 +76,9 @@
 	desc = "A staff that makes any journey easier. Durable and swift, capable of bludgeoning stray volves and ruffians alike."
 	icon_state = "quarterstaff"
 	force_wielded =  DAMAGE_STAFF_WIELD
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STRONG * 0.8
 	sellprice = 10
+	item_weight = 1.2 KILOGRAMS
 
 //................ Iron-shod Staff ............... //
 /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
@@ -89,6 +88,10 @@
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
+	item_weight = 1.8 KILOGRAMS
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 75
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
 	name = "steel quarterstaff"
@@ -98,16 +101,27 @@
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 7
+	item_weight = 2.2 KILOGRAMS
+	smeltresult = null
+	melting_material = /datum/material/steel
+	melt_amount = 75
 
-//................ Staff of the Testimonium ............... //
-/obj/item/weapon/polearm/woodstaff/aries
-	name = "staff of the testimonium"
-	desc = "A symbolic staff, granted to enlightened acolytes who have achieved and bear witnessed to the miracles of the Gods."
-	icon_state = "aries"
+/obj/item/weapon/polearm/woodstaff/quarterstaff/silver
+	name = "silver quarterstaff"
+	desc = "A quarterstaff with silver reinforcements, more effective against supernatural foes than a steel quarterstaff."
+	icon_state = "quarterstaff_silver"
 	force_wielded =  DAMAGE_STAFF_WIELD + 1
-	resistance_flags = FIRE_PROOF // Leniency for unique items
-	dropshrink = 0.6
-	sellprice = 100
+	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 7
+	item_weight = 2.2 KILOGRAMS
+	smeltresult = null
+	melting_material = /datum/material/silver
+	melt_amount = 75
+
+/obj/item/weapon/polearm/woodstaff/quarterstaff/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
@@ -115,25 +129,27 @@
 	icon_state = "seerstaff"
 	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	sellprice = 100
+	item_weight = 1.2 KILOGRAMS
 
 //................ Spear ............... //
 /obj/item/weapon/polearm/spear
 	name = "spear"
 	desc = "The humble spear, use the pointy end."
 	icon_state = "spear"
-	force = DAMAGE_SPEAR
+	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD
 	throwforce = DAMAGE_SPEAR
+	wbalance = GOOD_PARRY
 	possible_item_intents = list(SPEAR_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_BASH)
-	max_blade_int = 100
+	max_blade_int = 150
 
 	slot_flags = ITEM_SLOT_BACK
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	dropshrink = 0.8
 	thrown_bclass = BCLASS_STAB
 	sellprice = 22
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/getonmobprop(tag)
 	. = ..()
@@ -145,27 +161,57 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
 
+/obj/item/weapon/polearm/spear/steel
+	name = "steel spear"
+	desc = "A spear with a steel head, more durable and effective than a simple iron spear."
+	icon_state = "spear_sk"
+	force = DAMAGE_SPEARPLUS + 2
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	wbalance = GREAT_PARRY
+	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 200
+	smeltresult = /obj/item/ingot/steel_slag
+	sellprice = 40
+	item_weight = 2.7 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/steel/partizan
+	name = "partizan"
+	desc = "A spear with a heavy steel head, designed for stabbing and chopping."
+	icon_state = "partizan"
+	force = DAMAGE_SPEARPLUS + 3
+	force_wielded = DAMAGE_SPEAR_WIELD + 5
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST * 1.25
+	sellprice = 50
+
+/obj/item/weapon/polearm/spear/silver
+	name = "silver spear"
+	desc = "A spear with a silver head, more effective against supernatural foes than a steel spear."
+	icon_state = "silverspear"
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_SPEAR_WIELD
+	wbalance = GREAT_PARRY
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_blade_int = 200
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 60
+	item_weight = 2.7 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/weapon/polearm/spear/abyssor
 	name = "depthseeker"
 	desc = "An instrument of Abyssor's wrath to punish the ignorant."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "gsspear"
+	force = DAMAGE_SPEARPLUS + 2
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	throwforce = DAMAGE_SPEAR_WIELD
-
-/obj/item/weapon/polearm/spear/assegai
-	name = "iron assegai"
-	desc = "A long spear originating from the east."
-	icon = 'icons/roguetown/weapons/64/polearms.dmi'
-	icon_state = "assegai_iron"
-	throwforce = DAMAGE_SPEAR_WIELD
-	gripsprite = FALSE
-
-/obj/item/weapon/polearm/spear/steel/assegai
-	name = "steel assegai"
-	icon = 'icons/roguetown/weapons/64/polearms.dmi'
-	icon_state = "assegai_steel"
-	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	max_blade_int = 200
+	smeltresult = /obj/item/ingot/steel_slag
+	item_weight = 2.7 KILOGRAMS
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -174,16 +220,23 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyspear"
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	wdefense = AVERAGE_PARRY
-	wbalance = EASY_TO_DODGE
-	max_integrity = INTEGRITY_STRONG
+	force = DAMAGE_SPEARPLUS + 2
 	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
 	sellprice = 60
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/psydon/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/spear/psydon/noblessing
+	item_weight = 2.5 KILOGRAMS
+
+//gives this spear the generic blessing the other Psydonic weapons get
+/obj/item/weapon/polearm/spear/psydon/noblessing/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/polearm/spear/psydon/getonmobprop(tag)
 	. = ..()
@@ -200,46 +253,49 @@
 	name = "billhook"
 	desc = "A polearm with a curved krag, a Valorian design for dismounting mounted warriors and to strike down monstrous beasts."
 	icon_state = "billhook"
-	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
-	max_blade_int = 100
-	max_integrity = INTEGRITY_STRONG
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 60
+	item_weight = 3 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/billhook/ji
 	name = "steel dagger-ax"
 	desc = "An eastern polearm of ancient design. It's rarely seen on the battlefield these daes."
 	icon_state = "ji_steel"
-	wdefense = GOOD_PARRY
 	gripsprite = FALSE
+	item_weight = 3 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/billhook/ji/iron
 	name = "iron dagger-ax"
 	icon_state = "ji_iron"
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR_WIELD - 2
 	max_integrity = INTEGRITY_STANDARD
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	max_blade_int = 150
+	smeltresult = /obj/item/ingot/iron
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/billhook/ji/bronze
 	name = "bronze dagger-ax"
 	icon_state = "ji_bronze"
-	max_integrity = INTEGRITY_STANDARD
-	max_blade_int = 95
-	melting_material = /datum/material/bronze
-	melt_amount = 75
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	wdefense = GOOD_PARRY
+	max_integrity = INTEGRITY_POOR
+	max_blade_int = 100
+	smeltresult = /obj/item/ingot/bronze
+	item_weight = 2.5 KILOGRAMS
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
 	name = "simple spear"
-	desc = "With this weapon, the tribes of humenity became the chosen people of Psydon."
+	desc = "One of the first weapons wielded by humenity, still as versatile now as it was then."
 	icon_state = "stonespear"
-	force = DAMAGE_SPEAR
+	force = DAMAGE_SPEAR - 2
 	force_wielded = DAMAGE_SPEAR + 2
 	throwforce = DAMAGE_SPEAR
 	wdefense = AVERAGE_PARRY
@@ -250,26 +306,170 @@
 
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 0
 	dropshrink = 0.7
 	sellprice = 5
+	item_weight = 1.5 KILOGRAMS
 
 //................ Javelin ............... //
-/obj/item/weapon/polearm/spear/stone/copper
-	name = "javelin"
+/obj/item/weapon/polearm/spear/assegai
+	name = "iron assegai"
+	desc = "A long throwing spear originating from the east."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "assegai_iron"
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEARPLUS + 2
+	throwforce = DAMAGE_SPEAR_WIELD
+	wbalance = GOOD_PARRY
+	wlength = WLENGTH_LONG
+	minstr = 6
+
+	gripsprite = FALSE
+	throw_speed = 2
+	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+	item_weight = 1.5 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/assegai/steel
+	name = "steel assegai"
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "assegai_steel"
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	wbalance = GREAT_PARRY
+	max_blade_int = 200
+
+	gripsprite = FALSE
+	smeltresult = /obj/item/ingot/steel_slag
+	item_weight = 1.8 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/javelin
+	name = "copper javelin"
 	desc = "Made for throwing, long out of favor and using inferior metals, it still can kill when the aim is true."
 	icon_state = "cspear"
+	force = DAMAGE_SPEAR - 2
+	force_wielded = DAMAGE_SPEAR + 2
+	wdefense = AVERAGE_PARRY
+	wlength = WLENGTH_LONG
+	max_blade_int = 50
+	max_integrity = INTEGRITY_WORST
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 70
 	max_integrity = INTEGRITY_POOR
-	minstr = 7
 	melting_material = /datum/material/copper
 	melt_amount = 75
 	dropshrink = 0.9
 	sellprice = 15
 	throw_speed = 3
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+	item_weight = 900 GRAMS
 
-/obj/item/weapon/polearm/spear/stone/copper/getonmobprop(tag)
+/obj/item/weapon/polearm/spear/javelin/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.7,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.7,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+
+/obj/item/weapon/polearm/spear/javelin/iron
+	name = "iron javelin"
+	desc = "Heavier than a copper javelin, best suited for hunting beasts."
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "ijavelin"
+	gripsprite = FALSE
+	force = DAMAGE_SPEAR - 1
+	force_wielded = DAMAGE_SPEAR + 3
+	melting_material = /datum/material/iron
+	melt_amount = 75
+	throwforce = DAMAGE_SPEAR_WIELD + 5
+	max_blade_int = 80
+	max_integrity = INTEGRITY_STANDARD
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 60, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+
+/obj/item/weapon/polearm/spear/javelin/steel
+	name = "steel javelin"
+	desc = "A sturdy javelin made from steel, suitable to hunt knightly foes."
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "javelin"
+	melting_material = /datum/material/steel
+	melt_amount = 75
+	throwforce = DAMAGE_SPEAR_WIELD + 10
+	gripsprite = FALSE
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR + 3
+	max_blade_int = 100
+	max_integrity = INTEGRITY_STANDARD * 1.25
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 75, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+
+/obj/item/weapon/polearm/spear/javelin/silver
+	name = "silver javelin"
+	desc = "A sturdy javelin made from silver, suitable to hunt supernatural foes."
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "sjavelin"
+	gripsprite = FALSE
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_SPEAR + 3
+	melting_material = /datum/material/silver
+	melt_amount = 75
+	throwforce = DAMAGE_SPEAR_WIELD + 8
+	max_blade_int = 100
+	max_integrity = INTEGRITY_STANDARD * 0.8
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 70, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+
+/obj/item/weapon/polearm/spear/javelin/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/spear/bone
+	name = "bone javelin"
+	desc = "Made by the tribes of the wilds for hunting, this spear has will eventually kill your prey, if aim remains true."
+	icon_state = "bspear"
+	throwforce = DAMAGE_SPEAR_WIELD
+	max_blade_int = 60
+	max_integrity = INTEGRITY_POOR
+	minstr = 6
+	anvilrepair = /datum/attribute/skill/craft/crafting
+	dropshrink = 0.9
+	sellprice = 5
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+	item_weight = 900 GRAMS
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
+	melt_amount = 0
+
+/obj/item/weapon/polearm/spear/bone/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.7,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.7,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+
+/obj/item/weapon/polearm/spear/trollbone
+	name = "troll-horn bone javelin"
+	desc = "Made by the tribes of the wilds for hunting, and strengthed with a troll's horn, this spear has will outlast your prey, if aim remains true."
+	icon_state = "bspear"
+	throwforce = DAMAGE_SPEAR_WIELD
+	max_blade_int = 60
+	max_integrity = INTEGRITY_POOR
+	minstr = 6
+	anvilrepair = /datum/attribute/skill/craft/crafting
+	dropshrink = 0.9
+	sellprice = 5
+	throw_speed = 4
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+	item_weight = 900 GRAMS
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
+	melt_amount = 0
+
+/obj/item/weapon/polearm/spear/trollbone/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -286,7 +486,6 @@
 	icon_state = "halberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
-	wdefense = ULTMATE_PARRY
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
@@ -297,9 +496,30 @@
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.8
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/silver
+	name = "silver halberd"
+	desc = "A halberd forged from silver, laying low the beasts of the nite."
+	icon = 'icons/roguetown/weapons/64/axes.dmi'
+	icon_state = "silverhalberd"
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_HALBERD_WIELD
+	wbalance = EASY_TO_DODGE
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_blade_int = 300
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 120
+
+/obj/item/weapon/polearm/halberd/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()
@@ -311,6 +531,71 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+//................ Psydonian Halberd ............... //
+/obj/item/weapon/polearm/halberd/psydon
+	name = "psydonian halberd"
+	desc = "A mighty halberd capable of cutting down the heretical with remarkable ease, be it effigy, man, or beast."
+	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
+	icon_state = "psyhalberd"
+	swingsound = BLADEWOOSH_MED
+	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
+	axe_cut = 10
+	resistance_flags = FIRE_PROOF
+	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 100
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/psydon/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
+
+/obj/item/weapon/polearm/halberd/psydon/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/halberd/psydon/relic
+	name = "\proper sanctum"
+	desc = "These silver-tipped polearms are the bulwark of the Ordo Venatari, borrowing techniques from the Ordo Benetarus. During the early sieges, the Ordos used these to hold the horrors at bay for forty days-and-nites. A time always comes to fight - strike true."
+	icon_state = "psyhalberd"
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 1, TRUE)
+
+//................ Bardiche ............... //
+/obj/item/weapon/polearm/halberd/bardiche
+	name = "bardiche"
+	desc = "A grand axe of northernly design, renowned for easily chopping off limbs clean with brutal strength."
+	icon_state = "bardiche"
+	force = DAMAGE_AXE
+	force_wielded = DAMAGE_HEAVYAXE_WIELD
+	wdefense = AVERAGE_PARRY
+	wbalance = VERY_EASY_TO_DODGE
+	possible_item_intents = list(AXE_CUT)
+	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SPEAR_THRUST)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
+	minstr = 11
+
+	swingsound = BLADEWOOSH_MED
+	dropshrink = 0.95
+	axe_cut = 10
+	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 140
+	sellprice = 30
+	item_weight = 4 KILOGRAMS
 
 //originally in the axes.dm file, moved here because they inherit from the bardiche
 //................ Woodcutter Axe ............... //
@@ -327,12 +612,15 @@
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/axesmaces //It's ultimately a massive axe
+	associated_skill = /datum/attribute/skill/combat/axesmaces //It's ultimately a massive axe
 	dropshrink = 0.95
 	axe_cut = 15
-	melting_material = /datum/material/iron
+	smeltresult = null
 	melt_amount = 75
 	sellprice = 20
+	item_weight = 3 KILOGRAMS
+
+	weapon_special = /datum/special_intent/axe_swing
 
 /obj/item/weapon/woodchopper/getonmobprop(tag)
 	. = ..()
@@ -345,6 +633,24 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
+/obj/item/weapon/polearm/halberd/bardiche/woodcutter/steel
+	name = "felling axe"
+	desc = "This is not just a tool, weapon, or loyal companion. It is a true feller of wood, able to drop the mightiest of the trees and beasts."
+	icon_state = "swoodcutter"
+	force = DAMAGE_AXE + 2
+	wlength = WLENGTH_LONG
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST
+	minstr = 9
+
+	axe_cut = 15
+	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
+	melt_amount = 75
+	sellprice = 50
+	item_weight = 4 KILOGRAMS
+
+	weapon_special = /datum/special_intent/axe_swing
 
 //................ War Axe ............... //
 //attempting to fix transformation issues//it worked wohoo, don't touch it.
@@ -363,12 +669,12 @@
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	dropshrink = 0.95
 	axe_cut = 15
-	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 20
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/bardiche/warcutter/getonmobprop(tag)
 	. = ..()
@@ -381,66 +687,6 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-
-//................ Psydonian Halberd ............... //
-/obj/item/weapon/polearm/halberd/psydon
-	name = "psydonian halberd"
-	desc = "A mighty halberd capable of cutting down the heretical with remarkable ease, be it effigy, man, or beast."
-	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
-	icon_state = "psyhalberd"
-	swingsound = BLADEWOOSH_MED
-	max_blade_int = 250
-	max_integrity = INTEGRITY_STRONG
-	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
-	axe_cut = 10
-	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/silver
-	melt_amount = 150
-	sellprice = 100
-
-/obj/item/weapon/polearm/halberd/psydon/Initialize(mapload)
-	. = ..()
-	enchant(/datum/enchantment/silver)
-	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
-
-/obj/item/weapon/polearm/halberd/psydon/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.6,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("wielded")
-				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
-			if("onbelt")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
-
-/obj/item/weapon/polearm/halberd/psydon/relic
-	name = "Sanctum"
-	desc = "These silver-tipped polearms are the bulwark of the Ordo Venatari, borrowing techniques from the Ordo Benetarus. During the early sieges, the Ordos used these to hold the horrors at bay for forty days-and-nites. A time always comes to fight - strike true."
-	icon_state = "psyhalberd"
-
-//................ Bardiche ............... //
-/obj/item/weapon/polearm/halberd/bardiche
-	name = "bardiche"
-	desc = "A grand axe of northernly design, renowned for easily chopping off limbs clean with brutal strength."
-	icon_state = "bardiche"
-	force = DAMAGE_AXE
-	force_wielded = DAMAGE_AXE_WIELD
-	wdefense = AVERAGE_PARRY
-	wbalance = VERY_EASY_TO_DODGE
-	possible_item_intents = list(AXE_CUT)
-	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST)
-	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	minstr = 11
-
-	swingsound = BLADEWOOSH_MED
-	dropshrink = 0.95
-	axe_cut = 10
-	melting_material = /datum/material/iron
-	melt_amount = 140
-	sellprice = 30
-
 /obj/item/weapon/polearm/halberd/bardiche/ancient
 	name = "bardiche"
 	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
@@ -451,7 +697,28 @@
 	desc = "Summer's verdancy runs through the head of this scythe. All the more to sow."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "dendorscythe"
-	gripped_intents = list(POLEARM_THRUST, SCYTHE_CUT, SCYTHE_CHOP, POLEARM_BASH)
+	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/bardiche/captain
+	name = "\proper deliverance"
+	desc = "A glaive decorated with gold forged for the Captain alongside their armor. To deliver justice with every wide swing."
+	sellprice = 200
+	icon_state = "capglaive"
+	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/polearm/halberd/bardiche/glaive
+	name = "steel glaive"
+	desc = "A uniquely designed polearm, modeled after Deliverance. Excellent for chopping down your foes."
+	icon_state = "glaive"
+	force = DAMAGE_AXE + 2
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 150
 
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
@@ -460,6 +727,7 @@
 	icon_state = "eaglebeak"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR_WIELD
+	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
 	possible_item_intents = list(POLEARM_BASH, POLEARM_CHOP) //bash is for nonlethal takedowns, only targets limbs
@@ -470,9 +738,13 @@
 
 	slot_flags = ITEM_SLOT_BACK
 	dropshrink = 0.8
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
+	item_weight = 4 KILOGRAMS
+
+	weapon_special = /datum/special_intent/ground_smash
 
 /obj/item/weapon/polearm/eaglebeak/getonmobprop(tag)
 	. = ..()
@@ -493,49 +765,47 @@
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
 	max_integrity = INTEGRITY_STRONG
+	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 40
+	item_weight = 4 KILOGRAMS
 
 //................ Hoplite Spear ............... //
 /obj/item/weapon/polearm/spear/hoplite
 	name = "ancient spear"
 	desc = "A humble spear with a bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear"
-	force = DAMAGE_SPEARPLUS
-	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONG
-	melting_material = /datum/material/bronze
-	melt_amount = 75
+	max_blade_int = 200
+	smeltresult = /obj/item/ingot/bronze
 	sellprice = 120 // A noble collector would love to get his/her hands on one of these spears
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/hoplite/winged // Winged version has +1 weapon defence and sells for a bit more, but is identical otherwise
 	name = "ancient winged spear"
 	desc = "A spear with a winged bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear_winged"
-	wdefense = ULTMATE_PARRY
 	sellprice = 150 // A noble collector would love to get his/her hands on one of these spears
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/hoplite/abyssal
-	name = "Abyssal spear"
+	name = "abyssal spear"
 	desc = "A spear with a toothed end, inspired after the teeth of an abyssal monstrosity"
 	icon = 'icons/roguetown/weapons/64/ancient.dmi'
 	icon_state = "ancient_spear"
-	wdefense = ULTMATE_PARRY
 	sellprice = 40
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/bronze
-	name = "Bronze Spear"
+	name = "bronze spear"
 	desc = "A spear forged of bronze. Expensive but more durable than a regular iron one."
 	icon_state = "bronzespear"
-	force = DAMAGE_SPEARPLUS + 2
 	max_blade_int = 200
-	melting_material = /datum/material/bronze
-	melt_amount = 75
-
+	smeltresult = /obj/item/ingot/bronze
+	item_weight = 2.5 KILOGRAMS
 
 //scythe
-/obj/item/weapon/sickle/scythe
+/obj/item/weapon/sickle/scythe //This is supposed to be bad
 	name = "scythe"
 	desc = "A humble farming tool with long reach, traditionally used to cut grass or wheat."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
@@ -547,7 +817,7 @@
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SPEAR_CUT) //truly just a long knife
 	gripped_intents = list(SPEAR_CUT)
-	max_blade_int = 100
+	max_blade_int = 150
 	max_integrity = INTEGRITY_STRONG
 	minstr = 5
 
@@ -559,13 +829,12 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.75
-	blade_dulling = DULLING_BASHCHOP
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	sellprice = 10
+	item_weight = 3 KILOGRAMS
 
 /obj/item/weapon/sickle/scythe/Initialize()
 	. = ..()
@@ -579,8 +848,9 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	throwforce = DAMAGE_SPEARPLUS + 2
-	max_blade_int = 70
-	max_integrity = INTEGRITY_WORST - 40
+	anvilrepair = /datum/attribute/skill/craft/crafting
+	max_blade_int = 75
+	max_integrity = INTEGRITY_WORST * 0.8
 	minstr = 6
 
 	inhand_x_dimension = 64
@@ -588,25 +858,47 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
+	smeltresult = null
 	melting_material = null
-	blade_dulling = DULLING_BASHCHOP
+	melt_amount = 0
+	item_weight = 1.5 KILOGRAMS
 
-/obj/item/weapon/spear/naginata
-	name = "Naginata"
+/obj/item/weapon/polearm/spear/trollbonespear
+	name = "troll-horn bone spear"
+	desc = "A spear made of bones, strengthed with an troll's horn."
+	// icon_state = "bonespear"
+	icon_state = "stonespear_sk"
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	throwforce = DAMAGE_SPEARPLUS + 2
+	anvilrepair = /datum/attribute/skill/craft/crafting
+	max_blade_int = 125
+	max_integrity = INTEGRITY_WORST * 0.8 + 50
+	minstr = 6
+
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	bigboy = TRUE
+	gripsprite = TRUE
+	w_class = WEIGHT_CLASS_BULKY
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
+
+/obj/item/weapon/polearm/spear/naginata
+	name = "naginata"
 	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "naginata"
-	force = DAMAGE_SPEAR + 1
-	force_wielded = DAMAGE_SPEAR_WIELD + 5
+	force_wielded = DAMAGE_SPEAR_WIELD + 3
 	throwforce = DAMAGE_SPEAR - 3
-	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(NAGI_CUT, POLEARM_BASH) // no stab for you little chuddy, it's a slashing weapon
 	gripped_intents = list(NAGI_REND, NAGI_CUT, POLEARM_BASH)
-	max_blade_int = 50 //Nippon suteeru (dogshit)
+	max_blade_int = 100 //Nippon suteeru (dogshit)
 	minstr = 7
-	blade_dulling = DULLING_BASHCHOP
+	item_weight = 2 KILOGRAMS
 
-/obj/item/weapon/spear/naginata/getonmobprop(tag)
+/obj/item/weapon/polearm/spear/naginata/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -615,16 +907,16 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 4,"sy" = -2,"nx" = -3,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-
 /obj/item/weapon/polearm/woodstaff/naledi
 	name = "psydonian warstaff"
 	desc = "A staff carrying the black and gold insignia of the war scholars."
 	icon_state = "naledistaff"
 	force = DAMAGE_SPEARPLUS
-	force_wielded = DAMAGE_SPEAR_WIELD - 3
+	force_wielded = DAMAGE_SPEAR_WIELD
 	possible_item_intents = list(POLEARM_BASH)
-	gripped_intents = list(POLEARM_BASHRNG, MACE_WDRANGE)
-	max_integrity = INTEGRITY_STANDARD + 50
+	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
 	. = ..()

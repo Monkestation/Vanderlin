@@ -47,12 +47,11 @@
 #define DISABLE_RUNECHAT (1<<0)
 #define DISABLE_HOVER_TEXT (1<<1)
 #define DISABLE_BALLOON_ALERTS (1<<3)
+#define DISABLE_BALLOON_COMBAT (1<<4)
+#define DISABLE_BALLOON_EXP (1<<5)
 
-#define PARALLAX_INSANE -1 //for show offs
-#define PARALLAX_HIGH    0 //default.
-#define PARALLAX_MED     1
-#define PARALLAX_LOW     2
-#define PARALLAX_DISABLE 3 //this option must be the highest number
+// Gameplay toggles :(
+#define DISABLE_SPLIT_PERSONALITY (1<<0)
 
 #define PIXEL_SCALING_AUTO 0
 #define PIXEL_SCALING_1X 1
@@ -165,11 +164,14 @@
 
 // Voice types
 
-#define VOICE_TYPE_MASC		"Masculine"
-#define VOICE_TYPE_FEM		"Feminine"
+#define VOICE_TYPE_MASC		"Masculine (Species)"
+#define VOICE_TYPE_MASC_FOP "Masculine (Humen, Foppish)"
+#define VOICE_TYPE_FEM		"Feminine (Species)"
+#define VOICE_TYPE_FEM_DAINTY "Feminine (Humen, Dainty)"
+#define VOICE_TYPE_FEM_HAUGHTY "Feminine (Humen, Haughty)"
 #define VOICE_TYPE_ANDRO	"Androgynous"
 
-#define VOICE_TYPES_LIST list(VOICE_TYPE_MASC, VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)
+#define VOICE_TYPES_LIST list(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP, VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
 
 #define VOICE_TYPES_MASCANDRO list(VOICE_TYPE_MASC, VOICE_TYPE_ANDRO)
 #define VOICE_TYPES_FEMANDRO list(VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)
@@ -185,15 +187,17 @@
 #define ALIGNMENT_NE		"Neutral Evil"
 #define ALIGNMENT_CE		"Chaotic Evil"
 
-#define ALL_ALIGNMENTS_LIST list(ALIGNMENT_LG,\
-							ALIGNMENT_NG,\
-							ALIGNMENT_CG,\
-							ALIGNMENT_LN,\
-							ALIGNMENT_TN,\
-							ALIGNMENT_CN,\
-							ALIGNMENT_LE,\
-							ALIGNMENT_NE,\
-							ALIGNMENT_CE)
+#define ALL_ALIGNMENTS_LIST list(\
+	ALIGNMENT_LG,\
+	ALIGNMENT_NG,\
+	ALIGNMENT_CG,\
+	ALIGNMENT_LN,\
+	ALIGNMENT_TN,\
+	ALIGNMENT_CN,\
+	ALIGNMENT_LE,\
+	ALIGNMENT_NE,\
+	ALIGNMENT_CE,\
+)
 
 #define UI_PREFERENCE_LIGHT_MODE "light mode"
 #define UI_PREFERENCE_DARK_MODE "dark mode"
@@ -214,3 +218,54 @@ DEFINE_BITFIELD(toggles_maptext, list(
 	//"Disable hover text" = DISABLE_HOVER_TEXT,
 	"Disable runechat" = DISABLE_RUNECHAT,
 ))
+
+DEFINE_BITFIELD(toggles_gameplay, list(
+	"Disable random split personality" = DISABLE_SPLIT_PERSONALITY,
+))
+
+
+
+/// Species applies first so external organs / bodyparts can reference it.
+#define PREF_PRIORITY_SPECIES 1
+
+/// Bodypart-related prefs (head_flags etc.) apply after species.
+#define PREF_PRIORITY_BODYPARTS 2
+
+/// Gender is resolved before names so randomisation is sex-aware.
+#define PREF_PRIORITY_GENDER 3
+
+/// Body type after gender so "use gender" option works.
+#define PREF_PRIORITY_BODY_TYPE 4
+
+/// Names are resolved last among character prefs.
+#define PREF_PRIORITY_NAMES 5
+
+/// Modifications that adjust the name chosen by PREF_PRIORITY_NAMES.
+#define PREF_PRIORITY_NAME_MODS 6
+
+// Priorities must be in order!
+/// The default priority level
+#define PREF_PRIORITY_DEFAULT 7
+
+/// Keep this equal to the highest priority above.
+#define MAX_PREF_PRIORITY PREF_PRIORITY_DEFAULT
+
+// ---- Savefile identifier tokens ----
+/// This preference is stored per-character (under /character[N]).
+#define PREF_CHARACTER "character"
+/// This preference is stored per-player (under /).
+#define PREF_PLAYER "player"
+
+
+#define ROLE_SETTING_LIST_PICK "picker"
+#define ROLE_SETTING_TEXT "freetext"
+
+#define MAX_RUMORS 5
+#define MAX_NOBLE_GOSSIP 5
+#define MAX_GOSSIP_LENGTH 250
+/// The non gender specific list that we get from init_sprite_accessory_subtypes()
+#define DEFAULT_SPRITE_LIST "default_sprites"
+/// The male specific list that we get from init_sprite_accessory_subtypes()
+#define MALE_SPRITE_LIST "male_sprites"
+/// The female specific list that we get from init_sprite_accessory_subtypes()
+#define FEMALE_SPRITE_LIST "female_sprites"

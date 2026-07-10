@@ -125,7 +125,6 @@
 	icon = 'icons/turf/smooth/walls/stone_brick.dmi'
 	icon_state = MAP_SWITCH("stone_brick", "stone_brick-0")
 
-	wallclimb = FALSE
 	blade_dulling = DULLING_BASH
 	max_integrity = 1500
 	sheet_type = /obj/item/natural/stone
@@ -183,7 +182,7 @@
 	icon_state = "wood"
 	opacity = FALSE
 	max_integrity = 550
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE
 
 /turf/closed/wall/mineral/wood/window/Initialize()
 	. = ..()
@@ -256,14 +255,14 @@
 	icon_state = "subwindow"
 	opacity = FALSE
 	explosion_block = 1
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE
 
 /turf/closed/wall/mineral/wooddark/window/OnCrafted(dirin, mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 	return
 
 /turf/closed/wall/mineral/roofwall
@@ -347,7 +346,7 @@
 	name = "stone wall"
 	icon = 'icons/turf/walls.dmi'
 	resistance_flags = INDESTRUCTIBLE
-	opacity = 0
+	opacity = FALSE
 	icon_state = "decostone-l"
 
 /turf/closed/wall/mineral/decostone/center

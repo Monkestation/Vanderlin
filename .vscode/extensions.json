@@ -2,9 +2,9 @@
 	"recommendations": [
 		"platymuus.dm-langclient",
 		"EditorConfig.EditorConfig",
-		"dbaeumer.vscode-eslint",
 		"stylemistake.auto-comment-blocks",
 		"anturk.dmi-editor",
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+		"biomejs.biome"
 	]
 }

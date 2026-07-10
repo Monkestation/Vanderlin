@@ -141,7 +141,7 @@
 					<option value='SECOND'[poll?.interval == "SECOND" ? " selected" : ""]>Seconds</option>
 					<option value='MINUTE'[poll?.interval == "MINUTE" ? " selected" : ""]>Minutes</option>
 					<option value='HOUR'[poll?.interval == "HOUR" ? " selected" : ""]>Hours</option>
-					<option value='DAY'[(!poll?.interval || poll?.interval == "DAY") ? " selected" : ""]>Days</option>
+					<option value='DAY'[(!poll?.interval || poll?.interval == DAY) ? " selected" : ""]>Days</option>
 					<option value='WEEK'[poll?.interval == "WEEK" ? " selected" : ""]>Weeks</option>
 					<option value='MONTH'[poll?.interval == "MONTH" ? " selected" : ""]>Months</option>
 					<option value='YEAR'[poll?.interval == "YEAR" ? " selected" : ""]>Years</option>
@@ -227,8 +227,7 @@
 					output += "<hr style='background:#000000; border:0; height:3px'>"
 	var/datum/browser/panel = new(usr, "pmpanel", "Poll Management Panel", 780, 640)
 	panel.add_stylesheet("admin_panelscss", 'html/admin/admin_panels.css')
-	if(usr.client.prefs.tgui_fancy) //some browsers (IE8) have trouble with unsupported css3 elements that break the panel's functionality, so we won't load those if a user is in no frills tgui mode since that's for similar compatability support
-		panel.add_stylesheet("admin_panelscss3", 'html/admin/admin_panels_css3.css')
+	panel.add_stylesheet("admin_panelscss3", 'html/admin/admin_panels_css3.css')
 	panel.set_content(jointext(output, ""))
 	panel.open()
 
@@ -389,7 +388,7 @@
 	var/admin_ip = usr.client.address
 
 	var/end_datetime_sql
-	if (interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR"))
+	if (interval in list("SECOND", "MINUTE", "HOUR", DAY, "WEEK", "MONTH", "YEAR"))
 		end_datetime_sql = "NOW() + INTERVAL :duration [interval]"
 	else
 		end_datetime_sql = ":duration"
@@ -523,8 +522,7 @@
 		panel_height = 320
 	var/datum/browser/panel = new(usr, "popanel", "Poll Option Panel", 370, panel_height)
 	panel.add_stylesheet("admin_panelscss", 'html/admin/admin_panels.css')
-	if(usr.client.prefs.tgui_fancy) //some browsers (IE8) have trouble with unsupported css3 elements that break the panel's functionality, so we won't load those if a user is in no frills tgui mode since that's for similar compatability support
-		panel.add_stylesheet("admin_panelscss3", 'html/admin/admin_panels_css3.css')
+	panel.add_stylesheet("admin_panelscss3", 'html/admin/admin_panels_css3.css')
 	panel.set_content(jointext(output, ""))
 	panel.open()
 

@@ -136,7 +136,7 @@
 	budget2change(budget)
 	set_light(0)
 
-/obj/structure/fake_machine/merchantvend/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/merchantvend/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		var/money = I.get_real_price()
 		budget += money
@@ -167,12 +167,15 @@
 		if(budget >= final_price)
 			budget -= final_price
 			record_round_statistic(STATS_GOLDFACE_VALUE_SPENT, final_price)
+			add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_GOLDFACE_SPENT, final_price)
 			if(!(upgrade_flags & UPGRADE_NOTAX))
 				SStreasury.give_money_treasury(taxes, "goldface import tax")
 				record_featured_stat(FEATURED_STATS_TAX_PAYERS, human_mob, taxes)
 				record_round_statistic(STATS_TAXES_COLLECTED, taxes)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TAXES_COLLECTED, taxes)
 			else
 				record_round_statistic(STATS_TAXES_EVADED, taxes)
+				add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_TAXES_EVADED, taxes)
 		else
 			say("Not enough!")
 			return
@@ -231,7 +234,7 @@
 	contents += "<a href='byond://?src=[REF(src)];change=1'>MAMMON LOADED:</a> [budget]<BR>"
 
 	var/mob/living/carbon/human/H = user
-	if(H.job == "Merchant")
+	if(H.job == JOB_MERCHANT)
 		if(canread)
 			contents += "<a href='byond://?src=[REF(src)];secrets=1'>Secrets</a>"
 		else

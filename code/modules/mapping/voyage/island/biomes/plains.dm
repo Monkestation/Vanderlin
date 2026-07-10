@@ -151,6 +151,7 @@
 			/obj/structure/wild_plant/nospread/blackberry,
 			/obj/structure/wild_plant/nospread/raspberry,
 			/obj/structure/wild_plant/nospread/jacksberry,
+			/obj/structure/wild_plant/nospread/pompkaun,
 			/obj/structure/flora/grass/herb/urtica,
 			/obj/structure/flora/grass/herb/hypericum,
 			/obj/structure/flora/grass/herb/symphitum,

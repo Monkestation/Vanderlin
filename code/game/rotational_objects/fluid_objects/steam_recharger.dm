@@ -114,9 +114,6 @@
 
 	placed_mob.forceMove(get_turf(src))
 
-	if(placed_mob.buckled == src)
-		placed_mob.buckled = null
-
 	if(user)
 		to_chat(user, span_notice("You help [placed_mob] out of [src]."))
 
@@ -138,12 +135,8 @@
 		to_chat(user, span_warning("[src] is already occupied!"))
 		return FALSE
 
-	if(!ishuman(automaton))
+	if(!automaton.GetComponent(/datum/component/steam_life))
 		to_chat(user, span_warning("[automaton] cannot use [src]!"))
-		return FALSE
-
-	if(!istype(automaton.dna?.species, /datum/species/automaton))
-		to_chat(user, span_warning("[automaton] is not an automaton!"))
 		return FALSE
 
 	placed_mob = automaton
@@ -209,7 +202,7 @@
 		remove_placed_mob(user)
 		return
 
-/obj/structure/steam_recharger/attackby(obj/item/I, mob/living/user)
+/obj/structure/steam_recharger/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(placed_atom || placed_mob)
 		return ..()
 

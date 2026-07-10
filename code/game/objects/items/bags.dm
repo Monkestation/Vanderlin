@@ -16,6 +16,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	component_type = /datum/component/storage/concrete/grid/sack
+	item_weight = 150 GRAMS
 
 /obj/item/storage/sack/examine(mob/user)
 	. = ..()
@@ -34,7 +35,7 @@
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 
-/obj/item/storage/sack/mob_can_equip(mob/M, slot)
+/obj/item/storage/sack/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
@@ -44,7 +45,7 @@
 	else
 		return TRUE
 
-/obj/item/storage/sack/attack_hand_secondary(mob/user, params)
+/obj/item/storage/sack/attack_hand_secondary(mob/user, list/modifiers)
 	if(user.get_active_held_item())
 		return ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
@@ -107,8 +108,9 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/sack/meat
+	item_weight = 200 GRAMS
 
-/obj/item/storage/meatbag/attack_hand_secondary(mob/user, params)
+/obj/item/storage/meatbag/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -157,6 +159,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/handbasket
+	item_weight = 300 GRAMS
 
 /obj/item/storage/handbasket/update_overlays()
 	. = ..()
@@ -186,7 +189,7 @@
 			return
 	. += mutable_appearance(icon, "handbasket_generic")
 
-/obj/item/storage/handbasket/attack_hand_secondary(mob/user, params)
+/obj/item/storage/handbasket/attack_hand_secondary(mob/user, list/modifiers)
 	if(user.get_active_held_item())
 		return ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)

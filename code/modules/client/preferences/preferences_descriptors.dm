@@ -106,7 +106,7 @@
 		var/list/custom_data = print_custom_descriptor_customization(i)
 		if(custom_data)
 			dat += custom_data
-
+	dat +=  "<br><a href='?_src_=prefs;preference=gossip;task=gossip'>Rivals, Gossip & Rumors</a>"
 	dat += "<br><br><center>Descriptors can vary based on gender<br>Some don't appear if you don't match a requirement<center>"
 	return dat
 
@@ -122,7 +122,7 @@
 	dat += print_descriptors_page()
 	var/datum/browser/popup = new(user, "descriptors_customization", "<div align='center'>Describe myself</div>", 350, 510)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/has_descriptor_type_in_entries(descriptor_type)
 	for(var/datum/descriptor_entry/entry as anything in descriptor_entries)

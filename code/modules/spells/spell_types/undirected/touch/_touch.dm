@@ -122,7 +122,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	RegisterSignal(attached_hand, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hand_hit))
-	RegisterSignal(attached_hand, COMSIG_PARENT_QDELETING, PROC_REF(on_hand_deleted))
+	RegisterSignal(attached_hand, COMSIG_QDELETING, PROC_REF(on_hand_deleted))
 	RegisterSignal(attached_hand, COMSIG_ITEM_DROPPED, PROC_REF(on_hand_dropped))
 
 /// Unregisters all signal procs for the hand.
@@ -131,7 +131,7 @@
 
 	UnregisterSignal(attached_hand, list(
 		COMSIG_ITEM_AFTERATTACK,
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 		COMSIG_ITEM_DROPPED,
 	))
 
@@ -154,14 +154,13 @@
  *
  * When our hand hits an atom, we can cast do_hand_hit() on them.
  */
-/datum/action/cooldown/spell/undirected/touch/proc/on_hand_hit(datum/source, atom/victim, mob/caster, proximity_flag, click_parameters)
+/datum/action/cooldown/spell/undirected/touch/proc/on_hand_hit(datum/source, atom/victim, mob/caster, proximity_flag, list/modifiers)
 	SIGNAL_HANDLER
 	SHOULD_NOT_OVERRIDE(TRUE) // DEFINITELY don't put effects here, put them in cast_on_hand_hit
 
 	if(!proximity_flag || !can_hit_with_hand(victim, caster))
 		return
 
-	var/list/modifiers = params2list(click_parameters)
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		INVOKE_ASYNC(src, PROC_REF(do_secondary_hand_hit), source, victim, caster, modifiers)
 	else
@@ -250,7 +249,7 @@
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 /**
- * Signal proc for [COMSIG_PARENT_QDELETING] from our attached hand.
+ * Signal proc for [COMSIG_QDELETING] from our attached hand.
  *
  * If our hand is deleted for a reason unrelated to our spell,
  * unlink it (clear refs) and revert the cooldown
@@ -307,7 +306,7 @@
 	if(spell)
 		spell_which_made_us = WEAKREF(spell)
 
-/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user)
+/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user, list/modifiers)
 	if(!iscarbon(user)) //Look ma, no hands
 		return TRUE
 	if(!(user.mobility_flags & MOBILITY_USE))
@@ -332,5 +331,5 @@
 	holder.temporarilyRemoveItemFromInventory(src, force = TRUE)
 	qdel(src)
 
-/obj/item/melee/touch_attack/attack_self(mob/user, params)
+/obj/item/melee/touch_attack/attack_self(mob/user, list/modifiers)
 	qdel(src)

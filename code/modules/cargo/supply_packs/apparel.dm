@@ -2,6 +2,7 @@
 	group = "Apparel"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/apparel
 
 // HEAD
 
@@ -69,11 +70,6 @@
 	name = "Tricorn"
 	cost = 15
 	contains = /obj/item/clothing/head/helmet/leather/tricorn
-
-/datum/supply_pack/apparel/henhelm
-	name = "Henhelm"
-	cost = 200
-	contains = /obj/item/clothing/head/crown/hemhem
 
 /datum/supply_pack/apparel/easternhat
 	name = "Eastern Hat"

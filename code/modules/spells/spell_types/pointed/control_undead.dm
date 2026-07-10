@@ -8,7 +8,7 @@
 	cast_range = 5
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
-	associated_skill = /datum/skill/magic/arcane
+	associated_skill = /datum/attribute/skill/magic/arcane
 	attunements = list(
 		/datum/attunement/death = 1,
 	)
@@ -49,7 +49,7 @@
 	cast_on.LoadComponent(/datum/component/obeys_commands, pet_commands)
 	cast_on.ai_controller.CancelActions()
 	cast_on.ai_controller.set_blackboard_key(BB_PET_TARGETING_DATUM, new /datum/targetting_datum/basic/not_friends())
-	cast_on.faction = list("Cabal", "Undead")
+	cast_on.set_faction(list(FACTION_CABAL, FACTION_UNDEAD))
 	cast_on.befriend(owner)
 	cast_on.pet_passive = TRUE
 

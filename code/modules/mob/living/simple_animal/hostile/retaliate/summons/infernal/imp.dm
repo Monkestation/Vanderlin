@@ -43,7 +43,6 @@
 	attack_verb_continuous = "claws"
 	attack_verb_simple = "claw"
 	dodgetime = 30
-	aggressive = 1
 
 	ai_controller = /datum/ai_controller/imp
 

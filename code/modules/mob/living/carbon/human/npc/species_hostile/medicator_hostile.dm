@@ -9,7 +9,6 @@
 	wander = FALSE
 	d_intent = INTENT_PARRY
 
-
 /mob/living/carbon/human/species/medicator/base/Initialize()
 	. = ..()
 	AddElement(/datum/element/ai_retaliate)
@@ -51,19 +50,10 @@
 	base_constitution = 12
 	base_endurance = 12
 	base_fortune = 9
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/unskilled/naked
 
 /mob/living/carbon/human/species/medicator/base/unskilled/naked/after_creation()
 	..()
-	adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
-
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
@@ -73,21 +63,12 @@
 	base_constitution = 12
 	base_endurance = 12
 	base_fortune = 9
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/skilled/naked
 
 /mob/living/carbon/human/species/medicator/base/skilled/naked/after_creation()
 	..()
-	adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-
 
 /mob/living/carbon/human/species/medicator/base/very_skilled/naked
 	base_strength = 13
@@ -96,23 +77,14 @@
 	base_constitution = 10
 	base_endurance = 10
 	base_fortune = 10
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/very_skilled/naked
 
 /mob/living/carbon/human/species/medicator/base/very_skilled/naked/after_creation()
 	..()
-	adjust_skillrank(/datum/skill/combat/polearms, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 5, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 5, TRUE)
-
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
-// --- Light Gear ----
+// --- Light Gear ---
 
 /mob/living/carbon/human/species/medicator/base/unskilled/light_gear
 	base_strength = 10
@@ -122,16 +94,11 @@
 	base_endurance = 10
 	base_fortune = 9
 	dodgetime = 40
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/unskilled/light_gear
 
 /mob/living/carbon/human/species/medicator/base/unskilled/light_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
 	equipOutfit(new /datum/outfit/npc/light_gear)
 
@@ -143,20 +110,13 @@
 	base_endurance = 10
 	base_fortune = 9
 	dodgetime = 20
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/skilled/light_gear
 
 /mob/living/carbon/human/species/medicator/base/skilled/light_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
-
-	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
 	equipOutfit(new /datum/outfit/npc/light_gear)
 
@@ -168,23 +128,17 @@
 	base_endurance = 10
 	base_fortune = 10
 	dodgetime = 10
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/very_skilled/light_gear
 
 /mob/living/carbon/human/species/medicator/base/very_skilled/light_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives,5, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
 	equipOutfit(new /datum/outfit/npc/light_gear)
 
-// --- Medium Gear ----
-
+// --- Medium Gear ---
 
 /mob/living/carbon/human/species/medicator/base/unskilled/medium_gear
 	base_strength = 11
@@ -193,21 +147,11 @@
 	base_constitution = 12
 	base_endurance = 12
 	base_fortune = 9
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/unskilled/medium_gear
 
 /mob/living/carbon/human/species/medicator/base/unskilled/medium_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-
-	adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces,pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails,pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/polearms,pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed,1, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
 	equipOutfit(new /datum/outfit/npc/medium_gear)
 
@@ -218,18 +162,11 @@
 	base_constitution = 13
 	base_endurance = 13
 	base_fortune = 9
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/skilled/medium_gear
 
 /mob/living/carbon/human/species/medicator/base/skilled/medium_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces,3, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails,3, TRUE)
-	adjust_skillrank(/datum/skill/combat/polearms,3, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed,2, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
 	equipOutfit(new /datum/outfit/npc/medium_gear)
 
@@ -240,24 +177,16 @@
 	base_constitution = 14
 	base_endurance = 14
 	base_fortune = 10
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/very_skilled/medium_gear
 
 /mob/living/carbon/human/species/medicator/base/very_skilled/medium_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces,5, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails,5, TRUE)
-	adjust_skillrank(/datum/skill/combat/polearms,5, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed,4, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
 	equipOutfit(new /datum/outfit/npc/medium_gear)
 
-
-// --- Heavy Gear ----
+// --- Heavy Gear ---
 
 /mob/living/carbon/human/species/medicator/base/unskilled/heavy_gear
 	base_strength = 11
@@ -266,19 +195,11 @@
 	base_constitution = 12
 	base_endurance = 12
 	base_fortune = 9
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/unskilled/heavy_gear
 
 /mob/living/carbon/human/species/medicator/base/unskilled/heavy_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces,pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails,pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/polearms,pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, pick(1,2), TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed,1, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 3
 	equipOutfit(new /datum/outfit/npc/heavy_gear)
 
@@ -289,19 +210,11 @@
 	base_constitution = 14
 	base_endurance = 14
 	base_fortune = 9
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/skilled/heavy_gear
 
 /mob/living/carbon/human/species/medicator/base/skilled/heavy_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces,3, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails,3, TRUE)
-	adjust_skillrank(/datum/skill/combat/polearms,3, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed,2, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 3
 	equipOutfit(new /datum/outfit/npc/heavy_gear)
 
@@ -312,19 +225,11 @@
 	base_constitution = 16
 	base_endurance = 16
 	base_fortune = 10
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/generic_npc/very_skilled/heavy_gear
 
 /mob/living/carbon/human/species/medicator/base/very_skilled/heavy_gear/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces,5, TRUE)
-	adjust_skillrank(/datum/skill/combat/whipsflails,5, TRUE)
-	adjust_skillrank(/datum/skill/combat/polearms,5, TRUE)
-	adjust_skillrank(/datum/skill/combat/shields, 5, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed,4, TRUE)
-	adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 3
 	equipOutfit(new /datum/outfit/npc/heavy_gear)

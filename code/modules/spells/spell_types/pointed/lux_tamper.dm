@@ -9,7 +9,7 @@
 	sound = 'sound/magic/psydonbleeds.ogg'
 	invocation = "I BLEED, SO THAT YOU MIGHT ENDURE!"
 	invocation_type = "shout"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 1 MINUTES // 60 seconds cooldown
 	button_icon_state = "WEEP"
 
@@ -55,6 +55,14 @@
 			var/obj/item/bodypart/t_BP = C_target.get_bodypart(targetwound.bodypart_owner.body_zone)
 			t_BP.remove_wound(targetwound.type)
 
+		for(var/datum/injury/injury in C_target.all_injuries)
+			if(!injury.can_heal())
+				continue
+			injury.transfer_injury(C_caster)
+		C_caster.updatehealth()
+
+	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
+		artery.applyOrganDamage(-artery.damage)
 
 	// Visual effects
 	user.visible_message(span_danger("[user] shoulders [H]'s wounds!"))

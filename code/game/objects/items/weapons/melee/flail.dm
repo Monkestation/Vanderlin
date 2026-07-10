@@ -1,7 +1,7 @@
 /* FLAILS - Zero wdefense, can´t parry, best AP
 ==========================================================*/
 /obj/item/weapon/flail
-	name = "military flail"
+	name = "iron flail"
 	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
@@ -17,9 +17,8 @@
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/whipsflails
-	melting_material = /datum/material/iron
-	melt_amount = 100
+	associated_skill = /datum/attribute/skill/combat/whipsflails
+	smeltresult = /obj/item/ingot/iron
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -28,6 +27,9 @@
 
 	grid_width = 32
 	grid_height = 96
+
+	weapon_special = /datum/special_intent/flail_sweep
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/flail/getonmobprop(tag)
 	. = ..()
@@ -44,6 +46,7 @@
 	name = "militia flail"
 	desc = "A lucky hit from such a flail can squash a cheap helmet along with the wearer's skull."
 	icon_state = "militiaflail"
+	item_weight = 1.5 KILOGRAMS
 
 //................ Wooden Flail ............... // Obsolete by the thresher? No smash so its bad
 /obj/item/weapon/flail/towner
@@ -56,8 +59,8 @@
 	max_integrity = INTEGRITY_STANDARD
 	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash
-	melting_material = null
 	sellprice = 10
+	item_weight = 700 GRAMS
 
 
 //................ Steel Flail ............... //
@@ -68,20 +71,40 @@
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 4
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = null
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 35
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/flail/sflail/ancient
 	name = "ancient flail"
 	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "aflail"
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
 	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of The Ten left."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "necraflail"
+	item_weight = 1.4 KILOGRAMS
+
+//................ Silver Flail ............... //
+/obj/item/weapon/flail/silver
+	name = "silver flail"
+	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast."
+	icon_state = "silverflail"
+	force = DAMAGE_GOOD_FLAIL - 1
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 4
+	smeltresult = null
+	smeltresult = /obj/item/ingot/silver
+	sellprice = 90
+	item_weight = 1 KILOGRAMS
+
+/obj/item/weapon/flail/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
@@ -92,19 +115,24 @@
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 4
-	melting_material = /datum/material/silver
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/silverblessed
 	sellprice = 50
 	last_used = 0
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/flail/psydon/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/flail/psydon/relic
-	name = "Consecratia"
+	name = "\proper consecratia"
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
+	item_weight = 1.5 KILOGRAMS
+
+/obj/item/weapon/flail/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
 
 
 //................ Peasant Flail ............... // A little confusing still
@@ -119,7 +147,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(FLAIL_LNGSTRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	max_integrity = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_STRONG
 	minstr = 8
 
 	bigboy = TRUE
@@ -127,6 +155,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	sellprice = 20
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/flail/peasant/getonmobprop(tag)
 	. = ..()
@@ -152,7 +181,7 @@
 	possible_item_intents = list(FLAIL_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
 	minstr = 9
-
+	smeltresult = /obj/item/fertilizer/ash
 	pixel_y = -16
 	pixel_x = -16
 	inhand_x_dimension = 64
@@ -161,10 +190,10 @@
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
-	anvilrepair = /datum/skill/craft/carpentry
+	anvilrepair = /datum/attribute/skill/craft/carpentry
 	dropshrink = 0.9
-	blade_dulling = DULLING_BASH
 	resistance_flags = FLAMMABLE
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/flail/peasantwarflail/getonmobprop(tag)
 	. = ..()
@@ -177,16 +206,18 @@
 
 
 /obj/item/weapon/flail/peasantwarflail/matthios
-	name = "Gilded Flail"
+	name = "\proper gilded flail"
 	desc = "Weight of wealth in a deadly striking end."
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "matthiosflail"
 	force_wielded = DAMAGE_GOOD_FLAIL + 7
 	possible_item_intents = list(MATTHIOS_STRIKE)
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
+	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
-	blade_dulling = DULLING_BASHCHOP
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250
+	item_weight = 4 KILOGRAMS

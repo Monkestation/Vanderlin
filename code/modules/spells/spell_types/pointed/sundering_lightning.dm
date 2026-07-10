@@ -19,6 +19,8 @@
 	charge_slowdown = 1.3
 	cooldown_time = 1.5 MINUTES
 	spell_cost = 60
+	/// The spiral distance
+	var/radius = 4
 
 /datum/action/cooldown/spell/sundering_lightning/cast(atom/cast_on)
 	. = ..()
@@ -26,7 +28,7 @@
 
 /datum/action/cooldown/spell/sundering_lightning/proc/create_lightning(turf/victim)
 	var/last_dist = 0
-	for(var/turf/T as anything in spiral_range_turfs(4, victim))
+	for(var/turf/T as anything in spiral_range_turfs(radius, victim))
 		if(T.density)
 			continue
 		var/dist = get_dist(victim, T)

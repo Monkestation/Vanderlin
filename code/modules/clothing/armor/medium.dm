@@ -2,9 +2,8 @@
 	name = "Medium armor template"
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 3 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	smeltresult = /obj/item/ingot/steel_slag
 	armor_class = AC_MEDIUM
 	armor = ARMOR_SCALE
 	max_integrity = INTEGRITY_STANDARD
@@ -21,7 +20,7 @@
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
 	prevent_crits = ALL_CRITICAL_HITS
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7
+	item_weight = 9 KILOGRAMS
 
 /obj/item/clothing/armor/medium/scale/steppe
 	name = "steel heavy lamellar"
@@ -37,21 +36,7 @@
 	item_state = "surcoat"
 	detail_tag = "_metal"		// metal bits are the details so keep them uncolorer = white
 	detail_color = COLOR_WHITE
-	item_weight = 7.4
-
-/obj/item/clothing/armor/medium/surcoat/Initialize()
-	. = ..()
-	update_appearance(UPDATE_ICON)
-
-/obj/item/clothing/armor/medium/surcoat/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
+	item_weight = 5.3 KILOGRAMS
 
 //................ Armored surcoat (Heartfelt) ............... //
 /obj/item/clothing/armor/medium/surcoat/heartfelt
@@ -74,17 +59,16 @@
 	item_state = "inqcoat"
 	sleevetype = "shirt"
 	max_integrity = INTEGRITY_STRONG
-	anvilrepair = /datum/skill/craft/armorsmithing
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	equip_delay_self = 4 SECONDS
 	blocksound = SOFTHIT
+	item_weight = 6.3 KILOGRAMS
 
 /obj/item/clothing/armor/medium/scale/inqcoat/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_INQUIS_BOOT_STEP)
 
-/obj/item/clothing/armor/medium/scale/inqcoat/attackby(obj/item/W, mob/living/user, params)
+/obj/item/clothing/armor/medium/scale/inqcoat/attackby(obj/item/W, mob/living/user, list/modifiers)
 	..()
 	if(istype(W, /obj/item/clothing/armor/plate/fluted/ornate))
 		user.visible_message(span_warning("[user] starts to fit [W] inside the [src]."))
@@ -104,7 +88,7 @@
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "armored inquisitorial duster"
 	desc = "Metal plates reinforce this heavy coat, worn over the top of the finest Psydonian plate."
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	icon_state = "inqcoata"
 	item_state = "inqcoata"
 	equip_delay_self = 4 SECONDS
@@ -114,4 +98,4 @@
 	melt_amount = 150
 	melting_material =  /datum/material/steel
 	blocksound = PLATEHIT
-
+	item_weight = 7.2 KILOGRAMS

@@ -13,11 +13,14 @@
 	var/static/list/uncryoable = list(
 		/datum/job/lord,
 		/datum/job/hand,
+		/datum/job/advclass/hand,
 		/datum/job/prince,
+		/datum/job/advclass/heir,
 		/datum/job/consort,
+		/datum/job/advclass/consort,
 		/datum/job/priest,
 		/datum/job/captain,//Rest of these roles cannot cryo, as they must ahelp first before leaving the round.
-		/datum/job/gaffer //opening up the slot will break the gaffer ring code
+		/datum/job/gmtemplar
 	)
 
 /obj/structure/train/MouseDrop_T(atom/dropping, mob/user)
@@ -38,7 +41,7 @@
 		var/title = departing_mob.gender == FEMALE ? "lady" : "lord"
 		say("Surely you jest, my [title], you have a kingdom to rule over!")
 		return //prevents noble roles from cryoing as per request of Aberra
-	if(alert("Are you sure you want to [departing_mob == user ? "leave for [SSmapping.config.immigrant_origin] (you" : "send this person to [SSmapping.config.immigrant_origin] (they"] will be removed from the current round, the job slot freed)?", "Departing", "Confirm", "Cancel") != "Confirm")
+	if(tgui_alert(user, "Are you sure you want to [departing_mob == user ? "leave for [SSmapping.config.immigrant_origin] (you" : "send this person to [SSmapping.config.immigrant_origin] (they"] will be removed from the current round, the job slot freed)?", "Departing", list("Confirm", "Cancel")) != "Confirm")
 		return //doublechecks that people actually want to leave the round
 	if(user.incapacitated(IGNORE_GRAB) || QDELETED(departing_mob) || (departing_mob != user && departing_mob.client) || get_dist(src, dropping) > 2 || get_dist(src, user) > 2)
 		return //Things have changed since the alert happened.
@@ -59,6 +62,10 @@
 			content = departing_mob.contents[i]
 			dat += ", [content.name]"
 		dat += "."
+	if(departing_mob.real_name in GLOB.court_agents)
+		GLOB.court_agents -= departing_mob.real_name
+	else if(departing_mob.real_name in GLOB.ex_court_agents)
+		GLOB.ex_court_agents -= departing_mob.real_name
 	message_admins(dat)
 	log_admin(dat)
 	say(span_notice("[departing_mob == user ? "Out of their own volition, " : "Ushered by [user], "][departing_mob] is departing from [SSmapping.config.map_name]."))
@@ -67,6 +74,10 @@
 /proc/cryo_mob(mob/departing_mob, admin = FALSE)
 	if(QDELETED(departing_mob))
 		return "Tried to cryo a deleted mob!"
+	if(departing_mob.real_name in GLOB.court_agents)
+		GLOB.court_agents -= departing_mob.real_name
+	else if(departing_mob.real_name in GLOB.ex_court_agents)
+		GLOB.ex_court_agents -= departing_mob.real_name
 	GLOB.actors_list -= departing_mob.mobid // mob cryod - get him outta here.
 	var/mob/dead/new_player/newguy = new()
 	newguy.ckey = departing_mob.ckey

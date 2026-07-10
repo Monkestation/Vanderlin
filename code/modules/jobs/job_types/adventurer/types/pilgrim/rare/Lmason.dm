@@ -1,3 +1,25 @@
+/datum/attribute_holder/sheet/job/pilgrim/grandmastermason
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/labor/mining = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 50,
+		/datum/attribute/skill/craft/carpentry = 40,
+		/datum/attribute/skill/craft/masonry = 60,
+		/datum/attribute/skill/craft/engineering = 50,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/craft/smelting = 60,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/advclass/pilgrim/rare/grandmastermason
 	title = "Grandmaster Mason"
 	tutorial = "A Grandmaster mason, you built castles and entire cities with your own hands. \
@@ -11,29 +33,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/labor/mining = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 5,
-		/datum/skill/craft/carpentry = 4,
-		/datum/skill/craft/masonry = 6,
-		/datum/skill/craft/engineering = 5,
-		/datum/skill/misc/lockpicking = 3,
-		/datum/skill/craft/smelting = 6,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/reading = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/grandmastermason
 
 /datum/outfit/pilgrim/grandmastermason
 	name = "Grandmaster Mason (Pilgrim)"
