@@ -62,6 +62,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
@@ -138,7 +139,7 @@
 	name = "Bannermen Archer (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/leather/hide
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	cloak = /obj/item/clothing/cloak/stabard/guard
 	shoes = /obj/item/clothing/shoes/boots
@@ -204,7 +205,7 @@
 	name = "Bannermen Crossbowman (Migrant Wave)"
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/leather/hide
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backr = /obj/item/gun/ballistic/bow/cross
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	cloak = /obj/item/clothing/cloak/stabard/guard
 	shoes = /obj/item/clothing/shoes/boots
@@ -334,14 +335,15 @@
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
 
-/datum/outfit/pikeman_bannerman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/job/migrant/pikeman_bannerman/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
-	var/weapontype = pickweight(list("Spear" = 6, "Bardiche" = 4))
-	switch(weapontype)
+	var/static/list/weapons = list("Spear", "Bardiche")
+	var/weapon_choice = browser_input_list(equipped_human, "CHOOSE YOUR WEAPON.", "FOR THE CROWN.", weapons)
+	switch(weapon_choice)
 		if("Spear")
-			backr = /obj/item/weapon/polearm/spear
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/polearm/spear, ITEM_SLOT_BACK_R, TRUE)
 		if("Bardiche")
-			backr = /obj/item/weapon/polearm/halberd/bardiche
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/polearm/halberd/bardiche, ITEM_SLOT_BACK_R, TRUE)
 
 /datum/migrant_wave/returning_bannermen
 	name = "The Bannermen's Return"

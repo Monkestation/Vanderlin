@@ -62,8 +62,6 @@
 		warning("[src] at [AREACOORD(src)] has both a deadbolt and a viewport, these will conflict as they both use attack_hand_secondary.")
 	if(has_bolt && lock?.uses_key)
 		warning("[src] at [AREACOORD(src)] has both a deadbolt and a keylock, while this will work it may produce unintended behaviour.")
-	if(isopenturf(loc))
-		RegisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(redirect_attack)) // redirect the attack to the door
 	set_init_layer()
 
 	var/static/list/loc_connections = list(
@@ -74,18 +72,17 @@
 	if(repair_thresholds || broken_repair)
 		AddComponent(/datum/component/repairable, repair_thresholds, broken_repair, 'sound/misc/wood_saw.ogg', repair_skill)
 
+	// Click on the floor to close doors
+	AddComponent(/datum/component/redirect_attack_hand_from_turf)
+
 /obj/structure/door/Destroy()
 	. = ..()
-	UnregisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(redirect_attack))
 
 /obj/structure/door/get_explosion_resistance()
 	if(!door_opened)
 		return max_integrity
 	else
 		return 0
-
-/obj/structure/door/proc/redirect_attack(turf/source, mob/user)
-	attack_hand(user)
 
 /obj/structure/door/proc/set_init_layer()
 	if(density)
@@ -149,15 +146,19 @@
 	. = ..()
 	if(.)
 		return
+
 	if(obj_broken || switching_states)
 		return
+
 	if(!locked())
 		return TryToSwitchState(user)
+
 	if(user.used_intent.type == /datum/intent/unarmed/claw)
 		user.changeNext_move(CLICK_CD_MELEE)
 		to_chat(user, span_warning("I claw at [src]"))
 		take_damage(40, BRUTE, BCLASS_CUT, TRUE)
 		return
+
 	if(isliving(user) && world.time > last_bump + 1 SECONDS)
 		last_bump = world.time
 		var/mob/living/L = user
@@ -181,19 +182,29 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user, list/modifiers)
+/// We failed to lock / unlock (signal handled it) so we try to close
+/obj/structure/door/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(switching_states)
-		return
-	if(I.can_lock_interact())
-		return (..() || attack_hand(user))
-	return ..()
+		return NONE
+
+	if(!door_opened || obj_broken)
+		return NONE
+
+	attack_hand(user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/door/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	if(user.cmode)
 		return SECONDARY_ATTACK_CALL_NORMAL
+
 	user.changeNext_move(CLICK_CD_FAST)
 	if(has_bolt)
 		if(obj_broken)
@@ -204,6 +215,7 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		to_chat(user, span_notice("I can't reach the bolt from this side."))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(has_viewport)
 		if(obj_broken)
 			to_chat(user, span_warning("The viewport is broken!"))

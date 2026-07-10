@@ -15,6 +15,9 @@
 	possible_item_intents = list(/datum/intent/tie)
 	firefuel = 5 MINUTES
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	grid_height = 64
+	grid_width = 32
+	item_weight = 300 GRAMS
 	var/legcuff_multiplicative_slowdown = 3
 
 /obj/item/rope/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
@@ -153,6 +156,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 40
 	firefuel = null
+	item_weight = 1.2 KILOGRAMS
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 
 /obj/item/rope/net
@@ -168,6 +172,7 @@
 	gender = NEUTER
 	var/knockdown = 2 SECONDS
 	legcuff_multiplicative_slowdown = 2
+	item_weight = 500 GRAMS
 
 /obj/item/rope/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
 	. = ..()
@@ -186,8 +191,13 @@
 		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 		C.apply_status_effect(/datum/status_effect/debuff/netted)
 		playsound(src, 'sound/combat/hits/nodmg (2).ogg', 100, TRUE)
-		if(MOVE_INTENT_RUN && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
+		if((C.m_intent = MOVE_INTENT_RUN || HAS_TRAIT(C, TRAIT_STUMBLE)) && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
 			C.Knockdown(knockdown)
+
+/obj/item/rope/net/dropped(mob/living/carbon/user, silent)
+	. = ..()
+	if(istype(user) && user.legcuffed == src)
+		user.remove_status_effect(/datum/status_effect/debuff/netted)
 
 // Failsafe in case the item somehow ends up being destroyed
 /obj/item/rope/net/Destroy()
@@ -203,7 +213,7 @@
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	SET_BASE_PIXEL(0, 10)
 	icon_state = "noose"
-	can_buckle = 1
+	can_buckle = TRUE
 	layer = 4.26
 	max_integrity = 10
 	buckle_lying = FALSE
@@ -213,9 +223,11 @@
 	density = FALSE
 	layer = ABOVE_MOB_LAYER
 	plane = GAME_PLANE_UPPER
-	static_debris = list(/obj/item/rope = 1)
 	breakoutextra = 10 MINUTES
 	buckleverb = "tie"
+
+/obj/structure/noose/atom_deconstruct(disassembled)
+	new /obj/item/rope(loc)
 
 /obj/structure/noose/gallows
 	name = "gallows"
@@ -230,23 +242,23 @@
 		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
 			to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
-			buckled_mob.adjustBruteLoss(10)
+			buckled_mob.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 			buckled_mob.Knockdown(60)
 	return ..()
 
 /obj/structure/noose/attackby(obj/item/W, mob/user, list/modifiers)
-	if (W.get_sharpness())
-		if(do_after(user, 1 SECONDS, src))
-			new /obj/item/rope(loc)
-			playsound(src, 'sound/foley/dropsound/cloth_drop.ogg', 50, TRUE)
-			if (istype(src, /obj/structure/noose/gallows))
-				new /obj/machinery/light/fueled/lanternpost/unfixed(loc)
-				user.visible_message(span_notice("[user] cuts the noose down from the gallows."), span_notice("I cut the noose down from the gallows."), span_hear("I hear something snap."))
-			else
-				user.visible_message(span_notice("[user] cuts down the noose."), span_notice("I cut down the noose."), span_hear("I hear something snap."))
-			qdel(src)
-	else
+	if(!W.get_sharpness())
 		return ..()
+
+	if(do_after(user, 1 SECONDS, src))
+		new /obj/item/rope(loc)
+		playsound(src, 'sound/foley/dropsound/cloth_drop.ogg', 50, TRUE)
+		if (istype(src, /obj/structure/noose/gallows))
+			new /obj/machinery/light/fueled/lanternpost/unfixed(loc)
+			user.visible_message(span_notice("[user] cuts the noose down from the gallows."), span_notice("I cut the noose down from the gallows."), span_hear("I hear something snap."))
+		else
+			user.visible_message(span_notice("[user] cuts down the noose."), span_notice("I cut down the noose."), span_hear("I hear something snap."))
+		qdel(src)
 
 /obj/structure/noose/bullet_act(obj/projectile/P, def_zone, piercing_hit = FALSE)
 	. = ..()
@@ -284,16 +296,16 @@
 /obj/structure/noose/post_buckle_mob(mob/living/M)
 	if(has_buckled_mobs())
 		START_PROCESSING(SSobj, src)
-		M.set_mob_offsets("bed_buckle", _x = 0, _y = 10)
+		M.add_offsets(type, x_add = 0, y_add = 10)
 
 /obj/structure/noose/gallows/post_buckle_mob(mob/living/M)
 	if(has_buckled_mobs())
 		START_PROCESSING(SSobj, src)
-		M.set_mob_offsets("bed_buckle", _x = 6, _y = 16)
+		M.add_offsets(type, x_add = 6, y_add = 16)
 
 /obj/structure/noose/post_unbuckle_mob(mob/living/M)
 	STOP_PROCESSING(SSobj, src)
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/noose/process()
 	if(!has_buckled_mobs())

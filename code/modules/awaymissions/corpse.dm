@@ -13,7 +13,6 @@
 	var/roundstart = TRUE //fires on initialize
 	var/instant = FALSE	//fires on New
 	var/flavour_text = "The mapper forgot to set this!"
-	var/faction = null
 	var/permanent = FALSE	//If true, the spawner will not disappear upon running out of uses.
 	var/random = FALSE		//Don't set a name or gender, just go random
 	var/antagonist_type
@@ -28,6 +27,11 @@
 	var/banType = ROLE_NECRO_SKELETON
 	var/ghost_usable = TRUE
 
+/obj/effect/mob_spawn/Initialize(mapload)
+	. = ..()
+	if(faction)
+		faction = string_list(faction)
+
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/effect/mob_spawn/attack_ghost(mob/user)
 	if(!SSticker.HasRoundStarted() || !loc || !ghost_usable)
@@ -40,7 +44,7 @@
 		return
 	if(QDELETED(src) || QDELETED(user))
 		return
-	var/ghost_role = alert("Become [mob_name]? (Warning, You can no longer be cloned!)",,"Yes","No")
+	var/ghost_role = tgui_alert(user, "Become [mob_name]? (Warning, You can no longer be cloned!)", "Join Mob", list("Yes","No"))
 	if(ghost_role == "No" || !loc)
 		return
 	log_game("[key_name(user)] became [mob_name]")
@@ -79,12 +83,12 @@
 			mob_gender = pick(MALE, FEMALE)
 		M.gender = mob_gender
 	if(faction)
-		M.faction = list(faction)
+		M.set_faction(faction)
 	if(death)
 		M.death(1) //Kills the new mob
 
 	M.adjustOxyLoss(oxy_damage)
-	M.adjustBruteLoss(brute_damage)
+	M.adjustBruteLoss(brute_damage, damage_type = pick(BCLASS_BITE, BCLASS_BLUNT, BCLASS_LASHING, BCLASS_CUT))
 	M.adjustFireLoss(burn_damage)
 	M.color = mob_color
 	equip(M)

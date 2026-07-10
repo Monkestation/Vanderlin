@@ -26,8 +26,9 @@
 		/obj/structure/flora/grass/thorn_bush = 6,
 		/obj/item/natural/rock = 6,
 		/obj/structure/flora/grass/herb/random = 5,
-		/obj/structure/closet/dirthole/closed/loot = 5,
+		/obj/structure/closet/dirthole/closed = 5,
 		/obj/structure/flora/newtree = 5,
+		/obj/structure/wild_plant/nospread/ollie = 0.6,
 		/obj/item/natural/stone = 5,
 		/obj/structure/essence_node = 0.4,
 		/obj/item/grown/log/tree/stick = 4,
@@ -80,7 +81,7 @@
 
 /datum/mapGeneratorModule/forestwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	allowed_areas = list(/area/outdoors/wilderness)
 	spawnableAtoms = list(
 		/obj/structure/flora/grass/water = 20,

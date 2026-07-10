@@ -19,7 +19,7 @@
 /datum/job/advclass/wretch/rouschild
 	title = "Rouschild"
 	tutorial = "A child of the sewers, abandoned at birth, you were taken in by a colony of rous and raised as one of their own."
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/rouschild
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
@@ -42,10 +42,6 @@
 		/datum/action/cooldown/spell/conjure/rous
 	)
 
-
-/datum/job/advclass/wretch/rouschild/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/rouschild
 	name = "Rouschild (Wretch)"

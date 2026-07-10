@@ -42,7 +42,6 @@
 
 	attack_sound = list('sound/misc/lava_death.ogg')
 	dodgetime = 30
-	aggressive = 1
 //	stat_attack = UNCONSCIOUS
 	ranged = TRUE
 	ranged_cooldown = 40

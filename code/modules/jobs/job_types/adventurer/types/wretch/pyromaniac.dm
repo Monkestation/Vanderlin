@@ -35,11 +35,12 @@
 		TRAIT_FORAGER
 	)
 
-/datum/job/advclass/wretch/pyromaniac/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/wretch/pyromaniac/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/selectableweapon = list(
-		"Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
-		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+		"Bow" = /obj/item/gun/ballistic/bow/short,
+		"Crossbow" = /obj/item/gun/ballistic/bow/cross,
 	)
 	var/weaponschoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
 	if(!weaponschoice)
@@ -49,13 +50,11 @@
 		if("Bow")
 			var/obj/item/ammo_holder/quiver/arrows/pyro/P = new(get_turf(spawned))
 			spawned.equip_to_appropriate_slot(P)
-			to_chat(spawned, span_info("You are able to make more bow ammunitions with iron, blast powder and some planks."))
+			to_chat(spawned, span_info("You are able to make more bow ammunition with iron, blast powder and some planks."))
 		if("Crossbow")
 			var/obj/item/ammo_holder/quiver/bolts/pyro/P = new(get_turf(spawned))
 			spawned.equip_to_appropriate_slot(P)
-			to_chat(spawned, span_info("You are able to make more crossbow ammunitions with iron, blast powder and some planks."))
-
-	wretch_select_bounty(spawned)
+			to_chat(spawned, span_info("You are able to make more crossbow ammunition with iron, blast powder and some planks."))
 
 /datum/outfit/wretch/pyromaniac
 	name = "Pyromaniac (Wretch)"

@@ -10,6 +10,8 @@
  * * offset - Angle offset, 180 input would make the returned target turf be in the opposite direction
  */
 /proc/get_ranged_target_turf_direct(atom/starting_atom, atom/target, range, offset)
+	if(!starting_atom)
+		return
 	var/angle = ATAN2(target.x - starting_atom.x, target.y - starting_atom.y)
 	if(offset)
 		angle += offset
@@ -89,13 +91,13 @@
 	var/turf/return_turf
 	for(var/i in 1 to run_distance)
 		var/turf/test_destination = get_ranged_target_turf_direct(source, target, range = i, offset = angle)
-		if(isopenspace(test_destination) || is_blocked_turf(test_destination, exclude_mobs = !source.density))
+		if(isopenspace(test_destination) || test_destination.is_blocked_turf(exclude_mobs = !source.density))
 			var/origin = return_turf || get_turf(source)
 			var/obj/structure/stairs/found_stairs = locate() in origin
 			if(!found_stairs)
 				break
-			var/stairs_destination = found_stairs.get_transit_destination(get_dir(origin, test_destination))
-			if(isopenspace(stairs_destination) || is_blocked_turf(stairs_destination, exclude_mobs = !source.density))
+			var/turf/stairs_destination = found_stairs.get_transit_destination(get_dir(origin, test_destination))
+			if(isopenspace(stairs_destination) || stairs_destination.is_blocked_turf(exclude_mobs = !source.density))
 				break
 			return stairs_destination
 		return_turf = test_destination

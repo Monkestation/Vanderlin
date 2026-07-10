@@ -12,6 +12,8 @@
 	var/retained_dust = 0
 	var/datum/mind/mind = null
 
+	var/list/cached_dream_candidates = null
+
 	/// Flat pool of rested XP, shared across all skills, drains 1:1 as bonus XP
 	var/rested_xp_pool = 0
 	/// Assoc list: skill typepath -> TRUE if 1.5x rested multiplier is active until next sleep
@@ -19,6 +21,7 @@
 
 	var/list/available_modes = list("one_truth", "one_lie", "two_truths", "two_lies", "truth_lie")
 	var/list/remaining_modes = list()
+	var/list/daily_skill_xp = list()  // skill typepath -> raw XP earned today
 
 /datum/sleep_adv/New(datum/mind/passed_mind)
 	. = ..()
@@ -44,6 +47,12 @@
 /datum/sleep_adv/proc/adjust_sleep_xp(skill_type, amount, silent = FALSE)
 	if(!mind?.current)
 		return
+	//this is pre multi so catchup doesn't screw you
+	if(!(skill_type in daily_skill_xp))
+		daily_skill_xp |= skill_type //?? why this shouldn't need to be here but it runtimes otherwise
+		daily_skill_xp[skill_type] = 0
+	daily_skill_xp[skill_type] = nulltozero(daily_skill_xp[skill_type]) + amount
+
 	var/final_amount
 	if(rested_xp_pool > 0)
 		var/target_multiplier = rested_skill_multipliers[skill_type] ? 1.5 : RESTED_XP_MULTIPLIER
@@ -53,7 +62,7 @@
 		final_amount = FLOOR(amount * RESTED_XP_TIRED_RATE + covered, 1)
 	else
 		final_amount = FLOOR(amount * RESTED_XP_TIRED_RATE, 1)
-	mind.current.adjust_experience(skill_type, final_amount, silent)
+	mind.current.adjust_experience(skill_type, final_amount, silent, daily_xp = FALSE)
 
 /datum/sleep_adv/proc/advance_cycle()
 	if(!mind.current)
@@ -61,6 +70,7 @@
 	if(prob(0)) // TODO SLEEP ADV SPECIALS
 		rolled_specials++
 
+	cached_dream_candidates = null
 	to_chat(mind.current, span_notice("My consciousness slips and I start dreaming..."))
 	var/dreamwatcher = HAS_TRAIT(mind.current, TRAIT_DREAM_WATCHER)
 
@@ -140,6 +150,7 @@
 	sleep_adv_cycle++
 
 	show_ui(mind.current)
+	daily_skill_xp = list()
 
 /datum/sleep_adv/proc/show_ui(mob/living/user)
 	var/list/dat = list()
@@ -174,7 +185,10 @@
 	dat += "<br><center>Dream, for those who dream may reach higher heights</center><br>"
 	dat += "<center>\Roman[sleep_adv_points] dream points</center>"
 	dat += "<br><center><small>Rested pool: [rested_xp_pool] XP</small></center><br>"
-	var/list/dream_skills = get_dream_skill_candidates()
+	var/list/dream_skills = cached_dream_candidates
+	if(!dream_skills)
+		dream_skills = get_dream_skill_candidates()
+		cached_dream_candidates = dream_skills
 	for(var/skill_type in dream_skills)
 		var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 		var/already_active = rested_skill_multipliers[skill_type]
@@ -251,6 +265,7 @@
 	if(dream_text)
 		to_chat(mind.current, span_notice(dream_text))
 	sleep_adv_points -= get_skill_cost(skill_type)
+	cached_dream_candidates = null
 	rested_skill_multipliers[skill_type] = TRUE
 	to_chat(mind.current, span_nicegreen("You feel driven to practice [lowertext(skill.name)]... your efforts will be rewarded while you remain rested."))
 	record_round_statistic(STATS_SKILLS_DREAMED)
@@ -263,33 +278,58 @@
 		var/can_buy = !already_active && can_buy_skill(skill_type)
 		if(!already_active && !can_buy)
 			continue
-		// Already active skills always show
 		if(already_active)
-			weighted[skill_type] = -1 // sentinel: always include
+			weighted[skill_type] = -1
 			continue
 		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
-		// Weight: untrained = 1, each level adds 3 more weight
 		weighted[skill_type] = max(1, 1 + current_level * 3)
 
 	var/list/result = list()
 
-	// Always include already-active skills first
+	// Pin already-active multipliers first
 	for(var/skill_type in weighted)
 		if(weighted[skill_type] == -1)
 			result += skill_type
 
-	// Weighted random pick from the rest to fill up to max_count
-	var/list/candidates = list()
-	for(var/skill_type in weighted)
-		if(weighted[skill_type] != -1)
-			candidates[skill_type] = weighted[skill_type]
+	var/remaining_slots = max(0, max_count - result.len)
+	var/reinforcement_slots = FLOOR(remaining_slots / 2, 1)
+	var/discovery_slots = remaining_slots - reinforcement_slots
 
-	var/slots = max(0, max_count - result.len)
-	while(slots > 0 && candidates.len > 0)
-		var/skill_type = pickweight(candidates)
+	// Build separate candidate pools
+	var/list/discovery_candidates = list()
+	var/list/reinforcement_candidates = list()
+
+	for(var/skill_type in weighted)
+		if(weighted[skill_type] == -1)
+			continue
+		var/daily_xp = nulltozero(daily_skill_xp[skill_type])
+		if(daily_xp > 0)
+			reinforcement_candidates[skill_type] = daily_xp
+		else
+			discovery_candidates[skill_type] = weighted[skill_type]
+
+	// Fill reinforcement slots first from skills used today
+	while(reinforcement_slots > 0 && reinforcement_candidates.len > 0)
+		var/skill_type = pickweight(reinforcement_candidates)
 		result += skill_type
-		candidates -= skill_type
-		slots--
+		reinforcement_candidates -= skill_type
+		reinforcement_slots--
+
+	// Any unused reinforcement slots spill into discovery
+	discovery_slots += reinforcement_slots
+
+	// Fill discovery slots from remaining skills
+	while(discovery_slots > 0 && discovery_candidates.len > 0)
+		var/skill_type = pickweight(discovery_candidates)
+		result += skill_type
+		discovery_candidates -= skill_type
+		discovery_slots--
+
+	// If discovery pool was small, try reinforcement overflow
+	while(result.len < max_count && reinforcement_candidates.len > 0)
+		var/skill_type = pickweight(reinforcement_candidates)
+		result += skill_type
+		reinforcement_candidates -= skill_type
 
 	return result
 

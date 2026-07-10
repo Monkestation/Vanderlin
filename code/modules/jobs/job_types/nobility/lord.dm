@@ -48,7 +48,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	)
 
 /datum/job/lord
-	title = "Monarch"
+	title = JOB_MONARCH
 	var/ruler_title = "Monarch"
 	tutorial = "Elevated to your throne through a web of intrigue, political maneuvering, and divine sanction, you are the \
 	unquestioned authority of these lands. The Church has bestowed upon you the legitimacy of the gods themselves, and now \
@@ -89,7 +89,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	honorary_f = "Lady"
 
 	mind_traits = list(
-		TRAIT_KNOW_KEEP_DOORS
+		TRAIT_KNOW_KEEP_DOORS,
+		TRAIT_KNOWCOURTAGENTS
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -138,13 +139,32 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
+	if(player_client?.prefs)
+		var/datum/preferences/prefs = player_client.prefs
+
+		var/list/laws = prefs.read_preference(/datum/preference/list_type/role_setting/monarch_law)
+		if(length(laws))
+			GLOB.laws_of_the_land = list()
+		for(var/law in laws)
+			law = trim(law)
+			GLOB.laws_of_the_land += trim(law)
+
+
+		var/list/decrees = prefs.read_preference(/datum/preference/list_type/role_setting/monarch_decree)
+		if(length(decrees))
+			GLOB.lord_decrees = list()
+		for(var/decree in decrees)
+			decree = trim(decree)
+			GLOB.lord_decrees += trim(decree)
+
 /datum/outfit/lord
-	name = "Monarch"
+	name = JOB_MONARCH
 	head = /obj/item/clothing/head/crown/serpcrown
 	backr = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquegold
 	beltl = /obj/item/weapon/knife/dagger/steel/royal
 	beltr = /obj/item/weapon/sword/rapier
+	shoes = /obj/item/clothing/shoes/nobleboot
 	scabbards = list(/obj/item/weapon/scabbard/knife/royal, /obj/item/weapon/scabbard/sword/royal)
 	ring = /obj/item/clothing/ring/active/nomag
 	l_hand = /obj/item/weapon/lordscepter
@@ -167,12 +187,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		pants = /obj/item/clothing/pants/trou/formal
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		armor = /obj/item/clothing/armor/gambeson/arming
-		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak
 	else
 		pants = /obj/item/clothing/pants/tights/colored/random
 		armor = /obj/item/clothing/shirt/dress/royal
-		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak/ladycloak
 		wrists = /obj/item/clothing/wrists/royalsleeves
 

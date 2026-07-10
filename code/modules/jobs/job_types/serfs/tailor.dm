@@ -22,7 +22,7 @@
 	)
 
 /datum/job/tailor
-	title = "Tailor"
+	title = JOB_TAILOR
 	f_title = "Seamstress"
 	tutorial = "Cloth, linen, silk and leather. \
 	You've tirelessly studied and poured your life into \
@@ -48,9 +48,10 @@
 	traits = list(
 		TRAIT_SEEPRICES
 	)
+	book_type = /obj/item/recipe_book/sewing
 
 /datum/outfit/tailor
-	name = "Tailor"
+	name = JOB_TAILOR
 	pants = /obj/item/clothing/pants/tights/colored/red
 	shirt = /obj/item/clothing/shirt/undershirt/colored/red
 	armor = /obj/item/clothing/shirt/tunic/colored/red
@@ -75,7 +76,6 @@
 /datum/outfit/tailor/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == FEMALE)
-		cloak = /obj/item/clothing/cloak/raincloak/furcloak
 		shirt = /obj/item/clothing/shirt/dress/gen/colored/purple
 		armor = /obj/item/clothing/shirt/tunic/colored/purple
 		pants = /obj/item/clothing/pants/tights/colored/purple

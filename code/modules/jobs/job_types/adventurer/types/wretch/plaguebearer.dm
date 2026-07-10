@@ -43,10 +43,6 @@
 	)
 
 
-/datum/job/advclass/wretch/plaguebearer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
-
 /datum/outfit/wretch/plaguebearer
 	name = "Plaguebearer (Wretch)"
 	mask = /obj/item/clothing/face/phys/plaguebearer
@@ -60,7 +56,7 @@
 	armor = /obj/item/clothing/shirt/robe/phys
 	neck = /obj/item/clothing/neck/phys
 	belt = /obj/item/storage/belt/leather/black
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
+	beltl = /obj/item/gun/ballistic/blowgun
 	beltr = /obj/item/ammo_holder/dartpouch/poisondarts
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison = 1,

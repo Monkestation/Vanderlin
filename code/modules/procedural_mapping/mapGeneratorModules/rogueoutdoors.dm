@@ -23,7 +23,7 @@
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 7,
 							/obj/item/grown/log/tree/stick = 3,
-							/obj/structure/closet/dirthole/closed/loot=0.75,
+							/obj/structure/closet/dirthole/closed = 0.75,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
 	spawnableTurfs = list(/turf/open/floor/dirt/road=5)
 	allowed_areas = list(/area/outdoors/basin)
@@ -55,7 +55,7 @@
 
 /datum/mapGeneratorModule/roguetownwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	excluded_turfs = list()
 	allowed_areas = list(/area/outdoors/basin)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,

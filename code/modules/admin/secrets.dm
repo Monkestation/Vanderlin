@@ -101,7 +101,7 @@
 		if("night_shift_set")
 			if(!check_rights(R_ADMIN))
 				return
-			var/val = alert(usr, "What do you want to set night shift to? This will override the automatic system until set to automatic again.", "Night Shift", "On", "Off", "Automatic")
+			var/val = tgui_alert(usr, "What do you want to set night shift to? This will override the automatic system until set to automatic again.", "Night Shift", list("On", "Off", "Automatic"))
 			switch(val)
 				if("Automatic")
 					if(CONFIG_GET(flag/enable_night_shifts))
@@ -176,14 +176,6 @@
 			dat += "</table>"
 			usr << browse(dat, "window=fingerprints;size=440x410")
 
-		if("monkey")
-			if(!check_rights(R_FUN))
-				return
-			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Monkeyize All Humans"))
-			for(var/mob/living/carbon/human/H as anything in GLOB.human_list)
-				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon, monkeyize))
-			ok = 1
-
 		if("allspecies")
 			if(!check_rights(R_FUN))
 				return
@@ -212,8 +204,9 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Break All Lights"))
 			message_admins("[key_name_admin(usr)] broke all lights")
-			for(var/obj/machinery/light/L in GLOB.machines)
+			for(var/obj/machinery/light/L as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 				L.break_light_tube()
+				CHECK_TICK
 
 		if("anime")
 			if(!check_rights(R_FUN))
@@ -242,8 +235,9 @@
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Fix All Lights"))
 			message_admins("[key_name_admin(usr)] fixed all lights")
-			for(var/obj/machinery/light/L in GLOB.machines)
+			for(var/obj/machinery/light/L as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 				L.fix()
+				CHECK_TICK
 
 		if("stupidify")
 			if(!check_rights(R_FUN))
@@ -268,7 +262,7 @@
 	if(E)
 		E.processing = FALSE
 		if(E.announceWhen>0)
-			switch(alert(usr, "Would you like to alert the crew?", "Alert", "Yes", "No", "Cancel"))
+			switch(tgui_alert(usr, "Would you like to alert the crew?", "Alert", list("Yes", "No", "Cancel")))
 				if("Yes")
 					E.announceChance = 100
 				if("Cancel")

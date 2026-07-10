@@ -28,13 +28,11 @@
 	total_positions = 10
 	roll_chance = 100
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
-	allowed_patrons = list(/datum/patron/inhumen/matthios)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vigilante
 
 	traits = list(
 		TRAIT_DECEIVING_MEEKNESS,
-		TRAIT_INHUMENCAMP,
 		TRAIT_STEELHEARTED,
 		TRAIT_DODGEEXPERT
 	)
@@ -81,10 +79,6 @@
  		"the Wanted Man" = HONORARY_SUFFIX,
 	)
 
-/datum/job/advclass/wretch/vigilante/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
-
 /datum/outfit/wretch/vigilante
 	name = "Renegade (Wretch)"
 	neck = /obj/item/clothing/neck/highcollier/iron/renegadecollar
@@ -105,3 +99,7 @@
 		/obj/item/flint = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
+
+/datum/job/advclass/wretch/vigilante/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.set_patron(/datum/patron/inhumen/matthios)

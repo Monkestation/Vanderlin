@@ -61,3 +61,24 @@
 /datum/plant_def/oat/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
+
+/datum/plant_def/sunreed
+	name = "sunreed reeds"
+	icon_state = "maize"
+	produce_type = /obj/item/natural/chaff/sunreed
+	produce_amount_min = 2
+	produce_amount_max = 4
+	uproot_loot = list(/obj/item/natural/fibers, /obj/item/natural/fibers)
+	maturation_time = FAST_GROWING
+	produce_time = FAST_PRODUCE_TIME
+	plant_family = FAMILY_GRAIN
+	nitrogen_requirement = 25
+	phosphorus_requirement = 0
+	potassium_requirement = 0
+	nitrogen_production = 0
+	phosphorus_production = 0
+	potassium_production = 10
+	seed_identity = "sunreed seeds"
+
+/datum/plant_def/oat/set_genetic_tendencies(datum/plant_genetics/base_genetics)
+	base_genetics.disease_resistance = TRAIT_GRADE_GOOD

@@ -61,6 +61,7 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_INQUISITION,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
@@ -71,6 +72,9 @@
 /datum/job/advclass/puritan/ordinator/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
+
+/datum/job/advclass/puritan/ordinator/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/gear = list(
 		"Covenant And Creed (Broadsword + Shield)",
@@ -110,7 +114,6 @@
 	ring = /obj/item/clothing/ring/signet/silver
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/ordinatorcape
-	beltr = /obj/item/storage/belt/pouch/coins/rich
 	head = /obj/item/clothing/head/helmet/heavy/ordinatorhelm
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	backpack_contents = list(

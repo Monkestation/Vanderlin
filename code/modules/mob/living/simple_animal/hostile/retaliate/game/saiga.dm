@@ -54,13 +54,15 @@
 	can_buckle = TRUE
 	buckle_lying = FALSE
 	can_saddle = TRUE
-	aggressive = TRUE
 	remains_type = /obj/effect/decal/remains/saiga
 
 	ai_controller = /datum/ai_controller/saiga
 
 	genetics = /datum/animal_genetics/saiga
 	generate_genetics = TRUE
+	indexed = TRUE
+
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 	var/can_breed = TRUE
 
@@ -89,6 +91,15 @@
 	AddElement(/datum/element/ai_retaliate)
 
 	ADD_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
+
+	if(can_breed)
+		AddComponent(\
+			/datum/component/breed,\
+			list(/mob/living/simple_animal/hostile/retaliate/saiga, /mob/living/simple_animal/hostile/retaliate/saigabuck),\
+			3 MINUTES, \
+			list(/mob/living/simple_animal/hostile/retaliate/saiga/saigakid = 90, /mob/living/simple_animal/hostile/retaliate/saiga/saigakid/boy = 10),\
+			CALLBACK(src, PROC_REF(after_birth)),\
+		)
 
 /mob/living/simple_animal/hostile/retaliate/saiga/update_overlays()
 	. = ..()
@@ -126,17 +137,10 @@
 /mob/living/simple_animal/hostile/retaliate/saiga/tamed(mob/user)
 	. = ..()
 	deaggroprob = 30
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/saiga)
-	if(can_breed)
-		AddComponent(\
-			/datum/component/breed,\
-			list(/mob/living/simple_animal/hostile/retaliate/saiga, /mob/living/simple_animal/hostile/retaliate/saigabuck),\
-			3 MINUTES, \
-			list(/mob/living/simple_animal/hostile/retaliate/saiga/saigakid = 90, /mob/living/simple_animal/hostile/retaliate/saiga/saigakid/boy = 10),\
-			CALLBACK(src, PROC_REF(after_birth)),\
-		)
-
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/saiga)
 
 /mob/living/simple_animal/hostile/retaliate/saiga/get_sound(input)
 	switch(input)
@@ -180,6 +184,7 @@
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 3,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 1,
 						/obj/item/natural/hide = 5,
 						/obj/item/alch/sinew = 2,
@@ -214,13 +219,15 @@
 	can_saddle = TRUE
 	tame_chance = 25
 	bonus_tame_chance = 15
-	aggressive = TRUE
 	remains_type = /obj/effect/decal/remains/saiga
 
 	ai_controller = /datum/ai_controller/saiga
 
 	genetics = /datum/animal_genetics/saiga
 	generate_genetics = TRUE
+	indexed = TRUE
+
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 	var/static/list/pet_commands = list(
 		/datum/pet_command/idle,
@@ -298,8 +305,10 @@
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tamed(mob/user)
 	. = ..()
 	deaggroprob = 20
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/saiga)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/saiga)
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/simple_limb_hit(zone)
 	switch(zone)
@@ -339,9 +348,8 @@
 	defprob = 50
 	SET_BASE_PIXEL(-16, 0)
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/saiga
-	tame = TRUE
+	start_tamed = TRUE
 	can_buckle = FALSE
-	aggressive = TRUE
 
 	can_breed = FALSE
 
@@ -363,10 +371,12 @@
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/saigabuck
 
 /mob/living/simple_animal/hostile/retaliate/saiga/tame
-	tame = TRUE
+	start_tamed = TRUE
+	indexed = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame
-	tame = TRUE
+	start_tamed = TRUE
+	indexed = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled/Initialize()
 	. = ..()

@@ -475,32 +475,31 @@ SUBSYSTEM_DEF(gamemode)
 		pick_most_influential()
 		last_devotion_check = world.time + 2 MINUTES
 
-	if(SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) >= ROUNDSTART_VALID_TIMEFRAME)
-		can_run_roundstart = FALSE
-	else if(current_roundstart_event && length(current_roundstart_event.preferred_events)) //note that this implementation is made for preferred_events being other roundstart events
-		var/list/preferred_copy = current_roundstart_event.preferred_events.Copy()
-		var/datum/round_event_control/selected_event = pickweight(preferred_copy)
-		var/player_count = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
-		if(ispath(selected_event)) //get the instances if we dont have them
-			current_roundstart_event.preferred_events = list()
-			for(var/datum/round_event_control/e_control as anything in preferred_copy)
-				current_roundstart_event.preferred_events[new e_control] = preferred_copy[e_control]
-			preferred_copy = current_roundstart_event.preferred_events.Copy()
-			selected_event = null
-		else if(!selected_event.canSpawnEvent(player_count))
-			preferred_copy -= selected_event
-			selected_event = null
-
-		var/sanity = 0
-		while(!selected_event && length(preferred_copy) && sanity < 100)
-			sanity++
-			selected_event = pickweight(preferred_copy)
-			if(!selected_event.canSpawnEvent(player_count))
+	if(can_run_roundstart)
+		can_run_roundstart = SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) < ROUNDSTART_VALID_TIMEFRAME
+		if(current_roundstart_event && length(current_roundstart_event.preferred_events)) //note that this implementation is made for preferred_events being other roundstart events
+			var/list/preferred_copy = current_roundstart_event.preferred_events.Copy()
+			var/datum/round_event_control/selected_event = pickweight(preferred_copy)
+			var/player_count = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
+			if(ispath(selected_event)) //get the instances if we dont have them
+				current_roundstart_event.preferred_events = list()
+				for(var/datum/round_event_control/e_control as anything in preferred_copy)
+					current_roundstart_event.preferred_events[new e_control] = preferred_copy[e_control]
+				preferred_copy = current_roundstart_event.preferred_events.Copy()
+				selected_event = null
+			else if(!selected_event?.canSpawnEvent(player_count))
 				preferred_copy -= selected_event
 				selected_event = null
 
-		if(selected_event)
-			current_storyteller.try_buy_event(selected_event)
+			var/sanity = 0
+			while(!selected_event && length(preferred_copy) && sanity < 100)
+				sanity++
+				selected_event = pickweight(preferred_copy)
+				if(!selected_event.canSpawnEvent(player_count))
+					preferred_copy -= selected_event
+					selected_event = null
+			if(selected_event)
+				current_storyteller?.try_buy_event(selected_event)
 
 	///Handle scheduled events
 	for(var/datum/scheduled_event/sch_event in scheduled_events)
@@ -523,7 +522,7 @@ SUBSYSTEM_DEF(gamemode)
 
 /// Gets the number of antagonists the antagonist injection events will stop rolling after.
 /datum/controller/subsystem/gamemode/proc/get_antag_cap()
-	var/total_number = get_correct_popcount() + (garrison * 2)
+	var/total_number = get_correct_popcount() + garrison + church
 	var/cap = FLOOR((total_number / ANTAG_CAP_DENOMINATOR), 1) + ANTAG_CAP_FLAT
 	return cap
 
@@ -735,7 +734,7 @@ SUBSYSTEM_DEF(gamemode)
 	for(var/mob/player_mob as anything in GLOB.player_list)
 		if(!player_mob.client)
 			continue
-		if(player_mob.stat) //If they're alive
+		if(player_mob.stat == DEAD) //If they're alive
 			continue
 		if(player_mob.client.is_afk()) //If afk
 			continue
@@ -743,6 +742,8 @@ SUBSYSTEM_DEF(gamemode)
 			continue
 		active_players++
 		var/datum/job/assigned = player_mob.mind?.assigned_role
+		if(assigned?.parent_job)
+			assigned = assigned.parent_job
 		if(assigned)
 			if(assigned.job_bitflag & BITFLAG_ROYALTY)
 				royalty++
@@ -1538,7 +1539,8 @@ SUBSYSTEM_DEF(gamemode)
 		if(roundstart && istype(client?.mob, /mob/dead/new_player))
 			var/mob/dead/new_player/player = client.mob
 			if(player.ready == PLAYER_READY_TO_PLAY)
-				GLOB.patron_follower_counts[client.prefs.selected_patron.name]++
+				var/datum/patron/pref_patron = client.prefs.read_preference(/datum/preference/choiced/patron)
+				GLOB.patron_follower_counts[pref_patron.name]++
 
 		var/mob/living/living = client.mob
 		if(!istype(living))
@@ -1551,19 +1553,19 @@ SUBSYSTEM_DEF(gamemode)
 		if(!roundstart)
 			if(living.patron)
 				GLOB.patron_follower_counts[living.patron.name]++
-				if(living.job == "Monarch")
+				if(living.job == JOB_MONARCH)
 					force_set_round_statistic(STATS_MONARCH_PATRON, living.patron.name)
 		if(living.mind.has_antag_datum(/datum/antagonist/werewolf))
 			record_round_statistic(STATS_WEREVOLVES)
 		if(living.mind.has_antag_datum(/datum/antagonist/vampire))
 			record_round_statistic(STATS_VAMPIRES)
-		if(living.mind.has_antag_datum(/datum/antagonist/zombie) || living.mind.has_antag_datum(/datum/antagonist/skeleton) || living.mind.has_antag_datum(/datum/antagonist/lich))
+		if(IS_DEADITE(living) || living.mind.has_antag_datum(/datum/antagonist/skeleton) || living.mind.has_antag_datum(/datum/antagonist/lich))
 			record_round_statistic(STATS_DEADITES_ALIVE)
 		if(ishuman(living))
 			var/mob/living/carbon/human/human_mob = client.mob
 			current_valid_humans += human_mob
 			record_round_statistic(STATS_TOTAL_POPULATION)
-			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(TRUE))
+			for(var/obj/item/clothing/neck/current_item in human_mob.get_equipped_items(INCLUDE_POCKETS))
 				if(current_item.type in list(/obj/item/clothing/neck/psycross, /obj/item/clothing/neck/psycross/silver, /obj/item/clothing/neck/psycross/gold))
 					record_round_statistic(STATS_PSYCROSS_USERS)
 					break
@@ -1592,6 +1594,8 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ALIVE_NOBLES)
 			if(human_mob.mind.assigned_role.title in GLOB.garrison_positions)
 				record_round_statistic(STATS_ALIVE_GARRISON)
+			if(human_mob.mind.assigned_role.title in GLOB.gallowband_positions)
+				record_round_statistic(STATS_ALIVE_GALLOWBAND)
 			if((human_mob.mind.assigned_role.title in GLOB.church_positions) || (human_mob.mind.assigned_role.title in GLOB.inquisition_positions))
 				record_round_statistic(STATS_ALIVE_CLERGY)
 			if((human_mob.mind.assigned_role.title in GLOB.serf_positions) || (human_mob.mind.assigned_role.title in GLOB.peasant_positions) || (human_mob.mind.assigned_role.title in GLOB.company_positions))
@@ -1615,8 +1619,7 @@ SUBSYSTEM_DEF(gamemode)
 			if(HAS_TRAIT_NOT_FROM(human_mob, TRAIT_PACIFISM, "hugbox"))
 				record_round_statistic(STATS_PACIFISTS)
 			if(human_mob.family_datum && human_mob.family_member_datum)
-				var/datum/family_member/member = human_mob.family_member_datum
-				if(member.children.len > 0)
+				if(human_mob.family_member_datum.has_children())
 					record_round_statistic(STATS_PARENTS)
 				if(human_mob.IsWedded())
 					record_round_statistic(STATS_MARRIED)

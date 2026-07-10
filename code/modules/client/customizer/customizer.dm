@@ -45,7 +45,7 @@
 	var/datum/customizer_choice/choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
 	choice.validate_entry(prefs, entry)
 
-/datum/customizer/proc/is_allowed(datum/preferences/prefs)
+/datum/customizer/proc/is_allowed(mob/living/carbon/human/human)
 	return TRUE
 
 /datum/customizer/organ

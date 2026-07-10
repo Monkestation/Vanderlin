@@ -5,6 +5,7 @@
 	pile = /obj/structure/fluff/clodpile/sand
 	clod_type = "sand"
 	smeltresult = /obj/item/natural/glass
+	item_weight = 1.12 KILOGRAMS
 
 /obj/item/natural/clod/sand/Initialize()
 	. = ..()

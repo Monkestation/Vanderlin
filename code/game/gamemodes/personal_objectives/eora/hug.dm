@@ -20,7 +20,7 @@
 	if(completed)
 		return
 
-	if(target.job == "Beggar" || istype(target.mind?.assigned_role, /datum/job/vagrant))
+	if(target.job == JOB_BEGGAR || istype(target.mind?.assigned_role, /datum/job/vagrant))
 		complete_objective()
 
 /datum/objective/personal/hug_beggar/complete_objective()

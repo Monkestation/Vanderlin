@@ -264,7 +264,7 @@ SUBSYSTEM_DEF(migrants)
 			continue
 		if(islava(turf))
 			continue
-		if(is_blocked_turf(turf))
+		if(turf.is_blocked_turf())
 			continue
 		turfs += turf
 	turfs = shuffle(turfs)
@@ -421,10 +421,10 @@ SUBSYSTEM_DEF(migrants)
 			to_chat(player, span_warning("Wrong species. Your prioritized role disallows [migrant_job.blacklisted_species.Join(", ")]."))
 			can_join = FALSE
 
-	if(length(migrant_job.allowed_sexes) && !(prefs.gender in migrant_job.allowed_sexes))
+	if(length(migrant_job.allowed_sexes) && !(prefs.read_preference(/datum/preference/choiced/gender) in migrant_job.allowed_sexes))
 		to_chat(player, span_warning("Wrong gender. Your prioritized role only allows [migrant_job.allowed_sexes.Join(", ")]."))
 		can_join = FALSE
-	if(length(migrant_job.allowed_ages) && !(prefs.age in migrant_job.allowed_ages))
+	if(length(migrant_job.allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in migrant_job.allowed_ages))
 		to_chat(player, span_warning("Wrong age. Your prioritized role only allows [migrant_job.allowed_ages.Join(", ")]."))
 		can_join = FALSE
 
@@ -677,8 +677,8 @@ SUBSYSTEM_DEF(migrants)
 
 /proc/get_spawn_turf_for_job(jobname)
 	var/list/landmarks = list()
-	for(var/obj/effect/landmark/start/sloc as anything in GLOB.start_landmarks_list)
-		if(!(jobname in sloc.jobspawn_override))
+	for(var/obj/effect/landmark/start/sloc as anything in GLOB.roundstart_landmarks)
+		if(!(jobname in sloc.jobs_to_spawn))
 			continue
 		landmarks += sloc
 	if(!length(landmarks))

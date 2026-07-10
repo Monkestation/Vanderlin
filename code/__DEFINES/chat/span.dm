@@ -35,7 +35,7 @@
 
 #define span_bold(str) ("<span class='bold'>" + str + "</span>")
 #define span_boldannounce(str) ("<span class='boldannounce'>" + str + "</span>")
-
+#define span_briar(str) ("<span class='briar'>" + str + "</span>")
 #define span_clown(str) ("<span class='clown'>" + str + "</span>")
 #define span_colossus(str) ("<span class='colossus'>" + str + "</span>")
 #define span_command_headset(str) ("<span class='command_headset'>" + str + "</span>")
@@ -79,6 +79,7 @@
 #define span_name(str) ("<span class='name'>" + str + "</span>")
 #define span_narsie(str) ("<span class='narsie'>" + str + "</span>")
 #define span_narsiesmall(str) ("<span class='narsiesmall'>" + str + "</span>")
+#define span_infection(str) ("<span class='infection'>" + str + "</span>")
 #define span_necrosis(str) ("<span class='necrosis'>" + str + "</span>")
 #define span_neutraltext(str) ("<span class='neutraltext'>" + str + "</span>")
 #define span_neutraltextbig(str) ("<span class='neutraltextbig'>" + str + "</span>")
@@ -104,7 +105,8 @@
 #define span_silver(str) ("<span class='silver'>" + str + "</span>")
 #define span_artery(str) ("<span class='artery'>" + str + "</span>")
 #define span_love(str) ("<span class='love'>" + str + "</span>")
-
+#define span_animatedpain(str) ("<span class='animatedpain'>" + str + "</span>")
+#define span_bolddanger(str)	("<span class='bolddanger'>" + str + "</span>")
 
 //Sizes
 // arbitary names. ordered by smallest to biggest

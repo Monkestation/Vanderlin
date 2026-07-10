@@ -37,11 +37,10 @@
 	if(sheet)
 		sheet_on = TRUE
 
-/obj/structure/bed/deconstruct(disassembled = TRUE)
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(buildstacktype)
-			new buildstacktype(loc,buildstackamount)
-	..()
+/obj/structure/bed/atom_deconstruct(disassembled)
+	. = ..()
+	if(buildstacktype)
+		new buildstacktype(loc, buildstackamount)
 
 /obj/structure/bed/attack_paw(mob/user)
 	return attack_hand(user)
@@ -55,13 +54,6 @@
 		desc += "\nSomeone has already slept in this bed, the sheet is all messy."
 	else
 		desc += "\nThis bed has no sheet, at least it's still a bed."
-
-/obj/structure/bed/attackby(obj/item/W, mob/user, list/modifiers)
-	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1 & NODECONSTRUCT_1))
-		W.play_tool_sound(src)
-		deconstruct(TRUE)
-	else
-		return ..()
 
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	. = ..()

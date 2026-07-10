@@ -26,7 +26,7 @@
 
 /datum/objective/personal/mock/monarch/on_mock_used(datum/source, mob/living/victim)
 	. = ..()
-	if((istype(victim.mind?.assigned_role, /datum/job/lord) || victim.job == "Monarch") && (source == owner.current))
+	if((istype(victim.mind?.assigned_role, /datum/job/lord) || victim.job == JOB_MONARCH) && (source == owner.current))
 		complete_objective()
 
 /datum/objective/personal/mock/monarch/complete_objective()

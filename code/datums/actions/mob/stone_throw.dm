@@ -11,7 +11,6 @@
 	. = ..()
 	prepare_stone()
 	addtimer(CALLBACK(src, PROC_REF(chuck_stone), cast_on), 1 SECONDS)
-	StartCooldown()
 
 /datum/action/cooldown/spell/stone_throw/proc/prepare_stone(atom/target)
 	var/static/list/transforms
@@ -44,3 +43,4 @@
 	new /obj/effect/temp_visual/target/orcthrow(target_turf)
 
 /datum/action/cooldown/spell/stone_throw/proc/post_chuck_stone()
+	return

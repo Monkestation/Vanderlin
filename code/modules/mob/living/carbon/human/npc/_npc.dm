@@ -142,7 +142,7 @@
 			sneak_bonus = (GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/misc/sneaking) * 5)
 		probby -= sneak_bonus
 
-	probby += 100 * target.get_encumbrance()
+	probby += 100 * ENCUMBRANCE_TO_SIGMOID(target.encumbrance)
 	if (target.stat_roll(STAT_FORTUNE,5,10,TRUE))
 		probby += (10 - GET_MOB_ATTRIBUTE_VALUE(target, STAT_FORTUNE)) * 5 // drop 5% chance for every bit of fortune we're missing
 	if (target.stat_roll(STAT_FORTUNE,5,10))

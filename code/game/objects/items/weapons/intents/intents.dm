@@ -357,48 +357,6 @@
 	chargetime = 0.3
 	swingdelay = 3
 
-/datum/intent/shoot //shooting crossbows or other guns, no parrydrain
-	name = "shoot"
-	icon_state = "inshoot"
-	tranged = 1
-	warnie = "aimwarn"
-	chargetime = 0.1
-	no_early_release = FALSE
-	item_damage_type = "stab"
-	noaa = TRUE
-	charging_slowdown = 2
-	warnoffset = 20
-
-/datum/intent/shoot/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] aims [master_item]!</span>")
-
-/datum/intent/arc
-	name = "arc"
-	icon_state = "inarc"
-	tranged = 1
-	warnie = "aimwarn"
-	item_damage_type = "blunt"
-	chargetime = 0
-	no_early_release = FALSE
-	noaa = TRUE
-	charging_slowdown = 3
-	warnoffset = 20
-
-/datum/intent/proc/arc_check()
-	return FALSE
-
-/datum/intent/arc/arc_check()
-	return TRUE
-
-/datum/intent/arc/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] aims [master_item]!</span>")
-
 /datum/intent/simple/headbutt
 	name = "headbutt"
 	icon_state = "instrike"

@@ -16,7 +16,7 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	allowed_storytellers = DIVINE_STORYTELLERS
 	dedicated_storytellers = list(/datum/storyteller/astrata)
 
-	cost = 1
+	cost = 0.7
 	checks_antag_cap = FALSE
 	base_antags = 1
 	maximum_antags = 1
@@ -26,6 +26,8 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	prompted_picking = TRUE
 	//not actually, see check_enemies proc
 	required_enemies = 10
+
+	max_occurrences = 1
 
 	min_players = 20
 	weight = 10
@@ -93,6 +95,6 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 			"<h1>[SPAN_GOD_ASTRATA("<center>ASTRATA HAS NOTICED YOU</center>")]</h1>",
 			"<h2>[span_boldannounce("<center>THE DAEWALKER APPROACHES</center>")]</h2>"
 		))
-		var/vol = suckhead.client.prefs?.musicvol
+		var/vol = suckhead.client.prefs?.read_preference(/datum/preference/numeric/musicvol)
 		if(vol)
 			suckhead.playsound_local(M.current, 'sound/music/daewalkerintro.ogg', vol)

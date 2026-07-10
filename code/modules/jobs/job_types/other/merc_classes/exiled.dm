@@ -44,9 +44,14 @@
 
 /datum/job/advclass/mercenary/exiled/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	if(spawned.gender == MALE && spawned.dna?.species)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
-	var/weapons = list("Sword", "Axes")
+
+/datum/job/advclass/mercenary/exiled/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/weapons = list("Sword", "Axes")
 	var/weapon_choice = tgui_input_list(player_client, "CHOOSE YOUR WEAPON.", "SPILL SOME BLOOD.", weapons)
 	switch(weapon_choice)
 		if("Sword")
@@ -65,7 +70,7 @@
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
 	head = /obj/item/clothing/head/helmet/leather
-	armor = /obj/item/clothing/shirt/undershirt/easttats/tribal
+	armor = /obj/item/clothing/armor/regenerating/skin/easttats/tribal
 	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown

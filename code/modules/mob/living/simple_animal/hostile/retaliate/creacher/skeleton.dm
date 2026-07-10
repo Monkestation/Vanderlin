@@ -93,7 +93,7 @@
 		/obj/item/alch/bone,
 		/obj/item/alch/bone,
 		/obj/item/skull,
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+		/obj/item/gun/ballistic/bow,
 		/obj/item/ammo_casing/caseless/arrow,
 		/obj/item/ammo_casing/caseless/arrow,
 		/obj/item/ammo_casing/caseless/arrow
@@ -124,7 +124,7 @@
 	. = ..()
 	if(!target)
 		if(prob(60))
-			emote(pick("idle"), TRUE)
+			INVOKE_ASYNC(src, PROC_REF(emote), "idle")
 
 /mob/living/simple_animal/hostile/skeleton/taunted(mob/user)
 	emote("aggro")

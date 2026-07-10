@@ -5,6 +5,7 @@
 	wander = TRUE
 	dodgetime = 30
 	var/is_silent = TRUE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 10
 
 /mob/living/carbon/human/species/human/northern/militia/Initialize()
 	. = ..()
@@ -45,7 +46,7 @@
 	)
 
 /datum/outfit/job/human/species/human/northern/militia/pre_equip(mob/living/carbon/human/H)
-	if(H.faction && ("viking" in H.faction))
+	if(H.has_faction("viking"))
 		cloak = /obj/item/clothing/cloak/stabard/mercenary
 	else
 		cloak = /obj/item/clothing/cloak/stabard/guard
@@ -122,8 +123,3 @@
 
 /mob/living/carbon/human/species/human/northern/militia/deserter // Bad deserter, trash mob
 	faction = list("viking", "station")
-
-/mob/living/carbon/human/species/human/northern/militia/after_creation()
-	..()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 20 // Gobbo sellprice

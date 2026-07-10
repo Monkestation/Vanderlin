@@ -75,19 +75,7 @@
 	flags_inv = HIDEBOOB
 	var/overarmor = TRUE
 	sellprice = 300
-
-
-/obj/item/clothing/cloak/holysee/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
-
-/obj/item/clothing/cloak/holysee/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/holysee/MiddleClick(mob/user)
 	overarmor = !overarmor
@@ -158,6 +146,9 @@
 	icon_state = "exoticsilkmask"
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/silk
+	dyeable = TRUE
 	adjustable = CAN_CADJUST
 	toggle_icon_state = FALSE

@@ -36,7 +36,8 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 	languages = list(/datum/language/oldpsydonic)
@@ -92,7 +93,7 @@
 
 	if(equipped_human.gender == FEMALE)
 		head = /obj/item/clothing/head/helmet/heavy/crusader/t
-		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+		backr = /obj/item/gun/ballistic/bow/cross
 		beltl = /obj/item/weapon/knife/dagger/silver
 		beltr = /obj/item/ammo_holder/quiver/bolts
 		backl = /obj/item/storage/backpack/satchel/black
@@ -107,6 +108,8 @@
 	icon = 'icons/roguetown/clothing/special/crusader.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	detail_tag = null
+	detail_color = null
 
 /obj/item/clothing/cloak/stabard/crusader/t
 	name = "surcoat of the silver order"
@@ -143,7 +146,7 @@
 
 /obj/item/clothing/cloak/cape/crusader/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak/lord)
+	AddComponent(/datum/component/storage/concrete/grid/crusader_helm)
 
 /obj/item/clothing/cloak/cape/crusader/dropped(mob/living/carbon/human/user)
 	..()

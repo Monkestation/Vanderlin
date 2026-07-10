@@ -37,10 +37,11 @@
 		TRAIT_MEDIUMARMOR,
 	)
 
-/datum/job/advclass/bandit/sellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/bandit/sellsword/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/weapons = list(
-		"Spear & Crossbow" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow),
+		"Spear & Crossbow" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/bow/cross),
 		"Sword & Buckler" = list(/obj/item/weapon/sword , /obj/item/weapon/shield/tower/buckleriron)
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")
@@ -59,7 +60,7 @@
 	shirt = /obj/item/clothing/armor/gambeson
 	shoes = /obj/item/clothing/shoes/boots
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/shepherd/rag = 1)
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/chainmail

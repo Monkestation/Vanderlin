@@ -35,6 +35,7 @@
 						/obj/structure/flora/shroom_tree = 1,
 						/obj/structure/essence_node = 1,
 						/obj/item/restraints/legcuffs/beartrap/armed = 0.5,
+						/obj/structure/wild_plant/nospread/mushroom/drowsbane = 1,
 						/obj/structure/wild_plant/nospread/mushroom/caveweep = 1,)
 	allowed_areas = list(/area/under/mountains/anvil/lower)
 

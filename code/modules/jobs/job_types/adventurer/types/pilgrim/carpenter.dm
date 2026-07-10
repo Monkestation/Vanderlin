@@ -23,7 +23,7 @@
 	)
 
 /datum/job/advclass/carpenter
-	title = "Carpenter"
+	title = JOB_CARPENTER
 	tutorial = "As a woodsmen or women, you have dedicated your life to both felling \
 	trees and bending wood to your will. With enough practice, your only limit is your imagination."
 	allowed_sexes = list(MALE, FEMALE)
@@ -35,7 +35,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/carpenter
 
 /datum/outfit/adventurer/carpenter
-	name = "Carpenter"
+	name = JOB_CARPENTER
 	neck = /obj/item/clothing/neck/coif
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/trou

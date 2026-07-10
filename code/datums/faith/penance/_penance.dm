@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 		to_chat(src, span_warning("No valid penitents nearby."))
 		return
 
-	var/mob/living/carbon/human/target = input(src, "Who shall receive penance?") as null|anything in targets
+	var/mob/living/carbon/human/target = tgui_input_list(src, "Who shall receive penance?", "Potential Penitents", targets)
 	if(!target)
 		return
 
@@ -146,7 +146,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 		"Trial by Combat" = /datum/penance/combat,
 	)
 
-	var/choice = input(src, "What penance shall they perform?") as null|anything in penance_types
+	var/choice = tgui_input_list(src, "What penance shall they perform?", "Penance Type", penance_types)
 	if(!choice)
 		return
 
@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 		to_chat(src, span_warning("No penitents nearby."))
 		return
 
-	var/mob/living/carbon/human/target = input(src, "Who shall be absolved?") as null|anything in penitents
+	var/mob/living/carbon/human/target = tgui_input_list(src, "Who shall be absolved?", "Penitents", penitents)
 	if(!target)
 		return
 

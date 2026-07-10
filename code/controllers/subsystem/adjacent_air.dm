@@ -84,27 +84,86 @@ SUBSYSTEM_DEF(adjacent_air)
 	for(var/datum/reagent/R as anything in giver.reagent_list)
 		if(!(R.type in GLOB.liquid_blacklist))
 			compiled_list[R.type] = R.volume * multiplier
-	if(!compiled_list.len) //No reagents to add, don't bother going further
+	if(!compiled_list.len)
+		return
+
+	for(var/obj/item/reagent_containers/container in contents)
+		var/total_remaining = 0
+		for(var/reagent_type in compiled_list)
+			total_remaining += compiled_list[reagent_type]
+		if(!total_remaining)
+			break
+		if(!container.is_open_container())
+			continue
+		var/space = container.reagents.maximum_volume - container.reagents.total_volume
+		if(!space)
+			continue
+		var/transfer_total = min(space, total_remaining)
+		for(var/reagent_type in compiled_list)
+			var/part = compiled_list[reagent_type] / total_remaining
+			var/transfer_amount = transfer_total * part
+			container.reagents.add_reagent(reagent_type, transfer_amount)
+			compiled_list[reagent_type] -= transfer_amount
+
+	for(var/reagent_type in compiled_list)
+		if(!compiled_list[reagent_type])
+			compiled_list.Remove(reagent_type)
+	if(!length(compiled_list))
 		return
 	if(!liquids)
 		liquids = new(src)
 	liquids.liquid_group.add_reagents(liquids, compiled_list, chem_temp)
 
-//More efficient than add_liquid for multiples
-/turf/proc/add_liquid_list(reagent_list, no_react = FALSE, chem_temp)
+/turf/proc/add_liquid_list(list/reagent_list, no_react = FALSE, chem_temp)
 	if(liquids && !liquids.liquid_group)
 		qdel(liquids)
 		return
+	var/list/remaining_list = reagent_list.Copy()
 
+	for(var/obj/item/reagent_containers/container in contents)
+		var/total_remaining = 0
+		for(var/reagent_type in remaining_list)
+			total_remaining += remaining_list[reagent_type]
+		if(!total_remaining)
+			break
+		if(!container.is_open_container())
+			continue
+		var/space = container.reagents.maximum_volume - container.reagents.total_volume
+		if(!space)
+			continue
+		var/transfer_total = min(space, total_remaining)
+		for(var/reagent_type in remaining_list)
+			var/part = remaining_list[reagent_type] / total_remaining
+			var/transfer_amount = transfer_total * part
+			container.reagents.add_reagent(reagent_type, transfer_amount)
+			remaining_list[reagent_type] -= transfer_amount
+	for(var/reagent_type in remaining_list)
+		if(!remaining_list[reagent_type])
+			remaining_list.Remove(reagent_type)
+	if(!length(remaining_list))
+		return
 	if(!liquids)
 		liquids = new(src)
-	liquids.liquid_group.add_reagents(liquids, reagent_list, chem_temp)
-	//Expose turf
+
+	liquids.liquid_group.add_reagents(liquids, remaining_list, chem_temp)
 	liquids.liquid_group.expose_members_turf(liquids)
 
 /turf/proc/add_liquid(reagent, amount, no_react = FALSE, chem_temp = 300)
 	if(reagent in GLOB.liquid_blacklist)
 		return
+
+	for(var/obj/item/reagent_containers/container in contents)
+		if(!amount)
+			return
+		if(!container.is_open_container())
+			continue
+		var/transfer_amount = min((container.reagents.maximum_volume - container.reagents.total_volume), amount)
+		amount -= transfer_amount
+		container.reagents.add_reagent(reagent, transfer_amount)
+
+	if(!amount)
+		return
+
 	if(!liquids)
 		liquids = new(src)
 

@@ -36,6 +36,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/smooth,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/kobold,
@@ -64,5 +65,8 @@
 
 	if(!prefs?.parent)
 		return FALSE
+
+	if(prefs.parent.is_donator())
+		return TRUE
 
 	return prefs.parent.has_triumph_buy(TRIUMPH_BUY_FORMIKRAG_KOBOLD)

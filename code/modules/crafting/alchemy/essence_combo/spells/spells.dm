@@ -1,7 +1,7 @@
-/datum/essence_combo/spell/flame_jet
-	name = "Flame Jet"
+/datum/essence_combo/spell/fan_flames
+	name = "Fan of Flames"
 	required_essences = list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/air)
-	granted_spells = list(/datum/action/cooldown/spell/essence/flame_jet)
+	granted_spells = list(/datum/action/cooldown/spell/essence/fan_of_flames, /datum/action/cooldown/spell/essence/fire_cascade)
 
 /datum/essence_combo/spell/mud_shaping
 	name = "Mud Shaping"
@@ -13,30 +13,25 @@
 	required_essences = list(/datum/thaumaturgical_essence/frost, /datum/thaumaturgical_essence/water)
 	granted_spells = list(/datum/action/cooldown/spell/essence/ice_bridge, /datum/action/cooldown/spell/essence/frozen_storage)
 
+/datum/essence_combo/spell/divine_order
+	name = "Orderly Transcription"
+	required_essences = list(/datum/thaumaturgical_essence/order, /datum/thaumaturgical_essence/light)
+	granted_spells = list(/datum/action/cooldown/spell/essence/transcribe)
+
 /datum/essence_combo/spell/healing_spring
 	name = "Healing Spring"
 	required_essences = list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/water)
 	granted_spells = list(/datum/action/cooldown/spell/essence/healing_spring, /datum/action/cooldown/spell/essence/purify_water)
 
-/datum/essence_combo/spell/crystal_mastery
-	name = "Crystal Mastery"
-	required_essences = list(/datum/thaumaturgical_essence/earth, /datum/thaumaturgical_essence/crystal)
-	granted_spells = list(/datum/action/cooldown/spell/essence/gem_growth)
-
 /datum/essence_combo/spell/wind_step
 	name = "Wind Step"
 	required_essences = list(/datum/thaumaturgical_essence/motion, /datum/thaumaturgical_essence/air)
-	granted_spells = list(/datum/action/cooldown/spell/essence/wind_step, /datum/action/cooldown/spell/essence/aerial_dash)
-
-/datum/essence_combo/spell/divine_order
-	name = "Divine Order"
-	required_essences = list(/datum/thaumaturgical_essence/order, /datum/thaumaturgical_essence/light)
-	granted_spells = list(/datum/action/cooldown/spell/essence/divine_order)
+	granted_spells = list(/datum/action/cooldown/spell/essence/wind_step)
 
 /datum/essence_combo/spell/reality_shift
 	name = "Reality Shift"
 	required_essences = list(/datum/thaumaturgical_essence/chaos, /datum/thaumaturgical_essence/void)
-	granted_spells = list(/datum/action/cooldown/spell/essence/reality_shift, /datum/action/cooldown/spell/essence/probability_warp)
+	granted_spells = list(/datum/action/cooldown/spell/essence/probability_warp)
 
 /datum/essence_combo/spell/toxic_cleanse
 	name = "Toxic Cleanse"
@@ -63,22 +58,16 @@
 	name = "Dwarven Brewing"
 	required_essences = list(/datum/thaumaturgical_essence/earth, /datum/thaumaturgical_essence/water)
 	granted_spells = list(/datum/action/cooldown/spell/essence/create_beer)
-	required_race = "dwarf"
+	required_species = SPEC_ID_DWARF
 
 /datum/essence_combo/spell/master_forge
 	name = "Master Forge"
 	required_essences = list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/earth)
-	granted_spells = list(/datum/action/cooldown/spell/essence/master_forge, /datum/action/cooldown/spell/essence/ancestral_smithing)
-	required_race = "dwarf"
+	granted_spells = list(/datum/action/cooldown/spell/essence/ancestral_smithing)
+	required_species = SPEC_ID_DWARF
 
 /datum/essence_combo/spell/elven_grace
 	name = "Elven Grace"
 	required_essences = list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/light)
 	granted_spells = list(/datum/action/cooldown/spell/essence/elven_grace)
-	required_race = "elf"
-
-/datum/essence_combo/spell/balanced_mind
-	name = "Balanced Mind"
-	required_essences = list(/datum/thaumaturgical_essence/order, /datum/thaumaturgical_essence/chaos)
-	granted_spells = list(/datum/action/cooldown/spell/essence/balanced_mind)
-	required_race = "human"
+	required_species = SPEC_ID_ELF

@@ -55,12 +55,13 @@
 	traits = list(
 		TRAIT_STEELHEARTED
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 
 /datum/job/advclass/mercenary/anthrax/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-
 	if(spawned.gender == FEMALE)
 		// Female: melee defense-oriented brute
 		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/anthrax/female)
@@ -78,13 +79,12 @@
 /datum/outfit/mercenary/anthrax
 	name = "Anthrax (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots
-	belt = /obj/item/storage/belt/leather/black
+	belt = /obj/item/storage/belt/leather/mercenary/black
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
-		/obj/item/key/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
-		/obj/item/weapon/knife/dagger/steel/dirk
+		/obj/item/weapon/knife/dagger/steel/dirk,
 	)
 
 /datum/outfit/mercenary/anthrax/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -105,7 +105,7 @@
 		gloves = /obj/item/clothing/gloves/fingerless/shadowgloves
 		mask = /obj/item/clothing/face/shepherd/shadowmask
 		neck = /obj/item/clothing/neck/chaincoif/iron
-		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+		backr = /obj/item/gun/ballistic/bow/short
 		beltr = /obj/item/ammo_holder/quiver/arrows
 		beltl = /obj/item/weapon/sword/sabre/stalker
 		scabbards = list(/obj/item/weapon/scabbard/sword)
