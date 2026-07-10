@@ -80,8 +80,7 @@
 	local_template = replacetext(local_template, "## Map:\n", "## Map:\n[map]")
 
 	// Insert round
-	if(round_id != "Unknown")
-		local_template = replacetext(local_template, "## Round ID:\n", "## Round ID:\n[round_id]")
+	local_template = replacetext(local_template, "## Round ID:\n", "## Round ID:\n[round_id]")
 
 	// Insert testmerges
 	if(length(GLOB.revdata.testmerge))
