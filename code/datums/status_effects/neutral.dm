@@ -106,7 +106,7 @@
 	duration = -1
 	status_type = STATUS_EFFECT_MULTIPLE
 	alert_type = /atom/movable/screen/alert/bugged
-	var/obj/item/listeningdevice/device
+	var/obj/item/listeningdevice/inq/device
 
 /datum/status_effect/bugged/on_apply(mob/living/new_owner, obj/item/listeningdevice/tracker)
 	. = ..()

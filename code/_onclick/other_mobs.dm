@@ -87,12 +87,16 @@
 
 	A.attack_hand(src, modifiers)
 
-/mob/living/attack_hand_secondary(mob/user, list/modifiers)
+/mob/living/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+	if(.)
 		return
 
-	user.changeNext_move(CLICK_CD_MELEE)
+	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return
+
+	if(user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK)))
+		return TRUE
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -100,24 +104,56 @@
 		return
 
 	if(user.cmode)
+		return SECONDARY_ATTACK_CALL_NORMAL // Punch
+
+	if(!ishuman(user) || user == src)
 		return
 
-	if(ishuman(user) && user != src)
-		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(length(user.return_apprentices()) >= user.return_max_apprentices())
+	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+		var/zones = list(
+			BODY_ZONE_PRECISE_NECK,
+			BODY_ZONE_L_ARM,
+			BODY_ZONE_R_ARM,
+			BODY_ZONE_PRECISE_L_HAND,
+			BODY_ZONE_PRECISE_R_HAND,
+		)
+		if(user.zone_selected in zones)
+			check_pulse(user)
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ..()
+
+	if(!mind)
+		return
+
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(length(user.return_apprentices()) >= user.return_max_apprentices())
+		to_chat(user, span_notice("I have too many apprentices."))
+		return
+
+	if(is_apprentice())
+		to_chat(user, span_notice("[p_they(TRUE)] are under the tutelage of someone else."))
+		return
+
+	var/datum/job/my_job = mind?.assigned_role
+	if(istype(my_job))
+		if(!my_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		if(is_apprentice())
+
+		if(my_job.parent_job && !my_job.parent_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		var/datum/job/my_job = mind?.assigned_role
-		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
-			return
-		var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
-		if(choice != CHOICE_CONFIRM)
-			return
-		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
-			return
-		to_chat(user, span_notice("You offer apprenticeship to [src]."))
-		user.make_apprentice(src)
+
+	var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+	if(choice != CHOICE_CONFIRM)
+		return
+
+	if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
+		return
+
+	to_chat(user, span_notice("I offer apprenticeship to [src]."))
+	user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
 	return
@@ -343,9 +379,9 @@
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	if(user.cmode)
-		if(user.rmb_intent?.special_attack(user, src))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(user.cmode && user.rmb_intent?.special_attack(user, src))
+		user.changeNext_move(CLICK_CD_MELEE)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -395,8 +431,7 @@
 		return ui_interact(user)
 	return FALSE
 
-
-/mob/living/carbon/human/RangedAttack(atom/A, list/modifiers)
+/mob/living/carbon/human/ranged_attack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
@@ -566,7 +601,7 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.getPainLoss() / 50
+		jadded += H.getShockStage() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1

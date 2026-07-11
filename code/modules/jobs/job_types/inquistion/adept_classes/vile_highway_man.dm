@@ -52,7 +52,8 @@
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/renegade
 	head = /obj/item/clothing/head/helmet/leather/tricorn
-	beltl = /obj/item/weapon/sword/short/iron
+	beltl = /obj/item/weapon/sword/rapier/caneblade
+	scabbards = list(/obj/item/weapon/scabbard/cane)
 	l_hand = /obj/item/weapon/whip // Great length, they don't need to be next to a person to help in apprehending them.
 	backpack_contents = list(
 		/obj/item/storage/keyring/adept = 1,

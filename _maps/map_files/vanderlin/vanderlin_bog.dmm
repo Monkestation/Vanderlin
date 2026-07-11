@@ -249,6 +249,13 @@
 	color = "#29404E"
 	},
 /area/under/tomb/indoors/magic)
+"aef" = (
+/obj/structure/fluff/signage{
+	dir = 1;
+	name = "GALLOWBAND"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "aek" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/abyss_tile/three{
@@ -1748,6 +1755,12 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"aJX" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "aKe" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -3283,6 +3296,10 @@
 "bOm" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/lich)
+"bOv" = (
+/obj/structure/fluff/traveltile/bog_gallowband,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/bog/witch)
 "bPL" = (
 /obj/structure/chair/stool,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4392,13 +4409,6 @@
 "cZk" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/bog/beach)
-"cZS" = (
-/obj/structure/table/wood/folding{
-	pixel_x = -1;
-	pixel_y = 12
-	},
-/turf/open/openspace,
-/area/outdoors/bog/central)
 "cZV" = (
 /turf/closed/wall/window/stained/alt{
 	color = "#7D9BAE"
@@ -5531,6 +5541,18 @@
 /obj/item/bedsheet/double_pelt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog)
+"eaR" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "ebH" = (
 /obj/structure/door/abyss{
 	color = "#CD7F32";
@@ -5955,6 +5977,14 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/shelter/bog/lich)
+"ewz" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "ewD" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/carpet/red,
@@ -7477,11 +7507,6 @@
 "fSG" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/bog/lich)
-"fST" = (
-/obj/effect/decal/cleanable/dirt,
-/mob/living/carbon/human/species/zizombie/npc/grenzel,
-/turf/open/floor/wood,
-/area/indoors/ship)
 "fTa" = (
 /obj/structure/stairs/stone,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -8627,6 +8652,12 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
+"hbP" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "hbS" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile/three{
@@ -9810,6 +9841,20 @@
 /obj/item/natural/stone,
 /turf/open/floor/abyss_sand,
 /area/outdoors/bog/south/east)
+"irL" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "isc" = (
 /turf/open/floor/metal,
 /area/indoors/shelter/bog/lich)
@@ -12416,6 +12461,12 @@
 /obj/structure/fluff/steamvent,
 /turf/open/floor/herringbone,
 /area/indoors/shelter/bog/lich)
+"kNs" = (
+/obj/structure/bridge_stakes{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/witch)
 "kNv" = (
 /turf/open/floor/rooftop{
 	dir = 8
@@ -13583,6 +13634,12 @@
 	desc = "A Hard to destroy wall stands before you with the godly might of Abyssor coursing through it."
 	},
 /area/under/cavewet)
+"lYy" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/swamp,
+/area/outdoors/bog/witch)
 "lYI" = (
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/ruinedwood/darker,
@@ -13642,6 +13699,17 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog/witch)
+"mdJ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "mdT" = (
 /turf/closed/mineral/random/med,
 /area/outdoors/bog/west)
@@ -13897,13 +13965,6 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
-"mqu" = (
-/obj/structure/chair/wood/alt/chair_noble/purple{
-	dir = 1
-	},
-/mob/living/carbon/human/species/zizombie/npc/grenzel,
-/turf/open/floor/carpet/royalblack,
-/area/indoors/shelter/bog/lich)
 "mrh" = (
 /obj/structure/door/abyss{
 	color = "#406379"
@@ -14123,6 +14184,20 @@
 /obj/structure/flora/rock/coral,
 /turf/open/floor/abyss_sand/path,
 /area/outdoors/bog/north/west)
+"mEw" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/machinery/light/fueled/firebowl/stumpb{
+	pixel_y = 10
+	},
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "mFF" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile,
@@ -16497,6 +16572,12 @@
 	},
 /turf/open/openspace,
 /area/outdoors/bog/central)
+"pld" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/indoors/shelter/bog/lich)
 "plt" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -22281,6 +22362,15 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/bog/beach/east)
+"vEj" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/outdoors/bog/witch)
 "vEx" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -41642,13 +41732,13 @@ cJo
 cJo
 cJo
 cJo
-cXD
-wKK
-uKN
-uKN
-wKK
-rLh
-rLh
+nuG
+neZ
+nuG
+nuG
+neZ
+vSz
+vSz
 rLh
 wKK
 wKK
@@ -41844,13 +41934,13 @@ cJo
 yfu
 cJo
 cJo
-cXD
-wKK
-wKK
-wKK
-wKK
-uKN
-uKN
+nuG
+neZ
+mdJ
+hbP
+ewz
+vSz
+nuG
 jsZ
 rLh
 wKK
@@ -42045,14 +42135,14 @@ cJo
 yfu
 yfu
 cJo
-cJo
 gmP
-uKN
-wKK
-wKK
-wKK
-wKK
-wKK
+neZ
+irL
+bOv
+bOv
+bOv
+mEw
+neZ
 wKK
 uKN
 wKK
@@ -42248,13 +42338,13 @@ yfu
 cJo
 cJo
 cJo
-cJo
-wKK
-uKN
-uKN
-wKK
-wKK
-rLh
+neZ
+neZ
+eaR
+aJX
+vEj
+neZ
+vSz
 rLh
 wKK
 uKN
@@ -42453,9 +42543,9 @@ yfu
 neZ
 bKe
 bKe
+lYy
 fGz
-nuG
-neZ
+bKe
 neZ
 rLh
 rLh
@@ -42654,8 +42744,8 @@ yfu
 vSz
 neZ
 cwA
-ePU
-ePU
+aef
+kNs
 cwA
 bdk
 neZ
@@ -60522,7 +60612,7 @@ bHc
 sCF
 iKM
 pue
-fST
+xgh
 cnM
 rNI
 ece
@@ -82043,13 +82133,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-dcp
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
 dcp
 dcp
 dcp
@@ -82245,13 +82335,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-dcp
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
 dcp
 dcp
 dcp
@@ -82447,13 +82537,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-dcp
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
 dcp
 dcp
 dcp
@@ -82649,13 +82739,13 @@ iAa
 iAa
 iAa
 iAa
-iAa
-dcp
-dcp
-dcp
-dcp
-dcp
-cZS
+wjd
+wjd
+wjd
+wjd
+wjd
+wjd
+rIq
 dcp
 dcp
 dcp
@@ -102206,7 +102296,7 @@ uCr
 uUR
 ghb
 jvo
-mqu
+pld
 ghb
 odp
 fQn

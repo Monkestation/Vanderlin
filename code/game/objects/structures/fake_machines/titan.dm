@@ -1,7 +1,8 @@
 GLOBAL_LIST_EMPTY(outlawed_players)
 GLOBAL_LIST_EMPTY(lord_decrees)
 GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
-GLOBAL_LIST_EMPTY(roundstart_court_agents)
+GLOBAL_LIST_EMPTY(court_agents)
+GLOBAL_LIST_EMPTY(ex_court_agents)
 
 #define MODE_NONE "None"
 #define MODE_MAKE_ANNOUNCEMENT "Make Announcement"
@@ -114,7 +115,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Check if the mob has the crown
 /obj/structure/fake_machine/titan/proc/has_crown(mob/living/carbon/human/checked_mob)
-	if(!checked_mob.head || !istype(checked_mob.head, /obj/item/clothing/head/crown/serpcrown))
+	if(!(checked_mob.head == SSroguemachine.crown) && !(checked_mob.wear_mask == SSroguemachine.crown))
 		say("You need the crown!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 		return FALSE
@@ -240,7 +241,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 				say("[crown_holder.real_name] holds the crown!")
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				return
-			if(crown_holder.head == crown)
+			if((crown_holder.head == crown) || (crown_holder.wear_mask == crown))
 				say("[crown_holder.real_name] wears the crown!")
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				return

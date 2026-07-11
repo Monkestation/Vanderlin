@@ -15,10 +15,10 @@
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 
 // ~shock modifiers
-#define SHOCK_MOD_BRUTE 0.6
-#define SHOCK_MOD_BURN 0.8
+#define SHOCK_MOD_BRUTE 0.5
+#define SHOCK_MOD_BURN 0.75
 #define SHOCK_MOD_TOXIN 1
-#define SHOCK_MOD_CLONE 1.2
+#define SHOCK_MOD_CLONE 1.25
 
 #define SHOCK_PENALTY_CAP 4
 

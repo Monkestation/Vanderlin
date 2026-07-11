@@ -6,35 +6,37 @@
 	w_class = WEIGHT_CLASS_SMALL
 	item_weight = 340 GRAMS
 	slot_flags = ITEM_SLOT_HIP
-	COOLDOWN_DECLARE(next_scan)
 
+	COOLDOWN_DECLARE(next_scan)
 	var/obj/machinery/essence/source_device = null
 	var/connecting = FALSE
+
+
+
+/obj/item/essence_connector/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	var/obj/machinery/essence/machine = resolve_essence_machine(interacting_with)
+	if(!machine)
+		if(connecting)
+			to_chat(user, span_warning("[interacting_with] is not an essence device."))
+			return ITEM_INTERACT_BLOCKING
+		return NONE
+
+	if(connecting)
+		complete_connection(machine, user)
+		return ITEM_INTERACT_SUCCESS
+
+	start_connection(machine, user)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/essence_connector/proc/resolve_essence_machine(atom/target)
 	if(istype(target, /obj/machinery/essence))
 		return target
+
 	if(istype(target, /obj/machinery/light/fueled/cauldron))
 		var/obj/machinery/light/fueled/cauldron/C = target
 		return C.essence_node
+
 	return null
-
-/obj/item/essence_connector/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
-	if(!proximity_flag)
-		return ..()
-	if(user.get_active_held_item() != src)
-		return ..()
-
-	var/obj/machinery/essence/machine = resolve_essence_machine(target)
-	if(!machine)
-		if(connecting)
-			to_chat(user, span_warning("[target] is not an essence device."))
-		return
-
-	if(connecting)
-		complete_connection(machine, user)
-		return
-	start_connection(machine, user)
 
 /obj/item/essence_connector/proc/complete_connection(obj/machinery/essence/target, mob/user)
 	var/obj/machinery/essence/from = source_device
@@ -66,6 +68,8 @@
 	connecting = FALSE
 	if(user)
 		to_chat(user, span_info("Connection cancelled."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/essence_connector/attack_self(mob/user, list/modifiers)
 	if(connecting)

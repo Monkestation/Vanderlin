@@ -169,30 +169,36 @@
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)
 	qdel(src)
 
-/obj/item/grown/log/tree/stick/attackby(obj/item/I, mob/living/user, list/modifiers)
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(istype(I, /obj/item/natural/bundle/stick))
-		var/obj/item/natural/bundle/stick/B = I
-		if(B.amount < B.maxamount)
-			to_chat(user, span_notice("I add [src] to [B]."))
-			B.amount += 1
-			B.update_bundle()
-			qdel(src)
-		return
-	return ..()
+/obj/item/grown/log/tree/stick/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/grown/log/tree/stick/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
+	if(!istype(tool, /obj/item/natural/bundle/stick))
+		return NONE
 
-	if(istype(I, /obj/item/grown/log/tree/stick))
-		var/obj/item/natural/bundle/stick/F = new(get_turf(user))
-		qdel(I)
+	var/obj/item/natural/bundle/stick/B = tool
+	if(B.amount < B.maxamount)
+		user.balloon_alert(user, "[name] added.")
+		B.amount += 1
+		B.update_bundle()
 		qdel(src)
-		user.put_in_hands(F)
-		to_chat(user, "You collect the [F.stackname] into a bundle.")
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/grown/log/tree/stick/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/grown/log/tree/stick))
+		return NONE
+
+	var/obj/item/natural/bundle/stick/F = new(get_turf(user))
+	qdel(tool)
+	qdel(src)
+	user.put_in_hands(F)
+	user.balloon_alert(user, "[F.stackname] bundled.")
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/grown/log/tree/stake
 	name = "stake"

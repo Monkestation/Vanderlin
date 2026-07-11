@@ -39,7 +39,7 @@
 	///this is the skill type used for recipes
 	var/brewing_skill = /datum/attribute/skill/craft/cooking
 
-/datum/brewing_recipe/proc/after_finish_attackby(mob/living/user, obj/item/attacked_item, atom/source)
+/datum/brewing_recipe/proc/after_finish_interact(mob/living/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/bottle_kit))
 		return FALSE
 	var/name_to_use = secondary_name ? secondary_name : name
@@ -60,7 +60,6 @@
 		var/obj/item/reagent_containers/glass/bottle/brewing_bottle/bottle_made = new /obj/item/reagent_containers/glass/bottle/brewing_bottle(get_turf(source))
 		bottle_made.icon_state = "[bottle_kit.glass_colour]"
 		bottle_made.name = "brewer's bottle of [bottle_name]"
-		bottle_made.sellprice = round(sell_value / brewed_amount)
 		bottle_made.desc = "A bottle of locally-brewed [SSmapping.config.map_name] [bottle_name]."
 
 		// Add reagent with quality

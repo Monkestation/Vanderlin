@@ -290,6 +290,15 @@
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
+	if(player_client)
+		for(var/path in GLOB.post_job_spawn_prefs)
+			var/datum/preference/pref = GLOB.post_job_spawn_prefs[path]
+			if(!length(pref.job_types))
+				continue // ???
+			if(!(type in pref.job_types))
+				continue
+			pref.post_job_apply(spawned, player_client.prefs.read_preference(pref.type), player_client)
+
 	if(spawned.attributes)
 		assign_attributes(spawned, player_client)
 	if(!ishuman(spawned))
@@ -431,6 +440,9 @@
 		var/mob/living/carbon/human/H = spawned
 		H.pick_job_packs(src)
 
+	/// Applies here because it relies on mobs having their traits, oh well if they get it midround besides late joining
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(spawned)
 
 /// this "mostly" removes the existence of a job from someone.
 /// the unfortunately reality is that even this is still a flawed removal

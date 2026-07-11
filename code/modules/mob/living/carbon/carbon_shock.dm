@@ -147,7 +147,7 @@
 	else
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 
-	if(traumatic_shock > 0.8 * shock_stage)
+	if(traumatic_shock > 0.9 * shock_stage)
 		adjustShockStage(delta_time * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
 	else if(!undergoing_cardiac_arrest())
 		var/recovery = delta_time
@@ -236,7 +236,7 @@
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8)) // Crossed stage 8
 		if(!IsUnconscious())
-			visible_message(span_bolddanger("[src] scrunchs [p_their()] body and collapses!"), ignored_mobs = src)
+			visible_message(span_bolddanger("[src] scrunches [p_their()] body and collapses!"), ignored_mobs = src)
 			custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 		//Death is near...
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))

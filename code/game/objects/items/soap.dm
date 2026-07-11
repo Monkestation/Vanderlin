@@ -82,38 +82,50 @@
 	qdel(src)
 
 
-/obj/item/soap/attack(mob/living/carbon/human/target, mob/living/carbon/user, list/modifiers)
-	user.changeNext_move(CLICK_CD_MELEE)
+/obj/item/soap/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isobj(interacting_with))
+		if(try_dissolve(interacting_with, user))
+			return ITEM_INTERACT_SKIP_TO_ATTACK
+		return NONE // attack, afterattack cleaning :(
 
-	if(ishuman(target) && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+	if(!ishuman(interacting_with))
+		return NONE
+
+	var/mob/living/carbon/human/target = interacting_with
+
+	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 		if(target.is_mouth_covered())
 			to_chat(user, span_warning("[target.p_their(TRUE)] mouth is blocked!"))
-			return FALSE
+			return ITEM_INTERACT_BLOCKING
 
 		if(user != target)
 			var/obj/item/grabbing/G = user.get_active_held_item()
 			if(!istype(G) || !ishuman(G.grabbed) || G.grabbed != target) // gotta have the target in your offhand
 				to_chat(user, span_warning("I can't hold them still if I don't grab them!"))
-				return FALSE
-		user.visible_message(span_warning("<[user] starts to wash \the [target]'s mouth out with [src]..."), span_notice("I start to wash \the [target]'s mouth out with [src]...")) //washes mouth out with soap sounds better than 'the soap' here
+				return ITEM_INTERACT_BLOCKING
+
+		user.visible_message(
+			span_warning("<[user] starts to wash \the [target]'s mouth out with [src]..."),
+			span_notice("I start to wash \the [target]'s mouth out with [src]...")
+		) //washes mouth out with soap sounds better than 'the soap' here
 		// how this looks vvv https://www.desmos.com/calculator/55fpadxol5
 		if(do_after(user, (20 / GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) + 2) SECONDS, target))
-			user.visible_message(span_warning("[user] washes \the [target]'s mouth out with [src]!"), span_notice("I wash \the [target]'s mouth out with [src]!")) //washes mouth out with soap sounds better than 'the soap' here
-			target.emote("drown")
-			target.adjustOxyLoss(20)
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent(/datum/reagent/soap, 5)
-			reagents.trans_to(target, reagents.total_volume, transfered_by = user, method = INGEST)
-			log_combat(user, target, "fed", /datum/reagent/soap)
-			decreaseUses(5)
-			target.lip_style = null //removes lipstick
-			target.update_body()
-			return TRUE
+			return ITEM_INTERACT_BLOCKING
+		user.visible_message(
+			span_warning("[user] washes \the [target]'s mouth out with [src]!"),
+			span_notice("I wash \the [target]'s mouth out with [src]!")
+		) //washes mouth out with soap sounds better than 'the soap' here
+		target.emote("drown")
+		target.adjustOxyLoss(20)
+		var/datum/reagents/reagents = new()
+		reagents.add_reagent(/datum/reagent/soap, 5)
+		reagents.trans_to(target, reagents.total_volume, transfered_by = user, method = INGEST)
+		log_combat(user, target, "fed", /datum/reagent/soap)
+		decreaseUses(5)
+		target.lip_style = null //removes lipstick
+		target.update_body()
 
-
-	if(!ishuman(target))
-		to_chat(user, span_warning("They don't want to be soaped..."))
-		return FALSE
+		return ITEM_INTERACT_SUCCESS
 
 	var/turf/T = get_turf(target)
 	if(!istype(T, /turf/open/water))
@@ -121,57 +133,66 @@
 			to_chat(user, span_warning("Why am I doing this..."))
 		else
 			to_chat(user, span_warning("They must be in water!"))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
 	else
 		var/turf/open/water/bathspot = T
 		if(!bathspot.wash_in)
 			to_chat(user, span_warning("I can't bathe in this..."))
-			return FALSE
+			return ITEM_INTERACT_BLOCKING
 
 	if(istype(target.head, /obj/item/clothing) || istype(target.wear_armor, /obj/item/clothing) || istype(target.wear_shirt, /obj/item/clothing) || istype(target.cloak, /obj/item/clothing))
 		to_chat(user, span_warning("Can't get a proper bath with clothing on."))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
 	if(istype(target.gloves, /obj/item/clothing))
 		to_chat(user, span_warning("Can't get a proper bath with gloves on."))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
 	if(istype(target.wear_pants, /obj/item/clothing) && !istype(target.wear_pants, /obj/item/clothing/pants/loincloth)) // you can bathe in a loincloth
 		to_chat(user, span_warning("Can't get a proper bath with pants on."))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
+
 	if(istype(target.shoes, /obj/item/clothing))
 		to_chat(user, span_warning("Can't get a proper bath with shoes on."))
-		return FALSE
+		return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(span_info("\The [user] begins scrubbing \the [target] with [src]."))
 	playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-	if(do_after(user, 5 SECONDS, target))
-		playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		scrub_scrub(target, user)
-		return TRUE
-	return FALSE
 
-/obj/item/soap/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+	if(!do_after(user, 5 SECONDS, target))
+		return ITEM_INTERACT_BLOCKING
 
-	var/obj/O = attacked_atom
-	var/datum/reagents/r = O.reagents
-	if(!r || !O.is_open_container())
-		return ..()
-	. = TRUE
-	if(r.total_volume >= r.maximum_volume)
+	playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+	scrub_scrub(target, user)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/soap/proc/try_dissolve(obj/interacting_with, mob/living/user)
+	if(!interacting_with.reagents || !interacting_with.is_open_container())
+		return FALSE
+
+	var/datum/reagents/reagents = interacting_with.reagents
+
+	if(reagents.holder_full())
 		to_chat(user, span_warning("There's no room to add [src]."))
-		return
-	var/datum/reagent/wawa = r.get_reagent_amount(/datum/reagent/water)
+		return FALSE
+
+	var/datum/reagent/wawa = reagents.get_reagent_amount(/datum/reagent/water)
 	if(!wawa)
-		to_chat(user, span_warning("[O] needs to have water to dissolve [src]!"))
-		return
-	var/amt2Add = min(10, wawa, r.maximum_volume - r.total_volume)
-	if(do_after(user, 2 SECONDS, O))
-		var/datum/reagents/reagents = new()
-		reagents.add_reagent(/datum/reagent/soap, amt2Add)
-		reagents.trans_to(O, reagents.total_volume, transfered_by = user, method = TOUCH)
-		to_chat(user, span_info("I dissolve some of \the [name] in the water."))
-		decreaseUses(5)
+		to_chat(user, span_warning("[interacting_with] needs to have water to dissolve [src]!"))
+		return FALSE
+
+	var/amt2Add = min(10, wawa, reagents.maximum_volume - reagents.total_volume)
+
+	if(!do_after(user, 2 SECONDS, interacting_with))
+		return FALSE
+
+	reagents.add_reagent(/datum/reagent/soap, amt2Add)
+
+	to_chat(user, span_info("I dissolve some of \the [name] in the water."))
+	decreaseUses(5)
+
+	return TRUE
 
 /obj/item/soap/proc/scrub_scrub(mob/living/carbon/human/target, mob/living/carbon/user)
 	target.wash(clean_strength)

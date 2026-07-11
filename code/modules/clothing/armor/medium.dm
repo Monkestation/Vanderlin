@@ -68,7 +68,7 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_INQUIS_BOOT_STEP)
 
-/obj/item/clothing/armor/medium/scale/inqcoat/attackby(obj/item/W, mob/living/user, params)
+/obj/item/clothing/armor/medium/scale/inqcoat/attackby(obj/item/W, mob/living/user, list/modifiers)
 	..()
 	if(istype(W, /obj/item/clothing/armor/plate/fluted/ornate))
 		user.visible_message(span_warning("[user] starts to fit [W] inside the [src]."))

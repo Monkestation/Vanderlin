@@ -146,15 +146,19 @@
 	. = ..()
 	if(.)
 		return
+
 	if(obj_broken || switching_states)
 		return
+
 	if(!locked())
 		return TryToSwitchState(user)
+
 	if(user.used_intent.type == /datum/intent/unarmed/claw)
 		user.changeNext_move(CLICK_CD_MELEE)
 		to_chat(user, span_warning("I claw at [src]"))
 		take_damage(40, BRUTE, BCLASS_CUT, TRUE)
 		return
+
 	if(isliving(user) && world.time > last_bump + 1 SECONDS)
 		last_bump = world.time
 		var/mob/living/L = user
@@ -178,19 +182,29 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user, list/modifiers)
+/// We failed to lock / unlock (signal handled it) so we try to close
+/obj/structure/door/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(switching_states)
-		return
-	if(I.can_lock_interact())
-		return (..() || attack_hand(user))
-	return ..()
+		return NONE
+
+	if(!door_opened || obj_broken)
+		return NONE
+
+	attack_hand(user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/door/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	if(user.cmode)
 		return SECONDARY_ATTACK_CALL_NORMAL
+
 	user.changeNext_move(CLICK_CD_FAST)
 	if(has_bolt)
 		if(obj_broken)
@@ -201,6 +215,7 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		to_chat(user, span_notice("I can't reach the bolt from this side."))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(has_viewport)
 		if(obj_broken)
 			to_chat(user, span_warning("The viewport is broken!"))

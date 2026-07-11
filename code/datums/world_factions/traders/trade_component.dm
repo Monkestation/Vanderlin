@@ -230,7 +230,11 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 		return
 
 	item_to_buy = new item_to_buy(get_turf(customer))
+
 	if(isitem(item_to_buy))
+		var/list/calc_result = trader_data.active_faction?.get_faction_quality_calculator(item_to_buy)
+		if(calc_result)
+			create_quality_item(item_to_buy, calc_result[1], calc_result[2])
 		customer.put_in_hands(item_to_buy)
 	playsound(trader, trader_data.sell_sound, 50, TRUE)
 	product_info[TRADER_PRODUCT_INFO_QUANTITY] -= 1

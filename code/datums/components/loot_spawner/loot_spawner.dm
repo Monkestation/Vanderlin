@@ -49,39 +49,52 @@
 	src.action_text = action_text
 	src.resetting_item = resetting_item
 
+/datum/component/loot_spawner/Destroy(force)
+	QDEL_NULL(loot)
+	takers = null
+	return ..()
+
 /datum/component/loot_spawner/RegisterWithParent()
-	. = ..()
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(handle_loot_attempt))
 	if(resetting_item)
-		RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(handle_reset_attempt))
+		RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(handle_reset_attempt))
 
 /datum/component/loot_spawner/UnregisterFromParent()
-	. = ..()
 	UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
 	if(resetting_item)
-		UnregisterSignal(parent, COMSIG_ATOM_ATTACKBY)
-
+		UnregisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION)
 
 /datum/component/loot_spawner/proc/handle_loot_attempt(atom/source, mob/user)
+	SIGNAL_HANDLER
+
 	if(!source.CanLoot(user))
 		return NONE
+
 	if(needs_reset)
 		return NONE
+
 	if(user in takers)
 		if(takers[user] >= spawns_per_person)
 			return NONE
+
 	if(length(takers) >= max_spawns)
 		SEND_SIGNAL(parent, COMSIG_LOOT_SPAWNER_EMPTY)
 		return NONE
+
 	INVOKE_ASYNC(src, PROC_REF(start_loot), source, user)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
-/datum/component/loot_spawner/proc/handle_reset_attempt(atom/source, obj/item/L, mob/living/user)
+/datum/component/loot_spawner/proc/handle_reset_attempt(atom/source, mob/living/user, obj/item/tool)
+	SIGNAL_HANDLER
+
 	if(!needs_reset)
 		return NONE
-	if(istype(L, resetting_item))
+
+	if(!istype(tool, resetting_item))
 		return NONE
-	INVOKE_ASYNC(src, PROC_REF(start_reset), source, L, user)
+
+	INVOKE_ASYNC(src, PROC_REF(start_reset), source, user, tool)
+
 	return COMPONENT_NO_AFTERATTACK
 
 /datum/component/loot_spawner/proc/start_loot(atom/source, mob/living/user)
@@ -100,7 +113,8 @@
 
 	SEND_SIGNAL(parent, COMSIG_TRAP_TRIGGERED, user)
 
-/datum/component/loot_spawner/proc/start_reset(atom/source, obj/item/L, mob/living/user)
+/datum/component/loot_spawner/proc/start_reset(atom/source, mob/living/user, obj/item/tool)
 	if(!do_after(user, action_time, source))
 		return
+
 	needs_reset = FALSE
