@@ -366,8 +366,11 @@
 
 /datum/job/advclass/orphanadv/wward
 	title= "Weird Ward"
-	tutorial = "Write something \
-	here about this kid."
+	tutorial = "While the other children busy themselves with silly activities \
+	like baking bread or throwing rocks into the river, you have your sights set \
+	much higher.  You have seen what goes on in the clinic.  You know that you can \
+	figure it out, too.  You don't need someone to teach you.  You're the Matron's \
+	best and brightest.  You WILL do amazing things."
 	outfit = /datum/outfit/orphanadv/wward
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/wward
@@ -396,7 +399,7 @@
 	if(orphanage_renovated)
 		if(equipped_human.gender == MALE)
 			shirt = /obj/item/clothing/shirt/undershirt/colored/black
-			pants = /obj/item/clothing/pants/tights/colored/random
+			pants = /obj/item/clothing/pants/tights/colored/black
 		else
 			shirt = /obj/item/clothing/shirt/dress/gen/colored/black
 		pants = /obj/item/clothing/pants/tights
@@ -413,7 +416,7 @@
 	else
 		if(equipped_human.gender == MALE)
 			shirt = /obj/item/clothing/shirt/undershirt/colored/black
-			pants = /obj/item/clothing/pants/tights/colored/random
+			pants = /obj/item/clothing/pants/tights/colored/black
 		else
 			shirt = /obj/item/clothing/shirt/dress/gen/colored/black
 		mask = /obj/item/clothing/face/shepherd
@@ -442,13 +445,18 @@
 
 /datum/job/advclass/orphanadv/ccastoff
 	title= "Creative Castoff"
-	tutorial = "Write something here about \
-	this kid being artistic and creative."
+	tutorial = "In sun-blessed Vanderlin \
+	an orphan unraveled the day \
+	practicing their merry songs \
+	bringing bright color to the grey!"
 	outfit = /datum/outfit/orphanadv/ccastoff
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/ccastoff
 	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
+	traits = list(
+		TRAIT_BARDIC_TRAINING,
+	)
 
 /datum/job/orphanadv/ccastoff/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
