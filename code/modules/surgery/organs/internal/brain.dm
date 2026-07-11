@@ -107,15 +107,26 @@
 	organ_owner.update_body()
 	organ_owner.remove_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/on_medium_damage_received()
-	. = ..()
-	owner.add_stress(/datum/stress_event/brain_damage)
+///somehow slightly faster to not call parent...
+/obj/item/organ/brain/consider_processing(in_bleedout)
+	. = FALSE
+	if(in_bleedout)
+		. = TRUE
+	else if(damage >= DAMAGE_PRECISION)
+		. = TRUE
+	else if(germ_level > 0)
+		. = TRUE
+	else if(current_blood < max_blood_storage)
+		. = TRUE
+	else if(failure_time > 0)
+		. = TRUE
+	else if(is_failing())
+		. = TRUE
+	else if(owner && GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req) < BLOOD_VOLUME_BAD)
+		. = TRUE
+	needs_processing = .
 
-/obj/item/organ/brain/on_medium_damage_healed()
-	. = ..()
-	owner.remove_stress(/datum/stress_event/brain_damage)
-
-/obj/item/organ/brain/can_self_heal(delta_time, times_fired)
+/obj/item/organ/brain/can_self_heal(delta_time, times_fired, in_bleedout)
 	. = ..()
 	if(!.)
 		return
@@ -125,30 +136,17 @@
 	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
 		return FALSE
 
-/obj/item/organ/brain/handle_blood(delta_time, times_fired)
+/obj/item/organ/brain/handle_blood(delta_time, times_fired, in_bleedout)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
-	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
-	var/in_bleedout = owner.in_bleedout()
-	if(arterial_efficiency && !is_failing())
-		// Arteries get an extra flat 5 blood regen
-		current_blood = min(current_blood + (2.5 * delta_time * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY)), max_blood_storage)
-		return
-	if(!blood_req)
-		return
 	// Very low blood, danger!!
-	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_BAD))
-		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
-		return
-
-	if(in_bleedout)
+	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_BLEEDOUT))
 		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
 		if(DT_PROB(5, delta_time))
 			owner.adjust_eye_blur_up_to(4, 4)
 	else
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
-
 	// When all blood is lost, take blood from blood vessels
-	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
+	if(current_blood < max_blood_storage && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
 		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
@@ -157,10 +155,13 @@
 				artery = candidate
 				break
 		if(artery?.current_blood)
-			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * delta_time * 2), 0)
-			current_blood = max(prev_blood - artery.current_blood, 0)
+			var/blood_needed = min(max_blood_storage - current_blood, blood_req * delta_time * 2)
+			var/blood_taken = min(artery.current_blood, blood_needed)
+			artery.current_blood = max(artery.current_blood - blood_taken, 0)
+			artery.consider_processing()
+			current_blood = min(current_blood + blood_taken, max_blood_storage)
 		//Don't apply damage, this is handled by the organ process datum, if necessary
+	consider_processing()
 
 /obj/item/organ/brain/get_mechanics_examine(mob/user)
 	. = ..()

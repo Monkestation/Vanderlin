@@ -232,7 +232,19 @@
 		//stack_trace("spec_attacked_by failed to create injury with [dam] damage and [wounding_type] wounding type!")
 
 	if(incoming_germ && injury)
-		injury.adjust_germ_level(incoming_germ * 0.1)
+		//Divide it by 3 to be reasonable
+		incoming_germ = CEILING(incoming_germ/3, 1)
+
+		//If the patient has antibiotics, kill germs by an amount equal to 10x the antibiotic force
+		//e.g. nalixidic acid has 35 force, thus would decrease germs here by 350
+		var/antibiotics = owner?.get_antibiotics()
+		incoming_germ = max(0, incoming_germ - (antibiotics * 10))
+
+		//This amount is not meaningful enough to cause an infection
+		if(incoming_germ < incoming_germ/2)
+			return
+
+		injury.adjust_germ_level(incoming_germ * 0.5)
 
 	/*
 	for(var/datum/wound/iter_wound as anything in wounds)

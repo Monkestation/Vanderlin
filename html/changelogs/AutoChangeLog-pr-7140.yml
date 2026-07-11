@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - balance: "Random +1/-1 stat variation on spawn is removed."
