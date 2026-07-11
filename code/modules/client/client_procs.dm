@@ -1389,9 +1389,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	show_round_stats(pick_assoc(GLOB.featured_stats))
 
 /client/proc/preload_music()
-	if(SSsounds.initialized == TRUE)
+	if(SSsounds.initialized == TRUE && !cached_sounds)
 		for(var/sound_path as anything in SSsounds.all_music_sounds)
 			src << load_resource(sound_path, -1)
+		cached_sounds = TRUE
 
 /client/proc/is_donator()
 	if(patreon?.has_access(ACCESS_ASSISTANT_RANK))
