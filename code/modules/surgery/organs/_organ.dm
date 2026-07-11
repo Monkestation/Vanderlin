@@ -131,6 +131,10 @@
 	LAZYNULL(organ_efficiency_modification)
 	return ..()
 
+/obj/item/organ/vv_edit_var(var_name, var_value)
+	. = ..()
+	consider_processing()
+
 /obj/item/organ/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isliving(interacting_with))
 		return NONE
@@ -213,26 +217,11 @@
 		organ_flags &= ~ORGAN_NECROTIC
 		return TRUE
 
-/obj/item/organ/proc/handle_blood(delta_time, times_fired)
-	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
-	var/in_bleedout = owner.in_bleedout()
-	var/failer
-	if(arterial_efficiency)
-		failer = is_failing_without_bleedout()
-	else
-		failer = is_failing()
-	if(arterial_efficiency && !failer && !in_bleedout)
-		// Arteries get an extra flat 10 blood regen
-		current_blood = min(current_blood + (2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
-		return
-	if(!blood_req)
-		return
-	if(!in_bleedout)
-		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage) //very slow refill
-		return
-	current_blood = max(current_blood - (blood_req * delta_time), 0)
-	// When all blood is lost, take blood from blood vessels
-	if(!current_blood)
+/obj/item/organ/proc/handle_blood(delta_time, times_fired, in_bleedout)
+	if(blood_req && (in_bleedout || is_failing_without_bleedout()))
+		current_blood = max(current_blood - (blood_req * delta_time), 0)
+	// When blood is missing take from arteries
+	if(current_blood < max_blood_storage)
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
 		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
@@ -241,14 +230,17 @@
 				artery = candidate
 				break
 		if(artery?.current_blood)
-			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * delta_time), 0)
-			current_blood = max(prev_blood - artery.current_blood, 0)
+			var/blood_needed = min(max_blood_storage - current_blood, blood_req * delta_time)
+			var/blood_taken = min(artery.current_blood, blood_needed)
+			artery.current_blood = max(artery.current_blood - blood_taken, 0)
+			artery.consider_processing()
+			current_blood = min(current_blood + blood_taken, max_blood_storage)
 		if((current_blood <= 0) && !(organ_flags & ORGAN_LIMB_SUPPORTER))
 			var/temperature_mod = 1
 			if(owner?.bodytemperature > BODYTEMP_NORMAL)
 				temperature_mod += round((owner.bodytemperature - BODYTEMP_NORMAL) / (BODYTEMP_MAX_TEMPERATURE - BODYTEMP_NORMAL), 0.1)
 			applyOrganDamage(decay_factor * maxHealth * temperature_mod * delta_time)
+	consider_processing()
 
 /obj/item/organ/proc/generate_chimeric_organ(mob/living/source_mob)
 	if(!source_mob)
@@ -326,12 +318,13 @@
 		A.Grant(M)
 	update_accessory_colors()
 	update_appearance()
-	if(visible_organ)
-		M.update_body_parts(TRUE)
-	M.update_organ_requirements()
-	if(organ_flags & ORGAN_LIMB_SUPPORTER)
-		var/obj/item/bodypart/affected = owner.get_bodypart(current_zone)
-		affected?.update_limb_efficiency()
+	if(!(M.status_flags & BUILDING_ORGANS))
+		if(visible_organ)
+			M.update_body_parts(TRUE)
+		M.update_organ_requirements()
+		if(organ_flags & ORGAN_LIMB_SUPPORTER)
+			var/obj/item/bodypart/affected = owner.get_bodypart(current_zone)
+			affected?.update_limb_efficiency()
 	STOP_PROCESSING(SSobj, src)
 
 //Special is for instant replacement like autosurgeons
@@ -357,10 +350,11 @@
 	update_appearance()
 
 	START_PROCESSING(SSobj, src)
-	M.update_organ_requirements()
-	if(organ_flags & ORGAN_LIMB_SUPPORTER)
-		var/obj/item/bodypart/affected = M.get_bodypart(initial_zone)
-		affected?.update_limb_efficiency()
+	if(!(M.status_flags & BUILDING_ORGANS))
+		M.update_organ_requirements()
+		if(organ_flags & ORGAN_LIMB_SUPPORTER)
+			var/obj/item/bodypart/affected = M.get_bodypart(initial_zone)
+			affected?.update_limb_efficiency()
 
 /obj/item/organ/proc/on_owner_examine(datum/source, mob/user, list/examine_list)
 	return
@@ -381,6 +375,7 @@
 	. = ..()
 	if((germ_level >= INFECTION_LEVEL_THREE) && !CHECK_BITFIELD(organ_flags, ORGAN_NECROTIC))
 		kill_organ()
+	consider_processing()
 
 /obj/item/organ/proc/kill_organ()
 	. = FALSE
@@ -389,39 +384,42 @@
 		return TRUE
 
 /// Runs decay both inside and outside a person
-/obj/item/organ/proc/on_death(delta_time, times_fired)
+/obj/item/organ/proc/on_death(delta_time, times_fired, passed_temp)
 	if(!owner && !isbodypart(loc))
 		if(isnull(loc))
 			STOP_PROCESSING(SSobj, src)
 		organ_flags |= ORGAN_CUT_AWAY
-	if(can_decay())
+	if(can_decay(passed_temp))
 		decay(delta_time)
 	// else
 	// 	STOP_PROCESSING(SSobj, src)
 
 /// Infection/rot checks
-/obj/item/organ/proc/can_decay()
+/obj/item/organ/proc/can_decay(passed_temp)
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
-	check_cold()
+	check_cold(passed_temp)
 	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_SYNTHETIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
 		return FALSE
 	return TRUE
 
 // Checks to see if the organ is frozen from temperature and adds the ORGAN_FROZEN flag if so
-/obj/item/organ/proc/check_cold()
+/obj/item/organ/proc/check_cold(passed_temp)
 	var/local_temp
-	if(!owner)
-		//Only concern is adding an organ to a freezer when the area around it is cold.
-		if(isturf(loc))
-			var/turf/turf_loc = loc
-			local_temp = turf_loc?.return_temperature()
-		else if(ismob(loc))
-			var/mob/holder = loc
-			var/turf/turf_loc = holder.loc
-			local_temp = turf_loc?.return_temperature()
+	if(passed_temp)
+		local_temp = passed_temp
 	else
-		local_temp = owner.bodytemperature
+		if(!owner)
+			//Only concern is adding an organ to a freezer when the area around it is cold.
+			if(isturf(loc))
+				var/turf/turf_loc = loc
+				local_temp = turf_loc?.return_temperature()
+			else if(ismob(loc))
+				var/mob/holder = loc
+				var/turf/turf_loc = holder.loc
+				local_temp = turf_loc?.return_temperature()
+		else
+			local_temp = owner.bodytemperature
 
 	// Shouldn't happen but just in case
 	if(isnull(local_temp))
@@ -436,17 +434,14 @@
 
 
 /// Malus caused by germs
-/obj/item/organ/proc/handle_germ_effects(delta_time, times_fired)
-	var/virus_immunity = owner?.virus_immunity()
-	var/antibiotics = owner?.get_antibiotics()
-
+/obj/item/organ/proc/handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && DT_PROB(virus_immunity*0.15, delta_time))
 		adjust_germ_level(-0.5 * delta_time)
 		return
 
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
-		if(antibiotics < 5 && DT_PROB(round(germ_level/6 * owner.immunity_weakness() * 0.005), delta_time))
+		if(antibiotics < 5 && DT_PROB(round(germ_level/6 * immunity_weakness * 0.005), delta_time))
 			if(virus_immunity > 0)
 				adjust_germ_level(clamp(round(0.5/virus_immunity), 1, 10) * delta_time) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
@@ -460,7 +455,7 @@
 		var/obj/item/bodypart/bodypart = owner.get_bodypart(current_zone)
 		if(bodypart)
 			//Spread germs
-			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || DT_PROB(owner.immunity_weakness() * 0.15, delta_time)))
+			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || DT_PROB(immunity_weakness * 0.15, delta_time)))
 				bodypart.adjust_germ_level(0.5 * delta_time)
 		//Cause organ damage about once every ~30 seconds
 		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
@@ -476,11 +471,10 @@
 				bodypart.adjust_germ_level(0.5 * delta_time)
 
 /// Antibiotics combating germs and stuff
-/obj/item/organ/proc/handle_antibiotics(delta_time, times_fired)
+/obj/item/organ/proc/handle_antibiotics(delta_time, times_fired, antibiotics)
 	if(!owner || (germ_level <= 0))
 		return
 
-	var/antibiotics = owner.get_antibiotics()
 	if(antibiotics <= 0)
 		return
 
@@ -491,32 +485,48 @@
 		if(owner?.body_position == LYING_DOWN)
 			adjust_germ_level(-SANITIZATION_LYING * delta_time)
 
-/obj/item/organ/proc/on_life(delta_time, times_fired)	//repair organ damage if the organ is not failing
+/obj/item/organ/proc/consider_processing(in_bleedout)
+	. = FALSE
+	if(in_bleedout)
+		. = TRUE
+	else if(damage >= DAMAGE_PRECISION)
+		. = TRUE
+	else if(germ_level > 0)
+		. = TRUE
+	else if(current_blood < max_blood_storage)
+		. = TRUE
+	else if(failure_time > 0)
+		. = TRUE
+	else if(is_failing())
+		. = TRUE
+	needs_processing = .
+
+/obj/item/organ/proc/on_life(delta_time, times_fired, in_bleedout, virus_immunity, antibiotics, immunity_weakness, passed_temp)	//repair organ damage if the organ is not failing
 	SHOULD_CALL_PARENT(TRUE)
 	if(!owner)
 		return
 
 	/// Handle germs before anything else!
-	if(can_decay())
-		handle_germ_effects(delta_time, times_fired)
-		handle_antibiotics(delta_time, times_fired)
+	if(can_decay(passed_temp))
+		handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
+		handle_antibiotics(delta_time, times_fired, antibiotics)
 	else
 		germ_level = 0
 
 	/// Handle blood
-	handle_blood(delta_time, times_fired)
+	handle_blood(delta_time, times_fired, in_bleedout)
 
 	// Damage decrements by a percent of maxhealth
-	if(can_self_heal(delta_time, times_fired))
+	if(can_self_heal(delta_time, times_fired, in_bleedout))
 		handle_self_healing(delta_time, times_fired)
 
 	if(is_failing())
-		handle_failing_organ(delta_time, times_fired)
-		return
+		return handle_failing_organ(delta_time, times_fired)
 
 	// Decrease failure time while healthy
 	if(failure_time > 0)
 		failure_time = max(0, failure_time - delta_time)
+	consider_processing(in_bleedout)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
 /obj/item/organ/proc/handle_failing_organ(delta_time, times_fired)
@@ -524,10 +534,10 @@
 		return
 
 	failure_time += delta_time
-	organ_failure(delta_time)
+	return organ_failure(delta_time)
 
 /// healing checks
-/obj/item/organ/proc/can_self_heal(delta_time, times_fired)
+/obj/item/organ/proc/can_self_heal(delta_time, times_fired, in_bleedout)
 	. = TRUE
 	if(!owner)
 		return FALSE
@@ -541,7 +551,7 @@
 		return FALSE
 	if(current_blood <= 0)
 		return FALSE
-	if(owner.undergoing_cardiac_arrest())
+	if(in_bleedout)
 		return FALSE
 	if(owner.get_chem_effect(CE_TOXIN))
 		return FALSE
@@ -665,6 +675,7 @@
 
 	if(message && owner)
 		to_chat(owner, message)
+	consider_processing()
 
 ///SETS an organ's damage to the amount "d", and in doing so clears or sets the failing flag, good for when you have an effect that should fix an organ if broken
 /obj/item/organ/proc/setOrganDamage(d)	//use mostly for admin heals
