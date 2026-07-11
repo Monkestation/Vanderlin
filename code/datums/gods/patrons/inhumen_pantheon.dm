@@ -115,7 +115,7 @@
 		"BAOTHA'S WHISPERS CALM MY MIND!",
 	)
 	storyteller = /datum/storyteller/baotha
-	associated_structure = null //to lazy to have a shrine I guess
+	associated_structure = list(/obj/structure/fluff/statue/shisha)
 	associated_psycross = list(
 	/obj/item/clothing/neck/psycross/baotha,
 	/obj/item/clothing/neck/psycross/baotha/wood
