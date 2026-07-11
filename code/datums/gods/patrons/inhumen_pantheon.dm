@@ -1,7 +1,8 @@
 /datum/patron/inhumen
 	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
-	var/associated_psycross = /obj/item/clothing/neck/psycross/zizo //inverted psycross
+	var/associated_psycross = /obj/item/clothing/neck/psycross/zizo
+	var/associated_structure = /obj/structure/fluff/psycross/zizocross
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",
@@ -9,15 +10,15 @@
 	)
 
 /datum/patron/inhumen/can_pray(mob/living/carbon/human/follower)
-	for(var/obj/structure/fluff/psycross/cross in view(7, get_turf(follower)))
-		if(!cross.divine && !cross.obj_broken)
+	for(var/obj/structure/crosstype in view(7, get_turf(follower)))
+		if(is_type_in_list(crosstype, associated_structure))
 			return TRUE
 
 	if(is_type_in_list(follower.wear_wrists, associated_psycross) || is_type_in_list(follower.wear_neck, associated_psycross) || is_type_in_list(follower.get_active_held_item(), associated_psycross))
 		return TRUE
 
 
-	to_chat(follower, span_danger("I need an amulet of my patron, or a nearby Inverted Cross, for my prayers to be heard..."))
+	to_chat(follower, span_danger("I need an amulet of my patron, or my patron's idol, for my prayers to be heard..."))
 	return FALSE
 
 /* ----------------- */
@@ -42,7 +43,11 @@
 		/mob/living/carbon/human/proc/draw_sigil,
 		/mob/living/carbon/human/proc/praise,
 	)
-
+	added_blueprints = list(/datum/blueprint_recipe/zizo/shrine)
+	associated_structure = list(
+	/obj/structure/fluff/psycross/zizocross,
+	/obj/structure/fluff/statue/zizo
+	)
 	associated_psycross = list(
 	/obj/item/clothing/neck/psycross/zizo,
 	/obj/item/clothing/neck/psycross/zizo/wood
@@ -64,7 +69,8 @@
 		"GRAGGAR BRINGS UNHOLY DESTRUCTION!"
 	)
 	storyteller = /datum/storyteller/graggar
-
+	added_blueprints = list(/datum/blueprint_recipe/graggar/shrine)
+	associated_structure = list(/obj/structure/fluff/statue/graggar)
 	associated_psycross = list(
 	/obj/item/clothing/neck/psycross/graggar,
 	/obj/item/clothing/neck/psycross/graggar/wood
@@ -86,7 +92,8 @@
 		"MATTHIOS IS MY LORD, I SHALL BE HIS MARTYR!",
 	)
 	storyteller = /datum/storyteller/matthios
-
+	added_blueprints = list(/datum/blueprint_recipe/matthios/idol)
+	associated_structure = list(/obj/structure/fluff/statue/evil)
 	associated_psycross = list(
 	/obj/item/clothing/neck/psycross/matthios,
 	/obj/item/clothing/neck/psycross/matthios/wood
@@ -108,7 +115,7 @@
 		"BAOTHA'S WHISPERS CALM MY MIND!",
 	)
 	storyteller = /datum/storyteller/baotha
-
+	associated_structure = null //to lazy to have a shrine I guess
 	associated_psycross = list(
 	/obj/item/clothing/neck/psycross/baotha,
 	/obj/item/clothing/neck/psycross/baotha/wood

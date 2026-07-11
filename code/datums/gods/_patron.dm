@@ -35,6 +35,9 @@ GLOBAL_LIST_EMPTY(prayers)
 	///verbs applied by set_patron and removed when changed
 	var/list/added_verbs
 
+	///List of blueprints given to a patron for special structures
+	var/list/added_blueprints = list()
+
 	//If the patron has a specific specie worshipping them.
 	var/list/allowed_races
 
@@ -53,12 +56,22 @@ GLOBAL_LIST_EMPTY(prayers)
 		ADD_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
 		add_verb(pious, verb)
+	if(pious.mind)
+		pious.mind.teach_crafting_recipe(added_blueprints)
+	else
+		addtimer(CALLBACK(src, PROC_REF(added_blueprints_delay), pious), 1) //Doesn't added the blueprint on spawn without this
+
+/datum/patron/proc/added_blueprints_delay(mob/living/pious)
+	if(pious?.mind)
+		pious.mind.teach_crafting_recipe(added_blueprints)
 
 /datum/patron/proc/on_remove(mob/living/pious)
 	for(var/trait in added_traits)
 		REMOVE_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
 		remove_verb(pious, verb)
+	if(pious.mind)
+		pious.mind.forget_crafting_recipe(added_blueprints)
 
 /* -----PRAYERS----- */
 
