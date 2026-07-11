@@ -3204,7 +3204,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/rope,
 /obj/item/rope,
-/obj/item/restraints/legcuffs/beartrap/hunting_snare,
+/obj/item/restraints/legcuffs/beartrap/crafted,
 /turf/open/floor/hexstone,
 /area/indoors/town)
 "bBf" = (
@@ -48349,7 +48349,7 @@
 /area/under/town/basement)
 "vZy" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/restraints/legcuffs/beartrap/hunting_snare,
+/obj/item/restraints/legcuffs/beartrap/crafted,
 /obj/item/reagent_containers/glass/bucket/wooden{
 	pixel_x = 3
 	},
