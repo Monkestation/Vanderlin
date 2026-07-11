@@ -35,9 +35,9 @@
 	gloves = /obj/item/clothing/gloves/angle/grenzel
 	belt = /obj/item/storage/belt/leather/mercenary
 	shirt = /obj/item/clothing/shirt/grenzelhoft
-	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
+	wrists = /obj/item/clothing/wrists/bracers/iron
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/sword/long/greatsword/zwei/steel
+	backr = /obj/item/weapon/sword/long/greatsword/zwei
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
 	backpack_contents = list(
