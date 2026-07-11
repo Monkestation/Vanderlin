@@ -41,8 +41,7 @@
 		/datum/attribute/skill/combat/bows = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 10
-
+		/datum/attribute/skill/labor/mathematics = 10,
 	)
 
 /datum/job/advclass/orphanadv/bbrat
