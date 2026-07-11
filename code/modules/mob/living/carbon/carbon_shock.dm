@@ -236,7 +236,7 @@
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8)) // Crossed stage 8
 		if(!IsUnconscious())
-			visible_message(span_bolddanger("[src] scrunchs [p_their()] body and collapses!"), ignored_mobs = src)
+			visible_message(span_bolddanger("[src] scrunches [p_their()] body and collapses!"), ignored_mobs = src)
 			custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 		//Death is near...
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))

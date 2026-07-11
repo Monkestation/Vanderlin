@@ -38,13 +38,5 @@ export async function processAutoChangelog({ github, context }) {
 		path: `html/changelogs/AutoChangeLog-pr-${context.payload.pull_request.number}.yml`,
 		message: `Automatic changelog for PR #${context.payload.pull_request.number} [ci skip]`,
 		content: Buffer.from(yml).toString("base64"),
-		commiter: {
-			name: `VanderlinMonarch`,
-			email: '224467185+VanderlinMonarch@users.noreply.github.com',
-		},
-		author: {
-			name: `VanderlinMonarch`,
-			email: '224467185+VanderlinMonarch@users.noreply.github.com',
-		},
 	});
 }
