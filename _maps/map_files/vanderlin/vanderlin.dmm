@@ -26088,12 +26088,6 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/guest/guest1)
-"mkq" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
-/turf/open/openspace,
-/area/outdoors/mountains)
 "mkt" = (
 /obj/structure/easel,
 /obj/item/canvas{
@@ -151363,7 +151357,7 @@ nRI
 nRI
 nRI
 nRI
-mkq
+nRI
 nRI
 nRI
 nRI
