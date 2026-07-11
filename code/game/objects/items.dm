@@ -165,7 +165,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/canMouseDown = FALSE
 	var/can_parry = FALSE
-	var/associated_skill
+	var/datum/attribute/associated_skill
 
 	var/list/possible_item_intents = list(/datum/intent/use)
 
@@ -629,8 +629,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		inspect_list += "\n<b>MIN.STR:</b> [minstr]"
 
 	if(associated_skill)
-		var/datum/attribute/skill/skilltype = new associated_skill
-		inspect_list += "\n<b>SKILL:</b> [skilltype.name]"
+		inspect_list += "\n<b>SKILL:</b> [associated_skill::name]"
 
 	if(!istype(src, /obj/item/clothing))
 		if(can_parry)
