@@ -530,6 +530,11 @@
 	color = "#80432a"
 	taste_description = "meagre meat stew"
 
+/datum/reagent/consumable/soup/stew/solyanka
+	color = "#b0432a"
+	taste_description = "savory stewed meat and ollies"
+	nutriment_factor = 12
+
 /datum/reagent/consumable/soup/stew/fish
 	color = "#c7816e"
 	taste_description = "fish stew"
