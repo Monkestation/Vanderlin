@@ -16775,6 +16775,13 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"hWd" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/structure/fake_machine/stockpile{
+	pixel_y = -32
+	},
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "hWe" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -32703,9 +32710,7 @@
 /area/outdoors/town)
 "phd" = (
 /obj/structure/fluff/steamvent,
-/obj/structure/fake_machine/stockpile{
-	pixel_y = 0
-	},
+/obj/structure/fake_machine/stockpile,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "phf" = (
@@ -36280,12 +36285,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/vault)
-"qMH" = (
-/obj/structure/fake_machine/stockpile{
-	pixel_y = 0
-	},
-/turf/closed/wall/mineral/stone,
-/area/under/town/basement)
 "qML" = (
 /obj/structure/stairs{
 	dir = 8
@@ -71787,8 +71786,8 @@ kNq
 pBZ
 kNq
 mEZ
-mEZ
-qMH
+hWd
+jEQ
 qFx
 qFx
 qFx
