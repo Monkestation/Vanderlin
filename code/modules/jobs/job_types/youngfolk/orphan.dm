@@ -185,7 +185,7 @@
 		belt = /obj/item/storage/belt/leather/rope
 		beltr = /obj/item/weapon/mace/woodclub
 
-// SKILLED STRAY - THE RESPONSIBLE CHILD
+// SKILLED SCAMP - THE RESPONSIBLE CHILD
 
 /datum/attribute_holder/sheet/job/orphanadv/sscamp
 	raw_attribute_list = list(
@@ -194,6 +194,9 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/masonry = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/craft/cooking = 10,
 	)
 
 /datum/job/advclass/orphanadv/sscamp
@@ -345,9 +348,15 @@
 		shirt = /obj/item/clothing/shirt/undershirt
 		pants = /obj/item/clothing/pants/tights
 		belt = /obj/item/storage/belt/leather/rope
+		if(prob(1))
+			mouth = /obj/item/gem/diamond
+		else
+			mouth = /obj/item/natural/stone
 	else
 		pants = /obj/item/clothing/pants/tights/colored/vagrant
 		shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
+		if(prob(20))
+			mouth = /obj/item/natural/stone
 
 
 // WEIRD WARD - The Kid with Possibly Bad Vibes
@@ -361,7 +370,8 @@
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/medicine = 15,
 		/datum/attribute/skill/craft/alchemy = 5,
-		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/craft/tanning = 5,
 	)
 
 /datum/job/advclass/orphanadv/wward
@@ -402,7 +412,7 @@
 			pants = /obj/item/clothing/pants/tights/colored/black
 		else
 			shirt = /obj/item/clothing/shirt/dress/gen/colored/black
-		pants = /obj/item/clothing/pants/tights
+			pants = /obj/item/clothing/pants/tights
 		gloves = /obj/item/clothing/gloves/leather/phys
 		mask = /obj/item/clothing/face/shepherd
 		belt = /obj/item/storage/belt/leather/rope
@@ -437,17 +447,15 @@
 		STAT_FORTUNE = 1,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
-		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/medicine = 15,
-		/datum/attribute/skill/craft/alchemy = 5,
-		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/misc/music = 20,
+		/datum/attribute/skill/craft/crafting = 10,
 	)
 
 /datum/job/advclass/orphanadv/ccastoff
 	title= "Creative Castoff"
-	tutorial = "In sun-blessed Vanderlin \
-	an orphan unraveled the day \
-	practicing their merry songs \
+	tutorial = "In sun-blessed Vanderlin \n\
+	an orphan unraveled the day\n\
+	practicing their merry songs\n\
 	bringing bright color to the grey!"
 	outfit = /datum/outfit/orphanadv/ccastoff
 	category_tags = list(CTAG_ORPHAN)
