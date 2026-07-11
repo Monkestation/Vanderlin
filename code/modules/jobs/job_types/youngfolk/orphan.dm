@@ -14,7 +14,7 @@
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
-	advclass_cat_rolls = list(CTAG_ORPHAN = 7
+	advclass_cat_rolls = list(CTAG_ORPHAN = 7)
 	outfit = /datum/outfit/orphan
 
 	spells = list(
