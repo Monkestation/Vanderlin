@@ -185,16 +185,17 @@
 	armor = /obj/item/clothing/armor/leather/splint
 	beltr = /obj/item/weapon/mace/cudgel
 
-/datum/outfit/watchman/ranger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
-	var/weapontypec = pickweight(list("Bow" = 6, "Crossbow" = 4))
-	switch(weapontypec)
+	var/static/list/weapons = list("Bow", "Crossbow")
+	var/weapon_choice = browser_input_list(equipped_human, "CHOOSE YOUR WEAPON.", "AIM TRUE.", weapons)
+	switch(weapon_choice)
 		if("Bow")
-			backl = /obj/item/gun/ballistic/bow/long
-			backr = /obj/item/ammo_holder/quiver/arrows
+			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_L, TRUE)
+			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BACK_R, TRUE)
 		if("Crossbow")
-			backl = /obj/item/gun/ballistic/bow/cross
-			backr = /obj/item/ammo_holder/quiver/bolts
+			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_L, TRUE)
+			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BACK_R, TRUE)
 
 /datum/attribute_holder/sheet/job/menatarms/swordsman
 	raw_attribute_list = list(

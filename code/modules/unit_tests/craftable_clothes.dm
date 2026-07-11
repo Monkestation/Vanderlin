@@ -22,6 +22,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
+		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -55,7 +56,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/neck/fencerguard/inq, ///inqport
 		/obj/item/clothing/neck/fencerguard, //null
 		/obj/item/clothing/armor/cuirass/fencer, //meh
-		/obj/item/clothing/armor/cuirass/fluted, //eh
 		/obj/item/clothing/armor/medium/scale/inqcoat/armored, //upgrade
 		/obj/item/clothing/armor/brigandine/light, //basetype,
 		/obj/item/clothing/armor/plate/fluted/ornate, //basetype
@@ -95,7 +95,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/armor/heartfelt,
 		/obj/item/clothing/armor/heartfelt/hand,
 
-		/obj/item/clothing/armor/cuirass/fluted,
+		/obj/item/clothing/wrists/bracers/iron/concealed, // watchmen drip special
 
 		///these can probably have recipes?
 		/obj/item/clothing/face/xylixmask,

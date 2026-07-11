@@ -472,6 +472,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 
 	if(humanc)
 		try_apply_character_post_equipment(humanc, client)
+
 	if(humanc?.mind)
 		SSrelations.try_late_join_rival(humanc.mind)
 
@@ -487,7 +488,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	var/column_counter = 0
 
 	var/static/list/omegalist = list(
-		GLOB.noble_positions,
+		GLOB.noble_courthand_positions,
 		GLOB.garrison_positions,
 		GLOB.gallowband_positions,
 		GLOB.church_positions,

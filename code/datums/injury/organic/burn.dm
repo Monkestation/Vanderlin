@@ -35,7 +35,7 @@
 	. = ..()
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if(limb.owner && (limb.burn_dam/limb.max_damage) >= 0.25) // medium burn damage
-		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_BLEEDOUT * damage/100, 1))
+		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_SURVIVE * damage/150, 1))
 
 /*
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, wounding_type = WOUND_BLUNT)

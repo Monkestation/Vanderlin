@@ -166,8 +166,7 @@
 
 /obj/item/organ/lungs/proc/breathe_air(mob/living/carbon/breather, breath, delta_time)
 	if(!breath)
-		handle_suffocation(breather, delta_time)
-		return
+		return handle_suffocation(breather, delta_time)
 
 	if(breather.getOxyLoss())
 		var/lung_efficiency = get_slot_efficiency(ORGAN_SLOT_LUNGS)/ORGAN_OPTIMAL_EFFICIENCY
@@ -205,7 +204,8 @@
 	// Give them a chance to notice something is wrong.
 	if(DT_PROB(5, delta_time))
 		suffocator.emote("gasp")
-	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * delta_time)
+	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * delta_time, FALSE)
+	return ORGAN_PROCESS_UPDATE_HEALTH
 
 /obj/item/organ/lungs/proc/handle_breath_temperature(breath, mob/living/carbon/human/breather)
 	var/breath_effect_prob = 0

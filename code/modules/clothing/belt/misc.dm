@@ -66,6 +66,12 @@
 		/obj/item/storage/keyring/guard,
 	)
 
+/obj/item/storage/belt/leather/lieutenant //they get their keys + dagger there
+	populate_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special,
+		/obj/item/storage/keyring/lieutenant,
+	)
+
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
 		/obj/item/natural/cloth/bandage,
@@ -95,6 +101,13 @@
 	name = "black belt"
 	icon_state = "blackbelt"
 	sellprice = 10
+
+/obj/item/storage/belt/leather/black/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/weapon/knife/dagger/steel,
+		/obj/item/lockpickring/mundane,
+	)
 
 /obj/item/storage/belt/leather/plaquesilver
 	name = "plaque belt"
