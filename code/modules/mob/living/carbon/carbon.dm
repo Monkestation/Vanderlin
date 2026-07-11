@@ -1,7 +1,9 @@
 /mob/living/carbon/Initialize()
 	. = ..()
 	create_reagents(1000)
-	update_body_parts() //to update the carbon's new bodyparts appearance
+	update_organ_requirements()
+	update_limb_efficiencies()
+	update_body() //to update the carbon's new bodyparts appearance
 	LoadComponent(/datum/component/storage/concrete/organ)
 	GLOB.carbon_list += src
 
@@ -1143,7 +1145,8 @@
 
 /mob/living/carbon/proc/create_internal_organs()
 	for(var/obj/item/organ/I as anything in internal_organs)
-		I.Insert(src)
+		if(!I.owner)
+			I.Insert(src)
 
 /mob/living/carbon/vv_get_dropdown()
 	. = ..()
