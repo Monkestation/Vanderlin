@@ -123,6 +123,14 @@
 /obj/item/natural/cloth,
 /turf/open/floor/twig,
 /area/indoors/soilsons)
+"adb" = (
+/obj/structure/table/wood{
+	dir = 5;
+	icon_state = "largetable"
+	},
+/obj/machinery/essence/reservoir,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "ado" = (
 /obj/structure/bookcase/random{
 	pixel_y = 18;
@@ -498,6 +506,21 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
+"amp" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/essence_connector,
+/obj/item/essence_connector,
+/obj/item/essence_connector,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/essence_node_jar{
+	pixel_x = -7;
+	pixel_y = 17
+	},
+/obj/structure/chem_separator{
+	pixel_y = 17
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "amz" = (
 /obj/structure/fluff/railing/tall{
 	dir = 8
@@ -950,6 +973,13 @@
 /obj/structure/flora/grass/water,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
+"axa" = (
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/essence/harvester{
+	pixel_y = -3
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "axi" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/structure/breaker{
@@ -2411,6 +2441,35 @@
 /obj/effect/mapping_helpers/access/keyset/town/smith,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
+"bhb" = (
+/obj/item/essence_vial{
+	pixel_x = -5;
+	pixel_y = 15
+	},
+/obj/item/essence_vial{
+	pixel_y = 6;
+	pixel_x = -1
+	},
+/obj/item/essence_vial{
+	pixel_y = 11;
+	pixel_x = 8
+	},
+/obj/item/essence_vial{
+	pixel_x = 7;
+	pixel_y = 3
+	},
+/obj/item/essence_vial{
+	pixel_x = -10;
+	pixel_y = 2
+	},
+/obj/structure/table/wood/reinf_long{
+	dir = 1
+	},
+/obj/item/essence_vial{
+	pixel_y = -4
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "bhA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt,
@@ -2473,6 +2532,32 @@
 "bjG" = (
 /turf/open/floor/woodturned,
 /area/under/town/sewer)
+"bjI" = (
+/obj/item/essence_vial{
+	pixel_x = -8;
+	pixel_y = 21
+	},
+/obj/item/essence_vial{
+	pixel_y = 15
+	},
+/obj/item/essence_vial{
+	pixel_y = 22;
+	pixel_x = 8
+	},
+/obj/item/essence_vial{
+	pixel_x = -8;
+	pixel_y = 9
+	},
+/obj/item/essence_vial{
+	pixel_x = 9;
+	pixel_y = 11
+	},
+/obj/structure/table/wood/reinf_long,
+/obj/item/essence_vial{
+	pixel_y = 3
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "bjY" = (
 /obj/machinery/light/fueled/firebowl,
 /obj/structure/fluff/railing/wood{
@@ -4294,6 +4379,10 @@
 	dir = 4
 	},
 /area/indoors/soilsons)
+"cbn" = (
+/obj/machinery/tanningrack,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "cbu" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 32
@@ -5020,6 +5109,10 @@
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
+"ctY" = (
+/obj/structure/fluff/walldeco/med5,
+/turf/closed/wall/mineral/craftstone,
+/area/under/cave)
 "cug" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/effect/decal/cleanable/dirt,
@@ -6458,6 +6551,22 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/merc_guild)
+"cXo" = (
+/obj/item/natural/worms/leech{
+	pixel_x = 5;
+	pixel_y = -3
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = -7;
+	pixel_y = -5
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = 11;
+	pixel_y = 2
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/water/sewer,
+/area/under/cave)
 "cXz" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/feather,
@@ -9568,6 +9677,10 @@
 	},
 /turf/open/openspace,
 /area/outdoors/basin/safe)
+"exH" = (
+/obj/structure/fake_machine/drugmachine,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "exL" = (
 /obj/structure/winch{
 	dir = 1;
@@ -10255,6 +10368,14 @@
 /obj/structure/table/wood/fancy/purple,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"ePh" = (
+/obj/structure/table/wood{
+	dir = 1;
+	icon_state = "largetable"
+	},
+/obj/machinery/essence/reservoir,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "ePk" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/kitchen/spoon/iron,
@@ -12286,6 +12407,20 @@
 /obj/item/natural/stone,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
+"fNr" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/reagent_containers/food/snacks/meat/salami,
+/obj/item/reagent_containers/food/snacks/bread,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/natural/feather,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "fNw" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -12965,6 +13100,23 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/shop)
+"gdE" = (
+/obj/item/reagent_containers/glass/mortar{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/glass/mortar{
+	pixel_x = -4;
+	pixel_y = -4
+	},
+/obj/item/pestle,
+/obj/item/pestle{
+	pixel_x = 6;
+	pixel_y = 3
+	},
+/obj/structure/table/wood/reinforced_alter,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "gdJ" = (
 /obj/structure/fluff/railing/border,
 /obj/item/reagent_containers/food/snacks/smallrat,
@@ -16070,6 +16222,24 @@
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/clinic_large/apothecary)
+"hEW" = (
+/obj/item/natural/worms/leech{
+	pixel_x = 5;
+	pixel_y = 1
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = 18
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/water/sewer,
+/area/under/cave)
 "hEZ" = (
 /obj/structure/flora/grass,
 /turf/open/floor/cobblerock,
@@ -20157,6 +20327,13 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/archivist)
+"juD" = (
+/obj/machinery/essence/splitter{
+	pixel_y = -3
+	},
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "juI" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -22454,6 +22631,10 @@
 /obj/structure/flora/grass,
 /turf/open/water/clean/dirt,
 /area/outdoors/town)
+"kxm" = (
+/obj/machinery/essence/combiner,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "kxu" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/bed/shit,
@@ -22776,6 +22957,13 @@
 /area/indoors/town/merc_guild)
 "kHy" = (
 /turf/closed/mineral/random/med,
+/area/under/cave)
+"kHz" = (
+/obj/machinery/essence/enchantment_altar{
+	pixel_x = -1;
+	pixel_y = -4
+	},
+/turf/open/floor/blocks/stonered/tiny,
 /area/under/cave)
 "kHA" = (
 /obj/effect/mapping_helpers/access/keyset/manor/dungeon,
@@ -24029,6 +24217,14 @@
 "ljs" = (
 /turf/open/floor/grass/red,
 /area/indoors/town/church)
+"ljv" = (
+/obj/machinery/essence/reservoir,
+/obj/structure/table/wood{
+	dir = 1;
+	icon_state = "largetable"
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "ljE" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -24277,6 +24473,13 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town)
+"lpu" = (
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/essence/infuser{
+	pixel_y = -3
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "lpy" = (
 /turf/open/floor/concrete,
 /area/indoors/town)
@@ -26503,6 +26706,10 @@
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/garrison)
+"muA" = (
+/obj/machinery/essence/research_matrix,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "muC" = (
 /obj/effect/waterfall{
 	pixel_x = -5
@@ -27689,6 +27896,10 @@
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/cobble/mossy,
 /area/outdoors/town/keep)
+"mST" = (
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "mTj" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/keyset/town/soilson,
@@ -33020,6 +33231,14 @@
 	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"plC" = (
+/obj/structure/table/wood{
+	dir = 9;
+	icon_state = "largetable"
+	},
+/obj/machinery/essence/reservoir,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "plN" = (
 /obj/item/weapon/mace/woodclub/train_sword,
 /turf/open/floor/wood,
@@ -34787,6 +35006,10 @@
 "qcD" = (
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
+"qcH" = (
+/obj/structure/well,
+/turf/open/floor/blocks/paving,
+/area/under/cave)
 "qcM" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/servant)
@@ -35243,6 +35466,17 @@
 "qod" = (
 /turf/closed/wall/mineral/decorstone/window,
 /area/indoors/town/keep/library)
+"qoD" = (
+/obj/item/recipe_book/alchemy,
+/obj/item/recipe_book/alchemy,
+/obj/item/recipe_book/underworld,
+/obj/item/recipe_book/underworld,
+/obj/structure/bookcase,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "qoE" = (
 /obj/structure/door/stone{
 	name = "Supplies"
@@ -35531,6 +35765,12 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
+"qvD" = (
+/obj/structure/rack/shelf/biggest,
+/obj/effect/spawner/map_spawner/loot/potion_vitals,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "qvN" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -36881,6 +37121,10 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"qYD" = (
+/obj/machinery/light/fueled/cauldron,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "qYN" = (
 /obj/structure/carpet/green,
 /obj/structure/bookcase/random,
@@ -37266,6 +37510,32 @@
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/blocks,
 /area/outdoors/town)
+"riJ" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/obj/item/alch/bone,
+/obj/item/alch/bone,
+/obj/item/alch/bone,
+/obj/item/alch/airdust,
+/obj/item/alch/airdust,
+/obj/item/alch/earthdust,
+/obj/item/alch/earthdust,
+/obj/item/alch/firedust,
+/obj/item/alch/firedust,
+/obj/item/alch/waterdust,
+/obj/item/alch/waterdust,
+/obj/item/alch/magicdust,
+/obj/item/alch/magicdust,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/turf/open/floor/blocks/paving,
+/area/under/cave)
 "riK" = (
 /obj/structure/flora/grass,
 /obj/structure/fluff/railing/wood,
@@ -41478,6 +41748,11 @@
 /obj/item/gem,
 /turf/open/floor/tile/checker,
 /area/indoors/town/vault)
+"sYV" = (
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "sZb" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/curtain/bounty/dir{
@@ -41485,6 +41760,25 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
+"sZg" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/manapot,
+/obj/item/reagent_containers/glass/bottle/manapot,
+/obj/item/reagent_containers/glass/bottle/manapot,
+/obj/item/reagent_containers/glass/bottle/vial/conpot,
+/obj/item/reagent_containers/glass/bottle/vial/endpot,
+/obj/item/reagent_containers/glass/bottle/vial/intpot,
+/obj/item/reagent_containers/glass/bottle/vial/perpot,
+/obj/item/reagent_containers/glass/bottle/vial/spdpot,
+/obj/item/reagent_containers/glass/bottle/vial/strpot,
+/obj/item/reagent_containers/glass/bottle/vial/lucpot,
+/obj/effect/mapping_helpers/access/keyset/town/apothecary,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks/paving,
+/area/under/cave)
 "sZi" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -41667,6 +41961,14 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
+"tdt" = (
+/obj/machinery/essence/reservoir,
+/obj/structure/table/wood{
+	dir = 9;
+	icon_state = "largetable"
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "tdB" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "Ook wants more staging areas. -Aberra."
@@ -47390,6 +47692,13 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass,
 /area/outdoors/farm)
+"vDP" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/effect/spawner/map_spawner/loot/potion_vitals,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "vDV" = (
 /obj/structure/table/wood{
 	dir = 9;
@@ -47858,6 +48167,10 @@
 "vMQ" = (
 /turf/open/water/clean,
 /area/outdoors/town/keep)
+"vNf" = (
+/obj/machinery/essence/test_tube,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "vNk" = (
 /obj/structure/nocdevice,
 /obj/structure/carpet/blue,
@@ -47973,6 +48286,9 @@
 	dir = 1
 	},
 /area/outdoors/river)
+"vPf" = (
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "vPq" = (
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/blue)
@@ -48631,6 +48947,13 @@
 	},
 /turf/open/floor/cobble/mossy,
 /area/outdoors/town/keep)
+"wdN" = (
+/obj/structure/lever{
+	pixel_y = 7;
+	redstone_id = "apothecary"
+	},
+/turf/open/floor/blocks/paving,
+/area/under/cave)
 "wdV" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/church)
@@ -49160,6 +49483,14 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/churchbrick,
 /area/under/town/sewer)
+"wrD" = (
+/obj/machinery/essence/reservoir,
+/obj/structure/table/wood{
+	dir = 5;
+	icon_state = "largetable"
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "wrG" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/openspace,
@@ -51007,6 +51338,11 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"xaJ" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/cave)
 "xaT" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -52478,6 +52814,32 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
+"xHC" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/produce/swampweed_dried,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/item/reagent_containers/food/snacks/produce/swampweed,
+/obj/item/reagent_containers/food/snacks/produce/swampweed,
+/obj/item/clothing/face/cigarette/pipe/crafted,
+/obj/item/reagent_containers/powder/spice,
+/obj/item/reagent_containers/powder/spice,
+/obj/item/neuFarm/seed/poppy,
+/obj/item/natural/chaff/wheat,
+/obj/item/natural/chaff/wheat,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/turf/open/floor/blocks/paving,
+/area/under/cave)
 "xHL" = (
 /obj/structure/fake_machine/scomm,
 /mob/living/simple_animal/pet/cat/cabbit{
@@ -121868,21 +122230,21 @@ qFx
 qFx
 qFx
 qFx
+riJ
+juD
+qYD
+lpu
+qFx
+tdt
+gdE
 qFx
 qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+exH
+sYV
+vDP
 qFx
 qFx
 qFx
@@ -122070,21 +122432,21 @@ qFx
 qFx
 qFx
 qFx
+sZg
+cbn
+hdX
+vPf
+qFx
+ljv
+plC
+qFx
+bhb
+bjI
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+fNr
+qvD
 qFx
 qFx
 qFx
@@ -122271,17 +122633,17 @@ eIh
 nam
 qFx
 qFx
+xaJ
+xHC
+kHz
+ctY
+muA
 qFx
+wrD
+ePh
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+bhb
+bjI
 qFx
 qFx
 qFx
@@ -122473,14 +122835,14 @@ nam
 wDX
 qFx
 qFx
+mST
+hEW
+amp
+hdX
+vPf
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+qoD
+adb
 qFx
 qFx
 qFx
@@ -122675,11 +123037,11 @@ wbr
 nam
 nam
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+vNf
+cXo
+axa
+qYD
+kxm
 qFx
 qFx
 qFx
@@ -123082,8 +123444,8 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+qcH
+wdN
 qFx
 qFx
 eIh
