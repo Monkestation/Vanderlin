@@ -1,4 +1,0 @@
-author: "Sulaboy"
-delete-after: True
-changes:
-  - qol: "Inspecting a weapon shows what skill it scales off of for combat, and if it can't parry."
