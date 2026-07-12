@@ -12,7 +12,7 @@
 
 	charge_time = 2 SECONDS
 	charge_slowdown = 0.3
-	cooldown_time = 30 SECONDS
+	cooldown_time = 20 SECONDS
 	spell_cost = 35
 
 	projectile_type = /obj/projectile/magic/energy/moonstrike
