@@ -32,6 +32,7 @@
 
 	honorary = "Sir"
 	honorary_f = "Dame"
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
