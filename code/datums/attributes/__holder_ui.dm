@@ -6,9 +6,6 @@
 GLOBAL_LIST_EMPTY(attribute_menu_static_payload)
 GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
-/proc/attribute_menu_should_show_stat(attribute_type)
-	return attribute_type != STAT_FORTUNE
-
 /proc/ensure_attribute_menu_static_payload()
 	if(length(GLOB.attribute_menu_static_payload))
 		return GLOB.attribute_menu_static_payload
@@ -19,8 +16,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
 	var/list/stats_meta = list()
 	for(var/stat_type in GLOB.all_stats)
-		if(!attribute_menu_should_show_stat(stat_type))
-			continue
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
 		var/icon_class = sanitize_css_class_name(stat.icon_state)
 		stats_meta += list(list(
@@ -59,7 +54,7 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 				"difficulty" = skill.difficulty,
 				"kind" = "skill",
 			)
-			if(skill.governing_attribute && attribute_menu_should_show_stat(skill.governing_attribute))
+			if(skill.governing_attribute)
 				var/datum/attribute/governing = GET_ATTRIBUTE_DATUM(skill.governing_attribute)
 				if(governing)
 					skill_meta["governing_attribute"] = governing.name
@@ -69,8 +64,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 				for(var/default_type in skill.default_attributes)
 					var/datum/attribute/default_attr = GET_ATTRIBUTE_DATUM(default_type)
 					if(!default_attr)
-						continue
-					if(ispath(default_type, STAT) && !attribute_menu_should_show_stat(default_type))
 						continue
 					defaults_meta += list(list(
 						"name" = default_attr.name,
@@ -114,12 +107,42 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 /datum/attribute_holder/proc/build_character_preview()
 	if(!parent)
 		return null
-	var/original_dir = parent.dir
-	parent.dir = SOUTH
-	var/icon/flat = getFlatIcon(parent, SOUTH, no_anim = TRUE)
-	parent.dir = original_dir
+	var/image/snapshot = image(null)
+	snapshot.appearance = parent.appearance
+	snapshot.dir = SOUTH
+	var/list/base_dimensions = get_icon_dimensions(snapshot.icon)
+	var/base_width = base_dimensions["width"]
+	var/base_height = base_dimensions["height"]
+	var/list/kept_overlays = list()
+	for(var/image/overlay as anything in snapshot.overlays)
+		if(overlay.pixel_x < 0 && overlay.pixel_y < 0)
+			var/list/overlay_dimensions = get_icon_dimensions(overlay.icon || snapshot.icon)
+			if(overlay.pixel_x + overlay_dimensions["width"] > base_width && overlay.pixel_y + overlay_dimensions["height"] > base_height)
+				continue
+		kept_overlays += overlay
+	snapshot.overlays = kept_overlays
+	var/icon/flat = getFlatIcon(snapshot, SOUTH, no_anim = TRUE)
 	if(!flat)
 		return null
+	var/left = 0
+	var/right = 0
+	var/bottom = 0
+	var/top = 0
+	for(var/x in 1 to flat.Width())
+		for(var/y in 1 to flat.Height())
+			if(!flat.GetPixel(x, y))
+				continue
+			if(!left || x < left)
+				left = x
+			if(x > right)
+				right = x
+			if(!bottom || y < bottom)
+				bottom = y
+			if(y > top)
+				top = y
+	if(!left)
+		return null
+	flat.Crop(left, bottom, right, top)
 	var/flat_w = flat.Width()
 	var/flat_h = flat.Height()
 	if(flat_w % 2 || flat_h % 2)
@@ -160,8 +183,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
 	var/list/stats_values = list()
 	for(var/stat_type in GLOB.all_stats)
-		if(!attribute_menu_should_show_stat(stat_type))
-			continue
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
 		stats_values[stat.name] = list(
 			"raw_value" = nulltozero(raw_attribute_list[stat_type]),

@@ -23,7 +23,19 @@ const SEAL_STATES = new Set([
   'perception',
 ]);
 
-const statAnchor = (name: string): string => name.toLowerCase();
+const SEAL_RING_RADIUS = 34;
+const SEAL_LABEL_SPREAD = 48;
+
+const sealRingPosition = (index: number, count: number) => {
+  const angle = (2 * Math.PI * index) / Math.max(count, 1);
+  const sin = Math.sin(angle);
+  const cos = Math.cos(angle);
+  return {
+    left: 50 + SEAL_RING_RADIUS * sin,
+    top: 50 - SEAL_RING_RADIUS * cos,
+    labelShift: Math.round(SEAL_LABEL_SPREAD * sin * Math.abs(cos)),
+  };
+};
 
 const statSealLabel = (name: string, shorthand?: string): string =>
   shorthand ? `${name} (${shorthand})` : name;
@@ -45,7 +57,7 @@ const TUTORIAL_STEPS: TutorialStep[] = [
   },
   {
     title: 'Character Seals',
-    body: 'The left page bears six Core Attribute seals arranged around your portrait: Strength, Perception, Intelligence, Speed, Constitution, and Endurance. These foundations govern almost everything you do.',
+    body: 'The left page bears the Core Attribute seals arranged around your portrait: Strength, Speed, Endurance, Intelligence, Perception, Constitution, and Fortune. These foundations govern almost everything you do.',
     target: '.AttributeMenu__panel--seals',
     popupAnchor: 'right',
   },
@@ -431,20 +443,30 @@ const AttributeSealNode = memo((props: {
   stat: ResolvedStat;
   selected: boolean;
   act: any;
+  top: number;
+  left: number;
+  labelShift: number;
 }) => {
-  const { stat, selected, act } = props;
-  const anchor = statAnchor(stat.name);
-  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${anchor}${
+  const { stat, selected, act, top, left, labelShift } = props;
+  const hemisphere = top < 50 ? 'upper' : 'lower';
+  const nodeClass = `AttributeMenu__sealNode AttributeMenu__sealNode--${hemisphere}${
     selected ? ' is-selected' : ''
   }`;
 
   const sealState = stat.icon;
   const hasMedallion = !!sealState && SEAL_STATES.has(sealState);
 
+  const nodeStyle = {
+    top: `${top}%`,
+    left: `${left}%`,
+    '--seal-label-shift': `${labelShift}px`,
+  } as CSSProperties;
+
   return (
     <Tooltip content={stat.desc || stat.name} position="bottom">
       <button
         className={nodeClass}
+        style={nodeStyle}
         onClick={() => act('inspect_closely', { attribute_name: stat.name })}
         type="button"
       >
@@ -472,7 +494,10 @@ const AttributeSealNode = memo((props: {
   previous.stat.name === next.stat.name &&
   previous.stat.value === next.stat.value &&
   previous.stat.raw_value === next.stat.raw_value &&
-  previous.stat.shorthand === next.stat.shorthand);
+  previous.stat.shorthand === next.stat.shorthand &&
+  previous.top === next.top &&
+  previous.left === next.left &&
+  previous.labelShift === next.labelShift);
 
 const CoreAttributes = memo((props: {
   stats: ResolvedStat[];
@@ -513,14 +538,20 @@ const CoreAttributes = memo((props: {
         {!!stats.length && (
           <Box className="AttributeMenu__ringStage">
             <RingFigure previewImage={previewImage} subject={subject} />
-            {stats.map((stat) => (
-              <AttributeSealNode
-                key={stat.name}
-                stat={stat}
-                selected={selectedName === stat.name}
-                act={act}
-              />
-            ))}
+            {stats.map((stat, index) => {
+              const position = sealRingPosition(index, stats.length);
+              return (
+                <AttributeSealNode
+                  key={stat.name}
+                  stat={stat}
+                  selected={selectedName === stat.name}
+                  act={act}
+                  top={position.top}
+                  left={position.left}
+                  labelShift={position.labelShift}
+                />
+              );
+            })}
           </Box>
         )}
       </Box>
