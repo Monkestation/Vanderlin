@@ -19,6 +19,7 @@
 #define ACCESS_MINER "miner"
 #define ACCESS_BATHHOUSE "bathhouse"
 #define ACCESS_SWEEPER "sweeper"
+#define ACCESS_HUNTER "hunter"
 
 // Town Garrison (Including forest)
 #define ACCESS_GARRISON "garrison"

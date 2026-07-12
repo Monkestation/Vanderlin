@@ -64,6 +64,18 @@
 	width = 7
 	height = 15
 
+/datum/map_template/vanderlin_lodge_one
+	name = "Vanderlin Lodge 1"
+	mappath = "_maps/map_files/vanderlin/house_templates/lodge1.dmm"
+	width = 6
+	height = 6
+
+/datum/map_template/vanderlin_lodge_two
+	name = "Vanderlin Lodge 2"
+	mappath = "_maps/map_files/vanderlin/house_templates/lodge2.dmm"
+	width = 6
+	height = 6
+
 /datum/map_template/tailor
 	name = "Vanderlin Tailor Apartment"
 	mappath = "_maps/map_files/vanderlin/house_templates/tailor.dmm"
