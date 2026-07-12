@@ -29,7 +29,7 @@
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
-		STAT_INTELLIGENCE = 6,
+		STAT_INTELLIGENCE = 4,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = -2,
 		STAT_SPEED = -2,
@@ -115,6 +115,7 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_oracle()
 		devotion.grant_to(spawned)
+	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
 
 /datum/outfit/oracle
 	name = JOB_ORACLE

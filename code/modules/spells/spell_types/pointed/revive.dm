@@ -137,7 +137,8 @@
 	. = ..()
 	if(!.)
 		return
-	if(GLOB.tod == DAWN || GLOB.tod == DAY)
+	var/area/admin/starchamber/chamber = get_area(owner)
+	if((GLOB.tod == DAWN || GLOB.tod == DAY) && !(istype(chamber)))
 		if(feedback)
 			to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
 		return FALSE
