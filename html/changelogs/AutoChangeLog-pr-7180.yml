@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Random spellstones/scrolls/wands can no longer generate with spells they're not meant to have."
