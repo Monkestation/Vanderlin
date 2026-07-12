@@ -133,15 +133,19 @@
 		return FALSE
 	return ishuman(cast_on)
 
+/datum/action/cooldown/spell/revive_noc/can_cast_spell(feedback)
+	. = ..()
+	if(!.)
+		return
+	if(GLOB.tod == DAWN || GLOB.tod == DAY)
+		to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
+		return FALSE
+	return TRUE
+
 /datum/action/cooldown/spell/revive_noc/before_cast(mob/living/carbon/human/cast_on)
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
-
-	if(GLOB.tod == DAWN || GLOB.tod == DAY)
-		to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
 
 	if(HAS_TRAIT(cast_on, TRAIT_NOC_CURSE))
 		to_chat(owner, span_warning("This fool invoked the wrath of the Moon Prince, they belong to Necra now."))

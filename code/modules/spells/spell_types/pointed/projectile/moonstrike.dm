@@ -17,14 +17,14 @@
 
 	projectile_type = /obj/projectile/magic/energy/moonstrike
 
-/datum/action/cooldown/spell/projectile/moonstrike/before_cast(mob/living/cast_on)
+/datum/action/cooldown/spell/projectile/moonstrike/can_cast_spell(feedback)
 	. = ..()
-	if(. & SPELL_CANCEL_CAST)
+	if(!.)
 		return
 	if(GLOB.tod == DAWN || GLOB.tod == DAY)
 		to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
+		return FALSE
+	return TRUE
 
 /obj/projectile/magic/energy/moonstrike
 	name = "moonstrike"
