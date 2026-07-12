@@ -69,6 +69,10 @@
 	outfit = /datum/outfit/oracle
 	honorary = "Oracle"
 
+	magic_user = TRUE
+	spell_points = 12
+	give_bank_account = 30
+
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
@@ -77,6 +81,10 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/oracle
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/oracle/old
+
+	spells = list(
+		/datum/action/oracle_announce,
+	)
 
 	traits = list(
 		TRAIT_EMPATH,
