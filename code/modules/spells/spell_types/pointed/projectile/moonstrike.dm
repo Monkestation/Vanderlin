@@ -22,7 +22,8 @@
 	if(!.)
 		return
 	if(GLOB.tod == DAWN || GLOB.tod == DAY)
-		to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
+		if(feedback)
+			to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
 		return FALSE
 	return TRUE
 
