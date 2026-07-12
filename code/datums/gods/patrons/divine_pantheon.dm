@@ -18,24 +18,9 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 /datum/patron/divine
 	abstract_type = /datum/patron/divine
 	associated_faith = /datum/faith/divine_pantheon
+	church_prayer = TRUE
+	prayer_fail = "I need my patron's amulet, to go to church, or to find a cross to pray at."
 	profane_words = list("zizo", "cock", "dick", "fuck", "shit", "pussy", "cuck", "cunt", "asshole")
-	var/associated_psycross = /obj/item/clothing/neck/psycross
-
-/datum/patron/divine/can_pray(mob/living/carbon/human/follower)
-	//you can pray anywhere inside a church
-	if(istype(get_area(follower), /area/indoors/town/church))
-		return TRUE
-
-	for(var/obj/structure/fluff/psycross/cross in view(4, get_turf(follower)))
-		if(!cross.obj_broken)
-			return TRUE
-
-	if(is_type_in_list(follower.wear_wrists, associated_psycross) || is_type_in_list(follower.wear_neck, associated_psycross) || is_type_in_list(follower.get_active_held_item(), associated_psycross))
-		return TRUE
-
-
-	to_chat(follower, span_danger("I need an amulet of my patron, or a nearby Pantheon Cross, for my prayers to be heard..."))
-	return FALSE
 
 /* ----------------- */
 /datum/patron/divine/centrist
@@ -53,9 +38,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"THE TEN PROTECT US!",
 		"I SERVE THE DIVINE TEN!",
 	)
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine,
-	/obj/item/clothing/neck/psycross/divine
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine,
+			/obj/item/clothing/neck/psycross/divine
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 
@@ -75,9 +65,15 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I SERVE THE GLORY OF THE SUN!",
 	)
 	storyteller = /datum/storyteller/astrata
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/astrata,
-	/obj/item/clothing/neck/psycross/divine/astrata
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/astrata,
+			/obj/item/clothing/neck/psycross/divine/astrata
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross,
+			/obj/structure/fluff/statue/astrata
+		),
 	)
 
 /datum/patron/divine/noc
@@ -96,9 +92,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I SEEK THE MYSTERIES OF THE MOON!",
 	)
 	storyteller = /datum/storyteller/noc
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/noc,
-	/obj/item/clothing/neck/psycross/divine/noc
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/noc,
+			/obj/item/clothing/neck/psycross/divine/noc
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/dendor
@@ -117,9 +118,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I ANSWER THE CALL OF THE WILD!",
 	)
 	storyteller = /datum/storyteller/dendor
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/dendor,
-	/obj/item/clothing/neck/psycross/divine/dendor
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/dendor,
+			/obj/item/clothing/neck/psycross/divine/dendor
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/abyssor
@@ -138,9 +144,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I AM DRAWN BY THE PULL OF THE TIDE!",
 	)
 	storyteller = /datum/storyteller/abyssor
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/abyssor,
-	/obj/item/clothing/neck/psycross/divine/abyssor
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+			/obj/item/clothing/neck/psycross/divine/abyssor
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/necra
@@ -159,9 +170,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I FEAR NOT DEATH, MY LADY AWAITS ME!",
 	)
 	storyteller = /datum/storyteller/necra
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/necra,
-	/obj/item/clothing/neck/psycross/divine/necra
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/necra,
+			/obj/item/clothing/neck/psycross/divine/necra
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/ravox
@@ -180,9 +196,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"THE DRUMS OF WAR BEAT IN MY CHEST!",
 	)
 	storyteller = /datum/storyteller/ravox
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/ravox,
-	/obj/item/clothing/neck/psycross/divine/ravox
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/ravox,
+			/obj/item/clothing/neck/psycross/divine/ravox
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/xylix
@@ -208,9 +229,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"EORA BRINGS US TOGETHER!",
 	)
 	storyteller = /datum/storyteller/xylix
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/xylix,
-	/obj/item/clothing/neck/psycross/divine/xylix
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/xylix,
+			/obj/item/clothing/neck/psycross/divine/xylix
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/pestra
@@ -229,9 +255,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"MY AFFLICTION IS MY TESTAMENT!",
 	)
 	storyteller = /datum/storyteller/pestra
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/pestra,
-	/obj/item/clothing/neck/psycross/divine/pestra
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/pestra,
+			/obj/item/clothing/neck/psycross/divine/pestra
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/pestra/preference_accessible(datum/preferences/prefs)
@@ -258,9 +289,14 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I AM AN INSTRUMENT OF CREATION!",
 	)
 	storyteller = /datum/storyteller/malum
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/malum,
-	/obj/item/clothing/neck/psycross/divine/malum
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/malum,
+			/obj/item/clothing/neck/psycross/divine/malum
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)
 
 /datum/patron/divine/eora
@@ -279,7 +315,12 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I LOVE YOU, EVEN AS YOU TRESPASS AGAINST ME!",
 	)
 	storyteller = /datum/storyteller/eora
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/silver/divine/eora,
-	/obj/item/clothing/neck/psycross/divine/eora
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver/divine/eora,
+			/obj/item/clothing/neck/psycross/divine/eora
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
 	)

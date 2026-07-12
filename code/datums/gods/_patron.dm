@@ -18,6 +18,10 @@ GLOBAL_LIST_EMPTY(prayers)
 	var/sins = "Codersocks"
 	/// What boons the god may offer
 	var/boons = "Code errors"
+	/// Allows prayer without amulet or cross in church areas
+	var/church_prayer = FALSE
+	/// Message that shows if you can't pray.
+	var/prayer_fail = "I need an amulet of my patron, or my patron's idol, for my prayers to be heard..." // If a patron has unusual prayable structures we should tell them here.
 	/// Faith this god belongs to
 	var/datum/faith/associated_faith = null
 	/// All gods have related confessions
@@ -34,6 +38,15 @@ GLOBAL_LIST_EMPTY(prayers)
 
 	///verbs applied by set_patron and removed when changed
 	var/list/added_verbs
+
+	///List of usable amulets to wear or structures able to be prayed with
+	#define PATRON_AMULET 1
+	#define PATRON_STRUCTURE 2
+
+	var/list/associated_objects = list(
+		PATRON_AMULET = null,
+		PATRON_STRUCTURE = null,
+	)
 
 	///List of blueprints given to a patron for special structures
 	var/list/added_blueprints = list()
@@ -78,7 +91,19 @@ GLOBAL_LIST_EMPTY(prayers)
 /// Called when a patron's follower attempts to pray.
 /// Returns TRUE if they satisfy the needed conditions.
 /datum/patron/proc/can_pray(mob/living/follower)
-	return TRUE
+	if(istype(get_area(follower), /area/indoors/town/church) && church_prayer)
+		return TRUE
+
+	for(var/obj/structure/crosstype in view(7, get_turf(follower)))
+		if(is_type_in_list(crosstype, associated_objects[PATRON_STRUCTURE]))
+			return TRUE
+
+	if(follower.check_slots_for_types(list(ITEM_SLOT_NECK, ITEM_SLOT_WRISTS, ITEM_SLOT_HANDS), associated_objects[PATRON_AMULET]))
+		return TRUE
+
+	to_chat(follower, span_danger(prayer_fail))
+	return FALSE
+
 
 /// Called when a patron's follower prays to them.
 /// Returns TRUE if their prayer was heard and the patron was not insulted

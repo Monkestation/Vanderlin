@@ -1,25 +1,20 @@
 /datum/patron/inhumen
 	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
-	var/associated_psycross = /obj/item/clothing/neck/psycross/zizo
-	var/associated_structure = /obj/structure/fluff/psycross/zizocross
+	associated_objects = list(
+			PATRON_AMULET = list(
+				/obj/structure/fluff/psycross/zizocross,
+			),
+			PATRON_STRUCTURE = list(
+				/obj/item/clothing/neck/psycross/zizo,
+				/obj/item/clothing/neck/psycross/zizo/wood
+			),
+		)
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",
 		"THE TEN ARE DECEIVERS!"
 	)
-
-/datum/patron/inhumen/can_pray(mob/living/carbon/human/follower)
-	for(var/obj/structure/crosstype in view(7, get_turf(follower)))
-		if(is_type_in_list(crosstype, associated_structure))
-			return TRUE
-
-	if(is_type_in_list(follower.wear_wrists, associated_psycross) || is_type_in_list(follower.wear_neck, associated_psycross) || is_type_in_list(follower.get_active_held_item(), associated_psycross))
-		return TRUE
-
-
-	to_chat(follower, span_danger("I need an amulet of my patron, or my patron's idol, for my prayers to be heard..."))
-	return FALSE
 
 /* ----------------- */
 
@@ -33,6 +28,7 @@
 	boons = "You may perform fleshcrafting. Access to roles with magic."
 	//added_traits = list(TRAIT_CABAL)	No need for this. They have fleshcrafting now.
 	devotion_holder = /datum/devotion/inhumen/zizo
+	prayer_fail = "I need to wear her symbol, be at an Inverted Psycross, or a statue in Her image if I wish for Her knowledge!"
 	confess_lines = list(
 		"I FOLLOW THE PATH OF ZIZO!",
 		"LONG LIVE QUEEN ZIZO!",
@@ -44,13 +40,15 @@
 		/mob/living/carbon/human/proc/praise,
 	)
 	added_blueprints = list(/datum/blueprint_recipe/zizo/shrine)
-	associated_structure = list(
-	/obj/structure/fluff/psycross/zizocross,
-	/obj/structure/fluff/statue/zizo
-	)
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/zizo,
-	/obj/item/clothing/neck/psycross/zizo/wood
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/zizo,
+			/obj/item/clothing/neck/psycross/zizo/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross/zizocross,
+			/obj/structure/fluff/statue/zizo
+		),
 	)
 
 /datum/patron/inhumen/graggar
@@ -63,6 +61,7 @@
 	boons = "You are drawn to the flavour of raw flesh, organs, and blood. You may consume without worry."
 	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER)
 	devotion_holder = /datum/devotion/inhumen/graggar
+	prayer_fail = "He won't hear my prayer unless I'm wearing his amulet, or praying to His idol."
 	confess_lines = list(
 		"GRAGGAR IS THE BEAST I WORSHIP!",
 		"GRAGGAR WILL RAVAGE YOU!",
@@ -70,10 +69,14 @@
 	)
 	storyteller = /datum/storyteller/graggar
 	added_blueprints = list(/datum/blueprint_recipe/graggar/shrine)
-	associated_structure = list(/obj/structure/fluff/statue/graggar)
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/graggar,
-	/obj/item/clothing/neck/psycross/graggar/wood
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/graggar,
+			/obj/item/clothing/neck/psycross/graggar/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/statue/graggar
+		),
 	)
 
 /datum/patron/inhumen/matthios
@@ -86,6 +89,7 @@
 	boons = "You can see the most expensive item someone is carrying."
 	added_traits = list(TRAIT_MATTHIOS_EYES)
 	devotion_holder = /datum/devotion/inhumen/matthios
+	prayer_fail = "He won't hear my prayer unless I'm wearing his amulet, or praying to His idol."
 	confess_lines = list(
 		"MATTHIOS STEALS FROM THE WORTHLESS!",
 		"MATTHIOS IS JUSTICE FOR THE COMMON MAN!",
@@ -93,10 +97,14 @@
 	)
 	storyteller = /datum/storyteller/matthios
 	added_blueprints = list(/datum/blueprint_recipe/matthios/idol)
-	associated_structure = list(/obj/structure/fluff/statue/evil)
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/matthios,
-	/obj/item/clothing/neck/psycross/matthios/wood
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/matthios,
+			/obj/item/clothing/neck/psycross/matthios/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/statue/evil
+		),
 	)
 
 /datum/patron/inhumen/baotha
@@ -109,16 +117,21 @@
 	boons = "You will never overdose on drugs."
 	added_traits = list(TRAIT_CRACKHEAD)
 	devotion_holder = /datum/devotion/inhumen/baotha
+	prayer_fail = "Smoking at a hookah or shisha is bound to draw Her company, or if I were to wear Her amulet."
 	confess_lines = list(
 		"LIVE, LAUGH, LOVE! IN BAOTHA'S NAME!",
 		"JOY AT ALL COSTS! BAOTHA'S TEACHINGS REIGN!",
 		"BAOTHA'S WHISPERS CALM MY MIND!",
 	)
 	storyteller = /datum/storyteller/baotha
-	associated_structure = list(/obj/structure/fluff/statue/shisha)
-	associated_psycross = list(
-	/obj/item/clothing/neck/psycross/baotha,
-	/obj/item/clothing/neck/psycross/baotha/wood
+	associated_objects = list(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/baotha,
+			/obj/item/clothing/neck/psycross/baotha/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/statue/shisha
+		),
 	)
 
 /// Maniac Patron - Their mind is broken by secrets of Zizo/Graggar combined. They quite possibly know the reality of what happens outside the planet. They may think this is all a game. They are clearly insane.
