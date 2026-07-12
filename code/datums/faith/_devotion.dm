@@ -185,6 +185,7 @@
 	miracles_extra += list(
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
 	)
 	devotion_class = DEVOTION_CLASS_PRIEST
 
@@ -234,6 +235,19 @@
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
 	devotion_class = DEVOTION_CLASS_CHURCHLING
+
+/datum/devotion/proc/make_oracle()
+	devotion = 300
+	progression = CLERIC_REQ_3
+	passive_devotion_gain = 1
+	miracles_extra += list(
+		/datum/action/cooldown/spell/revive_noc,
+		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
+		/datum/action/cooldown/spell/healing/greater/noc,
+		/datum/action/cooldown/spell/projectile/moonstrike,
+	)
+	devotion_class = DEVOTION_CLASS_ACOLYTE // Equal to priest, but unique to Noc. Changing patron will reset to Acolyte tier.
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
