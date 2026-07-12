@@ -242,7 +242,7 @@
 	passive_devotion_gain = 1
 	/// We're overriding the list.
 	miracles = list(
-		CLERIC_T0 = (/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/healing/greater/noc),
+		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/healing/greater/noc),
 		CLERIC_T1 = /datum/action/cooldown/spell/status/invisibility,
 		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
 		CLERIC_T3 = list(/datum/action/cooldown/spell/projectile/moonlit_dagger, /datum/action/cooldown/spell/projectile/moonstrike),
