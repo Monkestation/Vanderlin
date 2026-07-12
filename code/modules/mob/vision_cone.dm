@@ -134,7 +134,6 @@
 
 	var/new_shadow_angle
 	var/new_angle
-
 	if(fovangle & FOV_RIGHT)
 		if(fovangle & FOV_LEFT)
 			new_shadow_angle = FOV_270_DEGREES
@@ -158,6 +157,10 @@
 	else
 		new_shadow_angle = FOV_90_DEGREES
 		new_angle = 0
+
+	// Nothing actually changed so we shouldn't need a rebuild
+	if(fov.fov_holder?.alpha && fov.shadow_angle == new_shadow_angle && fov.angle == new_angle)
+		return
 
 	fov.generate_fov_holder(src, new_shadow_angle, new_angle, register = FALSE, delete_holder = TRUE)
 

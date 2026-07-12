@@ -32,6 +32,7 @@
 
 	honorary = "Sir"
 	honorary_f = "Dame"
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -120,7 +121,7 @@
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	wrists = /obj/item/storage/keyring/manorguard
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/steel
 	beltr = /obj/item/weapon/sword/arming
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
