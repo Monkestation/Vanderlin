@@ -4,6 +4,7 @@
 	group = "Seeds"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/seeds
 
 /datum/supply_pack/seeds/spelt
 	name = "Spelt"
@@ -154,3 +155,8 @@
 	name = "Drowsbane"
 	cost = 15
 	contains = /obj/item/neuFarm/seed/spore/drowsbane
+
+/datum/supply_pack/seeds/ollie
+	name = "Ollie"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/ollie

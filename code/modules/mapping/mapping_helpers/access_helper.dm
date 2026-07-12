@@ -104,6 +104,9 @@
 /obj/effect/mapping_helpers/access/keyset/town/sweeper
 	accesses = list(ACCESS_SWEEPER)
 
+/obj/effect/mapping_helpers/access/keyset/town/hunter
+	accesses = list(ACCESS_HUNTER)
+
 // Town Garrison
 /obj/effect/mapping_helpers/access/keyset/garrison
 	color = "#b02323"
@@ -165,6 +168,10 @@
 
 /obj/effect/mapping_helpers/access/keyset/manor/hand
 	accesses = list(ACCESS_HAND)
+	difficulty = 2
+
+/obj/effect/mapping_helpers/access/keyset/manor/courtagent
+	accesses = list(ACCESS_COURTAGENT)
 	difficulty = 2
 
 /obj/effect/mapping_helpers/access/keyset/manor/lord

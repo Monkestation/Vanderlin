@@ -118,7 +118,8 @@
 	// I'm only interested in if the pass is unobstructed, not if the mob will actually make it
 	if(!climber.can_z_move(UP, get_turf(src), checking, z_move_flags = ZMOVE_ALLOW_BUCKLED))
 		return
-	var/turf/target = GET_TURF_ABOVE_DIAGONAL(src, dir|UP)
+	var/turf/turf = get_turf(src)
+	var/turf/target = GET_TURF_ABOVE_DIAGONAL(turf, dir|UP)
 	if(istype(target) && !climber.can_z_move(DOWN, target, z_move_flags = ZMOVE_FALL_FLAGS)) //Don't throw them into a tile that will just dump them back down.
 		climber.zMove(target = target, z_move_flags = ZMOVE_STAIRS_FLAGS)
 		/// Moves anything that's being dragged by src or anything buckled to it to the stairs turf.

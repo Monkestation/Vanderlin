@@ -27,6 +27,8 @@
 
 	/// The body that will be spawned, set by `generate_body()`, used to make inscription on a headstone if there is one.
 	var/mob/living/carbon/human/to_be_interred
+	/// If set, will override what will be spawned in the grave, see `grave_spawner_loot.dm` for details
+	var/datum/outfit/grave/unique/outfit_override
 
 /obj/effect/mapping_helpers/structure/grave_spawner/LateInitialize()
 	var/turf/open/floor/dirt/T = loc
@@ -136,11 +138,20 @@
 
 	// Generate inscription
 	if(to_be_interred && grave.headstone)
-		var/custom_messages = file2list("strings/grave_messages.txt")
+		var/custom_message
+		if(!outfit_override?.grave_messages)
+			custom_message = pick(file2list("strings/grave_messages.txt"))
+		else
+			custom_message = pick(outfit_override.grave_messages)
+			// We don't need outfit_override anymore, qdel it since we spawned it
+			qdel(outfit_override)
+		grave.headstone.custom_message = custom_message
+
 		grave.headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[to_be_interred.real_name]</span>\
 		<br>\
 		<br>\
-		<span class='italics'>[pick(custom_messages)]</span>"
+		<span class='italics'>[custom_message]</span>\
+		[to_be_interred.final_words ? "<br><span class='god_necra'>[pick(to_be_interred.final_words)]</span>" : null]"
 
 	//Update Grave
 	grave.no_devotion = TRUE // No devotion from these graves
@@ -165,26 +176,45 @@
 /// Returns body or container with body inside
 /obj/effect/mapping_helpers/structure/grave_spawner/proc/generate_body()
 	// This will (maybe) be expanded to have different species. For now we will just spawn a human and an outfit.
-	var/mob/living/carbon/human/body = new /mob/living/carbon/human/species/human/northern(loc)
+
+	// Stinks that we have to do this... qdel it after we grab everything we need from it
+	if(outfit_override)
+		outfit_override = new outfit_override()
+
+	var/mob/living/carbon/human/body
+	if(!outfit_override?.mob_to_spawn)
+		body = new /mob/living/carbon/human/species/human/northern(loc)
+	else
+		body = new outfit_override.mob_to_spawn(loc)
 	body.death()
 	ADD_TRAIT(body, TRAIT_STASIS, "Necra") // Body is dead and frozen, it was buried after all...
 
 	// Pick outfit
-	// List of available outfits for tier, unweighted and needs processed.
-	var/list/unprocessed_outfits
-	if(decor_quality == 1)
-		unprocessed_outfits = subtypesof(/datum/outfit/grave/t1)
-	else if(decor_quality == 2)
-		unprocessed_outfits = subtypesof(/datum/outfit/grave/t2)
+	if(!outfit_override)
+		// List of available outfits for tier, unweighted and needs processed.
+		var/list/unprocessed_outfits
+		if(decor_quality == 1)
+			unprocessed_outfits = subtypesof(/datum/outfit/grave/t1)
+		else if(decor_quality == 2)
+			unprocessed_outfits = subtypesof(/datum/outfit/grave/t2)
+		else
+			unprocessed_outfits = subtypesof(/datum/outfit/grave/t3)
+
+		// Weighted list that will be created and used to pick an outfit
+		var/list/outfit_choices = list()
+		for(var/datum/outfit/grave/possible_outfit as anything in unprocessed_outfits)
+			outfit_choices[possible_outfit] += possible_outfit.weight
+
+		body.equipOutfit(pickweight(outfit_choices))
 	else
-		unprocessed_outfits = subtypesof(/datum/outfit/grave/t3)
+		body.equipOutfit(outfit_override)
+		// We also replace name
+		if(outfit_override.mob_names)
+			body.fully_replace_character_name(body.name, pick(outfit_override.mob_names))
 
-	// Weighted list that will be created and used to pick an outfit
-	var/list/outfit_choices = list()
-	for(var/datum/outfit/grave/possible_outfit as anything in unprocessed_outfits)
-		outfit_choices[possible_outfit] += possible_outfit.weight
-
-	body.equipOutfit(pickweight(outfit_choices))
+	// Final words (if set)
+	if(outfit_override?.final_words)
+		body.final_words = pick(outfit_override.final_words)
 
 	to_be_interred = body
 

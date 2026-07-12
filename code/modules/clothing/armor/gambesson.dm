@@ -64,6 +64,9 @@
 /obj/item/clothing/armor/gambeson/heavy/colored/dark
 	color = CLOTHING_DARK_INK
 
+/obj/item/clothing/armor/gambeson/heavy/colored/brown
+	color = CLOTHING_MUD_BROWN
+
 /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	name = "robed jupon"
 	desc = "A thick, quilted jupon with an iron heart protector. It's great for the southern desert's heat and northern tundra's cold."
@@ -166,6 +169,11 @@
 	sellprice = VALUE_GAMBESSON+BONUS_VALUE_MODEST
 
 	body_parts_covered =  COVERAGE_ALL_BUT_LEGS
+
+/obj/item/clothing/armor/gambeson/arming/fencer
+	name = "fencing shirt"
+	desc = "A comfortable padded shirt designed for fencers, providing a bit of protection to vital areas."
+	icon_state = "fencingshirt"
 
 //................ Stalker Robe ............... //
 /obj/item/clothing/armor/gambeson/shadowrobe

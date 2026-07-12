@@ -30,11 +30,11 @@
 	update_blindness(source)
 
 /datum/status_effect/grouped/blindness/source_removed(source, removing)
-	if (!removing)
+	if(!removing)
 		update_blindness(source)
 
 /datum/status_effect/grouped/blindness/proc/update_blindness(changed_source)
-	if (!CAN_BE_BLIND(owner)) // future proofing
+	if(!CAN_BE_BLIND(owner)) // future proofing
 		qdel(src)
 		return
 
@@ -53,11 +53,20 @@
 /datum/status_effect/grouped/blindness/proc/make_blind(changed_source)
 	// have some extra logic to determine what overlay to use
 	// if our one and only source is from "temp blindness", use flicker overlay
-	var/overlay_to_use = /atom/movable/screen/fullscreen/blackimageoverlay
-	if(changed_source == /datum/status_effect/temporary_blindness::id && length(sources) == 1)
-		overlay_to_use = /atom/movable/screen/fullscreen/blind
-	else if(length(sources.Copy() - list(EYE_DAMAGE, TRAUMA_TRAIT))) // Sources other than eye damage or trauma
-		overlay_to_use = /atom/movable/screen/fullscreen/sleeper
+	var/overlay_to_use = /atom/movable/screen/fullscreen/blackimageoverlay/noflicker
+	var/list/priorities = list(EYE_DAMAGE = 1, TRAUMA_TRAIT = 1, UNCONSCIOUS_TRAIT = 2)
+	var/list/possible_overlay = list(/atom/movable/screen/fullscreen/blind/noflicker = 1, \
+		/atom/movable/screen/fullscreen/blackimageoverlay = 2)
+	var/highest_priority = 0
+	for(var/source in sources)
+		var/priority = priorities[source] // Sources other than eye damage or trauma
+		if(isnull(priority))
+			overlay_to_use = /atom/movable/screen/fullscreen/blackimageoverlay/noflicker
+			break
+		if(priority > highest_priority)
+			highest_priority = priority
+			overlay_to_use = possible_overlay[highest_priority]
+
 	owner.overlay_fullscreen(id, overlay_to_use)
 
 	// You are blind - at most, able to make out shapes near you

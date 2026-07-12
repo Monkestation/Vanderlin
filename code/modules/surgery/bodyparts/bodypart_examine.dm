@@ -236,7 +236,7 @@
 			if(get_cut(ignore_gauze = TRUE))
 				status += span_artery(uppertext("cut [possible_artery.name]"))
 			else
-				status += span_artery(uppertext("internal bleeding"))
+				status += span_artery(uppertext("bruised [possible_artery.name]"))
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"

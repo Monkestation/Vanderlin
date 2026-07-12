@@ -168,12 +168,10 @@
 			. += span_boldred(mind?.special_role == ROLE_BANDIT ? "BANDIT!" : "OUTLAW!")
 
 		// Court Agents
-		var/list/known_frumentarii = user.mind?.cached_frumentarii
-		if(name in known_frumentarii)
-			if(known_frumentarii[name])
-				. += span_smallgreen("[P[THEYRE]] an agent of the court.")
-			else
-				. += span_redtextsmall("[P[THEYRE]] an ex-agent of the court.")
+		if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS) && (real_name in GLOB.court_agents))
+			. += span_smallgreen ("An Agent of the Court.")
+		else if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS) && (real_name in GLOB.ex_court_agents))
+			. += span_redtextsmall ("An Ex-Agent of the Court.")
 
 		// Faceless
 		if(HAS_TRAIT(src, TRAIT_FACELESS))
@@ -547,6 +545,8 @@
 
 	// Bleeding
 	var/bleed_rate = get_bleed_rate()
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		bleed_rate += artery.blood_flow * (artery.damage/artery.maxHealth)
 	if(bleed_rate)
 		var/bleed_wording = "bleeding"
 		switch(bleed_rate)

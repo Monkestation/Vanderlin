@@ -61,6 +61,7 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_INQUISITION,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
@@ -113,7 +114,6 @@
 	ring = /obj/item/clothing/ring/signet/silver
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/ordinatorcape
-	beltr = /obj/item/storage/belt/pouch/coins/rich
 	head = /obj/item/clothing/head/helmet/heavy/ordinatorhelm
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	backpack_contents = list(

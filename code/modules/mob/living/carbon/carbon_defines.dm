@@ -8,6 +8,7 @@
 	usable_legs = 0 //Populated on init through list/bodyparts
 	num_hands = 0 //Populated on init through list/bodyparts
 	usable_hands = 0 //Populated on init through list/bodyparts
+	mobility_flags = MOBILITY_FLAGS_CARBON_DEFAULT
 	var/list/internal_organs		= list()	//List of /obj/item/organ in the mob. They don't go in the contents for some reason I don't want to know.
 	var/list/internal_organs_slot= list() //Same as above, but stores "slot ID" - "organ" pairs for easy access.
 	var/dreaming = 0 //How many dream images we have left to send
@@ -50,7 +51,8 @@
 	var/obj/item/tank/internal = null
 	var/obj/item/clothing/head = null
 
-
+	///a helper for NPCs so that they can avoid ALOT of work.
+	var/datum/species/race
 	var/obj/item/clothing/gloves = null //only used by humans
 	var/obj/item/clothing/shoes = null //only used by humans.
 
@@ -71,8 +73,6 @@
 	var/gib_type = /obj/effect/decal/cleanable/blood/gibs
 
 	rotate_on_lying = TRUE
-
-	var/tinttotal = 0	// Total level of visualy impairing items
 
 	var/list/bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
 					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg, /obj/item/bodypart/mouth)

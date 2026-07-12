@@ -7,13 +7,8 @@
  *
  **/
 
-//This is the ABSOLUTE ONLY THING that should init globally like this
-//2019 update: the failsafe,config and Global controllers also do it
+// See initialization order in /code/game/world.dm
 GLOBAL_REAL(Master, /datum/controller/master)
-
-//THIS IS THE INIT ORDER
-//Master -> SSPreInit -> GLOB -> world -> config -> SSInit -> Failsafe
-//GOT IT MEMORIZED?
 
 /datum/controller/master
 	name = "Master"

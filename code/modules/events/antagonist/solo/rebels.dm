@@ -11,7 +11,7 @@
 
 	roundstart = TRUE
 	antag_flag = ROLE_PREBEL
-	shared_occurence_type = SHARED_HIGH_THREAT
+	//shared_occurence_type = SHARED_HIGH_THREAT
 
 	base_antags = 1
 	maximum_antags = 4

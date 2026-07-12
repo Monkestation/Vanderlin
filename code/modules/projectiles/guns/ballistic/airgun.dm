@@ -68,17 +68,20 @@
 	playsound(src, 'sound/foley/industrial/pneumatichiss.ogg', 60)
 	COOLDOWN_START(src, hiss_cooldown, 2 SECONDS)
 
-/obj/item/gun/ballistic/airgun/attackby(obj/item/A, mob/user, list/modifiers)
-	if((istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing)))
+/obj/item/gun/ballistic/airgun/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if((istype(tool, /obj/item/ammo_box) || istype(tool, /obj/item/ammo_casing)))
 		if(!(user.is_holding(src)))
 			to_chat(user, span_warning("I need to hold \the [src] to load it!"))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		if(!(loading_chamber))
 			to_chat(user, span_warning("The loading chamber isn't open!"))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		if(steam_lever)
 			to_chat(user, span_warning("I almost scald myself with the boiling hot steam!"))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 	return ..()
 
 /obj/item/gun/ballistic/airgun/attack_self(mob/living/user, list/modifiers)

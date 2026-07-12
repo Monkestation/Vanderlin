@@ -8,20 +8,24 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/list/redstone_attached = list()
 
 /obj/structure/multitool_act(mob/living/user, obj/item/I)
-	. = ..()
 	if(!redstone_structure)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(!istype(I, /obj/item/contraption/linker))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/obj/item/contraption/linker/multitool = I
 	if(!multitool.current_charge)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) < 1)
 		to_chat(user, span_warning("I have no idea how to use [multitool]!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user.visible_message("[user] starts tinkering with [src].", "You start tinkering with [src].")
 	if(!do_after(user, 8 SECONDS, src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/datum/effect_system/spark_spread/noisy/S = new()
 	var/turf/front = get_turf(src)
 	S.set_up(1, 1, front)
@@ -44,6 +48,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		to_chat(user, "You store the internal schematics of [src] on [multitool].")
 		multitool.set_buffer(src)
 	multitool.charge_deduction(src, user, 1)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/vv_edit_var(var_name, var_value)
 	switch (var_name)
@@ -136,7 +142,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
-	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+	if(!(accessor_trait && HAS_CHARACTER_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
 			return // nothing here!
@@ -168,6 +174,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/hidden/thieves_guild
 	hidden_dc = 13
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
+
+/obj/structure/lever/hidden/courtagent
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
 
 /obj/structure/lever/hidden/rous
 	hidden_dc = 16

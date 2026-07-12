@@ -107,9 +107,11 @@
 	icon_state = "baitp"
 	attracted_types = list(/mob/living/simple_animal/hostile/retaliate/goat = 33,
 							/mob/living/simple_animal/hostile/retaliate/goatmale = 33,
+							/mob/living/simple_animal/hostile/retaliate/fox = 20,
 							/mob/living/simple_animal/pet/cat/cabbit = 50, // Rabbits love sweet things
 							/mob/living/simple_animal/hostile/retaliate/saiga = 20,
 							/mob/living/simple_animal/hostile/retaliate/saigabuck = 20,
+							/mob/living/simple_animal/hostile/retaliate/raccoon = 25,
 							/mob/living/simple_animal/hostile/retaliate/wolf = 10)
 
 	item_weight = 200 GRAMS
@@ -121,9 +123,24 @@
 	attracted_types = list(/mob/living/simple_animal/hostile/retaliate/wolf = 33,
 						/mob/living/simple_animal/hostile/retaliate/bigrat = 10,
 						/mob/living/simple_animal/hostile/retaliate/mole = 15,
+						/mob/living/simple_animal/hostile/retaliate/fox = 20,
+						/mob/living/simple_animal/hostile/retaliate/bobcat = 25,
+						/mob/living/simple_animal/hostile/retaliate/raccoon = 10,
+						/mob/living/simple_animal/hostile/retaliate/troll/caerbannog = 2.5)
+	item_weight = 250 GRAMS
+
+/obj/item/bait/greasy
+	name = "bag of greasebait"
+	desc = "A very powerful stench emits from this bait, carrying far and wide.. This is bound to attract something dangerous."
+	icon_state = "baitg"
+	attracted_types = list(/mob/living/simple_animal/hostile/retaliate/wolf = 40,
+						/mob/living/simple_animal/hostile/retaliate/direbear = 15,
+						/mob/living/simple_animal/hostile/retaliate/mole = 33,
 						/mob/living/simple_animal/hostile/retaliate/troll/axe = 5,
 						/mob/living/simple_animal/hostile/retaliate/troll/bog = 5,
-						/mob/living/simple_animal/hostile/retaliate/troll/caerbannog = 2.5)
+						/mob/living/simple_animal/hostile/retaliate/lamia = 1.5,
+						/mob/living/simple_animal/hostile/retaliate/troll/caerbannog = 2.5,
+						/mob/living/simple_animal/hostile/retaliate/voiddragon/red = 0.1)
 	item_weight = 250 GRAMS
 
 /obj/item/bait/forestdelight

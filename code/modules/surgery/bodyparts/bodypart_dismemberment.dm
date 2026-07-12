@@ -20,25 +20,25 @@
 	)
 
 //Dismember a limb
-/obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise)
-	. = ..()
-	if(owner?.client)
-		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
-
-/obj/item/bodypart/proc/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = src.body_zone)
+/obj/item/bodypart/proc/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = body_zone, forced = FALSE)
 	if(!owner)
 		return FALSE
+
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
 		if(zone_precise != BODY_ZONE_PRECISE_NECK)
 			return FALSE
+
 	if(C.status_flags & GODMODE)
 		return FALSE
+
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+
 	if(SEND_SIGNAL(src, COMSIG_CARBON_DISMEMBER, src) & COMPONENT_CANCEL_DISMEMBER)
 		return FALSE //signal handled the dropping
-	if(ishuman(owner))
+
+	if(!forced && ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		var/obj/item/clothing/checked_armor = human_owner.check_crit_armor(zone_precise, bclass)
 		if(checked_armor)
@@ -51,20 +51,25 @@
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
 	if(affecting && dismember_wound)
 		affecting.add_wound(dismember_wound)
+
 	playsound(C, pick(dismemsound), 50, FALSE, -1)
 	if(body_zone == BODY_ZONE_HEAD)
 		C.visible_message("<span class='danger'><B>[C] is [pick("BRUTALLY","VIOLENTLY","BLOODILY","MESSILY")] DECAPITATED!</B></span>")
 	else
 		C.visible_message("<span class='danger'><B>The [src.name] is [pick("torn off", "sundered", "severed", "separated", "unsewn")]!</B></span>")
+
 	if(C.can_feel_pain())
 		C.emote("painscream")
-	src.add_mob_blood(C)
+
+	add_mob_blood(C)
+
 	C.add_stress(/datum/stress_event/dismembered)
 	C.add_stress(/datum/stress_event/dismembered)
 	var/stress2give
 	if(!skeletonized && C.dna?.species) //we need a skeleton species for skeleton npcs
 		if(C.dna.species.id != SPEC_ID_GOBLIN && C.dna.species.id != SPEC_ID_ROUSMAN) //convert this into a define list later
 			stress2give = /datum/stress_event/viewdismember
+
 	if(C)
 		if(C.buckled)
 			if(istype(C.buckled, /obj/structure/fluff/psycross) || istype(C.buckled, /obj/machinery/light/fueled/campfire/pyre))
@@ -72,6 +77,7 @@
 					stress2give = /datum/stress_event/viewsinpunish
 			else if(istype(C.buckled, /obj/structure/guillotine))
 				stress2give = null
+
 	if(stress2give)
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
 			if(CA != C && !CA.is_blind())
@@ -86,8 +92,10 @@
 						CA.add_stress(/datum/stress_event/fviewdismember)
 						continue
 				CA.add_stress(stress2give)
+
 	if(grabbedby)
 		QDEL_LIST(grabbedby)
+
 	drop_limb()
 
 	if(dam_type == BURN)
@@ -116,16 +124,20 @@
 	throw_at(target_turf, throw_range, throw_speed)
 	return TRUE
 
-/obj/item/bodypart/chest/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = src.body_zone)
+/obj/item/bodypart/chest/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = body_zone, forced = FALSE)
 	if(!owner)
 		return FALSE
+
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
 		return FALSE
+
 	if(skeletonized)
 		return FALSE
+
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+
 	. = list()
 	var/organ_spilled = 0
 	var/turf/T = get_turf(C)
@@ -141,14 +153,22 @@
 		O.add_mob_blood(C)
 		organ_spilled = 1
 		. += O
+
 	for(var/atom/movable/item as anything in cavity_items)
 		item.forceMove(drop_location())
 		cavity_items -= item
+
 	organ_spilled = 1
 
 	if(organ_spilled)
 		C.visible_message("<span class='danger'><B>[C] spills [C.p_their()] guts!</B></span>")
+
 	return TRUE
+
+/obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise, forced)
+	. = ..()
+	if(owner?.client)
+		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
 
 //limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 /obj/item/bodypart/proc/drop_limb(special)
@@ -270,8 +290,9 @@
 				R.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
-		C.update_inv_gloves() //to remove the bloody hands overlay
-		C.update_inv_armor()
+		if(!(C?.status_flags & BUILDING_ORGANS))
+			C.update_inv_gloves() //to remove the bloody hands overlay
+			C.update_inv_armor()
 
 
 /obj/item/bodypart/l_arm/drop_limb(special)
@@ -282,15 +303,17 @@
 			C.handcuffed.forceMove(drop_location())
 			C.handcuffed.dropped(C)
 			C.set_handcuffed(null)
-			C.update_handcuffed()
+			if(!(C.status_flags & BUILDING_ORGANS))
+				C.update_handcuffed()
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/L = C.hud_used.hand_slots["[held_index]"]
 			if(L)
 				L.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
-		C.update_inv_gloves() //to remove the bloody hands overlay
-		C.update_inv_armor()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_gloves() //to remove the bloody hands overlay
+			C.update_inv_armor()
 
 /obj/item/bodypart/r_leg/drop_limb(special)
 	var/mob/living/carbon/C = owner
@@ -300,12 +323,14 @@
 			C.legcuffed.forceMove(C.drop_location()) //At this point bodypart is still in nullspace
 			C.legcuffed.dropped(C)
 			C.legcuffed = null
-			C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
-			C.update_inv_legcuffed()
+			if(!(C.status_flags & BUILDING_ORGANS))
+				C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
+				C.update_inv_legcuffed()
 		if(C.shoes && (C.num_legs < 1))
 			C.dropItemToGround(C.shoes, force = TRUE)
-		C.update_inv_shoes()
-		C.update_inv_pants()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_shoes()
+			C.update_inv_pants()
 
 /obj/item/bodypart/l_leg/drop_limb(special) //copypasta
 	var/mob/living/carbon/C = owner
@@ -315,12 +340,14 @@
 			C.legcuffed.forceMove(C.drop_location())
 			C.legcuffed.dropped(C)
 			C.legcuffed = null
-			C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
-			C.update_inv_legcuffed()
+			if(!(C.status_flags & BUILDING_ORGANS))
+				C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
+				C.update_inv_legcuffed()
 		if(C.shoes && (C.num_legs < 1))
 			C.dropItemToGround(C.shoes, force = TRUE)
-		C.update_inv_shoes()
-		C.update_inv_pants()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_shoes()
+			C.update_inv_pants()
 
 /obj/item/bodypart/head/drop_limb(special)
 	if(!special)
@@ -373,7 +400,8 @@
 			var/atom/movable/screen/inventory/hand/hand = C.hud_used.hand_slots["[held_index]"]
 			if(hand)
 				hand.update_appearance(UPDATE_OVERLAYS)
-		C.update_inv_gloves()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_gloves()
 
 	if(special) //non conventional limb attachment
 		//if we had an ongoing surgery to attach a new limb, we stop it.
@@ -400,9 +428,10 @@
 
 	update_bodypart_damage_state()
 
-	C.updatehealth()
-	C.update_body()
-	C.update_damage_overlays()
+	if(!(C.status_flags & BUILDING_ORGANS))
+		C.updatehealth()
+		C.update_body()
+		C.update_damage_overlays()
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
 	//Transfer some head appearance vars over

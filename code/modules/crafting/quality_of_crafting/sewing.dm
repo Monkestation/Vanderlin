@@ -667,6 +667,14 @@
 	craftdiff = 3
 	category = "Armor"
 
+/datum/repeatable_crafting_recipe/sewing/fencershirt
+	name = "fencing shirt"
+	output = /obj/item/clothing/armor/gambeson/arming/fencer
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Armor"
+
 /datum/repeatable_crafting_recipe/sewing/maidband
 	name = "maid headband"
 	output = /obj/item/clothing/head/maidband
@@ -1321,6 +1329,15 @@
 	craftdiff = 4
 	category = "Armor"
 
+/datum/repeatable_crafting_recipe/sewing/fencing_pants
+	name = "fencing breeches"
+	output = /obj/item/clothing/pants/fencer
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/silk = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+	category = "Pants"
+
 /*.............. recipes requiring skill 5 ..............*/
 
 /datum/repeatable_crafting_recipe/sewing/grenzel_shirt
@@ -1668,6 +1685,37 @@
 	craftdiff = 1
 	category = "Tabard"
 
+// Cadwyn Order Tabards
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_astrata
+	name = "bright tabard"
+	output = /obj/item/clothing/cloak/cadwyn/astrata
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_necra
+	name = "dark cloak"
+	output = /obj/item/clothing/cloak/cadwyn/necra
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_ravox
+	name = "tattered surcoat"
+	output = /obj/item/clothing/cloak/cadwyn/ravox
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
 // Detailed Tabards
 /datum/repeatable_crafting_recipe/sewing/eora_tabard
 	name = "eora tabard"
@@ -1956,3 +2004,4 @@
 /datum/repeatable_crafting_recipe/sewing/caparison/honse
 	name = "honse caparison"
 	output =/obj/item/caparison/honse
+

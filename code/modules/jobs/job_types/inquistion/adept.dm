@@ -9,8 +9,8 @@
 	display_order = JDO_SHEPHERD
 	selection_color = JCOLOR_INQUISITION
 	faction = FACTION_TOWN
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	bypass_lastclass = TRUE
 
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)

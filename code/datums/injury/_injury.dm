@@ -101,18 +101,20 @@
 /datum/injury/proc/set_bodypart(obj/item/bodypart/new_owner, sound_hint = TRUE)
 	parent_bodypart = new_owner
 	LAZYADD(parent_bodypart.injuries, src)
+	new_owner.post_damage_change()
 
-/datum/injury/proc/transfer_injury(mob/living/carbon/new_owner, sound_hint = TRUE)
+/datum/injury/proc/transfer_injury(mob/living/carbon/new_owner)
 	var/obj/item/bodypart/old_bodypart = parent_bodypart
 
 	var/obj/item/bodypart/new_bodypart = new_owner.get_bodypart(old_bodypart.body_zone)
 	if(!new_bodypart)
 		return
 
+	injury_flags &= ~(INJURY_BANDAGED|INJURY_CLAMPED|INJURY_RETRACTED)
+
 	remove_from_bodypart()
 	remove_from_mob()
-	set_mob(new_owner, sound_hint)
-	set_bodypart(new_bodypart, sound_hint)
+	apply_to_bodypart(new_bodypart)
 
 /datum/injury/proc/remove_from_mob()
 	if(!parent_mob)
@@ -174,18 +176,18 @@
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
 		return FALSE
+	if(parent_bodypart.return_surgical_state() & SURGERY_VESSELS_CLAMPED)
+		return FALSE
 	if(LAZYLEN(embedded_objects))
 		return FALSE
 	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE
 	if(!can_heal())
 		return FALSE
-	if(parent_bodypart.is_retracted())
-		return FALSE
 
 	if((is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
 		return TRUE
-	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 3 : 1)
+	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 2 : 1)
 
 // checks whether the injury has been appropriately treated
 /datum/injury/proc/is_treated()
@@ -274,7 +276,7 @@
 		current_stage++
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
-	if(!damage)
+	if(damage <= 0)
 		qdel(src)
 	if(update_bodypart && parent_bodypart?.post_damage_change(updating_health)) // no need to cache since qdel will update limbs and owner
 		parent_mob?.update_damage_overlays()

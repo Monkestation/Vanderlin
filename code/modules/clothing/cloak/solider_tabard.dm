@@ -11,30 +11,38 @@
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	detail_tag = "_quad"
-	detail_color = CLOTHING_RED
+	detail_color = CLOTHING_RED_OCHRE
 	var/picked
 
 /obj/item/clothing/cloak/stabard/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(picked)
 		return
+
 	var/the_time = world.time
-	var/design = input(user, "Select a design.","Tabard Design") as null|anything in list("None","Split", "Quadrants", "Boxes", "Diamonds")
+
+	var/design = tgui_input_list(user, "Select a design.","Tabard Design", list("None","Split", "Quadrants", "Boxes", "Diamonds"))
 	if(!design)
 		return
-	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+
+	var/colorone = tgui_input_list(user, "Select a primary color.","Tabard Design", GLOB.noble_dyes)
 	if(!colorone)
 		return
+
 	var/colortwo
 	if(design != "None")
-		colortwo = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+		colortwo = tgui_input_list(user, "Select a primary color.","Tabard Design", GLOB.noble_dyes)
 		if(!colortwo)
 			return
+
 	if(world.time > (the_time + 30 SECONDS))
 		return
+
 	switch(design)
 		if("Split")
 			detail_tag = "_spl"
@@ -44,22 +52,20 @@
 			detail_tag = "_box"
 		if("Diamonds")
 			detail_tag = "_dim"
-	color = clothing_color2hex(colorone)
+
+	color = GLOB.noble_dyes[colorone]
 	if(colortwo)
-		detail_color = clothing_color2hex(colortwo)
+		detail_color = GLOB.noble_dyes[colortwo]
+
 	update_appearance(UPDATE_OVERLAYS)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
+
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		detail_tag = initial(detail_tag)
 		update_appearance(UPDATE_OVERLAYS)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
 		return
+
 	picked = TRUE
 
 /obj/item/clothing/cloak/stabard/guard
@@ -116,8 +122,8 @@
 /obj/item/clothing/cloak/stabard/mercenary/Initialize()
 	. = ..()
 	detail_tag = pick("_quad", "_spl", "_box", "_dim")
-	color = clothing_color2hex(pick(CLOTHING_COLOR_NAMES))
-	detail_color = clothing_color2hex(pick(CLOTHING_COLOR_NAMES))
+	color = pick_assoc(GLOB.noble_dyes)
+	detail_color = pick_assoc(GLOB.noble_dyes)
 	update_appearance(UPDATE_ICON)
 
 /obj/item/clothing/cloak/stabard/kaledon
@@ -130,7 +136,7 @@
 ////////////////////////
 
 /obj/item/clothing/cloak/stabard/templar
-	name = "surcoat of the golden order"
+	name = "surcoat of the psydonic order"
 	icon_state = "tabard_weeping"
 	item_state = "tabard_weeping"
 	icon = 'icons/roguetown/clothing/special/templar.dmi'
@@ -215,6 +221,21 @@
 	icon_state = "tabard_xylix"
 	item_state = "tabard_xylix"
 
+/obj/item/clothing/cloak/stabard/crusader
+	name = "surcoat of the golden order"
+	desc = "A surcoat drenched in charcoal water, golden thread stitched in the style of Psydon's Knights of Old Psydonia."
+	icon_state = "crusader_surcoat"
+	icon = 'icons/roguetown/clothing/special/crusader.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	detail_tag = null
+	detail_color = null
+
+/obj/item/clothing/cloak/stabard/crusader/t
+	name = "surcoat of the silver order"
+	desc = "A surcoat drenched in charcoal water, white cotton stitched in the symbol of Psydon."
+	icon_state = "crusader_surcoatt2"
+
 //////////////////////////
 /// SURCOATS
 ////////////////////////
@@ -230,23 +251,31 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(picked)
 		return
+
 	var/the_time = world.time
-	var/design = input(user, "Select a design.","Tabard Design") as null|anything in list("None","Split", "Quadrants", "Boxes", "Diamonds")
+
+	var/design = tgui_input_list(user, "Select a design.","Tabard Design", list("None", "Split", "Quadrants", "Boxes", "Diamonds"))
 	if(!design)
 		return
-	var/colorone = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+
+	var/colorone = tgui_input_list(user, "Select a primary color.","Tabard Design", GLOB.noble_dyes)
 	if(!colorone)
 		return
+
 	var/colortwo
 	if(design != "None")
-		colortwo = input(user, "Select a primary color.","Tabard Design") as null|anything in CLOTHING_COLOR_NAMES
+		colortwo = tgui_input_list(user, "Select a primary color.","Tabard Design", GLOB.noble_dyes)
 		if(!colortwo)
 			return
+
 	if(world.time > (the_time + 30 SECONDS))
 		return
+
 	switch(design)
 		if("Split")
 			detail_tag = "_spl"
@@ -256,22 +285,20 @@
 			detail_tag = "_box"
 		if("Diamonds")
 			detail_tag = "_dim"
-	color = clothing_color2hex(colorone)
+
+	color = GLOB.noble_dyes[colorone]
 	if(colortwo)
-		detail_color = clothing_color2hex(colortwo)
-	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
+		detail_color = GLOB.noble_dyes[colortwo]
+
+	update_appearance(UPDATE_OVERLAYS)
+
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		detail_tag = initial(detail_tag)
-		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
+		update_appearance(UPDATE_OVERLAYS)
 		return
+
 	picked = TRUE
 
 /obj/item/clothing/cloak/stabard/jupon/guard

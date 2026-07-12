@@ -14,7 +14,6 @@
 		/datum/job/matron,
 		/datum/job/butler,
 		/datum/job/grabber,
-		/datum/job/undertaker,
 		/datum/job/captain,
 		/datum/job/consort,
 		/datum/job/courtphys,
@@ -35,7 +34,7 @@
 		/datum/job/bandit,
 		/datum/job/minor_noble,
 		/datum/job/guardsman,
-		/datum/job/adventurer/courtagent,
+		/datum/job/courtagent,
 		/datum/job/archivist,
 		/datum/job/templar,
 		/datum/job/inquisitor,
@@ -47,4 +46,5 @@
 		/datum/job/farmer = 1000,
 		/datum/job/miner = 1000,
 		/datum/job/blacksmith = -1,
+		/datum/job/undertaker = -1,
 	)

@@ -11,16 +11,21 @@
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	SET_BASE_PIXEL(0, 32)
+	var/magick_mirror = FALSE
 
 /obj/structure/mirror/fancy
 	icon_state = "fancymirror"
+
+/obj/structure/mirror/courtagent
+	name = "magick mirror"
+	magick_mirror = TRUE
 
 /obj/structure/mirror/Initialize(mapload)
 	. = ..()
 	if(icon_state == "mirror_broke" && !obj_broken)
 		atom_break(null, TRUE, mapload)
 
-/obj/structure/mirror/attack_hand(mob/user)
+/obj/structure/mirror/attack_hand(mob/living/user)
 	. = ..()
 	if(.)
 		return
@@ -32,7 +37,12 @@
 	var/mob/living/carbon/human/H = user
 
 
-	var/list/options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color")
+	var/list/options = list()
+	if(magick_mirror == TRUE && HAS_TRAIT(H, TRAIT_COURTAGENT))
+		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color", "honorific", "cover job")
+	else
+		options = list("hairstyle", "facial hairstyle", "hair color", "skin", "detail", "eye color")
+
 	var/chosen = browser_input_list(user, "Change what?", "VANDERLIN", options)
 	var/should_update
 	switch(chosen)
@@ -152,10 +162,43 @@
 		if("eye color")
 			var/list/eye_list = H.getorganslotlist(ORGAN_SLOT_EYES)
 			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
+				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference", eyes.eye_color) as color|null
 				if(new_eyes)
 					eyes.eye_color = sanitize_hexcolor(new_eyes, default = "#1753a8")
 					should_update = TRUE
+
+		if("honorific")
+			var/list/honorifics = list("Lord", "Lady", "Sir", "Dame", "Ritter", "Ritterin", "Count", "Countess", "Emir", "Clear honorific")
+			var/chosen_honorific = browser_input_list(user, "Select False Honorific", "HONORIFICS", honorifics)
+
+			if(chosen_honorific == "Clear honorific")
+				H.honorary = null
+			else
+				H.honorary = chosen_honorific
+		if("cover job")
+			var/list/jobs = list()
+			jobs += /datum/job/minor_noble::title
+			jobs += GLOB.garrison_positions
+			jobs += list(/datum/job/monk::title, /datum/job/undertaker::title)
+			jobs += GLOB.serf_positions
+			jobs += GLOB.peasant_positions
+			jobs += GLOB.apprentices_positions
+			jobs += GLOB.allmig_positions
+			jobs -= list(
+				/datum/job/royalknight::title,
+				/datum/job/lieutenant::title,
+				/datum/job/town_elder::title,
+				/datum/job/matron::title,
+				/datum/job/tomb_warden::title,
+				/datum/job/bandit::title
+			)
+			jobs += "Cancel"
+
+			var/cover_job = tgui_input_list(user, "Select Cover Job", "COVER JOB", jobs)
+			if(jobs == "Cancel")
+				return
+			H.job = cover_job
+			H.mind?.set_assigned_role(cover_job)
 
 	if(should_update)
 		H.update_body()
@@ -176,23 +219,3 @@
 /obj/structure/mirror/atom_fix()
 	. = ..()
 	icon_state = initial(icon_state)
-
-/obj/structure/mirror/welder_act(mob/living/user, obj/item/I)
-	..()
-	if(user.used_intent.type == INTENT_HARM)
-		return FALSE
-
-	if(!obj_broken)
-		return TRUE
-
-	if(!I.tool_start_check(user, amount=0))
-		return TRUE
-
-	to_chat(user, "<span class='notice'>I begin repairing [src]...</span>")
-	if(I.use_tool(src, user, 10, volume=50))
-		to_chat(user, "<span class='notice'>I repair [src].</span>")
-		atom_fix()
-		icon_state = initial(icon_state)
-		desc = initial(desc)
-
-	return TRUE

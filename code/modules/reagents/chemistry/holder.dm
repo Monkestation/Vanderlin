@@ -342,7 +342,7 @@
 	R.handle_reactions()
 	return amount
 
-/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE, efficiency = 100)
+/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE, efficiency = 100, health_update = TRUE)
 	var/list/cached_reagents = reagent_list
 	var/list/cached_addictions = addiction_list
 	if(C)
@@ -404,8 +404,11 @@
 							remove_addiction(R)
 		addiction_tick++
 	if(C && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
-		C.updatehealth()
-		C.update_stamina()
+		if(health_update)
+			C.updatehealth()
+			C.update_stamina()
+		else
+			. |= ORGAN_PROCESS_UPDATE_HEALTH
 	update_total()
 
 /datum/reagents/proc/remove_addiction(datum/reagent/R)
@@ -1065,3 +1068,16 @@
 			return X
 
 #undef CHEMICAL_QUANTISATION_LEVEL
+
+//===============================Logging==========================================
+/// Outputs a log-friendly list of reagents based on the internal reagent_list.
+/datum/reagents/proc/get_reagent_log_string()
+	if(!length(reagent_list))
+		return "no reagents"
+
+	var/list/data = list()
+
+	for(var/datum/reagent/reagent as anything in reagent_list)
+		data += "[reagent.type] [reagent.volume]u"
+
+	return english_list(data)

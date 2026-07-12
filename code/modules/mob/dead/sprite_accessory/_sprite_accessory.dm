@@ -198,7 +198,7 @@
 		result_icon.Blend(extra_icon, ICON_OVERLAY)
 
 	// Apparently new icons can do weird stuff unless you try and "read" something from it like this before using it.
-	result_icon.GetPixel(1, 1)
+	//result_icon.GetPixel(1, 1)
 
 	return result_icon
 
@@ -252,7 +252,7 @@
 /proc/color_key_source_list_from_prefs(datum/preferences/prefs)
 	if(istype(prefs))
 		var/list/sources = list()
-		sources[KEY_SKIN_COLOR] = prefs.skin_tone
+		sources[KEY_SKIN_COLOR] = prefs.read_preference(/datum/preference/choiced/skin_tone)
 		sources[KEY_EYE_COLOR] = prefs.get_eye_color()
 		sources[KEY_HAIR_COLOR] = prefs.get_hair_color()
 		sources[KEY_FACE_HAIR_COLOR] = prefs.get_facial_hair_color()

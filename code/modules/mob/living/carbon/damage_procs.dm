@@ -142,6 +142,9 @@
 	if(. <= 75)
 		if(getOxyLoss() > 75)
 			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+			var/obj/item/organ/brain = getorganslot(ORGAN_SLOT_BRAIN)
+			brain?.consider_processing()
+
 	else if(getOxyLoss() <= 75)
 		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
 
@@ -312,7 +315,7 @@
 	return TRUE
 
 /mob/living/carbon/can_feel_pain()
-	return !HAS_TRAIT(src, TRAIT_NOPAIN)
+	return !HAS_TRAIT(src, TRAIT_NOPAIN) && !IsUnconscious()
 
 /mob/living/carbon/getShock(painkiller_included = TRUE)
 	if(!can_feel_pain())
@@ -432,7 +435,7 @@
 			update = TRUE
 			var/list/mods = list()
 			if(no_crit)
-				mods = list(CRIT_MOD_CHANCE = -100)
+				mods = list(CRIT_MOD_CHANCE = CANT_CRIT)
 			picked.bodypart_attacked_by(damage_type, brute + burn, null, picked.body_zone, modifiers = mods)
 		else
 			update |= picked.receive_damage(brute_per_part, burn_per_part, blocked = FALSE, updating_health = FALSE, required_status = BODYPART_ORGANIC)

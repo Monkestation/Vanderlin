@@ -107,46 +107,46 @@
 	organ_owner.update_body()
 	organ_owner.remove_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/on_medium_damage_received()
-	. = ..()
-	owner.add_stress(/datum/stress_event/brain_damage)
+///somehow slightly faster to not call parent...
+/obj/item/organ/brain/consider_processing(in_bleedout)
+	. = FALSE
+	if(in_bleedout)
+		. = TRUE
+	else if(damage >= DAMAGE_PRECISION)
+		. = TRUE
+	else if(germ_level > 0)
+		. = TRUE
+	else if(current_blood < max_blood_storage)
+		. = TRUE
+	else if(failure_time > 0)
+		. = TRUE
+	else if(is_failing())
+		. = TRUE
+	else if(owner && GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req) < BLOOD_VOLUME_BAD)
+		. = TRUE
+	needs_processing = .
 
-/obj/item/organ/brain/on_medium_damage_healed()
-	. = ..()
-	owner.remove_stress(/datum/stress_event/brain_damage)
-
-/obj/item/organ/brain/can_self_heal(delta_time, times_fired)
+/obj/item/organ/brain/can_self_heal(delta_time, times_fired, in_bleedout)
 	. = ..()
 	if(!.)
 		return
+	if(self_healing_effect && owner.get_chem_effect(self_healing_effect))
+		return TRUE
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
 		return FALSE
 
-/obj/item/organ/brain/handle_blood(delta_time, times_fired)
+/obj/item/organ/brain/handle_blood(delta_time, times_fired, in_bleedout)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
-	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
-	var/in_bleedout = owner.in_bleedout()
-	if(arterial_efficiency && !is_failing())
-		// Arteries get an extra flat 5 blood regen
-		current_blood = min(current_blood + (2.5 * delta_time * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY)), max_blood_storage)
-		return
-	if(!blood_req)
-		return
 	// Very low blood, danger!!
-	if(!in_bleedout && (effective_blood_oxygenation >= BLOOD_VOLUME_BAD))
-		current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage)
-		return
-
-	if(in_bleedout)
+	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_BLEEDOUT))
 		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
 		if(DT_PROB(5, delta_time))
 			owner.adjust_eye_blur_up_to(4, 4)
 	else
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
-
 	// When all blood is lost, take blood from blood vessels
-	if(!current_blood && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
+	if(current_blood < max_blood_storage && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
 		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
@@ -155,10 +155,13 @@
 				artery = candidate
 				break
 		if(artery?.current_blood)
-			var/prev_blood = artery.current_blood
-			artery.current_blood = max(artery.current_blood - (blood_req * delta_time * 2), 0)
-			current_blood = max(prev_blood - artery.current_blood, 0)
+			var/blood_needed = min(max_blood_storage - current_blood, blood_req * delta_time * 2)
+			var/blood_taken = min(artery.current_blood, blood_needed)
+			artery.current_blood = max(artery.current_blood - blood_taken, 0)
+			artery.consider_processing()
+			current_blood = min(current_blood + blood_taken, max_blood_storage)
 		//Don't apply damage, this is handled by the organ process datum, if necessary
+	consider_processing()
 
 /obj/item/organ/brain/get_mechanics_examine(mob/user)
 	. = ..()
@@ -307,40 +310,50 @@
 		else
 			. += "<span class='info'>This one is completely devoid of life.</span>"
 
-/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user, list/modifiers)
-	if(!istype(C))
-		return ..()
+/obj/item/organ/brain/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
+	if(!iscarbon(interacting_with))
+		return ..() // Can't eat
+
+	var/mob/living/carbon/C = interacting_with
 
 	add_fingerprint(user)
 
 	if(user.zone_selected != BODY_ZONE_HEAD)
-		return ..()
+		return ITEM_INTERACT_BLOCKING
 
 	var/target_has_brain = C.getorgan(/obj/item/organ/brain)
 
 	if(!target_has_brain && C.is_eyes_covered())
 		to_chat(user, "<span class='warning'>You're going to need to remove [C.p_their()] head cover first!</span>")
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	if(!target_has_brain)
-		if(!C.get_bodypart(BODY_ZONE_HEAD) || !user.temporarilyRemoveItemFromInventory(src))
-			return
-		var/msg = "[C] has [src] inserted into [C.p_their()] head by [user]."
-		if(C == user)
-			msg = "[user] inserts [src] into [user.p_their()] head!"
+	if(target_has_brain)
+		return ITEM_INTERACT_BLOCKING
 
-		C.visible_message("<span class='danger'>[msg]</span>",
-						"<span class='danger'>[msg]</span>")
+	if(!C.get_bodypart(BODY_ZONE_HEAD) || !user.temporarilyRemoveItemFromInventory(src))
+		return ITEM_INTERACT_BLOCKING
 
-		if(C != user)
-			to_chat(C, "<span class='notice'>[user] inserts [src] into your head.</span>")
-			to_chat(user, "<span class='notice'>I insert [src] into [C]'s head.</span>")
-		else
-			to_chat(user, "<span class='notice'>I insert [src] into your head.</span>")
+	var/msg = "[C] has [src] inserted into [C.p_their()] head by [user]."
+	if(C == user)
+		msg = "[user] inserts [src] into [user.p_their()] head!"
 
-		Insert(C)
+	C.visible_message(
+		"<span class='danger'>[msg]</span>",
+		"<span class='danger'>[msg]</span>"
+	)
+
+	if(C != user)
+		to_chat(C, "<span class='notice'>[user] inserts [src] into your head.</span>")
+		to_chat(user, "<span class='notice'>I insert [src] into [C]'s head.</span>")
 	else
-		..()
+		to_chat(user, "<span class='notice'>I insert [src] into your head.</span>"	)
+
+	Insert(C)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/organ/brain/Destroy()
 	if(brainmob)
@@ -456,8 +469,8 @@
 	else
 		return brain_message
 
-/obj/item/organ/brain/get_shock(painkiller_included)
-	return 0 // you can't feel your brain being fried
+/obj/item/organ/brain/can_feel_pain()
+	return FALSE // you can't feel your brain being fried
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
@@ -560,7 +573,7 @@
 		if(!initial(brain_trauma.random_gain))
 			continue
 		if(ispath(brain_trauma, /datum/brain_trauma/severe/split_personality))
-			if(!force_split_personality && owner?.client?.prefs?.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
+			if(!force_split_personality && owner?.client?.prefs?.read_preference(/datum/preference/bitwise/toggles_gameplay) & DISABLE_SPLIT_PERSONALITY)
 				continue
 		if(can_gain_trauma(brain_trauma, resilience, natural_gain))
 			possible_traumas += brain_trauma

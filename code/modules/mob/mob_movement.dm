@@ -156,18 +156,17 @@
 
 	. = ..()
 
+	var/scalar = 1
 	if((direct & (direct - 1)) && mob.loc == new_loc) //moved diagonally successfully
+		scalar = sqrt(2)
 		add_delay *= sqrt(2)
 
-	var/after_glide = 0
-	if(visual_delay)
-		after_glide = visual_delay
-	else
-		after_glide = DELAY_TO_GLIDE_SIZE(add_delay)
-
-	mob.set_glide_size(after_glide)
+	add_delay = round(add_delay, world.tick_lag)
+	mob.set_glide_size(MOVEMENT_ADJUSTED_GLIDE_SIZE(add_delay, scalar))
 
 	move_delay += add_delay
+	move_delay = round(move_delay, world.tick_lag)
+
 	if(.) // If mob is null here, we deserve the runtime
 		if(mob.throwing)
 			mob.throwing.finalize(FALSE)
@@ -595,9 +594,9 @@
 		return
 	if(!prefs)
 		return
-	prefs.chat_toggles ^= CHAT_GHOSTEARS
+	prefs.preference_toggle_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTEARS)
 	prefs.save_preferences()
-	if(prefs.chat_toggles & CHAT_GHOSTEARS)
+	if(prefs.preference_has_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTEARS))
 		to_chat(src, span_info("I will hear all now."))
 	else
 		to_chat(src, span_info("I will hear like a mortal."))
@@ -609,9 +608,9 @@
 		return
 	if(!prefs)
 		return
-	prefs.chat_toggles ^= CHAT_GHOSTWHISPER
+	prefs.preference_toggle_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTWHISPER)
 	prefs.save_preferences()
-	if(prefs.chat_toggles & CHAT_GHOSTWHISPER)
+	if(prefs.preference_has_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTWHISPER))
 		to_chat(src, span_info("I will hear all whispers now."))
 	else
 		to_chat(src, span_info("I will hear like a mortal."))
@@ -623,9 +622,9 @@
 		return
 	if(!prefs)
 		return
-	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
+	prefs.preference_toggle_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTSIGHT)
 	prefs.save_preferences()
-	if(prefs.chat_toggles & CHAT_GHOSTSIGHT)
+	if(prefs.preference_has_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTSIGHT))
 		to_chat(src, span_info("I will see all whispers now."))
 	else
 		to_chat(src, span_info("I will see like a mortal."))

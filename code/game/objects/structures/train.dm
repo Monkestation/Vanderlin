@@ -62,6 +62,10 @@
 			content = departing_mob.contents[i]
 			dat += ", [content.name]"
 		dat += "."
+	if(departing_mob.real_name in GLOB.court_agents)
+		GLOB.court_agents -= departing_mob.real_name
+	else if(departing_mob.real_name in GLOB.ex_court_agents)
+		GLOB.ex_court_agents -= departing_mob.real_name
 	message_admins(dat)
 	log_admin(dat)
 	say(span_notice("[departing_mob == user ? "Out of their own volition, " : "Ushered by [user], "][departing_mob] is departing from [SSmapping.config.map_name]."))
@@ -70,6 +74,10 @@
 /proc/cryo_mob(mob/departing_mob, admin = FALSE)
 	if(QDELETED(departing_mob))
 		return "Tried to cryo a deleted mob!"
+	if(departing_mob.real_name in GLOB.court_agents)
+		GLOB.court_agents -= departing_mob.real_name
+	else if(departing_mob.real_name in GLOB.ex_court_agents)
+		GLOB.ex_court_agents -= departing_mob.real_name
 	GLOB.actors_list -= departing_mob.mobid // mob cryod - get him outta here.
 	var/mob/dead/new_player/newguy = new()
 	newguy.ckey = departing_mob.ckey

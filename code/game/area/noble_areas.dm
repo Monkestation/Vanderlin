@@ -39,6 +39,13 @@
 	name = "Hand's Room"
 	icon_state = "hand"
 
+/area/indoors/town/keep/courtagent
+	name = "Court Agent's Hideout"
+	icon_state = "court agent"
+	background_track = 'sound/music/area/manorgarri.ogg'
+	background_track_dusk = null
+	background_track_night = null
+
 /area/indoors/town/keep/phys
 	name = "Court Physician's Office"
 	icon_state = "physician"

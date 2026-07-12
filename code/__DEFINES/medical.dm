@@ -10,6 +10,7 @@
 #define BODY_ZONE_PRECISE_EARS		"ears"
 #define BODY_ZONE_PRECISE_R_EYE		"r_eye"
 #define BODY_ZONE_PRECISE_L_EYE		"l_eye"
+#define BODY_ZONES_EYES list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 #define BODY_ZONE_PRECISE_NOSE		"nose"
 #define BODY_ZONE_PRECISE_MOUTH		"mouth"
 #define BODY_ZONE_PRECISE_NECK		"neck"
@@ -34,6 +35,26 @@
 	BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, \
 	BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT, \
 	BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, \
+)
+
+#define ALL_BODY_ZONES list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define LIMB_ZONES list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define ARM_ZONES list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+#define LEG_ZONES list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define ALL_PRECISE_ZONES list(\
+	BODY_ZONE_PRECISE_SKULL,\
+	BODY_ZONE_PRECISE_EARS,\
+	BODY_ZONE_PRECISE_L_EYE,\
+	BODY_ZONE_PRECISE_R_EYE,\
+	BODY_ZONE_PRECISE_NOSE,\
+	BODY_ZONE_PRECISE_MOUTH,\
+	BODY_ZONE_PRECISE_NECK,\
+	BODY_ZONE_PRECISE_STOMACH,\
+	BODY_ZONE_PRECISE_GROIN,\
+	BODY_ZONE_PRECISE_L_HAND,\
+	BODY_ZONE_PRECISE_R_HAND,\
+	BODY_ZONE_PRECISE_L_FOOT,\
+	BODY_ZONE_PRECISE_R_FOOT,\
 )
 
 #define GENERIC_FRACTURE_BODYPARTS list(\
@@ -81,14 +102,6 @@
 #define BODYPART_FEATURE_ACCESSORY "accessory"
 #define BODYPART_FEATURE_FACE_DETAIL "facedetail"
 #define BODYPART_FEATURE_BRAND "brand"
-
-//flags for requirements for a surgery step
-#define SURGERY_BLOODY (1<<0)
-#define SURGERY_INCISED (1<<1)
-#define SURGERY_RETRACTED (1<<2)
-#define SURGERY_CLAMPED	(1<<3)
-#define SURGERY_DISLOCATED (1<<4)
-#define SURGERY_BROKEN (1<<5)
 
 // ~flags for the limb_flags var on /obj/item/bodypart
 /// Can suffer artery wounds
@@ -238,6 +251,9 @@ DEFINE_BITFIELD(organ_flags, list(
 #define GERM_LEVEL_FILTHY 500
 #define GERM_LEVEL_SMASHPLAYER 750
 
+/// Maximum germ level you can reach by standing still.
+#define GERM_LEVEL_AMBIENT 250
+
 /// Exposure to blood germ level per unit
 #define GERM_PER_UNIT_BLOOD 2
 
@@ -282,7 +298,7 @@ DEFINE_BITFIELD(organ_flags, list(
 #define CPR_CHEST "cardio"
 
 // ~arteries
-#define ARTERIAL_BLOOD_FLOW 20
+#define ARTERIAL_BLOOD_FLOW 9
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth
@@ -366,3 +382,10 @@ DEFINE_BITFIELD(organ_flags, list(
 
 /// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
 #define BLEED_DAMAGE_RATIO 25
+
+// /obj/item/bodypart on_mob_life() retval flag
+#define BODYPART_LIFE_UPDATE_HEALTH (1<<0)
+// /datum/organ_process/handle_process retval flag
+#define ORGAN_PROCESS_UPDATE_HEALTH (1<<1) // why is this like so? cause
+// /mob/living/carbon/handle_shock() retval flag
+#define SHOCK_PROCESS_UPDATE_HEALTH (1<<0)

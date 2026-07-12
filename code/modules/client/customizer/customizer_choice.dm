@@ -58,10 +58,10 @@
 /datum/customizer_choice/proc/on_randomize_entry(datum/customizer_entry/entry, datum/preferences/prefs)
 	return
 
-/datum/customizer_choice/proc/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
+/datum/customizer_choice/proc/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
 	return
 
-/datum/customizer_choice/proc/get_random_color(datum/customizer_entry/entry, datum/preferences/prefs, accessory_type)
+/datum/customizer_choice/proc/get_random_color(datum/customizer_entry/entry, mob/living/carbon/human/human, accessory_type)
 	return
 
 /datum/customizer_choice/proc/show_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
