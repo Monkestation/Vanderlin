@@ -603,6 +603,7 @@
 #include "code\controllers\subsystem\triumph\buy_datums\challenges\leprosy.dm"
 #include "code\controllers\subsystem\triumph\buy_datums\character\adoption.dm"
 #include "code\controllers\subsystem\triumph\buy_datums\character\fart.dm"
+#include "code\controllers\subsystem\triumph\buy_datums\character\noble_heretics.dm"
 #include "code\controllers\subsystem\triumph\buy_datums\character\officiant.dm"
 #include "code\controllers\subsystem\triumph\buy_datums\character\pick_all_jobs_as_any_race.dm"
 #include "code\controllers\subsystem\triumph\buy_datums\character\pick_any_class.dm"

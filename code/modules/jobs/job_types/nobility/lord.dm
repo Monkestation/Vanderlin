@@ -87,6 +87,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	//These change on map load
 	honorary = "Lord"
 	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,

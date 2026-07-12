@@ -71,6 +71,7 @@
 	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/captain
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
