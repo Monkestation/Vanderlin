@@ -1,0 +1,6 @@
+author: "Wrench-1"
+delete-after: True
+changes:
+  - rscadd: "Added the Cadwyn Order, a rework and lore reflavouring of the Totod Order"
+  - rscdel: "Removed the Totod Order Emmisary and Holy Crusade Migrant Wave, replacing them with the Cadwyn Order Emissary and the Cadwyn Order Crusade Migrant Wave"
+  - image: "Added sprites for the Cadwyn Order's Helmets, cloaks and gloves. Sprites by Blumengama"

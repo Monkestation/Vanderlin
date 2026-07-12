@@ -968,6 +968,12 @@
 	additional_items = list(/obj/item/ingot/silver)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/silver
 
+/datum/anvil_recipe/weapons/silver/mace
+	name = "Silver Mace (+Silver Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/weapon/mace/silver
+
 /datum/anvil_recipe/weapons/silver/rungu
 	name = "Silver Rungu (+Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
