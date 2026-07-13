@@ -20,7 +20,7 @@
 	)
 
 /datum/job/grabber
-	title = "Stevedore"
+	title = JOB_STEVEDORE
 	tutorial = "A stevedore is the lowest yet essential position in the Merchant's employment, reserved for the strong and loyal. \
 	You are responsible for hauling materials and goods to-and-fro the docks and warehouses, protecting their transportation from conniving thieves. \
 	Keep your eye out for the security of the Merchant, and they will surely treat you like family."
@@ -38,6 +38,7 @@
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
+	can_be_apprentice = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/grabber
 
@@ -46,7 +47,7 @@
 	)
 
 /datum/outfit/grabber
-	name = "Stevedore"
+	name = JOB_STEVEDORE
 	backr = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/fingerless

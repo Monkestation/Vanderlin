@@ -158,7 +158,7 @@
 			/obj/item/weapon/knife/copper = 15,
 			/obj/item/weapon/sword/long/rider/copper = 15,
 			/obj/item/weapon/sword/coppermesser = 15,
-			/obj/item/weapon/polearm/spear/stone/copper = 15,
+            /obj/item/weapon/polearm/spear/javelin = 15,
 			/obj/item/weapon/axe/iron = 10,
 			/obj/item/weapon/polearm/halberd/bardiche = 10,
 			/obj/item/weapon/sword/rapier/ironestoc = 10,
@@ -189,10 +189,10 @@
 			/obj/item/weapon/axe/bronze = 10,
 			/obj/item/weapon/sword/short/iron = 10,
 			/obj/item/weapon/sword/long/greatsword/zwei = 10,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short = 10,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/bow = 10,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long = 5,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow = 5,
+			/obj/item/gun/ballistic/bow/short = 10,
+			/obj/item/gun/ballistic/bow = 10,
+			/obj/item/gun/ballistic/bow/long = 5,
+			/obj/item/gun/ballistic/bow/cross = 5,
 			/obj/item/weapon/axe/steel = 5,
 			/obj/item/weapon/axe/steel/nsapo = 2,
 			/obj/item/weapon/sword/long/greatsword = 2,
@@ -223,6 +223,11 @@
 			/obj/item/clothing/armor/chainmail/iron = 10,
 			/obj/item/clothing/armor/plate/iron = 10,
 			/obj/item/clothing/armor/cuirass/iron = 10,
+			/obj/item/clothing/head/helmet/heavy/rust = 10,
+			/obj/item/clothing/armor/plate/rust = 10,
+			/obj/item/clothing/gloves/plate/rust = 10,
+			/obj/item/clothing/pants/platelegs/rust = 10,
+			/obj/item/clothing/shoes/boots/armor/light/rust = 10,
 			/obj/item/clothing/head/helmet/heavy/ironplate = 8,
 			/obj/item/clothing/armor/leather/splint = 10,
 			/obj/item/clothing/armor/brigandine = 5,
@@ -230,7 +235,7 @@
 			/obj/item/clothing/head/helmet/skullcap = 10,
 			/obj/item/clothing/head/helmet/heavy/frog = 5,
 			/obj/item/clothing/head/helmet/visored/hounskull = 5,
-			/obj/item/clothing/face/facemask/steel = 5,
+			/obj/item/clothing/face/facemask/steel = 10,
 			/obj/item/clothing/armor/plate/full = 5,
 			/obj/item/clothing/neck/chaincoif = 5,
 			/obj/item/clothing/neck/bevor/iron = 5,
@@ -335,5 +340,42 @@
 			/obj/item/reagent_containers/glass/bottle/vial/intpot = 10,
 			/obj/item/reagent_containers/glass/bottle/vial/spdpot = 10,
 			/obj/item/reagent_containers/glass/bottle/vial/lucpot = 10
+		)
+	)
+
+/datum/loot_table/potion_skills
+	name = "skill elixirs"
+	loot_table = list(
+		list(
+			/obj/item/reagent_containers/glass/bottle/vial/bladeart = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/heavy_arms = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/whip_hand = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/marksmans_eye = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/shield_bearer = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/craftsmans_wit = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/smelters_patience = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/builders_draught = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/trappers_sense = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/alchemists_clarity = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/smiths_blood = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/skinners_elixir = 10,
+
+			/obj/item/reagent_containers/glass/bottle/vial/locksmiths_oil = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/cooks_brine = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/prep_hands_tonic = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/brewers_wort = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/seamstress_thimble_drop = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/miners_heart = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/farmers_almanac = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/beastwhisper = 10,
+
+			/obj/item/reagent_containers/glass/bottle/vial/miracle_water = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/vital_ichor = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/arcane_solvent = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/wild_draught = 10,
+
+			/obj/item/reagent_containers/glass/bottle/vial/athletes_brine = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/shadow_tonic = 10,
+			/obj/item/reagent_containers/glass/bottle/vial/scholars_ink = 10
 		)
 	)

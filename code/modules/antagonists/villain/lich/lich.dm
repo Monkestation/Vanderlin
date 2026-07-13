@@ -23,9 +23,9 @@
 	)
 
 /datum/antagonist/lich
-	name = "Lich"
-	roundend_category = "Lich"
-	antagpanel_category = "Lich"
+	name = ROLE_LICH
+	roundend_category = ROLE_LICH
+	antagpanel_category = ROLE_LICH
 	job_rank = ROLE_LICH
 	antag_hud_type = ANTAG_HUD_NECROMANCY
 	antag_hud_name = "necromancer"
@@ -55,6 +55,7 @@
 		TRAIT_SEEPRICES,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
 	)
@@ -97,6 +98,7 @@
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	return ..()
 
 /datum/antagonist/lich/greet()
 	. = ..()
@@ -121,18 +123,22 @@
 	L.mana_pool.set_intrinsic_recharge(MANA_SOULS)
 	L.mana_pool.ethereal_recharge_rate += 0.2
 
+	ADD_TRAIT(L, TRAIT_NOBLOOD, TRAIT_GENERIC)
+
+	L.set_faction(list(FACTION_UNDEAD))
+	L.mob_biotypes |= MOB_UNDEAD
+	L.grant_undead_eyes()
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
+	L.skeletonize(FALSE)
+
+	L.equipOutfit(/datum/outfit/lich)
+	L.set_patron(/datum/patron/inhumen/zizo)
+
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.faction = list(FACTION_UNDEAD)
 	if(length(L.quirks))
 		L.clear_quirks()
-	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
-	L.grant_undead_eyes()
-	L.skeletonize(FALSE)
-	L.equipOutfit(/datum/outfit/lich)
-	L.set_patron(/datum/patron/inhumen/zizo)
 
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -158,9 +164,9 @@
 		H.dna.species.native_language = "Zizo Chant"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
-	H.ambushable = FALSE
+	ADD_TRAIT(H, TRAIT_NOAMBUSH, JOB_TRAIT)
 
-	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "LICH"), 5 SECONDS)
+	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), ROLE_LICH), 5 SECONDS)
 
 /datum/outfit/lich/post_equip(mob/living/carbon/human/H)
 	..()
@@ -232,7 +238,7 @@
 
 	lich_mob.skeletonize(FALSE)
 
-	lich_mob.faction = list(FACTION_UNDEAD)
+	lich_mob.set_faction(list(FACTION_UNDEAD))
 	if(length(lich_mob.quirks))
 		lich_mob.clear_quirks()
 	lich_mob.mob_biotypes |= MOB_UNDEAD
@@ -242,8 +248,8 @@
 /obj/item/phylactery
 	name = "phylactery"
 	desc = "Looks like it is filled with some intense power."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "soulstone"
+	icon = 'icons/roguetown/items/gems.dmi'
+	icon_state = "necro_crystal"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
@@ -268,3 +274,17 @@
 	var/offset = prob(50) ? -2 : 2
 	animate(src, pixel_x = offset, time = 0.2 DECISECONDS, loop = -1, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL) //start shaking
 	visible_message(span_warning("[src] begins to glow and shake violently!"))
+
+/obj/item/broken_phylactery
+	name = "exhausted phylactery"
+	desc = "A memento from a victory long past."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "purified_soulstone"
+	item_state = "electronic"
+	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
+	layer = HIGH_OBJ_LAYER
+	w_class = WEIGHT_CLASS_TINY
+	light_system = MOVABLE_LIGHT
+	light_color = "#7f84b4"
+	resistance_flags = INDESTRUCTIBLE

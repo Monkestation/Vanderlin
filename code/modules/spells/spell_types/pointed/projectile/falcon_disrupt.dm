@@ -32,7 +32,7 @@
 	if(!send_item)
 		return ..()
 
-	if(!length(owner.mind?.known_people))
+	if(!length(owner.mind?.relations))
 		to_chat(owner, span_warning("The falcon is confused... You know no one to send this item to."))
 		return FALSE
 	var/recipient = browser_input_text(owner, "Whose name shall the falcon seek?", "THE WINGS")
@@ -175,8 +175,13 @@
 		qdel(src)
 
 /obj/effect/falcon_strike_fx/proc/do_strike()
-	if(QDELETED(owner_mob))
-		owner_mob.adjustBruteLoss(10)
+	if(!QDELETED(owner_mob))
+		if(iscarbon(owner_mob))
+			var/mob/living/carbon/carbon = owner_mob
+			var/obj/item/bodypart/head = carbon.get_bodypart(BODY_ZONE_HEAD)
+			head?.bodypart_attacked_by(BCLASS_CUT, 10)
+		else
+			owner_mob.adjustBruteLoss(10, damage_type = BCLASS_CUT)
 		owner_mob.adjust_temp_blindness(0.4 SECONDS)
 		owner_mob.adjust_jitter(2 SECONDS)
 		to_chat(owner_mob, span_danger("the falcon scratches your face!"))

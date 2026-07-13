@@ -9,6 +9,7 @@
 	ambushable = FALSE
 	dodgetime = 15
 	flee_in_pain = FALSE
+	headprice = 12
 
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/ambush
 	wander = TRUE
@@ -16,7 +17,6 @@
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	set_species(/datum/species/human/northern)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/after_creation()
@@ -35,8 +35,6 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 40
 
 /datum/attribute_holder/sheet/job/npc/mad_touched_treasure_hunter
 	raw_attribute_list = list(
@@ -60,7 +58,7 @@
 /datum/outfit/job/human/species/human/northern/mad_touched_treasure_hunter/pre_equip(mob/living/carbon/human/H)
 	wrists = /obj/item/clothing/wrists/bracers
 	mask = /obj/item/clothing/face/facemask/steel/mad_touched
-	armor = /obj/item/clothing/armor/leather/heavy
+	armor = /obj/item/clothing/armor/leather/jerkin
 	shirt = /obj/item/clothing/armor/gambeson
 	if(prob(20))
 		shirt = /obj/item/clothing/armor/gambeson/light
@@ -99,7 +97,8 @@
 /obj/item/clothing/head/menacing/mad_touched_treasure_hunter //its here so it doesnt wind up on some class' loadout.
 	name = "sack hood"
 	desc = "A ragged hood of thick jute fibres. The itchiness is unbearable."
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	color = "#999999"
 	armor = ARMOR_LEATHER
 

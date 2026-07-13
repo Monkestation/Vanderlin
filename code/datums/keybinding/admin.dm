@@ -12,7 +12,7 @@
 	full_name = "Admin say"
 	description = "Talk with other admins."
 
-/datum/keybinding/admin/admin_say/down(client/user)
+/datum/keybinding/admin/admin_say/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.native_say?.open_say_window("Admin")
 	return TRUE
@@ -24,7 +24,7 @@
 	full_name = "Aghost"
 	description = "Go ghost"
 
-/datum/keybinding/admin/admin_ghost/down(client/user)
+/datum/keybinding/admin/admin_ghost/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.admin_ghost()
 	return TRUE
@@ -36,7 +36,7 @@
 	full_name = "Player Panel New"
 	description = "Opens up the new player panel"
 
-/datum/keybinding/admin/player_panel_new/down(client/user)
+/datum/keybinding/admin/player_panel_new/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.holder.player_panel_new()
 	return TRUE
@@ -48,7 +48,7 @@
 	full_name = "Toggle Buildmode Self"
 	description = "Toggles buildmode"
 
-/datum/keybinding/admin/toggle_buildmode_self/down(client/user)
+/datum/keybinding/admin/toggle_buildmode_self/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.togglebuildmodeself()
 	return TRUE
@@ -60,7 +60,7 @@
 	full_name = "Stealth mode"
 	description = "Enters stealth mode"
 
-/datum/keybinding/admin/stealthmode/down(client/user)
+/datum/keybinding/admin/stealthmode/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.stealth()
 	return TRUE
@@ -71,7 +71,7 @@
 	full_name = "Admin invisibility"
 	description = "Toggles ghost-like invisibility (Don't abuse this)"
 
-/datum/keybinding/admin/invisimin/down(client/user)
+/datum/keybinding/admin/invisimin/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.invisimin()
 	return TRUE
@@ -82,7 +82,7 @@
 	full_name = "deadsay"
 	description = "Allows you to send a message to dead chat"
 
-/datum/keybinding/admin/deadsay/down(client/user)
+/datum/keybinding/admin/deadsay/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.get_dead_say()
 	return TRUE
@@ -93,7 +93,7 @@
 	full_name = "Toggle right click menu"
 	description = "Toggles the admin context menu."
 
-/datum/keybinding/admin/toggle_rightclick_menu/down(client/user)
+/datum/keybinding/admin/toggle_rightclick_menu/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.toggle_context_menu()
 	return TRUE

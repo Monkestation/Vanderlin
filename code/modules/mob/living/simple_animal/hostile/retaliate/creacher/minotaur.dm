@@ -12,7 +12,8 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/minotaur_unarmed)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 10,
-						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2)
+						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3)
 	faction = list("caves")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 1500
@@ -38,7 +39,6 @@
 
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
 	dodgetime = 50
-	aggressive = 1
 //	stat_attack = UNCONSCIOUS
 
 	ai_controller = /datum/ai_controller/minotaur
@@ -195,7 +195,7 @@
 		return
 
 	for(var/mob/living/L in get_turf(src))
-		if(L.faction.Find("caves"))
+		if(L.has_faction("caves"))
 			continue
 
 		L.adjustFireLoss(damage_per_tick)

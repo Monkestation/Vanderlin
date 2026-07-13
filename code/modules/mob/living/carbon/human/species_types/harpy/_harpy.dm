@@ -98,6 +98,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
@@ -178,7 +179,7 @@
 
 /datum/species/harpy/on_species_gain(mob/living/carbon/foreign, datum/species/old_species)
 	..()
-	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE)
+	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE, _keeps_items = FALSE)
 	foreign.grant_language(/datum/language/common)
 
 /datum/species/harpy/get_skin_list()

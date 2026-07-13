@@ -73,7 +73,7 @@
 
 /datum/building_datum/simple/spawner/after_construction(obj/structure/spawner/wait/spawner)
 	. = ..()
-	spawner.faction |= "overlord"
+	spawner.add_faction("overlord")
 	spawner.set_spawner()
 
 /datum/building_datum/simple/spawner/goblin

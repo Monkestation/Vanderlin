@@ -30,8 +30,15 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /datum/blood_type/New()
 	. = ..()
-	compatible_types |= type
+	compatible_types |= type_key()
 
+/**
+ * Key used to identify this blood type in compatible_types
+ *
+ * Allows for more complex or dynamically generated blood types
+ */
+/datum/blood_type/proc/type_key()
+	return type
 
 /// Gets data to pass to a reagent
 /datum/blood_type/proc/get_blood_data(mob/living/sampled_from)
@@ -45,7 +52,6 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	blood_data["blood_type"] = sampled_from.get_blood_type().type
 	blood_data["gender"] = sampled_from.gender
 	blood_data["real_name"] = sampled_from.real_name
-	blood_data["factions"] = sampled_from.faction
 
 	blood_data["preferences"] = get_blood_prefs(sampled_from)
 	blood_data["vitae"] = vitae
@@ -57,7 +63,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	. = (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
 	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
 		. |= BLOOD_PREFERENCE_SLEEPING
-	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(sampled_from))
 		. &= ~BLOOD_PREFERENCE_LIVING
 		. |= BLOOD_PREFERENCE_DEAD
 	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))
@@ -101,12 +107,16 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	var/datum/mind/M = sampled_from.mind || sampled_from.last_mind
 	blood_data["mind"] = M
 	blood_data["ckey"] = sampled_from.ckey || ckey(sampled_from.last_mind?.key)
-	blood_data["cloneable"] = !sampled_from.suiciding
+
+	// If we haven't suicided but the ghost cannot reenter, i.e. we ghosted, don't set ourselves as cloneable
+	var/mob/dead/observer/ghost = sampled_from.get_ghost(TRUE, TRUE)
+	if(!HAS_TRAIT(src, TRAIT_SUICIDED) && (!ghost || ghost.can_reenter_corpse))
+		blood_data["cloneable"] = TRUE
+
 	blood_data["blood_type"] = sampled_from.dna.human_blood_type
 	blood_data["gender"] = sampled_from.gender
 	blood_data["real_name"] = sampled_from.real_name
 	blood_data["features"] = sampled_from.dna.features
-	blood_data["factions"] = sampled_from.faction
 
 	blood_data["preferences"] = get_blood_prefs(sampled_from)
 	blood_data["vitae"] = vitae

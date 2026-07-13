@@ -27,12 +27,12 @@
 		spawned.remove_status_effect(S)
 
 	if(spawn_with_torch)
-		spawned.put_in_hands(new /obj/item/flashlight/flare/torch)
+		spawned.put_in_hands(new /obj/item/flashlight/flare/torch/prelit)
 
 	apply_character_post_equipment(spawned)
 
-/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check)
-	if(!prob(roll_chance))
+/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, var/triumph_restriction_lift = FALSE)
+	if(!prob(roll_chance) && !triumph_restriction_lift)
 		return FALSE
 
 	var/datum/preferences/player_prefs = to_check.client.prefs
@@ -47,6 +47,12 @@
 		return FALSE
 
 	if(length(allowed_patrons) && !(to_check.patron.type in allowed_patrons))
+		return FALSE
+
+	if(length(banned_patrons) && (to_check.patron.type in banned_patrons))
+		return FALSE
+
+	if(tennite_triumph_exclusive && !to_check.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(to_check.patron.type in UNDIVIDED_TEMPLE_PATRONS))
 		return FALSE
 
 	if(!antags_can_pick && to_check.mind?.special_role)

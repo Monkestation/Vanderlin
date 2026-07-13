@@ -13,7 +13,7 @@
 	)
 
 /datum/job/churchling
-	title = "Churchling"
+	title = JOB_CHURCHLING
 	tutorial = "Your family were zealots. \
 	They scolded you with a studded belt and prayed like sinners \
 	every waking hour of the day they weren’t toiling in the fields. \
@@ -33,6 +33,7 @@
 	outfit = /datum/outfit/churchling
 	give_bank_account = TRUE
 	can_have_apprentices = FALSE
+	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CHURCH
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
@@ -50,7 +51,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/churchling
-	name = "Churchling"
+	name = JOB_CHURCHLING
 	neck = /obj/item/clothing/neck/psycross/silver/divine
 	armor = /obj/item/clothing/shirt/robe
 	shirt = /obj/item/clothing/shirt/undershirt

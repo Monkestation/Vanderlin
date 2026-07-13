@@ -10,6 +10,7 @@
 	throw_speed = 0.75
 	grid_width = 32
 	grid_height = 64
+	item_weight = 274 GRAMS
 	var/datum_to_spread = /datum/effect_system/smoke_spread
 
 /obj/item/smokebomb/attack_self(mob/user, list/modifiers)

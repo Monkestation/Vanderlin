@@ -49,7 +49,7 @@
 		var/mob/living/L = AM
 		if(L.z == z)
 			if(!HAS_TRAIT(L, TRAIT_KNEESTINGER_IMMUNITY))
-				if(L.electrocute_act(30, src))
+				if(L.electrocute_act(20, src))
 					L.emote("painscream")
 					L.update_sneak_invis(TRUE)
 					L.consider_ambush(always = TRUE)
@@ -61,13 +61,13 @@
 	if(isliving(user) && W && user.z == z)
 		if(W.flags_1 & CONDUCT_1)
 			var/mob/living/L = user
-			if(L.electrocute_act(30, src)) // The kneestingers will let you pass if you worship dendor, but they won't take your stupid ass hitting them.
+			if(L.electrocute_act(20, src)) // The kneestingers will let you pass if you worship dendor, but they won't take your stupid ass hitting them.
 				L.emote("painscream")
 				L.consider_ambush(always = TRUE)
 				if(L.throwing)
 					L.throwing.finalize(FALSE)
 				return FALSE
-	..()
+	return ..()
 
 /obj/structure/kneestingers/temperature_expose(exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300)

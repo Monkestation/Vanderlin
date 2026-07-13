@@ -1,7 +1,10 @@
 /datum/follower_command/follow
-	command_name = "Follow Target"
+	command_name = "Follow Me"
 	var/atom/target
 	var/datum/component/bounded/bound_component
+
+/datum/follower_command/follow/post_setup(mob/living/carbon/human/automaton, mob/living/issuer)
+	return issuer?.say("Follow me.")
 
 /datum/follower_command/follow/execute(mob/living/carbon/human/automaton, mob/living/issuer)
 	target = issuer
@@ -17,6 +20,7 @@
 		FALSE, \
 		FALSE)
 
+	playsound(automaton, 'sound/vo/automaton/executingorders.ogg', 70)
 	automaton.say("EXECUTING: Following [target]", forced = TRUE)
 
 /datum/follower_command/follow/terminate(mob/living/carbon/human/automaton)

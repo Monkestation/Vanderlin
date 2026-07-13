@@ -17,7 +17,6 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/craft/tanning = 10
 	)
@@ -45,11 +44,10 @@
 	name = "Amazon (Adventurer)"
 	neck = /obj/item/ammo_holder/dartpouch/poisondarts
 	backl = /obj/item/weapon/polearm/spear
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backr = /obj/item/gun/ballistic/bow/short
 	belt = /obj/item/storage/belt/leather/rope
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
+	beltl = /obj/item/gun/ballistic/blowgun
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	shoes = /obj/item/clothing/shoes/gladiator
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	armor = /obj/item/clothing/armor/amazon_chainkini
 	shoes = /obj/item/clothing/shoes/boots

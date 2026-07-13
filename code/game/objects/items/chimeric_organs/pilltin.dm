@@ -8,6 +8,7 @@
 	slot_flags = null
 	contents_tag = null
 	component_type = /datum/component/storage/concrete/grid/pilltin
+	item_weight = 55 GRAMS
 
 /obj/item/storage/fancy/pilltin/update_icon_state()
 	. = ..()

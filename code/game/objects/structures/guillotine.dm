@@ -154,7 +154,7 @@
 			for(var/mob/M in viewers(src, 7))
 				M.add_stress(/datum/stress_event/viewexecution)
 		else
-			H.apply_damage(30 * blade_sharpness, BRUTE, head)
+			H.apply_damage(30 * blade_sharpness, BRUTE, head, damage_type = BCLASS_CUT)
 			log_combat(user, H, "dropped the blade on", src, " non-fatally")
 			H.emote("scream")
 			// Executor has failed and was ashamed
@@ -215,7 +215,7 @@
 			return ..(carbon, force, FALSE)
 
 	for(var/obj/item/grabbing/G in M.grabbedby)
-		if(G.grab_state == GRAB_AGGRESSIVE)
+		if(G.grab_state >= GRAB_AGGRESSIVE)
 			return ..(M, force, FALSE)
 
 	to_chat(usr, span_warning("I must grab them more forcefully to put them in [src]."))
@@ -234,7 +234,7 @@
 			if (istype(S))
 				H.cut_overlays()
 				H.update_body_parts_head_only()
-				H.set_mob_offsets("bed_buckle", _x = 0, _y = -GUILLOTINE_HEAD_OFFSET)
+				H.add_offsets(type, x_add = 0, y_add = -GUILLOTINE_HEAD_OFFSET)
 				H.layer += GUILLOTINE_LAYER_DIFF
 			else
 				unbuckle_all_mobs()
@@ -247,35 +247,9 @@
 
 /obj/structure/guillotine/post_unbuckle_mob(mob/living/M)
 	M.regenerate_icons()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 	M.layer -= GUILLOTINE_LAYER_DIFF
 	..()
-
-/obj/structure/guillotine/can_be_unfasten_wrench(mob/user, silent)
-	if (LAZYLEN(buckled_mobs))
-		if (!silent)
-			to_chat(user, "<span class='warning'>Can't unfasten, someone's strapped in!</span>")
-		return FAILED_UNFASTEN
-
-	if (current_action)
-		return FAILED_UNFASTEN
-
-	return ..()
-
-/obj/structure/guillotine/wrench_act(mob/living/user, obj/item/I)
-	. = ..()
-	if (current_action)
-		return
-
-	current_action = GUILLOTINE_ACTION_WRENCH
-
-	if (do_after(user, GUILLOTINE_WRENCH_DELAY, src))
-		current_action = 0
-		default_unfasten_wrench(user, I, 0)
-		setDir(SOUTH)
-		return TRUE
-	else
-		current_action = 0
 
 #undef GUILLOTINE_BLADE_MAX_SHARP
 #undef GUILLOTINE_DECAP_MIN_SHARP

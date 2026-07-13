@@ -11,7 +11,7 @@
 	drag_slowdown = 6
 	SET_BASE_PIXEL(-12, 0)
 
-/obj/structure/plough/Moved(oldLoc, movement_dir)
+/obj/structure/plough/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if((dir == WEST) || (dir == EAST))
 		if(pulledby)
@@ -25,21 +25,24 @@
 			apply_farming_fatigue(user, 5)
 		else
 			apply_farming_fatigue(user, 10)
-		return
+		return TRUE
+
 	if(istype(location, /turf/open/floor/dirt))
 		playsound(location,'sound/items/dig_shovel.ogg', 100, TRUE)
-		var/obj/structure/soil/soil = get_soil_on_turf(location)
+		var/obj/structure/soil/soil = locate() in location
 		if(soil)
 			soil.user_till_soil(user)
-		else
-			var/obj/structure/irrigation_channel/located = locate(/obj/structure/irrigation_channel) in location
-			if(located)
-				to_chat(user, span_notice("[located] is in the way!"))
-				return
-			new /obj/structure/soil(location)
-			if(user.buckled)
-				apply_farming_fatigue(user, 5)
-			else
-				apply_farming_fatigue(user, 10)
+			return TRUE
 
-		return
+		if(location.is_blocked_turf(TRUE, src))
+			balloon_alert(user, "blocked!")
+			return
+
+		new /obj/structure/soil(location)
+
+		if(user.buckled)
+			apply_farming_fatigue(user, 5)
+		else
+			apply_farming_fatigue(user, 10)
+
+		return TRUE

@@ -7,6 +7,7 @@
 	icon_state = "ear_ring"
 	invisibility = INVISIBILITY_LEYLINES
 	w_class = WEIGHT_CLASS_TINY
+	item_weight = 5 GRAMS
 	var/hear_radius = 2
 	var/muted = FALSE
 	var/datum/weakref/linked_living
@@ -33,7 +34,7 @@
 		linked.emote("painscream")
 		linked.Immobilize(10)
 		linked.Knockdown(10)
-		linked.apply_damage(15, BRUTE, "head")
+		linked.apply_damage(15, BRUTE, BODY_ZONE_HEAD)
 
 /obj/item/phantom_ear/proc/reset_visibility()
 	if(!isturf(loc))

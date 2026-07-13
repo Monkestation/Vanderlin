@@ -27,22 +27,3 @@
 #define PROFILE_ITEM_LEN 2
 #define PROFILE_ITEM_TIME 1
 #define PROFILE_ITEM_COUNT 2
-
-// Only enable this if you have a local copy of the byond-tracy DLL.
-// DO NOT commit the DLL to the repo.
-#ifdef TRACY_PROFILE
-/proc/prof_init()
-	var/lib
-
-	switch(world.system_type)
-		if(MS_WINDOWS) lib = "prof.dll"
-		if(UNIX) lib = "libprof.so"
-		else CRASH("unsupported platform")
-
-	var/init = call_ext(lib, "init")()
-	if("0" != init) CRASH("[lib] init error: [init]")
-
-/world/New()
-	prof_init()
-	. = ..()
-#endif

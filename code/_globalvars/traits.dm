@@ -5,6 +5,8 @@ quirks have it's own panel so we don't need them here.
 */
 GLOBAL_LIST_INIT(traits_by_type, list(
 	/atom = list(
+		"TRAIT_AI_MOVEMENT_HALTED" = TRAIT_AI_MOVEMENT_HALTED,
+		"TRAIT_AI_PAUSED" = TRAIT_AI_PAUSED,
 		"TRAIT_ALT_CLICK_BLOCKER" = TRAIT_ALT_CLICK_BLOCKER,
 	),
 	/atom/movable = list(
@@ -13,6 +15,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_MOVE_VENTCRAWLING" = TRAIT_MOVE_VENTCRAWLING,
 		"TRAIT_MOVE_FLOATING" = TRAIT_MOVE_FLOATING,
 		"TRAIT_MOVE_PHASING" = TRAIT_MOVE_PHASING,
+		"TRAIT_MOVE_SWIMMING" = TRAIT_MOVE_SWIMMING,
 		"TRAIT_SHAKY_SPEECH" = TRAIT_SHAKY_SPEECH,
 	),
 	/mob = list(
@@ -26,6 +29,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_EMOTEMUTE " = TRAIT_EMOTEMUTE,
 		"TRAIT_DEAF" = TRAIT_DEAF,
 		"TRAIT_HUSK" = TRAIT_HUSK,
+		"TRAIT_DO_NOT_SPLASH" = TRAIT_DO_NOT_SPLASH,
 		"TRAIT_DUMB" = TRAIT_DUMB,
 		"TRAIT_MONKEYLIKE" = TRAIT_MONKEYLIKE,
 		"TRAIT_PACIFISM" = TRAIT_PACIFISM,
@@ -34,8 +38,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_DEATHCOMA" = TRAIT_DEATHCOMA,
 		"TRAIT_FAKEDEATH" = TRAIT_FAKEDEATH,
 		"TRAIT_NEARSIGHTED_CORRECTED" = TRAIT_NEARSIGHTED_CORRECTED,
+		"TRAIT_NO_THROWING" = TRAIT_NO_THROWING,
 		"TRAIT_NO_TRANSFORM" = TRAIT_NO_TRANSFORM,
 		"TRAIT_STUNIMMUNE" = TRAIT_STUNIMMUNE,
+		"TRAIT_SUICIDED" = TRAIT_SUICIDED,
 		"TRAIT_SLEEPIMMUNE" = TRAIT_SLEEPIMMUNE,
 		"TRAIT_PUSHIMMUNE" = TRAIT_PUSHIMMUNE,
 		"TRAIT_STABLEHEART" = TRAIT_STABLEHEART,
@@ -60,10 +66,12 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOLIMBDISABLE" = TRAIT_NOLIMBDISABLE,
 		"TRAIT_EASYLIMBDISABLE" = TRAIT_EASYLIMBDISABLE,
 		"TRAIT_TOXINLOVER" = TRAIT_TOXINLOVER,
+		"TRAIT_NOBLOOD" = TRAIT_NOBLOOD,
 		"TRAIT_NOBREATH" = TRAIT_NOBREATH,
 		"TRAIT_HOLY" = TRAIT_HOLY,
 		"TRAIT_NOAMBUSH" = TRAIT_NOAMBUSH,
 		"TRAIT_NOCRITDAMAGE" = TRAIT_NOCRITDAMAGE,
+		"TRAIT_NOCRITOVERLAY" = TRAIT_NOCRITOVERLAY,
 		"TRAIT_NOSLIPWATER" = TRAIT_NOSLIPWATER,
 		"TRAIT_NOSLIPALL" = TRAIT_NOSLIPALL,
 		"TRAIT_NODEATH" = TRAIT_NODEATH,
@@ -77,10 +85,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_PARALYSIS_R_ARM" = TRAIT_PARALYSIS_R_ARM,
 		"TRAIT_PARALYSIS_L_LEG" = TRAIT_PARALYSIS_L_LEG,
 		"TRAIT_PARALYSIS_R_LEG" = TRAIT_PARALYSIS_R_LEG,
+		"TRAIT_PASSTABLE" = TRAIT_PASSTABLE,
 		"TRAIT_NOMOBSWAP" = TRAIT_NOMOBSWAP,
 		"TRAIT_XRAY_VISION" = TRAIT_XRAY_VISION,
 		"TRAIT_THERMAL_VISION" = TRAIT_THERMAL_VISION,
-		"TRAIT_SURGEON" = TRAIT_SURGEON,
 		"TRAIT_STRONG_GRABBER" = TRAIT_STRONG_GRABBER,
 		"TRAIT_MAGIC_CHOKE" = TRAIT_MAGIC_CHOKE,
 		"TRAIT_SOOTHED_THROAT" = TRAIT_SOOTHED_THROAT,
@@ -90,16 +98,23 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_DRUQK" = TRAIT_DRUQK,
 		"TRAIT_FINGERPRINT_PASSTHROUGH" = TRAIT_FINGERPRINT_PASSTHROUGH,
 		"TRAIT_SOUND_DEBUGGED" = TRAIT_SOUND_DEBUGGED,
+		"TRAIT_TIME_STOP_IMMUNE" = TRAIT_TIME_STOP_IMMUNE,
+		"TRAIT_CANNOT_BE_UNBUCKLED" = TRAIT_CANNOT_BE_UNBUCKLED,
+		"TRAIT_CANT_RIDE" = TRAIT_CANT_RIDE,
+		"TRAIT_UNDENSE" = TRAIT_UNDENSE,
 		//Rogue Traits Past here
 		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
 		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
 		"TRAIT_KNOW_THIEF_DOORS" = TRAIT_KNOW_THIEF_DOORS,
+		"TRAIT_KNOW_COURTAGENT_DOORS" = TRAIT_KNOW_COURTAGENT_DOORS,
 		"TRAIT_KNOW_ROUS_DOORS" = TRAIT_KNOW_ROUS_DOORS,
 		"Blessing of Baotha" = TRAIT_CRACKHEAD,
 		"Blessing of Graggar" = TRAIT_ORGAN_EATER,
 		"Blessing of Pestra"= TRAIT_ROT_EATER,
 		"Blessing of Dendor" = TRAIT_KNEESTINGER_IMMUNITY,
 		"Blessing of Necra" = TRAIT_SOUL_EXAMINE,
+		"Blessing of The Hunt" = TRAIT_MANEATER_IMMUNITY,
+		"Vinewalker" = TRAIT_ENTANGLER_IMMUNITY,
 		"Enlightened Centrist" = TRAIT_DIVINE_CENTRIST,
 		"Divine Servant" = TRAIT_DIVINE_SERVANT,
 		"Divine Convert" = TRAIT_DIVINE_CONVERT,
@@ -178,11 +193,12 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Hollow Bones" = TRAIT_HOLLOWBONES,
 		"Light Load" = TRAIT_AMAZING_BACK,
 		"Loved By Kittens" = TRAIT_KITTEN_MOM,
-		"Waterbreathing" = TRAIT_WATER_BREATHING,
+		"Waterbreathing" = TRAIT_NODROWN,
 		"Moonwater Elixir" = TRAIT_MOONWATER_ELIXIR,
 		"Endless Slumber" = TRAIT_TORPOR,
 		"Boundless Energy" = TRAIT_NOENERGY,
 		"Keen Ears"	= TRAIT_KEENEARS,
+		"Keen Eyes" = TRAIT_KEENEYES,
 		"Poison Resilience" = TRAIT_POISON_RESILIENCE,
 		"Expert Forager" = TRAIT_FORAGER,
 		"Seed Finder" = TRAIT_SEED_FINDER,
@@ -191,6 +207,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Agent of the Court" = TRAIT_COURTAGENT,
+		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -202,6 +220,12 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NEEDS_TWO_HANDS" = TRAIT_NEEDS_TWO_HANDS,
 		"TRAIT_HARD_TO_STEAL" = TRAIT_HARD_TO_STEAL,
 	),
+	/turf = list(
+		"TRAIT_AI_AVOID_TURF" = TRAIT_AI_AVOID_TURF,
+		"TRAIT_CHASM_STOPPED" = TRAIT_CHASM_STOPPED,
+		"TRAIT_IMMERSE_STOPPED" = TRAIT_IMMERSE_STOPPED,
+		"TRAIT_TURF_IGNORE_SLOWDOWN" = TRAIT_TURF_IGNORE_SLOWDOWN,
+	)
 ))
 
 GLOBAL_LIST_INIT(roguetraits, list(
@@ -236,6 +260,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_NOSLEEP = span_warning("I can't sleep."),
 	TRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	TRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
+	TRAIT_MANEATER_IMMUNITY = "I am left untouched by maneaters.",
+	TRAIT_ENTANGLER_IMMUNITY = "I am left untouched by entangler vines.",
 	TRAIT_INHUMANE_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
 	TRAIT_NASTY_EATER = span_dead("I can eat bad food, and water that would be toxic to humen will not affect me."),
 	TRAIT_NOFALLDAMAGE1 = span_info("I can easily handle minor falls."),
@@ -252,7 +278,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_LEECHIMMUNE = "Leeches are reluctant to drain my blood.",
 	TRAIT_ASSASSIN = "My soul has been tainted by Graggar, god of murder.",
 	TRAIT_BARDIC_TRAINING = "Xylixian inspiration grants my songs boons and ailments.",
-	TRAIT_GRAVEROBBER = "Necra favors my grim deeds, I can unearth graves without being cursed by her.",
+	TRAIT_GRAVEROBBER = "I know the rites to shield myself from the Undermaiden's gaze, and can unearth graves without the risk of drawing her ire.",
 	TRAIT_MISSING_NOSE = span_warning("I struggle to breathe."),
 	TRAIT_DISFIGURED = span_warning("No one can recognize me..."),
 	TRAIT_BEAUTIFUL = span_love("My face was shaped by the gods!"),
@@ -291,11 +317,10 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CRATEMOVER = "I am able to drag heavy objects without any difficulty.",
 	TRAIT_SEE_LEYLINES = "I can see the lines that make up this world.",
 	TRAIT_MOONWATER_ELIXIR = span_info("My mind is open, I can understand magic runes."),
-	TRAIT_GOOD_SWIM = span_info("I can swim without being slowed and against the flow of rivers."),
-	TRAIT_WATER_BREATHING = span_info("I can breathe underwater, I have no fear of drowning."),
+	TRAIT_SWIMMER = span_info("I can swim without being slowed and against the flow of rivers."),
+	TRAIT_NODROWN = span_info("I can breathe underwater, I have no fear of drowning."),
 	TRAIT_TINY = "I am small, it's hard to look people in the eyes.",
 	TRAIT_FOREIGNER = span_notice("I'm not from around here."),
-	TRAIT_BURDEN = "I carry the Burden of HEAD EATER's hunger...",
 	TRAIT_OLDPARTY = "In years long passed, me and a group of fellow adventurers saved this city!",
 	TRAIT_DREAM_WATCHER = span_notice("I'm blessed by Noc, my dreams tell more than the average person.."),
 	TRAIT_AMAZING_BACK = span_notice("I'm able to carry far more on my back!"),
@@ -311,6 +336,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding."),
 	TRAIT_NOENERGY = span_info("I don't need rest; I won't ever feel fatigue."),
 	TRAIT_KEENEARS = span_info("I've a good pair of ears, and can tell who is speaking, even when they're out of sight. I can also hear whispers from further away."),
+	TRAIT_KEENEYES = span_info("Years of hunting and tracking have honed your sight. You're better at noticing details and spotting hidden things."),
 	TRAIT_POISON_RESILIENCE	= span_info("I'm more resilient to poisons."),
 	TRAIT_FORAGER = span_info("I can tell which jacksberries are poisonous."),
 	TRAIT_SEED_FINDER = span_info("I find seeds more easily."),
@@ -322,6 +348,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
+	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues")
 ))
 
 /// value -> trait name, generated on use from trait_by_type global
@@ -339,7 +366,8 @@ GLOBAL_LIST_INIT(movement_type_trait_to_flag, list(
 	TRAIT_MOVE_FLYING = FLYING,
 	TRAIT_MOVE_VENTCRAWLING = VENTCRAWLING,
 	TRAIT_MOVE_FLOATING = FLOATING,
-	TRAIT_MOVE_PHASING = PHASING
+	TRAIT_MOVE_PHASING = PHASING,
+	TRAIT_MOVE_SWIMMING = SWIMMING
 	))
 
 GLOBAL_LIST_INIT(movement_type_addtrait_signals, set_movement_type_addtrait_signals())

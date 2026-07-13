@@ -30,8 +30,8 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_FANATICAL,
-		TRAIT_INHUMENCAMP
 	)
 
 /datum/job/advclass/wretch/heretic/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -114,8 +114,6 @@
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/heretic
 	name = "Iconoclast (Wretch)"
@@ -251,4 +249,4 @@
 			head = /obj/item/clothing/head/helmet/heavy/bucket
 			wrists = /obj/item/clothing/neck/psycross/silver/divine
 			cloak = /obj/item/clothing/cloak/templar/undivided
-			beltr = /obj/item/weapon/sword/long/decorated
+			beltr = /obj/item/weapon/sword/long/silver/decorated

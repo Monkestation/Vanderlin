@@ -144,5 +144,5 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 	if(!istype(sacrifice) || sacrifice.stat == DEAD)
 		return FALSE
 	visible_message(span_danger("[sacrifice] throws itself into [src], being consumed alive!"))
-	sacrifice.adjustBruteLoss(sacrifice.health + 10)
+	sacrifice.adjustBruteLoss(sacrifice.health + 10, damage_type = BCLASS_BITE)
 	return consume_mob(sacrifice)

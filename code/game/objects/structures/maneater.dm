@@ -107,8 +107,8 @@
 		return
 	var/mob/living/L = user
 	var/wrestling = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling)
-	var/resist_chance = PERCENT((1 + 0.5 * wrestling) / (21 - GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE)))
-	resist_chance *= GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) / 10 // so 10 luck == 1, 11 == 1.1, 9 == 0.9
+	var/resist_chance = PERCENT((1 + wrestling) / 10)
+	resist_chance *= max(0.5, GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) / 10) // so 10 luck == 1, 11 == 1.1, 9 == 0.9
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(prob(resist_chance))
 		playsound(M, 'sound/combat/grabbreak.ogg', 100)
@@ -121,7 +121,7 @@
 		playsound(M, 'sound/combat/grabstruggle.ogg', 75)
 
 
-/obj/structure/flora/grass/maneater/real/user_buckle_mob(mob/living/M, mob/living/user) //Don't want them getting put on the rack other than by spiking
+/obj/structure/flora/grass/maneater/real/user_buckle_mob(mob/living/M, mob/living/user, check_loc) //Don't want them getting put on the rack other than by spiking
 	return
 
 /obj/structure/flora/grass/maneater/real/HasProximity(atom/movable/AM)
@@ -134,17 +134,19 @@
 		return
 	if(isliving(AM))
 		var/mob/living/L = AM
+		if(HAS_TRAIT(L, TRAIT_MANEATER_IMMUNITY))
+			return
 		if(COOLDOWN_FINISHED(src, activity_cooldown) && L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		if(L.status_flags & GODMODE)
 			return
-		if(L.buckling)
+		if(L.buckled)
 			return // Something else is buckling them, maybe another maneater even
 		if(!L.client)
 			return
 		buckle_mob(L, TRUE, check_loc = FALSE)
 		START_PROCESSING(SSobj, src)
-		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
+		if(L.can_feel_pain())
 			L.emote("painscream", forced = TRUE)
 		visible_message(span_danger("[src] snatches [L]!"))
 		playsound(src, pick(attack_sounds), 100, FALSE, -1)

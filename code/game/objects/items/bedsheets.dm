@@ -16,9 +16,12 @@ LINEN BINS
 	throwforce = 0
 	throw_speed = 1
 	throw_range = 2
-	w_class = WEIGHT_CLASS_TINY
+	w_class = WEIGHT_CLASS_SMALL
+	grid_width = 64
+	grid_height = 64
 	resistance_flags = FLAMMABLE
 	dying_key = DYE_REGISTRY_BEDSHEET
+	item_weight = 540 GRAMS //not weighted blankets but higher end heavy since cold
 
 	var/list/dream_messages = list("white")
 	var/datum/weakref/signal_sleeper //this is our goldylocks
@@ -51,7 +54,7 @@ LINEN BINS
 	RegisterSignal(src, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	RegisterSignal(sleeper, COMSIG_MOVABLE_MOVED, PROC_REF(smooth_sheets))
 	RegisterSignal(sleeper, COMSIG_LIVING_SET_RESTING, PROC_REF(smooth_sheets))
-	RegisterSignal(sleeper, COMSIG_PARENT_QDELETING, PROC_REF(smooth_sheets))
+	RegisterSignal(sleeper, COMSIG_QDELETING, PROC_REF(smooth_sheets))
 
 /obj/item/bedsheet/proc/smooth_sheets(mob/living/sleeper)
 	SIGNAL_HANDLER
@@ -59,7 +62,7 @@ LINEN BINS
 	UnregisterSignal(src, COMSIG_ITEM_PICKUP)
 	UnregisterSignal(sleeper, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(sleeper, COMSIG_LIVING_SET_RESTING)
-	UnregisterSignal(sleeper, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(sleeper, COMSIG_QDELETING)
 	to_chat(sleeper, "<span class='notice'>I smooth [src] out beneath you.</span>")
 	layer = initial(layer)
 	plane = initial(plane)
@@ -75,7 +78,7 @@ LINEN BINS
 	UnregisterSignal(src, COMSIG_ITEM_PICKUP)
 	UnregisterSignal(sleeper, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(sleeper, COMSIG_LIVING_SET_RESTING)
-	UnregisterSignal(sleeper, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(sleeper, COMSIG_QDELETING)
 	signal_sleeper = null
 
 /obj/item/bedsheet/attack_hand(mob/user, list/modifiers)

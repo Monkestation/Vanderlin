@@ -44,13 +44,30 @@
 	retreat_health = 0
 	ai_controller = /datum/ai_controller/mirespider
 
+	var/static/list/pet_commands = list(
+		/datum/pet_command/idle,
+		/datum/pet_command/free,
+		/datum/pet_command/good_boy,
+		/datum/pet_command/follow,
+		/datum/pet_command/home,
+		/datum/pet_command/go_home,
+		/datum/pet_command/attack,
+		/datum/pet_command/fetch,
+		/datum/pet_command/play_dead,
+		/datum/pet_command/protect_owner,
+		/datum/pet_command/aggressive,
+		/datum/pet_command/calm,
+	)
+
 /mob/living/simple_animal/hostile/retaliate/mirespider/Initialize()
+	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands
 	. = ..()
 	update_icon()
 	AddElement(/datum/element/ai_retaliate)
 	AddComponent(/datum/component/ai_aggro_system)
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_KNEESTINGER_IMMUNITY, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_POISONBITE, INNATE_TRAIT)
 
 	addtimer(CALLBACK(src, PROC_REF(find_lurker_to_follow)), 10)
 
@@ -278,7 +295,23 @@
 
 	ai_controller = /datum/ai_controller/mirespider_paralytic
 
+	var/static/list/pet_commands = list(
+		/datum/pet_command/idle,
+		/datum/pet_command/free,
+		/datum/pet_command/good_boy,
+		/datum/pet_command/follow,
+		/datum/pet_command/home,
+		/datum/pet_command/go_home,
+		/datum/pet_command/attack,
+		/datum/pet_command/fetch,
+		/datum/pet_command/play_dead,
+		/datum/pet_command/protect_owner,
+		/datum/pet_command/aggressive,
+		/datum/pet_command/calm,
+	)
+
 /mob/living/simple_animal/hostile/mirespider_paralytic/Initialize()
+	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 
@@ -380,7 +413,6 @@
 /obj/structure/spider/stickyweb/mirespider
 	opacity = 0
 	pass_flags = LETPASSTHROW
-	debris = null
 
 /obj/structure/spider/stickyweb/mirespider/CanPass(atom/movable/mover, turf/target)
 	. = ..()

@@ -1,5 +1,5 @@
 /datum/round_event_control/antagonist/solo/lich
-	name = "Lich"
+	name = ROLE_LICH
 	tags = list(
 		TAG_ZIZO,
 		TAG_COMBAT,
@@ -10,15 +10,13 @@
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 65
-
 	base_antags = 1
 	maximum_antags = 2
-
-	min_players = LOWPOP_THRESHOLD
-	weight = 12
+	min_players = (LOWPOP_THRESHOLD+5) * READYUP_AVG
+	denominator = (HIGHPOP_THRESHOLD+10) * READYUP_AVG
 
 	earliest_start = 0 SECONDS
+	weight = 10
 
 	typepath = /datum/round_event/antagonist/solo/lich
 	antag_datum = /datum/antagonist/lich
@@ -34,11 +32,16 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
+		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 

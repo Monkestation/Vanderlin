@@ -76,17 +76,20 @@
 	light_color = COLOR_WHITE
 	blocks_emissive = EMISSIVE_BLOCK_NONE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	light_system = MOVABLE_LIGHT
 
 /obj/effect/dummy/lighting_obj/Initialize(mapload, range, power, color, duration)
 	. = ..()
-	if(!isnull(range))
+
+	set_light_on(TRUE)
+	if(range)
 		set_light_range(range)
-	if(!isnull(power))
+	if(power)
 		set_light_power(power)
-	if(!isnull(color))
+	if(color)
 		set_light_color(color)
 	if(duration)
-		QDEL_IN(src, duration)
+		QDEL_IN(src, _duration)
 
 /obj/effect/dummy/lighting_obj/moblight
 	name = "mob lighting"

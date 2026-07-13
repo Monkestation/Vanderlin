@@ -10,6 +10,7 @@
 	light_color = LIGHT_COLOR_FIRE
 	dropshrink = 0.8
 	heat = 1000
+	item_weight = 224 GRAMS
 	var/wax = 1000
 	var/lit = FALSE
 	var/infinite = FALSE

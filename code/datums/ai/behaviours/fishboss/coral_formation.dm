@@ -58,7 +58,7 @@
 	if(isliving(AM) && !("deepone" in AM:faction))
 		playsound(src, pick('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg'), 50, FALSE)
 		for(var/mob/living/mob in range(range, src))
-			mob.apply_damage(damage_on_contact, BRUTE)
+			mob.apply_damage(damage_on_contact, BRUTE, damage_type = BCLASS_CUT)
 			to_chat(mob, "<span class='danger'>Coral shard fly into you!</span>")
 
 /obj/structure/coral_formation/attackby(obj/item/W, mob/user, list/modifiers)

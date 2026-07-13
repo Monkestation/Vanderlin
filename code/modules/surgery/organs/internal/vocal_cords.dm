@@ -3,9 +3,16 @@
 	icon_state = "vocal_cords"
 	zone = BODY_ZONE_PRECISE_MOUTH
 	slot = ORGAN_SLOT_VOICE
+	organ_efficiency = list(ORGAN_SLOT_VOICE = 100)
 	gender = PLURAL
-	decay_factor = 0	//we don't want decaying vocal cords to somehow matter or appear on scanners since they don't do anything damaged
-	healing_factor = 0
+
+	organ_volume = 1
+	max_blood_storage = 10
+	current_blood = 10
+	blood_req = 1
+	oxygen_req = 2.5
+	nutriment_req = 1.5
+
 	var/list/spans = null
 
 /obj/item/organ/vocal_cords/proc/can_speak_with() //if there is any limitation to speaking with these cords
@@ -16,6 +23,16 @@
 
 /obj/item/organ/vocal_cords/proc/handle_speech(message) //actually say the message
 	owner.say(message, spans = spans, sanitize = FALSE)
+
+/obj/item/organ/vocal_cords/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s throat is visibly swollen, the skin around [owner.p_their()] neck taut and inflamed.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b>'s neck looks slightly puffy and reddened around the throat.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b>'s throat looks mildly irritated.")
 
 /obj/item/organ/vocal_cords/harpy
 	name = "harpy's song"
@@ -28,7 +45,7 @@
 	. = ..()
 	vocals = new(src)  //okay, i think it'll be tied to the organ
 
-/obj/item/organ/vocal_cords/harpy/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+/obj/item/organ/vocal_cords/harpy/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, new_zone = null)
 	. = ..()
 	M.adjust_skill_level(/datum/attribute/skill/misc/music, 10)
 

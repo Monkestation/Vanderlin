@@ -948,6 +948,9 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
 /area/under/mountains/anvil/dungeon/lower)
+"ny" = (
+/turf/open/water/clean,
+/area/under/mountains/anvil/dungeon/lower)
 "nM" = (
 /obj/structure/rack,
 /obj/item/clothing/head/helmet/leather/minershelm,
@@ -1261,15 +1264,6 @@
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/under/mountains/anvil/dungeon)
-"rm" = (
-/obj/structure/table/wood{
-	dir = 10;
-	icon_state = "largetable"
-	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "ro" = (
 /obj/machinery/artificer_table,
@@ -2005,9 +1999,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
-"Br" = (
-/turf/open/water/cleanshallow,
-/area/under/mountains/anvil/dungeon/lower)
 "Bw" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/simple_animal/hostile/retaliate/bigrat,
@@ -2098,6 +2089,17 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
+"CD" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
 "CO" = (
 /turf/closed/wall/mineral/wood,
 /area/under/mountains/anvil/dungeon)
@@ -3463,17 +3465,6 @@
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
-"Uq" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon)
 "Ur" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs,
@@ -3682,6 +3673,15 @@
 /mob/living/simple_animal/hostile/retaliate/minotaur/axe{
 	real_name = "Bonebreaker"
 	},
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
+"WV" = (
+/obj/structure/table/wood{
+	dir = 10;
+	icon_state = "largetable"
+	},
+/obj/item/gun/ballistic/bow/cross,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "WW" = (
@@ -4286,13 +4286,13 @@ Xc
 Xc
 Vz
 ul
-Br
-Br
-Br
-Br
-Br
-Br
-Br
+ny
+ny
+ny
+ny
+ny
+ny
+ny
 ul
 Vz
 Xc
@@ -4352,13 +4352,13 @@ Xc
 Xc
 Vz
 ot
-Br
+ny
 IK
 nr
 GG
 nr
 IK
-Br
+ny
 ot
 Vz
 Xc
@@ -4418,13 +4418,13 @@ Xc
 Xc
 Vz
 Io
-Br
+ny
 vD
 vD
 vD
 vD
 vD
-Br
+ny
 Io
 Vz
 Xc
@@ -4484,13 +4484,13 @@ Xc
 Xc
 Vz
 xC
-Br
+ny
 cT
 cT
 Qk
 cT
 cT
-Br
+ny
 xC
 Vz
 Xc
@@ -4550,13 +4550,13 @@ Xc
 Xc
 Vz
 kn
-Br
+ny
 cT
 cT
 UD
 cT
 cT
-Br
+ny
 kn
 Vz
 Xc
@@ -4616,13 +4616,13 @@ Xc
 Xc
 Vz
 Io
-Br
+ny
 Tj
 Tj
 lO
 Tj
 Tj
-Br
+ny
 Io
 Vz
 Xc
@@ -4682,13 +4682,13 @@ Xc
 Xc
 Vz
 Ht
-Br
+ny
 Tj
 Tj
 HG
 Tj
 Tj
-Br
+ny
 Ht
 Vz
 Xc
@@ -4748,13 +4748,13 @@ Xc
 Xc
 Vz
 ul
-Br
+ny
 Tj
 Tj
 HG
 Tj
 Tj
-Br
+ny
 ul
 Vz
 Xc
@@ -4812,17 +4812,17 @@ Xc
 Xc
 Xc
 Xc
-Br
-Br
-Br
+ny
+ny
+ny
 Tj
 wg
 HG
 wg
 Tj
-Br
-Br
-Br
+ny
+ny
+ny
 Xc
 Xc
 Xc
@@ -5784,7 +5784,7 @@ Xc
 ag
 XJ
 XJ
-Br
+ny
 XJ
 Xc
 "}
@@ -5849,8 +5849,8 @@ Xc
 Xc
 Xc
 Nc
-Br
-Br
+ny
+ny
 XJ
 Xc
 "}
@@ -5914,8 +5914,8 @@ Xc
 Xc
 Xc
 Oi
-Br
-Br
+ny
+ny
 Ja
 XJ
 Xc
@@ -6312,7 +6312,7 @@ Xc
 Xc
 Xc
 ag
-Br
+ny
 ag
 Xc
 "}
@@ -6378,8 +6378,8 @@ Xc
 Xc
 TG
 ag
-Br
-Br
+ny
+ny
 Xc
 "}
 (38,1,1) = {"
@@ -6443,9 +6443,9 @@ Xc
 Xc
 rQ
 ag
-Br
+ny
 ag
-Br
+ny
 Xc
 "}
 (39,1,1) = {"
@@ -10980,7 +10980,7 @@ jQ
 bY
 bY
 Cb
-Uq
+CD
 bY
 wL
 fH
@@ -11311,7 +11311,7 @@ oR
 Nn
 fH
 oR
-rm
+WV
 kZ
 oR
 oR

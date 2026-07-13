@@ -1,6 +1,6 @@
 /datum/element/divine_intervention
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	var/datum/stress_event/stress_event
 	var/datum/patron/patron
 	var/allows_pantheon
@@ -10,7 +10,7 @@
 	. = ..()
 	if(!istype(target))
 		return ELEMENT_INCOMPATIBLE
-	src.patron = GLOB.patrons_by_type[patron]
+	src.patron = GLOB.patron_list[patron]
 	src.allows_pantheon = allows_pantheon
 	src.stress_event = stress_event
 	src.sets_alight = sets_alight

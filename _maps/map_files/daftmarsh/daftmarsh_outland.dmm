@@ -789,23 +789,6 @@
 	},
 /turf/open/floor/cobble/alt,
 /area/under/mountains/anvil/lower)
-"hM" = (
-/obj/structure/fluff/walldeco/bigpainting,
-/obj/structure/table/wood/plain,
-/obj/item/painting/queen{
-	pixel_x = -3;
-	pixel_y = -5
-	},
-/obj/item/painting/lorehead{
-	pixel_x = 10;
-	pixel_y = 6
-	},
-/obj/item/painting/lorehead/one{
-	pixel_x = -7;
-	pixel_y = 9
-	},
-/turf/open/floor/twig,
-/area/under/mountains/anvil/lower)
 "hO" = (
 /obj/item/reagent_containers/food/snacks/sugar{
 	pixel_x = 5;
@@ -1454,12 +1437,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/mountains)
-"od" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/cobblerock/snow,
-/area/outdoors/wilderness)
 "oh" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
@@ -1779,14 +1756,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/lower)
-"su" = (
-/obj/item/chair,
-/obj/item/ammo_casing/caseless/bolt,
-/obj/effect/decal/cleanable/blood,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/obj/effect/decal/remains/human,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "sy" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
@@ -2015,12 +1984,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/lower)
-"ut" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness)
 "uA" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
@@ -2063,6 +2026,12 @@
 	},
 /turf/open/floor/twig,
 /area/outdoors/mountains)
+"vm" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness)
 "vt" = (
 /obj/structure/stairs,
 /obj/structure/fluff/railing/wood{
@@ -2087,6 +2056,12 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/lower)
+"vO" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/bog)
 "vT" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -2311,14 +2286,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/mountains)
-"yN" = (
-/obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/reagent_containers/glass/bottle/redwine,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/wood,
-/area/indoors/villagegarrison)
 "yO" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -3347,12 +3314,6 @@
 "JI" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/villagegarrison)
-"JK" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness)
 "JN" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/under/mountains/anvil/lower)
@@ -3446,6 +3407,15 @@
 "KZ" = (
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"Lb" = (
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/structure/table/wood/plain,
+/obj/item/painting/queen{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/turf/open/floor/twig,
+/area/under/mountains/anvil/lower)
 "Lj" = (
 /obj/structure/kneestingers,
 /turf/open/water/river/dirt{
@@ -3481,6 +3451,12 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/lower)
+"LF" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness)
 "LL" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 2;
@@ -3627,6 +3603,12 @@
 /obj/structure/dungeon_entry,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"MD" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
+/turf/open/floor/cobblerock/snow,
+/area/outdoors/wilderness)
 "ME" = (
 /obj/structure/fluff/signage{
 	dir = 4;
@@ -3704,12 +3686,6 @@
 /obj/effect/landmark/mapGenerator/bog,
 /turf/closed,
 /area)
-"Nx" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/bog)
 "NH" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
@@ -4158,6 +4134,14 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/upper)
+"Sa" = (
+/obj/item/chair,
+/obj/item/ammo_casing/caseless/bolt,
+/obj/effect/decal/cleanable/blood,
+/obj/item/gun/ballistic/bow/cross,
+/obj/effect/decal/remains/human,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "Sb" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -4577,6 +4561,14 @@
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"WF" = (
+/obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/reagent_containers/glass/bottle/redwine,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "WJ" = (
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/decorstone,
@@ -39389,7 +39381,7 @@ lD
 lD
 Wn
 SD
-su
+Sa
 lD
 lD
 lD
@@ -44883,9 +44875,9 @@ pg
 pg
 pg
 pg
-Nx
-Nx
-Nx
+vO
+vO
+vO
 pg
 pg
 pg
@@ -83623,7 +83615,7 @@ IT
 fk
 IT
 Df
-hM
+Lb
 Ka
 nj
 oO
@@ -85354,9 +85346,9 @@ pg
 pg
 pg
 pg
-Nx
-Nx
-Nx
+vO
+vO
+vO
 pg
 pg
 pg
@@ -125830,9 +125822,9 @@ Lv
 Lv
 pS
 pS
-JK
-JK
-JK
+vm
+vm
+vm
 pS
 pS
 pS
@@ -138794,7 +138786,7 @@ FI
 Iv
 FI
 FI
-ut
+LF
 SK
 "}
 (64,1,4) = {"
@@ -138996,7 +138988,7 @@ FI
 FI
 FI
 FI
-ut
+LF
 SK
 "}
 (65,1,4) = {"
@@ -139198,7 +139190,7 @@ FI
 FI
 Iv
 Lv
-ut
+LF
 SK
 "}
 (66,1,4) = {"
@@ -152815,7 +152807,7 @@ GE
 YG
 YG
 kS
-yN
+WF
 JI
 PW
 LO
@@ -163842,7 +163834,7 @@ Iv
 FI
 eY
 eY
-od
+MD
 SK
 "}
 (188,1,4) = {"
@@ -164044,7 +164036,7 @@ eY
 eY
 eY
 eY
-od
+MD
 SK
 "}
 (189,1,4) = {"
@@ -164246,7 +164238,7 @@ Iv
 eY
 eY
 eY
-od
+MD
 SK
 "}
 (190,1,4) = {"

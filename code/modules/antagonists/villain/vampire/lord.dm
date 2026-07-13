@@ -22,6 +22,7 @@
 		"I AM THE LAND!",
 		"FIRSTBORNE CHILD OF KAIN!",
 	)
+	allow_preference_switching = TRUE
 	var/chooses_name = TRUE
 	var/outfit = /datum/outfit/vamplord
 	var/patron = /datum/patron/godless/autotheist
@@ -29,6 +30,7 @@
 	var/ascended = FALSE
 	// thralls to set the clan of on creation
 	var/list/starting_thralls = list()
+	antag_flags = NONE
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current
@@ -111,7 +113,7 @@
 		to_chat(src, span_warning("[ruler] is still conscious."))
 		return
 
-	switch(alert(ruler, "Submit and Pledge Allegiance to [name]?", "SUBMISSION", "Yes", "No"))
+	switch(tgui_alert(ruler, "Submit and Pledge Allegiance to [name]?", "SUBMISSION", list("Yes", "No")))
 		if("Yes")
 			SSmapping.retainer.king_submitted = TRUE
 		if("No")
@@ -157,7 +159,7 @@
 
 /mob/proc/death_knight_spawn()
 	SEND_SOUND(src, sound('sound/misc/notice (2).ogg'))
-	if(alert(src, "A Vampire Lord is summoning you from the Underworld.", "Be Risen?", "Yes", "No") == "Yes")
+	if(tgui_alert(src, "A Vampire Lord is summoning you from the Underworld.", "Be Risen?", list("Yes", "No")) == "Yes")
 		if(!has_world_trait(/datum/world_trait/death_knight))
 			to_chat(src, span_warning("Another soul was chosen."))
 		returntolobby()

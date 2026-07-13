@@ -982,10 +982,10 @@
 /area/under/tomb/indoors/magic)
 "MF" = (
 /obj/structure/flora/grass/herb/random,
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/reagent_containers/food/snacks/produce/sunflower,
-/turf/open/floor/grass/cold,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
 /area/under/tomb/indoors/magic)
 "MJ" = (
 /obj/effect/spawner/map_spawner/loot/medium,

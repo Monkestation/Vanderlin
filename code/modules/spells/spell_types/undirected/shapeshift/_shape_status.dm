@@ -14,7 +14,6 @@
 	var/already_restored = FALSE
 	/// Do we keep the caster's skill levels and experience for the mob?
 	var/keep_skills = TRUE
-	var/datum/attribute_holder/stored_holder
 
 /datum/status_effect/shapechange_mob/on_creation(mob/living/new_owner, mob/living/caster, keep_skills = TRUE)
 	// If any type or subtype of shapeshift mob is on the new_owner already throw an error and self-delete
@@ -36,21 +35,15 @@
 /datum/status_effect/shapechange_mob/on_apply()
 	. = ..()
 	owner.gender = caster_mob.gender
-
-	if(!keep_skills)
-		stored_holder = caster_mob.attributes
-		owner.attributes = new /datum/attribute_holder(owner)
-		var/list/stat_values = list()
-		for(var/attr in stored_holder.attribute_list)
-			if(!ispath(attr, STAT))
-				continue
-			stat_values[attr] = stored_holder.attribute_list[attr] - ATTRIBUTE_DEFAULT
-		owner.set_stat_modifier("stored_stats", stat_values)
-	else
-		owner.attributes.copy_holder(caster_mob.attributes)
-
-
 	owner.regenerate_icons()
+
+	var/datum/attribute_holder/temporary_holder
+	if(!keep_skills)
+		temporary_holder = caster_mob.attributes
+		temporary_holder?.set_parent(null)
+	caster_mob.mind?.transfer_to(owner) // attribute_holder will try to set new parent upon mind transfer
+	if(temporary_holder)
+		temporary_holder.set_parent(caster_mob)
 
 	caster_mob.forceMove(owner)
 	ADD_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
@@ -61,7 +54,7 @@
 	RegisterSignal(owner, COMSIG_PRE_MOB_CHANGED_TYPE, PROC_REF(on_pre_type_change))
 	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(on_shape_death))
 	RegisterSignal(caster_mob, COMSIG_LIVING_DEATH, PROC_REF(on_caster_death))
-	RegisterSignal(caster_mob, COMSIG_PARENT_QDELETING, PROC_REF(on_caster_deleted))
+	RegisterSignal(caster_mob, COMSIG_QDELETING, PROC_REF(on_caster_deleted))
 
 	SEND_SIGNAL(caster_mob, COMSIG_LIVING_SHAPESHIFTED, owner)
 	return TRUE
@@ -107,7 +100,7 @@
 
 	already_restored = TRUE
 	UnregisterSignal(owner, list(COMSIG_LIVING_PRE_WABBAJACKED, COMSIG_LIVING_DEATH))
-	UnregisterSignal(caster_mob, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH))
+	UnregisterSignal(caster_mob, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH))
 
 	caster_mob.forceMove(owner.loc)
 	REMOVE_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
@@ -116,9 +109,9 @@
 
 	// We aren't keeping skills, so trash the owner's skills. Don't qdel in case we're caching the owner's skill holder for some reason.
 	if(!keep_skills)
-		qdel(owner.attributes)
-		owner.attributes = stored_holder
-		stored_holder = null
+		owner.attributes?.set_parent(null)
+
+	owner.mind?.transfer_to(caster_mob)
 
 	if(kill_caster_after)
 		caster_mob.death()
@@ -160,7 +153,7 @@
 	else
 		owner.death()
 
-/// Signal proc for [COMSIG_PARENT_QDELETING] from our caster, delete us / our owner if we get deleted
+/// Signal proc for [COMSIG_QDELETING] from our caster, delete us / our owner if we get deleted
 /datum/status_effect/shapechange_mob/proc/on_caster_deleted(datum/source)
 	SIGNAL_HANDLER
 
@@ -196,7 +189,7 @@
 			var/damage_to_apply = owner.maxHealth * ((caster_mob.maxHealth - caster_mob.health) / caster_mob.maxHealth)
 
 			owner.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE)
-			owner.blood_volume = caster_mob.blood_volume
+			owner.set_blood_volume(caster_mob.get_blood_volume())
 
 	for(var/datum/action/bodybound_action as anything in caster_mob.actions)
 		if(bodybound_action.target != caster_mob)
@@ -232,7 +225,7 @@
 		caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE)
 
 	if(iscarbon(owner))
-		caster_mob.blood_volume = owner.blood_volume
+		caster_mob.set_blood_volume(owner.get_blood_volume())
 
 /datum/status_effect/shapechange_mob/from_spell/on_shape_death(datum/source, gibbed)
 	var/datum/action/cooldown/spell/undirected/shapeshift/source_spell = source_weakref.resolve()

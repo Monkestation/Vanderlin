@@ -36,14 +36,13 @@
 		TRAIT_BLOODDRINKER,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_NOPAINSTUN,
-		TRAIT_INHUMENCAMP
 	)
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/barbrage
 	)
 
-/datum/job/advclass/wretch/berserker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/wretch/berserker/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectableweapon = list(
 		"MY BARE HANDS!!!" = /obj/item/weapon/knife/dagger/steel,
@@ -66,8 +65,6 @@
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40, TRUE)
 		if("Sword")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/berserker
 	name = "Reaver (Wretch)"

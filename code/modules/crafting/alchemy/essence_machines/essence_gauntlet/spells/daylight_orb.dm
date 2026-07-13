@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/daylight
 	name = "Daylight"
 	desc = "Creates a bright light that mimics natural sunlight."
-	button_icon_state = "daylight"
+	button_icon_state = "conjure_dragonhide"
 	cast_range = 0
 	point_cost = 4
 	attunements = list(/datum/attunement/light)
+	essences = list(/datum/thaumaturgical_essence/light)
 
 /datum/action/cooldown/spell/essence/daylight/cast(atom/cast_on)
 	. = ..()

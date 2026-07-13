@@ -1,10 +1,9 @@
 /obj/item/clothing/gloves
+	abstract_type = /obj/item/clothing/gloves
 	name = "gloves"
-	gender = PLURAL //Carn: for grammarically correct text-parsing
-	w_class = WEIGHT_CLASS_SMALL
+	icon = 'icons/roguetown/clothing/gloves.dmi'
 
 	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
-	icon = 'icons/roguetown/clothing/gloves.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
 	bloody_icon_state = "bloodyhands"
 	sleevetype = "shirt"
@@ -13,6 +12,9 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
+
+	gender = PLURAL
+	w_class = WEIGHT_CLASS_SMALL
 
 	siemens_coefficient = 1
 	max_heat_protection_temperature = 361
@@ -27,19 +29,20 @@
 	strip_delay = 2 SECONDS
 	equip_delay_other = 4 SECONDS
 
-	sewrepair = TRUE
+	dyeable = TRUE
 	anvilrepair = null
 	smeltresult = /obj/item/fertilizer/ash
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	fiber_salvage = FALSE
 	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
 
 	grid_width = 64
 	grid_height = 32
-	item_weight = 4
+	item_weight = 300 GRAMS
 
 	var/transfer_prints = FALSE
-	abstract_type = /obj/item/clothing/gloves
 	var/unarmed_bonus = 1
 
 /obj/item/clothing/gloves/Initialize(mapload, ...)

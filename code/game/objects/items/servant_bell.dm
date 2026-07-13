@@ -13,6 +13,7 @@
 	dropshrink = 0.7
 	grid_height = 32
 	grid_width = 32
+	item_weight = 245 GRAMS
 
 	/// associative list of the names of servants to a weakref to their brain
 	var/alist/bound_servants = list()
@@ -52,30 +53,46 @@
 		. += span_notice("Use on a commoner to bind their mind to the bell.")
 		. += span_notice("Right click with an open hand to relinquish servants.")
 
-/obj/item/servant_bell/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!COOLDOWN_FINISHED(src, nearby_ring_bell) || !is_bell_proficient(user) || !ishuman(target))
-		return
-	var/mob/living/carbon/human/H = target
+/obj/item/servant_bell/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!is_bell_proficient(user))
+		return NONE
+
+	if(!ishuman(interacting_with))
+		return NONE
+
+	if(!COOLDOWN_FINISHED(src, nearby_ring_bell))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/carbon/human/H = interacting_with
 	if(!H.mind)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(length(bound_servants) >= max_servants)
 		to_chat(user, span_warning("It can hold no more minds without relinquishing another."))
+		return ITEM_INTERACT_BLOCKING
+
 	playsound(src, 'sound/items/servant_bell.ogg', 80, TRUE)
+
 	user.visible_message(span_smallnotice("[user] rings [src] in front of [user == H ? "[user.p_them()]self" : H] like a pendulum..."))
-	if(do_after(user, 6 SECONDS, H))
-		if((H.real_name in bound_servants) && H.name == H.real_name)
-			to_chat(user, span_warning("[src] is already bound to this bell."))
-		else if(H.is_dead())
-			to_chat(user, span_warning("What good is a dead servant?"))
-		else if(H.mind?.has_antag_datum(/datum/antagonist/zombie))
-			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
-		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
-			to_chat(user, span_warning("The enchantment seems to fail."))
-		else
-			add_servant(H)
-			to_chat(user, span_smallnotice("I bind [H] to [src]."))
+
+	if(!do_after(user, 6 SECONDS, H))
+		return ITEM_INTERACT_BLOCKING
+
+	if((H.real_name in bound_servants) && H.name == H.real_name)
+		to_chat(user, span_warning("[src] is already bound to this bell."))
+	else if(H.is_dead())
+		to_chat(user, span_warning("What good is a dead servant?"))
+	else if(IS_DEADITE(H))
+		to_chat(user, span_warning("The deadite curse resists the bell's charm."))
+	else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
+		to_chat(user, span_warning("The enchantment seems to fail."))
+	else
+		add_servant(H)
+		to_chat(user, span_smallnotice("I bind [H] to [src]."))
+
 	COOLDOWN_START(src, nearby_ring_bell, nearby_cooldown)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/servant_bell/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -95,7 +112,7 @@
 	var/remove = browser_input_list(user, "Who will be relinquished of service?","Service Bell", all_servants)
 	if(remove)
 		if(remove == "Relinquish all")
-			var/choice = input(user,"Are you sure you want to clear the servant list?","Service Bell",null) as null|anything in list("Yes", "No")
+			var/choice = tgui_alert(user, "Are you sure you want to clear the servant list?", "Service Bell", list("Yes", "No"))
 			if(choice != "Yes")
 				return
 			for(var/s_name in servants)
@@ -105,7 +122,7 @@
 			remove_servant(servant = remove)
 			to_chat(user, span_smallnotice("[remove] has been relinquished."))
 
-/obj/item/servant_bell/attack_self(mob/living/user, params)
+/obj/item/servant_bell/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(!istype(user)) // ???
 		return

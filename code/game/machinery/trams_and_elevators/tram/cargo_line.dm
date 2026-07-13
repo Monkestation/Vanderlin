@@ -21,7 +21,7 @@
 	RegisterSignal(SSdcs, COMSIG_DISPATCH_CARGO, PROC_REF(dispatch_cargo))
 
 /obj/effect/landmark/tram/queued_path/cargo_map_enter/tram_reached_travel_point(datum/source, datum/lift_master/tram/tram)
-	tram.destination = null
+	tram.set_travelling(FALSE)
 	held_tram = tram
 	SSmerchant.cargo_docked = TRUE
 
@@ -61,6 +61,10 @@
 
 /obj/effect/landmark/tram/queued_path/cargo_stop/tram_reached_travel_point(datum/source, datum/lift_master/tram/tram)
 	RegisterSignal(tram, COMSIG_TRAM_EMPTY, PROC_REF(send_cargo_boat))
+	tram.set_travelling(FALSE)
+	for(var/obj/structure/industrial_lift/tram/tram_part as anything in tram.lift_platforms)
+		for(var/mob/living/living in tram_part.lift_load)
+			SEND_SIGNAL(living, COMSIG_MOB_CARGO_DOCKED)
 
 /obj/effect/landmark/tram/queued_path/cargo_stop/proc/send_cargo_boat(datum/lift_master/tram/tram)
 	UnregisterSignal(tram, COMSIG_TRAM_EMPTY)
@@ -85,4 +89,5 @@
 	tram.try_sell_items()
 	tram.try_process_order()
 	tram.hide_tram()
+	tram.set_travelling(FALSE)
 	. = ..()

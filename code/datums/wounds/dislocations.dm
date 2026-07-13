@@ -10,7 +10,7 @@
 	)
 	sound_effect = "fracturedry"
 	whp = 40
-	woundpain = 40
+	woundpain = 20
 	mob_overlay = ""
 	sewn_overlay = ""
 	can_sew = FALSE
@@ -21,6 +21,8 @@
 	qdel_on_droplimb = TRUE
 
 	werewolf_infection_probability = 0
+	associated_bclasses = DISLOCATION_BCLASSES
+	min_damage_dividend = 0.4
 	/// Whether or not we can be surgically relocated
 	var/can_relocate = TRUE
 
@@ -28,6 +30,11 @@
 	if(istype(other, /datum/wound/dislocation) && (type == other.type))
 		return FALSE
 	return TRUE
+
+/datum/wound/dislocation/can_apply_to_bodypart(obj/item/bodypart/affected)
+	if(HAS_TRAIT(affected, TRAIT_BRITTLE))
+		return FALSE
+	return ..()
 
 /datum/wound/dislocation/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
@@ -72,10 +79,14 @@
 		"The %BODYPART is wrenched out of its socket!",
 	)
 	whp = 80
-	woundpain = 100
+	woundpain = 0 // you can't feel anything
+	min_damage_dividend = 1.0
+	viable_zones = list(BODY_ZONE_PRECISE_NECK)
 
 /datum/wound/dislocation/neck/can_apply_to_mob(mob/living/affected)
 	if(!QDELETED(affected) && istype(affected, /mob/living/carbon/human/species/skeleton/death_arena))
+		return FALSE
+	if(HAS_TRAIT(affected, TRAIT_BRITTLE))
 		return FALSE
 	. = ..()
 

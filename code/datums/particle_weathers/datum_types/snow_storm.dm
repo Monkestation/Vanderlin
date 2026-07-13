@@ -33,12 +33,6 @@
 
 	temperature_modification = -10
 
-
-//Makes you a little chilly
-/datum/particle_weather/snow_gentle/weather_act(mob/living/L)
-	L.snow_shiver = world.time + 7 SECONDS
-
-
 /datum/particle_weather/snow_storm
 	name = "Snow Storm"
 	desc = "Snow Storm, la la description."
@@ -74,12 +68,6 @@
 		new /obj/structure/snow(target_turf, 1)
 	else
 		target_turf.snow.weathered(src)
-
-//Makes you a lot little chilly
-/mob/living/var/snow_shiver
-
-/datum/particle_weather/snow_storm/weather_act(mob/living/L)
-	L.snow_shiver = world.time + 10 SECONDS
 
 /particles/fog
 	icon = 'icons/effects/particles/smoke.dmi'
@@ -144,10 +132,6 @@
 	for(var/atom/movable/movable in get_turf(src))
 		if(movable.get_filter("mob_moving_effect_mask"))
 			animate(movable.get_filter("mob_moving_effect_mask"), y = -32, time = 0)
-			if(ismob(movable))
-				movable:update_vision_cone()
-			for(var/mob/living/carbon/human/human in view(movable, 7))
-				human.update_vision_cone()
 
 	STOP_PROCESSING(SSslowobj, src)
 	snowed_turf.snow = null
@@ -374,7 +358,5 @@
 
 
 /turf/Exited(atom/movable/gone, direction)
-	if(!istype(gone))
-		return
-	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
+	. = ..()
 	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)

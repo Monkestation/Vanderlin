@@ -19,16 +19,18 @@
 
 	. = damage_amount
 
-	var/old_integrity = atom_integrity
-	update_integrity(atom_integrity - damage_amount, FALSE, damage_flag)
+	var/previous_atom_integrity = atom_integrity
+
+	update_integrity(atom_integrity - damage_amount, damage_flag = damage_flag)
+
+	var/integrity_failure_amount = integrity_failure * max_integrity
 
 	//BREAKING FIRST
-	if(integrity_failure && atom_integrity <= integrity_failure * max_integrity)
-		var/silent = !(old_integrity > integrity_failure * max_integrity)
-		atom_break(damage_flag, silent)
+	if(integrity_failure && previous_atom_integrity > integrity_failure_amount && atom_integrity <= integrity_failure_amount)
+		atom_break(damage_flag)
 
 	//DESTROYING SECOND
-	if(atom_integrity <= 0)
+	if(atom_integrity <= 0 && previous_atom_integrity > 0)
 		atom_destruction(damage_flag)
 
 /// Proc for recovering atom_integrity. Returns the amount repaired by
