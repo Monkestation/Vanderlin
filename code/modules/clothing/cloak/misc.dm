@@ -425,3 +425,35 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	color = "#FFFFFF"
 	detail_color = "#FFFFFF"
+
+//............... Cadwyn Order Cloaks ......................//
+/obj/item/clothing/cloak/cadwyn/astrata
+	name = "bright tabard"
+	desc = "A golden-coloured cloak, torn into strips at the ends. Let it mark you as a threat to any deadite monster as you stand tall above the charge."
+	icon_state = "cadwyncloak_astrata"
+	item_state = "cadwyncloak_astrata"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/cadwyn/ravox
+	name = "tattered surcoat"
+	desc = "A partially shredded red tabard.  Let your allies take shelter behind its bold colour as you bear the attack."
+	icon_state = "cadwyncloak_ravox"
+	item_state = "cadwyncloak_ravox"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/cadwyn/necra
+	name = "dark cloak"
+	desc = "A dark cloak secured with a silver buckle. The edge is torn from the dangerous melees with the deadite horde."
+	icon_state = "cadwyncloak_necra"
+	item_state = "cadwyncloak_necra"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+//............... Legacy Totod Order Cloaks ......................//
+/obj/item/clothing/cloak/cape/crusader
+	name = "desert cape"
+	desc = "Zaladin is known for its legacies in tailoring, this particular cape is interwoven with fine stained silks and leather - a sand elf design, renowned for its style and durability."
+	icon_state = "crusader_cloak"
+	icon = 'icons/roguetown/clothing/special/crusader.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	has_storage = TRUE

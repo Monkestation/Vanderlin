@@ -271,14 +271,13 @@
 
 
 ///Changes the range which the light reaches. 0 means no light, 9 is the maximum value.
-/datum/component/overlay_lighting/proc/set_range(atom/source, old_inner_range, old_outer_range)
+/datum/component/overlay_lighting/proc/set_range(atom/source, new_inner_range, new_outer_range)
 	SIGNAL_HANDLER
-	var/new_range = source.light_outer_range
-	if(range == new_range)
+	if(range == new_outer_range)
 		return
 	if(range == 0)
 		turn_off()
-	range = clamp(CEILING(new_range, 0.5), 1, 9)
+	range = clamp(CEILING(new_outer_range, 0.5), 1, 9)
 	var/pixel_bounds = ((range - 1) * 64) + 32
 	lumcount_range = CEILING(range, 1)
 	visible_mask.icon = light_overlays["[pixel_bounds]"]

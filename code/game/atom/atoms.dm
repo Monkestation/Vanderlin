@@ -170,7 +170,7 @@
 	/**
 	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
 	 */
-	var/germ_level = INFECTION_LEVEL_ONE
+	var/germ_level = GERM_LEVEL_AMBIENT
 
 
 /**
