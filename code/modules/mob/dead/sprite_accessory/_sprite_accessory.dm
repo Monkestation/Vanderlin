@@ -198,7 +198,7 @@
 		result_icon.Blend(extra_icon, ICON_OVERLAY)
 
 	// Apparently new icons can do weird stuff unless you try and "read" something from it like this before using it.
-	result_icon.GetPixel(1, 1)
+	//result_icon.GetPixel(1, 1)
 
 	return result_icon
 

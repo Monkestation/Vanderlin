@@ -474,12 +474,6 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	experience_multiplier *= 0.5
 	complete(TRUE)
 
-/datum/fishing_challenge/proc/hurt_fish(datum/source, obj/item/reagent_containers/food/snacks/fish/reward)
-	SIGNAL_HANDLER
-	if(istype(reward))
-		var/damage = CEILING((world.time - start_time)/10 * FISH_DAMAGE_PER_SECOND, 1)
-		reward.damage_fish(damage)
-
 /datum/fishing_challenge/proc/get_difficulty()
 	var/list/difficulty_holder = list(0)
 	SEND_SIGNAL(src, COMSIG_FISHING_CHALLENGE_GET_DIFFICULTY, reward_path, used_rod, user, difficulty_holder)

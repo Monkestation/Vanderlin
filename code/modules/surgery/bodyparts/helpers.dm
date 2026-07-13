@@ -125,3 +125,13 @@
 		if(robotic)
 			L.change_bodypart_status(BODYPART_ROBOTIC)
 	. = L
+
+/mob/proc/update_limb_efficiencies()
+	return
+
+/mob/living/carbon/update_limb_efficiencies()
+	if(status_flags & BUILDING_ORGANS)
+		return
+	for(var/thing in bodyparts)
+		var/obj/item/bodypart/limb = thing
+		limb.update_limb_efficiency()
