@@ -298,7 +298,7 @@
 	)
 
 	spells = list(
-		/datum/action/cooldown/spell/undirected/conjure_item/closecombat
+		/datum/action/innate/clench_fists
 	)
 
 /datum/outfit/forestguard/ossland_scout

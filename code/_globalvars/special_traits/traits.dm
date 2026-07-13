@@ -373,7 +373,7 @@
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tavernbrawler)
-	character.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+	character.add_spell(/datum/action/innate/clench_fists, TRUE)
 	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 
 /datum/attribute_holder/sheet/job/mastercraftsmen
@@ -1086,7 +1086,7 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
-	character.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/closecombat, TRUE)
+	character.add_spell(/datum/action/innate/clench_fists, TRUE)
 
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"

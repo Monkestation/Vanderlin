@@ -59,7 +59,7 @@
 	)
 
 	spells = list(
-		/datum/action/cooldown/spell/undirected/conjure_item/closecombat
+		/datum/action/innate/clench_fists
 	)
 
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)

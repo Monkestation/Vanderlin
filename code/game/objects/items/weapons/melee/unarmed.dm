@@ -8,7 +8,6 @@
 	minstr = 1
 	item_weight = 100 GRAMS
 	wbalance = HARD_TO_DODGE
-	item_flags = DROPDEL
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(CLOSECOMBAT_PUNCH, CLOSECOMBAT_JAB, CLOSECOMBAT_SLUG, CLOSECOMBAT_SLAM)
 	weapon_special = /datum/special_intent/upper_cut

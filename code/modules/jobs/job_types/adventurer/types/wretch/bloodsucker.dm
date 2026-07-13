@@ -37,7 +37,7 @@
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
 
 	spells = list(
-		/datum/action/cooldown/spell/undirected/conjure_item/closecombat
+		/datum/action/innate/clench_fists
 	)
 
 /datum/job/advclass/wretch/bloodsucker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
