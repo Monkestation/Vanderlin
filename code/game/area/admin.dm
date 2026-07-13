@@ -6,6 +6,7 @@
 	first_time_text = "The Dream Cave"
 	background_track = 'sound/music/area/magiciantower.ogg'
 	outdoors = FALSE
+	alpha = 0
 
 /area/admin/starchamber
 	name = "The Star Chamber"
@@ -15,3 +16,4 @@
 	first_time_text = "The Star Chamber"
 	background_track = 'sound/music/area/magiciantower.ogg'
 	outdoors = FALSE
+	alpha = 0

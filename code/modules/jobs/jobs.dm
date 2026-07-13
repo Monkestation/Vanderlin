@@ -71,6 +71,7 @@ GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
 	/datum/job/sundweller::title,
+	/datum/job/oracle::title,
 	))
 GLOBAL_PROTECT(church_positions)
 
