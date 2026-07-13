@@ -37,7 +37,7 @@
     if(QDELETED(fisticuffs))
         return
 
-    owner.balloon_alert("unclenches [owner.p_their()] fist")
+    owner.balloon_alert_to_viewers("unclenches [owner.p_their()] fist")
     clean_fists()
     active = FALSE
 
