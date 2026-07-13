@@ -10273,7 +10273,7 @@
 /obj/structure/door/violet{
 	name = "adventurer sleeping quarters"
 	},
-/turf/open/floor/ruinedwood/spiralfade,
+/turf/open/floor/carpet/green,
 /area/indoors/town/adv_guild)
 "ePb" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -15353,7 +15353,8 @@
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
 	},
-/turf/open/floor/ruinedwood/spiralfade,
+/obj/structure/bearpelt,
+/turf/open/floor/carpet/green,
 /area/indoors/town/adv_guild)
 "hoL" = (
 /obj/structure/door/viewport{
@@ -29424,6 +29425,12 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/carpet/stellar,
 /area/indoors/town/keep/magician)
+"nJb" = (
+/obj/machinery/light/fueled/wallfire{
+	pixel_x = -32
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
 "nJD" = (
 /obj/structure/fluff/railing/border,
 /turf/open/water/sewer,
@@ -35968,6 +35975,13 @@
 "qDx" = (
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
+"qDE" = (
+/obj/machinery/light/fueled/chand{
+	plane = -8;
+	layer = 4
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
 "qDL" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -82076,15 +82090,15 @@ bfG
 aYI
 aYI
 ijX
-mPg
+wRG
 mPg
 mLV
-hoo
+nJb
 hoo
 sYZ
 mPg
-wRG
 mPg
+wRG
 mPg
 mPg
 oYo
@@ -82281,8 +82295,8 @@ aYI
 cvV
 mPg
 lkF
-mPg
-mPg
+fSJ
+fSJ
 hxO
 mPg
 mPg
@@ -82483,8 +82497,8 @@ bVC
 mPg
 mPg
 mPg
-mPg
-mPg
+fSJ
+fSJ
 mPg
 mPg
 aaw
@@ -82685,8 +82699,8 @@ jJy
 mPg
 mPg
 mPg
-mPg
-mPg
+qDE
+fSJ
 mPg
 mPg
 tDR
@@ -82887,8 +82901,8 @@ jJy
 mPg
 mPg
 mPg
-mPg
-mPg
+fSJ
+fSJ
 mPg
 mPg
 aaw
@@ -83089,11 +83103,11 @@ clM
 mPg
 mPg
 mPg
+fSJ
+fSJ
 mPg
 mPg
 mPg
-mPg
-wRG
 mPg
 mPg
 mPg
@@ -83291,8 +83305,8 @@ aYI
 kIe
 oPP
 mPg
-mPg
-mPg
+fSJ
+fSJ
 mPg
 mPg
 mPg
@@ -83493,8 +83507,8 @@ aYI
 vmY
 npG
 uGd
-mPg
-mPg
+fSJ
+fSJ
 uGd
 hhk
 egL
