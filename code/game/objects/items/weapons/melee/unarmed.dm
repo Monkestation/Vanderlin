@@ -4,7 +4,7 @@
 	icon = null
 	icon_state = null
 	item_flags = ABSTRACT | DROPDEL
-	force = 9
+	force = 10
 	minstr = 1
 	item_weight = 100 GRAMS
 	wbalance = HARD_TO_DODGE
@@ -36,17 +36,19 @@
 	icon_state = "injab"
 	acc_bonus = 5
 	penfactor = 10
-	damfactor = 0.9
-	swingdelay = 0.7
+	damfactor = 0.75
+	swingdelay = 0.5
+	clickcd = 7
 	misscost = 4
 
 /datum/intent/unarmed/punch/slug
 	name = "slug"
 	icon_state = "inslug"
-	acc_bonus = 10
+	acc_bonus = 15
 	penfactor = 30
-	damfactor = 1.2
+	damfactor = 1.5
 	swingdelay = 1.5
+	clickcd = 15
 	releasedrain = 8
 	misscost = 5
 
@@ -56,8 +58,10 @@
 	acc_bonus = 5
 	penfactor = 40
 	damfactor = 1.8
+	clickcd = 20
 	swingdelay = 2.5
-	knockback = 2
+	knockback = 10
 	chargetime = 3
+	chargedrain = 3
 	releasedrain = 20
 	misscost = 10
