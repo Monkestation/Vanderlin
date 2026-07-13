@@ -165,7 +165,7 @@
 /obj/effect/temp_visual/trapice
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "frost"
-	light_outer_range = 2
+	light_range = 2
 	light_color = "#4cadee"
 	duration = 11
 

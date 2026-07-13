@@ -89,7 +89,7 @@
 	if(color)
 		set_light_color(color)
 	if(duration)
-		QDEL_IN(src, _duration)
+		QDEL_IN(src, duration)
 
 /obj/effect/dummy/lighting_obj/moblight
 	name = "mob lighting"
