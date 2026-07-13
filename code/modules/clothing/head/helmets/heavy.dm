@@ -4,7 +4,7 @@
 	flags_inv = HIDEEARS|HIDEFACE
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
-	block2add = FOV_RIGHT|FOV_LEFT
+	block2add = FOV_BEHIND
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
 	emote_environment = 3		// Unknown if this actually works and what it does
@@ -405,6 +405,32 @@
 	item_state = "abyssorhelm"
 	item_weight = 5.5 KILOGRAMS
 
+//............... Cadwyn heavy helmets ......................//
+//............... Astrata helmet ......................//
+/obj/item/clothing/head/helmet/heavy/necked/cadwyn/astrata
+	name = "cadwyn plumed helm"
+	desc = "A helmet with a large plume, forged for the Cadwyn Order. Let the forces of Z see you coming, and tremble."
+	icon_state = "cadwynhelmet_astrata"
+	item_state = "cadwynhelmet_astrata"
+	item_weight = 5.5 KILOGRAMS
+
+//............... Ravox helmet ......................//
+/obj/item/clothing/head/helmet/heavy/necked/cadwyn/ravox
+	name = "cadwyn ox-helm"
+	desc = "A blindfolded helmet, horned like the ox. The Cadwyn Order does not need to see to trust in its purpose."
+	icon_state = "cadwynhelmet_ravox"
+	item_state = "cadwynhelmet_ravox"
+	item_weight = 4.5 KILOGRAMS
+
+//............... Necra helmet ......................//
+/obj/item/clothing/head/helmet/heavy/necked/cadwyn/necra
+	name = "cadwyn skull-helm"
+	desc = "A skull-faced metal helm topped with a hood. Your face does not matter - the forces of Z will only see their own death reflected in you."
+	icon_state = "cadwynhelmet_necra"
+	item_state = "cadwynhelmet_necra"
+	item_weight = 4.5 KILOGRAMS
+
+//............... Other heavy helmets ......................//
 //................ Deep Abyssor Helmet ............. //
 /obj/item/clothing/head/helmet/heavy/necked/deepabyssor
 	name = "deep abyssor helmet"
@@ -666,3 +692,25 @@
 	block2add = FOV_BEHIND
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+
+//............... Legacy Totod Order Helmets ...............//
+/obj/item/clothing/head/helmet/heavy/crusader
+	name = "winged crusader helm"
+	desc = "Proud knights of the Psydonic order displays their faith and their allegiance openly."
+	icon_state = "totodhelm"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	bloody_icon_state = "helmetblood_big"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+
+/obj/item/clothing/head/helmet/heavy/crusader/t
+	name = "crusader helm"
+	desc = "A silver gilded bucket helm, inscriptions in old Psydonic are found embezeled on every inch of silver. Grenzelhoft specializes in these helmets."
+	icon_state = "crusader_helmt2"
+	icon = 'icons/roguetown/clothing/special/crusader.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	bloody_icon = 'icons/effects/blood.dmi'
+	bloody_icon_state = "itemblood"
+	worn_x_dimension = 32
+	worn_y_dimension = 32

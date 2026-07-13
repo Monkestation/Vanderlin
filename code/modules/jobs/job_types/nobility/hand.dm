@@ -29,6 +29,7 @@
 
 	honorary = "Lord"
 	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,
