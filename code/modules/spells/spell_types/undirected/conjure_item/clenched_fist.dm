@@ -1,6 +1,7 @@
 /datum/action/innate/clench_fists
     name = "Clench Fists"
     desc = "Assume a fistfighting stance."
+    button_icon_state = "giants_strength"
 
     var/obj/item/weapon/clenched_fist/fisticuffs
 
