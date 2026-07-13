@@ -18,7 +18,7 @@
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/magic/arcane = 35,
 
 	)
 
@@ -58,7 +58,7 @@
 	cmode_music = 'sound/music/cmode/antag/CombatRogueMage.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	spell_points = 1
+	spell_points = 8
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/roguemage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/roguemage/old
