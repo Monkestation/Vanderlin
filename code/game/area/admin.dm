@@ -1,19 +1,16 @@
-/area/admin/dreamcave
+/area/indoors/town/church/dreamcave
 	name = "The Dream Cave"
 	icon = 'icons/turf/areas/manor.dmi'
-	icon_state = "magiciantower"
+	icon_state = "magician"
 	ambient_index = AMBIENCE_MYSTICAL
 	first_time_text = "The Dream Cave"
 	background_track = 'sound/music/area/magiciantower.ogg'
 	outdoors = FALSE
 	alpha = 0
 
-/area/admin/starchamber
+/area/indoors/town/church/dreamcave/starchamber
 	name = "The Star Chamber"
-	icon = 'icons/turf/areas/manor.dmi'
-	icon_state = "magiciantower"
-	ambient_index = AMBIENCE_MYSTICAL
 	first_time_text = "The Star Chamber"
-	background_track = 'sound/music/area/magiciantower.ogg'
-	outdoors = FALSE
-	alpha = 0
+
+/area/indoors/town/church/dreamcave/starchamber/can_craft_here()
+	return FALSE

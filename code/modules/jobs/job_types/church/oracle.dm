@@ -87,6 +87,7 @@
 	)
 
 	traits = list(
+		TRAIT_DREAM_WATCHER,
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 	)

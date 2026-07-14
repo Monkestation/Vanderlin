@@ -137,12 +137,7 @@
 	. = ..()
 	if(!.)
 		return
-	var/area/admin/starchamber/chamber = get_area(owner)
-	if((GLOB.tod == DAWN || GLOB.tod == DAY) && !(istype(chamber)))
-		if(feedback)
-			to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
-		return FALSE
-	return TRUE
+	return can_cast_lunar_magic(feedback)
 
 /datum/action/cooldown/spell/revive_noc/before_cast(mob/living/carbon/human/cast_on)
 	. = ..()
