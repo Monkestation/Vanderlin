@@ -370,17 +370,6 @@
 	results = list(/datum/reagent/poison/erratique = 20)
 	mix_message = "The weakened venom foams as the drugs mix with it, before settling with a dizzying scent."
 
-/datum/chemical_reaction/bioweapon
-	name = "NCSIV"  //I hope noone knows what this is at all and gets curious
-	id = "NCSIV"
-	required_reagents = list(
-		/datum/reagent/lux = 20,
-		/datum/reagent/poison/rotwater = 20,
-		/datum/reagent/medicine/antidote = 5
-	)
-	results = list(/datum/reagent/poison/bioweapon	= 5)
-	mix_message = "The sludge thins out and bubbles as the lux is stirred in, ending with green freeflowing liquid. It smells surprisingly clean."
-
 /datum/chemical_reaction/kingsbane
 	name = "Kingsbane"
 	id = "kingsbane"

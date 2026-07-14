@@ -614,26 +614,6 @@
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")
 
-/datum/reagent/poison/herbal/acid
-	name = "Flamekiss Liqeur"
-	description = "Burning liquid which is tailored to dissolve flesh."
-	reagent_state = LIQUID
-	color = "#790404"
-	metabolization_rate = 0.5
-	taste_description = "burning pain beyond description"
-
-/datum/reagent/poison/herbal/acid/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
-	. = ..()
-	if(methods & (TOUCH|VAPOR))
-		exposed_mob.adjustFireLoss(reac_volume * 5, 0)
-		if(show_message)
-			exposed_mob.visible_message(span_danger("[exposed_mob]'s skin is melted off!"), span_userdanger("Your skin melts off your flesh!"))
-
-/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/L)
-	. = ..()
-	L.adjustFireLoss(5)
-	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
-
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state."
