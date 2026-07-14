@@ -1616,10 +1616,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// Check for item culture descriptions.
 	if (ishuman(user) && culture_desc[1][1] != "no_culture") // make sure the mob has a culture to check for + avoid unecessary controls.
 		var/mob/living/carbon/human/humanexaminer = user
-		for(var/culture in culture_desc.len)
-			if(humanexaminer.culture.name == culture_desc[culture][1])
+		for(var/culture_range = 1, culture_range <= culture_desc.len, culture_range++)
+			if(humanexaminer.culture.name == culture_desc[culture_range][1])
 				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [humanexaminer.culture.name]", humanexaminer.culture.name)]</summary>"
-				str += culture_desc[culture][2]
+				str += culture_desc[culture_range][2]
 				. += span_info(str)
 
 	if(!get_precursor_data(src))
