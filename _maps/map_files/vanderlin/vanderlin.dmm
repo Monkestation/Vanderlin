@@ -5683,9 +5683,6 @@
 /obj/item/natural/cloth,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
-"cGC" = (
-/turf/open/floor/greenstone,
-/area/outdoors/town)
 "cGH" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -29910,6 +29907,11 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
+"nVa" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/structure/chair/stool,
+/turf/open/floor/greenstone,
+/area/under/town/sewer)
 "nVi" = (
 /obj/structure/window/openclose/reinforced,
 /obj/structure/bars/passage/shutter/open{
@@ -42303,6 +42305,11 @@
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
+"tvL" = (
+/obj/effect/decal/cleanable/generic,
+/obj/item/chair/stool,
+/turf/open/floor/greenstone,
+/area/under/town/sewer)
 "tvN" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/dirt/road,
@@ -48256,6 +48263,11 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/shop)
+"vWU" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/structure/bed/shit,
+/turf/open/floor/greenstone,
+/area/under/town/sewer)
 "vWX" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/water/swamp,
@@ -75426,7 +75438,7 @@ nxW
 nxW
 qvf
 cAA
-cAA
+qvf
 wpU
 wpU
 wpU
@@ -75619,8 +75631,8 @@ mSh
 unl
 unl
 wpU
-qvf
-qvf
+acX
+acX
 qvf
 qvf
 qvf
@@ -75629,7 +75641,7 @@ qvf
 cAA
 mSi
 cAA
-cAA
+qvf
 qvf
 qvf
 qvf
@@ -75822,11 +75834,11 @@ unl
 unl
 wpU
 wpU
-wpU
-wpU
 upc
 qvf
-ndP
+crf
+cAA
+kPW
 cAA
 cAA
 cAA
@@ -76025,9 +76037,9 @@ unl
 pGp
 wpU
 upc
-upc
-upc
 qvf
+cAA
+cAA
 cAA
 cAA
 cAA
@@ -76228,11 +76240,11 @@ pGp
 wpU
 upc
 qZn
+cAA
+cAA
+cAA
 qvf
 qvf
-cAA
-cAA
-cAA
 qvf
 qvf
 qvf
@@ -76433,7 +76445,7 @@ qvf
 cAA
 cAA
 cAA
-cAA
+qvf
 qvf
 jEQ
 jEQ
@@ -76634,10 +76646,10 @@ qvf
 cAA
 cAA
 cAA
-cAA
+crf
 qvf
 qvf
-qvf
+jEQ
 jEQ
 ocG
 jze
@@ -76836,10 +76848,10 @@ qvf
 cAA
 cAA
 cAA
-cAA
 qvf
 qvf
-qvf
+jEQ
+jEQ
 clv
 jbx
 vxt
@@ -77036,11 +77048,11 @@ jQb
 wpU
 qvf
 cAA
-qvf
-qvf
+cAA
+cAA
 qvf
 ndP
-qvf
+jEQ
 jEQ
 jEQ
 dde
@@ -77238,11 +77250,11 @@ jQb
 wpU
 qvf
 cAA
-qvf
-qvf
+cAA
+cAA
 qvf
 kPW
-cAA
+jEQ
 jEQ
 tvF
 fBg
@@ -77439,12 +77451,12 @@ cZN
 jQb
 wpU
 qvf
-qvf
-qvf
-iNg
+cAA
+crf
+cAA
 ndP
-cAA
-cAA
+crf
+jEQ
 jEQ
 pPf
 fBg
@@ -77645,8 +77657,8 @@ qvf
 qvf
 qvf
 ndP
-dDt
-cAA
+wpU
+jEQ
 jEQ
 aMW
 fBg
@@ -77844,10 +77856,10 @@ jQb
 wpU
 qvf
 qvf
-qvf
 nkk
 qvf
-dDt
+iNg
+upc
 jEQ
 jEQ
 gUT
@@ -78045,11 +78057,11 @@ cZN
 jQb
 upc
 asC
-qZn
-qvf
+nVa
 nkR
 qxG
-pWc
+kCk
+upc
 jEQ
 nwj
 hHm
@@ -78245,13 +78257,13 @@ msU
 wRn
 dRg
 xDo
-wWw
+cAA
 asC
 qvf
-ndP
-qxG
-qZn
-pWc
+tvL
+qvf
+vWU
+upc
 jEQ
 nrK
 rLh
@@ -78447,13 +78459,13 @@ ryr
 msU
 msU
 jQb
-wWw
+cAA
 asC
 asC
-cAA
-cAA
+asC
 asC
 pWc
+upc
 jEQ
 qUQ
 mUe
@@ -78651,9 +78663,9 @@ msU
 jQb
 cAA
 qvf
+asC
 aeS
-cAA
-cAA
+asC
 pWc
 upc
 jEQ
@@ -117233,7 +117245,7 @@ lRk
 bnO
 mFi
 uca
-cGC
+wrm
 cNl
 pny
 lkw
@@ -117435,7 +117447,7 @@ qBP
 aFk
 hZn
 uca
-cGC
+wrm
 oLy
 wLV
 gXZ
@@ -117637,7 +117649,7 @@ pXw
 rXK
 hZn
 dWw
-cGC
+wrm
 bGC
 mHo
 gXZ
@@ -117839,7 +117851,7 @@ bKi
 nWb
 hZn
 dWw
-cGC
+wrm
 pny
 iwB
 gXZ
@@ -118041,7 +118053,7 @@ sOe
 izU
 mFi
 dWw
-cGC
+wrm
 pny
 fVi
 lNU
@@ -118243,7 +118255,7 @@ hZn
 hZn
 czz
 uca
-cGC
+wrm
 rJW
 tuD
 gXZ
@@ -118445,7 +118457,7 @@ hZn
 hZn
 mFi
 cTv
-cGC
+wrm
 wMz
 wZb
 gXZ
@@ -118647,7 +118659,7 @@ hZn
 vkG
 xkP
 wrm
-cGC
+wrm
 wMz
 kZR
 gXZ
@@ -118849,7 +118861,7 @@ hZn
 hZn
 xkP
 wrm
-cGC
+wrm
 pny
 sMM
 gXZ
@@ -119051,7 +119063,7 @@ hZn
 hZn
 xkP
 wrm
-cGC
+wrm
 rJW
 jCL
 gXZ
@@ -119253,7 +119265,7 @@ czz
 hZn
 xkP
 cvC
-cGC
+wrm
 oLy
 flF
 gXZ
