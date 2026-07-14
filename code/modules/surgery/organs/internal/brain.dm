@@ -139,7 +139,7 @@
 /obj/item/organ/brain/handle_blood(delta_time, times_fired, in_bleedout)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	// Very low blood, danger!!
-	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_BLEEDOUT))
+	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_SURVIVE))
 		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
 	else
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)

@@ -242,14 +242,6 @@
 			applyOrganDamage(decay_factor * maxHealth * temperature_mod * delta_time)
 	consider_processing()
 
-/obj/item/organ/proc/handle_blood_regen(delta_time)
-	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
-	if(arterial_efficiency)
-		// Arteries get an extra flat 10 blood regen
-		current_blood = min(current_blood + (2.5 * delta_time) * (arterial_efficiency/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
-		return
-	current_blood = min(current_blood + (blood_req * delta_time), max_blood_storage) //very slow refill
-
 /obj/item/organ/proc/generate_chimeric_organ(mob/living/source_mob)
 	if(!source_mob)
 		return
@@ -407,7 +399,7 @@
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
 	check_cold(passed_temp)
-	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_SYNTHETIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
+	if(IS_ROBOTIC_ORGAN(src) || CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
 		return FALSE
 	return TRUE
 

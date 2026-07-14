@@ -66,9 +66,6 @@
 	if(heart_efficiency < failing_threshold && !is_stable)
 		owner.set_heartattack(TRUE)
 		return
-	// if(owner.pulse <= PULSE_NONE)
-	// 	ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
-	// 	return
 
 	// Pulse normally shouldn't go above PULSE_FASTER unless you get extremely doped up
 	if(pulse_mod < 5)
@@ -118,10 +115,6 @@
 	if(owner.pulse <= PULSE_NONE)
 		owner.set_heartattack(TRUE)
 	else
-		// if((owner.pulse == PULSE_FASTER) && DT_PROB(0.5, delta_time))
-		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
-		// else if((owner.pulse >= PULSE_THREADY) && DT_PROB(2.5, delta_time))
-		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 		REMOVE_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 
 /datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, delta_time, times_fired)
