@@ -206,3 +206,22 @@
   realforest2001:
   - rscadd: Most court roles now require a triumph buy to be heretics. Settings are
       not final and may change later on.
+2026-07-13:
+  AnnoyingIncantation:
+  - code_imp: changed some code, heavy.dmi and royal_knight.dmi
+  Avalon-Proto:
+  - bugfix: Merchants can buy bullets again, Vials now accept shattering
+  ModDownloading:
+  - rscadd: The Hunter's Lodge, replacing the old Forest Guard cabin. Credit to Ardcrumb
+      for the map edits!
+  - rscadd: Towner Hunters now start with a key to the Hunting Lodge.
+  Wrench-1:
+  - rscadd: Added the Cadwyn Order, a rework and lore reflavouring of the Totod Order
+  - rscdel: Removed the Totod Order Emmisary and Holy Crusade Migrant Wave, replacing
+      them with the Cadwyn Order Emissary and the Cadwyn Order Crusade Migrant Wave
+  - image: Added sprites for the Cadwyn Order's Helmets, cloaks and gloves. Sprites
+      by Blumengama
+  realforest2001:
+  - bugfix: Buildmode button to reopen the item list now is visible again.
+  - bugfix: Random spellstones/scrolls/wands can no longer generate with spells they're
+      not meant to have.
