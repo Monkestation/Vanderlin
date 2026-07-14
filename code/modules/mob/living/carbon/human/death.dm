@@ -43,7 +43,7 @@
 	if(client || mind)
 		record_round_statistic(STATS_DEATHS)
 		add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_DEATH, 1)
-		var/area_of_death = lowertext(get_area_name(src))
+		var/area_of_death = LOWER_TEXT(get_area_name(src))
 		if(area_of_death == "wilderness")
 			record_round_statistic(STATS_FOREST_DEATHS)
 		if(is_noble())

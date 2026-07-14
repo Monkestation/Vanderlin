@@ -186,7 +186,7 @@
 	// GLOB.food_quality_description[quality]
 	var/quality_desc = GLOB.food_quality_description[reagent_quality]
 	if(quality_desc && !findtext(reagent.description, quality_desc))
-		reagent.description += " The [lowertext(reagent.name)] is of [quality_desc] quality."
+		reagent.description += " The [LOWER_TEXT(reagent.name)] is of [quality_desc] quality."
 
 /datum/container_craft/cooking/extra_html()
 	var/html

@@ -352,7 +352,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
 /proc/hasvar(datum/A, varname)
-	if(A.vars.Find(lowertext(varname)))
+	if(A.vars.Find(LOWER_TEXT(varname)))
 		return 1
 	else
 		return 0

@@ -70,7 +70,7 @@ GLOBAL_LIST_EMPTY(active_chimeric_surgeries)
 	. = ..()
 	if(!stored_node)
 		return
-	name = "[lowertext(stored_node.name)] humor"
+	name = "[LOWER_TEXT(stored_node.name)] humor"
 
 /mob/living/proc/generate_random_chimeric_organs(amount = 3)
 	for(var/i=1 to amount)

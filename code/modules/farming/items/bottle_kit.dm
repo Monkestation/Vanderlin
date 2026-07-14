@@ -11,7 +11,7 @@
 
 /obj/item/bottle_kit/examine(mob/user)
 	. = ..()
-	. += "[src] will make [lowertext(fake_glass_name)] bottles."
+	. += "[src] will make [LOWER_TEXT(fake_glass_name)] bottles."
 
 /obj/item/bottle_kit/attack_self(mob/user as mob)
 	..()

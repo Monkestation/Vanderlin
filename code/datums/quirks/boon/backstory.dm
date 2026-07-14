@@ -91,7 +91,7 @@
 	if(initial(B.stat_penalty) && initial(B.stat_reduction) > 0)
 		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = -initial(B.stat_reduction)))
 
-	to_chat(H, span_notice("Your experience as [lowertext(initial(B.name))] has shaped who you are today."))
+	to_chat(H, span_notice("Your experience as [LOWER_TEXT(initial(B.name))] has shaped who you are today."))
 
 /datum/quirk/boon/backstory/on_remove()
 	if(!ishuman(owner))
