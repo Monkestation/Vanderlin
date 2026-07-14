@@ -226,21 +226,6 @@
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "The brew smells of oblivion and bitterness..."
 
-/datum/container_craft/cooking/herbal_tea/acid
-	name = "Flamekiss liqeur"
-	created_reagent = /datum/reagent/poison/herbal/acid
-	water_conversion = 1
-	reagent_requirements = list(
-		/datum/reagent/drowsbane = 50,
-	)
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3,
-	)
-	output_amount = 20 // LARGE amount of OH GOD IT BURNS
-	crafting_time = 15 SECONDS
-	finished_smell = /datum/pollutant/food/bitter
-	complete_message = "The fumes from the pot smell of fire and hate..."
-
 /datum/container_craft/cooking/herbal_tea/weak_paralytic
 	name = "Paralytic preblend"
 	created_reagent = /datum/reagent/toxin/spidervenom_inert

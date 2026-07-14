@@ -367,7 +367,7 @@
 		/datum/reagent/druqks = 5,
 		/datum/reagent/medicine/antidote = 5
 	)
-	results = list(/datum/reagent/poison/erratique = 20)
+	results = list(/datum/reagent/poison/erratique = 20)  //Is it just me or do I smell military grade deliriant war chemicals?
 	mix_message = "The weakened venom foams as the drugs mix with it, before settling with a dizzying scent."
 
 /datum/chemical_reaction/kingsbane

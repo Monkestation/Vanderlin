@@ -608,7 +608,7 @@
 
 /datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
 	. = ..()
-	ADD_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")
+	ADD_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")  // effectively just BZ, aka IRL war chemical which makes you go insane.
 
 /datum/reagent/poison/erratique/on_mob_end_metabolize(mob/living/M)
 	. = ..()
