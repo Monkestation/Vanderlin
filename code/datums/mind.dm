@@ -350,7 +350,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	// Name-only fallback: scan snapshots.
 	if(name)
 		for(var/datum/relation/R in relations)
-			if(R.snapshot && lowertext(R.snapshot["name"]) == lowertext(name))
+			if(R.snapshot && LOWER_TEXT(R.snapshot["name"]) == LOWER_TEXT(name))
 				return TRUE
 	return FALSE
 

@@ -396,7 +396,7 @@
 
 /obj/item/reagent_containers/glass/bowl/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay bowl"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay bowl"
 
 /obj/item/reagent_containers/glass/bowl/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))

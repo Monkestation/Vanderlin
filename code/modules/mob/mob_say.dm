@@ -183,12 +183,12 @@
 		else if(key == ";" && !mods[MODE_HEADSET])
 			mods[MODE_HEADSET] = TRUE
 		else if((key in GLOB.department_radio_prefixes) && length(message) > length(key) + 1 && !mods[RADIO_EXTENSION])
-			mods[RADIO_KEY] = lowertext(message[1 + length(key)])
+			mods[RADIO_KEY] = LOWER_TEXT(message[1 + length(key)])
 			mods[RADIO_EXTENSION] = GLOB.department_radio_keys[mods[RADIO_KEY]]
 			chop_to = length(key) + 2
 		else if(key == "," && !mods[LANGUAGE_EXTENSION])
 			for(var/datum/language/LD as anything in GLOB.all_languages)
-				if(initial(LD.key) == lowertext(message[1 + length(message[1])]))
+				if(initial(LD.key) == LOWER_TEXT(message[1 + length(message[1])]))
 					if(!can_speak_in_language(LD))
 						return message
 					mods[LANGUAGE_EXTENSION] = LD

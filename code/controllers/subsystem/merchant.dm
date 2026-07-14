@@ -446,7 +446,7 @@ SUBSYSTEM_DEF(merchant)
 	if(!spawn_turf)
 		return
 	var/obj/structure/closet/crate/chest/merchant/delivery_chest = new(spawn_turf)
-	delivery_chest.name = "[lowertext(category)] delivery chest"
+	delivery_chest.name = "[LOWER_TEXT(category)] delivery chest"
 	register_lift_cargo(delivery_chest)
 	var/manifest_contents = "<h2>[category] Supply Division</h2><hr><b>Contained Cargo Manifest:</b><ul>"
 	for(var/item_type in items_to_pack)
@@ -462,7 +462,7 @@ SUBSYSTEM_DEF(merchant)
 		manifest_contents += "<li>[item.name]</li>"
 	manifest_contents += "</ul><hr><i>Seal of Authenticity - Approved Shipment.</i>"
 	var/obj/item/paper/manifest = new(spawn_turf)
-	manifest.name = "manifest parchment ([lowertext(category)])"
+	manifest.name = "manifest parchment ([LOWER_TEXT(category)])"
 	manifest.info = manifest_contents
 	manifest.update_appearance()
 	manifest.pixel_x = delivery_chest.pixel_x + rand(-3, 3)

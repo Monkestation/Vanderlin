@@ -267,7 +267,7 @@
 	sleep_adv_points -= get_skill_cost(skill_type)
 	cached_dream_candidates = null
 	rested_skill_multipliers[skill_type] = TRUE
-	to_chat(mind.current, span_nicegreen("You feel driven to practice [lowertext(skill.name)]... your efforts will be rewarded while you remain rested."))
+	to_chat(mind.current, span_nicegreen("You feel driven to practice [LOWER_TEXT(skill.name)]... your efforts will be rewarded while you remain rested."))
 	record_round_statistic(STATS_SKILLS_DREAMED)
 
 /datum/sleep_adv/proc/get_dream_skill_candidates(max_count = 6)

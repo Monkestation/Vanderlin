@@ -101,10 +101,8 @@
 						if(istype(current_hair, /datum/bodypart_feature/hair/head))
 							hair_entry.natural_gradient = current_hair.natural_gradient
 							hair_entry.natural_color = current_hair.natural_color
-							if(hasvar(current_hair, "hair_dye_gradient"))
-								hair_entry.dye_gradient = current_hair.hair_dye_gradient
-							if(hasvar(current_hair, "hair_dye_color"))
-								hair_entry.dye_color = current_hair.hair_dye_color
+							hair_entry.dye_gradient = current_hair.hair_dye_gradient
+							hair_entry.dye_color = current_hair.hair_dye_color
 
 						var/datum/bodypart_feature/hair/head/new_hair = new()
 						new_hair.set_accessory_type(valid_hairstyles[new_style], hair_entry.hair_color, H)

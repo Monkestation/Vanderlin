@@ -41,13 +41,13 @@
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(spy.examine_species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(spy.examine_species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(spy.examine_species.get_skin_list(), spy.examine_tone) || "incomprehensible"].")
 	else
 		var/datum/species/species = dna?.species
 		if(species?.use_skintones)
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
 	. = list()
@@ -56,7 +56,7 @@
 	if(culture)
 		// do we know them, are we an observer, or do we share a culture
 		if((do_i_know || O || istype(culture, H?.culture?.type)) && !istype(culture, /datum/culture/universal/ambiguous))
-			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
+			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [LOWER_TEXT(P[THEYRE])]"
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
 		// are they from anywhere
 		else if(!self_inspect)

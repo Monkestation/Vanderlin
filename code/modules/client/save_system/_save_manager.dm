@@ -37,7 +37,7 @@
 	if(!save_name)
 		return null
 
-	save_name = lowertext(save_name)
+	save_name = LOWER_TEXT(save_name)
 
 	if(save_name in save_files)
 		return save_files[save_name]
@@ -158,7 +158,7 @@
 		return
 
 	parent_manager = manager
-	save_name = lowertext(name)
+	save_name = LOWER_TEXT(name)
 	file_path = "[manager.base_path]/[save_name].sav"
 
 	load_from_file()
