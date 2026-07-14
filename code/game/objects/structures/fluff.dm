@@ -1111,7 +1111,7 @@
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
-	if(get_dir(loc, mover) == dir)
+	if(density && (get_dir(loc, mover) == dir))
 		return
 	return TRUE
 

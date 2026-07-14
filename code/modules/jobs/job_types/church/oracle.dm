@@ -125,6 +125,7 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/sword/sabre/noc
+	beltr = /obj/item/storage/keyring/priest
 	armor = /obj/item/clothing/shirt/robe/noc
 	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/raincloak/colored/blue
