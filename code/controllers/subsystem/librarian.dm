@@ -30,9 +30,9 @@ SUBSYSTEM_DEF(librarian)
 			continue
 
 		var/matches = TRUE
-		if(search_title && !findtext(lowertext(book_info["book_title"]), lowertext(search_title)))
+		if(search_title && !findtext(LOWER_TEXT(book_info["book_title"]), LOWER_TEXT(search_title)))
 			matches = FALSE
-		if(search_author && !findtext(lowertext(book_info["author"]), lowertext(search_author)))
+		if(search_author && !findtext(LOWER_TEXT(book_info["author"]), LOWER_TEXT(search_author)))
 			matches = FALSE
 		if(search_category && search_category != "Any" && book_info["category"] != search_category)
 			matches = FALSE

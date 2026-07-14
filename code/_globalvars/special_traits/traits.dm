@@ -1026,7 +1026,7 @@
 	allowed_jobs = list(/datum/job/vagrant, /datum/job/jester)
 
 /datum/special_trait/king/on_apply(mob/living/carbon/human/character, silent)
-	character.honorary = lowertext(character.pronouns == SHE_HER ? SSmapping.config.monarch_title_f : SSmapping.config.monarch_title)
+	character.honorary = LOWER_TEXT(character.pronouns == SHE_HER ? SSmapping.config.monarch_title_f : SSmapping.config.monarch_title)
 
 /datum/special_trait/augmentable
 	name = "Chippin' In"
