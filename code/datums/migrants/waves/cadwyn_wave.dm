@@ -125,6 +125,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
 		STAT_PERCEPTION = 1,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
