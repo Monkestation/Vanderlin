@@ -665,6 +665,7 @@
 	M.apply_status_effect(/datum/status_effect/debuff/alch/cards)
 	M.add_stress(/datum/stress_event/gambling)
 
+/*
 /datum/reagent/poison/rajaijah //Goonstation my beloved
 	name = "Dark sun's shine"  //basically just forces people into the vamp frenzy untill it finishes metabolizing.  
 	description = "Neurodegenerative brew which makes the user go temporarily insane with a craving for violence and blood."
@@ -672,7 +673,7 @@
 	metabolization_rate = 0.1
 	taste_description = "pure, unrestrained hate and hunger"
 
-/datum/reagent/poison/rajaijah/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/rajaijah/on_mob_metabolize(mob/living/M) //remaining here incase server standards change. Do not apply unless given explicit approval.
 	. = ..()
 	ADD_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
@@ -681,6 +682,7 @@
 	. = ..()
 	REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
 	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
+*/
 
 /datum/reagent/poison/tear
 	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
