@@ -208,7 +208,7 @@
 		if(/datum/patron/divine/ravox)
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 			cloak = /obj/item/clothing/cloak/cadwyn/ravox
-			beltr = /obj/item/weapon/sword/short
+			beltr = /obj/item/weapon/sword/arming
 			backr = /obj/item/weapon/shield/heater
 		if(/datum/patron/divine/necra)
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
