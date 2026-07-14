@@ -603,7 +603,7 @@
 	name = "Erratique"
 	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity."
 	color = "#ffffff"
-	metabolization_rate = 0.05
+	metabolization_rate = 0.1 
 	taste_description = "bitter thoughts"
 
 /datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
