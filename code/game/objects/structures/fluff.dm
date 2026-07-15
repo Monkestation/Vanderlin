@@ -1088,7 +1088,10 @@
 	dir = NORTH
 	buckle_requires_restraints = 1
 	buckle_prevents_pull = 1
+	/// Divine or Inhumen
 	var/divine = TRUE
+	/// If you can walk through it as if it doesn't exist. This is a hand-holdy var.
+	var/pass_all_dir = FALSE
 
 /obj/structure/fluff/psycross/Initialize()
 	. = ..()
@@ -1111,8 +1114,10 @@
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
-	if(density && (get_dir(loc, mover) == dir))
-		return
+	if(pass_all_dir)
+		return TRUE
+	if(get_dir(loc, mover) == dir)
+		return FALSE
 	return TRUE
 
 /obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
