@@ -133,7 +133,7 @@
 				deathsdoor = FALSE
 		if(deathsdoor)
 			if(owner.stat == CONSCIOUS)
-				owner.visible_message(span_danger("[owner] clutches at [owner.p_their()] chest as if [owner.p_their()] heart is stopping!"))
+				owner.visible_message(span_danger("[owner] clutches at [owner.p_their()] chest!"))
 	consider_processing()
 	return TRUE
 

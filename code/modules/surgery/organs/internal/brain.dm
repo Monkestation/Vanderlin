@@ -370,6 +370,9 @@
 		update_brain_color()
 		return
 
+	if(delta_dam != 0)
+		owner.updatehealth()
+
 	if(delta_dam >= 10)
 		var/damage_side_effect = CEILING(delta_dam / 2, 1)
 		if(damage_side_effect >= 1)
