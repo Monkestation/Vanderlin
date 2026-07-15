@@ -39,7 +39,7 @@
 	if(!COS)
 		AddComponent(/datum/component/ore_sight)
 	if(COS)
-		COS.toggle(null, state)
+		COS.toggle(state)
 
 /datum/status_effect/buff/oresight
 	id = "oresight"
@@ -56,7 +56,7 @@
 	var/last_pulse
 	var/range = 3
 	var/interval = 3 SECONDS
-	var/is_active = FALSE
+	var/is_active = TRUE
 
 /datum/component/ore_sight/Initialize()
 	if(!ismob(parent))
@@ -78,14 +78,16 @@
 		if(T)
 			var/obj/effect/temp_visual/fxtype
 			switch(T.type)
-				if(/turf/closed/mineral/random/med, /turf/closed/mineral/copper, /turf/closed/mineral/tin, /turf/closed/mineral/coal)
+				if(/turf/closed/mineral/copper, /turf/closed/mineral/copper/cold, /turf/closed/mineral/tin, /turf/closed/mineral/tin/cold, /turf/closed/mineral/coal, /turf/closed/mineral/coal/cold)
 					fxtype = /obj/effect/temp_visual/medqualityore
-				if(/turf/closed/mineral/random/high, /turf/closed/mineral/cinnabar, /turf/closed/mineral/iron, /turf/closed/mineral/gold, /turf/closed/mineral/silver)
+				if(/turf/closed/mineral/cinnabar,/turf/closed/mineral/cinnabar/cold, /turf/closed/mineral/iron, /turf/closed/mineral/iron/cold, /turf/closed/mineral/gold, /turf/closed/mineral/gold/cold, /turf/closed/mineral/silver, /turf/closed/mineral/silver/cold)
 					fxtype = /obj/effect/temp_visual/highqualityore
-				if(/turf/closed/mineral/gemeralds)
+				if(/turf/closed/mineral/gemeralds, /turf/closed/mineral/gemeralds/cold)
 					fxtype = /obj/effect/temp_visual/gemqualityore
-				if(/turf/closed/mineral/bedrock)
+				if(/turf/closed/mineral/bedrock, /turf/closed/mineral/bedrock/cold)
 					fxtype = /obj/effect/temp_visual/bedrockore
+				if(/turf/closed/mineral/mana_crystal, /turf/closed/mineral/mana_crystal/cold)
+					fxtype = /obj/effect/temp_visual/magicore
 			if(fxtype)
 				new fxtype(get_turf(T))
 	for(var/obj/item/natural/rock/boulder in get_hear(range, origin))	// We detect boulders and their contents, too.
@@ -98,6 +100,8 @@
 					fxtype = /obj/effect/temp_visual/highqualityore
 				if(/obj/item/natural/rock/gold, /obj/item/natural/rock/silver, /obj/item/natural/rock/gemerald)
 					fxtype = /obj/effect/temp_visual/gemqualityore
+				if(/obj/item/natural/rock/mana_crystal)
+					fxtype = /obj/effect/temp_visual/magicore
 			if(fxtype)
 				new fxtype(get_turf(boulder))
 
@@ -152,6 +156,16 @@
 	dir = NORTH
 	name = "bedrock"
 	desc = "The stone here's too hard to break."
+	randomdir = FALSE
+	duration = 1 SECONDS
+	layer = 18
+
+/obj/effect/temp_visual/magicore
+	name = "magic ore"
+	desc = "I feel some energy pulsating from that wall..."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "emppulse"
+	dir = NORTH
 	randomdir = FALSE
 	duration = 1 SECONDS
 	layer = 18

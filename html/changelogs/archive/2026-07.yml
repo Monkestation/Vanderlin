@@ -225,3 +225,54 @@
   - bugfix: Buildmode button to reopen the item list now is visible again.
   - bugfix: Random spellstones/scrolls/wands can no longer generate with spells they're
       not meant to have.
+2026-07-15:
+  AnnoyingIncantation:
+  - code_imp: changed some code, Butler races
+  CheffieGithub:
+  - bugfix: Fixed GMT safe oath being impossible to trigger
+  Snack-Max:
+  - bugfix: lowercase the bellow sallet name
+  copper-404:
+  - rscadd: Added a bell on top of the Vanderlin garrison.
+  - bugfix: 'Changed the inn bell name to "inn bell".
+
+      :cl:
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [ ] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  cyberascetic:
+  - bugfix: ' Fixed Malum''s eye enchantment (now works at Malum''s Anvil too)'
+  - bugfix: Merchant's Zalad plate gauntlets supply pack actually brings gauntlets
+      instead of full plates
+  dwasint:
+  - bugfix: skin armor lets you get surgery and healing done again
+  - bugfix: sleeping should now always reset your studied setting
+  - bugfix: dropping touch spells should delete them now
+  - bugfix: scying should now try to early abort if you log out
+  - bugfix: absolvers now get Grace regeneration
+  - bugfix: profane dagger now copies over visible organs
+  joogdamanA:
+  - bugfix: readded the alchemical flask to the merchant's buyable packs
+  realforest2001:
+  - bugfix: fixed noc device being invisible.

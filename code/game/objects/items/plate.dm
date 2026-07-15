@@ -162,7 +162,7 @@
 
 /obj/item/plate/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay platter"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay platter"
 
 /obj/item/plate/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	. = ..()

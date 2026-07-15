@@ -56,7 +56,7 @@
 		C.name = "[crate_name] - Purchased by [paying_account.account_holder]"
 	else
 		C = new crate_type(A)
-		C.name = "[crate_name] of [lowertext(name)]"
+		C.name = "[crate_name] of [LOWER_TEXT(name)]"
 
 	fill(C)
 	return C

@@ -134,7 +134,7 @@
 	if(H.voicecolor_override)
 		usedcolor = H.voicecolor_override
 	if(raw_message)
-		if(lowertext(raw_message) == "say laws")
+		if(LOWER_TEXT(raw_message) == "say laws")
 			dictate_laws()
 			return
 		for(var/obj/structure/fake_machine/scomm/S in SSroguemachine.scomm_machines)
