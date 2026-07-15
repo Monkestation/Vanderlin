@@ -649,35 +649,18 @@
 		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
 		animate(transform = prev_transform, time = 0)
 
-	if(extra_tile)
-		throw_at(target, range, 1, spin = FALSE)
-		RegisterSignal(src, COMSIG_MOVABLE_THROW_LANDED, PROC_REF(jump_extra_ended))
-	else
-		throw_at(target, range, 1, spin = FALSE)
-		RegisterSignal(src, COMSIG_MOVABLE_THROW_LANDED, PROC_REF(jump_ended))
+	throw_at(target, range, 1, spin = FALSE, callback = CALLBACK(src, PROC_REF(jump_ended), extra_tile))
 
-// Depression
-/// Callback for ending a sprint jump (probably) makes you go an extra tile so you fall off platforms
-/mob/living/proc/jump_extra_ended()
-	SIGNAL_HANDLER
-
-	jump_ended()
-
-	// This is unsafe but w/e
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)
-
-/// Callback for ending jump plays a specific "landing" sound, probably not the best way to do this
-/mob/living/proc/jump_ended()
-	SIGNAL_HANDLER
-
-	UnregisterSignal(src, COMSIG_MOVABLE_THROW_LANDED)
-
-	if(!isopenturf(loc))
+/mob/living/proc/jump_ended(extra_tile)
+	if(QDELETED(src) || !isopenturf(loc))
 		return
 
 	var/turf/open/open_turf = loc
 	if(open_turf.landsound)
 		playsound(open_turf, open_turf.landsound, 100, FALSE)
+
+	if(extra_tile)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)
 
 #undef FLIP_DIRECTION_CLOCKWISE
 #undef FLIP_DIRECTION_ANTICLOCKWISE
