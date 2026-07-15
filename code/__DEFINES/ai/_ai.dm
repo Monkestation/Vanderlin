@@ -267,6 +267,9 @@
 #define ARCHER_NPC_ARROW_SEARCH_RANGE   9
 #define ARCHER_NPC_SIMULATED_CHARGETIME 1.5 SECONDS // fallback charge wait in deciseconds
 
+#define BB_WAVE_COORDINATOR "BB_wave_coordinator"
+#define BB_WAVE_TARGET_POINT "BB_wave_target"
+#define BB_WAVE_ATTACK_TARGET "BB_wave_attack_target"
 
 #define BB_CAT_KITTEN_TARGET "BB_cat_kitten_target"
 #define BB_CAT_HOLDING_FOOD "BB_cat_holding_food"
@@ -387,3 +390,10 @@ GLOBAL_LIST_INIT(ai_item_flags, list(
 #define AI_INVENTORY_WATCHED_SLOTS (ITEM_SLOT_BELT | ITEM_SLOT_BACK_L | ITEM_SLOT_BACK_R | \
     ITEM_SLOT_BELT_L | ITEM_SLOT_BELT_R | ITEM_SLOT_ARMOR | ITEM_SLOT_PANTS | \
     ITEM_SLOT_SHIRT | ITEM_SLOT_CLOAK | ITEM_SLOT_BACK | ITEM_SLOT_NECK)
+
+#define WAVE_ADVANCING 1
+#define WAVE_OCCUPYING 2
+#define WAVE_COMPLETE 3
+#define WAVE_FAILED 4
+
+#define WAVE_DEFENSE_POINT_RADIUS 5

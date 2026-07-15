@@ -83,9 +83,11 @@
 #define COMSIG_MOB_ITEM_AFTERATTACK "mob_item_afterattack"
 /// from base of obj/item/attack_qdeleted(): (atom/target, mob/user, proxiumity_flag, click_parameters)
 #define COMSIG_MOB_ITEM_ATTACK_QDELETED "mob_item_attack_qdeleted"
-/// from base of mob/RangedAttack(): (atom/A, params)
+/// from base of mob/ranged_attack(): (atom/A, params)
 #define COMSIG_MOB_ATTACK_RANGED "mob_attack_ranged"
-/// from base of /datum/component/ranged_attacks/proc/async_fire_ranged_attack: (mob/living/simple_animal/firer, atom/target, list/modifiers)
+/// from base of mob/ranged_attack_secondary(): (atom/target, modifiers)
+#define COMSIG_MOB_ATTACK_RANGED_SECONDARY "mob_attack_ranged_secondary"
+/// from base of /datum/component/ranged_attacks/proc/async_fire_ranged_attack(): (mob/living/simple_animal/firer, atom/target, list/modifiers)
 #define COMSIG_MOB_POSTATTACK_RANGED "mob_postattack_ranged"
 /// from base of /mob/throw_item(): (atom/target)
 #define COMSIG_MOB_THROW "mob_throw"
@@ -157,3 +159,5 @@
 #define COMSIG_MOB_MOUSE_ENTERED "user_mouse_entered"
 
 #define COMSIG_MOB_WASHED_MESS "mob_mess_cleaned"
+
+#define COMSIG_MOB_CARGO_DOCKED "mob_cargo_docked"

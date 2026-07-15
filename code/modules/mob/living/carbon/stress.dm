@@ -169,7 +169,7 @@
 /mob/living/carbon/get_negative_stressors()
 	. = list()
 	for(var/datum/stress_event/event as anything in stressors)
-		if(event.get_stress(src) < 0)
+		if(event.get_stress(src) > 0)
 			. += event
 
 /mob/living/carbon/add_stress(event_type)

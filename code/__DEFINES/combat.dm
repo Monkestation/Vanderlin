@@ -71,6 +71,7 @@
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
 #define BLEEDOUT (1<<6)
+#define BUILDING_ORGANS (1<<7)
 
 //Health Defines
 #define HEALTH_THRESHOLD_CRIT 100
@@ -96,6 +97,7 @@
 #define CLICK_CD_HANDCUFFED 10
 #define CLICK_CD_RESIST 20
 #define CLICK_CD_GRABBING 10
+#define CLICK_CD_THROW 8
 
 //Cuff resist speeds
 #define FAST_CUFFBREAK 1
@@ -181,6 +183,8 @@
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
 #define SWDLONG_CHOP	 /datum/intent/sword/chop/long
 #define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
+
+#define SWORD_CLEAVE     /datum/intent/sword/chop/cleave
 
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
 #define SWORD_DISARM	 /datum/intent/sword/disarm

@@ -75,6 +75,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/list/metabolized_traits
 	/// A list of traits to apply while the reagent is in a mob.
 	var/list/added_traits
+	/// Our price per ligaue in mammons
+	var/price_per_unit = 0
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	. = ..()
@@ -125,7 +127,6 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 				record_round_statistic(STATS_ALCOHOL_CONSUMED, adjusted_metabolization_rate)
 			if(istype(src, /datum/reagent/water))
 				record_round_statistic(STATS_WATER_CONSUMED, adjusted_metabolization_rate)
-	return TRUE
 
 /datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered
 	if(iscarbon(A))

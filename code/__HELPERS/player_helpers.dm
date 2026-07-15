@@ -1,7 +1,7 @@
 
 /proc/reopen_roundstart_suicide_roles()
 	var/list/valid_positions = list()
-	valid_positions += GLOB.noble_positions
+	valid_positions += GLOB.noble_courthand_positions
 	valid_positions += GLOB.church_positions
 	valid_positions += GLOB.inquisition_positions
 	valid_positions += GLOB.garrison_positions

@@ -60,7 +60,7 @@
 	if(ic_blocked)
 		//The filter warning message shows the sanitized message though.
 		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
-		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
+		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, LOWER_TEXT(config.ic_filter_regex.match))
 		return
 
 	var/list/message_mods = list()
@@ -106,7 +106,9 @@
 		if(end)
 			return
 
-	language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
+	// If language not set in proc, grab one.
+	if(!language)
+		language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
 	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
 	var/signed = speaker_language?.flags & SIGNLANG
 

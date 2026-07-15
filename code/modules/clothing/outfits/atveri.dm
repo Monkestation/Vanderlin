@@ -235,24 +235,28 @@
 		H.update_inv_head()
 	..()
 
-/obj/item/clothing/head/helmet/leather/shaman_hood/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/reagent_containers/lux))
-		if(adjustable == CADJUSTED)
-			to_chat(user, span_warning("The hood must be up for this to work!"))
-			return
-		if(lux_consumed)
-			to_chat(user, span_warning("It has already been infused."))
-			return
-		to_chat(user, span_warning("I infuse the hood with the soul energies!"))
-		lux_consumed = TRUE
-		set_light_range_power_color(6, 2, lux_color) //The light is doubled
-		if(!on)
-			toggle_helmet_light(user)
-		else
-			update_icon()
-		qdel(I)
-	. = ..()
+/obj/item/clothing/head/helmet/leather/shaman_hood/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/reagent_containers/lux))
+		return NONE
 
+	if(adjustable == CADJUSTED)
+		to_chat(user, span_warning("The hood must be up for this to work!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(lux_consumed)
+		to_chat(user, span_warning("It has already been infused."))
+		return ITEM_INTERACT_BLOCKING
+
+	to_chat(user, span_warning("I infuse the hood with the soul energies!"))
+	lux_consumed = TRUE
+	set_light_range_power_color(6, 2, lux_color) //The light is doubled
+	if(!on)
+		toggle_helmet_light(user)
+	else
+		update_icon()
+
+	qdel(tool)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/head/helmet/leather/shaman_hood/AdjustClothes(mob/user)
 	if(loc == user)

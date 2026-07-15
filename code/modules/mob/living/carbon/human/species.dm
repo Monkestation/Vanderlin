@@ -338,6 +338,8 @@
 			return
 		if("Osslandic")
 			return strings("accents/ossland_replacement.json", "ossland")
+		if("Rockhill")
+			return strings("accents/rockhill_replacement.json", "rockhill")
 	return
 
 /datum/species/proc/get_pain_emote(power)
@@ -413,6 +415,7 @@
 				ACCENT_ROUSMAN,
 				ACCENT_WINTERMARE,
 				ACCENT_OSSLAND,
+				ACCENT_ROCKHILL,
 			)
 
 			///This will only trigger for donators
@@ -824,7 +827,7 @@
 		C.setToxLoss(0, TRUE, TRUE)
 
 	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(src, keep_liverless = TRUE)
+		C.reagents?.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
 		C.add_faction(inherent_factions)
@@ -847,6 +850,10 @@
 
 	on_gender_update(C)
 	C.update_organ_requirements() //post species trait gains
+
+	if(!(C.status_flags & BUILDING_ORGANS))
+		C.regenerate_icons()
+
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
@@ -1332,12 +1339,12 @@
 	return
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-//	if(!((target.health < 0 || HAS_TRAIT(target, TRAIT_FAKEDEATH)) && !(target.mobility_flags & MOBILITY_STAND)))
 	if(!(istype(user.rmb_intent, /datum/rmb_intent/weak)) && target.body_position == LYING_DOWN)
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaken")
 		return TRUE
+
 	else if(istype(user.rmb_intent, /datum/rmb_intent/weak) && (target.body_position == LYING_DOWN) && (user.zone_selected in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_MOUTH)))
 		user.do_cpr(target, user.zone_selected == BODY_ZONE_CHEST ? CPR_CHEST : CPR_MOUTH)
 		return TRUE
@@ -1857,7 +1864,7 @@
 		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking >= 10)
 			H.next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
 			// Get extra damage as a percent of 50% extra based on skill
-			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
+			var/percentage = attacker_sneaking / SKILL_LEVEL_LEGENDARY
 			if(blunt)
 				knockout_modifier = FLOOR(15 * percentage, 1)
 			item_force += (item_force * 0.5) * percentage

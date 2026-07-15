@@ -106,7 +106,6 @@
 	aportalgoesto = "banditin"
 	required_trait = TRAIT_BANDITCAMP
 	can_gain_with_sight = TRUE
-	can_gain_by_walking = TRUE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_vampire	// must NOT be a traveltile/vampire child, because that one has a check for banditcamp trait. People should always be able to leave the camp.
@@ -118,7 +117,6 @@
 	aportalgoesto = "vampin"
 	required_trait = TRAIT_VAMPMANSION
 	can_gain_with_sight = TRUE
-	can_gain_by_walking = TRUE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_inhumen
@@ -130,8 +128,6 @@
 	aportalid = "inhumenexit"
 	aportalgoesto = "inhumenin"
 	required_trait = TRAIT_INHUMENCAMP
-	can_gain_with_sight = FALSE
-	can_gain_by_walking = FALSE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/to_acid_caves
@@ -157,6 +153,36 @@
 	aportalid = "inq_enter"
 	aportalgoesto = "inq_exit"
 	required_trait = TRAIT_INQUISITION
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/gallowband_bog
+	name = "To the Bog Witch"
+	aportalid = "gallow_bog"
+	aportalgoesto = "bog_gallow"
+	required_trait = TRAIT_GALLOWBAND_SECRETS
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/bog_gallowband
+	name = "To the Gallowband"
+	aportalid = "bog_gallow"
+	aportalgoesto = "gallow_bog"
+	required_trait = TRAIT_GALLOWBAND_SECRETS
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/courtagent_sewers
+	name = "To the Sewers"
+	aportalid = "agent_sewers"
+	aportalgoesto = "sewers_agent"
+	required_trait = TRAIT_COURTAGENT
+	can_gain_with_sight = FALSE
+	can_gain_by_walking = FALSE
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/sewers_courtagent
+	name = "To the Hideout"
+	aportalid = "sewers_agent"
+	aportalgoesto = "agent_sewers"
+	required_trait = TRAIT_COURTAGENT
 	can_gain_with_sight = FALSE
 	can_gain_by_walking = FALSE
 	check_other_side = TRUE

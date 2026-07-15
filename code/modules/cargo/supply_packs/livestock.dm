@@ -2,6 +2,7 @@
 	group = "Livestock"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/livestock
 
 /datum/supply_pack/livestock/saiga
 	name = "Saigabuck"

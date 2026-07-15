@@ -522,12 +522,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	</div></a>
 
 	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:150px; left:120px; width:73px; height:9px; background-image: url('family_type.png');">
-		<div id="char-family" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/text/family) ? read_preference(/datum/preference/text/family) : "None"]</div>
+		<div id="char-family" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/family_mode) ? read_preference(/datum/preference/choiced/family_mode) : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=gender_choice'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
+	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
 		<div id="char-genderpref" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/gender_choice) ? read_preference(/datum/preference/choiced/gender_choice) : "Any"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=setspouse'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
+	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
 		<div id="char-spouse" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/text/setspouse) ? read_preference(/datum/preference/text/setspouse) : "None"]</div>
 	</div></a>
 
@@ -635,7 +635,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(update_all || ("gender" in fields_to_update))
 		params["gender"] = read_preference(/datum/preference/choiced/gender) == MALE ? "M" : "F"
 	if(update_all || ("family" in fields_to_update))
-		params["family"] = read_preference(/datum/preference/text/family) ? read_preference(/datum/preference/text/family) : "None"
+		params["family"] = read_preference(/datum/preference/choiced/family_mode) ? read_preference(/datum/preference/choiced/family_mode) : "None"
 	if(update_all || ("genderpref" in fields_to_update))
 		params["genderpref"] = read_preference(/datum/preference/choiced/gender_choice) ? read_preference(/datum/preference/choiced/gender_choice) : "Any"
 	if(update_all || ("spouse" in fields_to_update))
@@ -1210,6 +1210,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				expires = " The ban is for [DisplayTimeText(text2num(ban_details["duration"]) MINUTES)] and expires on [ban_details["expiration_time"]] (server time)."
 			to_chat(user, "<span class='danger'>You, or another user of this computer or connection ([ban_details["key"]]) is banned from playing [href_list["bancheck"]].<br>The ban reason is: [ban_details["reason"]]<br>This ban (BanID #[ban_details["id"]]) was applied by [ban_details["admin_key"]] on [ban_details["bantime"]] during round ID [ban_details["round_id"]].<br>[expires]</span>")
 			return
+
+	if(href_list["preference"] == "family")
+		var/datum/family_middleware/middleware = new /datum/family_middleware(src, user)
+		middleware.ui_interact(user)
+		return
+
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
 			if("close")
@@ -1265,6 +1271,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				set_antag(user)
 			else
 				set_antag(user)
+		return
 
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
@@ -1421,20 +1428,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			handle_customizer_topic(user, href_list)
 			update_menu_data(user)
 			ShowCustomizers(user)
-			return
 		if("change_marking")
 			handle_body_markings_topic(user, href_list)
 			update_menu_data(user)
 			ShowMarkings(user)
-			return
 		if("change_descriptor")
 			handle_descriptors_topic(user, href_list)
 			show_descriptors_ui(user)
-			return
 		if("change_culinary_preferences")
 			handle_culinary_topic(user, href_list)
 			show_culinary_ui(user)
-			return
 		if("random")
 			switch(href_list["preference"])
 				if("name")
@@ -1451,9 +1454,15 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 		if("loadout_store")
 			open_loadout_shop(user)
+			return
+
+		if("gossip")
+			open_gossip(user)
+			return
 
 		if("select_quirks")
 			open_quirk_menu(user)
+			return
 
 		if("finished")
 			user << browse(null, "window=latechoices") //closes late choices window
@@ -1783,25 +1792,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	return TRUE
 
-
-/datum/preferences/proc/set_loadout(mob/user, loadout_number, datum/loadout_item/loadout)
-	if(!loadout)
-		return
-	if(!donator)
-		to_chat(user, span_danger("This is a donator feature!"))
-		return FALSE
-
-	if(loadout == "None")
-		vars["loadout[loadout]"] = null
-		to_chat(user, span_notice("Who needs stuff anyway?"))
-	else
-		if(!(loadout in GLOB.loadout_items))
-			return
-		vars["loadout[loadout_number]"] = loadout
-		to_chat(user, span_notice("[loadout.name]"))
-		if(loadout.description)
-			to_chat(user, "[loadout.description]")
-
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
@@ -1864,6 +1854,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		)
 
 	var/datum/patron/patron = user.client.prefs.read_preference(/datum/preference/choiced/patron)
+	if(job.tennite_triumph_exclusive && !(patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		if(!user.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE))
+			return make_lock_row(
+				used_name,
+				"\[HERETIC LOCK\]",
+				"<b>Only The Ten may rule.</b>"
+			)
 	if(length(job.allowed_patrons) && !(patron.type in job.allowed_patrons))
 		var/list/patron_list = list()
 		for(var/datum/patron/mult_patron as anything in job.allowed_patrons)

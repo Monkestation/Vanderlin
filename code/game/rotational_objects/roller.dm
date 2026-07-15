@@ -32,9 +32,13 @@
 
 /obj/structure/roller/LateInitialize()
 	. = ..()
+	movedir = dir
 	set_connection_dir()
 	find_rotation_network()
 	build_roller_chain()
+
+/obj/structure/roller/set_connection_dir()
+	dpdir = turn(dir, 90) | turn(dir, -90) | movedir | REVERSE_DIR(movedir)
 
 /obj/structure/roller/Destroy()
 	for(var/obj/structure/roller/connected in connected_rollers)
@@ -93,29 +97,17 @@
 /obj/structure/roller/set_rotations_per_minute(rpm)
 	if(rotations_per_minute == rpm)
 		return FALSE
-
 	rotations_per_minute = min(rpm, 32)
-
-	if(rotations_per_minute > 0)
-		operating = TRUE
-	else
-		operating = FALSE
+	operating = rotations_per_minute > 0
+	if(!operating)
 		for(var/atom/movable/movable in loc)
 			stop_conveying(movable)
-
 	update_appearance()
-	propagate_rotation()
 	return TRUE
-
-/obj/structure/roller/proc/propagate_rotation()
-	for(var/obj/structure/roller/connected in connected_rollers)
-		if(connected.rotations_per_minute != rotations_per_minute)
-			connected.set_rotations_per_minute(rotations_per_minute)
 
 /obj/structure/roller/proc/build_roller_chain()
 	var/turf/forward_turf = get_step(src, movedir)
 	var/obj/structure/roller/forward_roller = locate(/obj/structure/roller) in forward_turf
-
 	if(forward_roller && (forward_roller.movedir == movedir || forward_roller.movedir == REVERSE_DIR(movedir)))
 		connected_rollers |= forward_roller
 		forward_roller.connected_rollers |= src
@@ -172,10 +164,9 @@
 	tool.play_tool_sound(src, 50)
 	setDir(turn(dir, 90))
 	to_chat(user, span_notice("You rotate [src]."))
-
 	connected_rollers = list()
 	build_roller_chain()
-	return TRUE
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/roller/update_appearance()
 	. = ..()
@@ -308,23 +299,22 @@
 	. += span_notice("Attack items to add them to the sorting list.")
 	. += span_notice("Alt-Click to reset the sorting list.")
 
-/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
-	if(target == src || !proximity_flag)
-		return ..()
+/obj/item/roller_sorter_lister/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ismovable(interacting_with))
+		return NONE
 
-	if(!ismovable(target))
-		return ..()
-
-	if(is_type_in_list(target, current_sort))
-		to_chat(user, span_warning("[target] is already in the sorting list!"))
-		return
+	if(is_type_in_list(interacting_with, current_sort))
+		to_chat(user, span_warning("[interacting_with] is already in the sorting list!"))
+		return ITEM_INTERACT_BLOCKING
 
 	if(length(current_sort) >= max_items)
 		to_chat(user, span_warning("The sorting list is full!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	current_sort += target.type
-	to_chat(user, span_notice("[target] has been added to the sorting list."))
+	current_sort += interacting_with.type
+	to_chat(user, span_notice("[interacting_with] has been added to the sorting list."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/roller_sorter_lister/AltClick(mob/user, list/modifiers)
 	. = ..()

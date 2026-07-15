@@ -3548,6 +3548,25 @@
 	dir = 1
 	},
 /area/indoors/town/tavern)
+"bHZ" = (
+/obj/structure/rack/shelf/biggest,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/item/listeningdevice/inq,
+/obj/item/listeningdevice/inq,
+/obj/item/speaker/inq,
+/obj/item/inqarticles/bmirror,
+/turf/open/floor/churchmarble/violet,
+/area/indoors/town/church/inquisition)
 "bIa" = (
 /obj/structure/roguerock,
 /turf/open/water/river,
@@ -23680,29 +23699,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/yellow)
-"kVH" = (
-/obj/structure/rack,
-/obj/item/weapon/polearm/spear/javelin,
-/obj/item/weapon/polearm/spear/javelin,
-/obj/item/weapon/polearm/spear/javelin,
-/obj/item/weapon/polearm/spear/javelin{
-	pixel_x = -17;
-	pixel_y = -16
-	},
-/obj/item/weapon/polearm/spear/javelin{
-	pixel_x = -23;
-	pixel_y = -13
-	},
-/obj/item/weapon/polearm/spear/javelin{
-	pixel_x = -14;
-	pixel_y = -18
-	},
-/obj/item/weapon/polearm/spear/javelin{
-	pixel_x = -20;
-	pixel_y = -14
-	},
-/turf/open/floor/twig,
-/area/outdoors/exposed/under/basement)
 "kVP" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -31139,6 +31135,29 @@
 /obj/structure/water_pipe,
 /turf/open/dungeon_trap/australia,
 /area/indoors/town/keep)
+"ojv" = (
+/obj/structure/rack,
+/obj/item/weapon/polearm/spear/javelin,
+/obj/item/weapon/polearm/spear/javelin,
+/obj/item/weapon/polearm/spear/javelin,
+/obj/item/weapon/polearm/spear/javelin{
+	pixel_x = -17;
+	pixel_y = -16
+	},
+/obj/item/weapon/polearm/spear/javelin{
+	pixel_x = -23;
+	pixel_y = -13
+	},
+/obj/item/weapon/polearm/spear/javelin{
+	pixel_x = -14;
+	pixel_y = -18
+	},
+/obj/item/weapon/polearm/spear/javelin{
+	pixel_x = -20;
+	pixel_y = -14
+	},
+/turf/open/floor/twig,
+/area/outdoors/exposed/under/basement)
 "ojJ" = (
 /obj/structure/fluff/railing/tall{
 	dir = 1
@@ -36422,25 +36441,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/basin/safe)
-"qze" = (
-/obj/structure/rack/shelf/biggest,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/listeningdevice,
-/obj/item/listeningdevice,
-/obj/item/speakerinq,
-/obj/item/inqarticles/bmirror,
-/turf/open/floor/churchmarble/violet,
-/area/indoors/town/church/inquisition)
 "qzg" = (
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/red)
@@ -204958,7 +204958,7 @@ aOv
 aOv
 bHs
 wNM
-qze
+bHZ
 ibm
 qFx
 qFx
@@ -239665,7 +239665,7 @@ huD
 huD
 sTk
 oHO
-kVH
+ojv
 seG
 okC
 qjx

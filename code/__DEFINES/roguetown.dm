@@ -87,6 +87,15 @@ GLOBAL_LIST_EMPTY(accused)
 #define FAMILY_OMMER "Parents Sibling"
 #define FAMILY_INLAW "In Law"
 
+#define ROYAL_STATUS_CONSORT "consort"
+#define ROYAL_STATUS_PROGENY "progeny"
+#define ROYAL_STATUS_OMMER "ommer"
+
+#define FAMILY_MEMBER_PARENT "parent"
+#define FAMILY_MEMBER_CHILD "child"
+#define FAMILY_MEMBER_SIBLING "sibling"
+#define FAMILY_MEMBER_SPOUSE "spouse"
+
 GLOBAL_LIST_EMPTY(job_respawn_delays)
 
 //stress levels. Stress starts at 0.
@@ -117,6 +126,7 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
 #define CTAG_HEIR "CAT_HEIR"
 #define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
+#define CTAG_COURTAGENT "CAT_COURT_AGENT"
 #define CTAG_MINOR_NOBLE "CAT_MINOR_NOBLE" // Minor Noble classes
 #define CTAG_CONSORT "CAT_CONSORT" // Consort classes
 #define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector

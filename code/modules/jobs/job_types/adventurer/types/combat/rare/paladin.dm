@@ -43,6 +43,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED
 	)
 

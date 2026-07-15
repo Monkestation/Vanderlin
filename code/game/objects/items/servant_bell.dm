@@ -53,30 +53,46 @@
 		. += span_notice("Use on a commoner to bind their mind to the bell.")
 		. += span_notice("Right click with an open hand to relinquish servants.")
 
-/obj/item/servant_bell/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!COOLDOWN_FINISHED(src, nearby_ring_bell) || !is_bell_proficient(user) || !ishuman(target))
-		return
-	var/mob/living/carbon/human/H = target
+/obj/item/servant_bell/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!is_bell_proficient(user))
+		return NONE
+
+	if(!ishuman(interacting_with))
+		return NONE
+
+	if(!COOLDOWN_FINISHED(src, nearby_ring_bell))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/carbon/human/H = interacting_with
 	if(!H.mind)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(length(bound_servants) >= max_servants)
 		to_chat(user, span_warning("It can hold no more minds without relinquishing another."))
+		return ITEM_INTERACT_BLOCKING
+
 	playsound(src, 'sound/items/servant_bell.ogg', 80, TRUE)
+
 	user.visible_message(span_smallnotice("[user] rings [src] in front of [user == H ? "[user.p_them()]self" : H] like a pendulum..."))
-	if(do_after(user, 6 SECONDS, H))
-		if((H.real_name in bound_servants) && H.name == H.real_name)
-			to_chat(user, span_warning("[src] is already bound to this bell."))
-		else if(H.is_dead())
-			to_chat(user, span_warning("What good is a dead servant?"))
-		else if(IS_DEADITE(H))
-			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
-		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
-			to_chat(user, span_warning("The enchantment seems to fail."))
-		else
-			add_servant(H)
-			to_chat(user, span_smallnotice("I bind [H] to [src]."))
+
+	if(!do_after(user, 6 SECONDS, H))
+		return ITEM_INTERACT_BLOCKING
+
+	if((H.real_name in bound_servants) && H.name == H.real_name)
+		to_chat(user, span_warning("[src] is already bound to this bell."))
+	else if(H.is_dead())
+		to_chat(user, span_warning("What good is a dead servant?"))
+	else if(IS_DEADITE(H))
+		to_chat(user, span_warning("The deadite curse resists the bell's charm."))
+	else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
+		to_chat(user, span_warning("The enchantment seems to fail."))
+	else
+		add_servant(H)
+		to_chat(user, span_smallnotice("I bind [H] to [src]."))
+
 	COOLDOWN_START(src, nearby_ring_bell, nearby_cooldown)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/servant_bell/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -106,7 +122,7 @@
 			remove_servant(servant = remove)
 			to_chat(user, span_smallnotice("[remove] has been relinquished."))
 
-/obj/item/servant_bell/attack_self(mob/living/user, params)
+/obj/item/servant_bell/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(!istype(user)) // ???
 		return
