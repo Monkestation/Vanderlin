@@ -1,5 +1,5 @@
 /datum/job/town_elder
-	title = "Town Elder"
+	title = JOB_TOWN_ELDER
 	tutorial = "You were once a wanderer, an unremarkable soul who, alongside your old adventuring party, carved your name into history.\
 	Now, the days of adventure are long past. You sit as the town's beloved elder; while the crown may rule from afar, the people\
 	look to you to settle disputes, mend rifts, and keep the true peace in town. Not every conflict must end in bloodshed,\
@@ -27,6 +27,10 @@
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_BARD = 300
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/townannouncement
+	)
+	forced_flaw = /datum/quirk/boon/folk_hero
 
 	traits = list(
 		TRAIT_OLDPARTY
@@ -36,10 +40,11 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/militia
 	)
 
-/datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+
+/datum/job/town_elder/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
-	var/instruments = list(
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -47,14 +52,10 @@
 		"Flute" = /obj/item/instrument/flute,
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola)
+		"Viola" = /obj/item/instrument/viola
+	)
 
-	var/instrument_choice = input(spawned, "Choose your instrument.", "XYLIX") as anything in instruments
-	var/spawn_instrument = instruments[instrument_choice]
-	if(!spawn_instrument)
-		spawn_instrument = /obj/item/instrument/lute
-	spawned.equip_to_slot_or_del(new spawn_instrument(spawned), ITEM_SLOT_BACK_R, TRUE)
-	spawned.add_quirk(/datum/quirk/boon/folk_hero)
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.", title = "XYLIX")
 
 /mob/living/carbon/human/proc/townannouncement()
 	set name = "Elder Announcement"
@@ -69,7 +70,7 @@
 		to_chat(src, "<span class='warning'>You must wait [time_left] more seconds before making another announcement.</span>")
 		return
 
-	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Make an announcement to the townsfolk", "Elder Announcement", multiline = TRUE)))
 	if(inputty)
 		if(!istype(get_area(src), /area/indoors/town/tavern))
 			to_chat(src, "<span class='warning'>I need to do this from the tavern.</span>")
@@ -126,7 +127,7 @@
 	category_tags = list(CTAG_TOWN_ELDER)
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 	honorary = "Mayor"
@@ -142,7 +143,7 @@
 
 /datum/job/advclass/town_elder/mayor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 
 /datum/outfit/town_elder/mayor
 	name = "Mayor (Town Elder)"
@@ -544,13 +545,13 @@
 	)
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/town_elder/lorekeeper/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 
 /datum/outfit/town_elder/lorekeeper
 	name = "Lorekeeper (Town Elder)"

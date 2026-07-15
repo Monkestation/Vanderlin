@@ -66,7 +66,7 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.dna?.species)
-			return "<span class='red'>Another [lowertext(H.dna.species.name)] perished.</span>"
+			return "<span class='red'>Another [LOWER_TEXT(H.dna.species.name)] perished.</span>"
 	return desc
 
 /datum/stress_event/viewdismember
@@ -529,16 +529,6 @@
 	desc = span_red("This menial chore insults my station, i should not need to polish a pair of shoes.")
 	timer = 5 MINUTES
 
-/datum/stress_event/destroyed_past //gaffer destroying their trophies
-	stress_change = 4
-	desc = span_red("A piece of my history is destroyed, how will they know my great past?")
-	timer = 10 MINUTES
-
-/datum/stress_event/ring_madness // ring bearer examines at HEAD EATER related thing
-	stress_change = 1
-	desc = span_red("It mocks me, toys with my mind!")
-	timer = 1 MINUTES
-
 /datum/stress_event/eora_matchmaking
 	stress_change = 2
 	desc = span_rose("Eora calls for me to be wed! I must find my destined partner before I die all alone...")
@@ -558,6 +548,16 @@
 	timer = 30 SECONDS
 	stress_change = 1
 	desc = span_red("That voice.. That old thief is calling for me, what is it now?")
+
+/datum/stress_event/orphan_calling
+	timer = 30 SECONDS
+	stress_change = 1
+	desc = span_red("That voice.. One of those brats are calling for me, what is it for this time?")
+
+/datum/stress_event/orphan_calling_help
+	timer = 1 MINUTES
+	stress_change = 2
+	desc = span_red("One of my brats are calling for help! Another mess I have to clean up no doubt...")
 
 /datum/stress_event/night_owl_dawn
 	desc = span_warning("I don't like the dae..")
@@ -650,7 +650,7 @@
 	timer = 3 MINUTES
 
 /datum/stress_event/slipped
-	desc = "<span class='warning'>I slipped. I should be more careful next timer...</span>\n"
+	desc = "<span class='warning'>I slipped. I should be more careful next time...</span>\n"
 	stress_change = 2
 	timer = 3 MINUTES
 
@@ -803,7 +803,6 @@
 	stress_change = 10
 	desc = span_red("The horrid wails of the dead call for relief!")
 
-
 /datum/stress_event/soulchurnerpsydon
 	timer = 1 MINUTES
 	stress_change = 1
@@ -828,6 +827,11 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I've been covered in shite! Disgusting!")
+
+/datum/stress_event/bad_grave
+	stress_change = 1
+	desc = span_red("Can the dead find true rest within such a poorly made grave..?")
+	timer = 5 MINUTES
 
 /datum/stress_event/malaguero
 	timer = 1 MINUTES
@@ -864,3 +868,22 @@
 	if(istiefling(user))
 		return 0
 	return ..()
+
+/datum/stress_event/shamanhoodlost
+	stress_change = 3
+	desc = span_boldred("I have lost my hood! My failure to protect it leaves open the defilement my future reincarnations!")
+	timer = 999 MINUTES
+
+/datum/stress_event/black_briar1
+	timer = 999 MINUTES
+	stress_change = 5
+	desc = span_briar("I feel something scratching at my lungs...")
+
+/datum/stress_event/black_briar2
+	timer = 999 MINUTES
+	stress_change = 10
+	desc = span_briar("I want to feel the moonlight shine on my skin... I want to go outside... plant my soles in the dirt...I hear music...I love music...it hurts...they hurt...together...")
+
+/datum/stress_event/black_briar2/on_apply(mob/living/user)
+	. = ..()
+	user.refresh_looping_ambience()

@@ -57,7 +57,7 @@
 		return
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
 	message = parsemarkdown_basic(message, limited = TRUE, barebones = TRUE)
-	usr.emote("me",1,message,TRUE, custom_me = TRUE)
+	usr.emote("me", NONE, message, intentional = TRUE)
 
 ///The big me emote verb
 /mob/verb/me_big_verb()
@@ -81,7 +81,7 @@
 		return
 	message = trim(copytext_char(html_encode(message), 1, MAX_MESSAGE_BIGME))
 	message = parsemarkdown_basic(message, limited = TRUE, barebones = TRUE)
-	usr.emote("me", 1, message, TRUE, custom_me = TRUE)
+	usr.emote("me", 1, message, TRUE)
 
 ///Speak as a dead person (ghost etc)
 /mob/proc/say_dead(message)
@@ -134,7 +134,7 @@
 ///Check if this message is an emote
 /mob/proc/check_emote(message, forced)
 	if(copytext(message, 1, 2) == "*")
-		emote(copytext_char(message, 2), intentional = !forced, custom_me = TRUE)
+		emote(copytext_char(message, 2), intentional = !forced)
 		return 1
 
 /mob/proc/check_whisper(message, forced)
@@ -183,12 +183,12 @@
 		else if(key == ";" && !mods[MODE_HEADSET])
 			mods[MODE_HEADSET] = TRUE
 		else if((key in GLOB.department_radio_prefixes) && length(message) > length(key) + 1 && !mods[RADIO_EXTENSION])
-			mods[RADIO_KEY] = lowertext(message[1 + length(key)])
+			mods[RADIO_KEY] = LOWER_TEXT(message[1 + length(key)])
 			mods[RADIO_EXTENSION] = GLOB.department_radio_keys[mods[RADIO_KEY]]
 			chop_to = length(key) + 2
 		else if(key == "," && !mods[LANGUAGE_EXTENSION])
 			for(var/datum/language/LD as anything in GLOB.all_languages)
-				if(initial(LD.key) == lowertext(message[1 + length(message[1])]))
+				if(initial(LD.key) == LOWER_TEXT(message[1 + length(message[1])]))
 					if(!can_speak_in_language(LD))
 						return message
 					mods[LANGUAGE_EXTENSION] = LD

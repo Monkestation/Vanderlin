@@ -3,7 +3,7 @@
 
 /datum/proc/find_references(references_to_clear = INFINITY)
 	if(usr?.client)
-		if(browser_alert(usr,"Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", list("Yes", "No")) != "Yes")
+		if(tgui_alert(usr,"Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", list("Yes", "No")) != "Yes")
 			return
 
 	src.references_to_clear = references_to_clear
@@ -133,6 +133,7 @@
 
 	else if(islist(potential_container))
 		var/list/potential_cache = potential_container
+		var/is_alist = istype(potential_cache, /alist)
 		for(var/element_in_list in potential_cache)
 			//Check normal sublists
 			if(islist(element_in_list))
@@ -169,7 +170,7 @@
 					log_reftracker("All references to [type] [text_ref(src)] found, exiting.")
 					return
 
-			if(!isnum(element_in_list) && !is_special_list)
+			if((!isnum(element_in_list) || is_alist) && !is_special_list)
 				// This exists to catch an error that throws when we access a special list
 				// is_special_list is a hint, it can be wrong
 				try

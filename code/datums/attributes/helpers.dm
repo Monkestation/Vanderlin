@@ -55,10 +55,15 @@
  *   silent           - suppress level-up messages
  *   check_apprentice - share XP with nearby apprentices
  */
-/mob/proc/adjust_experience(skill_type, amount, silent = FALSE, check_apprentice = TRUE)
+/mob/proc/adjust_experience(skill_type, amount, silent = FALSE, check_apprentice = TRUE, daily_xp = TRUE)
 	if(HAS_TRAIT(src, TRAIT_NO_EXPERIENCE))
 		return FALSE
-	return attributes?.adjust_experience(skill_type, amount, silent, check_apprentice)
+	return attributes?.adjust_experience(skill_type, amount, silent, check_apprentice, daily_xp = daily_xp)
+
+/mob/proc/add_sleep_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	if(HAS_TRAIT(src, TRAIT_NO_EXPERIENCE))
+		return FALSE
+	return mind?.add_sleep_experience(skill, amt, silent, check_apprentice)
 
 /**
  * Adjusts a skill by a delta in the new 0-60 range, with an optional cap.

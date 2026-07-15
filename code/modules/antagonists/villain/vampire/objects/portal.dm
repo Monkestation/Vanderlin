@@ -126,6 +126,7 @@
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
 	var/uses = 3
+	var/can_local_portal = FALSE
 
 /obj/item/clothing/neck/portalamulet/Initialize()
 	GLOB.vampire_objects |= src
@@ -135,10 +136,11 @@
 	GLOB.vampire_objects -= src
 	return ..()
 
-/* DISABLED FOR NOW
 /obj/item/clothing/neck/portalamulet/attack_self(mob/user, list/modifiers)
 	. = ..()
-	if(alert(user, "Create a portal?", "PORTAL GEM", "Yes", "No") == "Yes")
+	if(!can_local_portal)
+		return
+	if(tgui_alert(user, "Create a portal?", "PORTAL GEM", list("Yes", "No")) == "Yes")
 		uses -= 1
 		var/obj/effect/landmark/vteleportdestination/Vamp = new(loc)
 		Vamp.amuletname = name
@@ -148,4 +150,4 @@
 		if(uses <= 0)
 			visible_message("[src] shatters!")
 			qdel(src)
-*/
+

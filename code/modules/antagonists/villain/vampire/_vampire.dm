@@ -20,6 +20,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
@@ -35,19 +36,22 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	if(!istype(examined))
 		return
-	if(NOBLOOD in examined.dna?.species?.species_traits)
+	if(!CAN_HAVE_BLOOD(examined))
 		return
+	var/cached_blood_volume = examined.get_blood_volume()
 	var/vitae = 0
 	var/datum/blood_type/BT = examined.get_blood_type()
 	if(istype(BT) && BT.vitae)
-		var/list/BD = BT.get_blood_data(src)
-		vitae = round(examined.blood_volume * BD["vitae"])
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
+		vitae = round(cached_blood_volume * BT.vitae)
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "vamplesser"
+
+	clan_selected = TRUE
+	default_clan = /datum/clan/caitiff
 
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
@@ -212,8 +216,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // LANDMARKS
 /obj/effect/landmark/start/vampirelord
 	name = "Vampire Lord"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirelord/Initialize()
 	. = ..()
@@ -221,8 +225,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampirespawn
 	name = "Vampire Spawn"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirespawn/Initialize()
 	. = ..()
@@ -230,9 +234,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampireknight
 	name = "Death Knight"
-	icon_state = "arrow"
-	jobspawn_override = list("Death Knight")
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	jobs_to_spawn = list("Death Knight")
+	custom_handling = TRUE
 
 /obj/effect/landmark/vteleport
 	name = "Teleport Destination"

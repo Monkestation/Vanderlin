@@ -10,6 +10,7 @@
 	group = "Armor"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	allowed_start = FALSE
 
 // IRON GEAR
 
@@ -95,7 +96,7 @@
 /datum/supply_pack/armor/light/shamaniccoat
 	name = "Shamanic Coat"
 	cost = 30
-	contains = /obj/item/clothing/armor/leather/heavy/atgervi
+	contains = /obj/item/clothing/armor/leather/atgervi
 
 // SHIRT ARMOR
 
@@ -297,7 +298,7 @@
 /datum/supply_pack/armor/steel/zplategloves
 	name = "Zalad Plate Gloves"
 	cost = 55
-	contains = /obj/item/clothing/armor/rare/zaladplate
+	contains = /obj/item/clothing/gloves/rare/zaladplate
 
 /datum/supply_pack/armor/steel/plate_gloves
 	name = "Heavy Plate Gloves"

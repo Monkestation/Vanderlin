@@ -7,11 +7,11 @@
 	m_intent = MOVE_INTENT_SNEAK
 	d_intent = INTENT_DODGE
 	ai_controller = /datum/ai_controller/human_npc
+	headprice = 10
 
 /mob/living/carbon/human/species/human/northern/thief/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	set_species(/datum/species/human/northern)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 
 /mob/living/carbon/human/species/human/northern/thief/after_creation()
@@ -72,7 +72,6 @@
 	else
 		real_name = pick(file2list("strings/names/first_male.txt"))
 	update_body()
-	head.sellprice = 30
 
 /datum/attribute_holder/sheet/job/npc/thief
 	raw_attribute_list = list(

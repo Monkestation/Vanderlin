@@ -1,5 +1,6 @@
 /datum/attribute_holder/sheet/job/hunter
 	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
 		STAT_PERCEPTION = 3,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/tanning = 30,
@@ -43,7 +44,7 @@
 
 
 /datum/job/hunter
-	title = "Hunter"
+	title = JOB_HUNTER
 	f_title = "Huntress"
 	tutorial = "Silent and yet full of life, the forests of Dendor grant you both happiness and misery. \
 	In tales you've heard of small woodland creechers frolicking, now there is only the beastspawn of Graggar and Dendor... \
@@ -60,8 +61,9 @@
 
 	outfit = /datum/outfit/hunter
 	give_bank_account = 15
-	apprentice_name = "Hunter"
+	apprentice_name = JOB_HUNTER
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
@@ -69,30 +71,29 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/hunter/old
 
 	traits = list(
+		TRAIT_KEENEYES,
 		TRAIT_FORAGER
 	)
 
 /datum/outfit/hunter
-	name = "Hunter"
+	name = JOB_HUNTER
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots/leather
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	head = /obj/item/clothing/head/brimmed
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
-
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
-
+	backl = /obj/item/gun/ballistic/bow
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/storage/meatbag
-
 	gloves = /obj/item/clothing/gloves/leather
-
 	backpack_contents = list(
+		/obj/item/reagent_containers/powder/salt = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
 		/obj/item/weapon/knife/hunting = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/key/hunter = 1
 	)

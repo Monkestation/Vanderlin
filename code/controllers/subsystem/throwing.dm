@@ -93,7 +93,7 @@ SUBSYSTEM_DEF(throwing)
 /datum/thrownthing/New(thrownthing, target, init_dir, maxrange, speed, thrower, diagonals_first, force, gentle, callback, target_zone)
 	. = ..()
 	src.thrownthing = thrownthing
-	RegisterSignal(thrownthing, COMSIG_PARENT_QDELETING, PROC_REF(on_thrownthing_qdel))
+	RegisterSignal(thrownthing, COMSIG_QDELETING, PROC_REF(on_thrownthing_qdel))
 	src.starting_turf = get_turf(thrownthing)
 	src.target_turf = get_turf(target)
 	if(target_turf != target)
@@ -195,15 +195,33 @@ SUBSYSTEM_DEF(throwing)
 	if(!thrownthing)
 		return
 	thrownthing.throwing = null
-	if (!hit)
-		for (var/atom/movable/obstacle as anything in get_turf(thrownthing)) //looking for our target on the turf we land on.
-			if (obstacle == target)
+	if(!hit)
+		for(var/atom/movable/obstacle as anything in get_turf(thrownthing)) //looking for our target on the turf we land on.
+			if(obstacle == target)
 				hit = TRUE
 				thrownthing.throw_impact(obstacle, src)
 				if(QDELETED(thrownthing)) //throw_impact can delete things, such as glasses smashing
 					return //deletion should already be handled by on_thrownthing_qdel()
 				break
-		if (!hit)
+
+		if(!hit) // EXPERIMENTAL: Make thrown things fall and impact things after hitting openspace
+			var/turf/T = get_turf(thrownthing)
+			if(T?.zFall(thrownthing)) // throwing has been nulled so this works
+				var/atom/movable/actual_target = initial_target?.resolve()
+				for(var/atom/movable/obstacle as anything in get_turf(thrownthing))
+					if (obstacle == thrownthing || (obstacle == thrower && !ismob(thrownthing)))
+						continue
+					if(ismob(obstacle) && thrownthing.pass_flags & PASSMOB && (obstacle != actual_target))
+						continue
+					if(obstacle.pass_flags_self & LETPASSTHROW)
+						if(!(ismob(thrownthing) || ismobholder(thrownthing)) || !(obstacle.pass_flags_self & NOTLETPASSTHROWNMOB))
+							continue
+					if(obstacle == actual_target || (obstacle.density && !(obstacle.flags_1 & ON_BORDER_1) && !(obstacle in thrownthing.buckled_mobs)))
+						finalize(TRUE, obstacle)
+						break
+				return // relying on tick() to call finalize() again
+
+		if(!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
 			if(QDELETED(thrownthing)) //throw_impact can delete things, such as glasses smashing
 				return //deletion should already be handled by on_thrownthing_qdel()
@@ -216,10 +234,9 @@ SUBSYSTEM_DEF(throwing)
 	if (callback)
 		callback.Invoke()
 
-	if(!(thrownthing.atom_flags & Z_FALLING)) // I don't think you can zfall while thrown but hey, just in case.
+	if(!thrownthing?.currently_z_moving) // I don't think you can zfall while thrown but hey, just in case.
 		var/turf/T = get_turf(thrownthing)
-		if(T)
-			T.zFall(thrownthing)
+		T?.zFall(thrownthing)
 
 	if(thrownthing)
 		SEND_SIGNAL(thrownthing, COMSIG_MOVABLE_THROW_LANDED, src)

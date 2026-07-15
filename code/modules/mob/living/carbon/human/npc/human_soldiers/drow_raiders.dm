@@ -8,6 +8,7 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 	flee_in_pain = TRUE
 	d_intent = INTENT_DODGE
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 15
 
 /mob/living/carbon/human/species/elf/dark/drowraider/ambush
 	wander = TRUE
@@ -15,7 +16,6 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 /mob/living/carbon/human/species/elf/dark/drowraider/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	set_species(/datum/species/elf/dark)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 	is_silent = TRUE
 
@@ -61,7 +61,6 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 	set_hair_color("#DDDDDD")
 
 	head.add_bodypart_feature(new_hair)
-	head.sellprice = 40
 
 	dna.update_ui_block(DNA_HAIR_COLOR_BLOCK)
 	dna.species.handle_body(src)

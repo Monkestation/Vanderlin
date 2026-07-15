@@ -6,7 +6,7 @@
 	race = /datum/species/goblin
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
-					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin)
+					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin, /obj/item/bodypart/mouth)
 	rot_type = /datum/component/rot/corpse/goblin
 	var/gob_outfit = /datum/outfit/npc/goblin
 	ambushable = FALSE
@@ -122,6 +122,9 @@
 /obj/item/bodypart/l_leg/goblin
 	dismemberable = 0
 
+/obj/item/bodypart/head/goblin
+	sellprice = 5
+
 /obj/item/bodypart/head/goblin/update_icon_dropped()
 	return
 
@@ -131,13 +134,6 @@
 /obj/item/bodypart/head/goblin/skeletonize()
 	. = ..()
 	icon_state = "goblin_skel_head"
-	sellprice = 2
-	if(headprice)
-		headprice = 2
-
-/obj/item/bodypart/head/goblin/drop_organs(mob/user, violent_removal)
-	. = ..()
-	sellprice = 0
 
 /datum/species/goblin
 	name = "goblin"
@@ -156,6 +152,21 @@
 	var/raceicon = "goblin"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/goblin
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
+
+/datum/species/goblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+	..()
+	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+	C.grant_language(/datum/language/hellspeak)
+
+/datum/species/goblin/after_creation(mob/living/carbon/C)
+	..()
+	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
+	C.grant_language(/datum/language/hellspeak)
+
+/datum/species/goblin/on_species_loss(mob/living/carbon/C)
+	. = ..()
+	UnregisterSignal(C, COMSIG_MOB_SAY)
+	C.remove_language(/datum/language/hellspeak)
 
 /datum/species/goblin/regenerate_icons(mob/living/carbon/human/H)
 	H.icon_state = ""
@@ -243,21 +254,26 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/goblins.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-			headdy.headprice = rand(7,20)
-			headdy.sellprice = rand(7,20)
-	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
+	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 		eyes.Remove(src,1)
 		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(src)
+
+	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+	LE.switch_side(LEFT_SIDE)
+
+	LE.Insert(src)
+	RE.Insert(src)
+
 	for(var/slot in internal_organs_slot)
-		var/obj/item/organ/organ = internal_organs_slot[slot]
-		organ.sellprice = 5
+		for(var/obj/item/organ/organ as anything in internal_organs_slot[slot])
+			organ.sellprice = max(initial(organ.sellprice) / 2, 1)
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()
 	update_body()
+	update_eyes()
 	faction = list(FACTION_ORCS)
 	var/turf/turf = get_turf(src)
 	if(SSterrain_generation.get_island_at_location(turf))
@@ -300,10 +316,10 @@
 				should_update = TRUE
 	else if(amount > 12 MINUTES)
 		for(var/obj/item/bodypart/B in C.bodyparts)
-			if(!B.rotted)
-				B.rotted = TRUE
+			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
+				B.kill_limb()
 				should_update = TRUE
-			if(B.rotted && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 				var/turf/open/T = C.loc
 				if(istype(T))
 					T.pollute_turf(/datum/pollutant/rot, 4)
@@ -330,6 +346,14 @@
 		STAT_CONSTITUTION = list(-6, -2),
 		STAT_ENDURANCE = list(-2, 2),
 		STAT_SPEED = list(-2, 4),
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/swords = 10,
 	)
 /datum/outfit/npc/goblin/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -454,6 +478,7 @@
 	gobs++
 	var/mob/living/carbon/human/species/goblin/npc/N = new (get_turf(src))
 	N.key = user.key
+	addtimer(CALLBACK(N, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "GOBLIN"), 5 SECONDS)
 	qdel(user)
 
 
@@ -464,7 +489,7 @@
 		return
 	spawning = FALSE
 	if(moon_goblins == 0)
-		if(GLOB.tod == "night")
+		if(GLOB.tod == NIGHT)
 			if(prob(30))
 				moon_goblins = 1
 			else

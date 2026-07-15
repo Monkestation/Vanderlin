@@ -55,7 +55,7 @@
 	)
 
 /datum/job/advclass/pilgrim/blacksmith
-	title = "Blacksmith"
+	title = JOB_BLACKSMITH
 	tutorial = "Hardy worksmen that are at home in the forge, dedicating their lives \
 	to ceaselessly toil in dedication to Malum."
 	allowed_sexes = list(MALE, FEMALE)

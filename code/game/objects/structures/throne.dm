@@ -4,7 +4,7 @@
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "throne"
 	density = FALSE
-	can_buckle = 1
+	can_buckle = TRUE
 	SET_BASE_PIXEL(-32, 0)
 	max_integrity = 999999
 	buckle_lying = FALSE
@@ -15,12 +15,12 @@
 /obj/structure/throne/post_buckle_mob(mob/living/M)
 	..()
 	density = TRUE
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 8)
+	M.add_offsets(type, x_add = 0, y_add = 8)
 
 /obj/structure/throne/post_unbuckle_mob(mob/living/M)
 	. = ..()
 	density = FALSE
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/throne/statues	// alt version with more statue but covers side tables less.
 	icon = 'icons/roguetown/misc/throne_alt.dmi'

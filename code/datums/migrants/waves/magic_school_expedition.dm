@@ -100,9 +100,6 @@
 /datum/job/migrant/magic_student/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
-
-/datum/job/migrant/magic_student/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
 	if(prob(5))
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 

@@ -47,5 +47,5 @@
 	shirt = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/skirt/patkilt/colored/mageblue
 	backl = /obj/item/weapon/polearm/spear
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	backpack_contents = list(/obj/item/weapon/knife/villager = 1)

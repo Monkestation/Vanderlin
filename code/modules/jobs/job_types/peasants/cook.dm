@@ -29,7 +29,7 @@
 	)
 
 /datum/job/cook
-	title = "Cook"
+	title = JOB_COOK
 	tutorial = "Slice, chop, and into the pot... \
 	you work closely with the innkeep to prepare meals for all the hungry mouths of Vanderlin. \
 	You've spent more nites than you can count cutting meat and vegetables until your fingers are bloody and raw, but it's honest work."
@@ -46,15 +46,16 @@
 	display_order = JDO_COOK
 	give_bank_account = 8
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/cook
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/cook/old
-
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/cook
-	name = "Cook"
+	name = JOB_COOK
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/key/tavern
 	beltr = /obj/item/weapon/knife/villager
@@ -62,6 +63,7 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	cloak = /obj/item/clothing/cloak/apron/cook
+	backl = /obj/item/storage/backpack/satchel/cloth
 
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking = 1

@@ -10,6 +10,7 @@
 	id = "confusion"
 	alert_type = null
 	remove_on_fullheal = TRUE
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/confusion/on_creation(mob/living/new_owner, duration = 10 SECONDS)
 	src.duration = duration
@@ -28,7 +29,7 @@
 	SIGNAL_HANDLER
 
 	// How much time is left in the duration, in seconds.
-	var/time_left = (duration - world.time) / 10
+	var/time_left = duration / 10
 	var/direction = move_args[MOVE_ARG_DIRECTION]
 	var/new_dir
 

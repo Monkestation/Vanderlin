@@ -16,6 +16,7 @@
 
 	var/turf/T = get_turf(src)
 	if (isturf(T))
+		update_z(null)
 		update_z(T.z)
 
 	if(!funeral_login())

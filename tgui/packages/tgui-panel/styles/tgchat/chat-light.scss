@@ -678,6 +678,10 @@ h2.alert {
   font-family: Arabolical, Pterra;
 }
 
+.kobold {
+  font-family: SyneTactile, Pterra;
+}
+
 .hellspeak {
   font-family: Yataghan, Pterra;
   font-size: 0.85em;
@@ -712,6 +716,10 @@ h2.alert {
 .psydonic_old {
   font-family: "Wernicke Schwabacher", Pterra;
   font-size: 1.23em;
+}
+
+.gronnic {
+  font-family: "Jorvik Informal", Pterra;
 }
 
 .torture {
@@ -812,6 +820,57 @@ h2.alert {
   }
 }
 
+
+.animatedpain {
+  color: #BA55D3;
+  text-shadow: 0 0 6px #c75be2;
+  font-size: 110%;
+  animation: pain 750ms infinite;
+}
+
+@keyframes pain {
+  0% {
+    color: #BA55D3;
+    text-shadow: 0 0 4px #c75be2;
+  }
+
+  50% {
+    color: #cc00ff;
+    text-shadow: 0 0 8px #ad37ca;
+  }
+
+  100% {
+    color: #BA55D3;
+    text-shadow: 0 0 4px #c75be2;
+  }
+}
+
+.lowpain {
+  color: #a4a562;
+  text-shadow: 0 0 0px #a4a562;
+}
+
+.lowestpain {
+  color: #a4a562;
+  font-size: 85%;
+  text-shadow: 0 0 0px #a4a562;
+}
+
+.artery {
+  color: #9B5455;
+  text-shadow: 0 0 3px #9B5455;
+}
+
+.infection {
+  color: #77c72b;
+  text-shadow: 0 0 3px #68af26;
+}
+
+.necrosis {
+  color: #558d20;
+  text-shadow: 0 0 6px #497a1a;
+}
+
 .bloody {
   color: hsl(0, 86%, 43%);
 }
@@ -834,6 +893,10 @@ h2.alert {
 
 .silver{
   color: hsl(0, 7%, 26%);
+}
+
+.briar{
+  color: #6b3a4a;
 }
 
 .icon {
@@ -1586,6 +1649,66 @@ $border-width-px: $border-width * 1px;
 
 	100% {
 		color: hsl(189.5, 17.1%, 78.2%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### THE GREAT HUNT ##### */
+.god_thegreathunt {
+  color: hsl(85, 20%, 44%);
+  font-weight: bold;
+  animation: greathunt_flicker 1s infinite;
+}
+
+@keyframes greathunt_flicker {
+	20% {
+		color: hsl(85, 20%, 44%);
+	}
+
+	40% {
+		color: hsl(243, 74%, 59%);
+	}
+
+	60% {
+		color: hsl(84, 24%, 35%);
+	}
+
+  80% {
+		color: hsl(352, 50%, 50%);
+	}
+
+	100% {
+		color: hsl(84, 13%, 48%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### THE BLACK BRIAR ##### */
+.god_theblackbriar {
+  color: hsl(340, 30%, 32%);
+  font-weight: bold;
+  animation: blackbriar_flicker 1s infinite;
+}
+
+@keyframes blackbriar_flicker {
+	20% {
+		color: hsl(340, 30%, 32%);
+	}
+
+	40% {
+		color: hsl(0, 41%, 23%);
+	}
+
+	60% {
+		color: hsl(340, 30%, 32%);
+	}
+
+  80% {
+		color: hsl(349, 54%, 21%);
+	}
+
+	100% {
+		color: hsl(345, 36%, 37%);
 	}
 }
 /* ##### END ##### */

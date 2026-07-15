@@ -11,7 +11,7 @@
 /datum/slapcraft_step/use_item/carpentry/hammer/get_speed_multiplier(mob/living/user, obj/item/item, obj/item/slapcraft_assembly/assembly)
 	. = ..()
 	var/obj/item/weapon/hammer/hammer = item
-	. *= hammer.time_multiplier
+	. *= hammer.toolspeed
 
 /datum/slapcraft_step/use_item/masonry/hammer
 	desc = "Hammer the stones"
@@ -24,7 +24,7 @@
 /datum/slapcraft_step/use_item/masonry/hammer/get_speed_multiplier(mob/living/user, obj/item/item, obj/item/slapcraft_assembly/assembly)
 	. = ..()
 	var/obj/item/weapon/hammer/hammer = item
-	. *= hammer.time_multiplier
+	. *= hammer.toolspeed
 
 /datum/slapcraft_step/use_item/engineering/hammer
 	desc = "Hammer the mechanical parts"
@@ -35,7 +35,7 @@
 /datum/slapcraft_step/use_item/engineering/hammer/get_speed_multiplier(mob/living/user, obj/item/item, obj/item/slapcraft_assembly/assembly)
 	. = ..()
 	var/obj/item/weapon/hammer/hammer = item
-	. *= hammer.time_multiplier
+	. *= hammer.toolspeed
 
 /datum/slapcraft_step/use_item/masonry/chisel
 	desc = "Chisel the rock"
@@ -48,4 +48,4 @@
 /datum/slapcraft_step/use_item/masonry/chisel/get_speed_multiplier(mob/living/user, obj/item/item, obj/item/slapcraft_assembly/assembly)
 	. = ..()
 	var/obj/item/weapon/chisel/chisel = item
-	. *= chisel.time_multiplier
+	. *= chisel.toolspeed

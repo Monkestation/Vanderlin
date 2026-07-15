@@ -44,6 +44,24 @@
 	base_genetics.growth_speed = TRAIT_GRADE_GOOD
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
 
+/datum/plant_def/mushroom/drowsbane
+	name = "drowsbane cluster"
+	icon_state = "drowsbane"
+	produce_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
+	produce_amount_min = 3
+	produce_amount_max = 5
+	produce_time = DEFAULT_PRODUCE_TIME
+	nitrogen_requirement = 25 //This is kind of lichen-looking. So it uses nitrogen.
+	phosphorus_requirement = 0
+	nitrogen_production = 0
+	phosphorus_production = 10
+	potassium_production = 0
+	seed_identity = "drowsbane spores"
+
+/datum/plant_def/mushroom/borowiki/set_genetic_tendencies(datum/plant_genetics/base_genetics)
+	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
+	base_genetics.cold_resistance = TRAIT_GRADE_GOOD //This grows in subterra.
+
 /* Wild varieties */
 /datum/plant_def/mushroom/waddle
 	name = "waddle cluster"

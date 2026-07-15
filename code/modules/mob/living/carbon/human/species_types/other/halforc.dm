@@ -22,6 +22,10 @@
 /datum/species/halforc
 	name = "Half-Orc"
 	id = SPEC_ID_HALF_ORC
+	multiple_accents = list(
+		"Half-Orc Accent" = ACCENT_HORC,
+		"Ossland Accent" = ACCENT_OSSLAND,
+	)
 	native_language = "Orcish"
 	desc = "The bastards of Graggar. \
 	\n\n\
@@ -107,6 +111,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,

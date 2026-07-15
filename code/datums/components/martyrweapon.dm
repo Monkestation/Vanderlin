@@ -87,12 +87,12 @@
 /datum/component/martyr_weapon/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(item_afterattack))
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF_SECONDARY, PROC_REF(try_activate))
 
 /datum/component/martyr_weapon/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED, COMSIG_ITEM_AFTERATTACK, COMSIG_ITEM_ATTACK_SELF_SECONDARY, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(parent, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED, COMSIG_ITEM_AFTERATTACK, COMSIG_ITEM_ATTACK_SELF_SECONDARY, COMSIG_ATOM_EXAMINE))
 
 /datum/component/martyr_weapon/process()
 	if(!is_active || !bound_user)
@@ -147,6 +147,13 @@
 			H.dropItemToGround(parent)
 			return
 
+		if(H.real_name in GLOB.excommunicated_players)
+			// Check if person's patron is a tennite, if so, the weapon will not work!
+			if(ispath(H.patron.type, /datum/patron/divine) && !HAS_TRAIT(H, TRAIT_FANATICAL))
+				to_chat(H, span_warning("It slips from my grasp. I can't get a hold."))
+				H.dropItemToGround(parent)
+				return
+
 	bind_mob(user)
 
 /datum/component/martyr_weapon/proc/bind_mob(mob/living/bound)
@@ -154,12 +161,12 @@
 		return
 
 	if(bound_user)
-		UnregisterSignal(bound_user, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(bound_user, COMSIG_QDELETING)
 		deactivate(bound_user)
 
 	bound_user = bound
 
-	RegisterSignal(bound_user, COMSIG_PARENT_QDELETING, PROC_REF(bound_deleted))
+	RegisterSignal(bound_user, COMSIG_QDELETING, PROC_REF(bound_deleted))
 
 	if(bound_user)
 		to_chat(bound_user, SPAN_GOD_ASTRATA("The weapon binds to you."))
@@ -231,7 +238,7 @@
 /// Real activation because we have input
 /datum/component/martyr_weapon/proc/take_oath(mob/living/user)
 	var/area/A = get_area(user)
-	if(!length(allowed_areas) || allowed_areas[A])
+	if(!length(allowed_areas) || allowed_areas[A.type])
 		var/string = "You are within holy grounds. Do you wish to call your god to aid in its defense? (You will live if the duration ends within the Church.)"
 		if(tgui_alert(user, string, "OATH", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
 			return

@@ -86,7 +86,7 @@
 	set name = "CheckPQ"
 	if(!holder)
 		return
-	var/selection = alert(src, "Check VIA...", "Check PQ", "Character List", "Player List", "Player Name")
+	var/selection = tgui_alert(src, "Check VIA...", "Check PQ", list("Character List", "Player List", "Player Name"))
 	if(!selection)
 		return
 	var/list/selections = list()
@@ -156,7 +156,7 @@
 	set name = "AdjustPQ"
 	if(!holder)
 		return
-	var/selection = alert(src, "Adjust VIA...", "MODIFY PQ", "Character List", "Player List", "Player Name")
+	var/selection = tgui_alert(src, "Adjust VIA...", "MODIFY PQ", list("Character List", "Player List", "Player Name"))
 	var/list/selections = list()
 	var/theykey
 	if(selection == "Character List")
@@ -201,7 +201,7 @@
 		return
 	adjust_playerquality(amt2change, theykey, src.ckey, raisin)
 	for(var/client/C in GLOB.clients) // I hate this, but I'm not refactoring the cancer above this point.
-		if(lowertext(C.key) == lowertext(theykey))
+		if(LOWER_TEXT(C.key) == LOWER_TEXT(theykey))
 			to_chat(C, "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">Your PQ has been adjusted by [amt2change] by [key] for reason: [raisin]</span></span>")
 			return
 

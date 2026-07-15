@@ -17,10 +17,14 @@
 	drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
 	fillsounds = list('sound/items/fillcup.ogg')
 	poursounds = list('sound/items/fillbottle.ogg')
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 1
+	dyeable = TRUE
 	grid_width = 32
 	grid_height = 64
 	can_label_container = FALSE
+	item_weight = 732 GRAMS // I am getting a ton of conflicting information in this tbh
 	fancy = TRUE
 
 /obj/item/reagent_containers/glass/bottle/waterskin/Initialize()
@@ -42,15 +46,16 @@
 	name = "purifying waterskin"
 	desc = "Bronze tubes spiral about from the mouth of this waterskin in complex, dizzying patterns."
 	icon_state = "water-purifier"
+	item_weight = 1.34 KILOGRAMS
 	var/filtered_reagents = list(/datum/reagent/water/gross) // List of liquids it turns into drinkable water
 
 /obj/item/reagent_containers/glass/bottle/waterskin/purifier/Initialize()
 	. = ..()
 	filtered_reagents = typecacheof(filtered_reagents)
 
-/obj/item/reagent_containers/glass/bottle/waterskin/purifier/on_reagent_change(changetype)
-	. = ..()
-	cleanwater()
+// Still uses COMSIG_REAGENTS_HOLDER_UPDATED signal but it's good enough
+/obj/item/reagent_containers/glass/bottle/waterskin/purifier/on_reagent_change(datum/reagents/holder, ...)
+	INVOKE_ASYNC(src, PROC_REF(cleanwater))
 
 /obj/item/reagent_containers/glass/bottle/waterskin/purifier/proc/cleanwater()
 	// If there is dirty water inside the device, clean it!

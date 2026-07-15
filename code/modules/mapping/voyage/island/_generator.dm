@@ -3,7 +3,7 @@
 	var/size_y = 100
 	var/datum/island_biome/biome
 	var/turf/water_turf = /turf/open/water/ocean
-	var/turf/deep_water_turf = /turf/open/water/ocean/deep
+	var/turf/deep_water_turf = /turf/open/water/ocean/abyss
 	var/turf/wall_turf = /turf/closed/mineral/random
 	var/island_threshold = 0.25
 	var/beach_width = 2
@@ -647,7 +647,7 @@
 			var/chosen = pickweight(valid_fauna)
 			if(chosen)
 				var/mob/living/mob = new chosen(T)
-				mob.faction |= "islander"
+				mob.add_faction("islander")
 				SSisland_mobs.register_mob(mob)
 
 

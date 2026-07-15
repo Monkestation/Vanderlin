@@ -18,7 +18,7 @@
 	/// Type of organ DNA that this organ will create.
 	var/organ_dna_type = /datum/organ_dna
 	/// Draw icon as overlays from the acessory or bodypart icons
-	var/use_mob_sprite_as_obj_sprite = TRUE
+	var/use_mob_sprite_as_obj_sprite = FALSE
 
 /// Gets organ description for when its attached to a bodypart.
 /obj/item/organ/proc/get_bodypart_desc()
@@ -93,16 +93,8 @@
  * owner_species - species, needed to return the mutant slot as true or false. stomach set to null means it shouldn't have one.
  * owner_mob - for more specific checks, like nightmares.
  */
-/obj/item/organ/proc/get_availability(datum/species/owner_species)
+/obj/item/organ/proc/get_availability(datum/species/owner_species, mob/living/carbon/owner_mob)
 	return slot in owner_species.organs
-
-/// Called before organs are replaced in regenerate_organs with new ones
-/obj/item/organ/proc/before_organ_replacement(obj/item/organ/replacement)
-	SHOULD_CALL_PARENT(TRUE)
-
-	// If we're being replace with an identical type we should take organ damage
-	if(replacement.type == type)
-		replacement.setOrganDamage(damage)
 
 /// Sets an accessory type and optionally colors too.
 /obj/item/organ/proc/set_accessory_type(new_accessory_type, colors)
@@ -145,3 +137,51 @@
 
 /obj/item/organ/proc/update_accessory_colors()
 	return
+
+/**
+ * copy_organ
+ *
+ * Creates a new instance of this organ's type and copies over everything
+ * that affects how it looks (icon, accessory, bodypart overlay vars, side,
+ * and any chimeric organ overlays), without carrying over ownership, damage,
+ * germs, or blood state.
+ *
+ * Arguments:
+ * * copy_damage - if TRUE, also copies over damage/germ_level/current_blood.
+ *   Defaults to FALSE since this proc is meant for visual duplication.
+ */
+/obj/item/organ/proc/copy_organ(copy_damage = FALSE)
+	var/obj/item/organ/copy = new type()
+
+	// Base appearance
+	copy.icon = icon
+	copy.icon_state = icon_state
+	copy.color = color
+	copy.name = name
+	copy.desc = desc
+
+	// Sidedness (affects update_transform's mirroring)
+	copy.side = side
+	copy.unique_side_sprite = unique_side_sprite
+
+	// Bodypart overlay appearance
+	copy.bodypart_icon = bodypart_icon
+	copy.bodypart_icon_state = bodypart_icon_state
+	copy.bodypart_layer = bodypart_layer
+	copy.bodypart_emissive_blocker = bodypart_emissive_blocker
+	copy.use_mob_sprite_as_obj_sprite = use_mob_sprite_as_obj_sprite
+
+	// Sprite accessory (and its colors)
+	if(accessory_type)
+		copy.set_accessory_type(accessory_type, accessory_colors)
+
+	if(copy_damage)
+		copy.damage = damage
+		copy.germ_level = germ_level
+		copy.current_blood = current_blood
+		copy.organ_flags = organ_flags
+
+	copy.update_transform()
+	copy.update_appearance(UPDATE_OVERLAYS)
+
+	return copy

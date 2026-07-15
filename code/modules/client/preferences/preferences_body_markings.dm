@@ -8,7 +8,7 @@
 /datum/preferences/proc/handle_body_markings_topic(mob/user, href_list)
 	switch(href_list["preference"])
 		if("use_preset")
-			var/action = alert(usr, "Are you sure you want to use a preset (This will clear your existing markings)?", "Markings Preset", "Yes", "No")
+			var/action = tgui_alert(usr, "Are you sure you want to use a preset (This will clear your existing markings)?", "Markings Preset", list("Yes", "No"))
 			if(action && action == "Yes")
 				var/list/candidates = marking_sets_for_species(pref_species)
 				if(length(candidates) == 0)
@@ -34,7 +34,7 @@
 			if(new_color)
 				if(!body_markings[zone] || !body_markings[zone][name])
 					return
-				body_markings[zone][name] = sanitize_hexcolor(new_color, 6)
+				body_markings[zone][name] = sanitize_hexcolor(new_color, include_crunch = FALSE)
 		if("marking_move_up")
 			var/zone = href_list["key"]
 			var/name = href_list["name"]

@@ -78,6 +78,9 @@
 	///Age of byond account in days
 	var/account_age = -1
 
+	///do we cache sounds not persistant because rsc weirdness
+	var/cached_sounds = FALSE
+
 	preload_rsc = PRELOAD_RSC
 
 	var/atom/movable/screen/click_catcher/void
@@ -169,3 +172,11 @@
 
 	/// Loot panel for the client
 	var/datum/lootpanel/loot_panel
+
+	/**
+	 * Assoc list with all the active maps - when a screen obj is added to
+	 * a map, it's put in here as well.
+	 *
+	 * Format: list(<mapname> = list(/atom/movable/screen))
+	 */
+	var/list/screen_maps = list()

@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 	var/preset = "matthios"
 	var/forced_preset = "" // If set, force a specific preset instead of randomizing.
+	headprice = 36
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/Initialize()
 	. = ..()
@@ -25,13 +26,13 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	AddComponent(/datum/component/ai_aggro_system)
 	is_silent = TRUE
 	var/head = get_bodypart(BODY_ZONE_HEAD)
-	RegisterSignal(head, COMSIG_MOB_DISMEMBER, PROC_REF(handle_drop_limb))
+	RegisterSignal(head, COMSIG_CARBON_DISMEMBER, PROC_REF(handle_drop_limb))
 
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/Destroy()
 	var/head = get_bodypart(BODY_ZONE_HEAD)
 	if(head)
-		UnregisterSignal(head, COMSIG_MOB_DISMEMBER)
+		UnregisterSignal(head, COMSIG_CARBON_DISMEMBER)
 	return ..()
 
 /// Snowflake DK behavior for decaps. Yes, they turn to dust prior to decaps.

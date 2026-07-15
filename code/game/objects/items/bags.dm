@@ -16,6 +16,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	component_type = /datum/component/storage/concrete/grid/sack
+	item_weight = 150 GRAMS
 
 /obj/item/storage/sack/examine(mob/user)
 	. = ..()
@@ -107,6 +108,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/sack/meat
+	item_weight = 200 GRAMS
 
 /obj/item/storage/meatbag/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -157,6 +159,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/handbasket
+	item_weight = 300 GRAMS
 
 /obj/item/storage/handbasket/update_overlays()
 	. = ..()

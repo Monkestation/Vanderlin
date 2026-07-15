@@ -5,6 +5,7 @@
 	sound = null
 
 	school = SCHOOL_TRANSMUTATION
+	spell_flags = SPELL_UNETCHABLE
 
 	charge_required = FALSE
 	has_visual_effects = FALSE
@@ -82,7 +83,7 @@
 	matrix = M
 	user = U
 
-/datum/spell_interface/Destroy(force, ...)
+/datum/spell_interface/Destroy(force)
 	matrix = null
 	user = null
 	window.close()

@@ -3,6 +3,7 @@
 #define CTYPE_COPP "c"
 #define CTYPE_INQU "i"
 #define CTYPE_ANCI "a"
+#define CTYPE_WOOD "w"
 #define MAX_COIN_STACK_SIZE 20
 
 /obj/item/coin
@@ -17,6 +18,7 @@
 	sellprice = 0
 	static_price = TRUE
 	simpleton_price = TRUE
+	item_weight = 23 GRAMS
 
 	COOLDOWN_DECLARE(flip_cd)
 	var/heads_tails = TRUE
@@ -25,10 +27,19 @@
 	var/quantity = 1
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
+	var/pellet_type = null
+
+/obj/item/coin/get_carry_weight(atom/carrier)
+	. = item_weight * quantity
 
 /obj/item/coin/on_consume(mob/living/eater)
 	. = ..()
+	eater.extra_mob_weight += get_carry_weight(eater)
 	eater.sellprice += quantity * sellprice
+
+/obj/item/coin/on_anti_consume(mob/living/eater)
+	eater.extra_mob_weight -= get_carry_weight(eater)
+	eater.sellprice -= quantity * sellprice
 
 /obj/item/coin/Initialize(mapload, coin_amount)
 	. = ..()
@@ -73,6 +84,8 @@
 						spawned_type = /obj/item/coin/inqcoin
 					if(CTYPE_ANCI)
 						spawned_type = /obj/item/coin/copper
+					if(CTYPE_WOOD)
+						spawned_type = /obj/item/coin/wood
 					else
 						return // Don't destroy coins into copper
 
@@ -109,6 +122,9 @@
 	if(isobserver(user))
 		. += span_info("[quantity_to_words(quantity)] [denomination] ([get_real_price()] mammon)")
 		return
+
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= SKILL_LEVEL_NOVICE)
+		. += span_info("It looks like you could rig this up to be fired as ammunition.")
 
 	if(HAS_TRAIT(user, TRAIT_COIN_ILLITERATE))
 		if(quantity <= 1)
@@ -276,7 +292,7 @@
 	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
 /obj/item/coin/proc/rig_coin(mob/user)
-	var/outcome = alert(user, "What will you rig the next coin flip to?","XYLIX","Heads","Tails","Play fair")
+	var/outcome = tgui_alert(user, "What will you rig the next coin flip to?","XYLIX", list("Heads","Tails","Play fair"))
 	if(QDELETED(src) || !user.is_holding(src))
 		return
 	switch(outcome)
@@ -297,6 +313,25 @@
 		INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return TRUE
 
+	//turn coins into pellets! fucking fuck whoever snowflaked coins quantity...
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= 10)
+		//crafting timer
+		to_chat(user, span_notice("You start rigging up [src] to be fired as ammunition..."))
+		playsound(src, 'sound/foley/lockrattle.ogg', 100, TRUE, -2)
+		if(!do_after(user, 3 SECONDS, src))
+			to_chat(user, span_warning("You stop rigging up [src]."))
+			return
+
+		quantity -= 6
+		if(!quantity)
+			qdel(src)
+			return
+
+		var/obj/item/ammo_casing/caseless/pelletshot/coin/new_pellet = new pellet_type(get_turf(user))
+		user.put_in_hands(new_pellet)
+		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+
+
 /obj/item/coin/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -316,6 +351,8 @@
 				spawned_type = /obj/item/coin/silver
 			if(CTYPE_INQU)
 				spawned_type = /obj/item/coin/inqcoin
+			if(CTYPE_WOOD)
+				spawned_type = /obj/item/coin/wood
 			else
 				spawned_type = /obj/item/coin/copper
 	if(spawned_type)
@@ -386,15 +423,17 @@
 	else
 		desc = ""
 
-/obj/item/coin/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/coin))
-		var/obj/item/coin/G = I
-		if(item_flags & IN_STORAGE)
-			merge(G, user)
-		else
-			G.merge(src, user)
-		return
-	return ..()
+/obj/item/coin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/coin))
+		return NONE
+
+	var/obj/item/coin/coin = tool
+	if(item_flags & IN_STORAGE)
+		merge(coin, user)
+	else
+		coin.merge(src, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 //GOLD
 /obj/item/coin/gold
@@ -404,6 +443,8 @@
 	sellprice = 10
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
+	item_weight = 9 GRAMS
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenar
 
 
 // SILVER
@@ -414,6 +455,9 @@
 	sellprice = 5
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
+	item_weight = 11 GRAMS
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zil
+
 
 // COPPER
 /obj/item/coin/copper
@@ -423,6 +467,7 @@
 	sellprice = 1
 	base_type = CTYPE_COPP
 	plural_name = "zennies"
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenny
 
 /obj/item/coin/copper/pile/Initialize(mapload, coin_amount)
 	. = ..()
@@ -473,9 +518,24 @@
 		heads_tails = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/coin/wood
+	name = "chip"
+	icon = 'icons/obj/orphanage.dmi'
+	icon_state = "w1"
+	sellprice = 0
+	base_type = CTYPE_WOOD
+	plural_name = "chips"
+	item_weight = 3 GRAMS
+
+/obj/item/coin/wood/pile/Initialize(mapload, coin_amount)
+	. = ..()
+	if(!coin_amount)
+		set_quantity(rand(4,14))
+
 #undef CTYPE_GOLD
 #undef CTYPE_SILV
 #undef CTYPE_COPP
 #undef CTYPE_INQU
 #undef CTYPE_ANCI
+#undef CTYPE_WOOD
 #undef MAX_COIN_STACK_SIZE

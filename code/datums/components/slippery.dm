@@ -13,7 +13,7 @@
 	lube_flags = _lube_flags
 	callback = _callback
 	slip_probability = _slip_probability
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ENTERED), PROC_REF(Slip))
+	RegisterSignals(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ENTERED), PROC_REF(Slip))
 	RegisterSignal(parent, COMSIG_ITEM_WEARERCROSSED, PROC_REF(Slip_on_wearer))
 
 /datum/component/slippery/UnregisterFromParent()
@@ -24,7 +24,7 @@
 	var/mob/victim = AM
 	if(!prob(slip_probability))
 		return
-	if(istype(victim) && !(victim.movement_type & (FLOATING|FLYING)) && victim.slip(knockdown_time, parent, lube_flags, paralyze_time, force_drop_items) && callback)
+	if(istype(victim) && !(victim.movement_type & (MOVETYPES_NOT_TOUCHING_GROUND)) && victim.slip(knockdown_time, parent, lube_flags, paralyze_time, force_drop_items) && callback)
 		callback.Invoke(victim)
 
 /datum/component/slippery/proc/Slip_on_wearer(datum/source, atom/movable/AM, mob/living/crossed)

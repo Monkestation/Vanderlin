@@ -36,10 +36,10 @@
 	if(current_user)
 		src.current_user = WEAKREF(current_user)
 
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(clean_up))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(clean_up))
 
 	var/obj/item/I = parent
 	if(outline_color)
@@ -64,10 +64,10 @@
 	if(refresh_count != -1 && refresh_count <= 0)
 		clean_up(TRUE)
 		return
-	if(refresh_skill && !GET_MOB_SKILL_VALUE_OLD(holder, refresh_skill))
+	if(refresh_skill && !GET_MOB_SKILL_VALUE(holder, refresh_skill))
 		clean_up(TRUE)
 		return
-	if(skill_threshold && GET_MOB_SKILL_VALUE_OLD(holder, refresh_skill) < skill_threshold)
+	if(skill_threshold && GET_MOB_SKILL_VALUE(holder, refresh_skill) < skill_threshold)
 		clean_up(TRUE)
 		return
 
