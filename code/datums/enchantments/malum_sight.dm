@@ -161,11 +161,11 @@
 	layer = 18
 
 /obj/effect/temp_visual/magicore
+	name = "magic ore"
+	desc = "I feel some energy pulsating from that wall..."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "emppulse"
 	dir = NORTH
-	name = "magic ore"
-	desc = "I feel some energy pulsating from that wall..."
 	randomdir = FALSE
 	duration = 1 SECONDS
 	layer = 18
