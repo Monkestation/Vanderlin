@@ -80,6 +80,26 @@
 	if(prob(1)) //extremely rare just like court mage
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
+/datum/job/advclass/mercenary/sellmage/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	// Hat selection (visual equipment)
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+	)
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+
+	// Robe selection (visual equipment)
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+	)
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
+
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
 	shirt = /obj/item/clothing/armor/gambeson
@@ -97,25 +117,3 @@
 		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/manapot = 1
 	)
-
-/datum/outfit/mercenary/sellmage/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(visuals_only)
-		return
-
-	// Hat selection (visual equipment)
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-	)
-	equipped_human.select_equippable(equipped_human, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
-
-	// Robe selection (visual equipment)
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-	)
-	equipped_human.select_equippable(equipped_human, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")

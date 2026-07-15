@@ -44,6 +44,22 @@
 	spawned.grant_inspiration()
 	new /mob/living/simple_animal/hostile/retaliate/saiga/tame/saddled(get_turf(spawned))
 
+/datum/job/advclass/combat/vaquero/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	var/obj/item/clothing/cloak/poncho/ponck = spawned.get_item_by_slot(ITEM_SLOT_CLOAK)
+
+	var/list/colors = GLOB.peasant_dyes | GLOB.noble_dyes
+
+	var/color_selection = tgui_input_list(player_client, "What color was my poncho?	", "The Poncho", colors, "Winestain Red")
+	if(!color_selection)
+		return
+
+	if(ponck.loc != spawned)
+		return
+
+	ponck.color = colors[color_selection]
+
 /datum/outfit/vaquero
 	name = "Vaquero"
 	head = /obj/item/clothing/head/bardhat
@@ -59,15 +75,12 @@
 	beltr = /obj/item/rope
 	neck = /obj/item/clothing/neck/chaincoif
 	mask = /obj/item/alch/herb/rosa
+	cloak = /obj/item/clothing/cloak/poncho
 
 /datum/outfit/vaquero/post_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
-	if(visuals_only)
-		return
 
-	var/list/colors = GLOB.peasant_dyes|GLOB.noble_dyes
+	var/list/colors = GLOB.peasant_dyes | GLOB.noble_dyes
 
-	var/color_selection = tgui_input_list(H, "What color was my poncho?	", "The Poncho", colors, "Winestain Red")
-	var/obj/item/clothing/cloak/poncho/ponck = new()
-	ponck.color = colors[color_selection]
-	H.equip_to_slot(ponck, ITEM_SLOT_CLOAK, TRUE)
+	var/obj/item/clothing/cloak/poncho/ponck = H.get_item_by_slot(ITEM_SLOT_CLOAK)
+	ponck.color = pick_assoc(colors)
