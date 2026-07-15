@@ -9,7 +9,8 @@
 									//0 here does NOT disable the event, it just makes it extremely unlikely
 
 	var/earliest_start = 10 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 10 mins
-	var/latest_start = 4 HOURS //The latest world.time that an event can start (round-duration in deciseconds) default: 4 hrs
+	/// The latest world.time that an event can start
+	var/latest_start = INF
 	var/min_players = 0				//The minimum amount of alive, non-AFK human players on server required to start the event.
 
 	/// How many times this event has occured
