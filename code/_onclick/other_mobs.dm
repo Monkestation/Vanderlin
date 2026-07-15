@@ -652,12 +652,13 @@
 	throw_at(target, range, 1, spin = FALSE, callback = CALLBACK(src, PROC_REF(jump_ended), extra_tile))
 
 /mob/living/proc/jump_ended(extra_tile)
-	if(QDELETED(src) || !isopenturf(loc))
+	if(QDELETED(src) || isopenspace(loc))
 		return
 
-	var/turf/open/open_turf = loc
-	if(open_turf.landsound)
-		playsound(open_turf, open_turf.landsound, 100, FALSE)
+	if(isopenturf(loc))
+		var/turf/open/open_turf = loc
+		if(open_turf.landsound)
+			playsound(open_turf, open_turf.landsound, 100, FALSE)
 
 	if(extra_tile)
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)

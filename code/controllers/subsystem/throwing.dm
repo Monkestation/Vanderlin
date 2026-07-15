@@ -231,8 +231,11 @@ SUBSYSTEM_DEF(throwing)
 		if(QDELETED(thrownthing)) //throw_impact can delete things, such as glasses smashing
 			return //deletion should already be handled by on_thrownthing_qdel()
 
-	if (callback)
+	if(callback)
 		callback.Invoke()
+		// Same can happen in the callback
+		if(QDELETED(thrownthing))
+			return
 
 	if(!thrownthing?.currently_z_moving) // I don't think you can zfall while thrown but hey, just in case.
 		var/turf/T = get_turf(thrownthing)
