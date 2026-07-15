@@ -307,7 +307,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	If the human mob has the prerequisite culture, they will see the corresponding string. \
 	For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have : \
 	list(list("Vanderlin", "This is a vanderlinian description."), list("Grenzelhoft", "this is a grenzelhoftian description"))
-	var/culture_desc[][2] = list(list("no_culture", "description"))
+	var/culture_desc[][2] = list(list("no_culture", "description")) // defined twice because we need the len and the default text helps.
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -1617,9 +1617,15 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if (ishuman(user) && culture_desc[1][1] != "no_culture") // make sure the mob has a culture to check for + avoid unecessary controls.
 		var/mob/living/carbon/human/humanexaminer = user
 		for(var/culture_range = 1, culture_range <= culture_desc.len, culture_range++)
-			if(humanexaminer.culture.name == culture_desc[culture_range][1])
+			if(HAS_TRAIT(humanexaminer, TRAIT_CULTURAL_KNOWLEDGE))
+				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You've confided in the world's cultures.", humanexaminer.culture.name)]</summary>"
+				str += culture_desc[culture_range][2]
+				str += "</details>"
+				. += span_info(str)
+			else if(humanexaminer.culture.name == culture_desc[culture_range][1])
 				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [humanexaminer.culture.name]", humanexaminer.culture.name)]</summary>"
 				str += culture_desc[culture_range][2]
+				str += "</details>"
 				. += span_info(str)
 
 	if(!get_precursor_data(src))
