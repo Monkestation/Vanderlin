@@ -1,4 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - bugfix: "Fixed GMT safe oath being impossible to trigger"

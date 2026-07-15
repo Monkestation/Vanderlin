@@ -981,6 +981,22 @@
 
 	regenerate_icons()
 
+/mob/living/carbon/human/proc/copy_visible_organs(mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+
+	for(var/obj/item/organ/organ in internal_organs)
+		if(!organ.visible_organ)
+			continue
+		organ.Remove(src)
+		qdel(organ)
+
+	for(var/obj/item/organ/organ in target.internal_organs)
+		if(!organ.visible_organ)
+			continue
+		var/obj/item/organ/new_organ = organ.copy_organ()
+		new_organ.Insert(src)
+
 /mob/living/carbon/human/proc/copy_bodyparts(mob/living/carbon/human/target)
 	var/mob/living/carbon/human/self = src
 	var/list/target_missing = target.get_missing_limbs()

@@ -51,6 +51,7 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
+	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
 	var/datum/species/species = spawned.dna?.species
 	if(species)
@@ -62,6 +63,7 @@
 	if(.)
 		spawned.hud_used?.shutdown_bloodpool()
 		spawned.maxbloodpool = initial(spawned.maxbloodpool)
+		qdel(spawned.GetComponent(/datum/component/bloodpool_regen))
 
 /datum/job/advclass/sacrestant
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
