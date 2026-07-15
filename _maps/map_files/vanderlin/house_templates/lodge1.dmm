@@ -14,6 +14,10 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"i" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
 "k" = (
 /obj/structure/sign/property_sign/claim,
 /turf/closed/wall/mineral/decowood,
@@ -63,7 +67,7 @@ Z
 (2,1,1) = {"
 Z
 K
-a
+i
 W
 h
 b
