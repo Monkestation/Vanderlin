@@ -66,7 +66,7 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.dna?.species)
-			return "<span class='red'>Another [lowertext(H.dna.species.name)] perished.</span>"
+			return "<span class='red'>Another [LOWER_TEXT(H.dna.species.name)] perished.</span>"
 	return desc
 
 /datum/stress_event/viewdismember

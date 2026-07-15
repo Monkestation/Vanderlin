@@ -1278,7 +1278,7 @@
 			if(!name)
 				return
 			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(lowertext(HL.real_name) == lowertext(name))
+				if(LOWER_TEXT(HL.real_name) == LOWER_TEXT(name))
 					fixation = WEAKREF(HL)
 					target = HL
 					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)

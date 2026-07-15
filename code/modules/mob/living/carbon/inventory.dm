@@ -260,7 +260,7 @@
 	for(var/obj/item/worn_item in get_equipped_items())
 		if(worn_item.slot_flags & exluded_equipment_slots)
 			continue
-		covered_flags |= worn_item.body_parts_covered
+		covered_flags |= (worn_item.body_parts_covered & ~worn_item.body_parts_access_allowed)
 
 	// NB: we have to convert covered_flags via cover_flags2body_zones here
 	// instead of converting location via body_zones2cover_flags

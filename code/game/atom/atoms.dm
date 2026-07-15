@@ -534,7 +534,7 @@
 					var/list/full_reagents = list()
 					for(var/datum/reagent/R in reagents.reagent_list)
 						if(R.volume > 0)
-							full_reagents += "[lowertext(R.name)]"
+							full_reagents += "[LOWER_TEXT(R.name)]"
 					if(length(full_reagents))
 						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)

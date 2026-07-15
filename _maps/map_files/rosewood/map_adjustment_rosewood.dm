@@ -40,6 +40,5 @@
 	)
 
 	migrant_blacklist = list(
-		/datum/migrant_wave/crusade,
 		/datum/migrant_wave/grenzelhoft_visit,
 	)
