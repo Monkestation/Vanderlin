@@ -15,7 +15,7 @@
     . = ..()
 
     if(!owner.check_stamina(5))
-        owner.balloon_alert("You are too exhausted to clench your fists.")
+        owner.balloon_alert("exhausted!")
         return
 
     owner.adjust_stamina(5)
