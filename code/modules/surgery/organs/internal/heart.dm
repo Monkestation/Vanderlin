@@ -10,8 +10,8 @@
 	now_fixed = span_info("My heart begins to beat again.")
 	high_threshold_cleared = span_info("The pain in my chest has died down, and my breathing becomes more relaxed.")
 	organ_volume = 0.5
-	max_blood_storage = 1000
-	current_blood = 1000
+	max_blood_storage = 600
+	current_blood = 600
 	blood_req = 5
 	oxygen_req = 5
 	nutriment_req = 3
@@ -143,7 +143,7 @@
 	update_appearance()
 	if(owner && !old_beating)
 		to_chat(owner, span_userdanger("My [name] beats again!"))
-	current_blood = max(current_blood, 120)
+	current_blood = max(current_blood, 60)
 	consider_processing()
 	return TRUE
 

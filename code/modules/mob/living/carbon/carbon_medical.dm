@@ -5,7 +5,6 @@
 		recent_heart_pump = list("[world.time]" = (0.3 + CEILING(heymedic, 0.1)))
 	else
 		recent_heart_pump = list("[world.time]" = (0.3 + CEILING(forced_pump, 0.1)))
-	return TRUE
 
 /mob/living/carbon/proc/check_pulse(mob/living/carbon/user)
 	. = TRUE
