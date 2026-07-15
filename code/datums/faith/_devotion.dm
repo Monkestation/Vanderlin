@@ -237,22 +237,7 @@
 	devotion_class = DEVOTION_CLASS_CHURCHLING
 
 /datum/devotion/proc/make_oracle()
-	devotion = 300
-	progression = CLERIC_REQ_3
-	passive_devotion_gain = 1
-	/// We're overriding the list.
-	miracles = list(
-		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/healing/greater/noc),
-		CLERIC_T1 = /datum/action/cooldown/spell/status/invisibility,
-		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
-		CLERIC_T3 = list(/datum/action/cooldown/spell/projectile/moonlit_dagger, /datum/action/cooldown/spell/projectile/moonstrike),
-	)
-	miracles_extra += list(
-		/datum/action/cooldown/spell/revive_noc,
-		/datum/action/cooldown/spell/cure_rot,
-		/datum/action/cooldown/spell/diagnose/holy,
-	)
-	devotion_class = DEVOTION_CLASS_ACOLYTE // Equal to priest, but unique to Noc. Changing patron will reset to Acolyte tier.
+	make_acolyte()
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
