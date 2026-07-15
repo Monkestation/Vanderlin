@@ -24,7 +24,7 @@
 
 	if (!destination_platform)
 		return FALSE
-
+	tram.set_travelling(FALSE)
 	tram.tram_travel(destination_platform)
 	tram.callback_platform = destination_platform
 

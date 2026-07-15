@@ -15,13 +15,18 @@
 
 	skill_min = SKILL_LEVEL_APPRENTICE
 
-	any_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
 
 /datum/surgery_operation/basic/cure_rot/get_recommended_tool()
 	return TOOL_CAUTERY
 
 /datum/surgery_operation/basic/cure_rot/get_default_radial_image()
 	return image(/obj/item/weapon/surgery/cautery)
+
+/datum/surgery_operation/basic/cure_rot/any_required_strings()
+	. = ..()
+	. += "the patient must have a rotten limb or a setting infection"
+	. += "the patient may be a deadite"
 
 /datum/surgery_operation/basic/cure_rot/state_check(mob/living/patient)
 	if(!iscarbon(patient))

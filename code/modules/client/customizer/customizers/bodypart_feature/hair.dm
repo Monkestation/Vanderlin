@@ -368,7 +368,12 @@
 		/datum/sprite_accessory/hair/head/tapstersbun,
 		/datum/sprite_accessory/hair/head/thescientist,
 		/datum/sprite_accessory/hair/head/sleek,
-		/datum/sprite_accessory/hair/head/delver
+		/datum/sprite_accessory/hair/head/delver,
+		/datum/sprite_accessory/hair/head/mean_girl,
+		/datum/sprite_accessory/hair/head/muzzy,
+		/datum/sprite_accessory/hair/head/baothan,
+		/datum/sprite_accessory/hair/head/scabbard,
+		/datum/sprite_accessory/hair/head/dreamer
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton
@@ -387,6 +392,7 @@
 		/datum/sprite_accessory/hair/head/triton/gorgon,
 		/datum/sprite_accessory/hair/head/triton/lion,
 		/datum/sprite_accessory/hair/head/triton/betta,
+		/datum/sprite_accessory/hair/head/triton/susie
 	)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/medicator
@@ -473,6 +479,11 @@
 		/datum/sprite_accessory/hair/facial/pinnacle,
 		/datum/sprite_accessory/hair/facial/enchanter,
 		/datum/sprite_accessory/hair/facial/curlypom,
+		/datum/sprite_accessory/hair/facial/facial_genius,
+		/datum/sprite_accessory/hair/facial/facial_curled,
+		/datum/sprite_accessory/hair/facial/facial_general,
+		/datum/sprite_accessory/hair/facial/facial_teadrinker,
+		/datum/sprite_accessory/hair/facial/facial_pacifist
 	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari

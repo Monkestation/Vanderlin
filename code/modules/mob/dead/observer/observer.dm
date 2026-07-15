@@ -301,7 +301,16 @@ Works together with spawning an observer, noted above.
 		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = TRUE
 		ghost.key = key
+		RegisterSignal(ghost, COMSIG_MOB_LOGOUT, PROC_REF(break_scry))
 		return ghost
+
+/mob/proc/break_scry()
+	return
+
+/mob/dead/observer/break_scry()
+	client.view_size.setDefault(client.view_size.getScreenSize())
+	mind.current_ghost = null
+	mind.current.ckey = ckey(key)
 
 /*
 This is the proc mobs get to turn into a ghost. Forked from ghostize due to compatibility issues.

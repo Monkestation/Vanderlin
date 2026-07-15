@@ -1,8 +1,0 @@
-author: "SSensum13"
-delete-after: True
-changes:
-  - rscadd: "Added 2 more vices (weak and frail), that gives you STR and CON debuffs."
-  - bugfix: "Fixed Unlucky vice that was not giving you a stat debuff."
-  - balance: "Now if you hug a person before or after they fall asleep - they will not scream, if they have Nitemares vice."
-  - qol: "Backstory boon now have better clarity on how much stats it gives and what value acts as clamp."
-  - balance: "Combat backstories now give you 20 skills, instead of 10, while still being clamped to not go higher than 20."

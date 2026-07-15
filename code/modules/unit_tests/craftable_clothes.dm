@@ -22,6 +22,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
+		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -76,6 +77,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/neck/gorget/gold/king,
 		/obj/item/clothing/head/helmet/visored/gold/king,
 		/obj/item/clothing/shirt/robe/hag,
+		/obj/item/clothing/head/helmet/heavy/necked/cadwyn,
+		/obj/item/clothing/cloak/cadwyn,
 
 		/obj/item/clothing/head/helmet/heavy/dwarven,
 		/obj/item/clothing/head/helmet/heavy/dwarven/smith,

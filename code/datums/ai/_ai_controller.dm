@@ -57,6 +57,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	var/list/movement_path
 	///Cooldown for JPS movement, how often we're allowed to try making a new path
 	COOLDOWN_DECLARE(repath_cooldown)
+	///Cooldown for loot scanning
+	COOLDOWN_DECLARE(loot_scan_cooldown)
 	///AI paused time
 	var/paused_until = 0
 
@@ -75,6 +77,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	/// Make sure you hook update_get_able_to_run() in setup_get_able_to_run() to whatever parameters changing that you added
 	/// Otherwise we will not pay attention to them changing
 	var/able_to_run = FALSE
+	///this is just so we can pause/unpause ai from arbitrary signals
+	var/list/pause_signals
 
 /datum/ai_controller/New(atom/new_pawn)
 	change_ai_movement_type(ai_movement)
@@ -430,7 +434,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if(!("[pawn_turf?.z]" in GLOB.weatherproof_z_levels))
 		if(SSmapping.level_has_any_trait(pawn_turf?.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
 			GLOB.weatherproof_z_levels |= "[pawn_turf?.z]"
-	if("[pawn_turf?.z]" in GLOB.weatherproof_z_levels)
+	if(!(pawn_turf?.z in SSmobs.town_z))
 		if(!length(SSmobs.clients_by_zlevel[pawn_turf?.z]))
 			return AI_STATUS_OFF
 	if(!able_to_run)
@@ -581,6 +585,21 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	paused_until = world.time + time
 	update_able_to_run()
 	addtimer(CALLBACK(src, PROC_REF(update_able_to_run)), time)
+
+/datum/ai_controller/proc/PauseUntil(signal, time = 1 HOURS)
+	UnpauseAI()
+	paused_until = world.time + time
+	update_able_to_run()
+	addtimer(CALLBACK(src, PROC_REF(update_able_to_run)), time)
+	LAZYADD(pause_signals, signal)
+	RegisterSignal(pawn, signal, PROC_REF(UnpauseAI))
+
+/datum/ai_controller/proc/UnpauseAI()
+	for(var/signal in pause_signals)
+		LAZYREMOVE(pause_signals, signal)
+		UnregisterSignal(pawn, signal)
+	PauseAi(0)
+
 
 /datum/ai_controller/proc/modify_cooldown(datum/ai_behavior/behavior, new_cooldown)
 	behavior_cooldowns[behavior.type] = new_cooldown
