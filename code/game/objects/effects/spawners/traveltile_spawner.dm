@@ -159,14 +159,16 @@
 	name = "To the Bog Witch"
 	aportalid = "gallow_bog"
 	aportalgoesto = "bog_gallow"
-	required_trait = TRAIT_GALLOWBAND_SECRETS
+	required_trait = TRAIT_GALLOWBAND
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/bog_gallowband
 	name = "To the Gallowband"
 	aportalid = "bog_gallow"
 	aportalgoesto = "gallow_bog"
-	required_trait = TRAIT_GALLOWBAND_SECRETS
+	required_trait = TRAIT_GALLOWBAND
+	can_gain_with_sight = FALSE
+	can_gain_by_walking = FALSE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/courtagent_sewers

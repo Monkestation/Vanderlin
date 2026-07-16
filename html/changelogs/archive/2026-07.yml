@@ -276,3 +276,13 @@
   - bugfix: readded the alchemical flask to the merchant's buyable packs
   realforest2001:
   - bugfix: fixed noc device being invisible.
+2026-07-16:
+  MissyNym:
+  - map: Adds one candle each to the Lodge customizable rooms.
+  - code_imp: New trait for Gallowband mobs
+  - bugfix: Adjusted Gallowband/Bog Witch traveltile to point to new Gallowband trait
+      so it appears and is usable
+  realforest2001:
+  - bugfix: Fixed invisible decorations making people invisible.
+  - bugfix: Apothecary Regen Cycle now heals damage again instead of causing it.
+  - rscdel: Removes malaguero aura

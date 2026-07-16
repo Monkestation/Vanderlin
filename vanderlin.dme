@@ -1079,7 +1079,6 @@
 #include "code\datums\components\lifesteal.dm"
 #include "code\datums\components\liquid_interactions.dm"
 #include "code\datums\components\magnetic_catch.dm"
-#include "code\datums\components\malaguero.dm"
 #include "code\datums\components\martyrweapon.dm"
 #include "code\datums\components\mechanic_tip.dm"
 #include "code\datums\components\minion_tracker.dm"
