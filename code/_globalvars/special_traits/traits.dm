@@ -1083,6 +1083,8 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
+	character.AddComponent(/datum/component/theme_music)
+
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
 	greet_text = span_notice("Miracles that heal others scorch me, and i feel as if i am being dreagged to the underworld.")
