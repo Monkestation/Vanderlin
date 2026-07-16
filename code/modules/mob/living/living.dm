@@ -2921,7 +2921,7 @@
 			ADD_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 			log_combat(src, src, "died")
 			add_client_colour(/datum/client_colour/monochrome/death)
-	if(!can_hear())
+	if(HAS_TRAIT(src, TRAIT_DEAF))
 		stop_sound_channel(CHANNEL_AMBIENCE)
 	refresh_looping_ambience()
 
