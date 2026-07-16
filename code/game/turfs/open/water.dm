@@ -320,15 +320,15 @@
 /turf/open/water/proc/determine_swimming_properties()
 	switch(water_height)
 		if(WATER_HEIGHT_ANKLE)
-			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 2.5
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 1
 			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
 			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
 		if(WATER_HEIGHT_SHALLOW)
-			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 5
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 2.5
 			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
 			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
 		if(WATER_HEIGHT_DEEP)
-			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 7.5
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 5
 			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 5
 			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
 		if(WATER_HEIGHT_FULL)
