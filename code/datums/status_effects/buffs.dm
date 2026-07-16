@@ -6,8 +6,9 @@
 
 /datum/status_effect/wish_granters_gift //Fully revives after ten seconds.
 	id = "wish_granters_gift"
-	duration = 50
+	duration = 5 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/wish_granters_gift
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/wish_granters_gift/on_apply()
 	to_chat(owner, "<span class='notice'>Death is not my end! The Wish Granter's energy suffuses you, and you begin to rise...</span>")
@@ -25,7 +26,7 @@
 
 /datum/status_effect/sword_spin
 	id = "Bastard Sword Spin"
-	duration = 50
+	duration = 5 SECONDS
 	tick_interval = 8
 	alert_type = null
 
@@ -58,7 +59,7 @@
 //Being on fire will suppress this healing
 /datum/status_effect/fleshmend
 	id = "fleshmend"
-	duration = 100
+	duration = 10 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/fleshmend
 
 /datum/status_effect/fleshmend/tick()
@@ -112,6 +113,7 @@
 /datum/status_effect/regenerative_core
 	id = "Regenerative Core"
 	duration = 1 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = /atom/movable/screen/alert/status_effect/regenerative_core
 
@@ -131,6 +133,7 @@
 /datum/status_effect/antimagic
 	id = "antimagic"
 	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	examine_text = span_notice("SUBJECTPRONOUN seem to be covered in a dull, grey aura.")
 
 /datum/status_effect/antimagic/on_apply()

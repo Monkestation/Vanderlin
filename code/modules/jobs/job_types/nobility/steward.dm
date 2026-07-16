@@ -43,6 +43,7 @@
 	honorary_f = "Lady"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/steward
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_SEEPRICES,

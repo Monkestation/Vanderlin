@@ -143,3 +143,9 @@
 		return
 	detail_color = GLOB.noble_dyes[choice]
 	update_appearance(UPDATE_ICON)
+
+//............... Cadwyn gloves ............... //
+/obj/item/clothing/gloves/plate/cadwyn
+	name = "cadwyn gauntlets"
+	desc = "Metal gauntlets wrapped in the chains the Order is named for. Let no bite or claw reach you."
+	icon_state = "cadwyngauntlets"

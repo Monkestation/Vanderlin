@@ -735,6 +735,24 @@
 	enchant(/datum/enchantment/silver)
 
 //................ Silver ............... //
+/obj/item/weapon/mace/silver
+	name = "silver mace"
+	desc = "A fanged silver mace, used to ward away creatures of the nite."
+	icon_state = "silvermace"
+	force = DAMAGE_MACE + 1
+	force_wielded = DAMAGE_MACE_WIELD
+	wdefense = GOOD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 80
+	item_weight = 1.4 KILOGRAMS
+
+/obj/item/weapon/mace/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"

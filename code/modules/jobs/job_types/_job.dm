@@ -106,6 +106,8 @@
 	var/list/allowed_patrons
 	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
 	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt/proven)
+	/// Whether or not this role is exclusively for Tennite patrons //AND// can be heretics via triumph.
+	var/tennite_triumph_exclusive = FALSE
 
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
@@ -521,17 +523,24 @@
 		return parent_job.remove_job(spawned)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
+	var/datum/patron/old_patron = spawned.patron
+
+	if(tennite_triumph_exclusive && !spawned.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		spawned.set_patron(/datum/patron/divine/astrata, TRUE)
+		to_chat(spawned, span_warning("I've followed the word of [old_patron.display_name ? old_patron.display_name : old_patron] in my younger years, \
+		but the path I tread todae proves only The Ten may rule!"))
+		return
+
 	if(!length(allowed_patrons))
 		return
 
-	var/datum/patron/old_patron = spawned.patron
 	if(old_patron?.type in allowed_patrons)
 		return
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
 	for(var/god in GLOB.patron_list)
-		if(!(god in allowed_patrons))
+		if(!(god in allowed_patrons) || (god in banned_patrons))
 			continue
 		all_gods |= god
 		var/datum/patron/P = GLOB.patron_list[god]

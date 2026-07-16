@@ -94,5 +94,6 @@
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
 		/obj/item/weapon/knife/hunting = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/key/hunter = 1
 	)
