@@ -2,7 +2,6 @@
 	name = "Cooking"
 	desc = "Represents your character's ability to cook food. The higher your skill in Cooking, the better the food you can cook and the more you can make with your ingredients."
 	category = SKILL_CATEGORY_DOMESTIC
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		STAT_INTELLIGENCE = -4,
 	)
@@ -15,7 +14,6 @@
 /datum/attribute/skill/craft/cooking/preparation
 	name = "Preparation"
 	desc = "Represents your character's ability to prepare raw ingredients for cooking, trimming, peeling, chopping, portioning, and readying components so that the actual craft of cooking can begin. A skilled preparer works quickly and wastes little, and their knife never slips."
-	governing_attribute = STAT_SPEED
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -3,
 	)
@@ -27,7 +25,6 @@
 /datum/attribute/skill/craft/cooking/baking
 	name = "Baking"
 	desc = "Represents your character's ability to bake breads, pastries, and other oven-cooked goods. A skilled baker can produce everything from simple loaves to elaborate confections."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -4,
 	)
@@ -40,7 +37,6 @@
 /datum/attribute/skill/craft/cooking/confectionery
 	name = "Confectionery"
 	desc = "Represents your character's ability to work with sugar, chocolate, and other sweet ingredients. A skilled confectioner can produce candies, toffees, and elaborate sugar-work that borders on artistry."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -4,
 	)
@@ -53,7 +49,6 @@
 /datum/attribute/skill/craft/cooking/grilling
 	name = "Grilling"
 	desc = "Represents your character's ability to cook over open flame. A practiced grillmaster knows how to coax the best from meat and fish, trading subtlety for the honest char of fire."
-	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -4,
 	)
@@ -66,7 +61,6 @@
 /datum/attribute/skill/craft/cooking/fine_cuisine
 	name = "Fine Cuisine"
 	desc = "Represents your character's mastery of elevated cookery, precise technique, rare ingredients, and dishes fit for noble tables. Few ever reach true mastery, but those who do are worth their weight in gold."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -6,
 	)
@@ -79,7 +73,6 @@
 /datum/attribute/skill/craft/cooking/preservation
 	name = "Preservation"
 	desc = "Represents your character's knowledge of curing, salting, smoking, and pickling. A capable preserver can stretch a season's harvest through the harshest winter."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -3,
 	)
@@ -92,7 +85,6 @@
 /datum/attribute/skill/craft/cooking/brewing
 	name = "Brewing"
 	desc = "Represents your character's ability to ferment grains and honey into ales, meads, and simple beers. A seasoned brewer understands the temperament of yeast, the patience of fermentation, and the difference between a drink that warms the belly and one that ruins the batch."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking = -3,
 	)
@@ -105,7 +97,6 @@
 /datum/attribute/skill/craft/cooking/winemaking
 	name = "Winemaking"
 	desc = "Represents your character's ability to produce wine from fruit and grape. More sensitive than brewing and less forgiving of error, a true vintner can read a harvest and know already what it will become."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking/brewing = -4,
 	)
@@ -118,7 +109,6 @@
 /datum/attribute/skill/craft/cooking/distilling
 	name = "Distilling"
 	desc = "Represents your character's ability to distill fermented liquids into spirits and liquors. Distilling demands precision, too little heat and nothing comes, too much and the whole affair becomes dangerous. Those who master it produce spirits of remarkable potency and value."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking/brewing = -5,
 	)
@@ -131,7 +121,6 @@
 /datum/attribute/skill/craft/cooking/cheesemaking
 	name = "Cheesemaking"
 	desc = "Represents your character's ability to produce cheese from milk and curds. A skilled cheesemaker knows the character of their cultures, the right pressure for the press, and how long to leave a wheel to age in the dark. Good cheese takes time. The best takes years."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/cooking/preservation = -4,
 	)
