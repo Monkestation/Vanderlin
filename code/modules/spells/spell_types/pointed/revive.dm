@@ -33,26 +33,27 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 
-	if(cast_on.stat != DEAD)
-		to_chat(owner, span_warning("There is no way to revive the living!"))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
-
-	if(cast_on.get_lux_status() != LUX_HAS_LUX)
-		to_chat(owner, span_warning("This filth cannot be revived by holy light!"))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
-
-	for(var/obj/item/bodypart/bodypart as anything in cast_on.bodyparts)
-		if(bodypart.skeletonized || HAS_TRAIT(bodypart, TRAIT_ROTTEN))
-			to_chat(owner, span_warning("The rotten are unsuitable."))
+	if(!(cast_on.mob_biotypes & MOB_UNDEAD))
+		if(cast_on.stat != DEAD)
+			to_chat(owner, span_warning("There is no way to revive the living!"))
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-	if(HAS_TRAIT(cast_on, TRAIT_NECRA_CURSE))
-		to_chat(owner, span_warning("Necra holds tight to this one."))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
+		if(cast_on.get_lux_status() != LUX_HAS_LUX)
+			to_chat(owner, span_warning("This filth cannot be revived by holy light!"))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
+
+		for(var/obj/item/bodypart/bodypart as anything in cast_on.bodyparts)
+			if(bodypart.skeletonized || HAS_TRAIT(bodypart, TRAIT_ROTTEN))
+				to_chat(owner, span_warning("The rotten are unsuitable."))
+				reset_spell_cooldown()
+				return . | SPELL_CANCEL_CAST
+
+		if(HAS_TRAIT(cast_on, TRAIT_NECRA_CURSE))
+			to_chat(owner, span_warning("Necra holds tight to this one."))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
 
 	for(var/obj/structure/fluff/psycross/S in view(5, owner))
 		target_cross = S
