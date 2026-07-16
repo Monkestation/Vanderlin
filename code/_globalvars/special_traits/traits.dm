@@ -577,7 +577,7 @@
 	weight = 25
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_quirk(/datum/quirk/vice/maniac)
+	character.add_quirk(/datum/quirk/vice/addiction/sadist)
 	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 

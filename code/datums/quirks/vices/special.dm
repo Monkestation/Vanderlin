@@ -61,7 +61,7 @@
 	name = "Pacifist"
 	desc = "I don't want to harm other living beings!"
 	point_value = 8
-	traits_to_add = (TRAIT_PACIFISM)
+	traits_to_add = list(TRAIT_PACIFISM)
 
 /datum/quirk/vice/pacifist/on_spawn()
 	if(!ishuman(owner))

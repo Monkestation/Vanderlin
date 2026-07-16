@@ -21,7 +21,7 @@
 /datum/status_effect/debuff/addiction/pyromaniac
 /datum/status_effect/debuff/addiction/kleptomaniac
 /datum/status_effect/debuff/addiction/godfearing
-/datum/status_effect/debuff/addiction/maniac
+/datum/status_effect/debuff/addiction/sadist
 /datum/status_effect/debuff/addiction/greedy
 
 /atom/movable/screen/alert/status_effect/debuff/addiction

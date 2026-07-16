@@ -524,8 +524,8 @@
 						record_featured_stat(FEATURED_STATS_CRIMINALS, thief)
 						record_round_statistic(STATS_ITEMS_PICKPOCKETED)
 						SEND_SIGNAL(src, COMSIG_PICKPOCKET_SUCCESS)
-					if(has_quirk(/datum/quirk/vice/kleptomaniac))
-						sate_addiction(/datum/quirk/vice/kleptomaniac)
+					if(has_quirk(/datum/quirk/vice/addiction/kleptomaniac))
+						sate_addiction(/datum/quirk/vice/addiction/kleptomaniac)
 				else
 					exp_to_gain /= 2
 					to_chat(thief, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))

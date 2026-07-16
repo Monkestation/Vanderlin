@@ -68,7 +68,7 @@
 /datum/quirk/peculiarity/ugly
 	name = "Ugly"
 	desc = "Your appearance turns heads... in all the wrong ways. With features ranging from unsightly to grotesque, you likely have yet to find anyone impressed with your looks."
-	traits_to_add = (TRAIT_UGLY)
+	traits_to_add = list(TRAIT_UGLY)
 
 /datum/quirk/peculiarity/ugly/on_spawn()
 	if(!ishuman(owner))

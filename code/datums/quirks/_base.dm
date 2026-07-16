@@ -135,7 +135,8 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 /// Called when the quirk is removed
 /datum/quirk/proc/on_remove()
 	SHOULD_CALL_PARENT(TRUE)
-	REMOVE_TRAITS_IN(owner, "[type]")
+	if(!QDELETED(owner))
+		REMOVE_TRAITS_IN(owner, "[type]")
 	return
 
 /// Called when you are examined
