@@ -25,6 +25,8 @@
 #define JOB_NEW_PLAYER_JOINABLE (1<<3)
 /// Whether the job can be displayed on the actors list
 #define JOB_SHOW_IN_ACTOR_LIST (1<<4)
+/// if we require a whitelist
+#define JOB_REQUIRE_WHITELIST (1<<5)
 
 #define ALL_FACTIONS list( \
 	FACTION_NONE, \

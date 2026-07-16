@@ -6,6 +6,15 @@
 ///From mob/living/carbon/human/suicide()
 #define COMSIG_HUMAN_SUICIDE_ACT "human_suicide_act"
 
+///Called when a carbon attempts to breath, before the breath has actually occurred
+#define COMSIG_CARBON_ATTEMPT_BREATHE "carbon_attempt_breathe"
+	// Prevents the breath
+	#define COMSIG_CARBON_BLOCK_BREATH (1 << 0)
+	/// Allow the breath but prevent inake, think losebreath
+	#define BREATHE_SKIP_BREATH (1<<1)
+///Called when a carbon breathes, before the breath has actually occurred
+#define COMSIG_CARBON_PRE_BREATHE "carbon_pre_breathe"
+
 ///from base of /mob/living/carbon/regenerate_limbs(): (excluded_limbs)
 #define COMSIG_CARBON_REGENERATE_LIMBS "living_regen_limbs"
 

@@ -41,6 +41,7 @@
 	)
 
 /datum/job/servant
+	is_quest_giver = TRUE
 	title = JOB_SERVANT
 	tutorial = "You are the faceless, nameless labor that keeps the royal court fed, washed, and attended to. \
 	You work your fingers to the bone nearly every dae, \
@@ -66,6 +67,9 @@
 
 	mind_traits = list(
 		TRAIT_ROYALSERVANT
+	)
+	traits = list(
+		TRAIT_CAREFUL_CHAIRS
 	)
 	book_type = /obj/item/recipe_book/cooking
 
@@ -144,7 +148,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/tapster
 
 	traits = list(
-		TRAIT_BOOZE_SLIDER
+		TRAIT_BOOZE_SLIDER,
+		TRAIT_CAREFUL_CHAIRS
 	)
 
 /datum/outfit/tapster

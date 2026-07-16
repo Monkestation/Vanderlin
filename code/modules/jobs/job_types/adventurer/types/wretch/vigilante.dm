@@ -28,7 +28,6 @@
 	total_positions = 10
 	roll_chance = 100
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
-	allowed_patrons = list(/datum/patron/inhumen/matthios)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vigilante
 
@@ -100,3 +99,7 @@
 		/obj/item/flint = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
+
+/datum/job/advclass/wretch/vigilante/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.set_patron(/datum/patron/inhumen/matthios)

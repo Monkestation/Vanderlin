@@ -11,18 +11,18 @@ SUBSYSTEM_DEF(skills)
 	var/list/all_skills = list()
 	///Static assoc list of levels (ints) - strings
 	var/list/level_names = list(
-		span_info("Weak"), \
-		span_info("Average"), \
-		span_biginfo("Skilled"), \
+		span_info("Novice"), \
+		span_info("Apprentice"), \
+		span_biginfo("Journeyman"), \
 		span_biginfo("Expert"), \
 		"<B>Master</B>", \
 		span_greentext("Legendary"))//This list is already in the right order, due to indexing
 	/// All level plain names without span
 	var/static/alist/level_names_plain = alist(
 		SKILL_RANK_NONE = "None",
-		SKILL_RANK_NOVICE = "Weak",
-		SKILL_RANK_APPRENTICE = "Average",
-		SKILL_RANK_JOURNEYMAN = "Skilled",
+		SKILL_RANK_NOVICE = "Novice",
+		SKILL_RANK_APPRENTICE = "Apprentice",
+		SKILL_RANK_JOURNEYMAN = "Journeyman",
 		SKILL_RANK_EXPERT = "Expert",
 		SKILL_RANK_MASTER = "Master",
 		SKILL_RANK_LEGENDARY = "Legendary",

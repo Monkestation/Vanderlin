@@ -154,7 +154,7 @@
 			for(var/choice_type in customizer.customizer_choices)
 				var/datum/customizer_choice/iter_choice = CUSTOMIZER_CHOICE(choice_type)
 				choice_list[iter_choice.name] = choice_type
-			var/chosen_input = input(user, "Choose your [lowertext(customizer.name)]:", "Character Preference")  as null|anything in choice_list
+			var/chosen_input = input(user, "Choose your [LOWER_TEXT(customizer.name)]:", "Character Preference")  as null|anything in choice_list
 			if(!chosen_input)
 				return
 			var/choice_type = choice_list[chosen_input]

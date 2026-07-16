@@ -3926,6 +3926,10 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/churchrough,
 /area/indoors/town/clinic_large)
+"ddS" = (
+/obj/structure/notice_board,
+/turf/open/floor/dirt,
+/area/under/town/sewer)
 "dey" = (
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/halls/s)
@@ -4320,10 +4324,6 @@
 	},
 /turf/open/floor/twig,
 /area/outdoors/town)
-"dzz" = (
-/obj/structure/bounty_board,
-/turf/open/floor/dirt,
-/area/under/town/sewer)
 "dzC" = (
 /obj/structure/mannequin/male/female,
 /obj/structure/fluff/railing/border,
@@ -6634,6 +6634,21 @@
 /obj/machinery/light/fueled/oven/south,
 /turf/open/floor/tile,
 /area/indoors/town/tavern)
+"fvl" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/inqarticles/indexer{
+	pixel_x = -4
+	},
+/obj/item/inqarticles/indexer{
+	pixel_x = 2
+	},
+/obj/item/speaker/inq,
+/obj/item/listeningdevice/inq,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/churchmarble/purple,
+/area/indoors/town/church/inquisition)
 "fvC" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/naturalstone,
@@ -13939,10 +13954,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
-"lWT" = (
-/obj/structure/fake_machine/contractledger,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/tavern)
 "lXl" = (
 /obj/machinery/anvil,
 /obj/item/weapon/hammer/iron,
@@ -16441,14 +16452,6 @@
 /obj/structure/fluff/walldeco/gear,
 /turf/open/openspace,
 /area/indoors/town/clocktower)
-"oei" = (
-/obj/effect/landmark/bounty_location{
-	location_name = "Beside the Church Gate";
-	name = "Beside the Church Gate";
-	completion_range = 5
-	},
-/turf/open/floor/dirt,
-/area/outdoors/town)
 "oeV" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "Guest1Passage"
@@ -16538,14 +16541,6 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/tile,
 /area/under/town/sewer)
-"oiZ" = (
-/obj/effect/landmark/bounty_location{
-	location_name = "Beside the Town's Dungeon";
-	name = "Beside the Town's Dungeon";
-	completion_range = 5
-	},
-/turf/open/floor/cobble/mossy,
-/area/under/cavewet)
 "ojk" = (
 /obj/item/toy/cards/deck/syndicate{
 	pixel_x = -4;
@@ -17238,16 +17233,6 @@
 	dir = 1
 	},
 /area/outdoors/town/roofs)
-"oUS" = (
-/obj/structure/fluff/railing/wood,
-/obj/machinery/light/fueled/lanternpost/fixed,
-/obj/effect/landmark/bounty_location{
-	location_name = "End of the Cargo Docks";
-	name = "End of the Cargo Docks";
-	completion_range = 5
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/town)
 "oWq" = (
 /obj/structure/bookcase/random/legends,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -21841,14 +21826,6 @@
 /obj/item/clothing/head/padded/deathshroud,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/church)
-"tiu" = (
-/obj/effect/landmark/bounty_location{
-	location_name = "Infront of the Clinic";
-	name = "Infront of the Clinic";
-	completion_range = 5
-	},
-/turf/open/floor/twig,
-/area/outdoors/town)
 "tiI" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -22884,21 +22861,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/lord/center,
 /area/under/town/sewer)
-"tWJ" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/inqarticles/indexer{
-	pixel_x = -4
-	},
-/obj/item/inqarticles/indexer{
-	pixel_x = 2
-	},
-/obj/item/speakerinq,
-/obj/item/listeningdevice,
-/obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_y = -32
-	},
-/turf/open/floor/churchmarble/purple,
-/area/indoors/town/church/inquisition)
 "tWW" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/spiral,
@@ -25350,14 +25312,6 @@
 "wpV" = (
 /obj/item/natural/stone,
 /turf/open/floor/dirt/road,
-/area/under/town/sewer)
-"wqa" = (
-/obj/effect/landmark/bounty_location{
-	location_name = "Across the River by the Bounty Board";
-	name = "Across the River by the Bounty Board";
-	completion_range = 5
-	},
-/turf/open/floor/cobblerock,
 /area/under/town/sewer)
 "wqp" = (
 /turf/open/floor/carpet/red,
@@ -43924,7 +43878,7 @@ eFB
 wCB
 gBo
 heL
-tWJ
+fvl
 bMn
 dIg
 dIg
@@ -47580,7 +47534,7 @@ ssh
 mrC
 rVz
 uQY
-dzz
+ddS
 qBk
 qBk
 uDq
@@ -51017,7 +50971,7 @@ dIg
 dIg
 dIg
 nfD
-wqa
+qBk
 hXW
 dIg
 dIg
@@ -93804,7 +93758,7 @@ mfG
 mfG
 mfG
 hdv
-oei
+bJI
 bJI
 bJI
 hDR
@@ -111714,7 +111668,7 @@ deJ
 bLB
 keX
 bLB
-oiZ
+bLB
 keX
 bLB
 keX
@@ -113640,7 +113594,7 @@ jXg
 not
 iHi
 iHi
-oUS
+gIB
 jXg
 jXg
 jXg
@@ -122513,7 +122467,7 @@ mGB
 iHi
 ssI
 dcH
-tiu
+sQG
 iHi
 iHi
 iHi
@@ -128797,7 +128751,7 @@ iHi
 tpZ
 jXg
 ueR
-lWT
+bNv
 bNv
 bNv
 hOo

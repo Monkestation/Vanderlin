@@ -61,8 +61,9 @@ GLOBAL_PROTECT(no_child_icons)
 
 
 /mob/living/carbon/human/update_body()
-	dna?.species?.handle_body(src) //create destroy moment
-	..()
+	if(!(status_flags & BUILDING_ORGANS))
+		dna?.species?.handle_body(src)
+		return ..()
 
 /mob/living/carbon/human/proc/update_organ_colors()
 	var/list/colors = color_key_source_list_from_carbon(src)
@@ -175,6 +176,14 @@ GLOBAL_PROTECT(no_child_icons)
 					isnum(wound.armdam_override) ? wound.armdam_override : ARM_DAMAGE_LAYER,
 					wound.use_blood_color
 				)
+		if(BP.get_cut() && BP.is_artery_torn())
+			wound_overlays["s1"] = list(
+				DAMAGE_LAYER,
+				LEG_DAMAGE_LAYER,
+				ARM_DAMAGE_LAYER,
+				TRUE
+			)
+
 		for(var/wound_overlay in wound_overlays)
 			var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[wound_overlay]", -wound_overlays[wound_overlay][1])
 			damage_overlays += damage_overlay
@@ -540,7 +549,11 @@ GLOBAL_PROTECT(no_child_icons)
 		//add sleeve overlays, then offset
 		var/list/sleeves = list()
 		if(wear_wrists.sleeved && armsindex > 0)
-			sleeves = get_sleeves_layer(wear_wrists,armsindex,WRISTSLEEVE_LAYER)
+			var/obj/item/clothing/wrists/wrists_item = wear_wrists
+			var/wrists_sleeves_layer = WRISTSLEEVE_LAYER
+			if(istype(wrists_item) && wrists_item.alternate_sleeve_layer)
+				wrists_sleeves_layer = wrists_item.alternate_sleeve_layer
+			sleeves = get_sleeves_layer(wear_wrists, armsindex, wrists_sleeves_layer)
 
 		if(sleeves)
 			for(var/mutable_appearance/S as anything in sleeves)
@@ -1440,17 +1453,13 @@ generate/load female uniform sprites matching all previously decided variables
 		var/mutable_appearance/boob_overlay = mutable_appearance(file2use, "[t_state]_boob", -layer2use)
 		standing.overlays.Add(boob_overlay)
 
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon(file2use, "[t_state][get_detail_tag()]"), -layer2use)
-		pic.appearance_flags = RESET_COLOR
-		if(get_detail_color())
-			pic.color = get_detail_color()
+	var/detail_tag = get_detail_tag()
+	if(detail_tag)
+		var/mutable_appearance/pic = mutable_appearance(icon(file2use, "[t_state][detail_tag]"), -layer2use, color = get_detail_color(), appearance_flags = RESET_COLOR)
 		standing.overlays.Add(pic)
+
 		if(!isinhands && do_boob)
-			pic = mutable_appearance(icon(file2use, "[t_state]_boob[get_detail_tag()]"), -layer2use)
-			pic.appearance_flags = RESET_COLOR
-			if(get_detail_color())
-				pic.color = get_detail_color()
+			pic = mutable_appearance(icon(file2use, "[t_state]_boob[detail_tag]"), -layer2use, color = get_detail_color(), appearance_flags = RESET_COLOR)
 			standing.overlays.Add(pic)
 
 	if(!isinhands && GET_ATOM_BLOOD_DNA_LENGTH(src))
@@ -1540,11 +1549,10 @@ generate/load female uniform sprites matching all previously decided variables
 		r_sleeve.color = I.color
 		r_sleeve.alpha = I.alpha
 		sleeves += r_sleeve
-		if(I.get_detail_tag())
-			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
+		var/item_detail = I.get_detail_tag()
+		if(item_detail)
+			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][item_detail]"), layer = -layer2use, color = I.get_detail_color())
 //          pic.appearance_flags = RESET_COLOR
-			if(I.get_detail_color())
-				pic.color = I.get_detail_color()
 			sleeves += pic
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_r[used]
@@ -1564,11 +1572,10 @@ generate/load female uniform sprites matching all previously decided variables
 		l_sleeve.color = I.color
 		l_sleeve.alpha = I.alpha
 		sleeves += l_sleeve
-		if(I.get_detail_tag())
-			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][I.get_detail_tag()]"), layer=-layer2use)
+		var/item_detail = I.get_detail_tag()
+		if(item_detail)
+			var/mutable_appearance/pic = mutable_appearance(icon(I.sleeved, "[used][item_detail]"), layer = -layer2use, color = I.get_detail_color())
 //          pic.appearance_flags = RESET_COLOR
-			if(I.get_detail_color())
-				pic.color = I.get_detail_color()
 			sleeves += pic
 		if(GET_ATOM_BLOOD_DNA_LENGTH(I))
 			var/icon/blood_overlay = bloody_l[used]

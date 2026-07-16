@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX 33
+#define SAVEFILE_VERSION_MAX 35
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -45,23 +45,21 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 /datum/preferences/proc/update_preferences(current_version, savefile/S)
 	if(current_version < 29)
-		key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
+		key_bindings = (read_preference(/datum/preference/toggle/hotkeys)) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
 		parent.update_movement_keys()
-		to_chat(parent, "<span class='danger'>Empty keybindings, setting default to [hotkeys ? "Hotkey" : "Classic"] mode</span>")
+		to_chat(parent, "<span class='danger'>Empty keybindings, setting default to [read_preference(/datum/preference/toggle/hotkeys) ? "Hotkey" : "Classic"] mode</span>")
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 22)
-		job_preferences = list() //It loaded null from nonexistant savefile field.
-
-		//Can't use SSjob here since this happens right away on login
+		job_preferences = list()
 		for(var/datum/job/J as anything in subtypesof(/datum/job))
 			var/new_value
 			if(new_value)
 				job_preferences[initial(J.title)] = new_value
 
 	if(current_version < 24)
-		if (!(underwear in GLOB.underwear_list))
-			underwear = "Nude"
+		if(!(read_preference(/datum/preference/choiced/underwear) in GLOB.underwear_list))
+			write_preference(GLOB.preference_entries[/datum/preference/choiced/underwear], "Nude")
 
 	if(current_version < 25)
 		randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
@@ -73,38 +71,51 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			randomise[RANDOM_SPECIES] = TRUE
 
 	if(current_version < 30)
-		S["voice_color"] >> voice_color
+		var/raw_voice_color
+		S["voice_color"] >> raw_voice_color
+		write_preference(GLOB.preference_entries[/datum/preference/color/voice_color], raw_voice_color)
 
-	// Restructuring of skin tones and culture addition
 	if(current_version < 31)
-		culture = /datum/culture/universal/ambiguous
-		WRITE_FILE(S["culture"], culture)
-
+		write_preference(GLOB.preference_entries[/datum/preference/choiced/culture], /datum/culture/universal/ambiguous)
 		var/list/assoc_skins = pref_species.get_skin_list()
 		var/list/skins = list()
-
 		for(var/skin in assoc_skins)
 			skins += assoc_skins[skin]
-
-		if(!(skin_tone in skins))
-			skin_tone = pick_assoc(assoc_skins)
-			WRITE_FILE(S["skin_tone"], skin_tone)
+		if(!(read_preference(/datum/preference/choiced/skin_tone) in skins))
+			write_preference(GLOB.preference_entries[/datum/preference/choiced/skin_tone], pick_assoc(assoc_skins))
 
 	if(current_version < 32)
 		var/species_name = S["species"]
 		for(var/species_id in GLOB.species_list)
 			var/datum/species/species_type = GLOB.species_list[species_id]
 			if(species_type::name == species_name)
-				pref_species = new species_type()
-				WRITE_FILE(S["species"], pref_species.id)
+				write_preference(GLOB.preference_entries[/datum/preference/choiced/species], species_type)
+				break
 
 	if(current_version < 33)
-		switch(voice_type)
+		var/vtype = read_preference(/datum/preference/choiced/voice_type)
+		switch(vtype)
 			if("Masculine")
-				voice_type = VOICE_TYPE_MASC
+				write_preference(GLOB.preference_entries[/datum/preference/choiced/voice_type], VOICE_TYPE_MASC)
 			if("Feminine")
-				voice_type = VOICE_TYPE_FEM
-		WRITE_FILE(S["voice_type"], voice_type)
+				write_preference(GLOB.preference_entries[/datum/preference/choiced/voice_type], VOICE_TYPE_FEM)
+
+	if(current_version < 34)
+		var/list/flat = list()
+		for(var/key in list(
+			"real_name","gender","pronouns","voice_type","age",
+			"origin","domhand","alignment","phobia","selected_accent",
+			"family","setspouse","gender_choice",
+			"species","selected_patron","culture",
+			"skin_tone","eye_color","voice_color","detail_color","underwear_color",
+			"underwear","undershirt","accessory","detail","socks",
+			"flavortext","flavortext_display",
+			"ooc_notes","ooc_notes_display",
+			"ooc_extra","ooc_extra_link","headshot_link",
+			"joblessrole"
+		))
+			S[key] >> flat[key]
+		migrate_character_flat_to_preference(flat)
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
@@ -122,106 +133,37 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 	S.cd = "/"
 	var/needs_update = savefile_needs_update(S)
-	if(needs_update == -2)		//fatal, can't load any data
+	if(needs_update == -2)
 		return FALSE
 
-	//general preferences
-	S["asaycolor"]			>> asaycolor
-	S["ooccolor"]			>> ooccolor
-	S["oocpronouns"]		>> oocpronouns
+	// Non-preference fields
 	S["admin_ghost_icon"]	>> admin_ghost_icon
-	S["ui_theme"]			>> ui_theme
-	S["char_theme"]			>> char_theme
 	S["lastchangelog"]		>> lastchangelog
-	S["UI_style"]			>> UI_style
-	S["hotkeys"]			>> hotkeys
-	S["showrolls"]			>> showrolls
-	S["max_chat_length"]	>> max_chat_length
-	S["see_chat_non_mob"] 	>> see_chat_non_mob
-	S["tgui_fancy"]			>> tgui_fancy
-	S["tgui_lock"]			>> tgui_lock
-	S["buttons_locked"]		>> buttons_locked
-	S["windowflash"]		>> windowflashing
 	S["be_special"] 		>> be_special
 	S["triumphs"]			>> triumphs
-	S["musicvol"]			>> musicvol
-	S["anonymize"]			>> anonymize
-	S["crt"]				>> crt
-	S["mastervol"]			>> mastervol
 	S["lastclass"]			>> lastclass
-
-
 	S["default_slot"]		>> default_slot
-	S["chat_toggles"]		>> chat_toggles
-	S["toggles"]			>> toggles
-	S["toggles_maptext"]	>> toggles_maptext
-	S["toggles_gameplay"] >> toggles_gameplay
-	S["ghost_form"]			>> ghost_form
-	S["ghost_orbit"]		>> ghost_orbit
-	S["ghost_accs"]			>> ghost_accs
-	S["ghost_others"]		>> ghost_others
-	S["preferred_map"]		>> preferred_map
 	S["ignoring"]			>> ignoring
-	S["ghost_hud"]			>> ghost_hud
-	S["inquisitive_ghost"]	>> inquisitive_ghost
-	S["uses_glasses_colour"]>> uses_glasses_colour
-	S["clientfps"]			>> clientfps
-	S["parallax"]			>> parallax
-	S["ambientocclusion"]	>> ambientocclusion
-	S["auto_fit_viewport"]	>> auto_fit_viewport
-	S["widescreenpref"]	    >> widescreenpref
 	S["menuoptions"]		>> menuoptions
-	S["enable_tips"]		>> enable_tips
-	S["tip_delay"]			>> tip_delay
-	S["ui_scale"]			>> ui_scale
-	S["multi_char_ready"] >> multi_char_ready
 	S["owned_loadout_items"] >> owned_loadout_items
-	S["next_special_trait"] >> next_special_trait
-
-	S["multi_ready_slots"] >> multi_ready_slots
+	S["next_special_trait"]	>> next_special_trait
+	S["multi_ready_slots"]	>> multi_ready_slots
 	if(!islist(multi_ready_slots))
 		multi_ready_slots = list()
-
-	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
-
 	if(!islist(owned_loadout_items))
 		owned_loadout_items = list()
 
-	if(!char_theme)
-		char_theme = "grimshart"
-	//try to fix any outdated data if necessary
-	if(needs_update >= 0)
-		update_preferences(needs_update, S)		//needs_update = savefile_version if we need an update (positive integer)
+	// preference player fields
+	preference_load_from_savefile(S, PREF_PLAYER)
 
-	//Sanitize
-	asaycolor = sanitize_color(sanitize_hexcolor(asaycolor, default = initial(asaycolor)))
-	ooccolor = sanitize_color(sanitize_hexcolor(ooccolor, default = initial(ooccolor)))
+	if(needs_update >= 0)
+		update_preferences(needs_update, S)
+
+	// Sanitize non-preference fields
 	lastchangelog = sanitize_text(lastchangelog, initial(lastchangelog))
-	UI_style = sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
-	hotkeys = sanitize_integer(hotkeys, 0, 1, initial(hotkeys))
-	showrolls = sanitize_integer(showrolls, 0, 1, initial(showrolls))
-	max_chat_length = sanitize_integer(max_chat_length, 1, CHAT_MESSAGE_MAX_LENGTH, initial(max_chat_length))
-	see_chat_non_mob = sanitize_integer(see_chat_non_mob, 0, 1, initial(see_chat_non_mob))
-	tgui_fancy = sanitize_integer(tgui_fancy, 0, 1, initial(tgui_fancy))
-	tgui_lock = sanitize_integer(tgui_lock, 0, 1, initial(tgui_lock))
-	buttons_locked = sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
-	windowflashing = sanitize_integer(windowflashing, 0, 1, initial(windowflashing))
 	default_slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
-	toggles = sanitize_integer(toggles, 0, SHORT_REAL_LIMIT, initial(toggles))
-	chat_toggles = sanitize_integer(chat_toggles, 0, SHORT_REAL_LIMIT, initial(chat_toggles))
-	toggles_maptext = sanitize_integer(toggles_maptext, 0, SHORT_REAL_LIMIT, initial(toggles_maptext))
-	toggles_gameplay = sanitize_integer(toggles_gameplay, 0, SHORT_REAL_LIMIT, initial(toggles_gameplay))
-	clientfps = sanitize_integer(clientfps, 0, 1000, 0)
-	parallax = sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, null)
-	ambientocclusion = sanitize_integer(ambientocclusion, 0, 1, initial(ambientocclusion))
-	auto_fit_viewport = sanitize_integer(auto_fit_viewport, 0, 1, initial(auto_fit_viewport))
-	widescreenpref = sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
-	ghost_form = sanitize_inlist(ghost_form, GLOB.ghost_forms, initial(ghost_form))
-	ghost_orbit = sanitize_inlist(ghost_orbit, GLOB.ghost_orbits, initial(ghost_orbit))
-	ghost_accs = sanitize_inlist(ghost_accs, GLOB.ghost_accs_options, GHOST_ACCS_DEFAULT_OPTION)
-	ghost_others = sanitize_inlist(ghost_others, GLOB.ghost_others_options, GHOST_OTHERS_DEFAULT_OPTION)
-	menuoptions	= SANITIZE_LIST(menuoptions)
+	menuoptions = SANITIZE_LIST(menuoptions)
 	be_special = SANITIZE_LIST(be_special)
 	key_bindings = sanitize_islist(key_bindings, list())
 
@@ -229,8 +171,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	load_tickets(S)
 
-	//ROGUETOWN
-	parallax = PARALLAX_INSANE
 
 	return TRUE
 
@@ -242,64 +182,28 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 	S.cd = "/"
 
-	parallax = PARALLAX_INSANE
+	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)
 
-	WRITE_FILE(S["version"] , SAVEFILE_VERSION_MAX)		//updates (or failing that the sanity checks) will ensure data is not invalid at load. Assume up-to-date
-
-	//general preferences
-	WRITE_FILE(S["asaycolor"], asaycolor)
+	// Non-preference fields
 	WRITE_FILE(S["triumphs"], triumphs)
-	WRITE_FILE(S["musicvol"], musicvol)
-	WRITE_FILE(S["anonymize"], anonymize)
 	WRITE_FILE(S["admin_ghost_icon"], admin_ghost_icon)
-	WRITE_FILE(S["ui_theme"], ui_theme)
-	WRITE_FILE(S["char_theme"], char_theme)
-	WRITE_FILE(S["crt"], crt)
 	WRITE_FILE(S["lastclass"], lastclass)
-	WRITE_FILE(S["mastervol"], mastervol)
-	WRITE_FILE(S["ooccolor"], ooccolor)
 	WRITE_FILE(S["lastchangelog"], lastchangelog)
-	WRITE_FILE(S["UI_style"], UI_style)
-	WRITE_FILE(S["hotkeys"], hotkeys)
-	WRITE_FILE(S["showrolls"], showrolls)
-	WRITE_FILE(S["max_chat_length"], max_chat_length)
-	WRITE_FILE(S["see_chat_non_mob"], see_chat_non_mob)
-	WRITE_FILE(S["tgui_fancy"], tgui_fancy)
-	WRITE_FILE(S["tgui_lock"], tgui_lock)
-	WRITE_FILE(S["buttons_locked"], buttons_locked)
-	WRITE_FILE(S["windowflash"], windowflashing)
 	WRITE_FILE(S["be_special"], be_special)
 	WRITE_FILE(S["default_slot"], default_slot)
-	WRITE_FILE(S["toggles"], toggles)
-	WRITE_FILE(S["chat_toggles"], chat_toggles)
-	WRITE_FILE(S["toggles_maptext"], toggles_maptext)
-	WRITE_FILE(S["toggles_gameplay"], toggles_gameplay)
-	WRITE_FILE(S["ghost_form"], ghost_form)
-	WRITE_FILE(S["ghost_orbit"], ghost_orbit)
-	WRITE_FILE(S["ghost_accs"], ghost_accs)
-	WRITE_FILE(S["ghost_others"], ghost_others)
-	WRITE_FILE(S["preferred_map"], preferred_map)
-	WRITE_FILE(S["oocpronouns"], oocpronouns)
 	WRITE_FILE(S["ignoring"], ignoring)
-	WRITE_FILE(S["ghost_hud"], ghost_hud)
-	WRITE_FILE(S["inquisitive_ghost"], inquisitive_ghost)
-	WRITE_FILE(S["uses_glasses_colour"], uses_glasses_colour)
-	WRITE_FILE(S["clientfps"], clientfps)
-	WRITE_FILE(S["parallax"], parallax)
-	WRITE_FILE(S["ambientocclusion"], ambientocclusion)
-	WRITE_FILE(S["auto_fit_viewport"], auto_fit_viewport)
-	WRITE_FILE(S["widescreenpref"], widescreenpref)
 	WRITE_FILE(S["menuoptions"], menuoptions)
-	WRITE_FILE(S["enable_tips"], enable_tips)
-	WRITE_FILE(S["tip_delay"], tip_delay)
-	WRITE_FILE(S["ui_scale"], ui_scale)
 	WRITE_FILE(S["key_bindings"], key_bindings)
-	WRITE_FILE(S["multi_char_ready"], multi_char_ready)
 	WRITE_FILE(S["multi_ready_slots"], multi_ready_slots)
 	WRITE_FILE(S["owned_loadout_items"], owned_loadout_items)
 	WRITE_FILE(S["next_special_trait"], next_special_trait)
+
+	// preference player fields
+	preference_save_to_savefile(S, PREF_PLAYER)
+
 	save_tickets(S)
 	return TRUE
+
 
 /datum/preferences/proc/_load_species(S)
 	var/species_type = GLOB.species_list[S["species"]]
@@ -307,42 +211,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		species_type = /datum/species/human/northern
 	pref_species = new species_type()
 
-/datum/preferences/proc/_load_culinary_preferences(S)
-	var/list/loaded_culinary_preferences
-	S["culinary_preferences"] >> loaded_culinary_preferences
-	if(loaded_culinary_preferences)
-		culinary_preferences = loaded_culinary_preferences
-		validate_culinary_preferences()
-	else
-		reset_culinary_preferences()
 
 /datum/preferences/proc/_load_appearence(S)
-	S["real_name"] >> real_name
-	S["gender"] >> gender
-	S["domhand"] >> domhand
-	S["age"] >> age
-	S["eye_color"] >> eye_color
-	S["voice_color"] >> voice_color
-	S["skin_tone"] >> skin_tone
-	S["culture"] >> culture
-	S["underwear"] >> underwear
-	S["underwear_color"] >> underwear_color
-	S["accessory"] >> accessory
-	S["detail"] >> detail
 	S["randomise"] >> randomise
-	S["family"] >> family
-	S["gender_choice"] >> gender_choice
-	S["setspouse"] >> setspouse
-	S["selected_accent"] >> selected_accent
 
-	voice_color = sanitize_hexcolor(voice_color, include_crunch = FALSE)
-
-	// We load our list, but override everything to FALSE to stop a "tainted" save from making it random again.
+	// Override randomise flags to prevent tainted saves.
 	randomise[RANDOM_BODY] = FALSE
 	randomise[RANDOM_BODY_ANTAG] = FALSE
 	randomise[RANDOM_UNDERWEAR] = FALSE
 	randomise[RANDOM_SKIN_TONE] = FALSE
 	randomise[RANDOM_EYE_COLOR] = FALSE
+
 
 /datum/preferences/proc/load_character(slot)
 	if(!path)
@@ -358,108 +237,65 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	slot = sanitize_integer(slot, 1, max_save_slots, initial(default_slot))
 	if(slot != default_slot)
 		default_slot = slot
-		WRITE_FILE(S["default_slot"] , slot)
+		WRITE_FILE(S["default_slot"], slot)
 
 	S.cd = "/character[slot]"
 	var/needs_update = savefile_needs_update(S)
-	if(needs_update == -2)		//fatal, can't load any data
+	if(needs_update == -2)
 		return FALSE
 
-	//Species
+	// Systems with their own load logic
 	_load_species(S)
-
 	load_triumph_shop_character_data(S)
-
-	_load_culinary_preferences(S)
-
-	//Character
-	_load_appearence(S)
-
 	load_quirks(S)
 
-	if(!culture)
-		culture = src::culture
+	// preference character fields
+	preference_load_from_savefile(S, PREF_CHARACTER)
 
-	var/patron_typepath
-	S["selected_patron"] >> patron_typepath
-	if(patron_typepath)
-		selected_patron = GLOB.patrons_by_type[patron_typepath]
+	// Non-preference character fields
+	_load_appearence(S)
 
-	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patrons_by_type[default_patron]
+	if(!read_preference(/datum/preference/choiced/culture))
+		write_preference(GLOB.preference_entries[/datum/preference/choiced/culture], /datum/culture/universal/ambiguous)
 
-	//Custom names
+	// Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
-		var/savefile_slot_name = custom_name_id + "_name" //TODO remove this
+		var/savefile_slot_name = custom_name_id + "_name"
 		S[savefile_slot_name] >> custom_names[custom_name_id]
 
-	//Jobs
-	S["joblessrole"] >> joblessrole
-
-	//Load prefs
+	// Non-preference jobs/loadout
 	S["job_preferences"] >> job_preferences
 
-	//Load headshot link
-	S["headshot_link"]			>> headshot_link
-	if(!is_valid_headshot_link(null, headshot_link, TRUE))
-		headshot_link = null
-
-	S["pronouns"] >> pronouns
-	S["voice_type"] >> voice_type
-
-	//Load flavor text
-	S["flavortext"] >> flavortext
-	S["flavortext_display"]	>> flavortext_display
-	S["ooc_notes"] >> ooc_notes
-	S["ooc_notes_display"] >> ooc_notes_display
-	S["ooc_extra"] >> ooc_extra
-	S["ooc_extra_link"] >> ooc_extra_link
-
-	//try to fix any outdated data if necessary
-	if(needs_update >= 0)
-		update_character(needs_update, S)		//needs_update == savefile_version if we need an update (positive integer)
-
-	//Sanitize
-
-	real_name = reject_bad_name(real_name)
-	gender = sanitize_gender(gender)
-	if(!real_name)
-		real_name = random_unique_name(gender)
-
-	for(var/custom_name_id in GLOB.preferences_custom_names)
-		var/namedata = GLOB.preferences_custom_names[custom_name_id]
-		custom_names[custom_name_id] = reject_bad_name(custom_names[custom_name_id],namedata["allow_numbers"])
-		if(!custom_names[custom_name_id])
-			custom_names[custom_name_id] = get_default_name(custom_name_id)
-
-	randomise = SANITIZE_LIST(randomise)
-
-	age = sanitize_inlist(age, pref_species.possible_ages)
-	eye_color = sanitize_hexcolor(eye_color, 3, include_crunch = FALSE)
-	voice_color = voice_color
-	pronouns = sanitize_text(pronouns, THEY_THEM)
-	voice_type = sanitize_inlist(voice_type, VOICE_TYPES_LIST, VOICE_TYPE_MASC)
-	skin_tone = skin_tone
-	family = family
-	gender_choice = gender_choice
-	setspouse = setspouse
-	selected_accent ||= ACCENT_DEFAULT
-
+	// Non-preference complex fields
 	S["body_markings"] >> body_markings
 	body_markings = SANITIZE_LIST(body_markings)
-
 	validate_body_markings()
 
 	S["descriptor_entries"] >> descriptor_entries
 	descriptor_entries = SANITIZE_LIST(descriptor_entries)
 	S["custom_descriptors"] >> custom_descriptors
 	custom_descriptors = SANITIZE_LIST(custom_descriptors)
-
 	validate_descriptors()
 
-	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
+	if(needs_update >= 0)
+		update_character(needs_update, S)
 
-	//Validate job prefs
+	// Sanitize non-preference fields
+	var/gender = read_preference(/datum/preference/choiced/gender)
+	var/cached_name = read_preference(/datum/preference/text/real_name)
+	cached_name = reject_bad_name(cached_name)
+	if(!cached_name)
+		cached_name = random_unique_name(gender)
+		write_preference(GLOB.preference_entries[/datum/preference/text/real_name], cached_name)
+
+	for(var/custom_name_id in GLOB.preferences_custom_names)
+		var/namedata = GLOB.preferences_custom_names[custom_name_id]
+		custom_names[custom_name_id] = reject_bad_name(custom_names[custom_name_id], namedata["allow_numbers"])
+		if(!custom_names[custom_name_id])
+			custom_names[custom_name_id] = get_default_name(custom_name_id)
+
+	randomise = SANITIZE_LIST(randomise)
+
 	if(!job_preferences)
 		job_preferences = list()
 	else
@@ -480,72 +316,32 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		return FALSE
 	S.cd = "/character[default_slot]"
 
-	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)	//load_character will sanitize any bad data, so assume up-to-date.)
+	WRITE_FILE(S["version"], SAVEFILE_VERSION_MAX)
 
-	//Character
-	WRITE_FILE(S["real_name"], real_name)
-	WRITE_FILE(S["gender"], gender)
-	WRITE_FILE(S["domhand"], domhand)
-	WRITE_FILE(S["age"], age)
-	WRITE_FILE(S["eye_color"], eye_color)
-	WRITE_FILE(S["voice_color"], voice_color)
-	WRITE_FILE(S["skin_tone"], skin_tone)
-	WRITE_FILE(S["culture"], culture)
-	WRITE_FILE(S["underwear"], underwear)
-	WRITE_FILE(S["underwear_color"], underwear_color)
-	WRITE_FILE(S["undershirt"], undershirt)
-	WRITE_FILE(S["accessory"], accessory)
-	WRITE_FILE(S["detail"], detail)
-	WRITE_FILE(S["socks"], socks)
+	// preference character fields
+	preference_save_to_savefile(S, PREF_CHARACTER)
+
+
+	// Non-preference fields
 	WRITE_FILE(S["randomise"], randomise)
-	WRITE_FILE(S["pronouns"], pronouns)
-	WRITE_FILE(S["voice_type"], voice_type)
-	WRITE_FILE(S["species"], pref_species.id)
-	WRITE_FILE(S["loadout1"], loadout1)
-	WRITE_FILE(S["loadout2"], loadout2)
-	WRITE_FILE(S["loadout3"], loadout3)
-	WRITE_FILE(S["culinary_preferences"], culinary_preferences)
-	WRITE_FILE(S["family"], family)
-	WRITE_FILE(S["gender_choice"], gender_choice)
-	WRITE_FILE(S["setspouse"], setspouse)
-	WRITE_FILE(S["selected_accent"], selected_accent)
-
+	WRITE_FILE(S["job_preferences"], job_preferences)
 	WRITE_FILE(S["equipped_loadout"], equipped_loadout)
 	WRITE_FILE(S["equipped_loadout_colors"], equipped_loadout_colors)
 	WRITE_FILE(S["single_round_loadout_colors"], single_round_loadout_colors)
 	WRITE_FILE(S["single_round_loadout"], single_round_loadout)
 
-	//Custom names
+	// Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
-		var/savefile_slot_name = custom_name_id + "_name" //TODO remove this
-		WRITE_FILE(S[savefile_slot_name],custom_names[custom_name_id])
+		var/savefile_slot_name = custom_name_id + "_name"
+		WRITE_FILE(S[savefile_slot_name], custom_names[custom_name_id])
 
-	//Jobs
-	WRITE_FILE(S["joblessrole"], joblessrole)
-	//Write prefs
-	WRITE_FILE(S["job_preferences"], job_preferences)
-
-	//Patron
-	WRITE_FILE(S["selected_patron"], selected_patron.type)
-
-	// Organs
+	// Systems with their own save logic
 	WRITE_FILE(S["customizer_entries"], customizer_entries)
-	// Body markings
 	WRITE_FILE(S["body_markings"], body_markings)
-	// headshot link
-	WRITE_FILE(S["headshot_link"], headshot_link)
-	// flavor text
-	WRITE_FILE(S["flavortext"], html_decode(flavortext))
-	WRITE_FILE(S["flavortext_display"], flavortext_display)
-	WRITE_FILE(S["ooc_notes"], html_decode(ooc_notes))
-	WRITE_FILE(S["ooc_notes_display"], ooc_notes_display)
-	WRITE_FILE(S["ooc_extra"], ooc_extra)
-	WRITE_FILE(S["ooc_extra_link"],	ooc_extra_link)
-	// Descriptor entries
 	WRITE_FILE(S["descriptor_entries"], descriptor_entries)
 	WRITE_FILE(S["custom_descriptors"], custom_descriptors)
-
 	save_quirks(S)
+
 	return TRUE
 
 #undef SAVEFILE_VERSION_MAX
@@ -587,3 +383,27 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 				continue
 			key_bindings |= key
 			key_bindings[key] = GLOB.hotkey_keybinding_list_by_key[key]
+
+/datum/preferences/proc/preference_load_from_savefile(savefile/S, identifier)
+	for (var/datum/preference/entry as anything in GLOB.preferences_in_priority_order)
+		if (entry.savefile_identifier != identifier)
+			continue
+		var/raw
+		S[entry.savefile_key] >> raw
+		var/value
+		if (!isnull(raw))
+			value = entry.deserialize(raw, src)
+		if (isnull(value))
+			value = entry.create_informed_default_value(src)
+			// Write the default back so stale/absent keys are healed immediately.
+			WRITE_FILE(S[entry.savefile_key], entry.serialize(value))
+		preference_cache[entry.type] = value
+
+/datum/preferences/proc/preference_save_to_savefile(savefile/S, identifier)
+	for (var/T in GLOB.preference_entries)
+		var/datum/preference/entry = GLOB.preference_entries[T]
+		if (entry.savefile_identifier != identifier)
+			continue
+		if (!(T in preference_cache))
+			continue
+		WRITE_FILE(S[entry.savefile_key], entry.serialize(preference_cache[T]))

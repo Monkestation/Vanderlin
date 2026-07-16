@@ -13,6 +13,8 @@
 #define STATMOD_LUCKY "Lucky"
 #define STATMOD_CORNFED "Cornfed"
 #define STATMOD_THICKSKIN "Thickskin"
+#define STATMOD_WITLESS_PIXIE "Witless Pixie"
+#define STATMOD_UNLUCKY "Unlucky"
 
 // Combined basic mods
 #define STATMOD_JOB "Job"

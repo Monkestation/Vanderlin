@@ -55,13 +55,6 @@
 	else
 		desc += "\nThis bed has no sheet, at least it's still a bed."
 
-/obj/structure/bed/attackby(obj/item/W, mob/user, list/modifiers)
-	if(W.tool_behaviour == TOOL_WRENCH)
-		W.play_tool_sound(src)
-		deconstruct(TRUE)
-	else
-		return ..()
-
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	. = ..()
 	M.update_cone_show()

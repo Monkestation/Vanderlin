@@ -53,33 +53,37 @@
 
 /obj/structure/fluff/traveltile/Initialize()
 	GLOB.traveltiles += src
-	hide_if_needed()
 	. = ..()
 	return INITIALIZE_HINT_LATELOAD
-
 
 /obj/structure/fluff/traveltile/LateInitialize()
 	. = ..()
 	// Find our paired portal and cache what area it's in
 	resolve_destination_area()
+	hide_if_needed()
+
+/obj/structure/fluff/traveltile/Destroy()
+	GLOB.traveltiles -= src
+	revealed_to = null
+	cached_destination_area = null
+	return ..()
 
 /obj/structure/fluff/traveltile/proc/resolve_destination_area()
 	if(!aportalgoesto)
 		return
+
 	for(var/obj/structure/fluff/traveltile/other as anything in GLOB.traveltiles)
 		if(other.aportalid == aportalgoesto)
 			cached_destination_area = get_area(other)
 			return
 
-/obj/structure/fluff/traveltile/Destroy()
-	GLOB.traveltiles -= src
-	. = ..()
-
 /obj/structure/fluff/traveltile/proc/hide_if_needed()
-	if(required_trait)
-		invisibility = INVISIBILITY_OBSERVER
-		var/image/I = image(icon = 'icons/turf/floors.dmi', icon_state = "travel", layer = ABOVE_OPEN_TURF_LAYER, loc = src)
-		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/traveltile, required_trait, I)
+	if(!required_trait)
+		return
+
+	invisibility = INVISIBILITY_ABSTRACT
+	var/image/I = image(icon = 'icons/turf/floors.dmi', loc = src, icon_state = "travel", layer = ABOVE_OPEN_TURF_LAYER)
+	add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/traits, required_trait, I, NONE, list(required_trait))
 
 /obj/structure/fluff/traveltile/proc/get_other_end_turf(return_travel = FALSE)
 	if(!aportalgoesto)
@@ -110,10 +114,12 @@
 /obj/structure/fluff/traveltile/attack_ghost(mob/dead/observer/user)
 	if(!user.Adjacent(src))
 		return
+
 	var/turf/target_loc = get_other_end_turf()
 	if(!target_loc)
 		to_chat(user, "<b>It is a dead end.</b>")
 		return
+
 	user.forceMove(target_loc)
 
 /obj/structure/fluff/traveltile/attack_hand(mob/user)
@@ -122,19 +128,20 @@
 	user_try_travel(user)
 
 /obj/structure/fluff/traveltile/proc/can_go(atom/movable/AM)
-	. = TRUE
 	if(AM.pulledby)
 		return FALSE
+
 	if(AM.recent_travel)
 		if(world.time < AM.recent_travel + 15 SECONDS)
-			. = FALSE
-	if(. && required_trait && isliving(AM))
-		var/mob/living/L = AM
-		if(HAS_TRAIT(L, required_trait))
-			return TRUE
-		else
-			//to_chat(L, "<b>It is a dead end.</b>")
 			return FALSE
+
+	if(required_trait && isliving(AM))
+		var/mob/living/L = AM
+		if(HAS_CHARACTER_TRAIT(L, required_trait))
+			return TRUE
+		return FALSE
+
+	return TRUE
 
 /atom/movable
 	var/recent_travel = 0
@@ -143,11 +150,14 @@
 	. = ..()
 	if(!isliving(AM))
 		return
+
 	var/mob/living/living = AM
 	if(living.stat != CONSCIOUS)
 		return
+
 	if(living.incapacitated(IGNORE_GRAB))
 		return
+
 	// if it's in the same chain, it will actually stop a pulled thing being pulled, bandaid solution with a timer
 	addtimer(CALLBACK(src, PROC_REF(user_try_travel), living), 1)
 
@@ -156,8 +166,10 @@
 	if(!get_turf(the_tile))
 		to_chat(user, "<b>I can't find the other side.</b>")
 		return
+
 	if(!can_go(user))
 		return
+
 	var/time2go = 5 SECONDS
 	if(check_other_side && the_tile.required_trait)
 		for(var/mob/living/M in hearers(7, get_turf(the_tile)))
@@ -165,49 +177,60 @@
 				to_chat(user, span_warning("I sense something off at the end of the trail."))
 				time2go = 7 SECONDS
 				break
+
 	if(!do_after(user, time2go, src, (IGNORE_HELD_ITEM)))
 		return
+
 	if(!can_go(user))
 		return
+
 	if(user.pulling)
 		user.pulling.recent_travel = world.time
+
 	user.recent_travel = world.time
 	if(can_gain_with_sight)
 		reveal_travel_trait_to_others(user)
-	if(can_gain_by_walking && the_tile.required_trait && !HAS_TRAIT(user, the_tile.required_trait) && !user.is_blind()) // If you're blind you can't find your way
+
+	if(can_gain_by_walking && the_tile.required_trait && !HAS_CHARACTER_TRAIT(user, the_tile.required_trait) && !user.is_blind()) // If you're blind you can't find your way
 		ADD_TRAIT(user, the_tile.required_trait, TRAIT_GENERIC)
-	if(required_trait && !revealed_to.Find(user))
+
+	if(required_trait && !(user in revealed_to))
 		show_travel_tile(user)
 		the_tile.show_travel_tile(user)
+
 	user.log_message("[user.mind?.key ? user.mind?.key : user.real_name] has travelled to [loc_name(the_tile)] from", LOG_GAME, color = "#0000ff")
 	user.zMove(target = get_turf(the_tile), z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /obj/structure/fluff/traveltile/proc/reveal_travel_trait_to_others(mob/living/user)
 	if(!required_trait)
 		return
-	if(!HAS_TRAIT(user, required_trait))
+
+	if(!HAS_CHARACTER_TRAIT(user, required_trait))
 		return
-	for(var/mob/living/carbon/human/H in view(6,src))
-		if(!HAS_TRAIT(H, required_trait) && !H.is_blind())
+
+	for(var/mob/living/carbon/human/H in view(6, src))
+		if(!HAS_CHARACTER_TRAIT(H, required_trait) && !H.is_blind())
 			to_chat(H, "<b>I discover a well hidden entrance</b>")
 			ADD_TRAIT(H, required_trait, TRAIT_GENERIC)
 
 /obj/structure/fluff/traveltile/proc/show_travel_tile(mob/living/user)
-	if(!alternate_appearances)
+	if(!length(alternate_appearances))
 		return
+
 	for(var/K in alternate_appearances)
 		var/datum/atom_hud/alternate_appearance/AA = alternate_appearances[K]
 		if(AA.appearance_key == required_trait)
-			AA.add_hud_to(user)
+			AA.show_to(user)
 			revealed_to += user
 			break
 
 /obj/structure/fluff/traveltile/proc/remove_travel_tile(mob/living/user)
-	if(!alternate_appearances)
+	if(!length(alternate_appearances))
 		return
+
 	for(var/K in alternate_appearances)
 		var/datum/atom_hud/alternate_appearance/AA = alternate_appearances[K]
 		if(AA.appearance_key == required_trait)
-			AA.remove_from_hud(user)
+			AA.remove_atom_from_hud(user)
 			revealed_to -= user
 			break

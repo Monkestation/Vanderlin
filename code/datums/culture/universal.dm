@@ -9,6 +9,7 @@
 	description = "Once a shithole, now an even worse shithole. \
 	Located conveniently in the fetid bogs of Enigma, Rockhill has since converted into a militaristic bastion against the Brass Cataclysm. \
 	Their diet is interestingly comprised largely of whatever pies they can make."
+	accent = ACCENT_ROCKHILL
 
 /datum/culture/universal/heartfelt
 	name = "Heartfelt"

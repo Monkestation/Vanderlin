@@ -200,15 +200,13 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	wetable = FALSE
 
 /obj/item/clothing/shoes/courtphysician/female
 	name = "sanguine heels"
 	desc = "Leather heels, the solemn tap of these bears grim news, or salvation."
 	icon_state = "docheels"
 	item_state = "docheels"
-	icon = 'icons/roguetown/clothing/courtphys.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY
-	wetable = FALSE

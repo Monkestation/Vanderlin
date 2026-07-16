@@ -17,7 +17,7 @@
 	organ_volume = 0.5
 	max_blood_storage = 2.5
 	current_blood = 2.5
-	blood_req = 0.5
+	blood_req = 0.25
 	oxygen_req = 0.25
 	nutriment_req = 0.35
 	hydration_req = 0.2
@@ -37,9 +37,9 @@
 	name = "[inflamation_stage ? "inflamed " : null][initial(name)]"
 
 /obj/item/organ/appendix/organ_failure(delta_time)
-	. = ..()
 	inflamation_stage = TRUE
-	owner.adjustToxLoss(0.5 * delta_time, TRUE, TRUE) //forced to ensure people don't use it to gain tox as slime person
+	owner.adjustToxLoss(0.5 * delta_time, FALSE, TRUE) //forced to ensure people don't use it to gain tox as slime person
+	return ..() || ORGAN_PROCESS_UPDATE_HEALTH
 
 /obj/item/organ/appendix/prepare_eat()
 	var/obj/S = ..()

@@ -58,6 +58,24 @@
 	if(prob(1))
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
+/datum/job/advclass/wretch/hedgemage/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+	)
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "HEDGE MAGE")
+
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+	)
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "HEDGE MAGE")
+
 /datum/outfit/wretch/hedgemage
 	name = "Hedge Mage (Wretch)"
 	shoes = /obj/item/clothing/shoes/simpleshoes
@@ -82,20 +100,3 @@
 	if(equipped_human.age == AGE_OLD)
 		head = /obj/item/clothing/head/wizhat
 		backl = /obj/item/storage/backpack/backpack
-
-/datum/outfit/wretch/hedgemage/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	. = ..()
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-	)
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "HEDGE MAGE")
-
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-	)
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "HEDGE MAGE")

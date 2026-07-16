@@ -148,6 +148,7 @@ GLOBAL_LIST_INIT(admin_categories, build_admin_categories())
 
 #define ADMIN_CATEGORY_ADMIN "ADMIN"
 #define ADMIN_CATEGORY_MAINT "MAINT"
+#define ADMIN_CATEGORY_LEADERSHIP "LEADERSHIP"
 
 /proc/build_admin_categories()
 	var/list/final_build = list()

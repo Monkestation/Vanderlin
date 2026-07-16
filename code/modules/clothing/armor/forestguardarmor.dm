@@ -39,13 +39,10 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	icon_state = "snowcloak"
-
-/obj/item/clothing/cloak/forrestercloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
 
 /obj/item/clothing/cloak/wardencloak
 	name = "warden's cloak"
@@ -58,10 +55,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-
-/obj/item/clothing/cloak/wardencloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/head/helmet/visored/warden
 	name = "wardens's helmet"

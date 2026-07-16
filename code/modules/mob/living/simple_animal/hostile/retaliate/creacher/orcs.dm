@@ -128,7 +128,7 @@
 	. = ..()
 	if(!target)
 		if(prob(3))
-			emote(pick("idle"), TRUE)
+			INVOKE_ASYNC(src, PROC_REF(emote), "idle")
 
 /mob/living/simple_animal/hostile/orc/taunted(mob/user)
 	emote("aggro")

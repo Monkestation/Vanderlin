@@ -198,80 +198,6 @@
 	// if(randomise_flags & RANDOMIZE_FEATURES)
 	// 	dna.features = random_features()
 
-/*
-* Family Tree subsystem helpers
-* I was tired of editing indvidual values
-* across fluff.dm and death.dm so im simplifying
-* the process. They check with these procs that
-* i can edit from here. -IP
-*/
-/mob/living/carbon/human/proc/RomanticPartner(mob/living/carbon/human/H)
-	if(!ishuman(H))
-		return
-	if(spouse_mob == H)
-		return TRUE
-
-/mob/living/carbon/human/proc/IsWedded(mob/living/carbon/human/wedder)
-	if(spouse_mob)
-		return TRUE
-
-//Instead of putting the spouse variable everywhere its all funneled through this proc.
-/mob/living/carbon/human/proc/MarryTo(mob/living/carbon/human/spouse)
-	if(!ishuman(spouse))
-		return null
-
-	// Set basic spouse relationship
-	spouse_mob = spouse
-	spouse.spouse_mob = src
-
-	// Handle family integration
-	var/datum/heritage/primary_family = null
-	//var/datum/heritage/secondary_family = null
-	var/datum/family_member/primary_member = null
-	var/datum/family_member/secondary_member = null
-
-	// Determine which family takes precedence
-	if(family_datum && !spouse.family_datum)
-		// Spouse joins our family
-		primary_family = family_datum
-		primary_member = family_member_datum
-		secondary_member = primary_family.CreateFamilyMember(spouse)
-
-	else if(!family_datum && spouse.family_datum)
-		// We join spouse's family
-		primary_family = spouse.family_datum
-		primary_member = spouse.family_member_datum
-		secondary_member = primary_family.CreateFamilyMember(src)
-
-	else if(family_datum && spouse.family_datum)
-		// Both have families - keep separate but mark as married
-		primary_family = family_datum
-		primary_member = family_member_datum
-		secondary_member = spouse.family_member_datum
-
-	else
-		// Neither has family - create new one
-		var/new_family_name = null
-		// Use the male's surname traditionally, or first person's if no male
-		if(gender == MALE)
-			new_family_name = family_datum?.SurnameFormatting(src)
-		else if(spouse.gender == MALE)
-			new_family_name = family_datum?.SurnameFormatting(spouse)
-
-		primary_family = new /datum/heritage(src, new_family_name)
-		primary_member = primary_family.founder
-		secondary_member = primary_family.CreateFamilyMember(spouse)
-
-	// Add spouse relationship in family system
-	if(primary_member && secondary_member && primary_family)
-		primary_family.MarryMembers(primary_member, secondary_member)
-
-	return primary_family
-
-//Perspective stranger looks at --> src
-/mob/living/carbon/human/proc/ReturnRelation(mob/living/carbon/human/stranger)
-	return family_datum.ReturnRelation(src, stranger)
-
 /mob/living/carbon/human/proc/highest_ac_worn(check_hands = FALSE)
 	var/list/slots = DEFAULT_SLOT_PRIORITY - (check_hands ? null : ITEM_SLOT_HANDS)
 
@@ -289,5 +215,6 @@
 
 	return highest_ac
 
-/mob/living/carbon/human/proc/grant_inspiration(tier)
-	inspiration = new /datum/inspiration(src, tier)
+/mob/living/carbon/human/proc/grant_inspiration(tier = BARD_T2)
+	inspiration = new /datum/inspiration(src)
+	inspiration.grant_inspiration(src, tier)

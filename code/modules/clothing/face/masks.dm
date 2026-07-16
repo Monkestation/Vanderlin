@@ -65,6 +65,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 	item_weight = 65 GRAMS
+	melting_material = /datum/material/gold
 
 /obj/item/clothing/face/facemask/silvernosechain
 	name = "silver nosechain"
@@ -83,6 +84,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 	item_weight = 45 GRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/face/facemask/silvernosechain/Initialize()
 	. = ..()
@@ -105,6 +107,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 	item_weight = 1.2 KILOGRAMS
+	melting_material = /datum/material/gold
 
 /obj/item/clothing/face/facemask/silverveil
 	name = "silver face veil"
@@ -123,6 +126,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 	item_weight = 1.05 KILOGRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/face/facemask/silverveil/Initialize()
 	. = ..()
@@ -583,6 +587,7 @@
 	max_integrity = 150
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
 	item_weight = 2.8 KILOGRAMS
 
 /obj/item/clothing/face/operavisage

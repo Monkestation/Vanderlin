@@ -29,8 +29,6 @@
 	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 
 /obj/item/bin/Destroy()
-	layer = 2.8
-	icon_state = "washbin_destroy"
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	if(STR)
 		var/list/things = STR.contents()
@@ -93,27 +91,16 @@
 
 	try_wash(user, user)
 
-/obj/item/bin/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(user.cmode)
-		return
-
-	try_wash(weapon, user)
-
 /obj/item/bin/proc/try_wash(atom/to_wash, mob/user)
-	if(istype(to_wash, /obj/item/natural/cloth))
-		var/obj/item/item = to_wash
-		item.attack_atom(src, user)
-		return
-	if(!reagents || !reagents.maximum_volume || kover)
-		return
+	if(!reagents?.maximum_volume || kover)
+		return FALSE
+
 	var/removereg = /datum/reagent/water
 	if(!reagents.has_reagent(/datum/reagent/water, 5))
 		removereg = /datum/reagent/water/gross
 		if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
 			to_chat(user, "<span class='warning'>No water to wash these stains.</span>")
-			return
+			return FALSE
 
 	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
 	if(to_wash == user)
@@ -142,6 +129,8 @@
 			reagents.remove_reagent(/datum/reagent/water, amount_to_dirty)
 			reagents.add_reagent(/datum/reagent/water/gross, amount_to_dirty)
 
+	return TRUE
+
 //We need to use this or the object will be put in storage instead of attacking it
 /obj/item/bin/StorageBlock(obj/item/I, mob/user)
 	if(user?.used_intent)
@@ -153,39 +142,59 @@
 			return TRUE
 	return FALSE
 
-/obj/item/bin/attackby(obj/item/I, mob/user, list/modifiers)
-	if(kover)
-		return ..()
+/obj/item/bin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!reagents?.total_volume)
+		return NONE
 
-	if(istype(I, /obj/item/dye_pack))
-		var/obj/item/dye_pack/pack = I
+	if(user.cmode)
+		return NONE
+
+	if(istype(tool, /obj/item/dye_pack))
+		var/obj/item/dye_pack/pack = tool
 		user.visible_message(span_info("[user] begins to add [pack] to [src]..."))
-		if(do_after(user, 3 SECONDS, src))
-			playsound(src, "bubbles", 50, 1)
-			new /obj/structure/dye_bin(get_turf(src), pack)
-			qdel(src)
-		return
+		if(!do_after(user, 3 SECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+		playsound(src, "bubbles", 50, 1)
+		new /obj/structure/dye_bin(get_turf(src), pack)
+		qdel(src)
+		return ITEM_INTERACT_SUCCESS
 
-	if(!reagents || !reagents.maximum_volume) //trash
-		return ..()
+	if(is_type_in_list(user.used_intent, list(INTENT_SOAK, INTENT_WRING)))
+		return NONE // special snowflake
 
-	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
-	if(istype(I, /obj/item/weapon/tongs))
-		var/obj/item/weapon/tongs/T = I
-		if(T.held_item && HAS_TRAIT(T.held_item, TRAIT_NEEDS_QUENCH))
-			var/removereg = /datum/reagent/water
-			if(!reagents.has_reagent(/datum/reagent/water, 5))
-				removereg = /datum/reagent/water/gross
-				if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
-					to_chat(user, "<span class='warning'>Need more water to quench in.</span>")
-					return
-			reagents.remove_reagent(removereg, 5)
-			playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 100, FALSE)
-			user.visible_message("<span class='info'>[user] tempers \the [T.held_item.name] in \the [src], hot metal sizzling.</span>")
-			T.held_item.remove_quench()
-			update_appearance(UPDATE_ICON)
-			return
-	. = ..()
+	if(isreagentcontainer(tool))
+		return NONE // special snowflake
+
+	var/obj/item/item = tool
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = tool
+		if(tongs.held_item)
+			item = tongs.held_item
+
+	if(HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
+		if(!quench(item, user))
+			return ITEM_INTERACT_BLOCKING
+		return ITEM_INTERACT_SUCCESS
+
+	if(!try_wash(item, user))
+		return ITEM_INTERACT_BLOCKING
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/bin/proc/quench(obj/item/tool, mob/living/user)
+	var/removereg = /datum/reagent/water
+	if(!reagents.has_reagent(/datum/reagent/water, 5))
+		removereg = /datum/reagent/water/gross
+		if(!reagents.has_reagent(/datum/reagent/water/gross, 5))
+			to_chat(user, "<span class='warning'>Need more water to quench in.</span>")
+			return FALSE
+
+	reagents.remove_reagent(removereg, 5)
+	playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 100, FALSE)
+	user.visible_message("<span class='info'>[user] tempers \the [tool] in \the [src], hot metal sizzling.</span>")
+	tool.remove_quench()
+	update_appearance(UPDATE_ICON)
+
+	return TRUE
 
 /obj/item/bin/trash
 	name = "trash bin"
@@ -210,7 +219,7 @@
 
 /obj/item/proc/add_quench_requirement(source, duration)
 	if(!HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		add_filter("heated", 1, list(type="color", color = list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))
+		add_filter("heated", 1, color_matrix_filter(list(3,0,0,1, 0,2.7,0,0.4, 0,0,1,0, 0,0,0,1)))
 	ADD_TRAIT(src, TRAIT_NEEDS_QUENCH, source)
 	if(duration)
 		addtimer(CALLBACK(src, PROC_REF(remove_quench), source), duration, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_DELETE_ME)

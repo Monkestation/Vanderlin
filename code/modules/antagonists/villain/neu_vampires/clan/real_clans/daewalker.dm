@@ -1,7 +1,7 @@
 /datum/clan_leader/daewalker
 	lord_spells = list()
 	lord_verbs = list()
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Daewalker"
 
 /datum/clan/daewalker

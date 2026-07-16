@@ -118,7 +118,7 @@
 
 	actions_types = list(/datum/action/item_action/toggle_light)
 
-	var/brightness_on = 4 //less than a torch; basically good for one person.
+	var/brightness_on = 6
 	var/on = FALSE
 
 /obj/item/clothing/head/helmet/leather/minershelm/Initialize(mapload, ...)

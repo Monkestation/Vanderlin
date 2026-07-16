@@ -9,8 +9,8 @@
 	display_order = JDO_SHEPHERD
 	selection_color = JCOLOR_INQUISITION
 	faction = FACTION_TOWN
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	bypass_lastclass = TRUE
 
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
@@ -40,6 +40,7 @@
 	name = JOB_ADEPT
 	shoes = /obj/item/clothing/shoes/boots
 	mask = /obj/item/clothing/face/facemask/silver
+	neck = /obj/item/clothing/neck/gorget/explosive
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/armor/gambeson/light/colored/black

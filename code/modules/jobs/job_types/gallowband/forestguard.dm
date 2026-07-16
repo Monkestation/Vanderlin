@@ -124,8 +124,9 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 
 /datum/outfit/forestguard/infantry
 	name = JOB_FOREST_GUARD_THEGN_RAVAGER
@@ -179,8 +180,9 @@
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 
 /datum/outfit/forestguard/ranger
 	name = JOB_FOREST_GUARD_THEGN_RANGER
@@ -235,8 +237,9 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_IGNOREDAMAGESLOWDOWN,
 		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 
 /datum/outfit/forestguard/reaver
 	name = JOB_FOREST_GUARD_THEGN_REAVER
@@ -290,8 +293,9 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	verbs = list(
 		/mob/proc/haltyell
 	)
@@ -348,8 +352,9 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	verbs = list(
 		/mob/proc/haltyell
 	)

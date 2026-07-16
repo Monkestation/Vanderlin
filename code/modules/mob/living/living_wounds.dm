@@ -207,7 +207,7 @@
 					dam += 30
 			used = round(max(dam / 3, 1), 1)
 			if(prob(used))
-				LAZYADD(attempted_wounds, /datum/wound/artery/chest)
+				LAZYADD(attempted_wounds, /datum/wound/artery/heart)
 
 	if(!LAZYLEN(attempted_wounds))
 		return FALSE

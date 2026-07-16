@@ -102,14 +102,13 @@ GLOBAL_LIST_EMPTY(last_words)
 		H.Fade()
 		MOBTIMER_SET(src, MT_LASTDIED)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)
-		remove_client_colour(/datum/client_colour/monochrome/death)
-		add_client_colour(/datum/client_colour/monochrome/death)
 		if(last_words)
 			GLOB.last_words |= last_words
 
 	if(lastattacker_weakref)
 		var/mob/attacker = lastattacker_weakref.resolve()
-		SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
+		if(attacker)
+			SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
 
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(gibbed)
@@ -139,7 +138,7 @@ GLOBAL_LIST_EMPTY(last_words)
 
 
 /mob/living/proc/prepare_deathsight_message()
-	var/area_of_death = lowertext(get_area_name(src))
+	var/area_of_death = LOWER_TEXT(get_area_name(src))
 	var/locale = "a locale wreathed in enigmatic fog"
 	switch (area_of_death) // we're deliberately obtuse with this.
 		if ("mountains", "mt decapitation", "malum's anvil forest", "malum's anvil under lower caves", "malum's anvil cave building", "malum's anvil lower dungeon", "malum's anvil surface building", "malum's anvil hidden grove", "malum's anvil peak")

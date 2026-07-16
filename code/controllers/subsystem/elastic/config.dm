@@ -30,5 +30,14 @@
 /datum/config_entry/string/heartbeat_endpoint
 	protection = CONFIG_ENTRY_HIDDEN
 
+/datum/config_entry/string/quest_endpoint
+	protection = CONFIG_ENTRY_HIDDEN
+
+/datum/config_entry/string/quest_finished_endpoint
+	protection = CONFIG_ENTRY_HIDDEN
+
 /datum/config_entry/string/metrics_api_token
+	protection = CONFIG_ENTRY_HIDDEN
+
+/datum/config_entry/string/job_endpoint
 	protection = CONFIG_ENTRY_HIDDEN

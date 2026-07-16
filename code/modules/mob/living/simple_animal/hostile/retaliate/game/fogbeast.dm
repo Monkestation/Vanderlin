@@ -105,7 +105,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 
 
 /mob/living/simple_animal/hostile/retaliate/honse/tamed()
-	..()
+	. = ..()
 	deaggroprob = 20
 	if(.) // was already tamed
 		return

@@ -39,16 +39,17 @@
 	if(!iscarbon(target_mob))
 		return
 
+	// Bullets always inflict a fracture
 	var/mob/living/carbon/C = target_mob
-	var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
-	if(BP)
+	var/obj/item/bodypart/bodypart = C.get_bodypart(def_zone)
+	if(bodypart)
 		var/fracture_type = /datum/wound/fracture
-		switch(BP.body_zone)
+		switch(bodypart.body_zone)
 			if(BODY_ZONE_HEAD)
 				fracture_type = /datum/wound/fracture/head
 			if(BODY_ZONE_CHEST)
 				fracture_type = /datum/wound/fracture/chest
-		BP.add_wound(fracture_type)
+		bodypart.add_wound(fracture_type)
 
 /obj/projectile/bullet/fragment
 	name = "smaller lead ball"

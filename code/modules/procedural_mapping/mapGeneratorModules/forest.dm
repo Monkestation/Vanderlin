@@ -28,6 +28,7 @@
 		/obj/structure/flora/grass/herb/random = 5,
 		/obj/structure/closet/dirthole/closed = 5,
 		/obj/structure/flora/newtree = 5,
+		/obj/structure/wild_plant/nospread/ollie = 0.6,
 		/obj/item/natural/stone = 5,
 		/obj/structure/essence_node = 0.4,
 		/obj/item/grown/log/tree/stick = 4,

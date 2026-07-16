@@ -1,13 +1,11 @@
 /datum/injury/puncture
-	bleed_threshold = 10
-	bleed_rate = 3
-	damage_type = WOUND_PIERCE
+	damage_type = WOUND_PUNCTURE
 
 /datum/injury/puncture/can_worsen(damage_type, damage)
 	return FALSE //cannot be enlargened
 
 /datum/injury/puncture/small
-	max_bleeding_stage = 2
+	bleed_threshold = 2
 	stages = list(
 		"puncture" = 5,
 		"healing puncture" = 2,
@@ -15,7 +13,7 @@
 		)
 
 /datum/injury/puncture/flesh
-	max_bleeding_stage = 2
+	bleed_threshold = 5
 	stages = list(
 		"puncture wound" = 15,
 		"round blood soaked clot" = 5,
@@ -25,7 +23,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/puncture/gaping
-	max_bleeding_stage = 3
+	bleed_threshold = 10
 	stages = list(
 		"gaping hole" = 30,
 		"large round blood soaked clot" = 15,
@@ -36,7 +34,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/puncture/gaping_big
-	max_bleeding_stage = 3
+	bleed_threshold = 15
 	stages = list(
 		"big gaping hole" = 50,
 		"healing gaping hole" = 20,
@@ -47,7 +45,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/puncture/massive
-	max_bleeding_stage = 3
+	bleed_threshold = 25
 	stages = list(
 		"massive hole" = 60,
 		"massive healing hole" = 30,

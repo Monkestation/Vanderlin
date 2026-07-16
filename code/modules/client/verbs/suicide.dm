@@ -70,7 +70,6 @@
 	if(checkable.area_flags & BLOCK_SUICIDE)
 		to_chat(src, span_warning("I can't commit suicide here!"))
 		return FALSE
-
 	switch(stat)
 		if(CONSCIOUS)
 			return TRUE

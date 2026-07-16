@@ -4,7 +4,7 @@
 	flags_inv = HIDEEARS|HIDEFACE
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
-	block2add = FOV_RIGHT|FOV_LEFT
+	block2add = FOV_BEHIND
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
 	emote_environment = 3		// Unknown if this actually works and what it does
@@ -37,17 +37,17 @@
 	item_state = "silversallet"
 
 /obj/item/clothing/head/helmet/heavy/undivided/attackby(obj/item/W, mob/living/user, params)
-	..()
-	if(istype(W, /obj/item/natural/cloth) && !detail_tag)
-		var/choice = input(user, "Choose a color.", "Orle") as anything in COLOR_MAP
-		user.visible_message(span_warning("[user] adds [W] to [src]."))
-		user.transferItemToLoc(W, src, FALSE, FALSE)
-		detail_color = COLOR_MAP[choice]
-		detail_tag = "_detail"
-		update_icon()
-		if(loc == user && ishuman(user))
-			var/mob/living/carbon/H = user
-			H.update_inv_head()
+	. = ..()
+	if(!istype(W, /obj/item/natural/cloth) || detail_tag)
+		return
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	user.visible_message(span_warning("[user] adds [W] to [src]."))
+	qdel(W)
+	detail_color = GLOB.noble_dyes[choice]
+	detail_tag = "_detail"
+	update_appearance(UPDATE_ICON)
 
 /obj/item/clothing/head/helmet/heavy/bronze
 	name = "bronze barbute"
@@ -63,17 +63,17 @@
 	armor_class = AC_MEDIUM
 
 /obj/item/clothing/head/helmet/heavy/bronze/attackby(obj/item/W, mob/living/user, params)
-	..()
-	if(istype(W, /obj/item/natural/feather) && !detail_tag)
-		var/choice = input(user, "Choose a color.", "Plume") as anything in COLOR_MAP
-		detail_color = COLOR_MAP[choice]
-		detail_tag = "_detail"
-		user.visible_message(span_warning("[user] adds [W] to [src]."))
-		user.transferItemToLoc(W, src, FALSE, FALSE)
-		update_icon()
-		if(loc == user && ishuman(user))
-			var/mob/living/carbon/H = user
-			H.update_inv_head()
+	. = ..()
+	if(!istype(W, /obj/item/natural/feather) || detail_tag)
+		return
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	user.visible_message(span_warning("[user] adds [W] to [src]."))
+	qdel(W)
+	detail_color = GLOB.noble_dyes[choice]
+	detail_tag = "_detail"
+	update_appearance(UPDATE_ICON)
 
 /obj/item/clothing/head/helmet/heavy/psydonbarbute
 	name = "psydonian barbute"
@@ -81,6 +81,7 @@
 	icon_state = "psydonbarbute"
 	item_state = "psydonbarbute"
 	block2add = FOV_BEHIND
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
@@ -88,6 +89,7 @@
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
 	block2add = FOV_BEHIND
+	melting_material = /datum/material/silver
 
 //................ Iron Plate Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/ironplate
@@ -96,6 +98,7 @@
 	icon_state = "ironplate"
 	flags_inv = HIDEEARS
 	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	block2add = FOV_BEHIND
 
@@ -140,17 +143,18 @@
 	item_weight = 2.4 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/aalloy/attackby(obj/item/W, mob/living/user, params)
-	..()
-	if(istype(W, /obj/item/natural/feather) && !detail_tag)
-		var/choice = input(user, "Choose a color.", "Plume") as anything in COLOR_MAP
-		detail_color = COLOR_MAP[choice]
-		detail_tag = "_detail"
-		user.visible_message(span_warning("[user] adds [W] to [src]."))
-		user.transferItemToLoc(W, src, FALSE, FALSE)
-		update_icon()
-		if(loc == user && ishuman(user))
-			var/mob/living/carbon/H = user
-			H.update_inv_head()
+	. = ..()
+	if(!istype(W, /obj/item/natural/feather) || detail_tag)
+		return
+
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	user.visible_message(span_warning("[user] adds [W] to [src]."))
+	qdel(W)
+	detail_color = GLOB.noble_dyes[choice]
+	detail_tag = "_detail"
+	update_appearance(UPDATE_ICON)
 
 //............... Great Helm ............... //
 /obj/item/clothing/head/helmet/heavy/bucket
@@ -401,6 +405,32 @@
 	item_state = "abyssorhelm"
 	item_weight = 5.5 KILOGRAMS
 
+//............... Cadwyn heavy helmets ......................//
+//............... Astrata helmet ......................//
+/obj/item/clothing/head/helmet/heavy/necked/cadwyn/astrata
+	name = "cadwyn plumed helm"
+	desc = "A helmet with a large plume, forged for the Cadwyn Order. Let the forces of Z see you coming, and tremble."
+	icon_state = "cadwynhelmet_astrata"
+	item_state = "cadwynhelmet_astrata"
+	item_weight = 5.5 KILOGRAMS
+
+//............... Ravox helmet ......................//
+/obj/item/clothing/head/helmet/heavy/necked/cadwyn/ravox
+	name = "cadwyn ox-helm"
+	desc = "A blindfolded helmet, horned like the ox. The Cadwyn Order does not need to see to trust in its purpose."
+	icon_state = "cadwynhelmet_ravox"
+	item_state = "cadwynhelmet_ravox"
+	item_weight = 4.5 KILOGRAMS
+
+//............... Necra helmet ......................//
+/obj/item/clothing/head/helmet/heavy/necked/cadwyn/necra
+	name = "cadwyn skull-helm"
+	desc = "A skull-faced metal helm topped with a hood. Your face does not matter - the forces of Z will only see their own death reflected in you."
+	icon_state = "cadwynhelmet_necra"
+	item_state = "cadwynhelmet_necra"
+	item_weight = 4.5 KILOGRAMS
+
+//............... Other heavy helmets ......................//
 //................ Deep Abyssor Helmet ............. //
 /obj/item/clothing/head/helmet/heavy/necked/deepabyssor
 	name = "deep abyssor helmet"
@@ -408,6 +438,7 @@
 	icon_state = "deepabyssorhelm"
 	item_state = "deepabyssorhelm"
 	item_weight = 5.5 KILOGRAMS
+	melting_material = /datum/material/bronze
 
 //............... Sinistar (Graggar) Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/sinistar
@@ -426,6 +457,7 @@
 	item_weight = 4.45 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/decorated	// template
+	abstract_type = /obj/item/clothing/head/helmet/heavy/decorated
 	name = "a template"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	bloody_icon = 'icons/effects/blood64x64.dmi'
@@ -434,20 +466,8 @@
 	worn_y_dimension = 64
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
-	var/picked = FALSE
-
 	prevent_crits = ALL_CRITICAL_HITS
-	abstract_type = /obj/item/clothing/head/helmet/heavy/decorated
-
-/obj/item/clothing/head/helmet/heavy/decorated/update_overlays()
-	. = ..()
-	if(!get_detail_tag())
-		return
-	var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-	pic.appearance_flags = RESET_COLOR
-	if(get_detail_color())
-		pic.color = get_detail_color()
-	. += pic
+	var/picked = FALSE
 
 //............... Decorated Knight Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/decorated/knight
@@ -596,35 +616,34 @@
 	max_integrity = 350
 	var/plumed = FALSE
 
-/obj/item/clothing/head/helmet/heavy/ordinatorhelm/attackby(obj/item/W, mob/living/user, params)
-	..()
-	if(istype(W, /obj/item/natural/feather))
-		user.visible_message(span_warning("[user] starts to fashion plumage using [W] for [src]."))
-		if(do_after(user, 4 SECONDS))
-			var/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/P = new /obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume(get_turf(src.loc))
-			if(user.is_holding(src))
-				user.dropItemToGround(src)
-				user.put_in_hands(P)
-			qdel(src)
-			qdel(W)
-		else
-			user.visible_message(span_warning("[user] stops fashioning plumage for [src]."))
-		return
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/natural/feather))
+		return NONE
+
+	user.visible_message(span_warning("[user] starts to fashion plumage using [tool] for [src]."))
+	if(do_after(user, 4 SECONDS))
+		var/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/P = new(get_turf(user))
+		if(user.is_holding(src))
+			user.dropItemToGround(src)
+			user.put_in_hands(P)
+		P.update_integrity(get_integrity())
+		qdel(src)
+		qdel(tool)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume
 	icon_state = "ordinatorhelmplume"
 	item_state = "ordinatorhelmplume"
 
-/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/attackby(obj/item/W, mob/living/user, params)
-	if(istype(W, /obj/item/natural/feather))
-		return
+/obj/item/clothing/head/helmet/heavy/ordinatorhelm/plume/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	return NONE
 
 /obj/item/clothing/head/helmet/heavy/absolver
 	name = "psydonian conical helm"
 	desc = "Its shape confounds and confuses the enemies of Psydon. Offering unfound protection in its visage, the gaze is horrific to those without understanding."
 	icon_state = "absolutionisthelm"
 	item_state = "absolutionisthelm"
-	emote_environment = 3
 	block2add = null
 	body_parts_covered = FULL_HEAD|NECK
 	max_integrity = 450 // Worst vision. Yes.
@@ -634,6 +653,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	clothing_flags = NONE
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/heavy/psybucket
 	name = "psydonian bucket helmet"
@@ -644,6 +664,7 @@
 	adjustable = CAN_CADJUST
 	block2add = FOV_BEHIND
 	max_integrity = 400
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/heavy/psysallet
 	name = "psydonian sallet"
@@ -654,6 +675,7 @@
 	adjustable = CAN_CADJUST
 	block2add = FOV_BEHIND
 	max_integrity = 400
+	melting_material = /datum/material/silver
 
 //............... Gronn Heavy Helmet ...............//
 /obj/item/clothing/head/helmet/heavy/ironplate/gronn
@@ -670,3 +692,25 @@
 	block2add = FOV_BEHIND
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+
+//............... Legacy Totod Order Helmets ...............//
+/obj/item/clothing/head/helmet/heavy/crusader
+	name = "winged crusader helm"
+	desc = "Proud knights of the Psydonic order displays their faith and their allegiance openly."
+	icon_state = "totodhelm"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	bloody_icon_state = "helmetblood_big"
+	worn_x_dimension = 64
+	worn_y_dimension = 64
+
+/obj/item/clothing/head/helmet/heavy/crusader/t
+	name = "crusader helm"
+	desc = "A silver gilded bucket helm, inscriptions in old Psydonic are found embezeled on every inch of silver. Grenzelhoft specializes in these helmets."
+	icon_state = "crusader_helmt2"
+	icon = 'icons/roguetown/clothing/special/crusader.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	bloody_icon = 'icons/effects/blood.dmi'
+	bloody_icon_state = "itemblood"
+	worn_x_dimension = 32
+	worn_y_dimension = 32

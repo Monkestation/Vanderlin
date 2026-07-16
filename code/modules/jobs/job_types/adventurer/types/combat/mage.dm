@@ -51,34 +51,11 @@
 
 /datum/job/advclass/combat/mage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.patron?.type == /datum/patron/inhumen/zizo)
-		if(!spawned.has_language(/datum/language/undead))
-			spawned.grant_language(/datum/language/undead)
+	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
+		spawned.grant_language(/datum/language/undead)
 
-/datum/outfit/adventurer/mage
-	name = "Mage (Adventurer)"
-	shoes = /obj/item/clothing/shoes/simpleshoes
-	belt = /obj/item/storage/belt/leather/rope
-	backr = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/storage/magebag/poor
-	beltl = /obj/item/reagent_containers/glass/bottle/manapot
-	r_hand = /obj/item/weapon/polearm/woodstaff
-
-
-	backpack_contents = list(
-		/obj/item/book/granter/spellbook/apprentice = 1,
-		/obj/item/chalk = 1,
-	)
-
-/datum/outfit/adventurer/mage/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/job/advclass/combat/mage/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
-	if(H.age == AGE_OLD)
-		backl = /obj/item/storage/backpack/backpack
-
-/datum/outfit/adventurer/mage/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	. = ..()
-	if(visuals_only)
-		return
 
 	var/static/list/selectablehat = list(
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
@@ -88,7 +65,7 @@
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 	)
 
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "MAGE")
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "MAGE")
 
 	// Robe selection
 	var/static/list/selectablerobe = list(
@@ -96,4 +73,22 @@
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 	)
 
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "MAGE")
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "MAGE")
+
+/datum/outfit/adventurer/mage
+	name = "Mage (Adventurer)"
+	shoes = /obj/item/clothing/shoes/simpleshoes
+	belt = /obj/item/storage/belt/leather/rope
+	backr = /obj/item/storage/backpack/satchel
+	beltr = /obj/item/storage/magebag/poor
+	beltl = /obj/item/reagent_containers/glass/bottle/manapot
+	r_hand = /obj/item/weapon/polearm/woodstaff
+	backpack_contents = list(
+		/obj/item/book/granter/spellbook/apprentice = 1,
+		/obj/item/chalk = 1,
+	)
+
+/datum/outfit/adventurer/mage/pre_equip(mob/living/carbon/human/H, visuals_only)
+	. = ..()
+	if(H.age == AGE_OLD)
+		backl = /obj/item/storage/backpack/backpack

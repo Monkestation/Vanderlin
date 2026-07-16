@@ -900,7 +900,6 @@
 				armor = /obj/item/clothing/armor/cuirass/copperchest
 				mask = /obj/item/clothing/face/facemask/copper
 				wrists = /obj/item/clothing/wrists/bracers/copper
-				neck = /obj/item/clothing/neck/gorget/copper
 				shirt = /obj/item/clothing/armor/gambeson
 				pants = /obj/item/clothing/pants/chainlegs
 			if("BKnight") // RARE. DO NOT GIVE THEM BLACKSTEEL SHIT.

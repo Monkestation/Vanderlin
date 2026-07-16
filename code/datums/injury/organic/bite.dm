@@ -1,11 +1,9 @@
 /** BITES **/
 /datum/injury/bite
-	bleed_threshold = 5
-	bleed_rate = 2
 	damage_type = WOUND_BITE
 
 /datum/injury/bite/small
-	max_bleeding_stage = 3
+	bleed_threshold = 5
 	stages = list(
 		"ugly bite mark" = 20,
 		"bite mark" = 10,
@@ -15,7 +13,7 @@
 		)
 
 /datum/injury/bite/deep
-	max_bleeding_stage = 3
+	bleed_threshold = 15
 	stages = list(
 		"ugly deep bite" = 25,
 		"deep bite" = 20,
@@ -27,7 +25,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/bite/flesh
-	max_bleeding_stage = 4
+	bleed_threshold = 15
 	stages = list(
 		"ugly torn bite wound" = 35,
 		"torn bite wound" = 30,
@@ -39,7 +37,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/bite/gaping
-	max_bleeding_stage = 3
+	bleed_threshold = 15
 	stages = list(
 		"gaping bite wound" = 50,
 		"large blood soaked bite clot" = 25,
@@ -50,7 +48,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/bite/gaping_big
-	max_bleeding_stage = 3
+	bleed_threshold = 25
 	stages = list(
 		"big gaping bite wound" = 60,
 		"healing gaping bite wound" = 40,
@@ -61,7 +59,7 @@
 	fade_away_time = INFINITY
 
 /datum/injury/bite/massive
-	max_bleeding_stage = 3
+	bleed_threshold = 25
 	stages = list(
 		"massive bite wound" = 70,
 		"massive healing bite wound" = 50,

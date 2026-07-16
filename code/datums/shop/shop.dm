@@ -5,6 +5,10 @@
 	var/datum/tgui_triumph_shop/ui = new /datum/tgui_triumph_shop(mob.client)
 	ui.ui_interact(mob)
 
+/datum/preferences/proc/open_gossip(mob/mob)
+	var/datum/gossip_prefs/gossip = new /datum/gossip_prefs(mob)
+	gossip.ui_interact(mob)
+
 /datum/preferences/proc/load_triumph_shop_character_data(savefile/S)
 	if(!S)
 		return

@@ -171,13 +171,13 @@
 	controller.clear_blackboard_key(BB_HUMAN_NPC_WEAKPOINT)
 
 	// Parity with npc_choose_attack_zone aimheight picks
-	if(pawn.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(pawn))
 		pawn.aimheight_change(pawn.deadite_get_aimheight(target))
 		return
 	if(!(pawn.mobility_flags & MOBILITY_STAND))
 		pawn.aimheight_change(rand(1, 4))
 		return
-	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE))
+	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE) || !CAN_HAVE_BLOOD(target))
 		pawn.aimheight_change(rand(12, 19))
 		return
 	pawn.aimheight_change(pick(rand(5, 8), rand(9, 11), rand(12, 19)))
@@ -334,7 +334,7 @@
 	return null
 
 /datum/ai_behavior/basic_melee_attack/human_npc/proc/_try_backstep(mob/living/carbon/human/pawn, atom/target)
-	if(pawn.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(pawn))
 		return FALSE
 	if(pawn.body_position == LYING_DOWN)
 		return FALSE

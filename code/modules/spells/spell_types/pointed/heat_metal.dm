@@ -122,7 +122,7 @@
 /datum/action/cooldown/spell/heat_metal/proc/handle_heating_equipped(mob/living/carbon/target, obj/item/clothing/targeteditem)
 	var/damage_to_apply = 30 // How much damage should your armor burning you should do.
 	var/part_bitflags = targeteditem.body_parts_covered
-	var/list/body_zones = body_parts_covered2organ_names(part_bitflags) //list of precise and main body zones
+	var/list/body_zones = cover_flags2body_zones(part_bitflags) //list of precise and main body zones
 	if(!length(body_zones))
 		return
 	var/list/filtered_zones = list()

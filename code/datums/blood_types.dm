@@ -30,8 +30,15 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 
 /datum/blood_type/New()
 	. = ..()
-	compatible_types |= type
+	compatible_types |= type_key()
 
+/**
+ * Key used to identify this blood type in compatible_types
+ *
+ * Allows for more complex or dynamically generated blood types
+ */
+/datum/blood_type/proc/type_key()
+	return type
 
 /// Gets data to pass to a reagent
 /datum/blood_type/proc/get_blood_data(mob/living/sampled_from)
@@ -56,7 +63,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	. = (sampled_from.stat == DEAD ? BLOOD_PREFERENCE_DEAD : BLOOD_PREFERENCE_LIVING)
 	if(sampled_from.has_status_effect(STATUS_EFFECT_SLEEPING))
 		. |= BLOOD_PREFERENCE_SLEEPING
-	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(IS_DEADITE(sampled_from))
 		. &= ~BLOOD_PREFERENCE_LIVING
 		. |= BLOOD_PREFERENCE_DEAD
 	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))

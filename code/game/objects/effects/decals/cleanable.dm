@@ -9,7 +9,6 @@
 	///The type of cleaning required to clean the decal. See __DEFINES/cleaning.dm for the options
 	var/clean_type = CLEAN_TYPE_LIGHT_DECAL
 	var/wash_precent = 0
-	COOLDOWN_DECLARE(wash_cooldown)
 
 /obj/effect/decal/cleanable/Initialize(mapload)
 	. = ..()
@@ -28,11 +27,13 @@
 	var/turf/T = get_turf(src)
 	if(T && is_station_level(T.z))
 		SSblackbox.record_feedback("tally", "station_mess_created", 1, name)
+		SSobjectivequests.increase_value(/datum/objective_quest_driver/mess, 1)
 
 /obj/effect/decal/cleanable/Destroy()
 	var/turf/T = get_turf(src)
 	if(T && is_station_level(T.z))
 		SSblackbox.record_feedback("tally", "station_mess_destroyed", 1, name)
+		SSobjectivequests.decrease_value(/datum/objective_quest_driver/mess, 1)
 	return ..()
 
 /obj/effect/decal/cleanable/proc/lazy_init_reagents()
@@ -113,15 +114,16 @@
 /obj/effect/decal/cleanable/wash(clean_types)
 	. = ..()
 	if (. || (clean_types & clean_type))
+		if(usr)
+			SEND_SIGNAL(usr, COMSIG_MOB_WASHED_MESS, src)
 		qdel(src)
 		return TRUE
 	return .
 
 /obj/effect/decal/cleanable/weather_act_on(weather_trait, severity)
-	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, wash_cooldown))
+	if(weather_trait != PARTICLEWEATHER_RAIN)
 		return
-	COOLDOWN_START(src, wash_cooldown, 7.5 SECONDS)
-	wash_precent += min(25, severity / 2)
+	wash_precent += severity
 	alpha = 255 *((100 - wash_precent) * 0.01)
 	if(wash_precent >= 100)
 		wash(CLEAN_WASH)

@@ -33,12 +33,6 @@
 
 	temperature_modification = -10
 
-
-//Makes you a little chilly
-/datum/particle_weather/snow_gentle/weather_act(mob/living/L)
-	L.snow_shiver = world.time + 7 SECONDS
-
-
 /datum/particle_weather/snow_storm
 	name = "Snow Storm"
 	desc = "Snow Storm, la la description."
@@ -74,12 +68,6 @@
 		new /obj/structure/snow(target_turf, 1)
 	else
 		target_turf.snow.weathered(src)
-
-//Makes you a lot little chilly
-/mob/living/var/snow_shiver
-
-/datum/particle_weather/snow_storm/weather_act(mob/living/L)
-	L.snow_shiver = world.time + 10 SECONDS
 
 /particles/fog
 	icon = 'icons/effects/particles/smoke.dmi'

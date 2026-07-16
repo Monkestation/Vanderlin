@@ -50,11 +50,11 @@
 		if("Bow")
 			var/obj/item/ammo_holder/quiver/arrows/pyro/P = new(get_turf(spawned))
 			spawned.equip_to_appropriate_slot(P)
-			to_chat(spawned, span_info("You are able to make more bow ammunitions with iron, blast powder and some planks."))
+			to_chat(spawned, span_info("You are able to make more bow ammunition with iron, blast powder and some planks."))
 		if("Crossbow")
 			var/obj/item/ammo_holder/quiver/bolts/pyro/P = new(get_turf(spawned))
 			spawned.equip_to_appropriate_slot(P)
-			to_chat(spawned, span_info("You are able to make more crossbow ammunitions with iron, blast powder and some planks."))
+			to_chat(spawned, span_info("You are able to make more crossbow ammunition with iron, blast powder and some planks."))
 
 /datum/outfit/wretch/pyromaniac
 	name = "Pyromaniac (Wretch)"

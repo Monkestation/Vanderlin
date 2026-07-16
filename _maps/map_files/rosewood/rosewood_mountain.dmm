@@ -203,7 +203,7 @@
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon)
 "bQ" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon/lower)
 "bX" = (
@@ -2697,7 +2697,7 @@
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "vQ" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon/lower)
 "vU" = (

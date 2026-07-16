@@ -30,6 +30,7 @@
 #define VEHICLE_TRAIT "vehicle"
 /// For traits that an item should always have
 #define INNATE_TRAIT "innate"
+#define STOCK_TRAIT "stock_trait"
 #define CRIT_HEALTH_TRAIT "crit_health"
 #define OXYLOSS_TRAIT "oxyloss"
 #define BLOODLOSS_TRAIT "bloodloss"
@@ -72,6 +73,7 @@
 #define STASIS_MUTE "stasis"
 #define GENETICS_SPELL "genetics_spell"
 #define EYES_COVERED "eyes_covered"
+#define EYES_TINTED	"eyes_tinted"
 #define CULT_EYES "cult_eyes"
 #define TRAIT_SANTA "santa"
 #define SCRYING_ORB "scrying-orb"

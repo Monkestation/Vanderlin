@@ -17,7 +17,7 @@
 #define CE_STABLE "stable"
 /// Boosts spleen blood regen
 #define CE_BLOODRESTORE "bloodrestore"
-/// Reduces shock
+/// Reduces shock by a flat amount, applied across bodyparts
 #define CE_PAINKILLER "painkiller"
 /// Liver filtering
 #define CE_ALCOHOL "alcohol"

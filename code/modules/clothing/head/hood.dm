@@ -221,11 +221,11 @@
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 
-	color = CLOTHING_BROWN
+	color = CLOTHING_PEASANT_BROWN
 
 /obj/item/clothing/head/roguehood/studded/retinue //For skirmisher
 	name = "guard studded hood"
 	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however. This one bears the heraldry of the local lord."
 	detail_tag = "_detail"
-	color = CLOTHING_AZURE
+	color = CLOTHING_MAGE_BLUE
 	detail_color = CLOTHING_WHITE

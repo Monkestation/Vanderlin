@@ -1,40 +1,49 @@
 GLOBAL_LIST_EMPTY(slapcraft_firststep_recipe_cache)
-GLOBAL_LIST_EMPTY(slapcraft_categorized_recipes)
-GLOBAL_LIST_EMPTY(slapcraft_steps)
-GLOBAL_LIST_EMPTY(slapcraft_recipes)
 
+GLOBAL_LIST_INIT(slapcraft_steps, init_slapcraft_steps())
 
-/proc/init_slapcraft_recipes()
-	var/list/recipe_list = GLOB.slapcraft_recipes
-	for(var/datum/type as anything in typesof(/datum/slapcraft_recipe))
+/proc/init_slapcraft_steps()
+	var/list/step_list = list()
+	for(var/datum/slapcraft_step/type as anything in typesof(/datum/slapcraft_step))
 		if(IS_ABSTRACT(type))
 			continue
+		step_list[type] = new type()
+
+	return step_list
+
+GLOBAL_LIST_EMPTY(slapcraft_categorized_recipes)
+GLOBAL_LIST_INIT(slapcraft_recipes, init_slapcraft_recipes())
+
+/proc/init_slapcraft_recipes()
+	var/list/recipe_list = list()
+	for(var/datum/slapcraft_recipe/type as anything in typesof(/datum/slapcraft_recipe))
+		if(IS_ABSTRACT(type))
+			continue
+
 		var/datum/slapcraft_recipe/recipe = new type()
 		recipe_list[type] = recipe
 
 		// Add the recipe to the categorized global list, which is used for the handbook UI
-		if(!GLOB.slapcraft_categorized_recipes[recipe.category])
+		if(!length(GLOB.slapcraft_categorized_recipes[recipe.category]))
 			GLOB.slapcraft_categorized_recipes[recipe.category] = list()
-		if(!GLOB.slapcraft_categorized_recipes[recipe.category][recipe.subcategory])
+
+		if(!length(GLOB.slapcraft_categorized_recipes[recipe.category][recipe.subcategory]))
 			GLOB.slapcraft_categorized_recipes[recipe.category][recipe.subcategory] = list()
+
 		GLOB.slapcraft_categorized_recipes[recipe.category][recipe.subcategory] += recipe
 
+	return recipe_list
+
+GLOBAL_LIST_INIT(molten_recipes, init_molten_recipes())
 
 /proc/init_molten_recipes()
-	var/list/recipe_list = GLOB.molten_recipes
-	for(var/datum/type as anything in typesof(/datum/molten_recipe))
+	var/list/recipe_list = list()
+	for(var/datum/molten_recipe/type as anything in typesof(/datum/molten_recipe))
 		if(IS_ABSTRACT(type))
 			continue
-		var/datum/molten_recipe/recipe = new type()
-		recipe_list |= recipe
+		recipe_list += new type()
 
-
-/proc/init_slapcraft_steps()
-	var/list/step_list = GLOB.slapcraft_steps
-	for(var/datum/type as anything in typesof(/datum/slapcraft_step))
-		if(IS_ABSTRACT(type))
-			continue
-		step_list[type] = new type()
+	return recipe_list
 
 /// Gets cached recipes for a type. This is a method of optimizating recipe lookup. Ugly but gets the job done.
 /// also WARNING: This will make it so all recipes whose first step is not type checked will not work, which all recipes that I can think of will be.

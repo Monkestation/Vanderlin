@@ -38,21 +38,28 @@
 	src.cooldown_time = cooldown_time
 	src.enable_cooldown = enable_cooldown
 
+/datum/component/stockpile_loot_spawner/Destroy(force)
+	QDEL_NULL(loot)
+	stockpile_ref = null
+	takers = null
+	return ..()
+
 /datum/component/stockpile_loot_spawner/RegisterWithParent()
-	. = ..()
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(handle_loot_attempt))
 	if(resetting_item)
-		RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(handle_reset_attempt))
+		RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(handle_reset_attempt))
 
 /datum/component/stockpile_loot_spawner/UnregisterFromParent()
-	. = ..()
 	UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
 	if(resetting_item)
-		UnregisterSignal(parent, COMSIG_ATOM_ATTACKBY)
+		UnregisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION)
 
 /datum/component/stockpile_loot_spawner/proc/handle_loot_attempt(atom/source, mob/user)
+	SIGNAL_HANDLER
+
 	if(!source.CanLoot(user))
 		return NONE
+
 	if(needs_reset)
 		to_chat(user, span_warning("[parent] needs to be restocked before you can loot it again."))
 		return NONE
@@ -61,11 +68,10 @@
 	if(enable_cooldown)
 		if(!check_player_cooldown(user))
 			return NONE
-	else
-		if(user in takers)
-			if(takers[user] >= spawns_per_person)
-				to_chat(user, span_warning("You've already taken your share from [parent]."))
-				return NONE
+	else if(user in takers)
+		if(takers[user] >= spawns_per_person)
+			to_chat(user, span_warning("You've already taken your share from [parent]."))
+			return NONE
 
 	if(length(takers) >= max_spawns)
 		to_chat(user, span_warning("[parent] has been completely emptied."))
@@ -77,6 +83,7 @@
 		return NONE
 
 	INVOKE_ASYNC(src, PROC_REF(start_loot), source, user)
+
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/component/stockpile_loot_spawner/proc/check_stockpile_resources(mob/user)
@@ -145,13 +152,18 @@
 	for(var/resource in resource_costs)
 		. += "[resource_costs[resource]] [resource]"
 
-/datum/component/stockpile_loot_spawner/proc/handle_reset_attempt(atom/source, obj/item/L, mob/living/user)
+/datum/component/stockpile_loot_spawner/proc/handle_reset_attempt(atom/source, mob/living/user, obj/item/tool)
+	SIGNAL_HANDLER
+
 	if(!needs_reset)
 		return NONE
-	if(!istype(L, resetting_item))
+
+	if(!istype(tool, resetting_item))
 		return NONE
-	INVOKE_ASYNC(src, PROC_REF(start_reset), source, L, user)
-	return COMPONENT_NO_AFTERATTACK
+
+	INVOKE_ASYNC(src, PROC_REF(start_reset), source, user, tool)
+
+	return ITEM_INTERACT_SUCCESS
 
 /datum/component/stockpile_loot_spawner/proc/start_loot(atom/source, mob/living/user)
 	user.visible_message("[user] [action_text] [parent].")
@@ -189,9 +201,11 @@
 
 	SEND_SIGNAL(parent, COMSIG_TRAP_TRIGGERED, user)
 
-/datum/component/stockpile_loot_spawner/proc/start_reset(atom/source, obj/item/L, mob/living/user)
+/datum/component/stockpile_loot_spawner/proc/start_reset(atom/source, mob/living/user, obj/item/tool)
 	if(!do_after(user, action_time, source))
 		return
+
 	needs_reset = FALSE
+
 	to_chat(user, span_notice("You restock [parent]."))
 

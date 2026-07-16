@@ -60,6 +60,9 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/minermaster
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/minermaster/old
+	traits = list(
+		TRAIT_AMAZING_BACK
+	)
 
 /datum/outfit/pilgrim/minermaster
 	name = "Master Miner (Pilgrim)"
@@ -71,4 +74,5 @@
 	belt = /obj/item/storage/belt/leather
 	neck = /obj/item/storage/belt/pouch/coins/mid
 	beltl = /obj/item/weapon/pick
+	beltr = /obj/item/storage/hip/orebag
 	backl = /obj/item/storage/backpack/backpack

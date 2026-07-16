@@ -29,6 +29,14 @@
 	)
 	output = /obj/item/ammo_holder/quiver
 
+/datum/repeatable_crafting_recipe/leather/storage/javelin
+	name = "javelin sheath"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 2,
+	)
+	output = /obj/item/ammo_holder/javelin
+
 /datum/repeatable_crafting_recipe/leather/storage/dartpouch
 	name = "dart pouch"
 	requirements = list(
@@ -101,6 +109,18 @@
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/leather/storage/backpack/create_blacklisted_paths()
+	blacklisted_paths = subtypesof(/obj/item/rope)
+
+/datum/repeatable_crafting_recipe/leather/storage/orebag
+	name = "miner's satchel"
+	requirements = list(
+		/obj/item/natural/hide/cured= 3,
+		/obj/item/rope = 1,
+	)
+	output = /obj/item/storage/hip/orebag
+	craftdiff = 1
+
+/datum/repeatable_crafting_recipe/leather/storage/orebag/create_blacklisted_paths()
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
 /datum/repeatable_crafting_recipe/leather/storage/knife_sheath
@@ -249,6 +269,14 @@
 		/obj/item/natural/fibers = 1
 	)
 	output = /obj/item/clothing/gloves/leather/duelgloves
+
+/datum/repeatable_crafting_recipe/leather/gloves/fencergloves
+	name = "fencing gloves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 1
+	)
+	output = /obj/item/clothing/gloves/leather/fencer
 
 /datum/repeatable_crafting_recipe/leather/bracers
 	name = "leather bracers"
@@ -781,6 +809,13 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/standalone/fencerboots
+	name = "fencing boots"
+	output = /obj/item/clothing/shoes/boots/fencer
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
 /datum/repeatable_crafting_recipe/leather/standalone/furboots
 	name = "hardened fur lined boots"
 	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
@@ -790,7 +825,7 @@
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/hunterboots
-	name = "hunter boots"
+	name = "hunting boots"
 	output = /obj/item/clothing/shoes/boots/hunter
 	requirements = list(/obj/item/natural/hide/cured = 2,
 				/obj/item/natural/fur = 1,
@@ -940,6 +975,16 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/standalone/huntergamb
+	name = "hunting gambeson"
+	output = /obj/item/clothing/armor/gambeson/hunts
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
+		/obj/item/clothing/armor/gambeson = 1,
+	)
+	craftdiff = 4
+
 /datum/repeatable_crafting_recipe/leather/standalone/gloves
 	name = "hardened leather gloves"
 	output = /obj/item/clothing/gloves/leather/advanced
@@ -969,6 +1014,12 @@
 	output = /obj/item/clothing/armor/leather/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
 				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/fencercoat
+	name = "fencing coat"
+	output = /obj/item/clothing/armor/leather/fencer
+	requirements = list(/obj/item/natural/hide/cured = 2)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/atgervi_coat
@@ -1061,7 +1112,7 @@
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/hunterboots/masterwork
-	name = "masterwork hunter boots"
+	name = "masterwork hunting boots"
 	output = /obj/item/clothing/shoes/boots/hunter/masterwork
 	attacked_atom = /obj/item/clothing/shoes/boots/hunter
 	requirements = list(/obj/item/clothing/shoes/boots/hunter = 1,

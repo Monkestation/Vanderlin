@@ -240,8 +240,7 @@
 
 /datum/config_entry/number/outdated_movedelay/human_delay
 	movedelay_type = /mob/living/carbon/human
-/datum/config_entry/number/outdated_movedelay/monkey_delay
-	movedelay_type = /mob/living/carbon/monkey
+
 /datum/config_entry/number/outdated_movedelay/animal_delay
 	movedelay_type = /mob/living/simple_animal
 /////////////////////////////////////////////////

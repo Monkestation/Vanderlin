@@ -23,8 +23,8 @@
 
 	/// Active timers with this datum as the target
 	var/list/active_timers
-	/// Status traits attached to this datum
-	var/list/status_traits
+	/// Status traits attached to this datum. Associative list of the form: list(trait name (string) = list(source1, source2, source3,...))
+	var/list/_status_traits
 
 	/// Components attached to this datum
 	/// Lazy associated list in the structure of `type:component/list of components`

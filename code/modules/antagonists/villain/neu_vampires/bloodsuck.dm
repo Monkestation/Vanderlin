@@ -16,7 +16,7 @@
 		return 0
 	if(!force && !COOLDOWN_FINISHED(src, drinkblood_use))
 		return 0
-	if(HAS_TRAIT(victim, TRAIT_HUSK) || (NOBLOOD in victim.dna?.species?.species_traits) || victim.blood_volume <= 0)
+	if(HAS_TRAIT(victim, TRAIT_HUSK) || !CAN_HAVE_BLOOD(victim) || !victim.get_blood_volume())
 		to_chat(src, span_warning("Sigh. No blood."))
 		return 0
 	var/datum/antagonist/vampire/VDrinker = mind?.has_antag_datum(/datum/antagonist/vampire)
@@ -52,7 +52,7 @@
 				to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
 				used_vitae = min(250, victim.bloodpool)
 
-	drink_amt = min(victim.blood_volume, drink_amt)
+	drink_amt = min(victim.get_blood_volume(), drink_amt)
 	if(ingest)
 		drink_amt = victim.transfer_blood_impurities(reagents, drink_amt, 1.5, src)
 	if(used_vitae > 0)
@@ -63,7 +63,7 @@
 		clan?.handle_bloodsuck(src, blood_data?["preferences"])
 		adjust_bloodpool(used_vitae)
 		victim.adjust_bloodpool(-used_vitae)
-	victim.adjust_bloodvolume(-drink_amt)
+	victim.adjust_blood_volume(-drink_amt)
 
 	playsound(src, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
 

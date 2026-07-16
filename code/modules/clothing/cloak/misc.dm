@@ -96,18 +96,7 @@
 	color = CLOTHING_SOOT_BLACK
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = SPECIES_BASE_BODY
-
-/obj/item/clothing/cloak/half/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
-
-/obj/item/clothing/cloak/half/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/half/guard
 	name = "guard's half cloak"
@@ -176,6 +165,7 @@
 	slot_flags = ITEM_SLOT_CLOAK
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_CLOAK
+	has_storage = TRUE
 
 //............... Battle Nun ........................... (unique kit for the role, tabard for aesthetics)
 /obj/item/clothing/cloak/battlenun
@@ -212,9 +202,10 @@
 
 /obj/item/clothing/cloak/tabard/blkknight
 	name = "blood sash"
-	icon_state = "bksash"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
+	icon_state = "bksash"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	detail_tag = null
 
 /obj/item/clothing/neck/blkknight
 	name = "dragonscale necklace"
@@ -419,14 +410,10 @@
 	icon_state = "fancycoat"
 	item_state = "fancycoat"
 	alternate_worn_layer = TABARD_LAYER
-	boobed = FALSE
 	flags_inv = HIDEBOOB
 	slot_flags = ITEM_SLOT_CLOAK|ITEM_SLOT_ARMOR
-	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	nodismemsleeves = TRUE
-	color = CLOTHING_WHITE
-	detail_tag = "_detail"
-	detail_color = CLOTHING_WHITE
+	detail_tag = null
 
 /obj/item/clothing/cloak/kazengun
 	name = "jinbaori"
@@ -438,3 +425,35 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	color = "#FFFFFF"
 	detail_color = "#FFFFFF"
+
+//............... Cadwyn Order Cloaks ......................//
+/obj/item/clothing/cloak/cadwyn/astrata
+	name = "bright tabard"
+	desc = "A golden-coloured cloak, torn into strips at the ends. Let it mark you as a threat to any deadite monster as you stand tall above the charge."
+	icon_state = "cadwyncloak_astrata"
+	item_state = "cadwyncloak_astrata"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/cadwyn/ravox
+	name = "tattered surcoat"
+	desc = "A partially shredded red tabard.  Let your allies take shelter behind its bold colour as you bear the attack."
+	icon_state = "cadwyncloak_ravox"
+	item_state = "cadwyncloak_ravox"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/cadwyn/necra
+	name = "dark cloak"
+	desc = "A dark cloak secured with a silver buckle. The edge is torn from the dangerous melees with the deadite horde."
+	icon_state = "cadwyncloak_necra"
+	item_state = "cadwyncloak_necra"
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+//............... Legacy Totod Order Cloaks ......................//
+/obj/item/clothing/cloak/cape/crusader
+	name = "desert cape"
+	desc = "Zaladin is known for its legacies in tailoring, this particular cape is interwoven with fine stained silks and leather - a sand elf design, renowned for its style and durability."
+	icon_state = "crusader_cloak"
+	icon = 'icons/roguetown/clothing/special/crusader.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	has_storage = TRUE

@@ -66,7 +66,7 @@
 	. = ..()
 
 	sellprice = round((sellprice || 0) * 0.2)
-	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
+	if(lethal && owner && CAN_HAVE_BLOOD(owner))
 		owner.death()
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, atom/grabbed, precise)
@@ -193,9 +193,8 @@
 			//Applies the debrained overlay if there is no brain
 			if(!brain)
 				var/image/debrain_overlay = image(layer = -HAIR_LAYER, dir = SOUTH)
-				if(!(NOBLOOD in species_flags_list))
-					debrain_overlay.icon = 'icons/mob/human_face.dmi'
-					debrain_overlay.icon_state = "debrained"
+				debrain_overlay.icon = 'icons/mob/human_face.dmi'
+				debrain_overlay.icon_state = "debrained"
 				. += debrain_overlay
 			//ROGTODO add accessories (earrings, piercings) here
 

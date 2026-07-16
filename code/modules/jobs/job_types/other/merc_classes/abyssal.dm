@@ -80,6 +80,5 @@
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
-		/obj/item/storage/keyring/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
 	)

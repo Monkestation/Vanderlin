@@ -10,6 +10,77 @@
 	force = DAMAGE_KNIFE - 7
 	item_weight = 75 GRAMS
 
+/obj/item/ammo_casing/caseless/pelletshot
+	name = "pelletshot"
+	desc = "A handful of pellet shots, made to punch many holes into a packed bunch of enemies."
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "pellets"
+	projectile_type = /obj/projectile/bullet/pellet
+	caliber = "blundershot" //shotgun variant of lead balls essentially
+	dropshrink = 0.5
+	possible_item_intents = list(INTENT_USE)
+	pellets = 6
+	variance = 10
+	randomspread = TRUE
+
+	force = DAMAGE_KNIFE - 7
+	item_weight = 75 GRAMS
+
+/obj/item/ammo_casing/caseless/pelletshot/coin
+	var/coin_type = null
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/examine(mob/user)
+	. = ..()
+	. += span_info("It looks like you could rig this back up to regular coins.")
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/attack_self_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(!coin_type)
+		return
+	if(!do_after(user, 3 SECONDS, src))
+		to_chat(user, span_warning("You stop rigging back [src]."))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	var/obj/item/coin/coin_new = new coin_type(get_turf(src))
+	coin_new.set_quantity(pellets)
+	user.equip_to_slot_if_possible(coin_new, ITEM_SLOT_HANDS)
+	qdel(src)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/zenar
+	name = "zenarshot"
+	desc = "A handful of pellet shots out of zenars, made to punch many holes into a packed bunch of enemies."
+	icon_state = "pellets_zenar"
+	projectile_type = /obj/projectile/bullet/pellet/zenar
+	coin_type = /obj/item/coin/gold
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/zil
+	name = "zilshot"
+	desc = "A handful of pellet shots out of zils, made to punch many holes into a packed bunch of enemies."
+	icon_state = "pellets_zenarii"
+	projectile_type = /obj/projectile/bullet/pellet/zil
+	coin_type = /obj/item/coin/silver
+
+/obj/item/ammo_casing/caseless/pelletshot/coin/zenny
+	name = "zennyshot"
+	desc = "A handful of pellet shots out of zennies, made to punch many holes into a packed bunch of enemies."
+	icon_state = "pellets_zenny"
+	projectile_type = /obj/projectile/bullet/pellet/zenny
+	coin_type = /obj/item/coin/copper
+
+/obj/item/ammo_casing/caseless/pelletshot/glass
+	name = "glasshot"
+	desc = "A handful of pellet shots out of glass shards, made to bleed a packed bunch of enemies."
+	icon_state = "pellets_shard"
+	projectile_type = /obj/projectile/bullet/pellet/glass
+	pellets = 9
+
+/obj/item/ammo_casing/caseless/pelletshot/salt
+	name = "saltshot"
+	desc = "A handful of pellet shots out of salt, made to incapacitate a packed bunch of enemies."
+	icon_state = "pellets_salt"
+	projectile_type = /obj/projectile/bullet/pellet/salt
+	pellets = 9
+
 /obj/item/ammo_casing/caseless/cball
 	name = "large cannonball"
 	desc = "A round lead ball. Complex and still spherical."

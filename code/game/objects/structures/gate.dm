@@ -187,18 +187,24 @@ GLOBAL_LIST_EMPTY(biggates)
 	if(!redstone_attached)
 		to_chat(user, span_warning("The chain is not attached to anything."))
 		return
+
 	if(!isliving(user))
 		return
+
 	if(!COOLDOWN_FINISHED(src, winch_cooldown))
 		return
+
 	var/mob/living/L = user
 	L.changeNext_move(CLICK_CD_MELEE)
 	var/used_time = 10.5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 10)
 	if(!do_after(user, used_time))
 		return
+
 	COOLDOWN_START(src, winch_cooldown, 1.5 SECONDS)
 	for(var/obj/structure/structure in redstone_attached)
 		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+
 	trigger_wire_network(user)
 	user.visible_message(span_warning("[user] cranks [src]."), span_warning("I crank [src]."))
+	user.log_message("pulled the winch with id \"[redstone_id]\"", LOG_GAME)
 	playsound(src, 'sound/foley/winch.ogg', 100, extrarange = 3)

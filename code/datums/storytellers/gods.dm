@@ -255,7 +255,7 @@
 			STATS_ANIMALS_BRED = list("name" = "Animals bred:", "points" = 1.5, "capacity" = 60),
 		),
 		"Set 2" = list(
-			STATS_WOUNDS_SEWED = list("name" = "Wounds sewed up:", "points" = 0.75, "capacity" = 90),
+			STATS_WOUNDS_FIXED = list("name" = "Wounds sewed up:", "points" = 0.75, "capacity" = 90),
 		),
 		"Set 3" = list(
 			STATS_LUX_HARVESTED = list("name" = "Lux extracted:", "points" = 8, "capacity" = 70),

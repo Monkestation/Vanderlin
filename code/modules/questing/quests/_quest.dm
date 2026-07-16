@@ -9,6 +9,22 @@
 	var/reward_amount = 0
 	var/deposit_amount = 0
 	var/complete = FALSE
+	var/self_validating = FALSE
+
+	/// world.time at which this quest expires and gets pruned. 0 = never expire.
+	var/expiry_time = 0
+	/// world.time when an adventurer claimed this quest. 0 = unclaimed.
+	var/accepted_time = 0
+	/// Extra mammons added on top of the original reward via steward boosts.
+	var/reward_boosted_by = 0
+
+	/// Which threat region name (string, matches datum/threat_region.region_name) to reduce on completion.
+	/// Populated by generate() using the landmark's area.
+	var/threat_region_name = ""
+
+	/// Weakref to the steward/merchant who issued this quest (if any).
+	/// Used for bonus reward routing on turn-in.
+	var/datum/weakref/issuer_budget_ref
 
 	/// Progress tracking
 	var/progress_current = 0
@@ -34,6 +50,15 @@
 	var/datum/weakref/quest_scroll_ref
 	/// List of weakrefs to actual quest items/mobs for reducing overhead of compass.
 	var/list/datum/weakref/tracked_atoms = list()
+	/// If non-empty, this quest type may only spawn in these threat region names.
+	var/list/allowed_threat_regions = list()
+	/// If non-empty, this quest type will never spawn in these threat region names.
+	var/list/denied_threat_regions = list()
+
+	///low range for our quest
+	var/minimum_payout = QUEST_REWARD_EASY_LOW
+	///high range for our quest
+	var/maximum_payout = QUEST_REWARD_EASY_HIGH
 
 /datum/quest/Destroy()
 	// Clean up mobs with quest components
@@ -73,8 +98,14 @@
 
 /// Generate quest content - override in subtypes
 /datum/quest/proc/generate(obj/effect/landmark/quest_spawner/landmark)
+	add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_QUEST_CREATED, 1)
 	if(!title)
 		title = get_title()
+	// Record which threat region this landmark sits in
+	if(landmark)
+		var/datum/threat_region/TR = SSregionthreat.get_region_for_turf(get_turf(landmark))
+		if(TR)
+			threat_region_name = TR.region_name
 	return TRUE
 
 /// Get the quest title - override in subtypes for dynamic titles
@@ -100,20 +131,45 @@
 	else
 		quest_scroll?.update_quest_text()
 
-/// Mark quest as complete
+/// Mark quest as complete — triggers threat reduction and other side-effects.
 /datum/quest/proc/mark_complete()
 	complete = TRUE
 	quest_scroll?.update_quest_text()
+	on_complete()
 
-// Base reward scaled only to difficulty
-/datum/quest/proc/get_base_reward()
+/**
+ * on_complete — side-effects fired when a quest is marked complete.
+ *
+ * Reduces the associated threat region by an amount scaled to difficulty.
+ * Override in subtypes for additional effects (e.g. custom quest validation).
+ */
+/datum/quest/proc/on_complete()
+	SHOULD_CALL_PARENT(TRUE)
+	add_abstract_elastic_data(ELASCAT_QUESTS_FINISHED, title, 1)
+	add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_QUEST_COMPLETED, 1)
+	if(!threat_region_name)
+		return
+
+	var/datum/threat_region/TR = SSregionthreat.get_region(threat_region_name)
+	if(!TR)
+		return
+
+	var/reduction = 0
 	switch(quest_difficulty)
 		if(QUEST_DIFFICULTY_EASY)
-			return rand(QUEST_REWARD_EASY_LOW, QUEST_REWARD_EASY_HIGH)
+			reduction = QUEST_THREAT_REDUCE_EASY
 		if(QUEST_DIFFICULTY_MEDIUM)
-			return rand(QUEST_REWARD_MEDIUM_LOW, QUEST_REWARD_MEDIUM_HIGH)
+			reduction = QUEST_THREAT_REDUCE_MEDIUM
 		if(QUEST_DIFFICULTY_HARD)
-			return rand(QUEST_REWARD_HARD_LOW, QUEST_REWARD_HARD_HIGH)
+			reduction = QUEST_THREAT_REDUCE_HARD
+
+	if(reduction > 0)
+		TR.reduce_latent_ambush(reduction)
+		log_game("Quest completion reduced threat in [threat_region_name] by [reduction] (quest: [title])")
+
+// Base reward scaled only to difficulty
+/datum/quest/proc/get_base_reward() // I plan to add something to this to be more eventually
+	return rand(minimum_payout, maximum_payout)
 
 // Additional reward, override in subtypes for specific calculations. Called AFTER generation.
 /datum/quest/proc/get_additional_reward(turf/target_turf)
@@ -124,17 +180,6 @@
 	var/base = get_base_reward()
 	var/additional = get_additional_reward(target_turf)
 	return base + additional
-
-/// Calculate deposit based on difficulty
-/datum/quest/proc/calculate_deposit()
-	switch(quest_difficulty)
-		if(QUEST_DIFFICULTY_EASY)
-			return QUEST_DEPOSIT_EASY
-		if(QUEST_DIFFICULTY_MEDIUM)
-			return QUEST_DEPOSIT_MEDIUM
-		if(QUEST_DIFFICULTY_HARD)
-			return QUEST_DEPOSIT_HARD
-	return 0
 
 /// Get icon for scroll based on difficulty
 /datum/quest/proc/get_scroll_icon()
@@ -178,5 +223,37 @@
 
 /// Called when quest is claimed by a user
 /datum/quest/proc/on_claim(mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+	add_abstract_elastic_data(ELASCAT_QUESTS, title, 1)
+	add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_QUEST_ACCEPTED, 1)
 	quest_receiver_reference = WEAKREF(user)
 	quest_receiver_name = user.real_name
+
+/// Calculate deposit based on difficulty
+/datum/quest/proc/calculate_deposit()
+	switch(quest_difficulty)
+		if(QUEST_DIFFICULTY_EASY)
+			return QUEST_DEPOSIT_EASY
+		if(QUEST_DIFFICULTY_MEDIUM)
+			return QUEST_DEPOSIT_MEDIUM
+		if(QUEST_DIFFICULTY_HARD)
+			return QUEST_DEPOSIT_HARD
+	return 0
+
+
+/**
+ * Increase this quest's reward by `amount` mammons, always drawn from the quest fund.
+ * Returns TRUE on success.
+ */
+/datum/quest/proc/increase_reward(mob/steward, amount)
+	if(!amount || amount <= 0)
+		return FALSE
+	if(SSquestboard.quest_fund < amount)
+		to_chat(steward, span_warning("The quest fund only has [SSquestboard.quest_fund] mammons."))
+		return FALSE
+	SSquestboard.quest_fund -= amount
+	reward_amount += amount
+	reward_boosted_by += amount
+	log_quest(steward.ckey, steward.mind, steward, \
+		"Boost reward on custom quest \"[title]\" by [amount] from quest fund. New total: [reward_amount]")
+	return TRUE

@@ -193,20 +193,24 @@
 	icon_state = "inqvision"
 	layer = BLIND_LAYER
 
+// Flickering full black screen
 /atom/movable/screen/fullscreen/blackimageoverlay
 	icon_state = "blackimageoverlay"
 	layer = BLIND_LAYER
 	plane = FULLSCREEN_PLANE
 
+// Static full black screen
+/atom/movable/screen/fullscreen/blackimageoverlay/noflicker
+	icon_state = "blind"
+
+// Tg-style blindnesss
 /atom/movable/screen/fullscreen/blind
 	icon_state = "impairedoverlay2"
 	layer = BLIND_LAYER
 	plane = FULLSCREEN_PLANE
 
-/atom/movable/screen/fullscreen/blind/sleeper
-	icon_state = "blind"
-	layer = BLIND_LAYER
-	plane = FULLSCREEN_PLANE
+/atom/movable/screen/fullscreen/blind/noflicker
+	icon_state = "impairedoverlay2static"
 
 /atom/movable/screen/fullscreen/zezuspsyst
 	icon_state = "hey"

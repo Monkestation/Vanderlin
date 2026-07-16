@@ -133,8 +133,7 @@
 			var/mob/living/simple_animal/animal_candidate = candidate
 			animal_candidate.adjustHealth(-simple_heal, updating_health = FALSE)
 
-		if (candidate.blood_volume < BLOOD_VOLUME_NORMAL)
-			candidate.blood_volume += blood_heal
+		candidate.adjust_blood_volume(blood_heal, maximum = BLOOD_VOLUME_NORMAL)
 
 		candidate.updatehealth()
 

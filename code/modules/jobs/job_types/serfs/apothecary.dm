@@ -65,7 +65,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/apothecary
 
 	outfit = /datum/outfit/apothecary
-	give_bank_account = 100
+	give_bank_account = 200
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

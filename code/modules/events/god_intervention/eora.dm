@@ -30,10 +30,8 @@
 			continue
 
 		// Exclude parents using new family system
-		if(human_mob.family_member_datum)
-			var/datum/family_member/member = human_mob.family_member_datum
-			if(member.children.len > 0)
-				continue
+		if(human_mob.family_member_datum?.has_children())
+			continue
 
 		// Add to appropriate gender list
 		if(human_mob.gender == MALE)

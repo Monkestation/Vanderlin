@@ -2177,9 +2177,7 @@
 "aks" = (
 /obj/structure/fluff/statue/knight,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	dir = 4;
-	pixel_y = 1;
-	pixel_x = -7
+	dir = 4
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
@@ -2769,12 +2767,6 @@
 /obj/structure/lootable_structure/stockpile/mining_cache,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/lower)
-"anl" = (
-/mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	pixel_y = 27
-	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "ann" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -4162,9 +4154,7 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "aui" = (
-/mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	pixel_y = 27
-	},
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
@@ -6826,9 +6816,7 @@
 "aGu" = (
 /obj/structure/fluff/statue/knight/r,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	dir = 8;
-	pixel_y = 1;
-	pixel_x = 4
+	dir = 8
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
@@ -7014,25 +7002,6 @@
 	mailtag = "Inquisition"
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/town/church/inquisition)
-"aHq" = (
-/obj/structure/rack/shelf/biggest,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/listeningdevice,
-/obj/item/listeningdevice,
-/obj/item/speakerinq,
-/obj/item/inqarticles/bmirror,
-/turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "aHr" = (
 /obj/effect/decal/cleanable/food/flour,
@@ -7751,15 +7720,6 @@
 	},
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
-"aKY" = (
-/obj/structure/fluff/statue/knight,
-/mob/living/carbon/human/species/goblin/npc/ambush/cave{
-	dir = 4;
-	pixel_y = 3;
-	pixel_x = -6
-	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aLa" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -9380,11 +9340,6 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
-"aSQ" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/clothing/neck/talkstone,
-/turf/open/floor/carpet/royalblack,
-/area/indoors/town/church/inquisition)
 "aSR" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -11722,6 +11677,25 @@
 /obj/item/ingot/gold,
 /turf/open/floor/tile/diamond/blue,
 /area/under/mountains/anvil/upper)
+"fuI" = (
+/obj/structure/rack/shelf/biggest,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/item/listeningdevice/inq,
+/obj/item/listeningdevice/inq,
+/obj/item/speaker/inq,
+/obj/item/inqarticles/bmirror,
+/turf/open/floor/churchbrick,
+/area/indoors/town/church/inquisition)
 "fvT" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/herringbone,
@@ -14687,6 +14661,12 @@
 "wAI" = (
 /turf/open/water,
 /area/outdoors/mountains/anvil/peak)
+"wBu" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/clothing/neck/talkstone,
+/obj/item/storage/belt/pouch/coins/rich,
+/turf/open/floor/carpet/royalblack,
+/area/indoors/town/church/inquisition)
 "wEG" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/grass/cold,
@@ -68727,7 +68707,7 @@ ahv
 ahv
 ahv
 aWI
-aKY
+aks
 afn
 aWI
 aWI
@@ -70554,7 +70534,7 @@ afn
 aWI
 apS
 aKq
-anl
+aaE
 aMC
 afn
 adn
@@ -70958,7 +70938,7 @@ afn
 aWI
 apS
 aKq
-anl
+aaE
 aMC
 aEF
 aui
@@ -71567,7 +71547,7 @@ afn
 akd
 aMC
 aKq
-anl
+aaE
 adn
 abZ
 abZ
@@ -71968,7 +71948,7 @@ afn
 aWI
 apS
 aEF
-anl
+aaE
 aMC
 afn
 afn
@@ -72574,7 +72554,7 @@ apS
 apS
 apS
 aEF
-anl
+aaE
 aMC
 abZ
 apS
@@ -86614,7 +86594,7 @@ aVr
 aVr
 alC
 ado
-aHq
+fuI
 aIS
 awI
 aFz
@@ -129442,7 +129422,7 @@ aTv
 avU
 aer
 aer
-aSQ
+wBu
 aHa
 aHa
 aVr

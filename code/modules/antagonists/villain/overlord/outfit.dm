@@ -25,6 +25,6 @@
 		H.dna.species.native_language = "Zizo Chant"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
-	H.ambushable = FALSE
+	ADD_TRAIT(H, TRAIT_NOAMBUSH, JOB_TRAIT)
 
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "OVERLORD"), 5 SECONDS)
