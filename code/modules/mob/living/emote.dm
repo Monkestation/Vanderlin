@@ -1334,14 +1334,60 @@
 		playsound(user, pick('sound/vo/mobs/zombie/f/idle (1).ogg','sound/vo/mobs/zombie/f/idle (2).ogg','sound/vo/mobs/zombie/f/idle (3).ogg'), 80, FALSE, -1)
 
 
+/// The base chance for your yawn to propagate to someone else if they're on the same tile as you
+#define YAWN_PROPAGATE_CHANCE_BASE 20
+/// The amount the base chance to propagate yawns falls for each tile of distance
+#define YAWN_PROPAGATE_CHANCE_DECAY 4
+
 // ............... Y ..................
 /datum/emote/living/yawn
 	key = "yawn"
 	key_third_person = "yawns"
 	message = "yawns."
 	message_muffled = "makes a muffled yawn."
-	emote_type = EMOTE_AUDIBLE
+	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	cooldown = 5 SECONDS
+
+/datum/emote/living/yawn/run_emote(mob/user, params, type_override, intentional, targeted)
+	. = ..()
+	if(!isliving(user))
+		return
+
+	if(TIMER_COOLDOWN_FINISHED(user, COOLDOWN_YAWN_PROPAGATION))
+		TIMER_COOLDOWN_START(user, COOLDOWN_YAWN_PROPAGATION, cooldown * 3)
+
+	var/mob/living/carbon/carbon_user = user
+	if(carbon_user.check_obscured_slots() & HIDEFACE)
+		return // if your face is obscured, skip propagation
+
+	var/propagation_distance = user.client ? 5 : 2 // mindless mobs are less able to spread yawns
+
+	for(var/mob/living/iter_living in view(user, propagation_distance))
+		if(IS_DEAD_OR_INCAP(iter_living) || TIMER_COOLDOWN_RUNNING(iter_living, COOLDOWN_YAWN_PROPAGATION))
+			continue
+
+		var/dist_between = get_dist(user, iter_living)
+		var/recently_examined = FALSE // if you yawn just after someone looks at you, it forces them to yawn as well. Tradecraft!
+
+		if(iter_living.client)
+			var/examine_time = LAZYACCESS(iter_living.client?.recent_examines, user)
+			if(examine_time && (world.time - examine_time < YAWN_PROPAGATION_EXAMINE_WINDOW))
+				recently_examined = TRUE
+
+		if(!recently_examined && !prob(YAWN_PROPAGATE_CHANCE_BASE - (YAWN_PROPAGATE_CHANCE_DECAY * dist_between)))
+			continue
+
+		var/yawn_delay = rand(0.2 SECONDS, 0.7 SECONDS) * dist_between
+		addtimer(CALLBACK(src, PROC_REF(propagate_yawn), iter_living), yawn_delay)
+
+/// This yawn has been triggered by someone else yawning specifically, likely after a delay. Check again if they don't have the yawned recently trait
+/datum/emote/living/yawn/proc/propagate_yawn(mob/user)
+	if(!istype(user) || TIMER_COOLDOWN_RUNNING(user, COOLDOWN_YAWN_PROPAGATION))
+		return
+	user.emote("yawn")
+
+#undef YAWN_PROPAGATE_CHANCE_BASE
+#undef YAWN_PROPAGATE_CHANCE_DECAY
 
 /mob/living/carbon/human/verb/emote_yawn()
 	set name = "Yawn"
