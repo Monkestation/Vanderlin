@@ -117,6 +117,7 @@
 			backr = /obj/item/weapon/shield/tower/metal
 
 /datum/migrant_role/cadwynsentinel
+	name = "Cadwyn Order Sentinel"
 	greet_text = "You are one of the rank and file soldiers of the Cadwyn Order. You have sent with your brothers sisters to assist the local clergy in dealing with the growing influence of Z. \
 	Protect your brothers and sisters, and let no unholy creature stop you in your mission."
 	migrant_job = /datum/job/migrant/cadwynsentinel
