@@ -396,10 +396,7 @@
 
 /datum/outfit/orphanadv/wward/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
-	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
-		orphanage_renovated = TRUE
-	if(orphanage_renovated)
 		if(equipped_human.gender == MALE)
 			shirt = /obj/item/clothing/shirt/undershirt/colored/black
 			pants = /obj/item/clothing/pants/tights/colored/black
@@ -416,21 +413,22 @@
 			/obj/item/weapon/surgery/scalpel,
 			/obj/item/needle,
 		)
+		return
+
+	if(equipped_human.gender == MALE)
+		shirt = /obj/item/clothing/shirt/undershirt/colored/black
+		pants = /obj/item/clothing/pants/tights/colored/black
 	else
-		if(equipped_human.gender == MALE)
-			shirt = /obj/item/clothing/shirt/undershirt/colored/black
-			pants = /obj/item/clothing/pants/tights/colored/black
-		else
-			shirt = /obj/item/clothing/shirt/dress/gen/colored/black
-		mask = /obj/item/clothing/face/shepherd
-		belt = /obj/item/storage/belt/leather/rope
-		backr = /obj/item/storage/backpack/satchel
-		backpack_contents = list(
-			/obj/item/weapon/surgery/retractor/improv,
-			/obj/item/weapon/surgery/hemostat/improv,
-			/obj/item/weapon/surgery/scalpel,
-			/obj/item/needle/thorn,
-		)
+		shirt = /obj/item/clothing/shirt/dress/gen/colored/black
+	mask = /obj/item/clothing/face/shepherd
+	belt = /obj/item/storage/belt/leather/rope
+	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/surgery/retractor/improv,
+		/obj/item/weapon/surgery/hemostat/improv,
+		/obj/item/weapon/surgery/scalpel,
+		/obj/item/needle/thorn,
+	)
 
 /// Creative Castoff - The Artistic One
 /datum/attribute_holder/sheet/job/orphanadv/ccastoff
