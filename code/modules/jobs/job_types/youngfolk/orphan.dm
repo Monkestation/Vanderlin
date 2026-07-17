@@ -342,7 +342,7 @@
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		orphanage_renovated = TRUE
-	if(orphanage_renovated)
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		shirt = /obj/item/clothing/shirt/undershirt
 		pants = /obj/item/clothing/pants/tights
 		belt = /obj/item/storage/belt/leather/rope
