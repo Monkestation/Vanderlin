@@ -662,11 +662,13 @@
 	return effective_efficiency
 
 ///Adjusts an organ's damage by the amount "damage_amount", up to a maximum amount, which is by default max damage. Returns the net change in organ damage.
-/obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth)	//use for damaging effects
+/obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth, required_organ_flag = NONE)	//use for damaging effects
 	if(!damage_amount) //Micro-optimization.
 		return FALSE
 	maximum = clamp(maximum, 0, maxHealth) // the logical max is, our max
 	if(maximum < damage)
+		return FALSE
+	if(required_organ_flag && !(organ_flags & required_organ_flag))
 		return FALSE
 	damage = clamp(damage + damage_amount, 0, maximum)
 	. = (damage - prev_damage) // return net damage

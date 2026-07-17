@@ -145,7 +145,7 @@
 	if(M.has_dna() && ishuman(M))
 		M.dna.species.handle_body(M)
 
-/obj/item/organ/eyes/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
+/obj/item/organ/eyes/applyOrganDamage(amount, maximum = maxHealth)
 	. = ..()
 	if(owner)
 		owner.update_eyes()

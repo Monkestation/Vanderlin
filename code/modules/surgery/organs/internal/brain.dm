@@ -359,7 +359,7 @@
 	QDEL_LIST(traumas)
 	return ..()
 
-/obj/item/organ/brain/applyOrganDamage(amount, maximum, silent)
+/obj/item/organ/brain/applyOrganDamage(amount, maximum)
 	. = ..()
 	var/delta_dam = . //for the sake of clarity
 
