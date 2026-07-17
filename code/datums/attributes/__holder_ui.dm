@@ -50,6 +50,9 @@
 		else if(istype(closely_inspected_attribute, SKILL))
 			var/datum/attribute/skill/closely_inspected_skill = closely_inspected_attribute
 			closely_inspected["difficulty"] = closely_inspected_skill.difficulty
+			if(closely_inspected_skill.governing_attribute)
+				var/datum/attribute/governing_attribute = GET_ATTRIBUTE_DATUM(closely_inspected_skill.governing_attribute)
+				closely_inspected["governing_attribute"] = governing_attribute.name
 			if(LAZYLEN(closely_inspected_skill.default_attributes))
 				var/list/defaults = list()
 

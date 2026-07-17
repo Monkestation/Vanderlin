@@ -16,6 +16,7 @@ interface Attribute {
   value: number | null;
   raw_value: number | null;
   difficulty?: string;
+  governing_attribute?: string;
   default_value?: number;
   defaults?: Attribute[];
   modifiers?: AttributeModifier[];
@@ -131,6 +132,7 @@ const CloserInspection = (props: { data: AttributeData; act: any }) => {
                 {attribute.desc}
                 <Box mt={1.5} style={{ fontSize: '120%' }}>
                   {attribute.difficulty && <Box><b>Difficulty: </b>{attribute.difficulty}</Box>}
+                  {attribute.governing_attribute && <Box><b>Governing attribute: </b>{attribute.governing_attribute}</Box>}
                 </Box>
               </Box>
             </Stack.Item>

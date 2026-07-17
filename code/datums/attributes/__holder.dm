@@ -70,6 +70,12 @@
 	var/skill_value = raw_attribute_list[skill_type]
 	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 	if(istype(skill))
+		// we add the value of the primary attribute but only when we have at least attribute+0 skill
+		if(skill.governing_attribute && !isnull(skill_value) && (skill_value >= 0))
+			var/governing_value = return_raw_calculated_skill(skill.governing_attribute)
+			var/governing_multiplier = (governing_value >= 0) ? SKILL_GOVERNING_MULTIPLIER_POSITIVE : SKILL_GOVERNING_MULTIPLIER_NEGATIVE
+			var/governing_attribute_value = floor(governing_value * governing_multiplier)
+			skill_value += governing_attribute_value
 		if(LAZYLEN(skill.default_attributes))
 			for(var/attribute_type in skill.default_attributes)
 				var/default_value = return_raw_calculated_skill(attribute_type)
@@ -89,6 +95,16 @@
 	var/skill_value = attribute_list[skill_type]
 	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 	if(istype(skill))
+		// we add the value of the primary attribute but only when we have the skill (skill is not null)
+		if(skill.governing_attribute && !isnull(skill_value) && (skill_value > 0))
+			var/governing_raw = return_raw_calculated_skill(skill.governing_attribute)
+			var/governing_effective = return_calculated_skill(skill.governing_attribute)
+			var/governing_delta = governing_effective - governing_raw
+			if(governing_delta < 0)
+				// debuffs on the governing attribute hurt more than buffs help
+				skill_value += floor((governing_raw * SKILL_GOVERNING_MULTIPLIER_POSITIVE) + (governing_delta * SKILL_GOVERNING_MULTIPLIER_NEGATIVE))
+			else
+				skill_value += floor(governing_effective * SKILL_GOVERNING_MULTIPLIER_POSITIVE)
 		if(LAZYLEN(skill.default_attributes))
 			for(var/attribute_type in skill.default_attributes)
 				var/default_value = return_calculated_skill(attribute_type)
@@ -106,6 +122,12 @@
 	if(parent && HAS_TRAIT(parent, TRAIT_NO_SKILLS))
 		return 0
 	var/skill_value = raw_attribute_list[skill_type]
+	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
+	if(istype(skill) && !isnull(skill_value) && skill.governing_attribute)
+		// we add the value of the primary attribute but only when we have the skill (skill is not null)
+		var/governing_value = return_raw_calculated_skill(skill.governing_attribute)
+		var/governing_multiplier = (governing_value >= 0) ? SKILL_GOVERNING_MULTIPLIER_POSITIVE : SKILL_GOVERNING_MULTIPLIER_NEGATIVE
+		skill_value += floor(governing_value * governing_multiplier)
 	return skill_value
 
 /**
@@ -115,6 +137,22 @@
 	if(parent && HAS_TRAIT(parent, TRAIT_NO_SKILLS))
 		return 0
 	var/skill_value = attribute_list[skill_type]
+	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
+	if(istype(skill) && !isnull(skill_value) && skill.governing_attribute)
+		// equal or worse than default associated with governing attribute = we don't know this at all
+		skill_value = max(skill.default_attributes[skill.governing_attribute], skill_value)
+		if(skill.default_attributes[skill.governing_attribute] \
+			&& (skill_value <= skill.default_attributes[skill.governing_attribute] * SKILL_GOVERNING_MULTIPLIER_POSITIVE))
+			return
+		// we add the value of the primary attribute but only when we have the skill (skill is not null)
+		var/governing_raw = return_raw_calculated_skill(skill.governing_attribute)
+		var/governing_effective = return_calculated_skill(skill.governing_attribute)
+		var/governing_delta = governing_effective - governing_raw
+		if(governing_delta < 0)
+			// debuffs on the governing attribute hurt more than buffs help
+			skill_value += floor((governing_raw * SKILL_GOVERNING_MULTIPLIER_POSITIVE) + (governing_delta * SKILL_GOVERNING_MULTIPLIER_NEGATIVE))
+		else
+			skill_value += floor(governing_effective * SKILL_GOVERNING_MULTIPLIER_POSITIVE)
 	return skill_value
 
 /**

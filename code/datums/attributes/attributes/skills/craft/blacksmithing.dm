@@ -1,6 +1,7 @@
 /datum/attribute/skill/craft/blacksmithing
 	name = "Blacksmithing"
 	desc = "Represents your character's ability to craft metal items. The higher your skill in Blacksmithing, the more complex items you can create, and the better the resulting quality, up to Masterwork."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		STAT_STRENGTH = -5,
 		STAT_INTELLIGENCE = -6,
@@ -13,6 +14,7 @@
 /datum/attribute/skill/craft/weaponsmithing
 	name = "Weaponsmithing"
 	desc = "Represents your character's ability to craft metal weapons. The higher your skill in Weaponsmithing, the more complex weapons you can create, and the better the resulting quality, up to Masterwork."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		/datum/attribute/skill/craft/blacksmithing = -5,
 	)
@@ -25,6 +27,7 @@
 /datum/attribute/skill/craft/armorsmithing
 	name = "Armorsmithing"
 	desc = "Represents your character's ability to craft metal armor. The higher your skill in Armorsmithing, the more complex armor you can create, and the better the resulting quality, up to Masterwork."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		/datum/attribute/skill/craft/blacksmithing = -5,
 	)
@@ -37,6 +40,7 @@
 /datum/attribute/skill/craft/smelting
 	name = "Smelting"
 	desc = "Represents your character's ability to smelt metal into ingots. The higher your skill in Smelting, the better the ingots you create, which affect the quality of the resulting item."
+	governing_attribute = STAT_ENDURANCE
 	default_attributes = list(
 		STAT_ENDURANCE = -4,
 		STAT_INTELLIGENCE = -5,
@@ -53,6 +57,7 @@
 /datum/attribute/skill/craft/weapon_repair
 	name = "Weapon Repair"
 	desc = "Represents your character's ability to maintain and restore damaged weapons. A skilled weapon repairman can re-edge a dulled blade, re-set a loose haft, and pull a weapon back from the brink of uselessness though restoring a truly ruined weapon to its former glory demands more than repair alone."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		/datum/attribute/skill/craft/weaponsmithing = -8,
 	)
@@ -65,6 +70,7 @@
 /datum/attribute/skill/craft/armor_repair
 	name = "Armor Repair"
 	desc = "Represents your character's ability to maintain and restore damaged armor. Dented plates, burst rivets, torn mail a capable armorer can address all of it, returning protection to gear that has seen hard use. What cannot be repaired must be replaced, and knowing the difference is half the skill."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		/datum/attribute/skill/craft/armorsmithing = -8,
 	)
