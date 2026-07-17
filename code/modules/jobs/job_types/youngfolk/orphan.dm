@@ -184,8 +184,7 @@
 		belt = /obj/item/storage/belt/leather/rope
 		beltr = /obj/item/weapon/mace/woodclub
 
-// SKILLED SCAMP - THE RESPONSIBLE CHILD
-
+/// SKILLED SCAMP - THE RESPONSIBLE CHILD
 /datum/attribute_holder/sheet/job/orphanadv/sscamp
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
