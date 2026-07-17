@@ -467,10 +467,7 @@
 
 /datum/job/orphanadv/ccastoff/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
-		orphanage_renovated = TRUE
-	if(orphanage_renovated)
 		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
 			STAT_INTELLIGENCE = 1,
 			STAT_SPEED = 1,
