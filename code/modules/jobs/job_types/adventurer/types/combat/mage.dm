@@ -51,9 +51,29 @@
 
 /datum/job/advclass/combat/mage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.patron?.type == /datum/patron/inhumen/zizo)
-		if(!spawned.has_language(/datum/language/undead))
-			spawned.grant_language(/datum/language/undead)
+	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
+		spawned.grant_language(/datum/language/undead)
+
+/datum/job/advclass/combat/mage/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+	)
+
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "MAGE")
+
+	// Robe selection
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+	)
+
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "MAGE")
 
 /datum/outfit/adventurer/mage
 	name = "Mage (Adventurer)"
@@ -72,26 +92,3 @@
 	. = ..()
 	if(H.age == AGE_OLD)
 		backl = /obj/item/storage/backpack/backpack
-
-/datum/outfit/adventurer/mage/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	. = ..()
-	if(visuals_only)
-		return
-
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-	)
-
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "MAGE")
-
-	// Robe selection
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-	)
-
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "MAGE")
