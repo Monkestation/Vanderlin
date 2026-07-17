@@ -1142,3 +1142,21 @@
 
 /datum/special_trait/godocrime/on_apply(mob/living/carbon/human/character, silent)
 	character.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/puffer, silent = TRUE)
+
+/datum/special_trait/glassbones
+	name = "Glass Bones"
+	greet_text = span_notice("I have a rare condition that makes my bones brittle and fragile.")
+	weight = 40
+
+/datum/special_trait/glassbones/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_HOLLOWBONES, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_CRITICAL_WEAKNESS, BE_SPECIAL_TRAIT)
+
+/datum/special_trait/doaflip
+	name = "Do a Flip"
+	greet_text = span_notice("I compulsively flip every time I jump")")
+	weight = 80
+
+/datum/special_trait/doaflip/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_FLIP_JUMP, BE_SPECIAL_TRAIT)
+
