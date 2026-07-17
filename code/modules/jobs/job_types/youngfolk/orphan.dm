@@ -356,9 +356,7 @@
 		if(prob(20))
 			mouth = /obj/item/natural/stone
 
-
-// WEIRD WARD - The Kid with Possibly Bad Vibes
-
+/// WEIRD WARD - The Kid with Possibly Bad Vibes
 /datum/attribute_holder/sheet/job/orphanadv/wward
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 2,
