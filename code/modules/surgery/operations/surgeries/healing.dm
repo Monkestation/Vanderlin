@@ -293,7 +293,7 @@
 	time = 1 SECONDS
 
 	skill_min = SKILL_LEVEL_JOURNEYMAN
-	skill_median = SKILL_LEVEL_EXPERT
+	skill_median = (SKILL_LEVEL_JOURNEYMAN + SKILL_LEVEL_EXPERT) / 2
 
 	can_heal = COMBO_SURGERY
 	healing_amount = 3

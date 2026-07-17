@@ -88,7 +88,7 @@
 	/// Necessary skill MINIMUM to perform this surgery, of skill_used
 	var/skill_min = SKILL_LEVEL_NOVICE
 	/// Skill median used to apply success and speed bonuses
-	var/skill_median = SKILL_LEVEL_JOURNEYMAN
+	var/skill_median = SKILL_LEVEL_APPRENTICE
 
 	/// Requirement threshold for the diceroll as a baseline
 	var/dice_requirement = 30
@@ -367,14 +367,14 @@
 		requirement += skill_delta
 
 	var/tool_quality = get_tool_quality(tool)
-	requirement += round((1 - tool_quality) * 6)
+	requirement += (1 - tool_quality) * 8
 
 	var/loc_mod = get_location_modifier(get_turf(operating_on))
-	requirement += round((1 - loc_mod) * 8, 1)
+	requirement += (1 - loc_mod) * 6
 
 	var/overseer_bonus = get_overseer_bonus(surgeon)
 	if(overseer_bonus < 1)
-		requirement -= overseer_bonus
+		requirement += (1 - overseer_bonus) * 4
 		to_chat(surgeon, span_notice("You feel more confident with an experienced eye watching over you."))
 
 	return FLOOR(clamp(requirement, dice_num, dice_num * dice_sides), 1)
@@ -446,7 +446,7 @@
 
 		// every 10 above is 5% time reduction
 		var/bonus = 1.0 - ((overseer_skill - skill_median) * 0.005)
-		if(bonus > best_bonus)
+		if(bonus < best_bonus)
 			best_bonus = bonus
 
 	return best_bonus
