@@ -1,7 +1,6 @@
 /datum/attribute/skill/craft/engineering
 	name = "Engineering"
 	desc = "Represents your character's ability to craft mechanical items. The higher your skill in Engineering, the more complex items you can create without failure."
-	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		STAT_INTELLIGENCE = -7,
 	)
@@ -13,7 +12,6 @@
 /datum/attribute/skill/craft/locksmithing
 	name = "Locksmithing"
 	desc = "Represents your character's ability to craft, repair, and work with locks and their mechanisms. A skilled locksmith understands the intimate relationship between lock and key, the tolerances, the pins, the tension; and can produce work that ranges from simple padlocks to complex mechanisms that would humble a king's treasury."
-	governing_attribute = STAT_PERCEPTION
 	default_attributes = list(
 		/datum/attribute/skill/craft/engineering = -4,
 	)
