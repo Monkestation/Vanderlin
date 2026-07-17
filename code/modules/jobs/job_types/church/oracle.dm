@@ -109,7 +109,8 @@
 
 /datum/job/oracle/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.virginity = TRUE
+	//spawned.virginity = TRUEADD_TRAIT
+	ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
