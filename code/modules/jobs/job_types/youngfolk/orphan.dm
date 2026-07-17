@@ -478,10 +478,7 @@
 
 /datum/outfit/orphanadv/ccastoff/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
-	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
-		orphanage_renovated = TRUE
-	if(orphanage_renovated)
 		head = pick(
 			/obj/item/clothing/head/bardhat,
 			/obj/item/clothing/head/courtierhat,
@@ -493,14 +490,15 @@
 		belt = /obj/item/storage/belt/leather/rope
 		beltl = /obj/item/instrument/flute
 		shoes = /obj/item/clothing/shoes/simpleshoes
-	else
-		head = pick(
-			/obj/item/clothing/head/bardhat,
-			/obj/item/clothing/head/courtierhat,
-			/obj/item/clothing/head/fancyhat,
-		)
-		shirt = /obj/item/clothing/shirt/undershirt/colored/random
-		pants = /obj/item/clothing/pants/tights/colored/random
-		belt = /obj/item/storage/belt/leather/rope
-		beltl = /obj/item/instrument/flute
-		shoes = /obj/item/clothing/shoes/simpleshoes
+		return
+
+	head = pick(
+		/obj/item/clothing/head/bardhat,
+		/obj/item/clothing/head/courtierhat,
+		/obj/item/clothing/head/fancyhat,
+	)
+	shirt = /obj/item/clothing/shirt/undershirt/colored/random
+	pants = /obj/item/clothing/pants/tights/colored/random
+	belt = /obj/item/storage/belt/leather/rope
+	beltl = /obj/item/instrument/flute
+	shoes = /obj/item/clothing/shoes/simpleshoes
