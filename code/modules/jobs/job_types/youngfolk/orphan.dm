@@ -432,9 +432,7 @@
 			/obj/item/needle/thorn,
 		)
 
-
-// Creative Castoff - The Artistic One
-
+/// Creative Castoff - The Artistic One
 /datum/attribute_holder/sheet/job/orphanadv/ccastoff
 	raw_attribute_list = list(
 		STAT_FORTUNE = 1,
