@@ -18,7 +18,8 @@
 	return image(/obj/item/weapon/surgery/bonesetter)
 
 /datum/surgery_operation/limb/relocation/all_required_strings()
-	return list("the limb must be dislocated") + ..()
+	. = ..()
+	. += "the limb must be dislocated"
 
 /datum/surgery_operation/limb/relocation/state_check(obj/item/bodypart/limb)
 	if(!locate(/datum/wound/dislocation) in limb.wounds)

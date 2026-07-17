@@ -33,9 +33,14 @@
 	/// Kill the owner if they have TRAIT_CRITICAL_WEAKNESS and the artery is dissected
 	var/crit_weakness_lethal = FALSE
 
-/obj/item/organ/artery/can_self_heal(delta_time, times_fired)
+/obj/item/organ/artery/can_self_heal(delta_time, times_fired, in_bleedout)
 	return FALSE
 
+/obj/item/organ/artery/proc/is_bleeding()
+	if(!is_bruised() || !owner.pulse || (owner.bodytemperature <= -15))
+		return
+	return TRUE
+	
 /obj/item/organ/artery/on_life(delta_time, times_fired)
 	. = ..()
 	// Dead, pulseless or cryosleep people do not pump blood
@@ -67,6 +72,13 @@
 		squirt(final_bleed_rate)
 	else
 		squirt_less(final_bleed_rate)
+
+/obj/item/organ/artery/handle_blood(delta_time, times_fired, in_bleedout)
+	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
+	var/failer = is_failing_without_bleedout()
+	if(failer || in_bleedout)
+		return
+	current_blood = min(current_blood + (2.5 * delta_time) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 
 /obj/item/organ/artery/tear()
 	if(!owner)
@@ -130,3 +142,4 @@
 	// No open wound, even less drama
 	else
 		owner.adjust_blood_volume(-amount)
+	current_blood = max(current_blood - amount, 0)

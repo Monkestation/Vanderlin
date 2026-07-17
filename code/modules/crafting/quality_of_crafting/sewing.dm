@@ -1685,6 +1685,37 @@
 	craftdiff = 1
 	category = "Tabard"
 
+// Cadwyn Order Tabards
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_astrata
+	name = "bright tabard"
+	output = /obj/item/clothing/cloak/cadwyn/astrata
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_necra
+	name = "dark cloak"
+	output = /obj/item/clothing/cloak/cadwyn/necra
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_ravox
+	name = "tattered surcoat"
+	output = /obj/item/clothing/cloak/cadwyn/ravox
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
 // Detailed Tabards
 /datum/repeatable_crafting_recipe/sewing/eora_tabard
 	name = "eora tabard"

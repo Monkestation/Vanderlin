@@ -235,7 +235,6 @@
 
 	if(!QDELETED(our_light))
 		our_light.set_light_on(TRUE)
-		our_light.update_light()
 	else
 		our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
 
