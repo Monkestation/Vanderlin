@@ -358,19 +358,18 @@
 	return created_list
 
 /// Returns the result that must be rolled to succeed the surgery. HIGHER REQUIREMENT = MORE SUCCESS
-/datum/surgery_operation/proc/get_roll_requirement(atom/movable/operating_on, mob/living/surgeon, tool)
+/datum/surgery_operation/proc/get_roll_requirement(mob/living/patient, mob/living/surgeon, tool)
 	var/requirement = dice_requirement
 
 	if(skill_used)
-		var/skill_level = GET_MOB_SKILL_VALUE(surgeon, skill_used) || 0
-		var/skill_delta = (skill_level - skill_median) * 0.5
+		var/skill_delta = (GET_MOB_SKILL_VALUE(surgeon, skill_used) - skill_median) * 0.5
 		requirement += skill_delta
 
 	var/tool_quality = get_tool_quality(tool)
-	requirement += (1 - tool_quality) * 8
+	requirement += (1 - tool_quality) * 6
 
-	var/loc_mod = get_location_modifier(get_turf(operating_on))
-	requirement += (1 - loc_mod) * 6
+	var/loc_mod = get_location_modifier(get_turf(patient))
+	requirement += (1 - loc_mod) * 8
 
 	var/overseer_bonus = get_overseer_bonus(surgeon)
 	if(overseer_bonus < 1)
@@ -548,7 +547,7 @@
 			roll_result = DICE_FAILURE
 			display_roll(surgeon, "[uppertext(failure_message)]", null)
 		else
-			roll_requirement = get_roll_requirement(operating_on, surgeon, tool)
+			roll_requirement = get_roll_requirement(patient, surgeon, tool)
 			roll_result = surgeon.diceroll(
 				requirement = roll_requirement,
 				crit = skill_min,
@@ -743,7 +742,8 @@
 		on_crit_success(operating_on, surgeon, tool, operation_args)
 
 	var/intelligence_modifier = max(GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE), 1) / 10
-	surgeon.mind?.add_sleep_experience(skill_used, surgeon.get_learning_boon(skill_used) * intelligence_modifier * skill_min / 2)
+	var/difficulty_modifier = max(skill_min * 0.5, 5)
+	surgeon.mind?.add_sleep_experience(skill_used, surgeon.get_learning_boon(skill_used) * intelligence_modifier * difficulty_modifier)
 
 /// Used to customize behavior when the operation is successful
 /datum/surgery_operation/proc/on_success(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
@@ -783,7 +783,8 @@
 		on_crit_failure(operating_on, surgeon, tool, operation_args)
 
 	var/intelligence_modifier = max(GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE), 1) / 10
-	surgeon.mind?.add_sleep_experience(skill_used, surgeon.get_learning_boon(skill_used) * intelligence_modifier * skill_min / 4)
+	var/difficulty_modifier = max(skill_min * 0.5, 5)
+	surgeon.mind?.add_sleep_experience(skill_used, surgeon.get_learning_boon(skill_used) * intelligence_modifier * difficulty_modifier * 0.25)
 
 /// Used to customize behavior when the operation fails
 /datum/surgery_operation/proc/on_failure(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
