@@ -36,6 +36,7 @@
 
 	var/sight_flags = 0
 	var/see_in_dark = 8
+	/// How much innate tint these eyes have
 	var/tint = 0
 	var/eye_icon_state = "eye"
 	var/flash_protect = FLASH_PROTECTION_NONE
@@ -108,9 +109,10 @@
 	M.eye_organs.len = max(length(M.eye_organs), sight_index)
 	M.eye_organs[sight_index] = src
 
-	if(ishuman(owner))
-		var/mob/living/carbon/human/HMN = owner
-		HMN.regenerate_icons()
+	if(!(owner.status_flags & BUILDING_ORGANS))
+		if(ishuman(owner))
+			var/mob/living/carbon/human/HMN = owner
+			HMN.regenerate_icons()
 
 	M.update_eyes()
 	M.update_tint()

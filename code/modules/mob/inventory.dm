@@ -346,9 +346,12 @@
 	var/list/items = list()
 	for(var/obj/item/item_contents in contents)
 		if(item_contents.item_flags & IN_INVENTORY)
+			if(!(include_flags & INCLUDE_ABSTRACT) && (item_contents.item_flags & ABSTRACT)) //not really flavoured as items
+				continue
 			items += item_contents
 	if (!(include_flags & INCLUDE_HELD))
 		items -= held_items
+
 	return items
 
 /mob/living/proc/unequip_everything(silent = TRUE)

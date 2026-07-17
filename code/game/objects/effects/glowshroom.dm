@@ -52,7 +52,7 @@
 				if(L.throwing)
 					L.throwing.finalize(FALSE)
 				return FALSE
-	..()
+	return ..()
 
 /obj/structure/kneestingers/Initialize(mapload, obj/item/neuFarm/seed/newseed, mutate_stats)
 	. = ..()

@@ -99,16 +99,12 @@
 	secondary_direction = dir
 	setDir(last_direction)
 
-/obj/structure/minecart_rail/attackby_secondary(obj/item/I, mob/user, list/modifiers)
+/obj/structure/minecart_rail/multitool_act_secondary(mob/living/user, obj/item/tool)
+	rotate_direction(user)
+	return ITEM_INTERACT_SUCCESS
+
+/obj/structure/minecart_rail/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(I?.tool_behaviour == TOOL_MULTITOOL)
-		rotate_direction(user)
-		return
 
 	var/choice = browser_input_list(user, "Choose a direction to cycle to when activated by a trigger.", src, list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
 	if(!choice || QDELETED(user) || QDELETED(src))
@@ -149,7 +145,8 @@
 				if(!structure.try_network_merge(src))
 					rotation_break()
 			else
-				if(!structure.try_connect(src))
+				var/result = structure.try_connect(src)
+				if(result == FALSE)
 					rotation_break()
 
 	if(!rotation_network)
@@ -163,13 +160,10 @@
 		return list()
 	. = ..()
 
-/obj/structure/minecart_rail/find_and_propagate(list/checked, first = FALSE)
-	if(!length(checked))
-		checked = list()
-	checked |= src
+/obj/structure/minecart_rail/propagate_rotation_to_network(new_direction, new_rpm)
 	if(ISDIAGONALDIR(dir))
-		return checked
-	. = ..()
+		return
+	..()
 
 /obj/structure/minecart_rail/set_rotations_per_minute(speed)
 	. = ..()

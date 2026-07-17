@@ -31,27 +31,30 @@
 			to_chat(user, span_hierophant_warning("Place a blank arcyne focus on the seal first."))
 		return
 
-/obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch/attackby(obj/item/W, mob/user, list/modifiers)
+/obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/spell_focus))
+		return NONE
+
 	if(animating)
 		to_chat(user, span_notice("The seal is already working..."))
-		return
-	if(istype(W, /obj/item/spell_focus))
-		var/obj/item/spell_focus/focus = W
-		if(focus.stored_spell_type)
-			to_chat(user, span_warning("That focus is already etched with [focus.stored_spell_name]."))
-			return
-		if(staged_focus)
-			to_chat(user, span_notice("A focus is already placed here."))
-			return
-		user.temporarilyRemoveItemFromInventory(W)
-		W.forceMove(get_turf(src))
-		W.anchored = TRUE
-		staged_focus = focus
-		animate(W, pixel_x = 0, pixel_y = 0, time = 0.5 SECONDS, flags = ANIMATION_END_NOW)
-		to_chat(user, span_cultsmall("The focus settles onto the seal..."))
-		playsound(src, 'sound/magic/glass.ogg', 60, TRUE)
-		return
-	return ..()
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/spell_focus/focus = tool
+	if(focus.stored_spell_type)
+		to_chat(user, span_warning("That focus is already etched with [focus.stored_spell_name]."))
+		return ITEM_INTERACT_BLOCKING
+	if(staged_focus)
+		to_chat(user, span_notice("A focus is already placed here."))
+		return ITEM_INTERACT_BLOCKING
+	if(!user.temporarilyRemoveItemFromInventory(tool))
+		return ITEM_INTERACT_BLOCKING
+	tool.forceMove(get_turf(src))
+	tool.anchored = TRUE
+	staged_focus = focus
+	animate(tool, pixel_x = 0, pixel_y = 0, time = 0.5 SECONDS, flags = ANIMATION_END_NOW)
+	to_chat(user, span_cultsmall("The focus settles onto the seal..."))
+	playsound(src, 'sound/magic/glass.ogg', 60, TRUE)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch/proc/try_invoke(mob/living/user)
 	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)

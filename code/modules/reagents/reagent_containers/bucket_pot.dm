@@ -19,22 +19,33 @@
 	. = ..()
 	reagents.flags = initial(reagent_flags)
 
-/obj/item/reagent_containers/glass/bucket/attackby(obj/item/I, mob/user, list/modifiers)
-	..()
-	if(istype(I, /obj/item/reagent_containers/powder/salt))
-		if(!reagents.has_reagent(/datum/reagent/consumable/milk, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
-			to_chat(user, span_danger("Not enough milk."))
-			return
-		to_chat(user, span_danger("Adding salt to the milk."))
-		playsound(src, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		if(do_after(user,2 SECONDS, src))
-			if(reagents.has_reagent(/datum/reagent/consumable/milk, 15))
-				reagents.remove_reagent(/datum/reagent/consumable/milk, 15)
-				reagents.add_reagent(/datum/reagent/consumable/milk/salted, 15)
-			if(reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
-				reagents.remove_reagent(/datum/reagent/consumable/milk/gote, 15)
-				reagents.add_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
-			qdel(I)
+/obj/item/reagent_containers/glass/bucket/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/reagent_containers/powder/salt))
+		return ..()
+
+	if(!reagents?.total_volume)
+		return NONE
+
+	if(!reagents.has_reagent(/datum/reagent/consumable/milk, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
+		return NONE
+
+	to_chat(user, span_danger("Adding salt to the milk."))
+	playsound(src, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+
+	if(!do_after(user, 2 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	if(reagents.has_reagent(/datum/reagent/consumable/milk, 15))
+		reagents.remove_reagent(/datum/reagent/consumable/milk, 15)
+		reagents.add_reagent(/datum/reagent/consumable/milk/salted, 15)
+
+	if(reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
+		reagents.remove_reagent(/datum/reagent/consumable/milk/gote, 15)
+		reagents.add_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
+
+	qdel(tool)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/glass/bucket/wooden
 	name = "bucket"
@@ -98,14 +109,24 @@
 	icon_state = "pote_stone"
 	melting_material = null
 
-/obj/item/reagent_containers/glass/bucket/pot/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/reagent_containers/glass/bowl))
-		to_chat(user, "<span class='notice'>Filling the bowl...</span>")
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 70, FALSE)
-		if(do_after(user, 2 SECONDS, src))
-			reagents.trans_to(I, reagents.total_volume)
-		return TRUE
-	return ..()
+/obj/item/reagent_containers/glass/bucket/pot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/reagent_containers/glass/bowl))
+		return ..()
+
+	if(tool.reagents?.holder_full())
+		balloon_alert(user, "the [tool] is full!")
+		return ITEM_INTERACT_BLOCKING
+
+	balloon_alert(user, "filling [tool].")
+
+	playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 70, FALSE)
+
+	if(!do_after(user, 2 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	reagents.trans_to(tool, reagents.total_volume)
+
+	return ITEM_INTERACT_SKIP_TO_ATTACK
 
 /obj/item/reagent_containers/glass/bucket/pot/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	if(reagents.total_volume > 5)

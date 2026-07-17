@@ -298,34 +298,35 @@
 	if(try_handle_deweed(null, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_deweed(weapon, user, null))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(try_handle_flatten(weapon, user, null))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+/obj/structure/soil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_seed_planting(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
-/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, list/modifiers)
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_seed_planting(attacking_item, user))
-		return
-	if(try_handle_uprooting(attacking_item, user))
-		return
-	if(try_handle_tilling(attacking_item, user))
-		return
-	if(try_handle_watering(attacking_item, user))
-		return
-	if(try_handle_harvest(attacking_item, user))
-		return
-	if(try_handle_fertilizing(attacking_item, user))
-		return
-	for(var/obj/item/bagged_item in attacking_item.contents)
+	if(try_handle_uprooting(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_tilling(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_watering(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_harvest(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_fertilizing(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	for(var/obj/item/bagged_item in tool.contents)
 		if(try_handle_fertilizing(bagged_item, user))
-			return
-	return ..()
+			return ITEM_INTERACT_SUCCESS
+
+/obj/structure/soil/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_deweed(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_flatten(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/soil/proc/on_stepped(mob/living/stepper)
 	if(!plant)

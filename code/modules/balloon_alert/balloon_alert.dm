@@ -43,8 +43,8 @@
 	if(isnull(viewer_client))
 		return
 
-	var/balloon_disabled = viewer_client.prefs.toggles_maptext & DISABLE_BALLOON_ALERTS
-	var/flag_disabled = viewer_client.prefs.toggles_maptext & balloon_flag
+	var/balloon_disabled = viewer_client.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_BALLOON_ALERTS
+	var/flag_disabled = viewer_client.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & balloon_flag
 
 	if(balloon_disabled || flag_disabled)
 		to_chat(viewer, span_emote("[name]: [text]"))

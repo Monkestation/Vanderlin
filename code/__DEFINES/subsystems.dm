@@ -100,6 +100,8 @@
 // Subsystem init_order, from highest priority to lowest priority
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
+
+#define INIT_ORDER_PROFILER 102
 #define INIT_ORDER_ASSETS 101
 #define INIT_ORDER_TITLE 100
 #define INIT_ORDER_GARBAGE 99
@@ -128,6 +130,7 @@
 #define INIT_ORDER_TERRAIN 49
 #define INIT_ORDER_DUNGEON 48
 #define INIT_ORDER_NETWORKS 45
+#define INIT_ORDER_TIMETRACK 44
 #define INIT_ORDER_SPATIAL_GRID 43
 #define INIT_ORDER_ECONOMY 40
 #define INIT_ORDER_OUTPUTS 35

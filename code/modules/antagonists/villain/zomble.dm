@@ -204,6 +204,7 @@
 			zombie_part.update_disabled()
 	zombie.update_body()
 	zombie.grant_undead_eyes()
+	zombie.update_eyes()
 
 	zombie.add_client_colour(/datum/client_colour/monochrome)
 	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)

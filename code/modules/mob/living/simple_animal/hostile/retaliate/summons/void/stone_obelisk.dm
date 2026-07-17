@@ -91,7 +91,7 @@
 	QDEL_NULL(beam)
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/RangedAttack(atom/target, list/modifiers)
+/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/ranged_attack(atom/target, list/modifiers)
 	beam.Activate(target = target)
 
 /mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/get_sound(input)

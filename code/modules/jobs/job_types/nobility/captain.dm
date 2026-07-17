@@ -71,11 +71,13 @@
 	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/captain
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(

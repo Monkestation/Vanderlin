@@ -8,7 +8,7 @@
 	sewn_bleed_rate = 0.25
 	clotting_threshold = null
 	sewn_clotting_threshold = null
-	woundpain = 100
+	woundpain = 50
 	sewn_woundpain = 20
 	sew_threshold = 100 //absolutely awful to sew up
 	mob_overlay = "dis_head"

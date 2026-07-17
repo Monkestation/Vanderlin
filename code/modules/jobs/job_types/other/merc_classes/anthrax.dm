@@ -79,13 +79,12 @@
 /datum/outfit/mercenary/anthrax
 	name = "Anthrax (Mercenary)"
 	shoes = /obj/item/clothing/shoes/boots
-	belt = /obj/item/storage/belt/leather/black
+	belt = /obj/item/storage/belt/leather/mercenary/black
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
-		/obj/item/storage/keyring/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
-		/obj/item/weapon/knife/dagger/steel/dirk
+		/obj/item/weapon/knife/dagger/steel/dirk,
 	)
 
 /datum/outfit/mercenary/anthrax/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

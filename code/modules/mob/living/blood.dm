@@ -91,7 +91,7 @@
 		return BLEED_NONE
 
 	if(!iscarbon(src) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		return BLEED_NONE
+		return BLEED_SPLATTER
 
 	if(!iscarbon(src))
 		return BLEED_NONE
@@ -117,7 +117,7 @@
 #define BLOOD_DRIP_RATE_MOD 90 //Greater number means creating blood drips more often while bleeding
 
 /// Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/proc/bleed(amount)
+/mob/living/proc/bleed(amount, should_update = TRUE)
 	if((status_flags & GODMODE) || !can_bleed())
 		return
 	if(!get_blood_volume())
@@ -140,7 +140,8 @@
 	if(body_position != LYING_DOWN && stat == CONSCIOUS)
 		playsound(src, pick('sound/misc/bleed (1).ogg', 'sound/misc/bleed (2).ogg', 'sound/misc/bleed (3).ogg'), 100, FALSE)
 
-	updatehealth()
+	if(should_update)
+		updatehealth()
 	return TRUE
 
 #undef CONSTITUTION_BLEEDRATE_MOD
@@ -220,7 +221,7 @@
 	var/blood_purity = 1 // what % of the amt are we actually taking as blood?
 	var/cached_blood_volume = get_blood_volume()
 	amount = min(amount, transfer_to.maximum_volume - transfer_to.total_volume) // the volume of our transfer
-	if(reagents.total_volume)
+	if(reagents?.total_volume)
 		var/impurity_volume = reagents.total_volume
 		for(var/reagent_type in blacklisted_reagents)
 			impurity_volume -= reagents.get_reagent_amount(reagent_type, FALSE)

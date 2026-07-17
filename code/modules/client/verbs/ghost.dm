@@ -52,7 +52,7 @@
 	live_spirit.ckey = ckey
 	ADD_TRAIT(live_spirit, TRAIT_PACIFISM, TRAIT_GENERIC)
 
-	live_spirit.set_patron(live_spirit.client.prefs.selected_patron)
+	live_spirit.set_patron(live_spirit.client.prefs.read_preference(/datum/preference/choiced/patron))
 
 	if(has_coin)
 		live_spirit.paid = TRUE

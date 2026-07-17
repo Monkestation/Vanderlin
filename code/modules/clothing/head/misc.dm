@@ -154,7 +154,7 @@
 	. = ..()
 	to_chat(user, span_warning ("The thorns prick me."))
 	var/obj/item/bodypart/arm = user.get_active_hand()
-	arm?.bodypart_attacked_by(BCLASS_CUT, 7, modifiers = list(CRIT_MOD_CHANCE = -100))
+	arm?.bodypart_attacked_by(BCLASS_CUT, 7, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 
 //................ Hennin ............... //
 /obj/item/clothing/head/hennin
@@ -228,15 +228,6 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	tint = TINT_BLIND
 	item_weight = 55 GRAMS
-
-/obj/item/clothing/head/sack/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(slot & ITEM_SLOT_HEAD)
-		user.become_blind("blindfold_[REF(src)]")
-
-/obj/item/clothing/head/sack/dropped(mob/living/carbon/human/user)
-	..()
-	user.cure_blind("blindfold_[REF(src)]")
 
 /obj/item/clothing/head/sack/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))

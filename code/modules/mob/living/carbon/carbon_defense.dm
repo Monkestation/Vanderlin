@@ -48,11 +48,18 @@
 		needed_coverage |= MASKCOVERSMOUTH
 	return check_equipment_cover_flags(needed_coverage)
 
-/mob/living/carbon/is_eyes_covered(check_glasses = TRUE, check_head = TRUE, check_mask = TRUE)
-	if(check_head && head && (head.flags_cover & HEADCOVERSEYES))
+/mob/living/carbon/is_eyes_covered(check_flags = ALL)
+	if((check_flags & ITEM_SLOT_HEAD) && head && (head.flags_cover & HEADCOVERSEYES))
 		return head
-	if(check_mask && wear_mask && (wear_mask.flags_cover & MASKCOVERSEYES))
+
+	if((check_flags & ITEM_SLOT_MASK) && wear_mask && (wear_mask.flags_cover & MASKCOVERSEYES))
 		return wear_mask
+
+	if((check_flags & ITEM_SLOT_MOUTH) && mouth && (mouth.flags_cover & GLASSESCOVERSEYES))
+		return mouth
+
+	return null
+
 /mob/living/carbon/is_pepper_proof(check_head = TRUE, check_mask = TRUE)
 	if(check_head &&(head?.flags_cover & PEPPERPROOF))
 		return head
@@ -181,16 +188,6 @@
 			used_limb = affecting.body_zone
 	return used_limb
 
-/mob/living/carbon/attack_hand_secondary(mob/user, list/modifiers)
-	if(ishuman(user) && istype(user.rmb_intent, /datum/rmb_intent/weak))
-		var/mob/living/carbon/human/human_user = user
-		if(human_user.zone_selected in list(BODY_ZONE_PRECISE_NECK, \
-									BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, \
-									BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND))
-			check_pulse(user)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	return ..()
-
 /// Checks which arm is grabbed using index. Returns the found grabbing item.
 /mob/proc/check_arm_grabbed(index)
 	return
@@ -305,47 +302,6 @@
 		I.add_mob_blood(src)
 
 	return TRUE //successful attack
-
-/mob/living/carbon/attack_hand(mob/living/carbon/human/user)
-	. = ..()
-	if(.)
-		return TRUE
-
-	if(!lying_attack_check(user))
-		return FALSE
-
-	if(!get_bodypart(check_zone(user.zone_selected)))
-		to_chat(user, "<span class='warning'>[src] is missing that.</span>")
-		return FALSE
-
-	if(!user.cmode && (istype(user.rmb_intent, /datum/rmb_intent/weak) || istype(user.rmb_intent, /datum/rmb_intent/strong)))
-		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
-		var/list/possible_steps = list()
-		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
-			if(!surgery_step.name)
-				continue
-			if(surgery_step.can_do_step(user, src, user.zone_selected, null, user.used_intent))
-				possible_steps[surgery_step.name] = surgery_step
-		var/possible_len = length(possible_steps)
-		if(possible_len)
-			var/datum/surgery_step/done_step
-			if(possible_len > 1)
-				var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
-				if(input)
-					done_step = possible_steps[input]
-			else
-				done_step = possible_steps[possible_steps[1]]
-			if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent, try_to_fail))
-				return TRUE
-	/*
-	for(var/datum/surgery/S in surgeries)
-		if(!(mobility_flags & MOBILITY_STAND) || !S.lying_required)
-			if(user.used_intent.type == INTENT_HELP || user.used_intent.type == INTENT_DISARM)
-				if(S.next_step(user, user.used_intent))
-					return TRUE
-	*/
-	return FALSE
-
 
 /mob/living/carbon/attack_paw(mob/living/carbon/M)
 	if(M.used_intent.type == INTENT_HELP)

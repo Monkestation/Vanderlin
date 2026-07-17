@@ -2,6 +2,9 @@
 
 #if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
 
+/// A trait source when adding traits through unit tests
+#define TRAIT_SOURCE_UNIT_TESTS "unit_tests"
+
 /// For advanced cases, fail unconditionally but don't return (so a test can return multiple results)
 #define TEST_FAIL(reason) (Fail(reason || "No reason", __FILE__, __LINE__))
 
@@ -87,6 +90,7 @@
 #include "resist.dm"
 #include "rogue_inhands.dm"
 #include "roguetown_clothing.dm"
+#include "smithing_materials.dm"
 #include "spawn_humans.dm"
 #include "spawn_mobs.dm"
 #include "species_whitelists.dm"

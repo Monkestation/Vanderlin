@@ -25,49 +25,98 @@
 	var/checkchatter = 0
 	var/chatterbox = 0
 
-
 /obj/structure/fake_machine/lottery_roguetown/attack_hand(mob/living/user)
 	say("Your current tithe is [gamblingprice] mammons. Care to spin?")
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
-	return
 
-
-/obj/structure/fake_machine/lottery_roguetown/attackby(obj/item/coin/P, mob/living/user, list/modifiers)
+/obj/structure/fake_machine/lottery_roguetown/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-
-	if(!istype(P))
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
+	if(!ishuman(user) || stopgambling)
+		return
+
+	if(gamblingprice <= 0)
+		say("Poor thing, you are coinless.")
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(gamblingprice < 0)
+		say("Your peasant's tithe is NEGATIVE.")
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	// Build coin options
+	var/list/choicez = list()
+	if(gamblingprice > 10)
+		choicez += "GOLD"
+	if(gamblingprice > 5)
+		choicez += "SILVER"
+	choicez += "BRONZE"
+
+	var/selection = browser_input_list(user, "Make a Selection", "[name]", choicez)
+	if(!selection)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	// Calculate coin value
+	var/mod = 1
+	if(selection == "GOLD")
+		mod = 10
+	if(selection == "SILVER")
+		mod = 5
+
+	var/coin_amt = input(user, "Sayyid, you have [gamblingprice] mammon in tithes. You may withdraw [floor(gamblingprice/mod)] [selection] COINS.", src) as null|num
+	coin_amt = round(coin_amt)
+
+	if(coin_amt < 1)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(!Adjacent(user) || stopgambling)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if((coin_amt * mod) > gamblingprice)
+		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	budget2change(coin_amt * mod, user, selection)
+	gamblingprice -= coin_amt * mod
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/structure/fake_machine/lottery_roguetown/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/coin) || istype(tool, /obj/item/coin/inqcoin))
+		return NONE
 
 	if(stopgambling)
-		return
+		return NONE
 
-	// Reject special coins
-	if(istype(P, /obj/item/coin/inqcoin))
-		return
+	var/obj/item/coin/coin = tool
 
-	var/coin_value = P.sellprice * P.quantity
+	var/coin_value = coin.get_real_price()
 	var/new_total = gamblingprice + coin_value
 
 	// Validate tithe amount
 	if(new_total > maxtithing)
 		say("This puts the starting tithe over [maxtithing] mammons.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	if(new_total < mintithing)
 		say("This is below [mintithing] mammons.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	// Accept the coin
 	gamblingprice += coin_value
-	qdel(P)
+
+	qdel(coin)
 	say("Your current tithe is now [gamblingprice] mammons. Care to spin?")
 	playsound(src, 'sound/misc/machinequestion.ogg', 100, FALSE, -1)
-	return
 
+	return ITEM_INTERACT_SUCCESS
 
-/obj/structure/fake_machine/lottery_roguetown/MiddleClick(mob/living/user, params)
+/obj/structure/fake_machine/lottery_roguetown/MiddleClick(mob/living/user, list/modifiers)
 	if(stopgambling)
 		return
 
@@ -171,61 +220,9 @@
 	sleep(15)
 	stopgambling = 0
 
-
-/obj/structure/fake_machine/lottery_roguetown/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = ..()
-
-	if(!ishuman(user) || stopgambling)
-		return
-
-	if(gamblingprice <= 0)
-		say("Poor thing, you are coinless.")
-		return
-
-	if(gamblingprice < 0)
-		say("Your peasant's tithe is NEGATIVE.")
-		return
-
-	// Build coin options
-	var/list/choicez = list()
-	if(gamblingprice > 10)
-		choicez += "GOLD"
-	if(gamblingprice > 5)
-		choicez += "SILVER"
-	choicez += "BRONZE"
-
-	var/selection = input(user, "Make a Selection", src) as null|anything in choicez
-	if(!selection)
-		return
-
-	// Calculate coin value
-	var/mod = 1
-	if(selection == "GOLD")
-		mod = 10
-	if(selection == "SILVER")
-		mod = 5
-
-	var/coin_amt = input(user, "Sayyid, you have [gamblingprice] mammon in tithes. You may withdraw [floor(gamblingprice/mod)] [selection] COINS.", src) as null|num
-	coin_amt = round(coin_amt)
-
-	if(coin_amt < 1)
-		return
-
-	if(!Adjacent(user) || stopgambling)
-		return
-
-	if((coin_amt * mod) > gamblingprice)
-		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		return
-
-	budget2change(coin_amt * mod, user, selection)
-	gamblingprice -= coin_amt * mod
-
-
 /obj/structure/fake_machine/lottery_roguetown/proc/peasant_betting()
 	if(gamblingprice == oldtithe)
 		gamblingprice += pick(1, 1, 1, 1, 2, 2)
-
 
 /obj/structure/fake_machine/lottery_roguetown/proc/letsgogamblinggamblers()
 	if(checkchatter > 1 || prob(90))

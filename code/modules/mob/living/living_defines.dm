@@ -192,7 +192,6 @@
 
 	var/surrendering = 0
 
-
 	/// Combat bonuses for Simple Mobs
 	var/simpmob_attack = 0
 	var/simpmob_defend = 0
@@ -288,3 +287,8 @@
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)
+
+	/// Direction that this mob is looking at, used for the look_up and look_down procs
+	var/looking_vertically = NONE
+	///looking holder we use for look_up and look_down. we use this over resetting to the turf because we want to glide
+	var/atom/movable/looking_holder/looking_holder

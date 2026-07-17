@@ -33,23 +33,21 @@
 		for(var/obj/item/item as anything in contents)
 			. += span_info("- [item]")
 
-/obj/machinery/light/fueled/smelter/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	if(istype(attacking_item, /obj/item/weapon/tongs))
-		var/obj/item/weapon/tongs/tongs = attacking_item
+/obj/machinery/light/fueled/smelter/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = tool
 		if(tongs.held_item)
 			try_add_item(tongs.held_item, user, tongs)
 		else
 			try_retrieve_item(user, tongs)
-		return TRUE
+		return ITEM_INTERACT_SUCCESS
 
-	if(attacking_item.firefuel)
-		if(alert(usr, "Fuel \the [src] with [attacking_item]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
-			return ..()
+	if(tool.firefuel)
+		if(tgui_alert(user, "Fuel \the [name] with [tool]?", "VANDERLIN", list("Fuel", "Smelt")) == "Fuel")
+			return NONE
 
-	if(try_add_item(attacking_item, user))
-		return TRUE
-
-	return ..()
+	if(try_add_item(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/light/fueled/smelter/proc/try_retrieve_item(mob/living/user, obj/item/weapon/tongs/tongs_used)
 	. = FALSE

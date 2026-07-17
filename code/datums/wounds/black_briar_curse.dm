@@ -225,7 +225,7 @@
 	if(!owner.has_quirk(/datum/quirk/black_briar) && infection_percent >= BBC_STAGE_LATE)
 		if(mob_overlay != infection_overlay)
 			mob_overlay = infection_overlay
-			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, list(CRIT_MOD_CHANCE = -100))
+			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, list(CRIT_MOD_CHANCE = CANT_CRIT))
 			playsound(owner, pick('sound/gore/flesh_eat_01.ogg', 'sound/gore/flesh_eat_02.ogg'), 70, FALSE, -1)
 			bodypart_owner.add_pain((SHOCK_STAGE_2-SHOCK_STAGE_1)/2)
 			owner.update_damage_overlays()

@@ -1,15 +1,17 @@
 /obj/item/clothing/face/spectacles
 	name = "spectacles"
+	desc = "A pair of shaped lenses, worn with a bridge over the nose."
 	icon_state = "glasses"
+	w_class = WEIGHT_CLASS_SMALL
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	sellprice = 15
 	max_integrity = 20
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
 	gender = PLURAL
 	clothing_traits = list(TRAIT_NEARSIGHTED_CORRECTED)
-//	block2add = FOV_BEHIND
 
 /obj/item/clothing/face/spectacles/atom_break(damage_flag)
 	. = ..()
@@ -21,9 +23,11 @@
 
 /obj/item/clothing/face/spectacles/golden
 	name = "golden spectacles"
+	desc = "A pair of shaped lenses, worn with a bridge over the nose. The frame of this one is golden."
 	icon_state = "goggles"
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	sellprice = 40
 	max_integrity = 35
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
@@ -31,9 +35,47 @@
 
 /obj/item/clothing/face/spectacles/monocle
 	name = "silver monocle"
+	desc = "A single shaped lens housed in silver. It is held in front of the eye by tensing the muscles around the eye socket. Using this allows you to better appraise items."
 	icon_state = "monocle"
 	max_integrity = 35
+	sellprice = 20
 	gender = NEUTER
+	grid_width = 32
+	grid_height = 32
+
+/obj/item/clothing/face/spectacles/monocle/examine()
+	. = ..()
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
+
+/obj/item/clothing/face/spectacles/monocle/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	var/total_sellprice = 0
+
+	if(isturf(interacting_with))
+		visible_message("[user] evaluates the items on the [interacting_with] with their monocle.")
+
+		for(var/obj/item/assessed_item in interacting_with)
+			total_sellprice += assessed_item.sellprice
+
+		if(!HAS_TRAIT(user, TRAIT_SEEPRICES))
+			total_sellprice = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
+
+		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
+
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] evaluates the [interacting_with] with their monocle.")
+
+		var/obj/item/assessed_item = interacting_with
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
+			total_sellprice += item.sellprice
+
+		if(!HAS_TRAIT(user, TRAIT_SEEPRICES))
+			total_sellprice = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
+
+		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)

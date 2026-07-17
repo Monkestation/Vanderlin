@@ -30,6 +30,9 @@
 		// Prompt the user to upload the manuscript
 		var/choice = tgui_alert(user, "Do you want to add the painting to the archive?", "Confirm", list("Yes", "No"))
 		if(choice == "Yes")
+			if(is_misc_banned(user.ckey, BAN_MISC_PUBLISH))
+				to_chat(src, span_danger("I have been banned from publishing to the archive."))
+				return
 			upload_painting(user, M)
 			to_chat(user, span_notice("The painting has been uploaded."))
 		else
@@ -44,6 +47,9 @@
 		// Prompt the user to upload the manuscript
 		var/choice = tgui_alert(user, "Do you want to add the manuscript to the archive?", "Confirm", list("Yes", "No"))
 		if(choice == "Yes")
+			if(is_misc_banned(user.ckey, BAN_MISC_PUBLISH))
+				to_chat(src, span_danger("I have been banned from publishing to the archive."))
+				return
 			upload_manuscript(user, M)
 			// // Optionally delete the manuscript after uploading
 			// qdel(M)

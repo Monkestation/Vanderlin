@@ -19,7 +19,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 	if(ask_again)
 		log_game("([key || "NO KEY"]) mentorhelped ASK AGAIN: [msg]")
 		for(var/client/admin in GLOB.admins)
-			if(!(admin.prefs.chat_toggles & CHAT_PRAYER))
+			if(!(admin.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_PRAYER))
 				continue
 			to_chat(admin, span_admin_log("<i>[schizo_again.rng_name] ([key || "NO KEY"]) [ADMIN_FLW(src)] [ADMIN_SM(src)] meditates asks again...</i>\n<b>[msg]</b>"))
 
@@ -42,7 +42,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 		log_game("([key || "NO KEY"]) mentorhelped: [msg]")
 
 		for(var/client/voice in ((GLOB.clients - client) - GLOB.admins))
-			if(!(voice.prefs.toggles & SCHIZO_VOICE))
+			if(!(voice.prefs.read_preference(/datum/preference/bitwise/toggles) & SCHIZO_VOICE))
 				continue
 			var/answer_button = span_notice("(<a href='byond://?src=[voice];schizohelp=[REF(ticket)];'>ANSWER</a>)")
 			to_chat(voice, mentor_block("[message]  [answer_button]"))
@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 			SEND_SOUND(voice, used)
 
 		for(var/client/admin in (GLOB.admins - client))
-			if(!(admin.prefs.chat_toggles & CHAT_PRAYER))
+			if(!(admin.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_PRAYER))
 				continue
 			var/added_text = span_notice("(<A href='?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_MEDITATE]'><span class='adminsay'>MUTE</span></a>)")
 			var/answer_button = span_notice("(<a href='byond://?src=[admin];schizohelp=[REF(ticket)];'>ANSWER</a>)")
@@ -294,7 +294,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 	used.pitch *= 1.5
 	SEND_SOUND(schizo, used)
 	for(var/client/admin in GLOB.admins)
-		if(!(admin.prefs.chat_toggles & CHAT_PRAYER))
+		if(!(admin.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_PRAYER))
 			continue
 		to_chat(admin, span_admin_log(
 			"[voice] ([voice.key || "NO KEY"]) [ADMIN_FLW(voice)] [ADMIN_SM(voice)] \

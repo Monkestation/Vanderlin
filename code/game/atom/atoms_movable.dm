@@ -612,7 +612,7 @@
 // Here's where we rewrite how byond handles movement except slightly different
 // To be removed on step_ conversion
 // All this work to prevent a second bump
-/atom/movable/Move(atom/newloc, direction, glide_size_override = 0, update_dir = TRUE)
+/atom/movable/proc/CardinalMove(atom/newloc, direction, glide_size_override = 0, update_dir = TRUE)
 	. = FALSE
 
 	if(!newloc || newloc == loc)
@@ -718,7 +718,7 @@
 	if(loc != newloc)
 		if (!(direction & (direction - 1))) //Cardinal move
 			lastcardinal = direction
-			. = ..()
+			. = CardinalMove(newloc, direction, glide_size_override, update_dir)
 		else //Diagonal move, split it into cardinal moves
 			if(HAS_TRAIT(src, TRAIT_BLOCKED_DIAGONAL))
 				if (direction & NORTH)
@@ -863,7 +863,7 @@
 
 	//glide_size strangely enough can change mid movement animation and update correctly while the animation is playing
 	//This means that if you don't override it late like this, it will just be set back by the movement update that's called when you move turfs.
-	if(glide_size_override)
+	if(glide_size_override && glide_size != glide_size_override)
 		set_glide_size(glide_size_override)
 
 	last_move = direction_to_move
@@ -1048,7 +1048,7 @@
 			var/old_z = (oldturf ? oldturf.z : null)
 			var/dest_z = (destturf ? destturf.z : null)
 			if (old_z != dest_z)
-				onTransitZ(old_z, dest_z)
+				onTransitZ(oldturf, destturf)
 			destination.Entered(src, oldloc)
 			if(destarea && old_area != destarea)
 				destarea.Entered(src, oldloc)
@@ -1072,11 +1072,10 @@
 
 	RESOLVE_ACTIVE_MOVEMENT
 
-/atom/movable/proc/onTransitZ(old_z,new_z)
-	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_z, new_z)
-	for (var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
-		var/atom/movable/AM = item
-		AM.onTransitZ(old_z,new_z)
+/atom/movable/proc/onTransitZ(turf/old_turf, turf/new_turf)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_turf, new_turf)
+	for(var/atom/movable/AM as anything in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
+		AM.onTransitZ(old_turf, new_turf)
 
 /atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	set waitfor = 0

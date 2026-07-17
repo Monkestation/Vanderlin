@@ -1,20 +1,3 @@
-
-/datum/atom_hud/alternate_appearance/basic/group
-	var/list/seers
-	add_ghost_version = TRUE
-
-/datum/atom_hud/alternate_appearance/basic/group/New(key, image/I, mob_or_mobs)
-	..(key, I, FALSE)
-	var/list/mobs = islist(mob_or_mobs) ? mob_or_mobs : list(mob_or_mobs)
-	seers = mobs
-	for(var/mob/M in seers)
-		add_hud_to(M)
-
-/datum/atom_hud/alternate_appearance/basic/group/mobShouldSee(mob/M)
-	if(M in seers)
-		return TRUE
-	return FALSE
-
 /datum/component/vis_radius
 	// This is an invisible object that will follow bounded object
 	var/obj/effect/overlay/radius_obj
@@ -54,7 +37,7 @@
 	radius_img.transform = M
 
 /datum/component/vis_radius/proc/show_radius(datum/sourse, mob_or_mobs)
-	radius_obj.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/group, "visible_radius", radius_img, mob_or_mobs)
+	radius_obj.add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/people, "visible_radius", radius_img, NONE, mob_or_mobs)
 
 /datum/component/vis_radius/proc/hide_radius()
 	radius_obj?.remove_alt_appearance("visible_radius")

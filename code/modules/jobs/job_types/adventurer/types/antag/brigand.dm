@@ -1,8 +1,3 @@
-/datum/attribute_holder/sheet/job/
-	raw_attribute_list = list(
-
-	)
-
 /datum/attribute_holder/sheet/job/brigand
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -58,7 +53,7 @@
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/shepherd/rag = 1)
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	head = /obj/item/clothing/head/helmet/leather/volfhelm

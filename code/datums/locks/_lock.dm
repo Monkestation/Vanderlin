@@ -66,50 +66,56 @@
 	if(lockids && islist(lockids))
 		lockid_list = lockids
 	RegisterSignal(holder, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
-	RegisterSignal(holder, COMSIG_ATOM_ATTACKBY, PROC_REF(key_act_left))
+	RegisterSignal(holder, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(key_act_left))
 	if(requires_turning)
-		RegisterSignal(holder, COMSIG_ATOM_ATTACKBY_SECONDARY, PROC_REF(key_act_right))
+		RegisterSignal(holder, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY, PROC_REF(key_act_right))
 
-/datum/lock/key/Destroy()
-	UnregisterSignal(holder, list(COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_EXAMINE))
+/datum/lock/key/Destroy(force)
+	UnregisterSignal(holder, list(COMSIG_ATOM_ITEM_INTERACTION, COMSIG_ATOM_EXAMINE))
 	if(requires_turning)
-		UnregisterSignal(holder, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
+		UnregisterSignal(holder, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY)
 	return ..()
 
 /datum/lock/key/proc/examine(obj/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
+
 	if(tampered)
 		examine_list += span_notice("[source] has been tampered with.")
 
-/datum/lock/key/proc/key_act_left(obj/source, obj/item/I, mob/living/user, list/modifiers)
+/datum/lock/key/proc/key_act_left(obj/source, mob/living/user, obj/item/tool, list/modifiers)
 	SIGNAL_HANDLER
 
-	return attack_wrap(source, I, user, modifiers)
+	if(user.cmode)
+		return NONE
 
-/datum/lock/key/proc/key_act_right(obj/source, obj/item/I, mob/living/user, list/modifiers)
+	return interact_wrap(source, user, tool, modifiers)
+
+/datum/lock/key/proc/key_act_right(obj/source, mob/living/user, obj/item/tool, list/modifiers)
 	SIGNAL_HANDLER
 
-	return attack_wrap(source, I, user, modifiers)
+	if(user.cmode)
+		return NONE
 
-/datum/lock/key/proc/attack_wrap(obj/source, obj/item/I, mob/living/user, list/modifiers)
-	SIGNAL_HANDLER
+	return interact_wrap(source, user, tool, modifiers)
 
+/datum/lock/key/proc/interact_wrap(obj/source, mob/living/user, obj/item/tool, list/modifiers)
 	var/is_right = text2num(LAZYACCESS(modifiers, RIGHT_CLICK))
-	if(I.can_lock_interact() && source.pre_lock_interact(user))
-		try_toggle(I, user, is_right)
-		// :( these are technically the same thing
-		return is_right ? COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN : COMPONENT_NO_AFTERATTACK
-	if(is_type_in_list(I, lockpicks))
-		if(source.pre_lock_interact(user) && user.try_pick(source, I, lockpicks, wedges, difficulty))
-			// :( these are technically the same thing
-			return is_right ? COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN : COMPONENT_NO_AFTERATTACK
+	if(tool.can_lock_interact() && source.pre_lock_interact(user))
+		try_toggle(user, tool, is_right)
+		return ITEM_INTERACT_SUCCESS
 
-/// Try to toggle the lock with I
-/datum/lock/key/proc/try_toggle(obj/item/I, mob/user, is_right)
+	if(is_type_in_list(tool, lockpicks))
+		if(source.pre_lock_interact(user) && user.try_pick(source, tool, lockpicks, wedges, difficulty))
+			return ITEM_INTERACT_SUCCESS
+
+/// Try to toggle the lock with a tool
+/datum/lock/key/proc/try_toggle(mob/living/user, obj/item/tool, is_right)
 	var/silent = user?.m_intent == MOVE_INTENT_SNEAK
-	if(!check_access(I))
+
+	if(!check_access(tool))
 		holder?.lock_failed(user, silent)
 		return
+
 	if(requires_turning)
 		if(locked && is_right)
 			holder?.lock_failed(user, silent, "It won't turn this way, try turning it to the left.")
@@ -117,7 +123,8 @@
 		if(!locked && !is_right)
 			holder?.lock_failed(user, silent, "It won't turn this way, try turning it to the right.")
 			return
-	toggle(user, I, silent)
+
+	toggle(user, tool, silent)
 
 /datum/lock/key/proc/set_pick_difficulty(difficulty)
 	src.difficulty = CLAMP(difficulty, 1, 6)

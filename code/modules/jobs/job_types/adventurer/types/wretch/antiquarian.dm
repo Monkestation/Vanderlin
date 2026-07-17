@@ -31,7 +31,6 @@
 
 // The idea is that they're a slippery bastard. Cantrip focused, stealth-focused. They rely on their spells.
 	languages = list(/datum/language/thievescant)
-	allowed_patrons = list(/datum/patron/godless/defiant) // This one has seen too much. Matthiosans are not compatible with Heartfelt.
 
 	traits = list(
 		TRAIT_DEADNOSE,
@@ -112,3 +111,6 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
 
+/datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.set_patron(/datum/patron/godless/defiant)

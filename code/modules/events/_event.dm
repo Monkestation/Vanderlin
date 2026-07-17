@@ -156,6 +156,10 @@
 	if(!ispath(typepath, /datum/round_event))
 		return EVENT_CANT_RUN
 
+	if(max_occurrences <= 0)
+		stack_trace("round event [type], running with 0 max occurrences!")
+		return EVENT_CANT_RUN
+
 	triggering = TRUE
 	if (alert_observers)
 		message_admins("Random Event triggering in 10 seconds: [name] (<a href='byond://?src=[REF(src)];cancel=1'>CANCEL</a>)")

@@ -43,7 +43,7 @@
 	for(var/mob/target in players)
 		if(!isnewplayer(target) && target.can_hear())
 			to_chat(target, announcement)
-			if((target.client.prefs.toggles & SOUND_ANNOUNCEMENTS) && sound_to_play)
+			if((target.client.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_ANNOUNCEMENTS) && sound_to_play)
 				target.playsound_local(target, sound_to_play, 100)
 
 /proc/minor_announce(message, title = "", alert, html_encode = TRUE, list/mob/players)
@@ -60,7 +60,7 @@
 	for(var/mob/target in players)
 		if(!isnewplayer(target) && target.can_hear())
 			to_chat(target, "[span_minorannounce("<font color = purple>[title]</font color><BR>[message]")]<BR>")
-			if(target.client.prefs.toggles & SOUND_ANNOUNCEMENTS)
+			if(target.client.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_ANNOUNCEMENTS)
 				target.playsound_local(target, 'sound/misc/alert.ogg', 100)
 
 /proc/bordered_message(mob/target, list/messages)

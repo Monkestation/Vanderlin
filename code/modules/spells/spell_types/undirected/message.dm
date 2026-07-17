@@ -37,7 +37,7 @@
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
-	if(!LAZYLEN(owner.mind?.known_people))
+	if(!LAZYLEN(owner.mind?.relations))
 		to_chat(owner, span_warning("I don't know anyone!"))
 		return . | SPELL_CANCEL_CAST
 	var/recipient = tgui_input_text(owner, "Who are you trying to contact?", "BEYOND THE VEIL", encode=FALSE)
