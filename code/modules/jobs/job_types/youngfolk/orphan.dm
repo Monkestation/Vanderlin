@@ -332,7 +332,7 @@
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		orphanage_renovated = TRUE
-	if(orphanage_renovated)
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
 			STAT_INTELLIGENCE = 1,
 		))
