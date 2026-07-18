@@ -40,7 +40,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
@@ -125,7 +125,7 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/shortboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/sword/sabre/noc
+	beltl = /obj/item/weapon/flail/silver/noc
 	beltr = /obj/item/storage/keyring/priest
 	armor = /obj/item/clothing/shirt/robe/noc
 	backl = /obj/item/storage/backpack/satchel
