@@ -40,7 +40,8 @@
 	var/healing_multiplier = 0.07
 
 /datum/surgery_operation/basic/tend_wounds/all_required_strings()
-	return ..() + list("the patient must have brute or burn damage")
+	. = ..()
+	. += "the patient must have brute or burn damage"
 
 /datum/surgery_operation/basic/tend_wounds/state_check(mob/living/patient)
 	if(!iscarbon(patient))

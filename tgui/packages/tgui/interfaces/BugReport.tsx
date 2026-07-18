@@ -81,7 +81,7 @@ export const BugReport = () => {
   return (
     <Window
       title="Bug Report"
-      width={600}
+      width={820}
       height={400}
     >
       <Window.Content>

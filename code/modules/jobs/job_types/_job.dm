@@ -106,6 +106,8 @@
 	var/list/allowed_patrons
 	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
 	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt/proven)
+	/// Whether or not this role is exclusively for Tennite patrons //AND// can be heretics via triumph.
+	var/tennite_triumph_exclusive = FALSE
 
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
@@ -290,6 +292,15 @@
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
+	if(player_client)
+		for(var/path in GLOB.post_job_spawn_prefs)
+			var/datum/preference/pref = GLOB.post_job_spawn_prefs[path]
+			if(!length(pref.job_types))
+				continue // ???
+			if(!(type in pref.job_types))
+				continue
+			pref.post_job_apply(spawned, player_client.prefs.read_preference(pref.type), player_client)
+
 	if(spawned.attributes)
 		assign_attributes(spawned, player_client)
 	if(!ishuman(spawned))
@@ -431,6 +442,10 @@
 		var/mob/living/carbon/human/H = spawned
 		H.pick_job_packs(src)
 
+	/// Applies here because it relies on mobs having their traits, oh well if they get it midround besides late joining
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(spawned)
+
 /// this "mostly" removes the existence of a job from someone.
 /// the unfortunately reality is that even this is still a flawed removal
 /datum/job/proc/remove_job(mob/living/carbon/human/spawned)
@@ -508,17 +523,24 @@
 		return parent_job.remove_job(spawned)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
+	var/datum/patron/old_patron = spawned.patron
+
+	if(tennite_triumph_exclusive && !spawned.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		spawned.set_patron(/datum/patron/divine/astrata, TRUE)
+		to_chat(spawned, span_warning("I've followed the word of [old_patron.display_name ? old_patron.display_name : old_patron] in my younger years, \
+		but the path I tread todae proves only The Ten may rule!"))
+		return
+
 	if(!length(allowed_patrons))
 		return
 
-	var/datum/patron/old_patron = spawned.patron
 	if(old_patron?.type in allowed_patrons)
 		return
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
 	for(var/god in GLOB.patron_list)
-		if(!(god in allowed_patrons))
+		if(!(god in allowed_patrons) || (god in banned_patrons))
 			continue
 		all_gods |= god
 		var/datum/patron/P = GLOB.patron_list[god]
@@ -553,7 +575,7 @@
 		spawned_human.attributes?.add_sheet(attribute_sheet)
 
 /datum/job/proc/GetAntagRep()
-	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]
+	. = CONFIG_GET(keyed_list/antag_rep)[LOWER_TEXT(title)]
 	if(. == null)
 		return antag_rep
 

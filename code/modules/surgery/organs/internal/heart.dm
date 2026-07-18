@@ -134,6 +134,7 @@
 				deathsdoor = FALSE
 		if(deathsdoor)
 			to_chat(owner, span_danger("I'm knocking on Necra's door!"))
+	consider_processing()
 	return TRUE
 
 /obj/item/organ/heart/proc/Restart()
@@ -142,6 +143,7 @@
 	update_appearance()
 	if(owner && !old_beating)
 		to_chat(owner, span_userdanger("My [name] beats again!"))
+	consider_processing()
 	return TRUE
 
 /obj/item/organ/heart/get_availability(datum/species/S, mob/living/carbon/owner_mob)

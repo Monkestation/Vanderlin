@@ -145,7 +145,8 @@
 				if(!structure.try_network_merge(src))
 					rotation_break()
 			else
-				if(!structure.try_connect(src))
+				var/result = structure.try_connect(src)
+				if(result == FALSE)
 					rotation_break()
 
 	if(!rotation_network)
@@ -159,13 +160,10 @@
 		return list()
 	. = ..()
 
-/obj/structure/minecart_rail/find_and_propagate(list/checked, first = FALSE)
-	if(!length(checked))
-		checked = list()
-	checked |= src
+/obj/structure/minecart_rail/propagate_rotation_to_network(new_direction, new_rpm)
 	if(ISDIAGONALDIR(dir))
-		return checked
-	. = ..()
+		return
+	..()
 
 /obj/structure/minecart_rail/set_rotations_per_minute(speed)
 	. = ..()

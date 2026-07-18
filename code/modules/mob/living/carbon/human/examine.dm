@@ -6,13 +6,13 @@
 		used_title = spy.examine_title
 	if(!used_title)
 		return
-	if(!IsAdminGhost(user))
+	if(user != src && !IsAdminGhost(user))
 		if(!get_face_name("")) // face covered?
 			return
 		var/is_family_member = FALSE
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			is_family_member = H.family_datum && H.family_datum != family_datum
+			is_family_member = H.family_datum && (H.family_datum == family_datum)
 		if(!is_family_member)
 			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_ANY_OF_TRAITS(src, list(TRAIT_RECRUITED, TRAIT_RECOGNIZED)))
 				return
@@ -41,13 +41,13 @@
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(spy.examine_species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(spy.examine_species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(spy.examine_species.get_skin_list(), spy.examine_tone) || "incomprehensible"].")
 	else
 		var/datum/species/species = dna?.species
 		if(species?.use_skintones)
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
 	. = list()
@@ -56,7 +56,7 @@
 	if(culture)
 		// do we know them, are we an observer, or do we share a culture
 		if((do_i_know || O || istype(culture, H?.culture?.type)) && !istype(culture, /datum/culture/universal/ambiguous))
-			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
+			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [LOWER_TEXT(P[THEYRE])]"
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
 		// are they from anywhere
 		else if(!self_inspect)
@@ -74,7 +74,10 @@
 		// Know check
 		if(!is_family && !O)
 			if(do_i_know)
-				. += span_tinynotice("I know [P[THEM]].")
+				if(user.mind?.knows_as(src.mind, /datum/relation/rival))
+					. += "<span class='tinynotice'> I know [P[THEM]]...</span><span class='tinywarning'> they are my rival!</span>"
+				else
+					. += span_tinynotice("I know [P[THEM]].")
 			else
 				. += span_tinywarning("I do not know [P[THEM]].")
 

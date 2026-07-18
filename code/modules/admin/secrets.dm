@@ -121,7 +121,7 @@
 				return
 			var/dat = "<B>Bombing List</B><HR>"
 			for(var/l in GLOB.bombers)
-				dat += text("[l]<BR>")
+				dat += "[l]<BR>"
 			usr << browse(dat, "window=bombers")
 
 		if("list_signalers")
@@ -274,7 +274,7 @@
 	if (usr)
 		log_admin("[key_name(usr)] used secret [item]")
 		if (ok)
-			to_chat(world, text("<B>A secret has been activated by []!</B>", usr.key))
+			to_chat(world, "<B>A secret has been activated by [usr.key]!</B>")
 
 /proc/portalAnnounce(announcement, playlightning)
 	set waitfor = 0

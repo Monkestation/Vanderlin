@@ -111,9 +111,10 @@
 /obj/item/organ/eyes/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 
-	if(ishuman(organ_owner))
-		var/mob/living/carbon/human/HMN = owner
-		HMN.regenerate_icons()
+	if(!(owner.status_flags & BUILDING_ORGANS))
+		if(ishuman(owner))
+			var/mob/living/carbon/human/HMN = owner
+			HMN.regenerate_icons()
 
 	organ_owner.update_eyes()
 	organ_owner.update_tint()

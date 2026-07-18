@@ -338,6 +338,8 @@
 			return
 		if("Osslandic")
 			return strings("accents/ossland_replacement.json", "ossland")
+		if("Rockhill")
+			return strings("accents/rockhill_replacement.json", "rockhill")
 	return
 
 /datum/species/proc/get_pain_emote(power)
@@ -413,6 +415,7 @@
 				ACCENT_ROUSMAN,
 				ACCENT_WINTERMARE,
 				ACCENT_OSSLAND,
+				ACCENT_ROCKHILL,
 			)
 
 			///This will only trigger for donators
@@ -824,7 +827,7 @@
 		C.setToxLoss(0, TRUE, TRUE)
 
 	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(src, keep_liverless = TRUE)
+		C.reagents?.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
 		C.add_faction(inherent_factions)
@@ -847,6 +850,10 @@
 
 	on_gender_update(C)
 	C.update_organ_requirements() //post species trait gains
+
+	if(!(C.status_flags & BUILDING_ORGANS))
+		C.regenerate_icons()
+
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)

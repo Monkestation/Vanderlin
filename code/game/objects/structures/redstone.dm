@@ -92,7 +92,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.changeNext_move(CLICK_CD_MELEE)
-		var/used_time = pulltime - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
+		var/used_time = HAS_TRAIT(user, TRAIT_GATEKEEPER) ? 0 : (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		if(do_after(user, used_time))
@@ -142,7 +142,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
-	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+	if(!(accessor_trait && HAS_CHARACTER_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
 			return // nothing here!
@@ -174,6 +174,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/hidden/thieves_guild
 	hidden_dc = 13
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
+
+/obj/structure/lever/hidden/courtagent
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
 
 /obj/structure/lever/hidden/rous
 	hidden_dc = 16

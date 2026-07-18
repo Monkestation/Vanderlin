@@ -273,8 +273,9 @@
 				R.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
-		C.update_inv_gloves() //to remove the bloody hands overlay
-		C.update_inv_armor()
+		if(!(C?.status_flags & BUILDING_ORGANS))
+			C.update_inv_gloves() //to remove the bloody hands overlay
+			C.update_inv_armor()
 
 
 /obj/item/bodypart/l_arm/drop_limb(special, dismembered, move_to_floor = TRUE)
@@ -285,15 +286,17 @@
 			C.handcuffed.forceMove(drop_location())
 			C.handcuffed.dropped(C)
 			C.set_handcuffed(null)
-			C.update_handcuffed()
+			if(!(C.status_flags & BUILDING_ORGANS))
+				C.update_handcuffed()
 		if(C.hud_used)
 			var/atom/movable/screen/inventory/hand/L = C.hud_used.hand_slots["[held_index]"]
 			if(L)
 				L.update_appearance(UPDATE_OVERLAYS)
 		if(C.gloves && (C.num_hands < 1))
 			C.dropItemToGround(C.gloves, force = TRUE)
-		C.update_inv_gloves() //to remove the bloody hands overlay
-		C.update_inv_armor()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_gloves() //to remove the bloody hands overlay
+			C.update_inv_armor()
 
 /obj/item/bodypart/r_leg/drop_limb(special, dismembered, move_to_floor = TRUE)
 	var/mob/living/carbon/C = owner
@@ -303,12 +306,14 @@
 			C.legcuffed.forceMove(C.drop_location()) //At this point bodypart is still in nullspace
 			C.legcuffed.dropped(C)
 			C.legcuffed = null
-			C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
-			C.update_inv_legcuffed()
+			if(!(C.status_flags & BUILDING_ORGANS))
+				C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
+				C.update_inv_legcuffed()
 		if(C.shoes && (C.num_legs < 1))
 			C.dropItemToGround(C.shoes, force = TRUE)
-		C.update_inv_shoes()
-		C.update_inv_pants()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_shoes()
+			C.update_inv_pants()
 
 /obj/item/bodypart/l_leg/drop_limb(special, dismembered, move_to_floor = TRUE)
 	var/mob/living/carbon/C = owner
@@ -318,12 +323,14 @@
 			C.legcuffed.forceMove(C.drop_location())
 			C.legcuffed.dropped(C)
 			C.legcuffed = null
-			C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
-			C.update_inv_legcuffed()
+			if(!(C.status_flags & BUILDING_ORGANS))
+				C.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
+				C.update_inv_legcuffed()
 		if(C.shoes && (C.num_legs < 1))
 			C.dropItemToGround(C.shoes, force = TRUE)
-		C.update_inv_shoes()
-		C.update_inv_pants()
+		if(!(C.status_flags & BUILDING_ORGANS))
+			C.update_inv_shoes()
+			C.update_inv_pants()
 
 /obj/item/bodypart/head/drop_limb(special, dismembered, move_to_floor = TRUE)
 	if(!special)
@@ -375,7 +382,8 @@
 			var/atom/movable/screen/inventory/hand/hand = new_limb_owner.hud_used.hand_slots["[held_index]"]
 			if(hand)
 				hand.update_appearance(UPDATE_OVERLAYS)
-		new_limb_owner.update_inv_gloves()
+		if(!(new_limb_owner.status_flags & BUILDING_ORGANS))
+			new_limb_owner.update_inv_gloves()
 
 	if(special) //non conventional limb attachment
 		for(var/obj/item/organ/organ as anything in new_limb_owner.internal_organs)
@@ -398,9 +406,10 @@
 
 	update_bodypart_damage_state()
 
-	new_limb_owner.updatehealth()
-	new_limb_owner.update_body()
-	new_limb_owner.update_damage_overlays()
+	if(!(new_limb_owner.status_flags & BUILDING_ORGANS))
+		new_limb_owner.updatehealth()
+		new_limb_owner.update_body()
+		new_limb_owner.update_damage_overlays()
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
 	if(ishuman(C))

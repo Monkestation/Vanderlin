@@ -23,7 +23,7 @@
 	// Handle special time keywords
 	var/time_value = 0
 	if(time_change == "set" && !text2num(time_type))
-		switch(lowertext(time_type))
+		switch(LOWER_TEXT(time_type))
 			if("dawn")
 				time_value = SSnightshift.nightshift_dawn_start
 			if("dusk")

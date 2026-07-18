@@ -171,7 +171,7 @@
 
 			word = html_decode(word)
 
-			if(lowertext(word) in common_words)
+			if(LOWER_TEXT(word) in common_words)
 				new_message += word + suffix
 			else
 				if(prob(30) && message_split.len > 2)

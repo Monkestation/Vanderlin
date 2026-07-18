@@ -68,10 +68,17 @@
 	light_color = "#FFFFFF"
 	light_outer_range =  MINIMUM_USEFUL_LIGHT_RANGE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	light_system = MOVABLE_LIGHT
 
 /obj/effect/dummy/lighting_obj/Initialize(mapload, _color, _range, _power, _duration)
 	. = ..()
-	set_light(_range ? _range : light_outer_range, light_inner_range, _power ? _power : light_power, l_color = _color ? _color : light_color)
+	set_light_on(TRUE)
+	if(_range)
+		set_light_range(null, _range)
+	if(_power)
+		set_light_power(_power)
+	if(_color)
+		set_light_color(_color)
 	if(_duration)
 		QDEL_IN(src, _duration)
 

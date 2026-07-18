@@ -139,6 +139,8 @@
 			. += organ.get_slot_efficiency(slot)
 
 /mob/living/carbon/update_organ_requirements()
+	if(status_flags & BUILDING_ORGANS)
+		return
 	total_blood_req = 0
 	total_oxygen_req = 0
 	total_nutriment_req = 0

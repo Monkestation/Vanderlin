@@ -82,7 +82,10 @@
 	if(duration != STATUS_EFFECT_PERMANENT || tick_interval != STATUS_EFFECT_NO_TICK) //don't process if we don't care
 		switch(processing_speed)
 			if(STATUS_EFFECT_FAST_PROCESS)
-				START_PROCESSING(SSfastprocess, src)
+				if(tick_interval == STATUS_EFFECT_NO_TICK)
+					START_PROCESSING(SSprocessing, src)
+				else
+					START_PROCESSING(SSfastprocess, src)
 			if(STATUS_EFFECT_NORMAL_PROCESS)
 				START_PROCESSING(SSprocessing, src)
 
@@ -119,7 +122,7 @@
 		tick(seconds_per_tick)
 	else if(tick_interval != STATUS_EFFECT_NO_TICK && time_until_next_tick <= 0)
 		time_until_next_tick = tick_interval // same here as well
-		tick(tick_interval / 10)
+		tick(tick_interval * 0.1)
 
 	if(QDELING(src))
 		return // tick deleted us, no need to continue

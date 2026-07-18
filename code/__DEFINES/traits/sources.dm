@@ -30,6 +30,7 @@
 #define VEHICLE_TRAIT "vehicle"
 /// For traits that an item should always have
 #define INNATE_TRAIT "innate"
+#define STOCK_TRAIT "stock_trait"
 #define CRIT_HEALTH_TRAIT "crit_health"
 #define OXYLOSS_TRAIT "oxyloss"
 #define BLOODLOSS_TRAIT "bloodloss"

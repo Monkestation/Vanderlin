@@ -1,0 +1,7 @@
+author: "Telvayne"
+delete-after: True
+changes:
+  - rscadd: "Weird Ward Subclass"
+  - rscadd: "Creative Castoff Subclass"
+  - rscadd: "Weary Wastrel eating rocks again"
+  - balance: "Expaned Skilled Scamps skillset"
