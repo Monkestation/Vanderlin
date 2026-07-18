@@ -57,7 +57,7 @@
 	)
 	devotion_class = DEVOTION_CLASS_ACOLYTE // Equal to priest, but unique to Noc. Changing patron will reset to Acolyte tier.
 
-/datum/devotion/divine/noc/make_lunar_sentinel()
+/datum/devotion/divine/noc/make_lunar_champion()
 	devotion = 250
 	max_devotion = 500
 	progression = CLERIC_REQ_3

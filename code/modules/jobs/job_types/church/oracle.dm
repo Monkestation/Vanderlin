@@ -64,7 +64,7 @@
 	honorary = "Oracle"
 
 	magic_user = TRUE
-	spell_points = 12
+	spell_points = 17
 	give_bank_account = 30
 
 	exp_type = list(EXP_TYPE_CHURCH)
@@ -185,10 +185,11 @@
 
 	give_bank_account = 30
 
-	exp_type = list(EXP_TYPE_CHURCH)
-	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
+	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 	exp_requirements = list(
 		EXP_TYPE_CHURCH = 900,
+		EXP_TYPE_COMBAT = 900
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/lunar_sentinel
@@ -199,6 +200,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
+		TRAIT_DUALWIELDER,
 	)
 
 	languages = list(
@@ -215,7 +217,7 @@
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
-		devotion.make_lunar_sentinel()
+		devotion.make_templar()
 		devotion.grant_to(spawned)
 
 /datum/outfit/lunar_sentinel
@@ -291,10 +293,11 @@
 
 	give_bank_account = 30
 
-	exp_type = list(EXP_TYPE_CHURCH)
-	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
+	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
+	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 	exp_requirements = list(
 		EXP_TYPE_CHURCH = 900,
+		EXP_TYPE_COMBAT = 900
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/lunar_champion
@@ -305,6 +308,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
+		TRAIT_DUALWIELDER,
 	)
 
 	languages = list(
@@ -321,7 +325,7 @@
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
-		devotion.make_lunar_sentinel()
+		devotion.make_lunar_champion()
 		devotion.grant_to(spawned)
 
 /datum/outfit/lunar_champion

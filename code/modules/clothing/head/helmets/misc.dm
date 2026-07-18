@@ -466,9 +466,14 @@
 
 /obj/item/clothing/head/helmet/visored/owl/lunar
 	name = "lunar owl armet"
-	desc = "An armet of distinct bird like design with a pronounced beak. \
+	desc = "A silver armet of distinct bird like design with a pronounced beak. \
 		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
 		Worn by the sentinels of the Lunar Order it symbolises their eternal watch over the nite."
+	armor = ARMOR_PLATE_SILVER
+
+/obj/item/clothing/head/helmet/visored/owl/lunar/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/clothing/head/helmet/visored/knight/aalloy
 	name = "decrepit bascinet"

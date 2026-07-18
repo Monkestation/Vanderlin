@@ -239,7 +239,7 @@
 /datum/devotion/proc/make_oracle()
 	make_acolyte()
 
-/datum/devotion/proc/make_lunar_sentinel()
+/datum/devotion/proc/make_lunar_champion()
 	make_templar()
 
 /mob/living/carbon/human/proc/devotionreport()
