@@ -9444,6 +9444,22 @@
 /obj/structure/closet/crate/chest/neu,
 /turf/open/floor/wood,
 /area/indoors/town)
+"esS" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "esU" = (
 /obj/structure/flora/newtree/palm,
 /turf/open/floor/sand,
@@ -28230,6 +28246,7 @@
 /obj/effect/landmark/start/mercenary{
 	dir = 8
 	},
+/obj/structure/fluff/wallclock/r,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
 "ngL" = (
@@ -32994,6 +33011,10 @@
 	},
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/smithy)
+"pmK" = (
+/obj/structure/rack,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "pne" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -42745,7 +42766,7 @@
 	},
 /obj/item/storage/hip/headhook,
 /obj/structure/fake_machine/mail/r{
-	mailtag = "Mercenary"
+	mailtag = "Adventurer"
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/adv_guild)
@@ -46541,8 +46562,10 @@
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "vmw" = (
-/obj/structure/fluff/wallclock/r,
 /obj/structure/table/wood,
+/obj/structure/fake_machine/mail/r{
+	mailtag = "Mercenary"
+	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
 "vmR" = (
@@ -110459,7 +110482,7 @@ vfU
 vfU
 qBx
 vfU
-vfU
+esS
 fgR
 eHF
 bfp
@@ -111059,7 +111082,7 @@ aiQ
 lqN
 lqN
 qhm
-vfU
+pmK
 vfU
 bAm
 vfU
