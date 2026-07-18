@@ -304,6 +304,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
+
 	/// Optional lore description for the item, a list linking a human mob's culture.name var alongside a string. \
 	If the human mob has the prerequisite culture, they will see the corresponding string. \
 	For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have : \
