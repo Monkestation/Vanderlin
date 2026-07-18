@@ -50254,7 +50254,6 @@
 /area/outdoors/mountains)
 "wPr" = (
 /obj/structure/door/iron/bars,
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/tomb,
 /turf/open/floor/cobble/mossy,
 /area/under/town/basement)
