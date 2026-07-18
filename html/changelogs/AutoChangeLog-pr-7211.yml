@@ -1,0 +1,4 @@
+author: "Wrench-1"
+delete-after: True
+changes:
+  - balance: "nerfed the Cadwyn Order Migrant Wave. It no longer spawns a max of three Crusaders with plate, miracles and silver. It'll spawn a max of 1 Crusader, and 2 Sentinels with worse gear, stats and skills."
