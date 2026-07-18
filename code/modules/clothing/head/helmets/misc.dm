@@ -463,15 +463,17 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
 	icon_state = "armetowl"
 	raise_state = "_t"
+	worn_x_dimension = 32
+	worn_y_dimension = 32
 
-/obj/item/clothing/head/helmet/visored/owl/lunar
+/obj/item/clothing/head/helmet/visored/knight/owl/lunar
 	name = "lunar owl armet"
 	desc = "A silver armet of distinct bird like design with a pronounced beak. \
 		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
 		Worn by the sentinels of the Lunar Order it symbolises their eternal watch over the nite."
 	armor = ARMOR_PLATE_SILVER
 
-/obj/item/clothing/head/helmet/visored/owl/lunar/Initialize()
+/obj/item/clothing/head/helmet/visored/knight/owl/lunar/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
