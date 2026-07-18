@@ -349,8 +349,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
-	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues")
-	TRAIT_GATEKEEPER = span_info("I am a Gatekeeper, well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches.")"
+	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
+	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches.")
 ))
 
 /// value -> trait name, generated on use from trait_by_type global
