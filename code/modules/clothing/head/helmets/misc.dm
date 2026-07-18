@@ -424,7 +424,7 @@
 
 //............... Bellow Sallet ............... //
 /obj/item/clothing/head/helmet/visored/bellow
-	name = "Bellow Sallet"
+	name = "bellow sallet"
 	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
 	icon_state = "sallet_bellow"
 	item_weight = 4.5 KILOGRAMS

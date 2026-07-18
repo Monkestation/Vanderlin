@@ -5,6 +5,9 @@
 	var/obj/item/held_item = user.get_active_held_item()
 	if(user.cmode)
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_NECK))
+			if(check_crit_armor(BODY_ZONE_PRECISE_NECK, BCLASS_CUT))
+				to_chat(user, span_warning("I can't slit [src]'s throat, their neck is protected!"))
+				return
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				if(HAS_TRAIT(user, TRAIT_PACIFISM) && user != src)
 					to_chat(user, span_warning("I can't slit [src]'s throat, I am a pacifist!"))
@@ -980,6 +983,22 @@
 		REMOVE_TRAIT(src, TRAIT_ABOMINATION, TRAIT_GENERIC)
 
 	regenerate_icons()
+
+/mob/living/carbon/human/proc/copy_visible_organs(mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+
+	for(var/obj/item/organ/organ in internal_organs)
+		if(!organ.visible_organ)
+			continue
+		organ.Remove(src)
+		qdel(organ)
+
+	for(var/obj/item/organ/organ in target.internal_organs)
+		if(!organ.visible_organ)
+			continue
+		var/obj/item/organ/new_organ = organ.copy_organ()
+		new_organ.Insert(src)
 
 /mob/living/carbon/human/proc/copy_bodyparts(mob/living/carbon/human/target)
 	var/mob/living/carbon/human/self = src

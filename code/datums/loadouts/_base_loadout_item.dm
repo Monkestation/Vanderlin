@@ -39,11 +39,15 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 	return ("[type]" in C.prefs.owned_loadout_items)
 
 /datum/loadout_item/proc/can_afford_single(client/C)
+	if(loadout_flags & LOADOUT_FLAG_GIVEAWAY_ONLY)
+		return FALSE
 	if(triumph_cost_permanent)
 		return TRUE
 	return get_triumph_amount(C.ckey) >= CEILING(triumph_cost_permanent * 0.05, 1)
 
 /datum/loadout_item/proc/can_afford_permanent(client/C)
+	if(loadout_flags & LOADOUT_FLAG_GIVEAWAY_ONLY)
+		return FALSE
 	if(!triumph_cost_permanent)
 		return TRUE
 	return get_triumph_amount(C.ckey) >= triumph_cost_permanent

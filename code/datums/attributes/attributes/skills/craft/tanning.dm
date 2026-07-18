@@ -1,7 +1,6 @@
 /datum/attribute/skill/craft/tanning
 	name = "Skincrafting"
 	desc = "Represents your character's ability to process and use animal hide. The higher your skill in Skincrafting, the more leather you can create and the more you can make with it."
-	governing_attribute = STAT_PERCEPTION
 	default_attributes = list(
 		STAT_PERCEPTION = -5,
 		STAT_STRENGTH = -6,
@@ -14,7 +13,6 @@
 /datum/attribute/skill/craft/tanning/patching
 	name = "Hide Patching"
 	desc = "Represents your character's ability to repair damaged leather and hide goods. The higher your skill in Hide Patching, the more heavily damaged leatherwork you can restore, and the cleaner your patches will blend."
-	governing_attribute = STAT_PERCEPTION
 	default_attributes = list(
 		/datum/attribute/skill/craft/tanning = -4
 	)
