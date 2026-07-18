@@ -222,8 +222,10 @@
 #define JOB_ACOLYTE "Acolyte"
 #define JOB_GRAVETENDER "Gravetender"
 #define JOB_TEMPLAR "Templar"
-#define JOB_ORACLE "Lunar Oracle"
 
+#define JOB_ORACLE "Lunar Oracle"
+#define JOB_ORACLE_GUARD "Lunar Order Sentinel"
+#define JOB_ORACLE_GUARD_HVY "Lunar Order Champion"
 
 #define JOB_TOWNER "Towner"
 #define JOB_SOILSON "Soilson"

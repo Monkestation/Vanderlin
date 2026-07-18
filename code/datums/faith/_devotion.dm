@@ -239,6 +239,9 @@
 /datum/devotion/proc/make_oracle()
 	make_acolyte()
 
+/datum/devotion/proc/make_lunar_sentinel()
+	make_templar()
+
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
 	set category = "RoleUnique.Divine"
