@@ -99,7 +99,6 @@
 	name = "blank blessing of Dendor"
 	icon = 'icons/roguetown/misc/magick.dmi'
 	icon_state = ""
-	plane = -1
 	layer = 4.2
 	alpha = 155
 	var/associated_shrine = null

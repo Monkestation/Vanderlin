@@ -1,7 +1,7 @@
 /obj/effect/quest_spawn
 	name = "quest spawner"
-	icon = 'icons/effects/landmarks_static.dmi'
-	icon_state = "x"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "rift"
 	anchored = TRUE
 	layer = MID_LANDMARK_LAYER
 	invisibility = INVISIBILITY_OBSERVER
@@ -18,6 +18,14 @@
 	. = ..()
 	QDEL_NULL(contained_atom)
 	proximity_monitor = null
+
+/obj/effect/quest_spawn/proc/set_contained_atom(atom/movable/contained)
+	RegisterSignal(contained, COMSIG_LIVING_LIFE, PROC_REF(cancel_life))
+	ADD_TRAIT(contained, TRAIT_STASIS, "[type]")
+	contained_atom = contained
+
+/obj/effect/quest_spawn/proc/cancel_life()
+	return COMPONENT_LIVING_CANCEL_LIFE_PROCESSING
 
 /obj/effect/quest_spawn/HasProximity(mob/nearby)
 	if(!contained_atom)
@@ -37,7 +45,7 @@
 	if(get_dist(get_turf(src), get_turf(quest.quest_scroll_ref?.resolve())) > 7)
 		return
 
-	var/image/I = image(icon = 'icons/effects/effects.dmi', loc = get_turf(src), icon_state = "mobwarning", layer = 18)
+	var/image/I = image(icon = 'icons/effects/effects.dmi', loc = get_turf(src), icon_state = "rift", layer = 18)
 	I.layer = 18
 	I.plane = 18
 	I.alpha = 125
@@ -45,6 +53,8 @@
 	flick_overlay_view(I, 5 SECONDS)
 
 	contained_atom.forceMove(get_turf(src))
+	UnregisterSignal(contained_atom, COMSIG_LIVING_LIFE)
+	REMOVE_TRAIT(contained_atom, TRAIT_STASIS, "[type]")
 	contained_atom = null
 
 	playsound(loc, "plantcross", 100, FALSE, 3)

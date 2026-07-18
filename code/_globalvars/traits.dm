@@ -106,6 +106,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
 		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
 		"TRAIT_KNOW_THIEF_DOORS" = TRAIT_KNOW_THIEF_DOORS,
+		"TRAIT_KNOW_COURTAGENT_DOORS" = TRAIT_KNOW_COURTAGENT_DOORS,
 		"TRAIT_KNOW_ROUS_DOORS" = TRAIT_KNOW_ROUS_DOORS,
 		"Blessing of Baotha" = TRAIT_CRACKHEAD,
 		"Blessing of Graggar" = TRAIT_ORGAN_EATER,
@@ -206,7 +207,9 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Agent of the Court" = TRAIT_COURTAGENT,
 		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
+		"Gatekeeper" = TRAIT_GATEKEEPER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -347,6 +350,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
 	TRAIT_CULTURAL_KNOWLEDGE = span_info("I intimately understand cultures other than my own and may consult their viewpoint when examining certain items.")
+	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
+	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches.")
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

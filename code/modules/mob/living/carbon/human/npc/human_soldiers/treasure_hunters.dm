@@ -17,7 +17,6 @@
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	set_species(/datum/species/human/northern)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/after_creation()

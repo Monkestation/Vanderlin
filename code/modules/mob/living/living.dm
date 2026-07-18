@@ -35,12 +35,16 @@
 	if(!ambushable)
 		ADD_TRAIT(src, TRAIT_NOAMBUSH, INNATE_TRAIT)
 	recalculate_stats()
+	var/turf/turf = get_turf(src)
+	if(turf)
+		update_z(turf.z)
 
 /mob/living/Destroy()
 	if(FACTION_MATTHIOS in faction)
 		SSmatthios_mobs.unregister_mob(src)
 	if(cached_island_id)
 		SSisland_mobs.remove_mob(src)
+	update_z(null)
 
 	if(LAZYLEN(status_effects))
 		for(var/datum/status_effect/S as anything in status_effects)
@@ -2175,8 +2179,10 @@
 /mob/living/proc/update_z(new_z) // 1+ to register, null to unregister
 	if (registered_z != new_z)
 		if (registered_z)
-			SSmobs.clients_by_zlevel[registered_z] -= src
+			SSmobs.mobs_by_zlevel[registered_z] -= src
 		if (client)
+			if (registered_z)
+				SSmobs.clients_by_zlevel[registered_z] -= src
 			//Check the amount of clients exists on the Z level we're leaving from,
 			//this excludes us because at this point we are not registered to any z level.
 			var/old_level_new_clients = (registered_z ? SSmobs.clients_by_zlevel[registered_z].len : null)
@@ -2198,7 +2204,9 @@
 
 			registered_z = new_z
 		else
-			registered_z = null
+			registered_z = new_z
+		if (registered_z)
+			SSmobs.mobs_by_zlevel[registered_z] += src
 
 /mob/living/onTransitZ(turf/old_turf, turf/new_turf)
 	. = ..()

@@ -70,7 +70,7 @@
 #define ADMIN_VERBOSEJMP(src) "[src ? src.Admin_Coordinates_Readable(TRUE, TRUE) : "nonexistent location"]"
 #define ADMIN_INDIVIDUALLOG(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];individuallog=[REF(user)]'>LOGS</a>)"
 #define ADMIN_BIRD_LETTER(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];adminbirdletter=[REF(user)]'>LETTER</a>)"
-
+#define ADMIN_GRANT_TICKET(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];grantticket=[REF(user)]'>GRANT TICKET</a>)"
 /atom/proc/Admin_Coordinates_Readable(area_name, admin_jump_ref)
 	var/turf/turf_at_coords = Safe_COORD_Location()
 	return turf_at_coords ? "[area_name ? "[get_area_name(turf_at_coords, TRUE)] " : " "]([turf_at_coords.x],[turf_at_coords.y],[turf_at_coords.z])[admin_jump_ref ? " [ADMIN_JMP(turf_at_coords)]" : ""]" : "nonexistent location"

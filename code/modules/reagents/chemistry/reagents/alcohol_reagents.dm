@@ -30,6 +30,7 @@
 	. = ..()
 	if(age_path && holder)
 		age_timer = addtimer(CALLBACK(src, PROC_REF(age_beer)), age_time, TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_UNIQUE)
+	price_per_unit = 0.5 + (boozepwr * 0.02)
 
 /datum/reagent/consumable/ethanol/on_merge(data, amount)
 	. = ..()

@@ -1232,7 +1232,7 @@
 
 	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
 	user.set_patron(real_patron)
-	to_chat(user, "<span class='god_[lowertext(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
+	to_chat(user, "<span class='god_[LOWER_TEXT(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
 	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [real_patron]")
 	visible_message("A bright light flashes out from [src] as it channels divine focus.")
 	AOE_flash(user, range = 5)
@@ -1331,7 +1331,7 @@
 		var/is_title = FALSE
 		if(second_last_index)
 			var/second_last_word = copytext(groom.real_name, second_last_index + 1, groom_name_index)
-			if((lowertext(second_last_word) == "the" || lowertext(second_last_word) == "of") && last_word)
+			if((LOWER_TEXT(second_last_word) == "the" || LOWER_TEXT(second_last_word) == "of") && last_word)
 				is_title = TRUE
 
 		if(is_title)
@@ -1358,7 +1358,7 @@
 		var/is_title_bride = FALSE
 		if(second_last_index_bride)
 			var/second_last_word_bride = copytext(bride.real_name, second_last_index_bride + 1, bride_name_index)
-			if((lowertext(second_last_word_bride) == "the" || lowertext(second_last_word_bride) == "of") && last_word_bride)
+			if((LOWER_TEXT(second_last_word_bride) == "the" || LOWER_TEXT(second_last_word_bride) == "of") && last_word_bride)
 				is_title_bride = TRUE
 
 		if(!is_title_bride && !findtext(bride.real_name, " the ") && !findtext(bride.real_name, " of "))

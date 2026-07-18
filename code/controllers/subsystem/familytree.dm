@@ -161,23 +161,20 @@ SUBSYSTEM_DEF(familytree)
 		if(!mode || mode == FAMILY_NONE)
 			continue
 
-		var/assigned = FALSE
 		switch(mode)
 			if(FAMILY_PARTIAL)
-				assigned = AssignToHouse(H, H.family_adoption_pref)
+				AssignToHouse(H, H.family_adoption_pref)
 			if(FAMILY_NEWLYWED)
 				if(H.age == AGE_CHILD)
-					assigned = AssignToHouse(H, H.family_adoption_pref)
+					AssignToHouse(H, H.family_adoption_pref)
 				else
-					assigned = AssignNewlyWed(H)
+					AssignNewlyWed(H)
 			if(FAMILY_FULL)
 				if(H.virginity || H.age == AGE_CHILD)
-					assigned = AssignToHouse(H, H.family_adoption_pref)
+					AssignToHouse(H, H.family_adoption_pref)
 				else
-					assigned = AssignToFamily(H)
+					AssignToFamily(H)
 
-		if(!assigned)
-			pending_latejoin += H
 
 /datum/controller/subsystem/familytree/proc/AddRoyal(mob/living/carbon/human/H, status)
 	if(!ruling_family.housename)

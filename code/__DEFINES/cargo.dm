@@ -32,3 +32,9 @@
 	list("gondolapod", "gondola", "The silent walker. This one seems to be part of a delivery agency."),\
 	list("", "", "")\
 )
+
+#define SUPPLY_PRICE_FLOOR_MULT 0.5 // never cheaper than half of baseline
+#define SUPPLY_PRICE_CEILING_MULT 3.0 // never pricier than 3x baseline
+
+#define SUPPLY_DEMAND_PUSH_BASE 0.5 // % nudge per unit bought, at/above baseline
+#define SUPPLY_DEMAND_PUSH_DISCOUNT_SCALING 4 // extra % per full unit of "ratio below baseline"

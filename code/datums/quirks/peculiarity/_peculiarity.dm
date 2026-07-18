@@ -152,7 +152,7 @@
 		examine_list += span_notice("You know the passcode to this box: \"[passcode]\"")
 
 /datum/quirk/peculiarity/mystery_box/proc/try_unlock(code)
-	if(lowertext(trim(code)) == lowertext(passcode))
+	if(LOWER_TEXT(trim(code)) == LOWER_TEXT(passcode))
 		var/datum/loot_table/loot_generator
 		var/roll = rand(1, 100)
 

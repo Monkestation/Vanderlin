@@ -159,3 +159,5 @@
 #define COMSIG_MOB_MOUSE_ENTERED "user_mouse_entered"
 
 #define COMSIG_MOB_WASHED_MESS "mob_mess_cleaned"
+
+#define COMSIG_MOB_CARGO_DOCKED "mob_cargo_docked"

@@ -6,6 +6,7 @@
 
 	grid_width = 32
 	grid_height = 32
+	sellprice = 1
 	var/bundletype = null
 
 /obj/item/natural/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
