@@ -16,7 +16,7 @@
 /datum/job/advclass/mercenary/grenzelhoftzwei
 	title = "Grenzelhoft Doppelsöldner"
 	tutorial = "A Grenzelhoft Doppelsöldner, specializing in using Zweihanders to break through enemy pike formations. This expertise generally demands high pay, which has given them the name of 'double-pay men'."
-	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_AASIMAR)
+	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_AASIMAR, SPEC_ID_HALF_ELF)
 	outfit = /datum/outfit/mercenary/grenzelhoftzwei
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/grenzelhoftzwei
