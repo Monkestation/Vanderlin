@@ -305,10 +305,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
 
-	/// Optional lore description for the item, a list linking a human mob's culture.name var alongside a string. \
-	If the human mob has the prerequisite culture, they will see the corresponding string. \
-	For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have : \
-	list(list("Vanderlin", "This is a vanderlinian description."), list("Grenzelhoft", "this is a grenzelhoftian description"))
+	/* Optional lore description for the item, a list linking a human mob's culture.name var alongside a string.
+	If the human mob has the prerequisite culture, they will see the corresponding string.
+	For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have :
+	list(list("Vanderlin", "This is a vanderlinian description."), list("Grenzelhoft", "this is a grenzelhoftian description")) */
 	var/culture_desc[][2] = list(list("no_culture", "description"),) // defined twice because we need the len and the default text helps.
 
 /obj/item/Initialize(mapload)
