@@ -21710,9 +21710,9 @@
 /turf/open/water/clean/dirt,
 /area/outdoors/town/keep)
 "kda" = (
-/obj/structure/door/window,
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/inn,
+/obj/structure/window/openclose{
+	dir = 4
+	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/tavern)
 "kdk" = (
