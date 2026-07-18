@@ -14,7 +14,7 @@
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
-	advclass_cat_rolls = list(CTAG_ORPHAN = 5)
+	advclass_cat_rolls = list(CTAG_ORPHAN = 7)
 	outfit = /datum/outfit/orphan
 
 	spells = list(
@@ -41,8 +41,7 @@
 		/datum/attribute/skill/combat/bows = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 10
-
+		/datum/attribute/skill/labor/mathematics = 10,
 	)
 
 /datum/job/advclass/orphanadv/bbrat
@@ -185,8 +184,7 @@
 		belt = /obj/item/storage/belt/leather/rope
 		beltr = /obj/item/weapon/mace/woodclub
 
-// SKILLED STRAY - THE RESPONSIBLE CHILD
-
+/// SKILLED SCAMP - THE RESPONSIBLE CHILD
 /datum/attribute_holder/sheet/job/orphanadv/sscamp
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
@@ -194,6 +192,9 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/masonry = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/craft/cooking = 10,
 	)
 
 /datum/job/advclass/orphanadv/sscamp
@@ -331,7 +332,7 @@
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		orphanage_renovated = TRUE
-	if(orphanage_renovated)
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
 			STAT_INTELLIGENCE = 1,
 		))
@@ -341,10 +342,150 @@
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		orphanage_renovated = TRUE
-	if(orphanage_renovated)
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		shirt = /obj/item/clothing/shirt/undershirt
 		pants = /obj/item/clothing/pants/tights
 		belt = /obj/item/storage/belt/leather/rope
+		if(prob(1))
+			mouth = /obj/item/gem/diamond
+		else
+			mouth = /obj/item/natural/stone
 	else
 		pants = /obj/item/clothing/pants/tights/colored/vagrant
 		shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
+		if(prob(20))
+			mouth = /obj/item/natural/stone
+
+/// WEIRD WARD - The Kid with Possibly Bad Vibes
+/datum/attribute_holder/sheet/job/orphanadv/wward
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_FORTUNE = -1,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/medicine = 15,
+		/datum/attribute/skill/craft/alchemy = 5,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/craft/tanning = 5,
+	)
+
+/datum/job/advclass/orphanadv/wward
+	title= "Weird Ward"
+	tutorial = "While the other children busy themselves with silly activities \
+	like baking bread or throwing rocks into the river, you have your sights set \
+	much higher.  You have seen what goes on in the clinic.  You know that you can \
+	figure it out, too.  You don't need someone to teach you.  You're the Matron's \
+	best and brightest.  You WILL do amazing things."
+	outfit = /datum/outfit/orphanadv/wward
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/wward
+	allowed_ages = list(AGE_CHILD)
+	inherit_parent_title = TRUE
+	traits = list(
+		TRAIT_DEADNOSE,
+	)
+
+/datum/job/orphanadv/wward/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
+		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
+			STAT_INTELLIGENCE = 1,
+			STAT_ENDURANCE = 1,
+		))
+
+/datum/outfit/orphanadv/wward/pre_equip(mob/living/carbon/human/equipped_human)
+	. = ..()
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
+		if(equipped_human.gender == MALE)
+			shirt = /obj/item/clothing/shirt/undershirt/colored/black
+			pants = /obj/item/clothing/pants/tights/colored/black
+		else
+			shirt = /obj/item/clothing/shirt/dress/gen/colored/black
+			pants = /obj/item/clothing/pants/tights
+		gloves = /obj/item/clothing/gloves/leather/phys
+		mask = /obj/item/clothing/face/shepherd
+		belt = /obj/item/storage/belt/leather/rope
+		backr = /obj/item/storage/backpack/satchel
+		backpack_contents = list(
+			/obj/item/weapon/surgery/retractor/improv,
+			/obj/item/weapon/surgery/hemostat/improv,
+			/obj/item/weapon/surgery/scalpel,
+			/obj/item/needle,
+		)
+		return
+
+	if(equipped_human.gender == MALE)
+		shirt = /obj/item/clothing/shirt/undershirt/colored/black
+		pants = /obj/item/clothing/pants/tights/colored/black
+	else
+		shirt = /obj/item/clothing/shirt/dress/gen/colored/black
+	mask = /obj/item/clothing/face/shepherd
+	belt = /obj/item/storage/belt/leather/rope
+	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/surgery/retractor/improv,
+		/obj/item/weapon/surgery/hemostat/improv,
+		/obj/item/weapon/surgery/scalpel,
+		/obj/item/needle/thorn,
+	)
+
+/// Creative Castoff - The Artistic One
+/datum/attribute_holder/sheet/job/orphanadv/ccastoff
+	raw_attribute_list = list(
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/music = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+	)
+
+/datum/job/advclass/orphanadv/ccastoff
+	title= "Creative Castoff"
+	tutorial = "In sun-blessed Vanderlin \n\
+	an orphan unraveled the day\n\
+	practicing their merry songs\n\
+	bringing bright color to the grey!"
+	outfit = /datum/outfit/orphanadv/ccastoff
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/ccastoff
+	allowed_ages = list(AGE_CHILD)
+	inherit_parent_title = TRUE
+	traits = list(
+		TRAIT_BARDIC_TRAINING,
+	)
+
+/datum/job/orphanadv/ccastoff/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
+		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
+			STAT_INTELLIGENCE = 1,
+			STAT_SPEED = 1,
+		))
+
+/datum/outfit/orphanadv/ccastoff/pre_equip(mob/living/carbon/human/equipped_human)
+	. = ..()
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
+		head = pick(
+			/obj/item/clothing/head/bardhat,
+			/obj/item/clothing/head/courtierhat,
+			/obj/item/clothing/head/fancyhat,
+		)
+		neck = /obj/item/storage/belt/pouch/coins/poor
+		shirt = /obj/item/clothing/shirt/undershirt/colored/random
+		pants = /obj/item/clothing/pants/tights/colored/random
+		belt = /obj/item/storage/belt/leather/rope
+		beltl = /obj/item/instrument/flute
+		shoes = /obj/item/clothing/shoes/simpleshoes
+		return
+
+	head = pick(
+		/obj/item/clothing/head/bardhat,
+		/obj/item/clothing/head/courtierhat,
+		/obj/item/clothing/head/fancyhat,
+	)
+	shirt = /obj/item/clothing/shirt/undershirt/colored/random
+	pants = /obj/item/clothing/pants/tights/colored/random
+	belt = /obj/item/storage/belt/leather/rope
+	beltl = /obj/item/instrument/flute
+	shoes = /obj/item/clothing/shoes/simpleshoes
