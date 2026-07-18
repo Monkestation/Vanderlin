@@ -31,6 +31,7 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
+		TRAIT_GATEKEEPER,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(

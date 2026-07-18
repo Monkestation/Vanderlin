@@ -4,6 +4,8 @@
 #define RESTED_XP_INITIAL      500   // granted on datum creation so new chars aren't penalized
 
 /datum/sleep_adv
+	///were we a viable sleep at some point?
+	var/viable_sleep = FALSE
 	var/sleep_adv_cycle = 0
 	var/sleep_adv_points = 0
 	var/stress_amount = 0
@@ -214,8 +216,11 @@
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(TRUE)
+	viable_sleep = TRUE
 
 /datum/sleep_adv/proc/close_ui()
+	if(viable_sleep)
+		mind?.has_studied = FALSE
 	if(!mind.current)
 		return
 	mind.current << browse(null, "window=dreams")

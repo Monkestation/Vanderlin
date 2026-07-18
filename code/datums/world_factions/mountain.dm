@@ -195,6 +195,7 @@
 		/datum/supply_pack/weapons/ranged/puffer,
 		/datum/supply_pack/weapons/ranged/blunderbuss,
 		/datum/supply_pack/weapons/ammo/bullets,
+		/datum/supply_pack/weapons/ammo/aflask,
 		/datum/supply_pack/weapons/ranged/musket
 	)
 

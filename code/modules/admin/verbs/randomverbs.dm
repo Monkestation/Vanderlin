@@ -1051,3 +1051,23 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins(span_adminnotice("Messenger Bird Letter: [key_name_admin(usr)] -> [key_name_admin(M)] : [msg]"))
 	log_game("LETTER RECEIVED: [key_name(usr)] -> [key_name(M)]: \n[msg]")
 	SSblackbox.record_feedback("tally", "admin_verb_send_messenger_bird", 1, "Messenger Bird Letter") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+///This isn't showing in verbs for some reason??
+/client/proc/grant_ticket_to(mob/M in GLOB.player_list)
+	set name = "Grant Ticket To"
+	set category = "GameMaster.Interactions"
+
+	if(!ismob(M))
+		return
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/target_ckey = M.ckey
+	if(!target_ckey && M.client)
+		target_ckey = M.client.ckey
+	if(!target_ckey)
+		to_chat(usr, span_warning("TICKETS: Could not determine a ckey for that mob."))
+		return
+
+	var/datum/admin_ticket_granter/granter = new(src, target_ckey)
+	granter.ui_interact(mob)
