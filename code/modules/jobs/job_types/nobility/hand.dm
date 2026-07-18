@@ -245,6 +245,10 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/advisor/old
 	honorary = "Councilor"
 
+	traits = list(
+		TRAIT_CULTURAL_KNOWLEDGE
+	)
+
 /datum/outfit/hand/advisor
 	name = "Advisor (Hand)"
 	shirt = /obj/item/clothing/shirt/undershirt/fancy

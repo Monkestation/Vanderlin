@@ -33,7 +33,8 @@
 	forced_flaw = /datum/quirk/boon/folk_hero
 
 	traits = list(
-		TRAIT_OLDPARTY
+		TRAIT_OLDPARTY,
+		TRAIT_CULTURAL_KNOWLEDGE
 	)
 
 	spells = list(
