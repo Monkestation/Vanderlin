@@ -291,3 +291,12 @@
   - rscadd: verb for admins to give tickets to players
   realforest2001:
   - rscdel: Disabled Harlequinn.
+2026-07-18:
+  PatapoIIIa:
+  - code_imp: Redesigned AttributeMenu Skills panel UI with improved styling
+  - code_imp: Updated attribute modifier system and TutorialOverlay
+  realforest2001:
+  - rscadd: Priest now has access to Diagnose miracle.
+  - rscadd: Added a noc themed silver flail.
+  - bugfix: Throat slitting no longer bypasses neck armor.
+  - balance: Stats no longer increase skill levels you already have.
