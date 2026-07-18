@@ -498,7 +498,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 /// Can see the lore blurb of items for culture different than their own.
-#define TRAIT_CULTURAL_KNOWLEDGE "World's Confidant"
+#define TRAIT_CULTURAL_KNOWLEDGE "Cultural Erudite"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise

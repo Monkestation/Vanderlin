@@ -320,18 +320,18 @@
 		return
 	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")
 
-/datum/quirk/boon/world_confidant
-	name = "World's Confidant"
-	desc = "Whether through long travels, extended scholarship, or first-hand contact, you've acquired deep knowledge of other culture and how they think. \
+/datum/quirk/boon/cultural_scholar
+	name = "Cultural Erudite"
+	desc = "Whether through long travels, extended scholarship, or osmosis, you've acquired deep knowledge of other culture and how they think. \
 	When examining items, you may consult cultural lore blurbs for cultures that aren't your own."
 	point_value = -1
 
-/datum/quirk/boon/world_confidant/on_spawn()
+/datum/quirk/boon/cultural_scholar/on_spawn()
 	if(!owner)
 		return
 	ADD_TRAIT(owner, TRAIT_CULTURAL_KNOWLEDGE, "[type]")
 
-/datum/quirk/boon/world_confidant/on_remove()
+/datum/quirk/boon/cultural_scholar/on_remove()
 	if(!owner)
 		return
 	REMOVE_TRAIT(owner, TRAIT_CULTURAL_KNOWLEDGE, "[type]")
