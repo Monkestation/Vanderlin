@@ -872,6 +872,10 @@
 		new_shadow_angle = FOV_90_DEGREES
 		new_angle = 0
 
+	// Nothing actually changed so we shouldn't need a rebuild
+	if(fov.fov_holder?.alpha && fov.shadow_angle == new_shadow_angle && fov.angle == new_angle)
+		return
+
 	fov.generate_fov_holder(src, new_shadow_angle, new_angle, register = FALSE, delete_holder = TRUE)
 
 //to recalculate and update the mob's total tint from tinted equipment it's wearing.

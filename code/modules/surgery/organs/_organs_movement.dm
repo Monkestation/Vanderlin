@@ -101,8 +101,9 @@
 	update_accessory_colors()
 	update_appearance()
 
-	if(visible_organ)
+	if(visible_organ && !(organ_owner.status_flags & BUILDING_ORGANS))
 		organ_owner.update_body_parts(TRUE)
+
 	organ_owner.update_organ_requirements()
 
 /// Insert an organ into a limb, assume the limb as always detached and include no owner operations here (except the get_bodypart helper here I guess)
