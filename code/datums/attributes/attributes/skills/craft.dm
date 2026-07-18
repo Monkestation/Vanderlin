@@ -4,6 +4,7 @@
 /datum/attribute/skill/craft/crafting
 	name = "Crafting"
 	desc = "A general skill that represents your character's ability to craft items. The higher your skill in Crafting, the more complex items you can craft."
+	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		STAT_INTELLIGENCE = -4,
 	)
@@ -15,6 +16,7 @@
 /datum/attribute/skill/craft/carpentry
 	name = "Carpentry"
 	desc = "Represents your character's ability to craft wooden items. The higher your skill in Carpentry, the faster you can create wooden items and buildings."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		STAT_STRENGTH = -4,
 		STAT_INTELLIGENCE = -5,
@@ -27,6 +29,7 @@
 /datum/attribute/skill/craft/masonry
 	name = "Masonry"
 	desc = "Represents your character's ability to craft stone items. The higher your skill in Masonry, the faster you can make stone items and buildings."
+	governing_attribute = STAT_STRENGTH
 	default_attributes = list(
 		STAT_STRENGTH = -4,
 		STAT_ENDURANCE = -5,
@@ -40,6 +43,7 @@
 	name = "Trapping"
 	desc = "Represents your character's ability to lay traps. The higher your skill in Trapping, the more effective your traps will be and the less likely you are to set them off accidentally."
 	category = SKILL_CATEGORY_SKULDUGGERY
+	governing_attribute = STAT_PERCEPTION
 	default_attributes = list(
 		STAT_PERCEPTION = -5,
 		STAT_INTELLIGENCE = -6,
@@ -52,6 +56,7 @@
 /datum/attribute/skill/craft/alchemy
 	name = "Alchemy"
 	desc = "Represents your character's ability to craft potions. The higher your skill in Alchemy, the better you can identify potions and ingredients."
+	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		STAT_INTELLIGENCE = -7,
 	)
@@ -73,6 +78,7 @@
 /datum/attribute/skill/craft/bombs
 	name = "Bombcrafting"
 	desc = "Represents your character's ability to craft bombs. The higher your skill in Bombcrafting, the better the bombs you can create and the more you can make with your materials."
+	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		/datum/attribute/skill/craft/alchemy = -6,
 	)
