@@ -16,7 +16,7 @@
 /datum/job/advclass/mercenary/grenzelhoftgun
 	title = "Grenzelhoft Arkebusier"
 	tutorial = "A Grenzelhoft Arkebusier, they specialize in blackpowder weaponry, usually seen armed with muskets. Although more frail then other mercenaries, they make up for it with the incredible strength of their equipment."
-	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_AASIMAR)
+	allowed_races = RACES_PLAYER_GRENZ_MERC
 	outfit = /datum/outfit/mercenary/grenzelhoftgun
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/grenzelhoftgun
