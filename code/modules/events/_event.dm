@@ -106,7 +106,7 @@
 	if(latest_start < max(world.time - SSticker.round_start_time, 0))
 		if(string)
 			string += ", "
-		string +="Too Late"
+		string += "Too Late"
 	if(players_amt < min_players)
 		if(string)
 			string += ", "
