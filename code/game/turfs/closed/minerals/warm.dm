@@ -5,34 +5,32 @@
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_red.dmi', 'icons/turf/mining/mining_hot.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_low_warm")
 	mineralSpawnChanceList = list(
-	/turf/closed/mineral/salt/warm = 20,
-	/turf/closed/mineral/copper/warm = 15,
-	/turf/closed/mineral/tin/warm = 12,
-	/turf/closed/mineral/iron/warm = 5,
-	/turf/closed/mineral/coal/warm = 5
+		/turf/closed/mineral/salt/warm = 20,
+		/turf/closed/mineral/copper/warm = 15,
+		/turf/closed/mineral/tin/warm = 12,
+		/turf/closed/mineral/iron/warm = 5,
+		/turf/closed/mineral/coal/warm = 5
 	)
 
 /turf/closed/mineral/random/warm/med
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_red.dmi', 'icons/turf/mining/mining_hot.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_med_warm")
 	mineralSpawnChanceList = list(
-	/turf/closed/mineral/salt/warm = 20,
-	/turf/closed/mineral/iron/warm = 25,
-	/turf/closed/mineral/coal/warm = 20,
-	/turf/closed/mineral/copper/warm = 10,
-	/turf/closed/mineral/tin/warm = 10,
-	/turf/closed/mineral/silver/warm = 1
+		/turf/closed/mineral/salt/warm = 20,
+		/turf/closed/mineral/iron/warm = 25,
+		/turf/closed/mineral/coal/warm = 20,
+		/turf/closed/mineral/copper/warm = 10,
+		/turf/closed/mineral/tin/warm = 10,
+		/turf/closed/mineral/silver/warm = 1
 	)
 
 /turf/closed/mineral/random/warm/high
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_red.dmi', 'icons/turf/mining/mining_hot.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_high_warm")
 	mineralSpawnChanceList = list(
-	/turf/closed/mineral/mana_crystal/warm = 15,
-	/turf/closed/mineral/cinnabar/warm = 5,
-	/turf/closed/mineral/gold/warm = 15,
-	/turf/closed/mineral/iron/warm = 25,
-	/turf/closed/mineral/silver/warm = 15
+		/turf/closed/mineral/mana_crystal/warm = 15,
+		/turf/closed/mineral/cinnabar/warm = 5,
+		/turf/closed/mineral/gold/warm = 15,
+		/turf/closed/mineral/iron/warm = 25,
+		/turf/closed/mineral/silver/warm = 15
 	)
 
 /turf/closed/mineral/copper/warm

@@ -5,34 +5,32 @@
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_moss.dmi', 'icons/turf/mining/mining_moss.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_low_moss")
 	mineralSpawnChanceList = list(
-	/turf/closed/mineral/salt/moss = 20,
-	/turf/closed/mineral/copper/moss = 15,
-	/turf/closed/mineral/tin/moss = 12,
-	/turf/closed/mineral/iron/moss = 5,
-	/turf/closed/mineral/coal/moss = 5
+		/turf/closed/mineral/salt/moss = 20,
+		/turf/closed/mineral/copper/moss = 15,
+		/turf/closed/mineral/tin/moss = 12,
+		/turf/closed/mineral/iron/moss = 5,
+		/turf/closed/mineral/coal/moss = 5
 	)
 
 /turf/closed/mineral/random/moss/med
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_moss.dmi', 'icons/turf/mining/mining_moss.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_med_moss")
 	mineralSpawnChanceList = list(
-	/turf/closed/mineral/salt/moss = 20,
-	/turf/closed/mineral/iron/moss = 25,
-	/turf/closed/mineral/coal/moss = 20,
-	/turf/closed/mineral/copper/moss = 10,
-	/turf/closed/mineral/tin/moss = 10,
-	/turf/closed/mineral/silver/moss = 1
+		/turf/closed/mineral/salt/moss = 20,
+		/turf/closed/mineral/iron/moss = 25,
+		/turf/closed/mineral/coal/moss = 20,
+		/turf/closed/mineral/copper/moss = 10,
+		/turf/closed/mineral/tin/moss = 10,
+		/turf/closed/mineral/silver/moss = 1
 	)
 
 /turf/closed/mineral/random/moss/high
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_moss.dmi', 'icons/turf/mining/mining_moss.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_high_moss")
 	mineralSpawnChanceList = list(
-	/turf/closed/mineral/mana_crystal/moss = 15,
-	/turf/closed/mineral/cinnabar/moss = 5,
-	/turf/closed/mineral/gold/moss = 15,
-	/turf/closed/mineral/iron/moss = 25,
-	/turf/closed/mineral/silver/moss = 15
+		/turf/closed/mineral/mana_crystal/moss = 15,
+		/turf/closed/mineral/cinnabar/moss = 5,
+		/turf/closed/mineral/gold/moss = 15,
+		/turf/closed/mineral/iron/moss = 25,
+		/turf/closed/mineral/silver/moss = 15
 	)
 
 /turf/closed/mineral/copper/moss
