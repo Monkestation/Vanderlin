@@ -286,3 +286,33 @@
   - bugfix: Fixed invisible decorations making people invisible.
   - bugfix: Apothecary Regen Cycle now heals damage again instead of causing it.
   - rscdel: Removes malaguero aura
+2026-07-17:
+  dwasint:
+  - rscadd: verb for admins to give tickets to players
+  realforest2001:
+  - rscdel: Disabled Harlequinn.
+2026-07-18:
+  PatapoIIIa:
+  - code_imp: Redesigned AttributeMenu Skills panel UI with improved styling
+  - code_imp: Updated attribute modifier system and TutorialOverlay
+  realforest2001:
+  - rscadd: Priest now has access to Diagnose miracle.
+  - rscadd: Added a noc themed silver flail.
+  - bugfix: Throat slitting no longer bypasses neck armor.
+  - balance: Stats no longer increase skill levels you already have.
+2026-07-19:
+  Avalon-Proto:
+  - rscadd: Gatemasters now always instantly pull levers and winches, no matter their
+      STR score
+  MissyNym:
+  - map: Adjusts static apartment IV on Vanderlin such that a window no longer points
+      right into a wall.
+  Telvayne:
+  - rscadd: Weird Ward Subclass
+  - rscadd: Creative Castoff Subclass
+  - rscadd: Weary Wastrel eating rocks again
+  - balance: Expaned Skilled Scamps skillset
+  Wrench-1:
+  - balance: nerfed the Cadwyn Order Migrant Wave. It no longer spawns a max of three
+      Crusaders with plate, miracles and silver. It'll spawn a max of 1 Crusader,
+      and 2 Sentinels with worse gear, stats and skills.
