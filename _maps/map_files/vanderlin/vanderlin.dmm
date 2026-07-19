@@ -2473,6 +2473,9 @@
 	pixel_x = -9;
 	pixel_y = 16
 	},
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/adv_guild)
 "bjv" = (
@@ -2798,6 +2801,7 @@
 "bpX" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
+/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/adv_guild)
 "bqc" = (
@@ -7443,13 +7447,6 @@
 	dir = 8
 	},
 /area/indoors/town/keep)
-"duB" = (
-/obj/machinery/light/fueled/chand{
-	plane = -8;
-	layer = 4
-	},
-/turf/open/floor/carpet/green,
-/area/indoors/town/adv_guild)
 "duP" = (
 /obj/structure/stairs{
 	dir = 1
@@ -12347,13 +12344,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile,
 /area/indoors/town/keep/servant)
-"fNx" = (
-/obj/machinery/light/fueled/chand{
-	plane = -8;
-	layer = 4
-	},
-/turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/town/adv_guild)
 "fNH" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/storage/keyring,
@@ -81936,12 +81926,12 @@ kPk
 kPk
 dXc
 uFa
-uFa
+hdU
 pCT
 pCT
 pCT
 pCT
-uFa
+smw
 uFa
 jyf
 jgx
@@ -82137,7 +82127,7 @@ bfG
 kPk
 kPk
 giv
-fNx
+uFa
 uFa
 iBd
 bHv
@@ -82145,7 +82135,7 @@ aWM
 rnQ
 uFa
 uFa
-fNx
+uFa
 uFa
 uFa
 lkk
@@ -82746,7 +82736,7 @@ jNQ
 uFa
 uFa
 uFa
-duB
+awH
 awH
 uFa
 uFa
@@ -83358,7 +83348,7 @@ uFa
 uFa
 uFa
 uFa
-uFa
+qpL
 uFa
 rEm
 grm
