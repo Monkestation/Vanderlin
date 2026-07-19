@@ -726,7 +726,7 @@
 	desc = "A reinforced pole affixed with an ornate steel eagle's head, of which it's beak is intended to pierce with great harm."
 	icon_state = "eaglebeak"
 	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_HALBERD_WIELD -1
+	force_wielded = DAMAGE_HALBERD_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
