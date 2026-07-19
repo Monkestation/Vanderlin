@@ -256,8 +256,6 @@ All foods are distributed among various categories. Use common sense.
 		amb_temp = 11 + CEILING(amb_temp * 0.1, 1) // chests in graves act as cellars
 		turf_temp = amb_temp + temp_mod
 
-	var/area/A = get_area(location)
-
 	if(turf_temp)
 		if(turf_temp > 20)
 			// Each 10 degrees above room temp increases rot rate by 20%
