@@ -299,8 +299,9 @@ SUBSYSTEM_DEF(ticker)
 				continue
 			if(player.client.prefs.job_preferences[V] == JP_HIGH)
 				if(player.ready == PLAYER_READY_TO_PLAY)
-					if(player.IsJobUnavailable(V) != JOB_AVAILABLE)
-						to_chat(player, span_warning("You cannot be [V] and thus are not considered."))
+					var/job_status = player.IsJobUnavailable(V)
+					if(job_status != JOB_AVAILABLE)
+						to_chat(player, span_warning("You cannot be [V] and thus are not considered. Error [job_status]."))
 						continue
 					readied_jobs.Add(V)
 

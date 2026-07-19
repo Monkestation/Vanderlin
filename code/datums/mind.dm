@@ -153,7 +153,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 			if(target_mind.special_role == role)
 				is_role = TRUE
 			else
-				if(target_mind?.assigned_role.title == role)
+				if(target_mind?.assigned_role?.title == role)
 					is_role = TRUE
 		if(is_role)
 			. += target_mind

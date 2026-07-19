@@ -230,7 +230,7 @@
 
 				if(iscarbon(target_mob)) //Carbon stuff
 					if(ishuman(target_mob))
-						if(target_mob?.mind?.assigned_role.parent_job)
+						if(target_mob.mind?.assigned_role?.parent_job)
 							target_job = target_mob.mind.assigned_role.parent_job.title
 						else
 							target_job = target_mob.job
