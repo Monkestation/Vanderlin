@@ -1,0 +1,6 @@
+author: "CheffieGithub"
+delete-after: True
+changes:
+  - bugfix: "Fixed stacking rotation contraptions"
+  - bugfix: "Fixed not being able to create dye bins"
+  - bugfix: "Fixed using the alt click menu to place items on tables hitting the table."

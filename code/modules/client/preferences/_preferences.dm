@@ -567,7 +567,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	<a href='?_src_=prefs;preference=ooc_extra;task=input'><div class="sprite ooc-extra"></div></a>
 	<a href='?_src_=prefs;preference=antag;task=menu'><div class="sprite btn-roles"></div></a>
 	<a href='?_src_=prefs;preference=customizers;task=menu'><div class="sprite f-btn"></div></a>
-	<a href='?_src_=prefs;preference=randomiseappearanceprefs;'><div class="sprite f-random"></div></a>
+	<a href='?_src_=prefs;task=randomiseappearanceprefs;'><div class="sprite f-random"></div></a>
 
 	<div class="sprite features-bg"><div id="silhouette" class="sprite" style="background-image: url('features_bodytype_[read_preference(/datum/preference/choiced/gender) == MALE ? "m" : "f"].png');"></div></div>
 
