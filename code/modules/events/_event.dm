@@ -10,7 +10,7 @@
 
 	var/earliest_start = 10 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 10 mins
 	/// The latest world.time that an event can start
-	var/latest_start = INF
+	var/latest_start = INFINITY
 	var/min_players = 0				//The minimum amount of alive, non-AFK human players on server required to start the event.
 
 	/// How many times this event has occured
