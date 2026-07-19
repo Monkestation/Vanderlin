@@ -94,7 +94,7 @@
 			if(istype(I) && I.loc == src)
 				add_fingerprint(usr)
 				var/n_name = stripped_input(usr, "give your notice a header!", "Paper Labelling", null, MAX_NAME_LEN)
-				I.name = "[(n_name ? text("- '[n_name]'") : null)]"
+				I.name = "[(n_name ? "- '[n_name]'" : null)]"
 				return
 		to_chat(usr, "<span class='warning'>You'll need something to write with!</span>")
 

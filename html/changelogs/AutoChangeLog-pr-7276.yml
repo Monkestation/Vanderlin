@@ -1,0 +1,5 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - qol: "the skill menu now displays the base value with a +- modifier instead of the total value"
+  - rscadd: "skills you have default levels in now show as such instead of NA."

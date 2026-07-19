@@ -32,5 +32,5 @@
 	if(!iscarbon(owner))
 		return
 
-	carbon.adjustBruteLoss(0.01 * seconds_between_ticks, FALSE)
-	carbon.adjustFireLoss(0.01 * seconds_between_ticks, TRUE)
+	carbon.adjustBruteLoss(-0.01 * seconds_between_ticks, FALSE)
+	carbon.adjustFireLoss(-0.01 * seconds_between_ticks, TRUE)

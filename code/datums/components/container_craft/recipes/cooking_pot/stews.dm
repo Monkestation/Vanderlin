@@ -67,6 +67,21 @@
 /datum/container_craft/cooking/chicken_stew/cutlet
 	requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1)
 
+/datum/container_craft/cooking/solyanka
+	name = "Solyanka"
+	created_reagent = /datum/reagent/consumable/soup/stew/solyanka
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/cooked/coppiette = 1,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/tamto = 1,
+		/obj/item/reagent_containers/food/snacks/produce/fruit/lemon = 1,
+		/obj/item/reagent_containers/food/snacks/fruit/cured_ollie = 1,
+	)
+	reagent_requirements = list(
+		/datum/reagent/water = 100
+	)
+	finished_smell = /datum/pollutant/food/meat_stew
+	crafting_time = 45 SECONDS
+
 /datum/container_craft/cooking/questionable_stew
 	name = "Questionable Stew"
 	created_reagent = /datum/reagent/consumable/soup/stew/gross

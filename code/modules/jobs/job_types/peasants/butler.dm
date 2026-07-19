@@ -52,6 +52,7 @@
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/butler
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,

@@ -182,7 +182,8 @@
 /obj/item/rope/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(..() || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
 		return//abort
-	if(prob(100 * (throwingdatum?.GET_MOB_SKILL_VALUE_OLD(thrower, /datum/attribute/skill/craft/traps) || 1) / 3))
+	var/mob/thrower = throwingdatum.get_thrower()
+	if(prob(100 * (GET_MOB_SKILL_VALUE_OLD(thrower, /datum/attribute/skill/craft/traps) || 1) / 3))
 		ensnare(hit_atom)
 
 /obj/item/rope/net/proc/ensnare(mob/living/carbon/C)

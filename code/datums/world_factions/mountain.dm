@@ -195,13 +195,10 @@
 		/datum/supply_pack/weapons/ranged/puffer,
 		/datum/supply_pack/weapons/ranged/blunderbuss,
 		/datum/supply_pack/weapons/ammo/bullets,
+		/datum/supply_pack/weapons/ammo/aflask,
 		/datum/supply_pack/weapons/ranged/musket
 	)
 
-	bounty_path_weights = list(
-		/obj/item/ingot = 500,
-		/obj/item/ore = 600,
-	)
 
 /datum/world_faction/mountain_clans/initialize_faction_stock()
 	..()

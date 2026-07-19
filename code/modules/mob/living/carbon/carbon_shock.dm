@@ -131,7 +131,7 @@
 
 /mob/living/carbon/proc/handle_shock_stage(seconds_per_tick)
 	if(!can_feel_pain())
-		setShockStage(0)
+		. |= setShockStage(0, FALSE, deferred = TRUE)
 		remove_movespeed_modifier(MOVESPEED_ID_SHOCK, FALSE)
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 		hud_used?.update_chromatic_aberration(intensity = 0)
@@ -142,13 +142,13 @@
 
 	//Cardiac arrest automatically throws us into sofcrit territory
 	if(undergoing_cardiac_arrest())
-		setShockStage(max(shock_stage, SHOCK_STAGE_4))
+		. |= setShockStage(max(shock_stage, SHOCK_STAGE_4), deferred = TRUE)
 		add_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE, multiplicative_slowdown = 5)
 	else
 		remove_movespeed_modifier(MOVESPEED_ID_CARDIAC_ARREST, TRUE)
 
 	if(traumatic_shock > 0.9 * shock_stage)
-		adjustShockStage(seconds_per_tick * (ATTRIBUTE_MIDDLING/our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER)
+		. |= adjustShockStage(seconds_per_tick * (ATTRIBUTE_MIDDLING / our_endurance) * PAIN_SYSTEM_SPEED_MODIFIER, deferred = TRUE)
 	else if(!undergoing_cardiac_arrest())
 		var/recovery = seconds_per_tick
 		//Lower shock faster the less pain we feel
@@ -156,7 +156,7 @@
 			recovery += seconds_per_tick
 		if(traumatic_shock < 0.25 * shock_stage)
 			recovery += seconds_per_tick
-		adjustShockStage(-recovery * (our_endurance/ATTRIBUTE_MIDDLING) * PAIN_SYSTEM_SPEED_MODIFIER * 0.75)
+		. |= adjustShockStage(-recovery * (our_endurance / ATTRIBUTE_MIDDLING) * PAIN_SYSTEM_SPEED_MODIFIER * 0.75, deferred = TRUE)
 
 	//Shock makes us slow
 	if(shock_stage >= (SHOCK_STAGE_2 * (our_endurance/ATTRIBUTE_MIDDLING)))
@@ -198,14 +198,14 @@
 		if(SPT_PROB(3, seconds_per_tick))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-				Knockdown(2 SECONDS)
+				Knockdown(2 SECONDS, prevent_drop = (body_position == LYING_DOWN))
 			endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_5) && (previous_shock_stage >= SHOCK_STAGE_5))
 		if(SPT_PROB(4, seconds_per_tick))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-				Knockdown(3 SECONDS)
+				Knockdown(3 SECONDS, prevent_drop = (body_position == LYING_DOWN))
 			endorphinate()
 		if(SPT_PROB(0.5, seconds_per_tick))
 			emote("gasp")
@@ -214,7 +214,7 @@
 		if(SPT_PROB(4, seconds_per_tick))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-				Knockdown(5 SECONDS)
+				Knockdown(5 SECONDS, prevent_drop = (body_position == LYING_DOWN))
 			endorphinate()
 		if(SPT_PROB(1, seconds_per_tick))
 			emote("gasp")
@@ -236,7 +236,7 @@
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8)) // Crossed stage 8
 		if(!IsUnconscious())
-			visible_message(span_bolddanger("[src] scrunchs [p_their()] body and collapses!"), ignored_mobs = src)
+			visible_message(span_bolddanger("[src] scrunches [p_their()] body and collapses!"), ignored_mobs = src)
 			custom_pain(span_animatedpain("OH LORD! The PAIN!"), 100, nopainloss = TRUE)
 		//Death is near...
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))

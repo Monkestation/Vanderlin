@@ -396,7 +396,7 @@
 
 /obj/item/reagent_containers/glass/bowl/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay bowl"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay bowl"
 
 /obj/item/reagent_containers/glass/bowl/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))
@@ -529,6 +529,11 @@
 /datum/reagent/consumable/soup/stew/meat_meagre
 	color = "#80432a"
 	taste_description = "meagre meat stew"
+
+/datum/reagent/consumable/soup/stew/solyanka
+	color = "#b0432a"
+	taste_description = "savory stewed meat and ollies"
+	nutriment_factor = 12
 
 /datum/reagent/consumable/soup/stew/fish
 	color = "#c7816e"

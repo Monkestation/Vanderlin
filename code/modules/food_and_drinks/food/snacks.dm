@@ -233,7 +233,7 @@ All foods are distributed among various categories. Use common sense.
 	if(QDELETED(src))
 		return PROCESS_KILL
 
-	if(!rotprocess)
+	if(!rotprocess || HAS_TRAIT(src, TRAIT_NO_ROT))
 		return
 
 	if(istype(loc, /obj/item/storage/backpack/backpack/artibackpack))

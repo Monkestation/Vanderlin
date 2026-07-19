@@ -45,7 +45,7 @@
 /datum/brain_trauma/hypnosis/on_life(seconds_per_tick)
 	. = ..()
 	if(SPT_PROB(1, seconds_per_tick))
-		to_chat(owner, "<i>...[lowertext(hypnotic_phrase)]...</i>")
+		to_chat(owner, "<i>...[LOWER_TEXT(hypnotic_phrase)]...</i>")
 
 /datum/brain_trauma/hypnosis/handle_hearing(datum/source, list/hearing_args)
 	hearing_args[HEARING_MESSAGE] = target_phrase.Replace(hearing_args[HEARING_MESSAGE], "<span class='hypnophrase'>$1</span>")

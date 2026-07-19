@@ -8,6 +8,7 @@
 	scent_description = "metal"
 	alpha = 173
 	liver_chemical = FALSE
+	price_per_unit = 0.5
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -51,6 +52,7 @@
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM * 2
 	liver_chemical = FALSE
+	price_per_unit = 3
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -156,6 +158,7 @@
 	scent_description = "dry air"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	price_per_unit = 0.5
 
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
@@ -175,6 +178,7 @@
 	taste_description = "raw power"
 	scent_description = "dry air"
 	metabolization_rate = REAGENTS_METABOLISM * 3
+	price_per_unit = 3
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
@@ -189,6 +193,7 @@
 	scent_description = "grass"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	price_per_unit = 0.5
 
 /datum/reagent/medicine/stampot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
@@ -202,6 +207,7 @@
 	taste_description = "sparkly static"
 	scent_description = "grass"
 	metabolization_rate = REAGENTS_METABOLISM * 3
+	price_per_unit = 3
 
 /datum/reagent/medicine/strongstam/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()

@@ -325,27 +325,30 @@
 	pain_damage_coeff = pain_power
 
 /// Can this bodypart rot or get infected?
-/obj/item/bodypart/proc/can_decay()
+/obj/item/bodypart/proc/can_decay(passed_temp)
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
-	check_cold()
+	check_cold(passed_temp)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_FROZEN|BODYPART_DEAD|BODYPART_NO_INFECTION))
 		return FALSE
 	return TRUE
 
-/obj/item/bodypart/proc/check_cold()
+/obj/item/bodypart/proc/check_cold(passed_temp)
 	var/local_temp
-	if(!owner)
-		//Only concern is adding an organ to a freezer when the area around it is cold.
-		if(isturf(loc))
-			var/turf/turf_loc = loc
-			local_temp = turf_loc?.return_temperature()
-		else if(ismob(loc))
-			var/mob/holder = loc
-			var/turf/turf_loc = holder.loc
-			local_temp = turf_loc?.return_temperature()
+	if(passed_temp)
+		local_temp = passed_temp
 	else
-		local_temp = owner.bodytemperature
+		if(!owner)
+			//Only concern is adding an organ to a freezer when the area around it is cold.
+			if(isturf(loc))
+				var/turf/turf_loc = loc
+				local_temp = turf_loc?.return_temperature()
+			else if(ismob(loc))
+				var/mob/holder = loc
+				var/turf/turf_loc = holder.loc
+				local_temp = turf_loc?.return_temperature()
+		else
+			local_temp = owner.bodytemperature
 
 	// Shouldn't happen but just in case
 	if(isnull(local_temp))
@@ -425,17 +428,20 @@
 	update_limb_efficiency()
 
 /// Return TRUE to get whatever mob this is in to update health.
-/obj/item/bodypart/proc/on_life(seconds_per_tick)
+/obj/item/bodypart/proc/on_life(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(pain_heal_tick)
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		remove_pain(amount = (pain_heal_tick * multiplier * seconds_per_tick * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE)
-	if(can_decay())
+		if(remove_pain(amount = (pain_heal_tick * multiplier * seconds_per_tick * (PAIN_SYSTEM_SPEED_MODIFIER / 10)), updating_health = FALSE))
+			. |= BODYPART_LIFE_UPDATE_HEALTH
+	if(can_decay(passed_temp))
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
-			update_germs(seconds_per_tick)
+			update_germs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness)
+			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(number_injuries)
 		update_injuries(seconds_per_tick)
+		. |= BODYPART_LIFE_UPDATE_HEALTH
 
 /// Check if we need to run on_life()
 /obj/item/bodypart/proc/consider_processing()
@@ -613,7 +619,7 @@
 			heal_amt *= injury.amount
 			injury.heal_damage(heal_amt * seconds_per_tick)
 
-	if(post_damage_change())
+	if(post_damage_change(FALSE))
 		owner.update_damage_overlays()
 
 /// Updates brute_damn and burn_damn from injuries
@@ -632,13 +638,12 @@
 
 		number_injuries += injury.amount
 
-/// General handling of infections
-/obj/item/bodypart/proc/update_germs(seconds_per_tick)
+/obj/item/bodypart/proc/update_germs(seconds_per_tick, virus_immunity, antibiotics)
 	//Cryo stops germs from moving and doing their bad stuffs
 	if(owner.bodytemperature <= -15)
 		return
 	handle_germ_sync(seconds_per_tick)
-	handle_germ_effects(seconds_per_tick)
+	handle_germ_effects(seconds_per_tick, virus_immunity, antibiotics)
 	handle_antibiotics(seconds_per_tick)
 
 /// Try to sync wound/inuries etc with our germ level
@@ -669,17 +674,12 @@
 			adjust_germ_level(injury.infection_rate * seconds_per_tick)
 			break	//limit increase to a maximum of one injury infection increase per 2 seconds
 
-
-/// Handle infection effects
-/obj/item/bodypart/proc/handle_germ_effects(seconds_per_tick)
-	var/immunity = owner.virus_immunity()
-	var/immunity_weakness = owner.immunity_weakness()
-	var/antibiotics = owner.get_antibiotics()
+/obj/item/bodypart/proc/handle_germ_effects(seconds_per_tick, immunity, antibiotics, immunity_weakness)
 	var/arterial_efficiency = getorganslotefficiency(ORGAN_SLOT_ARTERY)
 
 	// Being properly oxygenated
 	if(!artery_needed() || (arterial_efficiency >= ORGAN_FAILING_EFFICIENCY))
-		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && SPT_PROB(immunity*0.3, seconds_per_tick))
+		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && SPT_PROB(immunity * 0.3, seconds_per_tick))
 			adjust_germ_level(-0.5 * seconds_per_tick)
 			return
 	// Dry gangrene
@@ -998,7 +998,7 @@
 /obj/item/bodypart/proc/post_damage_change(updating_health = TRUE, updating_shock = FALSE)
 	update_damages()
 
-	if(owner)
+	if(owner && !(owner.status_flags & BUILDING_ORGANS))
 		update_limb_efficiency()
 		if(can_be_disabled)
 			update_disabled()
@@ -1198,7 +1198,7 @@
 		if(status == BODYPART_ORGANIC)
 			icon = species_icon
 
-	if(owner)
+	if(owner && !(owner.status_flags & BUILDING_ORGANS))
 		owner.updatehealth()
 		owner.update_body() //if our head becomes robotic, we remove the lizard horns and human hair.
 		owner.update_damage_overlays()

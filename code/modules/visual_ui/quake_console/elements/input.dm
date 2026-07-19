@@ -488,7 +488,7 @@
 					if("`") char_to_add = "~"
 					else char_to_add = uppertext(char_to_add)
 			else
-				char_to_add = lowertext(char_to_add)
+				char_to_add = LOWER_TEXT(char_to_add)
 
 		if(key == "Space")
 			char_to_add = " "

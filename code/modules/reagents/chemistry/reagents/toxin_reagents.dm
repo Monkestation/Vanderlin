@@ -96,6 +96,7 @@
 	color = "#64916E"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	toxpwr = 0
+	price_per_unit = 3
 
 /datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
@@ -201,6 +202,7 @@
 	color = "#6eb9e4"
 	taste_description = "flowers"
 	metabolization_rate = 0.1 //this shit will kill you
+	price_per_unit = 1.1
 
 /datum/reagent/toxin/manabloom_juice/on_mob_metabolize(mob/living/L)
 	. = ..()

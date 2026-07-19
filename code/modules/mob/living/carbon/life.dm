@@ -19,9 +19,23 @@
 	if(HAS_TRAIT(src, TRAIT_STASIS))
 		. = ..()
 	else
-		//Reagent processing needs to come before breathing, to prevent edge cases.
-		handle_organs(seconds_per_tick)
-		handle_bodyparts(seconds_per_tick)
+		var/virus_immunity = virus_immunity()
+		var/antibiotics = get_antibiotics()
+		var/immunity_weakness = immunity_weakness()
+		var/turf/turf_loc = get_turf(loc)
+		var/passed_temp = turf_loc?.return_temperature()
+
+		var/organ_flag = handle_organs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+		var/bodypart_flag = handle_bodyparts(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+		var/sleep_flag = handle_sleep()
+
+		var/shock_flag = NONE
+		shock_flag |= handle_shock(seconds_per_tick)
+		shock_flag |= handle_shock_stage(seconds_per_tick)
+
+		if((organ_flag & ORGAN_PROCESS_UPDATE_HEALTH) || (bodypart_flag & BODYPART_LIFE_UPDATE_HEALTH) || (shock_flag & SHOCK_PROCESS_UPDATE_HEALTH) || (sleep_flag & BODYPART_LIFE_UPDATE_HEALTH))
+			updatehealth()
+			update_stamina()
 
 		. = ..()
 
@@ -32,11 +46,6 @@
 		handle_embedded_objects(seconds_per_tick)
 		update_stress()
 		handle_nausea(seconds_per_tick)
-
-		handle_shock(seconds_per_tick)
-		handle_shock_stage(seconds_per_tick)
-
-		handle_sleep(seconds_per_tick)
 
 	check_cremation(seconds_per_tick)
 
@@ -71,15 +80,16 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/proc/handle_bodyparts(seconds_per_tick)
+/mob/living/carbon/proc/handle_bodyparts(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		if(bodypart.needs_processing)
-			. |= bodypart.on_life(seconds_per_tick)
+			. |= bodypart.on_life(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 
-/mob/living/carbon/proc/handle_organs(seconds_per_tick)
+/mob/living/carbon/proc/handle_organs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
 		return
 
+	var/in_bleedout = in_bleedout()
 	// This is no longer tied to mob stat since organs can live on their own
 	var/list/already_processed_life = list()
 	for(var/organ_slot in GLOB.organ_process_order)
@@ -90,9 +100,10 @@
 			if(QDELETED(src))
 				break
 			// This exists mostly because reagent metabolization can cause organ shuffling
-			if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
-				if(organ.needs_processing)
-					organ.on_life(seconds_per_tick)
+			if(!QDELETED(organ) && !already_processed_life[organ] && (organ.owner == src))
+				if(in_bleedout || organ.needs_processing)
+					. |= organ.on_life(seconds_per_tick, in_bleedout, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+
 				already_processed_life[organ] = TRUE
 
 	if(stat < DEAD)
@@ -101,12 +112,11 @@
 				break
 			var/datum/organ_process/organ_process = GLOB.organ_processes_by_slot[thing]
 			if(organ_process.needs_process(src))
-				organ_process.handle_process(src, seconds_per_tick)
+				. |= organ_process.handle_process(src, seconds_per_tick)
 	else
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			//Needed so organs decay while inside the body
-			organ.on_death(seconds_per_tick)
-
+			. |= organ.on_death(seconds_per_tick, passed_temp)
 
 /mob/living/carbon/handle_embedded_objects(seconds_per_tick)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -449,8 +459,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					if(!wound.sleep_healing)
 						continue
 					wound.heal_wound(wound.sleep_healing * sleepy_mod)
-			adjustToxLoss(-(sleepy_mod * 0.15), forced = TRUE)
-			updatehealth()
+			if(toxloss)
+				adjustToxLoss(-(sleepy_mod * 0.15), FALSE, TRUE)
+				. |= BODYPART_LIFE_UPDATE_HEALTH
 			if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 				Sleeping(30 SECONDS)
 		tiredness = 0

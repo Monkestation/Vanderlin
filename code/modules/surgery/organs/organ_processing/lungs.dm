@@ -166,8 +166,7 @@
 
 /obj/item/organ/lungs/proc/breathe_air(mob/living/carbon/breather, breath, seconds_per_tick)
 	if(!breath)
-		handle_suffocation(breather, seconds_per_tick)
-		return
+		return handle_suffocation(breather, seconds_per_tick)
 
 	if(breather.getOxyLoss())
 		var/lung_efficiency = get_slot_efficiency(ORGAN_SLOT_LUNGS)/ORGAN_OPTIMAL_EFFICIENCY
@@ -200,12 +199,17 @@
 	// Can't suffocate without a Human, or without minimum breath pressure.
 	if(!suffocator)
 		return
+
 	// Mob is suffocating.
 	suffocator.failed_last_breath = TRUE
+
 	// Give them a chance to notice something is wrong.
 	if(SPT_PROB(5, seconds_per_tick))
 		suffocator.emote("gasp")
-	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * seconds_per_tick)
+
+	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * seconds_per_tick, FALSE)
+
+	return ORGAN_PROCESS_UPDATE_HEALTH
 
 /obj/item/organ/lungs/proc/handle_breath_temperature(breath, mob/living/carbon/human/breather)
 	var/breath_effect_prob = 0
