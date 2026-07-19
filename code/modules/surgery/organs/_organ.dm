@@ -219,7 +219,7 @@
 
 /obj/item/organ/proc/handle_blood(seconds_per_tick, in_bleedout)
 	if(blood_req && (in_bleedout || is_failing_without_bleedout()))
-		current_blood = max(current_blood - (blood_req * delta_time), 0)
+		current_blood = max(current_blood - (blood_req * seconds_per_tick), 0)
 
 	// When blood is missing take from arteries
 	if(current_blood < max_blood_storage)
@@ -435,7 +435,7 @@
 
 
 /// Malus caused by germs
-/obj/item/organ/proc/handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
+/obj/item/organ/proc/handle_germ_effects(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness)
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE / 2 && SPT_PROB(virus_immunity * 0.15, seconds_per_tick))
 		adjust_germ_level(-0.5 * seconds_per_tick)
 		return
@@ -502,7 +502,7 @@
 		. = TRUE
 	needs_processing = .
 
-/obj/item/organ/proc/on_life(seconds_per_tick in_bleedout, virus_immunity, antibiotics, immunity_weakness, passed_temp)	//repair organ damage if the organ is not failing
+/obj/item/organ/proc/on_life(seconds_per_tick, in_bleedout, virus_immunity, antibiotics, immunity_weakness, passed_temp)	//repair organ damage if the organ is not failing
 	SHOULD_CALL_PARENT(TRUE)
 	if(!owner)
 		return

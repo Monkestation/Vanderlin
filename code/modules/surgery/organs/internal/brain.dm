@@ -126,7 +126,7 @@
 		. = TRUE
 	needs_processing = .
 
-/obj/item/organ/brain/can_self_heal(delta_time, times_fired, in_bleedout)
+/obj/item/organ/brain/can_self_heal(seconds_per_tick, in_bleedout)
 	. = ..()
 	if(!.)
 		return
@@ -141,7 +141,7 @@
 	// Very low blood, danger!!
 	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_BLEEDOUT))
 		current_blood = max(current_blood - (blood_req * seconds_per_tick * 2), 0)
-		if(DT_PROB(5, seconds_per_tick))
+		if(SPT_PROB(5, seconds_per_tick))
 			owner.adjust_eye_blur_up_to(4, 4)
 	else
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * seconds_per_tick * 2), 0)

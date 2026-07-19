@@ -73,12 +73,12 @@
 	else
 		squirt_less(final_bleed_rate)
 
-/obj/item/organ/artery/handle_blood(delta_time, times_fired, in_bleedout)
+/obj/item/organ/artery/handle_blood(seconds_per_tick, in_bleedout)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/failer = is_failing_without_bleedout()
 	if(failer || in_bleedout)
 		return
-	current_blood = min(current_blood + (2.5 * delta_time) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+	current_blood = min(current_blood + (2.5 * seconds_per_tick) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 
 /obj/item/organ/artery/tear()
 	if(!owner)

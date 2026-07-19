@@ -4,7 +4,7 @@
 	var/static/sound/slowbeat = sound('sound/heart/slowbeat.ogg', volume = 20, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 	var/static/sound/fastbeat = sound('sound/heart/fastbeat.ogg', volume = 10, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 
-ocess/heart/handle_process(mob/living/carbon/owner, seconds_per_tick)
+/datum/organ_process/heart/handle_process(mob/living/carbon/owner, seconds_per_tick)
 	var/return_val = NONE
 
 	if(owner.needs_heart())
