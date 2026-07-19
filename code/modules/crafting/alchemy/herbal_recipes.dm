@@ -622,12 +622,14 @@
 	overdose_threshold = 10
 	taste_description = "fleeing life"
 
-/datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/herbal/ghoulpowder/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	M.adjustToxLoss(0.1)
 	if(prob(20))
 		M.set_eye_blur_if_lower(10 SECONDS)
 		M.set_confusion_if_lower(0.5 SECONDS)
+	
+	return TRUE
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_end_metabolize(mob/living/M)
 	. = ..()
