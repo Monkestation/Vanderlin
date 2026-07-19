@@ -299,7 +299,7 @@ SUBSYSTEM_DEF(ticker)
 				continue
 			if(player.client.prefs.job_preferences[needed_job] == JP_HIGH)
 				if(player.ready == PLAYER_READY_TO_PLAY)
-					if(player.client.prefs.lastclass = needed_job)//This makes no sense, but I need to sleep so I'll have to come back to it in the morning
+					if(player.client.prefs.lastclass == needed_job)//This makes no sense, but I need to sleep so I'll have to come back to it in the morning
 						var/job_status = player.IsJobUnavailable(needed_job)
 						if(job_status != JOB_AVAILABLE)
 							to_chat(player, span_warning("You cannot be [needed_job] and thus are not considered."))
