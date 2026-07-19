@@ -5342,6 +5342,11 @@
 "czw" = (
 /turf/open/floor/metal/alt,
 /area/under/town/basement)
+"czx" = (
+/obj/structure/chair/stool,
+/obj/structure/fake_machine/atm,
+/turf/open/floor/tile/brownbrick,
+/area/indoors/town/merc_guild)
 "czz" = (
 /turf/open/floor/blocks,
 /area/outdoors/town)
@@ -112072,7 +112077,7 @@ thi
 hZn
 mFi
 irX
-eSb
+czx
 jRe
 eSb
 lKG
