@@ -3552,6 +3552,7 @@
 	pixel_x = -22;
 	pixel_y = -8
 	},
+/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/dirt,
 /area/under/town/basement)
 "bHT" = (
@@ -20509,6 +20510,12 @@
 /obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
+"jzr" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "jzG" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/carafe/gold{
@@ -35242,6 +35249,12 @@
 /obj/structure/bars,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/gate)
+"qnI" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/dirt,
+/area/under/town/basement)
 "qod" = (
 /turf/closed/wall/mineral/decorstone/window,
 /area/indoors/town/keep/library)
@@ -40442,6 +40455,10 @@
 	redstone_id = "ArchiveTunnel4"
 	},
 /turf/closed/wall/mineral/decorstone,
+/area/under/town/basement)
+"sEe" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/cobble/mossy,
 /area/under/town/basement)
 "sEi" = (
 /obj/structure/fluff/walldeco/customflag{
@@ -78689,7 +78706,7 @@ ryr
 wRn
 ryr
 ryr
-msU
+qnI
 jQb
 cAA
 qvf
@@ -80111,7 +80128,7 @@ jQb
 jQb
 jQb
 kkL
-ryr
+sEe
 ryr
 ryr
 jEQ
@@ -80124,7 +80141,7 @@ fYq
 jEQ
 xZw
 hhq
-fBg
+jzr
 jEQ
 wpU
 qvf
@@ -81132,7 +81149,7 @@ gDP
 gDP
 ilJ
 uzn
-oXr
+vsA
 jux
 jux
 wpU
