@@ -57,11 +57,11 @@
 		if("Sword")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/arming, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 30)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 		if("Axes")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/axe/iron, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/axe/iron, ITEM_SLOT_BELT_L, TRUE)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20)
 
 /datum/outfit/mercenary/exiled
 	name = "Exiled Warrior (Mercenary)"

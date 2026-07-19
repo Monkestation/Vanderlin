@@ -1,0 +1,4 @@
+author: "yafesdot"
+delete-after: True
+changes:
+  - bugfix: "fixes a runtime error when clicking the randomise appearance button in character setup"

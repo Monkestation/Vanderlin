@@ -1,0 +1,4 @@
+author: "tired-wired"
+delete-after: True
+changes:
+  - rscadd: "Aasimar get favoured species bonuses for their patron if available."

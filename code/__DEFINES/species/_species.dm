@@ -170,6 +170,14 @@
 	SPEC_ID_AASIMAR,\
 )
 
+/// Species who can be Grenzelhoft Mercenaries but not other important grenzel stuff
+#define RACES_PLAYER_GRENZ_MERC list(\
+	SPEC_ID_HUMEN,\
+	SPEC_ID_DWARF,\
+	SPEC_ID_AASIMAR,\
+	SPEC_ID_HALF_ELF,\
+)
+
 /// Species who are affiliated with Zaladin
 #define RACES_PLAYER_ZALADIN list(\
 	SPEC_ID_HUMEN,\
