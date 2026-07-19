@@ -380,18 +380,6 @@
 	)
 	results = list(/datum/reagent/poison/kingsbane = 15)
 	mix_message = "The solution fizzles violently, as it becomes a solid mettalic gold color."
-/*
-/datum/chemical_reaction/rajaijah
-	name = "Dark Suns Shine"
-	id = "rajaijah"
-	required_reagents = list(
-		/datum/reagent/blood = 20,
-		/datum/reagent/lux_tainted = 5,
-		/datum/reagent/consumable/nutriment/bone_marrow = 5 //remaining here incase server standards change. Do not apply unless given explicit approval.
-	)
-	results = list(/datum/reagent/poison/rajaijah = 20)
-	mix_message = "The moment the 3 reagents mix, the solution violently bubbles, before slowly turning dark blue with and oily sheen. You feel angry looking at it."
-*/
 /datum/chemical_reaction/tear
 	name = "Sunder Toxin"
 	id = "tear"
