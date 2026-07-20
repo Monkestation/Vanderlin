@@ -86,7 +86,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/interaction_flags_item = INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	// Takes bitflags. See setup.dm for appropriate bit flags
-	var/body_parts_covered = 0
+	var/body_parts_covered = NONE
+	var/body_parts_access_allowed = NONE
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
@@ -165,7 +166,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/canMouseDown = FALSE
 	var/can_parry = FALSE
-	var/associated_skill
+	var/datum/attribute/associated_skill
 
 	var/list/possible_item_intents = list(/datum/intent/use)
 
@@ -614,8 +615,28 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!islist(inspect_list))
 		inspect_list = list()
 
+	if(max_blade_int)
+		inspect_list += "\n<b>SHARPNESS:</b> "
+		var/meme = round(((blade_int / max_blade_int) * 100), 1)
+		inspect_list += "[meme]%"
+
+//**** General durability
+	if(uses_integrity)
+		inspect_list += "\n<b>DURABILITY:</b> "
+		var/meme = round(((atom_integrity / max_integrity) * 100), 1)
+		inspect_list += "[meme]%"
+
 	if(minstr)
 		inspect_list += "\n<b>MIN.STR:</b> [minstr]"
+
+	if(associated_skill)
+		inspect_list += "\n<b>SKILL:</b> [associated_skill::name]"
+
+	if(!istype(src, /obj/item/clothing))
+		if(can_parry)
+			inspect_list += "\n<b>PARRY:</b> [wdefense]"
+		else
+			inspect_list +=  "\n<b>PARRY:</b> Cannot Parry"
 
 	if(wbalance)
 		inspect_list += "\n<b>BALANCE: </b>"
@@ -639,20 +660,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(alt_intents)
 		inspect_list += "\n<b>ALT-GRIPPABLE</b>"
-
-	if(can_parry)
-		inspect_list += "\n<b>PARRY:</b> [wdefense]"
-
-	if(max_blade_int)
-		inspect_list += "\n<b>SHARPNESS:</b> "
-		var/meme = round(((blade_int / max_blade_int) * 100), 1)
-		inspect_list += "[meme]%"
-
-//**** General durability
-	if(uses_integrity)
-		inspect_list += "\n<b>DURABILITY:</b> "
-		var/meme = round(((atom_integrity / max_integrity) * 100), 1)
-		inspect_list += "[meme]%"
 
 	return inspect_list
 

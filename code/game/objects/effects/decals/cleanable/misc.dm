@@ -77,7 +77,6 @@
 	icon_state = "cobweb1"
 	gender = NEUTER
 	layer = WALL_OBJ_LAYER
-	plane = -1
 	resistance_flags = FLAMMABLE
 	beauty = -100
 	alpha = 200

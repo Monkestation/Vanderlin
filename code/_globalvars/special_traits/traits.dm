@@ -494,7 +494,7 @@
 	greet_text = span_notice("I am beloved by the Ten, I have been blessed by all their boons.")
 	req_text = "Be Tennite"
 	weight = 7
-	allowed_patrons = ALL_TEMPLE_PATRONS
+	allowed_patrons = UNDIVIDED_TEMPLE_PATRONS
 
 /datum/special_trait/blessed/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_APRICITY, "[type]")
@@ -1026,7 +1026,7 @@
 	allowed_jobs = list(/datum/job/vagrant, /datum/job/jester)
 
 /datum/special_trait/king/on_apply(mob/living/carbon/human/character, silent)
-	character.honorary = lowertext(character.pronouns == SHE_HER ? SSmapping.config.monarch_title_f : SSmapping.config.monarch_title)
+	character.honorary = LOWER_TEXT(character.pronouns == SHE_HER ? SSmapping.config.monarch_title_f : SSmapping.config.monarch_title)
 
 /datum/special_trait/augmentable
 	name = "Chippin' In"
@@ -1047,6 +1047,42 @@
 /datum/special_trait/obese/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_FAT, BE_SPECIAL_TRAIT)
 
+/datum/special_trait/musclepriest
+	name = "My body is a TEMPLE!"
+	greet_text = span_notice("My body is a beacon for Astrata's light, and it shall be KNOWN")
+	weight = 30
+
+	req_text = "Be the Priest"
+	allowed_jobs = list(/datum/job/priest)
+
+/datum/attribute_holder/sheet/job/musclepriest
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = -3,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/combat/wrestling = 30,
+        /datum/attribute/skill/combat/unarmed = 25,
+	)
+
+/datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NOPAINSTUN, BE_SPECIAL_TRAIT)
+	QDEL_NULL(character.wear_pants)
+	QDEL_NULL(character.wear_shirt)
+	QDEL_NULL(character.wear_armor)
+	QDEL_NULL(character.shoes)
+	QDEL_NULL(character.belt)
+	character.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/eastpants2(character), ITEM_SLOT_PANTS)
+	character.equip_to_slot_or_del(new/obj/item/clothing/armor/regenerating/skin/disciple/sunlord(character), ITEM_SLOT_ARMOR)
+	character.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist(character), ITEM_SLOT_GLOVES)
+	character.equip_to_slot_or_del(new /obj/item/storage/belt/leather/steel(character), ITEM_SLOT_BELT)
+	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
+	character.equip_to_slot_or_del(new /obj/item/weapon/katar(character), ITEM_SLOT_BELT_R)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
+	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
+	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
 	greet_text = span_notice("Miracles that heal others scorch me, and i feel as if i am being dreagged to the underworld.")

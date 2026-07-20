@@ -9,8 +9,8 @@
 
 /datum/attribute_holder/sheet/job/species/halfdrow
 	raw_attribute_list = list(
-		STAT_PERCEPTION = 1,
-		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1,
 	)
 

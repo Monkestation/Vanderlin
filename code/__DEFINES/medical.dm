@@ -251,6 +251,9 @@ DEFINE_BITFIELD(organ_flags, list(
 #define GERM_LEVEL_FILTHY 500
 #define GERM_LEVEL_SMASHPLAYER 750
 
+/// Maximum germ level you can reach by standing still.
+#define GERM_LEVEL_AMBIENT 250
+
 /// Exposure to blood germ level per unit
 #define GERM_PER_UNIT_BLOOD 2
 
@@ -295,7 +298,7 @@ DEFINE_BITFIELD(organ_flags, list(
 #define CPR_CHEST "cardio"
 
 // ~arteries
-#define ARTERIAL_BLOOD_FLOW 20
+#define ARTERIAL_BLOOD_FLOW 9
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth
@@ -379,3 +382,10 @@ DEFINE_BITFIELD(organ_flags, list(
 
 /// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
 #define BLEED_DAMAGE_RATIO 25
+
+// /obj/item/bodypart on_mob_life() retval flag
+#define BODYPART_LIFE_UPDATE_HEALTH (1<<0)
+// /datum/organ_process/handle_process retval flag
+#define ORGAN_PROCESS_UPDATE_HEALTH (1<<1) // why is this like so? cause
+// /mob/living/carbon/handle_shock() retval flag
+#define SHOCK_PROCESS_UPDATE_HEALTH (1<<0)

@@ -428,8 +428,8 @@
 		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
 		return
 
-	var/ckey = lowertext(M.ckey)
-	var/admin = lowertext(usr.key)
+	var/ckey = LOWER_TEXT(M.ckey)
+	var/admin = LOWER_TEXT(usr.key)
 
 	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
 		to_chat(src, "<span class='boldwarning'>User does not exist.</span>")
@@ -456,8 +456,8 @@
 		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
 		return
 
-	var/ckey = lowertext(M.ckey)
-	var/admin = lowertext(usr.key)
+	var/ckey = LOWER_TEXT(M.ckey)
+	var/admin = LOWER_TEXT(usr.key)
 
 	/*if(ckey == admin)
 		to_chat(src, "<span class='boldwarning'>That's you!</span>")

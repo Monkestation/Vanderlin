@@ -127,6 +127,7 @@ SUBSYSTEM_DEF(job)
 		return FALSE
 
 	var/dominated_species_check = FALSE
+	var/heretic_noble_check = FALSE
 	var/player_species_id_job = player_prefs.pref_species.id_override ? player_prefs.pref_species.id_override : player_prefs.pref_species.id
 
 	if(length(job.allowed_races) && !(player_species_id_job in job.allowed_races))
@@ -144,6 +145,13 @@ SUBSYSTEM_DEF(job)
 	if(length(job.allowed_patrons) && !(pref_patron?.type in job.allowed_patrons))
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
+
+	if(job.tennite_triumph_exclusive && !(pref_patron?.type in UNDIVIDED_TEMPLE_PATRONS))
+		if(player.client?.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE))
+			heretic_noble_check = TRUE
+		else
+			JobDebug("Eligibility failed: noble patron, Player: [player], Job: [job.title]")
+			return FALSE
 
 	if(length(job.banned_patrons) && (pref_patron?.type in job.banned_patrons))
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
@@ -189,6 +197,8 @@ SUBSYSTEM_DEF(job)
 	// Activate triumph if we passed with it
 	if(dominated_species_check)
 		player.client?.activate_triumph_buy(TRIUMPH_BUY_RACE_ALL)
+	if(heretic_noble_check)
+		player.client?.activate_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE)
 
 	return TRUE
 
@@ -449,6 +459,8 @@ SUBSYSTEM_DEF(job)
 		if(length(job.allowed_patrons) && !(pref_patron.type in job.allowed_patrons))
 			continue
 		if(length(job.banned_patrons) && (pref_patron.type in job.banned_patrons))
+			continue
+		if(job.tennite_triumph_exclusive && !(pref_patron.type in UNDIVIDED_TEMPLE_PATRONS))
 			continue
 		if(length(job.allowed_ages) && !(player_prefs.read_preference(/datum/preference/choiced/age) in job.allowed_ages))
 			continue

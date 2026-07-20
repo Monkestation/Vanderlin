@@ -134,6 +134,39 @@
 			if("gen")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 0,"nx" = 11,"ny" = 1,"wx" = 0,"wy" = 1,"ex" = 4,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 15,"sturn" = 0,"wturn" = 0,"eturn" = 39,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 8)
 
+/// Called by burial_rites, gives some fluff messages before deleting the box.
+/obj/item/psydonmusicbox/proc/free_souls(mob/living/savior)
+	var/list/soul_lines = list(
+		SPAN_GOD_ASTRATA("Her light once more... thank you..."),
+		SPAN_GOD_ASTRATA("Warmth at last..."),
+		SPAN_GOD_NOC("I can see them... the stars..."),
+		SPAN_GOD_NECRA("Finally... peace..."),
+		SPAN_GOD_NECRA("You have done a noble service kin..."),
+		SPAN_GOD_NECRA("I will make sure to inform the Undermaiden of your service..."),
+		SPAN_GOD_ABYSSOR("May the sea treat you well..."),
+		SPAN_GOD_RAVOX("Freedom at last! May justice be done for what I have suffered..."),
+		SPAN_GOD_PESTRA("The suffering has ended..."),
+		SPAN_GOD_EORA("Peace at last! May you find love stranger..."),
+		SPAN_GOD_DENDOR("THOSE GRENZEL SCUM SHALL PAY FOR WHAT THEY HAVE DONE!"),
+		SPAN_GOD_XYLIX("Finally! That audience was getting boring anyways..."),
+		SPAN_GOD_MALUM("I have been freed! I must find my apprentice..."),
+		SPAN_GOD_MALUM("May Malum curse the creator of that cursed craft... thank you..."),
+		SPAN_GOD_MATTHIOS("Thanks pal, I owe you one..."),
+		SPAN_GOD_ZIZO("Thanks IDIOT! Time to cause some chaos~"),
+		SPAN_GOD_GRAGGAR("I WILL TEAR THOSE GRENZELS LIMB FROM LIMB!"),
+		SPAN_GOD_BAOTHA("What a horrid experience... I need a drink..."),
+		SPAN_GOD_PSYDON("Don't expect thanks from me, servant of the betrayer...")
+	)
+
+	savior.visible_message(span_info("As \the [src] crumbles to dust, you can see a few faint lights float away and fade out."), span_info("As \the [src] crumbles, you can faintly see fourteen souls slowly drift out and fade into the air. One of them utters a few words before joining the rest..."), vision_distance = COMBAT_MESSAGE_RANGE)
+
+	sleep(1 SECONDS)
+	to_chat(savior, pick(soul_lines))
+
+	savior.add_stress(/datum/stress_event/soulchurnerdestroyed)
+	qdel(src)
+
+
 /atom/movable/screen/alert/status_effect/buff/cranking_soulchurner
 	name = "Cranking Soulchurner"
 	desc = "I am bringing the twisted device to life..."
@@ -1245,7 +1278,7 @@
 			if(!name)
 				return
 			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(lowertext(HL.real_name) == lowertext(name))
+				if(LOWER_TEXT(HL.real_name) == LOWER_TEXT(name))
 					fixation = WEAKREF(HL)
 					target = HL
 					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)

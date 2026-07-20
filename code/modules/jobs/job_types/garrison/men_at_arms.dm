@@ -38,12 +38,12 @@
 	name = "Men-at-arms Base"
 	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shirt = /obj/item/clothing/armor/gambeson/arming
+	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
 	neck = /obj/item/clothing/neck/bevor
-	gloves = /obj/item/clothing/gloves/leather
+	gloves = /obj/item/clothing/gloves/leather/advanced
 	wrists = /obj/item/clothing/wrists/bracers/leather
-	pants = /obj/item/clothing/pants/trou/leather/guard
-	shoes = /obj/item/clothing/shoes/boots
+	pants = /obj/item/clothing/pants/trou/leather/splint
+	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/manorguard
 	backpack_contents = list(
@@ -66,7 +66,7 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 33,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
@@ -111,7 +111,7 @@
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/axesmaces = 33,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -154,8 +154,8 @@
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 33,
+		/datum/attribute/skill/combat/crossbows = 33,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -185,24 +185,25 @@
 	armor = /obj/item/clothing/armor/leather/splint
 	beltr = /obj/item/weapon/mace/cudgel
 
-/datum/outfit/watchman/ranger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
-	var/weapontypec = pickweight(list("Bow" = 6, "Crossbow" = 4))
-	switch(weapontypec)
+	var/static/list/weapons = list("Bow", "Crossbow")
+	var/weapon_choice = browser_input_list(equipped_human, "CHOOSE YOUR WEAPON.", "AIM TRUE.", weapons)
+	switch(weapon_choice)
 		if("Bow")
-			backl = /obj/item/gun/ballistic/bow/long
-			backr = /obj/item/ammo_holder/quiver/arrows
+			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_L, TRUE)
+			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BACK_R, TRUE)
 		if("Crossbow")
-			backl = /obj/item/gun/ballistic/bow/cross
-			backr = /obj/item/ammo_holder/quiver/bolts
+			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_L, TRUE)
+			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BACK_R, TRUE)
 
 /datum/attribute_holder/sheet/job/menatarms/swordsman
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/swords = 33,
+		/datum/attribute/skill/combat/shields = 33,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/wrestling = 20,

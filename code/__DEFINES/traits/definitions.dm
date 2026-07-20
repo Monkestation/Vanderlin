@@ -472,9 +472,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PUNISHMENT_CURSE "PunishmentCurse"
 #define TRAIT_BANDITCAMP "banditcamp"
 #define TRAIT_KNOWBANDITS "knowbandits"
+#define TRAIT_KNOWCOURTAGENTS "knowagents"
 #define TRAIT_VAMPMANSION "vampiremansion"
 #define TRAIT_VAMP_DREAMS "vamp_dreams"
 #define TRAIT_INHUMENCAMP "inhumencamp"
+#define TRAIT_GALLOWBAND "gallowband"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies
 #define TRAIT_STEELHEARTED "steelhearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
@@ -558,6 +560,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_KNOW_KEEP_DOORS "know_keep_doors"
 #define TRAIT_KNOW_INQUISITION_DOORS "know_inquisition_doors"
 #define TRAIT_KNOW_THIEF_DOORS "know_thief_doors"
+#define TRAIT_KNOW_COURTAGENT_DOORS "know_courtagent_doors"
 #define TRAIT_KNOW_ROUS_DOORS "know_rous_doors" //Event purposes.
 #define TRAIT_GALLOWBAND_SECRETS "know_gallowband_secrets"
 
@@ -568,6 +571,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EARGRAB "Ear Grab"
 #define TRAIT_FACELESS "Faceless One"
 #define TRAIT_ROYALSERVANT "Household Insight" // Let's you see the royals liked/hated food/drink
+#define TRAIT_COURTAGENT "Agent of the Court"
+#define TRAIT_GATEKEEPER "Gatekeeper"
 
 ///every hearing sensitive atom has this trait
 #define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
@@ -629,3 +634,4 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
 #define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"
+#define TRAIT_NO_ROT "no_rot"

@@ -63,11 +63,14 @@ SUBSYSTEM_DEF(outdoor_effects)
 	var/alist/turf_weather_affectable_z_levels = alist()
 	var/next_day = FALSE // Resets when station_time is less than the next start time.
 
+	var/static/mutable_appearance/global_weather_effect
+
 /datum/controller/subsystem/outdoor_effects/Initialize(timeofday)
 	#ifdef FORCE_RANDOM_WORLD_GEN
 	return ..()
 	#endif
 	if(!initialized)
+		setup_weather_effect()
 		for(var/zlevel in SSmapping.levels_by_trait(ZTRAIT_WEATHER_STUFF))
 			if(SSmapping.level_trait(zlevel, ZTRAIT_IGNORE_WEATHER_TRAIT))
 				continue
@@ -269,7 +272,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 
 	OE.sunlight_overlay = MA
 	//Get weather overlay if not weatherproof
-	OE.overlays = OE.weatherproof ? list(OE.sunlight_overlay) : list(OE.sunlight_overlay, get_weather_overlay())
+	OE.overlays = OE.weatherproof ? list(OE.sunlight_overlay) : list(OE.sunlight_overlay, global_weather_effect)
 	OE.luminosity = MA.luminosity
 
 //Retrieve an overlay from the list - create if necessary
@@ -280,14 +283,14 @@ SUBSYSTEM_DEF(outdoor_effects)
 	return sunlight_overlays[index]
 
 //get our weather overlay
-/datum/controller/subsystem/outdoor_effects/proc/get_weather_overlay() //TODO VANDERLIN: Restore this to 32x48 for some extra
+/datum/controller/subsystem/outdoor_effects/proc/setup_weather_effect()
 	var/mutable_appearance/MA = new /mutable_appearance()
 	MA.icon = 'icons/effects/weather_overlay.dmi'
 	MA.icon_state = "weather_overlay"
 	MA.plane = WEATHER_OVERLAY_PLANE
 	MA.blend_mode = BLEND_OVERLAY
 	MA.invisibility = INVISIBILITY_LIGHTING
-	return MA
+	global_weather_effect = MA
 
 //Create an overlay appearance from corner values
 /datum/controller/subsystem/outdoor_effects/proc/create_sunlight_overlay(fr, fg, fb, fa)
