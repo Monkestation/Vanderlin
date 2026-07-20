@@ -906,20 +906,20 @@
 	ADD_TRAIT(character, TRAIT_STINKY, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_DEADNOSE, BE_SPECIAL_TRAIT)
 
-/datum/special_trait/keenears
-	name = "Keen Ears"
-	greet_text = span_notice("People always did get mad at me for accidentally eavesdropping.")
+/datum/special_trait/keensenses
+	name = "Keen Senses"
+	greet_text = span_notice("My eyes and ears are sharp as razors.")
 	weight = 50
 
-/datum/special_trait/keenears/on_apply(mob/living/carbon/human/character, silent)
+/datum/special_trait/keensenses/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_KEENEARS, "[type]")
+	ADD_TRAIT(character, TRAIT_KEENEYES, "[type]")
 
 /datum/special_trait/bestial
 	name = "Bestial"
 	greet_text = span_notice("I am blessed by Dendor I feel closer to beasts than men, I can whisper in their tongue.")
 	weight = 50
-	req_text = "Worship Dendor and be an acolyte"
-	allowed_jobs = list(/datum/job/monk)
+	req_text = "Worship Dendor"
 	allowed_patrons = list(/datum/patron/divine/dendor)
 
 /datum/special_trait/bestial/on_apply(mob/living/carbon/human/character, silent)
@@ -1084,6 +1084,7 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
+
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
 	greet_text = span_notice("Miracles that heal others scorch me, and i feel as if i am being dreagged to the underworld.")
@@ -1161,3 +1162,138 @@
 /datum/special_trait/doaflip/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_FLIP_JUMP, BE_SPECIAL_TRAIT)
 
+/datum/special_trait/fish
+	name = "Swim like a Fish"
+	greet_text = span_notice("I always been told I swim as well as a Triton.")
+	weight = 75
+
+/datum/attribute_holder/sheet/job/fish
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 60,
+	)
+
+/datum/special_trait/fish/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_SWIMMER, BE_SPECIAL_TRAIT)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/fish)
+
+/datum/special_trait/thenerve
+	name = "Nerve Stapled"
+	greet_text = span_notice("In a bout of strange experimentation, my body was rendered fully painless. A blessing, or a curse?")
+	weight = 15
+
+/datum/special_trait/thenerve/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
+
+/datum/special_trait/glasscannon
+	name = "Glass Cannon"
+	greet_text = span_notice("With great power comes great fragility.")
+	weight = 15
+
+/datum/attribute_holder/sheet/job/glasscannon
+	raw_attribute_list = list(
+		STAT_STRENGTH = 15,
+		STAT_ENDURANCE = -10,
+	)
+
+/datum/special_trait/glasscannon/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/glasscannon)
+	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/glasscannon, STAT_CONSTITUTION, -15)
+
+/datum/special_trait/favoredbymatthios
+	name = "Favored by Matthios"
+	greet_text = span_notice("I have been blessed by the God of Thieves, and have been allowed use of one of his weapons.")
+	weight = 10
+	allowed_patrons = list(/datum/patron/inhumen/matthios)
+	req_text = "Have Matthios as your Patron"
+
+/datum/attribute_holder/sheet/job/favoredbymatthios
+	raw_attribute_list = list(
+		STAT_SPEED = 1
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(40, 40)
+	)
+
+/datum/special_trait/favoredbymatthios/on_apply(mob/living/carbon/human/character, silent)
+
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/favoredbymatthios)
+	character.mind.special_items["Matthios' Favor"] = /obj/item/weapon/sword/long/pleonexia
+
+/datum/special_trait/favoredbybaotha
+	name = "Favored by Baotha"
+	greet_text = span_notice("I have been blessed by the Goddess of Excess, and have been allowed use of one of her weapons.")
+	weight = 10
+	allowed_patrons = list(/datum/patron/inhumen/baotha)
+	req_text = "Have Baotha as your Patron"
+
+/datum/attribute_holder/sheet/job/favoredbybaotha
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/bows = list(40, 40)
+	)
+
+/datum/special_trait/favoredbybaotha/on_apply(mob/living/carbon/human/character, silent)
+
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/favoredbybaotha)
+	character.mind.special_items["Baotha's Favor"] = /obj/item/gun/ballistic/bow/turbulenta
+	character.mind.special_items["Quiver of Arrows"] = /obj/item/ammo_holder/quiver
+
+/datum/special_trait/favoredbygraggar
+	name = "Favored by Graggar"
+	greet_text = span_notice("I have been blessed by the God of Murder, and have been allowed use of one of his weapons.")
+	weight = 10
+	allowed_patrons = list(/datum/patron/inhumen/graggar)
+	req_text = "Have Graggar as your Patron"
+
+/datum/attribute_holder/sheet/job/favoredbygraggar
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(40, 40)
+	)
+
+/datum/special_trait/favoredbygraggar/on_apply(mob/living/carbon/human/character, silent)
+
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/favoredbygraggar)
+	character.mind.special_items["Graggar's Favor"] = /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast
+
+/datum/special_trait/favoredbyzizo
+	name = "Favored by Zizo"
+	greet_text = span_notice("I have been blessed by the Goddess of Power, and have been allowed use of one of his weapons.")
+	weight = 10
+	allowed_patrons = list(/datum/patron/inhumen/zizo)
+	req_text = "Have Zizo as your Patron"
+
+/datum/attribute_holder/sheet/job/favoredbyzizo
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(40, 40)
+	)
+
+/datum/special_trait/favoredbyzizo/on_apply(mob/living/carbon/human/character, silent)
+
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/favoredbyzizo)
+	character.mind.special_items["Zizo's Favor"] = /obj/item/weapon/polearm/neant
+
+/datum/special_trait/sneakygit
+	name = "Sneaky Git"
+	greet_text = span_notice("A master of getting around unseen, dat's one sneaky git.)")
+	weight = 50
+
+/datum/attribute_holder/sheet/job/sneakygit
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/sneaking = 60 ,
+	)
+
+/datum/special_trait/sneakygit/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/sneakygit)
+	character.add_spell(/datum/action/cooldown/spell/undirected/shadow_step, silent = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/smoke_bomb, silent = TRUE)
