@@ -605,6 +605,14 @@
 	craftdiff = 2
 	category = "Cloak"
 
+/datum/repeatable_crafting_recipe/sewing/shortcoat
+	name = "short surcoat"
+	output = /obj/item/clothing/cloak/stabard/shortcoat
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+	category = "Cloak"
+
 /datum/repeatable_crafting_recipe/sewing/jupon_cloak
 	name = "jupon"
 	output = /obj/item/clothing/cloak/stabard/jupon

@@ -12,6 +12,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	detail_tag = "_quad"
 	detail_color = CLOTHING_RED_OCHRE
+	sellprice = VALUE_LIGHT_GAMBESSON
 	var/picked
 
 /obj/item/clothing/cloak/stabard/attack_hand_secondary(mob/user, list/modifiers)
@@ -44,6 +45,8 @@
 		return
 
 	switch(design)
+		if("None")
+			detail_tag = ""
 		if("Split")
 			detail_tag = "_spl"
 		if("Quadrants")
@@ -225,6 +228,13 @@
 /// SURCOATS
 ////////////////////////
 
+/obj/item/clothing/cloak/stabard/shortcoat
+	name = "short surcoat"
+	icon_state = "shortcoat"
+	color = CLOTHING_MUSTARD_YELLOW
+	detail_tag = "_quad"
+	detail_color = CLOTHING_SOOT_BLACK
+
 /obj/item/clothing/cloak/stabard/jupon
 	name = "jupon"
 	icon_state = "surcoat"
@@ -232,98 +242,9 @@
 	detail_tag = "_spl"
 	detail_color = CLOTHING_SOOT_BLACK
 
-/obj/item/clothing/cloak/stabard/jupon/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(picked)
-		return
-
-	var/the_time = world.time
-
-	var/design = tgui_input_list(user, "Select a design.","Tabard Design", list("None", "Split", "Quadrants", "Boxes", "Diamonds"))
-	if(!design)
-		return
-
-	var/colorone = tgui_input_list(user, "Select a primary color.","Tabard Design", GLOB.noble_dyes)
-	if(!colorone)
-		return
-
-	var/colortwo
-	if(design != "None")
-		colortwo = tgui_input_list(user, "Select a primary color.","Tabard Design", GLOB.noble_dyes)
-		if(!colortwo)
-			return
-
-	if(world.time > (the_time + 30 SECONDS))
-		return
-
-	switch(design)
-		if("Split")
-			detail_tag = "_spl"
-		if("Quadrants")
-			detail_tag = "_quad"
-		if("Boxes")
-			detail_tag = "_box"
-		if("Diamonds")
-			detail_tag = "_dim"
-
-	color = GLOB.noble_dyes[colorone]
-	if(colortwo)
-		detail_color = GLOB.noble_dyes[colortwo]
-
-	update_appearance(UPDATE_OVERLAYS)
-
-	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
-		detail_color = initial(detail_color)
-		color = initial(color)
-		detail_tag = initial(detail_tag)
-		update_appearance(UPDATE_OVERLAYS)
-		return
-
-	picked = TRUE
-
 /obj/item/clothing/cloak/stabard/jupon/guard
 	desc = "A jupon with the lord's heraldic colors."
 	color = CLOTHING_BLOOD_RED
 	detail_tag = "_quad"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
-
-/obj/item/clothing/cloak/stabard/jupon/guard/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(picked)
-		return
-	var/the_time = world.time
-	var/chosen = input(user, "Select a design.","Tabard Design") as null|anything in list("Split", "Quadrants", "Boxes", "Diamonds")
-	if(world.time > (the_time + 10 SECONDS))
-		return
-	if(!chosen)
-		return
-	switch(chosen)
-		if("Split")
-			detail_tag = "_spl"
-		if("Quadrants")
-			detail_tag = "_quad"
-		if("Boxes")
-			detail_tag = "_box"
-		if("Diamonds")
-			detail_tag = "_dim"
-	update_appearance(UPDATE_ICON)
-	if(ismob(loc))
-		var/mob/L = loc
-		L.update_inv_cloak()
-	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
-		detail_tag = initial(detail_tag)
-		update_appearance(UPDATE_ICON)
-		if(ismob(loc))
-			var/mob/L = loc
-			L.update_inv_cloak()
-		return
-	picked = TRUE
