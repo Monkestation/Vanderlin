@@ -117,7 +117,7 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/labor/mathematics = 50,
-		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/music = 50
 	)
 

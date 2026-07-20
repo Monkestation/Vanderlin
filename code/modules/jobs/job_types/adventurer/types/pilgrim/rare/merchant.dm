@@ -3,7 +3,7 @@
 		STAT_INTELLIGENCE = 2,
 		STAT_SPEED = 2,
 		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 10,

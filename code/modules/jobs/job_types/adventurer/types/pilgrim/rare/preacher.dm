@@ -1,6 +1,7 @@
 /datum/attribute_holder/sheet/job/pilgrim/preacher
 	raw_attribute_list = list(
-		STAT_ENDURANCE = 4,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/misc/music = 10,
 		/datum/attribute/skill/misc/swimming = 20,

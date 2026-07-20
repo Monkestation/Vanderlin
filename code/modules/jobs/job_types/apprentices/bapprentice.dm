@@ -3,7 +3,7 @@
 		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,

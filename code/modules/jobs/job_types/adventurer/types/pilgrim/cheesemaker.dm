@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 2,
-		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
