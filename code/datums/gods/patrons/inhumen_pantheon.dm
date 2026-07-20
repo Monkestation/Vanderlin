@@ -2,14 +2,14 @@
 	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
 	associated_objects = list(
-			PATRON_AMULET = list(
-				/obj/structure/fluff/psycross/zizocross,
-			),
-			PATRON_STRUCTURE = list(
-				/obj/item/clothing/neck/psycross/zizo,
-				/obj/item/clothing/neck/psycross/zizo/wood
-			),
-		)
+		PATRON_AMULET = list(
+			/obj/structure/fluff/psycross/zizocross,
+		),
+		PATRON_STRUCTURE = list(
+			/obj/item/clothing/neck/psycross/zizo,
+			/obj/item/clothing/neck/psycross/zizo/wood
+		),
+	)
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",

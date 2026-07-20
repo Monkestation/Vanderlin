@@ -39,9 +39,6 @@ GLOBAL_LIST_EMPTY(prayers)
 	///verbs applied by set_patron and removed when changed
 	var/list/added_verbs
 
-	///List of usable amulets to wear or structures able to be prayed with
-	#define PATRON_AMULET 1
-	#define PATRON_STRUCTURE 2
 
 	var/list/associated_objects = list(
 		PATRON_AMULET = null,
@@ -98,7 +95,7 @@ GLOBAL_LIST_EMPTY(prayers)
 		if(is_type_in_list(crosstype, associated_objects[PATRON_STRUCTURE]))
 			return TRUE
 
-	if(follower.check_slots_for_types(list(ITEM_SLOT_NECK, ITEM_SLOT_WRISTS, ITEM_SLOT_HANDS), associated_objects[PATRON_AMULET]))
+	if(follower.check_slots_for_types(list(ITEM_SLOT_NECK, ITEM_SLOT_WRISTS, ITEM_SLOT_HANDS, ITEM_SLOT_BELT_L, ITEM_SLOT_BELT_R), associated_objects[PATRON_AMULET]))
 		return TRUE
 
 	to_chat(follower, span_danger(prayer_fail))
