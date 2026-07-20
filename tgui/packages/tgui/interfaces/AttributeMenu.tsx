@@ -287,8 +287,8 @@ interface AttributeModifier {
 }
 
 interface AttributeValues {
-  value: AttributeValue;
-  raw_value: AttributeValue;
+  base: AttributeValue;
+  net_modifier: number | null;
   trained?: boolean;
 }
 
@@ -331,8 +331,8 @@ interface AttributeFullMeta {
 
 interface CloselyInspectedDynamic {
   name: string;
-  value: AttributeValue;
-  raw_value: AttributeValue;
+  base: AttributeValue;
+  net_modifier: number | null;
   desc_from_level?: string;
   modifiers: AttributeModifier[];
 }
@@ -348,8 +348,8 @@ interface ResolvedSkillCategory {
 
 interface ResolvedInspectedAttribute extends Partial<AttributeFullMeta> {
   name: string;
-  value: AttributeValue;
-  raw_value: AttributeValue;
+  base: AttributeValue;
+  net_modifier: number | null;
   desc_from_level?: string;
   modifiers: AttributeModifier[];
 }
@@ -368,8 +368,8 @@ interface AttributeData {
 }
 
 const EMPTY_VALUES: AttributeValues = {
-  value: null,
-  raw_value: null,
+  base: null,
+  net_modifier: null,
   trained: false,
 };
 
@@ -378,6 +378,18 @@ type SizeMode = 'small' | 'half' | 'full';
 const SIZE_MODES: SizeMode[] = ['small', 'half', 'full'];
 const SIZE_MODE_STORAGE_KEY = 'attribute-menu-size-mode';
 const SMALL_SIZE: [number, number] = [1100, 700];
+
+const totalFromModifiers = (
+  base: AttributeValue | undefined,
+  modifiers: AttributeModifier[] | undefined,
+) => {
+  const modSum = (modifiers || []).reduce((sum, mod) => sum + mod.value, 0);
+  if (!isNumeric(base)) {
+    // Untrained: no base to add to, but a default can still stand on its own
+    return modSum !== 0 ? modSum : null;
+  }
+  return base + modSum;
+};
 
 const displayValue = (value: AttributeValue | undefined) => {
   if (value === null || value === undefined || value === '') {
@@ -389,20 +401,24 @@ const displayValue = (value: AttributeValue | undefined) => {
 const isNumeric = (value: AttributeValue | undefined): value is number =>
   typeof value === 'number' && Number.isFinite(value);
 
-const valueTone = (
-  value: AttributeValue | undefined,
-  raw: AttributeValue | undefined,
-) => {
-  if (!isNumeric(value) || !isNumeric(raw)) {
+const valueTone = (netModifier: AttributeValue | undefined) => {
+  if (!isNumeric(netModifier) || netModifier === 0) {
     return 'is-muted';
   }
-  if (value > raw) {
-    return 'is-buffed';
+  return netModifier > 0 ? 'is-buffed' : 'is-debuffed';
+};
+
+const ModifierBadge = (props: { netModifier: AttributeValue | undefined }) => {
+  const { netModifier } = props;
+  if (!isNumeric(netModifier) || netModifier === 0) {
+    return null;
   }
-  if (value < raw) {
-    return 'is-debuffed';
-  }
-  return 'is-muted';
+  const sign = netModifier > 0 ? `+${netModifier}` : `${netModifier}`;
+  return (
+    <Box as="span" className={`AttributeMenu__modifierBadge ${valueTone(netModifier)}`}>
+      {' '}({sign})
+    </Box>
+  );
 };
 
 const IconSprite = memo((props: { icon?: string; size: 'small' | 'big' }) => {
@@ -480,11 +496,9 @@ const AttributeSealNode = memo((props: {
         <Box as="span" className="AttributeMenu__sealNodeName">
           {statSealLabel(stat.name, stat.shorthand)}
         </Box>
-        <Box
-          as="span"
-          className={`AttributeMenu__sealNodeValue ${valueTone(stat.value, stat.raw_value)}`}
-        >
-          {displayValue(stat.value)}
+        <Box as="span" className="AttributeMenu__sealNodeValue">
+          {displayValue(stat.base)}
+          <ModifierBadge netModifier={stat.net_modifier} />
         </Box>
       </button>
     </Tooltip>
@@ -492,8 +506,8 @@ const AttributeSealNode = memo((props: {
 }, (previous, next) =>
   previous.selected === next.selected &&
   previous.stat.name === next.stat.name &&
-  previous.stat.value === next.stat.value &&
-  previous.stat.raw_value === next.stat.raw_value &&
+  previous.stat.base === next.stat.base &&
+  previous.stat.net_modifier === next.stat.net_modifier &&
   previous.stat.shorthand === next.stat.shorthand &&
   previous.top === next.top &&
   previous.left === next.left &&
@@ -585,8 +599,9 @@ const SkillEntry = memo((props: {
           <IconSprite icon={skill.icon} size="small" />
         </Box>
         <Box as="span" className="AttributeMenu__skillName">{skill.name}</Box>
-        <Box as="span" className={`AttributeMenu__value ${valueTone(skill.value, skill.raw_value)}`}>
-          {displayValue(skill.value)}
+        <Box as="span" className="AttributeMenu__value">
+          {displayValue(skill.base)}
+          <ModifierBadge netModifier={skill.net_modifier} />
         </Box>
       </button>
     </Tooltip>
@@ -594,8 +609,8 @@ const SkillEntry = memo((props: {
 }, (previous, next) =>
   previous.selected === next.selected &&
   previous.skill.name === next.skill.name &&
-  previous.skill.value === next.skill.value &&
-  previous.skill.raw_value === next.skill.raw_value &&
+  previous.skill.base === next.skill.base &&
+  previous.skill.net_modifier === next.skill.net_modifier &&
   previous.skill.icon === next.skill.icon &&
   previous.skill.difficulty === next.skill.difficulty &&
   previous.skill.desc === next.skill.desc);
@@ -745,7 +760,6 @@ const InspectionPanel = memo((props: {
   act: any;
 }) => {
   const { attribute, act } = props;
-
   if (!attribute) {
     return (
       <Section
@@ -767,7 +781,7 @@ const InspectionPanel = memo((props: {
       </Section>
     );
   }
-
+  const total = totalFromModifiers(attribute.base, attribute.modifiers);
   return (
     <Section
       fill
@@ -813,46 +827,56 @@ const InspectionPanel = memo((props: {
             )}
           </Stack.Item>
         </Stack>
-
-        <Box className="AttributeMenu__valueCard">
-          <Box as="span">Value</Box>
-          <strong className={valueTone(attribute.value, attribute.raw_value)}>
-            {displayValue(attribute.value)}
+         <Box className="AttributeMenu__valueCard">
+          <Box as="span">Total Value</Box>
+          <strong className={valueTone(attribute.net_modifier)}>
+            {displayValue(total)}
           </strong>
         </Box>
 
         <Box className="AttributeMenu__detailGrid">
-          <DetailLine label="Difficulty" value={attribute.difficulty || 'NA'} />
           <DetailLine label="Governing" value={attribute.governing_attribute || 'NA'} />
         </Box>
 
         {!!attribute.defaults?.length && (
           <section className="AttributeMenu__noteBlock">
-            <h3>Defaults To</h3>
-            {attribute.defaults.map((def) => {
+            <h3>Defaults To (highest applies, not combined)</h3>
+            {attribute.defaults.map((def, index) => {
               const mod = def.default_value ?? 0;
               const tone = mod >= 0 ? 'is-buffed' : 'is-debuffed';
               const sign = mod >= 0 ? `+${mod}` : `${mod}`;
               return (
-                <Tooltip
-                  key={def.name}
-                  position="bottom"
-                  content={`${def.name} sets a floor for this skill: its value plus this modifier, used when higher than your trained level.`}
-                >
-                  <button
-                    className="AttributeMenu__defaultRow"
-                    onClick={() => act('inspect_closely', { attribute_name: def.name })}
-                    type="button"
+                <>
+                  {index > 0 && (
+                    <Box as="span" className="AttributeMenu__defaultOr">or</Box>
+                  )}
+                  <Tooltip
+                    key={def.name}
+                    position="bottom"
+                    content={`Only the single highest of these applies — they are not added together. ${def.name}'s trained value, plus ${sign}, is compared against the others and against your own trained level.`}
                   >
-                    <IconSprite icon={def.icon} size="small" />
-                    <Box as="span">{def.name}</Box>
-                    <strong className={tone}>{sign}</strong>
-                  </button>
-                </Tooltip>
+                    <button
+                      className="AttributeMenu__defaultRow"
+                      onClick={() => act('inspect_closely', { attribute_name: def.name })}
+                      type="button"
+                    >
+                      <IconSprite icon={def.icon} size="small" />
+                      <Box as="span">{def.name}</Box>
+                      <strong className={tone}>{sign}</strong>
+                    </button>
+                  </Tooltip>
+                </>
               );
             })}
           </section>
         )}
+
+        <Box className="AttributeMenu__valueCard">
+          <Box as="span">Base Value</Box>
+          <strong>
+            {displayValue(attribute.base)}
+          </strong>
+        </Box>
 
         {!!attribute.modifiers?.length && (
           <section className="AttributeMenu__noteBlock">

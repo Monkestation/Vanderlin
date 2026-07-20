@@ -70,7 +70,8 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old
 
 	traits = list(
-		TRAIT_NOBLE_BLOOD
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/job/advclass/mercenary/sellmage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -102,7 +103,7 @@
 
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
-	shirt = /obj/item/clothing/armor/gambeson
+	shirt = /obj/item/clothing/armor/chainmail/hauberk/iron
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
