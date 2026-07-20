@@ -391,8 +391,8 @@
 /datum/special_trait/mastercraftsmen
 	name = "Master Craftsman"
 	greet_text = "In my youth, I've decided I'd get a grasp on every trade, and pursued the 10 arts of the craft."
-	req_text = "Middle-aged or Old"
-	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	req_text = "Middle-aged, Old, Or Immortal"
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	weight = 100
 
 /datum/special_trait/mastercraftsmen/on_apply(mob/living/carbon/human/character)
@@ -437,6 +437,7 @@
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
 	ADD_TRAIT(character, TRAIT_NOSLEEP, "[type]") // can't learn any new skills
 	ADD_TRAIT(character, TRAIT_NOENERGY, "[type]")
+	ADD_TRAIT(character, TRAIT_NOHUNGER, "[type]")
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/burdened_one)
 	character.cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'  // has a burdened vibe to it
 
