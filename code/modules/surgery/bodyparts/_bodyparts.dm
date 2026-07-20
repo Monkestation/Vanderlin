@@ -386,6 +386,7 @@
 	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
 	ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
 
+	// If we were already rotten, no need to update
 	if(was_rotten)
 		return
 
@@ -393,11 +394,10 @@
 	update_icon_dropped()
 
 /obj/item/bodypart/proc/revive_limb(update_icon = FALSE)
-	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
 	REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
 
-	// If it was rotten no need to update
-	if(was_rotten)
+	// If it still is rotten, no need to update
+	if(HAS_TRAIT(src, TRAIT_ROTTEN))
 		return
 
 	if(owner && update_icon)
