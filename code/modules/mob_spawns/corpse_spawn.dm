@@ -26,7 +26,7 @@
 	. = ..()
 	spawned_mob.death(TRUE)
 	spawned_mob.adjustOxyLoss(oxy_damage)
-	spawned_mob.adjustBruteLoss(brute_damage)
+	spawned_mob.adjustBruteLoss(brute_damage, damage_type = pick(BCLASS_BITE, BCLASS_BLUNT, BCLASS_LASHING, BCLASS_CUT))
 	spawned_mob.adjustFireLoss(burn_damage)
 
 /obj/effect/mob_spawn/corpse/create(mob/mob_possessor, newname)

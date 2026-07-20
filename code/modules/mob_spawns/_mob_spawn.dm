@@ -11,9 +11,6 @@
 	var/mob_name
 	///the type of the mob, you best inherit this
 	var/mob_type = /mob/living/simple_animal/pet/cat/black
-	///Lazy string list of factions that the spawned mob will be in upon spawn
-	var/list/faction
-	///Weakref to spawned mob
 
 	//Human specific stuff. Don't set these if you aren't using a human, the unit tests will put a stop to your sinful hand.
 
@@ -77,7 +74,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(faction)
-		spawned_mob.faction = faction
+		spawned_mob.set_faction(faction)
 
 	if(!ishuman(spawned_mob))
 		return
@@ -92,7 +89,6 @@
 
 	if(randomise_dna && spawned_human.dna?.species)
 		spawned_human.dna.species.random_character(spawned_human)
-		return
 
 /obj/effect/mob_spawn/proc/name_mob(mob/living/spawned_mob, forced_name)
 	var/chosen_name
