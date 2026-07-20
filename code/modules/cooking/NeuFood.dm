@@ -180,13 +180,12 @@
 
 /obj/item/reagent_containers/glass/bowl/examine(mob/user)
 	. = ..()
-	desc = initial(desc)
 	if(dirty)
-		desc += span_boldwarning("\nThis bowl is filthy... absolutely disgusting.")
+		. += span_boldwarning("This bowl is filthy... absolutely disgusting.")
 	else if(cleaned)
-		desc += span_notice("\nThis bowl was cleaned recently!")
+		. += span_notice("This bowl was cleaned recently!")
 	else
-		desc += "\nThis bowl looks properly stored and clean enough."
+		. += span_notice("This bowl looks clean enough.")
 
 /obj/item/reagent_containers/glass/bowl/update_overlays()
 	. = ..()
