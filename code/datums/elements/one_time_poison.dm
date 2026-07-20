@@ -1,5 +1,5 @@
 /datum/element/one_time_poison
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
 /datum/element/one_time_poison/Attach(atom/movable/target, list/reagent_list)
 	. = ..()
@@ -11,11 +11,11 @@
 		target.create_reagents(1)
 	target.reagents.add_reagent_list(reagent_list)
 	RegisterSignal(target, COMSIG_ITEM_ATTACK_EFFECT_SELF, PROC_REF(try_inject))
-	RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/element/one_time_poison/Detach(datum/source, force)
 	. = ..()
-	UnregisterSignal(source, list(COMSIG_ITEM_ATTACK_EFFECT_SELF, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(source, list(COMSIG_ITEM_ATTACK_EFFECT_SELF, COMSIG_ATOM_EXAMINE))
 
 /datum/element/one_time_poison/proc/try_inject(obj/item/source, mob/user, obj/item/bodypart/affecting, intent, mob/living/victim, selzone)
 	var/reagentlog2 = source.reagents

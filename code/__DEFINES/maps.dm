@@ -29,6 +29,7 @@ require only minor tweaks.
 // boolean - marks a level as having that property if present
 #define ZTRAIT_CENTCOM "CentCom"
 #define ZTRAIT_STATION "Station"
+#define ZTRAIT_TOWN "Town" // The town's z levels
 #define ZTRAIT_MINING "Mining"
 #define ZTRAIT_RESERVED "Transit/Reserved"
 #define ZTRAIT_AWAY "Away Mission"
@@ -69,7 +70,7 @@ require only minor tweaks.
 // default trait definitions, used by SSmapping
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
 #define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE, ZTRAIT_LEYLINES = TRUE)
-#define ZTRAITS_TOWN list(ZTRAIT_WEATHER_STUFF = TRUE, ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
+#define ZTRAITS_TOWN list(ZTRAIT_WEATHER_STUFF = TRUE, ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE, ZTRAIT_TOWN = TRUE)
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
 #define ZTRAITS_LAVALAND list(\
 	ZTRAIT_MINING = TRUE, \

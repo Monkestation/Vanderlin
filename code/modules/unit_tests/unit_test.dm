@@ -13,7 +13,6 @@ You can use the run_loc_bottom_left and run_loc_top_right to get turfs for testi
 
 GLOBAL_DATUM(current_test, /datum/unit_test)
 GLOBAL_VAR_INIT(failed_any_test, FALSE)
-GLOBAL_VAR(test_log)
 /// When unit testing, all logs sent to log_mapping are stored here and retrieved in log_mapping unit test.
 GLOBAL_LIST_EMPTY(unit_test_mapping_logs)
 
@@ -153,11 +152,16 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/obj/effect/fuse,
 		///shit that calls explosion() should probably not be called in empty space
 		/obj/effect/temp_visual/target/meteor,
-		/obj/structure/meatvine/papameat,
 		/obj/effect/meatvine_controller,
+		//Single use case holder atom requiring a user
+		/atom/movable/looking_holder,
 	)
+	/// ???
+	ignore += typesof(/obj/effect/bombard_zone)
+	/// Spawns a lot of shit
+	ignore += typesof(/obj/structure/meatvine)
 	///this does some wonky things that we don't want in a test area
-	ignore += typesof(/obj/structure/stockpile_storage,)
+	ignore += typesof(/obj/structure/stockpile_storage)
 	//these are VERY situational and need info passed
 	ignore += typesof(/obj/effect/abstract)
 	//needs a lich passed
@@ -172,7 +176,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	//We have a baseturf limit of 10, adding more than 10 baseturf helpers will kill CI, so here's a future edge case to fix.
 	ignore += typesof(/obj/effect/baseturf_helper)
 	//Expects a mob to holderize, we have nothing to give
-	ignore += typesof(/obj/item/clothing/head/mob_holder)
+	ignore += typesof(/obj/item/mob_holder)
 	//Needs cards passed into the initilazation args
 	ignore += typesof(/obj/item/toy/cards/cardhand)
 	//needs multiple atoms passed
@@ -193,8 +197,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 
 	var/list/tests_to_run = subtypesof(/datum/unit_test)
 	var/list/focused_tests = list()
-	for(var/_test_to_run in tests_to_run)
-		var/datum/unit_test/test_to_run = _test_to_run
+	for(var/datum/unit_test/test_to_run as anything in tests_to_run)
 		if (initial(test_to_run.focus))
 			focused_tests += test_to_run
 	if(length(focused_tests))

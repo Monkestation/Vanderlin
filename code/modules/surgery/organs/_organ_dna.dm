@@ -26,7 +26,6 @@
 
 /datum/organ_dna/eyes
 	var/eye_color = "#FFFFFF"
-	var/heterochromia = FALSE
 	var/second_color = "#FFFFFF"
 
 /datum/organ_dna/eyes/imprint_organ(obj/item/organ/organ, datum/species/species)
@@ -36,6 +35,7 @@
 	else
 		..()
 	var/obj/item/organ/eyes/eyes_organ = organ
-	eyes_organ.eye_color = eye_color
-	eyes_organ.heterochromia  = heterochromia
-	eyes_organ.second_color = second_color
+	if(eyes_organ.side == RIGHT_SIDE)
+		eyes_organ.eye_color = eye_color
+	else
+		eyes_organ.eye_color = second_color

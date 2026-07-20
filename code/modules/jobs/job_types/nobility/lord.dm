@@ -1,8 +1,54 @@
 GLOBAL_VAR(lordsurname)
 GLOBAL_LIST_EMPTY(lord_titles)
 
+/datum/attribute_holder/sheet/job/lord
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 5,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+/datum/attribute_holder/sheet/job/lord/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 5,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
 /datum/job/lord
-	title = "Monarch"
+	title = JOB_MONARCH
 	var/ruler_title = "Monarch"
 	tutorial = "Elevated to your throne through a web of intrigue, political maneuvering, and divine sanction, you are the \
 	unquestioned authority of these lands. The Church has bestowed upon you the legitimacy of the gods themselves, and now \
@@ -19,7 +65,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/action/cooldown/spell/undirected/list_target/grant_title,
 		/datum/action/cooldown/spell/undirected/list_target/grant_nobility,
 	)
-	allowed_races = RACES_PLAYER_ROYALTY
+	allowed_races = RACES_PLAYER_MONARCH
 	outfit = /datum/outfit/lord
 	bypass_lastclass = TRUE
 	give_bank_account = 500
@@ -35,36 +81,21 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		EXP_TYPE_LEADERSHIP = 300
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 3,
-		STATKEY_END = 3,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/lord
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/lord/old
 
-	skills = list(
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/labor/mathematics = 3
-	)
+	//These change on map load
+	honorary = "Lord"
+	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
-		TRAIT_KNOW_KEEP_DOORS
+		TRAIT_KNOW_KEEP_DOORS,
+		TRAIT_KNOWCOURTAGENTS
 	)
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
@@ -72,7 +103,15 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 	voicepack_m = /datum/voicepack/male/evil
 
-/datum/job/lord/get_informed_title(mob/mob, change_title = FALSE, new_title)
+/datum/job/lord/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = SSmapping.config.monarch_title
+		honorary_f = SSmapping.config.monarch_title //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = SSmapping.config.monarch_title_f
+
+/datum/job/lord/get_informed_title(mob/mob, ignore_pronouns, change_title = FALSE, new_title)
 	if(change_title)
 		ruler_title = new_title
 		return "[ruler_title]"
@@ -98,19 +137,35 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	to_chat(world, "<b>[span_notice(span_big("[spawned.real_name] is [ruler_title] of [SSmapping.config.map_name]."))]</b>")
 	to_chat(world, "<br>")
 
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
+	if(player_client?.prefs)
+		var/datum/preferences/prefs = player_client.prefs
+
+		var/list/laws = prefs.read_preference(/datum/preference/list_type/role_setting/monarch_law)
+		if(length(laws))
+			GLOB.laws_of_the_land = list()
+		for(var/law in laws)
+			law = trim(law)
+			GLOB.laws_of_the_land += trim(law)
+
+
+		var/list/decrees = prefs.read_preference(/datum/preference/list_type/role_setting/monarch_decree)
+		if(length(decrees))
+			GLOB.lord_decrees = list()
+		for(var/decree in decrees)
+			decree = trim(decree)
+			GLOB.lord_decrees += trim(decree)
+
 /datum/outfit/lord
-	name = "Monarch"
+	name = JOB_MONARCH
 	head = /obj/item/clothing/head/crown/serpcrown
 	backr = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquegold
-	beltl = /obj/item/weapon/knife/dagger/steel/special
+	beltl = /obj/item/weapon/knife/dagger/steel/royal
 	beltr = /obj/item/weapon/sword/rapier
+	shoes = /obj/item/clothing/shoes/nobleboot
 	scabbards = list(/obj/item/weapon/scabbard/knife/royal, /obj/item/weapon/scabbard/sword/royal)
 	ring = /obj/item/clothing/ring/active/nomag
 	l_hand = /obj/item/weapon/lordscepter
@@ -133,12 +188,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		pants = /obj/item/clothing/pants/trou/formal
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		armor = /obj/item/clothing/armor/gambeson/arming
-		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak
 	else
 		pants = /obj/item/clothing/pants/tights/colored/random
 		armor = /obj/item/clothing/shirt/dress/royal
-		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak/ladycloak
 		wrists = /obj/item/clothing/wrists/royalsleeves
 
@@ -157,16 +210,14 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_LORD
+	honorary = "Former Lord"
+	honorary_f = "Former Lady"
 
-/proc/give_lord_surname(mob/living/carbon/human/family_guy, preserve_original = FALSE)
-	if(!GLOB.lordsurname)
-		return
-	if(preserve_original)
-		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
-		return family_guy.real_name
-	var/list/chopped_name = splittext(family_guy.real_name, " ")
-	if(length(chopped_name) > 1)
-		family_guy.fully_replace_character_name(family_guy.real_name, chopped_name[1] + " " + GLOB.lordsurname)
-	else
-		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
-	return family_guy.real_name
+/datum/job/exlord/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = "Former [SSmapping.config.monarch_title]"
+		honorary_f = "Former [SSmapping.config.monarch_title]" //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = "Former [SSmapping.config.monarch_title_f]"
+

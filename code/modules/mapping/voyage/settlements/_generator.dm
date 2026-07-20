@@ -244,7 +244,7 @@
 		if(isclosedturf(turf) || isopenspace(turf))
 			for(var/obj/structure/flora/structure in turf.contents)
 				qdel(structure)
-			for(var/mob/living/mob in turf.contents)
+			for(var/mob/living/mob in turf)
 				var/turf/step_turf = turf
 				while(isclosedturf(step_turf) || isopenspace(step_turf))
 					step_turf = get_step(step_turf, NORTH)

@@ -1,6 +1,5 @@
 /datum/unit_test/subsystem_init/Run()
-	for(var/i in Master.subsystems)
-		var/datum/controller/subsystem/ss = i
+	for(var/datum/controller/subsystem/ss as anything in Master.subsystems)
 		if(ss.flags & SS_NO_INIT)
 			continue
 		if(!ss.initialized)

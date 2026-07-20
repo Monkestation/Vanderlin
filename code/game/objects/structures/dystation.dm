@@ -29,16 +29,15 @@
 		/obj/item/dye_pack/mage,
 	)
 
-/obj/structure/dye_bin/deconstruct(disassembled)
+/obj/structure/dye_bin/atom_deconstruct(disassembled)
 	visible_message( \
 		span_warning("[src] falls over, spilling out [p_their()] contents!"), \
 		null, \
 		span_warning("Something was knocked over!")
 	)
-	new /obj/effect/decal/cleanable/dyes(get_turf(src))
+	new /obj/effect/decal/cleanable/dyes(loc)
 	var/obj/item/bin/I = new(loc)
 	I.kover = TRUE
-	return ..()
 
 /obj/structure/dye_bin/Initialize(mapload, obj/item/dye_pack/inserted_pack)
 	. = ..()
@@ -56,7 +55,7 @@
 	selectable_colors |= new_pack.selectable_colors
 	qdel(new_pack)
 
-/obj/structure/dye_bin/attackby(obj/item/I, mob/living/user)
+/obj/structure/dye_bin/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/dye_pack))
 		. = TRUE
 		var/obj/item/dye_pack/pack = I
@@ -70,7 +69,7 @@
 		return
 
 
-	if(!(I.sewrepair || I.dyeable)) // ????
+	if(!(I.dyeable)) // ????
 		if(I.force < 8) // ?????????
 			to_chat(user, span_warning("I do not think \the [I] can be dyed this way."))
 		return ..()
@@ -82,7 +81,7 @@
 		if(!allow_mobs)
 			to_chat(user, span_warning("I could not fit [I] into [src]."))
 			return
-		var/obj/item/clothing/head/mob_holder/fellow = I
+		var/obj/item/mob_holder/fellow = I
 		fellow.release() //is this not a bug?
 
 	if(inserted)
@@ -100,10 +99,7 @@
 	icon_state = "dye_bin_full"
 	updateUsrDialog()
 
-/obj/structure/dye_bin/attack_hand(mob/living/user)
-	ui_interact(user)
-
-/obj/structure/dye_bin/ui_interact(mob/living/user)
+/obj/structure/dye_bin/interact(mob/living/user)
 	var/list/dat = list("<STYLE> * {text-align: center;} </STYLE>")
 	if(!inserted)
 		dat += "No item inserted."
@@ -201,7 +197,7 @@
 		span_warning("I hear a loud bang!") \
 	)
 
-	if(prob(user.STASTR * 8))
+	if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 		deconstruct(FALSE)
 
 /*	.................   Dyes   ................... */

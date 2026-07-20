@@ -30,14 +30,15 @@
 
 	return ..()
 
-/datum/dna/proc/transfer_identity(mob/living/carbon/destination, update_prints)
+/datum/dna/proc/transfer_identity(mob/living/carbon/destination, set_species=TRUE)
 	if(!istype(destination))
 		return
 	destination.dna.unique_enzymes = unique_enzymes
 	destination.dna.unique_identity = unique_identity
 	destination.dna.human_blood_type = human_blood_type
 	destination.dna.organ_dna = organ_dna
-	destination.set_species(species.type, icon_update=0)
+	if(set_species)
+		destination.set_species(species.type, icon_update=0)
 	destination.dna.body_markings = deepCopyList(body_markings)
 	destination.dna.features = features.Copy()
 	destination.dna.real_name = real_name
@@ -65,7 +66,7 @@
 	if(ishuman(holder))
 		var/mob/living/carbon/human/H = holder
 		L[DNA_SKIN_TONE_BLOCK] = H.skin_tone
-		L[DNA_EYE_COLOR_BLOCK] = H.get_eye_color()
+		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.get_eye_color(), include_crunch = FALSE, default="FFFFFF")
 
 	for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
 		if(L[i])
@@ -137,8 +138,7 @@
 		else
 			stored_dna.species = mrace //not calling any species update procs since we're a brain, not a monkey/human
 
-
-/mob/living/carbon/set_species(datum/species/species, icon_update = TRUE, datum/preferences/pref_load = null)
+/mob/living/carbon/set_species(datum/species/species, icon_update = TRUE, datum/preferences/pref_load = null, initial_set = FALSE)
 	if(!species || !has_dna())
 		return
 
@@ -151,22 +151,21 @@
 		return
 
 	deathsound = new_race.deathsound
-	dna.species.on_species_loss(src, new_race, pref_load)
+	if(!initial_set)
+		dna.species.on_species_loss(src, new_race, pref_load)
 
 	var/datum/species/old_species = dna.species
 	dna.species = new_race
-
 	//BODYPARTS AND FEATURES
 	if(pref_load)
 		dna.features = pref_load.features.Copy()
 		dna.body_markings = deepCopyList(pref_load.body_markings)
-
 	dna.species.on_species_gain(src, old_species, pref_load)
 
-/mob/living/carbon/human/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null)
+/mob/living/carbon/human/set_species(datum/species/species, icon_update = TRUE, datum/preferences/pref_load = null, initial_set = FALSE)
 	if(pref_load)
-		skin_tone = pref_load.skin_tone
-	..()
+		skin_tone = pref_load.read_preference(/datum/preference/choiced/skin_tone)
+	. = ..()
 	if(icon_update)
 		update_body()
 		update_body_parts(TRUE)
@@ -205,9 +204,11 @@
 
 /mob/living/carbon/proc/create_dna()
 	dna = new /datum/dna(src)
+	if(race)
+		dna.species = new race()
 	if(!dna.species)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species())]
-		set_species(new rando_race(), FALSE)
+		var/datum/species/random_species = GLOB.species_list[pick(GLOB.roundstart_species)]
+		set_species(random_species, TRUE)
 
 //proc used to update the mob's appearance after its dna UI has been changed
 /mob/living/carbon/proc/updateappearance(icon_update=1, mutcolor_update=0, mutations_overlay_update=0)

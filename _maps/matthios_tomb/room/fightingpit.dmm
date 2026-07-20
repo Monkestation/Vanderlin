@@ -104,7 +104,7 @@
 /area/under/tomb)
 "sz" = (
 /obj/machinery/light/fueled/firebowl/standing,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "sC" = (
 /obj/structure/chair/wood/alt/fancy{
@@ -271,7 +271,7 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb)
 "VO" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "VV" = (
 /turf/open/floor/ruinedwood,

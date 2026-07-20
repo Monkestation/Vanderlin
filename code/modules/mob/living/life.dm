@@ -1,5 +1,6 @@
 /mob/living/proc/Life(seconds, times_fired)
 	set waitfor = FALSE
+	SHOULD_NOT_SLEEP(TRUE)
 
 	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds, times_fired)
 
@@ -11,7 +12,7 @@
 		if(!T)
 			var/msg = "[ADMIN_LOOKUPFLW(src)] was found to have no .loc with an attached client, if the cause is unknown it would be wise to ask how this was accomplished."
 			message_admins(msg)
-			send2irc_adminless_only("Mob", msg, R_ADMIN)
+			INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(send2irc_adminless_only), "Mob", msg, R_ADMIN)
 			log_game("[key_name(src)] was found to have no .loc with an attached client.")
 
 		// This is a temporary error tracker to make sure we've caught everything
@@ -21,9 +22,6 @@
 #endif
 			log_game("Z-TRACKING: [src] has somehow ended up in Z-level [T.z] despite being registered in Z-level [registered_z].")
 			update_z(T.z)
-	else if (registered_z)
-		log_game("Z-TRACKING: [src] of type [src.type] has a Z-registration despite not having a client.")
-		update_z(null)
 
 	if(isnull(loc) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -31,7 +29,6 @@
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
 		//Breathing, if applicable
 		handle_temperature()
-		handle_breathing(times_fired)
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 			handle_wounds()
 			handle_embedded_objects()
@@ -49,7 +46,7 @@
 		if(!stat && HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
 			handle_wounds()
 			//passively heal wounds, but not if you're skullcracked OR DEAD.
-			if(blood_volume > BLOOD_VOLUME_SURVIVE)
+			if(!CAN_HAVE_BLOOD(src) || get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in get_wounds())
 					wound.heal_wound(wound.passive_healing * 0.25)
 
@@ -69,12 +66,12 @@
 
 	handle_typing_indicator()
 
-	if(istype(loc, /turf/open/water))
-		handle_inwater(loc)
-
 	if(!client && (world.time - last_island_check) > 20 SECONDS)
 		last_island_check = world.time
 		update_island_cache()
+
+	if (living_flags & BLOOD_UPDATE_QUEUED)
+		update_blood_effects()
 
 	if(stat != DEAD)
 		return 1
@@ -121,30 +118,26 @@
 /mob/living/proc/handle_temperature()
 	return
 
-/mob/living/proc/handle_breathing(times_fired)
-	return
-
 /mob/living/proc/handle_random_events()
 	//random painstun
-	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN) || !can_feel_pain())
 		return
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return
-	if((getBruteLoss() + getFireLoss()) < (STAEND * 10))
+	if((getBruteLoss() + getFireLoss()) < (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))
 		return
 
-	var/probby = 53 - (STAEND * 2)
+	var/probby = 53 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)
 	if(body_position == LYING_DOWN)
 		probby = probby - 20
 	if(prob(probby))
 		MOBTIMER_SET(src, MT_PAINSTUN)
 		Immobilize(10)
-		emote("painscream")
+		INVOKE_ASYNC(src, PROC_REF(emote), "painscream")
 		visible_message("<span class='warning'>[src] freezes in pain!</span>",
 					"<span class='warning'>I'm frozen in pain!</span>")
-		sleep(10)
-		Stun(110)
-		Knockdown(110)
+		addtimer(CALLBACK(src, PROC_REF(Stun), 11 SECONDS), 1 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(Knockdown), 1 SECONDS, 1 SECONDS))
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
@@ -196,8 +189,7 @@
 /mob/living/proc/get_fullness()
 	var/fullness = nutrition
 	// we add the nutrition value of what we're currently digesting
-	for(var/bile in reagents.reagent_list)
-		var/datum/reagent/consumable/bits = bile
+	for(var/datum/reagent/consumable/bits in reagents.reagent_list)
 		if(bits)
 			fullness += bits.nutriment_factor * bits.volume / bits.metabolization_rate
 	return fullness

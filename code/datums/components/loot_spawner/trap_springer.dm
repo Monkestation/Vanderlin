@@ -13,11 +13,11 @@
 
 /datum/component/trap_springer/RegisterWithParent()
 	. = ..()
-	RegisterSignal(parent, COMSIG_PARENT_TRAP_TRIGGERED, PROC_REF(trap_triggered))
+	RegisterSignal(parent, COMSIG_TRAP_TRIGGERED, PROC_REF(trap_triggered))
 
 /datum/component/trap_springer/UnregisterFromParent()
 	. = ..()
-	UnregisterSignal(parent, COMSIG_PARENT_TRAP_TRIGGERED)
+	UnregisterSignal(parent, COMSIG_TRAP_TRIGGERED)
 
 /datum/component/trap_springer/proc/trap_triggered(mob/living/triggerer)
 	if(!prob(trap_chance))

@@ -1,0 +1,2 @@
+/turf/open/transparent/openspace : /turf/open/openspace
+/turf/closed/transparent : /turf/closed

@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/vigor
 	name = "Vigor"
 	desc = "Increases physical strength and endurance temporarily."
-	button_icon_state = "vigor"
+	button_icon_state = "bat_transform"
 	cast_range = 1
 	point_cost = 4
 	attunements = list(/datum/attunement/life)
+	essences = list(/datum/thaumaturgical_essence/life)
 
 /datum/action/cooldown/spell/essence/vigor/cast(atom/cast_on)
 	. = ..()
@@ -24,17 +25,17 @@
 	id = "vigor"
 	alert_type = /atom/movable/screen/alert/status_effect/vigor
 	duration = 60 SECONDS
-	effectedstats = list(STATKEY_STR = 1, STATKEY_END = 1)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 1)
 
 /datum/status_effect/buff/vigor/on_apply()
 	. = ..()
 	if(isliving(owner))
 		var/mob/living/L = owner
 		L.adjust_stamina(50)
-		ADD_TRAIT(owner, TRAIT_STRONG_GRABBER, MAGIC_TRAIT)
+		ADD_TRAIT(owner, TRAIT_STRONG_GRABBER, TRAIT_STATUS_EFFECT(id))
 		to_chat(owner, span_notice("You feel invigorated with supernatural strength."))
 
 /datum/status_effect/buff/vigor/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_STRONG_GRABBER, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_STRONG_GRABBER, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("The supernatural vigor fades."))

@@ -4,7 +4,11 @@
 #define SEND_SOUND(target, sound) DIRECT_OUTPUT(target, sound)
 #define SEND_TEXT(target, text) DIRECT_OUTPUT(target, text)
 #define WRITE_FILE(file, text) DIRECT_OUTPUT(file, text)
-#define WRITE_LOG(log, text) text2file(text,log) //rustg_log_write
+
+//This is an external call, "true" and "false" are how rust parses out booleans
+#define WRITE_LOG(log, text) rustg_log_write(log, text, "true")
+#define WRITE_LOG_NO_FORMAT(log, text) rustg_log_write(log, text, "false")
+
 #define TIMETOTEXT4LOGS time2text(world.timeofday,"hh:mm:ss")
 //print a warning message to world.log
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [UNLINT(src)] usr: [usr].")
@@ -31,7 +35,7 @@
 	SEND_TEXT(world.log, text)
 #endif
 
-#if defined(REFERENCE_DOING_IT_LIVE)
+#if defined(REFERENCE_TRACKING_LOG_APART)
 #define log_reftracker(msg) log_harddel("## REF SEARCH [msg]")
 
 /proc/log_harddel(text)
@@ -78,10 +82,6 @@
 	if (CONFIG_GET(flag/log_virus))
 		WRITE_LOG(GLOB.world_virus_log, "\[[TIMETOTEXT4LOGS]\] VIRUS: [text]")
 
-/proc/log_cloning(text, mob/initiator)
-	if(CONFIG_GET(flag/log_cloning))
-		WRITE_LOG(GLOB.world_cloning_log, "\[[TIMETOTEXT4LOGS]\] CLONING: [text]")
-
 /proc/log_paper(text)
 	WRITE_LOG(GLOB.world_paper_log, "\[[TIMETOTEXT4LOGS]\] PAPER: [text]")
 
@@ -103,6 +103,10 @@
 /proc/log_manifest(ckey, datum/mind/mind,mob/body, latejoin = FALSE)
 	if(CONFIG_GET(flag/log_manifest))
 		WRITE_LOG(GLOB.world_manifest_log, "\[[TIMETOTEXT4LOGS]\] [ckey] \\ [body.real_name] \\ [mind.assigned_role.title] \\ [mind.special_role ? mind.special_role : "NONE"] \\ [latejoin ? "LATEJOIN":"ROUNDSTART"]")
+
+/proc/log_quest(ckey, datum/mind/mind, mob/body, text)
+	if (CONFIG_GET(flag/log_law))
+		WRITE_LOG(GLOB.world_game_log, "\[[TIMETOTEXT4LOGS]] QUEST: [ckey] \\ [body.real_name] \\ [text]")
 
 /proc/log_bomber(atom/user, details, atom/bomb, additional_details, message_admins = TRUE)
 	var/bomb_message = "\[[TIMETOTEXT4LOGS]\] [details][bomb ? " [bomb.name] at [AREACOORD(bomb)]": ""][additional_details ? " [additional_details]" : ""]."
@@ -215,10 +219,43 @@
 /proc/log_hunted(text)
 	WRITE_LOG(GLOB.hunted_log, text)
 
-/* ui logging */
+/// Logging for game performance
+/proc/log_perf(list/perf_info)
+	. = "[perf_info.Join(",")]\n"
+	WRITE_LOG_NO_FORMAT(GLOB.perf_log, .)
 
-/proc/log_tgui(text)
-	WRITE_LOG(GLOB.tgui_log, text)
+/* ui logging */
+/**
+ * Appends a tgui-related log entry. All arguments are optional.
+ */
+/proc/log_tgui(user, message, context,
+		datum/tgui_window/window,
+		datum/src_object)
+	var/entry = ""
+	// Insert user info
+	if(!user)
+		entry += "<nobody>"
+	else if(istype(user, /mob))
+		var/mob/mob = user
+		entry += "[mob.ckey] (as [mob] at [mob.x],[mob.y],[mob.z])"
+	else if(istype(user, /client))
+		var/client/client = user
+		entry += "[client.ckey]"
+	// Insert context
+	if(context)
+		entry += " in [context]"
+	else if(window)
+		entry += " in [window.id]"
+	// Resolve src_object
+	if(!src_object && window?.locked_by)
+		src_object = window.locked_by.src_object
+	// Insert src_object info
+	if(src_object)
+		entry += "\nUsing: [src_object.type] [REF(src_object)]"
+	// Insert message
+	if(message)
+		entry += "\n[message]"
+	WRITE_LOG(GLOB.tgui_log, entry)
 
 /proc/log_storyteller(text, list/data)
 	WRITE_LOG(GLOB.world_game_log, "STORYTELLERS: [text]")

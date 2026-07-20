@@ -23,7 +23,7 @@
 	icon_state = "nboard0[notices]"
 
 //attaching papers!!
-/obj/structure/noticeboard/attackby(obj/item/O, mob/user, params)
+/obj/structure/noticeboard/attackby(obj/item/O, mob/user, list/modifiers)
 	if(istype(O, /obj/item/paper))
 		if(notices < 5)
 			if(!user.transferItemToLoc(O, src))
@@ -37,9 +37,6 @@
 		return ..()
 
 /obj/structure/noticeboard/interact(mob/user)
-	ui_interact(user)
-
-/obj/structure/noticeboard/ui_interact(mob/user)
 	. = ..()
 	var/auth = TRUE
 	var/dat = "<B>[name]</B><BR>"

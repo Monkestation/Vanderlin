@@ -219,6 +219,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 			pois[avoid_assoc_duplicate_keys(A.name, namecounts)] = A
 
 	return pois
+
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
@@ -304,14 +305,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 			assembled += A
 	return assembled
 
-/proc/is_blocked_turf(turf/T, exclude_mobs)
-	if(T.density)
-		return 1
-	for(var/atom/A as anything in T)
-		if(A.density && (!exclude_mobs || !ismob(A)))
-			return 1
-	return 0
-
 /proc/is_anchored_dense_turf(turf/T) //like the older version of the above, fails only if also anchored
 	if(T.density)
 		return 1
@@ -329,7 +322,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/base_dir = get_dir(ref, get_step_towards(ref,trg))
 	var/turf/temp = get_step_towards(ref,trg)
 
-	if(is_blocked_turf(temp))
+	if(temp.is_blocked_turf())
 		var/dir_alt1 = turn(base_dir, 90)
 		var/dir_alt2 = turn(base_dir, -90)
 		var/turf/turf_last1 = temp
@@ -338,10 +331,10 @@ Turf and target are separate in case you want to teleport some distance from a t
 		var/breakpoint = 0
 
 		while(!free_tile && breakpoint < 10)
-			if(!is_blocked_turf(turf_last1))
+			if(!turf_last1.is_blocked_turf())
 				free_tile = turf_last1
 				break
-			if(!is_blocked_turf(turf_last2))
+			if(!turf_last2.is_blocked_turf())
 				free_tile = turf_last2
 				break
 			turf_last1 = get_step(turf_last1,dir_alt1)
@@ -355,14 +348,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 
 	else
 		return get_step(ref, base_dir)
-
-//Takes: Anything that could possibly have variables and a varname to check.
-//Returns: 1 if found, 0 if not.
-/proc/hasvar(datum/A, varname)
-	if(A.vars.Find(lowertext(varname)))
-		return 1
-	else
-		return 0
 
 //Repopulates sortedAreas list
 /proc/require_area_resort()
@@ -674,14 +659,6 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 /proc/stack_trace(msg)
 	CRASH(msg)
 
-GLOBAL_REAL_VAR(list/stack_trace_storage)
-/proc/gib_stack_trace()
-	stack_trace_storage = list()
-	stack_trace()
-	stack_trace_storage.Cut(1, min(3,stack_trace_storage.len))
-	. = stack_trace_storage
-	stack_trace_storage = null
-
 //Key thing that stops lag. Cornerstone of performance in ss13, Just sitting here, in unsorted.dm.
 
 //Increases delay as the server gets more overloaded,
@@ -892,7 +869,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 /proc/get_random_food()
 	var/list/blocked = list(
-		/obj/item/reagent_containers/food/snacks/store,
 		/obj/item/reagent_containers/food/snacks/grown,
 		)
 
@@ -982,8 +958,8 @@ GLOBAL_LIST_INIT(ITEM_DOES_NOT_GENERATE_VAULT_RENT, typecacheof(list(
 
 //Vars that will not be copied when using /DuplicateObject
 GLOBAL_LIST_INIT(duplicate_forbidden_vars,list(
-	"tag", "datum_components", "area", "type", "loc", "locs", "vars", "parent", "parent_type", "verbs", "ckey", "key",
-	"power_supply", "contents", "reagents", "stat", "x", "y", "z", "group", "atmos_adjacent_turfs", "comp_lookup"
+	"tag", "_datum_components", "area", "type", "loc", "locs", "vars", "parent", "parent_type", "verbs", "ckey", "key",
+	"power_supply", "contents", "reagents", "stat", "x", "y", "z", "group", "atmos_adjacent_turfs", "_listen_lookup", "_signal_procs",
 	))
 
 /proc/DuplicateObject(atom/original, perfectcopy = TRUE, sameloc, atom/newloc = null, nerf, holoitem)

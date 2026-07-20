@@ -6,14 +6,17 @@
 #define AB_CHECK_LYING (1 << 2)
 ///Action button checks if user is conscious
 #define AB_CHECK_CONSCIOUS (1 << 3)
+///Action button checks if user is incapacitated
+#define AB_CHECK_INCAPACITATED (1<<4)
 ///Action button checks if user is phasing
-#define AB_CHECK_PHASED (1 << 4)
+#define AB_CHECK_PHASED (1 << 5)
 
 DEFINE_BITFIELD(check_flags, list(
 	"CHECK IF HANDS BLOCKED" = AB_CHECK_HANDS_BLOCKED,
 	"CHECK IF IMMOBILIZED" = AB_CHECK_IMMOBILE,
 	"CHECK IF LYING DOWN" = AB_CHECK_LYING,
 	"CHECK IF CONSCIOUS" = AB_CHECK_CONSCIOUS,
+	"CHECK IF INCAPACITATED" = AB_CHECK_INCAPACITATED,
 	"CHECK IF TEMPORARILY INCORPOREAL" = AB_CHECK_PHASED,
 ))
 

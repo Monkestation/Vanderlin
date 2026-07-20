@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	new_lift_platform.lift_master_datum = src
 	LAZYADD(lift_platforms, new_lift_platform)
-	RegisterSignal(new_lift_platform, COMSIG_PARENT_QDELETING, PROC_REF(remove_lift_platforms))
+	RegisterSignal(new_lift_platform, COMSIG_QDELETING, PROC_REF(remove_lift_platforms))
 
 	check_for_landmarks(new_lift_platform)
 
@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	old_lift_platform.lift_master_datum = null
 	LAZYREMOVE(lift_platforms, old_lift_platform)
-	UnregisterSignal(old_lift_platform, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(old_lift_platform, COMSIG_QDELETING)
 	if(!length(lift_platforms))
 		qdel(src)
 
@@ -541,9 +541,9 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			var/turf/T = get_step_multiz(lift_platform, check_dir)
 			if(!T)//the edges of multi-z maps
 				return FALSE
-			if(check_dir == UP && !istype(T, /turf/open/transparent/openspace)) // We don't want to go through the ceiling!
+			if(check_dir == UP && !istype(T, /turf/open/openspace)) // We don't want to go through the ceiling!
 				return FALSE
-			if(check_dir == DOWN && !istype(get_turf(lift_platform), /turf/open/transparent/openspace)) // No going through the floor!
+			if(check_dir == DOWN && !istype(get_turf(lift_platform), /turf/open/openspace)) // No going through the floor!
 				return FALSE
 	return TRUE
 
@@ -575,9 +575,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		platform.horizontal_speed = 0.1
 		base_horizontal_speed = 0.1
 		horizontal_speed = 0.1
-		if(!platform.fake)
-			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			platform.alpha = 0
+
 		for(var/atom/movable/movable in platform.lift_load)
 			if(ismob(movable))
 				platform.RemoveItemFromLift(movable)
@@ -588,12 +586,14 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.density = FALSE
 			movable.alpha = 0
 
+		if(!platform.fake)
+			platform.hide_lift()
+
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 0.1
-			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			moving_platform.alpha = 0
+			moving_platform.hide_lift()
 
 /datum/lift_master/tram/proc/show_tram()
 	ignore_pathing_obstacles = FALSE
@@ -602,28 +602,25 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		base_horizontal_speed = 4
 		horizontal_speed = 4
 		if(!platform.fake)
-			platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			platform.alpha = 255
+			platform.show_lift()
+
+		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
+			if(moving_platform.fake)
+				continue
+			moving_platform.horizontal_speed = 4
+			moving_platform.show_lift()
+
 		for(var/atom/movable/movable in objects_pre_alpha)
 			movable.alpha = objects_pre_alpha[movable]
 			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
 			objects_pre_alpha -= movable
 			movable.density = initial(movable.density)
 
-		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
-			if(moving_platform.fake)
-				continue
-			moving_platform.horizontal_speed = 4
-			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			moving_platform.alpha = 255
-
 /datum/lift_master/tram/proc/try_process_order(fence = FALSE)
 	var/total_coin_value = 0
 	var/spent_amount = 0
 	var/list/requested_supplies = list()
 	var/list/request_fufillment = list()
-	var/list/reputation_purchases = list() // Track reputation purchases
-	var/total_reputation_cost = 0
 
 	var/datum/world_faction/faction = SSmerchant.active_faction
 	if(!faction)
@@ -660,22 +657,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 								SSmerchant.trade_requests -= request
 								qdel(request)
 
+	var/datum/world_faction/ordering_faction = null
+
 	for(var/obj/structure/industrial_lift/tram/platform in lift_platforms)
 		for(var/atom/movable/listed_atom in platform.lift_load)
 			if(istype(listed_atom, /obj/item/paper/scroll/cargo))
 				var/obj/item/paper/scroll/cargo/cargo_manifest = listed_atom
 
+				// Track the source faction from the manifest
+				if(cargo_manifest.buying_from)
+					ordering_faction = cargo_manifest.buying_from
+
 				// Add regular orders
 				requested_supplies.Add(cargo_manifest.orders.Copy())
-
-				if(cargo_manifest.reputation_orders && length(cargo_manifest.reputation_orders))
-					for(var/datum/supply_pack/pack in cargo_manifest.reputation_orders)
-						if(cargo_manifest.reputation_orders[pack])
-							reputation_purchases[pack] = TRUE
-							// Calculate reputation cost
-							var/quantity = cargo_manifest.orders[pack] || 0
-							var/rep_cost = calculate_reputation_cost_for_processing(pack)
-							total_reputation_cost += rep_cost * quantity
 
 				qdel(listed_atom)
 
@@ -688,15 +682,11 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 					continue
 				if(istype(inside, /obj/item/paper/scroll/cargo))
 					var/obj/item/paper/scroll/cargo/cargo_manifest = inside
-					requested_supplies.Add(cargo_manifest.orders.Copy())
 
-					if(cargo_manifest.reputation_orders && length(cargo_manifest.reputation_orders))
-						for(var/datum/supply_pack/pack in cargo_manifest.reputation_orders)
-							if(cargo_manifest.reputation_orders[pack])
-								reputation_purchases[pack] = TRUE
-								var/quantity = cargo_manifest.orders[pack] || 0
-								var/rep_cost = calculate_reputation_cost_for_processing(pack)
-								total_reputation_cost += rep_cost * quantity
+					if(cargo_manifest.buying_from)
+						ordering_faction = cargo_manifest.buying_from
+
+					requested_supplies.Add(cargo_manifest.orders.Copy())
 
 					qdel(inside)
 				if(istype(inside, /obj/item/coin))
@@ -709,17 +699,11 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			total_coin_value = 0
 			continue
 
-		// Check reputation requirements BEFORE processing any orders
-		if(total_reputation_cost > 0 && faction.faction_reputation < total_reputation_cost)
-			// Create failure note and return coins
-			spawn_coins(total_coin_value, platform, crate_type = /obj/structure/closet/crate/chest/merchant)
-			var/obj/item/paper/failure_note = new(get_turf(platform))
-			failure_note.name = "delivery failure notice"
-			failure_note.info = "Order rejected: Insufficient reputation. Required: [total_reputation_cost], Available: [faction.faction_reputation]. Please improve relations before attempting reputation purchases."
-			total_coin_value = 0
-			continue
+		// Fallback to active subsystem merchant faction if scroll did not provide one
+		if(!ordering_faction)
+			ordering_faction = SSmerchant.active_faction
 
-		// Calculate costs and process orders (modified for reputation pricing)
+		// Calculate costs and process orders (modified for dynamic target faction pricing)
 		var/total_required_cost = 0
 		for(var/datum/supply_pack/requested as anything in requested_supplies)
 			if(!requested_supplies[requested])
@@ -730,28 +714,24 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				if(!requested.contraband)
 					modifier = 1.5
 
-			// Check if this is a reputation purchase (costs 2x mammons)
-			var/reputation_multiplier = 1
-			if(reputation_purchases[requested])
-				reputation_multiplier = 2
+			// DYNAMIC PRICING: Check if the ordering faction has an overriden pack cost on its own reference
+			var/base_cost = requested.cost
+			if(ordering_faction && islist(ordering_faction.faction_supply_packs) && ordering_faction.faction_supply_packs[requested.type])
+				var/datum/supply_pack/faction_pack = ordering_faction.faction_supply_packs[requested.type]
+				base_cost = faction_pack.cost
 
 			var/quantity = requested_supplies[requested]
-			var/cost_per_item = FLOOR(requested.cost * modifier * reputation_multiplier, 1)
+			var/cost_per_item = FLOOR(base_cost * modifier, 1)
 			total_required_cost += cost_per_item * quantity
 
 		// Check if we have enough coins
 		if(total_coin_value < total_required_cost)
-			// Create failure note and return coins
 			spawn_coins(total_coin_value, platform, crate_type = /obj/structure/closet/crate/chest/merchant)
 			var/obj/item/paper/failure_note = new(get_turf(platform))
 			failure_note.name = "delivery failure notice"
 			failure_note.info = "Order rejected: Insufficient payment. Required: [total_required_cost] mammons, Provided: [total_coin_value]."
 			total_coin_value = 0
 			continue
-
-		// Deduct reputation cost first
-		if(total_reputation_cost > 0)
-			faction.faction_reputation -= total_reputation_cost
 
 		for(var/datum/supply_pack/requested as anything in requested_supplies)
 			if(!requested_supplies[requested])
@@ -762,35 +742,33 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				if(!requested.contraband)
 					modifier = 1.5
 
-			// Apply reputation multiplier for reputation purchases
-			var/reputation_multiplier = 1
-			if(reputation_purchases[requested])
-				reputation_multiplier = 2
+			// DYNAMIC PRICING (Deduction phase)
+			var/datum/supply_pack/faction_pack
+			var/base_cost = requested.cost
+			if(ordering_faction && islist(ordering_faction.faction_supply_packs) && ordering_faction.faction_supply_packs[requested.type])
+				faction_pack = ordering_faction.faction_supply_packs[requested.type]
+				base_cost = faction_pack.cost
+
+			var/units_bought = 0
 
 			for(var/i in 1 to requested_supplies[requested])
-				var/cost = FLOOR(requested.cost * modifier * reputation_multiplier, 1)
+				var/cost = FLOOR(base_cost * modifier, 1)
 				if(total_coin_value >= cost)
 					total_coin_value -= cost
 					spent_amount += cost
+					units_bought++
 
-					// Check if item is normally available or reputation purchase
-					var/datum/world_faction/active_faction = SSmerchant.active_faction
-					if(active_faction && active_faction.has_supply_pack(requested.type))
-						// Normal purchase - item is in stock
+					// Check stock matching the target ordering faction instead of global global state
+					if(ordering_faction && ordering_faction.has_supply_pack(requested.type))
 						SSmerchant.requestlist[requested] += 1
-					else if(reputation_purchases[requested])
-						// Reputation purchase - override stock limitation
-						SSmerchant.requestlist[requested] += 1
-					// If neither condition is met, the item simply isn't processed (shouldn't happen with proper validation)
+
+			// Buying pushes that faction's live price for this pack upward - demand
+			// outpacing supply. Bigger nudge the further under baseline it currently sits.
+			if(units_bought && faction_pack)
+				ordering_faction.apply_purchase_demand_pressure(faction_pack, units_bought)
 
 		// Return remaining coins
 		spawn_coins(total_coin_value, platform, crate_type = /obj/structure/closet/crate/chest/merchant)
-
-		// Create success note if reputation was used
-		if(total_reputation_cost > 0)
-			var/obj/item/paper/success_note = new(get_turf(platform))
-			success_note.name = "reputation purchase confirmation"
-			success_note.info = "Reputation purchase successful! [total_reputation_cost] reputation spent. Remaining: [faction.faction_reputation]"
 
 		total_coin_value = 0
 
@@ -798,21 +776,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	if(spent_amount)
 		record_round_statistic(STATS_TRADE_VALUE_IMPORTED, spent_amount)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_SPENT, spent_amount, 1)
-
-/datum/lift_master/tram/proc/calculate_reputation_cost_for_processing(datum/supply_pack/pack)
-	var/datum/world_faction/faction = SSmerchant.active_faction
-	if(!faction)
-		return 50
-
-	var/base_cost = pack.cost
-	var/tier = faction.get_reputation_tier()
-
-	// Base reputation cost scales with item value
-	// Higher tier = lower reputation costs (better relations = better deals)
-	var/reputation_multiplier = max(0.5, 1.5 - (tier * 0.15)) // 15% reduction per tier
-	var/reputation_cost = max(10, round(base_cost * reputation_multiplier))
-
-	return reputation_cost
+		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_IMPORT_VALUE, total_coin_value)
 
 /datum/lift_master/tram/proc/get_valid_turfs(obj/structure/industrial_lift/tram/platform)
 	var/list/valid_turfs = list()
@@ -906,6 +870,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			original_contents += resolved_contents
 		var/list/sold_items = list()
 		var/list/sold_count = list()
+
 		for(var/atom/movable/listed_atom in platform.lift_load)
 			if(listed_atom in original_contents)
 				continue
@@ -913,22 +878,50 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			if(istype(listed_atom, /obj/item/coin))
 				continue
-			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom.type))
+
+			var/bounty_status = SSmerchant.active_faction.handle_selling(listed_atom)
+			if(bounty_status == TRUE)
+				// Clean up nested contents and delete
+				for(var/atom/movable/inside in listed_atom.get_all_contents())
+					if(inside != listed_atom)
+						qdel(inside)
+				qdel(listed_atom)
 				continue
 
-			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			if(bounty_status == FALSE_BUT_HANDLED)
+				continue //It just stays on the tram.
+
+			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom))
+				continue
+
+			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price <= 0)
 				continue
 
+			// Standard Sale Continues if no bounty claimed it
 			total_coin_value += old_price
 			sold_count[initial(listed_atom.name)] += 1
 			sold_items[initial(listed_atom.name)] += old_price
-			SSmerchant.handle_selling(listed_atom.type)
 
-			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price != new_price)
 				SSmerchant.changed_sell_prices(listed_atom.type, old_price, new_price)
 
+			// Reagent contents sold separately, shown as their own manifest line
+			if(istype(listed_atom, /obj/item/reagent_containers/glass) || istype(listed_atom, /obj/structure))
+				var/list/reagent_values = SSmerchant.active_faction.get_reagent_sell_values(listed_atom)
+				for(var/reagent_name in reagent_values)
+					var/list/reagent_data = reagent_values[reagent_name]
+					var/reagent_volume = reagent_data[1]
+					var/reagent_value = round(reagent_data[2] * sell_modifer)
+					if(reagent_value <= 0)
+						continue
+					var/reagent_key = "[UNIT_FORM_STRING(reagent_volume)] of [reagent_name]"
+					total_coin_value += reagent_value
+					sold_count[reagent_key] += 1
+					sold_items[reagent_key] += reagent_value
+
+			// Nested item handling loop
 			for(var/atom/movable/inside in listed_atom.get_all_contents())
 				if(inside == listed_atom)
 					continue
@@ -938,34 +931,60 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 					continue
 				if(istype(inside, /obj/item/coin))
 					continue
-				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside.type))
+				var/bounty_status_inside = SSmerchant.active_faction.handle_selling(inside)
+				if(bounty_status_inside == TRUE)
+					qdel(inside)
 					continue
 
-				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				if(bounty_status_inside == FALSE_BUT_HANDLED)
+					continue //It just stays on the tram.
+
+				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside))
+					continue
+
+				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price <= 0)
 					continue
 
+				// Standard Nested Item Sale
 				total_coin_value += old_inside_price
 				sold_count[initial(inside.name)] += 1
 				sold_items[initial(inside.name)] += old_inside_price
-				SSmerchant.handle_selling(inside.type)
 
-				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price != new_inside_price)
 					SSmerchant.changed_sell_prices(inside.type, old_inside_price, new_inside_price)
+
+				// Reagent contents of nested glass containers sold separately too
+				if(istype(listed_atom, /obj/item/reagent_containers/glass) || istype(listed_atom, /obj/structure))
+					var/list/inside_reagent_values = SSmerchant.active_faction.get_reagent_sell_values(inside)
+					for(var/reagent_name in inside_reagent_values)
+						var/list/reagent_data = inside_reagent_values[reagent_name]
+						var/reagent_volume = reagent_data[1]
+						var/reagent_value = round(reagent_data[2] * sell_modifer)
+						if(reagent_value <= 0)
+							continue
+						var/reagent_key = "[UNIT_FORM_STRING(reagent_volume)] of [reagent_name]"
+						total_coin_value += reagent_value
+						sold_count[reagent_key] += 1
+						sold_items[reagent_key] += reagent_value
+
 				qdel(inside)
 
-			if(istype(listed_atom, /obj/item/clothing/head/mob_holder))
-				var/obj/item/clothing/head/mob_holder/holder = listed_atom
+			if(ismobholder(listed_atom))
+				var/obj/item/mob_holder/holder = listed_atom
 				for(var/obj/item/item in holder.held_mob.get_equipped_items())
 					item.forceMove(get_turf(holder))
 				to_chat(holder.held_mob, span_boldwarning("You have been sold."))
-				qdel(holder.held_mob) //so long my friend
+				qdel(holder.held_mob)
 			qdel(listed_atom)
 
-		var/atom/location = spawn_coins(total_coin_value, platform) // try_process_order will eat these coins, so don't spawn a chest
+		// Coin Spawning & Logging Block
+		var/atom/location = spawn_coins(total_coin_value + SSmerchant.extra_currency, platform)
+		SSmerchant.extra_currency = 0
 		record_round_statistic(STATS_TRADE_VALUE_EXPORTED, total_coin_value)
 		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_GAINED, total_coin_value)
+		add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_EXPORT_VALUE, total_coin_value)
 		if(length(sold_items) && !fence)
 			var/scrolls_to_spawn = CEILING(length(sold_items) / 6, 1)
 			for(var/i = 1 to scrolls_to_spawn)
@@ -974,7 +993,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				var/list/items = list()
 				var/list/count = list()
 				for(var/b = 1 to length(sold_items))
-					if(b > 6) // manifest can reasonably fit 6 entries
+					if(b > 6)
 						continue
 					var/first_item = sold_items[1]
 					items[first_item] = sold_items[first_item]

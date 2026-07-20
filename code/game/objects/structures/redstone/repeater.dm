@@ -214,7 +214,7 @@
 		trigger_lock_updates()
 		update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/redstone/repeater/update_icon()
+/obj/structure/redstone/repeater/update_icon_state()
 	. = ..()
 	icon_state = "repeater"
 	dir = facing_dir
@@ -242,7 +242,7 @@
 	to_chat(user, "<span class='notice'>Delay set to [delay_ticks] tick\s.</span>")
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/redstone/repeater/AltClick(mob/user)
+/obj/structure/redstone/repeater/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user)) return
 	facing_dir = turn(facing_dir, 90)
 	dir = facing_dir

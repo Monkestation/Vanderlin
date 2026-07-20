@@ -33,8 +33,6 @@ GLOBAL_LIST_INIT(admin_verbs_debug_mapping, list(
 	/client/proc/cmd_admin_rejuvenate,
 	/datum/admins/proc/show_traitor_panel,
 	/client/proc/disable_communication,
-	/client/proc/cmd_show_at_list,
-	/client/proc/cmd_show_at_markers,
 	/client/proc/manipulate_organs,
 	/client/proc/start_line_profiling,
 	/client/proc/stop_line_profiling,
@@ -51,7 +49,7 @@ GLOBAL_PROTECT(admin_verbs_debug_mapping)
 	desc = ""
 
 /obj/effect/debugging/marker
-	icon = 'icons/turf/areas.dmi'
+	icon = 'icons/turf/areas/areas.dmi'
 	icon_state = "yellow"
 
 /obj/effect/debugging/marker/Move()
@@ -61,7 +59,7 @@ GLOBAL_PROTECT(admin_verbs_debug_mapping)
 GLOBAL_LIST_EMPTY(dirty_vars)
 
 /client/proc/see_dirty_varedits()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Dirty Varedits"
 
 	var/list/dat = list()
@@ -75,7 +73,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 #endif
 
 /client/proc/intercom_view()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Intercom Range Display"
 
 	var/static/intercom_range_display_status = FALSE
@@ -86,61 +84,30 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Show Intercom Range") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_show_at_list()
-	set category = "Mapping"
-	set name = "Show roundstart AT list"
-	set desc = ""
-
-	var/dat = {"<b>Coordinate list of Active Turfs at Roundstart</b>
-	<br>Real-time Active Turfs list you can see in Air Subsystem at active_turfs var<br>"}
-
-	for(var/t in GLOB.active_turfs_startlist)
-		var/turf/T = t
-		dat += "[ADMIN_VERBOSEJMP(T)]\n"
-		dat += "<br>"
-
-	usr << browse(dat, "window=at_list")
-
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Show Roundstart Active Turfs") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/cmd_show_at_markers()
-	set category = "Mapping"
-	set name = "Show roundstart AT markers"
-	set desc = ""
-
-	var/count = 0
-	for(var/obj/effect/abstract/marker/at/AT in GLOB.all_abstract_markers)
-		qdel(AT)
-		count++
-
-	if(count)
-		to_chat(usr, "[count] AT markers removed.")
-	else
-		for(var/t in GLOB.active_turfs_startlist)
-			new /obj/effect/abstract/marker/at(t)
-			count++
-		to_chat(usr, "[count] AT markers placed.")
-
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Show Roundstart Active Turf Markers")
-
 /client/proc/enable_debug_verbs()
-	set category = "Debug"
+	set category = "Debug.Core"
 	set name = "Debug verbs - Enable"
 	if(!check_rights(R_DEBUG))
 		return
-	verbs -= /client/proc/enable_debug_verbs
-	verbs.Add(/client/proc/disable_debug_verbs, GLOB.admin_verbs_debug_mapping)
+
+	remove_verb(src, /client/proc/enable_debug_verbs)
+	add_verb(src, GLOB.admin_verbs_debug_mapping)
+	add_verb(src, /client/proc/disable_debug_verbs)
+
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Enable Debug Verbs") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/disable_debug_verbs()
-	set category = "Debug"
+	set category = "Debug.Core"
 	set name = "Debug verbs - Disable"
-	verbs.Remove(/client/proc/disable_debug_verbs, GLOB.admin_verbs_debug_mapping)
-	verbs += /client/proc/enable_debug_verbs
+
+	remove_verb(src, GLOB.admin_verbs_debug_mapping)
+	remove_verb(src, /client/proc/disable_debug_verbs)
+	add_verb(src, /client/proc/enable_debug_verbs)
+
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Disable Debug Verbs") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/count_objects_on_z_level()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Count Objects On Level"
 	var/level = input("Which z-level?","Level?") as text|null
 	if(!level)
@@ -179,7 +146,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Count Objects Zlevel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/count_objects_all()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Count Objects All"
 
 	var/type_text = input("Which type path?","") as text|null
@@ -202,7 +169,7 @@ GLOBAL_LIST_EMPTY(dirty_vars)
 //This proc is intended to detect lag problems relating to communication procs
 GLOBAL_VAR_INIT(say_disabled, FALSE)
 /client/proc/disable_communication()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Disable all communication verbs"
 
 	GLOB.say_disabled = !GLOB.say_disabled
@@ -214,7 +181,7 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 //This generates the icon states for job starting location landmarks.
 /client/proc/create_mapping_job_icons()
 	set name = "Generate job landmarks icons"
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	var/icon/final = icon()
 	var/mob/living/carbon/human/dummy/D = new(locate(1,1,1)) //spawn on 1,1,1 so we don't have runtimes when items are deleted
 	D.setDir(SOUTH)
@@ -234,7 +201,7 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 
 /client/proc/debug_z_levels()
 	set name = "Debug Z-Levels"
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 
 	var/list/z_list = SSmapping.z_list
 	var/list/messages = list()

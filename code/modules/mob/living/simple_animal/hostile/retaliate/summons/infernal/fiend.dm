@@ -46,7 +46,6 @@
 
 	attack_sound = list('sound/misc/lava_death.ogg')
 	dodgetime = 30
-	aggressive = 1
 	ranged = TRUE
 	rapid = TRUE
 	projectiletype = /obj/projectile/magic/aoe/fireball/rogue

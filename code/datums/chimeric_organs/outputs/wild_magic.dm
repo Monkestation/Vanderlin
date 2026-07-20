@@ -7,8 +7,8 @@
 /datum/chimeric_node/output/wild_magic/trigger_effect(multiplier)
 	. = ..()
 	if(!length(spell_types))
-		for(var/datum/spell_node/node in subtypesof(/datum/spell_node))
-			if(is_abstract(node))
+		for(var/datum/spell_node/node as anything in subtypesof(/datum/spell_node))
+			if(IS_ABSTRACT(node))
 				continue
 			if(initial(node.is_passive))
 				continue
@@ -18,6 +18,8 @@
 
 	var/picked_type = pick(spell_types)
 	var/datum/action/cooldown/spell/picked_spell = new picked_type
+	picked_spell.owner = hosted_carbon
+	picked_spell.spell_cost = 0
 	var/list/atoms_in_range = list()
 	for(var/atom/close_atom as anything in range(3, hosted_carbon))
 		if(isitem(close_atom))

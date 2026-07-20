@@ -31,7 +31,7 @@
 /area/under/tomb/cave/lava)
 "cQ" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "dD" = (
 /obj/effect/dungeon_directional_helper/west,
@@ -142,7 +142,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "lf" = (
 /obj/structure/flora/grass,
@@ -186,7 +186,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "mJ" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
@@ -348,7 +348,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "vF" = (
 /obj/effect/decal/cleanable/sigil,
@@ -399,7 +399,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "zB" = (
 /obj/structure/fluff/railing/border,
@@ -433,7 +433,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "AN" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/magic)
 "AO" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -473,7 +473,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "DC" = (
 /obj/structure/fluff/railing/border{
@@ -491,7 +491,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "Ed" = (
 /obj/structure/flora/ausbushes/ywflowers,
@@ -685,7 +685,7 @@
 /turf/open/floor/grass/red,
 /area/under/tomb/cave/lava)
 "Tr" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "TC" = (
 /obj/structure/chair/wood/alt/chair_noble{
@@ -766,7 +766,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "ZH" = (
 /turf/open/floor/metal/alt,

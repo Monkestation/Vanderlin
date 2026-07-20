@@ -15,3 +15,4 @@
 	muteinmouth = TRUE
 	spitoutmouth = FALSE
 	w_class = WEIGHT_CLASS_TINY
+	item_weight = 1 GRAMS

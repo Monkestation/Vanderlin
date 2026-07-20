@@ -12,9 +12,10 @@
 	slot_flags = ITEM_SLOT_HIP
 	force = 5
 	hitsound = 'sound/items/bsmith1.ogg'
+	item_weight = 600 GRAMS
 	COOLDOWN_DECLARE(bell_ring)
 
-/obj/item/handheld_bell/attack_self(mob/user, params)
+/obj/item/handheld_bell/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, bell_ring))
 		return
@@ -111,32 +112,21 @@
 	plane = GAME_PLANE_UPPER
 	COOLDOWN_DECLARE(bell_ring)
 
-/*
-	/obj/structure/stationary_bell/Initialize()
-		. = ..()
-		create_barriers()
+/obj/structure/stationary_bell/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/mace/church))
+		return NONE
 
-	// Function to create barriers around the bell
-	/obj/structure/stationary_bell/proc/create_barriers()
-		for(var/direction in GLOB.cardinals)
-			var/turf/adjacent_turf = get_step(src, direction)
-			if((adjacent_turf) || istype(adjacent_turf, /obj/structure/bell_barrier))
-				continue
-			new /obj/structure/bell_barrier(adjacent_turf)
-*/
+	if(!COOLDOWN_FINISHED(src, bell_ring))
+		return ITEM_INTERACT_BLOCKING
 
-/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user)
-	if(istype(used_item, /obj/item/weapon/mace/church))
-		if(!COOLDOWN_FINISHED(src, bell_ring))
-			return
-		for(var/mob/M in GLOB.player_list) // @everyone
-			if(M.client && M.can_hear()) // Disregard NPC's with no mind and sleeping/unconscious people
-				to_chat(M, "<span class='notice'>[src] rings, echoing solemnly far and wide across the realm.</span>")
-				M.playsound_local(M, 'sound/misc/bell.ogg', 50, 1)
-		visible_message("<span class='notice'>[user] uses the [used_item] to ring the [src].</span>")
-		COOLDOWN_START(src, bell_ring, 5 SECONDS)
-	else
-		return ..()
+	for(var/mob/M as anything in GLOB.player_list) // @everyone
+		if(M.client && M.can_hear()) // Disregard NPC's with no mind and sleeping/unconscious people
+			to_chat(M, "<span class='notice'>[src] rings, echoing solemnly far and wide across the realm.</span>")
+			M.playsound_local(M, 'sound/misc/bell.ogg', 50, 1)
+
+	visible_message("<span class='notice'>[user] uses the [tool] to ring the [src].</span>")
+	COOLDOWN_START(src, bell_ring, 5 SECONDS)
+	return ITEM_INTERACT_SUCCESS
 
 //////////Jingle Bells
 
@@ -149,6 +139,7 @@
 	dropshrink = 0.5
 	pickup_sound = SFX_JINGLE_BELLS
 	drop_sound = SFX_JINGLE_BELLS
+	item_weight = 100 GRAMS
 
 /obj/item/jingle_bells/Initialize()
 	. = ..()

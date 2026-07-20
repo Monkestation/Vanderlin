@@ -60,7 +60,8 @@
 
 ///list of foods this mob likes
 #define BB_BASIC_FOODS "BB_basic_foods"
-
+///What creature we want to cocoon
+#define BB_BASIC_MOB_COCOON_TARGET "BB_basic_mob_cocoon_target"
 
 /// Flag to set on or off if you want your mob to prioritise running away
 #define BB_BASIC_MOB_FLEEING "BB_basic_fleeing"
@@ -91,5 +92,4 @@
 #define BB_DRAGON_EXPLOSION_COOLDOWN "dragon_explosion_cooldown"
 #define BB_DRAGON_PHASE_COOLDOWN "dragon_ohase_cooldown"
 
-#define BB_IS_BEING_RIDDEN "bb_is_ridden"
 #define BB_BASIC_MOB_SCARED_ITEM "scared_item"

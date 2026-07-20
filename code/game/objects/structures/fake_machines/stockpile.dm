@@ -143,7 +143,7 @@
 				record_round_statistic(STATS_STOCKPILE_EXPANSES, amt)
 			return amt
 
-/obj/structure/fake_machine/stockpile/attackby(obj/item/P, mob/user, params)
+/obj/structure/fake_machine/stockpile/attackby(obj/item/P, mob/user, list/modifiers)
 	if(ishuman(user))
 		if(user.real_name in GLOB.outlawed_players)
 			say("OUTLAW DETECTED! REFUSING SERVICE!")
@@ -154,7 +154,7 @@
 		else
 			attemptsell(P, user, TRUE, TRUE)
 
-/obj/structure/fake_machine/stockpile/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/stockpile/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

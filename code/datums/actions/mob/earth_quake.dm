@@ -26,7 +26,7 @@
 				to_chat(hit_mob, span_userdanger("[owner]'s earth quake shockwave sends you flying!"))
 				var/turf/thrownat = get_ranged_target_turf_direct(owner, hit_mob, owner.throw_range, rand(-10, 10))
 				hit_mob.throw_at(thrownat, 8, 2, null, TRUE, force = MOVE_FORCE_OVERPOWERING)
-				hit_mob.apply_damage(20, BRUTE)
+				hit_mob.apply_damage(20, BRUTE, damage_type = BCLASS_BLUNT)
 				shake_camera(hit_mob, 2, 1)
 			all_turfs -= stomp_turf
 		sleep(delay)

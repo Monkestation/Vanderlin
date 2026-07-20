@@ -73,7 +73,7 @@
 /datum/status_effect/buff/meatvine_speed
 	id = "meatvine_speed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/meatvine_speed
-	effectedstats = list(STATKEY_SPD = 3)
+	effectedstats = list(STAT_SPEED = 3)
 	duration = 20 SECONDS
 
 /atom/movable/screen/alert/status_effect/buff/meatvine_speed
@@ -84,7 +84,7 @@
 /datum/status_effect/buff/meatvine_endurance
 	id = "meatvine_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/meatvine_endurance
-	effectedstats = list(STATKEY_END = 2, STATKEY_CON = 2)
+	effectedstats = list(STAT_ENDURANCE = 2, STAT_CONSTITUTION = 2)
 	duration = 20 SECONDS
 
 /atom/movable/screen/alert/status_effect/buff/meatvine_endurance

@@ -23,14 +23,14 @@
 	pixel_z = DISPLACEMENT_AMOUNT
 
 	src.thing_to_take = thing_to_take
-	RegisterSignal(thing_to_take, COMSIG_PARENT_QDELETING, PROC_REF(on_source_deletion))
+	RegisterSignal(thing_to_take, COMSIG_QDELETING, PROC_REF(on_source_deletion))
 	RegisterSignal(thing_to_take, COMSIG_MOVABLE_MOVED, PROC_REF(on_source_move))
 	lower_hand()
 
 /obj/effect/god_hand/Destroy(force)
 	. = ..()
 	thing_to_take = null
-	UnregisterSignal(thing_to_take, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(thing_to_take, COMSIG_QDELETING)
 	UnregisterSignal(thing_to_take, COMSIG_MOVABLE_MOVED)
 
 /obj/effect/god_hand/proc/on_source_deletion(atom/movable/source)
@@ -57,7 +57,7 @@
 		var/mob/living/mob_to_take = thing_to_take
 		mob_to_take.emote("choke", forced = TRUE)
 		mob_to_take.Immobilize(10 SECONDS)
-		addtimer(CALLBACK(mob_to_take, TYPE_PROC_REF(/mob/living, emote), "scream", null, null, FALSE, TRUE), 1.5 SECONDS)
+		addtimer(CALLBACK(mob_to_take, TYPE_PROC_REF(/mob, emote), "scream", null, null, FALSE, TRUE), 1.5 SECONDS)
 
 	animate(thing_to_take, time = 2 SECONDS, pixel_z = DISPLACEMENT_AMOUNT, easing = CUBIC_EASING, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)
 	animate(src, time = 2 SECONDS, pixel_z = DISPLACEMENT_AMOUNT, easing = CUBIC_EASING, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)

@@ -6,8 +6,8 @@
 
 	antimagic_flags = NONE
 
-	associated_skill = /datum/skill/combat/unarmed
-	associated_stat = STATKEY_STR
+	associated_skill = /datum/attribute/skill/combat/unarmed
+	associated_stat = STAT_STRENGTH
 
 	charge_required = FALSE
 	has_visual_effects = FALSE

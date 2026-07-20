@@ -26,7 +26,7 @@
 
 /datum/objective/personal/mock/monarch/on_mock_used(datum/source, mob/living/victim)
 	. = ..()
-	if((istype(victim.mind?.assigned_role, /datum/job/lord) || victim.job == "Monarch") && (source == owner.current))
+	if((istype(victim.mind?.assigned_role, /datum/job/lord) || victim.job == JOB_MONARCH) && (source == owner.current))
 		complete_objective()
 
 /datum/objective/personal/mock/monarch/complete_objective()
@@ -67,7 +67,7 @@
 
 /datum/objective/personal/mock/noble/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_XYLIX_BLESSING, STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_XYLIX_BLESSING, list(STAT_FORTUNE = 1))
 
 /datum/objective/personal/mock/noble/update_explanation_text()
 	. = ..()

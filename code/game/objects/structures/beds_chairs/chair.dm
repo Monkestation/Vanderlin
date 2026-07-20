@@ -4,7 +4,7 @@
 	icon = 'icons/obj/chairs.dmi'
 	icon_state = "chair"
 	anchored = FALSE
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0 //you sit in a chair, not lay
 	resistance_flags = NONE
 	max_integrity = 250
@@ -19,33 +19,22 @@
 	. = ..()
 	AddComponent(/datum/component/simple_rotation)
 
-/obj/structure/chair/deconstruct()
-	// If we have materials, and don't have the NOCONSTRUCT flag
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(buildstacktype)
-			new buildstacktype(loc,buildstackamount)
-	..()
-
 /obj/structure/chair/attack_paw(mob/user)
 	return attack_hand(user)
 
-/obj/structure/chair/narsie_act()
-	var/obj/structure/chair/wood/W = new/obj/structure/chair/wood(get_turf(src))
-	W.setDir(dir)
-	qdel(src)
+/obj/structure/chair/atom_deconstruct(disassembled)
+	if(buildstacktype)
+		new buildstacktype(loc, buildstackamount)
 
-/obj/structure/chair/attackby(obj/item/W, mob/user, params)
-	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
-		W.play_tool_sound(src)
-		deconstruct()
-	else
-		return ..()
+/obj/structure/chair/wrench_act(mob/living/user, obj/item/I)
+	. = ..()
+	I.play_tool_sound(src)
+	deconstruct(TRUE)
 
 /obj/structure/chair/proc/handle_rotation(direction)
 	handle_layer()
 	if(has_buckled_mobs())
-		for(var/m in buckled_mobs)
-			var/mob/living/buckled_mob = m
+		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.setDir(direction)
 
 /obj/structure/chair/proc/handle_layer()
@@ -59,12 +48,12 @@
 /obj/structure/chair/post_buckle_mob(mob/living/M)
 	. = ..()
 	handle_layer()
-	M.set_mob_offsets("chair", _x = pixel_x, _y = pixel_y)
+	M.add_offsets(type, x_add = pixel_x, y_add = pixel_y)
 
 /obj/structure/chair/post_unbuckle_mob(mob/living/M)
 	. = ..()
 	handle_layer()
-	M.reset_offsets("chair")
+	M.remove_offsets(type)
 
 /obj/structure/chair/setDir(newdir)
 	..()
@@ -82,10 +71,7 @@
 	item_chair = /obj/item/chair/wood
 	anchored = FALSE
 
-/obj/structure/chair/wood/narsie_act()
-	return
 //Stool
-
 /obj/structure/chair/stool
 	name = "stool"
 	desc = ""
@@ -104,7 +90,7 @@
 /obj/structure/chair/MouseDrop(over_object, src_location, over_location)
 	. = ..()
 	if(over_object == usr && Adjacent(usr))
-		if(QDELETED(src) || !item_chair || !usr.can_hold_items() || has_buckled_mobs() || src.flags_1 & NODECONSTRUCT_1)
+		if(QDELETED(src) || !item_chair || !usr.can_hold_items() || has_buckled_mobs())
 			return
 		if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 			return
@@ -167,12 +153,7 @@
 	playsound(src,hitsound,50,TRUE)
 	return BRUTELOSS
 
-/obj/item/chair/narsie_act()
-	var/obj/item/chair/wood/W = new/obj/item/chair/wood(get_turf(src))
-	W.setDir(dir)
-	qdel(src)
-
-/obj/item/chair/attack_self(mob/user, params)
+/obj/item/chair/attack_self(mob/user, list/modifiers)
 	plant(user)
 
 /obj/item/chair/proc/plant(mob/user)
@@ -197,10 +178,11 @@
 /obj/item/chair/proc/smash(mob/living/user)
 	qdel(src)
 
-/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
+
 	if(prob(break_chance))
 		user.visible_message("<span class='warning'>[src] is smashed to pieces!</span>")
 		if(iscarbon(target))
@@ -222,16 +204,10 @@
 	item_state = "barstool"
 	origin_type = /obj/structure/chair/stool/bar
 
-/obj/item/chair/stool/narsie_act()
-	return //sturdy enough to ignore a god
-
 /obj/item/chair/wood
 	name = "wooden chair"
 	origin_type = /obj/structure/chair/wood
 	break_chance = 50
-
-/obj/item/chair/wood/narsie_act()
-	return
 
 /obj/structure/chair/mime
 	name = "invisible chair"
@@ -240,7 +216,7 @@
 	icon_state = null
 	buildstacktype = null
 	item_chair = null
-	flags_1 = NODECONSTRUCT_1
+	obj_flags = parent_type::obj_flags | NO_DEBRIS_AFTER_DECONSTRUCTION
 	alpha = 0
 
 /obj/structure/chair/mime/post_buckle_mob(mob/living/M)

@@ -89,7 +89,7 @@
 	matrix = M
 	user = U
 
-/datum/talent_interface/Destroy(force, ...)
+/datum/talent_interface/Destroy(force)
 	matrix = null
 	user = null
 	if(window)

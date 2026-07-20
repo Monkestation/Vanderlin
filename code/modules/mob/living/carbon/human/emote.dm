@@ -6,10 +6,11 @@
 	key_third_person = "cries"
 	message = "cries."
 	emote_type = EMOTE_AUDIBLE
+	stat_allowed = SOFT_CRIT
 
 /mob/living/carbon/human/verb/emote_cry()
 	set name = "Cry"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("cry", intentional = TRUE)
 
@@ -20,9 +21,9 @@
 		if(!C.can_speak())
 			message = "makes a noise. Tears stream down their face."
 
-/datum/emote/living/carbon/human/cry/run_emote(mob/user, params, type_override, intentional, targetted)
+/datum/emote/living/carbon/human/cry/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && user.mind)
+	if(user.mind)
 		record_featured_stat(FEATURED_STATS_CRYBABIES, user)
 
 /datum/emote/living/carbon/human/eyebrow
@@ -32,7 +33,7 @@
 
 /mob/living/carbon/human/verb/emote_eyebrow()
 	set name = "Raise Eyebrow"
-	set category = "Emotes"
+	set category = "Emotes.Silent"
 
 	emote("eyebrow", intentional = TRUE)
 
@@ -44,7 +45,7 @@
 
 /mob/living/carbon/human/verb/emote_psst()
 	set name = "Psst"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("psst", intentional = TRUE)
 
@@ -57,7 +58,7 @@
 
 /mob/living/carbon/human/verb/emote_grumble()
 	set name = "Grumble"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("grumble", intentional = TRUE)
 
@@ -77,7 +78,7 @@
 
 /mob/living/carbon/human/verb/emote_mumble()
 	set name = "Mumble"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 
 	emote("mumble", intentional = TRUE)
 
@@ -108,10 +109,8 @@
 	key_third_person = "wags"
 	message = "wags their tail."
 
-/datum/emote/living/carbon/human/wag/run_emote(mob/user, params, type_override, intentional)
+/datum/emote/living/carbon/human/wag/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(!.)
-		return
 	var/mob/living/carbon/human/H = user
 	if(!istype(H) || !H.dna || !H.dna.species || !H.dna.species.can_wag_tail(H))
 		return
@@ -155,12 +154,12 @@
 
 /mob/living/carbon/human/species/rakshari/verb/emote_purr()
 	set name = "purr"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("purr", intentional = TRUE)
 
 /mob/living/carbon/human/species/rakshari/verb/emote_meow()
 	set name = "meow"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("meow", intentional = TRUE)
 
 //Ayy lmao

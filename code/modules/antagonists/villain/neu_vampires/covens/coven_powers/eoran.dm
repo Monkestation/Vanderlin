@@ -112,6 +112,7 @@
 	check_flags = COVEN_CHECK_CONSCIOUS | COVEN_CHECK_CAPABLE | COVEN_CHECK_SPEAK
 	target_type = TARGET_LIVING | TARGET_HUMAN
 	range = 5
+	violates_masquerade = TRUE
 
 	cooldown_length = 60 SECONDS
 	duration_length = 10 MINUTES
@@ -147,6 +148,7 @@
 	check_flags = COVEN_CHECK_CONSCIOUS | COVEN_CHECK_CAPABLE | COVEN_CHECK_FREE_HAND
 	target_type = TARGET_LIVING | TARGET_HUMAN | TARGET_SELF
 	range = 1
+	violates_masquerade = TRUE
 
 	cooldown_length = 90 SECONDS
 

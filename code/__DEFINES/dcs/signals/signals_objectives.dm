@@ -8,15 +8,15 @@
 #define COMSIG_DRUG_SNIFFED "drug_sniffed"
 /// from base of /mob/living/MiddleClickOn() (victim)
 #define COMSIG_ITEM_STOLEN "item_stolen"
-/// from base of adjust_skillrank() (skill_type, new_rank)
-#define COMSIG_SKILL_RANK_INCREASED "skill_rank_increased"
+/// from base of adjust_skillrank() (skill_reference, new_rank, old_rank)
+#define COMSIG_SKILL_RANK_CHANGE "skill_rank_increased"
 /// from base of /atom/proc/OnCrafted() (user, craft_path)
 #define COMSIG_ITEM_CRAFTED "item_crafted"
-/// from base of /obj/item/reagent_containers/food/snacks/organ/on_consume() (organ_type, obj/item/organ/organ_inside)
+/// from base of /obj/item/reagent_containers/food/snacks/meat/organ/on_consume() (organ_type, obj/item/organ/organ_inside)
 #define COMSIG_ORGAN_CONSUMED "organ_consumed"
 /// from base of /mob/living/carbon/human/proc/torture_victim() (mob/living/torturer, mob/living/victim)
 #define COMSIG_TORTURE_PERFORMED "torture_performed"
-/// from base of /obj/structure/gravemarker/OnCrafted() (mob/living/consecrator, obj/container)
+/// from base of /obj/structure/closet/dirthole/attackby() (mob/living/consecrator, obj/container)
 #define COMSIG_GRAVE_CONSECRATED "grave_consecrated"
 /// from base of /mob/living/simple_animal/proc/tamed() (mob/living/tamer, mob/living/simple_animal)
 #define COMSIG_ANIMAL_TAMED "animal_tamed"
@@ -28,7 +28,7 @@
 #define COMSIG_ROTTEN_FOOD_EATEN "rotten_food_eaten"
 /// from base of /datum/status_effect/buff/lux_drank/on_apply() ()
 #define COMSIG_LUX_TASTED "lux_tasted"
-/// from base of //mob/living/carbon/monkey/attack_hand() (victim)
+/// from base of //mob/living/carbon/attack_hand() (victim)
 #define COMSIG_HEAD_PUNCHED "head_punched"
 /// from base of /datum/action/cooldown/spell/transform_tree/cast() ()
 #define COMSIG_TREE_TRANSFORMED "tree_transformed"
@@ -52,6 +52,8 @@
 #define COMSIG_MOB_BUTCHERED "mob_butchered"
 /// from /datum/species/proc/kicked() (mob/user, mob/target, zone_hit, damage_blocked)
 #define COMSIG_MOB_KICK "mob_kick"
+/// from /datum/species/proc/kicked() (mob/user, mob/target, zone_hut, damage_blocked)
+#define COMSIG_MOB_KICKED "mob_kicked"
 /// from /obj/structure/closet/dirthole/attackby() (mob/user)
 #define COMSIG_GRAVE_ROBBED "grave_robbed"
 /// from /datum/action/cooldown/spell/find_flaw/cast() (datum/charflaw/flaw, mob/target)
@@ -64,3 +66,5 @@
 #define COMSIG_GLOBAL_FISH_RELEASED "global_fish_released"
 /// from base of /datum/action/cooldown/spell/undirected/list_target/convertrole/proc/convert() (mob/living/carbon/human/recruiter, mob/living/carbon/human/recruit, newrole)
 #define COMSIG_GLOBAL_ROLE_CONVERTED "role_converted"
+
+#define COMSIG_GHOST_VESSEL_POSSESSED "ghost_vessel_possessed"

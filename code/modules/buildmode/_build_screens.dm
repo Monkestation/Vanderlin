@@ -75,12 +75,11 @@
  * Handle clicks in this mode
  *
  * @param {client} c - The client who clicked
- * @param {string} params - Click parameters
+ * @param {string} modifiers - Click parameters list
  * @param {atom} object - The object clicked on
  * @return {bool} - Whether the click was handled
  */
-/datum/buildmode_mode/proc/handle_click(client/c, params, atom/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/proc/handle_click(client/client, list/modifiers, atom/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 
 	if(use_corner_selection)
@@ -91,15 +90,15 @@
 
 			if(cornerA && !cornerB)
 				cornerB = select_tile(get_turf(object), AREASELECT_CORNERB)
-				to_chat(c, "<span class='boldwarning'>Region selected, if you're happy with your selection left click again, otherwise right click.</span>")
+				to_chat(client, span_boldwarning("Region selected, if you're happy with your selection left click again, otherwise right click."))
 				return TRUE
 
 			if(cornerA && cornerB)
-				handle_selected_area(c, params)
+				handle_selected_area(client, modifiers)
 				deselect_region()
 				return TRUE
 		else
-			to_chat(c, "<span class='notice'>Region selection canceled!</span>")
+			to_chat(client, span_boldnotice("Region selection canceled!"))
 			deselect_region()
 			return TRUE
 
@@ -159,5 +158,5 @@
  * @param {client} c - The client selecting the area
  * @param {string} params - Click parameters
  */
-/datum/buildmode_mode/proc/handle_selected_area(client/c, params)
+/datum/buildmode_mode/proc/handle_selected_area(client/c, list/modifiers)
 	return

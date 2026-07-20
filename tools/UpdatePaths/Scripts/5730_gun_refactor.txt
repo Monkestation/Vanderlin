@@ -1,0 +1,5 @@
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/@SUBTYPES : /obj/item/gun/ballistic/bow/@SUBTYPES{@OLD}
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket : /obj/item/gun/ballistic/powder/musket{@OLD}
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol : /obj/item/gun/ballistic/powder/wheellock/puffer{@OLD}
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow : /obj/item/gun/ballistic/bow/cross{@OLD}
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow : /obj/item/gun/ballistic/bow/cross/slur{@OLD}

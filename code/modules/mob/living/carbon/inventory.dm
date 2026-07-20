@@ -10,19 +10,23 @@
 			return handcuffed
 		if(ITEM_SLOT_LEGCUFFED)
 			return legcuffed
-	return null
+		if(ITEM_SLOT_MOUTH)
+			return mouth
+		if(ITEM_SLOT_GLOVES)
+			return gloves
+		if(ITEM_SLOT_SHOES)
+			return shoes
+		if(ITEM_SLOT_BACK_R)
+			return backr
+		if(ITEM_SLOT_BACK_L)
+			return backl
+	return ..()
 
 /mob/living/carbon/get_slot_by_item(obj/item/looking_for)
 	if(looking_for == backr)
 		return ITEM_SLOT_BACK_R
 
 	if(looking_for == backl)
-		return ITEM_SLOT_BACK_L
-
-	if(backr && (looking_for in backr))
-		return ITEM_SLOT_BACK_R
-
-	if(backl && (looking_for in backl))
 		return ITEM_SLOT_BACK_L
 
 	if(looking_for == wear_mask)
@@ -102,6 +106,31 @@
 		if(ITEM_SLOT_HANDS)
 			put_in_hands(equipping)
 			update_inv_hands()
+		if(ITEM_SLOT_GLOVES)
+			if(gloves)
+				return
+			gloves = equipping
+			update_inv_gloves()
+		if(ITEM_SLOT_SHOES)
+			if(shoes)
+				return
+			shoes = equipping
+			update_inv_shoes()
+		if(ITEM_SLOT_MOUTH)
+			if(mouth)
+				return
+			mouth = equipping
+			update_inv_mouth()
+		if(ITEM_SLOT_BACK_R)
+			if(backr)
+				return
+			backr = equipping
+			update_inv_back()
+		if(ITEM_SLOT_BACK_L)
+			if(backl)
+				return
+			backl = equipping
+			update_inv_back()
 		if(ITEM_SLOT_BACKPACK)
 			not_handled = TRUE
 			if(backr)
@@ -110,7 +139,6 @@
 			if(backl && not_handled)
 				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE, !initial)) // If inital is true, item is from job datum and should be silent
 					not_handled = FALSE
-
 		else
 			not_handled = TRUE
 
@@ -126,7 +154,7 @@
 
 	return not_handled
 
-/mob/living/carbon/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE)
+/mob/living/carbon/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE, atom/source)
 	. = ..() //Sets the default return value to what the parent returns.
 	if(!. || !I) //We don't want to set anything to null if the parent returned 0.
 		return
@@ -181,9 +209,9 @@
 	return index && hand_bodyparts[index]
 
 //GetAllContents that is reasonable for carbons
-/mob/living/carbon/proc/get_all_gear()
-	var/list/processing_list = get_equipped_items(include_pockets = TRUE) + held_items
-	listclearnulls(processing_list) // handles empty hands
+/mob/living/proc/get_all_gear()
+	var/list/processing_list = get_equipped_items(INCLUDE_POCKETS|INCLUDE_HELD)
+	list_clear_nulls(processing_list) // handles empty hands
 	var/i = 0
 	while(i < length(processing_list))
 		var/atom/A = processing_list[++i]
@@ -200,3 +228,48 @@
 			most_expensive = atom
 			price = atom.sellprice
 	return most_expensive
+
+///Returns a list of all body_zones covered by clothing
+/mob/living/carbon/proc/get_covered_body_zones()
+	RETURN_TYPE(/list)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	return cover_flags2body_zones(get_all_covered_flags())
+
+///Returns a bitfield of all zones covered by clothing
+/mob/living/carbon/proc/get_all_covered_flags()
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	var/covered_flags = NONE
+	for(var/obj/item/worn_item in get_equipped_items())
+		covered_flags |= worn_item.body_parts_covered
+
+	return covered_flags
+
+/mob/living/carbon/is_location_accessible(location, exluded_equipment_slots = NONE)
+	switch(location)
+		// Snowflake checks for these precise zones
+		if(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE)
+			if(is_eyes_covered(~exluded_equipment_slots))
+				return FALSE
+		if(BODY_ZONE_PRECISE_MOUTH)
+			if(is_mouth_covered(~exluded_equipment_slots))
+				return FALSE
+
+	var/covered_flags = NONE
+	for(var/obj/item/worn_item in get_equipped_items())
+		if(worn_item.slot_flags & exluded_equipment_slots)
+			continue
+		covered_flags |= (worn_item.body_parts_covered & ~worn_item.body_parts_access_allowed)
+
+	// NB: we have to convert covered_flags via cover_flags2body_zones here
+	// instead of converting location via body_zones2cover_flags
+	//
+	// our coverage might look something like GROIN|LEGS, which would convert to list(BODY_ZONE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	// so if we were checking "is BODY_ZONE_CHEST accessible", we would pass - this is correct!
+	//
+	// however, if we convert the location to body zone, we would get CHEST|GROIN
+	// then we would check (CHEST|GROIN) & (GROIN|LEGS) and return FALSE - which is incorrect, the chest is perfectly accessible!
+	// checking for ((CHEST|GROIN) & (GROIN|LEGS)) == (CHEST|GROIN) would also be incorrect,
+	// as it would imply your chest is accessible from lacking groin coverage
+	return !(location in cover_flags2body_zones(covered_flags))

@@ -1,10 +1,12 @@
 /datum/action/cooldown/spell/essence/stone_shape
 	name = "Form Brick"
 	desc = "Forms a brick out of the grounds materials."
-	button_icon_state = "stone_shape"
+	button_icon_state = "magicians_brick"
+	sound = 'sound/magic/whiteflame.ogg'
 	cast_range = 2
 	point_cost = 4
-	attunements = list(/datum/attunement/earth)
+	attunements = list(/datum/attunement/time)
+	essences = list(/datum/thaumaturgical_essence/earth)
 
 /datum/action/cooldown/spell/essence/stone_shape/cast(atom/cast_on)
 	. = ..()
@@ -16,7 +18,7 @@
 	if(!isliving(owner))
 		return
 	var/mob/living/L = owner
-	var/INT = L.STAINT
+	var/INT = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)
 	if(INT <= 10)
 		return
 	var/obj/item/brick = new /obj/item/weapon/magicbrick(target_turf)

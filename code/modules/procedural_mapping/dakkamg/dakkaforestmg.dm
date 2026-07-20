@@ -21,12 +21,12 @@
 							/obj/item/grown/log/tree/stick = 5,
 							/obj/structure/chair/bench/ancientlog = 3,
 							/obj/structure/table/wood/treestump = 4,
-							/obj/structure/closet/dirthole/closed/loot=6,
+							/obj/structure/closet/dirthole/closed = 6,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0,
 							/obj/structure/flora/grass/maneater/real=0)
 	spawnableTurfs = list(/turf/open/floor/dirt/road=80,
 						/turf/open/water/swamp=25)
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 
 /datum/mapGeneratorModule/dforestroad
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -38,13 +38,13 @@
 	allowed_turfs = list(/turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableTurfs = list(/turf/open/floor/grass = 200)
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 
 /datum/mapGeneratorModule/dforestgrass
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass)
 	excluded_turfs = list()
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 	spawnableAtoms = list(/obj/structure/flora/tree = 0,
 							/obj/structure/flora/grass/bush_meagre = 6,
 							/obj/structure/flora/grass = 120,
@@ -58,9 +58,9 @@
 
 /datum/mapGeneratorModule/dforestwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	excluded_turfs = list()
-	allowed_areas = list(/area/outdoors/woods)
+	allowed_areas = list(/area/outdoors/wilderness)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,
 	                        /obj/structure/flora/grass/water/reeds = 30,
 	                        /obj/structure/kneestingers = 55)

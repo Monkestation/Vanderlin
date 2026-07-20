@@ -11,7 +11,7 @@
 		return
 	tracked_minions += minion
 	RegisterSignal(minion, COMSIG_LIVING_DEATH, PROC_REF(on_minion_death))
-	RegisterSignal(minion, COMSIG_PARENT_QDELETING, PROC_REF(on_minion_delete))
+	RegisterSignal(minion, COMSIG_QDELETING, PROC_REF(on_minion_delete))
 
 /datum/component/minion_tracker/proc/on_minion_death(mob/living/minion)
 	SIGNAL_HANDLER
@@ -23,7 +23,7 @@
 
 /datum/component/minion_tracker/proc/unregister_minion(mob/living/minion)
 	tracked_minions -= minion
-	UnregisterSignal(minion, list(COMSIG_LIVING_DEATH, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(minion, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING))
 	var/mob/living/F = parent
 	if(F?.ai_controller)
 		var/current_count = F.ai_controller.blackboard[BB_MINION_COUNT]

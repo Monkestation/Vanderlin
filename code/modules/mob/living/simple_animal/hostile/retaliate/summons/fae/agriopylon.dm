@@ -28,7 +28,6 @@
 		'sound/foley/plantcross2.ogg'
 	)
 
-	aggressive = 0
 	ai_controller = /datum/ai_controller/agriopylon
 	dendor_taming_chance = DENDOR_TAME_PROB_NONE
 	del_on_death = TRUE
@@ -47,7 +46,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/fae/agriopylon/Initialize(mapload)
 	. = ..()
-	ADD_TRAIT(src, TRAIT_ENTANGLER_IMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_ENTANGLER_IMMUNITY, TRAIT_GENERIC)
 	AddComponent(/datum/component/obeys_commands, pet_commands)
 	AddComponent(/datum/component/ai_aggro_system)
 	flower_idle = mutable_appearance(icon, "flower_spirit_detail")

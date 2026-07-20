@@ -48,7 +48,10 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/structure/channel_connector/furnace/attack_hand_secondary(mob/user, params)
+/obj/structure/channel_connector/furnace/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.visible_message(span_danger("[user] starts to [opened ? "close" : "open"] [src]."), span_danger("You start to [opened ? "close" : "open"] [src]."))
 	if(!do_after(user, 2.5 SECONDS, src))
@@ -81,7 +84,7 @@
 				var/reagent_color = initial(material.color)
 				. += "It contains [UNIT_FORM_STRING(total_volume)] of <font color=[reagent_color]> [tag] [initial(material.name)].</font>"
 
-/obj/structure/channel_connector/furnace/attackby(obj/item/I, mob/living/user, params)
+/obj/structure/channel_connector/furnace/attackby(obj/item/I, mob/living/user, list/modifiers)
 	// Fuel the furnace
 	if(I.firefuel > 0)
 		if(fuel_left >= max_fuel)
@@ -209,5 +212,5 @@
 		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
 		var/datum/material/largest = metal?.largest_metal
 
-		if(initial(largest?.red_hot) && internal_reagents.chem_temp > initial(largest.melting_point))
+		if(initial(largest?.show_as_filling) && internal_reagents.chem_temp > initial(largest.melting_point))
 			. += emissive_appearance(icon, "furnace_metal", alpha = used_alpha)

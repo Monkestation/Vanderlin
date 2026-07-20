@@ -37,7 +37,6 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		GLOB.unlinked_dungeon_entries |= src
 	return ..()
 
-
 /obj/structure/dungeon_entry/Initialize()
 	. = ..()
 	if(dungeon_id)
@@ -72,7 +71,7 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		return
 	use(user)
 
-/obj/structure/dungeon_entry/attackby(obj/item/W, mob/user, params)
+/obj/structure/dungeon_entry/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
@@ -107,7 +106,7 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
 		if(!do_after(user, 3 SECONDS, src))
 			return
-	movable_travel_z_level(user, get_turf(exit))
+	user.zMove(target = get_turf(exit), z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /obj/structure/dungeon_exit
 	name = "dungeon exit"
@@ -160,7 +159,7 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		return
 	use(user)
 
-/obj/structure/dungeon_exit/attackby(obj/item/W, mob/user, params)
+/obj/structure/dungeon_exit/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
@@ -175,7 +174,7 @@ GLOBAL_LIST_INIT(dungeon_exits, list())
 		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
 		if(!do_after(user, 3 SECONDS, src))
 			return
-	movable_travel_z_level(user, get_turf(entry))
+	user.zMove(target = get_turf(entry), z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /*
 	suggest making this proc shared beftween the two, or a refatoring that makes that work

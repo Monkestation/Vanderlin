@@ -1,5 +1,5 @@
 /datum/element/earhealing
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	var/list/user_by_item = list()
 
 /datum/element/earhealing/New()
@@ -10,7 +10,7 @@
 	if(!isitem(target))
 		return ELEMENT_INCOMPATIBLE
 
-	RegisterSignal(target, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED), PROC_REF(equippedChanged))
+	RegisterSignals(target, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED), PROC_REF(equippedChanged))
 
 /datum/element/earhealing/Detach(datum/target)
 	. = ..()

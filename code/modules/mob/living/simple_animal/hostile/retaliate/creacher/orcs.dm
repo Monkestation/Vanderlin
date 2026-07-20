@@ -29,6 +29,7 @@
 	attack_sound = 'sound/blank.ogg'
 	canparry = TRUE
 	d_intent = INTENT_PARRY
+	animal_type = /datum/blood_type/human/corrupted/orc
 	speak_emote = list("grunts")
 	speak = list("WAAAGH!", "KRUSH AND KILL!", "Never should have come here!", "Slaughter them all!", "Kill everything!", "Hahaha! Die!")
 	loot = list(/obj/effect/mob_spawn/corpse/orc/savage,
@@ -127,7 +128,7 @@
 	. = ..()
 	if(!target)
 		if(prob(3))
-			emote(pick("idle"), TRUE)
+			INVOKE_ASYNC(src, PROC_REF(emote), "idle")
 
 /mob/living/simple_animal/hostile/orc/taunted(mob/user)
 	emote("aggro")
@@ -162,10 +163,12 @@
 	retreat_distance = 2
 	minimum_distance = 5
 	ranged_cooldown_time = 60
-	loot = list(/obj/effect/mob_spawn/corpse/orc/savage/alt,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-			/obj/item/ammo_casing/caseless/arrow = 3,
-			/obj/effect/decal/cleanable/blood)
+	loot = list(
+		/obj/effect/mob_spawn/corpse/orc/savage/alt,
+		/obj/item/gun/ballistic/bow,
+		/obj/item/ammo_casing/caseless/arrow = 3,
+		/obj/effect/decal/cleanable/blood,
+	)
 	maxHealth = 100
 	health = 100
 	ai_controller = /datum/ai_controller/orc_ranged

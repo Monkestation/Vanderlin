@@ -838,7 +838,7 @@
 	var/position_desc = strip_html(params["position_desc"])
 	var/rank_level = text2num(params["rank_level"])
 	var/max_subordinates = text2num(params["max_subordinates"])
-	var/position_color = sanitize_hexcolor(params["position_color"], include_crunch = TRUE)
+	var/position_color = sanitize_hexcolor(params["position_color"])
 	var/can_assign = params["can_assign_positions"] ? TRUE : FALSE
 
 	if(!position_name || !max_subordinates)
@@ -874,7 +874,7 @@
 	var/superior_ref = params["superior_position"]
 	var/rank_level = text2num(params["rank_level"])
 	var/max_subordinates = text2num(params["max_subordinates"])
-	var/position_color = sanitize_hexcolor(params["position_color"], include_crunch = TRUE)
+	var/position_color = sanitize_hexcolor(params["position_color"])
 	var/can_assign = params["can_assign_positions"] ? TRUE : FALSE
 
 	if(!position_name || !superior_ref || !rank_level)

@@ -60,11 +60,11 @@
 	var/mob/living/captor = parent
 	target = targ
 	weapon = wep
-	RegisterSignal(targ, list(COMSIG_MOB_ATTACK_HAND, COMSIG_MOB_ITEM_ATTACK, COMSIG_MOB_FIRED_GUN, COMSIG_LIVING_RESIST_GRAB), PROC_REF(trigger_reaction))
+	RegisterSignals(targ, list(COMSIG_MOB_ATTACK_HAND, COMSIG_MOB_ITEM_ATTACK, COMSIG_MOB_FIRED_GUN, COMSIG_LIVING_RESIST_GRAB), PROC_REF(trigger_reaction))
 	RegisterSignal(targ, COMSIG_MOVABLE_MOVED, PROC_REF(check_deescalate))
-	RegisterSignal(targ, COMSIG_PARENT_QDELETING, PROC_REF(qdel), src)
+	RegisterSignal(targ, COMSIG_QDELETING, PROC_REF(qdel), src)
 
-	RegisterSignal(weapon, list(COMSIG_PARENT_QDELETING, COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_SPEC_ATTACKEDBY), PROC_REF(cancel))
+	RegisterSignals(weapon, list(COMSIG_QDELETING, COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_SPEC_ATTACKEDBY), PROC_REF(cancel))
 
 	captor.visible_message(span_danger("[captor] takes [target] hostage with [weapon]!"), \
 		span_danger("You take [target] hostage with [weapon]."), ignored_mobs = target, \
@@ -88,16 +88,16 @@
 
 /datum/component/hostage/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(move_react))
-	RegisterSignal(parent, COMSIG_MOB_APPLY_DAMGE, PROC_REF(flinch))
+	RegisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(flinch))
 	RegisterSignal(parent, COMSIG_MOB_ATTACK_HAND, PROC_REF(check_shove))
 	RegisterSignal(parent, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(check_deescalate))
-	RegisterSignal(parent, list(COMSIG_LIVING_START_PULL, COMSIG_MOVABLE_BUMP), PROC_REF(check_bump))
-	RegisterSignal(parent, list(COMSIG_MOB_SWAPPING_HANDS, COMSIG_ATOM_NO_LONGER_PULLING), PROC_REF(cancel))
+	RegisterSignals(parent, list(COMSIG_LIVING_START_PULL, COMSIG_MOVABLE_BUMP), PROC_REF(check_bump))
+	RegisterSignals(parent, list(COMSIG_MOB_SWAPPING_HANDS, COMSIG_ATOM_NO_LONGER_PULLING), PROC_REF(cancel))
 
 /datum/component/hostage/UnregisterFromParent()
 	UnregisterSignal(parent, \
 		list(COMSIG_MOVABLE_MOVED, \
-		COMSIG_MOB_APPLY_DAMGE, \
+		COMSIG_MOB_APPLY_DAMAGE, \
 		COMSIG_MOB_ATTACK_HAND,
 		COMSIG_MOB_UPDATE_SIGHT, \
 		COMSIG_LIVING_START_PULL, \

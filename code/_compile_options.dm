@@ -10,7 +10,7 @@
 //0 test
 //12 minutes norma
 //#define ROUNDTIMERBOAT (300 MINUTES)
-#define INITIAL_ROUND_TIMER (99 MINUTES)
+#define INITIAL_ROUND_TIMER (120 MINUTES)
 #define ROUND_EXTENSION_TIME (30 MINUTES)
 #define ROUND_END_TIME (15 MINUTES)
 #define ROUND_END_TIME_VERBAL "15 minutes"
@@ -24,6 +24,11 @@
 // Comment this out if you are debugging problems that might be obscured by custom error handling in world/Error
 #ifdef DEBUG
 #define USE_CUSTOM_ERROR_HANDLER
+#endif
+
+#if defined(OPENDREAM) && !defined(SPACEMAN_DMM) && !defined(CIBUILDING)
+// The code is being compiled for OpenDream, and not just for the CI linting.
+#define OPENDREAM_REAL
 #endif
 
 #ifdef TESTING
@@ -57,7 +62,23 @@
 #define REFERENCE_TRACKING
 // actually look for refs
 #define GC_FAILURE_HARD_LOOKUP
+// Log references in their own file
+#define REFERENCE_TRACKING_LOG_APART
 #endif // REFERENCE_DOING_IT_LIVE
+
+/// Sets up the reftracker to be used locally, to hunt for hard deletions
+/// Errors are logged to [log_dir]/harddels.log
+//#define REFERENCE_TRACKING_STANDARD
+#ifdef REFERENCE_TRACKING_STANDARD
+// compile the backend
+#define REFERENCE_TRACKING
+// actually look for refs
+#define GC_FAILURE_HARD_LOOKUP
+// spend ALL our time searching, not just part of it
+#define FIND_REF_NO_CHECK_TICK
+// Log references in their own file
+#define REFERENCE_TRACKING_LOG_APART
+#endif // REFERENCE_TRACKING_STANDARD
 
 
 // If defined, we will NOT defer asset generation till later in the game, and will instead do it all at once, during initiialize

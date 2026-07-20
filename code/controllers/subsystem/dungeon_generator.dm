@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(dungeon_generator)
 
 	if(!length(parent_types))
 		for(var/datum/map_template/dungeon/path as anything in subtypesof(/datum/map_template/dungeon))
-			if(!is_abstract(path))
+			if(!IS_ABSTRACT(path))
 				continue
 			if(!initial(path.type_weight))
 				continue
@@ -92,8 +92,8 @@ SUBSYSTEM_DEF(dungeon_generator)
 			parent_types[path] = initial(path.type_weight)
 
 	if(!length(created_types))
-		for(var/path in subtypesof(/datum/map_template/dungeon))
-			if(is_abstract(path))
+		for(var/datum/map_template/dungeon/path as anything in subtypesof(/datum/map_template/dungeon))
+			if(IS_ABSTRACT(path))
 				continue
 			var/datum/map_template/dungeon/template = new path
 			created_types[template] = template.rarity

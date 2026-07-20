@@ -53,4 +53,5 @@
 
 /datum/chimeric_node/input/reagent/blood/unregister_triggers()
 	. = ..()
-	REMOVE_TRAIT(hosted_carbon, TRAIT_SANGUINE, "[REF(src)]")
+	if(hosted_carbon)
+		REMOVE_TRAIT(hosted_carbon, TRAIT_SANGUINE, "[REF(src)]")

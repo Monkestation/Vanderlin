@@ -38,7 +38,7 @@
 	///Sound to make while doing a retalitory attack
 	var/ranged_attack_sound = 'sound/combat/Ranged/flatbow-shot-01.ogg'
 	///Weapon path, for visuals
-	var/held_weapon_visual = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	var/held_weapon_visual = /obj/item/gun/ballistic/bow
 
 	///Type path for the trader datum to use for retrieving the traders wares, speech, etc
 	var/trader_data_path = /datum/trader_data
@@ -75,7 +75,7 @@
 	var/datum/world_faction/faction = faction_ref?.resolve()
 	if(faction)
 		name = "[faction.faction_name] [trader_data.name] Trader"
-		desc = "A [lowertext(trader_data.name)] trader from the [faction.faction_name]."
+		desc = "A [LOWER_TEXT(trader_data.name)] trader from the [faction.faction_name]."
 
 /mob/living/simple_animal/hostile/retaliate/trader/proc/return_to_boat()
 	returning_to_boat = TRUE

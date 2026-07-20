@@ -36,12 +36,22 @@
 		charges = INFINITY,
 		inventory_flags = ~ITEM_SLOT_BACKPACK, // items in a backpack won't activate, anywhere else is fine
 		datum/callback/drain_antimagic,
-		datum/callback/expiration
+		datum/callback/expiration,
 	)
 
 	if(isitem(parent))
-		RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
-		RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+		var/obj/item/parent_item = parent
+		RegisterSignal(parent_item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
+		RegisterSignal(parent_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+
+		// incase it's already equipped, we gotta run the proc
+		if(isclothing(parent) && ishuman(parent_item.loc))
+			var/mob/living/carbon/human/wearer = parent_item.loc
+			var/obj/item/clothing/clothes = parent
+
+			if(clothes == wearer.get_item_by_slot(inventory_flags))
+				on_equip(wearer, wearer, clothes.slot_flags)
+
 	else if(ismob(parent))
 		RegisterSignal(parent, COMSIG_MOB_RECEIVE_MAGIC, PROC_REF(block_receiving_magic), override = TRUE)
 		RegisterSignal(parent, COMSIG_MOB_RESTRICT_MAGIC, PROC_REF(restrict_casting_magic), override = TRUE)
@@ -55,7 +65,7 @@
 	src.drain_antimagic = drain_antimagic
 	src.expiration = expiration
 
-/datum/component/anti_magic/Destroy(force, silent)
+/datum/component/anti_magic/Destroy(force)
 	QDEL_NULL(drain_antimagic)
 	QDEL_NULL(expiration)
 	return ..()

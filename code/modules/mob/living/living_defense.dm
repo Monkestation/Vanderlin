@@ -20,8 +20,8 @@
 
 	return armor
 
-
-/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+//simulate will cause no damage and play no sound
+/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	return 0
 
 //this returns the mob's protection against eye damage (number between -1 and 2) from bright lights
@@ -43,13 +43,15 @@
  *
  * Retuns a truthy value (a ref to what is covering mouth), or a falsy value (null)
  */
-/mob/living/proc/is_mouth_covered(head_only = 0, mask_only = 0)
+/mob/living/proc/is_mouth_covered(check_flags)
 	return FALSE
 
-/mob/living/proc/is_eyes_covered(check_glasses = 1, check_head = 1, check_mask = 1)
+/mob/living/proc/is_eyes_covered(check_flags)
 	return FALSE
+
 /mob/living/proc/is_pepper_proof(check_head = TRUE, check_mask = TRUE)
 	return FALSE
+
 /mob/living/proc/on_hit(obj/projectile/P)
 	return BULLET_ACT_HIT
 
@@ -127,9 +129,11 @@
 					damagetype = BRUTE
 				if("fire", "acid")
 					damagetype = BURN
-			if(!apply_damage(I.throwforce, damagetype, zone, armor))
+			var/real_damage = apply_damage(I.throwforce, damagetype, zone, armor)
+			if(!real_damage)
 				nodmg = TRUE
 				next_attack_msg += span_warning(" Armor stops the damage.")
+			var/mob/thrown_by = I.thrownby?.resolve()
 			if(!nodmg)
 				if(iscarbon(src))
 					var/obj/item/bodypart/affecting = get_bodypart(zone)
@@ -137,19 +141,19 @@
 						var/throwee = null
 						if(throwingdatum)
 							throwee = isliving(throwingdatum.thrower) ? throwingdatum.thrower : null
-						affecting.bodypart_attacked_by(I.thrown_bclass, I.throwforce, throwee, affecting.body_zone, crit_message = TRUE)
+						affecting.bodypart_attacked_by(I.thrown_bclass, real_damage, throwee, affecting.body_zone, crit_message = TRUE, incoming_germ = I.germ_level, pre_applied = TRUE)
 					I.do_special_attack_effect(I.thrownby, affecting, null, src, zone, thrown = TRUE)
 				else
 					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone, crit_message = TRUE)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(I.can_embed() && prob(I.embedding.embed_chance) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 							simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
-					I.do_special_attack_effect(I.thrownby, null, null, src, null, thrown = TRUE)
+					I.do_special_attack_effect(thrown_by, null, null, src, null, thrown = TRUE)
 			visible_message("<span class='danger'>[src] is hit by [I]![next_attack_msg.Join()]</span>", \
 							"<span class='danger'>I'm hit by [I]![next_attack_msg.Join()]</span>")
 			next_attack_msg.Cut()
-			if(I.thrownby)
-				log_combat(I.thrownby, src, "threw and hit", I)
+			if(thrown_by)
+				log_combat(thrown_by, src, "threw and hit", I)
 		else
 			return 1
 	else
@@ -186,9 +190,9 @@
 	var/skill_diff = 0
 	var/combat_modifier = 1
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling)) //NPCs don't use this
+		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling)) //NPCs don't use this
 	if(mind)
-		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
 
 	if(user == src)
 		instant = TRUE
@@ -216,21 +220,20 @@
 		if(G.chokehold)
 			combat_modifier += 0.15
 
-	var/probby = clamp((((8 + (((user.STASTR - STASTR)/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
+	var/probby = clamp((((8 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH))/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
 
 	if(!prob(probby) && !instant && !stat && cmode)
 		var/self_message
-		if(src.client?.prefs.showrolls)
+		if(src.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			self_message = span_warning("I struggle with [user]! ([probby]%)")
 		else
 			self_message = span_warning("I struggle with [user]!")
 		visible_message(span_warning("[user] struggles with [src]!"), self_message, span_hear("I hear aggressive shuffling!"))
 		playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
-		user.Immobilize(1 SECONDS)
-		user.changeNext_move(1 SECONDS)
+		user.Immobilize(0.5 SECONDS)
+		user.changeNext_move(CLICK_CD_GRABBING)
 		user.adjust_stamina(rand(2,6))
-		src.Immobilize(0.5 SECONDS)
-		src.changeNext_move(0.5 SECONDS)
+		src.Immobilize(0.25 SECONDS)
 		return
 
 	if(!instant)
@@ -323,11 +326,11 @@
 		playsound(src, M.a_intent.hitsound, 100, FALSE)
 
 	log_combat(M, src, "attacked")
-
+	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, M)
 	return TRUE
 
 
-/mob/living/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/attack_paw(mob/living/carbon/M)
 	if(isturf(loc) && istype(loc.loc, /area/start))
 //		to_chat(M, "No attacking people at spawn, you jackass.")
 		return FALSE
@@ -356,33 +359,6 @@
 
 /mob/living/ex_act(severity, target)
 	..()
-
-/mob/living/attack_paw(mob/living/carbon/monkey/M)
-	if(isturf(loc) && istype(loc.loc, /area/start))
-//		to_chat(M, "No attacking people at spawn, you jackass.")
-		return FALSE
-
-	if (M.used_intent.type == INTENT_HARM)
-		if(HAS_TRAIT(M, TRAIT_PACIFISM))
-			to_chat(M, "<span class='info'>I don't want to hurt anyone!</span>")
-			return FALSE
-
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
-			to_chat(M, "<span class='warning'>I can't bite with my mouth covered!</span>")
-			return FALSE
-		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
-		if (prob(75))
-			log_combat(M, src, "attacked")
-			playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
-			visible_message("<span class='danger'>[M.name] bites [src]!</span>", \
-							"<span class='danger'>[M.name] bites you!</span>", "<span class='hear'>I hear a chomp!</span>", COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, "<span class='danger'>I bite [src]!</span>")
-			return TRUE
-		else
-			visible_message("<span class='danger'>[M.name]'s bite misses [src]!</span>", \
-							"<span class='danger'>I avoid [M.name]'s bite!</span>", "<span class='hear'>I hear the sound of jaws snapping shut!</span>", COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, "<span class='warning'>My bite misses [src]!</span>")
-	return FALSE
 
 /mob/living/acid_act(acidpwr, acid_volume)
 	take_bodypart_damage(acidpwr * min(1, acid_volume * 0.1))

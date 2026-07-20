@@ -147,6 +147,7 @@
 	check_flags = COVEN_CHECK_CAPABLE | COVEN_CHECK_CONSCIOUS | COVEN_CHECK_IMMOBILE | COVEN_CHECK_LYING | COVEN_CHECK_FREE_HAND
 	violates_masquerade = TRUE
 	cooldown_length = 5 SECONDS
+	violates_masquerade = TRUE
 
 /datum/coven_power/quietus/scorpions_touch/activate()
 	. = ..()
@@ -160,7 +161,7 @@
 	icon_state = "grabbing_greyscale"
 	color = COLOR_RED_LIGHT
 
-/obj/item/melee/touch_attack/quietus/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/melee/touch_attack/quietus/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	if(!proximity)
 		return
 	if(isliving(target))

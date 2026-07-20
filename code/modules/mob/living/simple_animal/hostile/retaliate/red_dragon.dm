@@ -23,7 +23,6 @@
 	retreat_distance = 0
 	minimum_distance = 0
 	base_strength = 20
-	aggressive = 1
 	speed = 5
 	move_to_delay = 7
 	ranged = TRUE

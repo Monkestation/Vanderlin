@@ -9,7 +9,7 @@
 /datum/objective/personal/proper_burial/on_creation()
 	. = ..()
 	if(owner?.current)
-		if(owner.current.job == "Gravetender" || istype(owner.current.mind?.assigned_role, /datum/job/undertaker))
+		if(owner.current.job == JOB_GRAVETENDER || istype(owner.current.mind?.assigned_role, /datum/job/undertaker))
 			required_burials = 2
 		RegisterSignal(owner.current, COMSIG_GRAVE_CONSECRATED, PROC_REF(on_grave_consecrated))
 	update_explanation_text()
@@ -38,7 +38,7 @@
 
 /datum/objective/personal/proper_burial/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_DEADNOSE, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_DEADNOSE, OBJECTIVE_TRAIT)
 
 /datum/objective/personal/proper_burial/update_explanation_text()
 	explanation_text = "Consecrate [required_burials] grave\s by building a grave marker or using funeral rites to earn Necra's approval."

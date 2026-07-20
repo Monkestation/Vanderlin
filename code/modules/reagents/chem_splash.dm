@@ -8,6 +8,7 @@
 /proc/chem_splash(turf/epicenter, affected_range = 3, list/datum/reagents/reactants = list(), extra_heat = 0, threatscale = 1, adminlog = 1)
 	if(!isturf(epicenter) || !reactants.len || threatscale <= 0)
 		return
+
 	var/has_reagents
 	var/total_reagents
 	for(var/datum/reagents/R in reactants)
@@ -25,7 +26,7 @@
 		return
 
 	//splash down, not on open spaces.
-	while(istype(epicenter, /turf/open/transparent/openspace))
+	while(istype(epicenter, /turf/open/openspace))
 		var/turf/downcheck = GET_TURF_BELOW(epicenter)
 		if(downcheck)
 			epicenter = downcheck
@@ -62,8 +63,7 @@
 			for(var/turf/T in turflist)
 				if(accessible[T])
 					continue
-				for(var/thing in T.GetAtmosAdjacentTurfs(alldir = TRUE))
-					var/turf/NT = thing
+				for(var/turf/NT as anything in T.GetAtmosAdjacentTurfs(alldir = TRUE))
 					if(!(NT in accessible))
 						continue
 					if(!(get_dir(T,NT) in GLOB.cardinals))

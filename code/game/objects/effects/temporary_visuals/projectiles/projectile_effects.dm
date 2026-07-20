@@ -7,6 +7,11 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	appearance_flags = 0
 
+/obj/effect/projectile/Initialize(mapload, angle_override, p_x, p_y, color_override, scaling = 1)
+	if(angle_override && p_x && p_y && color_override && scaling)
+		apply_vars(angle_override, p_x, p_y, color_override, scaling)
+	return ..()
+
 /obj/effect/projectile/proc/scale_to(nx,ny,override=TRUE)
 	var/matrix/M
 	if(!override)
@@ -24,11 +29,6 @@
 		M = new
 	M.Turn(angle)
 	transform = M
-
-/obj/effect/projectile/New(angle_override, p_x, p_y, color_override, scaling = 1)
-	if(angle_override && p_x && p_y && color_override && scaling)
-		apply_vars(angle_override, p_x, p_y, color_override, scaling)
-	return ..()
 
 /obj/effect/projectile/proc/apply_vars(angle_override, p_x = 0, p_y = 0, color_override, scaling = 1, new_loc, increment = 0)
 	var/mutable_appearance/look = new(src)

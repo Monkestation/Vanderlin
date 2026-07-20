@@ -28,6 +28,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/sausage = 1,
 		/obj/item/reagent_containers/powder/salt = 1
 	)
+	subtypes_allowed = TRUE
 	attacked_atom = /obj/machinery/tanningrack
 
 	craft_time = 1.5 SECONDS
@@ -42,6 +43,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/steak = 1,
 		/obj/item/reagent_containers/powder/salt = 1
 	)
+	subtypes_allowed = TRUE
 	attacked_atom = /obj/machinery/tanningrack
 
 	craft_time = 1.5 SECONDS
@@ -88,28 +90,13 @@
 		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry = 1,
 	)
 	attacked_atom = /obj/machinery/tanningrack
+	subtypes_allowed = TRUE //poison berries
 
 	craft_time = 1.5 SECONDS
 	crafting_message = "starts drying some jacksberries"
 	craftdiff = 0
 	pass_types_in_end = list(
 		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry, //old craft blacklisted poison berries, cowards
-	)
-
-/datum/repeatable_crafting_recipe/raisins_poison
-	name = "raisins"
-	output = /obj/item/reagent_containers/food/snacks/raisins/poison
-	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison = 1,
-	)
-	attacked_atom = /obj/machinery/tanningrack
-
-	craft_time = 1.5 SECONDS
-	crafting_message = "starts drying some jacksberries"
-	craftdiff = 0
-	pass_types_in_end = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison,
 	)
 
 /datum/repeatable_crafting_recipe/driedstrawberry

@@ -1,5 +1,22 @@
+/datum/attribute_holder/sheet/job/steward
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 5,
+		STAT_CONSTITUTION = -2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/stealing = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/lockpicking = 60,
+		/datum/attribute/skill/labor/mathematics = 50
+	)
+
 /datum/job/steward
-	title = "Steward"
+	title = JOB_STEWARD
+	alt_titles = list("Landlord", "Chamberlain")
+	alt_honorary = list("Thane")
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: \
 	You're addicted to it, and you hold the position as the King's personal treasurer of both coin and information. \
 	You know the power silver and gold has on a man's mortal soul, \
@@ -11,6 +28,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
+	is_quest_giver = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/steward
@@ -23,26 +41,16 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
+	honorary = "Lord"
+	honorary_f = "Lady"
 
-	jobstats = list(
-		STATKEY_STR = -2,
-		STATKEY_INT = 5,
-		STATKEY_CON = -2
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 6,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/stealing = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/lockpicking = 6,
-		/datum/skill/labor/mathematics = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/steward
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_SEEPRICES,
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/outfit/steward/pre_equip(mob/living/carbon/human/H)
@@ -57,25 +65,52 @@
 	. = ..()
 	spawned.virginity = TRUE
 
+/datum/job/steward/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/list/options = list(
+		"Dagger",
+		"Rapier",
+		"Cane Blade",
+	)
+	var/choice = tgui_input_list(spawned, "CHOOSE YOUR WEAPON", "STEWARD", options, "Dagger")
+
+	if(!choice)
+		choice = "Dagger"
+
+	var/obj/item/weapon_choice
+	var/obj/item/weapon/scabbard/scabbard_choice
+
+	switch(choice)
+		if("Dagger")
+			weapon_choice = new /obj/item/weapon/knife/dagger/steel/royal(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/knife/royal(spawned)
+
+		if("Rapier")
+			weapon_choice = new /obj/item/weapon/sword/rapier/dec(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/sword/royal(spawned)
+
+		if("Cane Blade")
+			weapon_choice = new /obj/item/weapon/sword/rapier/caneblade(spawned)
+			scabbard_choice = new /obj/item/weapon/scabbard/cane(spawned)
+
+	if(scabbard_choice && weapon_choice)
+		if(SEND_SIGNAL(scabbard_choice, COMSIG_TRY_STORAGE_INSERT, weapon_choice, null, TRUE, FALSE))
+			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
+		else
+			spawned.put_in_hands(weapon_choice)
+			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
+
 /datum/outfit/steward
-	name = "Steward"
+	name = JOB_STEWARD
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
-	shirt = /obj/item/clothing/shirt/dress/stewarddress
 	head = /obj/item/clothing/head/stewardtophat
+	mask = /obj/item/clothing/face/spectacles/monocle
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/gambeson/steward
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/steward
-	beltl = /obj/item/weapon/knife/dagger/steel
 	backr = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/knife)
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/rich = 1,
 		/obj/item/lockpickring/mundane = 1
 	)
-
-/datum/outfit/steward/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.gender == MALE)
-		shirt = /obj/item/clothing/shirt/undershirt/fancy
-		pants = /obj/item/clothing/pants/trou/leathertights

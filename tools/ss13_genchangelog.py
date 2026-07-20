@@ -26,20 +26,19 @@ THE SOFTWARE.
 '''
 
 from __future__ import print_function
-import json, os, glob, sys, re, time, argparse
+import yaml, os, glob, sys, re, time, argparse
 from datetime import datetime, date, timedelta
 from time import time
 
 today = date.today()
-today_string = today.strftime("%Y-%m-%d")
 
 fileDateFormat = "%Y-%m"
 
 opt = argparse.ArgumentParser()
-opt.add_argument('directory', help='The directory of changelogs we will use.')
+opt.add_argument('ymlDir', help='The directory of YAML changelogs we will use.')
 
 args = opt.parse_args()
-archiveDir = os.path.join(args.directory, 'archive')
+archiveDir = os.path.join(args.ymlDir, 'archive')
 
 all_changelog_entries = {}
 
@@ -71,24 +70,24 @@ def dictToTuples(inp):
     return [(k, v) for k, v in inp.items()]
 
 print('Reading changelogs...')
-for fileName in glob.glob(os.path.join(args.directory, "*.json")):
+for fileName in glob.glob(os.path.join(args.ymlDir, "*.yml")):
     name, ext = os.path.splitext(os.path.basename(fileName))
     if name.startswith('.'): continue
     if name == 'example': continue
     fileName = os.path.abspath(fileName)
     formattedDate = today.strftime(fileDateFormat)
-    monthFile = os.path.join(archiveDir, formattedDate + '.json')
-    print('Reading {}...'.format(fileName))
+    monthFile = os.path.join(archiveDir, formattedDate + '.yml')
+    print(' Reading {}...'.format(fileName))
     cl = {}
-    with open(fileName, 'r',encoding='utf-8-sig') as f:
-        cl = json.load(f)
+    with open(fileName, 'r',encoding='utf-8') as f:
+        cl = yaml.load(f, Loader=yaml.SafeLoader)
     currentEntries = {}
     if os.path.exists(monthFile):
-        with open(monthFile,'r',encoding='utf-8-sig') as f:
-            currentEntries = json.load(f)
-    if today_string not in currentEntries:
-        currentEntries[today_string] = {}
-    author_entries = currentEntries[today_string].get(cl['author'], [])
+        with open(monthFile,'r',encoding='utf-8') as f:
+            currentEntries = yaml.load(f, Loader=yaml.SafeLoader)
+    if today not in currentEntries:
+        currentEntries[today] = {}
+    author_entries = currentEntries[today].get(cl['author'], [])
     if len(cl['changes']):
         new = 0
         for change in cl['changes']:
@@ -99,7 +98,7 @@ for fileName in glob.glob(os.path.join(args.directory, "*.json")):
                     sys.exit(1)
                 author_entries += [change]
                 new += 1
-        currentEntries[today_string][cl['author']] = author_entries
+        currentEntries[today][cl['author']] = author_entries
         if new > 0:
             print('  Added {0} new changelog entries.'.format(new))
 
@@ -109,4 +108,4 @@ for fileName in glob.glob(os.path.join(args.directory, "*.json")):
             os.remove(fileName)
 
     with open(monthFile, 'w', encoding='utf-8') as f:
-        json.dump(currentEntries, f, indent = 4)
+        yaml.dump(currentEntries, f, default_flow_style=False)

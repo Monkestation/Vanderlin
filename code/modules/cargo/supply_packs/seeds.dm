@@ -4,6 +4,7 @@
 	group = "Seeds"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/seeds
 
 /datum/supply_pack/seeds/spelt
 	name = "Spelt"
@@ -129,3 +130,33 @@
 	name = "Piyata"
 	cost = 10
 	contains = /obj/item/neuFarm/seed/dragonfruit
+
+/datum/supply_pack/seeds/cocaudo
+	name = "Cocaudo"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/cocaudo
+
+/datum/supply_pack/seeds/pompkaun
+	name = "Pompkaun"
+	cost = 8
+	contains = /obj/item/neuFarm/seed/pompkaun
+
+/datum/supply_pack/seeds/sunreed
+	name = "Sunreed"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/sunreed
+
+/datum/supply_pack/seeds/tamto
+	name = "Tamto"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/tamto
+
+/datum/supply_pack/seeds/drowsbane
+	name = "Drowsbane"
+	cost = 15
+	contains = /obj/item/neuFarm/seed/spore/drowsbane
+
+/datum/supply_pack/seeds/ollie
+	name = "Ollie"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/ollie

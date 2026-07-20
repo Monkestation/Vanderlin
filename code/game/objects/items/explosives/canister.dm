@@ -33,6 +33,7 @@
 	grid_height = 64
 	grid_width = 32
 	impact_explode = FALSE
+	item_weight = 1.7 KILOGRAMS
 
 	prob2fail = 5
 

@@ -38,7 +38,7 @@
 			var/probby = (BP.get_damage() / BP.max_damage) * 20 * attuned_strength
 			if(prob(probby))
 				BP.add_wound(/datum/wound/fracture)
-		L.adjustBruteLoss(scaled_damage)
+		L.adjustBruteLoss(scaled_damage, damage_type = BCLASS_CUT)
 		to_chat(L, span_userdanger("I'm cut by arcyne force!"))
 
 /obj/effect/temp_visual/trap

@@ -5,7 +5,7 @@
 
 /datum/mob_affix/armored/apply_affix(mob/living/simple_animal/hostile/retaliate/target)
 	description = "Reduces incoming damage by [round(25 * intensity)]%"
-	RegisterSignal(target, COMSIG_MOB_APPLY_DAMGE, PROC_REF(armored_damaged))
+	RegisterSignal(target, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(armored_damaged))
 
 /datum/mob_affix/armored/proc/armored_damaged(mob/living/simple_animal/hostile/retaliate/source, damage, damagetype, def_zone)
 	SIGNAL_HANDLER

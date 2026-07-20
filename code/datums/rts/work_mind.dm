@@ -57,7 +57,7 @@
 	worker.pass_flags |= PASSMOB
 	worker.density = FALSE
 
-	worker_name = pick( world.file2list("strings/rt/names/dwarf/dwarmm.txt") )
+	worker_name = pick( file2list("strings/rt/names/dwarf/dwarmm.txt") )
 	worker.real_name = "[worker_name] the [worker.real_name]"
 	worker.name = worker.real_name
 

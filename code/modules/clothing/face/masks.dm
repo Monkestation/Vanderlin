@@ -3,6 +3,7 @@
 	desc = "Half of your face turned gold."
 	icon_state = "lmask"
 	sellprice = 50
+	item_weight = 450 GRAMS
 
 /obj/item/clothing/face/lordmask/l
 	icon_state = "lmask_l"
@@ -35,19 +36,22 @@
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
 	block2add = FOV_BEHIND
-	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	slot_flags = ITEM_SLOT_MASK
 	experimental_onhip = TRUE
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = CANT_SLEEP_IN
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
 
+	material_category = ARMOR_MAT_PLATE
+	item_weight = 1.2 KILOGRAMS
+
 /obj/item/clothing/face/facemask/goldnosechain
 	name = "gold nosechain"
 	icon_state = "nosechain_g"
-	desc = "A fashionable nose chain with two rings. Its design originated from the Savannah Elf tribes."
+	desc = "A fashionable nose chain with two rings."
 	max_integrity = 100
 	blocksound = FALSE
 	armor = FALSE
@@ -56,15 +60,17 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
+	item_weight = 65 GRAMS
+	melting_material = /datum/material/gold
 
 /obj/item/clothing/face/facemask/silvernosechain
 	name = "silver nosechain"
 	icon_state = "nosechain_s"
-	desc = "A fashionable nose chain with two rings. Its design originated from the Savannah Elf tribes."
+	desc = "A fashionable nose chain with two rings."
 	max_integrity = 100
 	blocksound = FALSE
 	armor = FALSE
@@ -73,10 +79,12 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
+	item_weight = 45 GRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/face/facemask/silvernosechain/Initialize()
 	. = ..()
@@ -94,10 +102,12 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
+	item_weight = 1.2 KILOGRAMS
+	melting_material = /datum/material/gold
 
 /obj/item/clothing/face/facemask/silverveil
 	name = "silver face veil"
@@ -111,10 +121,12 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
+	item_weight = 1.05 KILOGRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/face/facemask/silverveil/Initialize()
 	. = ..()
@@ -135,10 +147,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 70
+	item_weight = 2.2 KILOGRAMS // a pure jade mask is heavy as fuck
 
 /obj/item/clothing/face/turqmask
 	name = "ceruleabaster mask "
@@ -155,10 +168,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 95
+	item_weight = 2.2 KILOGRAMS
 
 /obj/item/clothing/face/rosemask
 	name = "rosellusk mask "
@@ -175,10 +189,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 35
+	item_weight = 1.9 KILOGRAMS
 
 /obj/item/clothing/face/shellmask
 	name = "shell mask "
@@ -195,10 +210,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 30
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/clothing/face/coralmask
 	name = "aoetal mask "
@@ -215,10 +231,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 80
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/clothing/face/ambermask
 	name = "petriamber mask "
@@ -235,10 +252,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 70
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/clothing/face/onyxamask
 	name = "onyxa mask "
@@ -255,10 +273,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 50
+	item_weight = 1.7 KILOGRAMS
 
 /obj/item/clothing/face/opalmask
 	name = "opaloise mask "
@@ -275,10 +294,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 100
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/clothing/face/shepherd/clothmask
 	name = "cloth mask"
@@ -291,6 +311,7 @@
 	resistance_flags = FLAMMABLE
 	toggle_icon_state = TRUE
 	experimental_onhip = TRUE
+	item_weight = 25 GRAMS
 
 /obj/item/clothing/face/facemask/prisoner
 	clothing_flags = NONE //they're used to this being stuck on their face
@@ -314,7 +335,7 @@
 	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 80, "fire" = 0, "acid" = 0)
 	desc = "A knightly steel mask that both conceals and protects the face. Usually paired with a bascinet."
 	max_integrity = 300
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 100
 
@@ -328,6 +349,44 @@
 	icon_state = "steppemask_snout"
 	desc = "A steel mask shaped like a beast's face, worn by steppe riders to intimidate their enemies."
 
+/obj/item/clothing/face/facemask/steel/kazengun
+	name = "soldier's half-mask"
+	desc = "\"The first lesson of war is that it would be better to live in peace.\""
+	block2add = null
+	armor = ARMOR_PLATE // because it's only half
+	icon_state = "kazengunmouthguard"
+	item_state = "kazengunmouthguard"
+
+/obj/item/clothing/face/facemask/steel/kazengun/full
+	name = "ogre mask"
+	desc = "\"The second lesson: Rich men have dreams. Poor men die to make them come true.\""
+	icon_state = "kazengunfaceguard"
+	item_state = "kazengunfaceguard"
+
+/obj/item/clothing/face/facemask/steel/graggar
+	name = "vicious jawmask"
+	desc = "Shattered jaws, chipped teeth, sunken metal - fit for a skull of the same. It snarls in mimicry of the Sinistar's visage."
+	icon_state = "graggarplatemask_heavy"
+	block2add = null
+	body_parts_covered = MOUTH|NOSE
+	flags_inv = HIDEFACE
+
+/obj/item/clothing/face/facemask/bronze
+	name = "bronze mask"
+	desc = "Glimmering bronze, curved to veil its wearer's face from both judgement and harm."
+	armor_class = AC_LIGHT
+	icon_state = "bronzemask"
+	item_state = "bronzemask"
+	max_integrity = 150
+	melting_material = /datum/material/bronze
+	melt_amount = 75
+
+/obj/item/clothing/face/facemask/bronze/classic
+	name = "bronze death mask"
+	icon_state = "bronzemask_legacy"
+	item_state = "bronzemask_legacy"
+	desc = "Glimmering bronze, meticuliusly shaped to mimic the guise of another. One of civilization's oldest superstitions is the belief that donning such masks would impart a sliver of the mimicked facebearer's power unto its wearer."
+
 /obj/item/clothing/face/facemask/silver
 	name = "silver mask"
 	icon = 'icons/roguetown/clothing/special/adept.dmi'
@@ -339,13 +398,14 @@
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 100
+	item_weight = 1.4 KILOGRAMS
 	var/cross_retracted = 0 // Does the silver mask has it's 3 little spuds retracted or not. Used for toggling.
 
 /obj/item/clothing/face/facemask/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -369,6 +429,7 @@
 	icon_state = "shadowfacemask"
 	smeltresult = null// the mask is made out of silk and cloth, turns out it was giving "free" iron
 	melting_material = null
+	item_weight =  290 GRAMS
 
 /obj/item/clothing/face/shepherd
 	name = "halfmask"
@@ -382,6 +443,7 @@
 	experimental_onhip = TRUE
 	salvage_amount = 1
 	gas_transfer_coefficient = 0.3
+	item_weight = 25 GRAMS
 
 /obj/item/clothing/face/shepherd/AdjustClothes(mob/user)
 	if(loc == user)
@@ -422,8 +484,10 @@
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	gas_transfer_coefficient = 0.3
+	item_weight = 356 GRAMS
 
 /obj/item/clothing/face/phys
 	name = "physicker's mask"
@@ -434,22 +498,26 @@
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	gas_transfer_coefficient = 0.3
+	item_weight = 356 GRAMS
 
 /obj/item/clothing/face/courtphysician
 	name = "court physican's mask"
 	desc = "Similar to a feldsher's mask, this one is made with actual bone! Don't ask whose."
-	icon_state = "courtmask"
-	item_state = "courtmask"
+	icon_state = "docmask"
+	item_state = "docmask"
 	resistance_flags = FLAMMABLE
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	gas_transfer_coefficient = 0.3
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	item_weight = 275 GRAMS
 
 /obj/item/clothing/face/phys/plaguebearer
 	name = "plague's mask"
@@ -470,9 +538,11 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/copper
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melting_material = /datum/material/copper
+	melt_amount = 50
+	item_weight = 945 GRAMS
 
 //................ Druids Mask ............... //
 /obj/item/clothing/face/druid
@@ -490,6 +560,7 @@
 
 	armor = ARMOR_WEAK
 	prevent_crits = CUT_AND_MINOR_CRITS
+	item_weight = 356 GRAMS
 
 /obj/item/clothing/face/skullmask
 	name = "skull mask"
@@ -500,6 +571,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF
 	armor = list("blunt" = 10, "slash" = 40, "stab" = 40,  "piercing" = 8, "fire" = 0, "acid" = 0)
+	prevent_crits = CUT_AND_MINOR_CRITS
 	prevent_crits = null
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -507,6 +579,7 @@
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
 	smeltresult = /obj/item/alch/bone
+	item_weight = 240 GRAMS
 
 /obj/item/clothing/face/facemask/goldmask
 	name = "gold mask"
@@ -514,6 +587,8 @@
 	max_integrity = 150
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
+	item_weight = 2.8 KILOGRAMS
 
 /obj/item/clothing/face/operavisage
 	name = "opera visage"
@@ -528,4 +603,35 @@
 	salvage_result = /obj/item/natural/silk
 	flags_inv = HIDEFACE
 	resistance_flags = FLAMMABLE
+	item_weight = 356 GRAMS
 
+/obj/item/clothing/face/xylixmask
+	name = "jester mask"
+	item_state = "xylixmask"
+	icon_state = "xylixmask"
+	desc = "A ceramic mask, forever stuck with the joyful smile its patron god favors. While it will shatter easily from blows, its smug countenance shall taunt its foes."
+	max_integrity = 50
+	armor = null
+	flags_inv = HIDEFACE
+	body_parts_covered = FACE
+	block2add = FOV_BEHIND
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	smeltresult = null
+	sellprice = 0
+
+/obj/item/clothing/face/xylixmask/weathered
+	name = "weathered mask"
+	item_state = "xylix_weathered"
+	icon_state = "xylix_weathered"
+	desc = "An ancient ceramic face. It looks weathered, the sort molded by Xylixian worshippers of many yils past. Even when cast aside, it feels like the hardened clay has never left your hands. As if it always finds a way back into your palms."
+	// No armor anyways
+	max_integrity = 200
+	// Not messing with jester mask, but again, it has no armor. many other masks also don't block vision.
+	block2add = FOV_DEFAULT
+
+/obj/item/clothing/face/faceveil
+	name = "simple veil"
+	icon_state = "faceveil"
+	desc = "A remarkably plain veil meant to conceal ones face... if you wore this, a gust of wind would be all it takes to reveal your identity."
+	grid_width = 32
+	grid_height = 32

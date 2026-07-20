@@ -45,15 +45,11 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	// Proc calls are allowed past this point
 	else if(copytext(E.name, 1, 18) == "Out of resources!")//18 == length() of that string + 1
 		log_world("BYOND out of memory. Restarting ([E?.file]:[E?.line])")
+		SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_OOM)
 		TgsEndProcess()
 		. = ..()
 		Reboot(reason = 1)
 		return
-
-	if (islist(stack_trace_storage))
-		for (var/line in splittext(E.desc, "\n"))
-			if (text2ascii(line) != 32)
-				stack_trace_storage += line
 
 	var/static/list/error_last_seen = list()
 	var/static/list/error_cooldown = list() /* Error_cooldown items will either be positive(cooldown time) or negative(silenced error)

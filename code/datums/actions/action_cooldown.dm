@@ -209,8 +209,8 @@
 	return PreActivate(user)
 
 /// Intercepts client owner clicks to activate the ability
-/datum/action/cooldown/proc/InterceptClickOn(mob/living/clicker, params, atom/target)
-	if(!LAZYACCESS(params2list(params), MIDDLE_CLICK))
+/datum/action/cooldown/proc/InterceptClickOn(mob/living/clicker, list/modifiers, atom/target)
+	if(!LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return FALSE
 	if(!IsAvailable(TRUE))
 		return FALSE

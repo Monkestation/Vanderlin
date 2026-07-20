@@ -6,6 +6,7 @@
 	brewed_amount = 4
 	brew_time = 1.33 MINUTES
 	sell_value = 20
+	brewing_skill = /datum/attribute/skill/craft/cooking/brewing
 
 /datum/brewing_recipe/beer/oat
 	name = "Oat Ale"

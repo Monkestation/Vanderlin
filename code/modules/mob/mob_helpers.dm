@@ -18,8 +18,6 @@
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_NOSE)
 			zone = BODY_ZONE_HEAD
-		if(BODY_ZONE_PRECISE_MOUTH)
-			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_SKULL)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_EARS)
@@ -44,6 +42,19 @@
 			zone = BODY_ZONE_L_ARM
 
 	return zone
+
+///Returns a TRUE / FALSE if the zone is a FACE coverage subzone. Used mainly by accuracy_check & bait.
+/proc/check_face_subzone(zone)
+	if(!zone)
+		return FALSE
+	var/list/zones = list(
+		BODY_ZONE_PRECISE_R_EYE,
+		BODY_ZONE_PRECISE_L_EYE,
+		BODY_ZONE_PRECISE_MOUTH,
+		BODY_ZONE_PRECISE_NOSE,
+		BODY_ZONE_PRECISE_EARS,
+	)
+	return (zone in zones)
 
 /**
  * Return the zone or randomly, another valid zone
@@ -199,39 +210,31 @@
 ///Would this zone be above the neck
 /proc/above_neck(zone)
 	var/list/zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
-	if(zones.Find(zone))
-		return 1
-	else
-		return 0
+	return (zone in zones)
+
 /**
  * Convert random parts of a passed in message to stars
  *
- * * n - the string to convert
- * * pr - probability any character gets changed
+ * * phrase - the string to convert
+ * * probability - probability any character gets changed
  *
  * This proc is dangerously laggy, avoid it or die
  */
-/proc/stars(n, pr)
-	n = html_encode(n)
-	if (pr == null)
-		pr = 25
-	if (pr <= 0)
-		return null
-	else
-		if (pr >= 100)
-			return n
-	var/te = n
-	var/t = ""
-	n = length(n)
-
-	for(var/p = 1 to min(n,MAX_BROADCAST_LEN))
-		if ((copytext(te, p, p + 1) == " " || prob(pr)))
-			t = text("[][]", t, copytext(te, p, p + 1))
+/proc/stars(phrase, probability = 25)
+	if(probability <= 0)
+		return phrase
+	phrase = html_decode(phrase)
+	var/leng = length(phrase)
+	. = ""
+	var/char = ""
+	for(var/i = 1, i <= leng, i += length(char))
+		char = phrase[i]
+		if(char == " " || !prob(probability))
+			. += char
 		else
-			t = text("[]*", t)
-	if(n > MAX_BROADCAST_LEN)
-		t += "..." //signals missing text
-	return sanitize(t)
+			. += "*"
+	return sanitize(.)
+
 /**
  * Makes you speak like you're drunk
  */
@@ -244,15 +247,15 @@
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,3)==3)
-			if(lowertext(newletter)=="o")
+			if(LOWER_TEXT(newletter)=="o")
 				newletter="u"
-			if(lowertext(newletter)=="s")
+			if(LOWER_TEXT(newletter)=="s")
 				newletter="ch"
-			if(lowertext(newletter)=="a")
+			if(LOWER_TEXT(newletter)=="a")
 				newletter="ah"
-			if(lowertext(newletter)=="u")
+			if(LOWER_TEXT(newletter)=="u")
 				newletter="oo"
-			if(lowertext(newletter)=="c")
+			if(LOWER_TEXT(newletter)=="c")
 				newletter="k"
 		if(rand(1,20)==20)
 			if(newletter==" ")
@@ -281,17 +284,17 @@
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,2)==2)
-			if(lowertext(newletter)=="o")
+			if(LOWER_TEXT(newletter)=="o")
 				newletter="u"
-			if(lowertext(newletter)=="t")
+			if(LOWER_TEXT(newletter)=="t")
 				newletter="ch"
-			if(lowertext(newletter)=="a")
+			if(LOWER_TEXT(newletter)=="a")
 				newletter="ah"
-			if(lowertext(newletter)=="u")
+			if(LOWER_TEXT(newletter)=="u")
 				newletter="oo"
-			if(lowertext(newletter)=="c")
+			if(LOWER_TEXT(newletter)=="c")
 				newletter=" NAR "
-			if(lowertext(newletter)=="s")
+			if(LOWER_TEXT(newletter)=="s")
 				newletter=" SIE "
 		if(rand(1,4)==4)
 			if(newletter==" ")
@@ -316,28 +319,43 @@
 	return newphrase
 
 ///Adds stuttering to the message passed in
-/proc/stutter(n)
-	var/te = html_decode(n)
-	var/t = ""//placed before the message. Not really sure what it's for.
-	n = length(n)//length of the entire word
-	var/p = null
-	p = 1//1 is the start of any word
-	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
-		var/n_letter = copytext(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
-			if (prob(10))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
-			else
-				if (prob(20))
-					n_letter = text("[n_letter]-[n_letter]-[n_letter]")
-				else
-					if (prob(5))
-						n_letter = null
-					else
-						n_letter = text("[n_letter]-[n_letter]")
-		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
-		p++//for each letter p is increased to find where the next letter will be.
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+/proc/stutter(phrase, power = 5)
+    phrase = html_decode(phrase)
+    var/leng = length(phrase)
+    . = ""
+    var/newletter = ""
+    var/rawchar = ""
+    var/static/regex/nostutter = regex(@@[aeiouAEIOU ""''()[\]{}.!?,:;_`~-]@)
+    var/word_start = TRUE // track if we're at the start of a new word
+
+    for(var/i = 1, i <= leng, i += length(rawchar))
+        rawchar = newletter = phrase[i]
+
+        // spaces/punctuation reset the word boundary
+        if(nostutter.Find(rawchar))
+            if(rawchar == " ")
+                word_start = TRUE
+            . += newletter
+            continue
+
+        if(word_start)
+            word_start = FALSE
+            // stutter more aggressively on word-initial consonants
+            if(prob(50 + power))
+                if(prob(10) && power >= 10)
+                    newletter = "[newletter]-[newletter]-[newletter]-[newletter]"
+                else if(prob(25) && power >= 6)
+                    newletter = "[newletter]-[newletter]-[newletter]"
+                else
+                    newletter = "[newletter]-[newletter]"
+        else
+            // rare mid-word stutter, much lower chance
+            if(prob(1 + power))
+                newletter = "[newletter]-[newletter]"
+
+        . += newletter
+
+    return sanitize(.)
 
 ///Convert a message to derpy speak
 /proc/derpspeech(message, stuttering)
@@ -395,8 +413,7 @@
 /proc/findname(msg)
 	if(!istext(msg))
 		msg = "[msg]"
-	for(var/i in GLOB.mob_list)
-		var/mob/M = i
+	for(var/mob/M as anything in GLOB.mob_list)
 		if(M.real_name == msg)
 			return M
 	return 0
@@ -669,22 +686,24 @@
 		ADD_TRAIT(src, TRAIT_BLOCKED_DIAGONAL, "combat")
 		deltimer(cmode_timer)
 
+	SEND_SIGNAL(src, COMSIG_MOB_TOGGLE_CMODE, cmode)
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
-
-/mob
-	var/last_aimhchange = 0
-	var/aimheight = 11
-	var/cmode_music = 'sound/music/cmode/combat.ogg'
 
 /mob/proc/aimheight_change(input)
 	var/old_zone = zone_selected
 	if(isnum(input))
 		aimheight = input
-	if(input == "up")
-		aimheight = min(aimheight+1, 19)
-	if(input == "down")
-		aimheight = max(aimheight-1, 1)
+	else
+		if(input == "up")
+			aimheight++
+		else if(input == "down")
+			aimheight--
+		//im too stupid to get the modular division to make this not an if statement
+		if(aimheight < 1)
+			aimheight = 19
+		else if(aimheight > 19)
+			aimheight = 1
 
 	switch(aimheight)
 		if(19)
@@ -837,8 +856,8 @@
 		if(source)
 			var/atom/movable/screen/alert/notify_action/A = O.throw_alert("[REF(source)]_notify_action", /atom/movable/screen/alert/notify_action)
 			if(A)
-				if(O.client.prefs && O.client.prefs.UI_style)
-					A.icon = ui_style2icon(O.client.prefs.UI_style)
+				if(O.client.prefs && O.client.prefs.read_preference(/datum/preference/choiced/UI_style))
+					A.icon = ui_style2icon(O.client.prefs.read_preference(/datum/preference/choiced/UI_style))
 				if (header)
 					A.name = header
 				A.desc = message
@@ -848,26 +867,6 @@
 					alert_overlay = new(source)
 				alert_overlay.plane = FLOAT_PLANE
 				A.add_overlay(alert_overlay)
-
-/**
- * Heal a robotic body part on a mob
- */
-/proc/item_heal_robotic(mob/living/carbon/human/H, mob/user, brute_heal, burn_heal)
-	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
-	if(affecting && affecting.status == BODYPART_ROBOTIC)
-		var/dam //changes repair text based on how much brute/burn was supplied
-		if(brute_heal > burn_heal)
-			dam = 1
-		else
-			dam = 0
-		if((brute_heal > 0 && affecting.brute_dam > 0) || (burn_heal > 0 && affecting.burn_dam > 0))
-			if(affecting.heal_damage(brute_heal, burn_heal, 0, BODYPART_ROBOTIC))
-				H.update_damage_overlays()
-			user.visible_message("<span class='notice'>[user] has fixed some of the [dam ? "dents on" : "burnt wires in"] [H]'s [affecting.name].</span>", \
-			"<span class='notice'>I fix some of the [dam ? "dents on" : "burnt wires in"] [H == user ? "your" : "[H]'s"] [affecting.name].</span>")
-			return 1 //successful heal
-		else
-			to_chat(user, "<span class='warning'>[affecting] is already in good condition!</span>")
 
 ///Is the passed in mob an admin ghost
 /proc/IsAdminGhost(mob/user)
@@ -960,21 +959,6 @@
 /mob/proc/can_hear()
 	. = TRUE
 
-/**
- * Examine text for traits shared by multiple types.
- *
- * I wish examine was less copypasted. (oranges say, be the change you want to see buddy)
- */
-/mob/proc/common_trait_examine()
-	if(HAS_TRAIT(src, TRAIT_DISSECTED))
-		var/dissectionmsg = ""
-		if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Extraterrestrial Dissection"))
-			dissectionmsg = " via Extraterrestrial Dissection. It is no longer worth experimenting on"
-		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Experimental Dissection"))
-			dissectionmsg = " via Experimental Dissection"
-		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Thorough Dissection"))
-			dissectionmsg = " via Thorough Dissection"
-		. += "<span class='notice'>This body has been dissected and analyzed[dissectionmsg].</span><br>"
 
 /**
  * Get the list of keywords for policy config
@@ -995,13 +979,32 @@
 /mob/proc/can_see_reagents()
 	return stat == DEAD || has_unlimited_silicon_privilege //Dead guys and silicons can always see reagents
 
-/mob/living/carbon/human/proc/get_role_title()
+/mob/living/carbon/human/proc/get_role_title(ignore_pronouns = FALSE, steward_check = FALSE)
 	var/used_title
-	if(job)
-		var/datum/job/J = SSjob.GetJob(job)
-		if(!J)
-			return job
-		used_title = J.get_informed_title(src)
 	if(is_apprentice())
 		used_title = return_our_apprentice_name()
+	else if(job)
+		var/datum/job/job_datum = SSjob.GetJob(job)
+		if(QDELETED(job_datum))
+			return job
+		if(steward_check && (job_datum.department_flag & OUTSIDERS))
+			return "Visitor"
+		used_title = job_datum.get_informed_title(src, ignore_pronouns)
 	return used_title
+
+/mob/living/proc/recoil_camera(duration, backtime_duration, strength, angle)
+	if(!client || duration < 1)
+		return
+
+	strength *= world.icon_size
+
+	var/client/my_client = client
+	var/oldx = my_client.pixel_x
+	var/oldy = my_client.pixel_y
+
+	//get pixels to move the camera in an angle
+	var/mpx = sin(angle) * strength
+	var/mpy = cos(angle) * strength
+
+	animate(my_client, pixel_x = oldx + mpx, pixel_y = oldy + mpy, time = duration, flags = ANIMATION_RELATIVE)
+	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)

@@ -27,7 +27,7 @@
 	STOP_PROCESSING(SSobj, src)
 	if(connected_pipe && last_pressure_added)
 		remove_pressure_from_pipe()
-	UnregisterSignal(connected_pipe, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(connected_pipe, COMSIG_QDELETING)
 	connected_pipe = null
 	return ..()
 
@@ -40,7 +40,7 @@
 /obj/structure/pressurizer/proc/clear_pipe()
 	if(connected_pipe && last_pressure_added)
 		remove_pressure_from_pipe()
-	UnregisterSignal(connected_pipe, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(connected_pipe, COMSIG_QDELETING)
 	connected_pipe = null
 
 /obj/structure/pressurizer/proc/find_connected_pipe()
@@ -48,7 +48,7 @@
 	for(var/obj/structure/water_pipe/pipe in get_turf(src))
 		connected_pipe = pipe
 		update_pressure()
-		RegisterSignal(connected_pipe, COMSIG_PARENT_QDELETING, PROC_REF(clear_pipe))
+		RegisterSignal(connected_pipe, COMSIG_QDELETING, PROC_REF(clear_pipe))
 		break
 
 /obj/structure/pressurizer/find_rotation_network()
@@ -63,7 +63,8 @@
 			if(!structure.try_network_merge(src))
 				rotation_break()
 		else
-			if(!structure.try_connect(src))
+			var/result = structure.try_connect(src)
+			if(result == FALSE)
 				rotation_break()
 
 	if(!rotation_network)

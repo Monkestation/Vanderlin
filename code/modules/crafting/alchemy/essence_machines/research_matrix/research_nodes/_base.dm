@@ -14,7 +14,7 @@
 	var/bonus_value = 0       // The actual bonus value
 	var/bonus_type = "additive" // "additive", "multiplicative", or "special"
 
-/datum/thaumic_research_node/Destroy(force, ...)
+/datum/thaumic_research_node/Destroy(force)
 	connected_nodes = null
 	return ..()
 

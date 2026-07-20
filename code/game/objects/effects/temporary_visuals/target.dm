@@ -97,7 +97,7 @@
 		var/turf/closed/mineral/rock_turf = hit_turf
 		rock_turf.gets_drilled()
 	for(var/mob/living/mob in hit_turf)
-		mob.take_overall_damage(25)
+		mob.take_overall_damage(25, damage_type = BCLASS_BLUNT)
 
 	explosion(hit_turf, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire, hotspot_range = exp_hotspot, soundin = explode_sound)
 

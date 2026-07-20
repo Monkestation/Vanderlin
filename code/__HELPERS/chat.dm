@@ -55,8 +55,7 @@ it will be sent to all connected chats.
 		return
 
 	var/list/channels_to_use = list()
-	for(var/I in world.TgsChatChannelInfo())
-		var/datum/tgs_chat_channel/channel = I
+	for(var/datum/tgs_chat_channel/channel as anything in world.TgsChatChannelInfo())
 		var/list/applicable_tags = splittext(channel.custom_tag, ",")
 		if((!admin_only || channel.is_admin_channel) && (channel_tag in applicable_tags))
 			channels_to_use += channel

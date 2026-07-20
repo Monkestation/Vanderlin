@@ -35,11 +35,12 @@
 	var/firelevel = 1 //RTD new firehotspot mechanics
 
 /obj/effect/hotspot/extinguish()
+	. = ..()
 	if(isturf(loc))
 		new /obj/effect/temp_visual/small_smoke(src.loc)
 	qdel(src)
 
-/obj/effect/hotspot/Initialize(mapload, starting_volume, starting_temperature)
+/obj/effect/hotspot/Initialize(mapload, starting_volume, starting_temperature, lifetime)
 	. = ..()
 	SShotspots.hotspots += src
 	if(!isnull(starting_volume))
@@ -51,6 +52,8 @@
 	air_update_turf()
 	GLOB.weather_act_upon_list |= src
 	GLOB.active_fires |= src
+	if(lifetime)
+		QDEL_IN(src, lifetime)
 
 /obj/effect/hotspot/Destroy()
 	. = ..()
@@ -205,7 +208,7 @@
 			change_firelevel(min(3, firelevel+1))
 
 		if(burn_power)
-			for(var/turf/ranged_floor in range(1, src))
+			for(var/turf/ranged_floor as anything in RANGE_TURFS(1, src))
 				var/falling = FALSE
 				if(isopenspace(ranged_floor))
 					falling = TRUE

@@ -2,23 +2,17 @@
 #define MAX_PLANT_NUTRITION 300
 #define SOIL_DECAY_TIME 20 MINUTES
 
-#define QUALITY_REGULAR 1
-// #define QUALITY_BRONZE 2
-#define QUALITY_SILVER 2
-#define QUALITY_GOLD 3
-#define QUALITY_DIAMOND 4
-
 #define BLESSING_WEED_DECAY_RATE 10 / (1 MINUTES)
 #define WEED_GROWTH_RATE 3 / (1 MINUTES)
 #define WEED_DECAY_RATE 5 / (1 MINUTES)
 #define WEED_RESISTANCE_DECAY_RATE 20 / (1 MINUTES)
 
 // These get multiplied by 0.0 to 1.0 depending on amount of weeds
-#define WEED_WATER_CONSUMPTION_RATE 5 / (1 MINUTES)
+#define WEED_WATER_CONSUMPTION_RATE 4 / (1 MINUTES)
 #define WEED_NUTRITION_CONSUMPTION_RATE 2 / (1 MINUTES)
 
-#define PLANT_REGENERATION_RATE 10 / (1 MINUTES)
-#define PLANT_DECAY_RATE 10 / (1 MINUTES)
+#define PLANT_REGENERATION_RATE 5 / (1 MINUTES)
+#define PLANT_DECAY_RATE 5 / (1 MINUTES)
 #define PLANT_BLESS_HEAL_RATE 20 / (1 MINUTES)
 #define PLANT_WEEDS_HARM_RATE 10 / (1 MINUTES)
 
@@ -65,8 +59,8 @@
 	var/pollination_time = 0
 	/// Time remaining for the soil to decay and destroy itself, only applicable when its out of water and nutriments and has no plant
 	var/soil_decay_time = SOIL_DECAY_TIME
-	/// Current quality tier of the crop (1-5, regular to diamond)
-	var/crop_quality = QUALITY_REGULAR
+	/// Current quality tier of the crop (CROP_QUALITY defines)
+	var/crop_quality = CROP_QUALITY_REGULAR
 	/// Tracks quality points that accumulate toward quality tier increases
 	var/quality_points = 0
 	///accellerated_growth
@@ -92,10 +86,10 @@
 	if(!produce_ready)
 		return
 	apply_farming_fatigue(user, 4)
-	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
+	add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
 
 	return_nutrients_to_soil()
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming)
+	var/farming_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	var/chance_to_ruin = 50 - (farming_skill * 25)
 	if(prob(chance_to_ruin))
 		ruin_produce()
@@ -124,7 +118,7 @@
 	yield_produce(modifier)
 	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
-/obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
 		if(!plant || !produce_ready)
 			to_chat(user, span_warning("There is nothing to harvest!"))
@@ -134,7 +128,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user)
 	var/obj/item/old_item
 	if(istype(attacking_item, /obj/item/storage/sack))
 		var/list/seeds = list()
@@ -154,31 +148,31 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/shovel = attacking_item
 		to_chat(user, span_notice("I begin to uproot the crop..."))
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, get_farming_do_time(user, 4 SECONDS * shovel.time_multiplier), src))
+		if(do_after(user, get_farming_do_time(user, 4 SECONDS * shovel.toolspeed), src))
 			to_chat(user, span_notice("I uproot the crop."))
 			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 			uproot()
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_tilling(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_tilling(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		var/obj/item/weapon/hoe/hoe = attacking_item
 		to_chat(user, span_notice("I begin to till the soil..."))
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, get_farming_do_time(user, 3 SECONDS * hoe.time_multiplier), src))
+		if(do_after(user, get_farming_do_time(user, 3 SECONDS * hoe.toolspeed), src))
 			to_chat(user, span_notice("I till the soil."))
 			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 			user_till_soil(user)
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_watering(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_watering(obj/item/attacking_item, mob/user)
 	var/water_amount = 0
 	if(istype(attacking_item, /obj/item/reagent_containers))
 		if(water >= MAX_PLANT_WATER * 0.8)
@@ -199,10 +193,11 @@
 		playsound(user, pick_n_take(wash), 100, FALSE)
 		to_chat(user, span_notice("I water the soil."))
 		adjust_water(water_amount)
+		SEND_SIGNAL(user, COMSIG_PLANT_WATERED)
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_fertilizing(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_fertilizing(obj/item/attacking_item, mob/user)
 	var/fertilize_success = FALSE
 
 	if(istype(attacking_item, /obj/item/fertilizer))
@@ -237,7 +232,7 @@
 	adjust_potassium(fert.potassium_content)
 	return TRUE
 
-/obj/structure/soil/proc/try_handle_deweed(obj/item/attacking_item, mob/living/user, params)
+/obj/structure/soil/proc/try_handle_deweed(obj/item/attacking_item, mob/living/user)
 	if(weeds < MAX_PLANT_WEEDS * 0.3)
 		return FALSE
 	if(attacking_item == null)
@@ -246,26 +241,26 @@
 			apply_farming_fatigue(user, 20)
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
-			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
-		add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+		add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_flatten(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_flatten(obj/item/attacking_item, mob/user)
 	if(plant)
 		return FALSE
 	if(istype(attacking_item, /obj/item/weapon/shovel))
 		to_chat(user, span_notice("I begin flattening the soil with \the [attacking_item]..."))
 		var/obj/item/weapon/shovel/shovel = attacking_item
 		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, get_farming_do_time(user, 3 SECONDS * shovel.time_multiplier), src))
+		if(do_after(user, get_farming_do_time(user, 3 SECONDS * shovel.toolspeed), src))
 			if(plant)
 				return FALSE
 			apply_farming_fatigue(user, 10)
@@ -291,11 +286,11 @@
 			to_chat(user, span_notice("I remove the crop."))
 			playsound(src,'sound/items/seed.ogg', 100, FALSE)
 			uproot()
-			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		return
 	. = ..()
 
-/obj/structure/soil/attack_hand_secondary(mob/user, params)
+/obj/structure/soil/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -303,34 +298,35 @@
 	if(try_handle_deweed(null, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_deweed(weapon, user, null))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(try_handle_flatten(weapon, user, null))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+/obj/structure/soil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_seed_planting(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
-/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, params)
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_seed_planting(attacking_item, user, params))
-		return
-	if(try_handle_uprooting(attacking_item, user, params))
-		return
-	if(try_handle_tilling(attacking_item, user, params))
-		return
-	if(try_handle_watering(attacking_item, user, params))
-		return
-	if(try_handle_harvest(attacking_item, user, params))
-		return
-	if(try_handle_fertilizing(attacking_item, user, params))
-		return
-	for(var/obj/item/bagged_item in attacking_item.contents)
-		if(try_handle_fertilizing(bagged_item, user, params))
-			return
-	return ..()
+	if(try_handle_uprooting(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_tilling(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_watering(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_harvest(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_fertilizing(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	for(var/obj/item/bagged_item in tool.contents)
+		if(try_handle_fertilizing(bagged_item, user))
+			return ITEM_INTERACT_SUCCESS
+
+/obj/structure/soil/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_deweed(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_flatten(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/soil/proc/on_stepped(mob/living/stepper)
 	if(!plant)
@@ -340,9 +336,9 @@
 	if(stepper.m_intent == MOVE_INTENT_SNEAK)
 		return
 	if(stepper.m_intent == MOVE_INTENT_WALK)
-		adjust_plant_health(-2.5)
+		adjust_plant_health(-1)
 	else if(stepper.m_intent == MOVE_INTENT_RUN)
-		adjust_plant_health(-5)
+		adjust_plant_health(-2)
 	playsound(src, "plantcross", 90, FALSE)
 
 /obj/structure/soil/proc/deweed()
@@ -368,7 +364,7 @@
 	if(plant && plant_dead)
 		plant_dead = FALSE
 		plant_health = 10.0
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 
 	// Dendor provides balanced nutrients if low
 	if(nitrogen < 30)
@@ -385,7 +381,7 @@
 	// And it grows a little!
 	if(plant)
 		if(add_growth(2 MINUTES))
-			update_icon()
+			update_appearance(UPDATE_OVERLAYS)
 
 /// adjust water
 /obj/structure/soil/proc/adjust_water(adjust_amount)
@@ -435,14 +431,14 @@
 		return
 	water = min(MAX_PLANT_WATER, water + min(5, severity / 4))
 
-/obj/structure/soil/process()
-	var/dt = 10
+/obj/structure/soil/process(delta_time)
+	delta_time = delta_time SECONDS
 	var/force_update = FALSE
-	process_weeds(dt)
-	force_update = process_plant(dt)
+	process_weeds(delta_time)
+	force_update = process_plant(delta_time)
 	if(world.time < accellerated_growth)
-		force_update = process_plant(dt)
-	process_soil(dt)
+		force_update = process_plant(delta_time)
+	process_soil(delta_time)
 	if(soil_decay_time <= 0)
 		decay_soil(TRUE)
 		return
@@ -582,7 +578,7 @@
 	adjust_potassium(-dt * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
 
 	if((get_total_npk() > 0) && plant_genetics)
-		var/genetic_value = (100 - plant_genetics.disease_resistance) * 0.03
+		var/genetic_value = (TRAIT_GRADE_AVERAGE / max(plant_genetics.disease_resistance, TRAIT_GRADE_POOR))
 		adjust_weeds(dt * WEED_GROWTH_RATE * genetic_value)
 
 /obj/structure/soil/proc/process_plant(dt)
@@ -655,7 +651,7 @@
 
 	// Calculate max quality points based on total potential time
 	// Base time + production time + reasonable harvest window
-	var/total_potential_time = plant.maturation_time + plant.produce_time
+	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
 
 	var/progress_ratio = quality_points / max_quality_points
@@ -667,13 +663,13 @@
 
 	// Quality tier thresholds
 	if(quality_points >= max_quality_points * 0.9)
-		crop_quality = QUALITY_DIAMOND
+		crop_quality = CROP_QUALITY_DIAMOND
 	else if(quality_points >= max_quality_points * 0.7)
-		crop_quality = QUALITY_GOLD
+		crop_quality = CROP_QUALITY_GOLD
 	else if(quality_points >= max_quality_points * 0.5)
-		crop_quality = QUALITY_SILVER
+		crop_quality = CROP_QUALITY_SILVER
 	else
-		crop_quality = QUALITY_REGULAR
+		crop_quality = CROP_QUALITY_REGULAR
 
 // Optional: Add a proc to show current quality progress to players
 /obj/structure/soil/proc/get_quality_info()
@@ -682,18 +678,18 @@
 
 	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
-	var/progress_percent = round((quality_points / max_quality_points) * 100, 1)
+	var/progress_percent = PERCENT(quality_points / max_quality_points)
 
 	var/quality_name = "Regular"
 	switch(crop_quality)
-		if(QUALITY_SILVER)
+		if(CROP_QUALITY_SILVER)
 			quality_name = "Silver"
-		if(QUALITY_GOLD)
+		if(CROP_QUALITY_GOLD)
 			quality_name = "Gold"
-		if(QUALITY_DIAMOND)
+		if(CROP_QUALITY_DIAMOND)
 			quality_name = "Diamond"
 
-	return "Current Quality: [quality_name] ([progress_percent]% of maximum potential)"
+	return "Current Quality: [quality_name] ([total_potential_time], [max_quality_points], [progress_percent]% of maximum potential)"
 
 // Calculate quality modifier based on NPK balance
 /obj/structure/soil/proc/calculate_npk_quality_modifier()
@@ -795,13 +791,13 @@
 		var/efficiency_modifier = (plant_genetics.water_efficiency - TRAIT_GRADE_AVERAGE) / 100
 		drain_rate *= (1 - efficiency_modifier * 0.4) // Up to 20% less water consumption
 
-	var/weed_damage_multiplier = 1.0
-	if(plant_genetics)
-		var/hardiness_modifier = (plant_genetics.cold_resistance - TRAIT_GRADE_AVERAGE) / 100
-		weed_damage_multiplier = (1 - hardiness_modifier * 0.5) // Up to 25% less weed damage
-
 	// Lots of weeds harm the plant
 	if(weeds >= MAX_PLANT_WEEDS * 0.6)
+		var/weed_damage_multiplier = 1.0
+		if(plant_genetics)
+			var/hardiness_modifier = (plant_genetics.disease_resistance - TRAIT_GRADE_AVERAGE) / 100
+			weed_damage_multiplier = (1 - hardiness_modifier * 0.5) // Up to 25% less weed damage
+		weed_damage_multiplier *= (weeds / MAX_PLANT_WEEDS)
 		should_update |= adjust_plant_health(-dt * PLANT_WEEDS_HARM_RATE * weed_damage_multiplier)
 
 	// Regenerate plant health if we dont drain water, or we have the water
@@ -835,7 +831,7 @@
 		improvement_chance += 10
 	if(pollination_time > 0)
 		improvement_chance += 10
-	if(crop_quality >= QUALITY_SILVER) // the rich get richer
+	if(crop_quality >= CROP_QUALITY_SILVER) // the rich get richer
 		improvement_chance += 20
 
 	// Improve two random traits
@@ -998,6 +994,13 @@
 	if(potassium_needed && potassium_factor < 0.1)
 		actual_growth_time *= 0.95
 
+	var/drain_rate = plant.water_drain_rate * dt
+	if(plant_genetics)
+		var/efficiency_modifier = (plant_genetics.water_efficiency - TRAIT_GRADE_AVERAGE) / 100
+		drain_rate *= (1 - efficiency_modifier * 0.4) // Up to 20% less water consumption
+	if(water < drain_rate) // If no water, eat a massive growth rate penalty
+		actual_growth_time *= 0.5
+
 	// Nutrient deficiency affects plant health only if nutrients are required but unavailable
 	var/any_nutrients_needed = (nitrogen_needed > 0 || phosphorus_needed > 0 || potassium_needed > 0)
 	if(any_nutrients_needed && limiting_factor < 0.1)
@@ -1095,7 +1098,6 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 /// Yields produce on its tile if it's ready for harvest
-
 /obj/structure/soil/proc/yield_produce(modifier = 0)
 	if(!produce_ready || !plant_genetics)
 		return
@@ -1114,6 +1116,7 @@
 	for(var/i in 1 to spawn_amount)
 		var/obj/item/produce = new plant.produce_type(loc)
 		produce.set_quality(crop_quality)
+		produce.AddElement(/datum/element/visual_quality, crop_quality)
 		if(produce && istype(produce, /obj/item/reagent_containers/food/snacks/produce))
 			var/obj/item/reagent_containers/food/snacks/produce/P = produce
 			// Pass genetics to the produce for seed extraction
@@ -1126,11 +1129,10 @@
 
 	// Reset quality for next growth cycle if plant is perennial
 	if(plant?.perennial)
-		crop_quality = QUALITY_REGULAR
+		crop_quality = CROP_QUALITY_REGULAR
 		quality_points = 0
 
 	update_appearance(UPDATE_OVERLAYS)
-
 
 /obj/structure/soil/proc/insert_plant(datum/plant_def/new_plant, datum/plant_genetics/new_genetics)
 	if(plant)
@@ -1146,30 +1148,30 @@
 	plant_dead = FALSE
 	plant_genetics = new_genetics
 	// Reset quality values
-	crop_quality = QUALITY_REGULAR
+	crop_quality = CROP_QUALITY_REGULAR
 	quality_points = 0
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/soil/proc/add_signals()
 	var/turf/above = get_step(src, NORTH)
 	RegisterSignal(above, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
-	RegisterSignal(above, COMSIG_TURF_EXITED, PROC_REF(on_exited))
+	RegisterSignal(above, COMSIG_ATOM_EXITED, PROC_REF(on_exited))
 	LAZYADD(marked_turfs, above)
 	RegisterSignal(get_step(above, WEST), COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
-	RegisterSignal(get_step(above, WEST), COMSIG_TURF_EXITED, PROC_REF(on_exited))
+	RegisterSignal(get_step(above, WEST), COMSIG_ATOM_EXITED, PROC_REF(on_exited))
 	LAZYADD(marked_turfs, get_step(above, WEST))
 	RegisterSignal(get_step(above, EAST), COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
-	RegisterSignal(get_step(above, EAST), COMSIG_TURF_EXITED, PROC_REF(on_exited))
+	RegisterSignal(get_step(above, EAST), COMSIG_ATOM_EXITED, PROC_REF(on_exited))
 	LAZYADD(marked_turfs, get_step(above, EAST))
 
 /obj/structure/soil/proc/remove_signals()
 	var/turf/above = get_step(src, NORTH)
 	UnregisterSignal(above, COMSIG_ATOM_ENTERED)
-	UnregisterSignal(above, COMSIG_TURF_EXITED)
+	UnregisterSignal(above, COMSIG_ATOM_EXITED)
 	UnregisterSignal(get_step(above, WEST), COMSIG_ATOM_ENTERED)
-	UnregisterSignal(get_step(above, WEST), COMSIG_TURF_EXITED)
+	UnregisterSignal(get_step(above, WEST), COMSIG_ATOM_EXITED)
 	UnregisterSignal(get_step(above, EAST), COMSIG_ATOM_ENTERED)
-	UnregisterSignal(get_step(above, EAST), COMSIG_TURF_EXITED)
+	UnregisterSignal(get_step(above, EAST), COMSIG_ATOM_EXITED)
 	LAZYCLEARLIST(marked_turfs)
 	for(var/mob/mob as anything in vanished)
 		var/image/overlay = LAZYACCESS(vanished, mob)
@@ -1203,7 +1205,7 @@
 	LAZYADDASSOC(vanished, crossed, overlay)
 
 
-/obj/structure/soil/proc/on_exited(turf/source, mob/crossed, direction)
+/obj/structure/soil/proc/on_exited(turf/source, mob/crossed, atom/new_loc)
 	if(!isliving(crossed))
 		return
 	if(get_step(source, crossed.dir) in marked_turfs)
@@ -1278,11 +1280,11 @@
 #undef MAX_PLANT_WEEDS
 #undef SOIL_DECAY_TIME
 
-#undef QUALITY_REGULAR
+#undef CROP_QUALITY_REGULAR
 // #undef QUALITY_BRONZE
-#undef QUALITY_SILVER
-#undef QUALITY_GOLD
-#undef QUALITY_DIAMOND
+#undef CROP_QUALITY_SILVER
+#undef CROP_QUALITY_GOLD
+#undef CROP_QUALITY_DIAMOND
 
 #undef BLESSING_WEED_DECAY_RATE
 #undef WEED_GROWTH_RATE

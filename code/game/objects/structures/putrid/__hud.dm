@@ -183,12 +183,6 @@
 	..()
 	var/atom/movable/screen/using
 
-	scannies = new /atom/movable/screen/scannies
-	scannies.set_new_hud(src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70
-
 	for(var/element as anything in PUTRID_ELEMENTS)
 		using = new element()
 		using.set_new_hud(src)

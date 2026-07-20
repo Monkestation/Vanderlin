@@ -10,15 +10,15 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	blade_dulling = DULLING_CUT
 	max_integrity = 30
-	static_debris = list(/obj/item/grown/log/tree/small = 2)
+	var/list/static_debris = list(/obj/item/grown/log/tree/small = 2)
 	obj_flags = CAN_BE_HIT
 	resistance_flags = FLAMMABLE
-	gripped_intents = list(/datum/intent/hit)
-	possible_item_intents = list(/datum/intent/hit)
+	gripped_intents = list(INTENT_GENERIC)
+	possible_item_intents = list(INTENT_GENERIC)
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
-	var/quality = SMELTERY_LEVEL_NORMAL // For it not to ruin recipes that need it
+	item_weight = 2.4 KILOGRAMS
 	var/lumber = /obj/item/grown/log/tree/small //These are solely for lumberjack calculations
 	var/lumber_alt
 	var/lumber_amount = 1
@@ -28,7 +28,7 @@
 
 /obj/item/grown/log/tree/attacked_by(obj/item/I, mob/living/user) //This serves to reward woodcutting
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -39,7 +39,7 @@
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
 		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + prob(CLAMP((user.STALUC - 10)*2,0,100))))
+			if(prob(skill_level + prob(CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100))))
 				new /obj/item/grown/log/tree/essence(get_turf(src))
 				if(!essence_sound_played)
 					essence_sound_played = TRUE
@@ -51,20 +51,19 @@
 			new /obj/effect/decal/cleanable/debris/wood(get_turf(src))
 		if(!skill_level)
 			to_chat(user, span_info("My poor skill has me ruin some of the timber..."))
-		user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		playsound(src, destroy_sound, 100, TRUE)
 		qdel(src)
 		return TRUE
 	. = ..()
 
-
-/obj/item/grown/log/tree/attackby_secondary(obj/item/I, mob/living/user, params)
+/obj/item/grown/log/tree/attackby_secondary(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber_alt)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -75,7 +74,7 @@
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
 		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + prob(CLAMP((user.STALUC - 10)*2,0,100))))
+			if(prob(skill_level + prob(CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100))))
 				new /obj/item/grown/log/tree/essence(get_turf(src))
 				if(!essence_sound_played)
 					essence_sound_played = TRUE
@@ -85,36 +84,16 @@
 				new lumber_alt(get_turf(src))
 		if(!skill_level)
 			to_chat(user, span_info("My poor skill has me ruin some of the timber..."))
-		user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		playsound(src, destroy_sound, 100, TRUE)
 		qdel(src)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/*
-* Okay so the root of this proc defines dissasemble
-* but doesnt do anything with it. This means despite
-* burn() calling deconstruct(FALSE) it will still
-* spawn the debris.
-*/
-/obj/item/grown/log/tree/deconstruct(disassembled = TRUE)
-	if(disassembled)
-		return ..()
-	qdel(src)
-
-/obj/item/grown/log/tree/atom_destruction(damage_flag)
-	SHOULD_CALL_PARENT(FALSE)
-	SEND_SIGNAL(src, COMSIG_ATOM_DESTRUCTION, damage_flag)
-	if(damage_flag == "acid")
-		acid_melt()
-	else if(damage_flag == "fire")
-		burn()
-	else
-		if(destroy_sound)
-			playsound(src, destroy_sound, 100, TRUE)
-		if(destroy_message)
-			visible_message(destroy_message)
-		deconstruct(TRUE)
-	return TRUE
+/obj/item/grown/log/tree/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(drop_loc)
 
 /obj/item/grown/log/tree/small
 	name = "small log"
@@ -135,6 +114,9 @@
 	lumber_amount = 2
 	grid_height = 64
 	grid_width = 64
+	item_weight = 1.4 KILOGRAMS
+	grind_results = list(/datum/reagent/tree_sap = 10)
+
 
 /obj/item/grown/log/tree/small/apply_components()
 	return
@@ -157,6 +139,8 @@
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	lumber_amount = 0
 	lumber = null
+	item_weight = 121 GRAMS
+	grind_results = null
 
 /obj/item/grown/log/tree/stick/apply_components()
 	return
@@ -180,35 +164,41 @@
 				L.update_sneak_invis(TRUE)
 			L.consider_ambush()
 
-/obj/item/grown/log/tree/stick/attack_self(mob/living/user, params)
+/obj/item/grown/log/tree/stick/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)
 	qdel(src)
 
-/obj/item/grown/log/tree/stick/attackby(obj/item/I, mob/living/user, params)
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(istype(I, /obj/item/natural/bundle/stick))
-		var/obj/item/natural/bundle/stick/B = I
-		if(B.amount < B.maxamount)
-			to_chat(user, span_notice("I add [src] to [B]."))
-			B.amount += 1
-			B.update_bundle()
-			qdel(src)
-		return
-	return ..()
+/obj/item/grown/log/tree/stick/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/grown/log/tree/stick/attackby_secondary(obj/item/I, mob/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
+	if(!istype(tool, /obj/item/natural/bundle/stick))
+		return NONE
 
-	if(istype(I, /obj/item/grown/log/tree/stick))
-		var/obj/item/natural/bundle/stick/F = new(get_turf(user))
-		qdel(I)
+	var/obj/item/natural/bundle/stick/B = tool
+	if(B.amount < B.maxamount)
+		user.balloon_alert(user, "[name] added.")
+		B.amount += 1
+		B.update_bundle()
 		qdel(src)
-		user.put_in_hands(F)
-		to_chat(user, "You collect the [F.stackname] into a bundle.")
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/grown/log/tree/stick/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/grown/log/tree/stick))
+		return NONE
+
+	var/obj/item/natural/bundle/stick/F = new(get_turf(user))
+	qdel(tool)
+	qdel(src)
+	user.put_in_hands(F)
+	user.balloon_alert(user, "[F.stackname] bundled.")
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/grown/log/tree/stake
 	name = "stake"
@@ -220,7 +210,7 @@
 	experimental_inhand = FALSE
 	force = 2
 	throwforce = 2
-	possible_item_intents = list(/datum/intent/stab, /datum/intent/pick)
+	possible_item_intents = list(/datum/intent/stab, PICK_INTENT)
 	firefuel = 1 MINUTES
 	blade_dulling = 0
 	max_integrity = 20
@@ -231,6 +221,8 @@
 	lumber = null
 	lumber_amount = 0
 	tool_behaviour = TOOL_IMPROVISED_RETRACTOR
+	item_weight = 95 GRAMS
+	grind_results = null
 
 /obj/item/grown/log/tree/stake/apply_components()
 	return
@@ -247,6 +239,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/fertilizer/ash
 	bundletype = /obj/item/natural/bundle/plank
+	item_weight = 850 GRAMS
 
 /obj/item/natural/bundle/plank
 	name = "wooden planks"
@@ -255,7 +248,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	item_state = "plankbundle"
 	experimental_inhand = FALSE
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(INTENT_USE)
 	desc = "Wooden planks bundled together for easy handling."
 	force = 0
 	throwforce = 0
@@ -287,3 +280,5 @@
 	lumber_amount = 0
 	grid_height = 64
 	grid_width = 64
+	item_weight = 100 GRAMS
+	grind_results = null

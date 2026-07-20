@@ -32,7 +32,8 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	anvilrepair = null
 
 	var/fitted = NO_FEMALE_UNIFORM // For use in alternate clothing styles for women
@@ -51,7 +52,7 @@
 		if(accessory_overlay)
 			. += accessory_overlay
 
-/obj/item/clothing/pants/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/pants/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!attach_accessory(I, user))
 		return ..()
 
@@ -60,6 +61,12 @@
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_pants()
+
+
+/obj/item/clothing/pants/get_examine_string(mob/user, thats)
+	. = ..()
+	if(attached_accessory)
+		. += " with [icon2html(attached_accessory, user)] \a [attached_accessory]"
 
 
 /obj/item/clothing/pants/equipped(mob/user, slot)

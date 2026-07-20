@@ -203,12 +203,12 @@
 		return
 	switch(href_list["task"])
 		if("apply")
-			var/alert = alert(user, "Apply the ban?", "BAN", "Yes", "No")
+			var/alert = tgui_alert(user, "Apply the ban?", "BAN", list("Yes", "No"))
 			if(alert != "Yes")
 				return
 			apply_ban(user)
 		if("reset")
-			var/alert = alert(user, "Reset the panel and clear all of the values?", "Reset", "Yes", "No")
+			var/alert = tgui_alert(user, "Reset the panel and clear all of the values?", "Reset", list("Yes", "No"))
 			if(alert != "Yes")
 				return
 			reset_panel(user)
@@ -326,7 +326,7 @@
 		if("remove_ckey_role_ban")
 			var/ckey = href_list["ckey"]
 			var/ban_index = text2num(href_list["ban_index"])
-			var/alert = alert(user, "You sure you want to remove the ban?", "Remove Role Ban", "Yes", "No")
+			var/alert = tgui_alert(user, "You sure you want to remove the ban?", "Remove Role Ban", list("Yes", "No"))
 			if(alert != "Yes")
 				return
 			var/datum/role_bans/bans = get_role_bans_for_ckey(ckey)

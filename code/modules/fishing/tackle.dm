@@ -23,6 +23,7 @@
 
 /obj/item/fishing/reel
 	attachtype = "reel"
+	item_weight = 234 GRAMS
 
 /obj/item/fishing/reel/twine
 	name = "twine fishing line"

@@ -28,7 +28,9 @@
 		for(var/i in 1 to rand(5, maxi))
 			var/turf/T = pick_n_take(turfs)
 			message_admins("VINES at [ADMIN_VERBOSEJMP(T)]")
-			new /datum/vine_controller(T, event = src, potency = 0.1, muts = list(/datum/vine_mutation/thorns, /datum/vine_mutation/woodening)) //spawn a controller at turf
+			var/obj/structure/flora/tree/evil/root = new(T)
+			root.AddComponent(/datum/component/vine_controller, event = src, potency = 0.1, muts = list(/datum/vine_mutation/thorns, /datum/vine_mutation/woodening)) //spawn a controller component
+
 
 /datum/round_event_control/dendor_vines_boon
 	name = "Dendor's Blessed Vines"
@@ -60,7 +62,8 @@
 		for(var/i in 1 to rand(5, maxi))
 			var/turf/T = pick_n_take(turfs)
 			message_admins("VINES at [ADMIN_VERBOSEJMP(T)]")
-			new /datum/vine_controller(T, event = src, potency = 0.1, muts = list(/datum/vine_mutation/light, /datum/vine_mutation/healing, /datum/vine_mutation/woodening)) //spawn a controller at turf
+			var/obj/structure/flora/tree/wise/root = new(T)
+			root.AddComponent(/datum/component/vine_controller, event = src, potency = 0.1, muts = list(/datum/vine_mutation/light, /datum/vine_mutation/healing, /datum/vine_mutation/woodening))
 
 /datum/round_event_control/dendor_fertility
 	name = "Dendor's Blessing"

@@ -7,6 +7,7 @@
 	body_parts_covered = EYES
 	toggle_icon_state = TRUE
 	adjustable = CAN_CADJUST
+	item_weight = 95 GRAMS
 
 /obj/item/clothing/face/goggles/AdjustClothes(mob/user)
 	if(loc == user)

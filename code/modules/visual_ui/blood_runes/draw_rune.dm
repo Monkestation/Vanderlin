@@ -10,7 +10,7 @@
 /obj/abstract/visual_ui_element/hoverable/rune_word/appear()
 	. = ..()
 	if (word && !mouse_opacity)
-		mouse_opacity = 1
+		mouse_opacity = MOUSE_OPACITY_ICON
 		flick("rune_appear", src)
 
 /obj/abstract/visual_ui_element/hoverable/rune_word/proc/get_word_order()
@@ -29,7 +29,7 @@
 
 /obj/abstract/visual_ui_element/hoverable/rune_word/hide()
 	if (mouse_opacity)
-		mouse_opacity = 0
+		mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 		overlays.len = 0
 		if (word_overlay)
 			animate(word_overlay, alpha = 0, time = 2)

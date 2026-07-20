@@ -11,7 +11,7 @@
 	pollute_amount = 200
 	wording_choice = "leaves of"
 	complete_message = "The herbal brew smells soothing!"
-	used_skill = /datum/skill/craft/alchemy
+	used_skill = /datum/attribute/skill/craft/alchemy
 	quality_modifier = 0.8
 
 // Symphitum Tea Recipe
@@ -62,7 +62,7 @@
 	pollute_amount = 150
 	wording_choice = "petals of"
 	complete_message = "The herbal salve looks ready!"
-	used_skill = /datum/skill/craft/alchemy
+	used_skill = /datum/attribute/skill/craft/alchemy
 	quality_modifier = 0.9
 
 /datum/container_craft/cooking/herbal_salve/calendula_salve
@@ -354,15 +354,17 @@
 	pollute_amount = 200
 	complete_message = "A strong, fragrant scent permeates the area."
 	wording_choice = "leaves of"
-	used_skill = /datum/skill/craft/alchemy
+	used_skill = /datum/attribute/skill/craft/alchemy
 	quality_modifier = 0.8
 
 /datum/container_craft/cooking/perfume/rosa
 	name = "Rosa Perfume"
 	created_reagent = /obj/item/perfume/rose
 	requirements = list(
-		/datum/reagent/medicine/herbal/simple_rosa = 25,
 		/obj/item/alch/herb/rosa = 1
+	)
+	reagent_requirements = list(
+		/datum/reagent/medicine/herbal/simple_rosa = 25,
 	)
 	finished_smell = /datum/pollutant/fragrance/rose
 
@@ -373,8 +375,10 @@
 	name = "Mint Perfume"
 	created_reagent = /obj/item/perfume/mint
 	requirements = list(
-		/datum/reagent/medicine/herbal/simple_rosa = 25,
 		/obj/item/alch/herb/mentha = 1
+	)
+	reagent_requirements = list(
+		/datum/reagent/medicine/herbal/simple_rosa = 25,
 	)
 	finished_smell = /datum/pollutant/fragrance/mint
 
@@ -385,8 +389,10 @@
 	name = "Pear Perfume"
 	created_reagent = /obj/item/perfume/pear
 	requirements = list(
-		/datum/reagent/medicine/herbal/simple_rosa = 25,
 		/obj/item/reagent_containers/food/snacks/produce/fruit/pear = 1
+	)
+	reagent_requirements = list(
+		/datum/reagent/medicine/herbal/simple_rosa = 25,
 	)
 	finished_smell = /datum/pollutant/fragrance/pear
 	complete_message = "A strong, fragrant scent of pear permeates the area."
@@ -397,8 +403,10 @@
 	name = "Strawberry Perfume"
 	created_reagent = /obj/item/perfume/strawberry
 	requirements = list(
-		/datum/reagent/medicine/herbal/simple_rosa = 25,
 		/obj/item/reagent_containers/food/snacks/produce/fruit/strawberry = 1
+	)
+	reagent_requirements = list(
+		/datum/reagent/medicine/herbal/simple_rosa = 25,
 	)
 	finished_smell = /datum/pollutant/fragrance/strawberry
 	complete_message = "A strong, fragrant scent of strawberry permeates the area."

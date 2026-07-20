@@ -42,11 +42,11 @@
 	resolve_callback = _resolve_callback
 	master_destroyed_callback = _master_destroyed_callback
 
-	RegisterSignal(master, list(COMSIG_MOVABLE_MOVED), PROC_REF(check_bounds))
-	RegisterSignal(master, list(COMSIG_PARENT_QDELETING), PROC_REF(on_master_destroyed))
-	RegisterSignal(parent, list(COMSIG_PARENT_QDELETING), PROC_REF(on_parent_destroyed))
-	RegisterSignal(parent, list(COMSIG_MOVABLE_MOVED), PROC_REF(check_bounds))
-	RegisterSignal(parent, list(COMSIG_MOVABLE_PRE_MOVE), PROC_REF(on_try_move))
+	RegisterSignal(master, COMSIG_MOVABLE_MOVED, PROC_REF(check_bounds))
+	RegisterSignal(master, COMSIG_QDELETING, PROC_REF(on_master_destroyed))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_parent_destroyed))
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(check_bounds))
+	RegisterSignal(parent, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_try_move))
 
 	if(tips)
 		var/datum/mechanic_tip/bounded_tip = new(src)

@@ -1,0 +1,141 @@
+/datum/component/rope
+	var/icon = 'icons/effects/beam.dmi'
+	var/icon_state = "r_beam"
+	var/beam_type = /obj/effect/ebeam
+	var/atom/roped
+	var/maximum_rope_distance = 3
+	var/connect_loc = TRUE
+	var/datum/callback/rope_broken_callback
+	var/datum/beam/rope_beam
+	var/depth = 0
+	var/override_origin_pixel_x = null
+	var/override_origin_pixel_y = null
+	var/override_target_pixel_x = null
+	var/override_target_pixel_y = null
+
+/datum/component/rope/Initialize(atom/roped, \
+								icon = 'icons/effects/beam.dmi', \
+								icon_state = "r_beam", \
+								maximum_rope_distance = 3, \
+								connect_loc = TRUE, \
+								beam_type = /obj/effect/ebeam, \
+								datum/callback/rope_broken_callback, \
+								override_origin_pixel_x = null, \
+								override_origin_pixel_y = null, \
+								override_target_pixel_x = null, \
+								override_target_pixel_y = null)
+	. = ..()
+	if((!isatom(parent) || isarea(parent)) || (!isatom(roped) || isarea(roped)))
+		return COMPONENT_INCOMPATIBLE
+	src.roped = roped
+	src.icon = icon
+	src.icon_state = icon_state
+	src.maximum_rope_distance = maximum_rope_distance
+	src.connect_loc = connect_loc
+	src.beam_type = beam_type
+	src.rope_broken_callback = rope_broken_callback
+	src.override_origin_pixel_x = override_origin_pixel_x
+	src.override_origin_pixel_y = override_origin_pixel_y
+	src.override_target_pixel_x = override_target_pixel_x
+	src.override_target_pixel_y = override_target_pixel_y
+	create_beam(parent, roped)
+	START_PROCESSING(SSdcs, src)
+
+/datum/component/rope/Destroy(force, silent)
+	. = ..()
+	roped = null
+	rope_beam = null
+
+/datum/component/rope/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(parent_moved))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_qdeleted))
+	RegisterSignal(roped, COMSIG_MOVABLE_MOVED, PROC_REF(roped_moved))
+	RegisterSignal(roped, COMSIG_QDELETING, PROC_REF(roped_qdeleted))
+
+/datum/component/rope/UnregisterFromParent()
+	. = ..()
+	if(!QDELETED(rope_beam))
+		UnregisterSignal(rope_beam, COMSIG_QDELETING)
+	UnregisterSignal(parent, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
+	UnregisterSignal(roped, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
+
+/datum/component/rope/process(delta_time)
+	var/atom/beam_origin = rope_beam.origin
+	var/atom/beam_target = rope_beam.target
+	if(!can_see(beam_origin, beam_target, maximum_rope_distance))
+		qdel(rope_beam)
+		return PROCESS_KILL
+
+/datum/component/rope/proc/parent_moved(atom/movable/source, oldloc, dir, forced)
+	SIGNAL_HANDLER
+	if(QDELETED(src))
+		return
+
+	var/atom/movable/sourceloc = source.loc
+	if(istype(sourceloc))
+		if(!connect_loc)
+			qdel(rope_beam)
+			return
+		var/atom/movable/loc_of_loc = sourceloc.loc
+		if(istype(loc_of_loc))
+			qdel(rope_beam)
+			return
+		var/beam_target = rope_beam.target
+		create_beam(sourceloc, beam_target)
+	else if(rope_beam.origin != source)
+		var/beam_target = rope_beam.target
+		create_beam(source, beam_target)
+
+/datum/component/rope/proc/roped_moved(atom/movable/source, oldloc, dir, forced)
+	SIGNAL_HANDLER
+	if(QDELETED(src))
+		return
+
+	var/atom/movable/sourceloc = source.loc
+	if(istype(sourceloc))
+		if(!connect_loc)
+			qdel(rope_beam)
+			return
+		var/atom/movable/loc_of_loc = sourceloc.loc
+		if(istype(loc_of_loc))
+			qdel(rope_beam)
+			return
+		var/beam_origin = rope_beam.origin
+		UnregisterSignal(rope_beam, COMSIG_QDELETING)
+		QDEL_NULL(rope_beam)
+		create_beam(beam_origin, sourceloc)
+	else if(rope_beam.target != source)
+		var/beam_origin = rope_beam.origin
+		UnregisterSignal(rope_beam, COMSIG_QDELETING)
+		QDEL_NULL(rope_beam)
+		create_beam(beam_origin, source)
+
+/datum/component/rope/proc/parent_qdeleted(atom/source)
+	SIGNAL_HANDLER
+	qdel(rope_beam)
+
+/datum/component/rope/proc/roped_qdeleted(atom/source)
+	SIGNAL_HANDLER
+	qdel(rope_beam)
+
+/datum/component/rope/proc/create_beam(atom/beam_owner, atom/beam_target)
+	if(rope_beam)
+		UnregisterSignal(rope_beam, COMSIG_QDELETING)
+		QDEL_NULL(rope_beam)
+	rope_beam = beam_owner.Beam(beam_target, icon_state, icon, INFINITY, maximum_rope_distance, beam_type, \
+		override_origin_pixel_x = override_origin_pixel_x, \
+		override_origin_pixel_y = override_origin_pixel_y, \
+		override_target_pixel_x = override_target_pixel_x, \
+		override_target_pixel_y = override_target_pixel_y)
+	RegisterSignal(rope_beam, COMSIG_QDELETING, PROC_REF(rope_beam_broken))
+	return TRUE
+
+/datum/component/rope/proc/rope_beam_broken(datum/beam/source)
+	SIGNAL_HANDLER
+	var/datum/callback/broken_callback = rope_broken_callback
+	UnregisterSignal(source, COMSIG_QDELETING)
+	if(!QDELING(src))
+		qdel(src)
+	if(broken_callback)
+		broken_callback.Invoke()

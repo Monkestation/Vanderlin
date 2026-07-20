@@ -24,7 +24,7 @@
 	parent = creator
 
 	if(parent)
-		RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(handle_parent_del))
+		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(handle_parent_del))
 
 /datum/animate_holder/proc/handle_parent_del()
 	SIGNAL_HANDLER
@@ -33,7 +33,7 @@
 /datum/animate_holder/proc/remove_data(from_destroy = FALSE)
 	if(!parent)
 		return
-	UnregisterSignal(parent, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(parent, COMSIG_QDELETING)
 	steps.Cut(1)
 	easings.Cut(1)
 	transforms.Cut(1)

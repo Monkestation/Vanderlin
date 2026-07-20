@@ -2,8 +2,8 @@ GLOBAL_LIST_INIT(hair_gradients, build_hair_gradients())
 
 /proc/build_hair_gradients()
 	var/list/gradients = list()
-	for(var/path in typesof(/datum/hair_gradient))
-		if(is_abstract(path))
+	for(var/datum/hair_gradient/path as anything in typesof(/datum/hair_gradient))
+		if(IS_ABSTRACT(path))
 			continue
 		gradients[path] = new path()
 	return gradients

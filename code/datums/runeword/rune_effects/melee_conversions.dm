@@ -78,7 +78,7 @@
 	var/current_angle = 0
 	var/list/already_hit = list() // Track what we've already damaged
 
-/obj/projectile/orbital/New(loc, ...)
+/obj/projectile/orbital/Initialize(mapload, ...)
 	. = ..()
 	// Set up the projectile timer
 	addtimer(CALLBACK(src, PROC_REF(expire_orbital)), max_orbit_time)

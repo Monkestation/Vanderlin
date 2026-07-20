@@ -63,7 +63,6 @@
 
 	attack_sound = list('sound/foley/plantcross1.ogg','sound/foley/plantcross2.ogg','sound/foley/plantcross3.ogg','sound/foley/plantcross4.ogg')
 	dodgetime = 30
-	aggressive = 1
 //	stat_attack = UNCONSCIOUS
 	ranged = FALSE
 

@@ -1,17 +1,36 @@
+
 /datum/action_state/transport
 	name = "transport"
 	description = "Moving items between waypoints"
 	var/current_task = "finding_item"
 	var/moving_to_target = FALSE
+	priority_eval_interval = 2 SECONDS
+
+/datum/action_state/transport/evaluate_priority(datum/ai_controller/controller)
+	var/turf/source = controller.blackboard[BB_GNOME_TRANSPORT_SOURCE]
+	var/turf/dest   = controller.blackboard[BB_GNOME_TRANSPORT_DEST]
+
+	if(!source || !dest)
+		return GNOME_PRIORITY_NONE
+
+	// Already carrying something, finish the delivery.
+	if(controller.blackboard[BB_SIMPLE_CARRY_ITEM])
+		return GNOME_PRIORITY_HIGH
+
+	// Check if anything is actually waiting at the source.
+	if(find_transport_item(controller))
+		return GNOME_PRIORITY_NORMAL
+
+	return GNOME_PRIORITY_NONE
 
 /datum/action_state/transport/enter_state(datum/ai_controller/controller)
 	current_task = "finding_item"
 	moving_to_target = FALSE
 
-/datum/action_state/transport/process_state(datum/ai_controller/controller, delta_time)
-	if(!controller.blackboard[BB_GNOME_TRANSPORT_MODE])
-		return ACTION_STATE_COMPLETE
+/datum/action_state/transport/exit_state(datum/ai_controller/controller)
+	moving_to_target = FALSE
 
+/datum/action_state/transport/process_state(datum/ai_controller/controller, delta_time)
 	var/mob/living/pawn = controller.pawn
 
 	switch(current_task)
@@ -26,7 +45,8 @@
 
 			var/obj/item/found_item = find_transport_item(controller)
 			if(!found_item)
-				return ACTION_STATE_CONTINUE
+				// Nothing left to move, we're done.
+				return ACTION_STATE_COMPLETE
 
 			controller.set_blackboard_key(BB_GNOME_FOUND_ITEM, found_item)
 			manager.set_movement_target(controller, found_item)

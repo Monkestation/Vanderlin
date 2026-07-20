@@ -38,10 +38,10 @@ SUBSYSTEM_DEF(liquids)
 	if(!length(active_groups) && !length(evaporation_queue) && !length(burning_turfs))
 		return
 
-	listclearnulls(active_groups)
+	list_clear_nulls(active_groups)
 
 	if(length(arrayed_groups))
-		listclearnulls(arrayed_groups)
+		list_clear_nulls(arrayed_groups)
 		for(var/datum/liquid_group/liquid_group as anything in arrayed_groups)
 			if(QDELETED(liquid_group))
 				arrayed_groups -= liquid_group
@@ -53,7 +53,7 @@ SUBSYSTEM_DEF(liquids)
 	if(run_type == SSLIQUIDS_RUN_TYPE_GROUPS)
 		if(!length(group_process_work_queue))
 			group_process_work_queue |= active_groups
-		listclearnulls(group_process_work_queue)
+		list_clear_nulls(group_process_work_queue)
 		if(length(group_process_work_queue))
 			var/populate_evaporation = FALSE
 			if(!length(evaporation_queue))
@@ -76,7 +76,7 @@ SUBSYSTEM_DEF(liquids)
 		run_type = SSLIQUIDS_RUN_TYPE_EVAPORATION
 
 	if(run_type == SSLIQUIDS_RUN_TYPE_EVAPORATION && !debug_evaporation)
-		listclearnulls(evaporation_queue)
+		list_clear_nulls(evaporation_queue)
 		evaporation_counter++
 		if(evaporation_counter >= REQUIRED_EVAPORATION_PROCESSES)
 			evaporation_counter = 0
@@ -128,10 +128,10 @@ SUBSYSTEM_DEF(liquids)
 		member_counter++
 		if(!length(active_turf_group_queue))
 			active_turf_group_queue += active_groups
-		listclearnulls(active_turf_group_queue)
+		list_clear_nulls(active_turf_group_queue)
 
 		if(member_counter > REQUIRED_MEMBER_PROCESSES)
-			listclearnulls(cached_exposures)
+			list_clear_nulls(cached_exposures)
 			if(!length(cached_exposures))
 				for(var/datum/liquid_group/liquid_group as anything in active_turf_group_queue)
 					if(MC_TICK_CHECK)
@@ -169,7 +169,7 @@ SUBSYSTEM_DEF(liquids)
 	if(run_type == SSLIQUIDS_RUN_TYPE_CACHED_EDGES)
 		if(!length(cached_edge_work_queue))
 			cached_edge_work_queue |= active_groups
-		listclearnulls(cached_edge_work_queue)
+		list_clear_nulls(cached_edge_work_queue)
 
 		if(length(cached_edge_work_queue))
 			for(var/datum/liquid_group/liquid_group as anything in cached_edge_work_queue)

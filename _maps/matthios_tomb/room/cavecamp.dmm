@@ -85,7 +85,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "W" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "X" = (
 /obj/effect/dungeon_directional_helper/west,

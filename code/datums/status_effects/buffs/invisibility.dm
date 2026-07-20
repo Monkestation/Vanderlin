@@ -7,6 +7,7 @@
 /datum/status_effect/invisibility
 	id = "invisibility"
 	status_type = STATUS_EFFECT_REFRESH
+	tick_interval = STATUS_EFFECT_NO_TICK
 	duration = 30 SECONDS
 	on_remove_on_mob_delete = TRUE
 	alert_type = /atom/movable/screen/alert/status_effect/invisible

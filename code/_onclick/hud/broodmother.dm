@@ -124,16 +124,9 @@
 
 /datum/hud/broodmother/New(mob/owner)
 	..()
-	var/atom/movable/screen/using
-
-	scannies = new /atom/movable/screen/scannies
-	scannies.set_new_hud(src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70
 
 	for(var/element as anything in BROODMOTHER_HUD_ELEMENTS)
-		using = new element()
+		var/atom/movable/screen/using = new element()
 		using.set_new_hud(src)
 		static_inventory += using
 

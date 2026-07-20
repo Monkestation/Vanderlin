@@ -6,7 +6,7 @@
 	has_visual_effects = FALSE
 
 	cast_range = 2
-	associated_skill = /datum/skill/misc/medicine
+	associated_skill = /datum/attribute/skill/misc/medicine
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
 	spell_cost = 0
@@ -27,7 +27,7 @@
 	cast_range = 4
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 
 	cooldown_time = 5 SECONDS
 	spell_cost = 5

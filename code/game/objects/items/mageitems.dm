@@ -8,6 +8,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = NONE
 	max_integrity = 300
+	item_weight = 150 GRAMS
 	component_type = /datum/component/storage/concrete/grid/magebag
 
 /obj/item/storage/magebag/examine(mob/user)
@@ -15,7 +16,7 @@
 	if(contents.len)
 		. += span_notice("[contents.len] thing[contents.len > 1 ? "s" : ""] in the pouch.")
 
-/obj/item/storage/magebag/attack_hand_secondary(mob/user, params)
+/obj/item/storage/magebag/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -78,6 +79,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	grid_height = 32
 	grid_width = 32
+	item_weight = 20 GRAMS
 	var/amount = 8
 
 /obj/item/chalk/natural
@@ -86,34 +88,33 @@
 
 /obj/item/chalk/examine(mob/user)
 	. = ..()
-	desc += "It has [amount] uses left."
+	. += span_info("It has [amount] uses left.")
 
-/obj/item/chalk/attackby(obj/item/M, mob/user, params)
-	if(istype(M,/obj/item/ore/cinnabar))
+/obj/item/chalk/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/ore/cinnabar))
 		if(amount < 8)
 			amount = 8
-			to_chat(user, span_notice("I press arcyne magic into \the [M] and the red crystals within melt into quicksilver, quickly sinking into the [src]."))
-	else
-		return ..()
+			to_chat(user, span_notice("I press arcyne magic into \the [tool/name] and the red crystals within melt into quicksilver, quickly sinking into \the [name]."))
+			return ITEM_INTERACT_SUCCESS
 
-/obj/item/chalk/attack_self(mob/living/carbon/human/user, params)
-	if(!isarcyne(user))//We'll set up other items for other types of rune rituals
+/obj/item/chalk/attack_self(mob/living/carbon/human/user, list/modifiers)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)//We'll set up other items for other types of rune rituals
 		to_chat(user, span_cult("Nothing comes in mind to draw with the chalk."))
 		return
-	var/obj/effect/decal/cleanable/roguerune/pickrune
+	var/obj/effect/decal/cleanable/ritual_rune/pickrune
 	var/runenameinput = browser_input_list(user, "Runes", "Tier 1&2 Runes", GLOB.t2rune_types)
 	pickrune = GLOB.rune_types[runenameinput]
 	if(!pickrune)
 		return
 	var/turf/Turf = get_turf(user)
-	if(locate(/obj/effect/decal/cleanable/roguerune) in Turf)
+	if(locate(/obj/effect/decal/cleanable/ritual_rune) in Turf)
 		to_chat(user, span_cult("There is already a rune here."))
 		return
 	var/structures_in_way = check_for_structures_and_closed_turfs(loc, pickrune)
 	if(structures_in_way == TRUE)
 		to_chat(user, span_cult("There is a structure, rune or wall in the way."))
 		return
-	var/crafttime = (10 SECONDS - ((user.get_skill_level(/datum/skill/magic/arcane)) * 5))
+	var/crafttime = (10 SECONDS - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)) * 5))
 
 	user.visible_message(span_warning("[user] begins to scribe something [user.p_their()] [src]!"), \
 		span_notice("I start to drag the [src] in the shape of symbols and sigils"))
@@ -128,17 +129,18 @@
 	if(amount <= 0)
 		qdel(src)
 
-/obj/item/chalk/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/roguerune/rune_to_scribe)
+/obj/item/chalk/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/ritual_rune/rune_to_scribe)
 	for(var/turf/T in range(loc, rune_to_scribe.runesize))
 		//check for /sturcture subtypes in the turf's contents
 		for(var/obj/structure/S in T.contents)
-			return TRUE		//Found a structure, no need to continue
+			if(S.density)
+				return TRUE		//Found a structure, no need to continue
 
 		//check if turf itself is a /turf/closed subtype
 		if(istype(T,/turf/closed))
 			return TRUE
 		//check if rune in the turfs contents
-		for(var/obj/effect/decal/cleanable/roguerune/R in T.contents)
+		for(var/obj/effect/decal/cleanable/ritual_rune/R in T.contents)
 			return TRUE
 		//Return false if nothing in range was found
 	return FALSE
@@ -152,29 +154,32 @@
 	. = ..()
 	filter(type="drop_shadow", x=0, y=0, size=2, offset=1, color=rgb(128, 0, 128, 1))
 
-/obj/item/weapon/knife/dagger/silver/attackby(obj/item/M, mob/user, params)
-	if(istype(M,/obj/item/ore/cinnabar))
-		var/crafttime = (60 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
-		if(do_after(user, crafttime, target = src))
-			playsound(src, 'sound/magic/scrapeblade.ogg', 100, TRUE)
-			to_chat(user, span_notice("I press arcyne magic into the blade and it throbs in a deep purple..."))
-			var/obj/arcyne_knife = new /obj/item/weapon/knife/dagger/silver/arcyne
-			qdel(M)
-			qdel(src)
-			user.put_in_active_hand(arcyne_knife)
-	else
-		return ..()
+/obj/item/weapon/knife/dagger/silver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/ore/cinnabar))
+		return NONE
 
-/obj/item/weapon/knife/dagger/silver/arcyne/attack_self(mob/living/carbon/human/user, params)
-	if(!isarcyne(user))
+	var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)) * 5))
+	if(!do_after(user, crafttime, target = src))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/magic/scrapeblade.ogg', 100, TRUE)
+	to_chat(user, span_notice("I press arcyne magic into the blade and it throbs in a deep purple..."))
+	var/obj/arcyne_knife = new /obj/item/weapon/knife/dagger/silver/arcyne
+	qdel(tool)
+	qdel(src)
+	user.put_in_active_hand(arcyne_knife)
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/weapon/knife/dagger/silver/arcyne/attack_self(mob/living/carbon/human/user, list/modifiers)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		return
-	var/obj/effect/decal/cleanable/roguerune/pickrune
+	var/obj/effect/decal/cleanable/ritual_rune/pickrune
 	var/runenameinput = browser_input_list(user, "Runes", "All Runes", GLOB.t4rune_types)
 	pickrune = GLOB.rune_types[runenameinput]
 	if(!pickrune)
 		return
 	var/turf/Turf = get_turf(user)
-	if(locate(/obj/effect/decal/cleanable/roguerune) in Turf)
+	if(locate(/obj/effect/decal/cleanable/ritual_rune) in Turf)
 		to_chat(user, span_cult("There is already a rune here."))
 		return
 	var/structures_in_way = check_for_structures_and_closed_turfs(loc, pickrune)
@@ -190,10 +195,10 @@
 		playsound(src, get_sfx("genslash"), 100, TRUE)
 		user.visible_message(span_warning("[user] cuts open [user.p_their()] palm!"), \
 			span_cult("I slice open my palm!"))
-		if(user.blood_volume)
-			user.apply_damage(pickrune.scribe_damage, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+		if(user.get_blood_volume())
+			user.apply_damage(pickrune.scribe_damage, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), damage_type = BCLASS_CUT, can_crit = FALSE)
 		is_bled = TRUE
-	var/crafttime = (10 SECONDS - ((user.get_skill_level(/datum/skill/magic/arcane)) * 5))
+	var/crafttime = (10 SECONDS - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)) * 5))
 
 	user.visible_message(span_warning("[user] begins to carve something with [user.p_their()] blade!"), \
 		span_notice("I start to drag the blade in the shape of symbols and sigils."))
@@ -205,7 +210,7 @@
 		span_notice("I finish dragging the blade in symbols and circles, leaving behind a [pickrune.name]."))
 		new pickrune(Turf, chosen_keyword)
 
-/obj/item/weapon/knife/dagger/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/roguerune/rune_to_scribe)
+/obj/item/weapon/knife/dagger/proc/check_for_structures_and_closed_turfs(loc, obj/effect/decal/cleanable/ritual_rune/rune_to_scribe)
 	for(var/turf/T in range(loc, rune_to_scribe.runesize))
 		//check for /sturcture subtypes in the turf's contents
 		for(var/obj/structure/S in T.contents)
@@ -214,7 +219,7 @@
 		if(istype(T,/turf/closed))
 			return TRUE
 		//check if rune in the turfs contents
-		for(var/obj/effect/decal/cleanable/roguerune/R in T.contents)
+		for(var/obj/effect/decal/cleanable/ritual_rune/R in T.contents)
 			return TRUE
 		//Return false if nothing in range was found
 	return FALSE
@@ -225,6 +230,7 @@
 	sellprice = 18
 	arcyne_potency = 25
 	desc = "A pink crystal, it surges with magical energy, yet its artificial nature means it's worth little."
+	item_weight = 8 GRAMS
 	attuned = /datum/attunement/arcyne
 
 /obj/item/mimictrinket
@@ -233,6 +239,7 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "mimic_trinket"
 	possible_item_intents = list(/datum/intent/use)
+	item_weight = 30 GRAMS
 	var/duration = 10 MINUTES
 	var/oldicon
 	var/oldicon_state
@@ -241,7 +248,7 @@
 	var/ready = TRUE
 	var/timing_id
 
-/obj/item/mimictrinket/attack_self(mob/living/carbon/human/user, params)
+/obj/item/mimictrinket/attack_self(mob/living/carbon/human/user, list/modifiers)
 	revert()
 
 /obj/item/mimictrinket/proc/revert()
@@ -255,30 +262,35 @@
 		deltimer(timing_id)
 		timing_id = null
 
-/obj/item/mimictrinket/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/mimictrinket/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isobj(interacting_with))
+		return NONE
 
-	var/obj/target = attacked_atom
-	. = TRUE
-	if(ready)
-		to_chat(user,span_notice("[src] takes the form of [target]!"))
-		oldicon = icon
-		oldicon_state = icon_state
-		olddesc = desc
-		oldname = name
-		icon = target.icon
-		icon_state = target.icon_state
-		name = target.name
-		desc = target.desc
-		ready = FALSE
-		timing_id = addtimer(CALLBACK(src, PROC_REF(revert), user), duration,TIMER_STOPPABLE) // Minus two so we play the sound and decap faster
+	if(!ready)
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/target = interacting_with
+
+	to_chat(user, span_notice("[src] takes the form of [target]!"))
+	oldicon = icon
+	oldicon_state = icon_state
+	olddesc = desc
+	oldname = name
+	icon = target.icon
+	icon_state = target.icon_state
+	name = target.name
+	desc = target.desc
+	ready = FALSE
+	timing_id = addtimer(CALLBACK(src, PROC_REF(revert)), duration, TIMER_STOPPABLE) // Minus two so we play the sound and decap faster
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/hourglass/temporal
 	name = "temporal hourglass"
 	desc = "An arcyne infused hourglass that glows with magick."
 	icon = 'icons/obj/hourglass.dmi'
 	icon_state = "hourglass_idle"
+	item_weight = 300 GRAMS
 	var/turf/target
 	var/mob/living/victim
 
@@ -312,22 +324,24 @@
 	light_color = "#000000"
 	light_power = -3
 	on = FALSE
+	item_weight = 500 GRAMS
 
 /obj/item/clothing/ring/arcanesigil
 	name = "arcyne sigil"
 	desc = "A radiantly shimmering sigil within an amulet, It seems to pulse with intense arcynic flows."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "amulet"
+	item_weight = 30 GRAMS
 	var/cdtime = 30 MINUTES
 	var/ready = TRUE
 
-/obj/item/clothing/ring/arcanesigil/attack_self(mob/living/carbon/human/user, params)
+/obj/item/clothing/ring/arcanesigil/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(ready)
 		if(do_after(user, 25, target = src))
 			to_chat(user,span_notice("[src] heats up to an almost burning temperature, flooding you with overwhelming arcyne knowledge!"))
 			ready = FALSE
 			addtimer(CALLBACK(src, PROC_REF(revert), user), cdtime,TIMER_STOPPABLE) // Minus two so we play the sound and decap faster
-			user.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
+			user.adjust_stat_modifier(STATMOD_SIGIL, list(/datum/attribute/skill/magic/arcane = 10))
 	else
 		to_chat(user,span_notice("[src] remains inert. It must be gathering arcana!"))
 
@@ -340,10 +354,11 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "lens"
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 80 GRAMS
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	var/active = FALSE
 
-/obj/item/clothing/ring/shimmeringlens/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/ring/shimmeringlens/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -390,9 +405,10 @@
 /obj/item/natural/stone/sending
 	name = "sending stone"
 	desc = "One of a pair of sending stones."
+	item_weight = 50 GRAMS
 	var/obj/item/natural/stone/sending/paired_with
 
-/obj/item/natural/stone/sending/attack_self(mob/user, params)
+/obj/item/natural/stone/sending/attack_self(mob/user, list/modifiers)
 	var/input_text = input(user, "Enter your message:", "Message")
 	if(input_text)
 		paired_with.say(input_text)
@@ -402,6 +418,7 @@
 	bloody_icon_state = "bloodyhands"
 	icon_state = "angle"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 100 GRAMS
 	var/active_item
 
 /obj/item/clothing/gloves/nomagic/Initialize(mapload)
@@ -421,6 +438,7 @@
 /obj/item/rope/chain/bindingshackles
 	name = "planar binding shackles"
 	desc = "arcyne shackles imbued to bind other-planar creatures intelligence to this plane. They will not be under your thrall and a deal will need to be made."
+	item_weight = 400 GRAMS
 	var/mob/living/fam
 	var/tier = 1
 	var/being_used = FALSE
@@ -431,11 +449,11 @@
 	.=..()
 	src.filters += filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color=rgb(rand(1,255),rand(1,255),rand(1,255)))
 
-/obj/item/rope/chain/bindingshackles/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t2))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
@@ -450,11 +468,11 @@
 	name = "greater planar binding shackles"
 	tier = 2
 
-/obj/item/rope/chain/bindingshackles/t2/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/t2/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t3))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
@@ -469,11 +487,11 @@
 	name = "woven planar binding shackles"
 	tier = 3
 
-/obj/item/rope/chain/bindingshackles/t3/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/t3/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t4))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
@@ -488,11 +506,11 @@
 	name = "confluent planar binding shackles"
 	tier = 4
 
-/obj/item/rope/chain/bindingshackles/t4/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/rope/chain/bindingshackles/t4/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(P, /obj/item/natural/melded/t5))
 		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((user.get_skill_level(/datum/skill/magic/arcane))*5))
+			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
 			if(do_after(user, crafttime, target = src))
 				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
 				to_chat(user, span_notice("I mold the [P] into the [src] with my arcyne power."))
@@ -508,8 +526,11 @@
 	name = "aberrant planar binding shackles"
 	tier = 5
 
-/obj/item/rope/chain/bindingshackles/attack(mob/living/simple_animal/hostile/retaliate/captive, mob/living/user)
-	var/list/summon_types = list(
+/obj/item/rope/chain/bindingshackles/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /mob/living/simple_animal/hostile/retaliate))
+		return NONE
+
+	var/static/list/summon_types = list(
 		/mob/living/simple_animal/hostile/retaliate/infernal/imp,
 		/mob/living/simple_animal/hostile/retaliate/infernal/hellhound,
 		/mob/living/simple_animal/hostile/retaliate/infernal/watcher,
@@ -523,20 +544,23 @@
 		/mob/living/simple_animal/hostile/retaliate/fae/dryad,
 		/mob/living/simple_animal/hostile/retaliate/fae/sylph,
 		/mob/living/simple_animal/hostile/retaliate/voidstoneobelisk,
-		/mob/living/simple_animal/hostile/retaliate/voiddragon)
+		/mob/living/simple_animal/hostile/retaliate/voiddragon,
+	)
 
-	if(!(captive.type in summon_types))
+	var/mob/living/simple_animal/hostile/retaliate/captive = interacting_with
+
+	if(!is_type_in_list(interacting_with, summon_types))
 		to_chat(user, span_warning("[captive] cannot be bound by these shackles!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(captive.tier > tier)
 		to_chat(user, span_warning("[src] is not strong enough to bind [captive]!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	var/mob/living/simple_animal/hostile/retaliate/target = captive
 	target.visible_message(span_warning("[target.real_name]'s body is entangled by glowing chains..."), runechat_message = TRUE)
 
 	if(!target.ckey) //player is not inside body or has refused, poll for candidates
-
 		var/list/candidates = pollCandidatesForMob("Do you want to play as a Mage's summon?", null, null, null, 100, target, POLL_IGNORE_MAGE_SUMMON, new_players = TRUE)
 
 		// theres at least one candidate
@@ -544,18 +568,16 @@
 			var/mob/C = pick(candidates)
 			target.awaken_summon(user, C.ckey)
 			target.visible_message(span_warning("[target.real_name]'s eyes light up with an intelligence as it awakens fully on this plane."), runechat_message = TRUE)
-			custom_name(user,target)
-
-		//no candidates, raise as npc
+			custom_name(user, target)
 		else
 			to_chat(user, span_notice("The [captive] stares at you with mindless hate. The binding attempt failed to draw out its intelligence!"))
 
-		return FALSE
-	return FALSE
+	return ITEM_INTERACT_SUCCESS
 
 /mob/living/simple_animal/hostile/retaliate/proc/awaken_summon(mob/living/carbon/human/master, ckey)
 	if(!master)
 		return FALSE
+
 	if(ckey) //player
 		src.ckey = ckey
 
@@ -569,7 +591,7 @@
 	if(!chosen_name) // with the way that sanitize_name works, it'll actually send the error message to the awakener as well.
 		to_chat(awakener, span_warning("Your weapon did not select a valid name! Please wait as they try again.")) // more verbose than what sanitize_name might pass in it's error message
 		return custom_name(awakener, iteration++)
-	return chosen_name
+	return chosen_one.fully_replace_character_name(chosen_one.name, chosen_name)
 
 ////////////////////////////////////////Magic resources go below here////////////////////
 
@@ -581,6 +603,7 @@
 	desc = "Volcanic glass cooled from molten lava rapidly."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 80 GRAMS
 
 /obj/item/natural/leyline
 	name = "leyline shards"
@@ -589,6 +612,7 @@
 	desc = "A shard of a fractured leyline, it glows with lost power."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 30 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/manabloom
 	name = "mana bloom"
@@ -603,6 +627,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
 	list_reagents = list(/datum/reagent/toxin/manabloom_juice = SNACK_CHUNKY)
 	seed = /obj/item/neuFarm/seed/manabloom
+	item_weight = 20 GRAMS
 
 
 /obj/item/natural/artifact
@@ -611,6 +636,7 @@
 	desc = "An old stone from age long ago, marked with glowing sigils."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 100 GRAMS
 
 /obj/item/natural/voidstone
 	name = "Voidstone"
@@ -618,6 +644,7 @@
 	desc = "A piece of blackstone, it feels off to stare at it for long."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 60 GRAMS
 
 //combined items
 /obj/item/natural/melded
@@ -627,6 +654,9 @@
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
+	item_weight = 40 GRAMS
+	var/obj/item/book/granter/spellbook/melded_quality = /obj/item/book/granter/spellbook/adept
+	var/shock_damage = 20
 
 /obj/item/natural/melded/t1
 	name = "arcanic meld"
@@ -639,24 +669,37 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "dmeld"
 	desc = "A melding of hellhound fang, iridescent scales and elemental shard."
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 50 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/expert
+	shock_damage = 40
 
 /obj/item/natural/melded/t3
 	name = "sorcerous weave"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "wessence"
 	desc = "A melding of molten core, heartwood core and elemental fragment."
+	item_weight = 60 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/master
+	shock_damage = 60
 
 /obj/item/natural/melded/t4
 	name = "magical confluence"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "wessence"
 	desc = "A melding of abyssal flame, sylvan essence and elemental relic."
+	item_weight = 70 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/legendary
+	shock_damage = 80
 
 /obj/item/natural/melded/t5
 	name = "arcanic aberation"
 	icon_state = "wessence"
 	desc = "A melding of arcyne fusion and voidstone. It pulses erratically, power coiled tightly within and dangerous. Many would be afraid of going near this, let alone holding it."
-
+	item_weight = 80 GRAMS
+	melded_quality = /obj/item/book/granter/spellbook/legendary
+	shock_damage = 40
 
 /obj/structure/soul
 	name = "soul"
@@ -724,3 +767,55 @@
 		else
 			mana_amount -= transfer_amount
 			user.mana_pool.adjust_mana(transfer_amount)
+
+/obj/item/pylon_linker
+	name = "ley linker"
+	desc = "A mystical tool used to bind mana pylons together, allowing mana to flow between them."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "dbrush"
+	grid_width = 32
+	grid_height = 64
+
+	var/obj/structure/mana_pylon/source_pylon
+
+/obj/item/pylon_linker/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+	if(!istype(target, /obj/structure/mana_pylon))
+		return
+
+	var/obj/structure/mana_pylon/pylon = target
+
+	if(!source_pylon)
+		source_pylon = pylon
+		user.balloon_alert(user, "source set: [pylon.name]")
+		return
+
+	if(source_pylon == pylon)
+		user.balloon_alert(user, "can't link to itself!")
+		return
+
+	source_pylon.link_pylon(pylon)
+	user.balloon_alert(user, "pylons linked!")
+	source_pylon = null
+
+/obj/item/pylon_linker/afterattack_secondary(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+
+	if(!istype(target, /obj/structure/mana_pylon))
+		if(source_pylon)
+			user.balloon_alert(user, "source cleared!")
+			source_pylon = null
+		return
+
+	var/obj/structure/mana_pylon/pylon = target
+
+	if(!pylon.linked_pylon)
+		user.balloon_alert(user, "not linked!")
+		return
+
+	pylon.unlink_pylon(pylon.linked_pylon)
+	user.balloon_alert(user, "link broken!")

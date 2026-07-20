@@ -43,7 +43,7 @@
 	else
 		victim.Knockdown(knockdown_time * 2)
 
-	victim.apply_damage(sweep_damage, BRUTE, BODY_ZONE_CHEST)
+	victim.apply_damage(sweep_damage, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_BLUNT)
 	shake_camera(victim, 4, 3)
 	playsound(victim, impact_sound, 100, TRUE, 8, 0.9)
 	to_chat(victim, span_userdanger("[caster]'s appendages slam into you, throwing you back!"))

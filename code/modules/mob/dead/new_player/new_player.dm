@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
+GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player
 	flags_1 = NONE
@@ -39,7 +39,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 ///Say verb
 /mob/dead/new_player/say_verb(message as text)
 	set name = "Say"
-	set category = "IC"
+	set category = "IC.Speech"
 	set hidden = 1
 
 	if(message)
@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	multi_ready_characters = list()
 	multi_ready_index = 1
 
-	if(!client?.prefs?.multi_char_ready || !length(client.prefs.multi_ready_slots))
+	if(!client?.prefs?.read_preference(/datum/preference/toggle/multi_char_ready) || !length(client.prefs.multi_ready_slots))
 		return
 
 	var/original_slot = client.prefs.default_slot
@@ -67,26 +67,25 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		client.prefs.load_character(slot)
 		var/list/char_data = list(
 			"slot" = slot,
-			"real_name" = client.prefs.real_name,
-			"gender" = client.prefs.gender,
-			"age" = client.prefs.age,
-			"pref_species" = client.prefs.pref_species,
-			"selected_patron" = client.prefs.selected_patron,
+			"real_name" = client.prefs.read_preference(/datum/preference/text/real_name),
+			"gender" = client.prefs.read_preference(/datum/preference/choiced/gender),
+			"age" = client.prefs.read_preference(/datum/preference/choiced/age),
+			"pref_species" = client.prefs.pref_species.type,
+			"selected_patron" = client.prefs.read_preference(/datum/preference/choiced/patron),
 			"job_preferences" = client.prefs.job_preferences?.Copy(),
 			"features" = client.prefs.features?.Copy(),
 			"quirks" = client.prefs.quirks?.Copy(),
 			"quirk_customizations" = client.prefs.quirk_customizations?.Copy(),
-			"skin_tone" = client.prefs.skin_tone,
-			"eye_color" = client.prefs.eye_color,
-			"underwear" = client.prefs.underwear,
-			"undershirt" = client.prefs.undershirt,
-			"socks" = client.prefs.socks,
-			"pronouns" = client.prefs.pronouns,
-			"voice_type" = client.prefs.voice_type,
-			"voice_color" = client.prefs.voice_color,
-			"domhand" = client.prefs.domhand,
-			"flavortext" = client.prefs.flavortext,
-			"headshot_link" = client.prefs.headshot_link,
+			"skin_tone" = client.prefs.read_preference(/datum/preference/choiced/skin_tone),
+			"underwear" = client.prefs.read_preference(/datum/preference/choiced/underwear),
+			"undershirt" = client.prefs.read_preference(/datum/preference/choiced/undershirt),
+			"socks" = client.prefs.read_preference(/datum/preference/choiced/socks),
+			"pronouns" = client.prefs.read_preference(/datum/preference/choiced/pronouns),
+			"voice_type" = client.prefs.read_preference(/datum/preference/choiced/voice_type),
+			"voice_color" = client.prefs.read_preference(/datum/preference/color/voice_color),
+			"domhand" = client.prefs.read_preference(/datum/preference/choiced/domhand),
+			"flavortext" = client.prefs.read_preference(/datum/preference/text/flavortext),
+			"headshot_link" = client.prefs.read_preference(/datum/preference/text/headshot_link),
 		)
 		multi_ready_characters += list(char_data)
 
@@ -102,36 +101,35 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		return FALSE
 
 	var/datum/preferences/P = client.prefs
-	P.real_name = char_data["real_name"]
-	P.gender = char_data["gender"]
-	P.age = char_data["age"]
-	P.pref_species = char_data["pref_species"]
-	P.selected_patron = char_data["selected_patron"]
+	// 0 Validation on any of this
+	P.update_preference(/datum/preference/text, char_data["real_name"])
+	P.update_preference(/datum/preference/choiced/gender, char_data["gender"])
+	P.update_preference(/datum/preference/choiced/age, char_data["age"])
+	P.update_preference(/datum/preference/choiced/species, char_data["pref_species"])
+	P.update_preference(/datum/preference/choiced/patron, char_data["selected_patron"])
+	P.update_preference(/datum/preference/choiced/skin_tone, char_data["skin_tone"])
+	P.update_preference(/datum/preference/choiced/underwear, char_data["underwear"])
+	P.update_preference(/datum/preference/choiced/undershirt, char_data["undershirt"])
+	P.update_preference(/datum/preference/choiced/socks, char_data["socks"])
+	P.update_preference(/datum/preference/choiced/pronouns, char_data["pronouns"])
+	P.update_preference(/datum/preference/choiced/voice_type, char_data["voice_type"])
+	P.update_preference(/datum/preference/color/voice_color, char_data["voice_color"])
+	P.update_preference(/datum/preference/choiced/domhand, char_data["domhand"])
+	P.update_preference(/datum/preference/text/flavortext, char_data["flavortext"])
+	P.update_preference(/datum/preference/text/headshot_link, char_data["headshot_link"])
+
 	P.job_preferences = char_data["job_preferences"]
 	P.features = char_data["features"]
 	P.quirks = char_data["quirks"]
 	P.quirk_customizations = char_data["quirk_customizations"]
-	P.skin_tone = char_data["skin_tone"]
-	P.eye_color = char_data["eye_color"]
-	P.underwear = char_data["underwear"]
-	P.undershirt = char_data["undershirt"]
-	P.socks = char_data["socks"]
-	P.pronouns = char_data["pronouns"]
-	P.voice_type = char_data["voice_type"]
-	P.voice_color = char_data["voice_color"]
-	P.domhand = char_data["domhand"]
-	P.flavortext = char_data["flavortext"]
-	P.headshot_link = char_data["headshot_link"]
 
 	P.default_slot = char_data["slot"]
 	multi_ready_index = index
-	return TRUE
 
-/mob/dead/new_player/proc/new_player_panel()
-	if(!SSassets.initialized)
-		sleep(0.5 SECONDS)
-		new_player_panel()
-		return
+	if(!P.job_preferences)
+		P.job_preferences = list()
+
+	return TRUE
 
 /mob/dead/new_player/Topic(href, href_list[])
 	if(src != usr)
@@ -150,15 +148,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		relevant_cap = max(hpc, epc)
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src, 4)
+		client.prefs.show_choices(src, 4)
 		return 1
 
 	if(href_list["show_options"])
-		client.prefs.ShowChoices(src, 1)
+		client.prefs.show_choices(src, 1)
 		return 1
 
 	if(href_list["show_keybinds"])
-		client.prefs.ShowChoices(src, 3)
+		client.prefs.show_choices(src, 3)
 		return 1
 
 	if(href_list["ready"])
@@ -176,11 +174,26 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(href_list["refresh"])
 		winshow(src, "stonekeep_prefwin", FALSE)
 		src << browse(null, "window=preferences_browser")
-		new_player_panel()
 
 	if(client && client.prefs.is_active_migrant())
 		to_chat(usr, span_boldwarning("You are in the migrant queue."))
 		return
+
+	if(href_list["PossessVessel"])
+		var/id = href_list["PossessVessel"]
+		if(!client.is_whitelisted(id))
+			to_chat(src, span_boldwarning("You are not whitelisted for [id]."))
+			return
+		var/list/group = GLOB.active_ghost_vessels[id]
+		if(!length(group))
+			to_chat(src, span_warning("No vessels of that type are available."))
+			return
+		var/mob/living/carbon/human/vessel_mob = pick(group)
+		var/datum/component/ghost_vessel/gc = vessel_mob.GetComponent(/datum/component/ghost_vessel)
+		if(!gc || !gc.being_offered)
+			to_chat(src, span_warning("That vessel is no longer available."))
+			return
+		gc.possess_vessel(src)
 
 	if(href_list["late_join"])
 		if(!SSticker?.IsRoundInProgress())
@@ -233,8 +246,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
-		new_player_panel()
 
 	if(href_list["showpoll"])
 		handle_player_polling()
@@ -254,12 +265,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		ready = PLAYER_NOT_READY
 		return FALSE
 
-	var/this_is_like_playing_right = alert(src,"Are you sure you wish to observe? You will not be able to play this round!","Player Setup","Yes","No")
+	var/this_is_like_playing_right = tgui_alert(src, "Are you sure you wish to observe? You will not be able to play this round!", "Player Setup", list("Yes","No"))
 
 	if(QDELETED(src) || !src.client || this_is_like_playing_right != "Yes")
 		ready = PLAYER_NOT_READY
 		src << browse(null, "window=playersetup") //closes the player setup window
-		new_player_panel()
 		return FALSE
 
 	var/mob/dead/observer/observer = new()
@@ -278,7 +288,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	observer.client = client
 	observer.set_ghost_appearance()
 	if(observer.client && observer.client.prefs)
-		observer.real_name = observer.client.prefs.real_name
+		observer.real_name = observer.client.prefs.read_preference(/datum/preference/text/real_name)
 		observer.name = observer.real_name
 	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	QDEL_NULL(mind)
@@ -306,7 +316,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		if(JOB_UNAVAILABLE_SEX)
 			return "[jobtitle] is not meant for your sex."
 		if(JOB_UNAVAILABLE_DEITY)
-			return "[jobtitle] requires more faith."
+			return "[jobtitle] requires a different patron."
 		if(JOB_UNAVAILABLE_QUALITY)
 			return "[jobtitle] requires higher player quality."
 		if(JOB_UNAVAILABLE_DONATOR)
@@ -324,7 +334,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 //used for latejoining
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
+	if(QDELETED(src))
+		return JOB_UNAVAILABLE_GENERIC
+
 	var/datum/job/job = SSjob.GetJob(rank)
+	var/datum/preferences/player_prefs = client.prefs
 	//TODO: This fucking sucks.
 
 	if(is_skeleton_knight_job(job)) //has to be first because it's a subtype of skeleton
@@ -360,42 +374,59 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
 		return JOB_UNAVAILABLE_SLOTFULL
+
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!client.whitelisted()))
-			return JOB_UNAVAILABLE_GENERIC
 
 	if(is_role_banned(client.ckey, job.title))
 		return JOB_UNAVAILABLE_BANNED
-	if(is_race_banned(client.ckey, client.prefs.pref_species.id))
+
+	if(is_race_banned(client.ckey, player_prefs.pref_species.id))
 		return JOB_UNAVAILABLE_RACE_BANNED
+
 	if(job.banned_leprosy && is_misc_banned(client.ckey, BAN_MISC_LEPROSY))
 		return JOB_UNAVAILABLE_BANNED
+
 	if(job.banned_lunatic && is_misc_banned(client.ckey, BAN_MISC_LUNATIC))
 		return JOB_UNAVAILABLE_BANNED
 
-	if(QDELETED(src))
-		return JOB_UNAVAILABLE_GENERIC
 	if(!job.player_old_enough(client))
 		return JOB_UNAVAILABLE_ACCOUNTAGE
+
 	if(job.required_playtime_remaining(client))
 		return JOB_UNAVAILABLE_PLAYTIME
+
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	if((length(job.allowed_races) && !(client.prefs.pref_species.id in job.allowed_races)) || \
-		(length(job.blacklisted_species) && (client.prefs.pref_species.id in job.blacklisted_species)))
-		if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-			return JOB_UNAVAILABLE_RACE
-	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
+
+	if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL) && !job.prefs_species_check(player_prefs))
+		return JOB_UNAVAILABLE_RACE
+
+	var/datum/patron/pref_patron = player_prefs.read_preference(/datum/preference/choiced/patron)
+	if(!client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && job.tennite_triumph_exclusive && !(pref_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		return JOB_UNAVAILABLE_DEITY
+
+	if(length(job.allowed_sexes) && !(player_prefs.read_preference(/datum/preference/choiced/gender) in job.allowed_sexes))
 		return JOB_UNAVAILABLE_SEX
-	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
+
+	if(length(job.allowed_ages) && !(player_prefs.read_preference(/datum/preference/choiced/age) in job.allowed_ages))
 		return JOB_UNAVAILABLE_AGE
-	if((client.prefs.lastclass == job.title) && !job.bypass_lastclass)
+
+	if((player_prefs.lastclass == job.title) && !job.bypass_lastclass)
 		return JOB_UNAVAILABLE_LASTCLASS
+
+	if((job.job_flags & JOB_REQUIRE_WHITELIST) && !client?.is_whitelisted(initial(job.title)))
+		return JOB_UNAVAILABLE_GENERIC
+
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
+	// Multi-ready is pregame-only. If active, ignore cached slots and
+	// reload whichever character slot the player actually has selected.
+	if(client?.prefs?.read_preference(/datum/preference/toggle/multi_char_ready))
+		client.prefs.load_character(client.prefs.default_slot)
+		multi_ready_characters = list()
+
 	var/error = IsJobUnavailable(rank)
 	if(error != JOB_AVAILABLE)
 		alert(src, get_job_unavailable_error_message(error, rank))
@@ -444,7 +475,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	GLOB.respawncounts[character.ckey] += 1
 
 	if(humanc)
-		try_apply_character_post_equipment(humanc)
+		try_apply_character_post_equipment(humanc, client)
+
+	if(humanc?.mind)
+		SSrelations.try_late_join_rival(humanc.mind)
 
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
 
@@ -458,8 +492,9 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	var/column_counter = 0
 
 	var/static/list/omegalist = list(
-		GLOB.noble_positions,
+		GLOB.noble_courthand_positions,
 		GLOB.garrison_positions,
+		GLOB.gallowband_positions,
 		GLOB.church_positions,
 		GLOB.peasant_positions,
 		GLOB.apprentices_positions,
@@ -494,6 +529,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 					cat_name = "Nobles"
 				if (GARRISON)
 					cat_name = "Garrison"
+				if (GALLOWBAND)
+					cat_name = "Gallowband"
 				if (SERFS)
 					cat_name = "Yeomanry"
 				if (CHURCHMEN)
@@ -552,7 +589,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 					if(job in GLOB.noble_positions)
 						command_bold = " command"
 					var/used_name = job_datum.title
-					if(client.prefs.gender == FEMALE && job_datum.f_title)
+					if(client.prefs.read_preference(/datum/preference/choiced/gender) == FEMALE && job_datum.f_title)
 						used_name = job_datum.f_title
 					if(job_datum in SSjob.prioritized_jobs)
 						dat += "<a class='job[command_bold]' href='byond://?src=[REF(src)];SelectedJob=[job_datum.title]'><span class='priority'>[used_name] ([job_datum.current_positions])</span></a>"
@@ -563,6 +600,23 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			column_counter++
 			if(column_counter > 0 && (column_counter % 4 == 0))
 				dat += "</td><td valign='top'>"
+	if(length(GLOB.active_ghost_vessels))
+		var/list/available_vessel_ids = list()
+		for(var/id in GLOB.active_ghost_vessels)
+			if(client.is_whitelisted(id))
+				available_vessel_ids += id
+
+		if(length(available_vessel_ids))
+			dat += "<fieldset style='width: 185px; border: 2px solid #8B4513; display: inline'>"
+			dat += "<legend align='center' style='font-weight: bold; color: #8B4513'>Vessels</legend>"
+			for(var/id in available_vessel_ids)
+				var/count = length(GLOB.active_ghost_vessels[id])
+				dat += "<a class='job' href='byond://?src=[REF(src)];PossessVessel=[id]'>Join as [id] ([count] available)</a>"
+			dat += "</fieldset><br>"
+			column_counter++
+			if(column_counter > 0 && (column_counter % 4 == 0))
+				dat += "</td><td valign='top'>"
+
 	dat += "</td></tr></table></center>"
 	dat += "</div></div>"
 	var/datum/browser/popup = new(src, "latechoices", "Choose Class", 720, 580)
@@ -589,7 +643,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 /mob/dead/new_player/proc/check_preferences()
 	if(!client)
 		return FALSE //Not sure how this would get run without the mob having a client, but let's just be safe.
-	if(client.prefs.joblessrole != RETURNTOLOBBY)
+	if(client.prefs.read_preference(/datum/preference/choiced/joblessrole) != RETURNTOLOBBY)
 		return TRUE
 	// If they have antags enabled, they're potentially doing this on purpose instead of by accident. Notify admins if so.
 	var/has_antags = FALSE

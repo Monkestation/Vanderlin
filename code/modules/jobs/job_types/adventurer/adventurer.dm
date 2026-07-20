@@ -2,7 +2,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration, 30 SECONDS)
 GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 /datum/job/adventurer
-	title = "Adventurer"
+	title = JOB_ADVENTURER
 	tutorial = "Hero of nothing, adventurer by trade. \
 	Whatever led you to this fate is up to the wind to decide, \
 	and you've never fancied yourself for much other than the thrill. \
@@ -27,12 +27,14 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	is_foreigner = TRUE
 	can_have_apprentices = FALSE
 	scales = TRUE
+	can_be_apprentice = TRUE
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 
 /datum/job/advclass/combat
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
-
+	spawn_with_torch = TRUE
+	department_flag = OUTSIDERS
 
 /datum/job/adventurer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -47,7 +47,7 @@
 /datum/targetting_datum/basic/proc/faction_check(mob/living/living_mob, mob/living/the_target)
 	if((living_mob in SSmatthios_mobs.matthios_mobs) && (the_target in SSmatthios_mobs.matthios_mobs))
 		return TRUE
-	return living_mob.faction_check_mob(the_target, exact_match = FALSE)
+	return living_mob.faction_check_atom(the_target, exact_match = FALSE)
 
 /// Subtype which doesn't care about faction
 /// Mobs which retaliate but don't otherwise target seek should just attack anything which annoys them

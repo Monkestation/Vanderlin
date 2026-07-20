@@ -70,48 +70,36 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	var/isinhell
 	var/last_helld = 0
 
+	/// Grants this observer mob all languages
+	var/grant_all_languages = TRUE
+	/// If grant all is not true, the languages we grant
+	var/list/languages_to_grant = list(/datum/language/common)
+
 /mob/dead/observer/rogue
-//	see_invisible = SEE_INVISIBLE_LIVING
+	icon_state = "ghost1"
+	verb_say = "moans"
 	sight = 0
 	see_in_dark = 2
-	var/next_gmove
-	var/misting = 0
 	draw_icon = TRUE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
-	icon_state = "ghost1"
+
+	grant_all_languages = TRUE
+
+/mob/dead/observer/rogue/Initialize(mapload)
+	. = ..()
+	add_movespeed_modifier(MOVESPEED_ID_GHOST, multiplicative_slowdown = 0.3)
 
 /mob/dead/observer/rogue/nodraw
-	draw_icon = FALSE
 	icon = 'icons/roguetown/mob/misc.dmi'
 	icon_state = "ghost"
+	draw_icon = FALSE
 	alpha = 100
 
-/mob/dead/observer/rogue/Move(n, direct)
-	if(world.time < next_gmove)
-		return
-	next_gmove = world.time + 2
-	var/turf/T = n
-
-	setDir(direct)
-
-	if(!loc.Exit(src, T))
-		return
-
-	if(istype(T))
-		if(T.density)
-			return
-		for(var/obj/item/reagent_containers/powder/salt/S in T)
-//			go2hell()
-//			next_gmove = world.time + 30
-			return
-	. = ..()
-
 /mob/dead/observer/screye
-//	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
 	see_in_dark = 0
-	hud_type = /datum/hud/obs
+	hud_type = /datum/hud/obscured
 	can_reenter_corpse = FALSE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
@@ -128,17 +116,10 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
 
-/mob/dead/observer/profane/Move(n, direct)
-	return
-
-/mob/dead/observer/profane/canZMove(direction, turf/target)
-	return
-
 /mob/dead/observer/Initialize()
 	set_invisibility(GLOB.observer_default_invisibility)
 
-	verbs += list(
-		/mob/dead/observer/proc/tray_view)
+	add_verb(src, /mob/dead/observer/proc/tray_view)
 
 	if(icon_state in GLOB.ghost_forms_with_directions_list)
 		ghostimage_default = image(src.icon,src,src.icon_state + "")
@@ -177,7 +158,8 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 		mind?.current_ghost = src
 
-		set_suicide(body.suiciding) // Transfer whether they committed suicide.
+		if(HAS_TRAIT_FROM_ONLY(body, TRAIT_SUICIDED, REF(body))) // transfer if the body was killed due to suicide
+			ADD_TRAIT(src, TRAIT_SUICIDED, REF(body))
 
 		if(draw_icon)
 			if(ishuman(body))
@@ -200,34 +182,27 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	real_name = name
 
 	if(!fun_verbs)
-		verbs -= /mob/dead/observer/verb/boo
-		verbs -= /mob/dead/observer/verb/possess
+		add_verb(src, /mob/dead/observer/verb/boo)
+		add_verb(src, /mob/dead/observer/verb/possess)
 
 	GLOB.dead_mob_list += src
 
-	for(var/v in GLOB.active_alternate_appearances)
-		if(!v)
-			continue
-		var/datum/atom_hud/alternate_appearance/AA = v
-		AA.onNewMob(src)
+	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(src)
 
 	. = ..()
 
 	if(!istype(src, /mob/dead/observer/rogue/arcaneeye))
 		if(!istype(src, /mob/dead/observer/screye))
-			client?.verbs += GLOB.ghost_verbs
+			add_verb(src, GLOB.ghost_verbs)
 			to_chat(src, span_danger("Click the <b>SKULL</b> on the left of your HUD to respawn."))
 
-	grant_all_languages()
-
-//	show_data_huds()
-//	data_huds_on = 1
-
-/mob/dead/observer/narsie_act()
-	var/old_color = color
-	color = "#960000"
-	animate(src, color = old_color, time = 10, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 10)
+	if(grant_all_languages)
+		grant_all_languages()
+	else
+		remove_all_languages()
+		for(var/datum/language/lang as anything in languages_to_grant)
+			grant_language(lang)
 
 /mob/dead/observer/Destroy()
 	mind?.current_ghost = null
@@ -283,50 +258,40 @@ Transfer_mind is there to check if mob is being deleted/not going to have a body
 Works together with spawning an observer, noted above.
 */
 
-/mob/proc/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip)
-	if(key)
-		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
-		if(client)
-			if(client.holder)
-				var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
-				SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
-				ghost.can_reenter_corpse = can_reenter_corpse
-				ghost.ghostize_time = world.time
-				ghost.key = key
-				return ghost
-//		if(client)
-//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
-//			play_priomusic(S)
-		var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
-		if(drawskip)
-			ghost = new /mob/dead/observer/rogue/nodraw(src)
-		else
-			ghost = new(src)
-		ghost.ghostize_time = world.time
-		var/bnw = TRUE
-		if(client)
-			if(client.holder)
-				if(check_rights_for(client,R_WATCH))
-					bnw = FALSE
+/mob/proc/ghostize(can_reenter_corpse = 1, drawskip)
+	if(!key)
+		return
+
+	stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
+	if(client?.holder)
+		var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
 		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = can_reenter_corpse
+		ghost.ghostize_time = world.time
 		ghost.key = key
-		if(!bnw)
-			return ghost
-		ghost.add_client_colour(/datum/client_colour/monochrome)
 		return ghost
 
-/mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE)
-	if(mind)
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
-			if(force_respawn)
-				mind.remove_antag_datum(/datum/antagonist/zombie)
-				return ..()
-			// if(!Z.revived)
-			// 	if(!(world.time % 5))
-			// 		to_chat(src, "<span class='warning'>I'm preparing to walk again.</span>")
-			// 	return
-	return ..()
+	var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
+	if(drawskip)
+		ghost = new /mob/dead/observer/rogue/nodraw(src)
+	else
+		ghost = new(src)
+
+	ghost.ghostize_time = world.time
+	var/bnw = TRUE
+	if(client?.holder)
+		if(check_rights_for(client,R_WATCH))
+			bnw = FALSE
+
+	SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
+	ghost.can_reenter_corpse = can_reenter_corpse
+	ghost.key = key
+	if(!bnw)
+		return ghost
+
+	ghost.add_client_colour(/datum/client_colour/monochrome)
+	SEND_SIGNAL(src, COMSIG_MOB_GHOSTIZED)
+	return ghost
 
 /mob/proc/scry_ghost()
 	if(key)
@@ -336,7 +301,16 @@ Works together with spawning an observer, noted above.
 		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = TRUE
 		ghost.key = key
+		RegisterSignal(ghost, COMSIG_MOB_LOGOUT, PROC_REF(break_scry))
 		return ghost
+
+/mob/proc/break_scry()
+	return
+
+/mob/dead/observer/break_scry()
+	client.view_size.setDefault(client.view_size.getScreenSize())
+	mind.current_ghost = null
+	mind.current.ckey = ckey(key)
 
 /*
 This is the proc mobs get to turn into a ghost. Forked from ghostize due to compatibility issues.
@@ -353,7 +327,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(stat == DEAD)
 		ghostize(1)
 	else
-		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst still alive you may not play again this round! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?","Ghost","Stay in body")
+		var/response = tgui_alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst still alive you may not play again this round! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?", list("Ghost","Stay in body"))
 		if(response != "Ghost")
 			return	//didn't want to ghost after-all
 		ghostize(0)						//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
@@ -365,7 +339,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set hidden = 1
 	if(!usr.client.holder)
 		return
-	var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst still alive you may not play again this round! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?","Ghost","Stay in body")
+	var/response = tgui_alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst still alive you may not play again this round! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?", list("Ghost","Stay in body"))
 	if(response != "Ghost")
 		return
 	ghostize(0)
@@ -408,19 +382,23 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(istype(src, /mob/dead/observer/profane))
 		to_chat(src, "<span class='warning'>My spirit has been snatched away by Graggar!</span>")
 		return
+	if(is_antag_banned(ckey, ROLE_ZOMBIE))
+		if(IS_DEADITE(src))
+			to_chat(src, span_warning("I am banned from playing deadites."))
+			return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
 
 	remove_client_colour(/datum/client_colour/monochrome)
-	client.view_size.setDefault(getScreenSize())
+	client.view_size.setDefault(client.view_size.getScreenSize())
 	mind.current_ghost = null
 	mind.current.ckey = ckey(key)
 	return TRUE
 
 /mob/dead/observer/returntolobby(modifier as num)
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 	if (CONFIG_GET(flag/norespawn))
 		return
@@ -458,11 +436,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		qdel(M)
 		return
 
-	client?.verbs -= /client/proc/descend
 	M.key = key
 //	M.Login()	//wat
-	return
-
 
 /mob/dead/observer/verb/stay_dead()
 	set category = "Spirit"
@@ -476,13 +451,41 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(usr, "<span class='warning'>You're already stuck out of your body!</span>")
 		return FALSE
 
-	var/response = alert(src, "Are you sure you want to prevent (almost) all means of resuscitation? This cannot be undone. ","Are you sure you want to stay dead?","DNR","Save Me")
+	var/response = tgui_alert(src, "Are you sure you want to prevent (almost) all means of resuscitation? This cannot be undone. ","Are you sure you want to stay dead?", list("DNR","Save Me"))
 	if(response != "DNR")
 		return
 
 	can_reenter_corpse = FALSE
 	to_chat(src, "<span class='boldnotice'>I can no longer be brought back into your body.</span>")
 	return TRUE
+
+/// Allows human ghosts to set their mob's final words variable.
+/mob/dead/observer/verb/set_final_words()
+	set category = "Spirit"
+	set name = "Set Final Words"
+	set hidden = 1
+
+	if(!isobserver(src) || !client)
+		return
+
+	if(!mind || QDELETED(mind.current))
+		to_chat(src, span_warning("I have no body."))
+		return
+	if(!ishuman(mind.current))
+		to_chat(src, span_warning("I am not sophisticated enough to leave final words..."))
+		return
+	var/mob/living/carbon/human/body = mind.current
+
+	if(body.funeral)
+		to_chat(src, span_warning("My body has already been laid to rest!</span>"))
+		return
+
+	var/final_words = tgui_input_text(src, "Set or update the words you shall impart when you are laid to rest... (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", body.final_words, 50, timeout = 30 SECONDS)
+	if(!final_words || final_words == body.final_words)
+		return
+	body.final_words = final_words
+	log_say("[src] put [final_words] for their final words.")
+
 
 /mob/dead/observer/proc/notify_cloning(message, sound, atom/source, flashwindow = TRUE)
 	if(flashwindow)
@@ -492,8 +495,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(source)
 			var/atom/movable/screen/alert/A = throw_alert("[REF(source)]_notify_cloning", /atom/movable/screen/alert/notify_cloning)
 			if(A)
-				if(client && client.prefs && client.prefs.UI_style)
-					A.icon = ui_style2icon(client.prefs.UI_style)
+				if(client && client.prefs && client.prefs.read_preference(/datum/preference/choiced/UI_style))
+					A.icon = ui_style2icon(client.prefs.read_preference(/datum/preference/choiced/UI_style))
 				A.desc = message
 				var/old_layer = source.layer
 				var/old_plane = source.plane
@@ -507,22 +510,50 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/verb/follow()
 	set category = "Spirit"
-	set name = "Orbit" // "Haunt"
+	set name = "Orbit"
 	set desc = ""
 	set hidden = 1
-	var/list/mobs
-	if(client.holder)
-		if(check_rights(R_WATCH,0))
-			mobs = getpois(mobs_only=1,skip_mindless=1)
-		else
-			mobs = gethaunt()
-	else
-		mobs = gethaunt()
 
-	var/input = input("Who?!", "Haunt", null, null) as null|anything in mobs
+	var/list/mobs = getpois(mobs_only = TRUE, skip_mindless = TRUE)
+
+	if(!length(mobs))
+		to_chat(src, span_dead("No souls to orbit."))
+		return
+
+	var/input = browser_input_list(src, "Who?!", "Orbit", mobs)
+	if(!input || QDELETED(src))
+		return
+
 	var/mob/target = mobs[input]
+	if(!target)
+		return
+
 	ManualFollow(target)
 
+/mob/dead/observer/proc/dead_tele()
+	set category = "Ghost"
+	set name = "Teleport"
+	set desc= "Teleport to a location"
+	set hidden = 1
+
+	if(!isobserver(src))
+		to_chat(src, span_warning("Not when you're not dead!"))
+		return
+
+	var/area/thearea  = browser_input_list(src, "Area to jump to", "Where?", GLOB.areas)
+
+	if(!thearea || QDELETED(src))
+		return
+
+	var/list/L = list()
+	for(var/turf/T in get_area_turfs(thearea.type))
+		L += T
+
+	if(!length(L))
+		to_chat(src, span_warning("No location available!"))
+		return
+
+	forceMove(pick(L))
 
 #define HAUNTTIME (10 MINUTES)
 
@@ -737,7 +768,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/update_sight()
 	if(client)
-		ghost_others = client.prefs.ghost_others //A quick update just in case this setting was changed right before calling the proc
+		ghost_others = client.prefs.read_preference(/datum/preference/choiced/ghost_others) //A quick update just in case this setting was changed right before calling the proc
 
 	if (!ghostvision)
 		see_invisible = SEE_INVISIBLE_LIVING
@@ -749,8 +780,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	..()
 
 /proc/updateallghostimages()
-	listclearnulls(GLOB.ghost_images_default)
-	listclearnulls(GLOB.ghost_images_simple)
+	list_clear_nulls(GLOB.ghost_images_default)
+	list_clear_nulls(GLOB.ghost_images_simple)
 
 	for (var/mob/dead/observer/O in GLOB.player_list)
 		O.updateghostimages()
@@ -760,7 +791,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	var/bt = world.time
 	SEND_SOUND(src, sound('sound/misc/notice (2).ogg'))
-	if(alert(src, "You have been summoned to destroy Vanderlin!", "Join the Horde", "Yes", "No") == "Yes")
+	if(tgui_alert(src, "You have been summoned to destroy Vanderlin!", "Join the Horde", list("Yes", "No")) == "Yes")
 		if(world.time > bt + 5 MINUTES)
 			to_chat(src, "<span class='warning'>Too late.</span>")
 			return FALSE
@@ -777,11 +808,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				client.images -= GLOB.ghost_images_default
 			if(GHOST_OTHERS_SIMPLE)
 				client.images -= GLOB.ghost_images_simple
-	lastsetting = client.prefs.ghost_others
+	lastsetting = client.prefs.read_preference(/datum/preference/choiced/ghost_others)
 	if(!ghostvision)
 		return
-	if(client.prefs.ghost_others != GHOST_OTHERS_THEIR_SETTING)
-		switch(client.prefs.ghost_others)
+	if(client.prefs.read_preference(/datum/preference/choiced/ghost_others) != GHOST_OTHERS_THEIR_SETTING)
+		switch(client.prefs.read_preference(/datum/preference/choiced/ghost_others))
 			if(GHOST_OTHERS_DEFAULT_SPRITE)
 				client.images |= (GLOB.ghost_images_default-ghostimage_default)
 			if(GHOST_OTHERS_SIMPLE)
@@ -792,6 +823,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Possess!"
 	set desc= "Take over the body of a mindless creature!"
 
+	if(!check_rights(R_ADMIN))
+		return FALSE
 	var/list/possessible = list()
 	for(var/mob/living/L in GLOB.alive_mob_list)
 		if(istype(L,/mob/living/carbon/human/dummy) || !get_turf(L)) //Haha no.
@@ -805,14 +838,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return FALSE
 
 	if(can_reenter_corpse && mind && mind.current)
-		if(alert(src, "Your soul is still tied to your former life as [mind.current.name], if you go forward there is no going back to that life. Are you sure you wish to continue?", "Move On", "Yes", "No") == "No")
+		if(tgui_alert(src, "Your soul is still tied to your former life as [mind.current.name], if you go forward there is no going back to that life. Are you sure you wish to continue?", "Move On", list("Yes", "No")) == "No")
 			return FALSE
 	if(target.key)
 		to_chat(src, "<span class='warning'>Someone has taken this body while you were choosing!</span>")
 		return FALSE
 
 	target.key = key
-	target.faction = list(FACTION_NEUTRAL)
+	target.set_faction(list(FACTION_NEUTRAL))
 	return TRUE
 
 //this is a mob verb instead of atom for performance reasons
@@ -863,12 +896,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/proc/show_data_huds()
 	for(var/hudtype in datahuds)
 		var/datum/atom_hud/H = GLOB.huds[hudtype]
-		H.add_hud_to(src)
+		H.show_to(src)
 
 /mob/dead/observer/proc/remove_data_huds()
 	for(var/hudtype in datahuds)
 		var/datum/atom_hud/H = GLOB.huds[hudtype]
-		H.remove_hud_from(src)
+		H.hide_from(src)
 
 /mob/dead/observer/verb/toggle_data_huds()
 	set name = "Toggle Sec/Med/Diag HUD"
@@ -924,9 +957,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	set_ghost_appearance()
 	if(client && client.prefs)
-		deadchat_name = client.prefs.real_name
-		mind.ghostname = client.prefs.real_name
-		name = client.prefs.real_name
+		deadchat_name = client.prefs.read_preference(/datum/preference/text/real_name)
+		mind.ghostname = client.prefs.read_preference(/datum/preference/text/real_name)
+		name = client.prefs.read_preference(/datum/preference/text/real_name)
 
 /mob/dead/observer/proc/set_ghost_appearance()
 	if(!client?.prefs)
@@ -954,11 +987,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ghostimage_simple.icon_state = icon_state
 		if("fun_verbs")
 			if(fun_verbs)
-				verbs += /mob/dead/observer/verb/boo
-				verbs += /mob/dead/observer/verb/possess
+				add_verb(src, /mob/dead/observer/verb/boo)
+				add_verb(src, /mob/dead/observer/verb/possess)
 			else
-				verbs -= /mob/dead/observer/verb/boo
-				verbs -= /mob/dead/observer/verb/possess
+				add_verb(src, /mob/dead/observer/verb/boo)
+				add_verb(src, /mob/dead/observer/verb/possess)
 
 /mob/dead/observer/reset_perspective(atom/A)
 	if(client)

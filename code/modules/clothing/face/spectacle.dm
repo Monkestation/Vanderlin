@@ -1,14 +1,17 @@
 /obj/item/clothing/face/spectacles
 	name = "spectacles"
+	desc = "A pair of shaped lenses, worn with a bridge over the nose."
 	icon_state = "glasses"
+	w_class = WEIGHT_CLASS_SMALL
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	sellprice = 15
 	max_integrity = 20
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	gender = PLURAL
 	clothing_traits = list(TRAIT_NEARSIGHTED_CORRECTED)
-//	block2add = FOV_BEHIND
 
 /obj/item/clothing/face/spectacles/atom_break(damage_flag)
 	. = ..()
@@ -20,9 +23,11 @@
 
 /obj/item/clothing/face/spectacles/golden
 	name = "golden spectacles"
+	desc = "A pair of shaped lenses, worn with a bridge over the nose. The frame of this one is golden."
 	icon_state = "goggles"
 	break_sound = "glassbreak"
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
+	sellprice = 40
 	max_integrity = 35
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
@@ -30,8 +35,47 @@
 
 /obj/item/clothing/face/spectacles/monocle
 	name = "silver monocle"
+	desc = "A single shaped lens housed in silver. It is held in front of the eye by tensing the muscles around the eye socket. Using this allows you to better appraise items."
 	icon_state = "monocle"
 	max_integrity = 35
+	sellprice = 20
+	gender = NEUTER
+	grid_width = 32
+	grid_height = 32
+
+/obj/item/clothing/face/spectacles/monocle/examine()
+	. = ..()
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
+
+/obj/item/clothing/face/spectacles/monocle/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	var/total_sellprice = 0
+
+	if(isturf(interacting_with))
+		visible_message("[user] evaluates the items on the [interacting_with] with their monocle.")
+
+		for(var/obj/item/assessed_item in interacting_with)
+			total_sellprice += assessed_item.sellprice
+
+		if(!HAS_TRAIT(user, TRAIT_SEEPRICES))
+			total_sellprice = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
+
+		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
+
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] evaluates the [interacting_with] with their monocle.")
+
+		var/obj/item/assessed_item = interacting_with
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
+			total_sellprice += item.sellprice
+
+		if(!HAS_TRAIT(user, TRAIT_SEEPRICES))
+			total_sellprice = round(total_sellprice * rand(62, 127) / 100) //arbitrary numbers to make sussing out the actual price harder.
+
+		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)
@@ -51,6 +95,7 @@
 
 /obj/item/clothing/face/spectacles/inq
 	name = "inquisitorial spectacles"
+	examine_name = "crimson spectacles"
 	icon_state = "bglasses"
 	desc = "Spectacles evoking the stained glass of Grenzelhoftian cathedrals. See all evil."
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
@@ -59,7 +104,7 @@
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HEAD
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	var/lensmoved = TRUE // starts with the lenses out of the way, night vision being off.
 
 /obj/item/clothing/face/spectacles/inq/examine(mob/user) // informs inquisition members of the night vision functionality.
@@ -79,7 +124,7 @@
 			ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 			return
 
-/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, params)
+/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
@@ -118,7 +163,13 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	armor = ARMOR_PADDED
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
+
+/obj/item/clothing/face/sack/surgsack
+	name = "physicker's masked sack"
+	desc = "A brown sack, with a physickers mask on top of it, likely for more coverage."
+	icon_state = "surgsackmask"
 
 /obj/item/clothing/face/sack/psy
 	name = "psydonian sack mask"
@@ -140,7 +191,8 @@
 	body_parts_covered = FACE|HEAD
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	armor = ARMOR_PADDED
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 
 /obj/item/clothing/face/facemask/steel/confessor
 	name = "strange mask"
@@ -150,14 +202,13 @@
 	equip_sound = 'sound/items/confessormaskon.ogg'
 	melting_material = /datum/material/steel
 	melt_amount = 75
-	var/worn = FALSE
 	slot_flags = ITEM_SLOT_MASK
+	var/worn = FALSE
 
 /obj/item/clothing/face/facemask/steel/confessor/examine(mob/user) // informs inquisition members that nocshades can be installed in the mask.
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_INQUISITION) && !istype(src, /obj/item/clothing/face/facemask/steel/confessor/lensed))
 		. += span_info("This mask may have nocshades installed into it.")
-
 
 /obj/item/clothing/face/facemask/steel/confessor/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -171,7 +222,7 @@
 		worn = FALSE
 
 
-/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/clothing/face/spectacles/inq))
 		user.visible_message(span_warning("[user] starts to insert [I]'s lenses into [src]."))
@@ -207,7 +258,7 @@
 			user.update_sight()
 			return
 
-/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))

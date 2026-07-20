@@ -45,8 +45,8 @@
 	for(var/datum/mechanic_tip/tip in tips_to_add)
 		add_tip(tip)
 
-	RegisterSignal(parent, list(COMSIG_PARENT_EXAMINE), PROC_REF(show_tips))
-	RegisterSignal(parent, list(COMSIG_TIPS_REMOVE), PROC_REF(remove_tips))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(show_tips))
+	RegisterSignal(parent, COMSIG_TIPS_REMOVE, PROC_REF(remove_tips))
 
 /datum/component/mechanic_desc/InheritComponent(datum/component/mechanic_desc/C, i_am_original, list/datum/mechanic_tip/tips_to_add)
 	for(var/datum/mechanic_tip/tip in tips_to_add)

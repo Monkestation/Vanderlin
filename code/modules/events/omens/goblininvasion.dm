@@ -7,7 +7,7 @@
 	min_players = 0
 	req_omen = TRUE
 	earliest_start = 35 MINUTES
-	todreq = list("night", "dawn", "day", "dusk")
+	todreq = list(NIGHT, DAWN, DAY, DUSK)
 
 	tags = list(
 		TAG_RAID,

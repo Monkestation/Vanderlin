@@ -10,7 +10,7 @@
 
 //Splits the text of a file at seperator and returns them in a list.
 //returns an empty list if the file doesn't exist
-/world/proc/file2list(filename, seperator="\n", trim = TRUE)
+/proc/file2list(filename, seperator="\n", trim = TRUE)
 	if (trim)
 		return splittext(trim(file2text(filename)),seperator)
 	return splittext(file2text(filename),seperator)
@@ -255,54 +255,66 @@
 	return a
 
 //Turns a Body_parts_covered bitfield into a list of body zones.
-/proc/body_parts_covered2organ_names(bpc)
+/proc/cover_flags2body_zones(bpc)
 	var/list/covered_parts = list()
 
 	if(!bpc)
-		return 0
+		return covered_parts
 
 	if(bpc & HEAD)
 		covered_parts |= list(BODY_ZONE_HEAD)
+
 	if(bpc & NECK)
 		covered_parts |= list(BODY_ZONE_PRECISE_NECK)
+
 	if(bpc & MOUTH)
 		covered_parts |= list(BODY_ZONE_PRECISE_MOUTH)
+
 	if(bpc & EARS)
 		covered_parts |= list(BODY_ZONE_PRECISE_EARS)
+
 	if(bpc & NOSE)
 		covered_parts |= list(BODY_ZONE_PRECISE_NOSE)
+
 	if(bpc & HAIR)
 		covered_parts |= list(BODY_ZONE_PRECISE_SKULL)
 
 	if(bpc & LEFT_EYE)
 		covered_parts |= list(BODY_ZONE_PRECISE_L_EYE)
+
 	if(bpc & RIGHT_EYE)
 		covered_parts |= list(BODY_ZONE_PRECISE_R_EYE)
 
 	if(bpc & CHEST)
 		covered_parts |= list(BODY_ZONE_CHEST)
+
 	if(bpc & GROIN)
-		covered_parts |= list(BODY_ZONE_CHEST)
+		covered_parts |= list(BODY_ZONE_PRECISE_GROIN)
+
 	if(bpc & VITALS)
 		covered_parts |= list(BODY_ZONE_PRECISE_STOMACH)
 
 	if(bpc & ARM_LEFT)
 		covered_parts |= list(BODY_ZONE_L_ARM)
+
 	if(bpc & ARM_RIGHT)
 		covered_parts |= list(BODY_ZONE_R_ARM)
 
 	if(bpc & HAND_LEFT)
 		covered_parts |= list(BODY_ZONE_L_ARM)
+
 	if(bpc & HAND_RIGHT)
 		covered_parts |= list(BODY_ZONE_R_ARM)
 
 	if(bpc & LEG_LEFT)
 		covered_parts |= list(BODY_ZONE_L_LEG)
+
 	if(bpc & LEG_RIGHT)
 		covered_parts |= list(BODY_ZONE_R_LEG)
 
 	if(bpc & FOOT_LEFT)
 		covered_parts |= list(BODY_ZONE_L_LEG)
+
 	if(bpc & FOOT_RIGHT)
 		covered_parts |= list(BODY_ZONE_R_LEG)
 
@@ -454,7 +466,7 @@
 /proc/color_hex2color_matrix(string)
 	var/length = length(string)
 	if((length != 7 && length != 9) || length != length_char(string))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	var/r = hex2num(copytext(string, 2, 4))/255
 	var/g = hex2num(copytext(string, 4, 6))/255
 	var/b = hex2num(copytext(string, 6, 8))/255
@@ -462,7 +474,7 @@
 	if(length == 9)
 		a = hex2num(copytext(string, 8, 10))/255
 	if(!isnum(r) || !isnum(g) || !isnum(b) || !isnum(a))
-		return color_matrix_identity()
+		return COLOR_MATRIX_IDENTITY
 	return list(r,0,0,0, 0,g,0,0, 0,0,b,0, 0,0,0,a, 0,0,0,0)
 
 //will drop all values not on the diagonal
@@ -505,7 +517,7 @@
 		if(/turf)
 			return "turf"
 		else //regex everything else (works for /proc too)
-			return lowertext(replacetext("[the_type]", "[type2parent(the_type)]/", ""))
+			return LOWER_TEXT(replacetext("[the_type]", "[type2parent(the_type)]/", ""))
 
 /// Return html to load a url.
 /// for use inside of browse() calls to html assets that might be loaded on a cdn.

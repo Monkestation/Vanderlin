@@ -1,38 +1,61 @@
+/datum/attribute_holder/sheet/job/pilgrim/briar
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/labor/taming = 40,
+		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+	)
+
+/datum/attribute_holder/sheet/job/pilgrim/briar/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/magic/holy = 40,
+		/datum/attribute/skill/labor/taming = 40,
+		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+	)
+
 /datum/job/advclass/pilgrim/briar
 	title = "Briar"
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/briar
 	category_tags = list(CTAG_PILGRIM)
 	tutorial = "Stoic gardeners or flesh-eating predators, all can follow Dendor's path. <br>His Briars scorn civilized living, many embracing their animal nature, being fickle and temperamental."
-	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+	cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 	allowed_patrons = list(/datum/patron/divine/dendor)
 
 	total_positions = 4
 	exp_types_granted = list(EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 1,
-		STATKEY_INT = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/labor/taming = 4,
-		/datum/skill/craft/tanning = 2,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/labor/farming = 3,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
-		/datum/skill/misc/swimming = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/briar
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/briar/old
 
 	traits = list(
 		TRAIT_SEEDKNOW
@@ -40,9 +63,6 @@
 
 /datum/job/advclass/pilgrim/briar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/dendor/shillelagh)
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/dendor/forestdelight)
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/dendor/visage)
@@ -67,7 +87,7 @@
 	name = "Briar (Pilgrim)"
 	belt = /obj/item/storage/belt/leather/rope
 	mask = /obj/item/clothing/face/druid
-	neck = /obj/item/clothing/neck/psycross/silver/dendor
+	neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 	shirt = /obj/item/clothing/armor/leather/vest
 	armor = /obj/item/clothing/shirt/robe/dendor
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -79,7 +99,6 @@
 	name = "blank blessing of Dendor"
 	icon = 'icons/roguetown/misc/magick.dmi'
 	icon_state = ""
-	plane = -1
 	layer = 4.2
 	alpha = 155
 	var/associated_shrine = null
@@ -88,54 +107,56 @@
 	var/gives_tier2 = FALSE
 	var/unlocks_recipe = null
 
-/obj/item/dendor_blessing/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!istype(attacked_atom, associated_shrine))
-		return ..()
+/obj/item/dendor_blessing/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, associated_shrine))
+		return NONE
 
-	. = TRUE
-	if(ishuman(user) && user.patron.type == /datum/patron/divine/dendor)
-		if(!check_blessing_requirements(user))
-			return
-		icon_state = "[icon_state]_end"
+	if(!ishuman(user))
+		return NONE
 
-		if(!do_after(user, 3 SECONDS, target = src, display_over_user = TRUE))
-			icon_state = initial(icon_state)
-			return
-
-		record_round_statistic(STATS_DENDOR_SACRIFICES)
-
-		var/paths = list(TRAIT_DENDOR_GROWING, TRAIT_DENDOR_STINGING, TRAIT_DENDOR_DEVOURING, TRAIT_DENDOR_LORDING)
-		for(var/T in paths)
-			if(HAS_TRAIT(user, T) && T != path_trait)
-				to_chat(user, span_warning("Dendor rejects my offering... I already follow another path."))
-				icon_state = initial(icon_state)
-				return
-
-		if(required_trait && !HAS_TRAIT(user, required_trait))
-			to_chat(user, span_warning("I am not yet attuned to this path..."))
-			icon_state = initial(icon_state)
-			return
-
-		if(gives_tier2 && HAS_TRAIT(user, TRAIT_BLESSED))
-			to_chat(user, span_info("Dendor has already blessed me once. Further miracles must be earned differently."))
-			icon_state = initial(icon_state)
-			return
-
-		INVOKE_ASYNC(src, PROC_REF(give_blessing), user)
-		if(path_trait && !HAS_TRAIT(user, path_trait))
-			ADD_TRAIT(user, path_trait, TRAIT_GENERIC)
-		if(gives_tier2 && !HAS_TRAIT(user, TRAIT_BLESSED))
-			ADD_TRAIT(user, TRAIT_BLESSED, TRAIT_GENERIC)
-		if(unlocks_recipe && user.mind && !HAS_TRAIT(user, TRAIT_BLESSED))
-			user.mind.teach_crafting_recipe(unlocks_recipe)
-			var/datum/blueprint_recipe/R = unlocks_recipe
-			if(R && initial(R.name))
-				to_chat(user, span_good("I have learned how to make [initial(R.name)]!"))
-
-		qdel(src)
-	else
+	if(!istype(user.patron, /datum/patron/divine/dendor) || !check_blessing_requirements(user))
 		to_chat(user, span_warning("Dendor finds me unworthy of his blessings..."))
-	return
+		return ITEM_INTERACT_BLOCKING
+
+	icon_state = "[icon_state]_end"
+
+	if(!do_after(user, 3 SECONDS, target = src, display_over_user = TRUE))
+		icon_state = initial(icon_state)
+		return ITEM_INTERACT_BLOCKING
+
+	var/paths = list(TRAIT_DENDOR_GROWING, TRAIT_DENDOR_STINGING, TRAIT_DENDOR_DEVOURING, TRAIT_DENDOR_LORDING)
+	for(var/T in paths)
+		if(HAS_TRAIT(user, T) && T != path_trait)
+			to_chat(user, span_warning("Dendor rejects my offering... I already follow another path."))
+			icon_state = initial(icon_state)
+			return ITEM_INTERACT_BLOCKING
+
+	if(required_trait && !HAS_TRAIT(user, required_trait))
+		to_chat(user, span_warning("I am not yet attuned to this path..."))
+		icon_state = initial(icon_state)
+		return ITEM_INTERACT_BLOCKING
+
+	if(gives_tier2 && HAS_TRAIT(user, TRAIT_BLESSED))
+		to_chat(user, span_info("Dendor has already blessed me once. Further miracles must be earned differently."))
+		icon_state = initial(icon_state)
+		return ITEM_INTERACT_BLOCKING
+
+	INVOKE_ASYNC(src, PROC_REF(give_blessing), user)
+	if(path_trait && !HAS_TRAIT(user, path_trait))
+		ADD_TRAIT(user, path_trait, TRAIT_GENERIC)
+	if(gives_tier2 && !HAS_TRAIT(user, TRAIT_BLESSED))
+		ADD_TRAIT(user, TRAIT_BLESSED, TRAIT_GENERIC)
+	if(unlocks_recipe && user.mind && !HAS_TRAIT(user, TRAIT_BLESSED))
+		user.mind.teach_crafting_recipe(unlocks_recipe)
+		var/datum/blueprint_recipe/R = unlocks_recipe
+		if(R && initial(R.name))
+			to_chat(user, span_good("I have learned how to make [initial(R.name)]!"))
+
+	record_round_statistic(STATS_DENDOR_SACRIFICES)
+
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/dendor_blessing/proc/check_blessing_requirements(mob/living/user)
 	return TRUE

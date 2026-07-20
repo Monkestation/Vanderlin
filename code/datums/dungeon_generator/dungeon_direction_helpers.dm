@@ -10,12 +10,15 @@
 
 	var/top = FALSE
 
-/obj/effect/dungeon_directional_helper/New()
+INITIALIZE_IMMEDIATE(/obj/effect/dungeon_directional_helper)
+
+/obj/effect/dungeon_directional_helper/Initialize(mapload, ...)
 	. = ..()
 	var/turf/opposite_turf = get_step(get_turf(src), dir)
 
 	if(!locate(/obj/effect/dungeon_directional_helper) in opposite_turf)
 		SSdungeon_generator.markers |= src
+
 	alpha = 0
 
 /obj/effect/dungeon_directional_helper/Destroy(force)

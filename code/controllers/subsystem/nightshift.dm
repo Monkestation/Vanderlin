@@ -8,10 +8,10 @@ SUBSYSTEM_DEF(nightshift)
 	var/current_tod = null
 
 	var/nightshift_active = FALSE
-	var/nightshift_start_time = 576000	//4pm	//702000=7:30 PM, station time
-	var/nightshift_dawn_start = 288000		//198000=    530am
-	var/nightshift_day_start = 360000		//270000=    730am
-	var/nightshift_dusk_start = 504000		//630000=    530pm
+	var/nightshift_dawn_start = 	6 HOURS
+	var/nightshift_day_start = 		8 HOURS
+	var/nightshift_dusk_start = 	16 HOURS
+	var/nightshift_start_time = 	18 HOURS
 
 	/* Default STONEKEEP config.
 	var/nightshift_start_time = 756000	//9:00 PM - 2100 hrs
@@ -64,13 +64,13 @@ SUBSYSTEM_DEF(nightshift)
 /mob/living/carbon/human/update_tod(todd)
 	if(client)
 		refresh_looping_ambience()
-	if(todd == "dawn")
+	if(todd == DAWN)
 		if(HAS_TRAIT(src, TRAIT_VAMP_DREAMS))
 			apply_status_effect(/datum/status_effect/debuff/vamp_dreams)
 		if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
 			add_stress(/datum/stress_event/night_owl_dawn)
 
-	if(todd == "night")
+	if(todd == NIGHT)
 		if(HAS_TRAIT(src, TRAIT_NIGHT_OWL))
 			add_stress(/datum/stress_event/night_owl_night)
 		if(HAS_TRAIT(src, TRAIT_NOSTAMINA))

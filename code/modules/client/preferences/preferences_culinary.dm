@@ -30,6 +30,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	return GLOB.cached_drink_flat_icons[cache_key]
 
 /datum/preferences/proc/validate_culinary_preferences()
+	var/list/culinary_preferences = read_preference(/datum/preference/list_type/culinary_preferences)
 	if(!culinary_preferences)
 		culinary_preferences = list()
 
@@ -69,13 +70,17 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	if(culinary_preferences[CULINARY_FAVOURITE_DRINK] == culinary_preferences[CULINARY_HATED_DRINK])
 		culinary_preferences[CULINARY_HATED_DRINK] = get_default_hated_drink()
 
+	write_preference(/datum/preference/list_type/culinary_preferences, culinary_preferences)
+
 /datum/preferences/proc/reset_culinary_preferences()
-	culinary_preferences = list()
-	culinary_preferences[CULINARY_RANDOM_PREFERENCES] = FALSE
-	culinary_preferences[CULINARY_FAVOURITE_FOOD] = get_random_food()
-	culinary_preferences[CULINARY_FAVOURITE_DRINK] = get_random_drink()
-	culinary_preferences[CULINARY_HATED_FOOD] = get_random_hated_food()
-	culinary_preferences[CULINARY_HATED_DRINK] = get_random_hated_drink()
+	var/list/culinary = list(
+		CULINARY_RANDOM_PREFERENCES = FALSE,
+		CULINARY_FAVOURITE_FOOD = get_random_food(),
+		CULINARY_FAVOURITE_DRINK = get_random_drink(),
+		CULINARY_HATED_FOOD = get_random_hated_food(),
+		CULINARY_HATED_DRINK = get_random_hated_drink(),
+	)
+	write_preference(/datum/preference/list_type/culinary_preferences, culinary)
 
 /datum/preferences/proc/get_default_food()
 	return /obj/item/reagent_containers/food/snacks/bread
@@ -92,76 +97,88 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 /datum/preferences/proc/get_random_food()
 	if(!length(GLOB.selectable_foods))
 		GLOB.selectable_foods = get_global_selectable_foods()
-	var/list/choices = GLOB.selectable_foods - culinary_preferences[CULINARY_HATED_FOOD]
+	var/list/choices = GLOB.selectable_foods - read_assoc_preference(/datum/preference/list_type/culinary_preferences, CULINARY_HATED_FOOD)
 	return pick(choices)
 
 /datum/preferences/proc/get_random_drink()
 	if(!length(GLOB.selectable_drinks))
 		GLOB.selectable_drinks = get_global_selectable_drinks()
-	var/list/choices = GLOB.selectable_drinks - culinary_preferences[CULINARY_HATED_DRINK]
+	var/list/choices = GLOB.selectable_drinks - read_assoc_preference(/datum/preference/list_type/culinary_preferences, CULINARY_HATED_DRINK)
 	return pick(choices)
 
 /datum/preferences/proc/get_random_hated_food()
 	if(!length(GLOB.selectable_foods))
 		GLOB.selectable_foods = get_global_selectable_foods()
-	var/list/choices = GLOB.selectable_foods - culinary_preferences[CULINARY_FAVOURITE_FOOD]
+	var/list/choices = GLOB.selectable_foods - read_assoc_preference(/datum/preference/list_type/culinary_preferences, CULINARY_FAVOURITE_FOOD)
 	return pick(choices)
 
 /datum/preferences/proc/get_random_hated_drink()
 	if(!length(GLOB.selectable_drinks))
 		GLOB.selectable_drinks = get_global_selectable_drinks()
-	var/list/choices = GLOB.selectable_drinks - culinary_preferences[CULINARY_FAVOURITE_DRINK]
+	var/list/choices = GLOB.selectable_drinks - read_assoc_preference(/datum/preference/list_type/culinary_preferences, CULINARY_FAVOURITE_DRINK)
 	return pick(choices)
 
 /datum/preferences/proc/handle_culinary_topic(mob/user, href_list)
 	switch(href_list["preference"])
 		if("toggle_random_culinary")
-			var/current_random = culinary_preferences[CULINARY_RANDOM_PREFERENCES]
-			culinary_preferences[CULINARY_RANDOM_PREFERENCES] = !current_random
-			if(culinary_preferences[CULINARY_RANDOM_PREFERENCES])
-				to_chat(user, span_notice("Random culinary preferences enabled. Your food and drink preferences will be randomized."))
+			var/list/culinary = read_preference(/datum/preference/list_type/culinary_preferences)
+			culinary[CULINARY_RANDOM_PREFERENCES] = !culinary[CULINARY_RANDOM_PREFERENCES]
+			write_preference(GLOB.preference_entries[/datum/preference/list_type/culinary_preferences], culinary)
+			if(culinary[CULINARY_RANDOM_PREFERENCES])
+				to_chat(user, span_notice("Random culinary preferences enabled."))
 			else
-				to_chat(user, span_notice("Random culinary preferences disabled. You can now manually choose your preferences."))
+				to_chat(user, span_notice("Random culinary preferences disabled."))
 			show_culinary_ui(user)
+
 		if("choose_food")
 			show_food_selection_ui(user, CULINARY_FAVOURITE_FOOD)
+
 		if("choose_drink")
 			show_drink_selection_ui(user, CULINARY_FAVOURITE_DRINK)
+
 		if("choose_hated_food")
 			show_food_selection_ui(user, CULINARY_HATED_FOOD)
+
 		if("choose_hated_drink")
 			show_drink_selection_ui(user, CULINARY_HATED_DRINK)
+
 		if("confirm_food")
 			var/food_type = text2path(href_list["food_type"])
 			var/preference_type = href_list["preference_type"]
 			if(ispath(food_type, /obj/item/reagent_containers/food/snacks) && (food_type in GLOB.selectable_foods))
-				var/opposite_preference = (preference_type == CULINARY_FAVOURITE_FOOD) ? CULINARY_HATED_FOOD : CULINARY_FAVOURITE_FOOD
-				if(culinary_preferences[opposite_preference] == food_type)
+				var/list/culinary = read_preference(/datum/preference/list_type/culinary_preferences)
+				var/opposite = (preference_type == CULINARY_FAVOURITE_FOOD) ? CULINARY_HATED_FOOD : CULINARY_FAVOURITE_FOOD
+				if(culinary[opposite] == food_type)
 					to_chat(user, span_warning("You can't set the same item as both favorite and hated!"))
 				else
-					culinary_preferences[preference_type] = food_type
+					culinary[preference_type] = food_type
+					write_preference(GLOB.preference_entries[/datum/preference/list_type/culinary_preferences], culinary)
 					user << browse(null, "window=food_selection")
 					show_culinary_ui(user)
+
 		if("confirm_drink")
 			var/drink_type = text2path(href_list["drink_type"])
 			var/preference_type = href_list["preference_type"]
 			if(ispath(drink_type, /datum/reagent/consumable) && (drink_type in GLOB.selectable_drinks))
-				var/opposite_preference = (preference_type == CULINARY_FAVOURITE_DRINK) ? CULINARY_HATED_DRINK : CULINARY_FAVOURITE_DRINK
-				if(culinary_preferences[opposite_preference] == drink_type)
+				var/list/culinary = read_preference(/datum/preference/list_type/culinary_preferences)
+				var/opposite = (preference_type == CULINARY_FAVOURITE_DRINK) ? CULINARY_HATED_DRINK : CULINARY_FAVOURITE_DRINK
+				if(culinary[opposite] == drink_type)
 					to_chat(user, span_warning("You can't set the same drink as both favorite and hated!"))
 				else
-					culinary_preferences[preference_type] = drink_type
+					culinary[preference_type] = drink_type
+					write_preference(GLOB.preference_entries[/datum/preference/list_type/culinary_preferences], culinary)
 					user << browse(null, "window=drink_selection")
 					show_culinary_ui(user)
 
 /datum/preferences/proc/print_culinary_page(mob/user)
 	var/list/dat = list()
+	var/list/culinary = read_preference(/datum/preference/list_type/culinary_preferences)
 
-	var/current_food = culinary_preferences[CULINARY_FAVOURITE_FOOD]
-	var/current_drink = culinary_preferences[CULINARY_FAVOURITE_DRINK]
-	var/current_hated_food = culinary_preferences[CULINARY_HATED_FOOD]
-	var/current_hated_drink = culinary_preferences[CULINARY_HATED_DRINK]
-	var/random_preferences = culinary_preferences[CULINARY_RANDOM_PREFERENCES]
+	var/current_food = culinary[CULINARY_FAVOURITE_FOOD]
+	var/current_drink = culinary[CULINARY_FAVOURITE_DRINK]
+	var/current_hated_food = culinary[CULINARY_HATED_FOOD]
+	var/current_hated_drink = culinary[CULINARY_HATED_DRINK]
+	var/random_preferences = culinary[CULINARY_RANDOM_PREFERENCES]
 
 	var/food_name = "None"
 	var/food_icon = ""
@@ -249,24 +266,10 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += print_culinary_page(user)
 	var/datum/browser/popup = new(user, "culinary_customization", "<div align='center'>Culinary Preferences</div>", 360, 365)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
-
-/datum/preferences/proc/apply_culinary_preferences(mob/living/carbon/human/character)
-	if(!culinary_preferences)
-		return
-
-	character.culinary_preferences = culinary_preferences.Copy()
-	if(has_world_trait(/datum/world_trait/exotic_tastes))
-		character.culinary_preferences[CULINARY_RANDOM_PREFERENCES] = TRUE
-
-	if(character.culinary_preferences[CULINARY_RANDOM_PREFERENCES])
-		character.culinary_preferences[CULINARY_FAVOURITE_FOOD] = get_random_food()
-		character.culinary_preferences[CULINARY_FAVOURITE_DRINK] = get_random_drink()
-		character.culinary_preferences[CULINARY_HATED_FOOD] = get_random_hated_food()
-		character.culinary_preferences[CULINARY_HATED_DRINK] = get_random_hated_drink()
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/show_food_selection_ui(mob/user, preference_type)
-	if(culinary_preferences[CULINARY_RANDOM_PREFERENCES])
+	if(read_assoc_preference(/datum/preference/list_type/culinary_preferences, CULINARY_RANDOM_PREFERENCES))
 		to_chat(user, span_warning("You cannot choose food preferences while random preferences are enabled. Disable random preferences first."))
 		return
 
@@ -279,13 +282,12 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += "</style>"
 
 	var/list/food_with_faretypes = list()
-	for(var/food_type in GLOB.selectable_foods)
-		var/obj/item/reagent_containers/food/snacks/food_instance = food_type
+	for(var/obj/item/reagent_containers/food/snacks/food_instance as anything in GLOB.selectable_foods)
 		var/food_faretype = initial(food_instance.faretype)
 		var/food_name = initial(food_instance.name)
-		food_with_faretypes += list(list("type" = food_type, "faretype" = food_faretype, "name" = food_name))
+		food_with_faretypes += list(list("type" = food_instance, "faretype" = food_faretype, "name" = food_name))
 
-	food_with_faretypes = sortTim(food_with_faretypes, /proc/cmp_food_by_faretype_and_name)
+	food_with_faretypes = sortTim(food_with_faretypes, GLOBAL_PROC_REF(cmp_food_by_faretype_and_name))
 
 	for(var/list/food_data in food_with_faretypes)
 		var/food_type = food_data["type"]
@@ -299,10 +301,10 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/title = (preference_type == CULINARY_FAVOURITE_FOOD) ? "Select Favourite Food" : "Select Hated Food"
 	var/datum/browser/popup = new(user, "food_selection", "<div align='center'>[title]</div>", 400, 600)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/show_drink_selection_ui(mob/user, preference_type)
-	if(culinary_preferences[CULINARY_RANDOM_PREFERENCES])
+	if(read_assoc_preference(/datum/preference/list_type/culinary_preferences, CULINARY_RANDOM_PREFERENCES))
 		to_chat(user, span_warning("You cannot choose drink preferences while random preferences are enabled. Disable random preferences first."))
 		return
 
@@ -315,11 +317,10 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += "</style>"
 
 	var/list/drink_with_qualities = list()
-	for(var/drink_type in GLOB.selectable_drinks)
-		var/datum/reagent/consumable/drink_instance = drink_type
+	for(var/datum/reagent/consumable/drink_instance as anything in GLOB.selectable_drinks)
 		var/drink_quality = initial(drink_instance.quality)
 		var/drink_name = initial(drink_instance.name)
-		drink_with_qualities += list(list("type" = drink_type, "quality" = drink_quality, "name" = drink_name))
+		drink_with_qualities += list(list("type" = drink_instance, "quality" = drink_quality, "name" = drink_name))
 
 	drink_with_qualities = sortTim(drink_with_qualities, /proc/cmp_drink_by_quality_and_name)
 
@@ -335,7 +336,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/title = (preference_type == CULINARY_FAVOURITE_DRINK) ? "Select Favourite Drink" : "Select Hated Drink"
 	var/datum/browser/popup = new(user, "drink_selection", "<div align='center'>[title]</div>", 400, 600)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /proc/cmp_food_by_faretype_and_name(list/a, list/b)
 	var/faretype_a = a["faretype"]
@@ -372,7 +373,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/dough_base,
 		/obj/item/reagent_containers/food/snacks/meat,
 		/obj/item/reagent_containers/food/snacks/veg,
-		/obj/item/reagent_containers/food/snacks/store,
+		/obj/item/reagent_containers/food/snacks/truffles/toxic,
 		/obj/item/reagent_containers/food/snacks/grown,
 		/obj/item/reagent_containers/food/snacks/zybcake,
 		/obj/item/reagent_containers/food/snacks/zybcake_ready,
@@ -384,9 +385,6 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/crimsoncake_ready,
 		/obj/item/reagent_containers/food/snacks/chescake,
 		/obj/item/reagent_containers/food/snacks/chescake_ready,
-		/obj/item/reagent_containers/food/snacks/chescake_poison,
-		/obj/item/reagent_containers/food/snacks/chescake_poison_ready,
-		/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked,
 		/obj/item/reagent_containers/food/snacks/cake,
 		/obj/item/reagent_containers/food/snacks/piedough,
 		/obj/item/reagent_containers/food/snacks/raisindough,
@@ -394,7 +392,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/dough_slice,
 		/obj/item/reagent_containers/food/snacks/butterdough,
 		/obj/item/reagent_containers/food/snacks/butterdough_slice,
-		/obj/item/reagent_containers/food/snacks/meat/wiener,
+		/obj/item/reagent_containers/food/snacks/meat/sausage/wiener,
 		/obj/item/reagent_containers/food/snacks/meat/sausage,
 		/obj/item/reagent_containers/food/snacks/meat/fatty,
 		/obj/item/reagent_containers/food/snacks/rotten/sausage,
@@ -425,18 +423,27 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 		/obj/item/reagent_containers/food/snacks/produce/manabloom,
 		/obj/item/reagent_containers/food/snacks/produce/poppy,
-		/obj/item/reagent_containers/food/snacks/meat/human,
+		/obj/item/reagent_containers/food/snacks/meat/steak/human,
 		/obj/item/reagent_containers/food/snacks/crow,
 		/obj/item/reagent_containers/food/snacks/crow/dead,
 		/obj/item/reagent_containers/food/snacks/smallrat,
 		/obj/item/reagent_containers/food/snacks/smallrat/dead,
 		/obj/item/reagent_containers/food/snacks/messenger_bird,
 		/obj/item/reagent_containers/food/snacks/messenger_bird/dead,
+		/obj/item/reagent_containers/food/snacks/griddlecake/berry/poison,
+		/obj/item/reagent_containers/food/snacks/biscuit/poison,
+		/obj/item/reagent_containers/food/snacks/chescake_ready/poison,
+		/obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison,
+		/obj/item/reagent_containers/food/snacks/cheesecake_slice/poison,
+		/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison,
+		/obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison,
+		/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+		/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
+		/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
 	)
 
 	var/list/slice_paths = list()
-	for(var/food_type in subtypesof(/obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/F = food_type
+	for(var/obj/item/reagent_containers/food/snacks/F as anything in subtypesof(/obj/item/reagent_containers/food/snacks))
 		var/slice_path = initial(F.slice_path)
 		if(slice_path)
 			slice_paths |= slice_path
@@ -446,19 +453,18 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/list/filtered_food_types = list()
 	var/list/name_to_type = list()
 
-	for(var/food_type in food_types)
-		var/obj/item/reagent_containers/food/snacks/food_instance = food_type
+	for(var/obj/item/reagent_containers/food/snacks/food_instance as anything in food_types)
 		var/food_name = initial(food_instance.name)
 
 		if(!name_to_type[food_name])
-			name_to_type[food_name] = food_type
-			filtered_food_types += food_type
+			name_to_type[food_name] = food_instance
+			filtered_food_types += food_instance
 		else
 			var/existing_type = name_to_type[food_name]
-			if(ispath(existing_type, food_type))
-				name_to_type[food_name] = food_type
+			if(ispath(existing_type, food_instance))
+				name_to_type[food_name] = food_instance
 				filtered_food_types -= existing_type
-				filtered_food_types += food_type
+				filtered_food_types += food_instance
 
 	return filtered_food_types
 
@@ -482,19 +488,18 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/list/filtered_drink_types = list()
 	var/list/name_to_type = list()
 
-	for(var/drink_type in drink_types)
-		var/datum/reagent/consumable/drink_instance = drink_type
+	for(var/datum/reagent/consumable/drink_instance as anything in drink_types)
 		var/drink_name = initial(drink_instance.name)
 
 		if(!name_to_type[drink_name])
-			name_to_type[drink_name] = drink_type
-			filtered_drink_types += drink_type
+			name_to_type[drink_name] = drink_instance
+			filtered_drink_types += drink_instance
 		else
 			var/existing_type = name_to_type[drink_name]
-			if(ispath(existing_type, drink_type))
-				name_to_type[drink_name] = drink_type
+			if(ispath(existing_type, drink_instance))
+				name_to_type[drink_name] = drink_instance
 				filtered_drink_types -= existing_type
-				filtered_drink_types += drink_type
+				filtered_drink_types += drink_instance
 
 	return filtered_drink_types
 

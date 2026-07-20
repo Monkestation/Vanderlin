@@ -29,34 +29,46 @@
 /obj/structure/stone_tile/Crossed(atom/movable/AM)
 	if(falling || fallen)
 		return
+
+	if(!fall_on_cross)
+		return
+
 	var/turf/T = get_turf(src)
 	if(!islava(T)) //nothing to sink or fall into
 		return
-	var/obj/item/I
-	if(istype(AM, /obj/item))
-		I = AM
-	var/mob/living/L
-	if(isliving(AM))
-		L = AM
-	switch(fall_on_cross)
-		if(COLLAPSE_ON_CROSS, DESTROY_ON_CROSS)
-			if((I && I.w_class >= WEIGHT_CLASS_BULKY) || (L && !(L.movement_type & FLYING) && L.mob_size >= MOB_SIZE_HUMAN)) //too heavy! too big! aaah!
-				collapse()
-		if(UNIQUE_EFFECT)
-			crossed_effect(AM)
 
-/obj/structure/stone_tile/proc/collapse()
+	if(fall_on_cross == UNIQUE_EFFECT)
+		crossed_effect(AM)
+		return
+
+	// COLLAPSE_ON_CROSS or DESTROY_ON_CROSS implied
+
+	if(istype(AM, /obj/item))
+		var/obj/item/I = AM
+		if(I.w_class >= WEIGHT_CLASS_BULKY)
+			start_collapse()
+
+	if(isliving(AM))
+		var/mob/living/L = AM
+		if(!(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && L.mob_size >= MOB_SIZE_HUMAN)
+			start_collapse()
+
+/obj/structure/stone_tile/proc/start_collapse()
 	falling = TRUE
-	var/break_that_sucker = fall_on_cross == DESTROY_ON_CROSS
 	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	Shake(-1, -1, 25)
-	sleep(5)
+	addtimer(CALLBACK(src, PROC_REF(collapse)), 0.5 SECONDS)
+
+/obj/structure/stone_tile/proc/collapse()
+	var/break_that_sucker = fall_on_cross == DESTROY_ON_CROSS
 	if(break_that_sucker)
 		playsound(src, 'sound/blank.ogg', 50, TRUE)
 	else
 		playsound(src, 'sound/blank.ogg', 50, TRUE)
+
 	animate(src, alpha = 0, pixel_y = pixel_y - 3, time = 5)
 	fallen = TRUE
+
 	if(break_that_sucker)
 		QDEL_IN(src, 10)
 	else

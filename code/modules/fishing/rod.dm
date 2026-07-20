@@ -12,6 +12,7 @@
 
 	grid_height = 96
 	grid_width = 32
+	item_weight = 350 GRAMS
 
 	///the bait we have on the hook
 	var/obj/item/baited = null
@@ -100,26 +101,28 @@
 	icon_state = "auto"
 	no_attack = TRUE
 
-/obj/item/fishingrod/attack_self(mob/user, params)
+/obj/item/fishingrod/attack_self(mob/user, list/modifiers)
 	if(user.doing())
 		user.stop_all_doing()
 	else
 		..()
 
-/obj/item/fishingrod/attackby(obj/item/I, mob/user, params)
+/obj/item/fishingrod/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(baited && reel && hook && line)
-		return ..()
+		return NONE
 
-	if(istype(I, /obj/item/fishing/lure) || istype(I, /obj/item/natural/worms) || istype(I, /obj/item/natural/bundle/worms) || istype(I, /obj/item/fishing/lure) || istype(I, /obj/item/reagent_containers/food/snacks))
-		if(istype(I, /obj/item/fishing/lure) || istype(I, /obj/item/natural/worms) || istype(I, /obj/item/fishing/lure))
+	// This is disgusting
+	if(istype(tool, /obj/item/fishing/lure) || istype(tool, /obj/item/natural/worms) || istype(tool, /obj/item/natural/bundle/worms) || istype(tool, /obj/item/fishing/lure) || istype(tool, /obj/item/reagent_containers/food/snacks))
+		if(istype(tool, /obj/item/fishing/lure) || istype(tool, /obj/item/natural/worms) || istype(tool, /obj/item/fishing/lure))
 			if(!baited)
-				I.forceMove(src)
-				baited = I
-				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [I] to [src].</span>")
+				tool.forceMove(src)
+				baited = tool
+				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [tool] to [src].</span>")
 				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
-		else if(istype(I, /obj/item/natural/bundle/worms))
+			return ITEM_INTERACT_SUCCESS
+		else if(istype(tool, /obj/item/natural/bundle/worms))
 			if(!baited)
-				var/obj/item/natural/bundle/worms/W = I
+				var/obj/item/natural/bundle/worms/W = tool
 				baited = new W.stacktype(src)
 				W.amount--
 				if(W.amount == 1)
@@ -127,34 +130,38 @@
 					qdel(W)
 				user.visible_message("<span class='notice'>[user] hooks something to [src].</span>", "<span class='notice'>I hook [W.stacktype] to [src].</span>")
 				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
-		else
-			if(!baited)
-				I.forceMove(src)
-				baited = I
-				user.visible_message("<span class='notice'>[user] hooks something to the line.</span>", "<span class='notice'>I hook [I] to my line.</span>")
-				playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
+			return ITEM_INTERACT_SUCCESS
+		else if(!baited)
+			tool.forceMove(src)
+			baited = tool
+			user.visible_message("<span class='notice'>[user] hooks something to the line.</span>", "<span class='notice'>I hook [tool] to my line.</span>")
+			playsound(src, 'sound/foley/pierce.ogg', 50, FALSE)
+			return ITEM_INTERACT_SUCCESS
 
-	else if(istype(I, /obj/item/fishing)) //bait has a null attachtype and is accounted for in the previous check so i don't have to worry about it
-		var/obj/item/fishing/T = I
+	else if(istype(tool, /obj/item/fishing)) //bait has a null attachtype and is accounted for in the previous check so i don't have to worry about it
+		var/obj/item/fishing/T = tool
 		switch(T.attachtype)
 			if("line")
 				if(!line)
-					I.forceMove(src)
-					line = I
-					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
+					tool.forceMove(src)
+					line = tool
+					to_chat(user, "<span class='notice'>I add [tool] to [src]...</span>")
 			if("hook")
 				if(!hook)
-					I.forceMove(src)
-					hook = I
-					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
+					tool.forceMove(src)
+					hook = tool
+					to_chat(user, "<span class='notice'>I add [tool] to [src]...</span>")
 			if("reel")
 				if(!reel)
-					I.forceMove(src)
-					reel = I
-					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
+					tool.forceMove(src)
+					reel = tool
+					to_chat(user, "<span class='notice'>I add [tool] to [src]...</span>")
+
+		return ITEM_INTERACT_SUCCESS
+
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/fishingrod/attack_hand_secondary(mob/user, params)
+/obj/item/fishingrod/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -266,7 +273,7 @@
 		return
 
 	playsound(src, SFX_REEL, 50, vary = FALSE)
-	var/time = (0.8 - round(user.get_skill_level(/datum/skill/labor/fishing) * 0.04, 0.1)) SECONDS * bait_speed_mult
+	var/time = (0.8 - round(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/fishing) * 0.004, 0.1)) SECONDS * bait_speed_mult
 	if(!do_after(user, time, currently_hooked, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE, extra_checks = CALLBACK(src, PROC_REF(fishing_line_check))))
 		return
 	// nothing after this point should sleep (fingers crossed)
@@ -276,7 +283,7 @@
 		return
 
 	//About thirty minutes of non-stop reeling to get from zero to master... not worth it but hey, you do what you do.
-	user.mind?.add_sleep_experience(/datum/skill/labor/fishing, time * 0.13 * experience_multiplier)
+	user.mind?.add_sleep_experience(/datum/attribute/skill/labor/fishing, time * 0.13 * experience_multiplier)
 
 	//Try to move it 'till it's under the user's feet, then try to pick it up
 	var/requires_vertical = (loc.z > currently_hooked.z)
@@ -285,31 +292,34 @@
 		var/obj/item/item = currently_hooked
 		var/turf/old_loc = get_turf(currently_hooked)
 		step_towards(item, our_turf)
-		if((old_loc == get_turf(currently_hooked)) && requires_vertical)
-			ADD_TRAIT(currently_hooked, "hooked", type)
-			currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
-			addtimer(CALLBACK(src, PROC_REF(remove_hooked), currently_hooked), 1 SECONDS)
+		if((old_loc == get_turf(item)) && requires_vertical)
+			ADD_TRAIT(item, TRAIT_MOVE_FLYING, type) //Otherwise they instantly fall back in
+			item.movement_type |= FLYING
+			item.forceMove(GET_TURF_ABOVE(old_loc))
+			step_towards(item, our_turf)
 		if(item.loc == user.loc && (item.interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))
 			user.put_in_inactive_hand(item)
 			QDEL_NULL(fishing_line)
+		REMOVE_TRAIT(item, TRAIT_MOVE_FLYING, type)
+		if(!HAS_TRAIT(item, TRAIT_MOVE_FLYING))
+			item.movement_type &= ~FLYING
 	//Not an item, so just delete the line if it's adjacent to the user.
 	else if(get_dist(currently_hooked,our_turf) > 1)
-		var/turf/old_loc = get_turf(currently_hooked)
-		step_towards(currently_hooked, our_turf)
-		if((old_loc == get_turf(currently_hooked)) && requires_vertical)
-			ADD_TRAIT(currently_hooked, "hooked", type)
-			currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
-			addtimer(CALLBACK(src, PROC_REF(remove_hooked), currently_hooked), 1 SECONDS)
-		if(get_dist(currently_hooked,our_turf) <= 1)
+		var/atom/movable/cached_currently_hooked = currently_hooked
+		var/turf/old_loc = get_turf(cached_currently_hooked)
+		step_towards(cached_currently_hooked, our_turf)
+		if((old_loc == get_turf(cached_currently_hooked)) && requires_vertical)
+			ADD_TRAIT(cached_currently_hooked, TRAIT_MOVE_FLYING, type) //Otherwise they instantly fall back in
+			cached_currently_hooked.forceMove(GET_TURF_ABOVE(old_loc))
+			step_towards(cached_currently_hooked, our_turf)
+		if(get_dist(cached_currently_hooked, our_turf) <= 1)
 			QDEL_NULL(fishing_line)
+		REMOVE_TRAIT(cached_currently_hooked, TRAIT_MOVE_FLYING, type)
 	else
 		QDEL_NULL(fishing_line)
 
 /obj/item/fishingrod/proc/fishing_line_check()
 	return !QDELETED(fishing_line)
-
-/obj/item/fishingrod/proc/remove_hooked(atom/movable/hooked)
-	REMOVE_TRAIT(hooked, "hooked", type)
 
 /// Generates the fishing line visual from the current user to the target and updates inhands
 /obj/item/fishingrod/proc/create_fishing_line(atom/movable/target, mob/living/firer, target_py = null)
@@ -321,7 +331,7 @@
 	fishing_line = new(firer, target, icon_state = "fishing_line", beam_color = beam_color, emissive = FALSE, override_target_pixel_y = target_py, time = INFINITY, render_on_z_levels = TRUE)
 	fishing_line.lefthand = !(firer.get_held_index_of_item(src) % 2)
 	RegisterSignal(fishing_line, COMSIG_BEAM_BEFORE_DRAW, PROC_REF(check_los))
-	RegisterSignal(fishing_line, COMSIG_PARENT_QDELETING, PROC_REF(clear_line))
+	RegisterSignal(fishing_line, COMSIG_QDELETING, PROC_REF(clear_line))
 	INVOKE_ASYNC(fishing_line, TYPE_PROC_REF(/datum/beam/, Start))
 	if(QDELETED(fishing_line))
 		return null
@@ -337,7 +347,7 @@
 	user = user || loc
 	if (!isliving(user) || !user.mind || !user.is_holding(src))
 		return
-	. += round(user.get_skill_level(/datum/skill/labor/fishing) * 0.3)
+	. += round(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/fishing) * 0.03)
 	return max(., 1)
 
 /obj/item/fishingrod/dropped(mob/user, silent)
@@ -367,7 +377,7 @@
 		qdel(source)
 		return BEAM_CANCEL_DRAW
 
-/obj/item/fishingrod/afterattack(obj/target, mob/user, proximity, params)
+/obj/item/fishingrod/afterattack(obj/target, mob/user, proximity_flag, list/modifiers)
 	if(!check_allowed_items(target,target_self=1) \
 	|| (user.used_intent.type != ROD_CAST && user.used_intent.type != ROD_AUTO) \
 	|| user.doing() \
@@ -426,7 +436,8 @@
 	if(isopenspace(atom_hit_by_hook_projectile))
 		dropped = TRUE
 		while(isopenspace(atom_hit_by_hook_projectile))
-			atom_hit_by_hook_projectile = GET_TURF_BELOW(atom_hit_by_hook_projectile) // we know this will always be a turf so no need for get_turf
+			var/turf/turf = get_turf(atom_hit_by_hook_projectile)
+			atom_hit_by_hook_projectile = GET_TURF_BELOW(turf) // we know this will always be a turf so no need for get_turf
 
 	if(dropped)
 		for(var/mob/living/mob in atom_hit_by_hook_projectile.contents)

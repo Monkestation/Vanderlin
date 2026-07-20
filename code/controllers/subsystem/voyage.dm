@@ -510,14 +510,13 @@ SUBSYSTEM_DEF(terrain_generation)
 	// Get edge turfs based on direction
 	var/list/edge_turfs = get_edge_turfs(island.bottom_left, island.island_size, island.z_level, direction, FALSE)
 
-	if(!edge_turfs.len)
+	if(!length(edge_turfs))
 		return null
 
 	// Cast lines from edge turfs to find sand/shore tiles
 	var/opposite_dir = turn(direction, 180) // Direction toward island interior
 
-	for(var/turf/edge_turf in edge_turfs)
-		var/turf/current = edge_turf
+	for(var/turf/current as anything in edge_turfs)
 		var/distance = 0
 
 		for(var/i = 1 to 30)
@@ -531,7 +530,7 @@ SUBSYSTEM_DEF(terrain_generation)
 					return current
 				break
 
-	return edge_turfs[round(edge_turfs.len / 2)]
+	return edge_turfs[round(length(edge_turfs) / 2)]
 
 /datum/controller/subsystem/terrain_generation/proc/dock_ship_to_island(datum/ship_data/ship, datum/island_data/island, mirage_range = world.view)
 	if(!ship || !island)
@@ -555,10 +554,6 @@ SUBSYSTEM_DEF(terrain_generation)
 		var/turf/island_turf = island_edge_turfs[min(index, island_edge_turfs.len)]
 
 		ship_turf.alpha = 0
-		if(istype(ship_turf, /turf/open/water))
-			var/turf/open/water/water = ship_turf
-			water.water_overlay.alpha = 0
-			water.water_top_overlay.alpha = 0
 
 		var/datum/component/mirage_border/ship_to_island = ship_turf.AddComponent(\
 			/datum/component/mirage_border,\
@@ -646,10 +641,6 @@ SUBSYSTEM_DEF(terrain_generation)
 		else if(isturf(entry))
 			var/turf/T = entry
 			T.alpha = 255
-			if(istype(T, /turf/open/water))
-				var/turf/open/water/water = T
-				water.water_overlay.alpha = 255
-				water.water_top_overlay.alpha = 255
 			var/datum/component/mirage_border/MB = T.GetComponent(/datum/component/mirage_border)
 			if(MB)
 				qdel(MB)

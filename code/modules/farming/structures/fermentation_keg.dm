@@ -88,7 +88,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(master?.glows)
 		. += emissive_appearance(icon, "filling", alpha = used_alpha)
 
-/obj/structure/fermentation_keg/attack_hand_secondary(mob/user, params)
+/obj/structure/fermentation_keg/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -110,12 +110,12 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		else
 			shopping_run(user)
 
-/obj/structure/fermentation_keg/MiddleClick(mob/user, params)
+/obj/structure/fermentation_keg/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!Adjacent(user))
 		return
 	if(!brewing)
-		var/response = alert(user, "What do you wish to empty?", "[src]", "Reagents only", "Everything")
+		var/response = tgui_alert(user, "What do you wish to empty?", "[src]", list("Reagents only", "Everything"))
 		if(!response)
 			return
 		if(!Adjacent(user))
@@ -128,7 +128,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		else
 			clear_keg()
 
-/obj/structure/fermentation_keg/AltClick(mob/user)
+/obj/structure/fermentation_keg/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(!user.Adjacent(src))
 		return
@@ -149,36 +149,45 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		to_chat(user, span_info("[src] begins [selected_recipe.start_verb] [selected_recipe.name]."))
 	..()
 
-/obj/structure/fermentation_keg/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers))
+/obj/structure/fermentation_keg/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/reagent_containers))
 		if(brewing)
-			return
-		if(user.used_intent.type == /datum/intent/fill)
-			if(try_filling(user, I))
-				return
+			return NONE
+
+		if(istype(user.used_intent, /datum/intent/fill))
+			if(!tapped)
+				return NONE
+
+			if(try_filling(user, tool))
+				return ITEM_INTERACT_SUCCESS
+		else if(istype(user.used_intent, /datum/intent/pour))
+			return NONE
 
 	if(heated)
-		if(istype(I, /obj/item/ore/coal) || istype(I, /obj/item/grown/log/tree))
-			refuel(I, user)
-			return
+		if(istype(tool, /obj/item/ore/coal) || istype(tool, /obj/item/grown/log/tree))
+			refuel(tool, user)
+			return ITEM_INTERACT_SUCCESS
 
 	if(ready_to_bottle && (selected_recipe.brewed_item || (selected_recipe.brewed_amount && !tapped)))
-		if(selected_recipe.after_finish_attackby(user, I, src))
-			create_items(user, I)
-			return
+		if(selected_recipe.after_finish_interact(user, tool, src))
+			create_items(user, tool)
+			return ITEM_INTERACT_SUCCESS
 
 	var/list/produce_list = list()
 	var/list/storage_list = list()
 
-	if(I.type in selected_recipe?.needed_items)
-		produce_list |= I
+	if(tool.type in selected_recipe?.needed_items)
+		produce_list |= tool
 
-	if(I.type in selected_recipe?.needed_crops)
-		produce_list |= I
+	if(tool.type in selected_recipe?.needed_crops)
+		produce_list |= tool
 
-	if(istype(I, /obj/item/storage))
-		produce_list |= I.contents
-		storage_list |= I.contents
+	if(istype(tool, /obj/item/storage))
+		produce_list |= tool.contents
+		storage_list |= tool.contents
+
+	if(!length(produce_list) && !length(storage_list))
+		return NONE
 
 	var/dumps = FALSE
 	for(var/obj/item/reagent_containers/food/snacks/G in produce_list)
@@ -199,7 +208,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 					current_amount = recipe_crop_stocks[G.type]
 
 			// Get quality and freshness from the crop (matching cooking system)
-			var/crop_quality = max(G.recipe_quality, G.quality, 1) // Default quality
+			var/crop_quality = max(G.recipe_quality, 1) // Default quality
 			var/crop_freshness = max(0, (G.warming + G.rotprocess)) // Default freshness
 
 			// Calculate weighted average quality and freshness
@@ -264,12 +273,13 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		selected_recipe_reagent = selected_recipe.reagent_to_brew
 		keg_reagent_amount = reagents.get_reagent_amount(selected_recipe_reagent)
 
-	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 
 	// They added the recipe reagent backk into the barrel, reset aging time
 	if(selected_recipe_reagent && age_start_time && (reagents.get_reagent_amount(selected_recipe_reagent) > keg_reagent_amount))
 		age_start_time = world.time
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/fermentation_keg/examine(mob/user)
 	. =..()
@@ -342,20 +352,18 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(selecting_recipe)
 		return
 	selecting_recipe = TRUE
-	addtimer(VARSET_CALLBACK(src, selecting_recipe, FALSE), 5 SECONDS)
 
 	var/list/options = list()
-	for(var/path in subtypesof(/datum/brewing_recipe))
-		if(is_abstract(path))
+	for(var/datum/brewing_recipe/path as anything in subtypesof(/datum/brewing_recipe))
+		if(IS_ABSTRACT(path))
 			continue
-		var/datum/brewing_recipe/recipe = path
-		var/datum/reagent/prereq = initial(recipe.pre_reqs)
-		if(!heated && initial(recipe.heat_required))
+		var/datum/reagent/prereq = initial(path.pre_reqs)
+		if(!heated && initial(path.heat_required))
 			continue
 		if(!prereq || (reagents.has_reagent(prereq)))
-			options[initial(recipe.name)] = recipe
+			options[initial(path.name)] = path
 
-	for(var/datum/brewing_recipe/recipe in GLOB.custom_fermentation_recipes)
+	for(var/datum/brewing_recipe/recipe as anything in GLOB.custom_fermentation_recipes)
 		var/datum/reagent/prereq = initial(recipe.pre_reqs)
 		if(!heated && initial(recipe.heat_required))
 			continue
@@ -363,10 +371,12 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 			options[initial(recipe.name)] = recipe
 
 	if(options.len == 0)
+		selecting_recipe = FALSE
 		return
 
 	var/choice = input(user,"What brew do you want to make?", name) as null|anything in options
 
+	selecting_recipe = FALSE
 	if(!choice)
 		return
 	if(!Adjacent(user))
@@ -383,7 +393,6 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	selected_recipe = new choice_to_spawn
 	to_chat(user, span_notice("You set the recipe to [selected_recipe.name]."))
 	recipe_completions = 0
-	selecting_recipe = FALSE
 
 	//Second stage brewing gives no refunds! - This is intented design to help make it so folks dont quit halfway through and still get a rebate
 	ready_to_bottle = FALSE
@@ -418,6 +427,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	brewing = FALSE
 	tapped = FALSE
 	ready_to_bottle = FALSE
+	reagents.flags |= REFILLABLE | DRAINABLE
 	icon_state = initial(icon_state)
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -433,6 +443,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	brewing = TRUE
 	ready_to_bottle = FALSE
 	tapped = FALSE
+	reagents.flags &= ~(REFILLABLE | DRAINABLE)
 
 	// Store the user who started brewing for quality calculation
 	if(user)
@@ -610,10 +621,10 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 	var/name_to_use = selected_recipe.secondary_name ? selected_recipe.secondary_name : selected_recipe.name
 	if(!reagents.get_reagent(brewed_reagent))
-		to_chat(user, span_info("[src] is fully emptied of [lowertext(name_to_use)]."))
+		to_chat(user, span_info("[src] is fully emptied of [LOWER_TEXT(name_to_use)]."))
 		return
 
-	visible_message("[user] starts extracting [lowertext(name_to_use)] into [container].", "You start extracting [lowertext(name_to_use)] into [container].")
+	visible_message("[user] starts extracting [LOWER_TEXT(name_to_use)] into [container].", "You start extracting [LOWER_TEXT(name_to_use)] into [container].")
 	if(!do_after(user, 5 SECONDS, src))
 		return
 
@@ -630,7 +641,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	reagents.remove_reagent(brewed_reagent, transfer_amount)
 	container.reagents.add_reagent(new_brewed_reagent, transfer_amount)
 	if(!reagents.get_reagent(brewed_reagent))
-		to_chat(user, span_info("[src] is fully emptied of [lowertext(name_to_use)]."))
+		to_chat(user, span_info("[src] is fully emptied of [LOWER_TEXT(name_to_use)]."))
 
 /// Handles keg to keg transfers from src receiving mousedrop. If origin_keg is tapped and has a recipe set, it transfers its recipe reagent into src.
 /obj/structure/fermentation_keg/MouseDrop_T(atom/over, mob/living/user)
@@ -649,9 +660,9 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		var/name_to_use = origin_keg.selected_recipe.secondary_name ? origin_keg.selected_recipe.secondary_name : origin_keg.selected_recipe.name
 
 		if(!origin_keg.reagents.get_reagent(brewed_reagent))
-			to_chat(user, span_info("[origin_keg] is fully emptied of [lowertext(name_to_use)]."))
+			to_chat(user, span_info("[origin_keg] is fully emptied of [LOWER_TEXT(name_to_use)]."))
 			return
-		user.visible_message("[user] starts to extract [lowertext(name_to_use)] into [src]." , "You start to extract [lowertext(name_to_use)] in [src].")
+		user.visible_message("[user] starts to extract [LOWER_TEXT(name_to_use)] into [src]." , "You start to extract [LOWER_TEXT(name_to_use)] in [src].")
 		if(!do_after(user, 5 SECONDS, origin_keg))
 			return
 
@@ -668,7 +679,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		origin_keg.reagents.remove_reagent(brewed_reagent, transfer_amount)
 		reagents.add_reagent(new_brewed_reagent, transfer_amount)
 		if(!origin_keg.reagents.get_reagent(brewed_reagent))
-			to_chat(user, span_info("[src] is fully emptied of [lowertext(name_to_use)]."))
+			to_chat(user, span_info("[src] is fully emptied of [LOWER_TEXT(name_to_use)]."))
 	else
 		user.visible_message("[user] starts to pour [origin_keg] into [src]." , "You start to pour [origin_keg] in [src].")
 		if(!do_after(user, 5 SECONDS, origin_keg, extra_checks = CALLBACK(src, TYPE_PROC_REF(/atom/movable, Adjacent), origin_keg)))

@@ -111,7 +111,7 @@
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "oF" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "oZ" = (
 /obj/effect/decal/cleanable/sigil/W,
@@ -280,7 +280,7 @@
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "Sc" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "UE" = (
 /turf/closed/wall/mineral/stone,
@@ -306,7 +306,7 @@
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "ZN" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 
 (1,1,1) = {"

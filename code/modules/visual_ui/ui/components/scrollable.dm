@@ -2,7 +2,7 @@
 /obj/abstract/visual_ui_element/scrollable
 	name = "UI Scrollable Container"
 	icon_state = "scroll_background"
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	layer = VISUAL_UI_STEP_BACK
 	var/list/container_elements = list() // Elements contained within this scrollable area
 	var/max_height = 320 // Content height in pixels
@@ -156,7 +156,7 @@
 	name = "Scroll Track"
 	icon = 'icons/visual_ui/192x192.dmi'
 	icon_state = "scroll_track"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = VISUAL_UI_BUTTON
 
 /obj/abstract/visual_ui_element/hoverable/scroll_handle

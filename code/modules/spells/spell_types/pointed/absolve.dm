@@ -2,14 +2,14 @@
 /datum/action/cooldown/spell/psydonabsolve
 	name = "ABSOLVE"
 	spell_type = SPELL_PSYDONIC_MIRACLE
-	spell_flags = SPELL_PSYDON
+	spell_flags = SPELL_PSYDON|SPELL_UNETCHABLE
 	spell_cost = 160
 	charge_time = 1
 	cast_range = 1
 	sound = 'sound/magic/psyabsolution.ogg'
 	invocation = "BE ABSOLVED!"
 	invocation_type = "shout"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 30 SECONDS // 60 seconds cooldown
 	button_icon_state = "ABSOLVE"
 
@@ -34,12 +34,12 @@
 		if(head && brain && heart)
 			if(!H.mind)
 				return FALSE
-			if(alert(user, "REACH OUT AND PULL?", "THERE'S NO LUX IN THERE", "YES", "NO") != "YES")
+			if(tgui_alert(user, "REACH OUT AND PULL?", "THERE'S NO LUX IN THERE", list("YES", "NO")) != "YES")
 				return FALSE
 			to_chat(user, span_warning("You attempt to revive [H] by ABSOLVING them!"))
 			// Dramatic effect
 			user.visible_message(span_danger("[user] grabs [H] by the wrists, attempting to ABSOLVE them!"))
-			if(alert(H, "They want to ABSOLVE you. Will you let them?", "ABSOLUTION", "I'll allow it", "I refuse") != "I'll allow it")
+			if(tgui_alert(H, "They want to ABSOLVE you. Will you let them?", "ABSOLUTION", list("I'll allow it", "I refuse")) != "I'll allow it")
 				H.visible_message(span_notice("Nothing happens."))
 				return FALSE
 			// Create visual effects
@@ -50,8 +50,9 @@
 			// Revive the target
 			H.revive(HEAL_ALL)
 			H.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
+			add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ABSOLVE_REVIVE, 1)
 			H.emote("breathgasp")
-			H.adjust_jitter(100)
+			H.adjust_jitter(100 SECONDS)
 			H.update_body()
 			GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]++
 			ADD_TRAIT(H, TRAIT_IWASREVIVED, "[type]")
@@ -67,32 +68,36 @@
 	// Transfer afflictions from the target to the caster
 
 	// Transfer damage
-	var/brute_transfer = H.getBruteLoss()
-	var/burn_transfer = H.getFireLoss()
 	var/tox_transfer = H.getToxLoss()
 	var/oxy_transfer = H.getOxyLoss()
 	var/clone_transfer = H.getCloneLoss()
 
 	// Heal the target
-	H.adjustBruteLoss(-brute_transfer)
-	H.adjustFireLoss(-burn_transfer)
-	H.adjustToxLoss(-tox_transfer)
+	H.adjustToxLoss(-tox_transfer, forced = TRUE)
 	H.adjustOxyLoss(-oxy_transfer)
 	H.adjustCloneLoss(-clone_transfer)
 
 	// Apply damage to the caster
-	user.adjustBruteLoss(brute_transfer)
-	user.adjustFireLoss(burn_transfer)
-	user.adjustToxLoss(tox_transfer)
+	user.adjustToxLoss(tox_transfer, forced = TRUE)
 	user.adjustOxyLoss(oxy_transfer)
 	user.adjustCloneLoss(clone_transfer)
 
+	for(var/datum/injury/injury in H.all_injuries)
+		if(!injury.can_heal())
+			continue
+		injury.transfer_injury(user)
+	H.updatehealth()
+
+	for(var/obj/item/organ/artery/artery in H.getorganslotlist(ORGAN_SLOT_ARTERY))
+		artery.applyOrganDamage(-artery.damage)
+
 	// Transfer blood
 	var/blood_transfer = 0
-	if(H.blood_volume < BLOOD_VOLUME_NORMAL)
-		blood_transfer = BLOOD_VOLUME_NORMAL - H.blood_volume
-		H.blood_volume = BLOOD_VOLUME_NORMAL
-		user.blood_volume -= blood_transfer
+	var/cached_blood_volume = H.get_blood_volume()
+	if(CAN_HAVE_BLOOD(H) && cached_blood_volume < BLOOD_VOLUME_NORMAL)
+		blood_transfer = BLOOD_VOLUME_NORMAL - cached_blood_volume
+		H.set_blood_volume(BLOOD_VOLUME_NORMAL)
+		user.adjust_blood_volume(-blood_transfer)
 		to_chat(user, span_warning("You feel your blood drain into [H]!"))
 		to_chat(H, span_notice("You feel your blood replenish!"))
 

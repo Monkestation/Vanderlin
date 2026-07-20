@@ -11,11 +11,11 @@
 /obj/structure/redstone/pressure_plate/Initialize()
 	. = ..()
 	RegisterSignal(loc, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
-	RegisterSignal(loc, COMSIG_TURF_EXITED, PROC_REF(on_exited))
+	RegisterSignal(loc, COMSIG_ATOM_EXITED, PROC_REF(on_exited))
 	check_activation()
 
 /obj/structure/redstone/pressure_plate/Destroy()
-	UnregisterSignal(loc, list(COMSIG_ATOM_ENTERED, COMSIG_TURF_EXITED))
+	UnregisterSignal(loc, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXITED))
 	return ..()
 
 /obj/structure/redstone/pressure_plate/get_source_power()
@@ -30,7 +30,7 @@
 		current_occupants[arrived] = TRUE
 		check_activation()
 
-/obj/structure/redstone/pressure_plate/proc/on_exited(datum/source, atom/movable/gone, direction)
+/obj/structure/redstone/pressure_plate/proc/on_exited(datum/source, atom/movable/gone, atom/new_loc)
 	SIGNAL_HANDLER
 	if(gone in current_occupants)
 		current_occupants -= gone

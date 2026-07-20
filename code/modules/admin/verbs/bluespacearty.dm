@@ -17,7 +17,7 @@
 	if(target.health <= 1)
 		target.gib(1, 1)
 	else
-		target.adjustBruteLoss(min(99,(target.health - 1)))
+		target.adjustBruteLoss(min(99,(target.health - 1)), damage_type = BCLASS_PIERCE)
 		target.Paralyze(400)
 		target.stuttering = 20
 

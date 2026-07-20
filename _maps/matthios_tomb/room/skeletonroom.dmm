@@ -13,7 +13,7 @@
 /area/under/tomb)
 "ft" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "fR" = (
 /obj/structure/fluff/railing/border{
@@ -179,7 +179,7 @@
 /turf/open/floor/wood,
 /area/under/tomb/indoors/church)
 "Gd" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "Gu" = (
 /obj/effect/dungeon_directional_helper/east,
@@ -211,7 +211,7 @@
 /area/under/tomb/indoors/church)
 "KI" = (
 /obj/structure/fluff/walldeco/bigpainting/lake,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "KQ" = (
 /obj/structure/table/church,
@@ -290,7 +290,7 @@
 /area/under/tomb/indoors/church)
 "Uj" = (
 /obj/structure/fluff/walldeco/bigpainting,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/church)
 "VW" = (
 /obj/structure/chair/wood/alt/chair_noble/red{

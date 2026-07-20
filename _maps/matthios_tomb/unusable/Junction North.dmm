@@ -27,7 +27,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "N" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "Q" = (
 /obj/effect/decal/cleanable/blood/splatter,

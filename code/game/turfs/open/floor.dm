@@ -5,7 +5,7 @@
 	name = "floor"
 	desc = ""
 	icon = 'icons/turf/floors.dmi'
-	baseturfs = /turf/open/transparent/openspace
+	baseturfs = /turf/open/openspace
 	footstep = FOOTSTEP_FLOOR
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -60,14 +60,18 @@
 		icon_regular_floor = icon_state
 
 /turf/open/floor/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
-	var/shielded = is_shielded()
-	..()
-	if(severity != 1 && shielded && target != src)
-		return
+	. = ..()
+
 	if(target == src)
 		ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 		take_damage(INFINITY, BRUTE, "blunt", 0)
 		return
+	if(is_explosion_shielded(severity))
+		return FALSE
+
+	if(target)
+		severity = EXPLODE_LIGHT
+
 	var/ddist = devastation_range
 	var/hdist = heavy_impact_range
 	var/ldist = light_impact_range
@@ -92,10 +96,13 @@
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 
-/turf/open/floor/is_shielded()
-	for(var/obj/structure/A in contents)
-		if(A.level == 3)
-			return 1
+/turf/open/floor/is_explosion_shielded(severity)
+	if(severity >= EXPLODE_DEVASTATE)
+		return FALSE
+	for(var/obj/blocker in src)
+		if(blocker.density)
+			return TRUE
+	return FALSE
 
 /turf/open/floor/attack_paw(mob/user)
 	return attack_hand(user)
@@ -124,7 +131,7 @@
 	W.setDir(old_dir)
 	return W
 
-/turf/open/floor/attackby(obj/item/C, mob/user, params)
+/turf/open/floor/attackby(obj/item/C, mob/user, list/modifiers)
 	if(!C || !user)
 		return 1
 	if(..())

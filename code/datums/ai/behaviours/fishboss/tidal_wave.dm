@@ -27,7 +27,7 @@
 		if(prob(70))
 			new /obj/effect/temp_visual/liquid_splash(T)
 			for(var/mob/living/L in T)
-				if(!boss.faction_check_mob(L))
+				if(!boss.faction_check_atom(L))
 					L.apply_damage(15 + (5 * wave_level), BRUTE)
 					to_chat(L, "<span class='danger'>You're hit by [boss]'s tidal wave!</span>")
 					L.Knockdown(2 SECONDS)

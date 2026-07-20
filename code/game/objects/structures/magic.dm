@@ -31,7 +31,7 @@
 	else
 		to_chat(user, "<span class='notice'>The magick forces are beyond your control.</span>")
 
-/obj/structure/circle_protection/attackby(obj/item/I, mob/user, params)
+/obj/structure/circle_protection/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/powder/salt))
 		to_chat(user, "<span class='notice'>Restoring the salt lines...</span>")
 		if(do_after(user, 10 SECONDS, src))

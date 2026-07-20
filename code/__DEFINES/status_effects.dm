@@ -22,6 +22,12 @@
 /// so don't worry if your abstract status effect doesn't actually set this
 #define STATUS_EFFECT_ID_ABSTRACT "abstract"
 
+///Processing flags - used to define the speed at which the status will work
+///This is fast - 0.2s between ticks (I believe!)
+#define STATUS_EFFECT_FAST_PROCESS 0
+///This is slower and better for more intensive status effects - 1s between ticks
+#define STATUS_EFFECT_NORMAL_PROCESS 1
+
 //Incapacitated status effect flags
 /// If the incapacitated status effect will ignore a mob in restraints (handcuffs)
 #define IGNORE_RESTRAINTS (1<<0)
@@ -33,12 +39,6 @@
 ///////////
 // BUFFS //
 ///////////
-
-#define STATUS_EFFECT_SHADOW_MEND /datum/status_effect/shadow_mend //Quick, powerful heal that deals damage afterwards. Heals 15 brute/burn every second for 3 seconds.
-#define STATUS_EFFECT_VOID_PRICE /datum/status_effect/void_price //The price of healing myself with void energy. Deals 3 brute damage every 3 seconds for 30 seconds.
-
-#define STATUS_EFFECT_POWERREGEN /datum/status_effect/cyborg_power_regen //Regenerates power on a given cyborg over time
-
 #define STATUS_EFFECT_HISGRACE /datum/status_effect/his_grace //His Grace.
 
 #define STATUS_EFFECT_WISH_GRANTERS_GIFT /datum/status_effect/wish_granters_gift //If you're currently resurrecting with the Wish Granter
@@ -131,6 +131,11 @@
 #define STATUS_EFFECT_BUGGED /datum/status_effect/bugged //Lets other mobs listen in on what it hears
 
 #define STATUS_EFFECT_BOUNTY /datum/status_effect/bounty //rewards the person who added this to the target with refreshed spells and a fair heal
+
+/// The affected is unable to use or pickup items, plus will fall down depending on stats
+#define STATUS_EFFECT_STUMBLE /datum/status_effect/incapacitating/stumble
+/// The affected mob gets a very annoying screen effect
+#define STATUS_EFFECT_CONCUSSION /datum/status_effect/incapacitating/concussion
 
 /////////////
 //  SLIME  //

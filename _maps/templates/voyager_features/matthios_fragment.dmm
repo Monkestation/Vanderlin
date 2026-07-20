@@ -67,7 +67,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
 "I" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "M" = (
 /turf/open/floor/ruinedwood/spiral,

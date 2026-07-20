@@ -96,8 +96,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 
 /datum/objective/proc/get_crewmember_minds()
 	. = list()
-	for(var/V in GLOB.data_core.locked)
-		var/datum/data/record/R = V
+	for(var/datum/data/record/R as anything in GLOB.data_core.locked)
 		var/datum/mind/M = R.fields["mindref"]
 		if(M)
 			. += M
@@ -296,7 +295,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	for(var/datum/mind/M in owners)
 		if(considered_alive(M))
 			return FALSE
-		if(M.current?.suiciding) //killing myself ISN'T glorious.
+		if(HAS_TRAIT(M.current, TRAIT_SUICIDED)) //killing myself ISN'T glorious.
 			return FALSE
 	return TRUE
 

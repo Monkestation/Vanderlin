@@ -1,13 +1,3 @@
-//Preferences stuff
-	//Underwear
-GLOBAL_LIST_EMPTY(underwear_list)		//stores /datum/sprite_accessory/underwear indexed by name
-GLOBAL_LIST_EMPTY(underwear_m)	//stores only underwear name
-GLOBAL_LIST_EMPTY(underwear_f)	//stores only underwear name
-	//Undershirts
-GLOBAL_LIST_EMPTY(undershirt_list) 	//stores /datum/sprite_accessory/undershirt indexed by name
-GLOBAL_LIST_EMPTY(undershirt_m)	 //stores only undershirt name
-GLOBAL_LIST_EMPTY(undershirt_f)	 //stores only undershirt name
-
 GLOBAL_LIST_INIT(color_list_ethereal, list("F Class(Green)" = "97ee63", "F2 Class (Light Green)" = "00fa9a", "F3 Class (Dark Green)" = "37835b", "M Class (Red)" = "9c3030", "M1 Class (Purple)" = "ee82ee", "G Class (Yellow)" = "fbdf56", "O Class (Blue)" = "3399ff", "A Class (Cyan)" = "00ffff"))
 
 GLOBAL_LIST_INIT(ghost_forms_with_directions_list, list(
@@ -129,19 +119,19 @@ GLOBAL_LIST_INIT(TAGGERLOCATIONS, list("Disposals",
 	"Testing Range", "Toxins", "Dormitories", "Virology",
 	"Xenobiology", "Law Office","Detective's Office"))
 
-GLOBAL_LIST_INIT(station_prefixes, world.file2list("strings/station_prefixes.txt") + "")
+GLOBAL_LIST_INIT(station_prefixes, file2list("strings/station_prefixes.txt") + "")
 
-GLOBAL_LIST_INIT(station_names, world.file2list("strings/station_names.txt" + ""))
+GLOBAL_LIST_INIT(station_names, file2list("strings/station_names.txt" + ""))
 
-GLOBAL_LIST_INIT(station_suffixes, world.file2list("strings/station_suffixes.txt"))
+GLOBAL_LIST_INIT(station_suffixes, file2list("strings/station_suffixes.txt"))
 
-GLOBAL_LIST_INIT(greek_letters, world.file2list("strings/greek_letters.txt"))
+GLOBAL_LIST_INIT(greek_letters, file2list("strings/greek_letters.txt"))
 
-GLOBAL_LIST_INIT(phonetic_alphabet, world.file2list("strings/phonetic_alphabet.txt"))
+GLOBAL_LIST_INIT(phonetic_alphabet, file2list("strings/phonetic_alphabet.txt"))
 
-GLOBAL_LIST_INIT(numbers_as_words, world.file2list("strings/numbers_as_words.txt"))
+GLOBAL_LIST_INIT(numbers_as_words, file2list("strings/numbers_as_words.txt"))
 
-GLOBAL_LIST_INIT(roundid, world.file2list("strings/roundid.txt"))
+GLOBAL_LIST_INIT(roundid, file2list("strings/roundid.txt"))
 
 /proc/generate_number_strings()
 	var/list/L[198]
@@ -163,6 +153,6 @@ GLOBAL_LIST_INIT(most_common_words, init_common_words())
 /proc/init_common_words()
 	. = list()
 	var/i = 1
-	for(var/word in world.file2list("strings/1000_most_common.txt"))
+	for(var/word in file2list("strings/1000_most_common.txt"))
 		.[word] = i
 		i += 1

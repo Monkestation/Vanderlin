@@ -9,11 +9,12 @@
 	hud_type = /datum/hud/human
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE, INTENT_GIVE)
-	can_buckle = TRUE
 	buckle_lying = 0
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
-	ambushable = TRUE //! DEPRECATED VAR, USE TRAIT_NOAMBUSH
+	ambushable = TRUE
+	maxHealth = BRAIN_DAMAGE_DEATH
+	health = BRAIN_DAMAGE_DEATH
 
 	voice_pitch = 1
 
@@ -25,7 +26,8 @@
 
 	var/detail_color = "000"
 
-	var/skin_tone = "caucasian1"	//Skin tone
+	var/skin_tone = SKIN_COLOR_CONTINENTAL
+	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 	var/lip_color = "white"
@@ -65,13 +67,10 @@
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
-	var/name_override //For temporary visible name changes
-
 	var/datum/physiology/physiology
 
 	var/list/datum/bioware = list()
 
-	var/static/list/can_ride_typecache = typecacheof(list(/mob/living/carbon/human))
 	var/lastpuke = 0
 	var/last_fire_update
 	var/account_id //! DEPRECATED
@@ -90,8 +89,17 @@
 	var/mob/living/carbon/spouse_mob
 	var/image/spouse_indicator
 	var/setspouse
+	var/setchild
+	var/setparent
 	var/gender_choice_pref = ANY_GENDER
 	var/familytree_pref = FAMILY_NONE
+	var/family_adoption_pref = FALSE
+	var/was_divorced          = FALSE
+	var/list/accepted_patron_faiths  = list()
+	var/list/accepted_family_species = list()
+	var/same_species_family   = FALSE
+	var/list/family_job_filter       = list()
+
 	var/datum/heritage/family_datum
 	var/list/temp_ui_list = list()
 
@@ -99,11 +107,16 @@
 
 	var/original_name = null
 
-	var/buried = FALSE // Whether the body is buried or not.
-	var/funeral = FALSE // Whether the body has received rites or not.
+	/// Whether the body is buried or not.
+	var/buried = FALSE
+	/// Whether the body has received rites or not.
+	var/funeral = FALSE
+	/// Final words to have displayed if body is buried, set by an observer that has went to the afterlife
+	var/final_words
 
 	var/datum/devotion/cleric = null // Used for cleric_holder for priests
 	var/datum/inspiration/inspiration = null
+	var/list/selected_instrument_buffs
 	var/datum/rage/rage_datum = null //teehee
 
 	var/headshot_link = null

@@ -16,18 +16,18 @@
 	var/hydration_factor = 0
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes
 
-/datum/reagent/consumable/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
 			var/actual_metabolized = min(volume, metabolization_rate)
-			H.adjust_nutrition(nutriment_factor * actual_metabolized)
-			H.adjust_hydration(hydration_factor * actual_metabolized)
+			H.adjust_nutrition(nutriment_factor * actual_metabolized * efficiency)
+			H.adjust_hydration(hydration_factor * actual_metabolized  * efficiency)
 	return ..()
 
-/datum/reagent/consumable/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if ((method & INGEST) && ishuman(M))
-		var/mob/living/carbon/human/HM = M
+/datum/reagent/consumable/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+	if ((methods & INGEST) && ishuman(exposed_mob))
+		var/mob/living/carbon/human/HM = exposed_mob
 
 		if(HM.culinary_preferences)
 			var/favorite_drink_type = HM.culinary_preferences[CULINARY_FAVOURITE_DRINK]
@@ -55,27 +55,27 @@
 		if (quality)
 			switch (quality)
 				if (DRINK_NICE)
-					M.add_stress(/datum/stress_event/wine_okay)
+					exposed_mob.add_stress(/datum/stress_event/wine_okay)
 					if (prob(25))
-						to_chat(M, span_green("Not bad."))
+						to_chat(exposed_mob, span_green("Not bad."))
 					if (HM.is_noble() || HM.is_courtier() || HM.is_yeoman())
-						M.remove_stress(/datum/stress_event/noble_bland_food)
+						exposed_mob.remove_stress(/datum/stress_event/noble_bland_food)
 				if (DRINK_GOOD)
-					M.add_stress(/datum/stress_event/wine_good)
+					exposed_mob.add_stress(/datum/stress_event/wine_good)
 					if (prob(25))
-						to_chat(M, span_green("A fine beverage."))
+						to_chat(exposed_mob, span_green("A fine beverage."))
 					if (HM.is_noble() || HM.is_courtier() || HM.is_yeoman())
-						M.remove_stress(list(/datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food))
+						exposed_mob.remove_stress(list(/datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food))
 				if (DRINK_VERYGOOD to DRINK_FANTASTIC)
 					if (HM.is_noble() || HM.is_courtier() || HM.is_yeoman())
-						M.add_stress(/datum/stress_event/wine_great)
-						M.remove_stress(list(/datum/stress_event/noble_desperate, /datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food, /datum/stress_event/noble_bad_manners, /datum/stress_event/noble_ate_without_table))
+						exposed_mob.add_stress(/datum/stress_event/wine_great)
+						exposed_mob.remove_stress(list(/datum/stress_event/noble_desperate, /datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food, /datum/stress_event/noble_bad_manners, /datum/stress_event/noble_ate_without_table))
 						if (prob(25))
-							to_chat(M, span_blue("Absolutely exquisite!"))
+							to_chat(exposed_mob, span_blue("Absolutely exquisite!"))
 					else
-						M.add_stress(/datum/stress_event/wine_good)
+						exposed_mob.add_stress(/datum/stress_event/wine_good)
 						if (prob(25))
-							to_chat(M, span_green("Complex, but good."))
+							to_chat(exposed_mob, span_green("Complex, but good."))
 	return ..()
 
 /datum/reagent/consumable/nutriment
@@ -88,13 +88,16 @@
 	var/brute_heal = 0
 	var/burn_heal = 0
 
-/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, efficiency)
 	if(prob(50))
-		M.heal_bodypart_damage(brute_heal,burn_heal, 0)
+		M.heal_bodypart_damage(brute_heal * efficiency,burn_heal * efficiency, 0)
 		. = 1
 	..()
 
 /datum/reagent/consumable/nutriment/on_new(list/supplied_data)
+	. = ..()
+	if(!data)
+		return
 	// taste data can sometimes be ("salt" = 3, "chips" = 1)
 	// and we want it to be in the form ("salt" = 0.75, "chips" = 0.25)
 	// which is called "normalizing"
@@ -103,31 +106,38 @@
 
 	// if data isn't an associative list, this has some WEIRD side effects
 	// TODO probably check for assoc list?
-
-	data = counterlist_normalise(supplied_data)
+	for(var/list/list_data in supplied_data)
+		supplied_data[list_data] = counterlist_normalise(list_data)
 
 /datum/reagent/consumable/nutriment/on_merge(list/newdata, newvolume)
 	. = ..()
-	if(!islist(newdata) || !newdata.len)
+	if(!islist(newdata))
+		return
+	if(!islist(newdata["tastes"]) || !length(newdata["tastes"]))
 		return
 
 	// data for nutriment is one or more (flavour -> ratio)
 	// where all the ratio values adds up to 1
 
 	var/list/taste_amounts = list()
-	if(data)
-		taste_amounts = data.Copy()
+	var/list/taste_data = data?["tastes"]
+	if(taste_data)
+		taste_amounts = taste_data.Copy()
 
 	counterlist_scale(taste_amounts, volume)
 
-	var/list/other_taste_amounts = newdata.Copy()
+	var/list/new_taste_data = newdata["tastes"]
+	var/list/other_taste_amounts = new_taste_data.Copy()
+
 	counterlist_scale(other_taste_amounts, newvolume)
-
 	counterlist_combine(taste_amounts, other_taste_amounts)
-
 	counterlist_normalise(taste_amounts)
+	LAZYSET(data, "tastes", taste_amounts)
 
-	data = taste_amounts
+/datum/reagent/consumable/nutriment/get_taste_description(mob/living/taster)
+	if(length(data))
+		return data["tastes"]
+	return ..()
 
 /datum/reagent/consumable/nutriment/vitamin
 	name = "Vitamin"
@@ -136,10 +146,25 @@
 	brute_heal = 1
 	burn_heal = 1
 
-/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/M)
-	if(M.satiety < 600)
-		M.satiety += 30
+/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/affected_mob, delta_time)
 	. = ..()
+	if(affected_mob.satiety < MAX_SATIETY)
+		affected_mob.satiety += 15 * delta_time
+
+/datum/reagent/consumable/nutriment/bone_marrow
+	name = "Bone Marrow"
+	description = "Marrow straight from the source."
+
+	brute_heal = 1
+	burn_heal = 1
+
+/datum/reagent/consumable/nutriment/bone_marrow/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BLOODRESTORE, 4, "[type]")
+
+/datum/reagent/consumable/nutriment/bone_marrow/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
 /datum/reagent/consumable/sugar
 	name = "Sugar"
@@ -167,8 +192,8 @@
 	color = "#835c5c"
 
 /datum/reagent/consumable/sodiumchloride
-	name = "Table Salt"
-	description = "A salt made of sodium chloride. Commonly used to season food."
+	name = "Sea Salt"
+	description = "Commonly used to season food."
 	reagent_state = SOLID
 	color = "#FFFFFF" // rgb: 255,255,255
 	taste_description = "salt"
@@ -187,6 +212,11 @@
 	// no color (ie, black)
 	taste_description = "pepper"
 
+/datum/reagent/consumable/ollie_oil
+	name = "Ollie Oil"
+	description = "Vanderlin's preferred way to consume its ollies."
+	color = "#555f41"
+	taste_description = "peppery oil"
 
 /datum/reagent/drug/mushroomhallucinogen
 	name = "Mushroom Hallucinogen"
@@ -195,25 +225,25 @@
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	taste_description = "mushroom"
 
-/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M)
+/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!M.slurring)
 		M.slurring = 1
 	switch(current_cycle)
 		if(1 to 5)
-			M.set_dizzy(5)
-			M.set_drugginess(30)
+			M.set_dizzy(10 SECONDS * efficiency)
+			M.set_drugginess(30 SECONDS * efficiency)
 			if(prob(10))
 				M.emote(pick("twitch","giggle"))
 		if(5 to 10)
-			M.adjust_jitter(10)
-			M.set_dizzy(10)
-			M.set_drugginess(35)
+			M.adjust_jitter(10 SECONDS * efficiency)
+			M.set_dizzy(20 SECONDS * efficiency)
+			M.set_drugginess(35 SECONDS * efficiency)
 			if(prob(20))
 				M.emote(pick("twitch","giggle"))
 		if (10 to INFINITY)
-			M.adjust_jitter(20)
-			M.set_dizzy(20)
-			M.set_drugginess(40)
+			M.adjust_jitter(20 SECONDS * efficiency)
+			M.set_dizzy(30 SECONDS * efficiency)
+			M.set_drugginess(40 SECONDS * efficiency)
 			if(prob(30))
 				M.emote(pick("twitch","giggle"))
 	..()
@@ -233,11 +263,11 @@
 	metabolization_rate = 1 * REAGENTS_METABOLISM
 	taste_description = "sweetness"
 
-/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, efficiency)
 	M.reagents.add_reagent(/datum/reagent/consumable/sugar,3)
 	if(prob(55))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
-		M.adjustOxyLoss(-1*REM, 0)
-		M.adjustToxLoss(-1*REM, 0)
+		M.adjustBruteLoss(-1*REM * efficiency, 0)
+		M.adjustFireLoss(-1*REM * efficiency, 0)
+		M.adjustOxyLoss(-1*REM * efficiency, 0)
+		M.adjustToxLoss(-1*REM * efficiency, 0)
 	..()

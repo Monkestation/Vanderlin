@@ -7,3 +7,8 @@
 	name = "Ingot Mould"
 	difficulty = 1
 	created_item = /obj/item/mould/ingot
+
+/datum/pottery_recipe/custom_mould
+	name = "Customizable Mould"
+	difficulty = 1
+	created_item = /obj/item/mould/customizable

@@ -21,13 +21,14 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	anvilrepair = null
 	smeltresult = /obj/item/fertilizer/ash
 
 	grid_width = 64
 	grid_height = 64
-	item_weight = 3
+	item_weight = 150 GRAMS
 
 	var/fire_resist = T0C+100
 	var/blood_overlay_type = "suit"

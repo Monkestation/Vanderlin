@@ -7,8 +7,7 @@
 	build_chemical_reagent_list()
 
 	for(var/I in GLOB.chemical_reactions_list)
-		for(var/V in GLOB.chemical_reactions_list[I])
-			var/datum/chemical_reaction/R = V
+		for(var/datum/chemical_reaction/R as anything in GLOB.chemical_reactions_list[I])
 			for(var/id in (R.required_reagents + R.required_catalysts))
 				if(!GLOB.chemical_reagents_list[id])
 					TEST_FAIL("Unknown chemical id \"[id]\" in recipe [R.type]")

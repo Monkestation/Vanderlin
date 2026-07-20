@@ -1,19 +1,19 @@
-GLOBAL_LIST_INIT(commando_names, world.file2list("strings/names/death_commando.txt"))
-GLOBAL_LIST_INIT(first_names, world.file2list("strings/names/first.txt"))
-GLOBAL_LIST_INIT(first_names_male, world.file2list("strings/names/first_male.txt"))
-GLOBAL_LIST_INIT(first_names_female, world.file2list("strings/names/first_female.txt"))
-GLOBAL_LIST_INIT(last_names, world.file2list("strings/names/last.txt"))
-GLOBAL_LIST_INIT(lizard_names_male, world.file2list("strings/names/lizard_male.txt"))
-GLOBAL_LIST_INIT(lizard_names_female, world.file2list("strings/names/lizard_female.txt"))
-GLOBAL_LIST_INIT(ethereal_names, world.file2list("strings/names/ethereal.txt"))
+GLOBAL_LIST_INIT(commando_names, file2list("strings/names/death_commando.txt"))
+GLOBAL_LIST_INIT(first_names, file2list("strings/names/first.txt"))
+GLOBAL_LIST_INIT(first_names_male, file2list("strings/names/first_male.txt"))
+GLOBAL_LIST_INIT(first_names_female, file2list("strings/names/first_female.txt"))
+GLOBAL_LIST_INIT(last_names, file2list("strings/names/last.txt"))
+GLOBAL_LIST_INIT(lizard_names_male, file2list("strings/names/lizard_male.txt"))
+GLOBAL_LIST_INIT(lizard_names_female, file2list("strings/names/lizard_female.txt"))
+GLOBAL_LIST_INIT(ethereal_names, file2list("strings/names/ethereal.txt"))
 
-GLOBAL_LIST_INIT(verbs, world.file2list("strings/names/verbs.txt"))
-GLOBAL_LIST_INIT(ing_verbs, world.file2list("strings/names/ing_verbs.txt"))
-GLOBAL_LIST_INIT(adverbs, world.file2list("strings/names/adverbs.txt"))
-GLOBAL_LIST_INIT(adjectives, world.file2list("strings/names/adjectives.txt"))
-GLOBAL_LIST_INIT(dream_strings, world.file2list("strings/dreamstrings.txt"))
+GLOBAL_LIST_INIT(verbs, file2list("strings/names/verbs.txt"))
+GLOBAL_LIST_INIT(ing_verbs, file2list("strings/names/ing_verbs.txt"))
+GLOBAL_LIST_INIT(adverbs, file2list("strings/names/adverbs.txt"))
+GLOBAL_LIST_INIT(adjectives, file2list("strings/names/adjectives.txt"))
+GLOBAL_LIST_INIT(dream_strings, file2list("strings/dreamstrings.txt"))
 
-GLOBAL_LIST_INIT(ooctitle, world.file2list("strings/names/roguetown/ooctitle.txt"))
+GLOBAL_LIST_INIT(ooctitle, file2list("strings/names/roguetown/ooctitle.txt"))
 
 GLOBAL_LIST_INIT(preferences_custom_names, list(
 	"human" = list("pref_name" = "Backup Human", "qdesc" = "backup human name, used in the event you are assigned a command role as another species", "allow_numbers" = FALSE , "group" = "backup_human", "allow_null" = FALSE),

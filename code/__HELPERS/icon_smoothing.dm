@@ -72,61 +72,61 @@ DEFINE_BITFIELD(smoothing_junction, list(
 	var/smooth_obj = (smoothing_flags & SMOOTH_OBJ)
 	var/smooth_edge = (smoothing_flags & SMOOTH_EDGE)
 
-	#define SET_ADJ_IN_DIR(direction, direction_flag) \
-		set_adj_in_dir: { \
-			do { \
-				var/turf/neighbor = get_step(src, direction); \
-				if(!neighbor) { \
-					if(smooth_border) { \
-						new_junction |= direction_flag; \
+#define SET_ADJ_IN_DIR(direction, direction_flag) \
+	set_adj_in_dir: { \
+		do { \
+			var/turf/neighbor = get_step(src, direction); \
+			if(!neighbor) { \
+				if(smooth_border) { \
+					new_junction |= direction_flag; \
+				}; \
+				break set_adj_in_dir; \
+			}; \
+			if(smooth_edge && type == neighbor.type) { \
+				break set_adj_in_dir; \
+			}; \
+			if(smooth_obj) { \
+				for(var/atom/movable/thing as anything in neighbor) { \
+					if(!thing.anchored) { \
+						continue; \
 					}; \
-					break set_adj_in_dir; \
-				}; \
-				if(smooth_edge && type == neighbor.type) { \
-					break set_adj_in_dir; \
-				}; \
-				if(smooth_obj) { \
-					for(var/atom/movable/thing as anything in neighbor) { \
-						if(!thing.anchored) { \
-							continue; \
+					if(!length(smoothing_list)) { \
+						if(type == thing.type) { \
+							new_junction |= direction_flag; \
+							break set_adj_in_dir; \
 						}; \
-						if(!smoothing_list) { \
-							if(type == thing.type) { \
-								new_junction |= direction_flag; \
-								break set_adj_in_dir; \
-							}; \
-							continue; \
-						}; \
-						var/thing_smoothing_groups = thing.smoothing_groups; \
-						if(!thing_smoothing_groups) { \
-							continue; \
-						}; \
-						for(var/target in smoothing_list) { \
-							if(smoothing_list[target] & thing_smoothing_groups[target]) { \
-								new_junction |= direction_flag; \
-								break set_adj_in_dir; \
-							}; \
-						}; \
+						continue; \
 					}; \
-				}; \
-				if(!smoothing_list) { \
-					if(type == neighbor.type) { \
-						new_junction |= direction_flag; \
+					var/thing_smoothing_groups = thing.smoothing_groups; \
+					if(!length(thing_smoothing_groups)) { \
+						continue; \
 					}; \
-					break set_adj_in_dir; \
-				}; \
-				var/neighbor_smoothing_groups = neighbor.smoothing_groups; \
-				if(neighbor_smoothing_groups) { \
-					for(var/target as anything in smoothing_list) { \
-						if(smoothing_list[target] & neighbor_smoothing_groups[target]) { \
+					for(var/target in smoothing_list) { \
+						if(smoothing_list[target] & thing_smoothing_groups[target]) { \
 							new_junction |= direction_flag; \
 							break set_adj_in_dir; \
 						}; \
 					}; \
 				}; \
+			}; \
+			if(!length(smoothing_list)) { \
+				if(type == neighbor.type) { \
+					new_junction |= direction_flag; \
+				}; \
 				break set_adj_in_dir; \
-			} while(FALSE) \
-		}
+			}; \
+			var/neighbor_smoothing_groups = neighbor.smoothing_groups; \
+			if(length(neighbor_smoothing_groups)) { \
+				for(var/target as anything in smoothing_list) { \
+					if(smoothing_list[target] & neighbor_smoothing_groups[target]) { \
+						new_junction |= direction_flag; \
+						break set_adj_in_dir; \
+					}; \
+				}; \
+			}; \
+			break set_adj_in_dir; \
+		} while(FALSE) \
+	}
 
 	for(var/direction as anything in GLOB.cardinals) //Cardinal case first.
 		SET_ADJ_IN_DIR(direction, direction)

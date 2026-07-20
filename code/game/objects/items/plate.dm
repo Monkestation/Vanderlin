@@ -6,6 +6,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	possible_item_intents = list(/datum/intent/use, /datum/intent/food)
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 300 GRAMS
 	///How many things fit on this plate?
 	var/max_items = 2
 	///The offset from side to side the food items can have on the plate
@@ -29,7 +30,7 @@
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/plate/attackby(obj/item/I, mob/living/carbon/user, params)
+/obj/item/plate/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!length(contents) && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		if(dirty)
 			var/obj/item/natural/cloth/cloth_check = I
@@ -45,7 +46,7 @@
 				cloth_check.reagents.remove_all(1)
 				dirty = FALSE
 				update_appearance(UPDATE_OVERLAYS)
-				AddComponent(/datum/component/particle_spewer/sparkle)
+				AddComponent(/datum/component/particle_spewer/sparkle/turf_only)
 				user.nobles_seen_servant_work()
 				fork_usages = 0
 				cleaned = TRUE
@@ -67,10 +68,10 @@
 		to_chat(user, span_notice("[src] can't fit more items!"))
 		return
 
-	var/list/modifiers = params2list(params)
 	//Center the icon where the user clicked.
 	if(!LAZYACCESS(modifiers, ICON_X) || !LAZYACCESS(modifiers, ICON_Y))
 		return
+
 	if(user.transferItemToLoc(I, src, silent = FALSE))
 		I.pixel_x = I.base_pixel_x + clamp(text2num(LAZYACCESS(modifiers, ICON_X)) - 16, -max_x_offset, max_x_offset)
 		I.pixel_y = I.base_pixel_x + min(text2num(LAZYACCESS(modifiers, ICON_Y)) + placement_offset, max_height_offset)
@@ -79,24 +80,13 @@
 	else
 		return ..()
 
-/obj/item/plate/pre_attack(atom/A, mob/living/user, params)
-	if(!iscarbon(A))
-		return
-	if(!contents.len)
-		return
-	if(user.used_intent.type != /datum/intent/food)
-		return
-	var/obj/item/object_to_eat = contents[1]
-	A.attackby(object_to_eat, user)
-	return TRUE //No normal attack
-
 ///This proc adds the food to viscontents and makes sure it can deregister if this changes.
 /obj/item/plate/proc/AddToPlate(obj/item/item_to_plate)
 	vis_contents += item_to_plate
 	item_to_plate.flags_1 |= IS_ONTOP_1
 	item_to_plate.vis_flags |= (VIS_INHERIT_PLANE | VIS_INHERIT_LAYER)
 	RegisterSignal(item_to_plate, COMSIG_MOVABLE_MOVED, PROC_REF(ItemMoved))
-	RegisterSignal(item_to_plate, COMSIG_PARENT_QDELETING, PROC_REF(ItemMoved))
+	RegisterSignal(item_to_plate, COMSIG_QDELETING, PROC_REF(ItemMoved))
 	// We gotta offset ourselves via pixel_w/z, so we don't end up z fighting with the plane
 	item_to_plate.pixel_w = item_to_plate.pixel_x
 	item_to_plate.pixel_z = item_to_plate.pixel_y
@@ -113,7 +103,7 @@
 	removed_item.vis_flags &= ~VIS_INHERIT_PLANE
 	removed_item.vis_flags &= ~VIS_INHERIT_LAYER
 	vis_contents -= removed_item
-	UnregisterSignal(removed_item, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(removed_item, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
 	// Resettt
 	removed_item.pixel_x = removed_item.pixel_w
 	removed_item.pixel_y = removed_item.pixel_z
@@ -145,7 +135,7 @@
 		scattered_item.pixel_y = scattered_item.base_pixel_y + scatter_vector[2]
 		scattered_item.throw_impact(hit_atom, throwingdatum)
 
-/obj/item/plate/attack_self(mob/user, params)
+/obj/item/plate/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(contents.len) // If the tray isn't empty
 		for(var/obj/item/scattered_item as anything in contents)
@@ -154,13 +144,12 @@
 
 /obj/item/plate/examine(mob/user)
 	. = ..()
-	desc = initial(desc)
 	if(dirty)
-		desc += span_boldwarning("\nThis platter is filthy... absolutely disgusting.")
+		. += span_boldwarning("This platter is filthy... absolutely disgusting.")
 	else if(cleaned)
-		desc += span_notice("\nThis platter was cleaned recently!")
+		. += span_info("This platter was cleaned recently!")
 	else
-		desc += "\nThis platter looks properly stored and clean enough."
+		. += span_info("This platter looks clean enough.")
 
 /obj/item/plate/clay
 	name = "clay platter"
@@ -168,16 +157,18 @@
 	icon_state = "platter_clay"
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
 	resistance_flags = FIRE_PROOF
+	item_weight = 400 GRAMS
 
 /obj/item/plate/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay platter"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay platter"
 
 /obj/item/plate/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	. = ..()
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))
 	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	qdel(src)
+
 
 /obj/item/plate/copper
 	name = "copper platter"
@@ -186,6 +177,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_fork_usages = 7
+	item_weight = 600 GRAMS
 
 /obj/item/plate/pewter
 	name = "pewter platter"
@@ -194,6 +186,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_fork_usages = 7
+	item_weight = 500 GRAMS
 
 /obj/item/plate/silver
 	name = "silver platter"
@@ -204,6 +197,7 @@
 	sellprice = 12
 	smeltresult = /obj/item/ingot/silver
 	max_fork_usages = 9
+	item_weight = 700 GRAMS
 
 /obj/item/plate/silver/Initialize(mapload)
 	. = ..()
@@ -218,6 +212,7 @@
 	sellprice = 20
 	smeltresult = /obj/item/ingot/gold
 	max_fork_usages = 11
+	item_weight = 900 GRAMS
 
 /obj/item/plate/jade
 	name = "joapstone platter"
@@ -227,6 +222,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
 	max_fork_usages = 11
+	item_weight = 800 GRAMS
 
 /obj/item/plate/onyxa
 	name = "onyxa platter"
@@ -236,6 +232,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 40
 	max_fork_usages = 11
+	item_weight = 600 GRAMS
 
 /obj/item/plate/shell
 	name = "shell platter"
@@ -245,6 +242,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 20
 	max_fork_usages = 11
+	item_weight = 400 GRAMS
 
 /obj/item/plate/rose
 	name = "rosellusk platter"
@@ -254,6 +252,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 25
 	max_fork_usages = 11
+	item_weight = 450 GRAMS
 
 /obj/item/plate/amber
 	name = "petriamber platter"
@@ -263,6 +262,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
 	max_fork_usages = 11
+	item_weight = 350 GRAMS
 
 /obj/item/plate/opal
 	name = "opaloise platter"
@@ -272,6 +272,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 90
 	max_fork_usages = 11
+	item_weight = 700 GRAMS
 
 /obj/item/plate/coral
 	name = "aoetal platter"
@@ -281,6 +282,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 70
 	max_fork_usages = 11
+	item_weight = 750 GRAMS
 
 /obj/item/plate/turq
 	name = "ceruleabaster platter"
@@ -290,6 +292,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 85
 	max_fork_usages = 11
+	item_weight = 850 GRAMS
 
 /obj/item/tray
 	name = "tray"
@@ -301,6 +304,7 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_BULKY
+	item_weight = 500 GRAMS
 
 /obj/item/tray/psy
 	name = "tray"
@@ -310,7 +314,7 @@
 	. = ..()
 	AddComponent(/datum/component/storage/concrete/grid/tray)
 
-/obj/item/tray/attack(mob/living/M, mob/living/user)
+/obj/item/tray/attack(mob/living/M, mob/living/user, list/modifiers)
 	..()
 	// Drop all the things. All of them.
 	var/list/obj/item/oldContents = contents.Copy()

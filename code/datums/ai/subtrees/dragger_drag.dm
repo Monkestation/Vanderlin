@@ -97,7 +97,7 @@
 
 			new /obj/effect/temp_visual/dir_setting/wraith_phase_in(get_turf(dragger_pawn), dragger_pawn.dir)
 			playsound(dragger_pawn, 'sound/magic/ethereal_enter.ogg', 50, TRUE)
-			carbon_victim.apply_damage(15, BRUTE, spread_damage = TRUE)
+			carbon_victim.apply_damage(15, BRUTE, spread_damage = TRUE, damage_type = BCLASS_LASHING)
 
 			controller.blackboard[BB_DRAGGER_HUNTING_COOLDOWN] = world.time + 20 SECONDS
 

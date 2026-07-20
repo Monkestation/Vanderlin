@@ -9,7 +9,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/cloth
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/attribute/skill/misc/sewing
 	craftdiff = 0
 	subtypes_allowed = TRUE // so you can use any subtype of fur
 	category = "Shirt"
@@ -71,6 +71,15 @@
 		/obj/item/natural/fibers = 2,
 	)
 	output = /obj/item/clothing/head/papakha
+	craftdiff = 1
+
+/datum/repeatable_crafting_recipe/sewing/hide/gnomecap
+	name = "dwarven tallhat"
+	requirements = list(
+		/obj/item/natural/hide = 1,
+		/obj/item/natural/fur = 2,
+	)
+	output = /obj/item/clothing/head/gnomecap
 	craftdiff = 1
 
 /// Cloth
@@ -165,6 +174,13 @@
 /datum/repeatable_crafting_recipe/sewing/clothtights
 	name = "cloth tights"
 	output = /obj/item/clothing/pants/tights
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	category = "Pants"
+
+/datum/repeatable_crafting_recipe/sewing/explorerpants
+	name = "explorer's pants"
+	output = /obj/item/clothing/pants/tights/explorerpants
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	category = "Pants"
@@ -321,10 +337,25 @@
 	craftdiff = 1
 	category = "Storage"
 
+/datum/repeatable_crafting_recipe/sewing/clothrucksack
+	name = "cloth rucksack"
+	output = /obj/item/storage/backpack/satchel/cloth/big
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 4)
+	craftdiff = 2
+	category = "Storage"
+
 /datum/repeatable_crafting_recipe/sewing/pcoif
 	name = "cloth coif"
 	output = /obj/item/clothing/neck/coif/cloth
 	requirements = list(/obj/item/natural/fibers = 1, /obj/item/natural/cloth = 2)
+	craftdiff = 1
+	category = "Neck"
+
+/datum/repeatable_crafting_recipe/sewing/woolenneck
+	name = "woolen collar"
+	output = /obj/item/clothing/neck/woolen
+	requirements = list(/obj/item/natural/cloth = 3)
 	craftdiff = 1
 	category = "Neck"
 
@@ -375,6 +406,27 @@
 	requirements = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1,)
 	output = /obj/item/clothing/head/cookhat
 	craftdiff = 1
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/sewing/explorerhat
+	name = "explorer's hat"
+	requirements = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1,)
+	output = /obj/item/clothing/head/explorerhat
+	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/sewing/fedora
+	name = "archeologist's hat"
+	requirements = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1,)
+	output = /obj/item/clothing/head/fedora
+	craftdiff = 2
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/sewing/archercap
+	name = "archer's cap"
+	requirements = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1,)
+	output = /obj/item/clothing/head/archercap
+	craftdiff = 2
 	category = "Hat"
 
 /datum/repeatable_crafting_recipe/sewing/chefhat
@@ -447,11 +499,35 @@
 /datum/repeatable_crafting_recipe/sewing/flowercrown/rosa/create_blacklisted_paths()
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
+/datum/repeatable_crafting_recipe/sewing/flowercrown/cursedrosa
+	name = "black briar rosa crown"
+	requirements = list(/obj/item/natural/fibers = 1,\
+					/obj/item/ore/cursedrosa = 2)
+	output = /obj/item/clothing/head/flowercrown/cursedrosa
+
 /datum/repeatable_crafting_recipe/sewing/flowercrown/salvia
 	name = "salvia crown"
 	requirements = list(/obj/item/natural/fibers = 1,\
 					/obj/item/alch/herb/salvia = 2)
 	output = /obj/item/clothing/head/flowercrown/salvia
+
+/datum/repeatable_crafting_recipe/sewing/flowercrown/calendula
+	name = "calendula crown"
+	requirements = list(/obj/item/natural/fibers = 1,\
+					/obj/item/alch/herb/calendula = 2)
+	output = /obj/item/clothing/head/flowercrown/calendula
+
+/datum/repeatable_crafting_recipe/sewing/flowercrown/manabloom
+	name = "manabloom crown"
+	requirements = list(/obj/item/natural/fibers = 1,\
+					/obj/item/reagent_containers/food/snacks/produce/manabloom = 2)
+	output = /obj/item/clothing/head/flowercrown/manabloom
+
+/datum/repeatable_crafting_recipe/sewing/flowercrown/matricaria
+	name = "matricaria crown"
+	requirements = list(/obj/item/natural/fibers = 1,\
+					/obj/item/alch/herb/matricaria = 2)
+	output = /obj/item/clothing/head/flowercrown/matricaria
 
 /*.............. recipes requiring skill 2 ..............*/
 /datum/repeatable_crafting_recipe/sewing/gambeson
@@ -465,6 +541,22 @@
 /datum/repeatable_crafting_recipe/sewing/tabard
 	name = "tabard"
 	output = /obj/item/clothing/cloak/tabard
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+	category = "Cloak"
+
+/datum/repeatable_crafting_recipe/sewing/togaalt
+	name = "toga"
+	output = /obj/item/clothing/cloak/tabard/toga/alt
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+	category = "Cloak"
+
+/datum/repeatable_crafting_recipe/sewing/toga
+	name = "toga alt"
+	output = /obj/item/clothing/cloak/tabard/toga
 	requirements = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
@@ -486,6 +578,15 @@
 		/obj/item/natural/cloth = 2,
 		/obj/item/natural/fibers = 1,)
 	craftdiff = 2
+	category = "Cloak"
+
+/datum/repeatable_crafting_recipe/sewing/fancycoat
+	name = "fancy coat"
+	output = /obj/item/clothing/cloak/poncho/fancycoat
+	requirements = list(
+		/obj/item/natural/silk = 2,
+		/obj/item/natural/fibers = 1,)
+	craftdiff = 3
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/tabard/crusader
@@ -566,6 +667,14 @@
 	craftdiff = 3
 	category = "Armor"
 
+/datum/repeatable_crafting_recipe/sewing/fencershirt
+	name = "fencing shirt"
+	output = /obj/item/clothing/armor/gambeson/arming/fencer
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Armor"
+
 /datum/repeatable_crafting_recipe/sewing/maidband
 	name = "maid headband"
 	output = /obj/item/clothing/head/maidband
@@ -598,6 +707,30 @@
 	craftdiff = 3
 	category = "Shirt"
 
+/datum/repeatable_crafting_recipe/sewing/saree
+	name = "saree"
+	output = /obj/item/clothing/shirt/saree
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Shirt"
+
+/datum/repeatable_crafting_recipe/sewing/explorershirt
+	name = "explorer's vest"
+	output = /obj/item/clothing/shirt/explorer
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Shirt"
+
+/datum/repeatable_crafting_recipe/sewing/fancyjacket
+	name = "fancy jacket"
+	output = /obj/item/clothing/shirt/fancyjacket
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Shirt"
+
 /datum/repeatable_crafting_recipe/sewing/trousershorts
 	name = "trouser shorts"
 	output = /obj/item/clothing/pants/trou/formal/shorts
@@ -621,6 +754,20 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
 	category = "Hat"
+
+/datum/repeatable_crafting_recipe/sewing/baredrobes
+	name = "bared robes"
+	output = /obj/item/clothing/shirt/robe/bared
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 1
+
+/datum/repeatable_crafting_recipe/sewing/shepherdvest
+	name = "shepherd's best"
+	output = /obj/item/clothing/shirt/robe/shepherdvest
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/sewing/wizardrobes
 	name = "wizard robes"
@@ -1011,6 +1158,30 @@
 	craftdiff = 3
 	category = "Dress"
 
+/datum/repeatable_crafting_recipe/sewing/nobledress
+	name = "noble dress"
+	output = /obj/item/clothing/shirt/dress/nobledress
+	requirements = list(/obj/item/natural/silk = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+	category = "Dress"
+
+/datum/repeatable_crafting_recipe/sewing/dress/velvetdress
+	name = "velvet dress"
+	output = /obj/item/clothing/shirt/dress/velvetdress
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Dress"
+
+/datum/repeatable_crafting_recipe/sewing/slitdress
+	name = "slit dress"
+	output = /obj/item/clothing/shirt/dress/slit
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Dress"
+
 /datum/repeatable_crafting_recipe/sewing/stockdress
 	name = "stock dress"
 	output = /obj/item/clothing/shirt/dress/gen
@@ -1129,6 +1300,7 @@
 	requirements = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/fibers = 1,
 				/obj/item/clothing/neck/chaincoif)
+	blacklisted_paths = list(/obj/item/clothing/neck/chaincoif/iron)
 	craftdiff = 4
 	category = "Hat"
 
@@ -1149,13 +1321,22 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/lakkarijupon
-	name = "lakkarian jupon"
+	name = "robed jupon"
 	output = /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	requirements = list(/obj/item/natural/cloth = 4,
 				/obj/item/natural/fibers = 2,
 				/obj/item/ingot/iron = 1)
 	craftdiff = 4
 	category = "Armor"
+
+/datum/repeatable_crafting_recipe/sewing/fencing_pants
+	name = "fencing breeches"
+	output = /obj/item/clothing/pants/fencer
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/silk = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+	category = "Pants"
 
 /*.............. recipes requiring skill 5 ..............*/
 
@@ -1504,6 +1685,37 @@
 	craftdiff = 1
 	category = "Tabard"
 
+// Cadwyn Order Tabards
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_astrata
+	name = "bright tabard"
+	output = /obj/item/clothing/cloak/cadwyn/astrata
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_necra
+	name = "dark cloak"
+	output = /obj/item/clothing/cloak/cadwyn/necra
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_ravox
+	name = "tattered surcoat"
+	output = /obj/item/clothing/cloak/cadwyn/ravox
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
 // Detailed Tabards
 /datum/repeatable_crafting_recipe/sewing/eora_tabard
 	name = "eora tabard"
@@ -1712,6 +1924,16 @@
 	craftdiff = 2
 	category = "Mask"
 
+/datum/repeatable_crafting_recipe/sewing/surg_sack
+	name = "physicker's masked sack"
+	output = /obj/item/clothing/face/sack/surgsack
+	requirements = list(
+		/obj/item/natural/cloth = 3,
+		/obj/item/clothing/face/phys = 1,
+	)
+	craftdiff = 1
+	category = "Mask"
+
 /datum/repeatable_crafting_recipe/sewing/bandaged_gloves
 	name = "Bandaged Gloves"
 	output = /obj/item/clothing/gloves/bandages
@@ -1731,3 +1953,55 @@
 	)
 	craftdiff = 2
 	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/sewing/bandage
+	name = "Bandage"
+	output = /obj/item/natural/cloth/bandage
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 2.5
+	skillcraft = /datum/attribute/skill/misc/medicine
+	blacklisted_paths = list(/obj/item/natural/cloth/bandage)
+
+// You do not get medical skill for making bandages
+/datum/repeatable_crafting_recipe/sewing/bandage/add_skill_experience(mob/user)
+	return
+
+/datum/repeatable_crafting_recipe/sewing/barding
+	name = "padded barding (saiga)"
+	category = "Armor"
+	output = /obj/item/clothing/barding
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/sewing/barding/honse
+	name = "padded barding (honse)"
+	output = /obj/item/clothing/barding/honse
+
+/datum/repeatable_crafting_recipe/sewing/caparison
+	name = "caparison"
+	category = "Armor"
+	output =/obj/item/caparison
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/sewing/caparison/psy
+	name = "psydonite caparison"
+	output =/obj/item/caparison/psy
+
+/datum/repeatable_crafting_recipe/sewing/caparison/astrata
+	name = "astratan caparison"
+	output =/obj/item/caparison/astrata
+
+/datum/repeatable_crafting_recipe/sewing/caparison/eora
+	name = "eoran caparison"
+	output =/obj/item/caparison/eora
+
+/datum/repeatable_crafting_recipe/sewing/caparison/honse
+	name = "honse caparison"
+	output =/obj/item/caparison/honse
+

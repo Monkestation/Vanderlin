@@ -6,15 +6,11 @@
 
 /datum/antagonist/skeleton/knight/on_gain()
 	. = ..()
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
-	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
-	for(var/datum/mind/MF in get_minds("Death Knight"))
-		owner.i_know_person(MF)
-		owner.person_knows_me(MF)
+	owner.forget_and_be_forgotten()
+	for(var/datum/mind/found_mind in get_minds("Vampire Spawn"))
+		owner.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Death Knight"))
+		owner.share_identities(found_mind)
 
 /datum/antagonist/skeleton/knight/greet()
 	to_chat(owner.current, span_userdanger("I am returned to serve. I will obey, so that I may return to rest."))
@@ -36,7 +32,7 @@
 				to_chat(owner, "<B>Goal #[count]</B>: [objective.explanation_text] <span class='redtext'>Failure.</span>")
 				traitorwin = FALSE
 			count += objective.triumph_count
-	var/special_role_text = lowertext(name)
+	var/special_role_text = LOWER_TEXT(name)
 	if(traitorwin)
 		if(count)
 			if(owner)

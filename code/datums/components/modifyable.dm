@@ -24,14 +24,14 @@
 	max_sockets = initial_max_sockets
 
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_GET_RESISTANCE, PROC_REF(on_get_resistance))
 	RegisterSignal(parent, COMSIG_ATOM_GET_MAX_RESISTANCE, PROC_REF(on_get_max_resistance))
 	RegisterSignal(parent, COMSIG_ATOM_GET_STATUS_MOD, PROC_REF(on_get_status_mod))
 	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_apply_combat_effects))
 	RegisterSignal(parent, COMSIG_PROJECTILE_ON_HIT, PROC_REF(on_apply_combat_effects_ranged))
 
-/datum/component/modifications/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/user, params)
+/datum/component/modifications/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(istype(attacking_item, /obj/item/gem))
@@ -103,7 +103,7 @@
 			continue
 		effect.apply_combat_effect(target, user)
 
-/datum/component/modifications/proc/on_apply_combat_effects(obj/item/source, mob/living/target, mob/living/user, proximity_flag)
+/datum/component/modifications/proc/on_apply_combat_effects(obj/item/source, mob/living/target, mob/living/user, proximity_flag, list/modifiers)
 	SIGNAL_HANDLER
 	if(!proximity_flag)
 		return

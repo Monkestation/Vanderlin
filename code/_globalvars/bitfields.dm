@@ -4,7 +4,6 @@ GLOBAL_LIST_INIT(bitfields, generate_bitfields())
 /datum/bitfield
 	/// The variable name that contains the bitfield
 	var/variable
-
 	/// An associative list of the readable flag and its true value
 	var/list/flags
 
@@ -15,6 +14,17 @@ GLOBAL_LIST_INIT(bitfields, generate_bitfields())
 		var/datum/bitfield/bitfield = new _bitfield
 		bitfields[bitfield.variable] = bitfield.flags
 	return bitfields
+
+/// Returns an associative list of bitflag name -> number for all valid bitflags in the passed in field
+/proc/get_valid_bitflags(var_name)
+	return GLOB.bitfields[var_name] || list()
+
+/proc/get_random_bitflag(var_name)
+	var/list/flags = get_valid_bitflags(var_name)
+	if(!length(flags))
+		return
+	var/name = pick(flags)
+	return flags[name]
 
 // Definitions are ordered alphabetically and so are the inner lists
 // Please keep it that way
@@ -59,6 +69,7 @@ DEFINE_BITFIELD(area_flags, list(
 	"TUNNELS_ALLOWED" = TUNNELS_ALLOWED,
 	"UNIQUE_AREA" = UNIQUE_AREA,
 	"VALID_TERRITORY" = VALID_TERRITORY,
+	"BOGGY_AREA" = BOGGY_AREA,
 ))
 
 DEFINE_BITFIELD(clothing_flags, list(
@@ -91,7 +102,6 @@ DEFINE_BITFIELD(flags_1, list(
 	"HOLOGRAM_1" = HOLOGRAM_1,
 	"INITIALIZED_1" = INITIALIZED_1,
 	"IS_ONTOP_1" = IS_ONTOP_1,
-	"NODECONSTRUCT_1" = NODECONSTRUCT_1,
 	"NO_LAVA_GEN_1" = NO_LAVA_GEN_1,
 	"NO_RUINS_1" = NO_RUINS_1,
 	"ON_BORDER_1" = ON_BORDER_1,
@@ -139,6 +149,7 @@ DEFINE_BITFIELD(item_flags, list(
 	"BEING_REMOVED" = BEING_REMOVED,
 	"DROPDEL" = DROPDEL,
 	"FORCE_STRING_OVERRIDE" = FORCE_STRING_OVERRIDE,
+	"HAND_ITEM" = HAND_ITEM,
 	"IN_INVENTORY" = IN_INVENTORY,
 	"IN_STORAGE" = IN_STORAGE,
 	"NEEDS_PERMIT" = NEEDS_PERMIT,
@@ -184,6 +195,7 @@ DEFINE_BITFIELD(movement_type, list(
 	"GROUND" = GROUND,
 	"PHASING" = PHASING,
 	"VENTCRAWLING" = VENTCRAWLING,
+	"SWIMMING" = SWIMMING,
 ))
 
 DEFINE_BITFIELD(obj_flags, list(
@@ -195,6 +207,11 @@ DEFINE_BITFIELD(obj_flags, list(
 	"IN_USE" = IN_USE,
 	"UNIQUE_RENAME" = UNIQUE_RENAME,
 	"USES_TGUI" = USES_TGUI,
+	"NO_DEBRIS_AFTER_DECONSTRUCTION" = NO_DEBRIS_AFTER_DECONSTRUCTION,
+	"BLOCK_Z_OUT_DOWN" = BLOCK_Z_OUT_DOWN,
+	"BLOCK_Z_OUT_UP" = BLOCK_Z_OUT_UP,
+	"BLOCK_Z_IN_DOWN" = BLOCK_Z_IN_DOWN,
+	"BLOCK_Z_IN_UP" = BLOCK_Z_IN_UP,
 ))
 
 DEFINE_BITFIELD(pass_flags, list(

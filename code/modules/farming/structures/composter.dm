@@ -50,7 +50,7 @@
 /obj/structure/composter/proc/get_total_compost()
 	return unflipped_compost + flipped_compost + ready_compost
 
-/obj/structure/composter/proc/try_handle_flipping_compost(obj/item/attacking_item, mob/user, params)
+/obj/structure/composter/proc/try_handle_flipping_compost(obj/item/attacking_item, mob/user)
 	var/using_tool = FALSE
 	if(attacking_item)
 		if(istype(attacking_item, /obj/item/weapon/pitchfork) || istype(attacking_item, /obj/item/weapon/shovel))
@@ -91,6 +91,8 @@
 		compost_value = 50
 	if(istype(attacking_item, /obj/item/trash))
 		compost_value = 50
+	if(istype(attacking_item, /obj/item/reagent_containers/glass/cup/cocaudo_husk))
+		compost_value = 50
 	if(istype(attacking_item, /obj/item/reagent_containers/food/snacks/rotten))
 		compost_value = 50
 	if(compost_value > 0)
@@ -106,7 +108,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/composter/proc/try_handle_removing_compost(obj/item/attacking_item, mob/living/user, params)
+/obj/structure/composter/proc/try_handle_removing_compost(obj/item/attacking_item, mob/living/user)
 	if(ready_compost < COMPOST_PER_PRODUCED_ITEM)
 		to_chat(user, span_warning("There's not enough processed compost!"))
 		return TRUE
@@ -124,32 +126,37 @@
 	. = new /obj/item/fertilizer/compost(get_turf(src))
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/composter/attackby(obj/item/attacking_item, mob/user, params)
-	user.changeNext_move(CLICK_CD_FAST)
-	if(istype(attacking_item,/obj/item/storage/sack) && attacking_item.contents.len)
+/obj/structure/composter/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/storage/sack) && length(tool.contents))
 		if(get_total_compost() >= MAXIMUM_TOTAL_COMPOST)
 			to_chat(user, span_warning("There's too much compost!"))
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		var/success
-		for(var/obj/item/bagged_item in attacking_item.contents)
+		for(var/obj/item/bagged_item in tool.contents)
 			if(try_handle_adding_compost(bagged_item, user, batch_process = TRUE))
 				success = TRUE
 				if(get_total_compost() >= MAXIMUM_TOTAL_COMPOST)
 					break
 		if(success)
-			to_chat(user, span_info("I dump all the compostables inside [attacking_item] into [src]."))
-			attacking_item.update_appearance(UPDATE_ICON_STATE)
+			to_chat(user, span_info("I dump all the compostables inside [tool] into [src]."))
+			tool.update_appearance(UPDATE_ICON_STATE)
 		else
-			to_chat(user, span_warning("There's nothing in [attacking_item] that can be composted."))
-		return TRUE
-	if(try_handle_adding_compost(attacking_item, user))
-		return TRUE
-	if(istype(attacking_item, /obj/item/weapon/shovel))
-		if(try_handle_bulk_compost_removal(attacking_item, user, params))
-			return TRUE
-	. = ..()
+			to_chat(user, span_warning("There's nothing in [tool] that can be composted."))
+		return ITEM_INTERACT_SUCCESS
 
-/obj/structure/composter/proc/try_handle_bulk_compost_removal(obj/item/attacking_item, mob/living/user, params)
+	if(try_handle_adding_compost(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/weapon/shovel))
+		if(try_handle_bulk_compost_removal(tool, user))
+			return ITEM_INTERACT_SUCCESS
+
+/obj/structure/composter/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_flipping_compost(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+/obj/structure/composter/proc/try_handle_bulk_compost_removal(obj/item/attacking_item, mob/living/user)
 	if(ready_compost < COMPOST_PER_PRODUCED_ITEM)
 		to_chat(user, span_warning("There's not enough processed compost!"))
 		return FALSE
@@ -170,20 +177,12 @@
 		return
 	. = ..()
 
-/obj/structure/composter/attack_hand_secondary(mob/user, params)
+/obj/structure/composter/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_flipping_compost(null, user, params))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-/obj/structure/composter/attackby_secondary(obj/item/weapon, mob/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_flipping_compost(weapon, user, params))
+	if(try_handle_flipping_compost(null, user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/composter/update_overlays()

@@ -52,7 +52,7 @@
 /turf/open/floor/volcanic,
 /area/under/tomb/cave/lava)
 "W" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "X" = (
 /obj/item/natural/rock/random_ore,

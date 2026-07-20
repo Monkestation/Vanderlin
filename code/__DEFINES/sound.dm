@@ -15,11 +15,12 @@
 #define CHANNEL_CMUSIC 1013
 #define CHANNEL_WEATHER 1012
 #define CHANNEL_IMSICK 1011
+#define CHANNEL_EAR_RING 1012
 
 //THIS SHOULD ALWAYS BE THE LOWEST ONE!
 //KEEP IT UPDATED
 
-#define CHANNEL_HIGHEST_AVAILABLE 1011
+#define CHANNEL_HIGHEST_AVAILABLE 1012
 
 /// This is the lowest volume that can be used by playsound otherwise it gets ignored
 /// Most sounds around 10 volume can barely be heard. Almost all sounds at 5 volume or below are inaudible
@@ -81,6 +82,7 @@
 #define SFX_INQUIS_BOOT_STEP	"inquis_boot_step"
 #define SFX_POWER_ARMOR_STEP	"power_armor_step"
 #define SFX_WATCH_BOOT_STEP	"watch_boot_step"
+#define SFX_EVIL_BOOT_STEP "evil_boot_step"
 #define SFX_CAT_MEOW "cat_meow"
 #define SFX_CAT_PURR "cat_purr"
 #define SFX_EGG_HATCHING "egg_hatching"

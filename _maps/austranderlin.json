@@ -1,0 +1,24 @@
+{
+	"map_name": "uᴉlɹǝpuɐΛ",
+	"map_path": "map_files/austranderlin",
+	"map_file": "austranderlin.dmm",
+	"immigrant_origin": "plǝᴉɟsƃuᴉʞ",
+	"monarch_title": "King",
+	"monarch_title_f": "Queen",
+	"traits": [
+		{"Up": true, "Turf Weather Effects": true, "Cellar": true},
+		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
+		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
+		{"Up": true, "Down": true, "Turf Weather Effects": true},
+		{"Down": true, "Turf Weather Effects": true}
+	],
+	"other_z": [
+		"map_files/vanderlin/vanderlin_forest",
+		"map_files/vanderlin/vanderlin_mountain",
+		"map_files/vanderlin/vanderlin_bog"
+	],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0,
+	"exclude_from_ci": true
+}

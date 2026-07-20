@@ -36,7 +36,7 @@
 
 /datum/status_effect/void_chill/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("void_chill")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_VOID_CHILL)
 	owner.bodytemperature = BODYTEMP_NORMAL
 	UnregisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS)
 	owner.update_icon(UPDATE_OVERLAYS)
@@ -93,7 +93,7 @@
 
 ///Updates the movespeed of owner based on the amount of stacks of the debuff
 /datum/status_effect/void_chill/proc/update_movespeed(stacks)
-	owner.add_movespeed_modifier("void_chill", TRUE, override = TRUE, multiplicative_slowdown = 0.3 * stacks)
+	owner.add_movespeed_modifier(MOVESPEED_ID_VOID_CHILL, TRUE, override = TRUE, multiplicative_slowdown = 0.3 * stacks)
 	linked_alert.maptext = MAPTEXT_PIXELIFY("<span style='text-align:center'>[stacks]</span>")
 
 /datum/status_effect/void_chill/lasting

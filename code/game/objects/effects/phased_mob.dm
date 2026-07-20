@@ -11,6 +11,12 @@
 	var/movedelay = 0
 	/// The speed of movement while jaunted
 	var/movespeed = 0
+	/// Image we show to our jaunter so they can see where they are
+	var/image/position_indicator
+	/// Icon we draw our position indicator from
+	var/phased_mob_icon = 'icons/obj/projectiles.dmi'
+	/// Icon state we use for our position indicator
+	var/phased_mob_icon_state = "ice_1"
 
 /obj/effect/dummy/phased_mob/Initialize(mapload, atom/movable/jaunter)
 	. = ..()
@@ -21,13 +27,26 @@
 /obj/effect/dummy/phased_mob/proc/set_jaunter(atom/movable/new_jaunter)
 	jaunter = new_jaunter
 	jaunter.forceMove(src)
-	if(ismob(jaunter))
-		var/mob/mob_jaunter = jaunter
-		RegisterSignal(mob_jaunter, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
-		mob_jaunter.reset_perspective(src)
+	if(!ismob(jaunter))
+		return
+	var/mob/mob_jaunter = jaunter
+	position_indicator = image(phased_mob_icon, src, phased_mob_icon_state, ABOVE_LIGHTING_PLANE)
+	position_indicator.appearance_flags |= RESET_ALPHA
+	// SET_PLANE_EXPLICIT(position_indicator, ABOVE_LIGHTING_PLANE, src)
+	position_indicator.plane = ABOVE_LIGHTING_PLANE
+	RegisterSignal(mob_jaunter, COMSIG_MOB_LOGIN, PROC_REF(show_client_image))
+	RegisterSignal(mob_jaunter, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
+	mob_jaunter.reset_perspective(src)
+	show_client_image(mob_jaunter)
+
+/// Displays our position indicator to a client
+/obj/effect/dummy/phased_mob/proc/show_client_image(mob/show_to)
+	SIGNAL_HANDLER
+	show_to.client?.images |= position_indicator
 
 /obj/effect/dummy/phased_mob/Destroy()
 	jaunter = null // If a mob was left in the jaunter on qdel, they'll be dumped into nullspace
+	position_indicator = null
 	return ..()
 
 /// Removes [jaunter] from our phased mob
@@ -57,7 +76,7 @@
 /obj/effect/dummy/phased_mob/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(gone == jaunter)
-		UnregisterSignal(jaunter, COMSIG_MOB_STATCHANGE)
+		UnregisterSignal(jaunter, list(COMSIG_MOB_STATCHANGE, COMSIG_MOB_LOGIN))
 		SEND_SIGNAL(src, COMSIG_MOB_EJECTED_FROM_JAUNT, jaunter)
 		jaunter = null
 

@@ -94,7 +94,7 @@ Sunlight System
 	luminosity = GLOBAL_LIGHT_RANGE
 
 	for(var/turf/T in view(CEILING(GLOBAL_LIGHT_RANGE, 1), source_turf))
-		if(T.opacity) /* get_corners used to do opacity checks for arse */
+		if(IS_OPAQUE_TURF(T))
 			continue
 		if(!T.lighting_corners_initialised)
 			T.lighting_build_overlay()
@@ -147,7 +147,7 @@ Sunlight System
 
 //non-weatherproof turfs
 /turf/var/weatherproof = TRUE
-/turf/open/transparent/openspace/weatherproof = FALSE
+/turf/open/openspace/weatherproof = FALSE
 
 /datum/lighting_corner/var/list/sunlight_objects /* list of sunlight objects affecting this corner */
 /datum/lighting_corner/var/sunFalloff = 0 /* smallest distance to sunlight turf, for sunlight falloff */
@@ -229,16 +229,11 @@ Sunlight System
 			return FALSE
 	return TRUE
 
-// closed/transparent should be removed so we don't bother with an override for it, it's never used properly currently anyway
-/turf/closed/is_sky_visible()
-	return FALSE
-
 /// Does this turf allow the turf below to see the sky?
 /// Equivalent to is_sky_visible(recursionStarted = TRUE) in the old format.
 /turf/proc/is_sky_visible_through()
-	return FALSE
-
-/turf/open/transparent/is_sky_visible_through()
+	if(!istransparentturf(src))
+		return FALSE
 	for(var/obj/structure/thing in src)
 		if(thing.weatherproof)
 			return FALSE

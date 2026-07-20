@@ -35,7 +35,7 @@
 	if(werewolf_antag.transformed)
 		return FALSE
 	var/mob/living/carbon/human/human = owner
-	if(!human.rage_datum?.check_rage(text2num(WW_RAGE_MEDIUM)))
+	if(!human.rage_datum?.check_rage(WW_RAGE_MEDIUM))
 		return FALSE
 	return TRUE
 

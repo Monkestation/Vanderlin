@@ -16,7 +16,7 @@
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
-	brat_name = browser_input_text(owner, "Which one of those brats am I trying to call?", "Hag's Call")
+	brat_name = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(owner, "Which one of those brats am I trying to call?", "Hag's Call")))
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(!brat_name)

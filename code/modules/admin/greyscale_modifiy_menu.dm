@@ -15,7 +15,7 @@
 
 	refresh_preview()
 
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(ui_close))
+	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(ui_close))
 
 /datum/greyscale_modify_menu/Destroy()
 	target = null
@@ -51,10 +51,10 @@
 	switch(action)
 		if("recolor")
 			var/index = text2num(params["color_index"])
-			split_colors[index] = lowertext(params["new_color"])
+			split_colors[index] = LOWER_TEXT(params["new_color"])
 			refresh_preview()
 		if("recolor_from_string")
-			ReadColorsFromString(lowertext(params["color_string"]))
+			ReadColorsFromString(LOWER_TEXT(params["color_string"]))
 			refresh_preview()
 		if("pick_color")
 			var/group = params["color_index"]

@@ -104,7 +104,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter)
 "E" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter)
 "F" = (
 /turf/closed/wall/mineral/stonebrick{
@@ -158,7 +158,7 @@
 /area/indoors/shelter)
 "V" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter)
 "X" = (
 /obj/structure/chair/wood/alt{

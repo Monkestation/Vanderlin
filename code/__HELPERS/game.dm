@@ -107,8 +107,7 @@
 
 /proc/get_mob_by_key(key)
 	var/ckey = ckey(key)
-	for(var/i in GLOB.player_list)
-		var/mob/M = i
+	for(var/mob/M as anything in GLOB.player_list)
 		if(M.ckey == ckey)
 			return M
 	return null
@@ -185,20 +184,13 @@
 /area/flick_overlay_view(mutable_appearance/display, duration)
 	return
 
-/proc/flick_overlay_view(image/I, atom/target, duration) //wrapper for the above, flicks to everyone who can see the target atom
-	var/list/viewing = list()
-	for(var/mob/M as anything in viewers(target))
-		if(M.client)
-			viewing += M.client
-	flick_overlay(I, viewing, duration)
-
 /proc/get_active_player_count(alive_check = 0, afk_check = 0, human_check = 0)
 	// Get active players who are playing in the round
 	var/active_players = 0
 	for(var/i = 1; i <= GLOB.player_list.len; i++)
 		var/mob/M = GLOB.player_list[i]
 		if(M && M.client)
-			if(alive_check && M.stat)
+			if(alive_check && M.stat == DEAD)
 				continue
 			else if(afk_check && M.client.is_afk())
 				continue
@@ -220,7 +212,7 @@
 	if(flashwindow)
 		window_flash(M.client)
 	var/options = ignore_category ? list(CHOICE_YES, CHOICE_NO, CHOICE_NEVER) : DEFAULT_INPUT_CHOICES
-	switch(browser_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
+	switch(tgui_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options, timeout = poll_time))
 		if(CHOICE_YES)
 			to_chat(M, "<span class='notice'>Choice registered: Yes.</span>")
 			if(time_passed + poll_time <= world.time)
@@ -255,6 +247,24 @@
 
 	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
 
+
+/proc/pollGhostCandidatesWhitelisted(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, ignore_category = null, flashwindow = TRUE, new_players = FALSE, whitelist_type)
+	var/list/candidates = list()
+
+	for(var/mob/dead/observer/G in GLOB.player_list)
+		if(G.client.is_whitelisted(whitelist_type))
+			candidates += G
+	if(new_players)
+		for(var/mob/dead/new_player/G as anything in GLOB.new_player_list)
+			if(!G.client)
+				continue
+			if(!G.client.is_whitelisted(whitelist_type))
+				continue
+			candidates += G
+
+	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
+
+
 /proc/pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, ignore_category = null, flashwindow = TRUE, list/group = null)
 	var/time_passed = world.time
 	if (!Question)
@@ -262,6 +272,8 @@
 	var/list/result = list()
 	for(var/mob/M as anything in group)
 		if(!M.key || !M.client || (ignore_category && GLOB.poll_ignore[ignore_category] && (M.ckey in GLOB.poll_ignore[ignore_category])))
+			continue
+		if(jobbanType && is_banned_from(M.ckey, list(jobbanType)))
 			continue
 		if(be_special_flag)
 			if(!(M.client.prefs) || !(be_special_flag in M.client.prefs.be_special))
@@ -277,12 +289,18 @@
 		if(!M.key || !M.client)
 			result -= M
 
-	listclearnulls(result)
+	list_clear_nulls(result)
 
 	return result
 
 /proc/pollCandidatesForMob(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, mob/M, ignore_category = null, new_players = FALSE)
 	var/list/L = pollGhostCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, new_players = new_players)
+	if(!M || QDELETED(M) || !M.loc)
+		return list()
+	return L
+
+/proc/pollCandidatesForMobWhitelisted(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, mob/M, ignore_category = null, new_players = FALSE, whitelist_type)
+	var/list/L = pollGhostCandidatesWhitelisted(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, new_players = new_players, whitelist_type = whitelist_type)
 	if(!M || QDELETED(M) || !M.loc)
 		return list()
 	return L
@@ -303,7 +321,7 @@
 
 	//First we spawn a dude.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	SSjob.SendToBackupPoint(new_character)
 
 	G_found.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
@@ -321,7 +339,7 @@
 		var/mob/M = C
 		if(M.client)
 			C = M.client
-	if(!C || (!C.prefs.windowflashing && !ignorepref))
+	if(!C || (!C.prefs.read_preference(/datum/preference/toggle/windowflashing) && !ignorepref))
 		return
 
 //Recursively checks if an item is inside a given type, even through layers of storage. Returns the atom if it finds it.
@@ -361,7 +379,7 @@
 			if (!istype(turf_area, specific_area))
 				continue
 
-		if (!is_blocked_turf(found_turf))
+		if (!found_turf.is_blocked_turf())
 			possible_loc.Add(found_turf)
 
 	// Need at least one free location.

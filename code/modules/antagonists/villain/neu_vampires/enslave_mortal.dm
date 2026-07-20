@@ -136,4 +136,3 @@
 
 /datum/action/cooldown/spell/enslave_mortal/proc/create_enslavement_effects(mob/living/carbon/human/vampire, mob/living/carbon/human/target)
 	make_tracker_effects(vampire.loc, vampire, 1, "soul", 3, /obj/effect/tracker/drain, 3)
-	// make_tracker_effects(target.loc, target, 1, "soul", 3, /obj/effect/tracker/drain, 3)

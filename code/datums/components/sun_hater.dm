@@ -22,7 +22,7 @@
 		return
 
 	// Only check during day
-	if(GLOB.tod != "day")
+	if(GLOB.tod != DAY)
 		in_sunlight = FALSE
 		return
 

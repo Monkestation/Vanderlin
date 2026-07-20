@@ -1,5 +1,26 @@
+/datum/attribute_holder/sheet/job/grabber
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/firearms = 10,
+		/datum/attribute/skill/combat/crossbows = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/swimming = 40,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/labor/mathematics = 10
+	)
+
 /datum/job/grabber
-	title = "Stevedore"
+	title = JOB_STEVEDORE
 	tutorial = "A stevedore is the lowest yet essential position in the Merchant's employment, reserved for the strong and loyal. \
 	You are responsible for hauling materials and goods to-and-fro the docks and warehouses, protecting their transportation from conniving thieves. \
 	Keep your eye out for the security of the Merchant, and they will surely treat you like family."
@@ -17,45 +38,16 @@
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
+	can_be_apprentice = TRUE
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 1,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/firearms = 1,
-		/datum/skill/combat/crossbows = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/swimming = 4,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/labor/mathematics = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/grabber
 
 	traits = list(
 		TRAIT_CRATEMOVER
 	)
 
-/datum/job/grabber/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.gender == MALE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
-	else
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, 1)
-
 /datum/outfit/grabber
-	name = "Stevedore"
+	name = JOB_STEVEDORE
 	backr = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/fingerless

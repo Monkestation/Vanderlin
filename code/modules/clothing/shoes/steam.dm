@@ -8,9 +8,9 @@
 	sleeved =  'icons/roguetown/clothing/onmob/steamknight_onmob.dmi'
 	sleevetype = "steamknight_boots"
 
-	anvilrepair = /datum/skill/craft/engineering
+	anvilrepair = /datum/attribute/skill/craft/engineering
 	slowdown = 1.5
-	item_weight = 6 * BRONZE_MULTIPLIER
+	item_weight = 6 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/armor/steam/dropped(mob/living/carbon/user)
 	// Locate the boiler in the back slots

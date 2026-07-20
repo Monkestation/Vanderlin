@@ -621,7 +621,7 @@
 /obj/effect/meatvine_controller/proc/can_spread_to(turf/T)
 	if(!T)
 		return FALSE
-	if(istype(T, /turf/open/transparent/openspace))
+	if(istype(T, /turf/open/openspace))
 		return FALSE
 	if(istype(T, /turf/open/water))
 		return FALSE

@@ -9,6 +9,28 @@
 	finished_smell = /datum/pollutant/food/egg_soup
 	crafting_time = 40 SECONDS
 
+/datum/container_craft/cooking/tamto_soup
+	name = "Tamto Soup"
+	created_reagent = /datum/reagent/consumable/soup/veggie/tamto
+	requirements = list(/obj/item/reagent_containers/food/snacks/fruit/tamto_slice = 1)
+	max_optionals = 2
+	optional_wildcard_requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 2
+	)
+	finished_smell = /datum/pollutant/food/tamto_soup
+	crafting_time = 40 SECONDS
+
+/datum/container_craft/cooking/pompkaun_soup
+	name ="Pompkaun Soup"
+	created_reagent = /datum/reagent/consumable/soup/veggie/pompkaun
+	requirements = list(/obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo = 1)
+	max_optionals = 2
+	optional_wildcard_requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/vegetable = 2
+	)
+	finished_smell = /datum/pollutant/food/pompkaun_soup
+	crafting_time = 40 SECONDS
+
 /datum/container_craft/cooking/cheese_soup
 	name = "Cheese Soup"
 	created_reagent = /datum/reagent/consumable/soup/cheese
@@ -22,3 +44,17 @@
 
 /datum/container_craft/cooking/cheese_soup/wedge
 	requirements = list(/obj/item/reagent_containers/food/snacks/cheese_wedge = 1)
+
+/datum/container_craft/cooking/bone_broth
+	name = "Bone Broth"
+	created_reagent = /datum/reagent/consumable/soup/bone
+	requirements = list(/obj/item/alch/sinew = 1)
+	max_optionals = 2
+	optional_wildcard_requirements = list(
+		/obj/item/alch/bone = 2
+	)
+	finished_smell = /datum/pollutant/food/bone_broth
+	crafting_time = 40 SECONDS
+
+/datum/container_craft/cooking/bone_broth/real_bone
+    requirements = list(/obj/item/alch/bone = 1)

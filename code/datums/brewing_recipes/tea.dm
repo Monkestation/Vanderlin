@@ -7,6 +7,7 @@
 	brew_time = 2 MINUTES
 	sell_value = 40
 	heat_required = 320
+	brewing_skill = /datum/attribute/skill/craft/cooking/fine_cuisine
 
 /datum/brewing_recipe/soothing_valerian_tea
 	name = "Soothing Valerian Tea"
@@ -17,3 +18,4 @@
 	brew_time = 2 MINUTES
 	sell_value = 35
 	heat_required = 310
+	brewing_skill = /datum/attribute/skill/craft/cooking/fine_cuisine

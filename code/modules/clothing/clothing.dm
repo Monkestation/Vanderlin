@@ -79,6 +79,9 @@
 	var/proper_drying = FALSE
 	COOLDOWN_DECLARE(wet_stress_cd)
 
+	/// Defines for damage sounds, see [_DEFINES/clothing] and [pick_damage_sound]
+	var/material_category = ARMOR_MAT_FABRIC
+
 /obj/item/clothing/Initialize()
 	. = ..()
 	if(ispath(pocket_storage_component_path))
@@ -89,12 +92,8 @@
 	if(hoodtype)
 		MakeHood()
 
-
-/obj/item/clothing/Initialize(mapload, ...)
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
 	if(wetable)
 		wet = new(src)
-	return ..()
 
 /obj/item/clothing/Destroy()
 	user_vars_remembered = null //Oh god somebody put REFERENCES in here? not to worry, we'll clean it up
@@ -114,15 +113,24 @@
 /obj/item/clothing/get_inspect_entries(list/inspect_list)
 	. = ..()
 
+	if(armor)
+		. += "\n<u><b>DEFENSE:</b></u>\n"
+		var/list/defense_strings = list()
+		for(var/damage_key in ARMOR_LIST_DAMAGE())
+			var/rating = armor.get_rating(damage_key)
+			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
+		. += defense_strings.Join(" | ")
+
 	if(length(prevent_crits))
-		. += "\n<b>DEFENSE:</b>"
-		for(var/X in prevent_crits)
-			. += "\n<b>[X] damage</b>"
+		. += "\n<u><b>PREVENT CRITS:</b></u>\n"
+		. += prevent_crits.Join(" | ")
 
 	if(body_parts_covered)
-		. += "\n<b>COVERAGE:</b>"
-		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
-			. += "\n<b>[parse_zone(zone)]</b>"
+		. += "\n<u><b>COVERAGE:</b></u>\n"
+		var/list/parsed_zones = list()
+		for(var/zone in cover_flags2body_zones(body_parts_covered))
+			parsed_zones += "[parse_zone(zone)]"
+		. += parsed_zones.Join(" | ")
 
 	switch(armor_class)
 		if(AC_HEAVY)
@@ -139,29 +147,21 @@
 			. += span_notice("It has one torn sleeve.")
 		else
 			. += span_notice("Both its sleeves have been torn!")
+
 	if(wet)
-		var/list/t = wet.get_examine_text()
-		if(t)
-			for(var/line in t)
-				. += line
+		for(var/line in wet.get_examine_text())
+			. += line
+
 	if(proper_drying)
-		desc += span_notice("\n This was properly washed and dried off, it smells good!")
+		. += span_notice("This was properly washed and dried off, it smells good!")
 
-
-
-
-/obj/item/clothing/MiddleClick(mob/user, params)
+/obj/item/clothing/MiddleClick(mob/living/user, list/modifiers)
 	..()
-	var/mob/living/L = user
-	var/altheld //Is the user pressing alt?
-	var/list/modifiers = params2list(params)
-	if(LAZYACCESS(modifiers, ALT_CLICKED))
-		altheld = TRUE
-	if(!isliving(user))
+	if(!istype(user))
 		return
 	if(nodismemsleeves)
 		return
-	if(altheld)
+	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		if(user.zone_selected == l_sleeve_zone)
 			if(l_sleeve_status == SLEEVE_ROLLED)
 				l_sleeve_status = SLEEVE_NORMAL
@@ -199,7 +199,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				r_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -226,7 +226,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				l_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -245,27 +245,37 @@
 			else
 				user.visible_message(span_warning("[user] tries to tear [src]."))
 				return
-	if(loc == L)
-		L.regenerate_clothes()
+	if(loc == user)
+		user.regenerate_clothes()
 
-
-/obj/item/clothing/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
-	if(slot_flags & slot)
-		if(M.gender in allowed_sex)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.dna)
-					if(!(H.age in allowed_ages))
-						return FALSE
-					if(H.dna.species.id in allowed_race)
-						return TRUE
-					else
-						return FALSE
-			return TRUE
-		else
-			return FALSE
+
+	if(!(slot_flags & slot))
+		return FALSE
+
+	if(!(M.gender in allowed_sex))
+		return FALSE
+
+	if(!ishuman(M))
+		return FALSE
+
+	var/mob/living/carbon/human/H = M
+
+	if(!(H.age in allowed_ages))
+		return FALSE
+
+	var/datum/species/species = H.dna?.species
+	if(!species)
+		return FALSE
+
+	var/used_species_id = species.id_override ? species.id_override : species.id
+
+	if(!(used_species_id in allowed_race))
+		return FALSE
+
+	return TRUE
 
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)
@@ -298,18 +308,20 @@
 			return TRUE
 	return FALSE
 
-/obj/item/clothing/attack(mob/living/M, mob/living/user, def_zone)
-	if(M.on_fire)
-		if(user == M)
-			return
-		user.changeNext_move(CLICK_CD_MELEE)
-		M.visible_message(span_warning("[user] pats out the flames on [M] with [src]!"))
-		M.adjust_divine_fire_stacks(-2)
-		if(M.fire_stacks > 0)
-			M.adjust_fire_stacks(-2)
-		take_damage(10, BURN, "fire")
-	else
+/obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
+	if(!M.on_fire)
 		return ..()
+
+	if(user == M)
+		return
+
+	user.changeNext_move(CLICK_CD_MELEE)
+	M.visible_message(span_warning("[user] pats out the flames on [M] with [src]!"))
+	M.adjust_divine_fire_stacks(-2)
+	if(M.fire_stacks > 0)
+		M.adjust_fire_stacks(-2)
+
+	take_damage(10, BURN, "fire")
 
 /obj/item/clothing/dropped(mob/user)
 	..()
@@ -440,17 +452,16 @@ BLIND     // can't see anything
 		dismembered = fcopy_rsc(dismembered)
 		GLOB.dismembered_clothing_icons[index] = dismembered
 
-/obj/item/clothing/pants/AltClick(mob/user)
+/obj/item/clothing/pants/AltClick(mob/user, list/modifiers)
 	if(..())
 		return 1
 
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
+	else if(attached_accessory)
+		remove_accessory(user)
 	else
-		if(attached_accessory)
-			remove_accessory(user)
-		else
-			rolldown()
+		rolldown()
 
 /obj/item/clothing/atom_destruction(damage_flag)
 	if(damage_flag in list("acid", "fire"))
@@ -471,7 +482,7 @@ BLIND     // can't see anything
 		W.connectedc = src
 		hood = W
 
-/obj/item/clothing/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/attack_hand_secondary(mob/user, list/modifiers)
 	if(hoodtype && (loc == user))
 		ToggleHood()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -491,7 +502,6 @@ BLIND     // can't see anything
 	flags_cover = initial(flags_cover)
 	block2add = initial(block2add)
 	body_parts_covered = initial(body_parts_covered)
-	prevent_crits = initial(prevent_crits)
 	gas_transfer_coefficient = initial(gas_transfer_coefficient)
 
 /obj/item/clothing/equipped(mob/living/carbon/user, slot)
@@ -557,14 +567,14 @@ BLIND     // can't see anything
 	if(proper_drying && !C.has_stress_type(/datum/stress_event/washed_cloth))
 		C.add_stress(/datum/stress_event/washed_cloth)
 		proper_drying = FALSE
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+		qdel(GetComponent(/datum/component/particle_spewer/sparkle))
 
 	if(wet.use_water(0.7))
-		if(HAS_TRAIT(C, TRAIT_NOBLE) && wet.water_stacks == 0)
+		if(HAS_TRAIT(C, TRAIT_NOBLE_BLOOD) && wet.water_stacks == 0)
 			C.add_stress(/datum/stress_event/noble_tarnished_cloth)
 
+		if(wet.dirty_water)
+			C.adjust_germ_level_directed(0.5 * wet.water_stacks, body_zone = slot2body_zone(slot_flags))
 		if(C.mind?.assigned_role == /datum/job/farmer || C.mind?.assigned_role == /datum/job/soilchild || HAS_TRAIT(C, TRAIT_LEECHIMMUNE) || istriton(C))
 			return
 
@@ -573,3 +583,62 @@ BLIND     // can't see anything
 			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
 			C.add_stress(/datum/stress_event/wet_cloth)
 
+/obj/item/clothing/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
+	. = ..()
+	if(!. || !ismob(loc))
+		return
+
+	var/damage_dealt = .
+
+	var/max_int = max_integrity - (max_integrity * integrity_failure)
+	var/cur_int = max(atom_integrity - (max_integrity * integrity_failure), 0)
+	var/old_int = min(damage_dealt + cur_int, max_integrity)
+
+	var/ratio = cur_int / max_int
+	var/ratio_old = old_int / max_int
+
+	var/text
+	var/sound
+
+	if(ratio <= 0.75 && ratio_old > 0.75)
+		text = "Armor <br><font color = '#8aaa4d'>marred</font>"
+		sound = pick_damage_sound(1)
+	if(ratio <= 0.5 && ratio_old > 0.5)
+		text = "Armor <br><font color = '#d4d36c'>damaged</font>"
+		sound = pick_damage_sound(2)
+	if(ratio <= 0.25 && ratio_old > 0.25)
+		text = "Armor <br><font color = '#a8705a'>sundered</font>"
+		sound = pick_damage_sound(3)
+
+	if(sound)
+		playsound(src, sound, 100, TRUE)
+
+	if(text)
+		balloon_alert_to_viewers(text, balloon_flag = DISABLE_BALLOON_COMBAT)
+
+/obj/item/clothing/proc/pick_damage_sound(tier)
+	switch(material_category)
+		if(ARMOR_MAT_PLATE)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_plate1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_plate2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_plate3.ogg'
+		if(ARMOR_MAT_CHAINMAIL)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_chain1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_chain2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_chain3.ogg'
+		if(ARMOR_MAT_FABRIC)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_leather1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_leather2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_leather3.ogg'

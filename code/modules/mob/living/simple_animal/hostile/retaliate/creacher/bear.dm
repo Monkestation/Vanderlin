@@ -1,7 +1,7 @@
 /datum/status_effect/debuff/staggered
 	id = "staggered"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/staggered
-	effectedstats = list(STATKEY_PER = -2, STATKEY_SPD = -2, STATKEY_CON = -2)
+	effectedstats = list(STAT_PERCEPTION = -2, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
 	duration = 10 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/staggered
@@ -92,8 +92,8 @@
 									/obj/item/natural/head/direbear = 1)
 	faction = list("bears")		//This mf will kill undead - swapped to its own faction, doesn't trigger ambushes
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
-	melee_damage_lower = 50		// Ey, bo-bo!
-	melee_damage_upper = 60		// We're gonna take his pick-in-ick basket!
+	melee_damage_lower = 50		// Ey, Boo-Boo!
+	melee_damage_upper = 60		// We're gonna take his pic-a-ic basket!
 	vision_range = 6
 	aggro_vision_range = 8
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES // silly furniture won't stop our boy
@@ -106,6 +106,8 @@
 				/obj/item/organ, 		//Woe be upon ye
 				/obj/effect/decal/remains,
 				)
+	tame_chance = 15 // taken from mole
+	bonus_tame_chance = 15 // likewise taken from mole
 	base_constitution = 12
 	base_strength= 13
 	base_speed = 9
@@ -116,13 +118,36 @@
 	remains_type = /obj/effect/decal/remains/bear
 	attack_sound = list('sound/vo/mobs/direbear/direbear_attack1.wav','sound/vo/mobs/direbear/direbear_attack2.wav','sound/vo/mobs/direbear/direbear_attack3.wav')
 	dodgetime = 30
-	aggressive = 1
 	stat_attack = UNCONSCIOUS	//You falling unconcious won't save you, little one..
 	ai_controller = /datum/ai_controller/direbear
+	var/static/list/pet_commands = list( // list taken from hound, because sounds about right, and also bears fish!
+		/datum/pet_command/fish,
+		/datum/pet_command/idle,
+		/datum/pet_command/free,
+		/datum/pet_command/good_boy,
+		/datum/pet_command/follow,
+		/datum/pet_command/attack,
+		/datum/pet_command/fetch,
+		/datum/pet_command/play_dead,
+		/datum/pet_command/protect_owner,
+		/datum/pet_command/aggressive,
+		/datum/pet_command/calm,
+	)
+	can_buckle = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/direbear/Initialize(mapload)
+
+
+/mob/living/simple_animal/hostile/retaliate/direbear/Initialize()
+	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands, apparently?
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
+
+/mob/living/simple_animal/hostile/retaliate/direbear/tamed(mob/user)
+	. = ..()
+	if(.) // was already tamed
+		return
+	if(can_buckle)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/direbear)
 
 /mob/living/simple_animal/hostile/retaliate/direbear/get_sound(input)
 	switch(input)

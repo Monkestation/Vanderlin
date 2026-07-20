@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	/datum/job/archivist::title,
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
+	/datum/job/sunlord::title,
 ))
 GLOBAL_PROTECT(noble_positions)
 
@@ -23,31 +24,53 @@ GLOBAL_LIST_INIT(noble_courthand_positions, list(
 	/datum/job/archivist::title,
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
-	/datum/job/adventurer/courtagent::title,
+	/datum/job/courtagent::title,
+	/datum/job/sunlord::title,
 ))
-GLOBAL_PROTECT(noble_positions)
+GLOBAL_PROTECT(noble_courthand_positions)
 
 GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/royalknight::title,
-	/datum/job/veteran::title,
 	/datum/job/guardsman::title,
 	/datum/job/lieutenant::title,
 	/datum/job/men_at_arms::title,
 	/datum/job/gatemaster::title,
-	/datum/job/jailor::title,
 	/datum/job/dungeoneer::title,
 	/datum/job/town_elder::title,
-	/datum/job/forestwarden::title,
-	/datum/job/forestguard::title,
+	/datum/job/forestwarden_classic::title,
+	/datum/job/forestguard_classic::title,
 	/datum/job/persistence/caravanguard::title,
 	))
 GLOBAL_PROTECT(garrison_positions)
 
+GLOBAL_LIST_INIT(garrison_no_rebellion, list(
+	/datum/job/royalknight::title,
+	/datum/job/men_at_arms::title,
+	/datum/job/lieutenant::title,
+	/datum/job/gatemaster::title,
+	/datum/job/forestwarden::title,
+	/datum/job/forestenforcer::title,
+))
+GLOBAL_PROTECT(garrison_no_rebellion)
+
+GLOBAL_LIST_INIT(gallowband_positions, list(
+	/datum/job/forestwarden::title,
+	/datum/job/forestenforcer::title,
+	/datum/job/forestpreacher::title,
+	/datum/job/forestsupport::title,
+	/datum/job/forestguard::title,
+	/datum/job/bogwitch::title,
+	/datum/job/bog_apprentice::title,
+))
+GLOBAL_PROTECT(gallowband_positions)
+
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
+	/datum/job/gmtemplar::title,
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
+	/datum/job/sundweller::title,
 	))
 GLOBAL_PROTECT(church_positions)
 
@@ -63,16 +86,14 @@ GLOBAL_PROTECT(inquisition_positions)
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
-	/datum/job/armorsmith::title,
-	/datum/job/weaponsmith::title,
+	/datum/job/blacksmith::title,
 	/datum/job/tailor::title,
 	/datum/job/alchemist::title,
 	/datum/job/artificer::title,
 	/datum/job/matron::title,
 	/datum/job/feldsher::title,
 	/datum/job/apothecary::title,
-	/datum/job/scribe::title,
-	/datum/job/gaffer::title,
+	/datum/job/tomb_warden::title,
 	/datum/job/butler::title,
 	/datum/job/persistence/carpenter::title,
 	/datum/job/persistence/stonemason::title,
@@ -92,6 +113,7 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	/datum/job/bard::title,
 	/datum/job/prisoner::title,
 	/datum/job/vagrant::title,
+	/datum/job/sweeper::title,
 	/datum/job/persistence/woodsman::title,
 	/datum/job/persistence/miner::title,
 	/datum/job/persistence/farmer::title,
@@ -104,7 +126,6 @@ GLOBAL_LIST_INIT(apprentices_positions, list(
 	/datum/job/mageapprentice::title,
 	/datum/job/servant::title,
 	/datum/job/tapster::title,
-	/datum/job/gaffer_assistant::title,
 	/datum/job/clinicapprentice::title,
 	))
 GLOBAL_PROTECT(apprentices_positions)
@@ -129,11 +150,10 @@ GLOBAL_LIST_INIT(allmig_positions, list(
 	/datum/job/adventurer::title,
 	/datum/job/mercenary::title,
 	/datum/job/bandit::title,
-	/datum/job/wretch::title,
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(
-	"Adventurer",
+	JOB_ADVENTURER,
 	))
 
 GLOBAL_LIST_INIT(test_positions, list(
@@ -144,8 +164,9 @@ GLOBAL_LIST_EMPTY(job_assignment_order)
 
 /proc/get_job_assignment_order()
 	var/list/sorting_order = list()
-	sorting_order += GLOB.noble_positions
+	sorting_order += GLOB.noble_courthand_positions
 	sorting_order += GLOB.garrison_positions
+	sorting_order += GLOB.gallowband_positions
 	sorting_order += GLOB.church_positions
 	sorting_order += GLOB.inquisition_positions
 	sorting_order += GLOB.serf_positions

@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(fire_burning)
 		if(O.resistance_flags & ON_FIRE) //in case an object is extinguished while still in currentrun
 			if(!(O.resistance_flags & FIRE_PROOF) && !is_wet)
 				// Minimum of 8 burn per tick. Config for max fire damage per tick found in game_options.
-				O.take_damage((2 * fire_multiplier) + CLAMP(fire_intensity, 0, max_fire_damage_per_tick), BURN, "fire", 0)
+				O.take_damage((2 * fire_multiplier) + CLAMP(fire_intensity, 0, max_fire_damage_per_tick), BURN, FIRE, 0)
 			else
 				O.extinguish()
 			if(!O.fire_burn_start)

@@ -54,7 +54,7 @@
 /turf/open/water/sewer,
 /area/under/tomb/sewer)
 "aA" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/sewer)
 "aF" = (
 /obj/effect/dungeon_directional_helper/south,

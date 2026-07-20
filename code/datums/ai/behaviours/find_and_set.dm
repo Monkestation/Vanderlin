@@ -180,14 +180,14 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 	if(!ishuman(checking))
 		return FALSE
 	var/mob/living/living_pawn = pawn
-	return living_pawn.faction.Find(REF(checking)) ? TRUE : FALSE
+	return living_pawn.has_ally(checking) ? TRUE : FALSE
 
 /datum/ai_behavior/find_and_set/nearby_friends/search_tactic(datum/ai_controller/controller, locate_path, search_range)
 	var/atom/friend = locate(/mob/living/carbon/human) in oview(search_range, controller.pawn)
 	if(isnull(friend))
 		return null
 	var/mob/living/living_pawn = controller.pawn
-	var/potential_friend = living_pawn.faction.Find(REF(friend)) ? friend : null
+	var/potential_friend = living_pawn.has_ally(friend) ? friend : null
 	return potential_friend
 
 /datum/ai_behavior/find_and_set/in_list/turf_types
@@ -598,7 +598,7 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 		var/datum/proximity_monitor/field = controller.blackboard[BB_FIND_TARGETS_FIELD(type)]
 		qdel(field) // autoclears so it's fine
 		controller.CancelActions()
-		controller.modify_cooldown(src, get_cooldown(controller))
+		controller.modify_cooldown(src, world.time + get_cooldown(controller))
 
 /**
  * Proximity monitor for find_and_set tracking

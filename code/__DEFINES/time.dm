@@ -22,6 +22,11 @@
 #define CHRISTMAS				"Christmas"
 #define FESTIVE_SEASON			"Festive Season"
 
+#define NIGHT	"night"
+#define DAWN	"dawn"
+#define DAY		"day"
+#define DUSK	"dusk"
+
 /*
 
 Days of the week to make it easier to reference them.

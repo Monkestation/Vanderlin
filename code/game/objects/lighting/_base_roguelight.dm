@@ -2,12 +2,11 @@
 	icon = 'icons/roguetown/misc/lighting.dmi'
 	brightness = 8
 	nightshift_allowed = FALSE
-	fueluse = 60 MINUTES
+	var/fueluse = 60 MINUTES
 	bulb_colour = "#f9ad80"
 	bulb_power = 1
 	var/datum/looping_sound/soundloop = null // = /datum/looping_sound/fireloop
 	pass_flags_self = LETPASSTHROW
-	flags_1 = NODECONSTRUCT_1
 	var/cookonme = FALSE
 	var/crossfire = TRUE
 	var/can_damage = FALSE
@@ -48,7 +47,7 @@
 	. = ..()
 	if(Adjacent(user))
 		if(fueluse > 0)
-			var/minsleft = fueluse / 600
+			var/minsleft = fueluse / (1 MINUTES)
 			minsleft = round(minsleft)
 			if(minsleft <= 1)
 				minsleft = "less than a minute"
@@ -110,7 +109,7 @@
 /obj/machinery/light/fueled/spark_act()
 	fire_act()
 
-/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(cookonme)
 		if(istype(W, /obj/item/reagent_containers/food/snacks))
 			if(istype(W, /obj/item/reagent_containers/food/snacks/egg))
@@ -125,14 +124,14 @@
 						break
 				if(foundstab)
 					var/prob2spoil = 33
-					if(user.get_skill_level(/datum/skill/craft/cooking))
+					if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))
 						prob2spoil = 1
 
 					// Check for container craft recipes first
 					var/list/possible_recipes = list()
 					for(var/recipe_type in subtypesof(/datum/container_craft/pan))
 						var/datum/container_craft/recipe = new recipe_type
-						if(recipe.used_skill != /datum/skill/craft/cooking)
+						if(!ispath(recipe.used_skill, /datum/attribute/skill/craft/cooking))
 							continue // Only want cooking recipes
 
 						// Check if our food item matches any recipe requirement
@@ -177,22 +176,22 @@
 							if(prob(prob2spoil))
 								var/obj/item/reagent_containers/food/snacks/S = W
 								user.visible_message("<span class='warning'>[user] burns [S].</span>")
-								if(user.client?.prefs.showrolls)
+								if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 									to_chat(user, "<span class='warning'>Critfail... [prob2spoil]%.</span>")
 								result = S.cooking(1000, null)
 							else if(chosen_recipe.output)
 								result = new chosen_recipe.output(get_turf(user))
 
-								if(istype(result, /obj/item/reagent_containers/food/snacks))
-									var/obj/item/reagent_containers/food/snacks/food_result = result
-									var/skill_modifier = 1.0
-									var/skill_level = user.get_skill_level(chosen_recipe.used_skill)
+								// if(istype(result, /obj/item/reagent_containers/food/snacks))
+								// 	var/obj/item/reagent_containers/food/snacks/food_result = result
+								// 	var/skill_modifier = 1.0
+								// 	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, chosen_recipe.used_skill)
 
-									if(skill_level)
-										skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
+								// 	if(skill_level)
+								// 		skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
 
-									// Apply the recipe's quality modifier alongside skill
-									food_result.quality = food_result.quality * skill_modifier * chosen_recipe.quality_modifier
+								// 	// Apply the recipe's quality modifier alongside skill
+								// 	food_result.quality = food_result.quality * skill_modifier * chosen_recipe.quality_modifier
 
 								user.dropItemToGround(W, TRUE)
 								qdel(W)
@@ -212,7 +211,7 @@
 							var/obj/item/C
 							if(prob(prob2spoil))
 								user.visible_message("<span class='warning'>[user] burns [S].</span>")
-								if(user.client?.prefs.showrolls)
+								if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 									to_chat(user, "<span class='warning'>Critfail... [prob2spoil]%.</span>")
 								C = S.cooking(1000, null)
 							else
@@ -229,17 +228,17 @@
 	if(W.firefuel)
 		if(initial(fueluse))
 			if(fueluse > initial(fueluse) - 5 SECONDS)
-				to_chat(user, "<span class='warning'>[src] is fully fueled.</span>")
+				to_chat(user, span_warning("[src] is fully fueled."))
 				return
 		else
 			if(!on)
 				return
-		if (alert(usr, "Feed [W] to the fire?", "VANDERLIN", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Feed [W] to the fire?", "VANDERLIN", list("Yes", "No")) != "Yes")
 			return
 		if(!(W in user.held_items)|| !user.temporarilyRemoveItemFromInventory(W))
 			return
 		qdel(W)
-		user.visible_message("<span class='warning'>[user] feeds [W] to [src].</span>")
+		user.visible_message(span_warning("[user] feeds [W] to [src]."))
 		if(initial(fueluse))
 			fueluse = fueluse + W.firefuel
 			if(fueluse > initial(fueluse)) //keep it at the max
@@ -247,7 +246,7 @@
 		return
 	else
 		if(on)
-			if(istype(W, /obj/item/natural/dirtclod))
+			if(istype(W, /obj/item/natural/clod))
 				if(!user.temporarilyRemoveItemFromInventory(W))
 					return
 				on = FALSE
@@ -264,3 +263,17 @@
 	if(!can_damage)
 		return
 	. = ..()
+
+/obj/machinery/light/fueled/process(delta_time)
+	. = ..()
+	if(on)
+		if(initial(fueluse) > 0)
+			if(fueluse > 0)
+				fueluse = max(fueluse - 1 SECONDS * delta_time, 0)
+			if(fueluse == 0)
+				burn_out()
+		if(length(contents)) // burn kobolds in ovens and smelters
+			for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+				holder.held_mob?.adjust_fire_stacks(5)
+				holder.held_mob?.IgniteMob()
+				holder.update_appearance()

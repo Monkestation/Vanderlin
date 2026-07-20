@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
+GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 
 /obj/item/reagent_containers/glass/bottle
 	name = "bottle"
@@ -52,43 +52,48 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(desc != initial(desc))
 		fancy = initial(fancy)
 
-/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/paper/scroll))
-		if(reagents?.total_volume)
-			to_chat(user, span_notice("I cannot put a message in [src] while it is full!"))
-			return
-		if(closed)
-			to_chat(user, span_notice("I cannot put a message in [src] while it is closed!"))
-			return
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			var/obj/item/paper/scroll/P = I
-			var/obj/item/bottlemessage/BM = new
-			BM.icon_state = "[icon_state]_message"
+/obj/item/reagent_containers/glass/bottle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return ..()
 
-			P.forceMove(BM)
-			BM.contained = P
-			H.put_in_active_hand(BM)
-			playsound(src, 'sound/items/scroll_open.ogg', 100, FALSE)
-			qdel(src)
+	if(reagents?.total_volume)
+		balloon_alert(user, "it's full!")
 		return
-	return ..()
+
+	if(closed)
+		balloon_alert(user, "it's closed!")
+		return
+
+	playsound(src, 'sound/items/scroll_open.ogg', 100, FALSE)
+
+	var/obj/item/paper/scroll/scroll = tool
+	var/obj/item/bottlemessage/BM = new(get_turf(src))
+	BM.icon_state = "[icon_state]_message"
+	BM.contained = scroll
+
+	scroll.forceMove(BM)
+	user.put_in_hands(BM)
+
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/glass/bottle/update_overlays()
 	. = ..()
 	if(closed)
 		. += "[icon_state]cork"
 
-/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	toggle_cork(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user)
+/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user, modify_nextmove = TRUE)
 	closed = !closed
-	user.changeNext_move(CLICK_CD_RAPID)
+	if(modify_nextmove)
+		user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
@@ -154,8 +159,8 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	list_reagents = list(/datum/reagent/toxin/acid = 30)
 
 /obj/item/reagent_containers/glass/bottle/welding_fuel
-	name = "naphta bottle"
-	list_reagents = list(/datum/reagent/fuel = 30)
+	name = "oil bottle"
+	list_reagents = list(/datum/reagent/blood/fuel = 30)
 
 // message in a bootl
 
@@ -174,7 +179,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	contained = pp
 	pp.info = pick(GLOB.wisdoms)
 
-/obj/item/bottlemessage/attack_self_secondary(mob/user, params)
+/obj/item/bottlemessage/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -220,7 +225,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	icon_state = "clear_vial1"
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
@@ -250,3 +255,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	. = ..()
 	icon_state = "blackbottle"
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	name = "pot of cheese soup"
+	list_reagents = list(/datum/reagent/consumable/soup/cheese = 75)

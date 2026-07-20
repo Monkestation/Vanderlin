@@ -1,5 +1,5 @@
 /datum/artificer_recipe
-	appro_skill = /datum/skill/craft/engineering
+	appro_skill = /datum/attribute/skill/craft/engineering
 
 // --------- GENERAL -----------
 
@@ -61,6 +61,7 @@
 /datum/artificer_recipe/general/locks
 	name = "5x Custom Locks"
 	required_item = /obj/item/ingot/bronze
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/customlock
 	hammers_per_item = 5
 	craftdiff = 1
@@ -69,6 +70,7 @@
 /datum/artificer_recipe/general/keys
 	name = "5x Blank Custom Keys"
 	required_item = /obj/item/ingot/bronze
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/key/custom
 	hammers_per_item = 5
 	craftdiff = 1
@@ -114,6 +116,7 @@
 	name = "3x Lockpicks"
 	required_item = /obj/item/ingot/iron
 	created_item = /obj/item/lockpick
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	hammers_per_item = 5
 	created_amount = 3
 	craftdiff = 2
@@ -122,6 +125,7 @@
 	name = "Lockpick ring"
 	required_item = /obj/item/ingot/iron
 	created_item = /obj/item/lockpickring
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	hammers_per_item = 5
 	craftdiff = 2
 
@@ -142,7 +146,7 @@
 /datum/artificer_recipe/weapons/crossbow
 	name = "Crossbow (+1 Steel) (+2 Fibers)"
 	required_item = /obj/item/natural/wood/plank
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	created_item = /obj/item/gun/ballistic/bow/cross
 	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/natural/fibers = 2)
 	hammers_per_item = 7
 	craftdiff = 4
@@ -158,7 +162,7 @@
 /datum/artificer_recipe/weapons/airgun
 	name = "Airgun (+2 Cured Leather) (+3 Bronze) (+4 Metal Gear)"
 	required_item = /obj/item/ingot/steel
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/airgun
+	created_item = /obj/item/gun/ballistic/airgun
 	additional_items = list(/obj/item/natural/hide/cured = 2, /obj/item/ingot/bronze = 3, /obj/item/gear/metal = 4)
 	hammers_per_item = 10
 	craftdiff = 5
@@ -227,7 +231,7 @@
 /datum/artificer_recipe/contraptions/advanced_ingot_mold
 	name = "Advanced Ingot Mold (+1 Ingot Mold) (+1 Metal Gear) (+1 Bucket)"
 	required_item = /obj/item/ingot/bronze
-	additional_items = list(/obj/item/mould/ingot = 1, /obj/item/gear/metal = 1, /obj/item/reagent_containers/glass/bucket/wooden = 1)
+	additional_items = list(/obj/item/mould/ingot = 1, /obj/item/gear/metal = 1, /obj/item/reagent_containers/glass/bucket = 1)
 	created_item = /obj/item/mould/ingot/advanced
 	hammers_per_item = 6
 	craftdiff = 3
@@ -299,6 +303,14 @@
 	name = "Lead Bullets 4x"
 	hammers_per_item = 4
 	created_item = /obj/item/ammo_casing/caseless/bullet
+	required_item = /obj/item/ingot/tin
+	craftdiff = 2
+	created_amount = 4
+
+/datum/artificer_recipe/ammo/lead_pellet
+	name = "Pellet shots 4x"
+	hammers_per_item = 4
+	created_item = /obj/item/ammo_casing/caseless/pelletshot
 	required_item = /obj/item/ingot/tin
 	craftdiff = 2
 	created_amount = 4
@@ -481,64 +493,84 @@
 /datum/artificer_recipe/psycross/gold
 	name = "golden Psycross"
 	required_item = /obj/item/ingot/gold
-	created_item = /obj/item/clothing/neck/psycross/g
+	created_item = /obj/item/clothing/neck/psycross/gold
 	hammers_per_item = 7
 	craftdiff = 3
+
+/datum/artificer_recipe/psycross/undivided
+	name = "Undivided Psycross"
+	required_item = /obj/item/ingot/silver
+	created_item = /obj/item/clothing/neck/psycross/silver/divine
+
+/datum/artificer_recipe/psycross/matthios
+	name = "Matthios Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/matthios
+
+/datum/artificer_recipe/psycross/graggar
+	name = "Graggar Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/graggar
+
+/datum/artificer_recipe/psycross/baotha
+	name = "Baotha Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/baotha
 
 /datum/artificer_recipe/psycross/noc
 	name = "Noc Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/noc
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/noc
 
 /datum/artificer_recipe/psycross/astrata
 	name = "Astrata Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/astrata
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/astrata
 
 /datum/artificer_recipe/psycross/dendor
 	name = "Dendor Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/dendor
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/dendor
 
 /datum/artificer_recipe/psycross/abyssor
 	name = "Abyssor Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/abyssor
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 
 /datum/artificer_recipe/psycross/necra
 	name = "Necra Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/necra
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/necra
 
 /datum/artificer_recipe/psycross/ravox
 	name = "Ravox Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/ravox
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/ravox
 
 /datum/artificer_recipe/psycross/xylix
 	name = "Xylix Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/xylix
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/xylix
 
 /datum/artificer_recipe/psycross/eora
 	name = "Eora Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/eora
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/eora
 
 /datum/artificer_recipe/psycross/pestra
 	name = "Pestra Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/pestra
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/pestra
 
 /datum/artificer_recipe/psycross/malum_silver
 	name = "Malum Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/malum
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/malum
 
 /datum/artificer_recipe/psycross/malum_steel
 	name = "Malum Steel Psycross"
 	required_item = /obj/item/ingot/silver
-	created_item = /obj/item/clothing/neck/psycross/silver/malum/steel
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/malum/steel
 	additional_items = list(/obj/item/ingot/steel = 1)
 	craftdiff = 3
 

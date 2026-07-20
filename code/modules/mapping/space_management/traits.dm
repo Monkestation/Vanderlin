@@ -45,8 +45,7 @@
 /datum/controller/subsystem/mapping/proc/levels_by_trait(trait)
 	. = list()
 	var/list/_z_list = z_list
-	for(var/A in _z_list)
-		var/datum/space_level/S = A
+	for(var/datum/space_level/S as anything in _z_list)
 		if (S.traits[trait])
 			. += S.z_value
 
@@ -54,8 +53,7 @@
 /datum/controller/subsystem/mapping/proc/levels_by_any_trait(list/traits)
 	. = list()
 	var/list/_z_list = z_list
-	for(var/A in _z_list)
-		var/datum/space_level/S = A
+	for(var/datum/space_level/S as anything in _z_list)
 		for (var/trait in traits)
 			if (S.traits[trait])
 				. += S.z_value

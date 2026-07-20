@@ -1,15 +1,20 @@
 // Cleric Holder Datums
 /datum/devotion
+	/// The mob that this devotion datum is attached to
 	var/mob/living/carbon/human/holder_mob = null
 
+	/// How much devotion the `holder_mob` can use
 	var/devotion = 0
+	/// How much devotion the `holder_mob` can have
 	var/max_devotion = 1000
+	/// Progress on reaching next tier, granting access to new miracles
 	var/progression = 0
+	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
 	var/max_progression = CLERIC_REQ_3
 
-	/// How much devotion is gained per process call
+	/// How much devotion is gained per process call. Update this variable using `update_passive_devotion`
 	var/passive_devotion_gain = 0
-	/// How much progression is gained per process call
+	/// How much progression is gained per process call. Update this variable using `update_passive_progression`
 	var/passive_progression_gain = 0
 	/// How much devotion is gained per prayer cycle
 	var/prayer_effectiveness = 2
@@ -28,6 +33,8 @@
 
 	var/list/datum/devotion_task/tasks = list()
 	var/list/viable_tasks = list()
+
+	var/devotion_class = DEVOTION_CLASS_CLERIC
 
 /datum/devotion/Destroy(force)
 	remove()
@@ -48,15 +55,22 @@
 		START_PROCESSING(SSprocessing, src)
 	holder_mob = holder
 	holder_mob.cleric = src
-	holder_mob?.hud_used?.initialize_bloodpool()
-	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
+	else
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
 	for(var/trait as anything in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
-	holder_mob.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
+
+/datum/devotion/proc/initialize_hud()
+	holder_mob?.hud_used?.initialize_bloodpool()
+	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	update_devotion(0) //hack to force meter to reflect the starting devotion
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)
@@ -82,7 +96,7 @@
 	if(holder_mob)
 		holder_mob.cleric = null
 		holder_mob.remove_spells(source = src)
-		holder_mob.verbs -= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+		remove_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 		for(var/trait as anything in traits)
 			REMOVE_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	holder_mob = null
@@ -115,6 +129,28 @@
 
 	if(.)
 		check_progression()
+
+/// Updates `passive_devotion_gain` for mob, if it gets to 0 and `passive_progression_gain` is also 0, it will stop processing on next `process()`
+/// If `passive_devotion_gain` started at 0, we will have it start processing
+/datum/devotion/proc/update_passive_devotion(amount)
+	if(!amount)
+		return
+
+	passive_devotion_gain = max(0, passive_devotion_gain + amount)
+
+	if(passive_devotion_gain)
+		START_PROCESSING(SSprocessing, src)
+
+/// Updates `passive_progression_gain` for mob, if it gets to 0 and `passive_devotion_gain` is also 0, it will stop processing on next `process()`
+/// If `passive_progression_gain` started at 0, we will have it start processing
+/datum/devotion/proc/update_passive_progression(amount)
+	if(!amount)
+		return
+
+	passive_progression_gain = max(0, passive_progression_gain + amount)
+
+	if(passive_progression_gain)
+		START_PROCESSING(SSprocessing, src)
 
 /datum/devotion/proc/check_progression()
 	var/static/list/tiers = list(
@@ -149,22 +185,34 @@
 	miracles_extra += list(
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
 	)
+	devotion_class = DEVOTION_CLASS_PRIEST
+
+/datum/devotion/proc/make_gmtemplar()
+	devotion = 150
+	max_devotion = 350
+	progression = CLERIC_REQ_3
+	max_progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_GRANDMASTER
 
 /datum/devotion/proc/make_templar()
 	devotion = 50
 	max_devotion = CLERIC_REQ_3
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_2
+	devotion_class = DEVOTION_CLASS_TEMPLAR
 
 /datum/devotion/proc/make_absolver()
 	devotion = 100
 	max_devotion = CLERIC_REQ_3
 	progression = CLERIC_REQ_3
 	max_progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_ABSOLVER
 
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1
+	devotion_class = DEVOTION_CLASS_ACOLYTE
 
 /datum/devotion/proc/make_cleric()
 	devotion = 50
@@ -172,7 +220,13 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_3
 
-/datum/devotion/proc/make_churching()
+/datum/devotion/proc/make_shaman()
+	devotion = 80
+	max_devotion = CLERIC_REQ_1
+	progression = CLERIC_REQ_1
+	max_progression = CLERIC_REQ_1
+
+/datum/devotion/proc/make_churchling()
 	max_devotion = CLERIC_REQ_1
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_1
@@ -180,10 +234,11 @@
 		/datum/action/cooldown/spell/undirected/touch/orison/lesser,
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
+	devotion_class = DEVOTION_CLASS_CHURCHLING
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	if(!ishuman(src))
 		return
@@ -194,7 +249,7 @@
 
 /mob/living/carbon/human/proc/clericpray()
 	set name = "Give Prayer"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	if(!ishuman(src))
 		return
@@ -213,7 +268,7 @@
 				break
 			var/devotion_multiplier = 1
 			if(mind)
-				devotion_multiplier += (get_skill_level(/datum/skill/magic/holy) / 4)
+				devotion_multiplier += (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/magic/holy) / 4)
 			var/amount = floor(C.prayer_effectiveness * devotion_multiplier)
 			C.update_devotion(amount)
 			C.update_progression(amount)

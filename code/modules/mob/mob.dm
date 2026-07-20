@@ -74,6 +74,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * Intialize the movespeed of the mob
  */
 /mob/Initialize()
+	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_CREATED, src)
 	GLOB.mob_list += src
 	GLOB.mob_directory[tag] = src
@@ -85,17 +86,40 @@ GLOBAL_VAR_INIT(mobids, 1)
 		GLOB.alive_mob_list += src
 	set_focus(src)
 	prepare_huds()
-	for(var/v in GLOB.active_alternate_appearances)
-		if(!v)
-			continue
-		var/datum/atom_hud/alternate_appearance/AA = v
-		AA.onNewMob(src)
+	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(src)
 	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
 	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
+	attribute_initialize()
 	. = ..()
+	initialize_actionspeed()
 	update_config_movespeed()
 	update_movespeed(TRUE)
 	become_hearing_sensitive()
+	if(!canparry)
+		ADD_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
+	if(!candodge)
+		ADD_TRAIT(src, TRAIT_UNDODGING, INNATE_TRAIT)
+
+/// Attributes
+/mob/proc/attribute_initialize()
+	// If we have an attribute holder, lets get that W
+	if(!ispath(attributes))
+		return
+	attributes = new attributes(src)
+
+	// Seed raw stat values from the subtype's base_* vars.
+	// These are var/final so we read via initial() to get the
+	// compile-time value for this specific subtype.
+	attributes.raw_attribute_list[STAT_STRENGTH]     = initial(base_strength)
+	attributes.raw_attribute_list[STAT_PERCEPTION]   = initial(base_perception)
+	attributes.raw_attribute_list[STAT_ENDURANCE]    = initial(base_endurance)
+	attributes.raw_attribute_list[STAT_CONSTITUTION] = initial(base_constitution)
+	attributes.raw_attribute_list[STAT_INTELLIGENCE] = initial(base_intelligence)
+	attributes.raw_attribute_list[STAT_SPEED]        = initial(base_speed)
+	attributes.raw_attribute_list[STAT_FORTUNE]      = initial(base_fortune)
+	attributes.update_attributes()
+
 
 /**
  * Generate the tag for this mob
@@ -106,34 +130,16 @@ GLOBAL_VAR_INIT(mobids, 1)
 	tag = "mob_[next_mob_id++]"
 
 /**
- * Prepare the huds for this atom
- *
- * Goes through hud_possible list and adds the images to the hud_list variable (if not already
- * cached)
- */
-/atom/proc/prepare_huds()
-	hud_list = list()
-	for(var/hud in hud_possible)
-		var/hint = hud_possible[hud]
-		switch(hint)
-			if(HUD_LIST_LIST)
-				hud_list[hud] = list()
-			else
-				var/image/I = image('icons/mob/hud.dmi', src, "")
-				I.appearance_flags = RESET_COLOR|RESET_TRANSFORM
-				hud_list[hud] = I
-
-/**
  * Show a message to this mob (visual or audible)
  */
 /mob/proc/show_message(msg, type, alt_msg, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)
 		return
 
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(msg, 1, MAX_MESSAGE_LEN)
 
 	if(type)
-		if(type & MSG_VISUAL && is_blind() )//Vision related
+		if(type & MSG_VISUAL && is_blind())//Vision related
 			if(!alt_msg)
 				return
 			else
@@ -148,6 +154,11 @@ GLOBAL_VAR_INIT(mobids, 1)
 				type = alt_type
 				if(type & MSG_VISUAL && is_blind())
 					return
+	// voice muffling
+	if(stat == UNCONSCIOUS)
+		if(type & MSG_AUDIBLE) //audio
+			to_chat(src, "<I>... You can almost hear something ...</I>")
+		return
 	to_chat(src, msg)
 
 /**
@@ -167,7 +178,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * vision_distance (optional) define how many tiles away the message can be seen.
  * * ignored_mob (optional) doesn't show any message to a given mob if TRUE.
  */
-/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, log_seen = NONE, log_seen_msg = null)
+/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, visible_message_flags = NONE)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
@@ -182,6 +193,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 			continue
 		//This entire if/else chain could be in two lines but isn't for readibilties sake.
 		var/msg = message
+		var/signal = SEND_SIGNAL(M, COMSIG_MOB_VISIBLE_MESSAGE, src, message, vision_distance, ignored_mobs)
+		if(signal & COMPONENT_NO_VISIBLE_MESSAGE)
+			msg = null
+		else if(signal & COMPONENT_VISIBLE_MESSAGE_BLIND)
+			msg = blind_message
+		if(!msg)
+			continue
+
 		if(M.see_invisible < invisibility)//if src is invisible to M
 			msg = blind_message
 		if(!msg)
@@ -193,7 +212,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 ///Adds the functionality to self_message.
-/mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, log_seen = NONE, log_seen_msg = null)
+/mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, visible_message_flags = NONE)
 	. = ..()
 	if(self_message)
 		show_message(self_message, MSG_VISUAL, blind_message, MSG_AUDIBLE)
@@ -289,17 +308,20 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
  */
-/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial)
+/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial = FALSE)
 	if(!istype(W) || QDELETED(W)) //This qdeleted is to prevent stupid behavior with things that qdel during init, like say stacks
 		return FALSE
-	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self))
+
+	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self || initial))
 		if(qdel_on_fail)
 			qdel(W)
 		else if(!disable_warning)
 			to_chat(src, span_warning("I can't equip that!"))
 		return FALSE
+
 	equip_to_slot(W, slot, initial, redraw_mob) //This proc should not ever fail.
 	update_a_intents()
+
 	return TRUE
 
 /**
@@ -386,6 +408,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 			client.eye = client.mob
 			client.perspective = MOB_PERSPECTIVE
 
+	SEND_SIGNAL(src, COMSIG_MOB_RESET_PERSPECTIVE, new_perspective)
+
 /// Show the mob's inventory to another mob
 /mob/proc/show_inv(mob/user)
 	return
@@ -397,69 +421,89 @@ GLOBAL_VAR_INIT(mobids, 1)
  * [this byond forum post](https://secure.byond.com/forum/?post=1326139&page=2#comment8198716)
  * for why this isn't atom/verb/examine()
  */
-/mob/verb/examinate(atom/A as mob|obj|turf in view()) //It used to be oview(12), but I can't really say why
+/mob/verb/examinate(atom/examinify as mob|obj|turf in view()) //It used to be oview(12), but I can't really say why
 	set name = "Examine"
 	set category = "IC"
-	set hidden = 1
-	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(run_examinate), A))
 
-/mob/proc/run_examinate(atom/A)
-	if(isturf(A) && !(sight & SEE_TURFS) && !(A in view(client ? client.view : world.view, src)))
+	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(run_examinate), examinify))
+
+/mob/proc/run_examinate(atom/examinify)
+	if(QDELETED(examinify)) // since this can run async we might have had the atom get qdeleted already
+		return
+
+	if(isturf(examinify) && !(sight & SEE_TURFS) && !(examinify in view(client ? client.view : world.view, src)))
 		// shift-click catcher may issue examinate() calls for out-of-sight turfs
 		return
 
 	if(is_blind())
-		to_chat(src, "<span class='warning'>Something is there but I can't see it!</span>")
+		to_chat(src, span_warning("Something is there but I can't see it!"))
 		return
 
-	if(isturf(A.loc) && isliving(src))
-		face_atom(A)
-		if(src.m_intent != MOVE_INTENT_SNEAK)
-			visible_message("<span class='emote'>[src] looks at [A].</span>")
-		else
-			if(isliving(A))
-				var/mob/living/observer = src
-				var/mob/living/target = A
-				var/observer_skill = observer.get_skill_level(/datum/skill/misc/sneaking)
-				if(observer_skill <= 0)
-					observer_skill = 1
-				if(observer.rogue_sneaking)
-					observer_skill += 1
+	var/flags = SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
+	if(flags & COMPONENT_NO_EXAMINATE)
+		return
+	else if(flags & COMPONENT_EXAMINATE_BLIND)
+		to_chat(src, span_warning("Something is there but i can't see it!"))
+		return
 
-				// determine PER multiplier based on the target PER
-				var/multiplier = 5
-				if(target.STAPER < 5)
-					multiplier = 4
-				else if(target.STAPER >= 5 && target.STAPER < 10)
-					multiplier = 5
-				else if(target.STAPER >= 10 && target.STAPER < 15)
-					multiplier = 6
-				else if(target.STAPER >= 15 && target.STAPER <= 20)
-					multiplier = 7
+	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
+		face_atom(examinify)
+		if(m_intent != MOVE_INTENT_SNEAK)
+			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]."))
+		else if(isliving(examinify))
+			var/mob/living/examaniee = examinify
+			if(examaniee.peek_examine_check(src))
+				to_chat(src, span_info("My peeking went unnoticed.."))
+			else
+				to_chat(src, span_warning("[examaniee] noticed me peeking!"))
 
-				// calculate probability to fail
-				var/probby = (target.STAPER * multiplier) - (observer_skill * 10)
+				if(examaniee.client) // only if they have a client to see it
+					to_chat(examaniee, span_warning("[src] peeks at you!"))
+					found_ping(get_turf(src), examaniee.client, "hidden")
 
-				// clamp probability
-				probby = max(probby, 5)
-				probby = min(probby, 95)
-
-				if(prob(probby))
-					to_chat(src, span_warning("[A] noticed me peeking!"))
-					to_chat(A, span_warning("[src] peeks at you!"))
-					if(target.client) // only if they have a client to see it
-						found_ping(get_turf(observer), target.client, "hidden")
-				else
-					if(observer.client?.prefs.showrolls)
-						to_chat(src, span_info("[probby]%... my peeking went unnoticed.."))
-					else
-						to_chat(src, span_info("My peeking went unnoticed.."))
-	var/list/result = A.examine(src)
+	var/list/result = examinify.examine(src)
 	if(LAZYLEN(result))
+		var/list/mechanics_result = examinify.get_mechanics_examine(src)
+		if(length(mechanics_result))
+			var/mechanics_result_str = "<details><summary>Mechanics</summary>"
+			for(var/line in mechanics_result)
+				mechanics_result_str += " - " + span_blue(line) + "\n"
+			mechanics_result_str += "</details>"
+			result += mechanics_result_str
 		for(var/i in 1 to (length(result) - 1))
 			result[i] += "\n"
 		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
-	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, A)
+
+// Check if we notice an observer
+/mob/living/proc/peek_examine_check(mob/living/observer)
+	if(!istype(observer))
+		return FALSE
+
+	if(is_blind() || stat < CONSCIOUS)
+		return FALSE
+
+	var/observer_skill = GET_MOB_SKILL_VALUE_OLD(observer, /datum/attribute/skill/misc/sneaking)
+	if(observer_skill <= 0)
+		observer_skill = 1
+	if(observer.rogue_sneaking)
+		observer_skill += 1
+
+	var/multiplier = 5
+
+	var/our_per = GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)
+	if(our_per < 5)
+		multiplier = 4
+	else if(our_per >= 5 && our_per < 10)
+		multiplier = 5
+	else if(our_per >= 10 && our_per < 15)
+		multiplier = 6
+	else if(our_per >= 15 && our_per <= 20)
+		multiplier = 7
+
+	// calculate probability to fail
+	var/probby = (our_per * multiplier) - (observer_skill * 10)
+
+	return prob(clamp(probby, 5, 95))
 
 ///Can this mob resist (default FALSE)
 /mob/proc/can_resist()
@@ -552,11 +596,14 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * Only works if flag/norespawn is allowed in config
  */
+
+// Removed for the moment
+/*
 /mob/verb/abandon_mob()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Admin"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_ADMIN))
 		return
 	if (CONFIG_GET(flag/norespawn))
 		return
@@ -586,6 +633,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	M.key = key
 //	M.Login()	//wat
 	return
+*/
 
 
 /**
@@ -619,7 +667,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  */
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
+		var/t1 = "window=[href_list["mach_close"]]"
 		unset_machine()
 		src << browse(null, t1)
 
@@ -685,89 +733,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/proc/is_muzzled()
 	return 0
 
-/**
- * Output an update to the stat panel for the client
- *
- * calculates client ping, round id, server time, time dilation and other data about the round
- * and puts it in the mob status panel on a regular loop
- */
-/mob/Stat()
-	..()
-	// && check_rights(R_ADMIN,0)
-	var/ticker_time = world.time - SSticker.round_start_time
-	var/time_left = SSgamemode.round_ends_at - ticker_time
-	if(client)
-		if(statpanel("RoundInfo"))
-			stat("Round ID: [GLOB.rogue_round_id]")
-			stat("Round Time: [gameTimestamp("hh:mm:ss", world.time - SSticker.round_start_time)] [world.time - SSticker.round_start_time]")
-			if(client?.holder)
-				stat("Round TrueTime: [worldtime2text()] [world.time]")
-			if(SSgamemode.roundvoteend)
-				stat("Round End: [DisplayTimeText(time_left)]")
-			stat("Map: [SSmapping.config?.map_name || "Loading..."]")
-			var/datum/map_config/cached = SSmapping.next_map_config
-			if(cached)
-				stat("Next Map: [cached.map_name]")
-			stat("Time of Day: [GLOB.tod]")
-			if(client?.holder)
-				stat("Real Time: [station_time_timestamp()] [station_time()]")
-			stat("Ping: [round(client?.lastping, 1)]ms (Average: [round(client?.avgping, 1)]ms)")
-			stat("Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG: ([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
-
-	if(client && client.holder && check_rights(R_ADMIN,0))
-		if(statpanel("MC"))
-			var/turf/T = get_turf(client.eye)
-			stat("Location:", COORD(T))
-			stat("CPU:", "[world.cpu]")
-			stat("Instances:", "[num2text(world.contents.len, 10)]")
-			stat("World Time:", "[world.time]")
-			GLOB.stat_entry()
-			config.stat_entry()
-			stat(null)
-			if(Master)
-				Master.stat_entry()
-			else
-				stat("Master Controller:", "ERROR")
-			if(Failsafe)
-				Failsafe.stat_entry()
-			else
-				stat("Failsafe Controller:", "ERROR")
-			if(Master)
-				stat(null)
-				for(var/datum/controller/subsystem/SS in Master.subsystems)
-					SS.stat_entry()
-		if(statpanel("Tickets"))
-			GLOB.ahelp_tickets.stat_entry()
-		if(length(GLOB.sdql2_queries))
-			if(statpanel("SDQL2"))
-				stat("Access Global SDQL2 List", GLOB.sdql2_vv_statobj)
-				for(var/i in GLOB.sdql2_queries)
-					var/datum/SDQL2_query/Q = i
-					Q.generate_stat()
-
-	if(listed_turf && client)
-		if(!TurfAdjacent(listed_turf))
-			listed_turf = null
-		else
-			var/obj/structure/door/secret/secret_door =  locate(/obj/structure/door/secret) in listed_turf
-			if(!secret_door)
-				statpanel(listed_turf.name, null, listed_turf)
-			var/list/overrides = list()
-			for(var/image/I in client.images)
-				if(I.loc && I.loc.loc == listed_turf && I.override)
-					overrides += I.loc
-
-			for(var/atom/A in listed_turf)
-				if(!A.mouse_opacity)
-					continue
-				if(A.invisibility > see_invisible)
-					continue
-				if(overrides.len && (A in overrides))
-					continue
-				if(A.IsObscured())
-					continue
-				statpanel(listed_turf.name, null, A)
-
 
 #define MOB_FACE_DIRECTION_DELAY 1
 
@@ -782,11 +747,11 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * no transform not set
  * * we are not restrained
  */
-/mob/proc/canface(atom/A)
+/mob/proc/canface(atom/atom_to_face)
 	if(client)
 		if(world.time < client.last_turn)
 			return FALSE
-	if(stat == DEAD || stat == UNCONSCIOUS)
+	if(stat == DEAD || stat == UNCONSCIOUS || stat == HARD_CRIT)
 		return FALSE
 	if(anchored)
 		return FALSE
@@ -794,46 +759,16 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_RESTRAINED))
 		return FALSE
-	if( buckled || stat != CONSCIOUS)
-		return FALSE
+	if( buckled || stat != CONSCIOUS || !atom_to_face || !x || !y || !atom_to_face.x || !atom_to_face.y )
+		return
 	return TRUE
 
 ///Checks mobility move as well as parent checks
-/mob/living/canface(atom/A)
+/mob/living/canface(atom/atom_to_face)
 	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(world.time < last_dir_change + 5)
-		return
-	if(A && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) //the reason this isn't a mobility_flags check is because you want them to be able to change dir if you're passively grabbing them
-		// get_cardinal_dir is inconsistent, reuse face_atom code
-		var/dx = A.x - src.x
-		var/dy = A.y - src.y
-		var/dir
-		if(!dx && !dy) // Wall items are graphically shifted but on the floor
-			if(A.pixel_y > 16)
-				dir = NORTH
-			else if(A.pixel_y < -16)
-				dir = SOUTH
-			else if(A.pixel_x > 16)
-				dir = EAST
-			else if(A.pixel_x < -16)
-				dir = WEST
-		else
-			if(abs(dx) < abs(dy))
-				if(dy > 0)
-					dir = NORTH
-				else
-					dir = SOUTH
-			else
-				if(dx > 0)
-					dir = EAST
-				else
-					dir = WEST
-		if(dir == pulledby.dir) // can never face away from the person grabbing you
-			return FALSE
-		for(var/obj/item/grabbing/G in grabbedby) // only chokeholds prevent turning
-			if(G.chokehold)
-				return FALSE
+		return FALSE
 	if(IsImmobilized())
 		return FALSE
 	return ..()
@@ -947,43 +882,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 
 /**
- * Buckle to another mob
+ * Buckle a living mob to this mob. Also turns you to face the other mob
  *
  * You can buckle on mobs if you're next to them since most are dense
- *
- * Turns you to face the other mob too
  */
-/mob/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
+/mob/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE, buckle_mob_flags= NONE)
 	if(M.buckled)
-		return 0
-	var/turf/T = get_turf(src)
-	if(M.loc != T)
-		var/old_density = density
-		density = FALSE
-		var/can_step = step_towards(M, T)
-		density = old_density
-		if(!can_step)
-			return 0
-	return ..()
-
-///Call back post buckle to a mob to offset your visual height
-/mob/post_buckle_mob(mob/living/M)
-	var/height = M.get_mob_buckling_height(src)
-	M.pixel_y = M.base_pixel_y + height
-	if(M.layer < layer)
-		M.layer = layer + 0.1
-///Call back post unbuckle from a mob, (reset your visual height here)
-/mob/post_unbuckle_mob(mob/living/M)
-	M.layer = initial(M.layer)
-	M.pixel_y = M.base_pixel_y
-
-///returns the height in pixel the mob should have when buckled to another mob.
-/mob/proc/get_mob_buckling_height(mob/seat)
-	if(isliving(seat))
-		var/mob/living/L = seat
-		if(L.mob_size <= MOB_SIZE_SMALL) //being on top of a small mob doesn't put you very high.
-			return 0
-	return 9
+		return FALSE
+	return ..(M, force, check_loc, buckle_mob_flags)
 
 ///can the mob be buckled to something by default?
 /mob/proc/can_buckle()
@@ -1019,42 +925,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 ///Can this mob use storage
 /mob/proc/canUseStorage()
 	return FALSE
-/**
- * Check if the other mob has any factions the same as us
- *
- * If exact match is set, then all our factions must match exactly
- */
-/atom/movable/proc/faction_check_mob(mob/target, exact_match)
-
-/mob/faction_check_mob(mob/target, exact_match)
-	if(exact_match) //if we need an exact match, we need to do some bullfuckery.
-		var/list/faction_src = faction.Copy()
-		var/list/faction_target = target.faction.Copy()
-		if(!("[REF(src)]" in faction_target)) //if they don't have our ref faction, remove it from our factions list.
-			faction_src -= "[REF(src)]" //if we don't do this, we'll never have an exact match.
-		if(!("[REF(target)]" in faction_src))
-			faction_target -= "[REF(target)]" //same thing here.
-		return faction_check(faction_src, faction_target, TRUE)
-	var/list/faction2use = target.faction.Copy()
-	faction2use += target.name
-	return faction_check(faction, faction2use, FALSE)
-/*
- * Compare two lists of factions, returning true if any match
- *
- * If exact match is passed through we only return true if both faction lists match equally
- */
-/proc/faction_check(list/faction_A, list/faction_B, exact_match)
-	var/list/match_list
-	if(exact_match)
-		match_list = faction_A&faction_B //only items in both lists
-		var/length = LAZYLEN(match_list)
-		if(length)
-			return (length == LAZYLEN(faction_A)) //if they're not the same len(gth) or we don't have a len, then this isn't an exact match.
-	else
-		match_list = faction_A&faction_B
-		return LAZYLEN(match_list)
-	return FALSE
-
 
 /**
  * Fully update the name of a mob
@@ -1153,7 +1023,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * Args:
  *  light_amount (optional) - A decimal amount between 1.0 through 0.0 (default is 0.2)
 **/
-/mob/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
+/atom/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
 	var/turf/mob_location = get_turf(src)
 	var/area/mob_area = get_area(src)
 
@@ -1272,34 +1142,34 @@ GLOBAL_VAR_INIT(mobids, 1)
 	H.open_language_menu(usr)
 
 ///Adjust the nutrition of a mob
-/mob/proc/adjust_nutrition(change) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		nutrition = NUTRITION_LEVEL_FULL
-	nutrition = max(0, nutrition + change)
-	if(nutrition > NUTRITION_LEVEL_FULL)
-		nutrition = NUTRITION_LEVEL_FULL
+/mob/proc/adjust_nutrition(change, forced) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		nutrition = NUTRITION_LEVEL_WELL_FED
+		return
+
+	nutrition = clamp(nutrition + change, 0, NUTRITION_LEVEL_FULL)
 
 ///Force set the mob nutrition
-/mob/proc/set_nutrition(change) //Seriously fuck you oldcoders.
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		nutrition = NUTRITION_LEVEL_FULL
-	nutrition = max(0, change)
-	if(nutrition > NUTRITION_LEVEL_FULL)
-		nutrition = NUTRITION_LEVEL_FULL
+/mob/proc/set_nutrition(set_to, forced) //Seriously fuck you oldcoders.
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		nutrition = NUTRITION_LEVEL_WELL_FED
+		return
 
-/mob/proc/adjust_hydration(change)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		hydration = HYDRATION_LEVEL_FULL
-	hydration = max(0, hydration + change)
-	if(hydration > HYDRATION_LEVEL_FULL)
-		hydration = HYDRATION_LEVEL_FULL
+	nutrition = clamp(set_to, 0, NUTRITION_LEVEL_FULL)
 
-/mob/proc/set_hydration(change)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		hydration = HYDRATION_LEVEL_FULL
-	hydration = max(0, change)
-	if(hydration > HYDRATION_LEVEL_FULL)
-		hydration = HYDRATION_LEVEL_FULL
+/mob/proc/adjust_hydration(change, forced)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		hydration = HYDRATION_LEVEL_HYDRATED
+		return
+
+	hydration = clamp(hydration + change, 0, HYDRATION_LEVEL_FULL)
+
+/mob/proc/set_hydration(set_to, forced)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		hydration = HYDRATION_LEVEL_HYDRATED
+		return
+
+	hydration = clamp(set_to, 0, HYDRATION_LEVEL_FULL)
 
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = equipped_speed_mods()
@@ -1307,6 +1177,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 		remove_movespeed_modifier(MOVESPEED_ID_MOB_EQUIPMENT, update=TRUE)
 	else
 		add_movespeed_modifier(MOVESPEED_ID_MOB_EQUIPMENT, update=TRUE, priority=100, override=TRUE, multiplicative_slowdown=speedies, blacklisted_movetypes=FLOATING)
+
+/mob/living/carbon/update_equipment_speed_mods()
+	. = ..()
+	update_carry_weight()
 
 /// Gets the combined speed modification of all worn items
 /// Except base mob type doesnt really wear items
@@ -1325,7 +1199,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/say_mod(input, list/message_mods = list())
 	var/customsayverb = findtext(input, "*")
 	if(customsayverb)
-		return lowertext(copytext(input, 1, customsayverb))
+		return LOWER_TEXT(copytext(input, 1, customsayverb))
 	. = ..()
 
 /atom/movable/proc/attach_spans(input, list/spans)
@@ -1363,7 +1237,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return choice
 
 	for(var/obj/item/spawn_item as anything in spawn_items)
-		equip_to_appropriate_slot(new spawn_item(), TRUE)
+		equip_to_appropriate_slot(new spawn_item(), TRUE, TRUE)
 
 	return choice
 
@@ -1379,10 +1253,20 @@ GLOBAL_VAR_INIT(mobids, 1)
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))
 		for(var/mob/living/carbon/human/target as anything in nobles)
 			if(!target.has_stress_type(/datum/stress_event/noble_seen_servant_work))
 				target.add_stress(/datum/stress_event/noble_seen_servant_work)
+
+/// Adds this list to the output to the stat browser
+/mob/proc/get_status_tab_items()
+	. = list("") //we want to offset unique stuff from standard stuff
+	SEND_SIGNAL(src, COMSIG_MOB_GET_STATUS_TAB_ITEMS, .)
+	return .
+
+/mob/get_examine_name(mob/user, use_article=FALSE)
+	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
+

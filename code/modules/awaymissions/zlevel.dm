@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(potentialRandomZlevels, generateMapList(filename = "[global.con
 
 /proc/generateMapList(filename)
 	. = list()
-	var/list/Lines = world.file2list(filename)
+	var/list/Lines = file2list(filename)
 
 	if(!Lines.len)
 		return
@@ -32,10 +32,10 @@ GLOBAL_LIST_INIT(potentialRandomZlevels, generateMapList(filename = "[global.con
 		var/name = null
 
 		if (pos)
-			name = lowertext(copytext(t, 1, pos))
+			name = LOWER_TEXT(copytext(t, 1, pos))
 
 		else
-			name = lowertext(t)
+			name = LOWER_TEXT(t)
 
 		if (!name)
 			continue

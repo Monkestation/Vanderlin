@@ -31,6 +31,7 @@ Reel teleports the attached atom to the grabbed turf.
 	var/list/obj_to_destroy = list()
 	grid_height = 32
 	grid_width = 64
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/grapplinghook/Initialize(mapload)
 	. = ..()
@@ -88,15 +89,15 @@ Reel teleports the attached atom to the grabbed turf.
 
 /obj/item/grapplinghook/attack_self(mob/living/user)
 	if(!is_loaded && !in_use && user.used_intent != /datum/intent/reel)
-		var/stat = max(user.STASPD, user.STAPER)	//We check the PER / SPD stats first
+		var/stat = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED), GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION))	//We check the PER / SPD stats first
 		stat = stat - 10
 		if(stat > 0)
 			stat = stat * 3
-			if(user.STASTR > 11)	//Then we add their strength if they had any of the previous
-				stat += (user.STASTR - 10) * 2
+			if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) > 11)	//Then we add their strength if they had any of the previous
+				stat += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - 10) * 2
 		else
 			stat = 0
-		stat += (user.get_skill_level(/datum/skill/craft/engineering)) * 5	//And finally their Engineering level.
+		stat += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)) * 5	//And finally their Engineering level.
 		stat = clamp(stat, 10, 70)	//Clamp to a very loud second just in case you're a superhuman engineer
 		if(!isloading)
 			user.visible_message(span_info("[user] begins cranking the [src]..."))
@@ -107,7 +108,7 @@ Reel teleports the attached atom to the grabbed turf.
 				to_chat(user, span_info("It's loaded!"))
 				isloading = FALSE
 				is_loaded = TRUE
-				update_icon()
+				update_appearance(UPDATE_ICON_STATE)
 			else
 				isloading = FALSE
 				user.visible_message(span_info("[user] gets interrupted!"))
@@ -133,7 +134,7 @@ Reel teleports the attached atom to the grabbed turf.
 	if(!silent)	//Silent is used during a successful reel because it has its own distinct sounds
 		playsound(src, 'sound/foley/trap.ogg', 100, FALSE , 5)
 	is_loaded = FALSE
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 
 //Resets the target effect overlay and the attached atom. Generally called with reset_tile()
 /obj/item/grapplinghook/proc/reset_target()
@@ -142,7 +143,7 @@ Reel teleports the attached atom to the grabbed turf.
 		qdel(target_effect)
 		attached = null
 	in_use = FALSE
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/grapplinghook/proc/check_path(turf/Tu, turf/Tt, state)
 	var/dist = get_dist(Tt, Tu)
@@ -183,7 +184,7 @@ Reel teleports the attached atom to the grabbed turf.
 		success = TRUE
 		var/list/visible = getline(Tu, Tt)
 		for(var/turf/T in visible)
-			if(T.opacity || T.density && T != Tu)	//Any dense or opaque turfs
+			if(IS_OPAQUE_TURF(T) || T.density && T != Tu)	//Any dense or opaque turfs
 				success = FALSE
 				return success
 			for(var/obj/O in (T.contents + Tt.contents))
@@ -232,7 +233,7 @@ Reel teleports the attached atom to the grabbed turf.
 					O.atom_break()
 		LAZYCLEARLIST(obj_to_destroy)
 
-/obj/item/grapplinghook/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/grapplinghook/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(istype(user.used_intent, /datum/intent/grapple))	//First step, grappling onto a tile. Spawns an indicator on it.
 		if(is_loaded && istype(target, /turf/))
 			var/turf/T = target
@@ -324,7 +325,7 @@ Reel teleports the attached atom to the grabbed turf.
 /obj/item/grapplinghook/proc/load()
 	is_loaded = TRUE
 	in_use = FALSE
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 
 //Unloads the grappler after a successful, or not, attempt to use on a turf.
 /obj/item/grapplinghook/proc/unload(failure)
@@ -334,9 +335,9 @@ Reel teleports the attached atom to the grabbed turf.
 	else
 		is_loaded = FALSE
 		in_use = FALSE
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/grapplinghook/update_icon()
+/obj/item/grapplinghook/update_icon_state()
 	. = ..()
 	if(is_loaded && !in_use)
 		icon_state = "grappler"

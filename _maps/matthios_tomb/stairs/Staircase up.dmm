@@ -3,7 +3,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "l" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "q" = (
 /obj/structure/rack/shelf/biggest{

@@ -2,6 +2,6 @@
     "map_name": "Dungeon Map",
     "map_path": "map_files/shared",
     "map_file": "dungeon.dmm",
-	"traits": [{"Up": true, "NoDayorWeather": true, "Dungeon": true}, {"Down": true, "NoDayorWeather": true, "Dungeon": true, "Baseturf": "/turf/open/transparent/openspace"}],
+	"traits": [{"Up": true, "NoDayorWeather": true, "Dungeon": true}, {"Down": true, "NoDayorWeather": true, "Dungeon": true, "Baseturf": "/turf/open/openspace"}],
     "delve": 1
 }

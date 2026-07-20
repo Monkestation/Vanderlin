@@ -1,15 +1,15 @@
-GLOBAL_LIST_INIT(VVlocked, list("vars", "datum_flags", "client", "mob"))		//Requires DEBUG
+GLOBAL_LIST_INIT(VVlocked, list("vars", "datum_flags", "client", "mob")) //Requires DEBUG
 GLOBAL_PROTECT(VVlocked)
-GLOBAL_LIST_INIT(VVicon_edit_lock, list("icon", "icon_state", "overlays", "underlays"))		//Requires DEBUG or FUN
+GLOBAL_LIST_INIT(VVicon_edit_lock, list("icon", "icon_state", "overlays", "underlays")) //Requires DEBUG or FUN
 GLOBAL_PROTECT(VVicon_edit_lock)
-GLOBAL_LIST_INIT(VVckey_edit, list("key", "ckey"))	//Requires DEBUG or SPAWN
+GLOBAL_LIST_INIT(VVckey_edit, list("key", "ckey")) //Requires DEBUG or SPAWN
 GLOBAL_PROTECT(VVckey_edit)
-GLOBAL_LIST_INIT(VVpixelmovement, list("bound_x", "bound_y", "step_x", "step_y", "step_size", "bound_height", "bound_width", "bounds"))		//No editing ever.
+GLOBAL_LIST_INIT(VVpixelmovement, list("bound_x", "bound_y", "step_x", "step_y", "step_size", "bound_height", "bound_width", "bounds")) //No editing ever.
 GLOBAL_PROTECT(VVpixelmovement)
 
 /client/proc/vv_parse_text(O, new_var)
 	if(O && findtext(new_var,"\["))
-		var/process_vars = alert(usr,"\[] detected in string, process as variables?","Process Variables?","Yes","No")
+		var/process_vars = tgui_alert(usr,"\[] detected in string, process as variables?","Process Variables?",list("Yes","No"))
 		if(process_vars == "Yes")
 			. = string2listofvars(new_var, O)
 
@@ -23,8 +23,8 @@ GLOBAL_PROTECT(VVpixelmovement)
 	var/list/subtypes = subtypesof(type)
 	if (!subtypes || !subtypes.len)
 		return FALSE
-	if (subtypes && subtypes.len)
-		switch(alert("Strict object type detection?", "Type detection", "Strictly this type","This type and subtypes", "Cancel"))
+	if (subtypes?.len)
+		switch(tgui_alert(usr,"Strict object type detection?", "Type detection", list("Strictly this type","This type and subtypes", "Cancel")))
 			if("Strictly this type")
 				return FALSE
 			if("This type and subtypes")
@@ -49,14 +49,14 @@ GLOBAL_PROTECT(VVpixelmovement)
 	for(var/datum/D as anything in things)
 		i++
 		//try one of 3 methods to shorten the type text:
-		//	fancy type,
-		//	fancy type with the base type removed from the begaining,
-		//	the type with the base type removed from the begaining
+		// fancy type,
+		// fancy type with the base type removed from the begaining,
+		// the type with the base type removed from the begaining
 		var/fancytype = types[D.type]
 		if (findtext(fancytype, types[type]))
-			fancytype = copytext(fancytype, length(types[type])+1)
-		var/shorttype = copytext("[D.type]", length("[type]")+1)
-		if (length(shorttype) > length(fancytype))
+			fancytype = copytext(fancytype, length(types[type]) + 1)
+		var/shorttype = copytext("[D.type]", length("[type]") + 1)
+		if (length_char(shorttype) > length_char(fancytype))
 			shorttype = fancytype
 		if (!length(shorttype))
 			shorttype = "/"
@@ -64,7 +64,6 @@ GLOBAL_PROTECT(VVpixelmovement)
 		.["[D]([shorttype])[REF(D)]#[i]"] = D
 
 /client/proc/mod_list_add_ass(atom/O) //hehe
-
 	var/list/L = vv_get_value(restricted_classes = list(VV_RESTORE_DEFAULT))
 	var/class = L["class"]
 	if (!class)
@@ -94,9 +93,9 @@ GLOBAL_PROTECT(VVpixelmovement)
 	if (O)
 		L = L.Copy()
 
-	L += var_value
+	L += list(var_value) //var_value could be a list
 
-	switch(alert("Would you like to associate a value with the list entry?",,"Yes","No"))
+	switch(tgui_alert(usr,"Would you like to associate a value with the list entry?",,list("Yes","No")))
 		if("Yes")
 			L[var_value] = mod_list_add_ass(O) //hehe
 	if (O)
@@ -115,7 +114,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 		return
 
 	if(L.len > 1000)
-		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
+		var/confirm = tgui_alert(usr, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", list("Continue", "Abort"))
 		if(confirm != "Continue")
 			return
 
@@ -141,7 +140,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 
 		if(variable == "(CLEAR NULLS)")
 			L = L.Copy()
-			listclearnulls(L)
+			list_clear_nulls(L)
 			if (!O.vv_edit_var(objectvar, L))
 				to_chat(src, "Your edit was rejected by the object.")
 				return
@@ -151,7 +150,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 			return
 
 		if(variable == "(CLEAR DUPES)")
-			L = uniqueList(L)
+			L = unique_list(L)
 			if (!O.vv_edit_var(objectvar, L))
 				to_chat(src, "Your edit was rejected by the object.")
 				return
@@ -177,7 +176,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 	if (index == null)
 		return
 	var/assoc = 0
-	var/prompt = alert(src, "Do you want to edit the key or its assigned value?", "Associated List", "Key", "Assigned Value", "Cancel")
+	var/prompt = tgui_alert(usr, "Do you want to edit the key or its assigned value?", "Associated List", list("Key", "Assigned Value", "Cancel"))
 	if (prompt == "Cancel")
 		return
 	if (prompt == "Assigned Value")
@@ -185,7 +184,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 		assoc_key = L[index]
 	var/default
 	var/variable
-	var/old_assoc_value		//EXPERIMENTAL - Keep old associated value while modifying key, if any
+	var/old_assoc_value //EXPERIMENTAL - Keep old associated value while modifying key, if any
 	if(is_normal_list)
 		if (assoc)
 			variable = L[assoc_key]
@@ -380,6 +379,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 		to_chat(src, "Your edit was rejected by the object.")
 		return
 	vv_update_display(O, "varedited", VV_MSG_EDITED)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_VAR_EDIT, args)
 	log_world("### VarEdit by [key_name(src)]: [O.type] [variable]=[var_value] => [var_new]")
 	log_admin("[key_name(src)] modified [original_name]'s [variable] from [html_encode("[var_value]")] to [html_encode("[var_new]")]")
 	var/msg = "[key_name_admin(src)] modified [original_name]'s [variable] from [var_value] to [var_new]"
