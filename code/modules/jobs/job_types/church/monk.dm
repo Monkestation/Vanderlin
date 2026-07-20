@@ -90,6 +90,9 @@
 
 /datum/job/monk
 	title = JOB_ACOLYTE
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Brother")
+	alt_honorary_female = list("Sister")
 	tutorial = "Chores, exercise, prayer... and more chores. \
 	You are a humble acolyte at the temple in Vanderlin, \
 	not yet a trained guardian or an ordained priest. \

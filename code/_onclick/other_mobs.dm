@@ -612,52 +612,56 @@
 #define FLIP_DIRECTION_CLOCKWISE 1
 #define FLIP_DIRECTION_ANTICLOCKWISE 0
 
-/mob/living/proc/jump_action_resolve(atom/A, jadded, jrange, jextra)
-	var/do_a_flip
+/**
+ * Jump resolve
+ * Args
+ * * target - target atom we are jumping towards
+ * * stamina_cost - amount of stamina we need / we take when we jump
+ * * range - amount of tiles to throw
+ * * extra_tile - when the jump has ended, throw another tile
+ */
+/mob/living/proc/jump_action_resolve(atom/target, stamina_cost, range, extra_tile)
+	var/do_a_flip = FALSE
 	var/flip_direction = FLIP_DIRECTION_CLOCKWISE
 	var/prev_pixel_z = pixel_z
 	var/prev_transform = transform
-	if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4 || HAS_TRAIT(src, TRAIT_FLIP_JUMP))
+
+	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4)
 		do_a_flip = TRUE
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
 
-	// ensures the floating animation doesn't mess with our animation
-	if(movement_type & (MOVETYPES_FLOATING_ANIMATION))
-		ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT)
-		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT), 0.3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
-
-	if(adjust_stamina(min(jadded,100)))
-		if(do_a_flip)
-			var/flip_angle = flip_direction ? 120 : -120
-			animate(src, pixel_z = pixel_z + 6, transform = turn(transform, flip_angle), time = 1)
-			animate(transform = turn(transform, flip_angle), time=1)
-			animate(pixel_z = prev_pixel_z, transform = turn(transform, flip_angle), time=1)
-			animate(transform = prev_transform, time = 0)
-		else
-			animate(src, pixel_z = pixel_z + 6, time = 1)
-			animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
-			animate(transform = prev_transform, time = 0)
-
-		if(jextra)
-			throw_at(A, jrange, 1, src, spin = FALSE)
-			while(src.throwing)
-				sleep(1)
-			throw_at(get_step(src, src.dir), 1, 1, src, spin = FALSE)
-		else
-			throw_at(A, jrange, 1, src, spin = FALSE)
-			while(src.throwing)
-				sleep(1)
-		if(isopenturf(src.loc))
-			var/turf/open/T = src.loc
-			if(T.landsound)
-				playsound(T, T.landsound, 100, FALSE)
-			T.Entered(src)
-	else
-		animate(src, pixel_z = pixel_z + 6, time = 1)
-		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
+	if(!adjust_stamina(min(stamina_cost, 100)))
+		animate(src, pixel_z = pixel_z + 6, time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
 		animate(transform = prev_transform, time = 0)
-		throw_at(A, 1, 1, src, spin = FALSE)
+		throw_at(target, 1, 1, spin = FALSE)
+		return
+
+	if(do_a_flip)
+		var/flip_angle = flip_direction ? 120 : -120
+		animate(src, pixel_z = pixel_z + 6, transform = turn(transform, flip_angle), time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(transform = turn(transform, flip_angle), time = 0.1 SECONDS)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, flip_angle), time = 0.1 SECONDS)
+		animate(transform = prev_transform, time = 0)
+	else
+		animate(src, pixel_z = pixel_z + 6, time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
+		animate(transform = prev_transform, time = 0)
+
+	throw_at(target, range, 1, spin = FALSE, callback = CALLBACK(src, PROC_REF(jump_ended), extra_tile))
+
+/mob/living/proc/jump_ended(extra_tile)
+	if(QDELETED(src) || isopenspace(loc))
+		return
+
+	if(isopenturf(loc))
+		var/turf/open/open_turf = loc
+		if(open_turf.landsound)
+			playsound(open_turf, open_turf.landsound, 100, FALSE)
+
+	if(extra_tile)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)
 
 #undef FLIP_DIRECTION_CLOCKWISE
 #undef FLIP_DIRECTION_ANTICLOCKWISE

@@ -40,6 +40,7 @@
 
 /datum/job/magician
 	title = JOB_COURT_MAGE
+	alt_titles = list("Court Abjurer", "Court Illusionist", "Grand Wyrd", "Court Conjurer", "Court Spiritualist", "Court Summoner", "Court Evocator")
 	tutorial = "A seer of dreams, a reader of stars, and a master of the arcyne. Along a band of unlikely heroes, you shaped the fate of these lands.\
 	Now the days of adventure are gone, replaced by dusty tomes and whispered prophecies. The ruler's coin funds your studies,\
 	but debts both magical and mortal are never so easily repaid. With age comes wisdom, but also the creeping dread that your greatest spell work\

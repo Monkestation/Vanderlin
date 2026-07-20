@@ -891,6 +891,24 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	. = assigned_role
 	assigned_role = new_role
 
+/datum/mind/proc/update_alt_title(datum/job/new_role)
+	if(!istype(new_role))
+		new_role = ispath(new_role) ? SSjob.GetJobType(new_role) : SSjob.GetJob(new_role)
+	var/list/player_sel
+	if(new_role.title in current.client?.prefs?.alt_job_selections)
+		player_sel = current.client?.prefs?.alt_job_selections[new_role.title]
+
+	current.job_title_override = null
+	current.job_honorary_override = null
+	if(length(player_sel))
+		var/chosen_title = player_sel["title"]
+		if(chosen_title && (chosen_title in (list(new_role.title, new_role.f_title) + new_role.alt_titles + new_role.alt_titles_female)))
+			current.job_title_override = chosen_title
+
+		var/chosen_honorary = player_sel["honorary"]
+		if(chosen_honorary && (chosen_honorary in (list(new_role.honorary, new_role.honorary_f) + new_role.alt_honorary + new_role.alt_honorary_female)))
+			current.job_honorary_override = chosen_honorary
+
 /mob/proc/sync_mind()
 	mind_initialize()	//updates the mind (or creates and initializes one if one doesn't exist)
 	mind.active = TRUE	//indicates that the mind is currently synced with a client

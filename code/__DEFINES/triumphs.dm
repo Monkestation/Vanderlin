@@ -64,6 +64,8 @@
 
 #define TRIUMPH_BUY_SUBTERRAN_DWARF "subterran_dwarf"
 #define TRIUMPH_BUY_FORMIKRAG_KOBOLD "formikrag_kobold"
+#define TRIUMPH_BUY_SNOW_ELF "snow_elf"
+#define TRIUMPH_BUY_HALF_SNOW_ELF "half_snow_elf"
 
 // Bought triumph buys category
 #define TRIUMPH_CAT_ACTIVE_DATUMS "Bought"

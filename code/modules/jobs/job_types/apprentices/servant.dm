@@ -43,6 +43,8 @@
 /datum/job/servant
 	is_quest_giver = TRUE
 	title = JOB_SERVANT
+	unique_alt_titles = TRUE
+	alt_titles_female = list("Maid")
 	tutorial = "You are the faceless, nameless labor that keeps the royal court fed, washed, and attended to. \
 	You work your fingers to the bone nearly every dae, \
 	and have naught to show for it but boney fingers. \

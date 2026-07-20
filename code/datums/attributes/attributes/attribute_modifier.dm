@@ -186,4 +186,5 @@
 		update_attributes()
 
 /datum/attribute_modifier/attribute_editor
+	id = "Attribute Edited"
 	variable = TRUE

@@ -88,7 +88,7 @@
 
 /obj/item/chalk/examine(mob/user)
 	. = ..()
-	desc += "It has [amount] uses left."
+	. += span_info("It has [amount] uses left.")
 
 /obj/item/chalk/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(istype(tool, /obj/item/ore/cinnabar))
