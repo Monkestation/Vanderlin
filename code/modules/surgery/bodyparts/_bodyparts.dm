@@ -382,22 +382,27 @@
 /obj/item/bodypart/proc/kill_limb()
 	if(!can_decay())
 		return
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(!already_rot)
-		ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && !already_rot)
-		owner.update_body()
-	else
-		update_icon_dropped()
 
-/obj/item/bodypart/proc/revive_limb()
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(already_rot)
-		REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && already_rot)
+	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
+	ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	if(was_rotten)
+		return
+
+	owner?.update_body()
+	update_icon_dropped()
+
+/obj/item/bodypart/proc/revive_limb(update_icon = FALSE)
+	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
+	REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If it was rotten no need to update
+	if(was_rotten)
+		return
+
+	if(owner && update_icon)
 		owner.update_body()
-	else
-		update_icon_dropped()
+	update_icon_dropped()
 
 /// Adding/removing germs
 /obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
