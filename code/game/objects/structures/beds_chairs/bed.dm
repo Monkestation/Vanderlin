@@ -47,13 +47,12 @@
 
 /obj/structure/bed/examine(mob/user)
 	. = ..()
-	desc = initial(desc)
 	if(sheet_tucked && sheet_on)
-		desc += "\nThe sheet is neatly tucked in and the bed looks ready for a good rest."
+		. += span_info("The sheet is neatly tucked in and the bed looks ready for a good rest.")
 	else if(!sheet_tucked && sheet_on)
-		desc += "\nSomeone has already slept in this bed, the sheet is all messy."
+		. += span_info("Someone has already slept in this bed, the sheet is all messy.")
 	else
-		desc += "\nThis bed has no sheet, at least it's still a bed."
+		. += span_info("This bed has no sheet, at least it's still a bed.")
 
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	. = ..()

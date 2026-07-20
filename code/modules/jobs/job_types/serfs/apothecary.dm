@@ -36,6 +36,7 @@
 	)
 /datum/job/apothecary
 	title = JOB_APOTHECARY
+	alt_titles = list("Alchemist", "Herbalist")
 	tutorial = "You know every plant growing on these grounds and in the woods like the back of your hand. \
 	You are tasked with mixing tinctures and supplying the town and Feldsher with medicine. \
 	Some seek you out for your expertise in poisons or hedonistic pleasure. \

@@ -91,8 +91,10 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 
 /datum/attribute_holder/proc/get_attribute_ui_values(attribute_type)
 	var/list/values = list()
-	values["raw"] = return_raw_effective_skill(attribute_type)
-	values["effective"] = return_effective_skill(attribute_type)
+	var/list/breakdown = get_skill_value_breakdown(attribute_type)
+	values["base"] = breakdown["base"]
+	values["value"] = breakdown["value"]
+	values["net_modifier"] = isnull(breakdown["value"]) ? null : (breakdown["value"] - nulltozero(breakdown["base"]))
 	values["trained"] = !isnull(return_calculated_skill(attribute_type))
 	return values
 
@@ -184,9 +186,11 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 	var/list/stats_values = list()
 	for(var/stat_type in GLOB.all_stats)
 		var/datum/attribute/stat/stat = GET_ATTRIBUTE_DATUM(stat_type)
+		var/base = nulltozero(raw_attribute_list[stat_type])
+		var/final_value = nulltozero(attribute_list[stat_type])
 		stats_values[stat.name] = list(
-			"raw_value" = nulltozero(raw_attribute_list[stat_type]),
-			"value" = nulltozero(attribute_list[stat_type]),
+			"base" = base,
+			"net_modifier" = final_value - base,
 		)
 	data["stats_values"] = stats_values
 
@@ -196,8 +200,8 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 			var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 			var/list/values = get_attribute_ui_values(skill_type)
 			skills_values[skill.name] = list(
-				"raw_value" = values["raw"],
-				"value" = values["effective"],
+				"base" = values["base"],
+				"net_modifier" = values["net_modifier"],
 				"trained" = values["trained"],
 			)
 	data["skills_values"] = skills_values
@@ -207,14 +211,6 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 		closely_inspected_dynamic["name"] = closely_inspected_attribute.name
 		closely_inspected_dynamic["desc_from_level"] = capitalize_like_old_man(closely_inspected_attribute.description_from_level(attribute_list[closely_inspected_attribute.type]))
 
-		if(istype(closely_inspected_attribute, STAT))
-			closely_inspected_dynamic["raw_value"] = nulltozero(raw_attribute_list[closely_inspected_attribute.type])
-			closely_inspected_dynamic["value"] = nulltozero(attribute_list[closely_inspected_attribute.type])
-		else if(istype(closely_inspected_attribute, SKILL))
-			var/list/values = get_attribute_ui_values(closely_inspected_attribute.type)
-			closely_inspected_dynamic["raw_value"] = values["raw"]
-			closely_inspected_dynamic["value"] = values["effective"]
-
 		var/list/modifiers = list()
 		for(var/key in get_attribute_modification())
 			var/datum/attribute_modifier/mod = attribute_modification[key]
@@ -223,12 +219,28 @@ GLOBAL_LIST_EMPTY(attribute_menu_name_to_datum)
 			var/mod_val = mod.attribute_list[closely_inspected_attribute.type]
 			if(isnull(mod_val) || mod_val == 0)
 				continue
-			modifiers += list(list(
-				"id" = mod.id,
-				"value" = mod_val,
-			))
-		closely_inspected_dynamic["modifiers"] = modifiers
+			modifiers += list(list("id" = mod.id, "value" = mod_val))
 
+		if(istype(closely_inspected_attribute, STAT))
+			var/base = nulltozero(raw_attribute_list[closely_inspected_attribute.type])
+			var/final_value = nulltozero(attribute_list[closely_inspected_attribute.type])
+			closely_inspected_dynamic["base"] = base
+			closely_inspected_dynamic["net_modifier"] = final_value - base
+
+		else if(istype(closely_inspected_attribute, SKILL))
+			var/datum/attribute/skill/inspected_skill = closely_inspected_attribute
+			var/list/breakdown = get_skill_value_breakdown(inspected_skill.type)
+			closely_inspected_dynamic["base"] = breakdown["base"]
+			closely_inspected_dynamic["net_modifier"] = isnull(breakdown["value"]) ? null : (breakdown["value"] - nulltozero(breakdown["base"]))
+
+			if(breakdown["governing_contribution"] && inspected_skill.governing_attribute)
+				var/datum/attribute/governing_datum = GET_ATTRIBUTE_DATUM(inspected_skill.governing_attribute)
+				modifiers += list(list("id" = "Governing: [governing_datum.name]", "value" = breakdown["governing_contribution"]))
+
+			if(breakdown["defaults_contribution"])
+				modifiers += list(list("id" = "Defaulted", "value" = breakdown["defaults_contribution"]))
+
+		closely_inspected_dynamic["modifiers"] = modifiers
 		data["closely_inspected"] = closely_inspected_dynamic
 	else
 		data["closely_inspected"] = null

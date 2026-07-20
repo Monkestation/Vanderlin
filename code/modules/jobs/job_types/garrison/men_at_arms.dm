@@ -38,12 +38,12 @@
 	name = "Men-at-arms Base"
 	head = /obj/item/clothing/head/helmet/kettle/slit/atarms
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shirt = /obj/item/clothing/armor/gambeson/arming
+	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
 	neck = /obj/item/clothing/neck/bevor
-	gloves = /obj/item/clothing/gloves/leather
+	gloves = /obj/item/clothing/gloves/leather/advanced
 	wrists = /obj/item/clothing/wrists/bracers/leather
-	pants = /obj/item/clothing/pants/trou/leather/guard
-	shoes = /obj/item/clothing/shoes/boots
+	pants = /obj/item/clothing/pants/trou/leather/splint
+	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/manorguard
 	backpack_contents = list(
@@ -66,7 +66,7 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 33,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
@@ -111,7 +111,7 @@
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/axesmaces = 33,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -154,8 +154,8 @@
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 33,
+		/datum/attribute/skill/combat/crossbows = 33,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -202,8 +202,8 @@
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/swords = 33,
+		/datum/attribute/skill/combat/shields = 33,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
