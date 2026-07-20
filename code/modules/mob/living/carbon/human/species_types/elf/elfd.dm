@@ -160,7 +160,6 @@
 		"Jackpoison" = SKIN_COLOR_JACKPOISON, // - (Grey-purple)
 		"Homunculus" = SKIN_COLOR_HOMUNCULUS, // - (Grey-blue)
 		"Arachnid Ichor" = SKIN_COLOR_ARACHNID_ICHOR, // - (Black-blue)
-		"Zizo Descendant" = SKIN_COLOR_ICECAP, // - (Pale white)
 		"Gloomhaven" = SKIN_COLOR_GLOOMHAVEN, // - (Pink)
 	))
 
@@ -186,5 +185,3 @@
 
 /datum/species/elf/dark/after_creation(mob/living/carbon/human/C)
 	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 2)
-	if(C.skin_tone == SKIN_COLOR_ICECAP)
-		exotic_bloodtype = /datum/blood_type/human/cursed_elf

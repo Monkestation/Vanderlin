@@ -177,9 +177,6 @@
 		C.dna.species.native_language = C.accent
 	C.dna.species.accent_language = C.dna.species.get_accent(C.dna.species.native_language, 2)
 
-	if(C.skin_tone == SKIN_COLOR_ICECAP)
-		exotic_bloodtype = /datum/blood_type/human/cursed_elf
-
 	C.grant_language(/datum/language/elvish)
 	to_chat(C, "<span class='info'>I can speak Elvish with ,e before my speech.</span>")
 

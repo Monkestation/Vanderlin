@@ -38,20 +38,17 @@
 			qdel(new_key)
 		LAZYREMOVE(keys, X)
 
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/storage/keyring/update_icon_state()
 	icon_state = "keyring[clamp(length(contents), 0, 5)]"
 	return ..()
 
-/obj/item/storage/keyring/update_desc()
-	if(!length(contents))
-		desc = initial(desc)
-		return
-	desc = span_info("Holds \Roman[length(contents)] key\s, including:")
+/obj/item/storage/keyring/examine(mob/user)
+	. = ..()
+	. += span_info("Holds \Roman[length(contents)] key\s, including:")
 	for(var/obj/item/key/KE in contents)
-		desc += span_info("\n- [KE.name ? "\A [KE.name]." : "An unknown key."]")
-	return ..()
+		. += span_info("- [KE.name ? "\A [KE.name]." : "An unknown key."]")
 
 /obj/item/storage/keyring/proc/refresh_keys()
 	LAZYCLEARLIST(combined_access)
@@ -74,12 +71,12 @@
 
 /obj/item/storage/keyring/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+	update_appearance(UPDATE_ICON_STATE)
 	refresh_keys()
 
 /obj/item/storage/keyring/Exited(atom/movable/gone, direction)
 	. = ..()
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+	update_appearance(UPDATE_ICON_STATE)
 	refresh_keys()
 
 /obj/item/storage/keyring/getonmobprop(tag)

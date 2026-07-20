@@ -1,0 +1,5 @@
+author: "snowyseshi"
+delete-after: True
+changes:
+  - rscadd: "Added snow elves and half-snow elves as triumph bought species"
+  - balance: "drow and half drow stat tweaks"
