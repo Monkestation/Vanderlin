@@ -1154,7 +1154,7 @@
 
 /datum/special_trait/doaflip
 	name = "Do a Flip"
-	greet_text = span_notice("I compulsively flip every time I jump")")
+	greet_text = span_notice("I compulsively flip every time I jump")
 	weight = 80
 
 /datum/special_trait/doaflip/on_apply(mob/living/carbon/human/character, silent)
