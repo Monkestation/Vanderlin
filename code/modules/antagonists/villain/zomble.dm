@@ -226,6 +226,7 @@
 	zombie.cut_overlay(rotflies)
 	zombie.attributes?.remove_attribute_modifier(/datum/attribute_modifier/zombie)
 	zombie.remove_client_colour(/datum/client_colour/monochrome)
+	QDEL_NULL(zombie.ai_controller)
 
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		zombie_part.revive_limb()
