@@ -277,11 +277,11 @@ DEFINE_BITFIELD(organ_flags, list(
 /// We need to take at least this much brainloss gained at once to roll for brain traumas, any less it won't roll
 #define TRAUMA_ROLL_THRESHOLD 5
 /// Brainloss caused by mildly low blood oxygenation
-#define BRAIN_DAMAGE_LOW_OXYGENATION 1.5
+#define BRAIN_DAMAGE_LOW_OXYGENATION 1
 /// Brainloss caused by lower than low blood oxygenation
-#define BRAIN_DAMAGE_LOWER_OXYGENATION 3
+#define BRAIN_DAMAGE_LOWER_OXYGENATION 2.5
 /// Brainloss caused by a complete lack of oxygen flow
-#define BRAIN_DAMAGE_LOWEST_OXYGENATION 4.5
+#define BRAIN_DAMAGE_LOWEST_OXYGENATION 4
 
 // ~pulse levels, very simplified.
 #define PULSE_NONE 0   // So !M.pulse checks would be possible.
