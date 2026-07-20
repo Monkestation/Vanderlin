@@ -316,3 +316,32 @@
   - balance: nerfed the Cadwyn Order Migrant Wave. It no longer spawns a max of three
       Crusaders with plate, miracles and silver. It'll spawn a max of 1 Crusader,
       and 2 Sentinels with worse gear, stats and skills.
+2026-07-20:
+  Archeonan:
+  - balance: Adjusted skills of bandits, MAA's, gallowband, tomb warden, gatemaster,
+      watch LT, inquisition, and mercenaries
+  - balance: Adjusted gear of certain mercs and starting MAA equipment
+  - rscadd: Half Elves can now be Grenzelhoft Doppelsoldners, Hellebardieres, and
+      Arkebuisers.
+  CheffieGithub:
+  - bugfix: Fixed stacking rotation contraptions
+  - bugfix: Fixed not being able to create dye bins
+  - bugfix: Fixed using the alt click menu to place items on tables hitting the table.
+  ModDownloading:
+  - qol: Eora's Matchmaking will no longer fire after the 1 hour mark, and Necra's
+      Requiem will no longer fire after the 1 hour 30 minute mark.
+  SmokingCrackForChrist:
+  - qol: Gives Renegade Leatherworking.
+  Telvayne:
+  - balance: Various species stats altered
+  aberrantQuesrist:
+  - qol: Better river mapping helpers.
+  dwasint:
+  - qol: the skill menu now displays the base value with a +- modifier instead of
+      the total value
+  - rscadd: skills you have default levels in now show as such instead of NA.
+  tired-wired:
+  - rscadd: Aasimar get favoured species bonuses for their patron if available.
+  yafesdot:
+  - bugfix: fixes a runtime error when clicking the randomise appearance button in
+      character setup
