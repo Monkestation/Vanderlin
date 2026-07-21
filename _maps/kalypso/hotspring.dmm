@@ -16,19 +16,22 @@
 /turf/template_noop,
 /area)
 "j" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/water/hotspring,
+/turf/template_noop,
 /area)
 "l" = (
 /obj/structure/flora/hotspring_rocks/small/four,
 /turf/template_noop,
 /area)
 "n" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/water/hotspring,
+/turf/template_noop,
 /area)
 "o" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/template_noop,
 /area)
 "r" = (
 /obj/structure/hotspring/border,
@@ -72,8 +75,9 @@
 /turf/template_noop,
 /area)
 "L" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/water/hotspring,
+/turf/template_noop,
 /area)
 "M" = (
 /turf/template_noop,

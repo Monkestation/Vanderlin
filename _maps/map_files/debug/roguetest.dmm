@@ -1170,8 +1170,9 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
 "fq" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "fs" = (
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -1492,9 +1493,10 @@
 /turf/open/floor/cobblerock,
 /area/outdoors)
 "lH" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "lQ" = (
 /obj/structure/minecart_rail{
@@ -1580,7 +1582,8 @@
 /turf/open/floor/tile/bfloorz,
 /area/indoors)
 "nl" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/obj/structure/hotspring,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
 "nm" = (
@@ -1615,9 +1618,10 @@
 /turf/open/floor/wood,
 /area/indoors)
 "oF" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "oH" = (
 /obj/structure/soil/debug_soil/random,
@@ -2163,6 +2167,7 @@
 /turf/open/openspace,
 /area/outdoors)
 "zy" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/lily_petal/three{
 	pixel_y = -14;
@@ -2172,7 +2177,7 @@
 	pixel_y = 13;
 	pixel_x = 11
 	},
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "zA" = (
 /obj/structure/water_pump,
@@ -2467,8 +2472,9 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "Cd" = (
+/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "Cv" = (
 /obj/structure/chair/stool,
@@ -2644,7 +2650,8 @@
 /turf/open/openspace,
 /area)
 "GJ" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "GU" = (
 /obj/structure/hotspring/border/eleven,
@@ -2993,8 +3000,9 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "NM" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "NY" = (
 /obj/effect/falling_sakura,
@@ -3291,7 +3299,8 @@
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep)
 "UD" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
 "UG" = (
 /obj/structure/carpet/purple,
@@ -3327,11 +3336,12 @@
 /turf/open/water/sewer,
 /area/outdoors)
 "Vm" = (
+/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/structure/flora/sakura{
 	pixel_y = -13
 	},
-/turf/open/water/hotspring,
+/turf/open/floor/dirt/road,
 /area/outdoors)
 "Vp" = (
 /obj/structure/flora/grass,

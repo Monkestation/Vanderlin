@@ -195,6 +195,11 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/grass,
 /area/outdoors)
+"aT" = (
+/obj/structure/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "aX" = (
 /obj/structure/flora/grass/bush{
 	pixel_x = -3
@@ -218,7 +223,8 @@
 "be" = (
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "bh" = (
 /obj/structure/wild_plant/nospread/strawberry{
@@ -236,7 +242,8 @@
 "bj" = (
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "bm" = (
 /obj/item/grown/log/tree/stick{
@@ -566,6 +573,11 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/floor/grass,
 /area/outdoors)
+"cV" = (
+/obj/structure/hotspring,
+/obj/effect/lily_petal/three,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "cW" = (
 /obj/structure/flora/newbranch/leafless{
 	icon_state = "branch-end2";
@@ -605,7 +617,8 @@
 "di" = (
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/lily_petal/three,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "dj" = (
 /obj/item/grown/log/tree/stick,
@@ -613,8 +626,9 @@
 /area/outdoors)
 "dl" = (
 /obj/effect/falling_sakura,
+/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "do" = (
 /obj/item/natural/stone{
@@ -1694,8 +1708,9 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "iw" = (
+/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "ix" = (
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat{
@@ -1770,7 +1785,8 @@
 /area/outdoors)
 "iN" = (
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "iQ" = (
 /obj/effect/landmark/observer_start,
@@ -2478,6 +2494,10 @@
 	},
 /turf/open/water/marsh,
 /area/outdoors)
+"mB" = (
+/obj/structure/hotspring,
+/turf/open/floor/cobblerock,
+/area/outdoors)
 "mC" = (
 /obj/structure/flora/grass/bush_meagre{
 	icon_state = "bush3";
@@ -2527,7 +2547,8 @@
 "mP" = (
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/lily_petal/three,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "mS" = (
 /obj/structure/flora/grass{
@@ -2845,6 +2866,10 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobble/alt,
 /area/under/cave)
+"ov" = (
+/obj/structure/hotspring,
+/turf/open/floor/grass/eora,
+/area/outdoors)
 "ow" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -3197,7 +3222,8 @@
 /area/under/cave)
 "qr" = (
 /obj/structure/flora/hotspring_rocks/small,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "qs" = (
 /obj/structure/fluff/railing/wood{
@@ -3688,7 +3714,8 @@
 /area/under/cave)
 "tb" = (
 /obj/structure/flora/hotspring_rocks,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "tg" = (
 /turf/open/floor/dirt/road,
@@ -4381,7 +4408,8 @@
 /area/indoors/town)
 "wC" = (
 /obj/effect/lily_petal,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "wF" = (
 /obj/structure/flora/grass{
@@ -4445,7 +4473,8 @@
 /area/outdoors)
 "wY" = (
 /obj/effect/lily_petal/three,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "wZ" = (
 /obj/structure/wild_plant/nospread/blackberry{
@@ -4684,7 +4713,8 @@
 "xZ" = (
 /obj/effect/lily_petal,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "ya" = (
 /obj/structure/stairs/stone{
@@ -4940,7 +4970,8 @@
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "zE" = (
 /obj/effect/waterfall{
@@ -5455,7 +5486,8 @@
 /area/outdoors)
 "Cl" = (
 /obj/effect/lily_petal/two,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "Cn" = (
 /obj/structure/flora/grass/bush{
@@ -5664,6 +5696,12 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors)
+"Dx" = (
+/obj/structure/hotspring,
+/obj/structure/hotspring,
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "Dz" = (
 /obj/structure/flora/ausbushes/reedbush{
 	icon_state = "reedbush_4"
@@ -5743,7 +5781,8 @@
 "DU" = (
 /obj/structure/flora/hotspring_rocks/small,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "DV" = (
 /obj/structure/wild_plant/nospread/lemon{
@@ -5924,7 +5963,8 @@
 /area/outdoors)
 "EY" = (
 /obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "EZ" = (
 /turf/open/floor/woodturned,
@@ -6082,6 +6122,12 @@
 /obj/structure/tent_wall,
 /turf/open/floor/grass,
 /area/indoors/town)
+"FK" = (
+/obj/structure/hotspring,
+/obj/structure/hotspring,
+/obj/structure/flora/hotspring_rocks,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "FM" = (
 /obj/structure/wild_plant/nospread/blackberry{
 	name = "wild blackberry bush";
@@ -6372,8 +6418,9 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "Hp" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "Hq" = (
 /obj/structure/wild_plant/nospread/apple{
@@ -6646,7 +6693,8 @@
 /obj/structure/flora/hotspring_rocks/small,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "IG" = (
 /obj/structure/fluff/walldeco/vinez/blue,
@@ -7008,6 +7056,11 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
+"KH" = (
+/obj/structure/hotspring,
+/obj/effect/lily_petal,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "KI" = (
 /obj/structure/wild_plant/nospread/blackberry{
 	name = "wild blackberry bush";
@@ -7256,6 +7309,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Md" = (
+/obj/effect/falling_sakura,
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "Mf" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -7965,7 +8024,8 @@
 "PJ" = (
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "PM" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -8044,7 +8104,8 @@
 /turf/open/floor/grass,
 /area/outdoors)
 "Qe" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "Qg" = (
 /obj/structure/flora/newtree,
@@ -8514,6 +8575,11 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/town)
+"Sv" = (
+/obj/structure/hotspring,
+/obj/structure/flora/hotspring_rocks/small/five,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "Sw" = (
 /obj/structure/roguerock{
 	icon_state = "rock3"
@@ -9539,7 +9605,8 @@
 "Yo" = (
 /obj/structure/flora/hotspring_rocks/small/five,
 /obj/effect/falling_sakura,
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "Yp" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
@@ -9619,6 +9686,11 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/blocks/platform,
 /area/outdoors)
+"YJ" = (
+/obj/structure/hotspring,
+/obj/structure/flora/hotspring_rocks/small,
+/turf/open/floor/naturalstone,
+/area/outdoors)
 "YM" = (
 /obj/structure/stairs/stone/church{
 	dir = 4
@@ -9660,8 +9732,9 @@
 /turf/open/floor/hay,
 /area/outdoors)
 "Zc" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors)
 "Zf" = (
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat{
@@ -511701,7 +511774,7 @@ tw
 tw
 tw
 Fb
-dl
+Md
 iN
 PJ
 Qe
@@ -512893,14 +512966,14 @@ xr
 HR
 mv
 Vq
+mB
+Qe
+KH
 Qe
 Qe
-wC
 Qe
 Qe
-Qe
-Qe
-EY
+Sv
 Qe
 Qe
 bc
@@ -513299,12 +513372,12 @@ Qe
 Zc
 Qe
 Qe
-qr
+YJ
 Qe
 Qe
 Qe
-Qe
-wY
+aT
+cV
 iw
 bc
 aI
@@ -513697,9 +513770,9 @@ WU
 HR
 Fb
 Qe
-wC
+KH
 Qe
-qr
+YJ
 Gb
 bZ
 bZ
@@ -514098,7 +514171,7 @@ xr
 xr
 HR
 Fb
-EY
+Sv
 Qe
 Qe
 Qe
@@ -514512,7 +514585,7 @@ xr
 fN
 Oc
 Qe
-wC
+KH
 IY
 tw
 tw
@@ -514903,9 +514976,9 @@ WU
 HR
 Fb
 Qe
-qr
-Qe
-Qe
+YJ
+aT
+aT
 yR
 fN
 xr
@@ -515305,7 +515378,7 @@ HI
 HR
 QO
 MP
-wY
+cV
 Qe
 Hp
 yR
@@ -515315,7 +515388,7 @@ Tv
 MK
 fN
 Oc
-EY
+Sv
 Qe
 IY
 HR
@@ -516119,7 +516192,7 @@ fN
 YU
 sQ
 Fx
-wC
+KH
 Qe
 IY
 HR
@@ -516511,18 +516584,18 @@ iy
 xr
 HR
 LQ
-qr
+YJ
 Qe
-EY
+Sv
 Qe
-Qe
+aT
 wl
 sQ
 Fx
+ov
+aT
 Qe
-Qe
-Qe
-qr
+YJ
 IY
 tw
 tw
@@ -516915,14 +516988,14 @@ HR
 LQ
 Qe
 Qe
-wC
+KH
 Qe
-iw
+Dx
+aT
 Qe
 Qe
 Qe
-Qe
-tb
+FK
 Qe
 Qe
 IY
@@ -517318,12 +517391,12 @@ RZ
 iX
 Qe
 Qe
-qr
+YJ
 Qe
-wY
+cV
 Qe
 Qe
-qr
+YJ
 Qe
 Qe
 uQ

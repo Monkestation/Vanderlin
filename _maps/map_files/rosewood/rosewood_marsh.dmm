@@ -805,7 +805,7 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/lich)
 "eA" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/dirt,
 /area/indoors/lich)
 "eB" = (
@@ -1441,8 +1441,9 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
 "hD" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "hE" = (
 /obj/effect/decal/remains/human,
@@ -1566,9 +1567,9 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/lich)
 "in" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "io" = (
@@ -2280,6 +2281,11 @@
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
+"mw" = (
+/obj/structure/hotspring,
+/obj/structure/flora/hotspring_rocks/small,
+/turf/open/floor/naturalstone,
+/area/outdoors/bog)
 "mD" = (
 /obj/structure/door/stone,
 /turf/open/floor/churchmarble,
@@ -2945,8 +2951,8 @@
 /area/indoors/mountains)
 "qa" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "qc" = (
@@ -2995,8 +3001,9 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "qq" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "qr" = (
 /turf/open/water/blood,
@@ -3037,8 +3044,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/bog/witch)
 "qI" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small,
-/turf/open/water/hotspring,
+/turf/open/floor/dirt,
 /area/outdoors/bog)
 "qK" = (
 /obj/structure/spider/cocoon,
@@ -3077,8 +3085,9 @@
 /turf/open/floor/church/purple,
 /area/indoors/lich)
 "ra" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "rb" = (
 /mob/living/carbon/human/species/orc/marauder,
@@ -3779,6 +3788,10 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/lich)
+"uu" = (
+/obj/structure/hotspring,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/lich)
 "uv" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener,
@@ -3926,8 +3939,9 @@
 /turf/open/openspace,
 /area/outdoors/bog)
 "vk" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "vl" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -4217,7 +4231,8 @@
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
 "wF" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "wG" = (
 /obj/structure/hotspring/border/twelve,
@@ -5086,7 +5101,7 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/mountains)
 "AU" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/lich)
 "AW" = (
@@ -5624,7 +5639,8 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "DA" = (
-/turf/open/water/hotspring,
+/obj/structure/hotspring,
+/turf/open/floor/ruinedwood,
 /area/indoors/lich)
 "DB" = (
 /obj/item/reagent_containers/glass/cup/wooden/crafted,
@@ -6032,7 +6048,7 @@
 /area/outdoors/bog)
 "FW" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
 "FX" = (
@@ -6202,8 +6218,9 @@
 /turf/open/openspace,
 /area/outdoors/bog)
 "GJ" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "GK" = (
 /obj/structure/fermentation_keg/random/beer,
@@ -8189,10 +8206,11 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/bog)
 "Sx" = (
+/obj/structure/hotspring,
 /mob/living/simple_animal/hostile/retaliate/infernal/imp{
 	faction = list("Undead")
 	},
-/turf/open/water/hotspring,
+/turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
 "Sz" = (
 /obj/effect/decal/shadow_floor{
@@ -8604,7 +8622,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "Uy" = (
-/mob/living/carbon/human/species/zizombie/npc/GRENZEL,
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "Uz" = (
@@ -9297,8 +9315,9 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "Yg" = (
+/obj/structure/hotspring,
 /mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "Yj" = (
 /obj/structure/bars,
@@ -9348,8 +9367,9 @@
 /turf/open/floor/cobblerock/alt,
 /area/indoors/lich)
 "Yx" = (
+/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/four,
-/turf/open/water/hotspring,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "YB" = (
 /obj/structure/stairs/stone,
@@ -69310,7 +69330,7 @@ dE
 dE
 sL
 Sx
-DA
+uu
 QA
 aa
 Fn
@@ -92846,7 +92866,7 @@ IC
 IC
 yn
 ji
-qI
+mw
 wF
 bj
 bb
@@ -110581,7 +110601,7 @@ Av
 bD
 bD
 Av
-bD
+FW
 Av
 Av
 qa
@@ -110985,8 +111005,8 @@ cu
 Av
 bD
 bD
-FW
 bD
+Hl
 Av
 Hl
 Av
