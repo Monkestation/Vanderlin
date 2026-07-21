@@ -1163,8 +1163,9 @@
 	ADD_TRAIT(character, TRAIT_FLIP_JUMP, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/fish
-	name = "Swim like a Fish"
-	greet_text = span_notice("I always been told I swim as well as a Triton.")
+	name = "Blessings of Abyssor"
+	greet_text = span_notice("Abyssor gives me stregnth to swim like his chosen Triton.")
+	allowed_patrons = list(/datum/patron/divine/abyssor)
 	weight = 75
 
 /datum/attribute_holder/sheet/job/fish
@@ -1177,6 +1178,7 @@
 
 /datum/special_trait/fish/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_SWIMMER, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NODROWN, BE_SPECIAL_TRAIT)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/fish)
 
 /datum/special_trait/thenerve
@@ -1187,17 +1189,19 @@
 /datum/special_trait/thenerve/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
 
-/datum/special_trait/sneakygit
-	name = "Sneaky Git"
-	greet_text = span_notice("A master of getting around unseen, dat's one sneaky git.)")
-	weight = 40
+/datum/special_trait/beanpole
+	name = "Beanpole"
+	greet_text = span_notice("I am very tall and lanky, and I have a hard time fitting into tight spaces.")
+	weight = 50
 
-/datum/attribute_holder/sheet/job/sneakygit
+/datum/attribute_holder/sheet/job/beanpole
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/sneaking = 60 ,
+		STAT_STRENGTH = -2,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = 2,
 	)
 
-/datum/special_trait/sneakygit/on_apply(mob/living/carbon/human/character, silent)
-	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/sneakygit)
-	character.add_spell(/datum/action/cooldown/spell/undirected/shadow_step, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/smoke_bomb, silent = TRUE)
+/datum/special_trait/beanpole/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/beanpole)
+	character.transform = character.transform.Scale(1, 1.2)
+	character.update_transform()
