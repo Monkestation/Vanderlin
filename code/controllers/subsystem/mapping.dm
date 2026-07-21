@@ -212,11 +212,6 @@ SUBSYSTEM_DEF(mapping)
 #ifdef TESTING
 	INIT_ANNOUNCE("Loading [config.map_name]...")
 #endif
-	//set the primary level to be the designated "town"
-	if(islist(config.traits))
-		for(var/list/level in config.traits)
-			if (!(ZTRAIT_TOWN in level))
-				level[ZTRAIT_TOWN] = TRUE
 
 	LoadGroup(FailedZs, config.map_name, config.map_path, config.map_file, config.traits, ZTRAITS_TOWN, delve = config.delve)
 
@@ -236,7 +231,6 @@ SUBSYSTEM_DEF(mapping)
 #endif
 
 	//For all maps
-
 #ifndef LOWMEMORYMODE
 	otherZ += load_map_config("map_files/shared/underworld") // don't load underworld on lowmem
 #endif
@@ -245,7 +239,7 @@ SUBSYSTEM_DEF(mapping)
 		for(var/datum/map_config/OtherZ as anything in otherZ)
 			if(OtherZ.defaulted)
 				continue
-			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_STATION, delve = OtherZ.delve)
+			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_OUTLAND, delve = OtherZ.delve)
 
 	if(SSdbcore.Connect())
 		var/datum/DBQuery/query_round_map_name = SSdbcore.NewQuery({"
@@ -253,13 +247,6 @@ SUBSYSTEM_DEF(mapping)
 		"}, list("map_name" = config.map_name, "round_id" = GLOB.round_id))
 		query_round_map_name.Execute()
 		qdel(query_round_map_name)
-
-#ifndef LOWMEMORYMODE
-	// TODO: remove this when the DB is prepared for the z-levels getting reordered
-	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
-		++space_levels_so_far
-		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-#endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
 		var/msg = "RED ALERT! The following map files failed to load: [FailedZs[1]]"

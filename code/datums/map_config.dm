@@ -124,11 +124,11 @@
 	traits = json["traits"]
 	// "traits": [{"Linkage": "Cross"}, {"Space Ruins": true}]
 	if (islist(traits))
-		// "Station" is set by default, but it's assumed if you're setting
+		// "Town" is set by default, but it's assumed if you're setting
 		// traits you want to customize which level is cross-linked
 		for (var/level in traits)
-			if (!(ZTRAIT_STATION in level))
-				level[ZTRAIT_STATION] = TRUE
+			if (!(ZTRAIT_TOWN in level))
+				level[ZTRAIT_TOWN] = TRUE
 	// "traits": null or absent -> default
 	else if (!isnull(traits))
 		log_world("map_config traits is not a list!")

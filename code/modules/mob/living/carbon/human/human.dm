@@ -1062,7 +1062,6 @@
 			SSmatthios_mobs.register_mob(src)
 		if(SSterrain_generation.get_island_at_location(turf))
 			faction |= "islander"
-			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
 
 /mob/living/carbon/human/species/after_creation()
 	. = ..()
@@ -1070,7 +1069,6 @@
 		var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
 		head?.sellprice = headprice
 		head?.randomize_price()
-
 
 /**
  * Called when this human should be washed

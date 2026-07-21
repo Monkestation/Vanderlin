@@ -10,7 +10,6 @@
 			SSmatthios_mobs.register_mob(src)
 		if(SSterrain_generation.get_island_at_location(turf))
 			faction |= "islander"
-			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
 
 /mob/living/Initialize()
 	. = ..()
@@ -42,8 +41,7 @@
 /mob/living/Destroy()
 	if(FACTION_MATTHIOS in faction)
 		SSmatthios_mobs.unregister_mob(src)
-	if(cached_island_id)
-		SSisland_mobs.remove_mob(src)
+
 	update_z(null)
 
 	if(LAZYLEN(status_effects))
@@ -52,6 +50,7 @@
 				qdel(S)
 			else
 				S.be_replaced()
+
 	if(buckled)
 		buckled.unbuckle_mob(src,force=1)
 
@@ -1867,8 +1866,6 @@
 		return FALSE
 	if(is_centcom_level(T.z)) //dont detect mobs on centcom
 		return FALSE
-	if(is_away_level(T.z))
-		return FALSE
 	if(user != null && src == user)
 		return FALSE
 	if(invisibility || alpha == 0)//cloaked
@@ -2949,8 +2946,6 @@
 
 	if(src in SSmatthios_mobs.matthios_mobs)
 		SSmatthios_mobs.unregister_mob(src)
-	if(cached_island_id)
-		SSisland_mobs.remove_mob(src)
 
 	return TRUE
 
