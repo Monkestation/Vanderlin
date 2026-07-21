@@ -1,0 +1,4 @@
+author: "Singul0"
+delete-after: True
+changes:
+  - bugfix: "fixes no magic rings not working for monarchs"

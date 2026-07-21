@@ -459,6 +459,34 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	to_chat(src, "<span class='boldnotice'>I can no longer be brought back into your body.</span>")
 	return TRUE
 
+/// Allows human ghosts to set their mob's final words variable.
+/mob/dead/observer/verb/set_final_words()
+	set category = "Spirit"
+	set name = "Set Final Words"
+	set hidden = 1
+
+	if(!isobserver(src) || !client)
+		return
+
+	if(!mind || QDELETED(mind.current))
+		to_chat(src, span_warning("I have no body."))
+		return
+	if(!ishuman(mind.current))
+		to_chat(src, span_warning("I am not sophisticated enough to leave final words..."))
+		return
+	var/mob/living/carbon/human/body = mind.current
+
+	if(body.funeral)
+		to_chat(src, span_warning("My body has already been laid to rest!</span>"))
+		return
+
+	var/final_words = tgui_input_text(src, "Set or update the words you shall impart when you are laid to rest... (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", body.final_words, 50, timeout = 30 SECONDS)
+	if(!final_words || final_words == body.final_words)
+		return
+	body.final_words = final_words
+	log_say("[src] put [final_words] for their final words.")
+
+
 /mob/dead/observer/proc/notify_cloning(message, sound, atom/source, flashwindow = TRUE)
 	if(flashwindow)
 		window_flash(client)

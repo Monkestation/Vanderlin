@@ -31,6 +31,7 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
+		TRAIT_GATEKEEPER,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(
@@ -62,7 +63,7 @@
 		STAT_ENDURANCE = 2,
 		STAT_PERCEPTION = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/whipsflails = 36,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
@@ -112,8 +113,8 @@
 		STAT_CONSTITUTION = 2,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/axesmaces = 36,
+		/datum/attribute/skill/combat/shields = 35,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -159,8 +160,8 @@
 		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 36,
+		/datum/attribute/skill/combat/crossbows = 36,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,

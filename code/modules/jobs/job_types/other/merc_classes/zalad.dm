@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/combat/polearms = 10,
 		/datum/attribute/skill/combat/whipsflails = 10,
 		/datum/attribute/skill/misc/reading = 10,
@@ -74,7 +74,7 @@
 	beltr = /obj/item/weapon/sword/long/rider
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
-	pants = /obj/item/clothing/pants/tights/colored/red
+	pants = /obj/item/clothing/pants/chainlegs/iron
 	neck = /obj/item/clothing/neck/keffiyeh/colored/red
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
