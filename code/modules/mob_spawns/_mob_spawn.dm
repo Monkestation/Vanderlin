@@ -125,14 +125,8 @@
 			for(var/trait in real_job.traits)
 				ADD_TRAIT(spawned_human, trait, JOB_TRAIT)
 
-			for(var/datum/skill/skill as anything in real_job.skills)
-				var/amount_or_list = real_job.skills[skill]
-				if(islist(amount_or_list))
-					spawned_human.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
-				else
-					spawned_human.adjust_skillrank(skill, amount_or_list, TRUE)
-
-			spawned_mob.adjust_stat_modifier_list(STATMOD_JOB, real_job.jobstats)
+			if(spawned_human.attributes)
+				real_job.assign_attributes(spawned_human, null)
 
 	if(outfit)
 		outfit_used = outfit

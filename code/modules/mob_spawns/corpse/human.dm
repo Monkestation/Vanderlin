@@ -21,7 +21,7 @@
 
 /obj/effect/mob_spawn/corpse/random/special(mob/living/carbon/human/spawned)
 	. = ..()
-	mob_species = GLOB.species_list[pick(get_selectable_species())]
+	mob_species = GLOB.species_list[pick(GLOB.roundstart_species)]
 
 /obj/effect/mob_spawn/corpse/random/pilgrim
 	name = "pilgrim corpse"
