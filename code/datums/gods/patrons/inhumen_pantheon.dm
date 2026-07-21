@@ -1,7 +1,7 @@
 /datum/patron/inhumen
 	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/structure/fluff/psycross/zizocross,
 		),
@@ -40,7 +40,7 @@
 		/mob/living/carbon/human/proc/praise,
 	)
 	added_blueprints = list(/datum/blueprint_recipe/zizo/shrine)
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/zizo,
 			/obj/item/clothing/neck/psycross/zizo/wood
@@ -69,7 +69,7 @@
 	)
 	storyteller = /datum/storyteller/graggar
 	added_blueprints = list(/datum/blueprint_recipe/graggar/shrine)
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/graggar,
 			/obj/item/clothing/neck/psycross/graggar/wood
@@ -97,7 +97,7 @@
 	)
 	storyteller = /datum/storyteller/matthios
 	added_blueprints = list(/datum/blueprint_recipe/matthios/idol)
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/matthios,
 			/obj/item/clothing/neck/psycross/matthios/wood
@@ -124,7 +124,7 @@
 		"BAOTHA'S WHISPERS CALM MY MIND!",
 	)
 	storyteller = /datum/storyteller/baotha
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/baotha,
 			/obj/item/clothing/neck/psycross/baotha/wood

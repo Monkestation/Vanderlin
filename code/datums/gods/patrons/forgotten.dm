@@ -16,7 +16,7 @@
 		"PSYDON WILL RETURN!",
 	)
 
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver,
 			/obj/item/clothing/neck/psycross

@@ -41,7 +41,7 @@
 		"LET ME BE HUNTED, NOT SLAUGHTERED LIKE THIS!"
 	)
 	devotion_holder = /datum/devotion/alternate/great_hunt
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/great_hunt
 		),

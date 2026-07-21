@@ -40,7 +40,7 @@ GLOBAL_LIST_EMPTY(prayers)
 	var/list/added_verbs
 
 
-	var/list/associated_objects = list(
+	var/list/associated_objects = alist(
 		PATRON_AMULET = null,
 		PATRON_STRUCTURE = null,
 	)

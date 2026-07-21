@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"THE TEN PROTECT US!",
 		"I SERVE THE DIVINE TEN!",
 	)
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine,
 			/obj/item/clothing/neck/psycross/divine
@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I SERVE THE GLORY OF THE SUN!",
 	)
 	storyteller = /datum/storyteller/astrata
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/astrata,
 			/obj/item/clothing/neck/psycross/divine/astrata
@@ -92,7 +92,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I SEEK THE MYSTERIES OF THE MOON!",
 	)
 	storyteller = /datum/storyteller/noc
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/noc,
 			/obj/item/clothing/neck/psycross/divine/noc
@@ -118,7 +118,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I ANSWER THE CALL OF THE WILD!",
 	)
 	storyteller = /datum/storyteller/dendor
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/dendor,
 			/obj/item/clothing/neck/psycross/divine/dendor
@@ -144,7 +144,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I AM DRAWN BY THE PULL OF THE TIDE!",
 	)
 	storyteller = /datum/storyteller/abyssor
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 			/obj/item/clothing/neck/psycross/divine/abyssor
@@ -170,7 +170,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I FEAR NOT DEATH, MY LADY AWAITS ME!",
 	)
 	storyteller = /datum/storyteller/necra
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/necra,
 			/obj/item/clothing/neck/psycross/divine/necra
@@ -196,7 +196,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"THE DRUMS OF WAR BEAT IN MY CHEST!",
 	)
 	storyteller = /datum/storyteller/ravox
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/ravox,
 			/obj/item/clothing/neck/psycross/divine/ravox
@@ -229,7 +229,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"EORA BRINGS US TOGETHER!",
 	)
 	storyteller = /datum/storyteller/xylix
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/xylix,
 			/obj/item/clothing/neck/psycross/divine/xylix
@@ -255,7 +255,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"MY AFFLICTION IS MY TESTAMENT!",
 	)
 	storyteller = /datum/storyteller/pestra
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/pestra,
 			/obj/item/clothing/neck/psycross/divine/pestra
@@ -289,7 +289,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I AM AN INSTRUMENT OF CREATION!",
 	)
 	storyteller = /datum/storyteller/malum
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/malum,
 			/obj/item/clothing/neck/psycross/divine/malum
@@ -315,7 +315,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 		"I LOVE YOU, EVEN AS YOU TRESPASS AGAINST ME!",
 	)
 	storyteller = /datum/storyteller/eora
-	associated_objects = list(
+	associated_objects = alist(
 		PATRON_AMULET = list(
 			/obj/item/clothing/neck/psycross/silver/divine/eora,
 			/obj/item/clothing/neck/psycross/divine/eora
