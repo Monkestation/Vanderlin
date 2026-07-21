@@ -61,6 +61,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)

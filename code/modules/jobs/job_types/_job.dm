@@ -157,6 +157,9 @@
 
 	var/give_bank_account = FALSE
 
+	/// Whether this job starts knowing the members of the town.
+	var/knows_the_town = FALSE
+
 	var/can_random = TRUE
 
 	/// Some jobs have unique combat mode music, because why not?
@@ -249,7 +252,7 @@
 
 /datum/job/New()
 	. = ..()
-	if(give_bank_account)
+	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)
 			peopleiknow += X
 			peopleknowme += X

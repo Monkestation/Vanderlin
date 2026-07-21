@@ -43,6 +43,7 @@
 
 	outfit = /datum/outfit/dungeoneer
 	give_bank_account = 50
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 
 	job_bitflag = BITFLAG_GARRISON

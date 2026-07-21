@@ -59,6 +59,7 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant
 		)
 	give_bank_account = 120
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 	noble_income = 11
 
