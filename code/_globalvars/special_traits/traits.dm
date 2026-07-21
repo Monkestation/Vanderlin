@@ -926,6 +926,11 @@
 	character.grant_language(/datum/language/beast)
 	character.add_spell(/datum/action/cooldown/spell/undirected/howl/call_of_the_moon, silent = TRUE)
 	ADD_TRAIT(character, TRAIT_NASTY_EATER, "[type]") // eat the raw meat
+	var/holder = character.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_acolyte()
+		devotion.grant_to(character)
 
 /datum/attribute_holder/sheet/job/glutton
 	raw_attribute_list = list(
@@ -1203,5 +1208,5 @@
 
 /datum/special_trait/beanpole/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/beanpole)
-	character.transform = character.transform.Scale(1, 1.2)
+	character.transform = character.transform.Scale(0.9, 1.2)
 	character.update_transform()
