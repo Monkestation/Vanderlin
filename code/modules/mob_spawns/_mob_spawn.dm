@@ -107,7 +107,6 @@
 		spawned_human.skin_tone = skin_tone
 
 	spawned_human.update_body()
-	spawned_human.update_body_parts()
 
 /obj/effect/mob_spawn/proc/name_mob(mob/living/spawned_mob, forced_name)
 	var/chosen_name
