@@ -4478,10 +4478,6 @@
 "Ah" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/wilderness/gallowband)
-"Ai" = (
-/turf/open/floor/dirt,
-/turf/open/floor/dirt/road,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Ak" = (
 /obj/structure/table/wood/nice,
 /obj/item/candle/skull{
@@ -6653,9 +6649,6 @@
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
 "Md" = (
-/obj/effect/decal/woodpath{
-	dir = 4
-	},
 /obj/effect/decal/woodpath{
 	dir = 4
 	},
@@ -9070,11 +9063,6 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/outpost/vanderlin)
-"ZS" = (
-/turf/open/floor/dirt/road,
-/turf/open/floor/dirt/road,
-/turf/open/floor/dirt/road,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "ZU" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -15841,7 +15829,7 @@ tx
 bw
 zo
 Iz
-Qn
+Iz
 Iz
 Iz
 Iz
@@ -16043,7 +16031,7 @@ tS
 tS
 ih
 Iz
-Qn
+Iz
 Iz
 Iz
 Iz
@@ -16245,7 +16233,7 @@ yi
 Mu
 Iz
 Iz
-Qn
+Iz
 HT
 Iz
 Iz
@@ -18276,7 +18264,7 @@ wl
 wl
 Wa
 Iz
-wS
+Iz
 Kc
 ZV
 Iz
@@ -18871,10 +18859,10 @@ Iz
 Iz
 Iz
 Iz
-Qn
-Qn
-Qn
-ZS
+Iz
+Iz
+Iz
+Iz
 Iz
 ih
 tS
@@ -19076,7 +19064,7 @@ Iz
 Iz
 Iz
 Iz
-Qn
+Iz
 Qn
 Iz
 Iz
@@ -19474,8 +19462,8 @@ gr
 ZV
 tt
 gr
-wS
-Ai
+Iz
+Iz
 Iz
 Iz
 Iz
