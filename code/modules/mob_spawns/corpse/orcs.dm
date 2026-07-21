@@ -1,10 +1,10 @@
 /obj/effect/mob_spawn/corpse/orc
 	abstract_type = /obj/effect/mob_spawn/corpse/orc
 	mob_type = /mob/living/carbon/human/species/orc
-	skin_tone = SKIN_COLOR_GROONN
-	hairstyle = "Bald"
-	facial_hairstyle = "Shaved"
 	outfit = /datum/outfit/savageorc
+	skin_tone = SKIN_COLOR_GROONN
+	hair_style = "Bald"
+	facial_hair_style = "Shaved"
 	randomise_dna = FALSE
 
 /obj/effect/mob_spawn/corpse/orc/savage
