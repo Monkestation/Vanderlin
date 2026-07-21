@@ -1148,7 +1148,7 @@
 /datum/special_trait/glassbones
 	name = "Glass Bones"
 	greet_text = span_notice("I have a rare condition that makes my bones brittle and fragile.")
-	weight = 40
+	weight = 50
 
 /datum/special_trait/glassbones/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_HOLLOWBONES, BE_SPECIAL_TRAIT)
@@ -1182,7 +1182,7 @@
 /datum/special_trait/thenerve
 	name = "Nerve Stapled"
 	greet_text = span_notice("In a bout of strange experimentation, my body was rendered fully painless. A blessing, or a curse?")
-	weight = 15
+	weight = 30
 
 /datum/special_trait/thenerve/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
@@ -1281,12 +1281,13 @@
 /datum/special_trait/favoredbyzizo/on_apply(mob/living/carbon/human/character, silent)
 
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/favoredbyzizo)
+	ADD_TRAIT(character, TRAIT_CABAL, BE_SPECIAL_TRAIT)
 	character.mind.special_items["Zizo's Favor"] = /obj/item/weapon/polearm/neant
 
 /datum/special_trait/sneakygit
 	name = "Sneaky Git"
 	greet_text = span_notice("A master of getting around unseen, dat's one sneaky git.)")
-	weight = 50
+	weight = 40
 
 /datum/attribute_holder/sheet/job/sneakygit
 	raw_attribute_list = list(
