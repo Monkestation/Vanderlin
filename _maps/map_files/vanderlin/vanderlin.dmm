@@ -432,11 +432,10 @@
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
 "alh" = (
-/obj/structure/hotspring,
 /obj/structure/flora/rock/pile/largejungle,
 /obj/structure/flora/rock/jungle,
 /obj/item/clothing/head/peaceflower,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "all" = (
 /obj/structure/table/wood/counter/end{
@@ -4311,9 +4310,8 @@
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/lord_appt)
 "cdO" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "cdR" = (
 /obj/structure/closet/crate/crafted_closet/dark,
@@ -6371,12 +6369,11 @@
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/merc_guild)
 "cWC" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal{
 	pixel_x = 18;
 	pixel_y = -2
 	},
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "cWD" = (
 /obj/effect/decal/borderfall{
@@ -26455,12 +26452,11 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
 "mrj" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three{
 	pixel_x = 10;
 	pixel_y = -6
 	},
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "mrm" = (
 /obj/structure/fluff/walldeco/chains,
@@ -29848,9 +29844,8 @@
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
 "nUa" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "nUj" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -36818,8 +36813,7 @@
 /turf/open/floor/grass,
 /area/outdoors/town)
 "qXI" = (
-/obj/structure/hotspring,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "qXY" = (
 /obj/structure/flora/grass/bush,

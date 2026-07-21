@@ -5472,9 +5472,8 @@
 /turf/open/floor/cobble,
 /area/indoors/town/cell)
 "dmW" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "dnj" = (
 /obj/structure/chair/bench/church/mid{
@@ -5978,11 +5977,10 @@
 	},
 /area/under/town/basement)
 "dDZ" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "dEa" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -6804,10 +6802,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church)
 "dYk" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "dZa" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
@@ -9464,9 +9461,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "fDm" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "fDr" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -15054,10 +15050,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/garrison)
 "jeM" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "jgk" = (
 /obj/structure/fluff/railing/border,
@@ -15135,12 +15130,11 @@
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "jic" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three{
 	pixel_x = -5;
 	pixel_y = 5
 	},
-/turf/open/floor/grass/cold,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "jio" = (
 /obj/structure/fluff/railing/border{
@@ -15833,10 +15827,9 @@
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/kitchen)
 "jHO" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "jHU" = (
 /obj/structure/stairs{
@@ -21189,11 +21182,10 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/shop)
 "mVO" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five{
 	pixel_x = -10
 	},
-/turf/open/floor/grass/mixyel,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "mVR" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -23054,10 +23046,9 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/basin)
 "oge" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "ogi" = (
 /obj/structure/flora/grass/tundra,
@@ -24115,10 +24106,9 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/keep/courtagent)
 "oQq" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "oQN" = (
 /turf/open/floor/herringbone,
@@ -24960,9 +24950,8 @@
 /turf/open/floor/blocks,
 /area/under/cave)
 "prE" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "prH" = (
 /obj/structure/door/fancy{
@@ -25225,8 +25214,7 @@
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep/kitchen)
 "pzT" = (
-/obj/structure/hotspring,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "pzX" = (
 /obj/structure/fluff/stonecoffin,
@@ -30966,8 +30954,7 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "tov" = (
-/obj/structure/hotspring,
-/turf/open/floor/grass/cold,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "toH" = (
 /obj/structure/barricade/wooden,
@@ -32210,9 +32197,8 @@
 /turf/open/floor/naturalstone,
 /area/under/cavewet)
 "uff" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/grass/cold,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "ufo" = (
 /obj/structure/fluff/railing/border{
@@ -35631,9 +35617,8 @@
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "wmP" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "wmR" = (
 /turf/closed/mineral,
@@ -37107,9 +37092,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "xkK" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "xkL" = (
 /obj/structure/table/wood/reinforced_alter,
@@ -37208,9 +37192,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/shop)
 "xpg" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "xpw" = (
 /obj/structure/bars/cemetery,
@@ -38073,10 +38056,9 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/clinic_large)
 "xVv" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "xVy" = (
 /obj/machinery/light/fueledstreet/blue,

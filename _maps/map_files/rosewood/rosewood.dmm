@@ -599,11 +599,10 @@
 /area/under/town/basement)
 "aoG" = (
 /obj/effect/lily_petal,
-/obj/structure/hotspring,
 /obj/structure/bridge{
 	dir = 8
 	},
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "aoJ" = (
 /obj/structure/fluff/railing/wood{
@@ -1006,9 +1005,8 @@
 /turf/open/floor/snow/rough,
 /area/outdoors/town/keep)
 "ayx" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "ayE" = (
 /obj/item/coin/copper,
@@ -1439,9 +1437,8 @@
 /turf/open/floor/church,
 /area/outdoors/town)
 "aKF" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "aKK" = (
 /obj/effect/decal/cleanable/blood/tracks,
@@ -1981,10 +1978,9 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/gate)
 "aXl" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
 /obj/effect/waterfall,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "aXs" = (
 /obj/structure/fluff/railing/border{
@@ -2121,9 +2117,8 @@
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "aZp" = (
-/obj/structure/hotspring,
 /obj/structure/hotspring/border/twelve,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "aZq" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -4752,9 +4747,8 @@
 /turf/open/floor/church,
 /area/indoors/town/church)
 "cnx" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "cny" = (
 /obj/structure/bars,
@@ -5851,8 +5845,7 @@
 	},
 /area/outdoors/town/roofs)
 "cMe" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
+/turf/open/water/hotspring,
 /turf/open/floor/naturalstone,
 /area/outdoors/town)
 "cMh" = (
@@ -6577,10 +6570,9 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/basin/safe)
 "dbV" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "dbX" = (
 /obj/structure/fluff/railing/border{
@@ -7358,10 +7350,9 @@
 /area/indoors/town)
 "dxf" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "dxi" = (
 /obj/structure/door/window{
@@ -10388,11 +10379,10 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "eYA" = (
-/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "eYM" = (
 /obj/machinery/light/fueled/firebowl,
@@ -10628,8 +10618,7 @@
 	pixel_x = 3;
 	pixel_y = -3
 	},
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "ffk" = (
 /obj/structure/rack,
@@ -11323,9 +11312,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "fwG" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "fwN" = (
 /obj/structure/stairs/stone/d{
@@ -12134,9 +12122,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/mountains)
 "fRG" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
+/turf/open/water/hotspring,
 /turf/open/floor/naturalstone,
 /area/outdoors/town/roofs)
 "fRK" = (
@@ -12244,9 +12231,8 @@
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
 "fUQ" = (
-/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "fVe" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -13972,10 +13958,9 @@
 /turf/closed/wall/mineral/decostone/moss/blue/long,
 /area/indoors/villagegarrison)
 "gLl" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "gLo" = (
 /obj/structure/bars/cemetery,
@@ -13986,9 +13971,8 @@
 /turf/open/floor/dirt,
 /area/indoors/town/merc_guild)
 "gLA" = (
-/obj/structure/hotspring,
 /obj/structure/bridge,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "gLB" = (
 /obj/structure/bookcase/random,
@@ -14913,9 +14897,8 @@
 /turf/open/floor/blocks/paving,
 /area/indoors/town/garrison)
 "hil" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "hir" = (
 /obj/effect/decal/borderfall{
@@ -16150,8 +16133,7 @@
 /turf/open/floor/wood,
 /area/indoors/town)
 "hMx" = (
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "hMy" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -19514,14 +19496,13 @@
 /turf/open/floor/wood,
 /area/indoors/town/keep/magician)
 "jyM" = (
-/obj/structure/hotspring,
 /obj/effect/waterfall{
 	pixel_y = 37;
 	pixel_x = 16
 	},
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "jyQ" = (
 /turf/open/floor/woodturned/nosmooth,
@@ -22082,10 +22063,9 @@
 /turf/open/floor/tile,
 /area/under/town/basement)
 "kKU" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "kKW" = (
 /obj/structure/fake_machine/scomm/l,
@@ -22257,11 +22237,6 @@
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/hexstone,
 /area/under/town/sewer)
-"kOv" = (
-/obj/structure/hotspring,
-/obj/structure/bridge,
-/turf/open/floor/cobblerock/alt,
-/area/outdoors/town)
 "kOw" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -30451,9 +30426,8 @@
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "oKC" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "oKM" = (
 /obj/structure/door/violet{
@@ -30671,10 +30645,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/red)
 "oPP" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "oPY" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
@@ -31621,10 +31594,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/magician)
 "pmf" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "pmo" = (
 /obj/structure/closet/crate/chest/crafted,
@@ -32889,11 +32861,10 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
 "pVv" = (
-/obj/structure/hotspring,
 /obj/structure/bridge{
 	dir = 8
 	},
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "pVz" = (
 /obj/structure/window/openclose,
@@ -33144,9 +33115,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
 "qdt" = (
-/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "qdL" = (
 /turf/open/water/clean,
@@ -34256,11 +34226,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
-"qGZ" = (
-/obj/effect/lily_petal/three,
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors/town)
 "qHb" = (
 /turf/open/floor/herringbone,
 /area/indoors/soilsons)
@@ -34877,9 +34842,8 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "qXE" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "qXY" = (
 /obj/structure/stairs,
@@ -35712,10 +35676,9 @@
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/garrison)
 "rui" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "ruw" = (
 /obj/machinery/light/fueledstreet/blue/wall,
@@ -41845,13 +41808,12 @@
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
 "utl" = (
-/obj/structure/hotspring,
 /obj/item/clothing/head/peaceflower{
 	pixel_x = 3;
 	pixel_y = -3
 	},
 /obj/effect/lily_petal/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "utv" = (
 /obj/structure/table/wood/plain_alt,
@@ -44439,9 +44401,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "vGt" = (
-/obj/structure/hotspring,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "vGv" = (
 /obj/structure/fluff/railing/border{
@@ -46400,8 +46361,7 @@
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/soilsons)
 "wFH" = (
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "wGa" = (
 /obj/structure/fluff/walldeco/feldshersign{
@@ -48715,11 +48675,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/hexstone,
 /area/under/town/basement)
-"xNI" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/two,
-/turf/open/floor/cobblerock/alt,
-/area/outdoors/town)
 "xNN" = (
 /obj/effect/mapping_helpers/secret_door_creator/thieves_guild{
 	redstone_id = "thieves_guild"
@@ -49140,9 +49095,8 @@
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/clocktower)
 "xYK" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "xYO" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -49331,9 +49285,8 @@
 /turf/open/floor/cobble/mossy,
 /area/outdoors/town)
 "yek" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/four,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "yeA" = (
 /obj/structure/table/wood/plain,
@@ -107277,7 +107230,7 @@ leA
 lGv
 tFg
 hMx
-qGZ
+ayx
 mPO
 gTj
 fuz
@@ -107689,7 +107642,7 @@ crD
 ipE
 aBN
 jxf
-kOv
+gLA
 mmh
 cNv
 aBN
@@ -108298,7 +108251,7 @@ vwM
 egX
 tFg
 pVv
-xNI
+xYK
 qdt
 cyb
 pwx

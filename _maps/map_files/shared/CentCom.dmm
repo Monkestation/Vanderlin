@@ -3006,9 +3006,8 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "qr" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "qs" = (
 /turf/open/water/swamp,
@@ -3096,7 +3095,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "qX" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/lily_petal/three{
 	pixel_y = -14;
@@ -3106,7 +3104,7 @@
 	pixel_y = 13;
 	pixel_x = 11
 	},
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "qZ" = (
 /obj/structure/table/wood{
@@ -4607,12 +4605,11 @@
 /turf/open/floor/tile/checker_green,
 /area/indoors)
 "AZ" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/structure/flora/sakura{
 	pixel_y = -13
 	},
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Ba" = (
 /turf/open/floor/metal/barograte,
@@ -5139,9 +5136,8 @@
 /turf/open/floor/dirt/road,
 /area/outdoors)
 "ES" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "EU" = (
 /obj/structure/fluff/railing/border{
@@ -5934,10 +5930,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "JA" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "JD" = (
 /obj/structure/mannequin/male,
@@ -6027,8 +6022,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors)
 "Kf" = (
-/obj/structure/hotspring,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Kg" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -7603,10 +7597,9 @@
 /turf/open/floor/blocks,
 /area/indoors)
 "Uu" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Ux" = (
 /obj/structure/hotspring/border/eleven,
@@ -8038,9 +8031,8 @@
 /turf/open/floor/dirt/road,
 /area/indoors/bandit_lair)
 "Xl" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Xp" = (
 /obj/structure/table/wood{

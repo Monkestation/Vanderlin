@@ -2570,9 +2570,8 @@
 /turf/open/floor/wood,
 /area/outdoors/beach/boat)
 "bne" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "bnj" = (
 /obj/structure/fluff/railing/wood{
@@ -5735,9 +5734,8 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "cFL" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "cFM" = (
 /obj/structure/table/wood/large/corner{
@@ -10930,11 +10928,10 @@
 /turf/open/floor/sandstone,
 /area/outdoors/exposed/under/basement)
 "fbf" = (
-/obj/structure/hotspring,
 /obj/structure/flora/rock/pile/largejungle,
 /obj/structure/flora/rock/jungle,
 /obj/item/clothing/head/peaceflower,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "fbo" = (
 /obj/structure/table/vtable,
@@ -11519,12 +11516,11 @@
 /turf/open/floor/cobble/mossy,
 /area/outdoors/basin)
 "fpw" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three{
 	pixel_x = 10;
 	pixel_y = -6
 	},
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "fpG" = (
 /mob/living/simple_animal/hostile/retaliate/bigrat,
@@ -51070,12 +51066,11 @@
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
 "wHc" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal{
 	pixel_x = 18;
 	pixel_y = -2
 	},
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "wHf" = (
 /obj/structure/fluff/railing/wood{
@@ -53925,8 +53920,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/town)
 "xRU" = (
-/obj/structure/hotspring,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "xRW" = (
 /obj/structure/closet/crate/crafted_closet,
