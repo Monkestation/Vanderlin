@@ -2185,7 +2185,7 @@
 		SSmobs.mobs_by_zlevel[registered_z] -= src
 
 	// Clientless mobs we speed through
-	if(isnull(client))
+	if(!client)
 		if(new_z)
 			SSmobs.mobs_by_zlevel[new_z] += src
 		registered_z = new_z
