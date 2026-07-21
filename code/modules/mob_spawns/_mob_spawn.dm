@@ -1,11 +1,10 @@
 /obj/effect/mob_spawn
 	abstract_type = /obj/effect/mob_spawn
 	name = "Mob Spawner"
-	density = TRUE
-	anchored = TRUE
-	//So it shows up in the map editor
 	icon = 'icons/effects/mapping_helpers.dmi'
 	icon_state = "mobspawner"
+	density = TRUE
+	anchored = TRUE
 
 	///A forced name of the mob, though can be overridden if a special name is passed as an argument
 	var/mob_name

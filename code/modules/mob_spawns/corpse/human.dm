@@ -16,10 +16,10 @@
 /obj/effect/mob_spawn/corpse/human/elf_dark
 	mob_species = /datum/species/elf/dark
 
-/obj/effect/mob_spawn/corpse/random
+/obj/effect/mob_spawn/corpse/human/random
 	name = "randomised species corpse spawner"
 
-/obj/effect/mob_spawn/corpse/random/special(mob/living/carbon/human/spawned)
+/obj/effect/mob_spawn/corpse/human/random/special(mob/living/carbon/human/spawned)
 	. = ..()
 	mob_species = GLOB.species_list[pick(GLOB.roundstart_species)]
 
