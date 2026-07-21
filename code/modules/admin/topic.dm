@@ -1548,6 +1548,12 @@
 		var/mob/M = locate(href_list["adminbirdletter"])
 		usr.client.send_bird_letter(M)
 
+	else if(href_list["grantticket"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/mob/M = locate(href_list["grantticket"])
+		usr.client.grant_ticket_to(M)
+
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))
 		return

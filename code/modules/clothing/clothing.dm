@@ -147,16 +147,13 @@
 			. += span_notice("It has one torn sleeve.")
 		else
 			. += span_notice("Both its sleeves have been torn!")
+
 	if(wet)
-		var/list/t = wet.get_examine_text()
-		if(t)
-			for(var/line in t)
-				. += line
+		for(var/line in wet.get_examine_text())
+			. += line
+
 	if(proper_drying)
-		desc += span_notice("\n This was properly washed and dried off, it smells good!")
-
-
-
+		. += span_notice("This was properly washed and dried off, it smells good!")
 
 /obj/item/clothing/MiddleClick(mob/living/user, list/modifiers)
 	..()

@@ -1,9 +1,15 @@
 /mob/living/carbon/human/get_examine_string(mob/user, thats = FALSE)
 	. = ..()
 	var/used_title = get_role_title(src)
+	var/original_title
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		used_title = spy.examine_title
+	else if(job_title_override && job)
+		var/datum/job/job_datum = SSjob.GetJob(job)
+		if(!QDELETED(job_datum))
+			original_title = job_datum.get_default_title(src)
+
 	if(!used_title)
 		return
 	if(user != src && !IsAdminGhost(user))
@@ -18,7 +24,11 @@
 				return
 			if(!user.mind?.do_i_know(mind, real_name))
 				return
-	. += ", the [used_title]"
+
+	var/title_display = used_title
+	if(original_title && original_title != used_title)
+		title_display = conditional_tooltip_alt(used_title, "[original_title]", TRUE)
+	. += ", the [title_display]"
 
 /mob/living/carbon/human/get_examine_list(mob/user, list/P)
 	. = ..()

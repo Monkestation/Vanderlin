@@ -148,24 +148,6 @@
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/structure/table/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(user.cmode)
-		return NONE
-	if(tool.item_flags & ABSTRACT || HAS_TRAIT(tool, TRAIT_NODROP))
-		return NONE
-	if(!user.transferItemToLoc(tool, drop_location(), silent = FALSE))
-		return ITEM_INTERACT_BLOCKING
-	var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
-	var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
-	//Center the icon where the user clicked.
-	if(!icon_x || !icon_y)
-		return
-	//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
-	tool.pixel_x = tool.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size/2), world.icon_size/2)
-	tool.pixel_y = tool.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size/2), world.icon_size/2)
-	after_added_effects(tool, user)
-	return ITEM_INTERACT_SUCCESS
-
 /obj/structure/table/wrench_act(mob/living/user, obj/item/tool)
 	if(!deconstruction_ready)
 		return NONE
@@ -193,12 +175,13 @@
 
 	var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
-	//Center the icon where the user clicked.
+	// Center the icon where the user clicked. Or the center of the thing
 	if(!icon_x || !icon_y)
-		return NONE
+		icon_x = ICON_SIZE_X / 2
+		icon_y = ICON_SIZE_Y / 2
 
-	tool.pixel_x = tool.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size/2), world.icon_size/2)
-	tool.pixel_y = tool.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size/2), world.icon_size/2)
+	tool.pixel_x = tool.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size / 2), world.icon_size / 2)
+	tool.pixel_y = tool.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size / 2), world.icon_size / 2)
 
 	after_added_effects(tool, user)
 
@@ -461,21 +444,30 @@
 	I.play_tool_sound(src)
 	deconstruct(TRUE)
 
-/obj/structure/rack/attackby(obj/item/I, mob/user, list/modifiers)
-	. = ..()
+/obj/structure/rack/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-	if(!user.cmode)
-		if(!(I.item_flags & ABSTRACT))
-			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
-				var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
-				var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
-				//Center the icon where the user clicked.
-				if(!icon_x || !icon_y)
-					return
-				//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
-				I.pixel_x = I.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size/2), world.icon_size/2)
-				I.pixel_y = I.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size/2), world.icon_size/2)
-				return 1
+	if(tool.item_flags & ABSTRACT)
+		return NONE
+
+	if(!user.temporarilyRemoveItemFromInventory(tool))
+		return NONE
+
+	if(!user.transferItemToLoc(tool, drop_location(), silent = FALSE))
+		return NONE
+
+	var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
+	var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
+	// Center the icon where the user clicked. Or the center of the thing
+	if(!icon_x || !icon_y)
+		icon_x = ICON_SIZE_X / 2
+		icon_y = ICON_SIZE_Y / 2
+
+	tool.pixel_x = tool.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size / 2), world.icon_size / 2)
+	tool.pixel_y = tool.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size / 2), world.icon_size / 2)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/rack/attack_paw(mob/living/user)
 	attack_hand(user)
@@ -513,24 +505,6 @@
 /obj/structure/rack/shelf/notdense
 	density = FALSE
 	SET_BASE_PIXEL(0, 24)
-
-// Necessary to avoid a critical bug with disappearing weapons.
-/obj/structure/rack/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!user.cmode)
-		if(!(I.item_flags & ABSTRACT))
-			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
-				var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
-				var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
-				//Center the icon where the user clicked.
-				if(!icon_x || !icon_y)
-					return
-				//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
-				I.pixel_x = I.base_pixel_x + CLAMP(icon_x - 16, -(world.icon_size/2), world.icon_size/2)
-				I.pixel_y = I.base_pixel_y + CLAMP(icon_y - 16, -(world.icon_size/2), world.icon_size/2)
-				return 1
-	else
-		. = ..()
-
 
 /obj/structure/table/optable
 	name = "operating table"

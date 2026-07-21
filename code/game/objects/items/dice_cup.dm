@@ -100,14 +100,11 @@
 
 /obj/item/dice_cup/examine(mob/user)
 	. = ..()
-	if(!length(contents))
-		desc = initial(desc)
-		return
-	desc = initial(desc)
-	desc += "\n" + ("Contains [length(contents)] dice.")
-	if(last_roll.len)
-		desc += "\n" + ("Last rolls were: [last_roll.Join(", ")]")
-	return ..()
+	if(length(last_roll))
+		. += span_info("Last rolls were: [last_roll.Join(", ")]")
+
+	if(length(contents))
+		. += span_info("Contains [length(contents)] dice.")
 
 /obj/item/dice_cup/proc/rig_dice_cup(user)
 	var/obj/item/dice/which_one = browser_input_list(user, "Which die will you rig in your next roll?", "XYLIX", dice_list)
