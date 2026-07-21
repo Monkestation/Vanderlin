@@ -24,13 +24,13 @@
 	/// Randomise DNA appearance if possible
 	var/randomise_dna = FALSE
 	///sets a human's hairstyle
-	var/hairstyle
+	var/hair_style
 	///sets a human's facial hair
-	var/facial_hairstyle
+	var/facial_hair_style
 	///sets a human's hair color (use special for gradients, sorry)
-	var/haircolor
+	var/hair_color
 	///sets a human's facial hair color
-	var/facial_haircolor
+	var/facial_hair_color
 	///sets a human's skin tone
 	var/skin_tone
 
@@ -90,6 +90,24 @@
 
 	if(randomise_dna && spawned_human.dna?.species)
 		spawned_human.dna.species.random_character(spawned_human)
+
+	if(hair_style)
+		spawned_human.set_hair_style(hair_style, FALSE)
+
+	if(hair_color)
+		spawned_human.set_hair_color(hair_color, FALSE)
+
+	if(facial_hair_style)
+		spawned_human.set_facial_hair_style(facial_hair_style, FALSE)
+
+	if(facial_hair_color)
+		spawned_human.set_facial_hair_color(facial_hair_color, FALSE)
+
+	if(skin_tone)
+		spawned_human.skin_tone = skin_tone
+
+	spawned_human.update_body()
+	spawned_human.update_body_parts()
 
 /obj/effect/mob_spawn/proc/name_mob(mob/living/spawned_mob, forced_name)
 	var/chosen_name
