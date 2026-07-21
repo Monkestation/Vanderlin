@@ -953,7 +953,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/guard_tabard
-	name = "garrison tabbard"
+	name = "guard tabbard"
 	output = /obj/item/clothing/cloak/tabard/knight/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -977,7 +977,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/guard_surcoat
-	name = "garrison surcoat"
+	name = "guard surcoat"
 	output = /obj/item/clothing/cloak/stabard/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -1320,8 +1320,17 @@
 	craftdiff = 4
 	category = "Hat"
 
+/datum/repeatable_crafting_recipe/sewing/shortcoat_guard
+	name = "guard short surcoat"
+	output = /obj/item/clothing/cloak/stabard/shortcoat/guard
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+	category = "Cloak"
+
+
 /datum/repeatable_crafting_recipe/sewing/jupon_guard
-	name = "guard's jupon"
+	name = "guard jupon"
 	output = /obj/item/clothing/cloak/stabard/jupon/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
