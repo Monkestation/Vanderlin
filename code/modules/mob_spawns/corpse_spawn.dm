@@ -1,6 +1,7 @@
 ///these mob spawn subtypes trigger immediately (New or Initialize) and are not player controlled... since they're dead, you know?
 /obj/effect/mob_spawn/corpse
 	abstract_type = /obj/effect/mob_spawn/corpse
+	icon_state = "deadbodyplacer"
 	density = FALSE
 	///when this mob spawn should auto trigger.
 	var/spawn_when = CORPSE_INSTANT

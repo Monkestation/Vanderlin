@@ -13,8 +13,8 @@
 
 	//Human specific stuff. Don't set these if you aren't using a human, the unit tests will put a stop to your sinful hand.
 
-	///sets the human as a species, use a typepath (example: /datum/species/skeleton)
-	var/mob_species
+	///sets the human as a species
+	var/datum/species/mob_species
 	///job to pull stats and an outfit from, DOES NOT EquipRank. Outfit below overrides job outfit.
 	var/datum/job/equipment_job
 	///equips the human with an outfit.
