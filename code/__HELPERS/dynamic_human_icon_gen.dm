@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(dynamic_human_appearances)
 	if(GLOB.dynamic_human_appearances[arg_string]) //if already exists in our cache, just return that
 		return GLOB.dynamic_human_appearances[arg_string]
 
-	var/mob/living/carbon/human/dummy/consistent/dummy = new()
+	var/mob/living/carbon/human/dummy/dummy = new()
 	dummy.set_species(species_path)
 	dummy.stat = DEAD //this is to avoid side effects of mob spawners
 	dummy.underwear = "Nude"
