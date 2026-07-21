@@ -490,62 +490,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	cultist.generate_random_attunements(rand(6, 8))
 	to_chat(cultist, span_notice("Stolen Arcane prowess floods my mind, ZIZO empowers me."))
 
-/datum/ritual/fleshcrafting/curse
-    name = "Hollow Curse"
-    center_requirement = /mob/living/carbon/human
-
-    w_req = /obj/item/alch/sinew
-    e_req = /obj/item/alch/sinew
-    n_req = /obj/item/natural/fur
-    s_req = /obj/item/natural/fur
-
-/datum/ritual/fleshcrafting/curse/invoke(mob/living/user, turf/center)
-	var/mob/living/carbon/human/target = locate() in center.contents
-	if(!target)
-		return
-	if(!target.mind)
-		to_chat(target, span_warning("A mindless servant is useless to me!"))
-		return
-	if(target.mob_biotypes & MOB_UNDEAD)
-		to_chat(target, span_warning("The curse doesn't take hold!"))
-		return
-	if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
-		to_chat(target, span_warning("The curse doesn't take hold!"))
-		return
-	if(target.get_lux_status() != LUX_HAS_LUX)
-		to_chat(target, span_warning("The curse requires lux!"))
-		return
-	if(target.stat == DEAD)
-		return
-	to_chat(target, span_warning("You can feel part of your soul burn away, as you are reshaped painfully into an abomination! You have no recollection of who you once were and what you did, but still have innate skills and personality."))
-	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
-
-/datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
-	if(QDELETED(victim))
-		return
-	if(place != get_turf(victim))
-		return
-	if(!victim.mind)
-		return
-	if(victim.mob_biotypes & MOB_UNDEAD)
-		to_chat(victim, span_warning("The curse doesn't take hold, for they are blessed by Zizo!"))
-		return
-	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
-		to_chat(victim, span_warning("The curse doesn't take hold, for they already are damned!"))
-		return
-	if(victim.get_lux_status() != LUX_HAS_LUX)
-		to_chat(victim, span_warning("The curse fails, due to a lack of lux to burn!"))
-		return
-	if(victim.stat == DEAD)
-		return
-	victim.Knockdown(5 SECONDS)
-	victim.emote("agony", forced = TRUE)
-	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
-	victim.mind.transfer_to(wll)
-	wll.set_patron(/datum/patron/godless/naivety)
-	victim.gib()
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "NEW FACE NEW LIFE"), 5 SECONDS)
-
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
 	center_requirement = /mob/living/carbon/human
