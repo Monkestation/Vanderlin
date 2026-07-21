@@ -218,10 +218,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
-"agB" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open/floor/snow/patchy,
-/area/outdoors/exposed/church)
 "aha" = (
 /obj/item/reagent_containers/powder/manabloom{
 	pixel_x = -3;
@@ -1308,7 +1304,7 @@
 /obj/effect/mapping_helpers/access/keyset/church/grave,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
+/area/outdoors/exposed/church/graveyard)
 "aNg" = (
 /obj/structure/table/vtable/v2,
 /obj/item/paper/scroll{
@@ -4546,6 +4542,11 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/keep/halls/w)
+"cIK" = (
+/turf/closed/wall/mineral/stonebrick{
+	climbdiff = 1
+	},
+/area/outdoors/exposed/church/graveyard)
 "cIV" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -6676,10 +6677,6 @@
 "dVi" = (
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
-"dVz" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open/floor/snow,
-/area/outdoors/exposed/church)
 "dVA" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
@@ -7480,7 +7477,7 @@
 "esb" = (
 /obj/item/bin/water,
 /turf/open/floor/wood,
-/area/outdoors/exposed/church)
+/area/indoors/town/noble_manor/yellow)
 "esl" = (
 /obj/structure/door/fancy{
 	name = "Bedroom"
@@ -7708,9 +7705,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/halls/e)
-"exL" = (
-/turf/open/floor/snow/patchy,
-/area/outdoors/exposed/church)
 "exN" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
@@ -8199,10 +8193,6 @@
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/soilsons)
-"eMu" = (
-/obj/structure/fake_machine/contractledger,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/tavern)
 "eMM" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -8506,9 +8496,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/garrison)
-"eXI" = (
-/turf/closed/wall/mineral/stone,
-/area/outdoors/exposed/church)
 "eXZ" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -9317,23 +9304,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
-"fws" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/key/graveyard{
-	pixel_x = 5;
-	pixel_y = -6
-	},
-/obj/item/key/graveyard{
-	pixel_x = -6;
-	pixel_y = 12
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/mineral/craftstone,
-/area/outdoors/town/noble_manor/yellow)
 "fwx" = (
 /obj/structure/door/fancy{
 	name = "The Hand's Office"
@@ -9466,17 +9436,6 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/shop)
-"fBj" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
 "fBw" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/darker,
@@ -10957,10 +10916,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/merc_guild)
-"gBv" = (
-/obj/structure/flora/grass/tundra,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "gBw" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
 	candodge = 0;
@@ -11149,6 +11104,9 @@
 /obj/item/key/lord,
 /obj/item/servant_bell/lord,
 /obj/item/storage/belt/pouch/coins/mid,
+/obj/structure/fluff/walldeco/painting{
+	pixel_y = -32
+	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/lord_appt)
 "gGr" = (
@@ -11309,10 +11267,6 @@
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
-"gLJ" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "gLR" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/grass/cold,
@@ -11607,9 +11561,6 @@
 	},
 /turf/open/floor/tile/diamond,
 /area/under/town/basement)
-"gXZ" = (
-/turf/open/floor/snow,
-/area/outdoors/exposed/church)
 "gYc" = (
 /turf/closed/wall/mineral/stone/window,
 /area/indoors/villagegarrison)
@@ -12196,9 +12147,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
-"hoz" = (
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
 "hoO" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/snow/patchy,
@@ -12681,11 +12629,6 @@
 "hDQ" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/town/roofs)
-"hDW" = (
-/obj/structure/flora/grass/tundra,
-/obj/structure/flora/grass/tundra,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "hDX" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -12902,21 +12845,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/hand)
-"hMq" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fake_machine/contractledger,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/ruinedwood,
-/area/indoors/town)
 "hMZ" = (
 /obj/structure/chair/hotspring_bench/left,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -13686,10 +13614,6 @@
 "iij" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/basin)
-"iil" = (
-/obj/structure/flora/newtree/snow,
-/turf/open/floor/snow,
-/area/outdoors/exposed/church)
 "iiJ" = (
 /obj/structure/rack,
 /turf/open/floor/hexstone,
@@ -15130,9 +15054,6 @@
 /obj/effect/falling_sakura,
 /turf/open/water/hotspring,
 /area/outdoors/basin)
-"jfr" = (
-/turf/closed/mineral,
-/area/outdoors/exposed/church)
 "jgk" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -15591,9 +15512,6 @@
 /obj/structure/ladder,
 /turf/open/floor/blocks,
 /area/under/cave)
-"juW" = (
-/turf/open/floor/dirt,
-/area/indoors/town/church)
 "jvr" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/grass/cold,
@@ -15703,17 +15621,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/smithy)
-"jzA" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/flora/grass/tundra,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "jzC" = (
 /obj/structure/window/openclose{
 	dir = 1
@@ -15740,19 +15647,6 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/halls/w)
-"jBn" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/obj/effect/decal/cleanable/dirt/cobweb{
-	dir = 8
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/mineral,
-/area/indoors/town/church)
 "jBB" = (
 /obj/machinery/light/fueledstreet/blue/wall{
 	dir = 1
@@ -16625,9 +16519,6 @@
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/basin)
-"keg" = (
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "kek" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/herringbone,
@@ -20193,10 +20084,6 @@
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
-"mmo" = (
-/obj/structure/flora/newtree/snow,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "mmw" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/ruinedwood/darker,
@@ -20878,9 +20765,6 @@
 /obj/structure/chair/bench/coucha,
 /turf/open/floor/churchrough/purple,
 /area/under/cave)
-"mJB" = (
-/turf/open/floor/dirt/road,
-/area/indoors/town/church)
 "mJE" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/book/law,
@@ -21052,9 +20936,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
-"mOS" = (
-/turf/open/floor/cobble,
-/area/outdoors/exposed/church)
 "mPd" = (
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/steward)
@@ -21543,16 +21424,6 @@
 "neP" = (
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"nfg" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
 "nfl" = (
 /obj/structure/table/vtable,
 /obj/item/paper{
@@ -22420,10 +22291,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/yellow)
-"nDf" = (
-/obj/structure/flora/grass/bush/tundra,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "nDi" = (
 /obj/structure/stairs{
 	dir = 4
@@ -22511,10 +22378,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/garrison)
-"nIF" = (
-/obj/structure/flora/grass/bush/tundra,
-/turf/open/floor/snow,
-/area/outdoors/exposed/church)
 "nII" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/teacup,
@@ -23573,10 +23436,6 @@
 /mob/living/carbon/human/species/rousman,
 /turf/open/water/clean,
 /area/under/cavewet)
-"our" = (
-/obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "ouG" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/surgery/hammer,
@@ -24176,17 +24035,6 @@
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/throne)
-"oOC" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "oOF" = (
 /turf/open/floor/ruinedwood,
 /area/outdoors/town)
@@ -25071,7 +24919,7 @@
 /obj/structure/flora/grass/tundra,
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
+/area/outdoors/town)
 "pqY" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
@@ -25333,10 +25181,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/villagegarrison)
-"pyH" = (
-/obj/structure/flora/newtree/snow,
-/turf/open/floor/snow/patchy,
-/area/outdoors/exposed/church)
 "pyP" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -26544,11 +26388,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/noble_manor/yellow)
-"qtD" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "qtI" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 4
@@ -27450,10 +27289,6 @@
 "qXi" = (
 /turf/open/floor/blocks,
 /area/indoors/town/keep/garrison)
-"qXj" = (
-/obj/structure/flora/grass/bush/tundra,
-/turf/open/floor/snow/patchy,
-/area/outdoors/exposed/church)
 "qXo" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -29171,7 +29006,7 @@
 /turf/open/floor/blocks,
 /area/under/cave)
 "saT" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /mob/living/simple_animal/hostile/retaliate/elemental/warden,
 /turf/open/floor/blocks,
 /area/under/town/basement)
@@ -29248,17 +29083,6 @@
 /obj/item/bedsheet/pelt,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
-"scT" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/obj/effect/decal/cleanable/dirt/cobweb,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/mineral,
-/area/indoors/town/church)
 "sdc" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood,
@@ -30032,10 +29856,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep/servant)
-"sFi" = (
-/obj/structure/closet/dirthole/grave,
-/turf/open/floor/dirt,
-/area/indoors/town/church)
 "sFp" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -30708,17 +30528,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobble,
 /area/under/town/basement)
-"tbE" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open/floor/snow,
-/area/outdoors/exposed/church)
 "tbK" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -31167,10 +30976,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
-"tpE" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/snow/patchy,
-/area/outdoors/exposed/church)
 "tpH" = (
 /obj/structure/stairs{
 	dir = 4
@@ -31655,9 +31460,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
-"tFz" = (
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "tFB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/wallclock/l,
@@ -31982,7 +31784,7 @@
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
+/area/outdoors/town)
 "tTn" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/spiral,
@@ -32471,10 +32273,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/road,
 /area/indoors/town/smithy)
-"uiE" = (
-/obj/structure/bars/cemetery,
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
 "uiQ" = (
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/ruinedwood/darker,
@@ -34405,9 +34203,6 @@
 /obj/item/natural/bundle/stick,
 /turf/open/floor/blocks,
 /area/under/town/basement)
-"vsX" = (
-/turf/closed/mineral,
-/area/indoors/town/church)
 "vth" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/tile/bath,
@@ -35257,19 +35052,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/clinic_large/apothecary)
-"vWc" = (
-/obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flint,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/town/noble_manor/yellow)
 "vWo" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -35457,18 +35239,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
-"wbT" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/mineral/stonebrick{
-	climbdiff = 1
-	},
-/area/indoors/town/church)
 "wbV" = (
 /turf/open/floor/tile/masonic/single,
 /area/indoors/town/keep/feast)
@@ -36980,10 +36750,6 @@
 /obj/item/clothing/shirt/robe/newmage/adept,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/magician)
-"wVO" = (
-/obj/structure/closet/dirthole/grave,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "wWm" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -36997,9 +36763,26 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/basin)
 "wWU" = (
-/obj/structure/fluff/walldeco/painting{
-	pixel_x = -32
-	},
+/obj/structure/closet/crate/crafted_closet/lord,
+/obj/item/clothing/face/spectacles/sglasses,
+/obj/item/clothing/face/spectacles,
+/obj/item/clothing/face/exoticsilkmask,
+/obj/item/clothing/armor/gambeson/arming,
+/obj/item/clothing/cloak/eastcloak2,
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/head/courtierhat,
+/obj/item/clothing/shoes/ridingboots,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/face/spectacles/inqglasses,
+/obj/item/clothing/shirt/undershirt/eastshirt2,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/armor/basiceast/crafteast,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/shoes/boots/furlinedanklets,
+/obj/item/clothing/shoes/boots/furlinedboots,
+/obj/item/clothing/cloak/raincloak/furcloak,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/lord_appt)
 "wXn" = (
@@ -37132,11 +36915,6 @@
 /obj/effect/landmark/start/artificer,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/dwarfin)
-"xbP" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "xbS" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/town/noble_manor/red)
@@ -38412,18 +38190,6 @@
 "xYy" = (
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep/feast)
-"xYL" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open/floor/grass/cold,
-/area/outdoors/exposed/church)
 "xYM" = (
 /mob/living/simple_animal/pet/cat/inn{
 	name = "Minx"
@@ -38540,18 +38306,6 @@
 /obj/item/paper,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"yen" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "yez" = (
 /turf/closed/wall/mineral/stonebrick{
 	climbdiff = 1
@@ -80617,19 +80371,19 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -80819,19 +80573,19 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -81020,21 +80774,21 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 shR
@@ -81222,21 +80976,21 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 shR
 vts
@@ -81424,21 +81178,21 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 shR
 tcB
@@ -81626,21 +81380,21 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 shR
 tcB
@@ -81828,21 +81582,21 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 shR
 tcB
@@ -82031,19 +81785,19 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 shR
@@ -82233,19 +81987,19 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -82435,19 +82189,19 @@ nJJ
 nJJ
 nJJ
 nJJ
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-scT
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -82641,15 +82395,15 @@ fHb
 fHb
 fHb
 fHb
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -82845,13 +82599,13 @@ arJ
 fHb
 fHb
 fHb
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -83047,13 +82801,13 @@ gQc
 iwW
 tcj
 fHb
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -83249,13 +83003,13 @@ xJz
 xJz
 hzA
 fHb
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -83450,14 +83204,14 @@ xJz
 gQc
 gQc
 hzA
-wbT
-vsX
-vsX
-vsX
-vsX
-vsX
-jBn
-vsX
+fHb
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -83653,13 +83407,13 @@ xJz
 xJz
 vmU
 fHb
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
-vsX
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
 nJJ
 nJJ
 nJJ
@@ -99834,7 +99588,7 @@ dHp
 iFD
 kii
 xjj
-eMu
+cSl
 eoC
 oNt
 flM
@@ -108281,7 +108035,7 @@ pXj
 gZf
 bEf
 bEf
-hMq
+eeO
 pXj
 uvK
 uvK
@@ -120594,13 +120348,13 @@ nJJ
 nJJ
 nJJ
 nJJ
-jfr
-gXZ
+nJJ
+aZv
 aZv
 aZv
 aZv
 ppa
-exL
+rjc
 kEA
 ttd
 nJJ
@@ -120608,7 +120362,7 @@ nJJ
 nJJ
 nJJ
 nJJ
-keg
+leC
 leC
 leC
 tqI
@@ -120788,30 +120542,30 @@ kBy
 ccT
 pCc
 acb
-jfr
 nJJ
 nJJ
 nJJ
 nJJ
 nJJ
-jfr
-jfr
-gXZ
-iil
-exL
+nJJ
+nJJ
+nJJ
+aZv
+ulG
+rjc
 kKb
 kKb
-exL
-exL
-exL
-nIF
+rjc
+rjc
+rjc
+ttd
 ttd
 nJJ
 nJJ
 nJJ
-keg
-keg
-wVO
+leC
+leC
+rQD
 wUg
 tqI
 leC
@@ -120989,31 +120743,31 @@ rLZ
 aMN
 kBy
 xam
-eXI
-jfr
-jfr
-jfr
+acb
 nJJ
 nJJ
-jfr
-dVz
-gXZ
-gXZ
-exL
-exL
-gBv
-gBv
-oOC
-exL
-pyH
-nIF
-dVz
+nJJ
+nJJ
+nJJ
+nJJ
+kEA
+aZv
+aZv
+rjc
+rjc
+hEy
+hEy
+kKb
+rjc
+ppa
+ttd
+kEA
 rQJ
 leC
-tFz
-tFz
-tFz
-tFz
+wUg
+wUg
+wUg
+wUg
 leC
 tqI
 tqI
@@ -121191,32 +120945,32 @@ rLZ
 jIT
 kBy
 esb
-eXI
-jfr
-jfr
-jfr
-jfr
-jfr
-xYL
-tFz
-exL
-exL
-exL
-exL
-nDf
-gBv
-tFz
-tFz
-exL
-gXZ
-dVz
-uiE
-gLJ
-keg
-tFz
-tFz
-keg
-hoz
+acb
+nJJ
+nJJ
+nJJ
+nJJ
+nJJ
+gSR
+kKb
+rjc
+rjc
+rjc
+rjc
+jFt
+hEy
+kKb
+kKb
+rjc
+aZv
+kEA
+rQJ
+pXU
+leC
+wUg
+wUg
+leC
+tqI
 tqI
 tqI
 tqI
@@ -121396,34 +121150,34 @@ oPQ
 acb
 nJJ
 nJJ
-jfr
-jfr
-tFz
-our
-qXj
-exL
-exL
-agB
-qXj
-exL
-tFz
-gBv
-tFz
-exL
-exL
-gXZ
-uiE
-keg
-tFz
-tFz
-qtD
-keg
-tFz
-mJB
-mJB
-mJB
-mJB
-juW
+nJJ
+nJJ
+kKb
+gSR
+hOj
+rjc
+rjc
+gTB
+hOj
+rjc
+kKb
+hEy
+kKb
+rjc
+rjc
+aZv
+rQJ
+leC
+wUg
+wUg
+jeb
+leC
+wUg
+tqI
+tqI
+tqI
+tqI
+leC
 leC
 tqI
 tqI
@@ -121598,34 +121352,34 @@ acb
 acb
 nJJ
 nJJ
-tFz
-our
-our
-exL
-pyH
-qXj
-qXj
-agB
-pyH
-exL
-tFz
-hDW
-gBv
-tFz
-tFz
-exL
-uiE
-tFz
-keg
-keg
-tFz
-tFz
-tFz
-mJB
-mJB
-mJB
-fYa
-fYa
+kKb
+gSR
+gSR
+rjc
+ppa
+hOj
+hOj
+gTB
+ppa
+rjc
+kKb
+aTK
+hEy
+kKb
+kKb
+rjc
+rQJ
+wUg
+leC
+leC
+wUg
+wUg
+wUg
+tqI
+tqI
+tqI
+wUg
+wUg
 leC
 leC
 leC
@@ -121800,34 +121554,34 @@ wmE
 sit
 sit
 hqb
-tFz
-tFz
-dVz
-nIF
-agB
-iil
-dVz
-iil
-exL
-exL
-tFz
-gBv
-tFz
-gBv
-gBv
-exL
-uiE
-tFz
-yen
-keg
-keg
-tFz
-tFz
-fYa
-mJB
-juW
-sFi
-fYa
+kKb
+kKb
+kEA
+ttd
+gTB
+ulG
+kEA
+ulG
+rjc
+rjc
+kKb
+hEy
+kKb
+hEy
+hEy
+rjc
+rQJ
+wUg
+cEB
+leC
+leC
+wUg
+wUg
+wUg
+tqI
+leC
+rQD
+wUg
 wUg
 wUg
 rQD
@@ -121997,39 +121751,39 @@ qBL
 tQB
 gZq
 gZq
-vWc
+nvA
 tQB
 iUh
 wmE
 urZ
-gBv
-dVz
-iil
-gXZ
-iil
-gXZ
-gXZ
-gXZ
-exL
-tFz
-gBv
-gBv
-our
-tFz
-gBv
+hEy
+kEA
+ulG
+aZv
+ulG
+aZv
+aZv
+aZv
+rjc
+kKb
+hEy
+hEy
+gSR
+kKb
+hEy
 tSC
-crV
-keg
-keg
-xbP
-tFz
-tFz
-fBj
-mJB
-mJB
-juW
-fYa
-fYa
+cIK
+leC
+leC
+cEB
+wUg
+wUg
+tqI
+tqI
+tqI
+leC
+wUg
+wUg
 cEB
 wUg
 wUg
@@ -122204,34 +121958,34 @@ tQB
 tQB
 wmE
 urZ
-gBv
-gXZ
-gXZ
-gXZ
-gXZ
-gXZ
-gXZ
-tFz
-exL
-tFz
+hEy
+aZv
+aZv
+aZv
+aZv
+aZv
+aZv
+kKb
+rjc
+kKb
 pqM
-mmo
-agB
-exL
-hoz
-hoz
+cVN
+gTB
+rjc
+jvF
+jvF
 aNc
-hoz
-keg
-tFz
-tFz
-hoz
-hoz
-mJB
-mJB
-mJB
-juW
-fYa
+tqI
+leC
+wUg
+wUg
+tqI
+tqI
+tqI
+tqI
+tqI
+leC
+wUg
 wUg
 wUg
 wUg
@@ -122406,29 +122160,29 @@ nvA
 xGr
 tQB
 urZ
-gBv
-gBv
-gXZ
-gXZ
-iil
-tbE
-gXZ
-tFz
-tFz
-gBv
-nDf
-exL
-exL
-hoz
-hoz
-hoz
-crV
-hoz
-hoz
-hoz
-nfg
-hoz
-hoz
+hEy
+hEy
+aZv
+aZv
+ulG
+kEA
+aZv
+kKb
+kKb
+hEy
+jFt
+rjc
+rjc
+jvF
+jvF
+jvF
+cIK
+tqI
+tqI
+tqI
+tqI
+tqI
+tqI
 tqI
 tqI
 tqI
@@ -122608,28 +122362,28 @@ gZq
 xVy
 tQB
 urZ
-tFz
-gBv
-gBv
-gXZ
-nIF
-dVz
-tFz
-tFz
-gBv
-gBv
-exL
-mOS
-hoz
-hoz
-hoz
-hoz
+kKb
+hEy
+hEy
+aZv
+ttd
+kEA
+kKb
+kKb
+hEy
+hEy
+rjc
+uvK
+jvF
+jvF
+jvF
+jvF
 aNc
-hoz
-hoz
-hoz
-hoz
-hoz
+tqI
+tqI
+tqI
+tqI
+tqI
 tqI
 tqI
 tqI
@@ -122811,26 +122565,26 @@ nvA
 nvA
 urZ
 rjc
-tFz
-jzA
-gBv
-oOC
-tFz
-tFz
-gBv
-tFz
-tpE
-mOS
-hoz
-hoz
-hoz
-hoz
+kKb
+hEy
+hEy
+kKb
+kKb
+kKb
+hEy
+kKb
+luI
+uvK
+jvF
+jvF
+jvF
+jvF
 tSC
-crV
-hoz
-hoz
-tFz
-tFz
+cIK
+tqI
+tqI
+wUg
+wUg
 wUg
 leC
 tqI
@@ -123013,26 +122767,26 @@ gZq
 nvA
 urZ
 rjc
-exL
-tFz
-gBv
-gBv
-nDf
-nDf
-tFz
-exL
-exL
-bQg
-hoz
-hoz
-hoz
-hoz
-hoz
-uiE
-hoz
-tFz
-tFz
-keg
+rjc
+kKb
+hEy
+hEy
+jFt
+jFt
+kKb
+rjc
+rjc
+bwY
+jvF
+jvF
+jvF
+jvF
+jvF
+rQJ
+tqI
+wUg
+wUg
+leC
 leC
 leC
 leC
@@ -123213,28 +122967,28 @@ gZq
 gZq
 gZq
 gZq
-fws
+hqb
 frU
-exL
-tFz
-nDf
-mmo
+rjc
+kKb
+jFt
+cVN
 pqM
-gBv
-tFz
-exL
-exL
-bQg
-hoz
-hoz
-hoz
-hoz
-bQg
-uiE
-keg
-tFz
-tFz
-keg
+hEy
+kKb
+rjc
+rjc
+bwY
+jvF
+jvF
+jvF
+jvF
+bwY
+rQJ
+leC
+wUg
+wUg
+leC
 cEB
 leC
 wUg
@@ -123417,26 +123171,26 @@ gZq
 gZq
 urZ
 jvF
-hoz
-tFz
-tFz
-our
-tFz
-tFz
-gBv
-tFz
-exL
-hoz
-hoz
-hoz
-hoz
-mOS
-tFz
-uiE
-keg
-keg
-keg
-keg
+jvF
+kKb
+kKb
+gSR
+kKb
+kKb
+hEy
+kKb
+rjc
+jvF
+jvF
+jvF
+jvF
+uvK
+kKb
+rQJ
+leC
+leC
+leC
+leC
 leC
 leC
 wUg
