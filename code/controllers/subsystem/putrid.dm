@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(meatvines)
 	var/process_ticks = 0
 
 /datum/controller/subsystem/meatvines/stat_entry(msg)
-	msg = "E:[length(edge_vines)]|I:[length(interior_vines)]|T:[length(tracked_turfs)]"
+	msg += "E:[length(edge_vines)]|I:[length(interior_vines)]|T:[length(tracked_turfs)]"
 	return ..()
 
 /datum/controller/subsystem/meatvines/fire(resumed)
