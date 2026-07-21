@@ -4047,7 +4047,7 @@
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_4
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/adv_guild)
 "bTP" = (
 /obj/structure/door/weak/bolt{
@@ -9588,7 +9588,7 @@
 	template_y = 7;
 	default_template = /datum/map_template/vanderlin_mercapt_6
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "evg" = (
 /obj/structure/carpet,
@@ -10680,7 +10680,7 @@
 	template_y = 6;
 	default_template = /datum/map_template/vanderlin_mercapt_3
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "eWI" = (
 /turf/open/floor/wood,
@@ -13746,7 +13746,7 @@
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_2
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/adv_guild)
 "guX" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -13883,7 +13883,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/church/chapel)
 "gxD" = (
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "gxO" = (
 /obj/structure/fluff/walldeco/vinez/red,
@@ -14131,7 +14131,7 @@
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_5
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/adv_guild)
 "gEF" = (
 /obj/machinery/light/fueled/firebowl/standing,
@@ -17423,7 +17423,7 @@
 	template_y = 7;
 	default_template = /datum/map_template/vanderlin_mercapt_5
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "ijf" = (
 /obj/structure/orphan_smasher,
@@ -23360,7 +23360,7 @@
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_3
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/adv_guild)
 "kTE" = (
 /obj/structure/fluff/walldeco/bigpainting,
@@ -25282,7 +25282,7 @@
 	template_y = 6;
 	default_template = /datum/map_template/vanderlin_mercapt_4
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "lOb" = (
 /obj/structure/table/wood{
@@ -28136,7 +28136,7 @@
 	template_y = 7;
 	default_template = /datum/map_template/vanderlin_mercapt_1
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "ner" = (
 /turf/open/floor/cobble,
@@ -30462,7 +30462,7 @@
 	template_y = 7;
 	default_template = /datum/map_template/vanderlin_mercapt_2
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "oiF" = (
 /obj/structure/flora/newtree,
@@ -31355,7 +31355,7 @@
 /area/indoors/town/church/chapel)
 "oyY" = (
 /obj/structure/fluff/walldeco/vinez,
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/merc_guild)
 "ozc" = (
 /obj/structure/rack/shelf/biggest,
@@ -36768,6 +36768,9 @@
 /obj/structure/table/map/enigma,
 /turf/open/floor/church,
 /area/indoors/town/keep/guest/meeting)
+"qWD" = (
+/turf/closed/basic,
+/area/indoors/town/adv_guild)
 "qWX" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/clean,
@@ -39748,7 +39751,7 @@
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_1
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/adv_guild)
 "smK" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -46394,7 +46397,7 @@
 	template_y = 4;
 	default_template = /datum/map_template/vanderlin_advapt_6
 	},
-/turf/open/openspace,
+/turf/closed/basic,
 /area/indoors/town/adv_guild)
 "viN" = (
 /obj/structure/flora/ausbushes/ywflowers,
@@ -83973,15 +83976,15 @@ nSd
 bfG
 qFx
 hTc
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
 smI
 xbT
 xbT
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
 bTF
 hTc
 qvf
@@ -84175,16 +84178,16 @@ nSd
 bfG
 qFx
 hTc
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 xbT
 xbT
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 hTc
 qvf
 iNg
@@ -84377,16 +84380,16 @@ xOx
 vbN
 qFx
 hTc
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 xbT
 xbT
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 hTc
 qvf
 qvf
@@ -84780,17 +84783,17 @@ xOx
 xOx
 bfG
 jux
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
 guW
 uJn
 oXr
 oXr
 uJn
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
 gEC
 jux
 wpU
@@ -84982,18 +84985,18 @@ nSd
 xOx
 bfG
 hTc
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 xbT
 oXr
 oXr
 xbT
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 hTc
 qFx
 qFx
@@ -85184,18 +85187,18 @@ kFt
 kFt
 vbN
 hTc
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 xbT
 oXr
 oXr
 xbT
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 hTc
 qFx
 qFx
@@ -85588,17 +85591,17 @@ nSd
 nSd
 bfG
 jux
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
 kTD
 xbT
 oXr
 oXr
 xbT
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
 viG
 hTc
 qFx
@@ -85790,18 +85793,18 @@ nSd
 ctL
 bfG
 hTc
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 xbT
 oXr
 oXr
 xbT
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 hTc
 qFx
 qFx
@@ -85992,18 +85995,18 @@ ctL
 ipV
 bfG
 hTc
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 axP
 oXr
 oXr
 axP
-eqI
-eqI
-eqI
-eqI
+qWD
+qWD
+qWD
+qWD
 hTc
 qFx
 qFx
