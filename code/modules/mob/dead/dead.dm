@@ -171,6 +171,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 
 	if(!client)
 		registered_z = null
+		return
 
 	if(new_z)
 		SSmobs.dead_players_by_zlevel[new_z] += src
