@@ -489,7 +489,7 @@
 	if(ishuman(owner) && bare_organ_bonus)
 		var/mob/living/carbon/human/human_owner = owner
 		for(var/obj/item/clothing/clothes_check as anything in human_owner.clothingonpart(src))
-			if(clothes_check.armor.getRating(WOUND))
+			if(clothes_check.get_armor().get_rating(WOUND))
 				bare_organ_bonus = 0
 				break
 

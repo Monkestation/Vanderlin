@@ -11,7 +11,7 @@
 	pass_flags_self = PASSDOORS|PASSSTRUCTURE
 	max_integrity = 1000
 	integrity_failure = 0.5
-	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/door
 	damage_deflection = 10
 	CanAtmosPass = ATMOS_PASS_DENSITY
 	break_sound = 'sound/combat/hits/onwood/destroywalldoor.ogg'
@@ -485,7 +485,7 @@
 /obj/structure/door/iron
 	name = "iron door"
 	icon_state = "donjon"
-	armor = list("blunt" = 15, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 50, "acid" = 50)
+	armor_type = /datum/armor/door/heavy
 	max_integrity = 2000
 	damage_deflection = 15
 	resistance_flags = FIRE_PROOF
@@ -519,7 +519,7 @@
 /obj/structure/door/stone
 	name = "stone door"
 	icon_state = "stone"
-	armor = list("blunt" = 15, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 50, "acid" = 50)
+	armor_type = /datum/armor/door/heavy
 	open_sound = 'sound/foley/doors/stoneopen.ogg'
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
@@ -539,7 +539,7 @@
 	name = "abyssal door"
 	icon_state = "abyssdoor"
 	icon = 'icons/delver/abyss_objects.dmi'
-	armor = list("blunt" = 15, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 50, "acid" = 50)
+	armor_type = /datum/armor/door/heavy
 	open_sound = 'sound/foley/doors/stoneopen.ogg'
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)

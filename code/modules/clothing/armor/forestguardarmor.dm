@@ -16,7 +16,7 @@
 	desc = "Armour worn by few, those that live to hunt, to battle. \nThe soft, cloth linings with masterfully tanned leather make it easy to repair with a needle."
 	max_integrity = INTEGRITY_STRONG + 200
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/leather/master
 
 /obj/item/clothing/armor/leather/advanced/forrester/masterwork/Initialize()
 	. = ..()
