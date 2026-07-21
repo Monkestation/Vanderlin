@@ -85,7 +85,7 @@
 			if(H.can_block_magic(MAGIC_RESISTANCE))
 				return
 
-			if(!(H.mind?.assigned_role.job_bitflag & GARRISON|NOBLEMEN))
+			if(!(H.mind?.assigned_role.department_flag & GARRISON|NOBLEMEN))
 				return
 
 			if(!COOLDOWN_FINISHED(src, scepter))
@@ -168,7 +168,7 @@
 		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
 			return
 
-		if(!(H.mind?.assigned_role.job_bitflag & CHURCHMEN))
+		if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
 			return
 
 		if(!COOLDOWN_FINISHED(src, staff))
