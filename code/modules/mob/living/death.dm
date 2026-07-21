@@ -67,7 +67,7 @@ GLOBAL_LIST_EMPTY(last_words)
 	timeofdeath = world.time
 	tod = station_time_timestamp()
 
-	if(mind && !gibbed && !was_dead_before)
+	if(!gibbed && !was_dead_before)
 		var/obj/structure/soul/soul = new(get_turf(src))
 		soul.init_mana(WEAKREF(src))
 
