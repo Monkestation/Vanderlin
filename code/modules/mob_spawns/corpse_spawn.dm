@@ -1,6 +1,7 @@
 ///these mob spawn subtypes trigger immediately (New or Initialize) and are not player controlled... since they're dead, you know?
 /obj/effect/mob_spawn/corpse
 	abstract_type = /obj/effect/mob_spawn/corpse
+	density = FALSE
 	///when this mob spawn should auto trigger.
 	var/spawn_when = CORPSE_INSTANT
 
@@ -19,15 +20,17 @@
 		if(CORPSE_INSTANT)
 			INVOKE_ASYNC(src, PROC_REF(create))
 		if(CORPSE_ROUNDSTART)
-			if(mapload || (SSticker && SSticker.current_state > GAME_STATE_SETTING_UP))
+			if(SSticker.current_state < GAME_STATE_PLAYING)
+				SSticker.OnRoundstart(CALLBACK(src, PROC_REF(create)))
+			else
 				INVOKE_ASYNC(src, PROC_REF(create))
 
 /obj/effect/mob_spawn/corpse/special(mob/living/spawned_mob)
 	. = ..()
 	spawned_mob.death(TRUE)
-	spawned_mob.adjustOxyLoss(oxy_damage)
-	spawned_mob.adjustBruteLoss(brute_damage, damage_type = pick(BCLASS_BITE, BCLASS_BLUNT, BCLASS_LASHING, BCLASS_CUT))
-	spawned_mob.adjustFireLoss(burn_damage)
+	spawned_mob.adjustOxyLoss(oxy_damage, updating_health = FALSE)
+	spawned_mob.adjustBruteLoss(brute_damage, updating_health = FALSE, damage_type = pick(BCLASS_BITE, BCLASS_BLUNT, BCLASS_LASHING, BCLASS_CUT))
+	spawned_mob.adjustFireLoss(burn_damage, updating_health = FALSE)
 
 /obj/effect/mob_spawn/corpse/create(mob/mob_possessor, newname)
 	. = ..()

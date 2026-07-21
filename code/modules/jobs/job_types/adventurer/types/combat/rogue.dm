@@ -46,41 +46,6 @@
 	. = ..()
 
 	var/static/list/thiefcloak_colors = list(
-		"Fyritius Dye"	="#b47011",\
-		"Winestain Red"	="#6b3737",\
-		"Maroon"		="#672c0d",\
-		"Blood Red"		="#770d0d",\
-		"Forest Green"	="#3f8b24",\
-		"Bog Green"		="#58793f",\
-		"Spring Green"	="#435436",\
-		"Royal Teal"	="#249589",\
-		"Mana Blue"		="#1b3c7a",\
-		"Berry"			="#38455b",\
-		"Lavender"		="#865c9c",\
-		"Majenta"		="#822b52",\
-		"Bark Brown"	="#685542",\
-		"Russet"		="#685542",\
-		"Chestnut"		="#5f3d21",\
-		"Old Leather"	="#473a30",\
-		"Ashen Black"	="#2f352f",\
-	)
-
-	var/obj/item/clothing/cloak/raincloak/thiefcloak = spawned.get_item_by_slot(ITEM_SLOT_CLOAK)
-
-	var/choice = tgui_input_list(player_client, "Pick your cloak color.", "Thief", thiefcloak_colors, "Chestnut")
-	if(!choice)
-		return
-
-	if(!thiefcloak.loc == spawned)
-		return
-
-	thiefcloak.color = thiefcloak_colors[choice]
-
-	var/obj/item/clothing/cloak/raincloak = spawned.get_item_by_slot(ITEM_SLOT_CLOAK)
-	if(!raincloak)
-		return
-
-	var/static/list/thiefcloak_colors = list(
 		"Fyritius Dye" = "#b47011",
 		"Winestain Red"	= "#6b3737",
 		"Maroon" = "#672c0d",
@@ -100,12 +65,16 @@
 		"Ashen Black" = "#2f352f",
 	)
 
-	var/choice = browser_input_list(spawned, "What color was I?", "TOOLS OF THE TRADE", thiefcloak_colors)
+	var/obj/item/clothing/cloak/raincloak/thiefcloak = spawned.get_item_by_slot(ITEM_SLOT_CLOAK)
 
-	if(!choice || !raincloak.loc == spawned)
+	var/choice = tgui_input_list(player_client, "Pick your cloak color.", "Thief", thiefcloak_colors, "Chestnut")
+	if(!choice)
 		return
 
-	raincloak.color = thiefcloak_colors[choice]
+	if(thiefcloak.loc != spawned)
+		return
+
+	thiefcloak.color = thiefcloak_colors[choice]
 
 /datum/outfit/adventurer/rogue
 	name = "Thief (Adventurer)"
