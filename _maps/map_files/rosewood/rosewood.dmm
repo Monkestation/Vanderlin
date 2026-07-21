@@ -5844,10 +5844,6 @@
 	dir = 1
 	},
 /area/outdoors/town/roofs)
-"cMe" = (
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors/town)
 "cMh" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/gate)
@@ -12121,11 +12117,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/mountains)
-"fRG" = (
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors/town/roofs)
 "fRK" = (
 /obj/machinery/light/fueledstreet/blue{
 	dir = 4
@@ -107028,7 +107019,7 @@ pro
 jae
 ska
 jyM
-cMe
+hMx
 qne
 crD
 cUC
@@ -229775,7 +229766,7 @@ gYy
 gYy
 pMt
 gkA
-fRG
+hil
 pmf
 fiT
 xfH

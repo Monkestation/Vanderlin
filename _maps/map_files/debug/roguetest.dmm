@@ -1579,10 +1579,6 @@
 /obj/effect/spell_rune,
 /turf/open/floor/tile/bfloorz,
 /area/indoors)
-"nl" = (
-/turf/open/water/hotspring,
-/turf/open/floor/cobblerock,
-/area/outdoors/mountains/decap)
 "nm" = (
 /obj/effect/landmark/stall,
 /turf/open/floor/grass/yel,
@@ -9517,7 +9513,7 @@ cV
 cz
 hd
 UD
-nl
+UD
 UD
 yP
 ac

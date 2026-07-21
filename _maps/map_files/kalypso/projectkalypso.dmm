@@ -195,10 +195,6 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/grass,
 /area/outdoors)
-"aT" = (
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors)
 "aX" = (
 /obj/structure/flora/grass/bush{
 	pixel_x = -3
@@ -5668,11 +5664,6 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors)
-"Dx" = (
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors)
 "Dz" = (
 /obj/structure/flora/ausbushes/reedbush{
 	icon_state = "reedbush_4"
@@ -6091,11 +6082,6 @@
 /obj/structure/tent_wall,
 /turf/open/floor/grass,
 /area/indoors/town)
-"FK" = (
-/obj/structure/flora/hotspring_rocks,
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors)
 "FM" = (
 /obj/structure/wild_plant/nospread/blackberry{
 	name = "wild blackberry bush";
@@ -513317,7 +513303,7 @@ qr
 Qe
 Qe
 Qe
-aT
+Qe
 wY
 iw
 bc
@@ -514918,8 +514904,8 @@ HR
 Fb
 Qe
 qr
-aT
-aT
+Qe
+Qe
 yR
 fN
 xr
@@ -516529,12 +516515,12 @@ qr
 Qe
 EY
 Qe
-aT
+Qe
 wl
 sQ
 Fx
 Qe
-aT
+Qe
 Qe
 qr
 IY
@@ -516931,12 +516917,12 @@ Qe
 Qe
 wC
 Qe
-Dx
-aT
+iw
 Qe
 Qe
 Qe
-FK
+Qe
+tb
 Qe
 Qe
 IY
