@@ -226,6 +226,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 30
 	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	design_chosen = FALSE
 	item_weight = 6 KILOGRAMS
 

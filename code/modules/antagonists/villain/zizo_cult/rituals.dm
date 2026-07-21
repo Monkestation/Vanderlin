@@ -131,19 +131,25 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /obj/item/corruptedheart/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
 		return
+
 	if(istype(target.patron, /datum/patron/inhumen/zizo) && CAN_HAVE_BLOOD(target) && target.get_blood_volume() < BLOOD_VOLUME_NORMAL)
 		target.set_blood_volume(BLOOD_VOLUME_NORMAL)
 		to_chat(target, span_notice("My elixir of life is stagnant once again."))
 		qdel(src)
 		return
+
 	if(!do_after(user, 2 SECONDS, target))
 		return
+
 	if(target.cmode)
 		user.electrocute_act(30)
+
 	target.Stun(10 SECONDS)
+
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
 		carbon_target.adjust_silence(30 SECONDS)
+
 	qdel(src)
 
 /datum/ritual/servantry/darksunmark
@@ -457,7 +463,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
 		return
-	target.set_faction(FACTION_UNDEAD)
+	target.set_faction(list(FACTION_UNDEAD))
 	target.add_spell(/datum/action/cooldown/spell/gravemark)
 	target.add_spell(/datum/action/cooldown/spell/control_undead)
 	target.add_spell(/datum/action/cooldown/spell/decompose)

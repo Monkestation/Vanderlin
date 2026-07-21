@@ -82,14 +82,11 @@
 
 /obj/item/clothing/armor/brigandine/haraate/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
-	var/playerchoice = COLOR_MAP[choice]
-	detail_color = playerchoice
-	update_icon()
-	if(loc == user && ishuman(user))
-		var/mob/living/carbon/H = user
-		H.update_inv_armor()
-		H.update_icon()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)
 
 //................ Abyssal Robe ............... //
 /obj/item/clothing/armor/brigandine/abyssor // This is only a brigandine subtype for balance reasons, it should be a cuirass variant.
@@ -98,11 +95,11 @@
 	icon_state = "abyssal_robe"
 	item_state = "abyssal_robe"
 	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/clothing/armor/brigandine/abyssor/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_COAT_STEP)
-
 
 /obj/item/clothing/armor/brigandine/captain
 	name = "captain's brigandine"
@@ -148,17 +145,14 @@
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/armor/brigandine/light
-	slot_flags = ITEM_SLOT_ARMOR
 	name = "lightweight brigandine"
 	desc = "A light riveted coat with plates concealed inside an exterior fabric. Susceptible to daggers being shoved into your ribs."
 	icon_state = "light_brigandine"
-	blocksound = SOFTHIT
 	body_parts_covered = COVERAGE_TORSO
-	armor = ARMOR_BRIGANDINE
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE
 	smeltresult = /obj/item/ingot/iron
-	equip_delay_self = 40
-	armor_class = AC_LIGHT//steel version of the studded leather armor now
+	melting_material = /datum/material/iron
+	armor_class = AC_LIGHT //steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
 	item_weight = 3.95 KILOGRAMS

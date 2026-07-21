@@ -97,14 +97,6 @@
 #define COMSIG_ATOM_SMOOTHED_ICON "atom_smooth_icon"
 /// from base of atom/Bumped(): (/atom/movable)
 #define COMSIG_ATOM_BUMPED "atom_bumped"
-/// from base of atom/ex_act(): (severity, target)
-#define COMSIG_ATOM_EX_ACT "atom_ex_act"
-/// from base of atom/fire_act(): (added, maxstacks)
-#define COMSIG_ATOM_FIRE_ACT "atom_fire_act"
-/// from base of atom/bullet_act(): (/obj/projectile, def_zone)
-#define COMSIG_ATOM_BULLET_ACT "atom_bullet_act"
-/// from base of atom/acid_act(): (acidpwr, acid_volume)
-#define COMSIG_ATOM_ACID_ACT "atom_acid_act"
 /// from base of atom/setDir(): (old_dir, new_dir)
 #define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"
 /// from base of atom/setDir(): (old_dir, new_dir). Called after the direction changes.

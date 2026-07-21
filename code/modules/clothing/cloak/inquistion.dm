@@ -155,10 +155,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-/obj/item/clothing/cloak/ordinatorcape/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/ordinatorcape/lirvas
 	name = "warrior silks"
@@ -195,10 +192,7 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-/obj/item/clothing/cloak/absolutionistrobe/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/absolutionistrobe/black
 	name = "blessed robe"

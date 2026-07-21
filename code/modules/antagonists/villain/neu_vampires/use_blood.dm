@@ -176,24 +176,6 @@
 						to_chat(user, span_cult("You have trouble focusing, things will go bad if you keep using your blood.") )
 					else if (blood_before > BLOOD_VOLUME_SURVIVE && blood_after < BLOOD_VOLUME_SURVIVE)
 						to_chat(user, span_cult("It will be all over soon.") )
-			else if (ismonkey(user))
-				var/mob/living/carbon/C = user
-				var/blood_before = C.health
-				if (ismonkey(C))
-					C.adjustOxyLoss(data[BLOODCOST_AMOUNT_USER])
-				C.updatehealth()
-				var/blood_after = C.health
-				if (blood_before > (C.maxHealth*5/6) && blood_after < (C.maxHealth*5/6))
-					to_chat(user, span_cult("You start looking pale.") )
-				else if (blood_before > (C.maxHealth*4/6) && blood_after < (C.maxHealth*4/6))
-					to_chat(user, span_cult("You feel weak from the lack of blood.") )
-				else if (blood_before > (C.maxHealth*3/6) && blood_after < (C.maxHealth*3/6))
-					to_chat(user, span_cult("You are about to pass out from the lack of blood.") )
-				else if (blood_before > (C.maxHealth*2/6) && blood_after < (C.maxHealth*2/6))
-					to_chat(user, span_cult("You have trouble focusing, things will go bad if you keep using your blood.") )
-				else if (blood_before > (C.maxHealth*1/6) && blood_after < (C.maxHealth*1/6))
-					to_chat(user, span_cult("It will be all over soon.") )
-
 
 	if (communion && data[BLOODCOST_TOTAL] + total_accumulated >= amount_needed)
 		data[BLOODCOST_TOTAL] = max(data[BLOODCOST_TOTAL], total_needed)

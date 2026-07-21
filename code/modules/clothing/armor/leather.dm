@@ -421,3 +421,12 @@
 	armor = ARMOR_GRONN_LIGHT
 	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
+/obj/item/clothing/armor/leather/fencer
+	name = "fencer's jacket"
+	desc = "A lightweight leather jacket made from hardened leather, designed to comfortably protect vital areas."
+	icon_state = "freijacket"
+	detail_tag = "_detail"
+	color = "#5E4440"
+	detail_color = "#c08955"
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)

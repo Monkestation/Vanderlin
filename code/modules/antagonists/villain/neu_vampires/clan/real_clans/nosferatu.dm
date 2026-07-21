@@ -11,7 +11,7 @@
 		/datum/action/cooldown/spell/undirected/shapeshift/rat_vampire,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Nosferatu"
 
 

@@ -229,24 +229,33 @@
 	var/isunburnt = TRUE // Var needed for the burnt stump
 	var/stump_loot = /obj/item/grown/log/tree/small
 
-/obj/structure/table/wood/treestump/Initialize()
+/obj/structure/table/wood/treestump/Initialize(mapload, ...)
 	. = ..()
 	icon_state = "stumpt[rand(1,4)]"
 
-/obj/structure/table/wood/treestump/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/weapon/shovel))
-		to_chat(user, "I start unearthing the stump...")
-		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(do_after(user, 5 SECONDS))
-			user.visible_message(
-				span_notice("[user] unearths \the [src]."),
-				span_notice("I unearth \the [src].")
-								)
-			if(isunburnt)
-				new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
-			atom_destruction(BRUTE)
-		return
-	return ..()
+/obj/structure/table/wood/treestump/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/shovel))
+		return ..()
+
+	to_chat(user, "I start unearthing the stump...")
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+	if(!do_after(user, 5 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message(
+		span_notice("[user] unearths [src]."),
+		span_notice("I unearth [src].")
+	)
+
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+	if(isunburnt)
+		new stump_loot(loc) // Rewarded with an extra small log if done the right way.return
+
+	atom_destruction(BRUTE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/table/wood/treestump/burnt
 	name = "tree stump"

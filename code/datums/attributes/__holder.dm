@@ -160,7 +160,7 @@
  */
 /datum/attribute_holder/proc/set_parent(mob/new_parent)
 	if(parent)
-		UnregisterSignal(parent, list(COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, COMSIG_SHARE_APPRENTICE_XP, COMSIG_QDELETING))
+		UnregisterSignal(parent, list(COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, COMSIG_SHARE_APPRENTICE_XP, COMSIG_QDELETING, COMSIG_ATOM_UPDATED_ICON))
 		parent.attributes = null
 
 	parent = new_parent
@@ -169,6 +169,7 @@
 		RegisterSignal(parent, COMSIG_SHARE_APPRENTICE_XP, PROC_REF(onshare_apprentice_xp))
 		RegisterSignal(parent, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(upon_mind_transfer))
 		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_owner_deleted))
+		RegisterSignal(parent, COMSIG_ATOM_UPDATED_ICON, PROC_REF(on_parent_appearance_changed))
 	update_attributes()
 
 /datum/attribute_holder/proc/on_owner_deleted()
@@ -571,3 +572,50 @@
 		var/display_level = return_raw_effective_skill(skill_type)
 		var/tier_name = display_level > 0 ? skill.description_from_level(display_level) : "nothing"
 		to_chat(parent, span_warning("My [skill_name] has weakened to [tier_name]!"))
+
+/// Breaks a skill's final value into base + named contributions
+/datum/attribute_holder/proc/get_skill_value_breakdown(skill_type)
+	var/list/breakdown = list()
+	var/base = raw_attribute_list[skill_type]
+	breakdown["base"] = base
+
+	if(parent && HAS_TRAIT(parent, TRAIT_NO_SKILLS))
+		breakdown["value"] = 0
+		breakdown["governing_contribution"] = 0
+		breakdown["defaults_contribution"] = 0
+		return breakdown
+
+	var/after_direct = attribute_list[skill_type] // raw + direct attribute_modification entries only
+	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
+	var/governing_contribution = 0
+	var/value = after_direct
+
+	if(istype(skill) && skill.governing_attribute && !isnull(after_direct) && (after_direct > 0))
+		var/governing_raw = return_raw_calculated_skill(skill.governing_attribute)
+		var/governing_effective = return_calculated_skill(skill.governing_attribute)
+		var/governing_delta = governing_effective - governing_raw
+		if(governing_delta < 0)
+			governing_contribution = floor((governing_raw * SKILL_GOVERNING_MULTIPLIER_POSITIVE) + (governing_delta * SKILL_GOVERNING_MULTIPLIER_NEGATIVE))
+		else
+			governing_contribution = floor(governing_effective * SKILL_GOVERNING_MULTIPLIER_POSITIVE)
+		value = after_direct + governing_contribution
+
+	var/defaults_contribution = 0
+	if(istype(skill) && LAZYLEN(skill.default_attributes))
+		var/best_default = null
+		for(var/attribute_type in skill.default_attributes)
+			var/default_value = return_calculated_skill(attribute_type)
+			if(isnull(default_value))
+				continue
+			default_value += skill.default_attributes[attribute_type]
+			default_value = min(default_value, ATTRIBUTE_MASTER) // Rule of 20
+			if(isnull(best_default) || default_value > best_default)
+				best_default = default_value
+		if(!isnull(best_default) && (isnull(value) || best_default > value))
+			defaults_contribution = best_default - nulltozero(value)
+			value = best_default
+
+	breakdown["value"] = value
+	breakdown["governing_contribution"] = governing_contribution
+	breakdown["defaults_contribution"] = defaults_contribution
+	return breakdown

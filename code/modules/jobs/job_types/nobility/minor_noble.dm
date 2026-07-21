@@ -26,6 +26,10 @@
 		/datum/attribute/skill/combat/swords = list(20, 40)
 	)
 
+/datum/attribute_holder/sheet/job/minor_bows
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/bows = list(20, 40)
+	)
 
 /datum/job/minor_noble
 	title = JOB_MINOR_NOBLE
@@ -173,6 +177,11 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/magickal_graduate
 
+	traits = list(
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
+	)
+
 /datum/outfit/minornoble/magickal_graduate
 	name = "Magical Graduate (noble)"
 	head = /obj/item/clothing/head/wizhat/gen
@@ -236,7 +245,7 @@
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/labor/mathematics = 30,
-		/datum/attribute/skill/combat/bows = 20
+		/datum/attribute/skill/combat/bows = 10
 	)
 
 /datum/job/advclass/minornoble/vassal
@@ -259,15 +268,12 @@
 	name = "Vassal (noble)"
 	shoes = /obj/item/clothing/shoes/boots
 	shirt = /obj/item/clothing/shirt/tunic/colored/random
-	backl = /obj/item/storage/backpack/satchel
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
 	belt = /obj/item/storage/belt/leather
 	ring = /obj/item/clothing/ring/silver
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	backr = /obj/item/gun/ballistic/bow
-	beltl = /obj/item/ammo_holder/quiver/arrows
+	backr = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/head/fancyhat
-	backl = /obj/item/storage/backpack/satchel
 
 /datum/job/minor_noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -280,6 +286,7 @@
 		"Dagger" = /obj/item/weapon/knife/dagger/silver,
 		"Rapier" = /obj/item/weapon/sword/rapier/dec,
 		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade,
+		"Bow" = /obj/item/gun/ballistic/bow
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = JOB_MINOR_NOBLE)
 	if(!choice)
@@ -300,18 +307,20 @@
 			var/scabbard = new /obj/item/weapon/scabbard/cane()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
+		if("Bow")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/minor_bows)
+			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/arrows(), TRUE)
 
 /datum/outfit/noble
 	name = "Noble Base"
 	shoes = /obj/item/clothing/shoes/boots
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
+	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather
 	ring = /obj/item/clothing/ring/silver
 
 /datum/outfit/noble/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	if(equipped_human.gender == MALE)
-		pants = /obj/item/clothing/pants/tights/colored/black
 	if(equipped_human.age == AGE_CHILD)
 		backpack_contents = list(
 			/obj/item/reagent_containers/glass/carafe/teapot/tea = 1,

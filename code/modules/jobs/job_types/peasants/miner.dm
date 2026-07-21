@@ -46,23 +46,28 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/miner
+	traits = list(
+		TRAIT_AMAZING_BACK
+	)
 
 /datum/outfit/miner
 	name = JOB_MINER
-	head = /obj/item/clothing/head/armingcap
+	head = /obj/item/clothing/head/helmet/leather/minershelm
 	pants = /obj/item/clothing/pants/trou
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	shirt = /obj/item/clothing/shirt/undershirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots/leather
 	belt = /obj/item/storage/belt/leather
-	neck = /obj/item/storage/belt/pouch/coins/poor
+	neck = /obj/item/clothing/neck/coif/cloth/colored/peasantbrown
+	wrists = /obj/item/storage/keyring/artificer
 	beltl = /obj/item/weapon/pick
+	beltr = /obj/item/storage/hip/orebag
 	backr = /obj/item/weapon/shovel
 	backl = /obj/item/storage/backpack/backpack
 	backpack_contents = list(
 		/obj/item/flint = 1,
 		/obj/item/weapon/knife/villager = 1,
-		/obj/item/storage/keyring/artificer = 1
+		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
 /datum/outfit/miner/map_override(mob/living/carbon/human/H)
@@ -75,8 +80,5 @@
 /datum/outfit/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if (equipped_human.dna.species.id == SPEC_ID_DWARF)
-		head = /obj/item/clothing/head/helmet/leather/minershelm
 		equipped_human.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
-	else
-		beltr = /obj/item/flashlight/flare/torch/lantern
 

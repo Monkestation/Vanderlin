@@ -6,8 +6,8 @@
 		STAT_CONSTITUTION = 2,
 		STAT_SPEED = 2,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/combat/unarmed = 40,
-		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 50,
+		/datum/attribute/skill/combat/wrestling = 45,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/medicine = 20,
@@ -63,17 +63,17 @@
 /datum/job/advclass/puritan/preceptor/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/gear = list(
-		"Knuckleduster and Knuckleduster",
-		"Katar and Katar",
+		"Confidence and Conviction (Knuckles)",
+		"Anguish and Agony (Katars)",
 	)
 	var/gear_choice = browser_input_list(spawned, "CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.", gear)
 	switch(gear_choice)
-		if("Knuckleduster and Knuckleduster")
-			spawned.put_in_hands(new /obj/item/weapon/knuckles/psydon(get_turf(spawned)), TRUE)
-			spawned.put_in_hands(new /obj/item/weapon/knuckles/psydon(get_turf(spawned)), TRUE)
-		if("Katar and Katar")
-			spawned.put_in_hands(new /obj/item/weapon/katar/psydon(get_turf(spawned)), TRUE)
-			spawned.put_in_hands(new /obj/item/weapon/katar/psydon(get_turf(spawned)), TRUE)
+		if("Confidence and Conviction (Knuckles)")
+			spawned.put_in_hands(new /obj/item/weapon/knuckles/psydon/relic(get_turf(spawned)), TRUE)
+			spawned.put_in_hands(new /obj/item/weapon/knuckles/psydon/relic/alt(get_turf(spawned)), TRUE)
+		if("Anguish and Agony (Katars)")
+			spawned.put_in_hands(new /obj/item/weapon/katar/psydon/relic(get_turf(spawned)), TRUE)
+			spawned.put_in_hands(new /obj/item/weapon/katar/psydon/relic/alt(get_turf(spawned)), TRUE)
 
 /datum/outfit/job/preceptor
 	name = "Preceptor (Herr Prafekt)"

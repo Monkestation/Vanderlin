@@ -151,7 +151,7 @@
 	if(attacker_dualwielding && !defender_dualwielding)
 		effective_score = max(0, dodge_score - 2)
 
-	if(client?.prefs.showrolls)
+	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		var/text = "Roll to dodge... (score: [effective_score])"
 		if(attacker_dualwielding)
 			if(defender_dualwielding)
@@ -160,7 +160,7 @@
 				text += " Disadvantage! (score: [effective_score])"
 		to_chat(src, span_info("[text]"))
 
-	if(user.client?.prefs.showrolls && attacker_dualwielding)
+	if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls) && attacker_dualwielding)
 		var/attacker_feedback = "Attacking with advantage."
 		if(defender_dualwielding)
 			attacker_feedback += " Cancelled out!"

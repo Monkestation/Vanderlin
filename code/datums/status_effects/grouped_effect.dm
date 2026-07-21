@@ -9,15 +9,45 @@
 
 /// Be aware grouped status effects have the second argument as the source since duration does not matter.
 /datum/status_effect/grouped/on_creation(mob/living/new_owner, source)
-	var/datum/status_effect/grouped/existing = new_owner.has_status_effect(type)
-	if(existing)
-		existing.sources |= source
+	//Get our supplied arguments, without new_owner
+	var/list/new_source_args = args.Copy(2)
+
+	if(isnull(source))
+		stack_trace("Grouped status effect applied without a source")
 		qdel(src)
 		return FALSE
 
-	sources |= source
-	return ..()
+	var/datum/status_effect/grouped/existing = new_owner.has_status_effect(type)
+	if(existing)
+		existing.sources |= source
+		existing.source_added(arglist(new_source_args))
+		qdel(src)
+		return FALSE
+
+	/* We are the original */
+
+	. = ..()
+	if(.)
+		sources |= source
+		source_added(arglist(new_source_args))
+
+/**
+ * Called after a source is added to the status effect,
+ * this includes the first source added after creation.
+ */
+/datum/status_effect/grouped/proc/source_added(source, ...)
+	return
+
+/**
+ * Called after a source is removed from the status effect. \
+ * `removing` will be TRUE if this is the last source, which means
+ * the effect will be deleted.
+ */
+/datum/status_effect/grouped/proc/source_removed(source, removing)
+	return
 
 /datum/status_effect/grouped/before_remove(source)
 	sources -= source
-	return !length(sources)
+	var/was_last_source = !length(sources)
+	source_removed(source, was_last_source)
+	return was_last_source

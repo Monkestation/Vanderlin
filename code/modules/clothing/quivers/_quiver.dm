@@ -37,34 +37,34 @@
 	for(var/obj/item/ammo as anything in ammo_list)
 		. += ammo.get_carry_weight(carrier)
 
-/obj/item/ammo_holder/attackby(obj/A, loc, list/modifiers)
-	for(var/i in ammo_type)
-		if(istype(A, i))
-			if(ammo_list.len < max_storage)
-				if(ismob(loc))
-					var/mob/mob = loc
-					mob.transferItemToLoc(A, src, force)
-				else
-					A.forceMove(src)
-				ammo_list += A
-				update_appearance(UPDATE_ICON_STATE)
-			else
-				to_chat(loc, span_warning("[src] is full!"))
-			return
-	if(istype(A, /obj/item/gun/ballistic))
-		var/obj/item/gun/ballistic/B = A
-		var/obj/item/ammo_box/gun_magazine = B.accepted_magazine_type
-		var/obj/item/ammo_casing/caseless/gun_ammo = initial(gun_magazine?.ammo_type)
-		if(ammo_list.len && gun_ammo && !B.chambered)
-			for(var/AR in reverseList(ammo_list))
-				if(istype(AR, gun_ammo))
-					ammo_list -= AR
-					contents -= AR
-					B.attackby(AR, loc, modifiers)
-					break
+/obj/item/ammo_holder/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(is_type_in_list(tool, ammo_type))
+		if(length(ammo_list) >= max_storage)
+			to_chat(user, span_warning("[src] is full!"))
+			return ITEM_INTERACT_BLOCKING
+		user.transferItemToLoc(tool, src)
+		ammo_list += tool
 		update_appearance(UPDATE_ICON_STATE)
-		return
-	..()
+		return ITEM_INTERACT_SUCCESS
+
+	if(!length(ammo_list))
+		return NONE
+
+	if(istype(tool, /obj/item/gun/ballistic))
+		var/obj/item/gun/ballistic/gun = tool
+		if(gun.chambered)
+			return ITEM_INTERACT_BLOCKING
+		var/obj/item/ammo_box/gun_magazine = gun.accepted_magazine_type
+		var/obj/item/ammo_casing/caseless/gun_ammo = initial(gun_magazine?.ammo_type)
+		if(!gun_ammo)
+			return ITEM_INTERACT_BLOCKING
+		for(var/ammo in reverseList(ammo_list))
+			if(istype(ammo, gun_ammo))
+				ammo_list -= ammo
+				gun.item_interaction(user, ammo)
+				break
+		update_appearance(UPDATE_ICON_STATE)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/ammo_holder/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

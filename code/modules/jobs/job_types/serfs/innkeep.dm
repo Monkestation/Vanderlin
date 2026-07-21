@@ -14,6 +14,7 @@
 
 /datum/job/innkeep
 	title = JOB_INNKEEP
+	alt_titles = list("Taverner")
 	tutorial = "Liquor, lodging, and lavish meals... your business is the beating heart of Vanderlin. \
 		You're the one who provides the hardworking townsfolk with a place to eat and drink their sorrows away, \
 		and accommodations for weary travelers passing through."
@@ -36,7 +37,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep
 
 	traits = list(
-		TRAIT_BOOZE_SLIDER
+		TRAIT_BOOZE_SLIDER,
+		TRAIT_CAREFUL_CHAIRS
 	)
 
 	exp_type = list(EXP_TYPE_LIVING)

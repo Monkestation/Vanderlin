@@ -13,61 +13,66 @@ GLOBAL_LIST_EMPTY(trophy_cases)
 
 GLOBAL_LIST_EMPTY(mob_spawners) 		    // All mob_spawn objects
 
-GLOBAL_LIST_INIT(anvil_recipes, init_subtypes(/datum/anvil_recipe, list()))
-/// This is a global list of typepaths, these typepaths are resulting atoms that are associated with anvil recipes.
-GLOBAL_LIST_EMPTY(anvil_recipes_atom)
-GLOBAL_LIST_INIT(artificer_recipes, init_subtypes(/datum/artificer_recipe, list()))
-GLOBAL_LIST_INIT(alch_grind_recipes, init_subtypes(/datum/alch_grind_recipe, list()))
-GLOBAL_LIST_INIT(alch_cauldron_recipes, init_subtypes(/datum/alch_cauldron_recipe, list()))
-
 GLOBAL_LIST_INIT(distillation_recipes, setup_distillation_recipes())
 
 /* COLORS */
+/// Dull dye that should be associated with serfs
 GLOBAL_LIST_INIT(peasant_dyes, list(
-	"Linen" = CLOTHING_LINEN,
-	"Canvas" = CLOTHING_CANVAS,
-	"Soot Black" = CLOTHING_SOOT_BLACK,
-	"Winestain Red" = CLOTHING_WINESTAIN_RED,
-	"Peasant Brown" = CLOTHING_PEASANT_BROWN,
-	"Mud Brown" = CLOTHING_MUD_BROWN,
-	"Chestnut" = CLOTHING_CHESTNUT,
-	"Old Leather" = CLOTHING_OLD_LEATHER,
-	"Spring Green" = CLOTHING_SPRING_GREEN,
+	"Ash Grey" = CLOTHING_ASH_GREY,
 	"Berry Blue" = CLOTHING_BERRY_BLUE,
+	"Canvas" = CLOTHING_CANVAS,
+	"Chestnut" = CLOTHING_CHESTNUT,
+	"Eggplant" = CLOTHING_EGGPLANT,
+	"Linen" = CLOTHING_LINEN,
+	"Mud Brown" = CLOTHING_MUD_BROWN,
+	"Old Leather" = CLOTHING_OLD_LEATHER,
+	"Peasant Brown" = CLOTHING_PEASANT_BROWN,
+	"Pitch" = CLOTHING_PITCH,
+	"Spring Green" = CLOTHING_SPRING_GREEN,
+	"Soot Black" = CLOTHING_SOOT_BLACK,
 	"Taraxacum Yellow" = CLOTHING_TARAXACUM_YELLOW,
+	"White" = CLOTHING_WHITE,
+	"Winestain Red" = CLOTHING_WINESTAIN_RED,
 ))
 GLOBAL_PROTECT(peasant_dyes)
 
+/// More valuable dyes that should be associated with merchants and those better off
 GLOBAL_LIST_INIT(noble_dyes, list(
-	"Dark Ink" = CLOTHING_DARK_INK,
-	"Plum Purple" = CLOTHING_PLUM_PURPLE,
-	"Salmon" = CLOTHING_SALMON,
-	"Maroon" = CLOTHING_MAROON,
-	"Red Ochre" =  CLOTHING_RED_OCHRE,
-	"Forest Green" = CLOTHING_FOREST_GREEN,
-	"Sky Blue" = CLOTHING_SKY_BLUE,
-	"Mustard Yellow" = CLOTHING_MUSTARD_YELLOW,
-	"Yellow Ochre" = CLOTHING_YELLOW_OCHRE,
-	"Ash Grey" = CLOTHING_ASH_GREY,
-	"Russet" = CLOTHING_RUSSET,
 	"Blood Red" = CLOTHING_BLOOD_RED,
-	"Swampweed" = CLOTHING_SWAMPWEED,
+	"Dark Ink" = CLOTHING_DARK_INK,
+	"Forest Green" = CLOTHING_FOREST_GREEN,
+	"Mage Blue" = CLOTHING_MAGE_BLUE,
+	"Mage Green" = CLOTHING_MAGE_GREEN,
+	"Mage Grey" = CLOTHING_MAGE_GREY,
+	"Mage Orange" = CLOTHING_MAGE_ORANGE,
+	"Mage Yellow" = CLOTHING_MAGE_YELLOW,
+	"Mustard Yellow" = CLOTHING_MUSTARD_YELLOW,
+	"Maroon" = CLOTHING_MAROON,
 	"Ocean" = CLOTHING_OCEAN,
+	"Plum Purple" = CLOTHING_PLUM_PURPLE,
+	"Red Ochre" =  CLOTHING_RED_OCHRE,
+	"Russet" = CLOTHING_RUSSET,
+	"Salmon" = CLOTHING_SALMON,
+	"Scarlet" = CLOTHING_SCARLET,
+	"Sky Blue" = CLOTHING_SKY_BLUE,
+	"Swampweed" = CLOTHING_SWAMPWEED,
+	"Violet" = CLOTHING_VIOLET,
+	"Yellow Ochre" = CLOTHING_YELLOW_OCHRE,
 ))
 GLOBAL_PROTECT(noble_dyes)
 
+/// Most vibrant dyes that should be associated with the royal family
 GLOBAL_LIST_INIT(royal_dyes, list(
-	"Royal Black" = CLOTHING_ROYAL_BLACK,
-	"Royal Red" = CLOTHING_ROYAL_RED,
-	"Royal Purple" = CLOTHING_ROYAL_PURPLE,
-	"Royal Majenta" = CLOTHING_ROYAL_MAJENTA,
-	"Royal Teal" = CLOTHING_ROYAL_TEAL,
-
-	"Bark Brown" = CLOTHING_BARK_BROWN,
 	"Bog Green" = CLOTHING_BOG_GREEN,
-	"Fyritius Orange" = CLOTHING_FYRITIUS_ORANGE,
-	"Pear Yellow" = CLOTHING_PEAR_YELLOW,
+	"Bark Brown" = CLOTHING_BARK_BROWN,
 	"Chalk White" = CLOTHING_CHALK_WHITE,
+	"Fyritius Orange" = CLOTHING_FYRITIUS_ORANGE,
+	"Royal Black" = CLOTHING_ROYAL_BLACK,
+	"Royal Majenta" = CLOTHING_ROYAL_MAJENTA,
+	"Royal Purple" = CLOTHING_ROYAL_PURPLE,
+	"Royal Red" = CLOTHING_ROYAL_RED,
+	"Royal Teal" = CLOTHING_ROYAL_TEAL,
+	"Pear Yellow" = CLOTHING_PEAR_YELLOW,
 ))
 GLOBAL_PROTECT(royal_dyes)
 

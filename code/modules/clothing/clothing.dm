@@ -128,7 +128,7 @@
 	if(body_parts_covered)
 		. += "\n<u><b>COVERAGE:</b></u>\n"
 		var/list/parsed_zones = list()
-		for(var/zone in body_parts_covered2organ_names(body_parts_covered))
+		for(var/zone in cover_flags2body_zones(body_parts_covered))
 			parsed_zones += "[parse_zone(zone)]"
 		. += parsed_zones.Join(" | ")
 
@@ -147,16 +147,13 @@
 			. += span_notice("It has one torn sleeve.")
 		else
 			. += span_notice("Both its sleeves have been torn!")
+
 	if(wet)
-		var/list/t = wet.get_examine_text()
-		if(t)
-			for(var/line in t)
-				. += line
+		for(var/line in wet.get_examine_text())
+			. += line
+
 	if(proper_drying)
-		desc += span_notice("\n This was properly washed and dried off, it smells good!")
-
-
-
+		. += span_notice("This was properly washed and dried off, it smells good!")
 
 /obj/item/clothing/MiddleClick(mob/living/user, list/modifiers)
 	..()
@@ -312,17 +309,19 @@
 	return FALSE
 
 /obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
-	if(M.on_fire)
-		if(user == M)
-			return
-		user.changeNext_move(CLICK_CD_MELEE)
-		M.visible_message(span_warning("[user] pats out the flames on [M] with [src]!"))
-		M.adjust_divine_fire_stacks(-2)
-		if(M.fire_stacks > 0)
-			M.adjust_fire_stacks(-2)
-		take_damage(10, BURN, "fire")
-	else
+	if(!M.on_fire)
 		return ..()
+
+	if(user == M)
+		return
+
+	user.changeNext_move(CLICK_CD_MELEE)
+	M.visible_message(span_warning("[user] pats out the flames on [M] with [src]!"))
+	M.adjust_divine_fire_stacks(-2)
+	if(M.fire_stacks > 0)
+		M.adjust_fire_stacks(-2)
+
+	take_damage(10, BURN, "fire")
 
 /obj/item/clothing/dropped(mob/user)
 	..()
@@ -503,7 +502,6 @@ BLIND     // can't see anything
 	flags_cover = initial(flags_cover)
 	block2add = initial(block2add)
 	body_parts_covered = initial(body_parts_covered)
-	prevent_crits = initial(prevent_crits)
 	gas_transfer_coefficient = initial(gas_transfer_coefficient)
 
 /obj/item/clothing/equipped(mob/living/carbon/user, slot)

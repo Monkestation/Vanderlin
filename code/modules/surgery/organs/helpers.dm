@@ -90,6 +90,8 @@
 
 /mob/living/carbon/getorganslot(slot)
 	RETURN_TYPE(/obj/item/organ)
+	if(!(slot in internal_organs_slot)) // :(
+		return null
 	if(length(internal_organs_slot[slot]))
 		return pick(internal_organs_slot[slot])
 
@@ -137,6 +139,8 @@
 			. += organ.get_slot_efficiency(slot)
 
 /mob/living/carbon/update_organ_requirements()
+	if(status_flags & BUILDING_ORGANS)
+		return
 	total_blood_req = 0
 	total_oxygen_req = 0
 	total_nutriment_req = 0

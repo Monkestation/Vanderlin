@@ -18,6 +18,7 @@
 
 /datum/job/vagrant
 	title = JOB_BEGGAR
+	alt_titles = list("Reject", "Bum", "Tramp", "Vagabond", "Drifter")
 	tutorial = "The stench of your piss-laden clothes dont bug you anymore, \
 	the glances of disgust and loathing others give you is just a friendly greeting; \
 	the only reason you've not been killed already is because volfs are known to be repelled by decaying flesh. \

@@ -46,21 +46,6 @@
 			if("left")
 				A.setDir(turn(A.dir, 45))
 		vv_update_display(A, "dir", dir2text(A.dir))
-	else if(href_list["makehuman"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/monkey/Mo = locate(href_list["makehuman"]) in GLOB.mob_list
-		if(!istype(Mo))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/monkey")
-			return
-
-		if(tgui_alert(usr, "Confirm mob type change?", "Confirm", list("Transform","Cancel")) != "Transform")
-			return
-		if(!Mo)
-			to_chat(usr, "Mob doesn't exist anymore")
-			return
-		holder.Topic(href, list("humanone"=href_list["makehuman"]))
 
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
 
@@ -93,6 +78,9 @@
 			if("oxygen")
 				L.adjustOxyLoss(amount, forced = TRUE)
 				newamt = L.getOxyLoss()
+			if("clone")
+				L.adjustCloneLoss(amount, forced = TRUE)
+				newamt = L.getCloneLoss()
 			if("brain")
 				L.adjustOrganLoss(ORGAN_SLOT_BRAIN, amount)
 				newamt = L.getOrganLoss(ORGAN_SLOT_BRAIN)

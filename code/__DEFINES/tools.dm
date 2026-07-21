@@ -1,8 +1,4 @@
 // Tool types
-#define TOOL_NONE			"none" //exclusively used for surgery validation
-#define TOOL_HAND			"hand" //exclusively used for surgery validation
-#define TOOL_SHARP			"sharp implement"	//exclusively used for surgery validation
-#define TOOL_HOT			"hot implement" //exclusively used for surgery validation
 #define TOOL_CROWBAR 		"crowbar"
 #define TOOL_MULTITOOL 		"multitool"
 #define TOOL_SCREWDRIVER 	"screwdriver"
@@ -11,7 +7,6 @@
 #define TOOL_WELDER 		"welder"
 #define TOOL_ANALYZER		"analyzer"
 #define TOOL_MINING			"mining"
-#define TOOL_SHOVEL			"shovel"
 #define TOOL_RETRACTOR	 	"retractor"
 #define TOOL_HEMOSTAT 		"hemostat"
 #define TOOL_CAUTERY 		"cautery"
@@ -27,3 +22,17 @@
 // If delay between the start and the end of tool operation is less than MIN_TOOL_SOUND_DELAY,
 // tool sound is only played when op is started. If not, it's played twice.
 #define MIN_TOOL_SOUND_DELAY 20
+
+#define TOOL_USAGE_TONGS (1<<0)
+
+/// Return when an item interaction is successful.
+/// This cancels the rest of the chain entirely and indicates success.
+#define ITEM_INTERACT_SUCCESS (1<<0) // Same as TRUE, as most tool (legacy) tool acts return TRUE on success
+/// Return to prevent the rest of the attacck chain from being executed / preventing the item user from thwacking the target.
+/// Similar to [ITEM_INTERACT_SUCCESS], but does not necessarily indicate success.
+#define ITEM_INTERACT_BLOCKING (1<<1)
+/// Return to skip the rest of the interaction chain, going straight to attack.
+#define ITEM_INTERACT_SKIP_TO_ATTACK (1<<2)
+
+/// Combination flag for any item interaction that blocks the rest of the attack chain
+#define ITEM_INTERACT_ANY_BLOCKER (ITEM_INTERACT_SUCCESS | ITEM_INTERACT_BLOCKING)

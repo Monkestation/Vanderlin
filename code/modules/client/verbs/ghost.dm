@@ -52,7 +52,7 @@
 	live_spirit.ckey = ckey
 	ADD_TRAIT(live_spirit, TRAIT_PACIFISM, TRAIT_GENERIC)
 
-	live_spirit.set_patron(live_spirit.client.prefs.selected_patron)
+	live_spirit.set_patron(live_spirit.client.prefs.read_preference(/datum/preference/choiced/patron))
 
 	if(has_coin)
 		live_spirit.paid = TRUE
@@ -89,6 +89,20 @@
 		if((live_one.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED)) && !MOBTIMER_FINISHED(src, MT_LASTDIED, 60 SECONDS))
 			to_chat(src, span_warning("Graggar's influence is currently preventing me from fleeing to the Underworld!"))
 			return FALSE
+
+	var/answer = tgui_alert(src, "Begin the long walk in the Underworld to your judgement?", "JUDGEMENT", DEFAULT_INPUT_CHOICES)
+	if(!answer || QDELETED(src))
+		return FALSE
+	if(answer == CHOICE_NO)
+		to_chat(src, span_warning("You have second thoughts."))
+		return FALSE
+
+	return TRUE
+
+/mob/living/simple_animal/shade/can_enter_underworld()
+	if(!length(GLOB.underworldspiritspawns)) //That cant be good.
+		to_chat(src, span_danger("You are dead. Blood is fuel. Hell is somehow full. Alert an admin, as something is very wrong!"))
+		return FALSE
 
 	var/answer = tgui_alert(src, "Begin the long walk in the Underworld to your judgement?", "JUDGEMENT", DEFAULT_INPUT_CHOICES)
 	if(!answer || QDELETED(src))

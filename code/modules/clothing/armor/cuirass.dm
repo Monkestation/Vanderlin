@@ -125,7 +125,21 @@
 	desc = "A sturdy steel cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
 
 	body_parts_covered = CHEST | VITALS | LEGS
-	max_integrity = 300
+	max_integrity = INTEGRITY_STRONGEST
+
+/obj/item/clothing/armor/cuirass/fluted/iron
+	name = "iron fluted cuirass"
+	desc = "Relatively sturdy iron cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
+	icon_state = "flutedcuirass_iron"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+
+	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ARMOR
+	armor = ARMOR_PLATE_BAD
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 6.5 KILOGRAMS
+
 
 /obj/item/clothing/armor/cuirass/ornate
 	name = "psydonian cuirass"

@@ -45,6 +45,8 @@
 			hunger_rate *= 3
 		hunger_rate *= owner.physiology.hunger_mod
 		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
+		if (ishuman(owner))
+			hunger_rate *= owner.dna.species.nutrition_mod
 		owner.adjust_nutrition(-hunger_rate * delta_time)
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req

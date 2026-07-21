@@ -28,7 +28,7 @@
 		update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/tanningrack/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(istype(I, /obj/item/natural/hide) || istype(I, /obj/item/alch/sinew) && !istype(I, /obj/item/natural/hide/cured))
+	if((istype(I, /obj/item/natural/hide) && !istype(I, /obj/item/natural/hide/cured)) || istype(I, /obj/item/alch/sinew))
 		if(!stored_item)
 			I.forceMove(src)
 			stored_item = I

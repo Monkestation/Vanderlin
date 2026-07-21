@@ -59,13 +59,16 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_NOBLE_POWER,
-		TRAIT_FORAGER
+		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
 	verbs = list(
 		/mob/proc/haltyell
 	)
 
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)

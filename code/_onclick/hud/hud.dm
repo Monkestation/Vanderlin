@@ -95,7 +95,7 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 
 	if (!ui_style)
 		// will fall back to the default if any of these are null
-		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
+		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.read_preference(/datum/preference/choiced/UI_style))
 
 	reads = new(null, src)
 	textr = new(null, src)

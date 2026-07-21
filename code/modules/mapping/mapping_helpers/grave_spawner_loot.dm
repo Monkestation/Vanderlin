@@ -111,3 +111,38 @@
 	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
 		shirt = /obj/item/clothing/shirt/tunic/colored/random
+
+
+// SPECIAL OUTFITS, MAPPED IN ONLY!
+
+/datum/outfit/grave/unique
+	/// Potential names for the body
+	var/list/mob_names
+	/// Mob buried
+	var/mob/living/carbon/human/mob_to_spawn = /mob/living/carbon/human/species/human/northern
+	/// Potential messages engraved on their headstone, if they have one
+	var/list/grave_messages
+	/// Final words they can have
+	var/list/final_words
+
+/datum/outfit/grave/unique/ravox_saint
+	name = "Ravox Saint (Deceased)"
+	head = /obj/item/clothing/head/flowercrown/salvia
+	neck = /obj/item/clothing/neck/chaincoif
+	armor = /obj/item/clothing/armor/plate/full/silver
+	cloak = /obj/item/clothing/cloak/pantheon
+	shirt = /obj/item/clothing/armor/chainmail
+	pants = /obj/item/clothing/pants/platelegs/silver
+	shoes = /obj/item/clothing/shoes/boots/armor/silver
+	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(/obj/item/storage/belt/pouch/coins/rich = 1, /obj/item/reagent_containers/glass/bottle/alchemical/blessedwater = 1)
+	backr = /obj/item/weapon/greataxe/steel/grandmaster
+	belt = /obj/item/storage/belt/leather/black
+	ring = /obj/item/clothing/ring/gold/ravox
+	gloves = /obj/item/clothing/gloves/plate/silver
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
+
+	mob_names = list("Saint Placida", "Saint Alexia", "Saint Paisley", "Saint Remington")
+	mob_to_spawn = /mob/living/carbon/human/species/human/northern
+	grave_messages = list("Served with distinction, died with honor.", "May their life be an example to all.", "Pledged to devote their life to justice, and kept it.", "Hero of the Goblin Wars, gave their life in service to these lands.")
+	final_words = list(SPAN_GOD_RAVOX("May I serve justice in the lives to come..."), SPAN_GOD_RAVOX("I hope only that the virtues of Ravox live strong in the hearts of those who come after..."), SPAN_GOD_RAVOX("To those who gaze upon me now, know this; Justice shall always prevail in the end!"))

@@ -89,7 +89,6 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOMOBSWAP" = TRAIT_NOMOBSWAP,
 		"TRAIT_XRAY_VISION" = TRAIT_XRAY_VISION,
 		"TRAIT_THERMAL_VISION" = TRAIT_THERMAL_VISION,
-		"TRAIT_SURGEON" = TRAIT_SURGEON,
 		"TRAIT_STRONG_GRABBER" = TRAIT_STRONG_GRABBER,
 		"TRAIT_MAGIC_CHOKE" = TRAIT_MAGIC_CHOKE,
 		"TRAIT_SOOTHED_THROAT" = TRAIT_SOOTHED_THROAT,
@@ -107,6 +106,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
 		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
 		"TRAIT_KNOW_THIEF_DOORS" = TRAIT_KNOW_THIEF_DOORS,
+		"TRAIT_KNOW_COURTAGENT_DOORS" = TRAIT_KNOW_COURTAGENT_DOORS,
 		"TRAIT_KNOW_ROUS_DOORS" = TRAIT_KNOW_ROUS_DOORS,
 		"Blessing of Baotha" = TRAIT_CRACKHEAD,
 		"Blessing of Graggar" = TRAIT_ORGAN_EATER,
@@ -198,6 +198,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Endless Slumber" = TRAIT_TORPOR,
 		"Boundless Energy" = TRAIT_NOENERGY,
 		"Keen Ears"	= TRAIT_KEENEARS,
+		"Keen Eyes" = TRAIT_KEENEYES,
 		"Poison Resilience" = TRAIT_POISON_RESILIENCE,
 		"Expert Forager" = TRAIT_FORAGER,
 		"Seed Finder" = TRAIT_SEED_FINDER,
@@ -206,6 +207,9 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Agent of the Court" = TRAIT_COURTAGENT,
+		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
+		"Gatekeeper" = TRAIT_GATEKEEPER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -333,6 +337,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding."),
 	TRAIT_NOENERGY = span_info("I don't need rest; I won't ever feel fatigue."),
 	TRAIT_KEENEARS = span_info("I've a good pair of ears, and can tell who is speaking, even when they're out of sight. I can also hear whispers from further away."),
+	TRAIT_KEENEYES = span_info("Years of hunting and tracking have honed your sight. You're better at noticing details and spotting hidden things."),
 	TRAIT_POISON_RESILIENCE	= span_info("I'm more resilient to poisons."),
 	TRAIT_FORAGER = span_info("I can tell which jacksberries are poisonous."),
 	TRAIT_SEED_FINDER = span_info("I find seeds more easily."),
@@ -344,6 +349,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
+	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
+	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches.")
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

@@ -58,10 +58,10 @@
 /datum/customizer_choice/proc/on_randomize_entry(datum/customizer_entry/entry, datum/preferences/prefs)
 	return
 
-/datum/customizer_choice/proc/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
+/datum/customizer_choice/proc/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
 	return
 
-/datum/customizer_choice/proc/get_random_color(datum/customizer_entry/entry, datum/preferences/prefs, accessory_type)
+/datum/customizer_choice/proc/get_random_color(datum/customizer_entry/entry, mob/living/carbon/human/human, accessory_type)
 	return
 
 /datum/customizer_choice/proc/show_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
@@ -175,7 +175,7 @@
 			for(var/choice_type in sprite_accessories)
 				var/datum/sprite_accessory/accessory = SPRITE_ACCESSORY(choice_type)
 				choice_list[accessory.name] = choice_type
-			var/chosen_input = browser_input_list(user, "Choose your [lowertext(name)] appearance:", "Character Preference", choice_list)
+			var/chosen_input = browser_input_list(user, "Choose your [LOWER_TEXT(name)] appearance:", "Character Preference", choice_list)
 			if(!chosen_input)
 				return
 			var/choice_type = choice_list[chosen_input]

@@ -84,6 +84,13 @@
 	armor = ARMOR_MINIMAL
 	prevent_crits = MINOR_CRITICALS
 
+/obj/item/clothing/head/padded/malumhood
+	name = "sculptor's mask"
+	desc = "As Malum sculpts his great works, so does he sculpt his workers."
+	icon_state = "malumhood"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
+
 /obj/item/clothing/head/roguehood/priest
 	name = "solar visage"
 	desc = "The sanctified headwear of the most devoted. The mask can be removed."

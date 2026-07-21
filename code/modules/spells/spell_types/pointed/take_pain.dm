@@ -72,8 +72,8 @@
 		return
 
 	var/pain_percentage = 0
-	if(follower.getPainLoss() > 0)
-		pain_percentage = (total_pain_to_transfer / follower.getPainLoss()) * 100
+	if(follower.getShock() > 0)
+		pain_percentage = (total_pain_to_transfer / follower.getShock()) * 100
 	else
 		pain_percentage = 100
 

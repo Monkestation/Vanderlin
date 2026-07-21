@@ -82,7 +82,7 @@
 	var/language = target.get_random_understood_language()
 	var/message = target.compose_message(speaker, language, speech, face_name=TRUE)
 	target.playsound_local(target, pick(speech_sounds), vol = 60, vary = FALSE)
-	if(!(target.client?.prefs?.toggles_maptext & DISABLE_RUNECHAT))
+	if(!(target.client?.prefs?.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT))
 		target.create_chat_message(speaker, language, speech, spans = list(target.speech_span))
 	to_chat(target, message)
 

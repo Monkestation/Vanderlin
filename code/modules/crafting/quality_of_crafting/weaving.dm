@@ -192,6 +192,14 @@
 	craftdiff = 3
 	category = "Hat"
 
+/datum/repeatable_crafting_recipe/sewing/weaving/malumhood
+	name = "hood (Malum)"
+	output = /obj/item/clothing/head/padded/malumhood
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/ingot/steel = 1)
+	craftdiff = 3
+	category = "Hat"
+
 /datum/repeatable_crafting_recipe/sewing/weaving/wizard_hat_gen
 	name = "wizard hat"
 	output = /obj/item/clothing/head/wizhat/gen
@@ -242,6 +250,22 @@
 	requirements = list(/obj/item/natural/silk = 4)
 	craftdiff = 3
 	category = "Cloak"
+
+/datum/repeatable_crafting_recipe/sewing/weaving/guardpants
+	name = "watchmen pantaloons"
+	output = /obj/item/clothing/pants/guard
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/sewing/weaving/guardshirt
+	name = "watchmen garb"
+	output = /obj/item/clothing/shirt/guard
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Armor"
 
 /* craftdif of 4 = EXPERT */
 
@@ -321,6 +345,13 @@
 /datum/repeatable_crafting_recipe/sewing/weaving/pestra_robe
 	name = "robes (Pestra)"
 	output = /obj/item/clothing/shirt/robe/pestra
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/silk = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/sewing/weaving/malum_robe
+	name = "robes (Malum)"
+	output = /obj/item/clothing/shirt/robe/malum
 	requirements = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/silk = 1)
 	craftdiff = 4

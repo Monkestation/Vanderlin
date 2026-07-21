@@ -612,7 +612,7 @@
 // Here's where we rewrite how byond handles movement except slightly different
 // To be removed on step_ conversion
 // All this work to prevent a second bump
-/atom/movable/Move(atom/newloc, direction, glide_size_override = 0, update_dir = TRUE)
+/atom/movable/proc/CardinalMove(atom/newloc, direction, glide_size_override = 0, update_dir = TRUE)
 	. = FALSE
 
 	if(!newloc || newloc == loc)
@@ -718,7 +718,7 @@
 	if(loc != newloc)
 		if (!(direction & (direction - 1))) //Cardinal move
 			lastcardinal = direction
-			. = ..()
+			. = CardinalMove(newloc, direction, glide_size_override, update_dir)
 		else //Diagonal move, split it into cardinal moves
 			if(HAS_TRAIT(src, TRAIT_BLOCKED_DIAGONAL))
 				if (direction & NORTH)
@@ -863,7 +863,7 @@
 
 	//glide_size strangely enough can change mid movement animation and update correctly while the animation is playing
 	//This means that if you don't override it late like this, it will just be set back by the movement update that's called when you move turfs.
-	if(glide_size_override)
+	if(glide_size_override && glide_size != glide_size_override)
 		set_glide_size(glide_size_override)
 
 	last_move = direction_to_move
@@ -1048,7 +1048,7 @@
 			var/old_z = (oldturf ? oldturf.z : null)
 			var/dest_z = (destturf ? destturf.z : null)
 			if (old_z != dest_z)
-				onTransitZ(old_z, dest_z)
+				onTransitZ(oldturf, destturf)
 			destination.Entered(src, oldloc)
 			if(destarea && old_area != destarea)
 				destarea.Entered(src, oldloc)
@@ -1072,11 +1072,10 @@
 
 	RESOLVE_ACTIVE_MOVEMENT
 
-/atom/movable/proc/onTransitZ(old_z,new_z)
-	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_z, new_z)
-	for (var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
-		var/atom/movable/AM = item
-		AM.onTransitZ(old_z,new_z)
+/atom/movable/proc/onTransitZ(turf/old_turf, turf/new_turf)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_turf, new_turf)
+	for(var/atom/movable/AM as anything in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
+		AM.onTransitZ(old_turf, new_turf)
 
 /atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	set waitfor = 0
@@ -1099,57 +1098,56 @@
 	if(QDELETED(src))
 		CRASH("Qdeleted thing being thrown around.")
 
-	if (!target || speed <= 0)
+	if(!target || speed <= 0)
 		return
 
 	if(SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_THROW, args) & COMPONENT_CANCEL_THROW)
 		return
 
-	if (pulledby)
+	if(pulledby)
 		pulledby.stop_pulling()
 
 	//They are moving! Wouldn't it be cool if we calculated their momentum and added it to the throw?
-	if (thrower && thrower.last_move && thrower.client && thrower.client.move_delay >= world.time + world.tick_lag*2)
-		var/user_momentum = thrower.cached_multiplicative_slowdown
-		if (!user_momentum) //no movement_delay, this means they move once per byond tick, lets calculate from that instead.
-			user_momentum = world.tick_lag
+	if(ismob(thrower))
+		var/mob/thrower_mob = thrower
+		if(thrower_mob.last_move && thrower_mob.client && thrower_mob.client.move_delay >= world.time)
+			var/user_momentum = thrower_mob.cached_multiplicative_slowdown
+			if(!user_momentum) //no movement_delay, this means they move once per byond tick, lets calculate from that instead.
+				user_momentum = world.tick_lag
 
-		user_momentum = 1 / user_momentum // convert from ds to the tiles per ds that throw_at uses.
+			user_momentum = 1 / user_momentum // convert from ds to the tiles per ds that throw_at uses.
 
-		if (get_dir(thrower, target) & last_move)
-			user_momentum = user_momentum //basically a noop, but needed
-		else if (get_dir(target, thrower) & last_move)
-			user_momentum = -user_momentum //we are moving away from the target, lets slowdown the throw accordingly
-		else
-			user_momentum = 0
+			if(get_dir(thrower_mob, target) & last_move)
+				user_momentum = user_momentum //basically a noop, but needed
+			else if (get_dir(target, thrower_mob) & last_move)
+				user_momentum = -user_momentum //we are moving away from the target, lets slowdown the throw accordingly
+			else
+				user_momentum = 0
 
-
-		if (user_momentum)
-			//first lets add that momentum to range.
-			range *= (user_momentum / speed) + 1
-			//then lets add it to speed
-			speed += user_momentum
-			if (speed <= 0)
-				return//no throw speed, the user was moving too fast.
-
-	. = TRUE // No failure conditions past this point.
+			if(user_momentum)
+				//first lets add that momentum to range.
+				range *= (user_momentum / speed) + 1
+				//then lets add it to speed
+				speed += user_momentum
+				if(speed <= 0)
+					return//no throw speed, the user was moving too fast.
 
 	var/target_zone
 	if(QDELETED(thrower))
 		thrower = null //Let's not pass a qdeleting reference if any.
-	else
-		target_zone = thrower.zone_selected
+	else if(ismob(thrower))
+		var/mob/thrower_mob = thrower
+		target_zone = thrower_mob.zone_selected
 
-	var/datum/thrownthing/TT = new(src, target, get_dir(src, target), range, speed, thrower, diagonals_first, force, gentle, callback, target_zone)
+	var/datum/thrownthing/thrown_thing = new(src, target, get_dir(src, target), range, speed, thrower, diagonals_first, force, gentle, callback, target_zone)
 
 	var/dist_x = abs(target.x - src.x)
 	var/dist_y = abs(target.y - src.y)
 	var/dx = (target.x > src.x) ? EAST : WEST
 	var/dy = (target.y > src.y) ? NORTH : SOUTH
 
-	if (dist_x == dist_y)
-		TT.pure_diagonal = 1
-
+	if(dist_x == dist_y)
+		thrown_thing.pure_diagonal = 1
 	else if(dist_x <= dist_y)
 		var/olddist_x = dist_x
 		var/olddx = dx
@@ -1157,31 +1155,39 @@
 		dist_y = olddist_x
 		dx = dy
 		dy = olddx
-	TT.dist_x = dist_x
-	TT.dist_y = dist_y
-	TT.dx = dx
-	TT.dy = dy
-	TT.diagonal_error = dist_x/2 - dist_y
-	TT.start_time = world.time
+
+	thrown_thing.dist_x = dist_x
+	thrown_thing.dist_y = dist_y
+	thrown_thing.dx = dx
+	thrown_thing.dy = dy
+	thrown_thing.diagonal_error = dist_x / 2 - dist_y
+	thrown_thing.start_time = world.time
 
 	if(pulledby)
 		pulledby.stop_pulling()
 
-	throwing = TT
+	throwing = thrown_thing
+
+	// Upwards throw
 	var/turf/curloc = get_turf(src)
-	if(TT.target_turf && curloc)
-		if(TT.target_turf.z > curloc.z)
+	if(thrown_thing.target_turf && curloc)
+		if(thrown_thing.target_turf.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
 			if(istype(above, /turf/open/openspace))
 				forceMove(above)
+
 	if(spin)
 		do_spin_animation(5, 1)
 
-	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_THROW, TT, spin)
-	SSthrowing.processing[src] = TT
-	if (SSthrowing.state == SS_PAUSED && length(SSthrowing.currentrun))
-		SSthrowing.currentrun[src] = TT
-	TT.tick()
+	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_THROW, thrown_thing, spin)
+
+	SSthrowing.processing[src] = thrown_thing
+	if(SSthrowing.state == SS_PAUSED && length(SSthrowing.currentrun))
+		SSthrowing.currentrun[src] = thrown_thing
+
+	thrown_thing.tick()
+
+	return TRUE
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direction, glide_size_override)
 	for(var/mob/living/buckled_mob as anything in buckled_mobs)

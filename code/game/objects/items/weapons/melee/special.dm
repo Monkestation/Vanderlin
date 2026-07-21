@@ -18,7 +18,6 @@
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	swingsound = BLUNTWOOSH_MED
 	blade_dulling = DULLING_BASHCHOP
-	var/static/list/rod_jobs = null
 	COOLDOWN_DECLARE(scepter)
 
 	grid_height = 96
@@ -86,16 +85,7 @@
 			if(H.can_block_magic(MAGIC_RESISTANCE))
 				return
 
-			if(!rod_jobs)
-				rod_jobs = GLOB.noble_positions | GLOB.garrison_positions | list(
-				/datum/job/jester::title,
-				/datum/job/servant::title,
-				/datum/job/adventurer/courtagent::title,
-				/datum/job/butler::title,
-				/datum/job/squire::title,
-			)
-
-			if(!((H.mind?.assigned_role.title in rod_jobs)))
+			if(!(H.mind?.assigned_role.department_flag & GARRISON|NOBLEMEN))
 				return
 
 			if(!COOLDOWN_FINISHED(src, scepter))
@@ -131,7 +121,6 @@
 	sellprice = 100
 	possible_item_intents = list(POLEARM_BASH, /datum/intent/priest_smite, /datum/intent/priest_silence)
 	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood, /datum/intent/priest_smite, /datum/intent/priest_silence)
-	var/static/list/rod_jobs_priest = null
 	COOLDOWN_DECLARE(staff)
 	item_weight = 1.2 KILOGRAMS
 	smeltresult = null
@@ -179,16 +168,7 @@
 		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
 			return
 
-		if(!rod_jobs_priest)
-			rod_jobs_priest = GLOB.church_positions | list(
-			/datum/job/monk::title,
-			/datum/job/templar::title,
-			/datum/job/churchling::title,
-			/datum/job/undertaker::title,
-			/datum/job/gmtemplar,
-			)
-
-		if(!((H.mind?.assigned_role.title in rod_jobs_priest)))
+		if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
 			return
 
 		if(!COOLDOWN_FINISHED(src, staff))
@@ -383,6 +363,18 @@
 	. = ..()						//+3 force, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
+/obj/item/weapon/katar/psydon/relic
+	name = "\proper anguish"
+	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May its blows cause naught but anguish to those who dare raise up arms against you."
+
+/obj/item/weapon/katar/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
+
+/obj/item/weapon/katar/psydon/relic/alt
+	name = "\proper agony"
+	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May the agony it inflicts upon your foes leave a mark, so that they never forget His name."
+
 /obj/item/weapon/katar/abyssor
 	name = "barotrauma"
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
@@ -456,10 +448,23 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
 	item_weight = 200 GRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
+
+/obj/item/weapon/knuckles/psydon/relic
+	name = "\proper confidence"
+	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your strikes be confident and true, and done in His name."
+
+/obj/item/weapon/knuckles/psydon/relic/Initialize(mapload)
+	. = ..()							//+5 force, +100 int, +1 def, make silver
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
+
+/obj/item/weapon/knuckles/psydon/relic/alt
+	name = "\proper conviction"
+	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your convicition to the Faith be ever unwavering, lest you begin to doubt yourself and bring harm to your siblings."
 
 /obj/item/weapon/knuckles/eora
 	name = "close caress"

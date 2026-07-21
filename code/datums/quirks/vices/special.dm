@@ -42,6 +42,9 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+	incompatible_quirks = list(
+		/datum/quirk/vice/tainted_soul
+	)
 
 /datum/quirk/vice/luxless/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
@@ -98,7 +101,7 @@
 	point_value = 5
 
 /datum/quirk/vice/unlucky/on_spawn()
-	owner.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
+	owner.adjust_stat_modifier(STATMOD_UNLUCKY, list(STAT_FORTUNE = rand(-5, -9)))
 
 /datum/quirk/vice/unlucky/on_remove()
 	owner?.remove_stat_modifier(STATMOD_UNLUCKY)

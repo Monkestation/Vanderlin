@@ -3,7 +3,6 @@
 	sound_effect = 'sound/combat/crit.ogg'
 	severity = WOUND_SEVERITY_SEVERE
 	whp = null
-	woundpain = 10
 	can_sew = TRUE
 	sewn_bleed_rate = 0
 	can_cauterize = FALSE
@@ -29,7 +28,7 @@
 		"The eardrums are gored!",
 		"The eardrums are ruptured!",
 	)
-	woundpain = 50
+	woundpain = 25
 	bleed_rate = 4
 	can_cauterize = TRUE
 	critical = TRUE
@@ -64,7 +63,7 @@
 		"The eye is gouged!",
 		"The eye is destroyed!",
 	)
-	woundpain = 30
+	woundpain = 15
 	bleed_rate = 4
 	can_cauterize = FALSE
 	critical = TRUE
@@ -219,7 +218,7 @@
 	severity = 0
 	crit_message = "The face is mangled beyond recognition!"
 	whp = null
-	woundpain = 20
+	woundpain = 10
 	mob_overlay = "cut"
 	can_sew = FALSE
 	can_cauterize = FALSE
@@ -260,7 +259,7 @@
 		"The testicles are torsioned!",
 	)
 	whp = 50
-	woundpain = 100
+	woundpain = 50
 	mob_overlay = ""
 	can_sew = FALSE
 	can_cauterize = FALSE
@@ -273,11 +272,13 @@
 
 /datum/wound/cbt/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, damage_bclass)
 	if(HAS_TRAIT(affected.owner, TRAIT_CRITICAL_RESISTANCE))
-		return
+		return FALSE
 	. = ..()
 
 /datum/wound/cbt/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
-	var/cbt_multiplier = HAS_TRAIT(user, TRAIT_NUTCRACKER) ? 2 : 1
+	if(dam < min_damage)
+		return 0
+	var/cbt_multiplier = (user && HAS_TRAIT(user, TRAIT_NUTCRACKER)) ? 2 : 1
 	return round(dam / 5) * cbt_multiplier // ignores standard formula entirely
 
 /datum/wound/cbt/can_apply_to_mob(mob/living/affected)
@@ -357,7 +358,7 @@
 	)
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 80
-	woundpain = 30
+	woundpain = 15
 	disabling = TRUE
 	critical = TRUE
 	sleep_healing = 0

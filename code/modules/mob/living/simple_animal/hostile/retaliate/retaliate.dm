@@ -58,7 +58,7 @@
 	//If you cant act and dont have a player stop moving.
 	if(!can_act && !client)
 		return FALSE
-	. = ..()
+	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, damage_type, skip_dtype, can_crit)
 	. = ..()
@@ -106,24 +106,27 @@
 	if(!.)
 		return
 
-	if(adult_growth)
-		growth_prog += 0.5
-		if(growth_prog >= 100)
-			if(isturf(loc))
-				var/mob/living/simple_animal/A = new adult_growth(loc)
-				if(tame && !A.tame)
-					A.tamed()
+	if(!adult_growth)
+		return
 
-				var/datum/component/generic_mob_hunger/old_hunger = GetComponent(/datum/component/generic_mob_hunger)
-				var/datum/component/generic_mob_hunger/hunger = A.GetComponent(/datum/component/generic_mob_hunger)
-				if(old_hunger && hunger)
-					var/old_hunger_percentage = old_hunger.current_hunger / old_hunger.max_hunger
-					hunger.current_hunger = hunger.max_hunger * old_hunger_percentage
+	growth_prog += 0.5
+	if(growth_prog < 100)
+		return
 
-				if(istype(genetics))
-					genetics?.copy_to(A)
-				qdel(src)
-				return
+	var/mob/living/simple_animal/A = new adult_growth(loc)
+	if(tame && !A.tame)
+		A.tamed()
+
+	var/datum/component/generic_mob_hunger/old_hunger = GetComponent(/datum/component/generic_mob_hunger)
+	var/datum/component/generic_mob_hunger/hunger = A.GetComponent(/datum/component/generic_mob_hunger)
+	if(old_hunger && hunger)
+		var/old_hunger_percentage = old_hunger.current_hunger / old_hunger.max_hunger
+		hunger.current_hunger = hunger.max_hunger * old_hunger_percentage
+
+	if(istype(genetics))
+		genetics?.copy_to(A)
+
+	qdel(src)
 
 /// Prevents certain items from being targeted as food.
 /mob/living/simple_animal/hostile/retaliate/proc/PickyEater(atom/thing_to_eat)
