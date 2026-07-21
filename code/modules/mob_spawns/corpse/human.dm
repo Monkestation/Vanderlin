@@ -4,20 +4,12 @@
 	mob_type = /mob/living/carbon/human
 	mob_species = /datum/species/human/northern
 
+CREATE_ALL_SPECIES_SPAWNERS(/obj/effect/mob_spawn/corpse/human)
+
 /obj/effect/mob_spawn/corpse/human/damaged
 	brute_damage = 150
 
-/obj/effect/mob_spawn/corpse/human/half_elf
-	mob_species = /datum/species/human/halfelf
-
-/obj/effect/mob_spawn/corpse/human/half_drow
-	mob_species = /datum/species/human/halfdrow
-
-/obj/effect/mob_spawn/corpse/human/elf_wood
-	mob_species = /datum/species/elf/snow
-
-/obj/effect/mob_spawn/corpse/human/elf_dark
-	mob_species = /datum/species/elf/dark
+CREATE_ALL_SPECIES_SPAWNERS(/obj/effect/mob_spawn/corpse/human/damaged)
 
 /obj/effect/mob_spawn/corpse/human/random
 	name = "randomised species corpse spawner"

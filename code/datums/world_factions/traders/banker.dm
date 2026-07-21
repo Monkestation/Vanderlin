@@ -1,9 +1,3 @@
-/obj/effect/mob_spawn/rakshari
-	mob_species = /datum/species/rakshari
-
-/obj/effect/mob_spawn/rakshari/banker
-	outfit = /datum/outfit/tailor
-
 /mob/living/simple_animal/hostile/retaliate/banker
 	name = "Banker"
 	desc = "Come buy some!"
@@ -24,7 +18,7 @@
 	///The currency name
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
-	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/rakshari/banker
+	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/corpse/human/rakshari/banker
 	///Our species to create our look
 	var/species_path = /datum/species/human
 	///Casing used to shoot during retaliation
@@ -37,9 +31,14 @@
 	///Type path for the banker datum to use for retrieving the bankers wares, speech, etc
 	var/banker_data_path = /datum/banker_data
 
-
 /mob/living/simple_animal/hostile/retaliate/banker/Initialize(mapload, custom = FALSE, spawner_type, datum/weakref/_faction_ref)
 	. = ..()
+
+	if(spawner_type)
+		spawner_path = spawner_type
+
+	if(ispath(spawner_path, /obj/effect/mob_spawn/corpse/human))
+		loot += spawner_path
 
 	apply_dynamic_human_appearance(src, species_path = initial(spawner_path.mob_species), mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
 

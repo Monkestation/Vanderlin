@@ -75,6 +75,9 @@
 	if(faction)
 		spawned_mob.set_faction(faction)
 
+	// Zizo all that but we need these to not rot and waste processing
+	ADD_TRAIT(spawned_mob, TRAIT_NO_ROT, INNATE_TRAIT)
+
 	if(!ishuman(spawned_mob))
 		return
 
@@ -82,7 +85,6 @@
 	if(mob_species)
 		spawned_human.set_species(mob_species)
 
-	spawned_human.underwear = "Nude"
 	spawned_human.undershirt = "Nude"
 	spawned_human.socks = "Nude"
 

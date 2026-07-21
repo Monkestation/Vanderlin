@@ -31,30 +31,31 @@
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
 	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/rakshari/trader
-	///Our species to create our look
-	var/species_path = /datum/species/human
 	///Casing used to shoot during retaliation
 	var/ranged_attack_casing = /obj/item/ammo_casing/caseless/arrow
 	///Sound to make while doing a retalitory attack
 	var/ranged_attack_sound = 'sound/combat/Ranged/flatbow-shot-01.ogg'
 	///Weapon path, for visuals
 	var/held_weapon_visual = /obj/item/gun/ballistic/bow
-
 	///Type path for the trader datum to use for retrieving the traders wares, speech, etc
 	var/trader_data_path = /datum/trader_data
-
 
 /mob/living/simple_animal/hostile/retaliate/trader/Initialize(mapload, custom = FALSE, spawner_type, datum/weakref/_faction_ref)
 	. = ..()
 	if(spawner_type)
 		spawner_path = spawner_type
+
+	if(ispath(spawner_path, /obj/effect/mob_spawn/corpse/human))
+		if(!ispath(/obj/effect/mob_spawn/corpse/human/elf/artifact))
+			loot += spawner_path
+
 	var/datum/world_faction/faction = _faction_ref?.resolve()
 	faction_ref = _faction_ref
 	if(faction)
 		name = "[faction.faction_name] Trader"
 		desc = "A trader from the [faction.faction_name]."
 
-	apply_dynamic_human_appearance(src, species_path = initial(spawner_path.mob_species), mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
+	apply_dynamic_human_appearance(src, mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
 
 	if(!custom)
 		var/datum/trader_data/trader_data = new trader_data_path
