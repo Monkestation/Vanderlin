@@ -210,6 +210,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Agent of the Court" = TRAIT_COURTAGENT,
 		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
 		"Gatekeeper" = TRAIT_GATEKEEPER,
+		"Member of the Lunar Order" = TRAIT_LUNAR_ORDER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -323,7 +324,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_TINY = "I am small, it's hard to look people in the eyes.",
 	TRAIT_FOREIGNER = span_notice("I'm not from around here."),
 	TRAIT_OLDPARTY = "In years long passed, me and a group of fellow adventurers saved this city!",
-	TRAIT_DREAM_WATCHER = span_notice("I'm blessed by Noc, my dreams tell more than the average person.."),
+	TRAIT_DREAM_WATCHER = SPAN_GOD_NOC("I'm blessed by Noc, my dreams tell more than the average person.."),
+	TRAIT_LUNAR_ORDER = SPAN_GOD_NOC("I am a member of the Lunar Order, servant of The Moon Prince, and protector of the nite.")
 	TRAIT_AMAZING_BACK = span_notice("I'm able to carry far more on my back!"),
 	TRAIT_HOLLOWBONES = span_danger("My bones are light as air, it's hard to wear armor."),
 	TRAIT_RECRUITED = "I have been recruited!",

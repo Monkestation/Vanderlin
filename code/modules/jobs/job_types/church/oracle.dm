@@ -84,6 +84,7 @@
 		TRAIT_DREAM_WATCHER,
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
+		TRAIT_LUNAR_ORDER,
 	)
 
 	languages = list(
@@ -195,7 +196,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/lunar_sentinel
 
 	traits = list(
-		TRAIT_DREAM_WATCHER,
+		TRAIT_LUNAR_ORDER,
 		TRAIT_STEELHEARTED,
 		TRAIT_DEADNOSE,
 		TRAIT_HEAVYARMOR,
@@ -303,7 +304,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/lunar_champion
 
 	traits = list(
-		TRAIT_DREAM_WATCHER,
+		TRAIT_LUNAR_ORDER,
 		TRAIT_STEELHEARTED,
 		TRAIT_DEADNOSE,
 		TRAIT_HEAVYARMOR,
