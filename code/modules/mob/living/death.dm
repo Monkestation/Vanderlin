@@ -123,7 +123,7 @@ GLOBAL_LIST_EMPTY(last_words)
 
 	set_typing_indicator(FALSE)
 
-	if(mind)
+	if(mind && !gibbed)
 		var/locale = prepare_deathsight_message()
 		for(var/mob/living/player in GLOB.player_list)
 			if(player.stat == DEAD || isbrain(player))
