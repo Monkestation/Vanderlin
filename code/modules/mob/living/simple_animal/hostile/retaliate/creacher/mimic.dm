@@ -52,7 +52,7 @@
 		for(var/obj/item/I in loc)
 			I.forceMove(src)
 	icon_state = "mimic"
-	AddComponent(/datum/component/anti_magic, TRUE, TRUE, TRUE, null, null, FALSE)
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY|MAGIC_RESISTANCE_MIND , null, null)
 
 /mob/living/simple_animal/hostile/retaliate/mimic/death()
 	icon_state = "[initial(icon_state)]dead"

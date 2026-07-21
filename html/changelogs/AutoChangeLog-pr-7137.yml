@@ -1,0 +1,5 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - rscadd: "alt title, and alt honorary prefixes for jobs"
+  - refactor: "job menu is now a tgui menu"
