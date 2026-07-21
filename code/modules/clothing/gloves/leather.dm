@@ -8,7 +8,7 @@
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
 
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/gloves/padded/bad
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_POOR
 	salvage_result = null
@@ -26,14 +26,14 @@
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your fingers."
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/gloves/leather/advanced
 
 /obj/item/clothing/gloves/leather/masterwork
 	name = "masterwork leather gloves"
 	desc = "These gloves are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/gloves/leather/master
 
 /obj/item/clothing/gloves/leather/masterwork/Initialize()
 	. = ..()
@@ -60,7 +60,7 @@
 	desc = "A pair of heavy Grenzelhoftian leather gloves, commonly used by fencers, renowned for their quality."
 	icon_state = "fencergloves"
 	item_state = "fencergloves"
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/gloves/leather/good
 	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	resistance_flags = FIRE_PROOF
 	blocksound = SOFTHIT
@@ -87,7 +87,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
@@ -115,4 +115,4 @@
 	name = "fencing gloves"
 	desc = "Lightweight leather gloves designed for fencers, they'll hopefully protect your fingers from stray blows."
 	icon_state = "fencergloves"
-	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/gloves/leather/fencer

@@ -1,0 +1,4 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - bugfix: "orcs now use their proper armor values so they are on par with goblins and rous"

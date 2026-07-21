@@ -36,11 +36,13 @@
 ///protection from internal damage to the organs
 #define WOUND "wound"
 
+#define ARMOR_ALL "all_damage_types"
+
 /// Armor values that are used for damage
-#define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
+#define ARMOR_LIST_DAMAGE list(BLUNT, SLASH, STAB, PIERCE)
 
 /// All armors, preferable in the order as seen above
-#define ARMOR_LIST_ALL(...) list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC)
+#define ARMOR_LIST_ALL list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC, WOUND)
 
 #define MELEE_TYPES list(BLUNT, SLASH, STAB)
 

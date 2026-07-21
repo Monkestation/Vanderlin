@@ -146,17 +146,17 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /proc/get_minds(role)
 	. = list()
-	for(var/datum/mind/M in SSticker.minds)
+	for(var/datum/mind/target_mind in SSticker.minds)
 		var/is_role = TRUE
 		if(role)
 			is_role = FALSE
-			if(M.special_role == role)
+			if(target_mind.special_role == role)
 				is_role = TRUE
 			else
-				if(M.assigned_role.title == role)
+				if(target_mind?.assigned_role?.title == role)
 					is_role = TRUE
 		if(is_role)
-			. += M
+			. += target_mind
 
 /// Returns the relation datum of a given type this mind has toward target,
 /// or null if none exists.
