@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixes some admin tool runtimes."
+  - bugfix: "Fixed a crippling bug from the Court Agent mirror."

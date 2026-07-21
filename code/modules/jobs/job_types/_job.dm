@@ -564,7 +564,7 @@
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron
 
-	if(tennite_triumph_exclusive && !spawned.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+	if(tennite_triumph_exclusive && !spawned.client?.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
 		spawned.set_patron(/datum/patron/divine/astrata, TRUE)
 		to_chat(spawned, span_warning("I've followed the word of [old_patron.display_name ? old_patron.display_name : old_patron] in my younger years, \
 		but the path I tread todae proves only The Ten may rule!"))

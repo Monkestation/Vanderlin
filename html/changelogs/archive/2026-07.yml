@@ -345,3 +345,20 @@
   yafesdot:
   - bugfix: fixes a runtime error when clicking the randomise appearance button in
       character setup
+2026-07-21:
+  AberrantQuerist:
+  - rscadd: Three new mineral types for mappers.
+  Ben10083:
+  - rscadd: New verb allowing Ghosts to set their final words (for graves)
+  Singul0:
+  - bugfix: fixes no magic rings not working for monarchs
+  dwasint:
+  - rscadd: alt title, and alt honorary prefixes for jobs
+  - refactor: job menu is now a tgui menu
+  realforest2001:
+  - bugfix: Anastasis can now be cast on the undead once more.
+  - bugfix: Anthraxi is correctly patron locked to Ravox.
+  - rscdel: Disables Zizo Cult antag.
+  snowyseshi:
+  - rscadd: Added snow elves and half-snow elves as triumph bought species
+  - balance: drow and half drow stat tweaks
