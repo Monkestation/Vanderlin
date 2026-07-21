@@ -745,11 +745,6 @@
 "eq" = (
 /turf/open/floor/blocks,
 /area/outdoors/wilderness)
-"er" = (
-/turf/open/floor/dirt,
-/turf/open/floor/dirt/road,
-/turf/open/floor/dirt/road,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "es" = (
 /obj/item/rope/chain,
 /obj/effect/decal/cleanable/dirt,
@@ -4170,11 +4165,6 @@
 /area/under/cave)
 "yi" = (
 /obj/structure/fermentation_keg/water,
-/turf/open/floor/dirt/road,
-/area/outdoors/wilderness/safe/gallowband_fort)
-"yj" = (
-/turf/open/floor/grass,
-/turf/open/floor/dirt/road,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "yk" = (
@@ -8314,11 +8304,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/garrison)
-"Vx" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/grass,
-/turf/open/floor/dirt/road,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "Vy" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/reagent_containers/food/snacks/smallrat,
@@ -15256,7 +15241,7 @@ Iz
 Iz
 ZV
 gr
-Ai
+Iz
 te
 GG
 xy
@@ -15458,7 +15443,7 @@ gr
 Iz
 Iz
 Iz
-Qn
+Iz
 yN
 no
 xy
@@ -15660,7 +15645,7 @@ Iz
 Iz
 Iz
 Iz
-wS
+Iz
 pq
 wo
 wo
@@ -15861,8 +15846,8 @@ Iz
 Iz
 Iz
 Iz
-wS
-Ai
+Iz
+Iz
 Bm
 Bt
 pq
@@ -16063,11 +16048,11 @@ Iz
 Iz
 Iz
 Iz
-wS
-Vx
-Ai
-Ai
-wS
+Iz
+pF
+Iz
+Iz
+Iz
 gd
 ZV
 Kc
@@ -16265,12 +16250,12 @@ HT
 Iz
 Iz
 Iz
-wS
-wS
-er
-yj
-er
-Ai
+Iz
+Iz
+Iz
+Iz
+Iz
+Iz
 gr
 iv
 Iz
@@ -16473,7 +16458,7 @@ Sr
 Sr
 ZH
 ZH
-Ai
+Iz
 iv
 ZV
 Iz
@@ -16675,7 +16660,7 @@ mE
 ZV
 mr
 rt
-wS
+Iz
 iv
 gr
 gr
@@ -19062,7 +19047,7 @@ pg
 PR
 dC
 pg
-vA
+YM
 YM
 YM
 YM
