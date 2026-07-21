@@ -12,6 +12,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speed = 0
 	cmode = FALSE
+	del_on_death = TRUE
 
 	///Sound used when item sold/bought
 	var/sell_sound = 'sound/blank.ogg'
@@ -19,8 +20,6 @@
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
 	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/corpse/human/rakshari/banker
-	///Our species to create our look
-	var/species_path = /datum/species/human
 	///Casing used to shoot during retaliation
 	var/ranged_attack_casing = /obj/item/ammo_casing/caseless/arrow
 	///Sound to make while doing a retalitory attack
@@ -40,7 +39,7 @@
 	if(ispath(spawner_path, /obj/effect/mob_spawn/corpse/human))
 		loot += spawner_path
 
-	apply_dynamic_human_appearance(src, species_path = initial(spawner_path.mob_species), mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
+	apply_dynamic_human_appearance(src, mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
 
 	if(!custom)
 		var/datum/banker_data/banker_data = new banker_data_path

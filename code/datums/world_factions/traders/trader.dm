@@ -18,6 +18,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speed = 0
 	cmode = FALSE
+	del_on_death = TRUE
 
 	ai_controller = /datum/ai_controller/basic_controller/trader
 
@@ -113,7 +114,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/trader/death(gibbed)
 	. = ..()
-	var/obj/effect/landmark/stall/stall = ai_controller.blackboard[BB_SHOP_SPOT]
+	var/obj/effect/landmark/stall/stall = ai_controller?.blackboard[BB_SHOP_SPOT]
 	if(istype(stall))
 		stall.claimed_by_trader = FALSE
 	var/datum/action/setup_shop/shop_action = locate() in actions
