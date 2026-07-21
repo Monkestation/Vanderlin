@@ -77,6 +77,12 @@ abstract types are automatically excluded.
 		/obj/item/clothing/neck/gorget/gold/king,
 		/obj/item/clothing/head/helmet/visored/gold/king,
 		/obj/item/clothing/shirt/robe/hag,
+		/obj/item/clothing/armor/leather/splint/pyromaniac,
+		/obj/item/clothing/head/roguehood/colored/red/pyromaniac,
+		/obj/item/clothing/face/pyromaniac,
+		/obj/item/clothing/pants/trou/leather/pyromaniac,
+		/obj/item/clothing/armor/gambeson/heavy/pyromaniac,
+		/obj/item/clothing/gloves/leather/pyromaniac,
 		/obj/item/clothing/head/helmet/heavy/necked/cadwyn,
 		/obj/item/clothing/cloak/cadwyn,
 

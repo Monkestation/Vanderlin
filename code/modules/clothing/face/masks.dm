@@ -635,3 +635,42 @@
 	desc = "A remarkably plain veil meant to conceal ones face... if you wore this, a gust of wind would be all it takes to reveal your identity."
 	grid_width = 32
 	grid_height = 32
+
+// Pyromaniac - Seperated from Iron Mask so it won't hide the face.
+
+/obj/item/clothing/face/pyromaniac
+	name = "insulated iron mask"
+	icon_state = "imaskjaw"
+	blocksound = PLATEHIT
+	break_sound = 'sound/foley/breaksound.ogg'
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	armor = list("blunt" = 50, "slash" = 70, "stab" = 70, "piercing" = 50, "fire" = 100, "acid" = 10)
+	resistance_flags = FIRE_PROOF
+	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
+	body_parts_covered = FACE
+	block2add = FOV_BEHIND
+	slot_flags = ITEM_SLOT_MASK
+	experimental_onhip = TRUE
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	clothing_flags = CANT_SLEEP_IN
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 50
+
+	material_category = ARMOR_MAT_PLATE
+	item_weight = 1.2 KILOGRAMS
+
+/obj/item/clothing/face/pyromaniac/examine(mob/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_STUD))
+		desc = "Normally a handsome and absolutely stunning individual such as your self would NEVER cover your absolutely jaw-dropping and \
+		carved-from-marble face, but as a requirement to not completely burn your gods-sculpted visage, truly you must atleast 'attempt' to \
+		protect it. After all, it would be unfair that in every fight, your opponents would constantly and consistently stop to admire the stoic \
+		(but strikingly quite cute) expression that you lay bare upon them. Truly, this would result in an utterly unfair skirmish that is bereft \
+		of your stature and morals. After all, the sun blinds those who look into it, and you shan't force anyone to do as such - this act would be \
+		immoral, after all. And you? At this point, you've practically written the scriptures into your memory! You of all people know this act is \
+		only for the most demented! And you're hardly demented - you give your enemies the fairest of shakes, as Astrata wills it. And you are \
+		of Astrata's will! The mask stays on. Take it off when you gaze into a mirror, perchance?"
+	else
+		desc = "An iron mask that covers everything but the mouth. Notably, the interior has been heavily padded with imported Zalamander-skin, along with the eyes having goggles sealed against the ports."

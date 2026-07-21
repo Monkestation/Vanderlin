@@ -26,6 +26,14 @@
 	max_integrity = INTEGRITY_POOR
 	item_weight = 2.5 KILOGRAMS
 
+/obj/item/clothing/pants/trou/leather/pyromaniac
+	name = "zalamander-skin trousers"
+	desc = "Trousers lined with imported Zalamander-skin. Bulky, itchy, but insulated."
+	icon_state = "leathertrou"
+	item_weight = 4 KILOGRAMS
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 25, "slash" = 30, "stab" = 30, "piercing" = 30, "fire" = 75, "acid" = 0)
+
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
 	misc_flags = CRAFTING_TEST_EXCLUDE

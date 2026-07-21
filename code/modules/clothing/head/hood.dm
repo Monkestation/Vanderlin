@@ -62,6 +62,13 @@
 /obj/item/clothing/head/roguehood/colored/red
 	color = CLOTHING_BLOOD_RED
 
+/obj/item/clothing/head/roguehood/colored/red/pyromaniac
+	color = CLOTHING_BLOOD_RED
+	resistance_flags = FIRE_PROOF
+	name = "zalamander-skin hood"
+	desc = "A hood made of imported, exotic materials. It's dreadfully itchy and bulky, but well-insulated."
+	armor = list("blunt" = 5, "slash" = 5, "stab" = 5, "piercing" = 5, "fire" = 75, "acid" = 0)
+
 /obj/item/clothing/head/roguehood/colored/black
 	color = CLOTHING_SOOT_BLACK
 

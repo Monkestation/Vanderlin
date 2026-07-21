@@ -55,8 +55,16 @@
 	icon_state = "gambesonp"
 	sellprice = VALUE_HEAVY_GAMBESSON
 
+/obj/item/clothing/armor/gambeson/heavy/pyromaniac
+	name = "zalamander-skin gambeson"
+	desc = "Thick, but padded heavily with imported materials that provides less generalized protection, and more specialized protection against fire.."
+	icon_state = "gambesonp"
+	resistance_flags = FIRE_PROOF
+	sellprice = VALUE_HEAVY_GAMBESSON
+
 	armor = ARMOR_PADDED_GOOD
-	item_weight = 4 KILOGRAMS
+	item_weight = 7 KILOGRAMS // r/chonkers
+	armor = list("blunt" = 25, "slash" = 10, "stab" = 10, "piercing" = 10, "fire" = 100, "acid" = 0)
 
 /obj/item/clothing/armor/gambeson/heavy/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

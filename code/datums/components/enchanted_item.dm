@@ -60,6 +60,8 @@
 			I.add_filter(FORCE_FILTER, 2, outline_filter(1, "#9400D3"))
 		if(SEARING_BLADE_ENCHANT)
 			I.add_filter(SEARING_FILTER, 2, outline_filter(1, "#64af18"))
+		if(SINGING_BLADE_ENCHANT)
+			I.add_filter(SEARING_FILTER, 2, outline_filter(1, "#f54500"))
 		if(DIVINE_FIRE_ENCHANT)
 			I.add_filter(DIVINE_FILTER, 2, outline_filter(1, "#dddddd"))
 		if(DURABILITY_ENCHANT)
@@ -111,6 +113,8 @@
 			I.remove_filter(FORCE_FILTER)
 		if(SEARING_BLADE_ENCHANT)
 			I.remove_filter(SEARING_FILTER)
+		if(SINGING_BLADE_ENCHANT)
+			I.remove_filter(SEARING_FILTER)
 		if(DIVINE_FIRE_ENCHANT)
 			I.remove_filter(DIVINE_FILTER)
 		if(DURABILITY_ENCHANT)
@@ -132,6 +136,8 @@
 	switch(enchant_type)
 		if(SEARING_BLADE_ENCHANT)
 			examine_list += "This weapon is enchanted with a green flame enchantment."
+		if(SINGING_BLADE_ENCHANT)
+			examine_list += "This weapon is enchanted with a flame enchantment."
 		if(FORCE_BLADE_ENCHANT)
 			examine_list += "This weapon is enchanted with a force blade enchantment."
 		if(DURABILITY_ENCHANT)
@@ -158,5 +164,12 @@
 				damage_amt = damage_amt*1.5
 			target_mob.adjustFireLoss(damage_amt)
 			target_mob.visible_message(span_warning("Divine fire leaps from [source], burning [target_mob]!"), span_warning("Divine fire leaps from [source] and singes you!"))
+			// Permanent temporary solution until I figure out how to hack a dynamic on mob sprites
+			// Bypass parry & dodge btw.
+	else if(enchant_type == SINGING_BLADE_ENCHANT)
+		if(isliving(target))
+			var/mob/living/target_mob = target
+			target_mob.adjustFireLoss(SINGING_BLADE_DAMAGE)
+			target_mob.visible_message(span_warning("An ember dances from [source], singing [target_mob]!"), span_warning("Wisping flames leap from [source] and burns you!"))
 			// Permanent temporary solution until I figure out how to hack a dynamic on mob sprites
 			// Bypass parry & dodge btw.

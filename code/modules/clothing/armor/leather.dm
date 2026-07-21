@@ -116,6 +116,13 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 4 KILOGRAMS
 
+
+/obj/item/clothing/armor/leather/splint/pyromaniac // Pyromaniac
+	name = "zalamander-skin splintmail"
+	desc = "An exotic set of splintmail. The outside leather is made of boiled leather, while the inside is made of imported materials. It's not true Zalamander skin, but it does itch terribly." // IT'S ASBESTOS
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 30, "slash" = 40, "stab" = 50, "piercing" = 20, "fire" = 50, "acid" = 0)
+
 //................ Leather Vest ............... //	- has no sleeves.  - can be worn in armor OR shirt slot
 /obj/item/clothing/armor/leather/vest
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT

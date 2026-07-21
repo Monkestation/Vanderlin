@@ -447,6 +447,11 @@
 	stress_change = -5
 	desc = SPAN_GOD_XYLIX("Oh frabjous dae, calooh callay! The Silver-Tongue's guffaw keeps my troubles at bay!")
 
+/datum/stress_event/pyrojoystress
+	timer = 1 MINUTES
+	desc = "<span class='nicegreen'>Burning people alive is fucking AWESOME!</span>\n"
+	stress_change = -10
+  
 /datum/stress_event/soulchurnerdestroyed
 	timer = 10 MINUTES
 	stress_change = -5

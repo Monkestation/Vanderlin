@@ -247,6 +247,41 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
+//................ Pyromaniac Spear ............... //
+/obj/item/weapon/polearm/spear/pyromanicspear
+	name = "arsonist's brand"
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "peasantwarspear_hayfire"
+	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
+	force = DAMAGE_SPEARPLUS + 1
+	resistance_flags = FIRE_PROOF
+	sellprice = 0 // Yeah let's not sell holy fire.
+	item_weight = 2.5 KILOGRAMS
+	light_outer_range = 5
+	light_color = "#f74a05"
+
+/datum/intent/polearm/bash/pyromaniacspear
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/polearm/spear/pyromanicspear/examine(mob/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_STUD))
+		desc = "A strong and sturdy weapon to cleanse the sin out from those who would dare fight a man so grossly incandescent - such as yourself.\
+		 Who would dare fight you? A strong, moral-oriented soldier of the ultimate Judge, Astrata? Nay, only a fool would - and fools should never \
+		 be considered living, thinking, autonomous beings of reason. Nay! They are creatures of deceipt!"
+	else
+		desc = "A spear with the end wrapped in hay, burning with pilfered holy-fire... Only a madman would steal fire - who steals fire!??"
+
+/obj/item/weapon/polearm/spear/pyromanicspear/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+
 
 //................ Billhook ............... //
 /obj/item/weapon/polearm/spear/billhook

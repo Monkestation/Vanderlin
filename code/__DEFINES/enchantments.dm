@@ -4,9 +4,12 @@
 #define FORCE_BLADE_ENCHANT 2
 #define DURABILITY_ENCHANT 3
 #define DIVINE_FIRE_ENCHANT 4
+#define SINGING_BLADE_ENCHANT 5
 
 #define SEARING_BLADE_DAMAGE 8
 #define SEARING_FILTER "searing_blade"
+
+#define SINGING_BLADE_DAMAGE 3
 
 #define FORCE_BLADE_FORCE 5
 #define FORCE_FILTER "force_blade"

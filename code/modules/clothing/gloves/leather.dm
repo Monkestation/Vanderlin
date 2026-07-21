@@ -18,6 +18,12 @@
 	color = CLOTHING_SOOT_BLACK
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
+/obj/item/clothing/gloves/leather/pyromaniac
+	name = "zalamander-skin gloves"
+	desc = "Gloves padded with imported, fireproof materials. Provides virtually no protection outside of extreme insulation."
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 0, "slash" = 5, "stab" = 5, "piercing" = 2, "fire" = 80, "acid" = 0)
+
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK GLOVES ARE INTENDED
 //KEEP THIS IN MIND
 
