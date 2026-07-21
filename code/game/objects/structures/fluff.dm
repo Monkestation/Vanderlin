@@ -998,7 +998,7 @@
 	..()
 
 /obj/structure/fluff/statue/evil
-	name = "idol"
+	name = "Matthios Idol"
 	desc = "A statue built to the robber-god, Matthios. The visage resembles nobody in particular. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money."
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
@@ -1067,6 +1067,13 @@
 		give_rewards(offering_bandit, user)
 	else
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
+
+/obj/structure/fluff/statue/graggar
+	name = "Graggar Idol"
+	desc = "An ugly and crude stone statue in imitation of Graggar, bestial God of murder and cannibalism. The empty eye sockets seem to follow you."
+	icon_state = "graggaraltar"
+	icon = 'icons/roguetown/misc/tallstructure.dmi'
+
 
 /obj/structure/fluff/psycross
 	name = "pantheon cross"

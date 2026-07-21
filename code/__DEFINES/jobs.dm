@@ -304,3 +304,5 @@
 #define JOB_LUMBERJACK "Lumberjack"
 #define JOB_CHEESEMAKER "Cheesemaker"
 #define JOB_BUTCHER "Butcher"
+
+#define ALT_TITLE_FLAG_PATREON_LOCKED (1<<0)

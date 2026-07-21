@@ -24,6 +24,7 @@
 /datum/job/tailor
 	title = JOB_TAILOR
 	f_title = "Seamstress"
+	alt_titles = list("Dressmaker", "Clothier", "Sewist", "Couturier", "Outfitter")
 	tutorial = "Cloth, linen, silk and leather. \
 	You've tirelessly studied and poured your life into \
 	sewing articles of protection, padding, and fashion for serf and noble alike."

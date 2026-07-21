@@ -25,6 +25,7 @@
 
 /datum/job/carpenter
 	title = JOB_CARPENTER
+	alt_titles = list("Woodsman", "Lumberjack")
 	tutorial = "Others may regard your work as crude and demeaning, but you understand deep in your soul the beauty of woodchopping. \
 	For it is by your axe that the great trees of forests are felled, and it is by your hands from which the shining beacon of civilization is built."
 	department_flag = PEASANTS

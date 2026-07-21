@@ -275,6 +275,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	descriptor_entries = SANITIZE_LIST(descriptor_entries)
 	S["custom_descriptors"] >> custom_descriptors
 	custom_descriptors = SANITIZE_LIST(custom_descriptors)
+
+	S["alt_job_selections"] >> alt_job_selections
 	validate_descriptors()
 
 	if(needs_update >= 0)
@@ -340,6 +342,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["body_markings"], body_markings)
 	WRITE_FILE(S["descriptor_entries"], descriptor_entries)
 	WRITE_FILE(S["custom_descriptors"], custom_descriptors)
+	WRITE_FILE(S["alt_job_selections"], alt_job_selections)
 	save_quirks(S)
 
 	return TRUE

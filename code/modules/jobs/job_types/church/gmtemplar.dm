@@ -19,6 +19,9 @@
 
 /datum/job/gmtemplar
 	title = JOB_GRANDMASTER_TEMPLAR
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Brother")
+	alt_honorary_female = list("Sister")
 	tutorial = "At the upper echelon of the Templaric order sit the Grandmasters, five who sit in the Head in Kingsfield, and one appointed to each sanctified Tennite Church across the realm.\
 	They are masters of Ravox's arts and beholden to no will except Justice and Astrata, the latter of which they know the overbearing presence of all too well. \
 	Despite her cruel authority, the Ravoxian Grandmasters of the Order dare not rise up against the Astratan priests and their sect of guardians at the Head of the Order, lest they be excommunicated."
