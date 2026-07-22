@@ -51,7 +51,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 //............... Grenzelhoft Plume Hat ............... // - worn over a skullcap
 /obj/item/clothing/head/helmet/skullcap/grenzelhoft
@@ -113,7 +113,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 50
 	body_parts_covered = COVERAGE_HEAD
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/kettle/jingasa
 	name = "jingasa"
@@ -135,7 +135,7 @@
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
@@ -158,6 +158,7 @@
 	icon_state = "slitkettle"
 	flags_cover = HEADCOVERSEYES
 	body_parts_covered = HEAD|HAIR|EARS|EYES
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/clothing/head/helmet/kettle/slit/iron
 	name = "iron slitted kettle helmet"
@@ -167,7 +168,7 @@
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1.8 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
@@ -256,7 +257,7 @@
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 3.1 KILOGRAMS
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/beastskull
 	name = "beast skull"
@@ -281,7 +282,7 @@
 	sellprice = VALUE_IRON_HELMET
 	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 3.1 KILOGRAMS
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/iron/banded
 	name = "banded iron helmet"
@@ -409,14 +410,14 @@
 	name = "visored sallet"
 	desc = "A steel helmet offering good overall protection. Its visor can be flipped over for higher visibility at the cost of eye protection."
 	icon_state = "sallet_visor"
-	item_weight = 3.25 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 
 /obj/item/clothing/head/helmet/visored/sallet/iron
 	name = "visored iron sallet"
 	desc = "An iron helmet offering good overall protection. Its visor can be flipped over for higher visibility at the cost of eye protection."
 	icon_state = "isallet_visor"
 	item_state = "isallet_visor"
-	item_weight = 3.25 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 	armor_type = /datum/armor/head/plate/bad
@@ -427,7 +428,7 @@
 	name = "bellow sallet"
 	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
 	icon_state = "sallet_bellow"
-	item_weight = 4.5 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 //............... Hounskull ............... //
 /obj/item/clothing/head/helmet/visored/hounskull

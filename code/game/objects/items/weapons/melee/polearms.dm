@@ -88,7 +88,7 @@
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
-	item_weight = 1.8 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 75
@@ -101,7 +101,7 @@
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 7
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/steel
 	melt_amount = 75
@@ -114,7 +114,7 @@
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 7
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/silver
 	melt_amount = 75
@@ -149,7 +149,7 @@
 	dropshrink = 0.8
 	thrown_bclass = BCLASS_STAB
 	sellprice = 22
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/getonmobprop(tag)
 	. = ..()
@@ -172,7 +172,7 @@
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 40
-	item_weight = 2.7 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/steel/partizan
 	name = "partizan"
@@ -195,7 +195,7 @@
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 60
-	item_weight = 2.7 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/silver/Initialize(mapload)
 	. = ..()
@@ -211,7 +211,7 @@
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/steel_slag
-	item_weight = 2.7 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -224,7 +224,7 @@
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 60
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/psydon/Initialize(mapload)
 	. = ..()
@@ -260,14 +260,14 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 60
-	item_weight = 3 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/billhook/ji
 	name = "steel dagger-ax"
 	desc = "An eastern polearm of ancient design. It's rarely seen on the battlefield these daes."
 	icon_state = "ji_steel"
 	gripsprite = FALSE
-	item_weight = 3 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/billhook/ji/iron
 	name = "iron dagger-ax"
@@ -277,7 +277,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	max_blade_int = 150
 	smeltresult = /obj/item/ingot/iron
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/billhook/ji/bronze
 	name = "bronze dagger-ax"
@@ -288,7 +288,7 @@
 	max_integrity = INTEGRITY_POOR
 	max_blade_int = 100
 	smeltresult = /obj/item/ingot/bronze
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
@@ -309,7 +309,7 @@
 	melt_amount = 0
 	dropshrink = 0.7
 	sellprice = 5
-	item_weight = 1.5 KILOGRAMS
+	item_weight = 0.8 KILOGRAMS
 
 //................ Javelin ............... //
 /obj/item/weapon/polearm/spear/assegai
@@ -340,7 +340,7 @@
 
 	gripsprite = FALSE
 	smeltresult = /obj/item/ingot/steel_slag
-	item_weight = 1.8 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/javelin
 	name = "copper javelin"
@@ -500,7 +500,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
@@ -546,7 +546,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 100
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/psydon/Initialize(mapload)
 	. = ..()
@@ -595,7 +595,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 140
 	sellprice = 30
-	item_weight = 4 KILOGRAMS
+	item_weight = 2.8 KILOGRAMS
 
 //originally in the axes.dm file, moved here because they inherit from the bardiche
 //................ Woodcutter Axe ............... //
@@ -618,7 +618,7 @@
 	smeltresult = null
 	melt_amount = 75
 	sellprice = 20
-	item_weight = 3 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 	weapon_special = /datum/special_intent/axe_swing
 
@@ -648,7 +648,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 50
-	item_weight = 4 KILOGRAMS
+	item_weight = 2.5 KILOGRAMS
 
 	weapon_special = /datum/special_intent/axe_swing
 
@@ -674,7 +674,7 @@
 	axe_cut = 15
 	melt_amount = 150
 	sellprice = 20
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/bardiche/warcutter/getonmobprop(tag)
 	. = ..()
@@ -698,7 +698,7 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "dendorscythe"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/bardiche/captain
 	name = "\proper deliverance"
@@ -707,7 +707,7 @@
 	icon_state = "capglaive"
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 2.3 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/bardiche/glaive
 	name = "steel glaive"
@@ -742,7 +742,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
-	item_weight = 4 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 	weapon_special = /datum/special_intent/ground_smash
 
@@ -769,7 +769,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 40
-	item_weight = 4 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 //................ Hoplite Spear ............... //
 /obj/item/weapon/polearm/spear/hoplite
@@ -779,14 +779,14 @@
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/bronze
 	sellprice = 120 // A noble collector would love to get his/her hands on one of these spears
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/hoplite/winged // Winged version has +1 weapon defence and sells for a bit more, but is identical otherwise
 	name = "ancient winged spear"
 	desc = "A spear with a winged bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear_winged"
 	sellprice = 150 // A noble collector would love to get his/her hands on one of these spears
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/hoplite/abyssal
 	name = "abyssal spear"
@@ -794,7 +794,7 @@
 	icon = 'icons/roguetown/weapons/64/ancient.dmi'
 	icon_state = "ancient_spear"
 	sellprice = 40
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/bronze
 	name = "bronze spear"
@@ -802,7 +802,7 @@
 	icon_state = "bronzespear"
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/bronze
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 //scythe
 /obj/item/weapon/sickle/scythe //This is supposed to be bad
@@ -834,7 +834,7 @@
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/iron
 	sellprice = 10
-	item_weight = 3 KILOGRAMS
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/sickle/scythe/Initialize()
 	. = ..()
@@ -861,7 +861,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
-	item_weight = 1.5 KILOGRAMS
+	item_weight = 0.9 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/trollbonespear
 	name = "troll-horn bone spear"
@@ -916,7 +916,7 @@
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 1.5 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
 	. = ..()
