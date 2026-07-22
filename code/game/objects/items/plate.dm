@@ -22,6 +22,14 @@
 	var/dirty = FALSE
 	var/cleaned = FALSE
 	var/start_dirty = FALSE
+	///Things that plates are allowed to carry
+	var/list/permitted_items_on_plate = list(
+		/obj/item/kitchen/fork,
+		/obj/item/kitchen/spoon,
+		/obj/item/reagent_containers/food,
+		/obj/item/reagent_containers/glass/cup,
+		/obj/item/reagent_containers/glass/bowl,
+		)
 
 /obj/item/plate/dirty
 	dirty = TRUE
@@ -29,6 +37,12 @@
 /obj/item/plate/Initialize(mapload, ...)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/plate/proc/check_permitted_item(obj/item/I)
+	for(var/type_path in permitted_items_on_plate)
+		if(istype(I, type_path))
+			return TRUE
+	return FALSE
 
 /obj/item/plate/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!length(contents) && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
@@ -61,7 +75,7 @@
 	if(item_flags & IN_STORAGE)
 		to_chat(user, span_warning("I cannot reach [src]."))
 		return
-	if(!istype(I, /obj/item/kitchen/fork) && !istype(I, /obj/item/kitchen/spoon) && !istype(I, /obj/item/reagent_containers/food) && !istype(I, /obj/item/reagent_containers/glass/cup) && !istype(I, /obj/item/reagent_containers/glass/bowl))
+	if(!check_permitted_item(I))
 		to_chat(user, span_notice("[src] isn't made to carry that!"))
 		return
 	if(contents.len >= max_items)
