@@ -221,7 +221,7 @@
 
 /datum/outfit/lunar_sentinel
 	name = JOB_ORACLE_GUARD
-	head = /obj/item/clothing/head/helmet/visored/knight/owl
+	head = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 	neck = /obj/item/clothing/neck/gorget/silver
 	armor = /obj/item/clothing/armor/brigandine
 	shirt = /obj/item/clothing/armor/chainmail
@@ -328,7 +328,7 @@
 
 /datum/outfit/lunar_champion
 	name = JOB_ORACLE_GUARD_HVY
-	head = /obj/item/clothing/head/helmet/visored/knight/owl
+	head = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 	neck = /obj/item/clothing/neck/gorget/silver
 	armor = /obj/item/clothing/armor/plate/silver
 	shirt = /obj/item/clothing/armor/chainmail
