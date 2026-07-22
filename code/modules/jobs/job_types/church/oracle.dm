@@ -104,7 +104,6 @@
 
 /datum/job/oracle/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	//spawned.virginity = TRUE
 	ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 
 	var/holder = spawned.patron?.devotion_holder
@@ -212,7 +211,6 @@
 
 /datum/job/lunar_sentinel/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	//spawned.virginity = TRUE
 	ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 
 	var/holder = spawned.patron?.devotion_holder
@@ -320,7 +318,6 @@
 
 /datum/job/lunar_champion/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	//spawned.virginity = TRUE
 	ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 
 	var/holder = spawned.patron?.devotion_holder

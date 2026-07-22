@@ -185,7 +185,7 @@
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
-			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 			var/static/list/selectable = list(
 				"Heartstring (Rapier)" = /obj/item/weapon/sword/rapier/eora,
