@@ -10,17 +10,14 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 	headprice = 12
 
-
 /mob/living/carbon/human/species/human/northern/highwayman/ambush
 	wander = TRUE
-
 
 /mob/living/carbon/human/species/human/northern/highwayman/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 	is_silent = TRUE
-
 
 /mob/living/carbon/human/species/human/northern/highwayman/after_creation()
 	..()

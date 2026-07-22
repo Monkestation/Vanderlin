@@ -2,6 +2,7 @@
 	name = "orc"
 	icon = 'icons/roguetown/mob/monster/orc.dmi'
 	icon_state = "orc"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/orc
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/orc, /obj/item/bodypart/head/orc, /obj/item/bodypart/l_arm/orc,

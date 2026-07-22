@@ -1,8 +1,8 @@
 /mob/living/carbon/human/species/zizombie
 	name = "rotten zizombie"
-
 	icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 	icon_state = "zizombie"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/zizombie
 	gender = PLURAL
 	bodyparts = list(/obj/item/bodypart/chest/zizombie, /obj/item/bodypart/head/zizombie, /obj/item/bodypart/l_arm/zizombie,

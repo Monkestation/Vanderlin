@@ -2,7 +2,7 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 
 /mob/living/carbon/human/species/elf/dark/drowraider
 	ai_controller = /datum/ai_controller/human_npc
-	faction = list("drow")
+	faction = list(FACTION_HOSTILE)
 	ambushable = FALSE
 	dodgetime = 30
 	flee_in_pain = TRUE

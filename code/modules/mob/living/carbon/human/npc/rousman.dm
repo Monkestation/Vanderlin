@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	name = "rousman"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,

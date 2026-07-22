@@ -27,7 +27,6 @@
 	if(!ambushable)
 		ADD_TRAIT(src, TRAIT_NOAMBUSH, INNATE_TRAIT)
 	recalculate_stats()
-	var/turf/turf = get_turf(src)
 	if(turf)
 		update_z(turf.z)
 
@@ -2200,8 +2199,6 @@
 				//We don't set them directly on, for instances like AIs acting while dead and other cases that may exist in the future.
 				//This isn't a problem for AIs with a client since the client will prevent this from being called anyway.
 				controller.set_ai_status(controller.get_expected_ai_status())
-
-		SSmobs.mobs_by_zlevel[new_z] += src
 
 	registered_z = new_z
 

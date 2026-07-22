@@ -1,9 +1,9 @@
 /mob/living/carbon/human/species/goblin
 	name = "goblin"
-
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	icon_state = "goblin"
 	race = /datum/species/goblin
+	faction = list(FACTION_HOSTILE)
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
 					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin, /obj/item/bodypart/mouth)
