@@ -1,0 +1,4 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - map: "The Bog Witch and Bog Witch Apprentice now spawn in their dinghy instead of the entrance to the Terrorbog."

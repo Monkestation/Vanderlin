@@ -589,8 +589,6 @@
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
-	if(!deep_examination)
-		deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 	if(user == src)
 		m1 = "I am"
 		examination += "<span class='notice'>Let's see how I am doing.</span>"

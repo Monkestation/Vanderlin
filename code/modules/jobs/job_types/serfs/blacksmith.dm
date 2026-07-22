@@ -43,6 +43,7 @@
 	outfit = /datum/outfit/blacksmith
 	display_order = JDO_BLACKSMITH
 	give_bank_account = 30
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

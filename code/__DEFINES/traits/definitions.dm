@@ -115,8 +115,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STUNIMMUNE "stun_immunity"
 /// Stun duration reduced (unused)
 #define TRAIT_STUNRESISTANCE "stun_resistance"
-/// Immunity to sleep
-#define TRAIT_SLEEPIMMUNE "sleep_immunity"
 /// Can't be pushed
 #define TRAIT_PUSHIMMUNE "push_immunity"
 /// Doesn't need a heart
@@ -412,7 +410,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOSTAMINA	"Indefatigable"
 /// Can't fall asleep
 #define TRAIT_FAT "Obese"
-#define TRAIT_NOSLEEP "Fatal Insomnia"
+/// Immunity to sleep
+#define TRAIT_SLEEPIMMUNE "Fatal Insomnia"
 #define TRAIT_FASTSLEEP "Fast Sleeper"
 #define TRAIT_NUDIST "Nudist" //you can't wear most clothes
 #define TRAIT_INHUMANE_ANATOMY "Inhumen Anatomy" //can't wear hats and shoes
@@ -499,6 +498,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
+#define TRAIT_VIRGIN	"virginity"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise

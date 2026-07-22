@@ -157,6 +157,9 @@
 
 	var/give_bank_account = FALSE
 
+	/// Whether this job starts knowing the members of the town.
+	var/knows_the_town = FALSE
+
 	var/can_random = TRUE
 
 	/// Some jobs have unique combat mode music, because why not?
@@ -249,7 +252,7 @@
 
 /datum/job/New()
 	. = ..()
-	if(give_bank_account)
+	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)
 			peopleiknow += X
 			peopleknowme += X
@@ -1038,17 +1041,17 @@
 	var/datum/patron/pref_patron = prefs.read_preference(/datum/preference/choiced/patron)
 	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(pref_patron, /datum/patron/alternate/wurm))
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
-		if(!(tested.department_flag & OUTSIDERS))
+		if(!tested || !(tested.department_flag & OUTSIDERS))
 			return FALSE
 
 	if(species.id == SPEC_ID_SNOW_ELF)
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
-		if(!(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
 			return FALSE
 
 	if(species.id == SPEC_ID_HALF_SNOW_ELF)
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
-		if(!(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
 			return FALSE
 
 	return TRUE

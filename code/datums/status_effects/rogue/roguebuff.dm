@@ -725,7 +725,7 @@
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
-		if(!H.can_hear())
+		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
@@ -873,7 +873,7 @@
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
-		if(!H.can_hear())
+		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())

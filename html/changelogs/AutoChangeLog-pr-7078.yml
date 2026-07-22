@@ -1,0 +1,4 @@
+author: "Sulaboy"
+delete-after: True
+changes:
+  - balance: "Maximum Encumbrance now scales off Str,Con,&End instead of just Str."

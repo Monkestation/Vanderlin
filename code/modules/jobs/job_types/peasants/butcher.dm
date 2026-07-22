@@ -32,6 +32,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/butcher
 	outfit = /datum/outfit/beastmaster
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 	can_be_apprentice = TRUE
 

@@ -139,10 +139,8 @@
 /obj/item/organ/brain/handle_blood(delta_time, times_fired, in_bleedout)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	// Very low blood, danger!!
-	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_BLEEDOUT))
+	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_SURVIVE))
 		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
-		if(DT_PROB(5, delta_time))
-			owner.adjust_eye_blur_up_to(4, 4)
 	else
 		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
 	// When all blood is lost, take blood from blood vessels
@@ -361,13 +359,7 @@
 	QDEL_LIST(traumas)
 	return ..()
 
-/obj/item/organ/brain/proc/past_damage_threshold(threshold)
-	return (get_current_damage_threshold() > threshold)
-
-/obj/item/organ/brain/proc/get_current_damage_threshold()
-	return FLOOR(damage / damage_threshold_value, 1)
-
-/obj/item/organ/brain/applyOrganDamage(amount, maximum, silent)
+/obj/item/organ/brain/applyOrganDamage(amount, maximum)
 	. = ..()
 	var/delta_dam = . //for the sake of clarity
 
@@ -377,6 +369,9 @@
 	if(isnull(owner)) // no need to color it if it's in someone's noggin
 		update_brain_color()
 		return
+
+	if(delta_dam != 0)
+		owner.updatehealth()
 
 	if(delta_dam >= 10)
 		var/damage_side_effect = CEILING(delta_dam / 2, 1)

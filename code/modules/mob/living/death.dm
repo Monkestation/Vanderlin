@@ -62,6 +62,12 @@ GLOBAL_LIST_EMPTY(last_words)
 
 /mob/living/proc/death(gibbed)
 	var/was_dead_before = stat == DEAD
+
+	if(prob(0.1))
+		src.playsound_local(src, 'sound/misc/dark_die.ogg', 250)
+	else
+		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
+
 	set_stat(DEAD)
 	unset_machine()
 	timeofdeath = world.time
@@ -75,11 +81,6 @@ GLOBAL_LIST_EMPTY(last_words)
 	GLOB.alive_mob_list -= src
 	if(!gibbed && !was_dead_before)
 		GLOB.dead_mob_list += src
-
-	if(prob(0.1))
-		src.playsound_local(src, 'sound/misc/dark_die.ogg', 250)
-	else
-		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
 
 	set_disgust(0)
 	SetSleeping(0)

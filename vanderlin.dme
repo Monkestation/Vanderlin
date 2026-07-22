@@ -2204,6 +2204,7 @@
 #include "code\game\objects\structures\mirror.dm"
 #include "code\game\objects\structures\musicbox.dm"
 #include "code\game\objects\structures\newtree.dm"
+#include "code\game\objects\structures\noose.dm"
 #include "code\game\objects\structures\noticeboard.dm"
 #include "code\game\objects\structures\petrified_statue.dm"
 #include "code\game\objects\structures\pillory.dm"

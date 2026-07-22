@@ -87,12 +87,11 @@
 
 	languages = list(/datum/language/celestial)
 	can_have_apprentices = FALSE
+	traits = list(TRAIT_VIRGIN)
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.give_priest_verbs()
-
-	spawned.virginity = TRUE
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)

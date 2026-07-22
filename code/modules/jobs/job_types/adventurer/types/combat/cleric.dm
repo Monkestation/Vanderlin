@@ -58,6 +58,7 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
+		TRAIT_VIRGIN,
 	)
 
 	languages = list(/datum/language/celestial)
@@ -68,8 +69,6 @@
 	. = ..()
 	if(spawned.age == AGE_OLD)
 		ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-
-	spawned.virginity = TRUE
 
 	if(spawned.patron)
 		switch(spawned.patron.type)
@@ -83,7 +82,7 @@
 				ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 			if(/datum/patron/divine/eora)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
-				spawned.virginity = FALSE
+				REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 				ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			if(/datum/patron/divine/ravox)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
