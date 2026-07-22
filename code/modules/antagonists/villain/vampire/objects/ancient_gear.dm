@@ -8,7 +8,7 @@
 	icon_state = "ancientbarbute"
 	item_state = "ancientbarbute"
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	flags_inv = HIDEEARS|HIDEHAIR
 
 	detail_tag = "_detail"
@@ -27,7 +27,7 @@
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	body_parts_covered = HEAD_NECK
 	block2add = FOV_BEHIND
@@ -53,7 +53,7 @@
 	item_state = "achaincoif"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 
 /obj/item/clothing/neck/gorget/ancient
 	name = "ancient gorget"
@@ -61,7 +61,7 @@
 	icon_state = "ancientgorget"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/neck/plate
 	max_integrity = INTEGRITY_STRONG + 100
 
 //................ Armor ............... //
@@ -72,7 +72,7 @@
 	icon_state = "ancientcuirass"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	item_weight = 8.5 KILOGRAMS
 
 /obj/item/clothing/armor/plate/ancient
@@ -81,7 +81,7 @@
 	icon_state = "ancientplate"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	item_weight = 16 KILOGRAMS
 
 //................ Underarmor ............... //
@@ -92,7 +92,7 @@
 	icon_state = "ancientchain"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/maille/good
 	item_weight = 10 KILOGRAMS
 
 /obj/item/clothing/armor/chainmail/hauberk/ancient
@@ -101,7 +101,7 @@
 	icon_state = "ancienthauberk"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/maille/good
 	item_weight = 11 KILOGRAMS
 
 //................ Wrists ............... //
@@ -113,7 +113,7 @@
 	item_state = "ancientbracers"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/wrist/plate/good
 
 //................ Gloves ............... //
 
@@ -124,7 +124,7 @@
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 	item_weight = 1.2 KILOGRAMS
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/gloves/maille/good
 
 /obj/item/clothing/gloves/plate/ancient
 	name = "ancient plate gauntlets"
@@ -132,7 +132,7 @@
 	icon_state = "agauntlets"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.45 KILOGRAMS
 
 //................ Legs ............... //
@@ -147,7 +147,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_pants.dmi'
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/pants/maille/good
 	item_weight = 5.4 KILOGRAMS
 
 /obj/item/clothing/pants/platelegs/ancient
@@ -159,7 +159,7 @@
 
 	sleeved = FALSE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/pants/plate/good
 	item_weight = 5.5 KILOGRAMS
 
 //................ Shoes ............... //
@@ -172,7 +172,7 @@
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 	max_integrity = INTEGRITY_STRONG
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/boots/maille/good
 	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/armor/ancient
@@ -182,6 +182,6 @@
 	item_state = "ancientboots"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/boots/plate/good
 	item_weight = 2 KILOGRAMS
 

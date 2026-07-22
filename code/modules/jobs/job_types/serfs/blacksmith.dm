@@ -28,6 +28,7 @@
 
 /datum/job/blacksmith
 	title = JOB_BLACKSMITH
+	alt_titles = list("Goldsmith", "Greensmith", "Silversmith", "Whitesmith", "Tinsmith", "Weaponsmith", "Armoursmith")
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Blacksmith, \
 	a trade that certainly has seen a boom in revenue in recent times with many a bannerlord \
 	seeing the importance in maintaining a well-equipped army."

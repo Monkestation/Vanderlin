@@ -33,7 +33,7 @@
 				if(C.uses_integrity)
 					if(C.get_integrity() <= 0)
 						continue
-				var/val = C.armor.getRating(d_type)
+				var/val = C.get_armor().get_rating(d_type)
 				// The code below finally fixes the targetting order of armor > shirt > flesh. - Foxtrot (#gundamtanaka)
 				var/obj/item/armorworn = src.get_item_by_slot(ITEM_SLOT_ARMOR) // The armor we're wearing
 				var/obj/item/shirtworn = src.get_item_by_slot(ITEM_SLOT_SHIRT) // The shirt we're wearing
@@ -76,7 +76,7 @@
 			steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
 	if(physiology)
-		protection += physiology.armor.getRating(d_type)
+		protection += physiology.armor.get_rating(d_type)
 	return protection
 
 /// Return the armor that blocks the crit

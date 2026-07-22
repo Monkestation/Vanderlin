@@ -3245,3 +3245,7 @@
  */
 /mob/living/proc/is_location_accessible(location, exluded_equipment_slots = NONE)
 	return TRUE
+
+/// Check a mobs item slots for a type or types, returns the first item found that matches or null
+/mob/living/proc/check_slots_for_types(list/slots, list/types)
+	return

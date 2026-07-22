@@ -1,5 +1,0 @@
-author: "MissyNym"
-delete-after: True
-changes:
-  - code_imp: "New trait for Gallowband mobs"
-  - bugfix: "Adjusted Gallowband/Bog Witch traveltile to point to new Gallowband trait so it appears and is usable"

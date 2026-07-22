@@ -193,7 +193,7 @@
 			jobs += "Cancel"
 
 			var/cover_job = tgui_input_list(user, "Select Cover Job", "COVER JOB", jobs)
-			if(jobs == "Cancel")
+			if(cover_job == "Cancel")
 				return
 			H.job = cover_job
 			H.mind?.set_assigned_role(cover_job)

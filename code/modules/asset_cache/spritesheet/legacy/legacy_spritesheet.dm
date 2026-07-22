@@ -418,42 +418,48 @@
 
 /datum/asset/spritesheet/attributes_big
 	name = "attributes_big"
+	load_immediately = TRUE
 
 /datum/asset/spritesheet/attributes_big/create_spritesheets()
-	var/list/to_insert = list()
-
-	for(var/attribute_type in GLOB.all_attributes)
-		var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
-		if(attribute_datum.icon && attribute_datum.icon_state)
-			var/icon/attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
-			var/css_name = sanitize_css_class_name(attribute_datum.name)
-			var/size = ""
-			attribute_icon.Scale(128, 128)
-			size = "[attribute_icon.Width()]x[attribute_icon.Height()]"
-			LAZYINITLIST(to_insert[size])
-			to_insert[size][css_name] = attribute_icon
-
-	for(var/size in to_insert)
-		for(var/spritesheet_key in to_insert[size])
-			Insert(spritesheet_key, to_insert[size][spritesheet_key])
+	insert_attribute_icons(scale = 128)
 
 /datum/asset/spritesheet/attributes_small
 	name = "attributes_small"
+	load_immediately = TRUE
 
 /datum/asset/spritesheet/attributes_small/create_spritesheets()
+	insert_attribute_icons(scale = 16)
+
+/datum/asset/spritesheet/attribute_seals
+	name = "attribute_seals"
+	load_immediately = TRUE
+
+/datum/asset/spritesheet/attribute_seals/create_spritesheets()
+	var/seal_icon = 'icons/ui_icons/attributes.dmi'
+	for(var/seal_state in list("strength", "dexterity", "endurance", "intelligence", "willpower", "perception"))
+		var/icon/seal = icon(seal_icon, icon_state = seal_state)
+		seal.Scale(104, 104)
+		Insert(seal_state, seal)
+
+/datum/asset/spritesheet/proc/insert_attribute_icons(scale)
 	var/list/to_insert = list()
+	var/list/seen = list()
 
 	for(var/attribute_type in GLOB.all_attributes)
 		var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
-		if(attribute_datum.icon && attribute_datum.icon_state)
-			var/icon/attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
-			var/css_name = sanitize_css_class_name(attribute_datum.name)
-			var/size = ""
-			attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
-			attribute_icon.Scale(16, 16)
-			size = "[attribute_icon.Width()]x[attribute_icon.Height()]"
-			LAZYINITLIST(to_insert[size])
-			to_insert[size][css_name] = attribute_icon
+		if(!attribute_datum.icon || !attribute_datum.icon_state)
+			continue
+		var/dedup_key = "[attribute_datum.icon]|[attribute_datum.icon_state]"
+		if(seen[dedup_key])
+			continue
+		seen[dedup_key] = TRUE
+
+		var/icon/attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
+		attribute_icon.Scale(scale, scale)
+		var/size = "[attribute_icon.Width()]x[attribute_icon.Height()]"
+		var/css_name = sanitize_css_class_name(attribute_datum.icon_state)
+		LAZYINITLIST(to_insert[size])
+		to_insert[size][css_name] = attribute_icon
 
 	for(var/size in to_insert)
 		for(var/spritesheet_key in to_insert[size])
