@@ -24,6 +24,9 @@
 /obj/item/clothing/head/stewardtophat,
 /obj/item/clothing/armor/gambeson/steward,
 /obj/item/clothing/shirt/dress/stewarddress,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/key/merchant,
+/obj/item/book/secret/ledger,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/middeck)
 "ai" = (
@@ -564,11 +567,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/nobledeck)
-"dq" = (
-/obj/machinery/light/fueled/torchholder/r,
-/obj/structure/industrial_lift/tram,
-/turf/open/openspace,
-/area/outdoors/beach)
 "dD" = (
 /obj/structure/dye_bin,
 /turf/open/floor/wood,
@@ -1096,10 +1094,19 @@
 /turf/open/floor/metal/barograte,
 /area/ship/nobledeck)
 "gN" = (
-/obj/machinery/light/fueled/wallfire/candle/r,
-/obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/stampot,
+/obj/item/reagent_containers/glass/bottle/stampot,
+/obj/item/reagent_containers/glass/bottle/manapot,
+/obj/item/reagent_containers/glass/bottle/manapot,
+/obj/item/natural/bundle/cloth/bandage/full,
+/obj/item/natural/bundle/cloth/bandage/full,
+/obj/item/storage/backpack/satchel/surgbag,
+/turf/open/floor/metal/barograte,
+/area/ship/middeck)
 "gP" = (
 /obj/structure/rack/shelf/big{
 	icon_state = "shelf_biggest";
@@ -1415,7 +1422,7 @@
 /obj/effect/mapping_helpers/access/keyset/manor/vault,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/metal/barograte,
-/area/indoors/town/vault)
+/area/ship/middeck)
 "iK" = (
 /turf/open/floor/wood,
 /area/ship/shipbrig)
@@ -1516,7 +1523,10 @@
 /area/indoors/town/church)
 "jH" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/fake_machine/merchantvend,
+/obj/structure/fake_machine/merchantvend{
+	pixel_x = 0;
+	pixel_y = -32
+	},
 /turf/open/floor/wood,
 /area/ship/middeck)
 "jK" = (
@@ -1740,14 +1750,6 @@
 	dir = 4
 	},
 /area/ship/nobledeck)
-"lB" = (
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/obj/structure/fluff/railing/border,
-/obj/structure/industrial_lift/tram,
-/turf/open/openspace,
-/area/outdoors/beach)
 "lD" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/table/wood{
@@ -2032,15 +2034,6 @@
 /obj/machinery/light/fueled/torchholder/metal_torch/east,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
-"ny" = (
-/obj/structure/industrial_lift/tram{
-	icon_state = "corner";
-	icon = 'icons/turf/walls.dmi';
-	density = 1;
-	opacity = 1
-	},
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "nA" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/spiral,
@@ -2057,10 +2050,6 @@
 	},
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/ship/middeck)
-"nG" = (
-/obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "nI" = (
 /obj/structure/fake_machine/atm{
 	pixel_y = -32
@@ -2081,11 +2070,14 @@
 /turf/open/floor/hay,
 /area/ship/topdeck)
 "nR" = (
-/obj/structure/door/iron{
-	name = "Key Storage"
-	},
-/obj/effect/mapping_helpers/access/keyset/manor/steward,
-/obj/effect/mapping_helpers/access/locker,
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/item/storage/backpack/backpack,
+/obj/item/storage/sack,
+/obj/item/storage/sack,
+/obj/item/flashlight/flare/torch/lantern/bronzelamptern,
+/obj/item/flashlight/flare/torch/lantern/bronzelamptern,
+/obj/item/storage/messkit,
+/obj/item/storage/messkit,
 /turf/open/floor/metal/barograte,
 /area/ship/middeck)
 "nT" = (
@@ -2249,14 +2241,6 @@
 	},
 /turf/open/floor/church,
 /area/ship/middeck)
-"pc" = (
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/industrial_lift/tram{
-	icon_state = "roofg";
-	dir = 4
-	},
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "pd" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/cobble,
@@ -2453,11 +2437,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
-"qv" = (
-/obj/structure/rack/shelf/notdense,
-/obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "qA" = (
 /obj/structure/chair/bench/couch/left/lord_secondary,
 /obj/machinery/light/fueled/wallfire/candle/l{
@@ -2916,13 +2895,6 @@
 /obj/effect/landmark/start/villager,
 /turf/open/floor/ruinedwood/darker,
 /area/ship/middeck)
-"tc" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood3"
-	},
-/obj/structure/industrial_lift/tram,
-/turf/open/openspace,
-/area/outdoors/beach)
 "td" = (
 /obj/effect/landmark/start/innkeep_son,
 /turf/open/floor/herringbone,
@@ -3021,13 +2993,6 @@
 "tL" = (
 /turf/closed/wall/mineral/wooddark,
 /area/ship/middeck)
-"tM" = (
-/obj/structure/industrial_lift/tram{
-	icon_state = "roofg";
-	dir = 4
-	},
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "tT" = (
 /obj/structure/closet/crate/coffin,
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -3886,12 +3851,41 @@
 /area/ship/middeck)
 "zF" = (
 /obj/structure/table/wood/reinforced_alt,
+/obj/structure/closet/keyrack,
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/steward,
+/obj/item/key/manor,
+/obj/item/key/walls,
+/obj/item/key/blacksmith,
+/obj/item/key/steward,
+/obj/item/key/church,
+/obj/item/key/dungeon,
+/obj/item/key/graveyard,
+/obj/item/key/garrison,
+/obj/item/key/mercenary,
+/obj/item/key/merchant,
+/obj/item/key/courtphys,
+/obj/item/key/tavern,
+/obj/item/key/artificer,
+/obj/item/key/soilson,
+/obj/item/key/tailor,
+/obj/item/key/vault,
+/obj/item/key/manor,
+/obj/item/key/manor,
 /obj/structure/lever{
-	redstone_id = "VoyageMerchantFront";
-	pixel_x = 1;
-	pixel_y = 13;
+	redstone_id = "VoyageMerchantBack";
+	pixel_x = -9;
+	pixel_y = 21;
 	layer = 3
 	},
+/obj/structure/lever{
+	redstone_id = "VoyageMerchantFront";
+	pixel_x = -9;
+	pixel_y = 11;
+	layer = 3
+	},
+/obj/item/storage/keyring,
+/obj/item/storage/keyring,
 /turf/open/floor/wood,
 /area/ship/middeck)
 "zL" = (
@@ -3912,16 +3906,6 @@
 /obj/effect/landmark/start/farmer,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
-"zQ" = (
-/obj/structure/rack/shelf/notdense{
-	pixel_y = 23
-	},
-/obj/structure/table/wood{
-	icon_state = "largetable"
-	},
-/obj/structure/industrial_lift/tram,
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "zR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/walldeco/sign/apothecarysign/left{
@@ -5154,12 +5138,6 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/ship/middeck)
-"Il" = (
-/obj/structure/industrial_lift/tram{
-	fake = 1
-	},
-/turf/open/water/ocean/abyss,
-/area/outdoors/beach)
 "Iq" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/church/chapel)
@@ -5560,13 +5538,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
-"Lq" = (
-/obj/structure/industrial_lift/tram{
-	icon_state = "roofg";
-	dir = 4
-	},
-/turf/open/openspace,
-/area/outdoors/beach)
 "Lr" = (
 /obj/structure/fluff/statue/astrata/bling,
 /obj/item/candle/yellow/lit/infinite/strong,
@@ -5664,16 +5635,6 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/beach)
-"Mf" = (
-/obj/structure/industrial_lift/tram,
-/obj/structure/stairs{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "Mg" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -5907,11 +5868,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
 "Nv" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
 /obj/structure/industrial_lift/tram,
+/obj/machinery/light/fueledstreet/midlamp,
 /turf/open/openspace,
 /area/outdoors/beach)
 "Ny" = (
@@ -5939,31 +5897,6 @@
 /obj/item/bedsheet/fabric_double,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
-"NI" = (
-/obj/item/key/manor,
-/obj/item/key/walls,
-/obj/item/key/blacksmith,
-/obj/item/key/steward,
-/obj/item/key/church,
-/obj/item/key/dungeon,
-/obj/item/key/graveyard,
-/obj/item/key/garrison,
-/obj/item/key/mercenary,
-/obj/item/key/tavern,
-/obj/item/key/merchant,
-/obj/item/key/courtphys,
-/obj/item/key/artificer,
-/obj/item/key/soilson,
-/obj/item/key/tailor,
-/obj/item/key/vault,
-/obj/effect/mapping_helpers/access/keyset/manor/steward,
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/effect/mapping_helpers/access/locker,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/item/key/manor,
-/obj/item/key/manor,
-/turf/open/floor/metal/barograte,
-/area/ship/middeck)
 "NS" = (
 /obj/structure/chair/pew{
 	dir = 4
@@ -6257,23 +6190,10 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church)
 "PK" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
 /obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/turf/open/openspace,
-/area/outdoors/beach)
-"PM" = (
-/obj/structure/fluff/railing/border{
-	dir = 6
-	},
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/obj/structure/industrial_lift/tram,
 /turf/open/openspace,
 /area/outdoors/beach)
 "PT" = (
@@ -6292,13 +6212,6 @@
 /obj/structure/bars,
 /turf/open/floor/blocks,
 /area/indoors/town/church)
-"PX" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/industrial_lift/tram,
-/turf/open/openspace,
-/area/outdoors/beach)
 "PY" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -6662,6 +6575,7 @@
 	},
 /obj/structure/fluff/railing/border,
 /obj/structure/industrial_lift/tram,
+/obj/machinery/light/fueledstreet/midlamp,
 /turf/open/openspace,
 /area/outdoors/beach)
 "Sc" = (
@@ -6812,12 +6726,6 @@
 	},
 /turf/open/floor/hay,
 /area/ship/topdeck)
-"SY" = (
-/obj/structure/industrial_lift/tram{
-	fake = 1
-	},
-/turf/open/openspace,
-/area/outdoors/beach)
 "Tb" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -6826,12 +6734,6 @@
 /area/outdoors/beach)
 "Tc" = (
 /obj/structure/table/wood/reinforced_alt,
-/obj/structure/lever{
-	redstone_id = "VoyageMerchantBack";
-	pixel_x = 1;
-	pixel_y = 13;
-	layer = 3
-	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
 /area/ship/middeck)
@@ -7484,15 +7386,6 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
-"WQ" = (
-/obj/structure/closet/crate/drawer/inn{
-	pixel_y = 0
-	},
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/storage/keyring,
-/obj/item/storage/keyring,
-/turf/open/floor/ruinedwood/chevron,
-/area/ship/middeck)
 "WX" = (
 /obj/structure/bookcase/random/legends,
 /obj/item/book/bibble/psy,
@@ -7575,9 +7468,7 @@
 /turf/open/floor/wood,
 /area/ship/middeck)
 "XA" = (
-/obj/structure/fluff/walldeco/painting{
-	pixel_x = -32
-	},
+/obj/structure/fake_machine/scomm/l,
 /turf/open/floor/hexstone,
 /area/ship/middeck)
 "XE" = (
@@ -7782,7 +7673,7 @@
 /area/ship/topdeck)
 "Zf" = (
 /turf/closed/wall/mineral/pipe,
-/area/indoors/town/vault)
+/area/ship/middeck)
 "Zi" = (
 /obj/structure/chair/pew/right{
 	dir = 4
@@ -24715,9 +24606,9 @@ NT
 NT
 NT
 NT
-Il
-Il
-Il
+NT
+NT
+NT
 NT
 NT
 NT
@@ -24917,7 +24808,7 @@ NT
 NT
 NT
 NT
-Il
+NT
 NT
 NT
 NT
@@ -25119,7 +25010,7 @@ NT
 NT
 NT
 NT
-ny
+NT
 NT
 NT
 NT
@@ -25320,9 +25211,9 @@ NT
 NT
 NT
 NT
-ny
-ny
-ny
+NT
+NT
+NT
 NT
 NT
 NT
@@ -25522,9 +25413,9 @@ NT
 NT
 NT
 NT
-ny
-pc
-ny
+NT
+NT
+NT
 NT
 NT
 NT
@@ -25723,11 +25614,11 @@ NT
 NT
 NT
 NT
-ny
-ny
-tM
-ny
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -25925,11 +25816,11 @@ NT
 NT
 NT
 NT
-ny
-qv
-nG
-nG
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -26127,11 +26018,11 @@ NT
 NT
 NT
 NT
-ny
-Mf
-nG
-Mf
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -26329,11 +26220,11 @@ NT
 NT
 NT
 NT
-ny
-ny
-nG
-ny
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -26531,11 +26422,11 @@ NT
 NT
 NT
 NT
-ny
-zQ
-nG
-nG
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -26733,11 +26624,11 @@ NT
 NT
 NT
 NT
-ny
-zQ
-nG
-nG
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -26935,11 +26826,11 @@ NT
 NT
 NT
 NT
-ny
-zQ
-nG
-gN
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -27137,11 +27028,11 @@ NT
 NT
 NT
 NT
-ny
-ny
-nG
-ny
-ny
+NT
+NT
+NT
+NT
+NT
 NT
 NT
 NT
@@ -27340,9 +27231,9 @@ NT
 NT
 NT
 NT
-ny
-ny
-ny
+NT
+NT
+NT
 NT
 NT
 NT
@@ -57837,9 +57728,9 @@ BP
 iR
 ah
 hG
-WQ
+Kc
+gN
 tL
-xo
 tL
 BC
 BC
@@ -58041,7 +57932,7 @@ pI
 DS
 Kc
 nR
-NI
+tL
 tL
 BC
 BC
@@ -62271,13 +62162,13 @@ tL
 xo
 xo
 xo
-ML
-ML
-ML
+tL
+tL
+tL
 iH
-ML
-ML
-ML
+tL
+tL
+tL
 Nb
 Nb
 Nb
@@ -62479,7 +62370,7 @@ JR
 qY
 JR
 vl
-xr
+iR
 aW
 rc
 aW
@@ -62681,7 +62572,7 @@ mL
 qY
 Is
 Nz
-ML
+tL
 xo
 xo
 xo
@@ -65117,8 +65008,8 @@ BC
 BC
 BC
 Oz
-SY
-SY
+BC
+BC
 BC
 BC
 BC
@@ -66327,10 +66218,10 @@ BC
 BC
 BC
 PK
-PX
-PM
-PX
-lB
+aQ
+aQ
+aQ
+XW
 BC
 BC
 BC
@@ -66528,11 +66419,11 @@ BC
 BC
 BC
 BC
-XW
-BC
+aQ
+aQ
 Nv
-BC
-Sa
+aQ
+XW
 BC
 BC
 BC
@@ -66933,8 +66824,8 @@ BC
 BC
 BC
 Bl
-Bl
-tc
+aQ
+aQ
 aQ
 Bl
 BC
@@ -67338,7 +67229,7 @@ BC
 BC
 nv
 aQ
-aQ
+Nv
 aQ
 nv
 BC
@@ -67539,7 +67430,7 @@ BC
 BC
 BC
 Bl
-dq
+aQ
 aQ
 aQ
 Bl
@@ -105517,9 +105408,9 @@ BC
 BC
 BC
 BC
-SY
-SY
-SY
+BC
+BC
+BC
 BC
 BC
 BC
@@ -105719,7 +105610,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -105921,7 +105812,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -106123,7 +106014,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -106325,7 +106216,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -106527,7 +106418,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -106729,7 +106620,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -106931,7 +106822,7 @@ BC
 BC
 BC
 BC
-SY
+BC
 BC
 BC
 BC
@@ -107132,9 +107023,9 @@ BC
 BC
 BC
 BC
-Lq
-Lq
-Lq
+BC
+BC
+BC
 BC
 BC
 BC
@@ -107333,11 +107224,11 @@ BC
 BC
 BC
 BC
-Lq
-Lq
-Lq
-Lq
-Lq
+BC
+BC
+BC
+BC
+BC
 BC
 BC
 BC
@@ -107535,11 +107426,11 @@ BC
 BC
 BC
 BC
-Lq
-Lq
-Lq
-Lq
-Lq
+BC
+BC
+BC
+BC
+BC
 BC
 BC
 BC
@@ -107737,11 +107628,11 @@ BC
 BC
 BC
 BC
-Lq
-Lq
-Lq
-Lq
-Lq
+BC
+BC
+BC
+BC
+BC
 BC
 BC
 BC
@@ -107939,11 +107830,11 @@ BC
 BC
 BC
 BC
-Lq
-Lq
-Lq
-Lq
-Lq
+BC
+BC
+BC
+BC
+BC
 BC
 BC
 BC
@@ -108142,9 +108033,9 @@ BC
 BC
 BC
 BC
-Lq
-Lq
-Lq
+BC
+BC
+BC
 BC
 BC
 BC
@@ -145918,9 +145809,9 @@ BC
 BC
 BC
 BC
-BC
-BC
-BC
+Xg
+Xg
+Xg
 BC
 BC
 BC
@@ -146120,7 +146011,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
@@ -146322,7 +146213,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
@@ -146524,7 +146415,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
@@ -146726,7 +146617,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
@@ -146928,7 +146819,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
@@ -147130,7 +147021,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
@@ -147332,7 +147223,7 @@ BC
 BC
 BC
 BC
-BC
+Xg
 BC
 BC
 BC
