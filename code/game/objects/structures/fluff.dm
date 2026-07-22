@@ -1120,9 +1120,9 @@
 	M.remove_offsets(type)
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
-	. = ..()
 	if(pass_all_dir)
 		return TRUE
+	. = ..()
 	if(get_dir(loc, mover) == dir)
 		return FALSE
 	return TRUE
