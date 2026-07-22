@@ -1120,16 +1120,16 @@
 	M.remove_offsets(type)
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
+	. = ..()
 	if(pass_all_dir)
 		return TRUE
-	. = ..()
 	if(get_dir(loc, mover) == dir)
 		return FALSE
 	return TRUE
 
 /obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(direction == dir)
+	if(!pass_all_dir && (direction == dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 

@@ -66,6 +66,7 @@
 	magic_user = TRUE
 	spell_points = 17
 	give_bank_account = 30
+	knows_the_town = TRUE
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
@@ -141,8 +142,20 @@
 		return
 
 	var/mob/living/carbon/human/oracle = owner
-	oracle.churchannouncement()
+	oracle.oracleannouncement()
 
+/mob/living/carbon/human/proc/oracleannouncement()
+	set name = "Oracle Announcement"
+	set category = "RoleUnique.Divine"
+	if(stat)
+		return
+	if(!istype(get_area(src), /area/indoors/town/church/dreamcave))
+		to_chat(src, "<span class='warning'>I need to do this from the Dream Cave.</span>")
+		return FALSE
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Make an announcement to the faithful", "Oracle Announcement", multiline = TRUE)))
+	if(inputty)
+		priority_announce("[inputty]", title = "The Lunar Oracle Speaks", sound = 'sound/misc/bell.ogg')
+		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Oracle announcement")
 
 /// Sentinel
 
@@ -184,6 +197,7 @@
 	outfit = /datum/outfit/lunar_sentinel
 
 	give_bank_account = 30
+	knows_the_town = TRUE
 
 	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
@@ -291,6 +305,7 @@
 	outfit = /datum/outfit/lunar_champion
 
 	give_bank_account = 30
+	knows_the_town = TRUE
 
 	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
