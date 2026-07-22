@@ -2262,7 +2262,7 @@
 /area/indoors/wilderness/gallowband)
 "mY" = (
 /obj/structure/fluff/walldeco/wantedposter/r,
-/turf/open/floor/dirt/road,
+/turf/open/floor/cobblerock,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "nd" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2831,6 +2831,10 @@
 "qL" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /turf/open/floor/dirt/road,
+/area/outdoors/wilderness/safe/gallowband_fort)
+"qM" = (
+/obj/structure/fluff/walldeco/wantedposter/l,
+/turf/open/floor/cobblerock,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "qN" = (
 /obj/structure/flora/tree,
@@ -3549,6 +3553,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"uG" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "uI" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/dirt,
@@ -6220,6 +6228,7 @@
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Jp" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
+/obj/structure/closet/crate/chest/crate,
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "Jr" = (
@@ -7871,6 +7880,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Ta" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet/crate/chest/crate,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "Tc" = (
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe)
@@ -8087,6 +8101,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"Ud" = (
+/obj/structure/closet/crate/chest/crate,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "Ug" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
@@ -8250,7 +8268,7 @@
 /obj/structure/gate/bars/preopen{
 	redstone_id = "fgfortnorth"
 	},
-/turf/open/floor/dirt/road,
+/turf/open/floor/cobblerock,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "Vi" = (
 /obj/structure/stairs/stone{
@@ -16034,7 +16052,7 @@ YM
 YM
 YM
 YM
-Iz
+gr
 ih
 tS
 tS
@@ -16236,8 +16254,8 @@ YM
 YM
 YM
 pg
-Iz
-Iz
+gr
+gr
 yi
 Mu
 Iz
@@ -16452,9 +16470,9 @@ Iz
 Iz
 Sr
 Sr
+ZH
+ZH
 Sr
-ZH
-ZH
 Iz
 iv
 ZV
@@ -17448,7 +17466,7 @@ RL
 ax
 WW
 Tm
-Iz
+gr
 Iz
 Iz
 aF
@@ -18663,10 +18681,10 @@ wq
 Iz
 Iz
 Iz
-pF
+gd
+gr
 Iz
-Iz
-Iz
+gr
 Iz
 Iz
 Iz
@@ -18857,9 +18875,9 @@ YM
 uh
 iz
 iz
-Iz
-pF
-Iz
+ZV
+gd
+gr
 Iz
 Iz
 Iz
@@ -19077,9 +19095,9 @@ Iz
 Iz
 Iz
 Iz
-Iz
-pF
-Iz
+gr
+gd
+gr
 Iz
 Iz
 Kc
@@ -19664,7 +19682,7 @@ YM
 YM
 YM
 ZV
-hd
+gd
 Iz
 Iz
 Iz
@@ -28415,7 +28433,7 @@ ZX
 ZX
 EV
 ud
-ID
+Ud
 ZX
 YM
 YM
@@ -28617,7 +28635,7 @@ ZX
 Jp
 Gg
 ID
-Gg
+Ta
 ZX
 YM
 YM
@@ -28816,7 +28834,7 @@ Xt
 YM
 YM
 ZX
-ID
+Ud
 Bz
 Gg
 nm
@@ -29220,7 +29238,7 @@ kw
 YM
 YM
 ZX
-ID
+Ud
 CV
 Gg
 Hn
@@ -59450,12 +59468,12 @@ Iz
 Iz
 Iz
 Vh
+tM
+tM
+qM
+xH
 Iz
-Iz
-zY
-Iz
-Iz
-Iz
+tM
 pp
 JD
 JD
@@ -59648,16 +59666,16 @@ tM
 tM
 xH
 tM
+tM
+xH
+xH
 Iz
 Iz
+xH
+tM
 Iz
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
-Iz
+xH
+xH
 xR
 JD
 JD
@@ -59852,12 +59870,12 @@ xH
 xq
 mY
 Iz
+tM
 Iz
+xH
+uG
 Iz
-Iz
-xq
-Iz
-Iz
+tM
 Iz
 Iz
 xR
