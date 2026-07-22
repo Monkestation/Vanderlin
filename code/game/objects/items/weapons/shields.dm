@@ -228,7 +228,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	design_chosen = FALSE
-	item_weight = 2 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 /obj/item/weapon/shield/tower/metal/getonmobprop(tag)
 	if(tag)
