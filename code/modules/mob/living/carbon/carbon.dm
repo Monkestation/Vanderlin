@@ -80,7 +80,7 @@
 	AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 
 	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //13% damage reduction per level
-	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
+	var/damage = ((levels * rand(20, 35)) * encumbrance_multiplier) ** 1.5
 	damage *= skill_modifier
 	if(damage && apply_damage(damage, BRUTE, affecting.body_zone, run_armor_check(affecting, BLUNT), damage_type = BCLASS_BLUNT))
 		if(levels > 1)
@@ -972,7 +972,7 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			return
-		if((health <= hardcrit_threshold || undergoing_nervous_system_failure()) && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+		if(health <= hardcrit_threshold && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
 			set_stat(HARD_CRIT)
 		else if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
@@ -1011,6 +1011,7 @@
 		organ.current_blood = clamp(adjust_to, current_blood, organ.max_blood_storage)
 
 	pump_heart(forced_pump = 1.3)
+	set_heartattack(FALSE)
 
 	return ..()
 

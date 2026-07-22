@@ -27,7 +27,7 @@
 
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 
-/obj/item/organ/lungs/applyOrganDamage(d, maximum)
+/obj/item/organ/lungs/applyOrganDamage(damage_amount, maximum)
 	. = ..()
 	if(!.)
 		return

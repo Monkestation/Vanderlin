@@ -113,7 +113,7 @@
 	secondary_direction = directions[choice]
 
 /obj/structure/minecart_rail/proc/rotate_direction(mob/user)
-	var/choice = browser_input_list(user, "Rotate the rail towards a direction.", src, list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
+	var/choice = browser_input_list(user, "Rotate the rail towards a direction.", "[name]", list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
 	if(!choice)
 		return
 

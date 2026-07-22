@@ -90,7 +90,8 @@
 		TRAIT_SEEPRICES,
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
-		TRAIT_OLDPARTY
+		TRAIT_OLDPARTY,
+		TRAIT_VIRGIN,
 	)
 
 /datum/job/magician/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -101,8 +102,6 @@
 
 	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
 		spawned.grant_language(/datum/language/undead)
-
-	spawned.virginity = TRUE
 
 	if(spawned.gender == MALE && spawned.dna?.species  && spawned.dna.species.id != SPEC_ID_MEDICATOR)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/wizard()

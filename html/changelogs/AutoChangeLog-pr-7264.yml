@@ -1,4 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - rscdel: "Prisoners no longer start masked."

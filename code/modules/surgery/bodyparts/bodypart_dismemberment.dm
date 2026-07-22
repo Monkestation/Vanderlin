@@ -84,9 +84,9 @@
 				if(stress2give == /datum/stress_event/viewdismember)
 					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 						continue
-					if(CA.has_quirk(/datum/quirk/vice/maniac))
+					if(CA.has_quirk(/datum/quirk/vice/addiction/sadist))
 						CA.add_stress(/datum/stress_event/viewdismembermaniac)
-						CA.sate_addiction(/datum/quirk/vice/maniac)
+						CA.sate_addiction(/datum/quirk/vice/addiction/sadist)
 						continue
 					if(CA.gender == FEMALE)
 						CA.add_stress(/datum/stress_event/fviewdismember)
