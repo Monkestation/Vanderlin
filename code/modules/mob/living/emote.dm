@@ -61,10 +61,6 @@
 	if((follower.job == JOB_PRIEST) || (follower.job == JOB_PRIEST_FEM))
 		ident_string += "[SPAN_GOD_ASTRATA("(PRIEST)")]"
 		bigger = TRUE
-	else if(follower.job == JOB_ORACLE)
-		ident_string += "[SPAN_GOD_NOC("(ORACLE)")]"
-		bigger = TRUE
-
 	if(follower.has_quirk(/datum/quirk/vice/godfearing))
 		ident_string += "[SPAN_GOD_GENERIC("(GODFEARING)")]"
 	/// Usually I hate not using spans properly, but in this case it's going to make my life easier.
