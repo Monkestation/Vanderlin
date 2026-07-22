@@ -8,7 +8,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	item_weight = 300 GRAMS
 	///How many things fit on this plate?
-	var/max_items = 2
+	var/max_items = 3
 	///The offset from side to side the food items can have on the plate
 	var/max_x_offset = 4
 	///The max height offset the food can reach on the plate
@@ -61,7 +61,7 @@
 	if(item_flags & IN_STORAGE)
 		to_chat(user, span_warning("I cannot reach [src]."))
 		return
-	if(!istype(I, /obj/item/reagent_containers/food) && !istype(I, /obj/item/reagent_containers/glass/cup) && !istype(I, /obj/item/reagent_containers/glass/bowl))
+	if(!istype(I, /obj/item/kitchen/fork) && !istype(I, /obj/item/reagent_containers/food) && !istype(I, /obj/item/reagent_containers/glass/cup) && !istype(I, /obj/item/reagent_containers/glass/bowl))
 		to_chat(user, span_notice("[src] isn't made to carry that!"))
 		return
 	if(contents.len >= max_items)
