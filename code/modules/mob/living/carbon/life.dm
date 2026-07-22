@@ -172,8 +172,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
 		if(drunkenness >= 1)
 			SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-			if(has_quirk(/datum/quirk/vice/alcoholic))
-				sate_addiction(/datum/quirk/vice/alcoholic)
+			if(has_quirk(/datum/quirk/vice/addiction/alcoholic))
+				sate_addiction(/datum/quirk/vice/addiction/alcoholic)
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
@@ -343,7 +343,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!needs_heart())
 		return FALSE
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!heart || (heart.organ_flags & ORGAN_SYNTHETIC))
+	if(!heart || IS_ROBOTIC_ORGAN(heart))
 		return FALSE
 	return TRUE
 
@@ -414,13 +414,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 *	The mob tries to go to sleep or IS sleeping
 *
 *	Accounts for...
-*	TRAIT_NOSLEEP
+*	TRAIT_SLEEPIMMUNE
 *	CANT_SLEEP_IN
 *	Hunger and Hydration.
 */
 
 /mob/living/carbon/proc/handle_sleep()
-	if(HAS_TRAIT(src, TRAIT_NOSLEEP))
+	if(HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 		return
 	var/cant_fall_asleep = FALSE
 	var/cause = "I just can't..."
@@ -462,10 +462,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			if(toxloss)
 				adjustToxLoss(-(sleepy_mod * 0.15), FALSE, TRUE)
 				. |= BODYPART_LIFE_UPDATE_HEALTH
-			if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+			if(eyesclosed && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 				Sleeping(300)
 		tiredness = 0
-	else if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+	else if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 		// Resting on a bed or something
 		if(buckled?.sleepy)
 			if(eyesclosed && !cant_fall_asleep || (eyesclosed && !(fallingas >= 10 && cant_fall_asleep)))

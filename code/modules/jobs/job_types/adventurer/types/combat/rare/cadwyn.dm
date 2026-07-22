@@ -43,6 +43,8 @@
 	total_positions = 1
 	roll_chance = 10
 	is_recognized = TRUE
+	honorary = "Brother"
+	honorary_f = "Sister"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/cadwyn
 

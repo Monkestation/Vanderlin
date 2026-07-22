@@ -382,22 +382,27 @@
 /obj/item/bodypart/proc/kill_limb()
 	if(!can_decay())
 		return
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(!already_rot)
-		ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && !already_rot)
-		owner.update_body()
-	else
-		update_icon_dropped()
 
-/obj/item/bodypart/proc/revive_limb()
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(already_rot)
-		REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && already_rot)
+	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
+	ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If we were already rotten, no need to update
+	if(was_rotten)
+		return
+
+	owner?.update_body()
+	update_icon_dropped()
+
+/obj/item/bodypart/proc/revive_limb(update_icon = FALSE)
+	REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If it still is rotten, no need to update
+	if(HAS_TRAIT(src, TRAIT_ROTTEN))
+		return
+
+	if(owner && update_icon)
 		owner.update_body()
-	else
-		update_icon_dropped()
+	update_icon_dropped()
 
 /// Adding/removing germs
 /obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
@@ -431,7 +436,7 @@
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE))
+		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/15)), updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(can_decay(passed_temp))
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
@@ -484,7 +489,7 @@
 	if(ishuman(owner) && bare_organ_bonus)
 		var/mob/living/carbon/human/human_owner = owner
 		for(var/obj/item/clothing/clothes_check as anything in human_owner.clothingonpart(src))
-			if(clothes_check.armor.getRating(WOUND))
+			if(clothes_check.get_armor().get_rating(WOUND))
 				bare_organ_bonus = 0
 				break
 
@@ -602,10 +607,6 @@
 		if(injury.damage <= 0)
 			qdel(injury)
 			continue
-
-		// Bleeding
-		if(owner)
-			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
 
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount

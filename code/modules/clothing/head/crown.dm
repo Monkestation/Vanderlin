@@ -172,9 +172,9 @@
 /obj/item/clothing/head/crown/circlet/sleepless/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_NOSLEEP,"Fatal Insomnia")
+		ADD_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
 	else
-		REMOVE_TRAIT(user, TRAIT_NOSLEEP,"Fatal Insomnia")
+		REMOVE_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
 
 //............... Stink Immunity Circlet ............... //
 /obj/item/clothing/head/crown/circlet/stink

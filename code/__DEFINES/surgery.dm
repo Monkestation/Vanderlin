@@ -1,5 +1,7 @@
-#define ORGAN_ORGANIC 1
-#define ORGAN_ROBOTIC 2
+/// Helper to figure out if an organ is organic
+#define IS_ORGANIC_ORGAN(organ) (organ.organ_flags & ORGAN_ORGANIC)
+/// Helper to figure out if an organ is robotic
+#define IS_ROBOTIC_ORGAN(organ) (organ.organ_flags & ORGAN_ROBOTIC)
 
 #define BODYPART_ORGANIC 1
 #define BODYPART_ROBOTIC 2

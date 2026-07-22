@@ -1,5 +1,6 @@
 /datum/job/archivist
 	title = JOB_ARCHIVIST
+	alt_titles = list("Oracle", "Librarian", "Divination")
 	tutorial = "A well-traveled and well-learned seeker of wisdom, the Archivist bears the mark of Noc's influence.\
 	Tasked with recording the court's events and educating the ungrateful whelps the monarch calls heirs.\
 	Your work may go unappreciated now, but one dae historians will sing of your dedication and insight."
@@ -50,13 +51,9 @@
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
+		TRAIT_NOBLE_POWER,
+		TRAIT_VIRGIN,
 	)
-
-/datum/job/archivist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-
-	spawned.virginity = TRUE
 
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(

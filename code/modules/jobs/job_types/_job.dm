@@ -3,6 +3,10 @@
 	var/enabled = TRUE
 	/// The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
 	var/title = "NOPE"
+	///List of viable alternative jobs
+	var/list/alt_titles
+	/// Alternative titles selectable for female-presenting mobs
+	var/list/alt_titles_female
 	/// Visual title override
 	var/title_override = null
 	/// The title of this job given to female mobs. Fluff, not as important as [var/title].
@@ -200,6 +204,15 @@
 	/// Honorary titles appended to names. Based off pronouns
 	var/honorary
 	var/honorary_f
+
+	/// Selectable honorary prefixes (in addition to the fixed `honorary`/`honorary_f`)
+	var/list/alt_honorary
+	/// Selectable honorary prefixes for female-presenting mobs
+	var/list/alt_honorary_female
+
+	var/unique_alt_honororary = FALSE
+	var/unique_alt_titles = FALSE
+
 	/// Same as above, but for suffixes. See Khan
 	var/honorary_suffix
 	var/honorary_suffix_f
@@ -273,6 +286,19 @@
 		return FALSE
 	return ..()
 
+/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
+	if(grantee.job_honorary_override)
+		grantee.honorary = grantee.job_honorary_override
+	else if(honorary_f && grantee.pronouns == SHE_HER)
+		grantee.honorary = honorary_f
+	else if(honorary)
+		grantee.honorary = honorary
+
+	if(honorary_suffix)
+		grantee.honorary_suffix = honorary_suffix
+	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
+		grantee.honorary_suffix = honorary_suffix_f
+
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
 
@@ -291,6 +317,19 @@
 	SHOULD_NOT_SLEEP(TRUE) // Don't sleep ticker
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
+
+	var/list/player_sel
+	if(title in player_client?.prefs?.alt_job_selections)
+		player_sel = player_client?.prefs?.alt_job_selections[title]
+
+	if(length(player_sel))
+		var/chosen_title = player_sel["title"]
+		if(chosen_title && (chosen_title in (list(title, f_title) + alt_titles + alt_titles_female)))
+			spawned.job_title_override = chosen_title
+
+		var/chosen_honorary = player_sel["honorary"]
+		if(chosen_honorary && (chosen_honorary in (list(honorary, honorary_f) + alt_honorary + alt_honorary_female)))
+			spawned.job_honorary_override = chosen_honorary
 
 	if(player_client)
 		for(var/path in GLOB.post_job_spawn_prefs)
@@ -525,7 +564,7 @@
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron
 
-	if(tennite_triumph_exclusive && !spawned.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+	if(tennite_triumph_exclusive && !spawned.client?.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
 		spawned.set_patron(/datum/patron/divine/astrata, TRUE)
 		to_chat(spawned, span_warning("I've followed the word of [old_patron.display_name ? old_patron.display_name : old_patron] in my younger years, \
 		but the path I tread todae proves only The Ten may rule!"))
@@ -755,10 +794,8 @@
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
 
-/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
-	if(mob.admin_title)
-		return mob.admin_title
 
+/datum/job/proc/get_default_title(mob/mob, ignore_pronouns = FALSE)
 	if(title_override)
 		return title_override
 
@@ -768,15 +805,16 @@
 
 	return title
 
-/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
-	if(honorary)
-		grantee.honorary = honorary
-	if(honorary_f && grantee.pronouns == SHE_HER)
-		grantee.honorary = honorary_f
-	if(honorary_suffix)
-		grantee.honorary_suffix = honorary_suffix
-	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
-		grantee.honorary_suffix = honorary_suffix_f
+/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
+	if(mob.admin_title)
+		return mob.admin_title
+
+	if(ishuman(mob))
+		var/mob/living/carbon/human/H = mob
+		if(H.job_title_override)
+			return H.job_title_override
+
+	return get_default_title(mob, ignore_pronouns)
 
 /datum/job/proc/set_spawn_and_total_positions(count)
 	return spawn_positions
@@ -1001,6 +1039,16 @@
 	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(pref_patron, /datum/patron/alternate/wurm))
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
 		if(!(tested.department_flag & OUTSIDERS))
+			return FALSE
+
+	if(species.id == SPEC_ID_SNOW_ELF)
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
+		if(!(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+			return FALSE
+
+	if(species.id == SPEC_ID_HALF_SNOW_ELF)
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
+		if(!(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
 			return FALSE
 
 	return TRUE

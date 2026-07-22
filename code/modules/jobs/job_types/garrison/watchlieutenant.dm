@@ -23,19 +23,19 @@
 /datum/attribute_holder/sheet/job/lieutenant/flail
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(20, 30)
+		/datum/attribute/skill/combat/whipsflails = list(23, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/polearm
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(20, 30)
+		/datum/attribute/skill/combat/polearms = list(23, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/sword
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(20, 30)
+		/datum/attribute/skill/combat/swords = list(23, 33)
 	)
 
 /datum/job/lieutenant
