@@ -76,6 +76,9 @@ SUBSYSTEM_DEF(mobs)
 		if(z_index in GLOB.town_z_levels)
 			the_run |= mobs_by_zlevel[z_index]
 			continue
+		if(SSmapping.level_has_any_trait(z_index, list(ZTRAIT_ALWAYS_PROCESS)))
+			the_run |= mobs_by_zlevel[z_index]
+			continue
 		var/list/clients_here = clients_by_zlevel[z_index]
 		if(!length(clients_here))
 			continue
