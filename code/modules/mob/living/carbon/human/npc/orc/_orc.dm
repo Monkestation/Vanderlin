@@ -163,10 +163,7 @@
 	if(length(quirks))
 		clear_quirks()
 	update_eyes()
-	faction = list(FACTION_ORCS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_ORCS)
 	name = "orc"
 	real_name = "orc"
 	add_traits(list(TRAIT_HEAVYARMOR, TRAIT_NOMOOD, TRAIT_NOHUNGER, TRAIT_CRITICAL_WEAKNESS), SPECIES_TRAIT)

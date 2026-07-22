@@ -43,10 +43,7 @@
 	real_name = "skeleton"
 	underwear = "Nude"
 	mob_biotypes = MOB_UNDEAD
-	faction = list(FACTION_UNDEAD)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_UNDEAD)
 	if(length(quirks))
 		clear_quirks()
 	if(dna?.species)

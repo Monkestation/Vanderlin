@@ -330,10 +330,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_RATS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_RATS)
 	if(!randomize_rous_name)
 		name = "rousman"
 		real_name = "rousman"

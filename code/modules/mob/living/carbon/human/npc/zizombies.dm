@@ -138,10 +138,7 @@
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_UNDEAD)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_UNDEAD)
 	name = "zizombie"
 	real_name = "zizombie"
 	mob_biotypes |= MOB_UNDEAD

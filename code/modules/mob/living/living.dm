@@ -1,17 +1,10 @@
-/mob/living/New(loc, ...)
-	. = ..()
+/mob/living/Initialize(mapload)
 	var/turf/turf = get_turf(loc)
 	if(turf)
-		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
-			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
-				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			faction |= FACTION_MATTHIOS
-			SSmatthios_mobs.register_mob(src)
+		if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_MATTHIOS_DUNGEON)))
+			add_faction(FACTION_MATTHIOS)
 		if(SSterrain_generation.get_island_at_location(turf))
-			faction |= "islander"
-
-/mob/living/Initialize()
+			add_faction("islander")
 	. = ..()
 	if(initial_size != RESIZE_DEFAULT_SIZE)
 		update_transform(initial_size)
@@ -39,9 +32,6 @@
 		update_z(turf.z)
 
 /mob/living/Destroy()
-	if(FACTION_MATTHIOS in faction)
-		SSmatthios_mobs.unregister_mob(src)
-
 	update_z(null)
 
 	if(LAZYLEN(status_effects))
@@ -2944,8 +2934,8 @@
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
 
-	if(src in SSmatthios_mobs.matthios_mobs)
-		SSmatthios_mobs.unregister_mob(src)
+	if(has_faction(FACTION_MATTHIOS))
+		remove_faction(FACTION_MATTHIOS)
 
 	return TRUE
 

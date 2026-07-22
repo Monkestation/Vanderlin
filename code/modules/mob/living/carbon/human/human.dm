@@ -1048,20 +1048,6 @@
 	. = ..()
 	if(attribute_sheet)
 		attributes?.add_sheet(attribute_sheet)
-	return INITIALIZE_HINT_LATELOAD
-
-/mob/living/carbon/human/species/LateInitialize()
-	. = ..()
-	var/turf/turf = get_turf(loc)
-	if(turf)
-		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
-			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
-				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			faction |= FACTION_MATTHIOS
-			SSmatthios_mobs.register_mob(src)
-		if(SSterrain_generation.get_island_at_location(turf))
-			faction |= "islander"
 
 /mob/living/carbon/human/species/after_creation()
 	. = ..()
