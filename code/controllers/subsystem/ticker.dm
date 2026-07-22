@@ -292,18 +292,20 @@ SUBSYSTEM_DEF(ticker)
 	required_jobs = list()
 	readied_jobs = list(JOB_MONARCH)
 #endif
-	for(var/V in required_jobs)
+	for(var/needed_job in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
 			if(!player || !player.client)
 				stack_trace("somehow [player] doesn't have a client, wtf?")
 				continue
-			if(player.client.prefs.job_preferences[V] == JP_HIGH)
+			if(player.client.prefs.job_preferences[needed_job] == JP_HIGH)
 				if(player.ready == PLAYER_READY_TO_PLAY)
-					if(player.client.prefs.lastclass == V)
-						if(player.IsJobUnavailable(V) != JOB_AVAILABLE)
-							to_chat(player, span_warning("You cannot be [V] and thus are not considered."))
+					if(player.client.prefs.lastclass == needed_job)//This makes no sense, but I need to sleep so I'll have to come back to it in the morning
+						var/job_status = player.IsJobUnavailable(needed_job)
+						if(job_status != JOB_AVAILABLE)
+							to_chat(player, span_warning("You cannot be [needed_job] and thus are not considered."))
+							message_admins("JOB ERROR: [key_name(player)] is unable to be [needed_job], Error [job_status]!")
 							continue
-					readied_jobs.Add(V)
+					readied_jobs.Add(needed_job)
 
 	if(CONFIG_GET(flag/ruler_required) && !vote_started)
 		if(pre_vote > 4 && !voting)

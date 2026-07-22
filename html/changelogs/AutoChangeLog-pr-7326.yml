@@ -1,0 +1,4 @@
+author: "CheffieGithub"
+delete-after: True
+changes:
+  - bugfix: "Fixed Z registrations stacking when you ghosted (scrying mostly)"

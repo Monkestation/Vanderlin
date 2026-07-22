@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/sneaking = 40,
 		/datum/attribute/skill/misc/stealing = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 35,
 	)
 
 /datum/attribute_holder/sheet/job/confessor/arbalist
@@ -27,19 +27,19 @@
 /datum/attribute_holder/sheet/job/confessor/knives
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(30, 30)
+		/datum/attribute/skill/combat/knives = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/confessor/axes
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/axesmaces = list(30, 30)
+		/datum/attribute/skill/combat/axesmaces = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/confessor/swords
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(30, 30)
+		/datum/attribute/skill/combat/swords = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/confessor/adrenal

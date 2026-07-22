@@ -131,7 +131,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
@@ -175,7 +175,7 @@
 	toggle_icon_state = TRUE
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/neck/padded
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = MINOR_CRITICALS
 	item_weight = 250 GRAMS
@@ -206,7 +206,7 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 275 GRAMS
@@ -228,7 +228,7 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 
@@ -276,7 +276,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/neck/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
@@ -321,7 +321,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 100
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/neck/gorget/copper
@@ -331,7 +331,7 @@
 	smeltresult = /obj/item/ingot/copper
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/neck/leather/good
 	max_integrity = INTEGRITY_POOR
 
 
@@ -359,7 +359,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/neck/plate
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
@@ -385,7 +385,7 @@
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/neck/gorget
@@ -404,7 +404,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/neck/plate/bad
 	body_parts_covered = NECK
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
@@ -570,7 +570,7 @@
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
 	smeltresult = /obj/item/ingot/bronze
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 
 /obj/item/clothing/neck/highcollier
 	name = "high collier"
@@ -581,7 +581,7 @@
 	body_parts_covered = NECK|MOUTH|EARS
 	slot_flags = ITEM_SLOT_NECK
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 	resistance_flags = FIRE_PROOF
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
@@ -627,7 +627,7 @@
 	desc = "A thicker piece of chain neck protection made from iron, though, this one only covers the neck and mouth when pulled up."
 	icon_state = "ihigh_collier"
 	body_parts_covered = NECK|MOUTH
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_STRONG
 	smeltresult = /obj/item/ingot/iron
 	melt_amount = 100

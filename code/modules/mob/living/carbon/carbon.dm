@@ -1504,3 +1504,23 @@
 		return TRUE
 
 	return FALSE
+
+/**
+ * This proc is used to check a mobs item slots for a type or types, returns the first item found that matches or null
+ */
+/mob/living/carbon/check_slots_for_types(list/slots, list/types)
+	if(!length(slots) || !length(types))
+		return
+
+	for(var/slot in slots)
+		var/obj/item/slot_item
+		if(slot == ITEM_SLOT_HANDS)
+			slot_item = locate() in held_items
+		else
+			slot_item = get_item_by_slot(slot)
+
+		if(!slot_item)
+			continue
+
+		if(is_type_in_list(slot_item, types))
+			return slot_item

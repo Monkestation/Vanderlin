@@ -5,6 +5,9 @@
 	var/obj/item/held_item = user.get_active_held_item()
 	if(user.cmode)
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_NECK))
+			if(check_crit_armor(BODY_ZONE_PRECISE_NECK, BCLASS_CUT))
+				to_chat(user, span_warning("I can't slit [src]'s throat, their neck is protected!"))
+				return
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				if(HAS_TRAIT(user, TRAIT_PACIFISM) && user != src)
 					to_chat(user, span_warning("I can't slit [src]'s throat, I am a pacifist!"))

@@ -15,6 +15,8 @@
 
 /datum/job/steward
 	title = JOB_STEWARD
+	alt_titles = list("Landlord", "Chamberlain")
+	alt_honorary = list("Thane")
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: \
 	You're addicted to it, and you hold the position as the King's personal treasurer of both coin and information. \
 	You know the power silver and gold has on a man's mortal soul, \
