@@ -40,7 +40,7 @@
 
 /obj/item/plate/proc/check_permitted_item(obj/item/I)
 	for(var/type_path in permitted_items_on_plate)
-		if(istype(I, type_path))
+		if(istype(I))
 			return TRUE
 	return FALSE
 
