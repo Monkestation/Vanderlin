@@ -262,7 +262,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 17 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)
