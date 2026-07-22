@@ -9,6 +9,14 @@
 	item_weight = 300 GRAMS
 	///How many things fit on this plate?
 	var/max_items = 3
+	///What can those things be?  What's allowed on a plate?
+	var/list/permitted_items_on_plate = list(
+		/obj/item/kitchen/fork,
+		/obj/item/kitchen/spoon,
+		/obj/item/reagent_containers/food,
+		/obj/item/reagent_containers/glass/cup,
+		/obj/item/reagent_containers/glass/bowl,
+		)
 	///The offset from side to side the food items can have on the plate
 	var/max_x_offset = 4
 	///The max height offset the food can reach on the plate
@@ -22,14 +30,6 @@
 	var/dirty = FALSE
 	var/cleaned = FALSE
 	var/start_dirty = FALSE
-	///Things that plates are allowed to carry
-	var/list/permitted_items_on_plate = list(
-		/obj/item/kitchen/fork,
-		/obj/item/kitchen/spoon,
-		/obj/item/reagent_containers/food,
-		/obj/item/reagent_containers/glass/cup,
-		/obj/item/reagent_containers/glass/bowl,
-		)
 
 /obj/item/plate/dirty
 	dirty = TRUE
