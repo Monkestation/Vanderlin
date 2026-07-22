@@ -435,7 +435,7 @@
 
 /datum/special_trait/burdened/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
-	ADD_TRAIT(character, TRAIT_NOSLEEP, "[type]") // can't learn any new skills
+	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, "[type]") // can't learn any new skills
 	ADD_TRAIT(character, TRAIT_NOENERGY, "[type]")
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/burdened_one)
 	character.cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'  // has a burdened vibe to it
@@ -577,7 +577,7 @@
 	weight = 25
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_quirk(/datum/quirk/vice/maniac)
+	character.add_quirk(/datum/quirk/vice/addiction/sadist)
 	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
@@ -857,7 +857,7 @@
 	ADD_TRAIT(character, TRAIT_NOBREATH, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_TOXIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOSLEEP, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_SHOCKIMMUNE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOBLOOD, BE_SPECIAL_TRAIT)
 

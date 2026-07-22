@@ -46,6 +46,7 @@
 
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON

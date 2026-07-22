@@ -5,7 +5,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = /obj/item/ingot/steel_slag
 	armor_class = AC_MEDIUM
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/scale
 	max_integrity = INTEGRITY_STANDARD
 	clothing_flags = CANT_SLEEP_IN
 	prevent_crits = ALL_EXCEPT_STAB
@@ -94,7 +94,7 @@
 	equip_delay_self = 4 SECONDS
 	max_integrity = 300
 	armor_class = AC_MEDIUM
-	armor = list("blunt" = 40, "slash" = 100, "stab" = 80, "piercing" = 40, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/scale/inqcoat/armored
 	melt_amount = 150
 	melting_material =  /datum/material/steel
 	blocksound = PLATEHIT

@@ -11,16 +11,16 @@
 	operation_flags = OPERATION_LOOPING | OPERATION_IGNORE_CLOTHES
 
 	implements = list(
-		TOOL_SUTURE = 1,
-		TOOL_HEMOSTAT = 1.25,
-		TOOL_IMPROVISED_HEMOSTAT = 1.40,
+		TOOL_HEMOSTAT = 1,
+		TOOL_SUTURE = 1.2,
+		TOOL_IMPROVISED_HEMOSTAT = 1.4,
 		/obj/item/natural/feather = 1.8,
 	)
 
 	time = 2.5 SECONDS
 
 	skill_min = SKILL_LEVEL_NOVICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
+	skill_median = (SKILL_LEVEL_APPRENTICE + SKILL_LEVEL_JOURNEYMAN) / 2
 
 	success_sound = 'sound/surgery/retractor2.ogg'
 	failure_sound = 'sound/surgery/organ2.ogg'
@@ -104,7 +104,7 @@
 		var/datum/radial_menu_choice/brute_healing = LAZYACCESS(cached_healing_options, "[BRUTE_SURGERY]")
 		if(!brute_healing)
 			brute_healing = new()
-			brute_healing.image = image(/obj/item/needle)
+			brute_healing.image = image(/obj/item/weapon/surgery/hemostat)
 			brute_healing.name = "Tend Bruises"
 			brute_healing.info = "Heal a patient's superficial bruises and cuts."
 			LAZYSET(cached_healing_options, "[BRUTE_SURGERY]", brute_healing)
@@ -293,7 +293,7 @@
 	time = 1 SECONDS
 
 	skill_min = SKILL_LEVEL_JOURNEYMAN
-	skill_median = SKILL_LEVEL_EXPERT
+	skill_median = (SKILL_LEVEL_JOURNEYMAN + SKILL_LEVEL_EXPERT) / 2
 
 	can_heal = COMBO_SURGERY
 	healing_amount = 3

@@ -27,6 +27,7 @@
 
 	outfit = /datum/outfit/sweeper
 	give_bank_account = 10
+	knows_the_town = TRUE
 	can_random = FALSE
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
