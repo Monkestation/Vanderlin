@@ -62,6 +62,12 @@ GLOBAL_LIST_EMPTY(last_words)
 
 /mob/living/proc/death(gibbed)
 	var/was_dead_before = stat == DEAD
+
+	if(prob(0.1))
+		src.playsound_local(src, 'sound/misc/dark_die.ogg', 250)
+	else
+		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
+
 	set_stat(DEAD)
 	unset_machine()
 	timeofdeath = world.time
@@ -75,11 +81,6 @@ GLOBAL_LIST_EMPTY(last_words)
 	GLOB.alive_mob_list -= src
 	if(!gibbed && !was_dead_before)
 		GLOB.dead_mob_list += src
-
-	if(prob(0.1))
-		src.playsound_local(src, 'sound/misc/dark_die.ogg', 250)
-	else
-		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
 
 	set_disgust(0)
 	SetSleeping(0)
@@ -138,7 +139,7 @@ GLOBAL_LIST_EMPTY(last_words)
 
 
 /mob/living/proc/prepare_deathsight_message()
-	var/area_of_death = lowertext(get_area_name(src))
+	var/area_of_death = LOWER_TEXT(get_area_name(src))
 	var/locale = "a locale wreathed in enigmatic fog"
 	switch (area_of_death) // we're deliberately obtuse with this.
 		if ("mountains", "mt decapitation", "malum's anvil forest", "malum's anvil under lower caves", "malum's anvil cave building", "malum's anvil lower dungeon", "malum's anvil surface building", "malum's anvil hidden grove", "malum's anvil peak")

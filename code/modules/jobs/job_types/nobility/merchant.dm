@@ -16,6 +16,7 @@
 
 /datum/job/merchant
 	title = JOB_MERCHANT
+	alt_titles = list("Hawker", "Fence", "Grifter", "Mercator", "Pawnbroker")
 	tutorial = "Born a wastrel in the dirt, you clawed your way up. Either by luck or, gods forbid, effort to earn a place in the Merchant's Guild. \
 	Now, you are either a ruthless economist or a disgraced steward from distant lands. Where you came from no longer matters. \
 	What matters now is you make sure the fools around you keep buying what you sell. Everything has a price, and you shall be the beating heart of this economy."
@@ -32,6 +33,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/merchant
 	give_bank_account = 200
+	knows_the_town = TRUE
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_MERCHANT_COMPANY)
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 	exp_requirements = list(

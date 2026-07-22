@@ -80,7 +80,7 @@
 
 /obj/item/reagent_containers/glass/carafe/teapot/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay teapot"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay teapot"
 
 /obj/item/reagent_containers/glass/carafe/teapot/gold
 	name = "golden teapot"
@@ -201,7 +201,7 @@
 
 /obj/item/reagent_containers/glass/carafe/decanter/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay decanter"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay decanter"
 
 
 /* Spawning full */

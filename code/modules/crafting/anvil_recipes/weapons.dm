@@ -657,6 +657,14 @@
 	output_amount = 2
 	craftdiff = 1
 
+/datum/anvil_recipe/weapons/steel/royal
+	name = "Decorated Dagger"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/weapon/knife/dagger/steel/royal
+	output_amount = 2
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/steel/decsaber
 	name = "Decorated Sabre (+Gold Bar)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -959,6 +967,12 @@
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/silver)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/silver
+
+/datum/anvil_recipe/weapons/silver/mace
+	name = "Silver Mace (+Silver Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/weapon/mace/silver
 
 /datum/anvil_recipe/weapons/silver/rungu
 	name = "Silver Rungu (+Stick)"

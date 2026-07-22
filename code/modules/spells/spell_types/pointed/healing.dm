@@ -24,7 +24,7 @@
 	/// Wound healing modifier
 	var/wound_modifier = 0.25
 	/// Blood healing amount
-	var/blood_restoration = BLOOD_VOLUME_SURVIVE / 6
+	var/blood_restoration = BLOOD_VOLUME_SURVIVE / 15
 	/// Stuns undead
 	var/stun_undead = FALSE
 	/// What kind of healing is it?

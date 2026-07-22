@@ -12,7 +12,7 @@
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/neck/highcollier/iron,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "ad" = (
 /obj/structure/flora/newtree,
 /obj/structure/flora/newtree,
@@ -103,6 +103,12 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"aD" = (
+/obj/structure/stairs/stone{
+	dir = 4
+	},
+/turf/open/floor/herringbone,
+/area/indoors/wilderness/saint_crypt)
 "aF" = (
 /obj/structure/rack,
 /obj/item/kitchen/fork,
@@ -275,6 +281,9 @@
 /obj/structure/closet/crate/chest/wicker/random_soilson,
 /turf/open/floor/twig,
 /area/indoors/wilderness/gallowband)
+"bL" = (
+/turf/closed/mineral/bedrock,
+/area/indoors/wilderness/saint_crypt)
 "bN" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -313,7 +322,7 @@
 	pixel_y = -11
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "bV" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/grass,
@@ -485,7 +494,7 @@
 	dir = 8
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "cR" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/darker,
@@ -531,7 +540,7 @@
 /obj/structure/stone_tile/slab/cracked,
 /obj/structure/stone_tile/center/cracked,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "dg" = (
 /turf/open/floor/naturalstone,
 /area/indoors/wilderness/gallowband/garrison)
@@ -778,7 +787,7 @@
 "eu" = (
 /obj/structure/bookcase,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "ev" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -1132,7 +1141,7 @@
 "gq" = (
 /mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "gr" = (
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -1304,7 +1313,7 @@
 "hs" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "ht" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/sandstone_tile/six,
@@ -1988,6 +1997,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
 /area/indoors/dungeon)
+"lx" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/wilderness/saint_crypt)
 "lA" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -2088,7 +2101,7 @@
 /area/outdoors/wilderness)
 "mk" = (
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "ml" = (
 /obj/effect/waterfall,
 /turf/open/water/river{
@@ -2750,7 +2763,7 @@
 "qz" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "qD" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass,
@@ -2798,7 +2811,7 @@
 "qQ" = (
 /obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "qR" = (
 /obj/structure/spider/stickyweb/mirespider,
 /obj/structure/roguerock,
@@ -3491,7 +3504,7 @@
 	dir = 4
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "uk" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
@@ -3546,7 +3559,7 @@
 	pixel_y = 10
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "uv" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 8
@@ -3879,7 +3892,7 @@
 /obj/structure/bookcase/random/myths,
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "wh" = (
 /obj/structure/rack,
 /obj/item/plate,
@@ -4396,7 +4409,7 @@
 	dir = 5
 	},
 /turf/closed/wall/mineral/craftstone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "yS" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/wilderness/gallowband/garrison)
@@ -4559,6 +4572,12 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"zy" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/herringbone,
+/area/indoors/wilderness/saint_crypt)
 "zB" = (
 /turf/closed/wall/mineral/stone/window/moss,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -5096,7 +5115,7 @@
 /obj/structure/stone_tile/slab,
 /obj/structure/stone_tile/center,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "CH" = (
 /obj/structure/flora/grass/bush_meagre,
 /obj/structure/flora/grass/bush_meagre,
@@ -5106,6 +5125,10 @@
 /obj/structure/kneestingers,
 /turf/open/water/river,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"CN" = (
+/obj/structure/bookcase/random/legends,
+/turf/open/floor/herringbone,
+/area/indoors/wilderness/saint_crypt)
 "CO" = (
 /obj/effect/landmark/start/outsider{
 	dir = 4
@@ -5356,14 +5379,15 @@
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/outdoors/wilderness/outpost/vanderlin)
 "DU" = (
-/obj/structure/fluff/stonecoffin{
-	desc = "Stone Coffin holding the remains of a Ravox Saint";
-	name = "Saint's coffin"
+/obj/structure/closet/dirthole/closed{
+	bonusquality = 10
 	},
-/obj/item/clothing/head/flowercrown/salvia,
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
-/turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/obj/effect/mapping_helpers/structure/grave_spawner/t3{
+	force_consecrate = 1;
+	outfit_override = /datum/outfit/grave/unique/ravox_saint
+	},
+/turf/open/floor/dirt/road,
+/area/indoors/wilderness/saint_crypt)
 "DX" = (
 /obj/structure/bed/hay{
 	pixel_y = 14
@@ -5698,7 +5722,7 @@
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/carvedgem/opal/fancyvase,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "FQ" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/neck/psycross,
@@ -5752,7 +5776,7 @@
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/clothing/wrists/bracers/iron,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Gb" = (
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
@@ -5910,7 +5934,7 @@
 	redstone_id = "TombForest"
 	},
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "GX" = (
 /obj/effect/decal/borderfall{
 	dir = 1
@@ -5973,7 +5997,7 @@
 	pixel_y = -8
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Hi" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/floor/grass,
@@ -6586,7 +6610,7 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Kv" = (
 /obj/structure/table/wood/plain/alt,
 /obj/structure/fluff/millstone,
@@ -6622,7 +6646,7 @@
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/painting/queen,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "KH" = (
 /obj/structure/fluff/walldeco/vinez/l,
 /obj/machinery/light/fueled/torchholder/l,
@@ -7112,9 +7136,11 @@
 /area/indoors/dungeon)
 "NA" = (
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Saint's Rest"
+	},
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "NB" = (
 /turf/open/floor/sandstone_tile,
 /area/indoors/dungeon)
@@ -7223,9 +7249,7 @@
 /area/indoors/wilderness/gallowband/garrison)
 "Oh" = (
 /obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite{
-	force_consecrate = 1
-	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "Oj" = (
@@ -7308,7 +7332,7 @@
 "Ot" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Ou" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/naturalstone,
@@ -7391,6 +7415,9 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Pa" = (
+/turf/open/floor/herringbone,
+/area/indoors/wilderness/saint_crypt)
 "Pb" = (
 /obj/structure/chair/wood/alt/fancy{
 	dir = 4
@@ -7410,7 +7437,7 @@
 "Pj" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Pl" = (
 /obj/item/natural/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -7430,7 +7457,7 @@
 	pixel_y = -15
 	},
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Pp" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -7460,7 +7487,7 @@
 /area/indoors/wilderness/gallowband/garrison)
 "Pz" = (
 /turf/open/floor/carpet/purple,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "PA" = (
 /obj/effect/waterfall,
 /turf/open/water/river,
@@ -7617,7 +7644,7 @@
 /obj/structure/closet/crate/coffin,
 /obj/item/weapon/axe/steel/atgervi,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Qt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/toilet,
@@ -7733,9 +7760,8 @@
 "Rc" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/carvedgem/onyxa/snake,
-/obj/item/clothing/ring/gold/ravox,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Rd" = (
 /obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/dirt,
@@ -8920,6 +8946,9 @@
 /obj/item/weapon/sword/short/ida,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Xs" = (
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/wilderness/saint_crypt)
 "Xt" = (
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
@@ -9048,7 +9077,7 @@
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/carvedgem/rose/flower,
 /turf/open/floor/herringbone,
-/area/indoors/dungeon)
+/area/indoors/wilderness/saint_crypt)
 "Yo" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/cobblerock,
@@ -74880,15 +74909,15 @@ YM
 YM
 YM
 YM
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
+bL
+bL
+bL
+bL
+bL
+bL
+bL
+bL
+bL
 YM
 YM
 YM
@@ -75081,17 +75110,17 @@ kN
 YM
 YM
 YM
-Cx
-Cx
-RR
-RR
-RR
-RR
-Hu
-Hu
-Hu
-Cx
-Cx
+bL
+bL
+Xs
+Xs
+Xs
+Xs
+lx
+lx
+lx
+bL
+bL
 YM
 YM
 YM
@@ -75282,19 +75311,19 @@ ZL
 kN
 YM
 YM
-Cx
-Cx
-RR
-RR
+bL
+bL
+Xs
+Xs
 qQ
-lK
-lK
+Pa
+Pa
 Pn
 ac
-Hu
-RR
-Cx
-Cx
+lx
+Xs
+bL
+bL
 YM
 YM
 YM
@@ -75483,21 +75512,21 @@ Dc
 ZY
 kN
 kN
-Cx
-Cx
-Hu
-Hu
-Hu
+bL
+bL
+lx
+lx
+lx
 FP
-lK
-lK
+Pa
+Pa
 Ot
-Hu
-Hu
-Hu
-RR
-Cx
-Cx
+lx
+lx
+lx
+Xs
+bL
+bL
 YM
 YM
 YM
@@ -75685,21 +75714,21 @@ kw
 yz
 lC
 lC
-RR
-RR
-Hu
+Xs
+Xs
+lx
 CC
-Hu
-Hu
-yy
-yy
-Hu
-Hu
+lx
+lx
+aD
+aD
+lx
+lx
 eu
-PQ
-Hu
-RR
-Cx
+CN
+lx
+Xs
+bL
 YM
 YM
 YM
@@ -75889,19 +75918,19 @@ kw
 kw
 hs
 GW
-lK
+Pa
 qz
-lK
-RR
+Pa
+Xs
 mk
 mk
 mk
-RR
+Xs
 uu
 cQ
-Hu
-RR
-Cx
+lx
+Xs
+bL
 YM
 YM
 YM
@@ -76091,10 +76120,10 @@ kw
 lC
 hs
 GW
-lK
-lK
-lK
-RR
+Pa
+Pa
+Pa
+Xs
 Pz
 Pz
 Pz
@@ -76102,8 +76131,8 @@ Pj
 mk
 Kt
 Rc
-Hu
-Cx
+lx
+bL
 YM
 YM
 YM
@@ -76291,10 +76320,10 @@ ZY
 Xt
 kw
 jO
-Hu
-RR
-lK
-lK
+lx
+Xs
+Pa
+Pa
 gq
 NA
 Pz
@@ -76303,9 +76332,9 @@ Pz
 Pj
 mk
 DU
-Hu
-Hu
-Cx
+lx
+lx
+bL
 YM
 YM
 YM
@@ -76495,10 +76524,10 @@ kw
 kw
 hs
 GW
-lK
-lK
-lK
-RR
+Pa
+Pa
+Pa
+Xs
 Pz
 Pz
 Pz
@@ -76506,8 +76535,8 @@ Pj
 mk
 Kt
 KG
-RR
-Cx
+Xs
+bL
 YM
 YM
 YM
@@ -76697,19 +76726,19 @@ kw
 lC
 hs
 GW
-lK
+Pa
 qz
-lK
-Hu
+Pa
+lx
 mk
 mk
 Hh
-Hu
+lx
 uj
 bU
 yM
-RR
-Cx
+Xs
+bL
 YM
 YM
 YM
@@ -76897,21 +76926,21 @@ lt
 TW
 ZL
 Ra
-RR
-Hu
-Hu
+Xs
+lx
+lx
 df
-Hu
-Hu
-gU
-gU
-Hu
-Hu
+lx
+lx
+zy
+zy
+lx
+lx
 wg
 eu
-Hu
-RR
-Cx
+lx
+Xs
+bL
 YM
 YM
 YM
@@ -77099,21 +77128,21 @@ SJ
 lt
 Xt
 Ra
-Cx
-Cx
-Hu
-Hu
-Hu
+bL
+bL
+lx
+lx
+lx
 Ga
-lK
-lK
+Pa
+Pa
 Qr
-RR
-Hu
-Hu
-Hu
-Cx
-Cx
+Xs
+lx
+lx
+lx
+bL
+bL
 YM
 YM
 Xt
@@ -77302,19 +77331,19 @@ SJ
 If
 kN
 YM
-Cx
-Cx
-RR
-RR
+bL
+bL
+Xs
+Xs
 Yn
-lK
-lK
-lK
+Pa
+Pa
+Pa
 Ot
-RR
-RR
-Cx
-Cx
+Xs
+Xs
+bL
+bL
 YM
 YM
 YM
@@ -77505,17 +77534,17 @@ kN
 kN
 YM
 YM
-Cx
-Cx
-RR
-Hu
-Hu
-Hu
-Hu
-RR
-RR
-Cx
-Cx
+bL
+bL
+Xs
+lx
+lx
+lx
+lx
+Xs
+Xs
+bL
+bL
 YM
 YM
 YM
@@ -77708,15 +77737,15 @@ YM
 YM
 YM
 YM
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
-Cx
+bL
+bL
+bL
+bL
+bL
+bL
+bL
+bL
+bL
 YM
 YM
 YM

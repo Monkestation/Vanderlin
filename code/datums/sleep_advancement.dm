@@ -4,6 +4,8 @@
 #define RESTED_XP_INITIAL      500   // granted on datum creation so new chars aren't penalized
 
 /datum/sleep_adv
+	///were we a viable sleep at some point?
+	var/viable_sleep = FALSE
 	var/sleep_adv_cycle = 0
 	var/sleep_adv_points = 0
 	var/stress_amount = 0
@@ -192,7 +194,7 @@
 	for(var/skill_type in dream_skills)
 		var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 		var/already_active = rested_skill_multipliers[skill_type]
-		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
+		var/current_level = GET_MOB_SKILL_VALUE(mind.current, skill_type)
 		var/level_name = skill.description_from_level(current_level)
 		if(already_active)
 			dat += "<div class='class_bar_div'><span class='vagrant'>[skill.name] ([level_name]) - <b>1.5x active</b></span></div>"
@@ -214,8 +216,11 @@
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(TRUE)
+	viable_sleep = TRUE
 
 /datum/sleep_adv/proc/close_ui()
+	if(viable_sleep)
+		mind?.has_studied = FALSE
 	if(!mind.current)
 		return
 	mind.current << browse(null, "window=dreams")
@@ -241,7 +246,7 @@
 /datum/sleep_adv/proc/get_next_level_for_skill(skill_type)
 	if(!mind.current)
 		return 0
-	return nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type)) + 1
+	return GET_MOB_SKILL_VALUE(mind.current, skill_type) + 1
 
 /datum/sleep_adv/proc/get_skill_cost(skill_type)
 	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
@@ -267,7 +272,7 @@
 	sleep_adv_points -= get_skill_cost(skill_type)
 	cached_dream_candidates = null
 	rested_skill_multipliers[skill_type] = TRUE
-	to_chat(mind.current, span_nicegreen("You feel driven to practice [lowertext(skill.name)]... your efforts will be rewarded while you remain rested."))
+	to_chat(mind.current, span_nicegreen("You feel driven to practice [LOWER_TEXT(skill.name)]... your efforts will be rewarded while you remain rested."))
 	record_round_statistic(STATS_SKILLS_DREAMED)
 
 /datum/sleep_adv/proc/get_dream_skill_candidates(max_count = 6)
@@ -281,7 +286,7 @@
 		if(already_active)
 			weighted[skill_type] = -1
 			continue
-		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
+		var/current_level = GET_MOB_SKILL_VALUE(mind.current, skill_type)
 		weighted[skill_type] = max(1, 1 + current_level * 3)
 
 	var/list/result = list()
@@ -376,7 +381,7 @@
 /proc/can_train_combat_skill(mob/living/user, skill_type, target_skill_level)
 	if(!user.mind)
 		return FALSE
-	var/user_skill_level = nulltozero(GET_MOB_SKILL_VALUE(user, skill_type))
+	var/user_skill_level = GET_MOB_SKILL_VALUE(user, skill_type)
 	var/level_diff = target_skill_level - user_skill_level
 	if(level_diff <= 0)
 		return FALSE

@@ -11,6 +11,7 @@
 	school = SCHOOL_TRANSMUTATION
 	cooldown_time = 10 SECONDS
 	charge_required = FALSE
+	spell_flags = SPELL_UNETCHABLE
 
 	/// Our spell's requrements before we shapeshifted. Stored on shapeshift so we can restore them after unshifting.
 	var/pre_shift_requirements

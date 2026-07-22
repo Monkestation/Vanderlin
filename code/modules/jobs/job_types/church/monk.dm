@@ -90,6 +90,9 @@
 
 /datum/job/monk
 	title = JOB_ACOLYTE
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Brother")
+	alt_honorary_female = list("Sister")
 	tutorial = "Chores, exercise, prayer... and more chores. \
 	You are a humble acolyte at the temple in Vanderlin, \
 	not yet a trained guardian or an ordained priest. \
@@ -107,6 +110,7 @@
 
 	outfit = /datum/outfit/monk
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	job_bitflag = BITFLAG_CHURCH
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
@@ -115,18 +119,18 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/acolyte/old
 
 	languages = list(/datum/language/celestial)
+	traits = list(TRAIT_VIRGIN)
 
 /datum/job/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.virginity = TRUE
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
-			spawned.virginity = FALSE
+			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)

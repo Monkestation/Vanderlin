@@ -94,6 +94,9 @@
 
 /datum/job/templar
 	title = JOB_TEMPLAR
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Brother")
+	alt_honorary_female = list("Sister")
 	tutorial = "Templars are warriors who have forsaken wealth and station in the service of the church, either from fervent zeal or remorse for past sins.\
 	They are vigilant sentinels, guarding priest and altar, steadfast against heresy and shadow-beasts that creep in darkness. \
 	But in the quiet of troubled sleep, there is a question left. Does the blood they spill sanctify them, or stain them forever? If service ever demanded it, whose blood would be the price?"
@@ -110,6 +113,7 @@
 
 	outfit = /datum/outfit/templar
 	give_bank_account = 0
+	knows_the_town = TRUE
 
 	job_bitflag = BITFLAG_CHURCH
 
@@ -126,6 +130,7 @@
 		TRAIT_HEAVYARMOR,
 		TRAIT_STEELHEARTED,
 		TRAIT_MEDIUMARMOR,
+		TRAIT_VIRGIN,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
@@ -179,7 +184,7 @@
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
-			spawned.virginity = FALSE
+			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 			var/static/list/selectable = list(

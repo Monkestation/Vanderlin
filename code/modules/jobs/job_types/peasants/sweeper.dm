@@ -27,6 +27,7 @@
 
 	outfit = /datum/outfit/sweeper
 	give_bank_account = 10
+	knows_the_town = TRUE
 	can_random = FALSE
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
@@ -35,6 +36,7 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
+		TRAIT_CRATEMOVER,
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sweeper
@@ -59,3 +61,6 @@
 	ring = /obj/item/key/sweeper
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/belt/pouch
+	backpack_contents = list(
+		/obj/item/flashlight/flare/torch/lantern = 1
+	)
