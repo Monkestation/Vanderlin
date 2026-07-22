@@ -1319,10 +1319,13 @@
 /mob/living/carbon/proc/get_basic_lift()
 	if(!istype(attributes))
 		return 10
-	var/str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
-	if(str <= 0)
+
+	var/physavg = (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) / 3
+
+	if(physavg <= 0)
 		return 3
-	return max(CEILING(sqrt(str) * 3, 1), 3)
+
+	return max(CEILING(sqrt(physavg) * 3, 1), 3)
 
 /mob/living/carbon/proc/update_maximum_carry_weight()
 	maximum_carry_weight = get_basic_lift() * 10

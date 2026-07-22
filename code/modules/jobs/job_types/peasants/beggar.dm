@@ -31,6 +31,7 @@
 	spawn_positions = 15
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
+	knows_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

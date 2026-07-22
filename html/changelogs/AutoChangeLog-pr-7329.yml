@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Knowing the town on join is now controlled by a unique variable, rather than if a job has a bank account."
+  - rscadd: "Rejected Royal wretch class now starts knowing and known by the town."
