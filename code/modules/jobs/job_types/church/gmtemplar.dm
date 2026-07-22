@@ -40,6 +40,7 @@
 
 	outfit = /datum/outfit/gmtemplar
 	give_bank_account = 10
+	knows_the_town = TRUE
 
 	job_bitflag = BITFLAG_CHURCH
 
