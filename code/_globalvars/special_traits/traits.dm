@@ -1086,7 +1086,8 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
-	character.add_spell(/datum/action/innate/clench_fists, TRUE)
+	var/datum/action/innate/clench_fists/fists = new(character)
+	fists.Grant(character)
 
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
