@@ -65,6 +65,7 @@
 
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = COVERAGE_FULL
+	body_parts_access_allowed = COVERAGE_FULL
 	flags_inv = null //Exposes the chest and-or breasts.
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL

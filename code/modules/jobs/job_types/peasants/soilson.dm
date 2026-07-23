@@ -25,6 +25,7 @@
 
 /datum/job/farmer
 	title = JOB_SOILSON
+	alt_titles = list("Butcher", "Brewer", "Vinter", "Distiller", "Hogman")
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \

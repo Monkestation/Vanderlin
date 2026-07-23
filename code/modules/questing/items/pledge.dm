@@ -263,11 +263,11 @@
 /// Standalone item search used by pledge (mirrors notice_board's proc).
 /proc/search_item_types_global(query) //I coulda sworn we had this type of code before but I couldn't find it
 	var/list/results = list()
-	query = lowertext(query)
+	query = LOWER_TEXT(query)
 	for(var/obj/item/item_type as anything in subtypesof(/obj/item))
 		if(IS_ABSTRACT(item_type))
 			continue
-		var/iname = lowertext(initial(item_type.name))
+		var/iname = LOWER_TEXT(initial(item_type.name))
 		if(findtext(iname, query))
 			var/display = "[initial(item_type.name)] ([item_type])"
 			results[display] = item_type
@@ -277,11 +277,11 @@
 
 /proc/search_reagent_types_global(query)
 	var/list/results = list()
-	query = lowertext(query)
+	query = LOWER_TEXT(query)
 	for(var/datum/reagent/reagent_type as anything in subtypesof(/datum/reagent))
 		if(IS_ABSTRACT(reagent_type))
 			continue
-		var/rname = lowertext(initial(reagent_type.name))
+		var/rname = LOWER_TEXT(initial(reagent_type.name))
 		if(findtext(rname, query))
 			results[initial(reagent_type.name)] = reagent_type // type path as value
 			if(length(results) >= 20)

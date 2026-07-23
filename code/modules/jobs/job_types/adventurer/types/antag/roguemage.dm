@@ -4,7 +4,7 @@
 		STAT_INTELLIGENCE = 3,
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = -1,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms = 25,
 		/datum/attribute/skill/combat/bows = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
@@ -18,7 +18,7 @@
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/magic/arcane = 35,
 
 	)
 
@@ -58,7 +58,7 @@
 	cmode_music = 'sound/music/cmode/antag/CombatRogueMage.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	spell_points = 1
+	spell_points = 8
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/roguemage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/roguemage/old
@@ -67,7 +67,6 @@
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
 
-
 /datum/job/advclass/bandit/roguemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_OLD)
@@ -75,6 +74,24 @@
 
 	if(prob(1))
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
+
+/datum/job/advclass/bandit/roguemage/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+	)
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+	)
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
 
 /datum/outfit/bandit/roguemage
 	name = "Rogue Mage (Bandit)"
@@ -88,20 +105,3 @@
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/coif
 	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
-
-
-/datum/outfit/bandit/roguemage/post_equip(mob/living/carbon/human/H)
-	. = ..()
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-	)
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-	)
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")

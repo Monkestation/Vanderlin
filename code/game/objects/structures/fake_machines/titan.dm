@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 
 /// Check if the mob has the crown
 /obj/structure/fake_machine/titan/proc/has_crown(mob/living/carbon/human/checked_mob)
-	if(!checked_mob.head || !istype(checked_mob.head, /obj/item/clothing/head/crown/serpcrown))
+	if(!(checked_mob.head == SSroguemachine.crown) && !(checked_mob.wear_mask == SSroguemachine.crown))
 		say("You need the crown!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 		return FALSE
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 				say("[crown_holder.real_name] holds the crown!")
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				return
-			if(crown_holder.head == crown)
+			if((crown_holder.head == crown) || (crown_holder.wear_mask == crown))
 				say("[crown_holder.real_name] wears the crown!")
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				return
@@ -469,6 +469,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 
 	victim.job = new_pos
 	victim.mind?.set_assigned_role(new_pos)
+	victim.mind?.update_alt_title(new_pos)
 	if(ishuman(victim))
 		var/mob/living/carbon/human/human = victim
 		if(!HAS_TRAIT(human, TRAIT_RECRUITED) && HAS_TRAIT(human, TRAIT_FOREIGNER))

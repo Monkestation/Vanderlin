@@ -61,6 +61,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtphys
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/courtphys/old
+	tennite_triumph_exclusive = TRUE
 
 	honorary = "Lord"
 	honorary_f = "Lady"

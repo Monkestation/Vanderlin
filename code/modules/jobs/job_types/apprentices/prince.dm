@@ -27,6 +27,7 @@
 
 
 	outfit = /datum/outfit/heir
+	tennite_triumph_exclusive = TRUE
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/grant_title,

@@ -114,7 +114,7 @@
 	var/datum/world_faction/faction = faction_ref?.resolve()
 	if(faction)
 		name = "[faction.faction_name] [trader_data.name] Trader"
-		desc = "A [lowertext(trader_data.name)] trader from the [faction.faction_name]."
+		desc = "A [LOWER_TEXT(trader_data.name)] trader from the [faction.faction_name]."
 
 /mob/living/simple_animal/hostile/retaliate/trader/proc/return_to_boat()
 	returning_to_boat = TRUE

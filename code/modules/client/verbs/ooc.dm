@@ -291,10 +291,10 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		pos = search
 		search = findtext(jd, ",", pos+1)
 		if(search)
-			return lowertext(copytext(jd, pos+9, search))
+			return LOWER_TEXT(copytext(jd, pos+9, search))
 
 /client/proc/validate_oocpronouns(value)
-	value = lowertext(value)
+	value = LOWER_TEXT(value)
 
 	if (!value || trim(value) == "")
 		return TRUE

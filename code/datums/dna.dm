@@ -138,7 +138,7 @@
 			stored_dna.species = mrace //not calling any species update procs since we're a brain, not a monkey/human
 
 
-/mob/living/carbon/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null)
+/mob/living/carbon/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null, initial_set = FALSE)
 	if(mrace && has_dna())
 		var/datum/species/new_race
 		if(ispath(mrace))
@@ -148,7 +148,8 @@
 		else
 			return
 		deathsound = new_race.deathsound
-		dna.species.on_species_loss(src, new_race, pref_load)
+		if(!initial_set)
+			dna.species.on_species_loss(src, new_race, pref_load)
 		var/datum/species/old_species = dna.species
 		dna.species = new_race
 		//BODYPARTS AND FEATURES
@@ -157,7 +158,7 @@
 			dna.body_markings = deepCopyList(pref_load.body_markings)
 		dna.species.on_species_gain(src, old_species, pref_load)
 
-/mob/living/carbon/human/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null)
+/mob/living/carbon/human/set_species(datum/species/mrace, icon_update = TRUE, datum/preferences/pref_load = null, initial_set = FALSE)
 	if(pref_load)
 		skin_tone = pref_load.read_preference(/datum/preference/choiced/skin_tone)
 	..()
@@ -199,6 +200,8 @@
 
 /mob/living/carbon/proc/create_dna()
 	dna = new /datum/dna(src)
+	if(race)
+		dna.species = new race()
 	if(!dna.species)
 		var/datum/species/random_species = GLOB.species_list[pick(GLOB.roundstart_species)]
 		set_species(random_species, TRUE)
