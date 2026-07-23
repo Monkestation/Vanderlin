@@ -24,7 +24,7 @@
 		/obj/item/alch/transisdust,
 		)
 	///The offset from side to side the food items can have on the plate
-	var/max_x_offset = 4
+	var/max_x_offset = 5
 	///The max height offset the food can reach on the plate
 	var/max_height_offset = 5
 	///Offset of where the click is calculated from, due to how food is positioned in their DMIs.
@@ -89,6 +89,10 @@
 	if(user.transferItemToLoc(I, src, silent = FALSE))
 		I.pixel_x = I.base_pixel_x + clamp(text2num(LAZYACCESS(modifiers, ICON_X)) - 16, -max_x_offset, max_x_offset)
 		I.pixel_y = I.base_pixel_x + min(text2num(LAZYACCESS(modifiers, ICON_Y)) + placement_offset, max_height_offset)
+		if(istype(I, /obj/item/reagent_containers/glass/bottle) || istype(I, /obj/item/reagent_containers/glass/carafe))
+			I.pixel_y += 8
+		if(istype(I, /obj/item/reagent_containers/glass/cup/glassware/wineglass))
+			I.pixel_y += 6
 		to_chat(user, span_notice("You place [I] on [src]."))
 		AddToPlate(I, user)
 	else
