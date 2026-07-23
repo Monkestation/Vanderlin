@@ -33,17 +33,17 @@
 /datum/component/scrying/UnregisterFromParent()
 	switch(interact_method)
 		if("attack_self")
-			UnregisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(activate))
+			UnregisterSignal(parent, COMSIG_ITEM_ATTACK_SELF)
 		if("attack_hand")
-			UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(activate))
+			UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
 
 /datum/component/scrying/Destroy(force)
 	QDEL_NULL(scrying_eye)
 	held_user = null
 	. = ..()
 
-/datum/component/scrying/proc/activate(mob/living/user)
-	if(!pass_extra_checks())
+/datum/component/scrying/proc/activate(datum/source, mob/user)
+	if(!pass_extra_checks(user))
 		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, scry_cooldown))
@@ -172,7 +172,7 @@
 
 /datum/component/scrying/mirror
 	name = "Black Mirror"
-	vision_duration = 4 SECONDS
+	vision_duration = 6 SECONDS
 	needs_to_know = FALSE
 	needs_to_live = FALSE
 	var/obj/item/inqarticles/bmirror/parent_mirror
@@ -192,7 +192,7 @@
 	. = ..()
 
 /datum/component/scrying/mirror/activate(mob/living/user)
-	if(!pass_extra_checks())
+	if(!pass_extra_checks(user))
 		message_admins("SCRY DEBUG: EXTRA CHECKS FAIL")
 		return FALSE
 
