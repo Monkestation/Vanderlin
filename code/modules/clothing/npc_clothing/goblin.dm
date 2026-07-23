@@ -4,7 +4,7 @@
 	item_state = "plate_armor"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	smeltresult = /obj/item/ingot/iron
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/cuirass/goblin
 	allowed_race = list(SPEC_ID_GOBLIN)
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
@@ -17,7 +17,7 @@
 	icon_state = "leather_armor_item"
 	item_state = "leather_armor"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
-	armor = list("blunt" = 60, "slash" = 60, "stab" = 60,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/leather/goblin
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	armor_class = AC_LIGHT
 	max_integrity = 60
@@ -31,7 +31,7 @@
 	item_state = "cloth_armor"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	allowed_race = list(SPEC_ID_GOBLIN)
-	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/leather/goblin/bad
 	body_parts_covered = CHEST|GROIN
 	sellprice = 0
 	smeltresult = /obj/item/fertilizer/ash
@@ -41,7 +41,7 @@
 	icon_state = "leather_helm_item"
 	item_state = "leather_helm"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
-	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/leather/goblin
 	body_parts_covered = HEAD|EARS|HAIR|EYES
 	allowed_race = list(SPEC_ID_GOBLIN)
 	sellprice = 0
@@ -54,6 +54,6 @@
 	smeltresult = /obj/item/ingot/iron
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	allowed_race = list(SPEC_ID_GOBLIN)
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/plate/goblin
 	body_parts_covered = HEAD|EARS|HAIR|EYES
 	sellprice = 0

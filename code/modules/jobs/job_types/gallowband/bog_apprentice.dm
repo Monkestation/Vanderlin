@@ -49,7 +49,8 @@
 
 	traits = list(
 		TRAIT_FORAGER,
-		TRAIT_STEELHEARTED
+		TRAIT_STEELHEARTED,
+		TRAIT_GALLOWBAND
 	)
 	mind_traits = list(TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)

@@ -353,7 +353,8 @@
 	return FALSE
 
 /mob/living/IsSleeping() //If we're asleep
-	return has_status_effect(STATUS_EFFECT_SLEEPING)
+	if(!HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
+		return has_status_effect(STATUS_EFFECT_SLEEPING)
 
 /mob/living/proc/AmountSleeping() //How many deciseconds remain in our sleep
 	var/datum/status_effect/incapacitating/sleeping/S = IsSleeping()

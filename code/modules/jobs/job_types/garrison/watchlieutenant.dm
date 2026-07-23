@@ -23,19 +23,19 @@
 /datum/attribute_holder/sheet/job/lieutenant/flail
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(20, 30)
+		/datum/attribute/skill/combat/whipsflails = list(23, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/polearm
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(20, 30)
+		/datum/attribute/skill/combat/polearms = list(23, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/sword
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(20, 30)
+		/datum/attribute/skill/combat/swords = list(23, 33)
 	)
 
 /datum/job/lieutenant
@@ -61,6 +61,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)

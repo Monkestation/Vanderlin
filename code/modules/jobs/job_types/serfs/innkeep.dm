@@ -17,6 +17,7 @@
 
 /datum/job/innkeep
 	title = JOB_INNKEEP
+	alt_titles = list("Taverner")
 	tutorial = "Liquor, lodging, and lavish meals... your business is the beating heart of Vanderlin. \
 		You're the one who provides the hardworking townsfolk with a place to eat and drink their sorrows away, \
 		and accommodations for weary travelers passing through."
@@ -32,6 +33,7 @@
 
 	outfit = /datum/outfit/innkeep
 	give_bank_account = 60
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

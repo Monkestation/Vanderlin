@@ -32,6 +32,7 @@
 
 /datum/job/jester
 	title = JOB_JESTER
+	alt_titles = list("Fool", "Mime")
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. \
 	You command a position of a fool, envious of the position your superiors have upon you. \
 	Your cheap tricks and illusions of intelligence will only work for so long, \
@@ -54,6 +55,7 @@
 		/datum/action/cooldown/spell/projectile/vicious_mockery
 	)
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/jester
 

@@ -17,8 +17,8 @@
 		OB.brainmob = src
 		forceMove(OB)
 
-		ADD_TRAIT(src, TRAIT_IMMOBILIZED, BRAIN_UNAIDED)
-		ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
+	ADD_TRAIT(src, TRAIT_IMMOBILIZED, BRAIN_UNAIDED)
+	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
 
 /mob/living/brain/Destroy()
 	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
@@ -41,8 +41,8 @@
 /mob/living/brain/get_eye_protection()//no eyes
 	return 2
 
-/mob/living/brain/get_ear_protection()//no ears
-	return 2
+/mob/living/brain/get_ear_protection(ignore_deafness = FALSE)
+	return ..() + EAR_PROTECTION_HEAVY
 
 /mob/living/brain/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0)
 	return // no eyes, no flashing

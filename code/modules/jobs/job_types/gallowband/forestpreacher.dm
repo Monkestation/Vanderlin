@@ -46,6 +46,7 @@
 
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -53,7 +54,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestpreacher
 
 	traits = list(
-		TRAIT_FORAGER
+		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
 
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)

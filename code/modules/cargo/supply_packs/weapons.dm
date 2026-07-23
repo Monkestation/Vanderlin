@@ -2,6 +2,7 @@
 	group = "Weapons"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	allowed_start = FALSE
 
 // PRICESHEET: (this prices are based on aprox 1.5X before tax of prices of the player market at 11/08/25 )
 // Leather = 20 per
@@ -388,7 +389,7 @@
 	cost = 100
 	contains = /obj/item/storage/belt/pouch/bullets
 
-/datum/supply_pack/weapons/ammo/bullets
+/datum/supply_pack/weapons/ammo/aflask
 	name = "Gunpowder Flask"
 	cost = 150
 	contains = /obj/item/reagent_containers/glass/bottle/aflask

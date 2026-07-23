@@ -8,6 +8,7 @@
 	cast_range = 1
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
+	spell_flags = SPELL_UNETCHABLE
 
 /datum/action/cooldown/spell/adopt_child/can_cast_spell(feedback)
 	. = ..()

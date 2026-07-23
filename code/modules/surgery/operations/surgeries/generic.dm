@@ -64,7 +64,7 @@
 	)
 
 /datum/surgery_operation/limb/incise_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
-	limb.create_injury(WOUND_SLASH, 65, surgical = TRUE)
+	limb.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO / 3, surgical = TRUE)
 
 	if(!limb.bleeds)
 		return ..()
@@ -151,7 +151,8 @@
 	return image(/obj/item/weapon/surgery/cautery)
 
 /datum/surgery_operation/limb/close_skin/all_required_strings()
-	return ..() + list("the limb must have skin")
+	. = ..()
+	. += "the limb must have skin"
 
 /datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
 	return LIMB_HAS_SKIN(limb) && limb.get_incision()
