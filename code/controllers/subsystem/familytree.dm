@@ -136,7 +136,7 @@ SUBSYSTEM_DEF(familytree)
 				assigned = AssignNewlyWed(H)
 
 		if(FAMILY_FULL)
-			if(H.virginity || H.age == AGE_CHILD)
+			if(HAS_TRAIT(H, TRAIT_VIRGIN) || H.age == AGE_CHILD)
 				assigned = AssignToHouse(H, H.family_adoption_pref)
 			else
 				assigned = AssignToFamily(H)
@@ -170,7 +170,7 @@ SUBSYSTEM_DEF(familytree)
 				else
 					AssignNewlyWed(H)
 			if(FAMILY_FULL)
-				if(H.virginity || H.age == AGE_CHILD)
+				if(HAS_TRAIT(H, TRAIT_VIRGIN) || H.age == AGE_CHILD)
 					AssignToHouse(H, H.family_adoption_pref)
 				else
 					AssignToFamily(H)

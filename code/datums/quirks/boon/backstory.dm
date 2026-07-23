@@ -107,6 +107,7 @@
 		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = initial(B.stat_reduction)))
 
 	H.adjust_skill_exp_multiplier(initial(B.granted_skill), -initial(B.xp_multiplier))
+	return ..()
 
 /datum/backstory
 	/// The name of the backstory shown to players

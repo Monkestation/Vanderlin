@@ -1019,6 +1019,8 @@
 		set_suicide(FALSE)
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
 		timeofdeath = 0
+		if(getOrganLoss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_DEATH)
+			setOrganLoss(ORGAN_SLOT_BRAIN, BRAIN_DAMAGE_DEATH - 1)
 		updatehealth() //then we check if the mob should wake up.
 		if(full_heal_flags & HEAL_ADMIN)
 			get_up(TRUE)
@@ -2927,7 +2929,7 @@
 			ADD_TRAIT(src, TRAIT_DEAF, STAT_TRAIT)
 			log_combat(src, src, "died")
 			add_client_colour(/datum/client_colour/monochrome/death)
-	if(!can_hear())
+	if(HAS_TRAIT(src, TRAIT_DEAF))
 		stop_sound_channel(CHANNEL_AMBIENCE)
 	refresh_looping_ambience()
 

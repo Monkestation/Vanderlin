@@ -17,6 +17,7 @@
 	outfit = /datum/outfit/gatemaster
 	advclass_cat_rolls = list(CTAG_GATEMASTER = 20)
 	give_bank_account = 30
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGatekeeper.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
