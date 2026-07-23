@@ -12585,10 +12585,8 @@
 /turf/open/floor/tile/bfloorz,
 /area/indoors/town/bath)
 "fPE" = (
-/obj/structure/bearpelt{
-	layer = -1
-	},
 /obj/structure/chair/stool,
+/obj/structure/bearpelt,
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "fPF" = (
@@ -23845,9 +23843,7 @@
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
 	},
-/obj/structure/bearpelt{
-	layer = -1
-	},
+/obj/structure/bearpelt,
 /turf/open/floor/carpet/green,
 /area/indoors/town/adv_guild)
 "lap" = (
