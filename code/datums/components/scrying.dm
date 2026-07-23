@@ -13,6 +13,8 @@
 
 	var/mob/scry_eye/scrying_eye
 	var/mob/living/carbon/held_user
+
+	var/interact_method = "attack_self"
 	COOLDOWN_DECLARE(scry_cooldown)
 
 /datum/component/scrying/Initialize(obj/item/scrying/parent)
@@ -20,6 +22,20 @@
 	text_cooldown_fail = replacetext(text_cooldown_fail, "NAME_HERE", "\the [name]")
 	if(!parent)
 		return
+
+/datum/component/scrying/RegisterWithParent()
+	switch(interact_method)
+		if("attack_self")
+			RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(activate))
+		if("attack_hand")
+			RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(activate))
+
+/datum/component/scrying/UnregisterFromParent()
+	switch(interact_method)
+		if("attack_self")
+			UnregisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(activate))
+		if("attack_hand")
+			UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(activate))
 
 /datum/component/scrying/Destroy(force)
 	QDEL_NULL(scrying_eye)
@@ -136,9 +152,16 @@
 	vision_duration = 12 SECONDS
 	cooldown_duration = 3 SECONDS
 
+/datum/component/scrying/vampire/pass_extra_checks(mob/living/user)
+	if(!user?.mind.has_antag_datum(/datum/antagonist/vampire/lord))
+		to_chat(user, span_warning("I don't have the power to use this!"))
+		return FALSE
+	return TRUE
+
 /datum/component/scrying/telescope
 	name = "NOC Device"
 	text_cooldown_fail = "I peer into the sky but cannot focus the lens on the face of Noc. Maybe I should wait."
+	interact_method = "attack_hand"
 
 /datum/component/scrying/telescope/pass_extra_checks(mob/living/user)
 	var/mob/living/carbon/human/human_user = user
