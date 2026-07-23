@@ -51,11 +51,6 @@
 				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
 				human.add_stress(/datum/stress_event/campfire)
 
-	// else
-	// 	QDEL_NULL(proximity_monitor)
-	// 	for(var/mob/living/carbon/human/human in range(resting_range, src))
-	// 		human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
-
 	if(temperature_change)
 		propagate_temp_change(temperature_change, temperature_weight, temperature_falloff)
 
@@ -78,6 +73,15 @@
 		else
 			if(initial(fueluse) > 0)
 				. += "<span class='warning'>The fire is burned out and hungry...</span>"
+
+/obj/machinery/light/fueled/get_mechanics_examine(mob/user)
+	. = ..()
+	if(fueluse)
+		. += span_info("Click on the fire with fuel (sticks, logs, other flammable items) to add it, examine the campfire to see how much time the fuel will burn for.")
+	if(cookonme)
+		. += span_info("You can cook over the fire by using a suitable ingredient with one hand while holding a knife or wooden stake in the other.")
+	if(resting_range > 0)
+		. += span_info("Resting by this fire gradually restores energy and stamina.")
 
 
 /obj/machinery/light/fueled/extinguish()

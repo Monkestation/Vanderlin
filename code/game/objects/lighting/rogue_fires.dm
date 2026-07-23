@@ -528,12 +528,6 @@
 	resting_range = 1
 	temperature_change = 25
 
-/obj/machinery/light/fueled/campfire/get_mechanics_examine(mob/user)
-	. = ..()
-	. += span_info("Resting by a campfire gradually restores energy and stamina.")
-	. += span_info("Examine the campfire to see how much time the fuel will burn for, click on the campfire with fuel to add it to the campfire.")
-	. += span_info("You can cook over a campfire by using a suitable item with one hand while holding a knife or wooden stake in the other.")
-
 /obj/machinery/light/fueled/campfire/process()
 	..()
 	if(isopenturf(loc))
