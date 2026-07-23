@@ -159,7 +159,7 @@
 	if(user)
 		visible_message("<span class='info'>[user] opens [src].</span>")
 	playsound(src, 'sound/foley/doors/windowup.ogg', 100, FALSE)
-	climbable = TRUE
+	set_climbable(TRUE)
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)
 	pass_flags_self |= LETPASSTHROW
@@ -168,7 +168,7 @@
 	if(user)
 		visible_message("<span class='info'>[user] closes [src].</span>")
 	playsound(src, 'sound/foley/doors/windowdown.ogg', 100, FALSE)
-	climbable = FALSE
+	set_climbable(FALSE)
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)
 	pass_flags_self &= ~LETPASSTHROW
@@ -204,7 +204,7 @@
 
 /obj/structure/window/proc/force_open()
 	playsound(src, 'sound/foley/doors/windowup.ogg', 100, FALSE)
-	climbable = TRUE
+	set_climbable(TRUE)
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/window/attackby(obj/item/W, mob/user, list/modifiers)
@@ -232,13 +232,13 @@
 	if(!obj_broken)
 		attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 		new /obj/item/natural/glass/shard (get_turf(src))
-		climbable = TRUE
+		set_climbable(TRUE)
 	..()
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)
 
 /obj/structure/window/atom_fix()
 	. = ..()
-	climbable = initial(climbable)
+	set_climbable(initial(climbable))
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)

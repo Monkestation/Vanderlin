@@ -437,6 +437,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(togg)
 		icon_state = "[base_state]0"
 		obj_flags = null
+		set_is_platform(FALSE)
 		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
@@ -444,7 +445,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 				T.Entered(M)
 	else
 		icon_state = "[base_state]1"
-		obj_flags = BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+		obj_flags = BLOCK_Z_IN_UP
+		set_is_platform(TRUE)
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	if(user)
 		log_game("[user] triggered [src] at [x], [y], [z]. REDSTONE ID: [redstone_id]")

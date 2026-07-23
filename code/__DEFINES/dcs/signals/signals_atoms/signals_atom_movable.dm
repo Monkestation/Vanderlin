@@ -64,11 +64,6 @@
 /// From base of datum/element/movetype_handler/on_movement_type_trait_loss: (flag, old_movement_type)
 #define COMSIG_MOVETYPE_FLAG_DISABLED "movetype_flag_disabled"
 
-/// From base of /turf/Entered: (atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-#define COMSIG_MOVABLE_TURF_ENTERED "movable_turf_entered"
-/// From base of /turf/Exited: (atom/movable/gone, atom/new_loc)
-#define COMSIG_MOVABLE_TURF_EXITED "movable_turf_exited"
-
 /// from /mob/living/can_z_move, sent to whatever the mob is buckled to. Only ridable movables should be ridden up or down btw.
 #define COMSIG_BUCKLED_CAN_Z_MOVE "ridden_pre_can_z_move"
 	#define COMPONENT_RIDDEN_STOP_Z_MOVE 1

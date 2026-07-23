@@ -106,7 +106,18 @@
 		lock = new lock(src, lockids)
 		lockids = null
 
+	if(sellprice)
+		if(!(type in SSmerchant.staticly_setup_types))
+			if(!istype(src, /obj/item/coin))
+				SSmerchant.set_faction_sell_values(type)
+
 	. = ..() //Do this after, else mat datums is mad.
+
+	var/turf/our_turf = get_turf(src)
+
+	// if the turf is uninitialized it'll just call Entered on us
+	if(our_turf && (our_turf.flags_1 & INITIALIZED_1) && (obj_flags & BLOCK_Z_OUT_DOWN))
+		our_turf.platform_atom_count++
 
 /obj/proc/set_material_information()
 	color = initial(main_material.color)

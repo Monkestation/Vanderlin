@@ -19,7 +19,7 @@
 	effect_alpha = _effect_alpha
 
 	RegisterSignal(get_turf(target), COMSIG_ATOM_EXITED, PROC_REF(on_remove), override = TRUE)
-	RegisterSignal(get_turf(target), COMSIG_TURF_ENTERED, PROC_REF(on_add), override = TRUE)
+	RegisterSignal(get_turf(target), COMSIG_ATOM_ENTERED, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_REMOVE, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_UPDATE, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(remove_all), override = TRUE)
@@ -28,7 +28,7 @@
 	. = ..()
 	UnregisterSignal(get_turf(source), list(
 		COMSIG_ATOM_EXITED,
-		COMSIG_TURF_ENTERED,
+		COMSIG_ATOM_ENTERED,
 		COMSIG_MOB_OVERLAY_FORCE_REMOVE,
 		COMSIG_MOB_OVERLAY_FORCE_UPDATE,
 		COMSIG_QDELETING,
@@ -51,11 +51,15 @@
 /datum/element/mob_overlay_effect/proc/on_add(datum/source, atom/movable/target)
 	SIGNAL_HANDLER
 
+	if(QDELETED(target))
+		return
+
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))
 		return
-	for(var/obj/structure/S in get_turf(target))
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
+
+	var/turf/target_turf = get_turf(target)
+	if(target_turf.platform_atom_count)
+		return
 
 	if(isitem(target))
 		return ///this is ALOT of filters

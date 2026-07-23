@@ -84,7 +84,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	set_movement_registrations()
 	if(fake)
 		alpha = 0
-		obj_flags &= ~BLOCK_Z_OUT_DOWN
+		set_is_platform(FALSE)
 	else
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
@@ -108,7 +108,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 /obj/structure/industrial_lift/proc/set_movement_registrations(list/turfs_to_set)
 	for(var/turf/turf_loc as anything in turfs_to_set || locs)
 		RegisterSignal(turf_loc, COMSIG_ATOM_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
-		RegisterSignals(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
+		RegisterSignals(turf_loc, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
 
 ///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
 /obj/structure/industrial_lift/proc/unset_movement_registrations(list/turfs_to_unset)
@@ -138,7 +138,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
 	changed_gliders -= potential_rider
 
-	UnregisterSignal(potential_rider, list(COMSIG_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, COMSIG_MOVABLE_TURF_EXITED))
+	UnregisterSignal(potential_rider, list(COMSIG_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, COMSIG_ATOM_EXITING))
 
 	if(!length(held_cargo))
 		SEND_SIGNAL(src, COMSIG_TRAM_EMPTY)
@@ -157,7 +157,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	lift_load += new_lift_contents
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))
 	RegisterSignal(new_lift_contents, COMSIG_QDELETING, PROC_REF(RemoveItemFromLift))
-	RegisterSignal(new_lift_contents, COMSIG_MOVABLE_TURF_EXITED, PROC_REF(UncrossedAtomRemoveItemFromLift))
+	RegisterSignal(new_lift_contents, COMSIG_ATOM_EXITING, PROC_REF(UncrossedAtomRemoveItemFromLift))
 
 	return TRUE
 
@@ -666,12 +666,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	return TRUE
 
 /obj/structure/industrial_lift/proc/show_lift()
-	obj_flags |= BLOCK_Z_OUT_DOWN
+	set_is_platform(TRUE)
 	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	alpha = 255
 
 /obj/structure/industrial_lift/proc/hide_lift()
-	obj_flags &= ~BLOCK_Z_OUT_DOWN
+	set_is_platform(FALSE)
 	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	alpha = 0
 

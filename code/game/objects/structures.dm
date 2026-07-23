@@ -195,3 +195,29 @@
 				apply_item_colors(I, user.mind)
 				user.put_in_hands(I)
 	return TRUE
+
+
+/// Sets the BLOCK_Z_OUT_DOWN obj_flag and runs associated updates.
+/obj/structure/proc/set_is_platform(new_platform_status)
+	if((obj_flags & BLOCK_Z_OUT_DOWN) == new_platform_status)
+		return
+
+	obj_flags ^= BLOCK_Z_OUT_DOWN
+
+	var/turf/our_turf = get_turf(src)
+	if(new_platform_status)
+		our_turf.platform_atom_count++
+	else
+		our_turf.platform_atom_count--
+
+/obj/structure/proc/set_climbable(new_climbable)
+	if(new_climbable == climbable)
+		return
+
+	climbable = new_climbable
+
+	var/turf/our_turf = get_turf(src)
+	if(climbable)
+		our_turf.climbable_atom_count++
+	else
+		our_turf.climbable_atom_count--
