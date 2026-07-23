@@ -381,7 +381,7 @@
 					var/epinephrine_mod = 0
 					if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
 						epinephrine_mod += 5
-					target.adjustOxyLoss(-((medical_skill * 0.2) + epinephrine_mod))
+					target.adjustOxyLoss(-((medical_skill * 0.3) + epinephrine_mod))
 					to_chat(target, span_unconscious("I feel a breath of fresh air enter my lungs... It feels good..."))
 
 				looping = TRUE
@@ -423,12 +423,9 @@
 				var/epinephrine_mod = 0
 				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
 					epinephrine_mod += 3
-				var/heart_exposed_mod = 0
-				if(istype(they_heart) && CHECK_MULTIPLE_BITFIELDS(chest.return_surgical_state(), SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED))
-					heart_exposed_mod += 5
 
 				/// Master (55) have a 5% chance of reviving through CPR each attempt.
-				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 20, context = DICE_CONTEXT_PHYSICAL)
+				var/diceroll = diceroll(medical_skill+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 20, context = DICE_CONTEXT_PHYSICAL)
 				looping = TRUE
 
 				if(diceroll <= DICE_CRIT_FAILURE) // can't even break ribs correctly
@@ -445,18 +442,11 @@
 						 */
 						they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
 				else
-					if(heart_exposed_mod)
-						visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
-									span_notice("I massage <b>[target]</b>'s [they_heart]."), \
-									span_hear("I hear pushing."),
-									vision_distance = COMBAT_MESSAGE_RANGE, \
-									ignored_mobs = target)
-					else
-						visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
-									span_notice("I perform chest compressions on <b>[target]</b>."), \
-									span_hear("I hear pushing."),
-									vision_distance = COMBAT_MESSAGE_RANGE, \
-									ignored_mobs = target)
+					visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
+								span_notice("I perform chest compressions on <b>[target]</b>."), \
+								span_hear("I hear pushing."),
+								vision_distance = COMBAT_MESSAGE_RANGE, \
+								ignored_mobs = target)
 
 					target.pump_heart(src)
 					if(target.stat < DEAD) // No point in running the revive check
@@ -472,8 +462,6 @@
 
 					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
 						looping = FALSE
-						if(target.getOrganLoss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_DEATH)
-							target.setOrganLoss(ORGAN_SLOT_BRAIN, BRAIN_DAMAGE_DEATH - 1)
 						if(target.revive())
 							target.grab_ghost(TRUE)
 							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \

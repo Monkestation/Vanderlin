@@ -362,3 +362,36 @@
   snowyseshi:
   - rscadd: Added snow elves and half-snow elves as triumph bought species
   - balance: drow and half drow stat tweaks
+2026-07-22:
+  CheffieGithub:
+  - bugfix: Fixed Z registrations stacking when you ghosted (scrying mostly)
+  - bugfix: Cure rot doesn't leave patients green.
+  - bugfix: Revived players who were deadites no longer attack people if they left
+      the body.
+  ModDownloading:
+  - rscdel: Prisoners no longer start masked.
+  Singul0:
+  - bugfix: Fixes Master's Rod not working on any subclasses of noblemen or garrison
+  Sulaboy:
+  - rscadd: Wooden Amulets (Knife+Stick (3 sticks & 2 fiber) makes an unfinished amulet.
+      Knife+Unfinished Amulet makes whatever wooden god amulet you want.
+  dwasint:
+  - bugfix: orcs now use their proper armor values so they are on par with goblins
+      and rous
+  realforest2001:
+  - rscdel: Removes the Hollow Curse ritual.
+  - bugfix: Fixes some admin tool runtimes.
+  - bugfix: Fixed a crippling bug from the Court Agent mirror.
+2026-07-23:
+  MissyNym:
+  - map: The Bog Witch and Bog Witch Apprentice now spawn in their dinghy instead
+      of the entrance to the Terrorbog.
+  Sulaboy:
+  - balance: Maximum Encumbrance now scales off Str,Con,&End instead of just Str.
+  budgetcommander0:
+  - rscadd: Gave the Captain a steel dagger.
+  realforest2001:
+  - rscadd: Knowing the town on join is now controlled by a unique variable, rather
+      than if a job has a bank account.
+  - rscadd: Rejected Royal wretch class now starts knowing and known by the town.
+  - bugfix: Fixes a runtime with snow elf job checks.

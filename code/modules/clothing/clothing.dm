@@ -116,7 +116,7 @@
 	if(armor)
 		. += "\n<u><b>DEFENSE:</b></u>\n"
 		var/list/defense_strings = list()
-		for(var/damage_key in ARMOR_LIST_DAMAGE())
+		for(var/damage_key in ARMOR_LIST_DAMAGE)
 			var/rating = armor.get_rating(damage_key)
 			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
 		. += defense_strings.Join(" | ")
@@ -388,7 +388,7 @@
 	if(!damaged_clothes)
 		update_clothes_damaged_state(TRUE)
 	var/brokemessage = FALSE
-	var/list/armorlist = armor?.getList()
+	var/list/armorlist = get_armor().get_rating_list()
 	for(var/x in armorlist)
 		if(armorlist[x] > 0)
 			brokemessage = TRUE

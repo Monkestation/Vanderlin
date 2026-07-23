@@ -33,6 +33,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
+	knows_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard

@@ -58,7 +58,7 @@
 	//this is quadratic so expect it to scale like crazy
 	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6, source = src)
 
-	for(var/obj/item/organ/artery/artery in owner.getorganslotlist(ORGAN_SLOT_ARTERY))
+	for(var/obj/item/organ/artery/artery as anything in owner.getorganslotlist(ORGAN_SLOT_ARTERY))
 		artery.applyOrganDamage(-(bashing_lethal_heal + aggravated_heal) * level)
 
 	if(level >= 3)

@@ -128,9 +128,7 @@
 		return
 
 	for(var/mob/living/carbon/listener in hearers(5, source))
-		if(!listener.client)
-			continue
-		if(!listener.can_hear())
+		if(!listener.client || HAS_TRAIT(listener, TRAIT_DEAF))
 			continue
 		var/bypass_checks = FALSE
 		if(user == listener)

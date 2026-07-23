@@ -12,7 +12,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/pants/padded/bad
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
@@ -22,7 +22,7 @@
 	name = "leather trousers"
 	desc = "Standard leather pants for hardy workers."
 	icon_state = "leathertrou"
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/pants/leather
 	max_integrity = INTEGRITY_POOR
 	item_weight = 2.5 KILOGRAMS
 
@@ -34,7 +34,7 @@
 	name = "splint plate trousers"
 	desc = "Affordable armored pants for regular soldiers, they seem simple and their craftsmanship is solid, makes sure all stays in place with a plated codpiece."
 	icon_state = "splintlegs"
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_STANDARD
 
 /obj/item/clothing/pants/trou/leather/guard
@@ -46,7 +46,7 @@
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/pants/leather/advanced
 
 /obj/item/clothing/pants/trou/leather/advanced/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -62,7 +62,7 @@
 	dyeable = TRUE
 	max_integrity = 175
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
-	armor = list("blunt" = 65, "slash" = 50, "stab" = 25, "piercing" = 25,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/pants/padded/skirt
 
 /obj/item/clothing/pants/trou/leather/quiltedkilt/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -81,7 +81,7 @@
 	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/pants/leather/master
 
 /obj/item/clothing/pants/trou/leather/masterwork/Initialize()
 	. = ..()
@@ -132,7 +132,7 @@
 /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	desc = "Padded pants, favored by Valoria's Duelists, Legs are often a prime target in a duel, and these pants seem to have seen their fair share of it"
 	color = "#5a5a5a"
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/pants/padded
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
 
@@ -178,7 +178,7 @@
 			Those of Ossland adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
 	icon_state = "gronnleatherpants"
 	item_state = "gronnleatherpants"
-	armor = ARMOR_GRONN_LIGHT
+	armor_type = /datum/armor/pants/leather/gronn
 	max_integrity = ARMOR_INT_LEG_HARDLEATHER
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'

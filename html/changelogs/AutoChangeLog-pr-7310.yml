@@ -1,5 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - bugfix: "Cure rot doesn't leave patients green."
-  - bugfix: "Revived players who were deadites no longer attack people if they left the body."

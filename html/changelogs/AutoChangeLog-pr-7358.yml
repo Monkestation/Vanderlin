@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added the option for Noc Templars to choose between Khopesh and Flail."
