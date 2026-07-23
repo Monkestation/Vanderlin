@@ -99,18 +99,13 @@
 	else
 		eyes_dna.second_color = eye_color
 
-/obj/item/organ/eyes/mob_insert(mob/living/carbon/receiver, special, movement_flags, new_zone)
+/obj/item/organ/eyes/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	if(!.)
-		return
 
 	// Place this eye in the correct slot of the owner's eye_organs list
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
-	receiver.eye_organs.len = max(length(receiver.eye_organs), sight_index)
-	receiver.eye_organs[sight_index] = src
-
-/obj/item/organ/eyes/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
-	. = ..()
+	organ_owner.eye_organs.len = max(length(organ_owner.eye_organs), sight_index)
+	organ_owner.eye_organs[sight_index] = src
 
 	if(!(owner.status_flags & BUILDING_ORGANS))
 		if(ishuman(owner))
@@ -128,14 +123,11 @@
 		var/atom/movable/screen/eye_intent/eyet = locate() in organ_owner.hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/organ/eyes/mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+/obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
 	organ_owner.eye_organs[sight_index] = null
-
-/obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
-	. = ..()
 
 	organ_owner.update_eyes()
 	organ_owner.update_sight()

@@ -770,6 +770,7 @@
 	if(!ears)
 		ears = new()
 		ears.Insert(src)
+
 	ears.setOrganDamage(0)
 	ears.adjust_temporary_deafness(-INFINITY)
 /**

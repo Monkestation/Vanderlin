@@ -81,7 +81,7 @@
 	LAZYADD(receiver.organs_by_zone[checked_zone], src)
 	owner = receiver
 
-	on_mob_insert(receiver, special)
+	on_mob_insert(receiver, special, movement_flags)
 
 	return TRUE
 
@@ -128,7 +128,7 @@
 		bodypart_owner = bodypart
 		RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(forced_removal))
 		// Apply unique side-effects. Return value does not matter.
-		on_bodypart_insert(bodypart)
+		on_bodypart_insert(bodypart, movement_flags)
 
 	return TRUE
 
@@ -165,7 +165,7 @@
 
 	owner = null
 
-	on_mob_remove(organ_owner, special)
+	on_mob_remove(organ_owner, special, movement_flags)
 
 	return TRUE
 

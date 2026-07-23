@@ -64,7 +64,7 @@
 	add_mob_blood(C)
 
 	C.add_stress(/datum/stress_event/dismembered)
-	C.add_stress(/datum/stress_event/dismembered)
+
 	var/stress2give
 	if(!skeletonized && C.dna?.species) //we need a skeleton species for skeleton npcs
 		if(C.dna.species.id != SPEC_ID_GOBLIN && C.dna.species.id != SPEC_ID_ROUSMAN) //convert this into a define list later

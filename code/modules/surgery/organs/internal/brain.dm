@@ -50,16 +50,20 @@
 
 	var/list/datum/brain_trauma/traumas = list()
 
-/obj/item/organ/brain/mob_insert(mob/living/carbon/brain_owner, special, movement_flags, new_zone)
+/obj/item/organ/brain/on_mob_insert(mob/living/carbon/brain_owner, special, movement_flags, new_zone)
 	. = ..()
 
 	name = initial(name)
 
 	if(brainmob)
+		if(brain_owner.key)
+			brain_owner.ghostize()
+
 		if(brainmob.mind)
 			brainmob.mind.transfer_to(brain_owner)
 		else
-			brain_owner.key = brainmob.key
+			brain_owner.PossessByPlayer(brainmob.key)
+
 		QDEL_NULL(brainmob)
 
 	for(var/datum/brain_trauma/trauma as anything in traumas)
@@ -83,7 +87,7 @@
 	if(damage >= medium_threshold)
 		brain_owner.add_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+/obj/item/organ/brain/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 
 	update_brain_color(animate = FALSE) // once it's out in the world we need to make sure it's the right color

@@ -1071,17 +1071,23 @@
 
 	if(heal_flags & HEAL_TOX) //zero as second argument not automatically call updatehealth().
 		setToxLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_OXY)
 		setOxyLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_CLONE)
 		setCloneLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_BRUTE)
 		setBruteLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_BURN)
 		setFireLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_STAM)
 		adjust_stamina(-maximum_stamina, internal_regen = FALSE)
 		adjust_energy(max_energy)
+
 	if(heal_flags & HEAL_PAIN_SHOCK)
 		setPainLoss(0, FALSE, TRUE)
 		setShockStage(0, FALSE, TRUE)
@@ -1102,8 +1108,10 @@
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
+
 	if(heal_flags & HEAL_BLOOD)
 		restore_blood()
+
 	if(reagents && (heal_flags & HEAL_ALL_REAGENTS))
 		for(var/addi in reagents.addiction_list)
 			reagents.remove_addiction(addi)
