@@ -290,6 +290,7 @@
 	to_chat(owner, span_notice("You catch your reflection and can't help but admire yourself."))
 
 /datum/quirk/boon/beautiful/on_remove()
+	. = ..()
 	if(!owner)
 		return
 	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")
@@ -301,11 +302,13 @@
 	point_value = -1
 
 /datum/quirk/boon/cultural_scholar/on_spawn()
+	. = ..()
 	if(!owner)
 		return
 	ADD_TRAIT(owner, TRAIT_CULTURAL_KNOWLEDGE, "[type]")
 
 /datum/quirk/boon/cultural_scholar/on_remove()
+	. = ..()
 	if(!owner)
 		return
 	REMOVE_TRAIT(owner, TRAIT_CULTURAL_KNOWLEDGE, "[type]")
