@@ -76,15 +76,15 @@
 	LAZYADDASSOCLIST(., EXAMINE_SECT_NAME, span_larger("[get_examine_string(user, TRUE)]."))
 	// Our face
 	var/can_see_face = IsAdminGhost(user) || is_human_part_visible(src, HIDEFACE)
-	LAZYADDASSOC(., EXAMINE_SECT_FACE+0.5, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_FACE, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
 	// Our gear
-	LAZYADDASSOC(., EXAMINE_SECT_GEAR+0.5, get_examine_gear(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_GEAR, get_examine_gear(user, P, .))
 	/// Our physical aspects
-	LAZYADDASSOC(., EXAMINE_SECT_BODY+0.5, get_examine_body(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_BODY, get_examine_body(user, P, .))
 	/// Warnings
-	LAZYADDASSOC(., EXAMINE_SECT_WARNING+0.5, get_examine_warnings(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_WARNING, get_examine_warnings(user, P, .))
 	/// Our health
-	LAZYADDASSOC(., EXAMINE_SECT_HEALTH+0.5, get_examine_health(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_HEALTH, get_examine_health(user, P, .))
 
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
@@ -442,9 +442,9 @@
 	var/fire_str
 	if(on_fire)
 		fire_str = span_boldwarning("on fire!")
-		if(L?.has_quirk(/datum/quirk/vice/pyromaniac)) // living only
+		if(L?.has_quirk(/datum/quirk/vice/addiction/pyromaniac)) // living only
 			fire_str += span_boldred(" IT'S BEAUTIFUL!")
-			L.sate_addiction(/datum/quirk/vice/pyromaniac)
+			L.sate_addiction(/datum/quirk/vice/addiction/pyromaniac)
 	else if(fire_stacks + divine_fire_stacks > 0)
 		fire_str += "covered in something flammable."
 	else if(fire_stacks < 0 && !on_fire)
