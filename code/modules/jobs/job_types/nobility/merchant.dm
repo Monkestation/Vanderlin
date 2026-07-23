@@ -6,7 +6,6 @@
 		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 10,
-		/datum/attribute/skill/combat/firearms = 10,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 30,
