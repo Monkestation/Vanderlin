@@ -27,5 +27,5 @@
 	if(!blood_regen)
 		return
 	owner.adjust_nutrition(-combined_nutrition_requirement * nutrition_ratio * delta_time)
-	owner.adjust_blood_volume(CEILING(blood_regen * nutrition_ratio * delta_time, 0.1))
+	owner.adjust_blood_volume(CEILING(blood_regen * nutrition_ratio * delta_time, 0.1), maximum = BLOOD_VOLUME_NORMAL)
 	return TRUE

@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 36,
 		/datum/attribute/skill/combat/swords = 25, // their secondary weapon, could afford more training then the gun user
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,

@@ -40,6 +40,7 @@
 
 /datum/job/magician
 	title = JOB_COURT_MAGE
+	alt_titles = list("Court Abjurer", "Court Illusionist", "Grand Wyrd", "Court Conjurer", "Court Spiritualist", "Court Summoner", "Court Evocator")
 	tutorial = "A seer of dreams, a reader of stars, and a master of the arcyne. Along a band of unlikely heroes, you shaped the fate of these lands.\
 	Now the days of adventure are gone, replaced by dusty tomes and whispered prophecies. The ruler's coin funds your studies,\
 	but debts both magical and mortal are never so easily repaid. With age comes wisdom, but also the creeping dread that your greatest spell work\
@@ -57,6 +58,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/magician
 	give_bank_account = 120
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	magic_user = TRUE
@@ -89,7 +91,8 @@
 		TRAIT_SEEPRICES,
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
-		TRAIT_OLDPARTY
+		TRAIT_OLDPARTY,
+		TRAIT_VIRGIN,
 	)
 
 /datum/job/magician/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -100,8 +103,6 @@
 
 	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
 		spawned.grant_language(/datum/language/undead)
-
-	spawned.virginity = TRUE
 
 	if(spawned.gender == MALE && spawned.dna?.species  && spawned.dna.species.id != SPEC_ID_MEDICATOR)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/wizard()

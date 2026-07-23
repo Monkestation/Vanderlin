@@ -69,6 +69,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	outfit = /datum/outfit/lord
 	bypass_lastclass = TRUE
 	give_bank_account = 500
+	knows_the_town = TRUE
 	selection_color = "#7851A9"
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	can_have_apprentices = FALSE

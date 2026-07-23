@@ -5551,6 +5551,7 @@
 	pixel_y = 8
 	},
 /obj/structure/chair/stool,
+/obj/effect/landmark/start/late/bogwitch,
 /turf/open/floor/wood,
 /area/outdoors/bog/witch)
 "ebH" = (
@@ -22369,6 +22370,9 @@
 	},
 /obj/structure/fluff/railing/wood,
 /obj/structure/chair/stool,
+/obj/effect/landmark/start/late/bogwitch{
+	dir = 1
+	},
 /turf/open/floor/wood,
 /area/outdoors/bog/witch)
 "vEx" = (
@@ -24837,10 +24841,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/beach/east)
-"xXx" = (
-/obj/effect/landmark/start/late/bogwitch,
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/north)
 "xYb" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -46734,7 +46734,7 @@ thx
 (108,1,1) = {"
 bdA
 hPr
-xXx
+syJ
 syJ
 vpX
 vpX
@@ -46936,7 +46936,7 @@ thx
 (109,1,1) = {"
 bdA
 hPr
-xXx
+syJ
 syJ
 rhz
 rhz
@@ -47138,7 +47138,7 @@ thx
 (110,1,1) = {"
 bdA
 hPr
-xXx
+syJ
 jgP
 syJ
 mBE

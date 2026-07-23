@@ -3,7 +3,6 @@
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
 	var/mob/living/carbon/owner = null
-	var/status = ORGAN_ORGANIC
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 0
 	sellprice = DEFAULT_ORGAN_VALUE
@@ -22,9 +21,10 @@
 	var/current_zone = null
 	/// Body zones we can be inserted on
 	var/list/possible_zones = ALL_BODYPARTS
+	/// DO NOT add slots with matching names to different zones - it will break internal_organs_slot list!
 	var/slot
-	// DO NOT add slots with matching names to different zones - it will break internal_organs_slot list!
-	var/organ_flags = 0
+	/// Random flags that describe this organ
+	var/organ_flags = ORGAN_ORGANIC
 
 	/// Minimum amount of germ_level we gain when rotting
 	var/min_germ_factor = MIN_ORGAN_DECAY_INFECTION
@@ -142,7 +142,7 @@
 	if(interacting_with != user)
 		return NONE
 
-	if(status != ORGAN_ORGANIC)
+	if(!IS_ORGANIC_ORGAN(src))
 		return NONE
 
 	var/obj/item/reagent_containers/food/snacks/S = prepare_eat()
@@ -399,7 +399,7 @@
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
 	check_cold(passed_temp)
-	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_SYNTHETIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
+	if(IS_ROBOTIC_ORGAN(src) || CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
 		return FALSE
 	return TRUE
 
@@ -597,7 +597,7 @@
 	. += span_notice("It should be inserted in the [parse_zone(zone)].")
 
 	if(organ_flags & ORGAN_FAILING)
-		if(status == ORGAN_ROBOTIC)
+		if(IS_ROBOTIC_ORGAN(src))
 			. += span_warning("[src] seems to be broken.")
 			return
 		. += span_warning("[src] has decayed for too long, and has turned a sickly color. Only a skilled physican could restore this.")
@@ -662,11 +662,13 @@
 	return effective_efficiency
 
 ///Adjusts an organ's damage by the amount "damage_amount", up to a maximum amount, which is by default max damage. Returns the net change in organ damage.
-/obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth)	//use for damaging effects
+/obj/item/organ/proc/applyOrganDamage(damage_amount, maximum = maxHealth, required_organ_flag = NONE)	//use for damaging effects
 	if(!damage_amount) //Micro-optimization.
 		return FALSE
 	maximum = clamp(maximum, 0, maxHealth) // the logical max is, our max
 	if(maximum < damage)
+		return FALSE
+	if(required_organ_flag && !(organ_flags & required_organ_flag))
 		return FALSE
 	damage = clamp(damage + damage_amount, 0, maximum)
 	. = (damage - prev_damage) // return net damage
@@ -794,6 +796,10 @@
 			organ.regenerate_organ()
 		set_heartattack(FALSE)
 
+		// Ears have aditional var "deaf", need to update it too
+		var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+		ears.adjust_temporary_deafness(-INFINITY)
+
 		return
 
 	// Default organ fixing handling
@@ -828,12 +834,8 @@
 	if(!ears)
 		ears = new()
 		ears.Insert(src)
-	// ears.adjustEarDamage(-INFINITY, -INFINITY) // actually do: set_organ_damage(0) and deaf = 0
-
-	// heal ears after healing traits, since ears check TRAIT_DEAF trait
-	// when healing.
-	restoreEars()
-
+	ears.setOrganDamage(0)
+	ears.adjust_temporary_deafness(-INFINITY)
 /**
  * Robotic organs do not feel pain, simply for balancing reasons
  * Thus lowering the shock of IPCs and other synths is easier, as

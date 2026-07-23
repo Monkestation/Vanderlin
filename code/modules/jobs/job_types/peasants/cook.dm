@@ -30,6 +30,7 @@
 
 /datum/job/cook
 	title = JOB_COOK
+	alt_titles = list("Baker", "Griller", "Souper")
 	tutorial = "Slice, chop, and into the pot... \
 	you work closely with the innkeep to prepare meals for all the hungry mouths of Vanderlin. \
 	You've spent more nites than you can count cutting meat and vegetables until your fingers are bloody and raw, but it's honest work."
@@ -45,6 +46,7 @@
 	outfit = /datum/outfit/cook
 	display_order = JDO_COOK
 	give_bank_account = 8
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 	can_be_apprentice = TRUE
 

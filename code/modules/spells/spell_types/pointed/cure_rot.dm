@@ -73,7 +73,7 @@
 		rot.amount = 0
 
 	for(var/obj/item/bodypart/rotty in cast_on.bodyparts)
-		rotty.revive_limb()
+		rotty.revive_limb(FALSE)
 		rotty.germ_level = 0
 		rotty.update_limb()
 		if(rotty.can_be_disabled)
@@ -83,7 +83,7 @@
 		if(organs.germ_level >= INFECTION_LEVEL_ONE*0.2)
 			organs.set_germ_level(INFECTION_LEVEL_ONE*0.2)
 
-	cast_on.update_body()
+	cast_on.update_body_parts(TRUE)
 	cast_on.visible_message("<span class='notice'>The rot leaves [cast_on]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
 
 	if(cast_on.funeral)

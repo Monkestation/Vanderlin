@@ -15,7 +15,7 @@
 	default_hidden = HIDEEARS|HIDEHAIR
 	dropshrink = 0.8
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
@@ -26,7 +26,7 @@
 	icon_state = "deathface"
 	flags_inv = HIDEEARS | HIDEHAIR | HIDEFACIALHAIR
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	prevent_crits = MINOR_CRITICALS
 	item_weight = 250 GRAMS
 
@@ -64,7 +64,7 @@
 	worn_y_dimension = 64
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	resistance_flags = FIRE_PROOF // Made of metal
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/head/maille/iron
 	blocksound = CHAINHIT
 	prevent_crits = CUT_AND_MINOR_CRITS
 	break_sound = 'sound/foley/breaksound.ogg'
@@ -81,7 +81,7 @@
 	icon_state = "astratahood"
 	resistance_flags = FIRE_PROOF // Not the sun hat!
 
-	armor = ARMOR_MINIMAL
+	armor_type = /datum/armor/minimal
 	prevent_crits = MINOR_CRITICALS
 
 /obj/item/clothing/head/padded/malumhood
@@ -106,7 +106,7 @@
 	default_hidden = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	body_parts_covered = FULL_HEAD | NECK
 	prevent_crits = MINOR_CRITICALS
 
