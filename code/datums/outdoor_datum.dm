@@ -58,16 +58,12 @@ Sunlight System
 	return ..()
 
 /atom/movable/outdoor_effect/proc/disable_sunlight()
-	for(var/datum/lighting_corner/C in affecting_corners)
-		LAZYREMOVE(C.sunlight_objects, src)
-		C.get_sunlight_falloff()
-		for(var/turf/master in C.masters)
-			if(!(master.turf_flags & TURF_SUNLIGHT_QUEUED))
-				master.turf_flags |= TURF_SUNLIGHT_QUEUED
-				GLOB.SUNLIGHT_QUEUE_CORNER += master
-	if(!(source_turf.turf_flags & TURF_SUNLIGHT_QUEUED))
-		source_turf.turf_flags |= TURF_SUNLIGHT_QUEUED
-		GLOB.SUNLIGHT_QUEUE_CORNER += source_turf /* get our calculated indoor lighting */
+	for(var/datum/lighting_corner/C as anything in affecting_corners)
+		C.sunFalloff -= affecting_corners[C]
+		for(var/turf/turf in C.get_masters())
+			SSoutdoor_effects.queue_turf_corners(turf)
+
+	SSoutdoor_effects.queue_turf_corners(source_turf)
 
 	//Empty our affecting_corners list
 	affecting_corners = null
@@ -79,56 +75,48 @@ Sunlight System
 		if(SKY_VISIBLE_BORDER)
 			calc_sunlight_spread()
 
-#define GLOBAL_LIGHT_RANGE 3
+#define GLOBAL_LIGHT_RANGE 2
 
 #define HARD_SUN 0.5 /* our hyperboloidy modifyer funky times - I wrote this in like, 2020 and can't remember how it works - I think it makes a 3D cone shape with a flat top */
 /* calculate the indoor corners we are affecting */
-#define SUN_FALLOFF(C, T) (1 - CLAMP01(sqrt((C.x - T.x) ** 2 + (C.y - T.y) ** 2 - HARD_SUN) / max(1, GLOBAL_LIGHT_RANGE)))
+#define SUN_FALLOFF(C, T) (1 - CLAMP01(sqrt((C.x - T.x) ** 2 + (C.y - T.y) ** 2 - HARD_SUN) / GLOBAL_LIGHT_RANGE))
 
 /atom/movable/outdoor_effect/proc/calc_sunlight_spread()
-	var/list/turf/turfs = list()
-	var/list/corners = list() /* corners we are currently affecting */
+	var/list/datum/lighting_corner/corners = list()
+	if(source_turf)
+		var/oldlum = source_turf.luminosity
+		source_turf.luminosity = GLOBAL_LIGHT_RANGE
+		for(var/turf/T in view(GLOBAL_LIGHT_RANGE, source_turf))
+			if(IS_OPAQUE_TURF(T))
+				continue
+			if(!T.lighting_corners_initialised)
+				GENERATE_MISSING_CORNERS(T)
 
-	//Set lum so we can see things
-	var/oldLum = luminosity
-	luminosity = GLOBAL_LIGHT_RANGE
+			corners[T.lighting_corner_NE] = 0
+			corners[T.lighting_corner_SE] = 0
+			corners[T.lighting_corner_SW] = 0
+			corners[T.lighting_corner_NW] = 0
 
-	for(var/turf/T in view(CEILING(GLOBAL_LIGHT_RANGE, 1), source_turf))
-		if(IS_OPAQUE_TURF(T))
-			continue
-		if(!T.lighting_corners_initialised)
-			T.lighting_build_overlay()
-		if(!length(T.corners))
-			continue
-		corners |= T.corners
-		turfs += T
+		source_turf.luminosity = oldlum
 
-	//restore lum
-	luminosity = oldLum
+	var/list/datum/lighting_corner/new_corners = (corners - src.affecting_corners)
+	LAZYINITLIST(src.affecting_corners)
+	var/list/affecting_corners = src.affecting_corners
+	for (var/datum/lighting_corner/corner as anything in new_corners)
+		var/falloff = SUN_FALLOFF(corner, source_turf)
+		if (falloff != 0)
+			corner.sunFalloff += falloff
+			affecting_corners[corner] = falloff
+			for (var/turf/master in corner.get_masters())
+				SSoutdoor_effects.queue_turf_corners(master)
 
-	/* fix up the lists */
-	/* add ourselves and our distance to the corner */
-	LAZYINITLIST(affecting_corners)
-	var/list/L = corners - affecting_corners
-	affecting_corners += L
-	for(var/datum/lighting_corner/C as anything in L)
-		LAZYSET(C.sunlight_objects, src, SUN_FALLOFF(C, source_turf))
-		if(C.sunlight_objects[src] > C.sunFalloff) /* if are closer than current dist, update the corner */
-			C.sunFalloff = C.sunlight_objects[src]
-			for(var/turf/master in C.masters)
-				if(!(master.turf_flags & TURF_SUNLIGHT_QUEUED))
-					master.turf_flags |= TURF_SUNLIGHT_QUEUED
-					GLOB.SUNLIGHT_QUEUE_CORNER += master
+	var/list/datum/lighting_corner/gone_corners = affecting_corners - corners
+	for (var/datum/lighting_corner/corner as anything in gone_corners)
+		corner.sunFalloff -= affecting_corners[corner]
+		for (var/turf/master in corner.get_masters())
+			SSoutdoor_effects.queue_turf_corners(master)
 
-	L = affecting_corners - corners // Now-gone corners, remove us from the affecting.
-	affecting_corners -= L
-	for(var/datum/lighting_corner/C as anything in L)
-		LAZYREMOVE(C.sunlight_objects, src)
-		C.get_sunlight_falloff()
-		for(var/turf/master in C.masters)
-			if(!(master.turf_flags & TURF_SUNLIGHT_QUEUED))
-				master.turf_flags |= TURF_SUNLIGHT_QUEUED
-				GLOB.SUNLIGHT_QUEUE_CORNER += master
+	affecting_corners -= gone_corners
 
 #undef GLOBAL_LIGHT_RANGE
 #undef HARD_SUN
@@ -149,15 +137,7 @@ Sunlight System
 /turf/var/weatherproof = TRUE
 /turf/open/openspace/weatherproof = FALSE
 
-/datum/lighting_corner/var/list/sunlight_objects /* list of sunlight objects affecting this corner */
 /datum/lighting_corner/var/sunFalloff = 0 /* smallest distance to sunlight turf, for sunlight falloff */
-
-/* loop through and find our strongest sunlight value */
-/datum/lighting_corner/proc/get_sunlight_falloff()
-	sunFalloff = 0
-
-	for(var/atom/movable/outdoor_effect/S as anything in sunlight_objects)
-		sunFalloff = sunFalloff < sunlight_objects[S] ? sunlight_objects[S] : sunFalloff
 
 /turf/proc/reassess_stack()
 	if(!SSlighting.initialized && !SSoutdoor_effects.initialized)
@@ -167,15 +147,18 @@ Sunlight System
 	if(pseudo_roof && !ispath(pseudo_roof))
 		pseudo_roof = null
 
-	var/list/SunlightUpdates = list()
+	var/list/datum/lighting_corner/corners = list(
+		lighting_corner_NE,
+		lighting_corner_NW,
+		lighting_corner_SE,
+		lighting_corner_SW,
+	)
 
-	//Add ourselves (we might not have corners initialized, and this handles it)
-	SunlightUpdates += src
+	SSoutdoor_effects.queue_work |= src
 
 	for(var/datum/lighting_corner/corner in corners)
-		SunlightUpdates |= corner.masters
-
-	GLOB.SUNLIGHT_QUEUE_WORK += SunlightUpdates
+		for(var/turf/turf in corner.get_masters())
+			SSoutdoor_effects.queue_work |= turf
 
 	var/turf/T = GET_TURF_BELOW(src)
 	if(T)

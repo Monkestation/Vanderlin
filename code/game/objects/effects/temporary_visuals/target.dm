@@ -5,7 +5,7 @@
 	icon_state = "trap"
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
-	light_outer_range = 2
+	light_range = 2
 	duration = 9
 	var/duration_extra
 
@@ -105,7 +105,7 @@
 	icon = 'icons/effects/32x200.dmi'
 	icon_state = "lightning"
 	light_color = COLOR_PALE_BLUE_GRAY
-	light_outer_range = 15
+	light_range = 15
 	light_power = 25
 	duration = 12
 

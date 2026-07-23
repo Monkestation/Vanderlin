@@ -99,10 +99,7 @@
 #define DYNAMIC_LIGHTING_DISABLED 0
 /// dynamic lighting enabled
 #define DYNAMIC_LIGHTING_ENABLED 1
-/// dynamic lighting enabled even if the area doesn't require power
-#define DYNAMIC_LIGHTING_FORCED 2
-/// dynamic lighting enabled only if starlight is.
-#define DYNAMIC_LIGHTING_IFSTARLIGHT 3
+
 #define IS_DYNAMIC_LIGHTING(A) A.dynamic_lighting
 
 
@@ -156,6 +153,8 @@ GLOBAL_LIST_INIT(em_mask_matrix, EM_MASK_MATRIX)
 /// The default falloff curve for all atoms. It's a magic number you should adjust until it looks good.
 #define LIGHTING_DEFAULT_FALLOFF_CURVE 3
 
+///Object doesn't use any of the light systems. Should be changed to add a light source to the object.
+#define NO_LIGHT_SUPPORT 0
 ///Light made with the lighting datums, applying a matrix.
 #define STATIC_LIGHT 1
 ///Light made by masking the lighting darkness plane.
@@ -168,3 +167,19 @@ GLOBAL_LIST_INIT(em_mask_matrix, EM_MASK_MATRIX)
 
 /// The amount of lumcount on a tile for it to be considered dark (used to determine reading)
 #define LIGHTING_TILE_IS_DARK 0.2
+
+// Keep in mind. Lighting corners accept the bottom left (northwest) set of cords to them as input
+#define GENERATE_MISSING_CORNERS(gen_for) \
+	if (!gen_for.lighting_corner_NE) { \
+		gen_for.lighting_corner_NE = new /datum/lighting_corner(gen_for.x, gen_for.y, gen_for.z); \
+	} \
+	if (!gen_for.lighting_corner_SE) { \
+		gen_for.lighting_corner_SE = new /datum/lighting_corner(gen_for.x, gen_for.y - 1, gen_for.z); \
+	} \
+	if (!gen_for.lighting_corner_SW) { \
+		gen_for.lighting_corner_SW = new /datum/lighting_corner(gen_for.x - 1, gen_for.y - 1, gen_for.z); \
+	} \
+	if (!gen_for.lighting_corner_NW) { \
+		gen_for.lighting_corner_NW = new /datum/lighting_corner(gen_for.x - 1, gen_for.y, gen_for.z); \
+	} \
+	gen_for.lighting_corners_initialised = TRUE;

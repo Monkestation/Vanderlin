@@ -4,7 +4,7 @@
 	icon_state = "trap"
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
-	light_outer_range = 2
+	light_range = 2
 	duration = 1.2 SECONDS
 	var/explode_sound = list('sound/misc/explode/incendiary (1).ogg','sound/misc/explode/incendiary (2).ogg')
 

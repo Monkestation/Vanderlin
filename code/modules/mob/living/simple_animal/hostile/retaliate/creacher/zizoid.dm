@@ -77,7 +77,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/blood/ascended/Initialize()
 	. = ..()
-	set_light(5,5,5, l_color =  LIGHT_COLOR_RED)
+	set_light(5, 5, l_color =  LIGHT_COLOR_RED)
 	ADD_TRAIT(src, TRAIT_CRITICAL_RESISTANCE, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, INNATE_TRAIT)

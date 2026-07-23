@@ -29,7 +29,7 @@
 	// Muzzle Flash
 	light_on = FALSE
 	light_system = MOVABLE_LIGHT
-	light_outer_range = 3
+	light_range = 3
 	light_color = LIGHT_COLOR_ORANGE
 	light_power = 0.5
 	// If we can do the muzzle flash

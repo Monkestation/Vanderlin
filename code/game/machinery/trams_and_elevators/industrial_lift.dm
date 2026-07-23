@@ -145,9 +145,20 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 
 /obj/structure/industrial_lift/proc/AddItemOnLift(datum/source, atom/movable/new_lift_contents)
 	SIGNAL_HANDLER
-	var/static/list/blacklisted_types = typecacheof(list(/obj/effect, /atom/movable/outdoor_effect, /obj/structure/industrial_lift, /mob/camera, /atom/movable/lighting_object)) - typecacheof(list(/obj/effect/decal, /obj/effect/turf_decal))
+
+	var/static/list/blacklisted_types = typecacheof(
+		list(
+			/obj/effect,
+			/atom/movable/outdoor_effect,
+			/atom/movable/lighting_object,
+			/obj/structure/industrial_lift,
+			/mob/camera,
+		)
+	) - typecacheof(list(/obj/effect/decal, /obj/effect/turf_decal))
+
 	if(is_type_in_typecache(new_lift_contents, blacklisted_types) || new_lift_contents.invisibility == INVISIBILITY_ABSTRACT) //prevents the tram from stealing things like landmarks
 		return FALSE
+
 	if(new_lift_contents in lift_load)
 		return FALSE
 

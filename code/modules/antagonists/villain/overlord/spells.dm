@@ -56,7 +56,7 @@
 
 	// Add subtle visual effect
 	door.light_system = MOVABLE_LIGHT
-	door.light_outer_range = 1
+	door.light_range = 1
 	door.light_color = "#a51bc0"
 
 	RegisterSignal(parent, COMSIG_DOOR_OPENED, PROC_REF(on_door_opened))

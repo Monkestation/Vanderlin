@@ -47,7 +47,7 @@
 	nodamage = FALSE
 	speed = 0.3
 	light_color = "#e74141"
-	light_outer_range =  7
+	light_range =  7
 
 /obj/projectile/magic/bloodsteal/on_hit(target)
 	. = ..()

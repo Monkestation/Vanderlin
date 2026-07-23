@@ -1,17 +1,19 @@
 /turf/open/dungeon_trap
 	name = "dark chasm"
 	desc = "It's a long way down..."
-	baseturfs = /turf/open/dungeon_trap
 	icon = 'icons/turf/floors/chasms.dmi'
 	icon_state = "chasms-255"
 	smoothing_icon = "chasms"
 	base_icon_state = "chasms"
+
+	baseturfs = /turf/open/dungeon_trap
+
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_TURF_CHASM
 	smoothing_list = SMOOTH_GROUP_TURF_CHASM
 	density = TRUE //This will prevent hostile mobs from pathing into chasms, while the canpass override will still let it function like an open turf
 	bullet_bounce_sound = null //abandon all hope ye who enter
-	dynamic_lighting = 1
+	dynamic_lighting = TRUE
 
 /// Lets people walk into chasms.
 /turf/open/dungeon_trap/CanAllowThrough(atom/movable/mover, border_dir)

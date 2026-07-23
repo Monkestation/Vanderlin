@@ -11,7 +11,7 @@
 		if (default_map_traits.len > world.maxz)
 			default_map_traits.Cut(world.maxz + 1)
 
-	for (var/I in 1 to default_map_traits.len)
+	for (var/I in 1 to length(default_map_traits))
 		var/list/features = default_map_traits[I]
 		var/datum/space_level/S = new(I, features[DL_NAME], features[DL_TRAITS])
 		build_area_turfs(I)

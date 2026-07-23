@@ -44,7 +44,7 @@
 /obj/effect/temp_visual/trap
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "trap"
-	light_outer_range =  2
+	light_range =  2
 	duration = 7
 	plane = GAME_PLANE_UPPER
 

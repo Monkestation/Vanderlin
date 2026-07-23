@@ -5,7 +5,7 @@
 	icon_state = "lottery"
 	density = FALSE
 	pixel_y = 32
-	light_outer_range = 5
+	light_range = 5
 	light_color = "#1b7bf1"
 
 	// Gambling variables

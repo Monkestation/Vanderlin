@@ -383,5 +383,4 @@ GLOBAL_LIST_INIT(spontaneous_fish_traits, populate_spontaneous_fish_traits())
 
 /datum/fish_trait/bioluminescent/apply_to_fish(obj/item/reagent_containers/food/snacks/fish/fish)
 	. = ..()
-	fish.set_light_range(2)
-	fish.set_light_color(COLOR_CYAN)
+	fish.set_light(2, l_color = COLOR_CYAN)

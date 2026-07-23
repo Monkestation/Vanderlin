@@ -31,7 +31,7 @@
 	monitor.beacon = src
 	monitor.recalculate_field(full_recalc = TRUE)
 
-	set_light(2, 1, 1, l_color = pulse_color)
+	set_light(2, 1, l_color = pulse_color)
 	start_pulse_animation()
 
 	return .

@@ -153,6 +153,10 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		///shit that calls explosion() should probably not be called in empty space
 		/obj/effect/temp_visual/target/meteor,
 		/obj/effect/meatvine_controller,
+		// Abstract type, controlled by turfs
+		// Literally errors on creation/deletion
+		/atom/movable/lighting_object,
+		/atom/movable/outdoor_effect,
 		//Single use case holder atom requiring a user
 		/atom/movable/looking_holder,
 	)

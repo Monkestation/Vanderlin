@@ -41,7 +41,7 @@
 		limit_to_trait = TRAIT_PUTRID, \
 	)
 
-	set_light(3, 2, 2, l_color = "#ff6533")
+	set_light(3, 2, l_color = "#ff6533")
 
 	return .
 
@@ -57,7 +57,7 @@
 	drainer = draining_mob
 	qdel(GetComponent(/datum/component/aura_healing))
 	animate(src, alpha = 100, time = 1 SECONDS)
-	set_light(1, 1, 1, l_color = "#ff6533")
+	set_light(1, 1, l_color = "#ff6533")
 
 /obj/structure/meatvine/healing_well/proc/finish_drain()
 	is_being_drained = FALSE
@@ -83,7 +83,7 @@
 		limit_to_trait = TRAIT_PUTRID, \
 	)
 	animate(src, alpha = 255, time = 1 SECONDS)
-	set_light(3, 2, 2, l_color = "#ff6533")
+	set_light(3, 2, l_color = "#ff6533")
 
 /obj/structure/meatvine/healing_well/proc/on_floor_destroyed(datum/source)
 	SIGNAL_HANDLER
