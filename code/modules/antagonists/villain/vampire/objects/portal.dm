@@ -115,6 +115,7 @@
 		desc = "World anchor, used by the portal in The Mansion. Using it will return you to where it was made, right in the evil's lair. Leave it behind to make a portal to later."
 	else
 		desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"
+
 /obj/item/clothing/neck/portalamulet/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!can_local_portal)
