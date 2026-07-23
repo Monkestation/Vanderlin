@@ -68,7 +68,7 @@
 		remove_eye(TRUE)
 		return FALSE
 
-	log_game("SCRYING: [user.real_name] ([user.ckey]) has used the [name] to leer at [found_target.real_name] ([found_target.ckey])")
+	log_game("SCRYING: [user.real_name] ([user.ckey]) has used the [name] to scry [found_target.real_name] ([found_target.ckey])")
 
 	var/real_cooldown = cooldown_duration + vision_duration
 	COOLDOWN_START(src, scry_cooldown, real_cooldown)
@@ -128,6 +128,8 @@
 	name = "Night's Eye"
 	needs_to_know = FALSE
 	needs_to_live = FALSE
+	vision_duration = 12 SECONDS
+	cooldown_duration = 3 SECONDS
 
 /datum/component/scrying/telescope
 	name = "NOC Device"
