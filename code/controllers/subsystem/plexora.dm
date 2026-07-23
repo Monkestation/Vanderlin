@@ -28,7 +28,7 @@
 
 /// Runs check_servers() and updates the up_servers with their statuses.
 /// This may be useful if you are adding a user portal to quickly jump to sister servers.
-#define PLX_SHOULD_CHECK_SERVERS FALSE
+#define PLX_SHOULD_CHECK_SERVERS
 
 SUBSYSTEM_DEF(plexora)
 	name = "Plexora"
@@ -227,8 +227,9 @@ SUBSYSTEM_DEF(plexora)
 	))
 
 /datum/controller/subsystem/plexora/proc/check_servers()
-	if(!PLX_SHOULD_CHECK_SERVERS)
-		return
+#ifndef PLX_SHOULD_CHECK_SERVERS
+	return
+#else
 	var/list/servers_to_check = list(
 		PLEXORA_SERVERID_MRP,
 		PLEXORA_SERVERID_MONKESPAW,
@@ -239,6 +240,7 @@ SUBSYSTEM_DEF(plexora)
 		if(serverid == current_server_id)
 			continue
 		up_servers[serverid] = check_byondserver_status(serverid, null)
+#endif
 
 // Check status by id or game port
 /datum/controller/subsystem/plexora/proc/check_byondserver_status(id, port)
