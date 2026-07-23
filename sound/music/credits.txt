@@ -100,46 +100,25 @@ harp (b1).ogg: https://www.youtube.com/watch?v=DaGdjI4HGTg
 flute (b1).ogg: https://www.youtube.com/watch?v=_bhiGbnfMT4
 viola (b1): https://www.youtube.com/watch?v=qmS-rX0_qRQ
 
-lute (9): https://youtu.be/t9s_3WsiSEk
-lute (10).ogg: https://www.youtube.com/watch?v=7Pf5sUrM54I
+lute (9): https://youtu.be/0bLkPvYhSLA
+lute (10).ogg: https://youtu.be/zMJ54j6Ep70
 lute (11).ogg: https://www.youtube.com/watch?v=xJh865acA-U
-lute (12).ogg: https://youtu.be/zMJ54j6Ep70
-lute (13).ogg: https://youtu.be/0bLkPvYhSLA
 
 guitar (21).ogg: https://youtu.be/IXQqLbCX2Co
-guitar (22).ogg: https://youtu.be/bZn94Q5m5Aw
-guitar (23).ogg: https://youtu.be/lktkMoh2IF4
-guitar (24).ogg: https://youtu.be/98O-VqCO1Uc
-guitar (25).ogg: https://youtu.be/AwAQ74p6LwM
-guitar (26).ogg: https://youtu.be/3rRdEbgvUug
 
 hurdy (7).ogg: https://youtu.be/O3_BTpJDRJ4
 hurdy (8).ogg: https://youtu.be/L5oQt23yfyk
 hurdy (9).ogg: https://youtu.be/0dPHRxvs3KY
 
 accord (10).ogg: https://youtu.be/CFwhB-nR1eI
-accord (11).ogg: https://youtu.be/NJCLYpgZQdg
-accord (12).ogg: https://youtu.be/frBBcy488Yk
-accord (13).ogg: https://youtu.be/3OC79_y9qrI
 accord (14).ogg: https://youtu.be/7n-bWSGcM-Q
-accord (15).ogg: https://youtu.be/-IKRNS9nmXg
-accord (16).ogg: https://youtu.be/dzIRK2pICm8
-accord (17).ogg: https://youtu.be/117RYVsGpKA
-accord (18).ogg: https://youtu.be/j4bwtNJV3Ys
-accord (19).ogg: https://youtu.be/2OmQMHU2HBA
 accord (20).ogg: https://youtu.be/NeBiRfUI9Tg
-accord (21).ogg: https://youtu.be/uGydRfzISC4
 accord (22).ogg: https://youtu.be/maQzUyKfReI
-accord (23).ogg: https://youtu.be/ZfyheRU9yLw
 accord (24).ogg: https://youtu.be/8tHrANh_TlI
-accord (25).ogg: https://youtu.be/4-fXtwtXsvs
 accord (26).ogg: https://youtu.be/mpI6WmE4OvI
-accord (27).ogg: https://youtu.be/5ub6qRNY5Hw
-accord (28).ogg: https://youtu.be/cuSfJX-tPXE
-accord (29).ogg: https://youtu.be/bU4ah0RPQ8k
 accord (30).ogg: https://youtu.be/ptUitzO-Cyk
 accord (31).ogg: https://youtu.be/DOuu1cfDgrU
-accord (32).ogg: https://youtu.be/rl5d5PZT8iw
+
 accord (33).ogg: https://youtu.be/r9-gd6nyuSg
 accord (34).ogg: https://youtu.be/uK_AfAr446g
 

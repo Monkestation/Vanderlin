@@ -268,11 +268,9 @@
 	"Jests On Steel Ears" = 'sound/instruments/lute (6).ogg',
 	"Merchant in the Mire" = 'sound/instruments/lute (7).ogg',
 	"Soilson's Song" = 'sound/instruments/lute (8).ogg',
-	"The Bannered Mare" = 'sound/instruments/lute (9).ogg',
-	"I Want To Live" = 'sound/instruments/lute (10).ogg',
 	"House of the Rising Sun" = 'sound/instruments/lute (11).ogg',
-	"Sound of Silence" = 'sound/instruments/lute (12).ogg',
-	"The Entertainer" = 'sound/instruments/lute (13).ogg',
+	"Sound of Silence" = 'sound/instruments/lute (10).ogg',
+	"The Entertainer" = 'sound/instruments/lute (9).ogg',
 	)
 
 /obj/item/instrument/accord
@@ -291,30 +289,15 @@
 	"Dwarven Frolick" = 'sound/instruments/accord (8).ogg',
 	"Beloved Blue" = 'sound/instruments/accord (9).ogg',
 	"A Grenzel Farewell" = 'sound/instruments/accord (10).ogg',
-	"Accord d'Amelie" = 'sound/instruments/accord (11).ogg',
-	"Beer Barrel Polka" = 'sound/instruments/accord (12).ogg',
-	"Bosun Bill" = 'sound/instruments/accord (13).ogg',
-	"Dobrusha" = 'sound/instruments/accord (14).ogg',
-	"Farewell Now" = 'sound/instruments/accord (15).ogg',
-	"Fill Your Tankards!" = 'sound/instruments/accord (16).ogg',
-	"Grenzel's Walde" = 'sound/instruments/accord (17).ogg',
-	"Grenzeltaler" = 'sound/instruments/accord (18).ogg',
-	"In Grenzel steht ein Hofbrauhaus" = 'sound/instruments/accord (19).ogg',
-	"Kingsfielder Dance No.5" = 'sound/instruments/accord (20).ogg',
-	"Lady of Valoria" = 'sound/instruments/accord (21).ogg',
-	"Leave Her Johnny" = 'sound/instruments/accord (22).ogg',
-	"Lilli Marlene" = 'sound/instruments/accord (23).ogg',
-	"March of Zaladin" = 'sound/instruments/accord (24).ogg',
-	"O Beloved Meadows" = 'sound/instruments/accord (25).ogg',
-	"Ossalndic Polka" = 'sound/instruments/accord (26).ogg',
-	"Tavern Polka" = 'sound/instruments/accord (27).ogg',
-	"The Duellante's Acclaim" = 'sound/instruments/accord (28).ogg',
-	"The Happy Wanderer" = 'sound/instruments/accord (29).ogg',
-	"The Jolly Coppersmith" = 'sound/instruments/accord (30).ogg',
-	"The Merchant's Ballad" = 'sound/instruments/accord (31).ogg',
-	"The Vanderman" = 'sound/instruments/accord (32).ogg',
-	"Upon the Blue River" = 'sound/instruments/accord (33).ogg',
-	"Winter Serenade" = 'sound/instruments/accord (34).ogg',
+	"Dobrusha" = 'sound/instruments/accord (11).ogg',
+	"Kingsfielder Dance No.5" = 'sound/instruments/accord (12).ogg',
+	"Leave Her Johnny" = 'sound/instruments/accord (13).ogg',
+	"March of Zaladin" = 'sound/instruments/accord (14).ogg',
+	"Ossalndic Polka" = 'sound/instruments/accord (15).ogg',
+	"The Jolly Coppersmith" = 'sound/instruments/accord (16).ogg',
+	"The Merchant's Ballad" = 'sound/instruments/accord (17).ogg',
+	"Upon the Blue River" = 'sound/instruments/accord (18).ogg',
+	"Winter Serenade" = 'sound/instruments/accord (19).ogg',
 	)
 
 /obj/item/instrument/guitar
@@ -344,13 +327,7 @@
 	"Danza De Las Lanzas" = 'sound/instruments/guitar (18).ogg',
 	"The Feline, Forever Returning" = 'sound/instruments/guitar (19).ogg',
 	"El Beso Carmesí" = 'sound/instruments/guitar (20).ogg',
-
 	"Dont Let Your Guard Down" = 'sound/instruments/guitar (21).ogg',
-	"Inn's Hearth" = 'sound/instruments/guitar (22).ogg',
-	"Knight's Valley" = 'sound/instruments/guitar (23).ogg',
-	"Ravox's Sorrow" = 'sound/instruments/guitar (24).ogg',
-	"Saiga's Pride" = 'sound/instruments/guitar (25).ogg',
-	"The Vanderman" = 'sound/instruments/guitar (26).ogg',
 	)
 
 /obj/item/instrument/harp
@@ -420,9 +397,6 @@
 	"Becalmed" = 'sound/instruments/hurdy (4).ogg',
 	"The Bloody Throne" = 'sound/instruments/hurdy (5).ogg',
 	"We Shall Sail Together" = 'sound/instruments/hurdy (6).ogg',
-	"Bosun Bill" = 'sound/instruments/hurdy (7).ogg',
-	"The Vanderman" = 'sound/instruments/hurdy (8).ogg',
-	"The Warrior's Ballad" = 'sound/instruments/hurdy (9).ogg'
 	)
 	experimental_inhand = TRUE //temporary inhand sprite
 
