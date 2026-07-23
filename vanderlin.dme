@@ -1148,6 +1148,7 @@
 #include "code\datums\components\rope.dm"
 #include "code\datums\components\rotation.dm"
 #include "code\datums\components\rotting.dm"
+#include "code\datums\components\scrying.dm"
 #include "code\datums\components\shrapnel.dm"
 #include "code\datums\components\slippery.dm"
 #include "code\datums\components\slowing_field.dm"

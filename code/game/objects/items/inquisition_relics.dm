@@ -1258,9 +1258,9 @@
 
 	scry_comp.activate(user)
 
-/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(attacked) || !istype(user))
-		return ..()
+/obj/item/inqarticles/bmirror/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
 
 	var/mob/living/attacked = interacting_with
 
@@ -1295,7 +1295,6 @@
 	attacked.flash_fullscreen("redflash3")
 	attacked.adjustBruteLoss(40, damage_type = BCLASS_PIERCE, can_crit = FALSE)
 	attacked.adjust_bloodpool(-240)
-	feeder = WEAKREF(attacked)
 	openstate = "bloody"
 	fedblood = TRUE
 	update_appearance(UPDATE_ICON_STATE)
