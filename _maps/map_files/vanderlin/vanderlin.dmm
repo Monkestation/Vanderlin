@@ -17064,14 +17064,6 @@
 	},
 /turf/closed/wall/mineral/stone,
 /area/indoors/town)
-"hXJ" = (
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/effect/decal/carpet/square/black{
-	dir = 4;
-	pixel_x = 24
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/merc_guild)
 "hXP" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fermentation_keg,
@@ -52286,6 +52278,14 @@
 "xys" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
+"xyB" = (
+/obj/effect/decal/carpet/square/black{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/fluff/wallclock/l,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/merc_guild)
 "xyI" = (
 /obj/structure/bed/shit,
 /turf/open/floor/dirt/road,
@@ -109348,10 +109348,10 @@ irX
 lyz
 ecV
 bnR
+xyB
+fyc
 bnR
-hXJ
 bnR
-sVs
 fyc
 bnR
 bnR
