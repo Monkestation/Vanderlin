@@ -21,6 +21,11 @@
 	. = ..()
 	AddComponent(scry_comp_path)
 
+/obj/item/scrying/attack_self(mob/user, list/modifiers)
+	. = ..()
+	var/datum/component/scrying/mirror/scry_comp = GetComponent(/datum/component/scrying)
+	scry_comp.activate(user)
+
 /obj/item/scrying/eye
 	name = "accursed eye"
 	desc = "It is pulsating."
@@ -41,6 +46,11 @@
 /obj/structure/nocdevice/Initialize()
 	. = ..()
 	AddComponent(/datum/component/scrying/telescope)
+
+/obj/structure/nocdevice/attack_hand(mob/user)
+	. = ..()
+	var/datum/component/scrying/mirror/scry_comp = GetComponent(/datum/component/scrying)
+	scry_comp.activate(user)
 
 /*	..................   THE EYE   ................... */
 /mob/scry_eye

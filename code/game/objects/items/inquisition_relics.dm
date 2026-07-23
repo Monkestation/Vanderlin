@@ -1181,12 +1181,11 @@
 	var/broken = FALSE
 	var/atom/movable/screen/alert/blackmirror/effect
 	var/datum/looping_sound/blackmirror/soundloop
-	var/datum/component/scrying/mirror/scry_comp
 
 /obj/item/inqarticles/bmirror/Initialize()
 	. = ..()
 	soundloop = new(src, FALSE)
-	scry_comp = new(src)
+	AddComponent(/datum/component/scrying/mirror)
 
 /obj/item/inqarticles/bmirror/Destroy()
 	if(soundloop)
@@ -1255,7 +1254,7 @@
 		return
 
 	//add_client_colour(/datum/client_colour/nocshaded)
-
+	var/datum/component/scrying/mirror/scry_comp = GetComponent(/datum/component/scrying/mirror)
 	scry_comp.activate(user)
 
 /obj/item/inqarticles/bmirror/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
