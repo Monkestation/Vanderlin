@@ -10,7 +10,7 @@
 	///How many things fit on this plate?
 	var/max_items = 3
 	///What can those things be?  What's allowed on a plate?
-	var/list/permitted_items_on_plate = list(
+	var/static/permitted_items = list(
 		/obj/item/kitchen/fork,
 		/obj/item/kitchen/spoon,
 		/obj/item/reagent_containers/food,
@@ -37,12 +37,6 @@
 /obj/item/plate/Initialize(mapload, ...)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
-
-/obj/item/plate/proc/check_permitted_item(obj/item/I)
-	for(var/type_path in permitted_items_on_plate)
-		if(istype(I))
-			return TRUE
-	return FALSE
 
 /obj/item/plate/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!length(contents) && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
@@ -75,7 +69,7 @@
 	if(item_flags & IN_STORAGE)
 		to_chat(user, span_warning("I cannot reach [src]."))
 		return
-	if(!check_permitted_item(I))
+	if(!is_type_in_list(I, permitted_items))
 		to_chat(user, span_notice("[src] isn't made to carry that!"))
 		return
 	if(contents.len >= max_items)
