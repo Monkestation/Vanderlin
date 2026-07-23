@@ -1179,7 +1179,6 @@
 	var/usesleft = 3
 	var/active = FALSE
 	var/broken = FALSE
-	var/atom/movable/screen/alert/blackmirror/effect
 	var/datum/looping_sound/blackmirror/soundloop
 
 /obj/item/inqarticles/bmirror/Initialize()
@@ -1190,8 +1189,6 @@
 /obj/item/inqarticles/bmirror/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(effect)
-		QDEL_NULL(effect)
 	return ..()
 
 /obj/item/inqarticles/bmirror/examine(mob/user)
@@ -1206,7 +1203,6 @@
 	active = FALSE
 	fedblood = FALSE
 	openstate = "bloody"
-	effect = null
 	usesleft--
 	soundloop.stop()
 	visible_message(span_info("[src] clouds itself with a chilling fog."))
@@ -1319,6 +1315,7 @@
 /obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	openorshut(user)
+
 /obj/item/inqarticles/bmirror/proc/openorshut(mob/user)
 	if(active)
 		to_chat(user, span_warning("I cannot close the mirror while it's active."))
@@ -1330,29 +1327,6 @@
 	else
 		playsound(src, 'sound/items/blackmirror_shut.ogg', 100, FALSE)
 	update_appearance(UPDATE_ICON_STATE)
-
-/*
-	var/mob/living/fixated = fixation?.resolve()
-	if(opened)
-		if(fixated)
-			fixated.clear_alert("blackmirror", TRUE)
-			fixated.playsound_local(src, 'sound/items/blackeye.ogg', 40, FALSE)
-		else if(effect)
-			QDEL_NULL(effect)
-		playsound(src, 'sound/items/blackmirror_shut.ogg', 100, FALSE)
-		opened = FALSE
-		update_appearance(UPDATE_ICON_STATE)
-		return
-
-	playsound(src, 'sound/items/blackmirror_open.ogg', 100, FALSE)
-
-	if(fixated)
-		fixated.playsound_local(src, 'sound/items/blackeye_warn.ogg', 100, FALSE)
-		effect = fixated.throw_alert("blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
-
-	opened = TRUE
-	update_appearance(UPDATE_ICON_STATE)
-*/
 
 /obj/item/inqarticles/bmirror/update_icon_state()
 	. = ..()
@@ -1366,6 +1340,43 @@
 	name = "BLACK EYE"
 	desc = "LOOK AT ME. I SEE YOU."
 	icon_state = "blackeye"
+	var/obj/item/inqarticles/bmirror/source
+	var/mob/scry_eye/looking_eye
+
+/atom/movable/screen/alert/blackmirror/Destroy()
+	source = null
+	return ..()
+
+/atom/movable/screen/alert/blackmirror/Click()
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+	var/input = tgui_alert(user, "YOU FEEL AN UNFAMILIAR GAZE. WILL YOU STARE BACK AT THE ABYSS?", "PRESENCE WATCHING OVER", list("NO", "LOOK BACK"))
+	if(input != "LOOK BACK")
+		return
+
+	looking_eye = new
+	looking_eye.user_mob = user
+	looking_eye.orbit(source)
+	user.reset_perspective(looking_eye)
+	user.Immobilize(4 SECONDS)
+	user.overlay_fullscreen("scrying", /atom/movable/screen/backhudl/obscured)
+	playsound(user, 'sound/items/blackmirror_use.ogg', 100, FALSE)
+	addtimer(CALLBACK(src, PROC_REF(remove_eye)), 4 SECONDS)
+
+	user.visible_message(span_warning("[user] looks inward as their eyes glaze over..."))
+
+/atom/movable/screen/alert/blackmirror/Destroy()
+	remove_eye()
+	. = ..()
+
+/atom/movable/screen/alert/blackmirror/proc/remove_eye()
+	if(mob_viewer)
+		mob_viewer.reset_perspective(mob_viewer)
+		mob_viewer.clear_fullscreen("scrying")
+		playsound(mob_viewer, 'sound/items/blackeye.ogg', 100, FALSE)
+	QDEL_NULL(looking_eye)
+	mob_viewer = null
 
 // FINISH THIS AT YOUR LEISURE. I'M JUST LEAVING IT HERE UNIMPLEMENTED. IT'S INTENDED TO WORK AS A COMBINATION OF THE NOC FAR-SIGHT AND THE NOCSHADES. HAVE FUN! - YISCHE
 /obj/item/inqarticles/spyglass

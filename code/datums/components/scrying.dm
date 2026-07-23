@@ -21,6 +21,11 @@
 	if(!parent)
 		return
 
+/datum/component/scrying/Destroy(force)
+	QDEL_NULL(scrying_eye)
+	held_user = null
+	. = ..()
+
 /datum/component/scrying/proc/activate(mob/living/user)
 	if(!pass_extra_checks())
 		return FALSE
@@ -91,7 +96,7 @@
 	if(!held_user)
 		return FALSE
 	scrying_eye = new
-	scrying_eye.component = src
+	scrying_eye.user_mob = held_user
 	held_user.reset_perspective(scrying_eye)
 	held_user.Immobilize(vision_duration)
 	held_user.overlay_fullscreen("scrying", /atom/movable/screen/backhudl/obscured)
@@ -149,12 +154,19 @@
 	needs_to_live = FALSE
 	var/obj/item/inqarticles/bmirror/parent_mirror
 	var/mob/stored_target
+	var/atom/movable/screen/alert/blackmirror/effect
 
 /datum/component/scrying/mirror/Initialize(obj/item/scrying/parent)
 	. = ..()
 	parent_mirror = parent
 	if(!istype(parent_mirror))
 		return INITIALIZE_HINT_QDEL
+
+/datum/component/scrying/mirror/Destroy(force)
+	parent_mirror = null
+	stored_target = null
+	QDEL_NULL(effect)
+	. = ..()
 
 /datum/component/scrying/mirror/activate(mob/living/user)
 	if(!pass_extra_checks())
@@ -210,7 +222,7 @@
 	if(!held_user)
 		return FALSE
 	scrying_eye = new
-	scrying_eye.component = src
+	scrying_eye.user_mob = held_user
 	held_user.reset_perspective(scrying_eye)
 	held_user.Immobilize(vision_duration)
 	held_user.overlay_fullscreen("scrying", /atom/movable/screen/backhudl/obscured)
@@ -232,8 +244,10 @@
 		stored_target.playsound_local(src, 'sound/items/blackeye.ogg', 40, FALSE)
 		stored_target = null
 	parent_mirror.donefixating()
+	effect = null
 
 /datum/component/scrying/mirror/proc/apply_black_eye()
 	scrying_eye.orbit(stored_target)
-	parent_mirror.effect = stored_target.throw_alert("blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
+	effect = stored_target.throw_alert("blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
+	effect.source = parent_mirror
 	playsound(stored_target, 'sound/items/blackeye_warn.ogg', 100, FALSE)

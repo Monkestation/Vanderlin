@@ -59,7 +59,7 @@
 	hud_type = /datum/hud/obscured
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_LIVING
-	var/datum/component/scrying/component
+	var/mob/living/user_mob
 	var/moving_eye = FALSE
 
 /mob/scry_eye/blackmirror
@@ -70,10 +70,10 @@
 	..()
 
 /mob/scry_eye/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), original_message)
-	if(!component)
+	if(!user_mob)
 		qdel(src)
 		return
-	component.held_user.Hear(message, speaker, message_language, raw_message, radio_freq, spans, message_mods, original_message)
+	user_mob.Hear(message, speaker, message_language, raw_message, radio_freq, spans, message_mods, original_message)
 	return
 
 
