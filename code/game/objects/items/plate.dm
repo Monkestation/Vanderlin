@@ -9,13 +9,19 @@
 	item_weight = 300 GRAMS
 	///How many things fit on this plate?
 	var/max_items = 3
-	///What can those things be?  What's allowed on a plate?
+	///What items can be plated?
 	var/static/permitted_items = list(
 		/obj/item/kitchen/fork,
 		/obj/item/kitchen/spoon,
 		/obj/item/reagent_containers/food,
 		/obj/item/reagent_containers/glass/cup,
 		/obj/item/reagent_containers/glass/bowl,
+		/obj/item/reagent_containers/glass/carafe,
+		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/powder/spice,
+		/obj/item/reagent_containers/powder/moondust,
+		/obj/item/reagent_containers/powder/ozium,
+		/obj/item/alch/transisdust,
 		)
 	///The offset from side to side the food items can have on the plate
 	var/max_x_offset = 4
