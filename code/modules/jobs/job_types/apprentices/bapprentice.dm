@@ -26,6 +26,7 @@
 	spawn_positions = 2
 	display_order = JDO_BAPP
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'

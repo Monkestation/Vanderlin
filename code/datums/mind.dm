@@ -146,17 +146,17 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /proc/get_minds(role)
 	. = list()
-	for(var/datum/mind/M in SSticker.minds)
+	for(var/datum/mind/target_mind in SSticker.minds)
 		var/is_role = TRUE
 		if(role)
 			is_role = FALSE
-			if(M.special_role == role)
+			if(target_mind.special_role == role)
 				is_role = TRUE
 			else
-				if(M.assigned_role.title == role)
+				if(target_mind?.assigned_role?.title == role)
 					is_role = TRUE
 		if(is_role)
-			. += M
+			. += target_mind
 
 /// Returns the relation datum of a given type this mind has toward target,
 /// or null if none exists.
@@ -891,6 +891,24 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	. = assigned_role
 	assigned_role = new_role
 
+/datum/mind/proc/update_alt_title(datum/job/new_role)
+	if(!istype(new_role))
+		new_role = ispath(new_role) ? SSjob.GetJobType(new_role) : SSjob.GetJob(new_role)
+	var/list/player_sel
+	if(new_role.title in current.client?.prefs?.alt_job_selections)
+		player_sel = current.client?.prefs?.alt_job_selections[new_role.title]
+
+	current.job_title_override = null
+	current.job_honorary_override = null
+	if(length(player_sel))
+		var/chosen_title = player_sel["title"]
+		if(chosen_title && (chosen_title in (list(new_role.title, new_role.f_title) + new_role.alt_titles + new_role.alt_titles_female)))
+			current.job_title_override = chosen_title
+
+		var/chosen_honorary = player_sel["honorary"]
+		if(chosen_honorary && (chosen_honorary in (list(new_role.honorary, new_role.honorary_f) + new_role.alt_honorary + new_role.alt_honorary_female)))
+			current.job_honorary_override = chosen_honorary
+
 /mob/proc/sync_mind()
 	mind_initialize()	//updates the mind (or creates and initializes one if one doesn't exist)
 	mind.active = TRUE	//indicates that the mind is currently synced with a client
@@ -930,7 +948,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		return FALSE
 	amt *= GLOB.sleep_experience_modifier
 
-	if(current.has_quirk(/datum/quirk/boon/quick_learner) || current.has_reagent(/datum/reagent/buff/herbal/scholar_focus))
+	if(current.has_reagent(/datum/reagent/buff/herbal/scholar_focus))
 		amt *= 1.2
 
 	amt *= current.get_skill_exp_multiplier(skill)

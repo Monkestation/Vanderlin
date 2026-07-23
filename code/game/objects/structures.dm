@@ -5,6 +5,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
 	pass_flags_self = PASSSTRUCTURE
+	armor_type = /datum/armor/structure
 	var/climb_time = 20
 	var/climb_stun = 0
 	var/climb_sound = 'sound/foley/woodclimb.ogg'
@@ -18,8 +19,6 @@
 //	move_resist = MOVE_FORCE_STRONG
 
 /obj/structure/Initialize()
-	if (!armor)
-		armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 50)
 	. = ..()
 	if(smoothing_flags & (SMOOTH_BITMASK|SMOOTH_BITMASK_CARDINALS))
 		QUEUE_SMOOTH(src)

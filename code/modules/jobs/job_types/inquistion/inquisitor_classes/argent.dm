@@ -6,7 +6,7 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = 1,
 		STAT_FORTUNE = -1,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 35,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
@@ -29,31 +29,31 @@
 /datum/attribute_holder/sheet/job/argent/knives
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(30, 30)
+		/datum/attribute/skill/combat/knives = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/axesmaces
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/axesmaces = list(30, 30)
+		/datum/attribute/skill/combat/axesmaces = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/swords
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(30, 30)
+		/datum/attribute/skill/combat/swords = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/polearms
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(30, 30)
+		/datum/attribute/skill/combat/polearms = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/whipsflails
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(30, 30)
+		/datum/attribute/skill/combat/whipsflails = list(33, 33)
 	)
 
 /datum/job/advclass/sacrestant/argent
@@ -203,7 +203,7 @@
 			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
 		if("Nightmare Ward - No Sleep and Anti-Scrying")
-			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_SLEEPIMMUNE, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)

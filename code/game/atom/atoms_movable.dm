@@ -900,15 +900,15 @@
 /atom/movable/proc/Moved(atom/old_loc, movement_dir, forced = FALSE, list/old_locs)
 	SHOULD_CALL_PARENT(TRUE)
 
-	var/turf/old_turf = get_turf(old_loc)
-	var/turf/new_turf = get_turf(src)
-
 	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
 
 	if(old_loc)
 		SEND_SIGNAL(old_loc, COMSIG_ATOM_ABSTRACT_EXITED, src, movement_dir)
 	if(loc)
 		SEND_SIGNAL(loc, COMSIG_ATOM_ABSTRACT_ENTERED, src, old_loc, old_locs)
+
+	var/turf/old_turf = get_turf(old_loc)
+	var/turf/new_turf = get_turf(src)
 
 	if(HAS_SPATIAL_GRID_CONTENTS(src))
 		if(old_turf && new_turf && (old_turf.z != new_turf.z \

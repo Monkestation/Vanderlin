@@ -22,8 +22,6 @@
 #define COMSIG_CARBON_ADD_STRESS "mob_add_stress"
 /// from base of /datum/reagent/proc/on_transfer: (atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered to a carbon
 #define COMSIG_CARBON_REAGENT_ADD "carbon_reagent_add"
-/// from base of mob/living/carbon/soundbang_act(): (list(intensity))
-#define COMSIG_CARBON_SOUNDBANG "carbon_soundbang"
 /// From base of /mob/living/carbon/handle_blood: ()
 #define COMSIG_CARBON_ON_HANDLE_BLOOD "human_on_handle_blood"
 	#define HANDLE_BLOOD_HANDLED (1<<0)

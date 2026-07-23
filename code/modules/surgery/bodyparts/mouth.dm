@@ -101,7 +101,7 @@
 
 /obj/item/bodypart/mouth
 	name = "jaw"
-	desc = "I have no mouth and i must scream."
+	desc = "I have no mouth and I must scream."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "jaw"
 	base_icon_state = "jaw"

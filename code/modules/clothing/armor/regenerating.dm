@@ -72,7 +72,7 @@
 	armor_class = AC_LIGHT
 	blocksound = SOFTUNDERHIT
 	blade_dulling = DULLING_BASHCHOP
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/padded
 	surgery_cover = FALSE
 	clothing_flags = NONE
 
@@ -95,7 +95,7 @@
 /obj/item/clothing/armor/regenerating/skin/disciple
 	name = "disciple's skin"
 	desc = "It's far more than just an oath. Mercurial circles of silver are etched into the skin of this person, engraved with fanatic zeal and faithful reverence. May it ward the darkness. It seems to be written in red ink."
-	armor = list("blunt" = 30, "slash" = 50, "stab" = 50, "piercing" = 20, "fire" = 0, "acid" = 0) //Custom value; padded gambeson's slash- and stab- armor.
+	armor_type = /datum/armor/skin/disciple
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	max_integrity = 300
 	repair_time = 20 SECONDS
@@ -104,7 +104,7 @@
 	name = "bouhoi bujeog tattoos"
 	desc = "A mystic style of tattoos used to honor the kin that fell generations ago, a sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. Its movement causes you to shudder."
 	icon_state = "easttats"
-	armor = list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/skin/easttats
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	max_integrity = 300
 	repair_time = 20 SECONDS

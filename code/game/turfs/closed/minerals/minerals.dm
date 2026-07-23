@@ -209,13 +209,10 @@
 /turf/closed/mineral/Spread(turf/T)
 	T.ChangeTurf(type)
 
-/turf/closed/mineral/cold
-	icon = 'icons/turf/smooth/walls/mineral_blue.dmi'
-
 /turf/closed/mineral/random
 	name = "rock"
 	desc = "Seems barren."
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "rand_low")
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_CLOSED + SMOOTH_GROUP_MINERAL_WALLS
@@ -244,17 +241,6 @@
 			src = M
 			M.levelupdate()
 
-/turf/closed/mineral/random/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "rand_low_ice")
-	mineralSpawnChanceList = list(
-	/turf/closed/mineral/salt/cold = 20,
-	/turf/closed/mineral/copper/cold = 15,
-	/turf/closed/mineral/tin/cold = 12,
-	/turf/closed/mineral/iron/cold = 5,
-	/turf/closed/mineral/coal/cold = 5
-	)
-
 /turf/closed/mineral/random/med
 	icon_state = MAP_SWITCH("mineral", "rand_med")
 	mineralChance = 50
@@ -267,18 +253,6 @@
 	/turf/closed/mineral/silver = 1
 	)
 
-/turf/closed/mineral/random/cold/med
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "rand_med_ice")
-	mineralSpawnChanceList = list(
-	/turf/closed/mineral/salt/cold = 20,
-	/turf/closed/mineral/iron/cold = 25,
-	/turf/closed/mineral/coal/cold = 20,
-	/turf/closed/mineral/copper/cold = 10,
-	/turf/closed/mineral/tin/cold = 10,
-	/turf/closed/mineral/silver/cold = 1
-	)
-
 /turf/closed/mineral/random/high
 	icon_state = MAP_SWITCH("mineral", "rand_high")
 	mineralChance = 70
@@ -288,17 +262,6 @@
 	/turf/closed/mineral/gold = 15,
 	/turf/closed/mineral/iron = 25,
 	/turf/closed/mineral/silver = 15
-	)
-
-/turf/closed/mineral/random/cold/high
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "rand_high_ice")
-	mineralSpawnChanceList = list(
-	/turf/closed/mineral/mana_crystal/cold = 15,
-	/turf/closed/mineral/cinnabar/cold = 5,
-	/turf/closed/mineral/gold/cold = 15,
-	/turf/closed/mineral/iron/cold = 25,
-	/turf/closed/mineral/silver/cold = 15
 	)
 
 /turf/closed/mineral/random/low_nonval
@@ -358,7 +321,7 @@
 	)
 
 /turf/closed/mineral/copper
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "copper")
 	mineralType = /obj/item/ore/copper
 	rockType = /obj/item/natural/rock/copper
@@ -366,12 +329,9 @@
 	spread = 3
 	//maptext = "copper"
 
-/turf/closed/mineral/copper/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "copper_ice")
 
 /turf/closed/mineral/tin
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "tin")
 	mineralType = /obj/item/ore/tin
 	rockType = /obj/item/natural/rock/tin
@@ -379,12 +339,8 @@
 	spread = 5
 	//maptext = "tin"
 
-/turf/closed/mineral/tin/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "tin_ice")
-
 /turf/closed/mineral/silver
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "silver")
 	mineralType = /obj/item/ore/silver
 	rockType = /obj/item/natural/rock/silver
@@ -392,12 +348,8 @@
 	spread = 2
 	//maptext = "Silver"
 
-/turf/closed/mineral/silver/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "silver_ice")
-
 /turf/closed/mineral/gold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "gold")
 	mineralType = /obj/item/ore/gold
 	rockType = /obj/item/natural/rock/gold
@@ -405,12 +357,8 @@
 	spread = 2
 	//maptext = "gold"
 
-/turf/closed/mineral/gold/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "gold_ice")
-
 /turf/closed/mineral/salt
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "salt")
 	mineralType = /obj/item/reagent_containers/powder/salt
 	rockType = /obj/item/natural/rock/salt
@@ -418,12 +366,8 @@
 	spread = 3
 	//maptext = "salt"
 
-/turf/closed/mineral/salt/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "salt_ice")
-
 /turf/closed/mineral/cinnabar
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "gold")
 	mineralType = /obj/item/ore/cinnabar
 	rockType = /obj/item/natural/rock/cinnabar
@@ -431,22 +375,13 @@
 	spread = 5
 	//maptext = "cinnabar"
 
-/turf/closed/mineral/cinnabar/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "gold_ice")
-
 /turf/closed/mineral/mana_crystal
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "gold")
 	mineralType = /obj/item/mana_battery/mana_crystal/standard
 	rockType = /obj/item/natural/rock/mana_crystal
 	spreadChance = 23
 	spread = 5
-
-/turf/closed/mineral/mana_crystal/cold
-
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "gold_ice")
 
 /obj/item/natural/rock/mana_crystal
 	mineralType = /obj/item/mana_battery/mana_crystal/standard
@@ -455,7 +390,7 @@
 	mineralType = /obj/item/ore/cinnabar
 
 /turf/closed/mineral/iron
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "iron")
 	mineralType = /obj/item/ore/iron
 	rockType = /obj/item/natural/rock/iron
@@ -463,46 +398,30 @@
 	spread = 3
 	//maptext = "iron"
 
-/turf/closed/mineral/iron/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "iron_ice")
-
 /turf/closed/mineral/coal
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "coal")
 	mineralType = /obj/item/ore/coal
 	rockType = /obj/item/natural/rock/coal
 	spreadChance = 3
 	spread = 4
 
-/turf/closed/mineral/coal/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "coal_ice")
-
 /turf/closed/mineral/gemeralds
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "gem")
 	mineralType = /obj/item/gem
 	rockType = /obj/item/natural/rock/gemerald
 	spreadChance = 3
 	spread = 2
 
-/turf/closed/mineral/gemeralds/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "gem_ice")
-
 /turf/closed/mineral/bedrock
 	name = "rock"
 	desc = "Seems barren, and nigh-indestructible."
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining.dmi')
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
 	icon_state = MAP_SWITCH("mineral", "bedrock")
 	max_integrity = 10000000
 	damage_deflection = 99999999
 	above_floor = /turf/closed/mineral/bedrock
-
-/turf/closed/mineral/bedrock/cold
-	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining.dmi')
-	icon_state = MAP_SWITCH("mineral", "bedrock_ice")
 
 /turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, list/modifiers)
 	to_chat(user, span_warning("This is far too sturdy to be destroyed!"))

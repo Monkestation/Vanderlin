@@ -144,13 +144,12 @@
 
 /obj/item/plate/examine(mob/user)
 	. = ..()
-	desc = initial(desc)
 	if(dirty)
-		desc += span_boldwarning("\nThis platter is filthy... absolutely disgusting.")
+		. += span_boldwarning("This platter is filthy... absolutely disgusting.")
 	else if(cleaned)
-		desc += span_notice("\nThis platter was cleaned recently!")
+		. += span_info("This platter was cleaned recently!")
 	else
-		desc += "\nThis platter looks properly stored and clean enough."
+		. += span_info("This platter looks clean enough.")
 
 /obj/item/plate/clay
 	name = "clay platter"
