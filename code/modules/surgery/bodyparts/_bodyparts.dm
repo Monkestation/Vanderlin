@@ -948,29 +948,33 @@
 /obj/item/bodypart/proc/get_shock(painkiller_included = FALSE)
 	if(!can_feel_pain())
 		return 0
+
 	//Multiply our total pain damage by this
 	var/multiplier = 1
 	if(LAZYLEN(grabbedby))
 		//Being grasped lowers the pain just a bit
 		multiplier *= 0.75
+
 	if(multiplier <= 0)
 		return 0
+
 	var/constant_pain = 0
 	constant_pain += SHOCK_MOD_BRUTE * brute_dam
 	constant_pain += SHOCK_MOD_BURN * burn_dam
-	var/datum/wound/wound
-	for(var/thing in wounds)
-		wound = thing
+
+	for(var/datum/wound/wound as anything in wounds)
 		constant_pain += wound.woundpain
-	var/obj/item/organ/organ
-	for(var/thing in get_organs())
-		organ = thing
+
+	for(var/obj/item/organ/organ as anything in get_organs())
 		constant_pain += organ.get_shock(FALSE)
+
 	for(var/obj/item/embebbed as anything in embedded_objects)
 		if(embebbed.embedding)
 			constant_pain += embebbed.embedding.embedded_pain_multiplier * embebbed.w_class
+
 	if(painkiller_included)
 		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+
 	return clamp(FLOOR((pain_dam + constant_pain) * multiplier, DAMAGE_PRECISION), 0, max_pain_damage)
 
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
