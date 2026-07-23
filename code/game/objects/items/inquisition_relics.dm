@@ -1343,10 +1343,6 @@
 	var/obj/item/inqarticles/bmirror/source
 	var/mob/scry_eye/looking_eye
 
-/atom/movable/screen/alert/blackmirror/Destroy()
-	source = null
-	return ..()
-
 /atom/movable/screen/alert/blackmirror/Click()
 	var/mob/living/user = usr
 	if(!istype(user))
@@ -1368,7 +1364,8 @@
 
 /atom/movable/screen/alert/blackmirror/Destroy()
 	remove_eye()
-	. = ..()
+	source = null
+	return ..()
 
 /atom/movable/screen/alert/blackmirror/proc/remove_eye()
 	if(mob_viewer)
