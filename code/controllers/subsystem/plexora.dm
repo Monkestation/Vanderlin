@@ -974,3 +974,5 @@ SUBSYSTEM_DEF(plexora)
 				break
 
 	return text_guess
+
+#undef PLX_SHOULD_CHECK_SERVER
