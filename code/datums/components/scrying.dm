@@ -114,6 +114,12 @@
 /datum/component/scrying/orb
 	name = "Scrying Orb"
 
+/datum/component/scrying/orb/pass_extra_checks(mob/living/user)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) < 1)
+		to_chat(human_user, span_warning("I do not know what to do with this..."))
+		return FALSE
+	return TRUE
+
 /datum/component/scrying/eye
 	name = "Accursed Eye"
 	cooldown_duration = 5 MINUTES
@@ -130,7 +136,7 @@
 /datum/component/scrying/telescope/pass_extra_checks(mob/living/user)
 	var/mob/living/carbon/human/human_user = user
 	if(!ishuman(human_user) || !HAS_TRAIT(human_user, TRAIT_VIRGIN))
-		to_chat(human_user, span_notice("Noc looks angry with me..."))
+		to_chat(human_user, span_warning("Noc looks angry with me..."))
 		return FALSE
 	return TRUE
 
