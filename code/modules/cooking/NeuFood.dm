@@ -180,13 +180,12 @@
 
 /obj/item/reagent_containers/glass/bowl/examine(mob/user)
 	. = ..()
-	desc = initial(desc)
 	if(dirty)
-		desc += span_boldwarning("\nThis bowl is filthy... absolutely disgusting.")
+		. += span_boldwarning("This bowl is filthy... absolutely disgusting.")
 	else if(cleaned)
-		desc += span_notice("\nThis bowl was cleaned recently!")
+		. += span_notice("This bowl was cleaned recently!")
 	else
-		desc += "\nThis bowl looks properly stored and clean enough."
+		. += span_notice("This bowl looks clean enough.")
 
 /obj/item/reagent_containers/glass/bowl/update_overlays()
 	. = ..()
@@ -396,7 +395,7 @@
 
 /obj/item/reagent_containers/glass/bowl/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay bowl"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay bowl"
 
 /obj/item/reagent_containers/glass/bowl/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))

@@ -28,7 +28,7 @@
 
 /obj/item/mould/set_material_information()
 	. = ..()
-	name = lowertext("[initial(main_material.name)] [initial(name)]")
+	name = LOWER_TEXT("[initial(main_material.name)] [initial(name)]")
 
 /obj/item/mould/examine(mob/user)
 	. = ..()
@@ -313,7 +313,7 @@
 	else
 		base_icon_state = "plate"
 
-	name = lowertext("[moulded_recipe.name] mould")
+	name = LOWER_TEXT("[moulded_recipe.name] mould")
 	desc = "Hollowed out and ready to accept liquid metal for casting."
 	update_appearance(UPDATE_ICON_STATE)
 	find_recipe_requirements()

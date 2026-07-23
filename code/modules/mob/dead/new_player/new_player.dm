@@ -316,7 +316,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 		if(JOB_UNAVAILABLE_SEX)
 			return "[jobtitle] is not meant for your sex."
 		if(JOB_UNAVAILABLE_DEITY)
-			return "[jobtitle] requires more faith."
+			return "[jobtitle] requires a different patron."
 		if(JOB_UNAVAILABLE_QUALITY)
 			return "[jobtitle] requires higher player quality."
 		if(JOB_UNAVAILABLE_DONATOR)
@@ -401,6 +401,10 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 
 	if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL) && !job.prefs_species_check(player_prefs))
 		return JOB_UNAVAILABLE_RACE
+
+	var/datum/patron/pref_patron = player_prefs.read_preference(/datum/preference/choiced/patron)
+	if(!client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && job.tennite_triumph_exclusive && !(pref_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		return JOB_UNAVAILABLE_DEITY
 
 	if(length(job.allowed_sexes) && !(player_prefs.read_preference(/datum/preference/choiced/gender) in job.allowed_sexes))
 		return JOB_UNAVAILABLE_SEX

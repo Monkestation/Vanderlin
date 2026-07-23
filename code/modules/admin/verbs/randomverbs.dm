@@ -34,7 +34,7 @@
 	var/option = tgui_alert(user, "What type of SubtlePM do you want?", "Type", list("Voice", "Specific God"))
 	switch(option)
 		if("Voice")
-			message = input("Message:", text("Subtle PM to [target.key]")) as text|null
+			message = input("Message:", "Subtle PM to [target.key]") as text|null
 			if(!message)
 				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
 				return FALSE
@@ -173,7 +173,7 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text|null
+	var/msg = input("Message:", "Enter the text you wish to appear to everyone:") as text|null
 
 	if (!msg)
 		return
@@ -216,7 +216,7 @@
 	if(!M)
 		return
 
-	var/msg = input("Message:", text("Enter the text you wish to appear to your target:")) as text|null
+	var/msg = input("Message:", "Enter the text you wish to appear to your target:") as text|null
 
 	if( !msg )
 		return
@@ -239,7 +239,7 @@
 	var/range = input("Range:", "Narrate to mobs within how many tiles:", 7) as num|null
 	if(!range)
 		return
-	var/msg = input("Message:", text("Enter the text you wish to appear to everyone within view:")) as text|null
+	var/msg = input("Message:", "Enter the text you wish to appear to everyone within view:") as text|null
 	if (!msg)
 		return
 	for(var/mob/M in view(range,A))
@@ -509,22 +509,22 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/devastation = input("Range of total devastation. -1 to none", text("Input"))  as num|null
+	var/devastation = input("Range of total devastation. -1 to none", "Input") as num|null
 	if(devastation == null)
 		return
-	var/heavy = input("Range of heavy impact. -1 to none", text("Input"))  as num|null
+	var/heavy = input("Range of heavy impact. -1 to none", "Input") as num|null
 	if(heavy == null)
 		return
-	var/light = input("Range of light impact. -1 to none", text("Input"))  as num|null
+	var/light = input("Range of light impact. -1 to none", "Input") as num|null
 	if(light == null)
 		return
-	var/flash = input("Range of flash. -1 to none", text("Input"))  as num|null
+	var/flash = input("Range of flash. -1 to none", "Input") as num|null
 	if(flash == null)
 		return
-	var/flames = input("Range of flames. -1 to none", text("Input"))  as num|null
+	var/flames = input("Range of flames. -1 to none", "Input") as num|null
 	if(flames == null)
 		return
-	var/hotspots = input("Range of flames. -1 to none", text("Input"))  as num|null
+	var/hotspots = input("Range of flames. -1 to none", "Input") as num|null
 	if(hotspots == null)
 		return
 
@@ -1028,7 +1028,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	message_admins("[key_name_admin(src)] has started answering [ADMIN_LOOKUPFLW(M)]'s letter.")
 
-	var/msg = input("Message:", text("Letter to [M.key]")) as message|null
+	var/msg = input("Message:", "Letter to [M.key]") as message|null
 	if(!msg)
 		message_admins("[key_name_admin(src)] decided not to answer [ADMIN_LOOKUPFLW(M)]'s letter.")
 		return
@@ -1051,3 +1051,23 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins(span_adminnotice("Messenger Bird Letter: [key_name_admin(usr)] -> [key_name_admin(M)] : [msg]"))
 	log_game("LETTER RECEIVED: [key_name(usr)] -> [key_name(M)]: \n[msg]")
 	SSblackbox.record_feedback("tally", "admin_verb_send_messenger_bird", 1, "Messenger Bird Letter") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+///This isn't showing in verbs for some reason??
+/client/proc/grant_ticket_to(mob/M in GLOB.player_list)
+	set name = "Grant Ticket To"
+	set category = "GameMaster.Interactions"
+
+	if(!ismob(M))
+		return
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/target_ckey = M.ckey
+	if(!target_ckey && M.client)
+		target_ckey = M.client.ckey
+	if(!target_ckey)
+		to_chat(usr, span_warning("TICKETS: Could not determine a ckey for that mob."))
+		return
+
+	var/datum/admin_ticket_granter/granter = new(src, target_ckey)
+	granter.ui_interact(mob)

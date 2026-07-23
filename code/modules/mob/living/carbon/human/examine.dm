@@ -1,9 +1,15 @@
 /mob/living/carbon/human/get_examine_string(mob/user, thats = FALSE)
 	. = ..()
 	var/used_title = get_role_title(src)
+	var/original_title
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		used_title = spy.examine_title
+	else if(job_title_override && job)
+		var/datum/job/job_datum = SSjob.GetJob(job)
+		if(!QDELETED(job_datum))
+			original_title = job_datum.get_default_title(src)
+
 	if(!used_title)
 		return
 	if(user != src && !IsAdminGhost(user))
@@ -18,7 +24,11 @@
 				return
 			if(!user.mind?.do_i_know(mind, real_name))
 				return
-	. += ", the [used_title]"
+
+	var/title_display = used_title
+	if(original_title && original_title != used_title)
+		title_display = conditional_tooltip_alt(used_title, "[original_title]", TRUE)
+	. += ", the [title_display]"
 
 /mob/living/carbon/human/get_examine_list(mob/user, list/P)
 	. = ..()
@@ -41,13 +51,13 @@
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(spy.examine_species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(spy.examine_species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(spy.examine_species.get_skin_list(), spy.examine_tone) || "incomprehensible"].")
 	else
 		var/datum/species/species = dna?.species
 		if(species?.use_skintones)
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
 	. = list()
@@ -56,7 +66,7 @@
 	if(culture)
 		// do we know them, are we an observer, or do we share a culture
 		if((do_i_know || O || istype(culture, H?.culture?.type)) && !istype(culture, /datum/culture/universal/ambiguous))
-			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
+			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [LOWER_TEXT(P[THEYRE])]"
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
 		// are they from anywhere
 		else if(!self_inspect)

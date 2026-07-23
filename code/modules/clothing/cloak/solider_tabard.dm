@@ -136,7 +136,7 @@
 ////////////////////////
 
 /obj/item/clothing/cloak/stabard/templar
-	name = "surcoat of the golden order"
+	name = "surcoat of the psydonic order"
 	icon_state = "tabard_weeping"
 	item_state = "tabard_weeping"
 	icon = 'icons/roguetown/clothing/special/templar.dmi'
@@ -220,6 +220,21 @@
 	name = "surcoat of the xylixian order"
 	icon_state = "tabard_xylix"
 	item_state = "tabard_xylix"
+
+/obj/item/clothing/cloak/stabard/crusader
+	name = "surcoat of the golden order"
+	desc = "A surcoat drenched in charcoal water, golden thread stitched in the style of Psydon's Knights of Old Psydonia."
+	icon_state = "crusader_surcoat"
+	icon = 'icons/roguetown/clothing/special/crusader.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
+	detail_tag = null
+	detail_color = null
+
+/obj/item/clothing/cloak/stabard/crusader/t
+	name = "surcoat of the silver order"
+	desc = "A surcoat drenched in charcoal water, white cotton stitched in the symbol of Psydon."
+	icon_state = "crusader_surcoatt2"
 
 //////////////////////////
 /// SURCOATS

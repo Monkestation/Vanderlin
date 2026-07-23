@@ -18,6 +18,7 @@
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
 	give_bank_account = 120
+	knows_the_town = TRUE
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
@@ -29,6 +30,7 @@
 
 	honorary = "Lord"
 	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,
@@ -83,7 +85,7 @@
 		/datum/attribute/skill/combat/crossbows = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/swords = 45,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -137,7 +139,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/knives = 45,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 60,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -199,7 +201,7 @@
 		STAT_INTELLIGENCE = 4,
 		STAT_PERCEPTION = 4,
 		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/firearms = 40,
+		/datum/attribute/skill/combat/firearms = 45,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -220,7 +222,7 @@
 		STAT_SPEED = -1,
 		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/firearms = 40,
+		/datum/attribute/skill/combat/firearms = 45,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -272,8 +274,8 @@
 		STAT_ENDURANCE = 3,
 		STAT_PERCEPTION = 3,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/bows = 45,
 		/datum/attribute/skill/combat/firearms = 20,
 		/datum/attribute/skill/combat/unarmed = 35,
 		/datum/attribute/skill/combat/swords = 20,
@@ -303,7 +305,7 @@
 		STAT_CONSTITUTION = 2,
 		STAT_SPEED = -1,
 		STAT_STRENGTH = -1,
-		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/crossbows = 45,
 		/datum/attribute/skill/combat/bows = 50,
 		/datum/attribute/skill/combat/firearms = 20,
 		/datum/attribute/skill/combat/unarmed = 40,

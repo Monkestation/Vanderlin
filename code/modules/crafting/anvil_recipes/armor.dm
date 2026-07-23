@@ -329,13 +329,13 @@
 /datum/anvil_recipe/armor/steel/crusader_helm
 	name = "Crusader helm (+Bar X2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/crusader
+	created_item = /obj/item/clothing/head/helmet/heavy/crusader/t
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/totod_crusader_helm
-	name = "Totod Crusader helm (+Bar X2)"
+	name = "Winged Crusader helm (+Bar X2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/crusader/t
+	created_item = /obj/item/clothing/head/helmet/heavy/crusader
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/skullmet_helm
@@ -610,6 +610,21 @@
 	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
 	additional_items = list(/obj/item/ingot/bronze)
 
+/datum/anvil_recipe/armor/steel/templar/helmet_cadwyn_astrata
+	name = "Cadwyn Plumed Helmet (+Silver Bar, +Cloth)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/cadwyn/astrata
+	additional_items = list(/obj/item/ingot/silver, /obj/item/natural/cloth)
+
+/datum/anvil_recipe/armor/steel/templar/helmet_cadwyn_necra
+	name = "Cadwyn Skull-Helm (+Silver Bar, +Cloth)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/cadwyn/necra
+	additional_items = list(/obj/item/ingot/silver, /obj/item/natural/cloth)
+
+/datum/anvil_recipe/armor/steel/templar/helmet_cadwyn_ravox
+	name = "Cadwyn Ox-Helm (+Silver Bar, +Cloth)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/cadwyn/ravox
+	additional_items = list(/obj/item/ingot/silver, /obj/item/natural/cloth)
+
 /datum/anvil_recipe/armor/steel/chainleg
 	name = "Chain Chausses"
 	created_item = /obj/item/clothing/pants/chainlegs
@@ -865,6 +880,11 @@
 /datum/anvil_recipe/armor/steel/plateglove
 	name = "Plate Gauntlets"
 	created_item = /obj/item/clothing/gloves/plate
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/steel/cadwyn_plateglove
+	name = "Cadwyn Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/cadwyn
 	craftdiff = 4
 
 /datum/anvil_recipe/armor/steel/plateboot

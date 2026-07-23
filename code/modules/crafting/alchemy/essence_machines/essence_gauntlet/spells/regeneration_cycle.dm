@@ -32,5 +32,5 @@
 	if(!iscarbon(owner))
 		return
 
-	carbon.adjustBruteLoss(0.1, FALSE)
-	carbon.adjustFireLoss(0.1, TRUE)
+	carbon.adjustBruteLoss(-0.1, FALSE)
+	carbon.adjustFireLoss(-0.1, TRUE)

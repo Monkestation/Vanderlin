@@ -186,6 +186,12 @@
 	icon_state = "hornkey"
 	lockids = list(ACCESS_INN)
 
+/obj/item/key/hunter
+	name = "hunter's key"
+	desc = "This key should open the Hunter's Lodge."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_HUNTER)
+
 /obj/item/key/artificer
 	name = "artificer's key"
 	desc = "This bronze key should open the Artificer's guild."

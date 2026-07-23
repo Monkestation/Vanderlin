@@ -60,7 +60,7 @@
 	if(ic_blocked)
 		//The filter warning message shows the sanitized message though.
 		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
-		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
+		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, LOWER_TEXT(config.ic_filter_regex.match))
 		return
 
 	var/list/message_mods = list()
@@ -231,7 +231,7 @@
 		deaf_type = 2 // Since you should be able to hear myself without looking
 
 	// Create map text prior to modifying message for goonchat
-	if(can_see_runechat(speaker) && can_hear())
+	if(can_see_runechat(speaker) && !HAS_TRAIT(src, TRAIT_DEAF))
 		create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
@@ -240,7 +240,7 @@
 		message = "<I>... You can almost hear something ...</I>"
 	else if(isliving(speaker))
 		var/mob/living/living_speaker = speaker
-		if(living_speaker != src && living_speaker.client && src.can_hear()) //src.client already checked above
+		if(living_speaker != src && living_speaker.client && !HAS_TRAIT(src, TRAIT_DEAF)) //src.client already checked above
 			log_message("heard [key_name(living_speaker)] say: [raw_message]", LOG_SAY, "#0978b8", FALSE)
 
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)

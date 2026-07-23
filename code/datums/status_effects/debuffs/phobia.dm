@@ -2,6 +2,7 @@
 /datum/status_effect/minor_phobia_reaction
 	id = "phobia_minor"
 	duration = 12 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = null
 
 /datum/status_effect/minor_phobia_reaction/on_apply()

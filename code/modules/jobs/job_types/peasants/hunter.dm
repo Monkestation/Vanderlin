@@ -61,6 +61,7 @@
 
 	outfit = /datum/outfit/hunter
 	give_bank_account = 15
+	knows_the_town = TRUE
 	apprentice_name = JOB_HUNTER
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
@@ -94,5 +95,6 @@
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
 		/obj/item/weapon/knife/hunting = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1
+		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/key/hunter = 1
 	)

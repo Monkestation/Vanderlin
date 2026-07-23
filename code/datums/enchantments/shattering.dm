@@ -3,7 +3,7 @@
 	examine_text = "The bottle looks unusually brittle, as if eager to break."
 	enchantment_end_message = "The bottle loses its volatile enchantment."
 	enchantment_color = "#87CEEB"
-	required_type = /obj/item/reagent_containers/glass/bottle
+	required_type = /obj/item/reagent_containers/glass
 	essence_recipe = list(
 		/datum/thaumaturgical_essence/crystal = 10,
 		/datum/thaumaturgical_essence/chaos = 5

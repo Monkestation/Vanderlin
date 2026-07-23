@@ -34,7 +34,7 @@
 	var/list/allowed_maps = list()
 
 	var/list/trader_outfits = list(
-		/obj/effect/mob_spawn/human/rakshari/trader
+		/obj/effect/mob_spawn/rakshari/trader
 	)
 
 	/// Weighted preferences for trader types - higher numbers = more likely
