@@ -3,6 +3,7 @@
 #define TRAIT_GENERIC "generic"
 #define UNCONSCIOUS_TRAIT "unconscious"
 #define EYE_DAMAGE "eye_damage"
+#define EAR_DAMAGE "ear_damage"
 #define OBESITY_TRAIT "obesity"
 /// Granted by spells
 #define MAGIC_TRAIT "magic"

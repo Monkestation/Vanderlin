@@ -3,9 +3,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 */
 #define OBESITY "obesity"
 
-// ************* atom traits
-#define EAR_DAMAGE "ear_damage"
-
 /// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
 

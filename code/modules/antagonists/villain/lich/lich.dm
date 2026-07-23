@@ -58,6 +58,7 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
+		TRAIT_NO_ORGAN_PROCESS,
 	)
 
 	var/list/spells = list(
