@@ -975,4 +975,4 @@ SUBSYSTEM_DEF(plexora)
 
 	return text_guess
 
-#undef PLX_SHOULD_CHECK_SERVER
+#undef PLX_SHOULD_CHECK_SERVERS
