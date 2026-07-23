@@ -29,6 +29,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	antagpanel_category = "Vampire"
 
 /datum/antagonist/ghoul/on_gain()
+	. = ..()
 	var/mob/living/carbon/human/H = owner.current
 	H.hud_used?.shutdown_bloodpool()
 	H.hud_used?.initialize_bloodpool()
