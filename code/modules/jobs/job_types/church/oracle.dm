@@ -174,7 +174,6 @@
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/combat/swords = 40,
 	)
 
 /datum/job/lunar_sentinel
@@ -232,6 +231,21 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_templar()
 		devotion.grant_to(spawned)
+
+/datum/job/lunar_sentinel/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectable = list(
+		"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,
+		"Lunar Flail" = /obj/item/weapon/flail/silver/noc,
+	)
+	var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
+	if(!choice)
+		return
+	switch(choice)
+		if("Moonlight Khopesh")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/khopesh)
+		if("Lunar Flail")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/flail)
 
 /datum/outfit/lunar_sentinel
 	name = JOB_ORACLE_GUARD
