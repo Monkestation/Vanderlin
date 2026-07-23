@@ -4858,7 +4858,7 @@
 /area/indoors/town/merc_guild)
 "cpb" = (
 /obj/structure/rack,
-/turf/open/floor/metal/alt,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
 "cpf" = (
 /obj/structure/bars,
@@ -11219,10 +11219,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"fhV" = (
-/obj/effect/decal/carpet/square,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/merc_guild)
 "fib" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/river)
@@ -12589,7 +12585,9 @@
 /turf/open/floor/tile/bfloorz,
 /area/indoors/town/bath)
 "fPE" = (
-/obj/structure/bearpelt,
+/obj/structure/bearpelt{
+	layer = -1
+	},
 /obj/structure/chair/stool,
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -13323,7 +13321,7 @@
 /obj/structure/fluff/walldeco/painting/skull{
 	pixel_x = 32
 	},
-/turf/open/floor/metal/alt,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
 "gkQ" = (
 /obj/structure/table/wood/plain/alt,
@@ -16210,6 +16208,7 @@
 /obj/structure/table/wood/large/corner_new{
 	dir = 1
 	},
+/obj/item/candle/scandelabrasingle/lit,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/merc_guild)
 "hDE" = (
@@ -17885,7 +17884,7 @@
 "isc" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bucket/pot,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
 "isg" = (
 /obj/structure/kneestingers,
@@ -23846,7 +23845,9 @@
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
 	},
-/obj/structure/bearpelt,
+/obj/structure/bearpelt{
+	layer = -1
+	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/adv_guild)
 "lap" = (
@@ -28678,6 +28679,10 @@
 	dir = 9;
 	icon_state = "alt_largetable"
 	},
+/obj/structure/bearpelt{
+	layer = 2.7;
+	pixel_x = 18
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/merc_guild)
 "nmi" = (
@@ -29612,7 +29617,7 @@
 /obj/item/natural/feather,
 /obj/item/natural/feather,
 /obj/item/natural/feather,
-/turf/open/floor/ruinedwood/spiral,
+/turf/open/floor/ruinedwood/darker,
 /area/indoors/town/merc_guild)
 "nKc" = (
 /obj/structure/bed/mediocre,
@@ -37575,8 +37580,15 @@
 /obj/item/plate,
 /obj/item/plate,
 /obj/item/plate,
+/obj/item/plate,
 /obj/machinery/light/fueled/wallfire/candle/r,
-/turf/open/floor/blocks/newstone/alt,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/glass/bowl,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
 "rld" = (
 /turf/closed/wall/mineral/decorstone,
@@ -42150,6 +42162,12 @@
 /obj/structure/roguetent/preopen,
 /turf/open/floor/grass,
 /area/outdoors/town)
+"tmU" = (
+/obj/structure/bookcase/random/eoratica{
+	name = "bookcase (The Dangers of Holding Hands)"
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "tmY" = (
 /obj/structure/carpet/blue,
 /obj/structure/table/map{
@@ -43432,6 +43450,10 @@
 	dir = 8
 	},
 /area/indoors/town/dwarfin)
+"tPU" = (
+/obj/structure/bookcase/random/legends,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "tPV" = (
 /obj/structure/fluff/walldeco/painting/queen{
 	pixel_x = 32
@@ -46919,14 +46941,17 @@
 /area/outdoors/farm)
 "vpe" = (
 /obj/structure/table/wood/plain_alt,
+/obj/structure/mirror{
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/obj/item/paper{
+	info = "Please KEEP THE BATHS CLEAN. No one wants the place to smell like wet bog."
+	},
 /obj/item/natural/cloth,
 /obj/item/natural/cloth{
 	pixel_x = -6;
 	pixel_y = 7
-	},
-/obj/structure/mirror{
-	pixel_x = -32;
-	pixel_y = 0
 	},
 /turf/open/floor/tile/brownbrick,
 /area/indoors/town/merc_guild)
@@ -50432,6 +50457,12 @@
 /obj/item/soap,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/town/tavern)
+"wLW" = (
+/obj/effect/decal/carpet/square{
+	pixel_y = -7
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/merc_guild)
 "wMc" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/table/wood/reinforced_alt{
@@ -51765,6 +51796,10 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/mineral/bedrock,
 /area/outdoors/mountains)
+"xoT" = (
+/obj/structure/bookcase/random/myths,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "xoW" = (
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "orphanagelockdown"
@@ -52426,6 +52461,10 @@
 /obj/item/natural/worms/leech,
 /turf/open/floor/blocks/paving,
 /area/under/town/sewer)
+"xBu" = (
+/obj/structure/carpet/green,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/merc_guild)
 "xBz" = (
 /obj/structure/chair/stool,
 /obj/effect/decal/cleanable/blood/old,
@@ -109567,9 +109606,9 @@ bnR
 bnR
 bnR
 bnR
-bnR
+ikM
+fgR
 irX
-qFx
 qFx
 qFx
 qFx
@@ -109770,8 +109809,8 @@ nQz
 ukS
 bnR
 bnR
+fgR
 irX
-qFx
 qFx
 qFx
 qFx
@@ -109970,10 +110009,10 @@ gLw
 nlR
 sbN
 cqI
+wLW
 bnR
-bnR
+tPU
 irX
-qFx
 qFx
 qFx
 qFx
@@ -110168,14 +110207,14 @@ gxD
 gxD
 gxD
 gxD
-fhV
+ukS
 hDB
 vbo
 cqI
 bnR
-ikM
-fgR
-qFx
+bnR
+tmU
+irX
 qFx
 qFx
 qFx
@@ -110374,9 +110413,9 @@ ukS
 fvs
 rxL
 cqI
+wLW
 bnR
-bnR
-irX
+xoT
 irX
 qFx
 qFx
@@ -110781,7 +110820,7 @@ bnR
 bwS
 bnR
 nJY
-fgR
+irX
 xpr
 fyc
 bnR
@@ -111384,8 +111423,8 @@ cpb
 trF
 trF
 trF
-trF
-trF
+bnR
+bnR
 gkA
 hDf
 bnR
@@ -111593,7 +111632,7 @@ irX
 irX
 vqv
 bnR
-bnR
+xBu
 njN
 irX
 qFx
