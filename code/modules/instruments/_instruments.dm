@@ -293,7 +293,7 @@
 	"Kingsfielder Dance No.5" = 'sound/instruments/accord (12).ogg',
 	"Leave Her Johnny" = 'sound/instruments/accord (13).ogg',
 	"March of Zaladin" = 'sound/instruments/accord (14).ogg',
-	"Ossalndic Polka" = 'sound/instruments/accord (15).ogg',
+	"Osslandic Polka" = 'sound/instruments/accord (15).ogg',
 	"The Jolly Coppersmith" = 'sound/instruments/accord (16).ogg',
 	"The Merchant's Ballad" = 'sound/instruments/accord (17).ogg',
 	"Upon the Blue River" = 'sound/instruments/accord (18).ogg',
