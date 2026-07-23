@@ -42050,7 +42050,6 @@
 /area/indoors/town/shop)
 "tjf" = (
 /obj/structure/fluff/wallclock,
-/obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
 "tjw" = (
