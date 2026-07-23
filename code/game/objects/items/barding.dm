@@ -11,7 +11,7 @@
 	var/list/valid_animal_types = list(
 		/mob/living/simple_animal/hostile/retaliate/saiga
 	)
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
@@ -23,33 +23,37 @@
 	integrity_failure = 0.1
 	item_weight = 3 KILOGRAMS
 
-/obj/item/clothing/barding/attack(mob/living/M, mob/living/user)
-	if(!istype(M, /mob/living/simple_animal))
-		to_chat(user, span_warning("\The [src] can only be used on animals!"))
-		return
-	if(!is_type_in_list(M, valid_animal_types))
-		to_chat(user, span_warning("\The [src] cannot be used on [M]! It is only meant for specific animals."))
-		return
+/obj/item/clothing/barding/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /mob/living/simple_animal))
+		return NONE
 
-	var/mob/living/simple_animal/animal = M
+	if(!is_type_in_list(interacting_with, valid_animal_types))
+		to_chat(user, span_warning("\The [src] cannot be used on [interacting_with]! It is only meant for specific animals."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/simple_animal/animal = interacting_with
 	if(animal.adult_growth)
 		to_chat(user, span_warning("[animal] is a juvenile and cannot wear a bard!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(animal.bbarding)
 		to_chat(user, span_warning("[animal] is already wearing a bard!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(!animal.ssaddle)
 		to_chat(user, span_warning("[animal] needs to be saddled before you can fit a bard onto it!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(span_notice("[user] is fitting a bard onto [animal]..."), span_notice("I start fitting a bard onto [animal]..."))
 	if(!do_after(user, 5 SECONDS, animal))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	animal.bbarding = src
 	forceMove(animal)
-	animal.update_icon()
+	animal.update_appearance(UPDATE_ICON)
 	user.visible_message(span_notice("[user] fits a bard onto [animal]."), span_notice("I fit a bard onto [animal]."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/barding/atom_break(damage_flag)
 	. = ..()
@@ -65,7 +69,7 @@
 	icon_state = "armorkit"
 	barding_state = "barding_chain"
 	female_barding_state = "barding_chain-f"
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -95,7 +99,7 @@
 	icon_state = "armorkit"
 	barding_state = "barding_chain"
 	female_barding_state = "barding_chain"
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'

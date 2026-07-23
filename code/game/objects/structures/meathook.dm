@@ -30,7 +30,7 @@
 		if(L.stat == DEAD)
 			if(L.blood_drained >= 60)
 				if(L.skinned)
-					. += span_warning("[L] has been fully drained of blood and skinned. I can butcher it with a cleaver.")
+					. += span_warning("[L] has been fully drained of blood and skinned. I can butcher it with a knife.")
 				else
 					. += span_warning("[L] has had its blood fully drained. I can skin it with a knife.")
 			else
@@ -38,6 +38,15 @@
 					. += span_warning("[L] is having its blood drained. If I try to skin or butcher it now, I may lose some parts.")
 				else
 					. += span_warning("There is a corpse ready to be worked on. I might need a knife for this.")
+
+/obj/structure/meathook/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("To see the next step of butchering examine the meat hook.")
+	. += span_notice("To hang a mob from a meat hook aggressively grab them then click drag them on the meat hook.")
+	. += span_notice("If the mob is dead using middle click will start draining blood, using a bucket on the meathook will allow you to collect the blood.")
+	. += span_notice("Waiting for blood to drain fully will yield larger amounts of resources, but is not required.")
+	. += span_notice("Middle click the mob with a short sharp object to skin it.")
+	. += span_notice("Middle click the mob with a short sharp object after skining it to butcher it.")
 
 /obj/structure/meathook/attack_paw(mob/user)
 	return attack_hand(user)
@@ -166,7 +175,7 @@
 	var/happiness_bonus = butchery_target.get_happiness_yield_bonus(1)
 
 	if(!draining_blood && butchery_target.blood_drained < 60)
-		if(!(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
+		if(!(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/dagger/chop/cleaver || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
 			return
 		var/cut_time = 4 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I prepare to drain [butchery_target]'s blood by cutting the skin..."))
@@ -176,7 +185,7 @@
 			START_PROCESSING(SSmachines, src)
 		return
 
-	if(!butchery_target.skinned && (user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
+	if(!butchery_target.skinned && (user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/dagger/chop/cleaver || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
 		var/cut_time = 6 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I start to skin [butchery_target]."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))
@@ -236,7 +245,7 @@
 	if(!butchery_target.skinned)
 		return
 
-	if(user.used_intent.type == /datum/intent/dagger/chop/cleaver)
+	if(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/dagger/chop/cleaver || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut)
 		var/cut_time = 6 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I start to butcher [butchery_target]."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))

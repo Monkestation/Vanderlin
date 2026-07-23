@@ -16,7 +16,9 @@ export const SectionHead = (props: { children: any }) => (
 export const HR = () => <Box className="RecipeBook__hr" />;
 
 export const Badge = (props: { color?: string; children: any }) => (
-  <Box as="span" className="RecipeBook__badge" style={{ borderColor: props.color || 'var(--rb-accent)' }}>
+  <Box as="span" className="RecipeBook__badge" style={{
+      borderColor: props.color || 'var(--rb-accent)',
+      color: props.color || 'var(--rb-accent)'}}>
     {props.children}
   </Box>
 );

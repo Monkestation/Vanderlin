@@ -5,12 +5,11 @@
 	slot = ORGAN_SLOT_VOICE
 	organ_efficiency = list(ORGAN_SLOT_VOICE = 100)
 	gender = PLURAL
-	healing_factor = 0
 
 	organ_volume = 1
 	max_blood_storage = 10
 	current_blood = 10
-	blood_req = 2
+	blood_req = 1
 	oxygen_req = 2.5
 	nutriment_req = 1.5
 
@@ -24,6 +23,16 @@
 
 /obj/item/organ/vocal_cords/proc/handle_speech(message) //actually say the message
 	owner.say(message, spans = spans, sanitize = FALSE)
+
+/obj/item/organ/vocal_cords/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s throat is visibly swollen, the skin around [owner.p_their()] neck taut and inflamed.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b>'s neck looks slightly puffy and reddened around the throat.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b>'s throat looks mildly irritated.")
 
 /obj/item/organ/vocal_cords/harpy
 	name = "harpy's song"

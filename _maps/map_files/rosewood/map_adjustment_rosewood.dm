@@ -32,12 +32,13 @@
 		/datum/job/orthodoxist,
 		// RACES_PLAYER_GRENZ
 		/datum/job/advclass/combat/swordmaster,
-		/datum/job/advclass/mercenary/grenzelhoft,
+		/datum/job/advclass/mercenary/grenzelhoftzwei,
+		/datum/job/advclass/mercenary/grenzelhofthalb,
+		/datum/job/advclass/mercenary/grenzelhoftgun,
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/preacher,
 	)
 
 	migrant_blacklist = list(
-		/datum/migrant_wave/crusade,
 		/datum/migrant_wave/grenzelhoft_visit,
 	)

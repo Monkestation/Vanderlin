@@ -64,9 +64,9 @@
 		sucessive_uses = 0
 		owner.visible_message(span_warning("[owner] chokes on their own acid!"), span_userdanger("I choke on acid! it burns!"))
 		owner.emote("gags", forced = TRUE)
-		owner.take_damage(15, TOX)
 		if(isliving(owner))
 			var/mob/living/living_owner = owner
+			living_owner.adjustToxLoss(15)
 			living_owner.adjustFireLoss(15)
 			living_owner.apply_status_effect(/datum/status_effect/debuff/acidsplash)
 		StartCooldown()

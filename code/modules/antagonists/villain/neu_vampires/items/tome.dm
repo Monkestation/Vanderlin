@@ -144,23 +144,14 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 	usr << browse(tome_text(), "window=arcanetome;size=900x600")
 
 /obj/item/tome/attack(mob/living/M, mob/living/user, list/modifiers)
-	/*
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on him by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-	M.assaulted_by(user)
-	*/
-
+	. = ..()
 	if(!istype(M))
 		return
 
-	if(M.clan)//don't want to harm our team mates using tomes
+	if(M.clan) //don't want to harm our team mates using tomes
 		return
 
-	..()
-
-	if (!M.stat == DEAD)
+	if(M.stat != DEAD)
 		M.adjustOrganLoss(ORGAN_SLOT_STOMACH, rand(1, 10))
 		to_chat(M, span_warning("You feel a searing heat inside of you!") )
 

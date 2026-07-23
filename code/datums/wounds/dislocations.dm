@@ -10,7 +10,7 @@
 	)
 	sound_effect = "fracturedry"
 	whp = 40
-	woundpain = 40
+	woundpain = 20
 	mob_overlay = ""
 	sewn_overlay = ""
 	can_sew = FALSE
@@ -79,7 +79,7 @@
 		"The %BODYPART is wrenched out of its socket!",
 	)
 	whp = 80
-	woundpain = 100
+	woundpain = 0 // you can't feel anything
 	min_damage_dividend = 1.0
 	viable_zones = list(BODY_ZONE_PRECISE_NECK)
 

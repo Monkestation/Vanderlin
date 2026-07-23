@@ -12,7 +12,7 @@
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
@@ -28,7 +28,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 8.2 KILOGRAMS
@@ -49,6 +49,14 @@
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle)
 
+/obj/item/clothing/armor/chainmail/hauberk/aalloy
+	name = "decrepit hauberk"
+	desc = "Frayed bronze rings and rotting leather, woven together to form a sleeved maille-atekon. Once, the armored vestments of a paladin: now, the withered veil of Zizo's undying legionnaires."
+	icon_state = "ancienthauberk"
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_DECREPIT
+	material_category = ARMOR_MAT_CHAINMAIL
+	anvilrepair = null
+
 /obj/item/clothing/armor/chainmail/hauberk/fluted
 	name = "fluted hauberk"
 	desc = "A steel maille, of a pattern popularized by Psydonian templars."
@@ -63,7 +71,7 @@
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	smeltresult = /obj/item/ingot/iron
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 11 KILOGRAMS
 

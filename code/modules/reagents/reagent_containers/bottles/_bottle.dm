@@ -52,27 +52,31 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	if(desc != initial(desc))
 		fancy = initial(fancy)
 
-/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/paper/scroll))
-		if(reagents?.total_volume)
-			to_chat(user, span_notice("I cannot put a message in [src] while it is full!"))
-			return
-		if(closed)
-			to_chat(user, span_notice("I cannot put a message in [src] while it is closed!"))
-			return
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			var/obj/item/paper/scroll/P = I
-			var/obj/item/bottlemessage/BM = new
-			BM.icon_state = "[icon_state]_message"
+/obj/item/reagent_containers/glass/bottle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return ..()
 
-			P.forceMove(BM)
-			BM.contained = P
-			H.put_in_active_hand(BM)
-			playsound(src, 'sound/items/scroll_open.ogg', 100, FALSE)
-			qdel(src)
+	if(reagents?.total_volume)
+		balloon_alert(user, "it's full!")
 		return
-	return ..()
+
+	if(closed)
+		balloon_alert(user, "it's closed!")
+		return
+
+	playsound(src, 'sound/items/scroll_open.ogg', 100, FALSE)
+
+	var/obj/item/paper/scroll/scroll = tool
+	var/obj/item/bottlemessage/BM = new(get_turf(src))
+	BM.icon_state = "[icon_state]_message"
+	BM.contained = scroll
+
+	scroll.forceMove(BM)
+	user.put_in_hands(BM)
+
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/glass/bottle/update_overlays()
 	. = ..()

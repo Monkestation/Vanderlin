@@ -16,11 +16,11 @@
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_DWARF_SUBTERRAN)
 
 	outfit = null
 	outfit_female = null
 	give_bank_account = 3
+	knows_the_town = TRUE
 	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
 
 	exp_type = list(EXP_TYPE_LIVING)

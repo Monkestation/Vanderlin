@@ -11,8 +11,8 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 	var/hermailermaster
 	var/list/death_queue = list()
 	var/last_death_report
-	var/obj/item/crown
-	var/obj/item/key
+	var/obj/item/clothing/head/crown/serpcrown/crown
+	var/obj/item/key/lord/key
 	var/obj/structure/fake_machine/hailer/hailer
 
 /datum/controller/subsystem/processing/roguemachine/fire(resumed = 0)
@@ -45,17 +45,19 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 
 /proc/is_in_roguetown(atom/A)
 	if(!A)
-		return
+		return FALSE
 	var/turf/T = get_turf(A)
 	if(!T)
-		return
-	var/area/AR = get_area(T)
-	var/list/L = list(/area/outdoors/town,\
-/area/indoors/town,\
-/area/under/town)
-	for(var/X in L)
-		if(istype(AR, X))
-			return TRUE
+		return FALSE
+	var/area/the_area = get_area(T)
+	var/static/list/safe_areas = typecacheof(list(\
+		/area/outdoors/town,\
+		/area/indoors/town,\
+		/area/under/town,\
+		/area/outdoors/exposed/church,\
+	))
+	return is_type_in_typecache(the_area, safe_areas)
+
 #ifdef TESTING
 /mob/living/verb/maxzcdec()
 	set category = "DEBUGTEST"

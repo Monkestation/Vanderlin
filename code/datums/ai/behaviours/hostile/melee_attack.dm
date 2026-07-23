@@ -115,9 +115,9 @@
 
 	basic_mob.face_atom()
 	if(hiding_target) //Shoot it!
-		basic_mob.RangedAttack(hiding_target)
+		basic_mob.ranged_attack(hiding_target)
 	else
-		basic_mob.RangedAttack(target)
+		basic_mob.ranged_attack(target)
 
 /datum/ai_behavior/basic_ranged_attack/finish_action(datum/ai_controller/controller, succeeded, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()

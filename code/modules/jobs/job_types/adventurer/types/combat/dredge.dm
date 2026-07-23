@@ -503,7 +503,7 @@
 			spawned.change_stat(STAT_INTELLIGENCE, 3)
 			spawned.change_stat(STAT_CONSTITUTION, -1)
 			spawned.change_stat(STAT_PERCEPTION, -2)
-			spawned.virginity = TRUE
+			ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.grant_language(/datum/language/elvish)
 			spawned.grant_language(/datum/language/celestial)
 			spawned.grant_language(/datum/language/oldpsydonic)
@@ -900,7 +900,6 @@
 				armor = /obj/item/clothing/armor/cuirass/copperchest
 				mask = /obj/item/clothing/face/facemask/copper
 				wrists = /obj/item/clothing/wrists/bracers/copper
-				neck = /obj/item/clothing/neck/gorget/copper
 				shirt = /obj/item/clothing/armor/gambeson
 				pants = /obj/item/clothing/pants/chainlegs
 			if("BKnight") // RARE. DO NOT GIVE THEM BLACKSTEEL SHIT.

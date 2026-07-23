@@ -8,15 +8,13 @@
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	organ_volume = 1
 	max_blood_storage = 20
 	current_blood = 20
-	blood_req = 4
+	blood_req = 2
 	oxygen_req = 4
-	nutriment_req = 2
-	hydration_req = 1.5
+	nutriment_req = 1.5
+	hydration_req = 1.2
 
 	low_threshold_passed = "<span class='info'>My stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
 	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain. I can hardly stomach the idea of food right now!</span>"
@@ -29,6 +27,16 @@
 /obj/item/organ/stomach/Initialize()
 	. = ..()
 	create_reagents(1000)
+
+/obj/item/organ/stomach/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s abdomen is visibly distended, with a sickly sheen of sweat across [owner.p_their()] skin.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b> has a distinctly greenish, nauseated cast to [owner.p_their()] complexion.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b> looks a little peaky.")
 
 /obj/item/organ/stomach/Remove(mob/living/carbon/M, special = 0)
 	var/mob/living/carbon/human/H = owner
@@ -75,9 +83,18 @@
 	slot = ORGAN_SLOT_GUTS
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
-
-	healing_factor = STANDARD_ORGAN_HEALING
+	organ_efficiency = list(ORGAN_SLOT_GUTS = 100)
 	low_threshold_passed = "<span class='info'>My guts flashes with pain before subsiding.</span>"
 	high_threshold_passed = "<span class='warning'>My guts flares up with constant pain.</span>"
 	high_threshold_cleared = "<span class='info'>The pain in my guts die down for now.</span>"
 	low_threshold_cleared = "<span class='info'>The last bouts of pain in my guts have died out.</span>"
+
+/obj/item/organ/guts/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s abdomen looks rigid and board-like.")
+	else if(damage >= high_threshold)
+		examine_list += span_warning("<b>[owner]</b>'s midsection looks somewhat tense and swollen.")
+	else if(damage >= low_threshold)
+		examine_list += span_notice("<b>[owner]</b>'s abdomen looks mildly bloated.")

@@ -618,11 +618,11 @@
 /area/under/tomb/cave/spider)
 "ws" = (
 /obj/structure/rack,
-/obj/item/clothing/shoes/boots/rare/dwarfplate{
+/obj/item/clothing/shoes/boots/armor/dwarven{
 	pixel_x = -6;
 	pixel_y = 7
 	},
-/obj/item/clothing/gloves/rare/dwarfplate{
+/obj/item/clothing/gloves/plate/dwarven{
 	pixel_y = -3;
 	pixel_x = 1
 	},
@@ -1181,7 +1181,7 @@
 /area/under/tomb/indoors)
 "LV" = (
 /obj/structure/rack,
-/obj/item/clothing/head/rare/dwarfplate{
+/obj/item/clothing/head/helmet/heavy/dwarven{
 	pixel_y = 5;
 	pixel_x = -6
 	},
@@ -1418,7 +1418,7 @@
 /obj/structure/spider/stickyweb,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/structure/closet/crate/chest/lootbox,
-/obj/item/clothing/armor/rare/dwarfplate,
+/obj/item/clothing/armor/plate/full/dwarven,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "Vz" = (

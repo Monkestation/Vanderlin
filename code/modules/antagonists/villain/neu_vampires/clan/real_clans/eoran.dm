@@ -5,7 +5,7 @@
 		/datum/action/cooldown/spell/charm/vampire,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Elder"
 
 /datum/clan/eoran
@@ -25,7 +25,7 @@
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_VAMPMANSION,
 		TRAIT_VAMP_DREAMS,
 		TRAIT_NOAMBUSH,

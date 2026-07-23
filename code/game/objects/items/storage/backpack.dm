@@ -18,6 +18,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = NONE
 	max_integrity = 300
+	childcore = TRUE
 
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
 	dyeable = TRUE

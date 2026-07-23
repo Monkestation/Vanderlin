@@ -10,7 +10,7 @@
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
@@ -25,7 +25,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	item_weight = 10 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/rare
@@ -51,7 +51,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_VEST
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 6.5 KILOGRAMS
@@ -86,7 +86,7 @@
 	sellprice = VALUE_DIRT_CHEAP
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
@@ -98,7 +98,7 @@
 	icon_state = "vplate"
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
 	item_weight = 7 KILOGRAMS
@@ -125,10 +125,45 @@
 	desc = "A sturdy steel cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
 
 	body_parts_covered = CHEST | VITALS | LEGS
-	max_integrity = 300
+	max_integrity = INTEGRITY_STRONGEST
+
+/obj/item/clothing/armor/cuirass/fluted/iron
+	name = "iron fluted cuirass"
+	desc = "Relatively sturdy iron cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
+	icon_state = "flutedcuirass_iron"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+
+	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ARMOR
+	armor_type = /datum/armor/plate/bad
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 6.5 KILOGRAMS
+
 
 /obj/item/clothing/armor/cuirass/ornate
 	name = "psydonian cuirass"
 	icon_state = "ornatecuirass"
 	desc = "An ornate steel cuirass with tassets, favored by both the Oratorium Throni Vacui and the Order of the Silver Psycross. \
 			Made to endure."
+
+/obj/item/clothing/armor/cuirass/fluted/gold
+	name = "golden cuirass"
+	icon_state = "goldcuirass"
+	desc = "A resplendant cuirass of pure gold, fitted with tassets for additional coverage. It is dressed atop a besilked arming jacket to ensure the absolute comfort of its wearer, and the holy sigil has been meticulously formed from its slanted plates."
+	armor_class = AC_HEAVY
+	anvilrepair = null
+	melting_material = /datum/material/gold
+	melt_amount = 100
+	grid_height = 96
+	grid_width = 96
+	sellprice = 300
+
+/obj/item/clothing/armor/cuirass/fluted/gold/heroic
+	name = "golden heroic cuirass"
+	icon_state = "heroiccuirass"
+	desc = "A resplendant cuirass of pure gold, fitted with tassets for additional coverage. It has been meticulously waxed-and-assembled from dozens of smaller golden plates, in order to replicate the statuesque physique of Psydonia's legendary heroes."
+
+/obj/item/clothing/armor/cuirass/fluted/gold/king
+	name = "golden heroic cuirass"
+	sellprice = 400

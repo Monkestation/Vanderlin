@@ -92,8 +92,6 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isgoblin(A) (is_species(A, /datum/species/goblin))
 #define isorc(A) (is_species(A, /datum/species/orc))
-//more carbon mobs
-#define ismonkey(A) (istype(A, /mob/living/carbon/monkey))
 
 //Simple animals
 #define isanimal(A) (istype(A, /mob/living/simple_animal))
@@ -152,6 +150,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isclothing(A) (istype(A, /obj/item/clothing))
 
 #define isclothing_path(A) (ispath(A, /obj/item/clothing))
+
+#define isbundle(A) (istype(A, /obj/item/natural/bundle))
 
 GLOBAL_LIST_INIT(pointed_types, typecacheof(list(
 	/obj/item/kitchen/fork)))

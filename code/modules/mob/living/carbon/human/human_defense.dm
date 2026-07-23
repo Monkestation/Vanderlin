@@ -33,7 +33,7 @@
 				if(C.uses_integrity)
 					if(C.get_integrity() <= 0)
 						continue
-				var/val = C.armor.getRating(d_type)
+				var/val = C.get_armor().get_rating(d_type)
 				// The code below finally fixes the targetting order of armor > shirt > flesh. - Foxtrot (#gundamtanaka)
 				var/obj/item/armorworn = src.get_item_by_slot(ITEM_SLOT_ARMOR) // The armor we're wearing
 				var/obj/item/shirtworn = src.get_item_by_slot(ITEM_SLOT_SHIRT) // The shirt we're wearing
@@ -76,7 +76,7 @@
 			steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
 	if(physiology)
-		protection += physiology.armor.getRating(d_type)
+		protection += physiology.armor.get_rating(d_type)
 	return protection
 
 /// Return the armor that blocks the crit
@@ -279,7 +279,7 @@
 		var/mob/living/carbon/human/H = user
 		dna.species.spec_attack_hand(H, src)
 
-/mob/living/carbon/human/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/carbon/human/attack_paw(mob/living/carbon/M)
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(ran_zone(dam_zone))
 	if(!affecting)
@@ -589,8 +589,6 @@
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
-	if(!deep_examination)
-		deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 	if(user == src)
 		m1 = "I am"
 		examination += "<span class='notice'>Let's see how I am doing.</span>"
@@ -611,15 +609,16 @@
 	else
 		examination += "<span class='dead'>[m1] dead.</span>"
 
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			examination += "<span class='artery'>[m1] anemic.</span>"
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			examination += "<span class='artery'>[m1] a little anemic.</span>"
+	if(CAN_HAVE_BLOOD(src))
+		switch(get_blood_volume())
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				examination += "<span class='artery'>[m1] anemic.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				examination += "<span class='artery'>[m1] a little anemic.</span>"
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		if(HAS_TRAIT(src, TRAIT_NO_BITE))
@@ -651,7 +650,7 @@
 		var/list/mechanics_result = list()
 		for(var/wound_type in all_untreated)
 			switch(wound_type)
-				if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+				if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE)
 					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 				if(WOUND_BLUNT, WOUND_LASH)
 					mechanics_result += "Bandage bruises and lashes to allow them to heal."
@@ -772,3 +771,8 @@
 			if(C.body_parts_covered & def_zone.body_part)
 				covering_part += C
 	return covering_part
+
+/mob/living/carbon/human/getShock(painkiller_included)
+	. = ..()
+	if(dna?.species)
+		return . * dna?.species.pain_mod

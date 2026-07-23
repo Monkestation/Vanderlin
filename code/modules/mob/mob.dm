@@ -86,11 +86,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 		GLOB.alive_mob_list += src
 	set_focus(src)
 	prepare_huds()
-	for(var/v in GLOB.active_alternate_appearances)
-		if(!v)
-			continue
-		var/datum/atom_hud/alternate_appearance/AA = v
-		AA.onNewMob(src)
+	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(src)
 	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
 	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
 	attribute_initialize()
@@ -99,6 +96,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 	update_config_movespeed()
 	update_movespeed(TRUE)
 	become_hearing_sensitive()
+	if(!canparry)
+		ADD_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
+	if(!candodge)
+		ADD_TRAIT(src, TRAIT_UNDODGING, INNATE_TRAIT)
 
 /// Attributes
 /mob/proc/attribute_initialize()
@@ -129,24 +130,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 	tag = "mob_[next_mob_id++]"
 
 /**
- * Prepare the huds for this atom
- *
- * Goes through hud_possible list and adds the images to the hud_list variable (if not already
- * cached)
- */
-/atom/proc/prepare_huds()
-	hud_list = list()
-	for(var/hud in hud_possible)
-		var/hint = hud_possible[hud]
-		switch(hint)
-			if(HUD_LIST_LIST)
-				hud_list[hud] = list()
-			else
-				var/image/I = image('icons/mob/hud.dmi', src, "")
-				I.appearance_flags = RESET_COLOR|RESET_TRANSFORM
-				hud_list[hud] = I
-
-/**
  * Show a message to this mob (visual or audible)
  */
 /mob/proc/show_message(msg, type, alt_msg, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -163,7 +146,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 				msg = alt_msg
 				type = alt_type
 
-		if(type & MSG_AUDIBLE && !can_hear())//Hearing related
+		if(type & MSG_AUDIBLE && HAS_TRAIT(src, TRAIT_DEAF))//Hearing related
 			if(!alt_msg)
 				return
 			else
@@ -225,7 +208,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		if(M != src && !M.is_blind())
 			M.log_message("saw [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
-		if(runechat_message && M.can_hear())
+		if(runechat_message && !HAS_TRAIT(M, TRAIT_DEAF))
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 ///Adds the functionality to self_message.
@@ -250,10 +233,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 		hearers -= src
 	for(var/mob/M in hearers)
 		if(M != src && M.client)
-			if(M.can_hear())
+			if(!HAS_TRAIT(M, TRAIT_DEAF))
 				M.log_message("heard [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
-		if(runechat_message && M.can_see_runechat(src) && M.can_hear())
+		if(runechat_message && M.can_see_runechat(src) && !HAS_TRAIT(M, TRAIT_DEAF))
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 /**
@@ -325,17 +308,20 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
  */
-/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial)
+/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial = FALSE)
 	if(!istype(W) || QDELETED(W)) //This qdeleted is to prevent stupid behavior with things that qdel during init, like say stacks
 		return FALSE
-	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self))
+
+	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self || initial))
 		if(qdel_on_fail)
 			qdel(W)
 		else if(!disable_warning)
 			to_chat(src, span_warning("I can't equip that!"))
 		return FALSE
+
 	equip_to_slot(W, slot, initial, redraw_mob) //This proc should not ever fail.
 	update_a_intents()
+
 	return TRUE
 
 /**
@@ -681,7 +667,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  */
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
+		var/t1 = "window=[href_list["mach_close"]]"
 		unset_machine()
 		src << browse(null, t1)
 
@@ -1156,34 +1142,34 @@ GLOBAL_VAR_INIT(mobids, 1)
 	H.open_language_menu(usr)
 
 ///Adjust the nutrition of a mob
-/mob/proc/adjust_nutrition(change) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		nutrition = NUTRITION_LEVEL_FULL
-	nutrition = max(0, nutrition + change)
-	if(nutrition > NUTRITION_LEVEL_FULL)
-		nutrition = NUTRITION_LEVEL_FULL
+/mob/proc/adjust_nutrition(change, forced) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		nutrition = NUTRITION_LEVEL_WELL_FED
+		return
+
+	nutrition = clamp(nutrition + change, 0, NUTRITION_LEVEL_FULL)
 
 ///Force set the mob nutrition
-/mob/proc/set_nutrition(change) //Seriously fuck you oldcoders.
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		nutrition = NUTRITION_LEVEL_FULL
-	nutrition = max(0, change)
-	if(nutrition > NUTRITION_LEVEL_FULL)
-		nutrition = NUTRITION_LEVEL_FULL
+/mob/proc/set_nutrition(set_to, forced) //Seriously fuck you oldcoders.
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		nutrition = NUTRITION_LEVEL_WELL_FED
+		return
 
-/mob/proc/adjust_hydration(change)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		hydration = HYDRATION_LEVEL_FULL
-	hydration = max(0, hydration + change)
-	if(hydration > HYDRATION_LEVEL_FULL)
-		hydration = HYDRATION_LEVEL_FULL
+	nutrition = clamp(set_to, 0, NUTRITION_LEVEL_FULL)
 
-/mob/proc/set_hydration(change)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
-		hydration = HYDRATION_LEVEL_FULL
-	hydration = max(0, change)
-	if(hydration > HYDRATION_LEVEL_FULL)
-		hydration = HYDRATION_LEVEL_FULL
+/mob/proc/adjust_hydration(change, forced)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		hydration = HYDRATION_LEVEL_HYDRATED
+		return
+
+	hydration = clamp(hydration + change, 0, HYDRATION_LEVEL_FULL)
+
+/mob/proc/set_hydration(set_to, forced)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
+		hydration = HYDRATION_LEVEL_HYDRATED
+		return
+
+	hydration = clamp(set_to, 0, HYDRATION_LEVEL_FULL)
 
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = equipped_speed_mods()
@@ -1213,7 +1199,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/say_mod(input, list/message_mods = list())
 	var/customsayverb = findtext(input, "*")
 	if(customsayverb)
-		return lowertext(copytext(input, 1, customsayverb))
+		return LOWER_TEXT(copytext(input, 1, customsayverb))
 	. = ..()
 
 /atom/movable/proc/attach_spans(input, list/spans)
@@ -1251,7 +1237,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return choice
 
 	for(var/obj/item/spawn_item as anything in spawn_items)
-		equip_to_appropriate_slot(new spawn_item(), TRUE)
+		equip_to_appropriate_slot(new spawn_item(), TRUE, TRUE)
 
 	return choice
 

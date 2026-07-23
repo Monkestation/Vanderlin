@@ -9,6 +9,7 @@
 #define STATS_ALIVE_HALFLINGS "alive_halflings"
 #define STATS_VAMPIRES "vampires"
 #define STATS_ALIVE_GARRISON "alive_garrison"
+#define STATS_ALIVE_GALLOWBAND "alive_gallowband"
 #define STATS_ALIVE_CLERGY "alive_clergy"
 #define STATS_ALIVE_TRADESMEN "alive_tradesmen"
 #define STATS_MONARCH_PATRON "monarch_patron"
@@ -89,7 +90,7 @@
 
 // Pestra
 #define STATS_POTIONS_BREWED "potions_brewed"
-#define STATS_WOUNDS_SEWED "wounds_sewed"
+#define STATS_WOUNDS_FIXED "wounds_fixed"
 #define STATS_ANIMALS_BRED "animals_bred"
 #define STATS_FOOD_ROTTED "food_rotted"
 #define STATS_LUX_REVIVALS "lux_revivals"
@@ -212,7 +213,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_GRAVES_ROBBED = 0,
 	STATS_DEADITES_KILLED = 0,
 	STATS_VAMPIRES_KILLED = 0,
-	STATS_WOUNDS_SEWED = 0,
+	STATS_WOUNDS_FIXED = 0,
 	STATS_SOULS_REINCARNATED = 0,
 	STATS_ANIMALS_BRED = 0,
 	STATS_WEREVOLVES = 0,
@@ -322,6 +323,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_STARTING_TREASURY = 0,
 	STATS_HUNTED_PEOPLE = 0,
 	STATS_FOREIGNERS = 0,
+	STATS_CPR_REVIVALS = 0,
 ))
 
 GLOBAL_LIST_EMPTY(patron_follower_counts)

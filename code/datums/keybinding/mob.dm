@@ -10,7 +10,7 @@
 	full_name = "Face North"
 	description = ""
 
-/datum/keybinding/mob/face_north/down(client/user)
+/datum/keybinding/mob/face_north/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	M.northface()
@@ -24,7 +24,7 @@
 	full_name = "Face East"
 	description = ""
 
-/datum/keybinding/mob/face_east/down(client/user)
+/datum/keybinding/mob/face_east/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	M.eastface()
@@ -38,7 +38,7 @@
 	full_name = "Face South"
 	description = ""
 
-/datum/keybinding/mob/face_south/down(client/user)
+/datum/keybinding/mob/face_south/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	M.southface()
@@ -51,7 +51,7 @@
 	full_name = "Face West"
 	description = ""
 
-/datum/keybinding/mob/face_west/down(client/user)
+/datum/keybinding/mob/face_west/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	M.westface()
@@ -65,7 +65,7 @@
 	full_name = "Stop pulling"
 	description = ""
 
-/datum/keybinding/mob/stop_pulling/down(client/user)
+/datum/keybinding/mob/stop_pulling/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!M.pulling)
@@ -81,13 +81,13 @@
 	full_name = "Hold to toggle move intent"
 	description = "Held down to cycle to the other move intent, release to cycle back"
 
-/datum/keybinding/mob/toggle_move_intent/down(client/user)
+/datum/keybinding/mob/toggle_move_intent/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	M.toggle_move_intent()
 	return TRUE
 
-/datum/keybinding/mob/toggle_move_intent/up(client/user)
+/datum/keybinding/mob/toggle_move_intent/up(client/user, turf/target)
 	var/mob/M = user.mob
 	M.toggle_move_intent()
 	return TRUE
@@ -98,7 +98,7 @@
 	full_name = "press to cycle move intent"
 	description = "Pressing this cycle to the opposite move intent, does not cycle back"
 
-/datum/keybinding/mob/toggle_move_intent_alternative/down(client/user)
+/datum/keybinding/mob/toggle_move_intent_alternative/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	M.toggle_move_intent()
@@ -110,7 +110,7 @@
 	full_name = "Target: Cycle Head"
 	description = ""
 
-/datum/keybinding/mob/target_head_cycle/down(client/user)
+/datum/keybinding/mob/target_head_cycle/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_toggle_head()
 	return TRUE
@@ -121,7 +121,7 @@
 	full_name = "Target: Cycle Neck/Mouth"
 	description = ""
 
-/datum/keybinding/mob/target_neck/down(client/user)
+/datum/keybinding/mob/target_neck/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_neck()
 	return TRUE
@@ -132,7 +132,7 @@
 	full_name = "Target: Cycle Eyes/Ears"
 	description = ""
 
-/datum/keybinding/mob/target_eyes/down(client/user)
+/datum/keybinding/mob/target_eyes/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_eyes()
 	return TRUE
@@ -143,7 +143,7 @@
 	full_name = "Target: right arm"
 	description = ""
 
-/datum/keybinding/mob/target_r_arm/down(client/user)
+/datum/keybinding/mob/target_r_arm/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_r_arm()
 	return TRUE
@@ -154,7 +154,7 @@
 	full_name = "Target: Body"
 	description = ""
 
-/datum/keybinding/mob/target_body_chest/down(client/user)
+/datum/keybinding/mob/target_body_chest/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_chest()
 	return TRUE
@@ -165,7 +165,7 @@
 	full_name = "Target: left arm"
 	description = ""
 
-/datum/keybinding/mob/target_left_arm/down(client/user)
+/datum/keybinding/mob/target_left_arm/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_l_arm()
 	return TRUE
@@ -176,7 +176,7 @@
 	full_name = "Target: Right leg"
 	description = ""
 
-/datum/keybinding/mob/target_right_leg/down(client/user)
+/datum/keybinding/mob/target_right_leg/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_r_leg()
 	return TRUE
@@ -187,7 +187,7 @@
 	full_name = "Target: Groin"
 	description = ""
 
-/datum/keybinding/mob/target_body_groin/down(client/user)
+/datum/keybinding/mob/target_body_groin/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_groin()
 	return TRUE
@@ -198,7 +198,7 @@
 	full_name = "Target: left leg"
 	description = ""
 
-/datum/keybinding/mob/target_left_leg/down(client/user)
+/datum/keybinding/mob/target_left_leg/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.body_l_leg()
 	return TRUE

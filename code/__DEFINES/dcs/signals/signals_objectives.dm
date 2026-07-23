@@ -16,7 +16,7 @@
 #define COMSIG_ORGAN_CONSUMED "organ_consumed"
 /// from base of /mob/living/carbon/human/proc/torture_victim() (mob/living/torturer, mob/living/victim)
 #define COMSIG_TORTURE_PERFORMED "torture_performed"
-/// from base of /obj/structure/gravemarker/OnCrafted() (mob/living/consecrator, obj/container)
+/// from base of /obj/structure/closet/dirthole/attackby() (mob/living/consecrator, obj/container)
 #define COMSIG_GRAVE_CONSECRATED "grave_consecrated"
 /// from base of /mob/living/simple_animal/proc/tamed() (mob/living/tamer, mob/living/simple_animal)
 #define COMSIG_ANIMAL_TAMED "animal_tamed"
@@ -28,7 +28,7 @@
 #define COMSIG_ROTTEN_FOOD_EATEN "rotten_food_eaten"
 /// from base of /datum/status_effect/buff/lux_drank/on_apply() ()
 #define COMSIG_LUX_TASTED "lux_tasted"
-/// from base of //mob/living/carbon/monkey/attack_hand() (victim)
+/// from base of //mob/living/carbon/attack_hand() (victim)
 #define COMSIG_HEAD_PUNCHED "head_punched"
 /// from base of /datum/action/cooldown/spell/transform_tree/cast() ()
 #define COMSIG_TREE_TRANSFORMED "tree_transformed"
@@ -66,3 +66,5 @@
 #define COMSIG_GLOBAL_FISH_RELEASED "global_fish_released"
 /// from base of /datum/action/cooldown/spell/undirected/list_target/convertrole/proc/convert() (mob/living/carbon/human/recruiter, mob/living/carbon/human/recruit, newrole)
 #define COMSIG_GLOBAL_ROLE_CONVERTED "role_converted"
+
+#define COMSIG_GHOST_VESSEL_POSSESSED "ghost_vessel_possessed"

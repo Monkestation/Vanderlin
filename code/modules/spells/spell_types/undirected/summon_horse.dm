@@ -28,7 +28,7 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 	update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/honse/equestria/tamed()
-	..()
+	. = ..()
 	deaggroprob = 20
 	if(.) // was already tamed
 		return

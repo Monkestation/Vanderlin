@@ -36,7 +36,7 @@
 	var/t = 0
 	var/timeout_time = timeout
 
-	src << browse({"<script>var xhr = new XMLHttpRequest(); xhr.open('GET', 'byond://?asset_cache_confirm_arrival=[job]', true); xhr.send(null);</script>"}, "window=asset_cache_browser&file=asset_cache_send_verify.htm")
+	src << browse({"<script>window.location.href='byond://?asset_cache_confirm_arrival=[job]'</script>"}, "window=asset_cache_browser&file=asset_cache_send_verify.htm")
 
 	while(!completed_asset_jobs["[job]"] && t < timeout_time) // Reception is handled in Topic()
 		stoplag(1) // Lock up the requester until this is received.

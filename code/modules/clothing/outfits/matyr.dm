@@ -21,7 +21,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
 	sleevetype = "silverarmor"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/martyr.dmi'
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	sellprice = 1000
 	melting_material = /datum/material/silver
 	melt_amount = 350
@@ -35,7 +35,7 @@
 	sleevetype = "silverlegs"
 	icon_state = "silverlegs"
 	item_state = "silverlegs"
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/pants/plate
 	sellprice = 1000
 	melting_material = /datum/material/silver
 	melt_amount = 250
@@ -75,19 +75,7 @@
 	flags_inv = HIDEBOOB
 	var/overarmor = TRUE
 	sellprice = 300
-
-
-/obj/item/clothing/cloak/holysee/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
-
-/obj/item/clothing/cloak/holysee/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
 
 /obj/item/clothing/cloak/holysee/MiddleClick(mob/user)
 	overarmor = !overarmor
@@ -120,7 +108,7 @@
 	icon_state = "naledimask"
 	desc = "Runes and wards, meant for daemons; the gold has somehow rusted in unnatural, impossible agony. The most prominent of these etchings is in the shape of the psycross. Armored to protect the wearer's face."
 	max_integrity = 100
-	armor = ARMOR_MASK_METAL
+	armor_type = /datum/armor/mask/metal
 	flags_inv = HIDEFACE
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT)
 	sellprice = 0
@@ -148,7 +136,7 @@
 	icon_state = "naledimask"
 	desc = "A golden mask, hiding the face of those who prefer their fists and agility to speak for them."
 	max_integrity = 150
-	armor = ARMOR_MASK_METAL
+	armor_type = /datum/armor/mask/metal
 	flags_inv = HIDEFACE
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT)
 	sellprice = 0

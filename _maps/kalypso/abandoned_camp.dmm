@@ -3,9 +3,9 @@
 /turf/template_noop,
 /area/template_noop)
 "i" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
-/turf/template_noop,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
 /area/template_noop)
 "q" = (
 /obj/structure/table/wood/treestump,

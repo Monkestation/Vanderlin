@@ -1,5 +1,6 @@
 /datum/quest/courier
 	quest_type = QUEST_COURIER
+	quest_difficulty = QUEST_DIFFICULTY_EASY
 	var/list/target_delivery_locations = list(
 		/area/indoors/town/tavern,
 		/area/indoors/town/church,
@@ -23,12 +24,6 @@
 		text += "Pickup location: Reported sighting in [target_spawn_area] region.<br>"
 	text += "Destination: [initial(target_delivery_location.name)]."
 	return text
-
-/datum/quest/courier/get_additional_reward(target_turf)
-	var/turf/scroll_turf = get_turf(quest_scroll)
-	var/distance = CLAMP(get_dist(scroll_turf, target_turf), 0, 200) // Avoid infinity rewards if it bugs out
-	var/distance_reward = (distance / QUEST_DELIVERY_DISTANCE_DIVISOR) * QUEST_DELIVERY_DISTANCE_BONUS
-	return ROUND_UP(distance_reward + QUEST_COURIER_BONUS_FLAT)
 
 /datum/quest/courier/proc/spawn_courier_item(area/delivery_area, obj/effect/landmark/quest_spawner/landmark)
 	if(!delivery_area)

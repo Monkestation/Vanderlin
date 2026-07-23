@@ -16,7 +16,7 @@
 	melting_material = /datum/material/steel
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/gloves/plate/good
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_CRITICAL_HITS
 	abstract_type = /obj/item/clothing/gloves/rare
@@ -34,14 +34,6 @@
 	name = "elvish plate gauntlets"
 	desc = "Plate gauntlets of mystic elven alloy, lightweight yet incredibly protective. Typically worn by elite bladesingers."
 	icon_state = "welfhand"
-	item_weight = 1.65 KILOGRAMS
-
-/obj/item/clothing/gloves/rare/dwarfplate
-	name = "dwarvish plate gauntlets"
-	desc = "Plated gauntlets of masterwork dwarven smithing, the pinnacle of protection for one's hands."
-	icon_state = "dwarfhand"
-	allowed_race = list(SPEC_ID_DWARF)
-	allowed_sex = list(MALE, FEMALE)
 	item_weight = 1.65 KILOGRAMS
 
 /obj/item/clothing/gloves/rare/grenzelplate

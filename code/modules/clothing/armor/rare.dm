@@ -12,7 +12,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
@@ -41,14 +41,6 @@
 	desc = "A suit of steel interwoven, through honed elven technique, with hardened bark plates."
 	icon_state = "welfchest"
 	item_weight = 17 KILOGRAMS
-
-/obj/item/clothing/armor/rare/dwarfplate
-	name = "dwarvish plate"
-	desc = "Plate armor made out of the sturdiest, finest dwarvish metal armor. It's as heavy and durable as it gets."
-	icon_state = "dwarfchest"
-	allowed_race = list(SPEC_ID_DWARF)
-	item_weight = 17 KILOGRAMS
-	stand_speed_reduction = 1.2
 
 /obj/item/clothing/armor/rare/grenzelplate
 	name = "grenzelhoftian plate regalia"

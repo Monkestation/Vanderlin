@@ -1,3 +1,5 @@
+#define LIST_PRAISE_ZIZO list("Praise Zizo!", "Hail Zizo!", "Glory to the Pale Lady!", "ZIZO! ZIZO! ZIZO!")
+
 /datum/attribute_holder/sheet/job/zizocultist
 	raw_attribute_list = list(
 		STAT_STRENGTH = 4,
@@ -68,8 +70,7 @@
 	)
 
 /datum/antagonist/zizocultist/examine_target(mob/user, mob/examined, list/P, list/examine_contents)
-	var/mob/living/carbon/human/H = examined
-	if(istype(H) && H.virginity)
+	if(HAS_TRAIT(examined, TRAIT_VIRGIN))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, span_purple(html_tag("B", "[P[THEYRE]] a virgin!")))
 	. = ..()
 
@@ -191,7 +192,7 @@
 					traitorwin = FALSE
 				count += objective.triumph_count
 
-	var/special_role_text = lowertext(name)
+	var/special_role_text = LOWER_TEXT(name)
 	if(traitorwin)
 		if(count)
 			if(owner)
@@ -213,7 +214,7 @@
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
 	record_round_statistic(STATS_ZIZO_PRAISED)
-	audible_message("\The [src] praises <span class='bold'>Zizo</span>!")
+	say(pick(LIST_PRAISE_ZIZO), spans = list("god_zizo"), sanitize = FALSE, language = /datum/language/undead)
 	playsound(src, 'sound/vo/cult/praise.ogg', 45, 1)
 	log_say("[src] has praised zizo! (zizo cultist verb)")
 
@@ -455,7 +456,7 @@
 
 	var/list/runes = list("Servantry", "Transmutation", "Fleshcrafting")
 
-	if(!bloody_hands || get_bleed_rate())
+	if(!bloody_hands && !get_bleed_rate())
 		to_chat(src, span_danger("My hands aren't bloody enough."))
 		return
 
@@ -471,6 +472,9 @@
 	set name = "Release Lackey"
 	set category = "RoleUnique.Zizo"
 
+	if(!istype(src) || stat == DEAD)
+		return
+
 	var/list/mob/living/carbon/human/possible = list()
 	for(var/datum/mind/V in SSmapping.retainer.cultists)
 		if(V.special_role == "Zizoid Lackey")
@@ -485,3 +489,5 @@
 			sleep(20)
 			choice.gib() // Cooler than dusting.
 			SSmapping.retainer.cultists -= choice.mind
+
+#undef LIST_PRAISE_ZIZO

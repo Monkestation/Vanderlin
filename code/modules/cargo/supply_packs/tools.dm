@@ -2,6 +2,7 @@
 	group = "Tools"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/tools
 
 /datum/supply_pack/tools/rope
 	name = "Rope"
@@ -173,15 +174,16 @@
 
 /datum/supply_pack/tools/medical
 	group = "Medicine"
+	abstract_type = /datum/supply_pack/tools/medical
 
 /datum/supply_pack/tools/medical/health
 	name = "Healing Potion"
-	cost = 50
+	cost = 75
 	contains = /obj/item/reagent_containers/glass/bottle/healthpot
 
 /datum/supply_pack/tools/medical/mana
 	name = "Mana Potion"
-	cost = 50
+	cost = 75
 	contains = /obj/item/reagent_containers/glass/bottle/manapot
 
 /datum/supply_pack/tools/medical/surgerybag

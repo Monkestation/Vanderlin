@@ -8,6 +8,8 @@
 	var/atom/output
 	/// Minimum arcane skill level required to invoke
 	var/required_skill = SKILL_LEVEL_NONE
+	///amount of mana this costs
+	var/mana_cost = 0
 
 /datum/arcyne_crafting_recipe/amethyst_transmutation
 	name = "amethyst transmutation"
@@ -15,7 +17,8 @@
 		/obj/item/natural/stone,
 	)
 	output = /obj/item/gem/amethyst
-	required_skill =  SKILL_LEVEL_APPRENTICE
+	required_skill = SKILL_LEVEL_NONE
+	mana_cost = 20
 
 /datum/arcyne_crafting_recipe/infernal_feather
 	name = "infernal feather"
