@@ -382,3 +382,16 @@
   - rscdel: Removes the Hollow Curse ritual.
   - bugfix: Fixes some admin tool runtimes.
   - bugfix: Fixed a crippling bug from the Court Agent mirror.
+2026-07-23:
+  MissyNym:
+  - map: The Bog Witch and Bog Witch Apprentice now spawn in their dinghy instead
+      of the entrance to the Terrorbog.
+  Sulaboy:
+  - balance: Maximum Encumbrance now scales off Str,Con,&End instead of just Str.
+  budgetcommander0:
+  - rscadd: Gave the Captain a steel dagger.
+  realforest2001:
+  - rscadd: Knowing the town on join is now controlled by a unique variable, rather
+      than if a job has a bank account.
+  - rscadd: Rejected Royal wretch class now starts knowing and known by the town.
+  - bugfix: Fixes a runtime with snow elf job checks.
