@@ -1,12 +1,12 @@
 /obj/item/weapon/clenched_fist
 	name = "clenched fist"
-	desc = "The fist was humenity's first weapon, and still a fine one."
-	icon = null
-	icon_state = null
+	desc = "The fist was humenity's first weapon, and still sees much use."
+	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
+	icon_state = "clenchedfist"
 	item_flags = ABSTRACT | DROPDEL
 	force = 10
 	minstr = 1
-	item_weight = 100 GRAMS
+	item_weight = 0 GRAMS
 	wbalance = HARD_TO_DODGE
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(CLOSECOMBAT_PUNCH, CLOSECOMBAT_JAB, CLOSECOMBAT_SLUG, CLOSECOMBAT_SLAM)
@@ -16,13 +16,6 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NOEMBED, INNATE_TRAIT)
-
-/obj/item/weapon/clenched_fist/attack_self(mob/living/user, params)
-	user.visible_message(
-		span_warning("[user] unclenches [user.p_their()] fists."),
-		span_warning("I unclench my fists."),
-	)
-	qdel(src)
 
 /datum/intent/unarmed/punch/closecombat
 	name = "punch"
