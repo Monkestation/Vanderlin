@@ -260,6 +260,24 @@ Works together with spawning an observer, noted above.
 	else
 		ghost = new(src)
 
+	ghost.ghostize_time = world.time
+	var/bnw = TRUE
+	if(client?.holder)
+		if(check_rights_for(client,R_WATCH))
+			bnw = FALSE
+
+	SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
+	ghost.can_reenter_corpse = can_reenter_corpse
+	ghost.key = key
+	if(!bnw)
+		return ghost
+
+	ghost.add_client_colour(/datum/client_colour/monochrome)
+	SEND_SIGNAL(src, COMSIG_MOB_GHOSTIZED)
+	return ghost
+
+
+
 /*
 This is the proc mobs get to turn into a ghost. Forked from ghostize due to compatibility issues.
 */
