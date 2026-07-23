@@ -1158,12 +1158,19 @@
 	return ..()
 
 /mob/living/carbon/can_be_revived()
-	if(!mind)
+	. = ..()
+	if(!.)
+		return
+
+	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
+	if(!istype(H) || HAS_TRAIT(H, TRAIT_ROTTEN) || H.skeletonized)
 		return FALSE
-	var/obj/item/organ/brain/b = getorgan(/obj/item/organ/brain)
-	if(!istype(b) || b.brain_death)
+
+	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!istype(B) || B.brain_death)
 		return FALSE
-	return ..()
+
+	return TRUE
 
 /mob/living/carbon/harvest(mob/living/user)
 	if(QDELETED(src))
