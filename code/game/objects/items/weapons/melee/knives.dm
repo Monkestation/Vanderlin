@@ -495,6 +495,7 @@
 			var/mob/living/carbon/human/human_user = user
 
 			human_user.copy_physical_features(target)
+			human_user.copy_visible_organs(target)
 			to_chat(user, span_purple("I take on a new face.."))
 			ADD_TRAIT(target, TRAIT_DISFIGURED, TRAIT_GENERIC)
 

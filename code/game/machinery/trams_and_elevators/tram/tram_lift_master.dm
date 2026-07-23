@@ -41,9 +41,6 @@
 
 	var/obj/effect/landmark/tram/callback_platform
 
-	///this is our destination nation
-	var/datum/nation/destination
-
 /datum/lift_master/tram/New(obj/structure/industrial_lift/tram/lift_platform)
 	. = ..()
 	horizontal_speed = lift_platform.horizontal_speed
@@ -113,6 +110,9 @@
 /datum/lift_master/tram/proc/tram_travel(obj/effect/landmark/tram/destination_platform, rapid = TRUE)
 	if(destination_platform == idle_platform)
 		return
+	if(travelling)
+		stack_trace("Tried to call tram_travel while already travelling!")
+		return
 
 	travel_direction = get_dir(idle_platform, destination_platform)
 	travel_distance = get_dist(idle_platform, destination_platform)
@@ -140,14 +140,32 @@
 
 	START_PROCESSING(SStramprocess, src)
 
+/datum/lift_master/tram/proc/is_at_destination()
+	var/turf/dest_turf = get_turf(idle_platform)
+	for(var/obj/structure/industrial_lift/tram/tram_part as anything in lift_platforms)
+		if(dest_turf in tram_part.locs)
+			return TRUE
+	return FALSE
+
+/datum/lift_master/tram/proc/recalculate_travel(obj/effect/landmark/tram/destination)
+	var/obj/structure/industrial_lift/tram/anchor = lift_platforms[1]
+	travel_direction = get_dir(anchor, destination)
+	travel_distance = get_dist(anchor, destination)
+
 /datum/lift_master/tram/process()
 	if(!travel_distance)
+		if(!is_at_destination())
+			// counter ran out but we're not actually there the actual fuck?
+			stack_trace("A tram ran out of travel distance without being at the endpoint!")
+			recalculate_travel(idle_platform)
+			return
 		addtimer(CALLBACK(src, PROC_REF(unlock_controls), idle_platform), 2 SECONDS)
 		if(SEND_SIGNAL(callback_platform, COMSIG_TRAM_REACHED_PLATFORM, src))
 			return
 		return PROCESS_KILL
 	else if(world.time >= next_move)
 		var/start_time = TICK_USAGE
+
 		travel_distance--
 
 		move_lift_horizontally(travel_direction)

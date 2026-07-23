@@ -19,6 +19,7 @@
 	outfit_female = null
 
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 
 /datum/job/villager/after_spawn(mob/living/carbon/spawned, client/player_client)
 	..()

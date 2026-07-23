@@ -102,6 +102,13 @@
 	icon_state = "blackbelt"
 	sellprice = 10
 
+/obj/item/storage/belt/leather/black/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/weapon/knife/dagger/steel,
+		/obj/item/lockpickring/mundane,
+	)
+
 /obj/item/storage/belt/leather/plaquesilver
 	name = "plaque belt"
 	desc = "A belt with a silver plaque on its front."

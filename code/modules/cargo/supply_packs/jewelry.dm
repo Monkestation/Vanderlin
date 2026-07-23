@@ -2,6 +2,7 @@
 	group = "Jewelry"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/jewelry
 
 /datum/supply_pack/jewelry/silverring
 	name = "Silver Ring"

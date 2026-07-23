@@ -190,6 +190,7 @@
 /datum/reagent/consumable/sugar/molasses
 	name ="Molasses"
 	color = "#835c5c"
+	price_per_unit = 0.175
 
 /datum/reagent/consumable/sodiumchloride
 	name = "Sea Salt"

@@ -15,6 +15,7 @@
 	school = SCHOOL_TRANSMUTATION
 
 	invocation_type = INVOCATION_NONE
+	spell_flags = SPELL_UNETCHABLE
 
 	charge_required = FALSE
 

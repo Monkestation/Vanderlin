@@ -1,7 +1,9 @@
 /mob/living/carbon/Initialize()
 	. = ..()
 	create_reagents(1000)
-	update_body_parts() //to update the carbon's new bodyparts appearance
+	update_organ_requirements()
+	update_limb_efficiencies()
+	update_body() //to update the carbon's new bodyparts appearance
 	LoadComponent(/datum/component/storage/concrete/organ)
 	GLOB.carbon_list += src
 
@@ -78,7 +80,7 @@
 	AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 
 	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //13% damage reduction per level
-	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
+	var/damage = ((levels * rand(20, 35)) * encumbrance_multiplier) ** 1.5
 	damage *= skill_modifier
 	if(damage && apply_damage(damage, BRUTE, affecting.body_zone, run_armor_check(affecting, BLUNT), damage_type = BCLASS_BLUNT))
 		if(levels > 1)
@@ -127,7 +129,7 @@
 		selhand = (active_hand_index % held_items.len)+1
 
 	if(istext(selhand))
-		selhand = lowertext(selhand)
+		selhand = LOWER_TEXT(selhand)
 		if(selhand == "right" || selhand == "r")
 			selhand = 2
 		if(selhand == "left" || selhand == "l")
@@ -970,7 +972,7 @@
 			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			return
-		if((health <= hardcrit_threshold || undergoing_nervous_system_failure()) && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+		if(health <= hardcrit_threshold && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
 			set_stat(HARD_CRIT)
 		else if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
@@ -1009,6 +1011,7 @@
 		organ.current_blood = clamp(adjust_to, current_blood, organ.max_blood_storage)
 
 	pump_heart(forced_pump = 1.3)
+	set_heartattack(FALSE)
 
 	return ..()
 
@@ -1143,7 +1146,8 @@
 
 /mob/living/carbon/proc/create_internal_organs()
 	for(var/obj/item/organ/I as anything in internal_organs)
-		I.Insert(src)
+		if(!I.owner)
+			I.Insert(src)
 
 /mob/living/carbon/vv_get_dropdown()
 	. = ..()
@@ -1315,10 +1319,13 @@
 /mob/living/carbon/proc/get_basic_lift()
 	if(!istype(attributes))
 		return 10
-	var/str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
-	if(str <= 0)
+
+	var/physavg = (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) / 3
+
+	if(physavg <= 0)
 		return 3
-	return max(CEILING(sqrt(str) * 3, 1), 3)
+
+	return max(CEILING(sqrt(physavg) * 3, 1), 3)
 
 /mob/living/carbon/proc/update_maximum_carry_weight()
 	maximum_carry_weight = get_basic_lift() * 10
@@ -1411,6 +1418,7 @@
 	for(var/obj/item/bodypart/B in bodyparts)
 		B.skeletonize(lethal)
 	update_body_parts()
+	REMOVE_TRAIT(src, TRAIT_DEAF, NO_EARS)
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
@@ -1501,3 +1509,23 @@
 		return TRUE
 
 	return FALSE
+
+/**
+ * This proc is used to check a mobs item slots for a type or types, returns the first item found that matches or null
+ */
+/mob/living/carbon/check_slots_for_types(list/slots, list/types)
+	if(!length(slots) || !length(types))
+		return
+
+	for(var/slot in slots)
+		var/obj/item/slot_item
+		if(slot == ITEM_SLOT_HANDS)
+			slot_item = locate() in held_items
+		else
+			slot_item = get_item_by_slot(slot)
+
+		if(!slot_item)
+			continue
+
+		if(is_type_in_list(slot_item, types))
+			return slot_item

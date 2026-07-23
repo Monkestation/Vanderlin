@@ -106,6 +106,13 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/flail/silver/noc
+	name = "lunar flail"
+	desc = "A shining silver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
+	icon = 'icons/roguetown/weapons/32/patron.dmi'
+	icon_state = "moonflail"
+	sharpness = IS_SHARP
+
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
 	name = "psydonian flail"
