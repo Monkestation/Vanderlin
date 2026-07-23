@@ -116,7 +116,7 @@
 
 /datum/component/scrying/orb/pass_extra_checks(mob/living/user)
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) < 1)
-		to_chat(human_user, span_warning("I do not know what to do with this..."))
+		to_chat(user, span_warning("I do not know what to do with this..."))
 		return FALSE
 	return TRUE
 
