@@ -44,12 +44,12 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
-		TRAIT_STEELHEARTED
+		TRAIT_STEELHEARTED,
+		TRAIT_VIRGIN,
 	)
 
 /datum/job/advclass/combat/paladin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.virginity = TRUE
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
@@ -72,7 +72,7 @@
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		if(/datum/patron/divine/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
-			spawned.virginity = FALSE
+			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, JOB_TRAIT)
 		else
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'

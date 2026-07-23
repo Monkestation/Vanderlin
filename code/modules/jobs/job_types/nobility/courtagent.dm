@@ -11,6 +11,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
+	knows_the_town = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL

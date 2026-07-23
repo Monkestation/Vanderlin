@@ -89,7 +89,7 @@
 
 
 /mob/proc/playsound_local(atom/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, repeat, muffled, environment_override = -1)
-	if(!client || !can_hear())
+	if(!client || HAS_TRAIT(src, TRAIT_DEAF))
 		return FALSE
 
 	if(!S)

@@ -191,6 +191,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 /world/proc/AVerbsDebug()
 	return list(
 	/client/proc/restart_controller,
+	/client/proc/view_armor_compare,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/add_job_key_whitelist,
 	/client/proc/Debug2,
@@ -281,6 +282,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/everyone_random,
 	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
+	/client/proc/view_armor_compare,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/add_job_key_whitelist,
 	/client/proc/callproc,

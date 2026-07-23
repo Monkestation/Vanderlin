@@ -1,0 +1,6 @@
+author: "CheffieGithub"
+delete-after: True
+changes:
+  - bugfix: "orcs no longer drop humanb corpses."
+  - bugfix: "SDD players now get detected by deathsight."
+  - bugfix: "Gibbed and already dead things don't drop souls."

@@ -1,6 +1,7 @@
 /datum/round_event_control/antagonist/solo
 	typepath = /datum/round_event/antagonist/solo
 	max_occurrences = 1
+	latest_start = 5 MINUTES
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn

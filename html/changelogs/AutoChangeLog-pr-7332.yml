@@ -1,0 +1,5 @@
+author: "Singul0"
+delete-after: True
+changes:
+  - rscadd: "Arcyane nomagic gloves have *some* use now."
+  - bugfix: "fixed race condition on anti magic"

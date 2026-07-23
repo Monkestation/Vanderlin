@@ -25,6 +25,7 @@
 
 /datum/job/farmer
 	title = JOB_SOILSON
+	alt_titles = list("Butcher", "Brewer", "Vinter", "Distiller", "Hogman")
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \
@@ -44,6 +45,7 @@
 
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	can_be_apprentice = TRUE
 
@@ -132,6 +134,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/soilchild
 	give_bank_account = 10
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

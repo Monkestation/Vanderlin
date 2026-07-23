@@ -172,13 +172,13 @@
 	var/weapon_parry = FALSE
 
 	if(mainhand && mainhand.can_parry)
-		mainhand_defense += nulltozero(GET_MOB_SKILL_VALUE(src, mainhand.associated_skill))
+		mainhand_defense += GET_MOB_SKILL_VALUE(src, mainhand.associated_skill)
 		if(istype(mainhand, /obj/item/weapon/shield))
 			force_shield = TRUE
 			used_weapon = mainhand
 
 	if(offhand && offhand.can_parry)
-		offhand_defense += nulltozero(GET_MOB_SKILL_VALUE(src, offhand.associated_skill))
+		offhand_defense += GET_MOB_SKILL_VALUE(src, offhand.associated_skill)
 		if(istype(offhand, /obj/item/weapon/shield))
 			force_shield = TRUE
 
