@@ -711,6 +711,13 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"ea" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/natural/bundle/brick{
+	amount = 8
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "ed" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -3050,6 +3057,10 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe)
+"rO" = (
+/obj/item/natural/rock,
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness)
 "rP" = (
 /obj/effect/decal/woodpath{
 	dir = 8
@@ -4726,6 +4737,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/item/clothing/ring/jade,
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "By" = (
@@ -6229,6 +6241,9 @@
 "Jp" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/structure/closet/crate/chest/crate,
+/obj/item/natural/bundle/brick{
+	amount = 8
+	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "Jr" = (
@@ -7883,6 +7898,9 @@
 "Ta" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/crate,
+/obj/item/natural/bundle/plank{
+	amount = 8
+	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "Tc" = (
@@ -7918,6 +7936,18 @@
 /obj/item/natural/feather,
 /turf/open/floor/wood,
 /area/indoors/wilderness/gallowband/ship)
+"Tk" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/ingot/iron,
+/obj/item/ingot/iron,
+/obj/item/ingot/iron,
+/obj/item/ingot/iron,
+/obj/item/ingot/iron,
+/obj/item/weapon/axe/iron,
+/obj/item/weapon/pick,
+/obj/item/weapon/hammer/iron,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "Tl" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -8103,6 +8133,9 @@
 /area/outdoors/wilderness)
 "Ud" = (
 /obj/structure/closet/crate/chest/crate,
+/obj/item/natural/bundle/plank{
+	amount = 8
+	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "Ug" = (
@@ -28834,7 +28867,7 @@ Xt
 YM
 YM
 ZX
-Ud
+ea
 Bz
 Gg
 nm
@@ -29238,7 +29271,7 @@ kw
 YM
 YM
 ZX
-Ud
+Tk
 CV
 Gg
 Hn
@@ -67619,7 +67652,7 @@ Mi
 Mi
 Mi
 Mi
-iQ
+rO
 kw
 Xt
 kw
@@ -67832,7 +67865,7 @@ Xt
 Xt
 kw
 kw
-iQ
+rO
 kw
 Xt
 kw
@@ -68434,7 +68467,7 @@ we
 eq
 Xt
 iQ
-iQ
+rO
 we
 eq
 yg
@@ -68627,12 +68660,12 @@ Mi
 Mi
 Mi
 Mi
-iQ
+rO
 HK
 kw
 we
 iQ
-iQ
+rO
 eq
 Er
 kw
@@ -68841,7 +68874,7 @@ Er
 Xt
 Xt
 Mt
-iQ
+rO
 kw
 HH
 kw
@@ -69445,7 +69478,7 @@ qV
 Xt
 Er
 Xt
-iQ
+rO
 eq
 Nf
 kw
@@ -69637,7 +69670,7 @@ Mi
 Mi
 Mi
 eq
-iQ
+rO
 Xt
 Xt
 Xt
@@ -70658,7 +70691,7 @@ iQ
 iQ
 Er
 aY
-iQ
+rO
 eq
 Nf
 Xt
@@ -71256,7 +71289,7 @@ Mi
 Mi
 Mi
 eq
-iQ
+rO
 Xt
 kw
 kw
@@ -71264,10 +71297,10 @@ Xt
 kw
 kw
 Xt
-iQ
+rO
 iQ
 eq
-iQ
+rO
 eq
 kw
 Xt
@@ -72471,7 +72504,7 @@ Mi
 Mi
 Mi
 eq
-iQ
+rO
 kw
 iQ
 Mi
