@@ -244,7 +244,7 @@ SUBSYSTEM_DEF(plexora)
 
 // Check status by id or game port
 /datum/controller/subsystem/plexora/proc/check_byondserver_status(id, port)
-	if (isnull(id) && isnull(port))
+	if (!id && !port)
 		return
 
 	var/list/body = list(
