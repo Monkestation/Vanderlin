@@ -73,11 +73,13 @@ GLOBAL_LIST_EMPTY(last_words)
 	timeofdeath = world.time
 	tod = station_time_timestamp()
 
-	var/obj/structure/soul/soul = new(get_turf(src))
-	soul.init_mana(WEAKREF(src))
+	if(!gibbed && !was_dead_before)
+		var/obj/structure/soul/soul = new(get_turf(src))
+		soul.init_mana(WEAKREF(src))
 
 	for(var/obj/item/I in contents)
 		I.on_mob_death(src, gibbed)
+
 	GLOB.alive_mob_list -= src
 	if(!gibbed && !was_dead_before)
 		GLOB.dead_mob_list += src
@@ -113,30 +115,27 @@ GLOBAL_LIST_EMPTY(last_words)
 
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(gibbed)
+
 	for(var/datum/soullink/S as anything in sharedSoullinks)
 		S.sharerDies(gibbed)
 
-//	for(var/datum/death_tracker/D in target.death_trackers)
-
-	if(!gibbed && !QDELETED(src) && rot_type)
+	if(!gibbed && !QDELETED(src) && !HAS_TRAIT(src, TRAIT_NO_ROT) && rot_type)
 		LoadComponent(rot_type)
 
 	set_typing_indicator(FALSE)
 
-	if (client)
-		if (!gibbed)
-			var/locale = prepare_deathsight_message()
-			for (var/mob/living/player in GLOB.player_list)
-				if (player.stat == DEAD || isbrain(player))
-					continue
-				if (HAS_TRAIT(player, TRAIT_DEATHSIGHT))
-					if (HAS_TRAIT(player, TRAIT_CABAL) || istype(player.patron, /datum/patron/inhumen/zizo))
-						to_chat(player, span_warning("I feel the faint passage of disjointed life essence as it flees [locale]."))
-					else
-						to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turns towards [locale] for but a brief, singular moment."))
+	if(mind && !gibbed)
+		var/locale = prepare_deathsight_message()
+		for(var/mob/living/player in GLOB.player_list)
+			if(player.stat == DEAD || isbrain(player))
+				continue
+			if(HAS_TRAIT(player, TRAIT_DEATHSIGHT))
+				if(HAS_TRAIT(player, TRAIT_CABAL) || istype(player.patron, /datum/patron/inhumen/zizo))
+					to_chat(player, span_warning("I feel the faint passage of disjointed life essence as it flees [locale]."))
+				else
+					to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turns towards [locale] for but a brief, singular moment."))
 
 	return TRUE
-
 
 /mob/living/proc/prepare_deathsight_message()
 	var/area_of_death = LOWER_TEXT(get_area_name(src))

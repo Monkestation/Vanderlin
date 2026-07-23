@@ -123,6 +123,7 @@
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
 	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
 	)
