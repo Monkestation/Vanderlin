@@ -327,9 +327,6 @@
 		var/clean_final = ""
 		final_text += injury
 		clean_final = injury
-		if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
-			final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
-			clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
 		switch(injury_descriptors[injury])
 			if(-INFINITY to 1)
 				final_text = ""

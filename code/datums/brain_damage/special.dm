@@ -7,8 +7,8 @@
 	name = "Tenacity"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I suddenly stop feeling pain.</span>"
-	lose_text = "<span class='warning'>I realize you can feel pain again.</span>"
+	gain_text = span_warning("I suddenly stop feeling pain.")
+	lose_text = span_warning("I realize you can feel pain again.")
 
 /datum/brain_trauma/special/tenacity/on_gain()
 	ADD_TRAIT(owner, TRAIT_NOSOFTCRIT, TRAUMA_TRAIT)
@@ -24,8 +24,8 @@
 	name = "Functional Cerebral Necrosis"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I feel dead inside.</span>"
-	lose_text = "<span class='notice'>I feel alive again.</span>"
+	gain_text = span_warning("I feel dead inside.")
+	lose_text = span_notice("I feel alive again.")
 	var/active = FALSE
 
 /datum/brain_trauma/special/death_whispers/on_life()

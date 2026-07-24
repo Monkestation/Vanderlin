@@ -70,8 +70,7 @@
 	)
 
 /datum/antagonist/zizocultist/examine_target(mob/user, mob/examined, list/P, list/examine_contents)
-	var/mob/living/carbon/human/H = examined
-	if(istype(H) && H.virginity)
+	if(HAS_TRAIT(examined, TRAIT_VIRGIN))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, span_purple(html_tag("B", "[P[THEYRE]] a virgin!")))
 	. = ..()
 

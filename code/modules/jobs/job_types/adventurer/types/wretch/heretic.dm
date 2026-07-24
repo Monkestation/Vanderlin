@@ -58,7 +58,6 @@
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
-			spawned.virginity = FALSE
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
