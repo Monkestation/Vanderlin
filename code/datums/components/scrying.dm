@@ -54,13 +54,13 @@
 	if(!search_name)
 		return FALSE
 
-	if(!user.mind || (needs_to_know && !user.mind.do_i_know(name = search_name)))
-		to_chat(user, span_warning("I don't know anyone by that name."))
-		return FALSE
-
 	//check is applied twice to prevent someone from bypassing the cooldown
 	if(!COOLDOWN_FINISHED(src, scry_cooldown))
 		to_chat(user, span_warning(text_cooldown_fail))
+		return FALSE
+
+	if(!user.mind || (needs_to_know && !user.mind.do_i_know(name = search_name)))
+		to_chat(user, span_warning("I don't know anyone by that name."))
 		return FALSE
 
 	var/mob/living/carbon/human/found_target
@@ -72,22 +72,23 @@
 			found_target = human_target
 			break
 
-	held_user = user
+	if(!found_target)
+		return
+
 	if(HAS_TRAIT(found_target, TRAIT_ANTISCRYING))
 		to_chat(user, span_warning("I peer into \the [name], but an impenetrable fog shrouds [search_name]."))
 		to_chat(found_target, span_warning("My magical shrouding reacted to something."))
-		held_user = null
-		return
-
-	create_eye()
-	if(!scrying_eye)
-		remove_eye(TRUE)
 		return
 
 	if(needs_to_live && found_target.stat)
 		to_chat(user, span_warning("I peer into \the [name], but can't find [search_name]."))
-		remove_eye(TRUE)
 		return FALSE
+
+	held_user = user
+	create_eye()
+	if(!scrying_eye)
+		remove_eye(TRUE)
+		return
 
 	log_game("SCRYING: [user.real_name] ([user.ckey]) has used the [name] to scry [found_target.real_name] ([found_target.ckey])")
 

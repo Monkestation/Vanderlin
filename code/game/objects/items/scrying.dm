@@ -89,7 +89,7 @@
 	set desc= "Teleport to a location"
 	set hidden = 0
 
-	if(!is_scryeye(usr))
+	if(!isscryeye(usr))
 		to_chat(usr, span_warning("You're not an Eye!"))
 		return
 	var/list/filtered = list()
