@@ -6158,7 +6158,7 @@
 /area/outdoors/town)
 "eMq" = (
 /obj/structure/window/solid,
-/obj/structure/window/solid,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/garrison)
 "eNd" = (
@@ -17386,7 +17386,8 @@
 /area/under/town/sewer)
 "omd" = (
 /obj/structure/window/solid,
-/turf/closed/wall/mineral/wood,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/woodturned/nosmooth,
 /area/indoors/town/garrison)
 "oms" = (
 /obj/structure/table/wood/reinforced_alter,
@@ -21108,9 +21109,14 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/garrison)
 "rBp" = (
-/obj/structure/window/solid,
-/turf/closed/wall/mineral/wooddark,
-/area/indoors/town/garrison)
+/obj/structure/window/openclose/reinforced{
+	dir = 4
+	},
+/obj/structure/curtain/bounty/dir{
+	dir = 4
+	},
+/turf/open/floor/hexstone,
+/area/indoors/town/steward)
 "rBz" = (
 /obj/structure/door{
 	name = "Elder's Room"
@@ -118353,8 +118359,8 @@ jXg
 baK
 ekw
 omd
-eeF
-eeF
+omd
+omd
 ekw
 baK
 jXg
@@ -119158,7 +119164,7 @@ eUO
 ezQ
 jXg
 jXg
-eeF
+eMq
 qZo
 jEH
 qZn
@@ -119167,7 +119173,7 @@ bvc
 rip
 lSD
 vfo
-rBp
+kSv
 jXg
 jXg
 eLs
@@ -119360,7 +119366,7 @@ eUO
 ogY
 jXg
 jXg
-eeF
+eMq
 bKD
 tHp
 tHp
@@ -119369,7 +119375,7 @@ oUU
 fab
 fab
 tHp
-rBp
+kSv
 jXg
 cRx
 cRx
@@ -119773,7 +119779,7 @@ tHp
 bKD
 tHp
 tHp
-eMq
+eeF
 jXg
 eFC
 tKo
@@ -119975,7 +119981,7 @@ tHp
 bKD
 kcs
 kcs
-eMq
+eeF
 jXg
 eFC
 mvu
@@ -171874,9 +171880,9 @@ sdA
 sdA
 wGq
 wGq
-idA
-idA
-idA
+rBp
+rBp
+rBp
 wGq
 wGq
 tkU
