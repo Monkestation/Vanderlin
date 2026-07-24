@@ -17,8 +17,10 @@
 
 /turf/open/water/hotspring
 	name = "hot spring"
+	desc = "Relaxing, hot water. What could be better?"
 	icon = 'icons/obj/structures/hotspring.dmi'
 	icon_state = "hotspring"
+	gender = NEUTER
 	turf_flags = TURF_NO_LIQUID_SPREAD
 	shine = SHINE_MATTE
 	no_over_text = TRUE
@@ -28,6 +30,7 @@
 	smoothing_list = NONE
 
 	bottle_spawner = FALSE
+	uses_greyscale = FALSE
 
 /turf/open/water/hotspring/Initialize(mapload)
 	. = ..()
@@ -47,11 +50,15 @@
 ///the issue is they would need at least a 2x2 to smooth proper.
 /obj/structure/hotspring
 	abstract_type = /obj/structure/hotspring
-	name = "hot spring"
+	name = /turf/open/water/hotspring::name
+	desc = /turf/open/water/hotspring::desc
 	icon = 'icons/obj/structures/hotspring.dmi'
 	icon_state = "hotspring"
-	no_over_text = TRUE
 	plane = FLOOR_PLANE
+	obj_flags = NONE
+	resistance_flags = FIRE_PROOF|INDESTRUCTIBLE
+	no_over_text = TRUE
+
 	object_slowdown = 5
 
 /obj/structure/hotspring/Initialize(mapload)
@@ -75,17 +82,15 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
 	tool.reagents.add_reagent(/datum/reagent/water, 100)
-	to_chat(user, span_notice("I fill [tool] from \the [name]."))
+	balloon_alert(user, "[name] filled!")
 
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/hotspring/border
 	icon_state = "hotspring_border_1"
-	object_slowdown = 0
 
 /obj/structure/hotspring/border/two
 	icon_state = "hotspring_border_2"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/three
 	icon_state = "hotspring_border_3"
@@ -93,39 +98,30 @@
 
 /obj/structure/hotspring/border/four
 	icon_state = "hotspring_border_4"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/five
 	icon_state = "hotspring_border_5"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/six
 	icon_state = "hotspring_border_6"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/seven
 	icon_state = "hotspring_border_7"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/eight
 	icon_state = "hotspring_border_8"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/nine
 	icon_state = "hotspring_border_9"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/ten
 	icon_state = "hotspring_border_10"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/eleven
 	icon_state = "hotspring_border_11"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/twelve
 	icon_state = "hotspring_border_12"
-	object_slowdown = 5
 
 /obj/structure/hotspring/border/thirteen
 	icon_state = "hotspring_border_13"

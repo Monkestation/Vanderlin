@@ -97,6 +97,8 @@
 	/// If the tile can spawn bottles
 	var/bottle_spawner = TRUE
 
+	/// If the water takes on it's reagents color
+	var/uses_greyscale = TRUE
 
 /turf/open/water/Initialize(mapload)
 	if(randomize_dir)
@@ -420,7 +422,8 @@
 	if(water_volume < MINIMUM_WATER_VOLUME)
 		dry_up()
 		return
-	color = sanitize_hexcolor(water_reagent::color)
+	if(uses_greyscale)
+		color = sanitize_hexcolor(water_reagent::color)
 	fill_up()
 
 /turf/open/water/proc/fill_up()
