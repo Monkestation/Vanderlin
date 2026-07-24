@@ -114,7 +114,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isrogueobserver(A) (istype(A, /mob/dead/observer/rogue))
 
-#define is_scryeye(A) (istype(A, /mob/scry_eye))
+#define isscryeye(A) (istype(A, /mob/scry_eye))
 
 #define isdead(A) (istype(A, /mob/dead))
 

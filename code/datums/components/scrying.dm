@@ -17,11 +17,11 @@
 	var/interact_method = "attack_self"
 	COOLDOWN_DECLARE(scry_cooldown)
 
-/datum/component/scrying/Initialize(obj/item/scrying/parent)
+/datum/component/scrying/Initialize()
 	. = ..()
+	if(!isobj(parent))
+		return COMPONENT_INCOMPATIBLE
 	text_cooldown_fail = replacetext(text_cooldown_fail, "NAME_HERE", "\the [name]")
-	if(!parent)
-		return
 
 /datum/component/scrying/RegisterWithParent()
 	switch(interact_method)
@@ -40,7 +40,7 @@
 /datum/component/scrying/Destroy(force)
 	QDEL_NULL(scrying_eye)
 	held_user = null
-	. = ..()
+	return ..()
 
 /datum/component/scrying/proc/activate(datum/source, mob/user)
 	if(!pass_extra_checks(user))
