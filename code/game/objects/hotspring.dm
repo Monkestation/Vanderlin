@@ -36,15 +36,6 @@
 	. = ..()
 	var/obj/effect/abstract/shared_particle_holder/hotspring_steam = add_shared_particles(/particles/hotspring_steam, "hotspring", pool_size = 4)
 	hotspring_steam.vis_flags &= ~VIS_INHERIT_PLANE
-	AddElement(/datum/element/mob_overlay_effect, 2, -2, 100)
-
-/turf/open/water/hotspring/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	. = ..()
-	// Blessed be the water code (dogshit)
-	if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
-		playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
-	else
-		playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
 
 ///these were unfortunately requested to not be smoothed. I will likely create a smooth helper version aswell though
 ///the issue is they would need at least a 2x2 to smooth proper.
