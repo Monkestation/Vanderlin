@@ -43,7 +43,7 @@
 	if(!istype(attacked_item, /obj/item/bottle_kit))
 		return FALSE
 	var/name_to_use = secondary_name ? secondary_name : name
-	user.visible_message(span_info("[user] begins bottling [lowertext(name_to_use)]."))
+	user.visible_message(span_info("[user] begins bottling [LOWER_TEXT(name_to_use)]."))
 	if(!do_after(user, 5 SECONDS, source))
 		return FALSE
 	return TRUE
@@ -51,7 +51,7 @@
 /datum/brewing_recipe/proc/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)
 	var/obj/structure/fermentation_keg/source_keg = source
 	var/obj/item/bottle_kit/bottle_kit = attacked_item
-	var/bottle_name = secondary_name ? "[lowertext(secondary_name)]" : "[lowertext(name)]"
+	var/bottle_name = secondary_name ? "[LOWER_TEXT(secondary_name)]" : "[LOWER_TEXT(name)]"
 
 	// Calculate quality for the brewed reagents using the improved system
 	var/calculated_quality = calculate_brewing_quality(user, source_keg)

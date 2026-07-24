@@ -146,7 +146,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 				msg = alt_msg
 				type = alt_type
 
-		if(type & MSG_AUDIBLE && !can_hear())//Hearing related
+		if(type & MSG_AUDIBLE && HAS_TRAIT(src, TRAIT_DEAF))//Hearing related
 			if(!alt_msg)
 				return
 			else
@@ -208,7 +208,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		if(M != src && !M.is_blind())
 			M.log_message("saw [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
-		if(runechat_message && M.can_hear())
+		if(runechat_message && !HAS_TRAIT(M, TRAIT_DEAF))
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 ///Adds the functionality to self_message.
@@ -233,10 +233,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 		hearers -= src
 	for(var/mob/M in hearers)
 		if(M != src && M.client)
-			if(M.can_hear())
+			if(!HAS_TRAIT(M, TRAIT_DEAF))
 				M.log_message("heard [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
-		if(runechat_message && M.can_see_runechat(src) && M.can_hear())
+		if(runechat_message && M.can_see_runechat(src) && !HAS_TRAIT(M, TRAIT_DEAF))
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 /**
@@ -667,7 +667,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  */
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
+		var/t1 = "window=[href_list["mach_close"]]"
 		unset_machine()
 		src << browse(null, t1)
 
@@ -1199,7 +1199,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/say_mod(input, list/message_mods = list())
 	var/customsayverb = findtext(input, "*")
 	if(customsayverb)
-		return lowertext(copytext(input, 1, customsayverb))
+		return LOWER_TEXT(copytext(input, 1, customsayverb))
 	. = ..()
 
 /atom/movable/proc/attach_spans(input, list/spans)

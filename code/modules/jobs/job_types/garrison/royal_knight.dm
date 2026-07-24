@@ -20,6 +20,7 @@
 
 	advclass_cat_rolls = list(CTAG_ROYALKNIGHT = 20)
 	give_bank_account = 60
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'
 	job_bitflag = BITFLAG_GARRISON
 

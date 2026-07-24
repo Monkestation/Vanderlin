@@ -1357,7 +1357,8 @@
 "aIh" = (
 /obj/structure/stationary_bell{
 	pixel_x = -14;
-	pixel_y = -23
+	pixel_y = -23;
+	name = "inn bell"
 	},
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
@@ -31333,6 +31334,10 @@
 	},
 /turf/closed/wall/mineral/wood/window,
 /area/indoors/town/smithy)
+"oBN" = (
+/obj/item/weapon/mace/church,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/town/roofs)
 "oBS" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -46892,6 +46897,14 @@
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
+"vtf" = (
+/obj/structure/stationary_bell{
+	pixel_x = -16;
+	pixel_y = -16;
+	name = "garrison bell"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/town/roofs)
 "vtr" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -117838,8 +117851,8 @@ vDN
 vDN
 rvF
 rvF
-bcK
-bcK
+rvF
+rvF
 rvF
 uwe
 blx
@@ -118041,8 +118054,8 @@ vDN
 rvF
 bcK
 rvF
-bcK
-bcK
+rvF
+rvF
 uwe
 blx
 blx
@@ -118244,7 +118257,7 @@ rvF
 bcK
 bcK
 rvF
-bcK
+rvF
 vie
 blx
 blx
@@ -151276,8 +151289,8 @@ vHN
 ilT
 vHN
 vHN
+vHN
 pxK
-pwZ
 ngr
 izG
 biy
@@ -151477,9 +151490,9 @@ xkF
 efW
 vHN
 vHN
+vHN
 pQT
 nKC
-pwZ
 ngr
 izG
 fLN
@@ -196787,11 +196800,11 @@ biy
 tEH
 tEH
 xAw
+fZu
 xAw
 xAw
 xAw
-xAw
-xAw
+fZu
 xAw
 xAw
 tEH
@@ -197393,11 +197406,11 @@ biy
 tEH
 tEH
 xAw
-xAw
-xAw
-fZu
-xAw
-xAw
+lIl
+lOi
+ylx
+cMx
+lIl
 xAw
 xAw
 tEH
@@ -197595,11 +197608,11 @@ biy
 tEH
 tEH
 xAw
-xAw
-xAw
-xAw
-xAw
-xAw
+vBL
+sOX
+lwY
+lwY
+vBL
 xAw
 xAw
 tEH
@@ -197797,11 +197810,11 @@ biy
 tEH
 tEH
 xAw
-xAw
-xAw
-xAw
-xAw
-xAw
+aQA
+lwY
+vtf
+lwY
+aQA
 xAw
 xAw
 tEH
@@ -197999,11 +198012,11 @@ biy
 tEH
 tEH
 xAw
-xAw
-xAw
-xAw
-xAw
-xAw
+vBL
+lwY
+lwY
+lwY
+vBL
 xAw
 xAw
 tEH
@@ -198201,11 +198214,11 @@ tEH
 tEH
 tEH
 xAw
-xAw
-xAw
-xAw
-xAw
-xAw
+aQA
+sOX
+lwY
+oBN
+aQA
 xAw
 xAw
 xAw
@@ -198403,11 +198416,11 @@ tEH
 tEH
 tEH
 xAw
-xAw
-xAw
-xAw
-xAw
-xAw
+lIl
+lOi
+mrY
+cMx
+lIl
 xAw
 xAw
 xAw

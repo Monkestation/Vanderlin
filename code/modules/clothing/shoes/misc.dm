@@ -6,7 +6,7 @@
 	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
-	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 15, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather/noble
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
@@ -31,7 +31,7 @@
 	gender = PLURAL
 	icon_state = "shortboots"
 	item_state = "shortboots"
-	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/weak
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	wetable = FALSE
@@ -40,7 +40,7 @@
 	name = "riding boots"
 	color = "#d5c2aa"
 	desc = "Boots designed for riding a mount."
-	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 10, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather
 	gender = PLURAL
 	icon_state = "ridingboots"
 	item_state = "ridingboots"
@@ -55,7 +55,7 @@
 	gender = PLURAL
 	icon_state = "apothboots"
 	item_state = "apothboots"
-	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 5, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather/apothecary
 	sellprice = 10
 	wetable = FALSE
 
@@ -147,7 +147,7 @@
 	icon_state = "grenzelboots"
 	item_state = "grenzelboots"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
-	armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 15, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather/noble/good
 	sellprice = 20
 	wetable = FALSE
 
@@ -167,7 +167,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	max_integrity = 200
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/boots/leather/good
 	wetable = FALSE
 
 /obj/item/clothing/shoes/otavan/inqboots
@@ -181,7 +181,7 @@
 //Valorian Duelist Merc - On par with grenzelhoftian's stats.
 /obj/item/clothing/shoes/nobleboot/duelboots
 	desc = "Boots custom fit for a Valorian Duelist. Footwork is paramount in a duel, so good boots are a must."
-	armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 15, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather/noble/good
 
 /obj/item/clothing/shoes/psydonboots
 	name = "enduring boots"

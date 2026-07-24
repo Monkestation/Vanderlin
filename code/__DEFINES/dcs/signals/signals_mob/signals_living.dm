@@ -150,3 +150,7 @@
 #define COMSIG_MOB_MIND_TRANSFERRED_OUT_OF "mob_mind_transferred_out_of"
 /// From /mob/proc/ghostize() Called when a mob successfully ghosts
 #define COMSIG_MOB_GHOSTIZED "mob_ghostized"
+
+/// From /mob/living/get_eye_protection() (list/reflist)
+#define COMSIG_LIVING_GET_EAR_PROTECTION "living_get_ear_protection"
+	#define EAR_PROTECTION_ARG 1

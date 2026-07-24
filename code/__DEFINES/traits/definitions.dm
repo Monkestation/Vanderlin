@@ -26,6 +26,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MOVE_SWIMMING	"move_swimming"
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
+/// Disables rot can be applied to items or mobs
+#define TRAIT_NO_ROT "no_rot"
 
 ///generic atom traits
 ///Chasms will be safe to cross while they've this trait.
@@ -115,8 +117,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STUNIMMUNE "stun_immunity"
 /// Stun duration reduced (unused)
 #define TRAIT_STUNRESISTANCE "stun_resistance"
-/// Immunity to sleep
-#define TRAIT_SLEEPIMMUNE "sleep_immunity"
 /// Can't be pushed
 #define TRAIT_PUSHIMMUNE "push_immunity"
 /// Doesn't need a heart
@@ -412,7 +412,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOSTAMINA	"Indefatigable"
 /// Can't fall asleep
 #define TRAIT_FAT "Obese"
-#define TRAIT_NOSLEEP "Fatal Insomnia"
+/// Immunity to sleep
+#define TRAIT_SLEEPIMMUNE "Fatal Insomnia"
 #define TRAIT_FASTSLEEP "Fast Sleeper"
 #define TRAIT_NUDIST "Nudist" //you can't wear most clothes
 #define TRAIT_INHUMANE_ANATOMY "Inhumen Anatomy" //can't wear hats and shoes
@@ -476,6 +477,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_VAMPMANSION "vampiremansion"
 #define TRAIT_VAMP_DREAMS "vamp_dreams"
 #define TRAIT_INHUMENCAMP "inhumencamp"
+#define TRAIT_GALLOWBAND "gallowband"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies
 #define TRAIT_STEELHEARTED "steelhearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
@@ -498,6 +500,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
+#define TRAIT_VIRGIN	"virginity"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
@@ -571,6 +574,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_FACELESS "Faceless One"
 #define TRAIT_ROYALSERVANT "Household Insight" // Let's you see the royals liked/hated food/drink
 #define TRAIT_COURTAGENT "Agent of the Court"
+#define TRAIT_GATEKEEPER "Gatekeeper"
 
 ///every hearing sensitive atom has this trait
 #define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
@@ -632,4 +636,3 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
 #define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"
-#define TRAIT_NO_ROT "no_rot"

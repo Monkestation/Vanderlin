@@ -22,7 +22,7 @@
 	possible_item_intents = list(/datum/intent/food, /datum/intent/stab)
 	attack_verb = list("attacked", "stabbed", "poked")
 	hitsound = 'sound/blank.ogg'
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 30)
+	armor_type = /datum/armor/fork
 	item_weight = 30 GRAMS
 
 /obj/item/kitchen/fork/suicide_act(mob/living/carbon/user)

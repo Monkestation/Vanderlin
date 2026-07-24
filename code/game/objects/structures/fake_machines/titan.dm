@@ -469,6 +469,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 
 	victim.job = new_pos
 	victim.mind?.set_assigned_role(new_pos)
+	victim.mind?.update_alt_title(new_pos)
 	if(ishuman(victim))
 		var/mob/living/carbon/human/human = victim
 		if(!HAS_TRAIT(human, TRAIT_RECRUITED) && HAS_TRAIT(human, TRAIT_FOREIGNER))
