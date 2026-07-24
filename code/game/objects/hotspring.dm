@@ -58,21 +58,26 @@
 	. = ..()
 	AddElement(/datum/element/drinkable)
 
-/obj/structure/hotspring/attackby(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(user.used_intent.type != /datum/intent/fill)
-		return
-	if(!I.reagents)
-		return
-	if(I.reagents.holder_full())
-		to_chat(user, span_warning("[I] is full."))
-		return
+/obj/structure/hotspring/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!tool.reagents)
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/fill))
+		return NONE
+
+	if(tool.reagents.holder_full())
+		balloon_alert(user, "full!")
+		return ITEM_INTERACT_BLOCKING
+
 	if(!do_after(user, 8 DECISECONDS, src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
-	I.reagents.add_reagent(/datum/reagent/water, 100)
-	to_chat(user, span_notice("I fill [I] from \the [name]."))
+	tool.reagents.add_reagent(/datum/reagent/water, 100)
+	to_chat(user, span_notice("I fill [tool] from \the [name]."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/hotspring/border
 	icon_state = "hotspring_border_1"
