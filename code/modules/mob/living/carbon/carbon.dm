@@ -1418,6 +1418,7 @@
 	for(var/obj/item/bodypart/B in bodyparts)
 		B.skeletonize(lethal)
 	update_body_parts()
+	REMOVE_TRAIT(src, TRAIT_DEAF, NO_EARS)
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
