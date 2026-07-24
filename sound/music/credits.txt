@@ -106,20 +106,16 @@ lute (11).ogg: https://www.youtube.com/watch?v=xJh865acA-U
 
 guitar (21).ogg: https://youtu.be/IXQqLbCX2Co
 
-hurdy (7).ogg: https://youtu.be/O3_BTpJDRJ4
-hurdy (8).ogg: https://youtu.be/L5oQt23yfyk
-hurdy (9).ogg: https://youtu.be/0dPHRxvs3KY
-
 accord (10).ogg: https://youtu.be/CFwhB-nR1eI
-accord (14).ogg: https://youtu.be/7n-bWSGcM-Q
-accord (20).ogg: https://youtu.be/NeBiRfUI9Tg
-accord (22).ogg: https://youtu.be/maQzUyKfReI
-accord (24).ogg: https://youtu.be/8tHrANh_TlI
-accord (26).ogg: https://youtu.be/mpI6WmE4OvI
-accord (30).ogg: https://youtu.be/ptUitzO-Cyk
-accord (31).ogg: https://youtu.be/DOuu1cfDgrU
+accord (11).ogg: https://youtu.be/7n-bWSGcM-Q
+accord (12).ogg: https://youtu.be/NeBiRfUI9Tg
+accord (13).ogg: https://youtu.be/maQzUyKfReI
+accord (14).ogg: https://youtu.be/8tHrANh_TlI
+accord (15).ogg: https://youtu.be/mpI6WmE4OvI
+accord (16).ogg: https://youtu.be/ptUitzO-Cyk
+accord (17).ogg: https://youtu.be/DOuu1cfDgrU
 
-accord (33).ogg: https://youtu.be/r9-gd6nyuSg
-accord (34).ogg: https://youtu.be/uK_AfAr446g
+accord (18).ogg: https://youtu.be/r9-gd6nyuSg
+accord (19).ogg: https://youtu.be/uK_AfAr446g
 
 drum (6).ogg: https://youtu.be/J8hzw3Lpk9Q
