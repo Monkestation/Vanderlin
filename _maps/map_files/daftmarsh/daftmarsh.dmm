@@ -3828,7 +3828,9 @@
 /obj/structure/table/wood/fancy,
 /obj/item/weapon/knife/dagger/bronze{
 	pixel_x = -4;
-	pixel_y = 6
+	pixel_y = 6;
+	name = "bronze ritual dagger";
+	desc = "An elegant dagger made out of bronze. If you love it, drink it's blood."
 	},
 /obj/item/reagent_containers/glass/cup/golden{
 	pixel_x = 6;
@@ -22592,7 +22594,7 @@
 	pixel_y = -32
 	},
 /obj/structure/fake_machine/mail/l{
-	mailtag = Steward
+	mailtag = "Steward"
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
