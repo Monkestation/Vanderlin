@@ -1,4 +1,0 @@
-author: "Singul0"
-delete-after: True
-changes:
-  - bugfix: "Fixes Master's Rod not working on any subclasses of noblemen or garrison"

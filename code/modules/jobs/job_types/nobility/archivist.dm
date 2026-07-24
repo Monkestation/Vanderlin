@@ -18,6 +18,7 @@
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	advclass_cat_rolls = list(CTAG_ARCHIVIST = 20)
 	give_bank_account = 100
+	knows_the_town = TRUE
 
 	job_bitflag = BITFLAG_ROYALTY
 	allowed_patrons = list(/datum/patron/divine/noc)
@@ -51,13 +52,9 @@
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
+		TRAIT_NOBLE_POWER,
+		TRAIT_VIRGIN,
 	)
-
-/datum/job/archivist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-
-	spawned.virginity = TRUE
 
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(

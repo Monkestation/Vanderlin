@@ -148,8 +148,10 @@
 
 	/// Any atom that uses integrity and can be damaged must set this to true, otherwise the integrity procs will throw an error
 	var/uses_integrity = FALSE
+	///Armor datum created by the atom
+	VAR_PROTECTED/datum/armor/armor_type = /datum/armor/none
 	///Armor datum used by the atom
-	var/datum/armor/armor
+	VAR_PRIVATE/datum/armor/armor
 	///Current integrity, defaults to max_integrity on init
 	VAR_PRIVATE/atom_integrity
 	///Maximum integrity
@@ -254,7 +256,6 @@
 
 	if(uses_integrity)
 		atom_integrity = max_integrity
-	TEST_ONLY_ASSERT((!armor || istype(armor)), "[type] has an armor that contains an invalid value at intialize")
 
 	if(ispath(ai_controller))
 		ai_controller = new ai_controller(src)
@@ -961,6 +962,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_ADD_REAGENT, "Add Reagent")
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EXPLOSION, "Explosion")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_AI, "Add AI controller")
+	VV_DROPDOWN_OPTION(VV_HK_ARMOR_MOD, "Modify Armor")
 	if(greyscale_colors)
 		VV_DROPDOWN_OPTION(VV_HK_MODIFY_GREYSCALE, "Modify greyscale colors")
 
@@ -1001,6 +1003,30 @@
 					message_admins("<span class='notice'>[key_name(usr)] has added [amount] units of [chosen_id] to [src]</span>")
 	if(href_list[VV_HK_TRIGGER_EXPLOSION] && check_rights(R_FUN))
 		usr.client.cmd_admin_explosion(src)
+
+	if(href_list[VV_HK_ARMOR_MOD])
+		var/list/pickerlist = list()
+		var/list/armorlist = get_armor().get_rating_list()
+
+		for (var/i in armorlist)
+			pickerlist += list(list("value" = armorlist[i], "name" = i))
+
+		var/list/result = presentpicker(usr, "Modify armor", "Modify armor: [src]", Button1="Save", Button2 = "Cancel", Timeout=FALSE, inputtype = "text", values = pickerlist)
+		var/list/armor_all = ARMOR_LIST_ALL
+
+		if (islist(result))
+			if (result["button"] != 2) // If the user pressed the cancel button
+				// text2num conveniently returns a null on invalid values
+				var/list/converted = list()
+				for(var/armor_key in armor_all)
+					converted[armor_key] = text2num(result["values"][armor_key])
+				set_armor(get_armor().generate_new_with_specific(converted))
+				var/message = "[key_name(usr)] modified the armor on [src] ([type]) to: "
+				for(var/armor_key in armor_all)
+					message += "[armor_key]=[get_armor_rating(armor_key)],"
+				message = copytext(message, 1, -1)
+				log_admin(span_notice(message))
+				message_admins(span_notice(message))
 
 	if(href_list[VV_HK_ADD_AI])
 		if(!check_rights(R_VAREDIT))
@@ -1081,7 +1107,7 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
 
 ///Generate a tag for this atom
-/atom/proc/GenerateTag()
+/atom/GenerateTag()
 	return
 
 /// Generic logging helper

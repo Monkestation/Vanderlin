@@ -340,6 +340,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	add_traits(list(TRAIT_NOMOOD, TRAIT_NOHUNGER), SPECIES_TRAIT)
 
 /datum/component/rot/corpse/rousman/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/amt2add = 10 //1 second
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)

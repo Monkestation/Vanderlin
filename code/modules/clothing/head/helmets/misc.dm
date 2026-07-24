@@ -133,7 +133,7 @@
 	icon_state = "ikettle"
 	item_state = "ikettle"
 	sellprice = VALUE_CHEAP_IRON_HELMET
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = null
@@ -165,7 +165,7 @@
 	icon_state = "islitkettle"
 	item_state = "islitkettle"
 	sellprice = VALUE_CHEAP_IRON_HELMET
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
@@ -188,7 +188,7 @@
 	item_state = "lakkaricap"
 	sellprice = 50
 	flags_inv = null
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/head/scale
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
@@ -203,7 +203,7 @@
 	smeltresult = /obj/item/ingot/copper
 	sellprice = VALUE_LEATHER_HELMET // until copper/new mats properly finished and integrated this is a stopgap
 
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/head/padded/good
 	body_parts_covered = COVERAGE_HEAD
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
@@ -222,7 +222,7 @@
 	blocksound = CHAINHIT
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/head/maille/iron
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 1.56 KILOGRAMS
@@ -239,7 +239,7 @@
 	blocksound = CHAINHIT
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/head/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 1.56 KILOGRAMS
@@ -253,7 +253,7 @@
 	flags_inv = HIDEEARS
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
-	armor =  ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
@@ -279,7 +279,7 @@
 	desc = "A simple iron helmet with no attachments. Helps protect the ears."
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET
-	armor =  ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.1 KILOGRAMS
 
@@ -355,7 +355,7 @@
 	unequip_delay_self = 3 SECONDS
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_CRITICAL_HITS
@@ -400,7 +400,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	item_weight = 6.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
@@ -419,7 +419,7 @@
 	item_weight = 3.25 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 //............... Bellow Sallet ............... //
@@ -438,7 +438,7 @@
 	icon_state = "hounskull"
 	emote_environment = 3
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	item_weight = 4.45 KILOGRAMS
 
 //............... Knights Helmet ............... //
@@ -489,7 +489,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 
@@ -497,7 +497,7 @@
 	name = "golden knight's armet"
 	desc = "A resplendant armet, masterfully forged from pure gold. Hexagrammic etchings of a holy sigil line its visor, and its interior is fitted with a besilked arming cap. Even in absolute darkness, the polished surface sparkles with imbued sunlight."
 	icon_state = "goldknight"
-	armor = ARMOR_HEAD_HELMET_VISOR //Renders its wearer completely invulnerable to damage. The caveat is, however..
+	armor_type = /datum/armor/head/plate/visor  //Renders its wearer completely invulnerable to damage. The caveat is, however..
 	max_integrity = ARMOR_INT_HELMET_HEAVY_IRON // ..is that it's extraordinarily fragile. To note, this is lower than even Decrepit-tier armor.
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
 	anvilrepair = null
@@ -671,7 +671,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	smeltresult = /obj/item/ingot/silver
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/head/plate/silver
 	sellprice = VALUE_SILVER_ARMOR
 	item_weight = 6 KILOGRAMS
 	worn_x_dimension = 64
@@ -718,7 +718,7 @@
 	item_state = "bkhelm_visor"
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
-	armor = list("blunt" = 90, "slash" = 100, "stab" = 80,  "piercing" = 100, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/plate/blacksteel
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	block2add = FOV_RIGHT|FOV_LEFT
 	max_integrity = 425

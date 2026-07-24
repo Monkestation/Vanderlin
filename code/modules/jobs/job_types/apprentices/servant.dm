@@ -57,6 +57,7 @@
 	spawn_positions = 5
 	bypass_lastclass = TRUE
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 	can_have_apprentices = FALSE
 
@@ -140,6 +141,7 @@
 
 	outfit = /datum/outfit/tapster
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
@@ -205,6 +207,7 @@
 	spawn_positions = 0
 	bypass_lastclass = TRUE
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL

@@ -61,6 +61,7 @@
 
 	outfit = /datum/outfit/hunter
 	give_bank_account = 15
+	knows_the_town = TRUE
 	apprentice_name = JOB_HUNTER
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
