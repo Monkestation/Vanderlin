@@ -259,7 +259,6 @@
 	cloak = /obj/item/clothing/cloak/stabard/templar/noc
 	wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/weapon/sword/sabre/noc
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
