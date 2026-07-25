@@ -1942,6 +1942,29 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
+"nh" = (
+/obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/clothing/neck/psycross/silver/divine/xylix,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/malum,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/silver/divine/malum,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/xylix,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/church)
 "nj" = (
 /obj/machinery/loom,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -2101,6 +2124,7 @@
 	icon_state = "longtable";
 	dir = 5
 	},
+/obj/item/book/bibble,
 /turf/open/floor/wood,
 /area/indoors/town/church)
 "oL" = (
@@ -3637,6 +3661,16 @@
 "xZ" = (
 /turf/open/floor/wood,
 /area/ship/topdeck)
+"yb" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/item/book/bibble/psy,
+/turf/open/floor/churchrough,
+/area/ship/middeck)
 "yc" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -3655,6 +3689,7 @@
 	dir = 9
 	},
 /obj/item/reagent_containers/glass/cup/silver,
+/obj/item/clothing/neck/psycross/silver/divine/malum,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church)
 "yr" = (
@@ -20921,7 +20956,7 @@ Yc
 TC
 jG
 lV
-jG
+nh
 TC
 Aq
 Aq
@@ -53237,7 +53272,7 @@ tL
 tL
 JF
 Vd
-Vd
+yb
 Vd
 Xv
 tL
