@@ -395,3 +395,20 @@
       than if a job has a bank account.
   - rscadd: Rejected Royal wretch class now starts knowing and known by the town.
   - bugfix: Fixes a runtime with snow elf job checks.
+2026-07-24:
+  CheffieGithub:
+  - bugfix: orcs no longer drop humanb corpses.
+  - bugfix: SDD players now get detected by deathsight.
+  - bugfix: Gibbed and already dead things don't drop souls.
+  Singul0:
+  - rscadd: Arcyane nomagic gloves have *some* use now.
+  - bugfix: fixed race condition on anti magic
+  dwasint:
+  - bugfix: debraining no longer is perma death
+  - qol: traders now give 1-5 rep on selling items
+  - balance: traders can only buy a limited amount of each item
+  - balance: traders prices are now based on the live market rates with a +- variance
+  realforest2001:
+  - rscadd: Acolytes and Grave Tender now spawn with a cloth bag.
+  - rscadd: Added the option for Noc Templars to choose between Khopesh and Flail.
+  - bugfix: Fixes roundstart antag rolls triggering mid round.

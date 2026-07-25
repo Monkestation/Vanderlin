@@ -344,8 +344,6 @@
 		return FALSE
 	if(istype(output_turf, /turf/open/water) || istype(output_turf, /turf/open/lava))
 		return FALSE
-	if(locate(/obj/structure/hotspring, output_turf))
-		return FALSE
 	return TRUE
 
 /obj/structure/meatvine/proc/rot()
