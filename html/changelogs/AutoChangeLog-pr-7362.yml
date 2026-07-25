@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Kobolds now have generic names unique to them rather than sharing Dwarf names."

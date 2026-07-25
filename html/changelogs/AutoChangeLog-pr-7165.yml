@@ -1,0 +1,7 @@
+author: "Archeonan"
+delete-after: True
+changes:
+  - rscadd: "2 tile reach cut for zweihander"
+  - rscadd: "steel zweihander"
+  - rscadd: "2 tile reach strike for polehammers"
+  - balance: "replaced polehammer impale with daze, alongside buffing their damage"

@@ -13,7 +13,6 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_STRIKE)
 	max_integrity = INTEGRITY_POOR
-	minstr = 6
 
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
@@ -41,7 +40,6 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_THRESH,)
 
-	minstr = 7
 	smeltresult = /obj/item/ingot/iron
 	item_weight = 2.1 KILOGRAMS
 
@@ -207,7 +205,6 @@
 
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 5
 	sharpness = IS_BLUNT
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/ingot/iron
@@ -376,7 +373,6 @@
 	gripspriteonmob = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 6
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/attribute/skill/combat/polearms

@@ -113,7 +113,8 @@
 	var/static/list/selectableweapon = list(
 		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
 		"Axe" = /obj/item/weapon/axe/iron,
-		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/warhammer, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Warhammer" = /obj/item/weapon/mace/warhammer,
 		"Spear" = /obj/item/weapon/polearm/spear,
 		"Flail" = pick(list(/obj/item/weapon/flail, /obj/item/weapon/flail/militia)),
 		"Great flail" = /obj/item/weapon/flail/peasant,
@@ -131,7 +132,7 @@
 	switch(weaponchoice)
 		if("Sword")
 			weapon_skill_path = /datum/attribute/skill/combat/swords
-		if("Axe", "Mace", "Goedendag", "Great axe")
+		if("Axe", "Mace", "Goedendag", "Great axe", "Warhammer")
 			weapon_skill_path = /datum/attribute/skill/combat/axesmaces
 		if("Spear")
 			weapon_skill_path = /datum/attribute/skill/combat/polearms
