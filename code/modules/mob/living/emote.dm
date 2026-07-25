@@ -1350,6 +1350,8 @@
 
 /datum/emote/living/yawn/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
+	if(!iscarbon(user))
+		return
 
 	if(TIMER_COOLDOWN_FINISHED(user, COOLDOWN_YAWN_PROPAGATION))
 		TIMER_COOLDOWN_START(user, COOLDOWN_YAWN_PROPAGATION, cooldown * 3)
