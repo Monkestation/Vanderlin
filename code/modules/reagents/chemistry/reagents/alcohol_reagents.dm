@@ -30,7 +30,8 @@
 	. = ..()
 	if(age_path && holder)
 		age_timer = addtimer(CALLBACK(src, PROC_REF(age_beer)), age_time, TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_UNIQUE)
-	price_per_unit = 0.5 + (boozepwr * 0.02)
+	if(!price_per_unit)
+		price_per_unit = 0.5 + (boozepwr * 0.02)
 
 /datum/reagent/consumable/ethanol/on_merge(data, amount)
 	. = ..()
@@ -118,6 +119,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "ale"
 	glass_name = "glass of beer"
 	glass_desc = ""
+	price_per_unit = 0.05
 
 /datum/reagent/consumable/ethanol/rum
 	name = "Rum"
@@ -208,6 +210,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "cheap pisswater"
 	color = "#DBD77F"
 	quality = DRINK_NICE
+	price_per_unit = 0.055
 
 /datum/reagent/consumable/ethanol/hagwoodbitter
 	name = "Hagwood Bitter"
@@ -215,6 +218,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "dull crispness"
 	color = "#BBB525"
 	quality = DRINK_NICE
+	price_per_unit = 0.0525
 
 /datum/reagent/consumable/ethanol/blackgoat
 	name = "Black Gote Kriek"
@@ -222,6 +226,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "overwhelming sourness"
 	color = "#401806"
 	quality = DRINK_NICE
+	price_per_unit = 0.1
 
 /datum/reagent/consumable/ethanol/onion
 	name = "Royal Onion Cognac"
@@ -229,6 +234,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "spicy sweet malty overtones"
 	color = "#683e00"
 	quality = DRINK_NICE
+	price_per_unit = 0.025
 
 // Elf Production - LEAF-LOVERS MOTHERFUCKER
 
@@ -238,6 +244,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "subtle herbaceous undertones"
 	color = "#5D8A8A"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/fireleaf // cabbbage
 	name = "Fireleaf"
@@ -245,6 +252,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "bland liquor"
 	color = "#475e45"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 // Dwarven Production - Best in the Realms
 
@@ -254,6 +262,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "buttery richness"
 	color = "#5D8A8A"
 	quality = DRINK_GOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/stonebeards
 	name = "Stonebeard Reserve"
@@ -261,6 +270,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "potent oatlike liquor"
 	color = "#5D8A8A"
 	quality = DRINK_GOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/voddena // Not vodka. Trust me.
 	name = "Voddena"
@@ -268,6 +278,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "burning starchy wet dirt"
 	color = "#a1a1a1"
 	quality = DRINK_NICE
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/limoncello
 	name = "Limoncello"
@@ -285,6 +296,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	boozepwr = 20
 	taste_description = "sour wine"
 	color = "#552b4b"
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/whitewine
 	name = "White Wine"
@@ -292,6 +304,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "sweet white wine"
 	color = "#F3ED91"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/redwine
 	name = "Red Wine"
@@ -299,6 +312,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "tannin-stricken wine"
 	color = "#571111"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/jackberrywine
 	name = "Jacksberry Wine"
@@ -308,6 +322,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_NICE
 	age_path = /datum/reagent/consumable/ethanol/jackberrywine/aged
 	age_time = 10 MINUTES
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/jackberrywine/aged
 	name = "Aged Jacksberry Wine"
@@ -455,6 +470,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "delectable fruity notes"
 	color = "#6C0000"
 	quality = DRINK_GOOD
+	price_per_unit = 1.75
 
 /datum/reagent/consumable/ethanol/elfblue
 	name = "Valmora Blue"
@@ -462,6 +478,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "saintly sweetness"
 	color = "#2C9DAF"
 	quality = DRINK_FANTASTIC
+	price_per_unit = 3
 
 /datum/reagent/consumable/ethanol/jagdtrunk // JÄGERMEISTER!!!!
 	name = "Jagdtrunk"
@@ -684,12 +701,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	boozepwr = 60 // ancient lichebrau...
 	taste_description = "bitterness, pain, iron, and ancient mistakes" // what did you expect [2]
 	color = "#553837"
+	price_per_unit = 0.45
 
 /datum/reagent/consumable/ethanol/huangjiu
 	name = "Huangjiu"
 	boozepwr = 30
 	taste_description = "a mix of sweet and sour"
 	color = "#d8b84c"
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/baijiu
 	name = "Baijiu"
@@ -697,6 +716,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "fiery and pungent alcohol with a hint of sweetness"
 	color = "#f8fdfc"
 	quality = DRINK_GOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/yaojiu
 	name = "Yaojiu"
@@ -704,6 +724,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "bittersweet alcohol with deep herbal notes"
 	color = "#8C4B1F"
 	quality = DRINK_VERYGOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/shejiu
 	name = "Shejiu"
@@ -711,6 +732,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "musky and strong alcohol with a hint of gaminess"
 	color = "#C49A6C"
 	quality = DRINK_VERYGOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/kgunshochu
 	name = "Shochu"
@@ -718,6 +740,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "dry, clean finish"
 	color = "#F8FDFC"
 	quality = DRINK_VERYGOOD
+	price_per_unit = 0.3
 
 #undef ALCOHOL_THRESHOLD_MODIFIER
 #undef ALCOHOL_EXPONENT

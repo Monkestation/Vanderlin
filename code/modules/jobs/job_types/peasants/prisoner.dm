@@ -41,6 +41,7 @@
 
 /datum/job/prisoner
 	title = JOB_PRISONER
+	alt_titles = list("Bedlamite", "Blasphemer", "Experiment")
 	tutorial = "For a crime, or false allegation; as a hostage against another, \
 	or held for ransom: your fate until this day has been ill-starred save its first. \
 	Perhaps your story, which none but you recall, \
@@ -89,4 +90,3 @@
 /datum/outfit/prisoner
 	name = JOB_PRISONER
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner

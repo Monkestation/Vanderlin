@@ -144,13 +144,12 @@
 
 /obj/item/plate/examine(mob/user)
 	. = ..()
-	desc = initial(desc)
 	if(dirty)
-		desc += span_boldwarning("\nThis platter is filthy... absolutely disgusting.")
+		. += span_boldwarning("This platter is filthy... absolutely disgusting.")
 	else if(cleaned)
-		desc += span_notice("\nThis platter was cleaned recently!")
+		. += span_info("This platter was cleaned recently!")
 	else
-		desc += "\nThis platter looks properly stored and clean enough."
+		. += span_info("This platter looks clean enough.")
 
 /obj/item/plate/clay
 	name = "clay platter"
@@ -162,7 +161,7 @@
 
 /obj/item/plate/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay platter"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay platter"
 
 /obj/item/plate/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	. = ..()

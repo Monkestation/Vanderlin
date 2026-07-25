@@ -14,7 +14,7 @@
 
 	item_weight = 3.7 KILOGRAMS
 
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STRONGEST // no moving parts, steel
@@ -24,7 +24,7 @@
 	name = "bastion helm"
 	desc = "A modified great helm designed for Templars, this helmet with integrated neck protection serves as an unyielding bastion of protection for the devout."
 	icon_state = "topfhelm"
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	body_parts_covered = HEAD_NECK
 	prevent_crits = ALL_EXCEPT_BLUNT
@@ -102,7 +102,7 @@
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	block2add = FOV_BEHIND
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG //isn't the same as a steel helmet but is better than a skullcap, costs 2 bars and protects the mouth
 	item_weight = 3.5 KILOGRAMS
 
@@ -117,7 +117,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STANDARD
 	item_weight = 2.4 KILOGRAMS
 
@@ -163,7 +163,7 @@
 	icon_state = "topfhelm"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.3 KILOGRAMS
 
@@ -173,7 +173,7 @@
 	icon_state = "keeperhelm"
 	item_state = "keeperhelm"
 	// Best approximation for stone as we have no standard!
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	armor_class = AC_LIGHT
 	smeltresult = null
 
@@ -191,7 +191,7 @@
 	worn_y_dimension = 64
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.5 KILOGRAMS
 
@@ -204,7 +204,7 @@
 	icon_state = "zizofrogmouth"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.5 KILOGRAMS
 	block2add = FOV_BEHIND
@@ -245,7 +245,7 @@
 	icon_state = "matthioshelm"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor64x64.dmi'
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 3.2 KILOGRAMS
 	block2add = FOV_BEHIND
@@ -263,7 +263,7 @@
 	icon_state = "graggarplatehelm"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	flags_cover = HEADCOVERSEYES
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.5 KILOGRAMS
@@ -293,7 +293,7 @@
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	bloody_icon_state = "helmetblood_big"
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.5 KILOGRAMS
 	block2add = FOV_BEHIND
@@ -310,7 +310,7 @@
 	body_parts_covered = HEAD|NOSE|EYES
 	slot_flags = ITEM_SLOT_HEAD
 	flags_inv = HIDEFACE|HIDEHAIR
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	resistance_flags = FIRE_PROOF
 	blocksound = PLATEHIT
 	prevent_crits = ALL_CRITICAL_HITS
@@ -498,7 +498,7 @@
 	name = "hounskull"
 	desc = "A lavish hounskull which allows a crest to be mounted on top."
 	icon_state = "decorated_hounskull"
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.45 KILOGRAMS

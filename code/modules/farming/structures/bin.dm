@@ -140,6 +140,8 @@
 		var/obj/item/weapon/tongs/T = I
 		if(T.held_item && istype(T.held_item, /obj/item/ingot))
 			return TRUE
+	if(istype(I, /obj/item/dye_pack))
+		return TRUE
 	return FALSE
 
 /obj/item/bin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)

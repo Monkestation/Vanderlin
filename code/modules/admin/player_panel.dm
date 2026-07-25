@@ -216,49 +216,49 @@
 
 	var/list/mobs = sortmobs()
 	var/i = 1
-	for(var/mob/M in mobs)
-		if(M.ckey)
+	for(var/mob/target_mob in mobs)
+		if(target_mob.ckey)
 
 			var/color = dark_ui ? "#2a2a2a" : "#e6e6e6"
 			if(i%2 == 0)
 				color = dark_ui ? "#1e1d1d" : "#f2f2f2"
-			var/is_antagonist = is_special_character(M)
+			var/is_antagonist = is_special_character(target_mob)
 
-			var/M_job = ""
+			var/target_job = ""
 
-			if(isliving(M))
+			if(isliving(target_mob))
 
-				if(iscarbon(M)) //Carbon stuff
-					if(ishuman(M))
-						if(M.mind?.assigned_role.parent_job)
-							M_job = M.mind.assigned_role.parent_job.title
+				if(iscarbon(target_mob)) //Carbon stuff
+					if(ishuman(target_mob))
+						if(target_mob.mind?.assigned_role?.parent_job)
+							target_job = target_mob.mind.assigned_role.parent_job.title
 						else
-							M_job = M.job
+							target_job = target_mob.job
 					else
-						M_job = "Carbon-based"
+						target_job = "Carbon-based"
 
-				else if(isanimal(M)) //simple animals
-					M_job = "Animal"
+				else if(isanimal(target_mob)) //simple animals
+					target_job = "Animal"
 
 				else
-					M_job = "Living"
+					target_job = "Living"
 
-			else if(isnewplayer(M))
-				M_job = "New player"
+			else if(isnewplayer(target_mob))
+				target_job = "New player"
 
-			else if(isobserver(M))
-				var/mob/dead/observer/O = M
+			else if(isobserver(target_mob))
+				var/mob/dead/observer/O = target_mob
 				if(O.started_as_observer)//Did they get BTFO or are they just not trying?
-					M_job = "Observer"
+					target_job = "Observer"
 				else
-					M_job = "Ghost"
+					target_job = "Ghost"
 
-			var/M_name = html_encode(M.name)
-			var/M_rname = html_encode(M.real_name)
-			var/M_key = html_encode(M.key)
+			var/target_name = html_encode(target_mob.name)
+			var/target_real_name = html_encode(target_mob.real_name)
+			var/target_key = html_encode(target_mob.key)
 			var/previous_names = ""
-			if(M_key)
-				var/datum/player_details/P = GLOB.player_details[ckey(M_key)]
+			if(target_key)
+				var/datum/player_details/P = GLOB.player_details[ckey(target_key)]
 				if(P)
 					previous_names = P.played_names.Join(",")
 			previous_names = html_encode(previous_names)
@@ -270,10 +270,10 @@
 					<td align='center' bgcolor='[color]'>
 						<span id='notice_span[i]'></span>
 						<a id='link[i]'
-						onmouseover='expand("item[i]","[M_job]","[M_name]","[M_rname]","[previous_names]","[M_key]","[M.lastKnownIP]",[is_antagonist],"[REF(M)]")'
+						onmouseover='expand("item[i]","[target_job]","[target_name]","[target_real_name]","[previous_names]","[target_key]","[target_mob.lastKnownIP]",[is_antagonist],"[REF(target_mob)]")'
 						>
-						<b id='search[i]'>[M_name] - [M_rname] - [M_key] ([M_job])</b>
-						<span hidden class='filter_data'>[M_name] [M_rname] [M_key] [M_job] [previous_names]</span>
+						<b id='search[i]'>[target_name] - [target_real_name] - [target_key] ([target_job])</b>
+						<span hidden class='filter_data'>[target_name] [target_real_name] [target_key] [target_job] [previous_names]</span>
 						</a>
 						<br><span id='item[i]'></span>
 					</td>

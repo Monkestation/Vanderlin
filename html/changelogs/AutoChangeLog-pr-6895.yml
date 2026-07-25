@@ -1,0 +1,11 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - rscdel: "Tomb Warden no longer has a Mercenary key."
+  - rscdel: "Mercenaries no longer have a Tomb key."
+  - map: "Templates added for persistent housing in the Mercenary's Guild and the Adventurer's Guild."
+  - map: "Fixed up the Mercenary's Guild so it's not a godforsaken hellhole of spiders anymore and instead an operational base with new persistent bedrooms for the Mercenaries to customize."
+  - map: "Repurposed the Guild under the Inn to be the new Adventurer's Guild with new persistent bedrooms for Adventurers to customize."
+  - map: "Converted the old Adventurer's Guild space back into sewer area. The Innkeep loses their garden, but gains an easy space to dump their rotten food."
+  - map: "Changed door accesses to the Adventurer's Guild to be controlled by the Tomb Warden alone."
+  - map: "The Adventurer's Guild and sleeping quarters are unlocked by default, allowing them to access their guild in case the Tomb Warden is not in."

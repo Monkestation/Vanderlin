@@ -32,19 +32,29 @@ type TypeSchema = {
   fields: FieldDescriptor[];
 };
 
+type TicketTemplate = {
+  label: string;
+  fa_icon: string;
+  color: string;
+  ticket_type: string;
+  fields: Record<string, string>;
+};
+
 type Data = {
   type_schemas: TypeSchema[];
   typepath_options: Record<string, string[]>;
+  templates: TicketTemplate[];
+  prefill_ckey?: string;
 };
 
 export const AdminTicketGranter = () => {
   const { data, act } = useBackend<Data>();
-  const { type_schemas = [], typepath_options = {} } = data;
+  const { type_schemas = [], typepath_options = {}, templates = [] } = data;
 
   const [selectedType, setSelectedType] = useState<string>(
     type_schemas[0]?.ticket_type ?? '',
   );
-  const [targetCkey, setTargetCkey] = useState('');
+  const [targetCkey, setTargetCkey] = useState(data.prefill_ckey ?? '');
   const [ticketName, setTicketName] = useState('');
   const [ticketDesc, setTicketDesc] = useState('');
   const [grantReason, setGrantReason] = useState('');
@@ -56,6 +66,16 @@ export const AdminTicketGranter = () => {
   const handleTypeChange = (newType: string) => {
     setSelectedType(newType);
     setPayloadValues({});
+  };
+
+  const handleUseTemplate = (tpl: TicketTemplate) => {
+    const { name, description, grant_reason, ...rest } = tpl.fields;
+
+    setSelectedType(tpl.ticket_type);
+    if (name !== undefined) setTicketName(name);
+    if (description !== undefined) setTicketDesc(description);
+    if (grant_reason !== undefined) setGrantReason(grant_reason);
+    setPayloadValues(rest);
   };
 
   const handlePayloadChange = (key: string, val: string) => {
@@ -99,6 +119,23 @@ export const AdminTicketGranter = () => {
     <Window height={640} title="Admin Ticket Granter" width={520}>
       <Window.Content scrollable>
         <Stack vertical fill>
+        {templates.length > 0 && (
+            <Section title="Templates">
+              <Stack wrap>
+                {templates.map((tpl) => (
+                  <Stack.Item key={tpl.label} mb={1} mr={1}>
+                    <Button
+                      icon={tpl.fa_icon}
+                      style={{ borderLeft: `3px solid ${tpl.color}`, minWidth: '150px' }}
+                      onClick={() => handleUseTemplate(tpl)}
+                    >
+                      {tpl.label}
+                    </Button>
+                  </Stack.Item>
+                ))}
+              </Stack>
+            </Section>
+          )}
           <Section title="Ticket Type">
             <Stack wrap>
               {type_schemas.map((s) => (

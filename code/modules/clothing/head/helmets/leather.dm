@@ -14,7 +14,7 @@
 	dyeable = TRUE
 	sellprice = VALUE_LEATHER_HELMET
 
-	armor = ARMOR_LEATHER_BAD
+	armor_type = /datum/armor/head/leather/bad
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_STANDARD
@@ -33,7 +33,7 @@
 	max_integrity = INTEGRITY_STRONG
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/leather/advanced
 
 /obj/item/clothing/head/helmet/leather/masterwork
 	name = "masterwork leather helmet"
@@ -41,7 +41,7 @@
 	max_integrity = INTEGRITY_STRONG + 100
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/leather/master
 
 /obj/item/clothing/head/helmet/leather/masterwork/Initialize()
 	. = ..()
@@ -53,7 +53,7 @@
 	icon_state = "headscarf"
 	color = CLOTHING_BARK_BROWN
 	sellprice = VALUE_LEATHER_HELMET/2
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/head/padded/bad
 	body_parts_covered = HEAD|HAIR
 	prevent_crits =  MINOR_CRITICALS
 	max_integrity = INTEGRITY_POOR
@@ -87,7 +87,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	sellprice = VALUE_LEATHER_HELMET/2
 
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/head/padded/good
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 
 //............... Hardened Helmet ............... //
@@ -112,7 +112,7 @@
 	item_state = "minerslamp"
 	sellprice = VALUE_LEATHER_HELMET+BONUS_VALUE_MODEST
 
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/head/padded
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_BLUNT)
 	item_weight = 470 GRAMS
 
