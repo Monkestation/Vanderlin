@@ -145,9 +145,9 @@
 	var/obscure_name
 	if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
 		obscure_name = TRUE
-	if(isobserver(usr))
+	if(isobserver(user))
 		obscure_name = FALSE
-	. |= build_cool_description(get_mob_descriptors(obscure_name, usr), src)
+	. |= build_cool_description(get_mob_descriptors(obscure_name, user), src)
 
 //You can include this in any mob's examine() to show the examine texts of status effects!
 /mob/living/proc/status_effect_examines(mob/user, pronoun_replacement, list/P)
