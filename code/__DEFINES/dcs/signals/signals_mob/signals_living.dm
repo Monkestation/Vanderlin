@@ -132,6 +132,8 @@
 
 #define COMSIG_LIVING_ADJUSTED "living_damage_adjusted"
 
+/// From /atom/proc/onbite(): (user)
+#define COMSIG_ATOM_BITTEN "atom_bitten"
 #define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
 #define COMSIG_LIVING_POSTBITE_SELF "living_postbite"
 
