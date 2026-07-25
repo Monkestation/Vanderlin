@@ -9,6 +9,9 @@
 	///How the mob transformation matrix is scaled on init.
 	var/initial_size = RESIZE_DEFAULT_SIZE
 
+	var/job_title_override
+	var/job_honorary_override
+
 	var/lastattacker = null
 	var/lastattackerckey = null
 	var/datum/weakref/lastattacker_weakref = null

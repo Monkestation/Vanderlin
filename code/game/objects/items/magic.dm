@@ -97,14 +97,13 @@
 	desc = "An intricate lunar observation machine, that allows its user to study the face of Noc in the sky, reflecting the true whereabouts of hidden beings..."
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "nocdevice"
-	plane = -1
 	layer = 4.2
 	var/last_scry
 
 /obj/structure/nocdevice/attack_hand(mob/user)
 	. = ..()
 	var/mob/living/carbon/human/H = user
-	if(H.virginity)
+	if(HAS_TRAIT(H, TRAIT_VIRGIN))
 		if(world.time < last_scry + 30 SECONDS)
 			to_chat(user, "<span class='warning'>I peer into the sky but cannot focus the lens on the face of Noc. Maybe I should wait.</span>")
 			return

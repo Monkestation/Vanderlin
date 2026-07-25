@@ -137,6 +137,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/discord_id_manipulation,
 	/client/proc/ShowAllFamilies,
 	/client/proc/send_bird_letter,
+	/client/proc/grant_ticket_to,
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/role_ban_panel, /client/proc/check_pq, /client/proc/adjust_pq, /client/proc/getcurrentlogs, /client/proc/getserverlogs))
 GLOBAL_PROTECT(admin_verbs_ban)
@@ -190,6 +191,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 /world/proc/AVerbsDebug()
 	return list(
 	/client/proc/restart_controller,
+	/client/proc/view_armor_compare,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/add_job_key_whitelist,
 	/client/proc/Debug2,
@@ -280,6 +282,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/everyone_random,
 	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
+	/client/proc/view_armor_compare,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/add_job_key_whitelist,
 	/client/proc/callproc,

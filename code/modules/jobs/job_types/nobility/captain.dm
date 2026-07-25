@@ -59,6 +59,7 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant
 		)
 	give_bank_account = 120
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 	noble_income = 11
 
@@ -71,6 +72,7 @@
 	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/captain
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -121,6 +123,7 @@
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
 	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
 	)

@@ -236,12 +236,12 @@
 
 /datum/inqports/articles/listener
 	name = "1 Attentive Ear"
-	item_type = /obj/item/listeningdevice
+	item_type = /obj/item/listeningdevice/inq
 	marquescost = 4
 
 /datum/inqports/articles/whisperer
 	name = "1 Secret Whisperer"
-	item_type = /obj/item/speakerinq
+	item_type = /obj/item/speaker/inq
 	marquescost = 8
 
 
@@ -380,7 +380,7 @@
 	icon_state = "fencercollar"
 	color = "#8b1414"
 	detail_color = "#99b2b1"
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/neck/plate
 	max_integrity = ARMOR_INT_SIDE_STEEL
 	body_parts_covered = NECK
 	resistance_flags = FIRE_PROOF

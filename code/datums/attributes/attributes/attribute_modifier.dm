@@ -145,6 +145,7 @@
 		carbon_parent.update_endurance_fatigue_modifier()
 		carbon_parent.update_endurance_stamina_modifier()
 		carbon_parent.update_maximum_carry_weight()
+	SStgui.update_uis(src)
 
 /// Get the attribute modifiers list of the holder
 /datum/attribute_holder/proc/get_attribute_modification()
@@ -185,4 +186,5 @@
 		update_attributes()
 
 /datum/attribute_modifier/attribute_editor
+	id = "Attribute Edited"
 	variable = TRUE

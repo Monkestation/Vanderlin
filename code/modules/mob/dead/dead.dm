@@ -82,9 +82,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 			if(!player)
 				continue
 			if(player.client.prefs.job_preferences[job.title] != JP_HIGH)
-				//i'm sorry for doing this
-				if(!istype(job, /datum/job/adventurer) || player.client.prefs.job_preferences[JOB_COURT_AGENT] != JP_HIGH)
-					continue
+				continue
 			if(player.ready != PLAYER_READY_TO_PLAY)
 				continue
 
@@ -165,15 +163,20 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	C << link("[addr]?server_hop=[key]")
 
 /mob/dead/proc/update_z(new_z) // 1+ to register, null to unregister
-	if (registered_z != new_z)
-		if (registered_z)
-			SSmobs.dead_players_by_zlevel[registered_z] -= src
-		if (client)
-			if (new_z)
-				SSmobs.dead_players_by_zlevel[new_z] += src
-			registered_z = new_z
-		else
-			registered_z = null
+	if(registered_z == new_z)
+		return
+
+	if(registered_z)
+		SSmobs.dead_players_by_zlevel[registered_z] -= src
+
+	if(!client)
+		registered_z = null
+		return
+
+	if(new_z)
+		SSmobs.dead_players_by_zlevel[new_z] += src
+
+	registered_z = new_z
 
 /mob/dead/Login()
 	. = ..()

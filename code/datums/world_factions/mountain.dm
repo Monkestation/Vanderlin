@@ -1,15 +1,9 @@
-/obj/effect/mob_spawn/human/dwarf
-	mob_species = /datum/species/dwarf/mountain
-
-/obj/effect/mob_spawn/human/dwarf/trader
-	outfit = /datum/outfit/miner
-
 /datum/world_faction/mountain_clans
 	faction_name = "Dwarven Clans"
 	desc = "Hardy dwarves from the mountain passes"
 	faction_color = "#708090"
 	trader_outfits = list(
-		/obj/effect/mob_spawn/human/dwarf/trader
+		/obj/effect/mob_spawn/corpse/human/dwarf/trader
 	)
 	trader_type_weights = list(
 		/datum/trader_data/weapon_merchant = 15,
@@ -195,13 +189,10 @@
 		/datum/supply_pack/weapons/ranged/puffer,
 		/datum/supply_pack/weapons/ranged/blunderbuss,
 		/datum/supply_pack/weapons/ammo/bullets,
+		/datum/supply_pack/weapons/ammo/aflask,
 		/datum/supply_pack/weapons/ranged/musket
 	)
 
-	bounty_path_weights = list(
-		/obj/item/ingot = 500,
-		/obj/item/ore = 600,
-	)
 
 /datum/world_faction/mountain_clans/initialize_faction_stock()
 	..()

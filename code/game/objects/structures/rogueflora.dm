@@ -333,7 +333,7 @@
 
 /obj/structure/flora/grass/Initialize()
 	. = ..()
-	AddComponent(/datum/component/grass)
+	AddComponent(/datum/component/ambush_on_crossed)
 
 /obj/structure/flora/grass/Destroy()
 	if(isliving(usr) && HAS_TRAIT(usr, TRAIT_SEED_FINDER))
@@ -416,30 +416,35 @@
 	. = ..()
 	dir = pick(GLOB.cardinals)
 
-/datum/component/grass/Initialize()
+/datum/component/ambush_on_crossed/Initialize()
 	if(!ismovableatom(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
 
-/datum/component/grass/Destroy(force)
+/datum/component/ambush_on_crossed/Destroy(force)
 	UnregisterSignal(parent, COMSIG_MOVABLE_CROSSED)
 	return ..()
 
-/datum/component/grass/proc/Crossed(datum/source, atom/movable/AM)
-	var/atom/A = parent
+/datum/component/ambush_on_crossed/proc/Crossed(datum/source, atom/movable/AM)
+	if(!isliving(AM))
+		return
 
-	if(isliving(AM))
-		var/mob/living/L = AM
-		if(L.m_intent == MOVE_INTENT_SNEAK)
-			return
-		else
-			playsound(A, "plantcross", 90, FALSE, -1)
-			var/oldx = A.pixel_x
-			animate(A, pixel_x = oldx+1, time = 0.5)
-			animate(pixel_x = oldx-1, time = 0.5)
-			animate(pixel_x = oldx, time = 0.5)
-			L.consider_ambush()
+	var/mob/living/living_movable = AM
+	if(!living_movable.client || living_movable.m_intent == MOVE_INTENT_SNEAK || HAS_TRAIT(living_movable, TRAIT_MOVE_FLYING))
+		return
+	if(!prob(20))
+		return
+
+	living_movable.consider_ambush()
+	animate_parent()
+
+/datum/component/ambush_on_crossed/proc/animate_parent()
+	var/atom/A = parent
+	var/oldx = A.pixel_x
+	animate(A, pixel_x = oldx+1, time = 0.5)
+	animate(pixel_x = oldx-1, time = 0.5)
+	animate(pixel_x = oldx, time = 0.5)
 
 // normal bush. Oldstyle. Kept for the managed palace hedges for now.
 /obj/structure/flora/grass/bush
@@ -485,13 +490,9 @@
 	else
 		to_chat(L, span_warning("I get stuck in \a [src]."))
 
-	if(!L.client)
-		return
-	if(L.m_intent != MOVE_INTENT_SNEAK && !HAS_TRAIT(L, TRAIT_MOVE_FLYING) && prob(20))
-		L.consider_ambush()
-
 	if(!ishuman(L))
 		return
+
 	var/mob/living/carbon/human/H = L
 	var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
 	if(!was_hard_collision)

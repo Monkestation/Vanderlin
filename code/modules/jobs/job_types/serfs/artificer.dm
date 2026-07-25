@@ -46,6 +46,7 @@
 
 /datum/job/artificer
 	title = JOB_ARTIFICER
+	alt_titles = list("Engineer", "Artillerist", "Plumber", "Machinist", "Millwright")
 	tutorial = "You are one of the greatest minds of Heartfelt- an artificer, an engineer. \
 	You will build the future, regardless of what superstition the more mystical minded may spout. \
 	You know your machines' inner workings as well as you do stone, down to the last cog."
@@ -60,6 +61,7 @@
 
 	outfit = /datum/outfit/artificer
 	give_bank_account = 8
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

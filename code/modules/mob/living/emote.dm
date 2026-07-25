@@ -61,7 +61,7 @@
 	if((follower.job == JOB_PRIEST) || (follower.job == JOB_PRIEST_FEM))
 		ident_string += "[SPAN_GOD_ASTRATA("(PRIEST)")]"
 		bigger = TRUE
-	if(follower.has_quirk(/datum/quirk/vice/godfearing))
+	if(follower.has_quirk(/datum/quirk/vice/addiction/godfearing))
 		ident_string += "[SPAN_GOD_GENERIC("(GODFEARING)")]"
 	/// Usually I hate not using spans properly, but in this case it's going to make my life easier.
 	var/lowercase_god = "generic"
