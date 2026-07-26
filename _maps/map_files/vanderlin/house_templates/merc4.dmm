@@ -1,0 +1,112 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"k" = (
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/merc_guild)
+"t" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/merc4,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"y" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/flare/torch/lantern,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"C" = (
+/obj/machinery/light/fueled/oven{
+	pixel_y = 31
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"H" = (
+/obj/structure/door/violet{
+	name = "Mercenary Apartment 4";
+	lockid = "merc4"
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"I" = (
+/turf/closed/wall/mineral/stonebrick,
+/area/indoors/town/merc_guild)
+"M" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/merc_guild)
+"S" = (
+/obj/structure/chair/wood/alt/fancy,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"U" = (
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"W" = (
+/obj/structure/bed/inn,
+/obj/item/bedsheet/fabric,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"Y" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+
+(1,1,1) = {"
+I
+H
+M
+k
+k
+I
+"}
+(2,1,1) = {"
+k
+a
+a
+S
+y
+k
+"}
+(3,1,1) = {"
+k
+a
+a
+a
+a
+k
+"}
+(4,1,1) = {"
+k
+C
+a
+a
+a
+k
+"}
+(5,1,1) = {"
+k
+a
+a
+a
+U
+k
+"}
+(6,1,1) = {"
+k
+t
+a
+Y
+W
+k
+"}
+(7,1,1) = {"
+I
+I
+k
+k
+k
+k
+"}

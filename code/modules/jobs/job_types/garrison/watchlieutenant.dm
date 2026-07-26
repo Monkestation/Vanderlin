@@ -38,6 +38,12 @@
 		/datum/attribute/skill/combat/swords = list(23, 33)
 	)
 
+/datum/attribute_holder/sheet/job/lieutenant/mace
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(23, 33)
+	)
+
 /datum/job/lieutenant
 	/*
 	From wikipedia:
@@ -86,6 +92,7 @@
 		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail), \
 		"Spear" = /obj/item/weapon/polearm/spear, \
 		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
+		"Warhammer" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/mace/warhammer), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
@@ -97,6 +104,8 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
+		if("Warhammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/mace)
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
