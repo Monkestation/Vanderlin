@@ -49,10 +49,11 @@
 	Guide and educate the faithful. \
 	You are the light in the night, watcher of dreams."
 	department_flag = CHURCHMEN
-	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK)
+	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 0
+	enabled = FALSE
 	bypass_lastclass = TRUE
 	selection_color = "#c2a45d"
 	cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
