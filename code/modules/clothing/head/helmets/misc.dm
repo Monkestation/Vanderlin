@@ -461,7 +461,7 @@
 		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
 		This one used to be in the hands of a pale elf and may be fitted with a great plume atop, to bear heraldic colors."
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
-	bloody_icon = 'icons/effects/blood32x32.dmi'
+	bloody_icon = 'icons/effects/blood.dmi'
 	bloody_icon_state = "helmetblood"
 	icon_state = "armetowl"
 	raise_state = "_t"
