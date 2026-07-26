@@ -8,6 +8,8 @@
 		SPEC_ID_HALF_DROW,
 		SPEC_ID_DWARF,
 		SPEC_ID_KOBOLD,
+		SPEC_ID_SNOW_ELF,
+		SPEC_ID_HALF_SNOW_ELF,
 	)
 
 /datum/culture/species/elven
