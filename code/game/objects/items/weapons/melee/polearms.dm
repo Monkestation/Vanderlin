@@ -15,7 +15,6 @@
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	max_blade_int = 100
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8
 	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
@@ -52,7 +51,6 @@
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_BLUNT
@@ -87,7 +85,6 @@
 	icon_state = "quarterstaff_iron"
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
-	minstr = 7
 	item_weight = 1.8 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron
@@ -100,7 +97,6 @@
 	force_wielded =  DAMAGE_STAFF_WIELD + 1
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 7
 	item_weight = 2.2 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/steel
@@ -302,7 +298,6 @@
 	wlength = WLENGTH_LONG
 	max_blade_int = 50
 	max_integrity = INTEGRITY_WORST
-	minstr = 6
 
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -322,7 +317,6 @@
 	throwforce = DAMAGE_SPEAR_WIELD
 	wbalance = GOOD_PARRY
 	wlength = WLENGTH_LONG
-	minstr = 6
 
 	gripsprite = FALSE
 	throw_speed = 2
@@ -431,7 +425,6 @@
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
 	max_integrity = INTEGRITY_POOR
-	minstr = 6
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	dropshrink = 0.9
 	sellprice = 5
@@ -458,7 +451,6 @@
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
 	max_integrity = INTEGRITY_POOR
-	minstr = 6
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	dropshrink = 0.9
 	sellprice = 5
@@ -539,7 +531,6 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyhalberd"
 	swingsound = BLADEWOOSH_MED
-	minstr = 8 //So inspector can use their weapon as old, plus normal halberds are 8.
 	axe_cut = 10
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silverblessed
@@ -586,7 +577,6 @@
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SPEAR_THRUST)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
 
 	swingsound = BLADEWOOSH_MED
 	dropshrink = 0.95
@@ -607,7 +597,6 @@
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP)
-	minstr = 8
 
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
@@ -664,7 +653,6 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = GOOD_PARRY
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, AXE_THRUST, PICK_INTENT)
-	minstr = 10
 
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
@@ -726,15 +714,14 @@
 	desc = "A reinforced pole affixed with an ornate steel eagle's head, of which it's beak is intended to pierce with great harm."
 	icon_state = "eaglebeak"
 	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_SPEAR_WIELD
+	force_wielded = DAMAGE_HALBERD_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = EASY_TO_DODGE
 	slowdown = 1
 	possible_item_intents = list(POLEARM_BASH, POLEARM_CHOP) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(POLEARM_BASH, POLEARM_THRUST, MACE_HVYSMASH, WARHM_IMPALE)
+	gripped_intents = list(POLEHAMMER_STRIKE, POLEARM_THRUST, MACE_HVYSMASH, DAZE_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 11
 
 	slot_flags = ITEM_SLOT_BACK
 	dropshrink = 0.8
@@ -762,6 +749,7 @@
 	name = "lucerne"
 	desc = "A polehammer of simple iron, fracture bone and dissent with simple brute force."
 	icon_state = "polehammer"
+	force_wielded = DAMAGE_HALBERD_WIELD -3
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
 	max_integrity = INTEGRITY_STRONG
@@ -819,7 +807,6 @@
 	gripped_intents = list(SPEAR_CUT)
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STRONG
-	minstr = 5
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -851,7 +838,6 @@
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 75
 	max_integrity = INTEGRITY_WORST * 0.8
-	minstr = 6
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -874,7 +860,6 @@
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 125
 	max_integrity = INTEGRITY_WORST * 0.8 + 50
-	minstr = 6
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -895,7 +880,6 @@
 	possible_item_intents = list(NAGI_CUT, POLEARM_BASH) // no stab for you little chuddy, it's a slashing weapon
 	gripped_intents = list(NAGI_REND, NAGI_CUT, POLEARM_BASH)
 	max_blade_int = 100 //Nippon suteeru (dogshit)
-	minstr = 7
 	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/naginata/getonmobprop(tag)

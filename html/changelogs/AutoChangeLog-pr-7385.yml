@@ -1,0 +1,4 @@
+author: "Archeonan"
+delete-after: True
+changes:
+  - bugfix: "zweihander cut does full damage as intended"
