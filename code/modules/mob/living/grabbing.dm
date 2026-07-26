@@ -818,7 +818,10 @@
 		return
 	if(world.time < last_drink + 2 SECONDS)
 		return
-	if(check_crit_armor(slot2body_zone(sublimb_grabbed), BCLASS_BITE))
+	var/mob/living/carbon/human/grabbed_human
+	if(ishuman(grabbed))
+		grabbed_human = grabbed
+	if(grabbed_human.check_crit_armor(slot2body_zone(sublimb_grabbed), BCLASS_BITE))
 		to_chat(user, span_warning("I can't drink their blood through armor!"))
 		return
 	if(!limb_grabbed.get_bleed_rate())
