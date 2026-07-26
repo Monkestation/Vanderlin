@@ -10,7 +10,7 @@
 	///How many things fit on this plate?
 	var/max_items = 3
 	///What items can be plated?
-	var/static/permitted_items = list(
+	var/static/list/permitted_items = list(
 		/obj/item/kitchen/fork,
 		/obj/item/kitchen/spoon,
 		/obj/item/reagent_containers/food,
