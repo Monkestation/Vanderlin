@@ -1,8 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - rscadd: "Voice Color now shows up in relation menu"
-  - rscadd: "searchbar to relations menu, lets you search by any tag like species, gender, age, alt title, real title"
-  - qol: "Alt titles now show a hover like examines in relations menu"
-  - rscadd: "Species are now tracked by relations aswell"
-  - rscadd: "honorary titles now get passed into relations"

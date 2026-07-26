@@ -8,7 +8,6 @@
 	possible_item_intents = list(/datum/intent/sword/cut/militia, /datum/intent/sword/chop/militia, SHORT_THRUST)
 	wlength = WLENGTH_SHORT
 	gripped_intents = null
-	minstr = 9 //NO TWINKS!!
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/ingot/iron
 	grid_width = 32
