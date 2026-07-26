@@ -348,9 +348,9 @@
 
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 
-	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
-	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		amt = amt - transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT, src,  list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup))
+	// var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
+	// if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
+	// 	amt = amt - transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT, src,  list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup))
 
 	if(amt > 0.5)
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
