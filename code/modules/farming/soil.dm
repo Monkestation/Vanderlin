@@ -118,6 +118,8 @@
 	yield_produce(modifier)
 	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_PLANT_HARVESTED, src, user, drop_location())
+
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
 		if(!plant || !produce_ready)
