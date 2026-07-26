@@ -69,7 +69,7 @@
 		"Mace" = list(/obj/item/weapon/mace/steel, /obj/item/weapon/shield/tower/buckleriron), \
 		"Polehammer" = /obj/item/weapon/polearm/eaglebeak, \
 	)
-	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "SPILL SOME BLOOD!")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "FOR FORTUNE AND GLORY!")
 	switch(choice)
 		if("Sword")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 13)
