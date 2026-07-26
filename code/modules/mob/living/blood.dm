@@ -358,7 +358,7 @@
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		amt -= transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT, src)
+		amt -= transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT)
 
 	if(amt > 0.5)
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
