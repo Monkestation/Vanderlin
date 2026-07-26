@@ -22,7 +22,7 @@
 		/obj/item/reagent_containers/powder/moondust,
 		/obj/item/reagent_containers/powder/ozium,
 		/obj/item/alch/transisdust,
-		)
+	)
 	///The offset from side to side the food items can have on the plate
 	var/max_x_offset = 5
 	///The max height offset the food can reach on the plate
