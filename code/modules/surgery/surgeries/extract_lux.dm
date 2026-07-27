@@ -16,7 +16,6 @@
 	name = "Extract Lux"
 	implements = list(
 		TOOL_SCALPEL = 80,
-		/obj/item/melee/touch_attack/orison/pestra = 100,
 		TOOL_SHARP = 60,
 		/obj/item/kitchen/spoon = 40
 	)
