@@ -160,8 +160,8 @@
 	))
 
 /datum/species/elf/zizo/get_possible_names(gender = MALE)
-	var/static/list/male_names = file2list('strings/rt/names/elf/elfdm.txt')
-	var/static/list/female_names = file2list('strings/rt/names/elf/elfdf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/elf/elfzm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/elf/elfzf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/elf/zizo/get_possible_surnames(gender = MALE)
