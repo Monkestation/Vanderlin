@@ -5,6 +5,7 @@
 	desc = "Reshape a patient's face to fix disfigurement or make them a new person."
 
 	implements = list(
+        /obj/item/melee/touch_attack/orison/pestra = 1.2,
 		TOOL_SCALPEL = 1,
 		/obj/item/weapon/knife = 1.6
 	)
