@@ -15,7 +15,6 @@
 		/obj/item/clothing/neck/psycross/silver = 85,
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
-		/obj/item/melee/touch_attack/orison/pestra = 70,
 	)
 	target_mobtypes = list(/mob/living/carbon/human)
 	minimum_time = 7 SECONDS

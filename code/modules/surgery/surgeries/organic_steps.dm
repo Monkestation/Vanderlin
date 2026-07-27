@@ -6,7 +6,6 @@
 	implements = list(
 		TOOL_SCALPEL = 80,
 		TOOL_SHARP = 60,
-		/obj/item/melee/touch_attack/orison/pestra = 80,
 	) // 60% success with any sharp item.
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/simple_animal)
 	minimum_time = 1.2 SECONDS
@@ -98,7 +97,6 @@
 		TOOL_CAUTERY = 100,
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
-		/obj/item/melee/touch_attack/orison/pestra = 70,
 	)
 	minimum_time = 2.2 SECONDS
 	maximum_time = 3.5 SECONDS
@@ -146,7 +144,6 @@
 		TOOL_IMPROVISED_SAW = 65,
 		TOOL_SHOVEL = 50,
 		TOOL_SHARP = 25,
-		/obj/item/melee/touch_attack/orison/pestra = 70,
 	)
 	possible_locs = list(
 		BODY_ZONE_PRECISE_SKULL,
