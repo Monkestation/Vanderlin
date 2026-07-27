@@ -1293,7 +1293,7 @@
 	category = "Hat"
 
 /datum/repeatable_crafting_recipe/leather/atgervi_boots
-	name = "atgervi leather boots"
+	name = "fur-lined leather boots"
 	output = /obj/item/clothing/shoes/boots/leather/atgervi
 	requirements = list(
 		/obj/item/natural/hide/cured = 1
