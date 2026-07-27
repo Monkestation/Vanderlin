@@ -26,7 +26,7 @@
 
 	return TRUE
 
-/datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, delta_time, times_fired, next_breath = 4)
+/datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, seconds_per_tick, next_breath = 4)
 	var/obj/item/organ/lungs/lungs
 	var/highest_efficiency = 0
 	for(var/obj/item/organ/lungs/possible_lung as anything in owner.getorganslotlist(slot))

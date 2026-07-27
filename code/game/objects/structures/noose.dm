@@ -77,7 +77,7 @@
 		var/obj/item/bodypart/head = source.get_bodypart(BODY_ZONE_PRECISE_NECK)
 		head?.add_wound(/datum/wound/fracture/neck)
 
-/obj/structure/noose/process(delta_time)
+/obj/structure/noose/process(seconds_per_tick)
 	if(!has_buckled_mobs())
 		return PROCESS_KILL
 	if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.
@@ -95,7 +95,7 @@
 		if(buckled_mob.stat == DEAD || HAS_TRAIT(buckled_mob, TRAIT_NOBREATH))
 			continue
 
-		buckled_mob.adjustOxyLoss(3 * delta_time) // so nooses kill you faster
+		buckled_mob.adjustOxyLoss(3 * seconds_per_tick) // so nooses kill you faster
 
 		if(buckled_mob.stat < UNCONSCIOUS && prob(25))
 			buckled_mob.visible_message(pick(list(\

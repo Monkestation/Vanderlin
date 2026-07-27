@@ -60,7 +60,7 @@
 	if(is_failing())
 		return
 	if(temporary_deafness)
-		adjust_temporary_deafness(-delta_time SECONDS)
+		adjust_temporary_deafness(-seconds_per_tick SECONDS)
 
 ///Adjust the temporary deafness of the person, up or down
 /obj/item/organ/ears/proc/adjust_temporary_deafness(amount)
