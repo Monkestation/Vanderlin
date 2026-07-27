@@ -272,7 +272,6 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			beltl = /obj/item/weapon/sword/sabre/noc
 		if(/datum/patron/divine/dendor)
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
 			head = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm

@@ -118,6 +118,8 @@
 	yield_produce(modifier)
 	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_PLANT_HARVESTED, src, user, drop_location())
+
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
 		if(!plant || !produce_ready)
@@ -1004,7 +1006,7 @@
 	// Nutrient deficiency affects plant health only if nutrients are required but unavailable
 	var/any_nutrients_needed = (nitrogen_needed > 0 || phosphorus_needed > 0 || potassium_needed > 0)
 	if(any_nutrients_needed && limiting_factor < 0.1)
-		adjust_plant_health(-dt * NUTRIENT_DEFICIENCY_DAMAGE_RATE)
+		actual_growth_time *= 0.75
 
 	return add_growth(actual_growth_time)
 

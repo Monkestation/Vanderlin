@@ -12,7 +12,7 @@
 	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET
 
-	item_weight = 3.7 KILOGRAMS
+	item_weight = 3.5 KILOGRAMS
 
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
@@ -165,7 +165,7 @@
 
 	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS
-	item_weight = 4.3 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/bucket/keeper
 	name = "keeper's stone mask"
@@ -179,7 +179,7 @@
 
 /obj/item/clothing/head/helmet/heavy/bucket/gold
 	icon_state = "topfhelm_gold"
-	item_weight = 8.6 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 //............... Frog Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/frog

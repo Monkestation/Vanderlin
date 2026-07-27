@@ -602,6 +602,54 @@
 	name = "penthouse ii key"
 	lockids = list("penthouse2")
 
+/obj/item/key/apartments/merc1
+	name = "mercenary apartment i key"
+	lockids = list("merc1")
+
+/obj/item/key/apartments/merc2
+	name = "mercenary apartment ii key"
+	lockids = list("merc2")
+
+/obj/item/key/apartments/merc3
+	name = "mercenary apartment iii key"
+	lockids = list("merc3")
+
+/obj/item/key/apartments/merc4
+	name = "mercenary apartment iv key"
+	lockids = list("merc4")
+
+/obj/item/key/apartments/merc5
+	name = "mercenary apartment v key"
+	lockids = list("merc5")
+
+/obj/item/key/apartments/merc6
+	name = "mercenary apartment vi key"
+	lockids = list("merc6")
+
+/obj/item/key/apartments/adv1
+	name = "adventurer apartment i key"
+	lockids = list("adv1")
+
+/obj/item/key/apartments/adv2
+	name = "adventurer apartment ii key"
+	lockids = list("adv2")
+
+/obj/item/key/apartments/adv3
+	name = "adventurer apartment iii key"
+	lockids = list("adv3")
+
+/obj/item/key/apartments/adv4
+	name = "adventurer apartment iv key"
+	lockids = list("adv4")
+
+/obj/item/key/apartments/adv5
+	name = "adventurer apartment v key"
+	lockids = list("adv5")
+
+/obj/item/key/apartments/adv6
+	name = "adventurer apartment vi key"
+	lockids = list("adv6")
+
 // SHOP KEYS
 
 /obj/item/key/shops

@@ -27,7 +27,7 @@
 	total_positions = 3
 	category_tags = list(CTAG_MERCENARY)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander4.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/desert_pirate
 

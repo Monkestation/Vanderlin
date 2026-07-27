@@ -425,3 +425,36 @@
   - rscadd: honorary titles now get passed into relations
   flleeppyy:
   - code_imp: Updated Plexora code
+2026-07-26:
+  Archeonan:
+  - rscadd: Added warhammer weapon option to royal knights, fighter/cleric adventurer,
+      and city watch footman/lieutenant
+  - rscadd: Added eagle's beak weapon option to royal knights
+  - bugfix: zweihander cut does full damage as intended
+  - rscadd: 2 tile reach cut for zweihander
+  - rscadd: steel zweihander
+  - rscadd: 2 tile reach strike for polehammers
+  - balance: replaced polehammer impale with daze, alongside buffing their damage
+  MissyNym:
+  - map: Misc fixes for tailor's apartment and for the train station.
+  - rscdel: Tomb Warden no longer has a Mercenary key.
+  - rscdel: Mercenaries no longer have a Tomb key.
+  - map: Templates added for persistent housing in the Mercenary's Guild and the Adventurer's
+      Guild.
+  - map: Fixed up the Mercenary's Guild so it's not a godforsaken hellhole of spiders
+      anymore and instead an operational base with new persistent bedrooms for the
+      Mercenaries to customize.
+  - map: Repurposed the Guild under the Inn to be the new Adventurer's Guild with
+      new persistent bedrooms for Adventurers to customize.
+  - map: Converted the old Adventurer's Guild space back into sewer area. The Innkeep
+      loses their garden, but gains an easy space to dump their rotten food.
+  - map: Changed door accesses to the Adventurer's Guild to be controlled by the Tomb
+      Warden alone.
+  - map: The Adventurer's Guild and sleeping quarters are unlocked by default, allowing
+      them to access their guild in case the Tomb Warden is not in.
+  ModDownloading:
+  - balance: Removed all minimum strength requirements of 11 or less on equipment.
+  - rscadd: Kobolds now have generic names unique to them rather than sharing Dwarf
+      names.
+  SmokingCrackForChrist:
+  - rscadd: A new song for my stupid chud cat I hate.

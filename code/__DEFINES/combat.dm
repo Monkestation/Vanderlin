@@ -173,6 +173,7 @@
 #define SHORT_CUT		 /datum/intent/sword/cut/short
 #define SWDLONG_CUT		 /datum/intent/sword/cut/long
 #define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define ZWEI_CUT_REACH   /datum/intent/sword/cut/zwei/reach
 #define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 
 #define SWORD_THRUST	 /datum/intent/sword/thrust
@@ -234,6 +235,7 @@
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
 #define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
+#define POLEHAMMER_STRIKE   /datum/intent/mace/strike/polehammer
 
 #define MACE_THRUST			/datum/intent/mace/thrust
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
