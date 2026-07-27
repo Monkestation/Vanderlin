@@ -12,6 +12,8 @@
 	shared_occurence_type = SHARED_MINOR_THREAT
 	minor_roleset = TRUE
 
+	can_call_midround = TRUE
+
 	restricted_roles = list(
 		/datum/job/lord,
 		/datum/job/consort,
@@ -54,7 +56,7 @@
 		/datum/round_event_control/antagonist/solo/vampires = 0.7,
 		/datum/round_event_control/antagonist/solo/werewolf = 0.7,
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 0.5,
-		/datum/round_event_control/antagonist/solo/zizo_cult = 0.6,
+		///datum/round_event_control/antagonist/solo/zizo_cult = 0.6,
 		/datum/round_event_control/antagonist/solo/lich = 0.6,
 	)
 

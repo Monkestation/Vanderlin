@@ -338,6 +338,8 @@
 			return
 		if("Osslandic")
 			return strings("accents/ossland_replacement.json", "ossland")
+		if("Rockhill")
+			return strings("accents/rockhill_replacement.json", "rockhill")
 	return
 
 /datum/species/proc/get_pain_emote(power)
@@ -413,6 +415,7 @@
 				ACCENT_ROUSMAN,
 				ACCENT_WINTERMARE,
 				ACCENT_OSSLAND,
+				ACCENT_ROCKHILL,
 			)
 
 			///This will only trigger for donators
@@ -824,7 +827,7 @@
 		C.setToxLoss(0, TRUE, TRUE)
 
 	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(src, keep_liverless = TRUE)
+		C.reagents?.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
 		C.add_faction(inherent_factions)
@@ -847,6 +850,10 @@
 
 	on_gender_update(C)
 	C.update_organ_requirements() //post species trait gains
+
+	if(!(C.status_flags & BUILDING_ORGANS))
+		C.regenerate_icons()
+
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
@@ -1332,12 +1339,12 @@
 	return
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-//	if(!((target.health < 0 || HAS_TRAIT(target, TRAIT_FAKEDEATH)) && !(target.mobility_flags & MOBILITY_STAND)))
 	if(!(istype(user.rmb_intent, /datum/rmb_intent/weak)) && target.body_position == LYING_DOWN)
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaken")
 		return TRUE
+
 	else if(istype(user.rmb_intent, /datum/rmb_intent/weak) && (target.body_position == LYING_DOWN) && (user.zone_selected in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_MOUTH)))
 		user.do_cpr(target, user.zone_selected == BODY_ZONE_CHEST ? CPR_CHEST : CPR_MOUTH)
 		return TRUE
@@ -1645,7 +1652,7 @@
 				target.mind.attackedme[user.real_name] = world.time
 			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
-			var/damage = user.get_kick_damage(2.5)
+			var/damage = user.get_kick_damage() * 1.5
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 			var/balance = 10
 			target.next_attack_msg.Cut()
@@ -1752,7 +1759,7 @@
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
 		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
-		var/damage = user.get_kick_damage(1.4)
+		var/damage = user.get_kick_damage()
 		var/damage_blocked = FALSE
 
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
@@ -1857,7 +1864,7 @@
 		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking >= 10)
 			H.next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
 			// Get extra damage as a percent of 50% extra based on skill
-			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
+			var/percentage = attacker_sneaking / SKILL_LEVEL_LEGENDARY
 			if(blunt)
 				knockout_modifier = FLOOR(15 * percentage, 1)
 			item_force += (item_force * 0.5) * percentage
@@ -1980,7 +1987,7 @@
 	var/damage_amount = damage
 	var/list/mods = list()
 	if(!can_crit)
-		mods = list(CRIT_MOD_CHANCE = -100)
+		mods = list(CRIT_MOD_CHANCE = CANT_CRIT)
 	switch(damagetype)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
@@ -2034,7 +2041,7 @@
 					if(BP.receive_damage(0, damage_amount, flashes = flashes))
 						H.update_damage_overlays()
 				else
-					BP.bodypart_attacked_by(BCLASS_BURN, damage_amount, modifiers = list(CRIT_MOD_CHANCE = -100)) // burns can't crit
+					BP.bodypart_attacked_by(BCLASS_BURN, damage_amount, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT)) // burns can't crit
 					H.update_damage_overlays()
 			else
 				H.adjustFireLoss(damage_amount)

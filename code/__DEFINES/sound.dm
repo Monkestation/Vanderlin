@@ -82,6 +82,7 @@
 #define SFX_INQUIS_BOOT_STEP	"inquis_boot_step"
 #define SFX_POWER_ARMOR_STEP	"power_armor_step"
 #define SFX_WATCH_BOOT_STEP	"watch_boot_step"
+#define SFX_EVIL_BOOT_STEP "evil_boot_step"
 #define SFX_CAT_MEOW "cat_meow"
 #define SFX_CAT_PURR "cat_purr"
 #define SFX_EGG_HATCHING "egg_hatching"

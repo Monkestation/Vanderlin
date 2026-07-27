@@ -72,7 +72,7 @@
 	TRY_MIGRATE_PREF(/datum/preference/choiced/age, "age")
 	TRY_MIGRATE_PREF(/datum/preference/choiced/domhand, "domhand")
 	TRY_MIGRATE_PREF(/datum/preference/choiced/selected_accent,"selected_accent")
-	TRY_MIGRATE_PREF(/datum/preference/text/family, "family")
+	TRY_MIGRATE_PREF(/datum/preference/choiced/family_mode, "family")
 	TRY_MIGRATE_PREF(/datum/preference/text/setspouse, "setspouse")
 	TRY_MIGRATE_PREF(/datum/preference/choiced/gender_choice, "gender_choice")
 

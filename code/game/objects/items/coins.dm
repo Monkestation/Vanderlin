@@ -110,6 +110,10 @@
 		dropshrink = 0.2
 	else
 		dropshrink = 1
+	if(quantity <= 0)
+		qdel(src)
+		return
+
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC | UPDATE_NAME)
 	update_transform()
 
@@ -423,15 +427,17 @@
 	else
 		desc = ""
 
-/obj/item/coin/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/coin))
-		var/obj/item/coin/G = I
-		if(item_flags & IN_STORAGE)
-			merge(G, user)
-		else
-			G.merge(src, user)
-		return
-	return ..()
+/obj/item/coin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/coin))
+		return NONE
+
+	var/obj/item/coin/coin = tool
+	if(item_flags & IN_STORAGE)
+		merge(coin, user)
+	else
+		coin.merge(src, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 //GOLD
 /obj/item/coin/gold

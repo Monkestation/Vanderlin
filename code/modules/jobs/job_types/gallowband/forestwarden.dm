@@ -49,6 +49,7 @@
 	outfit = /datum/outfit/forestwarden
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
 	give_bank_account = 45
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 	languages = list(/datum/language/gronnic)
 
@@ -59,13 +60,16 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_NOBLE_POWER,
-		TRAIT_FORAGER
+		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
 	verbs = list(
 		/mob/proc/haltyell
 	)
 
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)

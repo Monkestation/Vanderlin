@@ -65,14 +65,19 @@
 	if (user.clan)
 		trigger(user)
 
-/obj/item/talisman/attack(mob/living/target, mob/living/user, list/modifiers)
-	if(user.clan && spell_type)
-		var/datum/rune_spell/instance = spell_type
-		if (initial(instance.touch_cast))
-			new spell_type(user, src, "touch", target)
-			qdel(src)
-			return
-	..()
+/obj/item/talisman/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!user.clan || !spell_type)
+		return NONE
+
+	var/datum/rune_spell/instance = spell_type
+	if(!initial(instance.touch_cast))
+		return ITEM_INTERACT_BLOCKING
+
+	new spell_type(user, src, "touch", interacting_with)
+
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/talisman/proc/trigger(mob/user)
 	if (!user)

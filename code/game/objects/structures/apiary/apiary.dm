@@ -184,12 +184,13 @@
 	stored_combs = 0
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/apiary/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/queen_bee))
+/obj/structure/apiary/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/queen_bee))
 		if(queen_bee)
 			to_chat(user, span_warning("There's already a queen!"))
 			return
-		insert_queen(I)
+		insert_queen(tool)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/apiary/proc/process_comb_gain()
 	if(!pollen)

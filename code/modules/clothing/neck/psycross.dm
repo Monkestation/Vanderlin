@@ -1,12 +1,73 @@
+// WOODEN AMULETS
 
 /obj/item/clothing/neck/psycross
 	name = "psycross"
 	desc = "Let His name be naught but forgot'n."
 	icon_state = "psycross_wood"
-	//dropshrink = 0.75
+	dropshrink = 0.75
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 10
 	experimental_onhip = TRUE
+
+/obj/item/clothing/neck/psycross/unfinished
+	name = "unfinished amulet"
+	desc = "A chunk of lumber, carve this to free the icon of your god."
+	icon_state = "unfinished_wood"
+
+/obj/item/clothing/neck/psycross/divine
+	name = "wooden amulet of the ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided_wood"
+
+/obj/item/clothing/neck/psycross/divine/astrata
+	name = "wooden amulet of Astrata"
+	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
+	icon_state = "astrata_wood"
+
+/obj/item/clothing/neck/psycross/divine/noc
+	name = "wooden amulet of Noc"
+	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."
+	icon_state = "noc_wood"
+
+/obj/item/clothing/neck/psycross/divine/dendor
+	name = "wooden amulet of Dendor"
+	desc = "Nature is a body of which we are but its entrails."
+	icon_state = "dendor_wood"
+
+/obj/item/clothing/neck/psycross/divine/abyssor
+	name = "wooden amulet of Abyssor"
+	desc = "Oceanshaper and guardian of the seas, make them remember his name."
+	icon_state = "abyssor_wood"
+
+/obj/item/clothing/neck/psycross/divine/necra
+	name = "wooden amulet of Necra"
+	desc = "Where, grave, thy victory? I triumph still while the Veiled Lady abides by me."
+	icon_state = "necra_wood"
+
+/obj/item/clothing/neck/psycross/divine/ravox
+	name = "wooden amulet of Ravox"
+	desc = "Struggle. Challenge. And rise to struggle again. That is the sword of he who yet lives to fight again."
+	icon_state = "ravox_wood"
+
+/obj/item/clothing/neck/psycross/divine/xylix
+	name = "wooden amulet of Xylix"
+	desc = "Be not fooled, and be not afraid to."
+	icon_state = "xylix_wood"
+
+/obj/item/clothing/neck/psycross/divine/eora
+	name = "wooden amulet of Eora"
+	desc = "And I love thee because thou art love."
+	icon_state = "eora_wood"
+
+/obj/item/clothing/neck/psycross/divine/pestra
+	name = "wooden amulet of Pestra"
+	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate."
+	icon_state = "pestra_wood"
+
+/obj/item/clothing/neck/psycross/divine/malum
+	name = "wooden amulet of Malum"
+	desc = "Blessed be our works, made in His name."
+	icon_state = "malum_wood"
 
 // Hunt
 /obj/item/clothing/neck/psycross/great_hunt
@@ -18,13 +79,16 @@
 // INHUMEN PSYCROSSES
 
 /obj/item/clothing/neck/psycross/zizo
-	name = "Amulet of Zizo"
+	name = "amulet of Zizo"
 	desc = "Through power dominate, through domination rule, through Zizo become the divinity you were always meant to be."
 	icon_state = "zcross"
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 0
 	experimental_onhip = TRUE
 
+/obj/item/clothing/neck/psycross/zizo/wood
+	name = "wooden amulet of Zizo"
+	icon_state = "zcross_wood"
 
 /obj/item/clothing/neck/psycross/matthios
 	name = "amulet of Matthios"
@@ -34,12 +98,20 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	smeltresult = null
 
+/obj/item/clothing/neck/psycross/matthios/wood
+	name = "wooden amulet of Matthios"
+	icon_state = "matthios_wood"
+
 /obj/item/clothing/neck/psycross/graggar
 	name = "amulet of Graggar"
 	desc = "Blood leads only to glory, and violence begets divinity. Nothing less. Conquest is simply another name for victory."
 	icon_state = "graggar"
 	resistance_flags = FIRE_PROOF
 	smeltresult = null
+
+/obj/item/clothing/neck/psycross/graggar/wood
+	name = "wooden amulet of Graggar"
+	icon_state = "graggar_wood"
 
 /obj/item/clothing/neck/psycross/baotha
 	name = "amulet of Baotha"
@@ -48,6 +120,11 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	smeltresult = null
+
+/obj/item/clothing/neck/psycross/baotha/wood
+	name = "wooden amulet of Baotha"
+	desc = "A promise as hollow as the wood it was carved from. It weighs heavy with the memory of sweet wine turned to poison, and the comfort of a sorrow that refuses to fade."
+	icon_state = "baotha_wood"
 
 /* // GRONN PSYCROSSES
 /obj/item/clothing/neck/psycross/gronn

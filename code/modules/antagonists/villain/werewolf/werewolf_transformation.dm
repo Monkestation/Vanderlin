@@ -80,7 +80,7 @@
 
 	new_werewolf.adjustBruteLoss(human_user.getBruteLoss() / 2)
 	new_werewolf.adjustFireLoss(human_user.getFireLoss() / 2)
-	new_werewolf.adjustToxLoss(human_user.getToxLoss() / 2)
+	new_werewolf.adjustToxLoss(human_user.getToxLoss() / 2, forced = TRUE)
 	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
 	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
 	new_werewolf.set_blood_volume(human_user.blood_volume, minimum = BLOOD_VOLUME_SURVIVE)

@@ -89,7 +89,7 @@
 
 
 /mob/proc/playsound_local(atom/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, repeat, muffled, environment_override = -1)
-	if(!client || !can_hear())
+	if(!client || HAS_TRAIT(src, TRAIT_DEAF))
 		return FALSE
 
 	if(!S)
@@ -419,6 +419,14 @@
 							'sound/foley/footsteps/armor/heavy-footstep (3).ogg',\
 							'sound/foley/footsteps/armor/heavy-footstep (4).ogg',\
 							'sound/foley/footsteps/armor/heavy-footstep (5).ogg'\
+							)
+			if(SFX_EVIL_BOOT_STEP)
+				soundin = pick('sound/foley/footsteps/armor/evilassfootstep1.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep2.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep3.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep4.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep5.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep6.ogg'\
 							)
 			if(SFX_CAT_MEOW)
 				soundin = pickweight(list(

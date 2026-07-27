@@ -29,7 +29,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
 		TRAIT_CHUNKYFINGERS,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLBLOCK,
 		TRAIT_BLOODLOSS_IMMUNE,
@@ -204,6 +204,7 @@
 			zombie_part.update_disabled()
 	zombie.update_body()
 	zombie.grant_undead_eyes()
+	zombie.update_eyes()
 
 	zombie.add_client_colour(/datum/client_colour/monochrome)
 	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
@@ -225,6 +226,7 @@
 	zombie.cut_overlay(rotflies)
 	zombie.attributes?.remove_attribute_modifier(/datum/attribute_modifier/zombie)
 	zombie.remove_client_colour(/datum/client_colour/monochrome)
+	QDEL_NULL(zombie.ai_controller)
 
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		zombie_part.revive_limb()

@@ -33,7 +33,8 @@
 	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity_flag) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
-	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers)
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
 
 	var/rmb_stam_penalty = 1
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
@@ -86,12 +87,16 @@
 
 	A.attack_hand(src, modifiers)
 
-/mob/living/attack_hand_secondary(mob/user, list/modifiers)
+/mob/living/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+	if(.)
 		return
 
-	user.changeNext_move(CLICK_CD_MELEE)
+	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return
+
+	if(user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK)))
+		return TRUE
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -99,24 +104,56 @@
 		return
 
 	if(user.cmode)
+		return SECONDARY_ATTACK_CALL_NORMAL // Punch
+
+	if(!ishuman(user) || user == src)
 		return
 
-	if(ishuman(user) && user != src)
-		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(length(user.return_apprentices()) >= user.return_max_apprentices())
+	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+		var/zones = list(
+			BODY_ZONE_PRECISE_NECK,
+			BODY_ZONE_L_ARM,
+			BODY_ZONE_R_ARM,
+			BODY_ZONE_PRECISE_L_HAND,
+			BODY_ZONE_PRECISE_R_HAND,
+		)
+		if(user.zone_selected in zones)
+			check_pulse(user)
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ..()
+
+	if(!mind)
+		return
+
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(length(user.return_apprentices()) >= user.return_max_apprentices())
+		to_chat(user, span_notice("I have too many apprentices."))
+		return
+
+	if(is_apprentice())
+		to_chat(user, span_notice("[p_they(TRUE)] are under the tutelage of someone else."))
+		return
+
+	var/datum/job/my_job = mind?.assigned_role
+	if(istype(my_job))
+		if(!my_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		if(is_apprentice())
+
+		if(my_job.parent_job && !my_job.parent_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		var/datum/job/my_job = mind?.assigned_role
-		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
-			return
-		var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
-		if(choice != CHOICE_CONFIRM)
-			return
-		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
-			return
-		to_chat(user, span_notice("You offer apprenticeship to [src]."))
-		user.make_apprentice(src)
+
+	var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+	if(choice != CHOICE_CONFIRM)
+		return
+
+	if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
+		return
+
+	to_chat(user, span_notice("I offer apprenticeship to [src]."))
+	user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
 	return
@@ -136,7 +173,8 @@
 /// Returns true to cancel further attacks doesn't call
 /atom/proc/onbite(mob/living/user)
 	. = FALSE
-	if(!istype(user))
+	var/sig_return = SEND_SIGNAL(src, COMSIG_ATOM_BITTEN, user)
+	if(sig_return || !istype(user))
 		return TRUE
 
 /mob/living/onbite(mob/living/user)
@@ -342,9 +380,9 @@
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	if(user.cmode)
-		if(user.rmb_intent?.special_attack(user, src))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(user.cmode && user.rmb_intent?.special_attack(user, src))
+		user.changeNext_move(CLICK_CD_MELEE)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -394,8 +432,7 @@
 		return ui_interact(user)
 	return FALSE
 
-
-/mob/living/carbon/human/RangedAttack(atom/A, list/modifiers)
+/mob/living/carbon/human/ranged_attack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
@@ -488,8 +525,8 @@
 						record_featured_stat(FEATURED_STATS_CRIMINALS, thief)
 						record_round_statistic(STATS_ITEMS_PICKPOCKETED)
 						SEND_SIGNAL(src, COMSIG_PICKPOCKET_SUCCESS)
-					if(has_quirk(/datum/quirk/vice/kleptomaniac))
-						sate_addiction(/datum/quirk/vice/kleptomaniac)
+					if(has_quirk(/datum/quirk/vice/addiction/kleptomaniac))
+						sate_addiction(/datum/quirk/vice/addiction/kleptomaniac)
 				else
 					exp_to_gain /= 2
 					to_chat(thief, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))
@@ -565,7 +602,7 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.getPainLoss() / 50
+		jadded += H.getShockStage() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1
@@ -576,52 +613,56 @@
 #define FLIP_DIRECTION_CLOCKWISE 1
 #define FLIP_DIRECTION_ANTICLOCKWISE 0
 
-/mob/living/proc/jump_action_resolve(atom/A, jadded, jrange, jextra)
-	var/do_a_flip
+/**
+ * Jump resolve
+ * Args
+ * * target - target atom we are jumping towards
+ * * stamina_cost - amount of stamina we need / we take when we jump
+ * * range - amount of tiles to throw
+ * * extra_tile - when the jump has ended, throw another tile
+ */
+/mob/living/proc/jump_action_resolve(atom/target, stamina_cost, range, extra_tile)
+	var/do_a_flip = FALSE
 	var/flip_direction = FLIP_DIRECTION_CLOCKWISE
 	var/prev_pixel_z = pixel_z
 	var/prev_transform = transform
-	if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4 || HAS_TRAIT(src, TRAIT_FLIP_JUMP))
+
+	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4)
 		do_a_flip = TRUE
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
 
-	// ensures the floating animation doesn't mess with our animation
-	if(movement_type & (MOVETYPES_FLOATING_ANIMATION))
-		ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT)
-		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT), 0.3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
-
-	if(adjust_stamina(min(jadded,100)))
-		if(do_a_flip)
-			var/flip_angle = flip_direction ? 120 : -120
-			animate(src, pixel_z = pixel_z + 6, transform = turn(transform, flip_angle), time = 1)
-			animate(transform = turn(transform, flip_angle), time=1)
-			animate(pixel_z = prev_pixel_z, transform = turn(transform, flip_angle), time=1)
-			animate(transform = prev_transform, time = 0)
-		else
-			animate(src, pixel_z = pixel_z + 6, time = 1)
-			animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
-			animate(transform = prev_transform, time = 0)
-
-		if(jextra)
-			throw_at(A, jrange, 1, src, spin = FALSE)
-			while(src.throwing)
-				sleep(1)
-			throw_at(get_step(src, src.dir), 1, 1, src, spin = FALSE)
-		else
-			throw_at(A, jrange, 1, src, spin = FALSE)
-			while(src.throwing)
-				sleep(1)
-		if(isopenturf(src.loc))
-			var/turf/open/T = src.loc
-			if(T.landsound)
-				playsound(T, T.landsound, 100, FALSE)
-			T.Entered(src)
-	else
-		animate(src, pixel_z = pixel_z + 6, time = 1)
-		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
+	if(!adjust_stamina(min(stamina_cost, 100)))
+		animate(src, pixel_z = pixel_z + 6, time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
 		animate(transform = prev_transform, time = 0)
-		throw_at(A, 1, 1, src, spin = FALSE)
+		throw_at(target, 1, 1, spin = FALSE)
+		return
+
+	if(do_a_flip)
+		var/flip_angle = flip_direction ? 120 : -120
+		animate(src, pixel_z = pixel_z + 6, transform = turn(transform, flip_angle), time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(transform = turn(transform, flip_angle), time = 0.1 SECONDS)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, flip_angle), time = 0.1 SECONDS)
+		animate(transform = prev_transform, time = 0)
+	else
+		animate(src, pixel_z = pixel_z + 6, time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
+		animate(transform = prev_transform, time = 0)
+
+	throw_at(target, range, 1, spin = FALSE, callback = CALLBACK(src, PROC_REF(jump_ended), extra_tile))
+
+/mob/living/proc/jump_ended(extra_tile)
+	if(QDELETED(src) || isopenspace(loc))
+		return
+
+	if(isopenturf(loc))
+		var/turf/open/open_turf = loc
+		if(open_turf.landsound)
+			playsound(open_turf, open_turf.landsound, 100, FALSE)
+
+	if(extra_tile)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)
 
 #undef FLIP_DIRECTION_CLOCKWISE
 #undef FLIP_DIRECTION_ANTICLOCKWISE

@@ -33,17 +33,16 @@
 	icon_state = "[icon_type]-[open ? "open" : "closed"]"
 
 /obj/structure/curtain/wirecutter_act(mob/living/user, obj/item/I)
-	..()
 	if(anchored)
-		return TRUE
+		return ITEM_INTERACT_BLOCKING
 
 	user.visible_message("<span class='warning'>[user] cuts apart [src].</span>",
 		"<span class='notice'>I start to cut apart [src].</span>", "<span class='hear'>I hear cutting.</span>")
+
 	if(I.use_tool(src, user, 50, volume=100) && !anchored)
 		to_chat(user, "<span class='notice'>I cut apart [src].</span>")
 		deconstruct()
-
-	return TRUE
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/curtain/attack_hand(mob/user)
 	. = ..()

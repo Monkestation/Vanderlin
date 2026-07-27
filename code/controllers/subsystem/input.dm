@@ -38,12 +38,13 @@ VERB_MANAGER_SUBSYSTEM_DEF(input)
 // This is for when macro sets are eventualy datumized
 /datum/controller/subsystem/verb_manager/input/proc/setup_default_macro_sets()
 	macro_set = list(
-	"Any" = "\"KeyDown \[\[*\]\]\"",
-	"Any+UP" = "\"KeyUp \[\[*\]\]\"",
-	"," = "me(big)", // I fucking hate that these are hard-coded in, I will eventually port my Subsystem refactor and fix this
-	"Back" = "\".winset \\\"input.text=\\\"\\\"\\\"\"",
-	"Tab" = "\".winset \\\"input.focus=true?map.focus=true command=disableInput input.text-color = #ad9eb4 input.background-color=[COLOR_INPUT_DISABLED] : input.focus=true command=activeInput input.text-color=#EEEEEE input.background-color=[COLOR_INPUT_ENABLED]\\\"\"",
-	"Escape" = "\".winset \\\"input.text=\\\"\\\"\\\"\"")
+		"Any" = "\"KeyDown \[\[*\]\] \[\[map.mouse-pos\]\] \[\[map.size\]\]\"",
+		"Any+UP" = "\"KeyUp \[\[*\]\] \[\[map.mouse-pos\]\] \[\[map.size\]\]\"",
+		"," = "me(big)", // I fucking hate that these are hard-coded in, I will eventually port my Subsystem refactor and fix this
+		"Back" = "\".winset \\\"input.text=\\\"\\\"\\\"\"",
+		"Tab" = "\".winset \\\"input.focus=true?map.focus=true command=disableInput input.text-color = #ad9eb4 input.background-color=[COLOR_INPUT_DISABLED] : input.focus=true command=activeInput input.text-color=#EEEEEE input.background-color=[COLOR_INPUT_ENABLED]\\\"\"",
+		"Escape" = "\".winset \\\"input.text=\\\"\\\"\\\"\"",
+	)
 
 // Badmins just wanna have fun ♪
 /datum/controller/subsystem/verb_manager/input/proc/refresh_client_macro_sets()

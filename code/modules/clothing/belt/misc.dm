@@ -66,7 +66,12 @@
 		/obj/item/storage/keyring/guard,
 	)
 
-// Bandit's belt starts with a bandage and a key to their guildhall.
+/obj/item/storage/belt/leather/lieutenant //they get their keys + dagger there
+	populate_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special,
+		/obj/item/storage/keyring/lieutenant,
+	)
+
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
 		/obj/item/natural/cloth/bandage,
@@ -80,7 +85,6 @@
 /obj/item/storage/belt/leather/mercenary/black
 	name = "black belt"
 	icon_state = "blackbelt"
-
 
 /obj/item/storage/belt/leather/plaquegold
 	name = "plaque belt"
@@ -97,6 +101,13 @@
 	name = "black belt"
 	icon_state = "blackbelt"
 	sellprice = 10
+
+/obj/item/storage/belt/leather/black/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/weapon/knife/dagger/steel,
+		/obj/item/lockpickring/mundane,
+	)
 
 /obj/item/storage/belt/leather/plaquesilver
 	name = "plaque belt"
@@ -489,26 +500,6 @@
 	dyeable = TRUE
 	component_type = /datum/component/storage/concrete/grid/belt/knife_belt
 	empty_when_dropped = FALSE
-
-/obj/item/storage/belt/leather/knifebelt/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
-
-	. = TRUE
-	if(length(contents) >= max_storage)
-		to_chat(user, span_warning("Your [src.name] is full!"))
-		return
-	var/turf/T = attacked_atom
-	to_chat(user, span_notice("You begin to gather the ammunition..."))
-	for(var/obj/item/weapon/knife/throwingknife/knife in T.contents)
-		if(do_after(user, 5 DECISECONDS))
-			if(!eat_knife(knife))
-				break
-
-/obj/item/storage/belt/leather/knifebelt/proc/eat_knife(obj/A)
-	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
-		if(length(contents) < max_storage)
-			return SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, FALSE)
 
 /obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, list/modifiers)
 	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))

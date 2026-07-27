@@ -155,33 +155,7 @@
   - rscadd: Hand gives leadership hours (experience)
 2026-04-12:
   Archeonan:
-  - balance: 'Replaced psydonian templar fluted cuirass with psydonian cuirass
-
-      :cl:
-
-      <!-- Both :cl:''s are required for the changelog to work! You can put your name
-      to the right of the first :cl: if you want to overwrite your GitHub username
-      as author ingame. -->
-
-      <!-- You can use multiple of the same prefix (they''re only used for the icon
-      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
-      generally represent how a player might be affected by the changes rather than
-      a summary of the PR''s contents. -->
-
-      ## Pre-Merge Checklist
-
-      <!-- Don''t bother filling these in while creating your Pull Request, just click
-      the checkboxes after the Pull Request is opened and you are redirected to the
-      page. -->
-
-      - [x] You tested this on a local server.
-
-      - [x] This code did not runtime during testing.
-
-      - [x] You documented all of your changes.
-
-      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
-      and errors. It is important to test your code/feature/fix locally. -->'
+  - balance: Replaced psydonian templar fluted cuirass with psydonian cuirass
   CheffieGithub:
   - bugfix: Fixed bayonet
   KevinfromHP:

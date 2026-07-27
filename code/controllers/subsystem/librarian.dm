@@ -30,9 +30,9 @@ SUBSYSTEM_DEF(librarian)
 			continue
 
 		var/matches = TRUE
-		if(search_title && !findtext(lowertext(book_info["book_title"]), lowertext(search_title)))
+		if(search_title && !findtext(LOWER_TEXT(book_info["book_title"]), LOWER_TEXT(search_title)))
 			matches = FALSE
-		if(search_author && !findtext(lowertext(book_info["author"]), lowertext(search_author)))
+		if(search_author && !findtext(LOWER_TEXT(book_info["author"]), LOWER_TEXT(search_author)))
 			matches = FALSE
 		if(search_category && search_category != "Any" && book_info["category"] != search_category)
 			matches = FALSE
@@ -66,7 +66,8 @@ SUBSYSTEM_DEF(librarian)
 		return "There is already a book by this title!"
 	if(!(istext(input) && istext(encoded_title) && istext(author) && istext(author_ckey) && istext(icon)))
 		return "This book is incorrectly formatted!"
-
+	if(is_misc_banned(author_ckey, BAN_MISC_PUBLISH))
+		return "This author is banned from uploading!"
 	var/list/contents = list("book_title" = "[book_title]", "author" = "[author]", "author_ckey" = "[author_ckey]", "icon" = "[icon]",  "text" = "[input]", "category" = category)
 	//url_encode should escape all the characters that do not belong in a file name. If not, god help us
 	text2file(json_encode(contents), "data/player_generated_books/[encoded_title].json")

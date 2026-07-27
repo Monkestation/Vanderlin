@@ -9,7 +9,6 @@
 		/datum/attribute/skill/combat/knives = 40,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -113,13 +112,13 @@
 
 	switch(enhancement_choice)
 		if("Auxiliary Adrenal Glands - Pain Resist")
-			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/adrenal)
 		if("Controlled Atrophy - Rapid Movement")
-			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
 		if("Formikrag Liver - Reversed Toxin Damage")
-			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, JOB_TRAIT)
 			var/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
 			if(stomach)
 				stomach.Remove(spawned,1)
@@ -134,31 +133,25 @@
 			eyes = new /obj/item/organ/eyes/night_vision/nightmare
 			eyes.Insert(spawned)
 		if("Greenskin Hands - Strong Grip")
-			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
 		if("Inhumen Stomach - Enhanced Endurance")
-			ADD_TRAIT(spawned, TRAIT_NASTY_EATER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NASTY_EATER, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/stomach)
 		if("Leviathanian Membrane - No Terrain Slowdown")
-			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_SWIMMER, TRAIT_GENERIC)
+			spawned.add_traits(list(TRAIT_WEBWALK, TRAIT_BRUSHWALK, TRAIT_SWIMMER), JOB_TRAIT)
 		if("Nerve Staple - No Mood")
-			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOMOOD, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
 		if("Nightmare Ward - No Sleep and Anti-Scrying")
-			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
+			spawned.add_traits(list(TRAIT_SLEEPIMMUNE, TRAIT_NOENERGY, TRAIT_ANTISCRYING), JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
 		if("Disguise Kit - Deceiving Meekness")
-			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, JOB_TRAIT)
 			var/obj/item/harlequin_disguise_kit/kit = new(get_turf(spawned))
 			spawned.put_in_hands(kit)
 		if("Serpentine Glands - Thermal Vision and Venom")
-			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
-
+			spawned.add_traits(list(TRAIT_THERMAL_VISION, TRAIT_POISONBITE), JOB_TRAIT)
 
 /datum/outfit/inquisitor/inspector
 	name = "Inspector (Herr Prafekt)"
@@ -168,14 +161,15 @@
 	shoes = /obj/item/clothing/shoes/otavan/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr =  /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/bow/cross
-	beltr = /obj/item/ammo_holder/quiver/bolts
+	beltl = /obj/item/ammo_holder/bullet/bullets
+	beltr = /obj/item/gun/ballistic/powder/wheellock/puffer
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	wrists = /obj/item/clothing/neck/psycross/silver
 	ring = /obj/item/clothing/ring/signet/silver
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored
+	r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/lockpickring/mundane = 1,

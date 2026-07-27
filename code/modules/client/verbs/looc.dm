@@ -6,7 +6,7 @@
 	full_name = "LOOC Chat"
 	description = "Local OOC Chat."
 
-/datum/keybinding/looc/down(client/user)
+/datum/keybinding/looc/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.native_say.open_say_window("LOOC")
 	return TRUE

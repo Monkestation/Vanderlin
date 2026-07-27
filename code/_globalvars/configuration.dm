@@ -12,8 +12,6 @@ GLOBAL_VAR_INIT(ooc_allowed, TRUE)	// used with admin verbs to disable ooc - not
 GLOBAL_VAR_INIT(looc_allowed, TRUE)
 GLOBAL_VAR_INIT(dooc_allowed, TRUE)
 GLOBAL_VAR_INIT(enter_allowed, TRUE)
-GLOBAL_VAR_INIT(tinted_weldhelh, TRUE)
-
 
 // Debug is used exactly once (in living.dm) but is commented out in a lot of places.  It is not set anywhere and only checked.
 // Debug2 is used in conjunction with a lot of admin verbs and therefore is actually legit.

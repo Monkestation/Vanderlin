@@ -5,19 +5,19 @@
 	var/static/sound/fastbeat = sound('sound/heart/fastbeat.ogg', volume = 10, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 
 /datum/organ_process/heart/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+	var/return_val = NONE
 	if(owner.needs_heart())
 		handle_heart_failure(owner, delta_time, times_fired)
 		handle_pulse(owner, delta_time, times_fired)
 		if(owner.pulse)
 			handle_heartbeat(owner, delta_time, times_fired)
-	handle_blood(owner, delta_time, times_fired)
-	return TRUE
+	return_val |= handle_blood(owner, delta_time, times_fired)
+	return return_val
 
 /// Handles the failure messaging and cardiac arrest flagging for a failing heart.
 /// Separated from handle_pulse so the logic is readable and the failed flag is managed cleanly.
 /datum/organ_process/heart/proc/handle_heart_failure(mob/living/carbon/owner, delta_time, times_fired)
-	for(var/thing in owner.getorganslotlist(ORGAN_SLOT_HEART))
-		var/obj/item/organ/heart/heart = thing
+	for(var/obj/item/organ/heart/heart as anything in owner.getorganslotlist(ORGAN_SLOT_HEART))
 		if(!istype(heart))
 			continue
 		if(heart.is_failing() && owner.needs_heart())
@@ -66,9 +66,6 @@
 	if(heart_efficiency < failing_threshold && !is_stable)
 		owner.set_heartattack(TRUE)
 		return
-	// if(owner.pulse <= PULSE_NONE)
-	// 	ADD_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
-	// 	return
 
 	// Pulse normally shouldn't go above PULSE_FASTER unless you get extremely doped up
 	if(pulse_mod < 5)
@@ -118,10 +115,6 @@
 	if(owner.pulse <= PULSE_NONE)
 		owner.set_heartattack(TRUE)
 	else
-		// if((owner.pulse == PULSE_FASTER) && DT_PROB(0.5, delta_time))
-		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
-		// else if((owner.pulse >= PULSE_THREADY) && DT_PROB(2.5, delta_time))
-		// 	owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 		REMOVE_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 
 /datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, delta_time, times_fired)
@@ -138,7 +131,7 @@
 				var/obj/item/bodypart/artery_popper = pick(owner.bodyparts)
 				if(!artery_popper.is_artery_torn())
 					artery_popper.add_wound(/datum/wound/artery)
-		if(-INFINITY to BLOOD_VOLUME_BLEEDOUT)
+		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 			if(!(owner.status_flags & BLEEDOUT))
 				owner.status_flags |= BLEEDOUT
 				to_chat(owner, span_userdanger("My organs feel outrageously heavy!"))
@@ -163,9 +156,10 @@
 		if(bleed_part.bandage)
 			bleed_part.try_bandage_expire()
 	if(temp_bleed > 0)
-		if(owner.bleed(temp_bleed) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
+		if(owner.bleed(temp_bleed, FALSE) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"
 			playsound(owner, bleed_sound, 60, FALSE)
+			. |= ORGAN_PROCESS_UPDATE_HEALTH
 
 	// This is not effective_blood_circulation because it represents the physical trauma from not having enough blood
 	if(CAN_HAVE_BLOOD(owner) && !HAS_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE) && owner.stat != DEAD)
@@ -191,7 +185,7 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 
-	if(owner.get_bleed_rate())
+	if(temp_bleed)
 		owner.add_stress(/datum/stress_event/bleeding)
 	else
 		owner.remove_stress(/datum/stress_event/bleeding)
@@ -201,18 +195,17 @@
 	if(isnull(owner.client))
 		return
 
-	if(HAS_TRAIT(owner, TRAIT_CRITICAL_CONDITION) && owner.heartbeat_sound != BEAT_SLOW)
-		owner.heartbeat_sound = BEAT_SLOW
-		SEND_SOUND(owner, slowbeat)
-		to_chat(owner, span_notice("I feel the grim reaper's cold gaze..."))
+	if(owner.health <= owner.crit_threshold && owner.health > owner.hardcrit_threshold) // owner.stat == SOFT_CRIT
+		if(owner.heartbeat_sound != BEAT_SLOW)
+			owner.heartbeat_sound = BEAT_SLOW
+			SEND_SOUND(owner, slowbeat)
+			to_chat(owner, span_notice("I feel my heart slow down..."))
 
-	if(owner.heartbeat_sound == BEAT_SLOW && !HAS_TRAIT(owner, TRAIT_CRITICAL_CONDITION))
-		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
-		owner.heartbeat_sound = BEAT_NONE
+	else if(owner.health <= owner.hardcrit_threshold) // owner.stat == HARD_CRIT
+		if(owner.heartbeat_sound != BEAT_FAST && owner.has_status_effect(/datum/status_effect/jitter))
+			SEND_SOUND(owner, fastbeat)
+			owner.heartbeat_sound = BEAT_FAST
 
-	if(owner.has_status_effect(/datum/status_effect/jitter) && !HAS_TRAIT(owner, TRAIT_CRITICAL_CONDITION) && (!owner.heartbeat_sound || owner.heartbeat_sound == BEAT_SLOW))
-		SEND_SOUND(owner, fastbeat)
-		owner.heartbeat_sound = BEAT_FAST
-	else if(owner.heartbeat_sound == BEAT_FAST)
+	else if(owner.heartbeat_sound != BEAT_NONE)
 		owner.stop_sound_channel(CHANNEL_HEARTBEAT)
 		owner.heartbeat_sound = BEAT_NONE

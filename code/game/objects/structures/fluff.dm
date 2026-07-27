@@ -250,6 +250,10 @@
 		icon_state = "passage0"
 		density = TRUE
 
+/obj/structure/bars/passage/open
+	icon_state = "passage1"
+	density = FALSE
+
 /obj/structure/bars/passage/shutter
 	icon_state = "shutter0"
 	density = TRUE
@@ -994,7 +998,7 @@
 	..()
 
 /obj/structure/fluff/statue/evil
-	name = "idol"
+	name = "Matthios Idol"
 	desc = "A statue built to the robber-god, Matthios. The visage resembles nobody in particular. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money."
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
@@ -1009,7 +1013,7 @@
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(istype(W, /obj/item/coin) || istype(W, /obj/item/gem) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
+			else if(istype(W, /obj/item/coin) || (istype(W, /obj/item/gem) && !istype(W, /obj/item/gem/amethyst)) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
 					record_round_statistic(STATS_SHRINE_VALUE, (W.get_real_price() / 2))
@@ -1063,6 +1067,13 @@
 		give_rewards(offering_bandit, user)
 	else
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
+
+/obj/structure/fluff/statue/graggar
+	name = "Graggar Idol"
+	desc = "An ugly and crude stone statue in imitation of Graggar, bestial God of murder and cannibalism. The empty eye sockets seem to follow you."
+	icon_state = "graggaraltar"
+	icon = 'icons/roguetown/misc/tallstructure.dmi'
+
 
 /obj/structure/fluff/psycross
 	name = "pantheon cross"
@@ -1228,7 +1239,7 @@
 
 	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
 	user.set_patron(real_patron)
-	to_chat(user, "<span class='god_[lowertext(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
+	to_chat(user, "<span class='god_[LOWER_TEXT(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
 	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [real_patron]")
 	visible_message("A bright light flashes out from [src] as it channels divine focus.")
 	AOE_flash(user, range = 5)
@@ -1327,7 +1338,7 @@
 		var/is_title = FALSE
 		if(second_last_index)
 			var/second_last_word = copytext(groom.real_name, second_last_index + 1, groom_name_index)
-			if((lowertext(second_last_word) == "the" || lowertext(second_last_word) == "of") && last_word)
+			if((LOWER_TEXT(second_last_word) == "the" || LOWER_TEXT(second_last_word) == "of") && last_word)
 				is_title = TRUE
 
 		if(is_title)
@@ -1354,7 +1365,7 @@
 		var/is_title_bride = FALSE
 		if(second_last_index_bride)
 			var/second_last_word_bride = copytext(bride.real_name, second_last_index_bride + 1, bride_name_index)
-			if((lowertext(second_last_word_bride) == "the" || lowertext(second_last_word_bride) == "of") && last_word_bride)
+			if((LOWER_TEXT(second_last_word_bride) == "the" || LOWER_TEXT(second_last_word_bride) == "of") && last_word_bride)
 				is_title_bride = TRUE
 
 		if(!is_title_bride && !findtext(bride.real_name, " the ") && !findtext(bride.real_name, " of "))

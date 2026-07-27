@@ -12,7 +12,6 @@
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(FLAIL_STRIKE, FLAIL_SMASH)
 	max_integrity = INTEGRITY_STRONG
-	minstr = 6
 
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
@@ -57,7 +56,6 @@
 	possible_item_intents = list(MACE_WDSTRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_WDSTRIKE)
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash
 	sellprice = 10
 	item_weight = 700 GRAMS
@@ -70,7 +68,6 @@
 	icon_state = "flail"
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 4
 	smeltresult = null
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 35
@@ -106,6 +103,13 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/flail/silver/noc
+	name = "lunar flail"
+	desc = "A shining silver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
+	icon = 'icons/roguetown/weapons/32/patron.dmi'
+	icon_state = "moonflail"
+	sharpness = IS_SHARP
+
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
 	name = "psydonian flail"
@@ -114,7 +118,6 @@
 	icon_state = "psyflail"
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 4
 	smeltresult = /obj/item/ingot/silverblessed
 	sellprice = 50
 	last_used = 0
@@ -125,10 +128,14 @@
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/flail/psydon/relic
-	name = "Consecratia"
+	name = "\proper consecratia"
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
 	item_weight = 1.5 KILOGRAMS
+
+/obj/item/weapon/flail/psydon/relic/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
 
 
 //................ Peasant Flail ............... // A little confusing still
@@ -144,7 +151,6 @@
 	possible_item_intents = list(FLAIL_LNGSTRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8
 
 	bigboy = TRUE
 	gripsprite = TRUE
@@ -176,7 +182,6 @@
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(FLAIL_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	minstr = 9
 	smeltresult = /obj/item/fertilizer/ash
 	pixel_y = -16
 	pixel_x = -16

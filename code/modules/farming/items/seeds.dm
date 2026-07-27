@@ -62,31 +62,41 @@
 		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= 2)
 			. += plant_def_instance.get_examine_details()
 
-/obj/item/neuFarm/seed/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
+/obj/item/neuFarm/seed/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-	var/turf/T = attacked_atom
-	var/obj/structure/soil/soil = get_soil_on_turf(T)
+	if(!isturf(interacting_with))
+		return NONE
+
+	var/turf/T = interacting_with
+
+	var/obj/structure/soil/soil = locate() in T
 	if(soil)
 		try_plant_seed(user, soil)
-		return TRUE
-	else if(istype(T, /turf/open/floor/dirt))
-		var/obj/structure/irrigation_channel/located = locate(/obj/structure/irrigation_channel) in T
-		if(located)
-			to_chat(user, span_notice("[located] is in the way!"))
-			return
-		if(!(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
-			to_chat(user, span_notice("I don't know enough to make a mound without tools."))
-			return
-		to_chat(user, span_notice("I begin making a mound for the seeds..."))
-		if(do_after(user, get_farming_do_time(user, 10 SECONDS), target = src))
-			apply_farming_fatigue(user, 30)
-			soil = get_soil_on_turf(T)
-			if(!soil)
-				soil = new /obj/structure/soil(T)
-		return TRUE
-	return ..()
+		return ITEM_INTERACT_SUCCESS
+
+	if(!istype(T, /turf/open/floor/dirt))
+		return ITEM_INTERACT_BLOCKING
+
+	if(T.is_blocked_turf(TRUE))
+		balloon_alert(user, "blocked!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(!(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
+		balloon_alert(user, "not enough skill!")
+		return ITEM_INTERACT_BLOCKING
+
+	balloon_alert(user, "making a mound...")
+	if(!do_after(user, get_farming_do_time(user, 10 SECONDS), target = src))
+		return ITEM_INTERACT_BLOCKING
+
+	apply_farming_fatigue(user, 30)
+
+	if(!(locate(/obj/structure/soil) in T))
+		new /obj/structure/soil(T)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/neuFarm/seed/proc/try_plant_seed(mob/living/user, obj/structure/soil/soil)
 	if(soil.plant)

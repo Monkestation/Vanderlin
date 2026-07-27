@@ -41,6 +41,7 @@
 
 	outfit = /datum/outfit/forestsupport
 	give_bank_account = 20
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -48,9 +49,11 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestsupport
 
 	traits = list(
-		TRAIT_FORAGER
+		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
 
+	mind_traits = list(TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestsupport/set_spawn_and_total_positions(count)
