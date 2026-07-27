@@ -38,7 +38,6 @@
 	outfit = /datum/outfit/mercenary/zalad
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Forgive me, Combat_DesertRider, I'm sorry, I'll miss you.
 	languages = list(/datum/language/zalad)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/zalad
@@ -52,6 +51,11 @@
 /datum/job/advclass/mercenary/zalad/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 1
+
+	if(spawned.dna?.species?.id == SPEC_ID_RAKSHARI)
+		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander4.ogg'
+	else
+		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'	//Forgive me, Combat_DesertRider, I'm sorry, I'll miss you.
 
 	// Set native language for specific species
 	if(spawned.dna?.species)

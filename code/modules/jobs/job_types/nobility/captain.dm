@@ -38,6 +38,7 @@
 
 /datum/job/captain
 	title = JOB_GUARD_CAPTAIN
+	alt_titles = list("Commander of The Watch", "Knight Commander", "Watch Master")
 	tutorial = "Law and Order, your divine reason for existence. \
 	You have been given command over the town and keep garrison to help ensure order and peace within the city, \
 	and defend it against the many dangers of the peninsula."
@@ -123,6 +124,7 @@
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
 	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
 	)

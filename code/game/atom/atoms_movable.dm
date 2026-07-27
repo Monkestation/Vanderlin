@@ -47,7 +47,6 @@
 	  */
 	var/movement_type = GROUND
 	var/atom/movable/pulling
-	var/atom_flags = NONE
 	var/grab_state = 0
 	var/throwforce = 0
 	var/datum/component/orbiter/orbiting

@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/combat/axesmaces = 20, //for bashing people with a cudgel
+		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
@@ -41,11 +41,13 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	head = /obj/item/clothing/head/helmet/visored/sallet
-	gloves = /obj/item/clothing/gloves/leather/advanced
+	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
 	armor = /obj/item/clothing/armor/cuirass
 	backl = /obj/item/storage/backpack/satchel
-	shirt = /obj/item/clothing/armor/gambeson
+	shirt = /obj/item/clothing/armor/gambeson/arming
+	pants = /obj/item/clothing/pants/trou/leather/splint
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
@@ -62,23 +64,16 @@
 /datum/job/advclass/mercenary/gloryhound/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Sword", "Polehammer", "Mace")
-	var/weapon_choice = tgui_input_list(player_client, "TAKE UP ARMS", "FOR FORTUNE AND GLORY!", weapons)
-	switch(weapon_choice)
+	var/static/list/selectable = list( \
+		"Sword" = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/arming, /obj/item/weapon/shield/tower/buckleriron), \
+		"Mace" = list(/obj/item/weapon/mace/steel, /obj/item/weapon/shield/tower/buckleriron), \
+		"Polehammer" = /obj/item/weapon/polearm/eaglebeak, \
+	)
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "FOR FORTUNE AND GLORY!")
+	switch(choice)
 		if("Sword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword, ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather, ITEM_SLOT_WRISTS, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 13)
 		if("Mace")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/steel, ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather, ITEM_SLOT_WRISTS, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 13)
 		if("Polehammer")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/eaglebeak/lucerne, ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather, ITEM_SLOT_PANTS)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/ironjackchain, ITEM_SLOT_WRISTS, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 13)

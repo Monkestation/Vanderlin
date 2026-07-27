@@ -77,14 +77,13 @@
 		"Axe" = /obj/item/weapon/axe/iron, \
 		"Mace" = /obj/item/weapon/mace, \
 		"Flail" = /obj/item/weapon/flail/militia, \
+		"Warhammer" = /obj/item/weapon/mace/warhammer, \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
 	switch(choice)
 		if("Sword")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
-		if("Axe")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
-		if("Mace")
+		if("Axe", "Mace", "Warhammer")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 		if("Flail")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 20)
