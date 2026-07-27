@@ -308,7 +308,7 @@
 /datum/supply_pack/armor/steel/beastclaws
 	name = "Beast Claws"
 	cost = 55
-	contains = /obj/item/clothing/gloves/plate/beast
+	contains = /obj/item/clothing/gloves/plate/beastclaws
 
 // PANTS
 
