@@ -37,6 +37,7 @@
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
+	alt_titles = list("Court Chirurgian")
 	tutorial = "One fateful evening at a royal banquet, your steady hand and sharp eye saved the royal bloodline. \
 	Now, you serve as the trusted healer of the crown, a living symbol of Pestra's favor. \
 	Your duty is clear: keep the monarch alive, no matter the cost."
@@ -52,6 +53,7 @@
 	outfit = /datum/outfit/courtphys/male
 	outfit_female = /datum/outfit/courtphys/female
 	give_bank_account = 100
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 	spells = list(/datum/action/cooldown/spell/diagnose)
 	job_bitflag = BITFLAG_ROYALTY

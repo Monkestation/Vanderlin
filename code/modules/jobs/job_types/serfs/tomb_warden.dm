@@ -51,6 +51,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatGaffer.ogg'
 	outfit = /datum/outfit/tomb_warden
 	give_bank_account = 20
+	knows_the_town = TRUE
 	bypass_lastclass = TRUE
 	selection_color = "#3b150e"
 

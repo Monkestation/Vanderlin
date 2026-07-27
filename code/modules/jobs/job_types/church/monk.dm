@@ -110,6 +110,7 @@
 
 	outfit = /datum/outfit/monk
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	job_bitflag = BITFLAG_CHURCH
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
@@ -195,6 +196,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/key/church
 	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+	backr = /obj/item/storage/backpack/satchel/cloth
 	backpack_contents = list(
 		/obj/item/needle = 1
 	)
