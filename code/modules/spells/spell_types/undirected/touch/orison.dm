@@ -207,7 +207,7 @@
 	possible_item_intents = list(ORISON_FILL)
 
 /datum/action/cooldown/spell/undirected/touch/orison/pestra
-	name = "Lesser Orison"
+	name = "Pestran Orison"
 
 	hand_path = /obj/item/melee/touch_attack/orison/pestra
 	charges = 3
