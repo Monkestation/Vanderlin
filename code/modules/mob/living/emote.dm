@@ -1318,7 +1318,7 @@
 	message = "smiles weakly."
 
 // ............... Z ..................
-/datum/emote/living/zombiemoan // sort of bandaid since zombie voicepacks got issues, maybe related to new pitch or who knows
+/datum/emote/living/zombiemoan
 	key = "zmoan"
 	key_third_person = "moans"
 	message = "moans."
