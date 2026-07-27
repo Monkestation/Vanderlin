@@ -4341,6 +4341,7 @@
 #include "code\modules\spells\spell_types\undirected\jaunt\bush_jaunt.dm"
 #include "code\modules\spells\spell_types\undirected\jaunt\ethereal_jaunt.dm"
 #include "code\modules\spells\spell_types\undirected\jaunt\illusory_prop.dm"
+#include "code\modules\spells\spell_types\undirected\jaunt\moonlight_mist.dm"
 #include "code\modules\spells\spell_types\undirected\list_target\_list_target.dm"
 #include "code\modules\spells\spell_types\undirected\list_target\bardic_inspiration.dm"
 #include "code\modules\spells\spell_types\undirected\list_target\encode_thoughts.dm"
