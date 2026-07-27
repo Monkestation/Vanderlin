@@ -87,8 +87,19 @@
 		for(var/datum/quirk/Q in quirks)
 			Q.on_life(src, seconds_per_tick)
 
+#ifndef LOWMEMORYMODE
+	if(!client && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE) && !ai_controller)
+		if(MOBTIMER_EXISTS(src, MT_SLO))
+			if(MOBTIMER_FINISHED(src, MT_SLO, 90 SECONDS)) //?????
+				Sleeping(100)
+		else
+			MOBTIMER_SET(src, MT_SLO)
+	else
+		MOBTIMER_UNSET(src, MT_SLO)
+
 	if(!typing)
 		set_typing_indicator(FALSE)
+#endif
 
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()

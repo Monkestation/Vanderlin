@@ -22,7 +22,7 @@
 	return ..()
 
 /datum/component/rot/process(seconds_per_tick)
-	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
 		return
 
 	var/amt2add = rot_amount_per_process * seconds_per_tick
@@ -37,8 +37,9 @@
 	. = ..()
 
 /datum/component/rot/corpse/process(seconds_per_tick)
-	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
 		return
+
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	..()
 	if(has_world_trait(/datum/world_trait/pestra_mercy))
@@ -106,6 +107,8 @@
 
 /datum/component/rot/simple/process(seconds_per_tick)
 	..()
+	if(HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/mob/living/L = parent
 	var/datum/component/rot/R = src
 	if(L.stat != DEAD)

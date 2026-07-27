@@ -114,7 +114,6 @@
 	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST + 220
-	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
 	dropshrink = 0.75

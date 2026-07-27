@@ -10,6 +10,8 @@
 	anchored = TRUE
 	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND | INTERACT_ATOM_UI_INTERACT
 
+	armor_type = /datum/armor/machinery
+
 	var/machine_stat = 0
 
 	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
@@ -31,8 +33,6 @@
 	var/mob/living/structureclimber
 
 /obj/machinery/Initialize(mapload, ...)
-	if(!armor)
-		armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 10, "fire" = 50, "acid" = 70)
 	. = ..()
 	SSmachines.register_machine(src)
 

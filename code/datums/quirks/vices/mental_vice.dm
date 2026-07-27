@@ -21,7 +21,7 @@
 /datum/status_effect/debuff/addiction/pyromaniac
 /datum/status_effect/debuff/addiction/kleptomaniac
 /datum/status_effect/debuff/addiction/godfearing
-/datum/status_effect/debuff/addiction/maniac
+/datum/status_effect/debuff/addiction/sadist
 /datum/status_effect/debuff/addiction/greedy
 
 /atom/movable/screen/alert/status_effect/debuff/addiction
@@ -47,6 +47,7 @@
 /datum/quirk/vice/greedy/on_spawn()
 	next_mammon_increase = world.time + rand(15 MINUTES, 25 MINUTES)
 	last_passed_check = world.time
+	return ..()
 
 /datum/quirk/vice/greedy/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
@@ -224,6 +225,7 @@
 	name = "Narcoleptic"
 	desc = "I get drowsy during the day and tend to fall asleep suddenly, but I can sleep easier if I want to, and moon dust can help me stay awake."
 	point_value = 4
+	traits_to_add = list(TRAIT_FASTSLEEP)
 	var/last_unconsciousness = 0
 	var/next_sleep = 0
 	var/concious_timer = (10 MINUTES)
@@ -236,10 +238,10 @@
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Sleepy..."))
 
 /datum/quirk/vice/narcoleptic/on_spawn()
-	ADD_TRAIT(owner, TRAIT_FASTSLEEP, "[type]")
 	last_unconsciousness = world.time
 	concious_timer = rand(7 MINUTES, 15 MINUTES)
 	pain_pity_charges = rand(2, 4)
+	return ..()
 
 /datum/quirk/vice/narcoleptic/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
@@ -282,10 +284,6 @@
 		next_sleep = world.time + rand(7 SECONDS, 11 SECONDS)
 		do_sleep = TRUE
 
-/datum/quirk/vice/narcoleptic/on_remove()
-	if(owner)
-		REMOVE_TRAIT(owner, TRAIT_FASTSLEEP, "[type]")
-
 /proc/narcolepsy_drug_up(mob/living/living)
 	var/datum/quirk/vice/narcoleptic/narco = living.get_quirk(/datum/quirk/vice/narcoleptic)
 	if(!narco)
@@ -305,6 +303,7 @@
 
 /datum/quirk/vice/masochist/on_spawn()
 	next_paincrave = world.time + rand(15 MINUTES, 25 MINUTES)
+	return ..()
 
 /datum/quirk/vice/masochist/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
@@ -381,6 +380,7 @@
 			BP.update_chronic()
 
 	to_chat(H, span_warning("Your joints feel stiff and painful - a reminder of your chronic arthritis."))
+	return ..()
 
 /datum/quirk/vice/chronic_back_pain
 	name = "Chronic Back Pain"
@@ -395,6 +395,7 @@
 	BP?.limb_flags |= pick(BODYPART_CHRONIC_FRACTURE, BODYPART_CHRONIC_SCAR)
 	BP?.update_chronic()
 	to_chat(H, span_warning("Your lower back aches with familiar, persistent pain."))
+	return ..()
 
 /datum/quirk/vice/old_war_wound
 	name = "Old War Wound"
@@ -421,3 +422,4 @@
 			var/wound_location = wounded.name
 			var/wound_desc = pick("shrapnel wound", "arrow wound", "deep scar", "poorly healed fracture")
 			to_chat(H, span_warning("You feel the familiar ache of your old [wound_desc] in your [wound_location]."))
+	return ..()

@@ -103,10 +103,8 @@
 /datum/status_effect/buff/playing_music/tick(damage_per_second)
 	var/obj/effect/temp_visual/music_rogue/M = new /obj/effect/temp_visual/music_rogue(get_turf(owner))
 	M.color = effect_color
-	for(var/mob/living/carbon/human/H in hearers(7, owner))
-		if(!H.client)
-			continue
-		if(!H.can_hear())
+	for (var/mob/living/carbon/human/H in hearers(7, owner))
+		if(!H.client || HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		H.add_stress(stress_to_apply)
 

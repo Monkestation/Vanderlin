@@ -102,7 +102,7 @@
 	if(crit_weakness_lethal && HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
 		owner.death()
 
-/obj/item/organ/artery/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
+/obj/item/organ/artery/applyOrganDamage(amount, maximum = maxHealth)
 	. = ..()
 	if(. < 0 && damage <= 0)
 		mend()

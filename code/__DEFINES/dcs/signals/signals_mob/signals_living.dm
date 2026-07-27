@@ -132,6 +132,8 @@
 
 #define COMSIG_LIVING_ADJUSTED "living_damage_adjusted"
 
+/// From /atom/proc/onbite(): (user)
+#define COMSIG_ATOM_BITTEN "atom_bitten"
 #define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
 #define COMSIG_LIVING_POSTBITE_SELF "living_postbite"
 
@@ -150,3 +152,7 @@
 #define COMSIG_MOB_MIND_TRANSFERRED_OUT_OF "mob_mind_transferred_out_of"
 /// From /mob/proc/ghostize() Called when a mob successfully ghosts
 #define COMSIG_MOB_GHOSTIZED "mob_ghostized"
+
+/// From /mob/living/get_eye_protection() (list/reflist)
+#define COMSIG_LIVING_GET_EAR_PROTECTION "living_get_ear_protection"
+	#define EAR_PROTECTION_ARG 1

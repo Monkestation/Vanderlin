@@ -21,8 +21,10 @@
 		else
 			M.emote(pick("twitch_s", "chuckle"))
 
-	if(M.has_quirk(/datum/quirk/vice/smoker))
-		M.sate_addiction(/datum/quirk/vice/smoker)
+	if(M.has_quirk(/datum/quirk/vice/addiction/smoker))
+		M.sate_addiction(/datum/quirk/vice/addiction/smoker)
+
+	return ..()
 
 /datum/reagent/drug/space_drugs/on_mob_metabolize(mob/living/M)
 	..()
@@ -72,17 +74,17 @@
 	overdose_threshold=999
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM
 
-
 /datum/reagent/drug/nicotine/on_mob_metabolize(mob/living/M)
-	var/mob/living/carbon/V = M
-	V.add_stress(/datum/stress_event/pweed)
-	..()
+	M.add_stress(/datum/stress_event/pweed)
+	return ..()
 
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
-	if(M.has_quirk(/datum/quirk/vice/smoker))
-		M.sate_addiction(/datum/quirk/vice/smoker)
+	if(M.has_quirk(/datum/quirk/vice/addiction/smoker))
+		M.sate_addiction(/datum/quirk/vice/addiction/smoker)
+
+	return ..()
 
 /datum/reagent/drug/nicotine/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()

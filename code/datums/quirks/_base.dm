@@ -91,6 +91,8 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 	var/list/allowed_species = list()
 	/// List of blocked species
 	var/list/blocked_species = list()
+	/// List of traits to add
+	var/list/traits_to_add = list()
 
 /datum/quirk/New(mob/living/new_owner, custom_value = null)
 	. = ..()
@@ -126,10 +128,15 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 
 /// Called when the quirk is applied to a character
 /datum/quirk/proc/on_spawn()
+	SHOULD_CALL_PARENT(TRUE)
+	owner.add_traits(traits_to_add, "[type]")
 	return
 
 /// Called when the quirk is removed
 /datum/quirk/proc/on_remove()
+	SHOULD_CALL_PARENT(TRUE)
+	if(!QDELETED(owner))
+		REMOVE_TRAITS_IN(owner, "[type]")
 	return
 
 /// Called when you are examined

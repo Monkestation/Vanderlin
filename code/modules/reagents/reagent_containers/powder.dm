@@ -164,8 +164,8 @@
 		else
 			M.emote(pick("twitch_s","chuckle"))
 
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -224,8 +224,9 @@
 	. = ..()
 
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 
 	M.apply_status_effect(/datum/status_effect/buff/ozium)
 
@@ -277,8 +278,8 @@
 	if(M.has_reagent(/datum/reagent/moondust_purest))
 		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER)
 
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 
 	M.apply_status_effect(/datum/status_effect/buff/moondust)
 
@@ -330,8 +331,8 @@
 	if(M.has_reagent(/datum/reagent/moondust))
 		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER, 0)
 
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
 

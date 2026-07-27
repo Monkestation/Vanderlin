@@ -25,6 +25,9 @@
 	var/list/remaining_modes = list()
 	var/list/daily_skill_xp = list()  // skill typepath -> raw XP earned today
 
+	/// Is the UI open?
+	var/ui_is_open = FALSE
+
 /datum/sleep_adv/New(datum/mind/passed_mind)
 	. = ..()
 	mind = passed_mind
@@ -155,6 +158,7 @@
 	daily_skill_xp = list()
 
 /datum/sleep_adv/proc/show_ui(mob/living/user)
+	ui_is_open = TRUE
 	var/list/dat = list()
 	SSassets.transport.send_assets(user.client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
 	dat += {"
@@ -194,7 +198,7 @@
 	for(var/skill_type in dream_skills)
 		var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 		var/already_active = rested_skill_multipliers[skill_type]
-		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
+		var/current_level = GET_MOB_SKILL_VALUE(mind.current, skill_type)
 		var/level_name = skill.description_from_level(current_level)
 		if(already_active)
 			dat += "<div class='class_bar_div'><span class='vagrant'>[skill.name] ([level_name]) - <b>1.5x active</b></span></div>"
@@ -219,11 +223,14 @@
 	viable_sleep = TRUE
 
 /datum/sleep_adv/proc/close_ui()
+	if(!ui_is_open)
+		return
 	if(viable_sleep)
 		mind?.has_studied = FALSE
 	if(!mind.current)
 		return
 	mind.current << browse(null, "window=dreams")
+	ui_is_open = FALSE
 
 /datum/sleep_adv/proc/process_sleep()
 	if(is_considered_sleeping())
@@ -246,7 +253,7 @@
 /datum/sleep_adv/proc/get_next_level_for_skill(skill_type)
 	if(!mind.current)
 		return 0
-	return nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type)) + 1
+	return GET_MOB_SKILL_VALUE(mind.current, skill_type) + 1
 
 /datum/sleep_adv/proc/get_skill_cost(skill_type)
 	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
@@ -286,7 +293,7 @@
 		if(already_active)
 			weighted[skill_type] = -1
 			continue
-		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
+		var/current_level = GET_MOB_SKILL_VALUE(mind.current, skill_type)
 		weighted[skill_type] = max(1, 1 + current_level * 3)
 
 	var/list/result = list()
@@ -381,7 +388,7 @@
 /proc/can_train_combat_skill(mob/living/user, skill_type, target_skill_level)
 	if(!user.mind)
 		return FALSE
-	var/user_skill_level = nulltozero(GET_MOB_SKILL_VALUE(user, skill_type))
+	var/user_skill_level = GET_MOB_SKILL_VALUE(user, skill_type)
 	var/level_diff = target_skill_level - user_skill_level
 	if(level_diff <= 0)
 		return FALSE

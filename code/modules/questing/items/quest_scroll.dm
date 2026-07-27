@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(quest_scrolls)
 	var/last_whisper = 0 // Last time the scroll whispered to the user
 	resistance_flags = FIRE_PROOF | LAVA_PROOF | INDESTRUCTIBLE | UNACIDABLE
 	max_integrity = 1000
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100, "piercing" = 100, "fire" = 100, "acid" = 100)
+	armor_type = /datum/armor/immune
 
 	COOLDOWN_DECLARE(next_compass_scan)
 

@@ -22,6 +22,7 @@
 
 /datum/job/dungeoneer
 	title = JOB_DUNGEONEER
+	alt_titles = list("Warden", "Gaoler", "Executioner")
 	tutorial = "Be you an instrument of sadism for the King or the guarantor of his merciful hospitality, \
 	your duties are a service paid for most handsomely. \
 	Perhaps you were promoted from the garrison down to these cells \
@@ -42,6 +43,7 @@
 
 	outfit = /datum/outfit/dungeoneer
 	give_bank_account = 50
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 
 	job_bitflag = BITFLAG_GARRISON

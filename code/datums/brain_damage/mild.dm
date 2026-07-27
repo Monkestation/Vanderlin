@@ -8,8 +8,8 @@
 	name = "Stuttering"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>Speaking clearly is getting harder.</span>"
-	lose_text = "<span class='notice'>I feel in control of my speech.</span>"
+	gain_text = span_warning("Speaking clearly is getting harder.")
+	lose_text = span_notice("I feel in control of my speech.")
 
 /datum/brain_trauma/mild/stuttering/on_life(seconds_per_tick)
 	owner.stuttering = min(owner.stuttering + 2.5 * seconds_per_tick, 25)
@@ -23,8 +23,8 @@
 	name = "Dumbness"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I feel dumber.</span>"
-	lose_text = "<span class='notice'>I feel smart again.</span>"
+	gain_text = span_warning("I feel dumber.")
+	lose_text = span_notice("I feel smart again.")
 
 /datum/brain_trauma/mild/dumbness/on_gain()
 	ADD_TRAIT(owner, TRAIT_DUMB, TRAUMA_TRAIT)
@@ -47,8 +47,8 @@
 	name = "Speech Impediment"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='danger'>I can't seem to form any coherent thoughts!</span>"
-	lose_text = "<span class='danger'>My mind feels more clear.</span>"
+	gain_text = span_danger("I can't seem to form any coherent thoughts!")
+	lose_text = span_danger("My mind feels more clear.")
 
 /datum/brain_trauma/mild/speech_impediment/on_gain()
 	ADD_TRAIT(owner, TRAIT_UNINTELLIGIBLE_SPEECH, TRAUMA_TRAIT)
@@ -62,8 +62,8 @@
 	name = "Concussion"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>My head hurts!</span>"
-	lose_text = "<span class='notice'>The pressure inside my head starts fading.</span>"
+	gain_text = span_warning("My head hurts!")
+	lose_text = span_notice("The pressure inside my head starts fading.")
 
 /datum/brain_trauma/mild/concussion/on_life(seconds_per_tick)
 	if(SPT_PROB(2.5, seconds_per_tick))
@@ -78,10 +78,10 @@
 			if(6 to 9)
 				owner.slurring += 30
 			if(10)
-				to_chat(owner, "<span class='notice'>I forget for a moment what you were doing.</span>")
+				to_chat(owner, span_notice("I forget for a moment what you were doing."))
 				owner.Stun(20)
 			if(11)
-				to_chat(owner, "<span class='warning'>I faint.</span>")
+				to_chat(owner, span_warning("I faint."))
 				owner.Unconscious(80)
 
 	..()
@@ -90,34 +90,36 @@
 	name = "Muscle Weakness"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>My muscles feel oddly faint.</span>"
-	lose_text = "<span class='notice'>I feel in control of my muscles again.</span>"
+	gain_text = span_warning("My muscles feel oddly faint.")
+	lose_text = span_notice("I feel in control of my muscles again.")
 
 /datum/brain_trauma/mild/muscle_weakness/on_life(seconds_per_tick)
-	var/fall_chance = 1
+	var/fall_chance = 0.5
 	if(owner.m_intent == MOVE_INTENT_RUN)
-		fall_chance += 2
-	if(SPT_PROB(0.5 * fall_chance, seconds_per_tick) && owner.body_position == STANDING_UP)
-		to_chat(owner, "<span class='warning'>My leg gives out!</span>")
-		owner.Paralyze(35)
+		fall_chance += 1
+
+	if(SPT_PROB(fall_chance, seconds_per_tick) && (owner.body_position != LYING_DOWN))
+		to_chat(owner, span_warning("My leg gives out!"))
+		owner.Paralyze(3.5 SECONDS)
 
 	else if(owner.get_active_held_item())
-		var/drop_chance = 1
+		var/drop_chance = 0.5
 		var/obj/item/I = owner.get_active_held_item()
-		drop_chance += I.w_class
-		if(SPT_PROB(0.5 * drop_chance, seconds_per_tick) && owner.dropItemToGround(I))
-			to_chat(owner, "<span class='warning'>I drop [I]!</span>")
+		drop_chance += I.w_class / 2
+		if(SPT_PROB(drop_chance, seconds_per_tick) && owner.dropItemToGround(I))
+			to_chat(owner, span_warning("I drop [I]!"))
 
 	else if(SPT_PROB(1.5, seconds_per_tick))
-		to_chat(owner, "<span class='warning'>I feel a sudden weakness in my muscles!</span>")
-	..()
+		to_chat(owner, span_warning("I feel a sudden weakness in my muscles!"))
+
+	return ..()
 
 /datum/brain_trauma/mild/muscle_spasms
 	name = "Muscle Spasms"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>My muscles feel oddly faint.</span>"
-	lose_text = "<span class='notice'>I feel in control of my muscles again.</span>"
+	gain_text = span_warning("My muscles feel oddly faint.")
+	lose_text = span_notice("I feel in control of my muscles again.")
 
 /datum/brain_trauma/mild/muscle_spasms/on_gain()
 	owner.apply_status_effect(STATUS_EFFECT_SPASMS)
@@ -131,8 +133,8 @@
 	name = "Nervous Cough"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>My throat itches incessantly...</span>"
-	lose_text = "<span class='notice'>My throat stops itching.</span>"
+	gain_text = span_warning("My throat itches incessantly...")
+	lose_text = span_notice("My throat stops itching.")
 
 /datum/brain_trauma/mild/nervous_cough/on_life(seconds_per_tick)
 	if(SPT_PROB(6, seconds_per_tick) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
@@ -149,8 +151,8 @@
 	name = "Expressive Aphasia"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I lose my grasp on complex words.</span>"
-	lose_text = "<span class='notice'>I feel my vocabulary returning to normal again.</span>"
+	gain_text = span_warning("I lose my grasp on complex words.")
+	lose_text = span_notice("I feel my vocabulary returning to normal again.")
 
 	var/static/list/common_words = file2list("strings/1000_most_common.txt")
 
@@ -191,8 +193,8 @@
 	name = "Mind Echo"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I feel a faint echo of my thoughts...</span>"
-	lose_text = "<span class='notice'>The faint echo fades away.</span>"
+	gain_text = span_warning("I feel a faint echo of my thoughts...")
+	lose_text = span_notice("The faint echo fades away.")
 	var/list/hear_dejavu = list()
 	var/list/speak_dejavu = list()
 

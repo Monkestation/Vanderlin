@@ -34,7 +34,7 @@ And it also helps for the character set panel
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_VAMPMANSION,
 		TRAIT_VAMP_DREAMS,
 		TRAIT_NOAMBUSH,
@@ -366,8 +366,7 @@ And it also helps for the character set panel
 
 /datum/clan/proc/examine_target(mob/living/user, mob/living/carbon/examined, list/P, list/examine_contents)
 	if(user != examined) // no need to beat yourself up over it buddy
-		var/mob/living/carbon/human/H = examined
-		if(istype(H) && H.virginity && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
+		if(HAS_TRAIT(examined, TRAIT_VIRGIN) && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
 			LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_boldred("[P[THEYRE]] a virgin!"))
 	var/clan_examine = examined.get_clan_hierarchy_examine(user)
 	if(clan_examine)

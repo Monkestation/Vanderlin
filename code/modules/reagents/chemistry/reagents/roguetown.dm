@@ -10,7 +10,7 @@
 	. = ..()
 
 	if(!HAS_TRAIT(M, TRAIT_DEADNOSE))
-		if(M.has_quirk(/datum/quirk/vice/maniac))
+		if(M.has_quirk(/datum/quirk/vice/addiction/sadist))
 			M.add_stress(/datum/stress_event/miasmagasmaniac)
 		else
 			M.add_nausea(0.6 * REAGENTS_MODIFIER)

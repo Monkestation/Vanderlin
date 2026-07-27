@@ -166,3 +166,13 @@
 	#define COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE COMPONENT_MOVABLE_BLOCK_PRE_MOVE
 
 #define COMSIG_MOB_CARGO_DOCKED "mob_cargo_docked"
+
+// signals for use by mob spawners
+/// called when a spawner spawns a mob
+#define COMSIG_SPAWNER_SPAWNED "spawner_spawned"
+
+/// Called when a spawner spawns a mob in a turf peel, but we need to use the default case.
+#define COMSIG_SPAWNER_SPAWNED_DEFAULT "spawner_spawned_default"
+
+/// called when a ghost clicks a spawner role: (mob/living)
+#define COMSIG_GHOSTROLE_SPAWNED "ghostrole_spawned"

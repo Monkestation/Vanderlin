@@ -45,6 +45,11 @@
 /datum/job/priest
 	title = JOB_PRIEST
 	f_title = JOB_PRIEST_FEM
+	alt_titles = list("Abbot", "Friar")
+
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Father")
+	alt_honorary_female = list("Mother Superior")
 	tutorial = "You are a devoted follower of Astrata. \
 	The divine is all that matters in an immoral world. \
 	The Sun Queen and her pantheon rule over all, and you will preach their wisdom to Vanderlin. \
@@ -82,12 +87,11 @@
 
 	languages = list(/datum/language/celestial)
 	can_have_apprentices = FALSE
+	traits = list(TRAIT_VIRGIN)
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.give_priest_verbs()
-
-	spawned.virginity = TRUE
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
