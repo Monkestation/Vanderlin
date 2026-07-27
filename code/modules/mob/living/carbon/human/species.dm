@@ -134,7 +134,7 @@
 	var/say_mod = "says"
 
 	/// Multipler for how quickly nutrition decreases
-	var/nutrition_mod = 0.5
+	var/nutrition_mod = 1
 	/// Multiplier for how quickly hygiene decreases
 	var/hygiene_mod = 1
 	/// Multipler for blood loss

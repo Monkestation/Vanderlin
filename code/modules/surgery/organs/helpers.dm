@@ -145,7 +145,7 @@
 		var/obj/item/organ/organ = thing
 		total_blood_req += (organ.blood_req/50 * BLOOD_VOLUME_NORMAL)
 		total_oxygen_req += organ.oxygen_req
-		total_nutriment_req += (organ.nutriment_req/100)
-		total_hydration_req += (organ.hydration_req/100)
+		total_nutriment_req += ((organ.nutriment_req/100) * RATE_OF_HUNGER_GLOBAL)
+		total_hydration_req += ((organ.hydration_req/100) * RATE_OF_THIRST_GLOBAL)
 	if(HAS_TRAIT(src, TRAIT_NORMALIZED_BLOOD))
 		total_blood_req = DEFAULT_TOTAL_BLOOD_REQ
