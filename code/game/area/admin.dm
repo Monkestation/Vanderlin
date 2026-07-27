@@ -11,6 +11,7 @@
 /area/indoors/town/church/dreamcave/starchamber
 	name = "The Star Chamber"
 	first_time_text = "The Star Chamber"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | NO_TELEPORT
 
 /area/indoors/town/church/dreamcave/starchamber/can_craft_here()
 	return FALSE

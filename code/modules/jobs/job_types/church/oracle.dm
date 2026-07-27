@@ -100,7 +100,8 @@
 		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,
-		/datum/language/deepspeak
+		/datum/language/deepspeak,
+		/datum/language/thievescant
 	)
 	can_have_apprentices = FALSE
 
