@@ -68,6 +68,21 @@
 	placed_type = parent_type
 
 /obj/item/rotation_contraption/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(istype(interacting_with, /obj/item/rotation_contraption))
+		if(!can_stack)
+			return
+
+		var/obj/item/rotation_contraption/rotator = interacting_with
+		if(placed_type != rotator.placed_type)
+			return
+
+		in_stack += rotator.in_stack
+		balloon_alert(user, "stacked!")
+		update_appearance(UPDATE_NAME)
+		qdel(rotator)
+
+		return ITEM_INTERACT_SUCCESS
+
 	var/turf/T = get_turf(interacting_with)
 
 	for(var/obj/structure/structure in T)
@@ -117,20 +132,6 @@
 		name = "pile of [initial(placed_type.name)]s x [in_stack]"
 	else
 		name = initial(placed_type.name) + " item"
-
-/obj/item/rotation_contraption/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(!can_stack)
-		return
-	if(!istype(I, src.type))
-		return
-	if(placed_type != I:placed_type)
-		return
-
-	I:in_stack += in_stack
-	visible_message("[user] collects [src].")
-	qdel(src)
-	I.update_appearance(UPDATE_NAME)
 
 /obj/item/rotation_contraption/cog
 	placed_type = /obj/structure/rotation_piece/cog
@@ -217,12 +218,20 @@
 	place_behavior = PLACE_TOWARDS_USER
 	item_weight = 200 GRAMS
 
+/obj/item/rotation_contraption/water_vent/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Sprays the contents of the attached pipe in the direction the vent is facing.")
+
 /obj/item/rotation_contraption/sprinkler
 	placed_type = /obj/structure/sprinkler
 	grid_height = 64
 
 	place_behavior = PLACE_ON_PIPE
 	item_weight = 750 GRAMS
+
+/obj/item/rotation_contraption/sprinkler/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Sprays the contents of the attached pipe around it.")
 
 /obj/item/rotation_contraption/pressurizer
 	placed_type = /obj/structure/pressurizer
@@ -231,6 +240,10 @@
 	place_behavior = PLACE_ON_PIPE
 	item_weight = 300 GRAMS
 
+/obj/item/rotation_contraption/pressurizer/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Increases the pressure of a pipe allowing you to move fluids farther.")
+
 /obj/item/rotation_contraption/drain
 	placed_type = /obj/structure/fluid_drain
 	grid_height = 32
@@ -238,3 +251,15 @@
 	place_behavior = PLACE_ON_PIPE
 	item_weight = 125 GRAMS
 
+/obj/item/rotation_contraption/drain/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Drains suck up liquids on the floor, needs to be placed on a pipe.")
+
+/obj/item/rotation_contraption/roller
+	placed_type = /obj/structure/roller
+	grid_height = 32
+	grid_width = 32
+
+/obj/item/rotation_contraption/roller/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Rollers move loose items and mobs in their facing direction while powered.")

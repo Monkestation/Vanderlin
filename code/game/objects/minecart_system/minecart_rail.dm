@@ -105,15 +105,13 @@
 
 /obj/structure/minecart_rail/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-
-	var/choice = browser_input_list(user, "Choose a direction to cycle to when activated by a trigger.", src, list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
+	var/choice = browser_input_list(user, "Choose a direction to cycle to when activated by a trigger.", "Directions", directions)
 	if(!choice || QDELETED(user) || QDELETED(src))
 		return
-
 	secondary_direction = directions[choice]
 
 /obj/structure/minecart_rail/proc/rotate_direction(mob/user)
-	var/choice = browser_input_list(user, "Rotate the rail towards a direction.", src, list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
+	var/choice = browser_input_list(user, "Rotate the rail towards a direction.", "Directions", directions)
 	if(!choice)
 		return
 
@@ -145,7 +143,8 @@
 				if(!structure.try_network_merge(src))
 					rotation_break()
 			else
-				if(!structure.try_connect(src))
+				var/result = structure.try_connect(src)
+				if(result == FALSE)
 					rotation_break()
 
 	if(!rotation_network)
@@ -159,13 +158,10 @@
 		return list()
 	. = ..()
 
-/obj/structure/minecart_rail/find_and_propagate(list/checked, first = FALSE)
-	if(!length(checked))
-		checked = list()
-	checked |= src
+/obj/structure/minecart_rail/propagate_rotation_to_network(new_direction, new_rpm)
 	if(ISDIAGONALDIR(dir))
-		return checked
-	. = ..()
+		return
+	..()
 
 /obj/structure/minecart_rail/set_rotations_per_minute(speed)
 	. = ..()

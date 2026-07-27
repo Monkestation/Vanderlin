@@ -77,6 +77,14 @@
 		else
 			armor = /obj/item/clothing/armor/gambeson/heavy/dress
 
+/datum/job/migrant/rockhill/mayor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
+
 /datum/migrant_role/rockhill_knight
 	name = "Knight of Rockhill"
 	greet_text = "You are a Knight of Rockhill, the notable of said town has taken the journey to your liege, you are to ensure their safety."
@@ -139,10 +147,15 @@
 		if(!index)
 			index = spawned.real_name
 		S.name = "knight tabard ([index])"
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/rockhill/knight
 	name = "Knight of Rockhill (Migrant Wave)"
-	head = /obj/item/clothing/head/helmet
+	head = /obj/item/clothing/head/helmet/visored/hounskull
 	gloves = /obj/item/clothing/gloves/plate
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
@@ -250,6 +263,14 @@
 		/obj/item/signal_horn = 1,
 	)
 
+/datum/job/migrant/rockhill/serjeant_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
+
 /datum/migrant_role/footman_guard
 	name = "Guardsmen of Rockhill"
 	greet_text = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
@@ -259,6 +280,22 @@
 	title = "Guardsmen of Rockhill"
 	tutorial = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
 	is_foreigner = TRUE
+
+/datum/job/migrant/footman_guard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
+
+/datum/job/migrant/footman_bannerman/rockhill/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
 
 /datum/migrant_wave/rockhill_wave
 	name = "The Mayor's Visit"

@@ -54,7 +54,6 @@
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, POLEARM_BASH)
 	max_blade_int = 50
 	max_integrity = INTEGRITY_WORST / 2 // not meant for long-term combat
-	minstr = 7
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64

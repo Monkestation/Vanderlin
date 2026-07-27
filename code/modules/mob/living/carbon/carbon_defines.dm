@@ -51,7 +51,8 @@
 	var/obj/item/tank/internal = null
 	var/obj/item/clothing/head = null
 
-
+	///a helper for NPCs so that they can avoid ALOT of work.
+	var/datum/species/race
 	var/obj/item/clothing/gloves = null //only used by humans
 	var/obj/item/clothing/shoes = null //only used by humans.
 

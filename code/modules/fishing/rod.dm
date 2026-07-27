@@ -436,7 +436,8 @@
 	if(isopenspace(atom_hit_by_hook_projectile))
 		dropped = TRUE
 		while(isopenspace(atom_hit_by_hook_projectile))
-			atom_hit_by_hook_projectile = GET_TURF_BELOW(atom_hit_by_hook_projectile) // we know this will always be a turf so no need for get_turf
+			var/turf/turf = get_turf(atom_hit_by_hook_projectile)
+			atom_hit_by_hook_projectile = GET_TURF_BELOW(turf) // we know this will always be a turf so no need for get_turf
 
 	if(dropped)
 		for(var/mob/living/mob in atom_hit_by_hook_projectile.contents)

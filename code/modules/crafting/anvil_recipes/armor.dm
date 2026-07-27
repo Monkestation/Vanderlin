@@ -266,6 +266,11 @@
 	created_item = /obj/item/clothing/armor/cuirass/iron
 	craftdiff = 0
 
+/datum/anvil_recipe/armor/iron/fluted_cuirass
+	name = "Iron Fluted Cuirass"
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/armor/cuirass/fluted/iron
+
 /datum/anvil_recipe/armor/iron/platefull
 	name = "Iron Plate Armor (+Bar x3)"
 	required_material = /obj/item/ingot/iron
@@ -324,13 +329,13 @@
 /datum/anvil_recipe/armor/steel/crusader_helm
 	name = "Crusader helm (+Bar X2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/crusader
+	created_item = /obj/item/clothing/head/helmet/heavy/crusader/t
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/totod_crusader_helm
-	name = "Totod Crusader helm (+Bar X2)"
+	name = "Winged Crusader helm (+Bar X2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
-	created_item = /obj/item/clothing/head/helmet/heavy/crusader/t
+	created_item = /obj/item/clothing/head/helmet/heavy/crusader
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/skullmet_helm
@@ -435,13 +440,23 @@
 	created_item = /obj/item/clothing/shoes/boots/armor/light
 
 /datum/anvil_recipe/armor/iron/town_watch_helmet
-	name = "Town Watch helmet"
-	required_material = /obj/item/ingot/iron
+	name = "Town Watchmen helmet"
+	created_item = /obj/item/clothing/head/helmet/watchmen
+	craftdiff = 1
+
+/datum/anvil_recipe/armor/iron/town_watch_helmet_lt
+	name = "Town Watch Liutenant helmet"
+	additional_items = list(/obj/item/natural/feather)
+	created_item = /obj/item/clothing/head/helmet/watchmen/lt
+	craftdiff = 1
+
+/datum/anvil_recipe/armor/iron/old_watch_helmet
+	name = "Old Watch helmet"
 	created_item = /obj/item/clothing/head/helmet/townwatch
 	craftdiff = 1
 
-/datum/anvil_recipe/armor/iron/town_watch_helmet_alt
-	name = "Town Watch helmet (alt)"
+/datum/anvil_recipe/armor/iron/old_watch_helmet_alt
+	name = "Old Watch helmet (alt)"
 	required_material = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/head/helmet/townwatch/alt
 	craftdiff = 1
@@ -499,6 +514,11 @@
 /datum/anvil_recipe/armor/steel/cuirass
 	name = "Steel Cuirass"
 	created_item = /obj/item/clothing/armor/cuirass
+
+/datum/anvil_recipe/armor/steel/fluted_cuirass
+	name = "Steel Fluted Cuirass"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/armor/cuirass/fluted
 
 /datum/anvil_recipe/armor/steel/brigadine
 	name = "Brigandine (+Bar x2, +Cloth)"
@@ -589,6 +609,21 @@
 	name = "Abyssor Helmet (+Bronze Bar)"
 	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
 	additional_items = list(/obj/item/ingot/bronze)
+
+/datum/anvil_recipe/armor/steel/templar/helmet_cadwyn_astrata
+	name = "Cadwyn Plumed Helmet (+Silver Bar, +Cloth)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/cadwyn/astrata
+	additional_items = list(/obj/item/ingot/silver, /obj/item/natural/cloth)
+
+/datum/anvil_recipe/armor/steel/templar/helmet_cadwyn_necra
+	name = "Cadwyn Skull-Helm (+Silver Bar, +Cloth)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/cadwyn/necra
+	additional_items = list(/obj/item/ingot/silver, /obj/item/natural/cloth)
+
+/datum/anvil_recipe/armor/steel/templar/helmet_cadwyn_ravox
+	name = "Cadwyn Ox-Helm (+Silver Bar, +Cloth)"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/cadwyn/ravox
+	additional_items = list(/obj/item/ingot/silver, /obj/item/natural/cloth)
 
 /datum/anvil_recipe/armor/steel/chainleg
 	name = "Chain Chausses"
@@ -845,6 +880,11 @@
 /datum/anvil_recipe/armor/steel/plateglove
 	name = "Plate Gauntlets"
 	created_item = /obj/item/clothing/gloves/plate
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/steel/cadwyn_plateglove
+	name = "Cadwyn Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/cadwyn
 	craftdiff = 4
 
 /datum/anvil_recipe/armor/steel/plateboot

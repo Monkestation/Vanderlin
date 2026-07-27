@@ -1,5 +1,0 @@
-author: "Ben10083"
-delete-after: True
-changes:
-  - qol: "Red tallow can now be crafted by clicking viscera with tallow"
-  - bugfix: "Red tallow no longer uses itself for crafting"

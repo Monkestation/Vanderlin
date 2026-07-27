@@ -141,6 +141,7 @@
 	overdose_threshold = 16
 	metabolization_rate = 0.2
 	metabolized_traits = list(TRAIT_DRUQK)
+	price_per_unit = 3
 
 /atom/movable/screen/fullscreen/druqks
 	icon_state = "spa"
@@ -158,8 +159,8 @@
 			M.emote(pick("twitch_s","giggle"))
 		else
 			M.emote(pick("twitch_s","chuckle"))
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 	..()
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/affected_mob)
@@ -200,6 +201,7 @@
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 16
 	metabolization_rate = 0.1
+	price_per_unit = 6
 
 /datum/reagent/ozium/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -213,8 +215,8 @@
 
 /datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 	if(prob(5))
 		M.flash_fullscreen("whiteflash")
 	M.apply_status_effect(/datum/status_effect/buff/ozium)
@@ -243,6 +245,7 @@
 	color = "#bfc3b5"
 	overdose_threshold = 50
 	metabolization_rate = 0.2
+	price_per_unit = 3
 
 /datum/reagent/moondust/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -260,8 +263,8 @@
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust_purest))
 		M.Sleeping(40, 0)
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 	M.apply_status_effect(/datum/status_effect/buff/moondust)
 	if(prob(2))
 		M.flash_fullscreen("whiteflash")
@@ -290,6 +293,7 @@
 	color = "#bfc3b5"
 	overdose_threshold = 50
 	metabolization_rate = 0.2
+	price_per_unit = 9
 
 /datum/reagent/moondust_purest/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -310,8 +314,8 @@
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust))
 		M.Sleeping(40 * efficiency, 0)
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
 	if(prob(20))
 		M.flash_fullscreen("whiteflash")
