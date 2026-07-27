@@ -1,8 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - bugfix: "More fix work on antags spawning when there is no way for them to spawn."
-  - bugfix: "Fixed duplicating noc templar weapon."
-  - bugfix: "Fixed infinite ability to study spellbooks."
-  - bugfix: "Fixed some snow elf issues."
-  - bugfix: "Fixed Strigidae armet sprite."

@@ -1,4 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - balance: "NPK deficiency no longer kills a crop on its own, only slow down its production and reduce the produce quality."

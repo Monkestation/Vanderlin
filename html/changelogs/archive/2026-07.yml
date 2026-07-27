@@ -458,3 +458,26 @@
       names.
   SmokingCrackForChrist:
   - rscadd: A new song for my stupid chud cat I hate.
+2026-07-27:
+  Archeonan:
+  - balance: Lowered overall weights of multiple armors and weapons
+  - bugfix: Warhammers cannot be 2 handed now
+  - bugfix: Some classes should theoretically no longer eat your weapon selections
+  Jmih:
+  - bugfix: fixed rail tracks rotation
+  ModDownloading:
+  - balance: NPK deficiency no longer kills a crop on its own, only slow down its
+      production and reduce the produce quality.
+  Telvayne:
+  - qol: Plates increased to 3 items
+  - qol: Plates accept drugs, wine bottles, spoons, and forks
+  realforest2001:
+  - bugfix: More fix work on antags spawning when there is no way for them to spawn.
+  - bugfix: Fixed duplicating noc templar weapon.
+  - bugfix: Fixed infinite ability to study spellbooks.
+  - bugfix: Fixed some snow elf issues.
+  - bugfix: Fixed Strigidae armet sprite.
+  - code_imp: Added missing defines for bitflags.
+  - rscadd: Added a bunch of new titles for the court roles.
+  yafesdot:
+  - rscadd: add culture accents to the accent mix
