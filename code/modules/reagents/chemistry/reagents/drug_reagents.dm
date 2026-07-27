@@ -24,8 +24,6 @@
 	if(M.has_quirk(/datum/quirk/vice/addiction/smoker))
 		M.sate_addiction(/datum/quirk/vice/addiction/smoker)
 
-	return ..()
-
 /datum/reagent/drug/space_drugs/on_mob_metabolize(mob/living/M)
 	..()
 	M.set_drugginess(30 SECONDS)
@@ -83,8 +81,6 @@
 
 	if(M.has_quirk(/datum/quirk/vice/addiction/smoker))
 		M.sate_addiction(/datum/quirk/vice/addiction/smoker)
-
-	return ..()
 
 /datum/reagent/drug/nicotine/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
