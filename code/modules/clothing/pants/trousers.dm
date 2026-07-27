@@ -24,7 +24,7 @@
 	icon_state = "leathertrou"
 	armor_type = /datum/armor/pants/leather
 	max_integrity = INTEGRITY_POOR
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 0.7 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
@@ -36,6 +36,7 @@
 	icon_state = "splintlegs"
 	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY

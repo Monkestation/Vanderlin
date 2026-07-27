@@ -37,6 +37,7 @@
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
+	alt_titles = list("Court Chirurgian")
 	tutorial = "One fateful evening at a royal banquet, your steady hand and sharp eye saved the royal bloodline. \
 	Now, you serve as the trusted healer of the crown, a living symbol of Pestra's favor. \
 	Your duty is clear: keep the monarch alive, no matter the cost."

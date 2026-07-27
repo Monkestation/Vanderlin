@@ -105,15 +105,13 @@
 
 /obj/structure/minecart_rail/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-
-	var/choice = browser_input_list(user, "Choose a direction to cycle to when activated by a trigger.", src, list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
+	var/choice = browser_input_list(user, "Choose a direction to cycle to when activated by a trigger.", "Directions", directions)
 	if(!choice || QDELETED(user) || QDELETED(src))
 		return
-
 	secondary_direction = directions[choice]
 
 /obj/structure/minecart_rail/proc/rotate_direction(mob/user)
-	var/choice = browser_input_list(user, "Rotate the rail towards a direction.", "[name]", list("Downwards Left Turn", "Downwards Right Turn", "Upwards Left Turn", "Upwards Right Turn", "Up and Down", "Left and Right"))
+	var/choice = browser_input_list(user, "Rotate the rail towards a direction.", "Directions", directions)
 	if(!choice)
 		return
 

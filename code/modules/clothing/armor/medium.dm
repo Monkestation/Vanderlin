@@ -20,7 +20,7 @@
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
 	prevent_crits = ALL_CRITICAL_HITS
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 9 KILOGRAMS
+	item_weight = 7 KILOGRAMS
 
 /obj/item/clothing/armor/medium/scale/steppe
 	name = "steel heavy lamellar"
