@@ -46,12 +46,15 @@
 
 /obj/item/weapon/chisel/stone
 	name = "flint chisel"
-	icon_state = 'stonechisel'
+	icon_state = "stonechisel"
+	icon = 'icons/roguetown/weapons/tools.dmi'
 	smeltresult = /obj/item/natural/stone
-	toolspeed = 1.1
+	toolspeed = 1
 
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"
+	icon_state = "bchisel"
+	icon = 'icons/roguetown/weapons/tools.dmi'
 	smeltresult = /obj/item/ingot/bronze
 	toolspeed = 1.2
 	item_weight = 245 GRAMS
