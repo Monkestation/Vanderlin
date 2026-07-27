@@ -24,7 +24,7 @@
 
 /obj/item/clothing/armor/leather/atgervi/masterwork
 	name = "masterwork shaman's coat"
-	desc = "This coat was masterfully hand crafted with dendors blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
+	desc = "This coat was masterfully hand crafted with Dendor's blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/leather/master
@@ -119,7 +119,7 @@
 	experimental_onhip = FALSE
 
 /obj/item/clothing/shoes/boots/leather/atgervi
-	name = "atgervi leather boots"
+	name = "fur-lined leather boots"
 	desc = "A pair of strong leather boots, designed to endure battle and the chill of the frozen north both."
 	icon_state = "atgervi_boots"
 	item_state = "atgervi_boots"

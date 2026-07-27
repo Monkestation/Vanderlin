@@ -27,7 +27,7 @@
 	contains = /obj/item/weapon/shield/tower
 
 /datum/supply_pack/weapons/shield/atgervishield
-	name = "Atgervi Shield"
+	name = "Dwarven Kite Shield"
 	cost = 30
 	contains = /obj/item/weapon/shield/atgervi
 
@@ -212,7 +212,7 @@
 	contains = /obj/item/weapon/polearm/spear/assegai/steel
 
 /datum/supply_pack/weapons/steel/atgervi
-	name = "Steel Atgervi Axe"
+	name = "Steel Bearded Axe"
 	cost = 60
 	contains = /obj/item/weapon/axe/steel/atgervi
 

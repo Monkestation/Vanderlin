@@ -418,7 +418,7 @@
 	contains = /obj/item/clothing/pants/trou/beltpants
 
 /datum/supply_pack/apparel/atgervi_trousers
-	name = "Atgervi Trousers"
+	name = "Fur Pants"
 	cost = 35
 	contains = /obj/item/clothing/pants/trou/leather/atgervi
 
@@ -465,7 +465,7 @@
 	contains = /obj/item/clothing/shoes/anklets
 
 /datum/supply_pack/apparel/otavan_boots
-	name = "Otavan Boots"
+	name = "Grenzelhoftian Leather Boots"
 	cost = 30
 	contains = /obj/item/clothing/shoes/otavan
 
@@ -485,7 +485,7 @@
 	contains = /obj/item/clothing/shoes/boots/clothlinedanklets
 
 /datum/supply_pack/apparel/atgervi_boots
-	name = "Atgervie Boots"
+	name = "Fur-Lined Boots"
 	cost = 30
 	contains = /obj/item/clothing/shoes/boots/leather/atgervi
 
@@ -522,7 +522,7 @@
 	contains = /obj/item/clothing/gloves/angle/atgervi
 
 /datum/supply_pack/apparel/otavan_gloves
-	name = "Otavan Gloves"
+	name = "Grenzelhoftian Leather Gloves"
 	cost = 25
 	contains = /obj/item/clothing/gloves/leather/otavan
 

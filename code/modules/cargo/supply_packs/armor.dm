@@ -203,7 +203,7 @@
 	contains = /obj/item/clothing/head/helmet/sallet/elven
 
 /datum/supply_pack/armor/steel/atgervihelm
-	name = "Atgervi Helm"
+	name = "Owl Helmet"
 	cost = 60
 	contains = /obj/item/clothing/head/helmet/bascinet/atgervi
 
@@ -274,7 +274,7 @@
 // SHIRT ARMOR
 
 /datum/supply_pack/armor/steel/atgervichest
-	name = "Atgervi Hauberk"
+	name = "Dwarven Hauberk"
 	cost = 95
 	contains = /obj/item/clothing/armor/chainmail/hauberk/atgervi
 
@@ -306,7 +306,7 @@
 	contains = /obj/item/clothing/gloves/plate
 
 /datum/supply_pack/armor/steel/atgervigloves
-	name = "Atgervi Gloves"
+	name = "Fur-Lined Gloves"
 	cost = 55
 	contains = /obj/item/clothing/gloves/plate/atgervi
 
