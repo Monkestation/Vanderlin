@@ -158,14 +158,14 @@
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	neck = /obj/item/clothing/neck/gorget
-	shoes = /obj/item/clothing/shoes/otavan/inqboots
+	shoes = /obj/item/clothing/shoes/grenzel/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
-	backr =  /obj/item/storage/backpack/satchel/otavan
+	backr =  /obj/item/storage/backpack/satchel/grenzel
 	beltl = /obj/item/ammo_holder/bullet/bullets
 	beltr = /obj/item/gun/ballistic/powder/wheellock/puffer
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	wrists = /obj/item/clothing/neck/psycross/silver
 	ring = /obj/item/clothing/ring/signet/silver
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored

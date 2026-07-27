@@ -893,7 +893,7 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 4,"sy" = -2,"nx" = -3,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-/obj/item/weapon/polearm/woodstaff/naledi
+/obj/item/weapon/polearm/woodstaff/psydonian
 	name = "psydonian warstaff"
 	desc = "A staff carrying the black and gold insignia of the war scholars."
 	icon_state = "naledistaff"
@@ -904,7 +904,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 1 KILOGRAMS
 
-/obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
+/obj/item/weapon/polearm/woodstaff/psydonian/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
