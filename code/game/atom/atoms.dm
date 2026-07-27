@@ -76,11 +76,6 @@
 	///Economy cost of item in premium vendor
 	var/custom_premium_price
 
-	/// Will move to flags_1 when i can be arsed to (2019, has not done so)
-	var/rad_flags = NONE
-
-	///Bitfield for how the atom handles materials.
-	var/material_flags = NONE
 	///Modifier that raises/lowers the effect of the amount of a material, prevents small and easy to get items from being death machines.
 	var/material_modifier = 1
 

@@ -216,8 +216,15 @@
 
 /// Transfers the blood of a mob factoring in the impure reagents in their blood
 /// Returns the actual amount of blood transferred
-/mob/living/proc/transfer_blood_impurities(datum/reagents/transfer_to, amount, impurity_mult = BLOODLETTING_MULT, mob/transferred_by)
-	var/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup)
+/mob/living/proc/transfer_blood_impurities(datum/reagents/transfer_to, amount, impurity_mult = BLOODLETTING_MULT)
+	var/static/list/blacklisted_reagents = list(
+		/datum/reagent/steam,
+		/datum/reagent/water,
+		/datum/reagent/blood,
+		/datum/reagent/consumable/nutriment,
+		/datum/reagent/consumable/soup,
+	)
+
 	var/blood_purity = 1 // what % of the amt are we actually taking as blood?
 	var/cached_blood_volume = get_blood_volume()
 	amount = min(amount, transfer_to.maximum_volume - transfer_to.total_volume) // the volume of our transfer
@@ -227,7 +234,8 @@
 			impurity_volume -= reagents.get_reagent_amount(reagent_type, FALSE)
 		if(impurity_volume > 0)
 			blood_purity = cached_blood_volume / (cached_blood_volume + impurity_volume)
-			reagents.trans_to(transfer_to, amount * impurity_mult * (1 - blood_purity), transfered_by=transferred_by, ignored_reagents=blacklisted_reagents)
+			reagents.trans_to(transfer_to, amount * impurity_mult * (1 - blood_purity), ignored_reagents = blacklisted_reagents)
+
 	var/blood_transferred = min(cached_blood_volume, amount * blood_purity)  // how much of the drip is straight up blood, final value
 	var/datum/blood_type/blood = get_blood_type()
 	var/list/blood_data = blood?.get_blood_data(src)
@@ -350,7 +358,7 @@
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		amt = amt - transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT, src,  list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup))
+		amt -= transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT)
 
 	if(amt > 0.5)
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T

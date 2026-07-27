@@ -71,7 +71,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/axe/battle/getonmobprop(tag)
 	if(tag)
@@ -99,7 +99,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	sellprice = 20
-	item_weight = 2 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/getonmobprop(tag)
 	. = ..()
@@ -117,7 +117,7 @@
 	desc = "An iron axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_iron"
-	item_weight = 2 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/nsapo/getonmobprop(tag)
 
@@ -154,7 +154,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	sellprice = 20
-	item_weight = 1.8 KILOGRAMS
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/axe/bronze/getonmobprop(tag)
 	. = ..()
@@ -181,7 +181,7 @@
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
-	item_weight = 1.7 KILOGRAMS
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/axe/psydon/Initialize(mapload)
 	. = ..()
@@ -243,7 +243,7 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
 	axe_cut = 15 // Better than iron
-	item_weight = 1.9 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/axe/steel/getonmobprop(tag)
 	. = ..()
@@ -269,7 +269,7 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 80
 	axe_cut = 13
-	item_weight = 1.7 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/axe/silver/Initialize(mapload)
 	. = ..()
@@ -525,7 +525,7 @@
 	icon_state = "graggargaxe"
 	alt_intents = list(AXE_CUT, AXE_CHOP)
 	sellprice = 0 // Graggarite axe, nobody wants this
-	item_weight = 5 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/greataxe/dreamscape
 	name = "otherworldly axe"
