@@ -7,16 +7,19 @@ SUBSYSTEM_DEF(mobs)
 	flags = SS_KEEP_TIMING | SS_NO_INIT
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 
-	// While this base doesn't process it's subtypes do
+	// While this base doesn't process it's subtypes may
 	var/list/processing = list()
 	var/list/currentrun = list()
 
-	/// Cliented mobs by Z level
+	/// Cliented /living mobs by Z level
 	var/static/list/clients_by_zlevel[][]
+	/// Cliented /dead mobs by Z level
+	var/static/list/dead_players_by_zlevel[][] = list(list())
+	/// Cliented /camera mob by Z level
+	var/static/list/camera_players_by_zlevel[][] = list(list())
+
 	/// Non cliented mobs by Z level
 	var/static/list/mobs_by_zlevel[][] = list(list())
-	var/static/list/dead_players_by_zlevel[][] = list(list())
-	var/static/list/camera_players_by_zlevel[][] = list(list())
 
 	var/datum/mob_affix_system/affix_system
 
@@ -50,8 +53,7 @@ SUBSYSTEM_DEF(mobs)
 	while(length(currentrun))
 		var/mob/living/L = currentrun[length(currentrun)]
 		currentrun.len--
-		if(!L || QDELETED(L))
-			GLOB.mob_living_list.Remove(L)
+		if(!L)
 			continue
 
 		if(L.stat == DEAD)
@@ -72,7 +74,8 @@ SUBSYSTEM_DEF(mobs)
 	var/list/seen_cells = list()
 	for(var/z_index in 1 to length(SSmapping.z_list))
 		if(z_index in GLOB.tomb_z_levels)
-			continue
+			continue // Own SS
+		// These Z levels always process fully
 		if(z_index in GLOB.town_z_levels)
 			the_run |= mobs_by_zlevel[z_index]
 			continue
@@ -91,7 +94,7 @@ SUBSYSTEM_DEF(mobs)
 					continue
 				seen_cells[cell] = TRUE
 				for(var/mob/living/listener in cell.hearing_contents)
-					if(listener.client)
+					if(listener.client) // Own SS
 						continue
 					the_run |= listener
 

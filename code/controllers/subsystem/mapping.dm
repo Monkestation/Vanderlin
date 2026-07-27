@@ -213,7 +213,7 @@ SUBSYSTEM_DEF(mapping)
 	INIT_ANNOUNCE("Loading [config.map_name]...")
 #endif
 
-	LoadGroup(FailedZs, config.map_name, config.map_path, config.map_file, config.traits, ZTRAITS_TOWN, delve = config.delve)
+	LoadGroup(FailedZs, config.map_name, config.map_path, config.map_file, config.traits, NONE, delve = config.delve)
 
 	var/list/otherZ = list()
 	for(var/map_json in config.other_z)
