@@ -5577,11 +5577,13 @@
 /turf/open/openspace,
 /area/outdoors/beach)
 "Mg" = (
-/obj/structure/window,
 /obj/structure/curtain/dir{
 	dir = 4
 	},
-/turf/closed/basic,
+/obj/structure/window/openclose{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/chevron,
 /area/ship/middeck)
 "Mj" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
