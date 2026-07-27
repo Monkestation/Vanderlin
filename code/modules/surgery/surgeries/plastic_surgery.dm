@@ -67,4 +67,4 @@
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	bodypart?.add_wound(/datum/wound/facial/disfigurement)
 	target.emote("scream")
-	return FALSE    
+	return FALSE
