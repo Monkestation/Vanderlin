@@ -10,7 +10,8 @@
 	give_bank_account = FALSE
 
 	traits = list(
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/job/rousman/after_spawn(mob/living/carbon/human/spawned, client/player_client)

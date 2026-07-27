@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(ambience)
 			client_old_areas -= client_iterator
 			continue
 
-		if(!client_mob.can_hear()) //WHAT? I CAN'T HEAR YOU
+		if(HAS_TRAIT(client_mob, TRAIT_DEAF)) //WHAT? I CAN'T HEAR YOU
 			continue
 
 		//Check to see if the client-mob is in a valid area
@@ -113,13 +113,13 @@ SUBSYSTEM_DEF(ambience)
 
 	var/datum/component/theme_music/theme_music = src.GetComponent(/datum/component/theme_music)
 
-	if(!can_hear() || theme_music?.music_enabled)
+	if(HAS_TRAIT(src, TRAIT_DEAF) || theme_music?.music_enabled)
 		cancel_looping_ambience()
 		return
 
-	var/music_enabled = client.prefs?.toggles & SOUND_SHIP_AMBIENCE
+	var/music_enabled = client.prefs?.read_preference(/datum/preference/bitwise/toggles) & SOUND_SHIP_AMBIENCE
 	var/area/my_area = get_area(src)
-	var/vol = client.prefs?.musicvol
+	var/vol = client.prefs?.read_preference(/datum/preference/numeric/musicvol)
 	var/used = buzz_to_use
 
 	if(!used && music_enabled)

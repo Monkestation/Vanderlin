@@ -126,7 +126,7 @@
 			newtax = CLAMP(newtax, 1, 99)
 			SStreasury.tax_value = newtax / 100
 			SStreasury.untaxed_deposits = list()
-			scom_announce("The new tax in Vanderlin shall be [newtax] percent.")
+			scom_announce("The new tax in [SSmapping.config?.map_name] shall be [newtax] percent.")
 	if(href_list["import"])
 		var/datum/stock/D = locate(href_list["import"]) in SStreasury.stockpile_datums
 		if(!D)
@@ -296,6 +296,9 @@
 		if(!X)
 			return
 		for(var/mob/living/A in SStreasury.bank_accounts)
+			if(A.job == /datum/job/lord::title)
+				to_chat(usr, "<span class='warning'>The MASTER OF NERVES does not permit reassigning the current Monarch.</span>")
+				continue
 			if(A == X)
 				var/list/jobs = list()
 				jobs += GLOB.noble_positions

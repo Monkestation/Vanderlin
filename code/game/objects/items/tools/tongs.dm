@@ -63,13 +63,18 @@
 /obj/item/weapon/tongs/proc/heat_held_item(source, duration, incoming, max_heat)
 	if(!held_item)
 		return FALSE
+
+	update_appearance(UPDATE_ICON_STATE)
+
 	if(istype(held_item, /obj/item/storage/crucible))
 		var/obj/item/storage/crucible/crucible = held_item
 		crucible.crucible_temperature = min(crucible.crucible_temperature + incoming, max_heat)
 		return TRUE
+
 	if(duration)
 		held_item.add_quench_requirement(source, duration)
 		return TRUE
+
 	return FALSE
 
 /obj/item/weapon/tongs/proc/set_held_item(obj/item/new_held_item)
@@ -95,14 +100,19 @@
 /// Places the ingot on the atom, this can be either a turf or a table
 /obj/item/weapon/tongs/proc/place_item_to_atom(atom/A, mob/user)
 	if(!held_item)
-		return
+		return FALSE
 
-	if(user && held_item.tong_interaction(A, user))
-		return
-	if(isturf(A) || istype(A, /obj/structure/table))
-		held_item.forceMove(get_turf(A))
-	else
-		to_chat(user, span_warning("Cannot place [held_item] here!"))
+	if(!isturf(A) && !istype(A, /obj/structure/table))
+		to_chat(user, "<span class='warning'>Cannot place [held_item] here!</span>")
+		return FALSE
+
+	held_item.forceMove(get_turf(A))
+	held_item.remove_quench()
+	held_item = null
+
+	update_appearance(UPDATE_ICON_STATE)
+
+	return TRUE
 
 /obj/item/weapon/tongs/attack_self(mob/user, list/modifiers)
 	. = ..()
@@ -116,33 +126,29 @@
 	. = ..()
 	place_item_to_atom(get_turf(src), user)
 
-/obj/item/weapon/tongs/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	place_item_to_atom(get_turf(A), user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
-/obj/item/weapon/tongs/pre_attack(obj/item/attacked_item, mob/living/user, list/modifiers)
-	if(held_item?.tong_interaction(attacked_item, user))
-		return TRUE
+/obj/item/weapon/tongs/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with) || !isturf(interacting_with.loc))
+		return NONE
 
 	if(held_item)
-		return ..()
+		return NONE
 
-	if(!istype(attacked_item) || !isturf(attacked_item.loc))
-		return ..()
+	var/obj/item/item = interacting_with
 
-	if(istype(attacked_item, /obj/item/storage/crucible))
-		. = TRUE
-	else if(HAS_TRAIT(attacked_item, TRAIT_NEEDS_QUENCH))
-		. = TRUE
-	else if(attacked_item.melting_material || attacked_item.anvilrepair || attacked_item.smeltresult)
-		. = TRUE
-	if(.)
-		user.visible_message(span_info("[user] picks up [attacked_item] with [src]."))
-		set_held_item(attacked_item)
+	if(istype(item, /obj/item/storage/crucible) \
+		|| HAS_TRAIT(item, TRAIT_NEEDS_QUENCH) \
+		|| item.melting_material || item.anvilrepair || item.smeltresult \
+	)
+		user.visible_message(span_info("[user] picks up [interacting_with] with [src]."))
+		set_held_item(interacting_with)
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/weapon/tongs/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!held_item)
+		return NONE
+
+	if(place_item_to_atom(interacting_with))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/tongs/getonmobprop(tag)
 	. = ..()
@@ -160,7 +166,3 @@
 	smeltresult = null
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST / 5
-
-/// Called in pre_attack of tongs, used for items held by tongs. Return TRUE to stop attack chain early.
-/atom/proc/tong_interaction(atom/target, mob/user)
-	return FALSE

@@ -15,24 +15,6 @@ export interface ReagentRef {
   amount: number;
 }
 
-export interface SurgeryStep {
-  name: string;
-  desc?: string;
-  tools?: { name: string; chance: number }[];
-  accept_hand?: boolean;
-  accept_any?: boolean;
-  self_operable?: boolean;
-  lying_required?: boolean;
-  repeating?: boolean;
-  ignore_clothes?: boolean;
-  skill_name?: string;
-  skill_min?: string;
-  skill_median?: string;
-  chems?: string;
-  organs?: string[];
-  flags?: string[];
-}
-
 export interface PotteryStep extends IconData {
   name: string;
   time_s: number;
@@ -67,13 +49,15 @@ export interface Recipe {
   type: string;
   name: string;
   category: string;
+  // shared output fields
   output_name?: string;
   output_icon?: string;
   output_state?: string;
   output_count?: number;
   _output_path?: string;
   _extra_output_paths?: string[];
-  yield_names?: string[];
+  yield_names?: string[];  // natural_precursor: essences this yields
+  // repeatable
   requirements?: ItemRef[];
   tools?: ItemRef[];
   reagents?: ReagentRef[];
@@ -87,10 +71,12 @@ export interface Recipe {
   attacked_icon?: string;
   attacked_state?: string;
   allow_inverse?: boolean;
-  steps?: (SlapcraftStep | PotteryStep | SurgeryStep)[];
+  // orderless_slapcraft / slapcraft
+  steps?: (SlapcraftStep | PotteryStep)[];
   finishing_name?: string;
   finishing_icon?: string;
   finishing_state?: string;
+  // blueprint
   desc?: string;
   materials?: ItemRef[];
   tool_name?: string;
@@ -101,6 +87,7 @@ export interface Recipe {
   build_time?: number;
   supports_directions?: boolean;
   floor_object?: boolean;
+  // container_craft
   craft_verb?: string;
   crafting_time?: number;
   wildcards?: { name: string; count: number }[];
@@ -111,8 +98,10 @@ export interface Recipe {
   container_icon?: string;
   container_state?: string;
   extra_html?: string;
+  // molten
   temperature_c?: number;
   outputs?: { name: string; count: number }[];
+  // anvil / artificer
   bar_name?: string;
   bar_icon?: string;
   bar_state?: string;
@@ -120,6 +109,7 @@ export interface Recipe {
   base_icon?: string;
   base_state?: string;
   extras?: ItemRef[];
+  // brewing
   brew_time_s?: number;
   hints?: string;
   heat_c?: number;
@@ -134,14 +124,19 @@ export interface Recipe {
   output_item_state?: string;
   output_item_count?: number;
   age_stages?: AgeStage[];
+  // runeritual
   tier?: number;
+  // book_entry
   html?: string;
+  // alch_cauldron
   essences?: EssenceEntry[];
   output_reagents?: { name: string; amount: number }[];
   output_items?: ItemRef[];
   smells_like?: string;
+  // essence_combination
   inputs?: EssenceEntry[];
   output_amount?: number;
+  // essence_infusion
   target_name?: string;
   target_icon?: string;
   target_state?: string;
@@ -149,10 +144,12 @@ export interface Recipe {
   result_icon?: string;
   result_state?: string;
   infusion_time?: number;
+  // natural_precursor
   yields?: EssenceEntry[];
   splits_from?: string[];
   splits_from_paths?: string[];
   search_data?: string;
+  // plant_def
   maturation_min?: number;
   produce_min?: number;
   yield_min?: number;
@@ -168,10 +165,17 @@ export interface Recipe {
   nitrogen_prod?: number;
   phosphorus_prod?: number;
   potassium_prod?: number;
+  // surgery
   heretical?: boolean;
-  req_bodypart?: boolean;
-  req_missing_bodypart?: boolean;
-  req_real_bodypart?: boolean;
+  implements?: { name: string; modifier: number; }[];
+  hard_requirements?: string[];
+  soft_requirements?: string[];
+  optional_requirements?: string[];
+  blocker_requirements?: string[];
+	min_skill?: number;
+	median_skill?: number;
+	looping?: boolean;
+  // wound
   severity_text?: string;
   severity_color?: string;
   critical?: boolean;
@@ -194,11 +198,13 @@ export interface Recipe {
   sewn_woundpain?: number;
   special_props?: string[];
   check_name?: string;
+  // chimeric_node
   slot_name?: string;
   slot_color?: string;
   is_special?: boolean;
   allowed_slots?: string[];
   forbidden_slots?: string[];
+  // chimeric_table
   node_tier?: number;
   purity_min?: number;
   purity_max?: number;
@@ -212,6 +218,7 @@ export interface Recipe {
   output_nodes?: NodeEntry[];
   special_nodes?: NodeEntry[];
   source_mobs?: { name: string; icon: string; icon_state: string; _path: string }[];
+  // snack_processing
   mill_name?: string;
   mill_icon?: string;
   mill_state?: string;
@@ -219,13 +226,14 @@ export interface Recipe {
   grind_results?: { name: string; amount: number }[];
   juice_results?: { name: string; amount: number }[];
   milled_from?: ItemRef[];
-  sliced_from?: ItemRef[];
+  sliced_from?: ItemRef[]
   slice_name?: string;
   slice_icon?: string;
   slice_state?: string;
   slice_path?: string;
   slice_num?: number;
   slice_skill?: string;
+  // fish
   avg_size?: number;
   avg_weight?: number;
   fluid_type?: string;
@@ -237,9 +245,13 @@ export interface Recipe {
   dislike_bait?: string;
   lures?: string[];
   traits?: string[];
+  // obtained_from
   sources?: { label: string; _path: string; name: string; icon: string; icon_state: string }[];
+  // source_page
   drops?: { name: string; icon: string; icon_state: string; _path: string; source_label: string }[];
+  // pottery
   speed_sweetspot?: string | number;
+  // organ
   zone?: string;
   threshold_low?: number;
   threshold_high?: number;
@@ -258,6 +270,7 @@ export interface Recipe {
   oxygen_req?: number;
   nutriment_req?: number;
   hydration_req?: number;
+  // distillation ?
   required_reagents?: ReagentRef[];
   required_catalysts?: ReagentRef[];
   is_cold_recipe?: number;

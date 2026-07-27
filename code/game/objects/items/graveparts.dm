@@ -77,27 +77,28 @@
 		. += span_italics("[custom_message]")
 
 
-/obj/item/gravedecor/headstone/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(!user.cmode && I.wlength == WLENGTH_SHORT)
-		if(!(I.get_sharpness()))
-			to_chat(user, span_warning("\The [I] is not sharp enough to engrave \the [src]!"))
-			return
+/obj/item/gravedecor/headstone/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-		var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [src]?", "Custom Inscription", custom_message, 150, TRUE)
-		if(!new_message || new_message == custom_message)
-			return
+	if(tool.wlength < WLENGTH_SHORT)
+		return NONE
 
-		user.visible_message(span_info("[user] begins to engrave a message into \the [src] with \a [I]."), span_info("You begin to engrave a message into \the [src]."), span_info("You hear someone cutting into stone."))
-		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
-		if(!do_after(user, 5 SECONDS, src, progress=TRUE, display_over_user=TRUE))
-			return
-		else
-			user.visible_message(span_info("[user] finishes working on \the [src]."), span_info("You finish engraving \the [src] with your message."))
-			custom_message = new_message
-			return
+	if(!(tool.get_sharpness()))
+		return NONE
 
-	return ..()
+	var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [src]?", "Custom Inscription", custom_message, 150, TRUE)
+	if(!new_message || new_message == custom_message)
+		return ITEM_INTERACT_BLOCKING
 
+	user.visible_message(span_info("[user] begins to engrave a message into \the [src] with \a [tool]."), span_info("You begin to engrave a message into \the [src]."), span_info("You hear someone cutting into stone."))
+	playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
+	if(!do_after(user, 5 SECONDS, src, progress=TRUE, display_over_user=TRUE))
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message(span_info("[user] finishes working on \the [src]."), span_info("You finish engraving \the [src] with your message."))
+	custom_message = new_message
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/gravedecor/headstone/crude
 	name = "crude headstone"

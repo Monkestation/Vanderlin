@@ -17,8 +17,8 @@
 			M.emote(pick("twitch_s","giggle"))
 		else
 			M.emote(pick("twitch_s","chuckle"))
-	if(M.has_quirk(/datum/quirk/vice/smoker))
-		M.sate_addiction(/datum/quirk/vice/smoker)
+	if(M.has_quirk(/datum/quirk/vice/addiction/smoker))
+		M.sate_addiction(/datum/quirk/vice/addiction/smoker)
 	..()
 
 /datum/reagent/drug/space_drugs/on_mob_metabolize(mob/living/M)
@@ -77,8 +77,8 @@
 	..()
 
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M, efficiency)
-	if(M.has_quirk(/datum/quirk/vice/smoker))
-		M.sate_addiction(/datum/quirk/vice/smoker)
+	if(M.has_quirk(/datum/quirk/vice/addiction/smoker))
+		M.sate_addiction(/datum/quirk/vice/addiction/smoker)
 	..()
 	. = 1
 
@@ -95,6 +95,7 @@
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	taste_description = "the clouds"
 	overdose_threshold = 30
+	price_per_unit = 2.5
 
 /datum/reagent/drug/hallucinogen/on_mob_life(mob/living/carbon/psychonaut, efficiency)
 	. = ..()
@@ -169,6 +170,7 @@
 	color = "#b000b0"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 	taste_description = " something deeply wrong"
+	price_per_unit = 3.5
 
 /datum/reagent/drug/hallucinogen_concetrate/on_mob_life(mob/living/carbon/psychonaut, efficiency)
 	. = ..()

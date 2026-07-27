@@ -17,7 +17,7 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/gloves/plate
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STRONGEST
 
@@ -32,7 +32,7 @@
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."
 	icon_state = "igauntlets"
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/gloves/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/gloves/plate/iron/banded
@@ -51,7 +51,7 @@
 	item_state = "rustgloves"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/gloves/plate/bad
 	max_integrity = INTEGRITY_STANDARD
 
 /obj/item/clothing/gloves/plate/blk
@@ -64,7 +64,7 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
@@ -72,7 +72,7 @@
 	name = "silver gauntlets"
 	desc = "Finely forged gauntlets made out of silver."
 	icon_state = "silvergloves"
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/gloves/plate/silver
 	smeltresult = /obj/item/ingot/silver
 	item_weight = 2.94 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
@@ -138,11 +138,14 @@
 
 /obj/item/clothing/gloves/plate/kote/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
-	var/choice = input(user, "Choose a color.", "Uniform colors") as anything in COLOR_MAP
-	var/playerchoice = COLOR_MAP[choice]
-	detail_color = playerchoice
-	update_appearance()
-	if(loc == user && ishuman(user))
-		var/mob/living/carbon/H = user
-		H.update_inv_armor()
-		H.update_icon()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)
+
+//............... Cadwyn gloves ............... //
+/obj/item/clothing/gloves/plate/cadwyn
+	name = "cadwyn gauntlets"
+	desc = "Metal gauntlets wrapped in the chains the Order is named for. Let no bite or claw reach you."
+	icon_state = "cadwyngauntlets"

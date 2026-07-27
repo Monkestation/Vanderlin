@@ -45,6 +45,8 @@
 			hunger_rate *= 3
 		hunger_rate *= owner.physiology.hunger_mod
 		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
+		if (ishuman(owner))
+			hunger_rate *= owner.dna.species.nutrition_mod
 		owner.adjust_nutrition(-hunger_rate * delta_time)
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req
@@ -165,8 +167,7 @@
 
 /datum/organ_process/stomach/proc/handle_disgust(mob/living/carbon/human/owner, delta_time, times_fired)
 	var/combined_disgust_metabolism = 0
-	for(var/thing in owner.getorganslotlist(ORGAN_SLOT_STOMACH))
-		var/obj/item/organ/stomach/stomach = thing
+	for(var/obj/item/organ/stomach/stomach as anything in owner.getorganslotlist(ORGAN_SLOT_STOMACH))
 		combined_disgust_metabolism += stomach.disgust_metabolism
 
 	if(owner.disgust)

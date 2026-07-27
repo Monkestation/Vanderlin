@@ -224,7 +224,7 @@
 
 /datum/anvil_recipe/tools/iron/headhook
 	name = "Iron Headhook (+Fibers x2)"
-	additional_items = list(/obj/item/natural/fibers = 2)
+	additional_items = list(/obj/item/natural/fibers, /obj/item/natural/fibers)
 	created_item = /obj/item/storage/hip/headhook
 	craftdiff = 3
 
@@ -272,6 +272,12 @@
 	name = "Iron Gravefence"
 	created_item = /obj/item/gravedecor/gravefence/iron
 	category = "Gravefences"
+
+/datum/anvil_recipe/tools/iron/headstone_malum
+	name = "Malumite Headstone (+Stone Blocks x2)"
+	additional_items = list(/obj/item/natural/stoneblock, /obj/item/natural/stoneblock)
+	created_item = /obj/item/gravedecor/headstone/malum
+	category = "Headstones"
 
 /datum/anvil_recipe/tools/iron/bowl
 	name = "Bowl (iron)"

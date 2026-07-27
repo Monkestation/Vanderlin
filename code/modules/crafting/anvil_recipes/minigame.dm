@@ -64,10 +64,10 @@
 	var/list/new_notes = list()
 
 	var/last_note_time = REALTIMEOFDAY + 1 SECONDS
-	for(var/i = 1 to min(rand(2,5), notes_left))
+	for(var/i = 1 to notes_left)
 		notes_left--
 		var/atom/movable/screen/hud_note/hud_note = new(null, null, src)
-		var/time = rand(5, 10)
+		var/time = rand(5, 7)
 		if(difficulty >= 6)
 			time /= round((difficulty - 4) * 0.5)
 		hud_note.generate_click_type(difficulty)
@@ -120,7 +120,6 @@
 	else
 		if((REALTIMEOFDAY > lower_range) && (REALTIMEOFDAY < upper_range))
 			anvil_presses -= anvil_presses[choice]
-			user.balloon_alert(user, "Great Hit!")
 
 			// for(var/mob/player as anything in GLOB.player_list)
 			// 	if(!is_in_zweb(player.z, host_anvil.z))

@@ -32,6 +32,7 @@
 	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
 	give_bank_account = 15
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
@@ -86,6 +87,7 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
+	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)
@@ -98,6 +100,7 @@
 	if(.)
 		spawned.hud_used?.shutdown_bloodpool()
 		spawned.maxbloodpool = initial(spawned.maxbloodpool)
+		qdel(spawned.GetComponent(/datum/component/bloodpool_regen))
 
 /datum/outfit/absolver
 	name = JOB_ABSOLVER

@@ -404,30 +404,30 @@
 /datum/anvil_recipe/valuables/signet/unblessedsilver
 	name = "Silver Signet Ring"
 	required_material = /obj/item/ingot/silver
-	craftdiff = SKILL_LEVEL_EXPERT
+	craftdiff = 4
 	created_item = /obj/item/clothing/ring/signet/silver
 
 /datum/anvil_recipe/valuables/signet
 	name = "Signet Ring"
 	required_material = /obj/item/ingot/gold
-	craftdiff = SKILL_LEVEL_EXPERT
+	craftdiff = 4
 	created_item = /obj/item/clothing/ring/signet
 
 /datum/anvil_recipe/valuables/signet/psy/gold
 	name = "Gold Signet Ring"
-	craftdiff = SKILL_LEVEL_EXPERT
+	craftdiff = 4
 	required_material = /obj/item/ingot/gold
 	created_item = /obj/item/clothing/ring/signet/psy/g
 
 /datum/anvil_recipe/valuables/signet/silver
 	name = "Blessed Silver Signet Ring"
-	craftdiff = SKILL_LEVEL_MASTER
+	craftdiff = 5
 	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/ring/signet/psy
 
 /datum/anvil_recipe/valuables/signet/silver/inq
 	name = "Blessed Silver Signet Ring"
-	craftdiff = SKILL_LEVEL_MASTER
+	craftdiff = 5
 	required_material = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/ring/signet/psy
 

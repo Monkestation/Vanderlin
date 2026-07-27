@@ -54,8 +54,10 @@
 		TRAIT_DEADNOSE,
 		TRAIT_FORAGER,
 		TRAIT_LEGENDARY_ALCHEMIST,
-		TRAIT_STEELHEARTED
+		TRAIT_STEELHEARTED,
+		TRAIT_GALLOWBAND
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	selection_color = "#a33096"
 	languages = list(/datum/language/gronnic)
 

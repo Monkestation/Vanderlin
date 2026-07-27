@@ -114,10 +114,6 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"aw" = (
-/obj/structure/hotspring,
-/turf/open/floor/cobblerock,
-/area/outdoors/mountains/decap)
 "ax" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors)
@@ -1058,20 +1054,19 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"dg" = (
+/obj/structure/mana_pylon,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"dh" = (
+/obj/machinery/light/fueled/chand{
+	plane = -8;
+	layer = 4
+	},
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/keep)
 "dl" = (
 /turf/open/floor/blocks,
-/area/indoors/town/keep)
-"do" = (
-/obj/item/reagent_containers/glass/bucket/wooden,
-/turf/open/floor/grass/yel,
-/area/outdoors)
-"du" = (
-/obj/structure/notice_board{
-	pixel_y = 32;
-	board_id = "debug";
-	density = 0
-	},
-/turf/open/floor/wood,
 /area/indoors/town/keep)
 "dL" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -1081,17 +1076,19 @@
 /obj/structure/irrigation_channel,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"dO" = (
-/obj/item/natural/infernalash,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"dT" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch,
+"dP" = (
+/obj/machinery/light/fueled/torchholder/c,
+/obj/item/spell_focus,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 "dV" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"ea" = (
+/obj/structure/carpet/purple,
+/obj/machinery/light/fueled/firebowl/church,
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "ef" = (
 /obj/structure/hotspring/border/five,
@@ -1105,10 +1102,6 @@
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"ej" = (
-/obj/structure/chair/stool,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "ek" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = 15
@@ -1120,14 +1113,6 @@
 /obj/structure/flora/grass/herb/symphitum,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"ev" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "ew" = (
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/dirt/road,
@@ -1136,25 +1121,17 @@
 /obj/structure/rotation_piece/cog,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"eD" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/three,
-/obj/structure/flora/sakura{
-	pixel_y = -13
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors)
+"eB" = (
+/obj/structure/carpet/purple,
+/obj/structure/chair/stool,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "eE" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"eR" = (
-/obj/structure/table/wood/plain,
-/obj/structure/quest_counter,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "fe" = (
 /obj/structure/closet/crate/chest,
 /obj/item/weapon/hammer/iron,
@@ -1188,27 +1165,19 @@
 /mob/living/simple_animal/hostile/retaliate/cow,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"fm" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "fn" = (
 /obj/structure/ladder,
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
+"fq" = (
+/obj/effect/lily_petal,
+/turf/open/water/hotspring,
+/area/outdoors)
 "fs" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"fK" = (
-/obj/machinery/essence/combiner{
-	pixel_y = 10
-	},
-/obj/structure/table/stone_small,
-/obj/item/essence_node_jar,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "fQ" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/dirt/road,
@@ -1225,25 +1194,35 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"gf" = (
-/obj/structure/door,
-/turf/open/floor/carpet/lord/center,
-/area/indoors/town/keep)
 "gj" = (
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/cobble,
 /area/indoors)
+"gm" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "gp" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/two,
-/obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
-/area/outdoors)
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "gr" = (
 /obj/structure/water_pipe,
 /obj/structure/sprinkler,
 /turf/open/floor/cobblerock,
 /area/outdoors)
+"gs" = (
+/turf/open/floor/churchbrick,
+/area)
 "gu" = (
 /obj/item/reagent_containers/glass/bottle/tiefling_wine,
 /turf/open/floor/tile/bfloorz,
@@ -1269,6 +1248,12 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
+"gG" = (
+/obj/effect/decal/carpet/kover_darkred{
+	pixel_y = 25
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "gJ" = (
 /obj/structure/flora/shroom_tree{
 	pixel_x = -9
@@ -1305,26 +1290,34 @@
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
-"hs" = (
-/obj/structure/table/wood/counter/end{
-	dir = 6
+"hm" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
+"hp" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
+"hC" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
 	},
 /turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"hv" = (
-/obj/item/natural/feather,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"hB" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep)
 "hF" = (
 /obj/structure/dungeon_entry/center,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
-"hL" = (
-/obj/machinery/light/fueled/firebowl/standing,
+"hJ" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "hN" = (
@@ -1353,11 +1346,17 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"iy" = (
-/obj/structure/stairs/fancy/c{
-	dir = 1
-	},
-/turf/open/floor/carpet/lord/center,
+"ii" = (
+/obj/machinery/essence/divider,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"iq" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
+"iv" = (
+/obj/structure/notice_board,
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "iE" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -1370,14 +1369,18 @@
 /obj/structure/stockpile_storage,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep)
-"iY" = (
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/keep)
 "ji" = (
 /obj/structure/hotspring/border/three,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"jk" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "jp" = (
 /obj/effect/decal/carpet/square{
 	pixel_y = -17;
@@ -1430,6 +1433,10 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep)
+"jY" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "kb" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/structure/minecart_rail{
@@ -1438,15 +1445,6 @@
 /obj/structure/closet/crate/miningcar,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"ke" = (
-/obj/machinery/essence/test_tube,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
-"kf" = (
-/obj/machinery/light/fueled/torchholder/c,
-/obj/item/spell_focus,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "ki" = (
 /obj/structure/rotation_piece/cog{
 	dir = 4
@@ -1465,17 +1463,6 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"kD" = (
-/obj/machinery/essence/harvester,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"kK" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "kL" = (
 /obj/structure/water_pipe,
 /turf/open/floor/wood,
@@ -1491,10 +1478,6 @@
 /obj/structure/door/window,
 /turf/open/floor/tile/bfloorz,
 /area)
-"lm" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "ln" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/effect/falling_sakura,
@@ -1504,21 +1487,15 @@
 /obj/structure/vertical_gearbox,
 /turf/open/floor/wood,
 /area/indoors)
-"lt" = (
-/obj/structure/table/stone_small,
-/obj/item/paper/scroll/quest/pledge,
-/obj/item/paper/scroll/quest/pledge,
-/obj/item/paper/scroll/quest/pledge,
-/obj/item/paper/scroll/quest/pledge,
-/obj/item/paper/scroll/quest/pledge,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"lJ" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
+"lC" = (
+/obj/effect/landmark/quest_spawner/objective,
+/turf/open/floor/cobblerock,
+/area/outdoors)
+"lH" = (
+/obj/effect/lily_petal/three,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
 "lQ" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -1529,6 +1506,18 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
+"lR" = (
+/obj/structure/door,
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/keep)
+"lT" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "lV" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble,
@@ -1564,22 +1553,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
-"mF" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal,
-/obj/effect/lily_petal/three{
-	pixel_y = -14;
-	pixel_x = -2
-	},
-/obj/effect/lily_petal/two{
-	pixel_y = 13;
-	pixel_x = 11
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors)
-"mL" = (
-/obj/structure/table/vtable/v2,
-/obj/structure/quest_counter,
+"mG" = (
+/obj/structure/carpet/blue,
+/obj/structure/table/wood/plain/alt,
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "mM" = (
@@ -1607,13 +1583,13 @@
 /obj/effect/landmark/stall,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"nn" = (
-/obj/structure/mana_pylon,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "nG" = (
 /turf/open/floor/cobble,
 /area)
+"nN" = (
+/obj/item/arcyne_spellobject/spellstone/greater,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "nX" = (
 /obj/structure/flora/grass/herb/symphitum,
 /obj/structure/minecart_rail{
@@ -1621,6 +1597,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"ot" = (
+/obj/structure/bookcase/random_recipes,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "ou" = (
 /turf/closed/wall/mineral/decorstone,
 /area/outdoors)
@@ -1630,14 +1610,30 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
+"oF" = (
+/obj/effect/lily_petal/two,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
 "oH" = (
 /obj/structure/soil/debug_soil/random,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"oQ" = (
-/obj/machinery/light/fueled/cauldron,
-/turf/open/floor/churchbrick,
+"oJ" = (
+/obj/effect/decal/carpet/kover_black{
+	dir = 1;
+	pixel_y = -5
+	},
+/turf/open/floor/wood,
 /area/indoors/town/keep)
+"oZ" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"pb" = (
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "pc" = (
 /turf/open/floor/cobblerock,
 /area/indoors)
@@ -1645,10 +1641,18 @@
 /obj/structure/ladder,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"px" = (
+/turf/closed/basic,
+/area/outdoors/wilderness/beside_thatchwood)
 "pD" = (
 /obj/structure/hotspring/border/fourteen,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"pG" = (
+/obj/structure/table/wood/plain,
+/obj/structure/quest_counter,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "pQ" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/wood,
@@ -1680,13 +1684,6 @@
 /obj/structure/bookcase/random_recipes,
 /turf/open/floor/wood,
 /area/indoors)
-"qp" = (
-/obj/item/reagent_containers/powder/manabloom,
-/obj/item/reagent_containers/powder/manabloom,
-/obj/item/reagent_containers/powder/manabloom,
-/obj/item/reagent_containers/powder/manabloom,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "qr" = (
 /obj/effect/decal/carpet/kover_purple{
 	dir = 4;
@@ -1700,9 +1697,9 @@
 /obj/item/clothing/shoes/nobleboot/thighboots,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
-"qu" = (
-/obj/machinery/essence/divider,
-/turf/open/floor/churchbrick,
+"qw" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/wood,
 /area/indoors/town/keep)
 "qG" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -1712,6 +1709,10 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"qM" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/keep)
 "qY" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/cobble/mossy,
@@ -1738,6 +1739,11 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"rl" = (
+/obj/structure/carpet/cyan,
+/obj/structure/table/wood/plain/alt,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "rm" = (
 /obj/structure/flora/shroom_tree{
 	pixel_x = -36;
@@ -1769,22 +1775,18 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"rL" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/church/gold,
+"rV" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"sa" = (
+/obj/machinery/light/fueled/cauldron,
+/turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 "sd" = (
 /obj/structure/flora/grass/herb/symphitum,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"sl" = (
-/obj/item/clothing/ring/shimmeringlens,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "ss" = (
 /turf/open/openspace,
 /area/outdoors)
@@ -1814,12 +1816,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
-"sJ" = (
-/obj/effect/decal/carpet/kover_darkred{
-	pixel_y = 25
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "sK" = (
 /obj/structure/well,
 /turf/open/water,
@@ -1830,6 +1826,14 @@
 	storage_id = "metals"
 	},
 /turf/open/floor/cobblerock,
+/area/indoors/town/keep)
+"sU" = (
+/obj/machinery/light/fueled/firebowl/church,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"sX" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/spellobject_imbue,
+/turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 "sZ" = (
 /obj/structure/essence_node/rare,
@@ -1849,23 +1853,6 @@
 	},
 /turf/closed/mineral/random/med,
 /area/outdoors/mountains/decap)
-"tp" = (
-/obj/structure/hotspring,
-/obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
-/area/outdoors)
-"tq" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/mana_siphon/crop_growth,
-/obj/item/mana_battery/mana_crystal/standard,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"tz" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "tI" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks,
@@ -1874,6 +1861,13 @@
 /obj/structure/essence_node/rare,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"tM" = (
+/obj/item/reagent_containers/powder/manabloom,
+/obj/item/reagent_containers/powder/manabloom,
+/obj/item/reagent_containers/powder/manabloom,
+/obj/item/reagent_containers/powder/manabloom,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "tN" = (
 /obj/structure/hotspring/border/eight,
 /obj/structure/bridge{
@@ -1924,10 +1918,22 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"us" = (
-/obj/structure/carpet/purple,
-/obj/structure/table/wood/plain/alt,
+"uy" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
+"uF" = (
+/obj/structure/carpet/red,
 /turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"uH" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep)
 "uL" = (
 /obj/structure/hotspring/border/two,
@@ -1938,28 +1944,27 @@
 	dir = 8
 	},
 /area/outdoors/mountains/decap)
-"vl" = (
-/obj/structure/carpet/blue,
-/obj/structure/chair/stool,
-/turf/open/floor/church/gold,
+"vi" = (
+/obj/item/pylon_linker,
+/turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"vj" = (
+/obj/machinery/light/fueled/chand{
+	plane = -8;
+	layer = 4
+	},
+/turf/open/openspace,
+/area)
 "vw" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean,
 /area/outdoors)
-"vB" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/two,
-/turf/open/floor/dirt/road,
-/area/outdoors)
+"vy" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "vD" = (
 /turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"vH" = (
-/obj/structure/notice_board{
-	pixel_y = 0
-	},
-/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "vV" = (
 /obj/machinery/light/fueled/campfire/densefire,
@@ -1972,6 +1977,22 @@
 /obj/structure/hotspring/border/nine,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
+"wq" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/fermentation_keg/random/water{
+	pixel_y = 5;
+	pixel_x = -3
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"wC" = (
+/obj/structure/carpet/blue,
+/obj/structure/chair/stool,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "wD" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -2013,10 +2034,20 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
+"wO" = (
+/obj/structure/stairs/fancy/c{
+	dir = 1
+	},
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/keep)
 "wR" = (
 /obj/item/reagent_containers/glass/carafe/water,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"wW" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/keep)
 "wY" = (
 /obj/structure/flora/sakura{
 	pixel_y = -13
@@ -2024,22 +2055,19 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"wZ" = (
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"xa" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/open/floor/carpet/lord/center,
-/area/indoors/town/keep)
 "xh" = (
 /obj/structure/waterwheel,
 /turf/open/water/river{
 	dir = 4
 	},
 /area/outdoors)
+"xk" = (
+/obj/structure/notice_board{
+	pixel_y = 32;
+	board_id = "debug"
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "xo" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -2068,22 +2096,10 @@
 /obj/structure/bridge_stakes,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"ya" = (
-/obj/machinery/essence/splitter,
-/obj/structure/table/vtable,
-/obj/item/essence_vial{
-	pixel_y = 18;
-	pixel_x = -9
+"xU" = (
+/obj/structure/table/wood/counter/end{
+	dir = 6
 	},
-/obj/item/essence_vial{
-	pixel_y = 14;
-	pixel_x = -4
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
-"yn" = (
-/obj/structure/carpet/blue,
-/obj/structure/table/wood/plain/alt,
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "yr" = (
@@ -2104,11 +2120,10 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
-"yL" = (
-/obj/structure/stairs{
-	dir = 8
+"yM" = (
+/obj/machinery/light/fueled/wallfire{
+	pixel_y = 11
 	},
-/obj/structure/fluff/railing/wood,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
 "yP" = (
@@ -2128,12 +2143,6 @@
 "zk" = (
 /turf/closed/wall/mineral/tent,
 /area/outdoors/mountains/decap)
-"zm" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/three,
-/obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
-/area/outdoors)
 "zn" = (
 /obj/structure/hotspring/border/eleven,
 /turf/open/floor/cobblerock,
@@ -2148,6 +2157,18 @@
 	dir = 8
 	},
 /turf/open/openspace,
+/area/outdoors)
+"zy" = (
+/obj/effect/lily_petal,
+/obj/effect/lily_petal/three{
+	pixel_y = -14;
+	pixel_x = -2
+	},
+/obj/effect/lily_petal/two{
+	pixel_y = 13;
+	pixel_x = 11
+	},
+/turf/open/water/hotspring,
 /area/outdoors)
 "zA" = (
 /obj/structure/water_pump,
@@ -2344,16 +2365,15 @@
 /obj/structure/hotspring/border/eleven,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"zU" = (
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
-"Aa" = (
-/obj/machinery/light/fueled/chand{
-	plane = -8;
-	layer = 4
+"zV" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
 	},
-/turf/open/floor/carpet/lord/center,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "Ab" = (
 /obj/structure/hotspring/border/thirteen,
@@ -2362,10 +2382,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Ac" = (
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Ad" = (
 /obj/effect/temp_visual/particle_up,
 /turf/open/floor/tile/bfloorz,
@@ -2388,6 +2404,13 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Ax" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "Az" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = -8;
@@ -2395,10 +2418,19 @@
 	},
 /turf/open/floor/wood,
 /area/outdoors)
-"AB" = (
-/obj/effect/landmark/quest_spawner/objective,
-/turf/open/floor/cobblerock,
-/area/outdoors)
+"AF" = (
+/obj/machinery/essence/splitter,
+/obj/structure/table/vtable,
+/obj/item/essence_vial{
+	pixel_y = 18;
+	pixel_x = -9
+	},
+/obj/item/essence_vial{
+	pixel_y = 14;
+	pixel_x = -4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "AI" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/river,
@@ -2411,18 +2443,9 @@
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/wood,
 /area/indoors)
-"AT" = (
-/obj/effect/decal/carpet/kover_black{
-	dir = 1;
-	pixel_y = -5
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
-"Bd" = (
-/obj/machinery/light/fueled/wallfire{
-	pixel_y = 11
-	},
-/turf/open/floor/wood,
+"Ba" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "Bu" = (
 /obj/structure/fake_machine/stockpile,
@@ -2432,15 +2455,6 @@
 /obj/structure/flora/grass/herb/hypericum,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
-"Bz" = (
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"BU" = (
-/obj/structure/carpet/cyan,
-/obj/structure/chair/stool,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "BW" = (
 /obj/structure/flora/grass,
 /obj/structure/minecart_rail{
@@ -2448,22 +2462,44 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Cp" = (
+"Cd" = (
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
+"Cv" = (
+/obj/structure/chair/stool,
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
+"Cz" = (
+/obj/item/mana_battery/mana_crystal/standard,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/mana_siphon/flight,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"CI" = (
+/obj/structure/soil/debug_soil/random,
+/turf/open/floor/dirt/road,
+/area/indoors/town/keep)
 "CJ" = (
-/obj/machinery/light/fueled/firebowl/church,
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "CO" = (
 /obj/effect/landmark/observer_start,
 /turf/open/floor/cobblerock,
 /area/outdoors)
+"Dh" = (
+/obj/item/natural/infernalash,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "Di" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Dj" = (
+/obj/item/natural/melded/t2,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "Dm" = (
 /obj/structure/door,
 /turf/open/floor/blocks,
@@ -2476,39 +2512,25 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/dirt,
 /area/outdoors)
-"Dz" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
-/turf/open/floor/cobblerock,
-/area/outdoors/mountains/decap)
 "DD" = (
 /obj/structure/rotation_piece,
 /obj/structure/flora/grass,
 /turf/closed/mineral/random/med,
 /area/outdoors/mountains/decap)
-"DF" = (
-/turf/open/floor/carpet/lord/center,
-/area/indoors/town/keep)
 "DJ" = (
 /obj/structure/hotspring/border/ten,
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"DL" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "DW" = (
 /turf/open/floor/wood,
 /area/outdoors)
-"DY" = (
-/obj/structure/hotspring,
-/turf/open/floor/dirt/road,
-/area/outdoors)
-"Es" = (
-/obj/structure/window/openclose,
-/turf/open/floor/church/gold,
+"Ek" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/wood,
 /area/indoors/town/keep)
 "EI" = (
 /obj/structure/gearbox,
@@ -2519,14 +2541,6 @@
 	dir = 1
 	},
 /turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"ER" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/wood,
 /area/indoors/town/keep)
 "EW" = (
 /obj/structure/closet/crate/chest/wicker/random_soilson,
@@ -2539,6 +2553,14 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"EY" = (
+/obj/machinery/essence/combiner{
+	pixel_y = 10
+	},
+/obj/structure/table/stone_small,
+/obj/item/essence_node_jar,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "Fa" = (
 /turf/open/water/clean/under,
 /area/outdoors/mountains/decap)
@@ -2569,14 +2591,9 @@
 "Fy" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors)
-"Fz" = (
-/obj/item/mana_battery/mana_crystal/standard,
-/obj/effect/decal/cleanable/ritual_rune/arcyne/mana_siphon/flight,
+"FM" = (
+/obj/item/spell_focus,
 /turf/open/floor/churchbrick,
-/area/indoors/town/keep)
-"FL" = (
-/obj/structure/table/wood/plain/alt,
-/turf/open/floor/wood,
 /area/indoors/town/keep)
 "FN" = (
 /obj/structure/flora/ausbushes/brflowers,
@@ -2586,6 +2603,16 @@
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
+"FY" = (
+/obj/structure/table/wood/counter/end{
+	dir = 10
+	},
+/obj/item/coin/gold/pile,
+/obj/item/coin/gold/pile,
+/obj/item/coin/gold/pile,
+/obj/item/coin/gold/pile,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "Gi" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -2612,14 +2639,9 @@
 "GE" = (
 /turf/open/openspace,
 /area)
-"GF" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/obj/structure/chair/stool,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
+"GJ" = (
+/turf/open/water/hotspring,
+/area/outdoors)
 "GU" = (
 /obj/structure/hotspring/border/eleven,
 /obj/effect/lily_petal/three{
@@ -2632,17 +2654,6 @@
 /obj/structure/rotation_piece,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/mountains/decap)
-"Hg" = (
-/obj/structure/carpet/red,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"Hk" = (
-/obj/structure/stairs{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Hl" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/river{
@@ -2655,11 +2666,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors)
-"Hs" = (
-/obj/structure/carpet/cyan,
-/obj/structure/table/wood/plain/alt,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "Hw" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -2682,10 +2688,6 @@
 /obj/item/natural/chaff/oat,
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"HJ" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/spellobject_imbue,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "HK" = (
 /obj/structure/hotspring/border/two,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -2693,10 +2695,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"HQ" = (
-/obj/structure/soil/debug_soil/random,
-/turf/open/floor/dirt/road,
-/area/indoors/town/keep)
 "HR" = (
 /obj/structure/fluff/walldeco/wantedposter/r,
 /turf/open/floor/cobble,
@@ -2710,10 +2708,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"HZ" = (
-/obj/structure/carpet/blue,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "Ie" = (
 /obj/structure/stockpile_storage{
 	storage_id = "foods"
@@ -2726,29 +2720,14 @@
 	},
 /turf/open/water/river/creatable,
 /area/outdoors)
-"Ik" = (
-/obj/structure/waterwheel,
-/turf/open/water/river,
-/area/outdoors)
-"Il" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/turf/open/floor/church/gold,
+"Is" = (
+/obj/machinery/light/fueled/torchholder/c,
+/obj/item/arcyne_spellobject/wand,
+/turf/open/floor/churchbrick,
 /area/indoors/town/keep)
-"Iq" = (
-/obj/structure/table/wood/counter/end{
-	dir = 10
-	},
-/obj/item/coin/gold/pile,
-/obj/item/coin/gold/pile,
-/obj/item/coin/gold/pile,
-/obj/item/coin/gold/pile,
-/turf/open/floor/church/gold,
+"IF" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/wood,
 /area/indoors/town/keep)
 "IK" = (
 /obj/structure/irrigation_channel,
@@ -2767,10 +2746,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"IZ" = (
-/obj/item/natural/melded/t2,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "Jc" = (
 /obj/structure/hotspring/border/seven,
 /obj/structure/bridge{
@@ -2782,27 +2757,38 @@
 "Jd" = (
 /turf/closed/wall/mineral/stone,
 /area)
-"Je" = (
-/obj/item/pylon_linker,
-/turf/open/floor/churchbrick,
+"Ji" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/turf/open/floor/wood,
 /area/indoors/town/keep)
 "Jj" = (
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
-"Jm" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/obj/structure/closet/crate/chest,
-/turf/open/floor/church/gold,
+"Jn" = (
+/obj/item/natural/feather,
+/turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 "Jx" = (
 /obj/structure/vertical_gearbox{
 	dir = 4
 	},
 /turf/open/floor/blocks,
+/area/indoors/town/keep)
+"Jz" = (
+/obj/structure/window/openclose,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"JK" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/obj/structure/closet/crate/chest,
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "JM" = (
 /obj/structure/well,
@@ -2824,11 +2810,6 @@
 /obj/effect/landmark/stall,
 /turf/open/floor/dirt,
 /area/indoors)
-"Kd" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal,
-/turf/open/floor/dirt/road,
-/area/outdoors)
 "Ke" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/bridge_stakes{
@@ -2872,16 +2853,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors)
-"KV" = (
-/obj/structure/stairs{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Lg" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/brflowers,
@@ -2891,9 +2862,6 @@
 /obj/item/bin,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep)
-"Ll" = (
-/turf/open/floor/churchbrick,
-/area)
 "Lm" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig/male{
 	name = "GENERIC BLOCKER TESTER"
@@ -2920,10 +2888,14 @@
 	dir = 1
 	},
 /area/outdoors/mountains/decap)
-"Lx" = (
-/obj/machinery/light/fueled/torchholder/c,
-/obj/item/arcyne_spellobject/wand,
-/turf/open/floor/churchbrick,
+"LC" = (
+/obj/structure/table/stone_small,
+/obj/item/paper/scroll/quest/pledge,
+/obj/item/paper/scroll/quest/pledge,
+/obj/item/paper/scroll/quest/pledge,
+/obj/item/paper/scroll/quest/pledge,
+/obj/item/paper/scroll/quest/pledge,
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "Md" = (
 /obj/machinery/light/fueled/torchholder/l,
@@ -2941,10 +2913,6 @@
 /obj/machinery/essence/reservoir/filled/life,
 /turf/open/floor/tile/bfloorz,
 /area/indoors)
-"Mj" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Mn" = (
 /turf/open/floor/dirt,
 /area/indoors)
@@ -2960,25 +2928,15 @@
 	},
 /turf/open/floor/wood,
 /area/outdoors)
-"MA" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/obj/structure/fermentation_keg/random/water{
-	pixel_y = 5;
-	pixel_x = -3
-	},
+"MB" = (
+/obj/structure/table/vtable/v2,
+/obj/structure/quest_counter,
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "MG" = (
 /obj/structure/gearbox,
 /turf/open/floor/dirt,
 /area/outdoors)
-"ML" = (
-/obj/item/spell_focus,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "MS" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -2995,11 +2953,30 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"MZ" = (
+/obj/item/essence_vial{
+	pixel_y = 8;
+	pixel_x = 3
+	},
+/obj/item/essence_vial{
+	pixel_y = 7;
+	pixel_x = -6
+	},
+/obj/structure/table/vtable/v2,
+/obj/structure/chem_separator{
+	pixel_y = 14
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "Nb" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Nf" = (
+/obj/structure/carpet/cyan,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "No" = (
 /obj/structure/water_pipe,
 /obj/structure/pressurizer{
@@ -3007,24 +2984,13 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Nq" = (
-/obj/structure/carpet/cyan,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"Nr" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"Nu" = (
-/obj/structure/carpet/purple,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "NF" = (
 /obj/structure/irrigation_channel,
 /turf/open/floor/grass/yel,
+/area/outdoors)
+"NM" = (
+/obj/effect/lily_petal/two,
+/turf/open/water/hotspring,
 /area/outdoors)
 "NY" = (
 /obj/effect/falling_sakura,
@@ -3036,6 +3002,14 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
+"Oq" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "OK" = (
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep)
@@ -3060,10 +3034,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Pk" = (
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Pl" = (
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/dirt/road,
@@ -3088,33 +3058,40 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Py" = (
-/obj/structure/fermentation_keg/random/water{
-	pixel_y = 5;
-	pixel_x = -7
-	},
-/obj/structure/fermentation_keg/random/water{
-	pixel_y = 5;
-	pixel_x = 9
-	},
-/obj/structure/fermentation_keg/random/water{
-	pixel_y = -6;
-	pixel_x = 9
-	},
-/turf/open/floor/church/gold,
+"PE" = (
+/obj/structure/chair/stool,
+/turf/open/floor/wood,
 /area/indoors/town/keep)
 "Qi" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Qn" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/keep)
+"Qw" = (
+/mob/living/carbon/human/species/goblin/npc/ambush,
+/turf/closed/basic,
+/area/outdoors/wilderness/beside_thatchwood)
 "QA" = (
 /obj/structure/water_pipe,
 /obj/structure/sprinkler,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"QC" = (
+/obj/effect/decal/carpet/kover_darkred{
+	pixel_y = 32
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "QN" = (
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"QP" = (
+/obj/structure/carpet/purple,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "QR" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = -15
@@ -3127,16 +3104,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"QW" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "Rf" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -3144,18 +3111,14 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Ru" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "RC" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"RD" = (
+/obj/structure/table/wood/plain/alt,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "RF" = (
 /obj/structure/hotspring/border,
 /turf/open/floor/dirt/road,
@@ -3171,10 +3134,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
-"RR" = (
-/mob/living/carbon/human/species/goblin/npc/ambush,
-/turf/closed/basic,
-/area/outdoors/wilderness/beside_thatchwood)
 "Sq" = (
 /obj/structure/flora/grass,
 /obj/structure/fluff/railing/wood{
@@ -3182,8 +3141,14 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Su" = (
-/obj/machinery/light/fueled/torchholder/r,
+"Sw" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "Sx" = (
@@ -3198,10 +3163,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors)
-"SC" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "SE" = (
 /obj/structure/hotspring/border/eleven,
 /obj/effect/lily_petal/three{
@@ -3214,17 +3175,16 @@
 /obj/item/key/lord,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
-"SQ" = (
-/obj/structure/carpet/purple,
-/obj/structure/chair/stool,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "SS" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"SY" = (
+/obj/machinery/essence/test_tube,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "SZ" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/dirt/road,
@@ -3271,10 +3231,6 @@
 	},
 /turf/open/floor/wood,
 /area/outdoors)
-"TH" = (
-/obj/structure/table/wood/plain,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
 "TJ" = (
 /obj/structure/flora/grass/herb/hypericum,
 /turf/open/floor/cobblerock,
@@ -3289,6 +3245,14 @@
 /obj/structure/roguetent/preopen,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
+"TU" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "Ua" = (
 /turf/open/water/river{
 	dir = 4
@@ -3314,6 +3278,29 @@
 /obj/machinery/essence/reservoir,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"Uq" = (
+/obj/structure/carpet/cyan,
+/obj/structure/chair/stool,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"Us" = (
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/keep)
+"UD" = (
+/turf/open/water/hotspring,
+/area/outdoors/mountains/decap)
+"UG" = (
+/obj/structure/carpet/purple,
+/obj/structure/table/wood/plain/alt,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
+"UW" = (
+/obj/structure/table/vtable,
+/obj/effect/landmark/quest_dropoff{
+	board_id = "debug"
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "UX" = (
 /obj/structure/rotation_piece{
 	dir = 1
@@ -3324,8 +3311,23 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/mountains/decap)
+"Vb" = (
+/obj/machinery/essence/harvester,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"Vh" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "Vk" = (
 /turf/open/water/sewer,
+/area/outdoors)
+"Vm" = (
+/obj/effect/lily_petal/three,
+/obj/structure/flora/sakura{
+	pixel_y = -13
+	},
+/turf/open/water/hotspring,
 /area/outdoors)
 "Vp" = (
 /obj/structure/flora/grass,
@@ -3353,6 +3355,21 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"VF" = (
+/obj/structure/fermentation_keg/random/water{
+	pixel_y = 5;
+	pixel_x = -7
+	},
+/obj/structure/fermentation_keg/random/water{
+	pixel_y = 5;
+	pixel_x = 9
+	},
+/obj/structure/fermentation_keg/random/water{
+	pixel_y = -6;
+	pixel_x = 9
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "VG" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass/yel,
@@ -3373,6 +3390,10 @@
 "Wi" = (
 /turf/open/water/river,
 /area/outdoors/mountains/decap)
+"Wk" = (
+/obj/item/clothing/ring/shimmeringlens,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "Wr" = (
 /turf/open/floor/cobblerock,
 /area/outdoors)
@@ -3382,10 +3403,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors)
-"Wz" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/keep)
 "WA" = (
 /turf/open/lava/flow,
 /area/outdoors/mountains/decap)
@@ -3403,6 +3420,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"WN" = (
+/obj/structure/table/wood/plain,
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "WU" = (
 /obj/item/reagent_containers/food/snacks/apple_dried{
 	pixel_x = -9
@@ -3532,16 +3553,20 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"XE" = (
-/obj/effect/decal/carpet/kover_darkred{
-	pixel_y = 32
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "XL" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"XQ" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "XS" = (
 /obj/structure/door,
 /turf/open/floor/churchbrick,
@@ -3552,20 +3577,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Yf" = (
-/obj/structure/table/vtable,
-/obj/effect/landmark/quest_dropoff{
-	board_id = "debug"
-	},
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"Ym" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Yr" = (
 /obj/structure/rotation_piece/cog/large,
 /turf/open/floor/grass/yel,
@@ -3589,62 +3600,30 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"YA" = (
-/obj/structure/carpet/purple,
-/obj/machinery/light/fueled/firebowl/church,
-/turf/open/floor/church/gold,
-/area/indoors/town/keep)
-"YK" = (
-/obj/machinery/light/fueled/chand{
-	plane = -8;
-	layer = 4
-	},
-/turf/open/openspace,
-/area)
 "YR" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
-"Zk" = (
-/turf/closed/basic,
-/area/outdoors/wilderness/beside_thatchwood)
-"Zr" = (
-/obj/item/arcyne_spellobject/spellstone/greater,
-/turf/open/floor/churchbrick,
+"YU" = (
+/obj/structure/carpet/blue,
+/turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "Zs" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors)
+"Zv" = (
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "Zx" = (
 /obj/structure/window/openclose{
 	dir = 8
 	},
 /turf/open/floor/carpet,
 /area/indoors)
-"ZO" = (
-/obj/item/essence_vial{
-	pixel_y = 8;
-	pixel_x = 3
-	},
-/obj/item/essence_vial{
-	pixel_y = 7;
-	pixel_x = -6
-	},
-/obj/structure/table/vtable/v2,
-/obj/structure/chem_separator{
-	pixel_y = 14
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
-"ZY" = (
-/obj/structure/stairs{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = -1
-	},
-/turf/open/floor/wood,
+"ZN" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/mana_siphon/crop_growth,
+/obj/item/mana_battery/mana_crystal/standard,
+/turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 
 (1,1,1) = {"
@@ -5624,7 +5603,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -5881,7 +5860,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -6138,7 +6117,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -6395,7 +6374,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -6652,7 +6631,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -6909,7 +6888,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -7166,7 +7145,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -7423,7 +7402,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -7680,7 +7659,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -7937,7 +7916,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -8194,7 +8173,7 @@ ac
 ac
 ac
 ac
-ac
+as
 as
 as
 as
@@ -8505,8 +8484,8 @@ yP
 yP
 yP
 yP
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -8762,8 +8741,8 @@ aL
 bv
 QR
 hd
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -9019,8 +8998,8 @@ aL
 aL
 cu
 hd
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -9238,7 +9217,7 @@ as
 as
 as
 as
-ac
+as
 as
 as
 as
@@ -9276,8 +9255,8 @@ ah
 aL
 aL
 hd
-aw
-aw
+UD
+UD
 yP
 yP
 ac
@@ -9495,7 +9474,7 @@ as
 as
 as
 as
-ac
+as
 as
 as
 as
@@ -9533,9 +9512,9 @@ ah
 cV
 cz
 hd
-aw
-Dz
-aw
+UD
+UD
+UD
 yP
 ac
 ac
@@ -9791,8 +9770,8 @@ aL
 aL
 An
 zn
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -10048,8 +10027,8 @@ aL
 UY
 cr
 hd
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -10305,8 +10284,8 @@ aL
 bv
 aL
 hd
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -10562,8 +10541,8 @@ cO
 cS
 cz
 hd
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -10819,8 +10798,8 @@ au
 aL
 FX
 YR
-aw
-aw
+UD
+UD
 yP
 ac
 ac
@@ -11294,7 +11273,7 @@ as
 as
 as
 as
-ac
+as
 as
 as
 as
@@ -13367,8 +13346,8 @@ as
 as
 at
 qi
-DY
-Kd
+GJ
+fq
 RC
 eq
 jC
@@ -13624,8 +13603,8 @@ as
 as
 at
 qi
-DY
-DY
+GJ
+GJ
 SZ
 RF
 Qi
@@ -13871,9 +13850,9 @@ XS
 zg
 zg
 GB
-Cp
-Bz
-Cp
+Zv
+oZ
+Zv
 zg
 as
 as
@@ -13881,9 +13860,9 @@ as
 as
 at
 qi
-eD
-tp
-tp
+Vm
+Cd
+Cd
 SZ
 RF
 XT
@@ -14115,11 +14094,11 @@ as
 as
 as
 zg
-kf
-ML
-ML
-ML
-ML
+dP
+FM
+FM
+FM
+FM
 zg
 OK
 OK
@@ -14128,9 +14107,9 @@ OK
 zg
 GB
 GB
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
 zg
 as
 as
@@ -14138,8 +14117,8 @@ as
 as
 at
 qi
-tp
-gp
+Cd
+oF
 IW
 SE
 SZ
@@ -14383,10 +14362,10 @@ OK
 Ie
 Lj
 zg
-du
-XE
-Cp
-Cp
+xk
+QC
+Zv
+Zv
 zg
 zg
 zg
@@ -14395,8 +14374,8 @@ zg
 zg
 at
 qi
-DY
-zm
+GJ
+lH
 HK
 pD
 Ty
@@ -14404,7 +14383,7 @@ tN
 Ty
 Ty
 zF
-mF
+zy
 cp
 Ty
 Ty
@@ -14631,7 +14610,7 @@ as
 zg
 vD
 vD
-dT
+Vh
 vD
 vD
 zg
@@ -14642,10 +14621,10 @@ OK
 zg
 GB
 GB
-Yf
-Cp
-Cp
-Cp
+UW
+Zv
+Zv
+Zv
 vD
 vD
 vD
@@ -14899,10 +14878,10 @@ OK
 zg
 zg
 kw
-mL
-qp
-Cp
-Cp
+MB
+tM
+Zv
+Zv
 dV
 vD
 vD
@@ -15143,7 +15122,7 @@ as
 as
 as
 zg
-wZ
+jY
 vD
 vD
 vD
@@ -15157,9 +15136,9 @@ zg
 zg
 zg
 zg
-lt
-hs
-Iq
+LC
+xU
+FY
 zg
 zg
 vD
@@ -15407,9 +15386,9 @@ zg
 zg
 zg
 zg
-HQ
-HQ
-HQ
+CI
+CI
+CI
 zg
 zg
 zg
@@ -15418,7 +15397,7 @@ zg
 zg
 zg
 zg
-ya
+AF
 GB
 vD
 vD
@@ -15657,25 +15636,25 @@ as
 as
 as
 zg
-wZ
+jY
 vD
 vD
 vD
 vD
 zg
-wZ
+jY
 vD
 vD
 vD
 vD
 zg
-wZ
+jY
 vD
 vD
 vD
 vD
 zg
-ZO
+MZ
 RP
 Wd
 jp
@@ -15918,21 +15897,21 @@ vD
 vD
 vD
 vD
-nn
+dg
 EQ
 vD
 vD
 vD
 vD
-nn
+dg
 EQ
 vD
 vD
-dO
+Dh
 vD
-nn
+dg
 EQ
-fK
+EY
 GB
 vD
 Ta
@@ -16173,31 +16152,31 @@ as
 zg
 vD
 vD
-Fz
+Cz
 vD
 vD
 vD
 vD
 vD
-tq
+ZN
 vD
 vD
 vD
 vD
-hv
-SC
-IZ
+Jn
+rV
+Dj
 vD
 vD
 vD
 vD
 Ui
-oQ
+sa
 zg
 zg
 cp
 ji
-AB
+lC
 xM
 Pg
 EX
@@ -16442,12 +16421,12 @@ vD
 zg
 vD
 vD
-dO
+Dh
 vD
 vD
 zg
 zg
-wZ
+jY
 vD
 vD
 Md
@@ -16470,7 +16449,7 @@ ae
 QN
 ew
 Ko
-vB
+NM
 RC
 NF
 NF
@@ -16685,28 +16664,28 @@ as
 as
 as
 zg
-wZ
+jY
 vD
 vD
 vD
 vD
 zg
-wZ
+jY
 vD
 vD
 vD
 vD
 zg
-wZ
+jY
 vD
 vD
-sl
-Je
+Wk
+vi
 zg
-ke
+SY
 GB
-kD
-qu
+Vb
+ii
 Ui
 zg
 ui
@@ -16949,9 +16928,9 @@ zg
 zg
 zg
 zg
-HQ
-HQ
-HQ
+CI
+CI
+CI
 zg
 zg
 zg
@@ -16960,7 +16939,7 @@ zg
 zg
 zg
 zg
-AT
+oJ
 GB
 vD
 vD
@@ -17199,7 +17178,7 @@ as
 as
 as
 zg
-wZ
+jY
 vD
 vD
 vD
@@ -17715,7 +17694,7 @@ as
 zg
 vD
 vD
-HJ
+sX
 vD
 vD
 zg
@@ -18227,8 +18206,8 @@ as
 as
 as
 zg
-Lx
-Zr
+Is
+nN
 vD
 vD
 vD
@@ -19272,7 +19251,7 @@ as
 as
 at
 EW
-do
+pb
 kj
 wR
 QN
@@ -19525,8 +19504,8 @@ as
 as
 as
 as
-as
-as
+at
+at
 at
 at
 QN
@@ -19541,8 +19520,8 @@ ac
 ac
 at
 Yr
-Ik
-Ua
+xh
+QN
 QN
 ai
 jC
@@ -19799,7 +19778,7 @@ zg
 zg
 zg
 zg
-Ua
+at
 at
 QN
 at
@@ -20047,14 +20026,14 @@ as
 as
 zg
 zg
-zU
-Ac
-FL
-Mj
-Cp
-Bz
-Cp
-Cp
+IF
+PE
+RD
+iq
+Zv
+oZ
+Zv
+Zv
 zg
 zg
 at
@@ -20290,9 +20269,9 @@ as
 zg
 zg
 zg
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
 zg
 zg
 zg
@@ -20306,13 +20285,13 @@ zg
 GB
 GB
 GB
-Ac
-Mj
-vH
-sJ
-Cp
-Cp
-Cp
+PE
+iq
+iv
+gG
+Zv
+Zv
+Zv
 zg
 at
 Wr
@@ -20545,13 +20524,13 @@ as
 as
 zg
 zg
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
 zg
 zg
 as
@@ -20559,17 +20538,17 @@ as
 as
 as
 zg
-Pk
+qw
 GB
 GB
-Ym
-Ym
-ER
-Cp
-Cp
-vl
-yn
-Cp
+uy
+uy
+hm
+Zv
+Zv
+wC
+mG
+Zv
 zg
 zg
 Wr
@@ -20801,15 +20780,15 @@ as
 as
 zg
 zg
-Bz
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Bz
+oZ
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+oZ
 zg
 zg
 zg
@@ -20818,16 +20797,16 @@ zg
 zg
 GB
 GB
-ER
-Cp
-Hg
-Cp
-Cp
-Cp
-HZ
-vl
-Cp
-Bz
+hm
+Zv
+uF
+Zv
+Zv
+Zv
+YU
+wC
+Zv
+oZ
 zg
 zg
 ai
@@ -21057,35 +21036,35 @@ as
 as
 as
 zg
-Cp
-Cp
-Cp
-Cp
-Nr
-Nr
-Nr
-Cp
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
+Zv
+gp
+gp
+gp
+Zv
+Zv
+Zv
+Zv
 zg
-iY
-ZY
-ZY
-Wz
+qM
+XQ
+XQ
+wW
 GB
-Mj
-hL
-ej
-Hg
-TH
-ej
-Cp
-vl
-HZ
-Cp
-Cp
-Cp
+iq
+CJ
+Cv
+uF
+WN
+Cv
+Zv
+wC
+YU
+Zv
+Zv
+Zv
 zg
 ai
 Wr
@@ -21314,36 +21293,36 @@ as
 as
 zg
 zg
-Cp
-Cp
-Cp
-ev
-Zk
-Zk
-RR
-Il
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
+jk
+px
+px
+Qw
+zV
+Zv
+Zv
+Zv
 zg
-Hk
+Ek
 GB
-Mj
-yL
+iq
+Ax
 GB
-Mj
-Cp
-Cp
-Hg
-eR
-Cp
-Cp
-yn
-vl
-Cp
-Cp
-CJ
-Es
+iq
+Zv
+Zv
+uF
+pG
+Zv
+Zv
+mG
+wC
+Zv
+Zv
+sU
+Jz
 Wr
 Wr
 QN
@@ -21570,36 +21549,36 @@ as
 as
 as
 zg
-Cp
-Cp
-Cp
-lm
-Zk
-Zk
-Zk
-Zk
-Zk
-lJ
-Cp
-Cp
-Cp
-lm
+Zv
+Zv
+Zv
+Ba
+px
+px
+px
+px
+px
+hJ
+Zv
+Zv
+Zv
+Ba
 GB
 GB
 GB
 GB
-Mj
-Jm
-TH
-TH
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
+iq
+JK
+WN
+WN
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
 zg
 Wr
 Wr
@@ -21827,37 +21806,37 @@ as
 as
 as
 zg
-Cp
-Cp
-Cp
-lm
-RR
-Zk
-Zk
-Zk
-Zk
-xa
-DF
-DF
-DF
-hB
-Bd
+Zv
+Zv
+Zv
+Ba
+Qw
+px
+px
+px
+px
+uH
+Us
+Us
+Us
+Qn
+yM
 GB
 GB
 GB
-DF
-iy
-DF
-DF
-DF
-DF
-Aa
-DF
-DF
-DF
-DF
-DF
-gf
+Us
+wO
+Us
+Us
+Us
+Us
+dh
+Us
+Us
+Us
+Us
+Us
+lR
 Wr
 ai
 Wr
@@ -22084,36 +22063,36 @@ as
 as
 as
 zg
-Cp
-Cp
-Cp
-lm
-Zk
-Zk
-RR
-Zk
-Zk
-lJ
-Cp
-Cp
-Cp
-lm
+Zv
+Zv
+Zv
+Ba
+px
+px
+Qw
+px
+px
+hJ
+Zv
+Zv
+Zv
+Ba
 GB
 GB
 GB
 GB
-Mj
-MA
-eR
-TH
-ej
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
+iq
+wq
+pG
+WN
+Cv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
 zg
 Wr
 ai
@@ -22342,36 +22321,36 @@ as
 as
 zg
 zg
-Cp
-Cp
-Cp
-rL
-Zk
-Zk
-Zk
-QW
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
+lT
+px
+px
+px
+Sw
+Zv
+Zv
+Zv
 zg
-yL
+Ax
 GB
-Mj
-Hk
+iq
+Ek
 GB
-Mj
-Hg
-Hg
-Hg
-TH
-Cp
-Cp
-Cp
-Cp
-Cp
-ej
-YA
-Es
+iq
+uF
+uF
+uF
+WN
+Zv
+Zv
+Zv
+Zv
+Zv
+Cv
+ea
+Jz
 Wr
 ai
 Wr
@@ -22599,35 +22578,35 @@ as
 as
 as
 zg
-Cp
-Cp
-Cp
-Cp
-kK
-kK
-kK
-Cp
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
+Zv
+hC
+hC
+hC
+Zv
+Zv
+Zv
+Zv
 zg
-iY
-KV
-KV
-Wz
+qM
+gm
+gm
+wW
 GB
-Mj
-Py
-Cp
-ej
-TH
-ej
-Nq
-BU
-Nq
-Cp
-us
-Nu
+iq
+VF
+Zv
+Cv
+WN
+Cv
+Nf
+Uq
+Nf
+Zv
+UG
+QP
 zg
 ai
 ai
@@ -22857,15 +22836,15 @@ as
 as
 zg
 zg
-Su
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Su
+vy
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+vy
 zg
 zg
 zg
@@ -22874,16 +22853,16 @@ zg
 zg
 GB
 GB
-Ru
-hL
-Cp
-Cp
-Cp
-BU
-Hs
-Nq
-Cp
-SQ
+TU
+CJ
+Zv
+Zv
+Zv
+Uq
+rl
+Nf
+Zv
+eB
 zg
 zg
 ai
@@ -23115,13 +23094,13 @@ as
 as
 zg
 zg
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
+Zv
 zg
 zg
 as
@@ -23129,17 +23108,17 @@ as
 as
 as
 zg
-Pk
+qw
 GB
 GB
-tz
-GF
-Ru
-Cp
-Cp
-Cp
-Cp
-Cp
+Ji
+Oq
+TU
+Zv
+Zv
+Zv
+Zv
+Zv
 zg
 zg
 Wr
@@ -23374,9 +23353,9 @@ as
 zg
 zg
 zg
-Cp
-Cp
-Cp
+Zv
+Zv
+Zv
 zg
 zg
 zg
@@ -23389,14 +23368,14 @@ zg
 zg
 GB
 GB
-Ac
-FL
-DL
-Cp
-Cp
-Cp
-Cp
-Su
+PE
+RD
+hp
+Zv
+Zv
+Zv
+Zv
+vy
 zg
 at
 at
@@ -23648,11 +23627,11 @@ zg
 kw
 GB
 GB
-Mj
-fm
-Su
-Cp
-Cp
+iq
+ot
+vy
+Zv
+Zv
 zg
 zg
 as
@@ -81449,7 +81428,7 @@ as
 as
 as
 Jd
-Ll
+gs
 GE
 GE
 GE
@@ -81706,7 +81685,7 @@ as
 as
 as
 Jd
-Ll
+gs
 GE
 GE
 GE
@@ -81963,7 +81942,7 @@ as
 as
 as
 Jd
-Ll
+gs
 GE
 GE
 GE
@@ -87369,7 +87348,7 @@ GE
 GE
 GE
 GE
-YK
+vj
 GE
 GE
 GE

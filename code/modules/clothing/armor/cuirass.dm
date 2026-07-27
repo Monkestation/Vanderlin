@@ -10,11 +10,11 @@
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 //................ Grenzelhoft Cuirass ............... //
 /obj/item/clothing/armor/cuirass/grenzelhoft
@@ -25,8 +25,8 @@
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
 
-	armor = ARMOR_PLATE_GOOD
-	item_weight = 10 KILOGRAMS
+	armor_type = /datum/armor/plate/good
+	item_weight = 5 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/rare
 	abstract_type = /obj/item/clothing/armor/cuirass/rare
@@ -51,10 +51,10 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_VEST
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6.5 KILOGRAMS
+	item_weight = 5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/rust
@@ -86,11 +86,11 @@
 	sellprice = VALUE_DIRT_CHEAP
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
-	item_weight = 6.4 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/vampire
 	name = "ancient plate"
@@ -98,10 +98,10 @@
 	icon_state = "vplate"
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	item_weight = 7 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fencer
 	name = "fencer's cuirass"
@@ -125,7 +125,22 @@
 	desc = "A sturdy steel cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
 
 	body_parts_covered = CHEST | VITALS | LEGS
-	max_integrity = 300
+	max_integrity = INTEGRITY_STRONGEST
+	item_weight = 6.5 KILOGRAMS
+
+/obj/item/clothing/armor/cuirass/fluted/iron
+	name = "iron fluted cuirass"
+	desc = "Relatively sturdy iron cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
+	icon_state = "flutedcuirass_iron"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
+
+	smeltresult = /obj/item/ingot/iron
+	sellprice = VALUE_IRON_ARMOR
+	armor_type = /datum/armor/plate/bad
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 6.5 KILOGRAMS
+
 
 /obj/item/clothing/armor/cuirass/ornate
 	name = "psydonian cuirass"

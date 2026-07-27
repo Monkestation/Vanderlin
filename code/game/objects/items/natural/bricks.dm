@@ -17,11 +17,6 @@
 	bundletype = /obj/item/natural/bundle/brick
 	item_weight = 1.1 KILOGRAMS
 
-/obj/item/natural/brick/attackby(obj/item, mob/living/user, list/modifiers)
-	if(item_flags & IN_STORAGE)
-		return
-	. = ..()
-
 /obj/item/natural/bundle/brick
 	name = "stack of bricks"
 	desc = "A stack of bricks."

@@ -64,7 +64,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 10 //meant to be a orc weapon or barbarian weapon
 
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
@@ -72,7 +71,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/axe/battle/getonmobprop(tag)
 	if(tag)
@@ -94,14 +93,13 @@
 	wdefense = MEDIOCRE_PARRY
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 6
 
 	smeltresult = /obj/item/ingot/iron
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	sellprice = 20
-	item_weight = 2 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/getonmobprop(tag)
 	. = ..()
@@ -119,7 +117,7 @@
 	desc = "An iron axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_iron"
-	item_weight = 2 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/nsapo/getonmobprop(tag)
 
@@ -140,7 +138,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 150
-	minstr = 10
 	item_weight = 2.2 KILOGRAMS
 
 //................ Bronze ............... //
@@ -151,14 +148,13 @@
 	wdefense = MEDIOCRE_PARRY
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 6
 
 	smeltresult = /obj/item/ingot/bronze
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	sellprice = 20
-	item_weight = 1.8 KILOGRAMS
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/axe/bronze/getonmobprop(tag)
 	. = ..()
@@ -179,14 +175,13 @@
 	icon_state = "psyaxe"
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 6
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
 	smeltresult = /obj/item/ingot/silverblessed
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
-	item_weight = 1.7 KILOGRAMS
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/axe/psydon/Initialize(mapload)
 	. = ..()
@@ -220,7 +215,6 @@
 	gripped_intents = list(AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 6
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	associated_skill = /datum/attribute/skill/combat/axesmaces
@@ -245,12 +239,11 @@
 	icon_state = "saxe"
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 6
 	smeltresult = /obj/item/ingot/steel_slag
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
 	axe_cut = 15 // Better than iron
-	item_weight = 1.9 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/axe/steel/getonmobprop(tag)
 	. = ..()
@@ -276,11 +269,23 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 80
 	axe_cut = 13
-	item_weight = 1.7 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
-/obj/item/weapon/axe/steel/silver/Initialize(mapload)
+/obj/item/weapon/axe/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/axe/silver/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -12,"sy" = -10,"nx" = 12,"ny" = -10,"wx" = -8,"wy" = -7,"ex" = 3,"ey" = -9,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = -12,"sy" = 3,"nx" = 12,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 4,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+
 
 
 //.................. Bearded Axe ...............//
@@ -312,7 +317,6 @@
 	desc = "A steel axe hailing from the fallen east. Great for felling trees and foes alike."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_steel"
-	minstr = 8
 	sellprice = 45
 	item_weight = 1.9 KILOGRAMS
 
@@ -340,7 +344,6 @@
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 100
 	max_integrity = INTEGRITY_POOR
-	minstr = 6
 	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
 	melt_amount = 150
@@ -371,7 +374,6 @@
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
-	minstr = 8
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	item_weight = 900 GRAMS
@@ -398,7 +400,6 @@
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 150
 	max_integrity = INTEGRITY_WORST + 50
-	minstr = 8
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	item_weight = 900 GRAMS
@@ -430,7 +431,6 @@
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP,  POLEARM_BASH)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 11
 
 	pixel_y = -16
 	pixel_x = -16
@@ -473,7 +473,6 @@
 	gripped_intents = list(GREATAXE_CUT, GREATAXE_CHOP, MACE_STRIKE) //Axe-equivalent to the Godendag or Grand Mace.
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 11
 	smeltresult = /obj/item/ingot/silverblessed
 	item_weight = 3.8 KILOGRAMS
 
@@ -525,9 +524,8 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
 	alt_intents = list(AXE_CUT, AXE_CHOP)
-	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
 	sellprice = 0 // Graggarite axe, nobody wants this
-	item_weight = 5 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/greataxe/dreamscape
 	name = "otherworldly axe"

@@ -43,14 +43,19 @@
 	to_chat(user, span_cultsmall("The item clatters free from the rune."))
 	playsound(src, 'sound/magic/glass.ogg', 40, TRUE)
 
-/obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/attackby(obj/item/W, mob/user, list/modifiers)
-	if(istype(W, /obj/item/melee/touch_attack))
-		return ..()
+/obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(tool.item_flags & ABSTRACT || HAS_TRAIT(tool, TRAIT_NODROP))
+		return NONE
+
 	if(animating)
 		to_chat(user, span_notice("The rune is already working..."))
-		return
-	if(!try_stage_item(user, W))
-		return ..()
+		return ITEM_INTERACT_BLOCKING
+
+	try_stage_item(user, tool)
+	return ITEM_INTERACT_SUCCESS
 
 /// Accepts exactly one item. Replaces any previously staged item (returning it
 /// to the ground) so the player can swap without having to erase and re-draw.

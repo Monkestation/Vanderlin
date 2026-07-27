@@ -12,7 +12,6 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
 	can_parry = FALSE
 	force = 0
-	minstr = 0
 	wbalance = 0
 	throwforce = 0
 	throw_range = 4
@@ -128,9 +127,7 @@
 		return
 
 	for(var/mob/living/carbon/listener in hearers(5, source))
-		if(!listener.client)
-			continue
-		if(!listener.can_hear())
+		if(!listener.client || HAS_TRAIT(listener, TRAIT_DEAF))
 			continue
 		var/bypass_checks = FALSE
 		if(user == listener)

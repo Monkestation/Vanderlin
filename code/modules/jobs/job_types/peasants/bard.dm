@@ -21,6 +21,7 @@
 
 /datum/job/bard
 	title = JOB_BARD
+	alt_titles = list("Carouser", "Piper", "Flutist", "Guitarist", "Fiddler", "Drummer")
 	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, \
 	mostly because they are the last ones in a party to die. \
 	Their wish is to experience the greatest adventures of the age and write amazing songs \
@@ -32,6 +33,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
+	knows_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard

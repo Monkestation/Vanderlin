@@ -30,7 +30,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/gallowglass
 
 	traits = list(
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/outfit/mercenary/gallowglass

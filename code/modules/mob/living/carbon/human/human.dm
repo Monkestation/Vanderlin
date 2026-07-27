@@ -5,6 +5,9 @@
 	var/obj/item/held_item = user.get_active_held_item()
 	if(user.cmode)
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_NECK))
+			if(check_crit_armor(BODY_ZONE_PRECISE_NECK, BCLASS_CUT))
+				to_chat(user, span_warning("I can't slit [src]'s throat, their neck is protected!"))
+				return
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				if(HAS_TRAIT(user, TRAIT_PACIFISM) && user != src)
 					to_chat(user, span_warning("I can't slit [src]'s throat, I am a pacifist!"))
@@ -111,17 +114,20 @@
 /mob/living/carbon/human/Initialize()
 	add_verb(src, /mob/living/proc/lay_down)
 
+	status_flags |= BUILDING_ORGANS
 	//initialize limbs first
 	create_bodyparts()
 
+	attribute_initialize() // chud shit
 	setup_human_dna()
 
 	if(dna.species)
-		set_species(dna.species.type)
+		set_species(dna.species.type, initial_set = TRUE)
 
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+	status_flags &= ~BUILDING_ORGANS
 	culture = GLOB.culture_singletons[culture]
 
 	. = ..()
@@ -375,7 +381,7 @@
 					var/epinephrine_mod = 0
 					if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
 						epinephrine_mod += 5
-					target.adjustOxyLoss(-((medical_skill * 0.2) + epinephrine_mod))
+					target.adjustOxyLoss(-((medical_skill * 0.3) + epinephrine_mod))
 					to_chat(target, span_unconscious("I feel a breath of fresh air enter my lungs... It feels good..."))
 
 				looping = TRUE
@@ -417,12 +423,9 @@
 				var/epinephrine_mod = 0
 				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
 					epinephrine_mod += 3
-				var/heart_exposed_mod = 0
-				if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
-					heart_exposed_mod += 5
 
 				/// Master (55) have a 5% chance of reviving through CPR each attempt.
-				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 20, context = DICE_CONTEXT_PHYSICAL)
+				var/diceroll = diceroll(medical_skill+epinephrine_mod, crit = SKILL_MIDDLING, dice_num = 20, context = DICE_CONTEXT_PHYSICAL)
 				looping = TRUE
 
 				if(diceroll <= DICE_CRIT_FAILURE) // can't even break ribs correctly
@@ -439,18 +442,11 @@
 						 */
 						they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
 				else
-					if(heart_exposed_mod)
-						visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
-									span_notice("I massage <b>[target]</b>'s [they_heart]."), \
-									span_hear("I hear pushing."),
-									vision_distance = COMBAT_MESSAGE_RANGE, \
-									ignored_mobs = target)
-					else
-						visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
-									span_notice("I perform chest compressions on <b>[target]</b>."), \
-									span_hear("I hear pushing."),
-									vision_distance = COMBAT_MESSAGE_RANGE, \
-									ignored_mobs = target)
+					visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
+								span_notice("I perform chest compressions on <b>[target]</b>."), \
+								span_hear("I hear pushing."),
+								vision_distance = COMBAT_MESSAGE_RANGE, \
+								ignored_mobs = target)
 
 					target.pump_heart(src)
 					if(target.stat < DEAD) // No point in running the revive check
@@ -466,8 +462,6 @@
 
 					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
 						looping = FALSE
-						if(target.getOrganLoss(ORGAN_SLOT_BRAIN) >= BRAIN_DAMAGE_DEATH)
-							target.setOrganLoss(ORGAN_SLOT_BRAIN, BRAIN_DAMAGE_DEATH - 1)
 						if(target.revive())
 							target.grab_ghost(TRUE)
 							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
@@ -543,7 +537,7 @@
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (getPainLoss() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
+			var/painpercent = can_feel_pain() ? (getShockStage() / SHOCK_STAGE_MAX) * 100 : 0 //what percent out of 100 to max pain
 
 
 			var/usedloss = 0
@@ -978,6 +972,22 @@
 
 	regenerate_icons()
 
+/mob/living/carbon/human/proc/copy_visible_organs(mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+
+	for(var/obj/item/organ/organ in internal_organs)
+		if(!organ.visible_organ)
+			continue
+		organ.Remove(src)
+		qdel(organ)
+
+	for(var/obj/item/organ/organ in target.internal_organs)
+		if(!organ.visible_organ)
+			continue
+		var/obj/item/organ/new_organ = organ.copy_organ()
+		new_organ.Insert(src)
+
 /mob/living/carbon/human/proc/copy_bodyparts(mob/living/carbon/human/target)
 	var/mob/living/carbon/human/self = src
 	var/list/target_missing = target.get_missing_limbs()
@@ -1019,14 +1029,11 @@
 	create_bodyparts()
 
 /mob/living/carbon/human/species
-	var/race = null
 	var/attribute_sheet
 	var/headprice
 
 /mob/living/carbon/human/species/Initialize()
 	. = ..()
-	if(race)
-		set_species(race)
 	if(attribute_sheet)
 		attributes?.add_sheet(attribute_sheet)
 	return INITIALIZE_HINT_LATELOAD

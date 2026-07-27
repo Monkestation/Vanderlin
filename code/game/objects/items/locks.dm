@@ -32,29 +32,32 @@
 			return TRUE
 	return FALSE
 
-/obj/item/customlock/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/weapon/hammer))
+/obj/item/customlock/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(istype(tool, /obj/item/weapon/hammer))
 		var/input = input(user, "What would you like to set the lock ID to?", "", 0) as num
 		input = abs(input)
 		if(!input)
-			return
+			return ITEM_INTERACT_BLOCKING
+
 		to_chat(user, span_notice("You set the lock ID to [input]."))
 		lockids = list("[input]")
-		return
-	if(!check_access(I))
-		to_chat(user, span_warning("[I] jams in [src]!"))
-		return
-	to_chat(user, span_notice("[I] twists cleanly in [src]."))
+		return ITEM_INTERACT_SUCCESS
 
-/obj/item/customlock/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(istype(I, /obj/item/weapon/hammer))
+	if(!check_access(tool))
+		to_chat(user, span_warning("[tool] jams in [src]!"))
+		return ITEM_INTERACT_SUCCESS
+
+	to_chat(user, span_notice("[tool] twists cleanly in [src]."))
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/customlock/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/weapon/hammer))
 		if(!length(lockids))
 			to_chat(user, span_notice("[src] is not ready, its pins are not set!"))
-			return
+			return ITEM_INTERACT_BLOCKING
 		var/obj/item/customlock/finished/F = new (get_turf(src))
 		F.lockids = lockids
 		to_chat(user, span_notice("You finish [F]."))
@@ -62,11 +65,14 @@
 		qdel(src)
 		if(user == old_loc)
 			user.put_in_hands(F)
-		return
-	if(!copy_access(I))
-		to_chat(user, span_warning("I cannot base the pins on [I]!"))
-		return
-	to_chat(user, span_notice("I set the pins based on [I]."))
+		return ITEM_INTERACT_SUCCESS
+
+	if(!copy_access(tool))
+		to_chat(user, span_warning("I cannot base the pins on [tool]!"))
+		return ITEM_INTERACT_BLOCKING
+
+	to_chat(user, span_notice("I set the pins based on [tool]."))
+	return ITEM_INTERACT_SUCCESS
 
 //finished lock
 /obj/item/customlock/finished
@@ -74,30 +80,39 @@
 	desc = "A customized iron lock that is used by keys. A name can be etched in with a hammer."
 	var/holdname = ""
 
-/obj/item/customlock/finished/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!istype(I, /obj/item/weapon/hammer))
-		..()
+/obj/item/customlock/finished/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/hammer))
+		return NONE
+
 	holdname = browser_input_text(user, "What would you like to name this?", "", max_length = MAX_CHARTER_LEN)
+
 	if(holdname)
 		to_chat(user, span_notice("You label the [name] with [holdname]."))
 
-/obj/item/customlock/finished/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	return // Keep crashing until we fix this
+	return ITEM_INTERACT_SUCCESS
 
-/obj/item/customlock/finished/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isobj(attacked_atom))
-		return ..()
+/obj/item/customlock/finished/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	return NONE
 
-	var/obj/O = attacked_atom
-	. = TRUE
+/obj/item/customlock/finished/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isobj(interacting_with))
+		return NONE
+
+	var/obj/O = interacting_with
+
 	if(!O.can_add_lock)
 		to_chat(user, span_warning("There is no place for a lock on [O]."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(O.lock)
 		to_chat(user, span_warning("[O] already has a lock."))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(holdname)
 		O.name = holdname
+
 	O.lock = new /datum/lock/key(O, lockids)
 	to_chat(user, span_notice("I fit [src] to [O]."))
 	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS

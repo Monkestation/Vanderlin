@@ -131,7 +131,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
@@ -175,13 +175,16 @@
 	toggle_icon_state = TRUE
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/neck/padded
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = MINOR_CRITICALS
 	item_weight = 250 GRAMS
 
 /obj/item/clothing/neck/coif/cloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/coif/cloth/colored/peasantbrown
+	color = CLOTHING_PEASANT_BROWN
 
 /obj/item/clothing/neck/coif/cloth/colored/berryblue
 	color = CLOTHING_BERRY_BLUE
@@ -203,7 +206,7 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 275 GRAMS
@@ -225,7 +228,7 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 
@@ -268,13 +271,12 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel_slag
-	melting_material = /datum/material/iron
+	melting_material = /datum/material/steel
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/neck/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
@@ -319,7 +321,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 100
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/neck/gorget/copper
@@ -329,7 +331,7 @@
 	smeltresult = /obj/item/ingot/copper
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/neck/leather/good
 	max_integrity = INTEGRITY_POOR
 
 
@@ -357,7 +359,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/neck/plate
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
@@ -383,7 +385,7 @@
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/neck/gorget
@@ -402,7 +404,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/neck/plate/bad
 	body_parts_covered = NECK
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
@@ -460,10 +462,9 @@
 	. = ..()
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
-	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
-		return
+/obj/item/clothing/neck/gorget/explosive/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/collar_detonator))
+		return NONE
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
@@ -471,6 +472,7 @@
 	else
 		to_chat(user, "Collar is already unlocked!")
 
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
@@ -509,10 +511,13 @@
 	if(!istype(loc, /mob/living/carbon))
 		qdel(src)
 		return
+
 	var/mob/living/carbon/soon_to_be_headless = loc
 	var/obj/item/bodypart/head/to_decap = soon_to_be_headless.get_bodypart(BODY_ZONE_HEAD)
 	if(to_decap)
-		to_decap.dismember(BRUTE) //its a NECK collar
+		if(!istype(to_decap))
+			stack_trace("get_bodypart(BODY_ZONE_HEAD) returned something that isn't a head.")
+		to_decap.dismember(BRUTE, zone_precise = BODY_ZONE_PRECISE_NECK, forced = TRUE) //its a NECK collar
 
 	qdel(src)
 
@@ -545,24 +550,27 @@
 	grid_height = 32
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!iscarbon(target))
-		return
+/obj/item/collar_detonator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!iscarbon(interacting_with))
+		return NONE
 
-	var/mob/living/carbon/to_bomb = target
+	var/mob/living/carbon/to_bomb = interacting_with
+
 	var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
+
 	if(istype(collar))
 		collar.prepare_to_go_boom()
 	else
 		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
 	smeltresult = /obj/item/ingot/bronze
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 
 /obj/item/clothing/neck/highcollier
 	name = "high collier"
@@ -573,7 +581,7 @@
 	body_parts_covered = NECK|MOUTH|EARS
 	slot_flags = ITEM_SLOT_NECK
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 	resistance_flags = FIRE_PROOF
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
@@ -619,7 +627,7 @@
 	desc = "A thicker piece of chain neck protection made from iron, though, this one only covers the neck and mouth when pulled up."
 	icon_state = "ihigh_collier"
 	body_parts_covered = NECK|MOUTH
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_STRONG
 	smeltresult = /obj/item/ingot/iron
 	melt_amount = 100
@@ -654,25 +662,35 @@
 	icon_state = "horus"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	sellprice = 30
+	sellprice = 75
 
 /obj/item/clothing/neck/mercator/examine()
 	. = ..()
-	. += span_info("Click on a turf or an item to see how much it is worth.")
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
-	. = ..()
+/obj/item/clothing/neck/mercator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	var/total_sellprice = 0
-	if(isturf(A))
-		for(var/obj/item/I in A.contents)
-			total_sellprice += I.sellprice
+
+	if(isturf(interacting_with))
+		visible_message("[user] peers at the items on the [interacting_with] through their amulet.")
+
+		for(var/obj/item/assessed_item in interacting_with)
+			total_sellprice += assessed_item.sellprice
+
 		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
-	else if(istype(A, /obj/item))
-		var/obj/item/I = A
-		total_sellprice += I.sellprice
-		for(var/obj/item/item in I.contents)
+		return ITEM_INTERACT_SUCCESS
+
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] peers at the [interacting_with] through their amulet.")
+
+		var/obj/item/assessed_item = interacting_with
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
 			total_sellprice += item.sellprice
+
 		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"

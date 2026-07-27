@@ -60,7 +60,7 @@
 	if(ic_blocked)
 		//The filter warning message shows the sanitized message though.
 		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
-		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
+		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, LOWER_TEXT(config.ic_filter_regex.match))
 		return
 
 	var/list/message_mods = list()
@@ -106,7 +106,9 @@
 		if(end)
 			return
 
-	language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
+	// If language not set in proc, grab one.
+	if(!language)
+		language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
 	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
 	var/signed = speaker_language?.flags & SIGNLANG
 
@@ -206,11 +208,11 @@
 /mob/proc/can_see_runechat(atom/movable/speaker)
 	if(!client || !client.prefs)
 		return FALSE
-	if(client.prefs.toggles_maptext & DISABLE_RUNECHAT)
+	if(client.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT)
 		return FALSE
 	if(stat >= UNCONSCIOUS)
 		return FALSE
-	if(!ismob(speaker) && !client.prefs.see_chat_non_mob)
+	if(!ismob(speaker) && !client.prefs.read_preference(/datum/preference/toggle/see_chat_non_mob))
 		return FALSE
 	return TRUE
 
@@ -229,7 +231,7 @@
 		deaf_type = 2 // Since you should be able to hear myself without looking
 
 	// Create map text prior to modifying message for goonchat
-	if(can_see_runechat(speaker) && can_hear())
+	if(can_see_runechat(speaker) && !HAS_TRAIT(src, TRAIT_DEAF))
 		create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
@@ -238,7 +240,7 @@
 		message = "<I>... You can almost hear something ...</I>"
 	else if(isliving(speaker))
 		var/mob/living/living_speaker = speaker
-		if(living_speaker != src && living_speaker.client && src.can_hear()) //src.client already checked above
+		if(living_speaker != src && living_speaker.client && !HAS_TRAIT(src, TRAIT_DEAF)) //src.client already checked above
 			log_message("heard [key_name(living_speaker)] say: [raw_message]", LOG_SAY, "#0978b8", FALSE)
 
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
@@ -307,9 +309,9 @@
 			if(player_mob.client.holder && isobserver(player_mob))
 				if(!player_mob.client.prefs)
 					continue
-				if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
+				if(eavesdrop_range && !(player_mob.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
 					continue
-				if(!(player_mob.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
+				if(!(player_mob.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
 					continue
 				the_dead[player_mob] = TRUE
 				listening |= player_mob
@@ -360,7 +362,7 @@
 	//speech bubble
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
-		if(M.client && M.client.prefs.toggles_maptext & DISABLE_RUNECHAT)
+		if(M.client && M.client.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT)
 			speech_bubble_recipients |= M.client
 
 	if(length(speech_bubble_recipients))
@@ -389,9 +391,9 @@
 				continue
 			if(player_mob.z != z || get_dist(player_mob, src) > message_range) //they're out of range of normal hearing
 				if(player_mob.client.prefs)
-					if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
+					if(eavesdrop_range && !(player_mob.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
 						continue
-					if(!(player_mob.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
+					if(!(player_mob.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
 						continue
 			listening |= player_mob
 
@@ -419,7 +421,7 @@
 	//speech bubble
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in understanders)
-		if(M.client && M.client.prefs.toggles_maptext & DISABLE_RUNECHAT)
+		if(M.client && M.client.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT)
 			speech_bubble_recipients |= M.client
 
 	if(length(speech_bubble_recipients))

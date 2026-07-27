@@ -89,7 +89,6 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NOMOBSWAP" = TRAIT_NOMOBSWAP,
 		"TRAIT_XRAY_VISION" = TRAIT_XRAY_VISION,
 		"TRAIT_THERMAL_VISION" = TRAIT_THERMAL_VISION,
-		"TRAIT_SURGEON" = TRAIT_SURGEON,
 		"TRAIT_STRONG_GRABBER" = TRAIT_STRONG_GRABBER,
 		"TRAIT_MAGIC_CHOKE" = TRAIT_MAGIC_CHOKE,
 		"TRAIT_SOOTHED_THROAT" = TRAIT_SOOTHED_THROAT,
@@ -107,6 +106,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_KNOW_KEEP_DOORS" = TRAIT_KNOW_KEEP_DOORS,
 		"TRAIT_KNOW_INQUISITION_DOORS" = TRAIT_KNOW_INQUISITION_DOORS,
 		"TRAIT_KNOW_THIEF_DOORS" = TRAIT_KNOW_THIEF_DOORS,
+		"TRAIT_KNOW_COURTAGENT_DOORS" = TRAIT_KNOW_COURTAGENT_DOORS,
 		"TRAIT_KNOW_ROUS_DOORS" = TRAIT_KNOW_ROUS_DOORS,
 		"Blessing of Baotha" = TRAIT_CRACKHEAD,
 		"Blessing of Graggar" = TRAIT_ORGAN_EATER,
@@ -148,7 +148,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Critical Weakness" = TRAIT_CRITICAL_WEAKNESS,
 		"Awoken" = TRAIT_MANIAC_AWOKEN,
 		"Indefatigable" = TRAIT_NOSTAMINA,
-		"Fatal Insomnia" = TRAIT_NOSLEEP,
+		"Fatal Insomnia" = TRAIT_SLEEPIMMUNE,
 		"Fast Sleeper" = TRAIT_FASTSLEEP,
 		"Nudist" = TRAIT_NUDIST,
 		"Inhumen Anatomy" = TRAIT_INHUMANE_ANATOMY,
@@ -207,6 +207,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Agent of the Court" = TRAIT_COURTAGENT,
+		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
+		"Virgin" = TRAIT_VIRGIN,
+		"Gatekeeper" = TRAIT_GATEKEEPER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -255,7 +259,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CRITICAL_WEAKNESS = span_danger("I am weak to wounds that others could survive."),
 	TRAIT_MANIAC_AWOKEN = span_danger("I am <b>WAKING UP</b> and the sheeple know this. They will resist."),
 	TRAIT_NOSTAMINA = "I have boundless energy, I will never tire.",
-	TRAIT_NOSLEEP = span_warning("I can't sleep."),
+	TRAIT_SLEEPIMMUNE = span_warning("I can't sleep."),
 	TRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	TRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
 	TRAIT_MANEATER_IMMUNITY = "I am left untouched by maneaters.",
@@ -346,6 +350,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
+	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
+	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches.")
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

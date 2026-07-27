@@ -49,6 +49,7 @@
 
 	outfit = /datum/outfit/forestenforcer
 	give_bank_account = 40
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -57,9 +58,12 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_FORAGER
+		TRAIT_MEDIUMARMOR,
+		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
 
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestenforcer/after_spawn(mob/living/carbon/human/spawned, client/player_client)

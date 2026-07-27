@@ -95,6 +95,6 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 			"<h1>[SPAN_GOD_ASTRATA("<center>ASTRATA HAS NOTICED YOU</center>")]</h1>",
 			"<h2>[span_boldannounce("<center>THE DAEWALKER APPROACHES</center>")]</h2>"
 		))
-		var/vol = suckhead.client.prefs?.musicvol
+		var/vol = suckhead.client.prefs?.read_preference(/datum/preference/numeric/musicvol)
 		if(vol)
 			suckhead.playsound_local(M.current, 'sound/music/daewalkerintro.ogg', vol)

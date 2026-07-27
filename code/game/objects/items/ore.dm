@@ -143,7 +143,7 @@
 
 	max_integrity = 500
 	resistance_flags = FIRE_PROOF
-	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	armor_type = /datum/armor/cursedrosa
 	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
 
 /obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
@@ -164,17 +164,22 @@
 	else
 		. += span_info("Its thorns have been trimmed.")
 
-/obj/item/ore/cursedrosa/attackby(obj/item/I, mob/living/user, params)
-	if(!user.cmode && istype(I, /obj/item/weapon/knife))
-		var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
-		if(QDELETED(thorns))
-			to_chat(user, span_warning("It has no thorns to trim."))
-		else
-			user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
-			playsound(I, 'sound/items/flint.ogg', 100, TRUE)
-			qdel(thorns)
-		return
-	return ..()
+/obj/item/ore/cursedrosa/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/weapon/knife))
+		return NONE
+
+	var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
+	if(QDELETED(thorns))
+		to_chat(user, span_warning("It has no thorns to trim."))
+	else
+		user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
+		playsound(tool, 'sound/items/flint.ogg', 100, TRUE)
+		qdel(thorns)
+
+	return ITEM_INTERACT_SUCCESS
 
 /* ............Ingots............ */
 /obj/item/ingot
