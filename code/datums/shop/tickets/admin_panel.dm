@@ -155,7 +155,7 @@
 	for(var/datum/ticket_template/D as anything in subtypesof(/datum/ticket_template))
 		if(IS_ABSTRACT(D))
 			continue
-		var/datum/ticket_template/instance = new path()
+		var/datum/ticket_template/instance = new D()
 		out += list(instance.to_ui_list())
 		qdel(instance)
 	return out

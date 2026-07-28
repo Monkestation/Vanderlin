@@ -86,11 +86,10 @@
 	var/list/_entries_by_type = list()
 	entries_by_type = _entries_by_type
 
-	for(var/I in typesof(/datum/config_entry))	//typesof is faster in this case
-		var/datum/config_entry/E = I
-		if(initial(E.abstract_type) == I)
+	for(var/datum/config_entry/E as anything in typesof(/datum/config_entry))	//typesof is faster in this case
+		if(IS_ABSTRACT(E))
 			continue
-		E = new I
+		E = new E
 		var/esname = E.name
 		var/datum/config_entry/test = _entries[esname]
 		if(test)
@@ -98,7 +97,7 @@
 			qdel(E)
 			continue
 		_entries[esname] = E
-		_entries_by_type[I] = E
+		_entries_by_type[E.type] = E
 
 /datum/controller/configuration/proc/RemoveEntry(datum/config_entry/CE)
 	entries -= CE.name
