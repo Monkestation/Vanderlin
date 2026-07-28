@@ -448,7 +448,6 @@
 	desc = SPAN_GOD_XYLIX("Oh frabjous dae, calooh callay! The Silver-Tongue's guffaw keeps my troubles at bay!")
 
 /datum/stress_event/campfire
-
 	desc = span_green("The warmth of the fire is comforting.")
 	stress_change = -1
 	timer = 1 MINUTES

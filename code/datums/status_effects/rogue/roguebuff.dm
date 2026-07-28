@@ -1026,30 +1026,13 @@
 	desc = "It is nice and warm, I'm recovering my energy."
 	icon_state = "campfire"
 
-#define CAMPFIRE_BASE_FILTER "campfire_stamina"
 
 /datum/status_effect/buff/campfire_stamina
 	id = "stamina_campfire"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/campfire_stamina
-	duration = -1
-	var/outline_colour = "#7e6a3e"
-
-/datum/status_effect/buff/campfire_stamina/on_apply()
-	..()
-
-	var/filter = owner.get_filter(CAMPFIRE_BASE_FILTER)
-	if (!filter)
-		owner.add_filter(CAMPFIRE_BASE_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
-	return TRUE
+	duration = 5 SECONDS
 
 /datum/status_effect/buff/campfire_stamina/tick()
 	if(owner.cmode)
 		return
 	owner.adjust_energy(5)
-
-/datum/status_effect/buff/campfire_stamina/on_remove()
-	..()
-
-	owner.remove_filter(CAMPFIRE_BASE_FILTER)
-
-#undef CAMPFIRE_BASE_FILTER

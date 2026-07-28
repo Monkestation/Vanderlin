@@ -14,7 +14,6 @@
 	var/temperature_change = 20
 	var/temperature_weight = 1
 	var/temperature_falloff = 0.9
-	var/datum/proximity_monitor/proximity_monitor
 	var/resting_range = 0
 
 /obj/machinery/light/fueled/Initialize()
@@ -30,27 +29,16 @@
 	. = ..()
 
 /obj/machinery/light/fueled/Destroy()
-	QDEL_NULL(proximity_monitor)
-	for(var/mob/living/carbon/human/human in range(resting_range, src))
-		human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
-	QDEL_NULL(soundloop)
+	if(soundloop)
+		QDEL_NULL(soundloop)
 
 	GLOB.fires_list -= src
 	remove_temp_effect()
-
 	return ..()
 
 
 /obj/machinery/light/fueled/seton(s)
 	. = ..()
-	if(on)
-		if(resting_range && !proximity_monitor)
-			proximity_monitor = new /datum/proximity_monitor/campfire(src, resting_range)
-
-			for(var/mob/living/carbon/human/human in range(resting_range, src))
-				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
-				human.add_stress(/datum/stress_event/campfire)
-
 	if(temperature_change)
 		propagate_temp_change(temperature_change, temperature_weight, temperature_falloff)
 
@@ -91,10 +79,6 @@
 	..()
 
 /obj/machinery/light/fueled/burn_out()
-	QDEL_NULL(proximity_monitor)
-	for(var/mob/living/carbon/human/human in range(resting_range, src))
-		human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
-
 	if(soundloop)
 		soundloop.stop()
 	if(on)
@@ -114,6 +98,10 @@
 	else
 		GLOB.fires_list -= src
 
+/obj/machinery/light/fueled/Destroy()
+	QDEL_NULL(soundloop)
+	GLOB.fires_list -= src
+	. = ..()
 
 /obj/machinery/light/fueled/fire_act(added, maxstacks)
 	if(!on && ((fueluse > 0) || (initial(fueluse) == 0)))
@@ -301,25 +289,8 @@
 				holder.held_mob?.IgniteMob()
 				holder.update_appearance()
 
-/obj/machinery/light/fueled/HasProximity(atom/movable/target)
-	if(!on || !ishuman(target))
-		return
+		if(resting_range > 0)
+			for(var/mob/living/carbon/human/human in range(resting_range, src))
+				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
+				human.add_stress(/datum/stress_event/campfire)
 
-	var/mob/living/carbon/human/human = target
-
-	human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
-	human.add_stress(/datum/stress_event/campfire)
-
-/datum/proximity_monitor/campfire
-	parent_type = /datum/proximity_monitor
-
-/datum/proximity_monitor/campfire/on_uncrossed(atom/source, atom/movable/gone, direction)
-
-	if(!ishuman(gone))
-		return
-
-	if(get_dist(gone, host) <= current_range)
-		return
-
-	var/mob/living/carbon/human/human = gone
-	human.remove_status_effect(/datum/status_effect/buff/campfire_stamina)
