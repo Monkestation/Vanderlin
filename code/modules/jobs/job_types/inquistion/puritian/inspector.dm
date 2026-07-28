@@ -104,10 +104,7 @@
 		"Nerve Staple - No Mood",
 		"Nightmare Ward - No Sleep and Anti-Scrying",
 		"Serpentine Glands - Thermal Vision and Venom")
-	//only four options
-	enhancements = shuffle(enhancements)
-	enhancements.Cut(4, 0)
-	enhancements += "Disguise Kit - Deceiving Meekness" //Always give this option
+		"Disguise Kit - Deceiving Meekness"
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
