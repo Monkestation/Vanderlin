@@ -353,16 +353,6 @@
 /obj/item/weapon/tongs,
 /turf/open/floor/cobble,
 /area/indoors)
-"ba" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood2";
-	dir = 10
-	},
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/turf/open/floor/carpet,
-/area/indoors)
 "bb" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood2";
@@ -74534,7 +74524,7 @@ aK
 aN
 aR
 aW
-ba
+aD
 bf
 bi
 bl
