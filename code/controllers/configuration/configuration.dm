@@ -26,6 +26,10 @@
 
 	var/static/regex/ic_filter_regex
 
+/datum/controller/configuration/stat_entry(msg)
+	msg = "Edit"
+	return msg
+
 /datum/controller/configuration/proc/admin_reload()
 	if(IsAdminAdvancedProcCall())
 		return
