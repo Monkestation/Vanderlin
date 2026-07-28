@@ -158,7 +158,7 @@
 	item_state = "freiboots"
 	max_integrity = ARMOR_INT_SIDE_HARDLEATHER + 50
 
-/obj/item/clothing/shoes/otavan
+/obj/item/clothing/shoes/grenzel
 	name = "grenzelhoftian leather boots"
 	desc = "Boots of outstanding craft, your fragile feet have never felt so protected and comfortable before."
 	body_parts_covered = FEET
@@ -170,7 +170,7 @@
 	armor_type = /datum/armor/boots/leather/good
 	wetable = FALSE
 
-/obj/item/clothing/shoes/otavan/inqboots
+/obj/item/clothing/shoes/grenzel/inqboots
 	name = "inquisitorial boots"
 	examine_name = "boots"
 	desc = "The steel-lined heels click."

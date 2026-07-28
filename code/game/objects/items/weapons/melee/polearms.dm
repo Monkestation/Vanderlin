@@ -44,7 +44,7 @@
 	desc = "The ultimate tool of travel for weary wanderers, support your weight or crack the heads that don't support you."
 	icon_state = "woodstaff"
 	force =  DAMAGE_STAFF
-	force_wielded =  DAMAGE_STAFF_WIELD - 1
+	force_wielded =  DAMAGE_STAFF_WIELD
 	wdefense = GREAT_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
@@ -72,7 +72,7 @@
 	name = "wooden quarterstaff"
 	desc = "A staff that makes any journey easier. Durable and swift, capable of bludgeoning stray volves and ruffians alike."
 	icon_state = "quarterstaff"
-	force_wielded =  DAMAGE_STAFF_WIELD
+	force_wielded =  DAMAGE_STAFF_WIELD + 3
 	max_integrity = INTEGRITY_STRONG * 0.8
 	sellprice = 10
 	item_weight = 1.2 KILOGRAMS
@@ -82,6 +82,8 @@
 	name = "iron quarterstaff"
 	desc = "A perfect tool for bounty hunters who prefer their prisoners broken and bruised but not slain. This reinforced staff is capable of clubbing even an armed opponent into submission with some carefully placed strikes."
 	icon_state = "quarterstaff_iron"
+	force = DAMAGE_STAFF + 4
+	force_wielded = DAMAGE_STAFF_WIELD + 5
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	minstr = 7
@@ -94,7 +96,8 @@
 	name = "steel quarterstaff"
 	desc = "An unusual sight, a knightly combat staff made out of worked steel and reinforced wood. It is a heavy and powerful weapon, more than capable of beating the living daylights out of any brigand."
 	icon_state = "quarterstaff_steel"
-	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	force = DAMAGE_STAFF + 6
+	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 7
@@ -107,7 +110,8 @@
 	name = "silver quarterstaff"
 	desc = "A quarterstaff with silver reinforcements, more effective against supernatural foes than a steel quarterstaff."
 	icon_state = "quarterstaff_silver"
-	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	force = DAMAGE_STAFF + 6
+	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 7
@@ -124,7 +128,7 @@
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
 	icon_state = "seerstaff"
-	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	force_wielded =  DAMAGE_STAFF_WIELD + 3
 	sellprice = 100
 	item_weight = 1.2 KILOGRAMS
 
@@ -337,7 +341,7 @@
 
 /obj/item/weapon/polearm/spear/javelin
 	name = "copper javelin"
-	desc = "Made for throwing, long out of favor and using inferior metals, it still can kill when the aim is true."
+	desc = "Made for throwing, long out of favor and using inferior metals, it can still kill when your aim is true."
 	icon_state = "cspear"
 	force = DAMAGE_SPEAR - 2
 	force_wielded = DAMAGE_SPEAR + 2
@@ -382,7 +386,7 @@
 
 /obj/item/weapon/polearm/spear/javelin/steel
 	name = "steel javelin"
-	desc = "A sturdy javelin made from steel, suitable to hunt knightly foes."
+	desc = "A sturdy javelin made from steel, suitable for hunting knightly foes."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "javelin"
 	melting_material = /datum/material/steel
@@ -398,7 +402,7 @@
 
 /obj/item/weapon/polearm/spear/javelin/silver
 	name = "silver javelin"
-	desc = "A sturdy javelin made from silver, suitable to hunt supernatural foes."
+	desc = "A sturdy javelin made from silver, suitable for hunting supernatural foes."
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "sjavelin"
 	gripsprite = FALSE
@@ -418,7 +422,7 @@
 
 /obj/item/weapon/polearm/spear/bone
 	name = "bone javelin"
-	desc = "Made by the tribes of the wilds for hunting, this spear has will eventually kill your prey, if aim remains true."
+	desc = "Made by the tribes of the wilds for hunting, this spear will eventually kill your prey, if your aim remains true."
 	icon_state = "bspear"
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
@@ -443,7 +447,7 @@
 
 /obj/item/weapon/polearm/spear/trollbone
 	name = "troll-horn bone javelin"
-	desc = "Made by the tribes of the wilds for hunting, and strengthed with a troll's horn, this spear has will outlast your prey, if aim remains true."
+	desc = "Made by the tribes of the wilds for hunting, and strengthened with a troll's horn, this spear will outlast your prey, if your aim remains true."
 	icon_state = "bspear"
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
@@ -881,7 +885,7 @@
 			if("wielded")
 				return list("shrink" = 0.6,"sx" = 4,"sy" = -2,"nx" = -3,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 
-/obj/item/weapon/polearm/woodstaff/naledi
+/obj/item/weapon/polearm/woodstaff/psydonian
 	name = "psydonian warstaff"
 	desc = "A staff carrying the black and gold insignia of the war scholars."
 	icon_state = "naledistaff"
@@ -892,7 +896,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 1 KILOGRAMS
 
-/obj/item/weapon/polearm/woodstaff/naledi/getonmobprop(tag)
+/obj/item/weapon/polearm/woodstaff/psydonian/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)

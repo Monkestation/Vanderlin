@@ -1,0 +1,5 @@
+author: "PotatoTomahto"
+delete-after: True
+changes:
+  - rscadd: "yawns can propagate and you can make eye contact"
+  - rscadd: "viewing descriptors is moved to examining twice quickly"

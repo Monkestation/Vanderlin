@@ -189,7 +189,7 @@
 	desc = "A pair of white pants decorated with red stripes and traditional patterning."
 	icon_state = "shepherdpants"
 
-/obj/item/clothing/pants/trou/leather/kazengun //no, not 'eastpants3', silly!
+/obj/item/clothing/pants/trou/leather/blackmeadow //no, not 'eastpants3', silly!
 	name = "gambeson trousers"
 	desc = "A form of Blackmeadow peasant's trousers. The fabric used in their manufacture is strong, and could probably turn away a few blows."
 	icon_state = "baggypants"

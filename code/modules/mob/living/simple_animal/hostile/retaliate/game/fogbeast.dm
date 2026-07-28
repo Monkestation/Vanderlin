@@ -2,7 +2,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 
 /mob/living/simple_animal/hostile/retaliate/honse
 	name = "honse mare"
-	desc = "A distant cousin to the saiga, hailing from the mysterious islands of Kaizoku - rarer, but more strongly valued. Extensively used in the Steppes of Aavnr as pack animals and combat mounts."
+	desc = "A distant cousin to the saiga. Extensively used in the Steppe as pack animals and combat mounts."
 	icon = 'icons/mob/monster/fogbeast.dmi'
 	icon_state = "fogbeast"
 	icon_living = "fogbeast"
@@ -201,7 +201,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 // FOAL
 /mob/living/simple_animal/hostile/retaliate/honse/kid
 	name = "honse filly"
-	desc = "A young honse, likely to be running around with its mother. Honses are a distant cousin to the saiga, hailing from the mysterious islands of Kaizoku - rarer, but more strongly valued. Extensively used in the Steppes of Aavnr as pack animals and combat mounts."
+	desc = "A young honse, likely to be running around with its mother. Honses are a distant cousin to the saiga. Extensively used in the Steppe as pack animals and combat mounts."
 	icon = 'icons/mob/monster/fogbeast.dmi'
 	icon_state = "foggie"
 	icon_living = "foggie"

@@ -1,12 +1,12 @@
 
-/obj/item/clothing/armor/chainmail/hauberk/atgervi
+/obj/item/clothing/armor/chainmail/hauberk/dwarven
 	name = "dwarven-make hauberk"
 	desc = "The pride of mercenaries from the Dwarven Federation, a well crafted blend of chain and leather into a dense protective coat."
 	icon_state = "atgervi_raider_mail"
 	item_state = "atgervi_raider_mail"
 	max_integrity = 400
 
-/obj/item/clothing/armor/leather/atgervi
+/obj/item/clothing/armor/leather/shamancoat
 	name = "shaman's coat"
 	desc = "A furred protective coat, often made by hand from a beast killed in the bearer's hunt."
 	icon_state = "atgervi_shaman_coat"
@@ -15,57 +15,57 @@
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 
-/obj/item/clothing/armor/leather/atgervi/advanced
+/obj/item/clothing/armor/leather/shamancoat/advanced
 	name = "hardened shaman's coat"
 	desc = "A thick, furred protective coat, often made by hand expertly from a beast killed in the bearer's hunt."
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/leather/advanced
 
-/obj/item/clothing/armor/leather/atgervi/masterwork
+/obj/item/clothing/armor/leather/shamancoat/masterwork
 	name = "masterwork shaman's coat"
-	desc = "This coat was masterfully hand crafted with dendors blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
+	desc = "This coat was masterfully hand crafted with Dendor's blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/leather/master
 
-/obj/item/clothing/armor/leather/atgervi/masterwork/Initialize()
+/obj/item/clothing/armor/leather/shamancoat/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 
-/obj/item/clothing/pants/trou/leather/atgervi
+/obj/item/clothing/pants/trou/leather/furpants
 	name = "fur pants"
 	desc = "Thick fur pants made to endure the coldest winds, offering a share of protection from fang and claw of beast or men alike."
 	icon_state = "atgervi_pants"
 	item_state = "atgervi_pants"
 
-/obj/item/clothing/pants/trou/leather/atgervi/advanced
+/obj/item/clothing/pants/trou/leather/furpants/advanced
 	name = "hardened fur chausses"
 	desc = "Expertly made thick fur pants made to endure the coldest winds, offering a measure of protection from fang and claw of beast or men alike."
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor_type = /datum/armor/pants/leather/advanced
 
-/obj/item/clothing/pants/trou/leather/atgervi/masterwork
+/obj/item/clothing/pants/trou/leather/furpants/masterwork
 	name = "masterwork fur chausses"
 	desc = "Masterfully made thick fur pants made to endure extreme winter winds, offering a reliable amount of protection from fang, and claw of beast or men alike."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor_type = /datum/armor/pants/leather/master
 
-/obj/item/clothing/pants/trou/leather/atgervi/masterwork/Initialize()
+/obj/item/clothing/pants/trou/leather/furpants/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 
-/obj/item/clothing/gloves/angle/atgervi
+/obj/item/clothing/gloves/angle/furlined
 	name = "fur-lined leather gloves"
 	desc = "Thick, padded gloves made for the harshest of climates, and wildest of beasts encountered in the untamed lands."
 	icon_state = "atgervi_raider_gloves"
 	item_state = "atgervi_raider_gloves"
 
-/obj/item/clothing/gloves/angle/atgervi/advanced
+/obj/item/clothing/gloves/angle/furlined/advanced
 	name = "hardened fur-lined leather gloves"
 	desc = "Thick, well padded gloves made for the harshest of climates, and wildest- and most dangeress- of beasts encountered in the untamed lands."
 	icon_state = "atgervi_raider_gloves"
@@ -74,24 +74,24 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor_type = /datum/armor/gloves/leather/advanced
 
-/obj/item/clothing/gloves/angle/atgervi/masterwork
+/obj/item/clothing/gloves/angle/furlined/masterwork
 	name = "masterwork fur-lined leather gloves"
 	desc = "Thick, masterfully padded gloves made for the harshest, most extreme of climates, and wildest- and most dangeress- of beasts encountered in the untamed lands."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor_type = /datum/armor/gloves/leather/master
 
-/obj/item/clothing/gloves/angle/atgervi/masterwork/Initialize()
+/obj/item/clothing/gloves/angle/furlined/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
-/obj/item/clothing/gloves/plate/atgervi
+/obj/item/clothing/gloves/plate/beastclaws
 	name = "beast claws"
 	desc = "A menacing pair of plated claws, a ceremonial weapon of the Osslandic hunters. The four claws symbolize the four godly aspects they revere."
 	icon_state = "atgervi_shaman_gloves"
 	item_state = "atergvi_shaman_gloves"
 
-/obj/item/clothing/head/helmet/bascinet/atgervi
+/obj/item/clothing/head/helmet/bascinet/owl
 	name = "owl helmet"
 	desc = "A carefully forged steel helmet in the shape of an owl's face, with added chain to cover the face and neck against many blows."
 	icon_state = "atgervi_raider"
@@ -104,7 +104,7 @@
 	worn_x_dimension = 32
 	worn_y_dimension = 48
 
-/obj/item/clothing/head/helmet/leather/saiga/atgervi
+/obj/item/clothing/head/helmet/leather/saiga/moose
 	name = "moose hood"
 	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. A suitable memorial for a worthy beast."
 	icon_state = "atgervi_shaman"
@@ -118,13 +118,13 @@
 	experimental_inhand = TRUE
 	experimental_onhip = FALSE
 
-/obj/item/clothing/shoes/boots/leather/atgervi
-	name = "atgervi leather boots"
+/obj/item/clothing/shoes/boots/leather/furlined
+	name = "fur-lined leather boots"
 	desc = "A pair of strong leather boots, designed to endure battle and the chill of the frozen north both."
 	icon_state = "atgervi_boots"
 	item_state = "atgervi_boots"
 
-/obj/item/weapon/shield/atgervi
+/obj/item/weapon/shield/dwarvenkite
 	name = "kite shield"
 	desc = "A large but light wooden shield with a steel boss in the center to deflect blows more easily."
 	icon_state = "atgervi_shield"
@@ -140,14 +140,13 @@
 	max_integrity = 300
 	experimental_inhand = FALSE
 
-/obj/item/weapon/shield/atgervi/getonmobprop(tag)
+/obj/item/weapon/shield/dwarvenkite/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
 			if("onback")
 				return list("shrink" = 0.7,"sx" = -17,"sy" = -15,"nx" = -15,"ny" = -15,"wx" = -12,"wy" = -15,"ex" = -18,"ey" = -15,"nturn" = 0,"sturn" = 0,"wturn" = 180,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 1,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
-// Gronnic subtypes of atgervi clothes
 /obj/item/clothing/head/helmet/leather/shaman_hood
 	name = "moose hood"
 	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. A suitable memorial for a worthy beast."
@@ -179,21 +178,6 @@
 	light_inner_range = 3
 	light_power = 1
 	toggle_icon_state = TRUE
-
-/obj/item/clothing/head/helmet/leather/shaman_hood/equipped(mob/user, slot)
-	. = ..()
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		H.remove_status_effect(/datum/status_effect/debuff/lost_shaman_hood)
-		H.remove_stress(/datum/stress_event/shamanhoodlost)
-
-/obj/item/clothing/head/helmet/leather/shaman_hood/dropped(mob/user)
-	. = ..()
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.merctype == 1) //Atgervi
-			H.apply_status_effect(/datum/status_effect/debuff/lost_shaman_hood)
-			H.add_stress(/datum/stress_event/shamanhoodlost)
 
 /obj/item/clothing/head/helmet/leather/shaman_hood/Initialize(mapload)
 	. = ..()
@@ -285,7 +269,7 @@
 	update_icon()
 
 
-/obj/item/clothing/head/helmet/bascinet/atgervi/gronn
+/obj/item/clothing/head/helmet/bascinet/owl/gronn
 	name = "osslandic skull-helm"
 	desc = "A helmet of hardened leather with a carefully preserved animal skull. \
 			The skull integrated is a trophy of the bearer's great hunt, and a symbol of their reincarnation after death."
@@ -299,7 +283,7 @@
 	worn_x_dimension = 32
 	worn_y_dimension = 32
 
-/obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
+/obj/item/clothing/head/helmet/bascinet/owl/gronn/ownel
 	name = "osslandic scout's helmet"
 	desc = "A full helmet that adequately protect the eyes and head; \
 			The slits are decorated with a harsh gold dye - it is rumoured in Ossland to grant one the ability to see as keenly as The Hunter himself."

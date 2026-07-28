@@ -123,7 +123,6 @@
 
 /datum/species/human/halfdrow/get_skin_list()
 	return sortList(list(
-		"Zizo-Cursed" = SKIN_COLOR_ICECAP, // - (Pale)
 		"Parasite-Taineted" = SKIN_COLOUR_PARASITE_TAINTED, // - (Light purple)
 		"Mushroom-Minded" = SKIN_COLOR_MUSHROOM_MINDED, // - (Mid purple)
 		"Cave-Attuned" = SKIN_COLOR_CAVE_ATTUNED, // - (Deep purple)
