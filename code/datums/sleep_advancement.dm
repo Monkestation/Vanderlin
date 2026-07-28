@@ -25,6 +25,9 @@
 	var/list/remaining_modes = list()
 	var/list/daily_skill_xp = list()  // skill typepath -> raw XP earned today
 
+	/// Is the UI open?
+	var/ui_is_open = FALSE
+
 /datum/sleep_adv/New(datum/mind/passed_mind)
 	. = ..()
 	mind = passed_mind
@@ -155,6 +158,7 @@
 	daily_skill_xp = list()
 
 /datum/sleep_adv/proc/show_ui(mob/living/user)
+	ui_is_open = TRUE
 	var/list/dat = list()
 	SSassets.transport.send_assets(user.client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
 	dat += {"
@@ -219,11 +223,14 @@
 	viable_sleep = TRUE
 
 /datum/sleep_adv/proc/close_ui()
+	if(!ui_is_open)
+		return
 	if(viable_sleep)
 		mind?.has_studied = FALSE
 	if(!mind.current)
 		return
 	mind.current << browse(null, "window=dreams")
+	ui_is_open = FALSE
 
 /datum/sleep_adv/proc/process_sleep()
 	if(is_considered_sleeping())

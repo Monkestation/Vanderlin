@@ -26,6 +26,7 @@
 /datum/job/butler
 	title = JOB_BUTLER
 	f_title = "Head Housekeeper"
+	alt_titles = list("Majordomo", "Master of Staff")
 	tutorial = "You are elevated to near nobility, as you hold the distinguished position of master of the royal household staff. \
 	Your blade is a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
 	By your word the meals are served, the chambers kept, and the floors polished clean. \

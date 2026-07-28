@@ -307,9 +307,9 @@
 	item_type = /obj/item/clothing/face/facemask/steel/confessor
 	marquescost = 6
 
-/datum/inqports/equipment/otavansatchel
+/datum/inqports/equipment/grenzelsatchel
 	name = "1 Grenzelhoftian Leather Satchel"
-	item_type = /obj/item/storage/backpack/satchel/otavan
+	item_type = /obj/item/storage/backpack/satchel/grenzel
 	marquescost = 2
 
 /datum/inqports/equipment/surgerybag
@@ -391,7 +391,7 @@
 	detail_tag = "_detail"
 	color = "#5058c1"
 
-/obj/item/clothing/armor/gambeson/heavy/otavan/inq
+/obj/item/clothing/armor/gambeson/heavy/grenzel/inq
 	color = "#8b1414"
 	detail_color = "#99b2b1"
 
@@ -401,11 +401,11 @@
 	marquescost = 8
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/fencerset/populate_contents()
-	new /obj/item/clothing/armor/gambeson/heavy/otavan/inq(src)
+	new /obj/item/clothing/armor/gambeson/heavy/grenzel/inq(src)
 	new /obj/item/clothing/neck/fencerguard/inq(src)
-	new /obj/item/clothing/gloves/leather/otavan(src)
+	new /obj/item/clothing/gloves/leather/grenzel(src)
 	new /obj/item/clothing/pants/tights/colored/black(src)
-	new /obj/item/clothing/shoes/otavan(src)
+	new /obj/item/clothing/shoes/grenzel(src)
 
 /datum/inqports/wardrobe/confessionalcombo
 	name = "The Confessional Combination"
@@ -434,8 +434,8 @@
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/inspector/populate_contents()
 	new /obj/item/clothing/head/leather/inqhat(src)
 	new /obj/item/clothing/armor/medium/scale/inqcoat/armored(src)
-	new /obj/item/clothing/gloves/leather/otavan/inqgloves(src)
-	new /obj/item/clothing/shoes/otavan/inqboots(src)
+	new /obj/item/clothing/gloves/leather/grenzel/inqgloves(src)
+	new /obj/item/clothing/shoes/grenzel/inqboots(src)
 
 /datum/inqports/wardrobe/fencersthree
 	name = "The Fencer's Gambeson Three-Pack"
@@ -444,7 +444,7 @@
 
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/fencersthree/populate_contents()
 	for(var/i in 1 to 3)
-		new /obj/item/clothing/armor/gambeson/heavy/otavan/inq(src)
+		new /obj/item/clothing/armor/gambeson/heavy/grenzel/inq(src)
 
 /datum/inqports/wardrobe/psydonianstandard
 	name = "The Inquisitorial Standard"
@@ -454,7 +454,7 @@
 /obj/structure/closet/crate/chest/inqcrate/wardrobe/psydonian/populate_contents()
 	new /obj/item/clothing/pants/tights/colored/black(src)
 	new /obj/item/clothing/armor/gambeson/heavy/inq(src)
-	new /obj/item/clothing/gloves/leather/otavan(src)
+	new /obj/item/clothing/gloves/leather/grenzel(src)
 	new /obj/item/clothing/shoes/psydonboots(src)
 
 /datum/inqports/wardrobe/nobledressup
