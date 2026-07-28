@@ -302,10 +302,10 @@
 	keys = list(/obj/item/key/warehouse, /obj/item/key/merchant)
 
 /obj/item/storage/keyring/tombwarden
-	keys = list(/obj/item/key/tombwarden, /obj/item/key/mercenary, /obj/item/key/tomb)
+	keys = list(/obj/item/key/tombwarden, /obj/item/key/tomb)
 
 /obj/item/storage/keyring/mercenary
-	keys = list(/obj/item/key/mercenary, /obj/item/key/tomb)
+	keys = list(/obj/item/key/mercenary)
 
 /obj/item/storage/keyring/master_of_crafts_and_labor
 	keys = list(/obj/item/key/elder, /obj/item/key/blacksmith,/obj/item/key/tailor,/obj/item/key/tavern,/obj/item/key/apothecary, /obj/item/key/butcher, /obj/item/key/soilson,/obj/item/key/artificer,/obj/item/key/clinic)

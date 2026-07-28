@@ -11,21 +11,13 @@
 	return ..()
 
 /datum/organ_process/lungs/handle_process(mob/living/carbon/owner, delta_time, times_fired)
-	handle_breathing(owner, delta_time, times_fired)
-	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
-	lungs?.cough_blood(delta_time)
-	return TRUE
-
-/datum/organ_process/lungs/proc/handle_breathing(mob/living/carbon/owner, delta_time, times_fired)
 	var/next_breath = 4
-	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
-	var/obj/item/organ/heart/heart = owner.getorganslot(ORGAN_SLOT_HEART)
-	if(lungs && lungs.get_slot_efficiency(ORGAN_SLOT_LUNGS) <= failing_threshold)
+	if(owner.getorganslotefficiency(slot) <= failing_threshold)
 		next_breath--
-	if(heart && heart.get_slot_efficiency(ORGAN_SLOT_HEART) <= failing_threshold)
+	if(owner.getorganslotefficiency(ORGAN_SLOT_HEART) <= failing_threshold)
 		next_breath--
-
 	var/owner_failed_breath = owner.failed_last_breath
+
 	if((times_fired % next_breath) == 0 || owner_failed_breath)
 		// Breathe per 4 ticks if healthy, down to 2 if our lungs or heart are damaged, unless suffocating
 		breathe(owner, delta_time, times_fired, owner_failed_breath ? 1 : next_breath)
@@ -33,47 +25,16 @@
 		var/obj/location_as_object = owner.loc
 		location_as_object.handle_internal_lifeform(owner, 0)
 
-/*
-	var/lung_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_LUNGS)
-	var/effective_oxygenation = ((100 - owner.getOxyLoss()) * (lung_efficiency/optimal_threshold))
-
-	if(effective_oxygenation < owner.total_oxygen_req)
-		if(DT_PROB(0.5, delta_time))
-			if(owner.body_position != LYING_DOWN)
-				owner.visible_message(span_danger("<b>[owner]</b> falls to the ground and hyperventilates!"), \
-								span_userdanger("I need more air!"))
-			else
-				owner.visible_message(span_danger("<b>[owner]</b> hyperventilates!"), \
-					span_userdanger("I need more air!"))
-			owner.Knockdown(8 SECONDS)
-			INVOKE_ASYNC(src, PROC_REF(gasp_spam), owner)
-		if(DT_PROB(2, delta_time))
-			owner.adjust_eye_blur_up_to(5, 5)
-			owner.adjust_confusion(16)
-		if(DT_PROB(2, delta_time))
-			owner.emote("gasp")
-			owner.losebreath = max(owner.losebreath, rand(8, 16))
-		if(DT_PROB(4, delta_time))
-			owner.emote("cough")
-	if(effective_oxygenation < (owner.total_oxygen_req/5))
-		if(DT_PROB(20, delta_time))
-			ADJUSTBRAINLOSS(owner, BRAIN_DAMAGE_LOWEST_OXYGENATION)
-		if(effective_oxygenation < (owner.total_oxygen_req/10))
-			ADJUSTBRAINLOSS(owner, BRAIN_DAMAGE_LOWEST_OXYGENATION)
-
-/datum/organ_process/lungs/proc/gasp_spam(mob/living/carbon/victim)
-	for(var/i in 1 to 3)
-		if(QDELETED(victim))
-			return
-		if(prob(80))
-			victim.emote("gasp")
-		else
-			victim.emote("choke")
-		sleep(1 SECONDS)
-*/
+	return TRUE
 
 /datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, delta_time, times_fired, next_breath = 4)
-	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
+	var/obj/item/organ/lungs/lungs
+	var/highest_efficiency = 0
+	for(var/obj/item/organ/lungs/possible_lung as anything in owner.getorganslotlist(slot))
+		var/possible_efficiency = possible_lung.get_slot_efficiency(slot)
+		if(possible_efficiency >= highest_efficiency)
+			lungs = possible_lung
+			highest_efficiency = possible_efficiency
 	if((owner.pulledby?.grab_state >= GRAB_KILL) || (lungs?.is_failing()))
 		owner.losebreath++  //You can't breath at all when being choked or if your lungs are failing, so you're going to miss a breath
 

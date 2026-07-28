@@ -16,6 +16,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	advclass_cat_rolls = list(CTAG_ORPHAN = 7)
 	outfit = /datum/outfit/orphan
+	knows_the_town = TRUE
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_for_hag,

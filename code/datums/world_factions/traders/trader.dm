@@ -1,46 +1,7 @@
-/// Creates a human with the given parameters and returns an appearance of it
-/proc/get_dynamic_human_appearance(outfit_path, species_path = /datum/species/human, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE, animated = TRUE)
-	if(!species_path)
-		return FALSE
-	if(!ispath(species_path))
-		stack_trace("Attempted to call get_dynamic_human_appearance() with an instantiated species_path. Pass the species datum typepath instead.")
-		return FALSE
-	var/mob/living/carbon/human/dummy/dummy = new()
-	dummy.set_species(species_path)
-	dummy.stat = DEAD //this is to avoid side effects of mob spawners
-	dummy.underwear = "Nude"
-	dummy.undershirt = "Nude"
-	dummy.socks = "Nude"
-	if(outfit_path)
-		var/datum/outfit/outfit = new outfit_path()
-		dummy.equipOutfit(outfit, TRUE)
-	else if(mob_spawn_path)
-		var/obj/effect/mob_spawn/spawner = new mob_spawn_path(null, TRUE)
-		spawner.special(dummy, dummy)
-		spawner.equip(dummy)
-	for(var/obj/item/carried_item in dummy)
-		if(bloody_slots & carried_item.slot_flags)
-			carried_item.add_mob_blood(dummy)
-	var/mutable_appearance/output = dummy.appearance
-	qdel(dummy)
-	return output
-
-/proc/apply_dynamic_human_appearance(atom/target, outfit_path, species_path = /datum/species/human, mob_spawn_path, r_hand, l_hand, bloody_slots = NONE)
-	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(set_dynamic_human_appearance), args)
-
-///This proc gets an argument of a target and runs
-/proc/set_dynamic_human_appearance(list/arguments)
-	var/atom/target = arguments[1] //1st argument is the target
-	var/dynamic_appearance = get_dynamic_human_appearance(arglist(arguments.Copy(2))) //the rest of the arguments starting from 2 matter to the proc
-	//target.icon = 'icons/mob/human/human.dmi'
-	target.icon_state = ""
-	target.appearance_flags |= KEEP_TOGETHER
-	target.copy_overlays(dynamic_appearance, cut_old = TRUE)
-
-/obj/effect/mob_spawn/human/rakshari
+/obj/effect/mob_spawn/rakshari
 	mob_species = /datum/species/rakshari
 
-/obj/effect/mob_spawn/human/rakshari/trader
+/obj/effect/mob_spawn/rakshari/trader
 	outfit = /datum/outfit/tailor
 
 /mob/living/simple_animal/hostile/retaliate/trader
@@ -57,6 +18,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speed = 0
 	cmode = FALSE
+	del_on_death = TRUE
 
 	ai_controller = /datum/ai_controller/basic_controller/trader
 
@@ -69,31 +31,32 @@
 	///The currency name
 	var/currency_name = "zennies"
 	///The spawner we use to create our look
-	var/obj/effect/mob_spawn/human/spawner_path = /obj/effect/mob_spawn/human/rakshari/trader
-	///Our species to create our look
-	var/species_path = /datum/species/human
+	var/obj/effect/mob_spawn/spawner_path = /obj/effect/mob_spawn/rakshari/trader
 	///Casing used to shoot during retaliation
 	var/ranged_attack_casing = /obj/item/ammo_casing/caseless/arrow
 	///Sound to make while doing a retalitory attack
 	var/ranged_attack_sound = 'sound/combat/Ranged/flatbow-shot-01.ogg'
 	///Weapon path, for visuals
 	var/held_weapon_visual = /obj/item/gun/ballistic/bow
-
 	///Type path for the trader datum to use for retrieving the traders wares, speech, etc
 	var/trader_data_path = /datum/trader_data
-
 
 /mob/living/simple_animal/hostile/retaliate/trader/Initialize(mapload, custom = FALSE, spawner_type, datum/weakref/_faction_ref)
 	. = ..()
 	if(spawner_type)
 		spawner_path = spawner_type
+
+	if(ispath(spawner_path, /obj/effect/mob_spawn/corpse/human))
+		if(!ispath(/obj/effect/mob_spawn/corpse/human/elf/artifact))
+			loot += spawner_path
+
 	var/datum/world_faction/faction = _faction_ref?.resolve()
 	faction_ref = _faction_ref
 	if(faction)
 		name = "[faction.faction_name] Trader"
 		desc = "A trader from the [faction.faction_name]."
 
-	apply_dynamic_human_appearance(src, species_path = initial(spawner_path.mob_species), mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
+	apply_dynamic_human_appearance(src, mob_spawn_path = spawner_path, r_hand = held_weapon_visual)
 
 	if(!custom)
 		var/datum/trader_data/trader_data = new trader_data_path
@@ -151,7 +114,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/trader/death(gibbed)
 	. = ..()
-	var/obj/effect/landmark/stall/stall = ai_controller.blackboard[BB_SHOP_SPOT]
+	var/obj/effect/landmark/stall/stall = ai_controller?.blackboard[BB_SHOP_SPOT]
 	if(istype(stall))
 		stall.claimed_by_trader = FALSE
 	var/datum/action/setup_shop/shop_action = locate() in actions

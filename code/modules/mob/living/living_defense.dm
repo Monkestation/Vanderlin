@@ -28,9 +28,18 @@
 /mob/living/proc/get_eye_protection()
 	return 0
 
+///A easy to use proc to apply both organ damage and temporary deafness at once, so you don't have to get the ears everytime.
+/mob/living/proc/sound_damage(damage, deafen)
+	return
+
 //this returns the mob's protection against ear damage (0:no protection; 1: some ear protection; 2: has no ears)
-/mob/living/proc/get_ear_protection()
-	return 0
+/mob/living/proc/get_ear_protection(ignore_deafness = FALSE)
+	if(!ignore_deafness && HAS_TRAIT(src, TRAIT_DEAF))
+		return INFINITY //For all my homies that can not hear in the world
+	var/list/sig_protection = list(0)
+	SEND_SIGNAL(src, COMSIG_LIVING_GET_EAR_PROTECTION, sig_protection)
+	var/protection = sig_protection[EAR_PROTECTION_ARG]
+	return protection
 
 /**
  * Checks if our mob has their mouth covered.
@@ -395,8 +404,37 @@
 	return FALSE
 
 //called when the mob receives a loud bang
-/mob/living/proc/soundbang_act()
-	return 0
+/mob/living/proc/soundbang_act(intensity = SOUNDBANG_NORMAL, stun_pwr = 2 SECONDS, damage_pwr = 5, deafen_pwr = 1.5 SECONDS, ignore_deafness = FALSE, send_sound = TRUE)
+	var/protection = get_ear_protection(ignore_deafness)
+	if(protection >= intensity)
+		return FALSE
+
+	///The amplitude of the effect is reduced by sound protection, while weakness only makes it worse.
+	var/effect_amount = protection > 0 ? 1 - (protection/intensity) : 1 - protection
+	if(stun_pwr)
+		Paralyze(stun_pwr * effect_amount * 0.1)
+		Knockdown(stun_pwr * effect_amount)
+
+	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+
+	. = effect_amount //how soundbanged we are
+	if(!ears || !(deafen_pwr || damage_pwr))
+		return
+
+	var/ear_damage = damage_pwr * effect_amount
+	var/deaf = deafen_pwr * effect_amount
+	sound_damage(ear_damage, deaf)
+
+	if(send_sound)
+		SEND_SOUND(src, sound('sound/flash_ring.ogg',0, 1, 0, 250))
+
+	if(ears.damage >= 15 && prob(ears.damage - 5))
+		to_chat(src, span_userdanger("You can't hear anything!"))
+		// Makes you deaf, enough that you need a proper source of healing, it won't self heal
+		// you need earmuffs, inacusiate, or replacement
+		ears.setOrganDamage(ears.maxHealth)
+	else if(ears.damage >= 5)
+		to_chat(src, span_warning("Your ears start to ring[ears.damage >= 15 ? " badly!":"!"]"))
 
 //to damage the clothes worn by a mob
 /mob/living/proc/damage_clothes(damage_amount, damage_type = BRUTE, damage_flag = 0, def_zone)

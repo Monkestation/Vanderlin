@@ -38,6 +38,12 @@
 		datum/callback/drain_antimagic,
 		datum/callback/expiration,
 	)
+	//damn race condition
+	src.antimagic_flags = antimagic_flags
+	src.charges = charges
+	src.inventory_flags = inventory_flags
+	src.drain_antimagic = drain_antimagic
+	src.expiration = expiration
 
 	if(isitem(parent))
 		var/obj/item/parent_item = parent
@@ -58,12 +64,6 @@
 		to_chat(parent, span_warning("Magic seems to flee from you. You are immune to spells but are unable to cast magic."))
 	else
 		return COMPONENT_INCOMPATIBLE
-
-	src.antimagic_flags = antimagic_flags
-	src.charges = charges
-	src.inventory_flags = inventory_flags
-	src.drain_antimagic = drain_antimagic
-	src.expiration = expiration
 
 /datum/component/anti_magic/Destroy(force)
 	QDEL_NULL(drain_antimagic)

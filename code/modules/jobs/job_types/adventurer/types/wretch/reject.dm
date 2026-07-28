@@ -42,6 +42,7 @@
 	)
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
 	total_positions = 1
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	outfit = /datum/outfit/wretch/reject
 

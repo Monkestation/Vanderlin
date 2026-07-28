@@ -112,8 +112,10 @@
 
 /mob/living/carbon/getorganslotlist(slot)
 	. = list()
-	if(length(internal_organs_slot[slot]))
-		. |= internal_organs_slot[slot]
+	var/organ_list = internal_organs_slot[slot]
+	if(!length(organ_list))
+		return
+	. |= organ_list
 
 /mob/living/carbon/getorganslotlistzone(slot, zone)
 	. = list()
