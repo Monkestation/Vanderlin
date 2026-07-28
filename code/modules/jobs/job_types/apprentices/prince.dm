@@ -14,6 +14,7 @@
 	display_order = JDO_PRINCE
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 
 	can_have_apprentices = FALSE

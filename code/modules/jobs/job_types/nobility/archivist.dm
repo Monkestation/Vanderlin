@@ -19,6 +19,7 @@
 	advclass_cat_rolls = list(CTAG_ARCHIVIST = 20)
 	give_bank_account = 100
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	job_bitflag = BITFLAG_ROYALTY
 	allowed_patrons = list(/datum/patron/divine/noc)

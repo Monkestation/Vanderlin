@@ -46,6 +46,7 @@
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	can_be_apprentice = TRUE
 
@@ -135,6 +136,7 @@
 	outfit = /datum/outfit/soilchild
 	give_bank_account = 10
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

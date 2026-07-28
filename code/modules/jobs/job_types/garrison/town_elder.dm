@@ -20,6 +20,7 @@
 	advclass_cat_rolls = list(CTAG_TOWN_ELDER = 20)
 	give_bank_account = 50
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	can_have_apprentices = FALSE
 
 	exp_type = list(EXP_TYPE_BARD, EXP_TYPE_LIVING)

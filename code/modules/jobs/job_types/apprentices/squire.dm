@@ -13,6 +13,7 @@
 	display_order = JDO_SQUIRE
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 	selection_color = "#304529"
 	advclass_cat_rolls = list(CTAG_SQUIRE = 20)

@@ -18,7 +18,11 @@
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
 	give_bank_account = 120
+
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_always_know_me = list(JOB_COURT_AGENT)
+
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)

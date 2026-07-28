@@ -20,20 +20,21 @@
 
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
-/datum/job/villager/after_spawn(mob/living/carbon/spawned, client/player_client)
-	..()
+/datum/job/villager/setup_known_people()
+	for(var/job in jobs_always_know_me)
+		jobs_i_know |= job
+		jobs_that_know_me |= job
 
-/datum/job/villager/New()
-	. = ..()
 	for(var/X in GLOB.peasant_positions)
-		peopleiknow += X
-		peopleknowme += X
+		jobs_i_know |= X
+		jobs_that_know_me |= X
 	for(var/X in GLOB.serf_positions)
-		peopleiknow += X
+		jobs_i_know |= X
 	for(var/X in GLOB.church_positions)
-		peopleiknow += X
+		jobs_i_know |= X
 	for(var/X in GLOB.garrison_positions)
-		peopleiknow += X
+		jobs_i_know |= X
 	for(var/X in GLOB.noble_positions)
-		peopleiknow += X
+		jobs_i_know |= X
