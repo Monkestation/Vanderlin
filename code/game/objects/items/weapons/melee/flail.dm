@@ -192,7 +192,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
 	anvilrepair = /datum/attribute/skill/craft/carpentry
-	dropshrink = 0.9
 	resistance_flags = FLAMMABLE
 	item_weight = 3.5 KILOGRAMS
 
