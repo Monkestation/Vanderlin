@@ -62,18 +62,17 @@ GLOBAL_LIST_INIT(learnable_songs, list(
 
 	// Songs
 	var/list/song_list = list()
-	for(var/songpath in GLOB.learnable_songs)
-		var/datum/action/cooldown/spell/undirected/song/S = songpath
+	for(var/datum/action/cooldown/spell/undirected/song/learnable as anything in GLOB.learnable_songs)
 		var/already_known = FALSE
 		if(owner?.mind)
 			for(var/datum/action/cooldown/spell/undirected/song/known in owner.actions)
-				if(known.type == songpath)
+				if(known.type == learnable)
 					already_known = TRUE
 					break
 		song_list += list(list(
-			"name" = initial(S.name),
-			"desc" = initial(S.desc),
-			"type_path" = "[songpath]",
+			"name" = initial(learnable.name),
+			"desc" = initial(learnable.desc),
+			"type_path" = "[learnable]",
 			"known" = already_known,
 		))
 	data["songs"] = song_list
@@ -120,11 +119,10 @@ GLOBAL_LIST_INIT(learnable_songs, list(
 		for(var/datum/action/cooldown/spell/undirected/rhythm/existing in owner.actions)
 			existing_rhythm_types += existing.type
 
-	for(var/rhythm_path in available_rhythms)
-		var/datum/action/cooldown/spell/undirected/rhythm/R = rhythm_path
+	for(var/datum/action/cooldown/spell/undirected/rhythm/rhythm_path as anything in available_rhythms)
 		rhythm_list += list(list(
-			"name" = initial(R.name),
-			"desc" = initial(R.desc),
+			"name" = initial(rhythm_path.name),
+			"desc" = initial(rhythm_path.desc),
 			"type_path" = "[rhythm_path]",
 			"known" = (rhythm_path in existing_rhythm_types),
 		))

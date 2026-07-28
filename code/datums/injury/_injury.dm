@@ -380,14 +380,17 @@
 /datum/injury/proc/is_bleeding()
 	if(!CAN_HAVE_BLOOD(parent_mob))
 		return
-	for(var/thing in embedded_objects)
-		var/obj/item/item = thing
+
+	for(var/obj/item/item as anything in embedded_objects)
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
+
 	if(is_bandaged() || is_sutured())
 		return FALSE
+
 	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
+
 	return (bleed_timer > 0 || damage_per_injury() > bleed_threshold)
 
 /datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)

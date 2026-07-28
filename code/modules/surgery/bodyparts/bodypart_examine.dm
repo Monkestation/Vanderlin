@@ -280,8 +280,7 @@
 /obj/item/bodypart/proc/get_injuries_desc()
 	var/list/flavor_text = list()
 	var/list/injury_descriptors = list()
-	for(var/thing in injuries)
-		var/datum/injury/injury = thing
+	for(var/datum/injury/injury as anything in injuries)
 		var/this_injury_desc = injury.get_desc()
 		if(!this_injury_desc)
 			continue
