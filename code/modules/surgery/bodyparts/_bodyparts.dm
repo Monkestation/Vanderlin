@@ -436,7 +436,7 @@
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE))
+		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/15)), updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(can_decay(passed_temp))
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
@@ -489,7 +489,7 @@
 	if(ishuman(owner) && bare_organ_bonus)
 		var/mob/living/carbon/human/human_owner = owner
 		for(var/obj/item/clothing/clothes_check as anything in human_owner.clothingonpart(src))
-			if(clothes_check.armor.getRating(WOUND))
+			if(clothes_check.get_armor().get_rating(WOUND))
 				bare_organ_bonus = 0
 				break
 
@@ -607,10 +607,6 @@
 		if(injury.damage <= 0)
 			qdel(injury)
 			continue
-
-		// Bleeding
-		if(owner)
-			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
 
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount

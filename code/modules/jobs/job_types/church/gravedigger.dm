@@ -37,7 +37,7 @@
 	allowed_patrons = list(/datum/patron/divine/necra)
 
 	outfit = /datum/outfit/undertaker
-	give_bank_account = TRUE
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 	can_be_apprentice = TRUE
 
@@ -75,7 +75,8 @@
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/hammer/iron
 	beltr = /obj/item/storage/belt/pouch/coins/poor
-	backr = /obj/item/weapon/shovel/necran
+	backl = /obj/item/weapon/shovel/necran
+	backr = /obj/item/storage/backpack/satchel/cloth
 	wrists = /obj/item/storage/keyring/gravetender
 	backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red, /obj/item/weapon/chisel/iron)
 

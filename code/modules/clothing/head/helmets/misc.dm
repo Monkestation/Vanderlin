@@ -51,7 +51,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 //............... Grenzelhoft Plume Hat ............... // - worn over a skullcap
 /obj/item/clothing/head/helmet/skullcap/grenzelhoft
@@ -113,7 +113,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 50
 	body_parts_covered = COVERAGE_HEAD
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/kettle/jingasa
 	name = "jingasa"
@@ -133,9 +133,9 @@
 	icon_state = "ikettle"
 	item_state = "ikettle"
 	sellprice = VALUE_CHEAP_IRON_HELMET
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1.5 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
@@ -158,6 +158,7 @@
 	icon_state = "slitkettle"
 	flags_cover = HEADCOVERSEYES
 	body_parts_covered = HEAD|HAIR|EARS|EYES
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/clothing/head/helmet/kettle/slit/iron
 	name = "iron slitted kettle helmet"
@@ -165,9 +166,9 @@
 	icon_state = "islitkettle"
 	item_state = "islitkettle"
 	sellprice = VALUE_CHEAP_IRON_HELMET
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 2.2 KILOGRAMS
+	item_weight = 1.8 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
@@ -188,7 +189,7 @@
 	item_state = "lakkaricap"
 	sellprice = 50
 	flags_inv = null
-	armor = ARMOR_SCALE
+	armor_type = /datum/armor/head/scale
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
@@ -203,7 +204,7 @@
 	smeltresult = /obj/item/ingot/copper
 	sellprice = VALUE_LEATHER_HELMET // until copper/new mats properly finished and integrated this is a stopgap
 
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/head/padded/good
 	body_parts_covered = COVERAGE_HEAD
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
@@ -222,7 +223,7 @@
 	blocksound = CHAINHIT
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/head/maille/iron
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 1.56 KILOGRAMS
@@ -239,7 +240,7 @@
 	blocksound = CHAINHIT
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/head/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 1.56 KILOGRAMS
@@ -253,10 +254,10 @@
 	flags_inv = HIDEEARS
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
-	armor =  ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 3.1 KILOGRAMS
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/beastskull
 	name = "beast skull"
@@ -279,14 +280,13 @@
 	desc = "A simple iron helmet with no attachments. Helps protect the ears."
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET
-	armor =  ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 3.1 KILOGRAMS
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/iron/banded
 	name = "banded iron helmet"
-	desc = "A menacing horned half-face iron helmet worn primarily by mercenaries hailing from an unaligned conflict-ridden enclave near the borders of Ossland. \
-	A helmet of this kind was notoriously worn by an unknown person said to kill the last Great Drakyn inhabiting the mountains of Hammerhold."
+	desc = "A menacing horned half-face iron helmet worn primarily by mercenaries hailing from an unaligned conflict-ridden enclave near the borders of Ossland."
 	max_integrity = ARMOR_INT_HELMET_HEAVY_IRON
 	armor_class = AC_MEDIUM
 	flags_inv = HIDEEARS|HIDEFACE
@@ -355,7 +355,7 @@
 	unequip_delay_self = 3 SECONDS
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_CRITICAL_HITS
@@ -400,7 +400,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	item_weight = 6.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
@@ -409,17 +409,17 @@
 	name = "visored sallet"
 	desc = "A steel helmet offering good overall protection. Its visor can be flipped over for higher visibility at the cost of eye protection."
 	icon_state = "sallet_visor"
-	item_weight = 3.25 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 
 /obj/item/clothing/head/helmet/visored/sallet/iron
 	name = "visored iron sallet"
 	desc = "An iron helmet offering good overall protection. Its visor can be flipped over for higher visibility at the cost of eye protection."
 	icon_state = "isallet_visor"
 	item_state = "isallet_visor"
-	item_weight = 3.25 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 //............... Bellow Sallet ............... //
@@ -427,7 +427,7 @@
 	name = "bellow sallet"
 	desc = "An unorthodox approach of sallet design that includes a full face cover with holes for easier breathing."
 	icon_state = "sallet_bellow"
-	item_weight = 4.5 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 //............... Hounskull ............... //
 /obj/item/clothing/head/helmet/visored/hounskull
@@ -438,7 +438,7 @@
 	icon_state = "hounskull"
 	emote_environment = 3
 
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/head/plate/good
 	item_weight = 4.45 KILOGRAMS
 
 //............... Knights Helmet ............... //
@@ -460,8 +460,13 @@
 	desc = "An armet of distinct bird like design with a pronounced beak. \
 		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
 		This one used to be in the hands of a pale elf and may be fitted with a great plume atop, to bear heraldic colors."
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	bloody_icon = 'icons/effects/blood.dmi'
+	bloody_icon_state = "helmetblood"
 	icon_state = "armetowl"
 	raise_state = "_t"
+	worn_x_dimension = 32
+	worn_y_dimension = 32
 
 /obj/item/clothing/head/helmet/visored/knight/aalloy
 	name = "decrepit bascinet"
@@ -489,7 +494,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 
@@ -497,7 +502,7 @@
 	name = "golden knight's armet"
 	desc = "A resplendant armet, masterfully forged from pure gold. Hexagrammic etchings of a holy sigil line its visor, and its interior is fitted with a besilked arming cap. Even in absolute darkness, the polished surface sparkles with imbued sunlight."
 	icon_state = "goldknight"
-	armor = ARMOR_HEAD_HELMET_VISOR //Renders its wearer completely invulnerable to damage. The caveat is, however..
+	armor_type = /datum/armor/head/plate/visor  //Renders its wearer completely invulnerable to damage. The caveat is, however..
 	max_integrity = ARMOR_INT_HELMET_HEAVY_IRON // ..is that it's extraordinarily fragile. To note, this is lower than even Decrepit-tier armor.
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
 	anvilrepair = null
@@ -671,7 +676,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	smeltresult = /obj/item/ingot/silver
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/head/plate/silver
 	sellprice = VALUE_SILVER_ARMOR
 	item_weight = 6 KILOGRAMS
 	worn_x_dimension = 64
@@ -718,7 +723,7 @@
 	item_state = "bkhelm_visor"
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
-	armor = list("blunt" = 90, "slash" = 100, "stab" = 80,  "piercing" = 100, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/plate/blacksteel
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	block2add = FOV_RIGHT|FOV_LEFT
 	max_integrity = 425
@@ -789,10 +794,7 @@
 
 /obj/item/clothing/head/helmet/bronzegladiator
 	name = "bronze murmillo"
-	desc = "A bronze helmet that veils the wearer's face behind a perforated visor; a distant ancestor to both the sallet and sayovard, \
-	providing excellent coverage while ensuring one doesn't suffocate on their own adrenal huffs. </br>Out of all actorial labors, none surpass \
-	the reenactment of Ravox's duel against Graggar atop Ur-Syon's ruins - mythologized not as a tentacled star, but as a towering doppelganger-champion; \
-	sculpted by the followers of evil to be the inverse to all who stood for justice and chivalry."
+	desc = "A bronze helmet that veils the wearer's face behind a perforated visor; a distant ancestor to both the sallet and sayovard, providing excellent coverage."
 	icon_state = "bronzemurmillo"
 	item_state = "bronzemurmillo"
 	max_integrity = ARMOR_INT_HELMET_IRON - 100

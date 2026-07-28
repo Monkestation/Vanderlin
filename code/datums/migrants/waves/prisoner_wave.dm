@@ -108,7 +108,6 @@
 /datum/outfit/mig_prisoner
 	name = "Convoy Prisoner"
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner
 
 /datum/migrant_role/prisoner_guard
 	name = "Convoy Guard"

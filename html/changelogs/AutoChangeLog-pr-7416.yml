@@ -1,0 +1,6 @@
+author: "snowyseshi"
+delete-after: True
+changes:
+  - bugfix: "hdrow still having access to zizo cursed"
+  - rscadd: "snow elves/half snow elves can be younglings now"
+  - code_imp: "snow elf/hsnow elf added to more defines that makes sense"

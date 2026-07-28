@@ -57,8 +57,6 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/skeletons.dmi'
 			headdy.icon_state = "skull"
-	for(var/obj/item/bodypart/B as anything in bodyparts)
-		B.skeletonize(FALSE)
 	grant_undead_eyes()
 	update_body()
 	add_traits(list(TRAIT_NOMOOD, \
@@ -66,7 +64,7 @@
 		TRAIT_NOBREATH, \
 		TRAIT_NOHYGIENE, \
 		TRAIT_NOPAIN, \
-		TRAIT_NOSLEEP, \
+		TRAIT_SLEEPIMMUNE, \
 		TRAIT_EASYDISMEMBER, \
 		TRAIT_TOXIMMUNE, \
 		TRAIT_LIMBATTACHMENT, \
@@ -74,6 +72,7 @@
 		TRAIT_NO_ORGAN_PROCESS, \
 		TRAIT_NOBLOOD)
 		, SPECIES_TRAIT)
+	skeletonize(FALSE)
 	if(skel_outfit)
 		var/datum/outfit/OU = new skel_outfit
 		if(OU)

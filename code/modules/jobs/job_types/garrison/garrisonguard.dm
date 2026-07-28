@@ -17,6 +17,7 @@
 	outfit = /datum/outfit/guardsman
 	advclass_cat_rolls = list(CTAG_GARRISON = 20)
 	give_bank_account = 30
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)
@@ -48,7 +49,7 @@
 	emote("haltyell")
 
 /*
-	# SUBTYPES 
+	# SUBTYPES
 */
 
 // Regular City Watch Footman
@@ -76,14 +77,13 @@
 		"Axe" = /obj/item/weapon/axe/iron, \
 		"Mace" = /obj/item/weapon/mace, \
 		"Flail" = /obj/item/weapon/flail/militia, \
+		"Warhammer" = /obj/item/weapon/mace/warhammer, \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
 	switch(choice)
 		if("Sword")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
-		if("Axe")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
-		if("Mace")
+		if("Axe", "Mace", "Warhammer")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 		if("Flail")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 20)
@@ -214,8 +214,8 @@
 		STAT_SPEED = 2,
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/crossbows = 30, // Because why not? If they somehow will get a crossbow, let them use it to the fullest.
-		/datum/attribute/skill/combat/knives = 30, 
-		/datum/attribute/skill/combat/wrestling = 30, 
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/axesmaces = 20, // Just to be able to non-lethaly detain someone using a cugel
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/swords = 10,
