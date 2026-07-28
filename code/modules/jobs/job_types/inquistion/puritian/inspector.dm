@@ -103,8 +103,8 @@
 		"Leviathanian Membrane - No Terrain Slowdown",
 		"Nerve Staple - No Mood",
 		"Nightmare Ward - No Sleep and Anti-Scrying",
-		"Serpentine Glands - Thermal Vision and Venom")
-		"Disguise Kit - Deceiving Meekness"
+		"Serpentine Glands - Thermal Vision and Venom"
+		"Disguise Kit - Deceiving Meekness")
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
