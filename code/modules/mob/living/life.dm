@@ -66,40 +66,11 @@
 
 	handle_typing_indicator()
 
-	if(!client && (world.time - last_island_check) > 20 SECONDS)
-		last_island_check = world.time
-		update_island_cache()
-
 	if (living_flags & BLOOD_UPDATE_QUEUED)
 		update_blood_effects()
 
 	if(stat != DEAD)
 		return 1
-
-/mob/living/proc/update_island_cache()
-	if(!length(SSterrain_generation.island_registry))
-		last_island_check = world.time + 3 HOURS
-		return
-	var/turf/T = get_turf(src)
-	if(!T)
-		if(cached_island_id)
-			SSisland_mobs.remove_mob(src)
-			cached_island_id = null
-		return
-
-	var/datum/island_data/island = SSterrain_generation.get_island_at_location(T)
-	var/new_island_id = island?.island_id
-
-	if(new_island_id != cached_island_id)
-		if(new_island_id)
-			SSisland_mobs.register_mob(src, new_island_id)
-		else
-			SSisland_mobs.remove_mob(src)
-			cached_island_id = null
-
-/mob/living/proc/force_island_check()
-	last_island_check = 0
-	update_island_cache()
 
 /mob/living/proc/DeadLife()
 	set invisibility = 0
