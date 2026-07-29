@@ -24,7 +24,7 @@
 	var/monarch_title = "King"
 	var/monarch_title_f = "Queen"
 
-	var/traits = null
+	var/list/traits = null
 	var/space_ruin_levels = 7
 	var/space_empty_levels = 1
 
@@ -122,15 +122,7 @@
 		return
 
 	traits = json["traits"]
-	// "traits": [{"Linkage": "Cross"}, {"Space Ruins": true}]
-	if (islist(traits))
-		// "Station" is set by default, but it's assumed if you're setting
-		// traits you want to customize which level is cross-linked
-		for (var/level in traits)
-			if (!(ZTRAIT_STATION in level))
-				level[ZTRAIT_STATION] = TRUE
-	// "traits": null or absent -> default
-	else if (!isnull(traits))
+	if(!islist(traits))
 		log_world("map_config traits is not a list!")
 		return
 

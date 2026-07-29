@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	name = "rousman"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,
@@ -330,10 +331,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_RATS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_RATS)
 	if(!randomize_rous_name)
 		name = "rousman"
 		real_name = "rousman"

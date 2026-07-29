@@ -1,9 +1,9 @@
 /mob/living/carbon/human/species/goblin
 	name = "goblin"
-
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	icon_state = "goblin"
 	race = /datum/species/goblin
+	faction = list(FACTION_HOSTILE)
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
 					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin, /obj/item/bodypart/mouth)
@@ -274,10 +274,7 @@
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_ORCS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_ORCS)
 	name = "goblin"
 	real_name = "goblin"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)

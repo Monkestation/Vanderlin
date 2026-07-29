@@ -93,6 +93,10 @@
 #define COMSIG_MOB_THROW "mob_throw"
 /// from base of /mob/verb/examinate(): (atom/target)
 #define COMSIG_MOB_EXAMINATE "mob_examinate"
+///from /mob/living/handle_eye_contact(): (mob/living/other_mob)
+#define COMSIG_MOB_EYECONTACT "mob_eyecontact"
+	/// return this if you want to block printing this message to this person, if you want to print your own (does not affect the other person's message)
+	#define COMSIG_BLOCK_EYECONTACT (1<<0)
 /// from base of mob/living/carbon/examine(): (mob/user, mob/target, list/pronouns, list/examine_strings)
 #define COMSIG_MOB_EXAMINATE_CARBON "mob_examinte_carbon"
 /// from base of /mob/update_sight(): ()
