@@ -237,7 +237,7 @@
 	addtimer(CALLBACK(src, PROC_REF(finish_sniff), smelled_targets), 1.5 SECONDS)
 
 /datum/action/cooldown/keen_nose/proc/finish_sniff(list/smelled_targets)
-	if(!owner)
+	if(QDELETED(owner) || QDELETED(src))
 		return
 
 	playsound(owner, 'sound/items/sniff.ogg', 100, TRUE)
