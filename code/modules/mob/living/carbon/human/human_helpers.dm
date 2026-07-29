@@ -140,7 +140,7 @@
 	damage += dna.species.punch_damage
 	return damage
 
-/mob/living/carbon/human/proc/get_kick_damage(multiplier = 1)
+/mob/living/carbon/human/proc/get_kick_damage()
 	if(QDELETED(src) || !ishuman(src))
 		return
 
@@ -149,7 +149,7 @@
 	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
-		return 30 * multiplier
+		return 30
 
 	if(used_str >= 11)
 		damage = max(damage + (damage * ((used_str - 10) * 0.3)), 1)
@@ -159,7 +159,7 @@
 	if(shoes)
 		damage *= (1 + (shoes.armor_class * 0.2))
 
-	return damage * multiplier
+	return damage
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]

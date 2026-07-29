@@ -235,9 +235,8 @@
 
 	if(!QDELETED(our_light))
 		our_light.set_light_on(TRUE)
-		our_light.update_light()
 	else
-		our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
+		our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 2, 1)
 
 	owner.visible_message(span_notice("[owner]'s body begins to glow with a deep blue bioluminescent light!"))
 	active = TRUE
@@ -248,7 +247,6 @@
 		return FALSE
 	if(our_light)
 		our_light.set_light_on(FALSE)
-		our_light.update_light()
 	owner.visible_message(span_notice("[owner]'s bioluminescent glow fades away."))
 	active = FALSE
 

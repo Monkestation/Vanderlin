@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(ticker)
 	var/use_rare_music = prob(1)
 
 	for(var/S in provisional_title_music)
-		var/lower = lowertext(S)
+		var/lower = LOWER_TEXT(S)
 		var/list/L = splittext(lower,"+")
 		switch(L.len)
 			if(3) //rare+MAP+sound.ogg or MAP+rare.sound.ogg -- Rare Map-specific sounds
@@ -150,7 +150,7 @@ SUBSYSTEM_DEF(ticker)
 	for(var/S in music)
 		var/list/L = splittext(S,".")
 		if(L.len >= 2)
-			var/ext = lowertext(L[L.len]) //pick the real extension, no 'honk.ogg.exe' nonsense here
+			var/ext = LOWER_TEXT(L[L.len]) //pick the real extension, no 'honk.ogg.exe' nonsense here
 			if(byond_sound_formats[ext])
 				continue
 		music -= S
@@ -292,18 +292,20 @@ SUBSYSTEM_DEF(ticker)
 	required_jobs = list()
 	readied_jobs = list(JOB_MONARCH)
 #endif
-	for(var/V in required_jobs)
+	for(var/needed_job in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
 			if(!player || !player.client)
 				stack_trace("somehow [player] doesn't have a client, wtf?")
 				continue
-			if(player.client.prefs.job_preferences[V] == JP_HIGH)
+			if(player.client.prefs.job_preferences[needed_job] == JP_HIGH)
 				if(player.ready == PLAYER_READY_TO_PLAY)
-					if(player.client.prefs.lastclass == V)
-						if(player.IsJobUnavailable(V) != JOB_AVAILABLE)
-							to_chat(player, span_warning("You cannot be [V] and thus are not considered."))
+					if(player.client.prefs.lastclass == needed_job)//This makes no sense, but I need to sleep so I'll have to come back to it in the morning
+						var/job_status = player.IsJobUnavailable(needed_job)
+						if(job_status != JOB_AVAILABLE)
+							to_chat(player, span_warning("You cannot be [needed_job] and thus are not considered."))
+							message_admins("JOB ERROR: [key_name(player)] is unable to be [needed_job], Error [job_status]!")
 							continue
-					readied_jobs.Add(V)
+					readied_jobs.Add(needed_job)
 
 	if(CONFIG_GET(flag/ruler_required) && !vote_started)
 		if(pre_vote > 4 && !voting)

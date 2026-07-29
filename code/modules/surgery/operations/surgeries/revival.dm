@@ -35,6 +35,16 @@
 
 	return TRUE
 
+/datum/surgery_operation/basic/revival/all_required_strings()
+	. = ..()
+	. += "the patient must be dead"
+	. += "the patient must have a heart"
+
+/datum/surgery_operation/basic/revival/all_blocked_strings()
+	. = ..()
+	. += "the patient must not be undead"
+	. += "the patient must not be cursed by the undermaiden"
+
 /datum/surgery_operation/basic/revival/state_check(mob/living/patient)
 	if(patient.stat != DEAD)
 		return FALSE
@@ -112,7 +122,7 @@
 	display_results(
 		surgeon,
 		patient,
-		span_danger("I work the [tool] into [patient]'s heart, but nothing happens!"),
-		span_danger("[surgeon] works [tool] into [patient]'s heart. But nothing happens!"),
-		span_danger("[surgeon] works something into [patient]'s innards. But nothing happens!"),
+		span_danger("I try to work the [tool] into [patient]'s heart, but fails!"),
+		span_danger("[surgeon] tries working [tool] into [patient]'s heart. But nothing happens!"),
+		span_danger("[surgeon] tries working something into [patient]'s innards. But nothing happens!"),
 	)

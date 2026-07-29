@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 36,
 		/datum/attribute/skill/combat/swords = 25, // their secondary weapon, could afford more training then the gun user
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
@@ -17,7 +17,7 @@
 /datum/job/advclass/mercenary/grenzelhofthalb
 	title = "Grenzelhoft Hellebardiere"
 	tutorial = "A Grenzelhoft Halberdier, specializing in the usage of polearms. They make up the majority of the Grenzelhoft mercenary guild, and are known for their reliability."
-	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_AASIMAR)
+	allowed_races = RACES_PLAYER_GRENZ_MERC
 	outfit = /datum/outfit/mercenary/grenzelhofthalb
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/grenzelhofthalb

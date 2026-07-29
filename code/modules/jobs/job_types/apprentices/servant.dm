@@ -43,6 +43,8 @@
 /datum/job/servant
 	is_quest_giver = TRUE
 	title = JOB_SERVANT
+	unique_alt_titles = TRUE
+	alt_titles_female = list("Maid")
 	tutorial = "You are the faceless, nameless labor that keeps the royal court fed, washed, and attended to. \
 	You work your fingers to the bone nearly every dae, \
 	and have naught to show for it but boney fingers. \
@@ -55,6 +57,7 @@
 	spawn_positions = 5
 	bypass_lastclass = TRUE
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 	can_have_apprentices = FALSE
 
@@ -138,6 +141,7 @@
 
 	outfit = /datum/outfit/tapster
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
@@ -203,6 +207,7 @@
 	spawn_positions = 0
 	bypass_lastclass = TRUE
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL

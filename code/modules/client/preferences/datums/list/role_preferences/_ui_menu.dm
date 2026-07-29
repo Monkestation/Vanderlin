@@ -1,3 +1,32 @@
+/// Filtered list of only role_setting preference entries, built once at init
+GLOBAL_LIST_INIT(role_setting_preference_entries, init_role_setting_preference_entries())
+/// Assoc list: savefile_key -> /datum/preference/list_type/role_setting, built once at init
+GLOBAL_LIST_INIT(role_setting_entries_by_key, init_role_setting_entries_by_key())
+/// Flat list of unique UI categories across all role settings, built once at init
+GLOBAL_LIST_INIT(role_setting_categories, init_role_setting_categories())
+
+/proc/init_role_setting_preference_entries()
+	var/list/output = list()
+	for(var/pref_type in GLOB.preference_entries)
+		var/datum/preference/list_type/role_setting/entry = GLOB.preference_entries[pref_type]
+		if(istype(entry, /datum/preference/list_type/role_setting))
+			output[pref_type] = entry
+	return output
+
+/proc/init_role_setting_entries_by_key()
+	var/list/output = list()
+	for(var/pref_type in GLOB.role_setting_preference_entries)
+		var/datum/preference/list_type/role_setting/entry = GLOB.role_setting_preference_entries[pref_type]
+		output[entry.savefile_key] = entry
+	return output
+
+/proc/init_role_setting_categories()
+	var/list/output = list()
+	for(var/pref_type in GLOB.role_setting_preference_entries)
+		var/datum/preference/list_type/role_setting/entry = GLOB.role_setting_preference_entries[pref_type]
+		if(!(entry.ui_category in output))
+			output += entry.ui_category
+	return output
 
 /datum/role_settings_menu
 	var/datum/preferences/preferences
@@ -19,15 +48,8 @@
 
 /datum/role_settings_menu/ui_data(mob/user)
 	var/list/settings = list()
-	var/list/categories = list()
-
-	for(var/pref_type in GLOB.preference_entries)
-		var/datum/preference/list_type/role_setting/entry = GLOB.preference_entries[pref_type]
-		if(!istype(entry, /datum/preference/list_type/role_setting))
-			continue
-		if(!entry.is_role)
-			continue
-
+	for(var/pref_type in GLOB.role_setting_preference_entries)
+		var/datum/preference/list_type/role_setting/entry = GLOB.role_setting_preference_entries[pref_type]
 		var/list/current = preferences.read_preference(pref_type)
 		var/list/setting_data = list(
 			"savefile_key" = entry.savefile_key,
@@ -37,19 +59,18 @@
 			"lines" = current?.len ? current.Copy() : list(),
 			"max_lines" = entry.max_lines,
 		)
-
+		if(!entry.is_role)
+			continue
 		if(istype(entry, /datum/preference/list_type/role_setting/picker))
 			var/datum/preference/list_type/role_setting/picker/picker_entry = entry
 			setting_data["options"] = picker_entry.get_option_data()
 		else
 			setting_data["example_text"] = entry.example_text
-
 		settings += list(setting_data)
+	return list("settings" = settings, "categories" = GLOB.role_setting_categories.Copy())
 
-		if(!(entry.ui_category in categories))
-			categories += entry.ui_category
-
-	return list("settings" = settings, "categories" = categories)
+/datum/role_settings_menu/proc/locate_role_setting(savefile_key)
+	return GLOB.role_setting_entries_by_key[savefile_key]
 
 /datum/role_settings_menu/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
@@ -100,12 +121,3 @@
 			preferences.write_preference(pref, current)
 			preferences.save_preferences()
 			return TRUE
-
-/datum/role_settings_menu/proc/locate_role_setting(savefile_key)
-	for(var/pref_type in GLOB.preference_entries)
-		var/datum/preference/list_type/role_setting/entry = GLOB.preference_entries[pref_type]
-		if(!istype(entry, /datum/preference/list_type/role_setting))
-			continue
-		if(entry.savefile_key == savefile_key)
-			return entry
-	return null

@@ -37,7 +37,7 @@
 	allowed_patrons = list(/datum/patron/divine/necra)
 
 	outfit = /datum/outfit/undertaker
-	give_bank_account = TRUE
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 	can_be_apprentice = TRUE
 

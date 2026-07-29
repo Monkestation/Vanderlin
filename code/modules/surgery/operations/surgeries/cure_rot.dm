@@ -15,13 +15,18 @@
 
 	skill_min = SKILL_LEVEL_APPRENTICE
 
-	any_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
+	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
 
 /datum/surgery_operation/basic/cure_rot/get_recommended_tool()
 	return TOOL_CAUTERY
 
 /datum/surgery_operation/basic/cure_rot/get_default_radial_image()
 	return image(/obj/item/weapon/surgery/cautery)
+
+/datum/surgery_operation/basic/cure_rot/any_required_strings()
+	. = ..()
+	. += "the patient must have a rotten limb or a setting infection"
+	. += "the patient may be a deadite"
 
 /datum/surgery_operation/basic/cure_rot/state_check(mob/living/patient)
 	if(!iscarbon(patient))
@@ -80,10 +85,12 @@
 
 	var/damage = max(20 - (GET_MOB_SKILL_VALUE(surgeon, skill_used) / 3), 0)
 	for(var/obj/item/bodypart/part as anything in patient.bodyparts)
-		part.revive_limb()
+		part.revive_limb(FALSE)
 		part.germ_level = 0
 		part.receive_damage(burn = damage)
 
 	for(var/obj/item/organ as anything in patient.internal_organs)
 		if(organ.germ_level >= INFECTION_LEVEL_ONE * 0.2)
 			organ.set_germ_level(INFECTION_LEVEL_ONE * 0.2)
+
+	patient.update_body_parts(TRUE)

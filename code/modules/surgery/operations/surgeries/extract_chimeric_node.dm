@@ -24,7 +24,9 @@
 	return image(/obj/item/chimeric_node)
 
 /datum/surgery_operation/basic/extract_chimeric_node/all_required_strings()
-	return list("the patient must be on a meathook") + ..()
+	. = ..()
+	. += "the patient must be on a meathook"
+	. += "the patient must have chimeric nodes to extract"
 
 /datum/surgery_operation/basic/extract_chimeric_node/state_check(mob/living/patient)
 	if(!istype(patient, /mob/living/simple_animal))

@@ -47,6 +47,9 @@
 		#define ELASDATA_QUEST_TAXES "quest_taxes"
 		#define ELASDATA_QUEST_CREATED "quests_created"
 		#define ELASDATA_QUEST_STALE "quests_stale"
+		#define ELASDATA_BOUNTIES_COMPLETED "bounties_completed"
+		#define ELASDATA_BOUNTIES_REROLLED "bounties_rerolled"
+		#define ELASDATA_BOUNTIES_GENERATED "bounties_generated"
 
 	/* Medical */
 		#define ELASDATA_ANASTASIS_REVIVE "anastasis"

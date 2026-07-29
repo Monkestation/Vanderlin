@@ -44,6 +44,7 @@
 
 	outfit = /datum/outfit/butler
 	give_bank_account = 30 // Along with the pouch, enough to purchase some ingredients from the farm and give hard working servants a silver here and there. Still need the assistance of the crown's coffers to do anything significant
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)
@@ -52,6 +53,7 @@
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/butler
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,
