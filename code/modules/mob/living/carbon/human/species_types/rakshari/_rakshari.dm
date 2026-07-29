@@ -233,11 +233,14 @@
 
 	owner.visible_message(span_notice("[owner] sniffs the air!"))
 	playsound(owner, 'sound/items/sniff.ogg', 70, TRUE)
-	sleep(5)
-	playsound(owner, 'sound/items/sniff.ogg', 70, TRUE)
-	sleep(10)
-	playsound(owner, 'sound/items/sniff.ogg', 100, TRUE)
+	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), owner, 'sound/items/sniff.ogg', 70, TRUE), 0.5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(finish_sniff), smelled_targets), 2 SECONDS)
 
+/datum/action/cooldown/keen_nose/proc/finish_sniff(list/smelled_targets)
+	if(!owner)
+		return
+
+	playsound(owner, 'sound/items/sniff.ogg', 100, TRUE)
 	if(!length(smelled_targets))
 		to_chat(owner, span_notice("You smell the air! No creatures are nearby, save yourself."))
 		return
