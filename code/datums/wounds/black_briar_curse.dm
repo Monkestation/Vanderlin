@@ -298,14 +298,14 @@
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
 		if(!HAS_ANY_OF_TRAITS(owner, list(TRAIT_NOBREATH, TRAIT_SOOTHED_THROAT)) && SPT_PROB(3, seconds_per_tick))
 			cough()
-			if(SPT_PROB(6, seconds_per_tick))
+			if(prob(12))
 				to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
 				var/fit = 0
 				for(fit = rand(6,8), fit <= 2.1 SECONDS, fit += rand(5,8))
 					addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/wound/black_briar_curse/chest, cough)), fit)
 				owner.Immobilize(fit)
 				owner.Stun(fit)
-				if(SPT_PROB(12.5, seconds_per_tick))
+				if(prob(25))
 					owner.drop_all_held_items(FALSE)
 
 		if(!owner.has_quirk(/datum/quirk/black_briar))
