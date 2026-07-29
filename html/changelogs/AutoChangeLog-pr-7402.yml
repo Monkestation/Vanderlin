@@ -1,4 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - bugfix: "coins now sanity check on reduction so if they are below or equal to 0 they get cleaned"

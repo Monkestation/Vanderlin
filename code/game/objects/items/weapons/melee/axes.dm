@@ -289,7 +289,7 @@
 
 
 //.................. Bearded Axe ...............//
-/obj/item/weapon/axe/steel/atgervi
+/obj/item/weapon/axe/steel/bearded
 	name = "bearded axe"
 	desc = "A large axe easily wielded in one hand or two, With a large hooked axe head to tearing into flesh and armor and ripping it away brutally."
 	icon_state = "atgervi_axe"
@@ -300,7 +300,7 @@
 	experimental_onhip = TRUE
 	item_weight = 2.2 KILOGRAMS
 
-/obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
+/obj/item/weapon/axe/steel/bearded/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)

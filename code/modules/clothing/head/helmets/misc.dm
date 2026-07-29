@@ -286,8 +286,7 @@
 
 /obj/item/clothing/head/helmet/sallet/iron/banded
 	name = "banded iron helmet"
-	desc = "A menacing horned half-face iron helmet worn primarily by mercenaries hailing from an unaligned conflict-ridden enclave near the borders of Ossland. \
-	A helmet of this kind was notoriously worn by an unknown person said to kill the last Great Drakyn inhabiting the mountains of Hammerhold."
+	desc = "A menacing horned half-face iron helmet worn primarily by mercenaries hailing from an unaligned conflict-ridden enclave near the borders of Ossland."
 	max_integrity = ARMOR_INT_HELMET_HEAVY_IRON
 	armor_class = AC_MEDIUM
 	flags_inv = HIDEEARS|HIDEFACE
@@ -795,10 +794,7 @@
 
 /obj/item/clothing/head/helmet/bronzegladiator
 	name = "bronze murmillo"
-	desc = "A bronze helmet that veils the wearer's face behind a perforated visor; a distant ancestor to both the sallet and sayovard, \
-	providing excellent coverage while ensuring one doesn't suffocate on their own adrenal huffs. </br>Out of all actorial labors, none surpass \
-	the reenactment of Ravox's duel against Graggar atop Ur-Syon's ruins - mythologized not as a tentacled star, but as a towering doppelganger-champion; \
-	sculpted by the followers of evil to be the inverse to all who stood for justice and chivalry."
+	desc = "A bronze helmet that veils the wearer's face behind a perforated visor; a distant ancestor to both the sallet and sayovard, providing excellent coverage."
 	icon_state = "bronzemurmillo"
 	item_state = "bronzemurmillo"
 	max_integrity = ARMOR_INT_HELMET_IRON - 100

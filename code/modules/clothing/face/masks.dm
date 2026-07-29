@@ -349,7 +349,7 @@
 	icon_state = "steppemask_snout"
 	desc = "A steel mask shaped like a beast's face, worn by steppe riders to intimidate their enemies."
 
-/obj/item/clothing/face/facemask/steel/kazengun
+/obj/item/clothing/face/facemask/steel/blackmeadow
 	name = "soldier's half-mask"
 	desc = "\"The first lesson of war is that it would be better to live in peace.\""
 	block2add = null
@@ -357,7 +357,7 @@
 	icon_state = "kazengunmouthguard"
 	item_state = "kazengunmouthguard"
 
-/obj/item/clothing/face/facemask/steel/kazengun/full
+/obj/item/clothing/face/facemask/steel/blackmeadow/full
 	name = "ogre mask"
 	desc = "\"The second lesson: Rich men have dreams. Poor men die to make them come true.\""
 	icon_state = "kazengunfaceguard"

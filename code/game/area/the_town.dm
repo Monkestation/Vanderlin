@@ -4,14 +4,14 @@
 	icon_state = "indoor_town"
 	background_track = 'sound/music/area/indoor.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 	converted_type = /area/outdoors/exposed/town
 
 /area/outdoors/exposed/town
 	icon_state = "town"
 	background_track = 'sound/music/area/towngen.ogg'
 	background_track_dusk = null
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 /area/indoors/town/shop
 	name = "Shop"
@@ -249,7 +249,7 @@
 	icon_state = "town"
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 	converted_type = /area/indoors/shelter/town
 	threat_region = THREAT_REGION_TOWN
 
@@ -261,7 +261,7 @@
 	icon_state = "town"
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 /area/outdoors/town/roofs
 	name = "roofs"
@@ -275,7 +275,7 @@
 	icon_state = "roofs"
 	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 
 ///// UNDERGROUND AREAS //////

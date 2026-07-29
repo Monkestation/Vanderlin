@@ -49,8 +49,8 @@
 /obj/item/clothing/head/headband/colored/red
 	color = CLOTHING_BLOOD_RED
 
-/obj/item/clothing/head/headband/naledi
-	name = "sojourner's headband"
+/obj/item/clothing/head/headband/preceptor
+	name = "preceptor's headband"
 	desc = "A traditional monk's headband, for those disciples who prefer the sweat out of their eyes."
 	icon_state = "headband"
 	color = "#48443b"
