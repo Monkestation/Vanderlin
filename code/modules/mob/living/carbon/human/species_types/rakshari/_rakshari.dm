@@ -234,7 +234,7 @@
 	owner.visible_message(span_notice("[owner] sniffs the air!"))
 	playsound(owner, 'sound/items/sniff.ogg', 70, TRUE)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), owner, 'sound/items/sniff.ogg', 70, TRUE), 0.5 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(finish_sniff), smelled_targets), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(finish_sniff), smelled_targets), 1.5 SECONDS)
 
 /datum/action/cooldown/keen_nose/proc/finish_sniff(list/smelled_targets)
 	if(!owner)
