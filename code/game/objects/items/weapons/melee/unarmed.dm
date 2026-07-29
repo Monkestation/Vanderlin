@@ -9,6 +9,8 @@
 	item_weight = 0 GRAMS
 	wbalance = HARD_TO_DODGE
 	wdefense = GOOD_PARRY
+	max_integrity = INTEGRITY_STANDARD
+	experimental_inhand = FALSE
 	possible_item_intents = list(CLOSECOMBAT_PUNCH, CLOSECOMBAT_JAB, CLOSECOMBAT_SLUG, CLOSECOMBAT_SLAM)
 	weapon_special = /datum/special_intent/upper_cut
 
@@ -17,12 +19,24 @@
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NOEMBED, INNATE_TRAIT)
 
+/obj/item/weapon/clenched_fist/atom_destruction(damage_flag)
+	if(ismob(loc))
+		var/mob/living/carbon/human/user = loc
+		var/target_zone = BODY_ZONE_L_ARM
+		if(user.get_active_hand() == LEFT_HANDS)
+			target_zone = BODY_ZONE_L_ARM
+		else
+			target_zone = BODY_ZONE_R_ARM
+		user.apply_damage(40, BRUTE, target_zone, damage_type = BCLASS_BLUNT, can_crit = TRUE)
+	. = ..()
+
 /datum/intent/unarmed/punch/closecombat
 	name = "punch"
 	acc_bonus = 15
 	penfactor = 18
 	damfactor = 1.2
 	misscost = 5
+	animname = "stab"
 
 /datum/intent/unarmed/punch/jab
 	name = "jab"
@@ -33,6 +47,7 @@
 	swingdelay = 0.5
 	clickcd = 7
 	misscost = 4
+	animname = "stab"
 
 /datum/intent/unarmed/punch/slug
 	name = "slug"
@@ -44,6 +59,7 @@
 	clickcd = 15
 	releasedrain = 8
 	misscost = 5
+	animname = "stab"
 
 /datum/intent/unarmed/punch/slam
 	name = "slam"
@@ -58,3 +74,4 @@
 	chargedrain = 3
 	releasedrain = 20
 	misscost = 10
+	animname = "stab"
