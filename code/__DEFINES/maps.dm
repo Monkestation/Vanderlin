@@ -84,8 +84,8 @@ require only minor tweaks.
 	ZTRAIT_LEYLINES = TRUE,\
 )
 #define ZTRAITS_DUNGEON list(\
-	ZTRAIT_LEYLINES = TRUE,\
 	ZTRAIT_MATTHIOS_DUNGEON = TRUE,\
+	ZTRAIT_LEYLINES = TRUE,\
 )
 
 #define DL_NAME "name"
