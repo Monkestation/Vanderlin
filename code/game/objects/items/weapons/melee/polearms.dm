@@ -18,7 +18,6 @@
 	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
-	dropshrink = 0.8
 	thrown_bclass = BCLASS_STAB
 	grid_height = 96
 	grid_width = 64
@@ -148,7 +147,6 @@
 
 	slot_flags = ITEM_SLOT_BACK
 	smeltresult = /obj/item/ingot/iron
-	dropshrink = 0.8
 	thrown_bclass = BCLASS_STAB
 	sellprice = 22
 	item_weight = 1 KILOGRAMS
@@ -308,7 +306,6 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	melt_amount = 0
-	dropshrink = 0.7
 	sellprice = 5
 	item_weight = 0.8 KILOGRAMS
 
@@ -357,7 +354,6 @@
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/copper
 	melt_amount = 75
-	dropshrink = 0.9
 	sellprice = 15
 	throw_speed = 3
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
@@ -432,7 +428,6 @@
 	max_blade_int = 60
 	max_integrity = INTEGRITY_POOR
 	anvilrepair = /datum/attribute/skill/craft/crafting
-	dropshrink = 0.9
 	sellprice = 5
 	throw_speed = 4
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
@@ -458,7 +453,6 @@
 	max_blade_int = 60
 	max_integrity = INTEGRITY_POOR
 	anvilrepair = /datum/attribute/skill/craft/crafting
-	dropshrink = 0.9
 	sellprice = 5
 	throw_speed = 4
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
@@ -493,7 +487,6 @@
 
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	dropshrink = 0.8
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
@@ -585,7 +578,6 @@
 	max_integrity = INTEGRITY_STRONG
 
 	swingsound = BLADEWOOSH_MED
-	dropshrink = 0.95
 	axe_cut = 10
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
@@ -608,7 +600,6 @@
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/axesmaces //It's ultimately a massive axe
-	dropshrink = 0.95
 	axe_cut = 15
 	smeltresult = null
 	melt_amount = 75
@@ -664,7 +655,6 @@
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/axesmaces
-	dropshrink = 0.95
 	axe_cut = 15
 	melt_amount = 150
 	sellprice = 20
@@ -730,7 +720,6 @@
 	max_integrity = INTEGRITY_STRONGEST
 
 	slot_flags = ITEM_SLOT_BACK
-	dropshrink = 0.8
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
@@ -824,7 +813,6 @@
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/iron
 	sellprice = 10
 	item_weight = 1.1 KILOGRAMS
