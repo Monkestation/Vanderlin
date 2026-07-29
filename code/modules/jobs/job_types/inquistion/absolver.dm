@@ -105,12 +105,12 @@
 /datum/outfit/absolver
 	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
-	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
+	gloves = /obj/item/clothing/gloves/leather/grenzel/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser
 	beltl = /obj/item/storage/belt/pouch/coins/rich
 	neck = /obj/item/clothing/neck/psycross/silver
 	cloak = /obj/item/clothing/cloak/absolutionistrobe
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	armor = /obj/item/clothing/armor/cuirass/psydon

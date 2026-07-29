@@ -80,13 +80,13 @@
 
 /datum/outfit/forestpreacher
 	name = JOB_FOREST_PREACHER
-	armor = /obj/item/clothing/armor/leather/atgervi
+	armor = /obj/item/clothing/armor/leather/shamancoat
 	neck = /obj/item/clothing/neck/psycross/great_hunt
 	pants = /obj/item/clothing/pants/trou/leather/gronn
 	shoes = /obj/item/clothing/shoes/boots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/leather/shaman_hood
-	gloves = /obj/item/clothing/gloves/plate/atgervi
+	gloves = /obj/item/clothing/gloves/plate/beastclaws
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	backl = /obj/item/storage/backpack/satchel

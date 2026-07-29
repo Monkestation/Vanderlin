@@ -303,7 +303,7 @@
 
 /datum/outfit/forestguard/ossland_scout
 	name = JOB_FOREST_GUARD_HUSKARL_SCOUT
-	head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
+	head = /obj/item/clothing/head/helmet/bascinet/owl/gronn/ownel
 	shirt = /obj/item/clothing/armor/chainmail/hauberk/gronn
 	gloves = /obj/item/clothing/gloves/angle/gronnfur
 	pants = /obj/item/clothing/pants/trou/leather/gronn
@@ -362,7 +362,7 @@
 
 /datum/outfit/forestguard/ossland_fighter
 	name = JOB_FOREST_GUARD_HUSKARL_FIGHTER
-	head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn
+	head = /obj/item/clothing/head/helmet/bascinet/owl/gronn
 	shirt = /obj/item/clothing/armor/chainmail/hauberk/gronn
 	gloves = /obj/item/clothing/gloves/chain/gronn
 	beltl = /obj/item/weapon/sword/short/gronn
