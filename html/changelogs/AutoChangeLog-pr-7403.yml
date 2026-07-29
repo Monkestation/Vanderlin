@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - bugfix: "Corrects a few erroneous references to countries that don't exist in lore."

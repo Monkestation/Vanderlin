@@ -336,7 +336,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 
 
-/obj/item/clothing/shoes/boots/leather/kazengun
+/obj/item/clothing/shoes/boots/leather/blackmeadow
 	name = "armored sandals"
 	desc = "Leather sandals, with steel ankle-protectors and socks of sturdy cloth."
 	icon_state = "kazengunboots"
@@ -344,7 +344,7 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_WHITE
 
-/obj/item/clothing/shoes/boots/leather/kazengun/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/shoes/boots/leather/blackmeadow/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
 	if(!choice)

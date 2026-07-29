@@ -219,9 +219,9 @@
 	name = "Argent (Sacrestants)"
 	cloak = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	neck = /obj/item/clothing/neck/gorget
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	backl = /obj/item/gun/ballistic/bow/cross
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid

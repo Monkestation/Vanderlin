@@ -66,11 +66,11 @@
 /datum/outfit/psyaltrist
 	name = "Psyaltrist (Adept)"
 	armor = /obj/item/clothing/armor/leather/studded/psyaltrist
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	neck = /obj/item/clothing/neck/gorget/explosive
 	cloak = /obj/item/clothing/cloak/psyaltrist
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
