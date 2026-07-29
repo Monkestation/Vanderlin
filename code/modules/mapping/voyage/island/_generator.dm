@@ -648,8 +648,6 @@
 			if(chosen)
 				var/mob/living/mob = new chosen(T)
 				mob.add_faction("islander")
-				SSisland_mobs.register_mob(mob)
-
 
 /datum/island_generator/proc/build_elevation(x, y, z, height, dist_to_water, temperature, moisture)
 	for(var/level = 1 to height)

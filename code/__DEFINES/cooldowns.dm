@@ -86,3 +86,5 @@
 #define DODGING_PENALTY_COOLDOWN_DURATION 0
 /// Cooldown before resetting the parrying penalty
 #define PARRYING_PENALTY_COOLDOWN_DURATION 4 SECONDS
+
+#define COOLDOWN_YAWN_PROPAGATION "yawn_propagation_cooldown"

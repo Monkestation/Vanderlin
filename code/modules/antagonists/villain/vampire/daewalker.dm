@@ -173,7 +173,7 @@
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	backr = /obj/item/weapon/scabbard/sword/noble
 	r_hand = /obj/item/weapon/sword/long/daewalker
 	backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 1, /obj/item/smokebomb = 2, /obj/item/needle/blessed = 1)
