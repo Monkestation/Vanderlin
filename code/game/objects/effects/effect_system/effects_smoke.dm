@@ -17,7 +17,6 @@
 	var/lifetime = 10 SECONDS
 	var/opaque = 1 //whether the smoke can block the view when in enough amount
 
-
 /obj/effect/particle_effect/smoke/proc/fade_out(frames = 16)
 	if(alpha == 0) //Handle already transparent case
 		return

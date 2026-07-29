@@ -79,7 +79,7 @@
 	return ..()
 
 /obj/item/holy_grenade/process(seconds_per_tick)
-	fuze -= seconds_per_tick
+	fuze -= SPT_TO_DECISECONDS(seconds_per_tick)
 	if(fuze <= 0)
 		explode(TRUE)
 

@@ -272,10 +272,9 @@
 
 /obj/item/weapon/mace/stunmace/process(seconds_per_tick)
 	if(on)
-		charge -= seconds_per_tick
-	else
-		if(charge < 100)
-			charge += seconds_per_tick
+		charge -= SPT_TO_DECISECONDS(seconds_per_tick)
+	else if(charge < 100)
+		charge += SPT_TO_DECISECONDS(seconds_per_tick)
 
 	if(charge <= 0)
 		on = FALSE

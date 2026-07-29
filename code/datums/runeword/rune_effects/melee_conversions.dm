@@ -139,7 +139,7 @@
 	check_orbital_collisions()
 
 	// Increment orbit time
-	orbit_time += seconds_per_tick
+	orbit_time += SPT_TO_DECISECONDS(seconds_per_tick)
 
 /obj/projectile/orbital/proc/check_orbital_collisions()
 	if(!loc)

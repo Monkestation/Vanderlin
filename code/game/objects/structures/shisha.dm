@@ -17,7 +17,7 @@
 	var/obj/item/bowl_contents = null
 	var/bowl_reagent_amount = 20
 
-	var/smoke_interval = 8
+	var/smoke_interval = 16 SECONDS
 	var/smoke_timer = 0
 
 	var/mob/living/current_smoker = null
@@ -198,7 +198,7 @@
 		stop_smoking()
 		return PROCESS_KILL
 
-	smoke_timer += seconds_per_tick
+	smoke_timer += SPT_TO_DECISECONDS(seconds_per_tick)
 	if(smoke_timer < smoke_interval)
 		return
 

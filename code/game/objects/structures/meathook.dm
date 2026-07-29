@@ -119,7 +119,7 @@
 		draining_blood = FALSE
 		return PROCESS_KILL
 
-	L.blood_drained += SPT_TO_DECISECONDS(seconds_per_tick)
+	L.blood_drained += SPT_TO_DECISECONDS(seconds_per_tick) // Yes this is a measure of time
 
 	var/datum/blood_type/bloodtype = L.get_blood_type()
 

@@ -109,7 +109,7 @@
 		return PROCESS_KILL
 
 	if(spawn_interval != 1)
-		count += seconds_per_tick
+		count++
 		if(count < spawn_interval)
 			return
 

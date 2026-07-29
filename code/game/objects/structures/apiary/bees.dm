@@ -62,9 +62,9 @@
 			if(T)
 				Move(T)
 
-	search_time += seconds_per_tick
+	search_time += SPT_TO_DECISECONDS(seconds_per_tick)
 
-	if(search_time >= 40)
+	if(search_time >= 1 MINUTES)
 		search_time = 0
 		find_new_home()
 

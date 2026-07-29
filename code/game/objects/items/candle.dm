@@ -11,7 +11,7 @@
 	dropshrink = 0.8
 	heat = 1000
 	item_weight = 224 GRAMS
-	var/wax = 20 MINUTES
+	var/wax = 30 MINUTES
 	var/lit = FALSE
 	var/infinite = FALSE
 	var/start_lit = FALSE
@@ -28,7 +28,7 @@
 /obj/item/candle/update_icon_state()
 	. = ..()
 	if(!infinite)
-		icon_state = "[base_icon_state][(wax > 400) ? ((wax > 750) ? 1 : 2) : 3][lit ? "_lit" : ""]"
+		icon_state = "[base_icon_state][(wax > initial(wax) * 0.4) ? ((wax > initial(wax) * 0.75) ? 1 : 2) : 3][lit ? "_lit" : ""]"
 	else
 		icon_state = "[base_icon_state][lit ? "_lit" : ""]"
 
@@ -83,7 +83,7 @@
 		return PROCESS_KILL
 
 	if(!infinite)
-		wax -= seconds_per_tick
+		wax -= SPT_TO_DECISECONDS(seconds_per_tick)
 
 	if(!wax)
 		var/obj/item/trash/candle/candle = new /obj/item/trash/candle(get_turf(src))

@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 200
-	var/timer = 480 //eventually the person will be freed
+	var/timer = 8 MINUTES //eventually the person will be freed
 	var/mob/living/petrified_mob
 
 /obj/structure/statue/petrified/Initialize(mapload, mob/living/L, statue_timer)

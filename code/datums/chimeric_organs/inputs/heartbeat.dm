@@ -19,7 +19,7 @@
 /datum/chimeric_node/input/heartbeat/proc/on_heartbeat(datum/source, seconds_per_tick)
 	SIGNAL_HANDLER
 
-	current_beats += seconds_per_tick
+	current_beats++
 
 	if(current_beats >= beats_per_trigger)
 		current_beats = 0

@@ -134,14 +134,12 @@
 	possible_item_intents = list(/datum/intent/use, /datum/intent/hit)
 	slot_flags = ITEM_SLOT_HIP
 	max_integrity = 40
-	fuel = 30 MINUTES
+	fuel = 10 MINUTES
 	light_depth = 0
 	light_height = 0
 	metalizer_result = /obj/item/flashlight/flare/torch/lantern
 	grid_width = 32
 	grid_height = 32
-
-	fuel = 4 MINUTES
 
 	var/extinguish_prob = 100
 	var/should_self_destruct = TRUE //added for torch burnout

@@ -106,9 +106,9 @@
 			var/turf/T = get_step(src, pick(GLOB.alldirs))
 			Move(T)
 
-		return_home_timer += seconds_per_tick
+		return_home_timer += SPT_TO_DECISECONDS(seconds_per_tick)
 
-		if(return_home_timer > 100)
+		if(return_home_timer > 3 MINUTES)
 			return_to_wild_hive()
 
 	if(home_hive && ((agitation_countdown <= 0 && agitated) || stored_pollen > 5))

@@ -467,7 +467,7 @@
 	if(!istype(H))
 		return
 
-	H.graggometer += seconds_per_tick
+	H.graggometer++
 
 	switch(H.graggometer)
 		if(15 to 30)

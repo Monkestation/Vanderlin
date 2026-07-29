@@ -29,7 +29,8 @@
 	if(!T.can_see_sky())
 		return
 
-	current_beats += seconds_per_tick
+	current_beats++
+
 	if(current_beats >= beats_per_trigger)
 		current_beats = 0
 		var/potency = node_purity / 100
