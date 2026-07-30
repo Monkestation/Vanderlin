@@ -131,7 +131,7 @@
 	desc = "Those who wear, thy should beware, for those who do; never come back as who they once were again."
 	allowed_race = ALL_RACES_LIST
 	body_parts_covered = ARMS|CHEST
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/maille/good
 
 /obj/item/clothing/cloak/half/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -415,7 +415,7 @@
 	nodismemsleeves = TRUE
 	detail_tag = null
 
-/obj/item/clothing/cloak/kazengun
+/obj/item/clothing/cloak/blackmeadow
 	name = "jinbaori"
 	desc = "A simple kind of Blackmeadow surcoat, worn here in the distant battlefields of Azuria to differentiate friend from foe."
 	icon_state = "kazenguncoat"

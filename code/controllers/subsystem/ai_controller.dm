@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(ai_controllers)
 	var/list/seen_cells = list()
 
 	for(var/z_index in 1 to SSmobs.clients_by_zlevel.len)
-		if(z_index in SSmobs.town_z)
+		if(z_index in GLOB.town_z_levels)
 			if(z_index <= GLOB.ai_controllers_by_zlevel.len)
 				in_range_controllers |= GLOB.ai_controllers_by_zlevel[z_index]
 			continue

@@ -8,7 +8,7 @@
 	sellprice = NO_MARKET_VALUE
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	max_integrity = INTEGRITY_POOR
 
@@ -17,7 +17,7 @@
 	desc = "Fearsome armor which covers nearly the entire body."
 	icon_state = "warlord_armor"
 	item_state = "warlord_armor"
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 
 /obj/item/clothing/armor/chainmail/iron/orc
 	name = "crude maille"
@@ -27,7 +27,7 @@
 	sellprice = NO_MARKET_VALUE
 
 	armor_class = AC_MEDIUM
-	armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/maille/orc
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_POOR
@@ -38,7 +38,7 @@
 	item_state = "marauder_helm"
 	allowed_race = list(SPEC_ID_ORC)
 	smeltresult = /obj/item/ingot/iron
-	armor = list("blunt" = 60, "slash" = 60, "stab" = 60,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/metal/orc/bad
 	body_parts_covered = HEAD|EARS|HAIR|EYES|NECK
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
 	blocksound = PLATEHIT
@@ -49,7 +49,7 @@
 	name = "Orc Warlord Helmet"
 	icon_state = "warlord_helm"
 	item_state = "warlord_helm"
-	armor = list("blunt" = 70, "slash" = 70, "stab" = 70,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/metal/orc
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	max_integrity = 150
 	sellprice = 10
@@ -60,7 +60,7 @@
 	desc = ""
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
 	icon_state = "leatherhelm"
-	armor = list("blunt" = 27, "slash" = 27, "stab" = 27,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/leather/orc
 	prevent_crits = list(BCLASS_BLUNT, BCLASS_TWIST)
 	anvilrepair = null
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
@@ -75,7 +75,7 @@
 	item_state = "orc_leather"
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	allowed_race = list(SPEC_ID_ORC)
-	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/leather/orc/bad
 	body_parts_covered = CHEST|GROIN
 	sellprice = 0
 

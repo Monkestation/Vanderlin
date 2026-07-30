@@ -190,7 +190,7 @@
 	icon_state = null
 	body_parts_covered = FULL_BODY
 	resistance_flags = FIRE_PROOF
-	armor = ARMOR_BRIGANDINE
+	armor_type = /datum/armor/brigandine
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP

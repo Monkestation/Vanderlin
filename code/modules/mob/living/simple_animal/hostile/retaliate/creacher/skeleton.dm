@@ -118,7 +118,7 @@
 	if(user)
 		friends += user.name
 		if (cabal_affine)
-			faction |= FACTION_CABAL
+			add_faction(FACTION_CABAL)
 
 /mob/living/simple_animal/hostile/skeleton/Life()
 	. = ..()

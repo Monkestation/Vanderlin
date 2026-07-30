@@ -15,7 +15,7 @@
 
 /datum/job/steward
 	title = JOB_STEWARD
-	alt_titles = list("Landlord", "Chamberlain")
+	alt_titles = list("Chamberlain", "Seneschal")
 	alt_honorary = list("Thane")
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: \
 	You're addicted to it, and you hold the position as the King's personal treasurer of both coin and information. \
@@ -33,6 +33,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/steward
 	give_bank_account = 100
+	knows_the_town = TRUE
 	noble_income = 16
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	job_bitflag = BITFLAG_ROYALTY
@@ -50,7 +51,8 @@
 	traits = list(
 		TRAIT_SEEPRICES,
 		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
+		TRAIT_NOBLE_POWER,
+		TRAIT_VIRGIN
 	)
 
 /datum/outfit/steward/pre_equip(mob/living/carbon/human/H)
@@ -60,10 +62,6 @@
 	else
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		pants = /obj/item/clothing/pants/trou/leathertights
-
-/datum/job/steward/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.virginity = TRUE
 
 /datum/job/steward/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
