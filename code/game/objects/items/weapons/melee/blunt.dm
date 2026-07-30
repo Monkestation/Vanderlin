@@ -617,6 +617,7 @@
 	icon_state = "iwarhammer"
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE)
 	gripped_intents = null
+	force_wielded = null
 	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/mace/warhammer/getonmobprop(tag)

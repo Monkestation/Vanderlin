@@ -150,7 +150,7 @@
 		/datum/supply_pack/weapons/iron/iassegai,
 		/datum/supply_pack/weapons/ranged/shortbow,
 		/datum/supply_pack/weapons/ranged/bow,
-		/datum/supply_pack/weapons/steel/atgervi,
+		/datum/supply_pack/weapons/steel/bearded,
 		/datum/supply_pack/weapons/ranged/crossbow,
 		/datum/supply_pack/weapons/ammo/quivers,
 		/datum/supply_pack/weapons/ammo/arrowquiver,

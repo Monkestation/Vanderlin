@@ -16,7 +16,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 1.2 KILOGRAMS
 
-/obj/item/clothing/wrists/bracers/naledi
+/obj/item/clothing/wrists/bracers/preceptor
 	name = "sojourner's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. It provides more freedom of movement than the traditional steel thorns."
 	slot_flags = ITEM_SLOT_WRISTS

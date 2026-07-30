@@ -15,7 +15,6 @@ SUBSYSTEM_DEF(throwing)
 	msg = "P:[length(processing)]"
 	return ..()
 
-
 /datum/controller/subsystem/throwing/fire(resumed = 0)
 	if (!resumed)
 		src.currentrun = processing.Copy()
@@ -24,7 +23,7 @@ SUBSYSTEM_DEF(throwing)
 	var/list/currentrun = src.currentrun
 
 	while(length(currentrun))
-		var/atom/movable/AM = currentrun[currentrun.len]
+		var/atom/movable/AM = currentrun[length(currentrun)]
 		var/datum/thrownthing/TT = currentrun[AM]
 		currentrun.len--
 		if (QDELETED(AM) || QDELETED(TT))

@@ -214,9 +214,9 @@
 	requirements = list(/obj/item/natural/cloth = 2,)
 	category = "Hat"
 
-/datum/repeatable_crafting_recipe/sewing/headband_naledi
+/datum/repeatable_crafting_recipe/sewing/headband_preceptor
 	name = "headband"
-	output = /obj/item/clothing/head/headband/naledi
+	output = /obj/item/clothing/head/headband/preceptor
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	category = "Hat"
@@ -1768,9 +1768,9 @@
 	craftdiff = 2
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/holysee_vestments
+/datum/repeatable_crafting_recipe/sewing/grandmaster_vestments
 	name = "holy silver vestments"
-	output = /obj/item/clothing/cloak/holysee
+	output = /obj/item/clothing/cloak/grandmaster
 	requirements = list(
 		/obj/item/natural/cloth = 3,
 		/obj/item/ingot/silver = 1,
