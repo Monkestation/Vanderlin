@@ -97,11 +97,10 @@
 
 /datum/admin_ticket_granter/proc/_collect_subtypes(base)
 	var/list/out = list()
-	for(var/path in subtypesof(base))
-		var/datum/D = path
-		if(initial(D.abstract_type) == path)
+	for(var/datum/D as anything in subtypesof(base))
+		if(IS_ABSTRACT(D))
 			continue
-		out += "[path]"
+		out += "[D]"
 	return out
 
 /datum/admin_ticket_granter/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -153,11 +152,10 @@
 
 /datum/admin_ticket_granter/proc/collect_templates()
 	var/list/out = list()
-	for(var/path in subtypesof(/datum/ticket_template))
-		var/datum/ticket_template/D = path
-		if(initial(D.abstract_type) == path)
+	for(var/datum/ticket_template/D as anything in subtypesof(/datum/ticket_template))
+		if(IS_ABSTRACT(D))
 			continue
-		var/datum/ticket_template/instance = new path()
+		var/datum/ticket_template/instance = new D()
 		out += list(instance.to_ui_list())
 		qdel(instance)
 	return out
