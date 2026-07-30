@@ -1,8 +1,10 @@
 /datum/admin_ticket_granter
 	var/client/admin_client
+	var/prefill_ckey
 
-/datum/admin_ticket_granter/New(client/C)
+/datum/admin_ticket_granter/New(client/C, prefill_ckey)
 	admin_client = C
+	src.prefill_ckey = prefill_ckey
 
 /datum/admin_ticket_granter/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -89,15 +91,16 @@
 	return list(
 		"type_schemas" = type_schemas,
 		"typepath_options" = typepath_options,
+		"templates" = collect_templates(),
+		"prefill_ckey" = prefill_ckey,
 	)
 
 /datum/admin_ticket_granter/proc/_collect_subtypes(base)
 	var/list/out = list()
-	for(var/path in subtypesof(base))
-		var/datum/D = path
-		if(initial(D.abstract_type) == path)
+	for(var/datum/D as anything in subtypesof(base))
+		if(IS_ABSTRACT(D))
 			continue
-		out += "[path]"
+		out += "[D]"
 	return out
 
 /datum/admin_ticket_granter/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -146,6 +149,16 @@
 			tt.triumph_amount = text2num(params["triumph_amount"])
 
 	deliver_ticket(t, target_ckey, admin_mob)
+
+/datum/admin_ticket_granter/proc/collect_templates()
+	var/list/out = list()
+	for(var/datum/ticket_template/D as anything in subtypesof(/datum/ticket_template))
+		if(IS_ABSTRACT(D))
+			continue
+		var/datum/ticket_template/instance = new D()
+		out += list(instance.to_ui_list())
+		qdel(instance)
+	return out
 
 /datum/admin_ticket_granter/proc/deliver_ticket(datum/ticket/t, target_ckey, mob/admin_mob)
 	var/client/C = GLOB.directory[target_ckey]

@@ -3,6 +3,7 @@
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
 	contraband = TRUE
+	abstract_type = /datum/supply_pack/narcotics
 
 /datum/supply_pack/narcotics/sigs
 	name = "Pipe Weed Zig"

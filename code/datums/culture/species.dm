@@ -8,6 +8,8 @@
 		SPEC_ID_HALF_DROW,
 		SPEC_ID_DWARF,
 		SPEC_ID_KOBOLD,
+		SPEC_ID_SNOW_ELF,
+		SPEC_ID_HALF_SNOW_ELF,
 	)
 
 /datum/culture/species/elven
@@ -16,6 +18,7 @@
 		SPEC_ID_ELF,
 		SPEC_ID_HALF_ELF,
 	)
+	accent = ACCENT_ELF
 
 /datum/culture/species/elven/costal
 	name = "Coastal Tribes"
@@ -56,21 +59,25 @@
 	species = list(
 		SPEC_ID_HALFLING
 	)
+	accent = ACCENT_HALFLING
 
 /datum/culture/species/halfling/jaded
 	name = "worldly halflings"
 	description = "Known to humens as halflings who have been outside of Hearthhill for longer, identifiable by the lack of shock in their eyes when someone is wounded in front of them. They understand humens can die like animals, though they are still averse to violence."
 	pre_append = "the "
+	accent = ACCENT_NONE
 
 /datum/culture/species/half_orc
 	abstract_type = /datum/culture/species/half_orc
 	species = list(
 		SPEC_ID_HALF_ORC,
 	)
+	accent = ACCENT_HORC
 
 /datum/culture/species/half_orc/shellcrest
 	name = "Shellcrest"
 	description = "Known to humens as vicious pirates, the Shellcrest tribe lives off the western coast of Vanderlin and the Isle of Enigma. They're famous for proving that a metal boat can float as well as a wooden one, through complete and utter blind enthusiasm."
+	accent = ACCENT_PIRATE
 
 /datum/culture/species/half_orc/blood_axe
 	name = "Blood Axe"
@@ -145,6 +152,7 @@
 		SPEC_ID_KOBOLD
 	)
 	pre_append = "the "
+	accent = ACCENT_KOBOLD
 
 /datum/culture/species/kobold/emberhide
 	name = "Emberhide tribes"
@@ -185,6 +193,7 @@
 		SPEC_ID_TRITON
 	)
 	pre_append = "the "
+	accent = ACCENT_TRITON
 
 /datum/culture/species/triton/reef
 	name = "Reef colonies"
@@ -207,6 +216,7 @@
 	species = list(
 		SPEC_ID_TIEFLING
 	)
+	accent = ACCENT_TIEFLING
 
 /datum/culture/species/tiefling/surprise
 	name = "humen-born origin"
@@ -245,6 +255,7 @@
 		SPEC_ID_DWARF
 	)
 	pre_append = "the "
+	accent = ACCENT_DWARF
 
 /datum/culture/species/dwarf/federation
 	name = "Dwarven Federation"

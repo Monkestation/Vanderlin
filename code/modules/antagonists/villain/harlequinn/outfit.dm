@@ -31,6 +31,7 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/leather/jacket
 	beltl = /obj/item/weapon/knife/dagger/steel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/storage/belt/pouch/coins/poor
 	cloak = /obj/item/clothing/cloak/half/shadowcloak

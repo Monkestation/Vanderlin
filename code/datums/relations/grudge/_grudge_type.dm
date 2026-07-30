@@ -22,11 +22,11 @@ GLOBAL_LIST_EMPTY(grudge_pool_generic)
 	GLOB.grudge_pool_by_dept = list()
 	GLOB.grudge_pool_generic = list()
 
-	for(var/grudge_type in typesof(/datum/grudge_type))
-		var/datum/grudge_type/G = grudge_type
-		if(IS_ABSTRACT(G))
+	for(var/datum/grudge_type/grudge as anything in typesof(/datum/grudge_type))
+		if(IS_ABSTRACT(grudge))
 			continue
-		var/datum/grudge_type/temp = new G
+
+		var/datum/grudge_type/temp = new grudge
 
 		var/list/atitles = temp.aggressor_titles
 		var/list/vtitles = temp.victim_titles
@@ -38,16 +38,16 @@ GLOBAL_LIST_EMPTY(grudge_pool_generic)
 					var/key = "[at]>[vt]"
 					if(!GLOB.grudge_pool_by_job[key])
 						GLOB.grudge_pool_by_job[key] = list()
-					GLOB.grudge_pool_by_job[key] += grudge_type
+					GLOB.grudge_pool_by_job[key] += grudge
 			continue
 
 		// Department-specific.
-		if(G::grudge_bitflags != NONE)
-			var/dept_key = dept_flag_to_key(G::grudge_bitflags)
+		if(grudge::grudge_bitflags != NONE)
+			var/dept_key = dept_flag_to_key(grudge::grudge_bitflags)
 			if(dept_key)
 				if(!GLOB.grudge_pool_by_dept[dept_key])
 					GLOB.grudge_pool_by_dept[dept_key] = list()
-				GLOB.grudge_pool_by_dept[dept_key] += grudge_type
+				GLOB.grudge_pool_by_dept[dept_key] += grudge
 			continue
 
-		GLOB.grudge_pool_generic += grudge_type
+		GLOB.grudge_pool_generic += grudge

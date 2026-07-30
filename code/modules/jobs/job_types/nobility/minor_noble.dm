@@ -43,6 +43,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
+	knows_the_town = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
 	advclass_cat_rolls = list(CTAG_MINOR_NOBLE = 20)
@@ -85,6 +86,7 @@
 	category_tags = list(CTAG_MINOR_NOBLE)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	give_bank_account = 40
+	knows_the_town = TRUE
 	honorary = "Baronet"
 	honorary_f = "Baronetess"
 
@@ -127,6 +129,7 @@
 	outfit = /datum/outfit/minornoble/magnate
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 300
+	knows_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -172,6 +175,7 @@
 	outfit = /datum/outfit/minornoble/magickal_graduate
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 20
+	knows_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -217,6 +221,7 @@
 	outfit = /datum/outfit/minornoble/herald
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 60
+	knows_the_town = TRUE
 	honorary = "Lord Herald"
 	honorary_f = "Lady Herald"
 
@@ -254,6 +259,7 @@
 	outfit = /datum/outfit/minornoble/vassal
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 100
+	knows_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 

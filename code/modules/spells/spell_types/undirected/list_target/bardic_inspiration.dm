@@ -44,5 +44,6 @@
 
 /datum/action/cooldown/spell/bardic_inspiration/cast(mob/living/cast_on)
 	. = ..()
-	if(cast_on.can_hear())
-		cast_on.apply_status_effect(/datum/status_effect/buff/bardic_inspiration)
+	if(HAS_TRAIT(cast_on, TRAIT_DEAF))
+		return
+	cast_on.apply_status_effect(/datum/status_effect/buff/bardic_inspiration)

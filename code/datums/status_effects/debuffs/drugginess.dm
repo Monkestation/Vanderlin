@@ -3,6 +3,7 @@
 	id = "drugged"
 	alert_type = /atom/movable/screen/alert/status_effect/high
 	remove_on_fullheal = TRUE
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/drugginess/on_creation(mob/living/new_owner, duration = 10 SECONDS)
 	src.duration = duration

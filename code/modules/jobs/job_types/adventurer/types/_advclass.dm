@@ -52,6 +52,9 @@
 	if(length(banned_patrons) && (to_check.patron.type in banned_patrons))
 		return FALSE
 
+	if(tennite_triumph_exclusive && !to_check.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(to_check.patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		return FALSE
+
 	if(!antags_can_pick && to_check.mind?.special_role)
 		return FALSE
 

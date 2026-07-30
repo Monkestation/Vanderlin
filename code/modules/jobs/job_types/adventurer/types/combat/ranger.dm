@@ -34,10 +34,6 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/ranger
 
-	traits = list(
-		TRAIT_DODGEEXPERT
-	)
-
 /datum/job/advclass/combat/ranger/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(prob(25))
@@ -64,28 +60,21 @@
 /datum/job/advclass/combat/ranger/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Bow", "Longbow", "Crossbow")
-	var/weapon_choice = tgui_input_list(player_client, "Take up arms", "Strike them from afar.", weapons)
-	switch(weapon_choice)
-		if("Bow") // worst choice, so you get some bonus stats/skills. bows are harder to make then real weapons.
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow, ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/iron, ITEM_SLOT_BELT_L)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson, ITEM_SLOT_SHIRT)
+	var/static/list/selectable = list( \
+		"Bow" = list(/obj/item/gun/ballistic/bow, /obj/item/ammo_holder/quiver/arrows, /obj/item/weapon/sword/iron, /obj/item/clothing/armor/gambeson), \
+		"Longbow" = list(/obj/item/gun/ballistic/bow/long, /obj/item/ammo_holder/quiver/arrows, /obj/item/clothing/shirt/undershirt), \
+		"Crossbow" = list(/obj/item/gun/ballistic/bow/cross, /obj/item/clothing/head/helmet/kettle/slit/iron, /obj/item/ammo_holder/quiver/bolts, /obj/item/weapon/sword/short/iron, /obj/item/clothing/shirt/undershirt), \
+	)
+	var/choice = spawned.select_equippable(player_client, selectable, message = "Choose your weapon", title = "May your aim be true.")
+	switch(choice)
+		if("Bow")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 20)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 25)
+			spawned.adjust_skill_level(/datum/attribute/skill/misc/athletics, 5)
+			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, JOB_TRAIT)
+		if("Longbow")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 20)
-			spawned.adjust_skill_level(/datum/attribute/skill/misc/athletics, 5) //slightly more athletics
-		if("Longbow") // objectively strongest choice, no bonuses.
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/shirt/undershirt, ITEM_SLOT_SHIRT)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 20)
+			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, JOB_TRAIT)
 		if("Crossbow")
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/kettle/slit/iron, ITEM_SLOT_HEAD)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short/iron, ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/shirt/undershirt, ITEM_SLOT_SHIRT)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 25)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/crossbows, 20)
-			REMOVE_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 25)

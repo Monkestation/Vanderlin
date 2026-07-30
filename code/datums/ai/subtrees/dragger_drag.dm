@@ -79,8 +79,8 @@
 					if(!T.density)
 						wilderness_turfs += T
 		else
-			var/mob/random_dungeon_mob = pick(SSmatthios_mobs.matthios_mobs)
-			for(var/turf/T in orange(15, random_dungeon_mob))
+			var/mob/random_dungeon_mob = SSmatthios_mobs.get_random_mob()
+			for(var/turf/T as anything in RANGE_TURFS(15, random_dungeon_mob))
 				if(!T.density)
 					wilderness_turfs += T
 

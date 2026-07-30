@@ -24,6 +24,11 @@
 	sellprice = 1
 	item_weight = 34 GRAMS
 
+/obj/item/reagent_containers/glass/alchemical/examine(mob/user)
+	. = ..()
+	if(!closed)
+		. += span_info("The cork appears to be off.")
+
 /obj/item/reagent_containers/glass/alchemical/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(closed)
 		return NONE
@@ -41,14 +46,12 @@
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You carefully press the cork back into the mouth of [src]."))
 		spillable = FALSE
-		desc = initial(desc)
 	else
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You thumb off the cork from [src]."))
 		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		spillable = TRUE
-		desc += "The cork appears to be off."
 	update_appearance(UPDATE_OVERLAYS)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 

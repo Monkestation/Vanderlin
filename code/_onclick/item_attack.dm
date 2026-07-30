@@ -693,6 +693,7 @@
 	send_item_attack_message(I, user, hitlim)
 	next_attack_msg.Cut()
 	I.do_special_attack_effect(user, null, null, src, null)
+	return TRUE
 
 
 /mob/living/simple_animal/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, peeldivisor, intdamfactor = 1, used_weapon)
@@ -705,7 +706,7 @@
 			armorval += max(0, natural - armor_penetration)
 
 	if(bbarding && !bbarding.obj_broken)
-		armorval = bbarding.armor.getRating(type)
+		armorval = bbarding.get_armor().get_rating(type)
 		var/intdamage = damage
 		if(type != "blunt")
 			if((damage + armor_penetration) > armorval)

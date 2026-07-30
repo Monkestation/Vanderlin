@@ -15,7 +15,7 @@
 /// Fired by trigger_invasion() when latent_ambush >= max_ambush.
 /// Override in concrete subtypes to start your dormant invasion events, left as an overridable thing incase we want special things.
 /datum/threat_region/proc/on_invasion_threshold()
-	try_spawn_harlequinn()
+	//try_spawn_harlequinn()
 	return
 
 /datum/threat_region/proc/reduce_latent_ambush(amount)

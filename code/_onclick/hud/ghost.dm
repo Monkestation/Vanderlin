@@ -22,16 +22,25 @@
 
 /atom/movable/screen/ghost/teleport
 	name = "Teleport"
-	screen_loc = "SOUTH:6,CENTER:24"
+	screen_loc = "SOUTH:6,CENTER+1:24"
 	icon_state = "teleport"
 
 /atom/movable/screen/ghost/teleport/Click()
 	var/mob/dead/observer/G = usr
 	G.dead_tele()
 
+/atom/movable/screen/ghost/set_final_words
+	name = "Set Final Words"
+	screen_loc = "SOUTH:6,CENTER:24"
+	icon_state = "set_final_words"
+
+/atom/movable/screen/ghost/set_final_words/Click()
+	var/mob/dead/observer/G = usr
+	G.set_final_words()
+
 /atom/movable/screen/ghost/ghost_up
 	name = "Ghost Up"
-	screen_loc = "SOUTH:6,CENTER+1:24"
+	screen_loc = "SOUTH:6,CENTER+2:24"
 	icon_state = "up"
 
 /atom/movable/screen/ghost/ghost_up/Click()
@@ -40,7 +49,7 @@
 
 /atom/movable/screen/ghost/ghost_down
 	name = "Ghost Down"
-	screen_loc = "SOUTH:6,CENTER+2:24"
+	screen_loc = "SOUTH:6,CENTER+3:24"
 	icon_state = "down"
 
 /atom/movable/screen/ghost/ghost_down/Click()
@@ -84,10 +93,13 @@
 	using = new /atom/movable/screen/ghost/orbit(null, src)
 	static_inventory += using
 
-	using = new /atom/movable/screen/ghost/teleport(null, src)
+	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
 	static_inventory += using
 
-	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
+	using = new /atom/movable/screen/ghost/set_final_words(null, src)
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/teleport(null, src)
 	static_inventory += using
 
 	using = new /atom/movable/screen/ghost/ghost_up(null, src)

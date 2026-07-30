@@ -32,4 +32,4 @@
 		prefs.write_preference(/datum/preference/choiced/voice_type, voicetype_input)
 		if(voicetype_input == VOICE_TYPE_ANDRO)
 			to_chat(user, span_warning("This will use the feminine voicepack pitched down a bit to achieve a more androgynous sound."))
-		to_chat(user, span_warning("Your character will now vocalize with a [lowertext(prefs.read_preference(/datum/preference/choiced/voice_type))] affect."))
+		to_chat(user, span_warning("Your character will now vocalize with a [LOWER_TEXT(prefs.read_preference(/datum/preference/choiced/voice_type))] affect."))

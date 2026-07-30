@@ -22,6 +22,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
+		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -46,8 +47,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/roguehood/psydon/confessor, ///inqport
 		/obj/item/clothing/face/facemask/steel/confessor, ///inqport
 		/obj/item/clothing/gloves/bandages/pugilist,
-		/obj/item/clothing/armor/gambeson/heavy/otavan/inq, ///inqport
-		/obj/item/clothing/armor/gambeson/heavy/otavan, ///null
+		/obj/item/clothing/armor/gambeson/heavy/grenzel/inq, ///inqport
+		/obj/item/clothing/armor/gambeson/heavy/grenzel, ///null
 		/obj/item/clothing/armor/gambeson/heavy/inq, //inqport
 		/obj/item/clothing/armor/leather/studded,
 		/obj/item/clothing/armor/leather/jacket/leathercoat/confessor, //inqport
@@ -62,11 +63,11 @@ abstract types are automatically excluded.
 		/obj/item/clothing/armor/plate/fluted,
 		/obj/item/clothing/cloak/templar, //base type
 		/obj/item/clothing/face/antiq, //implied to be a weird heartfelt technoitem. good luck replicating this. unique to antiquarian
-		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/wrists/bracers/preceptor, //Inqstuff
 		/obj/item/clothing/head/menacing/mad_touched_treasure_hunter, //cursed
 		/obj/item/clothing/face/facemask/steel/mad_touched, //cursed
 		/obj/item/clothing/cloak/poncho/yellow,//No free colouring
-		/obj/item/clothing/cloak/ordinatorcape/lirvas,
+		/obj/item/clothing/cloak/ordinatorcape/warrior,
 		/obj/item/clothing/cloak/minotaur,
 		/obj/item/clothing/cloak/psydontabard/black,
 		/obj/item/clothing/cloak/psydontabard/black/alt,
@@ -76,6 +77,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/neck/gorget/gold/king,
 		/obj/item/clothing/head/helmet/visored/gold/king,
 		/obj/item/clothing/shirt/robe/hag,
+		/obj/item/clothing/head/helmet/heavy/necked/cadwyn,
+		/obj/item/clothing/cloak/cadwyn,
 
 		/obj/item/clothing/head/helmet/heavy/dwarven,
 		/obj/item/clothing/head/helmet/heavy/dwarven/smith,
@@ -124,20 +127,21 @@ abstract types are automatically excluded.
 		/obj/item/clothing/gloves/plate/iron/banded,
 
 		///all blackmeadow are pending blackmeadow features
-		/obj/item/clothing/cloak/kazengun,
-		/obj/item/clothing/neck/gorget/kazengun,
-		/obj/item/clothing/shoes/boots/leather/kazengun,
-		/obj/item/clothing/pants/trou/leather/kazengun,
-		/obj/item/clothing/face/facemask/steel/kazengun,
-		/obj/item/clothing/face/facemask/steel/kazengun/full,
+		/obj/item/clothing/cloak/blackmeadow,
+		/obj/item/clothing/neck/gorget/blackmeadow,
+		/obj/item/clothing/shoes/boots/leather/blackmeadow,
+		/obj/item/clothing/pants/trou/leather/blackmeadow,
+		/obj/item/clothing/face/facemask/steel/blackmeadow,
+		/obj/item/clothing/face/facemask/steel/blackmeadow/full,
 		/obj/item/clothing/head/helmet/heavy/kabuto,
 		/obj/item/clothing/armor/plate/full/samsibsa,
 		/obj/item/clothing/gloves/plate/kote,
 		/obj/item/clothing/head/helmet/kettle/jingasa,
 		/obj/item/clothing/armor/brigandine/haraate,
 
-		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/wrists/bracers/preceptor, //Inqstuff
 		/obj/item/clothing/pants/trou/leather/pontifex,
+		/obj/item/clothing/head/peel_pin, //Giveaway only
 	)
 	// these don't use misc_flags = CRAFTING_TEST_EXCLUDE because we want to explicitly know which paths we are excluding.
 	/// excludes paths along with their subtypes

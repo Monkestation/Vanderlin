@@ -7,7 +7,8 @@
 	id = "hungryt1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt1
 	effectedstats = list(STAT_SPEED = -1, STAT_STRENGTH = -1, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt1
 	name = "Peckish, stomach growling"
@@ -30,7 +31,8 @@
 	id = "hungryt2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
 	effectedstats = list(STAT_SPEED = -4, STAT_STRENGTH = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -1)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt2
 	name = "Hungry, need food"
@@ -53,7 +55,8 @@
 	id = "hungryt3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt3
 	effectedstats = list(STAT_SPEED = -6, STAT_STRENGTH = -6, STAT_CONSTITUTION = -6, STAT_ENDURANCE = -6)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt3
 	name = "STARVING"
@@ -75,8 +78,7 @@
 /datum/status_effect/debuff/hungryt4
 	id = "hungryt4"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt4
-	duration = 100
-
+	duration = 10 SECONDS
 
 //Used only when starvation damage is enabled
 /atom/movable/screen/alert/status_effect/debuff/hungryt4
@@ -96,6 +98,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/wiz
 	effectedstats = list(STAT_INTELLIGENCE = -5)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/wiz
 	name = "Fading Power"
@@ -108,7 +111,8 @@
 	id = "thirsty1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt1
 	effectedstats = list(STAT_ENDURANCE = -1, STAT_SPEED = -1)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt1
 	name = "Getting thirsty"
@@ -132,7 +136,8 @@
 	id = "thirsty2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt2
 	effectedstats = list(STAT_SPEED = -4, STAT_ENDURANCE = -4)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt2
 	name = "Extremly thirsty"
@@ -155,7 +160,8 @@
 	id = "thirsty3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt3
 	effectedstats = list(STAT_STRENGTH = -6, STAT_SPEED = -6, STAT_ENDURANCE = -6)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt3
 	name = "Extreme Dehydration"
@@ -177,8 +183,7 @@
 /datum/status_effect/debuff/thirstyt4
 	id = "thirstyt4"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt4
-	duration = 100
-
+	duration = 10 SECONDS
 
 //Used only when starvation damage is enabled
 /atom/movable/screen/alert/status_effect/debuff/thirstyt4
@@ -199,6 +204,7 @@
 	id = "uncookedfood"
 	effectedstats = null
 	duration = 4 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 
@@ -221,6 +227,7 @@
 	effectedstats = null
 	alert_type = null
 	duration = 4 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/badmeal
@@ -239,6 +246,7 @@
 	effectedstats = null
 	alert_type = null
 	duration = 4 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 
 /datum/status_effect/debuff/burnedfood/on_apply()
@@ -258,6 +266,7 @@
 	effectedstats = null
 	alert_type = null
 	duration = 4 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/rotfood
@@ -278,7 +287,8 @@
 	id = "bleedingt1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt1
 	effectedstats = list(STAT_SPEED = -2)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt1
 	name = "Dizzy"
@@ -289,7 +299,8 @@
 	id = "bleedingt2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt2
 	effectedstats = list(STAT_STRENGTH = -1, STAT_SPEED = -4)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt2
 	name = "Faint"
@@ -300,7 +311,8 @@
 	id = "bleedingt3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt3
 	effectedstats = list(STAT_STRENGTH = -3, STAT_SPEED = -6)
-	duration = 100
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt3
 	name = "Drained"
@@ -311,6 +323,7 @@
 	id = "sleepytime"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/sleepytime
 	effectedstats = list(STAT_SPEED = -2, STAT_ENDURANCE = -2)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/sleepytime/on_apply()
 	. = ..()
@@ -343,6 +356,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/netted
 	duration = 2 MINUTES
 	effectedstats = list(STAT_SPEED = -5, STAT_ENDURANCE = -2)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/netted/on_apply()
 		. = ..()
@@ -370,6 +384,7 @@
 	id = "trainsleep"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/trainsleep
 	effectedstats = list(STAT_STRENGTH = -1, STAT_SPEED = -1, STAT_ENDURANCE = -1)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/trainsleep
 	name = "Muscle Soreness"
@@ -381,6 +396,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/barbfalter
 	duration = 30 SECONDS
 	effectedstats = list(STAT_STRENGTH = -2, STAT_SPEED = -2)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/barbfalter
 	name = "Faltering"
@@ -392,6 +408,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/revive
 	duration = 15 MINUTES
 	effectedstats = list(STAT_STRENGTH = -4, STAT_SPEED = -3, STAT_ENDURANCE = -3, STAT_CONSTITUTION = -4)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/revive
 	name = "Revival Sickness"
@@ -403,6 +420,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/chilled
 	effectedstats = list(STAT_SPEED = -5, STAT_STRENGTH = -2, STAT_ENDURANCE = -2)
 	duration = 15 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/chilled
 	name = "Chilled"
@@ -422,7 +440,8 @@
 	id = "eorapacify"
 	status_type = STATUS_EFFECT_REPLACE
 	tick_interval = 1
-	duration = 85
+	duration = 8.5 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = null
 
 /datum/status_effect/eorapacify/on_apply()
@@ -438,6 +457,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/drunk
 	effectedstats = list(STAT_STRENGTH = -2, STAT_FORTUNE = -5, STAT_PERCEPTION = -2, STAT_SPEED = -3) //debuff stats important in attacking
 	duration = 20 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/drunk
 	name = "Eoran Wine"
@@ -449,6 +469,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/mesmerised
 	effectedstats = list(STAT_STRENGTH = -2, STAT_FORTUNE = -2, STAT_PERCEPTION = -2, STAT_SPEED = -2) //
 	duration = 30 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/mesmerised
 	name = "Mesmerised"
@@ -461,6 +482,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/call_to_slaughter
 	effectedstats = list(STAT_ENDURANCE = -2, STAT_CONSTITUTION = -2)
 	duration = 2.5 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/call_to_slaughter
 	name = "Call to Slaughter"
@@ -472,6 +494,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/baothadruqks
 	effectedstats = list(STAT_PERCEPTION = -2, STAT_SPEED = -1, STAT_FORTUNE = -5)
 	duration = 20 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/baothadruqks
 	name = "Baothan Dust"
@@ -483,6 +506,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/lux_drained
 	effectedstats = list(STAT_FORTUNE = -3, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1, STAT_INTELLIGENCE = -1, STAT_PERCEPTION = -1, STAT_SPEED = -1, STAT_STRENGTH = -1)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/lux_drained
 	name = "Lux Drained"
@@ -494,6 +518,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/flaw_lux_taken
 	effectedstats = list(STAT_FORTUNE = -3, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1, STAT_INTELLIGENCE = -1, STAT_PERCEPTION = -1, STAT_SPEED = -1, STAT_STRENGTH = -1)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/flaw_lux_taken
 	name = "Lux Drained"
@@ -504,6 +529,7 @@
 	id = "stinky_person"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/stinky_person
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/stinky_person
 	name = "Stinky Person"
@@ -523,6 +549,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/tainted_lux
 	effectedstats = list(STAT_FORTUNE = -2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/tainted_lux
 	name = "Tainted Lux"
@@ -533,6 +560,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/received_tainted_lux
 	effectedstats = list(STAT_FORTUNE = -2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/received_tainted_lux
 	name = "Received Tainted Lux"
@@ -543,6 +571,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/corrupted_by_tainted_lux
 	effectedstats = list(STAT_FORTUNE = -4)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/corrupted_by_tainted_lux
 	name = "Corrupted..."
@@ -553,6 +582,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/electrified
 	duration = 20 SECONDS
 	status_type = STATUS_EFFECT_UNIQUE
+	tick_interval = STATUS_EFFECT_NO_TICK
 	var/shock_strength = 30
 	var/static/mutable_appearance/electric = mutable_appearance('icons/effects/effects.dmi', "electricity")
 
@@ -597,24 +627,28 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t1
 	effectedstats = list(STAT_FORTUNE = -3)
 	duration = 5 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/cursed_t2
 	id = "necra_curse"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t2
 	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
 	duration = 10 MINUTES //Double the time, this grave had effort put in.
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/cursed_t3
 	id = "necra_ire"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t3
 	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/cursed_t4
 	id = "necra_rage"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t4
 	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/curse_t1
 	name = "Necra's Gaze"
@@ -641,6 +675,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed
 	effectedstats = list(STAT_FORTUNE = -5) // More severe so that the permanent debuff from having the perk makes it actually worth it.
 	duration = 10 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/cursed
 	name = "Cursed"
@@ -653,6 +688,7 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	effectedstats = list(STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/black_briar1/on_apply()
 	. = ..()
@@ -669,6 +705,7 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	effectedstats = list(STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_PER = -2, STATKEY_INT = -2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/black_briar2/on_apply()
 	. = ..()
