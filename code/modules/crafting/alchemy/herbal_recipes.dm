@@ -675,7 +675,7 @@
 	metabolization_rate = 0.7
 	taste_description = "you just bit your cheek"
 
-datum/reagent/poison/tear/on_mob_add(mob/living/L)
+/datum/reagent/poison/tear/on_mob_add(mob/living/L)
 	. = ..()
 	to_chat(L, span_notice("You suddenly feel loose at the joints!"))
 	ADD_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
@@ -691,7 +691,7 @@ datum/reagent/poison/tear/on_mob_add(mob/living/L)
 	metabolization_rate = 0.01
 	taste_description = "cold gold"
 
-datum/reagent/poison/kingsbane/on_mob_add(mob/living/L)
+/datum/reagent/poison/kingsbane/on_mob_add(mob/living/L)
 	. = ..()
 	to_chat(L, span_notice("You suddenly become itchy at the thought of coins!"))
 	ADD_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
