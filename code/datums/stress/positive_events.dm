@@ -450,7 +450,7 @@
 /datum/stress_event/campfire
 	desc = span_green("The warmth of the fire is comforting.")
 	stress_change = -1
-	timer = 1 MINUTES
+	timer = 5 SECONDS
 
 /datum/stress_event/soulchurnerdestroyed
 	timer = 10 MINUTES
