@@ -606,13 +606,14 @@
 	metabolization_rate = 0.1 
 	taste_description = "bitter thoughts"
 
-/datum/reagent/poison/erratique/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/herbal/erratique/on_mob_add(mob/living/L)
 	. = ..()
-	ADD_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")  // effectively just BZ, aka IRL war chemical which makes you go insane.
+	to_chat(L, span_notice("You suddenly feel DEEPLY WRONG! Hey, Whats that over there?! "))
+	ADD_TRAIT(L, TRAIT_ZIZO_CURSE, "[type]")   // effectively just BZ, aka IRL war chemical which makes you go insane.
 
-/datum/reagent/poison/erratique/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/herbal/erratique/on_mob_delete(mob/living/L)
 	. = ..()
-	REMOVE_TRAIT(M, TRAIT_ZIZO_CURSE, "[type]")
+	REMOVE_TRAIT(L, TRAIT_ZIZO_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
@@ -674,13 +675,14 @@
 	metabolization_rate = 0.7
 	taste_description = "you just bit your cheek"
 
-/datum/reagent/poison/tear/on_mob_metabolize(mob/living/M)
+datum/reagent/poison/tear/on_mob_add(mob/living/L)
 	. = ..()
-	ADD_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
+	to_chat(L, span_notice("You suddenly feel loose at the joints!"))
+	ADD_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
 
-/datum/reagent/poison/tear/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/tear/on_mob_delete(mob/living/L)
 	. = ..()
-	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
+	REMOVE_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
 
 /datum/reagent/poison/kingsbane
 	name = "Kingsbane"  //more of a joke poison, just messes with nobles and money
@@ -689,14 +691,14 @@
 	metabolization_rate = 0.01
 	taste_description = "cold gold"
 
-/datum/reagent/poison/kingsbane/on_mob_metabolize(mob/living/M)
+datum/reagent/poison/kingsbane/on_mob_add(mob/living/L)
 	. = ..()
-	ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
+	to_chat(L, span_notice("You suddenly become itchy at the thought of coins!"))
+	ADD_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
 
-/datum/reagent/poison/kingsbane/on_mob_end_metabolize(mob/living/M)
+/datum/reagent/poison/kingsbane/on_mob_delete(mob/living/L)
 	. = ..()
-	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
-
+	REMOVE_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
 
 // Magical Enhancement
 
