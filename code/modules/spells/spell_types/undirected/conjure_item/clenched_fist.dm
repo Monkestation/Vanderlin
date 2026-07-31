@@ -24,7 +24,7 @@
         fisticuffs = new(owner)
 
     if(!owner.put_in_active_hand(fisticuffs))
-        owner.balloon_alert("hand full!")
+        owner.balloon_alert(owner, "hand full!")
         clean_fists()
         return
 
