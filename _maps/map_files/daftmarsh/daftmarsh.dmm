@@ -17859,8 +17859,8 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
-/obj/item/storage/backpack/satchel/otavan,
-/obj/item/storage/backpack/satchel/otavan,
+/obj/item/storage/backpack/satchel/grenzel,
+/obj/item/storage/backpack/satchel/grenzel,
 /turf/open/floor/churchmarble/purple,
 /area/indoors/town/church/inquisition)
 "pAq" = (

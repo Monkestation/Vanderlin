@@ -127,8 +127,7 @@
 	update_appearance()
 	if(owner && old_beating)
 		var/deathsdoor = TRUE
-		for(var/thing in (owner.getorganslotlist(ORGAN_SLOT_HEART) - src))
-			var/obj/item/organ/heart/heart = thing
+		for(var/obj/item/organ/heart/heart as anything in (owner.getorganslotlist(ORGAN_SLOT_HEART) - src))
 			if(heart.beating)
 				deathsdoor = FALSE
 		if(deathsdoor)

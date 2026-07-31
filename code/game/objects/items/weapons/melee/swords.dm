@@ -515,7 +515,6 @@
 	parrysound = "rapier"
 	swingsound = BLADEWOOSH_SMALL
 	SET_BASE_PIXEL(-16, -16)
-	dropshrink = 0.8
 
 	weapon_special = /datum/special_intent/piercing_lunge
 	item_weight = 700 GRAMS
@@ -626,7 +625,6 @@
 	desc = "An embellished swift sword from the east."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
-	dropshrink = 0.8
 	sellprice = 140 // its made with gold and steel, thats pretty valuable
 	item_weight = 750 GRAMS
 
@@ -706,7 +704,6 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	SET_BASE_PIXEL(-16, -16)
-	dropshrink = 0.75
 	bigboy = TRUE // WHY DOES THIS FUCKING VARIABLE CONTROL WHETHER THE BLOOD OVERLAY WORKS ON 64x64 WEAPONS
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/bronze
@@ -740,7 +737,6 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	dropshrink = 0.75
 	sellprice = 60
 	grid_height = 96
 	grid_width = 64
@@ -758,7 +754,6 @@
 	alt_intents = null
 
 	gripsprite = FALSE
-	dropshrink = 0.8
 	sellprice = 80
 	max_integrity = INTEGRITY_STRONG - 50 //this thing is long as hell, it would be more likely to break over time
 	item_weight = 1.4 KILOGRAMS
@@ -813,7 +808,6 @@
 	alt_intents = null
 	gripsprite = FALSE
 	max_integrity = INTEGRITY_STRONGEST
-	dropshrink = 0.9
 	sellprice = 60
 	item_weight = 1.6 KILOGRAMS
 
@@ -1519,7 +1513,6 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	dropshrink = 0.90
 	smeltresult = /obj/item/ingot/copper
 	sellprice = 10
 	item_weight = 1.8 KILOGRAMS
@@ -1647,7 +1640,6 @@
 	max_integrity = INTEGRITY_STANDARD
 
 	smeltresult = /obj/item/ingot/bronze
-	dropshrink = 0.80
 	item_weight = 700 GRAMS
 
 //A weapon meant to be used with two hands.
@@ -1855,7 +1847,6 @@
 
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
-	dropshrink = 1
 	smeltresult = /obj/item/ingot/gold
 	item_weight = 2.2 KILOGRAMS
 
