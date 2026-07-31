@@ -289,7 +289,7 @@ if [ "$pcre2_support" -eq 1 ]; then
 		echo
 		echo -e "${RED}ERROR: File(s) with no trailing newline detected, please add one.${NC}"
 		st=1
-	fi;
+	# fi;
 	# part "improper atom initialize args"
 	# if $grep -P '^/(obj|mob|turf|area|atom)/.+/Initialize\((?!mapload).*\)' "${code_files[@]}"; then
 	# 	echo
