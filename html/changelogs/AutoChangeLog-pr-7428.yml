@@ -1,4 +1,0 @@
-author: "Archeonan"
-delete-after: True
-changes:
-  - rscdel: "Removed dropshrink from most weapons"

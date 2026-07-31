@@ -693,8 +693,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		tooltips = new /datum/tooltip(src)
 
 	var/list/topmenus = GLOB.menulist[/datum/verbs/menu]
-	for(var/thing in topmenus)
-		var/datum/verbs/menu/topmenu = thing
+	for(var/datum/verbs/menu/topmenu as anything in topmenus)
 		var/topmenuname = "[topmenu]"
 		if(topmenuname == "[topmenu.type]")
 			var/list/tree = splittext(topmenuname, "/")
@@ -1390,7 +1389,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 /client/proc/preload_music()
 	if(SSsounds.initialized == TRUE && !cached_sounds)
-		for(var/sound_path as anything in SSsounds.all_music_sounds)
+		for(var/sound_path in SSsounds.all_music_sounds)
 			src << load_resource(sound_path, -1)
 		cached_sounds = TRUE
 
