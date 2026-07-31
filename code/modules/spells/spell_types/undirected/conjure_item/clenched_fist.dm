@@ -47,6 +47,6 @@
 
     if(!QDELETED(fisticuffs))
         qdel(fisticuffs)
-        active = FALSE
-        build_all_button_icons(UPDATE_BUTTON_STATUS)
+    active = FALSE
+    build_all_button_icons(UPDATE_BUTTON_STATUS)
     fisticuffs = null
