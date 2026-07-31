@@ -205,7 +205,7 @@
 		var/label
 		if(islist(req_type))
 			var/list/options = list()
-			for(var/possible as anything in req_type)
+			for(var/possible in req_type)
 				options += pickritual.parse_required_item(possible)
 			label = "[count] [english_list(options, and_text = "or")]"
 		else

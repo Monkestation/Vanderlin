@@ -431,7 +431,7 @@
 	if(forced_flaw)
 		if(!islist(forced_flaw))
 			forced_flaw = list(forced_flaw)
-		for(var/flaw as anything in forced_flaw)
+		for(var/flaw in forced_flaw)
 			if(ispath(flaw, /datum/quirk))
 				spawned.add_quirk(flaw)
 
@@ -508,7 +508,7 @@
 	if(forced_flaw)
 		if(!islist(forced_flaw))
 			forced_flaw = list(forced_flaw)
-		for(var/flaw as anything in forced_flaw)
+		for(var/flaw in forced_flaw)
 			if(ispath(flaw, /datum/quirk))
 				spawned.remove_quirk(flaw)
 
@@ -643,7 +643,7 @@
 			job_packs = equipping.job_packs[i]
 
 		var/list/reals = list()
-		for(var/pack as anything in job_packs)
+		for(var/pack in job_packs)
 			var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
 			if(!real_pack.can_pick_pack(src, previous_picked_types))
 				continue

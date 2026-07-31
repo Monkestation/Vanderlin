@@ -23,10 +23,12 @@
 			"fa_icon"= "box-open",
 			"color"= "#2196f3",
 			"fields" = list(
-				list("key" = "loadout_item_path", "label" = "Loadout Item Path",
-				 "type" = "typepath","base" = "/datum/loadout_item",
-				 "placeholder" = "/datum/loadout_item/...",
-				 "required" = TRUE),
+				list(
+					"key" = "loadout_item_path", "label" = "Loadout Item Path",
+					"type" = "typepath","base" = "/datum/loadout_item",
+					"placeholder" = "/datum/loadout_item/...",
+					"required" = TRUE,
+				),
 			),
 		),
 		list(
@@ -35,10 +37,12 @@
 			"fa_icon"= "dice",
 			"color"= "#9c27b0",
 			"fields" = list(
-				list("key" = "special_trait_path", "label" = "Special Trait Path",
-				 "type" = "typepath","base" = "/datum/special_trait",
-				 "placeholder" = "/datum/special_trait/...",
-				 "required" = TRUE),
+				list(
+					"key" = "special_trait_path", "label" = "Special Trait Path",
+					"type" = "typepath","base" = "/datum/special_trait",
+					"placeholder" = "/datum/special_trait/...",
+					"required" = TRUE,
+				),
 			),
 		),
 		list(
@@ -47,13 +51,19 @@
 			"fa_icon"= "briefcase",
 			"color"= "#ff9800",
 			"fields" = list(
-				list("key" = "job_boost_job","label" = "Job / Whitelist (blank = global)",
-				 "type" = "text",
-				 "placeholder" = "e.g. Artificer, or leave blank"),
-				list("key" = "job_boost_typepath", "label" = "Boost Type Path",
-				 "type" = "typepath","base" = "/datum/job_priority_boost",
-				 "placeholder" = "/datum/job_priority_boost/minor",
-				 "required" = TRUE),
+				list(
+					"key" = "job_boost_job","label" = "Job / Whitelist (blank = global)",
+					"type" = "text",
+					"placeholder" = "e.g. Artificer, or leave blank"
+				),
+				list(
+					"key" = "job_boost_typepath",
+					"label" = "Boost Type Path",
+					"type" = "typepath",
+					"base" = "/datum/job_priority_boost",
+					"placeholder" = "/datum/job_priority_boost/minor",
+					"required" = TRUE,
+				),
 			),
 		),
 		list(
@@ -62,10 +72,12 @@
 			"fa_icon"= "trophy",
 			"color"= "#ffd700",
 			"fields" = list(
-				list("key" = "triumph_amount", "label" = "Amount",
-				 "type" = "number", "min" = 1,
-				 "placeholder" = "e.g. 100",
-				 "required" = TRUE),
+				list(
+					"key" = "triumph_amount", "label" = "Amount",
+					"type" = "number", "min" = 1,
+					"placeholder" = "e.g. 100",
+					"required" = TRUE,
+				),
 			),
 		),
 		//here is how we do stuff

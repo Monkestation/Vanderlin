@@ -125,7 +125,7 @@
 /datum/hud/broodmother/New(mob/owner)
 	..()
 
-	for(var/element as anything in BROODMOTHER_HUD_ELEMENTS)
+	for(var/element in BROODMOTHER_HUD_ELEMENTS)
 		var/atom/movable/screen/using = new element()
 		using.set_new_hud(src)
 		static_inventory += using

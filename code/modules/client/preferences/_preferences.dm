@@ -455,8 +455,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	<div class="sprite headshot-bg" style="padding: 3px; box-sizing: border-box;">
 		<a href='?_src_=prefs;preference=headshot_link;task=input' style="display: block; width: 100%; height: 100%;">
 			<img id="headshot-img" src="[read_preference(/datum/preference/text/headshot_link) || ""]"
-				 style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; image-rendering: auto;"
-				 onerror="this.style.display='none';">
+				style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; image-rendering: auto;"
+				onerror="this.style.display='none';">
 		</a>
 	</div>
 	<div class="sprite ooc-bg"></div>
@@ -675,12 +675,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	update_preview_icon()
 
 /datum/preferences/proc/_get_loadout_slot(slot)
-    if(length(equipped_loadout) >= slot)
-        return equipped_loadout[slot]
-    var/rent_idx = slot - length(equipped_loadout)
-    if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
-        return single_round_loadout[rent_idx]
-    return null
+	if(length(equipped_loadout) >= slot)
+		return equipped_loadout[slot]
+	var/rent_idx = slot - length(equipped_loadout)
+	if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
+		return single_round_loadout[rent_idx]
+	return null
 
 /datum/preferences/proc/set_ui_theme(new_theme)
 	if(new_theme in list("dusty", "grimshart", "paper", "parchment"))
@@ -1252,7 +1252,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		for(var/datum/role_ban_instance/ban as anything in bans.bans)
 			if(!ban.curses)
 				continue
-			for(var/curse_name as anything in ban.curses)
+			for(var/curse_name in ban.curses)
 				var/datum/curse/curse = GLOB.curse_names[curse_name]
 				character.add_curse(curse.type)
 
