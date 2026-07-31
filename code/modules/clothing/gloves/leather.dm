@@ -54,7 +54,7 @@
 	desc = "Thick leather gloves for pulling thorny plants... or cracking skulls."
 	icon_state = "apothgloves"
 
-/obj/item/clothing/gloves/leather/otavan
+/obj/item/clothing/gloves/leather/grenzel
 	name = "grenzelhoftian leather gloves"
 	examine_name = "leather gloves"
 	desc = "A pair of heavy Grenzelhoftian leather gloves, commonly used by fencers, renowned for their quality."
@@ -73,7 +73,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 
-/obj/item/clothing/gloves/leather/otavan/inqgloves
+/obj/item/clothing/gloves/leather/grenzel/inqgloves
 	name = "inquisitorial leather gloves"
 	examine_name = "leather gloves"
 	desc = "Gloves of worn leather. Alas, the psydonian fetish wrapped around one is but a powerless replica."

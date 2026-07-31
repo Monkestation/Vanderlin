@@ -1,0 +1,4 @@
+author: "Sulaboy"
+delete-after: True
+changes:
+  - balance: "Kneestingers take damage when walked on by people without immunity."

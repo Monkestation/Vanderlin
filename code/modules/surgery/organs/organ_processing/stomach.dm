@@ -131,9 +131,7 @@
 	var/list/stomachs = owner.getorganslotlist(ORGAN_SLOT_STOMACH)
 
 	for(var/obj/item/organ/stomach/stomach as anything in stomachs)
-		for(var/chunk in stomach.reagents.reagent_list)
-			var/datum/reagent/bit = chunk
-
+		for(var/datum/reagent/bit as anything in stomach.reagents.reagent_list)
 			if(bit.metabolization_rate <= 0)
 				continue
 
