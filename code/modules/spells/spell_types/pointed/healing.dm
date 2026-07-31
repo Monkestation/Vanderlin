@@ -281,8 +281,7 @@
 		if(possible_organ.organ_flags & ORGAN_DESTROYED)
 			possible_organ.organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
 			possible_organ.scar_organ(20, 40)
-		if(possible_organ.damage > possible_organ.medium_threshold)
-			possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
+		possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
 
 /datum/action/cooldown/spell/healing/profane
 	name = "Corrupt Lesser Miracle"

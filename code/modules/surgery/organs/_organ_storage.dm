@@ -118,8 +118,7 @@
 		if(user.client && user.active_storage != src)
 			user.client.screen -= storing
 		if(user.observers && length(user.observers))
-			for(var/i in user.observers)
-				var/mob/dead/observe = i
+			for(var/mob/dead/observe as anything in user.observers)
 				if(observe.client && observe.active_storage != src)
 					observe.client.screen -= storing
 		if(!remote)

@@ -67,7 +67,7 @@
 
 	var/obj/item/repair_item_path
 	var/repair_value
-	for(var/item as anything in repair_thresholds)
+	for(var/item in repair_thresholds)
 		if(parent_integrity < repair_thresholds[item])
 			repair_item_path = item
 			repair_value = repair_thresholds[item] * atom_parent.max_integrity

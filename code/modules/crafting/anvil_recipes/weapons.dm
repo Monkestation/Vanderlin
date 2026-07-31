@@ -1092,19 +1092,19 @@
 
 // ------------------ Miscellaneous Weapons ------------------
 
-/datum/anvil_recipe/weapons/atgervi_shield
+/datum/anvil_recipe/weapons/dwarven_shield
 	name = "kite shield"
 	required_material = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree)
-	created_item = /obj/item/weapon/shield/atgervi
+	created_item = /obj/item/weapon/shield/dwarvenkite
 	category = "Shields"
 	craftdiff = 2
 
-/datum/anvil_recipe/weapons/atgervi_axe
+/datum/anvil_recipe/weapons/bearded_axe
 	name = "Bearded axe (+Small Log)"
 	required_material = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/axe/steel/atgervi
+	created_item = /obj/item/weapon/axe/steel/bearded
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/mace/cane/noble

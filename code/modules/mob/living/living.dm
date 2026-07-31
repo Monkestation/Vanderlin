@@ -1,18 +1,10 @@
-/mob/living/New(loc, ...)
-	. = ..()
+/mob/living/Initialize(mapload)
 	var/turf/turf = get_turf(loc)
 	if(turf)
-		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
-			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
-				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			faction |= FACTION_MATTHIOS
-			SSmatthios_mobs.register_mob(src)
+		if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_MATTHIOS_DUNGEON)))
+			add_faction(FACTION_MATTHIOS)
 		if(SSterrain_generation.get_island_at_location(turf))
-			faction |= "islander"
-			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
-
-/mob/living/Initialize()
+			add_faction("islander")
 	. = ..()
 	if(initial_size != RESIZE_DEFAULT_SIZE)
 		update_transform(initial_size)
@@ -35,15 +27,10 @@
 	if(!ambushable)
 		ADD_TRAIT(src, TRAIT_NOAMBUSH, INNATE_TRAIT)
 	recalculate_stats()
-	var/turf/turf = get_turf(src)
 	if(turf)
 		update_z(turf.z)
 
 /mob/living/Destroy()
-	if(FACTION_MATTHIOS in faction)
-		SSmatthios_mobs.unregister_mob(src)
-	if(cached_island_id)
-		SSisland_mobs.remove_mob(src)
 	update_z(null)
 
 	if(LAZYLEN(status_effects))
@@ -52,6 +39,7 @@
 				qdel(S)
 			else
 				S.be_replaced()
+
 	if(buckled)
 		buckled.unbuckle_mob(src,force=1)
 
@@ -1869,8 +1857,6 @@
 		return FALSE
 	if(is_centcom_level(T.z)) //dont detect mobs on centcom
 		return FALSE
-	if(is_away_level(T.z))
-		return FALSE
 	if(user != null && src == user)
 		return FALSE
 	if(invisibility || alpha == 0)//cloaked
@@ -2214,8 +2200,6 @@
 				//This isn't a problem for AIs with a client since the client will prevent this from being called anyway.
 				controller.set_ai_status(controller.get_expected_ai_status())
 
-		SSmobs.mobs_by_zlevel[new_z] += src
-
 	registered_z = new_z
 
 /mob/living/onTransitZ(turf/old_turf, turf/new_turf)
@@ -2364,12 +2348,12 @@
 	. += {"
 		<br><font size='1'>[VV_HREF_TARGETREF_1V(refid, VV_HK_BASIC_EDIT, "[ckey || "no ckey"]", NAMEOF(src, ckey))] / [VV_HREF_TARGETREF_1V(refid, VV_HK_BASIC_EDIT, "[real_name || "no real name"]", NAMEOF(src, real_name))]</font>
 		<br><font size='1'>
-			BRUTE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brute' id='brute'>[getBruteLoss()]</a>
-			FIRE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=fire' id='fire'>[getFireLoss()]</a>
-			TOXIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=toxin' id='toxin'>[getToxLoss()]</a>
-			OXY:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
-			CLONE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
-			BRAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
+			BRUTE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brute' id='brute'>[getBruteLoss()]</a>
+			FIRE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=fire' id='fire'>[getFireLoss()]</a>
+			TOXIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=toxin' id='toxin'>[getToxLoss()]</a>
+			OXY:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
+			CLONE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
+			BRAIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
 			PAIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=pain' id='pain'>[getPainLoss()]</a>
 			SHOCK:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock' id='shock'>[getShock()]</a>
 			SHOCK STAGE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock_stage' id='shock'>[getShockStage()]</a>
@@ -2704,7 +2688,7 @@
 					briar_notice = TRUE
 
 			if(briar_notice)
-				to_chat(span_briar(span_big("His gaze is enrapturing...")))
+				to_chat(src, span_briar(span_big("His gaze is enrapturing...")))
 				add_stress(/datum/stress_event/black_briar_noc)
 				return
 
@@ -2957,10 +2941,8 @@
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
 
-	if(src in SSmatthios_mobs.matthios_mobs)
-		SSmatthios_mobs.unregister_mob(src)
-	if(cached_island_id)
-		SSisland_mobs.remove_mob(src)
+	if(has_faction(FACTION_MATTHIOS))
+		remove_faction(FACTION_MATTHIOS)
 
 	return TRUE
 
