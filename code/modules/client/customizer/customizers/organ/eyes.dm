@@ -34,9 +34,9 @@
 /datum/customizer_choice/organ/eyes/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	..()
 	var/datum/customizer_entry/organ/eyes/eyes_entry = entry
-	dat += "<br>Right Eye Color: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=right_eye_color'><span class='color_holder_box' style='background-color:[eyes_entry.right_eye_color]'></span></a>"
+	dat += "<br>Right Eye Color: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=right_eye_color'><span class='color_holder_box' style='background-color:[eyes_entry.right_eye_color]'></span></a>"
 	if(allows_heterochromia)
-		dat += "<br>Left Eye Color: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=left_eye_color'><span class='color_holder_box' style='background-color:[eyes_entry.left_eye_color]'></span></a>"
+		dat += "<br>Left Eye Color: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=left_eye_color'><span class='color_holder_box' style='background-color:[eyes_entry.left_eye_color]'></span></a>"
 
 /datum/customizer_choice/organ/eyes/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	..()

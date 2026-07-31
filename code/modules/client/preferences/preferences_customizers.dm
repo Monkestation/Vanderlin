@@ -62,10 +62,10 @@
 		var/customizer_link
 
 		if(entry.disabled)
-			customizer_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing'"
+			customizer_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing'"
 		else
 			if(customizer.allows_disabling)
-				customizer_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing' class='linkOn'"
+				customizer_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing' class='linkOn'"
 			else
 				customizer_link = ""
 
@@ -74,7 +74,7 @@
 		if(!entry.disabled)
 			var/choice_link
 			if(length(customizer.customizer_choices) > 1)
-				choice_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=change_choice'"
+				choice_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=change_choice'"
 			else
 				choice_link = "class='linkOff'"
 			if(length(customizer.customizer_choices) > 1)

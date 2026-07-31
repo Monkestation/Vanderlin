@@ -60,7 +60,7 @@
 		<html><head><style type=\"text/css\">
 		body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 		dat += "[info]<br>"
-		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
+		dat += "<a href='byond://?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
 		user << browse(dat, "window=reading;size=460x460;can_close=0;can_minimize=0;can_maximize=0;can_resize=0")
 	else
