@@ -3970,10 +3970,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
-"bQc" = (
-/obj/structure/stairs,
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/clinic_large/apothecary)
 "bQg" = (
 /obj/structure/flora/grass/water,
 /turf/open/floor/dirt,
@@ -4374,6 +4370,11 @@
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
+/obj/effect/mapping_helpers/access/keyset/town/apothecary,
+/obj/structure/door/window{
+	name = "Bee Spider Farm"
+	},
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/clinic_large/apothecary)
 "bXY" = (
@@ -6278,13 +6279,6 @@
 /obj/structure/closet/crate/crafted_closet/dark,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/dungeoneer)
-"cQt" = (
-/obj/structure/fluff/railing/border{
-	dir = 10
-	},
-/obj/structure/fake_machine/scomm/r,
-/turf/open/floor/blocks/stonered/tiny,
-/area/indoors/town/clinic_large/apothecary)
 "cQu" = (
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
@@ -10553,21 +10547,6 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/openspace,
 /area/outdoors/town)
-"eQZ" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = 1;
-	pixel_y = 11
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = 7
-	},
-/obj/item/reagent_containers/glass/cup{
-	pixel_x = -6
-	},
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/blocks/stonered/tiny,
-/area/indoors/town/clinic_large/apothecary)
 "eRd" = (
 /turf/open/water/clean,
 /area/indoors/town/cell)
@@ -18209,6 +18188,13 @@
 /obj/item/natural/feather,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/town/tavern)
+"iwE" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/clinic_large/apothecary)
 "iwG" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/storage/backpack/backpack,
@@ -19625,6 +19611,12 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/red)
+"jcf" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/two,
+/area/indoors/town/clinic_large/apothecary)
 "jct" = (
 /obj/structure/bed/wool,
 /obj/item/bedsheet/fabric,
@@ -20841,14 +20833,6 @@
 "jDd" = (
 /turf/open/floor/metal,
 /area/outdoors/town)
-"jDe" = (
-/obj/structure/door/window{
-	name = "Bee Spider Farm"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/apothecary,
-/turf/open/floor/blocks/stonered,
-/area/indoors/town/clinic_large/apothecary)
 "jDj" = (
 /turf/open/openspace,
 /area/indoors/town/clocktower)
@@ -23046,10 +23030,10 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/town/basement)
 "kFv" = (
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "kFD" = (
@@ -26379,6 +26363,9 @@
 /obj/structure/window/openclose/reinforced{
 	dir = 4
 	},
+/obj/structure/curtain/bounty/dir{
+	dir = 4
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/apothecary)
 "meN" = (
@@ -26613,7 +26600,7 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
-	dir = 6
+	dir = 10
 	},
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town/clinic_large/apothecary)
@@ -29292,7 +29279,7 @@
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "nvD" = (
-/obj/structure/fluff/walldeco/sign/tailorsign/left,
+/obj/structure/fluff/walldeco/sign/apothecarysign,
 /turf/open/openspace,
 /area/outdoors/town)
 "nvH" = (
@@ -30846,6 +30833,11 @@
 /mob/living/simple_animal/hostile/retaliate/saiga/tame,
 /turf/open/floor/twig,
 /area/under/cave)
+"ohi" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/cobblerock,
+/area/indoors/town/clinic_large/apothecary)
 "oho" = (
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
@@ -31581,6 +31573,14 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/soilsons)
+"oui" = (
+/obj/effect/mapping_helpers/access/keyset/town/apothecary,
+/obj/structure/door/window{
+	name = "Bee Spider Farm"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/clinic_large/apothecary)
 "oun" = (
 /obj/structure/chair/wood/alt/chair_noble,
 /turf/open/floor/carpet/lord/center,
@@ -35746,7 +35746,17 @@
 /area/indoors/town/tavern)
 "qkQ" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/carafe/silver,
+/obj/item/candle/yellow{
+	pixel_x = 6
+	},
+/obj/item/candle/yellow{
+	pixel_x = 8;
+	pixel_y = -1
+	},
+/obj/item/flint{
+	pixel_x = -2;
+	pixel_y = 3
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "qkZ" = (
@@ -39267,6 +39277,13 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/lord_appt)
+"rMY" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/clinic_large/apothecary)
 "rNb" = (
 /obj/structure/bars/grille,
 /obj/structure/fluff/railing/border{
@@ -42860,21 +42877,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town/roofs)
-"trb" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/candle/yellow{
-	pixel_x = 8;
-	pixel_y = -1
-	},
-/obj/item/candle/yellow{
-	pixel_x = 6
-	},
-/obj/item/flint{
-	pixel_x = -2;
-	pixel_y = 3
-	},
-/turf/open/floor/blocks/stonered/tiny,
-/area/indoors/town/clinic_large/apothecary)
 "tre" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/broom,
@@ -48272,6 +48274,16 @@
 "vHN" = (
 /turf/open/floor/wood,
 /area/indoors/town)
+"vHU" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/clinic_large/apothecary)
 "vHY" = (
 /obj/effect/decal/cobblerockedge/alt,
 /obj/effect/decal/cobblerockedge/alt,
@@ -120754,7 +120766,7 @@ kwJ
 wDX
 gKQ
 gKQ
-cQt
+neD
 neD
 gRT
 gRT
@@ -120956,9 +120968,9 @@ mFi
 wDX
 qFx
 gKQ
-osm
+vHU
 neD
-neD
+rXd
 edU
 mmm
 ppd
@@ -160550,7 +160562,7 @@ vSg
 uLD
 dnp
 gNl
-nBV
+jcf
 gKQ
 kup
 nLs
@@ -160752,7 +160764,7 @@ vSg
 gKQ
 gKQ
 mjW
-bQc
+vsr
 gKQ
 osr
 nLs
@@ -161158,7 +161170,7 @@ gKQ
 vsr
 vsr
 gKQ
-kup
+ohi
 nLs
 okz
 okz
@@ -161357,8 +161369,8 @@ biy
 hUk
 ltL
 gKQ
-gKQ
-gKQ
+vsr
+vsr
 gKQ
 nLs
 nLs
@@ -161559,8 +161571,8 @@ biy
 biy
 gLs
 gKQ
-gKQ
-gKQ
+rMY
+iwE
 gKQ
 nLs
 nLs
@@ -161761,11 +161773,11 @@ biy
 eYe
 eYe
 gKQ
-iGc
-xXk
+vfY
+vfY
 gKQ
-jDe
-gKQ
+nLs
+nLs
 okz
 okz
 okz
@@ -161963,9 +161975,9 @@ biy
 gLs
 bKi
 gKQ
-nPW
-vfY
-vfY
+oui
+gKQ
+gKQ
 bXR
 gKQ
 vwS
@@ -162165,10 +162177,10 @@ biy
 eYe
 xRO
 gKQ
-trb
-vfY
-vfY
 neD
+vfY
+vfY
+vfY
 gKQ
 okz
 okz
@@ -162367,7 +162379,7 @@ fwi
 fwi
 rSh
 gKQ
-eQZ
+iGc
 vfY
 vfY
 hjB
@@ -163380,7 +163392,7 @@ gKQ
 iwG
 vQP
 vfY
-gCV
+nPW
 gKQ
 qFx
 qFx
