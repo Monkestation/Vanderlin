@@ -527,3 +527,8 @@
   - rscadd: More songs for accordion, hurdy-gurdy, drums and guitar.
   realforest2001:
   - rscadd: Added a strength control variable for Gravity spell.
+2026-07-31:
+  CheffieGithub:
+  - bugfix: Fixed config subsystem having no stat entry
+  Sulaboy:
+  - balance: Kneestingers take damage when walked on by people without immunity.

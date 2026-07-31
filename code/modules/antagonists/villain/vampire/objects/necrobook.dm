@@ -34,7 +34,7 @@
 			to_chat(user, span_notice("I have summoned a knight from the underworld. I need only wait for them to materialize."))
 			var/list/candidates = pollGhostCandidates("Would you like to play as a Death Knight?", ROLE_NECRO_SKELETON, poll_time = 20 SECONDS, ignore_category = POLL_IGNORE_NECROMANCER_SKELETON, new_players = TRUE)
 			if(!length(candidates))
-				to_chat(span_warning("But none answered my will."))
+				to_chat(user, span_warning("But none answered my will."))
  */
 		if("Steal the Sun")
 			if(!can_steal_sun(user))
