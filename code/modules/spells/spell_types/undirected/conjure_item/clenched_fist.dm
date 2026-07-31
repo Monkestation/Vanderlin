@@ -15,7 +15,7 @@
     . = ..()
 
     if(!owner.check_stamina(5))
-        owner.balloon_alert("exhausted!")
+        owner.balloon_alert(owner, "exhausted!")
         return
 
     owner.adjust_stamina(5)
