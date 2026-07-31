@@ -693,8 +693,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		tooltips = new /datum/tooltip(src)
 
 	var/list/topmenus = GLOB.menulist[/datum/verbs/menu]
-	for(var/thing in topmenus)
-		var/datum/verbs/menu/topmenu = thing
+	for(var/datum/verbs/menu/topmenu as anything in topmenus)
 		var/topmenuname = "[topmenu]"
 		if(topmenuname == "[topmenu.type]")
 			var/list/tree = splittext(topmenuname, "/")

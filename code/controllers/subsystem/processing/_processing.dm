@@ -4,14 +4,15 @@ SUBSYSTEM_DEF(processing)
 	name = "Processing"
 	priority = FIRE_PRIORITY_PROCESS
 	flags = SS_BACKGROUND|SS_POST_FIRE_TIMING|SS_NO_INIT
-	wait = 10
+	wait = 1 SECONDS
 
 	var/stat_tag = "P" //Used for logging
 	var/list/processing = list()
 	var/list/currentrun = list()
 
-/datum/controller/subsystem/processing/stat_entry()
-	..("[stat_tag]:[processing.len]")
+/datum/controller/subsystem/processing/stat_entry(msg)
+	msg = "[stat_tag]:[length(processing)]"
+	return ..()
 
 /datum/controller/subsystem/processing/fire(resumed = 0)
 	if (!resumed)
@@ -19,8 +20,8 @@ SUBSYSTEM_DEF(processing)
 	//cache for sanic speed (lists are references anyways)
 	var/list/current_run = currentrun
 
-	while(current_run.len)
-		var/datum/thing = current_run[current_run.len]
+	while(length(current_run))
+		var/datum/thing = current_run[length(current_run)]
 		current_run.len--
 		if(QDELETED(thing))
 			processing -= thing
