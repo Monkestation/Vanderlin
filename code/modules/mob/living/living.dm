@@ -2704,7 +2704,7 @@
 					briar_notice = TRUE
 
 			if(briar_notice)
-				to_chat(span_briar(span_big("His gaze is enrapturing...")))
+				to_chat(src, span_briar(span_big("His gaze is enrapturing...")))
 				add_stress(/datum/stress_event/black_briar_noc)
 				return
 
