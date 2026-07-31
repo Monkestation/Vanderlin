@@ -57,4 +57,4 @@
 	crafting_time = 40 SECONDS
 
 /datum/container_craft/cooking/bone_broth/real_bone
-    requirements = list(/obj/item/alch/bone = 1)
+	requirements = list(/obj/item/alch/bone = 1)

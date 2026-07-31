@@ -159,7 +159,7 @@
 
 	// Gather all movable, visible, non-abstract atoms in range.
 	var/list/atoms_in_range = list()
-	for(var/atom/movable/close_atom as anything in range(runesize, src))
+	for(var/atom/movable/close_atom in range(runesize, src))
 		if(isitem(close_atom))
 			var/obj/item/close_item = close_atom
 			if(close_item.item_flags & ABSTRACT)
@@ -205,7 +205,7 @@
 		var/label
 		if(islist(req_type))
 			var/list/options = list()
-			for(var/possible as anything in req_type)
+			for(var/possible in req_type)
 				options += pickritual.parse_required_item(possible)
 			label = "[count] [english_list(options, and_text = "or")]"
 		else
