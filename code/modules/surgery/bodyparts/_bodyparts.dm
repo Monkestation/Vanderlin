@@ -1574,8 +1574,7 @@
  */
 /obj/item/bodypart/proc/getorganslot(slot)
 	if(owner)
-		for(var/thing in shuffle(owner.getorganslotlist(slot)))
-			var/obj/item/organ/organ = thing
+		for(var/obj/item/organ/organ as anything in shuffle(owner.getorganslotlist(slot)))
 			if(deprecise_zone(organ.current_zone) == body_zone)
 				return organ
 	else
@@ -1595,9 +1594,7 @@
 /obj/item/bodypart/proc/getorganslotlist(slot)
 	var/list/organs = list()
 	if(owner)
-		var/obj/item/organ/organ
-		for(var/thing in owner.getorganslotlist(slot))
-			organ = thing
+		for(var/obj/item/organ/organ as anything in owner.getorganslotlist(slot))
 			if(check_zone(organ.current_zone) == body_zone)
 				organs |= organ
 	else

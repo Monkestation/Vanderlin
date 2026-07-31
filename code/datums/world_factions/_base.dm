@@ -774,7 +774,7 @@
 	var/tier = get_reputation_tier()
 	var/list/rerolled = list()
 
-	for(var/item_type as anything in trader_data.initial_wanteds)
+	for(var/item_type in trader_data.initial_wanteds)
 		var/list/list = trader_data.initial_wanteds[item_type]
 		var/list/entry = list.Copy()
 

@@ -18,11 +18,11 @@
 
 	var/datum/objective_quest_driver/town_objective/area/thatchwood/driver = SSobjectivequests.get_driver(/datum/objective_quest_driver/town_objective/area/thatchwood)
 	if(!driver)
-		owner.balloon_alert(owner, "Quest expired!")
+		owner.balloon_alert(owner, "quest expired!")
 		return FALSE
 
 	if(driver.schematic_placed)
-		owner.balloon_alert(owner, "Foundation already placed!")
+		owner.balloon_alert(owner, "foundation already placed!")
 		return FALSE
 
 	var/turf/T = get_turf(cast_on)
@@ -31,7 +31,7 @@
 		if(target_area == A)
 			return TRUE
 
-	owner.balloon_alert(owner, "Must place within Thatchwood!")
+	owner.balloon_alert(owner, "must place within Thatchwood!")
 	return FALSE
 
 /datum/action/cooldown/spell/place_blueprint/thatchwood_hall

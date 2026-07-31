@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(pollution)
 	var/list/singletons = list()
 
 /datum/controller/subsystem/pollution/stat_entry(msg)
-	msg += "|AT:[active_pollution.len]|P:[all_polution.len]"
+	msg = "|AT:[length(active_pollution)]|P:[length(all_polution)]"
 	return ..()
 
 /datum/controller/subsystem/pollution/Initialize()

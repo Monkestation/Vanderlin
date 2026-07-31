@@ -226,7 +226,7 @@
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if injury is bigger
 /datum/injury/proc/infection_check(delta_time = 2, times_fired)
 	var/normalized_damage = damage_per_injury()
-	if((normalized_damage < 10) && germ_level < INFECTION_LEVEL_ONE)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
+	if((normalized_damage < 10) || germ_level < INFECTION_LEVEL_ONE)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
 		return FALSE
 	if(is_treated() && normalized_damage < 25)	//anything less than a flesh injury (or equivalent) isn't infectable if treated properly
 		return FALSE
@@ -374,14 +374,17 @@
 /datum/injury/proc/is_bleeding()
 	if(!CAN_HAVE_BLOOD(parent_mob))
 		return
-	for(var/thing in embedded_objects)
-		var/obj/item/item = thing
+
+	for(var/obj/item/item as anything in embedded_objects)
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
+
 	if(is_bandaged() || is_sutured())
 		return FALSE
+
 	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
+
 	return (damage_per_injury() > bleed_threshold)
 
 /datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)

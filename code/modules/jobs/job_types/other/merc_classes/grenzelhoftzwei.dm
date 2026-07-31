@@ -1,7 +1,7 @@
 /datum/attribute_holder/sheet/job/grenzelhoftzwei
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 2,
-        STAT_STRENGTH = 2,
+		STAT_STRENGTH = 2,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/axesmaces = 25, // cudgel
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-    )
+	)
 /datum/job/advclass/mercenary/grenzelhoftzwei
 	title = "Grenzelhoft Doppelsöldner"
 	tutorial = "A Grenzelhoft Doppelsöldner, specializing in using Zweihanders to break through enemy pike formations. This expertise generally demands high pay, which has given them the name of 'double-pay men'."

@@ -488,3 +488,47 @@
   realforest2001:
   - balance: You can no longer drink blood through armor that protects from bite criticals.
   - balance: Miracles are more effective at healing organ damage.
+2026-07-29:
+  Ajax50:
+  - map: The Gallowfort has been moved further north and been thoroughly remodeled.
+  - map: A quaint adventurer's campsite has been placed on the peninsula just below
+      the old Gallowfort location.
+  - map: The mountain that housed the old Gallowband barracks is now the site of an
+      ancient castle ruins. Beware the trolls!
+  - map: Thatchwood has been given slightly more inviting trails and road signs.
+  - map: A sparse few braziers now line the Murderwoods trade road, courtesy of the
+      Gallowband.
+  - map: The hidden Murderwoods fishing cabin and ritual site on the west side of
+      the map have had their locations adjusted slightly to accommodate the other
+      map changes.
+  Cheffie, Mothblocks, ninjanomnom:
+  - code_imp: Stack traces are now no longer grouped in the runtime viewer
+  HeWhoBe:
+  - qol: Made quarterstaves usable
+  - balance: Buffed quarterstaves
+  - spellcheck: fixed grammar in a few javelin descs.
+  ModDownloading:
+  - rscadd: New name lists for Snow (Zizo) elves, courtesy of Ardcrumb!
+  - bugfix: Corrects a few erroneous references to countries that don't exist in lore.
+  PotatoTomahto:
+  - rscadd: yawns can propagate and you can make eye contact
+  - rscadd: viewing descriptors is moved to examining twice quickly
+  SmokingCrackForChrist:
+  - sound: Replaces deliverer.ogg (town theme) gone but not forgotten.
+  snowyseshi:
+  - rscadd: Added new captain title and honorary
+  - bugfix: hdrow still having access to zizo cursed
+  - rscadd: snow elves/half snow elves can be younglings now
+  - code_imp: snow elf/hsnow elf added to more defines that makes sense
+2026-07-30:
+  Archeonan:
+  - rscdel: Removed dropshrink from most weapons
+  Monkeke2:
+  - rscadd: More songs for accordion, hurdy-gurdy, drums and guitar.
+  realforest2001:
+  - rscadd: Added a strength control variable for Gravity spell.
+2026-07-31:
+  CheffieGithub:
+  - bugfix: Fixed config subsystem having no stat entry
+  Sulaboy:
+  - balance: Kneestingers take damage when walked on by people without immunity.
