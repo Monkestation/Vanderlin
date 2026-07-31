@@ -1,7 +1,7 @@
 /datum/attribute_holder/sheet/job/grenzelhofthalb
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1, //they want to stay in the fight for longer
-        STAT_STRENGTH = 2,
+		STAT_STRENGTH = 2,
 		STAT_PERCEPTION = 1, //direct pokes
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -13,7 +13,7 @@
 		/datum/attribute/skill/combat/swords = 25, // their secondary weapon, could afford more training then the gun user
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
-    )
+	)
 /datum/job/advclass/mercenary/grenzelhofthalb
 	title = "Grenzelhoft Hellebardiere"
 	tutorial = "A Grenzelhoft Halberdier, specializing in the usage of polearms. They make up the majority of the Grenzelhoft mercenary guild, and are known for their reliability."

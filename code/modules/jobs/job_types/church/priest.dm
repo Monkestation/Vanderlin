@@ -19,7 +19,7 @@
 
 /datum/attribute_holder/sheet/job/priest/old
 	raw_attribute_list = list(
-		 STAT_STRENGTH = 1,
+		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,

@@ -27,7 +27,7 @@
 		return
 	if(!iscarbon(owner))
 		if(feedback)
-			owner.balloon_alert(owner, "Only mortals may use the briar claw!")
+			owner.balloon_alert(owner, "only mortals may use the briar claw!")
 		return FALSE
 
 /datum/action/cooldown/spell/undirected/conjure_item/briar_claw/before_cast(atom/cast_on)

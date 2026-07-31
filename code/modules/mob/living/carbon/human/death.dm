@@ -61,8 +61,7 @@
 	stop_sound_channel(CHANNEL_HEARTBEAT)
 	heartbeat_sound = BEAT_NONE
 	pulse = PULSE_NONE
-	for(var/thing in getorganslotlist(ORGAN_SLOT_HEART))
-		var/obj/item/organ/heart/heart = thing
+	for(var/obj/item/organ/heart/heart as anything in getorganslotlist(ORGAN_SLOT_HEART))
 		heart.Stop()
 
 	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
