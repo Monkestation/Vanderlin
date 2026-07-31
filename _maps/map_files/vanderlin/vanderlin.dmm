@@ -1308,7 +1308,7 @@
 /area/indoors/town/noble_manor/red)
 "aFv" = (
 /obj/structure/door/window{
-	name = "Bee Spider Farm"
+	name = "Herb Farm"
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/apothecary,
