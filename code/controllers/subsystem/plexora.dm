@@ -776,7 +776,7 @@ SUBSYSTEM_DEF(plexora)
 	to_chat(recipient, html = "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 
 	recipient.receive_ahelp(
-		"<a href='?priv_msg=[stealthkey]'>[adminname]</a>",
+		"<a href='byond://?priv_msg=[stealthkey]'>[adminname]</a>",
 		message,
 	)
 

@@ -16,12 +16,12 @@
 	default_priority = 100
 
 	syllables = list(
-        "|+-squeak-+|",
-        "|+-hiss-+|",
-        "|+-trill-+|",
-        "|+-whine-+|",
-        "|+-yip-+|",
-	    "|+-snarl-+|",
-        "|+-growl-+|",
-        "|+-grunt-+|"
+		"|+-squeak-+|",
+		"|+-hiss-+|",
+		"|+-trill-+|",
+		"|+-whine-+|",
+		"|+-yip-+|",
+		"|+-snarl-+|",
+		"|+-growl-+|",
+		"|+-grunt-+|"
 	)

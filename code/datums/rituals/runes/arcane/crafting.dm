@@ -143,7 +143,7 @@
 	for(var/datum/crafting_slot/S in slots)
 		staged_types += S.item.type
 
-	for(var/recipe_type as anything in subtypesof(/datum/arcyne_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/arcyne_crafting_recipe))
 		var/datum/arcyne_crafting_recipe/R = new recipe_type
 		var/list/needed = R.ingredients.Copy()
 		if(length(needed) != length(slots))

@@ -73,8 +73,7 @@
 		return "0"
 
 	var/bypassed_heart = FALSE
-	for(var/thing in hearts)
-		var/obj/item/organ/heart/heart = thing
+	for(var/obj/item/organ/heart/heart as anything in hearts)
 		if(heart.open)
 			bypassed_heart = TRUE
 
