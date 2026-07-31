@@ -79,7 +79,7 @@
 
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 17 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 
 
 /obj/item/clothing/armor/plate/full/samsibsa
@@ -111,7 +111,7 @@
 
 	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 17 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 
 //................ Rusted Half-plate ............... //
 /obj/item/clothing/armor/plate/rust
@@ -144,14 +144,14 @@
 	name = "blacksteel plate"
 	desc = "A chestplate forged from blacksteel with shoulder guards, combining strength and agility."
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	armor_class = AC_MEDIUM
+	armor_class = AC_HEAVY // weighs less then regular plate so its no longer medium AC
 	icon_state = "bkarmor"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
-	item_weight = 20.45 KILOGRAMS
+	item_weight = 8 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
 
@@ -262,7 +262,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 22 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)
@@ -306,11 +306,11 @@
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()
 	if(HAS_TRAIT(owner, TRAIT_MEDIUMARMOR) && !HAS_TRAIT(owner, TRAIT_HEAVYARMOR))
-		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /datum/status_effect/buff/psydonic_endurance/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
 	name = "Psydonic Endurance"

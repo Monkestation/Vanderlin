@@ -18,7 +18,6 @@
 	alt_intents = list(DAZE_BASH, SWORD_STRIKE, POMMEL_BASH)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 7
 
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
@@ -65,7 +64,6 @@
 	possible_item_intents = list(SHORT_CUT, SHORT_THRUST)
 	gripped_intents = null
 	alt_intents = null
-	minstr = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
 	item_weight = 700 GRAMS
@@ -249,7 +247,6 @@
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
 	gripped_intents = null
 	alt_intents = null
-	minstr = 5
 	smeltresult = /obj/item/ingot/steel_slag
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
@@ -299,7 +296,6 @@
 	force = DAMAGE_SWORD + 2
 	wdefense = GREAT_PARRY
 	wbalance = HARD_TO_DODGE
-	minstr = 6
 	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/dadao
@@ -343,7 +339,6 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST)
-	minstr = 6
 
 	bigboy = TRUE
 	gripsprite = TRUE
@@ -407,7 +402,6 @@
 	gripped_intents = list(SWORD_CUT, AXE_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8 // Heavy blade used by orcs
 	smeltresult = /obj/item/ingot/iron
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
@@ -453,7 +447,6 @@
 	gripped_intents = list(SWORD_CUT, CURVED_THRUST)
 	alt_intents = null
 	swingsound = BLADEWOOSH_SMALL
-	minstr = 6
 	sellprice = 45
 	item_weight = 1.1 KILOGRAMS
 
@@ -473,7 +466,6 @@
 	icon_state = "sengese_silver"
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 7
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 30
 	item_weight = 1 KILOGRAMS
@@ -491,7 +483,6 @@
 	swingsound =  BLADEWOOSH_SMALL
 	max_blade_int = 240
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 6
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/scimitar/wodao/iron
@@ -518,14 +509,12 @@
 	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT)
 	gripped_intents = null
 	alt_intents = null
-	minstr = 6
 	smeltresult = /obj/item/ingot/steel_slag
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	parrysound = "rapier"
 	swingsound = BLADEWOOSH_SMALL
 	SET_BASE_PIXEL(-16, -16)
-	dropshrink = 0.8
 
 	weapon_special = /datum/special_intent/piercing_lunge
 	item_weight = 700 GRAMS
@@ -636,7 +625,6 @@
 	desc = "An embellished swift sword from the east."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
-	dropshrink = 0.8
 	sellprice = 140 // its made with gold and steel, thats pretty valuable
 	item_weight = 750 GRAMS
 
@@ -712,12 +700,10 @@
 	gripped_intents = null
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONG
-	minstr = 10 // Even though it's technically one-handed, you gotta have some muscle to wield this thing
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	SET_BASE_PIXEL(-16, -16)
-	dropshrink = 0.75
 	bigboy = TRUE // WHY DOES THIS FUCKING VARIABLE CONTROL WHETHER THE BLOOD OVERLAY WORKS ON 64x64 WEAPONS
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/bronze
@@ -751,7 +737,6 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	dropshrink = 0.75
 	sellprice = 60
 	grid_height = 96
 	grid_width = 64
@@ -769,7 +754,6 @@
 	alt_intents = null
 
 	gripsprite = FALSE
-	dropshrink = 0.8
 	sellprice = 80
 	max_integrity = INTEGRITY_STRONG - 50 //this thing is long as hell, it would be more likely to break over time
 	item_weight = 1.4 KILOGRAMS
@@ -824,7 +808,6 @@
 	alt_intents = null
 	gripsprite = FALSE
 	max_integrity = INTEGRITY_STRONGEST
-	dropshrink = 0.9
 	sellprice = 60
 	item_weight = 1.6 KILOGRAMS
 
@@ -1105,7 +1088,6 @@
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
-	minstr = 11
 
 	swingsound = BLADEWOOSH_HUGE
 	slot_flags = ITEM_SLOT_BACK
@@ -1135,7 +1117,6 @@
 	icon_state = "psygsword"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	minstr = 11
 	smeltresult = /obj/item/ingot/silverblessed
 	melt_amount = 150
 	sellprice = 150
@@ -1165,7 +1146,6 @@
 	force = DAMAGE_SWORD_WIELD
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
-	minstr = 9 //So the ordinator can use his sword as old.
 	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic/Initialize(mapload)
@@ -1224,10 +1204,10 @@
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
 	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
-	icon_state = "steelzwei"
+	icon_state = "steelzwei_sk"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(ZWEI_CUT, ZWEI_THRUST, SWORD_STRIKE)
-	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
+	gripped_intents = list(ZWEI_CUT_REACH, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	smeltresult = /obj/item/ingot/iron
@@ -1248,12 +1228,21 @@
 			if("onback")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
+/obj/item/weapon/sword/long/greatsword/zwei/steel
+	name = "steel zweihander"
+	desc = "A zweihander forged from steel, the pride and joy of any mercenary who wields it. It looks like it could cleave a man in half with a single swing."
+	icon_state = "steelzwei"
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/steel
+	sellprice = 90
+
 //................ Kriegsmesser ............... //
 /obj/item/weapon/sword/long/greatsword/elfgsword
 	name = "elven kriegsmesser"
 	desc = "A huge, curved elven blade. It's metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
 	icon_state = "kriegsmesser"
-	minstr = 10
 	sellprice = 120
 	item_weight = 2.3 KILOGRAMS
 
@@ -1276,7 +1265,6 @@
 	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
 	icon_state = "zizosword"
 	wdefense = ULTMATE_PARRY
-	minstr = 10
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.3 KILOGRAMS
 
@@ -1325,7 +1313,6 @@
 	desc = "A steel variant of the standard claymore."
 	icon_state = "steelclaymore"
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	minstr = 10
 	sellprice = 110
 	item_weight = 2.7 KILOGRAMS
 
@@ -1453,7 +1440,6 @@
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 4
 	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
 	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
-	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	item_weight = 3.5 KILOGRAMS
 
@@ -1527,7 +1513,6 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	dropshrink = 0.90
 	smeltresult = /obj/item/ingot/copper
 	sellprice = 10
 	item_weight = 1.8 KILOGRAMS
@@ -1582,7 +1567,6 @@
 	gripped_intents = list(ESTOC_THRUST, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -1656,7 +1640,6 @@
 	max_integrity = INTEGRITY_STANDARD
 
 	smeltresult = /obj/item/ingot/bronze
-	dropshrink = 0.80
 	item_weight = 700 GRAMS
 
 //A weapon meant to be used with two hands.
@@ -1864,7 +1847,6 @@
 
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
-	dropshrink = 1
 	smeltresult = /obj/item/ingot/gold
 	item_weight = 2.2 KILOGRAMS
 

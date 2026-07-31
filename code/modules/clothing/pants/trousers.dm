@@ -24,7 +24,7 @@
 	icon_state = "leathertrou"
 	armor_type = /datum/armor/pants/leather
 	max_integrity = INTEGRITY_POOR
-	item_weight = 2.5 KILOGRAMS
+	item_weight = 0.7 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
@@ -36,6 +36,7 @@
 	icon_state = "splintlegs"
 	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
@@ -188,7 +189,7 @@
 	desc = "A pair of white pants decorated with red stripes and traditional patterning."
 	icon_state = "shepherdpants"
 
-/obj/item/clothing/pants/trou/leather/kazengun //no, not 'eastpants3', silly!
+/obj/item/clothing/pants/trou/leather/blackmeadow //no, not 'eastpants3', silly!
 	name = "gambeson trousers"
 	desc = "A form of Blackmeadow peasant's trousers. The fabric used in their manufacture is strong, and could probably turn away a few blows."
 	icon_state = "baggypants"

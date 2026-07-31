@@ -56,23 +56,11 @@
 	name = initial(name)
 
 	if(brainmob)
-		if(brainmob?.key)
-			stack_trace("Decoy override brain with a key assigned - This should never happen.")
-
+		if(brainmob.mind)
+			brainmob.mind.transfer_to(brain_owner)
 		else
-			if(brain_owner.key)
-				brain_owner.ghostize()
-
-			if(brainmob.mind)
-				brainmob.mind.transfer_to(brain_owner)
-			else
-				brain_owner.PossessByPlayer(brainmob.key)
-
-			brain_owner.set_suicide(HAS_TRAIT(brainmob, TRAIT_SUICIDED))
-
+			brain_owner.key = brainmob.key
 		QDEL_NULL(brainmob)
-	else
-		brain_owner.set_suicide(suicided)
 
 	for(var/datum/brain_trauma/trauma as anything in traumas)
 		if(trauma.owner)
@@ -147,8 +135,7 @@
 	if(current_blood < max_blood_storage && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
-		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
-			var/obj/item/organ/candidate = thing
+		for(var/obj/item/organ/candidate as anything in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
 			if(candidate.current_blood && (candidate.get_slot_efficiency(ORGAN_SLOT_ARTERY) >= ORGAN_FAILING_EFFICIENCY))
 				artery = candidate
 				break

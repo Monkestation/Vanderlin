@@ -42,7 +42,7 @@
 
 	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 5.2 KILOGRAMS
+	item_weight = 3.95 KILOGRAMS
 
 /obj/item/clothing/pants/platelegs/captain
 	name = "captain's chausses"
@@ -76,7 +76,7 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/pants/plate/good
-	item_weight = 4.95 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 //............... Evil Pants ............... //
@@ -117,7 +117,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/pants/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 5.42 KILOGRAMS
+	item_weight = 3.95 KILOGRAMS
 	sellprice = VALUE_SILVER_ARMOR
 
 /obj/item/clothing/pants/platelegs/silver/Initialize(mapload)

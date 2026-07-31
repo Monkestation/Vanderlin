@@ -382,3 +382,153 @@
   - rscdel: Removes the Hollow Curse ritual.
   - bugfix: Fixes some admin tool runtimes.
   - bugfix: Fixed a crippling bug from the Court Agent mirror.
+2026-07-23:
+  MissyNym:
+  - map: The Bog Witch and Bog Witch Apprentice now spawn in their dinghy instead
+      of the entrance to the Terrorbog.
+  Sulaboy:
+  - balance: Maximum Encumbrance now scales off Str,Con,&End instead of just Str.
+  budgetcommander0:
+  - rscadd: Gave the Captain a steel dagger.
+  realforest2001:
+  - rscadd: Knowing the town on join is now controlled by a unique variable, rather
+      than if a job has a bank account.
+  - rscadd: Rejected Royal wretch class now starts knowing and known by the town.
+  - bugfix: Fixes a runtime with snow elf job checks.
+2026-07-24:
+  CheffieGithub:
+  - bugfix: orcs no longer drop humanb corpses.
+  - bugfix: SDD players now get detected by deathsight.
+  - bugfix: Gibbed and already dead things don't drop souls.
+  Singul0:
+  - rscadd: Arcyane nomagic gloves have *some* use now.
+  - bugfix: fixed race condition on anti magic
+  dwasint:
+  - bugfix: debraining no longer is perma death
+  - qol: traders now give 1-5 rep on selling items
+  - balance: traders can only buy a limited amount of each item
+  - balance: traders prices are now based on the live market rates with a +- variance
+  realforest2001:
+  - rscadd: Acolytes and Grave Tender now spawn with a cloth bag.
+  - rscadd: Added the option for Noc Templars to choose between Khopesh and Flail.
+  - bugfix: Fixes roundstart antag rolls triggering mid round.
+2026-07-25:
+  CheffieGithub:
+  - rscadd: You can use hotsprings like water
+  - rscadd: Hotspring edges can be drank from and can fill reagent containers.
+  dwasint:
+  - rscadd: Voice Color now shows up in relation menu
+  - rscadd: searchbar to relations menu, lets you search by any tag like species,
+      gender, age, alt title, real title
+  - qol: Alt titles now show a hover like examines in relations menu
+  - rscadd: Species are now tracked by relations aswell
+  - rscadd: honorary titles now get passed into relations
+  flleeppyy:
+  - code_imp: Updated Plexora code
+2026-07-26:
+  Archeonan:
+  - rscadd: Added warhammer weapon option to royal knights, fighter/cleric adventurer,
+      and city watch footman/lieutenant
+  - rscadd: Added eagle's beak weapon option to royal knights
+  - bugfix: zweihander cut does full damage as intended
+  - rscadd: 2 tile reach cut for zweihander
+  - rscadd: steel zweihander
+  - rscadd: 2 tile reach strike for polehammers
+  - balance: replaced polehammer impale with daze, alongside buffing their damage
+  MissyNym:
+  - map: Misc fixes for tailor's apartment and for the train station.
+  - rscdel: Tomb Warden no longer has a Mercenary key.
+  - rscdel: Mercenaries no longer have a Tomb key.
+  - map: Templates added for persistent housing in the Mercenary's Guild and the Adventurer's
+      Guild.
+  - map: Fixed up the Mercenary's Guild so it's not a godforsaken hellhole of spiders
+      anymore and instead an operational base with new persistent bedrooms for the
+      Mercenaries to customize.
+  - map: Repurposed the Guild under the Inn to be the new Adventurer's Guild with
+      new persistent bedrooms for Adventurers to customize.
+  - map: Converted the old Adventurer's Guild space back into sewer area. The Innkeep
+      loses their garden, but gains an easy space to dump their rotten food.
+  - map: Changed door accesses to the Adventurer's Guild to be controlled by the Tomb
+      Warden alone.
+  - map: The Adventurer's Guild and sleeping quarters are unlocked by default, allowing
+      them to access their guild in case the Tomb Warden is not in.
+  ModDownloading:
+  - balance: Removed all minimum strength requirements of 11 or less on equipment.
+  - rscadd: Kobolds now have generic names unique to them rather than sharing Dwarf
+      names.
+  SmokingCrackForChrist:
+  - rscadd: A new song for my stupid chud cat I hate.
+2026-07-27:
+  Archeonan:
+  - balance: Lowered overall weights of multiple armors and weapons
+  - bugfix: Warhammers cannot be 2 handed now
+  - bugfix: Some classes should theoretically no longer eat your weapon selections
+  Jmih:
+  - bugfix: fixed rail tracks rotation
+  ModDownloading:
+  - balance: NPK deficiency no longer kills a crop on its own, only slow down its
+      production and reduce the produce quality.
+  Telvayne:
+  - qol: Plates increased to 3 items
+  - qol: Plates accept drugs, wine bottles, spoons, and forks
+  realforest2001:
+  - bugfix: More fix work on antags spawning when there is no way for them to spawn.
+  - bugfix: Fixed duplicating noc templar weapon.
+  - bugfix: Fixed infinite ability to study spellbooks.
+  - bugfix: Fixed some snow elf issues.
+  - bugfix: Fixed Strigidae armet sprite.
+  - code_imp: Added missing defines for bitflags.
+  - rscadd: Added a bunch of new titles for the court roles.
+  yafesdot:
+  - rscadd: add culture accents to the accent mix
+2026-07-28:
+  dwasint:
+  - bugfix: coins now sanity check on reduction so if they are below or equal to 0
+      they get cleaned
+  realforest2001:
+  - balance: You can no longer drink blood through armor that protects from bite criticals.
+  - balance: Miracles are more effective at healing organ damage.
+2026-07-29:
+  Ajax50:
+  - map: The Gallowfort has been moved further north and been thoroughly remodeled.
+  - map: A quaint adventurer's campsite has been placed on the peninsula just below
+      the old Gallowfort location.
+  - map: The mountain that housed the old Gallowband barracks is now the site of an
+      ancient castle ruins. Beware the trolls!
+  - map: Thatchwood has been given slightly more inviting trails and road signs.
+  - map: A sparse few braziers now line the Murderwoods trade road, courtesy of the
+      Gallowband.
+  - map: The hidden Murderwoods fishing cabin and ritual site on the west side of
+      the map have had their locations adjusted slightly to accommodate the other
+      map changes.
+  Cheffie, Mothblocks, ninjanomnom:
+  - code_imp: Stack traces are now no longer grouped in the runtime viewer
+  HeWhoBe:
+  - qol: Made quarterstaves usable
+  - balance: Buffed quarterstaves
+  - spellcheck: fixed grammar in a few javelin descs.
+  ModDownloading:
+  - rscadd: New name lists for Snow (Zizo) elves, courtesy of Ardcrumb!
+  - bugfix: Corrects a few erroneous references to countries that don't exist in lore.
+  PotatoTomahto:
+  - rscadd: yawns can propagate and you can make eye contact
+  - rscadd: viewing descriptors is moved to examining twice quickly
+  SmokingCrackForChrist:
+  - sound: Replaces deliverer.ogg (town theme) gone but not forgotten.
+  snowyseshi:
+  - rscadd: Added new captain title and honorary
+  - bugfix: hdrow still having access to zizo cursed
+  - rscadd: snow elves/half snow elves can be younglings now
+  - code_imp: snow elf/hsnow elf added to more defines that makes sense
+2026-07-30:
+  Archeonan:
+  - rscdel: Removed dropshrink from most weapons
+  Monkeke2:
+  - rscadd: More songs for accordion, hurdy-gurdy, drums and guitar.
+  realforest2001:
+  - rscadd: Added a strength control variable for Gravity spell.
+2026-07-31:
+  CheffieGithub:
+  - bugfix: Fixed config subsystem having no stat entry
+  Sulaboy:
+  - balance: Kneestingers take damage when walked on by people without immunity.

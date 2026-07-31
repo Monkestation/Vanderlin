@@ -226,7 +226,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	if(ispath(test_path, /datum/unit_test/focus_only))
 		return
 
-	if(initial(test_path.abstract_type) == test_path)
+	if(IS_ABSTRACT(test_path))
 		return
 
 	var/datum/unit_test/test = new test_path

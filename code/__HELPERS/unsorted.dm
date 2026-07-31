@@ -655,10 +655,6 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 
 	return L
 
-//gives us the stack trace from CRASH() without ending the current proc.
-/proc/stack_trace(msg)
-	CRASH(msg)
-
 //Key thing that stops lag. Cornerstone of performance in ss13, Just sitting here, in unsorted.dm.
 
 //Increases delay as the server gets more overloaded,

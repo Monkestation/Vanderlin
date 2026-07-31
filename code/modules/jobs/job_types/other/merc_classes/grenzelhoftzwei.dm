@@ -1,7 +1,7 @@
 /datum/attribute_holder/sheet/job/grenzelhoftzwei
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 2,
-        STAT_STRENGTH = 2,
+		STAT_STRENGTH = 2,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/axesmaces = 25, // cudgel
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-    )
+	)
 /datum/job/advclass/mercenary/grenzelhoftzwei
 	title = "Grenzelhoft Doppelsöldner"
 	tutorial = "A Grenzelhoft Doppelsöldner, specializing in using Zweihanders to break through enemy pike formations. This expertise generally demands high pay, which has given them the name of 'double-pay men'."
@@ -29,21 +29,21 @@
 
 /datum/outfit/mercenary/grenzelhoftzwei
 	name = "Grenzelhoft Doppelsoldner (Mercenary)"
-	neck = /obj/item/clothing/neck/gorget //no double padding for your helmet, its a weak spot!
+	neck = /obj/item/clothing/neck/gorget
 	pants = /obj/item/clothing/pants/grenzelpants
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
 	belt = /obj/item/storage/belt/leather/mercenary
 	shirt = /obj/item/clothing/shirt/grenzelhoft
-	wrists = /obj/item/clothing/wrists/bracers/iron //bonus arm protection so you dont get your arms chopped off!
+	wrists = /obj/item/clothing/wrists/bracers/iron
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/sword/long/greatsword/zwei
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/weapon/knife/villager = 1, //utility knife!
-		/obj/item/weapon/mace/cudgel //all of this spawns in their bag because of stuff that spawns things on your hip
+		/obj/item/weapon/knife/villager = 1,
+		/obj/item/weapon/mace/cudgel
 	)
 /datum/outfit/mercenary/grenzelhoftzwei/pre_equip(mob/living/carbon/human/H)
 	. = ..()

@@ -26,6 +26,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MOVE_SWIMMING	"move_swimming"
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
+/// Disables rot can be applied to items or mobs
+#define TRAIT_NO_ROT "no_rot"
 
 ///generic atom traits
 ///Chasms will be safe to cross while they've this trait.
@@ -623,6 +625,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
 
+/// Gives you the Shifty Eyes quirk, rarely making people who examine you think you examined them back even when you didn't
+#define TRAIT_SHIFTY_EYES "shifty_eyes"
+
 /// This atom is a secluded location, which is counted as out of bounds.
 /// Anything that enters this atom's contents should react if it wants to stay in bounds.
 #define TRAIT_SECLUDED_LOCATION "secluded_loc"
@@ -634,4 +639,3 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
 #define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"
-#define TRAIT_NO_ROT "no_rot"

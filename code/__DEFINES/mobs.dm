@@ -381,6 +381,14 @@
 #define DOING_INTERACTION_WITH_TARGET(user, target) (LAZYACCESS(user.do_afters, target))
 #define DOING_INTERACTION_WITH_TARGET_LIMIT(user, target, max_interaction_count) ((LAZYACCESS(user.do_afters, target) || 0) >= max_interaction_count)
 
+// recent examine defines
+/// How long it takes for an examined atom to be removed from recent_examines. Should be the max of the below time windows
+#define RECENT_EXAMINE_MAX_WINDOW (1.5 SECONDS)
+/// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
+#define EXAMINE_MORE_WINDOW (0.75 SECONDS)
+/// If you yawn while someone nearby has examined you within this time frame, it will force them to yawn as well. Tradecraft!
+#define YAWN_PROPAGATION_EXAMINE_WINDOW (1.5 SECONDS)
+
 //defense intents
 #define INTENT_DODGE 1
 #define INTENT_PARRY 2
@@ -429,3 +437,6 @@
 #define FORBID_TELEKINESIS_REACH (1<<3)
 /// If resting on the floor is allowed to perform action
 #define ALLOW_RESTING (1<<4)
+
+/// In dynamic human icon gen we don't replace the held item.
+#define NO_REPLACE 0

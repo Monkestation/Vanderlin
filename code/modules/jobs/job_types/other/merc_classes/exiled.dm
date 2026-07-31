@@ -51,16 +51,15 @@
 /datum/job/advclass/mercenary/exiled/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/weapons = list("Sword", "Axes")
-	var/weapon_choice = tgui_input_list(player_client, "CHOOSE YOUR WEAPON.", "SPILL SOME BLOOD.", weapons)
-	switch(weapon_choice)
-		if("Sword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/arming, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
+	var/static/list/selectable = list( \
+		"Sword & Cudgel" = list(/obj/item/weapon/sword/arming, /obj/item/weapon/mace/cudgel), \
+		"Dual Axes" = list(/obj/item/weapon/axe/iron, /obj/item/weapon/axe/iron), \
+	)
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPONS", title = "SPILL SOME BLOOD!")
+	switch(choice)
+		if("Sword & Cudgel")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
-		if("Axes")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/axe/iron, ITEM_SLOT_BELT_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/axe/iron, ITEM_SLOT_BELT_L, TRUE)
+		if("Dual Axes")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20)
 
 /datum/outfit/mercenary/exiled

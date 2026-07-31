@@ -307,7 +307,7 @@
 
 	var/datum/status_effect/bugged/effect = has_status_effect(/datum/status_effect/bugged)
 	if(effect && HAS_TRAIT(user, TRAIT_INQUISITION))
-		dat += "<BR><A href='?src=[REF(src)];item=[effect.device]'>BUGGED</A>"
+		dat += "<BR><A href='byond://?src=[REF(src)];item=[effect.device]'>BUGGED</A>"
 
 	dat += {"
 	<BR>
@@ -1418,6 +1418,7 @@
 	for(var/obj/item/bodypart/B in bodyparts)
 		B.skeletonize(lethal)
 	update_body_parts()
+	REMOVE_TRAIT(src, TRAIT_DEAF, NO_EARS)
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
