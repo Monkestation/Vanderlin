@@ -1020,8 +1020,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 
 /datum/create_wave/proc/create_job(mob/admin)
-
-    // Generate HTML form
 	var/dat = {"
 	<html><head><title>Create Custom Job</title></head><body>
 	<form name='job' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1352,7 +1350,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	if(!J)
 		return
 
-    // Generate HTML form
+	// Generate HTML form
 	var/dat = {"
 	<html><head><title>Edit Custom Wave</title></head><body>
 	<form name='wave' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1684,7 +1682,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 /datum/create_wave/proc/create_wave(mob/admin)
 
-    // Generate HTML form
 	var/dat = {"
 	<html><head><title>Create Custom Wave</title></head><body>
 	<form name='wave' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1821,7 +1818,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		to_chat(admin, span_warning("You can't edit the wave while it is deploying!"))
 		return
 
-    // Generate HTML form (mostly like create_wave)
 	var/dat = {"
 	<html><head><title>Edit Custom Wave</title></head><body>
 	<form name='wave' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>

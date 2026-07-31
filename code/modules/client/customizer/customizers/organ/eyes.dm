@@ -25,11 +25,11 @@
 	eyes_entry.left_eye_color = sanitize_hexcolor(eyes_entry.left_eye_color, default = initial(eyes_entry.left_eye_color))
 
 /datum/customizer_choice/organ/eyes/imprint_organ_dna(datum/organ_dna/organ_dna, datum/customizer_entry/entry, datum/preferences/prefs)
-    ..()
-    var/datum/organ_dna/eyes/eyes_dna = organ_dna
-    var/datum/customizer_entry/organ/eyes/eyes_entry = entry
-    eyes_dna.eye_color = eyes_entry.right_eye_color
-    eyes_dna.second_color = eyes_entry.left_eye_color
+	..()
+	var/datum/organ_dna/eyes/eyes_dna = organ_dna
+	var/datum/customizer_entry/organ/eyes/eyes_entry = entry
+	eyes_dna.eye_color = eyes_entry.right_eye_color
+	eyes_dna.second_color = eyes_entry.left_eye_color
 
 /datum/customizer_choice/organ/eyes/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	..()

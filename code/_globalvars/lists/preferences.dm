@@ -39,11 +39,11 @@ GLOBAL_LIST_INIT(preferences_in_priority_order, build_preferences_in_priority_or
 	return flat
 
 /proc/init_post_job_spawn_prefs()
-    var/list/output = list()
-    for (var/datum/preference/T as anything in subtypesof(/datum/preference))
-        if (initial(T.abstract_type) == T)
-            continue
-        var/datum/preference/pref = GLOB.preference_entries[T]
-        if (pref.post_job_pref)
-            output[T] = pref
-    return output
+	var/list/output = list()
+	for (var/datum/preference/T as anything in subtypesof(/datum/preference))
+		if (initial(T.abstract_type) == T)
+			continue
+		var/datum/preference/pref = GLOB.preference_entries[T]
+		if (pref.post_job_pref)
+			output[T] = pref
+	return output
