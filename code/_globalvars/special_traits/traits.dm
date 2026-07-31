@@ -1063,7 +1063,7 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/combat/wrestling = 30,
-        /datum/attribute/skill/combat/unarmed = 25,
+		/datum/attribute/skill/combat/unarmed = 25,
 	)
 
 /datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
