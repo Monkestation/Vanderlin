@@ -8,7 +8,7 @@
 /datum/injury/burn/infection_check()
 	//anything less than a FUCK burn isn't infectable if treated properly
 	var/normalized_damage = damage_per_injury()
-	if(is_treated() && normalized_damage < 25)
+	if(is_treated() || normalized_damage < 25)
 		return FALSE
 	if(is_disinfected())
 		return FALSE

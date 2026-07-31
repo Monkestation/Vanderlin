@@ -453,26 +453,26 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	<div class="sprite loadout-bg"></div>
 	<div class="sprite triumphs-bg"></div>
 	<div class="sprite headshot-bg" style="padding: 3px; box-sizing: border-box;">
-		<a href='?_src_=prefs;preference=headshot_link;task=input' style="display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=headshot_link;task=input' style="display: block; width: 100%; height: 100%;">
 			<img id="headshot-img" src="[read_preference(/datum/preference/text/headshot_link) || ""]"
-				 style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; image-rendering: auto;"
-				 onerror="this.style.display='none';">
+				style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; image-rendering: auto;"
+				onerror="this.style.display='none';">
 		</a>
 	</div>
 	<div class="sprite ooc-bg"></div>
 
 	<div class="sprite" style="top:26px; left:23px; width:92px; height:9px; background-image: url('header_charname.png');">
-		<a href='?_src_=prefs;preference=real_name;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=real_name;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-name" class="clickable-text auto-shrink" style="width:92px; height:9px;">[read_preference(/datum/preference/text/real_name)]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:11px; left:122px; width:46px; height:9px; background-image: url('header_class.png');">
-		<a href='?_src_=prefs;preference=job;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=job;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-job" class="clickable-text auto-shrink" style="width:46px; height:9px;">[high_job || "None"]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:11px; left:172px; width:42px; height:9px; background-image: url('header_faith.png');">
-		<a href='?_src_=prefs;preference=faith;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=faith;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-faith" class="clickable-text auto-shrink" style="width:42px; height:9px;">[selected_faith?.name || ""]</div>
 		</a>
 	</div>
@@ -480,113 +480,113 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		<div id="char-ckey" class="clickable-text" style="width:31px; height:9px; cursor: default;">[user.ckey]</div>
 	</div>
 	<div class="sprite" style="top:30px; left:122px; width:46px; height:9px; background-image: url('header_species.png');">
-		<a href='?_src_=prefs;preference=species;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=species;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-species" class="clickable-text auto-shrink" style="width:46px; height:9px;">[pref_species.name]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:30px; left:172px; width:42px; height:9px; background-image: url('header_patron.png');">
-		<a href='?_src_=prefs;preference=selected_patron;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=selected_patron;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-patron" class="clickable-text auto-shrink" style="width:42px; height:9px;">[pref_patron.name]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:30px; left:220px; width:31px; height:9px; background-image: url('header_pq.png');">
-		<a href='?_src_=prefs;preference=playerquality;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=playerquality;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-pq" class="clickable-text auto-shrink" style="width:31px; height:9px;">[get_playerquality(user.ckey, text = TRUE)]</div>
 		</a>
 	</div>
 
 	<div class="sprite" style="top:70px; left:118px; width:46px; height:9px; background-image: url('body_age.png');">
-		<a href='?_src_=prefs;preference=age;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=age;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-age" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/age)]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:70px; left:168px; width:53px; height:9px; background-image: url('body_flaw.png');">
-		<a href='?_src_=prefs;task=select_quirks' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;task=select_quirks' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div class="clickable-text auto-shrink" style="width:53px; height:9px;">Select Quirks</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:89px; left:119px; width:46px; height:9px; background-image: url('body_dominanthand.png');">
-		<a href='?_src_=prefs;preference=domhand' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=domhand' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-domhand" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/domhand) == 1 ? "Left" : "Right"]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:89px; left:168px; width:53px; height:9px; background-image: url('body_ancestry.png');">
-		<a href='?_src_=prefs;preference=skin_tone;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=skin_tone;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div class="clickable-text auto-shrink" style="width:53px; height:9px;">Change</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:108px; left:119px; width:46px; height:9px; background-image: url('body_pronouns.png');">
-		<a href='?_src_=prefs;preference=pronouns;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=pronouns;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-pronouns" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/pronouns)]</div>
 		</a>
 	</div>
-	<a href='?_src_=prefs;preference=gender'><div class="sprite" style="top:108px; left:169px; width:53px; height:9px; background-image: url('body_bodytype.png');">
+	<a href='byond://?_src_=prefs;preference=gender'><div class="sprite" style="top:108px; left:169px; width:53px; height:9px; background-image: url('body_bodytype.png');">
 		<div id="char-gender" class="clickable-text auto-shrink" style="width:53px; height:9px;">[read_preference(/datum/preference/choiced/gender) == MALE ? "M" : "F"]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:150px; left:120px; width:73px; height:9px; background-image: url('family_type.png');">
+	<a href='byond://?_src_=prefs;preference=family'><div class="sprite" style="top:150px; left:120px; width:73px; height:9px; background-image: url('family_type.png');">
 		<div id="char-family" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/family_mode) ? read_preference(/datum/preference/choiced/family_mode) : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
+	<a href='byond://?_src_=prefs;preference=family'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
 		<div id="char-genderpref" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/gender_choice) ? read_preference(/datum/preference/choiced/gender_choice) : "Any"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
+	<a href='byond://?_src_=prefs;preference=family'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
 		<div id="char-spouse" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/text/setspouse) ? read_preference(/datum/preference/text/setspouse) : "None"]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
+	<a href='byond://?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
 		<div id="char-culture" class="clickable-text auto-shrink" style="width:51px; height:9px;">[pref_culture ? pref_culture::name : "None"]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=voice_type;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">
+	<a href='byond://?_src_=prefs;preference=voice_type;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">
 		<div id="char-voicetype" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/voice_type)]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=selected_accent;task=input'><div class="sprite" style="top:154px; left:60px; width:42px; height:9px; background-image: url('voice_accent.png');">
+	<a href='byond://?_src_=prefs;preference=selected_accent;task=input'><div class="sprite" style="top:154px; left:60px; width:42px; height:9px; background-image: url('voice_accent.png');">
 		<div id="char-accent" class="clickable-text auto-shrink" style="width:42px; height:9px;">[read_preference(/datum/preference/choiced/selected_accent)]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=loadout_item;loadout_number=1;task=loadout_store'><div class="sprite" style="top:194px; left:10px; width:51px; height:9px; background-image: url('loadout_item1.png');">
+	<a href='byond://?_src_=prefs;preference=loadout_item;loadout_number=1;task=loadout_store'><div class="sprite" style="top:194px; left:10px; width:51px; height:9px; background-image: url('loadout_item1.png');">
 		<div id="char-loadout1" class="clickable-text auto-shrink" style="width:51px; height:9px;">[loadout1_item ? loadout1_item.name : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=loadout_item;loadout_number=2;task=loadout_store'><div class="sprite" style="top:213px; left:10px; width:51px; height:9px; background-image: url('loadout_item2.png');">
+	<a href='byond://?_src_=prefs;preference=loadout_item;loadout_number=2;task=loadout_store'><div class="sprite" style="top:213px; left:10px; width:51px; height:9px; background-image: url('loadout_item2.png');">
 		<div id="char-loadout2" class="clickable-text auto-shrink" style="width:51px; height:9px;">[loadout2_item ? loadout2_item.name : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=loadout_item;loadout_number=3;task=loadout_store'><div class="sprite" style="top:232px; left:10px; width:51px; height:9px; background-image: url('loadout_item3.png');">
+	<a href='byond://?_src_=prefs;preference=loadout_item;loadout_number=3;task=loadout_store'><div class="sprite" style="top:232px; left:10px; width:51px; height:9px; background-image: url('loadout_item3.png');">
 		<div id="char-loadout3" class="clickable-text auto-shrink" style="width:51px; height:9px;">[loadout3_item ? loadout3_item.name : "None"]</div>
 	</div></a>
 
 	<div class="sprite" style="top:195px; left:82px; width:22px; height:7px; background-image: url('triumphs_display.png');">
-		<a href='?_src_=prefs;preference=triumphs;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=triumphs;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-triumphs" class="clickable-text" style="width:22px; height:7px; font-size: 5px;">[user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "0"]</div>
 		</a>
 	</div>
 
-	<a href='?_src_=prefs;preference=triumph_buy_menu'><div class="sprite tri-shop"></div></a>
-	<a href='?_src_=prefs;preference=descriptors;task=menu'><div class="sprite flav-desc"></div></a>
-	<a href='?_src_=prefs;preference=flavortext;task=input'><div class="sprite flav-text"></div></a>
-	<a href='?_src_=prefs;preference=culinary;task=menu'><div class="sprite flav-food"></div></a>
-	<a href='?_src_=prefs;preference=ooc_preview;task=ooc_preview'><div class="sprite flav-prev"></div></a>
-	<a href='?_src_=prefs;preference=ooc_notes;task=input'><div class="sprite ooc-notes"></div></a>
-	<a href='?_src_=prefs;preference=ooc_extra;task=input'><div class="sprite ooc-extra"></div></a>
-	<a href='?_src_=prefs;preference=antag;task=menu'><div class="sprite btn-roles"></div></a>
-	<a href='?_src_=prefs;preference=customizers;task=menu'><div class="sprite f-btn"></div></a>
-	<a href='?_src_=prefs;task=randomiseappearanceprefs;'><div class="sprite f-random"></div></a>
+	<a href='byond://?_src_=prefs;preference=triumph_buy_menu'><div class="sprite tri-shop"></div></a>
+	<a href='byond://?_src_=prefs;preference=descriptors;task=menu'><div class="sprite flav-desc"></div></a>
+	<a href='byond://?_src_=prefs;preference=flavortext;task=input'><div class="sprite flav-text"></div></a>
+	<a href='byond://?_src_=prefs;preference=culinary;task=menu'><div class="sprite flav-food"></div></a>
+	<a href='byond://?_src_=prefs;preference=ooc_preview;task=ooc_preview'><div class="sprite flav-prev"></div></a>
+	<a href='byond://?_src_=prefs;preference=ooc_notes;task=input'><div class="sprite ooc-notes"></div></a>
+	<a href='byond://?_src_=prefs;preference=ooc_extra;task=input'><div class="sprite ooc-extra"></div></a>
+	<a href='byond://?_src_=prefs;preference=antag;task=menu'><div class="sprite btn-roles"></div></a>
+	<a href='byond://?_src_=prefs;preference=customizers;task=menu'><div class="sprite f-btn"></div></a>
+	<a href='byond://?_src_=prefs;task=randomiseappearanceprefs;'><div class="sprite f-random"></div></a>
 
 	<div class="sprite features-bg"><div id="silhouette" class="sprite" style="background-image: url('features_bodytype_[read_preference(/datum/preference/choiced/gender) == MALE ? "m" : "f"].png');"></div></div>
 
 	<div class="sprite v-color-box">
-		<a href='?_src_=prefs;preference=voice_color;task=input' style="display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=voice_color;task=input' style="display: block; width: 100%; height: 100%;">
 			<div id="voice-blob" class="sprite v-blob" style="background-color: [read_preference(/datum/preference/color/voice_color)];"></div>
 		</a>
 	</div>
-	<a href='?_src_=prefs;task=loadout_store'><div id="bespecial" class="sprite [next_special_trait ? "yes" : ""]"></div></a>
-	<a href='?_src_=prefs;preference=multi;task=menu'><div class="sprite menu-ready"></div></a>
-	<a href='?_src_=prefs;task=changeslot;'><div class="sprite menu-change"></div></a>
-	<a href='?_src_=prefs;preference=keybinds;task=menu'><div class="sprite menu-keybinds"></div></a>
-	<a href='?_src_=prefs;preference=toggles'><div class="sprite menu-toggles"></div></a>
-	<a href='?_src_=prefs;task=save'><div class="sprite menu-save"></div></a>
-	<a href='?_src_=prefs;task=load'><div class="sprite menu-undo"></div></a>
-	<a href='?_src_=prefs;task=finished'><div class="sprite menu-done"></div></a>
+	<a href='byond://?_src_=prefs;task=loadout_store'><div id="bespecial" class="sprite [next_special_trait ? "yes" : ""]"></div></a>
+	<a href='byond://?_src_=prefs;preference=multi;task=menu'><div class="sprite menu-ready"></div></a>
+	<a href='byond://?_src_=prefs;task=changeslot;'><div class="sprite menu-change"></div></a>
+	<a href='byond://?_src_=prefs;preference=keybinds;task=menu'><div class="sprite menu-keybinds"></div></a>
+	<a href='byond://?_src_=prefs;preference=toggles'><div class="sprite menu-toggles"></div></a>
+	<a href='byond://?_src_=prefs;task=save'><div class="sprite menu-save"></div></a>
+	<a href='byond://?_src_=prefs;task=load'><div class="sprite menu-undo"></div></a>
+	<a href='byond://?_src_=prefs;task=finished'><div class="sprite menu-done"></div></a>
 </div>
 </body>
 </html>
@@ -675,12 +675,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	update_preview_icon()
 
 /datum/preferences/proc/_get_loadout_slot(slot)
-    if(length(equipped_loadout) >= slot)
-        return equipped_loadout[slot]
-    var/rent_idx = slot - length(equipped_loadout)
-    if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
-        return single_round_loadout[rent_idx]
-    return null
+	if(length(equipped_loadout) >= slot)
+		return equipped_loadout[slot]
+	var/rent_idx = slot - length(equipped_loadout)
+	if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
+		return single_round_loadout[rent_idx]
+	return null
 
 /datum/preferences/proc/set_ui_theme(new_theme)
 	if(new_theme in list("dusty", "grimshart", "paper", "parchment"))
@@ -765,28 +765,28 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
 
-	dat += "<center><a href='?_src_=prefs;preference=keybinds;task=close'>Done</a></center><br>"
+	dat += "<center><a href='byond://?_src_=prefs;preference=keybinds;task=close'>Done</a></center><br>"
 	for (var/category in kb_categories)
 		for (var/i in kb_categories[category])
 			var/datum/keybinding/kb = i
 			if(!length(user_binds[kb.name]))
-				dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a>"
+				dat += "<label>[kb.full_name]</label> <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a>"
 			//	var/list/default_keys = hotkeys ? kb.hotkey_keys : kb.classic_keys
 			//	if(LAZYLEN(default_keys))
 			//		dat += "| Default: [default_keys.Join(", ")]"
 				dat += "<br>"
 			else
 				var/bound_key = user_binds[kb.name][1]
-				dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
+				dat += "<label>[kb.full_name]</label> <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
 				for(var/bound_key_index in 2 to length(user_binds[kb.name]))
 					bound_key = user_binds[kb.name][bound_key_index]
-					dat += " | <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
+					dat += " | <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
 				if(length(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
-					dat += "| <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name]'>Add Secondary</a>"
+					dat += "| <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name]'>Add Secondary</a>"
 				dat += "<br>"
 
 	dat += "<br><br>"
-	dat += "<a href ='?_src_=prefs;preference=keybinds;task=keybindings_reset'>\[Reset to default\]</a>"
+	dat += "<a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_reset'>\[Reset to default\]</a>"
 	dat += "</body>"
 
 	var/datum/browser/noclose/popup = new(user, "keybind_setup", "<div align='center'>Keybinds</div>", 600, 600) //no reason not to reuse the occupation window, as it's cleaner that way
@@ -797,14 +797,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/set_antag(mob/user)
 	var/list/dat = list()
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
-	dat += "<center><a href='?_src_=prefs;preference=antag;task=close' style='display:block;margin-bottom:2px'>Done</a></center>"
+	dat += "<center><a href='byond://?_src_=prefs;preference=antag;task=close' style='display:block;margin-bottom:2px'>Done</a></center>"
 	dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Villains</h2>"
 	if(is_total_antag_banned(user.ckey))
 		dat += "<font color=red><b>I am banned from antagonist roles.</b></font><br>"
 		src.be_special = list()
 	for (var/i in GLOB.special_roles_rogue)
 		if(is_antag_banned(user.ckey, i))
-			dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
+			dat += "<b>[capitalize(i)]:</b> <a href='byond://?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
 		else
 			var/days_remaining = null
 			if(ispath(GLOB.special_roles_rogue[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs))
@@ -812,7 +812,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if(days_remaining)
 				dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS__~~\]~~__</font><br>"
 			else
-				dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
+				dat += "<b>[capitalize(i)]:</b> <a href='byond://?_src_=prefs;preference=antag;task=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
 
 	var/list/vessel_ids = GLOB.vessel_ids
 	var/list/available_vessel_ids = list()
@@ -824,7 +824,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Vessels</h2>"
 		for(var/id in available_vessel_ids)
 			var/enabled = (id in be_special)
-			dat += "<b>[id]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[id]'>[enabled ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>[id]:</b> <a href='byond://?_src_=prefs;preference=antag;task=be_special;be_special_type=[id]'>[enabled ? "Enabled" : "Disabled"]</a><br>"
 
 	dat += "</body>"
 	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340)
@@ -1252,7 +1252,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		for(var/datum/role_ban_instance/ban as anything in bans.bans)
 			if(!ban.curses)
 				continue
-			for(var/curse_name as anything in ban.curses)
+			for(var/curse_name in ban.curses)
 				var/datum/curse/curse = GLOB.curse_names[curse_name]
 				character.add_curse(curse.type)
 

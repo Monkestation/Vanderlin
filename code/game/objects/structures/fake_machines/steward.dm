@@ -315,7 +315,7 @@
 					/datum/job/bandit::title,
 				)
 				jobs += "Cancel"
-				var/new_pos = input(usr, "Select their new position", src, null) as anything in jobs
+				var/new_pos = tgui_input_list(usr, "Select their new position", src, null, jobs)
 				if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())
 					return
 				if(new_pos == "Cancel")

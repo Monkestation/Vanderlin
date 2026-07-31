@@ -116,7 +116,7 @@
 	"ORANGE"="#b86f0c",
 	"Royal Majenta"="#962e5c")
 	var/mob/living/carbon/human/L = loc
-	var/choice = input(L, "Choose a color.", "GRENZELHOFTIAN COLORPLEX") as anything in colors
+	var/choice = tgui_input_list(L, "Choose a color.", "GRENZELHOFTIAN COLORPLEX", colors)
 	var/playerchoice = colors[choice]
 	picked = TRUE
 	detail_color = playerchoice

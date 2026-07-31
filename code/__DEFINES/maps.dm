@@ -27,16 +27,15 @@ require only minor tweaks.
 
 // traits
 // boolean - marks a level as having that property if present
+// Traits for unique Z levels
 #define ZTRAIT_CENTCOM "CentCom"
-#define ZTRAIT_STATION "Station"
 #define ZTRAIT_TOWN "Town" // The town's z levels
 #define ZTRAIT_MINING "Mining"
 #define ZTRAIT_RESERVED "Transit/Reserved"
-#define ZTRAIT_AWAY "Away Mission"
-#define ZTRAIT_SPACE_RUINS "Space Ruins"
-#define ZTRAIT_LAVA_RUINS "Lava Ruins"
+#define ZTRAIT_OUTLAND "Outland"
+#define ZTRAIT_MATTHIOS_DUNGEON "Dungeon"
+
 #define ZTRAIT_ISOLATED_RUINS "Isolated Ruins" //Placing ruins on z levels with this trait will use turf reservation instead of usual placement.
-#define ZTRAIT_WEATHER_STUFF "Turf Weather Effects"
 
 // number - bombcap is multiplied by this before being applied to bombs
 #define ZTRAIT_BOMBCAP_MULTIPLIER "Bombcap Multiplier"
@@ -50,8 +49,12 @@ require only minor tweaks.
 // numeric offsets - e.g. {"Down": true} means that chasms will fall to z - 1 rather than oblivion
 #define ZTRAIT_UP "Up"
 #define ZTRAIT_DOWN "Down"
+
 #define ZTRAIT_IGNORE_WEATHER_TRAIT "NoDayorWeather"
-#define ZTRAIT_MATTHIOS_DUNGEON "NoDayorWeather"
+
+#define ZTRAIT_WEATHER_STUFF "Turf Weather Effects"
+/// For mob processing, no culling is used for mobs in this Z level. ZTRAIT_TOWN implies this.
+#define ZTRAIT_ALWAYS_PROCESS "Always Process"
 
 #define ZTRAIT_CELLAR_LIKE "Cellar"
 #define ZTRAIT_LEYLINES "Leylines"
@@ -68,15 +71,28 @@ require only minor tweaks.
 #define ZTRAIT_BASETURF "Baseturf"
 
 // default trait definitions, used by SSmapping
-#define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
-#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE, ZTRAIT_LEYLINES = TRUE)
-#define ZTRAITS_TOWN list(ZTRAIT_WEATHER_STUFF = TRUE, ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE, ZTRAIT_TOWN = TRUE)
-#define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
-#define ZTRAITS_LAVALAND list(\
-	ZTRAIT_MINING = TRUE, \
-	ZTRAIT_LAVA_RUINS = TRUE, \
-	ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
-	ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface)
+#define ZTRAITS_CENTCOM list(\
+	ZTRAIT_CENTCOM = TRUE,\
+	ZTRAIT_LEYLINES = TRUE,\
+)
+
+#define ZTRAITS_TOWN list(\
+	ZTRAIT_TOWN = TRUE,\
+	ZTRAIT_WEATHER_STUFF = TRUE,\
+	ZTRAIT_LEYLINES = TRUE,\
+)
+
+#define ZTRAITS_OUTLAND list(\
+	ZTRAIT_OUTLAND = TRUE,\
+	ZTRAIT_WEATHER_STUFF = TRUE,\
+	ZTRAIT_LEYLINES = TRUE,\
+)
+
+#define ZTRAITS_DUNGEON list(\
+	ZTRAIT_MATTHIOS_DUNGEON = TRUE,\
+	ZTRAIT_IGNORE_WEATHER_TRAIT = TRUE,\
+	ZTRAIT_LEYLINES = TRUE,\
+)
 
 #define DL_NAME "name"
 #define DL_TRAITS "traits"

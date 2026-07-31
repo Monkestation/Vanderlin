@@ -20,15 +20,14 @@
 	for(var/obj/item/organ/heart/heart as anything in owner.getorganslotlist(ORGAN_SLOT_HEART))
 		if(!istype(heart))
 			continue
-		if(heart.is_failing() && owner.needs_heart())
-			if(!heart.failed)
-				if(owner.stat == CONSCIOUS)
-					owner.visible_message(span_danger("<b>[owner]</b> clutches at [owner.p_their()] [parse_zone(BODY_ZONE_CHEST)]!"))
-				playsound(owner, heart.convulsion_sound, 95, FALSE)
-				heart.failed = TRUE
-		else
-			// Reset the flag once the heart recovers so the message can fire again next time
+		if(!heart.is_failing() || !owner.needs_heart())
 			heart.failed = FALSE
+			continue
+		if(!heart.failed)
+			if(owner.stat == CONSCIOUS)
+				owner.visible_message(span_danger("<b>[owner]</b> clutches at [owner.p_their()] [parse_zone(BODY_ZONE_CHEST)]!"))
+			playsound(owner, heart.convulsion_sound, 95, FALSE)
+			heart.failed = TRUE
 
 /datum/organ_process/heart/proc/handle_pulse(mob/living/carbon/owner, delta_time, times_fired)
 	// Pulse mod starts out as just the chemical effect amount
@@ -104,8 +103,7 @@
 	if(should_stop)
 		// We don't use set_heartattack here to avoid stopping all hearts instead of just one
 		var/list/hearts = owner.getorganslotlist(ORGAN_SLOT_HEART)
-		for(var/heartache in shuffle(hearts))
-			var/obj/item/organ/heart/heart = heartache
+		for(var/obj/item/organ/heart/heart as anything in shuffle(hearts))
 			if(heart.can_stop())
 				heart.Stop()
 				break
