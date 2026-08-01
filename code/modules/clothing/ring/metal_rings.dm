@@ -24,6 +24,16 @@
 	icon_state = "ring_duel"
 	sellprice = 10
 
+/obj/item/clothing/ring/bronze
+	name = "bronze ring"
+	desc = "A ring of plain bronze."
+	sellprice = 60
+
+/obj/item/clothing/ring/blacksteel
+	name = "blacksteel ring"
+	desc = "A myhtical blacksteel ring."
+	sellprice = 150
+
 /obj/item/clothing/ring/emeraldbs
 	name = "gemerald ring of blacksteel"
 	icon_state = "bs_ring_emerald"

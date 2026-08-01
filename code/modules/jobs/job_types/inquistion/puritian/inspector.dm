@@ -167,7 +167,7 @@
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
 	gloves = /obj/item/clothing/gloves/leather/grenzel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored
 	r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 	backpack_contents = list(
