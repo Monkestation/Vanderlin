@@ -62,7 +62,7 @@
 
 	var/static/list/rings = list(
 		"Bronze Ring" = /obj/item/clothing/ring/courtagent_ring/bronze,
-		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring,
+		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring/silver,
 		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold,
 	)
 	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "COURT AGENT")

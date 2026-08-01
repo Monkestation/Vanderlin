@@ -22,10 +22,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
-		/obj/item/clothing/ring/courtagent_ring, //uncraftable
-		/obj/item/clothing/ring/courtagent_ring/bronze, //uncraftable
-		/obj/item/clothing/ring/courtagent_ring/blacksteel, //uncraftable
-		/obj/item/clothing/ring/courtagent_ring/gold, //uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -161,6 +157,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/shirt/robe/kimono, //these are mob holders only
 		/obj/item/clothing/armor/regenerating, ///uh no
 		/obj/item/clothing/head/inqarticles, //inqports
+		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 	)
 
 	/// excludes paths that are subtypes of these types and only subtypes

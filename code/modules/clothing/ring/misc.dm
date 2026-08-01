@@ -375,6 +375,10 @@
 	base_icon_state = "ring_s"
 	var/metal_adjective = "silver"
 
+/obj/item/clothing/ring/courtagent_ring/silver/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
