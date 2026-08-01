@@ -314,14 +314,14 @@
 			var/list/roles = role_categories[category]
 			if(!roles || !roles.len)
 				continue
-			var/category_class = "cat_[replacetext(lowertext(category), " ", "_")]"
+			var/category_class = "cat_[replacetext(LOWER_TEXT(category), " ", "_")]"
 			output += "<div class='category'>"
 			output += "<label class='inputlabel checkbox'><b>[category]</b>"
 			output += "<input type='checkbox' id='[category_class]_head' name='[category_class]' value='1' onclick='toggle_checkboxes(this)'>"
 			output += "<div class='inputbox'></div></label>"
 			output += "<div class='rolelist'>"
 			for(var/role_two in roles)
-				var/role_id = "role_[replacetext(lowertext(role_two), " ", "_")]"
+				var/role_id = "role_[replacetext(LOWER_TEXT(role_two), " ", "_")]"
 				output += "<label class='inputlabel checkbox'>[role_two]"
 				output += "<input type='checkbox' id='[role_id]' class='[category_class]' name='[role_two]' value='1'[(role_two in banned_from) ? " checked" : ""]>"
 				output += "<div class='inputbox'></div></label>"
