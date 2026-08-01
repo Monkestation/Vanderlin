@@ -945,7 +945,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/knight_tabard
-	name = "knight's tabbard"
+	name = "knight's tabard"
 	output = /obj/item/clothing/cloak/tabard/knight
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -953,7 +953,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/guard_tabard
-	name = "guard tabbard"
+	name = "guard tabard"
 	output = /obj/item/clothing/cloak/tabard/knight/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -961,14 +961,14 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/crusader_tabard_alt
-	name = "crusader tabbard (alt)"
+	name = "crusader tabard (alt)"
 	output = /obj/item/clothing/cloak/tabard/crusader/tief
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/psydon_tabbard
+/datum/repeatable_crafting_recipe/sewing/psydon_tabard
 	name = "psydonic tababrd"
 	output = /obj/item/clothing/cloak/tabard/adept
 	requirements = list(/obj/item/natural/cloth = 2,
