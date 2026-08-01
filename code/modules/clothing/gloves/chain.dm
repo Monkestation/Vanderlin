@@ -14,7 +14,7 @@
 	smeltresult = null
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/gloves/maille
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
 	sewrepair = null
@@ -37,7 +37,7 @@
 	name = "iron chain gauntlets"
 	icon_state = "icgloves"
 	desc = "Gauntlets made out of interwoven iron chains. Decent melee protection, but are better suited to stop arrows than blades."
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/gloves/maille/iron
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 1.35 KILOGRAMS
 	smeltresult = null

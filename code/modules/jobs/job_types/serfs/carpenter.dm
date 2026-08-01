@@ -39,6 +39,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/carpenter
 	give_bank_account = 8
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

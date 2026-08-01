@@ -11,16 +11,16 @@ GLOBAL_LIST_INIT(preferences_in_priority_order, build_preferences_in_priority_or
 
 /proc/init_preference_entries()
 	var/list/output = list()
-	for (var/datum/preference/T as anything in subtypesof(/datum/preference))
-		if (initial(T.abstract_type) == T)
+	for(var/datum/preference/T as anything in subtypesof(/datum/preference))
+		if(IS_ABSTRACT(T))
 			continue
 		output[T] = new T
 	return output
 
 /proc/init_preference_entries_by_key()
 	var/list/output = list()
-	for (var/datum/preference/T as anything in subtypesof(/datum/preference))
-		if (initial(T.abstract_type) == T)
+	for(var/datum/preference/T as anything in subtypesof(/datum/preference))
+		if(IS_ABSTRACT(T))
 			continue
 		output[initial(T.savefile_key)] = GLOB.preference_entries[T]
 	return output
@@ -28,22 +28,22 @@ GLOBAL_LIST_INIT(preferences_in_priority_order, build_preferences_in_priority_or
 /// Returns a flat list of all Vanderlin preferences sorted by priority.
 /proc/build_preferences_in_priority_order()
 	var/list/by_priority[MAX_PREF_PRIORITY]
-	for (var/T in GLOB.preference_entries)
+	for(var/T in GLOB.preference_entries)
 		var/datum/preference/pref = GLOB.preference_entries[T]
 		LAZYADD(by_priority[pref.priority], pref)
 	var/list/flat = list()
-	for (var/i in 1 to MAX_PREF_PRIORITY)
-		if (!by_priority[i])
+	for(var/i in 1 to MAX_PREF_PRIORITY)
+		if(!by_priority[i])
 			continue
 		flat += by_priority[i]
 	return flat
 
 /proc/init_post_job_spawn_prefs()
-    var/list/output = list()
-    for (var/datum/preference/T as anything in subtypesof(/datum/preference))
-        if (initial(T.abstract_type) == T)
-            continue
-        var/datum/preference/pref = GLOB.preference_entries[T]
-        if (pref.post_job_pref)
-            output[T] = pref
-    return output
+	var/list/output = list()
+	for(var/datum/preference/T as anything in subtypesof(/datum/preference))
+		if(IS_ABSTRACT(T))
+			continue
+		var/datum/preference/pref = GLOB.preference_entries[T]
+		if(pref.post_job_pref)
+			output[T] = pref
+	return output

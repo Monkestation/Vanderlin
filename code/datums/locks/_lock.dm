@@ -156,7 +156,7 @@
 		return FALSE
 	if(master_unlockable && (ACCESS_LORD in access_list))
 		return TRUE
-	for(var/id as anything in lockid_list)
+	for(var/id in lockid_list)
 		if(id in access_list)
 			return TRUE
 	return FALSE

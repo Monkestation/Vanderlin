@@ -91,7 +91,7 @@
 	gloves = /obj/item/clothing/gloves/chain/psydon
 	neck = /obj/item/clothing/neck/chaincoif
 	pants = /obj/item/clothing/pants/chainlegs
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	shoes = /obj/item/clothing/shoes/psydonboots
 	belt = /obj/item/storage/belt/leather/black

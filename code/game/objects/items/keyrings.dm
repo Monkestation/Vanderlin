@@ -32,7 +32,7 @@
 		return
 	if(length(keys) > 10)
 		stack_trace("Keyring [src] has too many keys and the list will get cut short!")
-	for(var/X as anything in keys)
+	for(var/X in keys)
 		var/obj/item/key/new_key = new X(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_key, null, TRUE, FALSE))
 			qdel(new_key)
@@ -302,10 +302,10 @@
 	keys = list(/obj/item/key/warehouse, /obj/item/key/merchant)
 
 /obj/item/storage/keyring/tombwarden
-	keys = list(/obj/item/key/tombwarden, /obj/item/key/mercenary, /obj/item/key/tomb)
+	keys = list(/obj/item/key/tombwarden, /obj/item/key/tomb)
 
 /obj/item/storage/keyring/mercenary
-	keys = list(/obj/item/key/mercenary, /obj/item/key/tomb)
+	keys = list(/obj/item/key/mercenary)
 
 /obj/item/storage/keyring/master_of_crafts_and_labor
 	keys = list(/obj/item/key/elder, /obj/item/key/blacksmith,/obj/item/key/tailor,/obj/item/key/tavern,/obj/item/key/apothecary, /obj/item/key/butcher, /obj/item/key/soilson,/obj/item/key/artificer,/obj/item/key/clinic)

@@ -87,6 +87,7 @@ SUBSYSTEM_DEF(mapping)
 	retainer = new
 	if(initialized)
 		return
+
 #ifdef FORCE_RANDOM_WORLD_GEN
 	// Skip normal initialization and go straight to random world gen
 	log_world("Initializing random world generation...")
@@ -100,9 +101,16 @@ SUBSYSTEM_DEF(mapping)
 		if(!config || config.defaulted)
 			to_chat(world, "<span class='boldannounce'>Unable to load next or default map config, defaulting to Vanderlin</span>")
 			config = old_config
+
+	// Apply default town ZTRAIT here and not in load config because it's used for otherZ (It shoulldn't be)
+	for(var/list/z_level in config.traits)
+		if(!(ZTRAIT_TOWN in z_level))
+			z_level[ZTRAIT_TOWN] = TRUE
+
 	if(map_adjustment)
 		map_adjustment.on_mapping_init()
 		log_world("Applied '[map_adjustment.map_file_name]' map adjustment: on_mapping_init()")
+
 	loadWorld()
 	require_area_resort()
 	process_teleport_locs()			//Sets up the wizard teleport locations
@@ -155,6 +163,7 @@ SUBSYSTEM_DEF(mapping)
 #define INIT_ANNOUNCE(X) to_chat(world, span_boldannounce("[X]")); log_world(X)
 /datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, list/traits, list/default_traits, silent = FALSE, delve = 0)
 	. = list()
+
 	var/start_time = REALTIMEOFDAY
 
 	if (!islist(files))  // handle single-level maps
@@ -163,37 +172,37 @@ SUBSYSTEM_DEF(mapping)
 	// check that the total z count of all maps matches the list of traits
 	var/total_z = 0
 	var/list/parsed_maps = list()
-	for (var/file in files)
+	for(var/file in files)
 		var/full_path = "_maps/[path]/[file]"
 		var/datum/parsed_map/pm = new(file(full_path))
 		var/bounds = pm?.bounds
-		if (!bounds)
+		if(!bounds)
 			errorList |= full_path
 			continue
+
 		parsed_maps[pm] = total_z  // save the start Z of this file
 		total_z += bounds[MAP_MAXZ] - bounds[MAP_MINZ] + 1
 
-	if (!length(traits))  // null or empty - default
-		for (var/i in 1 to total_z)
+	if(!length(traits))  // null or empty - default
+		for(var/i in 1 to total_z)
 			traits += list(default_traits)
 	else if (total_z != traits.len)  // mismatch
 		INIT_ANNOUNCE("WARNING: [traits.len] trait sets specified for [total_z] z-levels in [path]!")
-		if (total_z < traits.len)  // ignore extra traits
+		if(total_z < length(traits))  // ignore extra traits
 			traits.Cut(total_z + 1)
-		while (total_z > traits.len)  // fall back to defaults on extra levels
+		while(total_z > length(traits))  // fall back to defaults on extra levels
 			traits += list(default_traits)
 
 	// preload the relevant space_level datums
 	var/start_z = world.maxz + 1
 	var/i = 0
-	for (var/level in traits)
+	for(var/level in traits)
 		add_new_zlevel("[name][i ? " [i + 1]" : ""]", level, delve = delve)
 		++i
 
 	// load the maps
-	for (var/P in parsed_maps)
-		var/datum/parsed_map/pm = P
-		if (!pm.load(1, 1, start_z + parsed_maps[P], no_changeturf = TRUE, new_z = TRUE))
+	for(var/datum/parsed_map/pm as anything in parsed_maps)
+		if(!pm.load(1, 1, start_z + parsed_maps[pm], no_changeturf = TRUE, new_z = TRUE))
 			errorList |= pm.original_path
 
 	log_game("Loaded [name] in [(REALTIMEOFDAY - start_time)/10]s!")
@@ -212,11 +221,6 @@ SUBSYSTEM_DEF(mapping)
 #ifdef TESTING
 	INIT_ANNOUNCE("Loading [config.map_name]...")
 #endif
-	//set the primary level to be the designated "town"
-	if(islist(config.traits))
-		for(var/list/level in config.traits)
-			if (!(ZTRAIT_TOWN in level))
-				level[ZTRAIT_TOWN] = TRUE
 
 	LoadGroup(FailedZs, config.map_name, config.map_path, config.map_file, config.traits, ZTRAITS_TOWN, delve = config.delve)
 
@@ -236,7 +240,6 @@ SUBSYSTEM_DEF(mapping)
 #endif
 
 	//For all maps
-
 #ifndef LOWMEMORYMODE
 	otherZ += load_map_config("map_files/shared/underworld") // don't load underworld on lowmem
 #endif
@@ -245,7 +248,7 @@ SUBSYSTEM_DEF(mapping)
 		for(var/datum/map_config/OtherZ as anything in otherZ)
 			if(OtherZ.defaulted)
 				continue
-			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_STATION, delve = OtherZ.delve)
+			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_OUTLAND, delve = OtherZ.delve)
 
 	if(SSdbcore.Connect())
 		var/datum/DBQuery/query_round_map_name = SSdbcore.NewQuery({"
@@ -253,13 +256,6 @@ SUBSYSTEM_DEF(mapping)
 		"}, list("map_name" = config.map_name, "round_id" = GLOB.round_id))
 		query_round_map_name.Execute()
 		qdel(query_round_map_name)
-
-#ifndef LOWMEMORYMODE
-	// TODO: remove this when the DB is prepared for the z-levels getting reordered
-	while (world.maxz < (5 - 1) && space_levels_so_far < config.space_ruin_levels)
-		++space_levels_so_far
-		add_new_zlevel("Empty Area [space_levels_so_far]", ZTRAITS_SPACE)
-#endif
 
 	if(LAZYLEN(FailedZs))	//but seriously, unless the server's filesystem is messed up this will never happen
 		var/msg = "RED ALERT! The following map files failed to load: [FailedZs[1]]"

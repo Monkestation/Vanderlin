@@ -76,11 +76,6 @@
 	///Economy cost of item in premium vendor
 	var/custom_premium_price
 
-	/// Will move to flags_1 when i can be arsed to (2019, has not done so)
-	var/rad_flags = NONE
-
-	///Bitfield for how the atom handles materials.
-	var/material_flags = NONE
 	///Modifier that raises/lowers the effect of the amount of a material, prevents small and easy to get items from being death machines.
 	var/material_modifier = 1
 
@@ -148,8 +143,10 @@
 
 	/// Any atom that uses integrity and can be damaged must set this to true, otherwise the integrity procs will throw an error
 	var/uses_integrity = FALSE
+	///Armor datum created by the atom
+	VAR_PROTECTED/datum/armor/armor_type = /datum/armor/none
 	///Armor datum used by the atom
-	var/datum/armor/armor
+	VAR_PRIVATE/datum/armor/armor
 	///Current integrity, defaults to max_integrity on init
 	VAR_PRIVATE/atom_integrity
 	///Maximum integrity
@@ -254,7 +251,6 @@
 
 	if(uses_integrity)
 		atom_integrity = max_integrity
-	TEST_ONLY_ASSERT((!armor || istype(armor)), "[type] has an armor that contains an invalid value at intialize")
 
 	if(ispath(ai_controller))
 		ai_controller = new ai_controller(src)
@@ -445,102 +441,6 @@
 	else if(src in container)
 		return TRUE
 	return FALSE
-
-/**
- * Get the name of this object for examine
- *
- * You can override what is returned from this proc by registering to listen for the
- * COMSIG_ATOM_GET_EXAMINE_NAME signal
- */
-/atom/proc/get_examine_name(mob/user, use_article = TRUE)
-	if(use_article)
-		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
-	return "<b>[name]</b>"
-
-///Generate the full examine string of this atom (including icon for goonchat)
-/atom/proc/get_examine_string(mob/user, thats = FALSE)
-	. = get_examine_name(user)
-	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
-	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
-
-/atom/proc/get_examine_desc(mob/user)
-	return desc
-
-/atom/proc/get_examine_icon(mob/user)
-	return ma2html(src, user)
-
-/atom/proc/get_inspect_button()
-	return ""
-
-/atom/proc/get_inspect_entries()
-	return list()
-
-/**
- * Called when a mob examines (shift click or verb) this atom
- *
- * Default behaviour is to get the name and icon of the object and it's reagents where
- * the TRANSPARENT flag is set on the reagents holder
- *
- * Produces a signal COMSIG_ATOM_EXAMINE
- */
-/atom/proc/examine(mob/user)
-	var/examine_string = get_examine_string(user, thats = TRUE)
-	if(examine_string)
-		. = list("[examine_string].[get_inspect_button()]")
-	else
-		. = list()
-
-	var/examine_desc = get_examine_desc(user)
-	if(examine_desc)
-		. += "<span class='info'>[examine_desc]</span>"
-
-	if(reagents)
-		if(reagents.flags & TRANSPARENT)
-			if(length(reagents.reagent_list))
-				if(user.can_see_reagents()) //Show each individual reagent
-					. += "It contains:"
-					for(var/datum/reagent/R in reagents.reagent_list)
-						. += "[(UNIT_FORM_STRING(R.volume))] of <font color=[R.color]>[R.name]</font>"
-				else //Otherwise, just show the total volume
-					var/total_volume = 0
-					var/reagent_color
-					for(var/datum/reagent/R in reagents.reagent_list)
-						total_volume += R.volume
-					reagent_color = mix_color_from_reagents(reagents.reagent_list)
-					. += "It contains [(UNIT_FORM_STRING(total_volume))] of <font color=[reagent_color]>something.</font>"
-			else
-				. += "It's empty."
-		else if(reagents.flags & AMOUNT_VISIBLE)
-			if(reagents.total_volume)
-				. += "<span class='notice'>It has [(UNIT_FORM_STRING(round(reagents.total_volume, 0.1)))] left.</span>"
-			else
-				. += "<span class='danger'>It's empty.</span>"
-		//SNIFFING
-		if (user.zone_selected == BODY_ZONE_PRECISE_NOSE && get_dist(src, user) <= 1)
-			// if atom's path is item/reagent_containers/glass/carafe
-			var/is_not_closed = FALSE
-			if(istype(src, /obj/item/reagent_containers/glass/bottle))
-				var/obj/item/reagent_containers/glass/bottle/A = src
-				is_not_closed = !A.closed
-			else if(istype(src, /obj/item/reagent_containers/glass/alchemical))
-				var/obj/item/reagent_containers/glass/alchemical/A = src
-				is_not_closed = !A.closed
-			if(is_not_closed && reagents.total_volume) // if the container is open, and there's liquids in there
-				user.visible_message(span_info("[user] takes a whiff of [src]."))
-				. += span_notice("I smell [src.reagents.generate_scent_message()].")
-				if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
-					var/list/full_reagents = list()
-					for(var/datum/reagent/R in reagents.reagent_list)
-						if(R.volume > 0)
-							full_reagents += "[LOWER_TEXT(R.name)]"
-					if(length(full_reagents))
-						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
-	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
-
-/atom/proc/get_mechanics_examine(mob/user)
-	return list()
 
 /**
  * Updates the appearence of the icon
@@ -961,6 +861,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_ADD_REAGENT, "Add Reagent")
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EXPLOSION, "Explosion")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_AI, "Add AI controller")
+	VV_DROPDOWN_OPTION(VV_HK_ARMOR_MOD, "Modify Armor")
 	if(greyscale_colors)
 		VV_DROPDOWN_OPTION(VV_HK_MODIFY_GREYSCALE, "Modify greyscale colors")
 
@@ -1002,6 +903,30 @@
 	if(href_list[VV_HK_TRIGGER_EXPLOSION] && check_rights(R_FUN))
 		usr.client.cmd_admin_explosion(src)
 
+	if(href_list[VV_HK_ARMOR_MOD])
+		var/list/pickerlist = list()
+		var/list/armorlist = get_armor().get_rating_list()
+
+		for (var/i in armorlist)
+			pickerlist += list(list("value" = armorlist[i], "name" = i))
+
+		var/list/result = presentpicker(usr, "Modify armor", "Modify armor: [src]", Button1="Save", Button2 = "Cancel", Timeout=FALSE, inputtype = "text", values = pickerlist)
+		var/list/armor_all = ARMOR_LIST_ALL
+
+		if (islist(result))
+			if (result["button"] != 2) // If the user pressed the cancel button
+				// text2num conveniently returns a null on invalid values
+				var/list/converted = list()
+				for(var/armor_key in armor_all)
+					converted[armor_key] = text2num(result["values"][armor_key])
+				set_armor(get_armor().generate_new_with_specific(converted))
+				var/message = "[key_name(usr)] modified the armor on [src] ([type]) to: "
+				for(var/armor_key in armor_all)
+					message += "[armor_key]=[get_armor_rating(armor_key)],"
+				message = copytext(message, 1, -1)
+				log_admin(span_notice(message))
+				message_admins(span_notice(message))
+
 	if(href_list[VV_HK_ADD_AI])
 		if(!check_rights(R_VAREDIT))
 			return
@@ -1037,7 +962,7 @@
 	. = ..()
 	var/refid = REF(src)
 	. += "[VV_HREF_TARGETREF(refid, VV_HK_AUTO_RENAME, "<b id='name'>[src]</b>")]"
-	. += "<br><font size='1'><a href='?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=left'><<</a> <a href='?_src_=vars;[HrefToken()];datumedit=[refid];varnameedit=dir' id='dir'>[dir2text(dir) || dir]</a> <a href='?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=right'>>></a></font>"
+	. += "<br><font size='1'><a href='byond://?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=left'><<</a> <a href='byond://?_src_=vars;[HrefToken()];datumedit=[refid];varnameedit=dir' id='dir'>[dir2text(dir) || dir]</a> <a href='byond://?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=right'>>></a></font>"
 
 ///Where atoms should drop if taken from this atom
 /atom/proc/drop_location()
@@ -1081,7 +1006,7 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
 
 ///Generate a tag for this atom
-/atom/proc/GenerateTag()
+/atom/GenerateTag()
 	return
 
 /// Generic logging helper

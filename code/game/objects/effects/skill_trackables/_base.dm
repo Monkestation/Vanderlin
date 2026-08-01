@@ -59,7 +59,7 @@
 
 /obj/effect/skill_tracker/Destroy(force)
 	real_image = null
-	for(var/knowing_one as anything in known_by)
+	for(var/knowing_one in known_by)
 		remove_knower(knowing_one)
 	if(creator)
 		clear_creator_reference(creator)

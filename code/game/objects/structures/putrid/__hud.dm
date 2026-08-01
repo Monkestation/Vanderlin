@@ -183,12 +183,12 @@
 	..()
 	var/atom/movable/screen/using
 
-	for(var/element as anything in PUTRID_ELEMENTS)
+	for(var/element in PUTRID_ELEMENTS)
 		using = new element()
 		using.set_new_hud(src)
 		static_inventory += using
 
-	for(var/element as anything in PERSONAL_PUTRID_ELEMENTS)
+	for(var/element in PERSONAL_PUTRID_ELEMENTS)
 		using = new element()
 		using.set_new_hud(src)
 		static_inventory += using

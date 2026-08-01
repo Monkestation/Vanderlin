@@ -12,11 +12,11 @@
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 8.2 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -28,10 +28,10 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 8.2 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 //................ Hauberk ............... //
 /obj/item/clothing/armor/chainmail/hauberk
@@ -43,7 +43,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 11 KILOGRAMS
+	item_weight = 9 KILOGRAMS
 
 /obj/item/clothing/armor/chainmail/hauberk/Initialize()
 	. = ..()
@@ -71,7 +71,7 @@
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	smeltresult = /obj/item/ingot/iron
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 11 KILOGRAMS
+	item_weight = 9 KILOGRAMS
 
