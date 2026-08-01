@@ -1,4 +1,4 @@
 author: "realforest2001"
 delete-after: True
 changes:
-  - bugfix: "Correctly closes hrefs"
+  - bugfix: "Fixes accent selection."
