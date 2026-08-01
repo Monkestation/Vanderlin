@@ -4452,9 +4452,6 @@
 /obj/item/clothing/gloves/leather/phys,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large/feldsher)
-"cea" = (
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/river)
 "cek" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/dirt/road,
@@ -33417,12 +33414,6 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
-"phP" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/river)
 "phQ" = (
 /obj/structure/fluff/railing/tall{
 	dir = 4
@@ -40909,10 +40900,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/jester)
-"swk" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/ruinedwood/spiral,
-/area/outdoors/river)
 "swv" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
@@ -109381,9 +109368,9 @@ luJ
 luJ
 luJ
 luJ
-phP
-cea
-cea
+sNT
+oWd
+oWd
 iCA
 gYi
 csT
@@ -109582,10 +109569,10 @@ luJ
 luJ
 luJ
 luJ
-swk
-cea
-cea
-cea
+hZZ
+oWd
+oWd
+oWd
 czz
 hVj
 bKi
@@ -148771,7 +148758,7 @@ qFx
 qFx
 qFx
 qFx
-rnY
+qFx
 biy
 biy
 biy
@@ -148972,9 +148959,9 @@ qFx
 qFx
 qFx
 qFx
-rnY
-rnY
-rnY
+qFx
+qFx
+qFx
 biy
 biy
 biy
@@ -149174,10 +149161,10 @@ qFx
 qFx
 qFx
 qFx
-rnY
-rnY
-rnY
-rnY
+qFx
+qFx
+qFx
+qFx
 biy
 biy
 biy
@@ -149375,11 +149362,11 @@ biy
 qFx
 qFx
 qFx
-rnY
-rnY
-rnY
-rnY
-rnY
+qFx
+qFx
+qFx
+qFx
+qFx
 biy
 biy
 biy
@@ -149577,11 +149564,11 @@ biy
 qFx
 qFx
 qFx
-rnY
-rnY
-rnY
-rnY
-rnY
+qFx
+qFx
+qFx
+qFx
+qFx
 biy
 biy
 biy
@@ -149780,9 +149767,9 @@ qFx
 qFx
 qFx
 qFx
-rnY
-rnY
-rnY
+qFx
+qFx
+qFx
 biy
 biy
 biy
@@ -149982,8 +149969,8 @@ biy
 qFx
 qFx
 qFx
-rnY
-rnY
+qFx
+qFx
 biy
 biy
 biy
