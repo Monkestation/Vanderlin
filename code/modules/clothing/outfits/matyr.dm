@@ -12,7 +12,7 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDEBOOB
 
-/obj/item/clothing/armor/plate/full/holysee
+/obj/item/clothing/armor/plate/full/grandmaster
 	name = "holy silver plate"
 	desc = "Silver-clad plate for the guardians and the warriors, for the spears and shields of the Ten."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
@@ -26,7 +26,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 350
 
-/obj/item/clothing/pants/platelegs/holysee
+/obj/item/clothing/pants/platelegs/grandmaster
 	name = "holy silver chausses"
 	desc = "Plate leggings of silver forged for the grandmaster. A sea of silver to descend upon evil."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
@@ -40,7 +40,7 @@
 	melting_material = /datum/material/silver
 	melt_amount = 250
 
-/obj/item/clothing/head/helmet/heavy/holysee
+/obj/item/clothing/head/helmet/heavy/grandmaster
 	name = "holy silver bascinet"
 	desc = "Branded by the faithful of the Ten, these helms are worn by its chosen warriors. A bastion of hope in the dark nite."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
@@ -59,7 +59,7 @@
 	melt_amount = 250
 
 
-/obj/item/clothing/cloak/holysee
+/obj/item/clothing/cloak/grandmaster
 	name = "holy silver vestments"
 	desc = "A set of vestments worn by the grandmaster, silver embroidery and seals of light ordain it as a bastion against evil."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
@@ -77,7 +77,7 @@
 	sellprice = 300
 	has_storage = TRUE
 
-/obj/item/clothing/cloak/holysee/MiddleClick(mob/user)
+/obj/item/clothing/cloak/grandmaster/MiddleClick(mob/user)
 	overarmor = !overarmor
 	to_chat(user, span_info("I [overarmor ? "wear the tabard over my armor" : "wear the tabard under my armor"]."))
 	if(overarmor)
@@ -87,23 +87,8 @@
 	user.update_inv_cloak()
 	user.update_inv_armor()
 
-/datum/stress_event/naledimasklost
-	stress_change = 3
-	desc = span_boldred("The mask! Anyone here could be unholy. I'm exposed.")
-	timer = 999 MINUTES
-
-/datum/status_effect/debuff/lost_naledi_mask
-	id = "naledimask"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/naledimask
-	effectedstats = list(STAT_ENDURANCE = -3, STAT_FORTUNE = -3)
-
-/atom/movable/screen/alert/status_effect/debuff/naledimask
-	name = "Lost Mask"
-	desc = "The unholy and daemons may claim me at any moment without the mask. It is not safe."
-	icon_state = "muscles"
-
-/obj/item/clothing/face/lordmask/naledi
-	name = "war scholar's mask"
+/obj/item/clothing/face/lordmask/preceptor
+	name = "preceptor's mask"
 	item_state = "naledimask"
 	icon_state = "naledimask"
 	desc = "Runes and wards, meant for daemons; the gold has somehow rusted in unnatural, impossible agony. The most prominent of these etchings is in the shape of the psycross. Armored to protect the wearer's face."
@@ -113,25 +98,8 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT)
 	sellprice = 0
 
-/obj/item/clothing/face/lordmask/naledi/equipped(mob/user, slot)
-	. = ..()
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.merctype == 14)	//Naledi
-			H.remove_status_effect(/datum/status_effect/debuff/lost_naledi_mask)
-			H.remove_stress(/datum/stress_event/naledimasklost)
-
-/obj/item/clothing/face/lordmask/naledi/dropped(mob/user)
-	. = ..()
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.merctype == 14)	//Naledi
-			if(!istiefling(user)) //Funny exception
-				H.apply_status_effect(/datum/status_effect/debuff/lost_naledi_mask)
-				H.add_stress(/datum/stress_event/naledimasklost)
-
-/obj/item/clothing/face/lordmask/naledi/sojourner
-	name = "sojourner's mask"
+/obj/item/clothing/face/lordmask/preceptor/gold
+	name = "preceptor's mask"
 	item_state = "naledimask"
 	icon_state = "naledimask"
 	desc = "A golden mask, hiding the face of those who prefer their fists and agility to speak for them."

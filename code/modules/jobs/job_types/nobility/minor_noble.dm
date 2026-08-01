@@ -180,6 +180,7 @@
 	honorary_f = "Lady"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/magickal_graduate
+	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,

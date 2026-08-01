@@ -1298,7 +1298,7 @@ SUBSYSTEM_DEF(gamemode)
 
 /datum/controller/subsystem/gamemode/proc/store_roundend_data()
 	var/congealed_string = ""
-	for(var/event_name as anything in triggered_round_events)
+	for(var/event_name in triggered_round_events)
 		congealed_string += event_name
 		congealed_string += ","
 	text2file(congealed_string, "data/last_round_events.txt")
@@ -1313,7 +1313,7 @@ SUBSYSTEM_DEF(gamemode)
 
 	if(!length(last_round_events))
 		return
-	for(var/event_name as anything in last_round_events)
+	for(var/event_name in last_round_events)
 		for(var/datum/round_event_control/listed as anything in control)
 			if(listed.name != event_name)
 				continue

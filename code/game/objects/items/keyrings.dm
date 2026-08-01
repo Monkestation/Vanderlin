@@ -32,7 +32,7 @@
 		return
 	if(length(keys) > 10)
 		stack_trace("Keyring [src] has too many keys and the list will get cut short!")
-	for(var/X as anything in keys)
+	for(var/X in keys)
 		var/obj/item/key/new_key = new X(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_key, null, TRUE, FALSE))
 			qdel(new_key)

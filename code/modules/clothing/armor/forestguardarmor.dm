@@ -98,7 +98,7 @@
 		return
 	if(!picked)
 		var/list/icons = SKULLMET_ICONS
-		var/choice = input(user, "Choose a helmet design.", "Helmet designs") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a helmet design.", "Helmet designs", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice

@@ -1,0 +1,15 @@
+2026-08-01:
+  ModDownloading:
+  - bugfix: Wounds are harder to infect.
+  Monkeke2:
+  - rscadd: Added an ability that lets rakshari and werevolves sniff to detect mobs
+      in their vicinity (20 tiles)
+  SmokingCrackForChrist:
+  - balance: Gives Vile Renegade (ADEPT) 30 points in sneaking.
+  - sound: Daewalker can now have a proper bloodrave. New theme!
+  dwasint:
+  - admin: Updates job ban panel to include jobs and classes properly.
+  realforest2001:
+  - bugfix: Correctly closes hrefs
+  - bugfix: Magical noble is correctly patron locked.
+  - rscadd: Added a chat color for maniac prayers.

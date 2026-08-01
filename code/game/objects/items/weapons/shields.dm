@@ -102,7 +102,6 @@
 	name = "wooden shield"
 	desc = "A simple, emblazoned round wooden shield with leather padding. \nCan exceptionally block attacks, but is more brittle than metal ones."
 	icon_state = "woodsh"
-	dropshrink = 0.8
 	coverage = 60
 	max_integrity = INTEGRITY_STANDARD - 25
 	item_weight = 1.4 KILOGRAMS
@@ -296,7 +295,6 @@
 	wbalance = HARD_TO_DODGE // small, tiny shield
 	coverage = 10
 	max_integrity = INTEGRITY_STANDARD
-	dropshrink = 0.75
 
 	resistance_flags = FIRE_PROOF
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
@@ -331,7 +329,6 @@
 	force = DAMAGE_SHIELD + 5
 	throwforce = DAMAGE_SHIELD
 	coverage = 60
-	dropshrink = 0.8
 	attacked_sound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = INTEGRITY_STANDARD

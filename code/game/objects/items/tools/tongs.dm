@@ -17,10 +17,6 @@
 
 /obj/item/weapon/tongs/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob)
-
-/obj/item/weapon/tongs/Initialize(mapload)
-	. = ..()
 	item_flags |= SURGICAL_TOOL // we lost a real one tbh
 
 /obj/item/weapon/tongs/examine(mob/user)
