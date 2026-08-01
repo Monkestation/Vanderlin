@@ -309,7 +309,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	If the human mob has the prerequisite culture, they will see the corresponding string.
 	For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have :
 	list(list("Vanderlin", "This is a vanderlinian description."), list("Grenzelhoft", "this is a grenzelhoftian description")) */
-	var/culture_desc[][2] = list(list("no_culture", "description"),) // defined twice because we need the len and the default text helps.
+	var/list/culture_description = list()
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
