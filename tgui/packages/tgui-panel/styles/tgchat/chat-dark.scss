@@ -1656,6 +1656,32 @@ $border-width-px: $border-width * 1px;
 }
 /* ##### END ##### */
 
+/* ##### GRAGGAZO ##### */
+.god_graggazo {
+  color: hsl(125.9, 49.1%, 32.4%);
+  font-weight: bold;
+  animation: graggazo_flicker 1s infinite;
+}
+
+@keyframes graggazo_flicker {
+	25% {
+		color: hsl(125.9, 49.1%, 32.4%);
+	}
+
+	50% {
+		color: hsl(125.9, 52.9%, 34.1%);
+	}
+
+	75% {
+		color: hsl(339.2, 61%, 24.1%);
+	}
+
+	100% {
+		color: hsl(338.8, 52.2%, 32%);
+	}
+}
+/* ##### END ##### */
+
 /* ##### PSYDON ##### */
 .god_psydon {
   color: hsl(190.9, 36.3%, 82.2%);
