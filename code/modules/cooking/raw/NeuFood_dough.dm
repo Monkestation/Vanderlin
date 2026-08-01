@@ -1615,9 +1615,9 @@
 	faretype = FARE_NEUTRAL
 	tastes = list("savory sausage" = 1, "bread" = 1)
 	item_weight = 180 GRAMS
-	culture_desc = list(list("Grenzelhoft", "Shameless cultural appropriation in the form of a bun. \
-			Any true resident of the Black Empire knows sausages go best with mashed tatoes"),
-			list("Rockhill", "Close yet quite far from a propper, tasty pie."))
+	culture_description = list("Grenzelhoft" = "Shameless cultural appropriation in the form of a bun. \
+			Any true resident of the Black Empire knows sausages go best with mashed tatoes",
+			"Rockhill" = "Close yet quite far from a propper, tasty pie.")
 
 
 /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole

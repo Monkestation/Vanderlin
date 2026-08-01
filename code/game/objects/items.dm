@@ -1622,19 +1622,19 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	/// Check for item culture descriptions.
-	if (ishuman(user) && culture_desc[1] != null ) // make sure the mob has a culture to avoid unecessary controls.
+	if (ishuman(user) && culture_description[1] != "Ambiguous" ) // make sure the mob has a culture to avoid unecessary controls.
 		var/mob/living/carbon/human/humanexaminer = user
-		for(var/culture_range = 1, culture_range <= culture_desc.len, culture_range++)
-			if(humanexaminer.culture.name == culture_desc[culture_range])
-				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [humanexaminer.culture.name]", humanexaminer.culture.name)]</summary>"
-				str += culture_desc[culture_range]
+		if(HAS_TRAIT(humanexaminer, TRAIT_CULTURAL_KNOWLEDGE))
+			for(var/culture_range = 1, culture_range <= culture_description.len, culture_range++)
+				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are culturally knowledgeable.", culture_description[culture_range])]</summary>"
+				str += culture_description[humanexaminer.culture.name]
 				str += "</details>"
 				. += span_info(str)
-			else if(HAS_TRAIT(humanexaminer, TRAIT_CULTURAL_KNOWLEDGE))
-				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are culturally knowledgeable.", culture_desc[culture_range])]</summary>"
-				str += culture_desc[culture_range]
-				str += "</details>"
-				. += span_info(str)
+		else
+			var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [humanexaminer.culture.name]", humanexaminer.culture.name)]</summary>"
+			str += culture_description[humanexaminer.culture.name]
+			str += "</details>"
+			. += span_info(str)
 
 	if(!get_precursor_data(src))
 		return
