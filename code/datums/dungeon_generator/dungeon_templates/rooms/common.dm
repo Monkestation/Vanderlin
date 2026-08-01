@@ -484,3 +484,26 @@
 	east_offset = 19
 	north_offset = 19
 	south_offset = 19
+
+/datum/map_template/dungeon/room/zizite
+	mappath = "_maps/matthios_tomb/room/zizite.dmm"
+	id = "zizite"
+	width = 25
+	height = 25
+
+	west_offset = 10
+	east_offset = 19
+	north_offset = 10
+	south_offset = 10
+
+/datum/map_template/dungeon/room/eorarest
+	mappath = "_maps/matthios_tomb/room/eorarest.dmm"
+	id = "eorarest"
+	width = 25
+	height = 25
+
+	west_offset = 12
+	east_offset = 12
+	north_offset = 12
+	south_offset = 12
+
