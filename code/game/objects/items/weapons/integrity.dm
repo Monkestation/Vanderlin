@@ -4,7 +4,7 @@
 	/// Blade integrity at which dismemberment reaches 100% effectiveness
 	var/dismember_blade_int = 0
 	/// randomize the blade integrity on creation?
-	var/randomize_blade_int = TRUE
+	var/randomize_blade_int = FALSE
 	/// Maximum blade integrity
 	var/max_blade_int = 0
 	/// Sharpness loss multiplier
