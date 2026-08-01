@@ -62,7 +62,7 @@
 	var/atom/pawn = controller.pawn
 	var/list/accepted_cats = list()
 
-	for(var/maybe_cat as anything in found)
+	for(var/maybe_cat in found)
 		if(maybe_cat == pawn)
 			continue
 		if(!atom_allowed(maybe_cat, locate_path, pawn))
