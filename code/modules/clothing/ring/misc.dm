@@ -373,6 +373,7 @@
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 	examine_name = /obj/item/clothing/ring/silver::name
 	base_icon_state = "ring_s"
+	abstract_type = /obj/item/clothing/ring/courtagent_ring
 	var/metal_adjective = "silver"
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()
