@@ -13,3 +13,6 @@
   - bugfix: Correctly closes hrefs
   - bugfix: Magical noble is correctly patron locked.
   - rscadd: Added a chat color for maniac prayers.
+2026-08-02:
+  realforest2001:
+  - bugfix: Fixes accent selection.

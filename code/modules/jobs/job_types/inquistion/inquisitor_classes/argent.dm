@@ -227,7 +227,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	shoes = /obj/item/clothing/shoes/psydonboots
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/key/inquisition = 1,
 		/obj/item/lockpickring/mundane = 1,
