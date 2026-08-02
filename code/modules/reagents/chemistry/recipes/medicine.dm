@@ -380,6 +380,7 @@
 	)
 	results = list(/datum/reagent/poison/kingsbane = 15)
 	mix_message = "The solution fizzles violently, as it becomes a solid mettalic gold color."
+	
 /datum/chemical_reaction/tear
 	name = "Sunder Toxin"
 	id = "tear"
