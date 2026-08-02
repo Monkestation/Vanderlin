@@ -412,7 +412,6 @@
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "zM" = (
-/obj/structure/closet/crate/crafted_closet/steward,
 /obj/item/riddleofsteel,
 /obj/structure/closet/crate/crafted_closet/steward,
 /obj/item/coin/gold/pile,
