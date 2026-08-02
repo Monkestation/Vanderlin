@@ -230,7 +230,6 @@
 "kt" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/item/clothing/head/crown/wooden,
-/obj/item/clothing/armor/gambeson/heavy/otavan,
 /obj/structure/mannequin/male,
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
@@ -505,10 +504,7 @@
 /obj/structure/window{
 	color = "#e09dda"
 	},
-/turf/closed/wall/mineral/decostone/long{
-	color = "#e09dda";
-	dir = 1
-	},
+/turf/closed/basic,
 /area/under/tomb/indoors/rest)
 "Dv" = (
 /obj/structure/flora/grass/herb/necralily,
@@ -1568,8 +1564,8 @@ ar
 ar
 SU
 lF
-fY
-fY
+Di
+Di
 lF
 SU
 ar
