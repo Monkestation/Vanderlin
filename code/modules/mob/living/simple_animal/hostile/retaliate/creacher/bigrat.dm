@@ -22,6 +22,7 @@
 						/obj/item/natural/fur/rous = 1, /obj/item/alch/bone = 4)
 	head_butcher = /obj/item/natural/head/rous
 
+	indexed = TRUE
 	health = ROUS_HEALTH
 	maxHealth = ROUS_HEALTH
 	food_type = list(/obj/item/reagent_containers/food/snacks,
@@ -43,7 +44,6 @@
 	defprob = 40
 	defdrain = 5
 	retreat_health = 0.3
-	aggressive = TRUE
 	stat_attack = UNCONSCIOUS
 	remains_type = /obj/effect/decal/remains/bigrat
 	body_eater = TRUE
@@ -95,6 +95,7 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
+	AddElement(/datum/element/kill_achievement, string_list(list(/datum/award/achievement/progress/rat_genocide), 3))
 
 
 /mob/living/simple_animal/hostile/retaliate/bigrat/death(gibbed)

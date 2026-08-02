@@ -2,6 +2,13 @@
 	name = "creator"
 	desc = "Generates chemicals when triggered"
 
+	var/possible_reagents = list(
+		/datum/reagent/medicine = 10,
+		/datum/reagent/drug = 10,
+		/datum/reagent/toxin = 10,
+		/datum/reagent/consumable = 10,
+		/datum/reagent/consumable/ethanol = 10,
+	)
 	var/datum/reagent/good_reagent
 
 	var/generated_amount = 5
@@ -10,12 +17,7 @@
 	. = ..()
 	generated_amount *= (node_purity * 0.02) * (tier * 0.5)
 
-	var/list/reagent_types = list(/datum/reagent/medicine,
-								  /datum/reagent/drug,
-								  /datum/reagent/toxin,
-								  /datum/reagent/consumable,
-								  /datum/reagent/consumable/ethanol)
-	var/datum/reagent/reagent_type = pick(reagent_types)
+	var/datum/reagent/reagent_type = pickweight(possible_reagents)
 
 	var/list/pickers
 	if(reagent_type == /datum/reagent/consumable)

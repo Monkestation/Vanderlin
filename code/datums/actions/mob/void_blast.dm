@@ -49,7 +49,7 @@
 	var/turf/origin_turf = get_turf(owner)
 	var/list/affected_turfs = get_line(origin_turf, target_turf) - origin_turf
 	for(var/turf/affected_turf in affected_turfs)
-		if(affected_turf.opacity)
+		if(IS_OPAQUE_TURF(affected_turf))
 			break
 		var/blocked = FALSE
 		for(var/obj/potential_block in affected_turf.contents)
@@ -65,7 +65,7 @@
 		for(var/mob/living/hit_mob in affected_turf.contents)
 			hit_mob.apply_damage(damage = 25, damagetype = BURN)
 			to_chat(hit_mob, span_userdanger("You're blasted by [owner]'s brimbeam!"))
-		RegisterSignal(new_obeliskbeam, COMSIG_PARENT_QDELETING, PROC_REF(extinguish_laser)) // In case idk a singularity eats it or something
+		RegisterSignal(new_obeliskbeam, COMSIG_QDELETING, PROC_REF(extinguish_laser)) // In case idk a singularity eats it or something
 	if(!length(beam_parts))
 		return FALSE
 	var/atom/last_obeliskbeam = beam_parts[length(beam_parts)]

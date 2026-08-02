@@ -10,6 +10,7 @@
 	group = "Armor"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	allowed_start = FALSE
 
 // IRON GEAR
 
@@ -29,7 +30,7 @@
 	contains = /obj/item/clothing/head/helmet/ironpot
 
 /datum/supply_pack/armor/light/lakkariancap
-	name = "Lakkarian Cap"
+	name = "Crowned Cap"
 	cost = 45
 	contains = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 
@@ -78,7 +79,7 @@
 	contains = /obj/item/clothing/armor/plate/full/iron
 
 /datum/supply_pack/armor/light/lakkarianarmor
-	name = "Lakkarian Armor"
+	name = "Padded Jupon"
 	cost = 45
 	contains = /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 
@@ -95,7 +96,7 @@
 /datum/supply_pack/armor/light/shamaniccoat
 	name = "Shamanic Coat"
 	cost = 30
-	contains = /obj/item/clothing/armor/leather/heavy/atgervi
+	contains = /obj/item/clothing/armor/leather/shamancoat
 
 // SHIRT ARMOR
 
@@ -201,10 +202,10 @@
 	cost = 90
 	contains = /obj/item/clothing/head/helmet/sallet/elven
 
-/datum/supply_pack/armor/steel/atgervihelm
-	name = "Atgervi Helm"
+/datum/supply_pack/armor/steel/dwarvenhelm
+	name = "Owl Helmet"
 	cost = 60
-	contains = /obj/item/clothing/head/helmet/bascinet/atgervi
+	contains = /obj/item/clothing/head/helmet/bascinet/owl
 
 /datum/supply_pack/armor/steel/steppehelm
 	name = "Steppe Bascinet"
@@ -272,10 +273,10 @@
 
 // SHIRT ARMOR
 
-/datum/supply_pack/armor/steel/atgervichest
-	name = "Atgervi Hauberk"
+/datum/supply_pack/armor/steel/dwarvenchest
+	name = "Dwarven Hauberk"
 	cost = 95
-	contains = /obj/item/clothing/armor/chainmail/hauberk/atgervi
+	contains = /obj/item/clothing/armor/chainmail/hauberk/dwarven
 
 /datum/supply_pack/armor/steel/chainmail
 	name = "Steel Chainmail"
@@ -297,17 +298,17 @@
 /datum/supply_pack/armor/steel/zplategloves
 	name = "Zalad Plate Gloves"
 	cost = 55
-	contains = /obj/item/clothing/armor/rare/zaladplate
+	contains = /obj/item/clothing/gloves/rare/zaladplate
 
 /datum/supply_pack/armor/steel/plate_gloves
 	name = "Heavy Plate Gloves"
 	cost = 50
 	contains = /obj/item/clothing/gloves/plate
 
-/datum/supply_pack/armor/steel/atgervigloves
-	name = "Atgervi Gloves"
+/datum/supply_pack/armor/steel/beastclaws
+	name = "Beast Claws"
 	cost = 55
-	contains = /obj/item/clothing/gloves/plate/atgervi
+	contains = /obj/item/clothing/gloves/plate/beastclaws
 
 // PANTS
 

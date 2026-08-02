@@ -1,5 +1,5 @@
 /datum/element/snailcrawl
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
 /datum/element/snailcrawl/Attach(datum/target)
 	. = ..()
@@ -20,7 +20,7 @@
 
 /datum/element/snailcrawl/proc/snail_crawl(mob/living/carbon/snail)
 	if(snail.resting && !snail.buckled && lubricate(snail))
-		snail.add_movespeed_modifier(MOVESPEED_ID_SNAIL_CRAWL, update=TRUE, priority=100, multiplicative_slowdown=-7, movetypes=GROUND)
+		snail.add_movespeed_modifier(MOVESPEED_ID_SNAIL_CRAWL, update=TRUE, priority=100, multiplicative_slowdown = 7, movetypes=GROUND)
 	else
 		snail.remove_movespeed_modifier(MOVESPEED_ID_SNAIL_CRAWL)
 

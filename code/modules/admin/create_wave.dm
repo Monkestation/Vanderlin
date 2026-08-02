@@ -34,7 +34,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	var/list/sexes_list = list(MALE,FEMALE)
 	var/list/races_list = RACES_PLAYER_ALL
 	var/list/ages_list = list(AGE_CHILD,AGE_ADULT,AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	var/list/stats_list = list(STATKEY_INT,STATKEY_STR,STATKEY_PER,STATKEY_SPD,STATKEY_CON,STATKEY_LCK)
+	var/list/stats_list = list(STAT_INTELLIGENCE,STAT_STRENGTH,STAT_PERCEPTION,STAT_SPEED,STAT_CONSTITUTION,STAT_FORTUNE)
 	var/list/skills_list = list()
 	var/list/languages_list = list()
 	var/list/traits_list = list()
@@ -128,8 +128,8 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 /datum/create_wave/New()
 
-	for(var/datum/skill/skill as anything in subtypesof(/datum/skill))
-		if(is_abstract(skill))
+	for(var/datum/attribute/skill/skill as anything in subtypesof(/datum/attribute/skill))
+		if(IS_ABSTRACT(skill))
 			continue
 		skills_list += skill
 
@@ -139,7 +139,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	for(var/trait in traits_list)
 		trait_options += "<option value='[trait]'>[trait]</option>"
 
-	for(var/datum/skill/skill_instance in skills_list)
+	for(var/datum/attribute/skill/skill_instance in skills_list)
 		skills_options += "<option value='[initial(skill_instance.type)]'>[initial(skill_instance.name)]</option>"
 
 	for(var/stat in stats_list)
@@ -308,7 +308,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		if(!check_rights(R_ADMIN))
 			return
 		var/skill = text2path(href_list["skill"])
-		var/datum/skill/S = new skill
+		var/datum/attribute/skill/S = new skill
 		var/level = text2num(href_list["level"])
 
 		if(level && level > 0 && level < 7)
@@ -337,7 +337,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		if(!check_rights(R_ADMIN))
 			return
 		var/skill_to_remove = text2path(href_list["skill"])
-		var/datum/skill/S_R = new skill_to_remove
+		var/datum/attribute/skill/S_R = new skill_to_remove
 
 		if(editing_job)
 			var/id = href_list["chosen_job_edit"]
@@ -815,7 +815,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		for(var/datum/job/job as anything in SSjob.joinable_occupations)
 			potential_jobs += job
 		for(var/datum/job/migrant as anything in subtypesof(/datum/job/migrant))
-			if(is_abstract(migrant))
+			if(IS_ABSTRACT(migrant))
 				continue
 			potential_jobs += new migrant
 
@@ -931,7 +931,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "<li>All Patrons are Allowed.</li>"
 	dat += "<h3>Skills:</h3><ul>"
 	if(length(J.skills))
-		for(var/datum/skill/S as anything in J.skills)
+		for(var/datum/attribute/skill/S as anything in J.skills)
 			var/level = J.skills[S]
 			dat += "<li>[initial(S.name)] (Level [level])</li>"
 	else
@@ -1020,8 +1020,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 
 /datum/create_wave/proc/create_job(mob/admin)
-
-    // Generate HTML form
 	var/dat = {"
 	<html><head><title>Create Custom Job</title></head><body>
 	<form name='job' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1069,31 +1067,31 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 			function addTrait() {
 				var trait = document.getElementById(\"traits_dropdown\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];add_trait=1;&\" + collectJobData({trait: trait});
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_trait=1;&\" + collectJobData({trait: trait});
 			}
 
 			function removeTrait(trait) {
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_trait=1;&\" + collectJobData({trait: trait});
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_trait=1;&\" + collectJobData({trait: trait});
 			}
 
 			function addSkill() {
 				var skill = document.getElementById(\"skills_dropdown\").value;
 				var level = document.getElementById(\"skills_level\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];add_skill=1;&\" + collectJobData({skill: skill, level: level});
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_skill=1;&\" + collectJobData({skill: skill, level: level});
 			}
 
 			function removeSkill(skill) {
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_skill=1;&\" + collectJobData({skill: skill});
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_skill=1;&\" + collectJobData({skill: skill});
 			}
 
 			function addStat() {
 				var stat = document.getElementById(\"stats_dropdown\").value;
 				var modifier = document.getElementById(\"stats_level\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];add_stat=1;&\" + collectJobData({stat: stat,  modifier: modifier});
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_stat=1;&\" + collectJobData({stat: stat,  modifier: modifier});
 			}
 
 			function removeStat(stat) {
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_stat=1;&\" + collectJobData({stat: stat});
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_stat=1;&\" + collectJobData({stat: stat});
 			}
 		</script>
 		<tr><th>Name:</th><td><input type='text' name='job_title'  id='job_title' value='[temp_job_title ? temp_job_title : "Custom Job"]'></td></tr>
@@ -1178,7 +1176,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "<h4>Added Skills:</h4><ul>"
 		for(var/skill_path in pending_skills)
 			var/level = pending_skills[skill_path]
-			var/datum/skill/S = new skill_path
+			var/datum/attribute/skill/S = new skill_path
 			dat += "<li>[S.name] (Level [level]) <button type='button' onclick='removeSkill(\"[skill_path]\")'>Remove</button></li>"
 			qdel(S)
 
@@ -1352,7 +1350,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	if(!J)
 		return
 
-    // Generate HTML form
+	// Generate HTML form
 	var/dat = {"
 	<html><head><title>Edit Custom Wave</title></head><body>
 	<form name='wave' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1366,7 +1364,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			<input type='text' id='job_title' value='[J.title]'
 				oninput='
 					var new_title = this.value;
-					window.location.href = "?src=[REF(src)];[HrefToken()];update_job_title=1;chosen_job_edit=[J.id];new_title=" + encodeURIComponent(new_title);
+					window.location.href=\"byond://?src=[REF(src)];[HrefToken()];update_job_title=1;chosen_job_edit=[J.id];new_title=\" + encodeURIComponent(new_title);
 				'>
 		</td></tr>
 		<tr>
@@ -1375,7 +1373,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				<textarea id='job_tutorial' style='width:400px'
 					oninput='
 						var new_tutorial = this.value;
-						window.location.href = "?src=[REF(src)];[HrefToken()];update_job_tutorial=1;chosen_job_edit=[J.id];new_tutorial=" + encodeURIComponent(new_tutorial);
+						window.location.href=\"byond://?src=[REF(src)];[HrefToken()];update_job_tutorial=1;chosen_job_edit=[J.id];new_tutorial=\" + encodeURIComponent(new_tutorial);
 					'>[J.tutorial]</textarea>
 			</td>
 		</tr>
@@ -1383,7 +1381,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		<td>
 			<select id='job_faction' onchange='
 				var new_faction = this.value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_faction=1;chosen_job_edit=[J.id];new_faction=\" + encodeURIComponent(new_faction);
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_faction=1;chosen_job_edit=[J.id];new_faction=\" + encodeURIComponent(new_faction);
 			'>
 				[generate_options(factions_list, J.faction)]
 			</select>
@@ -1392,7 +1390,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		<td>
 			<select id='job_outfit' onchange='
 				var new_outfit = this.value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_outfit=1;chosen_job_edit=[J.id];new_outfit=\" + encodeURIComponent(new_outfit);
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_outfit=1;chosen_job_edit=[J.id];new_outfit=\" + encodeURIComponent(new_outfit);
 			'>
 				[generate_options(outfits_list, J.outfit)]
 			</select>
@@ -1403,7 +1401,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				<input type='text' id='job_combat_song' value='[J.cmode_music]'
 					oninput='
 						var new_song = this.value;
-						window.location.href = "?src=[REF(src)];[HrefToken()];update_job_song=1;chosen_job_edit=[J.id];new_song=" + encodeURIComponent(new_song);
+						window.location.href=\"byond://?src=[REF(src)];[HrefToken()];update_job_song=1;chosen_job_edit=[J.id];new_song=" + encodeURIComponent(new_song);
 					'>
 			</td>
 		</tr>
@@ -1411,7 +1409,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		<td>
 			<select id='job_antag' onchange='
 				var new_faction = this.value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_antag=1;chosen_job_edit=[J.id];new_antag=\" + encodeURIComponent(new_faction);
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_antag=1;chosen_job_edit=[J.id];new_antag=\" + encodeURIComponent(new_faction);
 			'>
 				[generate_options(antag_list, J.antag_role)]
 			</select>
@@ -1420,7 +1418,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		<td>
 			<select id='job_foreigner' onchange='
 				var new_value = this.value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_foreigner=1;chosen_job_edit=[J.id];new_foreigner=\" + encodeURIComponent(new_value);
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_foreigner=1;chosen_job_edit=[J.id];new_foreigner=\" + encodeURIComponent(new_value);
 			'>
 				[generate_boolean_option(FALSE, J.is_foreigner)]
 			</select>
@@ -1429,7 +1427,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		<td>
 			<select id='job_recognized' onchange='
 				var new_value = this.value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_recognized=1;chosen_job_edit=[J.id];new_recognized=\" + encodeURIComponent(new_value);
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_recognized=1;chosen_job_edit=[J.id];new_recognized=\" + encodeURIComponent(new_value);
 			'>
 				[generate_boolean_option(FALSE, J.is_recognized)]
 			</select>
@@ -1438,7 +1436,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		<td>
 			<select id='job_magick_user' onchange='
 				var new_value = this.value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_magick_user=1;chosen_job_edit=[J.id];new_magick_user=\" + encodeURIComponent(new_value);
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_magick_user=1;chosen_job_edit=[J.id];new_magick_user=\" + encodeURIComponent(new_value);
 			'>
 				[generate_boolean_option(FALSE, J.magic_user)]
 			</select>
@@ -1455,7 +1453,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					document.querySelectorAll(\"input\[name=job_allowed_sexes\]:checked\").forEach(function(cb) {
 						selected.push(cb.value);
 					});
-					window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_allowed_sexes=1;chosen_job_edit=[J.id];new_allowed_sexes=\" + encodeURIComponent(selected.join(\",\"));
+					window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_allowed_sexes=1;chosen_job_edit=[J.id];new_allowed_sexes=\" + encodeURIComponent(selected.join(\",\"));
 				});
 			});
 		</script>
@@ -1470,7 +1468,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					document.querySelectorAll(\"input\[name=job_allowed_races\]:checked\").forEach(function(cb) {
 						selected.push(cb.value);
 					});
-					window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_race=1;chosen_job_edit=[J.id];new_races=\" + encodeURIComponent(selected.join(\",\"));
+					window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_race=1;chosen_job_edit=[J.id];new_races=\" + encodeURIComponent(selected.join(\",\"));
 				});
 			});
 		</script>
@@ -1485,7 +1483,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					document.querySelectorAll(\"input\[name=job_allowed_ages\]:checked\").forEach(function(cb) {
 						selected.push(cb.value);
 					});
-					window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_age=1;chosen_job_edit=[J.id];new_ages=\" + encodeURIComponent(selected.join(\",\"));
+					window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_age=1;chosen_job_edit=[J.id];new_ages=\" + encodeURIComponent(selected.join(\",\"));
 				});
 			});
 		</script>
@@ -1500,7 +1498,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					document.querySelectorAll(\"input\[name=job_languages\]:checked\").forEach(function(cb) {
 						selected.push(cb.value);
 					});
-					window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_languages=1;chosen_job_edit=[J.id];new_languages=\" + encodeURIComponent(selected.join(\",\"));
+					window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_languages=1;chosen_job_edit=[J.id];new_languages=\" + encodeURIComponent(selected.join(\",\"));
 				});
 			});
 		</script>
@@ -1515,7 +1513,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					document.querySelectorAll(\"input\[name=job_allowed_patrons\]:checked\").forEach(function(cb) {
 						selected.push(cb.value);
 					});
-					window.location.href = \"?src=[REF(src)];[HrefToken()];update_job_patron=1;chosen_job_edit=[J.id];new_patrons=\" + encodeURIComponent(selected.join(\",\"));
+					window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_patron=1;chosen_job_edit=[J.id];new_patrons=\" + encodeURIComponent(selected.join(\",\"));
 				});
 			});
 		</script>
@@ -1534,12 +1532,12 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "<h4>Added Skills:</h4><ul>"
 		for(var/skill_path in J.skills)
 			var/level = J.skills[skill_path]
-			var/datum/skill/S = new skill_path
+			var/datum/attribute/skill/S = new skill_path
 			dat += "<li>[S.name] (Level [level])"
 			qdel(S)
 			dat += {"<button type='button' onclick='
 				var chosen_job_edit = document.getElementById(\"chosen_job_edit\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_skill=1;skill=" + encodeURIComponent(\"[skill_path]\") +
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_skill=1;skill=" + encodeURIComponent(\"[skill_path]\") +
 					\";chosen_job_edit=\" + encodeURIComponent(chosen_job_edit);' '>
 				Remove</button></li>
 			"}
@@ -1552,7 +1550,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		var level = document.getElementById(\"skills_level\").value;
 		var chosen_job_edit = document.getElementById(\"chosen_job_edit\").value;
 
-		window.location.href = \"?src=[REF(src)];[HrefToken()];add_skill=1;\" +
+		window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_skill=1;\" +
 			\";skill=\" + encodeURIComponent(skill) +
 			\";level=\" + encodeURIComponent(level) +
 			\";chosen_job_edit=\" + encodeURIComponent(chosen_job_edit);' '>
@@ -1574,7 +1572,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			dat += "<li>[trait] "
 			dat += {"<button type='button' onclick='
 				var chosen_job_edit = document.getElementById(\"chosen_job_edit\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_trait=1;trait=" + encodeURIComponent(\"[trait]\") +
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_trait=1;trait=" + encodeURIComponent(\"[trait]\") +
 					\";chosen_job_edit=\" + encodeURIComponent(chosen_job_edit);' '>
 
 				Remove</button></li>
@@ -1587,7 +1585,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		var trait = document.getElementById(\"traits_dropdown\").value;
 		var chosen_job_edit = document.getElementById(\"chosen_job_edit\").value;
 
-		window.location.href = \"?src=[REF(src)];[HrefToken()];add_trait=1;\" +
+		window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_trait=1;\" +
 			\";trait=\" + encodeURIComponent(trait) +
 			\";chosen_job_edit=\" + encodeURIComponent(chosen_job_edit);' '>
 
@@ -1609,7 +1607,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			dat += "<li>[stats] Modifier: [modifier]"
 			dat += {"<button type='button' onclick='
 				var chosen_job_edit = document.getElementById(\"chosen_job_edit\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_stat=1;stats=" + encodeURIComponent(\"[stats]\") +
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_stat=1;stats=" + encodeURIComponent(\"[stats]\") +
 					\";chosen_job_edit=\" + encodeURIComponent(chosen_job_edit);' '>
 				Remove</button></li>
 			"}
@@ -1621,7 +1619,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		var stat = document.getElementById("stats_dropdown").value;
 		var modifier = document.getElementById("stats_level").value;
 		var chosen_job_edit = document.getElementById(\"chosen_job_edit\").value;
-		window.location.href = \"?src=[REF(src)];[HrefToken()];add_stat=1;\" +
+		window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_stat=1;\" +
 			\";stat=\" + encodeURIComponent(stat) +
 			\";modifier=\" + encodeURIComponent(modifier) +
 			\";chosen_job_edit=\" + encodeURIComponent(chosen_job_edit);' '>
@@ -1684,7 +1682,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 /datum/create_wave/proc/create_wave(mob/admin)
 
-    // Generate HTML form
 	var/dat = {"
 	<html><head><title>Create Custom Wave</title></head><body>
 	<form name='wave' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1713,7 +1710,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				var name = document.getElementById(\"wave_t\").value;
 				var name_g = document.getElementById(\"wave_g\").value;
 				var name_mc = document.getElementById(\"wave_mc\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_job=1;job=" + encodeURIComponent(\"[job]\") +
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_job=1;job=" + encodeURIComponent(\"[job]\") +
 					\";name=\" + encodeURIComponent(name) +
 					\";name_g=\" + encodeURIComponent(name_g) +
 					\";name_mc=\" + encodeURIComponent(name_mc);
@@ -1731,7 +1728,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				var name = document.getElementById("wave_t").value;
 				var name_g = document.getElementById("wave_g").value;
 				var name_mc = document.getElementById("wave_mc").value;
-				window.location.href = "?src=[REF(src)];[HrefToken()];add_jobs=1;job=" + encodeURIComponent(job) + ";name=" + encodeURIComponent(name) + ";name_g=" + encodeURIComponent(name_g) + ";name_mc=" + encodeURIComponent(name_mc) + ";slots=" + encodeURIComponent(slots);
+				window.location.href="byond://?src=[REF(src)];[HrefToken()];add_jobs=1;job=" + encodeURIComponent(job) + ";name=" + encodeURIComponent(name) + ";name_g=" + encodeURIComponent(name_g) + ";name_mc=" + encodeURIComponent(name_mc) + ";slots=" + encodeURIComponent(slots);
 			'>Add Job</button>
 	"}
 	dat+= "</td></tr>"
@@ -1821,7 +1818,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		to_chat(admin, span_warning("You can't edit the wave while it is deploying!"))
 		return
 
-    // Generate HTML form (mostly like create_wave)
 	var/dat = {"
 	<html><head><title>Edit Custom Wave</title></head><body>
 	<form name='wave' action='byond://?src=[REF(src)];[HrefToken()]' method='get'>
@@ -1835,7 +1831,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			<input type='text' id='wave_t' value='[CW.name]'
 				oninput='
 					var new_name = this.value;
-					window.location.href = "?src=[REF(src)];[HrefToken()];update_wave_name=1;wave_ref=[REF(CW)];new_name=" + encodeURIComponent(new_name);
+					window.location.href="byond://?src=[REF(src)];[HrefToken()];update_wave_name=1;wave_ref=[REF(CW)];new_name=" + encodeURIComponent(new_name);
 				'>
 		</td></tr>
 		<tr>
@@ -1844,7 +1840,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				<textarea id='wave_g' style='width:400px'
 					oninput='
 						var new_g = this.value;
-						window.location.href = "?src=[REF(src)];[HrefToken()];update_wave_greeting=1;wave_ref=[REF(CW)];new_g=" + encodeURIComponent(new_g);
+						window.location.href="byond://?src=[REF(src)];[HrefToken()];update_wave_greeting=1;wave_ref=[REF(CW)];new_g=" + encodeURIComponent(new_g);
 					'>[CW.greeting_text]</textarea>
 			</td>
 		</tr>
@@ -1854,7 +1850,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				<input type='number' id='wave_mc' style='width:40px' value='[CW.min_pop]'
 					oninput='
 						var new_mc = this.value;
-						window.location.href = "?src=[REF(src)];[HrefToken()];update_wave_min_pop=1;wave_ref=[REF(CW)];new_mc=" + encodeURIComponent(new_mc);
+						window.location.href="byond://?src=[REF(src)];[HrefToken()];update_wave_min_pop=1;wave_ref=[REF(CW)];new_mc=" + encodeURIComponent(new_mc);
 					'>
 			</td>
 		</tr>
@@ -1879,7 +1875,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				var name_g = document.getElementById(\"wave_g\").value;
 				var name_mc = document.getElementById(\"wave_mc\").value;
 				var wave_ref = document.getElementById(\"wave_ref\").value;
-				window.location.href = \"?src=[REF(src)];[HrefToken()];remove_job=1;job=" + encodeURIComponent(\"[job]\") +
+				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];remove_job=1;job=" + encodeURIComponent(\"[job]\") +
 					\";name=\" + encodeURIComponent(name) +
 					\";name_g=\" + encodeURIComponent(name_g) +
 					\";wave_ref=\" + encodeURIComponent(wave_ref) +
@@ -1899,7 +1895,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		var name_g = document.getElementById(\"wave_g\").value;
 		var name_mc = document.getElementById(\"wave_mc\").value;
 		var wave_ref = document.getElementById(\"wave_ref\").value;
-		window.location.href = \"?src=[REF(src)];[HrefToken()];add_jobs=1;job=\" + encodeURIComponent(job) +
+		window.location.href = \"byond://?src=[REF(src)];[HrefToken()];add_jobs=1;job=\" + encodeURIComponent(job) +
 			\";name=\" + encodeURIComponent(name) +
 			\";name_g=\" + encodeURIComponent(name_g) +
 			\";wave_ref=\" + encodeURIComponent(wave_ref) +
@@ -2034,16 +2030,20 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 			if(is_role_banned(C.ckey, job_check.title))
 				continue
+
 			if(job_check.banned_leprosy && is_misc_banned(C.ckey, BAN_MISC_LEPROSY))
 				continue
+
 			if(job_check.banned_lunatic && is_misc_banned(C.ckey, BAN_MISC_LUNATIC))
 				continue
 
-			if(length(job_check.allowed_races) && !(prefs.pref_species.id in job_check.allowed_races))
+			if(!job_check.prefs_species_check(prefs))
 				continue
-			if(length(job_check.allowed_sexes) && !(prefs.gender in job_check.allowed_sexes))
+
+			if(length(job_check.allowed_sexes) && !(prefs.read_preference(/datum/preference/choiced/gender) in job_check.allowed_sexes))
 				continue
-			if(length(job_check.allowed_ages) && !(prefs.age in job_check.allowed_ages))
+
+			if(length(job_check.allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in job_check.allowed_ages))
 				continue
 
 			// Valid assign this job
@@ -2116,21 +2116,27 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		// Check role bans
 		if(is_role_banned(player.ckey, job_check.title))
 			job_fail += "You are banned from this role"
+
 		if(job_check.banned_leprosy && is_misc_banned(player.ckey, BAN_MISC_LEPROSY))
 			job_fail += "Leprosy restriction"
+
 		if(job_check.banned_lunatic && is_misc_banned(player.ckey, BAN_MISC_LUNATIC))
 			job_fail += "Lunatic restriction"
 
 		// Check allowed races
-		if(length(job_check.allowed_races) && !(prefs.pref_species.id in job_check.allowed_races))
+		var/player_species_id_job = prefs.pref_species.id_override ? prefs.pref_species.id_override : prefs.pref_species.id
+		if(length(job_check.allowed_races) && !(player_species_id_job in job_check.allowed_races))
 			job_fail += "Wrong species (allowed: [job_check.allowed_races.Join(", ")])"
 
+		if(length(job_check.blacklisted_species) && (player_species_id_job in job_check.blacklisted_species))
+			job_fail += "Wrong species (disallowed: [job_check.blacklisted_species.Join(", ")])"
+
 		// Check allowed sexes
-		if(length(job_check.allowed_sexes) && !(prefs.gender in job_check.allowed_sexes))
+		if(length(job_check.allowed_sexes) && !(prefs.read_preference(/datum/preference/choiced/gender) in job_check.allowed_sexes))
 			job_fail += "Wrong sex (allowed: [job_check.allowed_sexes.Join(", ")])"
 
 		// Check allowed ages
-		if(length(job_check.allowed_ages) && !(prefs.age in job_check.allowed_ages))
+		if(length(job_check.allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in job_check.allowed_ages))
 			job_fail += "Wrong age (allowed: [job_check.allowed_ages.Join(", ")])"
 
 		// If no fails, player can join this wave
@@ -2331,132 +2337,69 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 	if(!init_outfit)
 		for(var/obj/item/storage/belt/belt as anything in subtypesof(/obj/item/storage/belt))
-			if(is_abstract(belt))
+			if(IS_ABSTRACT(belt))
 				continue
-			o_belt += belt
-
-		for(var/belts in o_belt)
-			o_belt_options += "<option value='[(belts)]'>[belts]</option>"
+			o_belt_options += "<option value='[belt]'>[belt::name]</option>"
 
 		for(var/obj/item/clothing/gloves/gloves as anything in subtypesof(/obj/item/clothing/gloves))
-			if(is_abstract(gloves))
+			if(IS_ABSTRACT(gloves))
 				continue
-			o_gloves += gloves
-
-		for(var/gloves in o_gloves)
-			var/obj/item/clothing/gloves/gloves_instance = new gloves
-			o_gloves_options += "<option value='[(gloves)]'>[gloves_instance.name]</option>"
-			qdel(gloves_instance)
+			o_gloves_options += "<option value='[gloves]'>[gloves::name]</option>"
 
 		for(var/obj/item/clothing/shoes/shoes as anything in subtypesof(/obj/item/clothing/shoes))
-			if(is_abstract(shoes))
+			if(IS_ABSTRACT(shoes))
 				continue
-			o_shoes += shoes
-
-		for(var/shoes in o_shoes)
-			var/obj/item/clothing/shoes/shoes_instance = new shoes
-			o_shoes_options += "<option value='[(shoes)]'>[shoes_instance.name]</option>"
-			qdel(shoes_instance)
+			o_shoes_options += "<option value='[shoes]'>[shoes::name]</option>"
 
 		for(var/obj/item/clothing/head/head as anything in subtypesof(/obj/item/clothing/head))
-			if(is_abstract(head))
+			if(IS_ABSTRACT(head))
 				continue
-			o_head += head
-
-		for(var/head in o_head)
-			var/obj/item/clothing/head/head_instance = new head
-			o_head_options += "<option value='[(head)]'>[head_instance.name]</option>"
-			qdel(head_instance)
+			o_head_options += "<option value='[head]'>[head::name]</option>"
 
 		for(var/obj/item/clothing/face/face as anything in subtypesof(/obj/item/clothing/face))
-			if(is_abstract(face))
+			if(IS_ABSTRACT(face))
 				continue
-			o_mask += face
-
-		for(var/face in o_mask)
-			var/obj/item/clothing/face/face_instance = new face
-			o_mask_options += "<option value='[(face)]'>[face_instance.name]</option>"
-			qdel(face_instance)
+			o_mask_options += "<option value='[face]'>[face::name]</option>"
 
 		for(var/obj/item/clothing/neck/neck as anything in subtypesof(/obj/item/clothing/neck))
-			if(is_abstract(neck))
+			if(IS_ABSTRACT(neck))
 				continue
-			o_neck += neck
-
-		for(var/neck in o_neck)
-			var/obj/item/clothing/neck/neck_instance = new neck
-			o_neck_options += "<option value='[(neck)]'>[neck_instance.name]</option>"
-			qdel(neck_instance)
+			o_neck_options += "<option value='[neck]'>[neck::name]</option>"
 
 		for(var/obj/item/clothing/wrists/wrists as anything in subtypesof(/obj/item/clothing/wrists))
-			if(is_abstract(wrists))
+			if(IS_ABSTRACT(wrists))
 				continue
-			o_wrists += wrists
+			o_wrists_options += "<option value='[wrists]'>[wrists::name]</option>"
 
-		for(var/wrists in o_wrists)
-			var/obj/item/clothing/wrists/wrists_instance = new wrists
-			o_wrists_options += "<option value='[(wrists)]'>[wrists_instance.name]</option>"
-
-		for(var/type in subtypesof(/obj/item/clothing/shirt) + subtypesof(/obj/item/clothing/armor))
-			if(is_abstract(type))
+		for(var/obj/item/clothing/shirt as anything in subtypesof(/obj/item/clothing/shirt) + subtypesof(/obj/item/clothing/armor))
+			if(IS_ABSTRACT(shirt))
 				continue
-			o_shirt += type
-
-		for(var/type in o_shirt)
-			var/obj/item/clothing/item_instance = new type
-			o_shirt_options += "<option value='[(type)]'>[item_instance.name]</option>"
-			qdel(item_instance)
+			o_shirt_options += "<option value='[shirt]'>[shirt::name]</option>"
 
 		for(var/obj/item/clothing/pants/pants as anything in subtypesof(/obj/item/clothing/pants))
-			if(is_abstract(pants))
+			if(IS_ABSTRACT(pants))
 				continue
-			o_pants += pants
-
-		for(var/pants in o_pants)
-			var/obj/item/clothing/pants/pants_instance = new pants
-			o_pants_options += "<option value='[(pants)]'>[pants_instance.name]</option>"
-			qdel(pants_instance)
+			o_pants_options += "<option value='[pants]'>[pants::name]</option>"
 
 		for(var/obj/item/clothing/armor/armor as anything in subtypesof(/obj/item/clothing/armor))
-			if(is_abstract(armor))
+			if(IS_ABSTRACT(armor))
 				continue
-			o_armor += armor
-
-		for(var/armor in o_armor)
-			var/obj/item/clothing/armor/armor_instance = new armor
-			o_armor_options += "<option value='[(armor)]'>[armor_instance.name]</option>"
-			qdel(armor_instance)
+			o_armor_options += "<option value='[armor]'>[armor::name]</option>"
 
 		for(var/obj/item/clothing/ring/ring as anything in subtypesof(/obj/item/clothing/ring))
-			if(is_abstract(ring))
+			if(IS_ABSTRACT(ring))
 				continue
-			o_ring += ring
-
-		for(var/ring in o_ring)
-			var/obj/item/clothing/ring/ring_instance = new ring
-			o_ring_options += "<option value='[(ring)]'>[ring_instance.name]</option>"
-			qdel(ring_instance)
+			o_ring_options += "<option value='[ring]'>[ring.name]</option>"
 
 		for(var/obj/item/weapon/scabbard/scabbard as anything in subtypesof(/obj/item/weapon/scabbard))
-			if(is_abstract(scabbard))
+			if(IS_ABSTRACT(scabbard))
 				continue
-			o_scabbards += scabbard
-
-		for(var/scabbard in o_scabbards)
-			var/obj/item/weapon/scabbard/scabbard_instance = new scabbard
-			o_scabbards_options += "<option value='[(scabbard)]'>[scabbard_instance.name]</option>"
-			qdel(scabbard_instance)
-
+			o_scabbards_options += "<option value='[scabbard]'>[scabbard::name]</option>"
 
 		for(var/obj/item/clothing/cloak/cloak as anything in subtypesof(/obj/item/clothing/cloak))
-			if(is_abstract(cloak))
+			if(IS_ABSTRACT(cloak))
 				continue
-			o_cloak += cloak
-
-		for(var/cloak in o_cloak)
-			var/obj/item/clothing/cloak/cloak_instance = new cloak
-			o_cloak_options += "<option value='[(cloak)]'>[cloak_instance.name]</option>"
-			qdel(cloak_instance)
+			o_cloak_options += "<option value='[cloak]'>[cloak::name]</option>"
 
 		var/list/excluded_item_types = list(
 			/obj/item/storage/belt,
@@ -2465,21 +2408,11 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		)
 
 		for(var/obj/item/I as anything in subtypesof(/obj/item))
-			if(is_abstract(I))
+			if(IS_ABSTRACT(I))
 				continue
-			var/skip = FALSE
-			for(var/excluded in excluded_item_types)
-				if(ispath(I, excluded))
-					skip = TRUE
-					break
-			if(skip)
+			if(is_path_in_list(I, excluded_item_types))
 				continue
-			o_items += I
-
-		for(var/i_items in o_items)
-			o_items_options += "<option value='[(i_items)]'>[i_items]</option>"
-
-		init_outfit = TRUE
+			o_items_options += "<option value='[(I)]'>[I::name]</option>"
 
 
 	var/dat = {"

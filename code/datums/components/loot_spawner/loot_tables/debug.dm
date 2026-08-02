@@ -8,13 +8,13 @@
 /datum/loot_table/debug
 	name = "testing table"
 	loot_table = list(
-		STATKEY_LCK = list(
+		STAT_FORTUNE = list(
 			/obj/item/coin/gold = 5,
 			/obj/item/coin/silver = 10,
 			200,
 			/obj/item/coin/copper = 25,
 		),
-		/datum/skill/misc/stealing = list(
+		/datum/attribute/skill/misc/stealing = list(
 			/obj/item/gem/green = 5,
 			/obj/item/gem/blue = 10,
 			/obj/item/lockpick = 25,

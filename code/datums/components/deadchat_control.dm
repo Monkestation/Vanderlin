@@ -24,14 +24,14 @@
 	notify_ghosts("[parent] is now deadchat controllable!", source = parent, action = NOTIFY_ORBIT, header="Something Interesting!")
 
 
-/datum/component/deadchat_control/Destroy(force, silent)
+/datum/component/deadchat_control/Destroy(force)
 	inputs = null
 	orbiters = null
 	ckey_to_cooldown = null
 	return ..()
 
 /datum/component/deadchat_control/proc/deadchat_react(mob/source, message)
-	message = lowertext(message)
+	message = LOWER_TEXT(message)
 	if(!inputs[message])
 		return
 	if(deadchat_mode == ANARCHY_MODE)

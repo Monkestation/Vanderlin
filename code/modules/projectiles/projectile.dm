@@ -78,6 +78,7 @@
 	var/ricochets_max = 2
 	var/ricochet_chance = 30
 	var/force_hit = FALSE //If the object being hit can pass ths damage on to something else, it should not do it for this bullet.
+	var/splatter_chance = 33
 
 	//Hitscan
 	var/hitscan = FALSE		//Whether this is hitscan. If it is, speed is basically ignored.
@@ -181,11 +182,11 @@
 		if(arcshot && isopenspace(current))
 			// If this is null something is VERY wrong
 			var/turf/below = GET_TURF_BELOW(current)
-			if(current.can_zFall(src, 1, below))
+			if(can_z_move(DOWN, current, below, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 				var/turf/target
 				while(!target)
 					var/turf/potential = GET_TURF_BELOW(below)
-					if(!potential || !below.can_zFall(src, 1, potential))
+					if(!potential || !can_z_move(DOWN, below, potential, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 						target = below
 					else
 						below = potential
@@ -237,7 +238,7 @@
  */
 /obj/projectile/proc/on_hit(atom/target, blocked = FALSE, pierce_hit)
 	if(fired_from)
-		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle)
+		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle, def_zone, damage)
 		SEND_SIGNAL(src, COMSIG_PROJECTILE_SELF_ON_HIT, firer, target, Angle)
 	var/turf/target_loca = get_turf(target)
 
@@ -272,13 +273,14 @@
 	var/mob/living/L = target
 
 	if(blocked != 100) // not completely blocked
-		if(damage && L.blood_volume && damage_type == BRUTE)
+		if(damage && L.get_blood_volume() && damage_type == BRUTE)
 			var/splatter_dir = dir
 			if(starting)
 				splatter_dir = get_dir(starting, target_loca)
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir)
-			if(prob(33))
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir, L.get_blood_type())
+			if(prob(splatter_chance))
 				L.add_splatter_floor(target_loca)
+				L.add_splatter_wall(force = 2, spill_amount = 2, splatter_direction = splatter_dir) //Projectiles hurt and spray blood everywhere behind and around of course.
 
 	if(impact_effect_type && !hitscan)
 		new impact_effect_type(target_loca, hitx, hity)
@@ -546,7 +548,7 @@
  * Scan turf we're now in for anything we can/should hit. This is useful for hitting non dense objects the user
  * directly clicks on, as well as for PHASING projectiles to be able to hit things at all as they don't ever Bump().
  */
-/obj/projectile/Moved(atom/OldLoc, Dir)
+/obj/projectile/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!fired)
 		return
@@ -794,7 +796,7 @@
 		homing_offset_y = -homing_offset_y
 
 //Spread is FORCED!
-/obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, spread = 0)
+/obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, list/modifiers, spread = 0)
 	var/turf/curloc = get_turf(source)
 	var/turf/targloc = get_turf(target)
 	if(targloc && curloc)
@@ -807,13 +809,13 @@
 	trajectory_ignore_forcemove = FALSE
 	starting = get_turf(source)
 	original = target
-	if(targloc || !params)
+	if(targloc || !modifiers)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
 		setAngle(get_angle(src, targloc) + spread)
 
-	if(isliving(source) && params)
-		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, params)
+	if(isliving(source) && length(modifiers))
+		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, modifiers)
 		p_x = calculated[2]
 		p_y = calculated[3]
 
@@ -826,11 +828,10 @@
 		stack_trace("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
 
-/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, params)
+/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, list/modifiers)
 	var/p_x = 0
 	var/p_y = 0
 	var/angle = 0
-	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, ICON_X))
 		p_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	if(LAZYACCESS(modifiers, ICON_Y))

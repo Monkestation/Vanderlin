@@ -24,22 +24,20 @@
 
 /obj/projectile/magic/death/on_hit(target)
 	. = ..()
-	if(ismob(target))
-		var/mob/M = target
-		if(isliving(M))
-			var/mob/living/L = M
-			if(L.mob_biotypes & MOB_UNDEAD) //negative energy heals the undead
-				if(L.hellbound && L.stat == DEAD)
-					return BULLET_ACT_BLOCK
-				if(L.revive(ADMIN_HEAL_ALL))
-					L.grab_ghost(force = TRUE) // even suicides
-					to_chat(L, "<span class='notice'>I rise with a start, I'm undead!!!</span>")
-				else if(L.stat != DEAD)
-					to_chat(L, "<span class='notice'>I feel great!</span>")
-			else
-				L.death(0)
-		else
-			M.death(0)
+
+	if(isliving(target))
+		var/mob/living/victim = target
+		if(victim.mob_biotypes & MOB_UNDEAD) //negative energy heals the undead
+			if(victim.hellbound && victim.stat == DEAD)
+				return BULLET_ACT_BLOCK
+			if(victim.revive(ADMIN_HEAL_ALL & ~HEAL_REFRESH_ORGANS , force_grab_ghost = TRUE)) // This heals suicides
+				victim.grab_ghost(force = TRUE)
+				to_chat(victim, span_notice("I rise with a start, I'm undead!!!"))
+			else if(victim.stat != DEAD)
+				to_chat(victim, span_notice("I feel great!"))
+			return
+		// victim.investigate_log("has been killed by a bolt of death.", INVESTIGATE_DEATHS)
+		victim.death()
 
 /obj/projectile/magic/resurrection
 	name = "bolt of resurrection"

@@ -96,7 +96,7 @@
 			span_userdanger("You slam into something!")
 		)
 
-		victim.apply_damage(collision_damage, BRUTE, def_zone = null, blocked = FALSE, forced = TRUE)
+		victim.apply_damage(collision_damage, BRUTE, def_zone = null, blocked = FALSE, forced = TRUE, damage_type = BCLASS_BLUNT)
 
 		playsound(victim, 'sound/misc/meteorimpact.ogg', 40, TRUE)
 		victim.add_splatter_floor()

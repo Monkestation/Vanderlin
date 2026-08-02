@@ -7,7 +7,7 @@
 	name = "Life Synthesis"
 	desc = "Understand the principals behind life."
 	prerequisites = list(/datum/thaumic_research_node/transmutation)
-	required_essences = list(/datum/thaumaturgical_essence/life = 200)
+	required_essences = list(/datum/thaumaturgical_essence/life = 50)
 	node_x = 480
 	node_y = 300
 

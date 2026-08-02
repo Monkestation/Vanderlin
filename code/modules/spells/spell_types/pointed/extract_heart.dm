@@ -27,7 +27,7 @@
 		return
 
 	// Calculate actual time based on butchery skill
-	var/skill_modifier = 1 - (owner.get_skill_level(/datum/skill/labor/butchering) * 0.1) // 10% reduction per skill level
+	var/skill_modifier = 1 - (GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/labor/butchering) * 0.1) // 10% reduction per skill level
 	var/actual_time = max(extraction_time * skill_modifier, 7.5 SECONDS) // Minimum 7.5 seconds
 
 	owner.visible_message(span_warning("[owner] reaches for [cast_on]'s chest, chanting incoherently..."), \
@@ -51,7 +51,8 @@
 	owner.put_in_hands(heart)
 
 	cast_on.add_splatter_floor()
-	cast_on.adjustBruteLoss(20)
+	var/obj/item/bodypart/chest = cast_on.get_bodypart(BODY_ZONE_CHEST)
+	chest.bodypart_attacked_by(BCLASS_PIERCE, 30)
 
 	owner.visible_message(span_warning("[owner] rips [cast_on]'s heart out with a roar!"), \
 						span_red("You present the heart to Graggar! The God chuckles upon this offering."))

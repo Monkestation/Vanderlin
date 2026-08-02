@@ -1,3 +1,18 @@
+/datum/attribute_holder/sheet/job/necromancer
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1,
+		STAT_INTELLIGENCE = 4,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/craft/alchemy = 40,
+		/datum/attribute/skill/magic/arcane = 40,
+	)
+
 /datum/job/advclass/wretch/necromancer
 	title = "Necromancer"
 	tutorial = "You have been ostracized and hunted by society for your dark magics and perversion of life."
@@ -12,26 +27,11 @@
 	languages = list(/datum/language/undead)
 	faction = FACTION_CABAL
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_CON = -1,
-		STATKEY_INT = 4
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/reading = 5,
-		/datum/skill/craft/alchemy = 4,
-		/datum/skill/magic/arcane = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/necromancer
 
 	traits = list(
+		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
-		TRAIT_INHUMENCAMP,
 		TRAIT_GRAVEROBBER,
 		TRAIT_DEADNOSE
 	)
@@ -54,7 +54,25 @@
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_SOULS)
 	spawned.mana_pool?.ethereal_recharge_rate += 0.1
 
-	wretch_select_bounty(spawned)
+/datum/job/advclass/wretch/necromancer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
+	)
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "NECROMANCER")
+
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
+	)
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "NECROMANCER")
 
 /datum/outfit/wretch/necromancer
 	name = "Necromancer (Wretch)"
@@ -76,22 +94,3 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1
 	)
-
-/datum/outfit/wretch/necromancer/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
-	)
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "NECROMANCER")
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
-	)
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "NECROMANCER")

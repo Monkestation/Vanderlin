@@ -4,14 +4,14 @@
 	button_icon_state = "comedy"
 	sound = 'sound/magic/ahh2.ogg'
 
-	associated_skill = /datum/skill/misc/music
+	associated_skill = /datum/attribute/skill/misc/music
 
 	invocation_type = INVOCATION_SHOUT
 	invocation = "Let fortune favour the bold!"
 
 	spell_type = NONE
-	associated_skill = /datum/skill/misc/music
-	associated_stat = STATKEY_INT
+	associated_skill = /datum/attribute/skill/misc/music
+	associated_stat = STAT_INTELLIGENCE
 
 	charge_required = FALSE
 	cooldown_time = 1 MINUTES
@@ -44,5 +44,6 @@
 
 /datum/action/cooldown/spell/bardic_inspiration/cast(mob/living/cast_on)
 	. = ..()
-	if(cast_on.can_hear())
-		cast_on.apply_status_effect(/datum/status_effect/buff/bardic_inspiration)
+	if(HAS_TRAIT(cast_on, TRAIT_DEAF))
+		return
+	cast_on.apply_status_effect(/datum/status_effect/buff/bardic_inspiration)

@@ -5,7 +5,7 @@
 	gender = PLURAL
 	icon_state = "plate_legs"
 	item_state = "plate_legs"
-	sewrepair = FALSE
+	sewrepair = null
 	blocksound = PLATEHIT
 	equip_delay_self = 30
 	unequip_delay_self = 30
@@ -15,29 +15,23 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	smeltresult = /obj/item/ingot/steel_slag
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/pants/plate
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 9 * STEEL_MULTIPLIER
+	item_weight = 3.95 KILOGRAMS
+
+	material_category = ARMOR_MAT_PLATE
 
 /obj/item/clothing/pants/platelegs/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_STEP)
-
-/obj/item/clothing/pants/platelegs/ancient
-	name = "ancient chausses"
-	desc = "Cuisses made of plated steel, offering additional protection against blunt force."
-	gender = PLURAL
-	icon_state = "ancientplate_legs"
-	item_state = "ancientplate_legs"
 
 /obj/item/clothing/pants/platelegs/iron
 	name = "iron plated chausses"
@@ -46,9 +40,9 @@
 	item_state = "iplate_legs"
 	smeltresult = /obj/item/ingot/iron
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 9 * IRON_MULTIPLIER
+	item_weight = 3.95 KILOGRAMS
 
 /obj/item/clothing/pants/platelegs/captain
 	name = "captain's chausses"
@@ -68,17 +62,8 @@
 	item_state = "rustpants"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_STANDARD
-
-/obj/item/clothing/pants/platelegs/vampire
-	name = "ancient plate greaves"
-	desc = "Steel chausses from antiquity, though outdated they offer superior protection."
-	icon_state = "vpants"
-	item_state = "vpants"
-	armor = ARMOR_PLATE_GOOD
-	prevent_crits = ALL_CRITICAL_HITS_VAMP // Vampire armors don't protect against lashing, Castlevania reference
-	item_weight = 5.5 * STEEL_MULTIPLIER
 
 /obj/item/clothing/pants/platelegs/blk
 	name = "blacksteel legs"
@@ -87,11 +72,11 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
-	item_weight = 9 * BLACKSTEEL_MULTIPLIER
+	armor_type = /datum/armor/pants/plate/good
+	item_weight = 3 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 //............... Evil Pants ............... //
@@ -130,11 +115,21 @@
 	desc = "A finely forged pair of silver plate leggings, offering additional protection against blunt force."
 	icon_state = "silverlegs"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/pants/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 9 * SILVER_MULTIPLIER
+	item_weight = 3.95 KILOGRAMS
 	sellprice = VALUE_SILVER_ARMOR
 
 /obj/item/clothing/pants/platelegs/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+//.............. Gronn Platelegs .................//
+
+/obj/item/clothing/pants/platelegs/iron/gronn
+	name = "osslandic iron chausses"
+	desc = "Iron chausses with an added layer of leather for comfort and padding. The knees are adorned with a skull-like shape, reminscent of the hunt."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplatepants"
+	item_state = "gronnplatepants"

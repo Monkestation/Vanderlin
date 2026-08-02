@@ -3,7 +3,7 @@
 	icon = null
 	icon_state = null
 	anchored = 1
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	var/image_color
 
 /obj/effect/afterimage/red

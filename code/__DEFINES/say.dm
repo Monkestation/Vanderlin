@@ -62,18 +62,21 @@
 #define MODE_SING "sing"
 
 #define SPAN_GEN "say"
+#define SPAN_GRONNIC "gronnic"
 #define SPAN_DWARF "dwarf"
 #define SPAN_ELF "elf"
-#define SPAN_OLDPSYDONIC "oldpsydonic"
+#define SPAN_PSYDON "psydonic"
+#define SPAN_PSYDON_OLD "psydonic_old"
 #define SPAN_ZALAD "zalad"
-#define SPAN_SAND "sandspeak"
+#define SPAN_CELESTIAL "celestial"
 #define SPAN_DELF "delf"
 #define SPAN_HELL "hellspeak"
 #define SPAN_ORC "orc"
-#define SPAN_OTAVAN "otavan"
 #define SPAN_BEAST "beast"
+#define SPAN_KOBOLD "kobold"
 #define SPAN_DEEPSPEAK "deepspeak"
 #define SPAN_UNDEAD "undead"
+
 //bitflag #defines for return value of the radio() proc.
 #define ITALICS 1
 #define REDUCE_RANGE 2
@@ -83,9 +86,9 @@
 #define EAVESDROP_EXTRA_RANGE 1 //how much past the specified message_range does the message get starred, whispering only
 
 // A link given to ghost alice to follow bob
-#define FOLLOW_LINK(alice, bob) "<a href=?src=[REF(alice)];follow=[REF(bob)]>(F)</a>"
-#define TURF_LINK(alice, turfy) "<a href=?src=[REF(alice)];x=[turfy.x];y=[turfy.y];z=[turfy.z]>(T)</a>"
-#define FOLLOW_OR_TURF_LINK(alice, bob, turfy) "<a href=?src=[REF(alice)];follow=[REF(bob)];x=[turfy.x];y=[turfy.y];z=[turfy.z]>(F)</a>"
+#define FOLLOW_LINK(alice, bob) "<a href='byond://?src=[REF(alice)];follow=[REF(bob)]'>(F)</a>"
+#define TURF_LINK(alice, turfy) "<a href='byond://?src=[REF(alice)];x=[turfy.x];y=[turfy.y];z=[turfy.z]'>(T)</a>"
+#define FOLLOW_OR_TURF_LINK(alice, bob, turfy) "<a href='byond://?src=[REF(alice)];follow=[REF(bob)];x=[turfy.x];y=[turfy.y];z=[turfy.z]'>(F)</a>"
 
 #define LINGHIVE_NONE 0
 #define LINGHIVE_OUTSIDER 1
@@ -107,6 +110,8 @@
 #define MSG_VISUAL (1<<0)
 #define MSG_AUDIBLE (1<<1)
 
-// USE ABOVE INSTEAD?
-#define EMOTE_VISIBLE 1
-#define EMOTE_AUDIBLE 2
+// Bitflags for emotes, used in var/emote_type of the emote datum
+/// Is the emote audible
+#define EMOTE_AUDIBLE (1<<0)
+/// Is the emote visible
+#define EMOTE_VISIBLE (1<<1)

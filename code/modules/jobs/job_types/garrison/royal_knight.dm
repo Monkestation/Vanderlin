@@ -1,5 +1,5 @@
 /datum/job/royalknight
-	title = "Royal Knight"
+	title = JOB_ROYAL_KNIGHT
 	tutorial = "You are a knight of the royal family, elevated by your skill and steadfast devotion. \
 	Sworn to protect the royal family, you stand as their shield, upholding their rule with steel and sacrifice. \
 	Yet service is not without its trials, and your loyalty will be tested in ways both seen and unseen. \
@@ -8,6 +8,7 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ROYALKNIGHT
 	faction = FACTION_TOWN
+	outfit = /datum/outfit/royalknight
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
@@ -19,6 +20,7 @@
 
 	advclass_cat_rolls = list(CTAG_ROYALKNIGHT = 20)
 	give_bank_account = 60
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'
 	job_bitflag = BITFLAG_GARRISON
 
@@ -29,65 +31,74 @@
 		EXP_TYPE_COMBAT = 1200
 	)
 
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_PER = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_INT = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/mathematics = 3
-	)
+	honorary = "Sir"
+	honorary_f = "Dame"
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_KNOWBANDITS,
-		TRAIT_NOBLE
+		TRAIT_MEDIUMARMOR,
+		TRAIT_NOBLE_POWER
+	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/proc/haltyell
 	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
-
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Sir"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Dame"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
+/datum/attribute_holder/sheet/job/royalknight/flail
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/whipsflails = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/sabre
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/polearms
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/longsword
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/mace
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(20, 40)
+	)
 
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE
 	should_reset_stats = FALSE
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
-/datum/job/advclass/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/royalknight/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectable = list(
 		"Flail" = /obj/item/weapon/flail/sflail,
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Longsword" = /obj/item/weapon/sword/long,
+		"Warhammer" = /obj/item/weapon/mace/warhammer/steel,
+		"Polehammer" = /obj/item/weapon/polearm/eaglebeak,
 		"Sabre" = /obj/item/weapon/sword/sabre/dec,
 	)
 
@@ -99,18 +110,22 @@
 
 	switch(choice)
 		if("Flail")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/flail)
 		if("Halberd")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/polearms)
 			grant_shield = FALSE
 		if("Longsword")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/longsword)
+			grant_shield = FALSE
+		if("Warhammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/mace)
+		if("Polehammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/polearms)
 			grant_shield = FALSE
 		if("Sabre")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/sabre)
 
 	if(grant_shield)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 1)
 		var/obj/item/weapon/shield/tower/metal/shield = new /obj/item/weapon/shield/tower/metal()
 		if(!spawned.equip_to_appropriate_slot(shield))
 			qdel(shield)
@@ -121,29 +136,95 @@
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
 	shirt = /obj/item/clothing/armor/gambeson/arming
-	belt = /obj/item/storage/belt/leather
+	wrists = /obj/item/storage/keyring/manorguard
+	belt = /obj/item/storage/belt/leather/steel
 	beltr = /obj/item/weapon/sword/arming
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
-	backpack_contents = list(/obj/item/storage/keyring/manorguard = 1)
 
 /datum/outfit/royalknight/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()
 	if(H.cloak && !findtext(H.cloak.name, "([H.real_name])"))
 		H.cloak.name = "[H.cloak.name] ([H.real_name])"
 
+/datum/attribute_holder/sheet/job/royalknight/knight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+)
+
 /datum/job/advclass/royalknight/knight
-	title = "Royal Knight"
+	title = JOB_ROYAL_KNIGHT
 	tutorial = "The classic Knight in shining armor. Slightly more skilled then their Steam counterpart but has worse armor."
 	outfit = /datum/outfit/royalknight/knight
+	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight/knight
 	category_tags = list(CTAG_ROYALKNIGHT)
 
 /datum/outfit/royalknight/knight
-	name = "Royal Knight"
+	name = JOB_ROYAL_KNIGHT
 	armor = /obj/item/clothing/armor/plate/full
-	head = /obj/item/clothing/head/helmet/visored/royalknight
 	gloves = /obj/item/clothing/gloves/plate
 	shoes = /obj/item/clothing/shoes/boots/armor
+
+// Helmet Selection (Royal Knight Exclusive)
+/datum/job/advclass/royalknight/knight/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectablehelmets = list(
+		"Hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
+		"Royal Knight Helmet" = /obj/item/clothing/head/helmet/visored/royalknight,
+		"Knight Helmet" = /obj/item/clothing/head/helmet/visored/knight,
+		"Decorated Knight Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/knight,
+		"Visored Sallet" = /obj/item/clothing/head/helmet/visored/sallet,
+		"Bellow Sallet" = /obj/item/clothing/head/helmet/visored/bellow,
+		"Decorated Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
+	)
+
+	spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = JOB_ROYAL_KNIGHT)
+
+/datum/attribute_holder/sheet/job/royalknight/steam
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/craft/engineering = 30,
+	)
 
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"
@@ -153,20 +234,8 @@
 	learning how to use it has cost you precious time \
 	you could have spent learning to use other weapons."
 	outfit = /datum/outfit/royalknight/steam
+	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight/steam
 	category_tags = list(CTAG_ROYALKNIGHT)
-
-/datum/job/advclass/royalknight/steam/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/swords, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/shields, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/polearms, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/whipsflails, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/axesmaces, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/bows, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/crossbows, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE)
 
 /datum/outfit/royalknight/steam
 	name = "Steam Knight"

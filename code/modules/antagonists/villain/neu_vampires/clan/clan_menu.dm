@@ -40,6 +40,9 @@
 /datum/clan_menu_interface/proc/generate_welcome_screen_html()
 	var/clan_downside = "burn in sunlight"
 	var/blood_preference = "any blood"
+	var/reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> Drain someone's blood to critical levels to gain the option to embrace them as a new vampire.</div>"}
+	if(!user.clan_position?.can_assign_positions)
+		reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> You are unable to sire new vampires.</div>"}
 
 	if(user_clan)
 		clan_downside = user_clan.get_downside_string()
@@ -72,9 +75,7 @@
 			<div class="tip-item">
 				<strong>Coven Abilities:</strong> Right-click on any coven ability to switch between different powers from that coven.
 			</div>
-			<div class="tip-item">
-				<strong>Creating Progeny:</strong> Drain someone's blood to critical levels to gain the option to embrace them as a new vampire.
-			</div>
+			[reproduce_string]
 		</div>
 	</div>
 	"}
@@ -125,7 +126,7 @@
 				overflow: auto;
 				background: #1a1a1a;
 				height: calc(100% - 40px);
-				margin-bottom: 20px; 
+				margin-bottom: 20px;
 			}
 
 			.hierarchy-sidebar {
@@ -813,7 +814,7 @@
 				<div class="clan-desc">[user_clan ? user_clan.desc : ""]</div>
 			</div>
 			<div class="header-controls">
-				<a href="?src=[REF(src)];action=refresh_clan_menu" class="header-btn">Refresh</a>
+				<a href='byond://?src=[REF(src)];action=refresh_clan_menu" class="header-btn">Refresh</a>
 			</div>
 		</div>
 
@@ -821,7 +822,7 @@
 			<div class="sidebar">
 				<h3>Clan Hierarchy</h3>
 				<ul class="coven-list">
-					<li class="coven-item hierarchy-button" onclick="window.location.href='?src=[REF(src)];action=show_hierarchy'">
+					<li class="coven-item hierarchy-button" onclick="window.location.href='byond://?src=[REF(src)];action=show_hierarchy'">
 					<div class="coven-name">Clan Hierarchy</div>
 					<div class="coven-stats">
 						<span>Management</span>
@@ -1009,7 +1010,7 @@
 						const node = e.target.classList.contains('research-node') ? e.target : e.target.parentElement;
 						const nodeId = node.dataset.nodeId;
 						if (nodeId) {
-							window.location.href = '?src=[REF(src)];action=research_node;node_id=' + nodeId;
+							window.location.href='byond://?src=[REF(src)];action=research_node;node_id=' + nodeId;
 						}
 					}
 				});

@@ -2,7 +2,7 @@
 	name = "Recruit Servant"
 	button_icon_state = "recruit_servant"
 
-	new_role = "Servant"
+	new_role = JOB_SERVANT
 	recruitment_faction = "Servants"
 	recruitment_message = "Join the keep's servants, %RECRUIT!"
 	accept_message = "I serve the Crown!"

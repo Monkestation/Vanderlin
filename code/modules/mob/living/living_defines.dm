@@ -4,7 +4,14 @@
 	see_in_dark = 8
 	hud_possible = list(ANTAG_HUD)
 
-	var/resize = 1 //Badminnery resize
+	///Tracks the scale of the mob transformation matrix in relation to its identity. Use update_transform(resize) to change it.
+	var/current_size = RESIZE_DEFAULT_SIZE
+	///How the mob transformation matrix is scaled on init.
+	var/initial_size = RESIZE_DEFAULT_SIZE
+
+	var/job_title_override
+	var/job_honorary_override
+
 	var/lastattacker = null
 	var/lastattackerckey = null
 	var/datum/weakref/lastattacker_weakref = null
@@ -37,17 +44,14 @@
 	var/pixelshift_x = 0
 	var/pixelshift_y = 0
 
-	///The y amount a mob's sprite should be offset due to the current position they're in (e.g. lying down moves your sprite down)Add commentMore actions
-	var/body_position_pixel_x_offset = 0
-	///The x amount a mob's sprite should be offset due to the current position they're in
-	var/body_position_pixel_y_offset = 0
-
 	/// Variable to track the body position of a mob, regardgless of the actual angle of rotation (usually matching it, but not necessarily).
 	var/body_position = STANDING_UP
 	/// Number of degrees of rotation of a mob. 0 means no rotation, up-side facing NORTH. 90 means up-side rotated to face EAST, and so on.
-	var/lying_angle = 0
+	VAR_PROTECTED/lying_angle = 0
 	/// Value of lying lying_angle before last change. TODO: Remove the need for this.
 	var/lying_prev = 0
+	/// Does the mob rotate when lying
+	var/rotate_on_lying = FALSE
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
 	var/timeofdeath = 0
@@ -78,6 +82,8 @@
 	var/metabolism_efficiency = 1 //more or less efficiency to metabolize helpful/harmful reagents and regulate body temperature..
 	var/has_limbs = 0 //does the mob have distinct limbs?(arms,legs, chest,head)
 
+	/// Chem effects
+	var/list/chem_effects
 	///How many legs does this mob have by default. This shouldn't change at runtime.
 	var/default_num_legs = 2
 	///How many legs does this mob currently have. Should only be changed through set_num_legs()
@@ -99,7 +105,6 @@
 
 	var/bubble_icon = "default" //what icon the mob uses for speechbubbles
 
-	var/last_bumped = 0
 	var/unique_name = 0 //if a mob's name should be appended with an id when created e.g. Mob (666)
 
 	var/list/butcher_results = null //these will be yielded from butchering with a probability chance equal to the butcher item's effectiveness
@@ -110,12 +115,23 @@
 
 	var/stun_absorption = null //converted to a list of stun absorption sources this mob has when one is added
 
-	var/blood_volume = BLOOD_VOLUME_NORMAL //how much blood the mob has
+	/// How much blood the mob currently has.
+	/// Don't read directly, use get_blood_volume() and get_blood_volume(apply_modifiers = TRUE).
+	/// Don't write directly either, use set_blood_volume() and adjust_blood_volume().
+	/// Also don't initialize this. Initialize default_blood_volume instead.
+	var/blood_volume = 0
+	/// The default blood volume of the mob. Used primarily for healing bloodloss.
+	var/default_blood_volume = BLOOD_VOLUME_NORMAL
 
 	var/see_override = 0 //0 for no override, sets see_invisible = see_override in silicon & carbon life process via update_sight()
 
 	var/list/status_effects //a list of all status effects the mob has
 	var/druggy = 0
+
+	var/parrying_penalty = 0
+	var/parrying_penalty_timer = null
+	var/dodging_penalty = 0
+	var/dodging_penalty_timer = null
 
 	//Speech
 	var/stuttering = 0
@@ -124,8 +140,6 @@
 	var/derpspeech = 0
 
 	var/list/implants = null
-
-	var/datum/riding/riding_datum
 
 	var/datum/language/selected_default_language
 
@@ -138,21 +152,48 @@
 
 	var/slowed_by_drag = TRUE //Whether the mob is slowed down when dragging another prone mob
 
+	/// Is this mob allowed to be buckled/unbuckled to/from things?
+	var/can_buckle_to = TRUE
+
+	///The height offset of a mob's maptext due to their current size.
+	var/body_maptext_height_offset = 0
+
 	var/list/ownedSoullinks //soullinks we are the owner of
 	var/list/sharedSoullinks //soullinks we are a/the sharer of
 
+	/// List of fatigue modifiers applying to this mob
+	var/list/fatigue_modification //Lazy list, see fatigue_modifier.dm
+	/// List of fatigue modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/fatigue_mod_immunities //Lazy list, see fatigue_modifier.dm
+
+	/// List of stamina modifiers applying to this mob
+	var/list/stamina_modification //Lazy list, see stamina_modifier.dm
+	/// List of stamina modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/stamina_mod_immunities //Lazy list, see stamina_modifier.dm
+
+	// ~WEIGHT SYSTEM
+	/// Maximum weight we can carry, this point and beyond means maximum encumbrance
+	var/maximum_carry_weight = 72
+	/// Weight we are currently carrying
+	var/carry_weight = 0
+	/// State of encumbrance we are in, cheaper to store this than keeping calling update_carry_weight()
+	var/encumbrance = ENCUMBRANCE_NONE
+
 	var/max_energy = 1000
-	var/maximum_stamina = 100
 	var/energy = 1000
+	var/base_max_energy = 1000
+
+	var/maximum_stamina = 100
 	var/stamina = 0
+	var/base_max_stamina = 100
 
 	var/last_fatigued = 0
 	var/last_ps = 0
 
-	var/ambushable = 0
+	/// ONLY TO BE USED TO CONTROL INITIALIZING WITH AMBUSHABLE TRAIT
+	var/ambushable = FALSE
 
 	var/surrendering = 0
-
 
 	/// Combat bonuses for Simple Mobs
 	var/simpmob_attack = 0
@@ -160,7 +201,6 @@
 
 	var/defprob = 50 //base chance to defend against this mob's attacks, for simple mob combat
 	var/defdrain = 5
-	var/encumbrance = 0
 
 	/// If the mob's eyes are closed, blinded
 	var/eyesclosed = FALSE
@@ -203,7 +243,10 @@
 
 	var/mutable_appearance/reflective_icon
 
-	var/list/mob_offsets = list()
+	/// Lazylists of pixel offsets this mob is currently using
+	/// Modify this via add_offsets and .remove_offsets(,
+	/// NOT directly (and definitely avoid modifying offsets directly)
+	VAR_PRIVATE/list/offsets
 
 	var/last_deadlife
 
@@ -232,5 +275,23 @@
 
 	var/datum/blood_type/animal_type
 
+	/// Pain (pain not taking other damage types into account) damage, generally a side effect of other types of damage
+	var/painloss = 0
+	/// Shock (pain taking into account other types of damage) damage
+	var/traumatic_shock = 0
+	/// Shock stage, as in how much our crit has progressed
+	var/shock_stage = 0
+	/// Next time we are able to trigger custom_pain()
+	var/next_pain_time = 0
+	/// Next time we are able to send a custom_pain() chat message
+	var/next_pain_message_time = 0
+	/// Next time we are able to emote from pain
+	var/next_pain_emote_time = 0
+
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)
+
+	/// Direction that this mob is looking at, used for the look_up and look_down procs
+	var/looking_vertically = NONE
+	///looking holder we use for look_up and look_down. we use this over resetting to the turf because we want to glide
+	var/atom/movable/looking_holder/looking_holder

@@ -1,7 +1,7 @@
 /obj/effect/stun_indicator
 	icon = null
 	anchored = 1
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	var/list/viewers = list()
 	var/image/indicator = null
 	var/current_dots = 6

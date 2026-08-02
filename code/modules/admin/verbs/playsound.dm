@@ -1,5 +1,5 @@
 /client/proc/play_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -20,7 +20,7 @@
 	admin_sound.status = SOUND_STREAM
 	admin_sound.volume = vol
 
-	var/res = alert(usr, "Show the title of this song to the players?",, "Yes","No", "Cancel")
+	var/res = tgui_alert(usr, "Show the title of this song to the players?","Show Name", list("Yes","No", "Cancel"))
 	switch(res)
 		if("Yes")
 			to_chat(world, "<span class='boldannounce'>An admin played: [S]</span>")
@@ -31,8 +31,8 @@
 	message_admins("[key_name_admin(src)] played sound [S]")
 
 	for(var/mob/M in GLOB.player_list)
-		if(M.client.prefs.toggles & SOUND_MIDI)
-			var/user_vol = M.client.prefs.musicvol
+		if(M.client.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_MIDI)
+			var/user_vol = M.client.prefs.read_preference(/datum/preference/numeric/musicvol)
 			if(user_vol)
 				admin_sound.volume = vol * (user_vol / 100)
 			SEND_SOUND(M, admin_sound)
@@ -40,63 +40,63 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/change_music_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeMusicPower"
 
 	if(prefs)
 /*		if(blacklisted() == 1)
-			var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
+			var/vol = input(usr, "Current music power: [prefs.read_preference(/datum/preference/numeric/musicvol)]",, 100) as null|num
 			vol = 100
-			prefs.musicvol = vol
+			prefs.read_preference(/datum/preference/numeric/musicvol) = vol
 			prefs.save_preferences()
-			mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
-			mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
-			mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
+			mob.update_music_volume(CHANNEL_MUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+			mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+			mob.update_music_volume(CHANNEL_ADMIN, prefs.read_preference(/datum/preference/numeric/musicvol))
 		else*/
-		var/vol = input(usr, "Current music power: [prefs.musicvol]",, 100) as null|num
+		var/vol = input(usr, "Current music power: [prefs.read_preference(/datum/preference/numeric/musicvol)]",, 100) as null|num
 		if(!vol)
 			if(vol != 0)
 				return
 		vol = min(vol, 100)
-		prefs.musicvol = vol
+		prefs.write_preference(/datum/preference/numeric/musicvol, vol)
 		prefs.save_preferences()
 
-		mob.update_music_volume(CHANNEL_MUSIC, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_ADMIN, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_BUZZ, prefs.musicvol)
-		mob.update_music_volume(CHANNEL_AMBIENCE, prefs.musicvol)
+		mob.update_music_volume(CHANNEL_MUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_LOBBYMUSIC, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_ADMIN, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_BUZZ, prefs.read_preference(/datum/preference/numeric/musicvol))
+		mob.update_music_volume(CHANNEL_AMBIENCE, prefs.read_preference(/datum/preference/numeric/musicvol))
 
 
 /client/verb/show_rolls()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ShowRolls"
 
 	if(prefs)
-		prefs.showrolls = !prefs.showrolls
+		prefs.write_preference(/datum/preference/toggle/showrolls, !prefs.read_preference(/datum/preference/toggle/showrolls))
 		prefs.save_preferences()
-		if(prefs.showrolls)
+		if(prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(src, "ShowRolls Enabled")
 		else
 			to_chat(src, "ShowRolls Disabled")
 
 /client/verb/change_master_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeVolPower"
 
 	if(prefs)
-		var/vol = input(usr, "Current volume power: [prefs.mastervol]",, 100) as null|num
+		var/vol = input(usr, "Current volume power: [prefs.read_preference(/datum/preference/numeric/mastervol)]",, 100) as null|num
 		if(!vol)
 			if(vol != 0)
 				return
 		vol = min(vol, 100)
-		prefs.mastervol = vol
+		prefs.write_preference(/datum/preference/numeric/mastervol, vol)
 		prefs.save_preferences()
 
-		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.mastervol)
+		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.read_preference(/datum/preference/numeric/mastervol))
 
 /client/proc/play_local_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -107,7 +107,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_web_sound()
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Internet Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -152,7 +152,7 @@
 					music_extra_data["start"] = data["start_time"]
 					music_extra_data["end"] = data["end_time"]
 
-					var/res = alert(usr, "Show the title of and link to this song to the players?\n[title]",, "No", "Yes", "Cancel")
+					var/res = tgui_alert(usr, "Show the title of and link to this song to the players?\n[title]", "Show title", list("No", "Yes", "Cancel"))
 					switch(res)
 						if("Yes")
 							to_chat(world, "<span class='boldannounce'>An admin played: [webpage_url]</span>")
@@ -179,16 +179,18 @@
 		if(web_sound_url || stop_web_sounds)
 			for(var/mob/M as anything in GLOB.player_list)
 				var/client/C = M.client
-				if((C.prefs.toggles & SOUND_MIDI) && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
+				if((C.prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_MIDI))
+					SEND_SOUND(C, sound(null, channel = CHANNEL_LOBBYMUSIC))
+					SEND_SOUND(C, sound(null, channel = CHANNEL_ADMIN))
 					if(!stop_web_sounds)
-						C.chatOutput.sendMusic(web_sound_url, music_extra_data)
+						C.tgui_panel?.play_music(web_sound_url, music_extra_data)
 					else
-						C.chatOutput.stopMusic()
+						C.tgui_panel?.stop_music()
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
 /client/proc/set_round_end_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Set Round End Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -200,7 +202,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Debug"
+	set category = "GameMaster.Sound"
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return
@@ -210,6 +212,5 @@
 	for(var/mob/M in GLOB.player_list)
 		SEND_SOUND(M, sound(null))
 		var/client/C = M.client
-		if(C && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
-			C.chatOutput.stopMusic()
+		C.tgui_panel?.stop_music()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stop All Playing Sounds") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

@@ -44,7 +44,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 
 	var/datum/beam/current_beam
 
-/datum/mana_pool/leyline/Destroy(force, ...)
+/datum/mana_pool/leyline/Destroy(force)
 	QDEL_NULL(intensity)
 	QDEL_LIST(themes)
 	if(current_beam)
@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 
 	return ..()
 
-/datum/mana_pool/leyline/New(atom/parent = null, z_level = SSmapping.levels_by_trait(ZTRAIT_STATION)[1])
+/datum/mana_pool/leyline/New(atom/parent = null, z_level = SSmapping.levels_by_trait(ZTRAIT_TOWN)[1])
 	GLOB.all_leylines += src
 
 	intensity = generate_initial_intensity()
@@ -166,6 +166,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 		ending,
 		icon_state = "blood",
 		time = INFINITY,
+		beam_type = /obj/effect/ebeam/leyline,
 		max_distance = world.maxx,
 		beam_color = theme?.beam_color,
 		beam_layer = UPPER_LEYLINE_LAYER,
@@ -173,3 +174,6 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 		invisibility = INVISIBILITY_LEYLINES,
 		mana_pool = src,
 	)
+
+/obj/effect/ebeam/leyline
+	vis_flags = VIS_HIDE

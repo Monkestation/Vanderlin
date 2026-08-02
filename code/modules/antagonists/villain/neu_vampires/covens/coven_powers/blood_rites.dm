@@ -1,3 +1,5 @@
+// Disabled.
+/*
 /datum/coven/blood_rites
 	name = "Blood Rites"
 	desc = "Use a language once thought forgotten, carve their words and extract their powers."
@@ -20,3 +22,5 @@
 
 /datum/coven_power/blood_rites/runic_writing/post_gain()
 	owner.display_ui("Cultist")
+
+*/

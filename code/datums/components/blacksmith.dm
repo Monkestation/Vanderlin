@@ -267,7 +267,7 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 		total_cost = initial(ingot.sellprice) * 2
 	if(inactive_item.melting_material)
 		var/datum/material/material = inactive_item.melting_material
-		var/obj/item/ingot/ingot = initial(material.ingot_type)
+		var/obj/item/ingot/ingot = initial(material.solid_form)
 		total_cost = initial(ingot.sellprice) * 2
 
 	trader.say("It will cost you [total_cost] [trader_data.currency_name] to repair this. Are you sure you want me to?")

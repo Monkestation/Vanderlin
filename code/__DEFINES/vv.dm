@@ -2,6 +2,7 @@
 #define VV_TEXT "Text"
 #define VV_MESSAGE "Mutiline Text"
 #define VV_COLOR "Color"
+#define VV_COLOR_MATRIX "Color Matrix"
 #define VV_ICON "Icon"
 #define VV_ATOM_REFERENCE "Atom Reference"
 #define VV_DATUM_REFERENCE "Datum Reference"
@@ -17,11 +18,13 @@
 #define VV_NEW_TYPE "New Custom Typepath"
 #define VV_NEW_LIST "New List"
 #define VV_NULL "NULL"
+#define VV_INFINITY "Infinity"
 #define VV_RESTORE_DEFAULT "Restore to Default"
 #define VV_MARKED_DATUM "Marked Datum"
 #define VV_BITFIELD "Bitfield"
 #define VV_TEXT_LOCATE "Custom Reference Locate"
 #define VV_PROCCALL_RETVAL "Return Value of Proccall"
+#define VV_WEAKREF "Weak Reference Datum"
 
 #define VV_MSG_MARKED "<br><font size='1' color='red'><b>Marked Object</b></font>"
 #define VV_MSG_EDITED "<br><font size='1' color='red'><b>Var Edited</b></font>"
@@ -45,7 +48,7 @@
 #define GET_VV_VAR_TARGET href_list[VV_HK_VARNAME]
 
 //Helper for getting something to vv_do_topic in general
-#define VV_TOPIC_LINK(datum, href_key, text) "<a href='?_src_=vars;[HrefToken()];[href_key]=TRUE;target=[REF(datum)]'>text</a>"
+#define VV_TOPIC_LINK(datum, href_key, text) "<a href='byond://?_src_=vars;[HrefToken()];[href_key]=TRUE;target=[REF(datum)]'>text</a>"
 
 //Helpers for vv_get_dropdown()
 #define VV_DROPDOWN_OPTION(href_key, name) . += "<option value='?_src_=vars;[HrefToken()];[href_key]=TRUE;target=[REF(src)]'>[name]</option>"
@@ -75,14 +78,18 @@
 #define VV_HK_CALLPROC "proc_call"
 #define VV_HK_MARK "mark"
 #define VV_HK_ADDCOMPONENT "addcomponent"
+#define VV_HK_REMOVECOMPONENT "removecomponent"
+#define VV_HK_MASS_REMOVECOMPONENT "massremovecomponent"
 #define VV_HK_MODIFY_TRAITS "modtraits"
 
 // /atom
 #define VV_HK_MODIFY_TRANSFORM "atom_transform"
+#define VV_HK_MODIFY_GREYSCALE "modify_greyscale"
 #define VV_HK_ADD_REAGENT "addreagent"
 #define VV_HK_TRIGGER_EXPLOSION "explode"
 #define VV_HK_AUTO_RENAME "auto_rename"
 #define VV_HK_ADD_AI "add_ai"
+#define VV_HK_ADJUST_ANIMATIONS "adjust_animations"
 
 // /obj
 #define VV_HK_OSAY "osay"
@@ -110,6 +117,7 @@
 #define VV_HK_MARTIAL_ART "give_martial_art"
 #define VV_HK_GIVE_TRAUMA "give_trauma"
 #define VV_HK_CURE_TRAUMA "cure_trauma"
+#define VV_HK_SHOW_RELATIONS "show_relations"
 
 // /mob/living/carbon/human
 #define VV_HK_COPY_OUTFIT "copy_outfit"
@@ -119,3 +127,8 @@
 
 // misc
 #define VV_HK_SPACEVINE_PURGE "spacevine_purge"
+
+// Flags for debug_variable() that do little things to what we end up rendering
+
+/// ALWAYS render a reduced list, useful for fuckoff big datums that need to be condensed for the sake of client load
+#define VV_ALWAYS_CONTRACT_LIST (1<<0)

@@ -9,7 +9,7 @@
 /// Immediately recalc adjacent atmos turfs instead of queuing.
 #define CHANGETURF_RECALC_ADJACENT (1 << 5)
 
-#define IS_OPAQUE_TURF(turf) (turf.opacity) //https://github.com/tgstation/tgstation/pull/52881
+#define IS_OPAQUE_TURF(turf) (turf.directional_opacity == ALL_CARDINALS)
 
 //supposedly the fastest way to do this according to https://gist.github.com/Giacom/be635398926bb463b42a
 ///Returns a list of turf in a square
@@ -20,6 +20,22 @@ block( \
 )
 
 #define Z_TURFS(ZLEVEL) block(locate(1,1,ZLEVEL), locate(world.maxx, world.maxy, ZLEVEL))
+
+/// Returns a list of turfs similar to CORNER_BLOCK but with offsets
+#define CORNER_BLOCK_OFFSET(corner, width, height, offset_x, offset_y) ((block(corner.x + offset_x, corner.y + offset_y, corner.z, corner.x + (width - 1) + offset_x, corner.y + (height - 1) + offset_y, corner.z)))
+
+/// Returns a list of turfs in the rectangle specified by BOTTOM LEFT corner and height/width, checks for being outside the world border for you
+#define CORNER_BLOCK(corner, width, height) CORNER_BLOCK_OFFSET(corner, width, height, 0, 0)
+
+/// Returns an outline (neighboring turfs) of the given block
+#define CORNER_OUTLINE(corner, width, height) ( \
+	CORNER_BLOCK_OFFSET(corner, width + 2, 1, -1, -1) + \
+	CORNER_BLOCK_OFFSET(corner, width + 2, 1, -1, height) + \
+	CORNER_BLOCK_OFFSET(corner, 1, height, -1, 0) + \
+	CORNER_BLOCK_OFFSET(corner, 1, height, width, 0))
+
+/// Returns a list of around us
+#define TURF_NEIGHBORS(turf) (CORNER_BLOCK_OFFSET(turf, 3, 3, -1, -1) - turf)
 
 ///Returns all currently loaded turfs
 #define ALL_TURFS(...) block(locate(1, 1, 1), locate(world.maxx, world.maxy, world.maxz))
@@ -36,3 +52,25 @@ block( \
 #define TURF_BEING_WEATHERED (1<<4)
 /// Turf is currently queued in GLOB.SUNLIGHT_QUEUE_CORNER and should not be re-queued to avoid duplicates
 #define TURF_SUNLIGHT_QUEUED (1<<5)
+
+//water_height defines
+#define WATER_HEIGHT_ANKLE 1
+#define WATER_HEIGHT_SHALLOW 2
+#define WATER_HEIGHT_DEEP 3
+#define WATER_HEIGHT_FULL 4
+
+#define WATER_VOLUME_DRY 0
+#define WATER_VOLUME_NORMAL 1
+#define WATER_VOLUME_INFINITE 2
+
+#define MINIMUM_WATER_VOLUME 10
+
+/// Makes the set turf transparent
+#define ADD_TURF_TRANSPARENCY(modturf, source) \
+	if(!HAS_TRAIT(modturf, TURF_Z_TRANSPARENT_TRAIT)) { modturf.AddElement(/datum/element/turf_z_transparency) }; \
+	ADD_TRAIT(modturf, TURF_Z_TRANSPARENT_TRAIT, (source))
+
+/// Removes the transparency from the set turf
+#define REMOVE_TURF_TRANSPARENCY(modturf, source) \
+	REMOVE_TRAIT(modturf, TURF_Z_TRANSPARENT_TRAIT, (source)); \
+	if(!HAS_TRAIT(modturf, TURF_Z_TRANSPARENT_TRAIT)) { modturf.RemoveElement(/datum/element/turf_z_transparency) }

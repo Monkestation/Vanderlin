@@ -23,9 +23,9 @@
 			continue
 		if(!H.patron || !istype(H.patron, /datum/patron/inhumen/matthios))
 			continue
-		if(istype(H.mind?.assigned_role, /datum/job/bandit) || H.job == "Bandit")
+		if(istype(H.mind?.assigned_role, /datum/job/bandit) || H.job == ROLE_BANDIT)
 			continue
-		if(H.get_skill_level(/datum/skill/misc/stealing) < 2)
+		if(GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/stealing) < 2)
 			continue
 		return TRUE
 
@@ -39,9 +39,9 @@
 			continue
 		if(!human_mob.patron || !istype(human_mob.patron, /datum/patron/inhumen/matthios))
 			continue
-		if(istype(human_mob.mind?.assigned_role, /datum/job/bandit) || human_mob.job == "Bandit")
+		if(istype(human_mob.mind?.assigned_role, /datum/job/bandit) || human_mob.job == ROLE_BANDIT)
 			continue
-		if(human_mob.get_skill_level(/datum/skill/misc/stealing) < 2)
+		if(GET_MOB_SKILL_VALUE_OLD(human_mob, /datum/attribute/skill/misc/stealing) < 2)
 			continue
 		valid_targets += human_mob
 

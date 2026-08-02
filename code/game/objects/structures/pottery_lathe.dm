@@ -9,7 +9,7 @@
 
 /obj/item/natural/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay lump"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay lump"
 
 /obj/structure/pottery_lathe
 	name = "potter's lathe"
@@ -40,7 +40,7 @@
 	MA.color = initial(stored_clay.main_material.color)
 	. += MA
 
-/obj/structure/pottery_lathe/attackby(obj/item/I, mob/user, params)
+/obj/structure/pottery_lathe/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(!stored_clay)
 		if(istype(I, /obj/item/natural/clay))
@@ -60,7 +60,7 @@
 	. = ..()
 	start_spinning_pottery(user)
 
-/obj/structure/pottery_lathe/attack_hand_secondary(mob/user, params)
+/obj/structure/pottery_lathe/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -95,7 +95,7 @@
 /obj/structure/pottery_lathe/proc/choose_recipe(mob/user)
 	if(!length(recipes))
 		for(var/datum/pottery_recipe/recipe as anything in typesof(/datum/pottery_recipe))
-			if(is_abstract(recipe))
+			if(IS_ABSTRACT(recipe))
 				continue
 			recipes |= new recipe
 

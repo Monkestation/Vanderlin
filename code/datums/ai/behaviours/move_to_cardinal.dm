@@ -36,6 +36,7 @@
 	set_movement_target(controller, move_target)
 
 /datum/ai_behavior/move_to_cardinal/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+	. = ..()
 	var/atom/target = controller.blackboard[target_key]
 	if (QDELETED(target))
 		finish_action(controller = controller, succeeded = FALSE, target_key = target_key)

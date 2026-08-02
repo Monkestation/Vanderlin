@@ -27,7 +27,7 @@
 	new /obj/effect/temp_visual/arcyne_storm(victim)
 	playsound(victim, "genslash", 40, TRUE)
 	for(var/mob/living/L in victim.contents)
-		L.adjustBruteLoss(round(10 * attuned_strength))
+		L.adjustBruteLoss(round(7 * attuned_strength), damage_type = BCLASS_CUT)
 		to_chat(L, span_userdanger("I'm cut by an arcyne force!"))
 
 /obj/effect/temp_visual/arcyne_storm

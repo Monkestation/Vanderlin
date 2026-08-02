@@ -1,4 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bp" = (
+/turf/open/water/swamp/deep,
+/area/under/tomb/cave/wet)
 "cy" = (
 /obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/ruinedwood/spiral,
@@ -55,9 +58,6 @@
 /obj/structure/stairs/d,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"io" = (
-/turf/open/openspace,
-/area/under/tomb/indoors)
 "iy" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/statue/silver,
@@ -102,16 +102,10 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
-"oR" = (
-/turf/open/water/swamp/deep,
-/area/under/tomb/cave)
 "oT" = (
 /obj/structure/door/swing,
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
-"oW" = (
-/turf/open/openspace,
-/area/under/tomb/cave/wet)
 "px" = (
 /obj/structure/stairs,
 /turf/open/floor/tile,
@@ -153,6 +147,9 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"ro" = (
+/turf/open/openspace,
+/area/under/tomb/cave/wet)
 "rz" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
@@ -195,9 +192,6 @@
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"Be" = (
-/turf/open/water/swamp/deep,
-/area/under/tomb/cave/wet)
 "Cj" = (
 /obj/item/statue/steel,
 /turf/open/floor/tile,
@@ -223,10 +217,6 @@
 /obj/structure/door/swing,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"Fy" = (
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/water/swamp/deep,
-/area/under/tomb/cave)
 "FC" = (
 /turf/open/floor/dirt,
 /area/under/tomb/cave/wet)
@@ -262,6 +252,9 @@
 /obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"IY" = (
+/turf/open/water/swamp/deep,
+/area/under/tomb/cave)
 "JE" = (
 /turf/closed/wall/mineral/decowood/vert,
 /area/under/tomb/indoors)
@@ -293,6 +286,10 @@
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"MS" = (
+/mob/living/carbon/human/species/skeleton/npc/ambush,
+/turf/open/water/swamp/deep,
+/area/under/tomb/cave)
 "Nh" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/closet/crate/drawer/inn,
@@ -348,7 +345,10 @@
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt,
 /area/under/tomb/cave/wet)
-"Yt" = (
+"XC" = (
+/turf/open/openspace,
+/area/under/tomb/indoors)
+"Zb" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
@@ -421,139 +421,139 @@ hr
 (3,1,1) = {"
 hr
 FC
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
 FC
 hr
 "}
 (4,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 JE
 JE
 JE
 JE
 JE
-Be
-Be
+bp
+bp
 JE
 JE
 JE
 JE
 JE
 JE
-Be
+bp
 FC
 hr
 "}
 (5,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 kv
 kv
 jL
 Gm
 oT
-Be
-Be
+bp
+bp
 oT
 Gm
 jL
 kv
 kv
 JE
-Be
+bp
 FC
 hr
 "}
 (6,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 Gb
 kv
 kv
 Gm
 JE
-Be
-Be
+bp
+bp
 JE
 ZQ
 kv
 kv
 kv
 JE
-Be
+bp
 FC
 hr
 "}
 (7,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 mv
 kv
 kv
 Cj
 JE
-Be
-Be
+bp
+bp
 JE
 Gm
 kv
 Gb
 kv
 JE
-Be
+bp
 FC
 hr
 "}
 (8,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 Gm
 Gm
 Gm
 Gm
 JE
-Be
-Be
+bp
+bp
 JE
 Gm
 Gm
 Gm
 Gm
 JE
-Be
+bp
 FC
 hr
 "}
 (9,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 If
 JE
@@ -568,58 +568,58 @@ JE
 JE
 If
 JE
-Be
+bp
 FC
 hr
 "}
 (10,1,1) = {"
 FC
 FC
-Be
-Be
-Be
-Be
-Yt
-Be
+bp
+bp
+bp
+bp
+Zb
+bp
 Gm
 px
 JE
 Gm
-oR
-oR
-oR
-oR
-oR
-Be
+IY
+IY
+IY
+IY
+IY
+bp
 FC
 FC
 "}
 (11,1,1) = {"
 Cy
 FC
-Be
-Be
-Be
-Be
-Be
-Be
+bp
+bp
+bp
+bp
+bp
+bp
 Gm
 px
 JE
 Gm
-oR
-Fy
-oR
-oR
-oR
-Be
+IY
+MS
+IY
+IY
+IY
+bp
 FC
 TO
 "}
 (12,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 oT
 JE
@@ -634,139 +634,139 @@ JE
 JE
 oT
 JE
-Be
+bp
 FC
 hr
 "}
 (13,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 Gm
 Gm
 Gm
 Gm
 JE
-Be
-Be
+bp
+bp
 JE
 Gm
 Gm
 Gm
 Gm
 JE
-Be
+bp
 FC
 hr
 "}
 (14,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 mv
 kv
 jL
 Gm
 JE
-Be
-Be
+bp
+bp
 JE
 ZQ
 kv
 kv
 jL
 JE
-Be
+bp
 FC
 hr
 "}
 (15,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 kv
 kv
 jl
 Gm
 JE
-Be
-Be
+bp
+bp
 JE
 Gm
 jL
 kv
 jl
 JE
-Be
+bp
 FC
 hr
 "}
 (16,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 kv
 kv
 kv
 Gm
 If
-Be
-Be
+bp
+bp
 If
 Gm
 kv
 jl
 JN
 JE
-Be
+bp
 FC
 hr
 "}
 (17,1,1) = {"
 hr
 FC
-Be
+bp
 JE
 JE
 JE
 JE
 JE
 JE
-Be
-Be
+bp
+bp
 JE
 JE
 JE
 JE
 JE
 JE
-Be
+bp
 FC
 hr
 "}
 (18,1,1) = {"
 hr
 FC
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
-Be
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
+bp
 FC
 hr
 "}
@@ -839,30 +839,30 @@ hr
 "}
 (2,1,2) = {"
 hr
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
 hr
 "}
 (3,1,2) = {"
 hr
-oW
-oW
+ro
+ro
 WI
 WI
 WI
@@ -877,13 +877,13 @@ WI
 WI
 WI
 WI
-oW
-oW
+ro
+ro
 hr
 "}
 (4,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 jV
@@ -900,12 +900,12 @@ jV
 jV
 jV
 Iq
-oW
+ro
 hr
 "}
 (5,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 js
@@ -922,12 +922,12 @@ Pk
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (6,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 AD
@@ -944,12 +944,12 @@ rz
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (7,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 hU
@@ -966,12 +966,12 @@ rz
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (8,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 rz
@@ -988,12 +988,12 @@ rz
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (9,1,2) = {"
 ug
-oW
+ro
 Dh
 jV
 jV
@@ -1010,12 +1010,12 @@ hc
 jV
 jV
 Iq
-oW
+ro
 ug
 "}
 (10,1,2) = {"
 ug
-oW
+ro
 Dh
 Ii
 rz
@@ -1023,7 +1023,7 @@ rz
 rz
 rz
 rz
-io
+XC
 il
 rz
 hL
@@ -1032,12 +1032,12 @@ rz
 rz
 Ii
 Iq
-oW
+ro
 ug
 "}
 (11,1,2) = {"
 ug
-oW
+ro
 Dh
 Ii
 rz
@@ -1045,7 +1045,7 @@ rz
 rz
 rz
 rz
-io
+XC
 il
 rz
 rz
@@ -1054,12 +1054,12 @@ rz
 rz
 Ii
 Iq
-oW
+ro
 ug
 "}
 (12,1,2) = {"
 ug
-oW
+ro
 Dh
 jV
 jV
@@ -1076,12 +1076,12 @@ jX
 jV
 jV
 Iq
-oW
+ro
 ug
 "}
 (13,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 Px
@@ -1098,12 +1098,12 @@ rz
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (14,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 rz
@@ -1120,12 +1120,12 @@ rz
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (15,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 Nh
@@ -1142,12 +1142,12 @@ rz
 hL
 jV
 Iq
-oW
+ro
 hr
 "}
 (16,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 fo
@@ -1164,12 +1164,12 @@ rz
 rz
 jV
 Iq
-oW
+ro
 hr
 "}
 (17,1,2) = {"
 hr
-oW
+ro
 Dh
 jV
 jV
@@ -1186,13 +1186,13 @@ jV
 jV
 jV
 Iq
-oW
+ro
 hr
 "}
 (18,1,2) = {"
 hr
-oW
-oW
+ro
+ro
 Ha
 Ha
 Ha
@@ -1207,30 +1207,30 @@ Ha
 Ha
 Ha
 Ha
-oW
-oW
+ro
+ro
 hr
 "}
 (19,1,2) = {"
 hr
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
-oW
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
+ro
 hr
 "}
 (20,1,2) = {"

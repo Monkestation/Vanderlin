@@ -45,15 +45,17 @@
 #define HEAL_POSTIVE_DISEASES (1<<20)
 /// Restores hydration, hunger, etc.
 #define HEAL_ESSENTIALS (1<<21)
+/// Heals pain and shock
+#define HEAL_PAIN_SHOCK (1<<22)
 
 /// Combination flag to only heal the main damage types.
-#define HEAL_DAMAGE (HEAL_BRUTE|HEAL_BURN|HEAL_TOX|HEAL_OXY|HEAL_CLONE|HEAL_STAM)
+#define HEAL_DAMAGE (HEAL_BRUTE|HEAL_BURN|HEAL_TOX|HEAL_OXY|HEAL_CLONE|HEAL_STAM|HEAL_PAIN_SHOCK)
 /// Combination flag to only heal things messed up things about the mob's body itself.
 #define HEAL_BODY (HEAL_LIMBS|HEAL_ORGANS|HEAL_REFRESH_ORGANS|HEAL_WOUNDS|HEAL_TRAUMAS|HEAL_BLOOD|HEAL_TEMP|HEAL_ESSENTIALS)
 /// Combination flag to heal negative things affecting the mob.
 #define HEAL_AFFLICTIONS (HEAL_NEGATIVE_DISEASES|HEAL_NEGATIVE_MUTATIONS|HEAL_ALL_REAGENTS|HEAL_STATUS|HEAL_CC_STATUS)
 
 /// Full heal that isn't admin forced
-#define HEAL_ALL ~(HEAL_ADMIN|HEAL_RESTRAINTS)
+#define HEAL_ALL ~(HEAL_ADMIN|HEAL_RESTRAINTS|HEAL_ORGANS)
 /// Heals everything and is as strong as / is an admin heal
 #define ADMIN_HEAL_ALL ALL

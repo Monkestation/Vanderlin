@@ -82,7 +82,7 @@
 		torchy.turn_off()
 	..()
 
-/obj/machinery/light/fueled/lanternpost/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/lanternpost/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/flashlight/flare/torch))
 		var/obj/item/flashlight/flare/torch/LR = W
 		if(torchy)

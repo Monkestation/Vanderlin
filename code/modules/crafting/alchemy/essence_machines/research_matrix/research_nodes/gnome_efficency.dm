@@ -4,8 +4,8 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/machines/gnomes)
 	required_essences = list(
-		/datum/thaumaturgical_essence/life = 50,
-		/datum/thaumaturgical_essence/order = 25,
+		/datum/thaumaturgical_essence/life = 20,
+		/datum/thaumaturgical_essence/order = 10,
 	)
 	node_x = 420
 	node_y = 440
@@ -19,9 +19,9 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/gnome_efficency)
 	required_essences = list(
-		/datum/thaumaturgical_essence/life = 75,
-		/datum/thaumaturgical_essence/order = 40,
-		/datum/thaumaturgical_essence/void = 20,
+		/datum/thaumaturgical_essence/life = 30,
+		/datum/thaumaturgical_essence/order = 15,
+		/datum/thaumaturgical_essence/void = 10,
 	)
 	node_x = 440
 	node_y = 540
@@ -34,9 +34,9 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/gnome_efficency/two)
 	required_essences = list(
-		/datum/thaumaturgical_essence/life = 100,
-		/datum/thaumaturgical_essence/order = 60,
-		/datum/thaumaturgical_essence/crystal = 30,
+		/datum/thaumaturgical_essence/life = 40,
+		/datum/thaumaturgical_essence/order = 20,
+		/datum/thaumaturgical_essence/crystal = 15,
 	)
 	node_x = 520
 	node_y = 600

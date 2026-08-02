@@ -21,10 +21,10 @@
 /datum/component/simple_rotation/proc/AddSignals()
 	RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(RotateLeft))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(RotateRight))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(ExamineMessage))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(ExamineMessage))
 
 /datum/component/simple_rotation/proc/RemoveSignals()
-	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_ATOM_ATTACK_HAND_SECONDARY, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_ATOM_ATTACK_HAND_SECONDARY, COMSIG_ATOM_EXAMINE))
 
 /datum/component/simple_rotation/RegisterWithParent()
 	AddSignals()

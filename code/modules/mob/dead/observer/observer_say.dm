@@ -1,13 +1,11 @@
 /mob/dead/observer/check_emote(message, forced)
-	if(message == "*spin" || message == "*flip")
-		emote(copytext(message, length(message[1]) + 1), intentional = !forced)
-		return TRUE
+	return emote(copytext(message, length(message[1]) + 1), intentional = !forced, force_silence = TRUE)
 
 //Modified version of get_message_mods, removes the trimming, the only thing we care about here is admin channels
 /mob/dead/observer/get_message_mods(message, list/mods)
 	var/key = message[1]
 	if((key in GLOB.department_radio_prefixes) && length(message) > length(key) + 1 && !mods[RADIO_EXTENSION])
-		mods[RADIO_KEY] = lowertext(message[1 + length(key)])
+		mods[RADIO_KEY] = LOWER_TEXT(message[1 + length(key)])
 		mods[RADIO_EXTENSION] = GLOB.department_radio_keys[mods[RADIO_KEY]]
 	return message
 
@@ -31,10 +29,10 @@
 
 	. = say_dead(message)
 
-/mob/dead/observer/rogue/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+/mob/dead/observer/rogue/arcaneeye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	return
 
-/mob/dead/observer/rogue/say_dead(message)
+/mob/dead/observer/rogue/arcaneeye/say_dead(message)
 	return
 
 /mob/dead/observer/screye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
@@ -47,7 +45,7 @@
 	if (!message)
 		return
 
-	if (src.client)
+	if (client)
 		if(client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='boldwarning'>I cannot send IC messages (muted).</span>")
 			return
@@ -63,9 +61,8 @@
 	. = ..()
 	var/atom/movable/to_follow = speaker
 	var/link = FOLLOW_LINK(src, to_follow)
-	// Create map text prior to modifying message for goonchat
 	if(client?.prefs)
-		if(!(client?.prefs.toggles_maptext & DISABLE_RUNECHAT) && (client.prefs.see_chat_non_mob || ismob(speaker)))
+		if(!(client?.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT) && (client.prefs.read_preference(/datum/preference/toggle/see_chat_non_mob) || ismob(speaker)))
 			create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose the message, because it's scrambled by default
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)

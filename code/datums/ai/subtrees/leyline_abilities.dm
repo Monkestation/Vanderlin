@@ -29,7 +29,7 @@
 		for(var/mob/living/L in view(3, lycan))
 			if(L == lycan)
 				continue
-			if("leyline" in L.faction)
+			if(L.has_faction("leyline"))
 				continue
 			nearby_enemies++
 
@@ -137,7 +137,7 @@
 	new /obj/effect/temp_visual/gravpush(get_turf(lycan))
 
 	for(var/mob/living/L in view(3, lycan))
-		if((L == lycan) || ("leyline" in L.faction))
+		if((L == lycan) || L.has_faction("leyline"))
 			continue
 
 		var/dist = get_dist(lycan, L)

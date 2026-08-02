@@ -134,7 +134,7 @@
 	var/activate_sound
 	abstract_type = /obj/item/clothing/ring/active
 
-/obj/item/clothing/ring/active/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/ring/active/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -146,7 +146,7 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.visible_message("<span class='warning'>[user] twists the [src]!</span>")
 	if(activate_sound)
-		playsound(user, activate_sound, 100, FALSE, -1)
+		playsound(user, activate_sound, 50, FALSE, -1)
 	cooldowny = world.time
 	addtimer(CALLBACK(src, PROC_REF(demagicify)), activetime)
 	active = TRUE
@@ -183,13 +183,17 @@
 
 /obj/item/clothing/ring/active/nomag/activate(mob/user)
 	. = ..()
-	AddComponent(/datum/component/anti_magic, TRUE, FALSE, FALSE, ITEM_SLOT_RING, INFINITY, FALSE)
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE, INFINITY, ITEM_SLOT_RING)
 
 /obj/item/clothing/ring/active/nomag/demagicify()
 	. = ..()
-	var/datum/component/magcom = GetComponent(/datum/component/anti_magic)
-	if(magcom)
-		magcom.RemoveComponent()
+	qdel(GetComponent(/datum/component/anti_magic))
+
+/obj/item/clothing/ring/active/nomag/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Right click to activate the ring's ward, which provides temporary invulnerability against all direct magical attacks for thirty seconds.")
+	. += span_info("Wearers with unholy ailments are also rendered invulnerable to being sundered by silver weaponry, for the ward's duration.")
+	. += span_info("Once the ring's ward is exhausted, it'll require ten minutes to recharge enough power for another activation.")
 
 // ................... Ring of Protection ....................... (rare treasure, not for purchase)
 /obj/item/clothing/ring/gold/protection
@@ -258,7 +262,7 @@
 /obj/item/clothing/ring/silver/calm
 	name = "soothing ring"
 	desc = "A lightweight ring that feels entirely weightless, and easing to your mind as you place it upon a finger."
-	icon_state = "ring_calm"
+	icon_state = "s_newring_quartz"
 
 /obj/item/clothing/ring/silver/calm/equipped(mob/living/user, slot)
 	. = ..()
@@ -293,129 +297,6 @@
 	UnregisterSignal(wearer, COMSIG_MOB_UNEQUIPPED_ITEM)
 	wearer.remove_status_effect(/datum/status_effect/buff/noc)
 
-
-// ................... Ring of Burden ....................... (Gaffer's ring, there should only be one of these at one time)
-
-/obj/item/clothing/ring/gold/burden
-	name = "ring of burden"
-	icon_state = "ring_protection" //N/A change this to a real sprite after its made
-	sellprice = 0
-
-/obj/item/clothing/ring/gold/burden/Initialize()
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, type)
-
-/obj/item/clothing/ring/gold/burden/examine(mob/user)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BURDEN))
-		. += "An ancient ring made of pyrite amalgam, an engraved quote is hidden in the inner bridge; \"Heavy is the head that bows\""
-		user.add_stress(/datum/stress_event/ring_madness)
-	else
-		. += "A very old golden ring appointing its wearer as the Mercenary guild master, its strangely missing the crown for the centre stone"
-
-/obj/item/clothing/ring/gold/burden/attack_hand(mob/user)
-	if(is_gaffer_assistant_job(user.mind?.assigned_role))
-		to_chat(user, span_danger("It is not mine to have..."))
-		return
-	. = ..()
-	if(!user.mind)
-		return
-
-	if(HAS_TRAIT(user, TRAIT_BURDEN))
-		return TRUE
-
-	var/gaffed = alert(user, "Will you bear the burden? (Be the next Gaffer)", "YOUR DESTINY", "Yes", "No")
-	var/gaffed_time = world.time
-
-	if((gaffed == "No" || world.time > gaffed_time + 5 SECONDS) && user.is_holding(src))
-		user.dropItemToGround(src, force = TRUE)
-		to_chat(user, span_danger("With great effort, the ring slides off your palm to the floor below"))
-		return
-
-	if((gaffed == "Yes") && user.is_holding(src))
-		ADD_TRAIT(user, TRAIT_BURDEN, type)
-		user.equip_to_slot_if_possible(src, ITEM_SLOT_RING, FALSE, FALSE, TRUE, TRUE)
-		to_chat(user, span_danger("A constricting weight grows around your neck as you adorn the ring"))
-		return TRUE
-
-	else
-		return
-
-/obj/item/clothing/ring/gold/burden/on_mob_death(mob/living/user)
-	. = ..()
-	if(user.ckey)
-		addtimer(CALLBACK(src, PROC_REF(on_mob_death),user), 5 MINUTES)
-		return
-	user.dropItemToGround(src, force = TRUE)
-
-/obj/item/clothing/ring/gold/burden/dropped(mob/user, slot)
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(on_ring_drop),user), 5 MINUTES)
-	REMOVE_TRAIT (user, TRAIT_BURDEN, type)
-	addtimer(CALLBACK(src, PROC_REF(psstt)), rand(10,20) SECONDS)
-
-/obj/item/clothing/ring/gold/burden/proc/psstt()
-	if(!ismob(loc))
-		playsound(src, 'sound/vo/psst.ogg', 50)
-		addtimer(CALLBACK(src, PROC_REF(psstt)), rand(10,20) SECONDS)
-
-/obj/item/clothing/ring/gold/burden/proc/on_ring_drop(mob/user, slot)
-	if(ismob(loc))
-		return
-	visible_message(span_warning("[src] begins to twitch and shake violently, before crumbling into ash"))
-	new /obj/item/fertilizer/ash(loc)
-	qdel(src)
-
-/obj/item/clothing/ring/gold/burden/equipped(mob/user, slot)
-	. = ..()
-	if((slot & ITEM_SLOT_RING) && istype(user)) //this will hopefully be a natural HEADEATER tutorial when HEADEATER is a proper thing
-		//say("good choice") as much as I love the aesthetic of the ring speech bubble being in the inventory screen, cant make it whisper like this
-		var/message = pick("New...bearer...",
-			"The...Guild...",
-			"Feed...it...",
-			"I...see...you...",
-			"Serve...me...")
-		message = span_danger(message)
-		to_chat(user, "The ring whispers, [message]")
-		return
-
-	to_chat(user, span_danger("The moment the [src] is in your grasp, it fuses with the skin of your palm, you can't let it go without choosing your destiny first."))
-
-/obj/item/clothing/ring/gold/burden/Destroy()
-	SEND_GLOBAL_SIGNAL(COMSIG_GAFFER_RING_DESTROYED, src)
-	. = ..()
-
-
-
-/obj/item/clothing/ring/dragon_ring
-	name = "dragon ring"
-	icon_state = "ring_g" // supposed to have it's own sprite but I'm lazy asf
-	desc = "Carrying the likeness of a dragon, this glorious ring hums with a subtle energy."
-	sellprice = 666
-	var/active_item
-
-/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user, slot)
-	. = ..()
-	if(active_item)
-		return
-	else if(slot & ITEM_SLOT_RING)
-		active_item = TRUE
-		to_chat(user, span_notice("Here be dragons."))
-		user.change_stat(STATKEY_STR, 2)
-		user.change_stat(STATKEY_CON, 2)
-		user.change_stat(STATKEY_END, 2)
-	return
-
-/obj/item/clothing/ring/dragon_ring/dropped(mob/living/user)
-	..()
-	if(active_item)
-		to_chat(user, span_notice("Gone is thy hoard."))
-		user.change_stat(STATKEY_STR, -2)
-		user.change_stat(STATKEY_CON, -2)
-		user.change_stat(STATKEY_END, -2)
-		active_item = FALSE
-	return
-
 /obj/item/clothing/ring/signet
 	name = "Signet Ring"
 	name = "signet ring"
@@ -426,26 +307,38 @@
 	sellprice = 135
 	sellprice = 135
 	var/tallowed = FALSE
+	var/tallow_color = "red"
 
 /obj/item/clothing/ring/signet/silver
 	name = "silver signet ring"
+	examine_name = "silver ring"
 	icon_state = "signet_silver"
 	desc = "A ring of blessed silver, bearing the Archbishop's symbol. By dipping it in melted redtallow, it can seal writs of religious importance."
 	sellprice = 90
 
-/obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/ring/signet/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(tallowed)
-		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")
+		if(tgui_alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", list("Yes", "No")) != "NO")
 			tallowed = FALSE
 			update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/clothing/ring/signet/update_icon_state()
 	. = ..()
 	if(tallowed)
-		icon_state = "[icon_state]_stamp"
+		icon_state = "[initial(icon_state)]_[tallow_color]_stamp"
 	else
 		icon_state = initial(icon_state)
+
+/obj/item/clothing/ring/signet/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Certain letters can be folded and stamped with the ring, which proves minor financial benefits.")
+	. += span_info("Pressed upon a quest scroll by a Steward, Clerk, or Grand Duke, the ring stamps it LEVY EXEMPT - waiving the Crown's Contract Levy on its reward.")
+
 
 // ................... The Feldsher's ring .......................
 
@@ -472,3 +365,46 @@
 	else
 		. += "An uncomfortably heavy ring of thaumic iron. Specifically made for apothecaries upon graduation. \n \
 		This gives them the right to both extract and manipulate lux, so long as they follow Pestra's teachings."
+
+/obj/item/clothing/ring/courtagent_ring
+	name = "Finger's Crown"
+	icon_state = "ring_s_agent"
+	desc = "A silver signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
+	examine_name = /obj/item/clothing/ring/silver::name
+	base_icon_state = "ring_s"
+	abstract_type = /obj/item/clothing/ring/courtagent_ring
+	var/metal_adjective = "silver"
+
+/obj/item/clothing/ring/courtagent_ring/silver/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/ring/courtagent_ring/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
+	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
+
+/obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)
+	if(isobserver(user) || HAS_TRAIT(user, TRAIT_COURTAGENT) || get_dist(user, src) < 1)
+		return ..()
+	return ma2html(mutable_appearance(icon, base_icon_state), user)
+
+/obj/item/clothing/ring/courtagent_ring/gold
+	icon_state = "ring_g_agent"
+	examine_name = /obj/item/clothing/ring/gold::name
+	base_icon_state = "ring_g"
+	metal_adjective = "golden"
+
+/obj/item/clothing/ring/courtagent_ring/blacksteel
+	icon_state = "ring_bs_agent"
+	examine_name = /obj/item/clothing/ring/blacksteel::name
+	base_icon_state = "ring_bs"
+	metal_adjective = "blacksteel"
+
+/obj/item/clothing/ring/courtagent_ring/bronze
+	icon_state = "ring_b_agent"
+	examine_name = /obj/item/clothing/ring/bronze::name
+	base_icon_state = "ring_b"
+	metal_adjective = "bronze"

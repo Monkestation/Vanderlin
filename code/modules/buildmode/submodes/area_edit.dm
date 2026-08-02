@@ -4,7 +4,7 @@
 	var/image/areaimage
 
 /datum/buildmode_mode/area_edit/New()
-	areaimage = image('icons/turf/areas.dmi', null, "yellow")
+	areaimage = image('icons/turf/areas/areas.dmi', null, "yellow")
 	..()
 
 /datum/buildmode_mode/area_edit/enter_mode(datum/buildmode/BM)
@@ -38,8 +38,7 @@
 		storedarea.name = areaname
 		areaimage.loc = storedarea // color our area
 
-/datum/buildmode_mode/area_edit/handle_click(client/c, params, object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/area_edit/handle_click(client/c, list/modifiers, object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 

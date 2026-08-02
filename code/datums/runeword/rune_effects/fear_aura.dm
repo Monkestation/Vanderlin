@@ -35,7 +35,7 @@
 		return
 	if(!istype(attacker))
 		return
-	var/odds = reflect * 10 / attacker.STAINT
+	var/odds = reflect * 10 / GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_INTELLIGENCE)
 	if(!prob(odds))
 		return
 

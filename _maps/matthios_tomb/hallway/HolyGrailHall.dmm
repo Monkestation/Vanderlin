@@ -46,6 +46,9 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
+"dr" = (
+/turf/open/water/clean,
+/area/under/tomb/cave)
 "dK" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/grass,
@@ -154,9 +157,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
-"or" = (
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave)
 "oF" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
@@ -216,9 +216,6 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
-"uc" = (
-/turf/open/openspace,
-/area/under/tomb)
 "uC" = (
 /obj/structure/flora/grass,
 /obj/effect/decal/cleanable/blood,
@@ -318,6 +315,9 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
+"FJ" = (
+/turf/open/openspace,
+/area/under/tomb)
 "Ga" = (
 /obj/structure/flora/ausbushes/sunnybush,
 /turf/open/floor/grass,
@@ -692,7 +692,7 @@ kv
 "}
 (8,1,1) = {"
 vf
-or
+dr
 Wy
 Wf
 Lb
@@ -746,7 +746,7 @@ kv
 "}
 (10,1,1) = {"
 vf
-or
+dr
 id
 KW
 vf
@@ -774,7 +774,7 @@ kv
 (11,1,1) = {"
 vf
 vf
-or
+dr
 vf
 vf
 vf
@@ -927,9 +927,9 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -953,11 +953,11 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 "}
@@ -980,10 +980,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1008,9 +1008,9 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1036,9 +1036,9 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
+FJ
+FJ
+FJ
 rK
 rK
 "}
@@ -1062,10 +1062,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 "}
@@ -1088,10 +1088,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1115,10 +1115,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1141,9 +1141,9 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1168,10 +1168,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1196,10 +1196,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1223,10 +1223,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 rK
@@ -1251,10 +1251,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 "}
@@ -1278,10 +1278,10 @@ rK
 rK
 rK
 rK
-uc
-uc
-uc
-uc
+FJ
+FJ
+FJ
+FJ
 rK
 rK
 "}
@@ -1306,8 +1306,8 @@ rK
 rK
 rK
 rK
-uc
-uc
+FJ
+FJ
 rK
 rK
 rK

@@ -8,32 +8,41 @@
 // the label will not be removed
 export const file_labels = {
 	'github': {
-		filepaths: ['.github'],
+		filepaths: ['.github/'],
 	},
 	'SQL': {
-		filepaths: ['SQL'],
+		filepaths: ['SQL/'],
 	},
 	'mapping': {
-		filepaths: ['_maps'],
+		filepaths: ['_maps/'],
+		file_extensions: [".dmm"],
 	},
 	'tooling': {
-		filepaths: ['tools'],
+		filepaths: ['tools/'],
 	},
 	'config': {
-		filepaths: ['config', 'code/controllers/configuration/entries'],
+		filepaths: ['config/', 'code/controllers/configuration/entries/'],
+		add_only: true,
 	},
 	'sprites': {
-		filepaths: ['icons', 'icons/roguetown'],
+		filepaths: ['icons/'],
+		file_extensions: [".dmi"],
+		add_only: true,
 	},
 	'sound': {
-		filepaths: ['sound'],
+		filepaths: ['sound/'],
+		file_extensions: [".ogg"],
+		add_only: true,
 	},
 	'music': {
-		filepaths: ['sound/music'],
+		filepaths: ['sound/music/'],
+		file_extensions: [".ogg"],
+		add_only: true,
 	},
-	// 'UI': {
-	// 	filepaths: ['tgui'],
-	// },
+	'UI': {
+		filepaths: ['tgui/'],
+		add_only: true,
+	},
 }
 
 // Title Labels

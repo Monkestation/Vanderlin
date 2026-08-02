@@ -16,15 +16,15 @@
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE // Made of leather
 	color = CLOTHING_LINEN
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_PADDED
 	prevent_crits = MINOR_CRITICALS
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/neck/leather/good
 	max_integrity = INTEGRITY_WORST
 
 /obj/item/clothing/neck/keffiyeh/AdjustClothes(mob/user)

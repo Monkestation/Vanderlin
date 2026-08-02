@@ -10,6 +10,7 @@
 	var/list/bandits = list()
 	var/list/harlequins = list()
 	var/list/overlords = list()
+	var/list/wretches = list()
 
 	var/cult_ascended = FALSE
 	var/head_rebel_decree = FALSE
@@ -60,7 +61,7 @@
 	var/lord_dead = FALSE
 	for(var/mob/living/carbon/human/H in GLOB.human_list)
 		if(H.mind)
-			if(H.job == "Monarch")
+			if(H.job == JOB_MONARCH)
 				lord_found = TRUE
 				if(H.stat == DEAD)
 					lord_dead = TRUE
@@ -73,7 +74,8 @@
 			SSticker.missing_lord_time = world.time
 		if(world.time > SSticker.missing_lord_time + 10 MINUTES)
 			SSticker.missing_lord_time = world.time
-			addomen(OMEN_NOLORD)
+			if(!SSticker.vote_started)
+				addomen(OMEN_NOLORD)
 		return FALSE
 	else
 		return TRUE

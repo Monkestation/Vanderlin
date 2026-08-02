@@ -6,7 +6,7 @@
 	var/moving = FALSE
 	var/icon/movement
 
-/obj/abstract/visual_ui_element/hoverable/movable/AltClick(mob/user) // Alt+Click defaults to reset the offset
+/obj/abstract/visual_ui_element/hoverable/movable/AltClick(mob/user, list/modifiers) // Alt+Click defaults to reset the offset
 	reset_loc()
 
 /obj/abstract/visual_ui_element/hoverable/movable/MouseDown(location, control, params)

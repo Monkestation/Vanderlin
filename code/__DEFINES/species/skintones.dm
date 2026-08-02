@@ -32,42 +32,7 @@
 #define SKIN_COLOR_ARACHNID_ICHOR "2F2F38" //Black-blue
 #define SKIN_COLOR_GLOOMHAVEN "897489" //Pink
 
-//ELF SKIN TONES
-#define SKIN_COLOR_SNOW_ELF "fff0e9" //Pale as SHIT!
-#define SKIN_COLOR_PLAIN_ELF "fcccb3" //White 2
-#define SKIN_COLOR_MOUNTAIN_ELF "edc6b3" //White 3
-#define SKIN_COLOR_COASTAL_ELF "e2b9a3" //White 4
-#define SKIN_COLOR_WOOD_ELF "c9a893" //Mediterranean 1
-#define SKIN_COLOR_SEA_ELF "ba9882" //Mediterranean 2
-#define SKIN_COLOR_JUNGLE_ELF "ac8369" //Latin 2
-#define SKIN_COLOR_SAVANNAH_ELF "9c6f52" //Middle-east 1
-#define SKIN_COLOR_DESERT_ELF "845a3a" // Middle-east 2
-#define SKIN_COLOR_SAND_ELF "5d4c41" //Black 1
-#define SKIN_COLOR_CRIMSON_ELF "4e3729" //Black 2
-#define SKIN_COLOR_BAYOU_ELF "7b4f42" //Native American 1
-#define SKIN_COLOR_TAIGA_ELF "734c37" //Native American 2
-#define SKIN_COLOR_ARCHIPELAGO_ELF "84674b" //Polynesian
-#define SKIN_COLOR_VOLCANO_ELF "3a1e22" //Melanesian
-
-//HALF ELF SKIN TONES
-#define SKIN_COLOR_TIMBER_GRONN "ffe0d1" //Pale
-#define SKIN_COLOR_SOLAR_HUE "fcccb3" //White
-#define SKIN_COLOR_WALNUT_STINE "edc6b3" //White
-#define SKIN_COLOR_AMBER_STAINED "e2b9a3" //White
-#define SKIN_COLOR_REDWOOD_ROOTED "c9a893" //Mediterranean 1
-#define SKIN_COLOR_DRIFTED_WOOD "ba9882" //Mediterranean 2
-#define SKIN_COLOR_VINE_WRAPPED "ac8369" //Latin 2
-#define SKIN_COLOR_JOSHUA_ALIGNED "9c6f52" //Middle-east 1
-#define SKIN_COLOR_ACACIA_CROSSED "845a3a" //Middle-east 2
-#define SKIN_COLOR_ARID_BIRTHED "5a4a41" //Black
-#define SKIN_COLOR_SAGE_BLOOMED "4e3729" //Black 2
-#define SKIN_COLOR_MANGROVE_CRADLED "7b4f42" //Native American 1
-#define SKIN_COLOR_TUNDRA_KISSED "734c37" //Native American 2
-#define SKIN_COLOR_OCEAN_BORN "84674b" //Polynesian
-#define SKIN_COLOR_BASALT_BIRTHED "3a1e22" //Melanesian
-
 //HALF DROW SKIN TONES
-#define SKIN_COLOR_ZIZO_CURSED "fff0e9" //Pale as SHIT
 #define SKIN_COLOUR_PARASITE_TAINTED "a191a1" //Light purple
 #define SKIN_COLOR_MUSHROOM_MINDED "897489" //Mid purple
 #define SKIN_COLOR_CAVE_ATTUNED "5f5f70" // Dark purple

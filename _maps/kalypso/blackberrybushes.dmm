@@ -4,7 +4,7 @@
 /area/template_noop)
 "b" = (
 /obj/structure/flora/grass/herb/random,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "k" = (
 /turf/open/floor/grass,
@@ -26,7 +26,7 @@
 /turf/open/floor/grass,
 /area/template_noop)
 "I" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "P" = (
 /turf/open/floor/dirt,

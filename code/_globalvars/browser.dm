@@ -1,1 +1,1 @@
-GLOBAL_DATUM(changelog_browser, /datum/changelog)
+GLOBAL_DATUM(changelog_tgui, /datum/changelog)

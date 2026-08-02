@@ -45,8 +45,8 @@
 	var/datum/objective/personal/torture/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
 
-	chosen_one.verbs |= /mob/living/carbon/human/proc/torture_victim
-	chosen_one.verbs |= /mob/living/carbon/human/proc/faith_test
+	add_verb(chosen_one, /mob/living/carbon/human/proc/torture_victim)
+	add_verb(chosen_one, /mob/living/carbon/human/proc/faith_test)
 
 	bordered_message(chosen_one, list(
 		span_userdanger("YOU ARE ZIZO'S CHOSEN!"),

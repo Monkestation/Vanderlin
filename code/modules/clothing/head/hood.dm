@@ -10,7 +10,7 @@
 	connectedc = null
 	return ..()
 
-/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -45,8 +45,10 @@
 	var/default_hidden = null
 
 	body_parts_covered = NECK
+	var/hooded_body_parts_covered = HEAD_EXCEPT_FACE | NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -89,7 +91,7 @@
 			if(toggle_icon_state)
 				icon_state = "[initial(icon_state)]_t"
 			flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-			body_parts_covered = NECK|HAIR|EARS|HEAD
+			body_parts_covered = hooded_body_parts_covered
 			if(ishuman(user))
 				var/mob/living/carbon/H = user
 				H.update_inv_head()
@@ -102,6 +104,7 @@
 /obj/item/clothing/head/roguehood/ResetAdjust(mob/user)
 	. = ..()
 	flags_inv = default_hidden
+	body_parts_covered = initial(body_parts_covered)
 	if(iscarbon(user))
 		var/mob/living/carbon/H = user
 		H.update_inv_head()
@@ -136,7 +139,7 @@
 	icon = 'icons/roguetown/clothing/head.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi' //Overrides slot icon behavior
 	body_parts_covered = NECK
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/head/padded/bad
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	max_integrity = 100
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
@@ -174,7 +177,55 @@
 	Protects from the eventual stabbing, but not much more."
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
-	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
-	flags_inv = HIDEFACE
-	armor = ARMOR_LEATHER
+	prevent_crits = MINOR_CRITICALS
+	armor_type = /datum/armor/leather
 	blocksound = SOFTUNDERHIT
+	item_weight = 145 GRAMS
+
+/obj/item/clothing/head/roguehood/leather/advanced
+	name = "hardened leather hood"
+	desc = "A simple if foreboding hood made out of expertly treated leather. Worn more by those venturing out into the wilds, rather than street thugs and honest yeoman."
+	max_integrity = INTEGRITY_STRONG
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor_type = /datum/armor/head/leather/advanced
+
+/obj/item/clothing/head/roguehood/leather/masterwork
+	name = "masterwork leather hood"
+	desc = "A simple if foreboding hood made out of masterfully treated and tanned leather. Worn by veteran hunters and adventurers venturing out into the wilds, this hood will keep out most anything, besides death, and fire."
+	max_integrity = INTEGRITY_STRONG + 100
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = ALL_EXCEPT_STAB
+	armor_type = /datum/armor/head/leather/master
+
+/obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+/obj/item/clothing/head/roguehood/studded
+	name = "studded hood"
+	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however."
+	icon_state = "studhood"
+	item_state = "studhood"
+	body_parts_covered = NECK | HEAD | HAIR
+	slot_flags = ITEM_SLOT_HEAD
+	flags_inv = HIDEEARS|HIDEHAIR
+	blocksound = SOFTHIT
+	armor_type = /datum/armor/leather
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	block2add = null
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+
+	color = CLOTHING_PEASANT_BROWN
+
+/obj/item/clothing/head/roguehood/studded/retinue //For skirmisher
+	name = "guard studded hood"
+	desc = "A padded hood splinted across creating a cocoon for whoever wears it - won't protect your face however. This one bears the heraldry of the local lord."
+	detail_tag = "_detail"
+	color = CLOTHING_MAGE_BLUE
+	detail_color = CLOTHING_WHITE

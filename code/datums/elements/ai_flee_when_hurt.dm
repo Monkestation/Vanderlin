@@ -3,7 +3,7 @@
  */
 /datum/element/ai_flee_while_injured
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	/// Health value to end fleeing if at or above
 	var/stop_fleeing_at
 	/// Health value to start fleeing if at or below

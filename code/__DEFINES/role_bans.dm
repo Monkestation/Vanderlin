@@ -4,6 +4,8 @@
 #define BAN_MISC_PUNISHMENT_CURSE "PunishmentCurse"
 #define BAN_MISC_LUNATIC "Lunatic"
 #define BAN_MISC_LEPROSY "Leprosy"
+/// Bans the ckey from publishing books, paintings, and other persistent media
+#define BAN_MISC_PUBLISH "Publishing/Uploading"
 #define BAN_MISC_OOC "OOC"
 #define BAN_MISC_OOCPRONOUNS "OOC Pronouns"
 #define BAN_MISC_DEADCHAT "Deadchat"
@@ -13,6 +15,7 @@
 	BAN_MISC_RESPAWN,\
 	BAN_MISC_PUNISHMENT_CURSE,\
 	BAN_MISC_LEPROSY,\
+	BAN_MISC_PUBLISH,\
 	BAN_MISC_LUNATIC,\
 	BAN_MISC_OOC,\
 	BAN_MISC_OOCPRONOUNS,\
@@ -24,13 +27,14 @@
 	ROLE_MANIAC,\
 	ROLE_WEREWOLF,\
 	ROLE_VAMPIRE,\
-	ROLE_NBEAST,\
 	ROLE_BANDIT,\
 	ROLE_PREBEL,\
 	ROLE_ASPIRANT,\
 	ROLE_ZIZOIDCULTIST,\
 	ROLE_LICH,\
 	ROLE_HARLEQUINN, \
+	ROLE_ZOMBIE,\
+	ROLE_NECRO_SKELETON,\
 )
 
 #define ALL_PRESET_TRAIT_BANS list(,\

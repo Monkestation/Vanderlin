@@ -6,8 +6,8 @@
 	invocation_type = INVOCATION_WHISPER
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/dendor)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	spell_cost = 15
 	item_duration = 1 MINUTES
 	cooldown_time = 4 MINUTES
@@ -27,7 +27,7 @@
 		return
 	if(!iscarbon(owner))
 		if(feedback)
-			owner.balloon_alert(owner, "Only mortals may use the briar claw!")
+			owner.balloon_alert(owner, "only mortals may use the briar claw!")
 		return FALSE
 
 /datum/action/cooldown/spell/undirected/conjure_item/briar_claw/before_cast(atom/cast_on)
@@ -47,11 +47,11 @@
 	parent_type = /obj/item/weapon/werewolf_claw
 	name = "briar claw"
 	desc = "A volf's claw."
-	force = 15
-	wdefense = 1
+	force = DAMAGE_KATAR
+	wdefense = MEDIOCRE_PARRY
 	armor_penetration = 7
 	max_blade_int = 700
-	max_integrity = 700
+	max_integrity = INTEGRITY_STRONGEST + 200
 
 /obj/item/weapon/briar_claw/Initialize()
 	. = ..()

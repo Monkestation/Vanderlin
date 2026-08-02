@@ -15,27 +15,26 @@
 	to_chat(c, "<span class='notice'>***********************************************************</span>")
 
 /datum/buildmode_mode/boom/change_settings(client/c)
-	devastation = input(c, "Range of total devastation. -1 to none", text("Input")) as num|null
+	devastation = input(c, "Range of total devastation. -1 to none", "Input") as num|null
 	if(devastation == null)
 		devastation = -1
-	heavy = input(c, "Range of heavy impact. -1 to none", text("Input")) as num|null
+	heavy = input(c, "Range of heavy impact. -1 to none", "Input") as num|null
 	if(heavy == null)
 		heavy = -1
-	light = input(c, "Range of light impact. -1 to none", text("Input")) as num|null
+	light = input(c, "Range of light impact. -1 to none", "Input") as num|null
 	if(light == null)
 		light = -1
-	flash = input(c, "Range of flash. -1 to none", text("Input")) as num|null
+	flash = input(c, "Range of flash. -1 to none", "Input") as num|null
 	if(flash == null)
 		flash = -1
-	flames = input(c, "Range of flames. -1 to none", text("Input")) as num|null
+	flames = input(c, "Range of flames. -1 to none", "Input") as num|null
 	if(flames == null)
 		flames = -1
-	hotspots = input(c, "Range of burning hotspots. -1 to none", text("Input")) as num|null
+	hotspots = input(c, "Range of burning hotspots. -1 to none", "Input") as num|null
 	if(hotspots == null)
 		hotspots = -1
 
-/datum/buildmode_mode/boom/handle_click(client/c, params, obj/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/boom/handle_click(client/c, list/modifiers, obj/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 
 	if(left_click)

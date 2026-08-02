@@ -1,7 +1,7 @@
 
 /datum/antagonist/prisoner
-	name = "Prisoner"
-	antagpanel_category = "Prisoner"
+	name = JOB_PRISONER
+	antagpanel_category = JOB_PRISONER
 	roundend_category = "Prisoners"
 	show_name_in_check_antagonists = TRUE
 	increase_votepwr = FALSE

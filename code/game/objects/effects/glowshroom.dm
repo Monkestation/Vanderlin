@@ -4,7 +4,7 @@
 	name = "kneestingers"
 	desc = "They're said to glow with Dendor's wrath."
 	anchored = TRUE
-	opacity = 0
+	opacity = FALSE
 	density = FALSE
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "glowshroom1" //replaced in New
@@ -34,25 +34,26 @@
 		var/mob/living/L = AM
 		if(L.z == z)
 			if(!HAS_TRAIT(L, TRAIT_KNEESTINGER_IMMUNITY))
-				if(L.electrocute_act(30, src))
+				take_damage(15, BRUTE)
+				if(L.electrocute_act(20, src))
 					L.emote("painscream")
 					L.update_sneak_invis(TRUE)
-					L.consider_ambush()
+					L.consider_ambush(always = TRUE)
 					if(L.throwing)
 						L.throwing.finalize(FALSE)
 	. = ..()
 
-/obj/structure/kneestingers/attackby(obj/item/W, mob/user, params)
+/obj/structure/kneestingers/attackby(obj/item/W, mob/user, list/modifiers)
 	if(isliving(user) && W && user.z == z)
 		if(W.flags_1 & CONDUCT_1)
 			var/mob/living/L = user
-			if(L.electrocute_act(30, src)) // The kneestingers will let you pass if you worship dendor, but they won't take your stupid ass hitting them.
+			if(L.electrocute_act(20, src)) // The kneestingers will let you pass if you worship dendor, but they won't take your stupid ass hitting them.
 				L.emote("painscream")
-				L.consider_ambush()
+				L.consider_ambush(always = TRUE)
 				if(L.throwing)
 					L.throwing.finalize(FALSE)
 				return FALSE
-	..()
+	return ..()
 
 /obj/structure/kneestingers/Initialize(mapload, obj/item/neuFarm/seed/newseed, mutate_stats)
 	. = ..()

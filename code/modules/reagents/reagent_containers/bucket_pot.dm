@@ -1,11 +1,9 @@
 /obj/item/reagent_containers/glass/bucket
-	name = "bugged bucket please report to mappers"
+	name = "bucket or pot"
 	desc = ""
 	icon = 'icons/roguetown/items/misc.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
-	icon_state = "woodbucket"
-	item_state = "woodbucket"
 	fill_icon_thresholds = list(0, 50, 100)
 	reagent_flags = OPENCONTAINER
 	max_integrity = 300
@@ -21,29 +19,42 @@
 	. = ..()
 	reagents.flags = initial(reagent_flags)
 
-/obj/item/reagent_containers/glass/bucket/attackby(obj/item/I, mob/user, params)
-	..()
-	if(istype(I, /obj/item/reagent_containers/powder/salt))
-		if(!reagents.has_reagent(/datum/reagent/consumable/milk, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
-			to_chat(user, span_danger("Not enough milk."))
-			return
-		to_chat(user, span_danger("Adding salt to the milk."))
-		playsound(src, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		if(do_after(user,2 SECONDS, src))
-			if(reagents.has_reagent(/datum/reagent/consumable/milk, 15))
-				reagents.remove_reagent(/datum/reagent/consumable/milk, 15)
-				reagents.add_reagent(/datum/reagent/consumable/milk/salted, 15)
-			if(reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
-				reagents.remove_reagent(/datum/reagent/consumable/milk/gote, 15)
-				reagents.add_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
-			qdel(I)
+/obj/item/reagent_containers/glass/bucket/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/reagent_containers/powder/salt))
+		return ..()
+
+	if(!reagents?.total_volume)
+		return NONE
+
+	if(!reagents.has_reagent(/datum/reagent/consumable/milk, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
+		return NONE
+
+	to_chat(user, span_danger("Adding salt to the milk."))
+	playsound(src, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
+
+	if(!do_after(user, 2 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	if(reagents.has_reagent(/datum/reagent/consumable/milk, 15))
+		reagents.remove_reagent(/datum/reagent/consumable/milk, 15)
+		reagents.add_reagent(/datum/reagent/consumable/milk/salted, 15)
+
+	if(reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
+		reagents.remove_reagent(/datum/reagent/consumable/milk/gote, 15)
+		reagents.add_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
+
+	qdel(tool)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/glass/bucket/wooden
 	name = "bucket"
 	fill_icon_state = "bucket"
+	icon_state = "woodbucket"
+	item_state = "woodbucket"
 	force = 5
 	throwforce = 10
-	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 50)
+	armor_type = /datum/armor/bucket
 	resistance_flags = FLAMMABLE
 	dropshrink = 0.8
 	slot_flags = null
@@ -68,9 +79,12 @@
 	desc = "The peasants friend, when filled with boiling water it will turn the driest oats to filling oatmeal."
 	icon = 'icons/roguetown/items/cooking.dmi'
 	icon_state = "pote"
+	item_state = "pot"
 	fill_icon_state = "pote"
 	force = 10
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
+	grid_width = 96
+	grid_height = 96
 	melting_material = /datum/material/iron
 	melt_amount = 80
 	var/processing_amount = 0 ///we use this to "reserve" reagents
@@ -80,7 +94,7 @@
 	. = ..()
 	if(!length(recipe_list))
 		for(var/datum/container_craft/recipe as anything in subtypesof(/datum/container_craft/cooking))
-			if(!is_abstract(recipe))
+			if(!IS_ABSTRACT(recipe))
 				recipe_list += recipe
 
 	AddComponent(/datum/component/storage/concrete/grid/food/cooking/pot)
@@ -95,14 +109,24 @@
 	icon_state = "pote_stone"
 	melting_material = null
 
-/obj/item/reagent_containers/glass/bucket/pot/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/reagent_containers/glass/bowl))
-		to_chat(user, "<span class='notice'>Filling the bowl...</span>")
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 70, FALSE)
-		if(do_after(user, 2 SECONDS, src))
-			reagents.trans_to(I, reagents.total_volume)
-		return TRUE
-	return ..()
+/obj/item/reagent_containers/glass/bucket/pot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/reagent_containers/glass/bowl))
+		return ..()
+
+	if(tool.reagents?.holder_full())
+		balloon_alert(user, "the [tool] is full!")
+		return ITEM_INTERACT_BLOCKING
+
+	balloon_alert(user, "filling [tool].")
+
+	playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 70, FALSE)
+
+	if(!do_after(user, 2 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	reagents.trans_to(tool, reagents.total_volume)
+
+	return ITEM_INTERACT_SKIP_TO_ATTACK
 
 /obj/item/reagent_containers/glass/bucket/pot/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	if(reagents.total_volume > 5)

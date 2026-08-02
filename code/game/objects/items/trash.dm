@@ -10,29 +10,21 @@
 
 /obj/item/trash/Initialize(mapload)
 	var/turf/T = get_turf(src)
-	if(T && is_station_level(T.z))
+	if(T && is_town_level(T.z))
 		SSblackbox.record_feedback("tally", "station_mess_created", 1, name)
 	return ..()
 
 /obj/item/trash/Destroy()
 	var/turf/T = get_turf(src)
-	if(T && is_station_level(T.z))
+	if(T && is_town_level(T.z))
 		SSblackbox.record_feedback("tally", "station_mess_destroyed", 1, name)
 	return ..()
-
-/obj/item/trash/plate
-	name = "plate"
-	icon_state = "plate"
-	resistance_flags = NONE
-
-/obj/item/trash/pistachios
-	name = "pistachios pack"
-	icon_state = "pistachios_pack"
 
 /obj/item/trash/candle
 	name = "candle"
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle4"
+	item_weight = 23 GRAMS
 
-/obj/item/trash/attack(mob/M, mob/living/user)
+/obj/item/trash/attack(mob/M, mob/living/user, list/modifiers)
 	return

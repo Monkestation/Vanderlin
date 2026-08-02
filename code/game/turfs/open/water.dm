@@ -1,62 +1,193 @@
-///////////// OVERLAY EFFECTS /////////////
-/obj/effect/overlay/water
-	icon = 'icons/turf/newwater.dmi'
-	icon_state = "bottom"
-	density = FALSE
-	mouse_opacity = FALSE
-	layer = MID_TURF_LAYER
-	anchored = TRUE
-
-/obj/effect/overlay/water/top
-	icon_state = "top"
-	layer = MID_TURF_LAYER
-
 /turf/open/water
 	gender = PLURAL
 	name = "water"
 	desc = "It's... well, water."
-	icon = 'icons/turf/newwater.dmi'
-	icon_state = "together"
+	icon = 'icons/turf/natural/liquids.dmi'
+	icon_state = "water"
 	baseturfs = /turf/open/water
 	slowdown = 20
-	var/obj/effect/overlay/water/water_overlay
-	var/obj/effect/overlay/water/top/water_top_overlay
 	bullet_sizzle = TRUE
 	bullet_bounce_sound = null //needs a splashing sound one day.
+
 	smoothing_flags = SMOOTH_EDGE
 	smoothing_groups = SMOOTH_GROUP_FLOOR_LIQUID
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "edge"
-	footstep = null
-	barefootstep = null
-	clawfootstep = null
-	heavyfootstep = null
+
+	footstep = FOOTSTEP_WATER
+	barefootstep = FOOTSTEP_WATER
+	clawfootstep = FOOTSTEP_WATER
+	heavyfootstep = FOOTSTEP_WATER
+	force_footstep_sound = TRUE
+
 	landsound = 'sound/foley/jumpland/waterland.ogg'
 	shine = SHINE_SHINY
 	no_over_text = FALSE
-	water_level = 2
 	spread_chance = 0
 	burn_power = 0
-	var/uses_level = TRUE
-	var/datum/reagent/water_reagent = /datum/reagent/water
-	var/mapped = TRUE // infinite source of water
-	var/water_volume = 100 // 100 is 1 bucket. Minimum of 10 to count as a water tile
-	var/water_maximum = 10000 //this is since water is stored in the originate
-	var/wash_in = TRUE
-	var/swim_skill = FALSE
-	var/swimdir = FALSE
-	var/notake = FALSE // cant pick up with reagent containers
-	var/set_relationships_on_init = TRUE
-	// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
-	var/blocked_flow_directions = 0
+	flags_1 = CONDUCT_1
 
+	var/datum/reagent/water_reagent = /datum/reagent/water
+
+	var/volume_status = WATER_VOLUME_INFINITE
+	var/pre_dry_status
+	/// 100 is 1 bucket. Minimum of 10 to count as a water tile
+	var/water_volume = 100
+	var/water_volume_maximum = 10000 //this is since water is stored in the originate
+
+	var/wash_in = TRUE
+	/// cant pick up with reagent containers
+	var/notake = FALSE
+
+	var/set_relationships_on_init = TRUE
+	/// A bitflag of blocked directions. ONLY works because we only allow cardinal flow.
+	var/blocked_flow_directions = 0
 	var/cached_use = 0
 
 	var/cleanliness_factor = 1 //related to hygiene for washing
 
 	/// Fishing element for this specific water tile
-	var/datum/fish_source/fishing_datum = /datum/fish_source/ocean
-	flags_1 = CONDUCT_1
+	var/datum/fish_source/fishing_datum = /datum/fish_source/water
+
+	/// Forces the water turf above to have an open bottom. Above water will set add_transparency = TRUE and water_height to be >= WATER_HEIGHT_DEEP
+	var/force_open_above = FALSE
+	/// If TRUE, the turf will not have a open bottom. Overrides force_open_above of the turf below it.
+	var/force_close_bottom = FALSE
+	/// icon_state of underlay applied to create the effect of the bottom of the water.
+	var/underlay_icon_state = "rock"
+	/// If TRUE, add turf transparency in LateInitialize() and disables underlay_icon_sate
+	var/add_transparency = FALSE
+
+	/// Whether the tile has a current and moves atoms that enter the tile
+	var/river_current = FALSE
+	/// The time between movements of the tile. Base of 0.5 seconds
+	var/current_speed = 0.5 SECONDS
+	/// The actual direction that stuff moves. Defaults to dir.
+	var/movedir
+
+	/// Whether people can examine to determine the depth. Note WATER_HEIGHT_FULL doesn't have examine text.
+	var/can_examine_depth = TRUE
+
+	/// Determines depth based behavior and which overlays to apply. Heights in order are ANKLE, SHALLOW, DEEP, FULL.
+	var/water_height = WATER_HEIGHT_SHALLOW
+	///The transparency of the immerse element's overlay
+	var/immerse_overlay_alpha = 180
+	///Icon state to use for the immersion mask. Overlays follow the format "immerse_overlay[water_height]"
+	var/immerse_overlay = "immerse"
+	/// Whether the immerse element has been added yet or not
+	var/immerse_added = FALSE
+
+	/**
+	 * Variables used for the swimming tile element. If a value is null, water_height is used to assign variable values.
+	 * - is_swimming_tile: Whether or not we add the element to this tile.
+	 * - stamina_entry_cost: how much stamina it costs to enter the swimming tile, and for each move into a tile
+	 * - ticking_stamina_cost: How much stamina is lost for staying in the water.
+	 * - ticking_oxy_damage: How much oxygen is lost per tick when drowning in water. Also determines how many breathes are lost.
+	 * - exhaust_swimmer_prob: The likelihood that someone suffers stamina damage when entering a swimming tile.
+	 */
+	var/is_swimming_tile = TRUE
+	var/stamina_entry_cost
+	var/ticking_stamina_cost
+	var/ticking_oxy_damage = 2
+	var/exhaust_swimmer_prob = 100
+
+	/// Randomize direction when initializing
+	var/randomize_dir = FALSE
+
+	/// If the tile can spawn bottles
+	var/bottle_spawner = TRUE
+
+	/// If the water takes on it's reagents color
+	var/uses_greyscale = TRUE
+
+/turf/open/water/Initialize(mapload)
+	if(randomize_dir)
+		dir = pick(GLOB.cardinals)
+
+	. = ..()
+
+	RegisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(on_atom_inited))
+
+	if(force_open_above)
+		force_open_above()
+
+	if(!isnull(fishing_datum))
+		add_lazy_fishing(fishing_datum)
+
+	ADD_TRAIT(src, TRAIT_CATCH_AND_RELEASE, INNATE_TRAIT)
+
+	if(mapload && bottle_spawner)
+		if(!rand(0, 999)) // 1/1000 chance
+			new /obj/item/bottlemessage/ancient(src)
+	else
+		START_PROCESSING(SSobj, src)
+
+	base_icon_state = icon_state // in case you want to override the icon_state when initializing
+
+	handle_water()
+
+	return INITIALIZE_HINT_LATELOAD
+
+/turf/open/water/LateInitialize()
+	. = ..()
+
+	AddElement(/datum/element/watery_tile, water_height, cleanliness_factor)
+	if(add_transparency)
+		ADD_TURF_TRANSPARENCY(src, INNATE_TRAIT)
+	else if(underlay_icon_state)
+		underlays += mutable_appearance(icon, underlay_icon_state)
+
+	if(set_relationships_on_init)
+		check_surrounding_water()
+
+/turf/open/water/Destroy()
+	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
+	dry_up(TRUE)
+	return ..()
+
+/turf/open/water/get_slowdown(mob/user)
+	. = ..()
+	if(. <= 0)
+		return 0
+	if(volume_status == WATER_VOLUME_DRY || HAS_TRAIT(user, TRAIT_SWIMMER))
+		return 0
+	if(is_swimming_tile)
+		return max(0, . - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming)))
+
+/turf/open/water/update_icon(updates = ALL)
+	. = ..()
+	if(!(updates & UPDATE_SMOOTHING) || !initial(smoothing_flags))
+		return
+
+	if(volume_status == WATER_VOLUME_DRY)
+		smoothing_flags = NONE
+		remove_neighborlays()
+	else
+		smoothing_flags = initial(smoothing_flags)
+		QUEUE_SMOOTH(src)
+
+/turf/open/water/update_icon_state()
+	if(volume_status == WATER_VOLUME_DRY)
+		icon_state = ""
+	else
+		icon_state = base_icon_state
+	return ..()
+
+/turf/open/water/proc/force_open_above()
+	var/turf/open/water/water_turf = get_step_multiz(src, UP)
+	if(iswaterturf(water_turf) && !water_turf.force_close_bottom)
+		water_turf.underlay_icon_state = null
+		water_turf.add_transparency = TRUE
+		water_turf.water_height = max(water_turf.water_height, WATER_HEIGHT_DEEP)
+		return
+
+/turf/open/water/proc/toggle_transparency()
+	if(istransparentturf(src))
+		REMOVE_TURF_TRANSPARENCY(src, INNATE_TRAIT)
+		underlays += mutable_appearance(icon, underlay_icon_state)
+	else
+		underlays = list()
+		ADD_TURF_TRANSPARENCY(src, INNATE_TRAIT)
 
 /turf/open/water/proc/set_watervolume(volume)
 	water_volume = volume
@@ -70,7 +201,7 @@
 	check_surrounding_water()
 
 /turf/open/water/proc/adjust_watervolume(volume)
-	water_volume += volume
+	water_volume = min(water_volume + volume, water_volume_maximum)
 	handle_water()
 
 	for(var/turf/open/water/river/water in children)
@@ -82,12 +213,12 @@
 	var/turf/open/water/adjuster = source_originate
 	if(!adjuster)
 		adjuster = src
-	if(volume < 10 && mapped)
+	if(volume < MINIMUM_WATER_VOLUME && volume_status == WATER_VOLUME_INFINITE)
 		if(adjuster.water_volume + volume < initial(adjuster.water_volume))
 			return
 	adjuster.water_volume += volume
 	handle_water()
-	if(adjuster.mapped) //means no changes downstream
+	if(adjuster.volume_status == WATER_VOLUME_INFINITE) //means no changes downstream
 		return
 	for(var/turf/open/water/river/water in adjuster.children)
 		water.adjust_watervolume(volume)
@@ -103,7 +234,7 @@
 		var/turf/open/water/river/water = get_step(src, dir)
 		if(!istype(water))
 			return
-		if(water.mapped)
+		if(water.volume_status == WATER_VOLUME_INFINITE)
 			return
 		water.set_watervolume(0)
 		water.check_surrounding_water()
@@ -114,60 +245,13 @@
 	else
 		check_surrounding_water()
 
-/turf/open/water/proc/dryup(forced = FALSE)
-	if(!forced && water_volume < 10)
-		smoothing_flags = NONE
-		remove_neighborlays()
-		if(water_overlay)
-			QDEL_NULL(water_overlay)
-		if(water_top_overlay)
-			QDEL_NULL(water_top_overlay)
-		make_unshiny()
-		var/mutable_appearance/dirty = mutable_appearance('icons/turf/natural/liquids.dmi', "rock")
-		add_overlay(dirty)
-		for(var/obj/structure/waterwheel/rotator in contents)
-			rotator.set_rotational_direction_and_speed(null, 0)
-			rotator.set_stress_generation(0)
-
 /turf/open/water/river/creatable
-	mapped = FALSE
-	river_processes = FALSE
-	icon_state = "together"
-	baseturfs = /turf/open/openspace
-
-/turf/open/water/river/handle_water()
-	if(water_volume < 10)
-		dryup()
-	else if(water_volume)
-		if(!water_overlay)
-			water_overlay = new(src)
-		if(!water_top_overlay)
-			water_top_overlay = new(src)
-		if(!LAZYLEN(neighborlay_list))
-			smoothing_flags = SMOOTH_EDGE
-			QUEUE_SMOOTH(src)
-
-	if(!river_processes)
-		icon_state = "together"
-		if(water_overlay)
-			water_overlay.color = water_reagent.color
-			water_overlay.icon_state = "bottom[water_level]"
-		if(water_top_overlay)
-			water_top_overlay.color = water_reagent.color
-			water_top_overlay.icon_state = "top[water_level]"
-		return
-	icon_state = "rock"
-
-	if(water_overlay)
-		water_overlay.color = water_reagent.color
-		water_overlay.icon_state = "riverbot"
-		water_overlay.dir = dir
-	if(water_top_overlay)
-		water_top_overlay.color = water_reagent.color
-		water_top_overlay.icon_state = "rivertop"
-		water_top_overlay.dir = dir
+	volume_status = WATER_VOLUME_NORMAL
+	icon_state = "rivermove"
+	baseturfs = /turf/open/water/river/creatable
 
 /turf/open/water/river/creatable/Initialize()
+	ADD_TRAIT(src, TRAIT_DO_NOT_SPLASH, INNATE_TRAIT)
 	var/list/viable_directions = list()
 	for(var/direction in GLOB.cardinals)
 		var/turf/open/water/water = get_step(src, direction)
@@ -176,14 +260,13 @@
 		viable_directions |= direction
 	if(length(viable_directions) == 4 || length(viable_directions) == 0)
 		return ..()
-	river_processes = TRUE
-	icon_state = "rock"
+	river_current = TRUE
 	var/picked_dir = pick(viable_directions)
 	dir = REVERSE_DIR(picked_dir)
 	handle_water()
 	return ..()
 
-/turf/open/water/river/creatable/attackby(obj/item/C, mob/user, params)
+/turf/open/water/river/creatable/attackby(obj/item/C, mob/user, list/modifiers)
 	if(istype(C, /obj/item/reagent_containers/glass/bucket/wooden) && user.used_intent.type == /datum/intent/splash)
 		try_modify_water(user, C)
 		return TRUE
@@ -193,237 +276,361 @@
 			if(!shovel.heldclod)
 				return
 			user.visible_message("[user] starts filling in [src].", "I start filling in [src].")
-			if(!do_after(user, 10 SECONDS * shovel.time_multiplier, src))
+			if(!do_after(user, 10 SECONDS * shovel.toolspeed, src))
 				return
 			QDEL_NULL(shovel.heldclod)
 			shovel.update_appearance(UPDATE_ICON_STATE)
 			ScrapeAway()
 			return TRUE
-	. = ..()
+	return ..()
 
 /turf/open/water/river/creatable/proc/try_modify_water(mob/user, obj/item/reagent_containers/glass/bucket/wooden/bucket)
-	if(user.used_intent.type == /datum/intent/splash)
-		if(bucket.reagents?.total_volume)
-			var/datum/reagent/container_reagent = bucket.reagents.get_master_reagent()
-			var/water_count = bucket.reagents.get_reagent_amount(container_reagent.type)
-			user.visible_message("[user] starts to fill [src].", "You start to fill [src].")
-			if(do_after(user, 3 SECONDS, src))
-				if(bucket.reagents.remove_reagent(container_reagent.type, clamp(container_reagent.volume, 1, 100)))
-					playsound(src, 'sound/foley/waterenter.ogg', 100, FALSE)
-					adjust_originate_watervolume(water_count)
-
-/turf/open/water/Initialize()
-	. = ..()
-
-	if(!isnull(fishing_datum))
-		add_lazy_fishing(fishing_datum)
-
-	if(mapped)
-		if(prob(0.1))
-			new /obj/item/bottlemessage/ancient(src)
-	else
-		START_PROCESSING(SSobj, src)
-
-	handle_water()
-
-	return INITIALIZE_HINT_LATELOAD
-
-/turf/open/water/LateInitialize()
-	. = ..()
-	if(!set_relationships_on_init)
+	if(user.used_intent.type != /datum/intent/splash)
 		return
-	check_surrounding_water()
+	if(!bucket.reagents?.total_volume)
+		return
+	var/datum/reagent/container_reagent = bucket.reagents.get_master_reagent()
+	var/water_count = bucket.reagents.get_reagent_amount(container_reagent.type)
+	user.visible_message("[user] starts to fill [src].", "You start to fill [src].")
+	if(do_after(user, 3 SECONDS, src))
+		if(bucket.reagents.remove_reagent(container_reagent.type, clamp(container_reagent.volume, 1, 100)))
+			playsound(src, 'sound/foley/waterenter.ogg', 100, FALSE)
+			adjust_originate_watervolume(water_count)
+
+///We lazily add the immerse element when something is spawned or crosses this turf and not before.
+/turf/open/water/proc/on_atom_inited(datum/source, atom/movable/movable)
+	SIGNAL_HANDLER
+	if(make_immersed(movable))
+		UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
+
+/**
+ * turf/Initialize() calls Entered on its contents too, however
+ * we need to wait for movables that still need to be initialized
+ * before we add the immerse element.
+ */
+/turf/open/water/Entered(atom/movable/arrived)
+	. = ..()
+	make_immersed(arrived)
+	conveyable_enter(arrived)
+
+///Makes this turf immersable, return true if we actually did anything so child procs don't have to repeat our checks
+/turf/open/water/proc/make_immersed(atom/movable/triggering_atom)
+	if(immerse_added || is_type_in_typecache(triggering_atom, GLOB.immerse_ignored_movable))
+		return FALSE
+	if(water_height < WATER_HEIGHT_ANKLE)
+		return FALSE
+
+	AddElement(/datum/element/immerse, "[immerse_overlay][water_height]", immerse_overlay_alpha, water_height)
+	immerse_added = TRUE
+
+	if(is_swimming_tile)
+		determine_swimming_properties()
+		AddElement(/datum/element/swimming_tile, stamina_entry_cost, ticking_stamina_cost, ticking_oxy_damage, exhaust_swimmer_prob)
+	return TRUE
+
+/turf/open/water/proc/determine_swimming_properties()
+	switch(water_height)
+		if(WATER_HEIGHT_ANKLE)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 1
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
+		if(WATER_HEIGHT_SHALLOW)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 2.5
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
+		if(WATER_HEIGHT_DEEP)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 5
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 5
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
+		if(WATER_HEIGHT_FULL)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 7.5
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 10
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
+		else
+			stamina_entry_cost = initial(stamina_entry_cost)
+			ticking_stamina_cost = initial(ticking_stamina_cost)
+			ticking_oxy_damage = initial(ticking_oxy_damage)
+			exhaust_swimmer_prob = initial(exhaust_swimmer_prob)
+
+/turf/open/water/proc/conveyable_enter(atom/movable/conveyable)
+	if(conveyable.loc != src) // If we are not on the same turf (order of operations memes) go to hell
+		return
+	if(!river_current)
+		SSmove_manager.stop_looping(conveyable, SSconveyors)
+		return
+	start_conveying(conveyable)
+
+/turf/open/water/proc/start_conveying(atom/movable/moving)
+	if(QDELETED(moving))
+		return
+	var/datum/move_loop/move/moving_loop = SSmove_manager.processing_on(moving, SSconveyors)
+	var/current_direction = movedir || dir
+	var/speed = current_speed
+	if(HAS_TRAIT(moving, TRAIT_SWIMMER)) // more time to swim against the current
+		speed *= 2
+	if(moving_loop)
+		moving_loop.direction = current_direction
+		moving_loop.delay = speed
+		return
+
+	var/static/list/unconveyables = GLOB.immerse_ignored_movable
+	if(!istype(moving) || is_type_in_typecache(moving, unconveyables) || moving == src || isstructure(moving))
+		return
+	moving.AddComponent(/datum/component/convey/current, current_direction, speed)
+
+/turf/open/water/Exited(atom/movable/gone, direction)
+	. = ..()
+	conveyable_exit(gone, direction)
+
+/turf/open/water/proc/conveyable_exit(atom/conveyable, direction)
+	var/turf/next_turf = get_step(src, direction)
+	if(conveyable.z != z || !iswaterturf(next_turf) || !isturf(conveyable.loc)) //If you've entered something on us, stop moving
+		SSmove_manager.stop_looping(conveyable, SSconveyors)
+
+/turf/open/water/proc/stop_conveying(atom/movable/thing)
+	if(!ismovable(thing))
+		return
+	SSmove_manager.stop_looping(thing, SSconveyors)
+
+/turf/open/water/examine(mob/user)
+	. = ..()
+	if(volume_status == WATER_VOLUME_DRY)
+		return
+	if(!can_examine_depth)
+		. += span_notice("I can't see the bottom...")
+		return
+	var/depth_message
+	switch(water_height)
+		if(WATER_HEIGHT_ANKLE)
+			depth_message = "ankle deep."
+		if(WATER_HEIGHT_SHALLOW)
+			depth_message = "about waist high."
+		if(WATER_HEIGHT_DEEP)
+			depth_message = "rather deep."
+		else
+			return
+	. += span_notice("It looks [depth_message]")
 
 /turf/open/water/process()
 	if(cached_use)
 		adjust_originate_watervolume(cached_use)
 		cached_use = 0
 
-	if(water_overlay && water_volume < 10)
-		dryup()
+	handle_water()
 
 /turf/open/water/proc/handle_water()
-	if(!water_volume || water_volume < 10)
-		dryup()
+	if(water_volume < MINIMUM_WATER_VOLUME)
+		dry_up()
 		return
-	if(!water_overlay)
-		water_overlay = new(src)
-	if(!water_top_overlay)
-		water_top_overlay = new(src)
-	if(!LAZYLEN(neighborlay_list))
-		smoothing_flags = SMOOTH_EDGE
-		QUEUE_SMOOTH(src)
+	if(uses_greyscale)
+		color = sanitize_hexcolor(water_reagent::color)
+	fill_up()
 
-	if(water_overlay)
-		water_overlay.color = water_reagent.color
-		if(uses_level)
-			water_overlay.icon_state = "bottom[water_level]"
-	if(water_top_overlay)
-		water_top_overlay.color = water_reagent.color
-		if(uses_level)
-			water_top_overlay.icon_state = "top[water_level]"
-
-/turf/open/water/add_neighborlay(dir, edgeicon, offset = FALSE)
-	var/add
-	var/y = 0
-	var/x = 0
-	switch(dir)
-		if(NORTH)
-			add = "[edgeicon]-n"
-			y = -32
-		if(SOUTH)
-			add = "[edgeicon]-s"
-			y = 32
-		if(EAST)
-			add = "[edgeicon]-e"
-			x = -32
-		if(WEST)
-			add = "[edgeicon]-w"
-			x = 32
-
-	if(!add)
+/turf/open/water/proc/fill_up()
+	if(volume_status != WATER_VOLUME_DRY)
 		return
+	volume_status = pre_dry_status || initial(volume_status)
+	update_appearance(UPDATE_SMOOTHING|UPDATE_ICON_STATE)
+	if(shine)
+		make_shiny(shine)
+	REMOVE_TRAIT(src, TRAIT_IMMERSE_STOPPED, INNATE_TRAIT)
+	footstep = initial(footstep)
+	barefootstep = initial(barefootstep)
+	clawfootstep = initial(clawfootstep)
+	heavyfootstep = initial(heavyfootstep)
+	if(river_current)
+		for(var/atom/movable/movable in src)
+			start_conveying(movable)
 
-	if(water_overlay)
-		var/image/overlay = image(icon, water_overlay, add, ABOVE_MOB_LAYER + 0.01, pixel_x = offset ? x : 0, pixel_y = offset ? y : 0 )
-		overlay.color = water_reagent.color
-		if("[dir]" in water_overlay.neighborlay_list)
-			water_overlay.cut_overlay(water_overlay.neighborlay_list["[dir]"])
-			qdel(water_overlay.neighborlay_list["[dir]"])
-			LAZYREMOVE(water_overlay.neighborlay_list, "[dir]")
-		LAZYADDASSOC(water_overlay.neighborlay_list, "[dir]", overlay)
-		water_overlay.add_overlay(overlay)
-
-/turf/open/water/remove_neighborlays()
-	var/list/overlays = water_overlay?.neighborlay_list
-	if(!LAZYLEN(overlays))
+/turf/open/water/proc/dry_up(empty_volume = FALSE)
+	if(volume_status == WATER_VOLUME_DRY)
 		return
-	for(var/key as anything in overlays)
-		water_overlay.cut_overlay(overlays[key])
-		QDEL_NULL(overlays[key])
-		LAZYREMOVE(overlays, key)
-
-/turf/open/water/Exited(atom/movable/AM, atom/newloc)
-	. = ..()
-	for(var/obj/structure/S in src)
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/user = AM
-		if(water_overlay)
-			if((get_dir(src, newloc) == SOUTH))
-				water_overlay.layer = BELOW_MOB_LAYER
-				water_overlay.plane = GAME_PLANE
-			else
-				spawn(6)
-					if(!locate(/mob/living) in src)
-						water_overlay.layer = BELOW_MOB_LAYER
-						water_overlay.plane = GAME_PLANE
-		for(var/D in GLOB.cardinals) //adjacent to a floor to hold onto
-			if(istype(get_step(newloc, D), /turf/open/floor))
-				return
-		if(swim_skill && !HAS_TRAIT(AM, TRAIT_GOOD_SWIM))
-			if(swimdir && newloc) //we're being pushed by water or swimming with the current, easy
-				if(get_dir(src, newloc) == dir)
-					return
-			if(user.mind && !user.buckled)
-				var/drained = max(15 - (user.get_skill_level(/datum/skill/misc/swimming) * 5), 1)
-//				drained += (user.checkwornweight()*2)
-				drained += user.get_encumbrance() * 50
-				if(!user.adjust_stamina(drained))
-					user.Immobilize(30)
-					addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
+	pre_dry_status = volume_status
+	volume_status = WATER_VOLUME_DRY
+	if(empty_volume)
+		water_volume = 0
+	update_appearance(UPDATE_SMOOTHING|UPDATE_ICON_STATE)
+	make_unshiny()
+	for(var/obj/structure/waterwheel/rotator in contents)
+		rotator.set_rotational_direction_and_speed(null, 0)
+		rotator.set_stress_generation(0)
+	ADD_TRAIT(src, TRAIT_IMMERSE_STOPPED, INNATE_TRAIT)
+	if(river_current)
+		for(var/atom/movable/movable in src)
+			stop_conveying(movable)
 
 /turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	..()
+	. = ..()
 	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg','sound/foley/water_land3.ogg'), 100, FALSE)
 
-/turf/open/water/Entered(atom/movable/AM, atom/oldLoc)
-	. = ..()
-	for(var/obj/structure/S in src)
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
-	if(water_volume < 10)
+/turf/open/water/proc/try_z_swim(mob/swimming_mob, going_up, forced)
+	if(!HAS_TRAIT(swimming_mob, TRAIT_MOVE_SWIMMING))
 		return
-	var/dirty_water_turf = FALSE
-	if(cleanliness_factor < 0)
-		dirty_water_turf = TRUE
-	if(istype(AM, /obj/item/reagent_containers/food/snacks/fish))
-		var/obj/item/reagent_containers/food/snacks/fish/F = AM
-		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
-		if(!F.status != FISH_DEAD)
-			F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
+
+	var/direction = going_up ? UP : DOWN
+
+	// determine valid travel directions
+	switch(water_height)
+		if(WATER_HEIGHT_DEEP)
+			if(direction != DOWN)
+				return
+		if(WATER_HEIGHT_FULL)
+			EMPTY_BLOCK_GUARD
 		else
-			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
-		qdel(F)
-	if(istype(AM, /obj/item/clothing))
-		var/obj/item/clothing/cloth = AM
-		if(cloth.wetable)
-			cloth.wet.add_water(20, dirty_water_turf)
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/L = AM
-		if(L.body_position == LYING_DOWN || water_level == 3)
-			L.SoakMob(FULL_BODY, dirty_water_turf)
-		else if(water_level == 2)
-			L.SoakMob(BELOW_CHEST, dirty_water_turf)
-		else if(water_level == 1)
-			L.SoakMob(FEET, dirty_water_turf)
-		if(water_overlay)
-			if(water_level > 1 && !istype(oldLoc, type))
-				playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
-			else
-				playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
-			if(istype(oldLoc, type) && (get_dir(src, oldLoc) != SOUTH))
-				water_overlay.layer = ABOVE_MOB_LAYER
-				water_overlay.plane = GAME_PLANE_UPPER
-			else
-				spawn(6)
-					if(AM.loc == src)
-						water_overlay.layer = ABOVE_MOB_LAYER
-						water_overlay.plane = GAME_PLANE_UPPER
+			return
 
-/turf/open/water/attackby(obj/item/C, mob/user, params)
-	if(user.used_intent.type == /datum/intent/fill)
-		if(C.reagents)
-			if(C.reagents.holder_full())
-				to_chat(user, "<span class='warning'>[C] is full.</span>")
-				return
-			if(notake)
-				return
-			if(water_volume < 10)
-				return
-			if(do_after(user, 8 DECISECONDS, src))
-				user.changeNext_move(CLICK_CD_MELEE)
-				playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
-				if(!mapped && C.reagents.add_reagent(water_reagent, 10))
-					adjust_originate_watervolume(-10)
+	if(direction == UP && HAS_TRAIT(swimming_mob, TRAIT_SINKING))
+		to_chat(swimming_mob, span_warningbig("I'm sinking and can't swim upwards!"))
+		return
 
-				else
-					C.reagents.add_reagent(water_reagent, 100)
-				to_chat(user, "<span class='notice'>I fill [C] from [src].</span>")
-			return
-	if(user.used_intent.type == /datum/intent/food)
-		if(mapped)
-			return
-		if(C.reagents)
-			if(water_volume >= water_maximum)
-				to_chat(user, "<span class='warning'>\The [src] is full.</span>")
-				return
-			if(do_after(user, 8 DECISECONDS, src))
-				user.changeNext_move(CLICK_CD_MELEE)
-				playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
-				var/water_count = C.reagents.get_reagent_amount(water_reagent.type)
-				if(!mapped && C.reagents.remove_reagent(water_reagent,  C.reagents.total_volume))
-					set_watervolume(clamp(water_volume + water_count, 1, water_maximum))
-				to_chat(user, "<span class='notice'>I pour the contents of [C] into [src].</span>")
-			return
+	if(!swimming_mob.can_z_move(direction, src, null, ZMOVE_SWIM_FLAGS|ZMOVE_FEEDBACK))
+		return
+	var/swim_time = 3 SECONDS - ((1 DECISECONDS * GET_MOB_SKILL_VALUE_OLD(swimming_mob, /datum/attribute/skill/misc/swimming)) + (1 SECONDS * HAS_TRAIT(swimming_mob, TRAIT_SWIMMER)))
+	if(!forced && !do_after(swimming_mob, swim_time, hidden = TRUE))
+		return
+	if(swimming_mob.zMove(direction, z_move_flags = ZMOVE_SWIM_FLAGS|ZMOVE_FEEDBACK))
+		if(direction == UP)
+			to_chat(swimming_mob, forced ? span_warningbig("A strong current pushes you upward!") : span_notice("You swim upward."))
+		else
+			to_chat(swimming_mob, forced ? span_warningbig("You sink downwards!") : span_notice("You swim downward."))
+
+/**
+ * Prepares a moving movable to be precipitated if Move() is successful.
+ * This is done in Enter() and not Entered() because there's no easy way to tell
+ * if the latter was called by Move() or forceMove() while the former is only called by Move().
+ */
+/turf/open/water/Enter(atom/movable/movable, atom/oldloc)
 	. = ..()
+	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
+		return
+	if(.)
+		//higher priority than CURRENTLY_Z_FALLING so the movable doesn't fall on Entered()
+		movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE)
 
-/turf/open/water/attack_hand_secondary(mob/user, params)
+///Makes movables fall when forceMove()'d to this turf.
+/turf/open/water/Entered(atom/movable/movable)
+	. = ..()
+	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
+		return
+	if(movable.set_currently_z_moving(CURRENTLY_Z_FALLING))
+		zFall(movable, falling_from_move = TRUE)
+
+/turf/open/water/zPassIn(direction)
+	if(direction == DOWN)
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_IN_DOWN)
+				return FALSE
+		return TRUE
+	if(direction == UP && istransparentturf(src))
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_IN_UP)
+				return FALSE
+		return TRUE
+	return FALSE
+
+/turf/open/water/zPassOut(direction)
+	if(direction == DOWN && istransparentturf(src))
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_OUT_DOWN)
+				return FALSE
+		return TRUE
+	if(direction == UP)
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_OUT_UP)
+				return FALSE
+		return TRUE
+	return FALSE
+
+/turf/open/water/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!tool.reagents)
+		return NONE
+
+	if(istype(user.used_intent, /datum/intent/fill))
+		if(notake)
+			return NONE
+
+		if(tool.reagents.holder_full())
+			to_chat(user, "<span class='warning'>[tool] is full.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		if(water_volume < MINIMUM_WATER_VOLUME || volume_status == WATER_VOLUME_DRY)
+			return ITEM_INTERACT_BLOCKING
+
+		if(!do_after(user, 8 DECISECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
+
+		if(volume_status != WATER_VOLUME_INFINITE && tool.reagents.add_reagent(water_reagent, 10))
+			adjust_originate_watervolume(-10)
+		else
+			tool.reagents.add_reagent(water_reagent, 100)
+
+		to_chat(user, "<span class='notice'>I fill [tool] from [src].</span>")
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(user.used_intent, /datum/intent/food))
+		if(volume_status == WATER_VOLUME_INFINITE)
+			return NONE
+
+		if(water_volume >= water_volume_maximum)
+			to_chat(user, "<span class='warning'>\The [name] is full.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		if(!do_after(user, 8 DECISECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
+
+		var/water_count = tool.reagents.get_reagent_amount(water_reagent.type)
+		if(tool.reagents.remove_reagent(water_reagent,  tool.reagents.total_volume))
+			set_watervolume(clamp(water_volume + water_count, 1, water_volume_maximum))
+
+		to_chat(user, "<span class='notice'>I pour the contents of [tool] into [src].</span>")
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		return ITEM_INTERACT_SUCCESS
+
+/turf/open/water/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(water_volume < MINIMUM_WATER_VOLUME || volume_status == WATER_VOLUME_DRY)
+		return ITEM_INTERACT_BLOCKING
+
+	// This should just be reagent interactions :(
+
+	playsound(user, pick(list('sound/foley/waterwash (1).ogg', 'sound/foley/waterwash (2).ogg')), 100, FALSE)
+
+	user.visible_message("<span class='info'>[user] starts to wash [tool] in [src].</span>")
+
+	if(!do_after(user, 3 SECONDS, src))
+		return ITEM_INTERACT_BLOCKING
+
+	if(wash_in)
+		tool.wash(CLEAN_WASH)
+
+	if(istype(tool, /obj/item/clothing))
+		var/obj/item/clothing/item2wash_cloth = tool
+		if(item2wash_cloth && item2wash_cloth.wetable)
+			if(cleanliness_factor > 0)
+				item2wash_cloth.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
+			else
+				item2wash_cloth.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
+
+	user.nobles_seen_servant_work()
+
+	playsound(user, pick(list('sound/foley/waterwash (1).ogg', 'sound/foley/waterwash (2).ogg')), 100, FALSE)
+
+	return ITEM_INTERACT_SUCCESS
+
+/turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(water_volume < 10)
+	if(volume_status == WATER_VOLUME_DRY)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
 	if(isliving(user))
@@ -435,7 +642,7 @@
 			var/datum/reagents/reagents = new()
 			reagents.add_reagent(water_reagent, 4)
 			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = TOUCH)
-			if(!mapped)
+			if(volume_status != WATER_VOLUME_INFINITE)
 				adjust_originate_watervolume(-2)
 			playsound(user, pick(wash), 100, FALSE)
 
@@ -451,34 +658,11 @@
 				L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, params)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(user.cmode)
-		return
-	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
-	playsound(user, pick_n_take(wash), 100, FALSE)
-	user.visible_message("<span class='info'>[user] starts to wash [item2wash] in [src].</span>")
-	if(do_after(user, 3 SECONDS, src))
-		if(wash_in)
-			item2wash.wash(CLEAN_WASH)
-		if(istype(item2wash, /obj/item/clothing))
-			var/obj/item/clothing/item2wash_cloth = item2wash
-			if(item2wash_cloth && item2wash_cloth.wetable)
-				if(cleanliness_factor > 0)
-					item2wash_cloth.wet.add_water(20, dirty = FALSE, washed_properly = TRUE)
-				else
-					item2wash_cloth.wet.add_water(20, dirty = TRUE, washed_properly = TRUE)
-		user.nobles_seen_servant_work()
-		playsound(user, pick(wash), 100, FALSE)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
 /turf/open/water/onbite(mob/living/user)
 	. = ..()
 	if(.)
 		return
-	if(water_volume < 10)
+	if(volume_status == WATER_VOLUME_DRY)
 		return TRUE
 	playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
 	user.visible_message(span_info("[user] starts to drink from [src]."))
@@ -487,69 +671,68 @@
 	var/datum/reagents/reagents = new()
 	reagents.add_reagent(water_reagent, 2)
 	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
-	if(!mapped)
+	if(volume_status != WATER_VOLUME_INFINITE)
 		adjust_originate_watervolume(-2)
 	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
 	return TRUE
-
-/turf/open/water/Destroy()
-	. = ..()
-	dryup(forced = TRUE)
-
-/turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	if(water_volume < 10)
-		return
-	if(isobj(AM))
-		var/obj/O = AM
-		O.extinguish()
-
-/turf/open/water/get_slowdown(mob/user)
-	if(water_volume < 10 || HAS_TRAIT(user, TRAIT_GOOD_SWIM))
-		return 0
-	var/returned = slowdown
-	if(user.mind && swim_skill)
-		returned = returned - (user.get_skill_level(/datum/skill/misc/swimming))
-	return returned
 
 /*	..................   Bath & Pool   ................... */
 /turf/open/water/bath
 	name = "water"
 	desc = "Faintly yellow colored. Suspicious."
-	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("bathtile", "bathtileW")
-	water_level = 2
+	icon_state = MAP_SWITCH("water", "bathtileW")
+	underlay_icon_state = "bathtile"
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	cleanliness_factor = 5
+	footstep = FOOTSTEP_SHALLOW
+	barefootstep = FOOTSTEP_SHALLOW
+	clawfootstep = FOOTSTEP_SHALLOW
+	heavyfootstep = FOOTSTEP_SHALLOW
 	water_reagent = /datum/reagent/water
+	stamina_entry_cost = 1
+	ticking_stamina_cost = 0
+	exhaust_swimmer_prob = 0
+
+/datum/reagent/water/gross/sewer
+	color = "#705a43"
 
 /turf/open/water/sewer
 	name = "sewage"
 	desc = "This dark water smells of dead rats."
-	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("paving", "pavingW")
-	water_level = 1
+	icon_state = MAP_SWITCH("water", "pavingW")
+	underlay_icon_state = "paving"
+	water_height = WATER_HEIGHT_ANKLE
 	slowdown = 1
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/sewer
 	footstep = FOOTSTEP_MUD
 	barefootstep = FOOTSTEP_MUD
+	clawfootstep = FOOTSTEP_MUD
 	heavyfootstep = FOOTSTEP_MUD
 	cleanliness_factor = -5
+	fishing_datum = /datum/fish_source/sewer
+	var/leech_chance = 3
 
-/turf/open/water/sewer/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/sewer/Initialize(mapload)
+	if(prob(10))
+		icon_state = "yuckwater"
 	. = ..()
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/living = AM
-		var/chance = 3
+
+/turf/open/water/sewer/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if(isliving(arrived) && !arrived.throwing && !(arrived.movement_type & MOVETYPES_NOT_TOUCHING_GROUND))
+		var/mob/living/living = arrived
+		var/chance = leech_chance
 		if(living.m_intent == MOVE_INTENT_RUN)
 			chance *= 2
 		else if(living.m_intent == MOVE_INTENT_SNEAK)
 			chance /= 2
 		if(!prob(chance))
 			return
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			if(C.blood_volume <= 0)
+		if(iscarbon(arrived))
+			var/mob/living/carbon/C = arrived
+			if(!C.get_blood_volume())
 				return
 			var/list/zonee = list(BODY_ZONE_R_LEG,BODY_ZONE_L_LEG)
 			for(var/i = 1, i <= zonee.len, i++)
@@ -557,46 +740,49 @@
 				if(!BP)
 					continue
 				if(BP.skeletonized)
+					continue
+				if(!BP.is_organic_limb())
 					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
 
-/datum/reagent/water/gross/sewer
-	color = "#705a43"
-
-/datum/reagent/water/gross/marshy
-	color = "#60b17b"
+/turf/open/water/sewer/under
+	icon_state = MAP_SWITCH("yuckwater", "pavinggwf")
+	water_height = WATER_HEIGHT_FULL
+	shine = SHINE_MATTE
+	leech_chance = 8
+	force_open_above = TRUE
 
 /turf/open/water/swamp
 	name = "murk"
 	desc = "Weeds and algae cover the surface of the water."
 	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("dirt", "dirtW2")
-	water_level = 2
+	icon_state = MAP_SWITCH("water", "dirtW2")
+	underlay_icon_state = "dirt"
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 20
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/sewer
 	cleanliness_factor = -5
+	fishing_datum = /datum/fish_source/swamp
+	randomize_dir = TRUE
+	var/leech_chance = 3
 
-/turf/open/water/swamp/Initialize()
-	dir = pick(GLOB.cardinals)
+/turf/open/water/swamp/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-
-/turf/open/water/swamp/Entered(atom/movable/AM, atom/oldLoc)
-	. = ..()
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/living = AM
-		var/chance = 3
+	if(isliving(arrived) && !arrived.throwing && !(arrived.movement_type & MOVETYPES_NOT_TOUCHING_GROUND))
+		var/mob/living/living = arrived
+		var/chance = leech_chance
 		if(living.m_intent == MOVE_INTENT_RUN)
 			chance *= 2
 		else if(living.m_intent == MOVE_INTENT_SNEAK)
 			chance /= 2
 		if(!prob(chance))
 			return
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			if(C.blood_volume <= 0)
+		if(iscarbon(arrived))
+			var/mob/living/carbon/C = arrived
+			if(!C.get_blood_volume())
 				return
 			var/list/zonee = list(BODY_ZONE_R_LEG,BODY_ZONE_L_LEG)
 			for(var/i = 1, i <= zonee.len, i++)
@@ -604,6 +790,8 @@
 				if(!BP)
 					continue
 				if(BP.skeletonized)
+					continue
+				if(!BP.is_organic_limb())
 					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
@@ -612,110 +800,91 @@
 /turf/open/water/swamp/deep
 	name = "murk"
 	desc = "Deep water with several weeds and algae on the surface."
-	icon_state = MAP_SWITCH("dirt", "dirtW")
-	water_level = 3
+	icon_state = MAP_SWITCH("water", "dirtW")
+	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
-	swim_skill = TRUE
+	fishing_datum = /datum/fish_source/swamp/deep
+	leech_chance = 8
 
-/turf/open/water/swamp/deep/Entered(atom/movable/AM, atom/oldLoc)
-	. = ..()
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/living = AM
-		var/chance = 8
-		if(living.m_intent == MOVE_INTENT_RUN)
-			chance *= 2
-		else if(living.m_intent == MOVE_INTENT_SNEAK)
-			chance /= 2
-		if(!prob(chance))
-			return
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
-			if(C.blood_volume <= 0)
-				return
-			var/list/zonee = list(BODY_ZONE_CHEST,BODY_ZONE_R_LEG,BODY_ZONE_L_LEG,BODY_ZONE_R_ARM,BODY_ZONE_L_ARM)
-			for(var/i = 1, i <= zonee.len, i++)
-				var/obj/item/bodypart/BP = C.get_bodypart(pick_n_take(zonee))
-				if(!BP)
-					continue
-				if(BP.skeletonized)
-					continue
-				var/obj/item/natural/worms/leech/I = new(C)
-				BP.add_embedded_object(I, silent = TRUE)
-				return .
+/datum/reagent/water/gross/marshy
+	color = "#60b17b"
 
 /turf/open/water/marsh
 	name = "marshwater"
 	desc = "A heavy layer of weeds and algae cover the surface of the water."
 	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("dirt", "dirtW3")
-	water_level = 2
+	icon_state = MAP_SWITCH("water", "dirtW3")
+	underlay_icon_state = "dirt"
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross/marshy
 	cleanliness_factor = -3
-
-/turf/open/water/marsh/Initialize()
-	dir = pick(GLOB.cardinals)
-	. = ..()
+	fishing_datum = /datum/fish_source/swamp
+	randomize_dir = TRUE
 
 /turf/open/water/marsh/deep
 	name = "marshwater"
 	desc = "A heavy layer of weeds and algae cover the surface of the deep water."
-	icon_state = MAP_SWITCH("dirt", "dirtW4")
-	water_level = 3
+	icon_state = MAP_SWITCH("water", "dirtW4")
+	underlay_icon_state = "dirt"
+	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
-	swim_skill = TRUE
+	fishing_datum = /datum/fish_source/swamp/deep
 
-/turf/open/water/cleanshallow
+/turf/open/water/clean
 	name = "water"
-	desc = "Clear and shallow water, what a blessing!"
-	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("rock", "rockw2")
-	water_level = 2
+	desc = "Crystal clear water, what a blessing!"
+	icon_state = MAP_SWITCH("water", "rockw2")
+	underlay_icon_state = "rock"
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	water_reagent = /datum/reagent/water
+	fishing_datum = /datum/fish_source/cleanshallow
+	randomize_dir = TRUE
 
-/turf/open/water/cleanshallow/Initialize()
-	dir = pick(GLOB.cardinals)
-	. = ..()
+/turf/open/water/clean/under
+	icon_state = MAP_SWITCH("water", "rockcwf")
+	underlay_icon_state = "rock"
+	water_height = WATER_HEIGHT_FULL
+	shine = SHINE_MATTE
+	force_open_above = TRUE
 
-
-/turf/open/water/cleanshallow/dirt
+/turf/open/water/clean/dirt
 	name = "water"
-	desc = "Clear and shallow water, mostly untainted by surrounding soil."
-	icon_state = MAP_SWITCH("dirt", "dirtW5")
+	desc = "Fairly clear water, mostly untainted by surrounding soil."
+	icon_state = MAP_SWITCH("water", "dirtW5")
+	underlay_icon_state = "dirt"
 	cleanliness_factor = -1
 
-/turf/open/water/cleanshallow/Initialize()
-	dir = pick(GLOB.cardinals)
-	. = ..()
+/turf/open/water/clean/dirt/under
+	icon_state = MAP_SWITCH("dirt", "dirtcwf")
+	water_height = WATER_HEIGHT_FULL
+	shine = SHINE_MATTE
+	force_open_above = TRUE
 
 /turf/open/water/blood
 	name = "blood"
 	desc = "A pool of sanguine liquid."
 	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("rock", "rockb")
-	water_level = 2
+	icon_state = MAP_SWITCH("water", "rockb")
+	underlay_icon_state = "rock"
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	cleanliness_factor = -5
 	water_reagent = /datum/reagent/blood
-
-/turf/open/water/blood/Initialize()
-	dir = pick(GLOB.cardinals)
-	. = ..()
+	randomize_dir = TRUE
 
 /turf/open/water/river
 	name = "water"
 	desc = "Crystal clear water! Flowing swiftly along the river."
-	icon_state = MAP_SWITCH("rock", "rivermove-dir")
-	water_level = 3
+	icon_state = MAP_SWITCH("rivermove", "rivermove-rockc")
+	underlay_icon_state = "rock"
+	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
-	swim_skill = TRUE
-	swimdir = TRUE
 	set_relationships_on_init = FALSE
-	uses_level = FALSE
-	var/river_processing
-	var/river_processes = TRUE
+	fishing_datum = /datum/fish_source/river
+	river_current = TRUE
 
 /turf/open/water/river/get_heuristic_slowdown(mob/traverser, travel_dir)
 	. = ..()
@@ -733,55 +902,70 @@
 		return
 	water.try_set_parent(src)
 
-/turf/open/water/river/Entered(atom/movable/AM, atom/oldLoc)
-	. = ..()
-	if(!river_processes)
-		return
-	if(locate(/obj/structure/stairs) in src)
-		return
-	if(isliving(AM) || isitem(AM))
-		if(!river_processing)
-			river_processing = addtimer(CALLBACK(src, PROC_REF(process_river)), 5, TIMER_STOPPABLE)
-
-/turf/open/water/river/proc/process_river()
-	river_processing = null
-	if(water_volume < 10)
-		return
-	for(var/atom/movable/A in contents)
-		for(var/obj/structure/S in src)
-			if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-				return
-		if((A.loc == src))
-			if(!istype(get_step(src, dir), /turf/open/water))
-				var/list/viable_cardinals = list()
-				var/inverse = REVERSE_DIR(dir)
-				for(var/direction in GLOB.cardinals)
-					if(direction == inverse)
-						continue
-					var/turf/open/water/water = get_step(src, direction)
-					if(!istype(water))
-						continue
-					viable_cardinals |= direction
-				if(length(viable_cardinals))
-					A.ConveyorMove(pick(viable_cardinals))
-			else
-				A.ConveyorMove(dir)
+/turf/open/water/river/under
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-rockcf")
+	water_height = WATER_HEIGHT_FULL
+	immerse_overlay = null
+	shine = SHINE_MATTE
+	force_open_above = TRUE
 
 /turf/open/water/river/dirt
-	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
+	desc = "Murky water, churning along the river."
+	icon_state = MAP_SWITCH("rivermove", "rivermove-dirtg")
+	underlay_icon_state = "dirt"
 	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
+	slowdown = 5
+	slowdown = 1
+	current_speed = 1 SECONDS
+
+/turf/open/water/river/dirt/under
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-dirtgf")
+	water_height = WATER_HEIGHT_FULL
+	immerse_overlay = null
+	shine = SHINE_MATTE
+	force_open_above = TRUE
+
+/turf/open/water/river/marsh
+	desc = "Marshy water, churning along the river."
+	icon_state = MAP_SWITCH("rivermove", "rivermove-dirtm")
+	underlay_icon_state = "dirt"
+	water_reagent = /datum/reagent/water/gross/marshy
+	cleanliness_factor = -3
+	slowdown = 5
+	slowdown = 1
+	current_speed = 1 SECONDS
+
+/turf/open/water/river/marsh/under
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-dirtmf")
+	water_height = WATER_HEIGHT_FULL
+	immerse_overlay = null
+	shine = SHINE_MATTE
+	force_open_above = TRUE
 
 /turf/open/water/river/blood
-	icon_state = MAP_SWITCH("rock", "rivermovealt2-dir")
+	name = "blood"
+	desc = "This river flows a viscous red."
+	icon_state = MAP_SWITCH("rivermove", "rivermove-rockb")
+	underlay_icon_state = "rock"
 	water_reagent = /datum/reagent/blood
 	cleanliness_factor = -5
+
+/turf/open/water/river/blood/under
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-rockbf")
+	water_height = WATER_HEIGHT_FULL
+	immerse_overlay = null
+	shine = SHINE_MATTE
+	force_open_above = TRUE
 
 /turf/open/water/acid // holy SHIT
 	name = "acid pool"
 	desc = "Well... how did THIS get here?"
+	underlay_icon_state = null
 	water_reagent = /datum/reagent/rogueacid
 	cleanliness_factor = -100
+	is_swimming_tile = FALSE
+	immerse_overlay = null
 
 /turf/open/water/acid/mapped
 	desc = "You know how this got here. You think."
@@ -789,40 +973,70 @@
 
 /turf/open/water/ocean
 	name = "salt water"
-	desc = "The waves lap at the coast, hungry to swallow the land. Doesn't look too deep."
-	icon_state = MAP_SWITCH("gravel", "gravelW")
-	icon = 'icons/turf/natural/liquids.dmi'
+	desc = "The waves lap at the coast, hungry to swallow the land."
+	icon_state = MAP_SWITCH("water", "gravelW")
+	underlay_icon_state = "gravel"
 	neighborlay_self = "edgesalt"
-	water_level = 2
+	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 2
-	swim_skill = TRUE
-	wash_in = TRUE
 	water_reagent = /datum/reagent/water/salty
 	fishing_datum = /datum/fish_source/ocean
 
-/turf/open/water/ocean/deep
+/turf/open/water/ocean/abyss
 	name = "salt water"
 	desc = "Deceptively deep, be careful not to find yourself this far out."
 	icon = 'icons/turf/natural/liquids.dmi'
-	icon_state = MAP_SWITCH("ash", "ashW")
-	water_level = 3
+	icon_state = MAP_SWITCH("water", "ashW")
+	underlay_icon_state = null // to give the impression the water is deeper than there are actual z levels
+	can_examine_depth = FALSE
+	water_height = WATER_HEIGHT_DEEP
 	slowdown = 4
-	swim_skill = TRUE
-	wash_in = TRUE
 	fishing_datum = /datum/fish_source/ocean/deep
 
+/turf/open/water/ocean/abyss/under
+	desc = "Down in the abyssal depths, there is only loneliness and wrath."
+	icon_state = MAP_SWITCH("water", "gravelswf")
+	underlay_icon_state = "ash"
+	water_height = WATER_HEIGHT_FULL
+	shine = SHINE_MATTE
+	force_open_above = TRUE
+
 /datum/reagent/water/salty
+	name = "Salt Water"
 	taste_description = "salt"
 	color = "#3e7459"
 
-/datum/reagent/water/salty/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
-		..()
+/datum/reagent/water/salty/expose_mob(mob/living/exposed_mob, methods, reac_volume)
+	if(!(methods & INGEST)) // Make sure you DRANK the salty water before losing hydration
+		return
+	. = ..()
 
-/datum/reagent/water/salty/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.adjust_hydration(-hydration)  //saltwater dehydrates more than it hydrates
-		M.adjustToxLoss(0.25) // Slightly toxic
-		M.add_nausea(2)
+		H.adjust_hydration(-hydration * efficiency)  //saltwater dehydrates more than it hydrates
+		M.adjustToxLoss(0.25 * efficiency) // Slightly toxic
+		M.add_nausea(2 * efficiency)
 	..()
+
+/// Piss
+/turf/open/water/river/sewer
+	desc = "Piss-laden water! Flowing swiftly along the river."
+	icon_state = MAP_SWITCH("rivermove", "rivermove-sewerg")
+	underlay_icon_state = "paving"
+	water_reagent = /datum/reagent/water/gross/sewer
+	cleanliness_factor = -5
+	slowdown = 5
+	water_height = WATER_HEIGHT_ANKLE
+	footstep = FOOTSTEP_SHALLOW
+	barefootstep = FOOTSTEP_SHALLOW
+	clawfootstep = FOOTSTEP_SHALLOW
+	heavyfootstep = FOOTSTEP_SHALLOW
+	slowdown = 5
+	current_speed = 1 SECONDS
+
+/turf/open/water/river/sewer/roofflow
+	underlay_icon_state = "roof"
+
+/turf/open/water/river/sewer/floorflow
+	underlay_icon_state = "wooden_floort"

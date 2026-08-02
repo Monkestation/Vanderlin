@@ -1,8 +1,11 @@
+GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
+
 /obj/effect/decal/cleanable/blood
 	name = "blood"
 	desc = ""
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "floor1"
+	color = COLOR_BLOOD
 	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6")
 	blood_state = BLOOD_STATE_HUMAN
 	bloodiness = BLOOD_AMOUNT_PER_DECAL
@@ -48,7 +51,7 @@
 		H.bloody_hands++
 		H.update_inv_gloves()
 
-/obj/effect/decal/cleanable/blood/Initialize(mapload)
+/obj/effect/decal/cleanable/blood/Initialize(mapload, override_color)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
@@ -58,6 +61,10 @@
 	pixel_y = base_pixel_y + rand(5,5)
 	blood_timer = addtimer(CALLBACK(src, PROC_REF(become_dry)), rand(5 MINUTES,15 MINUTES), TIMER_STOPPABLE)
 	GLOB.weather_act_upon_list += src
+	if(override_color)
+		color = override_color
+		add_atom_colour(color, COLOUR_PRIORITY_AMOUNT)
+	update_appearance(UPDATE_ICON)
 
 
 /obj/effect/decal/cleanable/blood/proc/become_dry()
@@ -65,7 +72,7 @@
 		return
 	qdel(reagents)
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	bloodiness = 0
 
 /obj/effect/decal/cleanable/blood/lazy_init_reagents()
@@ -73,7 +80,7 @@
 		return
 	var/list/reagents_to_add
 	var/list/all_dna = GET_ATOM_BLOOD_DNA(src)
-	for(var/dna_sample as anything in all_dna)
+	for(var/dna_sample in all_dna)
 		var/datum/blood_type/blood = GLOB.blood_types[all_dna[dna_sample]]
 		if(blood)
 			LAZYADD(reagents_to_add, blood.reagent_type)
@@ -81,7 +88,7 @@
 		return
 	reagents.remove_all(reagents.total_volume)
 	var/num_reagents = length(reagents_to_add)
-	for(var/reagent_type as anything in reagents_to_add)
+	for(var/reagent_type in reagents_to_add)
 		reagents.add_reagent(reagent_type, round((bloodiness * 0.1) / num_reagents, 0.01))
 
 /obj/effect/decal/cleanable/blood/replace_decal(obj/effect/decal/cleanable/C)
@@ -91,7 +98,6 @@
 		C.alpha = initial(alpha)
 		C.bloodiness = initial(bloodiness)
 		C.name = initial(name)
-		C.color = initial(color)
 
 /obj/effect/decal/cleanable/blood/Destroy()
 	deltimer(blood_timer)
@@ -117,13 +123,13 @@
 
 /obj/effect/decal/cleanable/blood/splatter/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/splatter/P = C
-		P.drips++
-		if(P.drips > 2)
+		var/obj/effect/decal/cleanable/blood/splatter/previous = C
+		previous.drips++
+		if(previous.drips > 2)
 			var/turf/T = loc
 			if(istype(T))
-				new /obj/effect/decal/cleanable/blood(T)
-				qdel(P)
+				new /obj/effect/decal/cleanable/blood(T, previous.color)
+				qdel(previous)
 		return TRUE
 
 
@@ -144,11 +150,13 @@
 	appearance_flags = NO_CLIENT_COLOR
 	var/blood_timer
 
-/obj/effect/decal/cleanable/trail_holder/Initialize(mapload)
+/obj/effect/decal/cleanable/trail_holder/Initialize(mapload, override_color)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
 	blood_timer = addtimer(CALLBACK(src, PROC_REF(become_dry)), rand(5 MINUTES,8 MINUTES), TIMER_STOPPABLE)
+	if(override_color)
+		color = override_color
 
 /obj/effect/decal/cleanable/trail_holder/Destroy()
 	deltimer(blood_timer)
@@ -159,7 +167,7 @@
 	if(QDELETED(src))
 		return
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	alpha = 100
 	bloodiness = 0
 
@@ -185,7 +193,7 @@
 	for(var/i in 0 to rand(1,3))
 		sleep(2)
 		if(i > 0)
-			new /obj/effect/decal/cleanable/blood/splatter(loc, diseases)
+			new /obj/effect/decal/cleanable/blood/splatter(loc, color)
 		if(!step_to(src, get_step(src, direction), 0))
 			break
 
@@ -252,21 +260,21 @@
 		if(istype(T))
 			var/obj/effect/decal/cleanable/blood/puddle/PUD = locate() in T
 			if(!PUD)
-				PUD = new(T)
+				PUD = new(T, color)
 				PUD.blood_vol = blood_vol
 
 /obj/effect/decal/cleanable/blood/drip/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/drip/P = C
-		P.drips++
-		if(P.drips > 5)
+		var/obj/effect/decal/cleanable/blood/drip/previous = C
+		previous.drips++
+		if(previous.drips > 5)
 			var/turf/T = loc
 			if(istype(T))
-				var/obj/effect/decal/cleanable/blood/puddle/PUD = new(T)
+				var/obj/effect/decal/cleanable/blood/puddle/PUD = new(T, previous.color)
 				PUD.blood_vol = blood_vol
-				qdel(P)
+				qdel(previous)
 		else
-			P.update_appearance(UPDATE_ICON_STATE)
+			previous.update_appearance(UPDATE_ICON_STATE)
 		return TRUE
 
 /obj/effect/decal/cleanable/blood/puddle
@@ -294,9 +302,10 @@
 
 /obj/effect/decal/cleanable/blood/puddle/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/puddle/P = C
-		P.blood_vol += 10
-		P.update_appearance(UPDATE_ICON_STATE)
+		var/obj/effect/decal/cleanable/blood/puddle/previous = C
+		previous.blood_vol += 10
+		previous.update_appearance(UPDATE_ICON_STATE)
+		previous.color = color
 		return TRUE
 
 
@@ -390,7 +399,7 @@
 	. = ..()
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.STAINT < 12)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) < 12)
 			return
 	if(shoe_types.len)
 		. += "You recognise the footprints as belonging to:\n"
@@ -406,3 +415,127 @@
 	if((blood_state != BLOOD_STATE_OIL) && (blood_state != BLOOD_STATE_NOT_BLOODY))
 		return 1
 	return 0
+
+/obj/effect/decal/cleanable/blood/over_wall
+	name = "blood splatter"
+	icon_state = "splatter1"
+	plane = GAME_PLANE
+	layer = BULLET_HOLE_LAYER //For obvious reasons.
+	var/list/splattericons = list("splatter1", "splatter2", "splatter3", "splatter4", "splatter5", "splatter6")
+	// Incremental for more blood on a wall
+	var/spray_amounts = 1
+
+/obj/effect/decal/cleanable/blood/over_wall/proc/increase_gore()
+	if(spray_amounts >= 3)
+		return TRUE // too full do an splatter on the ground instead
+	spray_amounts++
+
+	switch(spray_amounts)
+		if(2)
+			name = "gruesome blood splatter"
+		if(3)
+			name = "BRUTAL blood splatter"
+
+	add_overlay(pick_n_take(splattericons))
+	return FALSE
+
+/obj/effect/decal/cleanable/blood/over_wall/Initialize(mapload)
+	. = ..()
+	icon_state = pick_n_take(splattericons)
+
+/obj/effect/decal/cleanable/blood/over_wall/replace_decal(obj/effect/decal/cleanable/C)
+	return
+
+/obj/effect/decal/cleanable/blood/wallsplatter
+	name = "flying blood splatter"
+	icon_state = "splatter1"
+	plane = GAME_PLANE
+	layer = BULLET_HOLE_LAYER //For obvious reasons.
+	random_icon_states = list("splatter1", "splatter2", "splatter3", "splatter4", "splatter5", "splatter6")
+
+	var/turf/prev_loc
+	/// Skip making the final blood splatter when we're done, like if we're not in a turf
+	var/skip = FALSE
+	/// How many tiles/items/people we can paint red
+	var/splatter_strength = 1
+	/// Insurance so that we don't keep moving once we hit a stoppoint
+	var/hit_endpoint = FALSE
+	/// How fast the splatter moves
+	var/splatter_speed = 0.1 SECONDS
+	/// Tracks what direction we're flying
+	var/flight_dir = NONE
+
+/obj/effect/decal/cleanable/blood/wallsplatter/Initialize(mapload, splatter_strength)
+	. = ..()
+	prev_loc = loc //Just so we are sure prev_loc exists
+	if(splatter_strength)
+		src.splatter_strength = splatter_strength
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/expire()
+	if(isturf(loc) && !skip)
+		playsound(src, 'sound/effects/wounds/splatter.ogg', 60, TRUE, -1)
+		loc.add_blood_DNA(GET_ATOM_BLOOD_DNA(src))
+	qdel(src)
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/fly_towards(turf/target_turf, range)
+	flight_dir = get_dir(src, target_turf)
+	var/datum/move_loop/loop = SSmove_manager.move_towards(src, target_turf, splatter_speed, timeout = splatter_speed * range, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_START_FAST)
+	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
+	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
+	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(loop_done))
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/pre_move(datum/move_loop/source)
+	SIGNAL_HANDLER
+	prev_loc = loc
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/post_move(datum/move_loop/source)
+	SIGNAL_HANDLER
+	if(loc == prev_loc || !isturf(loc))
+		return
+
+	for(var/atom/movable/iter_atom in loc)
+		if(hit_endpoint)
+			return
+		if(iter_atom == src || iter_atom.invisibility || iter_atom.alpha <= 0 || (isobj(iter_atom) && !iter_atom.density))
+			continue
+		if(splatter_strength <= 0)
+			break
+		iter_atom.add_blood_DNA(GET_ATOM_BLOOD_DNA(src))
+	splatter_strength--
+
+	if(splatter_strength <= 0)
+		expire()
+		return
+
+/obj/effect/decal/cleanable/blood/wallsplatter/proc/loop_done(datum/source)
+	SIGNAL_HANDLER
+	if(!QDELETED(src))
+		expire()
+
+/obj/effect/decal/cleanable/blood/wallsplatter/Bump(atom/bumped_atom)
+	if(!iswallturf(bumped_atom) && !isclosedturf(bumped_atom) && !istype(bumped_atom, /obj/structure/window))
+		expire()
+		return
+
+	hit_endpoint = TRUE
+	if(!isturf(prev_loc)) // This will only happen if prev_loc is not even a turf, which is highly unlikely.
+		abstract_move(bumped_atom)
+		expire()
+		return
+
+	abstract_move(bumped_atom)
+	skip = TRUE
+
+	var/obj/effect/decal/cleanable/blood/over_wall/alreadysplatted = locate() in prev_loc //Don't spread foam where there's already foam!
+	if(alreadysplatted)
+		if(alreadysplatted.increase_gore())
+			return
+		expire()
+		return
+
+	var/obj/effect/decal/cleanable/blood/over_wall/final_splatter = new(prev_loc, null)
+	final_splatter.pixel_x = (dir == EAST ? 32 : (dir == WEST ? -32 : 0))
+	final_splatter.pixel_y = (dir == NORTH ? 32 : (dir == SOUTH ? -32 : 0))
+
+/obj/effect/decal/cleanable/blood/wallsplatter/replace_decal(obj/effect/decal/cleanable/C)
+	return //We don't want to replace decals for wall turfs since these are unique. May be changed in the future if it's too much.

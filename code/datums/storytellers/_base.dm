@@ -3,7 +3,7 @@
 /// Lower follower modifier for special storytellers such as Astrata, who is a default patron
 #define LOWER_FOLLOWER_MODIFIER STANDARD_FOLLOWER_MODIFIER - 3
 /// Standard follower modifier for inhumen storytellers, ie. how many points they get for each follower
-#define STANDARD_INHUMEN_MODIFIER 22
+#define STANDARD_INHUMEN_MODIFIER 18
 /// Lower follower modifier for special inhumen storytellers such as Zizo, who gets extra undead followers
 #define LOWER_INHUMEN_FOLLOWER_MODIFIER STANDARD_INHUMEN_MODIFIER - 3
 
@@ -49,7 +49,7 @@
 	var/roundstart_points_variance = 15
 
 	/// Whether the storyteller guaranteed a roleset roll (antag) on roundstart. (Still needs to pass pop check)
-	var/guarantees_roundstart_roleset = TRUE
+	var/guarantees_roundstart_roleset = FALSE
 
 	/// Whether the storyteller has the distributions disabled. Important for ghost storytellers
 	var/disable_distribution = FALSE
@@ -65,7 +65,7 @@
 	///have we done roundstart checks?
 	var/roundstart_checks = FALSE
 	///prob of roundstart antag
-	var/roundstart_prob = 90
+	var/roundstart_prob = 80
 	///do we ignore ran_roundstart
 	var/ignores_roundstart = FALSE
 	///is a storyteller always able to be voted for(also does not count for the amount of storytellers to pick from)
@@ -103,14 +103,14 @@
 	if(!guarantees_roundstart_roleset && prob(roundstart_prob) && !roundstart_checks)
 		roundstart_checks = TRUE
 
-	if(SSgamemode.current_roundstart_event && !SSgamemode.ran_roundstart && (guarantees_roundstart_roleset || roundstart_checks))
-		buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION, TRUE)
-		if(EVENT_TRACK_CHARACTER_INJECTION in SSgamemode.forced_next_events)
-			SSgamemode.forced_next_events[EVENT_TRACK_CHARACTER_INJECTION] = null
-			SSgamemode.forced_next_events -= EVENT_TRACK_CHARACTER_INJECTION
-
-		log_storyteller("Running SSgamemode.current_roundstart_event\[[SSgamemode.current_roundstart_event]\]")
-		SSgamemode.ran_roundstart = TRUE
+	if(roundstart_checks && SSgamemode.can_run_roundstart && !SSgamemode.ran_roundstart && SSgamemode.current_roundstart_event)
+		if(SSgamemode.current_roundstart_event.canSpawnEvent(get_active_player_count(afk_check = 1)))
+			buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION)
+			if(EVENT_TRACK_CHARACTER_INJECTION in SSgamemode.forced_next_events)
+				SSgamemode.forced_next_events[EVENT_TRACK_CHARACTER_INJECTION] = null
+				SSgamemode.forced_next_events -= EVENT_TRACK_CHARACTER_INJECTION
+			log_storyteller("Running SSgamemode.current_roundstart_event\[[SSgamemode.current_roundstart_event]\]")
+			SSgamemode.ran_roundstart = TRUE
 
 	add_points()
 	handle_tracks()

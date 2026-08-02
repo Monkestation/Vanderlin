@@ -5,6 +5,7 @@
 	icon = 'icons/roguetown/clothing/patron_hoods.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_hoods.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 450 GRAMS
 
 /obj/item/clothing/head/roguehood/nochood
 	name = "moon hood"
@@ -14,7 +15,7 @@
 	default_hidden = HIDEEARS|HIDEHAIR
 	dropshrink = 0.8
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/silk
@@ -25,20 +26,23 @@
 	icon_state = "deathface"
 	flags_inv = HIDEEARS | HIDEHAIR | HIDEFACIALHAIR
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/padded/deathshroud
 	name = "death shroud"
 	desc = "Worn by the faithful of Necra, or less savory individuals."
 	icon_state = "necrahood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/padded/pestra
 	name = "naga hood"
 	desc = "Worn by the faithful of Pestra. Resembling the face of the Naga clothed in rot."
 	icon_state = "pestrahood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/padded/abyssor
 	name = "sea hood"
@@ -47,6 +51,7 @@
 	icon = 'icons/roguetown/clothing/patron_hoods.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_robes.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/eora
 	name = "opera hood"
@@ -57,9 +62,18 @@
 	bloody_icon_state = "helmetblood_big"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	resistance_flags = FIRE_PROOF // Made of metal
-	armor = ARMOR_WEAK
-	salvage_result = NUTRITION_LEVEL_HUNGRY
+	armor_type = /datum/armor/head/maille/iron
+	blocksound = CHAINHIT
+	prevent_crits = CUT_AND_MINOR_CRITS
+	break_sound = 'sound/foley/breaksound.ogg'
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	body_parts_covered = FACE | NECK
+	hooded_body_parts_covered = HEAD_EXCEPT_MOUTH
+
+	max_integrity = INTEGRITY_STANDARD
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/astrata
 	name = "sun hood"
@@ -67,8 +81,15 @@
 	icon_state = "astratahood"
 	resistance_flags = FIRE_PROOF // Not the sun hat!
 
-	armor = ARMOR_MINIMAL
+	armor_type = /datum/armor/minimal
 	prevent_crits = MINOR_CRITICALS
+
+/obj/item/clothing/head/padded/malumhood
+	name = "sculptor's mask"
+	desc = "As Malum sculpts his great works, so does he sculpt his workers."
+	icon_state = "malumhood"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/priest
 	name = "solar visage"
@@ -85,7 +106,7 @@
 	default_hidden = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	body_parts_covered = FULL_HEAD | NECK
 	prevent_crits = MINOR_CRITICALS
 
@@ -112,20 +133,9 @@
 		user.update_fov_angles()
 		user.regenerate_clothes()
 
-/obj/item/clothing/head/roguehood/priest/equipped(mob/user, slot)
-	. = ..()
-	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-	else
-		REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
-/obj/item/clothing/head/roguehood/priest/dropped(mob/user)
-	. = ..()
-	REMOVE_TRAIT(user, TRAIT_ANTIMAGIC,"Anti-Magic")
-
 /obj/item/clothing/head/roguehood/priest/pickup(mob/living/user)
-	if((user.job != "Priest") && (user.job != "Priestess"))
-		playsound(user, 'sound/misc/gods/astrata_scream.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
+	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
+		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		user.visible_message(span_reallybig("UNWORTHY HANDS TOUCH MY VISAGE, CEASE OR BE PUNISHED"))
 		spawn(30)
 			if(loc == user)
@@ -142,9 +152,10 @@
 	dynamic_hair_suffix = ""
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	resistance_flags = FIRE_PROOF
+	item_weight = 135 GRAMS
 
 /obj/item/clothing/head/priestmask/pickup(mob/living/user)
-	if((user.job != "Priest") && (user.job != "Priestess"))
+	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
 		to_chat(user, "<font color='yellow'>UNWORTHY HANDS TOUCH THE VISAGE, CEASE OR BE PUNISHED</font>")
 		spawn(30)
 			if(loc == user)

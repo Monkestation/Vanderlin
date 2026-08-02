@@ -1,4 +1,5 @@
 /obj/item/weapon
+	abstract_type = /obj/item/weapon
 	name = "weapon"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
@@ -15,12 +16,12 @@
 	pickup_sound = "rustle" // Sound list define strings are in code/game/sound.dm
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	drop_sound = 'sound/foley/dropsound/mace_drop.ogg'
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = 200
-	wdefense = 3
+	max_integrity = INTEGRITY_STANDARD
+	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
 	embedding = list(
@@ -28,35 +29,46 @@
 		"embedded_pain_multiplier" = 1,
 		"embedded_fall_chance" = 0,
 	)
-	var/initial_sl
-	var/list/possible_enhancements
-	var/renamed_name
-	var/axe_cut = 0
 	istrainable = TRUE // You can train weapon skills on a dummy with these.
+	var/axe_cut = 0
+	var/datum/special_intent/weapon_special
 
 /obj/item/weapon/Initialize(mapload)
 	. = ..()
 	if(!destroy_message)
 		destroy_message = span_warning("[pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")]")
 
-	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
+	if(weapon_special)
+		weapon_special = new weapon_special
+
+/obj/item/weapon/equipped(mob/user, slot, initial)
+	. = ..()
+	if(initial && randomize_blade_int)
+		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
+
+/obj/item/weapon/Destroy(force)
+	if(istype(weapon_special))
+		QDEL_NULL(weapon_special)
+	return ..()
 
 /obj/item/weapon/attack_hand(mob/user)
 	if(is_species(user, /datum/species/werewolf)) //slop fix
-		return TRUE
-	. = ..()
+		return FALSE
 
-/obj/item/weapon/pickup(mob/user)
-	. = ..()
 	if(HAS_TRAIT(user, TRAIT_RAVOX_CURSE) && prob(33))
 		var/mob/living/carbon/human/H = user
 		to_chat(H, span_warning("The idea repulses me!"))
 		H.cursed_freak_out()
 		H.Paralyze(4 SECONDS)
-		return
+		return FALSE
 
-/obj/item/weapon/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
+	. = ..()
+
+/obj/item/weapon/examine(mob/user)
+	. = ..()
+
+	if(istype(weapon_special))
+		. += weapon_special.get_examine()
 
 /obj/item/weapon/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user)
 	if(!get_sharpness() || !affecting.can_dismember(src))
@@ -94,7 +106,7 @@
 	if(affecting.body_zone == BODY_ZONE_HEAD) //Decapitations are harder to pull off in general
 		probability *= 0.5
 	var/hard_dismember = HAS_TRAIT(affecting, TRAIT_HARDDISMEMBER)
-	var/easy_dismember = affecting.rotted || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
+	var/easy_dismember = HAS_TRAIT(affecting, TRAIT_ROTTEN) || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
 	if(affecting.owner)
 		if(!hard_dismember)
 			hard_dismember = HAS_TRAIT(affecting.owner, TRAIT_HARDDISMEMBER)

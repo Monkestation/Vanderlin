@@ -37,10 +37,10 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	open_phrase = _open_phrase || "[open_word()] [magic_word()]"
 	GLOB.secret_door_managers[id] = src
 
-/datum/secret_door_manager/Destroy(force, ...)
+/datum/secret_door_manager/Destroy(force)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN)
 	for(var/obj/structure/door/secret/door in doors)
-		UnregisterSignal(door, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_HEAR))
+		UnregisterSignal(door, list(COMSIG_QDELETING, COMSIG_MOVABLE_HEAR))
 	GLOB.secret_door_managers -= id
 	. = ..()
 
@@ -54,14 +54,14 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	if(new_door in doors)
 		return
 	RegisterSignal(new_door, COMSIG_MOVABLE_HEAR, PROC_REF(door_hear))
-	RegisterSignal(new_door, COMSIG_PARENT_QDELETING, PROC_REF(clear_door))
+	RegisterSignal(new_door, COMSIG_QDELETING, PROC_REF(clear_door))
 	doors |= new_door
 
 /datum/secret_door_manager/proc/remove_door(obj/structure/door/secret/to_remove)
 	var/obj/structure/door/old_door = locate(to_remove) in doors
 	if(!old_door)
 		return
-	UnregisterSignal(old_door, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_HEAR))
+	UnregisterSignal(old_door, list(COMSIG_QDELETING, COMSIG_MOVABLE_HEAR))
 	doors -= old_door
 
 /datum/secret_door_manager/proc/clear_door(obj/structure/door/source)
@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 			. += span_purple("There's a hidden door here...")
 		else
 			var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
-			if(L.STAPER + bonuses >= hidden_dc)
+			if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses >= hidden_dc)
 				. += span_purple("Something isn't right about this wall...")
 
 /obj/structure/door/secret/Open(silent = FALSE)
@@ -419,3 +419,29 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 	memory_name = "thieves' guild's"
 	vips = list(/datum/job/matron)
+
+/obj/effect/mapping_helpers/secret_door_creator/courtagent_hideout
+	name = "Court Agent's Hideout Secret Door Creator"
+	color = "#036bfc"
+	override_floor = FALSE
+	hidden_dc = 14
+	use_phrases = TRUE
+	lang = list(/datum/language/common)
+
+	manager_id = "court agent"
+	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
+	memory_name = "court agent's"
+	vips = list(/datum/job/hand, /datum/job/courtagent)
+
+
+/obj/effect/mapping_helpers/secret_door_creator/rous
+	name = "Rous Secret Door Creator"
+	color = "#dcec4b"
+	override_floor = FALSE
+	hidden_dc = 16
+	use_phrases = TRUE
+	lang = list(/datum/language/rousman)
+	manager_id = "rousdoors"
+	accessor_trait = TRAIT_KNOW_ROUS_DOORS
+	memory_name = "Rous'"
+	vips = list(/datum/job/rousman)

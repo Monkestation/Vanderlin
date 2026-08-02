@@ -16,25 +16,49 @@ LINEN BINS
 	throwforce = 0
 	throw_speed = 1
 	throw_range = 2
-	w_class = WEIGHT_CLASS_TINY
+	w_class = WEIGHT_CLASS_SMALL
+	grid_width = 64
+	grid_height = 64
 	resistance_flags = FLAMMABLE
 	dying_key = DYE_REGISTRY_BEDSHEET
+	item_weight = 540 GRAMS //not weighted blankets but higher end heavy since cold
 
 	var/list/dream_messages = list("white")
 	var/datum/weakref/signal_sleeper //this is our goldylocks
 	var/bed_tucked = FALSE
 
-/obj/item/bedsheet/Initialize()
+/obj/item/bedsheet/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/bed_tuckable, 0, 0, 0)
+	AddElement(/datum/element/bed_tuckable, mapload, 0, 0, 0)
 
-/obj/item/bedsheet/attack_self(mob/living/user, params)
+/obj/item/bedsheet/examine(mob/user)
+	. = ..()
+	if(bed_tucked)
+		. += span_info("[src] is tucked into the bed.")
+
+/obj/item/bedsheet/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+	var/mob/living/to_cover = interacting_with
+	if(to_cover.body_position != LYING_DOWN)
+		return ITEM_INTERACT_BLOCKING
+	if(!user.transferItemToLoc(src, get_turf(to_cover)))
+		return ITEM_INTERACT_BLOCKING
+
+	balloon_alert(user, "covered")
+	coverup(to_cover)
+	add_fingerprint(user)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/bedsheet/attack_self(mob/living/user, list/modifiers)
 	if(!user.CanReach(src))		//No telekenetic grabbing.
 		return
-	if(!user.resting)
+	if(user.body_position != LYING_DOWN)
 		return
-	if(!user.dropItemToGround(src))
+	if(!user.transferItemToLoc(src, get_turf(src)))
 		return
+
 	coverup(user)
 	add_fingerprint(user)
 
@@ -43,7 +67,7 @@ LINEN BINS
 	plane = GAME_PLANE_UPPER
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
-	to_chat(sleeper, "<span class='notice'>I cover myself with [src].</span>")
+	balloon_alert(sleeper, "covered")
 	var/angle = sleeper.lying_prev
 	dir = angle2dir(angle + 180) // 180 flips it to be the same direction as the mob
 
@@ -51,7 +75,7 @@ LINEN BINS
 	RegisterSignal(src, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	RegisterSignal(sleeper, COMSIG_MOVABLE_MOVED, PROC_REF(smooth_sheets))
 	RegisterSignal(sleeper, COMSIG_LIVING_SET_RESTING, PROC_REF(smooth_sheets))
-	RegisterSignal(sleeper, COMSIG_PARENT_QDELETING, PROC_REF(smooth_sheets))
+	RegisterSignal(sleeper, COMSIG_QDELETING, PROC_REF(smooth_sheets))
 
 /obj/item/bedsheet/proc/smooth_sheets(mob/living/sleeper)
 	SIGNAL_HANDLER
@@ -59,10 +83,11 @@ LINEN BINS
 	UnregisterSignal(src, COMSIG_ITEM_PICKUP)
 	UnregisterSignal(sleeper, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(sleeper, COMSIG_LIVING_SET_RESTING)
-	UnregisterSignal(sleeper, COMSIG_PARENT_QDELETING)
-	to_chat(sleeper, "<span class='notice'>I smooth [src] out beneath you.</span>")
+	UnregisterSignal(sleeper, COMSIG_QDELETING)
+	balloon_alert(sleeper, "smoothed sheets")
 	layer = initial(layer)
 	plane = initial(plane)
+	pixel_z = 0
 	signal_sleeper = null
 
 // We need to do this in case someone picks up a bedsheet while a mob is covered up
@@ -75,20 +100,20 @@ LINEN BINS
 	UnregisterSignal(src, COMSIG_ITEM_PICKUP)
 	UnregisterSignal(sleeper, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(sleeper, COMSIG_LIVING_SET_RESTING)
-	UnregisterSignal(sleeper, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(sleeper, COMSIG_QDELETING)
 	signal_sleeper = null
 
-/obj/item/bedsheet/attack_hand(mob/user, params)
+/obj/item/bedsheet/attack_hand(mob/user, list/modifiers)
 	if(!bed_tucked)
 		return ..()
 	if(do_after(user, 2 SECONDS, src))
 		var/obj/structure/bed/bed = locate() in loc
 		if(bed)
-			to_chat(user, span_notice("You start to remove \the [src] from \the [bed]."))
+			to_chat(user, span_notice("You remove \the [src] from \the [bed]."))
 			bed.sheet_tucked = FALSE
-			bed.sheet_on = FALSE
 			bed_tucked = FALSE
 		return ..()
+
 /obj/item/bedsheet/cloth
 	desc = ""
 	icon = 'icons/roguetown/misc/structure.dmi'

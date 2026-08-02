@@ -10,7 +10,7 @@
 	if(processes)
 		START_PROCESSING(SSobj, src)
 
-/datum/world_trait/Destroy(force, ...)
+/datum/world_trait/Destroy(force)
 	. = ..()
 	if(processes)
 		STOP_PROCESSING(SSobj, src)

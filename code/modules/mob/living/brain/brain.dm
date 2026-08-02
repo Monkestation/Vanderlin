@@ -6,6 +6,7 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 	base_intents = list(INTENT_HELP, INTENT_HARM) //for mechas
 	speech_span = SPAN_ROBOT
+	bloodpool = 0
 
 /mob/living/brain/Initialize()
 	. = ..()
@@ -16,8 +17,8 @@
 		OB.brainmob = src
 		forceMove(OB)
 
-		ADD_TRAIT(src, TRAIT_IMMOBILIZED, BRAIN_UNAIDED)
-		ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
+	ADD_TRAIT(src, TRAIT_IMMOBILIZED, BRAIN_UNAIDED)
+	ADD_TRAIT(src, TRAIT_HANDS_BLOCKED, BRAIN_UNAIDED)
 
 /mob/living/brain/Destroy()
 	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
@@ -31,7 +32,7 @@
 /mob/living/brain/proc/create_dna()
 	stored_dna = new /datum/dna/stored(src)
 	if(!stored_dna.species)
-		var/rando_race = pick(get_selectable_species())
+		var/rando_race = pick(pick(GLOB.roundstart_species))
 		set_species(rando_race)
 
 /mob/living/brain/ex_act() //you cant blow up brainmobs because it makes transfer_to() freak out when borgs blow up.
@@ -40,8 +41,8 @@
 /mob/living/brain/get_eye_protection()//no eyes
 	return 2
 
-/mob/living/brain/get_ear_protection()//no ears
-	return 2
+/mob/living/brain/get_ear_protection(ignore_deafness = FALSE)
+	return ..() + EAR_PROTECTION_HEAVY
 
 /mob/living/brain/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0)
 	return // no eyes, no flashing

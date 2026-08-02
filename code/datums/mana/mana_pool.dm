@@ -73,6 +73,8 @@
 
 	var/next_message = 0
 
+	VAR_PRIVATE/is_processing = FALSE
+
 /datum/mana_pool/New(atom/parent = null)
 	. = ..()
 	donation_budget_this_tick = max_donation_rate_per_second
@@ -82,7 +84,7 @@
 
 	START_PROCESSING(SSmagic, src)
 
-/datum/mana_pool/Destroy(force, ...)
+/datum/mana_pool/Destroy(force)
 	attunements = null
 	attunements_to_generate = null
 	negative_attunements = null
@@ -94,6 +96,12 @@
 
 	STOP_PROCESSING(SSmagic, src)
 
+	if(parent && ismob(parent))
+		var/mob/holder = parent
+		var/datum/hud/human/hud_used = holder.hud_used
+		if(hud_used?.mana)
+			hud_used.mana.icon_state = initial(hud_used.mana.icon_state)
+
 	if (parent.mana_pool != src)
 		stack_trace("[parent].mana_pool was not [src] when src had parent registered!")
 	else
@@ -101,6 +109,26 @@
 	parent = null
 
 	return ..()
+
+/datum/mana_pool/proc/needs_processing()
+	if(ethereal_recharge_rate != 0 && amount < get_safe_softcap())
+		return TRUE
+	if(intrinsic_recharge_sources && amount < get_softcap())
+		return TRUE
+	if(length(transferring_to))
+		return TRUE
+	if(amount > get_softcap())
+		return TRUE
+	return FALSE
+
+/datum/mana_pool/proc/update_processing_state()
+	var/should_process = needs_processing()
+	if(should_process && !is_processing)
+		is_processing = TRUE
+		START_PROCESSING(SSmagic, src)
+	else if(!should_process && is_processing)
+		is_processing = FALSE
+		STOP_PROCESSING(SSmagic, src)
 
 /datum/mana_pool/proc/set_parent(atom/parent)
 	src.parent = parent
@@ -192,9 +220,9 @@
 
 	donation_budget_this_tick = (max_donation_rate_per_second)
 
-	if (ethereal_recharge_rate != 0 && (amount < get_softcap()))
+	if (ethereal_recharge_rate != 0 && (amount < get_safe_softcap()))
 		adjust_mana(ethereal_recharge_rate, attunements_to_generate)
-	if((intrinsic_recharge_sources & MANA_ALL_LEYLINES) && amount < get_softcap())
+	if((intrinsic_recharge_sources & MANA_ALL_LEYLINES) && amount < get_safe_softcap())
 		var/list/leylines = list()
 		for(var/obj/effect/ebeam/beam in range(3, get_turf(parent)))
 			if(!beam.owner.mana_pool)
@@ -303,7 +331,9 @@
 
 /// Perform a "natural" transfer where we use the default transfer rate, capped by the usual math
 /datum/mana_pool/proc/transfer_mana_to(datum/mana_pool/target_pool)
-	return transfer_specific_mana(target_pool, get_transfer_rate_for(target_pool))
+	. = transfer_specific_mana(target_pool, get_transfer_rate_for(target_pool))
+	update_processing_state()
+	return .
 
 /// Returns the amount of mana we want to give in a given tick
 /datum/mana_pool/proc/get_transfer_rate_for(datum/mana_pool/target_pool)
@@ -339,7 +369,7 @@
 
 	target_pool.incoming_transfer_start(src)
 
-	RegisterSignal(target_pool, COMSIG_PARENT_QDELETING, PROC_REF(stop_transfer), override = TRUE)
+	RegisterSignal(target_pool, COMSIG_QDELETING, PROC_REF(stop_transfer), override = TRUE)
 
 	if (force_process)
 		transferring_to[target_pool] |= MANA_POOL_SKIP_NEXT_TRANSFER
@@ -356,8 +386,9 @@
 	transferring_to -= target_pool
 	target_pool.incoming_transfer_end(src)
 
-	UnregisterSignal(target_pool, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(target_pool, COMSIG_QDELETING)
 
+	update_processing_state()
 	return MANA_POOL_TRANSFER_STOP
 
 /datum/mana_pool/proc/incoming_transfer_start(datum/mana_pool/donator)
@@ -392,6 +423,7 @@
 			hud_used.mana.icon_state = "mana[filled]"
 	if(parent)
 		SEND_SIGNAL(parent, COMSIG_MANA_POOL_ADJUSTED, result - src.amount)
+	update_processing_state()
 
 ///this takes a string and adds it to our halters creates the list if it doesn't exist
 /datum/mana_pool/proc/halt_mana_disperse(string)
@@ -426,6 +458,7 @@
 	var/old_flags = intrinsic_recharge_sources
 	intrinsic_recharge_sources |= new_bitflags
 	update_intrinsic_recharge(old_flags)
+	update_processing_state()
 
 /datum/mana_pool/proc/update_intrinsic_recharge(previous_recharge_sources = NONE)
 	if (intrinsic_recharge_sources & MANA_ALL_LEYLINES)
@@ -450,6 +483,7 @@
 	ethereal_recharge_rate = new_value
 	if ((ethereal_recharge_rate > 0) && isnull(attunements_to_generate))
 		attunements_to_generate = get_default_attunements_to_generate()
+	update_processing_state()
 
 /datum/mana_pool/proc/get_default_attunements_to_generate()
 	RETURN_TYPE(/list/datum/attunement)
@@ -469,6 +503,18 @@
 
 	maximum_mana_capacity = new_max
 
+	if(parent && ismob(parent))
+		var/mob/holder = parent
+		var/datum/hud/human/hud_used = holder.hud_used
+		if(hud_used?.mana)
+			var/filled = round((src.amount / get_softcap()) * 100, 10)
+			if(filled < 10)
+				return
+			filled = clamp(filled, 0, 120)
+			hud_used.mana.icon_state = "mana[filled]"
+		holder.mana_overload_threshold = maximum_mana_capacity * 0.9
+	update_processing_state()
+
 /datum/mana_pool/proc/get_percent_to_max()
 	SHOULD_BE_PURE(TRUE)
 
@@ -485,8 +531,16 @@
 	if(!istype(L) || !L.mind)
 		return softcap
 
-	var/skill_level = max(1, L.get_skill_level(/datum/skill/magic/arcane))
+	var/skill_level = max(1, GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/magic/arcane))
 	return softcap + (skill_level * 100)
+
+/datum/mana_pool/proc/get_safe_softcap()
+	var/softcap = get_softcap()
+	if(ismob(parent))
+		var/mob/holder = parent
+		return min(softcap, holder.mana_overload_threshold-10)
+	else
+		return softcap
 
 ///this is how a mana pool responds to backlash for most pools this is just taking damage
 /datum/mana_pool/proc/mana_backlash(backlash_intensity)
@@ -498,7 +552,7 @@
 				to_chat(parent, span_warning("I feel woozy after casting that spell."))
 			if(10 to 30)
 				to_chat(parent, span_danger("I feel sharp pains coursing through my body!"))
-				parent:blood_volume -= backlash_intensity
+				parent:adjust_blood_volume(-backlash_intensity)
 			if(30 to 50)
 				parent.visible_message(span_danger("[parent] collapses as they vomit blood from the recoil."), span_danger("I feel my organs being ripped apart!"))
 				parent:vomit(1, blood = TRUE, stun = FALSE)

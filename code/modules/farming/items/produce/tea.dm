@@ -5,7 +5,6 @@
 	seed = /obj/item/neuFarm/seed/tea
 	tastes = list("grass" = 1)
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	rotprocess = null
 
 /obj/item/reagent_containers/food/snacks/produce/tealeaves_dry
@@ -16,7 +15,6 @@
 	tastes = list("bitterness" = 1)
 	seed = /obj/item/neuFarm/seed/tea
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	rotprocess = null
 	w_class = WEIGHT_CLASS_TINY
 	mill_result = /obj/item/reagent_containers/food/snacks/produce/tealeaves_ground
@@ -28,6 +26,5 @@
 	icon_state = "teaground"
 	tastes = list("bitterness" = 1)
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	rotprocess = null
 	w_class = WEIGHT_CLASS_TINY

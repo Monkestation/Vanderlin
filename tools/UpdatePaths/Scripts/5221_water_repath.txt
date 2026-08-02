@@ -1,0 +1,5 @@
+/turf/open/water/cleanshallow : /turf/open/water/clean
+/turf/open/water/cleanshallow/dirt : /turf/open/water/clean/dirt
+/turf/open/water/swamp/high : /turf/open/water/swamp/deep
+/turf/open/water/marsh/high : /turf/open/water/marsh/deep
+/turf/open/water/ocean/deep : /turf/open/water/ocean/abyss

@@ -70,15 +70,6 @@
 	loc = null
 	references.Cut()
 
-
-/**
- * Removes any null entries from the list
- * Returns TRUE if the list had nulls, FALSE otherwise
-**/
-/proc/list_clear_nulls(list/list_to_clear)
-	return (list_to_clear.RemoveAll(null) > 0)
-
-
 /**
  * returns every hearing movable in view to the turf of source not taking into account lighting
  * useful when you need to maintain always being able to hear something if a sound is emitted from it and you can see it (and youre in range).

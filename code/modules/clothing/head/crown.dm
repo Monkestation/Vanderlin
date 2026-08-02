@@ -2,14 +2,16 @@
 	dynamic_hair_suffix = ""				// this just means hair does not change when item is worn
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	abstract_type = /obj/item/clothing/head/crown
+	item_weight = 2.23 KILOGRAMS //the weight of the crown or something thematic
 
 /obj/item/clothing/head/crown/circlet
 	name = "golden circlet"
 	icon_state = "goldcirclet"
 	sellprice = VALUE_GOLD_ITEM
+	item_weight = 600 GRAMS
 
 /obj/item/clothing/head/crown/circlet/golddiadem
 	name = "gold diadem"
@@ -30,12 +32,14 @@
 	name = "zenarii headdress"
 	desc = "A fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_g"
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/crown/circlet/silverheaddress
 	name = "ziliquae headdress"
 	desc = "A fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_s"
 	sellprice = VALUE_SILVER_ITEM
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/crown/circlet/silverheaddress/Initialize()
 	. = ..()
@@ -103,6 +107,8 @@
 	name = "crown of Vanderlin"
 	desc = "Heavy is the weight of the crown, and even heavier the responsibility it infers to its wearer."
 	icon_state = "serpcrown"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	sellprice = VALUE_EXTREME
 	resistance_flags = FIRE_PROOF|ACID_PROOF|LAVA_PROOF|UNACIDABLE|INDESTRUCTIBLE
 
@@ -132,12 +138,14 @@
 	desc = "Winner of tournaments, bask in Ravox's glory."
 	icon_state = "sparrowcrown"
 	sellprice = VALUE_GOLD_ITEM
+	item_weight = 125 GRAMS
 
-/obj/item/clothing/head/crown/hemhem
+/*obj/item/clothing/head/crown/hemhem
 	name = "hemhem crown"
 	desc = "A large ceremonial crown heavily associated with the Hemhem desert, located in the Queendom of Lakkari. It looks pretty heavy."
 	icon_state = "hemhem"
 	sellprice = VALUE_GOLD_ITEM
+*/
 
 /obj/item/clothing/head/crown/circlet/vision
 	name = "mystical circlet"
@@ -164,9 +172,9 @@
 /obj/item/clothing/head/crown/circlet/sleepless/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_NOSLEEP,"Fatal Insomnia")
+		ADD_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
 	else
-		REMOVE_TRAIT(user, TRAIT_NOSLEEP,"Fatal Insomnia")
+		REMOVE_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
 
 //............... Stink Immunity Circlet ............... //
 /obj/item/clothing/head/crown/circlet/stink

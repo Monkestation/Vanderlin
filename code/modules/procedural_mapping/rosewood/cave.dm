@@ -53,7 +53,7 @@
 
 /datum/mapGeneratorModule/rosewoodcave/wet
 	clusterCheckFlags = CLUSTER_CHECK_NONE
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	excluded_turfs = list()
 	spawnableAtoms = list(/obj/structure/kneestingers = 3,
 							/obj/structure/flora/grass/water = 4,

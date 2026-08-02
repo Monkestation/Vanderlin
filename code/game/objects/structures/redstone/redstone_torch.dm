@@ -121,7 +121,7 @@
 		var/mutable_appearance/inverted_overlay = mutable_appearance(icon, "torch_inverted")
 		. += inverted_overlay
 
-/obj/structure/redstone/torch/AltClick(mob/user)
+/obj/structure/redstone/torch/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user))
 		return
 	attached_dir = turn(attached_dir, 90)

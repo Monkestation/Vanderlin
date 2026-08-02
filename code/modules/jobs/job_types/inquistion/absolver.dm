@@ -1,5 +1,23 @@
+/datum/attribute_holder/sheet/job/absolver
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = 7,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/labor/fishing = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/magic/holy = 20
+	)
+
 /datum/job/absolver
-	title = "Absolver"
+	title = JOB_ABSOLVER
 	department_flag = INQUISITION
 	faction = "Station"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -14,8 +32,11 @@
 	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
 	give_bank_account = 15
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
+
+	job_bitflag = BITFLAG_CHURCH
 
 	mind_traits = list(
 		TRAIT_KNOW_INQUISITION_DOORS
@@ -33,38 +54,23 @@
 		TRAIT_FOREIGNER,
 	)
 
-	jobstats = list(
-		STATKEY_END = 3,
-		STATKEY_SPD = -2,
-		STATKEY_CON = 7,
-	)
-
 	spells = list(
 		/datum/action/cooldown/spell/psydonlux_tamper,
 		/datum/action/cooldown/spell/psydonabsolve,
 		/datum/action/cooldown/spell/diagnose,
 	)
 
-	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/sewing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/cooking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/labor/fishing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE, // they need this so Psydon's Grace works
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/absolver
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
 	exp_types_granted = list(EXP_TYPE_INQUISITION)
 	exp_requirements = list(
 		EXP_TYPE_INQUISITION = 600
+	)
+	verbs = list(
+		/mob/living/carbon/human/proc/view_inquisition
 	)
 
 
@@ -73,8 +79,7 @@
 /datum/job/absolver/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Sanctae", 0, "Absolver")
-
-	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
+	spawned.add_chem_effect(CE_PAINKILLER, 10, "[type]")
 
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()
@@ -82,6 +87,7 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
+	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)
@@ -89,15 +95,22 @@
 	species.native_language = "Old Psydonic"
 	species.accent_language = species.get_accent(species.native_language)
 
+/datum/job/absolver/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned.hud_used?.shutdown_bloodpool()
+		spawned.maxbloodpool = initial(spawned.maxbloodpool)
+		qdel(spawned.GetComponent(/datum/component/bloodpool_regen))
+
 /datum/outfit/absolver
-	name = "Absolver"
+	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
-	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
+	gloves = /obj/item/clothing/gloves/leather/grenzel/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser
 	beltl = /obj/item/storage/belt/pouch/coins/rich
 	neck = /obj/item/clothing/neck/psycross/silver
 	cloak = /obj/item/clothing/cloak/absolutionistrobe
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	armor = /obj/item/clothing/armor/cuirass/psydon
@@ -105,7 +118,7 @@
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/head/helmet/blacksteel/psythorns
 	head = /obj/item/clothing/head/helmet/heavy/absolver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/book/bibble/psy = 1,
 		/obj/item/natural/bundle/cloth = 2,

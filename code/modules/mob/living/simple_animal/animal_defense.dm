@@ -35,6 +35,10 @@
 			visible_message("<span class='danger'>[M] [atk_verb] [src]![next_attack_msg.Join()]</span>",\
 							"<span class='danger'>[M] [atk_verb] me![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
 			next_attack_msg.Cut()
+			var/obj/item/clothing/gloves = M.get_item_by_slot(ITEM_SLOT_GLOVES)
+			if(gloves)
+				SEND_SIGNAL(gloves, COMSIG_GLOVES_POST_ATTACK_HAND, src, M, damage)
+
 			return TRUE
 
 		if(INTENT_DISARM)
@@ -56,7 +60,7 @@
 				var/mob/living/target_collateral_mob
 				var/obj/structure/table/target_table
 				var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
-				if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10),0,100)))//check if we actually shove them
+				if(prob(clamp(30 + (user.stat_compare(target, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))//check if we actually shove them
 					target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 					if(target_collateral_mob)
 						shove_blocked = TRUE
@@ -126,7 +130,7 @@
 		next_attack_msg.Cut()
 		return TRUE
 
-/mob/living/simple_animal/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/simple_animal/attack_paw(mob/living/carbon/M)
 	if(..()) //successful monkey bite.
 		if(stat != DEAD)
 			var/damage = rand(1, 3)

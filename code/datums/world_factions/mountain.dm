@@ -1,15 +1,9 @@
-/obj/effect/mob_spawn/human/dwarf
-	mob_species = /datum/species/dwarf/mountain
-
-/obj/effect/mob_spawn/human/dwarf/trader
-	outfit = /datum/outfit/miner
-
 /datum/world_faction/mountain_clans
 	faction_name = "Dwarven Clans"
 	desc = "Hardy dwarves from the mountain passes"
 	faction_color = "#708090"
 	trader_outfits = list(
-		/obj/effect/mob_spawn/human/dwarf/trader
+		/obj/effect/mob_spawn/corpse/human/dwarf/trader
 	)
 	trader_type_weights = list(
 		/datum/trader_data/weapon_merchant = 15,
@@ -77,7 +71,9 @@
 		/datum/supply_pack/rawmats/tin,
 		/datum/supply_pack/rawmats/lumber,
 		/datum/supply_pack/rawmats/blocks,
-		/datum/supply_pack/rawmats/ash
+		/datum/supply_pack/rawmats/ash,
+		// Seed(s)
+		/datum/supply_pack/seeds/drowsbane
 	)
 	uncommon_pool = list(
 		// Better armor
@@ -114,7 +110,6 @@
 		/datum/supply_pack/weapons/iron/iwodao,
 		/datum/supply_pack/weapons/shield/iron,
 		/datum/supply_pack/weapons/shield/towershield,
-		/datum/supply_pack/weapons/iron/ihwi,
 		/datum/supply_pack/weapons/steel/ida,
 		/datum/supply_pack/weapons/iron/injora,
 		/datum/supply_pack/weapons/iron/ishishpar,
@@ -161,7 +156,6 @@
 		/datum/supply_pack/weapons/iron/iirumi,
 		/datum/supply_pack/weapons/iron/insapo,
 		/datum/supply_pack/weapons/iron/isengese,
-		/datum/supply_pack/weapons/steel/hwi,
 		/datum/supply_pack/weapons/steel/njora,
 		/datum/supply_pack/weapons/steel/kukri,
 		/datum/supply_pack/weapons/ranged/slurbow,
@@ -178,12 +172,12 @@
 	)
 	exotic_pool = list(
 		/datum/supply_pack/armor/steel/coatofplates,
-		/datum/supply_pack/apparel/atgervi_trousers,
-		/datum/supply_pack/apparel/atgervi_boots,
-		/datum/supply_pack/armor/steel/atgervihelm,
-		/datum/supply_pack/armor/steel/atgervichest,
-		/datum/supply_pack/armor/steel/atgervigloves,
-		/datum/supply_pack/weapons/shield/atgervishield,
+		/datum/supply_pack/apparel/furlined_trousers,
+		/datum/supply_pack/apparel/furlined_boots,
+		/datum/supply_pack/armor/steel/dwarvenhelm,
+		/datum/supply_pack/armor/steel/dwarvenchest,
+		/datum/supply_pack/armor/steel/beastclaws,
+		/datum/supply_pack/weapons/shield/dwarvenshield,
 		/datum/supply_pack/armor/steel/buckethelm,
 		/datum/supply_pack/armor/steel/chainmail_hauberk,
 		/datum/supply_pack/armor/steel/visorsallet,
@@ -193,14 +187,12 @@
 		/datum/supply_pack/luxury/talkstone,
 		/datum/supply_pack/luxury/gold_plaque_belt,
 		/datum/supply_pack/weapons/ranged/puffer,
+		/datum/supply_pack/weapons/ranged/blunderbuss,
 		/datum/supply_pack/weapons/ammo/bullets,
+		/datum/supply_pack/weapons/ammo/aflask,
 		/datum/supply_pack/weapons/ranged/musket
 	)
 
-	bounty_path_weights = list(
-		/obj/item/ingot = 500,
-		/obj/item/ore = 600,
-	)
 
 /datum/world_faction/mountain_clans/initialize_faction_stock()
 	..()

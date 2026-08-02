@@ -9,8 +9,9 @@
 	mob_biotypes = MOB_SPIRIT|MOB_HUMANOID
 	gib_type = /obj/effect/decal/cleanable/blood/gibs
 	bodyparts = list(/obj/item/bodypart/chest/spirit, /obj/item/bodypart/head/spirit, /obj/item/bodypart/l_arm/spirit,
-					/obj/item/bodypart/r_arm/spirit, /obj/item/bodypart/r_leg/spirit, /obj/item/bodypart/l_leg/spirit)
+					/obj/item/bodypart/r_arm/spirit, /obj/item/bodypart/r_leg/spirit, /obj/item/bodypart/l_leg/spirit, /obj/item/bodypart/mouth)
 	hud_type = /datum/hud/spirit
+	/// If the ghost is able to enter the carriage (return to lobby). Also prevents them from participating in death arena.
 	var/paid = FALSE
 	var/beingmoved = FALSE //repurposed for speak with soul
 	var/livingname = null
@@ -42,8 +43,8 @@
 
 /mob/living/carbon/spirit/Initialize(mapload, cubespawned=FALSE, mob/spawner)
 //	coin_upkeep()	costly and not needed with the give_patron_toll failsafe if maze is drained
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	// add_verb(src, /mob/living/proc/mob_sleep)
+	add_verb(src, /mob/living/proc/lay_down)
 	ADD_TRAIT(src, TRAIT_PACIFISM, "status effects")
 	var/first_part = pick("Sorrowful", "Forlorn", "Regretful", "Piteous", "Rueful", "Dejected", "Desolate", "Mournful", "Melancholic", "Woeful")
 	var/second_part = pick("Wanderer", "Traveler", "Pilgrim", "Vagabond", "Nomad", "Wayfarer", "Spirit", "Specter", "Wraith", "Phantom")
@@ -104,18 +105,9 @@
 			slow += (health_deficiency / 25)
 	add_movespeed_modifier(MOVESPEED_ID_MONKEY_HEALTH_SPEEDMOD, TRUE, 100, override = TRUE, multiplicative_slowdown = slow)
 
-/mob/living/carbon/spirit/Stat()
-	..()
-	if(!client)
-		return
-	if(statpanel("Status"))
-		stat(null, "Intent: [a_intent]")
-		stat(null, "Move Mode: [m_intent]")
-	return
-
 /mob/living/carbon/spirit/returntolobby()
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 
 	if(key)
@@ -145,6 +137,7 @@
 	M.key = key
 	qdel(src)
 	return
+
 
 /*/mob/living/carbon/spirit/attack_animal(mob/living/simple_animal/M)
 	if(beingmoved)
@@ -207,12 +200,14 @@
 	. = FALSE
 	if(QDELETED(corpse) || (corpse.stat != DEAD))
 		return
-	// funeral + buried will make Journey to Underworld function as return to lobby
 	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
 		if(!human_corpse.funeral)
 			human_corpse.funeral = TRUE
 			. = TRUE
+	// Animals have no mind so we have no ghost or spirit to talk to. They still are 'pacified' though.
+	else if(isanimal(corpse))
+		return TRUE
 	var/datum/mind/corpse_mind = get_mind(corpse, include_last = TRUE)
 	if(corpse_mind?.remove_antag_datum(/datum/antagonist/zombie))
 		. = TRUE
@@ -238,7 +233,8 @@
 						to_chat(spirit, span_rose("A coin falls from above into your hands!"))
 					return TRUE
 	else
-		ghost = corpse.ghostize(force_respawn = TRUE)
+		corpse_mind.remove_antag_datum(/datum/antagonist/zombie)
+		ghost = corpse.ghostize()
 
 	if(ghost)
 		var/user_acknowledgement = user ? user.real_name : "a mysterious force"

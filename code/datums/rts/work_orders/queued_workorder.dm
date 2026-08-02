@@ -9,12 +9,12 @@
 /obj/effect/visual_effect/turf_break/Initialize(mapload, ...)
 	. = ..()
 	turf_to_break = loc
-	RegisterSignal(turf_to_break, COMSIG_PARENT_QDELETING, PROC_REF(clean_up))
+	RegisterSignal(turf_to_break, COMSIG_QDELETING, PROC_REF(clean_up))
 	RegisterSignal(turf_to_break, COMSIG_CANCEL_TURF_BREAK, PROC_REF(clean_up))
 
 /obj/effect/visual_effect/turf_break/proc/clean_up()
 	turf_to_break.break_overlay = null
-	UnregisterSignal(turf_to_break, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(turf_to_break, COMSIG_QDELETING)
 	turf_to_break = null
 	qdel(src)
 

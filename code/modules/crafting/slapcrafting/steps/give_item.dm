@@ -33,9 +33,9 @@
 	desc = "Add some jacksberry."
 	item_types = list(/obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry)
 
-/datum/slapcraft_step/item/dirtclod
+/datum/slapcraft_step/item/dirt
 	desc = "Add some dirt."
-	item_types = list(/obj/item/natural/dirtclod)
+	item_types = list(/obj/item/natural/clod/dirt)
 
 /datum/slapcraft_step/item/stick
 	desc = "Add a stick."

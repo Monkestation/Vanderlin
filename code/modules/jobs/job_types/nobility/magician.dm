@@ -1,5 +1,47 @@
+/datum/attribute_holder/sheet/job/magician
+	attribute_variance = list(
+		/datum/attribute/skill/magic/arcane = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 5,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/labor/mathematics = 40
+	)
+
+/datum/attribute_holder/sheet/job/magician/old
+	attribute_variance = list(
+		/datum/attribute/skill/magic/arcane = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 6,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = -3,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/labor/mathematics = 40
+	)
+
 /datum/job/magician
-	title = "Court Magician"
+	title = JOB_COURT_MAGE
+	alt_titles = list("Court Abjurer", "Court Illusionist", "Grand Wyrd", "Court Conjurer", "Court Wizard", "Court Summoner", "Court Evocator")
+	alt_honorary = list("Archwizard", "Magus", "Magister")
 	tutorial = "A seer of dreams, a reader of stars, and a master of the arcyne. Along a band of unlikely heroes, you shaped the fate of these lands.\
 	Now the days of adventure are gone, replaced by dusty tomes and whispered prophecies. The ruler's coin funds your studies,\
 	but debts both magical and mortal are never so easily repaid. With age comes wisdom, but also the creeping dread that your greatest spell work\
@@ -17,6 +59,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/magician
 	give_bank_account = 120
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	magic_user = TRUE
@@ -24,6 +67,9 @@
 	attunements_max = 6
 	attunements_min = 4
 	job_bitflag = BITFLAG_ROYALTY
+	max_apprentices = 2
+	honorary = "Archmage"
+	book_type = /obj/item/recipe_book/arcyne
 
 	spells = list(
 		/datum/action/cooldown/spell/aoe/knock,
@@ -39,29 +85,15 @@
 		EXP_TYPE_MAGICK = 300
 	)
 
-	jobstats = list(
-		STATKEY_STR = -2,
-		STATKEY_INT = 5,
-		STATKEY_CON = -2,
-		STATKEY_SPD = -2
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 6,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/magic/arcane = 5,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/labor/mathematics = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/magician
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/magician/old
 
 	traits = list(
 		TRAIT_SEEPRICES,
-		TRAIT_NOBLE,
-		TRAIT_OLDPARTY
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
+		TRAIT_OLDPARTY,
+		TRAIT_VIRGIN,
 	)
 
 /datum/job/magician/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -73,19 +105,31 @@
 	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
 		spawned.grant_language(/datum/language/undead)
 
-	spawned.adjust_skillrank(/datum/skill/magic/arcane, pick(0,1))
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-
-	spawned.virginity = TRUE
-
 	if(spawned.gender == MALE && spawned.dna?.species  && spawned.dna.species.id != SPEC_ID_MEDICATOR)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 
+/datum/job/magician/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+	)
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+		"Courtmage Robes" = /obj/item/clothing/shirt/robe/colored/courtmage,
+		"Wizard robes" = /obj/item/clothing/shirt/robe/wizard,
+	)
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
+
 /datum/outfit/magician
-	name = "Court Magician"
+	name = JOB_COURT_MAGE
 	backr = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/black_cloak
 	ring = /obj/item/clothing/ring/gold
@@ -102,23 +146,3 @@
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1,
 		/obj/item/storage/keyring/mage = 1
 	)
-
-/datum/outfit/magician/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-	)
-	equipped_human.select_equippable(equipped_human, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
-
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-		"Courtmage Robes" = /obj/item/clothing/shirt/robe/colored/courtmage,
-		"Wizard robes" = /obj/item/clothing/shirt/robe/wizard,
-	)
-	equipped_human.select_equippable(equipped_human, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
-

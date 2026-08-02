@@ -11,7 +11,7 @@
 	slot_flags = ITEM_SLOT_SHIRT
 	body_parts_covered = CHEST|VITALS
 	prevent_crits = list(BCLASS_LASHING)
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/none
 
 	edelay_type = 1
 	equip_delay_self = 25
@@ -21,13 +21,14 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	anvilrepair = null
 	smeltresult = /obj/item/fertilizer/ash
 
 	grid_width = 64
 	grid_height = 64
-	item_weight = 3
+	item_weight = 150 GRAMS
 
 	var/fire_resist = T0C+100
 	var/blood_overlay_type = "suit"

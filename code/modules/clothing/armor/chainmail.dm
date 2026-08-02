@@ -7,17 +7,18 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6 * STEEL_MULTIPLIER
+	item_weight = 6 KILOGRAMS
+
+	material_category = ARMOR_MAT_CHAINMAIL
 
 /obj/item/clothing/armor/chainmail/iron
 	name = "iron haubergeon"
@@ -27,10 +28,10 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6 * IRON_MULTIPLIER
+	item_weight = 6 KILOGRAMS
 
 //................ Hauberk ............... //
 /obj/item/clothing/armor/chainmail/hauberk
@@ -39,13 +40,22 @@
 	icon_state = "hauberk"
 	item_state = "hauberk"
 	sellprice = VALUE_STEEL_ARMOR_FINE
+	smeltresult = /obj/item/ingot/steel_slag
 
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 6 * STEEL_MULTIPLIER
+	item_weight = 9 KILOGRAMS
 
 /obj/item/clothing/armor/chainmail/hauberk/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle)
+
+/obj/item/clothing/armor/chainmail/hauberk/aalloy
+	name = "decrepit hauberk"
+	desc = "Frayed bronze rings and rotting leather, woven together to form a sleeved maille-atekon. Once, the armored vestments of a paladin: now, the withered veil of Zizo's undying legionnaires."
+	icon_state = "ancienthauberk"
+	max_integrity = ARMOR_INT_CHEST_MEDIUM_DECREPIT
+	material_category = ARMOR_MAT_CHAINMAIL
+	anvilrepair = null
 
 /obj/item/clothing/armor/chainmail/hauberk/fluted
 	name = "fluted hauberk"
@@ -59,24 +69,9 @@
 	icon_state = "ihauberk"
 	item_state = "ihauberk"
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
+	smeltresult = /obj/item/ingot/iron
 
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6 * IRON_MULTIPLIER
+	item_weight = 9 KILOGRAMS
 
-//................ Ancient Haubergon ............... //
-/obj/item/clothing/armor/chainmail/hauberk/vampire
-	name = "ancient haubergeon"
-	desc = "A style of armor long out of use, rests easy on the shoulders. Has sleeves but doesn't cover the legs."
-	icon_state = "vunder"
-	sellprice = VALUE_STEEL_ARMOR_FINE
-
-	armor_class = AC_LIGHT
-	armor = ARMOR_SCALE
-	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	item_weight = 7 * STEEL_MULTIPLIER
-
-/obj/item/clothing/armor/chainmail/hauberk/ancient
-	name = "ancient hauberk"
-	desc = "A very old hauberk."
-	icon_state = "ancienthauberk"

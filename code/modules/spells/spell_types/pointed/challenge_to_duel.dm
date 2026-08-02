@@ -19,7 +19,7 @@
 
 	var/challenge_message = "[owner] challenges you to an honor duel! Do you accept?"
 	owner.visible_message(span_notice("[owner] challenges [duelist] to an honor duel!"), span_notice("You challenge [duelist] to a duel!"))
-	var/answer = browser_alert(duelist, challenge_message, "Duel Challenge", DEFAULT_INPUT_CHOICES)
+	var/answer = tgui_alert(duelist, challenge_message, "Duel Challenge", DEFAULT_INPUT_CHOICES)
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(duelist))
 		return FALSE
 	if(answer != CHOICE_YES)

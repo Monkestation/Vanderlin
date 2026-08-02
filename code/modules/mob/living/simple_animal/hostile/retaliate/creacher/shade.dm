@@ -68,11 +68,10 @@
 	defprob = 0
 	defdrain = 0
 	dodgetime = 0
-	blood_volume = 0
+	default_blood_volume = 0
 	del_on_deaggro = 999 SECONDS
 
 	attack_sound = list('sound/magic/magic_nulled.ogg')
-	aggressive = 1
 	retreat_health = null
 	remains_type = null
 
@@ -97,7 +96,7 @@
 /*
 * Shades are supprisingly flammable
 */
-/mob/living/simple_animal/hostile/retaliate/shade/attackby(obj/item/O, mob/user, params)  //Marker -Agouri
+/mob/living/simple_animal/hostile/retaliate/shade/attackby(obj/item/O, mob/user, list/modifiers)  //Marker -Agouri
 	if(istype(O, /obj/item/flashlight/flare))
 		fire_act(3,3)
 		return

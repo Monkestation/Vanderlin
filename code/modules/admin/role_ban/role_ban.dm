@@ -100,6 +100,8 @@
 	return FALSE
 
 /proc/is_antag_banned(ckey, antag_name)
+	if(is_total_antag_banned(ckey))
+		return TRUE
 	var/list/valid_bans = get_valid_role_bans(ckey)
 	for(var/datum/role_ban_instance/instance as anything in valid_bans)
 		if(antag_name in instance.antags)

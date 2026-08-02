@@ -38,8 +38,8 @@
 /turf/open/floor/cobblerock,
 /area)
 "G" = (
-/obj/effect/landmark/start/adventurerlate,
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/start/outsider,
+/obj/effect/landmark/backup_join,
 /obj/effect/landmark/start/lord{
 	dir = 8
 	},

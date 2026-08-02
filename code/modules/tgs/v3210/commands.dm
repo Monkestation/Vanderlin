@@ -36,7 +36,7 @@
 	if(!cached_custom_tgs_chat_commands)
 		cached_custom_tgs_chat_commands = list()
 		for(var/datum/tgs_chat_command/stc as anything in typesof(/datum/tgs_chat_command) - /datum/tgs_chat_command)
-			cached_custom_tgs_chat_commands[lowertext(initial(stc.name))] = stc
+			cached_custom_tgs_chat_commands[LOWER_TEXT(initial(stc.name))] = stc
 
 	var/command_type = cached_custom_tgs_chat_commands[command]
 	if(!command_type)

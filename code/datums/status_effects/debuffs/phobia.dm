@@ -2,6 +2,7 @@
 /datum/status_effect/minor_phobia_reaction
 	id = "phobia_minor"
 	duration = 12 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = null
 
 /datum/status_effect/minor_phobia_reaction/on_apply()
@@ -59,7 +60,7 @@
 
 		if(3)
 			to_chat(owner, span_warning("You lose your balance!"))
-			owner.add_movespeed_modifier("spooked_phobia", multiplicative_slowdown = 0.25)
+			owner.add_movespeed_modifier(MOVESPEED_ID_SPOOKED_PHOBIA, multiplicative_slowdown = 0.25)
 			// We're relying on the fact that there's a 12 second application cooldown to not have to bother cancelling and replacing this timer
 			// So if you adjust the duration keep that in mind
 			addtimer(CALLBACK(src, PROC_REF(speed_up)), 1 SECONDS * stacks, TIMER_STOPPABLE | TIMER_DELETE_ME)
@@ -74,4 +75,4 @@
 
 /// Remove our active movespeed modifier
 /datum/status_effect/stacking/phobia_reaction/proc/speed_up()
-	owner.remove_movespeed_modifier("spooked_phobia")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_SPOOKED_PHOBIA)

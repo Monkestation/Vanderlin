@@ -5,14 +5,16 @@
 	var/postdig_icon_change = FALSE
 	var/postdig_icon
 	var/wet
+
 	var/footstep = null
 	var/barefootstep = null
 	var/clawfootstep = null
 	var/heavyfootstep = null
-	var/footstepstealth = FALSE
+	var/force_footstep_sound = FALSE
+
 	baseturfs = /turf/open/openspace
 
-	smoothing_groups = SMOOTH_GROUP_OPEN
+	smoothing_groups = SMOOTH_GROUP_TURF_OPEN
 
 	var/obj/effect/hotspot/active_hotspot
 
@@ -34,7 +36,7 @@
 	var/total_slowdown = slowdown
 	for(var/obj/obj in contents)
 		if(obj.obj_flags & BLOCK_Z_OUT_DOWN)
-			return slowdown
+			return obj.object_slowdown
 		total_slowdown += obj.object_slowdown
 	return total_slowdown
 
@@ -42,22 +44,22 @@
 	var/landsound = null
 
 //direction is direction of travel of A
-/turf/open/zPassIn(atom/movable/A, direction, turf/source)
-	if(direction == DOWN)
-		for(var/obj/O in contents)
-			if(O.obj_flags & BLOCK_Z_IN_DOWN)
-				return FALSE
-		return TRUE
-	return FALSE
+/turf/open/zPassIn(direction)
+	if(direction != DOWN)
+		return FALSE
+	for(var/obj/on_us in contents)
+		if(on_us.obj_flags & BLOCK_Z_IN_DOWN)
+			return FALSE
+	return TRUE
 
-//direction is direction of travel of A
-/turf/open/zPassOut(atom/movable/A, direction, turf/destination)
-	if(direction == UP)
-		for(var/obj/O in contents)
-			if(O.obj_flags & BLOCK_Z_OUT_UP)
-				return FALSE
-		return TRUE
-	return FALSE
+//direction is direction of travel of an atom
+/turf/open/zPassOut(direction)
+	if(direction != UP)
+		return FALSE
+	for(var/obj/on_us in contents)
+		if(on_us.obj_flags & BLOCK_Z_OUT_UP)
+			return FALSE
+	return TRUE
 
 //direction is direction of travel of air
 /turf/open/zAirIn(direction, turf/source)
@@ -86,19 +88,20 @@
 	return TRUE
 
 /turf/open/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube, paralyze_amount, force_drop)
-	if(C.movement_type & FLYING)
+	if(C.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 		return 0
+
 	var/obj/buckled_obj
 	if(C.buckled)
 		buckled_obj = C.buckled
-		if(!(lube&GALOSHES_DONT_HELP)) //can't slip while buckled unless it's lube.
+		if(!(lube & GALOSHES_DONT_HELP)) //can't slip while buckled unless it's lube.
 			return 0
 	else
-		if(!(lube&SLIP_WHEN_CRAWLING) && (C.body_position == LYING_DOWN) || !(C.status_flags & CANKNOCKDOWN)) // can't slip unbuckled mob if they're lying or can't fall.
+		if(!(lube & SLIP_WHEN_CRAWLING) && (C.body_position == LYING_DOWN) || !(C.status_flags & CANKNOCKDOWN)) // can't slip unbuckled mob if they're lying or can't fall.
 			return 0
 		if(C.m_intent == MOVE_INTENT_WALK && (lube&NO_SLIP_WHEN_WALKING))
 			return 0
-	if(!(lube&SLIDE_ICE))
+	if(!(lube & SLIDE_ICE))
 		to_chat(C, "<span class='notice'>I slipped[ O ? " on the [O.name]" : ""]!</span>")
 		playsound(C, 'sound/blank.ogg', 50, TRUE, -3)
 
@@ -120,9 +123,9 @@
 		buckled_obj.unbuckle_mob(C)
 		lube |= SLIDE_ICE
 
-	if(lube&SLIDE)
+	if(lube & SLIDE)
 		new /datum/forced_movement(C, get_ranged_target_turf(C, olddir, 4), 1, FALSE, CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon, spin), 1, 1))
-	else if(lube&SLIDE_ICE)
+	else if(lube & SLIDE_ICE)
 		if(C.force_moving) //If we're already slipping extend it
 			qdel(C.force_moving)
 		new /datum/forced_movement(C, get_ranged_target_turf(C, olddir, 1), 1, FALSE)	//spinning would be bad for ice, fucks up the next dir

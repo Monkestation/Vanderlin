@@ -93,7 +93,7 @@
 	var/strength = 5
 	var/attached = 0
 
-/obj/item/clothing/face/goblin_mask/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
+/obj/item/clothing/face/goblin_mask/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
 	..()
 	if(atom_integrity < 90)
 		Die()
@@ -110,7 +110,8 @@
 /obj/item/clothing/face/goblin_mask/attack_hand(mob/user)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
-		C.adjustBruteLoss(5)
+		var/obj/item/bodypart/head = C.get_bodypart(BODY_ZONE_HEAD)
+		head.bodypart_attacked_by(BCLASS_BITE, 5, incoming_germ = 500)
 		to_chat(user, span_warning("[src] bites!"))
 		return
 	if((stat == CONSCIOUS))
@@ -121,7 +122,7 @@
 /obj/item/clothing/face/goblin_mask/examine(mob/user)
 	. = ..()
 	switch(stat)
-		if(DEAD,UNCONSCIOUS)
+		if(DEAD,UNCONSCIOUS,HARD_CRIT)
 			. += "<span class='boldannounce'>[src] is not moving.</span>"
 		if(CONSCIOUS)
 			. += "<span class='boldannounce'>[src] seems to be active!</span>"
@@ -169,8 +170,8 @@
 	. = ..()
 	HasProximity(target)
 
-/obj/item/clothing/face/goblin_mask/attack(mob/living/M, mob/user)
-	..()
+/obj/item/clothing/face/goblin_mask/attack(mob/living/M, mob/user, list/modifiers)
+	. = ..()
 	if(user.transferItemToLoc(src, get_turf(M)))
 		Leap(M)
 
@@ -237,7 +238,7 @@
 	if(iscarbon(loc))
 		var/mob/living/carbon/C = loc
 		to_chat(C, span_warning("[src] is eating your face!"))
-		C.apply_damage(5, BRUTE)
+		C.apply_damage(5, BRUTE, BODY_ZONE_HEAD, damage_type = BCLASS_BITE)
 
 /datum/action/fae_trickery
 	name = "Mytherceria Traps"
@@ -285,7 +286,7 @@
 			if(!unique)
 				var/mob/living/L = AM
 				var/atom/throw_target = get_edge_target_turf(AM, get_dir(src, AM))
-				L.apply_damage(30, BRUTE)
+				L.apply_damage(30, BRUTE, damage_type = BCLASS_BLUNT)
 				AM.throw_at(throw_target, rand(8,10), 14, owner)
 				qdel(src)
 
@@ -403,7 +404,7 @@
 				if(RIDDLE)
 					if(RIDDLE.riddle_text == try_riddle)
 						actual_riddle = RIDDLE
-			target.add_movespeed_modifier("riddle", 5)
+			target.add_movespeed_modifier(MOVESPEED_ID_FAE_TRICKERY, multiplicative_slowdown = 5)
 			actual_riddle.ask(target)
 			owner.say(actual_riddle.riddle_text)
 	else
@@ -485,7 +486,7 @@
 					tongue.Remove(C)
 			to_chat(answerer,
 				span_danger("THE RIDDLE REMOVES YOUR LYING TONGUE AS IT FLEES."))
-			answerer.remove_movespeed_modifier("riddle")
+			answerer.remove_movespeed_modifier(MOVESPEED_ID_FAE_TRICKERY)
 			alert.bad_answers = 0
 			alert.riddle = null
 			answerer.clear_alert("riddle")
@@ -493,6 +494,6 @@
 		to_chat(answerer,
 			"<span class='nicegreen'>You feel the riddle's hold over you vanish.</span>")
 		alert.riddle = null
-		answerer.remove_movespeed_modifier("riddle")
+		answerer.remove_movespeed_modifier(MOVESPEED_ID_FAE_TRICKERY)
 		answerer.say(the_answer)
 		answerer.clear_alert("riddle")

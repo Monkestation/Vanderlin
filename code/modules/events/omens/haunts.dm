@@ -7,7 +7,7 @@
 	min_players = 0
 	req_omen = TRUE
 	earliest_start = 25 MINUTES
-	todreq = list("night")
+	todreq = list(NIGHT)
 
 	tags = list(
 		TAG_HAUNTED,

@@ -28,15 +28,15 @@
 	if(!window_id)
 		CRASH("created a browser with no window id")
 	src.user = user
-	RegisterSignal(user, COMSIG_PARENT_QDELETING, PROC_REF(user_deleted))
+	RegisterSignal(user, COMSIG_QDELETING, PROC_REF(user_deleted))
 	src.owner = owner
-	RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(owner_deleted))
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(owner_deleted))
 	src.window_id = window_id
 	src.title = format_text(title)
 	src.width = width
 	src.height = height
 
-/datum/browser/Destroy(force, ...)
+/datum/browser/Destroy(force)
 	if(!isnull(user))
 		var/client/user_client = isclient(user) ? user : user.client
 		UnregisterSignal(user_client, COMSIG_MOB_CLIENT_MOVED)

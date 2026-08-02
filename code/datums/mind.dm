@@ -111,15 +111,13 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	///List of learned recipe TYPES.
 	var/list/learned_recipes
 	var/list/special_items = list()
+	var/list/loadout_item_colors = null
 
 	var/list/areas_entered = list()
 
-	var/list/known_people = list() //contains person, their job, and their voice color
+	var/list/relations = list()
 
 	var/list/notes = list() //RTD add notes button
-
-	//assoc list of frumentarii you know of to a BOOL of if they are still frumentarii
-	var/list/cached_frumentarii = list()
 
 	var/datum/sleep_adv/sleep_adv = null
 
@@ -140,123 +138,240 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/Destroy()
 	SSticker.minds -= src
 	QDEL_NULL(sleep_adv)
+	remove_all_uis()
+	QDEL_LIST(active_uis)
 	if(islist(antag_datums))
 		QDEL_LIST(antag_datums)
 	return ..()
 
 /proc/get_minds(role)
 	. = list()
-	for(var/datum/mind/M in SSticker.minds)
+	for(var/datum/mind/target_mind in SSticker.minds)
 		var/is_role = TRUE
 		if(role)
 			is_role = FALSE
-			if(M.special_role == role)
+			if(target_mind.special_role == role)
 				is_role = TRUE
 			else
-				if(M.assigned_role.title == role)
+				if(target_mind?.assigned_role?.title == role)
 					is_role = TRUE
 		if(is_role)
-			. += M
+			. += target_mind
 
-/// proc that adds us to their lists, and they are added to ours
-/datum/mind/proc/i_know_person(person)
-	if(!person)
-		return
-	if(person == src)
-		return
-	var/datum/mind/M = person
-	if(ishuman(M.current))
-		var/mob/living/carbon/human/H = M.current
-		if(!known_people[H.real_name])
-			known_people[H.real_name] = list()
-		known_people[H.real_name]["VCOLOR"] = H.voice_color
-		var/used_title = H.get_role_title()
-		if(!used_title)
-			used_title = "Unknown"
-		known_people[H.real_name]["FJOB"] = used_title
-		known_people[H.real_name]["FGENDER"] = H.gender
-		known_people[H.real_name]["FAGE"] = H.age
+/// Returns the relation datum of a given type this mind has toward target,
+/// or null if none exists.
+/datum/mind/proc/get_relation(datum/mind/target, relation_type)
+	for(var/datum/relation/R in relations)
+		if(R.other == target && istype(R, relation_type))
+			return R
+	return null
 
-/// we are added to their lists, they are added to ours
-/datum/mind/proc/person_knows_me(person)
-	if(!person)
+/// Returns TRUE if this mind has any relation toward target.
+/datum/mind/proc/knows(datum/mind/target)
+	for(var/datum/relation/R in relations)
+		if(R.other == target)
+			return TRUE
+	return FALSE
+
+/// Returns TRUE if this mind has the named relation toward target.
+/datum/mind/proc/knows_as(datum/mind/target, relation_type)
+	return !isnull(get_relation(target, relation_type))
+
+/// Add a symmetric relation between src and target.
+/// Creates mirror datums on both minds. Skips if incompatible relation exists.
+/// Returns the created datum or null on failure.
+/datum/mind/proc/add_relation(datum/mind/target, relation_type)
+	if(!target || target == src)
+		return null
+
+	var/datum/relation/template = new relation_type()
+
+	var/list/to_dissolve = list()
+	var/list/inherited_history = null
+	var/list/old_snapshot = null
+	for(var/datum/relation/R in relations)
+		if(R.other == target && template.upgrades_relation(R))
+			if(R.relation_history)
+				if(!inherited_history)
+					inherited_history = list()
+				inherited_history += R.relation_history
+			if(R.snapshot && !old_snapshot)
+				old_snapshot = R.snapshot
+			to_dissolve += R
+	for(var/datum/relation/R in to_dissolve)
+		R.dissolve()
+
+	// Incompatibility check on both sides.
+	for(var/datum/relation/R in relations)
+		if(R.other == target && template.conflicts_with(R))
+			qdel(template)
+			return null
+	for(var/datum/relation/R in target.relations)
+		if(R.other == src && template.conflicts_with(R))
+			qdel(template)
+			return null
+
+	// Build our side.
+	template.holder = src
+	template.other = target
+	if(old_snapshot)
+		template.snapshot = old_snapshot.Copy()
+	if(inherited_history)
+		template.relation_history = inherited_history.Copy()
+	template.refresh_snapshot()
+	LAZYADD(relations, template)
+
+	if(template.symmetric)
+		// Check for inherited history/snapshot on target's side too,
+		// in case their copy of the old relation had its own data.
+		var/list/mirror_inherited_history = null
+		var/list/mirror_old_snapshot = null
+		var/list/mirror_to_dissolve = list()
+		for(var/datum/relation/R in target.relations)
+			if(R.other == src && template.upgrades_relation(R))
+				if(R.relation_history)
+					if(!mirror_inherited_history)
+						mirror_inherited_history = list()
+					mirror_inherited_history += R.relation_history
+				if(R.snapshot && !mirror_old_snapshot)
+					mirror_old_snapshot = R.snapshot
+				mirror_to_dissolve += R
+		for(var/datum/relation/R in mirror_to_dissolve)
+			R.dissolve()
+
+		var/datum/relation/mirror = new relation_type()
+		mirror.holder = target
+		mirror.other = src
+		if(mirror_old_snapshot)
+			mirror.snapshot = mirror_old_snapshot.Copy()
+		else if(old_snapshot)
+			mirror.snapshot = old_snapshot.Copy()
+		if(mirror_inherited_history)
+			mirror.relation_history = mirror_inherited_history.Copy()
+		mirror.refresh_snapshot()
+		LAZYADD(target.relations, mirror)
+		template.on_created()
+		mirror.on_created()
+	else
+		template.on_created()
+
+	return template
+
+/// Remove all relations this mind has toward target,
+/// and remove the mirror entries from target.
+/datum/mind/proc/remove_relations_with(datum/mind/target)
+	for(var/datum/relation/R in relations)
+		if(R.other == target)
+			R.dissolve()
+
+/// Clear all relations entirely (both directions).
+/datum/mind/proc/clear_all_relations()
+	for(var/datum/mind/M in SSrelations.all_minds())
+		remove_relations_with(M)
+	relations = list()
+
+/// Refresh identity snapshots on all relations pointing at this mind.
+/// Call this when a mob's name/job/appearance changes.
+/datum/mind/proc/broadcast_identity_update()
+	for(var/datum/mind/M in SSrelations.all_minds())
+		for(var/datum/relation/R in M.relations)
+			if(R.other == src)
+				R.refresh_snapshot()
+
+/// Display the relation list to user. Replaces display_known_people().
+/datum/mind/proc/display_relations(mob/user)
+	if(!user)
 		return
-	if(person == src)
+	if(!length(relations))
+		to_chat(user, span_notice("[name] doesn't know anyone yet."))
 		return
-	var/datum/mind/M = person
-	if(M.known_people)
-		if(ishuman(current))
-			var/mob/living/carbon/human/H = current
-			if(!M.known_people[H.real_name])
-				M.known_people[H.real_name] = list()
-			M.known_people[H.real_name]["VCOLOR"] = H.voice_color
-			var/used_title
-			if(H.job)
-				var/datum/job/job = SSjob.GetJob(H.job)
-				used_title = job.get_informed_title(H)
-			if(!used_title)
-				used_title = "Unknown"
-			M.known_people[H.real_name]["FJOB"] = used_title
-			M.known_people[H.real_name]["FGENDER"] = H.gender
-			M.known_people[H.real_name]["FAGE"] = H.age
+
+	var/datum/tgui_relations/menu = new(src)
+	menu.ui_interact(user)
+
+/datum/mind/proc/share_identities(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
+		return
+	if(target_mind == src)
+		return
+	learn_target_identity(target_mind)
+	give_source_identity(target_mind)
+
+/// Refresh or create our snapshot of target. Replaces learn_target_identity().
+/datum/mind/proc/learn_target_identity(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
+		return
+	if(target_mind == src)
+		return
+	// Refresh snapshot on any existing relation we have toward them.
+	var/found = FALSE
+	for(var/datum/relation/R in relations)
+		if(R.other == target_mind)
+			R.refresh_snapshot()
+			found = TRUE
+	// If we have no relation at all, create a minimal "acquaintance" record
+	// so identity data has somewhere to live.
+	if(!found)
+		_ensure_acquaintance(target_mind)
+
+/// Give our identity to target's relation entries pointing at us.
+/// Replaces give_source_identity().
+/datum/mind/proc/give_source_identity(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
+		return
+	if(target_mind == src)
+		return
+	var/found = FALSE
+	for(var/datum/relation/R in target_mind.relations)
+		if(R.other == src)
+			R.refresh_snapshot()
+			found = TRUE
+	if(!found)
+		target_mind._ensure_acquaintance(src)
+
+/// Creates a minimal acquaintance relation so identity can be stored
+/// without implying friendship/rivalry/etc.
+/// Does nothing if any relation already exists toward target.
+/datum/mind/proc/_ensure_acquaintance(datum/mind/target_mind)
+	if(knows(target_mind))
+		return
+	var/datum/relation/acquaintance/A = new()
+	A.holder = src
+	A.other = target_mind
+	A.refresh_snapshot()
+	LAZYADD(relations, A)
 
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
 	if(!person && !name)
 		return FALSE
 	if(person)
-		var/mob/living/carbon/human/H = person.current
-		if(!istype(H))
-			return
-		for(var/P in known_people)
-			if(lowertext(H.real_name) == lowertext(P))
-				return TRUE
-	else if(name)
-		for(var/P in known_people)
-			if(lowertext(name) == lowertext(P))
+		return knows(person)
+	// Name-only fallback: scan snapshots.
+	if(name)
+		for(var/datum/relation/R in relations)
+			if(R.snapshot && LOWER_TEXT(R.snapshot["name"]) == LOWER_TEXT(name))
 				return TRUE
 	return FALSE
 
 /// we are removed from X's known people
-/datum/mind/proc/become_unknown_to(person)
-	if(!person)
+/datum/mind/proc/forget_source_identity(datum/mind/person)
+	if(!person || person == src)
 		return
-	if(person == src)
-		return
-	var/datum/mind/M = person
-	var/mob/living/carbon/human/H = current
-	if(M.known_people && istype(H))
-		if(M.known_people[H.real_name])
-			M.known_people[H.real_name] = null
+	for(var/datum/relation/R in person.relations)
+		if(R.other == src)
+			person.relations -= R
+			// Clean up counterpart link if asymmetric.
+			if(R.counterpart)
+				R.counterpart.counterpart = null
 
-/// removes all known people from your known_people list
-/datum/mind/proc/unknow_all_people()
-	known_people = list()
+/// Removes everyone from known list, and clears you from theirs.
+/datum/mind/proc/forget_and_be_forgotten()
+	clear_all_relations()
 
 /// show known people to the player
 /datum/mind/proc/display_known_people(mob/user)
-	if(!user)
-		return
-	if(!known_people.len)
-		return
-	var/contents = "<center>People that [name] knows:</center><BR>"
-	for(var/P in known_people)
-		if(!length(known_people[P]))
-			known_people -= P
-			continue
-		var/fcolor = known_people[P]["VCOLOR"]
-		if(!fcolor)
-			continue
-		var/fjob = known_people[P]["FJOB"]
-		var/fgender = known_people[P]["FGENDER"]
-		var/fage = known_people[P]["FAGE"]
-		if(fcolor && fjob)
-			contents += "<B><font color=#[fcolor];text-shadow:0 0 10px #8d5958, 0 0 20px #8d5958, 0 0 30px #8d5958, 0 0 40px #8d5958, 0 0 50px #e60073, 0 0 60px #8d5958, 0 0 70px #8d5958;>[P]</font></B><BR>[fjob], [capitalize(fgender)], [fage]"
-			contents += "<BR>"
-
-	var/datum/browser/popup = new(user, "PEOPLEIKNOW", "", 260, 400)
-	popup.set_content(contents)
-	popup.open()
+	display_relations(user)
 
 /// returns the language holder of this mind
 /datum/mind/proc/get_language_holder()
@@ -270,7 +385,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/transfer_to(mob/new_character, force_key_move = 0)
 	if(current)	// remove ourself from our old body's mind variable
 		current.mind = null
-		UnregisterSignal(current, COMSIG_MOB_DEATH)
+		UnregisterSignal(current, COMSIG_LIVING_DEATH)
 		SStgui.on_transfer(current, new_character)
 
 	if(!language_holder)
@@ -300,10 +415,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		C.last_mind = src
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
-	if(old_current.skills)
-		old_current.skills.set_current(current)
 
-	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
+	RegisterSignal(current, COMSIG_LIVING_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
 		current.key = key		//now transfer the key to link the client to our new body
 	current.update_fov_angles()
@@ -420,8 +533,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/enslave_mind_to_creator(mob/living/creator)
 	enslaved_to = creator
 
-	current.faction |= creator.faction
-	creator.faction |= current.faction
+	current.add_faction(creator.get_faction())
+	creator.add_faction(current.get_faction())
 
 	if(creator.mind.special_role)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
@@ -504,22 +617,42 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		to_chat(recipient, "<i>[output]</i>")
 
 /// Output current targets to the player
-/datum/mind/proc/recall_targets(mob/recipient, window=1)
-	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
-	for (var/mob/living/carbon in GLOB.mob_living_list)
-		if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
-			output += "<br><b>[carbon.real_name]</b>"
-			if (carbon.job)
-				output += " - [carbon.job]"
 
-			// Get the hunted quirk and display the reason
-			var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
-			if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
-				output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
-			else
-				output += "<br><i>Hunted for: Unknown reasons</i>"
+/datum/mind/proc/recall_targets(mob/recipient, window=1, type)
+	var/output
+	if(type == "Ordos")
+		output = "<B>[SSmapping.config.map_name] Scouting Report</B><br>"
+		for (var/mob/living/carbon in GLOB.mob_living_list)
+			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/suspicion) && (!istype(carbon, /mob/living/carbon/human/dummy))) && (carbon.real_name in GLOB.inquis_suspect_players)))
+				output += "<br><b>[carbon.real_name]</b>"
+				if (carbon.job)
+					output += " - [carbon.job]"
 
-	output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
+				// Get the suspicion quirk and display the reason
+				var/datum/quirk/vice/suspicion/suspicion_quirk = carbon.get_quirk(/datum/quirk/vice/suspicion)
+				if(suspicion_quirk && suspicion_quirk.customization_value && suspicion_quirk.customization_value != "")
+					output += "<br><i>Reason for suspicion: [suspicion_quirk.customization_value]</i>"
+				else
+					output += "<br><i>Reason for suspicion: General heretical conduct.</i>"
+
+		output += "<br><br>Our scouts have marked these people as suspected of heresy. Verify or disprove these reports and administer justice if need be."
+
+	else
+		output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
+		for (var/mob/living/carbon in GLOB.mob_living_list)
+			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
+				output += "<br><b>[carbon.real_name]</b>"
+				if (carbon.job)
+					output += " - [carbon.job]"
+
+				// Get the hunted quirk and display the reason
+				var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
+				if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
+					output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
+				else
+					output += "<br><i>Hunted for: Unknown reasons</i>"
+
+		output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 	if(window)
 		recipient << browse(output,"window=memory")
 
@@ -758,6 +891,24 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	. = assigned_role
 	assigned_role = new_role
 
+/datum/mind/proc/update_alt_title(datum/job/new_role)
+	if(!istype(new_role))
+		new_role = ispath(new_role) ? SSjob.GetJobType(new_role) : SSjob.GetJob(new_role)
+	var/list/player_sel
+	if(new_role.title in current.client?.prefs?.alt_job_selections)
+		player_sel = current.client?.prefs?.alt_job_selections[new_role.title]
+
+	current.job_title_override = null
+	current.job_honorary_override = null
+	if(length(player_sel))
+		var/chosen_title = player_sel["title"]
+		if(chosen_title && (chosen_title in (list(new_role.title, new_role.f_title) + new_role.alt_titles + new_role.alt_titles_female)))
+			current.job_title_override = chosen_title
+
+		var/chosen_honorary = player_sel["honorary"]
+		if(chosen_honorary && (chosen_honorary in (list(new_role.honorary, new_role.honorary_f) + new_role.alt_honorary + new_role.alt_honorary_female)))
+			current.job_honorary_override = chosen_honorary
+
 /mob/proc/sync_mind()
 	mind_initialize()	//updates the mind (or creates and initializes one if one doesn't exist)
 	mind.active = TRUE	//indicates that the mind is currently synced with a client
@@ -793,16 +944,18 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
  ** check_apprentice - do apprentices receive skill experience too?
 */
 /datum/mind/proc/add_sleep_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	if(HAS_TRAIT(current, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	amt *= GLOB.sleep_experience_modifier
 
-	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+	if(current.has_reagent(/datum/reagent/buff/herbal/scholar_focus))
 		amt *= 1.2
 
 	amt *= current.get_skill_exp_multiplier(skill)
 
 	if(check_apprentice)
-		current.adjust_apprentice_exp(skill, amt, silent)
-	if(sleep_adv.add_sleep_experience(skill, amt, silent))
+		current.attributes.adjust_apprentice_exp(skill, amt, silent)
+	if(sleep_adv.adjust_sleep_xp(skill, amt, silent))
 		return TRUE
 
 /datum/mind/proc/add_personal_objective(datum/objective/O)

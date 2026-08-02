@@ -17,7 +17,7 @@
  * * ignore_walls - Whether or not the sound can pass through walls.
  * * falloff_distance - Distance at which falloff_exponent begins. Sound is at peak volume (in regards to falloff_exponent) aslong as it is in this range.
  */
-/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff_exponent = SOUND_FALLOFF_EXPONENT, frequency = null, channel, pressure_affected = FALSE, ignore_walls = TRUE, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, soundping = FALSE, repeat)
+/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff_exponent = SOUND_FALLOFF_EXPONENT, frequency = null, channel, pressure_affected = FALSE, ignore_walls = TRUE, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, soundping = FALSE, repeat, environment_override = -1)
 	if(isarea(source))
 		CRASH("playsound(): source is an area")
 
@@ -75,7 +75,7 @@
 				listeners += listening_ghost
 
 	for(var/mob/listening_mob in listeners)//had nulls sneak in here, hence the typecheck
-		listening_mob.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, max_distance = maxdistance, falloff_distance = falloff_distance, repeat = repeat)
+		listening_mob.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, max_distance = maxdistance, falloff_distance = falloff_distance, repeat = repeat, environment_override=environment_override)
 
 	return listeners
 
@@ -88,8 +88,8 @@
 	flick_overlay(I, GLOB.clients, 6)
 
 
-/mob/proc/playsound_local(atom/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, repeat, muffled)
-	if(!client || !can_hear())
+/mob/proc/playsound_local(atom/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, repeat, muffled, environment_override = -1)
+	if(!client || HAS_TRAIT(src, TRAIT_DEAF))
 		return FALSE
 
 	if(!S)
@@ -111,15 +111,18 @@
 
 	var/vol2use = vol
 	if(client.prefs)
-		vol2use = vol * (client.prefs.mastervol * 0.01)
+		vol2use = vol * (client.prefs.read_preference(/datum/preference/numeric/mastervol) * 0.01)
 	vol2use = min(vol2use, 100)
 
 	S.volume = vol2use
 
-	var/area/A = get_area(src)
-	if(A)
-		if(A.soundenv != -1)
-			S.environment = A.soundenv
+	if(environment_override != -1)
+		S.environment = environment_override
+	else
+		var/area/A = get_area(src)
+		if(A)
+			if(A.soundenv != -1)
+				S.environment = A.soundenv
 
 	if(vary)
 		S.frequency = get_rand_frequency()
@@ -281,8 +284,8 @@
 	set waitfor = FALSE
 	UNTIL(SSticker.login_music) //wait for SSticker init to set the login music
 
-	if(prefs && (prefs.toggles & SOUND_LOBBY))
-		SEND_SOUND(src, sound(SSticker.login_music, repeat = 1, wait = 0, volume = prefs.musicvol, channel = CHANNEL_LOBBYMUSIC)) // MAD JAMS
+	if(prefs && (prefs.read_preference(/datum/preference/bitwise/toggles) & SOUND_LOBBY))
+		SEND_SOUND(src, sound(SSticker.login_music, repeat = 1, wait = 0, volume = prefs.read_preference(/datum/preference/numeric/musicvol), channel = CHANNEL_LOBBYMUSIC)) // MAD JAMS
 
 /proc/get_rand_frequency()
 	return rand(43100, 45100) //Frequency stuff only works with 45kbps oggs.
@@ -416,6 +419,14 @@
 							'sound/foley/footsteps/armor/heavy-footstep (3).ogg',\
 							'sound/foley/footsteps/armor/heavy-footstep (4).ogg',\
 							'sound/foley/footsteps/armor/heavy-footstep (5).ogg'\
+							)
+			if(SFX_EVIL_BOOT_STEP)
+				soundin = pick('sound/foley/footsteps/armor/evilassfootstep1.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep2.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep3.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep4.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep5.ogg',\
+							'sound/foley/footsteps/armor/evilassfootstep6.ogg'\
 							)
 			if(SFX_CAT_MEOW)
 				soundin = pickweight(list(

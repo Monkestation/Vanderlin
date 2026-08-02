@@ -121,6 +121,19 @@
 	category = "Structures"
 
 
+/datum/blueprint_recipe/structure/curtain
+	name = "Curtain"
+	desc = "A long-draped curtain."
+	result_type = /obj/structure/curtain/bounty
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+
 /datum/blueprint_recipe/structure/bed
 	name = "Bed"
 	desc = "A simple wooden bed with fiber bedding."
@@ -143,7 +156,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Structures"
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 
 
 /datum/blueprint_recipe/structure/noose
@@ -171,7 +184,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Structures"
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 
 /datum/blueprint_recipe/structure/torchholder
 	name = "Sconce"
@@ -183,7 +196,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Wall Fixtures"
 	floor_object = FALSE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	check_adjacent_wall = TRUE
 	supports_directions = TRUE
 	inverse_check = TRUE
@@ -199,7 +212,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Wall Fixtures"
 	floor_object = FALSE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	check_adjacent_wall = TRUE
 	supports_directions = TRUE
 	place_on_wall = TRUE
@@ -216,7 +229,40 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Wall Fixtures"
 	floor_object = FALSE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	check_adjacent_wall = TRUE
 	supports_directions = TRUE
 	place_on_wall = TRUE
+
+/datum/blueprint_recipe/structure/psydon_metal_cross
+	name = "metal psycross"
+	desc = "A metal psycross dedicated to Psydon."
+	required_materials = list(
+		/obj/item/ingot/iron = 3,
+	)
+	result_type = /obj/structure/fluff/psycross/psydon/metal
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/attribute/skill/craft/crafting
+	craftdiff = 3
+
+/datum/blueprint_recipe/structure/astrata_cross
+	name = "astrata cross"
+	desc = "A metal psycross dedicated to Astrata."
+	required_materials = list(
+		/obj/item/ingot/iron = 3,
+	)
+	result_type = /obj/structure/fluff/psycross/astrata
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/attribute/skill/craft/crafting
+	craftdiff = 3
+
+/datum/blueprint_recipe/structure/astrata_cross_gold
+	name = "golden astrata cross"
+	desc = "A golden psycross dedicated to Astrata."
+	required_materials = list(
+		/obj/item/ingot/gold = 3,
+	)
+	result_type = /obj/structure/fluff/psycross/astrata/gold
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/attribute/skill/craft/crafting
+	craftdiff = 3

@@ -33,7 +33,7 @@
 
 /datum/objective/personal/retainer/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_ASTRATA_BLESSING, STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ASTRATA_BLESSING, list(STAT_FORTUNE = 1))
 
 /datum/objective/personal/retainer/update_explanation_text()
 	explanation_text = "Recruit at least one retainer to serve you and to demonstrate your ability to lead to Astrata."

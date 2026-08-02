@@ -5,6 +5,7 @@
 	cast_range = 2
 	point_cost = 2
 	attunements = list(/datum/attunement/life)
+	essences = list(/datum/thaumaturgical_essence/poison)
 
 /datum/action/cooldown/spell/essence/detect_poison/cast(atom/cast_on)
 	. = ..()

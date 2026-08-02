@@ -5,24 +5,26 @@
 	gender = PLURAL
 	icon_state = "trou"
 	item_state = "trou"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/pants/padded/bad
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 3
+	item_weight = 350 GRAMS
 
 /obj/item/clothing/pants/trou/leather
 	name = "leather trousers"
 	desc = "Standard leather pants for hardy workers."
 	icon_state = "leathertrou"
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/pants/leather
 	max_integrity = INTEGRITY_POOR
+	item_weight = 0.7 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
@@ -32,8 +34,9 @@
 	name = "splint plate trousers"
 	desc = "Affordable armored pants for regular soldiers, they seem simple and their craftsmanship is solid, makes sure all stays in place with a plated codpiece."
 	icon_state = "splintlegs"
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
@@ -42,23 +45,25 @@
 /obj/item/clothing/pants/trou/leather/advanced
 	name = "hardened leather chausses"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
-	max_integrity = INTEGRITY_POOR + 50
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor_type = /datum/armor/pants/leather/advanced
 
 /obj/item/clothing/pants/trou/leather/advanced/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/pants/trou/leather/quiltedkilt //close enough!
 	name = "quilted kilt"
-	desc = "A sturdy quilted kilt, commonly worn by Lakkarian soldiers or worn casually by Lakkarian commoners."
+	desc = "A sturdy quilted kilt."
 	icon_state = "lakkarikilt"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	max_integrity = 175
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
-	armor = list("blunt" = 65, "slash" = 50, "stab" = 25, "piercing" = 25,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/pants/padded/skirt
 
 /obj/item/clothing/pants/trou/leather/quiltedkilt/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -75,9 +80,9 @@
 /obj/item/clothing/pants/trou/leather/masterwork
 	name = "masterwork leather chausses"
 	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_POOR + 100
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor_type = /datum/armor/pants/leather/master
 
 /obj/item/clothing/pants/trou/leather/masterwork/Initialize()
 	. = ..()
@@ -128,7 +133,7 @@
 /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	desc = "Padded pants, favored by Valoria's Duelists, Legs are often a prime target in a duel, and these pants seem to have seen their fair share of it"
 	color = "#5a5a5a"
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/pants/padded
 	prevent_crits = MINOR_CRITICALS
 	max_integrity = INTEGRITY_STANDARD
 
@@ -148,3 +153,52 @@
 	icon_state = "butlershorts"
 	item_state = "butlershorts"
 	detail_color = CLOTHING_SOOT_BLACK
+	childcore = TRUE
+
+/obj/item/clothing/pants/trou/courtphysician
+	name = "sanguine trousers"
+	desc = "A pair of formal trousers, clean to the best of the servant's ability, but some bloodstains are impossible to rid them of"
+	icon_state = "docpants"
+	item_state = "docpants"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+
+//gronn trou
+/obj/item/clothing/pants/trou/leather/splint/gronn
+	name = "osslandic chain chausses"
+	desc = "A pair of chain-wrapped pants with a leather subligar, ensuring both protection and comfort."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnchainpants"
+	item_state = "gronnchainpants"
+
+/obj/item/clothing/pants/trou/leather/gronn
+	name = "osslandic fur pants"
+	desc = "A pair of hardened leather pants with bone reinforcements along the legs; \
+			Those of Ossland adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
+	icon_state = "gronnleatherpants"
+	item_state = "gronnleatherpants"
+	armor_type = /datum/armor/pants/leather/gronn
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+
+/obj/item/clothing/pants/trou/leather/shepherd
+	name = "shepherd's pants"
+	desc = "A pair of white pants decorated with red stripes and traditional patterning."
+	icon_state = "shepherdpants"
+
+/obj/item/clothing/pants/trou/leather/blackmeadow //no, not 'eastpants3', silly!
+	name = "gambeson trousers"
+	desc = "A form of Blackmeadow peasant's trousers. The fabric used in their manufacture is strong, and could probably turn away a few blows."
+	icon_state = "baggypants"
+	item_state = "baggypants"
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER - 50
+
+/obj/item/clothing/pants/trou/leather/pontifex
+	name = "pontifex's chaqchur"
+	desc = "A handmade pair of baggy, thin leather pants. They end in a tight stocking around the calf, ballooning out around the thigh."
+	icon_state = "monkpants"
+	item_state = "monkpants"
+	salvage_result = /obj/item/natural/hide/cured

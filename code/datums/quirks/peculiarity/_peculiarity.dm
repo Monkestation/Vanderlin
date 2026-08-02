@@ -14,6 +14,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(1.15, 1.15)
 	H.update_transform()
+	return ..()
 
 /datum/quirk/peculiarity/large_sized/on_remove()
 	if(!ishuman(owner))
@@ -21,6 +22,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(0.87, 0.87)
 	H.update_transform()
+	return ..()
 
 /datum/quirk/peculiarity/small_sized
 	name = "Small Build"
@@ -32,6 +34,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(0.9, 0.9)
 	H.update_transform()
+	return ..()
 
 /datum/quirk/peculiarity/small_sized/on_remove()
 	if(!ishuman(owner))
@@ -39,51 +42,47 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(1.11, 1.11)
 	H.update_transform()
-
+	return ..()
 
 /datum/quirk/peculiarity/witless_pixie
 	name = "Witless Pixie"
 	desc = "By some cruel twist of fate, you have been born a dainty-minded, dim-witted klutz. Yours is a life of constant misdirection, confusion and general incompetence. It is no small blessing your dazzling looks make up for this, sometimes."
 
 /datum/quirk/peculiarity/witless_pixie/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, rand(-2, -5))
+	owner.adjust_stat_modifier(STATMOD_WITLESS_PIXIE, list(STAT_INTELLIGENCE = rand(-2, -5)))
 
-	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_FISHFACE, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, NONE)
+	REMOVE_TRAIT(owner, TRAIT_UGLY, NONE)
+	REMOVE_TRAIT(owner, TRAIT_FISHFACE, NONE)
 
 	if(prob(50))
-		ADD_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+		ADD_TRAIT(owner, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
 	else if(prob(30))
-		ADD_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
+		ADD_TRAIT(owner, TRAIT_UGLY, QUIRK_TRAIT)
+	return ..()
 
 /datum/quirk/peculiarity/witless_pixie/on_remove()
+	owner?.remove_stat_modifier(STATMOD_WITLESS_PIXIE)
+	return ..()
+
+/datum/quirk/peculiarity/ugly
+	name = "Ugly"
+	desc = "Your appearance turns heads... in all the wrong ways. With features ranging from unsightly to grotesque, you likely have yet to find anyone impressed with your looks."
+	traits_to_add = list(TRAIT_UGLY)
+
+/datum/quirk/peculiarity/ugly/on_spawn()
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	// Remove stat penalty (inverse of what was applied)
-	// This is approximate since we randomized on spawn
-	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, 3)
+
+	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_FISHFACE, TRAIT_GENERIC)
+	return ..()
 
 /datum/quirk/peculiarity/virgin
 	name = "Virgin"
-	desc = "YOU... ARE MAIDENLESS!! you never were good with women... or men, whether cause you are a awkward freak, or religous reasons, or simply plain unlucky, your blood remains untainted and pure."
-
-/datum/quirk/peculiarity/virgin/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.virginity = FALSE
-
-/datum/quirk/peculiarity/virgin/after_job_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.virginity = FALSE
-
+	desc = "YOU... ARE MAIDENLESS! Whether because of awkwardness, deep religiosity, or sheer unluckiness, your body remains untainted and pure."
+	traits_to_add = list(TRAIT_VIRGIN)
 
 /datum/quirk/peculiarity/mystery_box
 	name = "Mystery Box"
@@ -112,35 +111,36 @@
 
 	H.put_in_hands(mystery_box)
 	find_keeper()
+	return ..()
 
 /datum/quirk/peculiarity/mystery_box/proc/find_keeper()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/carbon/human/box_owner = owner
 
 	// Find a random player to be the keeper
 	var/list/possible_keepers = list()
-	for(var/mob/living/carbon/human/P in GLOB.player_list)
-		if(P != H && P.mind && P.stat != DEAD)
-			possible_keepers += P
+	for(var/mob/living/carbon/human/possible_keeper in GLOB.player_list)
+		if(possible_keeper != box_owner && possible_keeper.mind && possible_keeper.stat != DEAD && !isautomaton(possible_keeper))
+			possible_keepers += possible_keeper
 
 	if(length(possible_keepers))
 		keeper = pick(possible_keepers)
 
 		// Give keeper the knowledge with flavor
 		to_chat(keeper, span_notice("A memory surfaces... you know the passcode to a mysterious box: \"[passcode]\""))
-		keeper.mind.store_memory("Passcode to [H.real_name]'s box: \"[passcode]\"")
+		keeper.mind.store_memory("Passcode to [box_owner.real_name]'s box: \"[passcode]\"")
 
-		to_chat(H, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
+		to_chat(box_owner, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
 	else
-		to_chat(H, span_warning("You can't remember who knows the passcode..."))
+		to_chat(box_owner, span_warning("You can't remember who knows the passcode..."))
 
-	RegisterSignal(mystery_box, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine), TRUE)
+	RegisterSignal(mystery_box, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine), TRUE)
 
 /datum/quirk/peculiarity/mystery_box/proc/on_examine(datum/source, mob/user, list/examine_list)
 	if(user == keeper)
 		examine_list += span_notice("You know the passcode to this box: \"[passcode]\"")
 
 /datum/quirk/peculiarity/mystery_box/proc/try_unlock(code)
-	if(lowertext(trim(code)) == lowertext(passcode))
+	if(LOWER_TEXT(trim(code)) == LOWER_TEXT(passcode))
 		var/datum/loot_table/loot_generator
 		var/roll = rand(1, 100)
 
@@ -165,23 +165,32 @@
 
 /datum/quirk/peculiarity/mystery_box/on_remove()
 	if(mystery_box)
-		UnregisterSignal(mystery_box, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(mystery_box, COMSIG_ATOM_EXAMINE)
 		qdel(mystery_box)
+	return ..()
 
 /obj/item/mystery
 	name = "locked box"
 	desc = "A mysterious locked box."
 	icon = 'icons/roguetown/items/misc.dmi'
-	icon_state = "mimic_trinket"
+	icon_state = "mysterybox"
+	detail_tag = "_detail"
+	detail_color = CLOTHING_YELLOW_OCHRE
+	dropshrink = 0.8
+	item_weight = 750 GRAMS
+
 	var/datum/quirk/peculiarity/mystery_box/linked_quirk
 	var/listening = TRUE
 
 /obj/item/mystery/Initialize()
 	. = ..()
 	become_hearing_sensitive()
+	detail_color = pick_assoc(GLOB.noble_dyes)
+	update_appearance()
 
 /obj/item/mystery/Destroy()
 	lose_hearing_sensitivity()
+	linked_quirk = null
 	return ..()
 
 /obj/item/mystery/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, original_message)
@@ -215,4 +224,4 @@
 		. += span_green("You know the words to open this box: \"[linked_quirk.passcode]\"")
 	else
 		. += span_notice("It seems to respond to spoken words. Perhaps [linked_quirk?.keeper ? linked_quirk.keeper.real_name : "someone"] knows how to open it.")
-	. += span_notice("Right-click to get a hint about who might know the passcode.")
+	. += span_notice("Click in-hand to get a hint about who might know the passcode.")

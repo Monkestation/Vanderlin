@@ -1,0 +1,4 @@
+author: "Spitegremlin"
+delete-after: True
+changes:
+  - rscadd: "Added new chisel and sprite for bronze chisel, repaletted the stone hammer and new hammerstone"

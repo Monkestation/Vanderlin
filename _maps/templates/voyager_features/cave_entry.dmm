@@ -2,15 +2,18 @@
 "a" = (
 /turf/open/floor/naturalstone,
 /area/template_noop)
-"c" = (
+"e" = (
 /turf/open/openspace,
 /area/template_noop)
-"j" = (
+"i" = (
 /obj/effect/waterfall,
-/turf/open/openspace,
+/turf/open/water/clean,
 /area/template_noop)
 "o" = (
 /turf/closed/mineral,
+/area/template_noop)
+"s" = (
+/turf/open/water/clean,
 /area/template_noop)
 "y" = (
 /turf/template_noop,
@@ -18,12 +21,9 @@
 "A" = (
 /turf/open/floor/dirt,
 /area/template_noop)
-"G" = (
-/turf/open/water/cleanshallow,
-/area/template_noop)
-"M" = (
+"N" = (
 /obj/effect/waterfall,
-/turf/open/water/cleanshallow,
+/turf/open/openspace,
 /area/template_noop)
 "Q" = (
 /turf/open/floor/cobblerock,
@@ -51,8 +51,8 @@ o
 o
 a
 a
-G
-G
+s
+s
 a
 "}
 (3,1,1) = {"
@@ -63,9 +63,9 @@ a
 o
 a
 a
-G
-G
-G
+s
+s
+s
 a
 "}
 (4,1,1) = {"
@@ -75,11 +75,11 @@ a
 o
 o
 a
-G
-G
-G
-G
-G
+s
+s
+s
+s
+s
 "}
 (5,1,1) = {"
 y
@@ -88,11 +88,11 @@ a
 o
 a
 a
-M
-G
-G
-G
-G
+i
+s
+s
+s
+s
 "}
 (6,1,1) = {"
 y
@@ -101,11 +101,11 @@ a
 o
 a
 a
-M
-G
-G
-G
-G
+i
+s
+s
+s
+s
 "}
 (7,1,1) = {"
 y
@@ -114,11 +114,11 @@ a
 o
 a
 a
-G
-G
-G
-G
-G
+s
+s
+s
+s
+s
 "}
 (8,1,1) = {"
 y
@@ -129,9 +129,9 @@ a
 a
 a
 a
-G
-G
-G
+s
+s
+s
 "}
 (9,1,1) = {"
 y
@@ -143,8 +143,8 @@ o
 a
 a
 a
-G
-G
+s
+s
 "}
 (10,1,1) = {"
 y
@@ -219,7 +219,7 @@ y
 o
 a
 a
-c
+e
 a
 a
 a
@@ -231,9 +231,9 @@ y
 y
 o
 a
-j
-c
-c
+N
+e
+e
 a
 a
 y
@@ -244,9 +244,9 @@ y
 o
 o
 a
-j
-c
-c
+N
+e
+e
 a
 o
 y
@@ -257,9 +257,9 @@ y
 a
 a
 a
-c
-c
-c
+e
+e
+e
 a
 o
 y
@@ -269,9 +269,9 @@ y
 y
 y
 a
-c
-c
-c
+e
+e
+e
 a
 a
 y
@@ -282,9 +282,9 @@ y
 y
 y
 o
-c
+e
 a
-c
+e
 a
 o
 a
@@ -350,7 +350,7 @@ o
 o
 a
 A
-c
+e
 a
 A
 A
@@ -362,9 +362,9 @@ y
 o
 A
 a
-c
-c
-c
+e
+e
+e
 a
 Q
 A
@@ -374,11 +374,11 @@ y
 A
 o
 A
-j
-c
-c
-c
-c
+N
+e
+e
+e
+e
 A
 y
 "}
@@ -387,10 +387,10 @@ A
 o
 o
 a
-j
-c
-c
-c
+N
+e
+e
+e
 Q
 a
 Q
@@ -400,10 +400,10 @@ A
 o
 Q
 a
-c
-c
-c
-c
+e
+e
+e
+e
 a
 o
 A
@@ -413,9 +413,9 @@ y
 o
 A
 a
-c
-c
-c
+e
+e
+e
 a
 A
 o
@@ -427,7 +427,7 @@ o
 o
 A
 Q
-c
+e
 a
 A
 o

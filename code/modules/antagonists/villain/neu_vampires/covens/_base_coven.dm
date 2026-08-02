@@ -115,8 +115,8 @@
 	if(new_owner == owner)
 		return
 	if(owner)
-		UnregisterSignal(owner, COMSIG_PARENT_QDELETING)
-	RegisterSignal(new_owner, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_qdel))
+		UnregisterSignal(owner, COMSIG_QDELETING)
+	RegisterSignal(new_owner, COMSIG_QDELETING, PROC_REF(on_owner_qdel))
 	owner = new_owner
 
 	// Set owner for all known powers

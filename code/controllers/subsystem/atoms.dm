@@ -20,6 +20,7 @@ SUBSYSTEM_DEF(atoms)
 	initialized = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 	initialized = INITIALIZATION_INNEW_REGULAR
+	GLOB.obtained_from_reverse = build_obtained_from_reverse()
 	return ..()
 
 /datum/controller/subsystem/atoms/proc/InitializeAtoms(list/atoms)

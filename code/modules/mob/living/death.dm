@@ -1,6 +1,6 @@
 GLOBAL_LIST_EMPTY(last_words)
 
-/mob/living/gib(no_brain, no_organs, no_bodyparts)
+/mob/living/proc/gib(no_brain, no_organs, no_bodyparts)
 	var/prev_lying = lying_angle
 	if(stat != DEAD)
 		death(TRUE)
@@ -36,9 +36,7 @@ GLOBAL_LIST_EMPTY(last_words)
 /mob/living/proc/spread_bodyparts()
 	return
 
-/mob/living/dust(just_ash, drop_items, force)
-	death(TRUE)
-
+/mob/living/proc/dust(just_ash, drop_items, force)
 	spill_embedded_objects()
 
 	if(drop_items)
@@ -47,9 +45,12 @@ GLOBAL_LIST_EMPTY(last_words)
 	if(buckled)
 		buckled.unbuckle_mob(src, force = TRUE)
 
-	dust_animation()
+	death(TRUE)
 	spawn_dust(just_ash)
-	QDEL_IN(src,5) // since this is sometimes called in the middle of movement, allow half a second for movement to finish, ghosting to happen and animation to play. Looks much nicer and doesn't cause multiple runtimes.
+
+	if(!QDELETED(src))
+		invisibility = INVISIBILITY_MAXIMUM
+		QDEL_IN(src, 0.5 SECONDS) // since this is sometimes called in the middle of movement, allow half a second for movement to finish, ghosting to happen and animation to play. Looks much nicer and doesn't cause multiple runtimes.
 
 /mob/living/proc/dust_animation()
 	return
@@ -59,26 +60,29 @@ GLOBAL_LIST_EMPTY(last_words)
 		new /obj/item/fertilizer/ash(loc)
 
 
-/mob/living/death(gibbed)
+/mob/living/proc/death(gibbed)
 	var/was_dead_before = stat == DEAD
-	set_stat(DEAD)
-	unset_machine()
-	timeofdeath = world.time
-	tod = station_time_timestamp()
-
-	var/obj/structure/soul/soul = new(get_turf(src))
-	soul.init_mana(WEAKREF(src))
-
-	for(var/obj/item/I in contents)
-		I.on_mob_death(src, gibbed)
-	GLOB.alive_mob_list -= src
-	if(!gibbed && !was_dead_before)
-		GLOB.dead_mob_list += src
 
 	if(prob(0.1))
 		src.playsound_local(src, 'sound/misc/dark_die.ogg', 250)
 	else
 		src.playsound_local(src, 'sound/misc/deth.ogg', 100)
+
+	set_stat(DEAD)
+	unset_machine()
+	timeofdeath = world.time
+	tod = station_time_timestamp()
+
+	if(!gibbed && !was_dead_before)
+		var/obj/structure/soul/soul = new(get_turf(src))
+		soul.init_mana(WEAKREF(src))
+
+	for(var/obj/item/I in contents)
+		I.on_mob_death(src, gibbed)
+
+	GLOB.alive_mob_list -= src
+	if(!gibbed && !was_dead_before)
+		GLOB.dead_mob_list += src
 
 	set_disgust(0)
 	SetSleeping(0)
@@ -91,9 +95,8 @@ GLOBAL_LIST_EMPTY(last_words)
 
 	to_chat(src, span_green("A bleak afterlife awaits... but the Gods may let you walk again in another shape! Spirit, you must descend in a Journey to the Underworld and wait there for judgment..."))
 
-	. = ..()
-
 	SEND_SIGNAL(src, COMSIG_LIVING_DEATH, gibbed)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_DEATH, src , gibbed)
 	if(client)
 		client.move_delay = initial(client.move_delay)
 		var/atom/movable/screen/gameover/hog/H = new()
@@ -102,45 +105,40 @@ GLOBAL_LIST_EMPTY(last_words)
 		H.Fade()
 		MOBTIMER_SET(src, MT_LASTDIED)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)
-		remove_client_colour(/datum/client_colour/monochrome/death)
-		add_client_colour(/datum/client_colour/monochrome/death)
-		client?.verbs |= /client/proc/descend
 		if(last_words)
 			GLOB.last_words |= last_words
 
 	if(lastattacker_weakref)
 		var/mob/attacker = lastattacker_weakref.resolve()
-		SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
+		if(attacker)
+			SEND_SIGNAL(attacker, COMSIG_LIVING_COMBAT_KILL, src)
 
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(gibbed)
+
 	for(var/datum/soullink/S as anything in sharedSoullinks)
 		S.sharerDies(gibbed)
 
-//	for(var/datum/death_tracker/D in target.death_trackers)
-
-	if(!gibbed && !QDELETED(src) && rot_type)
+	if(!gibbed && !QDELETED(src) && !HAS_TRAIT(src, TRAIT_NO_ROT) && rot_type)
 		LoadComponent(rot_type)
 
 	set_typing_indicator(FALSE)
 
-	if (client)
-		if (!gibbed)
-			var/locale = prepare_deathsight_message()
-			for (var/mob/living/player in GLOB.player_list)
-				if (player.stat == DEAD || isbrain(player))
-					continue
-				if (HAS_TRAIT(player, TRAIT_DEATHSIGHT))
-					if (HAS_TRAIT(player, TRAIT_CABAL) || istype(player.patron, /datum/patron/inhumen/zizo))
-						to_chat(player, span_warning("I feel the faint passage of disjointed life essence as it flees [locale]."))
-					else
-						to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turns towards [locale] for but a brief, singular moment."))
+	if(mind && !gibbed)
+		var/locale = prepare_deathsight_message()
+		for(var/mob/living/player in GLOB.player_list)
+			if(player.stat == DEAD || isbrain(player))
+				continue
+			if(HAS_TRAIT(player, TRAIT_DEATHSIGHT))
+				if(HAS_TRAIT(player, TRAIT_CABAL) || istype(player.patron, /datum/patron/inhumen/zizo))
+					to_chat(player, span_warning("I feel the faint passage of disjointed life essence as it flees [locale]."))
+				else
+					to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turns towards [locale] for but a brief, singular moment."))
 
 	return TRUE
 
-
 /mob/living/proc/prepare_deathsight_message()
-	var/area_of_death = lowertext(get_area_name(src))
+	var/area_of_death = LOWER_TEXT(get_area_name(src))
 	var/locale = "a locale wreathed in enigmatic fog"
 	switch (area_of_death) // we're deliberately obtuse with this.
 		if ("mountains", "mt decapitation", "malum's anvil forest", "malum's anvil under lower caves", "malum's anvil cave building", "malum's anvil lower dungeon", "malum's anvil surface building", "malum's anvil hidden grove", "malum's anvil peak")

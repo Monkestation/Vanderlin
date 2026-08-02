@@ -42,12 +42,12 @@
 		return
 	RegisterSignal(observing_turf, COMSIG_TURF_CHANGE, PROC_REF(on_observed_change))
 	RegisterSignal(observing_turf, COMSIG_TURF_ENTERED, PROC_REF(on_observed_change))
-	RegisterSignal(observing_turf, COMSIG_TURF_EXITED, PROC_REF(on_observed_change))
+	RegisterSignal(observing_turf, COMSIG_ATOM_EXITED, PROC_REF(on_observed_change))
 
 /obj/structure/redstone/observer/proc/unregister_observation_signals()
 	if(!observing_turf)
 		return
-	UnregisterSignal(observing_turf, list(COMSIG_TURF_CHANGE, COMSIG_ATOM_ENTERED, COMSIG_TURF_EXITED))
+	UnregisterSignal(observing_turf, list(COMSIG_TURF_CHANGE, COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXITED))
 
 /obj/structure/redstone/observer/proc/get_turf_state(turf/T)
 	if(!T)
@@ -93,7 +93,7 @@
 	. = ..()
 	icon_state = pulsing ? "comparator_pulse" : "comparator"
 
-/obj/structure/redstone/observer/AltClick(mob/user)
+/obj/structure/redstone/observer/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user))
 		return
 	dir = turn(dir, 90)

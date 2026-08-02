@@ -29,7 +29,7 @@
 	RegisterSignal(mind, COMSIG_WORKER_IDLE_START, PROC_REF(output_idle_start))
 	RegisterSignal(mind, COMSIG_WORKER_ATTACK_START, PROC_REF(output_attack_start))
 	RegisterSignal(mind, COMSIG_WORKER_ATTACK_END, PROC_REF(output_attack_end))
-	RegisterSignal(mind.worker, COMSIG_PARENT_QDELETING, PROC_REF(clean))
+	RegisterSignal(mind.worker, COMSIG_QDELETING, PROC_REF(clean))
 	RegisterSignal(mind, COMSIG_AI_PATH_GENERATED, PROC_REF(regenerate_path))
 	RegisterSignal(mind.worker, COMSIG_MOVABLE_MOVED, PROC_REF(check_turf_update))
 
@@ -52,7 +52,7 @@
 	))
 	cut_path()
 
-	UnregisterSignal(mind.worker, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
+	UnregisterSignal(mind.worker, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	STOP_PROCESSING(SSstrategy_master, src)
 	mind = null
 	output = null

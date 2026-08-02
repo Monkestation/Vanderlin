@@ -1,12 +1,7 @@
-#define CLERIC_SPELLS "Cleric"
-#define PRIEST_SPELLS "Priest"
-
-GLOBAL_LIST_EMPTY(patronlist)
-GLOBAL_LIST_EMPTY(patrons_by_faith) // Does not include patrons with preference_accessible as FALSE
-GLOBAL_LIST_EMPTY(preference_patrons) // Does not include patrons with preference_accessible as FALSE
 GLOBAL_LIST_EMPTY(prayers)
 
 /datum/patron
+	abstract_type = /datum/patron
 	/// Name of the god
 	var/name
 	/// Display name of the patron in the prefs menu
@@ -23,10 +18,12 @@ GLOBAL_LIST_EMPTY(prayers)
 	var/sins = "Codersocks"
 	/// What boons the god may offer
 	var/boons = "Code errors"
+	/// Allows prayer without amulet or cross in church areas
+	var/church_prayer = FALSE
+	/// Message that shows if you can't pray.
+	var/prayer_fail = "I need an amulet of my patron, or my patron's idol, for my prayers to be heard..." // If a patron has unusual prayable structures we should tell them here.
 	/// Faith this god belongs to
-	var/datum/faith/associated_faith = /datum/faith
-	/// Whether or not we are accessible in preferences
-	var/preference_accessible = TRUE
+	var/datum/faith/associated_faith = null
 	/// All gods have related confessions
 	var/list/confess_lines
 
@@ -34,7 +31,7 @@ GLOBAL_LIST_EMPTY(prayers)
 	var/datum/devotion/devotion_holder = null
 
 	/// List of words that this god considers profane.
-	var/list/profane_words = list("zizo","cock","dick","fuck","shit","pussy","cuck","cunt","asshole")
+	var/list/profane_words = list()
 
 	///our traits thats applied by set_patron and removed when changed
 	var/list/added_traits
@@ -42,29 +39,68 @@ GLOBAL_LIST_EMPTY(prayers)
 	///verbs applied by set_patron and removed when changed
 	var/list/added_verbs
 
+
+	var/list/associated_objects = alist(
+		PATRON_AMULET = null,
+		PATRON_STRUCTURE = null,
+	)
+
+	///List of blueprints given to a patron for special structures
+	var/list/added_blueprints = list()
+
 	//If the patron has a specific specie worshipping them.
 	var/list/allowed_races
 
 	var/datum/storyteller/storyteller
 
+/datum/patron/proc/preference_accessible(datum/preferences/prefs)
+	if(length(allowed_races) && !(prefs.pref_species.id in allowed_races))
+		return FALSE
+
+	return TRUE
+
 /datum/patron/proc/on_gain(mob/living/pious)
+	if(HAS_TRAIT(pious, TRAIT_DIVINE_CONVERT))
+		return
 	for(var/trait in added_traits)
 		ADD_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
-		pious.verbs |= verb
+		add_verb(pious, verb)
+	if(pious.mind)
+		pious.mind.teach_crafting_recipe(added_blueprints)
+	else
+		addtimer(CALLBACK(src, PROC_REF(added_blueprints_delay), pious), 1) //Doesn't added the blueprint on spawn without this
+
+/datum/patron/proc/added_blueprints_delay(mob/living/pious)
+	if(pious?.mind)
+		pious.mind.teach_crafting_recipe(added_blueprints)
 
 /datum/patron/proc/on_remove(mob/living/pious)
 	for(var/trait in added_traits)
 		REMOVE_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
-		pious.verbs -= verb
+		remove_verb(pious, verb)
+	if(pious.mind)
+		pious.mind.forget_crafting_recipe(added_blueprints)
 
 /* -----PRAYERS----- */
 
 /// Called when a patron's follower attempts to pray.
 /// Returns TRUE if they satisfy the needed conditions.
 /datum/patron/proc/can_pray(mob/living/follower)
-	return TRUE
+	if(istype(get_area(follower), /area/indoors/town/church) && church_prayer)
+		return TRUE
+
+	for(var/obj/structure/crosstype in view(7, get_turf(follower)))
+		if(is_type_in_list(crosstype, associated_objects[PATRON_STRUCTURE]))
+			return TRUE
+
+	if(follower.check_slots_for_types(list(ITEM_SLOT_NECK, ITEM_SLOT_WRISTS, ITEM_SLOT_HANDS, ITEM_SLOT_BELT_L, ITEM_SLOT_BELT_R), associated_objects[PATRON_AMULET]))
+		return TRUE
+
+	to_chat(follower, span_danger(prayer_fail))
+	return FALSE
+
 
 /// Called when a patron's follower prays to them.
 /// Returns TRUE if their prayer was heard and the patron was not insulted

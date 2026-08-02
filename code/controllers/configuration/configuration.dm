@@ -21,7 +21,14 @@
 	var/motd
 	var/policy
 
+	/// If the configuration is loaded
+	var/loaded = FALSE
+
 	var/static/regex/ic_filter_regex
+
+/datum/controller/configuration/stat_entry(msg)
+	msg = "Edit"
+	return msg
 
 /datum/controller/configuration/proc/admin_reload()
 	if(IsAdminAdvancedProcCall())
@@ -52,8 +59,11 @@
 		LoadEntries("dev_overrides.txt")
 	loadmaplist(CONFIG_MAPS_FILE)
 	LoadMOTD()
+	LoadTMInfo()
 	LoadPolicy()
-	LoadChatFilter()
+	LoadRelays()
+
+	loaded = TRUE
 
 	if(Master)
 		Master.OnConfigLoad()
@@ -80,11 +90,10 @@
 	var/list/_entries_by_type = list()
 	entries_by_type = _entries_by_type
 
-	for(var/I in typesof(/datum/config_entry))	//typesof is faster in this case
-		var/datum/config_entry/E = I
-		if(initial(E.abstract_type) == I)
+	for(var/datum/config_entry/E as anything in typesof(/datum/config_entry))	//typesof is faster in this case
+		if(IS_ABSTRACT(E))
 			continue
-		E = new I
+		E = new E
 		var/esname = E.name
 		var/datum/config_entry/test = _entries[esname]
 		if(test)
@@ -92,7 +101,7 @@
 			qdel(E)
 			continue
 		_entries[esname] = E
-		_entries_by_type[I] = E
+		_entries_by_type[E.type] = E
 
 /datum/controller/configuration/proc/RemoveEntry(datum/config_entry/CE)
 	entries -= CE.name
@@ -102,14 +111,14 @@
 	if(IsAdminAdvancedProcCall())
 		return
 
-	var/filename_to_test = world.system_type == MS_WINDOWS ? lowertext(filename) : filename
+	var/filename_to_test = world.system_type == MS_WINDOWS ? LOWER_TEXT(filename) : filename
 	if(filename_to_test in stack)
 		log_config("Warning: Config recursion detected ([english_list(stack)]), breaking!")
 		return
 	stack = stack + filename_to_test
 
 	log_config("Loading config file [filename]...")
-	var/list/lines = world.file2list("[directory]/[filename]")
+	var/list/lines = file2list("[directory]/[filename]")
 	var/list/_entries = entries
 	for(var/L in lines)
 		L = trim(L)
@@ -129,10 +138,10 @@
 		var/value = null
 
 		if(pos)
-			entry = lowertext(copytext(L, 1, pos))
+			entry = LOWER_TEXT(copytext(L, 1, pos))
 			value = copytext(L, pos + 1)
 		else
-			entry = lowertext(L)
+			entry = LOWER_TEXT(L)
 
 		if(!entry)
 			continue
@@ -188,15 +197,9 @@
 	var/list/banned_edits = list(NAMEOF(src, entries_by_type), NAMEOF(src, entries), NAMEOF(src, directory))
 	return !(var_name in banned_edits) && ..()
 
-/datum/controller/configuration/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Edit", src)
-	stat("[name]:", statclick)
-
 /datum/controller/configuration/proc/Get(entry_type)
 	var/datum/config_entry/E = entry_type
-	var/entry_is_abstract = initial(E.abstract_type) == entry_type
-	if(entry_is_abstract)
+	if(IS_ABSTRACT(E))
 		CRASH("Tried to retrieve an abstract config_entry: [entry_type]")
 	E = entries_by_type[entry_type]
 	if(!E)
@@ -208,8 +211,7 @@
 
 /datum/controller/configuration/proc/Set(entry_type, new_val)
 	var/datum/config_entry/E = entry_type
-	var/entry_is_abstract = initial(E.abstract_type) == entry_type
-	if(entry_is_abstract)
+	if(IS_ABSTRACT(E))
 		CRASH("Tried to set an abstract config_entry: [entry_type]")
 	E = entries_by_type[entry_type]
 	if(!E)
@@ -221,9 +223,12 @@
 
 /datum/controller/configuration/proc/LoadMOTD()
 	motd = file2text("[directory]/motd.txt")
+	GLOB.join_motd = motd
+
+/datum/controller/configuration/proc/LoadTMInfo()
 	var/tm_info = GLOB.revdata.GetTestMergeInfo()
-	if(motd || tm_info)
-		motd = motd ? "[motd]<br>[tm_info]" : tm_info
+	GLOB.current_tms = tm_info
+
 /*
 Policy file should be a json file with a single object.
 Value is raw html.
@@ -257,7 +262,7 @@ Example config:
 /datum/controller/configuration/proc/loadmaplist(filename)
 	log_config("Loading config file [filename]...")
 	filename = "[directory]/[filename]"
-	var/list/Lines = world.file2list(filename)
+	var/list/Lines = file2list(filename)
 
 	var/datum/map_config/currentmap = null
 	for(var/t in Lines)
@@ -275,10 +280,10 @@ Example config:
 		var/data = null
 
 		if(pos)
-			command = lowertext(copytext(t, 1, pos))
+			command = LOWER_TEXT(copytext(t, 1, pos))
 			data = copytext(t, pos + length(t[pos]))
 		else
-			command = lowertext(t)
+			command = LOWER_TEXT(t)
 
 		if(!command)
 			continue
@@ -313,25 +318,23 @@ Example config:
 			else
 				log_config("Unknown command in map vote config: '[command]'")
 
-/datum/controller/configuration/proc/LoadChatFilter()
-	var/list/in_character_filter = list()
-
-	if(!fexists("[directory]/in_character_filter.txt"))
-		return
-
-	log_config("Loading config file in_character_filter.txt...")
-
-	for(var/line in world.file2list("[directory]/in_character_filter.txt"))
-		if(!line)
-			continue
-		if(findtextEx(line,"#",1,2))
-			continue
-		in_character_filter += REGEX_QUOTE(line)
-
-	ic_filter_regex = in_character_filter.len ? regex("\\b([jointext(in_character_filter, "|")])\\b", "i") : null
-
-	syncChatRegexes()
-
 //Message admins when you can.
 /datum/controller/configuration/proc/DelayedMessageAdmins(text)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(message_admins), text), 0)
+
+/datum/controller/configuration/proc/LoadRelays()
+	var/config_path = "[directory]/relays.toml"
+	if(!fexists(file(config_path)))
+		log_config("relays.toml does not exist.")
+		return
+
+	var/list/result = rustg_raw_read_toml_file(config_path)
+	if(!result["success"])
+		log_config("Notify Server Operators: The relay config (relays.toml) is not configured correctly! [result["content"]]")
+		return
+
+	var/list/content = json_decode(result["content"])
+	if(!length(content))
+		return
+
+	GLOB.relay_config = content["relay"]

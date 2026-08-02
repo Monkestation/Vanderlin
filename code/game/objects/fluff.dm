@@ -35,7 +35,10 @@
 	icon = 'icons/delver/abyss_objects.dmi'
 	icon_state = "driftwood-1"
 	debris = list(/obj/item/grown/log/tree/stick = 2)
-	static_debris = list(/obj/item/grown/log/tree = 1)
+
+/obj/structure/flora/driftwood/atom_deconstruct(disassembled)
+	. = ..()
+	new /obj/item/grown/log/tree(loc)
 
 /obj/structure/flora/driftwood/Initialize()
 	icon_state = "driftwood-[rand(1, 4)]"

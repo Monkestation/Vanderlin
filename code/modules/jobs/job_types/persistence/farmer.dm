@@ -1,3 +1,27 @@
+/datum/attribute_holder/sheet/job/persistant/farmer
+	attribute_variance = list(
+		STAT_STRENGTH = list(0, 1),
+		STAT_CONSTITUTION = list(0, 1),
+		STAT_ENDURANCE = list(0, 1),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/labor/farming = 40,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/labor/fishing = 20,
+		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/combat/polearms = 20
+	)
+
 /datum/job/persistence/farmer
 	title = "Farmer"
 	tutorial = "You're a farmer, ensure the settlers don't starve."
@@ -7,26 +31,7 @@
 	outfit = /datum/outfit/farmer_p
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/labor/farming = 4,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/labor/fishing = 2,
-		/datum/skill/labor/taming = 2,
-		/datum/skill/combat/polearms = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/persistant/farmer
 
 	traits = list(
 		TRAIT_SEEDKNOW
@@ -36,11 +41,6 @@
 	. = ..()
 	if(prob(50))
 		spawned.cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
-
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, pick(0,1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, pick(0,1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, pick(0,1))
-
 
 
 /datum/outfit/farmer_p

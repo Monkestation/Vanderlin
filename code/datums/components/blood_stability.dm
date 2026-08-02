@@ -29,7 +29,7 @@
 	if(!blood_storage[blood_type])
 		blood_storage[blood_type] = 0
 	blood_storage[blood_type] = min(max_storage_per_type, blood_storage[blood_type] + amount)
-	to_chat(host, span_notice("Your body has absorbed [amount] units of [blood_type]. Total: [blood_storage[blood_type]]"))
+	to_chat(host, span_notice("Your body has absorbed [amount] units of [initial(blood_type.name)] Blood. Total: [blood_storage[blood_type]]"))
 	return TRUE
 
 /datum/component/blood_stability/proc/has_blood_amount(blood_type, amount)

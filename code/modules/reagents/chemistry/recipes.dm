@@ -1,4 +1,5 @@
 /datum/chemical_reaction
+	abstract_type = /datum/chemical_reaction
 	var/name = null
 	var/id = null
 	var/list/results = new/list()
@@ -25,7 +26,7 @@
 		var/atom/A = holder.my_atom
 		var/turf/T = get_turf(A)
 		var/message = "A [reaction_name] reaction has occurred in [ADMIN_VERBOSEJMP(T)]"
-		message += " (<A HREF='?_src_=vars;Vars=[REF(A)]'>VV</A>)"
+		message += " (<A href='byond://?_src_=vars;Vars=[REF(A)]'>VV</A>)"
 
 		var/mob/M = get(A, /mob)
 		if(M)
@@ -47,7 +48,7 @@
 				S = create_random_mob(get_turf(holder.my_atom), mob_class)
 			else
 				S = new mob_class(get_turf(holder.my_atom))//Spawn our specific mob_class
-			S.faction |= mob_faction
+			S.add_faction(mob_faction)
 			if(prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)
 					step(S, pick(NORTH,SOUTH,EAST,WEST))

@@ -1,10 +1,26 @@
-/datum/job_pack/creed
-	name = "Covenant And Creed (Broadsword + Shield)"
-	pack_skills = list(
-		/datum/skill/combat/swords = SKILL_LEVEL_MASTER,
-		/datum/skill/combat/shields = SKILL_LEVEL_EXPERT,
+/datum/attribute_holder/sheet/job/pack/creed
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/shields = 40,
 	)
 
+/datum/attribute_holder/sheet/job/pack/consecratia
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/whipsflails = 50,
+		/datum/attribute/skill/combat/shields = 40,
+	)
+
+/datum/attribute_holder/sheet/job/pack/crusade
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/knives = 40,
+	)
+
+/datum/job_pack/creed
+	name = "Covenant And Creed (Broadsword + Shield)"
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/creed
+	)
 	pack_contents = list(
 		/obj/item/weapon/sword/long/broadsword/psy/relic = ITEM_SLOT_HANDS,
 		/obj/item/paper/inqslip/arrival/inq = ITEM_SLOT_HANDS,
@@ -19,9 +35,8 @@
 
 /datum/job_pack/consecratia
 	name = "Covenant and Consecratia (Flail + Shield)"
-	pack_skills = list(
-		/datum/skill/combat/whipsflails = SKILL_LEVEL_MASTER,
-		/datum/skill/combat/shields = SKILL_LEVEL_EXPERT,
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/consecratia
 	)
 
 	pack_contents = list(
@@ -31,9 +46,8 @@
 
 /datum/job_pack/crusade
 	name = "Crusade (Greatsword) and a Silver Dagger"
-	pack_skills = list(
-		/datum/skill/combat/swords = SKILL_LEVEL_MASTER,
-		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/crusade
 	)
 
 	pack_contents = list(

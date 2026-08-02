@@ -22,7 +22,6 @@
 	retreat_health = 0.1
 	attack_sound = list('sound/vo/mobs/vw/attack (1).ogg','sound/vo/mobs/vw/attack (2).ogg','sound/vo/mobs/vw/attack (3).ogg','sound/vo/mobs/vw/attack (4).ogg')
 	dodgetime = 30
-	aggressive = 1
 	remains_type = null
 	botched_butcher_results = null
 	butcher_results = null

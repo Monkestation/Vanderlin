@@ -13,7 +13,7 @@
 	if(!locate(/obj/structure/meatvine/floor) in T)
 		return INITIALIZE_HINT_QDEL
 
-	RegisterSignal(T, COMSIG_PARENT_QDELETING, PROC_REF(on_floor_destroyed))
+	RegisterSignal(T, COMSIG_QDELETING, PROC_REF(on_floor_destroyed))
 
 /obj/structure/meatvine/intestine_wormhole/proc/on_floor_destroyed()
 	visible_message("<span class='warning'>[src] collapses as its foundation is destroyed!</span>")

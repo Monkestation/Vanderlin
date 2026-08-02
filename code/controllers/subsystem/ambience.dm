@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(ambience)
 			client_old_areas -= client_iterator
 			continue
 
-		if(!client_mob.can_hear()) //WHAT? I CAN'T HEAR YOU
+		if(HAS_TRAIT(client_mob, TRAIT_DEAF)) //WHAT? I CAN'T HEAR YOU
 			continue
 
 		//Check to see if the client-mob is in a valid area
@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(ambience)
 	if(override_sound)
 		new_sound = override_sound
 	else if(spooky_sounds)
-		if(ambientnight && GLOB.tod == "night")
+		if(ambientnight && GLOB.tod == NIGHT)
 			spooky_sounds = ambientnight
 		new_sound = pick(spooky_sounds)
 
@@ -95,13 +95,13 @@ SUBSYSTEM_DEF(ambience)
 	var/time = GLOB.tod
 	var/used = background_track
 	if(is_lit)
-		if(time == "night" && background_track_night)
+		if(time == NIGHT && background_track_night)
 			used = background_track_night
-		else if (time == "dusk" && background_track_dusk)
+		else if (time == DUSK && background_track_dusk)
 			used = background_track_dusk
 	else if(uses_alt_droning)
 		used = safepick(alternative_droning)
-		if(time == "night" && length(alternative_droning_night))
+		if(time == NIGHT && length(alternative_droning_night))
 			used = pick(alternative_droning_night)
 
 	return used
@@ -113,13 +113,13 @@ SUBSYSTEM_DEF(ambience)
 
 	var/datum/component/theme_music/theme_music = src.GetComponent(/datum/component/theme_music)
 
-	if(!can_hear() || theme_music?.music_enabled)
+	if(HAS_TRAIT(src, TRAIT_DEAF) || theme_music?.music_enabled)
 		cancel_looping_ambience()
 		return
 
-	var/music_enabled = client.prefs?.toggles & SOUND_SHIP_AMBIENCE
+	var/music_enabled = client.prefs?.read_preference(/datum/preference/bitwise/toggles) & SOUND_SHIP_AMBIENCE
 	var/area/my_area = get_area(src)
-	var/vol = client.prefs?.musicvol
+	var/vol = client.prefs?.read_preference(/datum/preference/numeric/musicvol)
 	var/used = buzz_to_use
 
 	if(!used && music_enabled)
@@ -131,6 +131,8 @@ SUBSYSTEM_DEF(ambience)
 		vol *= 1.2
 	else if(music_enabled && HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
 		used = 'sound/music/dreamer_is_still_asleep.ogg'
+	else if(music_enabled && has_stress_type(/datum/stress_event/black_briar2))
+		used = 'sound/music/briar.ogg'
 	else if(music_enabled && HAS_TRAIT(src, TRAIT_DRUQK))
 		used = 'sound/music/spice.ogg'
 

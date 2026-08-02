@@ -97,13 +97,10 @@
 	var/sublimb_grabbed		//ref to what precise (sublimb) we are grabbing (if any) (text)
 	var/bleed_suppressing = 0.75 //multiplier for how much we suppress bleeding, can accumulate so two grabs means 25% bleeding
 	var/chokehold = FALSE
+	var/delete_from_stop_pull
 
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
-
-/obj/item/grabbing/Initialize()
-	. = ..()
-	START_PROCESSING(SSfastprocess, src)
 
 /obj/item/grabbing/process()
 	if(valid_check())
@@ -113,19 +110,16 @@
 			chokehold = FALSE
 
 /obj/item/grabbing/proc/valid_check()
+	// Mouth grabs aren't actual grabs and as such can't be handled by stop_pulling()
 	if(QDELETED(grabbee) || QDELETED(grabbed))
 		qdel(src)
 		return FALSE
-	// We should be conscious to do this, first of all...
-	if(grabbee.stat < UNCONSCIOUS)
-		// Mouth grab while we're adjacent is good
-		if(grabbee.mouth == src && grabbee.Adjacent(grabbed))
-			return TRUE
-		// Other grab requires adjacency and pull status, unless we're grabbing ourselves
-		if(grabbee.Adjacent(grabbed) && (grabbee.pulling == grabbed || grabbee == grabbed))
-			return TRUE
-	qdel(src)
-	return FALSE
+	// Mouth grab is only good while we're adjacent
+	if(grabbee.mouth == src && !grabbee.Adjacent(grabbed))
+		qdel(src)
+		return FALSE
+	// Otherwise we're depending on check_pulling() to handle broken grabs
+	return TRUE
 
 /obj/item/grabbing/Click(location, control, params)
 	if(!valid_check())
@@ -155,12 +149,43 @@
 			else
 				C.l_grab = src
 
+/obj/item/grabbing/proc/set_grabber(mob/living/pulledby)
+	if(!istype(pulledby))
+		return
+	grabbee = pulledby
+	RegisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(upon_stop_pulling))
+	if(ismob(grabbed))
+		RegisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE, PROC_REF(on_tried_turn))
+	START_PROCESSING(SSfastprocess, src)
+
+/obj/item/grabbing/proc/upon_stop_pulling(datum/source, atom/movable/old_pulling)
+	SIGNAL_HANDLER
+	UnregisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING)
+	delete_from_stop_pull = TRUE // don't call stop_pulling() again in Destroy()
+	qdel(src)
+
+/obj/item/grabbing/proc/on_tried_turn(mob/source, old_dir, new_dir)
+	SIGNAL_HANDLER
+
+	if(!istype(source) || !source.pulledby || source.pulledby == source)
+		return
+
+	if(grab_state < GRAB_AGGRESSIVE || source.pulledby.body_position == LYING_DOWN)
+		return
+
+	if(chokehold) // chokeholds prevent any turning
+		return COMPONENT_ATOM_BLOCK_DIR_CHANGE
+
+	if(new_dir == source.pulledby.dir) // can never face away from the person grabbing you
+		return COMPONENT_ATOM_BLOCK_DIR_CHANGE
+
 /obj/item/grabbing/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
 	if(isobj(grabbed))
 		var/obj/I = grabbed
 		I.grabbedby -= src
 	if(ismob(grabbed))
+		UnregisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE)
 		var/mob/M = grabbed
 		M.grabbedby -= src
 		if(iscarbon(M) && sublimb_grabbed)
@@ -190,12 +215,12 @@
 			grabbee.l_grab = null
 
 		if(stop_pull)
-			grabbee.stop_pulling()
-			for(var/mob/M as anything in grabbee.buckled_mobs)
-				if(M == grabbed)
-					grabbee.unbuckle_mob(M, force = TRUE)
+			if(grabbed in grabbee.buckled_mobs)
+				grabbee.unbuckle_mob(grabbed, force = TRUE)
+			if(!delete_from_stop_pull)
+				grabbee.stop_pulling()
 
-/obj/item/grabbing/attack(mob/living/M, mob/living/user)
+/obj/item/grabbing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!valid_check() || !istype(M))
 		return FALSE
 
@@ -206,8 +231,8 @@
 		spam_penalty = 1 + (C.grab_fatigue * 0.15)
 		C.add_grab_fatigue(1)
 	// Check for mutual grab breaking first
-	if(M.mutual_grab_break())
-		return FALSE
+	// if(M.mutual_grab_break())
+	// 	return FALSE
 
 	if(M != grabbed)
 		if(!istype(limb_grabbed, /obj/item/bodypart/head))
@@ -228,9 +253,9 @@
 	var/combat_modifier = positioning_mod // Start with positioning
 
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling))
 	if(M.mind)
-		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/combat/wrestling))
 
 	if(M.surrendering)
 		combat_modifier *= 2
@@ -280,14 +305,14 @@
 					var/mob/living/carbon/C = M
 					var/obj/item/clothing/neck/neck_armor = C.wear_neck
 					var/throat_protected = FALSE
-					if(neck_armor)
+					if(istype(neck_armor))
 						throat_protected = (neck_armor.armor_class != ARMOR_CLASS_NONE)
 					if(C.head && istype(C.head, /obj/item/clothing/head/helmet/heavy/necked))
 						throat_protected = TRUE
 					if(!throat_protected)
 						if(prob(23))
 							C.emote("choke")
-						var/choke_damage = user.STASTR * 0.75 // this is too busted
+						var/choke_damage = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 0.75 // this is too busted
 						if(chokehold)
 							choke_damage *= 1.2
 						if(C.pulling == user && C.grab_state >= GRAB_AGGRESSIVE)
@@ -352,23 +377,23 @@
 						return
 				M.visible_message(span_danger("[user] pins [M] to the ground!"), \
 								span_userdanger("[user] pins me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
-				M.Stun(max(20 + (skill_diff * 10) + (user.STASTR * 5) - (M.STACON * 5) * combat_modifier, 1))
+				M.Stun(max(20 + (skill_diff * 10) + (GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 5) - (GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) * 5) * combat_modifier, 1))
 				user.Immobilize(max(20 - skill_diff, 1))
 				user.changeNext_move(max(20 - skill_diff, CLICK_CD_GRABBING))
 				user.adjust_stamina(rand(3,6) * spam_penalty)
 			else
 				user.adjust_stamina(rand(5,10) * spam_penalty)
-				if(prob(clamp((((4 + ((user.STASTR - (M.STACON+2))/2) + skill_diff) * 10 + rand(-5, 5)) * combat_modifier), 5, 95)))
-					M.Knockdown(max(10 + (skill_diff * 2), 1))
-					M.set_resting(TRUE, TRUE)
+				if(prob(clamp((((4 + ((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - (GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION)+2))/2) + skill_diff) * 10 + rand(-5, 5)) * combat_modifier), 5, 95)))
+					var/tackle_time = max(10 + (skill_diff * 2), 1)
+					M.Knockdown(tackle_time)
 					playsound(src,"genblunt",100,TRUE)
-					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state == GRAB_AGGRESSIVE )
+					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state >= GRAB_AGGRESSIVE)
 						M.visible_message(span_danger("[user] throws [M] to the ground!"), \
 						span_userdanger("[user] throws me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
 					else
 						M.visible_message(span_danger("[user] tackles [M] to the ground!"), \
 						span_userdanger("[user] tackles me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
-						user.set_resting(TRUE, TRUE)
+						user.Knockdown(tackle_time / 2)
 				else
 					M.visible_message(span_warning("[user] tries to shove [M]!"), \
 									span_danger("[user] tries to shove me!"), span_hear("I hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE)
@@ -384,11 +409,11 @@
 				else
 					I = M.get_inactive_held_item()
 			user.adjust_stamina(rand(3,6) * spam_penalty)
-			var/probby = clamp((((3 + (((user.STASTR - M.STACON)/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
+			var/probby = clamp((((3 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION))/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
 			if(I)
 				if(M.mind)
 					if(I.associated_skill)
-						probby -= M.get_skill_level(I.associated_skill) * 5
+						probby -= GET_MOB_SKILL_VALUE_OLD(M, I.associated_skill) * 5
 				if(HAS_TRAIT(I, TRAIT_WIELDED))
 					probby -= 20
 				if(prob(probby))
@@ -422,7 +447,7 @@
 			else
 				I = M.get_item_for_held_index(2)
 			user.adjust_stamina(rand(3,6) * spam_penalty)
-			var/probby = clamp((((3 + (((user.STASTR - M.STACON)/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
+			var/probby = clamp((((3 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION))/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
 			if(I)
 				if(prob(probby))
 					M.dropItemToGround(I, force = FALSE, silent = FALSE)
@@ -465,10 +490,10 @@
 	var/damage = H.get_punch_dmg()
 	C.next_attack_msg.Cut()
 	playsound(C, "genblunt", 100, FALSE, -1)
-	C.apply_damage(damage*1.5, , Chead, armor_block)
-	Chead.bodypart_attacked_by(BCLASS_SMASH, damage*1.5, H, crit_message=TRUE)
-	H.apply_damage(damage, BRUTE, Hhead, armor_block_user)
-	Hhead.bodypart_attacked_by(BCLASS_SMASH, damage/1.2, H, crit_message=TRUE)
+	var/head_damage = C.apply_damage(damage*1.5, , Chead, armor_block)
+	Chead.bodypart_attacked_by(BCLASS_SMASH, head_damage, H, crit_message=TRUE, pre_applied = TRUE)
+	var/hhead_damage = H.apply_damage(damage, BRUTE, Hhead, armor_block_user)
+	Hhead.bodypart_attacked_by(BCLASS_SMASH, hhead_damage, H, crit_message=TRUE, pre_applied = TRUE)
 
 	C.visible_message(span_danger("[H] headbutts [C]'s [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), \
 					span_userdanger("[H] headbutts my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE, H)
@@ -576,7 +601,7 @@
 	var/damage = user.get_punch_dmg()
 	C.next_attack_msg.Cut()
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
-		limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, damage, user, sublimb_grabbed, crit_message = TRUE)
+		limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, damage, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE)
 		playsound(C, "smashlimb", 100, FALSE, -1)
 	else
 		C.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
@@ -592,7 +617,8 @@
 		return
 	grab_state = max(GRAB_PASSIVE, grab_state - 1)
 	grabbee.setGrabState(max(grabbee.r_grab?.grab_state, grabbee.l_grab?.grab_state))
-	grabbee.set_pull_offsets(grabbed, grabbee.grab_state)
+	if(grabbee != grabbed)
+		grabbee.set_pull_offsets(grabbed, grabbee.grab_state)
 	update_grab_intents()
 	if(!silent)
 		grabbee.visible_message(span_warning("[grabbee] loosens [grabbee.p_their()] grip on [grabbed]'s [limb_grabbed.name]."),\
@@ -695,6 +721,10 @@
 	bleed_suppressing = 1
 	var/last_drink
 
+/obj/item/grabbing/bite/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+
 /obj/item/grabbing/bite/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 	if(!valid_check())
@@ -723,14 +753,16 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	var/mob/living/carbon/C = grabbed
 	var/armor_block = C.run_armor_check(sublimb_grabbed, "stab")
-	var/damage = user.get_punch_dmg()
+	var/obj/item/bodypart/mouth/jaw = iscarbon(user) ? user.get_bodypart(BODY_ZONE_PRECISE_MOUTH) : null
+	var/damage = jaw ? jaw.get_bite_damage(user) : user.get_punch_dmg() * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 2 : 1)
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	user.do_attack_animation(C, ATTACK_EFFECT_BITE, used_item = FALSE)
 	C.next_attack_msg.Cut()
-	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
+	var/real_damage = C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
+	if(real_damage)
 		playsound(C, "smallslash", 100, FALSE, -1)
-		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, damage, user, sublimb_grabbed, crit_message = TRUE)
+		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, real_damage, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
 		if(user.mind)
 			//TODO: Werewolf Signal
 			var/datum/antagonist/werewolf/werewolf_antag = user.mind.has_antag_datum(/datum/antagonist/werewolf)
@@ -742,7 +774,7 @@
 					human.werewolf_feed(C)
 
 			// TODO: Zombie Signal
-			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
+			if(IS_DEADITE(user))
 				var/mob/living/carbon/human/H = C
 				if(istype(H))
 					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
@@ -763,7 +795,7 @@
 							return
 		if(HAS_TRAIT(user, TRAIT_POISONBITE))
 			if(C.reagents)
-				var/poison = user.STACON/2 //more peak species level, more poison
+				var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2 //more peak species level, more poison
 				C.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
 				C.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
 				to_chat(user, span_warning("Your fangs inject venom into [C]!"))
@@ -786,7 +818,14 @@
 		return
 	if(world.time < last_drink + 2 SECONDS)
 		return
+	var/mob/living/carbon/human/grabbed_human
+	if(ishuman(grabbed))
+		grabbed_human = grabbed
+	if(grabbed_human.check_crit_armor(slot2body_zone(sublimb_grabbed), BCLASS_BITE))
+		to_chat(user, span_warning("I can't drink their blood through armor!"))
+		return
 	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, span_warning("Sigh. It's not bleeding."))
 		return
-	user.drinksomeblood(grabbed, sublimb_grabbed)
+	var/drink_amt = ((user in user.clan?.clan_members) && !(user in user.clan.non_vampire_members)) ? 80 : 10
+	user.drinksomeblood(grabbed, sublimb_grabbed, drink_amt)

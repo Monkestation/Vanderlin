@@ -1,7 +1,6 @@
 /datum/patron/godless
-	name = null
+	abstract_type = /datum/patron/godless
 	associated_faith = /datum/faith/godless
-	profane_words = list()
 
 /datum/patron/godless/can_pray(mob/living/follower)
 	// Redefined this entire proc just to tell you:

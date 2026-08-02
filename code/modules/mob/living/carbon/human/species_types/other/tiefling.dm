@@ -7,6 +7,14 @@
 /mob/living/carbon/human/species/tieberian
 	race = /datum/species/tieberian
 
+/datum/attribute_holder/sheet/job/species/tieberian
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = -1
+	)
+
 /datum/species/tieberian
 	name = "Tiefling"
 	id = SPEC_ID_TIEFLING
@@ -86,13 +94,13 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = -1)
-	specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/tieberian
 
 	enflamed_icon = "widefire"
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
@@ -190,11 +198,11 @@
 	return hair_colors
 
 /datum/species/tieberian/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/tiefm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/tiefm.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/tieberian/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/other/tieflast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/other/tieflast.txt')
 	return last_names
 

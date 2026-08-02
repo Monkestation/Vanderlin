@@ -24,6 +24,12 @@
 #define AUTH_HEADER ("Basic " + CONFIG_GET(string/comms_key))
 #define OLD_PLEXORA_CONFIG "config/plexora.json"
 
+//// Options
+
+/// Runs check_servers() and updates the up_servers with their statuses.
+/// This may be useful if you are adding a user portal to quickly jump to sister servers.
+#define PLX_SHOULD_CHECK_SERVERS
+
 SUBSYSTEM_DEF(plexora)
 	name = "Plexora"
 	wait = 30 SECONDS
@@ -46,11 +52,18 @@ SUBSYSTEM_DEF(plexora)
 	var/mob/restart_requester
 	var/list/active_requests = list()
 
+	var/list/up_servers = list()
+	var/current_server_id = null
+
 /datum/controller/subsystem/plexora/Initialize()
 	if(!CONFIG_GET(flag/plexora_enabled) && !load_old_plexora_config())
 		enabled = FALSE
 		flags |= SS_NO_FIRE
 		return TRUE
+
+	current_server_id = CONFIG_GET(string/plexora_server_id)
+	if(current_server_id)
+		log_world("This server's Plexora ID is [current_server_id]")
 
 	var/comms_key = CONFIG_GET(string/comms_key)
 	if (!comms_key)
@@ -71,6 +84,7 @@ SUBSYSTEM_DEF(plexora)
 		stack_trace("SSplexora is enabled BUT plexora is not alive or running! SS has not been aborted, subsequent fires will take place.")
 	else
 		serverstarted()
+		check_servers()
 
 	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_STARTING, PROC_REF(roundstarted))
 
@@ -150,27 +164,29 @@ SUBSYSTEM_DEF(plexora)
 		if(request.is_complete()) // rust-g will clear the job once it's complete
 			active_requests -= request
 			qdel(request)
+	check_servers()
 
-/datum/controller/subsystem/plexora/proc/_Shutdown(hard = FALSE, requestedby)
+/datum/controller/subsystem/plexora/proc/notify_shutdown(restart_type_override)
 	var/static/server_restart_sent = FALSE
 
-	if (server_restart_sent)
+	if(server_restart_sent)
 		return
+
 	server_restart_sent = TRUE
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "servershutdown",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
 		"round_timer" = ROUND_TIME(),
 		"map" = SSmapping.config?.map_name,
 		"playercount" = length(GLOB.clients),
-		"restart_type" = restart_type,
+		"restart_type" = isnull(restart_type_override) ? restart_type : restart_type_override,
 		"requestedby" = usr?.ckey,
 		"requestedby_stealthed" = usr?.client?.holder?.fakekey,
-	), mark_active = FALSE)
+	))
 
 /datum/controller/subsystem/plexora/proc/serverstarted()
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "serverstart",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -179,7 +195,7 @@ SUBSYSTEM_DEF(plexora)
 	))
 
 /datum/controller/subsystem/plexora/proc/serverinitdone(time)
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "serverinitdone",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -190,7 +206,7 @@ SUBSYSTEM_DEF(plexora)
 
 // This DOES get called, refer to init proc, it uses a signal.
 /datum/controller/subsystem/plexora/proc/roundstarted()
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "roundstart",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -199,7 +215,7 @@ SUBSYSTEM_DEF(plexora)
 	))
 
 /datum/controller/subsystem/plexora/proc/roundended()
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "roundend",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -210,14 +226,33 @@ SUBSYSTEM_DEF(plexora)
 		"playerstring" = "**Total**: [length(GLOB.clients)]",
 	))
 
-/datum/controller/subsystem/plexora/proc/check_byondserver_status(id)
-	if (isnull(id)) return
+/datum/controller/subsystem/plexora/proc/check_servers()
+#ifndef PLX_SHOULD_CHECK_SERVERS
+	return
+#else
+	var/list/servers_to_check = list(
+		PLEXORA_SERVERID_MRP,
+		PLEXORA_SERVERID_MONKESPAW,
+		PLEXORA_SERVERID_MONKERIS,
+		PLEXORA_SERVERID_VANDERLIN,
+	)
+	for(var/serverid in servers_to_check)
+		if(serverid == current_server_id)
+			continue
+		up_servers[serverid] = check_byondserver_status(serverid, null)
+#endif
+
+// Check status by id or game port
+/datum/controller/subsystem/plexora/proc/check_byondserver_status(id, port)
+	if (!id && !port)
+		return
 
 	var/list/body = list(
-		"id" = id
+		"id" = id,
+		"port" = port,
 	)
 
-	var/datum/http_request/request = new(RUSTG_HTTP_METHOD_GET, "[base_url]/byondserver_alive", json_encode(body), default_headers)
+	var/datum/http_request/request = new(RUSTG_HTTP_METHOD_POST, "[base_url]/byondserver_alive", json_encode(body), default_headers)
 	request.begin_async()
 	UNTIL_OR_TIMEOUT(request.is_complete(), 5 SECONDS)
 	var/datum/http_response/response = request.into_response()
@@ -229,7 +264,7 @@ SUBSYSTEM_DEF(plexora)
 		return json_body["alive_likely"]
 
 /datum/controller/subsystem/plexora/proc/relay_admin_say(client/user, message)
-	http_basicasync("relay_admin_say", list(
+	http_fireandforget("relay_admin_say", list(
 		"key" = user.key,
 		"message" = message,
 		"icon_b64" = icon2base64(getFlatIcon(user.mob, SOUTH, no_anim = TRUE)),
@@ -238,7 +273,7 @@ SUBSYSTEM_DEF(plexora)
 // note: recover_all_SS_and_recreate_master to force mc shit
 
 /datum/controller/subsystem/plexora/proc/mc_alert(alert, level = 5)
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "mcalert",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -252,19 +287,19 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/new_note(list/note)
 	// note["replay_pass"] = CONFIG_GET(string/replay_password)
-	http_basicasync("noteupdates", note)
+	http_fireandforget("noteupdates", note)
 
 /datum/controller/subsystem/plexora/proc/new_ban(list/ban)
 	// TODO: It might be easier to just send off a ban ID to Plexora, but oh well.
 	// list values are in sql_ban_system.dm
 	// ban["replay_pass"] = CONFIG_GET(string/replay_password)
-	http_basicasync("banupdates", ban)
+	http_fireandforget("banupdates", ban)
 
 // Maybe we should consider that, if theres no admin_ckey when creating a new ticket,
 // This isnt a bwoink. Other wise if it does exist, it is a bwoink.
 /datum/controller/subsystem/plexora/proc/aticket_new(datum/admin_help/ticket, msg_raw, is_bwoink, urgent, admin_ckey = null)
 	if(!enabled) return
-	http_basicasync("atickets/new", list(
+	http_fireandforget("atickets/new", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"round_timer" = ROUND_TIME(),
@@ -283,7 +318,7 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/aticket_closed(datum/admin_help/ticket, closed_by, close_type = AHELP_CLOSETYPE_CLOSE, close_reason = AHELP_CLOSEREASON_NONE)
 	if(!enabled) return
-	http_basicasync("atickets/close", list(
+	http_fireandforget("atickets/close", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"closed_by" = closed_by,
@@ -295,7 +330,7 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/aticket_reopened(datum/admin_help/ticket, reopened_by)
 	if(!enabled) return
-	http_basicasync("atickets/reopen", list(
+	http_fireandforget("atickets/reopen", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"time_reopened" = rustg_unix_timestamp(),
@@ -316,7 +351,7 @@ SUBSYSTEM_DEF(plexora)
 
 	if (admin_ckey)	body["admin_ckey"] = admin_ckey
 
-	http_basicasync("atickets/pm", list(
+	http_fireandforget("atickets/pm", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"message" = message,
@@ -327,7 +362,7 @@ SUBSYSTEM_DEF(plexora)
 	if(!ticket)
 		return
 	if(!enabled) return
-	http_basicasync("atickets/connection_notice", list(
+	http_fireandforget("atickets/connection_notice", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"is_disconnect" = is_disconnect,
@@ -336,10 +371,23 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/topic_listener_response(token, data)
 	if(!enabled) return
-	http_basicasync("topic_emitter", list(
+	http_fireandforget("topic_emitter", list(
 		"token" = token,
 		"data" = data,
 	))
+
+/datum/controller/subsystem/plexora/proc/http_fireandforget(path, list/body, ignore_enabled = FALSE)
+	if(!enabled && !ignore_enabled)
+		return
+
+	var/datum/http_request/request = new(
+		RUSTG_HTTP_METHOD_POST,
+		"[base_url]/[path]",
+		json_encode(body),
+		default_headers,
+		"tmp/response.json"
+	)
+	request.fire_and_forget()
 
 /datum/controller/subsystem/plexora/proc/http_basicasync(path, list/body, mark_active = TRUE)
 	RETURN_TYPE(/datum/http_request)
@@ -363,6 +411,7 @@ SUBSYSTEM_DEF(plexora)
 /datum/world_topic/plx_announce/Run(list/input)
 	var/message = input["message"]
 	var/from = input["from"]
+	// the topic params do contain "encode" (boolean) for html but since we dont have "send_formatted_announcement" it'll skip encoding anyway.
 
 	var/admin_name = span_adminannounce_big("[from] Announces:")
 	var/message_to_announce = ("[span_adminannounce(message)]")
@@ -724,18 +773,14 @@ SUBSYSTEM_DEF(plexora)
 	message_admins("External message from [sender] to [recipient_name_linked] : [message]")
 	log_admin_private("External PM: [sender] -> [recipient_name] : [message]")
 
-	to_chat(recipient,
-		message = "<font color='red' size='4'><b>-- Administrator private message --</b></font>",
-		)
+	to_chat(recipient, html = "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 
 	recipient.receive_ahelp(
-		"<a href='?priv_msg=[stealthkey]'>[adminname]</a>",
+		"<a href='byond://?priv_msg=[stealthkey]'>[adminname]</a>",
 		message,
 	)
 
-	to_chat(recipient,
-		message = span_adminsay("<i>Click on the administrator's name to reply.</i>"),)
-
+	to_chat(recipient, html = span_adminsay("<i>Click on the administrator's name to reply.</i>"))
 
 	admin_ticket_log(recipient, "<font color='purple'>PM From [adminname]: [message]</font>", player_message = "<font color='purple'>PM From [adminname]: [message]</font>")
 
@@ -827,10 +872,7 @@ SUBSYSTEM_DEF(plexora)
 
 
 /client/proc/receive_ahelp(reply_to, message, span_class = "adminsay")
-	to_chat(
-		src,
-		message = "<span class='[span_class]'>Admin PM from-<b>[reply_to]</b>: [message]</span>",
-	)
+	to_chat(src, html = "<span class='[span_class]'>Admin PM from-<b>[reply_to]</b>: [message]</span>")
 
 /// This should match the interface of /client wherever necessary.
 /datum/client_interface
@@ -932,3 +974,5 @@ SUBSYSTEM_DEF(plexora)
 				break
 
 	return text_guess
+
+#undef PLX_SHOULD_CHECK_SERVERS

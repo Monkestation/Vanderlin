@@ -34,7 +34,7 @@
 	return container
 
 /datum/admins/proc/beaker_panel()
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set name = "Spawn reagent container"
 	if(!check_rights())
 		return

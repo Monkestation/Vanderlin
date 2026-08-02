@@ -57,12 +57,12 @@
 	if(user.real_name in GLOB.outlawed_players)
 		var/list/funny = list("Yup. My face is on there.", "Wait a minute... That's me!", "Look at that handsome devil...", "At least I am wanted by someone...", "My chin can't be that big... right?")
 		to_chat(user, span_notice("[pick(funny)]"))
-		if(!HAS_TRAIT(user, TRAIT_KNOWBANDITS))
-			ADD_TRAIT(user, TRAIT_KNOWBANDITS, TRAIT_GENERIC)
+		if(!HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS))
+			ADD_TRAIT(user.mind, TRAIT_KNOWBANDITS, TRAIT_GENERIC)
 			user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 			to_chat(user, span_notice("I can recognize these fine people anywhere now."))
-	else if(!HAS_TRAIT(user, TRAIT_KNOWBANDITS))
-		ADD_TRAIT(user, TRAIT_KNOWBANDITS, TRAIT_GENERIC)
+	else if(!HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS))
+		ADD_TRAIT(user.mind, TRAIT_KNOWBANDITS, TRAIT_GENERIC)
 		user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 		to_chat(user, span_notice("I can recognize these faces as wanted criminals now."))
 
@@ -240,13 +240,13 @@
 	name = ""
 	desc = ""
 	icon_state = "walldec1"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/structure/fluff/walldeco/church/line
 	name = ""
 	desc = ""
 	icon_state = "churchslate"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = TURF_DECAL_LAYER
 
 /obj/structure/fluff/walldeco/stone/Initialize()
@@ -257,7 +257,7 @@
 	name = "stone sigil"
 	desc = ""
 	icon_state = "maidensigil"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	dir = SOUTH
 	SET_BASE_PIXEL(0, 32)
 
@@ -286,7 +286,7 @@
 	layer = 4.26
 	icon_state = "chains1"
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	breakoutextra = 10 MINUTES
 	buckleverb = "tie"
@@ -332,7 +332,6 @@
 
 /obj/structure/fluff/walldeco/skullspike // for ground really
 	icon_state = "skullspike"
-	plane = -1
 	layer = ABOVE_MOB_LAYER
 	SET_BASE_PIXEL(8, 24)
 
@@ -340,7 +339,6 @@
 /obj/structure/fluff/walldeco/sign/saiga
 	name = "The Drunken Saiga"
 	icon_state = "shopsign_inn_saiga_right"
-	plane = -1
 	SET_BASE_PIXEL(3, 16)
 
 /obj/structure/fluff/walldeco/sign/saiga/left
@@ -361,7 +359,6 @@
 /obj/structure/fluff/walldeco/sign/weaponsmithsign
 	name = "weaponsmith shop sign"
 	icon_state = "shopsign_weaponsmith_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/weaponsmithsign/left
@@ -371,7 +368,6 @@
 /obj/structure/fluff/walldeco/sign/armorsmithsign
 	name = "armorsmith shop sign"
 	icon_state = "shopsign_armorsmith_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/armorsmithsign/left
@@ -381,7 +377,6 @@
 /obj/structure/fluff/walldeco/sign/merchantsign
 	name = "merchant shop sign"
 	icon_state = "shopsign_merchant_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/merchantsign/left
@@ -391,7 +386,6 @@
 /obj/structure/fluff/walldeco/sign/apothecarysign
 	name = "apothecary sign"
 	icon_state = "shopsign_apothecary_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/apothecarysign/left
@@ -400,7 +394,6 @@
 /obj/structure/fluff/walldeco/sign/tailorsign
 	name = "tailor sign"
 	icon_state = "shopsign_tailor_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/tailorsign/left
@@ -455,7 +448,7 @@
 	desc = ""
 	icon = 'icons/roguetown/misc/decoration.dmi'
 	icon_state = "shadow_floor"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/shadow_floor/corner
 	icon_state = "shad_floorcorn"

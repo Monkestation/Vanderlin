@@ -92,30 +92,27 @@
 			loaded_thing.throw_at(target, blast_range, 3, force = MOVE_FORCE_OVERPOWERING)
 			if(isliving(loaded_thing))
 				var/mob/living/loaded_living = loaded_thing
-				loaded_living.reset_offsets("structure_climb")
+				loaded_living.remove_offsets("structure_climb")
 
 	throw_at(get_step(src, REVERSE_DIR(dir)), 1, 3, spin = FALSE)
 
-/obj/structure/cannon/attackby(obj/item/I, mob/user, params)
-	if(isreagentcontainer(I))
-		var/obj/item/reagent_containers/reagent_container = I
+/obj/structure/cannon/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(isreagentcontainer(tool))
 		if(do_after(user, 1 SECONDS, src))
-			if(reagent_container.reagents.trans_to(reagents, 10, transfered_by = user))
-				user.visible_message(span_notice("[user] fills the [src] with \the [I]"), span_notice("I fill the [src] with \the [I]"))
+			if(tool.reagents.trans_to(reagents, 10, transfered_by = user))
+				user.visible_message(span_notice("[user] fills \the [name] with \the [tool.name]"), span_notice("I fill \the [name] with \the [tool.name]"))
 				playsound(src, 'sound/foley/gunpowder_fill.ogg', 100, FALSE)
-				balloon_alert(user, "Added!")
+				balloon_alert(user, "added!")
 			else
-				balloon_alert(user, "None Left!")
-		return TRUE
+				balloon_alert(user, "none Left!")
+		return ITEM_INTERACT_SUCCESS
 
-	if(isfuse(I))
-		var/obj/item/fuse/fuse = I
+	if(isfuse(tool))
+		var/obj/item/fuse/fuse = tool
 		if(fuse.add_to_cannon(src, user))
 			user.visible_message(span_notice("[user] adds \the [fuse] to \the [src]"), span_notice("I add \the [fuse] to \the [src]"))
 			balloon_alert_to_viewers("Attached!")
-		return TRUE
-
-	. = ..()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/effect/fuse
 	icon = 'icons/roguetown/misc/cannon_fuse.dmi'
@@ -134,9 +131,9 @@
 
 	sync_with_fuse()
 	calculate_offsets()
-	RegisterSignal(cannon, COMSIG_PARENT_QDELETING, PROC_REF(on_deletion))
+	RegisterSignal(cannon, COMSIG_QDELETING, PROC_REF(on_deletion))
 	RegisterSignal(cannon, COMSIG_ATOM_DIR_CHANGE, PROC_REF(calculate_offsets))
-	RegisterSignal(fuse, COMSIG_PARENT_QDELETING, PROC_REF(on_deletion))
+	RegisterSignal(fuse, COMSIG_QDELETING, PROC_REF(on_deletion))
 	RegisterSignal(fuse, COMSIG_FUSE_LIT, PROC_REF(on_status_change))
 	RegisterSignal(fuse, COMSIG_FUSE_EXTINGUISHED, PROC_REF(on_status_change))
 	AddElement(/datum/element/no_mouse_drop)
@@ -145,9 +142,9 @@
 	. = ..()
 	cannon = null
 	fuse = null
-	UnregisterSignal(cannon, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(cannon, COMSIG_QDELETING)
 	UnregisterSignal(cannon, COMSIG_ATOM_DIR_CHANGE)
-	UnregisterSignal(fuse, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(fuse, COMSIG_QDELETING)
 	UnregisterSignal(fuse, COMSIG_FUSE_LIT)
 	UnregisterSignal(fuse, COMSIG_FUSE_EXTINGUISHED)
 
@@ -158,7 +155,7 @@
 	fuse?.remove_from_cannon(cannon)
 	qdel(src)
 
-/obj/effect/fuse/attackby(obj/item/I, mob/living/user, params)
+/obj/effect/fuse/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(I.sharpness == IS_SHARP)
 		balloon_alert_to_viewers("Cut!")
@@ -227,13 +224,13 @@
 		return FALSE
 
 	src.cannon = cannon
-	RegisterSignal(cannon, COMSIG_PARENT_PREQDELETED, PROC_REF(remove_from_cannon))
+	RegisterSignal(cannon, COMSIG_PREQDELETED, PROC_REF(remove_from_cannon))
 	loc = null
 	new /obj/effect/fuse (get_turf(cannon), cannon, src)
 	return TRUE
 
 /obj/item/fuse/proc/remove_from_cannon()
-	UnregisterSignal(cannon, COMSIG_PARENT_PREQDELETED)
+	UnregisterSignal(cannon, COMSIG_PREQDELETED)
 	loc = get_turf(cannon)
 	cannon?.inserted_fuse = null
 	cannon = null

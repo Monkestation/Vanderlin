@@ -25,7 +25,8 @@
 		/datum/action/cooldown/spell/aoe/repulse/howl, \
 		/datum/action/cooldown/spell/woundlick, \
 		/datum/action/cooldown/spell/lunge, \
-		/datum/action/cooldown/spell/throw_target
+		/datum/action/cooldown/spell/throw_target, \
+		/datum/action/cooldown/keen_nose
 	)
 	COOLDOWN_DECLARE(message_cooldown)
 
@@ -78,6 +79,7 @@
 	// owner.current should now be the original human mob, if not something is terribly wrong
 	if(!silent && owner.current)
 		to_chat(owner.current,span_danger("I am no longer a [special_role]!"))
+	REMOVE_TRAIT(owner, TRAIT_NO_TRANSFORM, REF(src))
 	owner.special_role = null
 	owner.current.remove_spell(/datum/action/cooldown/spell/undirected/werewolf_form)
 	owner.current.remove_language(/datum/language/beast)
@@ -123,7 +125,9 @@
 /mob/living/carbon/human/proc/can_werewolf()
 	if(!mind)
 		return FALSE
-	if(mind.has_antag_datum(/datum/antagonist/zombie))
+	if(is_antag_banned(ckey, ROLE_WEREWOLF))
+		return FALSE
+	if(IS_DEADITE(src))
 		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
 		return FALSE
@@ -167,7 +171,7 @@
 		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
 		return
 	if(target.mind)
-		if(target.mind.has_antag_datum(/datum/antagonist/zombie))
+		if(IS_DEADITE(target))
 			to_chat(src, span_warning("I should not feed on rotten flesh."))
 			return
 		if(target.mind.has_antag_datum(/datum/antagonist/vampire))
@@ -187,11 +191,11 @@
 	icon_state = null
 	body_parts_covered = FULL_BODY
 	resistance_flags = FIRE_PROOF
-	armor = ARMOR_BRIGANDINE
+	armor_type = /datum/armor/brigandine
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
-	sewrepair = FALSE
+	sewrepair = null
 	max_integrity = INTEGRITY_STRONG
 	item_flags = DROPDEL
 	repair_time = 15 SECONDS
@@ -221,8 +225,8 @@
 	max_integrity = 900
 	force = 15
 	block_chance = 0
-	wdefense = 2
-	associated_skill = /datum/skill/combat/unarmed
+	wdefense = AVERAGE_PARRY
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE
 	w_class = WEIGHT_CLASS_BULKY

@@ -1,2 +1,9 @@
-npm-debug.log
-node_modules/
+## NPM garbage
+node_modules
+*.log
+
+## Build artifacts
+/public/**/*
+!/public/*.html
+!/public/ntos-error.min.css
+!/public/helpers.min.js

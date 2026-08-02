@@ -18,7 +18,7 @@
 /datum/component/igniter/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_ITEM_AFTERATTACK, COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_PROJECTILE_ON_HIT))
 
-/datum/component/igniter/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/component/igniter/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		return
 	do_igniter(target)

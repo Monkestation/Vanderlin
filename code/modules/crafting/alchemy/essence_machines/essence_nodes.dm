@@ -29,11 +29,11 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 		essence_type = pick_random_essence_type()
 	switch(tier)
 		if(0)
-			max_essence = rand(50, 150)
-			recharge_rate = rand(1, 3)
+			max_essence = rand(100, 150)
+			recharge_rate = rand(2, 3)
 			max_integrity = 100
 		if(1)
-			max_essence = rand(200, 400)
+			max_essence = rand(300, 400)
 			recharge_rate = rand(3, 6)
 			max_integrity = 200
 
@@ -90,7 +90,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 /obj/structure/essence_node/proc/can_be_extracted()
 	return TRUE
 
-/obj/structure/essence_node/attackby(obj/item/I, mob/user)
+/obj/structure/essence_node/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 
@@ -258,7 +258,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 
 /obj/item/essence_node_portable/proc/apply_carrying_penalties(mob/living/holder)
 	if(!(src in holder.status_effects))
-		holder.add_movespeed_modifier("essence_node", multiplicative_slowdown = 2)
+		holder.add_movespeed_modifier(MOVESPEED_ID_CARRYING_ESSENCE, multiplicative_slowdown = 2)
 	if(world.time >= last_stamina_drain + 1 MINUTES)
 		if(holder.stamina)
 			holder.stamina = max(0, holder.stamina - stamina_drain)
@@ -269,7 +269,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 /obj/item/essence_node_portable/dropped(mob/user)
 	. = ..()
 	if(user)
-		user.remove_movespeed_modifier("essence_node")
+		user.remove_movespeed_modifier(MOVESPEED_ID_CARRYING_ESSENCE)
 
 /obj/item/essence_node_portable/pickup(mob/user)
 	. = ..()

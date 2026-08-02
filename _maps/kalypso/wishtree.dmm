@@ -51,7 +51,7 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "E" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "F" = (
 /obj/structure/flora/sakura{
@@ -60,7 +60,7 @@
 	icon_state = "manabloomtree";
 	icon = 'icons/obj/structures/manabloomtree.dmi'
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "G" = (
 /turf/open/floor/dirt,
@@ -83,7 +83,7 @@
 	pixel_x = 22;
 	pixel_y = -24
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "S" = (
 /obj/effect/falling_leaves,

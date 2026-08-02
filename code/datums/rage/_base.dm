@@ -42,10 +42,10 @@
 
 	holder_mob = holder
 	RegisterSignal(holder_mob, COMSIG_HUMAN_LIFE, PROC_REF(on_life))
-	RegisterSignal(holder_mob, COMSIG_PARENT_QDELETING, PROC_REF(remove_holder))
+	RegisterSignal(holder_mob, COMSIG_QDELETING, PROC_REF(remove_holder))
 	holder_mob.rage_datum = src
 
-	for(var/trait as anything in traits)
+	for(var/trait in traits)
 		ADD_TRAIT(holder_mob, trait, RAGE_TRAIT)
 	for(var/datum/action/ability as anything in abilities_extra)
 		grant_ability(ability, permanent = TRUE)
@@ -59,14 +59,14 @@
 /// holder_mob is nulled at the end. As rage depends on holder_mob life ticks, you probably shouldn't call this unless the datum is being deleted or transfered.
 /datum/rage/proc/remove_holder()
 	if(holder_mob)
-		UnregisterSignal(holder_mob, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(holder_mob, list(COMSIG_HUMAN_LIFE, COMSIG_QDELETING))
 		holder_mob.rage_datum = null
 		holder_mob.hud_used?.shutdown_bloodpool()
 		for(var/datum/action/ability as anything in active_abilities)
 			holder_mob.remove_spell(ability)
 		active_abilities.Cut()
 		holder_mob.remove_spells(source = src)
-		for(var/trait as anything in traits)
+		for(var/trait in traits)
 			REMOVE_TRAIT(holder_mob, trait, RAGE_TRAIT)
 	holder_mob = null
 
@@ -75,7 +75,7 @@
 		return FALSE
 
 	secondary_mob = secondary
-	RegisterSignal(secondary_mob, COMSIG_PARENT_QDELETING, PROC_REF(remove_secondary))
+	RegisterSignal(secondary_mob, COMSIG_QDELETING, PROC_REF(remove_secondary))
 	secondary_mob.rage_datum = src
 
 	secondary_mob.hud_used?.initialize_bloodpool()
@@ -86,7 +86,7 @@
 
 /datum/rage/proc/remove_secondary()
 	if(secondary_mob)
-		UnregisterSignal(secondary_mob, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(secondary_mob, COMSIG_QDELETING)
 		secondary_mob.rage_datum = null
 		secondary_mob.hud_used?.shutdown_bloodpool()
 	secondary_mob = null

@@ -56,20 +56,29 @@
 		return wound
 
 /// Loops through our list of wounds healing them until we run out of healing or all wounds are healed
-/mob/living/proc/heal_wounds(heal_amount)
+/mob/living/proc/heal_wounds(heal_amount, datum/source)
+	if(heal_amount <= 0)
+		return FALSE
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in get_wounds())
 		if(heal_amount <= 0)
 			continue
-		var/amount_healed = wound.heal_wound(heal_amount)
+		var/amount_healed = wound.heal_wound(heal_amount, source)
 		if(amount_healed)
 			heal_amount -= amount_healed
 			healed_any = TRUE
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(!artery.damage)
+			continue
+		artery.applyOrganDamage(-heal_amount)
+		healed_any = TRUE
 	return healed_any
 
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
-/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
-	if(!wound || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
+	if(!wound || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
@@ -106,7 +115,7 @@
 
 	var/do_crit = TRUE
 	if(user)
-		if(user.stat_roll(STATKEY_LCK,2,10))
+		if(user.stat_roll(STAT_FORTUNE,2,10))
 			dam += 10
 		if(istype(user.rmb_intent, /datum/rmb_intent/weak))
 			do_crit = FALSE
@@ -174,13 +183,13 @@
 		return FALSE
 	var/used
 	if(user)
-		if(user.stat_roll(STATKEY_LCK,2,10))
+		if(user.stat_roll(STAT_FORTUNE,2,10))
 			dam += 10
 
 	var/list/crit_classes
-	if(bclass in GLOB.fracture_bclasses)
+	if(bclass in FRACTURE_BCLASSES)
 		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
+	if(bclass in ARTERY_BCLASSES)
 		LAZYADD(crit_classes, "artery")
 
 	if(!LAZYLEN(crit_classes))
@@ -199,13 +208,13 @@
 				LAZYADD(attempted_wounds, fracture_type)
 		if("artery")
 			if(user)
-				if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
+				if((bclass in ARTERY_STRONG_BCLASSES) && istype(user.rmb_intent, /datum/rmb_intent/strong))
 					dam += 30
 				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 			used = round(max(dam / 3, 1), 1)
 			if(prob(used))
-				LAZYADD(attempted_wounds, /datum/wound/artery/chest)
+				LAZYADD(attempted_wounds, /datum/wound/artery/heart)
 
 	if(!LAZYLEN(attempted_wounds))
 		return FALSE

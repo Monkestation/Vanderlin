@@ -108,7 +108,7 @@
 			user.visible_message("<span class='warning'>[user] kicks [src]!</span>", \
 				"<span class='warning'>I kick [src]!</span>")
 			return
-		if(prob(L.STASTR * 8))
+		if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 8))
 			playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 			user.visible_message("<span class='warning'>[user] kicks over [src]!</span>", \
 				"<span class='warning'>I kick over [src]!</span>")
@@ -173,6 +173,7 @@
 	base_state = "wallcandleb"
 
 /obj/machinery/light/fueled/wallfire/candle/blue/extinguish()
+	. = ..()
 	return FALSE
 
 /obj/machinery/light/fueled/wallfire/candle/blue/burn_out()
@@ -190,6 +191,7 @@
 	base_state = "skullwallcandle"
 
 /obj/machinery/light/fueled/wallfire/candle/skull/extinguish()
+	. = ..()
 	return FALSE
 
 /obj/machinery/light/fueled/wallfire/candle/skull/burn_out()
@@ -216,6 +218,7 @@
 	name = "candle lamp"
 	icon_state = "candle"
 	base_state = "candle"
+	plane = GAME_PLANE_UPPER
 	layer = WALL_OBJ_LAYER+0.1
 	light_power = 0.9
 	light_outer_range =  6
@@ -317,7 +320,7 @@
 		torchy.turn_off()
 	..()
 
-/obj/machinery/light/fueled/torchholder/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/torchholder/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/flashlight/flare/torch))
 		var/obj/item/flashlight/flare/torch/LR = W
 		if(torchy)
@@ -379,8 +382,12 @@
 	fueluse = 0
 	soundloop = null
 	crossfire = FALSE
-	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	obj_flags = parent_type::obj_flags | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	temperature_change = 5
+
+/obj/machinery/light/fueled/chand/Initialize()
+	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/machinery/light/fueled/chand/attack_hand(mob/user)
 	if(isliving(user) && on)
@@ -409,27 +416,21 @@
 	var/obj/item/reagent_containers/food/snacks/food = null
 	var/rawegg = FALSE
 
-/obj/machinery/light/fueled/hearth/Initialize()
-	. = ..()
+/obj/machinery/light/fueled/hearth/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(attachment)
+		tool.melee_attack_chain(user, attachment, modifiers)
+		return ITEM_INTERACT_SUCCESS
+	else if(istype(tool, /obj/item/cooking/pan) || istype(tool, /obj/item/reagent_containers/glass/bucket/pot) || istype(tool, /obj/item/reagent_containers/glass/carafe/teapot))
+		playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
 
-/obj/machinery/light/fueled/hearth/Destroy()
-	. = ..()
+		if(!user.transferItemToLoc(tool, src, silent = TRUE))
+			return ITEM_INTERACT_BLOCKING
 
-/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, params)
-	if(!attachment)
-		if(istype(W, /obj/item/cooking/pan) || istype(W, /obj/item/reagent_containers/glass/bucket/pot) || istype(W, /obj/item/reagent_containers/glass/carafe/teapot))
-			playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
+		attachment = tool
+		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+		return ITEM_INTERACT_SUCCESS
 
-			if(user.transferItemToLoc(W, src, silent = TRUE))
-				attachment = W
-				update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
-			return
-
-	else
-		. = attachment.attackby(W, user, params)
-		if(.)
-			return
-	. = ..()
+	return ..()
 
 /obj/machinery/light/fueled/hearth/MouseDrop(mob/over, src_location, over_location, src_control, over_control, params)
 	. = ..()
@@ -572,7 +573,7 @@
 	fueluse = 30 MINUTES
 	layer = BELOW_MOB_LAYER
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	dir = NORTH
 	buckle_requires_restraints = 1
@@ -581,12 +582,12 @@
 
 /obj/machinery/light/fueled/campfire/pyre/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 10)
+	M.add_offsets(type, x_add = 0, y_add = 10)
 	M.setDir(SOUTH)
 
 /obj/machinery/light/fueled/campfire/pyre/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/machinery/light/fueled/campfire/longlived
 	fueluse = 180 MINUTES

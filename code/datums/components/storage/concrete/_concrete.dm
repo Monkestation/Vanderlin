@@ -182,7 +182,7 @@
 	I.mouse_opacity = MOUSE_OPACITY_OPAQUE //So you can click on the area around the item to equip it, instead of having to pixel hunt
 	if(ismovable(parent))
 		if(isliving(parent:loc))
-			parent:loc:encumbrance_to_speed()
+			parent:loc:update_carry_weight()
 	if(M)
 		if(M.client && M.active_storage != src)
 			M.client.screen -= I

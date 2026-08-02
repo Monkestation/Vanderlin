@@ -25,8 +25,12 @@
 	///Reagents holder
 	var/datum/reagents/reagents = null
 
-	///This atom's HUD (med/sec, etc) images. Associative list.
+	///all of this atom's HUD (med/sec, etc) images. Associative list of the form: list(hud category = hud image or images for that category).
+	///most of the time hud category is associated with a single image, sometimes its associated with a list of images.
+	///not every hud in this list is actually used. for ones available for others to see, look at active_hud_list.
 	var/list/image/hud_list = null
+	///all of this atom's HUD images which can actually be seen by players with that hud
+	var/list/image/active_hud_list = null
 	///HUD images that this atom can provide.
 	var/list/hud_possible
 
@@ -67,18 +71,11 @@
 	///Last fingerprints to touch this atom
 	var/fingerprintslast
 
-	var/list/filter_data //For handling persistent filters
-
 	///Economy cost of item
 	var/custom_price
 	///Economy cost of item in premium vendor
 	var/custom_premium_price
 
-	/// Will move to flags_1 when i can be arsed to (2019, has not done so)
-	var/rad_flags = NONE
-
-	///Bitfield for how the atom handles materials.
-	var/material_flags = NONE
 	///Modifier that raises/lowers the effect of the amount of a material, prevents small and easy to get items from being death machines.
 	var/material_modifier = 1
 
@@ -89,10 +86,16 @@
 	///AI controller that controls this atom. type on init, then turned into an instance during runtime
 	var/datum/ai_controller/ai_controller
 
+	// Use SET_BASE_PIXEL(x, y) to set these in typepath definitions, it'll handle pixel_x and y for you
 	///Default pixel x shifting for the atom's icon.
 	var/base_pixel_x = 0
 	///Default pixel y shifting for the atom's icon.
 	var/base_pixel_y = 0
+	// Use SET_BASE_VISUAL_PIXEL(x, y) to set these in typepath definitions, it'll handle pixel_w and z for you
+	///Default pixel w shifting for the atom's icon.
+	var/base_pixel_w = 0
+	///Default pixel z shifting for the atom's icon.
+	var/base_pixel_z = 0
 	///Used for changing icon states for different base sprites.
 	var/base_icon_state
 
@@ -140,8 +143,10 @@
 
 	/// Any atom that uses integrity and can be damaged must set this to true, otherwise the integrity procs will throw an error
 	var/uses_integrity = FALSE
+	///Armor datum created by the atom
+	VAR_PROTECTED/datum/armor/armor_type = /datum/armor/none
 	///Armor datum used by the atom
-	var/datum/armor/armor
+	VAR_PRIVATE/datum/armor/armor
 	///Current integrity, defaults to max_integrity on init
 	VAR_PRIVATE/atom_integrity
 	///Maximum integrity
@@ -158,6 +163,12 @@
 	var/attacked_sound
 
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
+
+	/**
+	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
+	 */
+	var/germ_level = GERM_LEVEL_AMBIENT
+
 
 /**
  * Called when an atom is created in byond (built in engine proc)
@@ -236,15 +247,10 @@
 	if(light_system == STATIC_LIGHT && light_power && (light_inner_range || light_outer_range))
 		update_light()
 
-	if(opacity && isturf(loc))
-		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
-
 	SETUP_SMOOTHING()
 
 	if(uses_integrity)
 		atom_integrity = max_integrity
-	TEST_ONLY_ASSERT((!armor || istype(armor)), "[type] has an armor that contains an invalid value at intialize")
 
 	if(ispath(ai_controller))
 		ai_controller = new ai_controller(src)
@@ -277,10 +283,10 @@
  * * clears the light object
  */
 /atom/Destroy(force)
-	if(alternate_appearances)
-		for(var/K in alternate_appearances)
-			var/datum/atom_hud/alternate_appearance/AA = alternate_appearances[K]
-			AA.remove_from_hud(src)
+	if(length(alternate_appearances))
+		for(var/current_alternate_appearance in alternate_appearances)
+			var/datum/atom_hud/alternate_appearance/selected_alternate_appearance = alternate_appearances[current_alternate_appearance]
+			selected_alternate_appearance.remove_atom_from_hud(src)
 
 	if(reagents)
 		qdel(reagents)
@@ -437,92 +443,6 @@
 	return FALSE
 
 /**
- * Get the name of this object for examine
- *
- * You can override what is returned from this proc by registering to listen for the
- * COMSIG_ATOM_GET_EXAMINE_NAME signal
- */
-/atom/proc/get_examine_name(mob/user)
-	. = "\a <b>[src]</b>"
-	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
-	if(article)
-		. = "[article] <b>[src]</b>"
-		override[EXAMINE_POSITION_ARTICLE] = article
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
-
-///Generate the full examine string of this atom (including icon for goonchat)
-/atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""][get_examine_name(user)]"
-
-/atom/proc/get_inspect_button()
-	return ""
-
-/atom/proc/get_inspect_entries()
-	return list()
-
-/**
- * Called when a mob examines (shift click or verb) this atom
- *
- * Default behaviour is to get the name and icon of the object and it's reagents where
- * the TRANSPARENT flag is set on the reagents holder
- *
- * Produces a signal COMSIG_PARENT_EXAMINE
- */
-/atom/proc/examine(mob/user)
-	var/examine_string = get_examine_string(user, thats = TRUE)
-	if(examine_string)
-		. = list("[examine_string].[get_inspect_button()]")
-	else
-		. = list()
-
-	if(desc)
-		. += "<span class='info'>[desc]</span>"
-
-	if(reagents)
-		if(reagents.flags & TRANSPARENT)
-			if(length(reagents.reagent_list))
-				if(user.can_see_reagents()) //Show each individual reagent
-					. += "It contains:"
-					for(var/datum/reagent/R in reagents.reagent_list)
-						. += "[(UNIT_FORM_STRING(R.volume))] of <font color=[R.color]>[R.name]</font>"
-				else //Otherwise, just show the total volume
-					var/total_volume = 0
-					var/reagent_color
-					for(var/datum/reagent/R in reagents.reagent_list)
-						total_volume += R.volume
-					reagent_color = mix_color_from_reagents(reagents.reagent_list)
-					. += "It contains [(UNIT_FORM_STRING(total_volume))] of <font color=[reagent_color]>something.</font>"
-			else
-				. += "It's empty."
-		else if(reagents.flags & AMOUNT_VISIBLE)
-			if(reagents.total_volume)
-				. += "<span class='notice'>It has [(UNIT_FORM_STRING(round(reagents.total_volume, 0.1)))] left.</span>"
-			else
-				. += "<span class='danger'>It's empty.</span>"
-		//SNIFFING
-		if (user.zone_selected == BODY_ZONE_PRECISE_NOSE && get_dist(src, user) <= 1)
-			// if atom's path is item/reagent_containers/glass/carafe
-			var/is_not_closed = FALSE
-			if(istype(src, /obj/item/reagent_containers/glass/bottle))
-				var/obj/item/reagent_containers/glass/bottle/A = src
-				is_not_closed = !A.closed
-			else if(istype(src, /obj/item/reagent_containers/glass/alchemical))
-				var/obj/item/reagent_containers/glass/alchemical/A = src
-				is_not_closed = !A.closed
-			if(is_not_closed && reagents.total_volume) // if the container is open, and there's liquids in there
-				user.visible_message(span_info("[user] takes a whiff of [src]."))
-				. += span_notice("I smell [src.reagents.generate_scent_message()].")
-				if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
-					var/list/full_reagents = list()
-					for(var/datum/reagent/R in reagents.reagent_list)
-						if(R.volume > 0)
-							full_reagents += "[lowertext(R.name)]"
-					if(length(full_reagents))
-						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
-
-/**
  * Updates the appearence of the icon
  *
  * Mostly delegates to update_name, update_desc, and update_icon
@@ -627,8 +547,18 @@
 /atom/proc/relaymove(mob/living/user, direction)
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 50
-		to_chat(user, "<span class='warning'>I should try resisting.</span>")
+		to_chat(user, span_warning("I should try resisting."))
 	return
+
+/**
+ * A special case of relaymove() in which the person relaying the move may be "driving" this atom
+ *
+ * This is a special case for vehicles and ridden animals where the relayed movement may be handled
+ * by the riding component attached to this atom. Returns TRUE as long as there's nothing blocking
+ * the movement, or FALSE if the signal gets a reply that specifically blocks the movement
+ */
+/atom/proc/relaydrive(mob/living/user, direction)
+	return !(SEND_SIGNAL(src, COMSIG_RIDDEN_DRIVER_MOVE, user, direction) & COMPONENT_DRIVER_BLOCK_MOVE)
 
 /// Handle what happens when your contents are exploded by a bomb
 /atom/proc/contents_explosion(severity, target)
@@ -677,7 +607,7 @@
 /mob/living/carbon/get_blood_dna_list()
 	if(isnull(dna)) // Xenos
 		return ..()
-	if(NOBLOOD in dna.species.species_traits) //no skeletons bleeding
+	if(!CAN_HAVE_BLOOD(src)) //no skeletons bleeding
 		return null
 	var/datum/blood_type/blood = get_blood_type()
 	return list("[dna.unique_enzymes]" = blood.type)
@@ -712,22 +642,6 @@
  */
 /atom/proc/acid_act(acidpwr, acid_volume)
 	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
-
-/**
- * Respond to an emag being used on our atom
- *
- * Default behaviour is to send COMSIG_ATOM_EMAG_ACT and return
- */
-/atom/proc/emag_act(mob/user)
-	SEND_SIGNAL(src, COMSIG_ATOM_EMAG_ACT, user)
-
-/**
- * Respond to narsie eating our atom
- *
- * Default behaviour is to send COMSIG_ATOM_NARSIE_ACT and return
- */
-/atom/proc/narsie_act()
-	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
 
 /**
  * Implement the behaviour for when a user click drags a storage object to your atom
@@ -815,8 +729,15 @@
  * Not recommended to use, listen for the COMSIG_ATOM_DIR_CHANGE signal instead (sent by this proc)
  */
 /atom/proc/setDir(newdir)
+	SHOULD_CALL_PARENT(TRUE)
+	if (SEND_SIGNAL(src, COMSIG_ATOM_PRE_DIR_CHANGE, dir, newdir) & COMPONENT_ATOM_BLOCK_DIR_CHANGE)
+		newdir = dir
+		return
 	SEND_SIGNAL(src, COMSIG_ATOM_DIR_CHANGE, dir, newdir)
+	var/olddir = dir
+	. = dir != newdir
 	dir = newdir
+	SEND_SIGNAL(src, COMSIG_ATOM_POST_DIR_CHANGE, olddir, newdir)
 
 /**
  * Wash this atom
@@ -881,6 +802,13 @@
 	atom_colours[colour_priority] = null
 	update_atom_colour()
 
+/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
+	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
+
+/// Force set the germ level
+/atom/proc/set_germ_level(germs)
+	var/delta = (germs - germ_level)
+	return adjust_germ_level(delta)
 
 ///Resets the atom's color to null, and then sets it to the highest priority colour available
 /atom/proc/update_atom_colour()
@@ -933,6 +861,9 @@
 	VV_DROPDOWN_OPTION(VV_HK_ADD_REAGENT, "Add Reagent")
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EXPLOSION, "Explosion")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_AI, "Add AI controller")
+	VV_DROPDOWN_OPTION(VV_HK_ARMOR_MOD, "Modify Armor")
+	if(greyscale_colors)
+		VV_DROPDOWN_OPTION(VV_HK_MODIFY_GREYSCALE, "Modify greyscale colors")
 
 /atom/vv_do_topic(list/href_list)
 	. = ..()
@@ -944,7 +875,7 @@
 
 		if(reagents)
 			var/chosen_id
-			switch(alert(usr, "Choose a method.", "Add Reagents", "Search", "Choose from a list", "I'm feeling lucky"))
+			switch(tgui_alert(usr, "Choose a method.", "Add Reagents", list("Search", "Choose from a list", "I'm feeling lucky")))
 				if("Search")
 					var/valid_id
 					while(!valid_id)
@@ -971,6 +902,30 @@
 					message_admins("<span class='notice'>[key_name(usr)] has added [amount] units of [chosen_id] to [src]</span>")
 	if(href_list[VV_HK_TRIGGER_EXPLOSION] && check_rights(R_FUN))
 		usr.client.cmd_admin_explosion(src)
+
+	if(href_list[VV_HK_ARMOR_MOD])
+		var/list/pickerlist = list()
+		var/list/armorlist = get_armor().get_rating_list()
+
+		for (var/i in armorlist)
+			pickerlist += list(list("value" = armorlist[i], "name" = i))
+
+		var/list/result = presentpicker(usr, "Modify armor", "Modify armor: [src]", Button1="Save", Button2 = "Cancel", Timeout=FALSE, inputtype = "text", values = pickerlist)
+		var/list/armor_all = ARMOR_LIST_ALL
+
+		if (islist(result))
+			if (result["button"] != 2) // If the user pressed the cancel button
+				// text2num conveniently returns a null on invalid values
+				var/list/converted = list()
+				for(var/armor_key in armor_all)
+					converted[armor_key] = text2num(result["values"][armor_key])
+				set_armor(get_armor().generate_new_with_specific(converted))
+				var/message = "[key_name(usr)] modified the armor on [src] ([type]) to: "
+				for(var/armor_key in armor_all)
+					message += "[armor_key]=[get_armor_rating(armor_key)],"
+				message = copytext(message, 1, -1)
+				log_admin(span_notice(message))
+				message_admins(span_notice(message))
 
 	if(href_list[VV_HK_ADD_AI])
 		if(!check_rights(R_VAREDIT))
@@ -1007,14 +962,14 @@
 	. = ..()
 	var/refid = REF(src)
 	. += "[VV_HREF_TARGETREF(refid, VV_HK_AUTO_RENAME, "<b id='name'>[src]</b>")]"
-	. += "<br><font size='1'><a href='?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=left'><<</a> <a href='?_src_=vars;[HrefToken()];datumedit=[refid];varnameedit=dir' id='dir'>[dir2text(dir) || dir]</a> <a href='?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=right'>>></a></font>"
+	. += "<br><font size='1'><a href='byond://?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=left'><<</a> <a href='byond://?_src_=vars;[HrefToken()];datumedit=[refid];varnameedit=dir' id='dir'>[dir2text(dir) || dir]</a> <a href='byond://?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=right'>>></a></font>"
 
 ///Where atoms should drop if taken from this atom
 /atom/proc/drop_location()
-	var/atom/L = loc
-	if(!L)
+	var/atom/location = loc
+	if(!location)
 		return null
-	return L.AllowDrop() ? L : L.drop_location()
+	return location.AllowDrop() ? location : location.drop_location()
 
 /atom/proc/vv_auto_rename(newname)
 	name = newname
@@ -1022,21 +977,22 @@
 /**
  * An atom has entered this atom's contents
  *
- * Default behaviour is to send the COMSIG_ATOM_ENTERED
+ * Default behaviour is to send the [COMSIG_ATOM_ENTERED]
  */
-/atom/Entered(atom/movable/AM, atom/oldLoc)
-	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, AM, oldLoc)
+/atom/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, arrived, old_loc, old_locs)
+	SEND_SIGNAL(arrived, COMSIG_ATOM_ENTERING, src, old_loc, old_locs)
 
 /**
  * An atom is attempting to exit this atom's contents
  *
- * Default behaviour is to send the COMSIG_ATOM_EXIT
+ * Default behaviour is to send the [COMSIG_ATOM_EXIT]
  */
-/atom/Exit(atom/movable/AM, atom/newLoc)
+/atom/Exit(atom/movable/leaving, direction)
 	// Don't call `..()` here, otherwise `Uncross()` gets called.
 	// See the doc comment on `Uncross()` to learn why this is bad.
 
-	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, AM, newLoc) & COMPONENT_ATOM_BLOCK_EXIT)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, leaving, direction) & COMPONENT_ATOM_BLOCK_EXIT)
 		return FALSE
 
 	return TRUE
@@ -1046,76 +1002,11 @@
  *
  * Default behaviour is to send the COMSIG_ATOM_EXITED
  */
-/atom/Exited(atom/movable/AM, atom/newLoc)
-	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, AM, newLoc)
-
-/**
- *Tool behavior procedure. Redirects to tool-specific procs by default.
- *
- * You can override it to catch all tool interactions, for use in complex deconstruction procs.
- *
- * Must return  parent proc ..() in the end if overridden
- */
-/atom/proc/tool_act(mob/living/user, obj/item/I, tool_type)
-	switch(tool_type)
-		if(TOOL_CROWBAR)
-			. |= crowbar_act(user, I)
-		if(TOOL_MULTITOOL)
-			. |= multitool_act(user, I)
-		if(TOOL_SCREWDRIVER)
-			. |= screwdriver_act(user, I)
-		if(TOOL_WRENCH)
-			. |= wrench_act(user, I)
-		if(TOOL_WIRECUTTER)
-			. |= wirecutter_act(user, I)
-		if(TOOL_WELDER)
-			. |= welder_act(user, I)
-		if(TOOL_ANALYZER)
-			. |= analyzer_act(user, I)
-	if(. & COMPONENT_BLOCK_TOOL_ATTACK)
-		return TRUE
-
-//! Tool-specific behavior procs. They send signals, so try to call ..()
-///
-
-///Crowbar act
-/atom/proc/crowbar_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_CROWBAR_ACT, user, I)
-
-///Multitool act
-/atom/proc/multitool_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_MULTITOOL_ACT, user, I)
-
-///Check if the multitool has an item in it's data buffer
-/atom/proc/multitool_check_buffer(user, obj/item/I, silent = FALSE)
-	if(!istype(I, /obj/item/multitool))
-		if(user && !silent)
-			to_chat(user, "<span class='warning'>[I] has no data buffer!</span>")
-		return FALSE
-	return TRUE
-
-///Screwdriver act
-/atom/proc/screwdriver_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_SCREWDRIVER_ACT, user, I)
-
-///Wrench act
-/atom/proc/wrench_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_WRENCH_ACT, user, I)
-
-///Wirecutter act
-/atom/proc/wirecutter_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_WIRECUTTER_ACT, user, I)
-
-///Welder act
-/atom/proc/welder_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_WELDER_ACT, user, I)
-
-///Analyzer act
-/atom/proc/analyzer_act(mob/living/user, obj/item/I)
-	return SEND_SIGNAL(src, COMSIG_ATOM_ANALYSER_ACT, user, I)
+/atom/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
 
 ///Generate a tag for this atom
-/atom/proc/GenerateTag()
+/atom/GenerateTag()
 	return
 
 /// Generic logging helper
@@ -1251,60 +1142,18 @@
 	defender.log_message(message, LOG_ATTACK, color="red")
 	attacker.log_message(reverse_message, LOG_ATTACK, "red", FALSE) // log it in the attacker's personal log too, but not log globally because it was already done.
 
-/atom/movable/proc/add_filter(name, priority, list/params)
-	if(!filter_data)
-		filter_data = list()
-	var/list/p = params.Copy()
-	p["priority"] = priority
-	filter_data[name] = p
-	update_filters()
+/atom/proc/intercept_zImpact(list/falling_movables, levels = 1)
+	SHOULD_CALL_PARENT(TRUE)
+	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, falling_movables, levels)
 
-/atom/movable/proc/remove_filter(name_or_names)
-	if(!filter_data)
+///Setter for the `density` variable to append behavior related to its changing.
+/atom/proc/set_density(new_value)
+	SHOULD_CALL_PARENT(TRUE)
+	if(density == new_value)
 		return
-
-	var/list/names = islist(name_or_names) ? name_or_names : list(name_or_names)
-
-	. = FALSE
-	for(var/name in names)
-		if(filter_data[name])
-			filter_data -= name
-			. = TRUE
-
-	if(.)
-		update_filters()
-	return .
-
-/atom/movable/proc/clear_filters()
-	var/atom/atom_cast = src // filters only work with images or atoms.
-	filter_data = null
-	atom_cast.filters = null
-
-/proc/cmp_filter_data_priority(list/A, list/B)
-	return A["priority"] - B["priority"]
-
-/atom/movable/proc/update_filters()
-	filters = null
-	var/atom/atom_cast = src // filters only work with images or atoms.
-	atom_cast.filters = null
-	sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
-	for(var/filter_raw in filter_data)
-		var/list/data = filter_data[filter_raw]
-		var/list/arguments = data.Copy()
-		arguments -= "priority"
-		atom_cast.filters += filter(arglist(arguments))
-	UNSETEMPTY(filter_data)
-
-/obj/item/update_filters()
-	. = ..()
-	update_item_action_buttons()
-
-/atom/movable/proc/get_filter(name)
-	if(filter_data && filter_data[name])
-		return filters[filter_data.Find(name)]
-
-/atom/proc/intercept_zImpact(atom/movable/AM, levels = 1)
-	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, AM, levels)
+	. = density
+	density = new_value
+	SEND_SIGNAL(src, COMSIG_ATOM_DENSITY_CHANGED)
 
 /obj/proc/propagate_temp_change(value, weight, falloff = 0.5, max_depth = 3)
 	var/key = REF(src)
@@ -1357,11 +1206,6 @@
 	base_pixel_y = new_value
 	pixel_y = pixel_y + base_pixel_y - .
 
-/// Returns the indice in filters of the given filter name.
-/// If it is not found, returns null.
-/atom/proc/get_filter_index(name)
-	return filter_data?.Find(name)
-
 /atom/proc/do_alert_effect()
 	var/mutable_appearance/alert = mutable_appearance('icons/effects/32x48.dmi', "alert_effect")
 	var/atom/movable/flick_visual/exclamation = flick_overlay_view(alert, 1 SECONDS)
@@ -1376,3 +1220,33 @@
 /atom/proc/forget_alert(atom/movable/flick_visual/alert)
 	animate(alert, time = 0.5 SECONDS, alpha = 0)
 	QDEL_IN(alert, 0.5 SECONDS)
+
+///Passes Stat Browser Panel clicks to the game and calls client click on an atom
+/atom/Topic(href, list/href_list)
+	. = ..()
+	if(!usr?.client)
+		return
+	var/client/usr_client = usr.client
+	var/list/paramslist = list()
+
+	if(href_list["statpanel_item_click"])
+		switch(href_list["statpanel_item_click"])
+			if("left")
+				paramslist[LEFT_CLICK] = "1"
+			if("right")
+				paramslist[RIGHT_CLICK] = "1"
+			if("middle")
+				paramslist[MIDDLE_CLICK] = "1"
+			else
+				return
+
+		if(href_list["statpanel_item_shiftclick"])
+			paramslist[SHIFT_CLICKED] = "1"
+		if(href_list["statpanel_item_ctrlclick"])
+			paramslist[CTRL_CLICKED] = "1"
+		if(href_list["statpanel_item_altclick"])
+			paramslist[ALT_CLICKED] = "1"
+
+		var/mouseparams = list2params(paramslist)
+		usr_client.Click(src, loc, null, mouseparams)
+		return TRUE

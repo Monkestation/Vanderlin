@@ -41,8 +41,8 @@
 
 	cast_on.visible_message(span_warning("[cast_on.real_name]'s body is engulfed by dark energy..."), runechat_message = TRUE)
 
-	if(cast_on.ckey) //player still inside body
-		var/offer = browser_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
+	if(cast_on.ckey && !is_antag_banned(cast_on.ckey, ROLE_NECRO_SKELETON)) //player still inside body
+		var/offer = tgui_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
 
 		if(offer == CHOICE_YES)
 			to_chat(cast_on, span_danger("You rise as a minion."))
@@ -52,7 +52,7 @@
 		else
 			to_chat(cast_on, span_danger("Another soul will take over."))
 
-	var/list/candidates = pollCandidatesForMob("Do you want to play as a Necromancer's minion?", null, null, null, 100, cast_on, POLL_IGNORE_NECROMANCER_SKELETON)
+	var/list/candidates = pollCandidatesForMob("Do you want to play as a Necromancer's minion?", ROLE_NECRO_SKELETON, null, null, 100, cast_on, POLL_IGNORE_NECROMANCER_SKELETON)
 	if(length(candidates))
 		var/mob/C = pick(candidates)
 		cast_on.turn_to_minion(owner, C.ckey)
@@ -74,15 +74,15 @@
 		AddComponent(/datum/component/ai_aggro_system)
 		wander = TRUE
 
-	clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/crossbows, 2, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/wrestling, 1, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 20, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30, TRUE)
 
 	mind.current.job = null
+	mind.add_antag_datum(/datum/antagonist/skeleton)
 
-	dna.species.species_traits |= NOBLOOD
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
@@ -99,27 +99,36 @@
 	copy_known_languages_from(master, TRUE)
 	mob_biotypes = MOB_UNDEAD
 	faction = list(FACTION_UNDEAD)
-	ambushable = FALSE
-	candodge = FALSE
+
+	add_traits(list(TRAIT_NOMOOD, \
+		TRAIT_NOHUNGER, \
+		TRAIT_NOBREATH, \
+		TRAIT_NOHYGIENE, \
+		TRAIT_NOPAIN, \
+		TRAIT_SLEEPIMMUNE, \
+		TRAIT_EASYDISMEMBER, \
+		TRAIT_TOXIMMUNE, \
+		TRAIT_LIMBATTACHMENT, \
+		TRAIT_CRITICAL_WEAKNESS, \
+		TRAIT_NO_ORGAN_PROCESS, \
+		TRAIT_NOBLOOD, \
+		TRAIT_NOENERGY, \
+		TRAIT_SHOCKIMMUNE, \
+		TRAIT_NOAMBUSH, \
+		TRAIT_UNDODGING)
+		, SPECIES_TRAIT)
 
 	skeletonize(FALSE)
+	fully_heal(HEAL_TRAUMAS)
+
 	skele_look()
 	grant_undead_eyes()
 
+	for(var/obj/item/organ/organ as anything in internal_organs)
+		organ.regenerate_organ()
+
 	if(length(quirks))
 		clear_quirks()
-
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOENERGY, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 
 	update_body()
 

@@ -16,6 +16,7 @@
 	icon_state = "raw_shell"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 65 GRAMS
 
 /obj/item/carvedgem/shell/openoyster
 	name = "open fossilized clam"
@@ -164,13 +165,14 @@
 	grid_width = 64
 	sellprice = 35
 //.....................Rose......................//
-/obj/item/carvedgem/rose/
+/obj/item/carvedgem/rose
 	name = "rose base"
 	desc = "if you are seeing this, it's a bug, report it to coders"
 	icon = 'icons/roguetown/gems/gem_rose.dmi'
 	icon_state = "raw_rose"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 90 GRAMS
 
 /obj/item/carvedgem/rose/rawrose
 	name = "raw rosellusk"
@@ -179,6 +181,7 @@
 	grid_height = 32
 	grid_width = 32
 	sellprice = 15
+	item_weight = 101 GRAMS
 
 /obj/item/carvedgem/rose/cutgem
 	name = "rosellusk pearl"
@@ -328,6 +331,7 @@
 	icon_state = "cutgem_jade"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 55 GRAMS
 
 /obj/item/carvedgem/jade/cutgem
 	name = "cut joapstone"
@@ -468,6 +472,7 @@
 	icon_state = "cutgem_onyxa"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 38 GRAMS
 
 /obj/item/carvedgem/onyxa/cutgem
 	name = "polished onyxa gem"
@@ -616,6 +621,7 @@
 	icon_state = "cutgem_turq"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 60 GRAMS
 
 /obj/item/carvedgem/turq/cutgem
 	name = "cut ceruleabaster"
@@ -740,8 +746,8 @@
 	sellprice = 95
 
 /obj/item/carvedgem/turq/ka
-	name = "ceruleabaster ka statue"
-	desc = "A large carving of a ka spirit from Lakkarian myth. Believed to help guide the recently parted to Necra's domain."
+	name = "ceruleabaster bird statue"
+	desc = "A large carving of a bird."
 	icon_state = "ka_turq"
 	grid_height = 64
 	grid_width = 32
@@ -749,7 +755,7 @@
 
 /obj/item/carvedgem/turq/scarab
 	name = "ceruleabaster scarab"
-	desc = "A large carving of a scarab made out of ceruleabaster. An insect sacred to Lakkarians. Scarabs are commonly seen at Lakkarian temples and mastabas."
+	desc = "A large carving of a scarab made out of ceruleabaster."
 	icon_state = "scarab_turq"
 	dropshrink = 0.8
 	grid_height = 64
@@ -765,6 +771,7 @@
 	icon_state = "cutgem_coral"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 48 GRAMS
 
 /obj/item/carvedgem/coral/cutgem
 	name = "cut aoetal gem"
@@ -913,6 +920,7 @@
 	icon_state = "cutgem_amber"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 32 GRAMS
 
 /obj/item/carvedgem/amber/cutgem
 	name = "cut petriamber gem"
@@ -1061,6 +1069,7 @@
 	icon_state = "cutgem_opal"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 24 GRAMS
 
 /obj/item/carvedgem/opal/cutgem
 	name = "cut opaloise gem"

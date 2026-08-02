@@ -56,16 +56,16 @@
 	var/mob/living/luser = user
 	if(user.mind && (user.mind in immune_minds))
 		return
-	if(get_dist(user, src) <= FLOOR((luser.STAPER-4)/4,1))
+	if(get_dist(user, src) <= FLOOR((GET_MOB_ATTRIBUTE_VALUE(luser, STAT_PERCEPTION)-4)/4,1))
 		to_chat(user,span_notice("I reveal and temporarily disarm \the [src]"))
 		flare()
 
 /obj/structure/trap/proc/on_active_perception(datum/controller/subsystem/processing/dcs/unused,mob/living/percepter)
 	SIGNAL_HANDLER
-	if(!(percepter in view(FLOOR(percepter.STAPER/3,1),src)))
+	if(!(percepter in view(FLOOR(GET_MOB_ATTRIBUTE_VALUE(percepter, STAT_PERCEPTION)/3,1),src)))
 		return
 	//10% chance to see over DC
-	if(percepter.stat_roll(STATKEY_PER,10,perception_dc))
+	if(percepter.stat_roll(STAT_PERCEPTION,10,perception_dc))
 		alpha = 200
 		found_ping(get_turf(src),percepter.client,"trap")
 		animate(src, alpha = initial(alpha), time = 4.5 SECONDS)
@@ -116,7 +116,7 @@
 ///Common checks to make sure we can trigger the trap.
 /// True == Yep we good.
 /obj/structure/trap/proc/trap_check(mob/living/victim)
-	if(istype(get_area(loc), /area/overlord_lair) && ("overlord" in victim.faction))
+	if(istype(get_area(loc), /area/overlord_lair) && (victim.has_faction("overlord")))
 		return FALSE
 	if(last_trigger + time_between_triggers > world.time)
 		return FALSE
@@ -185,8 +185,7 @@
 	var/obj/item/bodypart/part = victim.get_bodypart(prob(50) ? BODY_ZONE_L_LEG : BODY_ZONE_R_LEG)
 	if(isnull(part))
 		part = victim.get_bodypart(BODY_ZONE_CHEST)
-	part?.receive_damage(30)
-	part?.add_wound(/datum/wound/puncture)
+	part?.create_injury(WOUND_PUNCTURE, 30)
 	victim.emote("scream")
 	post_triggered()
 
@@ -247,8 +246,7 @@
 		var/obj/item/bodypart/part = victim.get_bodypart(prob(50) ? BODY_ZONE_L_LEG : BODY_ZONE_R_LEG)
 		if(isnull(part))
 			part = victim.get_bodypart(BODY_ZONE_CHEST)
-		part?.receive_damage(40)
-		part?.add_wound(/datum/wound/slash/large)
+		part?.create_injury(WOUND_SLASH, part?.max_damage * 0.4)
 		victim.emote("scream")
 
 /obj/structure/trap/wall_projectile

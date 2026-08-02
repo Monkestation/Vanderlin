@@ -2,7 +2,7 @@
  * Can be applied to /atom/movable subtypes to make them apply fire stacks to things they hit
  */
 /datum/element/firestacker
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	/// A list in format {atom/movable/owner, number}
 	/// Used to keep track of movables which want to apply a different number of fire stacks than default
 	var/list/amount_by_owner = list()

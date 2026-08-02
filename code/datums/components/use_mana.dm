@@ -98,9 +98,6 @@
 
 /// Should return TRUE if the total adjusted mana of all mana pools surpasses get_mana_required(). FALSE otherwise.
 /datum/component/uses_mana/proc/is_mana_sufficient(atom/movable/user, ...)
-	for(var/obj/effect/temp_visual/silence_zone/zone in range(3, user))
-		return FALSE
-
 	var/total_effective_mana = 0
 	var/list/datum/mana_pool/provided_mana = get_mana_to_use()
 	var/required_mana = get_mana_required(arglist(args))

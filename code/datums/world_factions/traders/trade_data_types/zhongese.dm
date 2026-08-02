@@ -3,17 +3,11 @@
 	armor = /obj/item/clothing/shirt/robe/kimono
 	//cloak = /obj/item/clothing/cloak/raincloak/purple
 
-/obj/effect/mob_spawn/human/trition
-	mob_species = /datum/species/triton
-
-/obj/effect/mob_spawn/human/trition/zhong
-	outfit = /datum/outfit/zhongese
-
 /datum/trader_data/sake_merchant
 	name = "Sake"
 	base_type = list()
 	initial_products = list()
-	outfit_override = list(/obj/effect/mob_spawn/human/trition/zhong)
+	outfit_override = list(/obj/effect/mob_spawn/corpse/human/triton/zhong)
 	max_custom_items = 6
 	custom_items = list(
 		/obj/item/reagent_containers/glass/bottle/black/huangjiu = list(3, 25, 3),
@@ -88,14 +82,14 @@
 	name = "Eastern Blades"
 	base_type = list()
 	initial_products = list()
-	outfit_override = list(/obj/effect/mob_spawn/human/trition/zhong)
+	outfit_override = list(/obj/effect/mob_spawn/corpse/human/triton/zhong)
 	max_custom_items = 6
 	custom_items = list(
 		/obj/item/weapon/sword/katana/mulyeog = list(3, 45, 3),
 		/obj/item/weapon/sword/katana/mulyeog/rumahench = list(4, 65, 2),
 		/obj/item/weapon/sword/katana/mulyeog/rumacaptain = list(6, 120, 1),
 		/obj/item/weapon/sword/sabre/hook = list(5, 85, 2),
-		/obj/item/weapon/spear/naginata = list(6, 90, 2),
+		/obj/item/weapon/polearm/spear/naginata = list(6, 90, 2),
 		/obj/item/weapon/knife/dagger/navaja = list(6, 75, 1),
 		/obj/item/weapon/whip/nagaika = list(5, 60, 2),
 	)

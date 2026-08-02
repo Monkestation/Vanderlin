@@ -58,18 +58,16 @@
 	)
 
 	if(do_after(owner, 2 SECONDS, owner))
-		var/skill_level = owner.get_skill_level(associated_skill)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
 		var/mote_power = clamp(4 + (skill_level - 3), 4, 7) // every step above journeyman should get us 1 more tile of brightness
 		mote = new
 		mote.set_light_range(new_outer_range = mote_power)
-		if(mote.light_system == STATIC_LIGHT)
-			mote.update_light()
 
 		var/list/icon_dimensions = get_icon_dimensions(owner.icon)
 		var/orbitsize = (icon_dimensions["width"] + icon_dimensions["height"]) * 0.5
 		orbitsize -= (orbitsize/world.icon_size)*(world.icon_size*0.25)
 
-		mote.orbit(owner, orbitsize, pick(list(TRUE, FALSE)), 2000, 36, TRUE)
+		mote.orbit(owner, orbitsize, rand(0, 1), 80, 36, TRUE)
 		return TRUE
 
 	return FALSE
@@ -78,7 +76,7 @@
 	// adjusted from /obj/item/soap in clown_items.dm, some duplication unfortunately (needed for flavor)
 
 	// let's adjust the clean speed based on our skill level
-	var/skill_level = owner.get_skill_level(associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
 	var/cleanspeed = 3.5 SECONDS - (skill_level * 3) // 3 cleanspeed per skill level, from 35 down to a maximum of 17 (pretty quick)
 
 	if(istype(target, /obj/effect/decal/cleanable))
@@ -107,7 +105,7 @@
 /datum/action/cooldown/spell/undirected/touch/prestidigitation/proc/gather_thing(atom/target)
 	// adjusted from /obj/item/soap in clown_items.dm, some duplication unfortunately (needed for flavor)
 
-	var/skill_level = owner.get_skill_level(associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
 	var/gatherspeed =  3.5 SECONDS - (skill_level * 3)
 	if (istype(target, /turf/open/lava))
 		if (do_after(owner, gatherspeed, target))
@@ -144,7 +142,7 @@
 
 	owner.adjust_stamina(fatigue_used + extra_fatigue)
 
-	var/skill_level = owner.get_skill_level(associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE(owner, associated_skill)
 	if (skill_level >= SKILL_LEVEL_EXPERT)
 		fatigue_used = 0 // we do this after we've actually changed fatigue because we're hard-capping the raises this gives to Expert
 
@@ -170,20 +168,20 @@
 	canparry = TRUE
 
 /datum/intent/prestidigitation/clean
-	name = "touch"
-	icon_state = "intouch"
+	name = "clean"
+	icon_state = "inclean"
 
 /datum/intent/prestidigitation/gather
 	name = "grab"
 	icon_state = "ingrab"
 
 /datum/intent/prestidigitation/spark
-	name = "shove"
-	icon_state = "inshove"
+	name = "spark"
+	icon_state = "inspark"
 
 /datum/intent/prestidigitation/mote
-	name = "use"
-	icon_state = "inuse"
+	name = "light"
+	icon_state = "inlight"
 
 /obj/effect/wisp/prestidigitation
 	name = "minor magelight mote"
@@ -192,7 +190,7 @@
 	icon_state = "wisp"
 	light_outer_range =  4
 	light_color = "#3FBAFD"
-	SET_BASE_PIXEL(20, 0)
+	light_system = MOVABLE_LIGHT
 
 #undef PRESTI_CLEAN
 #undef PRESTI_GATHER

@@ -10,16 +10,19 @@
 	resistance_flags = FLAMMABLE // Made of leather
 	smeltresult = /obj/item/fertilizer/ash
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	sellprice = VALUE_LEATHER_HELMET
 
-	armor = ARMOR_LEATHER_BAD
+	armor_type = /datum/armor/head/leather/bad
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_STANDARD
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 1.6
+	item_weight = 1.6 KILOGRAMS
+
+	material_category = ARMOR_MAT_FABRIC
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK HELMETS ARE INTENDED
 //KEEP THIS IN MIND
@@ -27,18 +30,18 @@
 /obj/item/clothing/head/helmet/leather/advanced
 	name = "hardened leather helmet"
 	desc = "Sturdy, durable, flexible. A comfortable and reliable hood made of hardened leather."
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_STRONG
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor_type = /datum/armor/head/leather/advanced
 
 /obj/item/clothing/head/helmet/leather/masterwork
 	name = "masterwork leather helmet"
 	desc = "This helmet is a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STANDARD + 100
+	max_integrity = INTEGRITY_STRONG + 100
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+	prevent_crits = ALL_EXCEPT_STAB
+	armor_type = /datum/armor/head/leather/master
 
 /obj/item/clothing/head/helmet/leather/masterwork/Initialize()
 	. = ..()
@@ -50,12 +53,12 @@
 	icon_state = "headscarf"
 	color = CLOTHING_BARK_BROWN
 	sellprice = VALUE_LEATHER_HELMET/2
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/head/padded/bad
 	body_parts_covered = HEAD|HAIR
 	prevent_crits =  MINOR_CRITICALS
 	max_integrity = INTEGRITY_POOR
 	clothing_flags = NONE
-	item_weight = 0.5
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/helmet/leather/headscarf/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -84,7 +87,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	sellprice = VALUE_LEATHER_HELMET/2
 
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/head/padded/good
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 
 //............... Hardened Helmet ............... //
@@ -109,20 +112,16 @@
 	item_state = "minerslamp"
 	sellprice = VALUE_LEATHER_HELMET+BONUS_VALUE_MODEST
 
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/head/padded
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_BLUNT)
-	item_weight = 3 * IRON_MULTIPLIER
+	item_weight = 470 GRAMS
 
 	actions_types = list(/datum/action/item_action/toggle_light)
 
-	var/brightness_on = 4 //less than a torch; basically good for one person.
+	var/brightness_on = 6
 	var/on = FALSE
 
-/obj/item/clothing/head/helmet/leather/minershelm/Initialize(mapload, ...)
-	AddElement(/datum/element/update_icon_updates_onmob)
-	return ..()
-
-/obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, params)
+/obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, list/modifiers)
 	toggle_helmet_light(user)
 
 /obj/item/clothing/head/helmet/leather/minershelm/proc/toggle_helmet_light(mob/living/user)
@@ -149,7 +148,8 @@
 	desc = "A dainty looking feathered hat that is actually quite heavy and thick, Duelists from Valoria are known to value winning fights without dirtying the white feather on top"
 	icon_state = "duelisthat"
 	item_state = "duelisthat"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	prevent_crits =  MINOR_CRITICALS
 	body_parts_covered = HEAD|HAIR
 	dynamic_hair_suffix = ""

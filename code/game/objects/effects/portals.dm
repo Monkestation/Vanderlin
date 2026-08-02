@@ -44,7 +44,7 @@
 			return FALSE
 	return ..()
 
-/obj/effect/portal/attackby(obj/item/W, mob/user, params)
+/obj/effect/portal/attackby(obj/item/W, mob/user, list/modifiers)
 	if(user && Adjacent(user))
 		user.forceMove(get_turf(src))
 		return TRUE

@@ -96,7 +96,7 @@
  * if check_verbosity is true, skip the match if there spoken_text is way longer than the match
  */
 /datum/pet_command/proc/find_command_in_text(spoken_text, check_verbosity = FALSE)
-	for (var/command as anything in speech_commands)
+	for (var/command in speech_commands)
 		if (!findtext(spoken_text, command))
 			continue
 		if(check_verbosity && length(spoken_text) > length(command) + MAX_NAME_LEN)
@@ -148,7 +148,7 @@
 	parent.ai_controller.CancelActions() // Stop whatever you're doing and do this instead
 	parent.ai_controller.set_blackboard_key(BB_ACTIVE_PET_COMMAND, src)
 	if(command_feedback)
-		parent.emote("me", EMOTE_VISIBLE, "[command_feedback]", TRUE, custom_me = TRUE)
+		parent.emote("me", EMOTE_VISIBLE, "[command_feedback]", TRUE)
 	if(!radial_command)
 		return
 	if(!requires_pointing)

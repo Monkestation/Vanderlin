@@ -1,15 +1,4 @@
 /*ALL MOB-RELATED DEFINES THAT DON'T BELONG IN ANOTHER FILE GO HERE*/
-
-#define STATKEY_STR "strength"
-#define STATKEY_PER "perception"
-#define STATKEY_INT "intelligence"
-#define STATKEY_CON "constitution"
-#define STATKEY_END "endurance"
-#define STATKEY_SPD "speed"
-#define STATKEY_LCK "fortune"
-
-#define MOBSTATS list(STATKEY_STR, STATKEY_PER, STATKEY_INT, STATKEY_CON, STATKEY_END, STATKEY_SPD, STATKEY_LCK)
-
 //Misc mob defines
 
 //for vision cone
@@ -32,13 +21,19 @@
 #define SUBMIT_INTENT 1
 
 //Blood levels
-#define BLOOD_VOLUME_MAXIMUM 2240
-#define BLOOD_VOLUME_SLIME_SPLIT 1120
-#define BLOOD_VOLUME_NORMAL 1120
-#define BLOOD_VOLUME_SAFE 950
-#define BLOOD_VOLUME_OKAY 672
-#define BLOOD_VOLUME_BAD 448
-#define BLOOD_VOLUME_SURVIVE 244
+#define BLOOD_VOLUME_MAXIMUM BLOOD_VOLUME_NORMAL * 3.5
+#define BLOOD_VOLUME_MAX_LETHAL BLOOD_VOLUME_NORMAL * 3
+#define BLOOD_VOLUME_EXCESS BLOOD_VOLUME_NORMAL * 2.5
+#define BLOOD_VOLUME_SAFE_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
+#define BLOOD_VOLUME_NORMAL		1200
+#define BLOOD_VOLUME_SAFE		BLOOD_VOLUME_NORMAL * 0.8
+#define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
+#define BLOOD_VOLUME_RISKY		BLOOD_VOLUME_NORMAL * 0.55
+#define BLOOD_VOLUME_BAD 		BLOOD_VOLUME_NORMAL * 0.4
+#define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
+
+/// How efficiently humans regenerate blood.
+#define BLOOD_REGEN_FACTOR 0.01
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
@@ -67,17 +62,16 @@
 #define MOB_REPTILE		(1<<8)
 #define MOB_SPIRIT		(1<<9)
 
+// ~organ sides
+#define NO_SIDE 0
+#define RIGHT_SIDE (1<<0)
+#define LEFT_SIDE (1<<1)
+
 //Organ defines for carbon mobs
 #define CHRONIC_ARTHRITIS 1
 #define CHRONIC_NERVE_DAMAGE 2
 #define CHRONIC_OLD_FRACTURE 3
 #define CHRONIC_SCAR_TISSUE 4
-
-#define ORGAN_ORGANIC   1
-#define ORGAN_ROBOTIC   2
-
-#define BODYPART_ORGANIC   1
-#define BODYPART_ROBOTIC   2
 
 #define BODYPART_NOT_DISABLED 0
 #define BODYPART_DISABLED_DAMAGE 1
@@ -127,12 +121,14 @@
 #define TRAUMA_RESILIENCE_BASIC 1      //Curable with chems
 #define TRAUMA_RESILIENCE_SURGERY 2    //Curable with brain surgery
 #define TRAUMA_RESILIENCE_LOBOTOMY 3   //Curable with lobotomy
-#define TRAUMA_RESILIENCE_MAGIC 4      //Curable only with magic
-#define TRAUMA_RESILIENCE_ABSOLUTE 5   //This is here to stay
+#define TRAUMA_RESILIENCE_WOUND 4    //Curable by healing the head wound
+#define TRAUMA_RESILIENCE_MAGIC 5      //Curable only with magic
+#define TRAUMA_RESILIENCE_ABSOLUTE 6   //This is here to stay
 
 //Limit of traumas for each resilience tier
 #define TRAUMA_LIMIT_BASIC 3
 #define TRAUMA_LIMIT_SURGERY 2
+#define TRAUMA_LIMIT_WOUND 2
 #define TRAUMA_LIMIT_LOBOTOMY 3
 #define TRAUMA_LIMIT_MAGIC 3
 #define TRAUMA_LIMIT_ABSOLUTE INFINITY
@@ -318,11 +314,15 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.15	//factor at which mob nutrition decreases
+/// Base factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.2
+/// Base Factor at which mob hydration decreases
+#define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_SLOW_METABOLISM 0.1 // needed to have poisons have powerful effect at low doses without making it too fast
+#define REAGENTS_INSANELY_SLOW_METABOLISM 0.01
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
@@ -332,10 +332,34 @@
 #define FLASH_PROTECTION_FLASH 1
 #define FLASH_PROTECTION_WELDER 2
 
+
+/**
+ * Ear protection
+ * These values are additive to determine your overall ear/soundbang protection
+ */
+#define EAR_PROTECTION_NONE 0
+#define EAR_PROTECTION_NORMAL 1
+#define EAR_PROTECTION_HEAVY 2
+#define EAR_PROTECTION_VACUUM 3
+#define EAR_PROTECTION_FULL INFINITY
+
+/**
+ * Soundbang defines
+ * These values are used as argument to determine the strength of the soundbang_act call
+ */
+///Soundbang strength for most things like flashbangs, honkblasts and harm control modules
+#define SOUNDBANG_NORMAL 1
+///Soundbang strength for things like flashbangs in proximity and emagged harm alarm megaphones, cannot be countered by standard ear protection equipment
+#define SOUNDBANG_STRONG 2
+///Soundbang strength for things like changeling shrieks, which can affect robots and aliens as well.
+#define SOUNDBANG_MASSIVE 3
+///Soundbang strength for anything that cannot be stopped unless you're stacked on multiple effects and equipment to counter it (or are simply deaf)
+#define SOUNDBANG_OVERWHELMING 4
+
 #define HUMAN_FIRE_STACK_ICON_NUM	5
 
-#define GRAB_PIXEL_SHIFT_PASSIVE 6
-#define GRAB_PIXEL_SHIFT_AGGRESSIVE 12
+#define GRAB_PIXEL_SHIFT_PASSIVE 5
+#define GRAB_PIXEL_SHIFT_AGGRESSIVE 10
 
 #define PULL_PRONE_SLOWDOWN 2
 #define HUMAN_CARRY_SLOWDOWN 0
@@ -357,6 +381,14 @@
 #define DOING_INTERACTION_WITH_TARGET(user, target) (LAZYACCESS(user.do_afters, target))
 #define DOING_INTERACTION_WITH_TARGET_LIMIT(user, target, max_interaction_count) ((LAZYACCESS(user.do_afters, target) || 0) >= max_interaction_count)
 
+// recent examine defines
+/// How long it takes for an examined atom to be removed from recent_examines. Should be the max of the below time windows
+#define RECENT_EXAMINE_MAX_WINDOW (1.5 SECONDS)
+/// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
+#define EXAMINE_MORE_WINDOW (0.75 SECONDS)
+/// If you yawn while someone nearby has examined you within this time frame, it will force them to yawn as well. Tradecraft!
+#define YAWN_PROPAGATION_EXAMINE_WINDOW (1.5 SECONDS)
+
 //defense intents
 #define INTENT_DODGE 1
 #define INTENT_PARRY 2
@@ -364,11 +396,27 @@
 /// Humans are slowed by the difference between bodytemp and BODYTEMP_COLD_DAMAGE_LIMIT divided by this
 #define COLD_SLOWDOWN_FACTOR				20
 
+//Lying angles, which way your head points
+#define LYING_ANGLE_EAST 90
+#define LYING_ANGLE_WEST 270
+
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
+/// Possible value of [/atom/movable/buckle_dir]. If set to a different (positive-or-zero) value than this, the buckling thing will force a dir on the buckled.
+#define BUCKLE_MATCH_DIR -1
 
 /// Simple mob trait, indicating it may follow continuous move actions controlled by code instead of by user input.
 #define MOVES_ON_ITS_OWN (1<<0)
+/// Simple mob trait, can be fireman carried
+#define CAN_BE_FIREMANNED (1<<1)
+/// Blood volume or status has changed since the last [proc/update_blood_effects] call.
+/// Nowhere near guaranteed to happen only once per life tick, or at all.
+#define BLOOD_UPDATE_QUEUED (1<<4)
+/// This mob can have blood, cached value of [proc/can_have_blood]
+#define LIVING_CAN_HAVE_BLOOD (1<<5)
+
+/// Returns whether or not the given mob can succumb
+#define CAN_SUCCUMB(target) ((HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION) || HAS_TRAIT(target, TRAIT_DEATHS_DOOR)) && !HAS_TRAIT(target, TRAIT_NODEATH))
 
 // Body position defines.
 /// Mob is standing up, usually associated with lying_angle value of 0.
@@ -389,3 +437,6 @@
 #define FORBID_TELEKINESIS_REACH (1<<3)
 /// If resting on the floor is allowed to perform action
 #define ALLOW_RESTING (1<<4)
+
+/// In dynamic human icon gen we don't replace the held item.
+#define NO_REPLACE 0

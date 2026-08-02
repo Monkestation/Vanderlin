@@ -7,7 +7,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
 	icon_state = "clothwraps"
 	item_state = "clothwraps"
-	armor = ARMOR_GLOVES_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT)
 	max_integrity = 50
 	resistance_flags = FIRE_PROOF
@@ -16,14 +16,17 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	salvage_result = /obj/item/natural/cloth
 	unarmed_bonus = 1.125 //Sublight armor with minimal durability, but a greater unarmed damage multiplier. More damage than leather, less than maille. Loadout-selectable.
+	item_weight = 85 GRAMS
 
 /obj/item/clothing/gloves/bandages/weighted
 	name = "weighted bandages"
 	desc = "Thickly-woven bandages that've been wrapped around the hands, fitted with padded knuckleweights. It soaks up the sweat from your palm, strengthens your fists, and protects your knuckles from dislodged teeth."
 	unarmed_bonus = 1.225 //Craftable. Given to non-specialized Monks and other certain subclasses. Provides a +25% unarmed damage bonus over plate gauntlets.
+	item_weight = 230 GRAMS
 
 /obj/item/clothing/gloves/bandages/pugilist
 	name = "pugilistic bandages"

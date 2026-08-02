@@ -10,44 +10,11 @@
 		/datum/quirk/vice/bad_sight
 	)
 
-/datum/quirk/boon/night_vision
-	name = "Night Vision"
-	desc = "You can see better in darkness than most. Perhaps you have elf blood, or maybe you just spent too many nights as a watchman."
-	point_value = -4
-	incompatible_quirks = list(
-		/datum/quirk/vice/bad_sight,
-		/datum/quirk/vice/cyclops_left,
-		/datum/quirk/vice/cyclops_right
-	)
-
-/datum/quirk/boon/night_vision/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
-	H.update_sight()
-
-/datum/quirk/boon/night_vision/on_remove()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.lighting_alpha = initial(H.lighting_alpha)
-	H.update_sight()
-
 /datum/quirk/boon/light_footed
 	name = "Light Footed"
 	desc = "You move with grace and agility. Your steps are quieter then most."
 	point_value = -6
-
-/datum/quirk/boon/light_footed/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_LIGHT_STEP, "[type]")
-
-/datum/quirk/boon/light_footed/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_LIGHT_STEP, "[type]")
+	traits_to_add = list(TRAIT_LIGHT_STEP)
 
 /datum/quirk/boon/quick_learner
 	name = "Quick Learner"
@@ -58,13 +25,7 @@
 	name = "Iron Will"
 	desc = "Your resolve is unshakeable. You handle the horrors of war better then most."
 	point_value = -4
-
-/datum/quirk/boon/iron_will/on_spawn()
-	ADD_TRAIT(owner, TRAIT_STEELHEARTED, "[type]")
-
-/datum/quirk/boon/iron_will/on_remove()
-	if(owner)
-		REMOVE_TRAIT(owner, TRAIT_STEELHEARTED, "[type]")
+	traits_to_add = list(TRAIT_STEELHEARTED)
 
 /datum/quirk/boon/composed
 	name = "Composed"
@@ -102,18 +63,22 @@
 		/datum/language/dwarvish,
 		/datum/language/deepspeak,
 		/datum/language/zalad,
-		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
+		/datum/language/gronnic,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
 	if(!customization_value || !ispath(customization_value, /datum/language))
 		return
+	if(!(customization_value in customization_options))
+		return
 
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		H.grant_language(customization_value)
+	return ..()
 
 /datum/quirk/boon/pet
 	name = "Loyal Companion"
@@ -134,6 +99,7 @@
 	var/mob/living/simple_animal/pet_mob
 
 /datum/quirk/boon/pet/on_spawn()
+	. = ..()
 	if(!get_turf(owner))
 		addtimer(CALLBACK(src, PROC_REF(on_spawn)), 0.5 SECONDS)
 		return
@@ -157,12 +123,6 @@
 	pet_mob.tamed(H)
 	ADD_TRAIT(pet_mob, TRAIT_TINY, "[type]")
 
-	// Set a name if the pet doesn't have a unique one
-	if(pet_mob.name == initial(pet_mob.name))
-		var/new_name = stripped_input(H, "What is your pet's name?", "Pet Name", initial(pet_mob.name), MAX_NAME_LEN)
-		if(new_name)
-			pet_mob.fully_replace_character_name(null, new_name)
-
 	var/datum/component/obeys_commands/command_component = pet_mob.GetComponent(/datum/component/obeys_commands)
 	if(command_component)
 		var/datum/pet_command/follow/follow_command = command_component.available_commands["Follow"]
@@ -171,9 +131,9 @@
 			follow_command.execute_action(pet_mob.ai_controller)
 
 /datum/quirk/boon/pet/on_remove()
+	. = ..()
 	// Don't delete the pet when quirk is removed, just release it
 	if(pet_mob && !QDELETED(pet_mob))
-		pet_mob.owner = null
 		pet_mob.tame = FALSE
 		pet_mob = null
 
@@ -192,62 +152,35 @@
 	)
 	preview_render = FALSE
 
-/datum/quirk/boon/folk_hero/on_spawn()
-	if(!ishuman(owner))
+/datum/quirk/boon/folk_hero/on_examined(mob/user, list/P, list/examine_contents)
+	if(user == owner)
 		return
-	RegisterSignal(owner, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-
-/datum/quirk/boon/folk_hero/on_remove()
-	if(!ishuman(owner))
+	var/mob/living/carbon/source_mob = owner
+	var/mob/living/examiner = user
+	if(!istype(source_mob) || !istype(examiner))
 		return
-	UnregisterSignal(owner, COMSIG_PARENT_EXAMINE)
-
-/datum/quirk/boon/folk_hero/proc/on_examine(mob/living/source, mob/user, list/examine_list)
-	if(!ishuman(user) || !ishuman(source))
+	if(!examiner.mind || !source_mob.mind)
 		return
-
-	var/mob/living/carbon/human/H = source
-	var/mob/living/carbon/human/examiner = user
-
-	if(!examiner.mind || !H.mind)
+	if(GET_MOB_ATTRIBUTE_VALUE(examiner, STAT_INTELLIGENCE) < 8)
 		return
-
-	// Folk heroes are recognized by others
-	if(prob(80)) // 80% chance people recognize them
-		examine_list += span_notice("You recognize [H.real_name], the folk hero!")
-
-		// Add them to known people if not already known
-		if(!examiner.mind.do_i_know(H.mind))
-			examiner.mind.i_know_person(H.mind)
-			H.mind.i_know_person(examiner.mind)
+	var/mob_name = source_mob.get_visible_name("")
+	if(!mob_name || (mob_name == "Unknown"))
+		return
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
+	if(!examiner.mind.do_i_know(source_mob.mind, source_mob.real_name))
+		examiner.mind.learn_target_identity(source_mob.mind, source_mob.real_name)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"
 	desc = "You have great hand-eye coordination and know how to move your fingers fast. All crafts are 10% faster."
 	point_value = -4
-
-/datum/quirk/boon/quick_hands/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_QUICK_HANDS, "[type]")
-
-/datum/quirk/boon/quick_hands/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_QUICK_HANDS, "[type]")
+	traits_to_add = list(TRAIT_QUICK_HANDS)
 
 /datum/quirk/boon/naturalist
 	name = "Naturalist"
 	desc = "Your body is attuned to the natural world. You extract more nourishment from unprocessed, natural foods - fruits, vegetables, and simple preparations sustain you better than they do others."
 	point_value = -8
-
-/datum/quirk/boon/naturalist/on_spawn()
-	ADD_TRAIT(owner, TRAIT_FORAGER, "[type]")
-
-/datum/quirk/boon/naturalist/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_FORAGER, "[type]")
+	traits_to_add = list(TRAIT_FORAGER)
 
 /datum/quirk/boon/always_prepared
 	name = "Always Prepared"
@@ -267,6 +200,7 @@
 	var/obj/item/tent_kit/tent
 
 /datum/quirk/boon/always_prepared/on_spawn()
+	. = ..()
 	if(!owner)
 		return
 	if(!customization_value)
@@ -279,8 +213,8 @@
 		L = new(T)
 		tent = new(T)
 		var/obj/structure/handcart/cart = new(T)
-		cart.put_in(null, L)
-		cart.put_in(null, tent)
+		cart.put_in(null, L, TRUE)
+		cart.put_in(null, tent, TRUE)
 
 	to_chat(owner, span_notice("Your equipment is ready. You're well prepared for the journey ahead."))
 
@@ -302,6 +236,17 @@
 	L = null
 	tent = null
 
+/datum/quirk/boon/packmule
+	name = "Packmule"
+	desc = "There's no such thing as having too much storage! You start with a backpack."
+	point_value = -4
+	preview_render = FALSE
+
+/datum/quirk/boon/packmule/after_job_spawn(datum/job/job)
+	var/obj/item/storage/backpack/backpack/pack = new(get_turf(owner))
+	if(!owner.equip_to_appropriate_slot(pack))
+		owner.put_in_hands(pack)
+
 /datum/quirk/boon/rider
 	name = "Experienced Rider"
 	desc = "You begin with expert riding skills and your own mount."
@@ -321,6 +266,7 @@
 	S.tamed(H)
 
 	to_chat(owner, span_notice("Your trusted mount awaits you."))
+	return ..()
 
 /datum/quirk/boon/rider/after_job_spawn(datum/job/job)
 	. = ..()
@@ -328,22 +274,17 @@
 		return
 
 	var/mob/living/carbon/human/H = owner
-	H.clamped_adjust_skillrank(/datum/skill/misc/riding, 2, 2, TRUE)
+	H.clamped_adjust_skill_level(/datum/attribute/skill/misc/riding, 20, 20, TRUE)
 
 /datum/quirk/boon/beautiful
 	name = "Strikingly Beautiful"
 	desc = "You are remarkably attractive, improving social interactions."
 	point_value = -4
+	traits_to_add = list(TRAIT_BEAUTIFUL)
 
 /datum/quirk/boon/beautiful/on_spawn()
+	. = ..()
 	if(!owner)
 		return
-
-	ADD_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")
 
 	to_chat(owner, span_notice("You catch your reflection and can't help but admire yourself."))
-
-/datum/quirk/boon/beautiful/on_remove()
-	if(!owner)
-		return
-	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")

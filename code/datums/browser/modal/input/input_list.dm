@@ -13,7 +13,7 @@
 	if(isnull(user.client))
 		return null
 
-	var/datum/browser/modal/input_list/input = new(user, message, title, items, default, timeout)
+	var/datum/browser/modal/input_list/input = new(user, message, html_tag("center", title), items, default, timeout)
 	input.open()
 	input.wait()
 	if(input)

@@ -12,7 +12,7 @@
 	pollute_amount = 100
 	wording_choice = "essence of"
 	complete_message = "The oil glistens with herbal essence!"
-	used_skill = /datum/skill/craft/alchemy
+	used_skill = /datum/attribute/skill/craft/alchemy
 	quality_modifier = 1.0
 
 // Rosa Oil (perfume/cosmetic)

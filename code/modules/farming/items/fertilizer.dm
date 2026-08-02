@@ -11,7 +11,7 @@
 
 /obj/item/fertilizer/examine(mob/user)
 	. = ..()
-	if(user.get_skill_level(/datum/skill/labor/farming) >= 3)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= 3)
 		if(nitrogen_content)
 			. += span_info("Restores [nitrogen_content] Nitrogen")
 		if(phosphorus_content)
@@ -47,6 +47,11 @@
 	phosphorus_content = 20
 	potassium_content = 50
 
+/obj/item/fertilizer/ash/Initialize(mapload)
+	. = ..()
+	create_reagents(50)
+	reagents.add_reagent(/datum/reagent/ash, 50)
+
 /obj/item/fertilizer/ash/burn()
 	if(resistance_flags & ON_FIRE)
 		SSfire_burning.processing -= src
@@ -62,3 +67,26 @@
 			prob2break = 100
 		if(prob(prob2break))
 			qdel(src)
+
+/obj/item/fertilizer/ash/attackby(obj/item/attacking_item, mob/living/user)
+	if(istype(attacking_item, /obj/item/reagent_containers/glass))
+		var/obj/item/reagent_containers/glass = attacking_item
+		if(attacking_item.reagents && glass.is_open_container())
+			. = 1 //so the containers don't splash their content on the src while scooping.
+			if(glass.reagents.total_volume >= glass.reagents.maximum_volume)
+				to_chat(user, "<span class='notice'>[glass] is full!</span>")
+				return
+			to_chat(user, "<span class='notice'>I scoop up [src] into [glass]!</span>")
+			reagents.trans_to(glass, reagents.total_volume, transfered_by = user)
+			if(!reagents.total_volume) //scooped up all of it
+				qdel(src)
+				return
+	else
+		return ..()
+
+/obj/item/fertilizer/ash/large
+	name = "large pile of ashes"
+	icon_state = "big_ash"
+	w_class = WEIGHT_CLASS_NORMAL
+	phosphorus_content = 40
+	potassium_content = 100

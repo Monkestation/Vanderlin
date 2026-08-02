@@ -7,7 +7,7 @@
 
 	cooldown_time = 2 MINUTES
 	invocation_type = INVOCATION_NONE
-	associated_skill = /datum/skill/craft/bombs
+	associated_skill = /datum/attribute/skill/craft/bombs
 	item_type = /obj/item/smokebomb
 	item_duration = null
 	item_outline ="#0e5c21"

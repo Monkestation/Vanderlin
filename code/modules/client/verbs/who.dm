@@ -25,7 +25,7 @@
 				else
 					entry += " - Playing as [C.mob.real_name]"
 				switch(C.mob.stat)
-					if(UNCONSCIOUS)
+					if(UNCONSCIOUS,HARD_CRIT)
 						entry += " - <font color='darkgray'><b>UNCON</b></font>"
 					if(DEAD)
 						if(isobserver(C.mob))
@@ -39,9 +39,6 @@
 				if(C.mob.mind)
 					if(C.mob.mind.special_role)
 						entry += " - <b><font color='red'>[C.mob.mind.special_role]</font></b>"
-			if(C.whitelisted())
-				wled++
-				entry += "(WL)"
 			entry += "</span>"
 			Lines += entry
 	else

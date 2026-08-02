@@ -3,7 +3,7 @@
 	var/size_y = 100
 	var/datum/island_biome/biome
 	var/turf/water_turf = /turf/open/water/ocean
-	var/turf/deep_water_turf = /turf/open/water/ocean/deep
+	var/turf/deep_water_turf = /turf/open/water/ocean/abyss
 	var/turf/wall_turf = /turf/closed/mineral/random
 	var/island_threshold = 0.25
 	var/beach_width = 2
@@ -647,9 +647,7 @@
 			var/chosen = pickweight(valid_fauna)
 			if(chosen)
 				var/mob/living/mob = new chosen(T)
-				mob.faction |= "islander"
-				SSisland_mobs.register_mob(mob)
-
+				mob.add_faction("islander")
 
 /datum/island_generator/proc/build_elevation(x, y, z, height, dist_to_water, temperature, moisture)
 	for(var/level = 1 to height)

@@ -25,6 +25,7 @@
 	force = 20
 	throwforce = 20
 	throw_range = 2
+	item_weight = 5 KILOGRAMS
 	var/datum/looping_sound/dmusloop/soundloop
 	var/curfile
 	var/playing = FALSE
@@ -53,24 +54,27 @@
 	else
 		icon_state = "mbox[loaded]"
 
-/obj/item/dmusicbox/attackby(obj/item/P, mob/user, params)
-	if(!loaded)
-		if(istype(P, /obj/item/coin/gold))
-			loaded=TRUE
-			qdel(P)
-			update_appearance(UPDATE_ICON_STATE)
-			playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
-			return
-	return ..()
+/obj/item/dmusicbox/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(loaded)
+		return NONE
 
-/obj/item/dmusicbox/attack_self_secondary(mob/user, params)
+	if(!istype(tool, /obj/item/coin/gold))
+		return NONE
+
+	loaded = TRUE
+	qdel(tool)
+	update_appearance(UPDATE_ICON_STATE)
+	playsound(src, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/dmusicbox/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	attack_hand_secondary(user, params)
+	attack_hand_secondary(user, modifiers)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/dmusicbox/attack_hand_secondary(mob/user, params)
+/obj/item/dmusicbox/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -99,7 +103,7 @@
 		return
 
 	var/filename = "[infile]"
-	var/file_ext = lowertext(copytext(filename, -4))
+	var/file_ext = LOWER_TEXT(copytext(filename, -4))
 	var/file_size = length(infile)
 
 	if(file_ext != ".ogg")
@@ -115,7 +119,7 @@
 	loaded = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/dmusicbox/attack_self(mob/living/user, params)
+/obj/item/dmusicbox/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

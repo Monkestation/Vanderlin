@@ -17,7 +17,7 @@
 
 /datum/objective/personal/kick_groin/proc/on_kick_attempted(datum/source, mob/living/target, zone_hit, damage_blocked)
 	SIGNAL_HANDLER
-	if(completed || target.gender != MALE || target.stat == DEAD || zone_hit != BODY_ZONE_PRECISE_GROIN)
+	if(completed || !target.client || target.gender != MALE || target.stat == DEAD || zone_hit != BODY_ZONE_PRECISE_GROIN)
 		return
 
 	if(damage_blocked)
@@ -33,8 +33,8 @@
 
 /datum/objective/personal/kick_groin/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, TRAIT_GENERIC)
-	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, STATKEY_STR, 1)
+	ADD_TRAIT(owner.current, TRAIT_NUTCRACKER, OBJECTIVE_TRAIT)
+	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, list(STAT_STRENGTH = 1))
 
 /datum/objective/personal/kick_groin/update_explanation_text()
 	explanation_text = "Kick a man in the balls to show your dominance and earn Zizo's approval!"

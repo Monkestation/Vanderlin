@@ -18,14 +18,17 @@
 	if(!category || QDELETED(src))
 		return
 
+	var/datum/weakref/master_ref
+	if(isatom(new_master))
+		master_ref = WEAKREF(new_master)
 	var/atom/movable/screen/alert/thealert
 	if(alerts[category])
 		thealert = alerts[category]
 		if(thealert.override_alerts)
 			return 0
-		var/obj/old_master = thealert.master_ref?.resolve()
-		if(new_master && new_master != old_master)
-			WARNING("[src] threw alert [category] with new_master [new_master] while already having that alert with master [old_master]")
+		if(master_ref && thealert.master_ref && master_ref != thealert.master_ref)
+			var/datum/current_master = thealert.master_ref.resolve()
+			WARNING("[src] threw alert [category] with new_master [new_master] while already having that alert with master [current_master]")
 			clear_alert(category)
 			return .()
 		else if(thealert.type != type)
@@ -45,15 +48,10 @@
 	thealert.mob_viewer = src
 
 	if(new_master)
-		var/old_layer = new_master.layer
-		var/old_plane = new_master.plane
-		new_master.plane = FLOAT_PLANE
-		thealert.add_overlay(new_master)
-		new_master.layer = old_layer
-		new_master.plane = old_plane
-		thealert.icon_state = "status" // We'll set the icon to the client's ui pref in reorganize_alerts()
-		thealert.master_ref = WEAKREF(new_master)
-	else
+		thealert.master_ref = master_ref
+		thealert.RegisterSignal(new_master, COMSIG_ATOM_UPDATE_APPEARANCE, TYPE_PROC_REF(/atom/movable/screen/alert, on_master_update_appearance))
+		thealert.update_appearance(UPDATE_OVERLAYS)
+	else if(severity)
 		thealert.icon_state = "[initial(thealert.icon_state)][severity]"
 		thealert.severity = severity
 
@@ -99,6 +97,11 @@
 	var/alert_group = ALERT_STATUS //decides where on the screen the alert shows up, if it's a debuff, status effect, or buff
 	no_over_text = FALSE
 
+	///If set, this overlay will be added to the icon.
+	var/overlay_state
+	///The file to fetch the overlay from
+	var/overlay_icon = 'icons/mob/screen_alert.dmi'
+
 /atom/movable/screen/alert/MouseEntered(location,control,params)
 	..()
 //	if(!QDELETED(src))
@@ -109,6 +112,30 @@
 	..()
 //	closeToolTip(usr)
 
+/atom/movable/screen/alert/proc/on_master_update_appearance(datum/source)
+	SIGNAL_HANDLER
+	update_appearance(UPDATE_OVERLAYS)
+
+/atom/movable/screen/alert/update_overlays()
+	. = ..()
+	var/atom/our_master = master_ref?.resolve()
+	if(istype(our_master) && !QDELETED(our_master))
+		. += add_atom_icon(our_master)
+	if(overlay_state)
+		. += mutable_appearance(overlay_icon, overlay_state)
+
+///Returns a copy of the appearance of the atom, with its base pixel coordinates. Useful for overlays
+/atom/movable/screen/alert/proc/add_atom_icon(atom/atom)
+	var/mutable_appearance/atom_appearance = new(atom)
+	atom_appearance.appearance_flags = KEEP_TOGETHER
+	atom_appearance.layer = FLOAT_LAYER
+	atom_appearance.plane = FLOAT_PLANE
+	atom_appearance.dir = SOUTH
+	atom_appearance.pixel_x = atom.base_pixel_x
+	atom_appearance.pixel_y = atom.base_pixel_y
+	atom_appearance.pixel_w = atom.base_pixel_w
+	atom_appearance.pixel_z = atom.base_pixel_z
+	return strip_appearance_underlays(atom_appearance)
 
 //Gas alerts
 /atom/movable/screen/alert/not_enough_oxy

@@ -6,7 +6,7 @@
 	tier = 4
 	minimum_amount = 0
 
-/datum/chimeric_node/input/reagent/alcohol/on_reagent_added(datum/reagent/consumed_reagent, consumed_amount, method)
+/datum/chimeric_node/input/reagent/alcohol/on_reagent_added(datum/source, datum/reagent/consumed_reagent, consumed_amount)
 	if(istype(consumed_reagent, /datum/reagent/consumable/ethanol))
 		trigger_output(consumed_amount * 0.2)
 		return

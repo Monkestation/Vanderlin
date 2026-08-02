@@ -3,6 +3,7 @@
 /obj/item/hourglass
 	name = "hourglass"
 	desc = ""
+	item_weight = 300 GRAMS
 	var/obj/effect/countdown/hourglass/countdown
 	var/time = 1 MINUTES
 	var/finish_time //So countdown doesn't need to fiddle with timers
@@ -11,7 +12,11 @@
 	icon = 'icons/obj/hourglass.dmi'
 	icon_state = "hourglass_idle"
 
-/obj/item/hourglass/attack_self(mob/user, params)
+/obj/item/hourglass/Initialize(mapload)
+	. = ..()
+	countdown = new(src)
+
+/obj/item/hourglass/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(hand_activated)
 		toggle(user)

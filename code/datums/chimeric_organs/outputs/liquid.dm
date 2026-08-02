@@ -13,7 +13,7 @@
 	var/list/reagent_types = list(/datum/reagent/medicine,
 								  /datum/reagent/drug,
 								  /datum/reagent/toxin,
-								  /datum/reagent/poison,
+								  /datum/reagent/poison/herbal,
 								  /datum/reagent/consumable,
 								  /datum/reagent/consumable/ethanol)
 	var/datum/reagent/reagent_type = pick(reagent_types)
@@ -22,7 +22,7 @@
 	if(reagent_type == /datum/reagent/consumable)
 		pickers = typesof(reagent_type) - typesof(/datum/reagent/consumable/ethanol)
 	else
-		pickers = typesof(reagent_type)
+		pickers = subtypesof(reagent_type)
 
 	var/datum/reagent/picked_reagent = pick(pickers)
 	if(!good_reagent)

@@ -1,7 +1,31 @@
+/datum/attribute_holder/sheet/job/lich
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 5,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = -1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/craft/alchemy = 60,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+
+		/datum/attribute/skill/labor/mathematics = 40
+	)
+
 /datum/antagonist/lich
-	name = "Lich"
-	roundend_category = "Lich"
-	antagpanel_category = "Lich"
+	name = ROLE_LICH
+	roundend_category = ROLE_LICH
+	antagpanel_category = ROLE_LICH
 	job_rank = ROLE_LICH
 	antag_hud_type = ANTAG_HUD_NECROMANCY
 	antag_hud_name = "necromancer"
@@ -22,7 +46,7 @@
 		TRAIT_NOPAIN,
 		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_INHUMENCAMP,
 		TRAIT_NOMOOD,
 		TRAIT_NOLIMBDISABLE,
@@ -31,6 +55,7 @@
 		TRAIT_SEEPRICES,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
 	)
@@ -65,7 +90,7 @@
 	move_to_spawnpoint()
 	remove_job()
 	lich.delete_equipment()
-	owner.current?.remove_stat_modifier(STATMOD_AGE)
+	lich.update_age_stats(lich.age, TRUE)
 	skele_look()
 	equip_lich()
 
@@ -73,6 +98,7 @@
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	return ..()
 
 /datum/antagonist/lich/greet()
 	. = ..()
@@ -81,7 +107,8 @@
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/lichintro.ogg', 80, FALSE, pressure_affected = FALSE)
 
 /datum/antagonist/lich/move_to_spawnpoint()
-	owner.current.forceMove(pick(GLOB.lich_starts))
+	if(SSmapping.config.map_name != "Voyage")
+		owner.current.forceMove(pick(GLOB.lich_starts))
 
 /datum/antagonist/lich/proc/skele_look()
 	var/mob/living/carbon/human/L = owner.current
@@ -89,27 +116,29 @@
 	L.skele_look()
 
 /datum/antagonist/lich/proc/equip_lich()
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
+	owner.forget_and_be_forgotten()
 	var/mob/living/carbon/human/L = owner.current
 
 	L.mana_pool.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES
 	L.mana_pool.set_intrinsic_recharge(MANA_SOULS)
 	L.mana_pool.ethereal_recharge_rate += 0.2
 
+	ADD_TRAIT(L, TRAIT_NOBLOOD, TRAIT_GENERIC)
+
+	L.set_faction(list(FACTION_UNDEAD))
+	L.mob_biotypes |= MOB_UNDEAD
+	L.grant_undead_eyes()
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
+	L.skeletonize(FALSE)
+
+	L.equipOutfit(/datum/outfit/lich)
+	L.set_patron(/datum/patron/inhumen/zizo)
+
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.faction = list(FACTION_UNDEAD)
 	if(length(L.quirks))
 		L.clear_quirks()
-	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
-	L.grant_undead_eyes()
-	L.skeletonize(FALSE)
-	L.equipOutfit(/datum/outfit/lich)
-	L.set_patron(/datum/patron/inhumen/zizo)
 
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -127,35 +156,17 @@
 	beltl = /obj/item/weapon/knife/dagger/steel
 	r_hand = /obj/item/weapon/polearm/woodstaff
 
-	H.set_skillrank(/datum/skill/misc/reading, 6, TRUE)
-	H.set_skillrank(/datum/skill/craft/alchemy, 5, TRUE)
-	H.set_skillrank(/datum/skill/magic/arcane, 5, TRUE)
-	H.set_skillrank(/datum/skill/misc/riding, 4, TRUE)
-	H.set_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.set_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.set_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	H.set_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.set_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.set_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 4, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.change_stat(STATKEY_STR, -1)
-	H.change_stat(STATKEY_INT, 5)
-	H.change_stat(STATKEY_CON, 5)
-	H.change_stat(STATKEY_END, -1)
-	H.change_stat(STATKEY_SPD, -1)
 	H.adjust_spell_points(17) //Same as CM - Until they receive their spellbook.
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)
 		H.dna.species.native_language = "Zizo Chant"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
-	H.ambushable = FALSE
+	ADD_TRAIT(H, TRAIT_NOAMBUSH, JOB_TRAIT)
 
-	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "LICH"), 5 SECONDS)
+	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), ROLE_LICH), 5 SECONDS)
 
 /datum/outfit/lich/post_equip(mob/living/carbon/human/H)
 	..()
@@ -227,7 +238,7 @@
 
 	lich_mob.skeletonize(FALSE)
 
-	lich_mob.faction = list(FACTION_UNDEAD)
+	lich_mob.set_faction(list(FACTION_UNDEAD))
 	if(length(lich_mob.quirks))
 		lich_mob.clear_quirks()
 	lich_mob.mob_biotypes |= MOB_UNDEAD
@@ -237,8 +248,8 @@
 /obj/item/phylactery
 	name = "phylactery"
 	desc = "Looks like it is filled with some intense power."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "soulstone"
+	icon = 'icons/roguetown/items/gems.dmi'
+	icon_state = "necro_crystal"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
@@ -263,3 +274,17 @@
 	var/offset = prob(50) ? -2 : 2
 	animate(src, pixel_x = offset, time = 0.2 DECISECONDS, loop = -1, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL) //start shaking
 	visible_message(span_warning("[src] begins to glow and shake violently!"))
+
+/obj/item/broken_phylactery
+	name = "exhausted phylactery"
+	desc = "A memento from a victory long past."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "purified_soulstone"
+	item_state = "electronic"
+	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
+	layer = HIGH_OBJ_LAYER
+	w_class = WEIGHT_CLASS_TINY
+	light_system = MOVABLE_LIGHT
+	light_color = "#7f84b4"
+	resistance_flags = INDESTRUCTIBLE

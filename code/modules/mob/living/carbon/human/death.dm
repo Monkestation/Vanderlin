@@ -42,7 +42,8 @@
 
 	if(client || mind)
 		record_round_statistic(STATS_DEATHS)
-		var/area_of_death = lowertext(get_area_name(src))
+		add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_DEATH, 1)
+		var/area_of_death = LOWER_TEXT(get_area_name(src))
 		if(area_of_death == "wilderness")
 			record_round_statistic(STATS_FOREST_DEATHS)
 		if(is_noble())
@@ -54,22 +55,18 @@
 				record_round_statistic(STATS_CLERGY_DEATHS)
 			if(mind.has_antag_datum(/datum/antagonist/vampire))
 				record_round_statistic(STATS_VAMPIRES_KILLED)
-			if(mind.has_antag_datum(/datum/antagonist/zombie) || mind.has_antag_datum(/datum/antagonist/skeleton) || mind.has_antag_datum(/datum/antagonist/lich))
+			if(IS_DEADITE(src) || mind.has_antag_datum(/datum/antagonist/skeleton) || mind.has_antag_datum(/datum/antagonist/lich))
 				record_round_statistic(STATS_DEADITES_KILLED)
 
-	if(!gibbed)
-		if(!has_world_trait(/datum/world_trait/necra_requiem))
-			if(!is_in_roguetown(src) || has_world_trait(/datum/world_trait/zizo_defilement))
-				zombie_check()
-
 	stop_sound_channel(CHANNEL_HEARTBEAT)
-	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
-	if(H)
-		H.beat = BEAT_NONE
+	heartbeat_sound = BEAT_NONE
+	pulse = PULSE_NONE
+	for(var/obj/item/organ/heart/heart as anything in getorganslotlist(ORGAN_SLOT_HEART))
+		heart.Stop()
 
 	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
 		MOBTIMER_SET(src, MT_DEATHDIED)
-		if(H in SStreasury.bank_accounts)
+		if(src in SStreasury.bank_accounts)
 			for(var/obj/structure/fake_machine/camera/C in view(7, src))
 				var/area_name = A.name
 				var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
@@ -77,37 +74,37 @@
 				SSroguemachine.death_queue += texty
 				break
 
-		var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
-		if(buckled)
-			if(istype(buckled, /obj/structure/fluff/psycross) || istype(buckled, /obj/machinery/light/fueled/campfire/pyre))
-				if((real_name in GLOB.excommunicated_players) || (real_name in GLOB.heretical_players))
-					yeae = FALSE
-				if(real_name in GLOB.outlawed_players)
-					yeae = FALSE
+	var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
+	if(buckled)
+		if(istype(buckled, /obj/structure/fluff/psycross) || istype(buckled, /obj/machinery/light/fueled/campfire/pyre))
+			if((real_name in GLOB.excommunicated_players) || (real_name in GLOB.heretical_players))
+				yeae = FALSE
+			if(real_name in GLOB.outlawed_players)
+				yeae = FALSE
 
-		if(mind && yeae)
-			// Omens are handled here
-			if((is_lord_job(mind.assigned_role)))
-				addomen(OMEN_NOLORD)
-				for(var/mob/living/carbon/human/HU in GLOB.player_list)
-					if(HU.stat <= CONSCIOUS && is_in_roguetown(HU))
-						HU.playsound_local(get_turf(HU), 'sound/music/lorddeath.ogg', 80, FALSE, pressure_affected = FALSE)
+	if(mind && yeae)
+		// Omens are handled here
+		if((is_lord_job(mind.assigned_role)))
+			addomen(OMEN_NOLORD)
+			for(var/mob/living/carbon/human/HU in GLOB.player_list)
+				if(HU.stat <= CONSCIOUS && is_in_roguetown(HU))
+					HU.playsound_local(get_turf(HU), 'sound/music/lorddeath.ogg', 80, FALSE, pressure_affected = FALSE)
 
-			if(is_priest_job(mind.assigned_role))
-				addomen(OMEN_NOPRIEST)
+		if(is_priest_job(mind.assigned_role))
+			addomen(OMEN_NOPRIEST)
 
-		if(!gibbed && yeae)
-			for(var/mob/living/carbon/human/HU in viewers(7, src))
-				if(HU != src && !HU.is_blind())
-					if(!HAS_TRAIT(HU, TRAIT_VILLAIN)) //temporary measure for npc skeletons
-						if(HU.dna?.species && dna?.species)
-							if(HU.dna.species.id == dna.species.id)
-								var/mob/living/carbon/D = HU
-								if(D.has_quirk(/datum/quirk/vice/maniac))
-									D.add_stress(/datum/stress_event/viewdeathmaniac)
-									D.sate_addiction(/datum/quirk/vice/maniac)
-								else
-									D.add_stress(/datum/stress_event/viewdeath)
+	if(!gibbed && yeae)
+		for(var/mob/living/carbon/human/HU in viewers(7, src))
+			if(HU != src && !HU.is_blind())
+				if(!HAS_TRAIT(HU, TRAIT_VILLAIN)) //temporary measure for npc skeletons
+					if(HU.dna?.species && dna?.species)
+						if(HU.dna.species.id == dna.species.id)
+							var/mob/living/carbon/D = HU
+							if(D.has_quirk(/datum/quirk/vice/addiction/sadist))
+								D.add_stress(/datum/stress_event/viewdeathmaniac)
+								D.sate_addiction(/datum/quirk/vice/addiction/sadist)
+							else
+								D.add_stress(/datum/stress_event/viewdeath)
 
 	dna.species.spec_death(gibbed, src) // parent call deletes dna
 
@@ -117,10 +114,10 @@
 		SSblackbox.ReportDeath(src)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()])", LOG_ATTACK)
 
-/mob/living/carbon/human/proc/zombie_check()
+/mob/living/carbon/proc/zombie_check()
 	if(!mind)
 		return
-	var/datum/antagonist/zombie = mind.has_antag_datum(/datum/antagonist/zombie)
+	var/datum/antagonist/zombie = IS_DEADITE(src)
 	if(zombie)
 		return zombie
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
@@ -131,6 +128,9 @@
 		return
 	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
 		return
+	var/obj/item/bodypart/chest/c = get_bodypart()
+	if(c?.has_wound(/datum/wound/black_briar_curse/chest))
+		return
 	return mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
@@ -140,9 +140,9 @@
 			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 				continue
 			var/mob/living/carbon/V = CA
-			if(V.has_quirk(/datum/quirk/vice/maniac))
+			if(V.has_quirk(/datum/quirk/vice/addiction/sadist))
 				V.add_stress(/datum/stress_event/viewgibmaniac)
-				V.sate_addiction(/datum/quirk/vice/maniac)
+				V.sate_addiction(/datum/quirk/vice/addiction/sadist)
 				continue
 			V.add_stress(/datum/stress_event/viewgib)
 	. = ..()

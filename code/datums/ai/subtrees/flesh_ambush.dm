@@ -23,7 +23,7 @@
 	// Find a dark spot to hide
 	var/list/possible_ambush_spots = list()
 	for(var/turf/T in orange(7, flesh))
-		if((T.opacity || T.get_lumcount() < 0.3))
+		if((IS_OPAQUE_TURF(T) || T.get_lumcount() < 0.3))
 			if(!flesh.CanReach(T))
 				continue
 			possible_ambush_spots += T

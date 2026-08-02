@@ -28,7 +28,6 @@
 	var/charge_pointer = null // Simple unique charge icon
 	var/charged_pointer = null // Simple unique charged icon
 	var/clickcd = CLICK_CD_MELEE //the cd invoked clicking on stuff with this intent
-	var/recovery = 0		//RTD unable to move for this duration after an attack without becoming off balance
 	var/list/charge_invocation //list of stuff to say while charging
 	var/no_early_release = FALSE //we can't shoot off early
 	var/movement_interrupt = FALSE //we cancel charging when changing mob direction, for concentration spells
@@ -38,6 +37,8 @@
 	var/keep_looping = TRUE
 	var/damfactor = 1 //multiplied by weapon's force for damage
 	var/penfactor = 0 //see armor_penetration
+	var/knockback = 0 //If the weapon can knockdown with a large endurance difference between players
+	var/acc_bonus = 0 //Accuracy bonus to hitting bodyparts
 	var/charging_slowdown = 0
 	var/warnoffset = 0
 	var/swingdelay = 0
@@ -355,48 +356,6 @@
 	blade_class = BCLASS_DRILL
 	chargetime = 0.3
 	swingdelay = 3
-
-/datum/intent/shoot //shooting crossbows or other guns, no parrydrain
-	name = "shoot"
-	icon_state = "inshoot"
-	tranged = 1
-	warnie = "aimwarn"
-	chargetime = 0.1
-	no_early_release = FALSE
-	item_damage_type = "stab"
-	noaa = TRUE
-	charging_slowdown = 2
-	warnoffset = 20
-
-/datum/intent/shoot/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] aims [master_item]!</span>")
-
-/datum/intent/arc
-	name = "arc"
-	icon_state = "inarc"
-	tranged = 1
-	warnie = "aimwarn"
-	item_damage_type = "blunt"
-	chargetime = 0
-	no_early_release = FALSE
-	noaa = TRUE
-	charging_slowdown = 3
-	warnoffset = 20
-
-/datum/intent/proc/arc_check()
-	return FALSE
-
-/datum/intent/arc/arc_check()
-	return TRUE
-
-/datum/intent/arc/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] aims [master_item]!</span>")
 
 /datum/intent/simple/headbutt
 	name = "headbutt"

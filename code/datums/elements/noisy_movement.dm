@@ -1,6 +1,6 @@
 /datum/element/noisy_movement
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	var/movement_sound
 	var/volume
 
@@ -16,6 +16,6 @@
 
 /datum/element/noisy_movement/proc/play_sound(atom/movable/source, old_loc, movement_dir, forced)
 	SIGNAL_HANDLER
-	if(!forced)
+	if(!forced && !CHECK_MOVE_LOOP_FLAGS(source, MOVEMENT_LOOP_OUTSIDE_CONTROL))
 		playsound(source, movement_sound, volume, TRUE)
 

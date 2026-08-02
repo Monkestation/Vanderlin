@@ -6,7 +6,7 @@
 		/datum/slapcraft_step/item/stoneblock/third,
 		/datum/slapcraft_step/use_item/masonry/hammer,
 		)
-	result_type = /obj/structure/fluff/statue/carving_block
+	result_type = /obj/structure/fluff/carving_block
 	craftdiff = 3
 	category = "Statues"
 

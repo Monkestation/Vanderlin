@@ -155,9 +155,8 @@
 	var/datum/browser/panel = new(usr, "banpanel", "Banning Panel", 910, panel_height)
 	panel.add_stylesheet("admin_panelscss", 'html/admin/admin_panels.css')
 	panel.add_stylesheet("banpanelcss", 'html/admin/banpanel.css')
-	if(usr.client.prefs.tgui_fancy) //some browsers (IE8) have trouble with unsupported css3 elements and DOM methods that break the panel's functionality, so we won't load those if a user is in no frills tgui mode since that's for similar compatability support
-		panel.add_stylesheet("admin_panelscss3", 'html/admin/admin_panels_css3.css')
-		panel.add_script("banpaneljs", 'html/admin/banpanel.js')
+	panel.add_stylesheet("admin_panelscss3", 'html/admin/admin_panels_css3.css')
+	panel.add_script("banpaneljs", 'html/admin/banpanel.js')
 	var/list/output = list("<form method='get' action='?src=[REF(src)]'>[HrefTokenFormField()]")
 	output += {"<input type='hidden' name='src' value='[REF(src)]'>
 	<label class='inputlabel checkbox'>Key:
@@ -276,9 +275,60 @@
 			while(query_get_banned_roles.NextRow())
 				banned_from += query_get_banned_roles.item[1]
 			qdel(query_get_banned_roles)
+
+		var/list/role_categories = list(
+			"Noblemen" = GLOB.noble_courthand_positions,
+			"Garrison" = GLOB.garrison_positions,
+			"Church" = GLOB.church_positions,
+			"Inquisition" = GLOB.inquisition_positions,
+			"Serfs" = GLOB.serf_positions,
+			"Peasants" = GLOB.peasant_positions,
+			"Apprentices" = GLOB.apprentices_positions,
+			"Youngfolk" = GLOB.youngfolk_positions,
+			"Company" = GLOB.company_positions,
+			"Outsiders" = GLOB.allmig_positions,
+			"Gallowband" = GLOB.gallowband_positions,
+		)
+
+		// Build a flat lookup of every role title that's already in a category,
+		// so we can figure out what's missing.
+		var/list/categorized_roles = list()
+		for(var/category in role_categories)
+			for(var/role_title in role_categories[category])
+				categorized_roles[role_title] = TRUE
+
+		// Catch anything not in a named category so it's never silently unbannable.
+		var/list/uncategorized = list()
+		for(var/datum/job/job_type as anything in SSjob.all_occupations)
+			var/title = job_type.title
+			if(title == "NOPE")
+				continue
+			if(istype(job_type, /datum/job/advclass))
+				continue
+			if(title && !(title in categorized_roles))
+				uncategorized += title
+		if(uncategorized.len)
+			role_categories["Other"] = uncategorized
+
+		for(var/category in role_categories)
+			var/list/roles = role_categories[category]
+			if(!roles || !roles.len)
+				continue
+			var/category_class = "cat_[replacetext(LOWER_TEXT(category), " ", "_")]"
+			output += "<div class='category'>"
+			output += "<label class='inputlabel checkbox'><b>[category]</b>"
+			output += "<input type='checkbox' id='[category_class]_head' name='[category_class]' value='1' onclick='toggle_checkboxes(this)'>"
+			output += "<div class='inputbox'></div></label>"
+			output += "<div class='rolelist'>"
+			for(var/role_two in roles)
+				var/role_id = "role_[replacetext(LOWER_TEXT(role_two), " ", "_")]"
+				output += "<label class='inputlabel checkbox'>[role_two]"
+				output += "<input type='checkbox' id='[role_id]' class='[category_class]' name='[role_two]' value='1'[(role_two in banned_from) ? " checked" : ""]>"
+				output += "<div class='inputbox'></div></label>"
+			output += "</div>"
+			output += "</div>"
 		output += "</div></div>"
-		output += "</div>"
-	output += "</form>"
+	output += "</div>"
 	panel.set_content(jointext(output, ""))
 	panel.open()
 
@@ -381,7 +431,7 @@
 			if("server")
 				roles_to_ban += "Server"
 			if("role")
-				href_list.Remove("Command", "Security", "Engineering", "Medical", "Science", "Supply", "Silicon", "Abstract", "Service", "Ghost and Other Roles", "Antagonist Positions") //remove the role banner hidden input values
+				href_list.Remove("cat_noblemen", "cat_garrison", "cat_church", "cat_inquisition", "cat_serfs", "cat_peasants", "cat_apprentices", "cat_youngfolk", "cat_company", "cat_outsiders", "cat_gallowband", "cat_other") //remove the role category header hidden input values
 				if(href_list[href_list.len] == "roleban_delimiter")
 					error_state += "Role ban was selected but no roles to ban were selected."
 				else
@@ -422,11 +472,11 @@
 					player_cid = query_create_ban_get_player.item[3]
 		else
 			if(use_last_connection)
-				if(alert(usr, "[player_key]/([player_ckey]) has not been seen before, unable to use IP and CID from last connection. Are you sure you want to create a ban for them?", "Unknown key", "Yes", "No", "Cancel") != "Yes")
+				if(tgui_alert(usr, "[player_key]/([player_ckey]) has not been seen before, unable to use IP and CID from last connection. Are you sure you want to create a ban for them?", "Unknown key", list("Yes", "No")) != "Yes")
 					qdel(query_create_ban_get_player)
 					return
 			else
-				if(alert(usr, "[player_key]/([player_ckey]) has not been seen before, are you sure you want to create a ban for them?", "Unknown key", "Yes", "No", "Cancel") != "Yes")
+				if(tgui_alert(usr, "[player_key]/([player_ckey]) has not been seen before, are you sure you want to create a ban for them?", "Unknown key", list("Yes", "No")) != "Yes")
 					qdel(query_create_ban_get_player)
 					return
 		qdel(query_create_ban_get_player)
@@ -459,7 +509,7 @@
 	duration = text2num(duration)
 	if (!(interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR")))
 		interval = "MINUTE"
-	var/time_message = "[duration] [lowertext(interval)]" //no DisplayTimeText because our duration is of variable interval type
+	var/time_message = "[duration] [LOWER_TEXT(interval)]" //no DisplayTimeText because our duration is of variable interval type
 	if(duration > 1) //pluralize the interval if necessary
 		time_message += "s"
 	var/note_reason = "Banned from [roles_to_ban[1] == "Server" ? "the server" : " Roles: [roles_to_ban.Join(", ")]"] [isnull(duration) ? "permanently" : "for [time_message]"] - [reason]"
@@ -599,7 +649,7 @@
 			var/pagecount = 1
 			var/list/pagelist = list()
 			while(bancount > 0)
-				pagelist += "<a href='?_src_=holder;[HrefToken()];unbanpagecount=[pagecount - 1];unbankey=[player_key];unbanadminkey=[admin_key];unbanip=[player_ip];unbancid=[player_cid]'>[pagecount == page ? "<b>\[[pagecount]\]</b>" : "\[[pagecount]\]"]</a>"
+				pagelist += "<a href='byond://?_src_=holder;[HrefToken()];unbanpagecount=[pagecount - 1];unbankey=[player_key];unbanadminkey=[admin_key];unbanip=[player_ip];unbancid=[player_cid]'>[pagecount == page ? "<b>\[[pagecount]\]</b>" : "\[[pagecount]\]"]</a>"
 				bancount -= bansperpage
 				pagecount++
 			output += pagelist.Join(" | ")
@@ -659,7 +709,7 @@
 			var/ban_round_id  = query_unban_search_bans.item[3]
 			var/role = query_unban_search_bans.item[4]
 			//make the href for unban here so only the search parameters are passed
-			var/unban_href = "<a href='?_src_=holder;[HrefToken()];unbanid=[ban_id];unbankey=[player_key];unbanadminkey=[admin_key];unbanip=[player_ip];unbancid=[player_cid];unbanrole=[role];unbanpage=[page]'>Unban</a>"
+			var/unban_href = "<a href='byond://?_src_=holder;[HrefToken()];unbanid=[ban_id];unbankey=[player_key];unbanadminkey=[admin_key];unbanip=[player_ip];unbancid=[player_cid];unbanrole=[role];unbanpage=[page]'>Unban</a>"
 			var/expiration_time = query_unban_search_bans.item[5]
 			//we don't cast duration as num because if the duration is large enough to be converted to scientific notation by byond then the + character gets lost when passed through href causing SQL to interpret '4.321e 007' as '4'
 			var/duration = query_unban_search_bans.item[6]
@@ -684,9 +734,9 @@
 				output += "<br>Unbanned by <b>[unban_key]</b> on <b>[unban_datetime]</b> during round <b>#[unban_round_id]</b>."
 			output += "</div><div class='container'><div class='reason'>[reason]</div><div class='edit'>"
 			if(!expired && !unban_datetime)
-				output += "<a href='?_src_=holder;[HrefToken()];editbanid=[ban_id];editbankey=[player_key];editbanip=[player_ip];editbancid=[player_cid];editbanrole=[role];editbanduration=[duration];editbanadmins=[applies_to_admins];editbanreason=[url_encode(reason)];editbanpage=[page];editbanadminkey=[admin_key]'>Edit</a><br>[unban_href]"
+				output += "<a href='byond://?_src_=holder;[HrefToken()];editbanid=[ban_id];editbankey=[player_key];editbanip=[player_ip];editbancid=[player_cid];editbanrole=[role];editbanduration=[duration];editbanadmins=[applies_to_admins];editbanreason=[url_encode(reason)];editbanpage=[page];editbanadminkey=[admin_key]'>Edit</a><br>[unban_href]"
 			if(edits)
-				output += "<br><a href='?_src_=holder;[HrefToken()];unbanlog=[ban_id]'>Edit log</a>"
+				output += "<br><a href='byond://?_src_=holder;[HrefToken()];unbanlog=[ban_id]'>Edit log</a>"
 			output += "</div></div></div>"
 		qdel(query_unban_search_bans)
 		output += "</div>"
@@ -700,7 +750,7 @@
 		to_chat(usr, "<span class='danger'>Failed to establish database connection.</span>")
 		return
 	var/target = ban_target_string(player_key, player_ip, player_cid)
-	if(alert(usr, "Please confirm unban of [target] from [role].", "Unban confirmation", "Yes", "No") == "No")
+	if(tgui_alert(usr, "Please confirm unban of [target] from [role].", "Unban confirmation", list("Yes", "No")) == "No")
 		return
 	var/kn = key_name(usr)
 	var/kna = key_name_admin(usr)
@@ -760,11 +810,11 @@
 					player_cid = query_edit_ban_get_player.item[4]
 		else
 			if(use_last_connection)
-				if(alert(usr, "[player_key]/([player_ckey]) has not been seen before, unable to use IP and CID from last connection. Are you sure you want to edit a ban for them?", "Unknown key", "Yes", "No", "Cancel") != "Yes")
+				if(tgui_alert(usr, "[player_key]/([player_ckey]) has not been seen before, unable to use IP and CID from last connection. Are you sure you want to edit a ban for them?", "Unknown key", list("Yes", "No")) != "Yes")
 					qdel(query_edit_ban_get_player)
 					return
 			else
-				if(alert(usr, "[player_key]/([player_ckey]) has not been seen before, are you sure you want to edit a ban for them?", "Unknown key", "Yes", "No", "Cancel") != "Yes")
+				if(tgui_alert(usr, "[player_key]/([player_ckey]) has not been seen before, are you sure you want to edit a ban for them?", "Unknown key", list("Yes", "No")) != "Yes")
 					qdel(query_edit_ban_get_player)
 					return
 		qdel(query_edit_ban_get_player)
@@ -791,7 +841,7 @@
 				return
 		qdel(query_check_adminban_count)
 
-	if (!(interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR")))
+	if (!(interval in list("SECOND", "MINUTE", "HOUR", DAY, "WEEK", "MONTH", "YEAR")))
 		interval = "MINUTE"
 
 	var/list/changes_text = list()

@@ -1,7 +1,7 @@
 //Largely negative status effects go here, even if they have small benificial effects
 //STUN EFFECTS
 /datum/status_effect/incapacitating
-	tick_interval = 0
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = null
 	remove_on_fullheal = TRUE
@@ -44,15 +44,45 @@
 /datum/status_effect/incapacitating/knockdown
 	id = "knockdown"
 	alert_type = /atom/movable/screen/alert/status_effect/knocked_down
+	///Boolean that, if TRUE, will prevent the person getting this effect from dropping items.
+	var/prevent_drop = FALSE
+
+/datum/status_effect/incapacitating/knockdown/on_creation(mob/living/new_owner, duration_override, prevent_drop)
+	src.prevent_drop = prevent_drop
+	. = ..()
 
 /datum/status_effect/incapacitating/knockdown/on_apply()
 	. = ..()
 	if(!.)
 		return
+
+	// anti-drop logic (for shuttle dock or tripped)
+	if(prevent_drop)
+		for(var/obj/item/held_item in owner.held_items)
+			ADD_TRAIT(held_item, TRAIT_NODROP, TRAIT_STATUS_EFFECT(id))
+
+	// Apply floored trait so the mob falls over
 	ADD_TRAIT(owner, TRAIT_FLOORED, TRAIT_STATUS_EFFECT(id))
+
+	// Clean up no-drop immediately after application
+	if(prevent_drop)
+		addtimer(CALLBACK(src, PROC_REF(clear_prevent_drop)), 0)
+
+/datum/status_effect/incapacitating/knockdown/proc/clear_prevent_drop()
+	for(var/obj/item/held_item in owner.held_items)
+		REMOVE_TRAIT(held_item, TRAIT_NODROP, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/incapacitating/knockdown/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_FLOORED, TRAIT_STATUS_EFFECT(id))
+	// owner.knockdown_diminish = 1
+	return ..()
+
+// cleaner tripped version — now uses prevent_drop flag instead of the hack
+/datum/status_effect/incapacitating/knockdown/tripped
+	id = "tripped"
+
+/datum/status_effect/incapacitating/knockdown/tripped/on_apply()
+	prevent_drop = TRUE
 	return ..()
 
 /atom/movable/screen/alert/status_effect/knocked_down
@@ -137,24 +167,27 @@
 	id = "sleeping"
 	alert_type = /atom/movable/screen/alert/status_effect/asleep
 	needs_update_stat = TRUE
+	tick_interval = 0 //??? this is what it was set at the parent level IDK man
 	var/sleptonground = FALSE
 
 /datum/status_effect/incapacitating/sleeping/on_creation(mob/living/new_owner)
 	. = ..()
 	if(!.)
 		return
+	owner.become_blind(id) // to apply static black blindness
 	ADD_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 
 	owner.cmode = FALSE
 	owner.set_typing_indicator(FALSE)
 
 /datum/status_effect/incapacitating/sleeping/on_remove()
+	owner.cure_blind(id)
 	REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 	owner.refresh_looping_ambience()
 
 	if(ishuman(owner) && sleptonground)
 		var/mob/living/carbon/human/human_owner = owner
-		if(HAS_TRAIT(human_owner, TRAIT_NOBLE))
+		if(HAS_TRAIT(human_owner, TRAIT_NOBLE_BLOOD))
 			human_owner.add_stress(/datum/stress_event/sleepfloornoble)
 		else
 			human_owner.add_stress(/datum/stress_event/sleepfloor)
@@ -179,7 +212,7 @@
 	human_owner?.drunkenness *= 0.997 //reduce drunkenness by 0.3% per tick, 6% per 2 seconds
 	if(prob(20))
 		carbon_owner?.handle_dreams()
-		if(prob(10) && owner.health > owner.crit_threshold)
+		if(prob(10) && !HAS_TRAIT(carbon_owner, TRAIT_CRITICAL_CONDITION))
 			owner.emote("snore")
 
 /atom/movable/screen/alert/status_effect/asleep
@@ -247,6 +280,7 @@
 	id = "strandling"
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/strandling
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/strandling/on_apply()
 	ADD_TRAIT(owner, TRAIT_MAGIC_CHOKE, "dumbmoron")
@@ -315,7 +349,7 @@
 	id = "trance"
 	status_type = STATUS_EFFECT_UNIQUE
 	duration = 300
-	tick_interval = 10
+	tick_interval = 1 SECONDS
 	var/stun = TRUE
 	alert_type = /atom/movable/screen/alert/status_effect/trance
 
@@ -356,7 +390,7 @@
 	to_chat(owner, "<span class='warning'>I snap out of my trance!</span>")
 
 /datum/status_effect/trance/proc/hypnotize(datum/source, list/hearing_args)
-	if(!owner.can_hear())
+	if(HAS_TRAIT(owner, TRAIT_DEAF))
 		return
 	if(hearing_args[HEARING_SPEAKER] == owner)
 		return
@@ -487,3 +521,156 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
+
+/// Prevent clicks for the "duration" of the status
+/datum/status_effect/debuff/clickcd
+	id = "clickcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clickcd
+	duration = 3 SECONDS
+
+/datum/status_effect/debuff/clickcd/on_creation(mob/living/new_owner, duration_override, ...)
+	new_owner.changeNext_move(duration)
+	return ..()
+
+/atom/movable/screen/alert/status_effect/debuff/clickcd
+	name = "Action Delayed"
+	desc = "I cannot take another action."
+	icon_state = "clickcd"
+
+/datum/status_effect/stacking/baited
+	id = "bait"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/baited
+	tick_interval = BAIT_COOLDOWN_TIME * 2
+	stack_threshold = 2
+	max_stacks = 2
+
+	COOLDOWN_DECLARE(bait_cooldown)
+
+/datum/status_effect/stacking/baited/on_apply()
+	. = ..()
+	if(!.)
+		return
+
+	var/fatiguemod = 1
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		var/armor_class = human_owner.highest_ac_worn()
+		switch(armor_class)
+			if(ARMOR_CLASS_NONE)
+				fatiguemod = 5
+			if(AC_LIGHT, AC_MEDIUM)
+				fatiguemod = 4
+			if(AC_HEAVY)
+				fatiguemod = 3
+
+	COOLDOWN_START(src, bait_cooldown, BAIT_COOLDOWN_TIME)
+
+	owner.adjust_stamina(owner.maximum_stamina / fatiguemod)
+	owner.emote("huh", forced = TRUE)
+	owner.Slowdown(3)
+	owner.Immobilize(0.5 SECONDS)
+
+/datum/status_effect/stacking/baited/threshold_cross_effect()
+	owner.emote("gasp", forced = TRUE)
+	owner.OffBalance(2 SECONDS)
+	owner.Immobilize(2 SECONDS)
+
+/atom/movable/screen/alert/status_effect/debuff/baited
+	name = "Baited"
+	desc = "I fell for it. I'm exposed. I won't fall for it again. For now."
+	icon_state = "bait"
+
+/datum/status_effect/debuff/baitcd
+	id = "baitcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/baitedcd
+	duration = 20 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/baitedcd
+	name = "Bait Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "baitcd"
+
+/datum/status_effect/debuff/clashcd
+	id = "clashcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clashcd
+	duration = 20 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/clashcd
+	name = "Riposte / Guard Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "guardcd"
+
+/datum/status_effect/debuff/exposed
+	id = "exposed"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/exposed
+	duration = 10 SECONDS
+	mob_overlay_icon_state = "eff_exposed"
+
+/atom/movable/screen/alert/status_effect/debuff/exposed
+	name = "Exposed"
+	desc = "My defenses are completely exposed. I can be hit through my parry and dodge to great effect!"
+	icon_state = "exposed"
+
+/datum/status_effect/debuff/vulnerable
+	id = "vulnerable"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/vulnerable
+	duration = 10 SECONDS
+	mob_overlay_icon_state = "eff_vulnerable"
+
+/atom/movable/screen/alert/status_effect/debuff/vulnerable
+	name = "Vulnerable"
+	desc = "A mistake. I can be hit through my parry and dodge to a lighter effect!"
+	icon_state = "vulnerable"
+
+/datum/status_effect/debuff/feinted
+	id = "feinted"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/feinted
+	duration = 20 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/feinted
+	name = "Feinted"
+	desc = span_boldwarning("I've been feinted. It won't happen again so soon.")
+	icon_state = "feinted"
+
+/datum/status_effect/debuff/feintcd
+	id = "feintcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/feintcd
+	duration = 30 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/feintcd
+	name = "Feint Cooldown"
+	desc = span_warning("I have feinted recently, my opponents will be wary.")
+	icon_state = "feinted"
+
+/// Prevents use of weapon special attacks
+/datum/status_effect/debuff/specialcd
+	id = "specialcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/specialcd
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
+
+/atom/movable/screen/alert/status_effect/debuff/specialcd
+	name = "Special Manouevre Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "specialcd"
+
+/// 2 Speed reduction for 8 seconds + slow
+/datum/status_effect/debuff/hobbled
+	id = "hobbled"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/hobbled
+	effectedstats = list(STAT_SPEED = -2)
+	duration = 8 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/hobbled
+	name = "Hobbled"
+	desc = "You've been struck in the leg! The force has left you staggered!"
+	icon_state = "dazed"
+
+/datum/status_effect/debuff/hobbled/on_apply()
+	. = ..()
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = 1.5)
+
+/datum/status_effect/debuff/hobbled/on_remove()
+	. = ..()
+	owner?.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
+

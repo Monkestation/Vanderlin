@@ -1,21 +1,20 @@
 /datum/patron/inhumen
-	name = null
+	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
-
-	profane_words = list()
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/structure/fluff/psycross/zizocross,
+		),
+		PATRON_STRUCTURE = list(
+			/obj/item/clothing/neck/psycross/zizo,
+			/obj/item/clothing/neck/psycross/zizo/wood
+		),
+	)
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",
 		"THE TEN ARE DECEIVERS!"
 	)
-
-/datum/patron/inhumen/can_pray(mob/living/follower)
-	for(var/obj/structure/fluff/psycross/cross in view(7, get_turf(follower)))
-		if(cross.divine && !cross.obj_broken)
-			to_chat(follower, span_danger("That accursed cross won't let me commune with the Forbidden One!"))
-			return FALSE
-
-	return TRUE
 
 /* ----------------- */
 
@@ -29,6 +28,7 @@
 	boons = "You may perform fleshcrafting. Access to roles with magic."
 	//added_traits = list(TRAIT_CABAL)	No need for this. They have fleshcrafting now.
 	devotion_holder = /datum/devotion/inhumen/zizo
+	prayer_fail = "I need to wear her symbol, be at an Inverted Psycross, or a statue in Her image if I wish for Her knowledge!"
 	confess_lines = list(
 		"I FOLLOW THE PATH OF ZIZO!",
 		"LONG LIVE QUEEN ZIZO!",
@@ -39,6 +39,17 @@
 		/mob/living/carbon/human/proc/draw_sigil,
 		/mob/living/carbon/human/proc/praise,
 	)
+	added_blueprints = list(/datum/blueprint_recipe/zizo/shrine)
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/zizo,
+			/obj/item/clothing/neck/psycross/zizo/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross/zizocross,
+			/obj/structure/fluff/statue/zizo
+		),
+	)
 
 /datum/patron/inhumen/graggar
 	name = GRAGGAR
@@ -47,15 +58,26 @@
 	flaws = "Rage, Hatred, Bloodthirst"
 	worshippers = "Greenskins, The Revenge-Driven, Sadists, Misogynists"
 	sins = "Compassion, Frailty, Servility"
-	boons = "You are drawn to the flavour of raw flesh and organs, and may consume without worry."
-	added_traits = list(TRAIT_ORGAN_EATER)
+	boons = "You are drawn to the flavour of raw flesh, organs, and blood. You may consume without worry."
+	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER)
 	devotion_holder = /datum/devotion/inhumen/graggar
+	prayer_fail = "He won't hear my prayer unless I'm wearing his amulet, or praying to His idol."
 	confess_lines = list(
 		"GRAGGAR IS THE BEAST I WORSHIP!",
 		"GRAGGAR WILL RAVAGE YOU!",
 		"GRAGGAR BRINGS UNHOLY DESTRUCTION!"
 	)
 	storyteller = /datum/storyteller/graggar
+	added_blueprints = list(/datum/blueprint_recipe/graggar/shrine)
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/graggar,
+			/obj/item/clothing/neck/psycross/graggar/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/statue/graggar
+		),
+	)
 
 /datum/patron/inhumen/matthios
 	name = MATTHIOS
@@ -67,12 +89,23 @@
 	boons = "You can see the most expensive item someone is carrying."
 	added_traits = list(TRAIT_MATTHIOS_EYES)
 	devotion_holder = /datum/devotion/inhumen/matthios
+	prayer_fail = "He won't hear my prayer unless I'm wearing his amulet, or praying to His idol."
 	confess_lines = list(
 		"MATTHIOS STEALS FROM THE WORTHLESS!",
 		"MATTHIOS IS JUSTICE FOR THE COMMON MAN!",
 		"MATTHIOS IS MY LORD, I SHALL BE HIS MARTYR!",
 	)
 	storyteller = /datum/storyteller/matthios
+	added_blueprints = list(/datum/blueprint_recipe/matthios/idol)
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/matthios,
+			/obj/item/clothing/neck/psycross/matthios/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/statue/evil
+		),
+	)
 
 /datum/patron/inhumen/baotha
 	name = BAOTHA
@@ -84,12 +117,22 @@
 	boons = "You will never overdose on drugs."
 	added_traits = list(TRAIT_CRACKHEAD)
 	devotion_holder = /datum/devotion/inhumen/baotha
+	prayer_fail = "Smoking at a hookah or shisha is bound to draw Her company, or if I were to wear Her amulet."
 	confess_lines = list(
 		"LIVE, LAUGH, LOVE! IN BAOTHA'S NAME!",
 		"JOY AT ALL COSTS! BAOTHA'S TEACHINGS REIGN!",
 		"BAOTHA'S WHISPERS CALM MY MIND!",
 	)
 	storyteller = /datum/storyteller/baotha
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/baotha,
+			/obj/item/clothing/neck/psycross/baotha/wood
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/statue/shisha
+		),
+	)
 
 /// Maniac Patron - Their mind is broken by secrets of Zizo/Graggar combined. They quite possibly know the reality of what happens outside the planet. They may think this is all a game. They are clearly insane.
 /datum/patron/inhumen/graggar_zizo
@@ -100,13 +143,15 @@
 	worshippers = "Broken Minds, Overshared Secrets, Space-Faring Species Like You, Misanthropes"
 	sins = "The Unseen, Secrets, Worthless Pigs"
 	boons = "You are drawn to the flavour of other followers of Zizo, and may see them when you consume without worry."
-	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_CABAL)
+	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER, TRAIT_CABAL)
 	confess_lines = list(
 		"WHERE AM I!",
 		"NONE OF THIS IS REAL!",
 		"WHO AM I WORSHIPPING?!"
 	)
-	preference_accessible = FALSE
+
+/datum/patron/inhumen/graggar_zizo/preference_accessible(datum/preferences/prefs)
+	return FALSE
 
 /datum/patron/inhumen/graggar_zizo/can_pray(mob/living/follower)
 	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)
@@ -119,10 +164,4 @@
 	return FALSE
 
 /datum/patron/inhumen/graggar_zizo/hear_prayer(mob/living/follower, message)
-	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)
-	if(!dreamer)
-		return FALSE
-	if(text2num(message) == dreamer.sum_keys)
-		INVOKE_ASYNC(dreamer, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
-		return TRUE
-	. = ..()
+	return TRUE // trey liam always hears

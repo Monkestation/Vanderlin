@@ -30,7 +30,7 @@
 		return FALSE
 
 	// Check if target is a wall
-	if(!is_blocked_turf(target_turf))
+	if(!target_turf.is_blocked_turf())
 		owner.balloon_alert(owner, "must target a wall")
 		return FALSE
 
@@ -51,7 +51,7 @@
 		if(!current_turf)
 			break
 
-		if(is_blocked_turf(current_turf))
+		if(current_turf.is_blocked_turf())
 			wall_turfs += current_turf
 			current_turf = get_step(current_turf, wall_dir)
 		else
@@ -143,7 +143,7 @@
 	if(!adjacent_turf)
 		return 0
 
-	if(is_blocked_turf(adjacent_turf))
+	if(adjacent_turf.is_blocked_turf())
 		// Check if we can actually burrow through
 		var/turf/check_turf = adjacent_turf
 		// Count wall depth
@@ -151,7 +151,7 @@
 			if(!check_turf)
 				break
 
-			if(is_blocked_turf(check_turf))
+			if(check_turf.is_blocked_turf())
 				check_turf = get_step(check_turf, dir_to_target)
 			else
 				// Found exit, this is valid

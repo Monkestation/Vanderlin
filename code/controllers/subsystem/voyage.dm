@@ -554,10 +554,6 @@ SUBSYSTEM_DEF(terrain_generation)
 		var/turf/island_turf = island_edge_turfs[min(index, island_edge_turfs.len)]
 
 		ship_turf.alpha = 0
-		if(istype(ship_turf, /turf/open/water))
-			var/turf/open/water/water = ship_turf
-			water.water_overlay.alpha = 0
-			water.water_top_overlay.alpha = 0
 
 		var/datum/component/mirage_border/ship_to_island = ship_turf.AddComponent(\
 			/datum/component/mirage_border,\
@@ -645,10 +641,6 @@ SUBSYSTEM_DEF(terrain_generation)
 		else if(isturf(entry))
 			var/turf/T = entry
 			T.alpha = 255
-			if(istype(T, /turf/open/water))
-				var/turf/open/water/water = T
-				water.water_overlay.alpha = 255
-				water.water_top_overlay.alpha = 255
 			var/datum/component/mirage_border/MB = T.GetComponent(/datum/component/mirage_border)
 			if(MB)
 				qdel(MB)

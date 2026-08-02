@@ -66,6 +66,8 @@
 		/datum/supply_pack/seeds/spelt,
 		/datum/supply_pack/seeds/cabbage,
 		/datum/supply_pack/seeds/turnip,
+		/datum/supply_pack/seeds/pompkaun,
+		/datum/supply_pack/seeds/sunreed,
 		/datum/supply_pack/luxury/spectacles_onyxa,
 		/datum/supply_pack/jewelry/nosegold,
 		/datum/supply_pack/apparel/engineering_goggles,
@@ -96,6 +98,7 @@
 		/datum/supply_pack/weapons/ranged/whip,
 		/datum/supply_pack/weapons/steel/irumi,
 		/datum/supply_pack/weapons/iron/ikhopesh,
+		/datum/supply_pack/weapons/ranged/javeliniron,
 		// Food & Drink
 		/datum/supply_pack/food/drinks/beer,
 		/datum/supply_pack/food/drinks/onin,
@@ -147,7 +150,7 @@
 		/datum/supply_pack/weapons/iron/iassegai,
 		/datum/supply_pack/weapons/ranged/shortbow,
 		/datum/supply_pack/weapons/ranged/bow,
-		/datum/supply_pack/weapons/steel/atgervi,
+		/datum/supply_pack/weapons/steel/bearded,
 		/datum/supply_pack/weapons/ranged/crossbow,
 		/datum/supply_pack/weapons/ammo/quivers,
 		/datum/supply_pack/weapons/ammo/arrowquiver,
@@ -155,6 +158,7 @@
 		/datum/supply_pack/weapons/ammo/Blowpouch,
 		/datum/supply_pack/weapons/steel/khopesh,
 		/datum/supply_pack/weapons/steel/steppesabre,
+		/datum/supply_pack/weapons/ranged/javelinsteel,
 		// Food
 		/datum/supply_pack/food/drinks/spottedhen,
 		/datum/supply_pack/food/roastedcoffee,
@@ -186,7 +190,6 @@
 		/datum/supply_pack/apparel/exoticsilkmask,
 		/datum/supply_pack/apparel/exoticsilkbra,
 		/datum/supply_pack/apparel/anklets,
-		/datum/supply_pack/apparel/henhelm,
 		/datum/supply_pack/jewelry/nyle,
 		/datum/supply_pack/jewelry/scom
 	)

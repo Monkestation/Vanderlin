@@ -1,7 +1,7 @@
 /datum/repeatable_crafting_recipe/projectile
 	abstract_type = /datum/repeatable_crafting_recipe/projectile
 	category = "Projectiles"
-	skillcraft = /datum/skill/craft/crafting
+	skillcraft = /datum/attribute/skill/craft/crafting
 
 /datum/repeatable_crafting_recipe/projectile/arrow
 	name = "stone arrow"
@@ -15,6 +15,18 @@
 	output_amount = 2
 	craft_time = 1 SECONDS
 
+/datum/repeatable_crafting_recipe/projectile/bone_arrow
+	name = "bone arrow"
+	requirements = list(
+		/obj/item/grown/log/tree/stick= 1,
+		/obj/item/alch/bone = 1,
+	)
+	starting_atom = /obj/item/grown/log/tree/stick
+	attacked_atom = /obj/item/alch/bone
+	output = /obj/item/ammo_casing/caseless/arrow/bone
+	output_amount = 3
+	craft_time = 1 SECONDS
+
 /datum/repeatable_crafting_recipe/projectile/pyro_arrow
 	name = "pyroclastic arrow"
 	requirements = list(
@@ -26,7 +38,7 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fyritius
 	output = /obj/item/ammo_casing/caseless/arrow/pyro
 	craftdiff = 1
-	skillcraft = /datum/skill/craft/bombs
+	skillcraft = /datum/attribute/skill/craft/bombs
 	craft_time = 1 SECONDS
 
 /datum/repeatable_crafting_recipe/projectile/pyro_bolt
@@ -40,7 +52,7 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fyritius
 	output = /obj/item/ammo_casing/caseless/bolt/pyro
 	craftdiff = 1
-	skillcraft = /datum/skill/craft/bombs
+	skillcraft = /datum/attribute/skill/craft/bombs
 	craft_time = 1 SECONDS
 
 /datum/repeatable_crafting_recipe/projectile/water_arrow
@@ -55,7 +67,7 @@
 	output = /obj/item/ammo_casing/caseless/arrow/water
 	output_amount = 3
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/alchemy
+	skillcraft = /datum/attribute/skill/craft/alchemy
 	craft_time = 4 SECONDS
 
 /datum/repeatable_crafting_recipe/projectile/water_bolt
@@ -70,7 +82,7 @@
 	output = /obj/item/ammo_casing/caseless/bolt/water
 	output_amount = 3
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/alchemy
+	skillcraft = /datum/attribute/skill/craft/alchemy
 	craft_time = 4 SECONDS
 
 /datum/repeatable_crafting_recipe/projectile/vial_arrow
@@ -83,7 +95,7 @@
 	blacklisted_paths = list(/obj/item/ammo_casing/caseless/arrow/vial)
 	attacked_atom = /obj/item/ammo_casing/caseless/arrow
 	starting_atom = /obj/item/natural/fibers // Vials get a little bit quirky
-	skillcraft = /datum/skill/craft/crafting
+	skillcraft = /datum/attribute/skill/craft/crafting
 
 /datum/repeatable_crafting_recipe/projectile/vial_arrow/water
 	name = "vial arrow (water)"

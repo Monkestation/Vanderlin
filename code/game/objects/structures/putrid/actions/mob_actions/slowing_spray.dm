@@ -128,10 +128,10 @@
 		var/mob/living/M = AM
 		if(istype(M, /mob/living/simple_animal/hostile/retaliate/meatvine))
 			return
-		M.add_movespeed_modifier("meatvine_slow", 2)
+		M.add_movespeed_modifier(MOVESPEED_ID_MEATVINE, multiplicative_slowdown = 2)
 
 /obj/effect/decal/cleanable/meatvine_slow/Uncrossed(atom/movable/AM)
 	. = ..()
 	if(isliving(AM))
 		var/mob/living/M = AM
-		M.remove_movespeed_modifier("meatvine_slow")
+		M.remove_movespeed_modifier(MOVESPEED_ID_MEATVINE)

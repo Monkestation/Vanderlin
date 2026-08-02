@@ -8,13 +8,9 @@
 	. = ..()
 	if(next_time > world.time)
 		return
-	if(!controller.able_to_run())
-		return
 	if(controller.blackboard[BB_BASIC_MOB_FOOD_TARGET]) // this means we are likely eating a corpse
 		return
 	if(controller.blackboard[BB_RESISTING]) //we are trying to resist
-		return
-	if(controller.blackboard[BB_IS_BEING_RIDDEN])
 		return
 
 	var/mob/living/simple_animal/wanderer = controller.pawn

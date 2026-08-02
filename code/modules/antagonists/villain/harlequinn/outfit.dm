@@ -1,3 +1,25 @@
+/datum/attribute_holder/sheet/job/harlequin
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = 1,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/stealing = 30,
+		/datum/attribute/skill/misc/music = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/lockpicking = 10,
+	)
 
 /datum/outfit/harlequin/pre_equip(mob/living/carbon/human/H)
 	. = ..()
@@ -9,35 +31,17 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/leather/jacket
 	beltl = /obj/item/weapon/knife/dagger/steel
+	beltr = /obj/item/flashlight/flare/torch/lantern
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/storage/belt/pouch/coins/poor
 	cloak = /obj/item/clothing/cloak/half/shadowcloak
 	head = /obj/item/clothing/head/roguehood/colored/black
 
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/stealing, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
 	H.add_spell(/datum/action/cooldown/spell/undirected/shadow_step, TRUE)
-	H.add_spell(/datum/action/cooldown/spell/enhanced_mimicry, TRUE)
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_END, 2)
-	H.change_stat(STATKEY_PER, 1)
-	H.change_stat(STATKEY_SPD, 2)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/harlequin)
 
 	backpack_contents = list(
-		/obj/item/harlequinn_disguise_kit,
+		/obj/item/harlequin_disguise_kit,
 		/obj/item/reagent_containers/glass/bottle/poison,
 		/obj/item/lockpick,
 		/obj/item/rope,

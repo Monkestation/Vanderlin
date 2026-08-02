@@ -1,3 +1,36 @@
+/datum/attribute_holder/sheet/job/pilgrim/fishermaster
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 2,
+		STAT_PERCEPTION = 2,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 50,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/fishing = 50,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
+/datum/attribute_holder/sheet/job/pilgrim/fishermaster/old
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 2,
+		STAT_PERCEPTION = 2,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 50,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/fishing = 60,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/combat/polearms = 10
+	)
+
 /datum/job/advclass/pilgrim/rare/fishermaster
 	title = "Master Fisher"
 	tutorial = "Seafarers who have mastered the tides, and are able to catch any fish with ease \
@@ -11,29 +44,8 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_CON = 2,
-		STATKEY_PER = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 5,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/fishing = 5,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1
-	)
-
-/datum/job/advclass/pilgrim/rare/fishermaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/fishermaster
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/fishermaster/old
 
 /datum/outfit/pilgrim/fishermaster
 	name = "Master Fisher (Pilgrim)"

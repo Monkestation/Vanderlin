@@ -2,6 +2,7 @@
 	group = "Raw Materials"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/rawmats
 
 /datum/supply_pack/rawmats/glass
 	name = "Glass Panes (6)"
@@ -127,6 +128,7 @@
 	name = "Riddle of Steel"
 	group = "Special Materials"
 	cost = 600
+	allowed_start = FALSE
 	contains = list(
 		/obj/item/riddleofsteel
 	)

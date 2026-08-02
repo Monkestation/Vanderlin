@@ -42,6 +42,7 @@
 		icon_state = "rare_frog"
 		icon_living = "rare_frog"
 		icon_dead = "rare_frog_dead"
+	add_traits(list(TRAIT_NODROWN, TRAIT_SWIMMER), INNATE_TRAIT)
 
 /mob/living/simple_animal/hostile/retaliate/frog/Crossed(AM as mob|obj)
 	if(!stat && isliving(AM))

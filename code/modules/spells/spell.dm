@@ -61,6 +61,9 @@
 	/// Cost to cast based on [spell_type].
 	var/spell_cost = 0
 
+	///this is purely for etching
+	var/spell_tier = 1
+
 	/// The sound played on cast.
 	var/sound = 'sound/magic/whiteflame.ogg'
 
@@ -101,12 +104,14 @@
 	var/list/required_items
 
 	/// Skill associated with spell enhancements.
-	var/associated_skill = /datum/skill/magic/arcane
+	var/associated_skill = /datum/attribute/skill/magic/arcane
 	/// Stat associated with spell enchancements.
-	var/associated_stat = STATKEY_INT
+	var/associated_stat = STAT_INTELLIGENCE
 
 	/// Assoc list of [datum/attunement] to value.
 	var/list/attunements
+	///list of essences we can use as a sub for cost
+	var/list/essences
 	/// Value summed from caster and spell attunements to adjust some spell effects.
 	var/attuned_strength
 
@@ -214,7 +219,7 @@
 
 	if(charge_drain)
 		if(!check_cost(charge_drain))
-			owner.balloon_alert(owner, "I cannot uphold the channeling!")
+			owner.balloon_alert(owner, "i cannot uphold the channeling!")
 			cancel_casting()
 			return PROCESS_KILL
 		invoke_cost(charge_drain)
@@ -223,7 +228,7 @@
 	if(world.time > (charge_started_at + charge_target_time))
 		// We don't want that mouseUp to end in sadness
 		if(!check_cost(charge_drain))
-			owner.balloon_alert(owner, "I cannot uphold the channeling!")
+			owner.balloon_alert(owner, "i cannot uphold the channeling!")
 			cancel_casting()
 			return PROCESS_KILL
 		owner.client?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charged.dmi'
@@ -259,7 +264,7 @@
 	if(spell_type == SPELL_RAGE)
 		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
-	RegisterSignal(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
+	RegisterSignals(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
 /datum/action/cooldown/spell/Remove(mob/living/remove_from)
 	UnregisterSignal(remove_from, list(
@@ -345,8 +350,8 @@
 
 	return TRUE
 
-/datum/action/cooldown/spell/InterceptClickOn(mob/living/clicker, params, atom/click_target)
-	if(!LAZYACCESS(params2list(params), MIDDLE_CLICK))
+/datum/action/cooldown/spell/InterceptClickOn(mob/living/clicker, list/modifiers, atom/click_target)
+	if(!LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return
 
 	if(charge_required && !charged)
@@ -362,18 +367,23 @@
 			// If we didn't find a human, we settle for any living at all
 			aim_assist_target = locate(/mob/living) in click_target
 
-	return ..(clicker, params, aim_assist_target || click_target)
+	return ..(clicker, modifiers, aim_assist_target || click_target)
 
 // Where the cast chain starts
 /datum/action/cooldown/spell/PreActivate(atom/target)
 	charged = FALSE
+	if(SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_STARTED, src) & COMPONENT_BLOCK_ABILITY_START)
+		return
 	if(!is_valid_target(target))
 		if(charge_required && click_to_activate)
 			to_chat(owner, span_warning("I can't cast [src] on [target]!"))
 			RegisterSignal(owner.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(start_casting))
 		return FALSE
 
-	return Activate(target)
+	var/target_val = Activate(target)
+	if(!QDELETED(src) && !QDELETED(owner))
+		SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_FINISHED, src)
+	return target_val
 
 /// Adjust the base charge time based on the users stats
 /datum/action/cooldown/spell/proc/get_adjusted_charge_time()
@@ -383,7 +393,7 @@
 	var/mob/living/living_owner = owner
 	var/new_time = charge_time
 
-	new_time -= charge_time * living_owner.get_skill_level(associated_skill) * 0.05
+	new_time -= charge_time * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.05
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
@@ -403,17 +413,13 @@
 	if(cost_override)
 		new_cost = cost_override
 
-	new_cost -= spell_cost * living_owner.get_skill_level(associated_skill) * 0.03
+	new_cost -= spell_cost * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.03
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
 		new_cost -= spell_cost * (owner_stat - 10) * 0.02
 	else
 		new_cost += spell_cost * (10 - owner_stat) * 0.02
-
-	var/owner_encumbrance = living_owner.get_encumbrance()
-	if(owner_encumbrance > 0.4)
-		new_cost += spell_cost * owner_encumbrance * 0.5
 
 	return max(new_cost, 0)
 
@@ -447,12 +453,12 @@
 
 	if(!(spell_flags & SPELL_IGNORE_SPELLBLOCK) && HAS_TRAIT(owner, TRAIT_SPELLBLOCK))
 		if(feedback)
-			owner.balloon_alert(owner, "Can't focus on casting...")
+			owner.balloon_alert(owner, "can't focus on casting...")
 		return FALSE
 
 	if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
 		if(feedback)
-			owner.balloon_alert(owner, "My magicka has left me...")
+			owner.balloon_alert(owner, "my magicka has left me...")
 		return FALSE
 
 	for(var/datum/action/cooldown/spell/spell in owner.actions)
@@ -460,7 +466,7 @@
 			continue
 		if(spell.currently_charging)
 			if(feedback)
-				owner.balloon_alert(owner, "Already channeling!")
+				owner.balloon_alert(owner, "already channeling!")
 			return FALSE
 
 	if(!check_cost(feedback = feedback))
@@ -470,7 +476,7 @@
 	var/turf/caster_turf = get_turf(owner)
 	if((spell_requirements & SPELL_REQUIRES_STATION) && is_centcom_level(caster_turf.z))
 		if(feedback)
-			owner.balloon_alert(owner, "Cannot cast here!")
+			owner.balloon_alert(owner, "cannot cast here!")
 		return FALSE
 
 	if((spell_requirements & SPELL_REQUIRES_MIND) && !owner.mind)
@@ -481,7 +487,7 @@
 	// that corresponds with the spell's antimagic, then they can't actually cast the spell
 	if((spell_requirements & SPELL_REQUIRES_NO_ANTIMAGIC) && !owner.can_cast_magic(antimagic_flags))
 		if(feedback)
-			owner.balloon_alert(owner, "Antimagic is preventing casting!")
+			owner.balloon_alert(owner, "antimagic is preventing casting!")
 		return FALSE
 
 	if(!can_invoke(feedback = feedback))
@@ -490,7 +496,7 @@
 	if(!ishuman(owner))
 		if(spell_requirements & (SPELL_REQUIRES_HUMAN))
 			if(feedback)
-				owner.balloon_alert(owner, "Can only be cast by humans!")
+				owner.balloon_alert(owner, "can only be cast by humans!")
 			return FALSE
 
 	if(LAZYLEN(required_items))
@@ -500,7 +506,7 @@
 				found = TRUE
 				break
 		if(!found && feedback)
-			owner.balloon_alert(owner, "Missing something to cast!")
+			owner.balloon_alert(owner, "missing something to cast!")
 			return FALSE
 
 	return TRUE
@@ -514,7 +520,7 @@
 /datum/action/cooldown/spell/proc/is_valid_target(atom/cast_on)
 	if(click_to_activate && !self_cast_possible)
 		if(cast_on == owner)
-			owner.balloon_alert(owner, "Can't self cast!")
+			owner.balloon_alert(owner, "can't self cast!")
 			return FALSE
 
 	return TRUE
@@ -592,7 +598,7 @@
 			return sig_return
 
 		if(get_dist(owner, cast_on) > cast_range)
-			owner.balloon_alert(owner, "Too far away!")
+			owner.balloon_alert(owner, "too far away!")
 			return sig_return | SPELL_CANCEL_CAST
 
 		if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_ATHEISM_CURSE))
@@ -736,7 +742,7 @@
 		owner.balloon_alert(owner, charge_message)
 
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
-		owner.balloon_alert(owner, "Be still while channelling...")
+		owner.balloon_alert(owner, "be still while channelling...")
 
 	if(owner?.mmb_intent)
 		owner.mmb_intent_change(null)
@@ -750,12 +756,12 @@
 		charged = TRUE
 		return
 	if(owner)
-		owner.balloon_alert(owner, "Channeling was interrupted!")
+		owner.balloon_alert(owner, "channeling was interrupted!")
 
 /// End the charging cycle
 /datum/action/cooldown/spell/proc/end_charging()
 	UnregisterSignal(owner.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
-	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_MOB_DEATH, COMSIG_MOVABLE_MOVED))
+	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_LIVING_DEATH, COMSIG_MOVABLE_MOVED))
 	currently_charging = FALSE
 	charge_started_at = null
 	charge_target_time = null
@@ -795,12 +801,12 @@
 	var/mob/living/living_owner = owner
 	if(invocation_type == INVOCATION_EMOTE && HAS_TRAIT(living_owner, TRAIT_EMOTEMUTE))
 		if(feedback)
-			owner.balloon_alert(owner, "Can't position your hands correctly to invoke!")
+			owner.balloon_alert(owner, "can't position your hands correctly to invoke!")
 		return FALSE
 
 	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !ignore_can_speak && !living_owner.can_speak_vocal())
 		if(feedback)
-			owner.balloon_alert(owner, "Can't get the words out to invoke!")
+			owner.balloon_alert(owner, "can't get the words out to invoke!")
 		return FALSE
 
 	return TRUE
@@ -884,7 +890,7 @@
 		var/not_stamina_spell = (spell_type != SPELL_STAMINA)
 		if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
 			if(feedback)
-				owner.balloon_alert(owner, "Not enough stamina to cast!")
+				owner.balloon_alert(owner, "not enough stamina to cast!")
 			return FALSE
 
 	if(spell_type == NONE || spell_type == SPELL_STAMINA)
@@ -894,7 +900,7 @@
 		if(SPELL_MANA)
 			if(!caster.has_mana_available(attunements, used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Not enough mana to cast!")
+					owner.balloon_alert(owner, "not enough mana to cast!")
 				return FALSE
 
 			return TRUE
@@ -902,7 +908,7 @@
 		if(SPELL_BLOOD)
 			if(!caster.has_bloodpool_cost(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Need more blood to cast!")
+					owner.balloon_alert(owner, "need more blood to cast!")
 				return FALSE
 
 			return TRUE
@@ -911,7 +917,7 @@
 			var/mob/living/carbon/human/H = caster
 			if(!istype(H) || !H.cleric?.check_devotion(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Devotion too weak!")
+					owner.balloon_alert(owner, "devotion too weak!")
 				return FALSE
 
 			return TRUE
@@ -920,7 +926,7 @@
 			var/mob/living/carbon/human/H = caster
 			if(!istype(H) || !H.rage_datum?.check_rage(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Not enough Rage!")
+					owner.balloon_alert(owner, "not enough Rage!")
 				return FALSE
 
 			return TRUE
@@ -930,14 +936,14 @@
 			if(QDELETED(target) || !istype(target))
 				stack_trace("Essence spell checking cost without being assigned to an essence gauntlet!")
 				return FALSE
-			if(!gaunt.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
 				return FALSE
 			// Ditto
 			if(!length(gaunt.stored_vials))
 				return FALSE
-			if(!gaunt.can_consume_essence(used_cost, attunements))
+			if(!gaunt.can_consume_essence(used_cost, essences))
 				if(feedback)
-					owner.balloon_alert(owner, "Not enough essence!")
+					owner.balloon_alert(owner, "not enough essence!")
 				return FALSE
 
 			return TRUE
@@ -945,7 +951,7 @@
 		if(SPELL_PSYDONIC_MIRACLE)
 			if(!caster.has_bloodpool_cost(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Need more grace to cast!")
+					owner.balloon_alert(owner, "need more grace to cast!")
 				return FALSE
 
 			return TRUE
@@ -1000,7 +1006,11 @@
 
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
-			if(!gaunt?.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
+				return
+
+			if(!gaunt.can_consume_essence(used_cost, essences))
+				owner.balloon_alert(owner, "not enough essence!")
 				return
 
 			gaunt.consume_essence(used_cost, attunements)
@@ -1022,7 +1032,7 @@
 	if(!experience_max_skill)
 		experience_max_skill = SKILL_LEVEL_LEGENDARY
 
-	var/skill_level = owner.get_skill_level(associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_RAW(owner, associated_skill)
 	if(skill_level >= experience_max_skill)
 		return
 
@@ -1031,9 +1041,7 @@
 
 	var/datum/mind/owner_mind = owner.mind
 	if(owner_mind && experience_sleep || (experience_sleep_threshold && (skill_level >= experience_sleep_threshold)))
-		// Check to make sure that experience max is adhered to even when using sleep exp
-		if(!owner_mind.sleep_adv.enough_sleep_xp_to_advance(associated_skill, experience_max_skill - skill_level))
-			owner_mind.add_sleep_experience(associated_skill, exp_to_gain)
+		owner_mind.add_sleep_experience(associated_skill, exp_to_gain)
 		return
 	owner.adjust_experience(associated_skill, exp_to_gain)
 
@@ -1065,7 +1073,7 @@
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignal(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
+	RegisterSignals(owner, list(COMSIG_LIVING_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
@@ -1106,15 +1114,46 @@
 	// At this point we DO care about the _target value
 	if(isnull(location) || istype(_target, /atom/movable/screen)) //Clicking on a screen object.
 		_target = parse_caught_click_modifiers(modifiers, get_turf(source.eye), source)
-		params = list2params(modifiers)
 		if(!_target)
 			CRASH("Failed to get the turf under clickcatcher")
 
 	// Call this directly to do all the relevant checks and aim assist
-	InterceptClickOn(owner, params, _target)
+	InterceptClickOn(owner, modifiers, _target)
 	source.click_intercept_time = 0
 
 /datum/action/cooldown/spell/proc/signal_cancel()
 	SIGNAL_HANDLER
 
 	cancel_casting()
+
+
+/**
+*Used to calculate bonuses to Great Hunt miracles/spells.
+*
+*Arguments:
+* * radial_source - Where we're starting the radial search for bonus ingredients. Defaults to spell owner.
+* * radius - The actual radius of the search. Default to 5.
+* * consume_chance - How likely it is the spell will consume the bonus ingredient. Default to 50.
+* * bonus_value - The number to return per bonus item. Defaults to zero as can be wildly different if needed for time bonuses.
+*/
+/datum/action/cooldown/spell/proc/check_hunt_bonuses(atom/radial_source, radius = 5, consume_chance = 50, bonus_value = 0)
+	var/static/list/alch_bodyparts = typecacheof(list(/obj/item/alch/bone, /obj/item/alch/sinew, /obj/item/alch/horn))
+	var/used_source = radial_source
+	var/bonus_total = 0
+	if(!used_source)
+		used_source = owner
+
+	for(var/obj/possible_bonus in oview(radius, used_source))
+		if(is_type_in_typecache(possible_bonus, alch_bodyparts))
+			bonus_total += bonus_value
+			if(prob(consume_chance))
+				consume_hunt_bonus(possible_bonus)
+
+	return bonus_total
+
+/datum/action/cooldown/spell/proc/consume_hunt_bonus(obj/target)
+	if(!target)
+		return FALSE
+	target.visible_message(span_warning("[target] disintegrates into a red mist."))
+	qdel(target)
+	return TRUE

@@ -9,7 +9,7 @@
 
 /datum/action/cooldown/spell/undirected/list_target/convert_role/guard/on_conversion(mob/living/cast_on)
 	. = ..()
-	cast_on.verbs |= /mob/proc/haltyell
+	add_verb(cast_on, /mob/proc/haltyell)
 
 /datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest
 	name = "Recruit Forest Guard"

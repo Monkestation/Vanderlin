@@ -38,7 +38,6 @@
 	move_to_delay = 5
 	ranged = TRUE
 	SET_BASE_PIXEL(-32, 0)
-	aggressive = 1
 	deathmessage = "collapses to the floor with a final roar, the impact rocking the ground."
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	var/void_corruption = TRUE
@@ -263,7 +262,7 @@
 			visible_message(span_warning("[src] slams down on [L], crushing [L.p_them()]!"))
 			L.gib()
 		else
-			L.adjustBruteLoss(75)
+			L.adjustBruteLoss(75, damage_type = BCLASS_BLUNT)
 			if(L && !QDELETED(L)) // Some mobs are deleted on death
 				var/throw_dir = get_dir(src, L)
 				if(L.loc == loc)

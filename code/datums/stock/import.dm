@@ -72,7 +72,7 @@
 
 /obj/structure/closet/crate/chest/steward/crossbow/populate_contents()
 	for(var/i in 1 to 3)
-		new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow(src)
+		new /obj/item/gun/ballistic/bow/cross(src)
 		new /obj/item/ammo_holder/quiver/bolts(src)
 
 /datum/stock/import/saigabuck

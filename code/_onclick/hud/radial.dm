@@ -8,9 +8,9 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	var/datum/radial_menu/parent
 
 /atom/movable/screen/radial/proc/set_parent(new_value)
-	UnregisterSignal(parent, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(parent, COMSIG_QDELETING)
 	parent = new_value
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(handle_parent_del))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(handle_parent_del))
 
 /atom/movable/screen/radial/proc/handle_parent_del()
 	SIGNAL_HANDLER
@@ -18,6 +18,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 
 /atom/movable/screen/radial/slice
 	icon_state = "radial_slice"
+	layer = RADIAL_BACKGROUND_LAYER
 	var/choice
 	var/next_page = FALSE
 	var/tooltips = FALSE

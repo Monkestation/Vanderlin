@@ -28,8 +28,8 @@
 
 	blade_dulling = DULLING_BASHCHOP
 
+	/// Dropped upon atom_deconstruct() with a +1/-1 random amount
 	var/debris = null
-	var/static_debris = null
 	var/destroy_sound = 'sound/foley/breaksound.ogg'
 	var/destroy_message = null
 
@@ -49,6 +49,13 @@
 	var/rarity_mod = 0
 
 	vis_flags = VIS_INHERIT_PLANE
+
+	/// The sound this obj makes when something is buckled to it
+	var/buckle_sound = null
+
+	/// The sound this obj makes when something is unbuckled from it
+	var/unbuckle_sound = null
+
 	uses_integrity = TRUE
 
 	// See /code/datums/locks
@@ -88,12 +95,6 @@
 	return ..()
 
 /obj/Initialize(mapload, ...)
-	if(islist(armor))
-		armor = getArmor(arglist(armor))
-	else if(!armor)
-		armor = getArmor()
-	else if(!istype(armor, /datum/armor))
-		stack_trace("Invalid type [armor.type] found in .armor during /obj Initialize()")
 	if(main_material)
 		set_material_information()
 	if(lockid)
@@ -225,14 +226,14 @@
 			usr.client.object_say(src)
 	if(href_list[VV_HK_MASS_DEL_TYPE])
 		if(check_rights(R_DEBUG|R_SERVER))
-			var/action_type = alert("Strict type ([type]) or type and all subtypes?",,"Strict type","Type and subtypes","Cancel")
+			var/action_type = tgui_alert(usr, "Strict type ([type]) or type and all subtypes?", "Type", list("Strict type","Type and subtypes","Cancel"))
 			if(action_type == "Cancel" || !action_type)
 				return
 
-			if(alert("Are you really sure you want to delete all objects of type [type]?",,"Yes","No") != "Yes")
+			if(tgui_alert(usr, "Are you really sure you want to delete all objects of type [type]?", "Mass Delete", list("Yes","No")) != "Yes")
 				return
 
-			if(alert("Second confirmation required. Delete?",,"Yes","No") != "Yes")
+			if(tgui_alert(usr, "Second confirmation required. Delete?", "Confirm", list("Yes","No")) != "Yes")
 				return
 
 			var/O_type = type
@@ -269,7 +270,7 @@
 	if(unique_reskin && !current_skin)
 		. += "<span class='notice'>Alt-click it to reskin it.</span>"
 
-/obj/AltClick(mob/user)
+/obj/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		reskin_obj(user)

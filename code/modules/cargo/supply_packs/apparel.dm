@@ -2,6 +2,7 @@
 	group = "Apparel"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	abstract_type = /datum/supply_pack/apparel
 
 // HEAD
 
@@ -69,11 +70,6 @@
 	name = "Tricorn"
 	cost = 15
 	contains = /obj/item/clothing/head/helmet/leather/tricorn
-
-/datum/supply_pack/apparel/henhelm
-	name = "Henhelm"
-	cost = 200
-	contains = /obj/item/clothing/head/crown/hemhem
 
 /datum/supply_pack/apparel/easternhat
 	name = "Eastern Hat"
@@ -421,10 +417,10 @@
 	cost = 25
 	contains = /obj/item/clothing/pants/trou/beltpants
 
-/datum/supply_pack/apparel/atgervi_trousers
-	name = "Atgervi Trousers"
+/datum/supply_pack/apparel/furlined_trousers
+	name = "Fur Pants"
 	cost = 35
-	contains = /obj/item/clothing/pants/trou/leather/atgervi
+	contains = /obj/item/clothing/pants/trou/leather/furpants
 
 // SHOES
 
@@ -468,10 +464,10 @@
 	cost = 50
 	contains = /obj/item/clothing/shoes/anklets
 
-/datum/supply_pack/apparel/otavan_boots
-	name = "Otavan Boots"
+/datum/supply_pack/apparel/grenzel_boots
+	name = "Grenzelhoftian Leather Boots"
 	cost = 30
-	contains = /obj/item/clothing/shoes/otavan
+	contains = /obj/item/clothing/shoes/grenzel
 
 /datum/supply_pack/apparel/buckle_boots
 	name = "Buckled Boots"
@@ -488,10 +484,10 @@
 	cost = 20
 	contains = /obj/item/clothing/shoes/boots/clothlinedanklets
 
-/datum/supply_pack/apparel/atgervi_boots
-	name = "Atgervie Boots"
+/datum/supply_pack/apparel/furlined_boots
+	name = "Fur-Lined Boots"
 	cost = 30
-	contains = /obj/item/clothing/shoes/boots/leather/atgervi
+	contains = /obj/item/clothing/shoes/boots/leather/furlined
 
 /datum/supply_pack/apparel/watch_boots
 	name = "Watch Boots"
@@ -523,12 +519,12 @@
 /datum/supply_pack/apparel/fur_gloves
 	name = "Fur Gloves"
 	cost = 15
-	contains = /obj/item/clothing/gloves/angle/atgervi
+	contains = /obj/item/clothing/gloves/angle/furlined
 
-/datum/supply_pack/apparel/otavan_gloves
-	name = "Otavan Gloves"
+/datum/supply_pack/apparel/grenzel_gloves
+	name = "Grenzelhoftian Leather Gloves"
 	cost = 25
-	contains = /obj/item/clothing/gloves/leather/otavan
+	contains = /obj/item/clothing/gloves/leather/grenzel
 
 /datum/supply_pack/apparel/black_gloves
 	name = "Black Gloves"

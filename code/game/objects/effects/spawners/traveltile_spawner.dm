@@ -90,6 +90,12 @@
 /obj/effect/spawner/traveltile_spawner/vertical/inhumen
 	travel_tile = /obj/structure/fluff/traveltile/to_inhumen_tribe
 
+/obj/effect/spawner/traveltile_spawner/horizontal/jarosite
+	travel_tile = /obj/structure/fluff/traveltile/to_acid_caves
+
+/obj/effect/spawner/traveltile_spawner/vertical/jarosite
+	travel_tile = /obj/structure/fluff/traveltile/to_acid_caves
+
 /*	..................   Traveltiles   ................... */ // these are the ones on centcom, where the actual lair is, to reduce varedits onmap
 /obj/structure/fluff/traveltile/exit_bandit		// must NOT be a traveltile/bandit child, because that one has a check for banditcamp trait. People should always be able to leave the camp.
 	aportalid = "banditin"
@@ -100,7 +106,6 @@
 	aportalgoesto = "banditin"
 	required_trait = TRAIT_BANDITCAMP
 	can_gain_with_sight = TRUE
-	can_gain_by_walking = TRUE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_vampire	// must NOT be a traveltile/vampire child, because that one has a check for banditcamp trait. People should always be able to leave the camp.
@@ -112,19 +117,74 @@
 	aportalgoesto = "vampin"
 	required_trait = TRAIT_VAMPMANSION
 	can_gain_with_sight = TRUE
-	can_gain_by_walking = TRUE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_inhumen
 	aportalid = "inhumenin"
 	aportalgoesto = "inhumenexit"
 
-
 /obj/structure/fluff/traveltile/to_inhumen_tribe
 	name = "to the Deep Bog"
 	aportalid = "inhumenexit"
 	aportalgoesto = "inhumenin"
 	required_trait = TRAIT_INHUMENCAMP
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/to_acid_caves
+	name = "to the Acid Caves"
+	aportalid = "acid_out"
+	aportalgoesto = "acid_in"
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/from_acid_caves
+	aportalid = "acid_in"
+	aportalgoesto = "acid_out"
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/inquisition
+	name = "To the Vanderlin Basin"
+	aportalid = "inq_exit"
+	aportalgoesto = "inq_enter"
+	required_trait = TRAIT_INQUISITION
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/exit_inquisition
+	name = "To the Inquisitorial Lodge"
+	aportalid = "inq_enter"
+	aportalgoesto = "inq_exit"
+	required_trait = TRAIT_INQUISITION
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/gallowband_bog
+	name = "To the Bog Witch"
+	aportalid = "gallow_bog"
+	aportalgoesto = "bog_gallow"
+	required_trait = TRAIT_GALLOWBAND
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/bog_gallowband
+	name = "To the Gallowband"
+	aportalid = "bog_gallow"
+	aportalgoesto = "gallow_bog"
+	required_trait = TRAIT_GALLOWBAND
+	can_gain_with_sight = FALSE
+	can_gain_by_walking = FALSE
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/courtagent_sewers
+	name = "To the Sewers"
+	aportalid = "agent_sewers"
+	aportalgoesto = "sewers_agent"
+	required_trait = TRAIT_COURTAGENT
+	can_gain_with_sight = FALSE
+	can_gain_by_walking = FALSE
+	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/sewers_courtagent
+	name = "To the Hideout"
+	aportalid = "sewers_agent"
+	aportalgoesto = "agent_sewers"
+	required_trait = TRAIT_COURTAGENT
 	can_gain_with_sight = FALSE
 	can_gain_by_walking = FALSE
 	check_other_side = TRUE

@@ -15,6 +15,7 @@
 
 	grid_height = 32
 	grid_width = 64
+	item_weight = 14 GRAMS
 	var/list/colors = list()
 
 
@@ -38,20 +39,20 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/paint_palette/proc/remove_color(mob/user)
-	var/remove_color = input(user, "Choose a color to remove") as anything in colors
+	var/remove_color = tgui_input_list(user, "Choose a color to remove", colors)
 	if(!remove_color)
 		return
 	colors -= remove_color
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/paint_palette/attack_hand_secondary(mob/user, params)
+/obj/item/paint_palette/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	remove_color(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/paint_palette/attack_self(mob/user, params)
+/obj/item/paint_palette/attack_self(mob/user, list/modifiers)
 	. = ..()
 	add_color(user)
 

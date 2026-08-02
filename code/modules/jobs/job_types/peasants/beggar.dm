@@ -1,5 +1,24 @@
+/datum/attribute_holder/sheet/job/vagrant
+	attribute_variance = list(
+		STAT_FORTUNE = list(-9, 9),
+		/datum/attribute/skill/misc/sneaking = list(20, 50),
+		/datum/attribute/skill/misc/stealing = list(20, 50),
+		/datum/attribute/skill/misc/lockpicking = list(20, 50),
+		/datum/attribute/skill/misc/climbing = list(30, 50),
+		/datum/attribute/skill/combat/wrestling = list(-10, 20),
+		/datum/attribute/skill/combat/unarmed = list(20, 30),
+		/datum/attribute/skill/craft/alchemy = list(20, 30),
+		/datum/attribute/skill/craft/crafting = list(10, 20),
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -3,
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = -2
+	)
+
 /datum/job/vagrant
-	title = "Beggar"
+	title = JOB_BEGGAR
+	alt_titles = list("Reject", "Bum", "Tramp", "Vagabond", "Drifter")
 	tutorial = "The stench of your piss-laden clothes dont bug you anymore, \
 	the glances of disgust and loathing others give you is just a friendly greeting; \
 	the only reason you've not been killed already is because volfs are known to be repelled by decaying flesh. \
@@ -12,30 +31,18 @@
 	spawn_positions = 15
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
+	knows_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/vagrant
 	can_random = FALSE
 	can_have_apprentices = FALSE
+	can_be_apprentice = TRUE
 
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
-	jobstats = list(
-		STATKEY_INT = -3,
-		STATKEY_CON = -2,
-		STATKEY_END = -2
-	)
-
-	skills = list(
-		/datum/skill/misc/sneaking = 1,
-		/datum/skill/misc/stealing = 1,
-		/datum/skill/misc/lockpicking = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/craft/alchemy = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/vagrant
 
 /datum/job/vagrant/New()
 	. = ..()
@@ -49,30 +56,14 @@
 	else
 		spawned.set_hygiene(HYGIENE_LEVEL_DIRTY)
 
-	// Luck roll
-	spawned.base_fortune = rand(1, 20)
-	spawned.recalculate_stats(FALSE)
-
-	spawned.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2,3,4), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/stealing, pick(1,2,3,4), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/climbing, pick(1,2,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/alchemy, pick(1,2), TRUE)
-
 
 /datum/outfit/vagrant
-	name = "Beggar"
+	name = JOB_BEGGAR
 
 /datum/outfit/vagrant/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	if(prob(20))
 		head = /obj/item/clothing/head/knitcap
-	if(prob(5))
-		beltr = /obj/item/reagent_containers/powder/moondust
-	if(prob(10))
-		beltl = /obj/item/clothing/face/cigarette/rollie/cannabis
 	if(prob(10))
 		cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 	if(prob(10))
@@ -85,3 +76,5 @@
 	else
 		pants = /obj/item/clothing/pants/tights/colored/vagrant
 		shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
+
+	neck = /obj/item/storage/belt/pouch
