@@ -490,11 +490,11 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
-"CV" = (
+"Cb" = (
 /obj/structure/window{
 	color = "#e09dda"
 	},
-/turf/open/floor/grass/eora,
+/turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
 "Di" = (
 /obj/structure/window{
@@ -820,6 +820,12 @@
 /obj/structure/hotspring,
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
+"Zw" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "ZK" = (
 /obj/item/bin/water,
 /turf/open/floor/ruinedwood/two,
@@ -839,12 +845,12 @@
 (1,1,1) = {"
 SU
 lF
-CV
-CV
+Zw
+Zw
 lF
 lF
-CV
-CV
+Zw
+Zw
 SU
 Aq
 xu
@@ -1028,7 +1034,7 @@ Aq
 (8,1,1) = {"
 SU
 lF
-CV
+Zw
 lF
 lF
 SU
@@ -1560,8 +1566,8 @@ ar
 ar
 SU
 lF
-Di
-Di
+Cb
+Cb
 lF
 SU
 ar
