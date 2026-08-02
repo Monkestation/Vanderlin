@@ -57,7 +57,7 @@
 	south_offset = 7
 	west_offset = 9
 
-	/datum/map_template/dungeon/room/eorarest
+/datum/map_template/dungeon/room/eorarest
 	mappath = "_maps/matthios_tomb/rest/eorarest.dmm"
 	id = "eorarest"
 	width = 25
