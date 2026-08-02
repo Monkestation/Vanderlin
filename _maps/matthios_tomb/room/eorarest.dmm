@@ -296,6 +296,12 @@
 /obj/structure/flora/hotspring_rocks/small/three,
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
+"op" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
 "oU" = (
 /obj/item/clothing/cloak/apron/cook,
 /turf/open/floor/ruinedwood/two,
@@ -357,6 +363,12 @@
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
+"sn" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "sz" = (
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/blocks/newstone/alt,
@@ -415,12 +427,6 @@
 /obj/item/clothing/shirt/dress/stewarddress,
 /obj/item/clothing/head/crown/circlet/goldheaddress,
 /turf/open/floor/tile/diamond/purple,
-/area/under/tomb/indoors/rest)
-"wM" = (
-/obj/structure/window{
-	color = "#e09dda"
-	},
-/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "wX" = (
 /obj/structure/table/church/m,
@@ -552,6 +558,12 @@
 	},
 /turf/open/openspace,
 /area/under/tomb/indoors/rest)
+"GS" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
 "Hd" = (
 /obj/structure/hotspring/border/three,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -651,12 +663,6 @@
 /area/under/tomb/indoors/rest)
 "LM" = (
 /turf/open/floor/grass/yel,
-/area/under/tomb/indoors/rest)
-"LN" = (
-/obj/structure/window{
-	color = "#e09dda"
-	},
-/turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
 "Mc" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/west,
@@ -845,12 +851,12 @@
 (1,1,1) = {"
 SU
 lF
-wM
-wM
+sn
+sn
 lF
 lF
-wM
-wM
+sn
+sn
 SU
 Aq
 xu
@@ -1034,7 +1040,7 @@ Aq
 (8,1,1) = {"
 SU
 lF
-wM
+sn
 lF
 lF
 SU
@@ -1566,8 +1572,8 @@ ar
 ar
 SU
 lF
-LN
-LN
+GS
+GS
 lF
 SU
 ar
@@ -1581,7 +1587,7 @@ fW
 jz
 bS
 bS
-Di
+op
 ar
 ar
 ar
