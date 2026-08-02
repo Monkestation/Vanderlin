@@ -502,12 +502,6 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
-"Di" = (
-/obj/structure/window{
-	color = "#e09dda"
-	},
-/turf/closed/basic,
-/area/under/tomb/indoors/rest)
 "Dv" = (
 /obj/structure/flora/grass/herb/necralily,
 /turf/open/floor/dirt/road,
@@ -1656,7 +1650,7 @@ PS
 oU
 PS
 PS
-Di
+GS
 ar
 "}
 (6,1,2) = {"
@@ -1683,7 +1677,7 @@ BX
 PS
 PS
 Al
-Di
+GS
 ar
 "}
 (7,1,2) = {"
