@@ -77,13 +77,11 @@
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "dA" = (
+/obj/structure/mirror/fancy,
 /obj/structure/window{
 	color = "#e09dda"
 	},
-/obj/structure/mirror/fancy,
-/turf/closed/wall/mineral/decostone/long{
-	color = "#e09dda"
-	},
+/turf/closed/basic,
 /area/under/tomb/indoors/rest)
 "dC" = (
 /obj/structure/hotspring/border/three,
@@ -139,14 +137,6 @@
 "fW" = (
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/tile/diamond/purple,
-/area/under/tomb/indoors/rest)
-"fY" = (
-/obj/structure/window{
-	color = "#e09dda"
-	},
-/turf/closed/wall/mineral/decostone/long{
-	color = "#e09dda"
-	},
 /area/under/tomb/indoors/rest)
 "gm" = (
 /obj/structure/table/wood/bar,
@@ -843,12 +833,12 @@
 (1,1,1) = {"
 SU
 lF
-fY
-fY
+Di
+Di
 lF
 lF
-fY
-fY
+Di
+Di
 SU
 Aq
 xu
@@ -1032,7 +1022,7 @@ Aq
 (8,1,1) = {"
 SU
 lF
-fY
+Di
 lF
 lF
 SU
@@ -1579,7 +1569,7 @@ fW
 jz
 bS
 bS
-qN
+Di
 ar
 ar
 ar
