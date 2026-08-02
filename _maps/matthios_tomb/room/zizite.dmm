@@ -224,6 +224,7 @@
 	pixel_y = 1;
 	pixel_x = 3
 	},
+/obj/item/clothing/cloak/grandmaster,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "ms" = (
