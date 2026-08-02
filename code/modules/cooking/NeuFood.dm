@@ -264,7 +264,7 @@
 		to_chat(user, span_warning("You can't clean the [src] while it has something inside of it!"))
 		return ITEM_INTERACT_BLOCKING
 
-	if(!tool_behaviour == TOOL_SPOON)
+	if(!(tool.tool_behaviour == TOOL_SPOON))
 		return ..()
 
 	if(!reagents?.total_volume)
