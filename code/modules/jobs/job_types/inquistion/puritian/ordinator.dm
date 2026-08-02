@@ -111,7 +111,7 @@
 	shoes = /obj/item/clothing/shoes/grenzel/inqboots
 	backl = /obj/item/storage/backpack/satchel/grenzel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/ordinatorcape
 	head = /obj/item/clothing/head/helmet/heavy/ordinatorhelm

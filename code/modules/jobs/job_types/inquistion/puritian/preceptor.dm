@@ -92,5 +92,5 @@
 	gloves = /obj/item/clothing/gloves/bandages/pugilist
 	neck = /obj/item/clothing/neck/psycross/gold
 	wrists = /obj/item/clothing/wrists/bracers/preceptor
-	ring = /obj/item/clothing/ring/signet
+	ring = /obj/item/clothing/ring/signet/psy/g
 
