@@ -81,7 +81,7 @@
 /obj/structure/window{
 	color = "#e09dda"
 	},
-/turf/closed/basic,
+/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "dC" = (
 /obj/structure/hotspring/border/three,
@@ -490,6 +490,12 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
+"CV" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "Di" = (
 /obj/structure/window{
 	color = "#e09dda"
@@ -833,12 +839,12 @@
 (1,1,1) = {"
 SU
 lF
-Di
-Di
+CV
+CV
 lF
 lF
-Di
-Di
+CV
+CV
 SU
 Aq
 xu
@@ -1022,7 +1028,7 @@ Aq
 (8,1,1) = {"
 SU
 lF
-Di
+CV
 lF
 lF
 SU
