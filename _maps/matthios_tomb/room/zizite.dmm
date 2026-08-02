@@ -45,10 +45,6 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "dm" = (
-/obj/item/clothing/armor/plate/full/holysee{
-	pixel_x = 8;
-	pixel_y = 13
-	},
 /obj/item/clothing/armor/chainmail/hauberk/ancient{
 	pixel_y = -9;
 	pixel_x = -11
@@ -222,9 +218,6 @@
 /obj/item/clothing/shirt/ornate/dress{
 	pixel_y = -6;
 	pixel_x = 14
-	},
-/obj/item/clothing/cloak/holysee{
-	pixel_y = -17
 	},
 /obj/effect/decal/remains/human,
 /obj/item/clothing/ring/gold/saffira{
