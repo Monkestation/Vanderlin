@@ -416,6 +416,12 @@
 /obj/item/clothing/head/crown/circlet/goldheaddress,
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
+"wM" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "wX" = (
 /obj/structure/table/church/m,
 /turf/open/floor/churchmarble,
@@ -487,12 +493,6 @@
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot{
 	pixel_y = 1
-	},
-/turf/open/floor/ruinedwood/two,
-/area/under/tomb/indoors/rest)
-"Cb" = (
-/obj/structure/window{
-	color = "#e09dda"
 	},
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
@@ -651,6 +651,12 @@
 /area/under/tomb/indoors/rest)
 "LM" = (
 /turf/open/floor/grass/yel,
+/area/under/tomb/indoors/rest)
+"LN" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
 "Mc" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/west,
@@ -820,12 +826,6 @@
 /obj/structure/hotspring,
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
-"Zw" = (
-/obj/structure/window{
-	color = "#e09dda"
-	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "ZK" = (
 /obj/item/bin/water,
 /turf/open/floor/ruinedwood/two,
@@ -845,12 +845,12 @@
 (1,1,1) = {"
 SU
 lF
-Zw
-Zw
+wM
+wM
 lF
 lF
-Zw
-Zw
+wM
+wM
 SU
 Aq
 xu
@@ -1034,7 +1034,7 @@ Aq
 (8,1,1) = {"
 SU
 lF
-Zw
+wM
 lF
 lF
 SU
@@ -1566,8 +1566,8 @@ ar
 ar
 SU
 lF
-Cb
-Cb
+LN
+LN
 lF
 SU
 ar
