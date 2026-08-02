@@ -382,7 +382,6 @@
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "yn" = (
-/obj/item/natural/wood/plank,
 /obj/item/natural/wood/plank{
 	pixel_y = 7;
 	pixel_x = -7
