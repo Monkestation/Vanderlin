@@ -26,11 +26,13 @@
 
 /obj/item/clothing/ring/bronze
 	name = "bronze ring"
+	icon_state = "ring_b"
 	desc = "A ring of plain bronze."
 	sellprice = 60
 
 /obj/item/clothing/ring/blacksteel
 	name = "blacksteel ring"
+	icon_state = "ring_bs"
 	desc = "A myhtical blacksteel ring."
 	sellprice = 150
 
