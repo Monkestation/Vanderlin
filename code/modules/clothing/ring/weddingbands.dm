@@ -27,9 +27,9 @@
 		return
 
 /obj/item/clothing/ring/band/get_mechanics_examine(mob/user)
-    . = ..()
-    . += span_info("Right-click to add a custom name and description to the weddingband.")
-    . += span_info("If your character is meant to be already married to someone else, offer the ring to them while they are offering theirs to you. This will mark you as spouses, but will not change your names.")
+	. = ..()
+	. += span_info("Right-click to add a custom name and description to the weddingband.")
+	. += span_info("If your character is meant to be already married to someone else, offer the ring to them while they are offering theirs to you. This will mark you as spouses, but will not change your names.")
 
 /obj/item/clothing/ring/band/gold
 	name = "gold weddingband"

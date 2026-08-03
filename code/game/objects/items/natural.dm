@@ -6,6 +6,7 @@
 
 	grid_width = 32
 	grid_height = 32
+	sellprice = 1
 	var/bundletype = null
 
 /obj/item/natural/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
@@ -229,7 +230,7 @@
 			amount -= 1
 			var/obj/F = new stacktype(get_turf(src))
 			H.put_in_hands(F)
-			user.balloon_alert(user, "I remove \a [F].")
+			user.balloon_alert(user, "i remove \a [F].")
 
 	update_bundle()
 

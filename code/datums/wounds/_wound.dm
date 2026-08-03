@@ -185,7 +185,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!bodypart_owner || !length(organ_efficiency_reduction))
 		return
 
-	for(var/organ_slot as anything in organ_efficiency_reduction)
+	for(var/organ_slot in organ_efficiency_reduction)
 		var/obj/item/organ/organ = bodypart_owner.getorganslot(organ_slot)
 		organ?.apply_efficiency_modification(organ_efficiency_reduction[organ_slot], organ_slot, src)
 
@@ -193,7 +193,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!bodypart_owner || !length(organ_efficiency_reduction))
 		return
 
-	for(var/organ_slot as anything in organ_efficiency_reduction)
+	for(var/organ_slot in organ_efficiency_reduction)
 		var/obj/item/organ/organ = bodypart_owner.getorganslot(organ_slot)
 		organ?.remove_efficiency_modification(organ_slot, src)
 

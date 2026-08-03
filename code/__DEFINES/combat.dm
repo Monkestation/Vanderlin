@@ -36,11 +36,13 @@
 ///protection from internal damage to the organs
 #define WOUND "wound"
 
+#define ARMOR_ALL "all_damage_types"
+
 /// Armor values that are used for damage
-#define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
+#define ARMOR_LIST_DAMAGE list(BLUNT, SLASH, STAB, PIERCE)
 
 /// All armors, preferable in the order as seen above
-#define ARMOR_LIST_ALL(...) list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC)
+#define ARMOR_LIST_ALL list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC, WOUND)
 
 #define MELEE_TYPES list(BLUNT, SLASH, STAB)
 
@@ -71,6 +73,7 @@
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
 #define BLEEDOUT (1<<6)
+#define BUILDING_ORGANS (1<<7)
 
 //Health Defines
 #define HEALTH_THRESHOLD_CRIT 100
@@ -170,6 +173,7 @@
 #define SHORT_CUT		 /datum/intent/sword/cut/short
 #define SWDLONG_CUT		 /datum/intent/sword/cut/long
 #define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define ZWEI_CUT_REACH   /datum/intent/sword/cut/zwei/reach
 #define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 
 #define SWORD_THRUST	 /datum/intent/sword/thrust
@@ -231,6 +235,7 @@
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
 #define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
+#define POLEHAMMER_STRIKE   /datum/intent/mace/strike/polehammer
 
 #define MACE_THRUST			/datum/intent/mace/thrust
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
@@ -316,6 +321,7 @@
 #define BCLASS_BITE			"bite"
 #define BCLASS_BURN			"charring"
 #define BCLASS_LASHING		"lashing"
+#define BCLASS_INTENSE_BURN "intense burn"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1

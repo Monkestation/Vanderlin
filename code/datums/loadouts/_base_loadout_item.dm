@@ -39,11 +39,15 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 	return ("[type]" in C.prefs.owned_loadout_items)
 
 /datum/loadout_item/proc/can_afford_single(client/C)
+	if(loadout_flags & LOADOUT_FLAG_GIVEAWAY_ONLY)
+		return FALSE
 	if(triumph_cost_permanent)
 		return TRUE
 	return get_triumph_amount(C.ckey) >= CEILING(triumph_cost_permanent * 0.05, 1)
 
 /datum/loadout_item/proc/can_afford_permanent(client/C)
+	if(loadout_flags & LOADOUT_FLAG_GIVEAWAY_ONLY)
+		return FALSE
 	if(!triumph_cost_permanent)
 		return TRUE
 	return get_triumph_amount(C.ckey) >= triumph_cost_permanent
@@ -74,15 +78,15 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 /// Returns TRUE if this item is currently owned by the client and all runtime access checks pass.
 /// Use this as the authoritative check in other systems (species checks, perk grants, etc).
 /datum/loadout_item/proc/is_owned_and_accessible(client/C)
-    if(!C?.prefs)
-        return FALSE
-    if(!("[type]" in C.prefs.owned_loadout_items))
-        return FALSE
-    // Patreon can lapse after purchase; re-validate at runtime.
-    if(loadout_flags & LOADOUT_FLAG_PATREON_LOCKED)
-        if(!C?.patreon?.is_donator())
-            return FALSE
-    return TRUE
+	if(!C?.prefs)
+		return FALSE
+	if(!("[type]" in C.prefs.owned_loadout_items))
+		return FALSE
+	// Patreon can lapse after purchase; re-validate at runtime.
+	if(loadout_flags & LOADOUT_FLAG_PATREON_LOCKED)
+		if(!C?.patreon?.is_donator())
+			return FALSE
+	return TRUE
 
 /proc/owns_loadout_item(client/client, datum/loadout_item/loadout_item)
 	var/datum/loadout_item/singleton = GLOB.loadout_items[loadout_item]

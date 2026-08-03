@@ -10,13 +10,20 @@
 	if(isclothing(wear_mask)) //Mask
 		. += wear_mask.flash_protect
 
-/mob/living/carbon/get_ear_protection()
-	. = ..()
-	var/obj/item/organ/ears/E = getorganslot(ORGAN_SLOT_EARS)
-	if(!E)
-		return INFINITY
-	else
-		. += E.bang_protect
+/mob/living/carbon/sound_damage(damage, deafen)
+	if(status_flags & GODMODE)
+		return
+	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+	if(QDELETED(ears))
+		return
+	if(damage)
+		ears.applyOrganDamage(damage * ears.damage_multiplier)
+	if(deafen)
+		ears.adjust_temporary_deafness(deafen)
+
+/mob/living/carbon/get_ear_protection(ignore_deafness = FALSE)
+	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+	return ..() + ears?.bang_protect
 
 /mob/living/carbon/proc/virus_immunity()
 	var/antibiotic_boost = max(0, get_antibiotics()/100)
@@ -339,6 +346,8 @@
 		return
 	//Propagation through pulling, fireman carry
 	if(!(flags & SHOCK_ILLUSION))
+		if(undergoing_cardiac_arrest())
+			set_heartattack(FALSE)
 		var/list/shocking_queue = list()
 		if(iscarbon(pulling) && source != pulling)
 			shocking_queue += pulling
@@ -465,36 +474,6 @@
 		if(prob(20))
 			to_chat(src, "<span class='notice'>Something bright flashes in the corner of my vision!</span>")
 
-
-/mob/living/carbon/soundbang_act(intensity = 1, stun_pwr = 20, damage_pwr = 5, deafen_pwr = 15)
-	var/list/reflist = list(intensity) // Need to wrap this in a list so we can pass a reference
-	SEND_SIGNAL(src, COMSIG_CARBON_SOUNDBANG, reflist)
-	intensity = reflist[1]
-	var/ear_safety = get_ear_protection()
-	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
-	var/effect_amount = intensity - ear_safety
-	if(effect_amount > 0)
-		if(stun_pwr)
-			Paralyze((stun_pwr*effect_amount)*0.1)
-			Knockdown(stun_pwr*effect_amount)
-
-		if(istype(ears) && (deafen_pwr || damage_pwr))
-			var/ear_damage = damage_pwr * effect_amount
-			var/deaf = deafen_pwr * effect_amount
-			adjustEarDamage(ear_damage,deaf)
-
-			if(ears.damage >= 15)
-				to_chat(src, "<span class='warning'>My ears start to ring badly!</span>")
-				if(prob(ears.damage - 5))
-					to_chat(src, "<span class='danger'>I can't hear anything!</span>")
-					ears.damage = min(ears.damage, ears.maxHealth)
-					// you need earmuffs, inacusiate, or replacement
-			else if(ears.damage >= 5)
-				to_chat(src, "<span class='warning'>My ears start to ring!</span>")
-			SEND_SOUND(src, sound('sound/blank.ogg',0,1,0,250))
-		return effect_amount //how soundbanged we are
-
-
 /mob/living/carbon/damage_clothes(damage_amount, damage_type = BRUTE, damage_flag = 0, def_zone)
 	if(damage_type != BRUTE && damage_type != BURN)
 		return
@@ -509,9 +488,3 @@
 			hit_clothes = head
 		if(hit_clothes)
 			hit_clothes.take_damage(damage_amount, damage_type, damage_flag, 0)
-
-/mob/living/carbon/can_hear()
-	. = FALSE
-	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
-	if((istype(ears) && !ears.deaf) || (src.stat == DEAD)) // 2nd check so you can hear messages when beheaded
-		. = TRUE

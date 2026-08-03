@@ -6,7 +6,7 @@
 		STAT_INTELLIGENCE = -2,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/unarmed = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/swimming = 30,
@@ -69,7 +69,7 @@
 	spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE) // this will fail on the unarmed discipline
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 50)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 		if("Katar")
@@ -83,12 +83,12 @@
 	name = "Disciple (Sacrestants)"
 	shoes = /obj/item/clothing/shoes/psydonboots
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather/rope/dark
 	pants = /obj/item/clothing/pants/tights/colored/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	cloak = /obj/item/clothing/cloak/psydontabard/alt
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	neck = /obj/item/clothing/neck/psycross/silver
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
 	mask = /obj/item/clothing/head/helmet/blacksteel/psythorns

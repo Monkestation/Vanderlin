@@ -85,7 +85,7 @@
 
 /mob/living/carbon/human/species/human/northern/bog_deserters
 	ai_controller = /datum/ai_controller/human_npc
-	faction = list("viking", "station")
+	faction = list(FACTION_VIKINGS)
 	ambushable = FALSE
 	cmode = 1
 	setparrytime = 30
@@ -104,7 +104,6 @@
 /mob/living/carbon/human/species/human/northern/bog_deserters/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	set_species(/datum/species/human/northern)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 	is_silent = TRUE
 

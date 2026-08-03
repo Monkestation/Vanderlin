@@ -24,6 +24,12 @@
 #define AUTH_HEADER ("Basic " + CONFIG_GET(string/comms_key))
 #define OLD_PLEXORA_CONFIG "config/plexora.json"
 
+//// Options
+
+/// Runs check_servers() and updates the up_servers with their statuses.
+/// This may be useful if you are adding a user portal to quickly jump to sister servers.
+#define PLX_SHOULD_CHECK_SERVERS
+
 SUBSYSTEM_DEF(plexora)
 	name = "Plexora"
 	wait = 30 SECONDS
@@ -46,11 +52,18 @@ SUBSYSTEM_DEF(plexora)
 	var/mob/restart_requester
 	var/list/active_requests = list()
 
+	var/list/up_servers = list()
+	var/current_server_id = null
+
 /datum/controller/subsystem/plexora/Initialize()
 	if(!CONFIG_GET(flag/plexora_enabled) && !load_old_plexora_config())
 		enabled = FALSE
 		flags |= SS_NO_FIRE
 		return TRUE
+
+	current_server_id = CONFIG_GET(string/plexora_server_id)
+	if(current_server_id)
+		log_world("This server's Plexora ID is [current_server_id]")
 
 	var/comms_key = CONFIG_GET(string/comms_key)
 	if (!comms_key)
@@ -71,6 +84,7 @@ SUBSYSTEM_DEF(plexora)
 		stack_trace("SSplexora is enabled BUT plexora is not alive or running! SS has not been aborted, subsequent fires will take place.")
 	else
 		serverstarted()
+		check_servers()
 
 	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_STARTING, PROC_REF(roundstarted))
 
@@ -150,6 +164,7 @@ SUBSYSTEM_DEF(plexora)
 		if(request.is_complete()) // rust-g will clear the job once it's complete
 			active_requests -= request
 			qdel(request)
+	check_servers()
 
 /datum/controller/subsystem/plexora/proc/notify_shutdown(restart_type_override)
 	var/static/server_restart_sent = FALSE
@@ -211,14 +226,33 @@ SUBSYSTEM_DEF(plexora)
 		"playerstring" = "**Total**: [length(GLOB.clients)]",
 	))
 
-/datum/controller/subsystem/plexora/proc/check_byondserver_status(id)
-	if (isnull(id)) return
+/datum/controller/subsystem/plexora/proc/check_servers()
+#ifndef PLX_SHOULD_CHECK_SERVERS
+	return
+#else
+	var/list/servers_to_check = list(
+		PLEXORA_SERVERID_MRP,
+		PLEXORA_SERVERID_MONKESPAW,
+		PLEXORA_SERVERID_MONKERIS,
+		PLEXORA_SERVERID_VANDERLIN,
+	)
+	for(var/serverid in servers_to_check)
+		if(serverid == current_server_id)
+			continue
+		up_servers[serverid] = check_byondserver_status(serverid, null)
+#endif
+
+// Check status by id or game port
+/datum/controller/subsystem/plexora/proc/check_byondserver_status(id, port)
+	if (!id && !port)
+		return
 
 	var/list/body = list(
-		"id" = id
+		"id" = id,
+		"port" = port,
 	)
 
-	var/datum/http_request/request = new(RUSTG_HTTP_METHOD_GET, "[base_url]/byondserver_alive", json_encode(body), default_headers)
+	var/datum/http_request/request = new(RUSTG_HTTP_METHOD_POST, "[base_url]/byondserver_alive", json_encode(body), default_headers)
 	request.begin_async()
 	UNTIL_OR_TIMEOUT(request.is_complete(), 5 SECONDS)
 	var/datum/http_response/response = request.into_response()
@@ -377,6 +411,7 @@ SUBSYSTEM_DEF(plexora)
 /datum/world_topic/plx_announce/Run(list/input)
 	var/message = input["message"]
 	var/from = input["from"]
+	// the topic params do contain "encode" (boolean) for html but since we dont have "send_formatted_announcement" it'll skip encoding anyway.
 
 	var/admin_name = span_adminannounce_big("[from] Announces:")
 	var/message_to_announce = ("[span_adminannounce(message)]")
@@ -741,7 +776,7 @@ SUBSYSTEM_DEF(plexora)
 	to_chat(recipient, html = "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 
 	recipient.receive_ahelp(
-		"<a href='?priv_msg=[stealthkey]'>[adminname]</a>",
+		"<a href='byond://?priv_msg=[stealthkey]'>[adminname]</a>",
 		message,
 	)
 
@@ -939,3 +974,5 @@ SUBSYSTEM_DEF(plexora)
 				break
 
 	return text_guess
+
+#undef PLX_SHOULD_CHECK_SERVERS

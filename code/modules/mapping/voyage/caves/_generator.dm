@@ -691,12 +691,11 @@
 
 			valid_fauna[fauna_path] = rule.spawn_weight
 
-		if(valid_fauna.len)
+		if(length(valid_fauna))
 			var/chosen = pickweight(valid_fauna)
 			if(chosen)
 				var/mob/living/mob = new chosen(T)
 				mob.add_faction("islander")
-				SSisland_mobs.register_mob(mob)
 				if(lower_world)
 					SSmobs.enhance_mob(mob, 1 + (biome.difficulty * 2))
 

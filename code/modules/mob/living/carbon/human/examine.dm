@@ -1,9 +1,15 @@
 /mob/living/carbon/human/get_examine_string(mob/user, thats = FALSE)
 	. = ..()
 	var/used_title = get_role_title(src)
+	var/original_title
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		used_title = spy.examine_title
+	else if(job_title_override && job)
+		var/datum/job/job_datum = SSjob.GetJob(job)
+		if(!QDELETED(job_datum))
+			original_title = job_datum.get_default_title(src)
+
 	if(!used_title)
 		return
 	if(user != src && !IsAdminGhost(user))
@@ -18,7 +24,11 @@
 				return
 			if(!user.mind?.do_i_know(mind, real_name))
 				return
-	. += ", the [used_title]"
+
+	var/title_display = used_title
+	if(original_title && original_title != used_title)
+		title_display = conditional_tooltip_alt(used_title, "[original_title]", TRUE)
+	. += ", the [title_display]"
 
 /mob/living/carbon/human/get_examine_list(mob/user, list/P)
 	. = ..()
@@ -41,13 +51,13 @@
 	var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
 	if(spy)
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(spy.examine_species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(spy.examine_species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(spy.examine_species.get_skin_list(), spy.examine_tone) || "incomprehensible"].")
 	else
 		var/datum/species/species = dna?.species
 		if(species?.use_skintones)
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
-				"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
+				"[capitalize(P[THEIR])] [LOWER_TEXT(species.skin_tone_wording || "skin tone")] \
 				is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
 	. = list()
@@ -56,7 +66,7 @@
 	if(culture)
 		// do we know them, are we an observer, or do we share a culture
 		if((do_i_know || O || istype(culture, H?.culture?.type)) && !istype(culture, /datum/culture/universal/ambiguous))
-			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
+			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [LOWER_TEXT(P[THEYRE])]"
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
 		// are they from anywhere
 		else if(!self_inspect)
@@ -124,10 +134,20 @@
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
 		if(client?.is_donator())
 			if(flavortext || headshot_link || ooc_extra_link) // only show flavor text if there is a flavor text and we show headshot
-				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>")
+				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='byond://?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
 
-
+/mob/living/carbon/human/examine_more(mob/user)
+	. = ..()
+	if(!ismob(user))
+		return
+	if(HAS_TRAIT(src, TRAIT_FACELESS) || (!user.can_perform_action(src, NEED_LIGHT) && !isobserver(user)))
+		return
+	var/obscure_name
+	if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
+		obscure_name = TRUE
+	if(isobserver(user))
+		obscure_name = FALSE
+	. |= build_cool_description(get_mob_descriptors(obscure_name, user), src)
 
 //You can include this in any mob's examine() to show the examine texts of status effects!
 /mob/living/proc/status_effect_examines(mob/user, pronoun_replacement, list/P)

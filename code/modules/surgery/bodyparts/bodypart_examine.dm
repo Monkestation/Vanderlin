@@ -26,7 +26,7 @@
 				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 			if(WOUND_BLUNT, WOUND_LASH)
 				. += "Bandage bruises and lashes to allow them to heal."
-			if(WOUND_BURN)
+			if(WOUND_BURN, WOUND_INTENSE_BURN)
 				. += "Disinfect and salve burns to allow them to heal."
 			if("germs")
 				. += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
@@ -280,8 +280,7 @@
 /obj/item/bodypart/proc/get_injuries_desc()
 	var/list/flavor_text = list()
 	var/list/injury_descriptors = list()
-	for(var/thing in injuries)
-		var/datum/injury/injury = thing
+	for(var/datum/injury/injury as anything in injuries)
 		var/this_injury_desc = injury.get_desc()
 		if(!this_injury_desc)
 			continue
@@ -327,9 +326,6 @@
 		var/clean_final = ""
 		final_text += injury
 		clean_final = injury
-		if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
-			final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
-			clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
 		switch(injury_descriptors[injury])
 			if(-INFINITY to 1)
 				final_text = ""

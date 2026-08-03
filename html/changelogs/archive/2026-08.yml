@@ -1,0 +1,29 @@
+2026-08-01:
+  ModDownloading:
+  - bugfix: Wounds are harder to infect.
+  Monkeke2:
+  - rscadd: Added an ability that lets rakshari and werevolves sniff to detect mobs
+      in their vicinity (20 tiles)
+  SmokingCrackForChrist:
+  - balance: Gives Vile Renegade (ADEPT) 30 points in sneaking.
+  - sound: Daewalker can now have a proper bloodrave. New theme!
+  dwasint:
+  - admin: Updates job ban panel to include jobs and classes properly.
+  realforest2001:
+  - bugfix: Correctly closes hrefs
+  - bugfix: Magical noble is correctly patron locked.
+  - rscadd: Added a chat color for maniac prayers.
+2026-08-02:
+  realforest2001:
+  - bugfix: Fixes accent selection.
+2026-08-03:
+  Spitegremlin:
+  - rscadd: Added new chisel and sprite for bronze chisel, repaletted the stone hammer
+      and new hammerstone
+  flleeppyy:
+  - bugfix: readd admin proc call check on db query
+  realforest2001:
+  - rscadd: Added plain Bronze and Blacksteel rings.
+  - rscadd: Added Court Agent rings made of Bronze, Gold and Blacksteel.
+  - image: Added icons for the Court Agent rings, and changed silver to new style.
+  - bugfix: Fixed the pathing for inquisition signet rings.

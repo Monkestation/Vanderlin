@@ -90,7 +90,7 @@ GLOBAL_LIST_EMPTY(biggates)
 /obj/structure/gate/Destroy()
 	if(is_big_gate)
 		GLOB.biggates -= src
-	for(var/A as anything in blockers)
+	for(var/A in blockers)
 		QDEL_NULL(A)
 	blockers.Cut()
 	turfsy.Cut()
@@ -197,7 +197,7 @@ GLOBAL_LIST_EMPTY(biggates)
 	var/mob/living/L = user
 	L.changeNext_move(CLICK_CD_MELEE)
 	var/used_time = 10.5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 10)
-	if(!do_after(user, used_time))
+	if(!HAS_TRAIT(user, TRAIT_GATEKEEPER) && !do_after(user, used_time))
 		return
 
 	COOLDOWN_START(src, winch_cooldown, 1.5 SECONDS)

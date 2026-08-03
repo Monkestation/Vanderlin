@@ -42,7 +42,7 @@
 	desc = "An oddly shaped hat made of tightly-sewn leather, commonly worn by spellsinger."
 	icon_state = "spellcasterhat"
 	item_state = "spellcasterhat"
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/head/leather/good
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
@@ -59,7 +59,7 @@
 	name = "spellsinger robes"
 	desc = "A set of reinforced, leather-padded robes worn by spellblades."
 	body_parts_covered = COVERAGE_FULL
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/leather/good
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	armor_class = AC_LIGHT
 	icon_state = "spellcasterrobe"
@@ -79,7 +79,7 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	body_parts_covered = COVERAGE_FULL
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
@@ -99,7 +99,7 @@
 	desc = "A dobo robe with a red tassel. Leather inlays are sewn in. It looks sturdier than a simple robe."
 	icon_state = "eastsuit2"
 	item_state = "eastsuit2"
-	armor = ARMOR_LEATHER_GOOD // Makes it the equivalence of studded with less integrity and better armor
+	armor_type = /datum/armor/leather/good // Makes it the equivalence of studded with less integrity and better armor
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MEDIUM
 
 //craftable variation of eastsuit, essentially requiring the presence of a tailor with relevant materials
@@ -111,7 +111,7 @@
 	icon_state = "eastsuit1"
 	item_state = "eastsuit1"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/leather/good
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MEDIUM
 
 
@@ -120,7 +120,7 @@
 	desc = "Flower-styled robes."
 	icon_state = "eastsuit4"
 	item_state = "eastsuit4"
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/leather/good
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER + 25 // Head Honcho gets a buff
 	sellprice = 25
 
@@ -144,7 +144,7 @@
 	is_barefoot = TRUE
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
-	armor = ARMOR_BOOTS_BAD
+	armor_type = /datum/armor/boots/anklet
 
 /obj/item/clothing/shoes/rumaclan
 	name = "raised sandals"
@@ -152,14 +152,14 @@
 	icon_state = "eastsandals"
 	item_state = "eastsandals"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
-	armor = ARMOR_BOOTS
+	armor_type = /datum/armor/boots/ruma
 
 /obj/item/clothing/gloves/eastgloves1
 	name = "black gloves"
 	desc = "Sleek gloves typically used by swordsmen."
 	icon_state = "eastgloves1"
 	item_state = "eastgloves1"
-	armor = ARMOR_GLOVES_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	resistance_flags = null
 	blocksound = SOFTHIT
@@ -175,7 +175,7 @@
 	desc = "Unusual gloves worn by foreign gangs."
 	icon_state = "eastgloves2"
 	item_state = "eastgloves2"
-	armor = ARMOR_GLOVES_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	resistance_flags = null
 	blocksound = SOFTHIT
@@ -191,7 +191,7 @@
 	desc = "A reinforced bamboo hat."
 	icon_state = "easthat"
 	item_state = "easthat"
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/head/padded/good
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
 	sewrepair = /datum/attribute/skill/misc/sewing/mending

@@ -323,27 +323,30 @@
 	pain_damage_coeff = pain_power
 
 /// Can this bodypart rot or get infected?
-/obj/item/bodypart/proc/can_decay()
+/obj/item/bodypart/proc/can_decay(passed_temp)
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
-	check_cold()
+	check_cold(passed_temp)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_FROZEN|BODYPART_DEAD|BODYPART_NO_INFECTION))
 		return FALSE
 	return TRUE
 
-/obj/item/bodypart/proc/check_cold()
+/obj/item/bodypart/proc/check_cold(passed_temp)
 	var/local_temp
-	if(!owner)
-		//Only concern is adding an organ to a freezer when the area around it is cold.
-		if(isturf(loc))
-			var/turf/turf_loc = loc
-			local_temp = turf_loc?.return_temperature()
-		else if(ismob(loc))
-			var/mob/holder = loc
-			var/turf/turf_loc = holder.loc
-			local_temp = turf_loc?.return_temperature()
+	if(passed_temp)
+		local_temp = passed_temp
 	else
-		local_temp = owner.bodytemperature
+		if(!owner)
+			//Only concern is adding an organ to a freezer when the area around it is cold.
+			if(isturf(loc))
+				var/turf/turf_loc = loc
+				local_temp = turf_loc?.return_temperature()
+			else if(ismob(loc))
+				var/mob/holder = loc
+				var/turf/turf_loc = holder.loc
+				local_temp = turf_loc?.return_temperature()
+		else
+			local_temp = owner.bodytemperature
 
 	// Shouldn't happen but just in case
 	if(isnull(local_temp))
@@ -379,22 +382,27 @@
 /obj/item/bodypart/proc/kill_limb()
 	if(!can_decay())
 		return
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(!already_rot)
-		ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && !already_rot)
-		owner.update_body()
-	else
-		update_icon_dropped()
 
-/obj/item/bodypart/proc/revive_limb()
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(already_rot)
-		REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && already_rot)
+	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
+	ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If we were already rotten, no need to update
+	if(was_rotten)
+		return
+
+	owner?.update_body()
+	update_icon_dropped()
+
+/obj/item/bodypart/proc/revive_limb(update_icon = FALSE)
+	REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If it still is rotten, no need to update
+	if(HAS_TRAIT(src, TRAIT_ROTTEN))
+		return
+
+	if(owner && update_icon)
 		owner.update_body()
-	else
-		update_icon_dropped()
+	update_icon_dropped()
 
 /// Adding/removing germs
 /obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
@@ -423,17 +431,20 @@
 	update_limb_efficiency()
 
 /// Return TRUE to get whatever mob this is in to update health.
-/obj/item/bodypart/proc/on_life(delta_time, times_fired)
+/obj/item/bodypart/proc/on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(pain_heal_tick)
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE)
-	if(can_decay())
+		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE))
+			. |= BODYPART_LIFE_UPDATE_HEALTH
+	if(can_decay(passed_temp))
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
-			update_germs(delta_time, times_fired)
+			update_germs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
+			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(number_injuries)
 		update_injuries(delta_time, times_fired)
+		. |= BODYPART_LIFE_UPDATE_HEALTH
 
 /// Check if we need to run on_life()
 /obj/item/bodypart/proc/consider_processing()
@@ -478,7 +489,7 @@
 	if(ishuman(owner) && bare_organ_bonus)
 		var/mob/living/carbon/human/human_owner = owner
 		for(var/obj/item/clothing/clothes_check as anything in human_owner.clothingonpart(src))
-			if(clothes_check.armor.getRating(WOUND))
+			if(clothes_check.get_armor().get_rating(WOUND))
 				bare_organ_bonus = 0
 				break
 
@@ -491,7 +502,7 @@
 		if(WOUND_PUNCTURE, WOUND_BLUNT)
 			organ_damage_minimum *= 0.75
 		// Burn damage is unlikely to damage organs
-		if(WOUND_BURN)
+		if(WOUND_BURN, WOUND_INTENSE_BURN)
 			organ_damage_minimum *= 1.5
 		else
 			organ_damage_hit_minimum *= 1
@@ -597,10 +608,6 @@
 			qdel(injury)
 			continue
 
-		// Bleeding
-		if(owner)
-			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
-
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
@@ -611,7 +618,7 @@
 			heal_amt *= injury.amount
 			injury.heal_damage(heal_amt * delta_time)
 
-	if(post_damage_change())
+	if(post_damage_change(FALSE))
 		owner.update_damage_overlays()
 
 /// Updates brute_damn and burn_damn from injuries
@@ -631,12 +638,12 @@
 		number_injuries += injury.amount
 
 /// General handling of infections
-/obj/item/bodypart/proc/update_germs(delta_time, times_fired)
+/obj/item/bodypart/proc/update_germs(delta_time, times_fired, virus_immunity, antibiotics)
 	//Cryo stops germs from moving and doing their bad stuffs
 	if(owner.bodytemperature <= -15)
 		return
 	handle_germ_sync(delta_time, times_fired)
-	handle_germ_effects(delta_time, times_fired)
+	handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics)
 	handle_antibiotics(delta_time, times_fired)
 
 /// Try to sync wound/inuries etc with our germ level
@@ -669,10 +676,7 @@
 
 
 /// Handle infection effects
-/obj/item/bodypart/proc/handle_germ_effects(delta_time, times_fired)
-	var/immunity = owner.virus_immunity()
-	var/immunity_weakness = owner.immunity_weakness()
-	var/antibiotics = owner.get_antibiotics()
+/obj/item/bodypart/proc/handle_germ_effects(delta_time, times_fired, immunity, antibiotics, immunity_weakness)
 	var/arterial_efficiency = getorganslotefficiency(ORGAN_SLOT_ARTERY)
 
 	// Being properly oxygenated
@@ -886,29 +890,31 @@
 /obj/item/bodypart/proc/get_shock(painkiller_included = FALSE)
 	if(!can_feel_pain())
 		return 0
+
 	//Multiply our total pain damage by this
 	var/multiplier = 1
 	if(LAZYLEN(grabbedby))
 		//Being grasped lowers the pain just a bit
 		multiplier *= 0.75
+
 	if(multiplier <= 0)
 		return 0
+
 	var/constant_pain = 0
-	constant_pain += SHOCK_MOD_BRUTE * brute_dam
-	constant_pain += SHOCK_MOD_BURN * burn_dam
-	var/datum/wound/wound
-	for(var/thing in wounds)
-		wound = thing
+	for(var/datum/injury/injury as anything in injuries)
+		constant_pain += injury.return_pain()
+	for(var/datum/wound/wound as anything in wounds)
 		constant_pain += wound.woundpain
-	var/obj/item/organ/organ
-	for(var/thing in get_organs())
-		organ = thing
+	for(var/obj/item/organ/organ as anything in get_organs())
 		constant_pain += organ.get_shock(FALSE)
+
 	for(var/obj/item/embebbed as anything in embedded_objects)
 		if(embebbed.embedding)
 			constant_pain += embebbed.embedding.embedded_pain_multiplier * embebbed.w_class
+
 	if(painkiller_included)
 		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+
 	return clamp(FLOOR((pain_dam + constant_pain) * multiplier, DAMAGE_PRECISION), 0, max_pain_damage)
 
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
@@ -996,7 +1002,7 @@
 /obj/item/bodypart/proc/post_damage_change(updating_health = TRUE, updating_shock = FALSE)
 	update_damages()
 
-	if(owner)
+	if(owner && !(owner.status_flags & BUILDING_ORGANS))
 		update_limb_efficiency()
 		if(can_be_disabled)
 			update_disabled()
@@ -1196,7 +1202,7 @@
 		if(status == BODYPART_ORGANIC)
 			icon = species_icon
 
-	if(owner)
+	if(owner && !(owner.status_flags & BUILDING_ORGANS))
 		owner.updatehealth()
 		owner.update_body() //if our head becomes robotic, we remove the lizard horns and human hair.
 		owner.update_damage_overlays()
@@ -1486,8 +1492,7 @@
  */
 /obj/item/bodypart/proc/getorganslot(slot)
 	if(owner)
-		for(var/thing in shuffle(owner.getorganslotlist(slot)))
-			var/obj/item/organ/organ = thing
+		for(var/obj/item/organ/organ as anything in shuffle(owner.getorganslotlist(slot)))
 			if(deprecise_zone(organ.current_zone) == body_zone)
 				return organ
 	else
@@ -1507,9 +1512,7 @@
 /obj/item/bodypart/proc/getorganslotlist(slot)
 	var/list/organs = list()
 	if(owner)
-		var/obj/item/organ/organ
-		for(var/thing in owner.getorganslotlist(slot))
-			organ = thing
+		for(var/obj/item/organ/organ as anything in owner.getorganslotlist(slot))
 			if(check_zone(organ.current_zone) == body_zone)
 				organs |= organ
 	else

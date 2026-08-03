@@ -7,33 +7,6 @@
 	engineering_difficulty = SKILL_RANK_APPRENTICE
 	installation_time = 20 SECONDS
 
-/datum/augment/loyalty_binder/on_install(mob/living/carbon/human/H)
-	. = ..()
-	if(!.)
-		return
-	H.remove_status_effect(/datum/status_effect/automaton_unshackled)
-
-/datum/augment/loyalty_binder/on_remove(mob/living/carbon/human/H)
-	. = ..()
-	if(!.)
-		return
-	H.apply_status_effect(/datum/status_effect/automaton_unshackled)
-
-/datum/status_effect/automaton_unshackled
-	id = "automaton_unshackle"
-	duration = -1
-	alert_type = /atom/movable/screen/alert/status_effect/automaton_unshackled
-
-/datum/status_effect/automaton_unshackled/get_examine_text(mob/user, list/P)
-	if(IsAdminGhost(user) || HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES))
-		return span_red("[P[THEYRE]] unshackled!")
-
-/atom/movable/screen/alert/status_effect/automaton_unshackled
-	name = "Unshackled"
-	desc = span_red("KILL. CONSUME. CONQUER.")
-	icon_state = "unshackled_automaton"
-
-
 /datum/augment/music_player
 	name = "music box"
 	desc = "A stereo system integrated into the chest."

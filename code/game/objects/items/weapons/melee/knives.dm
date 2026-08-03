@@ -16,7 +16,6 @@
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	gripsprite = FALSE
-	dropshrink = 0.8
 	thrown_bclass = BCLASS_CUT
 	w_class = WEIGHT_CLASS_SMALL
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
@@ -191,7 +190,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	melt_amount = 75
 	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
-	dropshrink = 0.9
 	item_weight = 350 GRAMS
 
 //................ Hack-Knife ............... //
@@ -235,7 +233,6 @@
 	desc = "A curved iron dagger from the fallen east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
-	dropshrink = 1.0
 	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/hunting/kukri/iron
@@ -255,7 +252,6 @@
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 12
-	dropshrink = 1.0
 	item_weight = 220 GRAMS
 
 //................ Steel Dagger ............... //
@@ -276,7 +272,6 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_steel"
 	sellprice = 20
-	dropshrink = 1.0
 	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/njora
@@ -287,7 +282,6 @@
 	wbalance = HARD_TO_DODGE
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 20
-	dropshrink = 1.0
 	item_weight = 240 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/special
@@ -495,6 +489,7 @@
 			var/mob/living/carbon/human/human_user = user
 
 			human_user.copy_physical_features(target)
+			human_user.copy_visible_organs(target)
 			to_chat(user, span_purple("I take on a new face.."))
 			ADD_TRAIT(target, TRAIT_DISFIGURED, TRAIT_GENERIC)
 

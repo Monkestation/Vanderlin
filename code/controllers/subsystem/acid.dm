@@ -7,21 +7,21 @@ SUBSYSTEM_DEF(acid)
 	var/list/currentrun = list()
 	var/list/processing = list()
 
-/datum/controller/subsystem/acid/stat_entry()
-	..("P:[processing.len]")
-
+/datum/controller/subsystem/acid/stat_entry(msg)
+	msg = "P:[length(processing)]"
+	return ..()
 
 /datum/controller/subsystem/acid/fire(resumed = 0)
-	if (!resumed)
+	if(!resumed)
 		src.currentrun = processing.Copy()
 
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
-	while (currentrun.len)
-		var/obj/O = currentrun[currentrun.len]
+	while(length(currentrun))
+		var/obj/O = currentrun[length(currentrun)]
 		currentrun.len--
-		if (!O || QDELETED(O))
+		if(!QDELETED(O))
 			processing -= O
 			if (MC_TICK_CHECK)
 				return
@@ -33,5 +33,5 @@ SUBSYSTEM_DEF(acid)
 			O.cut_overlay(GLOB.acid_overlay, TRUE)
 			processing -= O
 
-		if (MC_TICK_CHECK)
+		if(MC_TICK_CHECK)
 			return
