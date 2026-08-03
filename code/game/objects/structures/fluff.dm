@@ -708,6 +708,28 @@
 	blade_dulling = DULLING_BASH
 	SET_BASE_PIXEL(-16, 0)
 
+/obj/structure/fluff/statue/noc
+	name = "statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	icon = 'icons/roguetown/misc/tallandwide.dmi'
+	icon_state = "noc"
+	max_integrity = 100 // You wanted descructible statues, you'll get them.
+	deconstructible = FALSE
+	density = TRUE
+	blade_dulling = DULLING_BASH
+	SET_BASE_PIXEL(-16, 0)
+
+/obj/structure/fluff/statue/noc/tall
+	name = "standing statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	icon = 'icons/roguetown/misc/64x128.dmi'
+	icon_state = "noc"
+	max_integrity = 100 // You wanted descructible statues, you'll get them.
+	deconstructible = FALSE
+	density = TRUE
+	blade_dulling = DULLING_BASH
+	SET_BASE_PIXEL(-16, 0)
+
 /obj/structure/fluff/statue/astrata/bling
 	icon_state = "astrata_bling"
 
@@ -815,6 +837,22 @@
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "telescope"
 	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/books
+	name = "stack of books & inkpot"
+	desc = "A few stacks of books with a pot of ink & quill waiting for inspiration."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_books"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/teapot
+	name = "teapot & cups"
+	desc = "A teapot & accompanying cups on a mat."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_teapot"
+	density = FALSE
 	anchored = FALSE
 
 /obj/structure/fluff/telescope/attack_hand(mob/user)
@@ -1494,3 +1532,4 @@
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))
+

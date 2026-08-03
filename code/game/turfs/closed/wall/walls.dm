@@ -213,6 +213,71 @@
 	dir = dirin
 	return ..()
 
+/turf/closed/wall/mineral/tent/blue
+	icon_state = "tent_blue"
+	name = "blue tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/cyan
+	icon_state = "tent_cyan"
+	name = "cyan tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/brown
+	icon_state = "tent_brown"
+	name = "brown tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/green
+	icon_state = "tent_green"
+	name = "green tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/purple
+	icon_state = "tent_purple"
+	name = "purple tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/red
+	icon_state = "tent_red"
+	name = "red tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/reddeco
+	icon_state = "tent_red_deco"
+	name = "decorated red tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/purpledeco
+	icon_state = "tent_purple_deco"
+	name = "decorated purple tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/greendeco
+	icon_state = "tent_green_deco"
+	name = "decorated green tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/browndeco
+	icon_state = "tent_brown_deco"
+	name = "decorated brown tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/cyandeco
+	icon_state = "tent_cyan_deco"
+	name = "decorated cyan tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/bluedeco
+	icon_state = "tent_blue_deco"
+	name = "decorated blue tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/noc
+	icon_state = "tent_noc"
+	name = "decorated navy tent wall"
+	desc = "A colourful tent wall embossed with silver, popular amongst Noccites."
+
 /turf/closed/wall/mineral/wooddark
 	name = "dark wood wall"
 	desc = "Made from durable, somewhat darker wood."

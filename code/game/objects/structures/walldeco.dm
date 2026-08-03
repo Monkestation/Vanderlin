@@ -271,6 +271,12 @@
 	icon_state = "sherwoods"
 	SET_BASE_PIXEL(-16, 32)
 
+/obj/structure/fluff/walldeco/bigpainting/rainuponthevalley
+	name = "painting"
+	desc = "A painting of rolling rain clouds descending on a valley."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "rain_upon_the_valley"
+
 /obj/structure/fluff/walldeco/bigpainting/lake
 	icon_state = "lake"
 

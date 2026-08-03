@@ -212,3 +212,21 @@
 	name = "fur pelt"
 	desc = "Pelt of some foreign creachur."
 	icon_state = "fur_alt2"
+
+/obj/structure/carpet/moonrug
+	name = "moon rug"
+	desc = "A decorative rug depicting the phases of the moon."
+	icon = 'icons/roguetown/misc/96x96.dmi'
+	icon_state = "moonrug"
+
+/obj/structure/carpet/matsquare
+	name = "fiber mat"
+	desc = "A rustic mat woven from fiber."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "fibermat"
+
+/obj/structure/carpet/matround
+	name = "round fiber mat"
+	desc = "A rustic mat woven from fiber."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "fibermat_round"
