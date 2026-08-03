@@ -18,6 +18,19 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_NOEMBED, INNATE_TRAIT)
+	RegisterSignal(src, COMSIG_ATOM_INTEGRITY_CHANGED, PROC_REF(on_integrity_changed))
+
+/obj/item/weapon/clenched_fist/Destroy()
+	UnregisterSignal(src, COMSIG_ATOM_INTEGRITY_CHANGED)
+	return ..()
+
+/obj/item/weapon/clenched_fist/proc/on_integrity_changed(datum/source, old_value, new_value)
+	if(new_value >= old_value || !ismob(loc))
+		return
+	var/mob/living/carbon/human/user = loc
+	var/arm_damage = max(1, round((old_value - new_value) / 2))
+	var/target_zone = user.get_active_hand() == LEFT_HANDS ? BODY_ZONE_L_ARM : BODY_ZONE_R_ARM
+	user.apply_damage(arm_damage, BRUTE, target_zone, damage_type = BCLASS_BLUNT, can_crit = FALSE)
 
 /obj/item/weapon/clenched_fist/atom_destruction(damage_flag)
 	if(ismob(loc))
