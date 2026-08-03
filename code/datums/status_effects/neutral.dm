@@ -116,7 +116,7 @@
 /datum/status_effect/bugged/get_examine_text(mob/user, list/P)
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
 		var/str = span_warning("[P[THEYVE]] [device.get_examine_name()] implanted.")
-		return "<A href='?src=[REF(owner)];item=[device]'>][str]</A>"
+		return "<A href='byond://?src=[REF(owner)];item=[device]'>][str]</A>"
 
 
 /datum/status_effect/bugged/on_remove()

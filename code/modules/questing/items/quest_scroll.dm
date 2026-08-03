@@ -117,7 +117,7 @@ GLOBAL_LIST_EMPTY(quest_scrolls)
 			return
 	..()
 
-/obj/item/paper/scroll/quest/proc/get_quest_assignees(var/mob/user, var/include_giver = FALSE)
+/obj/item/paper/scroll/quest/proc/get_quest_assignees(mob/user, include_giver = FALSE)
 	var/list/assignees = list()
 
 	var/mob/quest_receiver = assigned_quest?.quest_receiver_reference?.resolve()

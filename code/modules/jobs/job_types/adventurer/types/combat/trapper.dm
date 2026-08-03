@@ -48,6 +48,6 @@
 	beltl = /obj/item/weapon/sword/short/iron
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-    	/obj/item/weapon/knife/dagger = 1,
-   		/obj/item/restraints/legcuffs/beartrap/crafted = 1
+		/obj/item/weapon/knife/dagger = 1,
+		/obj/item/restraints/legcuffs/beartrap/crafted = 1
 	)

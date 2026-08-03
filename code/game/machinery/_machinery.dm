@@ -136,10 +136,9 @@
 		dump_contents() //drop everything inside us
 		return //we don't have any parts.
 
-	if(component_parts && component_parts.len)
-		for(var/part in component_parts)
-			var/obj/item/obj_part = part
-			component_parts -= part
+	if(length(component_parts))
+		for(var/obj/item/obj_part as anything in component_parts)
+			component_parts -= obj_part
 			obj_part.forceMove(loc)
 	LAZYCLEARLIST(component_parts)
 

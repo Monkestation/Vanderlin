@@ -53,10 +53,19 @@
 	belt = /obj/item/storage/belt/leather/black/courtagent
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots
-	ring = /obj/item/clothing/ring/courtagent_ring
 
 /datum/job/advclass/courtagent
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT)
+
+/datum/job/advclass/courtagent/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/rings = list(
+		"Bronze Ring" = /obj/item/clothing/ring/courtagent_ring/bronze,
+		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring/silver,
+		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold,
+	)
+	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "COURT AGENT")
 
 /datum/attribute_holder/sheet/job/courtagent/bruiser
 	raw_attribute_list = list(
