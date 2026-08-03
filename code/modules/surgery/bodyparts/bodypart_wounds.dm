@@ -212,6 +212,8 @@
 				wounding_type = WOUND_BURN
 			if(BCLASS_LASHING)
 				wounding_type = WOUND_LASH
+			if(BCLASS_INTENSE_BURN)
+				wounding_type = WOUND_INTENSE_BURN
 
 	dam *= skeletonized_mod(wounding_type)
 

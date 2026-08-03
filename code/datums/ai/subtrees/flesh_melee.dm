@@ -85,7 +85,7 @@
 			if(ismob(target))
 				var/mob/living/L = target
 				if(L.IsOffBalanced())
-					L.Knockdown(3 SECONDS)
+					L.CombatKnockdown(3 SECONDS)
 				else
 					L.OffBalance(3 SECONDS)
 

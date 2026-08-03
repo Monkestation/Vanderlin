@@ -1415,6 +1415,7 @@
 #include "code\datums\injury\organic\bruise.dm"
 #include "code\datums\injury\organic\burn.dm"
 #include "code\datums\injury\organic\divine_lash.dm"
+#include "code\datums\injury\organic\intense_burn.dm"
 #include "code\datums\injury\organic\internal_bruising.dm"
 #include "code\datums\injury\organic\lash.dm"
 #include "code\datums\injury\organic\puncture.dm"

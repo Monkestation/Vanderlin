@@ -321,6 +321,7 @@
 #define BCLASS_BITE			"bite"
 #define BCLASS_BURN			"charring"
 #define BCLASS_LASHING		"lashing"
+#define BCLASS_INTENSE_BURN "intense burn"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1
