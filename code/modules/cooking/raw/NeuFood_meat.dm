@@ -113,7 +113,6 @@
 	var/rarity_rank = 0
 
 /obj/item/reagent_containers/food/snacks/fish/dead
-	abstract_type = /obj/item/reagent_containers/food/snacks/fish/dead
 	status = FISH_DEAD
 	fish_id = "dead"
 
