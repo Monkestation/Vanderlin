@@ -6918,12 +6918,12 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/soilsons)
 "fIz" = (
-/obj/structure/closet/crate/crafted_closet/atarms,
 /obj/item/key/manor,
 /obj/item/key/manor,
 /obj/item/key/manor,
 /obj/item/key/manor,
 /obj/effect/mapping_helpers/access/keyset/manor/butler,
+/obj/structure/closet/crate/crafted_closet/dark,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/servanthead)
 "fIC" = (

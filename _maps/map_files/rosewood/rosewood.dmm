@@ -28377,7 +28377,6 @@
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 1
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/archive,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/under/town/basement)
 "nNl" = (
