@@ -32956,7 +32956,6 @@
 /obj/item/clothing/face/cigarette/rollie/cannabis,
 /obj/item/storage/belt/pouch/coins/mid,
 /obj/item/reagent_containers/glass/bottle/strongpoison,
-/obj/effect/mapping_helpers/access/keyset/manor/hand,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/hand)
