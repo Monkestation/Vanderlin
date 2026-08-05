@@ -88,8 +88,6 @@
 	var/desc = "A background."
 	/// The skill this backstory grants
 	var/datum/attribute/skill/granted_skill
-	/// How much to reduce the stat
-	var/stat_reduction = 1
 	///ammount we give
 	var/amount = 10
 	///what we clamp to
@@ -357,7 +355,6 @@
 /datum/backstory/magic
 	abstract_type = /datum/backstory/magic
 	desc = "A magical background."
-	stat_reduction = 0
 	clamp = 20
 
 /datum/backstory/magic/acolyte
