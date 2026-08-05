@@ -23651,8 +23651,8 @@
 /area/outdoors/town)
 "uSk" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/clothing/face/cigarette/rollie,
-/obj/item/clothing/face/cigarette/rollie,
+/obj/item/clothing/face/cigarette/rollie/nicotine,
+/obj/item/clothing/face/cigarette/rollie/nicotine,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/sewer)
 "uSD" = (

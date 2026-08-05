@@ -72,6 +72,8 @@
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 50)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
+			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 		if("Katar")
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Knuckledusters")
