@@ -4534,6 +4534,15 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
+/obj/effect/mapping_helpers/access/locker,
+/obj/item/key/butler,
+/obj/item/key/heir,
+/obj/item/key/heir,
+/obj/structure/closet/keyrack{
+	pixel_y = 0;
+	pixel_x = 32
+	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/lord_appt)
 "cGQ" = (
