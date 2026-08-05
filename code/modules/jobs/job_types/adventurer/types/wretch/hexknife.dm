@@ -106,7 +106,7 @@
 	eyes = new /obj/item/organ/eyes/night_vision/nightmare
 	eyes.Insert(spawned)
 
-/datum/job/advclass/wretch/hexknife/after_spawn(mob/living/carbon/human/spawned, mob/living/carbon/human/H, client/player_client)
+/datum/job/advclass/wretch/hexknife/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.set_patron(/datum/patron/divine/noc, TRUE)
 
