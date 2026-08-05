@@ -246,7 +246,7 @@
 
 /datum/backstory/craft/trapper
 	name = "Mantrap Maker"
-	desc = "You learned to lay traps for game
+	desc = "You learned to lay traps for game, using wits and bait."
 	granted_skill = /datum/attribute/skill/craft/traps
 
 /datum/backstory/craft/smelter
