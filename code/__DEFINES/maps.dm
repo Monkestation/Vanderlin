@@ -84,7 +84,6 @@ require only minor tweaks.
 
 #define ZTRAITS_OUTLAND list(\
 	ZTRAIT_OUTLAND = TRUE,\
-	ZTRAIT_WEATHER_STUFF = TRUE,\
 	ZTRAIT_LEYLINES = TRUE,\
 )
 

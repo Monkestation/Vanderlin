@@ -175,7 +175,7 @@
 	icon_state = "clinic_feld"
 
 /area/indoors/town/thieves_guild
-	name = "Theives' Guild"
+	name = "Thieves' Guild"
 	first_time_text = "Thieves' Guild"
 	icon_state = "thieves_guild"
 
@@ -194,6 +194,11 @@
 	background_track = 'sound/music/area/shop.ogg'
 	background_track_dusk = null
 	background_track_night = null
+
+/area/indoors/town/train_station
+	name = "Train Station"
+	first_time_text = "Vanderlin Train Station"
+	icon_state = "train_station"
 
 /area/indoors/town/steward
 	name = "Steward's Office"

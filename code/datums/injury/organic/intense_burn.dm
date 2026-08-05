@@ -1,14 +1,15 @@
 /** BURNS **/
-/datum/injury/burn
-	damage_type = WOUND_BURN
+/datum/injury/intense_burn
+	damage_type = WOUND_INTENSE_BURN
 	autoheal_cutoff = 6
 	infection_rate = 1.25
+	pain_modifier = 2
 	bleed_rate = BLEED_DAMAGE_RATIO / 100 // burns generally don't bleed much
 
-/datum/injury/burn/infection_check()
+/datum/injury/intense_burn/infection_check()
 	//anything less than a FUCK burn isn't infectable if treated properly
 	var/normalized_damage = damage_per_injury()
-	if(is_treated() || normalized_damage < 25)
+	if(is_treated() && normalized_damage < 25)
 		return FALSE
 	if(is_disinfected())
 		return FALSE
@@ -28,11 +29,17 @@
 
 	return FALSE
 
-/datum/injury/burn/can_merge(datum/injury/other)
+/datum/injury/intense_burn/can_merge(datum/injury/other)
 	return FALSE // don't merge burns so we can calculate fluid loss correctly
 
+/datum/injury/intense_burn/apply_to_bodypart(obj/item/bodypart/limb)
+	. = ..()
+	//Burn damage can cause fluid loss due to blistering and cook-off
+	if(limb.owner && (limb.burn_dam/limb.max_damage) >= 0.25) // medium burn damage
+		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_SURVIVE * damage/150, 1))
+
 /*
-/datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, wounding_type = WOUND_BLUNT)
+/datum/injury/intense_burn/receive_damage(damage_received = 0, pain_received = 0, wounding_type = WOUND_BLUNT)
 	. = ..()
 	if((wounding_type & WOUND_BURN) && (damage + damage_received >= 50) && parent_bodypart)
 		if(!parent_bodypart.is_dead())
@@ -45,7 +52,7 @@
 			parent_bodypart.dismember(BURN)
 */
 
-/datum/injury/burn/moderate
+/datum/injury/intense_burn/moderate
 	bleed_threshold = 10
 	stages = list(
 		"ripped burn" = 10,
@@ -54,7 +61,7 @@
 		"fresh skin" = 0
 		)
 
-/datum/injury/burn/large
+/datum/injury/intense_burn/large
 	bleed_threshold = 20
 	stages = list(
 		"ripped large burn" = 20,
@@ -64,7 +71,7 @@
 		)
 	fade_away_time = INFINITY
 
-/datum/injury/burn/severe
+/datum/injury/intense_burn/severe
 	bleed_threshold = 35
 	stages = list(
 		"ripped severe burn" = 35,
@@ -74,7 +81,7 @@
 		)
 	fade_away_time = INFINITY
 
-/datum/injury/burn/deep
+/datum/injury/intense_burn/deep
 	bleed_threshold = 45
 	stages = list(
 		"ripped deep burn" = 45,
@@ -84,7 +91,7 @@
 		)
 	fade_away_time = INFINITY
 
-/datum/injury/burn/carbonised
+/datum/injury/intense_burn/carbonised
 	bleed_threshold = 50
 	stages = list(
 		"carbonised area" = 50,

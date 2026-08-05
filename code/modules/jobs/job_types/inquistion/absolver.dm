@@ -118,7 +118,7 @@
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/head/helmet/blacksteel/psythorns
 	head = /obj/item/clothing/head/helmet/heavy/absolver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/book/bibble/psy = 1,
 		/obj/item/natural/bundle/cloth = 2,

@@ -732,7 +732,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "ars" = (
 /obj/effect/landmark/house_spot{
 	save_id = "advapt_4";
@@ -901,7 +901,7 @@
 /area/indoors/town)
 "avE" = (
 /turf/open/floor/metal/barograte,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "avH" = (
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/eora)
@@ -2326,7 +2326,7 @@
 /obj/structure/closet/crate/chest/crate,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/metal/barograte,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "bfE" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/carpet/green,
@@ -2531,7 +2531,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "bkF" = (
 /obj/structure/fluff/statue/scare,
 /turf/open/floor/grass,
@@ -2695,7 +2695,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "boO" = (
 /obj/structure/table/wood/reinforced_alter,
 /obj/structure/bars{
@@ -3017,7 +3017,7 @@
 "bvH" = (
 /obj/structure/stairs,
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "bvM" = (
 /obj/machinery/light/fueled/oven{
 	pixel_y = 31
@@ -3410,7 +3410,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "bER" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile,
@@ -4483,7 +4483,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "cgC" = (
 /obj/structure/door/green,
 /turf/open/floor/wood,
@@ -5044,6 +5044,12 @@
 "ctu" = (
 /turf/closed/wall/mineral/stone,
 /area/outdoors/town/noble_manor/yellow)
+"cty" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/farm)
 "ctC" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/dirt,
@@ -5680,6 +5686,13 @@
 /obj/structure/kneestingers,
 /turf/open/water/swamp/deep,
 /area/under/town/sewer)
+"cGJ" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/water/clean/dirt,
+/area/outdoors/farm)
 "cGM" = (
 /obj/machinery/light/fueled/chand,
 /turf/open/openspace,
@@ -5702,7 +5715,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "cHD" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
@@ -5965,7 +5978,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "cNF" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/darker,
@@ -6450,7 +6463,7 @@
 	pixel_y = 10
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "cWN" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -6979,7 +6992,7 @@
 	dir = 4
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "dkV" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/blocks/newstone,
@@ -7547,7 +7560,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "dAl" = (
 /obj/structure/rack,
 /obj/item/clothing/shoes/boots,
@@ -8979,7 +8992,7 @@
 "eia" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/concrete,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "eil" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/reagent_containers/glass/bottle/wine,
@@ -9420,7 +9433,7 @@
 "esF" = (
 /obj/structure/closet/crate/chest/neu,
 /turf/open/floor/wood,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "esU" = (
 /obj/structure/flora/newtree/palm,
 /turf/open/floor/sand,
@@ -9726,6 +9739,9 @@
 /obj/structure/fluff/walldeco/masonflag,
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town/dwarfin)
+"eAu" = (
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/town/train_station)
 "eAF" = (
 /obj/structure/rack,
 /obj/item/weapon/sword/iron,
@@ -9862,11 +9878,11 @@
 	pixel_y = 3
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "eFN" = (
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/metal/barograte,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "eGt" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/keep/servanthead)
@@ -10183,7 +10199,7 @@
 	},
 /obj/effect/landmark/start/vagrant,
 /turf/open/floor/dirt/road,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "eLZ" = (
 /obj/structure/composter/halffull,
 /turf/open/floor/grass,
@@ -10203,7 +10219,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "eMy" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass,
@@ -11213,7 +11229,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/wood,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "fle" = (
 /obj/structure/fluff/railing/wood,
 /obj/effect/decal/cleanable/debris/wood,
@@ -11816,7 +11832,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "fBC" = (
 /obj/structure/chair/hotspring_bench/right{
 	dir = 1
@@ -14554,7 +14570,7 @@
 /area/indoors/town/clocktower)
 "gVr" = (
 /turf/closed/mineral,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "gVM" = (
 /obj/structure/bookcase/random/thesis,
 /obj/structure/carpet/red,
@@ -15337,6 +15353,9 @@
 /area/outdoors/town/roofs)
 "hqz" = (
 /mob/living/simple_animal/hostile/retaliate/goat,
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
 /turf/open/floor/grass,
 /area/outdoors/farm)
 "hqH" = (
@@ -15552,7 +15571,7 @@
 "hvD" = (
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "hvI" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -15937,6 +15956,10 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
+"hCY" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/herringbone,
+/area/indoors/town/train_station)
 "hDd" = (
 /obj/structure/fluff/railing/border,
 /turf/open/openspace,
@@ -17093,7 +17116,7 @@
 	pixel_y = -32
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "ifE" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/key/merchant{
@@ -17383,6 +17406,13 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
+"inA" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/dirt,
+/area/outdoors/farm)
 "inC" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -17521,6 +17551,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
+"ipY" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/water/clean/dirt,
+/area/outdoors/farm)
 "iqa" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty/dir{
@@ -17650,7 +17684,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "ist" = (
 /obj/effect/mapping_helpers/access/keyset/garrison/lieutenant,
 /obj/effect/mapping_helpers/access/locker,
@@ -19019,7 +19053,7 @@
 	dir = 4
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "iXo" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
@@ -19289,6 +19323,12 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/church,
 /area/indoors/town/church)
+"jdr" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/dirt,
+/area/outdoors/farm)
 "jdz" = (
 /turf/open/floor/dirt,
 /area/outdoors/basin)
@@ -20024,7 +20064,7 @@
 	dir = 9
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "jsX" = (
 /obj/structure/window/openclose{
 	dir = 1
@@ -20223,6 +20263,12 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/tile/brownbrick,
 /area/indoors/town/merc_guild)
+"jwu" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/turf/open/floor/grass,
+/area/outdoors/farm)
 "jwy" = (
 /obj/structure/rack,
 /obj/item/clothing/head/crown/circlet/coral{
@@ -20542,6 +20588,10 @@
 "jDd" = (
 /turf/open/floor/metal,
 /area/outdoors/town)
+"jDg" = (
+/mob/living/simple_animal/hostile/retaliate/cow,
+/turf/open/floor/dirt,
+/area/outdoors/farm)
 "jDj" = (
 /turf/open/openspace,
 /area/indoors/town/clocktower)
@@ -22639,6 +22689,13 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/keep/knight)
+"kDu" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/grass,
+/area/outdoors/farm)
+"kDz" = (
+/turf/open/floor/wood,
+/area/indoors/town/train_station)
 "kDC" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/bfloorz,
@@ -23144,7 +23201,7 @@
 	pixel_y = 27
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "kQt" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/beer/butterhairs,
@@ -24084,6 +24141,9 @@
 /obj/structure/chair/stool,
 /turf/open/floor/cobble,
 /area/indoors/town/cell)
+"lkb" = (
+/turf/open/floor/herringbone,
+/area/indoors/town/train_station)
 "lkt" = (
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/grass,
@@ -26481,6 +26541,13 @@
 "mpu" = (
 /turf/open/floor/dirt,
 /area/under/cavelava)
+"mpF" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/water/clean/dirt,
+/area/outdoors/farm)
 "mpL" = (
 /obj/structure/stairs{
 	dir = 4
@@ -27282,7 +27349,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "mHR" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/throne)
@@ -28800,7 +28867,7 @@
 	pixel_y = -32
 	},
 /turf/open/floor/concrete,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "npN" = (
 /turf/open/floor/grass,
 /area/outdoors/beach)
@@ -29183,7 +29250,7 @@
 /area/outdoors/basin)
 "nyV" = (
 /turf/closed/mineral/bedrock,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "nzJ" = (
 /turf/open/floor/cobble,
 /area/indoors/town/vault)
@@ -29876,7 +29943,7 @@
 "nTm" = (
 /obj/structure/underworld/barrier,
 /turf/open/floor/naturalstone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "nTp" = (
 /obj/effect/landmark/house_spot{
 	save_id = "advapt_5";
@@ -30216,7 +30283,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "oaa" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -30439,6 +30506,9 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"ogb" = (
+/turf/open/floor/concrete,
+/area/indoors/town/train_station)
 "ogc" = (
 /obj/item/natural/stoneblock,
 /obj/item/natural/stoneblock{
@@ -30698,7 +30768,7 @@
 	pixel_y = -24
 	},
 /turf/open/floor/concrete,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "omh" = (
 /obj/item/ore/copper,
 /turf/open/floor/naturalstone,
@@ -31348,6 +31418,12 @@
 	},
 /turf/open/floor/greenstone/runed,
 /area/indoors/town/keep/magician)
+"oxo" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/floor/dirt,
+/area/outdoors/farm)
 "oxr" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -32304,7 +32380,7 @@
 	dir = 1
 	},
 /turf/open/floor/concrete,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "oUq" = (
 /obj/structure/door{
 	name = "HUNT ROOM"
@@ -32936,6 +33012,12 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
+"phi" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/floor/grass,
+/area/outdoors/farm)
 "phn" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/clean,
@@ -33008,6 +33090,9 @@
 /area/indoors/town/merc_guild)
 "piD" = (
 /mob/living/simple_animal/hostile/retaliate/goatmale,
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
 /turf/open/floor/dirt,
 /area/outdoors/farm)
 "piF" = (
@@ -33398,7 +33483,7 @@
 	dir = 1
 	},
 /turf/open/floor/wood,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "ptP" = (
 /obj/structure/rack,
 /obj/item/weapon/mace/woodclub,
@@ -34821,7 +34906,7 @@
 	dir = 1
 	},
 /turf/open/floor/metal/barograte,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "qaH" = (
 /obj/structure/barricade/wooden/crude,
 /turf/open/openspace,
@@ -34983,7 +35068,7 @@
 	pixel_y = 11
 	},
 /turf/open/floor/dirt/road,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "qfP" = (
 /obj/item/reagent_containers/glass/cup{
 	pixel_x = -8;
@@ -35194,6 +35279,15 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
+"qkb" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/outdoors/farm)
 "qkD" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/alch/sinew,
@@ -35325,7 +35419,7 @@
 	pixel_y = 27
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "qni" = (
 /obj/structure/mannequin/male,
 /turf/open/floor/tile/diamond/purple,
@@ -35340,6 +35434,13 @@
 "qnm" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/garrison)
+"qnx" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border,
+/turf/open/floor/grass,
+/area/outdoors/farm)
 "qny" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -35706,6 +35807,9 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
+"qwM" = (
+/turf/closed/wall/mineral/stone,
+/area/indoors/town/train_station)
 "qxc" = (
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/ruinedwood,
@@ -36067,7 +36171,7 @@
 /area/indoors/town/clinic_large/feldsher)
 "qEU" = (
 /turf/open/floor/dirt/road,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "qEZ" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/north,
 /turf/open/openspace,
@@ -36789,7 +36893,7 @@
 "qUU" = (
 /obj/structure/closet/crate/chest/crate,
 /turf/open/floor/wood,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "qUW" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -37431,6 +37535,12 @@
 /obj/item/weapon/mace/woodclub/train_sword,
 /turf/open/floor/dirt,
 /area/under/cave)
+"rkw" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/outdoors/farm)
 "rky" = (
 /obj/effect/decal/carpet{
 	dir = 4;
@@ -38601,7 +38711,7 @@
 "rMh" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "rMo" = (
 /obj/structure/stairs/fancy/l,
 /turf/open/floor/wood,
@@ -38893,7 +39003,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "rSx" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/east,
 /turf/open/floor/cobblerock,
@@ -39542,6 +39652,12 @@
 "sdx" = (
 /turf/open/floor/grass/eora,
 /area/under/cavewet)
+"sdH" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/outdoors/farm)
 "sdU" = (
 /obj/structure/fluff/walldeco/bigpainting/lake{
 	pixel_y = -32
@@ -40348,7 +40464,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "syj" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock,
@@ -42674,7 +42790,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "tBJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -42875,7 +42991,7 @@
 	name = "Train Station"
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "tGN" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/easel,
@@ -43246,8 +43362,8 @@
 /area/indoors/town/keep/gate)
 "tMo" = (
 /obj/item/clothing/neck/talkstone,
-/obj/item/clothing/ring/courtagent_ring,
-/obj/item/clothing/ring/courtagent_ring,
+/obj/item/clothing/ring/courtagent_ring/silver,
+/obj/item/clothing/ring/courtagent_ring/silver,
 /obj/structure/closet/crate/chest,
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
@@ -43549,7 +43665,7 @@
 	dir = 4
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "tUJ" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 5
@@ -44254,7 +44370,7 @@
 	dir = 4
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "une" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/paper,
@@ -44963,6 +45079,9 @@
 /obj/structure/carpet/cyan,
 /turf/open/floor/tile,
 /area/indoors/town/shop)
+"uAV" = (
+/turf/open/floor/blocks,
+/area/indoors/town/train_station)
 "uBc" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/cobble/mossy,
@@ -45298,7 +45417,7 @@
 	},
 /obj/structure/water_vent,
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "uIZ" = (
 /obj/structure/curtain/bounty/dir{
 	dir = 1
@@ -45638,7 +45757,7 @@
 	dir = 4
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "uQH" = (
 /obj/structure/closet/crate/drawer,
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -46066,7 +46185,7 @@
 "uZy" = (
 /obj/structure/fluff/walldeco/customflag,
 /turf/closed/wall/mineral/stone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "uZH" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -46339,7 +46458,7 @@
 	},
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/naturalstone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "vbv" = (
 /obj/structure/table/wood/large/corner{
 	dir = 9
@@ -46581,7 +46700,7 @@
 	pixel_y = -20
 	},
 /turf/open/floor/dirt/road,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "vjw" = (
 /obj/structure/bars/passage/shutter{
 	redstone_id = "LordShutters"
@@ -47627,7 +47746,7 @@
 	pixel_y = -24
 	},
 /turf/open/floor/concrete,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "vFz" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 8
@@ -47737,7 +47856,7 @@
 /area/indoors/town/noble_manor/yellow)
 "vIe" = (
 /turf/open/floor/naturalstone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "vIp" = (
 /turf/open/floor/greenstone/runed,
 /area/indoors/town/keep/magician)
@@ -49105,7 +49224,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/metal,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "wlH" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stonebrick,
@@ -49249,7 +49368,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "wpH" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -49573,7 +49692,7 @@
 "wwO" = (
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/metal/barograte,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "wwP" = (
 /turf/closed/mineral,
 /area/indoors/town/shop)
@@ -49874,7 +49993,7 @@
 	dir = 10
 	},
 /turf/closed/mineral/bedrock,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "wBK" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/closed/wall/mineral/wooddark,
@@ -51273,7 +51392,7 @@
 	dir = 8
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "xbH" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -52143,7 +52262,7 @@
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town)
+/area/indoors/town/train_station)
 "xuM" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
@@ -74236,11 +74355,11 @@ asC
 cAA
 crf
 qvf
-qOq
-qOq
-qOq
-qOq
-qOq
+qwM
+qwM
+qwM
+qwM
+qwM
 qFx
 ozq
 ozq
@@ -74438,11 +74557,11 @@ cAA
 cAA
 cAA
 qvf
-qOq
+qwM
 eia
 rMh
 npo
-qOq
+qwM
 qFx
 ozq
 iZs
@@ -74640,11 +74759,11 @@ cAA
 cAA
 cAA
 qvf
-qOq
-lpy
+qwM
+ogb
 iXi
-lpy
-qOq
+ogb
+qwM
 qFx
 ozq
 ozq
@@ -74842,11 +74961,11 @@ cAA
 cAA
 cAA
 qvf
-qOq
-lpy
+qwM
+ogb
 iXi
-lpy
-qOq
+ogb
+qwM
 qFx
 ozq
 ozq
@@ -75044,11 +75163,11 @@ crf
 cAA
 cAA
 qvf
-qOq
-lpy
+qwM
+ogb
 iXi
-lpy
-qOq
+ogb
+qwM
 qFx
 ozq
 nZm
@@ -75246,11 +75365,11 @@ cAA
 cAA
 asC
 qvf
-qOq
-lpy
+qwM
+ogb
 iXi
-lpy
-qOq
+ogb
+qwM
 qFx
 ozq
 ozq
@@ -75448,11 +75567,11 @@ cAA
 cAA
 asC
 qvf
-qOq
-lpy
+qwM
+ogb
 iXi
 npo
-qOq
+qwM
 qFx
 ozq
 cyz
@@ -75650,12 +75769,12 @@ cAA
 cAA
 asC
 qvf
-qOq
+qwM
 eia
 iXi
-lpy
-waU
-waU
+ogb
+eAu
+eAu
 gVr
 ozq
 cyz
@@ -75851,16 +75970,16 @@ cAA
 cAA
 cAA
 qvf
-qOq
-qOq
-lpy
+qwM
+qwM
+ogb
 iXi
-lpy
-qOq
-qOq
-qOq
-qOq
-qOq
+ogb
+qwM
+qwM
+qwM
+qwM
+qwM
 ozq
 nZm
 ozq
@@ -76053,16 +76172,16 @@ asC
 cAA
 cAA
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 cgt
 hvD
-dZO
-dZO
-qOq
+hCY
+hCY
+qwM
 ozq
 ozq
 ozq
@@ -76255,16 +76374,16 @@ asC
 cAA
 cAA
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 wpC
-pKj
-pKj
-pKj
-bMr
+lkb
+lkb
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -76457,16 +76576,16 @@ asC
 cAA
 crf
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 qav
 avE
 avE
 wwO
-bMr
+uAV
 ozq
 ozq
 ozq
@@ -76659,16 +76778,16 @@ cAA
 cAA
 cAA
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 wlG
-vHN
+kDz
 xuL
-pKj
-pKj
-pKj
-bMr
+lkb
+lkb
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -76861,16 +76980,16 @@ cAA
 cAA
 cAA
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 dzW
-pKj
-pKj
+lkb
+lkb
 ifB
-qOq
+qwM
 ozq
 ozq
 ozq
@@ -77063,16 +77182,16 @@ cAA
 cAA
 cAA
 wpU
-qOq
+qwM
 qnc
-vHN
+kDz
 boC
-vHN
+kDz
 uIW
-pKj
+lkb
 tBC
-pKj
-bMr
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -77265,16 +77384,16 @@ cAA
 cAA
 cAA
 pbP
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 vFn
-pKj
+lkb
 arn
-pKj
-bMr
+lkb
+uAV
 ozq
 nZm
 ozq
@@ -77469,14 +77588,14 @@ cAA
 asC
 uZy
 kQk
-vHN
+kDz
 eMv
-vHN
+kDz
 oUk
-pKj
+lkb
 rSo
-pKj
-bMr
+lkb
+uAV
 ozq
 nZm
 ozq
@@ -77669,16 +77788,16 @@ cAA
 cAA
 cAA
 ndP
-qOq
+qwM
 qnc
-vHN
+kDz
 iXi
-vHN
+kDz
 olK
-pKj
-pKj
+lkb
+lkb
 ifB
-qOq
+qwM
 ozq
 gBg
 ozq
@@ -77871,16 +77990,16 @@ cAA
 cAA
 cAA
 qvf
-qOq
+qwM
 qnc
-vHN
+kDz
 syd
-vHN
+kDz
 uIW
-pKj
+lkb
 bkC
-pKj
-bMr
+lkb
+uAV
 ozq
 gBg
 ozq
@@ -78075,14 +78194,14 @@ cAA
 ndP
 uZy
 kQk
-vHN
+kDz
 uQs
-vHN
+kDz
 eFK
-pKj
+lkb
 arn
-pKj
-bMr
+lkb
+uAV
 ozq
 nZm
 ozq
@@ -78275,16 +78394,16 @@ cAA
 cAA
 cAA
 huW
-qOq
+qwM
 kQk
-vHN
+kDz
 cHg
-vHN
+kDz
 fBt
 xby
 iss
-pKj
-bMr
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -78477,16 +78596,16 @@ rCb
 pCg
 pCg
 rCb
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 qUU
-qOq
+qwM
 uZy
 ifB
-qOq
+qwM
 ozq
 ozq
 ozq
@@ -78679,16 +78798,16 @@ hLm
 hLm
 hLm
 hLm
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 esF
-qOq
+qwM
 bEQ
-pKj
-bMr
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -78883,14 +79002,14 @@ hLm
 hLm
 tGH
 bvH
-vHN
+kDz
 cNx
-vHN
+kDz
 esF
-qOq
+qwM
 bEQ
-pKj
-bMr
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -79083,16 +79202,16 @@ taH
 taH
 taH
 taH
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 qUU
-qOq
+qwM
 uZy
-pKj
-bMr
+lkb
+uAV
 ozq
 ozq
 nZm
@@ -79285,16 +79404,16 @@ cAA
 cAA
 cAA
 asC
-qOq
+qwM
 kQk
-vHN
+kDz
 dkU
-vHN
+kDz
 mHH
 jsW
-pKj
+lkb
 ifB
-qOq
+qwM
 ozq
 ozq
 ozq
@@ -79489,14 +79608,14 @@ cAA
 qvf
 uZy
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 nZP
-pKj
+lkb
 eFN
 eFN
-bMr
+uAV
 ozq
 ozq
 ozq
@@ -79689,16 +79808,16 @@ crf
 cAA
 cAA
 qvf
-qOq
+qwM
 qnc
-vHN
+kDz
 iXi
-vHN
+kDz
 uIW
-pKj
-pKj
-pKj
-bMr
+lkb
+lkb
+lkb
+uAV
 ozq
 ozq
 ozq
@@ -79891,16 +80010,16 @@ cAA
 cAA
 asC
 qvf
-qOq
+qwM
 qnc
-vHN
+kDz
 iXi
-vHN
+kDz
 vFn
-pKj
+lkb
 eFN
 bfD
-bMr
+uAV
 ozq
 nZm
 ozq
@@ -80095,14 +80214,14 @@ asC
 asC
 uZy
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 oUk
-pKj
-pKj
-pKj
-qOq
+lkb
+lkb
+lkb
+qwM
 ozq
 nZm
 ozq
@@ -80295,16 +80414,16 @@ cAA
 cAA
 asC
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 olK
-pKj
-pKj
+lkb
+lkb
 ifB
-qOq
+qwM
 gBg
 gBg
 ozq
@@ -80497,16 +80616,16 @@ cAA
 cAA
 asC
 qvf
-qOq
+qwM
 qnc
-vHN
+kDz
 iXi
-vHN
+kDz
 cWD
 umU
 umU
 umU
-qOq
+qwM
 gBg
 gBg
 ozq
@@ -80699,16 +80818,16 @@ cAA
 cAA
 asC
 qvf
-qOq
+qwM
 kQk
-vHN
+kDz
 iXi
-vHN
+kDz
 pty
-vHN
+kDz
 qEU
 qfr
-qOq
+qwM
 gBg
 gBg
 ozq
@@ -80901,16 +81020,16 @@ cAA
 cAA
 cAA
 qvf
-qOq
-qOq
-vHN
+qwM
+qwM
+kDz
 iXi
-vHN
-qOq
+kDz
+qwM
 eLK
 vjj
 fkK
-qOq
+qwM
 nZm
 ozq
 ozq
@@ -81104,15 +81223,15 @@ cAA
 cAA
 qvf
 wpU
-qOq
-vHN
+qwM
+kDz
 iXi
-vHN
-qOq
+kDz
+qwM
 nyV
 nyV
 nyV
-qOq
+qwM
 nZm
 ozq
 ozq
@@ -81306,11 +81425,11 @@ cAA
 cAA
 qvf
 wpU
-qOq
+qwM
 vbu
 iXi
 vbu
-qOq
+qwM
 dID
 qFx
 qFx
@@ -116294,7 +116413,7 @@ voQ
 voQ
 voQ
 vDN
-gdc
+rkw
 hqz
 gdc
 gdc
@@ -116492,13 +116611,13 @@ rqE
 vDN
 voQ
 voQ
-voQ
-voQ
-gdc
+jDg
+oxo
+rkw
 xKy
 wKW
-gdc
-gdc
+qkb
+jwu
 gdc
 gdc
 gdc
@@ -116695,12 +116814,12 @@ vDN
 voQ
 voQ
 voQ
-wDs
+kDu
 wKW
 xKy
 wKW
 wKW
-voQ
+cty
 voQ
 voQ
 gdc
@@ -116897,12 +117016,12 @@ vDN
 gdc
 rRQ
 gdc
-gdc
+kDu
 wKW
 wKW
 xKy
 wKW
-voQ
+cty
 voQ
 voQ
 wuS
@@ -117099,11 +117218,11 @@ vDN
 gdc
 gdc
 gdc
-gdc
-gdc
+phi
+qnx
 wKW
 xKy
-voQ
+jdr
 piD
 voQ
 voQ
@@ -117302,8 +117421,8 @@ gdc
 hAu
 wDs
 gdc
-gdc
-gdc
+phi
+sdH
 sds
 voQ
 voQ
@@ -119724,8 +119843,8 @@ qKq
 qKq
 mbn
 sds
-voQ
-wKW
+inA
+mpF
 hCc
 bSj
 hCc
@@ -119927,7 +120046,7 @@ qKq
 mbn
 xKy
 wKW
-wKW
+ipY
 hCc
 bSj
 hCc
@@ -120129,7 +120248,7 @@ qKq
 mbn
 xKy
 wKW
-wKW
+ipY
 hCc
 bSj
 hCc
@@ -120330,8 +120449,8 @@ qKq
 qKq
 mbn
 vDN
-wKW
-wKW
+kHI
+cGJ
 hCc
 bSj
 hCc
