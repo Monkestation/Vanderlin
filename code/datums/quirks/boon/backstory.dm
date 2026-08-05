@@ -1,5 +1,5 @@
 /datum/quirk/boon/backstory
-	name = "Additional Training"
+	name = "Additional Skill"
 	desc = "During your youth, you dabbled in other skills, and still carry some of that ability today. (OOC NOTE; COMBAT SKILLS ARE CLAMPED AT AVERAGE FROM THIS, THIS IS YOUR PAST.)"
 	point_value = -3
 	customization_label = "Choose Background"
@@ -136,13 +136,13 @@
 	granted_skill = /datum/attribute/skill/combat/polearms
 
 /datum/backstory/combat/mercenary
-	name = "Ex-Mercenary"
-	desc = "You fought for coin, wielding axe and mace with brutal efficiency."
+	name = "Chicken Clubber"
+	desc = "You were often made to butcher the chickens for dinner, with axe or club to slay the animal."
 	granted_skill = /datum/attribute/skill/combat/axesmaces
 
 /datum/backstory/combat/brawler
-	name = "Pit Fighter"
-	desc = "When money was tight you took part in brawling duels to earn your keep."
+	name = "Basic Brawler"
+	desc = "When money was tight you took part in fistfights to earn your keep."
 	granted_skill = /datum/attribute/skill/combat/unarmed
 
 /datum/backstory/combat/archer
@@ -151,23 +151,23 @@
 	granted_skill = /datum/attribute/skill/combat/bows
 
 /datum/backstory/combat/assassin
-	name = "Reformed Assassin"
-	desc = "You killed for hire, a blade in the dark."
+	name = "Knifetrick Enthusiast"
+	desc = "You loved doing all sorts of tricks with knives, hands and arms nicked and scarred."
 	granted_skill = /datum/attribute/skill/combat/knives
 
 /datum/backstory/combat/crossbowman
-	name = "Former Crossbowman"
-	desc = "You served as a crossbowman, learning patience and precision."
+	name = "Livestock Guardian"
+	desc = "When volves, vernard, and other predators threatened your animals, they often met a bolt."
 	granted_skill = /datum/attribute/skill/combat/crossbows
 
 /datum/backstory/combat/wrestler
-	name = "Pit Fighter"
-	desc = "You wrestled for sport and survival in fighting pits."
+	name = "Moo-Beast Wrestler"
+	desc = "Often when you grew up, you enjoyed wrestlign with the bulls, now you can apply it to people too."
 	granted_skill = /datum/attribute/skill/combat/wrestling
 
 /datum/backstory/combat/whipmaster
-	name = "Former Slaver"
-	desc = "You wielded whip and flail in a dark past you've left behind."
+	name = "Grain Thresher"
+	desc = "Threshing grain translates well to crackign whips and swinging flails."
 	granted_skill = /datum/attribute/skill/combat/whipsflails
 
 /datum/backstory/combat/shieldbearer
@@ -176,18 +176,18 @@
 	granted_skill = /datum/attribute/skill/combat/shields
 
 /datum/backstory/combat/gunner
-	name = "Former Gunner"
-	desc = "You served with firearms, a dangerous and loud profession."
+	name = "Gun Enthusiast"
+	desc = "A mercenary travelled by, and showed you a puffer, and since then you have been obssessed."
 	granted_skill = /datum/attribute/skill/combat/firearms
 
 /datum/backstory/combat/athlete // under "combat" so they get clamped as well
-	name = "Former Athlete"
-	desc = "You competed in games, testing strength and endurance."
+	name = "Woodland Courier"
+	desc = "You ran messages through the forests, zipping past goblins and more. "
 	granted_skill = /datum/attribute/skill/misc/athletics
 
 /datum/backstory/combat/acrobat
-	name = "Retired Acrobat"
-	desc = "You performed daring feats, climbing and leaping."
+	name = "Wild Acrobat"
+	desc = "You spent as much time in the trees as on the ground, climbing and swinging through the branches."
 	granted_skill = /datum/attribute/skill/misc/climbing
 
 /datum/backstory/craft
@@ -196,7 +196,7 @@
 
 /datum/backstory/craft/blacksmith
 	name = "Apprentice Blacksmith"
-	desc = "You worked the forge, shaping metal with hammer and anvil."
+	desc = "You worked the forge, learning to shape metal with hammer and anvil."
 	granted_skill = /datum/attribute/skill/craft/blacksmithing
 
 /datum/backstory/craft/weaponsmith
