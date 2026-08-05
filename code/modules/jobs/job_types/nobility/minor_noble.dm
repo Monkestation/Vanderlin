@@ -196,7 +196,7 @@
 	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/book/granter/spellbook/apprentice = 1,
-		/obj/item/chalk = 1,
+		/obj/item/chalk = 1
 	)
 
 /datum/attribute_holder/sheet/job/herald
