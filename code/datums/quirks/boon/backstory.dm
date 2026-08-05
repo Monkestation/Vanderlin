@@ -63,7 +63,6 @@
 
 	if(initial(B.granted_skill))
 		H.clamped_adjust_skill_level(initial(B.granted_skill), B.amount, initial(B.clamp), TRUE)
-		H.adjust_skill_exp_multiplier(initial(B.granted_skill), initial(B.xp_multiplier))
 
 
 	to_chat(H, span_notice("Your experience as [LOWER_TEXT(initial(B.name))] has shaped who you are today."))
@@ -78,7 +77,6 @@
 	var/datum/backstory/B = customization_value
 	var/mob/living/carbon/human/H = owner
 
-	H.adjust_skill_exp_multiplier(initial(B.granted_skill), -initial(B.xp_multiplier))
 	return ..()
 
 /datum/backstory
@@ -92,8 +90,6 @@
 	var/amount = 10
 	///what we clamp to
 	var/clamp = 60
-	///how much of an xp multiplier we add
-	var/xp_multiplier = 0.2
 
 	/// List of allowed ages (empty = all allowed)
 	var/list/allowed_ages = list()
@@ -128,16 +124,15 @@
 	desc = "A combat-focused background."
 	amount = 20
 	clamp = 20
-	xp_multiplier = 0.1
 
 /datum/backstory/combat/soldier
-	name = "Former Soldier"
-	desc = "You served in the military, learning discipline and swordsmanship."
+	name = "Novice Swordsman"
+	desc = "You dabbled in swordplay while you were younger."
 	granted_skill = /datum/attribute/skill/combat/swords
 
 /datum/backstory/combat/guard
-	name = "Retired Guard"
-	desc = "You stood watch for years, mastering the spear and halberd."
+	name = "Peasent Spearman"
+	desc = "You spent much of your youth warding off volves and goblins with a spear."
 	granted_skill = /datum/attribute/skill/combat/polearms
 
 /datum/backstory/combat/mercenary
@@ -146,13 +141,13 @@
 	granted_skill = /datum/attribute/skill/combat/axesmaces
 
 /datum/backstory/combat/brawler
-	name = "Street Fighter"
-	desc = "You brawled to survive in the gutters and alleys."
+	name = "Pit Fighter"
+	desc = "When money was tight you took part in brawling duels to earn your keep."
 	granted_skill = /datum/attribute/skill/combat/unarmed
 
 /datum/backstory/combat/archer
-	name = "Former Archer"
-	desc = "You were a skilled bowman, whether in war or the hunt."
+	name = "Dabbling Hunter"
+	desc = "You aren't the best with a bow, but it is enough to feed you."
 	granted_skill = /datum/attribute/skill/combat/bows
 
 /datum/backstory/combat/assassin
