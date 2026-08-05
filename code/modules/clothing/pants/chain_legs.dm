@@ -22,7 +22,7 @@
 	l_sleeve_status = SLEEVE_NOMOD
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/pants/maille
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 3.95 KILOGRAMS
@@ -37,7 +37,7 @@
 	icon_state = "ichain_legs"
 	name = "iron chain chausses"
 	desc = "Chain mail chausses made of iron rings woven together, offering protection against cuts and stabs."
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.95 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
@@ -57,7 +57,7 @@
 	desc = "Interlinked metal rings that drape down all the way to the ankles."
 	icon_state = "ichainkilt"
 	item_state = "ichainkilt"
-	armor = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_STRONG
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron

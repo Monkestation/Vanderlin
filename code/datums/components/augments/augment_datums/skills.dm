@@ -40,9 +40,8 @@
 /datum/augment/skill/get_examine_info()
 	var/list/info = list()
 	info += span_info("Skill changes:")
-	for(var/skill_type in skill_changes)
-		var/datum/attribute/skill/S = skill_type
-		var/change = skill_changes[skill_type]
+	for(var/datum/attribute/skill/S as anything in skill_changes)
+		var/change = skill_changes[S]
 		info += span_info("  [initial(S.name)]: [change > 0 ? "+" : ""][change]")
 	return info
 

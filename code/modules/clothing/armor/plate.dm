@@ -12,7 +12,7 @@
 	clothing_flags = CANT_SLEEP_IN
 	//Plate doesn't protect a lot against blunt
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS //Has shoulder guards, and nothing else to suggest leg protection
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
@@ -30,7 +30,7 @@
 	item_state = "ihalfplate"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/clothing/armor/plate/iron/banded
@@ -49,7 +49,7 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	icon_state = "heartfelt"
 	item_state = "heartfelt"
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	allowed_sex = list(MALE, FEMALE)
 	nodismemsleeves = TRUE
 	blocking_behavior = null
@@ -77,9 +77,9 @@
 	unequip_delay_self = 7 SECONDS
 	sellprice = VALUE_FULL_PLATE
 
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 17 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 
 
 /obj/item/clothing/armor/plate/full/samsibsa
@@ -109,9 +109,9 @@
 	sellprice = VALUE_IRON_ARMOR*2
 	smeltresult = /obj/item/ingot/iron
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 17 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 
 //................ Rusted Half-plate ............... //
 /obj/item/clothing/armor/plate/rust
@@ -124,7 +124,7 @@
 	item_state = "rustplate"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_STANDARD
 	item_weight = 8.75 KILOGRAMS
 
@@ -133,7 +133,7 @@
 	desc = "Noc's holy silver, one fifth. Steel, three fifths. Chosen Material, one fifth. The armor of the Templar, protector and warrior of the Ten's Faithful."
 	icon_state = "silverhalfplate"
 	body_parts_covered = COVERAGE_TORSO
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/plate
 	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
 	allowed_sex = list(MALE, FEMALE)
 	melting_material = /datum/material/silver
@@ -144,14 +144,14 @@
 	name = "blacksteel plate"
 	desc = "A chestplate forged from blacksteel with shoulder guards, combining strength and agility."
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	armor_class = AC_MEDIUM
+	armor_class = AC_HEAVY // weighs less then regular plate so its no longer medium AC
 	icon_state = "bkarmor"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
-	item_weight = 20.45 KILOGRAMS
+	item_weight = 8 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
 
@@ -185,7 +185,7 @@
 	</br>Scholars oft-describe this suit as a 'panoply', purpose-made for the physiques of Psydonia's earliest Aasimari."
 	icon_state = "bronzeplate"
 	item_state = "bronzeplate"
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_IRON + 100
 	armor_class = AC_HEAVY
 	melt_amount = 275
@@ -260,9 +260,9 @@
 	desc = "A finely forged set of full silver plate, with long tassets protecting the legs."
 	icon_state = "silverarmor"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 22 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)
@@ -289,7 +289,7 @@
 	max_integrity = 400
 	melt_amount = 150
 	melting_material = /datum/material/silver
-	armor = ARMOR_PLATE // overall worse because of the endurance buff //Changed to Plate armor
+	armor_type = /datum/armor/plate // overall worse because of the endurance buff //Changed to Plate armor
 
 
 /obj/item/clothing/armor/plate/fluted/ornate/ordinator
@@ -306,11 +306,11 @@
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()
 	if(HAS_TRAIT(owner, TRAIT_MEDIUMARMOR) && !HAS_TRAIT(owner, TRAIT_HEAVYARMOR))
-		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /datum/status_effect/buff/psydonic_endurance/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
 	name = "Psydonic Endurance"

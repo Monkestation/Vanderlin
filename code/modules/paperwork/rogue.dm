@@ -60,7 +60,7 @@
 		<html><head><style type=\"text/css\">
 		body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 		dat += "[info]<br>"
-		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
+		dat += "<a href='byond://?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
 		user << browse(dat, "window=reading;size=460x460;can_close=0;can_minimize=0;can_maximize=0;can_resize=0")
 	else
@@ -564,44 +564,44 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/frumentarii/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-    if(user.cmode)
-        return NONE
+	if(user.cmode)
+		return NONE
 
-    if(!istype(tool, /obj/item/natural/thorn) && !istype(tool, /obj/item/natural/feather))
-        return NONE
+	if(!istype(tool, /obj/item/natural/thorn) && !istype(tool, /obj/item/natural/feather))
+		return NONE
 
-    var/choice = tgui_alert(user, "What would you like to do?", "Reattach/Sever Finger", list("Reattach", "Sever"))
-    if(!choice)
-        return ITEM_INTERACT_BLOCKING
+	var/choice = tgui_alert(user, "What would you like to do?", "Reattach/Sever Finger", list("Reattach", "Sever"))
+	if(!choice)
+		return ITEM_INTERACT_BLOCKING
 
-    switch(choice)
-        if("Reattach")
-            if(length(GLOB.ex_court_agents) <= 0)
-                balloon_alert(user, "there are no Ex-Fingers to reattach.")
-                return ITEM_INTERACT_BLOCKING
+	switch(choice)
+		if("Reattach")
+			if(length(GLOB.ex_court_agents) <= 0)
+				balloon_alert(user, "there are no Ex-Fingers to reattach.")
+				return ITEM_INTERACT_BLOCKING
 
-            var/reattachChoice = tgui_input_list(user, "Reattach a Finger", "THE LIST", GLOB.ex_court_agents)
-            if(!reattachChoice || QDELETED(src) || QDELETED(user))
-                return ITEM_INTERACT_BLOCKING
+			var/reattachChoice = tgui_input_list(user, "Reattach a Finger", "THE LIST", GLOB.ex_court_agents)
+			if(!reattachChoice || QDELETED(src) || QDELETED(user))
+				return ITEM_INTERACT_BLOCKING
 
-            GLOB.ex_court_agents -= reattachChoice
-            GLOB.court_agents += reattachChoice
-            playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
-            return ITEM_INTERACT_SUCCESS
+			GLOB.ex_court_agents -= reattachChoice
+			GLOB.court_agents += reattachChoice
+			playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
+			return ITEM_INTERACT_SUCCESS
 
-        if("Sever")
-            if(length(GLOB.court_agents) <= 0)
-                balloon_alert(user, "there are no Fingers to sever.")
-                return ITEM_INTERACT_BLOCKING
+		if("Sever")
+			if(length(GLOB.court_agents) <= 0)
+				balloon_alert(user, "there are no Fingers to sever.")
+				return ITEM_INTERACT_BLOCKING
 
-            var/severChoice = tgui_input_list(user, "Sever a Finger", "THE LIST", GLOB.court_agents)
-            if(!severChoice || QDELETED(src) || QDELETED (user))
-                return ITEM_INTERACT_BLOCKING
+			var/severChoice = tgui_input_list(user, "Sever a Finger", "THE LIST", GLOB.court_agents)
+			if(!severChoice || QDELETED(src) || QDELETED (user))
+				return ITEM_INTERACT_BLOCKING
 
-            GLOB.court_agents -= severChoice
-            GLOB.ex_court_agents += severChoice
-            playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
-            return ITEM_INTERACT_SUCCESS
+			GLOB.court_agents -= severChoice
+			GLOB.ex_court_agents += severChoice
+			playsound(src, 'sound/items/write.ogg', 50, FALSE, -4, ignore_walls = FALSE)
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/paper/scroll/keep_plans
 	name = "keep architectural drawings"

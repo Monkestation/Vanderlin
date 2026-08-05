@@ -1,7 +1,6 @@
 /datum/attribute_holder/sheet/job/monk
 	attribute_variance = list(
-		/datum/attribute/skill/combat/polearms = list(10, 20),
-		/datum/attribute/skill/misc/athletics = list(20, 30)
+		/datum/attribute/skill/combat/polearms = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -14,6 +13,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 30, //i didn't know it was random. no longer random.
 		/datum/attribute/skill/misc/climbing = 40,
 	)
 
@@ -40,6 +40,11 @@
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
+		TRAIT_CLOSECOMBAT,
+	)
+
+	spells = list(
+		/datum/action/innate/clench_fists
 	)
 
 /datum/job/advclass/combat/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)

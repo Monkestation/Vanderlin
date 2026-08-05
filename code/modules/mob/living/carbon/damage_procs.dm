@@ -115,11 +115,11 @@
 		return
 	adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
-/mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
+/mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status, intense)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(amount > 0)
-		take_overall_damage(0, amount, updating_health, required_status)
+		take_overall_damage(0, amount, updating_health, required_status, damage_type = (intense ? BCLASS_INTENSE_BURN : null))
 	else
 		heal_overall_damage(0, abs(amount), required_status ? required_status : BODYPART_ORGANIC, updating_health)
 	return amount
@@ -142,11 +142,12 @@
 	if(. <= 75)
 		if(getOxyLoss() > 75)
 			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
-			var/obj/item/organ/brain = getorganslot(ORGAN_SLOT_BRAIN)
-			brain?.consider_processing()
 
 	else if(getOxyLoss() <= 75)
 		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+
+	var/obj/item/organ/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	brain?.consider_processing()
 
 /mob/living/carbon/setOxyLoss(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
@@ -430,7 +431,7 @@
 			damage_type = WOUND_INTERNAL_BRUISE
 
 		if(damage_type || burn)
-			if(burn)
+			if(burn && (damage_type != BCLASS_INTENSE_BURN))
 				damage_type = BCLASS_BURN
 			update = TRUE
 			var/list/mods = list()

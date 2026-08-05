@@ -382,22 +382,27 @@
 /obj/item/bodypart/proc/kill_limb()
 	if(!can_decay())
 		return
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(!already_rot)
-		ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && !already_rot)
-		owner.update_body()
-	else
-		update_icon_dropped()
 
-/obj/item/bodypart/proc/revive_limb()
-	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(already_rot)
-		REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
-	if(owner && already_rot)
+	var/was_rotten = HAS_TRAIT(src, TRAIT_ROTTEN)
+	ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If we were already rotten, no need to update
+	if(was_rotten)
+		return
+
+	owner?.update_body()
+	update_icon_dropped()
+
+/obj/item/bodypart/proc/revive_limb(update_icon = FALSE)
+	REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+
+	// If it still is rotten, no need to update
+	if(HAS_TRAIT(src, TRAIT_ROTTEN))
+		return
+
+	if(owner && update_icon)
 		owner.update_body()
-	else
-		update_icon_dropped()
+	update_icon_dropped()
 
 /// Adding/removing germs
 /obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
@@ -484,7 +489,7 @@
 	if(ishuman(owner) && bare_organ_bonus)
 		var/mob/living/carbon/human/human_owner = owner
 		for(var/obj/item/clothing/clothes_check as anything in human_owner.clothingonpart(src))
-			if(clothes_check.armor.getRating(WOUND))
+			if(clothes_check.get_armor().get_rating(WOUND))
 				bare_organ_bonus = 0
 				break
 
@@ -497,7 +502,7 @@
 		if(WOUND_PUNCTURE, WOUND_BLUNT)
 			organ_damage_minimum *= 0.75
 		// Burn damage is unlikely to damage organs
-		if(WOUND_BURN)
+		if(WOUND_BURN, WOUND_INTENSE_BURN)
 			organ_damage_minimum *= 1.5
 		else
 			organ_damage_hit_minimum *= 1
@@ -602,10 +607,6 @@
 		if(injury.damage <= 0)
 			qdel(injury)
 			continue
-
-		// Bleeding
-		if(owner)
-			injury.bleed_timer = max(0, injury.bleed_timer - delta_time)
 
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
@@ -889,29 +890,31 @@
 /obj/item/bodypart/proc/get_shock(painkiller_included = FALSE)
 	if(!can_feel_pain())
 		return 0
+
 	//Multiply our total pain damage by this
 	var/multiplier = 1
 	if(LAZYLEN(grabbedby))
 		//Being grasped lowers the pain just a bit
 		multiplier *= 0.75
+
 	if(multiplier <= 0)
 		return 0
+
 	var/constant_pain = 0
-	constant_pain += SHOCK_MOD_BRUTE * brute_dam
-	constant_pain += SHOCK_MOD_BURN * burn_dam
-	var/datum/wound/wound
-	for(var/thing in wounds)
-		wound = thing
+	for(var/datum/injury/injury as anything in injuries)
+		constant_pain += injury.return_pain()
+	for(var/datum/wound/wound as anything in wounds)
 		constant_pain += wound.woundpain
-	var/obj/item/organ/organ
-	for(var/thing in get_organs())
-		organ = thing
+	for(var/obj/item/organ/organ as anything in get_organs())
 		constant_pain += organ.get_shock(FALSE)
+
 	for(var/obj/item/embebbed as anything in embedded_objects)
 		if(embebbed.embedding)
 			constant_pain += embebbed.embedding.embedded_pain_multiplier * embebbed.w_class
+
 	if(painkiller_included)
 		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+
 	return clamp(FLOOR((pain_dam + constant_pain) * multiplier, DAMAGE_PRECISION), 0, max_pain_damage)
 
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
@@ -1489,8 +1492,7 @@
  */
 /obj/item/bodypart/proc/getorganslot(slot)
 	if(owner)
-		for(var/thing in shuffle(owner.getorganslotlist(slot)))
-			var/obj/item/organ/organ = thing
+		for(var/obj/item/organ/organ as anything in shuffle(owner.getorganslotlist(slot)))
 			if(deprecise_zone(organ.current_zone) == body_zone)
 				return organ
 	else
@@ -1510,9 +1512,7 @@
 /obj/item/bodypart/proc/getorganslotlist(slot)
 	var/list/organs = list()
 	if(owner)
-		var/obj/item/organ/organ
-		for(var/thing in owner.getorganslotlist(slot))
-			organ = thing
+		for(var/obj/item/organ/organ as anything in owner.getorganslotlist(slot))
 			if(check_zone(organ.current_zone) == body_zone)
 				organs |= organ
 	else

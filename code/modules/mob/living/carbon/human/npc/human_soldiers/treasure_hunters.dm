@@ -5,7 +5,7 @@
 
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter
 	ai_controller = /datum/ai_controller/human_npc
-	faction = list("viking", "station")
+	faction = list(FACTION_VIKINGS)
 	ambushable = FALSE
 	dodgetime = 15
 	flee_in_pain = FALSE
@@ -100,7 +100,7 @@
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
 	color = "#999999"
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/leather
 
 /obj/item/clothing/face/facemask/steel/mad_touched
 	name = "eerie ancient mask"

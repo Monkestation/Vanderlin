@@ -177,8 +177,8 @@
 		recoil(user)
 		return
 
-	user.mind?.has_studied = TRUE
 	var/mob/living/reader = user
+	reader.mind?.has_studied = TRUE
 
 	// Base quality is a blend of INT, reading skill, and arcane skill.
 	var/qualityoflearn = (GET_MOB_ATTRIBUTE_VALUE(reader, STAT_INTELLIGENCE) * 2 + GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/reading) * 5 + GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5)
@@ -217,6 +217,7 @@
 
 	var/spellpoints = CEILING(bookquality * (qualityoflearn / 100), 1)
 	reader.adjust_spell_points(spellpoints)
+	log_game("SPELLBOOK: [key_name(reader)] read a spellbook and gained [spellpoints] spell points.")
 
 	if(stored_attunement)
 		user.mana_pool?.adjust_attunement(stored_attunement, 0.1 * (spellpoints / 0.2))

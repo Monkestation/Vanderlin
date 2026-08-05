@@ -32,6 +32,7 @@
 	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
 	give_bank_account = 15
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
@@ -104,12 +105,12 @@
 /datum/outfit/absolver
 	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
-	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
+	gloves = /obj/item/clothing/gloves/leather/grenzel/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser
 	beltl = /obj/item/storage/belt/pouch/coins/rich
 	neck = /obj/item/clothing/neck/psycross/silver
 	cloak = /obj/item/clothing/cloak/absolutionistrobe
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	armor = /obj/item/clothing/armor/cuirass/psydon
@@ -117,7 +118,7 @@
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/head/helmet/blacksteel/psythorns
 	head = /obj/item/clothing/head/helmet/heavy/absolver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/book/bibble/psy = 1,
 		/obj/item/natural/bundle/cloth = 2,

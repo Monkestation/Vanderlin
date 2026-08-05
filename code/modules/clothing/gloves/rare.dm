@@ -16,7 +16,7 @@
 	melting_material = /datum/material/steel
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/gloves/plate/good
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_CRITICAL_HITS
 	abstract_type = /obj/item/clothing/gloves/rare

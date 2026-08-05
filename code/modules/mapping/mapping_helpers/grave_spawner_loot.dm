@@ -40,7 +40,6 @@
 /datum/outfit/grave/t1/prisoner
 	name = "Prisoner (grave)"
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner
 
 	weight = 1
 

@@ -201,7 +201,7 @@
 /mob/living/proc/getFireLoss()
 	return fireloss
 
-/mob/living/proc/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/proc/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, intense = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	fireloss = CLAMP((fireloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
@@ -247,6 +247,8 @@
 /mob/living/proc/getOrganLoss(slot)
 	return
 
+/mob/living/proc/get_stamina_loss()
+	return stamina
 
 /mob/living/proc/getPainLoss()
 	return painloss

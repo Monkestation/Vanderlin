@@ -34,7 +34,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 /mob/living/carbon/human/dummy/setup_human_dna()
 	create_dna(src)
 	randomize_human(src)
-	dna.initialize_dna(skip_index = TRUE) //Skip stuff that requires full round init.
+	dna.initialize_dna(FALSE, FALSE, FALSE) //Skip stuff that requires full round init.
 
 //Inefficient pooling/caching way.
 GLOBAL_LIST_EMPTY(human_dummy_list)

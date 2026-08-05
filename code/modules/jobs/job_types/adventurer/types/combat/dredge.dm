@@ -503,7 +503,7 @@
 			spawned.change_stat(STAT_INTELLIGENCE, 3)
 			spawned.change_stat(STAT_CONSTITUTION, -1)
 			spawned.change_stat(STAT_PERCEPTION, -2)
-			spawned.virginity = TRUE
+			ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.grant_language(/datum/language/elvish)
 			spawned.grant_language(/datum/language/celestial)
 			spawned.grant_language(/datum/language/oldpsydonic)
