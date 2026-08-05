@@ -385,15 +385,6 @@
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
-"uP" = (
-/obj/item/clothing/head/peaceflower{
-	pixel_x = -8;
-	pixel_y = 7
-	},
-/turf/open/water/hotspring,
-/turf/open/water/hotspring,
-/turf/open/water/hotspring,
-/area/under/tomb/indoors/rest)
 "vh" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter,
 /turf/open/floor/grass/mixyel,
@@ -1108,7 +1099,7 @@ YO
 qV
 Fn
 YO
-uP
+pw
 dj
 Qy
 Qy
