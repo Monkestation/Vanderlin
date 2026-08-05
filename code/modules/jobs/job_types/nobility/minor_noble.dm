@@ -108,9 +108,6 @@
 	armor = /obj/item/clothing/armor/cuirass/fluted
 	gloves = /obj/item/clothing/gloves/plate
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/key/manor = 1,
-	)
 
 /datum/attribute_holder/sheet/job/magnate
 	raw_attribute_list = list(
@@ -154,9 +151,6 @@
 	backl = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/head/chaperon/colored/greyscale/silk
 	mask = /obj/item/clothing/face/spectacles/monocle
-	backpack_contents = list(
-		/obj/item/key/manor = 1,
-	)
 
 /datum/attribute_holder/sheet/job/magickal_graduate
 	raw_attribute_list = list(
@@ -203,7 +197,6 @@
 	backpack_contents = list(
 		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1,
-		/obj/item/key/manor = 1,
 	)
 
 /datum/attribute_holder/sheet/job/herald
@@ -247,9 +240,6 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	shirt = /obj/item/clothing/shirt/dress/silkdress/loudmouth
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/key/manor = 1,
-	)
 
 /datum/attribute_holder/sheet/job/vassal
 	raw_attribute_list = list(
@@ -291,9 +281,6 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	backr = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/head/fancyhat
-	backpack_contents = list(
-		/obj/item/key/manor = 1,
-	)
 
 /datum/job/minor_noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -338,3 +325,4 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather
 	ring = /obj/item/clothing/ring/silver
+	beltl = /obj/item/key/manor
