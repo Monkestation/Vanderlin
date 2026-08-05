@@ -157,12 +157,9 @@
 
 /obj/item/clothing/armor/plate/blkknight/lordly
 	name = "lordly plate"
-	desc ="A masterfully-crafted ensemble of blacksteel, complete with arm and leg guards, worn under a fine, heavy, fur-lined coat of genuine, dark Troll leather, the latest fashion amongst high Nobility in Psydonia."
+	desc ="A full, master-crafted ensemble of fine blacksteel, complete with arm, leg and groin protection, and worn with a heavy, indubitably stylish, fur-lined collar of genuine saigahair to boot. The latest battle-fashion amongst the high nobility of Psydonia."
 	icon_state = "lordly"
 	body_parts_covered = COVERAGE_FULL
-	detail_tag = "_detail"
-	uses_lord_coloring = LORD_PRIMARY
-
 //................ Deccorated Half-plate ............... //
 
 /obj/item/clothing/armor/plate/decorated
