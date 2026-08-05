@@ -97,7 +97,7 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
 // This would be Thermal Vision if it had worked.
-/datum/job/advclass/wretch/hexknife/on_roundstart(mob/living/carbon/human/spawned, mob/living/carbon/human/H, client/player_client)
+/datum/job/advclass/wretch/hexknife/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
