@@ -413,6 +413,8 @@
 		return FALSE
 	if(body_position == LYING_DOWN)
 		return TRUE
+	if(HAS_TRAIT(L, TRAIT_CLOSECOMBAT))
+		return TRUE
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if( !(check_zone(L.zone_selected) in acceptable) )
 		to_chat(L, "<span class='warning'>I can't reach that.</span>")

@@ -358,9 +358,9 @@
 	icon_state = "tablewood2";
 	dir = 10
 	},
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
+/obj/item/clothing/head/helmet/kettle,
+/obj/item/clothing/head/helmet/kettle,
+/obj/item/clothing/head/helmet/kettle,
 /turf/open/floor/carpet,
 /area/indoors)
 "bb" = (

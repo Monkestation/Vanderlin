@@ -16,3 +16,26 @@
 2026-08-02:
   realforest2001:
   - bugfix: Fixes accent selection.
+2026-08-03:
+  Spitegremlin:
+  - rscadd: Added new chisel and sprite for bronze chisel, repaletted the stone hammer
+      and new hammerstone
+  flleeppyy:
+  - bugfix: readd admin proc call check on db query
+  realforest2001:
+  - rscadd: Added plain Bronze and Blacksteel rings.
+  - rscadd: Added Court Agent rings made of Bronze, Gold and Blacksteel.
+  - image: Added icons for the Court Agent rings, and changed silver to new style.
+  - bugfix: Fixed the pathing for inquisition signet rings.
+2026-08-04:
+  dwasint:
+  - qol: you now bleedout 50% slower when in critical so you can more easily be saved
+  - qol: Off-Balance now applies Combat Knockdown instead of regular knockdown, which
+      cannot stack if you are already knocked down.
+2026-08-05:
+  Avalon-Proto:
+  - rscadd: Fighters trained in unarmed combat can now kick anywhere on the body,
+      and have the ability to access 4 new punch types
+  realforest2001:
+  - bugfix: Fixes heretic triumph buy.
+  - balance: Addressed some exploitable finances.

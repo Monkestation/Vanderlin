@@ -131,6 +131,8 @@
 	switch(weapon_choice)
 		if("Bare Handed")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/bruiser/barehanded)
+			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 
 /datum/attribute_holder/sheet/job/courtagent/hitman
 	raw_attribute_list = list(

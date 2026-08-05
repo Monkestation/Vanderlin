@@ -1,7 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added plain Bronze and Blacksteel rings."
-  - rscadd: "Added Court Agent rings made of Bronze, Gold and Blacksteel."
-  - image: "Added icons for the Court Agent rings, and changed silver to new style."
-  - bugfix: "Fixed the pathing for inquisition signet rings."
