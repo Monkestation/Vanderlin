@@ -337,7 +337,6 @@
 "akI" = (
 /obj/effect/mapping_helpers/access/keyset/town/tomb,
 /obj/structure/door/iron/bars,
-/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "akN" = (
