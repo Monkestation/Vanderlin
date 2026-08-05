@@ -271,6 +271,7 @@
 	message = "sniffs..."
 	emote_type = EMOTE_AUDIBLE
 	ignore_silent = TRUE
+
 /mob/living/carbon/human/verb/emote_sniff()
 	set name = "Sniff"
 	set category = "Emotes.Noises"
