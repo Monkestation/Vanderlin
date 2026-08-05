@@ -143,7 +143,7 @@
 /obj/machinery/light/fueled/wallfire/candle/incense
 	name = "incense"
 	icon_state = "incense1"
-	base_state = "incense0"
+	base_state = "incense"
 	bulb_colour = "#ffa35c"
 	crossfire = FALSE
 	cookonme = FALSE
@@ -154,7 +154,7 @@
 /obj/machinery/light/fueled/wallfire/candle/silver
 	name = "silver candle"
 	icon_state = "silvercandle1"
-	base_state = "silvercandle0"
+	base_state = "silvercandle"
 	bulb_colour = "#ffa35c"
 	crossfire = FALSE
 	cookonme = FALSE
@@ -165,7 +165,7 @@
 /obj/machinery/light/fueled/wallfire/candle/goldcandle
 	name = "gold candle"
 	icon_state = "goldcandle1"
-	base_state = "goldcandle0"
+	base_state = "goldcandle"
 	bulb_colour = "#ffa35c"
 	crossfire = FALSE
 	cookonme = FALSE
