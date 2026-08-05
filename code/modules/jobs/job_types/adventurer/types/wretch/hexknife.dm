@@ -99,12 +99,7 @@
 // This would be Thermal Vision if it had worked.
 /datum/job/advclass/wretch/hexknife/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		eyes.Remove(spawned,1)
-		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(spawned)
+	spawned.grant_undead_eyes()
 
 /datum/job/advclass/wretch/hexknife/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
