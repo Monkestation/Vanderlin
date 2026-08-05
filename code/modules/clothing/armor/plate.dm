@@ -160,6 +160,8 @@
 	desc = "A masterfully-crafted ensemble of blacksteel, complete with arm and leg guards, worn under a fine, fur-lined coat, the latest fashion amongst high Nobility in Psydonia."
 	icon_state = "lordly"
 	body_parts_covered = COVERAGE_FULL
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
 
 //................ Deccorated Half-plate ............... //
 
