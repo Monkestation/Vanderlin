@@ -210,18 +210,18 @@
 	granted_skill = /datum/attribute/skill/craft/armorsmithing
 
 /datum/backstory/craft/carpenter
-	name = "Retired Carpenter"
-	desc = "You worked with wood, building homes and furniture."
+	name = "Hobby Carver"
+	desc = "You have always enjoyed shaping wood by hand and blade."
 	granted_skill = /datum/attribute/skill/craft/carpentry
 
 /datum/backstory/craft/mason
-	name = "Ex-Mason"
-	desc = "You shaped stone, building walls and monuments."
+	name = "Simple Stoneworker"
+	desc = "You learned to chisel and shape stone, making all sorts of carvings."
 	granted_skill = /datum/attribute/skill/craft/masonry
 
 /datum/backstory/craft/cook
-	name = "Former Cook"
-	desc = "You prepared meals, from simple stews to elaborate feasts."
+	name = "Common Cook"
+	desc = "You always have enjoyed cooking, and still remember the basics."
 	granted_skill = /datum/attribute/skill/craft/cooking
 
 /datum/backstory/craft/alchemist
@@ -230,23 +230,23 @@
 	granted_skill = /datum/attribute/skill/craft/alchemy
 
 /datum/backstory/craft/engineer
-	name = "Failed Engineer"
-	desc = "You built machines and contraptions, though not all worked."
+	name = "Studied Engineer"
+	desc = "While oyu couldn't build complex machines, you still know how to fix them, and make gears."
 	granted_skill = /datum/attribute/skill/craft/engineering
 
 /datum/backstory/craft/tailor
-	name = "Former Tailor"
-	desc = "You sewed garments for nobles and commoners alike."
+	name = "Simple Stitcher"
+	desc = "You learned to sew at a yougn age, and still remember some needlework."
 	granted_skill = /datum/attribute/skill/misc/sewing
 
 /datum/backstory/craft/tanner
-	name = "Ex-Tanner"
+	name = "Leatherworker"
 	desc = "You worked with leather, turning hides into useful goods."
 	granted_skill = /datum/attribute/skill/craft/tanning
 
 /datum/backstory/craft/trapper
-	name = "Former Trapper"
-	desc = "You laid traps for beasts and sometimes men."
+	name = "Mantrap Maker"
+	desc = "You learned to lay traps for game
 	granted_skill = /datum/attribute/skill/craft/traps
 
 /datum/backstory/craft/smelter
@@ -269,28 +269,28 @@
 	desc = "A labor-focused background."
 
 /datum/backstory/labor/miner
-	name = "Ex-Miner"
-	desc = "You worked in the mines, digging for ore and gems."
+	name = "Minor Miner"
+	desc = "You helped your family dig and excavate a new cellar, and soem of the skills stuck with you."
 	granted_skill = /datum/attribute/skill/labor/mining
 
 /datum/backstory/labor/farmer
-	name = "Former Farmer"
-	desc = "You tilled the land and knew the seasons well."
+	name = "Family Farmer"
+	desc = "You tilled the land and grew simple foods for your home."
 	granted_skill = /datum/attribute/skill/labor/farming
 
 /datum/backstory/labor/fisher
-	name = "Retired Fisher"
-	desc = "You fished the waters, patient and persistent."
+	name = "Leisure Time Fisher"
+	desc = "You fished the waters, getting away from the daily grind and enjoying the peace of the water."
 	granted_skill = /datum/attribute/skill/labor/fishing
 
 /datum/backstory/labor/butcher
-	name = "Former Butcher"
-	desc = "You prepared meat, skilled with knife and cleaver."
+	name = "Basic Butcher"
+	desc = "You were  often set to work cleaning the carcasses of the animals, your hands still remember the feeling."
 	granted_skill = /datum/attribute/skill/labor/butchering
 
 /datum/backstory/labor/lumberjack
-	name = "Ex-Lumberjack"
-	desc = "You felled trees and split logs with ease."
+	name = "Learned Lumberjack"
+	desc = "You helped split wood and chop trees around winter, for fuel and construction."
 	granted_skill = /datum/attribute/skill/labor/lumberjacking
 
 /datum/backstory/labor/tamer
@@ -303,23 +303,23 @@
 	desc = "A miscellaneous background."
 
 /datum/backstory/misc/thief
-	name = "Former Thief"
-	desc = "You picked pockets and stole to survive."
+	name = "Pickpocketing"
+	desc = "You have always had sticky fingers."
 	granted_skill = /datum/attribute/skill/misc/stealing
 
 /datum/backstory/misc/spy
-	name = "Ex-Spy"
-	desc = "You moved in shadows, gathering secrets."
+	name = "Light-footed Listener"
+	desc = "You had a tendency to creep around and enjoy going unseen."
 	granted_skill = /datum/attribute/skill/misc/sneaking
 
 /datum/backstory/misc/locksmith
-	name = "Former Locksmith"
-	desc = "You worked with locks, both making and picking them."
+	name = "Latent Locksmith"
+	desc = "You've always had a knack for locks and keys, and learned to pick them for fun."
 	granted_skill = /datum/attribute/skill/misc/lockpicking
 
 /datum/backstory/misc/bard
 	name = "Tavern Bard"
-	desc = "You played for crowds, earning coin and applause."
+	desc = "You have always had a passion for music, and learned to play a few instruments."
 	granted_skill = /datum/attribute/skill/misc/music
 
 /datum/backstory/misc/medic
@@ -329,30 +329,25 @@
 
 /datum/backstory/misc/rider
 	name = "Horse Trainer"
-	desc = "You rode and trained mounts for nobles and soldiers."
+	desc = "You helped raise saiga, and learned to ride too."
 	granted_skill = /datum/attribute/skill/misc/riding
 
 /datum/backstory/misc/scribe
-	name = "Scribe's Apprentice"
-	desc = "You studied letters and copied manuscripts."
+	name = "Basic Literacy"
+	desc = "You spent time learning to red and write as a child."
 	granted_skill = /datum/attribute/skill/misc/reading
 
 /datum/backstory/misc/swimmer
-	name = "Former Swimmer"
-	desc = "You swam the rivers and knew the waters well."
+	name = "Summer Swimmer"
+	desc = "You enjoyed swimming often to cool off come the hot days of the summer."
 	granted_skill = /datum/attribute/skill/misc/swimming
 
 /datum/backstory/misc/merchant
-	name = "Merchant's Assistant"
-	desc = "You counted coin and learned the art of numbers."
+	name = "Marketplace Assistant"
+	desc = "You helped handle the coin from your family's ventures, and still have a good handle on math."
 	granted_skill = /datum/attribute/skill/labor/mathematics
 
 /datum/backstory/magic
 	abstract_type = /datum/backstory/magic
 	desc = "A magical background."
-	clamp = 20
 
-/datum/backstory/magic/acolyte
-	name = "Former Acolyte"
-	desc = "You studied in a temple, learning divine miracles."
-	granted_skill = /datum/attribute/skill/magic/holy
