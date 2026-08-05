@@ -7615,6 +7615,20 @@
 /obj/item/clothing/face/lordmask/l,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/hand)
+"etG" = (
+/obj/item/key/servant,
+/obj/item/key/servant,
+/obj/item/key/servant,
+/obj/item/key/servant,
+/obj/effect/mapping_helpers/access/keyset/manor/butler,
+/obj/effect/mapping_helpers/access/locker,
+/obj/structure/closet/keyrack{
+	pixel_y = 0;
+	pixel_x = -32
+	},
+/obj/item/key/guest,
+/turf/open/floor/cobble,
+/area/indoors/town/keep/servanthead)
 "etZ" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/soap{
@@ -143631,7 +143645,7 @@ odL
 dvF
 wSM
 uyw
-roJ
+etG
 dvF
 lym
 lym
