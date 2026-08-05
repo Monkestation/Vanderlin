@@ -27,3 +27,15 @@
   - rscadd: Added Court Agent rings made of Bronze, Gold and Blacksteel.
   - image: Added icons for the Court Agent rings, and changed silver to new style.
   - bugfix: Fixed the pathing for inquisition signet rings.
+2026-08-04:
+  dwasint:
+  - qol: you now bleedout 50% slower when in critical so you can more easily be saved
+  - qol: Off-Balance now applies Combat Knockdown instead of regular knockdown, which
+      cannot stack if you are already knocked down.
+2026-08-05:
+  Avalon-Proto:
+  - rscadd: Fighters trained in unarmed combat can now kick anywhere on the body,
+      and have the ability to access 4 new punch types
+  realforest2001:
+  - bugfix: Fixes heretic triumph buy.
+  - balance: Addressed some exploitable finances.

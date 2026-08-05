@@ -43265,8 +43265,8 @@
 /area/indoors/town/keep/gate)
 "tMo" = (
 /obj/item/clothing/neck/talkstone,
-/obj/item/clothing/ring/courtagent_ring,
-/obj/item/clothing/ring/courtagent_ring,
+/obj/item/clothing/ring/courtagent_ring/silver,
+/obj/item/clothing/ring/courtagent_ring/silver,
 /obj/structure/closet/crate/chest,
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
