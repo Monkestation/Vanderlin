@@ -292,9 +292,8 @@
 /turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "ol" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "op" = (
 /obj/structure/window{
@@ -307,12 +306,11 @@
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
 "pw" = (
-/obj/structure/hotspring,
 /obj/item/clothing/head/peaceflower{
 	pixel_x = -8;
 	pixel_y = 7
 	},
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "pN" = (
 /obj/machinery/light/fueled/firebowl,
@@ -340,12 +338,11 @@
 	},
 /area/under/tomb/indoors/rest)
 "qV" = (
-/obj/structure/hotspring,
 /obj/structure/flora/sakura{
 	pixel_x = -53;
 	pixel_y = 18
 	},
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "ry" = (
 /obj/item/fishingrod,
@@ -388,39 +385,23 @@
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
-"uP" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
-/obj/structure/hotspring,
-/obj/item/clothing/head/peaceflower{
-	pixel_x = -8;
-	pixel_y = 7
-	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "vh" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter,
 /turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "vt" = (
-/obj/structure/hotspring,
 /obj/structure/fluff/statue/small,
 /obj/item/clothing/head/flowercrown/salvia{
 	pixel_y = -11
 	},
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "vw" = (
-/obj/structure/hotspring,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_y = 23;
 	pixel_x = -15
 	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
-"vA" = (
-/obj/structure/hotspring,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "wv" = (
 /obj/structure/mannequin/male/female,
@@ -532,9 +513,8 @@
 	},
 /area/under/tomb/indoors/rest)
 "Fn" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "GL" = (
 /obj/structure/dye_bin/luxury,
@@ -625,9 +605,8 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/under/tomb/indoors/rest)
 "JK" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "Ka" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -774,11 +753,6 @@
 /obj/structure/hotspring/border/fourteen,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
-"Wo" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/two,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "WA" = (
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/grass/eora,
@@ -805,9 +779,8 @@
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
 "Xz" = (
-/obj/structure/hotspring,
 /obj/structure/healing_spring,
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "Yy" = (
 /obj/effect/decal/cleanable/debris/glass,
@@ -823,8 +796,7 @@
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
 "YO" = (
-/obj/structure/hotspring,
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "ZK" = (
 /obj/item/bin/water,
@@ -1099,7 +1071,7 @@ aS
 YO
 vt
 Xz
-Wo
+JK
 qB
 MP
 Qy
@@ -1127,7 +1099,7 @@ YO
 qV
 Fn
 YO
-uP
+pw
 dj
 Qy
 Qy
@@ -1151,7 +1123,7 @@ VI
 gD
 YO
 YO
-Wo
+JK
 YO
 Xz
 YO
@@ -1261,7 +1233,7 @@ Qy
 Qy
 VI
 Rl
-vA
+YO
 dj
 Qy
 Qy
