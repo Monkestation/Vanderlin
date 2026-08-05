@@ -320,7 +320,7 @@
 	name = "hand's key"
 	desc = "This regal key belongs to the Monarch's Right Hand."
 	icon_state = "cheesekey"
-	lockids = list(ACCESS_HAND, ACCESS_COURTAGENT)
+	lockids = list(ACCESS_HAND, ACCESS_COURTAGENT, ACCESS_SERVANT)
 
 /obj/item/key/courtagent
 	name = "court agent hideout key"

@@ -15322,7 +15322,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
@@ -48202,7 +48203,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
@@ -52606,7 +52608,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)

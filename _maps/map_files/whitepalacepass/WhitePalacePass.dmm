@@ -2931,7 +2931,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/carpet/lord/corner{
 	dir = 1
@@ -7030,7 +7031,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/carpet/lord/corner{
 	dir = 1
@@ -11736,7 +11738,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/carpet/lord/right{
 	dir = 1
@@ -33132,7 +33135,8 @@
 	icon_state = "barsbent";
 	layer = 2.81;
 	name = "kitchen manners";
-	alpha = 0
+	alpha = 0;
+	mouse_opacity = 0
 	},
 /turf/open/floor/carpet/lord/corner{
 	dir = 4
