@@ -178,6 +178,10 @@
 "kr" = (
 /turf/open/openspace,
 /area/under/tomb/indoors/church)
+"kM" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/openspace,
+/area/under/tomb)
 "ld" = (
 /turf/closed/wall/mineral/decostone/long,
 /area/under/tomb/indoors/church)
@@ -240,6 +244,12 @@
 "ok" = (
 /turf/closed/wall/window/stained/red,
 /area/under/tomb/indoors/church)
+"oP" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "oV" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -248,6 +258,12 @@
 "pr" = (
 /turf/closed/wall/mineral/decostone/end,
 /area/under/tomb/indoors/church)
+"pB" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
 "qa" = (
 /obj/item/clothing/shirt/robe/necra,
 /obj/item/clothing/neck/psycross/silver/divine/necra{
@@ -288,6 +304,12 @@
 /obj/structure/bed/inn,
 /obj/item/bedsheet/pelt,
 /turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"sc" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
 "sm" = (
 /mob/living/carbon/human/species/demihuman/base/skilled/light_gear,
@@ -374,6 +396,12 @@
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
+"xn" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb)
 "xC" = (
 /mob/living/carbon/human/species/skeleton/npc/hard,
 /turf/open/floor/church/gold,
@@ -410,6 +438,10 @@
 /obj/item/bodypart/l_leg/zizombie,
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"zB" = (
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/closed/wall/window/stained/yellow,
 /area/under/tomb/indoors/church)
 "zM" = (
 /obj/item/riddleofsteel,
@@ -538,6 +570,10 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
+"GT" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/church/violet,
+/area/under/tomb)
 "Hb" = (
 /obj/structure/table/stone_small,
 /obj/item/weapon/flail/psydon/relic,
@@ -546,6 +582,9 @@
 "Hf" = (
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
+"Hw" = (
+/turf/closed/mineral/bedrock,
+/area/under/tomb)
 "HI" = (
 /obj/structure/table/church,
 /obj/item/weapon/knife/scissors/steel{
@@ -645,6 +684,12 @@
 "Qz" = (
 /turf/closed/wall/mineral/decostone/moss/red/long,
 /area/under/tomb/indoors/church)
+"QZ" = (
+/obj/item/broken_phylactery,
+/obj/item/rope/chain,
+/obj/item/clothing/shirt/robe/necromancer,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
 "RX" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 1
@@ -714,6 +759,9 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/openspace,
 /area/under/tomb/indoors/church)
+"Uq" = (
+/turf/open/floor/twig,
+/area/under/tomb/indoors/church)
 "UN" = (
 /obj/effect/temp_visual/dir_setting/bloodsplatter,
 /turf/open/floor/carpet/lord/center,
@@ -746,9 +794,6 @@
 /obj/structure/barricade/wooden,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
-"Vw" = (
-/turf/open/openspace,
-/area/delver)
 "VC" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/tomb/indoors/church)
@@ -813,36 +858,34 @@
 /area/under/tomb/indoors/church)
 
 (1,1,1) = {"
-sS
-sS
-sS
-sS
-sS
-sS
-sS
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 JG
 JG
+GT
 JG
 JG
-JG
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 "}
 (2,1,1) = {"
-sS
-sS
-sS
+Hw
 sS
 sS
 sS
@@ -851,6 +894,11 @@ sS
 JG
 JG
 JG
+JG
+JG
+JG
+JG
+JG
 sS
 sS
 sS
@@ -861,13 +909,10 @@ sS
 sS
 sS
 sS
-sS
-sS
-sS
-sS
+Hw
 "}
 (3,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -891,10 +936,10 @@ XF
 XF
 Sm
 sS
-sS
+Hw
 "}
 (4,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -918,10 +963,10 @@ Hf
 iv
 XF
 sS
-sS
+Hw
 "}
 (5,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -945,10 +990,10 @@ Hf
 zX
 XF
 sS
-sS
+Hw
 "}
 (6,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -972,10 +1017,10 @@ FW
 Sm
 Sm
 sS
-sS
+Hw
 "}
 (7,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -999,10 +1044,10 @@ Sm
 sS
 sS
 sS
-sS
+Hw
 "}
 (8,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1026,10 +1071,10 @@ sS
 sS
 sS
 sS
-sS
+Hw
 "}
 (9,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1053,10 +1098,10 @@ sS
 sS
 sS
 sS
-sS
+Hw
 "}
 (10,1,1) = {"
-sS
+Hw
 VO
 Qz
 ok
@@ -1080,10 +1125,10 @@ Sm
 Sm
 Sm
 Sm
-Hf
+Hw
 "}
 (11,1,1) = {"
-sS
+Hw
 VO
 hg
 Jz
@@ -1110,7 +1155,7 @@ sB
 Hf
 "}
 (12,1,1) = {"
-sS
+Hw
 ok
 gO
 Mw
@@ -1137,7 +1182,7 @@ aP
 Hf
 "}
 (13,1,1) = {"
-sS
+Hw
 ok
 Mw
 YQ
@@ -1161,10 +1206,10 @@ Hf
 Hf
 JX
 Hf
-Hf
+pB
 "}
 (14,1,1) = {"
-sS
+Hw
 ok
 Mw
 gU
@@ -1191,7 +1236,7 @@ BG
 Hf
 "}
 (15,1,1) = {"
-sS
+Hw
 VO
 hg
 ba
@@ -1218,7 +1263,7 @@ vc
 Hf
 "}
 (16,1,1) = {"
-sS
+Hw
 VO
 Qz
 ok
@@ -1242,10 +1287,10 @@ Sm
 Sm
 Sm
 Sm
-Hf
+Hw
 "}
 (17,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1269,10 +1314,10 @@ sS
 sS
 sS
 sS
-sS
+Hw
 "}
 (18,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1296,10 +1341,10 @@ sS
 sS
 sS
 sS
-sS
+Hw
 "}
 (19,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1323,10 +1368,10 @@ Sm
 sS
 sS
 sS
-sS
+Hw
 "}
 (20,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1350,10 +1395,10 @@ FW
 Sm
 Sm
 sS
-sS
+Hw
 "}
 (21,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1377,10 +1422,10 @@ Hf
 vU
 XF
 sS
-sS
+Hw
 "}
 (22,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1404,10 +1449,10 @@ ex
 iv
 XF
 sS
-sS
+Hw
 "}
 (23,1,1) = {"
-sS
+Hw
 sS
 sS
 sS
@@ -1431,12 +1476,10 @@ XF
 XF
 Sm
 sS
-sS
+Hw
 "}
 (24,1,1) = {"
-sS
-sS
-sS
+Hw
 sS
 sS
 sS
@@ -1445,6 +1488,11 @@ sS
 JG
 JG
 JG
+JG
+JG
+JG
+JG
+JG
 sS
 sS
 sS
@@ -1455,67 +1503,65 @@ sS
 sS
 sS
 sS
-sS
-sS
-sS
-sS
+Hw
 "}
 (25,1,1) = {"
-sS
-sS
-sS
-sS
-sS
-sS
-sS
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 JG
 JG
+xn
 JG
 JG
-JG
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
-sS
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 "}
 
 (1,1,2) = {"
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 wk
 wk
+kM
 wk
 wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 "}
 (2,1,2) = {"
+Hw
 wk
 wk
 wk
@@ -1539,11 +1585,10 @@ wk
 wk
 wk
 wk
-wk
-wk
+Hw
 "}
 (3,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1567,10 +1612,10 @@ Qz
 Qz
 Qz
 wk
-wk
+Hw
 "}
 (4,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1594,10 +1639,10 @@ Mw
 Vk
 Qz
 wk
-wk
+Hw
 "}
 (5,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1621,10 +1666,10 @@ Mw
 kr
 Qz
 wk
-wk
+Hw
 "}
 (6,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1648,10 +1693,10 @@ Mw
 Qz
 Qz
 wk
-wk
+Hw
 "}
 (7,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1675,10 +1720,10 @@ Qz
 wk
 wk
 wk
-wk
+Hw
 "}
 (8,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1702,10 +1747,10 @@ wk
 wk
 wk
 wk
-wk
+Hw
 "}
 (9,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1729,10 +1774,10 @@ wk
 wk
 wk
 wk
-wk
+Hw
 "}
 (10,1,2) = {"
-Vw
+Hw
 iv
 Sm
 XF
@@ -1755,11 +1800,11 @@ ld
 Jd
 Wp
 Wp
-Wp
 ld
+Hw
 "}
 (11,1,2) = {"
-Vw
+Hw
 Sm
 PB
 tB
@@ -1780,13 +1825,13 @@ VC
 tg
 eo
 FL
-eo
 sR
 gW
 Wp
+Uq
 "}
 (12,1,2) = {"
-Vw
+Hw
 XF
 BF
 lV
@@ -1807,13 +1852,13 @@ ZJ
 Ph
 sR
 AX
-eo
 FL
 Td
-Wp
+zB
+Uq
 "}
 (13,1,2) = {"
-Vw
+Hw
 XF
 Vj
 lV
@@ -1835,12 +1880,12 @@ Bv
 el
 dm
 eo
-eo
 qy
 VC
+sc
 "}
 (14,1,2) = {"
-Vw
+Hw
 XF
 Hb
 lV
@@ -1859,15 +1904,15 @@ zf
 yn
 kr
 EK
-eo
-qS
 xC
+qS
 mg
 eo
-Wp
+zB
+Uq
 "}
 (15,1,2) = {"
-Vw
+Hw
 Sm
 PB
 BP
@@ -1887,14 +1932,14 @@ Ax
 Ug
 NW
 Wg
-eo
-sR
+QZ
 va
 rL
 Wp
+Uq
 "}
 (16,1,2) = {"
-Vw
+Hw
 iv
 Sm
 XF
@@ -1917,11 +1962,11 @@ ld
 ld
 Wp
 Wp
-Wp
 Qz
+Hw
 "}
 (17,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1945,10 +1990,10 @@ wk
 wk
 wk
 wk
-wk
+Hw
 "}
 (18,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1972,10 +2017,10 @@ wk
 wk
 wk
 wk
-wk
+Hw
 "}
 (19,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -1999,10 +2044,10 @@ Qz
 wk
 wk
 wk
-wk
+Hw
 "}
 (20,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -2026,10 +2071,10 @@ YD
 Qz
 Qz
 wk
-wk
+Hw
 "}
 (21,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -2053,10 +2098,10 @@ YD
 kr
 Qz
 wk
-wk
+Hw
 "}
 (22,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -2080,10 +2125,10 @@ Mw
 CO
 Qz
 wk
-wk
+Hw
 "}
 (23,1,2) = {"
-wk
+Hw
 wk
 wk
 wk
@@ -2107,9 +2152,10 @@ Qz
 Qz
 Qz
 wk
-wk
+Hw
 "}
 (24,1,2) = {"
+Hw
 wk
 wk
 wk
@@ -2133,33 +2179,32 @@ wk
 wk
 wk
 wk
-wk
-wk
+Hw
 "}
 (25,1,2) = {"
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 wk
 wk
+oP
 wk
 wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
-wk
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
 "}
