@@ -256,6 +256,7 @@
 	sellprice = 1
 	max_servants = 1
 	hear_distance = 100
+	dyeable = FALSE
 	var/datum/weakref/mob_ref
 
 /obj/item/servant_bell/mercenary/examine(mob/user)
