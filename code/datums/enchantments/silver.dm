@@ -28,7 +28,7 @@
 	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
 	if(istype(vamp_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/lord_datum = vamp_datum
-		return (!lord_datum.ascended) ? AFFECTED_VLORD : UNAFFECTED
+		return AFFECTED_VLORD * (1 - lord_datum.ascension_resistance())
 	if(!vamp_datum && !wolf_datum)
 		return UNAFFECTED
 	if(wolf_datum?.transformed || vamp_datum)
