@@ -1,0 +1,4 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - bugfix: "Bronze statues should have a sprite again."
