@@ -290,5 +290,5 @@
 	return
 
 /obj/item/servant_bell/mercenary/proc/link_mob(mob/living/carbon/human/H)
-    mob_ref = WEAKREF(H)
+	mob_ref = WEAKREF(H)
 
