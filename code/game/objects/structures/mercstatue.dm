@@ -1,6 +1,6 @@
 /obj/structure/mercstatue
 	name = "mercenary statue"
-	desc = "A gilbronze warrior erupts from the stone bell that homes them; foreign garb, horns of stone, claws of deathly metals. The perfect central-point of a proud warrior extrinsic to this place and time."
+	desc = "A gilbronze statue of a mercenary from ages long past."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "mercstatue"
 	density = TRUE
@@ -12,8 +12,6 @@
 	var/static/list/sender_cooldowns = list()
 	var/static/list/pending_direct_responses = list()
 	var/static/response_id_counter = 0
-	var/static/list/pending_registrations = list()
-	var/static/list/pending_message_links = list()
 
 /obj/structure/mercstatue/attack_hand(mob/living/carbon/human/user)
 	use(user)
@@ -43,7 +41,6 @@
 						return
 			if(mercring)
 				qdel(mercring)
-				mercring = null
 		return
 
 	if(ishuman(user) && user.mind && istype(user.mind.assigned_role, /datum/job/advclass/mercenary))
@@ -83,6 +80,10 @@
 				addtimer(CALLBACK(src, PROC_REF(expire_direct_response), response_id), response_timeout)
 				to_chat(selected_merc, span_boldnotice("The mercenary statue whispers in my mind: <i>[message]</i> - [user.real_name]<br><a href='?src=[REF(src)];direct_response=interested;response_id=[response_id]'>\[INTERESTED\]</a> | <a href='?src=[REF(src)];direct_response=notinterested;response_id=[response_id]'>\[NOT INTERESTED\]</a>"))
 				playsound(selected_merc, 'sound/misc/notice (2).ogg', 100, FALSE, -1)
+				to_chat(user, "My message has been sent")
+				return
+
+
 		return
 	to_chat(user, "No mercenaries are currently available!")
 
@@ -132,7 +133,7 @@
 	if(GLOB.available_mercenaries)
 		. += span_notice("These mercenaries are currently available:")
 		for(var/mob/living/carbon/human/merc in GLOB.available_mercenaries)
-			if (merc.job)
+			if(merc.job)
 				. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
 			else
 				. += "[merc.real_name]: [merc.mercdesc]"

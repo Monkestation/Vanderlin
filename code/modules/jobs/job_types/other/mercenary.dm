@@ -47,6 +47,8 @@
 		spawned.put_in_hands(mercring)
 		mercring.link_mob(spawned)
 		mercring.add_servant(spawned)
+		if(spawned.mercdesc && (spawned.mercdesc != ""))
+			return
 		spawned.mercdesc = stripped_input(spawned, "Write a description which will be shown to potential employers.", "Description", "", 300)
 
 /datum/job/advclass/mercenary

@@ -14482,6 +14482,10 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/dirt,
 /area/under/cavewet)
+"iNM" = (
+/obj/structure/mercstatue,
+/turf/open/floor/cobble,
+/area/indoors/town/merc_guild)
 "iNV" = (
 /obj/structure/soil/mushmound,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
@@ -38245,6 +38249,10 @@
 /obj/item/natural/melded/t5,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/town/basement)
+"ybs" = (
+/obj/structure/mercstatue,
+/turf/open/floor/grass/cold,
+/area/outdoors/town/keep)
 "ybJ" = (
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
@@ -59804,7 +59812,7 @@ qPf
 jxh
 vhP
 vhP
-vhP
+iNM
 gBj
 tnl
 dIH
@@ -180335,7 +180343,7 @@ aYU
 ewa
 aYU
 ewa
-tck
+ybs
 tck
 gLm
 rZA

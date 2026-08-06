@@ -15382,6 +15382,13 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
+"hqT" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/obj/structure/mercstatue,
+/turf/open/floor/dirt/road,
+/area/outdoors/town)
 "hqX" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -31162,6 +31169,10 @@
 /obj/item/dice,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
+"osl" = (
+/obj/structure/mercstatue,
+/turf/open/floor/dirt/road,
+/area/outdoors/beach)
 "osm" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/clinic_large/apothecary)
@@ -31656,6 +31667,10 @@
 /obj/item/candle/skull/lit,
 /turf/open/floor/carpet/green,
 /area/indoors/town/adv_guild)
+"oCI" = (
+/obj/structure/mercstatue,
+/turf/open/floor/grass/red,
+/area/outdoors/woods_safe)
 "oDC" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
@@ -36037,6 +36052,10 @@
 /obj/structure/fake_machine/hailerboard/l,
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"qBu" = (
+/obj/structure/mercstatue,
+/turf/open/floor/dirt/road,
+/area/outdoors/town/keep)
 "qBO" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/blocks,
@@ -41054,6 +41073,7 @@
 /obj/effect/decal/borderfall{
 	dir = 1
 	},
+/obj/structure/mercstatue,
 /turf/open/floor/blocks,
 /area/outdoors/town)
 "sKG" = (
@@ -45344,6 +45364,13 @@
 	},
 /turf/open/openspace,
 /area/indoors/town)
+"uHe" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/mercstatue,
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "uHm" = (
 /obj/effect/landmark/house_spot{
 	save_id = "mercapt_5";
@@ -46720,6 +46747,7 @@
 /area/indoors/town/orphanage)
 "vjZ" = (
 /obj/structure/fake_machine/hailerboard/r,
+/obj/structure/mercstatue,
 /turf/open/floor/tile/brownbrick,
 /area/indoors/town/merc_guild)
 "vkc" = (
@@ -61713,7 +61741,7 @@ pao
 uvp
 mIW
 nTH
-qAA
+osl
 npN
 npN
 qAA
@@ -107815,7 +107843,7 @@ oWd
 mFi
 kwJ
 mFi
-cJK
+hqT
 kwJ
 eYe
 xRO
@@ -112824,7 +112852,7 @@ qFx
 qVe
 weQ
 oho
-xTl
+qBu
 xTl
 vqf
 viN
@@ -117319,7 +117347,7 @@ fUV
 sAG
 giE
 kse
-oqS
+uHe
 sAG
 sAG
 cUs
@@ -169063,7 +169091,7 @@ nzP
 nzP
 nzP
 dCm
-sMC
+oCI
 szR
 szR
 sMC
