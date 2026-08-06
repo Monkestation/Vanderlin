@@ -172,7 +172,7 @@
 		if(!type_list[item.type])
 			type_list[item.type] = 0
 		type_list[item.type]++
-	for(var/type as anything in type_list)
+	for(var/type in type_list)
 		if(type_list[type] < 5)
 			continue
 		if(ispath(type, /obj/item/reagent_containers/food/snacks/bread))

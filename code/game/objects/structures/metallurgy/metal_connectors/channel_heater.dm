@@ -138,5 +138,5 @@
 				appearance_flags = (RESET_COLOR | KEEP_APART),
 			)
 
-			if(initial(largest.red_hot) && internal_reagents.chem_temp > initial(largest.melting_point))
+			if(initial(largest.show_as_filling) && internal_reagents.chem_temp > initial(largest.melting_point))
 				. += emissive_appearance(icon, "heater_metal", alpha = 150)

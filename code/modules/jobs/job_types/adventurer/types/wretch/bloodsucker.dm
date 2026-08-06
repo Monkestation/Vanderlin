@@ -31,9 +31,14 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodsucker
 	traits = list(
 		TRAIT_NOPAINSTUN,
-		TRAIT_DODGEEXPERT
+		TRAIT_DODGEEXPERT,
+		TRAIT_CLOSECOMBAT
 	)
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
+
+	spells = list(
+		/datum/action/innate/clench_fists
+	)
 
 /datum/job/advclass/wretch/bloodsucker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

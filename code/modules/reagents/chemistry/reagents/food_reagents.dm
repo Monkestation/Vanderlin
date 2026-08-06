@@ -25,9 +25,9 @@
 			H.adjust_hydration(hydration_factor * actual_metabolized  * efficiency)
 	return ..()
 
-/datum/reagent/consumable/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if ((method & INGEST) && ishuman(M))
-		var/mob/living/carbon/human/HM = M
+/datum/reagent/consumable/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+	if ((methods & INGEST) && ishuman(exposed_mob))
+		var/mob/living/carbon/human/HM = exposed_mob
 
 		if(HM.culinary_preferences)
 			var/favorite_drink_type = HM.culinary_preferences[CULINARY_FAVOURITE_DRINK]
@@ -55,27 +55,27 @@
 		if (quality)
 			switch (quality)
 				if (DRINK_NICE)
-					M.add_stress(/datum/stress_event/wine_okay)
+					exposed_mob.add_stress(/datum/stress_event/wine_okay)
 					if (prob(25))
-						to_chat(M, span_green("Not bad."))
+						to_chat(exposed_mob, span_green("Not bad."))
 					if (HM.is_noble() || HM.is_courtier() || HM.is_yeoman())
-						M.remove_stress(/datum/stress_event/noble_bland_food)
+						exposed_mob.remove_stress(/datum/stress_event/noble_bland_food)
 				if (DRINK_GOOD)
-					M.add_stress(/datum/stress_event/wine_good)
+					exposed_mob.add_stress(/datum/stress_event/wine_good)
 					if (prob(25))
-						to_chat(M, span_green("A fine beverage."))
+						to_chat(exposed_mob, span_green("A fine beverage."))
 					if (HM.is_noble() || HM.is_courtier() || HM.is_yeoman())
-						M.remove_stress(list(/datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food))
+						exposed_mob.remove_stress(list(/datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food))
 				if (DRINK_VERYGOOD to DRINK_FANTASTIC)
 					if (HM.is_noble() || HM.is_courtier() || HM.is_yeoman())
-						M.add_stress(/datum/stress_event/wine_great)
-						M.remove_stress(list(/datum/stress_event/noble_desperate, /datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food, /datum/stress_event/noble_bad_manners, /datum/stress_event/noble_ate_without_table))
+						exposed_mob.add_stress(/datum/stress_event/wine_great)
+						exposed_mob.remove_stress(list(/datum/stress_event/noble_desperate, /datum/stress_event/noble_impoverished_food, /datum/stress_event/noble_bland_food, /datum/stress_event/noble_bad_manners, /datum/stress_event/noble_ate_without_table))
 						if (prob(25))
-							to_chat(M, span_blue("Absolutely exquisite!"))
+							to_chat(exposed_mob, span_blue("Absolutely exquisite!"))
 					else
-						M.add_stress(/datum/stress_event/wine_good)
+						exposed_mob.add_stress(/datum/stress_event/wine_good)
 						if (prob(25))
-							to_chat(M, span_green("Complex, but good."))
+							to_chat(exposed_mob, span_green("Complex, but good."))
 	return ..()
 
 /datum/reagent/consumable/nutriment
@@ -121,7 +121,7 @@
 
 	var/list/taste_amounts = list()
 	var/list/taste_data = data?["tastes"]
-	if(!length(taste_data))
+	if(taste_data)
 		taste_amounts = taste_data.Copy()
 
 	counterlist_scale(taste_amounts, volume)
@@ -134,6 +134,11 @@
 	counterlist_normalise(taste_amounts)
 	LAZYSET(data, "tastes", taste_amounts)
 
+/datum/reagent/consumable/nutriment/get_taste_description(mob/living/taster)
+	if(length(data))
+		return data["tastes"]
+	return ..()
+
 /datum/reagent/consumable/nutriment/vitamin
 	name = "Vitamin"
 	description = "All the best vitamins, minerals, and carbohydrates the body needs in pure form."
@@ -141,11 +146,10 @@
 	brute_heal = 1
 	burn_heal = 1
 
-
-/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/M, efficiency)
-	if(M.satiety < 600)
-		M.satiety += 30 * efficiency
+/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/affected_mob, delta_time)
 	. = ..()
+	if(affected_mob.satiety < MAX_SATIETY)
+		affected_mob.satiety += 15 * delta_time
 
 /datum/reagent/consumable/nutriment/bone_marrow
 	name = "Bone Marrow"
@@ -186,6 +190,7 @@
 /datum/reagent/consumable/sugar/molasses
 	name ="Molasses"
 	color = "#835c5c"
+	price_per_unit = 0.175
 
 /datum/reagent/consumable/sodiumchloride
 	name = "Sea Salt"
@@ -208,6 +213,11 @@
 	// no color (ie, black)
 	taste_description = "pepper"
 
+/datum/reagent/consumable/ollie_oil
+	name = "Ollie Oil"
+	description = "Vanderlin's preferred way to consume its ollies."
+	color = "#555f41"
+	taste_description = "peppery oil"
 
 /datum/reagent/drug/mushroomhallucinogen
 	name = "Mushroom Hallucinogen"

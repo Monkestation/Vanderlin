@@ -17,11 +17,7 @@
 		BCLASS_TWIST,
 	)
 	can_roll = FALSE
-
-/datum/wound/bruise/can_apply_to_bodypart(obj/item/bodypart/affected)
-	. = ..()
-	if(affected.status == BODYPART_ROBOTIC)
-		return FALSE
+	required_bodypart_status = BODYPART_ORGANIC
 
 /datum/wound/bruise/small
 	name = "bruise"
@@ -32,7 +28,7 @@
 /datum/wound/bruise/large
 	name = "massive hematoma"
 	whp = 40
-	bleed_rate = 0.9
+	bleed_rate = 0.45
 	clotting_rate = 0.02
 	clotting_threshold = 0.3
 	sew_threshold = 75

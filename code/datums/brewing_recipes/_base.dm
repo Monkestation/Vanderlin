@@ -39,11 +39,11 @@
 	///this is the skill type used for recipes
 	var/brewing_skill = /datum/attribute/skill/craft/cooking
 
-/datum/brewing_recipe/proc/after_finish_attackby(mob/living/user, obj/item/attacked_item, atom/source)
+/datum/brewing_recipe/proc/after_finish_interact(mob/living/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/bottle_kit))
 		return FALSE
 	var/name_to_use = secondary_name ? secondary_name : name
-	user.visible_message(span_info("[user] begins bottling [lowertext(name_to_use)]."))
+	user.visible_message(span_info("[user] begins bottling [LOWER_TEXT(name_to_use)]."))
 	if(!do_after(user, 5 SECONDS, source))
 		return FALSE
 	return TRUE
@@ -51,7 +51,7 @@
 /datum/brewing_recipe/proc/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)
 	var/obj/structure/fermentation_keg/source_keg = source
 	var/obj/item/bottle_kit/bottle_kit = attacked_item
-	var/bottle_name = secondary_name ? "[lowertext(secondary_name)]" : "[lowertext(name)]"
+	var/bottle_name = secondary_name ? "[LOWER_TEXT(secondary_name)]" : "[LOWER_TEXT(name)]"
 
 	// Calculate quality for the brewed reagents using the improved system
 	var/calculated_quality = calculate_brewing_quality(user, source_keg)
@@ -60,7 +60,6 @@
 		var/obj/item/reagent_containers/glass/bottle/brewing_bottle/bottle_made = new /obj/item/reagent_containers/glass/bottle/brewing_bottle(get_turf(source))
 		bottle_made.icon_state = "[bottle_kit.glass_colour]"
 		bottle_made.name = "brewer's bottle of [bottle_name]"
-		bottle_made.sellprice = round(sell_value / brewed_amount)
 		bottle_made.desc = "A bottle of locally-brewed [SSmapping.config.map_name] [bottle_name]."
 
 		// Add reagent with quality
@@ -88,11 +87,8 @@
 
 	// Create quality calculator with the calculated quality
 	var/datum/quality_calculator/brewing/brew_calc = new(
-		base_qual = 0,
 		mat_qual = quality,
 		skill_qual = brewing_skill,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = 0, // Freshness already factored into quality calculation
 		recipe_mod = quality_modifier
@@ -114,7 +110,7 @@
 	var/total_freshness = 0
 	var/ingredient_count = 0
 	var/highest_food_quality = 0
-	var/highest_input_reagent_quality = 0
+	var/highest_input_recipe_quality = 0
 	var/total_reagent_volume = 0
 
 	// Calculate average freshness and find highest quality food ingredient from crops
@@ -143,8 +139,7 @@
 		for(var/datum/reagent/R in keg.reagents.reagent_list)
 			if(R.volume > 0)
 				total_reagent_volume += R.volume
-				if(R.recipe_quality)
-					highest_input_reagent_quality = max(highest_input_reagent_quality, R.recipe_quality)
+				highest_input_recipe_quality = max(highest_input_recipe_quality, R.get_recipe_quality())
 
 	// Calculate average freshness
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
@@ -156,18 +151,16 @@
 
 	// Use the quality calculator to determine final quality (matching cooking system)
 	var/datum/quality_calculator/brewing/brew_calc = new(
-		base_qual = 0,
-		mat_qual = max(highest_food_quality, highest_input_reagent_quality), // Use the higher of food or reagent quality
+		mat_qual = max(highest_food_quality, highest_input_recipe_quality), // Use the higher of food or reagent quality
 		skill_qual = brewing_skill_level,
-		perf_qual = 0,
-		diff_mod = 0,
 		components = 1,
 		fresh = average_freshness,
 		recipe_mod = quality_modifier,
-		reagent_qual = highest_input_reagent_quality
+		reagent_qual = highest_input_recipe_quality
 	)
 
 	var/final_quality = brew_calc.calculate_final_quality()
 	qdel(brew_calc)
 
-	return CLAMP(final_quality, 1, 4)
+	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
+

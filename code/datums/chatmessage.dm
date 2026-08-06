@@ -138,7 +138,7 @@
 	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_parent_take_damage))
 
 	// Clip message
-	var/maxlen = owned_by.prefs.max_chat_length
+	var/maxlen = owned_by.prefs.read_preference(/datum/preference/numeric/max_chat_length)
 	if (length_char(text) > maxlen)
 		text = copytext_char(text, 1, maxlen + 1) + "..." // BYOND index moment
 
@@ -326,7 +326,7 @@
 				mobs_around++
 		if(mobs_around > 4)
 			skip_spelling = TRUE
-	for(var/letter as anything in remaining_strings)
+	for(var/letter in remaining_strings)
 		if(premature_end)
 			return
 		var/extra_delay = spelling_extra_delays(letter)

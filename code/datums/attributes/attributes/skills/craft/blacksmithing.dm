@@ -22,6 +22,7 @@
 	dreams = list(
 		"...you gently grasp the tang of the blade. without water nor oil, you turn over to the basin, slicing your hand, and letting the blood fill the void... you quench the blade."
 	)
+	shared_xp_percent = 0.5
 
 /datum/attribute/skill/craft/armorsmithing
 	name = "Armorsmithing"
@@ -34,6 +35,24 @@
 	dreams = list(
 		"...you are assailed by a faceless adversary. he pummels you - crack, crack, crack... it hurts, you scream... he tires, you do not..."
 	)
+	shared_xp_percent = 0.5
+
+/datum/attribute/skill/craft/smelting
+	name = "Smelting"
+	desc = "Represents your character's ability to smelt metal into ingots. The higher your skill in Smelting, the better the ingots you create, which affect the quality of the resulting item."
+	governing_attribute = STAT_ENDURANCE
+	default_attributes = list(
+		STAT_ENDURANCE = -4,
+		STAT_INTELLIGENCE = -5,
+	)
+	default_attributes = list(
+		/datum/attribute/skill/craft/blacksmithing = -5,
+	)
+	difficulty = SKILL_DIFFICULTY_EASY
+	dreams = list(
+		"...the heat brings warmth to you on this dreary night. your feet ache, and your arms remain sore - but the stress of the day melts away, along with the snow around you - becoming just another distant memory."
+	)
+	shared_xp_percent = 0.5
 
 /datum/attribute/skill/craft/weapon_repair
 	name = "Weapon Repair"

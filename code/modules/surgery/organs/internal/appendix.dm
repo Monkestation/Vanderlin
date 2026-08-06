@@ -17,21 +17,29 @@
 	organ_volume = 0.5
 	max_blood_storage = 2.5
 	current_blood = 2.5
-	blood_req = 0.5
+	blood_req = 0.25
 	oxygen_req = 0.25
-	nutriment_req = 0.3
-	hydration_req = 0.15
+	nutriment_req = 0.35
+	hydration_req = 0.2
 
 	var/inflamation_stage = 0
+
+/obj/item/organ/appendix/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner))
+		return
+	if(is_failing())
+		examine_list += span_danger("<b>[owner]</b>'s lower right abdomen looks visibly distended and taut.")
+	else if(inflamation_stage)
+		examine_list += span_warning("<b>[owner]</b>'s lower abdomen appears slightly swollen.")
 
 /obj/item/organ/appendix/update_name()
 	. = ..()
 	name = "[inflamation_stage ? "inflamed " : null][initial(name)]"
 
 /obj/item/organ/appendix/organ_failure(delta_time)
-	. = ..()
 	inflamation_stage = TRUE
-	owner.adjustToxLoss(0.5 * delta_time, TRUE, TRUE) //forced to ensure people don't use it to gain tox as slime person
+	owner.adjustToxLoss(0.5 * delta_time, FALSE, TRUE) //forced to ensure people don't use it to gain tox as slime person
+	return ..() || ORGAN_PROCESS_UPDATE_HEALTH
 
 /obj/item/organ/appendix/prepare_eat()
 	var/obj/S = ..()

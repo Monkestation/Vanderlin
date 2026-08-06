@@ -36,11 +36,13 @@
 ///protection from internal damage to the organs
 #define WOUND "wound"
 
+#define ARMOR_ALL "all_damage_types"
+
 /// Armor values that are used for damage
-#define ARMOR_LIST_DAMAGE(...) list(BLUNT, SLASH, STAB, PIERCE)
+#define ARMOR_LIST_DAMAGE list(BLUNT, SLASH, STAB, PIERCE)
 
 /// All armors, preferable in the order as seen above
-#define ARMOR_LIST_ALL(...) list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC)
+#define ARMOR_LIST_ALL list(BLUNT, SLASH, STAB, PIERCE, FIRE, ACID, MAGIC, WOUND)
 
 #define MELEE_TYPES list(BLUNT, SLASH, STAB)
 
@@ -71,10 +73,11 @@
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
 #define BLEEDOUT (1<<6)
+#define BUILDING_ORGANS (1<<7)
 
 //Health Defines
-#define HEALTH_THRESHOLD_CRIT 0
-#define HEALTH_THRESHOLD_FULLCRIT 0
+#define HEALTH_THRESHOLD_CRIT 100
+#define HEALTH_THRESHOLD_FULLCRIT 70
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
@@ -96,6 +99,7 @@
 #define CLICK_CD_HANDCUFFED 10
 #define CLICK_CD_RESIST 20
 #define CLICK_CD_GRABBING 10
+#define CLICK_CD_THROW 8
 
 //Cuff resist speeds
 #define FAST_CUFFBREAK 1
@@ -116,6 +120,8 @@
 #define CRAWLING_ADD_SLOWDOWN 7
 //slowdown for dislocated limbs
 #define DISLOCATED_ADD_SLOWDOWN 2
+//slowdown for fractured limbs
+#define FRACTURED_ADD_SLOWDOWN 3
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1
@@ -167,6 +173,7 @@
 #define SHORT_CUT		 /datum/intent/sword/cut/short
 #define SWDLONG_CUT		 /datum/intent/sword/cut/long
 #define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define ZWEI_CUT_REACH   /datum/intent/sword/cut/zwei/reach
 #define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 
 #define SWORD_THRUST	 /datum/intent/sword/thrust
@@ -179,6 +186,8 @@
 #define SWORD_CHOP		 /datum/intent/sword/chop //2h swords only
 #define SWDLONG_CHOP	 /datum/intent/sword/chop/long
 #define SHOTEL_CHOP		 /datum/intent/sword/chop/long/shotel
+
+#define SWORD_CLEAVE     /datum/intent/sword/chop/cleave
 
 #define SWORD_STRIKE	 /datum/intent/sword/strike //mordhau grip
 #define SWORD_DISARM	 /datum/intent/sword/disarm
@@ -202,6 +211,7 @@
 #define AXE_GRTCHOP			/datum/intent/axe/chop/great //For polearm axes
 #define GREATAXE_CHOP		/datum/intent/axe/chop/greataxe
 #define DBLGREATAXE_CHOP	/datum/intent/axe/chop/greataxe/doublehead
+#define GREATAXE_CLEAVE	    /datum/intent/axe/chop/greataxe/slayer
 
 #define POLEARM_THRUST		/datum/intent/polearm/thrust
 #define SPEAR_THRUST		/datum/intent/polearm/thrust/spear
@@ -225,6 +235,7 @@
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
 #define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
+#define POLEHAMMER_STRIKE   /datum/intent/mace/strike/polehammer
 
 #define MACE_THRUST			/datum/intent/mace/thrust
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
@@ -258,6 +269,11 @@
 #define KNUCKLE_SMASH		/datum/intent/knuckles/smash
 #define KATAR_CUT			/datum/intent/katar/cut
 #define KATAR_THRUST		/datum/intent/katar/thrust
+
+#define CLOSECOMBAT_PUNCH   /datum/intent/unarmed/punch/closecombat
+#define CLOSECOMBAT_JAB     /datum/intent/unarmed/punch/jab
+#define CLOSECOMBAT_SLUG    /datum/intent/unarmed/punch/slug
+#define CLOSECOMBAT_SLAM    /datum/intent/unarmed/punch/slam
 
 #define NEANT_SHOOT			/datum/intent/shoot/neant
 #define PLEX_BLINK			/datum/intent/plex_dash
@@ -310,6 +326,7 @@
 #define BCLASS_BITE			"bite"
 #define BCLASS_BURN			"charring"
 #define BCLASS_LASHING		"lashing"
+#define BCLASS_INTENSE_BURN "intense burn"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1
@@ -486,5 +503,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 // try_crit keys for modifiers
 /// Chance modifier
 #define CRIT_MOD_CHANCE "crit_mod"
+#define CANT_CRIT	-100
 /// Specifically knockout modifier for head crits
 #define CRIT_MOD_KNOCKOUT_CHANCE "knockout_mod"

@@ -2,8 +2,8 @@
 	name = "Phobia"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I start finding default values very unnerving...</span>"
-	lose_text = "<span class='notice'>I no longer feel afraid of default values.</span>"
+	gain_text = span_warning("I start finding default values very unnerving...")
+	lose_text = span_notice("I no longer feel afraid of default values.")
 	var/phobia_type
 	/// Cooldown for proximity checks so we don't spam a range 7 view every two seconds.
 	COOLDOWN_DECLARE(check_cooldown)
@@ -26,8 +26,8 @@
 	if(!phobia_type)
 		phobia_type = pick(GLOB.phobia_types)
 
-	gain_text = "<span class='warning'>I start finding [phobia_type] very unnerving...</span>"
-	lose_text = "<span class='notice'>I no longer feel afraid of [phobia_type].</span>"
+	gain_text = span_warning("I start finding [phobia_type] very unnerving...")
+	lose_text = span_notice("I no longer feel afraid of [phobia_type].")
 
 	trigger_regex = GLOB.phobia_regexes[phobia_type]
 	trigger_mobs = GLOB.phobia_mobs[phobia_type]
@@ -90,7 +90,7 @@
 	return TRUE
 
 /datum/brain_trauma/mild/phobia/handle_hearing(datum/source, list/hearing_args)
-	if(!owner.can_hear() || owner == hearing_args[HEARING_SPEAKER] || !owner.has_language(hearing_args[HEARING_LANGUAGE])) 	//words can't trigger you if you can't hear them *taps head*
+	if(HAS_TRAIT(owner, TRAIT_DEAF) || owner == hearing_args[HEARING_SPEAKER] || !owner.has_language(hearing_args[HEARING_LANGUAGE])) 	//words can't trigger you if you can't hear them *taps head*
 		return
 
 	if(HAS_TRAIT(owner, TRAIT_FEARLESS) || !COOLDOWN_FINISHED(src, scare_cooldown))

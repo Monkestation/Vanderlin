@@ -7,8 +7,9 @@ SUBSYSTEM_DEF(fire_burning)
 	var/list/currentrun = list()
 	var/list/processing = list()
 
-/datum/controller/subsystem/fire_burning/stat_entry()
-	..("P:[processing.len]")
+/datum/controller/subsystem/fire_burning/stat_entry(msg)
+	msg = "P:[length(processing)]"
+	return ..()
 
 /datum/controller/subsystem/fire_burning/fire(resumed = 0)
 	if (!resumed)
@@ -21,8 +22,8 @@ SUBSYSTEM_DEF(fire_burning)
 	/// The longer the burn timer / stack the more intense the burn damage. Increases by  (Default: 5)
 	var/fire_intensity = 5
 
-	while(currentrun.len)
-		var/obj/O = currentrun[currentrun.len]
+	while(length(currentrun))
+		var/obj/O = currentrun[length(currentrun)]
 		currentrun.len--
 		fire_intensity = fire_intensity + CLAMP(fire_multiplier, 1, INFINITY) // 6 -> 7 -> 8 etc...
 		if (!O || QDELETED(O))
@@ -45,7 +46,7 @@ SUBSYSTEM_DEF(fire_burning)
 		if(O.resistance_flags & ON_FIRE) //in case an object is extinguished while still in currentrun
 			if(!(O.resistance_flags & FIRE_PROOF) && !is_wet)
 				// Minimum of 8 burn per tick. Config for max fire damage per tick found in game_options.
-				O.take_damage((2 * fire_multiplier) + CLAMP(fire_intensity, 0, max_fire_damage_per_tick), BURN, "fire", 0)
+				O.take_damage((2 * fire_multiplier) + CLAMP(fire_intensity, 0, max_fire_damage_per_tick), BURN, FIRE, 0)
 			else
 				O.extinguish()
 			if(!O.fire_burn_start)

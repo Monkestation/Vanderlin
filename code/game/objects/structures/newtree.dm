@@ -5,14 +5,13 @@
 	icon_state = "treenew"
 	base_icon_state = "tree"
 	num_random_icons = 2
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = -100, "acid" = 50)
+	armor_type = /datum/armor/tree
 	blade_dulling = DULLING_CUT
 	opacity = TRUE
 	density = TRUE
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
 	climbable = FALSE
-	static_debris = list(/obj/item/grown/log/tree = 1)
 	obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP | BLOCK_Z_OUT_DOWN
 	max_integrity = 300
 	var/burnt = FALSE
@@ -23,7 +22,7 @@
 /obj/structure/flora/newtree/Initialize()
 	. = ..()
 	GenerateTree()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/flora/newtree/Destroy()
 	SStreesetup.initialize_me -= src
@@ -41,16 +40,7 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
+	if(try_fetch_special_item(user))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/newtree/attack_hand(mob/user)
@@ -92,9 +82,12 @@
 	if(.)
 		burn_tree()
 
-/obj/structure/flora/newtree/deconstruct()
+/obj/structure/flora/newtree/handle_deconstruct(disassembled)
 	FellTree()
 	return ..()
+
+/obj/structure/flora/newtree/atom_deconstruct(disassembled)
+	new /obj/item/grown/log/tree(loc)
 
 /obj/structure/flora/newtree/proc/burn_tree()
 	name = "burnt tree"
@@ -377,7 +370,6 @@
 	base_icon_state = "branch-end"
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
-	static_debris = list(/obj/item/grown/log/tree/stick = 1)
 	max_integrity = 30
 	num_random_icons = 2
 	var/underlay_base = "center-leaf"
@@ -393,7 +385,7 @@
 		100,\
 		extrarange = SHORT_RANGE_SOUND_EXTRARANGE,\
 	)
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/flora/newbranch/update_overlays()
@@ -403,6 +395,9 @@
 	var/mutable_appearance/mutable = mutable_appearance(icon, "[underlay_base][rand(1, num_underlay_icons)]", layer - 0.01)
 	mutable.dir = dir
 	. += mutable
+
+/obj/structure/flora/newbranch/atom_deconstruct(disassembled)
+	new /obj/item/grown/log/tree/stick(loc)
 
 /obj/structure/flora/newbranch/snow
 	underlay_base = "center-leaf-cold"
@@ -416,7 +411,9 @@
 	icon_state = "branchburnt-end1"
 	base_icon_state = "branchburnt-end"
 	desc = "Cracked and hardened from a terrible fire."
-	static_debris = null
+
+/obj/structure/flora/newbranch/leafless/scorched/atom_deconstruct(disassembled)
+	return
 
 /obj/structure/flora/newbranch/connector
 	icon_state = "branch-extend"

@@ -5,7 +5,7 @@
 	appearance_flags = RESET_ALPHA | RESET_COLOR | RESET_TRANSFORM | KEEP_APART | TILE_BOUND
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon = 'icons/effects/particles/particle.dmi'
-	icon_state = "dot"
+	icon_state = "none"
 	underlays = null
 	overlays = null
 
@@ -14,7 +14,7 @@
 	///the unusual_description grabbed into the actual handler itself only needed when used as an unusual
 	var/unusual_description = "teehee"
 	///the duration we last
-	var/duration = 0.7 SECONDS
+	var/duration = 0
 	///the spawn intervals in game ticks
 	var/spawn_interval = 1
 	///particles still in the process of animating
@@ -28,7 +28,7 @@
 	///the dmi location of the particle
 	var/icon_file = 'icons/effects/particles/particle.dmi'
 	///the icon_state given to the objects
-	var/particle_state = "dot"
+	var/particle_state = "none"
 	///current process count
 	var/count = 0
 	///equipped offset ie hats go to 32 if set to 32 will also reset to height changes
@@ -50,9 +50,13 @@
 	var/particle_blending = BLEND_DEFAULT
 	/// our animate_holder
 	var/datum/animate_holder/animate_holder
+	/// If the effect is currently paused.
+	var/paused = FALSE
 
 /datum/component/particle_spewer/Initialize(duration = 0, spawn_interval = 0, offset_x = 0, offset_y = 0, icon_file, particle_state, equipped_offset = 0, burst_amount = 0, lifetime = 0, random_bursts = 0)
 	. = ..()
+	if(!isatom(parent))
+		return COMPONENT_INCOMPATIBLE
 	if(icon_file)
 		src.icon_file = icon_file
 	if(particle_state)
@@ -79,45 +83,55 @@
 	animate_holder.animates_self = FALSE
 	adjust_animate_steps()
 
-	if(processes)
-		START_PROCESSING(SSfastprocess, src)
+	update_processing()
 	RegisterSignal(source_object, COMSIG_ITEM_EQUIPPED, PROC_REF(handle_equip_offsets))
 	RegisterSignal(source_object, COMSIG_ITEM_POST_UNEQUIP, PROC_REF(reset_offsets))
+	RegisterSignal(source_object, COMSIG_MOVABLE_MOVED, PROC_REF(update_processing))
 
 	if(lifetime)
 		QDEL_IN(src, lifetime)
 
 /datum/component/particle_spewer/Destroy(force)
-	. = ..()
 	UnregisterSignal(source_object, list(
 		COMSIG_ITEM_EQUIPPED,
 		COMSIG_ITEM_POST_UNEQUIP,
+		COMSIG_MOVABLE_MOVED,
 	))
-
-	STOP_PROCESSING(SSfastprocess, src)
+	STOP_PROCESSING(SSparticle_spewers, src)
 	QDEL_LIST(living_particles)
 	QDEL_LIST(dead_particles)
 	source_object = null
 	QDEL_NULL(animate_holder)
+	return ..()
 
-/datum/component/particle_spewer/process()
+/datum/component/particle_spewer/process(seconds_per_tick)
+	if(!get_turf(source_object) || paused)
+		return PROCESS_KILL
 	if(spawn_interval != 1)
 		count++
 		if(count < spawn_interval)
 			return
 	count = 0
-	if(isturf(source_object.loc))
-		spawn_particles()
+	spawn_particles()
+
+/datum/component/particle_spewer/proc/update_processing()
+	SIGNAL_HANDLER
+	if(paused || QDELETED(src) || QDELETED(source_object) || !processes || !get_turf(source_object))
+		STOP_PROCESSING(SSparticle_spewers, src)
+	else
+		START_PROCESSING(SSparticle_spewers, src)
 
 /datum/component/particle_spewer/proc/spawn_particles(atom/movable/mover, turf/target)
+	if(paused)
+		return
 	var/burstees = burst_amount
 	if(random_bursts)
 		burstees = rand(1, burst_amount)
 
+	var/turf/spawn_loc = get_turf(source_object)
 	for(var/i = 0 to burstees)
 		//create and assign particle its stuff
-		var/obj/effect/abstract/particle/spawned
-		spawned = new(get_turf(source_object))
+		var/obj/effect/abstract/particle/spawned = new(spawn_loc)
 		if(offsets)
 			spawned.pixel_x = offset_x
 			spawned.pixel_y = offset_y
@@ -172,3 +186,13 @@
 /obj/item/debug_particle_holder/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/particle_spewer, 2 SECONDS)
+
+/datum/component/particle_spewer/vv_get_dropdown()
+	. = ..()
+	VV_DROPDOWN_OPTION("", "---------")
+	VV_DROPDOWN_OPTION(VV_HK_ADJUST_ANIMATIONS, "Adjust Animations")
+
+/datum/component/particle_spewer/vv_do_topic(list/href_list)
+	. = ..()
+	if(href_list[VV_HK_ADJUST_ANIMATIONS] && check_rights(R_VAREDIT))
+		animate_holder.ui_interact(usr)

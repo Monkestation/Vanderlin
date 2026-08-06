@@ -14,7 +14,6 @@
 	possible_item_intents = list(MACE_STRIKE, DAZE_BASH)
 	gripped_intents = list(MACE_STRIKE, MACE_SMASH, DAZE_BASH)
 	max_integrity = INTEGRITY_STRONG
-	minstr = 7
 
 	item_state = "mace_greyscale"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -24,8 +23,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/axesmaces
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
 	sellprice = 20
@@ -65,12 +63,11 @@
 
 /obj/item/weapon/mace/shishpar
 	name = "iron shishpar"
-	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but its capable of delivering devastating blows."
 	icon_state = "shishpar_iron"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 2
-	minstr = 8
-
+	smeltresult = /obj/item/ingot/iron
 	melt_amount = 150
 	sellprice = 35
 	item_weight = 1.8 KILOGRAMS
@@ -85,9 +82,11 @@
 	force = DAMAGE_MACE - 4
 	force_wielded = DAMAGE_MACE - 2
 	wdefense = MEDIOCRE_PARRY
-	minstr = 4
 	sellprice = 5
 	item_weight = 400 GRAMS
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/mace/cane/noble
 	name = "fancy cane"
@@ -110,7 +109,7 @@
 
 /obj/item/weapon/mace/cane/merchant
 	name = "merchant's cane"
-	desc = "An expensive cane, decorated with gold and inlaid with a gem. A symbol of great wealth for the ownner"
+	desc = "An expensive cane, decorated with gold and inlaid with a gem. A symbol of great wealth for the owner."
 	icon_state = "merchant_cane"
 	sellprice = 300
 	item_weight = 500 GRAMS
@@ -132,6 +131,7 @@
 	force_wielded = DAMAGE_MACE - 1
 	sellprice = 35
 	item_weight = 600 GRAMS
+	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/mace/cane/necran
 	name = "necran rod"
@@ -210,8 +210,7 @@
 	force = DAMAGE_MACE + 3
 	force_wielded = DAMAGE_MACE_WIELD + 3
 	wdefense = GOOD_PARRY
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 100
 	item_weight = 1.8 KILOGRAMS
 
@@ -225,6 +224,7 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -237,7 +237,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = AVERAGE_PARRY //Due to costing less bars
 	max_integrity = INTEGRITY_STRONGEST * 0.75
-	melt_amount = 75
+	melt_amount = 100
 	sellprice = 30
 	item_weight = 1.4 KILOGRAMS
 
@@ -248,7 +248,6 @@
 	force_wielded = DAMAGE_MACE_WIELD + 3
 	wdefense = AVERAGE_PARRY
 	wbalance = EASY_TO_DODGE
-	minstr = 8
 	sellprice = 75
 	item_weight = 1.9 KILOGRAMS
 
@@ -281,7 +280,6 @@
 	force_wielded = DAMAGE_CLUB_WIELD + 2
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
-	minstr = 6
 	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/mace/bludgeon/getonmobprop(tag)
@@ -305,9 +303,7 @@
 	force_wielded = DAMAGE_CLUB_WIELD + 1
 	wdefense = MEDIOCRE_PARRY
 	max_integrity = INTEGRITY_POOR
-	minstr = 5
-
-	melting_material = /datum/material/copper
+	smeltresult = /obj/item/ingot/copper
 	sellprice = 10
 	item_weight = 900 GRAMS
 
@@ -323,11 +319,11 @@
 	possible_item_intents = list(MACE_WDSTRIKE)
 	gripped_intents = list(MACE_WDSTRIKE, MACE_WOODSMASH)
 	max_integrity = INTEGRITY_WORST
-	minstr = 2
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 0
 	sellprice = 5
 	item_weight = 700 GRAMS
 
@@ -348,11 +344,11 @@
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 2
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	melt_amount = 0
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 15
 	item_weight = 500 GRAMS
@@ -374,7 +370,7 @@
 	wdefense = AVERAGE_PARRY
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silverblessed
 	item_weight = 600 GRAMS
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)
@@ -390,6 +386,9 @@
 	max_integrity = INTEGRITY_POOR
 	sellprice = 35
 	item_weight = 300 GRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
 
 //................ Alt cudgel ............... //
 /obj/item/weapon/mace/cudgel/carpenter
@@ -397,6 +396,9 @@
 	icon_state = "carpentercudgel"
 	desc = "A stubby club reinforced with iron bits, popular among village watchmen and peasant militias. Despite being reinforced and hard-hitting, it still cannot compare to a proper mace."
 	item_weight = 600 GRAMS
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
+	melt_amount = 0
 
 //................ Wooden sword ............... //
 /obj/item/weapon/mace/woodclub/train_sword
@@ -412,6 +414,9 @@
 	associated_skill = /datum/attribute/skill/combat/swords
 	metalizer_result = /obj/item/weapon/sword/iron
 	item_weight = 400 GRAMS
+	smeltresult = /obj/item/fertilizer/ash
+	melting_material = null
+	melt_amount = 0
 
 /obj/item/weapon/mace/woodclub/train_sword/getonmobprop(tag)
 	. = ..()
@@ -441,7 +446,6 @@
 	sharpness = IS_SHARP
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONG
-	minstr = 10
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -450,7 +454,6 @@
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	melting_material = /datum/material/iron
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	parrysound = "parrywood"
 	sellprice = 35
@@ -478,7 +481,6 @@
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD + 5
 	gripped_intents = list(MACE_HVYSMASH, MACE_HVYSTRIKE)
 	max_integrity = INTEGRITY_STRONGEST * 1.2
-	minstr = 11
 	item_weight = 2.5 KILOGRAMS
 
 //................ Grand mace ............... //
@@ -492,8 +494,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 
 	resistance_flags = FIRE_PROOF
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 60
 	item_weight = 3.5 KILOGRAMS
 
@@ -516,9 +517,9 @@
 	icon_state = "psymace"
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 11
 
 	resistance_flags = FIRE_PROOF
+	smeltresult = /obj/item/ingot/silverblessed
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 100
@@ -548,7 +549,6 @@
 	icon_state = "shillelagh"
 	gripped_intents = list(MACE_WOODSMASH)
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 8
 
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
@@ -603,10 +603,9 @@
 	force_wielded = DAMAGE_CLUB_WIELD
 	slowdown = 1
 	max_integrity = INTEGRITY_POOR
-	minstr = 10
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	melting_material = /datum/material/copper
+	smeltresult = /obj/item/ingot/copper
 	parrysound = "parrywood"
 	sellprice = 35
 	item_weight = 2.5 KILOGRAMS
@@ -618,6 +617,7 @@
 	icon_state = "iwarhammer"
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE)
 	gripped_intents = null
+	force_wielded = null
 	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/mace/warhammer/getonmobprop(tag)
@@ -638,9 +638,28 @@
 	force = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	item_weight = 2.2 KILOGRAMS
+
+/obj/item/weapon/mace/warhammer/silver
+	name = "silver warhammer"
+	desc = "A silver warhammer, made to fight nite-creachers. It makes a satisfying sound when paired with a skeleton's skull."
+	icon_state = "silverhammer"
+	force = DAMAGE_MACE_WIELD
+	wdefense = GOOD_PARRY
+	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 90
+	item_weight = 2.1 KILOGRAMS
+
+/obj/item/weapon/mace/warhammer/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 //................ Elven Club  ............... //
 
@@ -653,13 +672,12 @@
 	possible_item_intents = list(MACE_STRIKE, AXE_CUT)
 	gripped_intents = list(MACE_STRIKE, AXE_CUT, AXE_CHOP) //can't smash with this weapon.
 	max_blade_int = 150
-	minstr = 5
 	sharpness = IS_SHARP
 	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/mace/elvenclub/steel
 	name = "steel elven war club"
-	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace, It is capable of delivering swift, painful blows"
+	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace, It is capable of delivering swift, painful blows."
 	icon_state = "elvenclubsteel"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD
@@ -667,7 +685,7 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	max_blade_int = 250
 	max_integrity = INTEGRITY_STRONGEST
-
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -677,8 +695,9 @@
 	name = "bronze elven war club"
 	desc = "A bronze one-handed war club with a sharp end. It's been long favoured by the Elves of Heartfelt, despite its foreign origins."
 	icon_state = "elvenclub_bronze"
-	melting_material = /datum/material/bronze
 	max_integrity = INTEGRITY_STANDARD
+	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	melt_amount = 100
 	item_weight = 1.4 KILOGRAMS
 
@@ -693,7 +712,7 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	item_weight = 1.4 KILOGRAMS
-
+	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 150
@@ -703,6 +722,24 @@
 	enchant(/datum/enchantment/silver)
 
 //................ Silver ............... //
+/obj/item/weapon/mace/silver
+	name = "silver mace"
+	desc = "A fanged silver mace, used to ward away creatures of the nite."
+	icon_state = "silvermace"
+	force = DAMAGE_MACE + 1
+	force_wielded = DAMAGE_MACE_WIELD
+	wdefense = GOOD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
+	melt_amount = 150
+	sellprice = 80
+	item_weight = 1.4 KILOGRAMS
+
+/obj/item/weapon/mace/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"
@@ -712,7 +749,7 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-
+	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 45
@@ -729,8 +766,7 @@
 	force = DAMAGE_MACE + 2
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-
-	minstr = 8
+	melting_material = /datum/material/silver
 	sellprice = 150 // It's silver and gold.
 	item_weight = 1.8 KILOGRAMS
 
@@ -747,9 +783,9 @@
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 1 //Spiked
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 6
 	sellprice = 25
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = /obj/item/ingot/bronze
 
 /obj/item/weapon/mace/bronze/shishpar
 	name = "bronze shishpar"
@@ -758,5 +794,4 @@
 	force = DAMAGE_MACE_WIELD + 2
 	force_wielded = DAMAGE_MACE_WIELD + 3
 	wbalance = EASY_TO_DODGE
-	minstr = 8
 	item_weight = 1.8 KILOGRAMS

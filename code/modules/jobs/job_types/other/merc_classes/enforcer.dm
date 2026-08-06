@@ -10,7 +10,7 @@
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/reading = 10,
@@ -46,7 +46,7 @@
 	var/is_leader = FALSE //does nothing except give you a cooler blade.
 
 /datum/outfit/mercenary/enforcer/pre_equip(mob/living/carbon/human/H)
-	shirt = /obj/item/clothing/shirt/undershirt/easttats
+	shirt = /obj/item/clothing/armor/regenerating/skin/easttats
 	belt = /obj/item/storage/belt/leather/mercenary
 	backr = /obj/item/storage/backpack/satchel
 	if(H.gender == MALE)
@@ -66,10 +66,10 @@
 		is_leader = TRUE
 		var/obj/item/weapon/sword/katana/mulyeog/rumacaptain/P = new(get_turf(src))
 		H.equip_to_appropriate_slot(P)
-		var/obj/item/weapon/scabbard/kazengun/gold/L = new(get_turf(src))
+		var/obj/item/weapon/scabbard/blackmeadow/gold/L = new(get_turf(src))
 		H.equip_to_appropriate_slot(L)
 	else
 		var/obj/item/weapon/sword/katana/mulyeog/rumahench/P = new(get_turf(src))
 		H.equip_to_appropriate_slot(P)
-		var/obj/item/weapon/scabbard/kazengun/steel/L = new(get_turf(src))
+		var/obj/item/weapon/scabbard/blackmeadow/steel/L = new(get_turf(src))
 		H.equip_to_appropriate_slot(L)

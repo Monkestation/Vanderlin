@@ -144,6 +144,7 @@
 	if(user.m_intent != MOVE_INTENT_SNEAK)
 		playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 	if(do_after(user, 3 SECONDS, src))
+		user.set_currently_z_moving(CURERENTLY_Z_CLIMBING_DOWN) // EXPERIMENTAL: Climbing down onto openspace should make you fall
 		user.zMove(target = target, z_move_flags = Z_MOVE_CLIMBING_FLAGS)
 		if(user.m_intent != MOVE_INTENT_SNEAK)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)

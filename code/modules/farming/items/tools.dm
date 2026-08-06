@@ -13,7 +13,6 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_STRIKE)
 	max_integrity = INTEGRITY_POOR
-	minstr = 6
 
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
@@ -41,9 +40,7 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_THRESH,)
 
-	minstr = 7
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	item_weight = 2.1 KILOGRAMS
 
 /datum/intent/flailthresh
@@ -106,24 +103,29 @@
 			if("onbelt")
 				return list("shrink" = 0.4,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/thresher/afterattack(obj/target, mob/user, proximity, list/modifiers)
-	if(user.used_intent.type == /datum/intent/flailthresh)
-		if(!proximity)
-			return
-		if(isturf(target.loc))
-			var/turf/T = target.loc
-			var/found = FALSE
-			for(var/obj/item/natural/chaff/C in T)
-				found = TRUE
-				C.thresh()
-			if(found)
-				playsound(src,"plantcross", 90, FALSE)
-				playsound(src,"smashlimb", 35, FALSE)
-				apply_farming_fatigue(user, 10)
-				user.visible_message(span_notice("[user] threshes the stalks!"), \
-									span_notice("I thresh the stalks."))
-		return
-	..()
+/obj/item/weapon/thresher/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/flailthresh))
+		return NONE
+
+	var/turf/target_turf = get_turf(interacting_with)
+
+	var/found
+	for(var/obj/item/natural/chaff/C in target_turf)
+		found = TRUE
+		C.thresh()
+
+	if(found)
+		playsound(src,"plantcross", 90, FALSE)
+		playsound(src,"smashlimb", 35, FALSE)
+		apply_farming_fatigue(user, 10)
+		user.visible_message(
+			span_notice("[user] threshes the stalks!"), \
+			span_notice("I thresh the stalks.")
+			)
+		return ITEM_INTERACT_SUCCESS
 
 /*---------\
 |  Sickle  |
@@ -169,7 +171,14 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-
+/obj/item/weapon/sickle/copper
+	name = "copper sickle"
+	desc = ""
+	icon = 'icons/roguetown/weapons/tools.dmi'
+	icon_state = "csickle"
+	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
+	item_weight = 354 GRAMS
 
 /*------\
 |  Hoe  |
@@ -196,15 +205,12 @@
 
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 5
 	sharpness = IS_BLUNT
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/attribute/skill/combat/polearms
 
 	wlength = 66
-	var/time_multiplier = 1
 	max_integrity = INTEGRITY_POOR
 	item_weight = 912 GRAMS
 
@@ -263,37 +269,63 @@
 			if("onbelt")
 				return list("shrink" = 0.6,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/hoe/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
+/obj/item/weapon/hoe/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-	var/turf/T = attacked_atom
-	if(user.used_intent.type == /datum/intent/till)
-		. = TRUE
-		var/obj/structure/irrigation_channel/located = locate(/obj/structure/irrigation_channel) in T
-		if(located)
-			to_chat(user, span_notice("[located] is in the way!"))
-			return
-		user.changeNext_move(CLICK_CD_MELEE)
-		if(istype(T, /turf/open/floor/grass))
-			playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			if(do_after(user, 3 SECONDS * time_multiplier, src))
-				apply_farming_fatigue(user, 10)
-				T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
-				playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			return
-		if(istype(T, /turf/open/floor/dirt))
-			playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-			if(do_after(user, 2 SECONDS * time_multiplier, src))
-				playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-				var/obj/structure/soil/soil = get_soil_on_turf(T)
-				if(soil)
-					soil.user_till_soil(user)
-				else
-					apply_farming_fatigue(user, 8)
-					new /obj/structure/soil(T)
-			return
-	return ..()
+	if(!istype(user.used_intent, /datum/intent/till))
+		return NONE
+
+	if(!isturf(interacting_with))
+		return NONE
+
+	var/turf/T = interacting_with
+
+	if(T.is_blocked_turf(TRUE))
+		balloon_alert(user, "blocked!")
+		return ITEM_INTERACT_BLOCKING
+
+	user.changeNext_move(CLICK_CD_MELEE)
+
+	if(istype(T, /turf/open/floor/grass))
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+		if(!do_after(user, 3 SECONDS * toolspeed, T))
+			return ITEM_INTERACT_BLOCKING
+
+		apply_farming_fatigue(user, 10)
+		T.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(T, /turf/open/floor/dirt))
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+		if(!do_after(user, 2 SECONDS * toolspeed, T))
+			return ITEM_INTERACT_BLOCKING
+
+		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+		var/obj/structure/soil/soil = locate() in T
+		if(soil)
+			soil.user_till_soil(user)
+		else
+			apply_farming_fatigue(user, 8)
+			new /obj/structure/soil(T)
+
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/weapon/hoe/copper
+	name = "copper hoe"
+	desc = ""
+	icon = 'icons/roguetown/weapons/tools.dmi'
+	icon_state = "choe"
+	force = DAMAGE_STAFF
+	force_wielded = DAMAGE_STAFF_WIELD
+	possible_item_intents = list(INTENT_USE)
+	experimental_inhand = TRUE
+	experimental_onback = TRUE
+	experimental_onhip = TRUE
+	smeltresult = /obj/item/ingot/copper
+	item_weight = 852 GRAMS
 
 /datum/intent/till
 	name = "hoe"
@@ -312,7 +344,6 @@
 	smeltresult = null
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST
-	time_multiplier = 2
 	item_weight = 742 GRAMS
 
 /*------------\
@@ -342,10 +373,8 @@
 	gripspriteonmob = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 6
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
-	melting_material = /datum/material/iron
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/attribute/skill/combat/polearms
 	thrown_bclass = BCLASS_STAB
 	max_integrity = INTEGRITY_POOR
@@ -417,18 +446,24 @@
 	misscost = 0
 	no_attack = TRUE
 
-/obj/item/weapon/pitchfork/afterattack(obj/target, mob/user, proximity, list/modifiers)
-	if((!proximity) || (!HAS_TRAIT(src, TRAIT_WIELDED)))
-		return ..()
-	if(isopenturf(target))
-		if(forked.len)
-			for(var/obj/item/I in forked)
-				I.forceMove(target)
-				forked -= I
-			to_chat(user, span_warning("I dump the stalks."))
-		update_appearance(UPDATE_ICON_STATE)
-		return
-	return ..()
+/obj/item/weapon/pitchfork/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!HAS_TRAIT(src, TRAIT_WIELDED))
+		return NONE
+
+	if(!isopenturf(interacting_with))
+		return NONE
+
+	if(!length(forked))
+		return NONE
+
+	for(var/obj/item/I in forked)
+		I.forceMove(interacting_with)
+		forked -= I
+
+	to_chat(user, span_warning("I dump the stalks."))
+	update_appearance(UPDATE_ICON_STATE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/pitchfork/on_unwield(obj/item/source, mob/living/carbon/user)
 	. = ..()
@@ -442,3 +477,27 @@
 /obj/item/weapon/pitchfork/update_icon_state()
 	. = ..()
 	icon_state = "[initial(icon_state)][length(forked) ? "stuff" : ""]"
+
+/obj/item/weapon/pitchfork/copper
+	name = "copper fork"
+	desc = "A simple and rustic tool for working the fields, not a very effective weapon."
+	icon_state = "cpitchfork"
+	item_state = "pitchfork"
+	force_wielded = DAMAGE_SPEAR
+	wdefense = AVERAGE_PARRY
+	experimental_inhand = TRUE
+	experimental_onback = TRUE
+	experimental_onhip = TRUE
+	smeltresult = /obj/item/ingot/copper
+	item_weight = 1.74 KILOGRAMS
+
+/obj/item/weapon/pitchfork/copper/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -7,"sy" = 0,"nx" = 8,"ny" = 0,"wx" = -5,"wy" = 0,"ex" = 0,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 32,"eturn" = -32,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 3,"sy" = -4,"nx" = 3,"ny" = -3,"wx" = -4,"wy" = -4,"ex" = 2,"ey" = -4,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 45,"sturn" = 135,"wturn" = -45,"eturn" = 45,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)

@@ -2,6 +2,7 @@
 	group = "Weapons"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
+	allowed_start = FALSE
 
 // PRICESHEET: (this prices are based on aprox 1.5X before tax of prices of the player market at 11/08/25 )
 // Leather = 20 per
@@ -25,10 +26,10 @@
 	cost = 35
 	contains = /obj/item/weapon/shield/tower
 
-/datum/supply_pack/weapons/shield/atgervishield
-	name = "Atgervi Shield"
+/datum/supply_pack/weapons/shield/dwarvenshield
+	name = "Dwarven Kite Shield"
 	cost = 30
-	contains = /obj/item/weapon/shield/atgervi
+	contains = /obj/item/weapon/shield/dwarvenkite
 
 /datum/supply_pack/weapons/shield/iron
 	name = "Iron Buckler"
@@ -210,10 +211,10 @@
 	cost = 60
 	contains = /obj/item/weapon/polearm/spear/assegai/steel
 
-/datum/supply_pack/weapons/steel/atgervi
-	name = "Steel Atgervi Axe"
+/datum/supply_pack/weapons/steel/bearded
+	name = "Steel Bearded Axe"
 	cost = 60
-	contains = /obj/item/weapon/axe/steel/atgervi
+	contains = /obj/item/weapon/axe/steel/bearded
 
 /datum/supply_pack/weapons/steel/paxe
 	name = "Pickaxe"
@@ -283,6 +284,11 @@
 	cost = 500
 	contains = /obj/item/gun/ballistic/powder/wheellock/puffer
 
+/datum/supply_pack/weapons/ranged/blunderbuss
+	name = "Smuggled Blunderbuss"
+	cost = 650
+	contains = /obj/item/gun/ballistic/powder/wheellock/blunderbuss
+
 /datum/supply_pack/weapons/ranged/musket
 	name = "Smuggled Musket"
 	cost = 750 //needs balancing
@@ -327,6 +333,16 @@
 	name = "Steel Tossblade Belt"
 	cost = 120
 	contains = /obj/item/storage/belt/leather/knifebelt/black/steel
+
+/datum/supply_pack/weapons/ranged/javeliniron
+	name = "Iron Javelin Sling"
+	cost = 70
+	contains = /obj/item/ammo_holder/javelin/iron
+
+/datum/supply_pack/weapons/ranged/javelinsteel
+	name = "Steel Javelin Sling"
+	cost = 140
+	contains = /obj/item/ammo_holder/javelin/steel
 
 /datum/supply_pack/weapons/ranged/whip
 	name = "Leather Whip"
@@ -373,7 +389,7 @@
 	cost = 100
 	contains = /obj/item/storage/belt/pouch/bullets
 
-/datum/supply_pack/weapons/ammo/bullets
+/datum/supply_pack/weapons/ammo/aflask
 	name = "Gunpowder Flask"
 	cost = 150
 	contains = /obj/item/reagent_containers/glass/bottle/aflask

@@ -3,6 +3,10 @@
 	var/enabled = TRUE
 	/// The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
 	var/title = "NOPE"
+	///List of viable alternative jobs
+	var/list/alt_titles
+	/// Alternative titles selectable for female-presenting mobs
+	var/list/alt_titles_female
 	/// Visual title override
 	var/title_override = null
 	/// The title of this job given to female mobs. Fluff, not as important as [var/title].
@@ -14,7 +18,7 @@
 	/// Whether this job is intended to give quests
 	var/is_quest_giver = FALSE
 	/// How many quests this job can take at once
-	var/max_active_quests = 3
+	var/max_active_quests = 1
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job
@@ -106,6 +110,8 @@
 	var/list/allowed_patrons
 	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
 	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt/proven)
+	/// Whether or not this role is exclusively for Tennite patrons //AND// can be heretics via triumph.
+	var/tennite_triumph_exclusive = FALSE
 
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
@@ -150,6 +156,9 @@
 	var/list/peopleknowme = list()
 
 	var/give_bank_account = FALSE
+
+	/// Whether this job starts knowing the members of the town.
+	var/knows_the_town = FALSE
 
 	var/can_random = TRUE
 
@@ -198,6 +207,15 @@
 	/// Honorary titles appended to names. Based off pronouns
 	var/honorary
 	var/honorary_f
+
+	/// Selectable honorary prefixes (in addition to the fixed `honorary`/`honorary_f`)
+	var/list/alt_honorary
+	/// Selectable honorary prefixes for female-presenting mobs
+	var/list/alt_honorary_female
+
+	var/unique_alt_honororary = FALSE
+	var/unique_alt_titles = FALSE
+
 	/// Same as above, but for suffixes. See Khan
 	var/honorary_suffix
 	var/honorary_suffix_f
@@ -234,7 +252,7 @@
 
 /datum/job/New()
 	. = ..()
-	if(give_bank_account)
+	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)
 			peopleiknow += X
 			peopleknowme += X
@@ -248,6 +266,9 @@
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.garrison_positions)
+			peopleiknow += X
+			peopleknowme += X
+		for(var/X in GLOB.gallowband_positions)
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.noble_positions)
@@ -268,6 +289,19 @@
 		return FALSE
 	return ..()
 
+/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
+	if(grantee.job_honorary_override)
+		grantee.honorary = grantee.job_honorary_override
+	else if(honorary_f && grantee.pronouns == SHE_HER)
+		grantee.honorary = honorary_f
+	else if(honorary)
+		grantee.honorary = honorary
+
+	if(honorary_suffix)
+		grantee.honorary_suffix = honorary_suffix
+	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
+		grantee.honorary_suffix = honorary_suffix_f
+
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
 
@@ -277,7 +311,7 @@
 /datum/job/proc/pre_outfit_equip(mob/living/carbon/human/spawned, client/player_client)
 	SHOULD_CALL_PARENT(TRUE)
 
-	adjust_patron(spawned)
+	adjust_patron(spawned, player_client)
 
 /// Executes after the mob has been spawned in the map.
 /// Client might not be yet in the mob, and is thus a separate variable.
@@ -286,6 +320,28 @@
 	SHOULD_NOT_SLEEP(TRUE) // Don't sleep ticker
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
+
+	var/list/player_sel
+	if(title in player_client?.prefs?.alt_job_selections)
+		player_sel = player_client?.prefs?.alt_job_selections[title]
+
+	if(length(player_sel))
+		var/chosen_title = player_sel["title"]
+		if(chosen_title && (chosen_title in (list(title, f_title) + alt_titles + alt_titles_female)))
+			spawned.job_title_override = chosen_title
+
+		var/chosen_honorary = player_sel["honorary"]
+		if(chosen_honorary && (chosen_honorary in (list(honorary, honorary_f) + alt_honorary + alt_honorary_female)))
+			spawned.job_honorary_override = chosen_honorary
+
+	if(player_client)
+		for(var/path in GLOB.post_job_spawn_prefs)
+			var/datum/preference/pref = GLOB.post_job_spawn_prefs[path]
+			if(!length(pref.job_types))
+				continue // ???
+			if(!(type in pref.job_types))
+				continue
+			pref.post_job_apply(spawned, player_client.prefs.read_preference(pref.type), player_client)
 
 	if(spawned.attributes)
 		assign_attributes(spawned, player_client)
@@ -375,7 +431,7 @@
 	if(forced_flaw)
 		if(!islist(forced_flaw))
 			forced_flaw = list(forced_flaw)
-		for(var/flaw as anything in forced_flaw)
+		for(var/flaw in forced_flaw)
 			if(ispath(flaw, /datum/quirk))
 				spawned.add_quirk(flaw)
 
@@ -428,6 +484,9 @@
 		var/mob/living/carbon/human/H = spawned
 		H.pick_job_packs(src)
 
+	/// Applies here because it relies on mobs having their traits, oh well if they get it midround besides late joining
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(spawned)
 
 /// this "mostly" removes the existence of a job from someone.
 /// the unfortunately reality is that even this is still a flawed removal
@@ -449,7 +508,7 @@
 	if(forced_flaw)
 		if(!islist(forced_flaw))
 			forced_flaw = list(forced_flaw)
-		for(var/flaw as anything in forced_flaw)
+		for(var/flaw in forced_flaw)
 			if(ispath(flaw, /datum/quirk))
 				spawned.remove_quirk(flaw)
 
@@ -505,21 +564,28 @@
 	if(parent_job)
 		return parent_job.remove_job(spawned)
 
-/datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
+/datum/job/proc/adjust_patron(mob/living/carbon/human/spawned, client/player_client)
+	var/datum/patron/old_patron = spawned.patron
+
+	if(tennite_triumph_exclusive && !player_client?.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		spawned.set_patron(/datum/patron/divine/astrata, TRUE)
+		to_chat(spawned, span_warning("I've followed the word of [old_patron.display_name ? old_patron.display_name : old_patron] in my younger years, \
+		but the path I tread todae proves only The Ten may rule!"))
+		return
+
 	if(!length(allowed_patrons))
 		return
 
-	var/datum/patron/old_patron = spawned.patron
 	if(old_patron?.type in allowed_patrons)
 		return
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patrons_by_type)
-		if(!(god in allowed_patrons))
+	for(var/god in GLOB.patron_list)
+		if(!(god in allowed_patrons) || (god in banned_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patrons_by_type[god]
+		var/datum/patron/P = GLOB.patron_list[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -551,7 +617,7 @@
 		spawned_human.attributes?.add_sheet(attribute_sheet)
 
 /datum/job/proc/GetAntagRep()
-	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]
+	. = CONFIG_GET(keyed_list/antag_rep)[LOWER_TEXT(title)]
 	if(. == null)
 		return antag_rep
 
@@ -577,7 +643,7 @@
 			job_packs = equipping.job_packs[i]
 
 		var/list/reals = list()
-		for(var/pack as anything in job_packs)
+		for(var/pack in job_packs)
 			var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
 			if(!real_pack.can_pick_pack(src, previous_picked_types))
 				continue
@@ -702,7 +768,7 @@
 /mob/living/carbon/human/apply_prefs_job(client/player_client, datum/job/job, latejoining = FALSE)
 	var/fully_randomize = is_banned_from(player_client.ckey, "Appearance")
 	var/mob/dead/new_player/np = player_client?.mob
-	if(istype(np) && player_client?.prefs?.multi_char_ready && !latejoining)
+	if(istype(np) && player_client?.prefs?.read_preference(/datum/preference/toggle/multi_char_ready) && !latejoining)
 		np.ensure_multi_ready_character_loaded()
 	if(!player_client)
 		return // Disconnected while checking for the appearance ban.
@@ -714,7 +780,7 @@
 		var/is_antag = (player_client.mob.mind in GLOB.pre_setup_antags)
 		player_client.prefs.safe_transfer_prefs_to(src, TRUE, is_antag)
 		if(CONFIG_GET(flag/force_random_names))
-			player_client.prefs.real_name = player_client.prefs.pref_species.random_name(player_client.prefs.gender, TRUE)
+			player_client.prefs.write_preference(/datum/preference/text/real_name, player_client.prefs.pref_species.random_name(player_client.prefs.read_preference(/datum/preference/choiced/gender), TRUE))
 	dna.update_dna_identity()
 
 /datum/job/proc/adjust_current_positions(offset)
@@ -731,10 +797,8 @@
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
 
-/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
-	if(mob.admin_title)
-		return mob.admin_title
 
+/datum/job/proc/get_default_title(mob/mob, ignore_pronouns = FALSE)
 	if(title_override)
 		return title_override
 
@@ -744,15 +808,16 @@
 
 	return title
 
-/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
-	if(honorary)
-		grantee.honorary = honorary
-	if(honorary_f && grantee.pronouns == SHE_HER)
-		grantee.honorary = honorary_f
-	if(honorary_suffix)
-		grantee.honorary_suffix = honorary_suffix
-	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
-		grantee.honorary_suffix = honorary_suffix_f
+/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
+	if(mob.admin_title)
+		return mob.admin_title
+
+	if(ishuman(mob))
+		var/mob/living/carbon/human/H = mob
+		if(H.job_title_override)
+			return H.job_title_override
+
+	return get_default_title(mob, ignore_pronouns)
 
 /datum/job/proc/set_spawn_and_total_positions(count)
 	return spawn_positions
@@ -973,9 +1038,20 @@
 		return FALSE
 
 	// Subterran dwarves can only be outsiders if they follow the wurm
-	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(prefs.selected_patron, /datum/patron/alternate/wurm))
+	var/datum/patron/pref_patron = prefs.read_preference(/datum/preference/choiced/patron)
+	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(pref_patron, /datum/patron/alternate/wurm))
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
-		if(!(tested.department_flag & OUTSIDERS))
+		if(!tested || !(tested.department_flag & OUTSIDERS))
+			return FALSE
+
+	if(species.id == SPEC_ID_SNOW_ELF)
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | YOUNGFOLK)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+			return FALSE
+
+	if(species.id == SPEC_ID_HALF_SNOW_ELF)
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES | YOUNGFOLK)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
 			return FALSE
 
 	return TRUE

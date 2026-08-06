@@ -216,8 +216,8 @@
 
 	var/list/materials = list()
 
-	materials |= first.req_bar
-	materials[first.req_bar]++
+	materials |= first.required_material
+	materials[first.required_material]++
 
 	for(var/atom/atom_path as anything in first.additional_items)
 		materials |= atom_path
@@ -239,7 +239,7 @@
 				material_copy -= listed_atom.type
 
 	var/atom/new_atom
-	for(var/i in 1 to current.createditem_extra + 1)
+	for(var/i in 1 to current.output_amount)
 		new_atom = new current.created_item(get_turf(bin))
 		new_atom.update_integrity(new_atom.max_integrity, update_atom = FALSE)
 		SEND_SIGNAL(bin, COMSIG_TRY_STORAGE_INSERT, new_atom, null, TRUE, TRUE)

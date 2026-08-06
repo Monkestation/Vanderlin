@@ -24,18 +24,16 @@
 	sellprice = 1
 	item_weight = 34 GRAMS
 
-/obj/item/reagent_containers/glass/alchemical/attackby(obj/item/I, mob/user, list/modifiers)
-	if(reagents.total_volume)
-		return
-	if(closed)
-		return
-	else
-		return ..()
-
-/obj/item/reagent_containers/glass/alchemical/update_overlays()
+/obj/item/reagent_containers/glass/alchemical/examine(mob/user)
 	. = ..()
+	if(!closed)
+		. += span_info("The cork appears to be off.")
+
+/obj/item/reagent_containers/glass/alchemical/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(closed)
-		. += mutable_appearance(icon, "vial_cork")
+		return NONE
+
+	return ..()
 
 /obj/item/reagent_containers/glass/alchemical/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -48,13 +46,17 @@
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You carefully press the cork back into the mouth of [src]."))
 		spillable = FALSE
-		desc = initial(desc)
 	else
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		to_chat(user, span_notice("You thumb off the cork from [src]."))
 		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		spillable = TRUE
-		desc += "The cork appears to be off."
 	update_appearance(UPDATE_OVERLAYS)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+
+/obj/item/reagent_containers/glass/alchemical/update_overlays()
+	. = ..()
+	if(closed)
+		. += mutable_appearance(icon, "vial_cork")

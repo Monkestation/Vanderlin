@@ -174,9 +174,6 @@ GLOBAL_LIST_INIT(specific_fish_icons, generate_specific_fish_icons())
 			if(6)
 				difficulty_holder[1] += -10
 
-	if(challenge.special_effects & FISHING_MINIGAME_RULE_KILL)
-		challenge.RegisterSignal(src, COMSIG_FISH_SOURCE_REWARD_DISPENSED, TYPE_PROC_REF(/datum/fishing_challenge, hurt_fish))
-
 /**
  * Calculates the difficulty of the minigame:
  *

@@ -38,7 +38,6 @@
 	weight = 8
 
 	secondary_events = list(
-		/datum/round_event_control/antagonist/solo/rebel = 2, // paint the town red baby
 		/datum/round_event_control/antagonist/solo/wretch = 1,
 	)
 	secondary_prob = 40

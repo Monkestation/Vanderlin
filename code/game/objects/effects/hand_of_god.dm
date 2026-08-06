@@ -57,7 +57,7 @@
 		var/mob/living/mob_to_take = thing_to_take
 		mob_to_take.emote("choke", forced = TRUE)
 		mob_to_take.Immobilize(10 SECONDS)
-		addtimer(CALLBACK(mob_to_take, TYPE_PROC_REF(/mob/living, emote), "scream", null, null, FALSE, TRUE), 1.5 SECONDS)
+		addtimer(CALLBACK(mob_to_take, TYPE_PROC_REF(/mob, emote), "scream", null, null, FALSE, TRUE), 1.5 SECONDS)
 
 	animate(thing_to_take, time = 2 SECONDS, pixel_z = DISPLACEMENT_AMOUNT, easing = CUBIC_EASING, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)
 	animate(src, time = 2 SECONDS, pixel_z = DISPLACEMENT_AMOUNT, easing = CUBIC_EASING, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)

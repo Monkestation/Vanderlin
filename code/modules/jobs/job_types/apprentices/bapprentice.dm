@@ -6,10 +6,10 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/craft/blacksmithing = 20,
+		/datum/attribute/skill/craft/blacksmithing = 30,
 		/datum/attribute/skill/craft/armorsmithing = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 20,
-		/datum/attribute/skill/craft/smelting = 20,
+		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/reading = 20
 	)
@@ -18,7 +18,7 @@
 	title = JOB_SMITHY_APP
 	tutorial = "Long hours and back-breaking work wouldnt even describe a quarter of what you do in a day for your Master. \
 	Its exhausting, filthy and you dont get much freetime: \
-	but someday youll get your own smithy, and youll have TWICE as many apprentices as your master does."
+	but someday you will get your own smithy and have TWICE as many apprentices as your master does."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
@@ -26,6 +26,7 @@
 	spawn_positions = 2
 	display_order = JDO_BAPP
 	give_bank_account = TRUE
+	knows_the_town = TRUE
 	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
@@ -50,17 +51,17 @@
 	name = JOB_SMITHY_APP
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/key/blacksmith
+	beltl = /obj/item/weapon/hammer/iron
 	backr = /obj/item/storage/backpack/satchel
+	shoes = /obj/item/clothing/shoes/simpleshoes
 
 /datum/outfit/bapprentice/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == MALE)
 		pants = /obj/item/clothing/pants/tights/colored/random
-		shoes = /obj/item/clothing/shoes/simpleshoes
 		armor = /obj/item/clothing/armor/leather/vest
 		wrists = /obj/item/clothing/wrists/bracers/leather
 	else
 		armor = /obj/item/clothing/shirt/dress/gen/colored/random
-		shoes = /obj/item/clothing/shoes/simpleshoes
 		shirt = /obj/item/clothing/shirt/undershirt
 		cloak = /obj/item/clothing/cloak/apron/brown

@@ -84,7 +84,6 @@
 		if(!do_after(user, 5 SECONDS, src))
 			return
 		if(pacify_coffin(src, user))
-			add_overlay("graveconsecrated")
 			user.visible_message(span_rose("[user] seals and consecrates [src]."), span_rose("I seal the coffin, consecrating it. I may bury it to protect it's inhabitant further."))
 			SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 			record_round_statistic(STATS_GRAVES_CONSECRATED)
@@ -112,7 +111,9 @@
 						to_chat(user, "<span class='warning'>Necra turns a blind eye to my deeds.</span>")
 					else
 						to_chat(user, "<span class='warning'>Necra shuns my blasphemous deeds, I am cursed!</span>")
-						L.apply_status_effect(/datum/status_effect/debuff/cursed)
+						L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+						if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t3)) || !(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
+							L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
 				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 				sealed = FALSE
 				consecrated = FALSE

@@ -23,8 +23,8 @@
 
 	/// Active timers with this datum as the target
 	var/list/active_timers
-	/// Status traits attached to this datum
-	var/list/status_traits
+	/// Status traits attached to this datum. Associative list of the form: list(trait name (string) = list(source1, source2, source3,...))
+	var/list/_status_traits
 
 	/// Components attached to this datum
 	/// Lazy associated list in the structure of `type:component/list of components`
@@ -151,6 +151,13 @@
 	//END: ECS SHIT
 
 	return QDEL_HINT_QUEUE
+
+///Generate a tag for this /datum, if it implements one
+///Should be called as early as possible, best would be in New, to avoid weakref mistargets
+///Really just don't use this, you don't need it, global lists will do just fine MOST of the time
+///We really only use it for mobs to make id'ing people easier
+/datum/proc/GenerateTag()
+	datum_flags |= DF_USE_TAG
 
 ///Only override this if you know what you're doing. You do not know what you're doing
 ///This is a threat

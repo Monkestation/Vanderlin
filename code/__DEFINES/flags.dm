@@ -38,8 +38,6 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define CHECK_RICOCHET_1			(1<<4)
 /// conducts electricity (metal etc.)
 #define CONDUCT_1					(1<<5)
-/// For machines and structures that should not break into parts, eg, holodeck stuff
-#define NODECONSTRUCT_1				(1<<7)
 /// item has priority to check when entering or leaving
 #define ON_BORDER_1					(1<<8)
 /// Prevent clicking things below it on the same turf eg. doors/ fulltile windows
@@ -159,8 +157,13 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define MOBILITY_STORAGE		(1<<5)
 /// can pull things
 #define MOBILITY_PULL			(1<<6)
+/// can rest
+#define MOBILITY_REST (1<<7)
+/// can lie down
+#define MOBILITY_LIEDOWN (1<<8)
 
 #define MOBILITY_FLAGS_DEFAULT (MOBILITY_MOVE | MOBILITY_STAND | MOBILITY_PICKUP | MOBILITY_USE | MOBILITY_UI | MOBILITY_STORAGE | MOBILITY_PULL)
+#define MOBILITY_FLAGS_CARBON_DEFAULT (MOBILITY_MOVE | MOBILITY_STAND | MOBILITY_PICKUP | MOBILITY_USE | MOBILITY_UI | MOBILITY_STORAGE | MOBILITY_PULL | MOBILITY_REST | MOBILITY_LIEDOWN)
 
 //alternate appearance flags
 #define AA_TARGET_SEE_APPEARANCE (1<<0)

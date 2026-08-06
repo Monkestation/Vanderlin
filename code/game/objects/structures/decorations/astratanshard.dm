@@ -3,6 +3,7 @@ GLOBAL_LIST_EMPTY(street_lamp_lights)
 /obj/structure/astratanshard
 	name = "astratan shard"
 	max_integrity = 1500
+	integrity_failure = 1
 	icon = 'icons/roguetown/misc/64x64.dmi'
 	icon_state = "clockcrystal"
 	desc = "The crystal within the comet landed at Malum's Anvil. Gathered and contained by the finest artificers, it now lies here to light the way for travellers and boats alike. Bask in its divinity."
@@ -19,36 +20,28 @@ GLOBAL_LIST_EMPTY(street_lamp_lights)
 	set_light(5, 4, 30, l_color = LIGHT_COLOR_YELLOW)
 
 /obj/structure/astratanshard/Destroy()
-	if(broken_containment)
-		Unregall()
 	for(var/obj/machinery/light/fueledstreet/lamp as anything in GLOB.street_lamp_lights)
 		lamp.lights_out(TRUE)
 	if(the_hum)
 		QDEL_NULL(the_hum)
 	return ..()
 
-/obj/structure/astratanshard/deconstruct(disassembled = FALSE)
-	if(!broken_containment)
-		broken_containment = TRUE
-		QDEL_NULL(the_hum)
-		the_hum = new /datum/looping_sound/astratanshard_broken(src, FALSE)
-		the_hum.start()
-		RegisterSignal(src, COMSIG_ATOM_ATTACK_HAND,PROC_REF(on_touched))
-		RegisterSignal(src, COMSIG_ATOM_ATTACK_PAW,PROC_REF(on_touched))
-		RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED,PROC_REF(on_whacked))
-		RegisterSignal(src, COMSIG_ATOM_BUMPED,PROC_REF(on_bump))
-		icon_state = "clockcrystal_broken"
-		resistance_flags |= INDESTRUCTIBLE
-		return FALSE
-	else
-		Unregall()
-		. = ..()
+/obj/structure/astratanshard/atom_break(damage_flag, silent)
+	. = ..()
+	if(broken_containment)
+		return
+	broken_containment = TRUE
+	QDEL_NULL(the_hum)
+	the_hum = new /datum/looping_sound/astratanshard_broken(src, FALSE)
+	the_hum.start()
+	RegisterSignals(src, list(COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_ATTACK_PAW), PROC_REF(on_touched))
+	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_whacked))
+	RegisterSignal(src, COMSIG_ATOM_BUMPED, PROC_REF(on_bump))
+	icon_state = "clockcrystal_broken"
+	resistance_flags |= INDESTRUCTIBLE
 
-/obj/structure/astratanshard/proc/Unregall()
-	UnregisterSignal(src, COMSIG_ATOM_ATTACK_HAND)
-	UnregisterSignal(src, COMSIG_ATOM_ATTACK_PAW)
-	UnregisterSignal(src, COMSIG_ATOM_WAS_ATTACKED)
-	UnregisterSignal(src, COMSIG_ATOM_BUMPED)
+/obj/structure/astratanshard/atom_deconstruct(disassembled)
+	return // Nah
 
 /obj/structure/astratanshard/proc/on_bump(atom/shard,atom/movable/movie)
 	SIGNAL_HANDLER
@@ -68,7 +61,7 @@ GLOBAL_LIST_EMPTY(street_lamp_lights)
 	if(istype(thingy,/obj))
 		var/obj/deadthing = thingy
 		src.visible_message(span_danger("\The [deadthing] vanishes in a violent flash on contact with \The [src]!"))
-		deadthing.Destroy()
+		qdel(deadthing)
 
 /obj/structure/astratanshard/proc/send_to_necra(mob/living/fool,visible_message,mob_message,cause)
 	if(isdead(fool))

@@ -30,7 +30,7 @@
 	. = ..()
 	if(target_mould)
 		. += "There is \a [target_mould] positioned beneath the drain."
-		var/fill_percent = round((target_mould.fufilled_metal / target_mould.required_metal) * 100, 1)
+		var/fill_percent = round((target_mould.fufilled_metal / target_mould.required_metal_amount) * 100, 1)
 		. += "The mould is [fill_percent]% filled."
 	else
 		. += "There is no mould beneath the drain."
@@ -61,7 +61,7 @@
 		if(mould.cooling)
 			continue
 
-		if(mould.fufilled_metal >= mould.required_metal)
+		if(mould.fufilled_metal >= mould.required_metal_amount)
 			continue
 
 		target_mould = mould
@@ -95,19 +95,14 @@
 			return
 		metal_to_drain = target_mould.filling_metal
 	var/available_metal = channel_metal.data[metal_to_drain]
-	var/needed_metal = target_mould.required_metal - target_mould.fufilled_metal
+	var/needed_metal = target_mould.required_metal_amount - target_mould.fufilled_metal
 	var/amount_to_drain = min(drain_rate, available_metal, needed_metal)
 	if(amount_to_drain <= 0)
 		return
 
-	var/drain_quality = channel_metal.recipe_quality
+	var/drain_quality = channel_metal.get_recipe_quality()
 
-	if(target_mould.fufilled_metal > 0)
-		target_mould.total_quality_points += amount_to_drain * drain_quality
-		target_mould.average_quality = target_mould.total_quality_points / (target_mould.fufilled_metal + amount_to_drain)
-	else
-		target_mould.total_quality_points = amount_to_drain * drain_quality
-		target_mould.average_quality = drain_quality
+	target_mould.average_quality = LERP(target_mould.average_quality, drain_quality, amount_to_drain / (target_mould.fufilled_metal + amount_to_drain))
 
 	channel_metal.data[metal_to_drain] -= amount_to_drain
 	if(channel_metal.data[metal_to_drain] <= 0)
@@ -118,7 +113,7 @@
 
 	target_mould.fufilled_metal += amount_to_drain
 	target_mould.update_appearance(UPDATE_OVERLAYS)
-	if(target_mould.fufilled_metal >= target_mould.required_metal)
+	if(target_mould.fufilled_metal >= target_mould.required_metal_amount)
 		target_mould.start_cooling()
 		target_mould = null
 	for(var/obj/structure/metal_channel/channel_update in channel.info?.channels)
@@ -141,5 +136,5 @@
 				appearance_flags = (RESET_COLOR | KEEP_APART),
 			)
 
-			if(initial(largest.red_hot) && input.group_reagents.chem_temp > initial(largest.melting_point))
+			if(initial(largest.show_as_filling) && input.group_reagents.chem_temp > initial(largest.melting_point))
 				. += emissive_appearance(icon, "drain_flow", alpha = 100)

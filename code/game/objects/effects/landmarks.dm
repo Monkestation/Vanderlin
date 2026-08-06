@@ -132,14 +132,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = JOB_GATEMASTER
 	jobs_to_spawn = list(JOB_GATEMASTER)
 
-/obj/effect/landmark/start/forestwarden
-	name = JOB_FOREST_WARDEN
-	jobs_to_spawn = list(JOB_FOREST_WARDEN)
-
-/obj/effect/landmark/start/forestguard
-	name = JOB_FOREST_GUARD
-	jobs_to_spawn = list(JOB_FOREST_GUARD)
-
 /obj/effect/landmark/start/woodsman
 	name = JOB_TOWN_ELDER
 	jobs_to_spawn = list(JOB_TOWN_ELDER)
@@ -300,6 +292,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = JOB_BEGGAR
 	jobs_to_spawn = list(JOB_BEGGAR)
 
+/obj/effect/landmark/start/sweeper
+	name = JOB_SWEEPER
+	jobs_to_spawn = list(JOB_SWEEPER)
+
 /obj/effect/landmark/start/consort
 	name = JOB_CONSORT
 	jobs_to_spawn = list(JOB_CONSORT)
@@ -403,6 +399,30 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/late/bogwitch
 	name = "Bog Witch and Apprentice"
 	jobs_to_spawn = list(JOB_BOGWITCH, JOB_BOGWITCH_APP)
+
+/obj/effect/landmark/start/forestwarden
+	name = JOB_FOREST_WARDEN
+	jobs_to_spawn = list(JOB_FOREST_WARDEN, JOB_FOREST_WARDEN_CLASSIC)//Spawns Forest Warden on maps without Gallowband
+
+/obj/effect/landmark/start/forestenforcer
+	name = JOB_FOREST_ENFORCER
+	jobs_to_spawn = list(JOB_FOREST_ENFORCER)
+
+/obj/effect/landmark/start/forestpreacher
+	name = JOB_FOREST_PREACHER
+	jobs_to_spawn = list(JOB_FOREST_PREACHER)
+
+/obj/effect/landmark/start/forestguard
+	name = JOB_FOREST_GUARD
+	jobs_to_spawn = list(JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT, JOB_FOREST_GUARD_CLASSIC)//Spawns Forest Guards on maps without Gallowband
+
+/obj/effect/landmark/start/forestsupport
+	name = JOB_FOREST_SUPPORT
+	jobs_to_spawn = list(JOB_FOREST_SUPPORT)
+
+/obj/effect/landmark/start/late/gallowband
+	name = "Bog Witch and Apprentice"
+	jobs_to_spawn = list(JOB_FOREST_WARDEN, JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT)
 
 //Antagonist spawns
 

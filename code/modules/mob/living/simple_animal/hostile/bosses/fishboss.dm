@@ -160,6 +160,8 @@
 	flag = "piercing"
 	speed = 10
 
+/obj/projectile/bullet/reusable/deepone/handle_drop()
+	return
 
 /mob/living/simple_animal/hostile/boss/fishboss/death()
 	visible_message("<span class='warning'>[src] convulses violently as eldritch energy pours from its wounds! The bloated, grotesque fishman explodes in a cataclysmic shower of gore and sea water!</span>")

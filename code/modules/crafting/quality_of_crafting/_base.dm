@@ -74,6 +74,8 @@
 	///sound we use for crafting
 	var/crafting_sound
 	var/sound_volume = 40
+	///do we reward experience on craft?
+	var/reward_experience = TRUE
 
 /datum/repeatable_crafting_recipe/New()
 	. = ..()
@@ -126,8 +128,8 @@
 
 	var/list/total_list = usable_contents
 
-	for(var/path as anything in total_list)
-		for(var/required_path as anything in requirements)
+	for(var/path in total_list)
+		for(var/required_path in requirements)
 			if(!check_matches_requirement(path, required_path))
 				continue
 
@@ -136,15 +138,15 @@
 				copied_requirements -= required_path
 			break
 
-	for(var/path as anything in total_list)
-		for(var/required_path as anything in tool_usage)
+	for(var/path in total_list)
+		for(var/required_path in tool_usage)
 			if(ispath(path, required_path))
 				copied_tool_usage -= required_path
 
 	if(length(reagent_requirements))
 		var/list/reagent_values = gather_reagents(user)
 
-		for(var/required_path as anything in reagent_requirements)
+		for(var/required_path in reagent_requirements)
 			var/required_amount = reagent_requirements[required_path]
 			var/available_amount = 0
 
@@ -175,12 +177,12 @@
 	var/list/total_list = usable_contents
 
 	// Check each requirement against available items
-	for(var/required_path as anything in requirements)
+	for(var/required_path in requirements)
 		var/required_amount = requirements[required_path]
 		var/available_amount = 0
 
 		// Count available items that match this requirement
-		for(var/path as anything in total_list)
+		for(var/path in total_list)
 			if(!check_matches_requirement(path, required_path))
 				continue
 
@@ -196,7 +198,7 @@
 	if(length(reagent_requirements))
 		var/list/reagent_values = gather_reagents(user)
 
-		for(var/required_path as anything in reagent_requirements)
+		for(var/required_path in reagent_requirements)
 			var/required_amount = reagent_requirements[required_path]
 			var/available_amount = 0
 
@@ -423,7 +425,7 @@
 	var/obj/item/reagent_containers/concopy = new /obj/item/reagent_containers(null)
 	copied_containers[container] += concopy
 
-	for(var/required_path as anything in copied_reagent_requirements)
+	for(var/required_path in copied_reagent_requirements)
 		var/list/reagent_paths
 		if(reagent_subtypes_allowed)
 			reagent_paths = typesof(required_path)
@@ -856,7 +858,7 @@
 		return FAIL_END_CRAFT
 
 	if(!prob(prob2craft))
-		if(user.client?.prefs.showrolls)
+		if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			to_chat(user, "<span class='danger'>I've failed to craft \the [name]. (Success chance: [prob2craft]%)</span>")
 		else
 			to_chat(user, "<span class='danger'>I've failed to craft \the [name].</span>")
@@ -866,7 +868,8 @@
 
 	clean_up_items(to_delete)
 
-	add_skill_experience(user)
+	if(reward_experience)
+		add_skill_experience(user)
 
 	move_products(outputs, user)
 

@@ -72,15 +72,16 @@
 			client.screen -= screens[category]
 
 /mob/proc/reload_fullscreen()
-	if(client)
-		var/atom/movable/screen/fullscreen/screen
-		for(var/category in screens)
-			screen = screens[category]
-			if(screen.should_show_to(src))
-				screen.update_for_view(client.view)
-				client.screen |= screen
-			else
-				client.screen -= screen
+	if(!client)
+		return
+
+	for(var/atom/movable/screen/fullscreen/screen as anything in screens)
+		screen = screens[screen]
+		if(screen.should_show_to(src))
+			screen.update_for_view(client.view)
+			client.screen |= screen
+		else
+			client.screen -= screen
 
 /atom/movable/screen/fullscreen
 	icon = 'icons/mob/screen_full.dmi'
@@ -193,20 +194,24 @@
 	icon_state = "inqvision"
 	layer = BLIND_LAYER
 
+// Flickering full black screen
 /atom/movable/screen/fullscreen/blackimageoverlay
 	icon_state = "blackimageoverlay"
 	layer = BLIND_LAYER
 	plane = FULLSCREEN_PLANE
 
+// Static full black screen
+/atom/movable/screen/fullscreen/blackimageoverlay/noflicker
+	icon_state = "blind"
+
+// Tg-style blindnesss
 /atom/movable/screen/fullscreen/blind
 	icon_state = "impairedoverlay2"
 	layer = BLIND_LAYER
 	plane = FULLSCREEN_PLANE
 
-/atom/movable/screen/fullscreen/blind/sleeper
-	icon_state = "blind"
-	layer = BLIND_LAYER
-	plane = FULLSCREEN_PLANE
+/atom/movable/screen/fullscreen/blind/noflicker
+	icon_state = "impairedoverlay2static"
 
 /atom/movable/screen/fullscreen/zezuspsyst
 	icon_state = "hey"

@@ -33,7 +33,6 @@
 		else
 			I.icon_state += "-sheathed"
 
-
 /datum/component/storage/concrete/scabbard/knife/New(list/raw_args)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife))
@@ -42,7 +41,7 @@
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/long/daewalker))
 
-/datum/component/storage/concrete/scabbard/kazengun/New(list/raw_args)
+/datum/component/storage/concrete/scabbard/blackmeadow/New(list/raw_args)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword/katana))
 

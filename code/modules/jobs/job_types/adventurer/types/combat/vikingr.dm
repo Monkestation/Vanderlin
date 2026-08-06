@@ -40,6 +40,7 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	backl = /obj/item/weapon/shield/wood
 	head = /obj/item/clothing/head/helmet/nasal
+	beltr = /obj/item/storage/belt/pouch/coins/poor
 
 /datum/outfit/adventurer/vikingr/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
@@ -47,19 +48,13 @@
 
 	switch(weapontype)
 		if("Bow")
-			beltl = /obj/item/ammo_holder/quiver/arrows // womp womp, guess bow users cant have coins
+			beltl = /obj/item/ammo_holder/quiver/arrows
 			backr = /obj/item/gun/ballistic/bow/long
 			head = /obj/item/clothing/head/roguehood/colored/black
 			beltr = /obj/item/weapon/sword/iron
 		if("Axe")
 			backr = /obj/item/weapon/polearm/halberd/bardiche/woodcutter
-			beltr = /obj/item/storage/belt/pouch/coins/poor
-			head = /obj/item/clothing/head/helmet/nasal
 			beltl = /obj/item/weapon/sword/iron
 		if("Claymore")
 			backr = /obj/item/weapon/sword/long/greatsword/claymore/iron
 			beltl = /obj/item/weapon/axe/iron
-			beltr = /obj/item/storage/belt/pouch/coins/poor
-			head = /obj/item/clothing/head/helmet/nasal
-
-

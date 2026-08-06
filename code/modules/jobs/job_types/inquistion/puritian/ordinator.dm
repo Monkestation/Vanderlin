@@ -61,6 +61,7 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_INQUISITION,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
@@ -107,15 +108,14 @@
 	armor = /obj/item/clothing/armor/plate/fluted/ornate/ordinator
 	belt = /obj/item/storage/belt/leather/steel
 	neck = /obj/item/clothing/neck/gorget
-	shoes = /obj/item/clothing/shoes/otavan/inqboots
-	backl = /obj/item/storage/backpack/satchel/otavan
+	shoes = /obj/item/clothing/shoes/grenzel/inqboots
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/ordinatorcape
-	beltr = /obj/item/storage/belt/pouch/coins/rich
 	head = /obj/item/clothing/head/helmet/heavy/ordinatorhelm
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/paper/inqslip/arrival/inq = 1,

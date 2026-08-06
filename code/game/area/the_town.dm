@@ -4,14 +4,14 @@
 	icon_state = "indoor_town"
 	background_track = 'sound/music/area/indoor.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 	converted_type = /area/outdoors/exposed/town
 
 /area/outdoors/exposed/town
 	icon_state = "town"
 	background_track = 'sound/music/area/towngen.ogg'
 	background_track_dusk = null
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 /area/indoors/town/shop
 	name = "Shop"
@@ -89,6 +89,7 @@
 	converted_type = /area/outdoors/exposed/tavern
 
 /area/outdoors/exposed/tavern
+	name = "tavern exterior"
 	icon_state = "tavern"
 
 /area/indoors/town/church
@@ -98,17 +99,30 @@
 	background_track_dusk = null
 	background_track_night = 'sound/music/area/churchnight.ogg'
 	converted_type = /area/outdoors/exposed/church
+	burial_grounds = TRUE
 
 /area/outdoors/exposed/church
+	name = "church exterior"
 	icon_state = "church"
 	background_track = 'sound/music/area/church.ogg'
 	background_track_dusk = null
 	background_track_night = 'sound/music/area/churchnight.ogg'
+	burial_grounds = TRUE
+
+/area/outdoors/exposed/church/graveyard
+	name = "church graveyard"
+	icon_state = "graveyard"
+	first_time_text = "THE GRAVEYARD"
 
 /area/indoors/town/church/chapel
 	name = "prayer hall"
 	icon_state = "chapel"
 	first_time_text = "THE HOUSE OF THE TEN"
+
+/area/indoors/town/church/crypt
+	name = "royal crypt"
+	icon_state = "crypt"
+	first_time_text = "THE ROYAL CRYPT"
 
 /area/indoors/town/church/inquisition
 	name = "inquisition"
@@ -161,7 +175,7 @@
 	icon_state = "clinic_feld"
 
 /area/indoors/town/thieves_guild
-	name = "Theives' Guild"
+	name = "Thieves' Guild"
 	first_time_text = "Thieves' Guild"
 	icon_state = "thieves_guild"
 
@@ -172,6 +186,19 @@
 	background_track = 'sound/music/area/shop.ogg'
 	background_track_dusk = null
 	background_track_night = null
+
+/area/indoors/town/adv_guild
+	name = "Adventurer's Guild"
+	first_time_text = "Adventurer's Guild"
+	icon_state = "adv_guild"
+	background_track = 'sound/music/area/shop.ogg'
+	background_track_dusk = null
+	background_track_night = null
+
+/area/indoors/town/train_station
+	name = "Train Station"
+	first_time_text = "Vanderlin Train Station"
+	icon_state = "train_station"
 
 /area/indoors/town/steward
 	name = "Steward's Office"
@@ -227,7 +254,7 @@
 	icon_state = "town"
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 	converted_type = /area/indoors/shelter/town
 	threat_region = THREAT_REGION_TOWN
 
@@ -239,7 +266,7 @@
 	icon_state = "town"
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 /area/outdoors/town/roofs
 	name = "roofs"
@@ -253,7 +280,7 @@
 	icon_state = "roofs"
 	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 
 ///// UNDERGROUND AREAS //////

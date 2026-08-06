@@ -4,27 +4,41 @@
 	baseturfs = /turf/open/dungeon_trap
 	icon = 'icons/turf/floors/chasms.dmi'
 	icon_state = "chasms-255"
+	smoothing_icon = "chasms"
 	base_icon_state = "chasms"
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_TURF_CHASM
 	smoothing_list = SMOOTH_GROUP_TURF_CHASM
+	density = TRUE //This will prevent hostile mobs from pathing into chasms, while the canpass override will still let it function like an open turf
 	bullet_bounce_sound = null //abandon all hope ye who enter
-	path_weight = 500
 	dynamic_lighting = 1
 
+/// Lets people walk into chasms.
+/turf/open/dungeon_trap/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
+	return TRUE
+
 /turf/open/dungeon_trap/can_cross_safely(atom/movable/traveler)
-	return HAS_TRAIT(traveler, TRAIT_MOVE_FLYING) || !traveler.can_z_move(DOWN, src, z_move_flags = ZMOVE_FALL_FLAGS)
+	return HAS_TRAIT(src, TRAIT_CHASM_STOPPED) || (traveler.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
+
+///Makes movables fall when forceMove()'d to this turf.
+/turf/open/dungeon_trap/Entered(atom/movable/movable)
+	. = ..()
+	if(!movable.currently_z_moving)
+		handle_falling_movement(movable, 1)
 
 /turf/open/dungeon_trap/zImpact(atom/movable/falling, levels, turf/prev_turf, flags)
-	if(!isobj(falling) && !ismob(falling))
-		return ..()
-	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
-		return ..()
 	. = handle_falling_movement(falling, levels) // I hate this
 	if(!.)
 		return ..()
 
 /turf/open/dungeon_trap/proc/handle_falling_movement(atom/movable/falling, levels)
+	if(HAS_TRAIT(src, TRAIT_CHASM_STOPPED))
+		return
+	if(!isobj(falling) && !ismob(falling))
+		return
+	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
+		return
 	var/turf/target = get_dungeon_tile()
 	if(!target)
 		return FALSE

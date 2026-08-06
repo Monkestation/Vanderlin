@@ -113,7 +113,6 @@
 	var/rarity_rank = 0
 
 /obj/item/reagent_containers/food/snacks/fish/dead
-	abstract_type = /obj/item/reagent_containers/food/snacks/fish/dead
 	status = FISH_DEAD
 	fish_id = "dead"
 
@@ -194,13 +193,13 @@
 	item_weight = 150 GRAMS
 	var/obj/item/organ/organ_inside
 
+/obj/item/reagent_containers/food/snacks/meat/organ/Destroy()
+	QDEL_NULL(organ_inside)
+	return ..()
+
 /obj/item/reagent_containers/food/snacks/meat/organ/on_consume(mob/living/eater)
 	if(bitecount >= bitesize)
 		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, type, organ_inside)
-	. = ..()
-
-/obj/item/reagent_containers/food/snacks/meat/organ/Destroy()
-	QDEL_NULL(organ_inside)
 	return ..()
 
 /obj/item/reagent_containers/food/snacks/meat/organ/heart

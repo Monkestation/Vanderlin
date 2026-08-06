@@ -143,9 +143,7 @@
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	if(hungry_hungry_kobold)
-		var/datum/component/abberant_eater = C.GetComponent(/datum/component/abberant_eater)
-		if(abberant_eater)
-			abberant_eater.RemoveComponent()
+		qdel(GetComponent(/datum/component/abberant_eater))
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
 	C.remove_language(/datum/language/kobold)
@@ -179,14 +177,8 @@
 		"Icepack" = SKIN_COLOR_ICEPACK,
 	))
 
-/datum/species/kobold/get_possible_names(gender = MALE)
-	var/static/list/male_names = file2list('strings/rt/names/dwarf/dwarmm.txt')
-	var/static/list/female_names = file2list('strings/rt/names/dwarf/dwarmf.txt')
-	return (gender == FEMALE) ? female_names : male_names
-
-/datum/species/kobold/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = file2list('strings/rt/names/dwarf/dwarmlast.txt')
-	return last_names
+/datum/species/kobold/get_possible_names(gender)
+	return file2list('strings/rt/names/other/kobold.txt')
 
 #undef DIET_TURF_KOBOLD
 #undef DIET_KOBOLD

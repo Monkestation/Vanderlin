@@ -64,6 +64,33 @@
 	set desc = "Report an issue"
 	set hidden = 1
 
+	if(!CONFIG_GET(string/githuburl))
+		to_chat(src, span_danger("The Github URL is not set in the server configuration."))
+		return
+
+	if(!CONFIG_GET(string/issue_key))
+		to_chat(src, span_danger("Issue Reporting is not properly configured."))
+		return
+
+	var/testmerge_data = GLOB.revdata.testmerge
+	var/has_testmerge_data = (length(testmerge_data) != 0)
+
+	var/message = "This will start reporting an issue, gathering some information from the server and your client, before submitting it to github."
+	if(has_testmerge_data)
+		message += "<br>The following experimental changes are active and may be the cause of any new or sudden issues:<br>"
+		message += GLOB.revdata.GetTestMergeInfo(FALSE)
+
+	if(browser_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+		return
+
+	var/datum/bug_report/reporter = new()
+	reporter.ui_interact(mob)
+
+/client/verb/reportissue_legacy()
+	set name = "report-issue-legacy"
+	set desc = "Report an issue without TGUI."
+	set category = "OOC"
+
 	var/githuburl = CONFIG_GET(string/githuburl)
 	if(!githuburl)
 		to_chat(src, span_danger("The Github URL is not set in the server configuration."))
@@ -82,7 +109,7 @@
 		message += "<br>The following experimental changes are active and may be the cause of any new or sudden issues:<br>"
 		message += GLOB.revdata.GetTestMergeInfo(FALSE)
 
-	if(tgui_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(browser_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
 	// Keep a static version of the template to avoid reading file
@@ -238,13 +265,13 @@
 		var/current_scaling = window_scaling * 100
 		var/new_scaling = input(usr, "Enter UI Scaling (Your current scaling is [current_scaling]%). Cancel to reset to native scaling.", "New UI Scaling", window_scaling * 100) as null|num
 		if(!isnull(new_scaling))
-			prefs.toggles |= UI_SCALE
+			prefs.preference_set_flag(/datum/preference/bitwise/toggles, UI_SCALE)
 			window_scaling = new_scaling / 100
-			prefs.ui_scale = window_scaling
+			prefs.write_preference(/datum/preference/numeric/ui_scale, window_scaling)
 			prefs.save_preferences()
 			to_chat(src, span_notice("UI Scaling set to [window_scaling * 100]%. Changes take effect when opening new windows."))
 		else
-			prefs.toggles &= ~UI_SCALE
+			prefs.preference_clear_flag(/datum/preference/bitwise/toggles, UI_SCALE)
 			window_scaling = text2num(winget(src, null, "dpi"))
 			to_chat(src, span_notice("UI Scaling reset to native [window_scaling * 100]%. Changes take effect when opening new windows."))
 		native_say?.refresh_channels()
@@ -263,8 +290,8 @@
 		return
 	var/newfps = input(usr, "Enter new FPS", "New FPS", 100) as null|num
 	if (!isnull(newfps))
-		prefs.clientfps = clamp(newfps, 1, 1000)
-		fps = prefs.clientfps
+		prefs.write_preference(/datum/preference/numeric/clientfps, clamp(newfps, 1, 1000))
+		fps = prefs.read_preference(/datum/preference/numeric/clientfps)
 		prefs.save_preferences()
 
 /client/verb/changelog()

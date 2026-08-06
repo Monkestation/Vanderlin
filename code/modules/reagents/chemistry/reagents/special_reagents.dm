@@ -7,6 +7,7 @@
 	taste_description = "burning chemicals"
 	harmful = TRUE
 	boiling_point = T0C + 140
+	price_per_unit = 4
 
 /datum/reagent/drug/methamphetamine
 	name = "Methamphetamine"
@@ -15,6 +16,7 @@
 	color = "#78C8FA" //best case scenario is the "default", gets muddled depending on purity
 	overdose_threshold = 20
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
+	price_per_unit = 10
 
 /datum/reagent/drug/methamphetamine/on_mob_metabolize(mob/living/L)
 	..()
@@ -64,6 +66,7 @@
 	reagent_state = LIQUID
 	color = "#7FE0FF"
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
+	price_per_unit = 7
 
 /datum/reagent/drug/phlogiston_elasticum/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -79,6 +82,7 @@
 	reagent_state = LIQUID
 	color = "#5FA8FF"
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
+	price_per_unit = 7
 
 /datum/reagent/drug/gravitum_elixir/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -96,6 +100,7 @@
 	reagent_state = LIQUID
 	color = "#BFEFFF"
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
+	price_per_unit = 7
 
 /datum/reagent/drug/subtilum_tincture/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -113,19 +118,20 @@
 	color = "#929292"
 	metabolization_rate = 10 * REAGENTS_METABOLISM
 	taste_description = "rocks"
+	price_per_unit = 11
 
 	/// Less than this and it wont petrify
 	var/min_volume_to_pretrify = 3
 	/// So 1u of exposure is 5 seconds of statue time
 	var/reagent_to_time_conversion = 5 SECONDS
 
-/datum/reagent/sal_petris/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/sal_petris/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
 	if(reac_volume < min_volume_to_pretrify)
 		return
 
-	M.Stun(4 SECONDS)
-	M.petrify(reac_volume * reagent_to_time_conversion)
+	exposed_mob.Stun(4 SECONDS)
+	exposed_mob.petrify(reac_volume * reagent_to_time_conversion)
 
 /datum/reagent/cryzaline_suspension
 	name = "Crysaline Suspension"
@@ -134,17 +140,17 @@
 	color = "#88BFFF"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	taste_description = "biting cold"
+	price_per_unit = 7
 
 	/// Minimum volume before frost begins to take hold
 	var/min_volume_to_affect = 5
 	/// How much reagent volume converts into frost stacks
 	var/reagent_to_stack_conversion = 0.2
 
-/datum/reagent/cryzaline_suspension/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+/datum/reagent/cryzaline_suspension/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
-
 	if(reac_volume < min_volume_to_affect)
 		return
 
 	var/stacks = max(1, round(reac_volume * reagent_to_stack_conversion))
-	apply_frost_stack(M, stacks)
+	apply_frost_stack(exposed_mob, stacks)

@@ -212,5 +212,5 @@
 		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
 		var/datum/material/largest = metal?.largest_metal
 
-		if(initial(largest?.red_hot) && internal_reagents.chem_temp > initial(largest.melting_point))
+		if(initial(largest?.show_as_filling) && internal_reagents.chem_temp > initial(largest.melting_point))
 			. += emissive_appearance(icon, "furnace_metal", alpha = used_alpha)

@@ -1,10 +1,10 @@
 //The minimum for glide_size to be clamped to.
 //Clamped to 5 because byond's glide size scaling is actually just completely broken and "step"
 //movement is better than dealing with the awful camera juddering
-#define MIN_GLIDE_SIZE 4
+#define MIN_GLIDE_SIZE 0
 //The maximum for glide_size to be clamped to.
 //This shouldn't be higher than the icon size, and generally you shouldn't be changing this, but it's here just in case.
-#define MAX_GLIDE_SIZE 8
+#define MAX_GLIDE_SIZE 32
 
 //This is a global so it can be changed in game, if you want to make this a bit faster you can make it a constant/define directly in the code
 //GLOBAL_VAR_INIT(glide_size_multiplier, 1.25)
@@ -17,10 +17,11 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 /// Then that's multiplied by the global glide size multiplier. 1.25 by default feels pretty close to spot on. This is just to try to get byond to behave.
 /// The whole result is then clamped to within the range above.
 /// Not very readable but it works
-#define DELAY_TO_GLIDE_SIZE(delay) (clamp(((world.icon_size / max((delay) / world.tick_lag, 1)) * GLOB.glide_size_multiplier), MIN_GLIDE_SIZE, MAX_GLIDE_SIZE))
+#define DELAY_TO_GLIDE_SIZE(delay) (clamp(((world.icon_size / max((delay) / world.tick_lag, 1))), MIN_GLIDE_SIZE, MAX_GLIDE_SIZE))
 
+//port in from Vanderlin
 ///Similar to DELAY_TO_GLIDE_SIZE, except without the clamping, and it supports piping in an unrelated scalar
-#define MOVEMENT_ADJUSTED_GLIDE_SIZE(delay, movement_disparity) (world.icon_size / ((delay) / world.tick_lag) * movement_disparity * GLOB.glide_size_multiplier)
+#define MOVEMENT_ADJUSTED_GLIDE_SIZE(delay, movement_disparity) (world.icon_size / ((delay) / world.tick_lag) * movement_disparity)
 
 //Movement loop priority. Only one loop can run at a time, this dictates that
 // Higher numbers beat lower numbers
@@ -37,13 +38,13 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 ///Do we not use the priority system?
 #define MOVEMENT_LOOP_IGNORE_PRIORITY (1<<1)
 ///Should we override the loop's glide?
-#define MOVEMENT_LOOP_IGNORE_GLIDE (1<<3)
+#define MOVEMENT_LOOP_IGNORE_GLIDE (1<<2)
 ///Should we not update our movables dir on move?
-#define MOVEMENT_LOOP_NO_DIR_UPDATE (1<<4)
+#define MOVEMENT_LOOP_NO_DIR_UPDATE (1<<3)
 ///Is the loop moving the movable outside its control, like it's an external force? e.g. footsteps won't play if enabled.
-#define MOVEMENT_LOOP_OUTSIDE_CONTROL (1<<5)
-///Was this Move() called because of the process() of move_loop? Allows for checking whether a move was made from a movement loop.
-#define MOVEMENT_LOOP_CALLED_MOVE (1<<6)
+#define MOVEMENT_LOOP_OUTSIDE_CONTROL (1<<4)
+///Added to the move packet `processing_move_loop_flags` so we know when a loop is behind movement even in absence of other flags
+#define MOVED_BY_MOVEMENT_LOOP (1<<6)
 
 #define DEFAULT_MOB_SNEAK_TIME 5 SECONDS
 
@@ -57,6 +58,7 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
  * currently_z_moving defines. Higher numbers mean higher priority.
  * This one is for falling down open space from stuff such as deleted tile, pit grate...
  */
+#define CURERENTLY_Z_CLIMBING_DOWN 0.5
 #define CURRENTLY_Z_FALLING 1
 /// currently_z_moving is set to this in zMove() if 0.
 #define CURRENTLY_Z_MOVING_GENERIC 2

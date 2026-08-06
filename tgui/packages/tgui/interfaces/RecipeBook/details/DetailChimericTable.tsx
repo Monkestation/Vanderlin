@@ -30,7 +30,7 @@ export const DetailChimericTable = ({ r, lookup, pickerMap, allRecipes, essenceI
     <SectionHead>Blood Cost</SectionHead>
     <Box className="RecipeBook__step-block">
       <Box className="RecipeBook__step-row">Base: {r.base_blood_cost}u/beat</Box>
-      <Box className="RecipeBook__step-row" style={{ color: 'green' }}>
+      <Box className="RecipeBook__step-row" style={{ color: 'mediumseagreen' }}>
         Preferred: −{((r.pref_bonus || 0) * 100).toFixed(0)}%
       </Box>
       <Box className="RecipeBook__step-row" style={{ color: 'red' }}>
@@ -42,10 +42,10 @@ export const DetailChimericTable = ({ r, lookup, pickerMap, allRecipes, essenceI
         <SectionHead>Blood Types</SectionHead>
         <Box className="RecipeBook__step-block">
           {r.preferred_blood?.map((b, i) => (
-            <Box key={i} className="RecipeBook__step-row" style={{ color: 'green' }}>★ {b}</Box>
+            <Box key={i} className="RecipeBook__step-row" style={{ color: 'mediumseagreen' }}>★ {b}</Box>
           ))}
           {r.compatible_blood?.map((b, i) => (
-            <Box key={i} className="RecipeBook__step-row" style={{ color: 'cyan' }}>✓ {b}</Box>
+            <Box key={i} className="RecipeBook__step-row" style={{ color: 'steelblue' }}>✓ {b}</Box>
           ))}
           {r.incompatible_blood?.map((b, i) => (
             <Box key={i} className="RecipeBook__step-row" style={{ color: 'red' }}>✗ {b}</Box>
@@ -54,11 +54,11 @@ export const DetailChimericTable = ({ r, lookup, pickerMap, allRecipes, essenceI
       </>
     )}
     <SectionHead>Input Nodes</SectionHead>
-    <NodeList nodes={r.input_nodes} color="cyan" />
+    <NodeList nodes={r.input_nodes} color="steelblue" />
     <SectionHead>Output Nodes</SectionHead>
-    <NodeList nodes={r.output_nodes} color="orange" />
+    <NodeList nodes={r.output_nodes} color="sienna" />
     <SectionHead>Special Nodes</SectionHead>
-    <NodeList nodes={r.special_nodes} color="purple" />
+    <NodeList nodes={r.special_nodes} color="rebeccapurple"/>
     {!!r.source_mobs?.length && (
       <>
         <SectionHead>Blood Source Mobs</SectionHead>

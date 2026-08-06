@@ -55,13 +55,29 @@
 			. = ..()
 		return
 
-/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/attackby(obj/item/W, mob/user, list/modifiers)
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/attack_hand_secondary(mob/living/user, list/modifiers)
 	if(animating)
 		to_chat(user, span_notice("The rune is already working..."))
 		return
-	// try to stage it.
-	if(!try_place_item(user, W))
+	if(!length(slots))
 		return ..()
+	abort_ritual()
+	to_chat(user, span_cultsmall("The items clatter free from the rune."))
+	playsound(src, 'sound/magic/glass.ogg', 40, TRUE)
+
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(tool.item_flags & ABSTRACT || HAS_TRAIT(tool, TRAIT_NODROP))
+		return NONE
+
+	if(animating)
+		to_chat(user, span_notice("The rune is already working..."))
+		return ITEM_INTERACT_BLOCKING
+
+	try_place_item(user, tool)
+	return ITEM_INTERACT_SUCCESS
 
 /// Attempts to place the held item into the next open slot.
 /obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/proc/try_place_item(mob/living/user, obj/item/item)
@@ -127,7 +143,7 @@
 	for(var/datum/crafting_slot/S in slots)
 		staged_types += S.item.type
 
-	for(var/recipe_type as anything in subtypesof(/datum/arcyne_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/arcyne_crafting_recipe))
 		var/datum/arcyne_crafting_recipe/R = new recipe_type
 		var/list/needed = R.ingredients.Copy()
 		if(length(needed) != length(slots))
@@ -166,6 +182,11 @@
 		to_chat(user, span_hierophant_warning("My arcyne is not refined enough to complete this working..."))
 		abort_ritual()
 		return
+	if(user.mana_pool.amount < matched_recipe.mana_cost)
+		to_chat(user, span_hierophant_warning("My mana is lacking..."))
+		abort_ritual()
+		return
+	user.mana_pool.adjust_mana(-matched_recipe.mana_cost)
 
 	user.say(invocation, language = /datum/language/common, ignore_spam = TRUE, forced = "cult invocation")
 	playsound(src, 'sound/magic/cosmic_expansion.ogg', 60, TRUE)
@@ -202,6 +223,7 @@
 
 	//spawn output invisible and floating, then fade it in.
 	var/obj/item/result = new matched_recipe.output(center)
+	result.OnCrafted(dir, user)
 	result.alpha = 0
 	var/saved_transform = result.transform
 	result.transform = matrix() * 0.1
@@ -218,9 +240,12 @@
 
 	playsound(src, 'sound/magic/blink.ogg', 80, TRUE)
 
-	matched_recipe = null
 	animating = FALSE
 	rune_in_use = FALSE
+
+	user.mind.add_sleep_experience(/datum/attribute/skill/magic/arcane, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2) + matched_recipe.required_skill, FALSE)
+
+	matched_recipe = null
 	do_invoke_glow()
 
 /// Releases all staged items and resets state without crafting anything.
@@ -229,7 +254,7 @@
 		if(S.item && !QDELETED(S.item))
 			S.item.anchored = FALSE
 			animate(S.item, pixel_x = 0, pixel_y = 0, time = 0.5 SECONDS, flags = ANIMATION_END_NOW)
-	slots.Cut()
+	QDEL_LIST(slots)
 	matched_recipe = null
 	animating = FALSE
 	rune_in_use = FALSE
@@ -246,3 +271,7 @@
 	var/px = 0
 	/// Pixel Y offset from the rune's tile center
 	var/py = 0
+
+/datum/crafting_slot/Destroy(force)
+	. = ..()
+	item = null

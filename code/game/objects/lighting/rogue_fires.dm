@@ -382,12 +382,12 @@
 	fueluse = 0
 	soundloop = null
 	crossfire = FALSE
-	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	obj_flags = parent_type::obj_flags | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	temperature_change = 5
 
 /obj/machinery/light/fueled/chand/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/machinery/light/fueled/chand/attack_hand(mob/user)
 	if(isliving(user) && on)
@@ -416,27 +416,21 @@
 	var/obj/item/reagent_containers/food/snacks/food = null
 	var/rawegg = FALSE
 
-/obj/machinery/light/fueled/hearth/Initialize()
-	. = ..()
+/obj/machinery/light/fueled/hearth/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(attachment)
+		tool.melee_attack_chain(user, attachment, modifiers)
+		return ITEM_INTERACT_SUCCESS
+	else if(istype(tool, /obj/item/cooking/pan) || istype(tool, /obj/item/reagent_containers/glass/bucket/pot) || istype(tool, /obj/item/reagent_containers/glass/carafe/teapot))
+		playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
 
-/obj/machinery/light/fueled/hearth/Destroy()
-	. = ..()
+		if(!user.transferItemToLoc(tool, src, silent = TRUE))
+			return ITEM_INTERACT_BLOCKING
 
-/obj/machinery/light/fueled/hearth/attackby(obj/item/W, mob/living/user, list/modifiers)
-	if(!attachment)
-		if(istype(W, /obj/item/cooking/pan) || istype(W, /obj/item/reagent_containers/glass/bucket/pot) || istype(W, /obj/item/reagent_containers/glass/carafe/teapot))
-			playsound(user, 'sound/foley/dropsound/shovel_drop.ogg', 40, TRUE, -1)
+		attachment = tool
+		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
+		return ITEM_INTERACT_SUCCESS
 
-			if(user.transferItemToLoc(W, src, silent = TRUE))
-				attachment = W
-				update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
-			return
-
-	else
-		. = attachment.attackby(W, user, modifiers)
-		if(.)
-			return
-	. = ..()
+	return ..()
 
 /obj/machinery/light/fueled/hearth/MouseDrop(mob/over, src_location, over_location, src_control, over_control, params)
 	. = ..()

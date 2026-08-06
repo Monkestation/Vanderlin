@@ -139,14 +139,14 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/area/A as anything in GLOB.areas)
 		if(on_station)
 			var/turf/picked = safepick(get_area_turfs(A.type))
-			if(picked && is_station_level(picked.z))
+			if(picked && is_town_level(picked.z))
 				if(!(A.type in areas_all) && !is_type_in_typecache(A, station_areas_blacklist))
 					areas_all.Add(A.type)
 		else if(!(A.type in areas_all))
 			areas_all.Add(A.type)
 		CHECK_TICK
 
-	for(var/obj/machinery/light/L in GLOB.machines)
+	for(var/obj/machinery/light/L as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/light))
 		var/area/A = get_area(L)
 		if(!A)
 			dat += "Skipped over [L] in invalid location, [L.loc].<br>"

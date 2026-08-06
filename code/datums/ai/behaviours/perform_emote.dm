@@ -38,6 +38,6 @@
 	for(var/mob/ghost as anything in GLOB.dead_mob_list)
 		if(!ghost.client || isnewplayer(ghost))
 			continue
-		if(ghost.client.prefs.chat_toggles & CHAT_GHOSTSIGHT && !(ghost in viewers(origin_turf, null)))
+		if(ghost.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_GHOSTSIGHT && !(ghost in viewers(origin_turf, null)))
 			ghost.show_message("[FOLLOW_LINK(ghost, src)] [ghost_text]")
 	return TRUE

@@ -65,10 +65,11 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/action/cooldown/spell/undirected/list_target/grant_title,
 		/datum/action/cooldown/spell/undirected/list_target/grant_nobility,
 	)
-	allowed_races = RACES_PLAYER_ROYALTY
+	allowed_races = RACES_PLAYER_MONARCH
 	outfit = /datum/outfit/lord
 	bypass_lastclass = TRUE
 	give_bank_account = 500
+	knows_the_town = TRUE
 	selection_color = "#7851A9"
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	can_have_apprentices = FALSE
@@ -87,9 +88,11 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	//These change on map load
 	honorary = "Lord"
 	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
-		TRAIT_KNOW_KEEP_DOORS
+		TRAIT_KNOW_KEEP_DOORS,
+		TRAIT_KNOWCOURTAGENTS
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -138,6 +141,24 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
+	if(player_client?.prefs)
+		var/datum/preferences/prefs = player_client.prefs
+
+		var/list/laws = prefs.read_preference(/datum/preference/list_type/role_setting/monarch_law)
+		if(length(laws))
+			GLOB.laws_of_the_land = list()
+		for(var/law in laws)
+			law = trim(law)
+			GLOB.laws_of_the_land += trim(law)
+
+
+		var/list/decrees = prefs.read_preference(/datum/preference/list_type/role_setting/monarch_decree)
+		if(length(decrees))
+			GLOB.lord_decrees = list()
+		for(var/decree in decrees)
+			decree = trim(decree)
+			GLOB.lord_decrees += trim(decree)
+
 /datum/outfit/lord
 	name = JOB_MONARCH
 	head = /obj/item/clothing/head/crown/serpcrown
@@ -145,6 +166,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	belt = /obj/item/storage/belt/leather/plaquegold
 	beltl = /obj/item/weapon/knife/dagger/steel/royal
 	beltr = /obj/item/weapon/sword/rapier
+	shoes = /obj/item/clothing/shoes/nobleboot
 	scabbards = list(/obj/item/weapon/scabbard/knife/royal, /obj/item/weapon/scabbard/sword/royal)
 	ring = /obj/item/clothing/ring/active/nomag
 	l_hand = /obj/item/weapon/lordscepter
@@ -167,12 +189,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		pants = /obj/item/clothing/pants/trou/formal
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		armor = /obj/item/clothing/armor/gambeson/arming
-		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak
 	else
 		pants = /obj/item/clothing/pants/tights/colored/random
 		armor = /obj/item/clothing/shirt/dress/royal
-		shoes = /obj/item/clothing/shoes/nobleboot
 		cloak = /obj/item/clothing/cloak/lordcloak/ladycloak
 		wrists = /obj/item/clothing/wrists/royalsleeves
 

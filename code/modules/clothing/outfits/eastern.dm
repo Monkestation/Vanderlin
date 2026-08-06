@@ -30,23 +30,19 @@
 	name = "psyalter's stole"
 	desc = "A silk stole embroidered with silver filigree and with concealed pockets in its back worn over a hymnal-scroll. It is worn as the traditional garb of a graduate of the choir leaders of the cathedrals of Grenzelhoft, and is a symbol of their station."
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-	icon_state = "psaltertabard"
-	item_state = "psaltertabard"
+	icon_state = "psyaltertabard"
+	item_state = "psyaltertabard"
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-
-
-/obj/item/clothing/cloak/psyaltrist/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak)
+	has_storage = TRUE
 
 /obj/item/clothing/head/spellcasterhat
 	name = "spellsinger hat"
 	desc = "An oddly shaped hat made of tightly-sewn leather, commonly worn by spellsinger."
 	icon_state = "spellcasterhat"
 	item_state = "spellcasterhat"
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/head/leather/good
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
@@ -63,7 +59,7 @@
 	name = "spellsinger robes"
 	desc = "A set of reinforced, leather-padded robes worn by spellblades."
 	body_parts_covered = COVERAGE_FULL
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/leather/good
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	armor_class = AC_LIGHT
 	icon_state = "spellcasterrobe"
@@ -83,7 +79,7 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	body_parts_covered = COVERAGE_FULL
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
@@ -103,7 +99,7 @@
 	desc = "A dobo robe with a red tassel. Leather inlays are sewn in. It looks sturdier than a simple robe."
 	icon_state = "eastsuit2"
 	item_state = "eastsuit2"
-	armor = ARMOR_LEATHER_GOOD // Makes it the equivalence of studded with less integrity and better armor
+	armor_type = /datum/armor/leather/good // Makes it the equivalence of studded with less integrity and better armor
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MEDIUM
 
 //craftable variation of eastsuit, essentially requiring the presence of a tailor with relevant materials
@@ -115,7 +111,7 @@
 	icon_state = "eastsuit1"
 	item_state = "eastsuit1"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/leather/good
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MEDIUM
 
 
@@ -124,7 +120,7 @@
 	desc = "Flower-styled robes."
 	icon_state = "eastsuit4"
 	item_state = "eastsuit4"
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/leather/good
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER + 25 // Head Honcho gets a buff
 	sellprice = 25
 
@@ -148,7 +144,7 @@
 	is_barefoot = TRUE
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
-	armor = ARMOR_BOOTS_BAD
+	armor_type = /datum/armor/boots/anklet
 
 /obj/item/clothing/shoes/rumaclan
 	name = "raised sandals"
@@ -156,14 +152,14 @@
 	icon_state = "eastsandals"
 	item_state = "eastsandals"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
-	armor = ARMOR_BOOTS
+	armor_type = /datum/armor/boots/ruma
 
 /obj/item/clothing/gloves/eastgloves1
 	name = "black gloves"
 	desc = "Sleek gloves typically used by swordsmen."
 	icon_state = "eastgloves1"
 	item_state = "eastgloves1"
-	armor = ARMOR_GLOVES_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	resistance_flags = null
 	blocksound = SOFTHIT
@@ -179,7 +175,7 @@
 	desc = "Unusual gloves worn by foreign gangs."
 	icon_state = "eastgloves2"
 	item_state = "eastgloves2"
-	armor = ARMOR_GLOVES_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	resistance_flags = null
 	blocksound = SOFTHIT
@@ -195,7 +191,7 @@
 	desc = "A reinforced bamboo hat."
 	icon_state = "easthat"
 	item_state = "easthat"
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/head/padded/good
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
@@ -309,57 +305,3 @@
 	l_sleeve_status = SLEEVE_NORMAL
 	flags_inv = HIDEBOOB
 	allowed_race = RACES_PLAYER_ALL
-
-/obj/item/clothing/shirt/undershirt/easttats
-	name = "bouhoi bujeog tattoos"
-	desc = "A mystic style of tattoos used to honor the kin that fell generations ago, a sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. Its movement causes you to shudder."
-	resistance_flags = FIRE_PROOF
-	icon_state = "easttats"
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
-	armor = list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
-	body_parts_covered = COVERAGE_FULL
-	icon = 'icons/roguetown/clothing/shirts.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
-	allowed_race = RACES_PLAYER_ALL
-	misc_flags = CRAFTING_TEST_EXCLUDE
-	surgery_cover = FALSE
-	max_integrity = 600 //Bad armor protection and very basic crit protection, but incredibly hard to break completely
-	flags_inv = null //free the breast
-	var/repair_amount = 6 //The amount of integrity the tattoos will repair themselves
-	var/repair_time = 20 SECONDS //The amount of time between each repair
-	var/last_repair //last time the tattoos got repaired
-
-/obj/item/clothing/shirt/undershirt/easttats/Initialize(mapload)
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-
-/obj/item/clothing/shirt/undershirt/easttats/dropped(mob/living/carbon/human/user)
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)
-
-
-/obj/item/clothing/shirt/undershirt/easttats/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
-	. = ..()
-	if(atom_integrity < max_integrity)
-		START_PROCESSING(SSobj, src)
-		return
-
-/obj/item/clothing/shirt/undershirt/easttats/process()
-	if(atom_integrity >= max_integrity)
-		STOP_PROCESSING(SSobj, src)
-		src.visible_message(span_notice("The [src] flow more calmly, as they finish resting and regain their strength."), vision_distance = 1)
-		return
-	else if(world.time > src.last_repair + src.repair_time)
-		src.last_repair = world.time
-		update_integrity(min(atom_integrity + src.repair_amount, src.max_integrity))
-	..()
-
-/obj/item/clothing/shirt/undershirt/easttats/tribal
-	name = "Tribal Tattoos"
-	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."

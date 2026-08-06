@@ -18,7 +18,7 @@
 
 	_build_slot_flag_list()
 	inventory_map = alist()
-	for(var/ai_item_type as anything in GLOB.ai_item_flags)
+	for(var/ai_item_type in GLOB.ai_item_flags)
 		inventory_map[ai_item_type] = list()
 
 	container_refs = alist()

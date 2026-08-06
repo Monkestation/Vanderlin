@@ -101,7 +101,7 @@
 
 /obj/item/bodypart/mouth
 	name = "jaw"
-	desc = "I have no mouth and i must scream."
+	desc = "I have no mouth and I must scream."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "jaw"
 	base_icon_state = "jaw"
@@ -287,8 +287,6 @@
 		teeth_mod = new()
 		if(owner)
 			teeth_mod.add_speech_modifier(owner)
-	if(owner)
-		owner.Stun(2 SECONDS)
 	update_limb_efficiency()
 	return dropped
 

@@ -36,13 +36,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	if(!istype(examined))
 		return
-	if(NOBLOOD in examined.dna?.species?.species_traits)
+	if(!CAN_HAVE_BLOOD(examined))
 		return
+	var/cached_blood_volume = examined.get_blood_volume()
 	var/vitae = 0
 	var/datum/blood_type/BT = examined.get_blood_type()
 	if(istype(BT) && BT.vitae)
-		vitae = round(examined.blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
+		vitae = round(cached_blood_volume * BT.vitae)
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"

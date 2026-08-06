@@ -15,7 +15,7 @@
 
 	if(transformed && !HAS_TRAIT(human_user, TRAIT_PARALYSIS) && !human_user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 		if(human_user.rage_datum.check_rage(WW_RAGE_MEDIUM))
-			if(human_user.blood_volume > BLOOD_VOLUME_SURVIVE)
+			if(!CAN_HAVE_BLOOD(human_user) || human_user.get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in human_user.get_wounds())
 					wound.heal_wound(1.2)
 
@@ -63,6 +63,7 @@
 	if(!try_transform_checks()) return
 
 	var/mob/living/carbon/human/human_user = owner.current
+	human_user.buckled?.unbuckle_mob(human_user, TRUE)
 
 	if(human_user.cmode)
 		human_user.toggle_cmode()
@@ -79,10 +80,10 @@
 
 	new_werewolf.adjustBruteLoss(human_user.getBruteLoss() / 2)
 	new_werewolf.adjustFireLoss(human_user.getFireLoss() / 2)
-	new_werewolf.adjustToxLoss(human_user.getToxLoss() / 2)
+	new_werewolf.adjustToxLoss(human_user.getToxLoss() / 2, forced = TRUE)
 	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
 	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
-	new_werewolf.blood_volume = human_user.blood_volume
+	new_werewolf.set_blood_volume(human_user.blood_volume, minimum = BLOOD_VOLUME_SURVIVE)
 	human_user.fully_heal(HEAL_BLOOD|HEAL_WOUNDS|HEAL_RESTRAINTS)
 
 	playsound(new_werewolf, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
@@ -147,8 +148,8 @@
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))
 	playsound(caster_mob, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-	caster_mob.Knockdown(30)
-	caster_mob.Stun(30)
+	caster_mob.Knockdown(1.5 SECONDS)
+	caster_mob.Stun(1.5 SECONDS)
 	caster_mob.rage_datum.remove_secondary()
 	caster_mob.rage_datum.rage_change_on_life += transformed_rage_decay
 	caster_mob.apply_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform)

@@ -70,7 +70,7 @@
 "cI" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/grass/cold,
-/area/under/tomb)
+/area/outdoors/exposed/church)
 "cL" = (
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/churchmarble,
@@ -144,6 +144,9 @@
 	},
 /turf/open/floor/woodturned,
 /area/under/tomb/cave/wet)
+"ea" = (
+/turf/open/floor/herringbone,
+/area/outdoors/exposed/church)
 "eo" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchmarble,
@@ -230,7 +233,7 @@
 "hd" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass/cold,
-/area/under/tomb)
+/area/outdoors/exposed/church)
 "hh" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 10;
@@ -446,7 +449,7 @@
 /turf/open/floor/metal{
 	dir = 1
 	},
-/area/under/tomb)
+/area/outdoors/exposed/church)
 "ol" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/churchmarble,
@@ -572,9 +575,10 @@
 /turf/open/floor/churchrough,
 /area/under/tomb)
 "uK" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/grass/cold,
-/area/under/tomb)
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "uM" = (
 /obj/structure/kneestingers,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
@@ -815,8 +819,9 @@
 "Hb" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/turf/open/floor/grass/cold,
-/area/under/tomb)
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "Hh" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/twig,
@@ -1055,7 +1060,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/grass/cold,
-/area/under/tomb)
+/area/outdoors/exposed/church)
 "Pi" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -1144,7 +1149,7 @@
 /area/under/tomb)
 "Sy" = (
 /turf/open/floor/grass/cold,
-/area/under/tomb)
+/area/outdoors/exposed/church)
 "SL" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/cloth,
@@ -3216,10 +3221,10 @@ Dz
 Dz
 Dz
 nU
-Dz
-Dz
-Dz
-Dz
+ea
+ea
+ea
+ea
 nU
 Dz
 Dz

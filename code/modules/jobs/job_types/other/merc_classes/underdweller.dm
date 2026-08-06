@@ -21,14 +21,14 @@
 
 /datum/attribute_holder/sheet/job/underdweller/dwarf
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/axesmaces = 36,
+		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/craft/bombs = 40,
 	)
 
 /datum/attribute_holder/sheet/job/underdweller/other
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 36,
 	)
 
 /datum/job/advclass/mercenary/underdweller
@@ -64,10 +64,12 @@
 
 /datum/outfit/mercenary/underdweller
 	name = "Underdweller (Mercenary)"
+	head = /obj/item/clothing/head/helmet/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	armor = /obj/item/clothing/armor/cuirass/iron
 	shoes = /obj/item/clothing/shoes/boots/armor/light
 	belt = /obj/item/storage/belt/leather/mercenary
+	beltl = /obj/item/weapon/sword/sabre
 	beltr = /obj/item/weapon/knife/hunting
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	backl = /obj/item/storage/backpack/backpack
@@ -89,7 +91,3 @@
 		head = /obj/item/clothing/head/helmet/leather/minershelm
 		beltl = /obj/item/weapon/pick/paxe // Dorfs get a pick as their primary weapon and axes/maces to use it
 		backr = /obj/item/weapon/shield/wood
-	else
-		// No miner's helm for Delves or kobolds as they have nitevision now.
-		beltl = /obj/item/weapon/sword/sabre // Dark elves get a sabre as their primary weapon and swords skill, who woulda thought
-		head = /obj/item/clothing/head/helmet/leather // similar to the miner helm, except not as cool of course

@@ -6,6 +6,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/drunk
 	effectedstats = list(STAT_INTELLIGENCE = -1, STAT_SPEED = -1, STAT_CONSTITUTION = 1)
 	duration = 12 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/drunk
 	name = "Drunk"
@@ -29,6 +30,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/foodbuff
 	effectedstats = list(STAT_CONSTITUTION = 1, STAT_ENDURANCE = 1)
 	duration = 15 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/foodbuff
 	name = "Great Meal"
@@ -47,6 +49,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/clean_plus
 	effectedstats = list(STAT_FORTUNE = 1)
 	duration = 10 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/clean_plus/on_apply()
 	. = ..()
@@ -65,6 +68,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
 	effectedstats = list(STAT_INTELLIGENCE = 4, STAT_SPEED = 2, STAT_FORTUNE = -5)
 	duration = 2 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/druqks/on_apply()
 	. = ..()
@@ -100,6 +104,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
 	effectedstats = list(STAT_SPEED = -4, STAT_PERCEPTION = 2)
 	duration = 2 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/ozium/on_apply()
 	. = ..()
@@ -120,6 +125,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
 	effectedstats = list(STAT_SPEED = 2, STAT_ENDURANCE = 2, STAT_INTELLIGENCE = -4)
 	duration = 1 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/moondust/nextmove_modifier()
 	return 0.5
@@ -141,6 +147,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
 	effectedstats = list(STAT_SPEED = 4, STAT_ENDURANCE = 4, STAT_INTELLIGENCE = -2)
 	duration = 2 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/moondust_purest/nextmove_modifier()
 	return 0.5
@@ -163,6 +170,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/weed
 	effectedstats = list(STAT_INTELLIGENCE = 2, STAT_SPEED = -2,STAT_FORTUNE = 2)
 	duration = 5 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/weed/on_apply()
 	. = ..()
@@ -186,6 +194,7 @@
 	id = "featherfall"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/featherfall
 	duration = 1 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/featherfall/on_apply()
 	. = ..()
@@ -201,6 +210,7 @@
 	id = "darkvision"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/darkvision
 	duration = 10 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/darkvision
 	name = "Darkvision"
@@ -231,12 +241,14 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/haste
 	effectedstats = list(STAT_SPEED = 3)
 	duration = 1 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/calm
 	id = "calm"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/calm
 	effectedstats = list(STAT_FORTUNE = 1)
 	duration = 240 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/calm
 	name = "Calmness"
@@ -260,12 +272,14 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/barbrage
 	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2) //endurance to boost pain treshold, not powerful enough to warrant total painkilling
 	duration = 30 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/adrenalinerush
 	id = "adrenalinerush"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/adrenalinerush
 	effectedstats = list(STAT_SPEED = 4, STAT_ENDURANCE = 2, STAT_CONSTITUTION = 2) // Meant as a 'GET THE FUCK OUT' spell.
 	duration = 2 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/barbrage
 	name = "Barbaric Rage"
@@ -302,6 +316,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/nocbuff
 	effectedstats = list(STAT_INTELLIGENCE = 3)
 	duration = 240 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/nocbuff
 	name = "Divine Knowledge"
@@ -316,6 +331,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/ravoxbuff
 	effectedstats = list(STAT_CONSTITUTION = 1, STAT_ENDURANCE = 1, STAT_STRENGTH = 1)
 	duration = 240 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/ravoxbuff
 	name = "Divine Power"
@@ -333,6 +349,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/beastsense
 	effectedstats = list(STAT_PERCEPTION = 2)
 	duration = 10 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/beastsense
 	name = "Bestial Senses"
@@ -360,6 +377,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/trollshape
 	effectedstats = list(STAT_STRENGTH = 4, STAT_ENDURANCE = 2, STAT_SPEED = -2, STAT_INTELLIGENCE = -4)
 	duration = 3 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/trollshape
 	name = "Troll Shape"
@@ -392,6 +410,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/barbrage/briarrage
 	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/barbrage/briarrage
 	name = "Dendor's frenzy"
@@ -406,6 +425,7 @@
 	id = "divine_beauty"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/divine_beauty
 	duration = 5 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/divine_beauty/on_apply()
 	. = ..()
@@ -433,6 +453,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/call_to_arms
 	duration = 2.5 MINUTES
 	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 2, STAT_CONSTITUTION = 2)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/call_to_arms
 	name = "Call to Arms"
@@ -448,6 +469,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/craft_buff
 	duration = 2.5 MINUTES
 	effectedstats = list(STAT_INTELLIGENCE = 2)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/craft_buff
 	name = "Exquisite Craftsmanship"
@@ -459,6 +481,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/malum_anvil
 	duration = 13 SECONDS
 	effectedstats = list(STAT_CONSTITUTION = 3, STAT_SPEED = -1) // Anvils do not move that fast
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/malum_anvil/on_apply()
 	. = ..()
@@ -488,6 +511,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/call_to_hunt
 	duration = 2.5 MINUTES
 	effectedstats = list(STATKEY_END = 1, STATKEY_CON = 1)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/call_to_hunt
 	name = "Call to Hunt"
@@ -503,6 +527,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/call_to_slaughter
 	duration = 2.5 MINUTES
 	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 1, STAT_CONSTITUTION = 1)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/call_to_slaughter
 	name = "Call to Slaughter"
@@ -522,6 +547,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/graggar_bloodrage
 	var/outline_color = "#ad0202"
 	duration = 15 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/bloodrage/on_creation(mob/living/carbon/new_owner, duration_override, ...)
 	var/holyskill = GET_MOB_SKILL_VALUE(new_owner, /datum/attribute/skill/magic/holy)
@@ -549,51 +575,6 @@
 
 #undef BLOODRAGE_FILTER
 
-/atom/movable/screen/alert/status_effect/buff/matthioshealing
-	name = "Healing Miracle"
-	desc = "Strange Divine intervention relieves me of my ailments."
-	icon_state = "buff"
-
-#define MIRACLE_HEALING_FILTER "miracle_heal_glow"
-
-/datum/status_effect/buff/matthioshealing
-	id = "healing"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/matthioshealing
-	duration = 10 SECONDS
-	var/healing_on_tick = 1
-	var/outline_colour = "#c42424"
-
-/datum/status_effect/buff/matthioshealing/on_creation(mob/living/new_owner, new_healing_on_tick)
-	healing_on_tick = new_healing_on_tick
-	return ..()
-
-/datum/status_effect/buff/matthioshealing/on_apply()
-	. = ..()
-	owner.add_filter(MIRACLE_HEALING_FILTER, 2,  outline_filter(2, outline_colour))
-	return TRUE
-
-/datum/status_effect/buff/matthioshealing/on_remove()
-	. = ..()
-	owner.remove_filter(MIRACLE_HEALING_FILTER)
-	return TRUE
-
-/datum/status_effect/buff/matthioshealing/get_examine_text()
-	return "SUBJECTPRONOUN is bathed in a restorative aura!"
-
-/datum/status_effect/buff/matthioshealing/tick()
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume+10, BLOOD_VOLUME_NORMAL)
-	if(owner.get_wounds())
-		owner.heal_wounds(healing_on_tick)
-		owner.update_damage_overlays()
-		owner.adjustBruteLoss(-healing_on_tick, 0)
-		owner.adjustFireLoss(-healing_on_tick, FALSE)
-		owner.adjustOxyLoss(-healing_on_tick, FALSE)
-		owner.adjustToxLoss(-healing_on_tick, FALSE)
-		owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
-
-#undef MIRACLE_HEALING_FILTER //Why is this a thing?
-
 #define CRANKBOX_FILTER "crankboxbuff_glow"
 /atom/movable/screen/alert/status_effect/buff/churnerprotection
 	name = "Magick Distorted"
@@ -605,6 +586,7 @@
 	id = "soulchurnerprotection"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/churnerprotection
 	duration = 20 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/churnerprotection/on_apply()
 	. = ..()
@@ -632,6 +614,7 @@
 	id ="soulchurnernegative"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/churnernegative
 	duration = 23 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/churnernegative/on_apply()
 	. = ..()
@@ -648,6 +631,7 @@
 /datum/status_effect/buff/lux_drank/baothavitae
 	id = "druqks"
 	duration = 1 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 // BARDIC BUFFS BELOW
 
@@ -741,7 +725,7 @@
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
-		if(!H.can_hear())
+		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
@@ -754,6 +738,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/knowledge
 	effectedstats = list(STAT_INTELLIGENCE = 2)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/knowledge
 	name = "runic cunning"
@@ -765,6 +750,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/strength
 	effectedstats = list(STAT_STRENGTH = 3)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/strength
 	name = "arcane reinforced strength"
@@ -776,6 +762,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/strength/lesser
 	effectedstats = list(STAT_STRENGTH = 1)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/strength/lesser
 	name = "lesser arcane strength"
@@ -788,6 +775,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/speed
 	effectedstats = list(STAT_SPEED = 3)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/speed
 	name = "arcane swiftness"
@@ -799,6 +787,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/speed/lesser
 	effectedstats = list(STAT_SPEED = 1)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/speed/lesser
 	name = "arcane swiftness"
@@ -810,6 +799,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/endurance
 	effectedstats = list(STAT_ENDURANCE = 3)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/endurance
 	name = "arcane endurance"
@@ -821,6 +811,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/endurance/lesser
 	effectedstats = list(STAT_ENDURANCE = 1)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/endurance/lesser
 	name = "lesser arcane endurance"
@@ -833,6 +824,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/constitution
 	effectedstats = list(STAT_CONSTITUTION = 3)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/constitution
 	name = "arcane constitution"
@@ -844,6 +836,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/constitution/lesser
 	effectedstats = list(STAT_CONSTITUTION = 1)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/constitution/lesser
 	name = "lesser arcane constitution"
@@ -855,6 +848,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/perception
 	effectedstats = list(STAT_PERCEPTION = 3)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/perception
 	name = "arcane perception"
@@ -866,6 +860,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/perception/lesser
 	effectedstats = list(STAT_PERCEPTION = 1)
 	duration = 20 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/perception/lesser
 	name = "lesser arcane perception"
@@ -878,7 +873,7 @@
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
-		if(!H.can_hear())
+		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
@@ -891,6 +886,7 @@
 	alert_type =  /atom/movable/screen/alert/status_effect/debuff/cold
 	effectedstats = list(STAT_SPEED = -2)
 	duration = 12 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/cold/on_apply()
 	. = ..()
@@ -908,6 +904,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/nocblessing
 	effectedstats = list(STAT_INTELLIGENCE = 1)
 	duration = 30 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/nocblessing
 	name = "Noc's blessing"
@@ -919,6 +916,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/nocblessed
 	effectedstats = list(STAT_INTELLIGENCE = 3, STAT_PERCEPTION = 2)
 	duration = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/nocblessed
 	name = "Blessed by Noc"
@@ -931,6 +929,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
 	effectedstats = list(STAT_INTELLIGENCE = 2, STAT_ENDURANCE = 4, STAT_SPEED = -3)
 	duration = 20 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/powered_steam_armor/on_apply()
 	. = ..()
@@ -962,6 +961,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/lux_drank
 	effectedstats = list(STAT_FORTUNE = 2)
 	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/buff/lux_drank/on_apply()
 	. = ..()
@@ -992,6 +992,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/stuffed
 	effectedstats = list(STAT_CONSTITUTION = 1, STAT_ENDURANCE = 1)
 	duration = 3 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/buff/stuffed
 	name = "Stuffed"

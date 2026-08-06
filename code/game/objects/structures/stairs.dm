@@ -40,7 +40,7 @@
 	)
 
 	AddElement(/datum/element/connect_loc, exit_connections)
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/stairs/Destroy()
 	if(directly_above)
@@ -118,7 +118,8 @@
 	// I'm only interested in if the pass is unobstructed, not if the mob will actually make it
 	if(!climber.can_z_move(UP, get_turf(src), checking, z_move_flags = ZMOVE_ALLOW_BUCKLED))
 		return
-	var/turf/target = GET_TURF_ABOVE_DIAGONAL(src, dir|UP)
+	var/turf/turf = get_turf(src)
+	var/turf/target = GET_TURF_ABOVE_DIAGONAL(turf, dir|UP)
 	if(istype(target) && !climber.can_z_move(DOWN, target, z_move_flags = ZMOVE_FALL_FLAGS)) //Don't throw them into a tile that will just dump them back down.
 		climber.zMove(target = target, z_move_flags = ZMOVE_STAIRS_FLAGS)
 		/// Moves anything that's being dragged by src or anything buckled to it to the stairs turf.
@@ -187,12 +188,12 @@
 
 /// What happens when a mob tumbles down the stairs
 /obj/structure/stairs/proc/on_fall(mob/living/falling)
-	falling.AdjustParalyzed(1 SECONDS)
-	falling.OffBalance(1 SECONDS)
-	falling.AdjustKnockdown(2.5 SECONDS)
+	falling.AdjustParalyzed(0.5 SECONDS)
+	falling.OffBalance(0.5 SECONDS)
+	falling.AdjustKnockdown(1.25 SECONDS)
 	falling.spin(1 SECONDS, 0.25 SECONDS)
 	falling.apply_damage(rand(4, 8), BRUTE, spread_damage = TRUE)
-	SSmove_manager.move_towards(falling, get_ranged_target_turf(src, REVERSE_DIR(dir), 2), delay = 0.4 SECONDS, timeout = 1 SECONDS)
+	SSmove_manager.move_towards(falling, get_ranged_target_turf(src, REVERSE_DIR(dir), 2), delay = 0.2 SECONDS, timeout = 0.5 SECONDS)
 
 /obj/structure/stairs/proc/isTerminator() //If this is the last stair in a chain and should move mobs up
 	if(terminator_mode != STAIR_TERMINATOR_AUTOMATIC)
@@ -257,7 +258,7 @@
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 
 	dir = dirin
 	var/turf/partner = get_step(src, turn(dir, 180))
@@ -276,7 +277,7 @@
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 
 	dir = dirin
 	var/turf/partner = get_step(src, turn(dir, 180))

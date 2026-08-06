@@ -68,12 +68,11 @@
 
 // Check if we are accessible
 /datum/component/storage/concrete/organ/proc/is_accessible()
-	. = FALSE
 	if(bodypart_affected)
-		var/surgery_flags = bodypart_affected.get_surgery_flags()
-		return CHECK_MULTIPLE_BITFIELDS(surgery_flags, SURGERY_INCISED|SURGERY_RETRACTED)
-	else
-		return TRUE
+		var/state = bodypart_affected.return_surgical_state()
+		return state & SURGERY_SKIN_OPEN
+
+	return TRUE
 
 /datum/component/storage/concrete/organ/on_move()
 	var/atom/A = parent
@@ -119,8 +118,7 @@
 		if(user.client && user.active_storage != src)
 			user.client.screen -= storing
 		if(user.observers && length(user.observers))
-			for(var/i in user.observers)
-				var/mob/dead/observe = i
+			for(var/mob/dead/observe as anything in user.observers)
 				if(observe.client && observe.active_storage != src)
 					observe.client.screen -= storing
 		if(!remote)
@@ -343,7 +341,7 @@
 			update_insides()
 			return
 		var/mob/living/carbon/carbon_parent = parent
-		if(!carbon_parent.IsUnconscious() && (carbon_parent.get_chem_effect(CE_PAINKILLER) < 50))
+		if(!carbon_parent.IsUnconscious() && (carbon_parent.get_chem_effect(CE_PAINKILLER) < 30))
 			carbon_parent.emote("scream")
 			/*
 			if(!CHECK_BITFIELD(O.organ_flags, ORGAN_CUT_AWAY))
@@ -367,7 +365,7 @@
 	// this must come before the screen objects only block, dunno why it wasn't before
 	var/mob/living/L = M
 	var/mob/living/carbon/carbon_mob = parent
-	if(istype(L) && L.used_intent.type == INTENT_HELP)
+	if(istype(L) && istype(L.rmb_intent, /datum/rmb_intent/weak))
 		assign_bodypart(carbon_mob.get_bodypart(check_zone(L.zone_selected)))
 		if(!generated_chimeric)
 			if(istype(bodypart_affected, /obj/item/bodypart/chest))
@@ -378,7 +376,7 @@
 					new_atom.forceMove(bodypart_affected)
 					LAZYADD(bodypart_affected.cavity_items, new_atom)
 				generated_chimeric = TRUE
-	if(!istype(L) || !L.used_intent.type == INTENT_HELP || !is_accessible(L) || !bodypart_affected)
+	if(!istype(L) || !istype(L.rmb_intent, /datum/rmb_intent/weak) || !is_accessible(L) || !bodypart_affected)
 		return FALSE
 	if(isliving(over_object) && (check_zone(L.zone_selected) == check_zone(bodypart_affected?.body_zone)))
 		update_insides()

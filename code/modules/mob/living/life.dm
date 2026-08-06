@@ -1,5 +1,6 @@
 /mob/living/proc/Life(seconds, times_fired)
 	set waitfor = FALSE
+	SHOULD_NOT_SLEEP(TRUE)
 
 	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds, times_fired)
 
@@ -11,7 +12,7 @@
 		if(!T)
 			var/msg = "[ADMIN_LOOKUPFLW(src)] was found to have no .loc with an attached client, if the cause is unknown it would be wise to ask how this was accomplished."
 			message_admins(msg)
-			send2irc_adminless_only("Mob", msg, R_ADMIN)
+			INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(send2irc_adminless_only), "Mob", msg, R_ADMIN)
 			log_game("[key_name(src)] was found to have no .loc with an attached client.")
 
 		// This is a temporary error tracker to make sure we've caught everything
@@ -21,9 +22,6 @@
 #endif
 			log_game("Z-TRACKING: [src] has somehow ended up in Z-level [T.z] despite being registered in Z-level [registered_z].")
 			update_z(T.z)
-	else if (registered_z)
-		log_game("Z-TRACKING: [src] of type [src.type] has a Z-registration despite not having a client.")
-		update_z(null)
 
 	if(isnull(loc) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -31,7 +29,6 @@
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
 		//Breathing, if applicable
 		handle_temperature()
-		handle_breathing(times_fired)
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 			handle_wounds()
 			handle_embedded_objects()
@@ -49,7 +46,7 @@
 		if(!stat && HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
 			handle_wounds()
 			//passively heal wounds, but not if you're skullcracked OR DEAD.
-			if(blood_volume > BLOOD_VOLUME_SURVIVE)
+			if(!CAN_HAVE_BLOOD(src) || get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in get_wounds())
 					wound.heal_wound(wound.passive_healing * 0.25)
 
@@ -69,37 +66,11 @@
 
 	handle_typing_indicator()
 
-	if(!client && (world.time - last_island_check) > 20 SECONDS)
-		last_island_check = world.time
-		update_island_cache()
+	if (living_flags & BLOOD_UPDATE_QUEUED)
+		update_blood_effects()
 
 	if(stat != DEAD)
 		return 1
-
-/mob/living/proc/update_island_cache()
-	if(!length(SSterrain_generation.island_registry))
-		last_island_check = world.time + 3 HOURS
-		return
-	var/turf/T = get_turf(src)
-	if(!T)
-		if(cached_island_id)
-			SSisland_mobs.remove_mob(src)
-			cached_island_id = null
-		return
-
-	var/datum/island_data/island = SSterrain_generation.get_island_at_location(T)
-	var/new_island_id = island?.island_id
-
-	if(new_island_id != cached_island_id)
-		if(new_island_id)
-			SSisland_mobs.register_mob(src, new_island_id)
-		else
-			SSisland_mobs.remove_mob(src)
-			cached_island_id = null
-
-/mob/living/proc/force_island_check()
-	last_island_check = 0
-	update_island_cache()
 
 /mob/living/proc/DeadLife()
 	set invisibility = 0
@@ -118,12 +89,9 @@
 /mob/living/proc/handle_temperature()
 	return
 
-/mob/living/proc/handle_breathing(times_fired)
-	return
-
 /mob/living/proc/handle_random_events()
 	//random painstun
-	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN) || !can_feel_pain())
 		return
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return
@@ -136,12 +104,11 @@
 	if(prob(probby))
 		MOBTIMER_SET(src, MT_PAINSTUN)
 		Immobilize(10)
-		emote("painscream")
+		INVOKE_ASYNC(src, PROC_REF(emote), "painscream")
 		visible_message("<span class='warning'>[src] freezes in pain!</span>",
 					"<span class='warning'>I'm frozen in pain!</span>")
-		sleep(10)
-		Stun(110)
-		Knockdown(110)
+		addtimer(CALLBACK(src, PROC_REF(Stun), 11 SECONDS), 1 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(Knockdown), 1 SECONDS, 1 SECONDS))
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly

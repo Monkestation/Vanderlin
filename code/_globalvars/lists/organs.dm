@@ -17,11 +17,11 @@ GLOBAL_LIST_INIT(organ_process_order, list(
 	))
 
 GLOBAL_LIST_INIT(organ_process_datum_order, list(
-	ORGAN_SLOT_BRAIN,
 	ORGAN_SLOT_HEART,
 	ORGAN_SLOT_LUNGS,
 	ORGAN_SLOT_LIVER,
 	ORGAN_SLOT_STOMACH,
 	ORGAN_SLOT_SPLEEN,
 	ORGAN_SLOT_EARS,
+	ORGAN_SLOT_BRAIN, // brain fires last so other organs can set states
 	))

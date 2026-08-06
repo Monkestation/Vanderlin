@@ -2,7 +2,7 @@
 	var/covered_locations = NONE	//based on body_parts_covered
 	if(iscarbon(victim))
 		var/mob/living/carbon/carbon_victim = victim
-		for(var/obj/item/equipped_item in carbon_victim.get_equipped_items(include_pockets = FALSE))
+		for(var/obj/item/equipped_item in carbon_victim.get_equipped_items())
 			if(zone2covered(location, equipped_item.body_parts_covered) && equipped_item.surgery_cover)
 				return FALSE
 		if(ishuman(carbon_victim))
