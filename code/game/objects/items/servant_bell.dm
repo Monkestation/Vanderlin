@@ -257,6 +257,8 @@
 	max_servants = 1
 	hear_distance = 100
 	dyeable = FALSE
+	detail_tag = null
+	detail_color = null
 	var/datum/weakref/mob_ref
 
 /obj/item/servant_bell/mercenary/examine(mob/user)
