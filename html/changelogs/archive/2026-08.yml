@@ -39,3 +39,8 @@
   realforest2001:
   - bugfix: Fixes heretic triumph buy.
   - balance: Addressed some exploitable finances.
+2026-08-06:
+  MissyNym:
+  - bugfix: Bronze statues should have a sprite again.
+  - map: The soilson's ranch now has fences and borders around the watering holes
+      to keep the poor animals from walking in and drowning.
