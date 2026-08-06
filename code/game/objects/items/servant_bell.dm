@@ -65,6 +65,9 @@
 
 	var/mob/living/carbon/human/H = interacting_with
 
+	if(!H.mind)
+		return ITEM_INTERACT_BLOCKING
+
 	if(length(bound_servants) >= max_servants)
 		to_chat(user, span_warning("It can hold no more minds without relinquishing another."))
 		return ITEM_INTERACT_BLOCKING
