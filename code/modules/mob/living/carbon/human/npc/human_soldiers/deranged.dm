@@ -208,7 +208,7 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	shoes = /obj/item/clothing/shoes/boots/armor/blkknight
 	gloves = /obj/item/clothing/gloves/plate/blk
 	wrists = /obj/item/clothing/wrists/bracers
-	head = /obj/item/clothing/head/helmet/blacksteel
+	head = /obj/item/clothing/head/helmet/blacksteel/bucket
 	neck = /obj/item/clothing/neck/gorget
 	r_hand = /obj/item/weapon/sword/long/greatsword
 	mask = /obj/item/clothing/face/facemask/steel

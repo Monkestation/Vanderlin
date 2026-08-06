@@ -18,7 +18,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 	if(!owner_hud)
 		return
 	var/returned_planes = list()
-	for(var/plane as anything in controlled_planes)
+	for(var/plane in controlled_planes)
 		var/atom/movable/screen/plane_master/instance = owner_hud.plane_masters["[plane]"]
 		if(!instance)
 			stack_trace("[plane] isn't a valid plane master layer for [owner_hud.type], are you sure it exists in the first place?")

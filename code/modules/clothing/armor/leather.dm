@@ -20,7 +20,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 3.2 KILOGRAMS
+	item_weight = 1.2 KILOGRAMS
 
 	material_category = ARMOR_MAT_FABRIC
 
@@ -84,7 +84,7 @@
 	armor_type = /datum/armor/leather/good
 	body_parts_covered = COVERAGE_FULL
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 4.5 KILOGRAMS
+	item_weight = 2 KILOGRAMS
 
 /obj/item/clothing/armor/leather/hide/steppe/advanced
 	name = "hardened steppe hide armor"
@@ -114,7 +114,7 @@
 	armor_type = /datum/armor/leather/good
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 4 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 //................ Leather Vest ............... //	- has no sleeves.  - can be worn in armor OR shirt slot
 /obj/item/clothing/armor/leather/vest

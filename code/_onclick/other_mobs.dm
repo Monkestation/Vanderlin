@@ -173,7 +173,8 @@
 /// Returns true to cancel further attacks doesn't call
 /atom/proc/onbite(mob/living/user)
 	. = FALSE
-	if(!istype(user))
+	var/sig_return = SEND_SIGNAL(src, COMSIG_ATOM_BITTEN, user)
+	if(sig_return || !istype(user))
 		return TRUE
 
 /mob/living/onbite(mob/living/user)

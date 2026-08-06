@@ -12,7 +12,7 @@
 	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET
 
-	item_weight = 3.7 KILOGRAMS
+	item_weight = 3.5 KILOGRAMS
 
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
@@ -165,7 +165,7 @@
 
 	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS
-	item_weight = 4.3 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/bucket/keeper
 	name = "keeper's stone mask"
@@ -179,7 +179,7 @@
 
 /obj/item/clothing/head/helmet/heavy/bucket/gold
 	icon_state = "topfhelm_gold"
-	item_weight = 8.6 KILOGRAMS
+	item_weight = 4 KILOGRAMS
 
 //............... Frog Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/frog
@@ -482,7 +482,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_KNIGHT_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -510,7 +510,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_HOUNSKULL_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -535,7 +535,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_BUCKET_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -560,7 +560,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_GOLD_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -590,7 +590,7 @@
 		return
 	if(!picked)
 		var/list/icons = BASCINET_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice

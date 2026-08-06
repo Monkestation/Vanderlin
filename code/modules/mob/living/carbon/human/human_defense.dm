@@ -654,7 +654,7 @@
 					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 				if(WOUND_BLUNT, WOUND_LASH)
 					mechanics_result += "Bandage bruises and lashes to allow them to heal."
-				if(WOUND_BURN)
+				if(WOUND_BURN, WOUND_INTENSE_BURN)
 					mechanics_result += "Disinfect and salve burns to allow them to heal."
 				if("germs")
 					mechanics_result += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."

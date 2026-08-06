@@ -21,15 +21,15 @@
 		return
 
 	var/datum/repeatable_crafting_recipe/crafter = new recipe
-	for(var/path as anything in crafter.requirements)
+	for(var/path in crafter.requirements)
 		for(var/i = 1 to crafter.requirements[path])
 			new path(get_turf(starter))
 
-	for(var/reagent as anything in crafter.reagent_requirements)
+	for(var/reagent in crafter.reagent_requirements)
 		var/obj/item/reagent_containers/glass/bottle/bottle = new(get_turf(starter))
 		bottle.reagents.add_reagent(reagent, crafter.reagent_requirements[reagent])
 
-	for(var/tool as anything in crafter.tool_usage)
+	for(var/tool in crafter.tool_usage)
 		new tool(get_turf(starter))
 
 	if(crafter.required_table)

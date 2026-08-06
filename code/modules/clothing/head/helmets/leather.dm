@@ -121,10 +121,6 @@
 	var/brightness_on = 6
 	var/on = FALSE
 
-/obj/item/clothing/head/helmet/leather/minershelm/Initialize(mapload, ...)
-	AddElement(/datum/element/update_icon_updates_onmob)
-	return ..()
-
 /obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, list/modifiers)
 	toggle_helmet_light(user)
 

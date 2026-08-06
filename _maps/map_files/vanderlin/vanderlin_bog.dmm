@@ -5908,7 +5908,7 @@
 /obj/item/clothing/head/crown/circlet/sleepless,
 /obj/item/clothing/neck/mana_star,
 /obj/structure/carpet/blue,
-/obj/item/weapon/polearm/woodstaff/naledi,
+/obj/item/weapon/polearm/woodstaff/psydonian,
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
@@ -17494,10 +17494,10 @@
 /obj/item/ingot/gold,
 /obj/item/clothing/ring/silver/noc,
 /obj/item/weapon/shield/tower/metal/psy,
-/obj/item/clothing/armor/plate/full/holysee,
-/obj/item/clothing/pants/platelegs/holysee,
-/obj/item/clothing/head/helmet/heavy/holysee,
-/obj/item/clothing/cloak/holysee,
+/obj/item/clothing/armor/plate/full/grandmaster,
+/obj/item/clothing/pants/platelegs/grandmaster,
+/obj/item/clothing/head/helmet/heavy/grandmaster,
+/obj/item/clothing/cloak/grandmaster,
 /obj/item/clothing/cloak/templar/undivided,
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
@@ -22155,7 +22155,7 @@
 /area/outdoors/bog/north)
 "vsS" = (
 /obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/clothing/face/lordmask/naledi,
+/obj/item/clothing/face/lordmask/preceptor,
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
 "vtP" = (

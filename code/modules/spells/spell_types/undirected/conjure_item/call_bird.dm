@@ -188,7 +188,7 @@
 			return ITEM_INTERACT_BLOCKING
 		to_chat(user, span_notice("You attach your note to the messenger bird."))
 		var/noble_info = "[user.key]/([user.real_name]) ([user.job])"
-		var/dest = input(user, "Where would you like the bird to go?", "Destination")  as anything in spell.destinations
+		var/dest = tgui_input_list(user, "Where would you like the bird to go?", "Destination", spell.destinations)
 
 		if(dest == "Cancel")
 			to_chat(user, span_notice("You decide not to send the bird anywhere."))

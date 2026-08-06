@@ -114,10 +114,9 @@
 	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST + 220
-	minstr = 10
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.75
+
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
 	item_weight = 3 KILOGRAMS
@@ -238,7 +237,6 @@
 	slot_flags = ITEM_SLOT_BACK
 	SET_BASE_PIXEL(-16, -16)
 	bigboy = TRUE
-	dropshrink = 0.75
 	fire_sound = 'sound/combat/Ranged/turbulentafire.ogg'
 	possible_item_intents = list(/datum/intent/shoot/bow/turbulenta, /datum/intent/arc/bow/turbulenta)
 	force = 12

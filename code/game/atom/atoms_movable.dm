@@ -47,7 +47,6 @@
 	  */
 	var/movement_type = GROUND
 	var/atom/movable/pulling
-	var/atom_flags = NONE
 	var/grab_state = 0
 	var/throwforce = 0
 	var/datum/component/orbiter/orbiting
@@ -82,6 +81,10 @@
 	color = EM_BLOCK_COLOR
 
 /atom/movable/Initialize(mapload)
+	var/atom/movable/stupid_type = type
+	if(IS_ABSTRACT(stupid_type))
+		stack_trace("Abstract type ([type]) initialised at [AREACOORD(src)]!")
+
 	. = ..()
 
 #if EMISSIVE_BLOCK_GENERIC != 0

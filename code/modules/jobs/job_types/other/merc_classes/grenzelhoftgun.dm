@@ -1,7 +1,7 @@
 /datum/attribute_holder/sheet/job/grenzelhoftgun
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 2, //use musket from a range!
-        STAT_SPEED = -2, // fuck you no running!
+		STAT_SPEED = -2, // fuck you no running!
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/bombs = 10,
-    )
+	)
 /datum/job/advclass/mercenary/grenzelhoftgun
 	title = "Grenzelhoft Arkebusier"
 	tutorial = "A Grenzelhoft Arkebusier, they specialize in blackpowder weaponry, usually seen armed with muskets. Although more frail then other mercenaries, they make up for it with the incredible strength of their equipment."

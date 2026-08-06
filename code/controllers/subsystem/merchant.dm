@@ -449,10 +449,9 @@ SUBSYSTEM_DEF(merchant)
 	delivery_chest.name = "[LOWER_TEXT(category)] delivery chest"
 	register_lift_cargo(delivery_chest)
 	var/manifest_contents = "<h2>[category] Supply Division</h2><hr><b>Contained Cargo Manifest:</b><ul>"
-	for(var/item_type in items_to_pack)
-		var/atom/movable/item = item_type
-		if(ispath(item_type))
-			item = new item_type(delivery_chest)
+	for(var/atom/movable/item as anything in items_to_pack)
+		if(ispath(item))
+			item = new item(delivery_chest)
 		else
 			item.forceMove(delivery_chest)
 		if(isitem(item))
