@@ -21819,8 +21819,8 @@
 /area/under/cavewet)
 "npb" = (
 /obj/item/clothing/neck/talkstone,
-/obj/item/clothing/ring/courtagent_ring,
-/obj/item/clothing/ring/courtagent_ring,
+/obj/item/clothing/ring/courtagent_ring/silver,
+/obj/item/clothing/ring/courtagent_ring/silver,
 /obj/structure/closet/crate/chest,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/courtagent)
