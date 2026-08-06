@@ -64,8 +64,6 @@
 		return ITEM_INTERACT_BLOCKING
 
 	var/mob/living/carbon/human/H = interacting_with
-	if(!H.mind)
-		return ITEM_INTERACT_BLOCKING
 
 	if(length(bound_servants) >= max_servants)
 		to_chat(user, span_warning("It can hold no more minds without relinquishing another."))
@@ -243,3 +241,51 @@
 	name = "Servant Bell"
 	desc = "I've been summoned by the bell."
 	icon_state = "servant_bell"
+
+/// Mercenary Ring
+/obj/item/servant_bell/mercenary
+	job_targets = list(/datum/job/advclass/mercenary)
+	name = "mercenary ring"
+	desc = "A beautiful golden ring, which resonates in a mercenary's mind when twisted. Usually given to their employers as a way of communication. Only a mercenary may bind themselves to such ring."
+	icon = 'icons/roguetown/clothing/rings.dmi'
+	icon_state = "g_newring_topaz"
+	slot_flags = ITEM_SLOT_RING
+	sellprice = 1
+	max_servants = 1
+	hear_distance = 100
+	var/datum/weakref/mob_ref
+
+/obj/item/servant_bell/mercenary/examine(mob/user)
+	. = ..()
+	. -= span_notice("Use on a commoner to bind their mind to the bell.")
+	. -= span_notice("Right click with an open hand to relinquish servants.")
+
+/obj/item/servant_bell/mercenary/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ishuman(interacting_with))
+		return
+	var/mob/living/carbon/human/H = interacting_with
+	if(!(user == H))
+		to_chat(user, span_warning("I can only bind myself to the ring"))
+		return
+	if(!is_mercenary_job(user.mind.assigned_role))
+		to_chat(user, span_warning("I am not a mercenary, the ring does not answer to me."))
+		return
+
+	add_servant(H)
+
+/obj/item/servant_bell/mercenary/attack_hand_secondary(mob/user, list/modifiers)
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(!user.client)
+		return
+	to_chat(user, span_warning("The bond is permanent, the ring can never be made to relinquish its mercenary."))
+
+/obj/item/servant_bell/mercenary/Initialize(mapload)
+	. = ..()
+	bound_servants = list()
+
+/obj/item/servant_bell/mercenary/on_new_jobber(source, datum/job/job, mob/living/spawned, client/player_client)
+	return
+
+/obj/item/servant_bell/mercenary/proc/link_mob(mob/living/carbon/human/H)
+    mob_ref = WEAKREF(H)
+
