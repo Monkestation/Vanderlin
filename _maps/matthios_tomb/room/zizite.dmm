@@ -23,6 +23,12 @@
 /obj/item/alch/sinew,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
+"bk" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "bG" = (
 /obj/item/clothing/cloak/stabard/templar/noc{
 	pixel_y = -13;
@@ -175,13 +181,13 @@
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
+"jR" = (
+/obj/structure/fluff/railing/border,
+/turf/open/openspace,
+/area/under/tomb)
 "kr" = (
 /turf/open/openspace,
 /area/under/tomb/indoors/church)
-"kM" = (
-/obj/effect/dungeon_directional_helper/west,
-/turf/open/openspace,
-/area/under/tomb)
 "ld" = (
 /turf/closed/wall/mineral/decostone/long,
 /area/under/tomb/indoors/church)
@@ -244,9 +250,9 @@
 "ok" = (
 /turf/closed/wall/window/stained/red,
 /area/under/tomb/indoors/church)
-"oP" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 4
+"oS" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
 	},
 /turf/open/openspace,
 /area/under/tomb)
@@ -317,6 +323,12 @@
 	dir = 1
 	},
 /area/under/tomb/indoors/church)
+"st" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "sB" = (
 /obj/item/clothing/shirt/robe/necromancer{
 	pixel_y = 2;
@@ -499,6 +511,12 @@
 /obj/item/coin/gold/pile,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
+"Cc" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb)
 "Cl" = (
 /mob/living/carbon/human/species/skeleton/npc/hard,
 /turf/open/floor/carpet/lord/corner{
@@ -655,6 +673,12 @@
 	},
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
+"OF" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 8
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb)
 "Pe" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/carpet/lord/center,
@@ -866,11 +890,11 @@ Hw
 Hw
 Hw
 Hw
-JG
+Hw
 JG
 GT
 JG
-JG
+Hw
 Hw
 Hw
 Hw
@@ -891,13 +915,13 @@ sS
 sS
 sS
 sS
+sS
+JG
+OF
 JG
 JG
 JG
-JG
-JG
-JG
-JG
+OF
 JG
 sS
 sS
@@ -919,13 +943,13 @@ sS
 sS
 sS
 sS
-sS
 JG
 JG
 JG
-sS
-sS
-sS
+JG
+JG
+JG
+JG
 sS
 sS
 sS
@@ -950,7 +974,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -977,7 +1001,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1004,7 +1028,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1031,7 +1055,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1058,7 +1082,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1085,7 +1109,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1301,7 +1325,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1328,7 +1352,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1355,7 +1379,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1382,7 +1406,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1409,7 +1433,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1436,7 +1460,7 @@ sS
 JG
 JG
 JG
-sS
+JG
 sS
 sS
 sS
@@ -1459,13 +1483,13 @@ sS
 sS
 sS
 sS
-sS
 JG
 JG
 JG
-sS
-sS
-sS
+JG
+JG
+JG
+JG
 sS
 sS
 sS
@@ -1485,13 +1509,13 @@ sS
 sS
 sS
 sS
+sS
+JG
+Cc
 JG
 JG
 JG
-JG
-JG
-JG
-JG
+Cc
 JG
 sS
 sS
@@ -1514,11 +1538,11 @@ Hw
 Hw
 Hw
 Hw
-JG
+Hw
 JG
 xn
 JG
-JG
+Hw
 Hw
 Hw
 Hw
@@ -1542,11 +1566,11 @@ Hw
 Hw
 Hw
 Hw
-wk
-wk
-kM
-wk
-wk
+OF
+JG
+GT
+JG
+OF
 Hw
 Hw
 Hw
@@ -1568,13 +1592,13 @@ wk
 wk
 wk
 wk
+jR
 wk
+oS
+oS
+oS
 wk
-wk
-wk
-wk
-wk
-wk
+st
 wk
 wk
 wk
@@ -2162,13 +2186,13 @@ wk
 wk
 wk
 wk
+jR
 wk
+bk
+bk
+bk
 wk
-wk
-wk
-wk
-wk
-wk
+st
 wk
 wk
 wk
@@ -2190,11 +2214,11 @@ Hw
 Hw
 Hw
 Hw
-wk
-wk
-oP
-wk
-wk
+Cc
+JG
+xn
+JG
+Cc
 Hw
 Hw
 Hw
