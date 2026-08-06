@@ -105,6 +105,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/list/owned_tickets = list() // list of /datum/ticket subtypes
 	var/list/ticket_history = list() // list of assoc lists
 
+	/// job.title -> list("title" = chosen_value, "honorary" = chosen_value)
+	var/list/alt_job_selections = list()
+
 	///this exists since we use a savefile, basically lets us cache access to the values from our datums to let us use singletons
 	var/list/preference_cache = list()
 
@@ -450,26 +453,26 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	<div class="sprite loadout-bg"></div>
 	<div class="sprite triumphs-bg"></div>
 	<div class="sprite headshot-bg" style="padding: 3px; box-sizing: border-box;">
-		<a href='?_src_=prefs;preference=headshot_link;task=input' style="display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=headshot_link;task=input' style="display: block; width: 100%; height: 100%;">
 			<img id="headshot-img" src="[read_preference(/datum/preference/text/headshot_link) || ""]"
-				 style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; image-rendering: auto;"
-				 onerror="this.style.display='none';">
+				style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; image-rendering: auto;"
+				onerror="this.style.display='none';">
 		</a>
 	</div>
 	<div class="sprite ooc-bg"></div>
 
 	<div class="sprite" style="top:26px; left:23px; width:92px; height:9px; background-image: url('header_charname.png');">
-		<a href='?_src_=prefs;preference=real_name;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=real_name;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-name" class="clickable-text auto-shrink" style="width:92px; height:9px;">[read_preference(/datum/preference/text/real_name)]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:11px; left:122px; width:46px; height:9px; background-image: url('header_class.png');">
-		<a href='?_src_=prefs;preference=job;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=job;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-job" class="clickable-text auto-shrink" style="width:46px; height:9px;">[high_job || "None"]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:11px; left:172px; width:42px; height:9px; background-image: url('header_faith.png');">
-		<a href='?_src_=prefs;preference=faith;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=faith;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-faith" class="clickable-text auto-shrink" style="width:42px; height:9px;">[selected_faith?.name || ""]</div>
 		</a>
 	</div>
@@ -477,113 +480,113 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		<div id="char-ckey" class="clickable-text" style="width:31px; height:9px; cursor: default;">[user.ckey]</div>
 	</div>
 	<div class="sprite" style="top:30px; left:122px; width:46px; height:9px; background-image: url('header_species.png');">
-		<a href='?_src_=prefs;preference=species;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=species;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-species" class="clickable-text auto-shrink" style="width:46px; height:9px;">[pref_species.name]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:30px; left:172px; width:42px; height:9px; background-image: url('header_patron.png');">
-		<a href='?_src_=prefs;preference=selected_patron;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=selected_patron;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-patron" class="clickable-text auto-shrink" style="width:42px; height:9px;">[pref_patron.name]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:30px; left:220px; width:31px; height:9px; background-image: url('header_pq.png');">
-		<a href='?_src_=prefs;preference=playerquality;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=playerquality;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-pq" class="clickable-text auto-shrink" style="width:31px; height:9px;">[get_playerquality(user.ckey, text = TRUE)]</div>
 		</a>
 	</div>
 
 	<div class="sprite" style="top:70px; left:118px; width:46px; height:9px; background-image: url('body_age.png');">
-		<a href='?_src_=prefs;preference=age;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=age;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-age" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/age)]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:70px; left:168px; width:53px; height:9px; background-image: url('body_flaw.png');">
-		<a href='?_src_=prefs;task=select_quirks' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;task=select_quirks' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div class="clickable-text auto-shrink" style="width:53px; height:9px;">Select Quirks</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:89px; left:119px; width:46px; height:9px; background-image: url('body_dominanthand.png');">
-		<a href='?_src_=prefs;preference=domhand' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=domhand' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-domhand" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/domhand) == 1 ? "Left" : "Right"]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:89px; left:168px; width:53px; height:9px; background-image: url('body_ancestry.png');">
-		<a href='?_src_=prefs;preference=skin_tone;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=skin_tone;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div class="clickable-text auto-shrink" style="width:53px; height:9px;">Change</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:108px; left:119px; width:46px; height:9px; background-image: url('body_pronouns.png');">
-		<a href='?_src_=prefs;preference=pronouns;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=pronouns;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-pronouns" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/pronouns)]</div>
 		</a>
 	</div>
-	<a href='?_src_=prefs;preference=gender'><div class="sprite" style="top:108px; left:169px; width:53px; height:9px; background-image: url('body_bodytype.png');">
+	<a href='byond://?_src_=prefs;preference=gender'><div class="sprite" style="top:108px; left:169px; width:53px; height:9px; background-image: url('body_bodytype.png');">
 		<div id="char-gender" class="clickable-text auto-shrink" style="width:53px; height:9px;">[read_preference(/datum/preference/choiced/gender) == MALE ? "M" : "F"]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:150px; left:120px; width:73px; height:9px; background-image: url('family_type.png');">
+	<a href='byond://?_src_=prefs;preference=family'><div class="sprite" style="top:150px; left:120px; width:73px; height:9px; background-image: url('family_type.png');">
 		<div id="char-family" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/family_mode) ? read_preference(/datum/preference/choiced/family_mode) : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
+	<a href='byond://?_src_=prefs;preference=family'><div class="sprite" style="top:169px; left:120px; width:73px; height:9px; background-image: url('gender_pref.png');">
 		<div id="char-genderpref" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/choiced/gender_choice) ? read_preference(/datum/preference/choiced/gender_choice) : "Any"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=family'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
+	<a href='byond://?_src_=prefs;preference=family'><div class="sprite" style="top:188px; left:120px; width:73px; height:9px; background-image: url('spouse_pref.png');">
 		<div id="char-spouse" class="clickable-text auto-shrink" style="width:73px; height:9px;">[read_preference(/datum/preference/text/setspouse) ? read_preference(/datum/preference/text/setspouse) : "None"]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
+	<a href='byond://?_src_=prefs;preference=culture;task=input'><div class="sprite" style="top:150px; left:207px; width:51px; height:9px; background-image: url('flavour_culture.png');">
 		<div id="char-culture" class="clickable-text auto-shrink" style="width:51px; height:9px;">[pref_culture ? pref_culture::name : "None"]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=voice_type;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">
+	<a href='byond://?_src_=prefs;preference=voice_type;task=input'><div class="sprite" style="top:154px; left:10px; width:46px; height:9px; background-image: url('voice_type.png');">
 		<div id="char-voicetype" class="clickable-text auto-shrink" style="width:46px; height:9px;">[read_preference(/datum/preference/choiced/voice_type)]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=selected_accent;task=input'><div class="sprite" style="top:154px; left:60px; width:42px; height:9px; background-image: url('voice_accent.png');">
+	<a href='byond://?_src_=prefs;preference=selected_accent;task=input'><div class="sprite" style="top:154px; left:60px; width:42px; height:9px; background-image: url('voice_accent.png');">
 		<div id="char-accent" class="clickable-text auto-shrink" style="width:42px; height:9px;">[read_preference(/datum/preference/choiced/selected_accent)]</div>
 	</div></a>
 
-	<a href='?_src_=prefs;preference=loadout_item;loadout_number=1;task=loadout_store'><div class="sprite" style="top:194px; left:10px; width:51px; height:9px; background-image: url('loadout_item1.png');">
+	<a href='byond://?_src_=prefs;preference=loadout_item;loadout_number=1;task=loadout_store'><div class="sprite" style="top:194px; left:10px; width:51px; height:9px; background-image: url('loadout_item1.png');">
 		<div id="char-loadout1" class="clickable-text auto-shrink" style="width:51px; height:9px;">[loadout1_item ? loadout1_item.name : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=loadout_item;loadout_number=2;task=loadout_store'><div class="sprite" style="top:213px; left:10px; width:51px; height:9px; background-image: url('loadout_item2.png');">
+	<a href='byond://?_src_=prefs;preference=loadout_item;loadout_number=2;task=loadout_store'><div class="sprite" style="top:213px; left:10px; width:51px; height:9px; background-image: url('loadout_item2.png');">
 		<div id="char-loadout2" class="clickable-text auto-shrink" style="width:51px; height:9px;">[loadout2_item ? loadout2_item.name : "None"]</div>
 	</div></a>
-	<a href='?_src_=prefs;preference=loadout_item;loadout_number=3;task=loadout_store'><div class="sprite" style="top:232px; left:10px; width:51px; height:9px; background-image: url('loadout_item3.png');">
+	<a href='byond://?_src_=prefs;preference=loadout_item;loadout_number=3;task=loadout_store'><div class="sprite" style="top:232px; left:10px; width:51px; height:9px; background-image: url('loadout_item3.png');">
 		<div id="char-loadout3" class="clickable-text auto-shrink" style="width:51px; height:9px;">[loadout3_item ? loadout3_item.name : "None"]</div>
 	</div></a>
 
 	<div class="sprite" style="top:195px; left:82px; width:22px; height:7px; background-image: url('triumphs_display.png');">
-		<a href='?_src_=prefs;preference=triumphs;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=triumphs;task=menu' style="text-decoration: none; display: block; width: 100%; height: 100%;">
 			<div id="char-triumphs" class="clickable-text" style="width:22px; height:7px; font-size: 5px;">[user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "0"]</div>
 		</a>
 	</div>
 
-	<a href='?_src_=prefs;preference=triumph_buy_menu'><div class="sprite tri-shop"></div></a>
-	<a href='?_src_=prefs;preference=descriptors;task=menu'><div class="sprite flav-desc"></div></a>
-	<a href='?_src_=prefs;preference=flavortext;task=input'><div class="sprite flav-text"></div></a>
-	<a href='?_src_=prefs;preference=culinary;task=menu'><div class="sprite flav-food"></div></a>
-	<a href='?_src_=prefs;preference=ooc_preview;task=ooc_preview'><div class="sprite flav-prev"></div></a>
-	<a href='?_src_=prefs;preference=ooc_notes;task=input'><div class="sprite ooc-notes"></div></a>
-	<a href='?_src_=prefs;preference=ooc_extra;task=input'><div class="sprite ooc-extra"></div></a>
-	<a href='?_src_=prefs;preference=antag;task=menu'><div class="sprite btn-roles"></div></a>
-	<a href='?_src_=prefs;preference=customizers;task=menu'><div class="sprite f-btn"></div></a>
-	<a href='?_src_=prefs;preference=randomiseappearanceprefs;'><div class="sprite f-random"></div></a>
+	<a href='byond://?_src_=prefs;preference=triumph_buy_menu'><div class="sprite tri-shop"></div></a>
+	<a href='byond://?_src_=prefs;preference=descriptors;task=menu'><div class="sprite flav-desc"></div></a>
+	<a href='byond://?_src_=prefs;preference=flavortext;task=input'><div class="sprite flav-text"></div></a>
+	<a href='byond://?_src_=prefs;preference=culinary;task=menu'><div class="sprite flav-food"></div></a>
+	<a href='byond://?_src_=prefs;preference=ooc_preview;task=ooc_preview'><div class="sprite flav-prev"></div></a>
+	<a href='byond://?_src_=prefs;preference=ooc_notes;task=input'><div class="sprite ooc-notes"></div></a>
+	<a href='byond://?_src_=prefs;preference=ooc_extra;task=input'><div class="sprite ooc-extra"></div></a>
+	<a href='byond://?_src_=prefs;preference=antag;task=menu'><div class="sprite btn-roles"></div></a>
+	<a href='byond://?_src_=prefs;preference=customizers;task=menu'><div class="sprite f-btn"></div></a>
+	<a href='byond://?_src_=prefs;task=randomiseappearanceprefs;'><div class="sprite f-random"></div></a>
 
 	<div class="sprite features-bg"><div id="silhouette" class="sprite" style="background-image: url('features_bodytype_[read_preference(/datum/preference/choiced/gender) == MALE ? "m" : "f"].png');"></div></div>
 
 	<div class="sprite v-color-box">
-		<a href='?_src_=prefs;preference=voice_color;task=input' style="display: block; width: 100%; height: 100%;">
+		<a href='byond://?_src_=prefs;preference=voice_color;task=input' style="display: block; width: 100%; height: 100%;">
 			<div id="voice-blob" class="sprite v-blob" style="background-color: [read_preference(/datum/preference/color/voice_color)];"></div>
 		</a>
 	</div>
-	<a href='?_src_=prefs;task=loadout_store'><div id="bespecial" class="sprite [next_special_trait ? "yes" : ""]"></div></a>
-	<a href='?_src_=prefs;preference=multi;task=menu'><div class="sprite menu-ready"></div></a>
-	<a href='?_src_=prefs;task=changeslot;'><div class="sprite menu-change"></div></a>
-	<a href='?_src_=prefs;preference=keybinds;task=menu'><div class="sprite menu-keybinds"></div></a>
-	<a href='?_src_=prefs;preference=toggles'><div class="sprite menu-toggles"></div></a>
-	<a href='?_src_=prefs;task=save'><div class="sprite menu-save"></div></a>
-	<a href='?_src_=prefs;task=load'><div class="sprite menu-undo"></div></a>
-	<a href='?_src_=prefs;task=finished'><div class="sprite menu-done"></div></a>
+	<a href='byond://?_src_=prefs;task=loadout_store'><div id="bespecial" class="sprite [next_special_trait ? "yes" : ""]"></div></a>
+	<a href='byond://?_src_=prefs;preference=multi;task=menu'><div class="sprite menu-ready"></div></a>
+	<a href='byond://?_src_=prefs;task=changeslot;'><div class="sprite menu-change"></div></a>
+	<a href='byond://?_src_=prefs;preference=keybinds;task=menu'><div class="sprite menu-keybinds"></div></a>
+	<a href='byond://?_src_=prefs;preference=toggles'><div class="sprite menu-toggles"></div></a>
+	<a href='byond://?_src_=prefs;task=save'><div class="sprite menu-save"></div></a>
+	<a href='byond://?_src_=prefs;task=load'><div class="sprite menu-undo"></div></a>
+	<a href='byond://?_src_=prefs;task=finished'><div class="sprite menu-done"></div></a>
 </div>
 </body>
 </html>
@@ -672,12 +675,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	update_preview_icon()
 
 /datum/preferences/proc/_get_loadout_slot(slot)
-    if(length(equipped_loadout) >= slot)
-        return equipped_loadout[slot]
-    var/rent_idx = slot - length(equipped_loadout)
-    if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
-        return single_round_loadout[rent_idx]
-    return null
+	if(length(equipped_loadout) >= slot)
+		return equipped_loadout[slot]
+	var/rent_idx = slot - length(equipped_loadout)
+	if(rent_idx >= 1 && rent_idx <= length(single_round_loadout))
+		return single_round_loadout[rent_idx]
+	return null
 
 /datum/preferences/proc/set_ui_theme(new_theme)
 	if(new_theme in list("dusty", "grimshart", "paper", "parchment"))
@@ -688,364 +691,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
 
-/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list(JOB_GUARD_CAPTAIN, JOB_PRIEST, JOB_MERCHANT, JOB_BUTLER, "Village Elder"), widthPerColumn = 400, height = 620)
-	if(!SSjob)
-		return
-
-	var/HTML = "<center>"
-	if(!length(SSjob.joinable_occupations))
-		HTML += "<center><a href='?_src_=prefs;preference=job;task=close'>Done</a></center><br>"
-	else
-		HTML += "<center><a href='?_src_=prefs;preference=job;task=close'>Done</a></center><br>"
-		if(read_preference(/datum/preference/choiced/joblessrole) != RETURNTOLOBBY && read_preference(/datum/preference/choiced/joblessrole) != BERANDOMJOB)
-			write_preference(/datum/preference/choiced/joblessrole, RETURNTOLOBBY)
-		HTML += "<b>If Role Unavailable:</b><font color='purple'><a href='?_src_=prefs;preference=job;task=nojob'>[read_preference(/datum/preference/choiced/joblessrole)]</a></font><BR>"
-		HTML += "<script type='text/javascript'>function setJobPrefRedirect(level, rank) { window.location.href='?_src_=prefs;preference=job;task=setJobLevel;level=' + level + ';text=' + encodeURIComponent(rank); return false; }</script>"
-		HTML += {"
-			<script type='text/javascript'>
-				function update_job_preference() {
-					var data = {};
-					for(var i = 0; i < arguments.length; i++) {
-						var arg = arguments\[i\];
-						if(typeof arg === 'string' && arg.indexOf('=') !== -1) {
-							var parts = arg.split('=');
-							var key = parts\[0\];
-							var value = decodeURIComponent(parts.slice(1).join('='));
-							data\[key\] = value;
-						}
-					}
-
-					if(!data.jobTitle || data.prefLevel === undefined) return;
-
-					var jobId = data.jobTitle.replace(/ /g, '_');
-					var prefLink = document.getElementById('job-pref-' + jobId);
-
-					if(prefLink) {
-						var level = parseInt(data.prefLevel);
-						// level values: 1=High, 2=Medium, 3=Low, 4=NEVER
-						var config = {
-							1: { label: 'High', color: 'slateblue', upper: 4, lower: 2 },
-							2: { label: 'Medium', color: 'green', upper: 1, lower: 3 },
-							3: { label: 'Low', color: 'orange', upper: 2, lower: 4 },
-							4: { label: 'NEVER', color: 'red', upper: 3, lower: 1 }
-						};
-
-						if(config\[level\]) {
-							var cfg = config\[level\];
-							var jobTitle = data.jobTitle;
-
-							prefLink.innerHTML = '<font color=' + cfg.color + '>' + cfg.label + '</font>';
-							prefLink.href = '?_src_=prefs;preference=job;task=setJobLevel;level=' + cfg.upper + ';text=' + jobTitle;
-							prefLink.setAttribute('oncontextmenu', 'javascript:return setJobPrefRedirect(' + cfg.lower + ', "' + jobTitle + '");');
-						}
-					}
-				}
-
-
-				function toggleCategory(categoryName) {
-					var fieldset = document.getElementById('fieldset-' + categoryName);
-					var content = document.getElementById('content-' + categoryName);
-					if(content.style.display === 'none') {
-						content.style.display = 'block';
-						fieldset.setAttribute('data-collapsed', 'false');
-					} else {
-						content.style.display = 'none';
-						fieldset.setAttribute('data-collapsed', 'true');
-					}
-				}
-			</script>
-			<style>
-				.two-column-container {
-					display: flex;
-					justify-content: center;
-					gap: 20px;
-					max-width: 1000px;
-					margin: 0 auto;
-				}
-
-				.column {
-					display: flex;
-					flex-direction: column;
-					gap: 10px;
-					width: 450px;
-				}
-
-				.job-category-box {
-					width: 100%;
-					border: 2px solid;
-					margin: 0;
-					box-sizing: border-box;
-				}
-
-				.job-category-box table {
-					width: 100%;
-				}
-
-				fieldset\[data-collapsed="true"\] legend::after {
-					content: " (Expand)";
-				}
-				fieldset\[data-collapsed="false"\] legend::after {
-					content: " (Collapse)";
-				}
-
-				.tutorialhover {
-					position: relative;
-					display: inline-block;
-				}
-				.tutorialhover .tutorial {
-					visibility: hidden;
-					width: 280px;
-					background-color: black;
-					color: #e3c06f;
-					text-align: center;
-					border-radius: 6px;
-					padding: 5px;
-					position: absolute;
-					z-index: 1000;
-					left: 50%;
-					transform: translateX(-50%);
-					bottom: 100%;
-					margin-bottom: 5px;
-				}
-				.tutorialhover:hover .tutorial {
-					visibility: visible;
-				}
-			</style>
-		"}
-
-		var/race_ban = FALSE
-		if(is_race_banned(user.ckey, user.client.prefs.pref_species.id))
-			HTML += "<div style='color: red; text-align: center; padding: 10px;'>YOU ARE BANNED FROM PLAYING THE SPECIES: [user.client.prefs.pref_species.id]</div>"
-			race_ban = TRUE
-
-		if(!race_ban)
-			var/left_column_html = ""
-			var/right_column_html = ""
-
-			var/list/omegalist = list(
-				GLOB.noble_courthand_positions,
-				GLOB.garrison_positions,
-				GLOB.gallowband_positions,
-				GLOB.church_positions,
-				GLOB.peasant_positions,
-				GLOB.apprentices_positions,
-				GLOB.serf_positions,
-				GLOB.company_positions,
-				GLOB.youngfolk_positions,
-				GLOB.allmig_positions,
-				GLOB.inquisition_positions,
-			)
-
-			var/category_index = 0
-			for(var/list/category in omegalist)
-				if(!SSjob.name_occupations[category[1]])
-					continue
-
-				var/list/available_jobs = list()
-				for(var/job in category)
-					var/datum/job/job_datum = SSjob.name_occupations[job]
-					if(!job_datum)
-						continue
-					if(!job_datum.total_positions && !job_datum.spawn_positions)
-						continue
-					if(!job_datum.enabled)
-						continue
-					if(job_datum.spawn_positions <= 0)
-						continue
-					available_jobs += job_datum
-
-				if(!length(available_jobs))
-					continue
-
-				var/datum/job/first_job = SSjob.name_occupations[category[1]]
-				var/cat_color = first_job.selection_color
-				var/cat_name = ""
-				switch(first_job.department_flag)
-					if(NOBLEMEN)
-						cat_name = "Nobles"
-					if(GARRISON)
-						cat_name = "Garrison"
-					if(GALLOWBAND)
-						cat_name = "Gallowband"
-					if(SERFS)
-						cat_name = "Yeomanry"
-					if(CHURCHMEN)
-						cat_name = "Churchmen"
-					if(COMPANY)
-						cat_name = "Company"
-					if(PEASANTS)
-						cat_name = "Peasantry"
-					if(APPRENTICES)
-						cat_name = "Apprentices"
-					if(YOUNGFOLK)
-						cat_name = "Young Folk"
-					if(OUTSIDERS)
-						cat_name = "Outsiders"
-					if(INQUISITION)
-						cat_name = "Inquisition"
-
-				var/category_html = ""
-				category_html += "<fieldset class='job-category-box' style='border-color: [cat_color];' id='fieldset-[cat_name]' data-collapsed='true'>"
-				category_html += "<legend align='center' style='font-weight: bold; color: [cat_color]; cursor: pointer;' onclick='toggleCategory(\"[cat_name]\")'>[cat_name]</legend>"
-				category_html += "<div id='content-[cat_name]' style='display: none;'>"
-				category_html += "<table cellpadding='1' cellspacing='0'>"
-
-				for(var/datum/job/job in available_jobs)
-					var/rank = job.title
-					var/used_name = (read_preference(/datum/preference/choiced/pronouns) == SHE_HER && job.f_title) ? job.f_title : job.title
-					var/job_id = replacetext(rank, " ", "_")
-
-					category_html += "<tr bgcolor='#000000'><td width='60%' align='right'>"
-
-					if(is_role_banned(user.ckey, job.title))
-						category_html += "[used_name]</td><td><a href='?_src_=prefs;bancheck=[rank]'> BANNED</a></td></tr>"
-						continue
-					if(!job.player_old_enough(user.client))
-						var/available_in_days = job.available_in_days(user.client)
-						category_html += "[used_name]</td><td><font color=red> \[IN [(available_in_days)] DAYS\]</font></td></tr>"
-						continue
-					var/lock_html = get_job_lock_html(job, user, used_name)
-					if(lock_html)
-						category_html += lock_html
-						continue
-
-					category_html += "<div class='tutorialhover'>[used_name]"
-					category_html += "<span class='tutorial'>[job.tutorial]<br>Slots: [job.get_total_positions()]</span>"
-					category_html += "</div>"
-
-					category_html += "</td><td width='40%'>"
-
-					var/prefLevelLabel = "ERROR"
-					var/prefLevelColor = "pink"
-					var/prefUpperLevel = -1 // level to assign on left click
-					var/prefLowerLevel = -1 // level to assign on right click
-
-					switch(job_preferences[job.title])
-						if(JP_HIGH)
-							prefLevelLabel = "High"
-							prefLevelColor = "slateblue"
-							prefUpperLevel = 4
-							prefLowerLevel = 2
-						if(JP_MEDIUM)
-							prefLevelLabel = "Medium"
-							prefLevelColor = "green"
-							prefUpperLevel = 1
-							prefLowerLevel = 3
-						if(JP_LOW)
-							prefLevelLabel = "Low"
-							prefLevelColor = "orange"
-							prefUpperLevel = 2
-							prefLowerLevel = 4
-						else
-							prefLevelLabel = "NEVER"
-							prefLevelColor = "red"
-							prefUpperLevel = 3
-							prefLowerLevel = 1
-
-					category_html += "<a class='white' id='job-pref-[job_id]' href='?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank]\");'>"
-					category_html += "<font color=[prefLevelColor]>[prefLevelLabel]</font>"
-					category_html += "</a></td></tr>"
-
-				category_html += "</table></div></fieldset>"
-
-				if(category_index % 2 == 0)
-					left_column_html += category_html
-				else
-					right_column_html += category_html
-				category_index++
-
-			HTML += "<div class='two-column-container'>"
-			HTML += "<div class='column'>[left_column_html]</div>"
-			HTML += "<div class='column'>[right_column_html]</div>"
-			HTML += "</div>"
-
-		if(user.client.prefs.lastclass)
-			HTML += "<center><br><a href='?_src_=prefs;preference=job;task=triumphthing'>PLAY AS [user.client.prefs.lastclass] AGAIN</a></center>"
-		else
-			HTML += "<br>"
-		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>Reset</a></center>"
-		HTML += "<br><center><a href='?_src_=prefs;preference=role_settings'>Role Specific Preferences</a></center>"
-
-	HTML += "</center>"
-
-	var/datum/browser/noclose/popup = new(user, "mob_occupation", "<div align='center'>Class Selection</div>", 1000, 700)
-	popup.set_window_options(can_close = FALSE)
-	popup.set_content(HTML)
-	popup.open(use_onclose = FALSE)
-
-/datum/preferences/proc/set_job_preference_level(datum/job/job, level)
-	if(!job)
-		return FALSE
-	if(level == JP_HIGH)
-		for(var/j in job_preferences)
-			if(job_preferences[j] == JP_HIGH)
-				job_preferences[j] = JP_MEDIUM
-	job_preferences[job.title] = level
-	return TRUE
-
-
-/datum/preferences/proc/update_job_preference(mob/user, role, desiredLvl)
-	if(!SSjob || !length(SSjob.joinable_occupations))
-		return
-	var/datum/job/job = SSjob.GetJob(role)
-	if(!job || !(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
-		user << browse(null, "window=mob_occupation")
-		update_menu_data(user, list("job"))
-		return
-	if(!isnum(desiredLvl))
-		to_chat(user, "<span class='danger'>update_job_preference - desired level was not a number. Please notify coders!</span>")
-		CRASH("update_job_preference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
-
-	var/jpval = null
-	// desiredLvl comes from the links: 1=High, 2=Medium, 3=Low, 4=NEVER
-	// JP constants: JP_LOW=1, JP_MEDIUM=2, JP_HIGH=3
-	switch(desiredLvl)
-		if(1)
-			jpval = JP_HIGH  // 3
-		if(2)
-			jpval = JP_MEDIUM  // 2
-		if(3)
-			jpval = JP_LOW  // 1
-		if(4)
-			jpval = null  // NEVER
-
-	var/was_high = (jpval == JP_HIGH)
-	var/previous_high_job = null
-
-	if(was_high)
-		for(var/job_title in job_preferences)
-			if(job_preferences[job_title] == JP_HIGH)
-				previous_high_job = job_title
-				break
-
-	set_job_preference_level(job, jpval)
-
-	// Send back the desiredLvl value directly since that's what JavaScript expects
-	update_job_display(user, role, desiredLvl)
-
-	if(was_high && previous_high_job && previous_high_job != role)
-		update_job_display(user, previous_high_job, 2)  // Medium
-
-	update_menu_data(user, list("job"))
-	return 1
-
 /datum/preferences/proc/reset_jobs(mob/user, silent = FALSE)
 	job_preferences = list()
 	if(!silent)
 		to_chat(user, "<font color='red'>Classes reset.</font>")
-	if(winget(user, "mob_occupation", "is-visible"))
-		set_choices(user)
-
-
-/datum/preferences/proc/update_job_display(mob/user, job_title, pref_level)
-	if(!winexists(user, "mob_occupation"))
-		return
-
-	var/list/params = list()
-	params["jobTitle"] = job_title
-	params["prefLevel"] = pref_level
-
-	user << output(list2params(params), "mob_occupation.browser:update_job_preference")
 
 /datum/preferences/proc/capture_keybinding(mob/user, datum/keybinding/kb, old_key)
 	var/HTML = {"
@@ -1116,28 +765,28 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
 
-	dat += "<center><a href='?_src_=prefs;preference=keybinds;task=close'>Done</a></center><br>"
+	dat += "<center><a href='byond://?_src_=prefs;preference=keybinds;task=close'>Done</a></center><br>"
 	for (var/category in kb_categories)
 		for (var/i in kb_categories[category])
 			var/datum/keybinding/kb = i
 			if(!length(user_binds[kb.name]))
-				dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a>"
+				dat += "<label>[kb.full_name]</label> <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a>"
 			//	var/list/default_keys = hotkeys ? kb.hotkey_keys : kb.classic_keys
 			//	if(LAZYLEN(default_keys))
 			//		dat += "| Default: [default_keys.Join(", ")]"
 				dat += "<br>"
 			else
 				var/bound_key = user_binds[kb.name][1]
-				dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
+				dat += "<label>[kb.full_name]</label> <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
 				for(var/bound_key_index in 2 to length(user_binds[kb.name]))
 					bound_key = user_binds[kb.name][bound_key_index]
-					dat += " | <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
+					dat += " | <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
 				if(length(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
-					dat += "| <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name]'>Add Secondary</a>"
+					dat += "| <a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name]'>Add Secondary</a>"
 				dat += "<br>"
 
 	dat += "<br><br>"
-	dat += "<a href ='?_src_=prefs;preference=keybinds;task=keybindings_reset'>\[Reset to default\]</a>"
+	dat += "<a href='byond://?_src_=prefs;preference=keybinds;task=keybindings_reset'>\[Reset to default\]</a>"
 	dat += "</body>"
 
 	var/datum/browser/noclose/popup = new(user, "keybind_setup", "<div align='center'>Keybinds</div>", 600, 600) //no reason not to reuse the occupation window, as it's cleaner that way
@@ -1148,14 +797,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/set_antag(mob/user)
 	var/list/dat = list()
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
-	dat += "<center><a href='?_src_=prefs;preference=antag;task=close' style='display:block;margin-bottom:2px'>Done</a></center>"
+	dat += "<center><a href='byond://?_src_=prefs;preference=antag;task=close' style='display:block;margin-bottom:2px'>Done</a></center>"
 	dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Villains</h2>"
 	if(is_total_antag_banned(user.ckey))
 		dat += "<font color=red><b>I am banned from antagonist roles.</b></font><br>"
 		src.be_special = list()
 	for (var/i in GLOB.special_roles_rogue)
 		if(is_antag_banned(user.ckey, i))
-			dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
+			dat += "<b>[capitalize(i)]:</b> <a href='byond://?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
 		else
 			var/days_remaining = null
 			if(ispath(GLOB.special_roles_rogue[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs))
@@ -1163,7 +812,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			if(days_remaining)
 				dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS__~~\]~~__</font><br>"
 			else
-				dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
+				dat += "<b>[capitalize(i)]:</b> <a href='byond://?_src_=prefs;preference=antag;task=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
 
 	var/list/vessel_ids = GLOB.vessel_ids
 	var/list/available_vessel_ids = list()
@@ -1175,7 +824,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Vessels</h2>"
 		for(var/id in available_vessel_ids)
 			var/enabled = (id in be_special)
-			dat += "<b>[id]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[id]'>[enabled ? "Enabled" : "Disabled"]</a><br>"
+			dat += "<b>[id]:</b> <a href='byond://?_src_=prefs;preference=antag;task=be_special;be_special_type=[id]'>[enabled ? "Enabled" : "Disabled"]</a><br>"
 
 	dat += "</body>"
 	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340)
@@ -1217,36 +866,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		return
 
 	if(href_list["preference"] == "job")
-		switch(href_list["task"])
-			if("close")
-				user << browse(null, "window=mob_occupation")
-				show_choices(user,4)
-			if("reset")
-				reset_jobs(user, TRUE)
-
-			if("triumphthing")
-				reset_last_class(user)
-			if("nojob")
-				switch(read_preference(/datum/preference/choiced/joblessrole))
-					if(RETURNTOLOBBY)
-						write_preference(/datum/preference/choiced/joblessrole, BERANDOMJOB)
-					if(BERANDOMJOB)
-						write_preference(/datum/preference/choiced/joblessrole, RETURNTOLOBBY)
-				set_choices(user)
-			if("tutorial")
-				if(href_list["tut"])
-					to_chat(user, "<span class='info'>* ----------------------- *</span>")
-					to_chat(user, href_list["tut"])
-					to_chat(user, "<span class='info'>* ----------------------- *</span>")
-			if("random")
-				write_preference(/datum/preference/choiced/joblessrole, BERANDOMJOB)
-				set_choices(user)
-			if("setJobLevel")
-				if(SSticker.job_change_locked)
-					return 1
-				update_job_preference(user, href_list["text"], text2num(href_list["level"]))
-			else
-				set_choices(user)
+		open_job_middleware(user)
 		return 1
 	else if(href_list["preference"] == "multi")
 		if(isnewplayer(user))
@@ -1632,7 +1252,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		for(var/datum/role_ban_instance/ban as anything in bans.bans)
 			if(!ban.curses)
 				continue
-			for(var/curse_name as anything in ban.curses)
+			for(var/curse_name in ban.curses)
 				var/datum/curse/curse = GLOB.curse_names[curse_name]
 				character.add_curse(curse.type)
 
@@ -1791,113 +1411,3 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		return FALSE
 
 	return TRUE
-
-/datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
-	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
-	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
-	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
-
-	if(length(job.whitelisted_ckeys) && !(user.ckey in job.whitelisted_ckeys))
-		return make_lock_row(
-			used_name,
-			"\[EVENT WHITELISTED\]",
-			"<b>This role has been whitelisted by staff for event purposes.</b>"
-		)
-
-	if(job.job_flags & JOB_REQUIRE_WHITELIST && !user.client?.is_whitelisted(initial(job.title)))
-		return make_lock_row(
-			used_name,
-			"\[WHITELISTED\]",
-			"<b>This role has been whitelisted.</b>"
-		)
-
-	if(job.required_playtime_remaining(user.client))
-		var/list/lines = list()
-		for(var/t in job.exp_requirements)
-			var/needed = job.exp_requirements[t]
-			var/have = user.client.calc_exp_type(t)
-			lines += "[t]: [get_exp_format(have)] / [get_exp_format(needed)]"
-		var/text = jointext(lines, "<br>")
-
-		return make_lock_row(
-			used_name,
-			"\[TIME LOCK\]",
-			"<b>Requirements:</b><br>[text]"
-		)
-
-	if(fails_allowed || fails_blacklist)
-		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-			var/list/allowed_races = job.allowed_races.Copy()
-			for(var/blacklist in job.blacklisted_species)
-				allowed_races -= blacklist
-			var/races_text = jointext(allowed_races, ", ")
-			return make_lock_row(
-				used_name,
-				"\[SPECIES LOCK\]",
-				"<b>Species Needed:</b><br>[races_text]"
-			)
-
-	if(length(job.allowed_ages) && !(user.client.prefs.read_preference(/datum/preference/choiced/age) in job.allowed_ages))
-		var/ages_text = jointext(job.allowed_ages, ", ")
-		return make_lock_row(
-			used_name,
-			"\[AGE LOCK\]",
-			"<b>Ages Needed:</b><br>[ages_text]"
-		)
-
-	if(length(job.allowed_sexes) && !(user.client.prefs.read_preference(/datum/preference/choiced/gender) in job.allowed_sexes))
-		var/sexes_text = jointext(job.allowed_sexes, ", ")
-		return make_lock_row(
-			used_name,
-			"\[SEX LOCK\]",
-			"<b>Sexes Needed:</b><br>[sexes_text]"
-		)
-
-	var/datum/patron/patron = user.client.prefs.read_preference(/datum/preference/choiced/patron)
-	if(job.tennite_triumph_exclusive && !(patron.type in UNDIVIDED_TEMPLE_PATRONS))
-		if(!user.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE))
-			return make_lock_row(
-				used_name,
-				"\[HERETIC LOCK\]",
-				"<b>Only The Ten may rule.</b>"
-			)
-	if(length(job.allowed_patrons) && !(patron.type in job.allowed_patrons))
-		var/list/patron_list = list()
-		for(var/datum/patron/mult_patron as anything in job.allowed_patrons)
-			patron_list += mult_patron::display_name || mult_patron::name
-		var/patron_text = jointext(patron_list, ", ")
-
-		return make_lock_row(
-			used_name,
-			"\[PATRON LOCK\]",
-			"<b>Patron Needed:</b><br>[patron_text]"
-		)
-	if(length(job.banned_patrons) && (patron.type in job.banned_patrons))
-		var/list/patron_list = list()
-		for(var/mult_patron in job.banned_patrons)
-			var/datum/patron/P = new mult_patron
-			patron_list += (P.display_name ? P.display_name : P.name)
-			qdel(P)
-		var/patron_text = jointext(patron_list, ", ")
-
-		return make_lock_row(
-			used_name,
-			"\[PATRON BAN\]",
-			"<b>Patrons Banned:</b><br>[patron_text]"
-		)
-	// No lock
-	return FALSE
-
-/datum/preferences/proc/make_lock_row(used_name, lock_text, body_text)
-	return {"
-		[used_name]
-	</td>
-	<td>
-		<div class='tutorialhover'>
-			<font color=#a36c63>[lock_text]</font>
-			<span class='tutorial'>[body_text]</span>
-		</div>
-	</td>
-	</tr>
-	"}
-

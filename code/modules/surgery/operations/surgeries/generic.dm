@@ -64,7 +64,7 @@
 	)
 
 /datum/surgery_operation/limb/incise_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
-	limb.create_injury(WOUND_SLASH, 65, surgical = TRUE)
+	limb.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO / 3, surgical = TRUE)
 
 	if(!limb.bleeds)
 		return ..()

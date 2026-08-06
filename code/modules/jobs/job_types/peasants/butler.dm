@@ -26,6 +26,7 @@
 /datum/job/butler
 	title = JOB_BUTLER
 	f_title = "Head Housekeeper"
+	alt_titles = list("Majordomo", "Master of Staff")
 	tutorial = "You are elevated to near nobility, as you hold the distinguished position of master of the royal household staff. \
 	Your blade is a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
 	By your word the meals are served, the chambers kept, and the floors polished clean. \
@@ -44,6 +45,7 @@
 
 	outfit = /datum/outfit/butler
 	give_bank_account = 30 // Along with the pouch, enough to purchase some ingredients from the farm and give hard working servants a silver here and there. Still need the assistance of the crown's coffers to do anything significant
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)

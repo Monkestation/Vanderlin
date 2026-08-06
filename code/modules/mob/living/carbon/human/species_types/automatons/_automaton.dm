@@ -101,7 +101,7 @@
 		TRAIT_RESISTHEAT,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_SLEEPIMMUNE,
 		TRAIT_TOXIMMUNE,
 		TRAIT_FEARLESS,
@@ -344,26 +344,23 @@
 	desc = "A crystalline matrix containing a trapped soul, bound in service through dark artifice."
 	icon_state = "soul_core"
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
 	zone = BODY_ZONE_CHEST // this means decaps are non-lethal, how quaint
-	organ_flags = ORGAN_SYNTHETIC|ORGAN_VITAL
+	organ_flags = ORGAN_ROBOTIC|ORGAN_VITAL
 	food_type = null
 
 /obj/item/organ/heart/automaton
 	name = "steam engine"
 	desc = "A miniature steam engine that powers the automaton's movements."
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
 	zone = BODY_ZONE_PRECISE_STOMACH // the engine's in the stomach
-	organ_flags = ORGAN_SYNTHETIC
+	organ_flags = ORGAN_ROBOTIC
 	food_type = null
 
 /obj/item/organ/eyes/automaton
 	name = "optical sensors"
 	desc = "Glowing lenses that allow the automaton to perceive the world."
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
+	organ_flags = ORGAN_ROBOTIC
 	food_type = null
 	glows = TRUE
 	eye_color = "#ff7b00"
@@ -372,8 +369,7 @@
 	name = "audio interface"
 	desc = "The audio processor for automatons to receive orders."
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
+	organ_flags = ORGAN_ROBOTIC
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "broadcaster"
 	food_type = null

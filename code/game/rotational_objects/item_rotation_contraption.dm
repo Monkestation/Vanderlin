@@ -68,6 +68,21 @@
 	placed_type = parent_type
 
 /obj/item/rotation_contraption/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(istype(interacting_with, /obj/item/rotation_contraption))
+		if(!can_stack)
+			return
+
+		var/obj/item/rotation_contraption/rotator = interacting_with
+		if(placed_type != rotator.placed_type)
+			return
+
+		in_stack += rotator.in_stack
+		balloon_alert(user, "stacked!")
+		update_appearance(UPDATE_NAME)
+		qdel(rotator)
+
+		return ITEM_INTERACT_SUCCESS
+
 	var/turf/T = get_turf(interacting_with)
 
 	for(var/obj/structure/structure in T)
@@ -117,20 +132,6 @@
 		name = "pile of [initial(placed_type.name)]s x [in_stack]"
 	else
 		name = initial(placed_type.name) + " item"
-
-/obj/item/rotation_contraption/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(!can_stack)
-		return
-	if(!istype(I, src.type))
-		return
-	if(placed_type != I:placed_type)
-		return
-
-	I:in_stack += in_stack
-	visible_message("[user] collects [src].")
-	qdel(src)
-	I.update_appearance(UPDATE_NAME)
 
 /obj/item/rotation_contraption/cog
 	placed_type = /obj/structure/rotation_piece/cog

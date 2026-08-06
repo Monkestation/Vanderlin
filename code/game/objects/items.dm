@@ -86,7 +86,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/interaction_flags_item = INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	// Takes bitflags. See setup.dm for appropriate bit flags
-	var/body_parts_covered = 0
+	var/body_parts_covered = NONE
+	var/body_parts_access_allowed = NONE
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
@@ -1668,7 +1669,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 
 	if(!silent)
-		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
+		balloon_alert_to_viewers(("[name]<br>breaks!"))
 
 /obj/item/return_recipe_data()
 	var/has_grind = length(grind_results)

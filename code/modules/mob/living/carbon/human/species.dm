@@ -739,7 +739,7 @@
 	/// Check if we have any customizer entries that don't match.
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE
-		for(var/customizer_type as anything in customizers)
+		for(var/customizer_type in customizers)
 			if(customizer_type != entry.customizer_type)
 				continue
 			var/datum/customizer/customizer = CUSTOMIZER(customizer_type)
@@ -755,7 +755,7 @@
 			customizer_entries -= entry
 
 	/// Check if we have any missing customizer entries
-	for(var/customizer_type as anything in customizers)
+	for(var/customizer_type in customizers)
 		var/found = FALSE
 		for(var/datum/customizer_entry/entry as anything in customizer_entries)
 			if(entry.customizer_type != customizer_type)
@@ -806,15 +806,15 @@
 			else	//Entries in the list should only ever be items or null, so if it's not an item, we can assume it's an empty hand
 				C.put_in_hands(new mutanthands())
 
-	for(var/trait as anything in inherent_traits)
+	for(var/trait in inherent_traits)
 		ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(LAZYLEN(inherent_traits_f) && C.gender == FEMALE)
-		for(var/trait as anything in inherent_traits_f)
+		for(var/trait in inherent_traits_f)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(LAZYLEN(inherent_traits_m) && C.gender == MALE)
-		for(var/trait as anything in inherent_traits_m)
+		for(var/trait in inherent_traits_m)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(inherent_sheet)
@@ -1652,7 +1652,7 @@
 				target.mind.attackedme[user.real_name] = world.time
 			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
-			var/damage = user.get_kick_damage(2.5)
+			var/damage = user.get_kick_damage() * 1.5
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 			var/balance = 10
 			target.next_attack_msg.Cut()
@@ -1759,7 +1759,7 @@
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
 		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
-		var/damage = user.get_kick_damage(1.4)
+		var/damage = user.get_kick_damage()
 		var/damage_blocked = FALSE
 
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))

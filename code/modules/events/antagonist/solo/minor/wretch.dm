@@ -48,7 +48,7 @@
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 1,
 		/datum/round_event_control/antagonist/solo/vampires = 1,
 		/datum/round_event_control/antagonist/solo/werewolf = 1,
-		/datum/round_event_control/antagonist/solo/zizo_cult = 1
+		///datum/round_event_control/antagonist/solo/zizo_cult = 1
 	)
 	typepath = /datum/round_event/antagonist/solo/wretch
 

@@ -128,6 +128,7 @@
 	name = "Riddle of Steel"
 	group = "Special Materials"
 	cost = 600
+	allowed_start = FALSE
 	contains = list(
 		/obj/item/riddleofsteel
 	)

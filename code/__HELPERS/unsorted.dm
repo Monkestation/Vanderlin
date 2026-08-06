@@ -349,14 +349,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 	else
 		return get_step(ref, base_dir)
 
-//Takes: Anything that could possibly have variables and a varname to check.
-//Returns: 1 if found, 0 if not.
-/proc/hasvar(datum/A, varname)
-	if(A.vars.Find(lowertext(varname)))
-		return 1
-	else
-		return 0
-
 //Repopulates sortedAreas list
 /proc/require_area_resort()
 	GLOB.sortedAreas = null
@@ -662,10 +654,6 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 			CHECK_TICK
 
 	return L
-
-//gives us the stack trace from CRASH() without ending the current proc.
-/proc/stack_trace(msg)
-	CRASH(msg)
 
 //Key thing that stops lag. Cornerstone of performance in ss13, Just sitting here, in unsorted.dm.
 

@@ -44,7 +44,6 @@
 
 /obj/item/weapon/scabbard/knife/apply_components()
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/knife)
 
 /obj/item/weapon/scabbard/knife/getonmobprop(tag)
@@ -89,7 +88,6 @@
 
 /obj/item/weapon/scabbard/sword/apply_components()
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/sword)
 
 /obj/item/weapon/scabbard/sword/getonmobprop(tag)
@@ -145,7 +143,6 @@
 
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/sword)
 	AddElement(/datum/element/walking_stick)
 
@@ -206,7 +203,7 @@
 
 
 
-/obj/item/weapon/scabbard/kazengun
+/obj/item/weapon/scabbard/blackmeadow
 	name = "simple eastern scabbard"
 	desc = "A piece of steel lined with wood. Great for batting away blows."
 	icon_state = "kazscab"
@@ -222,12 +219,11 @@
 	sellprice = 10
 	item_weight = 400 GRAMS
 
-/obj/item/weapon/scabbard/kazengun/apply_components()
+/obj/item/weapon/scabbard/blackmeadow/apply_components()
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
-	AddComponent(/datum/component/storage/concrete/scabbard/kazengun)
+	AddComponent(/datum/component/storage/concrete/scabbard/blackmeadow)
 
-/obj/item/weapon/scabbard/kazengun/steel
+/obj/item/weapon/scabbard/blackmeadow/steel
 	name = "hwang scabbard"
 	desc = "A cloud-patterned scabbard with a cloth sash. Used for blocking."
 	icon_state = "kazscab_steel"
@@ -235,7 +231,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 450 GRAMS
 
-/obj/item/weapon/scabbard/kazengun/gold
+/obj/item/weapon/scabbard/blackmeadow/gold
 	name = "gold-stained scabbard"
 	desc = "An ornate, wooden scabbard with a sash. Great for parrying."
 	icon_state = "kazscab_gold"

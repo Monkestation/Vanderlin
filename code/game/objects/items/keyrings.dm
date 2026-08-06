@@ -32,26 +32,23 @@
 		return
 	if(length(keys) > 10)
 		stack_trace("Keyring [src] has too many keys and the list will get cut short!")
-	for(var/X as anything in keys)
+	for(var/X in keys)
 		var/obj/item/key/new_key = new X(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_key, null, TRUE, FALSE))
 			qdel(new_key)
 		LAZYREMOVE(keys, X)
 
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/storage/keyring/update_icon_state()
 	icon_state = "keyring[clamp(length(contents), 0, 5)]"
 	return ..()
 
-/obj/item/storage/keyring/update_desc()
-	if(!length(contents))
-		desc = initial(desc)
-		return
-	desc = span_info("Holds \Roman[length(contents)] key\s, including:")
+/obj/item/storage/keyring/examine(mob/user)
+	. = ..()
+	. += span_info("Holds \Roman[length(contents)] key\s, including:")
 	for(var/obj/item/key/KE in contents)
-		desc += span_info("\n- [KE.name ? "\A [KE.name]." : "An unknown key."]")
-	return ..()
+		. += span_info("- [KE.name ? "\A [KE.name]." : "An unknown key."]")
 
 /obj/item/storage/keyring/proc/refresh_keys()
 	LAZYCLEARLIST(combined_access)
@@ -74,12 +71,12 @@
 
 /obj/item/storage/keyring/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+	update_appearance(UPDATE_ICON_STATE)
 	refresh_keys()
 
 /obj/item/storage/keyring/Exited(atom/movable/gone, direction)
 	. = ..()
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+	update_appearance(UPDATE_ICON_STATE)
 	refresh_keys()
 
 /obj/item/storage/keyring/getonmobprop(tag)
@@ -305,10 +302,10 @@
 	keys = list(/obj/item/key/warehouse, /obj/item/key/merchant)
 
 /obj/item/storage/keyring/tombwarden
-	keys = list(/obj/item/key/tombwarden, /obj/item/key/mercenary, /obj/item/key/tomb)
+	keys = list(/obj/item/key/tombwarden, /obj/item/key/tomb)
 
 /obj/item/storage/keyring/mercenary
-	keys = list(/obj/item/key/mercenary, /obj/item/key/tomb)
+	keys = list(/obj/item/key/mercenary)
 
 /obj/item/storage/keyring/master_of_crafts_and_labor
 	keys = list(/obj/item/key/elder, /obj/item/key/blacksmith,/obj/item/key/tailor,/obj/item/key/tavern,/obj/item/key/apothecary, /obj/item/key/butcher, /obj/item/key/soilson,/obj/item/key/artificer,/obj/item/key/clinic)

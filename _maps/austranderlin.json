@@ -6,11 +6,32 @@
 	"monarch_title": "King",
 	"monarch_title_f": "Queen",
 	"traits": [
-		{"Up": true, "Turf Weather Effects": true, "Cellar": true},
-		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
-		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
-		{"Up": true, "Down": true, "Turf Weather Effects": true},
-		{"Down": true, "Turf Weather Effects": true}
+		{
+			"Up": true,
+			"Turf Weather Effects": true,
+			"Cellar": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Down": true,
+			"Turf Weather Effects": true
+		}
 	],
 	"other_z": [
 		"map_files/vanderlin/vanderlin_forest",

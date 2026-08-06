@@ -26,6 +26,10 @@
 
 	var/static/regex/ic_filter_regex
 
+/datum/controller/configuration/stat_entry(msg)
+	msg = "Edit"
+	return msg
+
 /datum/controller/configuration/proc/admin_reload()
 	if(IsAdminAdvancedProcCall())
 		return
@@ -86,11 +90,10 @@
 	var/list/_entries_by_type = list()
 	entries_by_type = _entries_by_type
 
-	for(var/I in typesof(/datum/config_entry))	//typesof is faster in this case
-		var/datum/config_entry/E = I
-		if(initial(E.abstract_type) == I)
+	for(var/datum/config_entry/E as anything in typesof(/datum/config_entry))	//typesof is faster in this case
+		if(IS_ABSTRACT(E))
 			continue
-		E = new I
+		E = new E
 		var/esname = E.name
 		var/datum/config_entry/test = _entries[esname]
 		if(test)
@@ -98,7 +101,7 @@
 			qdel(E)
 			continue
 		_entries[esname] = E
-		_entries_by_type[I] = E
+		_entries_by_type[E.type] = E
 
 /datum/controller/configuration/proc/RemoveEntry(datum/config_entry/CE)
 	entries -= CE.name
@@ -108,7 +111,7 @@
 	if(IsAdminAdvancedProcCall())
 		return
 
-	var/filename_to_test = world.system_type == MS_WINDOWS ? lowertext(filename) : filename
+	var/filename_to_test = world.system_type == MS_WINDOWS ? LOWER_TEXT(filename) : filename
 	if(filename_to_test in stack)
 		log_config("Warning: Config recursion detected ([english_list(stack)]), breaking!")
 		return
@@ -135,10 +138,10 @@
 		var/value = null
 
 		if(pos)
-			entry = lowertext(copytext(L, 1, pos))
+			entry = LOWER_TEXT(copytext(L, 1, pos))
 			value = copytext(L, pos + 1)
 		else
-			entry = lowertext(L)
+			entry = LOWER_TEXT(L)
 
 		if(!entry)
 			continue
@@ -277,10 +280,10 @@ Example config:
 		var/data = null
 
 		if(pos)
-			command = lowertext(copytext(t, 1, pos))
+			command = LOWER_TEXT(copytext(t, 1, pos))
 			data = copytext(t, pos + length(t[pos]))
 		else
-			command = lowertext(t)
+			command = LOWER_TEXT(t)
 
 		if(!command)
 			continue
