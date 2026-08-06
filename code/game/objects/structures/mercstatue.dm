@@ -78,7 +78,7 @@
 				sender_cooldowns[cooldown_key] = world.time
 				pending_direct_responses[response_key] = list("sender" = user, "target" = selected_merc, "message" = message)
 				addtimer(CALLBACK(src, PROC_REF(expire_direct_response), response_id), response_timeout)
-				to_chat(selected_merc, span_boldnotice("The mercenary statue whispers in my mind: <i>[message]</i> - [user.real_name]<br><a href='?src=[REF(src)];direct_response=interested;response_id=[response_id]'>\[INTERESTED\]</a> | <a href='?src=[REF(src)];direct_response=notinterested;response_id=[response_id]'>\[NOT INTERESTED\]</a>"))
+				to_chat(selected_merc, span_boldnotice("The mercenary statue whispers in my mind: <i>[message]</i> - [user.real_name]<br><a href='byond://?src=[REF(src)];direct_response=interested;response_id=[response_id]'>\[INTERESTED\]</a> | <a href='byond://?src=[REF(src)];direct_response=notinterested;response_id=[response_id]'>\[NOT INTERESTED\]</a>"))
 				playsound(selected_merc, 'sound/misc/notice (2).ogg', 100, FALSE, -1)
 				to_chat(user, "My message has been sent")
 				return
