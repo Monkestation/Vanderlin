@@ -25,6 +25,7 @@
 
 	//try to enter stasis
 	if(cast_on.eyesclosed)
+		var/can_sleep = TRUE
 		var/list/equipped_items = cast_on.get_equipped_items()
 		for(var/obj/item/clothing/thing in equipped_items)
 			if(thing.clothing_flags & CANT_SLEEP_IN)
