@@ -890,8 +890,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))
 
-#define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
-
 // Converts browser keycodes to BYOND keycodes.
 /proc/browser_keycode_to_byond(keycode)
 	keycode = text2num(keycode)

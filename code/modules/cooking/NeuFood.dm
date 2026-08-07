@@ -119,6 +119,7 @@
 	desc = "Traditional utensil for shoveling soup into your mouth, or to churn butter with."
 	icon_state = "spoon"
 	smeltresult = /obj/item/fertilizer/ash
+	tool_behaviour = TOOL_SPOON
 
 /obj/item/kitchen/spoon/iron
 	name = "iron spoon"
@@ -263,7 +264,7 @@
 		to_chat(user, span_warning("You can't clean the [src] while it has something inside of it!"))
 		return ITEM_INTERACT_BLOCKING
 
-	if(!istype(tool, /obj/item/kitchen/spoon))
+	if(!(tool.tool_behaviour == TOOL_SPOON))
 		return ..()
 
 	if(!reagents?.total_volume)
