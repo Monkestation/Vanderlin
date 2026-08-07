@@ -18,12 +18,12 @@
 
 /datum/action/cooldown/spell/undirected/eternal_vigilance/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	can_sleep = TRUE
 	if(stasis)
 		//we're ALREADY in basic stasis, time to wake up
 		stasis = FALSE
 		cast_on.remove_status_effect(/datum/status_effect/aasimar_stasis)
 		return
+
 	//try to enter stasis
 	if(cast_on.eyesclosed)
 		var/list/equipped_items = cast_on.get_equipped_items()
@@ -37,6 +37,7 @@
 		if(can_sleep)
 			cast_on.apply_status_effect(/datum/status_effect/aasimar_stasis/deep)
 		return
+
 	//time for regular stasis
 	cast_on.apply_status_effect(/datum/status_effect/aasimar_stasis)
 	stasis = TRUE
