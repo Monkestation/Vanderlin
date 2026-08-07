@@ -47,7 +47,6 @@
 	  */
 	var/movement_type = GROUND
 	var/atom/movable/pulling
-	var/atom_flags = NONE
 	var/grab_state = 0
 	var/throwforce = 0
 	var/datum/component/orbiter/orbiting
@@ -82,6 +81,10 @@
 	color = EM_BLOCK_COLOR
 
 /atom/movable/Initialize(mapload)
+	var/atom/movable/stupid_type = type
+	if(IS_ABSTRACT(stupid_type))
+		stack_trace("Abstract type ([type]) initialised at [AREACOORD(src)]!")
+
 	. = ..()
 
 #if EMISSIVE_BLOCK_GENERIC != 0
@@ -900,15 +903,15 @@
 /atom/movable/proc/Moved(atom/old_loc, movement_dir, forced = FALSE, list/old_locs)
 	SHOULD_CALL_PARENT(TRUE)
 
-	var/turf/old_turf = get_turf(old_loc)
-	var/turf/new_turf = get_turf(src)
-
 	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
 
 	if(old_loc)
 		SEND_SIGNAL(old_loc, COMSIG_ATOM_ABSTRACT_EXITED, src, movement_dir)
 	if(loc)
 		SEND_SIGNAL(loc, COMSIG_ATOM_ABSTRACT_ENTERED, src, old_loc, old_locs)
+
+	var/turf/old_turf = get_turf(old_loc)
+	var/turf/new_turf = get_turf(src)
 
 	if(HAS_SPATIAL_GRID_CONTENTS(src))
 		if(old_turf && new_turf && (old_turf.z != new_turf.z \

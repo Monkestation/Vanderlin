@@ -5,7 +5,16 @@
 	"immigrant_origin": "Psydonia",
 	"monarch_title": "God",
 	"monarch_title_f": "Goddess",
-	"traits": [{"Up": true, "Leylines": true}, {"Down": true, "Leylines": true}],
+	"traits": [
+		{
+			"Up": true,
+			"Leylines": true
+		},
+		{
+			"Down": true,
+			"Leylines": true
+		}
+	],
 	"minetype": null,
 	"space_empty_levels": 0,
 	"space_ruin_levels": 0

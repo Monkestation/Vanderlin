@@ -72,14 +72,14 @@
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/padded
 
 /obj/item/clothing/shirt/grenzelhoft
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "grenzelhoftian hip-shirt"
 	desc = "A true fashion statement worn by Grenzelhoftian swordsmen."
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
-	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 10, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/shirt/grenzelhoft
 	icon_state = "grenzelshirt"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
@@ -116,7 +116,7 @@
 	"ORANGE"="#b86f0c",
 	"Royal Majenta"="#962e5c")
 	var/mob/living/carbon/human/L = loc
-	var/choice = input(L, "Choose a color.", "GRENZELHOFTIAN COLORPLEX") as anything in colors
+	var/choice = tgui_input_list(L, "Choose a color.", "GRENZELHOFTIAN COLORPLEX", colors)
 	var/playerchoice = colors[choice]
 	picked = TRUE
 	detail_color = playerchoice
@@ -135,20 +135,19 @@
 	sleeved = 'icons/roguetown/clothing/onmob/ornate_tunic.dmi'
 	boobed = TRUE
 	abstract_type = /obj/item/clothing/shirt/ornate
+	sellprice = 30
 
 /obj/item/clothing/shirt/ornate/tunic
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "ornate tunic"
 	desc = "A red tunic with gold accents, fit for nobility."
 	icon_state = "ornatetunic"
-	sellprice = 150
 
 /obj/item/clothing/shirt/ornate/dress
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "ornate dress"
 	desc = "A red dress with gold accents, fit for nobility."
 	icon_state = "ornatedress"
-	sellprice = 150
 
 /obj/item/clothing/shirt/clothvest
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK

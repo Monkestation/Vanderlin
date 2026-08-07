@@ -55,11 +55,13 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	H.apply_status_effect(/datum/status_effect/debuff/flaw_lux_taken)
+	return ..()
 
 /datum/quirk/vice/pacifist
 	name = "Pacifist"
 	desc = "I don't want to harm other living beings!"
 	point_value = 8
+	traits_to_add = list(TRAIT_PACIFISM)
 
 /datum/quirk/vice/pacifist/on_spawn()
 	if(!ishuman(owner))
@@ -70,16 +72,11 @@
 	if(H.mind && ((H.mind in GLOB.pre_setup_antags) || H.mind.has_antag_datum(/datum/antagonist)))
 		to_chat(H, span_warning("As an antagonist, you cannot be a pacifist. This quirk has been removed."))
 		return
-
-	ADD_TRAIT(owner, TRAIT_PACIFISM, "[type]")
+	return ..()
 
 /datum/quirk/vice/pacifist/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Pacifist..."))
-
-/datum/quirk/vice/pacifist/on_remove()
-	if(owner)
-		REMOVE_TRAIT(owner, TRAIT_PACIFISM, "[type]")
 
 /datum/quirk/vice/chronic_migraine
 	name = "Chronic Migraines"
@@ -94,6 +91,7 @@
 	BP?.limb_flags |= BODYPART_CHRONIC_MIGRAINE
 	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
+	return ..()
 
 /datum/quirk/vice/unlucky
 	name = "Unlucky"
@@ -102,9 +100,11 @@
 
 /datum/quirk/vice/unlucky/on_spawn()
 	owner.adjust_stat_modifier(STATMOD_UNLUCKY, list(STAT_FORTUNE = rand(-5, -9)))
+	return ..()
 
 /datum/quirk/vice/unlucky/on_remove()
 	owner?.remove_stat_modifier(STATMOD_UNLUCKY)
+	return ..()
 
 /datum/quirk/vice/skill_issue
 	name = "Skill Issue"
@@ -117,6 +117,7 @@
 	var/mob/living/carbon/human/H = owner
 	for(var/datum/attribute/skill/skill in SSskills.all_skills)
 		H.adjust_skill_level(skill, -10)
+	return ..()
 
 /datum/quirk/vice/skill_bereft
 	name = "Skill Bereft"
@@ -126,21 +127,13 @@
 /datum/quirk/vice/skill_bereft/on_spawn()
 	for(var/datum/attribute/skill/skill in SSskills.all_skills)
 		owner.adjust_skill_level(skill, -30)
+	return ..()
 
 /datum/quirk/vice/deaf
 	name = "Hard of Hearing"
 	desc = "You can barely hear. Words said outside of a 2 tile radius become jumbled or unreadable unless screamed."
 	point_value = 3
-
-/datum/quirk/vice/deaf/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_PARTIAL_DEAF, "[type]")
-
-/datum/quirk/vice/deaf/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_PARTIAL_DEAF, "[type]")
+	traits_to_add = list(TRAIT_PARTIAL_DEAF)
 
 /datum/quirk/vice/traumatized
 	name = "Traumatized"
@@ -179,6 +172,7 @@
 	if(!customization_value)
 		customization_value = /datum/species/goblin
 	fear_type = customization_value
+	return ..()
 
 /datum/quirk/vice/traumatized/on_life(mob/living/user)
 	if(world.time < next_scream_time)
@@ -230,20 +224,11 @@
 	name = "Tortured"
 	desc = "You were once tortured by bandits, Drow raiders, or your own kingdom. You fear it happening again and always answer truthfully when tortured."
 	point_value = 2
+	traits_to_add = list(TRAIT_TORTURED)
 
 /datum/quirk/vice/tortured/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Tortured..."))
-
-/datum/quirk/vice/tortured/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_TORTURED, "[type]")
-
-/datum/quirk/vice/tortured/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_TORTURED, "[type]")
 
 /datum/stress_event/tortured
 	desc = "<span class='danger'>The pain... it brings back memories.</span>\n"
@@ -263,12 +248,14 @@
 	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 	RegisterSignal(owner, COMSIG_LIVING_TRY_ENTER_AFTERLIFE, PROC_REF(on_death))
 	to_chat(owner, span_boldwarning("You have chosen HARDCORE mode. If you die, you will become a rat. There are no second chances."))
+	return ..()
 
 /datum/quirk/vice/hardcore/on_remove()
 	if(!ishuman(owner))
 		return
 	UnregisterSignal(owner, COMSIG_LIVING_DEATH)
 	UnregisterSignal(owner, COMSIG_LIVING_TRY_ENTER_AFTERLIFE)
+	return ..()
 
 /datum/quirk/vice/hardcore/proc/on_death(mob/living/source)
 	if(turning)
@@ -317,20 +304,11 @@
 	incompatible_quirks = list(
 		/datum/quirk/boon/iron_will
 	)
+	traits_to_add = list(TRAIT_WEAK_HEART)
 
 /datum/quirk/vice/weak_heart/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Weak-Hearted..."))
-
-/datum/quirk/vice/weak_heart/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_WEAK_HEART, "[type]")
-
-/datum/quirk/vice/weak_heart/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_WEAK_HEART, "[type]")
 
 /datum/quirk/vice/tremors
 	name = "Tremors"
@@ -344,6 +322,7 @@
 	if(!owner)
 		return
 	schedule_next_tremor()
+	return ..()
 
 /datum/quirk/vice/tremors/on_life()
 	if(!owner)
@@ -456,6 +435,7 @@
 	if((customization_value == "Outlaw") || (customization_value == "Both!"))
 		GLOB.outlawed_players |= H.real_name
 		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))
+	return ..()
 
 /datum/quirk/vice/suspicion
 	name = "Inquisitorial Suspicion"
@@ -481,4 +461,4 @@
 
 	GLOB.inquis_suspect_players += H.real_name
 	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
-
+	return ..()

@@ -97,7 +97,7 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
-		balloon_alert(user, "I press the cork back in.")
+		balloon_alert(user, "i press the cork back in.")
 		spillable = FALSE
 		GLOB.weather_act_upon_list -= src
 		if(!fancy)
@@ -106,7 +106,7 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
-		balloon_alert(user, "I thumb off the cork.")
+		balloon_alert(user, "i thumb off the cork.")
 		spillable = TRUE
 		GLOB.weather_act_upon_list |= src
 		if(!fancy)
@@ -232,12 +232,12 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
 		desc = "A vial with a cork."
-		balloon_alert(user, "I press the cork back in.")
+		balloon_alert(user, "i press the cork back in.")
 		spillable = FALSE
 	else
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
-		balloon_alert(user, "I thumb off the cork.")
+		balloon_alert(user, "i thumb off the cork.")
 		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		desc = "An open vial, easy to drink quickly."
 		spillable = TRUE

@@ -99,10 +99,11 @@
 		to_chat(user, span_warning("[src] cannot be used to repair [I]!"))
 		return FALSE
 
+	var/list/armorlist = I.get_armor().get_rating_list()
 	var/armor_value = 0
 	var/skill_level = GET_MOB_SKILL_VALUE(user, I.sewrepair)
-	for(var/key in I.armor.getList())
-		armor_value += I.armor.getRating(key)
+	for(var/key in armorlist)
+		armor_value += armorlist[key]
 
 	if(!I.obj_broken && I.get_integrity() >= I.max_integrity && (I.max_integrity != initial(I.max_integrity)))
 		if(!I.salvage_result)

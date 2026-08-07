@@ -14,7 +14,6 @@
 	can_parry = FALSE
 	wdodgebonus = 30 //To counteract the GREAT_LENGTH penalty.
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
-	minstr = 4
 
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
@@ -45,7 +44,6 @@
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle."
 	icon_state = "gwhip"
 	force = DAMAGE_WHIP + 4
-	minstr = 4 // Why was this needing 7 STR
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel_slag
 	max_integrity = INTEGRITY_STRONG
@@ -146,7 +144,6 @@
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderwhip"
 	force = DAMAGE_WHIP + 3
-	minstr = 6
 	item_weight = 500 GRAMS
 
 //................ Chain Whip ............... //
@@ -156,7 +153,6 @@
 	icon_state = "whip_chain"
 	force = DAMAGE_WHIP + 3
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
-	minstr = 9
 
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
@@ -195,7 +191,6 @@
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 5
 
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	resistance_flags = FIRE_PROOF

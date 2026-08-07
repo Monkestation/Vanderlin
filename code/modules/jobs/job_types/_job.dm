@@ -157,6 +157,9 @@
 
 	var/give_bank_account = FALSE
 
+	/// Whether this job starts knowing the members of the town.
+	var/knows_the_town = FALSE
+
 	var/can_random = TRUE
 
 	/// Some jobs have unique combat mode music, because why not?
@@ -249,7 +252,7 @@
 
 /datum/job/New()
 	. = ..()
-	if(give_bank_account)
+	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)
 			peopleiknow += X
 			peopleknowme += X
@@ -308,7 +311,7 @@
 /datum/job/proc/pre_outfit_equip(mob/living/carbon/human/spawned, client/player_client)
 	SHOULD_CALL_PARENT(TRUE)
 
-	adjust_patron(spawned)
+	adjust_patron(spawned, player_client)
 
 /// Executes after the mob has been spawned in the map.
 /// Client might not be yet in the mob, and is thus a separate variable.
@@ -428,7 +431,7 @@
 	if(forced_flaw)
 		if(!islist(forced_flaw))
 			forced_flaw = list(forced_flaw)
-		for(var/flaw as anything in forced_flaw)
+		for(var/flaw in forced_flaw)
 			if(ispath(flaw, /datum/quirk))
 				spawned.add_quirk(flaw)
 
@@ -505,7 +508,7 @@
 	if(forced_flaw)
 		if(!islist(forced_flaw))
 			forced_flaw = list(forced_flaw)
-		for(var/flaw as anything in forced_flaw)
+		for(var/flaw in forced_flaw)
 			if(ispath(flaw, /datum/quirk))
 				spawned.remove_quirk(flaw)
 
@@ -561,10 +564,10 @@
 	if(parent_job)
 		return parent_job.remove_job(spawned)
 
-/datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
+/datum/job/proc/adjust_patron(mob/living/carbon/human/spawned, client/player_client)
 	var/datum/patron/old_patron = spawned.patron
 
-	if(tennite_triumph_exclusive && !spawned.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
+	if(tennite_triumph_exclusive && !player_client?.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(old_patron.type in UNDIVIDED_TEMPLE_PATRONS))
 		spawned.set_patron(/datum/patron/divine/astrata, TRUE)
 		to_chat(spawned, span_warning("I've followed the word of [old_patron.display_name ? old_patron.display_name : old_patron] in my younger years, \
 		but the path I tread todae proves only The Ten may rule!"))
@@ -640,7 +643,7 @@
 			job_packs = equipping.job_packs[i]
 
 		var/list/reals = list()
-		for(var/pack as anything in job_packs)
+		for(var/pack in job_packs)
 			var/datum/job_pack/real_pack = GLOB.job_pack_singletons[pack]
 			if(!real_pack.can_pick_pack(src, previous_picked_types))
 				continue
@@ -1038,17 +1041,17 @@
 	var/datum/patron/pref_patron = prefs.read_preference(/datum/preference/choiced/patron)
 	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(pref_patron, /datum/patron/alternate/wurm))
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
-		if(!(tested.department_flag & OUTSIDERS))
+		if(!tested || !(tested.department_flag & OUTSIDERS))
 			return FALSE
 
 	if(species.id == SPEC_ID_SNOW_ELF)
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
-		if(!(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | YOUNGFOLK)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
 			return FALSE
 
 	if(species.id == SPEC_ID_HALF_SNOW_ELF)
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
-		if(!(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES | YOUNGFOLK)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
 			return FALSE
 
 	return TRUE

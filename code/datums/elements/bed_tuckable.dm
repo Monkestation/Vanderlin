@@ -1,5 +1,7 @@
 /// Tucking element, for things that can be tucked into bed.
 /datum/element/bed_tuckable
+	element_flags = ELEMENT_BESPOKE
+	argument_hash_start_idx = 3
 	/// our pixel_x offset - how much the item moves x when in bed (+x is closer to the pillow)
 	var/x_offset = 0
 	/// our pixel_y offset - how much the item move y when in bed (-y is closer to the middle)
@@ -9,7 +11,7 @@
 	/// our starting angle for the item
 	var/starting_angle = 0
 
-/datum/element/bed_tuckable/Attach(obj/target, x = 0, y = 0, rotation = 0)
+/datum/element/bed_tuckable/Attach(obj/target, mapload = FALSE, x = 0, y = 0, rotation = 0)
 	. = ..()
 	if(!isitem(target))
 		return ELEMENT_INCOMPATIBLE
@@ -18,6 +20,13 @@
 	y_offset = y
 	starting_angle = rotation
 	RegisterSignal(target, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(tuck_into_bed))
+	if(!mapload)
+		return
+	var/turf/our_home = get_turf(target)
+	var/obj/structure/bed/eepy = locate(/obj/structure/bed) in our_home
+	if(isnull(eepy))
+		return
+	tuck(target, null, eepy)
 
 /datum/element/bed_tuckable/Detach(obj/target)
 	. = ..()
@@ -39,27 +48,26 @@
 	if(!tucker.transferItemToLoc(tucked, target_bed.drop_location()))
 		return NONE
 
-	if(istype(tucked, /obj/item/bedsheet))
-		var/obj/item/bedsheet/sheet = tucked
-		to_chat(tucker, span_notice("You tuck \the [sheet] into \the [target_bed]."))
-		target_bed.sheet_tucked = TRUE
-		target_bed.sheet_on = TRUE
-		sheet.bed_tucked = TRUE
-		tucker.nobles_seen_servant_work()
-	else
-		to_chat(tucker, span_notice("You lay [tucked] out on [target_bed]."))
+	to_chat(tucker, span_notice("You lay [tucked] out on [target_bed]."))
+	tuck(tucked, tucker, target_bed)
+	return ITEM_INTERACT_SUCCESS
 
-	tucked.dir = target_bed.dir
-	tucked.pixel_x = tucked.base_pixel_x + (target_bed.dir & EAST ? -x_offset : x_offset)
-	tucked.pixel_y = tucked.base_pixel_y + y_offset + target_bed.pixel_y
+/datum/element/bed_tuckable/proc/tuck(obj/item/tucked, mob/living/tucker, obj/structure/bed/target_bed)
+	tucked.dir = target_bed.dir & target_bed.left_headrest_dirs ? EAST : WEST
+	tucked.pixel_x = target_bed.dir & target_bed.left_headrest_dirs ? -x_offset : x_offset
+	tucked.pixel_y = y_offset
 	tucked.layer = ABOVE_MOB_LAYER
 	tucked.plane = GAME_PLANE_UPPER
 	if(starting_angle)
-		rotation_degree = target_bed.dir & EAST ? starting_angle + 180 : starting_angle
+		rotation_degree = target_bed.dir & target_bed.left_headrest_dirs ? starting_angle + 180 : starting_angle
 		tucked.transform = turn(tucked.transform, rotation_degree)
 		RegisterSignal(tucked, COMSIG_ITEM_PICKUP, PROC_REF(untuck))
 
-	return ITEM_INTERACT_SUCCESS
+	if(istype(tucked, /obj/item/bedsheet))
+		var/obj/item/bedsheet/sheet = tucked
+		target_bed.sheet_tucked = TRUE
+		sheet.bed_tucked = TRUE
+		tucker?.nobles_seen_servant_work()
 
 /**
  * If we rotate our object, then we need to un-rotate it when it's picked up

@@ -373,6 +373,8 @@
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tavernbrawler)
+	character.add_spell(/datum/action/innate/clench_fists, TRUE)
+	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 
 /datum/attribute_holder/sheet/job/mastercraftsmen
 	raw_attribute_list = list(
@@ -435,7 +437,7 @@
 
 /datum/special_trait/burdened/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
-	ADD_TRAIT(character, TRAIT_NOSLEEP, "[type]") // can't learn any new skills
+	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, "[type]") // can't learn any new skills
 	ADD_TRAIT(character, TRAIT_NOENERGY, "[type]")
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/burdened_one)
 	character.cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'  // has a burdened vibe to it
@@ -577,7 +579,7 @@
 	weight = 25
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_quirk(/datum/quirk/vice/maniac)
+	character.add_quirk(/datum/quirk/vice/addiction/sadist)
 	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
@@ -857,7 +859,7 @@
 	ADD_TRAIT(character, TRAIT_NOBREATH, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_TOXIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOSLEEP, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_SHOCKIMMUNE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOBLOOD, BE_SPECIAL_TRAIT)
 
@@ -1063,12 +1065,13 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/combat/wrestling = 30,
-        /datum/attribute/skill/combat/unarmed = 25,
+		/datum/attribute/skill/combat/unarmed = 25,
 	)
 
 /datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOPAINSTUN, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 	QDEL_NULL(character.wear_pants)
 	QDEL_NULL(character.wear_shirt)
 	QDEL_NULL(character.wear_armor)
@@ -1083,6 +1086,9 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
+	var/datum/action/innate/clench_fists/fists = new(character)
+	fists.Grant(character)
+
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
 	greet_text = span_notice("Miracles that heal others scorch me, and i feel as if i am being dreagged to the underworld.")

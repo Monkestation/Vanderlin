@@ -106,7 +106,7 @@
 	blade.grant_language(/datum/language/celestial)
 	blade.grant_language(/datum/language/newpsydonic)
 	blade.grant_language(/datum/language/oldpsydonic)
-	blade.add_quirk(/datum/quirk/vice/godfearing)
+	blade.add_quirk(/datum/quirk/vice/addiction/godfearing)
 
 	RegisterSignal(blade, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
@@ -173,7 +173,7 @@
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	backr = /obj/item/weapon/scabbard/sword/noble
 	r_hand = /obj/item/weapon/sword/long/daewalker
 	backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 1, /obj/item/smokebomb = 2, /obj/item/needle/blessed = 1)
@@ -267,7 +267,7 @@
 	icon_state = "psydonboots"
 	item_state = "psydonboots"
 	color = CLOTHING_ROYAL_BLACK
-	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	max_integrity = INTEGRITY_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -278,13 +278,13 @@
 
 /obj/item/clothing/pants/trou/beltpants/daewalker
 	color = CLOTHING_ROYAL_BLACK
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/pants/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = INTEGRITY_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker
-	armor = list("blunt" = 60, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/wrist/leather/advanced
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = INTEGRITY_STANDARD + 50
 	misc_flags = CRAFTING_TEST_EXCLUDE

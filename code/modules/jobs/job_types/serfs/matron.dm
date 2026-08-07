@@ -62,6 +62,7 @@
 
 	outfit = /datum/outfit/matron
 	give_bank_account = 35
+	knows_the_town = TRUE
 	can_have_apprentices = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
 	honorary = "Miss"

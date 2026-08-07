@@ -20,6 +20,7 @@
 
 	advclass_cat_rolls = list(CTAG_ROYALKNIGHT = 20)
 	give_bank_account = 60
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'
 	job_bitflag = BITFLAG_GARRISON
 
@@ -77,6 +78,14 @@
 		/datum/attribute/skill/combat/swords = list(20, 40)
 	)
 
+/datum/attribute_holder/sheet/job/royalknight/mace
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(20, 40)
+	)
+
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE
 	should_reset_stats = FALSE
@@ -88,6 +97,8 @@
 		"Flail" = /obj/item/weapon/flail/sflail,
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Longsword" = /obj/item/weapon/sword/long,
+		"Warhammer" = /obj/item/weapon/mace/warhammer/steel,
+		"Polehammer" = /obj/item/weapon/polearm/eaglebeak,
 		"Sabre" = /obj/item/weapon/sword/sabre/dec,
 	)
 
@@ -105,6 +116,11 @@
 			grant_shield = FALSE
 		if("Longsword")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/longsword)
+			grant_shield = FALSE
+		if("Warhammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/mace)
+		if("Polehammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/polearms)
 			grant_shield = FALSE
 		if("Sabre")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/sabre)

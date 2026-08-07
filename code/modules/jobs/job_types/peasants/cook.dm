@@ -46,6 +46,7 @@
 	outfit = /datum/outfit/cook
 	display_order = JDO_COOK
 	give_bank_account = 8
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 	can_be_apprentice = TRUE
 

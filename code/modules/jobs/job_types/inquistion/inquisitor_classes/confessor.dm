@@ -204,7 +204,7 @@
 			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
 		if("Nightmare Ward - No Sleep and Anti-Scrying")
-			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_SLEEPIMMUNE, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
@@ -220,15 +220,15 @@
 	name = "Confessor (Sacrestants)"
 	cloak = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	neck = /obj/item/clothing/neck/gorget
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/face/facemask/steel/confessor
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/rope/inqarticles/inquirycord = 1,

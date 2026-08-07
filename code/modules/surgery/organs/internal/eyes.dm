@@ -18,13 +18,14 @@
 	high_threshold = 0.3 * STANDARD_ORGAN_THRESHOLD	//threshold at 30
 	low_threshold = 0.2 * STANDARD_ORGAN_THRESHOLD	//threshold at 20
 
-	low_threshold_passed = "<span class='info'>Distant objects become somewhat less tangible.</span>"
-	high_threshold_passed = "<span class='info'>Everything starts to look a lot less clear.</span>"
-	now_failing = "<span class='warning'>Darkness envelops me, as my eyes goes blind!</span>"
-	now_fixed = "<span class='info'>Color and shapes are once again perceivable.</span>"
-	high_threshold_cleared = "<span class='info'>My vision functions passably once more.</span>"
-	low_threshold_cleared = "<span class='info'>My vision is cleared of any ailment.</span>"
+	low_threshold_passed = span_info("Distant objects become somewhat less tangible.")
+	high_threshold_passed = span_info("Everything starts to look a lot less clear.")
+	now_failing = span_warning("Darkness envelops me, as my eyes goes blind!")
+	now_fixed = span_info("Color and shapes are once again perceivable.")
+	high_threshold_cleared = span_info("My vision functions passably once more.")
+	low_threshold_cleared = span_info("My vision is cleared of any ailment.")
 
+	pain_multiplier = 0.35 / 2
 	// remember that this is normally DOUBLED (2 eyes)
 	organ_volume = 0.25
 	max_blood_storage = 5
@@ -144,7 +145,7 @@
 	if(M.has_dna() && ishuman(M))
 		M.dna.species.handle_body(M)
 
-/obj/item/organ/eyes/applyOrganDamage(amount, maximum = maxHealth, silent = FALSE)
+/obj/item/organ/eyes/applyOrganDamage(amount, maximum = maxHealth)
 	. = ..()
 	if(owner)
 		owner.update_eyes()

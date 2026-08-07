@@ -90,4 +90,3 @@
 /datum/outfit/prisoner
 	name = JOB_PRISONER
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner

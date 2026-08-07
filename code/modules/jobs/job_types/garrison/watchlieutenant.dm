@@ -38,6 +38,12 @@
 		/datum/attribute/skill/combat/swords = list(23, 33)
 	)
 
+/datum/attribute_holder/sheet/job/lieutenant/mace
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(23, 33)
+	)
+
 /datum/job/lieutenant
 	/*
 	From wikipedia:
@@ -61,6 +67,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)
@@ -85,6 +92,7 @@
 		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail), \
 		"Spear" = /obj/item/weapon/polearm/spear, \
 		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
+		"Warhammer" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/mace/warhammer), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
@@ -96,6 +104,8 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
+		if("Warhammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/mace)
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
