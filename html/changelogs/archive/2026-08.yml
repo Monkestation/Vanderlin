@@ -44,3 +44,11 @@
   - bugfix: Bronze statues should have a sprite again.
   - map: The soilson's ranch now has fences and borders around the watering holes
       to keep the poor animals from walking in and drowning.
+2026-08-07:
+  MissyNym:
+  - map: Fixes a couple of tomb tiles.
+  Somniworld:
+  - balance: 'Soilsons now get 30 points in each of the following skills : Brewing,
+      Winemaking, Distilling, and Cheesemaking.'
+  realforest2001:
+  - bugfix: Noble gem cutlery is now REAL and not just for the museum.
