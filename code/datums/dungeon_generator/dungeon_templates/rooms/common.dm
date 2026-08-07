@@ -491,8 +491,8 @@
 	width = 25
 	height = 25
 
-	west_offset = 10
-	east_offset = 19
-	north_offset = 10
-	south_offset = 10
+	west_offset = 14
+	east_offset = 14
+	north_offset = 12
+	south_offset = 12
 
