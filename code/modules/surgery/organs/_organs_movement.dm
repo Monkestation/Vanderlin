@@ -142,6 +142,8 @@
 	if(organ_flags & ORGAN_LIMB_SUPPORTER)
 		limb.update_limb_efficiency()
 
+	STOP_PROCESSING(SSobj, src)
+
 /*
  * Remove the organ from the select mob.
  *
@@ -196,6 +198,11 @@
 		organ_owner.death()
 
 	organ_owner.update_organ_requirements()
+
+	// In cases where it's removed by non-surgical means
+	organ_flags |= ORGAN_CUT_AWAY
+
+	START_PROCESSING(SSobj, src)
 
 /// Called to remove an organ from a limb. Do not put any mob operations here (except the bodypart_getter at the start)
 /// Give EITHER a limb OR a limb_owner

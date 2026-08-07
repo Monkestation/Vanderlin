@@ -119,12 +119,12 @@
 	/// If the mob has this chem effect, ignore all other checks for can_self_heal and ignore self_heal_thresholds
 	var/self_healing_effect = CE_ORGAN_REGEN
 
-/obj/item/organ/Initialize()
+/obj/item/organ/Initialize(mapload)
 	. = ..()
-	START_PROCESSING(SSobj, src)
 	current_zone = zone
 	if(use_mob_sprite_as_obj_sprite)
 		update_appearance(UPDATE_OVERLAYS)
+	START_PROCESSING(SSobj, src)
 
 /obj/item/organ/Destroy()
 	if(bodypart_owner && !owner && !QDELETED(bodypart_owner))
@@ -302,9 +302,16 @@
 	// Kinda hate doing it like this, but I really don't want to call process directly.
 	return on_death(delta_time, times_fired)
 
+/obj/item/organ/proc/on_death(delta_time, times_fired, passed_temp)
+	if(can_decay(passed_temp))
+		decay(delta_time)
+
 /// proper decaying
 /obj/item/organ/proc/decay(delta_time)
-	adjust_germ_level(rand(min_germ_factor, max_germ_factor) * delta_time)
+	var/factor = rand(min_germ_factor, max_germ_factor)
+	if(factor == 0)
+		return
+	adjust_germ_level(factor * delta_time)
 
 /obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
@@ -318,24 +325,19 @@
 		setOrganDamage(maxHealth)
 		return TRUE
 
-/// Runs decay both inside and outside a person
-/obj/item/organ/proc/on_death(delta_time, times_fired, passed_temp)
-	if(!owner && !isbodypart(loc))
-		if(isnull(loc))
-			STOP_PROCESSING(SSobj, src)
-		organ_flags |= ORGAN_CUT_AWAY
-	if(can_decay(passed_temp))
-		decay(delta_time)
-	// else
-	// 	STOP_PROCESSING(SSobj, src)
-
 /// Infection/rot checks
 /obj/item/organ/proc/can_decay(passed_temp)
+	if(IS_ROBOTIC_ORGAN(src))
+		return FALSE
+
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
+
 	check_cold(passed_temp)
-	if(IS_ROBOTIC_ORGAN(src) || CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
+
+	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_INDESTRUCTIBLE))
 		return FALSE
+
 	return TRUE
 
 // Checks to see if the organ is frozen from temperature and adds the ORGAN_FROZEN flag if so
@@ -366,7 +368,6 @@
 
 	organ_flags &= ~ORGAN_FROZEN
 	return (organ_flags & ORGAN_FROZEN)
-
 
 /// Malus caused by germs
 /obj/item/organ/proc/handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
