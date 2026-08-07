@@ -325,6 +325,7 @@
 /obj/structure/bars/wooden_arch
 	name = "decorative wooden arch"
 	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	icon_state = "wooden_barrier"
 	attacked_sound = list("sound/combat/hits/onwood/woodimpact (1).ogg", "sound/combat/hits/onwood/woodimpact (2).ogg")
 
 /obj/structure/plank

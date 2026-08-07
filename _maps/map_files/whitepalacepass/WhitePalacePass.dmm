@@ -27154,7 +27154,6 @@
 /obj/structure/door/violet{
 	name = "Kitchen"
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/servant,
 /turf/open/floor/tile/checker,
 /area/indoors/town/keep/kitchen)

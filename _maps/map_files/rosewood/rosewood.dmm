@@ -19136,6 +19136,7 @@
 /area/indoors/town)
 "jji" = (
 /obj/structure/table/wood/counter/end,
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "jjC" = (
@@ -24448,6 +24449,7 @@
 /obj/structure/table/wood/counter/end{
 	dir = 4
 	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "lPF" = (
@@ -27258,6 +27260,7 @@
 /area/indoors/town/noble_manor/blue)
 "njq" = (
 /obj/structure/table/wood/counter,
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "njz" = (
@@ -43300,6 +43303,7 @@
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "uXF" = (
@@ -47313,6 +47317,13 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town)
+"wQT" = (
+/obj/structure/door/violet{
+	name = "Kitchen"
+	},
+/obj/effect/mapping_helpers/access/keyset/manor/steward,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/keep)
 "wQY" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
@@ -105449,7 +105460,7 @@ dWd
 nrk
 ati
 mZy
-eJI
+wQT
 yiW
 yiW
 yiW

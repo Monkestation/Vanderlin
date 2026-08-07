@@ -18503,6 +18503,7 @@
 /area/indoors/town/shop)
 "qax" = (
 /obj/structure/table/wood/counter,
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "qaB" = (
@@ -20178,8 +20179,7 @@
 /obj/structure/door/violet{
 	name = "Kitchen"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
-/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/servant,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "rAz" = (
@@ -27466,6 +27466,14 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
+"ybH" = (
+/obj/structure/door/violet{
+	name = "Kitchen"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/servant,
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/keep/kitchen)
 "ybK" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -27551,7 +27559,6 @@
 /obj/structure/door/violet{
 	name = "servants' pantry"
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/servant,
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -127172,7 +127179,7 @@ qax
 qax
 qax
 tNv
-rAu
+ybH
 tNv
 tNv
 hoJ
