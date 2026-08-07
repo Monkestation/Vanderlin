@@ -15318,13 +15318,7 @@
 	pixel_x = -10;
 	pixel_y = 8
 	},
-/obj/structure/bars{
-	icon_state = "barsbent";
-	layer = 2.81;
-	name = "kitchen manners";
-	alpha = 0;
-	mouse_opacity = 0
-	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "hjs" = (
@@ -48199,13 +48193,7 @@
 /area/outdoors/town)
 "vAf" = (
 /obj/structure/table/wood/counter,
-/obj/structure/bars{
-	icon_state = "barsbent";
-	layer = 2.81;
-	name = "kitchen manners";
-	alpha = 0;
-	mouse_opacity = 0
-	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "vAq" = (
@@ -52604,13 +52592,7 @@
 /obj/item/tray{
 	pixel_y = 6
 	},
-/obj/structure/bars{
-	icon_state = "barsbent";
-	layer = 2.81;
-	name = "kitchen manners";
-	alpha = 0;
-	mouse_opacity = 0
-	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "xps" = (
