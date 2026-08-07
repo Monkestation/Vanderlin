@@ -16,7 +16,6 @@
 	var/stasis = FALSE
 	var/can_sleep = TRUE
 
-
 /datum/action/cooldown/spell/undirected/eternal_vigilance/cast(mob/living/carbon/human/cast_on)
 	. = ..()
 	can_sleep = TRUE
@@ -24,20 +23,20 @@
 		//we're ALREADY in basic stasis, time to wake up
 		stasis = FALSE
 		cast_on.remove_status_effect(/datum/status_effect/aasimar_stasis)
-	else
-		//try to enter stasis
-		if(cast_on.eyesclosed)
-			var/list/equipped_items = cast_on.get_equipped_items()
-			for(var/obj/item/clothing/thing in equipped_items)
-				if(thing.clothing_flags & CANT_SLEEP_IN)
-					//we're too uncomfortable for deep stasis
-					to_chat(cast_on, span_boldwarning("I can't enter stasis...[thing] bothers me..."))
-					can_sleep = FALSE
-					break
-			//we made it through the items check, go into deep stasis for a set duration.
-			if(can_sleep)
-				cast_on.apply_status_effect(/datum/status_effect/aasimar_stasis/deep)
-		else
-			//time for regular stasis
-			cast_on.apply_status_effect(/datum/status_effect/aasimar_stasis)
-			stasis = TRUE
+		return
+	//try to enter stasis
+	if(cast_on.eyesclosed)
+		var/list/equipped_items = cast_on.get_equipped_items()
+		for(var/obj/item/clothing/thing in equipped_items)
+			if(thing.clothing_flags & CANT_SLEEP_IN)
+				//we're too uncomfortable for deep stasis
+				to_chat(cast_on, span_boldwarning("I can't enter stasis...[thing] bothers me..."))
+				can_sleep = FALSE
+				break
+		//we made it through the items check, go into deep stasis for a set duration.
+		if(can_sleep)
+			cast_on.apply_status_effect(/datum/status_effect/aasimar_stasis/deep)
+		return
+	//time for regular stasis
+	cast_on.apply_status_effect(/datum/status_effect/aasimar_stasis)
+	stasis = TRUE
