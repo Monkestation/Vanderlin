@@ -12,9 +12,8 @@
 	spell_cost = 0
 	check_flags = NONE
 
-	//tracking if we're already in basic stasis
+	/// tracking if we're already in basic stasis
 	var/stasis = FALSE
-	var/can_sleep = TRUE
 
 /datum/action/cooldown/spell/undirected/eternal_vigilance/cast(mob/living/carbon/human/cast_on)
 	. = ..()
