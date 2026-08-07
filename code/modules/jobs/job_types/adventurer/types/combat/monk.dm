@@ -40,6 +40,11 @@
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
+		TRAIT_CLOSECOMBAT,
+	)
+
+	spells = list(
+		/datum/action/innate/clench_fists
 	)
 
 /datum/job/advclass/combat/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)

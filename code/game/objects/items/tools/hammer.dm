@@ -251,6 +251,27 @@
 	no_spark = TRUE
 	item_weight = 1.12 KILOGRAMS
 
+/obj/item/weapon/hammer/stone
+	name = "stone hammer"
+	desc = "A simple, if crude and primitive hammer."
+	icon_state = "stonehammer"
+	icon = 'icons/roguetown/weapons/tools.dmi'
+	force = DAMAGE_HAMMER - 4
+	max_integrity = INTEGRITY_POOR
+	melting_material = /obj/item/natural/stone
+	toolspeed = 1
+	no_spark = TRUE
+	item_weight = 1.1 KILOGRAMS
+
+/obj/item/weapon/hammer/stone/rock
+	name = "hammerstone"
+	desc = "A simple rock, rounded and turned almost into a proper tool."
+	icon_state = "hammerstone"
+	force = DAMAGE_HAMMER - 6
+	max_integrity = INTEGRITY_WORST
+	toolspeed = 0.8
+	item_weight = 0.8 KILOGRAMS
+
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"
 	desc = "It's almost asking to be put to work."

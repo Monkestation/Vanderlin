@@ -135,20 +135,19 @@
 	sleeved = 'icons/roguetown/clothing/onmob/ornate_tunic.dmi'
 	boobed = TRUE
 	abstract_type = /obj/item/clothing/shirt/ornate
+	sellprice = 30
 
 /obj/item/clothing/shirt/ornate/tunic
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "ornate tunic"
 	desc = "A red tunic with gold accents, fit for nobility."
 	icon_state = "ornatetunic"
-	sellprice = 150
 
 /obj/item/clothing/shirt/ornate/dress
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "ornate dress"
 	desc = "A red dress with gold accents, fit for nobility."
 	icon_state = "ornatedress"
-	sellprice = 150
 
 /obj/item/clothing/shirt/clothvest
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK

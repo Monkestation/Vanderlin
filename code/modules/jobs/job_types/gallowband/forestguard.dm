@@ -294,11 +294,16 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
+		TRAIT_CLOSECOMBAT,
 		TRAIT_GALLOWBAND
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	verbs = list(
 		/mob/proc/haltyell
+	)
+
+	spells = list(
+		/datum/action/innate/clench_fists
 	)
 
 /datum/outfit/forestguard/ossland_scout
