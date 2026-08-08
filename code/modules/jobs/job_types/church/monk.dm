@@ -135,7 +135,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/noc)
-			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
+			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1, "Pharynx" = 1))
 			switch(language)
 				if("Dwarvish")
 					spawned.grant_language(/datum/language/dwarvish)
@@ -162,10 +162,16 @@
 					to_chat(spawned,span_info("\
 					I learned the tongue of the savages in my time.")
 					)
+				if("Pharynx")
+					spawned.grant_language(/datum/language/pharynx)
+					to_chat(spawned,span_info("\
+					I learned the tongue of the feculents and the quacks.")
+					)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/pestra)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/pestra)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			spawned.grant_language(/datum/language/pharynx)
 		if(/datum/patron/divine/dendor)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/dendor)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)

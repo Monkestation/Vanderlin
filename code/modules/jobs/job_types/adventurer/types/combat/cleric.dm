@@ -91,6 +91,7 @@
 				spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			if(/datum/patron/divine/pestra)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+				spawned.grant_language(/datum/language/pharynx)
 			if(/datum/patron/divine/abyssor)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 				spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 20)

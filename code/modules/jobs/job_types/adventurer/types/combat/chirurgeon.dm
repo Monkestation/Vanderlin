@@ -31,6 +31,9 @@
 		TRAIT_EMPATH,
 		TRAIT_DEADNOSE,
 	)
+	languages = list(
+		/datum/language/pharynx,
+	)
 
 /datum/outfit/chirurgeon
 	name = "Chirurgeon (Migrant Wave)"

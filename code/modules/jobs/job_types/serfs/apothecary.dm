@@ -18,6 +18,11 @@
 
 	)
 
+	languages = list(
+		/datum/language/pharynx,
+	)
+
+
 /datum/attribute_holder/sheet/job/apothecary/old
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 3,

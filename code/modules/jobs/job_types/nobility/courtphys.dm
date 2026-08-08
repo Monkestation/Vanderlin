@@ -17,6 +17,10 @@
 		/datum/attribute/skill/labor/farming = 30,
 	)
 
+	languages = list(
+		/datum/language/pharynx,
+	)
+
 /datum/attribute_holder/sheet/job/courtphys/old
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
