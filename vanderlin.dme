@@ -4287,6 +4287,7 @@
 #include "code\modules\spells\spell_types\undirected\create_cloud.dm"
 #include "code\modules\spells\spell_types\undirected\divine_strike.dm"
 #include "code\modules\spells\spell_types\undirected\embrace_death.dm"
+#include "code\modules\spells\spell_types\undirected\eternal_vigilance.dm"
 #include "code\modules\spells\spell_types\undirected\fart.dm"
 #include "code\modules\spells\spell_types\undirected\feather_fall.dm"
 #include "code\modules\spells\spell_types\undirected\forcewall.dm"

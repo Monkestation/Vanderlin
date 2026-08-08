@@ -52,3 +52,8 @@
       Winemaking, Distilling, and Cheesemaking.'
   realforest2001:
   - bugfix: Noble gem cutlery is now REAL and not just for the museum.
+2026-08-08:
+  Spitegremlin:
+  - rscadd: Added more emotes, finger snapping, sniffing, single clap
+  tired-wired:
+  - rscadd: Added a stasis function for aasimar.

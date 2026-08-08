@@ -155,6 +155,15 @@
 	)
 	craftdiff = 1
 
+/datum/blueprint_recipe/carpentry/decorative_arch
+	name = "wooden decorative arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	result_type = /obj/structure/bars/wooden_arch
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 2,
+	)
+	craftdiff = 2
+
 /datum/blueprint_recipe/carpentry/pyre
 	name = "wooden pyre"
 	desc = "A wooden funeral pyre."
