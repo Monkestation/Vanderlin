@@ -1,6 +1,6 @@
 /obj/structure/mercstatue
 	name = "mercenary statue"
-	desc = "A gilbronze statue of a mercenary from ages long past."
+	desc = "A bronze statue of a mercenary from ages long past."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "mercstatue"
 	density = TRUE
