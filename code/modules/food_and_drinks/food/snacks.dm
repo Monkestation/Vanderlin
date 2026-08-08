@@ -523,7 +523,7 @@ All foods are distributed among various categories. Use common sense.
 			var/mob/living/carbon/C = eater
 			var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
 			if(C.cmode)
-				if(!CH.grabbedby)
+				if(!length(CH.grabbedby))
 					to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
 					return ITEM_INTERACT_BLOCKING
 
