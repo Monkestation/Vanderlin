@@ -26,7 +26,7 @@
 				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 			if(WOUND_BLUNT, WOUND_LASH)
 				. += "Bandage bruises and lashes to allow them to heal."
-			if(WOUND_BURN)
+			if(WOUND_BURN, WOUND_INTENSE_BURN)
 				. += "Disinfect and salve burns to allow them to heal."
 			if("germs")
 				. += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."

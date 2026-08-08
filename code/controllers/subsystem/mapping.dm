@@ -248,6 +248,9 @@ SUBSYSTEM_DEF(mapping)
 		for(var/datum/map_config/OtherZ as anything in otherZ)
 			if(OtherZ.defaulted)
 				continue
+			for(var/list/z_level in OtherZ.traits)
+				if(!(ZTRAIT_OUTLAND in z_level))
+					z_level[ZTRAIT_OUTLAND] = TRUE
 			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_OUTLAND, delve = OtherZ.delve)
 
 	if(SSdbcore.Connect())

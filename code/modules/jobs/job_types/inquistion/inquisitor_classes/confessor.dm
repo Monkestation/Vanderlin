@@ -228,7 +228,7 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/face/facemask/steel/confessor
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/rope/inqarticles/inquirycord = 1,

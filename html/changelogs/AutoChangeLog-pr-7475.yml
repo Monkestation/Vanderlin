@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - balance: "Characters no longer start rounds hungry or thirsty immediately."
