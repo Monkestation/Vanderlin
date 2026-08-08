@@ -271,7 +271,7 @@
 		return
 	var/mob/living/carbon/human/H = interacting_with
 	if(!(user == H))
-		to_chat(user, span_warning("I can only bind myself to the ring"))
+		to_chat(user, span_warning("I can only bind myself to the ring."))
 		return
 	if(!is_mercenary_job(user.mind.assigned_role))
 		to_chat(user, span_warning("I am not a mercenary, the ring does not answer to me."))
