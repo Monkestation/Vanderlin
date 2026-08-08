@@ -31,11 +31,12 @@
 
 /datum/job/mercenary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/job/mercenary, set_availability), spawned), 0)
-	if(player_client?.prefs)
-		var/datum/preferences/prefs = player_client.prefs
-		spawned.mercdesc = prefs.read_preference(/datum/preference/list_type/role_setting/mercenary_description)
-		return
+	if(SSmapping.config?.map_name != "Voyage")
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/job/mercenary, set_availability), spawned), 0)
+		if(player_client?.prefs)
+			var/datum/preferences/prefs = player_client.prefs
+			spawned.mercdesc = prefs.read_preference(/datum/preference/list_type/role_setting/mercenary_description)
+			return
 
 /datum/job/mercenary/proc/set_availability(mob/living/carbon/human/spawned)
 	if(!spawned || QDELETED(spawned) || !spawned.client)
