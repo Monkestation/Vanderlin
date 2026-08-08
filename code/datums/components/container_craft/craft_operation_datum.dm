@@ -138,7 +138,7 @@
 		return
 
 	// Update progress
-	progress += seconds_per_tick
+	progress += SPT_TO_DECISECONDS(seconds_per_tick)
 	last_progress_time = world.time
 
 	// Check if craft is complete

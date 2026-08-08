@@ -22,7 +22,7 @@
 	/// How long has the furnace been smelting for? Resets when adding an item.
 	var/smelting_progress = 0
 	/// How high smelting_progress needs to reach before smelting an ore
-	var/smelting_threshold = 40
+	var/smelting_threshold = 4 SECONDS
 	var/max_crucible_temperature = 1500
 
 /obj/machinery/light/fueled/smelter/examine(mob/user, params)
@@ -154,7 +154,7 @@
 		return
 
 	if(smelting_progress < smelting_threshold)
-		smelting_progress += seconds_per_tick
+		smelting_progress += SPT_TO_DECISECONDS(seconds_per_tick)
 		playsound(src.loc,'sound/misc/smelter_sound.ogg', 50, FALSE)
 		return
 
