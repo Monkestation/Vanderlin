@@ -2090,7 +2090,7 @@
 /area/ship/middeck)
 "nT" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/scrying,
+/obj/item/scrying/orb,
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/two,
 /area/ship/nobledeck)

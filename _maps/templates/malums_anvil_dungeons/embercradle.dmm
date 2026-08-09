@@ -1267,7 +1267,7 @@
 /area/under/mountains/anvil/dungeon)
 "ro" = (
 /obj/machinery/artificer_table,
-/obj/item/scrying,
+/obj/item/scrying/orb,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/stellar,
 /area/under/mountains/anvil/dungeon/lower)

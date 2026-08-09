@@ -4,7 +4,7 @@
 
 /obj/structure/vampire/scryingorb/Initialize()
 	. = ..()
-	AddComponent(/datum/component/scrying/vampire) //Temporary alternative
+	AddComponent(/datum/component/scrying, 12 SECONDS, 3 SECONDS, FALSE, FALSE) //Temporary alternative
 
 /*
 /mob/proc/enter_night_eye()

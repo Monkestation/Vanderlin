@@ -278,7 +278,7 @@
 	name = "Staff of the Wizend Wizard"
 	},
 /obj/structure/table/wood/fancy/royalblue,
-/obj/item/scrying,
+/obj/item/scrying/orb,
 /turf/open/floor/carpet,
 /area/indoors)
 "aW" = (

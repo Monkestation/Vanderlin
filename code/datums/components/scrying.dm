@@ -14,49 +14,66 @@
 	var/mob/scry_eye/scrying_eye
 	var/mob/living/carbon/held_user
 
-	var/interact_method = "attack_self"
 	COOLDOWN_DECLARE(scry_cooldown)
 
-/datum/component/scrying/Initialize()
+/datum/component/scrying/Initialize(new_view_duration, new_cooldown_duration, need_knowledge, need_alive, cooldown_text_override)
 	. = ..()
-	if(!isobj(parent))
+	if(!isitem(parent) && !isstructure(parent))
 		return COMPONENT_INCOMPATIBLE
+
+	if(new_view_duration)
+		vision_duration = new_view_duration
+	if(new_cooldown_duration)
+		cooldown_duration = new_cooldown_duration
+	if(!isnull(need_knowledge))
+		needs_to_know = need_knowledge
+	if(!isnull(need_alive))
+		needs_to_live = need_alive
+	if(cooldown_text_override)
+		text_cooldown_fail = cooldown_text_override
+
+	var/obj/parent_obj = parent
+	name = parent_obj.name
 	text_cooldown_fail = replacetext(text_cooldown_fail, "NAME_HERE", "\the [name]")
 
 /datum/component/scrying/RegisterWithParent()
-	switch(interact_method)
-		if("attack_self")
-			RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(activate))
-		if("attack_hand")
-			RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(activate))
+	if(isstructure(parent))
+		RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(activate))
+		return
+	if(isitem(parent))
+		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(activate))
+		return
 
 /datum/component/scrying/UnregisterFromParent()
-	switch(interact_method)
-		if("attack_self")
-			UnregisterSignal(parent, COMSIG_ITEM_ATTACK_SELF)
-		if("attack_hand")
-			UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
+	if(isstructure(parent))
+		UnregisterSignal(parent, COMSIG_ITEM_ATTACK_SELF)
+		return
+	if(isitem(parent))
+		UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
+		return
 
 /datum/component/scrying/Destroy(force)
 	QDEL_NULL(scrying_eye)
 	held_user = null
 	return ..()
 
-/datum/component/scrying/proc/activate(datum/source, mob/user)
-	if(!pass_extra_checks(user))
+/datum/component/scrying/proc/activate(datum/source, mob/living/user)
+	var/obj/parent_obj = parent
+	if(!parent_obj.pass_scrying_checks(user))
 		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, scry_cooldown))
 		to_chat(user, span_warning(text_cooldown_fail))
 		return FALSE
 
-	var/search_name = tgui_input_text(user, "Who are you looking for?", name)
-	if(!search_name)
-		return FALSE
+	var/search_name = tgui_input_text(user, "Who are you looking for?", name, timeout = 10 SECONDS)
 
 	//check is applied twice to prevent someone from bypassing the cooldown
 	if(!COOLDOWN_FINISHED(src, scry_cooldown))
 		to_chat(user, span_warning(text_cooldown_fail))
+		return FALSE
+
+	if(!search_name)
 		return FALSE
 
 	if(!user.mind || (needs_to_know && !user.mind.do_i_know(name = search_name)))
@@ -129,48 +146,6 @@
 	QDEL_NULL(scrying_eye)
 	held_user = null
 
-
-/datum/component/scrying/proc/pass_extra_checks(mob/living/user)
-	return TRUE
-
-/datum/component/scrying/orb
-	name = "Scrying Orb"
-
-/datum/component/scrying/orb/pass_extra_checks(mob/living/user)
-	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) < 1)
-		to_chat(user, span_warning("I do not know what to do with this..."))
-		return FALSE
-	return TRUE
-
-/datum/component/scrying/eye
-	name = "Accursed Eye"
-	cooldown_duration = 5 MINUTES
-
-/datum/component/scrying/vampire
-	name = "Night's Eye"
-	needs_to_know = FALSE
-	needs_to_live = FALSE
-	vision_duration = 12 SECONDS
-	cooldown_duration = 3 SECONDS
-
-/datum/component/scrying/vampire/pass_extra_checks(mob/living/user)
-	if(!user?.mind.has_antag_datum(/datum/antagonist/vampire/lord))
-		to_chat(user, span_warning("I don't have the power to use this!"))
-		return FALSE
-	return TRUE
-
-/datum/component/scrying/telescope
-	name = "NOC Device"
-	text_cooldown_fail = "I peer into the sky but cannot focus the lens on the face of Noc. Maybe I should wait."
-	interact_method = "attack_hand"
-
-/datum/component/scrying/telescope/pass_extra_checks(mob/living/user)
-	var/mob/living/carbon/human/human_user = user
-	if(!ishuman(human_user) || !HAS_TRAIT(human_user, TRAIT_VIRGIN))
-		to_chat(human_user, span_warning("Noc looks angry with me..."))
-		return FALSE
-	return TRUE
-
 /datum/component/scrying/mirror
 	name = "Black Mirror"
 	vision_duration = 6 SECONDS
@@ -180,7 +155,7 @@
 	var/mob/stored_target
 	var/atom/movable/screen/alert/blackmirror/effect
 
-/datum/component/scrying/mirror/Initialize(obj/item/scrying/parent)
+/datum/component/scrying/mirror/Initialize(new_view_duration, new_cooldown_duration, need_knowledge, need_alive, cooldown_text_override)
 	. = ..()
 	parent_mirror = parent
 	if(!istype(parent_mirror))
@@ -193,8 +168,8 @@
 	. = ..()
 
 /datum/component/scrying/mirror/activate(mob/living/user)
-	if(!pass_extra_checks(user))
-		message_admins("SCRY DEBUG: EXTRA CHECKS FAIL")
+	var/obj/parent_obj = parent
+	if(!parent_obj.pass_scrying_checks(user))
 		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, scry_cooldown))

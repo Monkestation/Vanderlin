@@ -1,8 +1,11 @@
+/obj/proc/pass_scrying_checks(mob/user)
+	return TRUE
+
 /obj/item/scrying
-	name = "scrying orb"
-	desc = "On its glass depths, you can scry on many unsuspecting beings..."
+	name = "scrying object"
+	desc = "You can see more than you ought with this..."
 	icon = 'icons/roguetown/items/misc.dmi'
-	icon_state ="scrying"
+	icon_state = "scrying"
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 15
@@ -15,11 +18,33 @@
 	grid_height = 32
 	grid_width = 32
 
-	var/scry_comp_path = /datum/component/scrying/orb
+	abstract_type = /obj/item/scrying
 
 /obj/item/scrying/Initialize(mapload)
 	. = ..()
-	AddComponent(scry_comp_path)
+	add_scry_comp()
+
+/obj/item/scrying/proc/add_scry_comp()
+	AddComponent(/datum/component/scrying)
+
+/obj/item/scrying/orb
+	name = "arcyne scrying orb"
+	desc = "Within its glass depths, you can scry on many unsuspecting beings..."
+
+/obj/item/scrying/orb/pass_scrying_checks(mob/living/user)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) < 1)
+		to_chat(user, span_warning("I do not know what to do with this..."))
+		return FALSE
+	return TRUE
+
+/obj/item/scrying/orb/miracle
+	name = "divine scrying orb"
+
+/obj/item/scrying/orb/miracle/pass_scrying_checks(mob/living/user)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/holy) < 1)
+		to_chat(user, span_warning("I do not know what to do with this..."))
+		return FALSE
+	return TRUE
 
 /obj/item/scrying/eye
 	name = "accursed eye"
@@ -27,20 +52,45 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scryeye"
 
-	scry_comp_path = /datum/component/scrying/eye
+/obj/item/scrying/eye/add_scry_comp()
+	AddComponent(/datum/component/scrying, 8 SECONDS, 5 MINUTES)
 
+/obj/item/scrying/eye/bogwitch
+	name = "eye of the hunt"
+
+/obj/item/scrying/eye/bogwitch/add_scry_comp()
+	AddComponent(/datum/component/scrying, 8 SECONDS, 60 SECONDS)
+
+/obj/item/scrying/eye/bogwitch/pass_scrying_checks(mob/living/user)
+	if(!istype(user.patron, /datum/patron/alternate/great_hunt/proven))
+		to_chat(user, span_warning("I do not know what to do with this..."))
+		return FALSE
+	return TRUE
 
 /*	..................   NOC Device (Fixed scrying ball)   ................... */
-/obj/structure/nocdevice
+/obj/structure/scrying/Initialize()
+	. = ..()
+	add_scry_comp()
+
+/obj/structure/scrying/proc/add_scry_comp()
+	AddComponent(/datum/component/scrying)
+
+/obj/structure/scrying/nocdevice
 	name = "NOC Device"
 	desc = "An intricate lunar observation machine, that allows its user to study the face of Noc in the sky, reflecting the true whereabouts of hidden beings..."
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "nocdevice"
 	layer = 4.2
 
-/obj/structure/nocdevice/Initialize()
-	. = ..()
-	AddComponent(/datum/component/scrying/telescope)
+/obj/structure/scrying/nocdevice/add_scry_comp()
+	AddComponent(/datum/component/scrying, 10 SECONDS, 45 SECONDS, TRUE, FALSE, "I peer into the sky but cannot focus the lens on the face of Noc. Maybe I should wait.")
+
+/obj/structure/scrying/nocdevice/pass_scrying_checks(mob/living/user)
+	var/mob/living/carbon/human/human_user = user
+	if(!ishuman(human_user) || !HAS_TRAIT(human_user, TRAIT_VIRGIN))
+		to_chat(human_user, span_warning("Noc looks angry with me..."))
+		return FALSE
+	return TRUE
 
 /*	..................   THE EYE   ................... */
 /mob/scry_eye
@@ -51,8 +101,6 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 	var/mob/living/user_mob
 	var/moving_eye = FALSE
-
-/mob/scry_eye/blackmirror
 
 /mob/scry_eye/Move(n, direct)
 	if(!moving_eye)
@@ -67,12 +115,9 @@
 	return
 
 
-
-
-
-
 /* VAMPIRE EYE */
 /mob/scry_eye/eye_of_night
+	name = "Arcane Eye"
 	sight = 0
 	see_in_dark = 2
 	invisibility = INVISIBILITY_GHOST
@@ -122,7 +167,6 @@
 		/mob/scry_eye/eye_of_night/proc/vampire_telepathy
 	)
 	add_verb(src, verbs)
-	name = "Arcane Eye"
 	grant_all_languages()
 
 /mob/scry_eye/eye_of_night/proc/cancel_scry()
