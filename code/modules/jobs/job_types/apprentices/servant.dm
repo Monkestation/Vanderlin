@@ -60,6 +60,7 @@
 	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 	can_have_apprentices = FALSE
+	starting_wage = 35
 
 	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL

@@ -38,9 +38,10 @@
 
 	var/static/sound/ringing = sound('sound/flash_ring.ogg', FALSE, 0, CHANNEL_EAR_RING, 75)
 
-/obj/item/organ/ears/Insert(mob/living/carbon/M, special, drop_if_replaced, new_zone = null)
+/obj/item/organ/ears/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	for(var/datum/wound/facial/ears/ear_wound in M.get_wounds())
+
+	for(var/datum/wound/facial/ears/ear_wound in organ_owner.get_wounds())
 		qdel(ear_wound)
 	if(temporary_deafness)
 		on_deafened()
@@ -155,10 +156,12 @@
 /obj/item/organ/ears/rakshari
 	name = "rakshari ears"
 
-/obj/item/organ/ears/rakshari/Insert(mob/living/carbon/M, special, drop_if_replaced, new_zone = null)
+/obj/item/organ/ears/rakshari/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	ADD_TRAIT(M, TRAIT_KEENEARS, "[type]")
 
-/obj/item/organ/ears/rakshari/Remove(mob/living/carbon/human/H,  special = 0)
+	ADD_TRAIT(organ_owner, TRAIT_KEENEARS, "[type]")
+
+/obj/item/organ/ears/rakshari/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	REMOVE_TRAIT(H, TRAIT_KEENEARS, "[type]")
+
+	REMOVE_TRAIT(organ_owner, TRAIT_KEENEARS, "[type]")
