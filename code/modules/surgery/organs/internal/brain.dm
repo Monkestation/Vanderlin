@@ -35,8 +35,8 @@
 	current_blood = 100
 	blood_req = 2.5
 	oxygen_req = 6
-	nutriment_req = 3
-	hydration_req = 1.5
+	nutriment_req = 1.5 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.75 * RATE_OF_THIRST_GLOBAL
 	self_healing_effect = CE_BRAIN_REGEN
 	self_heal_thresholds = list()
 

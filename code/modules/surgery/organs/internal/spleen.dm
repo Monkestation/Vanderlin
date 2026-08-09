@@ -18,8 +18,8 @@
 	current_blood = 20
 	blood_req = 1
 	oxygen_req = 2
-	nutriment_req = 2.4
-	hydration_req = 0.9
+	nutriment_req = 1.2 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.45 * RATE_OF_THIRST_GLOBAL
 
 	var/blood_regen_factor = BLOOD_REGEN_FACTOR // how much blood the spleen regenerates per efficiency point, per 2 seconds
 
