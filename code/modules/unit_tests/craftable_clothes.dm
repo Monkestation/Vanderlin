@@ -22,7 +22,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
-		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
 		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
@@ -47,8 +46,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/roguehood/psydon/confessor, ///inqport
 		/obj/item/clothing/face/facemask/steel/confessor, ///inqport
 		/obj/item/clothing/gloves/bandages/pugilist,
-		/obj/item/clothing/armor/gambeson/heavy/otavan/inq, ///inqport
-		/obj/item/clothing/armor/gambeson/heavy/otavan, ///null
+		/obj/item/clothing/armor/gambeson/heavy/grenzel/inq, ///inqport
+		/obj/item/clothing/armor/gambeson/heavy/grenzel, ///null
 		/obj/item/clothing/armor/gambeson/heavy/inq, //inqport
 		/obj/item/clothing/armor/leather/studded,
 		/obj/item/clothing/armor/leather/jacket/leathercoat/confessor, //inqport
@@ -63,11 +62,11 @@ abstract types are automatically excluded.
 		/obj/item/clothing/armor/plate/fluted,
 		/obj/item/clothing/cloak/templar, //base type
 		/obj/item/clothing/face/antiq, //implied to be a weird heartfelt technoitem. good luck replicating this. unique to antiquarian
-		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/wrists/bracers/preceptor, //Inqstuff
 		/obj/item/clothing/head/menacing/mad_touched_treasure_hunter, //cursed
 		/obj/item/clothing/face/facemask/steel/mad_touched, //cursed
 		/obj/item/clothing/cloak/poncho/yellow,//No free colouring
-		/obj/item/clothing/cloak/ordinatorcape/lirvas,
+		/obj/item/clothing/cloak/ordinatorcape/warrior,
 		/obj/item/clothing/cloak/minotaur,
 		/obj/item/clothing/cloak/psydontabard/black,
 		/obj/item/clothing/cloak/psydontabard/black/alt,
@@ -127,19 +126,19 @@ abstract types are automatically excluded.
 		/obj/item/clothing/gloves/plate/iron/banded,
 
 		///all blackmeadow are pending blackmeadow features
-		/obj/item/clothing/cloak/kazengun,
-		/obj/item/clothing/neck/gorget/kazengun,
-		/obj/item/clothing/shoes/boots/leather/kazengun,
-		/obj/item/clothing/pants/trou/leather/kazengun,
-		/obj/item/clothing/face/facemask/steel/kazengun,
-		/obj/item/clothing/face/facemask/steel/kazengun/full,
+		/obj/item/clothing/cloak/blackmeadow,
+		/obj/item/clothing/neck/gorget/blackmeadow,
+		/obj/item/clothing/shoes/boots/leather/blackmeadow,
+		/obj/item/clothing/pants/trou/leather/blackmeadow,
+		/obj/item/clothing/face/facemask/steel/blackmeadow,
+		/obj/item/clothing/face/facemask/steel/blackmeadow/full,
 		/obj/item/clothing/head/helmet/heavy/kabuto,
 		/obj/item/clothing/armor/plate/full/samsibsa,
 		/obj/item/clothing/gloves/plate/kote,
 		/obj/item/clothing/head/helmet/kettle/jingasa,
 		/obj/item/clothing/armor/brigandine/haraate,
 
-		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
+		/obj/item/clothing/wrists/bracers/preceptor, //Inqstuff
 		/obj/item/clothing/pants/trou/leather/pontifex,
 		/obj/item/clothing/head/peel_pin, //Giveaway only
 	)
@@ -158,6 +157,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/shirt/robe/kimono, //these are mob holders only
 		/obj/item/clothing/armor/regenerating, ///uh no
 		/obj/item/clothing/head/inqarticles, //inqports
+		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 	)
 
 	/// excludes paths that are subtypes of these types and only subtypes
@@ -202,20 +202,20 @@ abstract types are automatically excluded.
 			clothes_list -= path
 
 	// paths by text, if a piece of this text is found in the typepath it's excluded
-	for(var/path as anything in clothes_list)
-		for(var/text_to_find as anything in excluded_paths_by_text)
+	for(var/path in clothes_list)
+		for(var/text_to_find in excluded_paths_by_text)
 			if(findtextEx("[path]", "/[text_to_find]"))
 				clothes_list -= path
 				break
 
 	// paths with subtypes
-	for(var/paths_to_exclude as anything in excluded_paths_with_their_subtypes)
+	for(var/paths_to_exclude in excluded_paths_with_their_subtypes)
 		for(var/path in clothes_list)
 			if(ispath(path, paths_to_exclude))
 				clothes_list -= path
 
 	// paths by subtypes only
-	for(var/paths_to_exclude as anything in excluded_paths_subtypes_only)
+	for(var/paths_to_exclude in excluded_paths_subtypes_only)
 		for(var/path in clothes_list)
 			if(ispath(path, paths_to_exclude) && (paths_to_exclude != path))
 				clothes_list -= path
@@ -226,7 +226,7 @@ abstract types are automatically excluded.
 	for(var/datum/loot_table/loot_datum as anything in subtypesof(/datum/loot_table))
 		var/datum/loot_table/loot_table_to_check = new loot_datum
 		for(var/list/parent_list as anything in loot_table_to_check.loot_table)
-			for(var/loot_path as anything in parent_list)
+			for(var/loot_path in parent_list)
 				clothes_list -= loot_path
 		qdel(loot_table_to_check)
 
@@ -234,7 +234,7 @@ abstract types are automatically excluded.
 	for(var/datum/supply_pack/supply_pack_being_checked as anything in supply_pack_list)
 		var/list/supply_pack_contents = list()
 		supply_pack_contents += supply_pack_being_checked.contains // some contains definitions are not lists
-		for(var/path_in_contents as anything in supply_pack_contents)
+		for(var/path_in_contents in supply_pack_contents)
 			clothes_list -= path_in_contents
 
 	/* crafting recipes go next */

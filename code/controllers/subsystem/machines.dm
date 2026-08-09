@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(machines)
 	return all_machines.Copy()
 
 /datum/controller/subsystem/machines/stat_entry(msg)
-	msg = "\n  M:[length(all_machines)]|MT:[length(machines_by_type)]|PM:[length(processing)]"
+	msg = "M:[length(all_machines)]|MT:[length(machines_by_type)]|PM:[length(processing)]"
 	return ..()
 
 /datum/controller/subsystem/machines/fire(resumed = 0)
@@ -56,8 +56,8 @@ SUBSYSTEM_DEF(machines)
 
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
-	while(currentrun.len)
-		var/obj/machinery/thing = currentrun[currentrun.len]
+	while(length(currentrun))
+		var/obj/machinery/thing = currentrun[length(currentrun)]
 		currentrun.len--
 		if(QDELETED(thing) || thing.process(wait * 0.1) == PROCESS_KILL)
 			processing -= thing

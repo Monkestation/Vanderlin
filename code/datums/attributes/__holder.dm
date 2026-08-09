@@ -429,8 +429,7 @@
 			output += span_notice("<EM>[category]</EM>")
 		else
 			output += span_notice("\n<EM>[category]</EM>")
-		for(var/thing in skills_by_category[category])
-			var/datum/attribute/skill/skill = thing
+		for(var/datum/attribute/skill/skill as anything in skills_by_category[category])
 			var/calculated_raw_skill = return_raw_calculated_skill(skill.type)
 			var/calculated_skill = return_calculated_skill(skill.type)
 			var/raw_skill = isnull(calculated_raw_skill) ? "NA" : calculated_raw_skill
@@ -464,8 +463,7 @@
 			var/datum/attribute/attribute = GLOB.all_stats[thing]
 			stats += attribute
 	output += span_notice("<EM>Stats</EM>")
-	for(var/thing in stats)
-		var/datum/attribute/stat/stat = thing
+	for(var/datum/attribute/stat/stat as anything in stats)
 		var/raw_attribute = nulltozero(raw_attribute_list[stat.type])
 		var/total_attribute = nulltozero(attribute_list[stat.type])
 		var/total_style = "class='info'"

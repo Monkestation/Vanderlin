@@ -2732,8 +2732,8 @@
 /area/indoors/mountains/anvil/upperkeep)
 "ane" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/storage/backpack/satchel/otavan,
-/obj/item/storage/backpack/satchel/otavan,
+/obj/item/storage/backpack/satchel/grenzel,
+/obj/item/storage/backpack/satchel/grenzel,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/church/purple,
@@ -6059,7 +6059,7 @@
 /obj/structure/handcart{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/corpse/damaged,
+/obj/effect/mob_spawn/corpse/human/damaged,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aCD" = (

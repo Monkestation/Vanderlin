@@ -2,7 +2,6 @@
 	abstract_type = /obj/item/organ
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
-	var/mob/living/carbon/owner = null
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 0
 	sellprice = DEFAULT_ORGAN_VALUE
@@ -10,6 +9,13 @@
 	grid_width = 32
 	grid_height = 32
 	germ_level = 0
+
+	/// The mob that owns this organ.
+	var/mob/living/carbon/owner = null
+	/// Reference to the limb we're inside of
+	var/obj/item/bodypart/bodypart_owner
+
+	var/status = ORGAN_ORGANIC
 
 	/// Time we have spent failing
 	var/failure_time = 0
@@ -74,9 +80,6 @@
 
 	/// What food typepath should be used when eaten
 	var/food_type = /obj/item/reagent_containers/food/snacks/meat/organ
-	/// Original owner of the organ, the one who had it inside them last
-	var/mob/living/carbon/last_owner = null
-
 	/// Needs to get processed on next life() tick
 	var/needs_processing = TRUE
 
@@ -116,18 +119,22 @@
 	/// If the mob has this chem effect, ignore all other checks for can_self_heal and ignore self_heal_thresholds
 	var/self_healing_effect = CE_ORGAN_REGEN
 
-/obj/item/organ/Initialize()
+/obj/item/organ/Initialize(mapload)
 	. = ..()
-	START_PROCESSING(SSobj, src)
 	current_zone = zone
 	if(use_mob_sprite_as_obj_sprite)
 		update_appearance(UPDATE_OVERLAYS)
+	START_PROCESSING(SSobj, src)
 
 /obj/item/organ/Destroy()
-	if(owner)
-		Remove(owner, special=TRUE)
-	last_owner = null
-	STOP_PROCESSING(SSobj, src)
+	if(bodypart_owner && !owner && !QDELETED(bodypart_owner))
+		bodypart_remove(bodypart_owner)
+	else if(owner)
+		// The special flag is important, because otherwise mobs can die
+		// while undergoing transformation into different mobs.
+		Remove(owner, special = TRUE)
+	else
+		STOP_PROCESSING(SSobj, src)
 	LAZYNULL(organ_efficiency_modification)
 	return ..()
 
@@ -224,8 +231,7 @@
 	if(current_blood < max_blood_storage)
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
-		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
-			var/obj/item/organ/candidate = thing
+		for(var/obj/item/organ/candidate as anything in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
 			if(candidate.current_blood && (candidate.get_slot_efficiency(ORGAN_SLOT_ARTERY) >= ORGAN_FAILING_EFFICIENCY))
 				artery = candidate
 				break
@@ -285,77 +291,6 @@
 	for(var/mutable_appearance/node_overlay in organ.overlay_states)
 		. += node_overlay
 
-/obj/item/organ/proc/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE, new_zone = null)
-	if(!iscarbon(M) || owner == M)
-		return
-
-	if(!isnull(new_zone))
-		current_zone = new_zone
-	else
-		current_zone = zone
-
-	if(unique_slot)
-		var/obj/item/organ/replaced = M.getorganslot(slot)
-		if(replaced)
-			replaced.Remove(M, special = 1)
-			if(drop_if_replaced)
-				replaced.forceMove(get_turf(M))
-			else
-				qdel(replaced)
-
-	SEND_SIGNAL(src, COMSIG_ORGAN_INSERTED, M)
-	owner = M
-	last_owner = M
-	M.internal_organs |= src
-	moveToNullspace()
-	for(var/slot in organ_efficiency)
-		LAZYADD(M.internal_organs_slot[slot], src)
-		update_organ_efficiency(slot)
-	var/checked_zone = check_zone(current_zone)
-	LAZYADD(M.organs_by_zone[checked_zone], src)
-	RegisterSignal(owner, COMSIG_ATOM_EXAMINE, PROC_REF(on_owner_examine))
-	for(var/datum/action/A as anything in actions)
-		A.Grant(M)
-	update_accessory_colors()
-	update_appearance()
-	if(!(M.status_flags & BUILDING_ORGANS))
-		if(visible_organ)
-			M.update_body_parts(TRUE)
-		M.update_organ_requirements()
-		if(organ_flags & ORGAN_LIMB_SUPPORTER)
-			var/obj/item/bodypart/affected = owner.get_bodypart(current_zone)
-			affected?.update_limb_efficiency()
-	STOP_PROCESSING(SSobj, src)
-
-//Special is for instant replacement like autosurgeons
-/obj/item/organ/proc/Remove(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
-	if(!M)
-		return
-	SEND_SIGNAL(src, COMSIG_ORGAN_REMOVED, M)
-	UnregisterSignal(owner, COMSIG_ATOM_EXAMINE)
-	var/initial_zone = current_zone
-	owner = null
-	current_zone = zone
-	M.internal_organs -= src
-	for(var/slot in organ_efficiency)
-		LAZYREMOVE(M.internal_organs_slot[slot], src)
-	var/checked_initial_zone = check_zone(initial_zone)
-	LAZYREMOVE(M.organs_by_zone[checked_initial_zone], src)
-	if((organ_flags & ORGAN_VITAL) && !special && !(M.status_flags & GODMODE))
-		M.death()
-	for(var/datum/action/A as anything in actions)
-		A.Remove(M)
-	if(visible_organ)
-		M.update_body_parts(TRUE)
-	update_appearance()
-
-	START_PROCESSING(SSobj, src)
-	if(!(M.status_flags & BUILDING_ORGANS))
-		M.update_organ_requirements()
-		if(organ_flags & ORGAN_LIMB_SUPPORTER)
-			var/obj/item/bodypart/affected = M.get_bodypart(initial_zone)
-			affected?.update_limb_efficiency()
-
 /obj/item/organ/proc/on_owner_examine(datum/source, mob/user, list/examine_list)
 	return
 
@@ -367,9 +302,16 @@
 	// Kinda hate doing it like this, but I really don't want to call process directly.
 	return on_death(delta_time, times_fired)
 
+/obj/item/organ/proc/on_death(delta_time, times_fired, passed_temp)
+	if(can_decay(passed_temp))
+		decay(delta_time)
+
 /// proper decaying
 /obj/item/organ/proc/decay(delta_time)
-	adjust_germ_level(rand(min_germ_factor, max_germ_factor) * delta_time)
+	var/factor = rand(min_germ_factor, max_germ_factor)
+	if(factor == 0)
+		return
+	adjust_germ_level(factor * delta_time)
 
 /obj/item/organ/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
@@ -383,24 +325,19 @@
 		setOrganDamage(maxHealth)
 		return TRUE
 
-/// Runs decay both inside and outside a person
-/obj/item/organ/proc/on_death(delta_time, times_fired, passed_temp)
-	if(!owner && !isbodypart(loc))
-		if(isnull(loc))
-			STOP_PROCESSING(SSobj, src)
-		organ_flags |= ORGAN_CUT_AWAY
-	if(can_decay(passed_temp))
-		decay(delta_time)
-	// else
-	// 	STOP_PROCESSING(SSobj, src)
-
 /// Infection/rot checks
 /obj/item/organ/proc/can_decay(passed_temp)
+	if(IS_ROBOTIC_ORGAN(src))
+		return FALSE
+
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
+
 	check_cold(passed_temp)
-	if(IS_ROBOTIC_ORGAN(src) || CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_INDESTRUCTIBLE))//I'll let arteries not rot to make life easier
+
+	if(CHECK_BITFIELD(organ_flags, ORGAN_FROZEN|ORGAN_NECROTIC|ORGAN_INDESTRUCTIBLE))
 		return FALSE
+
 	return TRUE
 
 // Checks to see if the organ is frozen from temperature and adds the ORGAN_FROZEN flag if so
@@ -431,7 +368,6 @@
 
 	organ_flags &= ~ORGAN_FROZEN
 	return (organ_flags & ORGAN_FROZEN)
-
 
 /// Malus caused by germs
 /obj/item/organ/proc/handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
@@ -834,6 +770,7 @@
 	if(!ears)
 		ears = new()
 		ears.Insert(src)
+
 	ears.setOrganDamage(0)
 	ears.adjust_temporary_deafness(-INFINITY)
 /**

@@ -234,7 +234,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/mailer = null
 	var/mailedto = null
 
-	var/list/examine_effects = list()
+	var/list/examine_effects
 
 	var/list/blocksound //played when an item that is equipped blocks a hit
 
@@ -1669,7 +1669,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 
 	if(!silent)
-		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
+		balloon_alert_to_viewers(("[name]<br>breaks!"))
 
 /obj/item/return_recipe_data()
 	var/has_grind = length(grind_results)

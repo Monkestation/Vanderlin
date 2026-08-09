@@ -14,7 +14,7 @@
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 //................ Grenzelhoft Cuirass ............... //
 /obj/item/clothing/armor/cuirass/grenzelhoft
@@ -26,7 +26,7 @@
 	boobed = TRUE
 
 	armor_type = /datum/armor/plate/good
-	item_weight = 10 KILOGRAMS
+	item_weight = 5 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/rare
 	abstract_type = /obj/item/clothing/armor/cuirass/rare
@@ -54,7 +54,7 @@
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_VEST
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6.5 KILOGRAMS
+	item_weight = 5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/rust
@@ -90,7 +90,7 @@
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
-	item_weight = 6.4 KILOGRAMS
+	item_weight = 3 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/vampire
 	name = "ancient plate"
@@ -101,7 +101,7 @@
 	armor_type = /datum/armor/plate/good
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	item_weight = 7 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fencer
 	name = "fencer's cuirass"
@@ -126,6 +126,7 @@
 
 	body_parts_covered = CHEST | VITALS | LEGS
 	max_integrity = INTEGRITY_STRONGEST
+	item_weight = 6.5 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fluted/iron
 	name = "iron fluted cuirass"

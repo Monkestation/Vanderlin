@@ -91,12 +91,12 @@
 	gloves = /obj/item/clothing/gloves/chain/psydon
 	neck = /obj/item/clothing/neck/chaincoif
 	pants = /obj/item/clothing/pants/chainlegs
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	shoes = /obj/item/clothing/shoes/psydonboots
 	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,

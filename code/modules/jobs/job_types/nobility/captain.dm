@@ -38,6 +38,10 @@
 
 /datum/job/captain
 	title = JOB_GUARD_CAPTAIN
+	alt_titles = list("Commander of The Watch", "Knight Commander", "Watch Master", "Marshal")
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Sir")
+	alt_honorary_female = list("Dame")
 	tutorial = "Law and Order, your divine reason for existence. \
 	You have been given command over the town and keep garrison to help ensure order and peace within the city, \
 	and defend it against the many dangers of the peninsula."

@@ -4,7 +4,7 @@
 	var/recipe_name = ""
 	var/smells_like = "nothing"
 	var/list/output_reagents = list()
-	var/list/output_items = list()
+	var/list/output_items
 	var/list/required_essences = list()
 
 /datum/alch_cauldron_recipe/proc/matches_essences(list/available_essences)
