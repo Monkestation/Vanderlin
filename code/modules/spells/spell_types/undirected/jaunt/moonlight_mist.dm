@@ -1,3 +1,4 @@
+/* Disabled for compat with magic rework
 /datum/action/cooldown/spell/undirected/planar_shift
 	name = "Planar Shift"
 	desc = "This spell turns your form ethereal, making you invisible and able to pass through walls."
@@ -216,3 +217,4 @@
 	shifter.remove_traits(list(TRAIT_MAGICALLY_PHASED, TRAIT_RUNECHAT_HIDDEN, TRAIT_WEATHER_IMMUNE), REF(src))
 	// This needs to happen at the end, after all the traits and stuff is handled
 	SEND_SIGNAL(shifter, COMSIG_MOB_AFTER_EXIT_JAUNT, src)
+*/
