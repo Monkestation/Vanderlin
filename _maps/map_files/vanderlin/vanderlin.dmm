@@ -5373,10 +5373,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
-"cBr" = (
-/turf/closed/wall/mineral/stone/window,
-/turf/open/floor/blocks,
-/area/indoors/town/keep/gate)
 "cCk" = (
 /obj/structure/bed/wool,
 /obj/item/bedsheet/fabric,
@@ -156975,7 +156971,7 @@ biy
 biy
 hHM
 ojO
-cBr
+ojO
 hET
 hHM
 biy
