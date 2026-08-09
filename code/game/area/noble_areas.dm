@@ -134,6 +134,10 @@
 	name = "Keep Guest Room 2"
 	icon_state = "guest2"
 
+/area/indoors/town/keep/guest/guest3
+	name = "Keep Guest Room 3"
+	icon_state = "guest3"
+
 /area/indoors/town/keep/guest/meeting
 	name = "Keep Meeting Room"
 	icon_state = "meeting"

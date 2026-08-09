@@ -322,6 +322,12 @@
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
+/obj/structure/bars/wooden_arch
+	name = "decorative wooden arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	icon_state = "wooden_barrier"
+	attacked_sound = list("sound/combat/hits/onwood/woodimpact (1).ogg", "sound/combat/hits/onwood/woodimpact (2).ogg")
+
 /obj/structure/plank
 	name = "plank"
 	desc = ""

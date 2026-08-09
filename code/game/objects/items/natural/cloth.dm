@@ -230,9 +230,11 @@
 	if(!do_after(user, used_time, M))
 		return FALSE
 
+	if(!user.temporarilyRemoveItemFromInventory(src))
+		return FALSE
+
 	playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 
-	user.dropItemToGround(src)
 	affecting.try_bandage(src)
 	H.update_damage_overlays()
 

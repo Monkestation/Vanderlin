@@ -1,10 +1,5 @@
 // Guidelines for Stockpiles. Items should always cost ~50% more to withdraw than was received for depositing.
 // Export Prices should fall between the payout and the withdraw, unless the item is incredibly cheap.
-
-/datum/stock/stockpile
-	var/oversupply_amount = 999
-	var/oversupply_payout = 0
-
 /datum/stock/stockpile/get_payout_price(obj/item/I)
 	return (held_items >= oversupply_amount) ? oversupply_payout : payout_price
 
