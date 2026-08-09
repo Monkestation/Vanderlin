@@ -32,6 +32,7 @@
 	grid_height = 64
 	grid_width = 32
 	item_weight = 200 GRAMS
+	tool_behaviour = TOOL_KNIFE
 
 /obj/item/weapon/knife/Initialize()
 	. = ..()

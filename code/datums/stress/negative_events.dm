@@ -669,11 +669,6 @@
 	stress_change = 15
 	timer = 60 SECONDS
 
-/datum/stress_event/dismembered
-	desc = "<span class='boldwarning'>AHH! I WAS USING THAT LIMB!</span>\n"
-	stress_change = 10
-	timer = 8 MINUTES
-
 /datum/stress_event/embedded
 	desc = "<span class='boldwarning'>Pull it out!</span>\n"
 	stress_change = 7
