@@ -107,7 +107,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	armor = /obj/item/clothing/armor/cuirass/fluted
 	gloves = /obj/item/clothing/gloves/plate
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 
 /datum/attribute_holder/sheet/job/magnate
 	raw_attribute_list = list(
@@ -148,7 +148,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/formal
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/leather/jacket/tailcoat/lord
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/head/chaperon/colored/greyscale/silk
 	mask = /obj/item/clothing/face/spectacles/monocle
 
@@ -193,7 +193,7 @@
 	shirt = /obj/item/clothing/shirt/tunic/colored/random
 	armor = /obj/item/clothing/armor/basiceast/crafteast
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	backr = /obj/item/storage/backpack/satchel/black
+	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1
@@ -239,7 +239,7 @@
 	head = /obj/item/clothing/head/chaperon
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	shirt = /obj/item/clothing/shirt/dress/silkdress/loudmouth
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 
 /datum/attribute_holder/sheet/job/vassal
 	raw_attribute_list = list(
@@ -325,16 +325,4 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather
 	ring = /obj/item/clothing/ring/silver
-
-/datum/outfit/noble/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.age == AGE_CHILD)
-		backpack_contents = list(
-			/obj/item/reagent_containers/glass/carafe/teapot/tea = 1,
-			/obj/item/reagent_containers/glass/cup/teacup/fancy = 3
-		)
-	else
-		backpack_contents = list(
-			/obj/item/reagent_containers/glass/bottle/wine = 1,
-			/obj/item/reagent_containers/glass/cup/silver = 1
-		)
+	beltl = /obj/item/key/manor

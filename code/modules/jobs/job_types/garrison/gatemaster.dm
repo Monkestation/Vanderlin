@@ -19,6 +19,7 @@
 	give_bank_account = 30
 	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGatekeeper.ogg'
+	starting_wage = 30
 
 	job_bitflag = BITFLAG_GARRISON
 

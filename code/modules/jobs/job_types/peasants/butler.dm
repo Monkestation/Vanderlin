@@ -39,6 +39,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
+	starting_wage = 35
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_BUTLER
@@ -68,13 +69,14 @@
 /datum/outfit/butler
 	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
-	beltr = /obj/item/storage/keyring/butler
 	beltl = /obj/item/storage/belt/pouch/coins/mid
+	beltr = /obj/item/weapon/whip/butler
 	backr = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(
 		/obj/item/weapon/knife/villager = 1,
-		/obj/item/servant_bell/lord = 1
+		/obj/item/servant_bell/lord = 1,
+		/obj/item/storage/keyring/butler = 1
 	)
 
 /datum/outfit/butler/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
