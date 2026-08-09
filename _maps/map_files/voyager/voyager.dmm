@@ -5941,7 +5941,7 @@
 /area/ship/nobledeck)
 "NI" = (
 /obj/item/key/manor,
-/obj/item/key/walls,
+/obj/item/key/gatehouse,
 /obj/item/key/blacksmith,
 /obj/item/key/steward,
 /obj/item/key/church,

@@ -282,9 +282,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					adjust_blood_volume(-10)
 				if(limb.cremation_progress >= 50)
 					if(limb.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-						limb.skeletonize()
 						should_update_body = TRUE
-						limb.drop_limb()
 						limb.visible_message("<span class='warning'>[src]'s [limb.name] crumbles into ash!</span>")
 						qdel(limb)
 					else
@@ -298,9 +296,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			head.cremation_progress += rand(1,4)
 			if(head.cremation_progress >= 50)
 				if(head.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-					head.skeletonize()
 					should_update_body = TRUE
-					head.drop_limb()
 					head.visible_message("<span class='warning'>[src]'s head crumbles into ash!</span>")
 					qdel(head)
 				else

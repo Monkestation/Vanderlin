@@ -60,6 +60,7 @@
 	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 	can_have_apprentices = FALSE
+	starting_wage = 35
 
 	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL
@@ -78,7 +79,7 @@
 
 /datum/outfit/servant
 	name = JOB_SERVANT
-	neck = /obj/item/key/manor
+	neck = /obj/item/key/servant
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking = 1,
