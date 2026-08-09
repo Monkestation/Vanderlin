@@ -139,7 +139,7 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/mana_star
 	backpack_contents = list(
-		/obj/item/scrying = 1,
+		/obj/item/scrying/orb = 1,
 		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/killersice = 1,
 		/obj/item/book/granter/spellbook/master = 1,
