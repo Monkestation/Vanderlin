@@ -89,6 +89,7 @@
 	)
 
 	languages = list(
+		/datum/language/celestial_moon,
 		/datum/language/elvish,
 		/datum/language/dwarvish,
 		/datum/language/zalad,
@@ -218,6 +219,7 @@
 	)
 
 	languages = list(
+		/datum/language/celestial_moon,
 		/datum/language/celestial,
 		/datum/language/hellspeak
 	)
@@ -340,6 +342,7 @@
 	)
 
 	languages = list(
+		/datum/language/celestial_moon,
 		/datum/language/celestial,
 		/datum/language/hellspeak
 	)
