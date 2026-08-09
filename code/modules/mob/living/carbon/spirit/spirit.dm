@@ -59,7 +59,7 @@
 	put_in_hands(L)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_BAREFOOT, 1, -6)
 
-/mob/living/carbon/spirit/create_internal_organs()
+/mob/living/carbon/spirit/proc/create_internal_organs()
 	internal_organs += new /obj/item/organ/lungs
 	internal_organs += new /obj/item/organ/heart
 	internal_organs += new /obj/item/organ/brain
@@ -68,7 +68,6 @@
 	internal_organs += new /obj/item/organ/ears
 	internal_organs += new /obj/item/organ/liver
 	internal_organs += new /obj/item/organ/stomach
-	..()
 
 /mob/living/carbon/spirit/Destroy()
 	GLOB.spirit_list -= src

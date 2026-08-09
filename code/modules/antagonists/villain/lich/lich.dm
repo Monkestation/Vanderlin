@@ -58,6 +58,7 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
+		TRAIT_NO_ORGAN_PROCESS,
 	)
 
 	var/list/spells = list(
@@ -127,9 +128,9 @@
 
 	L.set_faction(list(FACTION_UNDEAD))
 	L.mob_biotypes |= MOB_UNDEAD
-	L.grant_undead_eyes()
 	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.skeletonize(FALSE)
+	L.grant_undead_eyes()
 
 	L.equipOutfit(/datum/outfit/lich)
 	L.set_patron(/datum/patron/inhumen/zizo)
