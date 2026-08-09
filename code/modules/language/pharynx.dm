@@ -14,8 +14,8 @@
 	additional_syllable_high = 1
 	default_priority = 80
 	default_priority = 80
-	mutual_understanding = list( // can understand some orcish with this, the reverse is not true.
-		datum/language/orcish = 33,
+	mutual_understanding = list( // Pharynx is somewhat based on orcish, speakers can understand some of it, the reverse is not true.
+		/datum/language/orcish = 33,
 		)
 
 	syllables = list(

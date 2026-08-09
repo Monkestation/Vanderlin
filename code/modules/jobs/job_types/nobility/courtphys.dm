@@ -17,9 +17,7 @@
 		/datum/attribute/skill/labor/farming = 30,
 	)
 
-	languages = list(
-		/datum/language/pharynx,
-	)
+
 
 /datum/attribute_holder/sheet/job/courtphys/old
 	raw_attribute_list = list(
@@ -80,6 +78,9 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
 		TRAIT_VIRGIN,
+	)
+	languages = list(
+		/datum/language/pharynx,
 	)
 	book_type = /obj/item/recipe_book/medical
 

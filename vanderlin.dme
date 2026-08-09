@@ -3554,6 +3554,7 @@
 #include "code\modules\language\newpsydonic.dm"
 #include "code\modules\language\oldpsydonic.dm"
 #include "code\modules\language\orc.dm"
+#include "code\modules\language\pharynx.dm"
 #include "code\modules\language\rousman.dm"
 #include "code\modules\language\sandspeak.dm"
 #include "code\modules\language\thieves_cant.dm"

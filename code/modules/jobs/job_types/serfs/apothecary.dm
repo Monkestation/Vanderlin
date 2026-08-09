@@ -18,9 +18,7 @@
 
 	)
 
-	languages = list(
-		/datum/language/pharynx,
-	)
+
 
 
 /datum/attribute_holder/sheet/job/apothecary/old
@@ -82,6 +80,10 @@
 		EXP_TYPE_LIVING = 600
 	)
 	book_type = /obj/item/recipe_book/alchemy
+
+	languages = list(
+		/datum/language/pharynx,
+	)
 
 /datum/job/apothecary/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
