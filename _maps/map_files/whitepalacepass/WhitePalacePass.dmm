@@ -19102,7 +19102,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "lHr" = (
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -3
 	},
 /turf/open/floor/wood,

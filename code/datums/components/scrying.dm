@@ -37,18 +37,18 @@
 	text_cooldown_fail = replacetext(text_cooldown_fail, "NAME_HERE", "\the [name]")
 
 /datum/component/scrying/RegisterWithParent()
-	if(isstructure(parent))
+	if(isitem(parent))
 		RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(activate))
 		return
-	if(isitem(parent))
+	if(isstructure(parent))
 		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(activate))
 		return
 
 /datum/component/scrying/UnregisterFromParent()
-	if(isstructure(parent))
+	if(isitem(parent))
 		UnregisterSignal(parent, COMSIG_ITEM_ATTACK_SELF)
 		return
-	if(isitem(parent))
+	if(isstructure(parent))
 		UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
 		return
 

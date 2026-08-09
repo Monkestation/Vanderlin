@@ -29720,7 +29720,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -5;
 	pixel_y = 6
 	},
@@ -45796,7 +45796,7 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/town)
 "wdz" = (
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -3
 	},
 /turf/open/floor/wood,

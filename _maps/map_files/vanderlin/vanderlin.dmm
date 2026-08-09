@@ -48155,7 +48155,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
 "vNk" = (
-/obj/structure/nocdevice,
+/obj/structure/scrying/nocdevice,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
