@@ -48,7 +48,7 @@
 
 	available_types = shuffle(available_types)
 	var/assigned = 0
-	for(var/quest_type as anything in available_types)
+	for(var/quest_type in available_types)
 		if(assigned >= 3)
 			break
 

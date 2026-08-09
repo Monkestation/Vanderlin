@@ -22,8 +22,17 @@
 
 /datum/attribute_holder/sheet/job/templar/patron/noc
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/labor/mathematics = 20
+	)
+
+/datum/attribute_holder/sheet/job/templar/patron/noc/khopesh
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 40
+	)
+
+/datum/attribute_holder/sheet/job/templar/patron/noc/flail
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/whipsflails = 40
 	)
 
 /datum/attribute_holder/sheet/job/templar/patron/dendor
@@ -159,6 +168,18 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+			var/static/list/selectable = list(
+				"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,
+				"Lunar Flail" = /obj/item/weapon/flail/silver/noc,
+			)
+			var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
+			if(!choice)
+				return
+			switch(choice)
+				if("Moonlight Khopesh")
+					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/khopesh)
+				if("Lunar Flail")
+					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/flail)
 		if(/datum/patron/divine/dendor)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/dendor)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
@@ -251,7 +272,6 @@
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
 			cloak = /obj/item/clothing/cloak/stabard/templar/noc
-			beltl = /obj/item/weapon/sword/sabre/noc
 		if(/datum/patron/divine/dendor)
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
 			head = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm

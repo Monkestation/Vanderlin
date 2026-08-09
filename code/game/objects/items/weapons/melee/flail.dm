@@ -12,7 +12,6 @@
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(FLAIL_STRIKE, FLAIL_SMASH)
 	max_integrity = INTEGRITY_STRONG
-	minstr = 6
 
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
@@ -57,7 +56,6 @@
 	possible_item_intents = list(MACE_WDSTRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_WDSTRIKE)
 	max_integrity = INTEGRITY_STANDARD
-	minstr = 5
 	smeltresult = /obj/item/fertilizer/ash
 	sellprice = 10
 	item_weight = 700 GRAMS
@@ -70,7 +68,6 @@
 	icon_state = "flail"
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 4
 	smeltresult = null
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 35
@@ -121,7 +118,6 @@
 	icon_state = "psyflail"
 	force = DAMAGE_GOOD_FLAIL
 	max_integrity = INTEGRITY_STRONGEST
-	minstr = 4
 	smeltresult = /obj/item/ingot/silverblessed
 	sellprice = 50
 	last_used = 0
@@ -155,7 +151,6 @@
 	possible_item_intents = list(FLAIL_LNGSTRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
 	max_integrity = INTEGRITY_STRONG
-	minstr = 8
 
 	bigboy = TRUE
 	gripsprite = TRUE
@@ -187,7 +182,6 @@
 	wlength = WLENGTH_GREAT
 	possible_item_intents = list(FLAIL_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	minstr = 9
 	smeltresult = /obj/item/fertilizer/ash
 	pixel_y = -16
 	pixel_x = -16
@@ -198,7 +192,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
 	anvilrepair = /datum/attribute/skill/craft/carpentry
-	dropshrink = 0.9
 	resistance_flags = FLAMMABLE
 	item_weight = 3.5 KILOGRAMS
 

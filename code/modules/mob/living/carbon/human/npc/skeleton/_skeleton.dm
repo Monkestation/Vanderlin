@@ -2,6 +2,7 @@
 	name = "skeleton"
 	icon = 'icons/roguetown/mob/monster/skeletons.dmi'
 	icon_state = MAP_SWITCH("", "skeleton")
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/human/northern
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
@@ -43,10 +44,7 @@
 	real_name = "skeleton"
 	underwear = "Nude"
 	mob_biotypes = MOB_UNDEAD
-	faction = list(FACTION_UNDEAD)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_UNDEAD)
 	if(length(quirks))
 		clear_quirks()
 	if(dna?.species)

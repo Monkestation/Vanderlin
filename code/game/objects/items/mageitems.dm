@@ -414,17 +414,18 @@
 		paired_with.say(input_text)
 
 /obj/item/clothing/gloves/nomagic
+	name = "mana binding gloves"
 	icon = 'icons/roguetown/clothing/gloves.dmi'
 	bloody_icon_state = "bloodyhands"
 	icon_state = "angle"
 	w_class = WEIGHT_CLASS_SMALL
+	resistance_flags = FIRE_PROOF
 	item_weight = 100 GRAMS
 	var/active_item
 
 /obj/item/clothing/gloves/nomagic/Initialize(mapload)
 	. = ..()
-	name = "mana binding gloves"
-	resistance_flags = FIRE_PROOF
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE, 1, ITEM_SLOT_GLOVES)
 	///VANDERLIN TO DO
 
 /obj/item/clothing/gloves/nomagic/equipped(mob/living/user, slot)

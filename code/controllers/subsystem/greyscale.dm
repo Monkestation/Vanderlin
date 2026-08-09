@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(greyscale)
 #endif
 
 	// This final verification step is for things that need other greyscale configurations to be finished loading
-	for(var/greyscale_type as anything in configurations)
+	for(var/greyscale_type in configurations)
 		CHECK_TICK
 		var/datum/greyscale_config/config = configurations[greyscale_type]
 		config.CrossVerify()

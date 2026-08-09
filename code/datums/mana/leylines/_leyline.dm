@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 
 	return ..()
 
-/datum/mana_pool/leyline/New(atom/parent = null, z_level = SSmapping.levels_by_trait(ZTRAIT_STATION)[1])
+/datum/mana_pool/leyline/New(atom/parent = null, z_level = SSmapping.levels_by_trait(ZTRAIT_TOWN)[1])
 	GLOB.all_leylines += src
 
 	intensity = generate_initial_intensity()

@@ -368,16 +368,43 @@
 
 /obj/item/clothing/ring/courtagent_ring
 	name = "Finger's Crown"
-	icon_state = "ring_agent"
+	icon_state = "ring_s_agent"
 	desc = "A silver signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 	examine_name = /obj/item/clothing/ring/silver::name
+	base_icon_state = "ring_s"
+	abstract_type = /obj/item/clothing/ring/courtagent_ring
+	var/metal_adjective = "silver"
+
+/obj/item/clothing/ring/courtagent_ring/silver/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
+	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 
 /obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)
 	if(isobserver(user) || HAS_TRAIT(user, TRAIT_COURTAGENT) || get_dist(user, src) < 1)
 		return ..()
-	return ma2html(mutable_appearance(icon, "ring_s"), user)
+	return ma2html(mutable_appearance(icon, base_icon_state), user)
+
+/obj/item/clothing/ring/courtagent_ring/gold
+	icon_state = "ring_g_agent"
+	examine_name = /obj/item/clothing/ring/gold::name
+	base_icon_state = "ring_g"
+	metal_adjective = "golden"
+
+/obj/item/clothing/ring/courtagent_ring/blacksteel
+	icon_state = "ring_bs_agent"
+	examine_name = /obj/item/clothing/ring/blacksteel::name
+	base_icon_state = "ring_bs"
+	metal_adjective = "blacksteel"
+
+/obj/item/clothing/ring/courtagent_ring/bronze
+	icon_state = "ring_b_agent"
+	examine_name = /obj/item/clothing/ring/bronze::name
+	base_icon_state = "ring_b"
+	metal_adjective = "bronze"

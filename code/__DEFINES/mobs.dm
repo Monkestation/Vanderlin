@@ -64,8 +64,8 @@
 
 // ~organ sides
 #define NO_SIDE 0
-#define RIGHT_SIDE (1<<0)
-#define LEFT_SIDE (1<<1)
+#define RIGHT_SIDE 1
+#define LEFT_SIDE 2
 
 //Organ defines for carbon mobs
 #define CHRONIC_ARTHRITIS 1
@@ -380,6 +380,14 @@
 #define DOING_INTERACTION_LIMIT(user, interaction_key, max_interaction_count) ((LAZYACCESS(user.do_afters, interaction_key) || 0) >= max_interaction_count)
 #define DOING_INTERACTION_WITH_TARGET(user, target) (LAZYACCESS(user.do_afters, target))
 #define DOING_INTERACTION_WITH_TARGET_LIMIT(user, target, max_interaction_count) ((LAZYACCESS(user.do_afters, target) || 0) >= max_interaction_count)
+
+// recent examine defines
+/// How long it takes for an examined atom to be removed from recent_examines. Should be the max of the below time windows
+#define RECENT_EXAMINE_MAX_WINDOW (1.5 SECONDS)
+/// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
+#define EXAMINE_MORE_WINDOW (0.75 SECONDS)
+/// If you yawn while someone nearby has examined you within this time frame, it will force them to yawn as well. Tradecraft!
+#define YAWN_PROPAGATION_EXAMINE_WINDOW (1.5 SECONDS)
 
 //defense intents
 #define INTENT_DODGE 1
