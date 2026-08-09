@@ -3,9 +3,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 */
 #define OBESITY "obesity"
 
-// ************* atom traits
-#define EAR_DAMAGE "ear_damage"
-
 /// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
 
@@ -501,6 +498,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 #define TRAIT_VIRGIN	"virginity"
+// This is for UNARMED FIGHTERS. LIMIT ITS USE TO THEM
+#define TRAIT_CLOSECOMBAT "Close Combat"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise

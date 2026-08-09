@@ -26,7 +26,7 @@
 				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 			if(WOUND_BLUNT, WOUND_LASH)
 				. += "Bandage bruises and lashes to allow them to heal."
-			if(WOUND_BURN)
+			if(WOUND_BURN, WOUND_INTENSE_BURN)
 				. += "Disinfect and salve burns to allow them to heal."
 			if("germs")
 				. += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
@@ -37,20 +37,19 @@
 	. = ..()
 	if(owner)
 		return
+
 	var/list/head_status = list()
 	if(!brain)
 		head_status += "<span class='dead'>The brain is missing.</span>"
 
 	if(!eyes_left)
 		head_status += "<span class='warning'>The left eye is missing.</span>"
+
 	if(!eyes_right)
 		head_status += "<span class='warning'>The right eye is missing.</span>"
 
 	if(!ears)
 		head_status += "<span class='warning'>The ears are missing.</span>"
-
-	if(!tongue)
-		head_status += "<span class='warning'>The tongue is missing.</span>"
 
 	if(length(head_status))
 		. += "<B>Organs:</B>"

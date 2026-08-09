@@ -270,6 +270,11 @@
 #define KATAR_CUT			/datum/intent/katar/cut
 #define KATAR_THRUST		/datum/intent/katar/thrust
 
+#define CLOSECOMBAT_PUNCH   /datum/intent/unarmed/punch/closecombat
+#define CLOSECOMBAT_JAB     /datum/intent/unarmed/punch/jab
+#define CLOSECOMBAT_SLUG    /datum/intent/unarmed/punch/slug
+#define CLOSECOMBAT_SLAM    /datum/intent/unarmed/punch/slam
+
 #define NEANT_SHOOT			/datum/intent/shoot/neant
 #define PLEX_BLINK			/datum/intent/plex_dash
 #define DAZE_BASH			/datum/intent/effect/daze
@@ -321,6 +326,7 @@
 #define BCLASS_BITE			"bite"
 #define BCLASS_BURN			"charring"
 #define BCLASS_LASHING		"lashing"
+#define BCLASS_INTENSE_BURN "intense burn"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1

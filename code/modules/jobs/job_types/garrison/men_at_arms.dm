@@ -24,6 +24,7 @@
 	give_bank_account = 30
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	starting_wage = 30
 
 	job_bitflag = BITFLAG_GARRISON
 

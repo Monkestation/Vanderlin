@@ -81,6 +81,10 @@
 	color = EM_BLOCK_COLOR
 
 /atom/movable/Initialize(mapload)
+	var/atom/movable/stupid_type = type
+	if(IS_ABSTRACT(stupid_type))
+		stack_trace("Abstract type ([type]) initialised at [AREACOORD(src)]!")
+
 	. = ..()
 
 #if EMISSIVE_BLOCK_GENERIC != 0

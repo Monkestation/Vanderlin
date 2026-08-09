@@ -13,6 +13,7 @@
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
+	starting_wage = 30
 
 	outfit = /datum/outfit/guardsman
 	advclass_cat_rolls = list(CTAG_GARRISON = 20)
