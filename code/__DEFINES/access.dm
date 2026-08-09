@@ -36,17 +36,24 @@
 
 // Manor
 #define ACCESS_MANOR "manor"
+#define ACCESS_BUTLER "butler"
+#define ACCESS_SERVANT "servant"
 #define ACCESS_MANOR_GATE "walls"
 #define ACCESS_STEWARD "steward"
 #define ACCESS_DUNGEON "dungeon"
 #define ACCESS_HAND "hand"
 #define ACCESS_COURTAGENT "court agent"
 #define ACCESS_LORD "lord"
+#define ACCESS_CONSORT "consort"
+#define ACCESS_HEIR "heir"
 #define ACCESS_VAULT "vault"
-#define ACCESS_ARCHIVE "archive"
+#define ACCESS_ARCHIVIST "archivist"
+#define ACCESS_LIBRARY "library"
 #define ACCESS_MAGE "mage"
 #define ACCESS_AT_ARMS "at_arms"
-#define ACCESS_GUEST "guest"
+#define ACCESS_GUEST1 "guest1"
+#define ACCESS_GUEST2 "guest2"
+#define ACCESS_GUEST3 "guest3"
 #define ACCESS_PHYSICIAN "physician"
 #define ACCESS_NOBLE3 "nobles3"
 #define ACCESS_NOBLE2 "nobles2"
@@ -97,3 +104,11 @@
 
 // Other
 #define ACCESS_BOGWITCH "bogwitch"
+
+// Lock Strength
+#define LOCK_LEGENDARY 1
+#define LOCK_MASTER 2
+#define LOCK_EXPERT 3
+#define LOCK_SKILLED 4
+#define LOCK_NOVICE 5
+#define LOCK_BASIC 6

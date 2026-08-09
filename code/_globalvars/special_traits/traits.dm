@@ -632,7 +632,8 @@
 	weight = 50
 
 /datum/special_trait/unlucky/on_apply(mob/living/carbon/human/character, silent)
-	GET_MOB_ATTRIBUTE_VALUE(character, STAT_FORTUNE) = rand(1, 10)
+	var/mod = rand(1, 10)
+	character.adjust_stat_modifier("[type]", list(STAT_FORTUNE = -mod))
 
 /datum/special_trait/jesterphobia
 	name = "Jesterphobic"
