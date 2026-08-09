@@ -14,9 +14,14 @@
 	var/mob/scry_eye/scrying_eye
 	var/mob/living/carbon/held_user
 
+	/// The perception stat required to see the face of your scry-er.
+	var/perception_face = 15
+	/// The perception stat to sense being scryed.
+	var/perception_sense = 11
+
 	COOLDOWN_DECLARE(scry_cooldown)
 
-/datum/component/scrying/Initialize(new_view_duration, new_cooldown_duration, need_knowledge, need_alive, cooldown_text_override)
+/datum/component/scrying/Initialize(new_view_duration, new_cooldown_duration, need_knowledge, need_alive, cooldown_text_override, new_face_perception, new_sense_perception)
 	. = ..()
 	if(!isitem(parent) && !isstructure(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -31,6 +36,10 @@
 		needs_to_live = need_alive
 	if(cooldown_text_override)
 		text_cooldown_fail = cooldown_text_override
+	if(new_face_perception)
+		perception_face = new_face_perception
+	if(new_sense_perception)
+		perception_sense = new_sense_perception
 
 	var/obj/parent_obj = parent
 	name = parent_obj.name
@@ -114,7 +123,7 @@
 	user.visible_message(span_danger("[user] stares into \the [name], [user.p_their()] eyes rolling back into [user.p_their()] head."), span_warning("My eyes roll into the back of my head as I'm lost in the depths of the orb."))
 	scrying_eye.orbit(found_target)
 	var/target_perception = GET_MOB_ATTRIBUTE_VALUE(found_target, STAT_PERCEPTION)
-	if(target_perception >= 15)
+	if(target_perception >= perception_face)
 		if(found_target.mind)
 			if(found_target.mind.do_i_know(name = user.real_name))
 				to_chat(found_target, span_warning("I can clearly see the face of [user.real_name] staring at me!"))
@@ -122,7 +131,7 @@
 				return TRUE
 		to_chat(found_target, span_warning("I can clearly see the face of an unknown [user.gender == FEMALE ? "woman" : "man"] staring at me!"))
 		return TRUE
-	if(target_perception >= 11)
+	if(target_perception >= perception_sense)
 		to_chat(found_target, span_warning("I feel a pair of unknown eyes on me."))
 	return TRUE
 
