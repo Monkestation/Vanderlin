@@ -65,7 +65,6 @@
 	honorary = "Oracle"
 
 	magic_user = TRUE
-	spell_points = 17
 	give_bank_account = 30
 	knows_the_town = TRUE
 
