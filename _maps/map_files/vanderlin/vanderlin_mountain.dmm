@@ -2120,12 +2120,6 @@
 	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"aki" = (
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast{
-	pixel_y = 0
-	},
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "akk" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "vanderlin-forest_mountain-forest";
@@ -14235,6 +14229,7 @@
 /obj/effect/decal/cleanable/ritual_rune/arcyne/empowerment{
 	pixel_y = -47
 	},
+/obj/item/weapon/greataxe/steel/doublehead/graggar,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "uuP" = (
@@ -36955,7 +36950,7 @@ aEY
 aJv
 aJv
 uum
-aki
+aJv
 aJv
 aJv
 aEY
