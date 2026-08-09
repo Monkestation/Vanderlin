@@ -1074,7 +1074,6 @@
 #include "code\datums\chimeric_organs\outputs\status_effect.dm"
 #include "code\datums\chimeric_organs\outputs\stressor.dm"
 #include "code\datums\chimeric_organs\outputs\vomit.dm"
-#include "code\datums\chimeric_organs\outputs\wild_magic.dm"
 #include "code\datums\chimeric_organs\outputs\wound_clotting.dm"
 #include "code\datums\chimeric_organs\special\delayer.dm"
 #include "code\datums\chimeric_organs\special\repeater.dm"

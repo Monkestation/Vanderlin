@@ -74,6 +74,7 @@
 	exp_requirements = list(EXP_TYPE_GARRISON = 900)
 	honorary = "Lieutenant"
 	job_bitflag = BITFLAG_GARRISON
+	starting_wage = 35
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/lieutenant
 
