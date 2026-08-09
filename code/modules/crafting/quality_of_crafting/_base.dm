@@ -632,9 +632,9 @@
 		var/list/usable_contents = get_usable_contents(user)
 		var/list/storage_contents = get_storage_contents(user)
 
-		var/list/copied_requirements = requirements.Copy()
-		var/list/copied_reagent_requirements = reagent_requirements.Copy()
-		var/list/copied_tool_usage = tool_usage.Copy()
+		var/list/copied_requirements = length(requirements) ? requirements.Copy() : list()
+		var/list/copied_reagent_requirements = length(reagent_requirements) ? reagent_requirements.Copy() : list()
+		var/list/copied_tool_usage = length(tool_usage) ? tool_usage.Copy() : list()
 		var/list/to_delete = list()
 		var/list/copied_containers = list()
 
