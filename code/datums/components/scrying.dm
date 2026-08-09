@@ -82,7 +82,7 @@
 
 	var/mob/living/carbon/human/found_target
 	for(var/mob/living/carbon/human/human_target as anything in GLOB.human_list)
-		if(lowertext(human_target.real_name) == lowertext(search_name))
+		if(LOWER_TEXT(human_target.real_name) == LOWER_TEXT(search_name))
 			var/turf/target_turf = get_turf(human_target)
 			if(!target_turf)
 				continue
