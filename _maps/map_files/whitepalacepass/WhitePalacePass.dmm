@@ -911,7 +911,7 @@
 	dir = 9
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "aAA" = (
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_x = -32
@@ -2493,7 +2493,7 @@
 /area/indoors/town/shop)
 "bub" = (
 /turf/open/floor/wood,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "bup" = (
 /obj/structure/chair/bench/church/smallbench/stone,
 /obj/structure/fluff/railing/tall/stone{
@@ -3367,7 +3367,7 @@
 	dir = 6
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "bVD" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/grass/yel,
@@ -4254,7 +4254,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/wood,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "cxb" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -4320,7 +4320,7 @@
 /area/indoors/town/merc_guild)
 "czL" = (
 /turf/closed/mineral/bedrock,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "czT" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/cloth,
@@ -4949,7 +4949,7 @@
 	dir = 6
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "cVI" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/double_pelt,
@@ -10646,11 +10646,11 @@
 "gpX" = (
 /obj/structure/table/wood/fancy/purple,
 /turf/open/floor/wood,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "gqi" = (
 /obj/structure/fluff/telescope,
 /turf/open/floor/wood,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "gqq" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/flora/ausbushes/ywflowers{
@@ -12217,7 +12217,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "hos" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/keyset/town/matron,
@@ -12909,7 +12909,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "hLH" = (
 /obj/structure/mirror/fancy{
 	pixel_x = -31;
@@ -17044,7 +17044,7 @@
 	dir = 10
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "ksc" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
@@ -19154,7 +19154,7 @@
 	pixel_x = -3
 	},
 /turf/open/floor/wood,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "lHW" = (
 /obj/structure/lever/hidden{
 	redstone_id = "dungeonsecret"
@@ -23576,7 +23576,7 @@
 /area/indoors/town/orphanage)
 "ouV" = (
 /turf/closed/mineral,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "ouW" = (
 /obj/structure/rack/shelf/biggest{
 	pixel_y = 16
@@ -27008,10 +27008,10 @@
 "qIz" = (
 /obj/structure/fluff/railing/border,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "qIB" = (
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "qJh" = (
 /obj/structure/fluff/walldeco/vinez/blue{
 	dir = 8
@@ -34113,7 +34113,7 @@
 	dir = 10
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "vlo" = (
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/carpet/royalblack,
@@ -36396,7 +36396,7 @@
 /area/under/town/basement)
 "wGT" = (
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/open_skys)
 "wGX" = (
 /obj/item/reagent_containers/glass/carafe/gold/redwine{
 	pixel_x = -5;
