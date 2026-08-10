@@ -41,6 +41,9 @@
 	if(HAS_TRAIT(limb.owner, TRAIT_NODISMEMBER))
 		return FALSE
 
+	if(HAS_TRAIT(limb.owner, TRAIT_NODECAPITATE) && (limb.body_zone == BODY_ZONE_HEAD))
+		return FALSE
+
 	return TRUE
 
 /datum/surgery_operation/limb/amputate/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)

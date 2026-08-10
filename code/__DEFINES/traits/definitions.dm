@@ -144,6 +144,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYDISMEMBER "easy_dismember"
 /// Limbs can't be dismembered
 #define TRAIT_NODISMEMBER "dismember_immunity"
+/// Cannot be decapitated, other limbs still fall off.
+#define TRAIT_NODECAPITATE "decapitate_immunity"
 /// Can't get fire stacks (can get DIVINE fire stacks)
 #define TRAIT_NOFIRE "Nonflammable"
 /// Can't use guns
