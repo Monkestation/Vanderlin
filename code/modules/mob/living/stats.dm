@@ -206,6 +206,9 @@
  * Adjusts an existing named stat modifier, adding delta values on top.
  * If no modifier for this source exists yet, creates one.
  *
+ * This way of stats adjustment should be somewhat temporary (effects, clothing, etc), 
+ * and it has much stronger impact on skills.
+ *
  * Arguments:
  *   source    - string ID of the modifier to adjust
  *   stat_list - associative list of STAT_* typepath = integer delta

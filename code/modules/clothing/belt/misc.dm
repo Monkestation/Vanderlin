@@ -58,7 +58,11 @@
 // mercenary's belt starts with a bandage and a key to their guildhall.
 /obj/item/storage/belt/leather/mercenary/populate_contents()
 	new /obj/item/natural/cloth/bandage(src)
-	new /obj/item/key/mercenary(src)
+	new /obj/item/storage/keyring/mercenary(src)
+
+/obj/item/storage/belt/leather/lieutenant/populate_contents()
+	new /obj/item/weapon/knife/dagger/steel/special(src)
+	new /obj/item/storage/keyring/lieutenant(src)
 
 /obj/item/storage/belt/leather/mercenary/shalal
 	name = "shalal belt"
@@ -83,6 +87,13 @@
 	name = "black belt"
 	icon_state = "blackbelt"
 	sellprice = 10
+
+/obj/item/storage/belt/leather/black/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/weapon/knife/dagger/steel,
+		/obj/item/lockpickring/mundane,
+	)
 
 /obj/item/storage/belt/leather/plaquesilver
 	name = "plaque belt"
@@ -311,6 +322,13 @@
 /obj/item/storage/backpack/satchel/heartfelt/populate_contents()
 	new /obj/item/natural/feather(src)
 	new /obj/item/paper/heartfelt(src)
+
+/obj/item/storage/backpack/satchel/grenzel
+	name = "grenzelhoftian leather satchel"
+	examine_name = "satchel"
+	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
+	icon_state = "osatchel"
+	item_state = "osatchel"
 
 /obj/item/storage/backpack/satchel/mule/populate_contents()
 	for(var/i in 1 to 3)

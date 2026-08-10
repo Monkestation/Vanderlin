@@ -22,8 +22,9 @@
 	possible_item_intents = list(/datum/intent/food, /datum/intent/stab)
 	attack_verb = list("attacked", "stabbed", "poked")
 	hitsound = 'sound/blank.ogg'
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 30)
+	armor_type = /datum/armor/fork
 	item_weight = 30 GRAMS
+	tool_behaviour = TOOL_FORK
 
 /obj/item/kitchen/fork/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] stabs \the [src] into [user.p_their()] chest! It looks like [user.p_theyre()] trying to take a bite out of [user.p_them()]self!</span>")

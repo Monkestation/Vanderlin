@@ -83,7 +83,8 @@
 	flags_1 |= INITIALIZED_1
 
 	// by default, vis_contents is inherited from the turf that was here before
-	vis_contents.Cut()
+	if (length(vis_contents))
+		vis_contents.Cut()
 
 	assemble_baseturfs()
 
@@ -106,7 +107,6 @@
 
 	if(uses_integrity)
 		atom_integrity = max_integrity
-	TEST_ONLY_ASSERT((!armor || istype(armor)), "[type] has an armor that contains an invalid value at intialize")
 
 	var/turf/T = GET_TURF_ABOVE(src)
 	if(T)

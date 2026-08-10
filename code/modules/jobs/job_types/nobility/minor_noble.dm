@@ -43,6 +43,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
+	knows_the_town = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
 	advclass_cat_rolls = list(CTAG_MINOR_NOBLE = 20)
@@ -85,6 +86,7 @@
 	category_tags = list(CTAG_MINOR_NOBLE)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	give_bank_account = 40
+	knows_the_town = TRUE
 	honorary = "Baronet"
 	honorary_f = "Baronetess"
 
@@ -105,7 +107,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	armor = /obj/item/clothing/armor/cuirass/fluted
 	gloves = /obj/item/clothing/gloves/plate
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 
 /datum/attribute_holder/sheet/job/magnate
 	raw_attribute_list = list(
@@ -127,6 +129,7 @@
 	outfit = /datum/outfit/minornoble/magnate
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 300
+	knows_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -145,7 +148,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/formal
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	armor = /obj/item/clothing/armor/leather/jacket/tailcoat/lord
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/head/chaperon/colored/greyscale/silk
 	mask = /obj/item/clothing/face/spectacles/monocle
 
@@ -172,10 +175,12 @@
 	outfit = /datum/outfit/minornoble/magickal_graduate
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 20
+	knows_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/magickal_graduate
+	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -188,7 +193,7 @@
 	shirt = /obj/item/clothing/shirt/tunic/colored/random
 	armor = /obj/item/clothing/armor/basiceast/crafteast
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	backr = /obj/item/storage/backpack/satchel/black
+	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1
@@ -217,6 +222,7 @@
 	outfit = /datum/outfit/minornoble/herald
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 60
+	knows_the_town = TRUE
 	honorary = "Lord Herald"
 	honorary_f = "Lady Herald"
 
@@ -233,7 +239,7 @@
 	head = /obj/item/clothing/head/chaperon
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	shirt = /obj/item/clothing/shirt/dress/silkdress/loudmouth
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 
 /datum/attribute_holder/sheet/job/vassal
 	raw_attribute_list = list(
@@ -254,6 +260,7 @@
 	outfit = /datum/outfit/minornoble/vassal
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 100
+	knows_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -318,16 +325,4 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather
 	ring = /obj/item/clothing/ring/silver
-
-/datum/outfit/noble/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.age == AGE_CHILD)
-		backpack_contents = list(
-			/obj/item/reagent_containers/glass/carafe/teapot/tea = 1,
-			/obj/item/reagent_containers/glass/cup/teacup/fancy = 3
-		)
-	else
-		backpack_contents = list(
-			/obj/item/reagent_containers/glass/bottle/wine = 1,
-			/obj/item/reagent_containers/glass/cup/silver = 1
-		)
+	beltl = /obj/item/key/manor

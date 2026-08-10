@@ -116,6 +116,8 @@
 			reagents.remove_reagent(/datum/reagent/water, amount_to_dirty)
 			reagents.add_reagent(/datum/reagent/water/gross, amount_to_dirty)
 
+	return TRUE
+
 /obj/item/bin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!reagents?.total_volume)
 		return NONE

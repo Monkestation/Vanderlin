@@ -3,6 +3,7 @@
 #define TRAIT_GENERIC "generic"
 #define UNCONSCIOUS_TRAIT "unconscious"
 #define EYE_DAMAGE "eye_damage"
+#define EAR_DAMAGE "ear_damage"
 #define OBESITY_TRAIT "obesity"
 /// Granted by spells
 #define MAGIC_TRAIT "magic"
@@ -30,6 +31,7 @@
 #define VEHICLE_TRAIT "vehicle"
 /// For traits that an item should always have
 #define INNATE_TRAIT "innate"
+#define STOCK_TRAIT "stock_trait"
 #define CRIT_HEALTH_TRAIT "crit_health"
 #define OXYLOSS_TRAIT "oxyloss"
 #define BLOODLOSS_TRAIT "bloodloss"
@@ -72,6 +74,7 @@
 #define STASIS_MUTE "stasis"
 #define GENETICS_SPELL "genetics_spell"
 #define EYES_COVERED "eyes_covered"
+#define NO_EARS "no_ears"
 #define EYES_TINTED	"eyes_tinted"
 #define CULT_EYES "cult_eyes"
 #define TRAIT_SANTA "santa"
@@ -127,3 +130,5 @@
 #define MARTYR_TRAIT "martyr"
 /// Trait from wings
 #define WING_TRAIT "wings"
+/// Trait from an organ being inside a bodypart
+#define ORGAN_INSIDE_BODY_TRAIT "organ_inside_body"

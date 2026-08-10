@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	name = "rousman"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,
@@ -181,6 +182,30 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	target_mob.skin_tone = skins[pick(skins)]
 	target_mob.accessory = "Nothing"
 
+	validate_customizer_entries(target_mob)
+	reset_all_customizer_accessory_colors(target_mob)
+	randomize_all_customizer_accessories(target_mob)
+	apply_customizers_to_character(target_mob)
+	if(!target_mob.client && target_mob.dna)
+		var/list/organ_list = list()
+		for(var/datum/customizer_entry/entry as anything in customizer_entries)
+			var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
+			var/datum/customizer/customizer = CUSTOMIZER(entry.customizer_type)
+			if(!customizer.is_allowed(target_mob))
+				continue
+			if(entry.disabled)
+				continue
+			var/datum/organ_dna/dna = customizer_choice.create_organ_dna(entry, target_mob)
+			if(!dna)
+				continue
+			organ_list[customizer_choice.get_organ_slot()] = dna
+
+		target_mob.dna.organ_dna = list()
+		var/list/organ_dna_list = organ_list
+		for(var/organ_slot in organ_dna_list)
+			target_mob.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+		regenerate_organs(target_mob)
+
 	target_mob.update_body()
 	target_mob.update_body_parts()
 
@@ -306,16 +331,15 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_RATS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_RATS)
 	if(!randomize_rous_name)
 		name = "rousman"
 		real_name = "rousman"
 	add_traits(list(TRAIT_NOMOOD, TRAIT_NOHUNGER), SPECIES_TRAIT)
 
 /datum/component/rot/corpse/rousman/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/amt2add = 10 //1 second
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)

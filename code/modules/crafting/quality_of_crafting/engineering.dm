@@ -147,6 +147,22 @@
 	output = /obj/structure/closet/crate/miningcar
 	craft_time = 5 SECONDS
 
+/datum/repeatable_crafting_recipe/engineering/roller
+	name = "roller"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/grown/log/tree/stick = 4,
+		/obj/item/gear = 2,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/gear
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/roller
+	output_amount = 8
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/engineering/boiler
 	name = "boiler"
 	requirements = list(

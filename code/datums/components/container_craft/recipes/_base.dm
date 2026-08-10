@@ -87,7 +87,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 		// for(var/datum/reagent/listed_reagent as anything in crafter.reagents.reagent_list)
 		// 	available_reagents[listed_reagent.type] = listed_reagent.volume
 
-		// for(var/required_path as anything in fake_reagents)
+		// for(var/required_path in fake_reagents)
 		// 	var/required_amount = fake_reagents[required_path]
 		// 	for(var/path in available_reagents)
 		// 		if(subtype_reagents_allowed ? !ispath(path, required_path) : path != required_path)
@@ -171,10 +171,10 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 	return TRUE
 
 /datum/container_craft/proc/create_start_callback(crafter, initiator, highest_multiplier)
-	return CALLBACK(crafter, TYPE_PROC_REF(/atom, visible_message), "The [lowertext(name)] starts to cook.")
+	return CALLBACK(crafter, TYPE_PROC_REF(/atom, visible_message), "The [LOWER_TEXT(name)] starts to cook.")
 
 /datum/container_craft/proc/create_fail_callback(crafter, initiator, highest_multiplier)
-	return CALLBACK(crafter, TYPE_PROC_REF(/atom, visible_message), "The [lowertext(name)] stops cooking.")
+	return CALLBACK(crafter, TYPE_PROC_REF(/atom, visible_message), "The [LOWER_TEXT(name)] stops cooking.")
 
 /**
  * Handles the final execution of the craft after processing is complete
@@ -200,7 +200,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 		var/list/found_optional_reagents = list()
 
 		if(length(reagent_requirements))
-			for(var/reagent as anything in reagent_requirements)
+			for(var/reagent in reagent_requirements)
 				var/datum/reagent/reagent_found = crafter.reagents.has_reagent(reagent, reagent_requirements[reagent], check_subtypes = subtype_reagents_allowed)
 				if(!reagent_found)
 					return FALSE

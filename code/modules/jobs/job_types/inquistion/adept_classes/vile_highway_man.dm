@@ -12,6 +12,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 20,

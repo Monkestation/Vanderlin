@@ -657,6 +657,14 @@
 	output_amount = 2
 	craftdiff = 1
 
+/datum/anvil_recipe/weapons/steel/royal
+	name = "Decorated Dagger"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/weapon/knife/dagger/steel/royal
+	output_amount = 2
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/steel/decsaber
 	name = "Decorated Sabre (+Gold Bar)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -716,6 +724,13 @@
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/weapon/sword/long/greatsword/flamberge
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/steel/zweihander
+	name = "Zweihander (+Steel Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/sword/long/greatsword/zwei/steel
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/steel/claymore
@@ -960,6 +975,12 @@
 	additional_items = list(/obj/item/ingot/silver)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/silver
 
+/datum/anvil_recipe/weapons/silver/mace
+	name = "Silver Mace (+Silver Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/weapon/mace/silver
+
 /datum/anvil_recipe/weapons/silver/rungu
 	name = "Silver Rungu (+Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -1071,19 +1092,19 @@
 
 // ------------------ Miscellaneous Weapons ------------------
 
-/datum/anvil_recipe/weapons/atgervi_shield
+/datum/anvil_recipe/weapons/dwarven_shield
 	name = "kite shield"
 	required_material = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree)
-	created_item = /obj/item/weapon/shield/atgervi
+	created_item = /obj/item/weapon/shield/dwarvenkite
 	category = "Shields"
 	craftdiff = 2
 
-/datum/anvil_recipe/weapons/atgervi_axe
+/datum/anvil_recipe/weapons/bearded_axe
 	name = "Bearded axe (+Small Log)"
 	required_material = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/axe/steel/atgervi
+	created_item = /obj/item/weapon/axe/steel/bearded
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/mace/cane/noble

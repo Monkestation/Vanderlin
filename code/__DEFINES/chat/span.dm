@@ -66,6 +66,7 @@
 #define span_hypnophrase(str) ("<span class='hypnophrase'>" + str + "</span>")
 #define span_icon(str) ("<span class='icon'>" + str + "</span>")
 #define span_info(str) ("<span class='info'>" + str + "</span>")
+#define span_infoplain(str) ("<span class='infoplain'>" + str + "</span>")
 #define span_interface(str) ("<span class='interface'>" + str + "</span>")
 #define span_italics(str) ("<span class='italics'>" + str + "</span>")
 #define span_linkoff(str) ("<span class='linkOff'>" + str + "</span>")
@@ -177,6 +178,7 @@
 #define SPAN_GOD_ZIZO(str) ("<span class='god_zizo'>" + str + "</span>")
 #define SPAN_GOD_PSYDON(str) ("<span class='god_psydon'>" + str + "</span>")
 #define SPAN_GOD_GREATHUNT(str) ("<span class='god_thegreathunt'>" + str + "</span>")
+#define SPAN_GOD_GRAGGAZO(str) ("<span class='god_graggazo'>" + str + "</span>")
 
 /* Complex Spans */
 /// Ones where span_X isn't just the class

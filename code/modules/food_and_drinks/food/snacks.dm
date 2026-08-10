@@ -233,7 +233,7 @@ All foods are distributed among various categories. Use common sense.
 	..()
 	if(QDELETED(src))
 		return PROCESS_KILL
-	if(rotprocess)
+	if(rotprocess && !HAS_TRAIT(src, TRAIT_NO_ROT))
 		var/turf/open/T = get_turf(src)
 		var/temp_modifier = 1.0
 		var/turf_temp = T?.return_temperature()
@@ -255,10 +255,6 @@ All foods are distributed among various categories. Use common sense.
 				// Each 3 degrees below room temp decreases rot rate by 20%
 				temp_modifier = max(0.2, 1.0 - ((20 -turf_temp) / 3) * 0.2)
 				// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
-
-		var/area/A = get_area(T)
-		if (istype(A, /area/indoors/town/vault))
-			temp_modifier = 0
 
 		var/turf/location = get_turf(src)
 		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in location
@@ -470,6 +466,7 @@ All foods are distributed among various categories. Use common sense.
 		var/mob/living/simple_animal/animal = interacting_with
 		if(!animal.eat_food(src))
 			return ITEM_INTERACT_BLOCKING
+		animal.eat_food_after(src)
 		return ITEM_INTERACT_SUCCESS
 
 	if(!iscarbon(interacting_with))
@@ -484,12 +481,12 @@ All foods are distributed among various categories. Use common sense.
 		eatverb = pick(list("bite", "chew", "nibble", "gnaw", "gobble", "chomp"))
 
 	var/obj/item/kitchen/fork/fork_check = user.get_active_held_item()
-	var/obj/item/plate/plate_check
 
-	if(istype(loc, /obj/item/plate))
-		plate_check = loc
+	if(fork_check.tool_behaviour == TOOL_FORK)
+		var/obj/item/plate/plate_check
+		if(istype(loc, /obj/item/plate))
+			plate_check = loc
 
-	if(istype(fork_check))
 		if(!plate_check)
 			if(HAS_TRAIT(eater, TRAIT_NOBLE_BLOOD))
 				eater.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
@@ -531,7 +528,7 @@ All foods are distributed among various categories. Use common sense.
 			var/mob/living/carbon/C = eater
 			var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
 			if(C.cmode)
-				if(!CH.grabbedby)
+				if(!length(CH.grabbedby))
 					to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
 					return ITEM_INTERACT_BLOCKING
 

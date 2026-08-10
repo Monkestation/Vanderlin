@@ -43,6 +43,7 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
+	starting_wage = 30
 
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
@@ -53,6 +54,7 @@
 	outfit = /datum/outfit/forestwarden_classic
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
 	give_bank_account = 45
+	knows_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON

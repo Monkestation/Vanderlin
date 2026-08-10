@@ -157,7 +157,7 @@
 	inhand_mod = TRUE
 	has_storage = TRUE
 
-/obj/item/clothing/cloak/ordinatorcape/lirvas
+/obj/item/clothing/cloak/ordinatorcape/warrior
 	name = "warrior silks"
 	desc = "Fine silks. Only the best for me, of course. You need to look good while beating someone to death."
 	icon_state = "lirvastabard"

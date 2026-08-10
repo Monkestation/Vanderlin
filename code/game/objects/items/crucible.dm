@@ -18,7 +18,7 @@
 
 /obj/item/storage/crucible/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] crucible"
+	name = "[LOWER_TEXT(initial(main_material.name))] crucible"
 
 /obj/item/storage/crucible/Initialize()
 	. = ..()

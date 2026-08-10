@@ -26,13 +26,7 @@
 		pixel_y -= 8
 	U.add_overlay(src)
 
-	if (islist(U.armor) || isnull(U.armor)) 										// This proc can run before /obj/Initialize has run for U and src,
-		U.armor = getArmor(arglist(U.armor))	// we have to check that the armor list has been transformed into a datum before we try to call a proc on it
-																					// This is safe to do as /obj/Initialize only handles setting up the datum if actually needed.
-	if (islist(armor) || isnull(armor))
-		armor = getArmor(arglist(armor))
-
-	U.armor = U.armor.attachArmor(armor)
+	U.set_armor(U.get_armor().add_other_armor(get_armor()))
 
 	if(isliving(user))
 		on_uniform_equip(U, user)
@@ -40,7 +34,10 @@
 	return TRUE
 
 /obj/item/clothing/accessory/proc/detach(obj/item/clothing/pants/U, user)
-	U.armor = U.armor.detachArmor(armor)
+	if(detached_pockets && detached_pockets.parent == U)
+		TakeComponent(detached_pockets)
+
+	U.set_armor(U.get_armor().subtract_other_armor(get_armor()))
 
 	if(isliving(user))
 		on_uniform_dropped(U, user)

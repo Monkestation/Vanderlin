@@ -21,8 +21,10 @@
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	give_bank_account = 30
+	knows_the_town = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
+	starting_wage = 30
 
 	outfit = /datum/outfit/forestguard_classic
 	advclass_cat_rolls = list(CTAG_FORGARRISON = 20)

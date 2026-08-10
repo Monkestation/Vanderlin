@@ -32,9 +32,13 @@
 
 /obj/structure/roller/LateInitialize()
 	. = ..()
+	movedir = dir
 	set_connection_dir()
 	find_rotation_network()
 	build_roller_chain()
+
+/obj/structure/roller/set_connection_dir()
+	dpdir = turn(dir, 90) | turn(dir, -90) | movedir | REVERSE_DIR(movedir)
 
 /obj/structure/roller/Destroy()
 	for(var/obj/structure/roller/connected in connected_rollers)
@@ -93,29 +97,17 @@
 /obj/structure/roller/set_rotations_per_minute(rpm)
 	if(rotations_per_minute == rpm)
 		return FALSE
-
 	rotations_per_minute = min(rpm, 32)
-
-	if(rotations_per_minute > 0)
-		operating = TRUE
-	else
-		operating = FALSE
+	operating = rotations_per_minute > 0
+	if(!operating)
 		for(var/atom/movable/movable in loc)
 			stop_conveying(movable)
-
 	update_appearance()
-	propagate_rotation()
 	return TRUE
-
-/obj/structure/roller/proc/propagate_rotation()
-	for(var/obj/structure/roller/connected in connected_rollers)
-		if(connected.rotations_per_minute != rotations_per_minute)
-			connected.set_rotations_per_minute(rotations_per_minute)
 
 /obj/structure/roller/proc/build_roller_chain()
 	var/turf/forward_turf = get_step(src, movedir)
 	var/obj/structure/roller/forward_roller = locate(/obj/structure/roller) in forward_turf
-
 	if(forward_roller && (forward_roller.movedir == movedir || forward_roller.movedir == REVERSE_DIR(movedir)))
 		connected_rollers |= forward_roller
 		forward_roller.connected_rollers |= src
@@ -172,7 +164,6 @@
 	tool.play_tool_sound(src, 50)
 	setDir(turn(dir, 90))
 	to_chat(user, span_notice("You rotate [src]."))
-
 	connected_rollers = list()
 	build_roller_chain()
 	return ITEM_INTERACT_SUCCESS

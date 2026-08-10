@@ -153,6 +153,8 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		///shit that calls explosion() should probably not be called in empty space
 		/obj/effect/temp_visual/target/meteor,
 		/obj/effect/meatvine_controller,
+		//Single use case holder atom requiring a user
+		/atom/movable/looking_holder,
 	)
 	/// ???
 	ignore += typesof(/obj/effect/bombard_zone)
@@ -187,6 +189,11 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	ignore += typesof(/obj/effect/spawner)
 	ignore += typesof(/atom/movable/screen)
 	ignore += typesof(/obj/abstract)
+
+	// Ignore all abstract types as they shouldn't be made
+	for(var/datum/sometype as anything in subtypesof(/datum))
+		if(IS_ABSTRACT(sometype))
+			ignore += sometype
 
 	return ignore
 
@@ -224,7 +231,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	if(ispath(test_path, /datum/unit_test/focus_only))
 		return
 
-	if(initial(test_path.abstract_type) == test_path)
+	if(IS_ABSTRACT(test_path))
 		return
 
 	var/datum/unit_test/test = new test_path

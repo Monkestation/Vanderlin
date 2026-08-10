@@ -6,7 +6,7 @@
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
 
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
@@ -17,14 +17,14 @@
 	desc = "A heavier pair of leather gloves with extra, solid padding. These look like they can take a hard beating. Good melee protection and reliable durability."
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	armor = list("blunt" = 50, "slash" = 40, "stab" = 35, "piercing" = 15, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/gloves/leather/advanced
 
 /obj/item/clothing/gloves/angle/masterwork
 	name = "masterwork heavy leather gloves"
 	desc = "A heavier pair of leather gloves with extra, thick padding. These look like they can take a brutal beating. Great melee protection and very reliable durability."
 	max_integrity = INTEGRITY_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 15, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/gloves/leather/master
 
 /obj/item/clothing/gloves/angle/masterwork/Initialize()
 	. = ..()

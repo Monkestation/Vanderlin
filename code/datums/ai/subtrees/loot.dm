@@ -1,12 +1,16 @@
 
 /datum/ai_planning_subtree/loot
 	var/scan_range = 7
+	var/scan_interval = 15 SECONDS
 
 /datum/ai_planning_subtree/loot/SelectBehaviors(datum/ai_controller/controller, delta_time)
 	if(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])
 		return
 	if(controller.blackboard[BB_BASIC_MOB_FLEEING])
 		return
+	if(!COOLDOWN_FINISHED(controller, loot_scan_cooldown))
+		return
+	COOLDOWN_START(controller, loot_scan_cooldown, scan_interval)
 
 	var/mob/living/pawn = controller.pawn
 	var/datum/component/ai_inventory_manager/inv = controller.get_inventory()

@@ -5,17 +5,18 @@
 	footstep_type = FOOTSTEP_MOB_METAL
 	job = "Automaton"
 	pronouns = IT_ITS
-	bodyparts = list(/obj/item/bodypart/chest/automaton, /obj/item/bodypart/head/automaton, /obj/item/bodypart/l_arm/automaton,
-					/obj/item/bodypart/r_arm/automaton, /obj/item/bodypart/r_leg/automaton, /obj/item/bodypart/l_leg/automaton)
+	bodyparts = list(
+		/obj/item/bodypart/chest/automaton,
+		/obj/item/bodypart/head/automaton,
+		/obj/item/bodypart/l_arm/automaton,
+		/obj/item/bodypart/r_arm/automaton,
+		/obj/item/bodypart/r_leg/automaton,
+		/obj/item/bodypart/l_leg/automaton,
+		/obj/item/bodypart/mouth, // fuk it they don't get spawned anyways
+	)
 	uses_random_stats = FALSE
 	culture = /datum/culture/universal/heartfelt
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
-
-/mob/living/carbon/human/species/automaton/LateInitialize()
-	. = ..()
-	skin_tone = "FFFFFF"
-	update_body()
-	update_body_parts()
 
 /mob/living/carbon/human/species/automaton/vessel/LateInitialize()
 	. = ..()
@@ -101,7 +102,7 @@
 		TRAIT_RESISTHEAT,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_SLEEPIMMUNE,
 		TRAIT_TOXIMMUNE,
 		TRAIT_FEARLESS,
@@ -158,7 +159,6 @@
 	C.AddComponent(/datum/component/command_follower)
 	C.AddComponent(/datum/component/augmentable)
 	C.AddComponent(/datum/component/damage_shutdown)
-	C.apply_status_effect(/datum/status_effect/automaton_unshackled)
 
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	RegisterSignal(C, COMSIG_MOB_TOGGLE_CMODE, PROC_REF(cmode_changed))
@@ -345,26 +345,23 @@
 	desc = "A crystalline matrix containing a trapped soul, bound in service through dark artifice."
 	icon_state = "soul_core"
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
 	zone = BODY_ZONE_CHEST // this means decaps are non-lethal, how quaint
-	organ_flags = ORGAN_SYNTHETIC|ORGAN_VITAL
+	organ_flags = ORGAN_ROBOTIC|ORGAN_VITAL
 	food_type = null
 
 /obj/item/organ/heart/automaton
 	name = "steam engine"
 	desc = "A miniature steam engine that powers the automaton's movements."
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
 	zone = BODY_ZONE_PRECISE_STOMACH // the engine's in the stomach
-	organ_flags = ORGAN_SYNTHETIC
+	organ_flags = ORGAN_ROBOTIC
 	food_type = null
 
 /obj/item/organ/eyes/automaton
 	name = "optical sensors"
 	desc = "Glowing lenses that allow the automaton to perceive the world."
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
+	organ_flags = ORGAN_ROBOTIC
 	food_type = null
 	glows = TRUE
 	eye_color = "#ff7b00"
@@ -373,8 +370,7 @@
 	name = "audio interface"
 	desc = "The audio processor for automatons to receive orders."
 	resistance_flags = FIRE_PROOF
-	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
+	organ_flags = ORGAN_ROBOTIC
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "broadcaster"
 	food_type = null

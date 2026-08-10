@@ -3,7 +3,7 @@
 		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = 2,
-		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/reading = 30, // Using the higher value (3) since there were two entries with different values

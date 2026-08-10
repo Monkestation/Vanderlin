@@ -65,10 +65,11 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/action/cooldown/spell/undirected/list_target/grant_title,
 		/datum/action/cooldown/spell/undirected/list_target/grant_nobility,
 	)
-	allowed_races = RACES_PLAYER_ROYALTY
+	allowed_races = RACES_PLAYER_MONARCH
 	outfit = /datum/outfit/lord
 	bypass_lastclass = TRUE
 	give_bank_account = 500
+	knows_the_town = TRUE
 	selection_color = "#7851A9"
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	can_have_apprentices = FALSE
@@ -87,9 +88,11 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	//These change on map load
 	honorary = "Lord"
 	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
-		TRAIT_KNOW_KEEP_DOORS
+		TRAIT_KNOW_KEEP_DOORS,
+		TRAIT_KNOWCOURTAGENTS
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -167,6 +170,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	scabbards = list(/obj/item/weapon/scabbard/knife/royal, /obj/item/weapon/scabbard/sword/royal)
 	ring = /obj/item/clothing/ring/active/nomag
 	l_hand = /obj/item/weapon/lordscepter
+
+	backpack_contents = list(
+		/obj/item/storage/keyring/monarch = 1,
+	)
 
 /datum/outfit/lord/map_override(mob/living/carbon/human/H)
 	if(SSmapping.config.map_name != "Voyage")

@@ -5,6 +5,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
 	pass_flags_self = PASSSTRUCTURE
+	armor_type = /datum/armor/structure
 	var/climb_time = 20
 	var/climb_stun = 0
 	var/climb_sound = 'sound/foley/woodclimb.ogg'
@@ -18,8 +19,6 @@
 //	move_resist = MOVE_FORCE_STRONG
 
 /obj/structure/Initialize()
-	if (!armor)
-		armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 50)
 	. = ..()
 	if(smoothing_flags & (SMOOTH_BITMASK|SMOOTH_BITMASK_CARDINALS))
 		QUEUE_SMOOTH(src)
@@ -53,8 +52,8 @@
 				user.remove_offsets("structure_climb")
 	if(redstone_id)
 		for(var/obj/structure/O in redstone_attached)
-			O.redstone_attached -= src
-			redstone_attached -= O
+			LAZYREMOVE(O.redstone_attached, src)
+			LAZYREMOVE(redstone_attached, O)
 		GLOB.redstone_objs -= src
 	return ..()
 

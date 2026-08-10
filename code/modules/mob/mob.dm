@@ -86,13 +86,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 		GLOB.alive_mob_list += src
 	set_focus(src)
 	prepare_huds()
-	for(var/v in GLOB.active_alternate_appearances)
-		if(!v)
-			continue
-		var/datum/atom_hud/alternate_appearance/AA = v
-		AA.onNewMob(src)
-	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
-	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
+	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(src)
+	set_nutrition(NUTRITION_LEVEL_WELL_FED)
+	set_hydration(HYDRATION_LEVEL_HYDRATED)
 	attribute_initialize()
 	. = ..()
 	initialize_actionspeed()
@@ -133,24 +130,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 	tag = "mob_[next_mob_id++]"
 
 /**
- * Prepare the huds for this atom
- *
- * Goes through hud_possible list and adds the images to the hud_list variable (if not already
- * cached)
- */
-/atom/proc/prepare_huds()
-	hud_list = list()
-	for(var/hud in hud_possible)
-		var/hint = hud_possible[hud]
-		switch(hint)
-			if(HUD_LIST_LIST)
-				hud_list[hud] = list()
-			else
-				var/image/I = image('icons/mob/hud.dmi', src, "")
-				I.appearance_flags = RESET_COLOR|RESET_TRANSFORM
-				hud_list[hud] = I
-
-/**
  * Show a message to this mob (visual or audible)
  */
 /mob/proc/show_message(msg, type, alt_msg, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -167,7 +146,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 				msg = alt_msg
 				type = alt_type
 
-		if(type & MSG_AUDIBLE && !can_hear())//Hearing related
+		if(type & MSG_AUDIBLE && HAS_TRAIT(src, TRAIT_DEAF))//Hearing related
 			if(!alt_msg)
 				return
 			else
@@ -229,7 +208,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		if(M != src && !M.is_blind())
 			M.log_message("saw [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(msg, MSG_VISUAL, blind_message, MSG_AUDIBLE)
-		if(runechat_message && M.can_hear())
+		if(runechat_message && !HAS_TRAIT(M, TRAIT_DEAF))
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 ///Adds the functionality to self_message.
@@ -254,10 +233,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 		hearers -= src
 	for(var/mob/M in hearers)
 		if(M != src && M.client)
-			if(M.can_hear())
+			if(!HAS_TRAIT(M, TRAIT_DEAF))
 				M.log_message("heard [key_name(src)] emote: [message]", LOG_EMOTE, log_globally = FALSE)
 		M.show_message(message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
-		if(runechat_message && M.can_see_runechat(src) && M.can_hear())
+		if(runechat_message && M.can_see_runechat(src) && !HAS_TRAIT(M, TRAIT_DEAF))
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 /**
@@ -329,17 +308,20 @@ GLOBAL_VAR_INIT(mobids, 1)
  *
  * Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
  */
-/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial)
+/mob/proc/equip_to_slot_if_possible(obj/item/W, slot, qdel_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE, bypass_equip_delay_self = FALSE, initial = FALSE)
 	if(!istype(W) || QDELETED(W)) //This qdeleted is to prevent stupid behavior with things that qdel during init, like say stacks
 		return FALSE
-	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self))
+
+	if(!W.mob_can_equip(src, null, slot, disable_warning, bypass_equip_delay_self || initial))
 		if(qdel_on_fail)
 			qdel(W)
 		else if(!disable_warning)
 			to_chat(src, span_warning("I can't equip that!"))
 		return FALSE
+
 	equip_to_slot(W, slot, initial, redraw_mob) //This proc should not ever fail.
 	update_a_intents()
+
 	return TRUE
 
 /**
@@ -381,7 +363,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(!slot_priority)
 		slot_priority = DEFAULT_SLOT_PRIORITY
 
-	for(var/slot as anything in slot_priority)
+	for(var/slot in slot_priority)
 		if(equip_to_slot_if_possible(equipping, slot, FALSE, TRUE, TRUE, initial = initial)) //qdel_on_fail = 0; disable_warning = 1; redraw_mob = 1
 			return TRUE
 
@@ -445,7 +427,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(run_examinate), examinify))
 
-/mob/proc/run_examinate(atom/examinify)
+/mob/proc/run_examinate(atom/examinify, force_examinate_more = FALSE)
 	if(QDELETED(examinify)) // since this can run async we might have had the atom get qdeleted already
 		return
 
@@ -461,7 +443,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(flags & COMPONENT_NO_EXAMINATE)
 		return
 	else if(flags & COMPONENT_EXAMINATE_BLIND)
-		to_chat(src, span_warning("Something is there but i can't see it!"))
+		to_chat(src, span_warning("Something is there but I can't see it!"))
 		return
 
 	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
@@ -479,18 +461,92 @@ GLOBAL_VAR_INIT(mobids, 1)
 					to_chat(examaniee, span_warning("[src] peeks at you!"))
 					found_ping(get_turf(src), examaniee.client, "hidden")
 
-	var/list/result = examinify.examine(src)
-	if(LAZYLEN(result))
-		var/list/mechanics_result = examinify.get_mechanics_examine(src)
-		if(length(mechanics_result))
-			var/mechanics_result_str = "<details><summary>Mechanics</summary>"
-			for(var/line in mechanics_result)
-				mechanics_result_str += " - " + span_blue(line) + "\n"
-			mechanics_result_str += "</details>"
-			result += mechanics_result_str
-		for(var/i in 1 to (length(result) - 1))
-			result[i] += "\n"
-		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
+	var/result_combined
+	if(client)
+		LAZYINITLIST(client.recent_examines)
+		var/ref_to_atom = REF(examinify)
+		var/examine_time = client.recent_examines[ref_to_atom]
+		if(force_examinate_more || (examine_time && (world.time - examine_time < EXAMINE_MORE_WINDOW)))
+			var/list/result = examinify.examine_more(src)
+			if(!length(result))
+				result += span_notice("<i>I examine [examinify] closer, but find nothing of interest...</i>")
+			result_combined = boxed_message(jointext(result, "<br>"))
+		else
+			client.recent_examines[ref_to_atom] = world.time // set to when we last normal examine'd them
+			addtimer(CALLBACK(src, PROC_REF(clear_from_recent_examines), ref_to_atom), RECENT_EXAMINE_MAX_WINDOW)
+			handle_eye_contact(examinify)
+
+	if(!result_combined)
+		var/list/result = examinify.examine(src)
+		if(LAZYLEN(result))
+			var/list/mechanics_result = examinify.get_mechanics_examine(src)
+			if(length(mechanics_result))
+				var/mechanics_result_str = "<details><summary>Mechanics</summary>"
+				for(var/line in mechanics_result)
+					mechanics_result_str += " - " + span_blue(line) + "\n"
+				mechanics_result_str += "</details>"
+				result += mechanics_result_str
+			for(var/i in 1 to (length(result) - 1))
+				result[i] += "\n"
+		result_combined = examine_block(result.Join())
+
+	to_chat(src, span_infoplain(result_combined))
+
+/mob/proc/clear_from_recent_examines(ref_to_clear)
+	SIGNAL_HANDLER
+	if(!client)
+		return
+	LAZYREMOVE(client.recent_examines, ref_to_clear)
+
+/// How far away you can be to make eye contact with someone while examining
+#define EYE_CONTACT_RANGE 5
+
+/**
+ * handle_eye_contact() is called when we examine() something. If we examine an alive mob with a mind who has examined us in the last 2 seconds within 5 tiles, we make eye contact!
+ *
+ * Note that if either party has their face obscured, the other won't get the notice about the eye contact
+ * Also note that examine_more() doesn't proc this or extend the timer, just because it's simpler this way and doesn't lose much.
+ * The nice part about relying on examining is that we don't bother checking visibility, because we already know they were both visible to each other within the last second, and the one who triggers it is currently seeing them
+ */
+/mob/proc/handle_eye_contact(mob/living/examined_mob)
+	return
+
+/mob/living/handle_eye_contact(mob/living/examined_mob)
+	if(!istype(examined_mob) || src == examined_mob || examined_mob.stat >= UNCONSCIOUS || !client || is_blind())
+		return
+
+	var/imagined_eye_contact = FALSE
+	if(!LAZYACCESS(examined_mob.client?.recent_examines, src))
+		// even if you haven't looked at them recently, if you have the shift eyes trait, they may still imagine the eye contact
+		if(HAS_TRAIT(examined_mob, TRAIT_SHIFTY_EYES) && prob(10 - get_dist(src, examined_mob)))
+			imagined_eye_contact = TRUE
+		else
+			return
+
+	if(get_dist(src, examined_mob) > EYE_CONTACT_RANGE)
+		return
+
+	// check to see if their face is blocked or, if not, a signal blocks it
+	if(examined_mob.can_eye_contact() && SEND_SIGNAL(src, COMSIG_MOB_EYECONTACT, examined_mob, TRUE) != COMSIG_BLOCK_EYECONTACT)
+		var/obj/item/clothing/eye_cover = examined_mob.is_eyes_covered()
+		if (!eye_cover || (!eye_cover.tint && !eye_cover.flash_protect))
+			var/msg = span_smallnotice("I make eye contact with [examined_mob].")
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), src, msg), 0.3 SECONDS) // so the examine signal has time to fire and this will print after
+
+	if(!imagined_eye_contact && can_eye_contact() && !examined_mob.is_blind() && SEND_SIGNAL(examined_mob, COMSIG_MOB_EYECONTACT, src, FALSE) != COMSIG_BLOCK_EYECONTACT)
+		var/obj/item/clothing/eye_cover = is_eyes_covered()
+		if (!eye_cover || (!eye_cover.tint && !eye_cover.flash_protect))
+			var/msg = span_smallnotice("[src] makes eye contact with you.")
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), examined_mob, msg), 0.3 SECONDS)
+
+#undef EYE_CONTACT_RANGE
+
+/// Checks if we can make eye contact or someone can make eye contact with us
+/mob/living/proc/can_eye_contact()
+	return TRUE
+
+/mob/living/carbon/can_eye_contact()
+	return !(check_obscured_slots() & HIDEFACE)
 
 // Check if we notice an observer
 /mob/living/proc/peek_examine_check(mob/living/observer)
@@ -685,7 +741,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  */
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
+		var/t1 = "window=[href_list["mach_close"]]"
 		unset_machine()
 		src << browse(null, t1)
 
@@ -1217,7 +1273,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/say_mod(input, list/message_mods = list())
 	var/customsayverb = findtext(input, "*")
 	if(customsayverb)
-		return lowertext(copytext(input, 1, customsayverb))
+		return LOWER_TEXT(copytext(input, 1, customsayverb))
 	. = ..()
 
 /atom/movable/proc/attach_spans(input, list/spans)
@@ -1255,7 +1311,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return choice
 
 	for(var/obj/item/spawn_item as anything in spawn_items)
-		equip_to_appropriate_slot(new spawn_item(), TRUE)
+		equip_to_appropriate_slot(new spawn_item(), TRUE, TRUE)
 
 	return choice
 

@@ -3,8 +3,17 @@
     "map_path": "map_files/rosewood",
     "map_file": "rosewood_marsh.dmm",
 	"traits": [
-        {"Up": true, "Leylines": true},
-        {"Up": true, "Down": true, "Leylines": true},
-        {"Down": true, "Leylines": true}
+        {
+            "Up": true
+        },
+        {
+            "Up": true,
+            "Down": true,
+            "Leylines": true
+        },
+        {
+            "Down": true,
+            "Leylines": true
+        }
     ]
 }

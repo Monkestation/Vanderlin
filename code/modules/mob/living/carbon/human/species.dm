@@ -338,6 +338,8 @@
 			return
 		if("Osslandic")
 			return strings("accents/ossland_replacement.json", "ossland")
+		if("Rockhill")
+			return strings("accents/rockhill_replacement.json", "rockhill")
 	return
 
 /datum/species/proc/get_pain_emote(power)
@@ -413,6 +415,7 @@
 				ACCENT_ROUSMAN,
 				ACCENT_WINTERMARE,
 				ACCENT_OSSLAND,
+				ACCENT_ROCKHILL,
 			)
 
 			///This will only trigger for donators
@@ -582,15 +585,18 @@
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
 			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+
 	//what should be put in if there is no mutantorgan (brains handled seperately)
 	var/list/slot_mutantorgans = organs
 	var/list/slots_to_iterate = list()
 	for(var/slot in C.dna.organ_dna)
 		slots_to_iterate |= slot
+
 	for(var/slot in slot_mutantorgans)
 		if(!is_organ_slot_allowed(C, slot))
 			continue
 		slots_to_iterate |= slot
+
 	// Remove the organs from the slots they should have nothing in
 	for(var/obj/item/organ/organ in C.internal_organs)
 		if(organ.slot in slots_to_iterate)
@@ -599,6 +605,7 @@
 			continue
 		organ.Remove(C, TRUE)
 		QDEL_NULL(organ)
+
 	var/list/source_key_list = color_key_source_list_from_carbon(C)
 	for(var/slot in slots_to_iterate)
 		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
@@ -634,7 +641,7 @@
 			if(slot == ORGAN_SLOT_BRAIN)
 				var/obj/item/organ/brain/brain = oldorgan
 				if(!brain.decoy_override)//"Just keep it if it's fake" - confucius, probably
-					brain.Remove(C,TRUE, TRUE) //brain argument used so it doesn't cause any... sudden death.
+					brain.Remove(C, TRUE, movement_flags = NO_ID_TRANSFER) //brain argument used so it doesn't cause any... sudden death.
 					QDEL_NULL(brain)
 					oldorgan = null //now deleted
 			else
@@ -647,7 +654,7 @@
 		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
 			if(neworgan)
-				neworgan.Insert(C, TRUE, FALSE)
+				neworgan.Insert(C, TRUE)
 				if(slot in PAIRED_ORGAN_SLOTS)
 					var/obj/item/organ/paired_organ = new neworgan.type()
 					paired_organ.switch_side(neworgan.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
@@ -658,7 +665,7 @@
 					if(pref_load)
 						pref_load.customize_organ(paired_organ)
 					if(!(initial(paired_organ.zone) in excluded_zones))
-						paired_organ.Insert(C, TRUE, FALSE)
+						paired_organ.Insert(C, TRUE)
 					else
 						qdel(paired_organ)
 		if(!used_neworgan)
@@ -736,7 +743,7 @@
 	/// Check if we have any customizer entries that don't match.
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE
-		for(var/customizer_type as anything in customizers)
+		for(var/customizer_type in customizers)
 			if(customizer_type != entry.customizer_type)
 				continue
 			var/datum/customizer/customizer = CUSTOMIZER(customizer_type)
@@ -752,7 +759,7 @@
 			customizer_entries -= entry
 
 	/// Check if we have any missing customizer entries
-	for(var/customizer_type as anything in customizers)
+	for(var/customizer_type in customizers)
 		var/found = FALSE
 		for(var/datum/customizer_entry/entry as anything in customizer_entries)
 			if(entry.customizer_type != customizer_type)
@@ -803,15 +810,15 @@
 			else	//Entries in the list should only ever be items or null, so if it's not an item, we can assume it's an empty hand
 				C.put_in_hands(new mutanthands())
 
-	for(var/trait as anything in inherent_traits)
+	for(var/trait in inherent_traits)
 		ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(LAZYLEN(inherent_traits_f) && C.gender == FEMALE)
-		for(var/trait as anything in inherent_traits_f)
+		for(var/trait in inherent_traits_f)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(LAZYLEN(inherent_traits_m) && C.gender == MALE)
-		for(var/trait as anything in inherent_traits_m)
+		for(var/trait in inherent_traits_m)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(inherent_sheet)
@@ -824,7 +831,7 @@
 		C.setToxLoss(0, TRUE, TRUE)
 
 	if(TRAIT_NOMETABOLISM in inherent_traits)
-		C.reagents.end_metabolization(src, keep_liverless = TRUE)
+		C.reagents?.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
 		C.add_faction(inherent_factions)
@@ -847,6 +854,10 @@
 
 	on_gender_update(C)
 	C.update_organ_requirements() //post species trait gains
+
+	if(!(C.status_flags & BUILDING_ORGANS))
+		C.regenerate_icons()
+
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
@@ -1642,7 +1653,7 @@
 				target.mind.attackedme[user.real_name] = world.time
 			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
-			var/damage = user.get_kick_damage(2.5)
+			var/damage = user.get_kick_damage() * 1.5
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 			var/balance = 10
 			target.next_attack_msg.Cut()
@@ -1749,7 +1760,7 @@
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
 		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
-		var/damage = user.get_kick_damage(1.4)
+		var/damage = user.get_kick_damage()
 		var/damage_blocked = FALSE
 
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))

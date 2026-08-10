@@ -110,6 +110,10 @@
 		dropshrink = 0.2
 	else
 		dropshrink = 1
+	if(quantity <= 0)
+		qdel(src)
+		return
+
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC | UPDATE_NAME)
 	update_transform()
 
@@ -133,7 +137,7 @@
 			. += span_info("[quantity_to_words(quantity)] coins.")
 		return
 
-	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
+	var/intelligence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
 		return
@@ -205,22 +209,22 @@
 	. = ..()
 
 /obj/item/coin/proc/coin_skill(mob/user, intended)		// Coin counting and splitting
-	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
-	var/perception = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_PERCEPTION)
-	var/speed = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_SPEED)
+	var/intelligence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+	var/perception = GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)
+	var/speed = GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED)
 	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mathematics) || 0
 	var/list/skill_data = list("delay" = 1.2 SECONDS,"error" = 0)
 
 	var/base_tier	// Base intelligence tiers
 	switch(intelligence)
 		if(0 to 6)
-			base_tier = 1 			// Low INT
+			base_tier = 1 // Low INT
 		if(7 to 9)
-			base_tier = 2			// Below average INT
+			base_tier = 2 // Below average INT
 		if(10 to 11)
-			base_tier = 3			// Average INT
+			base_tier = 3 // Average INT
 		if(14 to INFINITY)
-			base_tier = 4	// Very High INT
+			base_tier = 4 // Very High INT
 		else base_tier = 3 // Default for 12-13
 
 	// Apply mathematics tier boost

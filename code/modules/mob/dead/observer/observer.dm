@@ -187,11 +187,8 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 	GLOB.dead_mob_list += src
 
-	for(var/v in GLOB.active_alternate_appearances)
-		if(!v)
-			continue
-		var/datum/atom_hud/alternate_appearance/AA = v
-		AA.onNewMob(src)
+	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(src)
 
 	. = ..()
 
@@ -262,37 +259,39 @@ Works together with spawning an observer, noted above.
 */
 
 /mob/proc/ghostize(can_reenter_corpse = 1, drawskip)
-	if(key)
-		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
-		if(client)
-			if(client.holder)
-				var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
-				SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
-				ghost.can_reenter_corpse = can_reenter_corpse
-				ghost.ghostize_time = world.time
-				ghost.key = key
-				return ghost
-//		if(client)
-//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.read_preference(/datum/preference/numeric/musicvol), channel = CHANNEL_MUSIC)
-//			play_priomusic(S)
-		var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
-		if(drawskip)
-			ghost = new /mob/dead/observer/rogue/nodraw(src)
-		else
-			ghost = new(src)
-		ghost.ghostize_time = world.time
-		var/bnw = TRUE
-		if(client)
-			if(client.holder)
-				if(check_rights_for(client,R_WATCH))
-					bnw = FALSE
+	if(!key)
+		return
+
+	stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
+	if(client?.holder)
+		var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
 		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = can_reenter_corpse
+		ghost.ghostize_time = world.time
 		ghost.key = key
-		if(!bnw)
-			return ghost
-		ghost.add_client_colour(/datum/client_colour/monochrome)
 		return ghost
+
+	var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
+	if(drawskip)
+		ghost = new /mob/dead/observer/rogue/nodraw(src)
+	else
+		ghost = new(src)
+
+	ghost.ghostize_time = world.time
+	var/bnw = TRUE
+	if(client?.holder)
+		if(check_rights_for(client,R_WATCH))
+			bnw = FALSE
+
+	SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
+	ghost.can_reenter_corpse = can_reenter_corpse
+	ghost.key = key
+	if(!bnw)
+		return ghost
+
+	ghost.add_client_colour(/datum/client_colour/monochrome)
+	SEND_SIGNAL(src, COMSIG_MOB_GHOSTIZED)
+	return ghost
 
 /mob/proc/scry_ghost()
 	if(key)
@@ -302,7 +301,16 @@ Works together with spawning an observer, noted above.
 		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = TRUE
 		ghost.key = key
+		RegisterSignal(ghost, COMSIG_MOB_LOGOUT, PROC_REF(break_scry))
 		return ghost
+
+/mob/proc/break_scry()
+	return
+
+/mob/dead/observer/break_scry()
+	client.view_size.setDefault(client.view_size.getScreenSize())
+	mind.current_ghost = null
+	mind.current.ckey = ckey(key)
 
 /*
 This is the proc mobs get to turn into a ghost. Forked from ghostize due to compatibility issues.
@@ -451,6 +459,34 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	to_chat(src, "<span class='boldnotice'>I can no longer be brought back into your body.</span>")
 	return TRUE
 
+/// Allows human ghosts to set their mob's final words variable.
+/mob/dead/observer/verb/set_final_words()
+	set category = "Spirit"
+	set name = "Set Final Words"
+	set hidden = 1
+
+	if(!isobserver(src) || !client)
+		return
+
+	if(!mind || QDELETED(mind.current))
+		to_chat(src, span_warning("I have no body."))
+		return
+	if(!ishuman(mind.current))
+		to_chat(src, span_warning("I am not sophisticated enough to leave final words..."))
+		return
+	var/mob/living/carbon/human/body = mind.current
+
+	if(body.funeral)
+		to_chat(src, span_warning("My body has already been laid to rest!</span>"))
+		return
+
+	var/final_words = tgui_input_text(src, "Set or update the words you shall impart when you are laid to rest... (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", body.final_words, 50, timeout = 30 SECONDS)
+	if(!final_words || final_words == body.final_words)
+		return
+	body.final_words = final_words
+	log_say("[src] put [final_words] for their final words.")
+
+
 /mob/dead/observer/proc/notify_cloning(message, sound, atom/source, flashwindow = TRUE)
 	if(flashwindow)
 		window_flash(client)
@@ -468,7 +504,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				A.add_overlay(source)
 				source.layer = old_layer
 				source.plane = old_plane
-	to_chat(src, "<span class='ghostalert'><a href=?src=[REF(src)];reenter=1>(Click to re-enter)</a></span>")
+	to_chat(src, "<span class='ghostalert'><a href='byond://?src=[REF(src)];reenter=1'>(Click to re-enter)</a></span>")
 	if(sound)
 		SEND_SOUND(src, sound(sound))
 
@@ -860,12 +896,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/proc/show_data_huds()
 	for(var/hudtype in datahuds)
 		var/datum/atom_hud/H = GLOB.huds[hudtype]
-		H.add_hud_to(src)
+		H.show_to(src)
 
 /mob/dead/observer/proc/remove_data_huds()
 	for(var/hudtype in datahuds)
 		var/datum/atom_hud/H = GLOB.huds[hudtype]
-		H.remove_hud_from(src)
+		H.hide_from(src)
 
 /mob/dead/observer/verb/toggle_data_huds()
 	set name = "Toggle Sec/Med/Diag HUD"

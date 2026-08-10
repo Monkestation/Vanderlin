@@ -9,12 +9,12 @@
 	var/category
 	var/atom/output
 	var/output_amount = 1
-	var/list/requirements = list()
-	var/list/reagent_requirements = list()
+	var/list/requirements
+	var/list/reagent_requirements
 	///this is a list of tool usage in their order which executes after requirements and reagents are fufilled these are assoc lists going path = list(text, self_text, sound)
-	var/list/tool_usage = list()
+	var/list/tool_usage
 	///these typepaths and their subtypes (by default) won't be considered as requirements for recipes. override create_blacklisted_paths() for custom blacklist behavior.
-	var/list/blacklisted_paths = list()
+	var/list/blacklisted_paths
 
 	///do we need to be learned
 	var/requires_learning = FALSE
@@ -66,7 +66,7 @@
 	///do we also count reagent subtypes?
 	var/reagent_subtypes_allowed = FALSE
 	///list of types we pass before deletion to the child
-	var/list/pass_types_in_end = list()
+	var/list/pass_types_in_end
 	///this is our extra % added after all skills and such
 	var/extra_chance = 0
 	///do we hide from recipe books
@@ -85,7 +85,8 @@
 	var/list/new_blacklist = list()
 	for(var/path in blacklisted_paths)
 		new_blacklist |= typesof(path)
-	blacklisted_paths = new_blacklist
+	if(length(blacklisted_paths))
+		blacklisted_paths = new_blacklist
 
 /**
  * Checks if the recipe can be started with the given items
@@ -119,17 +120,17 @@
 		if(!check_matches_requirement(attacked_item_path, starting_atom) || !check_matches_requirement(attacking_item_path, attacked_atom))
 			return FALSE
 
-	var/list/copied_requirements = requirements.Copy()
-	var/list/copied_reagent_requirements = reagent_requirements.Copy()
-	var/list/copied_tool_usage = tool_usage.Copy()
+	var/list/copied_requirements = length(requirements) ? requirements.Copy() : list()
+	var/list/copied_reagent_requirements = length(reagent_requirements) ? reagent_requirements.Copy() : list()
+	var/list/copied_tool_usage = length(tool_usage) ? tool_usage.Copy() : list()
 	var/list/usable_contents = list()
 
 	gather_usable_contents(user, usable_contents)
 
 	var/list/total_list = usable_contents
 
-	for(var/path as anything in total_list)
-		for(var/required_path as anything in requirements)
+	for(var/path in total_list)
+		for(var/required_path in requirements)
 			if(!check_matches_requirement(path, required_path))
 				continue
 
@@ -138,15 +139,15 @@
 				copied_requirements -= required_path
 			break
 
-	for(var/path as anything in total_list)
-		for(var/required_path as anything in tool_usage)
+	for(var/path in total_list)
+		for(var/required_path in tool_usage)
 			if(ispath(path, required_path))
 				copied_tool_usage -= required_path
 
 	if(length(reagent_requirements))
 		var/list/reagent_values = gather_reagents(user)
 
-		for(var/required_path as anything in reagent_requirements)
+		for(var/required_path in reagent_requirements)
 			var/required_amount = reagent_requirements[required_path]
 			var/available_amount = 0
 
@@ -177,12 +178,12 @@
 	var/list/total_list = usable_contents
 
 	// Check each requirement against available items
-	for(var/required_path as anything in requirements)
+	for(var/required_path in requirements)
 		var/required_amount = requirements[required_path]
 		var/available_amount = 0
 
 		// Count available items that match this requirement
-		for(var/path as anything in total_list)
+		for(var/path in total_list)
 			if(!check_matches_requirement(path, required_path))
 				continue
 
@@ -198,7 +199,7 @@
 	if(length(reagent_requirements))
 		var/list/reagent_values = gather_reagents(user)
 
-		for(var/required_path as anything in reagent_requirements)
+		for(var/required_path in reagent_requirements)
 			var/required_amount = reagent_requirements[required_path]
 			var/available_amount = 0
 
@@ -307,7 +308,7 @@
  */
 /datum/repeatable_crafting_recipe/proc/process_bundle(obj/item/natural/bundle/item, mob/user, list/copied_requirements, list/to_delete, list/blacklisted_paths)
 	var/obj/item/bundle_path = item:stacktype
-	if(bundle_path in blacklisted_paths)
+	if(length(blacklisted_paths) && (bundle_path in blacklisted_paths))
 		return FALSE
 
 	// Check if this bundle type matches any of our requirements
@@ -425,7 +426,7 @@
 	var/obj/item/reagent_containers/concopy = new /obj/item/reagent_containers(null)
 	copied_containers[container] += concopy
 
-	for(var/required_path as anything in copied_reagent_requirements)
+	for(var/required_path in copied_reagent_requirements)
 		var/list/reagent_paths
 		if(reagent_subtypes_allowed)
 			reagent_paths = typesof(required_path)
@@ -631,9 +632,9 @@
 		var/list/usable_contents = get_usable_contents(user)
 		var/list/storage_contents = get_storage_contents(user)
 
-		var/list/copied_requirements = requirements.Copy()
-		var/list/copied_reagent_requirements = reagent_requirements.Copy()
-		var/list/copied_tool_usage = tool_usage.Copy()
+		var/list/copied_requirements = length(requirements) ? requirements.Copy() : list()
+		var/list/copied_reagent_requirements = length(reagent_requirements) ? reagent_requirements.Copy() : list()
+		var/list/copied_tool_usage = length(tool_usage) ? tool_usage.Copy() : list()
 		var/list/to_delete = list()
 		var/list/copied_containers = list()
 
@@ -803,7 +804,7 @@
 	if(!thing_to_check)
 		return FALSE
 	var/path_to_check = ispath(thing_to_check) ? thing_to_check : thing_to_check.type
-	if(path_to_check in blacklisted_paths)
+	if(length(blacklisted_paths) && (path_to_check in blacklisted_paths))
 		return FALSE
 	if(subtypes_allowed)
 		return ispath(path_to_check, required_type)

@@ -2120,12 +2120,6 @@
 	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"aki" = (
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast{
-	pixel_y = 0
-	},
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "akk" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "vanderlin-forest_mountain-forest";
@@ -2732,8 +2726,8 @@
 /area/indoors/mountains/anvil/upperkeep)
 "ane" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/storage/backpack/satchel/otavan,
-/obj/item/storage/backpack/satchel/otavan,
+/obj/item/storage/backpack/satchel/grenzel,
+/obj/item/storage/backpack/satchel/grenzel,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/church/purple,
@@ -6059,7 +6053,7 @@
 /obj/structure/handcart{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/corpse/damaged,
+/obj/effect/mob_spawn/corpse/human/damaged,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aCD" = (
@@ -7002,25 +6996,6 @@
 	mailtag = "Inquisition"
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/town/church/inquisition)
-"aHq" = (
-/obj/structure/rack/shelf/biggest,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/listeningdevice,
-/obj/item/listeningdevice,
-/obj/item/speakerinq,
-/obj/item/inqarticles/bmirror,
-/turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "aHr" = (
 /obj/effect/decal/cleanable/food/flour,
@@ -9359,12 +9334,6 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
-"aSQ" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/clothing/neck/talkstone,
-/obj/item/storage/belt/pouch/coins/rich,
-/turf/open/floor/carpet/royalblack,
-/area/indoors/town/church/inquisition)
 "aSR" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -11702,6 +11671,25 @@
 /obj/item/ingot/gold,
 /turf/open/floor/tile/diamond/blue,
 /area/under/mountains/anvil/upper)
+"fuI" = (
+/obj/structure/rack/shelf/biggest,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/item/listeningdevice/inq,
+/obj/item/listeningdevice/inq,
+/obj/item/speaker/inq,
+/obj/item/inqarticles/bmirror,
+/turf/open/floor/churchbrick,
+/area/indoors/town/church/inquisition)
 "fvT" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/herringbone,
@@ -14241,6 +14229,7 @@
 /obj/effect/decal/cleanable/ritual_rune/arcyne/empowerment{
 	pixel_y = -47
 	},
+/obj/item/weapon/greataxe/steel/doublehead/graggar,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "uuP" = (
@@ -14667,6 +14656,12 @@
 "wAI" = (
 /turf/open/water,
 /area/outdoors/mountains/anvil/peak)
+"wBu" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/clothing/neck/talkstone,
+/obj/item/storage/belt/pouch/coins/rich,
+/turf/open/floor/carpet/royalblack,
+/area/indoors/town/church/inquisition)
 "wEG" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/grass/cold,
@@ -36955,7 +36950,7 @@ aEY
 aJv
 aJv
 uum
-aki
+aJv
 aJv
 aJv
 aEY
@@ -86594,7 +86589,7 @@ aVr
 aVr
 alC
 ado
-aHq
+fuI
 aIS
 awI
 aFz
@@ -129422,7 +129417,7 @@ aTv
 avU
 aer
 aer
-aSQ
+wBu
 aHa
 aHa
 aVr

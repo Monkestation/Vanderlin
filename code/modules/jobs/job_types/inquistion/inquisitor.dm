@@ -24,6 +24,7 @@
 	display_order = JDO_PURITAN
 	advclass_cat_rolls = list(CTAG_PURITAN = 20)
 	give_bank_account = 30
+	knows_the_town = TRUE
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
@@ -63,6 +64,7 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
+	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)
@@ -75,6 +77,7 @@
 	if(.)
 		spawned.maxbloodpool = initial(spawned.maxbloodpool)
 		spawned.hud_used?.shutdown_bloodpool()
+		qdel(spawned.GetComponent(/datum/component/bloodpool_regen))
 
 
 ////Classic Inquisitor with a much more underground twist. Use listening devices, sneak into places to gather evidence, track down suspicious individuals. Has relatively the same utility stats as Confessor, but fulfills a different niche in terms of their combative job as the head honcho.
