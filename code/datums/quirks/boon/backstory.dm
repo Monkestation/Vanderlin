@@ -125,17 +125,17 @@
 	amount = 20
 	clamp = 20
 
-/datum/backstory/combat/soldier
+/datum/backstory/combat/sword
 	name = "Novice Swordsman"
 	desc = "You dabbled in swordplay while you were younger."
 	granted_skill = /datum/attribute/skill/combat/swords
 
-/datum/backstory/combat/guard
-	name = "Peasent Spearman"
-	desc = "You spent much of your youth warding off volves and goblins with a spear."
+/datum/backstory/combat/spear
+	name = "Peasant Spearman"
+	desc = "You spent much of your youth warding off wolves and goblins with a spear."
 	granted_skill = /datum/attribute/skill/combat/polearms
 
-/datum/backstory/combat/mercenary
+/datum/backstory/combat/clubber
 	name = "Chicken Clubber"
 	desc = "You were often made to butcher the chickens for dinner, with axe or club to slay the animal."
 	granted_skill = /datum/attribute/skill/combat/axesmaces
@@ -145,29 +145,29 @@
 	desc = "When money was tight you took part in fistfights to earn your keep."
 	granted_skill = /datum/attribute/skill/combat/unarmed
 
-/datum/backstory/combat/archer
+/datum/backstory/combat/hunter
 	name = "Dabbling Hunter"
 	desc = "You aren't the best with a bow, but it is enough to feed you."
 	granted_skill = /datum/attribute/skill/combat/bows
 
-/datum/backstory/combat/assassin
+/datum/backstory/combat/knifetricks
 	name = "Knifetrick Enthusiast"
 	desc = "You loved doing all sorts of tricks with knives, hands and arms nicked and scarred."
 	granted_skill = /datum/attribute/skill/combat/knives
 
-/datum/backstory/combat/crossbowman
+/datum/backstory/combat/guardian
 	name = "Livestock Guardian"
 	desc = "When volves, vernard, and other predators threatened your animals, they often met a bolt."
 	granted_skill = /datum/attribute/skill/combat/crossbows
 
 /datum/backstory/combat/wrestler
 	name = "Moo-Beast Wrestler"
-	desc = "Often when you grew up, you enjoyed wrestlign with the bulls, now you can apply it to people too."
+	desc = "Often when you grew up, you enjoyed wrestling with the bulls, now you can apply it to people too."
 	granted_skill = /datum/attribute/skill/combat/wrestling
 
-/datum/backstory/combat/whipmaster
+/datum/backstory/combat/thresher
 	name = "Grain Thresher"
-	desc = "Threshing grain translates well to crackign whips and swinging flails."
+	desc = "Threshing grain translates well to cracking whips and swinging flails."
 	granted_skill = /datum/attribute/skill/combat/whipsflails
 
 /datum/backstory/combat/shieldbearer
@@ -177,10 +177,10 @@
 
 /datum/backstory/combat/gunner
 	name = "Gun Enthusiast"
-	desc = "A mercenary travelled by, and showed you a puffer, and since then you have been obssessed."
+	desc = "A mercenary travelled by, and showed you a puffer, and you have been obsessed with them ever since."
 	granted_skill = /datum/attribute/skill/combat/firearms
 
-/datum/backstory/combat/athlete // under "combat" so they get clamped as well
+/datum/backstory/combat/courier // under "combat" so they get clamped as well
 	name = "Woodland Courier"
 	desc = "You ran messages through the forests, zipping past goblins and more. "
 	granted_skill = /datum/attribute/skill/misc/athletics
@@ -209,7 +209,7 @@
 	desc = "You made armor, protecting warriors with your craft."
 	granted_skill = /datum/attribute/skill/craft/armorsmithing
 
-/datum/backstory/craft/carpenter
+/datum/backstory/craft/carver
 	name = "Hobby Carver"
 	desc = "You have always enjoyed shaping wood by hand and blade."
 	granted_skill = /datum/attribute/skill/craft/carpentry
@@ -231,12 +231,12 @@
 
 /datum/backstory/craft/engineer
 	name = "Studied Engineer"
-	desc = "While oyu couldn't build complex machines, you still know how to fix them, and make gears."
+	desc = "While you couldn't build complex machines, you still know how to fix them, and make gears."
 	granted_skill = /datum/attribute/skill/craft/engineering
 
-/datum/backstory/craft/tailor
+/datum/backstory/craft/stitcher
 	name = "Simple Stitcher"
-	desc = "You learned to sew at a yougn age, and still remember some needlework."
+	desc = "You learned to sew at a young age, and still remember some needlework."
 	granted_skill = /datum/attribute/skill/misc/sewing
 
 /datum/backstory/craft/tanner
@@ -270,7 +270,7 @@
 
 /datum/backstory/labor/miner
 	name = "Minor Miner"
-	desc = "You helped your family dig and excavate a new cellar, and soem of the skills stuck with you."
+	desc = "You helped your family dig and excavate a new cellar, and some of the skills stuck with you."
 	granted_skill = /datum/attribute/skill/labor/mining
 
 /datum/backstory/labor/farmer
@@ -294,20 +294,20 @@
 	granted_skill = /datum/attribute/skill/labor/lumberjacking
 
 /datum/backstory/labor/tamer
-	name = "Beast Tamer"
-	desc = "You trained animals, from horses to more exotic beasts."
+	name = "Rous Whisperer"
+	desc = "Your first pet was a rous, which you befriended with cheese. Your family always said you had a way with animals."
 	granted_skill = /datum/attribute/skill/labor/taming
 
 /datum/backstory/misc
 	abstract_type = /datum/backstory/misc
 	desc = "A miscellaneous background."
 
-/datum/backstory/misc/thief
+/datum/backstory/misc/pickpocket
 	name = "Pickpocketing"
 	desc = "You have always had sticky fingers."
 	granted_skill = /datum/attribute/skill/misc/stealing
 
-/datum/backstory/misc/spy
+/datum/backstory/misc/sneaky
 	name = "Light-footed Listener"
 	desc = "You had a tendency to creep around and enjoy going unseen."
 	granted_skill = /datum/attribute/skill/misc/sneaking
@@ -323,8 +323,8 @@
 	granted_skill = /datum/attribute/skill/misc/music
 
 /datum/backstory/misc/medic
-	name = "Field Medic"
-	desc = "You treated the wounded on battlefields and in clinics."
+	name = "Doctor's Assistant"
+	desc = "Your home town's feldsher often recruited you to help with basic medical care, and you learned a few things."
 	granted_skill = /datum/attribute/skill/misc/medicine
 
 /datum/backstory/misc/rider
@@ -332,9 +332,9 @@
 	desc = "You helped raise saiga, and learned to ride too."
 	granted_skill = /datum/attribute/skill/misc/riding
 
-/datum/backstory/misc/scribe
+/datum/backstory/misc/literacy
 	name = "Basic Literacy"
-	desc = "You spent time learning to red and write as a child."
+	desc = "You spent time learning to read and write as a child."
 	granted_skill = /datum/attribute/skill/misc/reading
 
 /datum/backstory/misc/swimmer
