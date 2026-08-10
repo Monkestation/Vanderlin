@@ -92,13 +92,13 @@
 	var/clamp = 60
 
 	/// List of allowed ages (empty = all allowed)
-	var/list/allowed_ages = list()
+	var/list/allowed_ages
 	/// List of blocked ages
-	var/list/blocked_ages = list()
+	var/list/blocked_ages
 	/// List of allowed species (empty = all allowed)
-	var/list/allowed_species = list()
+	var/list/allowed_species
 	/// List of blocked species
-	var/list/blocked_species = list()
+	var/list/blocked_species
 
 
 /datum/backstory/proc/is_available(datum/preferences/prefs)
@@ -108,13 +108,13 @@
 	// Check age restrictions
 	if(length(allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in allowed_ages))
 		return FALSE
-	if(prefs.read_preference(/datum/preference/choiced/age) in blocked_ages)
+	if(length(blocked_ages) && (prefs.read_preference(/datum/preference/choiced/age) in blocked_ages))
 		return FALSE
 
 	// Check species restrictions
 	if(length(allowed_species) && !(prefs.pref_species in allowed_species))
 		return FALSE
-	if(prefs.pref_species in blocked_species)
+	if(length(blocked_species) && (prefs.pref_species in blocked_species))
 		return FALSE
 
 	return TRUE

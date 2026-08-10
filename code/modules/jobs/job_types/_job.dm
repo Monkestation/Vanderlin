@@ -1,6 +1,8 @@
 /datum/job
 	///If the job is disabled/enabled for preferences
 	var/enabled = TRUE
+	/// Daily wage paid out at dawn, set per job type. 0 = unpaid.
+	var/starting_wage = 0
 	/// The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
 	var/title = "NOPE"
 	///List of viable alternative jobs

@@ -17,10 +17,6 @@
 /obj/item/weapon/knife/villager,
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
-"aS" = (
-/obj/structure/hotspring/border/twelve,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "bf" = (
 /obj/item/clothing/head/fancyhat,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -76,6 +72,11 @@
 /obj/structure/hotspring/border/two,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
+"dq" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "dA" = (
 /obj/structure/mirror/fancy,
 /obj/structure/window{
@@ -99,6 +100,9 @@
 /area/under/tomb/indoors/rest)
 "ea" = (
 /turf/open/floor/abyss_sand/path,
+/area/under/tomb/indoors/rest)
+"eb" = (
+/turf/closed/mineral/bedrock,
 /area/under/tomb/indoors/rest)
 "ef" = (
 /obj/structure/hotspring/border/eleven,
@@ -130,6 +134,12 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
+"fM" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
 "fP" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/tile/diamond/purple,
@@ -148,9 +158,17 @@
 /obj/structure/door/swing,
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
-"gD" = (
-/obj/structure/hotspring/border/eleven,
-/turf/open/floor/grass/eora,
+"gy" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 1
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"gT" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
+	},
+/turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "hq" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -175,6 +193,13 @@
 	color = "#e09dda";
 	dir = 1
 	},
+/area/under/tomb/indoors/rest)
+"iR" = (
+/obj/machinery/light/fueled/firebowl,
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/floor/abyss_sand/path,
 /area/under/tomb/indoors/rest)
 "iW" = (
 /obj/item/clothing/head/peaceflower{
@@ -217,6 +242,12 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
+"kd" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
 "kt" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/item/clothing/head/crown/wooden,
@@ -243,10 +274,6 @@
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
-"lc" = (
-/obj/structure/hotspring/border/five,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "lB" = (
 /obj/item/clothing/head/peaceflower,
 /turf/open/floor/dirt/road,
@@ -255,6 +282,12 @@
 /turf/closed/wall/mineral/decostone/long{
 	color = "#e09dda"
 	},
+/area/under/tomb/indoors/rest)
+"lS" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "lT" = (
 /obj/machinery/tanningrack{
@@ -271,10 +304,6 @@
 	},
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
-"mI" = (
-/obj/structure/fluff/statue,
-/turf/open/floor/dirt/road,
-/area/under/tomb/indoors/rest)
 "mU" = (
 /obj/structure/wild_plant/nospread/poppy{
 	name = "wild poppies";
@@ -283,18 +312,39 @@
 	},
 /turf/open/floor/grass/healthy,
 /area/under/tomb/indoors/rest)
+"mW" = (
+/mob/living/simple_animal/pet/cat/cabbit{
+	color = "#e09dda"
+	},
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"ne" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/obj/structure/flora/grass/bush/wall/tall/tundra,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
 "nn" = (
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"nE" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 1
+	},
+/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "ok" = (
 /obj/structure/wild_plant/nospread/apple,
 /turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "ol" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "op" = (
 /obj/structure/window{
@@ -302,21 +352,42 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
+"oy" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
 "oU" = (
 /obj/item/clothing/cloak/apron/cook,
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
 "pw" = (
-/obj/structure/hotspring,
 /obj/item/clothing/head/peaceflower{
 	pixel_x = -8;
 	pixel_y = 7
+	},
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"pK" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
 	},
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "pN" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"pO" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"pP" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "qi" = (
 /obj/structure/table/church{
@@ -340,12 +411,15 @@
 	},
 /area/under/tomb/indoors/rest)
 "qV" = (
-/obj/structure/hotspring,
 /obj/structure/flora/sakura{
 	pixel_x = -53;
 	pixel_y = 18
 	},
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"rh" = (
+/obj/structure/fluff/railing/tall/stone,
+/turf/open/openspace,
 /area/under/tomb/indoors/rest)
 "ry" = (
 /obj/item/fishingrod,
@@ -384,43 +458,16 @@
 /obj/structure/hotspring/border/five,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
-"tv" = (
-/obj/structure/hotspring/border/seven,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
-"uP" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
-/obj/structure/hotspring,
-/obj/item/clothing/head/peaceflower{
-	pixel_x = -8;
-	pixel_y = 7
-	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "vh" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter,
 /turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "vt" = (
-/obj/structure/hotspring,
 /obj/structure/fluff/statue/small,
 /obj/item/clothing/head/flowercrown/salvia{
 	pixel_y = -11
 	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
-"vw" = (
-/obj/structure/hotspring,
-/obj/machinery/light/fueled/torchholder/hotspring/standing{
-	pixel_y = 23;
-	pixel_x = -15
-	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
-"vA" = (
-/obj/structure/hotspring,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "wv" = (
 /obj/structure/mannequin/male/female,
@@ -431,10 +478,6 @@
 "wX" = (
 /obj/structure/table/church/m,
 /turf/open/floor/churchmarble,
-/area/under/tomb/indoors/rest)
-"xe" = (
-/obj/structure/flora/grass/bush/wall/tall/tundra,
-/turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "xi" = (
 /obj/structure/table/church,
@@ -467,6 +510,12 @@
 /obj/item/clothing/shoes/simpleshoes/colored,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/rest)
+"zL" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
 "Al" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/ruinedwood/two,
@@ -480,8 +529,25 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/under/tomb/indoors/rest)
+"Ax" = (
+/obj/structure/fluff/statue,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "AD" = (
 /turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"AQ" = (
+/obj/machinery/light/fueled/torchholder/hotspring/standing{
+	pixel_y = 30;
+	pixel_x = -15
+	},
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Bo" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "Bx" = (
 /obj/structure/table/wood,
@@ -502,17 +568,38 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
+"Cb" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"Ce" = (
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"CS" = (
+/obj/effect/decal/cleanable/debris/glass,
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "Dv" = (
 /obj/structure/flora/grass/herb/necralily,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
-"Dy" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "Eb" = (
 /obj/structure/door/violet,
 /turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"Ej" = (
+/obj/structure/stairs,
+/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "EG" = (
 /obj/structure/fluff/psycross{
@@ -532,8 +619,25 @@
 	},
 /area/under/tomb/indoors/rest)
 "Fn" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Fq" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"FS" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"FX" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "GL" = (
@@ -576,13 +680,15 @@
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
+"HQ" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "HS" = (
 /obj/item/orphan_toy/wolf,
 /turf/open/floor/ruinedwood/two,
-/area/under/tomb/indoors/rest)
-"Ic" = (
-/obj/structure/hotspring/border/four,
-/turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "Iu" = (
 /obj/structure/dye_bin/luxury,
@@ -611,10 +717,20 @@
 /obj/item/needle/blessed,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
+"IS" = (
+/obj/structure/wild_plant/nospread/apple,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
 "IT" = (
 /obj/item/recipe_book/gravemaking,
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"IU" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
+	},
+/turf/open/openspace,
 /area/under/tomb/indoors/rest)
 "Jf" = (
 /obj/machinery/loom,
@@ -625,9 +741,18 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/under/tomb/indoors/rest)
 "JK" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"JP" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"JR" = (
+/obj/structure/fluff/railing/tall/stone,
+/turf/open/floor/grass/mixyel,
 /area/under/tomb/indoors/rest)
 "Ka" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -653,10 +778,14 @@
 /mob/living/simple_animal/pet/cat/cabbit{
 	color = "#e09dda"
 	},
-/turf/open/floor/grass/mixyel,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "LM" = (
 /turf/open/floor/grass/yel,
+/area/under/tomb/indoors/rest)
+"LN" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "Mc" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/west,
@@ -694,6 +823,12 @@
 /obj/structure/dye_bin,
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
+"NK" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
 "OL" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/diamond/purple,
@@ -701,11 +836,6 @@
 "Po" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/tile/diamond/purple,
-/area/under/tomb/indoors/rest)
-"PC" = (
-/obj/structure/hotspring/border/fourteen,
-/obj/structure/hotspring/border/fourteen,
-/turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "PF" = (
 /obj/machinery/light/fueledstreet/blue/midlamp{
@@ -716,6 +846,10 @@
 /area/under/tomb/indoors/rest)
 "PS" = (
 /turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"Qp" = (
+/obj/structure/stairs,
+/turf/open/floor/grass/healthy,
 /area/under/tomb/indoors/rest)
 "Qy" = (
 /turf/open/floor/dirt/road,
@@ -774,15 +908,6 @@
 /obj/structure/hotspring/border/fourteen,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
-"Wo" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/two,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
-"WA" = (
-/obj/effect/decal/cleanable/debris/glass,
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "WK" = (
 /obj/structure/wild_plant/nospread/sunflower,
 /turf/open/floor/grass/mixyel,
@@ -805,9 +930,8 @@
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
 "Xz" = (
-/obj/structure/hotspring,
 /obj/structure/healing_spring,
-/turf/open/floor/grass/eora,
+/turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
 "Yy" = (
 /obj/effect/decal/cleanable/debris/glass,
@@ -822,13 +946,28 @@
 /obj/item/orphan_toy/skeleton,
 /turf/open/floor/ruinedwood/two,
 /area/under/tomb/indoors/rest)
-"YO" = (
-/obj/structure/hotspring,
+"YM" = (
+/obj/structure/fluff/railing/tall/stone,
 /turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"YO" = (
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Zk" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/openspace,
 /area/under/tomb/indoors/rest)
 "ZK" = (
 /obj/item/bin/water,
 /turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"ZN" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/turf/open/floor/abyss_sand/path,
 /area/under/tomb/indoors/rest)
 "ZT" = (
 /obj/structure/mannequin/male/female{
@@ -843,33 +982,61 @@
 /area/under/tomb/indoors/rest)
 
 (1,1,1) = {"
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
 SU
-lF
-sn
-sn
-lF
-lF
-sn
-sn
+LN
+Qy
 SU
-Aq
-xu
-xe
-Qy
-Qy
-Mh
-ce
-Uw
-Aq
-Aq
-Aq
-Aq
-Uw
-Aq
-Aq
-Aq
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
 "}
 (2,1,1) = {"
+eb
+SU
+lF
+sn
+sn
+lF
+lF
+sn
+sn
+SU
+xu
+SU
+Qy
+Qy
+SU
+Te
+Aq
+bO
+SU
+lF
+lF
+dA
+lF
+SU
+eb
+"}
+(3,1,1) = {"
+eb
 qN
 Jf
 bS
@@ -879,24 +1046,24 @@ Nu
 bS
 bS
 qN
-Aq
-Aq
-Mh
+JR
+Fq
 Qy
 Qy
-xe
-Te
+zL
+ne
 Aq
 Aq
-SU
-lF
-lF
-dA
-lF
-SU
-Aq
+Fi
+sz
+az
+sa
+At
+Fi
+eb
 "}
-(3,1,1) = {"
+(4,1,1) = {"
+eb
 Fi
 lT
 Po
@@ -906,41 +1073,13 @@ bS
 bS
 bS
 Eb
-Aq
 ce
-ce
+AD
 Qy
 Qy
-PF
+AD
 ce
-bO
-Aq
-Fi
-sz
-az
-sa
-At
-Fi
-Aq
-"}
-(4,1,1) = {"
-qN
-bS
-bS
-jE
-bS
-bS
-bS
-bS
-qN
-Aq
-ce
-Mh
-Qy
-Qy
-Mh
-ce
-ce
+Ce
 Aq
 qN
 az
@@ -948,24 +1087,24 @@ az
 az
 SU
 qN
-Aq
+eb
 "}
 (5,1,1) = {"
+eb
 qN
 bS
 bS
 jE
 bS
-SU
-lF
-lF
-SU
-bO
+bS
+bS
+bS
+qN
 ce
-Mh
+AD
 Qy
 Qy
-Mh
+AD
 WK
 LM
 LM
@@ -975,20 +1114,20 @@ eF
 az
 Ju
 qN
-Aq
+eb
 "}
 (6,1,1) = {"
+eb
 qN
-dQ
 bS
-gw
 bS
-qN
-ev
-Uw
-ce
-AD
-AD
+jE
+bS
+SU
+lF
+lF
+SU
+IS
 Qy
 Qy
 Qy
@@ -1002,19 +1141,19 @@ lF
 ei
 lF
 SU
-Uw
+eb
 "}
 (7,1,1) = {"
+eb
 qN
-SU
+dQ
 bS
-jE
-Mc
+gw
+bS
 qN
+ev
 Uw
-AD
-RA
-Qy
+ce
 Qy
 Qy
 Qy
@@ -1028,21 +1167,21 @@ Aq
 Aq
 Qy
 Aq
-Aq
-Aq
+bO
+eb
 "}
 (8,1,1) = {"
+eb
+qN
 SU
-lF
-sn
-lF
-lF
-SU
-AD
+bS
+jE
+Mc
+qN
+Uw
+RA
 Qy
-Qy
-Ic
-sc
+HM
 sc
 sc
 MP
@@ -1056,22 +1195,22 @@ Aq
 Qy
 mt
 Aq
-bO
+eb
 "}
 (9,1,1) = {"
-Aq
-Aq
-Aq
-Dy
-Aq
-xe
+eb
+SU
+lF
+sn
+lF
+lF
+SU
 Qy
 Qy
 Qy
 tc
-vw
+AQ
 pw
-YO
 qB
 MP
 Qy
@@ -1083,51 +1222,51 @@ mU
 Qy
 pN
 SU
-Aq
+eb
 "}
 (10,1,1) = {"
+eb
 Aq
-Aq
-Aq
+pK
 Aq
 AD
 bE
 Qy
+Qy
 HM
-tv
-aS
-YO
+sc
+dH
 vt
 Xz
-Wo
+JK
 qB
 MP
 Qy
 Qy
 RA
 ce
-AD
+PF
 Qy
-ce
+gT
 Aq
-Aq
+eb
 "}
 (11,1,1) = {"
-Mh
-Mh
-ce
+SU
+SU
+kd
 RA
-Mh
+AD
 Xg
 Qy
-lc
-YO
+Qy
+tc
 YO
 YO
 qV
 Fn
 YO
-uP
+pw
 dj
 Qy
 Qy
@@ -1135,9 +1274,9 @@ Qy
 No
 No
 Qy
-PF
-Mh
-Mh
+Qp
+SU
+SU
 "}
 (12,1,1) = {"
 Qy
@@ -1147,11 +1286,11 @@ Qy
 Qy
 Qy
 Qy
+Qy
 VI
-gD
+ef
 YO
-YO
-Wo
+JK
 YO
 Xz
 YO
@@ -1167,6 +1306,7 @@ Qy
 Hi
 "}
 (13,1,1) = {"
+gy
 Qy
 Qy
 Qy
@@ -1175,8 +1315,7 @@ Qy
 Qy
 Qy
 Qy
-PC
-sf
+VI
 sf
 ef
 YO
@@ -1191,15 +1330,15 @@ Qy
 Qy
 Qy
 Qy
-Qy
+oy
 "}
 (14,1,1) = {"
-Mh
-Mh
-ce
+Qy
+Qy
+Qy
 LF
-Mh
-Mh
+Qy
+Qy
 Qy
 Qy
 Qy
@@ -1221,13 +1360,13 @@ Qy
 Hi
 "}
 (15,1,1) = {"
-Aq
-Aq
-Aq
+SU
+SU
+JP
 Uw
-js
-AD
+Aq
 Mh
+AD
 Qy
 Qy
 Sv
@@ -1243,15 +1382,15 @@ Qy
 No
 RA
 AD
-AD
-Mh
-Mh
+Qp
+SU
+SU
 "}
 (16,1,1) = {"
-Aq
+eb
 js
-jK
-Aq
+mW
+js
 jK
 Aq
 Mh
@@ -1261,7 +1400,7 @@ Qy
 Qy
 VI
 Rl
-vA
+YO
 dj
 Qy
 Qy
@@ -1270,15 +1409,15 @@ Qy
 RA
 RA
 ea
-Sh
+iR
 ea
-ea
+eb
 "}
 (17,1,1) = {"
-Dy
-Uw
+eb
+dq
 Aq
-Aq
+Ax
 Uw
 Aq
 Aq
@@ -1299,15 +1438,15 @@ ea
 ea
 SA
 SA
-ea
+eb
 "}
 (18,1,1) = {"
+eb
 SU
 lF
 lF
 lF
 lF
-Dy
 Aq
 AD
 Mh
@@ -1326,15 +1465,15 @@ ea
 SA
 SA
 SA
-ea
+eb
 "}
 (19,1,1) = {"
+eb
 qN
 xi
 kM
 ZT
 kM
-Aq
 bO
 Aq
 Aq
@@ -1343,7 +1482,7 @@ Mh
 Mh
 Qy
 Qy
-AD
+PF
 AD
 ea
 ry
@@ -1353,15 +1492,15 @@ SA
 SA
 SA
 SA
-ea
+eb
 "}
 (20,1,1) = {"
+eb
 qN
 wX
 EG
 kM
 kM
-Aq
 Aq
 Aq
 js
@@ -1380,24 +1519,24 @@ SA
 SA
 SA
 SA
-ea
+eb
 "}
 (21,1,1) = {"
+eb
 qN
 qi
 kM
 yG
 kM
 Aq
-Aq
 IT
 ev
 Aq
 Aq
-Mh
+AD
 Qy
 Qy
-Mh
+AD
 ea
 SA
 SA
@@ -1407,16 +1546,16 @@ SA
 SA
 SA
 SA
-ea
+eb
 "}
 (22,1,1) = {"
+eb
 SU
 lF
 lF
 lF
 lF
-Dy
-Aq
+ev
 Aq
 Aq
 Aq
@@ -1424,7 +1563,7 @@ jK
 AD
 Qy
 Qy
-PF
+AD
 ea
 SA
 SA
@@ -1434,25 +1573,25 @@ SA
 SA
 SA
 SA
-ea
+eb
 "}
 (23,1,1) = {"
+eb
 cv
 IF
 Nc
 Ra
 Aq
-ev
 Aq
 bO
 jK
 Aq
-Aq
-Mh
+YM
+fM
 Qy
 Qy
-Mh
-ea
+fM
+ZN
 SA
 SA
 SA
@@ -1461,91 +1600,119 @@ SA
 SA
 SA
 SA
-ea
+eb
 "}
 (24,1,1) = {"
+eb
 Dv
 Dv
 Yy
 Aq
-WA
-jK
-Aq
-ev
-Aq
-Aq
-ev
-Mh
-Qy
-Qy
-Mh
-ea
-ea
-SA
-SA
-SA
-SA
-SA
-SA
-SA
-ea
-"}
-(25,1,1) = {"
-mI
-Aq
+CS
 KN
 ev
-xu
 Aq
 Aq
-Aq
-Aq
-Aq
-Aq
-Mh
+ev
+SU
 Qy
 Qy
-Mh
+SU
 ea
 ea
-ea
-ea
-ea
-ea
-ea
-ea
-ea
-ea
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(25,1,1) = {"
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+SU
+NK
+Qy
+SU
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
 "}
 
 (1,1,2) = {"
-SU
-lF
-lF
-lF
-lF
-lF
-lF
-lF
-SU
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
 ar
 ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
+Aq
+pP
+Aq
+Aq
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
 "}
 (2,1,2) = {"
+eb
+SU
+lF
+lF
+lF
+lF
+lF
+lF
+lF
+SU
+rh
+Cb
+Aq
+Aq
+Cb
+pO
+ar
+ar
+SU
+lF
+GS
+GS
+lF
+SU
+eb
+"}
+(3,1,2) = {"
+eb
 qN
 xB
 GL
@@ -1557,22 +1724,22 @@ kD
 qN
 ar
 ar
+Zk
+Zk
 ar
 ar
 ar
 ar
+Fi
+jq
+HS
+YD
 ar
-ar
-ar
-SU
-lF
-GS
-GS
-lF
-SU
-ar
+Fi
+eb
 "}
-(3,1,2) = {"
+(4,1,2) = {"
+eb
 qN
 aw
 OL
@@ -1590,16 +1757,16 @@ ar
 ar
 ar
 ar
-ar
-Fi
-jq
-HS
-YD
-ar
-Fi
-ar
+qN
+PS
+PS
+YH
+GR
+qN
+eb
 "}
-(4,1,2) = {"
+(5,1,2) = {"
+eb
 qN
 Ka
 GP
@@ -1617,16 +1784,16 @@ ar
 ar
 ar
 ar
-ar
-qN
+il
+PS
+oU
 PS
 PS
-YH
-GR
-qN
-ar
+GS
+eb
 "}
-(5,1,2) = {"
+(6,1,2) = {"
+eb
 qN
 fP
 bS
@@ -1644,16 +1811,16 @@ ar
 ar
 ar
 ar
-ar
-il
-PS
-oU
+qN
+BX
 PS
 PS
+Al
 GS
-ar
+eb
 "}
-(6,1,2) = {"
+(7,1,2) = {"
+eb
 qN
 ar
 bS
@@ -1671,16 +1838,16 @@ ar
 ar
 ar
 ar
-ar
 qN
-BX
+Bx
 PS
 PS
-Al
-GS
-ar
+kQ
+qN
+eb
 "}
-(7,1,2) = {"
+(8,1,2) = {"
+eb
 qN
 GR
 fb
@@ -1698,50 +1865,22 @@ ar
 ar
 ar
 ar
-ar
-qN
-Bx
-PS
-PS
-kQ
-qN
-ar
-"}
-(8,1,2) = {"
-SU
-lF
-lF
-lF
-lF
-SU
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
 qN
 cL
 aR
 ZK
 hq
 qN
-ar
+eb
 "}
 (9,1,2) = {"
-ar
-ar
-ar
-ar
-ar
-ar
-ar
+eb
+SU
+lF
+lF
+lF
+lF
+SU
 ar
 ar
 ar
@@ -1759,10 +1898,11 @@ lF
 lF
 lF
 SU
-ar
+eb
 "}
 (10,1,2) = {"
 ar
+IU
 ar
 ar
 ar
@@ -1784,11 +1924,12 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
+IU
+eb
 "}
 (11,1,2) = {"
+Aq
+JP
 ar
 ar
 ar
@@ -1810,12 +1951,12 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
+Ej
+Aq
 "}
 (12,1,2) = {"
+Aq
+YM
 ar
 ar
 ar
@@ -1837,12 +1978,12 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
+lS
+Aq
 "}
 (13,1,2) = {"
+nE
+YM
 ar
 ar
 ar
@@ -1864,12 +2005,12 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
+lS
+FS
 "}
 (14,1,2) = {"
+Aq
+YM
 ar
 ar
 ar
@@ -1891,12 +2032,12 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
+lS
+Aq
 "}
 (15,1,2) = {"
+Aq
+JP
 ar
 ar
 ar
@@ -1918,12 +2059,12 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
+Ej
+Aq
 "}
 (16,1,2) = {"
+eb
+Zk
 ar
 ar
 ar
@@ -1945,12 +2086,11 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
+Zk
+eb
 "}
 (17,1,2) = {"
+eb
 ar
 ar
 ar
@@ -1974,10 +2114,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (18,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2001,10 +2141,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (19,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2028,10 +2168,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (20,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2055,10 +2195,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (21,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2082,10 +2222,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (22,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2109,10 +2249,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (23,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2136,10 +2276,10 @@ ar
 ar
 ar
 ar
-ar
-ar
+eb
 "}
 (24,1,2) = {"
+eb
 ar
 ar
 ar
@@ -2149,6 +2289,12 @@ ar
 ar
 ar
 ar
+rh
+HQ
+FX
+FX
+HQ
+pO
 ar
 ar
 ar
@@ -2157,39 +2303,32 @@ ar
 ar
 ar
 ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
+eb
 "}
 (25,1,2) = {"
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
-ar
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+Aq
+Bo
+Aq
+Aq
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
 "}
