@@ -80,3 +80,16 @@
   - rscadd: Added a key to the keep for the noble role.
   - image: Added three new key icons, two taken from Azure Peak.
   - code_imp: Changed lock difficulties to defines instead of magic numbers.
+2026-08-10:
+  CheffieGithub:
+  - bugfix: Fixed combat music getting stuck turned on in some areas
+  - rscdel: Removed wild magic humor
+  MissyNym:
+  - map: Replaces the Gorefeast spawn in Malum's Anvil with a Vicious Axe instead.
+  dwasint:
+  - rscadd: Daily Wages, steward can set to payout each dawn.
+  realforest2001:
+  - bugfix: Fixed a lingering error
+  - rscadd: Added more keep area defines, mainly for replacing instances of 'basement'.
+  - rscadd: Added an open sky area for use in place of generic roof area where suitable.
+  - bugfix: Fixed a runtime in crafting.

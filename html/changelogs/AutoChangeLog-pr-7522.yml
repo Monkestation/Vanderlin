@@ -1,4 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - bugfix: "Fixed combat music getting stuck turned on in some areas"
