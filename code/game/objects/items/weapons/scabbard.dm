@@ -9,7 +9,6 @@
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)
-	randomize_blade_int = FALSE
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
