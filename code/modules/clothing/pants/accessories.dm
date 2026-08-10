@@ -34,9 +34,6 @@
 	return TRUE
 
 /obj/item/clothing/accessory/proc/detach(obj/item/clothing/pants/U, user)
-	if(detached_pockets && detached_pockets.parent == U)
-		TakeComponent(detached_pockets)
-
 	U.set_armor(U.get_armor().subtract_other_armor(get_armor()))
 
 	if(isliving(user))

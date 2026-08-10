@@ -6,31 +6,32 @@
 	quickdraw = TRUE
 	insert_preposition = "in"
 
-// /datum/component/storage/concrete/scabbard/RegisterWithParent()
-// 	. = ..()
-// 	RegisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE, PROC_REF(update_icon_state))
+/datum/storage/no_interface/scabbard/set_parent(atom/new_parent)
+	. = ..()
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE, PROC_REF(update_icon_state))
 
-// /datum/component/storage/concrete/scabbard/UnregisterFromParent()
-// 	UnregisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE)
-// 	. = ..()
+/datum/storage/no_interface/scabbard/Destroy(force)
+	UnregisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE)
+	return ..()
 
-// /datum/component/storage/concrete/scabbard/proc/update_icon_state(obj/item/I)
-// 	if(!istype(I))
-// 		return
-// 	I.icon_state = initial(I.icon_state)
-// 	I.item_state = initial(I.item_state)
+/datum/storage/no_interface/proc/update_icon_state(datum/source)
+	if(!istype(parent))
+		return
 
-// 	if(length(I.contents))
-// 		var/obj/item/sheathed_weapon = I.contents[1]
-// 		var/icon/possible_sheaths = icon(I.icon) //hehe
-// 		var/list/extensions = list()
-// 		for(var/s in possible_sheaths.IconStates(1))
-// 			extensions[s] = TRUE
-// 		qdel(possible_sheaths)
-// 		if(extensions[I.icon_state+"_[sheathed_weapon.icon_state]"])
-// 			I.icon_state += "_[sheathed_weapon.icon_state]"
-// 		else
-// 			I.icon_state += "-sheathed"
+	parent.icon_state = initial(parent.icon_state)
+
+	if(length(real_location.contents))
+		var/obj/item/sheathed_weapon = real_location.contents[1]
+		var/icon/possible_sheaths = icon(parent.icon) //hehe
+		var/list/extensions = list()
+		for(var/s in possible_sheaths.IconStates(1))
+			extensions[s] = TRUE
+		qdel(possible_sheaths)
+
+		if(extensions[parent.icon_state + "_[sheathed_weapon.icon_state]"])
+			parent.icon_state += "_[sheathed_weapon.icon_state]"
+		else
+			parent.icon_state += "-sheathed"
 
 /datum/storage/no_interface/scabbard/knife/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
@@ -44,7 +45,7 @@
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword/long/daewalker))
 
-/datum/storage/no_interface/scabbard/kazengun/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+/datum/storage/no_interface/scabbard/blackmeadow/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword/katana))
 

@@ -237,7 +237,7 @@
 
 /obj/item/weapon/scabbard/blackmeadow/Initialize(mapload)
 	. = ..()
-	create_storage(type = /datum/storage/no_interface/scabbard/kazengun)
+	create_storage(type = /datum/storage/no_interface/scabbard/blackmeadow)
 
 /obj/item/weapon/scabbard/blackmeadow/steel
 	name = "hwang scabbard"

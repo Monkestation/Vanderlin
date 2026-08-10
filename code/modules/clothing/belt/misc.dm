@@ -88,12 +88,11 @@
 	icon_state = "blackbelt"
 	sellprice = 10
 
-/obj/item/storage/belt/leather/black/courtagent
-	populate_contents = list(
-		/obj/item/storage/keyring/courtagent,
-		/obj/item/weapon/knife/dagger/steel,
-		/obj/item/lockpickring/mundane,
-	)
+/obj/item/storage/belt/leather/black/courtagent/populate_contents()
+	. = ..()
+	new /obj/item/storage/keyring/courtagent(src)
+	new /obj/item/weapon/knife/dagger/steel(src)
+	new /obj/item/lockpickring/mundane(src)
 
 /obj/item/storage/belt/leather/plaquesilver
 	name = "plaque belt"
