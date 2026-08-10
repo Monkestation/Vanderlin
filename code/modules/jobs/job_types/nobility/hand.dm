@@ -51,6 +51,7 @@
 	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/keyring/hand
+	ring = /obj/item/clothing/ring/courtagent_ring/blacksteel
 
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)

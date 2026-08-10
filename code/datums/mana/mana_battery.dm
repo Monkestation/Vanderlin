@@ -96,7 +96,7 @@
 	grid_width = 32
 
 /obj/item/mana_battery/mana_crystal/standard/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!istype(tool, /obj/item/weapon/knife))
+	if(!(tool.tool_behaviour == TOOL_KNIFE))
 		return NONE
 
 	user.visible_message(span_notice("[user] starts to chop up [src]!"), span_notice("You start to chop up [src]!"))

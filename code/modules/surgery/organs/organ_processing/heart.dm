@@ -149,6 +149,8 @@
 				true_bleed *= 1.25
 			if(PULSE_FASTER, PULSE_THREADY)
 				true_bleed *= 1.5
+		if(owner.status_flags & BLEEDOUT)
+			true_bleed *= 0.5 //this gives us some nice bleed reduction so you have more time to save someone whos in crit
 		true_bleed = CEILING(true_bleed * bleed_mod, 0.1)
 		temp_bleed += true_bleed
 		if(bleed_part.bandage)

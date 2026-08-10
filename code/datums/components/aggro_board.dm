@@ -1,6 +1,6 @@
 /datum/component/ai_aggro_system
 	/// Default threat threshold before a mob is considered hostile
-	var/default_threat_threshold = 10
+	var/default_threat_threshold = 5
 	/// Default range at which mobs detect and add threats
 	var/default_aggro_range = 9
 	/// Default range at which mobs maintain aggro before dropping target

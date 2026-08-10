@@ -59,6 +59,9 @@
 		if("MY BARE HANDS!!!")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 20)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
+			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
+			spawned.mind.special_items["My Gloves"] = /obj/item/clothing/gloves/bandages/pugilist
 		if("Great Axe")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40, TRUE)
 		if("Mace")

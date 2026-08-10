@@ -5,6 +5,8 @@
 	var/list/bad_colours = list()
 	var/list/bad_icons = list()
 	for(var/obj/item/thing as anything in subtypesof(/obj/item))
+		if(IS_ABSTRACT(thing))
+			continue
 		thing = allocate(thing)
 		if(!thing.get_detail_tag())
 			continue

@@ -45,8 +45,6 @@
 
 	stop_offering_item()
 
-	QDEL_LIST(surgeries)
-
 	GLOB.mob_living_list -= src
 	for(var/datum/soullink/S as anything in ownedSoullinks)
 		S.ownerDies(FALSE)
@@ -413,6 +411,8 @@
 		return FALSE
 	if(body_position == LYING_DOWN)
 		return TRUE
+	if(HAS_TRAIT(L, TRAIT_CLOSECOMBAT))
+		return TRUE
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if( !(check_zone(L.zone_selected) in acceptable) )
 		to_chat(L, "<span class='warning'>I can't reach that.</span>")
@@ -548,11 +548,11 @@
 			var/used_limb = C.find_used_grab_limb(src, accurate)
 			O.name = "[C]'s [parse_zone(used_limb)]"
 			var/obj/item/bodypart/BP = C.get_bodypart(check_zone(used_limb))
-			C.grabbedby += O
+			LAZYADD(C.grabbedby, O)
 			O.grabbed = C
 			O.set_grabber(src)
 			O.limb_grabbed = BP
-			BP.grabbedby += O
+			LAZYADD(BP.grabbedby, O)
 			SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, src) // black briar uses this for triggering infection on grabbers
 			if(item_override)
 				O.sublimb_grabbed = item_override
@@ -1061,17 +1061,23 @@
 
 	if(heal_flags & HEAL_TOX) //zero as second argument not automatically call updatehealth().
 		setToxLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_OXY)
 		setOxyLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_CLONE)
 		setCloneLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_BRUTE)
 		setBruteLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_BURN)
 		setFireLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_STAM)
 		adjust_stamina(-maximum_stamina, internal_regen = FALSE)
 		adjust_energy(max_energy)
+
 	if(heal_flags & HEAL_PAIN_SHOCK)
 		setPainLoss(0, FALSE, TRUE)
 		setShockStage(0, FALSE, TRUE)
@@ -1092,8 +1098,10 @@
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
+
 	if(heal_flags & HEAL_BLOOD)
 		restore_blood()
+
 	if(reagents && (heal_flags & HEAL_ALL_REAGENTS))
 		for(var/addi in reagents.addiction_list)
 			reagents.remove_addiction(addi)
@@ -1119,16 +1127,6 @@
 	if(health <= HEALTH_THRESHOLD_DEAD)
 		return FALSE
 	return TRUE
-
-/mob/living/carbon/human/can_be_revived()
-	. = ..()
-	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(!istype(H) || HAS_TRAIT(H, TRAIT_ROTTEN) || H.skeletonized)
-		return FALSE
-	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
-	if(!istype(B) || B.brain_death)
-		return FALSE
-
 
 /mob/living/proc/update_damage_overlays()
 	return
@@ -1960,7 +1958,7 @@
 	var/list/item_contents = list()
 
 	for(var/obj/item/item in src)
-		if(!dropItemToGround(item))
+		if(!dropItemToGround(item) && !(item.item_flags & ABSTRACT))
 			qdel(item)
 			continue
 		item_contents += item
