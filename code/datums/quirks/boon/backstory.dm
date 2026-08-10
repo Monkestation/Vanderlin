@@ -56,7 +56,7 @@
 		return
 
 	if(!customization_value || !ispath(customization_value, /datum/backstory))
-		customization_value = /datum/backstory/combat/soldier
+		customization_value = /datum/backstory/combat/sword
 
 	var/datum/backstory/B = customization_value
 	var/mob/living/carbon/human/H = owner
