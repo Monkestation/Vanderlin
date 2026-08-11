@@ -75,7 +75,7 @@
 			to_chat(H, span_notice(name))
 
 /datum/job/advclass/hand
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
 
 /datum/attribute_holder/sheet/job/hand
 	raw_attribute_list = list(
@@ -103,7 +103,6 @@
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/hand
 	honorary = "General"
@@ -158,7 +157,6 @@
 	outfit = /datum/outfit/hand/spymaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/spymaster
 	honorary = "Spymaster"
@@ -245,7 +243,6 @@
 	outfit = /datum/outfit/hand/advisor
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/advisor
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/advisor/old
@@ -339,7 +336,6 @@
 	outfit = /datum/outfit/hand/huntsmaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/huntsmaster
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/huntsmaster/old
