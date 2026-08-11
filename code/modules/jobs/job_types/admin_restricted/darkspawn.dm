@@ -44,11 +44,9 @@
 	knows_the_town = TRUE
 	known_by_the_town = FALSE
 
-	exp_type = list(EXP_TYPE_CHURCH)
-	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
-	exp_requirements = list(
-		EXP_TYPE_CHURCH = 900,
-	)
+	exp_type = list()
+	exp_types_granted = list()
+	exp_requirements = list()
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/darkspawn
 
