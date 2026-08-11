@@ -76,6 +76,27 @@
 	icon_state = "jester"
 	item_weight = 155 GRAMS
 
+/obj/item/clothing/head/trilby
+	name = "trilby"
+	desc = "A hat suited for only the finest of skeptics."
+	icon_state = "curator"
+	flags_inv = HIDEEARS
+	sellprice = VALUE_FINE_CLOTHING
+	item_weight = 100 GRAMS
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/hexknifehat
+	name = "accursed hat"
+	desc = "Every night, all over the city, dozens of people see this man in their dreams. If this man appears in your dreams too, or you have any \
+	information that can help us identify him, please contact us at the Broken Ogre tavern by the docks."
+	icon = 'icons/roguetown/maniac/dwclothing.dmi'
+	mob_overlay_icon = 'icons/roguetown/maniac/dwclothing_mob.dmi'
+	icon_state = "chzo"
+	flags_inv = HIDEEARS
+	sellprice = VALUE_FINE_CLOTHING
+	item_weight = 100 GRAMS
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/head/jester/Initialize()
 	. = ..()
 	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_JINGLE_BELLS), step_delay_override = 2, falloff_exponent = 20) //die off quickly

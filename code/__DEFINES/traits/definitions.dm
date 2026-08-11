@@ -572,6 +572,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EARGRAB "Ear Grab"
 #define TRAIT_FACELESS "Faceless One"
 #define TRAIT_ROYALSERVANT "Household Insight" // Let's you see the royals liked/hated food/drink
+#define TRAIT_DREAMWEAVERPHANTASM "Dreamweaved" // Dreamweaver Wretch. Hallucinations.
+#define TRAIT_DREAMSTOLEN "Stolen Dreams" // Dreamweaver Wretch. If someone gets their dreams stolen.
+#define TRAIT_DREAMPARANOIAAGENT "Paranoia Agent" // Dreamweaver Wretch. Activates some misc. details.
 #define TRAIT_COURTAGENT "Agent of the Court"
 #define TRAIT_GATEKEEPER "Gatekeeper"
 

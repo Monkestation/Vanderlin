@@ -116,3 +116,17 @@
 /obj/item/clothing/armor/regenerating/skin/easttats/tribal
 	name = "Tribal Tattoos"
 	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
+
+/obj/item/clothing/armor/regenerating/skin/easttats/hexknife
+	name = "a normal leather jacket"
+	desc = "Touch the sleeve, it is warm, like flesh. But it is not flesh. Not yet."
+	icon_state = "doccoat"
+	item_state = "doccoat"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	detail_color = CLOTHING_SCARLET
+	boobed = FALSE
+	uses_lord_coloring = FALSE
+	misc_flags = CRAFTING_TEST_EXCLUDE

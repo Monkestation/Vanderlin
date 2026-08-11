@@ -26,6 +26,7 @@
 #define STATMOD_ABOM "Abomination"
 #define STATMOD_SIGIL "Arcane Sigal"
 #define STATMOD_RITUAL "Ritual"
+#define STATMOD_DREAMWEAVER "Dreamweaver"
 
 // Patrons
 #define STATMOD_ASTRATA_BLESSING "astrata_blessing"
