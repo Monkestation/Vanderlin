@@ -29,7 +29,7 @@
 	var/auto_deadmin_role_flags = NONE
 
 	//Players will be allowed to spawn in as jobs that are set to "Station"
-	var/faction = FACTION_NONE
+	var/list/factions = FACTION_NONE
 
 	///Whether this job can be chosen if the player is already an antagonist
 	var/antags_can_pick = TRUE
@@ -262,6 +262,8 @@
 
 /datum/job/New()
 	. = ..()
+	if(!islist(factions))
+		factions = list(factions)
 	setup_known_people()
 
 /datum/job/proc/setup_known_people(mob/living/carbon/human/spawned)
@@ -864,7 +866,7 @@
 	data["spawn_positions"] = spawn_positions
 	data["cmode_music"] = cmode_music
 	data["antag_role"] = antag_role
-	data["faction"] = faction
+	data["factions"] = factions
 	data["total_positions"] = total_positions
 	data["tutorial"] = tutorial
 	data["selection_color"] = selection_color
@@ -945,7 +947,7 @@
 	cmode_music = data["cmode_music"]
 	outfit = data["outfit"]
 	antag_role = text2path(data["antag_role"])
-	faction = data["faction"]
+	factions = data["factions"]
 	total_positions = data["total_positions"]
 	tutorial = data["tutorial"]
 	selection_color = data["selection_color"]

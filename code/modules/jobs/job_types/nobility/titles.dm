@@ -2,7 +2,7 @@
 	title = "Warden of the Terrorbog"
 	tutorial = ""
 	department_flag = NOBLEMEN
-	faction = "Station"
+	factions = "Station"
 	total_positions = 0
 	spawn_positions = 0
 
@@ -24,7 +24,7 @@
 	f_title = "Huntmistress of the Murderwoods"
 	tutorial = ""
 	department_flag = NOBLEMEN
-	faction = "Station"
+	factions = "Station"
 	total_positions = 0
 	spawn_positions = 0
 
@@ -45,7 +45,7 @@
 	title = "Hetman of Mount Decapitation"
 	tutorial = ""
 	department_flag = NOBLEMEN
-	faction = "Station"
+	factions = "Station"
 	total_positions = 0
 	spawn_positions = 0
 
