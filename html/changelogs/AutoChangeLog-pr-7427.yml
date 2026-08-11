@@ -1,4 +1,4 @@
 author: "realforest2001"
 delete-after: True
 changes:
-  - bugfix: "Fixed a runtime in crafting."
+  - refactor: "Changes how jobs know eachother."

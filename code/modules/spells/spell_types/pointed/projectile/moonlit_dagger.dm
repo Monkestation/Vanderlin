@@ -37,7 +37,7 @@
 	var/datum/antagonist/vampire/sucker_datum = target.mind?.has_antag_datum(/datum/antagonist/vampire/)
 	if(istype(sucker_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/sucker_lord = sucker_datum //I am very mature
-		if(sucker_lord.ascended >= 4)
+		if(sucker_lord.ascension_resistance() == 1)
 			target.visible_message(span_danger("\The [src] fails to affect [target]!"), span_userdanger("Feeble metal cannot hurt me, I AM THE ANCIENT!"))
 			return
 

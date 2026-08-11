@@ -1,0 +1,4 @@
+author: "l3lb0t"
+delete-after: True
+changes:
+  - bugfix: "Hand subclasses now properly give leadership XP."

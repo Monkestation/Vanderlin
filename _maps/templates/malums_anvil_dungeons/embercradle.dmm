@@ -2931,7 +2931,7 @@
 /obj/item/clothing/shirt/robe/colored/black,
 /obj/item/clothing/gloves/leather/black,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/storage/belt/leather/black,
 /obj/item/clothing/head/crown/nyle,
 /turf/open/floor/carpet,
@@ -3615,13 +3615,13 @@
 /area/under/mountains/anvil/dungeon/lower)
 "Wn" = (
 /obj/structure/rack,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "Wq" = (

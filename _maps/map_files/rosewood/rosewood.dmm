@@ -3678,7 +3678,7 @@
 /obj/item/clothing/shirt/dress/royal/prince,
 /obj/item/clothing/shirt/dress/royal/princess,
 /obj/item/clothing/pants/tights/colored/black,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/head/crown/circlet,
 /obj/item/clothing/shirt/ornate/dress,
 /obj/item/clothing/shirt/ornate/tunic,
@@ -4229,12 +4229,12 @@
 /area/indoors/town/orphanage)
 "cbl" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/shoes/boots/leather{
 	pixel_x = 1;
 	pixel_y = 15
 	},
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -5170,7 +5170,7 @@
 /area/indoors/town/tavern)
 "cvv" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/item/clothing/gloves/leather/phys,
@@ -10332,7 +10332,7 @@
 	pixel_x = -2;
 	pixel_y = 5
 	},
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/item/clothing/cloak/raincloak/furcloak,
@@ -12593,7 +12593,7 @@
 /obj/structure/closet/crate/crafted_closet/lord,
 /obj/item/scomstone,
 /obj/item/clothing/shoes/nobleboot,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/cloak/half,
 /obj/item/clothing/cloak/wardencloak{
 	name = "thick cloak";
@@ -20646,7 +20646,7 @@
 	pixel_x = -2;
 	pixel_y = 5
 	},
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/item/clothing/cloak/raincloak/furcloak,
@@ -26279,7 +26279,7 @@
 /obj/item/clothing/shirt/undershirt/colored/black,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/head/roguehood/colored/black,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/wood,
 /area/indoors/town/keep/magician)
 "mMu" = (
@@ -27822,7 +27822,7 @@
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/item/clothing/pants/tights/colored/black,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/storage/backpack/satchel,
 /obj/item/clothing/cloak/lordcloak/ladycloak,
 /obj/item/clothing/wrists/royalsleeves,
@@ -29481,7 +29481,7 @@
 	dir = 8
 	},
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/armor/leather/jacket/handjacket,
 /obj/item/clothing/armor/gambeson/heavy/winterdress,
@@ -29890,7 +29890,7 @@
 /area/indoors/town)
 "ooH" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/bath)
@@ -32220,7 +32220,7 @@
 /area/under/town/basement)
 "pua" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/item/clothing/shoes/boots/furlinedboots,
@@ -33409,7 +33409,7 @@
 /area/indoors/town/orphanage)
 "qcP" = (
 /obj/structure/rack,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
 "qcT" = (
@@ -35553,7 +35553,7 @@
 /obj/item/clothing/cloak/raincloak/furcloak/colored/black,
 /obj/item/clothing/shirt/undershirt/colored/black,
 /obj/item/clothing/pants/tights/colored/black,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/face/spectacles/golden,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/carpet/red,
@@ -45099,8 +45099,8 @@
 /area/indoors/town/orphanage)
 "vOH" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/storage/belt/leather/suspenders,

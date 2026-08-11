@@ -511,6 +511,22 @@
 
 	return TRUE
 
+/datum/action/cooldown/spell/proc/can_cast_lunar_magic(feedback)
+	if(!owner)
+		return FALSE
+
+	if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
+		if(feedback)
+			to_chat(owner, span_warning("The Moon Prince has turned his divine wrath upon me! I cannot wield the moonlight!"))
+		return FALSE
+
+	var/area/indoors/town/church/dreamcave/chamber = get_area(owner)
+	if((GLOB.tod == DAWN || GLOB.tod == DAY) && !(istype(chamber)))
+		if(feedback)
+			to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
+		return FALSE
+	return TRUE
+
 /**
  * Check if the target we're casting on is a valid target.
  * For self-casted spells, the target being checked (cast_on) is the caster.

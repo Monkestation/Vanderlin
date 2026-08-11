@@ -8,12 +8,13 @@
 	But someday you'll have to grow up, and that will be the day your carelessness will cost you more than a few mammons."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_PRINCE
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 
 	can_have_apprentices = FALSE

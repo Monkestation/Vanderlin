@@ -468,6 +468,17 @@
 	worn_x_dimension = 32
 	worn_y_dimension = 32
 
+/obj/item/clothing/head/helmet/visored/knight/owl/lunar
+	name = "lunar owl armet"
+	desc = "A silver armet of distinct bird like design with a pronounced beak. \
+		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
+		Worn by the sentinels of the Lunar Order it symbolises their eternal watch over the nite."
+	armor_type = /datum/armor/head/plate/silver
+
+/obj/item/clothing/head/helmet/visored/knight/owl/lunar/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/clothing/head/helmet/visored/knight/aalloy
 	name = "decrepit bascinet"
 	desc = "A chipped greathelm of frayed bronze. The fittings squeal with nauseous annoyance, whenever you move to lift its half-rusted visor up and down. Add a feather to show the colors of your family or allegiance."

@@ -10,7 +10,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MENATARMS
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
@@ -23,6 +23,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
 	give_bank_account = 30
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	starting_wage = 30
 
 	job_bitflag = BITFLAG_GARRISON
