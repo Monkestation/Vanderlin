@@ -155,7 +155,7 @@
 	name = "zizombie"
 	id = SPEC_ID_ZIZOMBIE
 	species_traits = list()
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
+	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = "human"
