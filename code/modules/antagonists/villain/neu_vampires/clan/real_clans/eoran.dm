@@ -52,6 +52,6 @@
 	H.AddComponent(/datum/component/vampire_disguise)
 
 /datum/clan/eoran/setup_vampire_abilities(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
 	transfix.Grant(H)

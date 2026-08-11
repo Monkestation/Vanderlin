@@ -13,7 +13,7 @@
 		return
 	for(var/obj/item/clothing/neck/portalamulet/P in GLOB.vampire_objects)
 		possibleportals += P
-	var/atom/choice = browser_input_list(user, "Choose an area to open the portal to", "Choices", possibleportals)
+	var/atom/choice = tgui_input_list(user, "Choose an area to open the portal to", "Choices", possibleportals)
 	if(!choice)
 		to_chat(user, span_warning("There are no anchors to open a portal to."))
 		return
@@ -111,7 +111,7 @@
 
 /obj/item/clothing/neck/portalamulet/examine(mob/user)
 	. = ..()
-	if(user.mind.has_antag_datum(/datum/antagonist/vampire))
+	if(user.mind?.has_antag_datum(/datum/antagonist/vampire))
 		desc = "World anchor, used by the portal in The Mansion. Using it will return you to where it was made, right in the evil's lair. Leave it behind to make a portal to later."
 	else
 		desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"

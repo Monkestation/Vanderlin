@@ -116,7 +116,7 @@
 		return
 	grab_ghost(TRUE, TRUE)
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
-	if(src.mind.has_antag_datum(/datum/antagonist/ghoul)) //removing old covens for thralls
+	if(mind?.has_antag_datum(/datum/antagonist/ghoul)) //removing old covens for thralls
 		var/obj/item/bodypart/chest = src.get_bodypart(BODY_ZONE_CHEST)
 		if(chest)
 			for (var/datum/bodypart_feature/F in chest.bodypart_features)

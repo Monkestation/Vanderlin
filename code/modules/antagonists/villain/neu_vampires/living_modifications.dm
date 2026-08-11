@@ -415,7 +415,7 @@
 		chosen_coven.max_level = 3 //caps the level for thralls at 3
 
 	give_coven(chosen_coven)
-	src.mind.add_antag_datum(/datum/antagonist/ghoul)
+	mind.add_antag_datum(/datum/antagonist/ghoul)
 
 
 

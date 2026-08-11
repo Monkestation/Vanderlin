@@ -37,11 +37,6 @@
 		return
 	if(IS_DEADITE(victim))
 		to_chat(src, span_warning("The dead already walk. This one is the Dark Lady's servant."))
-	//Handled by TRAIT_VAMP_OFFERED, to allow ghouls for proper conversion
-	// if((victim.clan || victim.mind.has_antag_datum(/datum/antagonist/vampire)))
-	// 	if(victim.coven)
-	// 	to_chat(src, span_warning("[victim] has already been sired."))
-	// 	return
 	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
 		to_chat(src, span_warning("[victim] tastes of beast. [victim.p_they()] will not sire."))
 		return
