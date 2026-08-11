@@ -23793,7 +23793,7 @@
 /turf/open/floor/dirt,
 /area/under/town/sewer)
 "uVn" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = -32
 	},

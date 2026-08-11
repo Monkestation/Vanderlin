@@ -3726,7 +3726,7 @@
 /turf/open/floor/blocks,
 /area/indoors/town)
 "bMR" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -5030,7 +5030,7 @@
 /area/indoors/town/shop)
 "crD" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /obj/effect/mapping_helpers/access/locker,
@@ -9000,7 +9000,7 @@
 /obj/item/key/apartments/apartment2,
 /obj/item/key/apartments/apartment1,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -10643,7 +10643,7 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "eSw" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -12545,7 +12545,7 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/mapping_helpers/access/keyset/town/tombwarden,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/key/mercenary,
 /obj/item/key/mercenary,
 /obj/item/key/mercenary,
@@ -19227,7 +19227,7 @@
 /turf/open/floor/cobblerock/alt,
 /area/indoors/town/noble_manor/yellow)
 "iRB" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/key/mnoble3_red,
 /obj/item/key/mnoble3_red,
 /obj/item/key/mnoble3_red,
@@ -20963,7 +20963,7 @@
 /turf/open/floor/cobble,
 /area/outdoors/town/keep)
 "jDs" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -27159,7 +27159,7 @@
 /turf/open/water/clean/dirt,
 /area/outdoors/woods_safe)
 "muh" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /obj/item/key/church,
@@ -30098,7 +30098,7 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/beach)
 "nHW" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/key/mnoble1_blue,
 /obj/item/key/mnoble1_blue,
 /obj/item/key/mnoble1_blue,
@@ -45883,7 +45883,7 @@
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep/feast)
 "uEV" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/yellow)
@@ -46811,7 +46811,7 @@
 /obj/item/key/vault,
 /obj/effect/mapping_helpers/access/keyset/manor/vault,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = -32
 	},
@@ -49226,7 +49226,7 @@
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "vUl" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -49957,7 +49957,7 @@
 /turf/open/floor/sandstone,
 /area/outdoors/exposed/under/basement)
 "wlB" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /obj/item/key/dungeon,

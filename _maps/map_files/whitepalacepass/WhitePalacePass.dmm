@@ -3760,7 +3760,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/gate)
 "ckR" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/key/medroomi,
 /obj/item/key/medroomii,
 /obj/item/key/medroomiii,
@@ -3954,7 +3954,7 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/hand)
 "crq" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /obj/effect/mapping_helpers/access/keyset/garrison/lieutenant,
@@ -4445,7 +4445,7 @@
 /obj/item/key/butler,
 /obj/item/key/heir,
 /obj/item/key/heir,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -5286,7 +5286,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "djU" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /obj/item/key/dungeon,
@@ -7387,7 +7387,7 @@
 /obj/item/key/servant,
 /obj/effect/mapping_helpers/access/keyset/manor/butler,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = -32
 	},
@@ -12505,7 +12505,7 @@
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/steward,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -14030,7 +14030,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
 "iAn" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32;
 	pixel_x = 0
 	},
@@ -14935,7 +14935,7 @@
 /obj/item/key/atarms,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /turf/open/floor/cobble,
@@ -21237,7 +21237,7 @@
 /obj/item/key/tomb,
 /obj/item/key/tomb,
 /obj/item/key/tombwarden,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = -32
 	},
@@ -21468,7 +21468,7 @@
 /turf/open/floor/concrete,
 /area/indoors/town/merc_guild)
 "njj" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/key/vault,
 /obj/effect/mapping_helpers/access/keyset/manor/vault,
 /obj/effect/mapping_helpers/access/locker,
@@ -26428,7 +26428,7 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/guest/meeting)
 "qBj" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /obj/item/key/church,
@@ -37066,7 +37066,7 @@
 /obj/item/key/houses/house4,
 /obj/item/key/houses/house5,
 /obj/item/key/houses/house6,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -37237,7 +37237,7 @@
 /obj/item/key/manor,
 /obj/item/key/manor,
 /obj/item/key/manor,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},

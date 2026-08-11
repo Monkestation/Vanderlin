@@ -4929,7 +4929,7 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
 "CJ" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /obj/item/key/forrestgarrison,
 /obj/item/key/forrestgarrison,
