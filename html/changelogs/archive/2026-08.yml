@@ -1,0 +1,98 @@
+2026-08-01:
+  ModDownloading:
+  - bugfix: Wounds are harder to infect.
+  Monkeke2:
+  - rscadd: Added an ability that lets rakshari and werevolves sniff to detect mobs
+      in their vicinity (20 tiles)
+  SmokingCrackForChrist:
+  - balance: Gives Vile Renegade (ADEPT) 30 points in sneaking.
+  - sound: Daewalker can now have a proper bloodrave. New theme!
+  dwasint:
+  - admin: Updates job ban panel to include jobs and classes properly.
+  realforest2001:
+  - bugfix: Correctly closes hrefs
+  - bugfix: Magical noble is correctly patron locked.
+  - rscadd: Added a chat color for maniac prayers.
+2026-08-02:
+  realforest2001:
+  - bugfix: Fixes accent selection.
+2026-08-03:
+  Spitegremlin:
+  - rscadd: Added new chisel and sprite for bronze chisel, repaletted the stone hammer
+      and new hammerstone
+  flleeppyy:
+  - bugfix: readd admin proc call check on db query
+  realforest2001:
+  - rscadd: Added plain Bronze and Blacksteel rings.
+  - rscadd: Added Court Agent rings made of Bronze, Gold and Blacksteel.
+  - image: Added icons for the Court Agent rings, and changed silver to new style.
+  - bugfix: Fixed the pathing for inquisition signet rings.
+2026-08-04:
+  dwasint:
+  - qol: you now bleedout 50% slower when in critical so you can more easily be saved
+  - qol: Off-Balance now applies Combat Knockdown instead of regular knockdown, which
+      cannot stack if you are already knocked down.
+2026-08-05:
+  Avalon-Proto:
+  - rscadd: Fighters trained in unarmed combat can now kick anywhere on the body,
+      and have the ability to access 4 new punch types
+  realforest2001:
+  - bugfix: Fixes heretic triumph buy.
+  - balance: Addressed some exploitable finances.
+2026-08-06:
+  MissyNym:
+  - bugfix: Bronze statues should have a sprite again.
+  - map: The soilson's ranch now has fences and borders around the watering holes
+      to keep the poor animals from walking in and drowning.
+2026-08-07:
+  MissyNym:
+  - map: Fixes a couple of tomb tiles.
+  Somniworld:
+  - balance: 'Soilsons now get 30 points in each of the following skills : Brewing,
+      Winemaking, Distilling, and Cheesemaking.'
+  realforest2001:
+  - bugfix: Noble gem cutlery is now REAL and not just for the museum.
+2026-08-08:
+  Spitegremlin:
+  - rscadd: Added more emotes, finger snapping, sniffing, single clap
+  tired-wired:
+  - rscadd: Added a stasis function for aasimar.
+2026-08-09:
+  CheffieGithub:
+  - rscadd: Organs now live inside of limbs, there maybe unintended consequences of
+      this
+  ModDownloading:
+  - balance: Characters no longer start rounds hungry or thirsty immediately.
+  realforest2001:
+  - rscadd: Added a special key for the Butler, providing them with wider access around
+      the keep, namely access to all the bedrooms.
+  - rscadd: Gave the Hand the same key.
+  - rscadd: Added individual keys for each guest room in the keep.
+  - rscadd: Added keys for Servants and the Heirs, restricting their areas from generic
+      keep access.
+  - rscadd: Restricted the wine cellar to Servants, Butler and Consort.
+  - rscadd: Added some library keys for the archivist to give out to trusted people.
+      Does not provide access to archivist quarters.
+  - rscadd: Changed the Consort's key to be wide reaching but not a master key.
+  - rscadd: Monarch now spawns with a keyring and some spare keys so they're not screwed
+      if they lend out the master key.
+  - rscadd: Butler key can now open the death pit.
+  - rscadd: Added a key to the keep for the noble role.
+  - image: Added three new key icons, two taken from Azure Peak.
+  - code_imp: Changed lock difficulties to defines instead of magic numbers.
+2026-08-10:
+  CheffieGithub:
+  - bugfix: Fixed combat music getting stuck turned on in some areas
+  - rscdel: Removed wild magic humor
+  MissyNym:
+  - map: Replaces the Gorefeast spawn in Malum's Anvil with a Vicious Axe instead.
+  dwasint:
+  - rscadd: Daily Wages, steward can set to payout each dawn.
+  realforest2001:
+  - bugfix: Fixed a lingering error
+  - rscadd: Added more keep area defines, mainly for replacing instances of 'basement'.
+  - rscadd: Added an open sky area for use in place of generic roof area where suitable.
+  - bugfix: Fixed a runtime in crafting.
+2026-08-11:
+  CheffieGithub:
+  - bugfix: Fixed clan interface not rendering right

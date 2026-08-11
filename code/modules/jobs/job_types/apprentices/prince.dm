@@ -98,7 +98,7 @@
 	shoes = /obj/item/clothing/shoes/nobleboot
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/sword
-	beltr = /obj/item/key/manor
+	beltr = /obj/item/key/heir
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	backr = /obj/item/storage/backpack/satchel
 
@@ -144,7 +144,7 @@
 /datum/outfit/heir/aristocrat
 	name = "Sheltered Aristocrat (Prince)"
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/key/manor
+	beltl = /obj/item/key/heir
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 
 /datum/outfit/heir/aristocrat/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -204,7 +204,7 @@
 /datum/outfit/heir/inbred
 	name = "Inbred Wastrel (Prince)"
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/key/manor
+	beltl = /obj/item/key/heir
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 
 /datum/outfit/heir/inbred/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

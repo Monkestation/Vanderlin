@@ -322,39 +322,39 @@
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, spit)
 
 /datum/action/cooldown/mob_cooldown/tentacle_spit_acid
-    name = "Acid Spit"
-    button_icon = 'icons/effects/effects.dmi'
-    button_icon_state = "acid"
-    desc = "Spit corrosive acid at a target."
-    cooldown_time = 8 SECONDS
-    var/projectile_type = /obj/projectile/tentacle_acid
+	name = "Acid Spit"
+	button_icon = 'icons/effects/effects.dmi'
+	button_icon_state = "acid"
+	desc = "Spit corrosive acid at a target."
+	cooldown_time = 8 SECONDS
+	var/projectile_type = /obj/projectile/tentacle_acid
 
 /datum/action/cooldown/mob_cooldown/tentacle_spit_acid/Activate(atom/target)
-    if(!isliving(target))
-        return FALSE
+	if(!isliving(target))
+		return FALSE
 
-    var/turf/start_turf = get_turf(owner)
-    if(!start_turf)
-        return FALSE
+	var/turf/start_turf = get_turf(owner)
+	if(!start_turf)
+		return FALSE
 
-    owner.visible_message(span_boldwarning("[owner] spits a glob of acid at [target]!"))
+	owner.visible_message(span_boldwarning("[owner] spits a glob of acid at [target]!"))
 
-    var/obj/projectile/tentacle_acid/proj = new projectile_type(start_turf)
-    proj.firer = owner
-    proj.fired_from = start_turf
-    proj.preparePixelProjectile(target, owner)
-    proj.fire()
+	var/obj/projectile/tentacle_acid/proj = new projectile_type(start_turf)
+	proj.firer = owner
+	proj.fired_from = start_turf
+	proj.preparePixelProjectile(target, owner)
+	proj.fire()
 
-    StartCooldown()
-    return TRUE
+	StartCooldown()
+	return TRUE
 
 /obj/projectile/tentacle_acid
-    name = "acid glob"
-    icon_state = "acid_splash"
-    damage = 20
-    damage_type = BURN
-    range = 6
-    speed = 2
+	name = "acid glob"
+	icon_state = "acid_splash"
+	damage = 20
+	damage_type = BURN
+	range = 6
+	speed = 2
 
 /obj/effect/temp_visual/tentacle_emergence
 	icon = 'icons/effects/effects.dmi'

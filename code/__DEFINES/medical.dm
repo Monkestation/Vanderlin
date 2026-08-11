@@ -126,20 +126,19 @@
 ///this is for bodyparts that are bone covered
 #define BODYPART_BONE_ENCASED (1<<12)
 
-//flags for the organ_flags var on /obj/item/organ
 // Flags for the organ_flags var on /obj/item/organ
 /// Organic organs, the default.
 #define ORGAN_ORGANIC (1<<0)
 /// Synthetic organs, or cybernetic organs. Don't deteriorate or heal
 #define ORGAN_ROBOTIC (1<<1)
 /// Frozen organs, don't deteriorate
-#define ORGAN_FROZEN			(1<<3)
+#define ORGAN_FROZEN (1<<3)
 /// Failing organs perform damaging effects until replaced or fixed
-#define ORGAN_FAILING			(1<<4)
+#define ORGAN_FAILING (1<<4)
 /// Was this organ implanted/inserted/etc, if true will not be removed during species change.
-#define ORGAN_EXTERNAL			(1<<5)
+#define ORGAN_EXTERNAL (1<<5)
 /// Currently only the brain - Removal of this organ immediately kills you
-#define ORGAN_VITAL				(1<<6)
+#define ORGAN_VITAL (1<<6)
 /// Destroyed organs don't function and cannot be repaired, needs a transplant
 #define ORGAN_DESTROYED	(1<<7)
 /// Not only is the organ failing, it is completely septic and spreading germs around
@@ -152,6 +151,8 @@
 #define ORGAN_NO_VIOLENT_DAMAGE (1<<11)
 /// Organ cannot ever become destroyed beyond repair
 #define ORGAN_INDESTRUCTIBLE (1<<12)
+/// Organ cannot be removed through normal means
+#define ORGAN_UNREMOVABLE (1<<13)
 
 DEFINE_BITFIELD(organ_flags, list(
 	"ORGAN_DESTROYED" = ORGAN_DESTROYED,
@@ -342,10 +343,12 @@ DEFINE_BITFIELD(organ_flags, list(
 #define WOUND_INTERNAL_BRUISE	(1<<11)
 ///wounds coming from divine sources
 #define WOUND_DIVINE	(1<<12)
+///wounds caused by insanely hot things like lava
+#define WOUND_INTENSE_BURN (1<<13)
 
 #define SEWABLE_WOUND_TYPES	(WOUND_SLASH|WOUND_PUNCTURE|WOUND_BITE|WOUND_LASH)
 #define BRUTE_WOUND_TYPES	(SEWABLE_WOUND_TYPES|WOUND_BLUNT|WOUND_INTERNAL_BRUISE)
-#define FIRE_WOUND_TYPES	(WOUND_BURN)
+#define FIRE_WOUND_TYPES	(WOUND_BURN|WOUND_INTENSE_BURN)
 #define CUT_WOUND_TYPES		(WOUND_SLASH|WOUND_PUNCTURE|WOUND_BITE)
 
 // ~injury flags

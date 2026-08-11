@@ -5,7 +5,7 @@
 	blood_disgust = null
 	clan_covens = list(
 		/datum/coven/bloodheal
-    )
+	)
 	force_VL_if_clan_is_empty = FALSE
 	selectable_by_vampires = FALSE
 	//lmaoooooo

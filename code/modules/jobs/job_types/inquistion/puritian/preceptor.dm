@@ -55,7 +55,13 @@
 		TRAIT_DUALWIELDER,
 		TRAIT_FOREIGNER,
 		TRAIT_RECOGNIZED,
+		TRAIT_CLOSECOMBAT,
 	)
+
+	spells = list(
+		/datum/action/innate/clench_fists
+	)
+
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
@@ -79,7 +85,7 @@
 	name = "Preceptor (Herr Prafekt)"
 	shoes = /obj/item/clothing/shoes/psydonboots
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	backpack_contents = list(
 		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/paper/inqslip/arrival/inq = 1,
@@ -87,10 +93,10 @@
 	belt = /obj/item/storage/belt/leather/rope/dark
 	pants = /obj/item/clothing/pants/tights/colored/black
 	cloak = /obj/item/clothing/cloak/cape/inquisitor
-	head = /obj/item/clothing/head/headband/naledi
-	mask = /obj/item/clothing/face/lordmask/naledi/sojourner
+	head = /obj/item/clothing/head/headband/preceptor
+	mask = /obj/item/clothing/face/lordmask/preceptor/gold
 	gloves = /obj/item/clothing/gloves/bandages/pugilist
 	neck = /obj/item/clothing/neck/psycross/gold
-	wrists = /obj/item/clothing/wrists/bracers/naledi
-	ring = /obj/item/clothing/ring/signet
+	wrists = /obj/item/clothing/wrists/bracers/preceptor
+	ring = /obj/item/clothing/ring/signet/psy/g
 

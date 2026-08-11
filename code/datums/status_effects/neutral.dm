@@ -12,6 +12,44 @@
 	desc = "I am knocked off balance!"
 	icon_state = "off_balanced"
 
+/datum/status_effect/aasimar_stasis
+	id = "aasimar_stasis"
+	examine_text = span_notice("SUBJECTPRONOUN is as still as a statue.")
+
+/datum/status_effect/aasimar_stasis/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, "stasis")
+	to_chat(owner, span_notice("My stone settles into stillness."))
+
+/datum/status_effect/aasimar_stasis/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, "stasis")
+	to_chat(owner, span_notice("It's time to serve once more."))
+
+/datum/status_effect/aasimar_stasis/deep
+	id = "aasimar_stasis_deep"
+	duration = 20 SECONDS
+	remove_on_fullheal = TRUE
+
+/datum/status_effect/aasimar_stasis/deep/on_apply()
+	. = ..()
+	to_chat(owner, span_notice("I let my 'self' sink deep."))
+	ADD_TRAIT(owner, TRAIT_DEAF, "stasis")
+	owner.apply_status_effect(/datum/status_effect/grouped/blindness)
+
+/datum/status_effect/aasimar_stasis/deep/on_remove()
+	. = ..()
+	to_chat(owner, span_notice("I return to the surface."))
+	REMOVE_TRAIT(owner, TRAIT_DEAF, "stasis")
+	owner.remove_status_effect(/datum/status_effect/grouped/blindness)
+
+/datum/status_effect/aasimar_stasis/deep/tick()
+	. = ..()
+	owner.adjust_energy((owner.max_energy * 0.02))
+	if(!(owner.blood_volume == BLOOD_VOLUME_MAXIMUM))
+		owner.blood_volume = min(owner.blood_volume + 2, BLOOD_VOLUME_NORMAL)
+	owner.heal_overall_damage(1, 1, BODYPART_ORGANIC, TRUE)
+
 //ENDROGUE
 
 /datum/status_effect/sigil_mark //allows the affected target to always trigger sigils while mindless
@@ -116,7 +154,7 @@
 /datum/status_effect/bugged/get_examine_text(mob/user, list/P)
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
 		var/str = span_warning("[P[THEYVE]] [device.get_examine_name()] implanted.")
-		return "<A href='?src=[REF(owner)];item=[device]'>][str]</A>"
+		return "<A href='byond://?src=[REF(owner)];item=[device]'>][str]</A>"
 
 
 /datum/status_effect/bugged/on_remove()

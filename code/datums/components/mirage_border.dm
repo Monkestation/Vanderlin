@@ -195,11 +195,6 @@
 	// Teleport to destination
 	crosser.forceMove(destination)
 
-	if(isliving(crosser))
-		var/mob/living/M = crosser
-		if(!M.client)
-			M.force_island_check()
-
 	// Animate both the mob and client back to normal
 	animate(crosser, pixel_x = crosser.pixel_x - initial_pixel_x, pixel_y = crosser.pixel_y - initial_pixel_y, time = glide_time, flags = ANIMATION_PARALLEL)
 

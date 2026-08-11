@@ -54,13 +54,13 @@
 /datum/clan/nosferatu/get_blood_preference_string()
 	return "kindred blood, the blood of the dead, blood of vermin"
 
-// /datum/clan/nosferatu/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
-// 	. = ..()
+/datum/clan/nosferatu/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
+	. = ..()
 
-// 	if(is_vampire)
-// 		var/obj/item/organ/eyes/night_vision/NV = new()
-// 		NV.Insert(H, TRUE, FALSE)
-// 		H.ventcrawler = VENTCRAWLER_ALWAYS //I don't think this does anything because we have no vents
+	if(is_vampire)
+		var/obj/item/organ/eyes/night_vision/NV = new()
+		NV.Insert(H, TRUE, movement_flags = DELETE_IF_REPLACED)
+		H.ventcrawler = VENTCRAWLER_ALWAYS //I don't think this does anything because we have no vents
 
 /datum/clan/nosferatu/apply_clan_components(mob/living/carbon/human/H)
 	H.AddComponent(/datum/component/sunlight_vulnerability, damage = 2, drain = 2)

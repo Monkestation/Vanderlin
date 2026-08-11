@@ -22,14 +22,13 @@
 	return ..()
 
 /datum/component/rot/process()
-	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
 		return
 	var/amt2add = rot_amount_per_process
 	if(last_process)
 		amt2add = ((world.time - last_process)/10) * amt2add
 	last_process = world.time
 	amount += amt2add
-	return
 
 /datum/component/rot/corpse/Initialize()
 	if(!iscarbon(parent))
@@ -37,7 +36,7 @@
 	. = ..()
 
 /datum/component/rot/corpse/process()
-	if(HAS_TRAIT(parent, TRAIT_STASIS)) // No rot
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
 		return
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	..()
@@ -106,6 +105,8 @@
 
 /datum/component/rot/simple/process()
 	..()
+	if(HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/mob/living/L = parent
 	var/datum/component/rot/R = src
 	if(L.stat != DEAD)

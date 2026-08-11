@@ -1,6 +1,7 @@
 /datum/round_event_control/antagonist/solo
 	typepath = /datum/round_event/antagonist/solo
 	max_occurrences = 1
+	latest_start = 5 MINUTES
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn
@@ -22,6 +23,8 @@
 		/datum/round_event_control/antagonist/solo/aspirant = 1,
 		/datum/round_event_control/antagonist/solo/maniac = 1,
 	)
+	/// Can this trigger mid round? Backup cover for latest_start
+	var/can_call_midround = FALSE
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
@@ -47,10 +50,9 @@
 /datum/round_event_control/antagonist/solo/proc/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
 	var/new_players_arg = round_started ? FALSE : TRUE
-	var/living_players_arg = round_started ? TRUE : FALSE
 	var/midround_antag_pref_arg = round_started ? FALSE : TRUE
 
-	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, FALSE, new_players_arg, living_players_arg, midround_antag_pref = midround_antag_pref_arg, \
+	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, FALSE, new_players_arg, can_call_midround, midround_antag_pref = midround_antag_pref_arg, \
 													no_antags = TRUE, restricted_roles = restricted_roles, required_roles = exclusive_roles)
 
 	return trim_candidates(candidates)

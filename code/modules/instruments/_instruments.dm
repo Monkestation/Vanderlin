@@ -12,7 +12,6 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK_R|ITEM_SLOT_BACK_L
 	can_parry = FALSE
 	force = 0
-	minstr = 0
 	wbalance = 0
 	throwforce = 0
 	throw_range = 4
@@ -267,7 +266,11 @@
 	"A Reed On the Wind" = 'sound/instruments/lute (5).ogg',
 	"Jests On Steel Ears" = 'sound/instruments/lute (6).ogg',
 	"Merchant in the Mire" = 'sound/instruments/lute (7).ogg',
-	"Soilson's Song" = 'sound/instruments/lute (8).ogg')
+	"Soilson's Song" = 'sound/instruments/lute (8).ogg',
+	"House of the Rising Sun" = 'sound/instruments/lute (11).ogg',
+	"Sound of Silence" = 'sound/instruments/lute (10).ogg',
+	"The Entertainer" = 'sound/instruments/lute (9).ogg',
+	)
 
 /obj/item/instrument/accord
 	name = "accordion"
@@ -284,6 +287,16 @@
 	"Song of the Falconeer" = 'sound/instruments/accord (7).ogg',
 	"Dwarven Frolick" = 'sound/instruments/accord (8).ogg',
 	"Beloved Blue" = 'sound/instruments/accord (9).ogg',
+	"A Grenzel Farewell" = 'sound/instruments/accord (10).ogg',
+	"Dobrusha" = 'sound/instruments/accord (11).ogg',
+	"Kingsfielder Dance No.5" = 'sound/instruments/accord (12).ogg',
+	"Leave Her Johnny" = 'sound/instruments/accord (13).ogg',
+	"March of Zaladin" = 'sound/instruments/accord (14).ogg',
+	"Osslandic Polka" = 'sound/instruments/accord (15).ogg',
+	"The Jolly Coppersmith" = 'sound/instruments/accord (16).ogg',
+	"The Merchant's Ballad" = 'sound/instruments/accord (17).ogg',
+	"Upon the Blue River" = 'sound/instruments/accord (18).ogg',
+	"Winter Serenade" = 'sound/instruments/accord (19).ogg',
 	)
 
 /obj/item/instrument/guitar
@@ -313,6 +326,7 @@
 	"Danza De Las Lanzas" = 'sound/instruments/guitar (18).ogg',
 	"The Feline, Forever Returning" = 'sound/instruments/guitar (19).ogg',
 	"El Beso Carmesí" = 'sound/instruments/guitar (20).ogg',
+	"Dont Let Your Guard Down" = 'sound/instruments/guitar (21).ogg',
 	)
 
 /obj/item/instrument/harp
@@ -367,18 +381,21 @@
 	"Muster the Wardens" = 'sound/instruments/drum (2).ogg',
 	"The Earth That Quakes" = 'sound/instruments/drum (3).ogg',
 	"Marching Beat" = 'sound/instruments/drum (4).ogg',
-	"Desert Heat" = 'sound/instruments/drum (5).ogg')
+	"Desert Heat" = 'sound/instruments/drum (5).ogg',
+	"The Assembly" = 'sound/instruments/drum (6).ogg'
+	)
 
 /obj/item/instrument/hurdygurdy
 	name = "hurdy-gurdy"
 	desc = "A knob-driven, wooden string instrument that reminds you of the oceans far."
 	icon_state = "hurdygurdy"
-	song_list = list("Ruler's One Ring" = 'sound/instruments/hurdy (1).ogg',
+	song_list = list(
+	"Ruler's One Ring" = 'sound/instruments/hurdy (1).ogg',
 	"Tangled Trod" = 'sound/instruments/hurdy (2).ogg',
 	"Motus" = 'sound/instruments/hurdy (3).ogg',
 	"Becalmed" = 'sound/instruments/hurdy (4).ogg',
 	"The Bloody Throne" = 'sound/instruments/hurdy (5).ogg',
-	"We Shall Sail Together" = 'sound/instruments/hurdy (6).ogg'
+	"We Shall Sail Together" = 'sound/instruments/hurdy (6).ogg',
 	)
 	experimental_inhand = TRUE //temporary inhand sprite
 

@@ -45,14 +45,16 @@
 	. = ..()
 	vocals = new(src)  //okay, i think it'll be tied to the organ
 
-/obj/item/organ/vocal_cords/harpy/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, new_zone = null)
+/obj/item/organ/vocal_cords/harpy/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	M.adjust_skill_level(/datum/attribute/skill/misc/music, 10)
 
-/obj/item/organ/vocal_cords/harpy/Remove(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+	organ_owner.adjust_skill_level(/datum/attribute/skill/misc/music, 10)
+
+/obj/item/organ/vocal_cords/harpy/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	if(!QDELING(M))
-		M.adjust_skill_level(/datum/attribute/skill/misc/music, -10)
+
+	if(!QDELING(organ_owner))
+		organ_owner.adjust_skill_level(/datum/attribute/skill/misc/music, -10)
 
 /datum/action/item_action/organ_action/use/harpy_sing
 	name = "Harpy's song"

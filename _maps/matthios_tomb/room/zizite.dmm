@@ -1,0 +1,2234 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aj" = (
+/mob/living/carbon/human/species/demihuman/base/skilled/light_gear,
+/turf/open/floor/carpet/lord/left,
+/area/under/tomb/indoors/church)
+"as" = (
+/obj/effect/decal/cleanable/sigil/S,
+/obj/effect/decal/cleanable/blood/gibs/down,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"aP" = (
+/mob/living/carbon/human/species/skeleton/npc/hard,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"ba" = (
+/obj/structure/closet/crate/chest,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/obj/item/alch/sinew,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"bk" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/under/tomb)
+"bG" = (
+/obj/item/clothing/cloak/stabard/templar/noc{
+	pixel_y = -13;
+	pixel_x = -11
+	},
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/head/roguehood/nochood{
+	pixel_y = -7;
+	pixel_x = 11
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"cY" = (
+/obj/item/clothing/neck/psycross/gold,
+/obj/item/ingot/steelholy,
+/obj/item/ingot/steelholy,
+/obj/item/ingot/steelholy,
+/obj/item/ingot/silverblessed,
+/obj/structure/closet/crate/crafted_closet/steward,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"dm" = (
+/obj/item/clothing/armor/chainmail/hauberk/ancient{
+	pixel_y = -9;
+	pixel_x = -11
+	},
+/obj/effect/decal/cleanable/ash/crematorium{
+	pixel_y = -9
+	},
+/obj/effect/decal/cleanable/ash/crematorium,
+/obj/effect/decal/cleanable/ash/crematorium{
+	pixel_y = -3;
+	pixel_x = 9
+	},
+/obj/effect/decal/cleanable/ash/crematorium{
+	pixel_y = -3;
+	pixel_x = 9
+	},
+/obj/effect/decal/cleanable/ash/crematorium{
+	pixel_y = 1;
+	pixel_x = -10
+	},
+/obj/item/clothing/ring/gold/ravox,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"dz" = (
+/obj/effect/decal/cleanable/blood/gibs/up,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"dF" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 1
+	},
+/obj/structure/door/iron,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"dH" = (
+/obj/item/clothing/pants/platelegs/zizo,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"el" = (
+/obj/item/clothing/head/helmet/visored/silver/armet,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"eo" = (
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"ex" = (
+/obj/structure/closet/crate/chest/gold,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"eJ" = (
+/obj/item/weapon/sword/sabre/noc,
+/obj/item/clothing/neck/psycross/zizo,
+/obj/item/clothing/shirt/robe/necromancer{
+	pixel_y = 2;
+	pixel_x = 8
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"eS" = (
+/obj/effect/decal/cleanable/blood/gibs/body,
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/effect/blood_rune,
+/obj/item/clothing/cloak/templar/astratan,
+/obj/effect/decal/cleanable/sigil,
+/obj/item/clothing/neck/psycross/silver/divine/astrata{
+	pixel_y = -2;
+	pixel_x = 15
+	},
+/obj/item/clothing/armor/cuirass/fluted/gold/king{
+	pixel_y = -10
+	},
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"fR" = (
+/obj/structure/trap/poison,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"gO" = (
+/obj/structure/fluff/statue/zizo{
+	pixel_x = 15
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"gU" = (
+/mob/living/carbon/human/species/skeleton/npc/hard,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"gW" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/gem/amber,
+/obj/item/gem/amber,
+/obj/item/gem/amber,
+/obj/item/gem/amber,
+/obj/item/statue/gold,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"hg" = (
+/obj/structure/fluff/clock/zizoclock,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"hZ" = (
+/obj/structure/fluff/psycross/zizocross,
+/obj/effect/decal/carpet/kover_darkred,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"if" = (
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"il" = (
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/item/instrument/psyaltery,
+/obj/item/coin/gold/pile,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"iq" = (
+/obj/structure/inert_bonepile,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"is" = (
+/mob/living/simple_animal/hostile/retaliate/elemental/crawler,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"iv" = (
+/turf/closed/wall/mineral/decostone/moss/red,
+/area/under/tomb/indoors/magic)
+"jL" = (
+/obj/effect/decal/cleanable/sigil/NW,
+/obj/effect/decal/cleanable/blood/gibs/old,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"jR" = (
+/obj/structure/fluff/railing/border,
+/turf/open/openspace,
+/area/under/tomb)
+"kr" = (
+/turf/open/openspace,
+/area/under/tomb/indoors/church)
+"ld" = (
+/turf/closed/wall/mineral/decostone/long,
+/area/under/tomb/indoors/church)
+"lm" = (
+/obj/structure/trap/shock,
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/item/natural/wood/plank{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/obj/item/natural/wood/plank{
+	pixel_y = -5;
+	pixel_x = -7
+	},
+/obj/item/natural/wood/plank{
+	pixel_y = -5;
+	pixel_x = 10
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"lS" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/effect/decal/cleanable/blood/tracks,
+/mob/living/carbon/human/species/human/northern/deranged_knight/zizo,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"lV" = (
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"mg" = (
+/obj/item/clothing/head/peaceflower{
+	pixel_y = 10
+	},
+/obj/item/clothing/head/flowercrown/salvia{
+	pixel_x = -2;
+	pixel_y = 8
+	},
+/obj/item/clothing/shirt/ornate/dress{
+	pixel_y = -6;
+	pixel_x = 14
+	},
+/obj/effect/decal/remains/human,
+/obj/item/clothing/ring/gold/saffira{
+	pixel_y = 1;
+	pixel_x = 3
+	},
+/obj/item/clothing/cloak/grandmaster,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"ms" = (
+/obj/effect/decal/cleanable/sigil/SW,
+/obj/effect/decal/cleanable/blood/gibs/torso,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"nC" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
+/area/under/tomb/indoors/church)
+"ok" = (
+/turf/closed/wall/window/stained/red,
+/area/under/tomb/indoors/church)
+"oS" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/under/tomb)
+"oV" = (
+/obj/effect/decal/cleanable/blood/gibs/torso,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"pr" = (
+/turf/closed/wall/mineral/decostone/end,
+/area/under/tomb/indoors/church)
+"pB" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"qa" = (
+/obj/item/clothing/shirt/robe/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra{
+	pixel_y = 1
+	},
+/obj/item/statue/gold/comb{
+	pixel_x = 9;
+	pixel_y = 7
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"qj" = (
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/item/weapon/knife/dagger/steel/profane,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"qy" = (
+/obj/structure/fluff/stonecoffin,
+/obj/structure/fluff/psycross/astrata/gold{
+	pixel_y = 13
+	},
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"qS" = (
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"rr" = (
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"rI" = (
+/obj/item/organ/heart,
+/obj/effect/decal/cleanable/sigil/NW,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"rL" = (
+/obj/structure/bed/inn,
+/obj/item/bedsheet/pelt,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"sc" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"sm" = (
+/mob/living/carbon/human/species/demihuman/base/skilled/light_gear,
+/turf/open/floor/carpet/lord/corner{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
+"st" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/under/tomb)
+"sB" = (
+/obj/item/clothing/shirt/robe/necromancer{
+	pixel_y = 2;
+	pixel_x = -6
+	},
+/obj/structure/rack/shelf/biggest,
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"sR" = (
+/obj/item/broken_phylactery,
+/obj/item/clothing/shirt/robe/necromancer,
+/obj/item/rope/chain,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"sS" = (
+/turf/open/water/blood,
+/area/under/tomb)
+"tg" = (
+/obj/structure/fluff/statue/astrata/bling,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"tB" = (
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/item/clothing/ring/active/nomag,
+/obj/item/coin/gold/pile,
+/obj/item/coin/gold/pile,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"tL" = (
+/obj/item/natural/wood/plank,
+/obj/item/natural/wood/plank{
+	pixel_y = 10;
+	pixel_x = -7
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"uE" = (
+/mob/living/carbon/human/species/human/northern/deranged_knight/zizo,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"va" = (
+/obj/structure/table/stone_small,
+/obj/item/reagent_containers/glass/carafe/gold{
+	pixel_y = 6;
+	pixel_x = 10
+	},
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"vc" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/clothing/shirt/robe/necromancer{
+	pixel_y = 8
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"ve" = (
+/obj/structure/table/church/m,
+/obj/item/statue/gold{
+	pixel_y = 12;
+	pixel_x = -2
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"vU" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"wk" = (
+/turf/open/openspace,
+/area/under/tomb)
+"wu" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/item/bodypart/r_arm/zizombie,
+/obj/effect/decal/cleanable/sigil/SW,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"xn" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb)
+"xC" = (
+/mob/living/carbon/human/species/skeleton/npc/hard,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"xZ" = (
+/obj/effect/decal/cleanable/sigil/S,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"yn" = (
+/obj/item/natural/wood/plank{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"yr" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 10
+	},
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
+"zf" = (
+/turf/closed/wall/mineral/decostone/moss/red/cand,
+/area/under/tomb/indoors/church)
+"zo" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"zz" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/item/bodypart/l_leg/zizombie,
+/obj/effect/decal/cleanable/sigil/SE,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"zB" = (
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/closed/wall/window/stained/yellow,
+/area/under/tomb/indoors/church)
+"zM" = (
+/obj/item/riddleofsteel,
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/item/coin/gold/pile,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"zX" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 8
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"Ax" = (
+/obj/item/breach_charge,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"AF" = (
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/turf/open/floor/carpet/lord/left,
+/area/under/tomb/indoors/church)
+"AX" = (
+/obj/item/weapon/polearm/halberd/silver,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"Bh" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"Bv" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/structure/wild_plant/nospread/mushroom/drowsbane,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"BF" = (
+/obj/structure/table/stone_small,
+/obj/structure/healingfountain{
+	pixel_y = 11
+	},
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"BG" = (
+/obj/item/reagent_containers/glass/bottle/strongmanapot,
+/obj/item/reagent_containers/glass/bottle/stronghealthpot{
+	pixel_x = 12
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"BP" = (
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/item/carvedgem/amber/urn,
+/obj/item/carvedgem/amber/urn,
+/obj/item/carvedgem/amber/duck/sunduck,
+/obj/item/coin/gold/pile,
+/obj/item/coin/gold/pile,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"Cc" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb)
+"Cl" = (
+/mob/living/carbon/human/species/skeleton/npc/hard,
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
+/area/under/tomb/indoors/church)
+"CO" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"CU" = (
+/obj/effect/decal/cleanable/sigil/W,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"Dv" = (
+/obj/item/organ/appendix,
+/obj/effect/decal/cleanable/sigil/E,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"DC" = (
+/obj/effect/decal/cleanable/sigil,
+/obj/item/clothing/shirt/robe/priest,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"DG" = (
+/obj/item/bodypart/head/zizombie,
+/obj/effect/decal/cleanable/sigil/N,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"Et" = (
+/obj/effect/decal/cleanable/sigil/SE,
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"EK" = (
+/obj/item/natural/wood/plank{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/obj/item/natural/wood/plank{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/obj/item/natural/wood/plank{
+	pixel_y = -5;
+	pixel_x = -7
+	},
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"FL" = (
+/mob/living/carbon/human/species/zizombie/npc/militiamen,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"FN" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/effect/decal/cleanable/sigil/W,
+/obj/item/carvedgem/amber/sun,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"FU" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/effect/decal/cleanable/sigil/NE,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"FW" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"GT" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/church/violet,
+/area/under/tomb)
+"Hb" = (
+/obj/structure/table/stone_small,
+/obj/item/weapon/flail/psydon/relic,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"Hf" = (
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"Hw" = (
+/turf/closed/mineral/bedrock,
+/area/under/tomb)
+"HI" = (
+/obj/structure/table/church,
+/obj/item/weapon/knife/scissors/steel{
+	pixel_y = 1;
+	pixel_x = 7
+	},
+/obj/item/weapon/knife/cleaver{
+	pixel_x = -10
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"HJ" = (
+/obj/effect/decal/cleanable/sigil/NE,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"IO" = (
+/mob/living/carbon/human/species/demihuman/base/skilled/light_gear,
+/turf/open/floor/carpet/lord/right,
+/area/under/tomb/indoors/church)
+"Jd" = (
+/obj/structure/fluff/walldeco/painting/queen,
+/turf/closed/wall/mineral/decostone/long,
+/area/under/tomb/indoors/church)
+"Jz" = (
+/obj/structure/closet/crate/chest,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/obj/item/natural/fur/volf,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"JG" = (
+/turf/open/floor/church/violet,
+/area/under/tomb)
+"JX" = (
+/obj/structure/door/iron,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"KA" = (
+/obj/effect/decal/cleanable/sigil/E,
+/obj/effect/decal/cleanable/blood/gibs/core,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"KZ" = (
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
+"La" = (
+/obj/structure/door/iron,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/church)
+"Mw" = (
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"NW" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/remains/human,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/shirt/robe/dendor{
+	pixel_y = -12;
+	pixel_x = 11
+	},
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"OF" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 8
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb)
+"Pe" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"Ph" = (
+/obj/item/natural/wood/plank{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/obj/item/natural/wood/plank{
+	pixel_y = -5;
+	pixel_x = -7
+	},
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"PB" = (
+/obj/structure/fluff/psycross/zizocross,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"PD" = (
+/obj/structure/fluff/psycross/zizocross,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"PG" = (
+/turf/open/floor/carpet/lord/corner,
+/area/under/tomb/indoors/church)
+"Qz" = (
+/turf/closed/wall/mineral/decostone/moss/red/long,
+/area/under/tomb/indoors/church)
+"QZ" = (
+/obj/item/broken_phylactery,
+/obj/item/rope/chain,
+/obj/item/clothing/shirt/robe/necromancer,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"RX" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 1
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"Sa" = (
+/obj/effect/decal/remains/human,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"Sm" = (
+/turf/closed/wall/mineral/decostone/moss/red/long,
+/area/under/tomb/indoors/magic)
+"SB" = (
+/obj/structure/mana_pylon,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"SY" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"Tb" = (
+/turf/open/floor/carpet/lord/right,
+/area/under/tomb/indoors/church)
+"Td" = (
+/obj/structure/closet/crate/chest/gold,
+/obj/item/coin/gold/pile,
+/obj/item/coin/gold/pile,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/produce/fruit/apple,
+/obj/item/reagent_containers/food/snacks/produce/fruit/apple,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"Tx" = (
+/obj/structure/wild_plant/nospread/mushroom/drowsbane,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"Tz" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"TW" = (
+/obj/structure/table/church{
+	dir = 1
+	},
+/obj/item/clothing/neck/psycross/zizo{
+	pixel_y = 6
+	},
+/obj/item/clothing/neck/psycross/zizo{
+	pixel_y = 2;
+	pixel_x = -10
+	},
+/obj/item/clothing/neck/psycross/zizo{
+	pixel_y = 12;
+	pixel_x = 5
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"Ug" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/openspace,
+/area/under/tomb/indoors/church)
+"Uq" = (
+/turf/open/floor/twig,
+/area/under/tomb/indoors/church)
+"UN" = (
+/obj/effect/temp_visual/dir_setting/bloodsplatter,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"UO" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/church)
+"Vj" = (
+/obj/structure/table/stone_small,
+/obj/item/chalk{
+	pixel_y = 8;
+	pixel_x = -13
+	},
+/obj/item/clothing/face/facemask/psydonmask{
+	pixel_x = 1;
+	pixel_y = 4
+	},
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"Vk" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 8
+	},
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"Vm" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/structure/door/iron,
+/obj/structure/barricade/wooden,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"VC" = (
+/turf/closed/wall/mineral/decorstone,
+/area/under/tomb/indoors/church)
+"VO" = (
+/turf/closed/wall/mineral/decostone/moss/red,
+/area/under/tomb/indoors/church)
+"Wg" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"Wp" = (
+/turf/closed/wall/window/stained/yellow,
+/area/under/tomb/indoors/church)
+"WB" = (
+/obj/structure/door/stone,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"WC" = (
+/turf/closed/wall/mineral/decostone/moss/red/cand,
+/area/under/tomb/indoors/magic)
+"Xd" = (
+/obj/effect/decal/cleanable/sigil/N,
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"XF" = (
+/turf/closed/wall/window/stained/red,
+/area/under/tomb/indoors/magic)
+"XH" = (
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
+"XI" = (
+/obj/machinery/light/fueled/firebowl/church/unholyfire,
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
+"Yt" = (
+/obj/structure/inert_bonepile,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/magic)
+"YD" = (
+/obj/effect/decal/remains/human,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"YQ" = (
+/obj/structure/trap/poison,
+/turf/open/floor/church/violet,
+/area/under/tomb/indoors/church)
+"YZ" = (
+/obj/item/bodypart/head/zizombie,
+/turf/open/floor/churchmarble/rust,
+/area/under/tomb/indoors/magic)
+"Za" = (
+/turf/open/floor/carpet/lord/left,
+/area/under/tomb/indoors/church)
+"ZJ" = (
+/obj/structure/fluff/walldeco/painting/seraphina,
+/turf/closed/wall/mineral/decorstone,
+/area/under/tomb/indoors/church)
+
+(1,1,1) = {"
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+JG
+GT
+JG
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+"}
+(2,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+OF
+JG
+JG
+JG
+OF
+JG
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+Hw
+"}
+(3,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+sS
+Sm
+XF
+XF
+Sm
+sS
+Hw
+"}
+(4,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+sS
+sS
+Sm
+Sm
+Hf
+iv
+XF
+sS
+Hw
+"}
+(5,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+sS
+Sm
+Sm
+Hf
+Hf
+zX
+XF
+sS
+Hw
+"}
+(6,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+Sm
+Sm
+Hf
+Hf
+FW
+Sm
+Sm
+sS
+Hw
+"}
+(7,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+Sm
+Sm
+Hf
+Hf
+Hf
+Sm
+sS
+sS
+sS
+Hw
+"}
+(8,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+XF
+Hf
+Hf
+Sm
+Sm
+sS
+sS
+sS
+sS
+Hw
+"}
+(9,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+XF
+Hf
+FW
+Sm
+sS
+sS
+sS
+sS
+sS
+Hw
+"}
+(10,1,1) = {"
+Hw
+VO
+Qz
+ok
+ok
+ok
+Qz
+Qz
+ok
+WB
+ok
+Qz
+Qz
+Sm
+Sm
+iv
+Hf
+Sm
+Sm
+Sm
+Sm
+Sm
+Sm
+Sm
+Hw
+"}
+(11,1,1) = {"
+Hw
+VO
+hg
+Jz
+Mw
+Mw
+Mw
+sm
+Za
+aj
+AF
+Za
+PG
+WC
+PD
+Hf
+Hf
+iv
+Bh
+Bh
+Bh
+Bh
+Sm
+sB
+Hf
+"}
+(12,1,1) = {"
+Hw
+ok
+gO
+Mw
+gU
+Mw
+HI
+KZ
+rI
+FN
+wu
+Pe
+yr
+WC
+fR
+Hf
+Hf
+iv
+Sa
+is
+eJ
+dH
+XF
+aP
+Hf
+"}
+(13,1,1) = {"
+Hw
+ok
+Mw
+YQ
+hZ
+Mw
+ve
+XI
+DG
+eS
+xZ
+UN
+XH
+dF
+RX
+RX
+rr
+JX
+is
+Hf
+Hf
+Hf
+JX
+Hf
+pB
+"}
+(14,1,1) = {"
+Hw
+ok
+Mw
+gU
+Mw
+Mw
+TW
+KZ
+FU
+Dv
+zz
+UO
+XH
+WC
+Hf
+Yt
+Hf
+Hf
+FW
+bG
+Hf
+Hf
+XF
+BG
+Hf
+"}
+(15,1,1) = {"
+Hw
+VO
+hg
+ba
+iq
+Mw
+Mw
+Cl
+Tb
+IO
+Tb
+Tb
+nC
+WC
+PD
+Hf
+Hf
+Hf
+Bh
+Bh
+Bh
+Bh
+Sm
+vc
+Hf
+"}
+(16,1,1) = {"
+Hw
+VO
+Qz
+ok
+ok
+ok
+Qz
+Qz
+ok
+WB
+ok
+Qz
+Qz
+Sm
+Sm
+iv
+Hf
+Sm
+Sm
+Sm
+Sm
+Sm
+Sm
+Sm
+Hw
+"}
+(17,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+XF
+Hf
+FW
+Sm
+sS
+sS
+sS
+sS
+sS
+Hw
+"}
+(18,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+XF
+Hf
+Hf
+Sm
+Sm
+sS
+sS
+sS
+sS
+Hw
+"}
+(19,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+Sm
+Sm
+Hf
+Hf
+Hf
+Sm
+sS
+sS
+sS
+Hw
+"}
+(20,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+Sm
+Sm
+Hf
+Hf
+FW
+Sm
+Sm
+sS
+Hw
+"}
+(21,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+sS
+Sm
+Sm
+Hf
+Hf
+vU
+XF
+sS
+Hw
+"}
+(22,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+sS
+sS
+Sm
+Sm
+ex
+iv
+XF
+sS
+Hw
+"}
+(23,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+JG
+JG
+JG
+JG
+JG
+JG
+sS
+sS
+sS
+sS
+sS
+Sm
+XF
+XF
+Sm
+sS
+Hw
+"}
+(24,1,1) = {"
+Hw
+sS
+sS
+sS
+sS
+sS
+sS
+JG
+Cc
+JG
+JG
+JG
+Cc
+JG
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+sS
+Hw
+"}
+(25,1,1) = {"
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+JG
+xn
+JG
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+"}
+
+(1,1,2) = {"
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+OF
+JG
+GT
+JG
+OF
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+"}
+(2,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+jR
+wk
+oS
+oS
+oS
+wk
+st
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Hw
+"}
+(3,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+kr
+kr
+kr
+Qz
+Qz
+Qz
+Qz
+wk
+Hw
+"}
+(4,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+kr
+kr
+Qz
+Qz
+Mw
+Vk
+Qz
+wk
+Hw
+"}
+(5,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+kr
+Qz
+Qz
+Mw
+Mw
+kr
+Qz
+wk
+Hw
+"}
+(6,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+Qz
+Qz
+Mw
+Mw
+Mw
+Qz
+Qz
+wk
+Hw
+"}
+(7,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Qz
+Qz
+Mw
+Mw
+Mw
+Qz
+wk
+wk
+wk
+Hw
+"}
+(8,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Qz
+Mw
+Mw
+Qz
+Qz
+wk
+wk
+wk
+wk
+Hw
+"}
+(9,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Qz
+Mw
+Mw
+Qz
+wk
+wk
+wk
+wk
+wk
+Hw
+"}
+(10,1,2) = {"
+Hw
+iv
+Sm
+XF
+XF
+XF
+Sm
+Sm
+XF
+XF
+XF
+Sm
+Sm
+Sm
+Sm
+VO
+YQ
+pr
+ld
+ld
+Jd
+Wp
+Wp
+ld
+Hw
+"}
+(11,1,2) = {"
+Hw
+Sm
+PB
+tB
+PB
+il
+PB
+qj
+SB
+if
+SB
+if
+if
+if
+if
+zf
+Mw
+VC
+tg
+eo
+FL
+sR
+gW
+Wp
+Uq
+"}
+(12,1,2) = {"
+Hw
+XF
+BF
+lV
+jL
+CU
+ms
+YZ
+if
+uE
+if
+if
+if
+if
+if
+zf
+tL
+ZJ
+Ph
+sR
+AX
+FL
+Td
+zB
+Uq
+"}
+(13,1,2) = {"
+Hw
+XF
+Vj
+lV
+Xd
+DC
+as
+oV
+lS
+SY
+Tz
+zo
+SY
+SY
+SY
+La
+lm
+Vm
+Bv
+el
+dm
+eo
+qy
+VC
+sc
+"}
+(14,1,2) = {"
+Hw
+XF
+Hb
+lV
+HJ
+KA
+Et
+dz
+if
+uE
+if
+if
+if
+if
+if
+zf
+yn
+kr
+EK
+xC
+qS
+mg
+eo
+zB
+Uq
+"}
+(15,1,2) = {"
+Hw
+Sm
+PB
+BP
+PB
+zM
+PB
+cY
+SB
+if
+SB
+if
+if
+if
+if
+zf
+Ax
+Ug
+NW
+Wg
+QZ
+va
+rL
+Wp
+Uq
+"}
+(16,1,2) = {"
+Hw
+iv
+Sm
+XF
+XF
+XF
+Sm
+Sm
+XF
+XF
+XF
+Sm
+Sm
+Sm
+Sm
+VO
+YQ
+Tx
+ld
+ld
+ld
+Wp
+Wp
+Qz
+Hw
+"}
+(17,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Qz
+Tx
+Tx
+Qz
+wk
+wk
+wk
+wk
+wk
+Hw
+"}
+(18,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Qz
+Mw
+Mw
+Qz
+Qz
+wk
+wk
+wk
+wk
+Hw
+"}
+(19,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Qz
+Qz
+gU
+YD
+YD
+Qz
+wk
+wk
+wk
+Hw
+"}
+(20,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+Qz
+Qz
+YD
+qa
+YD
+Qz
+Qz
+wk
+Hw
+"}
+(21,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+kr
+Qz
+Qz
+YD
+YD
+kr
+Qz
+wk
+Hw
+"}
+(22,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+kr
+kr
+Qz
+Qz
+Mw
+CO
+Qz
+wk
+Hw
+"}
+(23,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+kr
+kr
+kr
+kr
+Qz
+Qz
+Qz
+Qz
+wk
+Hw
+"}
+(24,1,2) = {"
+Hw
+wk
+wk
+wk
+wk
+wk
+wk
+jR
+wk
+bk
+bk
+bk
+wk
+st
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+wk
+Hw
+"}
+(25,1,2) = {"
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Cc
+JG
+xn
+JG
+Cc
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+Hw
+"}

@@ -99,8 +99,9 @@
 		return (..() || !beating)
 	return ..()
 
-/obj/item/organ/heart/Remove(mob/living/carbon/old_owner, special = FALSE)
+/obj/item/organ/heart/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
+
 	if(!special)
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS)
 
@@ -127,8 +128,7 @@
 	update_appearance()
 	if(owner && old_beating)
 		var/deathsdoor = TRUE
-		for(var/thing in (owner.getorganslotlist(ORGAN_SLOT_HEART) - src))
-			var/obj/item/organ/heart/heart = thing
+		for(var/obj/item/organ/heart/heart as anything in (owner.getorganslotlist(ORGAN_SLOT_HEART) - src))
 			if(heart.beating)
 				deathsdoor = FALSE
 		if(deathsdoor)
