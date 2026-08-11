@@ -24,7 +24,7 @@
 		/datum/round_event_control/antagonist/solo/maniac = 1,
 	)
 	/// Can this trigger mid round? Backup cover for latest_start
-	var/can_call_midround = FALSE
+	var/can_call_midround = TRUE
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
