@@ -273,7 +273,7 @@
 
 /datum/outfit/minornoble/vassal
 	name = "Vassal (noble)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	shirt = /obj/item/clothing/shirt/tunic/colored/random
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
 	belt = /obj/item/storage/belt/leather
@@ -320,7 +320,7 @@
 
 /datum/outfit/noble
 	name = "Noble Base"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather

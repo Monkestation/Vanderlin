@@ -68,7 +68,7 @@
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/fgarrison

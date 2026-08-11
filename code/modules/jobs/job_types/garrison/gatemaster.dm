@@ -46,7 +46,7 @@
 	shirt = /obj/item/clothing/armor/chainmail
 	belt = /obj/item/storage/belt/leather/black
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/gatemaster/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()

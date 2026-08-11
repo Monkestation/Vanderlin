@@ -89,7 +89,7 @@
 	beltl = /obj/item/key/vampire
 	beltr = /obj/item/storage/belt/pouch/coins/veryrich
 	cloak = /obj/item/clothing/cloak/cape/puritan
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel/black
 	if(!(HAS_TRAIT(H, TRAIT_FOREIGNER)))
 		ADD_TRAIT(H, TRAIT_FOREIGNER, TRAIT_GENERIC)

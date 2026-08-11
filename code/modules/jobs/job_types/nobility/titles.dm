@@ -17,7 +17,7 @@
 	pants = /obj/item/clothing/pants/tights
 	shirt = /obj/item/clothing/shirt/undershirt
 	armor = /obj/item/clothing/shirt/rags
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/job/huntmaster
 	title = "Huntmaster of the Murderwoods"
@@ -39,7 +39,7 @@
 	pants = /obj/item/clothing/pants/tights
 	shirt = /obj/item/clothing/shirt/undershirt
 	armor = /obj/item/clothing/shirt/rags
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/job/hetman
 	title = "Hetman of Mount Decapitation"
@@ -60,4 +60,4 @@
 	pants = /obj/item/clothing/pants/tights
 	shirt = /obj/item/clothing/shirt/undershirt
 	armor = /obj/item/clothing/shirt/rags
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots

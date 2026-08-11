@@ -44,7 +44,7 @@
 	name = "Monster Hunter"
 	shirt = /obj/item/clothing/shirt/undershirt/puritan
 	belt = /obj/item/storage/belt/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	armor = /obj/item/clothing/armor/leather/splint
 	cloak = /obj/item/clothing/cloak/cape/puritan

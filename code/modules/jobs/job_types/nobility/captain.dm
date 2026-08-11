@@ -121,7 +121,7 @@
 	armor = /obj/item/clothing/armor/brigandine/captain
 	neck = /obj/item/clothing/neck/gorget
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/weapon/mace/cudgel

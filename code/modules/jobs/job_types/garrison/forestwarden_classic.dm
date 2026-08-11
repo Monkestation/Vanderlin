@@ -78,7 +78,7 @@
 	armor = /obj/item/clothing/armor/plate
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/platelegs
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/visored/warden
 	gloves = /obj/item/clothing/gloves/leather

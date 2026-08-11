@@ -70,7 +70,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
 	wrists = null
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/farmer
 	name = JOB_SOILSON

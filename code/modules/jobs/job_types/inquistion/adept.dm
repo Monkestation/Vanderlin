@@ -38,7 +38,7 @@
 
 /datum/outfit/adept // Base outfit for Adepts, before loadouts
 	name = JOB_ADEPT
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	mask = /obj/item/clothing/face/facemask/silver
 	neck = /obj/item/clothing/neck/gorget/explosive
 	beltr = /obj/item/storage/belt/pouch/coins/poor

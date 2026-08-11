@@ -102,7 +102,7 @@
 
 /datum/outfit/archivist/chronicler
 	name = "Chronicler (Archivist)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/storage/keyring/archivist
 	beltr = /obj/item/book/granter/spellbook/expert
@@ -177,7 +177,7 @@
 /datum/outfit/archivist/dreamwatcher
 	name = "Dreamwatcher (Archivist)"
 	armor = /obj/item/clothing/shirt/robe/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/archivist
 	wrists = /obj/item/clothing/wrists/nocwrappings

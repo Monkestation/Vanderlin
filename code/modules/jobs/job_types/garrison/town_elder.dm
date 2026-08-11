@@ -152,7 +152,7 @@
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/leather/black
 	ring = /obj/item/clothing/ring/gold/toper
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/black
@@ -560,7 +560,7 @@
 	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/half

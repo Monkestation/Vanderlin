@@ -95,7 +95,7 @@
 		else
 			pants = /obj/item/clothing/pants/trou/formal/shorts
 		belt = /obj/item/storage/belt/leather/suspenders
-		shoes = /obj/item/clothing/shoes/boots
+		shoes = /obj/item/clothing/shoes/boots/darkboots
 	else
 		armor = /obj/item/clothing/shirt/dress/maid/servant
 		shoes = /obj/item/clothing/shoes/simpleshoes

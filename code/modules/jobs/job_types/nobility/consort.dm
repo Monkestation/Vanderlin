@@ -58,7 +58,7 @@
 /datum/outfit/consort
 	name = JOB_CONSORT
 	head = /obj/item/clothing/head/crown/nyle/consortcrown
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	ring = /obj/item/clothing/ring/silver
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/consort

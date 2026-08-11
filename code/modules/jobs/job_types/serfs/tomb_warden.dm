@@ -118,7 +118,7 @@
 	wrists = /obj/item/storage/keyring/tombwarden
 	armor = /obj/item/clothing/armor/leather/jerkin/belted/long
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	head = /obj/item/clothing/head/roguehood/leather
 	r_hand = /obj/item/weapon/mace/cane

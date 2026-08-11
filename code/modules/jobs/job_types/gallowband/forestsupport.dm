@@ -101,7 +101,7 @@
 /datum/outfit/forestsupport
 	name = JOB_FOREST_SUPPORT
 	shirt = /obj/item/clothing/shirt/tunic/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/roguehood
 	gloves = /obj/item/clothing/gloves/angle/gronn
