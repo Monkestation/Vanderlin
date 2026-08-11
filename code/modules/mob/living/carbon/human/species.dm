@@ -320,7 +320,7 @@
 			return strings("accents/dwarf_replacement.json", "dwarf")
 		if("Infernal")
 			return strings("accents/spanish_replacement.json", "spanish")
-		if("Celestial")
+		if("Celestial", "Lunaris")
 			return
 		if("Orcish")
 			return strings("accents/halforc_replacement.json", "halforc")

@@ -33,6 +33,7 @@
 	display_order = JDO_ABSOLVER
 	give_bank_account = 15
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 

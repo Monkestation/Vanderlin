@@ -21,6 +21,7 @@
 	outfit_female = null
 	give_bank_account = 3
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
 
 	exp_type = list(EXP_TYPE_LIVING)

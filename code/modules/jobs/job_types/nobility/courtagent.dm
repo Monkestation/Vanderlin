@@ -11,7 +11,11 @@
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
+
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = list(JOB_MONARCH, JOB_HAND, JOB_COURT_AGENT)
+	jobs_always_know_me = list(JOB_MONARCH, JOB_HAND, JOB_COURT_AGENT)
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
@@ -52,7 +56,7 @@
 	name = "Court Agent Base"
 	belt = /obj/item/storage/belt/leather/black/courtagent
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/job/advclass/courtagent
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT)

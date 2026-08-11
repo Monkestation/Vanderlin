@@ -34,6 +34,7 @@
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard
@@ -79,7 +80,7 @@
 /datum/outfit/bard
 	name = JOB_BARD
 	head = /obj/item/clothing/head/bardhat
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	belt = /obj/item/storage/belt/leather

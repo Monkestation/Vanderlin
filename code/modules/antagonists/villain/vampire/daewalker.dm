@@ -44,7 +44,7 @@
 	)
 	isgoodguy = TRUE
 	chooses_name = FALSE
-	ascended = 4
+	ascension_level = 4
 	outfit = /datum/outfit/daewalker
 	patron = /datum/patron/divine/astrata
 	innate_traits = list(

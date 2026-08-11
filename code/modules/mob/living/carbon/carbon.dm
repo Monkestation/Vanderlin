@@ -1065,9 +1065,9 @@
 	if(CONFIG_GET(flag/near_death_experience))
 		if(. > HEALTH_THRESHOLD_NEARDEATH)
 			if(health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
-				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+				ADD_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 		else if(health > HEALTH_THRESHOLD_NEARDEATH)
-			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+			REMOVE_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 
 /mob/living/carbon/update_stat()
 	if(status_flags & GODMODE)
@@ -1374,14 +1374,6 @@
 
 /mob/living/carbon/can_resist()
 	return bodyparts.len > 2 && ..()
-
-/mob/living/carbon/proc/hypnosis_vulnerable()
-	if(HAS_TRAIT(src, TRAIT_MINDSHIELD))
-		return FALSE
-	if(IsSleeping())
-		return TRUE
-	if(HAS_TRAIT(src, TRAIT_DUMB))
-		return TRUE
 
 /// Modifies the handcuffed value if a different value is passed, returning FALSE otherwise. The variable should only be changed through this proc.
 /mob/living/carbon/proc/set_handcuffed(new_value)

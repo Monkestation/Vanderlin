@@ -121,7 +121,7 @@
 	pixel_x = 5;
 	pixel_y = 8
 	},
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -2;
 	pixel_y = -7
 	},
@@ -8169,7 +8169,7 @@
 	pixel_x = 1;
 	pixel_y = 15
 	},
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -18339,7 +18339,7 @@
 	pixel_x = 7;
 	pixel_y = -2
 	},
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -18363,7 +18363,7 @@
 /obj/item/clothing/shirt/robe/wizard,
 /obj/item/clothing/cloak/raincloak/colored/blue,
 /obj/item/clothing/head/wizhat,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/shoes/shortboots,
 /obj/item/clothing/face/spectacles/golden,
 /obj/item/clothing/head/wizhat/witch,
@@ -25208,7 +25208,7 @@
 /area/indoors/town/orphanage)
 "whv" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/storage/belt/leather/suspenders,
 /obj/item/clothing/shirt/undershirt/formal,

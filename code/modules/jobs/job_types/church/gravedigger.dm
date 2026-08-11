@@ -38,6 +38,7 @@
 
 	outfit = /datum/outfit/undertaker
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 	can_be_apprentice = TRUE
 
@@ -71,7 +72,7 @@
 	neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 	pants = /obj/item/clothing/pants/trou/leather/mourning
 	armor = /obj/item/clothing/shirt/robe/necra
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/hammer/iron
 	beltr = /obj/item/storage/belt/pouch/coins/poor

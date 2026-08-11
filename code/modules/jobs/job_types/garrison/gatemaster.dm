@@ -18,6 +18,7 @@
 	advclass_cat_rolls = list(CTAG_GATEMASTER = 20)
 	give_bank_account = 30
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGatekeeper.ogg'
 	starting_wage = 30
 
@@ -46,7 +47,7 @@
 	shirt = /obj/item/clothing/armor/chainmail
 	belt = /obj/item/storage/belt/leather/black
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/gatemaster/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()

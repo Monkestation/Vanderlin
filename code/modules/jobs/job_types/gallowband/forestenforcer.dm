@@ -50,6 +50,7 @@
 	outfit = /datum/outfit/forestenforcer
 	give_bank_account = 40
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON

@@ -247,6 +247,8 @@
 #define FLAIL_LNGSMASH		/datum/intent/flail/strike/smash/long
 #define MATTHIOS_STRIKE		/datum/intent/flail/strike/matthiosflail
 #define MATTHIOS_SMASH		/datum/intent/flail/strike/smash/matthiosflail
+#define FLAIL_CUT			/datum/intent/flail/cut
+#define FLAIL_LNGCUT		/datum/intent/flail/cut/long
 
 #define WHIP_CRACK			/datum/intent/whip/crack
 #define WHIP_STRIKE			/datum/intent/whip

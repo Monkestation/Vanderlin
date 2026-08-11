@@ -1129,7 +1129,7 @@
 /obj/item/clothing/shirt/tunic/noblecoat,
 /obj/item/clothing/pants/tights/colored/random,
 /obj/item/clothing/gloves/fingerless,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "dV" = (
@@ -2612,7 +2612,7 @@
 /obj/item/clothing/armor/leather/jacket/hand,
 /obj/item/clothing/armor/leather/jacket/leathercoat/black,
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/cloak/cape,
 /obj/item/clothing/shirt/tunic/colored/black,
 /obj/item/clothing/gloves/angle,
@@ -2929,9 +2929,9 @@
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
 "qc" = (
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
@@ -6119,10 +6119,10 @@
 /obj/item/clothing/shoes/boots/armor,
 /obj/item/clothing/shoes/boots/armor,
 /obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/carpet,
 /area/indoors)
 "KS" = (
@@ -6511,7 +6511,7 @@
 /area/overlord_lair)
 "NB" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -7;
 	pixel_y = -3
 	},

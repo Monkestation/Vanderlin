@@ -154,13 +154,21 @@
 
 	var/bypass_lastclass = FALSE
 
-	var/list/peopleiknow = list()
-	var/list/peopleknowme = list()
-
 	var/give_bank_account = FALSE
+
+	/// Dynamic list of jobs that you know.
+	var/list/jobs_i_know = list()
+	/// Dynamic list of jobs that know you.
+	var/list/jobs_that_know_me = list()
+	/// Static list of jobs you always know.
+	var/list/jobs_i_always_know = list(JOB_MONARCH)
+	/// Static list of jobs that always know you.
+	var/list/jobs_always_know_me = list()
 
 	/// Whether this job starts knowing the members of the town.
 	var/knows_the_town = FALSE
+	/// Whether this job starts known by the members of the town.
+	var/known_by_the_town = FALSE
 
 	var/can_random = TRUE
 
@@ -254,37 +262,56 @@
 
 /datum/job/New()
 	. = ..()
+	setup_known_people()
+
+/datum/job/proc/setup_known_people(mob/living/carbon/human/spawned)
+	for(var/job in jobs_always_know_me)
+		jobs_i_know += job
+		jobs_that_know_me += job
+
 	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.serf_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.company_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.church_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.garrison_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.gallowband_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.noble_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.apprentices_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.youngfolk_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
 		for(var/X in GLOB.inquisition_positions)
-			peopleiknow += X
-			peopleknowme += X
+			jobs_i_know |= X
+
+	if(known_by_the_town)
+		for(var/X in GLOB.peasant_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.serf_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.company_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.church_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.garrison_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.gallowband_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.noble_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.apprentices_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.youngfolk_positions)
+			jobs_that_know_me |= X
+		for(var/X in GLOB.inquisition_positions)
+			jobs_that_know_me |= X
 
 /datum/job/vv_edit_var(var_name, var_value)
 	if(var_name == "whitelisted_ckeys")
@@ -397,11 +424,11 @@
 	for(var/skill_type in skill_multipliers)
 		spawned.set_skill_exp_multiplier(skill_type, skill_multipliers[skill_type])
 
-	for(var/X in peopleknowme)
+	for(var/X in jobs_that_know_me)
 		for(var/datum/mind/found_mind in get_minds(X))
 			spawned.mind.give_source_identity(found_mind)
 
-	for(var/X in peopleiknow)
+	for(var/X in jobs_i_know)
 		for(var/datum/mind/found_mind in get_minds(X))
 			spawned.mind.learn_target_identity(found_mind)
 
@@ -523,11 +550,11 @@
 		spawned.cmode_music = initial(spawned.cmode_music)
 
 	if(spawned.mind)
-		for(var/X in peopleknowme)
+		for(var/X in jobs_that_know_me)
 			for(var/datum/mind/found_mind in get_minds(X))
 				spawned.mind.forget_source_identity(found_mind)
 
-		for(var/X in peopleiknow)
+		for(var/X in jobs_i_know)
 			for(var/datum/mind/found_mind in get_minds(X))
 				found_mind.forget_source_identity(spawned.mind)
 

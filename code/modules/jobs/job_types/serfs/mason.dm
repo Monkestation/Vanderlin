@@ -36,6 +36,7 @@
 	outfit = /datum/outfit/mason
 	give_bank_account = 8
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
 
