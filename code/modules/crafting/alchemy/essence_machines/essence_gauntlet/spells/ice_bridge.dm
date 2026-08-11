@@ -3,8 +3,6 @@
 	desc = "Creates a temporary bridge of solid ice from the cast location to you."
 	button_icon_state = "ice_bridge"
 	cast_range = 3
-	point_cost = 7
-	attunements = list(/datum/attunement/ice, /datum/attunement/blood)
 	essences = list(/datum/thaumaturgical_essence/frost, /datum/thaumaturgical_essence/water)
 
 /datum/action/cooldown/spell/essence/ice_bridge/cast(atom/cast_on)
@@ -24,7 +22,7 @@
 		steps++
 		var/obj/structure/ice_bridge/bridge = new(target_turf)
 		QDEL_IN(bridge, 300 SECONDS)
-		target_turf = step_towards(target_turf, caster_turf)
+		target_turf = get_step_towards(target_turf, caster_turf)
 
 /obj/structure/ice_bridge
 	name = "ice bridge"
@@ -44,3 +42,12 @@
 /obj/structure/ice_bridge/Destroy()
 	remove_temp_effect()
 	return ..()
+
+/datum/action/cooldown/spell/essence/ice_bridge/spell
+	name = "Bridge of Ice"
+	charge_required = TRUE
+	charge_time = 2 SECONDS
+	spell_cost = 60
+	spell_type = SPELL_MANA
+
+	required_form = FORM_ICE

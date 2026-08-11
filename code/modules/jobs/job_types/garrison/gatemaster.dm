@@ -58,6 +58,7 @@
 	inherit_parent_title = TRUE
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/gatemaster/whip
 	raw_attribute_list = list(

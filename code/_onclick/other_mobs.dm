@@ -51,7 +51,7 @@
 		if(L.checkmiss(src))
 			return TRUE
 
-		if(!L.checkdefense(used_intent, src))
+		if(has_status_effect(/datum/status_effect/buff/empowered_strike) || !L.checkdefense(used_intent, src))
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE

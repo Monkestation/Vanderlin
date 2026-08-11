@@ -209,7 +209,7 @@
 	var/arcaneskill = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane)
 	if(arcaneskill >= SKILL_LEVEL_NOVICE) //Required arcane skill of NOVICE or higher to use the granter
 		to_chat(user, span_notice("I absorb the insights on the scroll, and feel more adept at spellcraft!"))
-		user.adjust_spell_points(1)
+		user.adjust_form_mastery_points(1)
 		onlearned(user)
 	else
 		to_chat(user, span_notice("I don't know what to make of this."))

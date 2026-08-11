@@ -220,6 +220,10 @@
 					if(!throwable_mob.buckled)
 						var/obj/item/grabbing/other_grab = offhand ? get_active_held_item() : get_inactive_held_item()
 						if(grab_state < GRAB_AGGRESSIVE)
+							if(HAS_TRAIT(throwable_mob, TRAIT_BIGGUY))
+								return
+							if(!HAS_TRAIT(src,TRAIT_BIGGUY))
+								return
 							stop_pulling(pulling_broke_free = TRUE)
 							return
 						stop_pulling(pulling_broke_free = TRUE)

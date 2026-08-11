@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Factions are now inhereted from jobs as intended."
+  - code_imp: "Changes faction var to factions on job as is list."

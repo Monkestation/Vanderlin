@@ -304,6 +304,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
+	///if this is set we add the spell modifier component with these stats
+	var/datum/spellcraft_contribution/item/spell_modifier
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -322,6 +324,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
 				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
 
+	if(spell_modifier)
+		apply_spell_modifiers()
 	if(experimental_onhip)
 		if(slot_flags & ITEM_SLOT_BELT)
 			var/i = "onbelt"
@@ -1349,6 +1353,24 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		play_tool_sound(target, volume)
 
 	return TRUE
+
+/obj/item/proc/apply_spell_modifiers()
+	var/datum/spellcraft_contribution/contribution = GLOB.spellcraft_items[spell_modifier]
+
+	if(!contribution)
+		return
+
+	if(contribution.is_empty())
+		return
+
+	AddComponent(/datum/component/spell_modifier, \
+		contribution.form_cost_multipliers, \
+		contribution.form_cast_speed_multipliers, \
+		contribution.form_magnitude_modifications, \
+		contribution.technique_cost_multipliers, \
+		contribution.technique_cast_speed_multipliers, \
+		contribution.technique_magnitude_modifications \
+	)
 
 // Called before use_tool if there is a delay, or by use_tool if there isn't.
 // Only ever used by welding tools and stacks, so it's not added on any other use_tool checks.
