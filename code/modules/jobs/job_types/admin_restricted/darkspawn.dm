@@ -42,6 +42,7 @@
 
 	magic_user = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = FALSE
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)

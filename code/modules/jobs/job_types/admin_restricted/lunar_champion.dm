@@ -18,7 +18,7 @@
 	)
 
 /datum/job/admin/lunar_champion
-	title = JOB_ADMIN_ORACLE_GUARD_HVY
+	title = JOB_ADMIN_LUNAR_CHAMPION
 	tutorial = "You are a devoted follower of Noc. \
 	Champion of the Lunar Order you guard their most sacred places. \
 	Keep safe the nite."
@@ -34,6 +34,10 @@
 
 	give_bank_account = 30
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+
+	jobs_i_always_know = list(JOB_MONARCH, JOB_ADMIN_ORACLE, JOB_ADMIN_LUNAR_SENTINEL, JOB_ADMIN_LUNAR_CHAMPION)
+	jobs_always_know_me = list(JOB_ADMIN_ORACLE, JOB_ADMIN_LUNAR_SENTINEL, JOB_ADMIN_LUNAR_CHAMPION)
 
 	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
@@ -70,7 +74,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/lunar_champion
-	name = JOB_ADMIN_ORACLE_GUARD_HVY
+	name = JOB_ADMIN_LUNAR_CHAMPION
 	head = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 	neck = /obj/item/clothing/neck/gorget/silver
 	armor = /obj/item/clothing/armor/plate/silver
