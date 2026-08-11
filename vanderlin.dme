@@ -3872,6 +3872,7 @@
 #include "code\modules\mob\living\carbon\human\voicepacks\female\haughty.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\female\medicator.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\male\assassin.dm"
+#include "code\modules\mob\living\carbon\human\voicepacks\male\darkspawn.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\male\dwarf.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\male\elf.dm"
 #include "code\modules\mob\living\carbon\human\voicepacks\male\evil.dm"

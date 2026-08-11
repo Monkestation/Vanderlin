@@ -38,7 +38,8 @@
 	allowed_patrons = list(/datum/patron/inhumen/zizo)
 
 	outfit = /datum/outfit/darkspawn
-	honorary = "Oracle"
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	magic_user = TRUE
 	knows_the_town = TRUE
@@ -101,6 +102,9 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_acolyte()
 		devotion.grant_to(spawned)
+
+	if(spawned.dna?.species)
+		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
 
 /datum/outfit/darkspawn
 	name = JOB_ADMIN_DARKSPAWN
