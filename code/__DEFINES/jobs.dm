@@ -78,6 +78,8 @@
 #define UNDEAD			(1<<10)
 #define GALLOWBAND		(1<<11)
 
+#define ADMIN_SPECIAL	(1<<12)
+
 #define JCOLOR_NOBLE "#9c40bf"
 #define JCOLOR_MERCHANT "#c2b449"
 #define JCOLOR_SOLDIER "#b64949"
@@ -223,9 +225,9 @@
 #define JOB_GRAVETENDER "Gravetender"
 #define JOB_TEMPLAR "Templar"
 
-#define JOB_ORACLE "Lunar Oracle"
-#define JOB_ORACLE_GUARD "Lunar Order Sentinel"
-#define JOB_ORACLE_GUARD_HVY "Lunar Order Champion"
+#define JOB_ADMIN_ORACLE "Lunar Oracle"
+#define JOB_ADMIN_ORACLE_GUARD "Lunar Order Sentinel"
+#define JOB_ADMIN_ORACLE_GUARD_HVY "Lunar Order Champion"
 
 #define JOB_TOWNER "Towner"
 #define JOB_SOILSON "Soilson"

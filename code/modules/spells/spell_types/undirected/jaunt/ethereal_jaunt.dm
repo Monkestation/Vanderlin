@@ -220,8 +220,3 @@
 	. = ..()
 	if(!.)
 		return
-
-/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/oracle
-	name = "Oracle's Jaunt"
-	cooldown_time = 45 SECONDS
-	jaunt_duration = 20 SECONDS
