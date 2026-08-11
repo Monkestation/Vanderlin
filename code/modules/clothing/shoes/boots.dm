@@ -10,7 +10,7 @@
 	salvage_amount = 1
 	max_integrity = INTEGRITY_STANDARD
 	wetable = FALSE
-	abstract_type = /obj/item/clothing/shoes/boots/darkboots
+	abstract_type = /obj/item/clothing/shoes/boots
 
 /obj/item/clothing/shoes/boots/darkboots
 	name = "dark boots"
