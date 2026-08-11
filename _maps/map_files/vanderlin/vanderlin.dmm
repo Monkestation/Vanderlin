@@ -8452,6 +8452,9 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/blue)
+"dVU" = (
+/turf/closed/wall/mineral/stone/window,
+/area/outdoors/town/keep)
 "dVV" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -21308,9 +21311,6 @@
 "jTQ" = (
 /turf/open/floor/blocks,
 /area/indoors/town/church/crypt)
-"jTR" = (
-/turf/closed/wall/mineral/stone/window,
-/area/outdoors/town/keep)
 "jUc" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/walldeco/church/line,
@@ -117424,7 +117424,7 @@ aNf
 aNf
 fep
 itQ
-jTR
+dVU
 mfh
 clj
 mfh
