@@ -103,7 +103,7 @@
 		user.equip_to_slot_if_possible(new /obj/item/storage/belt/leather/cloth(get_turf(user)), ITEM_SLOT_BELT)
 		qdel(src)
 
-/obj/item/natural/cloth/dropped(mob/living/carbon/human/user)
+/obj/item/natural/cloth/dropped(mob/living/carbon/human/user, silent)
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 

@@ -9,21 +9,30 @@
 	SHOULD_CALL_PARENT(TRUE)
 	PROTECTED_PROC(TRUE)
 
-	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
+	if(!user.cmode)
+		var/tool_return = tool_act(user, tool, modifiers)
+		if(tool_return)
+			return tool_return
+
+	var/is_right_clicking = text2num(LAZYACCESS(modifiers, RIGHT_CLICK))
 	var/is_left_clicking = !is_right_clicking
-
-	if(!user.cmode && isobj(src) && is_left_clicking && user.try_recipes(src, tool))
-		user?.changeNext_move(CLICK_CD_FAST)
-		return ITEM_INTERACT_SUCCESS
-
 	var/early_sig_return = NONE
 	if(is_left_clicking)
+		/*
+		 * This is intentionally using `||` instead of `|` to short-circuit the signal calls
+		 * This is because we want to return early if ANY of these signals return a value
+		 *
+		 * This puts priority on the atom's signals, then the tool's signals, then the user's signals,
+		 * so we can avoid doing two interactions at once
+		 */
 		early_sig_return = SEND_SIGNAL(src, COMSIG_ATOM_ITEM_INTERACTION, user, tool, modifiers) \
-			| SEND_SIGNAL(tool, COMSIG_ITEM_INTERACTING_WITH_ATOM, user, src, modifiers)
+			|| SEND_SIGNAL(tool, COMSIG_ITEM_INTERACTING_WITH_ATOM, user, src, modifiers) \
+			|| SEND_SIGNAL(user, COMSIG_USER_ITEM_INTERACTION, src, tool, modifiers)
 	else
+		// See above
 		early_sig_return = SEND_SIGNAL(src, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY, user, tool, modifiers) \
-			| SEND_SIGNAL(tool, COMSIG_ITEM_INTERACTING_WITH_ATOM_SECONDARY, user, src, modifiers)
-
+			|| SEND_SIGNAL(tool, COMSIG_ITEM_INTERACTING_WITH_ATOM_SECONDARY, user, src, modifiers) \
+			|| SEND_SIGNAL(user, COMSIG_USER_ITEM_INTERACTION_SECONDARY, src, tool, modifiers)
 	if(early_sig_return)
 		return early_sig_return
 
@@ -41,17 +50,56 @@
 	if(interact_return)
 		return interact_return
 
+	// We have to manually handle storage in item_interaction because storage is blocking in 99% of interactions, which stifles a lot
+	// Yeah it sucks not being able to signalize this, but the other option is to have a second signal here just for storage which is also not great
+	if(atom_storage)
+		if(is_left_clicking)
+			if(atom_storage.insert_on_attack)
+				return atom_storage.item_interact_insert(user, tool)
+		else
+			if(atom_storage.open_storage(user) && atom_storage.display_contents)
+				return ITEM_INTERACT_SUCCESS
+
+	return NONE
+
+/**
+ *
+ * ## Tool Act
+ *
+ * Handles using specific tools on this atom directly.
+ * Only called when combat mode is off.
+ *
+ * Handles the tool_acts in particular, such as wrenches and screwdrivers.
+ *
+ * This can be overridden to handle unique "tool interactions"
+ * IE using an item like a tool (when it's not actually one)
+ * This is particularly useful for things that shouldn't be inserted into storage
+ * (because tool acting runs before storage checks)
+ * but otherwise does nothing that [item_interaction] doesn't already do.
+ *
+ * In other words, use sparingly. It's harder to use (correctly) than [item_interaction].
+ */
+/atom/proc/tool_act(mob/living/user, obj/item/tool, list/modifiers)
+	SHOULD_CALL_PARENT(TRUE)
+	PROTECTED_PROC(TRUE)
+
 	var/tool_type = tool.tool_behaviour
-	if(!tool_type) // here on only deals with ... tools
+	if(!tool_type)
 		return NONE
 
-	var/list/processing_recipes = list()
+	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
+	var/is_left_clicking = !is_right_clicking
+
 	var/signal_result = is_left_clicking \
-		? SEND_SIGNAL(src, COMSIG_ATOM_TOOL_ACT(tool_type), user, tool, processing_recipes) \
+		? SEND_SIGNAL(src, COMSIG_ATOM_TOOL_ACT(tool_type), user, tool) \
 		: SEND_SIGNAL(src, COMSIG_ATOM_SECONDARY_TOOL_ACT(tool_type), user, tool)
 
 	if(signal_result)
 		return signal_result
+
+	if(is_left_clicking && !isobj(src) && user.try_recipes(src, tool))
+		user?.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
 
 	if(QDELETED(tool))
 		return ITEM_INTERACT_SUCCESS // Safe-ish to assume that if we deleted our item something succeeded
@@ -75,15 +123,6 @@
 			act_result = is_left_clicking ? analyzer_act(user, tool) : analyzer_act_secondary(user, tool)
 
 	if(!act_result)
-		// We have to manually handle storage in item_interaction because storage is blocking in 99% of interactions, which stifles a lot
-		// Yeah it sucks not being able to signalize this, but the other option is to have a second signal here just for storage which is also not great
-		if(atom_storage)
-			if(is_left_clicking)
-				if(atom_storage.insert_on_attack)
-					return atom_storage.item_interact_insert(user, tool)
-			else
-				if(atom_storage.open_storage(user) && atom_storage.display_contents)
-					return ITEM_INTERACT_SUCCESS
 		return NONE
 
 	// A tooltype_act has completed successfully
@@ -94,6 +133,7 @@
 		log_game("[key_name(user)] used [tool] on [src] (right click) at [AREACOORD(src)]")
 		SEND_SIGNAL(tool, COMSIG_TOOL_ATOM_ACTED_SECONDARY(tool_type), src)
 
+	SEND_SIGNAL(tool, COMSIG_ITEM_TOOL_ACTED, src, user, tool_type, act_result)
 	return act_result
 
 /mob/living/item_interaction(mob/living/user, obj/item/tool, list/modifiers)

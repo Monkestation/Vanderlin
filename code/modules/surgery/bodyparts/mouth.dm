@@ -114,6 +114,8 @@
 
 	artery_type = ARTERY_MOUTH
 
+	storage_type = /datum/storage/organ/mouth
+
 	/// Maximum amount of teeth this limb can hae
 	var/max_teeth = 32
 	/// Lisp modifier for when this limb is missing teeth

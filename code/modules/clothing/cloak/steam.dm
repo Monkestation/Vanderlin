@@ -17,7 +17,7 @@
 	. = ..()
 	AddComponent(/datum/component/steam_storage, 1000, 0.5, "steam_armor")
 
-/obj/item/clothing/cloak/boiler/dropped(mob/living/user)
+/obj/item/clothing/cloak/boiler/dropped(mob/living/user, silent)
 	power_off(user)
 	. = ..()
 

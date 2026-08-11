@@ -767,10 +767,23 @@
 	return GLOB.accent_list[accent]
 
 // THIS SUCKS. PORT STRIPPABLE ELEMENT
-/mob/living/carbon/human/MouseDrop_T(mob/living/target, mob/living/user)
+/mob/living/carbon/human/MouseDrop_T(atom/target, mob/user)
+	if(!isliving(target) || !isliving(user))
+		return ..()
+
 	if(mouse_buckle_handling(target, user))
 		return TRUE
-	. = ..()
+
+	if(!istype(user.rmb_intent, /datum/rmb_intent/weak) || !iscarbon(target))
+		return ..()
+
+	var/mob/living/carbon/carbon_dude = target
+	var/obj/item/bodypart/try_open = carbon_dude.get_bodypart(user.zone_selected)
+	if(!try_open?.atom_storage)
+		return ..()
+
+	try_open.atom_storage.open_storage(user)
+	return TRUE
 
 /mob/living/carbon/human/mouse_buckle_handling(mob/living/M, mob/living/user)
 	if(pulling != M || stat != CONSCIOUS)

@@ -139,7 +139,7 @@
 	if(!reagents)
 		return NONE
 
-	if(is_open_container() && reagents.total_volume > 0 && !GetComponent(/datum/component/storage))
+	if(!atom_storage && is_open_container() && reagents.total_volume > 0)
 		if(!istype(tool, /obj/item/reagent_containers) && !istype(tool, /obj/item/paper))
 			if(is_type_in_list(user.used_intent, list(INTENT_SOAK, INTENT_WRING)))
 				return NONE // special snowflake
@@ -168,7 +168,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
-	if(GetComponent(/datum/component/storage))
+	if(atom_storage)
 		return NONE
 
 	if(istype(tool, /obj/item/reagent_containers/syringe))

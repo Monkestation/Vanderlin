@@ -137,17 +137,6 @@
 	lensmoved = FALSE
 	user.update_sight()
 
-/obj/item/clothing/face/spectacles/inq/dropped(mob/user, slot)
-	..()
-	if(!(slot & ITEM_SLOT_MASK) || slot & ITEM_SLOT_HEAD)
-		if(!lensmoved)
-			REMOVE_TRAIT(user, TRAIT_NOCSHADES, "redlens")
-			user.update_sight()
-			lensmoved = TRUE // set the night vision to off, to avoid weirdness
-			return
-
-
-
 /obj/item/clothing/face/sack
 	name = "sack mask"
 	desc = "A brown sack with eyeholes cut into it."
@@ -215,7 +204,7 @@
 	if(user.wear_mask == src)
 		worn = TRUE
 
-/obj/item/clothing/face/facemask/steel/confessor/dropped(mob/user)
+/obj/item/clothing/face/facemask/steel/confessor/dropped(mob/user, silent)
 	. = ..()
 	if(worn)
 		playsound(user, 'sound/items/confessormaskoff.ogg', 80)
@@ -270,12 +259,3 @@
 	ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 	lensmoved = FALSE
 	user.update_sight()
-
-/obj/item/clothing/face/facemask/steel/confessor/lensed/dropped(mob/user, slot)
-	..()
-	if(!(slot & ITEM_SLOT_MASK) || slot & ITEM_SLOT_HEAD)
-		if(!lensmoved)
-			REMOVE_TRAIT(user, TRAIT_NOCSHADES, "redlens")
-			user.update_sight()
-			lensmoved = TRUE // set the night vision to off, to avoid weirdness
-			return

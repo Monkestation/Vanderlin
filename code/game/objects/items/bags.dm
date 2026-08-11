@@ -32,7 +32,7 @@
 		to_chat(user, span_info("The [src] slips through dead fingers..."))
 		user.dropItemToGround(src, TRUE)
 
-/obj/item/storage/sack/dropped(mob/living/carbon/human/user)
+/obj/item/storage/sack/dropped(mob/living/carbon/human/user, silent)
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 

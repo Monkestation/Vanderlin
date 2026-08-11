@@ -200,7 +200,7 @@
 		bronzeplatecumbersome = TRUE
 	return
 
-/obj/item/clothing/armor/plate/full/bronze/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/armor/plate/full/bronze/dropped(mob/living/carbon/human/user, silent)
 	. = ..()
 	if(bronzeplatecumbersome == TRUE)
 		to_chat(user, span_hypnophrase("..and with a sigh of relief, the panoply's weight no longer burdens my shoulders."))

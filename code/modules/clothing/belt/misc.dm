@@ -205,7 +205,7 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/storage/belt/pouch/medicinepopulate_contents()
+/obj/item/storage/belt/pouch/medicine/populate_contents()
 	new /obj/item/needle(src)
 	new /obj/item/natural/bundle/cloth/bandage/full(src)
 	new /obj/item/reagent_containers/glass/bottle/healthpot(src)
@@ -388,15 +388,17 @@
 	storage_type = /datum/storage/surgery_bag
 
 /obj/item/storage/backpack/satchel/surgbag/populate_contents()
-	new /obj/item/needle/blessed(src)
 	new /obj/item/weapon/surgery/scalpel(src)
 	new /obj/item/weapon/surgery/saw(src)
+	new /obj/item/weapon/surgery/hemostat(src)
+	new /obj/item/weapon/surgery/hemostat(src)
 	new /obj/item/weapon/surgery/retractor(src)
 	new /obj/item/weapon/surgery/bonesetter(src)
 	new /obj/item/weapon/surgery/cautery(src)
-	new /obj/item/natural/worms/leech/parasite(src)
 	new /obj/item/weapon/surgery/hammer(src)
 	new /obj/item/reagent_containers/syringe(src)
+	new /obj/item/natural/worms/leech/parasite(src)
+	new /obj/item/needle/blessed(src)
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"
@@ -415,7 +417,6 @@
 	qdel(src)
 
 /obj/item/storage/backpack/satchel/surgbag/shit/populate_contents()
-	new /obj/item/needle(src)
 	new /obj/item/weapon/surgery/scalpel(src)
 	new /obj/item/weapon/surgery/saw(src)
 	new /obj/item/weapon/surgery/hemostat(src)
@@ -424,8 +425,9 @@
 	new /obj/item/weapon/surgery/bonesetter(src)
 	new /obj/item/weapon/surgery/cautery(src)
 	new /obj/item/weapon/surgery/hammer(src)
-	new /obj/item/natural/worms/leech(src)
 	new /obj/item/natural/bundle/fibers/full(src)
+	new /obj/item/natural/worms/leech(src)
+	new /obj/item/needle(src)
 
 /obj/item/storage/backpack/satchel/musketeer/populate_contents()
 	new /obj/item/weapon/knife/dagger/bayonet(src)
@@ -574,7 +576,7 @@
 	. = ..()
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_user_moved), TRUE)
 
-/obj/item/storage/hip/orebag/dropped(mob/user)
+/obj/item/storage/hip/orebag/dropped(mob/user, silent)
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
 

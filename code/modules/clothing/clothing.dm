@@ -96,8 +96,6 @@
 	if(wetable)
 		wet = new(src)
 
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
-
 /obj/item/clothing/Destroy(force)
 	user_vars_remembered = null //Oh god somebody put REFERENCES in here? not to worry, we'll clean it up
 	if(hoodtype)
@@ -283,7 +281,7 @@
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)
 
-/obj/item/clothing/dropped(mob/living/user)
+/obj/item/clothing/dropped(mob/living/user, silent)
 	..()
 	for(var/trait in clothing_traits)
 		REMOVE_CLOTHING_TRAIT(user, trait)

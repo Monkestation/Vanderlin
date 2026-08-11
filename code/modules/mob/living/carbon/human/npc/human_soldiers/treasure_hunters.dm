@@ -112,6 +112,6 @@
 		var/mob/living/carbon/human/mad_touched = user
 		mad_touched.apply_damage(25, BRUTE, BODY_ZONE_HEAD)
 
-/obj/item/clothing/face/facemask/steel/mad_touched/dropped(mob/user)
+/obj/item/clothing/face/facemask/steel/mad_touched/dropped(mob/user, silent)
 	. = ..()
 	REMOVE_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)

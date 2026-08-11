@@ -458,7 +458,7 @@
 	//this checks if its inhand, instead of neck slot
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/dropped(mob/user)
+/obj/item/clothing/neck/gorget/explosive/dropped(mob/user, silent)
 	. = ..()
 	is_in_neck_slot = FALSE
 

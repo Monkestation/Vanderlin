@@ -32,7 +32,7 @@
 					H.update_inv_head()
 		user.regenerate_clothes()
 
-/obj/item/clothing/face/goggles/dropped(mob/user)
+/obj/item/clothing/face/goggles/dropped(mob/user, silent)
 	. = ..()
 	REMOVE_TRAIT(user, TRAIT_ENGINEERING_GOGGLES, "[ref(src)]")
 

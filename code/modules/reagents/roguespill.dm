@@ -12,7 +12,7 @@
 			if(I.reagents && I.spillable)
 				I.reagents.remove_all(3)
 
-/obj/item/storage/dropped(mob/user)
+/obj/item/storage/dropped(mob/user, silent)
 	. = ..()
 	if(user)
 		UnregisterSignal(user, COMSIG_MOVABLE_MOVED)

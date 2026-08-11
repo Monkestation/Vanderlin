@@ -141,7 +141,6 @@
 
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/scabbard/cane/courtphysician

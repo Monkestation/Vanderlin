@@ -17,7 +17,7 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
 
-/obj/item/clothing/face/lordmask/faceless/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/face/lordmask/faceless/dropped(mob/living/carbon/human/user, silent)
 	. = ..()
 	if(QDELETED(src))
 		return
@@ -323,7 +323,7 @@
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
 	flags_inv = HIDEFACIALHAIR //so prisoners can actually be identified
 
-/obj/item/clothing/face/facemask/prisoner/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/face/facemask/prisoner/dropped(mob/living/carbon/human/user, silent)
 	. = ..()
 	if(QDELETED(src))
 		return

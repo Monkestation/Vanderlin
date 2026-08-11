@@ -23,6 +23,8 @@
 	artery_type = list(ARTERY_HEAD, ARTERY_NECK)
 	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
 
+	storage_type = /datum/storage/organ/head
+
 	var/mob/living/brain/brainmob = null //The current occupant.
 	var/obj/item/organ/brain/brain = null //The brain organ
 	var/obj/item/organ/eyes/eyes_right

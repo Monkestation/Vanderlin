@@ -24,6 +24,8 @@
 	artery_type = list(ARTERY_CHEST, ARTERY_HEART)
 	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
 
+	storage_type = /datum/storage/organ
+
 /obj/item/bodypart/chest/forced_removal(dismembered, special, move_to_floor)
 	var/mob/living/carbon/old_owner = owner
 	..(special = TRUE) //special because we're self destructing

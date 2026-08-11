@@ -758,7 +758,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(!loc.atom_storage.remove_single(user, src, get_turf(user), silent = TRUE))
+		if(!loc.atom_storage.remove_single(user, src, get_turf(user)))
 			return
 
 	if(QDELETED(src)) //moving it out of the storage destroyed it.

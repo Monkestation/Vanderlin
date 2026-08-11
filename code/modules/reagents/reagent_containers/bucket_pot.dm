@@ -15,7 +15,7 @@
 	obj_flags = CAN_BE_HIT
 	resistance_flags = NONE
 
-/obj/item/reagent_containers/glass/bucket/dropped(mob/user)
+/obj/item/reagent_containers/glass/bucket/dropped(mob/user, silent)
 	. = ..()
 	reagents.flags = initial(reagent_flags)
 

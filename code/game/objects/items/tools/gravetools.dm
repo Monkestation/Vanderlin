@@ -38,7 +38,7 @@
 		QDEL_NULL(heldclod)
 	return ..()
 
-/obj/item/weapon/shovel/dropped(mob/user)
+/obj/item/weapon/shovel/dropped(mob/user, silent)
 	. = ..()
 	if(heldclod && isturf(loc))
 		heldclod.forceMove(loc)

@@ -171,11 +171,11 @@
 	var/list/datum/injury/injuries
 	/// The last injury to have afflicted this bodypart
 	var/datum/injury/last_injury
+	/// Storage type, probably organ storage
+	var/datum/storage/storage_type = null
 
 /obj/item/bodypart/Initialize(mapload)
 	. = ..()
-
-	create_base_organs()
 
 	if(isnull(max_pain_damage))
 		max_pain_damage = max_damage * 1.5
@@ -198,6 +198,11 @@
 
 	if(innate_state)
 		add_surgical_state(innate_state)
+
+	if(storage_type)
+		create_storage(type = storage_type)
+
+	create_base_organs()
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))

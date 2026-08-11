@@ -65,7 +65,7 @@
 	. = ..()
 	user.update_fov_angles()
 
-/obj/item/clothing/head/hooded/dropped(mob/user)
+/obj/item/clothing/head/hooded/dropped(mob/user, silent)
 	. = ..()
 	user.update_fov_angles()
 

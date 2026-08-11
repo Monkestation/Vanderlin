@@ -487,7 +487,7 @@
 			working = FALSE
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/inqarticles/indexer/dropped(mob/living/carbon/human/user, slot)
+/obj/item/inqarticles/indexer/dropped(mob/living/carbon/human/user, silent)
 	. = ..()
 	if(active)
 		possible_item_intents = list(/datum/intent/use)
@@ -1115,7 +1115,7 @@
 		worn = TRUE
 		ADD_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
 
-/obj/item/clothing/head/inqarticles/blackbag/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/head/inqarticles/blackbag/dropped(mob/living/carbon/human/user, silent)
 	..()
 	if(worn == TRUE)
 		user.cure_blind("blindfold_[REF(src)]")

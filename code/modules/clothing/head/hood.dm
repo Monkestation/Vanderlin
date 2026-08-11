@@ -18,7 +18,7 @@
 		connectedc.ToggleHood()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/clothing/head/hooded/dropped()
+/obj/item/clothing/head/hooded/dropped(mob/user, silent)
 	. = ..()
 	if(connectedc)
 		connectedc.RemoveHood()
