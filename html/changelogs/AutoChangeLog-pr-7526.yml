@@ -1,5 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added more keep area defines, mainly for replacing instances of 'basement'."
-  - rscadd: "Added an open sky area for use in place of generic roof area where suitable."
