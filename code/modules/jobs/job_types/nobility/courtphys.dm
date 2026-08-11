@@ -54,6 +54,7 @@
 	outfit_female = /datum/outfit/courtphys/female
 	give_bank_account = 100
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 	spells = list(/datum/action/cooldown/spell/diagnose)
 	job_bitflag = BITFLAG_ROYALTY

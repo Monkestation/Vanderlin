@@ -60,10 +60,6 @@
 		TRAIT_ROT_EATER
 	)
 
-/datum/job/sundweller/New()
-	. = ..()
-	peopleknowme = list()
-
 /datum/job/sundweller/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.set_patron(/datum/patron/godless/sunlord)

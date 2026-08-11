@@ -11,7 +11,11 @@
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
+
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = list(JOB_MONARCH, JOB_HAND, JOB_COURT_AGENT)
+	jobs_always_know_me = list(JOB_MONARCH, JOB_HAND, JOB_COURT_AGENT)
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL

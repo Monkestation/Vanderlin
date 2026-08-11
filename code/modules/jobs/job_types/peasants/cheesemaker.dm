@@ -25,6 +25,7 @@
 	total_positions = 0
 	spawn_positions = 0
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/cheesemaker

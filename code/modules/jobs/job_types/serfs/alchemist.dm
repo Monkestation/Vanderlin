@@ -30,6 +30,7 @@
 	outfit = /datum/outfit/alchemist
 	give_bank_account = 12
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/alchemist
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/alchemist/old
