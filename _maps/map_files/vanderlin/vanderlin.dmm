@@ -23469,18 +23469,6 @@
 /area/indoors/town/noble_manor/yellow)
 "kVP" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/restraints/legcuffs/beartrap{
-	pixel_x = -6;
-	pixel_y = -6
-	},
-/obj/item/restraints/legcuffs/beartrap{
-	pixel_x = -5;
-	pixel_y = 2
-	},
-/obj/item/restraints/legcuffs/beartrap{
-	pixel_x = -6;
-	pixel_y = 11
-	},
 /obj/item/ammo_holder/quiver/bolts{
 	pixel_x = 11;
 	pixel_y = -1
@@ -23488,6 +23476,18 @@
 /obj/item/ammo_holder/quiver/bolts{
 	pixel_x = 8;
 	pixel_y = 7
+	},
+/obj/item/restraints/legcuffs/beartrap/crafted{
+	pixel_x = -6;
+	pixel_y = -8
+	},
+/obj/item/restraints/legcuffs/beartrap/crafted{
+	pixel_x = -9;
+	pixel_y = 0
+	},
+/obj/item/restraints/legcuffs/beartrap/crafted{
+	pixel_x = -9;
+	pixel_y = 10
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
