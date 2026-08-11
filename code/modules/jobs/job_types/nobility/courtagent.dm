@@ -60,6 +60,7 @@
 
 /datum/job/advclass/courtagent
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)
 
 /datum/job/advclass/courtagent/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

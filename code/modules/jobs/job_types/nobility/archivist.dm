@@ -58,6 +58,9 @@
 		TRAIT_VIRGIN,
 	)
 
+/datum/job/advclass/archivist
+	factions = list(FACTION_TOWN)
+
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,

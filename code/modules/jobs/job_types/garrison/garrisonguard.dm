@@ -44,6 +44,7 @@
 
 /datum/job/advclass/garrison
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)
 
 /mob/proc/haltyell()
 	set name = "HALT!"

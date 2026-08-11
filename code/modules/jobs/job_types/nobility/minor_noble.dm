@@ -60,6 +60,7 @@
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/minor_noble
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/former_commander
 	raw_attribute_list = list(

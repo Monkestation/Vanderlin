@@ -61,6 +61,7 @@
 /datum/job/advclass/menatarms
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/menatarms/pikeman
 	raw_attribute_list = list(

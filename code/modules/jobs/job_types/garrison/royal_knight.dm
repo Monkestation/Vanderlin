@@ -92,6 +92,7 @@
 	inherit_parent_title = TRUE
 	should_reset_stats = FALSE
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)
 
 /datum/job/advclass/royalknight/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

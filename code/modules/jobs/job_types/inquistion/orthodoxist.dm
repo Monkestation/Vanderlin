@@ -67,3 +67,4 @@
 
 /datum/job/advclass/sacrestant
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
