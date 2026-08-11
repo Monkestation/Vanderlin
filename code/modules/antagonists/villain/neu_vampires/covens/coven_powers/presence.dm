@@ -24,7 +24,7 @@
 	cooldown_length = 15 SECONDS
 
 /datum/coven_power/presence/awe/pre_activation_checks(mob/living/target)
-	if(target.stat != CONCIOUS)
+	if(target.stat != CONSCIOUS)
 		to_chat(owner, span_danger("Minds of the dead cannot be swayed."))
 		return FALSE
 	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
