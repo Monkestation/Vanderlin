@@ -29,7 +29,7 @@
 	var/auto_deadmin_role_flags = NONE
 
 	//Players will be allowed to spawn in as jobs that are set to "Station"
-	var/list/factions = FACTION_NONE
+	var/list/factions = list(FACTION_NONE)
 
 	///Whether this job can be chosen if the player is already an antagonist
 	var/antags_can_pick = TRUE
@@ -262,8 +262,6 @@
 
 /datum/job/New()
 	. = ..()
-	if(!islist(factions))
-		factions = list(factions)
 	setup_known_people()
 
 /datum/job/proc/setup_known_people(mob/living/carbon/human/spawned)
