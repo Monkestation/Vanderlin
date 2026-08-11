@@ -10,7 +10,7 @@
 	animated = FALSE
 
 	screen_max_columns = 2
-	screen_max_rows = 6
+	screen_max_rows = 8
 
 	// Emulate old storage
 	grid_width_override = 32
@@ -23,11 +23,11 @@
 
 /datum/storage/organ/mouth
 	screen_max_columns = 1
-	screen_max_rows = 3
+	screen_max_rows = 6
 
 /datum/storage/organ/head
 	screen_max_columns = 2
-	screen_max_rows = 4
+	screen_max_rows = 5
 
 /datum/storage/organ/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage, surgery_requirements)
 	if(!isbodypart(parent))
