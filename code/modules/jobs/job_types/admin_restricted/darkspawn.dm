@@ -31,7 +31,7 @@
 	You are her flesh. \
 	You are her will."
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = list(FACTION_CABAL, FACTION_UNDEAD)
+	factions = list(FACTION_CABAL, FACTION_UNDEAD)
 
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	allowed_races = list(SPEC_ID_SNOW_ELF)
