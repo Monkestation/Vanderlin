@@ -179,7 +179,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	beltl = /obj/item/weapon/knife/dagger/steel/hand/parry
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backpack_contents = list(
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/frumentarii = 1,
@@ -257,7 +257,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,

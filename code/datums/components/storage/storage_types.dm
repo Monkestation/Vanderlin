@@ -88,7 +88,7 @@
 		return
 
 	if(!istype(I, /obj/item/weapon/knife) && isatom(parent))
-		var/obj/item/clothing/shoes/boots = parent
+		var/obj/item/clothing/shoes/boots/boots = parent
 		if(ishuman(boots?.loc))
 			var/mob/living/carbon/human/uncomfy = boots.loc
 			if(uncomfy.shoes != parent)

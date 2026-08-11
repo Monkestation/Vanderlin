@@ -184,7 +184,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 	shirt = /obj/item/clothing/shirt/undershirt/puritan
 	wrists = null
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/lord/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

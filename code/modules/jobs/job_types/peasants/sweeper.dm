@@ -57,7 +57,7 @@
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/grey
 	backl = /obj/item/storage/backpack/satchel/cloth
 	head = /obj/item/clothing/head/strawhat
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	ring = /obj/item/key/sweeper
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/belt/pouch

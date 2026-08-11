@@ -83,7 +83,7 @@
 	armor = /obj/item/clothing/armor/leather/shamancoat
 	neck = /obj/item/clothing/neck/psycross/great_hunt
 	pants = /obj/item/clothing/pants/trou/leather/gronn
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/leather/shaman_hood
 	gloves = /obj/item/clothing/gloves/plate/beastclaws

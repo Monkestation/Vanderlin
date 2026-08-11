@@ -52,7 +52,7 @@
 	name = "Court Agent Base"
 	belt = /obj/item/storage/belt/leather/black/courtagent
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/job/advclass/courtagent
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT)

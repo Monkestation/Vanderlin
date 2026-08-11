@@ -27,6 +27,7 @@
 		/datum/language/newpsydonic,
 		/datum/language/zalad,
 		/datum/language/celestial,
+		/datum/language/celestial_moon,
 		/datum/language/hellspeak,
 		/datum/language/beast,
 		/datum/language/kobold,

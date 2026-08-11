@@ -1,0 +1,5 @@
+author: "copper-404"
+delete-after: True
+changes:
+  - rscadd: "Added a variant of the daub wall for mapping purposes, complete with a construction recipe."
+  - qol: "Changed daub wall construction recipe to use a hammer instead of a knife."
