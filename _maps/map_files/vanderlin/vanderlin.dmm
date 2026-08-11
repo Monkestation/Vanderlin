@@ -21308,6 +21308,9 @@
 "jTQ" = (
 /turf/open/floor/blocks,
 /area/indoors/town/church/crypt)
+"jTR" = (
+/turf/closed/wall/mineral/stone/window,
+/area/outdoors/town/keep)
 "jUc" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/walldeco/church/line,
@@ -23478,9 +23481,13 @@
 	pixel_x = -6;
 	pixel_y = 11
 	},
-/obj/item/ammo_holder/quiver/bolt{
+/obj/item/ammo_holder/quiver/bolts{
+	pixel_x = 11;
+	pixel_y = -1
+	},
+/obj/item/ammo_holder/quiver/bolts{
 	pixel_x = 8;
-	pixel_y = -2
+	pixel_y = 7
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
@@ -116609,8 +116616,8 @@ fep
 aNf
 aNf
 itQ
-vrr
-hHM
+ojO
+ojO
 cqk
 lsD
 nfO
@@ -117417,7 +117424,7 @@ aNf
 aNf
 fep
 itQ
-dGg
+jTR
 mfh
 clj
 mfh
