@@ -106,6 +106,13 @@
 	if(spawned.dna?.species)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
 
+	var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
+	if(eyes)
+		eyes.Remove(spawned,1)
+		QDEL_NULL(eyes)
+	eyes = new /obj/item/organ/eyes/night_vision/nightmare
+	eyes.Insert(spawned)
+
 /datum/outfit/darkspawn
 	name = JOB_ADMIN_DARKSPAWN
 	pants = /obj/item/clothing/pants/trou/formal/shorts
