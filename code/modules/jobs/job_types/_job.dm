@@ -262,8 +262,6 @@
 
 /datum/job/New()
 	. = ..()
-	if(!islist(faction))
-		faction = list(faction)
 	setup_known_people()
 
 /datum/job/proc/setup_known_people(mob/living/carbon/human/spawned)
