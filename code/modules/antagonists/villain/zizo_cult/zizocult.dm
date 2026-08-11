@@ -133,8 +133,6 @@
 			return FALSE
 		if(new_owner.unconvertable)
 			return FALSE
-		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
-			return FALSE
 
 /datum/antagonist/zizocultist/proc/add_cultist(datum/mind/cult_mind)
 	cult_mind.add_antag_datum(/datum/antagonist/zizocultist)

@@ -126,10 +126,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RESISTHEATHANDS "resist_heat_handsonly"
 /// Resists low temperatures
 #define TRAIT_RESISTCOLD "resist_cold"
-/// Resist high pressure enviroments (unused with no atmos)
-#define TRAIT_RESISTHIGHPRESSURE "resist_high_pressure"
-/// Resist low pressure enviroments (unused with no atmos)
-#define TRAIT_RESISTLOWPRESSURE	"resist_low_pressure"
 /// This human is immune to the effects of being exploded. (ex_act)
 #define TRAIT_BOMBIMMUNE "bomb_immunity"
 /// Immunity against germs and viruses crippled
@@ -144,6 +140,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYDISMEMBER "easy_dismember"
 /// Limbs can't be dismembered
 #define TRAIT_NODISMEMBER "dismember_immunity"
+/// Cannot be decapitated, other limbs still fall off.
+#define TRAIT_NODECAPITATE "decapitate_immunity"
 /// Can't get fire stacks (can get DIVINE fire stacks)
 #define TRAIT_NOFIRE "Nonflammable"
 /// Can't use guns
@@ -185,12 +183,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOHARDCRIT "nohardcrit"
 /// Can't enter soft crit
 #define TRAIT_NOSOFTCRIT "nosoftcrit"
-/// Shielded from mind altering effects (unused)
-#define TRAIT_MINDSHIELD "mindshield"
-/// Unused
-#define TRAIT_DISSECTED	"dissected"
 /// Can hear dead people
-#define TRAIT_SIXTHSENSE "sixth_sense"
+#define TRAIT_GHOSTEARS "ghost_sense"
 /// Immune to the effects of phobias
 #define TRAIT_FEARLESS "fearless"
 //These are used for brain-based paralysis, where replacing the limb won't fix it
@@ -214,8 +208,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MAGIC_CHOKE "magic_choke"
 /// Immune to nervous cough
 #define TRAIT_SOOTHED_THROAT "soothed-throat"
-/// Can't lower hygiene
-#define TRAIT_ALWAYS_CLEAN "always-clean"
 /// Can throw reagent containers without spilling them
 #define TRAIT_BOOZE_SLIDER "booze-slider"
 /// Unused
