@@ -39,8 +39,9 @@
 	vampire.reset_and_reroll_stats()
 	vampire.purge_combat_knowledge()
 	vampire.remove_all_traits()
-	vampire.grant_undead_eyes()
 	. = ..()
+	vampire.grant_undead_eyes()
+
 	if(!forced)
 		if(clan_selected)
 			vampire.set_clan(default_clan)
@@ -51,6 +52,8 @@
 		if(!istype(thrall))
 			continue
 		thrall.set_clan_direct(vampire.clan)
+		var/datum/clan_hierarchy_node/new_clan_position = vampire.clan.create_position("Elder", "Original spawn of the [vampire.clan_position.name].", vampire.clan_position, 1)
+		new_clan_position.assign_member(thrall)
 	starting_thralls = null
 	if(chooses_name)
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)

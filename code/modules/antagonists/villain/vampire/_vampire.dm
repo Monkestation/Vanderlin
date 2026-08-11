@@ -22,6 +22,23 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/datum/clan/forcing_clan
 	antag_flags = FLAG_ANTAG_CAP_TEAM
 
+/datum/antagonist/ghoul //Vampire thralls, their coven is picked through the make_vampire_slave() function in living_modifications.dm
+	name = "Ghoul"
+	increase_votepwr = FALSE
+	roundend_category = "Vampires"
+	antagpanel_category = "Vampire"
+
+/datum/antagonist/ghoul/on_gain()
+	. = ..()
+	var/mob/living/carbon/human/H = owner.current
+	H.hud_used?.shutdown_bloodpool()
+	H.hud_used?.initialize_bloodpool()
+	H.hud_used?.bloodpool.set_fill_color("#510000")
+	H.maxbloodpool = 1500
+	H.set_bloodpool(500)
+	H.add_bodypart_feature(new /datum/bodypart_feature/vamprire_seal)
+	ADD_TRAIT(H, TRAIT_BLOODDRINKER, "clan")
+
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
 	if(forced_clan)
@@ -147,11 +164,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		finalize_custom_clan(vampdude)
 		return
 
-	// Select first coven
-	var/first_choice = input(vampdude, "Choose your first coven:", "Coven Selection") as null|anything in coven_options
-	if(first_choice)
-		selected_covens += coven_options[first_choice]
-		coven_options -= first_choice
+	// Forces first coven to be bloodheal (seen too much newbies not pick it)
+	selected_covens += coven_options["Bloodheal"]
+	coven_options -= "Bloodheal"
 
 	// Select second coven
 	if(length(coven_options))

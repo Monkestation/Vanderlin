@@ -40,6 +40,7 @@ And it also helps for the character set panel
 		TRAIT_NOAMBUSH,
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
+		TRAIT_VAMP_OFFERED
 	)
 	var/silent_join = FALSE
 
@@ -52,10 +53,11 @@ And it also helps for the character set panel
 
 	var/list/clan_members = list()
 	var/list/non_vampire_members = list()
+	var/list/new_members_titles = list("Neonate", "Fledgling", "Youngblood", "Progeny")
 	/// Whether this clan allows non-vampire members
 	var/allows_non_vampires = TRUE
 	/// Title for non-vampire members
-	var/non_vampire_title = "Slave"
+	var/non_vampire_title = "Thrall"
 	var/has_hierarchy = TRUE
 	var/datum/clan_hierarchy_node/hierarchy_root
 	var/list/datum/clan_hierarchy_node/all_positions = list()
@@ -92,6 +94,17 @@ And it also helps for the character set panel
 /datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types, vitae)
 	var/wanted_blood = (blood_types & blood_preference)
 	var/unwanted_blood = (blood_types & blood_disgust)
+
+
+	if(drinker.mind?.has_antag_datum(/datum/antagonist/ghoul)) //thrall drinking
+		if(!(blood_types & BLOOD_PREFERENCE_KIN) && !wanted_blood) //shares drinking habits with their master's clan
+			to_chat(drinker, span_userdanger("THIS BLOOD DOESN'T SATIATE ME! I NEED SOME OF MY MASTER'S BLOOD!"))
+			vitae *= 0.1
+			return vitae
+		else
+			vitae *= 2
+			return vitae
+
 
 	if(wanted_blood && !unwanted_blood)
 		drinker.apply_status_effect(/datum/status_effect/debuff/blood_preference)
@@ -303,7 +316,9 @@ And it also helps for the character set panel
 
 	var/list/spells_to_remove = list(
 		/datum/action/clan_menu,
-		/datum/action/cooldown/spell/undirected/transfix,
+		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire,
+		/datum/action/cooldown/spell/enslave_mortal,
+		/datum/action/cooldown/spell/undirected/transfix
 	)
 	for(var/spell_type in spells_to_remove)
 		var/datum/action/spell_instance = locate(spell_type) in vampire.actions
@@ -381,8 +396,10 @@ And it also helps for the character set panel
 
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/clan)
 	H.update_age_stats(H.age, TRUE)
-	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
-	transfix.Grant(H)
+	var/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire/encode_thoughts = new(H.mind)
+	encode_thoughts.Grant(H)
+	var/datum/action/cooldown/spell/enslave_mortal/enslave_mortal = new(H.mind)
+	enslave_mortal.Grant(H)
 
 
 /datum/clan/proc/apply_vampire_look(mob/living/carbon/human/H)

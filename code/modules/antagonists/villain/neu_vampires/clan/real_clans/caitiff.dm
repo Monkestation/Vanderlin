@@ -17,6 +17,7 @@
 		TRAIT_DARKVISION,
 		TRAIT_NOBREATH,
 		TRAIT_NOAMBUSH,
+		TRAIT_VAMP_OFFERED,
 	)
 	has_hierarchy = FALSE
 	silent_join = TRUE

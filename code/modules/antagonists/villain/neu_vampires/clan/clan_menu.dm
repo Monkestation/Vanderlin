@@ -40,7 +40,7 @@
 /datum/clan_menu_interface/proc/generate_welcome_screen_html()
 	var/clan_downside = "burn in sunlight"
 	var/blood_preference = "any blood"
-	var/reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> Drain someone's blood to critical levels to gain the option to embrace them as a new vampire.</div>"}
+	var/reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> Bite someone's neck and then their blood to critical levels to gain the option to embrace them as a new vampire using the "sire mortal" verb.</div>"}
 	if(!user.clan_position?.can_assign_positions)
 		reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> You are unable to sire new vampires.</div>"}
 
@@ -54,7 +54,8 @@
 
 		<div class="intro-section">
 			<p>Select a coven from the sidebar to view its research tree and manage your powers.
-			Each coven represents a different aspect of your vampiric abilities.</p>
+			Each coven represents a different aspect of your vampiric abilities.
+			You can input a number of vitae you wish to spend under a coven to increase the experience on it. Any vitae amount will be divived in half.</p>
 		</div>
 
 		<div class="vampire-mechanics">
@@ -101,7 +102,8 @@
 			<div class="coven-progress">
 				<div class="coven-progress-fill" style="width: [experience_percent]%"></div>
 			</div>
-			<div class="research-points">RP: [coven.research_points]</div>
+			<input class='exp-input' type="number" id="xp_input_[coven_name]" value="" min="10" step="10" max="[coven.experience_needed * 2]" onclick="event.stopPropagation();">
+			<button class='exp-button' onclick="addXP('[coven_name]')">+</button>
 		</li>
 		"}
 
@@ -805,6 +807,45 @@
 				color: #FFD700;
 				margin-bottom: 30px;
 			}
+
+			.exp-button {
+				background: #d86a00;
+				border: 2px solid #7a3c00;
+				color: #fff;
+				padding: 5px 10px;
+				border-radius: 0;
+				cursor: pointer;
+				font-weight: bold;
+				font-size: 12px;
+				letter-spacing: 0;
+				text-transform: none;
+				box-shadow: inset 0 0 2px #000;
+				transition: background 0.1s ease-in-out, transform 0.05s;
+			}
+
+			.exp-button:hover {
+				background: #ff8a2b;
+				box-shadow: inset 0 0 3px #000;
+				transform: translateY(-1px);
+			}
+
+			.exp-input {
+				width: 60px;
+				background: #1a1a1a;
+				border: 2px solid #7a3c00;
+				color: #fff;
+				padding: 4px 6px;
+				border-radius: 0;
+				font-size: 12px;
+				box-shadow: inset 0 0 2px #000;
+				outline: none;
+				transition: border-color 0.1s ease-in-out, background 0.1s;
+			}
+
+			.exp-input:focus {
+				border-color: #d86a00;
+				background: #222;
+			}
 		</style>
 	</head>
 	<body>
@@ -902,6 +943,11 @@
 				});
 				event.target.closest('.coven-item').classList.add('selected');
 				window.location.href = 'byond://?src=[REF(src)];action=load_coven_tree;coven_name=' + encodeURIComponent(covenName);
+			}
+
+			function addXP(covenName) {
+				var amount = parseInt(document.getElementById("xp_input_" + covenName).value) || 0;
+   				window.location = 'byond://?src=[REF(src)];action=add_xp;coven_name=' + encodeURIComponent(covenName) + ';amount=' + amount;
 			}
 
 			// Research tree interaction variables
@@ -1152,6 +1198,15 @@
 		if("load_coven_tree")
 			var/coven_name = href_list["coven_name"]
 			load_coven_research_tree(coven_name)
+
+		if("add_xp")
+			var/coven_name = href_list["coven_name"]
+			var/amount = text2num(href_list["amount"])
+
+			var/datum/coven/C = user_covens[coven_name]
+			if(C)
+				C.addButtonExp(amount)
+			generate_interface()
 
 		if("show_hierarchy")
 			show_hierarchy()

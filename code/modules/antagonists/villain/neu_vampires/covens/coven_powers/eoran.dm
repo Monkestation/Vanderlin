@@ -2,6 +2,7 @@
 	name = "Eoran Embrace"
 	desc = "Blessed by the Goddess of Love, Family, and Art, these vampires have developed powers that strengthen bonds, inspire beauty, and heal emotional wounds."
 	icon_state = "eora"
+	clan_restricted = TRUE
 	power_type = /datum/coven_power/eora
 	max_level = 4
 

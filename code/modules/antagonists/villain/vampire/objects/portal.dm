@@ -8,58 +8,30 @@
 
 	. = TRUE
 
-
-	if(!user.has_bloodpool_cost(1000))
-		to_chat(user, span_warning("This costs 1000 vitae, I lack that."))
+	if(sending)
+		to_chat(user, "A portal is already active!")
 		return
-	var/list/choices = list("RETURN", "SENDING", CHOICE_CANCEL)
-	switch(browser_input_list(user, "Which type of portal?", "Portal Type", choices))
-		if(CHOICE_CANCEL)
-			return
+	for(var/obj/item/clothing/neck/portalamulet/P in GLOB.vampire_objects)
+		possibleportals += P
+	var/atom/choice = tgui_input_list(user, "Choose an area to open the portal to", "Choices", possibleportals)
+	if(!choice)
+		to_chat(user, span_warning("There are no anchors to open a portal to."))
+		return
+	user.visible_message("[user] begins to summon a portal.", "I begin to summon a portal.")
+	if(do_after(user, 3 SECONDS, src))
+		if(istype(choice, /obj/item/clothing/neck/portalamulet))
+			var/obj/item/clothing/neck/portalamulet/A = choice
+			A.uses -= 1
+			var/turf/G = get_turf(A)
+			new /obj/effect/landmark/vteleportsenddest(G.loc)
+			if(A.uses <= 0)
+				A.visible_message("[A] shatters!")
+				qdel(A)
+			else
+				to_chat(user, span_warning("[A.name] has only [A.uses] left before breaking."))
+			create_portal()
+			user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
 
-		if("RETURN")
-			for(var/obj/item/clothing/neck/portalamulet/P in GLOB.vampire_objects)
-				possibleportals += P
-			var/atom/choice = browser_input_list(user, "Choose an area to open the portal", "Choices", possibleportals)
-			if(!choice)
-				return
-			user.visible_message("[user] begins to summon a portal.", "I begin to summon a portal.")
-			if(!do_after(user, 3 SECONDS, src))
-				return
-
-			user.has_bloodpool_cost(-1000)
-			if(istype(choice, /obj/item/clothing/neck/portalamulet))
-				var/obj/item/clothing/neck/portalamulet/A = choice
-				A.uses -= 1
-				var/obj/effect/landmark/vteleportdestination/VR = new(A.loc)
-				VR.amuletname = A.name
-				create_portal_return(A.name, 3000)
-				user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
-				if(A.uses <= 0)
-					A.visible_message("[A] shatters!")
-					qdel(A)
-		if("SENDING")
-			if(sending)
-				to_chat(user, "A portal is already active!")
-				return
-			for(var/obj/item/clothing/neck/portalamulet/P in GLOB.vampire_objects)
-				possibleportals += P
-			var/atom/choice = browser_input_list(user, "Choose an area to open the portal to", "Choices", possibleportals)
-			if(!choice)
-				return
-			user.visible_message("[user] begins to summon a portal.", "I begin to summon a portal.")
-			if(do_after(user, 3 SECONDS, src))
-				user.has_bloodpool_cost(-1000)
-				if(istype(choice, /obj/item/clothing/neck/portalamulet))
-					var/obj/item/clothing/neck/portalamulet/A = choice
-					A.uses -= 1
-					var/turf/G = get_turf(A)
-					new /obj/effect/landmark/vteleportsenddest(G.loc)
-					if(A.uses <= 0)
-						A.visible_message("[A] shatters!")
-						qdel(A)
-					create_portal()
-					user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
 
 /obj/structure/vampire/portal
 	name = "Eerie Portal"
@@ -123,10 +95,11 @@
 
 /obj/item/clothing/neck/portalamulet
 	name = "Gate Amulet"
+	desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
-	var/uses = 3
-	var/can_local_portal = FALSE
+	var/uses = 6
+	var/can_local_portal = TRUE
 
 /obj/item/clothing/neck/portalamulet/Initialize()
 	GLOB.vampire_objects |= src
@@ -135,6 +108,13 @@
 /obj/item/clothing/neck/portalamulet/Destroy()
 	GLOB.vampire_objects -= src
 	return ..()
+
+/obj/item/clothing/neck/portalamulet/examine(mob/user)
+	. = ..()
+	if(user.mind?.has_antag_datum(/datum/antagonist/vampire))
+		desc = "World anchor, used by the portal in The Mansion. Using it will return you to where it was made, right in the evil's lair. Leave it behind to make a portal to later."
+	else
+		desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"
 
 /obj/item/clothing/neck/portalamulet/attack_self(mob/user, list/modifiers)
 	. = ..()
@@ -147,6 +127,7 @@
 		for(var/obj/structure/vampire/portalmaker/P in GLOB.vampire_objects)
 			P.create_portal_return(name, 3000)
 		user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
+		to_chat(user, span_danger("[name] has [uses] left."))
 		if(uses <= 0)
 			visible_message("[src] shatters!")
 			qdel(src)

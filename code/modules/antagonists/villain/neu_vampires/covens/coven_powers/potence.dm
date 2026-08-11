@@ -19,8 +19,8 @@
 		/datum/coven_power/potence/four,
 		/datum/coven_power/potence/five
 	)
-	duration_length = 3 SECONDS
-	cooldown_length = 3 SECONDS
+	duration_length = 10 SECONDS
+	cooldown_length = 10 SECONDS
 	violates_masquerade = TRUE
 	refresh_violations = TRUE
 

@@ -473,6 +473,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_KNOWCOURTAGENTS "knowagents"
 #define TRAIT_VAMPMANSION "vampiremansion"
 #define TRAIT_VAMP_DREAMS "vamp_dreams"
+#define TRAIT_VAMP_OFFERED "offered_vampirism"
 #define TRAIT_INHUMENCAMP "inhumencamp"
 #define TRAIT_GALLOWBAND "gallowband"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies

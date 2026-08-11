@@ -392,4 +392,30 @@
 	if(!master.clan)
 		return
 	master.clan.add_non_vampire_member(src)
-	add_bodypart_feature(new /datum/bodypart_feature/vamprire_seal)
+	var/datum/clan_hierarchy_node/new_clan_position = master.clan.create_position("Thrall", "A mortal servant to the clan.", master.clan_position, 1)
+	new_clan_position.assign_member(src)
+	var/list/coven_options = list()
+
+	// Get all available covens
+	for(var/coven_name in master.covens)
+		var/datum/coven/temp_coven = master.covens[coven_name]
+		if(temp_coven.name != "Bloodheal")
+			coven_options[temp_coven.name] = temp_coven
+		qdel(temp_coven)
+
+	if(!length(coven_options))
+		to_chat(master, span_warning("No covens available for granting."))
+		return
+
+	var/granted_boon = input(master, "Grant a coven to the thrall", "Coven Selection") as null|anything in coven_options
+	if(!granted_boon)
+		return
+	var/datum/coven/chosen_coven = coven_options[granted_boon]
+	if(chosen_coven.max_level > 3)
+		chosen_coven.max_level = 3 //caps the level for thralls at 3
+
+	give_coven(chosen_coven)
+	mind.add_antag_datum(/datum/antagonist/ghoul)
+
+
+
