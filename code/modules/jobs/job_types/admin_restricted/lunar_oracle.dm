@@ -86,6 +86,7 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_LUNAR_ORDER,
 		TRAIT_BLINDFIGHTING,
+		TRAIT_SORCERER,
 	)
 
 	languages = list(
@@ -114,6 +115,10 @@
 		devotion.make_oracle()
 		devotion.grant_to(spawned)
 	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
+
+	spawned.adjust_technique_mastery_points(12)
+	spawned.adjust_form_mastery_points(20)
+	spawned.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
 /datum/outfit/oracle
 	name = JOB_ADMIN_ORACLE

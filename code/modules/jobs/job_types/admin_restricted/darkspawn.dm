@@ -81,6 +81,7 @@
 		TRAIT_NODECAPITATE,
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED,
+		TRAIT_SORCERER,
 	)
 
 	languages = list(
@@ -102,6 +103,10 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_acolyte()
 		devotion.grant_to(spawned)
+
+	spawned.adjust_technique_mastery_points(12)
+	spawned.adjust_form_mastery_points(20)
+	spawned.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
 	if(spawned.dna?.species)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
