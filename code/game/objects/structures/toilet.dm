@@ -15,7 +15,7 @@
 	if(.)
 		return
 
-	if(!atom_storage || !length(atom_storage.return_inv()))
+	if(!length(atom_storage?.return_inv(recursive = FALSE)))
 		to_chat(user, span_notice("The toilet is empty."))
 		return
 

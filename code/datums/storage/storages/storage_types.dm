@@ -102,7 +102,7 @@
 	if(uncomfy.shoes != parent)
 		return
 
-	if(!length(return_inv()))
+	if(!length(return_inv(recursive = FALSE)))
 		uncomfy.remove_stress(/datum/stress_event/fullshoe)
 
 /datum/storage/no_interface/boots/proc/equipped_stress(datum/source, mob/user, slot)
