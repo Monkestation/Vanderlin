@@ -19,6 +19,7 @@
 	advclass_cat_rolls = list(CTAG_ARCHIVIST = 20)
 	give_bank_account = 100
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	job_bitflag = BITFLAG_ROYALTY
 	allowed_patrons = list(/datum/patron/divine/noc)
@@ -38,6 +39,7 @@
 		/datum/language/dwarvish,
 		/datum/language/zalad,
 		/datum/language/celestial,
+		/datum/language/celestial_moon,
 		/datum/language/hellspeak,
 		/datum/language/halfling,
 		/datum/language/gronnic,
@@ -102,7 +104,7 @@
 
 /datum/outfit/archivist/chronicler
 	name = "Chronicler (Archivist)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/storage/keyring/archivist
 	beltr = /obj/item/book/granter/spellbook/expert
@@ -177,7 +179,7 @@
 /datum/outfit/archivist/dreamwatcher
 	name = "Dreamwatcher (Archivist)"
 	armor = /obj/item/clothing/shirt/robe/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/archivist
 	wrists = /obj/item/clothing/wrists/nocwrappings

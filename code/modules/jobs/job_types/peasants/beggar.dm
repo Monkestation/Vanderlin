@@ -32,6 +32,7 @@
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 	knows_the_town = TRUE
+	known_by_the_town = FALSE
 
 	allowed_races = RACES_PLAYER_ALL
 
@@ -43,10 +44,6 @@
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vagrant
-
-/datum/job/vagrant/New()
-	. = ..()
-	peopleknowme = list()
 
 /datum/job/vagrant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

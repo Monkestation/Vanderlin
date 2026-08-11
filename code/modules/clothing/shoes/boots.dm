@@ -1,8 +1,6 @@
 /obj/item/clothing/shoes/boots
-	name = "dark boots"
-	//dropshrink = 0.75
-	color = "#d5c2aa"
-	desc = "Boots made out of darker materials. Offers light protection against melee attacks."
+	name = "boots"
+	desc = "Boots."
 	gender = PLURAL
 	icon_state = "blackboots"
 	item_state = "blackboots"
@@ -10,6 +8,18 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	max_integrity = INTEGRITY_STANDARD
+	wetable = FALSE
+	abstract_type = /obj/item/clothing/shoes/boots
+
+/obj/item/clothing/shoes/boots/darkboots
+	name = "dark boots"
+	//dropshrink = 0.75
+	color = "#d5c2aa"
+	desc = "Boots made out of darker materials. Offers light protection against melee attacks."
+	icon_state = "blackboots"
+	item_state = "blackboots"
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
 	max_integrity = INTEGRITY_STANDARD
 	wetable = FALSE
 

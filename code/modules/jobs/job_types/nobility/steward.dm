@@ -34,6 +34,7 @@
 	outfit = /datum/outfit/steward
 	give_bank_account = 100
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	noble_income = 16
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	job_bitflag = BITFLAG_ROYALTY

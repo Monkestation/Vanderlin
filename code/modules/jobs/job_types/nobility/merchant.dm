@@ -34,6 +34,7 @@
 	outfit = /datum/outfit/merchant
 	give_bank_account = 200
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_MERCHANT_COMPANY)
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 	exp_requirements = list(

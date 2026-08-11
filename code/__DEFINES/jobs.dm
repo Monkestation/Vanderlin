@@ -13,6 +13,7 @@
 #define JOB_UNAVAILABLE_ACCOUNTAGE 12
 #define JOB_UNAVAILABLE_JOB_COOLDOWN 13
 #define JOB_UNAVAILABLE_RACE_BANNED 14
+#define JOB_UNAVAILABLE_WHITELIST 15
 
 /* Job datum job_flags */
 /// Whether the mob is announced on arrival.
@@ -77,6 +78,8 @@
 
 #define UNDEAD			(1<<10)
 #define GALLOWBAND		(1<<11)
+
+#define ADMIN_SPECIAL	(1<<12)
 
 #define JCOLOR_NOBLE "#9c40bf"
 #define JCOLOR_MERCHANT "#c2b449"
@@ -223,6 +226,9 @@
 #define JOB_GRAVETENDER "Gravetender"
 #define JOB_TEMPLAR "Templar"
 
+#define JOB_ADMIN_ORACLE "Lunar Oracle"
+#define JOB_ADMIN_ORACLE_GUARD "Lunar Order Sentinel"
+#define JOB_ADMIN_ORACLE_GUARD_HVY "Lunar Order Champion"
 
 #define JOB_TOWNER "Towner"
 #define JOB_SOILSON "Soilson"

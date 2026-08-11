@@ -50,6 +50,7 @@
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	can_be_apprentice = TRUE
 
@@ -70,7 +71,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
 	wrists = null
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/farmer
 	name = JOB_SOILSON
@@ -139,6 +140,7 @@
 	outfit = /datum/outfit/soilchild
 	give_bank_account = 10
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

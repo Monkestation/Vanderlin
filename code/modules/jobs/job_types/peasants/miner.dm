@@ -41,6 +41,7 @@
 	outfit = /datum/outfit/miner
 	give_bank_account = 6
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
 
@@ -76,7 +77,7 @@
 		return
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

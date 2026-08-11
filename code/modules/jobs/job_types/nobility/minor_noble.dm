@@ -44,6 +44,7 @@
 	spawn_positions = 2
 	bypass_lastclass = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
 	advclass_cat_rolls = list(CTAG_MINOR_NOBLE = 20)
@@ -87,6 +88,7 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	give_bank_account = 40
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	honorary = "Baronet"
 	honorary_f = "Baronetess"
 
@@ -130,6 +132,7 @@
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 300
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -176,6 +179,7 @@
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 20
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -223,6 +227,7 @@
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 60
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	honorary = "Lord Herald"
 	honorary_f = "Lady Herald"
 
@@ -261,6 +266,7 @@
 	category_tags = list(CTAG_MINOR_NOBLE)
 	give_bank_account = 100
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -273,7 +279,7 @@
 
 /datum/outfit/minornoble/vassal
 	name = "Vassal (noble)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	shirt = /obj/item/clothing/shirt/tunic/colored/random
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
 	belt = /obj/item/storage/belt/leather
@@ -320,7 +326,7 @@
 
 /datum/outfit/noble
 	name = "Noble Base"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather

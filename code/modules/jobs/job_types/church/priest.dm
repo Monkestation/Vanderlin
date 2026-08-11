@@ -68,6 +68,7 @@
 	allowed_patrons = list(/datum/patron/divine/astrata)
 
 	outfit = /datum/outfit/priest
+	give_bank_account = 30
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/templar,
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/acolyte,

@@ -49,6 +49,9 @@
 		EXP_TYPE_CHURCH = 600
 	)
 
+	knows_the_town = TRUE
+	known_by_the_town = FALSE
+
 	cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sunlord
@@ -70,10 +73,6 @@
 		TRAIT_NOMOOD,
 		TRAIT_CRITICAL_RESISTANCE,
 	)
-
-/datum/job/sunlord/New()
-	. = ..()
-	peopleknowme = list()
 
 /datum/job/sunlord/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

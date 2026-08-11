@@ -93,3 +93,6 @@
   - rscadd: Added more keep area defines, mainly for replacing instances of 'basement'.
   - rscadd: Added an open sky area for use in place of generic roof area where suitable.
   - bugfix: Fixed a runtime in crafting.
+2026-08-11:
+  CheffieGithub:
+  - bugfix: Fixed clan interface not rendering right

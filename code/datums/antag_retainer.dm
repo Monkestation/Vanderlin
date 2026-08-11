@@ -18,7 +18,7 @@
 	///vampire stuff
 	var/mob/living/carbon/human/vampire_lord
 	var/king_submitted = FALSE
-	var/ascended = FALSE
+	var/vlord_ascended = FALSE
 
 
 	///delf stuff

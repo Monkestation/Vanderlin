@@ -55,7 +55,7 @@
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/weapon/knife/cleaver/combat
 	beltr = /obj/item/storage/belt/pouch/coins/mid
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/clothing/face/shepherd/rag = 1
