@@ -1,4 +1,4 @@
-/obj/item/clothing/shoes/boots/darkboots
+/obj/item/clothing/shoes/boots
 	name = "boots"
 	desc = "Boots."
 	gender = PLURAL
