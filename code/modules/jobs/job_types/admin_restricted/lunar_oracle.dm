@@ -130,7 +130,7 @@
 	beltr = /obj/item/storage/keyring/oracle
 	armor = /obj/item/clothing/shirt/robe/noc
 	backl = /obj/item/storage/backpack/satchel
-	cloak = /obj/item/clothing/cloak/raincloak/colored/blue
+	cloak = /obj/item/clothing/cloak/raincloak/colored/chalk
 	backpack_contents = list(
 		/obj/item/needle = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
