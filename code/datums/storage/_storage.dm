@@ -27,6 +27,12 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	/// List of our stored items and coordinates to said items
 	VAR_PRIVATE/list/obj/item/item_coordinates
 
+	/// Type of boxes to use, for appearances
+	var/boxes_type = /atom/movable/screen/storage
+
+	/// Type of closer to use, for appearances
+	var/closer_type = /atom/movable/screen/close
+
 	/// storage display object
 	VAR_PRIVATE/atom/movable/screen/storage/boxes
 	/// close button object
@@ -116,6 +122,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 
 	/// maximum amount of columns a storage object can have
 	var/screen_max_columns = 3
+	/// maximum amount of rows a storage object can have
 	var/screen_max_rows = 8
 	/// pixel location of the boxes and close button
 	var/screen_pixel_x = 5
@@ -131,6 +138,13 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	/// Don't set by default, change conditionally for grid storage
 	var/display_contents = TRUE
 
+	/// If TRUE hovering the storage shows a preview of the space the item will take
+	var/does_hover = TRUE
+	/// Override for inserted grid_width
+	var/grid_width_override = null
+	/// Override for inserted grid_height
+	var/grid_height_override = null
+
 /datum/storage/New(
 	atom/parent,
 	screen_max_rows = src.screen_max_rows,
@@ -140,11 +154,11 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	max_total_storage = src.max_total_storage,
 )
 
-	boxes = new(null, src)
-	closer = new(null, src)
+	boxes = new boxes_type(null, src)
+	closer = new closer_type(null, src)
 
 	if(!istype(parent))
-		stack_trace("Storage datum ([type]) created without a [isnull(parent) ? "null parent" : "invalid parent ([parent.type])"]!")
+		stack_trace("Storage datum ([type]) created with a [isnull(parent) ? "null parent" : "invalid parent ([parent.type])"]!")
 		qdel(src)
 		return
 
@@ -265,7 +279,19 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 
 	arrived.item_flags |= IN_STORAGE
 
-	refresh_views()
+	// Item has been forced moved inside
+	if(!(arrived in item_coordinates))
+		var/coordinates = get_valid_coordinates(arrived)
+		if(!add_item_to_grid(arrived, coordinates))
+			var/atom/loc = real_location.drop_location()
+			if(!loc)
+				stack_trace("forced moved [arrived] did not have enough space in storage on [parent] at [AREACOORD(parent)]! This could delete organs!")
+				qdel(arrived)
+			else
+				arrived.forceMove(real_location.drop_location())
+			return
+
+	addtimer(CALLBACK(src, PROC_REF(refresh_views)), 1)
 	arrived.on_enter_storage(src)
 	RegisterSignal(arrived, COMSIG_MOUSEDROPPED_ONTO, PROC_REF(mousedrop_receive))
 	SEND_SIGNAL(arrived, COMSIG_ITEM_STORED, src)
@@ -400,7 +426,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * Should be used for opening, insertion and removal if a user is present.
  *
  * Arguments
- * * mob/user - the guy trying to interact
+ * * mob/user - The guy trying to interact
+ * * messages - If the user gets messages for why they failed
  */
 /datum/storage/proc/can_interact(mob/user, messages = TRUE)
 	var/violated_flags = check_equipped_access(user)
@@ -421,6 +448,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  *
  * Arguments
  * * obj/item/to_insert - the item we're checking
+ * * mob/user - optional mob to give feedback to
  * * messages - if TRUE, will print out a message if the item is not valid
  * * force - bypass locked storage up to a certain level. See [code/__DEFINES/storage.dm]
  * * modifiers - click params, solely to check for grid storage restrictions
@@ -463,7 +491,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			user.balloon_alert(user, "no space!")
 		return FALSE
 
-	if(max_slots && length(real_location.contents) >= max_slots)
+	if(max_slots && length(return_inv(recursive = FALSE)) >= max_slots)
 		if(messages && user && !silent_for_user)
 			user.balloon_alert(user, "no space!")
 		return FALSE
@@ -516,6 +544,18 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	return TRUE
 
+/**
+ * Checks if an item or any item is capable of being removed from storage.
+ * Mainly for overrides and mob access.
+ *
+ * Arguments
+ * * obj/item/to_insert - optional, item to check
+ * * mob/user - optional, mob to give feedback to
+ * * messages - if TRUE, will print out a message if the item is not valid
+ */
+/datum/storage/proc/can_remove(obj/item/to_remove, mob/user, messages = TRUE)
+	return can_interact(user, messages)
+
 /// Check if access is possible based on equipped_access_flags
 /// Returns flag that is violated if any, for feedback
 /datum/storage/proc/check_equipped_access(mob/user)
@@ -555,7 +595,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /// Returns a count of how many items held due to exception_hold we have
 /datum/storage/proc/get_exception_count()
 	var/count = 0
-	for(var/obj/item/thing in real_location)
+	for(var/obj/item/thing in return_inv(recursive = FALSE))
 		if(thing.w_class > max_specific_storage && is_type_in_typecache(thing, exception_hold))
 			count += 1
 	return count
@@ -563,7 +603,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /// Returns a sum of all of our content's weight classes
 /datum/storage/proc/get_total_weight()
 	var/total_weight = 0
-	for(var/obj/item/thing in real_location)
+	for(var/obj/item/thing in return_inv(recursive = FALSE))
 		total_weight += thing.w_class
 	return total_weight
 
@@ -575,7 +615,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /// Returns first set of valid coordinates for grid storage or none
 /datum/storage/proc/get_valid_coordinates(obj/item/to_insert)
-	for(var/current_y in 1 to screen_max_rows)
+	for(var/current_y in screen_max_rows to 1 step -1)
 		for(var/current_x in 1 to screen_max_columns)
 			var/test_coordinates = "[current_x - 1],[current_y - 1]"
 
@@ -650,6 +690,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(numerical_stacking)
 		return
 
+	// This isn't return_inv(recursive = FALSE) as it's relatively safe to do
 	var/drop_index = real_location.contents.Find(dropped_onto)
 	real_location.contents -= target
 
@@ -679,16 +720,16 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(thing.type in rejections) // To limit bag spamming: any given type only complains once
 			continue
 		if(!attempt_insert(thing, user, override = TRUE)) // Note can_be_inserted still makes noise when the answer is no
-			if(real_location.contents.len >= max_slots)
+			if(length(return_inv(recursive = FALSE)) >= max_slots)
 				break
 			rejections += thing.type // therefore full bags are still a little spammy
 			continue
 
 		if (TICK_CHECK)
-			progress.update(progress.goal - things.len)
+			progress.update(progress.goal - length(things))
 			return TRUE
 
-	progress.update(progress.goal - things.len)
+	progress.update(progress.goal - length(things))
 	return FALSE
 
 /**
@@ -720,7 +761,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /**
  * Attempts to remove an item from the storage
- * Ignores removal do_afters. Only use this if you're doing it as part of a dumping action
+ * Ignores removal do_afters and user access checks. Only use this if you're doing it as part of a dumping action
  *
  * Arguments
  * * obj/item/thing - the object we're removing
@@ -733,7 +774,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(istype(thing) && ismob(parent.loc))
 		var/mob/mob_parent = parent.loc
-		thing.dropped(mob_parent, /*silent = */TRUE)
+		thing.dropped(mob_parent, silent = TRUE)
 
 	if(remove_to_loc)
 		reset_item(thing)
@@ -751,7 +792,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(animated)
 			animate_parent()
 
-		refresh_views()
 		parent.update_appearance()
 
 	SEND_SIGNAL(parent, COMSIG_ATOM_REMOVED_ITEM, thing, remove_to_loc, silent)
@@ -765,16 +805,16 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * atom/drop_loc - where we're placing the item
  * * update_storage - should we update the parent to show visual effects
  */
-/datum/storage/proc/remove_all(atom/drop_loc = parent.drop_location(), update_storage = TRUE)
-	for(var/obj/item/thing in real_location)
+/datum/storage/proc/remove_all(atom/drop_loc = real_location.drop_location(), update_storage = TRUE)
+	for(var/obj/item/thing in return_inv(recursive = FALSE))
 		if(!attempt_remove(thing, drop_loc, silent = TRUE))
 			continue
 		thing.pixel_x = thing.base_pixel_x + rand(-8, 8)
 		thing.pixel_y = thing.base_pixel_y + rand(-8, 8)
 
 /**
- * Allows a mob to attempt to remove a single item from the storage
- * Allows for hooks into things like removal delays
+ * Allows a mob to attempt to remove a single item from the storage.
+ * Allows for hooks into things like removal delays.
  *
  * Arguments
  * * mob/removing - the mob doing the removing
@@ -782,13 +822,13 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * atom/remove_to_loc - where we're placing the item
  * * silent - if TRUE, we won't play any exit sounds
  */
-/datum/storage/proc/remove_single(mob/removing, obj/item/thing, atom/remove_to_loc, silent = FALSE)
-	if(!can_interact(removing, messages = !silent))
+/datum/storage/proc/remove_single(mob/removing, obj/item/thing, atom/remove_to_loc = real_location.drop_location(), silent = FALSE)
+	if(!can_remove(thing, removing, messages = !silent))
 		return FALSE
 	return attempt_remove(thing, remove_to_loc, silent)
 
 /**
- * Wrapper for remove_single but for a random item in storage
+ * Allows a mob to pull out a an item at random from storage.
  *
  * Arguments
  * * mob/removing - the mob doing the removing
@@ -796,11 +836,11 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * atom/remove_to_loc - where we're placing the item
  * * silent - if TRUE, we won't play any exit sounds
  */
-/datum/storage/proc/remove_single_random(mob/removing, atom/remove_to_loc, silent = FALSE)
-	if(!can_interact(removing, messages = !silent))
+/datum/storage/proc/remove_single_random(mob/removing, atom/remove_to_loc = real_location.drop_location(), silent = FALSE)
+	if(!can_remove(null, removing, messages = !silent))
 		return FALSE
 
-	var/list/obj/item/goodies = real_location.contents
+	var/list/obj/item/goodies = return_inv(recursive = FALSE)
 	if(!length(goodies))
 		if(!silent)
 			parent.balloon_alert(removing, "nothing to take!")
@@ -810,7 +850,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!istype(to_remove))
 		return FALSE
 
-	if(!remove_single(removing, to_remove))
+	if(!attempt_remove(removing, to_remove, silent = silent))
 		return FALSE
 
 	INVOKE_ASYNC(src, PROC_REF(put_in_hands_async), removing, to_remove) // Can be called from a signal
@@ -839,8 +879,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(isnull(user) || !user.CanReach(destination) || !user.CanReach(parent))
 			return FALSE
 
-	var/list/taking = typecache_filter_list(real_location.contents, typecacheof(type))
-	if(taking.len > amount)
+	var/list/taking = typecache_filter_list(return_inv(recursive = FALSE), typecacheof(type))
+	if(length(taking) > amount)
 		taking.len = amount
 
 	if(inserted) //duplicated code for performance, don't bother checking retval/checking for list every item.
@@ -854,16 +894,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	return TRUE
 
 /// Signal handler for remove_all()
-/datum/storage/proc/mass_empty(datum/source, atom/location, force)
+/datum/storage/proc/mass_empty(datum/source, mob/living/user, list/modifers)
 	SIGNAL_HANDLER
 
-	if(!allow_quick_empty && !force)
+	if(!allow_quick_empty)
 		return
 
-	if(!force && !can_interact(source))
-		return
-
-	remove_all(get_turf(location))
+	INVOKE_ASYNC(src, PROC_REF(dump_content_at), get_turf(user), null, user)
+	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /**
  * Recursive proc to get absolutely EVERYTHING inside a storage item, including the contents of inner items.
@@ -872,9 +910,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * recursive - whether or not we're checking inside of inner items
  */
 /datum/storage/proc/return_inv(recursive = TRUE)
+	if(!recursive)
+		return real_location.contents
+
 	var/list/ret = list()
 
-	for(var/atom/found_thing as anything in real_location)
+	for(var/atom/found_thing as anything in return_inv(recursive = FALSE))
 		ret |= found_thing
 		if(recursive && found_thing.atom_storage)
 			ret |= found_thing.atom_storage.return_inv(recursive = TRUE)
@@ -1012,6 +1053,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		user.balloon_alert(user, "closed!")
 		return
 
+	if(!can_remove(null, user, TRUE))
+		return
+
 	if(!user.CanReach(parent) || !user.CanReach(dest_object))
 		return
 
@@ -1025,7 +1069,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		if(do_rustle && rustle_sound)
 			playsound(parent, rustle_sound, 50, TRUE, -5)
 
-		for(var/obj/item/to_dump in real_location)
+		for(var/obj/item/to_dump in return_inv(recursive = FALSE))
 			dest_object.atom_storage.attempt_insert(to_dump, user)
 		parent.update_appearance()
 		SEND_SIGNAL(src, COMSIG_STORAGE_DUMP_POST_TRANSFER, dest_object, user)
@@ -1062,10 +1106,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /// Called directly from the attack chain if [insert_on_attack] is TRUE.
 /// Handles inserting an item into the storage when clicked.
 /datum/storage/proc/item_interact_insert(mob/living/user, obj/item/thing, list/modifiers)
-	if(attempt_insert(thing, user))
-		refresh_views() // WHY DOES IT NEED IT???
-		return TRUE
-	return FALSE
+	return attempt_insert(thing, user)
 
 /// Signal handler for whenever we're attacked by a mob.
 /datum/storage/proc/on_attack(datum/source, mob/user)
@@ -1189,13 +1230,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 
 	if(to_show.active_storage != src && (to_show.stat == CONSCIOUS))
-		for(var/obj/item/thing in real_location)
+		for(var/obj/item/thing in return_inv(recursive = FALSE))
 			if(thing.on_found(to_show))
 				to_show.active_storage.hide_contents(to_show)
+				return FALSE
 
-	if(to_show.active_storage)
-		to_show.active_storage.hide_contents(to_show)
-
+	to_show.active_storage?.hide_contents(to_show)
 	to_show.active_storage = src
 
 	if(ismovable(real_location))
@@ -1208,7 +1248,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	to_show.client.screen |= boxes
 	to_show.client.screen |= closer
-	to_show.client.screen |= real_location.contents
+	to_show.client.screen += return_inv(recursive = FALSE)
 
 /**
  * Hide our storage from a mob.
@@ -1230,7 +1270,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(to_show.client)
 		to_show.client.screen -= boxes
 		to_show.client.screen -= closer
-		to_show.client.screen -= real_location.contents
+		to_show.client.screen -= return_inv(recursive = FALSE)
 
 /**
  * Toggles the collectmode of our storage.
@@ -1269,7 +1309,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /datum/storage/proc/process_numerical_display()
 	var/list/toreturn = list()
 
-	for(var/obj/item/thing in real_location)
+	for(var/obj/item/thing in return_inv(recursive = FALSE))
 		var/total_amnt = 1
 
 		if(istype(thing, /obj/item/natural/bundle))
@@ -1316,12 +1356,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 			var/enchanted = (stored_item.has_enchantment(/datum/enchantment/dimensional_shrink) || (stored_item.item_flags & SHRINK_ENCHANT))
 
-			var/used_gridwidth = stored_item.grid_width
-			if(enchanted)
+			var/used_gridwidth = grid_width_override || stored_item.grid_width
+			if(!grid_width_override && enchanted)
 				used_gridwidth = max(32, used_gridwidth - 32)
 
-			var/used_gridheight = stored_item.grid_height
-			if(enchanted)
+			var/used_gridheight = grid_height_override || stored_item.grid_height
+			if(!grid_height_override && enchanted)
 				used_gridheight = max(32, used_gridheight - 32)
 
 			stored_item.mouse_opacity = MOUSE_OPACITY_OPAQUE
@@ -1346,18 +1386,18 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			stored_item.plane = ABOVE_HUD_PLANE
 			stored_item.maptext = MAPTEXT("<font color='white'>[(numbered_display.number > 1)? "[numbered_display.number]" : ""]</font>")
 	else
-		for(var/obj/item/stored_item in real_location)
+		for(var/obj/item/stored_item in return_inv(recursive = FALSE))
 			if(QDELETED(stored_item))
 				continue
 
 			var/enchanted = (stored_item.has_enchantment(/datum/enchantment/dimensional_shrink) || (stored_item.item_flags & SHRINK_ENCHANT))
 
-			var/used_gridwidth = stored_item.grid_width
-			if(enchanted)
+			var/used_gridwidth = grid_width_override || stored_item.grid_width
+			if(!grid_width_override && enchanted)
 				used_gridwidth = max(32, used_gridwidth - 32)
 
-			var/used_gridheight = stored_item.grid_height
-			if(enchanted)
+			var/used_gridheight = grid_height_override || stored_item.grid_height
+			if(!grid_height_override && enchanted)
 				used_gridheight = max(32, used_gridheight - 32)
 
 			stored_item.mouse_opacity = MOUSE_OPACITY_OPAQUE
@@ -1482,12 +1522,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	var/enchanted = to_store.has_enchantment(/datum/enchantment/dimensional_shrink)
 
-	var/used_grid_width = to_store.grid_width
-	if(enchanted)
+	var/used_grid_width = grid_width_override || to_store.grid_width
+	if(!grid_width_override && enchanted)
 		used_grid_width = max(32, used_grid_width - 32)
 
-	var/used_grid_height = to_store.grid_height
-	if(enchanted)
+	var/used_grid_height = grid_height_override || to_store.grid_height
+	if(!grid_height_override && enchanted)
 		used_grid_height = max(32, used_grid_height - 32)
 
 	var/number_x = used_grid_width / 32
@@ -1589,12 +1629,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	var/enchanted = to_store.has_enchantment(/datum/enchantment/dimensional_shrink)
 
-	var/used_grid_width = to_store.grid_width
-	if(enchanted)
+	var/used_grid_width = grid_width_override || to_store.grid_width
+	if(!grid_width_override && enchanted)
 		used_grid_width = max(32, used_grid_width - 32)
 
-	var/used_grid_height = to_store.grid_height
-	if(enchanted)
+	var/used_grid_height = grid_height_override || to_store.grid_height
+	if(!grid_height_override && enchanted)
 		used_grid_height = max(32, used_grid_height - 32)
 
 	var/number_x = used_grid_width / 32

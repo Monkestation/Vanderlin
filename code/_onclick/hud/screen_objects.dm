@@ -888,16 +888,24 @@
 	. = ..()
 	hovering = new(null, hud_owner)
 
+/atom/movable/screen/storage/organ
+	icon = 'icons/hud/screen_organ.dmi'
+	icon_state = "organ_block"
+
+/atom/movable/screen/storage/organ/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	add_overlay(mutable_appearance(icon, "[icon_state]_overlay", layer = layer + 1, plane = ABOVE_HUD_PLANE))
+
 /atom/movable/screen/storage/Destroy()
 	QDEL_NULL(hovering)
 	return ..()
 
 /atom/movable/screen/storage/Click(location, control, params)
-	var/datum/storage/active = usr.active_storage
-	if(!active)
+	if(!isliving(usr) || usr.incapacitated(IGNORE_GRAB))
 		return
 
-	if(!isliving(usr) || usr.incapacitated(IGNORE_GRAB))
+	var/datum/storage/active = usr.active_storage
+	if(!active)
 		return
 
 	var/obj/item/to_put = usr.get_active_held_item()
@@ -948,7 +956,7 @@
 	if(!usr.client)
 		return
 
-	if(!usr.active_storage)
+	if(!usr.active_storage?.does_hover)
 		return
 
 	usr.client.screen -= hovering
@@ -1008,6 +1016,10 @@
 	plane = ABOVE_HUD_PLANE
 	icon = 'icons/hud/storage.dmi'
 	icon_state = "close"
+
+/atom/movable/screen/close/organ
+	icon = 'icons/hud/screen_organ.dmi'
+	icon_state = "organ_close"
 
 /atom/movable/screen/close/Click(location, control, params)
 	. = ..()
