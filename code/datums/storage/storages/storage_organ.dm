@@ -19,6 +19,8 @@
 
 	rustle_sound = list('sound/gore/organ1.ogg', 'sound/gore/organ2.ogg')
 
+	var/static/mutable_appearance/background_icon
+
 /datum/storage/organ/mouth
 	screen_max_columns = 1
 	screen_max_rows = 3
@@ -121,4 +123,6 @@
 
 // We force items to act like 1 x 1 grid objects so we only need a single overlay
 /datum/storage/organ/get_bound_underlay(grid_width, grid_height, enchanted)
-	return mutable_appearance(boxes.icon, "organ_block_red", layer = boxes.layer + 0.01, plane = boxes.plane)
+	if(!background_icon)
+		background_icon = mutable_appearance(boxes.icon, "organ_block_red", layer = boxes.layer + 0.01, plane = boxes.plane)
+	return background_icon
