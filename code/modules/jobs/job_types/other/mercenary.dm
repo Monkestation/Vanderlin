@@ -44,9 +44,8 @@
 	if(tgui_alert(spawned, "Do you want to join the available mercenaries list for the mercenary statue?", "MERCENARY", DEFAULT_INPUT_CHOICES, 30 SECONDS) == CHOICE_YES)
 		GLOB.available_mercenaries += spawned
 		to_chat(spawned, "<span class='notice'>You have been added to the available mercenaries list.</span>")
-		var/obj/item/servant_bell/mercenary/mercring = new /obj/item/servant_bell/mercenary(spawned.loc)
+		var/obj/item/mercenary_ring/mercring = new /obj/item/mercenary_ring(spawned.loc)
 		spawned.put_in_hands(mercring)
-		mercring.link_mob(spawned)
 		mercring.add_servant(spawned)
 		if(spawned.mercdesc && (spawned.mercdesc != ""))
 			return

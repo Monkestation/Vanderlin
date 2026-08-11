@@ -2086,6 +2086,7 @@
 #include "code\game\objects\items\locks.dm"
 #include "code\game\objects\items\mageitems.dm"
 #include "code\game\objects\items\magic.dm"
+#include "code\game\objects\items\mercenary_ring.dm"
 #include "code\game\objects\items\natural.dm"
 #include "code\game\objects\items\needle.dm"
 #include "code\game\objects\items\ore.dm"

@@ -19,7 +19,7 @@
 /obj/structure/mercstatue/proc/use(mob/living/carbon/human/user)
 	if(!user)
 		return
-	var/obj/item/servant_bell/mercenary/mercring
+	var/obj/item/mercenary_ring/mercring
 
 	if(ishuman(user) && user.mind && istype(user.mind.assigned_role, /datum/job/advclass/mercenary))
 		if(tgui_alert(user, "Do you want to change your mercenary description", "MERCENARY", DEFAULT_INPUT_CHOICES, 20 SECONDS) == CHOICE_YES)
@@ -33,7 +33,7 @@
 	if(user in GLOB.available_mercenaries)
 		if(tgui_alert(user, "Do you want to unregister as an available mercenary for the mercenary statue?", "MERCENARY", DEFAULT_INPUT_CHOICES, 20 SECONDS) == CHOICE_YES)
 			GLOB.available_mercenaries -= user
-			for(var/obj/item/servant_bell/mercenary/ring in world)
+			for(var/obj/item/mercenary_ring/ring in world)
 				if(ring.mob_ref)
 					var/mob/living/M = ring.mob_ref.resolve()
 					if(M == user)
@@ -46,9 +46,8 @@
 	if(ishuman(user) && user.mind && istype(user.mind.assigned_role, /datum/job/advclass/mercenary))
 		if(tgui_alert(user, "Do you want to register as an available mercenary for the mercenary statue?", "MERCENARY", DEFAULT_INPUT_CHOICES, 20 SECONDS) == CHOICE_YES)
 			GLOB.available_mercenaries += user
-			mercring = new /obj/item/servant_bell/mercenary(src)
+			mercring = new /obj/item/mercenary_ring(src)
 			mercring.add_servant(user)
-			mercring.link_mob(user)
 			user.put_in_hands(mercring)
 			if(user.mercdesc && (user.mercdesc != ""))
 				return
@@ -56,7 +55,7 @@
 			return
 
 	if(length(GLOB.available_mercenaries))
-		var/mob/selected_merc = tgui_input_list(user, "Choose an available mercenary", "Mercenaries", GLOB.available_mercenaries - user)
+		var/mob/selected_merc = tgui_input_list(user, "Choose an available mercenary", "Mercenaries", GLOB.available_mercenaries)
 
 		if(selected_merc)
 			var/cooldown_key = "[user.real_name]_[selected_merc.real_name]"
