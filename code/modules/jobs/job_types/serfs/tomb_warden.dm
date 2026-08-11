@@ -32,7 +32,7 @@
 /datum/job/tomb_warden
 	title = JOB_TOMB_WARDEN
 	department_flag = SERFS
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1
 	spawn_positions = 1

@@ -49,7 +49,7 @@
 	Guide and educate the faithful. \
 	You are the light in the night, watcher of dreams."
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 
 	cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED

@@ -1,7 +1,7 @@
 /datum/job/orthodoxist
 	title = JOB_SACRESTANTS
 	department_flag = INQUISITION
-	faction = "Station"
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	total_positions = 2 // TWO GOONS!!
 	spawn_positions = 2
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF)

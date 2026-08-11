@@ -25,7 +25,7 @@
 	allowed_patrons = list(/datum/patron/inhumen/zizo)
 	spell_points = 7
 	languages = list(/datum/language/undead)
-	faction = FACTION_CABAL
+	factions = list(FACTION_CABAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/necromancer
 

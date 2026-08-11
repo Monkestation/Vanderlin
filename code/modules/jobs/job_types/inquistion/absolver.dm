@@ -19,7 +19,7 @@
 /datum/job/absolver
 	title = JOB_ABSOLVER
 	department_flag = INQUISITION
-	faction = "Station"
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1 // THE ONE.
 	spawn_positions = 1

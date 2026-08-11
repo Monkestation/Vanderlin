@@ -26,7 +26,7 @@
 	tutorial = "Disillusioned with the Church of the Ten for whatever reason or adopted as a child, you have yet to prove yourself in the hunt. You live and work with the Gallowband. Keep them fed and their gear maintained as you learn of the Osslandic way. One dae, you will take your place in the cycle, too."
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_FORSUPP

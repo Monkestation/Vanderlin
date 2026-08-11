@@ -26,7 +26,7 @@
 	department_flag = OUTSIDERS
 	display_order = JDO_SUNLORD
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS | JOB_SHOW_IN_ACTOR_LIST)
-	faction = FACTION_RATS
+	factions = list(FACTION_RATS)
 	total_positions = 0
 	spawn_positions = 0
 	bypass_lastclass = TRUE

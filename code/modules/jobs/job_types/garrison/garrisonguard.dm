@@ -6,7 +6,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CITYWATCHMEN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 8
 	spawn_positions = 8
 	bypass_lastclass = TRUE

@@ -2,7 +2,7 @@
 	title = JOB_PRAFEKT
 	f_title = "Frau Prafekt"
 	department_flag = INQUISITION
-	faction = "Station"
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
