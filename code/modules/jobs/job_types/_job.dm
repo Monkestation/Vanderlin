@@ -254,6 +254,8 @@
 
 /datum/job/New()
 	. = ..()
+	if(!islist(faction))
+		faction = list(faction)
 	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)
 			peopleiknow += X
