@@ -12,6 +12,7 @@
 
 /datum/job/admin/New()
 	. = ..()
+	reset_whitelists()
 	RegisterSignal(SSdcs, COMSIG_GLOB_ADMINS_RELOADED, PROC_REF(reset_whitelists))
 
 /datum/job/admin/proc/reset_whitelists()
