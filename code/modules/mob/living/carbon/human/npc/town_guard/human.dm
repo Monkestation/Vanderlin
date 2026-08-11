@@ -35,7 +35,7 @@
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
-	equipOutfit(new /datum/outfit/npc)
+	equipOutfit(new /datum/outfit/npc/town_guard)
 
 /mob/living/carbon/human/species/human/northern/guardsman_npc/skilled
 	dodgetime = 40
@@ -52,7 +52,7 @@
 	..()
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 2
-	equipOutfit(new /datum/outfit/npc)
+	equipOutfit(new /datum/outfit/npc/town_guard)
 
 /mob/living/carbon/human/species/human/northern/guardsman_npc/very_skilled
 	dodgetime = 30
