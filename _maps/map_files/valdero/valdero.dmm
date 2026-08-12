@@ -417,7 +417,7 @@
 /area/indoors/town)
 "bN" = (
 /obj/structure/window/solid,
-/turf/closed/wall/mineral/stone,
+/turf/closed/basic,
 /area/indoors/town/smithy)
 "bO" = (
 /turf/open/floor/tile/masonic/full,
@@ -9623,10 +9623,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/halls/w)
-"Or" = (
-/turf/open/openspace,
-/turf/closed/wall/mineral/wooddark/vertical,
-/area/indoors/town)
 "Os" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
@@ -9983,7 +9979,6 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
-/turf/open/floor/wood,
 /turf/open/floor/tile/masonic{
 	dir = 8
 	},
@@ -113154,7 +113149,7 @@ QQ
 QQ
 QQ
 QQ
-Or
+ul
 Xn
 Xn
 MC
@@ -113306,7 +113301,7 @@ QQ
 QQ
 QQ
 QQ
-Or
+ul
 Xn
 Xn
 ul
@@ -113458,7 +113453,7 @@ QQ
 QQ
 QQ
 QQ
-Or
+ul
 zL
 zL
 ul
@@ -113610,7 +113605,7 @@ QQ
 QQ
 QQ
 QQ
-Or
+ul
 HR
 HR
 nt
