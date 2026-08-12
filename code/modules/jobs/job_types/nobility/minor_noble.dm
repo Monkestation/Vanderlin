@@ -39,7 +39,7 @@
 	display_order = JDO_MINOR_NOBLE
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
@@ -60,6 +60,7 @@
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/minor_noble
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/former_commander
 	raw_attribute_list = list(
@@ -191,6 +192,23 @@
 		TRAIT_NOBLE_POWER
 	)
 
+/datum/job/advclass/minornoble/magickal_graduate/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/apprentice/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/apprentice/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/apprentice/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/apprentice/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/apprentice/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/apprentice/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/apprentice/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/apprentice/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/apprentice/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
+
 /datum/outfit/minornoble/magickal_graduate
 	name = "Magical Graduate (noble)"
 	head = /obj/item/clothing/head/wizhat/gen
@@ -199,7 +217,6 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
-		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1
 	)
 

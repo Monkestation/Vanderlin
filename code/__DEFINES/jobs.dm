@@ -64,6 +64,7 @@
 #define FACTION_MATTHIOS	"Matthios"
 #define FACTION_VIKINGS     "Vikings"
 #define FACTION_GALLOWBAND  "Gallowband"
+#define FACTION_INQUISITION	"Inquisition"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)

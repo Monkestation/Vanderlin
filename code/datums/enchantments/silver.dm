@@ -24,6 +24,8 @@
 /datum/enchantment/silver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
 		return UNAFFECTED
+	if(HAS_TRAIT(target, TRAIT_SILVER_IMMUNE))
+		return UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
 	if(istype(vamp_datum, /datum/antagonist/vampire/lord))

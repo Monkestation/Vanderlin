@@ -33,7 +33,7 @@
 	Though most likely you will end up as one of the many countless Physickers roaming Faience."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	display_order = JDO_CLINICAPPRENTICE
 	total_positions = 4
 	spawn_positions = 4

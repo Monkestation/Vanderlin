@@ -7,7 +7,7 @@
 	Learn from the garrison and train hard... maybe one dae you will be honored with knighthood."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_SQUIRE
@@ -52,6 +52,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/squire/lancer
 	raw_attribute_list = list(

@@ -6,7 +6,7 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK)
 	display_order = JDO_ORPHAN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	allowed_ages = list(AGE_CHILD)
 	total_positions = 12
 	spawn_positions = 12
@@ -32,6 +32,9 @@
 
 /datum/outfit/orphan
 	name = JOB_ORPHAN
+
+/datum/job/advclass/orphanadv
+	factions = list(FACTION_TOWN)
 
 // BOOKISH BRAT - THE COURTLY CHILD
 

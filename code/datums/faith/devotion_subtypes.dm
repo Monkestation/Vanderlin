@@ -214,7 +214,7 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/undirected/touch/orison, /datum/action/cooldown/spell/aoe/snuff),
 		CLERIC_T1 = /datum/action/cooldown/spell/projectile/profane,
-		CLERIC_T2 = /datum/action/cooldown/spell/conjure/raise_lesser_undead,
+		CLERIC_T2 = /datum/action/cooldown/spell/conjure_summon/raise_lesser_undead,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/rituos,
 	)
 	traits = list(TRAIT_DEATHSIGHT)

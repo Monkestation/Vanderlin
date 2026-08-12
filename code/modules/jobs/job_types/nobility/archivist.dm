@@ -7,7 +7,7 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = 19 //lol?
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -58,6 +58,9 @@
 		TRAIT_VIRGIN,
 	)
 
+/datum/job/advclass/archivist
+	factions = list(FACTION_TOWN)
+
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
@@ -93,7 +96,6 @@
 	category_tags = list(CTAG_ARCHIVIST)
 	magic_user = TRUE
 	spells = list(
-		/datum/action/cooldown/spell/undirected/learn,
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
 		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment,
 		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment/scroll,
@@ -102,12 +104,27 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/chronicler
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/chronicler/old
 
+/datum/job/advclass/archivist/chronicler/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/expert/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/expert/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/expert/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/expert/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/expert/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/expert/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/expert/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/expert/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/expert/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
+
 /datum/outfit/archivist/chronicler
 	name = "Chronicler (Archivist)"
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/storage/keyring/archivist
-	beltr = /obj/item/book/granter/spellbook/expert
 	backl = /obj/item/storage/backpack/satchel
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backpack_contents = list(

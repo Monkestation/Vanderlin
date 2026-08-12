@@ -5,13 +5,12 @@
 	You're just some average poor bastard who thinks they'll be something someday."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_FOREIGNERS
+	factions = list(FACTION_FOREIGNERS)
 	total_positions = 0
 	spawn_positions = 0
 	banned_leprosy = FALSE
 	bypass_lastclass = TRUE
 
-	advclass_cat_rolls = list(CTAG_TOWNER = 20)
 	allowed_races = RACES_PLAYER_ALL
 	can_be_apprentice = TRUE
 

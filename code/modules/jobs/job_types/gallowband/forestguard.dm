@@ -4,7 +4,7 @@
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_FORGUARD
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
@@ -85,6 +85,7 @@
 /datum/job/advclass/forestguard
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	banned_patrons = list()
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/forestguard/infantry
 	raw_attribute_list = list(

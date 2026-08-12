@@ -67,7 +67,7 @@
 			/obj/item/perfume/random,
 		),
 		/area/indoors/town/keep/magician = list(
-			/obj/item/book/granter/spellbook,
+			/obj/item/spellbook,
 			/obj/item/gem/yellow,
 			/obj/item/reagent_containers/glass/bottle/manapot,
 		),
