@@ -6530,7 +6530,7 @@
 /area/indoors/town/keep/garrison)
 "cYo" = (
 /obj/structure/fermentation_keg/random/water,
-/obj/machinery/light/fueled/torchholder/l,
+/obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
 "cYs" = (
@@ -16805,9 +16805,12 @@
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
 "hVS" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 4
+/obj/structure/lever/wall{
+	dir = 8;
+	redstone_id = "gatehouselockdown";
+	name = "Locldown"
 	},
+/obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/gate)
 "hVT" = (
@@ -23468,27 +23471,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/yellow)
 "kVP" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/ammo_holder/quiver/bolts{
-	pixel_x = 11;
-	pixel_y = -1
+/obj/structure/stairs{
+	dir = 4
 	},
-/obj/item/ammo_holder/quiver/bolts{
-	pixel_x = 8;
-	pixel_y = 7
-	},
-/obj/item/restraints/legcuffs/beartrap/crafted{
-	pixel_x = -6;
-	pixel_y = -8
-	},
-/obj/item/restraints/legcuffs/beartrap/crafted{
-	pixel_x = -9;
-	pixel_y = 0
-	},
-/obj/item/restraints/legcuffs/beartrap/crafted{
-	pixel_x = -9;
-	pixel_y = 10
-	},
+/obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
 "kVR" = (
@@ -31004,6 +30990,7 @@
 /obj/item/paper/scroll,
 /obj/item/paper/scroll,
 /obj/item/natural/feather,
+/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
 "opg" = (
@@ -38214,6 +38201,33 @@
 	},
 /turf/open/openspace,
 /area/indoors/town/tavern)
+"rya" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/ammo_holder/quiver/bolts{
+	pixel_x = 11;
+	pixel_y = -1
+	},
+/obj/item/ammo_holder/quiver/bolts{
+	pixel_x = 8;
+	pixel_y = 7
+	},
+/obj/item/restraints/legcuffs/beartrap/crafted{
+	pixel_x = -6;
+	pixel_y = -8
+	},
+/obj/item/restraints/legcuffs/beartrap/crafted{
+	pixel_x = -9;
+	pixel_y = 0
+	},
+/obj/item/restraints/legcuffs/beartrap/crafted{
+	pixel_x = -9;
+	pixel_y = 10
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/town/keep/gate)
 "ryd" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -41372,6 +41386,12 @@
 	pixel_y = 7
 	},
 /turf/open/floor/herringbone,
+/area/indoors/town/keep/gate)
+"sOW" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
 "sOX" = (
 /obj/machinery/light/fueled/firebowl/standing,
@@ -49375,11 +49395,6 @@
 /obj/structure/table/wood/reinf_long{
 	dir = 8
 	},
-/obj/structure/lever{
-	pixel_x = -7;
-	pixel_y = 8;
-	redstone_id = "gatehouselockdown"
-	},
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/gate)
 "wmR" = (
@@ -51804,7 +51819,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/orphanage)
 "xjh" = (
-/obj/structure/fluff/wallclock,
 /obj/structure/fake_machine/scomm{
 	pixel_y = -32
 	},
@@ -115607,7 +115621,7 @@ xTl
 eqL
 pXi
 hHM
-bRE
+kVP
 qDx
 pwJ
 lsD
@@ -155606,7 +155620,7 @@ biy
 hHM
 hHM
 hHM
-vrr
+hHM
 hHM
 biy
 biy
@@ -155807,8 +155821,8 @@ biy
 biy
 hHM
 xzl
-hHM
-vrr
+rya
+xuF
 hHM
 feD
 ivy
@@ -156009,8 +156023,8 @@ biy
 biy
 hHM
 hDd
-hHM
-hHM
+sOW
+qDx
 hHM
 fyV
 ngr
@@ -156614,8 +156628,8 @@ biy
 biy
 biy
 hHM
-kVP
-xuF
+qDx
+qDx
 qDx
 hHM
 akm
