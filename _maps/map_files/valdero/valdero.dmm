@@ -9834,12 +9834,6 @@
 /area/indoors/town/smithy)
 "Pk" = (
 /obj/structure/industrial_lift/tram{
-	icon_state = "tent";
-	icon = 'icons/turf/walls.dmi';
-	density = 1;
-	opacity = 1
-	},
-/obj/structure/industrial_lift/tram{
 	icon_state = "wood";
 	icon = 'icons/turf/walls.dmi';
 	density = 1;
@@ -11042,6 +11036,17 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
+"UK" = (
+/obj/structure/industrial_lift/tram{
+	icon_state = "roofg";
+	dir = 4
+	},
+/obj/structure/industrial_lift/tram{
+	icon_state = "roofg";
+	dir = 4
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "UL" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -118250,7 +118255,7 @@ NM
 NM
 NM
 NM
-xh
+FX
 xh
 xh
 xh
@@ -121450,13 +121455,13 @@ xh
 xh
 xh
 xh
-xh
-xh
 Dg
 Dg
+UK
+UK
+UK
 Dg
-xh
-xh
+Dg
 xh
 xh
 xh
@@ -121602,13 +121607,13 @@ xh
 xh
 xh
 xh
-xh
 Dg
 Dg
 Dg
 Dg
 Dg
-xh
+Dg
+Dg
 xh
 xh
 xh
@@ -139683,11 +139688,11 @@ NM
 NM
 xh
 xh
+FX
 xh
 xh
 xh
-xh
-xh
+FX
 xh
 xh
 xh
@@ -141051,7 +141056,7 @@ NM
 NM
 NM
 NM
-xh
+FX
 xh
 xh
 xh
@@ -144251,13 +144256,13 @@ xh
 xh
 xh
 xh
-xh
-xh
 XZ
 xh
 xh
 xh
 xh
+xh
+XZ
 xh
 xh
 xh
@@ -144403,13 +144408,13 @@ xh
 xh
 xh
 xh
-xh
-xh
+XZ
 XZ
 xh
 xh
 xh
-xh
+XZ
+XZ
 xh
 xh
 xh
@@ -144555,8 +144560,8 @@ xh
 xh
 xh
 xh
-xh
-xh
+XZ
+XZ
 XZ
 Pk
 XZ
@@ -144707,12 +144712,12 @@ xh
 xh
 xh
 xh
-XZ
+xh
 XZ
 XZ
 Pk
 XZ
-xh
+XZ
 xh
 xh
 xh
@@ -144863,7 +144868,7 @@ xh
 xh
 xh
 xh
-XZ
+xh
 xh
 xh
 xh
@@ -145015,7 +145020,7 @@ xh
 xh
 xh
 xh
-XZ
+xh
 xh
 xh
 xh
