@@ -49,7 +49,7 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MAGICIAN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -60,12 +60,10 @@
 	outfit = /datum/outfit/magician
 	give_bank_account = 120
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	magic_user = TRUE
-	spell_points = 17
-	attunements_max = 6
-	attunements_min = 4
 	job_bitflag = BITFLAG_ROYALTY
 	max_apprentices = 2
 	honorary = "Archmage"
@@ -76,6 +74,8 @@
 		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
 	)
+
+	form_points = 4
 
 	exp_type = list(EXP_TYPE_ADVENTURER, EXP_TYPE_LIVING, EXP_TYPE_MAGICK)
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_MAGICK, EXP_TYPE_ADVENTURER)
@@ -128,6 +128,20 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
 
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/legendary/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/legendary/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/legendary/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/legendary/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/legendary/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/legendary/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/legendary/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/legendary/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/legendary/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
+
 /datum/outfit/magician
 	name = JOB_COURT_MAGE
 	backr = /obj/item/storage/backpack/satchel
@@ -142,7 +156,6 @@
 		/obj/item/scrying = 1,
 		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/killersice = 1,
-		/obj/item/book/granter/spellbook/master = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1,
 		/obj/item/storage/keyring/mage = 1
 	)

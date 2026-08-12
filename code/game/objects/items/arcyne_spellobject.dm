@@ -158,7 +158,6 @@
 					)
 
 	var/datum/action/cooldown/spell/instance = new E.spell_type(user)
-	instance.point_cost = 0
 	instance.spell_cost = 0
 	instance.cooldown_time = 0
 	instance.spell_flags |= SPELL_TEMPORARY
@@ -216,7 +215,6 @@
 	if(E.live_spell || !E.spell_type)
 		return
 	E.live_spell = new E.spell_type(user)
-	E.live_spell.point_cost = 0
 	E.live_spell.cooldown_time = 0
 	E.live_spell.spell_cost = 0
 	E.live_spell.spell_flags |= SPELL_TEMPORARY

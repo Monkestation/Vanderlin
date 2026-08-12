@@ -9,7 +9,7 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MERCENARY
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
@@ -21,6 +21,7 @@
 	outfit_female = null
 	give_bank_account = 3
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
 
 	exp_type = list(EXP_TYPE_LIVING)
@@ -39,3 +40,4 @@
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_DWARF_SUBTERRAN)
 	category_tags = list(CTAG_MERCENARY)
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)

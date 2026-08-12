@@ -21,6 +21,8 @@
 
 	var/omni_bolt = FALSE
 
+	var/smashable = TRUE
+
 	/// Can people riding go through without falling off their mount
 	var/ridethrough = FALSE
 	/// If TRUE when bumped open we callback close

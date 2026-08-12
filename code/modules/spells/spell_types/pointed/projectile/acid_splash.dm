@@ -4,11 +4,8 @@
 	button_icon_state = "acidsplash"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/blood = 0.3,
-		/datum/attunement/death = 0.4,
-	)
+	required_form = FORM_WATER
+	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "HYDRO MURIATIC!!!!"
 	invocation_type = INVOCATION_SHOUT
@@ -23,9 +20,9 @@
 
 /datum/action/cooldown/spell/projectile/acid_splash/ready_projectile(obj/projectile/magic/acidsplash/to_fire, atom/target, mob/user, iteration)
 	. = ..()
-	to_fire.damage *= attuned_strength
-	to_fire.aoe_range *= attuned_strength
-	to_fire.strength_modifier *= attuned_strength
+	to_fire.damage *= spell_magnitude_modifier
+	to_fire.aoe_range *= spell_magnitude_modifier
+	to_fire.strength_modifier *= spell_magnitude_modifier
 
 /datum/action/cooldown/spell/projectile/acid_splash/quietus
 	name = "Caustic Splash"
@@ -37,6 +34,8 @@
 	desc = "Vomit up acid against a foe, at great risk to yourself."
 	sound = 'sound/vo/vomit.ogg'
 	charge_sound = null
+
+	required_form = null
 
 	associated_skill = null
 

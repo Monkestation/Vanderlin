@@ -53,7 +53,7 @@
 	department_flag = SERFS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ARTIFICER
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
@@ -62,6 +62,7 @@
 	outfit = /datum/outfit/artificer
 	give_bank_account = 8
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

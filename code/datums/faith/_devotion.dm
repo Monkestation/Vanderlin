@@ -236,6 +236,12 @@
 	)
 	devotion_class = DEVOTION_CLASS_CHURCHLING
 
+/datum/devotion/proc/make_oracle()
+	make_acolyte()
+
+/datum/devotion/proc/make_lunar_champion()
+	make_templar()
+
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
 	set category = "RoleUnique.Divine"

@@ -9,7 +9,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_HAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
@@ -18,7 +18,11 @@
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
 	give_bank_account = 120
+
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_always_know_me = list(JOB_COURT_AGENT)
+
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
@@ -75,7 +79,8 @@
 			to_chat(H, span_notice(name))
 
 /datum/job/advclass/hand
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/hand
 	raw_attribute_list = list(
@@ -103,7 +108,6 @@
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/hand
 	honorary = "General"
@@ -158,7 +162,6 @@
 	outfit = /datum/outfit/hand/spymaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/spymaster
 	honorary = "Spymaster"
@@ -179,7 +182,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	beltl = /obj/item/weapon/knife/dagger/steel/hand/parry
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backpack_contents = list(
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/frumentarii = 1,
@@ -245,7 +248,6 @@
 	outfit = /datum/outfit/hand/advisor
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/advisor
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/advisor/old
@@ -257,7 +259,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
@@ -339,7 +341,6 @@
 	outfit = /datum/outfit/hand/huntsmaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/huntsmaster
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/huntsmaster/old
