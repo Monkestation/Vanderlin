@@ -408,6 +408,11 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/plum,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/kitchen)
+"bF" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
+/area/indoors/town/noble_manor)
 "bG" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/town/church)
@@ -575,6 +580,11 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/darker,
 /area/under/town/basement)
+"co" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 1
+	},
+/area/indoors/town/garrison)
 "cq" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -967,6 +977,11 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
+"dZ" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
+/area/indoors/town/garrison)
 "eb" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/fabric,
@@ -2946,6 +2961,14 @@
 "lC" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/soilsons)
+"lD" = (
+/obj/structure/fake_machine/scomm{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/carpet/green,
+/turf/open/floor/cobble,
+/area/indoors/town/garrison)
 "lF" = (
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/shop)
@@ -3757,6 +3780,9 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/merc_guild)
+"oT" = (
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/garrison)
 "oV" = (
 /obj/structure/mirror/fancy{
 	pixel_x = 32;
@@ -4379,6 +4405,9 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
+"rn" = (
+/turf/open/floor/carpet/lord/corner,
+/area/indoors/town/noble_manor)
 "ro" = (
 /obj/machinery/light/fueled/wallfire/candle/weak{
 	pixel_y = -32
@@ -5142,6 +5171,11 @@
 /obj/effect/landmark/start/vagrant,
 /turf/open/floor/blocks/platform,
 /area/under/town/basement)
+"ui" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
+/area/indoors/town/garrison)
 "uk" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -5219,9 +5253,18 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town)
+"uF" = (
+/obj/machinery/light/fueled/firebowl/standing,
+/turf/open/floor/churchrough,
+/area/outdoors/town/roofs)
 "uG" = (
 /turf/closed/wall/mineral/decostone/center,
 /area/indoors/town/keep/library)
+"uI" = (
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
+/area/indoors/town/noble_manor)
 "uJ" = (
 /obj/structure/door{
 	name = "cellar"
@@ -5789,6 +5832,9 @@
 "wY" = (
 /turf/closed/mineral/bedrock,
 /area/under/cave)
+"wZ" = (
+/turf/open/floor/carpet/lord/left,
+/area/indoors/town/garrison)
 "xa" = (
 /obj/item/reagent_containers/glass/bucket/pot/stone{
 	pixel_x = 1
@@ -5847,14 +5893,11 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/merc_guild)
 "xl" = (
-/obj/item/reagent_containers/glass/bucket/wooden{
-	pixel_x = 3;
-	pixel_y = 12
-	},
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
 	pixel_y = 0
 	},
+/obj/structure/fluff/statue/knight/r,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
 "xm" = (
@@ -6118,6 +6161,13 @@
 "ye" = (
 /turf/open/floor/wood,
 /area/outdoors/town/roofs)
+"yf" = (
+/obj/structure/toilet,
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/town/garrison)
 "yg" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town)
@@ -7069,6 +7119,11 @@
 /obj/item/bedsheet/double_pelt,
 /turf/open/floor/carpet/green,
 /area/indoors/town/tavern)
+"Bp" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
+/area/indoors/town/noble_manor)
 "Bq" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile/masonic/arrow/inverted{
@@ -7130,6 +7185,9 @@
 "BA" = (
 /turf/open/floor/blocks,
 /area/indoors/town/vault)
+"BB" = (
+/turf/open/floor/twig,
+/area/indoors/town/garrison)
 "BC" = (
 /obj/structure/fake_machine/scomm{
 	pixel_y = -32
@@ -7389,6 +7447,9 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/throne)
+"CR" = (
+/turf/open/floor/carpet/lord/corner,
+/area/indoors/town/garrison)
 "CS" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -8304,6 +8365,10 @@
 /obj/item/reagent_containers/powder/flour,
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor)
+"Gs" = (
+/obj/structure/carpet/green,
+/turf/open/floor/cobble,
+/area/indoors/town/garrison)
 "Gt" = (
 /obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
@@ -8367,6 +8432,10 @@
 "GB" = (
 /obj/structure/table/wood{
 	icon_state = "longtable"
+	},
+/obj/item/reagent_containers/glass/bucket/wooden{
+	pixel_x = 3;
+	pixel_y = 12
 	},
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
@@ -8602,6 +8671,9 @@
 /obj/item/neuFarm/seed/cocaudo,
 /turf/open/floor/twig,
 /area/indoors/soilsons)
+"Ht" = (
+/turf/open/floor/carpet/lord/right,
+/area/indoors/town/garrison)
 "Hu" = (
 /obj/structure/table/wood/counter/end{
 	dir = 8
@@ -9432,6 +9504,11 @@
 "Lj" = (
 /turf/open/floor/cobble,
 /area/indoors/soilsons)
+"Ll" = (
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
+/area/indoors/town/garrison)
 "Ln" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/wood,
@@ -10566,6 +10643,19 @@
 /obj/structure/carpet/red,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"PK" = (
+/obj/structure/toilet,
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/town/garrison)
+"PL" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town/noble_manor)
 "PN" = (
 /obj/structure/meathook,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -10891,6 +10981,11 @@
 /obj/structure/bars,
 /turf/open/floor/dirt/road,
 /area/outdoors/farm)
+"Rl" = (
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
+/area/indoors/town/noble_manor)
 "Rn" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -10898,6 +10993,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"Ro" = (
+/obj/structure/carpet/green,
+/turf/open/floor/cobblerock,
+/area/indoors/town/garrison)
 "Rp" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/reagent_containers/glass/mortar,
@@ -11317,6 +11416,9 @@
 /obj/structure/curtain/bounty,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/garrison)
+"SL" = (
+/turf/open/floor/carpet/royalblack,
+/area/indoors/town/keep/halls/w)
 "SM" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -11544,6 +11646,7 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
+/obj/structure/fluff/statue/knight,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
 "TN" = (
@@ -11711,6 +11814,11 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
+"UA" = (
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
+/area/indoors/town/garrison)
 "UB" = (
 /obj/structure/chair/wood/alt/chair3,
 /turf/open/floor/twig,
@@ -12337,6 +12445,7 @@
 	name = "ARMORY"
 	},
 /obj/effect/mapping_helpers/access/keyset/garrison/general,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
 /area/indoors/town/garrison)
 "Xn" = (
@@ -12404,6 +12513,10 @@
 /obj/structure/well,
 /turf/open/floor/dirt,
 /area/outdoors/farm)
+"Xz" = (
+/obj/structure/carpet/red,
+/turf/open/floor/cobblerock,
+/area/indoors/town/garrison)
 "XA" = (
 /obj/structure/door/fancy{
 	name = "Hand's Chambers"
@@ -12746,6 +12859,12 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town/keep)
+"YM" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/noble_manor)
 "YN" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -12839,6 +12958,10 @@
 "Zf" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/library)
+"Zg" = (
+/obj/structure/carpet/green,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/church)
 "Zh" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
@@ -73786,8 +73909,8 @@ HW
 vQ
 HW
 QT
-HW
-HW
+Xz
+Xz
 QT
 eU
 eU
@@ -92014,7 +92137,7 @@ Qp
 Qp
 QT
 QT
-QT
+oG
 QT
 QT
 oG
@@ -92030,7 +92153,7 @@ sY
 oG
 QT
 QT
-QT
+oG
 QT
 QT
 Qp
@@ -94570,9 +94693,9 @@ CF
 ZR
 ZR
 ZR
-CF
-CF
-WE
+xY
+cU
+WH
 ke
 oW
 vU
@@ -94605,9 +94728,9 @@ eU
 QT
 vQ
 SQ
-gz
-vQ
-vQ
+lD
+Gs
+Gs
 SQ
 QY
 QT
@@ -94724,7 +94847,7 @@ WE
 WE
 CF
 CF
-CF
+xY
 Vn
 Ik
 Ik
@@ -95370,7 +95493,7 @@ Nl
 QT
 QT
 QT
-HW
+yf
 QT
 QT
 xh
@@ -95517,15 +95640,15 @@ fP
 fP
 Ea
 QT
-HW
-HW
-vQ
+Ro
+Ro
+Gs
 QT
 vQ
 HW
 QY
 QT
-HW
+yf
 QT
 xh
 xh
@@ -96125,7 +96248,7 @@ QT
 QT
 QT
 QT
-HW
+Ro
 vQ
 HW
 QT
@@ -96272,12 +96395,12 @@ OQ
 HW
 Ii
 vQ
-HW
+Ro
 HW
 Ii
 HW
 Zo
-HW
+Ro
 vQ
 vQ
 QC
@@ -96429,7 +96552,7 @@ SQ
 HW
 vQ
 QT
-vQ
+Gs
 HW
 HW
 QT
@@ -97045,7 +97168,7 @@ dK
 HW
 QY
 QT
-HW
+PK
 QT
 xh
 xh
@@ -97194,7 +97317,7 @@ OQ
 QT
 QT
 QT
-HW
+PK
 QT
 QT
 xh
@@ -112971,14 +113094,14 @@ xh
 xh
 mF
 bs
-bs
-bs
-bs
-bs
-bs
-bs
-bs
-bs
+Zg
+Zg
+Zg
+Zg
+Zg
+Zg
+Zg
+Zg
 tk
 uZ
 uZ
@@ -113564,7 +113687,7 @@ kc
 mp
 up
 nl
-kc
+YM
 wE
 ok
 dD
@@ -113870,9 +113993,9 @@ ED
 ug
 ug
 wE
-dD
-dD
-RP
+RS
+ug
+rn
 ra
 BT
 BT
@@ -113910,14 +114033,14 @@ eU
 sY
 Ua
 vQ
-vQ
-vQ
-HW
+co
+wZ
+CR
 HW
 sY
-HW
-HW
-HW
+BB
+BB
+BB
 sY
 HW
 vQ
@@ -114022,9 +114145,9 @@ Vc
 ev
 ev
 tr
-RP
-RP
-RP
+uI
+ev
+Rl
 ra
 BT
 BT
@@ -114062,9 +114185,9 @@ eU
 QT
 Ua
 vQ
-vQ
-vQ
-vQ
+Ll
+oT
+UA
 vQ
 QT
 QT
@@ -114174,9 +114297,9 @@ pf
 Ul
 Ul
 wE
-RP
-RP
-RP
+bF
+Ul
+Bp
 ra
 BT
 BT
@@ -114214,14 +114337,14 @@ QT
 sY
 QT
 NR
-vQ
-vQ
-vQ
+Ll
+oT
+UA
 vQ
 Ii
-vQ
-vQ
-vQ
+Gs
+Gs
+Gs
 Ii
 vQ
 QY
@@ -114366,9 +114489,9 @@ zM
 Ii
 HW
 vQ
-vQ
-vQ
-vQ
+dZ
+Ht
+ui
 vQ
 vQ
 vQ
@@ -114476,7 +114599,7 @@ kc
 iQ
 up
 iz
-kc
+PL
 wE
 fj
 dD
@@ -115256,7 +115379,7 @@ xh
 xh
 xh
 di
-eR
+uF
 rj
 rj
 rj
@@ -116798,9 +116921,9 @@ ON
 SQ
 vQ
 vQ
-vQ
-vQ
-vQ
+co
+wZ
+CR
 vQ
 vQ
 vQ
@@ -116950,14 +117073,14 @@ sY
 QT
 sY
 NR
-vQ
-vQ
-vQ
+Ll
+oT
+UA
 vQ
 SQ
-vQ
-vQ
-vQ
+Gs
+Gs
+Gs
 SQ
 vQ
 qr
@@ -117102,9 +117225,9 @@ eU
 QT
 Ua
 vQ
-vQ
-vQ
-vQ
+Ll
+oT
+UA
 vQ
 QT
 QT
@@ -117254,9 +117377,9 @@ eU
 QT
 Ua
 vQ
-vQ
-vQ
-HW
+dZ
+Ht
+ui
 HW
 sY
 HW
@@ -134431,7 +134554,7 @@ oI
 oI
 oI
 gj
-ek
+SL
 lz
 ek
 BK
@@ -134583,7 +134706,7 @@ oI
 oI
 oI
 Ja
-ek
+SL
 lz
 ek
 Iq
@@ -134735,7 +134858,7 @@ oI
 oI
 oI
 gj
-ek
+SL
 lz
 ek
 BK
@@ -142033,7 +142156,7 @@ bL
 sX
 ei
 ei
-ei
+Po
 FS
 HN
 HN
@@ -142185,7 +142308,7 @@ bL
 KC
 ei
 ei
-ei
+Po
 sj
 HN
 sb
@@ -142337,7 +142460,7 @@ bL
 Tz
 ei
 ei
-ei
+Po
 FS
 HN
 HN
