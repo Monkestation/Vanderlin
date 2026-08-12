@@ -64,7 +64,6 @@
 	return
 
 /datum/clan/nitewalker/apply_clan_components(mob/living/carbon/human/H)
-	H.AddComponent(/datum/component/sunlight_vulnerability)
 	return
 
 /datum/clan/nitewalker/setup_vampire_abilities(mob/living/carbon/human/H)
