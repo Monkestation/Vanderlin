@@ -381,10 +381,12 @@
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_SHOCKIMMUNE))
 		return FALSE
-	if(shock_damage < 1)
-		return FALSE
-	if(!(flags & SHOCK_ILLUSION))
-		adjustFireLoss(shock_damage)
+	if(!(flags & SHOCK_VISUAL_ONLY))
+		if(shock_damage < 1)
+			return FALSE
+		if(!(flags & SHOCK_ILLUSION))
+			adjustFireLoss(shock_damage)
+
 	visible_message(
 		"<span class='danger'>[src] was shocked by [source ? "\the [source]" : "something"]!</span>", \
 		"<span class='danger'>I feel a powerful shock coursing through my body!</span>", \

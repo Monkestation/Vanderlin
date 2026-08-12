@@ -587,7 +587,7 @@
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/cloth = 1
 	)
-	output = /obj/item/clothing/shoes/boots
+	output = /obj/item/clothing/shoes/boots/darkboots
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/leather/ridingboots

@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Bloodsucker Wretch now has the Vampire antag datum properly, their traits and closecombat have been moved into the clan setup."

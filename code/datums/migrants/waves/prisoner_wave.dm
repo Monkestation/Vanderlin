@@ -172,7 +172,7 @@
 	beltl = /obj/item/weapon/mace
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	backpack_contents = list(
 		/obj/item/storage/keyring/guard,

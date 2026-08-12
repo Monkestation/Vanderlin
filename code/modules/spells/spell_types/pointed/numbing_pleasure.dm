@@ -10,11 +10,6 @@
 	invocation = "May you find bliss through your pain."
 	invocation_type = INVOCATION_WHISPER
 
-	attunements = list(
-		/datum/attunement/electric = 0.3,
-		/datum/attunement/aeromancy = 0.3,
-	)
-
 	charge_required = FALSE
 	cooldown_time = 2 MINUTES
 	spell_cost = 75
@@ -34,3 +29,10 @@
 	phy.pain_mod *= 0.5	//Literally halves your pain modifier.
 	addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 0.5), 1 MINUTES)	//Adds back the 0.5 of pain, basically setting it back to 1.
 	cast_on.apply_status_effect(/datum/status_effect/buff/lux_drank/baothavitae)					//Basically lowers fortune by 2 but +3 speed, it's powerful. Drugs cus Baotha.
+
+/datum/action/cooldown/spell/painkiller/spell
+	name = "Numb Senses"
+	desc = "Numbs a targets senses lowering the pain they recieve."
+	spell_type = SPELL_MANA
+	spell_cost = 20
+	required_form = FORM_AIR

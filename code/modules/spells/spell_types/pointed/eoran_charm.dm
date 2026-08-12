@@ -49,10 +49,6 @@
 	sound = 'sound/magic/PSY.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
 
-	attunements = list(
-		/datum/attunement/blood = 0.5,
-	)
-
 	charge_time = 3 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3

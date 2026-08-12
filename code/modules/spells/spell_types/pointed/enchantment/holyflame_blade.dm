@@ -4,9 +4,6 @@
 	button_icon_state = "enchant_weapon"
 
 	enchantment_duration = 5 MINUTES
-	attunements = list(
-		/datum/attunement/fire = 0.3,
-	)
 
 	charge_required = FALSE
 	spell_cost = 30
