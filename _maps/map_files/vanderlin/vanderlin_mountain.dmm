@@ -14218,7 +14218,7 @@
 /obj/effect/decal/cleanable/ritual_rune/arcyne/empowerment{
 	pixel_y = -47
 	},
-/obj/item/weapon/greataxe/steel/doublehead/graggar,
+/obj/item/weapon/greataxe/steel/slayer,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "uuv" = (
