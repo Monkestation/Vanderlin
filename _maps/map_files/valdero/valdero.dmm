@@ -417,7 +417,7 @@
 /area/indoors/town)
 "bN" = (
 /obj/structure/window/solid,
-/turf/closed/basic,
+/turf/open/floor/herringbone,
 /area/indoors/town/smithy)
 "bO" = (
 /turf/open/floor/tile/masonic/full,
