@@ -20832,23 +20832,6 @@
 	icon_state = "largetable"
 	},
 /obj/machinery/essence/reservoir,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/rack/shelf/biggest,
-/obj/item/clothing/shoes/boots/leather{
-	pixel_x = 1;
-	pixel_y = 15
-	},
-/obj/item/clothing/shoes/boots/darkboots{
-	pixel_x = -7;
-	pixel_y = -3
-	},
-/obj/item/clothing/shoes/shortboots{
-	pixel_x = 10
-	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "jCo" = (
