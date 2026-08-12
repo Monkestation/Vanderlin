@@ -1,7 +1,0 @@
-author: "KevinfromHP"
-delete-after: True
-changes:
-  - balance: "Daewalker spawns more often based on a Vlord's ascension level."
-  - balance: "Some holy things now scale based on a Vlord's ascension level rather than a flat 1 or 0."
-  - bugfix: "Fixed broken HTML in the Blood Rite prompt"
-  - refactor: "Vampire Lord Blood Rite cleanup"
