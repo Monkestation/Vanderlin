@@ -1888,6 +1888,11 @@
 	name = "steep decorated stone wall"
 	},
 /area/outdoors/mountains)
+"ic" = (
+/obj/structure/industrial_lift/tram,
+/obj/structure/industrial_lift/tram,
+/turf/open/openspace,
+/area/outdoors/mountains)
 "ie" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/rack/shelf/biggest,
@@ -11297,21 +11302,6 @@
 /obj/effect/mapping_helpers/access/keyset/town/inn,
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"VW" = (
-/obj/structure/industrial_lift/tram{
-	icon_state = "corner";
-	icon = 'icons/turf/walls.dmi';
-	density = 1;
-	opacity = 1
-	},
-/obj/structure/industrial_lift/tram{
-	icon_state = "corner";
-	icon = 'icons/turf/walls.dmi';
-	density = 1;
-	opacity = 1
-	},
-/turf/open/openspace,
-/area/outdoors/mountains)
 "VX" = (
 /obj/structure/chair/bench/couch/left/lord_secondary{
 	dir = 4
@@ -75858,13 +75848,13 @@ xh
 xh
 xh
 xh
-xh
-xh
 od
 ty
+ty
+ty
+ty
+ty
 gg
-xh
-xh
 xh
 xh
 xh
@@ -76010,13 +76000,13 @@ xh
 xh
 xh
 xh
-xh
-od
 ty
+DN
+DN
 La
+DN
+DN
 ty
-gg
-xh
 xh
 xh
 xh
@@ -76162,13 +76152,13 @@ xh
 xh
 xh
 xh
-od
 ty
 DN
 DN
 DN
+DN
+DN
 ty
-gg
 xh
 xh
 xh
@@ -76319,7 +76309,7 @@ DN
 DN
 zc
 DN
-DN
+ic
 ty
 xh
 xh
@@ -98659,13 +98649,13 @@ xh
 xh
 xh
 xh
-xh
-xh
 od
+ty
+ty
 bC
+ty
+ty
 gg
-xh
-xh
 xh
 xh
 xh
@@ -98811,13 +98801,13 @@ xh
 xh
 xh
 xh
-xh
-od
 ty
+GY
+GY
 Ht
+DN
+DN
 ty
-gg
-xh
 xh
 xh
 xh
@@ -98963,13 +98953,13 @@ xh
 xh
 xh
 xh
-od
-VW
+ty
+GY
 LG
 Gt
 Hk
+DN
 ty
-gg
 xh
 xh
 xh
