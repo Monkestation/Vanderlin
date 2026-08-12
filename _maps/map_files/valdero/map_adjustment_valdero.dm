@@ -26,7 +26,6 @@
 		/datum/job/orthodoxist,
 	)
 	slot_adjust = list(
-		/datum/job/farmer = 1000,
-		/datum/job/miner = 1000,
-		/datum/job/undertaker = -1,
+		/datum/job/royalknight = 1
+		/datum/job/squire = 1
 	)
