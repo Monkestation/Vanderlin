@@ -62,6 +62,7 @@
 
 	if(!holder)
 		CRASH("[type] attempted do_jaunt but failed to create a jaunt holder via enter_jaunt.")
+	holder.name = cast_on.name
 
 	if(jaunt_out_time > 0)
 		ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
@@ -212,6 +213,7 @@
 /// The dummy that holds people jaunting. Maybe one day we can replace it.
 /obj/effect/dummy/phased_mob/spell_jaunt
 	movespeed = 2 //quite slow.
+	invisibility = INVISIBILITY_LEYLINES
 	/// Whether we're currently reappearing - we can't move if so
 	var/reappearing = FALSE
 
