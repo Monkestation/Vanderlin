@@ -464,9 +464,9 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!target)
 		return
 	target.set_faction(list(FACTION_UNDEAD))
-	target.add_spell(/datum/action/cooldown/spell/gravemark)
-	target.add_spell(/datum/action/cooldown/spell/control_undead)
-	target.add_spell(/datum/action/cooldown/spell/decompose)
+	target.add_spell(/datum/action/cooldown/spell/gravemark, mastery_spell = TRUE)
+	target.add_spell(/datum/action/cooldown/spell/control_undead, mastery_spell = TRUE)
+	target.add_spell(/datum/action/cooldown/spell/decompose, mastery_spell = TRUE)
 	to_chat(target, span_notice("The undead bow down to my will."))
 
 /datum/ritual/fleshcrafting/arcane
@@ -485,9 +485,9 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	mage.gib()
 
 	cultist.adjust_stat_modifier(STATMOD_RITUAL, list(/datum/attribute/skill/magic/arcane = 40))
-	cultist.adjust_spell_points(18)
+	cultist.adjust_form_mastery_points(12)
+	cultist.adjust_technique_mastery_points(5)
 	cultist.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
-	cultist.generate_random_attunements(rand(6, 8))
 	to_chat(cultist, span_notice("Stolen Arcane prowess floods my mind, ZIZO empowers me."))
 
 /datum/ritual/fleshcrafting/nopain

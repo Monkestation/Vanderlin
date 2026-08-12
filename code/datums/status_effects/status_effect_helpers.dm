@@ -128,3 +128,12 @@
 			return present_effect
 
 	return null
+
+/mob/living/proc/reduce_status_effect_duration(effect_type, amount = 15 SECONDS)
+	var/datum/status_effect/S = has_status_effect(effect_type)
+	if(!S)
+		return FALSE
+	S.duration -= amount
+	if(S.duration <= world.time)
+		remove_status_effect(effect_type)
+	return TRUE

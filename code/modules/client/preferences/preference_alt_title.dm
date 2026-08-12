@@ -206,6 +206,7 @@
 		list("name" = "Young Folk", "jobs" = GLOB.youngfolk_positions),
 		list("name" = "Outsiders", "jobs" = GLOB.allmig_positions),
 		list("name" = "Inquisition", "jobs" = GLOB.inquisition_positions),
+		list("name" = "SPECIAL", jobs = GLOB.admin_special_positions),
 	)
 
 	var/list/categories = list()

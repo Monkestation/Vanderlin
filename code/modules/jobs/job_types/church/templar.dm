@@ -112,7 +112,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_TEMPLAR
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
@@ -121,8 +121,9 @@
 	allowed_patrons = ALL_TEMPLAR_PATRONS
 
 	outfit = /datum/outfit/templar
-	give_bank_account = 0
+	give_bank_account = 10
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	job_bitflag = BITFLAG_CHURCH
 
@@ -166,7 +167,8 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
+			ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			var/static/list/selectable = list(
 				"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,
@@ -185,8 +187,8 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/necra)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/necra)
-			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_DEADNOSE, JOB_TRAIT)
+			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 			var/static/list/selectable = list(
 				"Necran Battleshovel (Polearm)" = /obj/item/weapon/shovel/necran,
@@ -202,11 +204,11 @@
 					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/necra/flail)
 		if(/datum/patron/divine/pestra)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/pestra)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
-			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 			var/static/list/selectable = list(
 				"Heartstring (Rapier)" = /obj/item/weapon/sword/rapier/eora,

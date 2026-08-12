@@ -41,6 +41,33 @@
 	)
 	traits = list(TRAIT_DIVINE_SERVANT)
 
+/datum/devotion/divine/noc/make_oracle()
+	devotion = 300
+	progression = CLERIC_REQ_3
+	passive_devotion_gain = 1
+	/// We're overriding the list.
+	miracles = list(
+		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/healing/greater/noc),
+		CLERIC_T1 = /datum/action/cooldown/spell/status/invisibility,
+		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
+		CLERIC_T3 = list(/datum/action/cooldown/spell/projectile/moonlit_dagger, /datum/action/cooldown/spell/projectile/moonstrike),
+	)
+	miracles_extra += list(
+		/datum/action/cooldown/spell/revive_noc,
+		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
+	)
+	devotion_class = DEVOTION_CLASS_ACOLYTE // Equal to priest, but unique to Noc. Changing patron will reset to Acolyte tier.
+
+/datum/devotion/divine/noc/make_lunar_champion()
+	devotion = 250
+	max_devotion = 500
+	progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_TEMPLAR
+	miracles_extra += list(
+		/datum/action/cooldown/spell/projectile/moonstrike,
+	)
+
 /datum/devotion/divine/dendor
 	miracles = list(
 		CLERIC_T0 = /datum/action/cooldown/spell/healing,
@@ -187,7 +214,7 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/undirected/touch/orison, /datum/action/cooldown/spell/aoe/snuff),
 		CLERIC_T1 = /datum/action/cooldown/spell/projectile/profane,
-		CLERIC_T2 = /datum/action/cooldown/spell/conjure/raise_lesser_undead,
+		CLERIC_T2 = /datum/action/cooldown/spell/conjure_summon/raise_lesser_undead,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/rituos,
 	)
 	traits = list(TRAIT_DEATHSIGHT)
