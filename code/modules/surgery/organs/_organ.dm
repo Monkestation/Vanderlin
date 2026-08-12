@@ -137,6 +137,11 @@
 	else
 		STOP_PROCESSING(SSobj, src)
 	LAZYNULL(organ_efficiency_modification)
+	// This hides some bad behaviour so we want to find out why if it does happen
+	if(bodypart_owner)
+		var/owner_part = owner ? "[owner] ([AREACOORD(owner)])" : "NULL"
+		stack_trace("organ ([type]) owner [owner_part] deleted with bodypart owner [bodypart_owner] ([AREACOORD(bodypart_owner)])!")
+		bodypart_owner = null
 	return ..()
 
 /obj/item/organ/vv_edit_var(var_name, var_value)
