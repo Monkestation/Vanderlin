@@ -4309,6 +4309,14 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
+"rG" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/fake_machine/lottery_roguetown,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "rI" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
@@ -117620,7 +117628,7 @@ xh
 BO
 Fo
 BO
-AC
+rG
 km
 XR
 BO
