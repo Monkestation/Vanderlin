@@ -79,9 +79,11 @@
 		TRAIT_STUNIMMUNE,
 		TRAIT_TOXIMMUNE,
 		TRAIT_NODECAPITATE,
+		TRAIT_LIMBATTACHMENT,
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED,
 		TRAIT_SORCERER,
+		TRAIT_NOPAIN,
 	)
 
 	languages = list(
@@ -103,6 +105,7 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_acolyte()
 		devotion.grant_to(spawned)
+		devotion.update_passive_devotion(5)
 
 	spawned.adjust_technique_mastery_points(12)
 	spawned.adjust_form_mastery_points(20)
@@ -110,13 +113,19 @@
 
 	if(spawned.dna?.species)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
+		spawned.dna.species.organs[ORGAN_SLOT_EYES] = /obj/item/organ/eyes/night_vision/nightmare
 
-	var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		eyes.Remove(spawned,1)
+	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+		eyes.Remove(src,1)
 		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(spawned)
+
+	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+	LE.switch_side(LEFT_SIDE)
+
+	LE.Insert(src)
+	RE.Insert(src)
 
 /datum/outfit/darkspawn
 	name = JOB_ADMIN_DARKSPAWN

@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/undirected/planar_shift
 	name = "Planar Shift"
-	desc = "This spell turns your form ethereal, making you invisible and able to pass through walls."
+	desc = "This spell turns your form ethereal, making you invisible and able to pass through walls. Unlike lesser variants, this shift is permanent."
 	button_icon_state = "jaunt"
 	sound = 'sound/magic/ethereal_enter.ogg'
 
