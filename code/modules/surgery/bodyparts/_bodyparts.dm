@@ -1620,8 +1620,8 @@
 /obj/item/bodypart/proc/get_cavity_volume()
 	. = 0
 	for(var/obj/item/organ/organ as anything in get_organs())
-		// External organs count as internal for the count if they are severed, otherwise do not count
-		if((organ.organ_flags & ORGAN_EXTERNAL) && !(organ.organ_flags & ORGAN_CUT_AWAY))
+		// External organs do not count
+		if(organ.organ_flags & ORGAN_EXTERNAL)
 			continue
 		. += organ.organ_volume
 	for(var/obj/item/item as anything in cavity_items)
