@@ -5760,10 +5760,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/merc_guild)
 "yq" = (
-/obj/effect/landmark/tram/queued_path{
-	next_path_id = "cargo_pre_enter";
-	platform_code = "point_1"
-	},
+/obj/effect/landmark/tram/queued_path/cargo_pre_enter,
 /obj/effect/landmark/tram/queued_path/cargo_exit{
 	next_path_id = "cargo_map_exit"
 	},
@@ -7593,12 +7590,12 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/throne)
 "FE" = (
+/obj/effect/landmark/tram/queued_path/cargo_map_enter{
+	next_path_id = "point_1"
+	},
 /obj/effect/landmark/tram/queued_path{
 	next_path_id = "cargo_return_2";
 	platform_code = "cargo_return_1"
-	},
-/obj/effect/landmark/tram/queued_path/cargo_map_enter{
-	next_path_id = "point_1"
 	},
 /obj/structure/industrial_lift,
 /turf/open/openspace,
@@ -99412,7 +99409,7 @@ GY
 GY
 yw
 xh
-xh
+uH
 xh
 xh
 xh
@@ -101236,7 +101233,7 @@ xh
 xh
 xh
 xh
-uH
+xh
 xh
 xh
 xh
