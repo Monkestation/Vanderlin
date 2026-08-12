@@ -115,17 +115,17 @@
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
 		spawned.dna.species.organs[ORGAN_SLOT_EYES] = /obj/item/organ/eyes/night_vision/nightmare
 
-	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+	var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
 	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(src,1)
+		eyes.Remove(spawned,1)
 		QDEL_NULL(eyes)
 
 	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
 	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
 	LE.switch_side(LEFT_SIDE)
 
-	LE.Insert(src)
-	RE.Insert(src)
+	LE.Insert(spawned)
+	RE.Insert(spawned)
 
 /datum/outfit/darkspawn
 	name = JOB_ADMIN_DARKSPAWN
