@@ -1118,8 +1118,7 @@
 			handled = TRUE
 			break
 
-	if(spawned.put_in_hands(new_item))
-		handled = TRUE
-
 	if(!handled)
+		if(spawned.put_in_hands(new_item))
+			return
 		message_admins("[spawned] had a granted spellboo with no room to store!")
