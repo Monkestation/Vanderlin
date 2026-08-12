@@ -106,6 +106,8 @@
 
 	organ_owner.update_organ_requirements()
 
+	STOP_PROCESSING(SSobj, src)
+
 /// Insert an organ into a limb, assume the limb as always detached and include no owner operations here (except the get_bodypart helper here I guess)
 /// Give EITHER a limb OR a limb owner
 /obj/item/organ/proc/bodypart_insert(obj/item/bodypart/bodypart, mob/living/carbon/limb_owner, movement_flags)
@@ -138,11 +140,10 @@
 
 	item_flags |= ABSTRACT
 	ADD_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
+	interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	if(organ_flags & ORGAN_LIMB_SUPPORTER)
 		limb.update_limb_efficiency()
-
-	STOP_PROCESSING(SSobj, src)
 
 /*
  * Remove the organ from the select mob.
@@ -229,6 +230,7 @@
 
 	item_flags &= ~ABSTRACT
 	REMOVE_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
+	interaction_flags_item |= INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	if(organ_flags & ORGAN_LIMB_SUPPORTER)
 		limb.update_limb_efficiency()
@@ -238,8 +240,14 @@
 	SIGNAL_HANDLER
 
 	if(owner)
-		Remove(owner)
+		if(loc?.loc == owner) // loc = some bodypart, loc.loc = some bodypart's owner
+			stack_trace("Forced removal triggered on [src] ([type]) moving into the same mob [owner] ([owner.type])!")
+		else
+			Remove(owner)
 	else if(bodypart_owner)
-		bodypart_remove(limb_owner = owner)
+		if(loc == bodypart_owner)
+			stack_trace("Forced removal triggered on [src] ([type]) moving into the same bodypart [bodypart_owner] ([bodypart_owner.type])!")
+		else
+			bodypart_remove(bodypart_owner)
 	else
 		stack_trace("Force removed an already removed organ!")

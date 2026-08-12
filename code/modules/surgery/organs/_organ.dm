@@ -129,10 +129,11 @@
 /obj/item/organ/Destroy()
 	if(bodypart_owner && !owner && !QDELETED(bodypart_owner))
 		bodypart_remove(bodypart_owner)
+	else if(owner && QDESTROYING(owner))
+		// The mob is being deleted, don't update the mob
+		Remove(owner, special=TRUE)
 	else if(owner)
-		// The special flag is important, because otherwise mobs can die
-		// while undergoing transformation into different mobs.
-		Remove(owner, special = TRUE)
+		Remove(owner)
 	else
 		STOP_PROCESSING(SSobj, src)
 	LAZYNULL(organ_efficiency_modification)
