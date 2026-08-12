@@ -34,7 +34,6 @@
 	factions = list(FACTION_CABAL, FACTION_UNDEAD)
 
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
-	allowed_races = list(SPEC_ID_SNOW_ELF)
 	allowed_patrons = list(/datum/patron/inhumen/zizo)
 
 	outfit = /datum/outfit/darkspawn
