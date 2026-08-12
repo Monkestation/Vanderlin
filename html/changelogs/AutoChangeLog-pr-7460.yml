@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - balance: "New weapons now always start fully sharp."
