@@ -140,7 +140,6 @@
 
 	item_flags |= ABSTRACT
 	ADD_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
-	interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	if(organ_flags & ORGAN_LIMB_SUPPORTER)
 		limb.update_limb_efficiency()
@@ -230,24 +229,17 @@
 
 	item_flags &= ~ABSTRACT
 	REMOVE_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
-	interaction_flags_item |= INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	if(organ_flags & ORGAN_LIMB_SUPPORTER)
 		limb.update_limb_efficiency()
 
 /// In space station videogame, nothing is sacred. If somehow an organ is removed unexpectedly, handle it properly
-/obj/item/organ/proc/forced_removal()
+/obj/item/organ/proc/forced_removal(datum/source, atom/old_loc, ...)
 	SIGNAL_HANDLER
 
 	if(owner)
-		if(loc?.loc == owner) // loc = some bodypart, loc.loc = some bodypart's owner
-			stack_trace("Forced removal triggered on [src] ([type]) moving into the same mob [owner] ([owner.type])!")
-		else
-			Remove(owner)
+		Remove(owner)
 	else if(bodypart_owner)
-		if(loc == bodypart_owner)
-			stack_trace("Forced removal triggered on [src] ([type]) moving into the same bodypart [bodypart_owner] ([bodypart_owner.type])!")
-		else
-			bodypart_remove(bodypart_owner)
+		bodypart_remove(limb_owner = owner)
 	else
 		stack_trace("Force removed an already removed organ!")
