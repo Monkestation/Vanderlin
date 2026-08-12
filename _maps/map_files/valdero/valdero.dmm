@@ -4857,13 +4857,6 @@
 "uG" = (
 /turf/closed/wall/mineral/decostone/center,
 /area/indoors/town/keep/library)
-"uH" = (
-/obj/effect/landmark/tram/queued_path{
-	next_path_id = "cargo_map_enter";
-	platform_code = "cargo_return_2"
-	},
-/turf/open/openspace,
-/area/outdoors/mountains)
 "uJ" = (
 /obj/structure/door{
 	name = "cellar"
@@ -5760,9 +5753,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/merc_guild)
 "yq" = (
-/obj/effect/landmark/tram/queued_path/cargo_pre_enter,
-/obj/effect/landmark/tram/queued_path/cargo_exit{
-	next_path_id = "cargo_map_exit"
+/obj/effect/landmark/tram/queued_path/cargo_pre_enter{
+	next_path_id = "cargo_stop"
 	},
 /turf/open/openspace,
 /area/outdoors/mountains)
@@ -7120,9 +7112,6 @@
 	next_path_id = "cargo_pre_enter";
 	platform_code = "point_1"
 	},
-/obj/effect/landmark/tram/queued_path/cargo_map_exit{
-	next_path_id = "cargo_return_1"
-	},
 /turf/open/openspace,
 /area/outdoors/mountains)
 "DN" = (
@@ -7592,10 +7581,6 @@
 "FE" = (
 /obj/effect/landmark/tram/queued_path/cargo_map_enter{
 	next_path_id = "point_1"
-	},
-/obj/effect/landmark/tram/queued_path{
-	next_path_id = "cargo_return_2";
-	platform_code = "cargo_return_1"
 	},
 /obj/structure/industrial_lift,
 /turf/open/openspace,
@@ -8189,6 +8174,12 @@
 "HN" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
+"HP" = (
+/obj/effect/landmark/tram/queued_path/cargo_map_exit{
+	next_path_id = "cargo_return_1"
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "HQ" = (
 /obj/structure/bars,
 /turf/open/floor/grass,
@@ -8203,12 +8194,11 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "HU" = (
-/obj/structure/door{
-	name = "Apartment V";
-	lockid = "apartment5"
-	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/tailor,
+/obj/structure/door{
+	name = "Tailor Shop"
+	},
 /turf/open/floor/wood,
 /area/indoors/town)
 "HW" = (
@@ -10318,6 +10308,12 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/steward)
+"RI" = (
+/obj/effect/landmark/tram/queued_path/cargo_exit{
+	next_path_id = "cargo_map_exit"
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "RJ" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/east,
 /turf/open/floor/blocks/newstone,
@@ -11089,10 +11085,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/greenstone,
 /area/indoors/town/vault)
-"UV" = (
-/obj/effect/mapping_helpers/access/keyset/town/mercenary,
-/turf/open/openspace,
-/area/outdoors/mountains)
 "UX" = (
 /obj/structure/closet/crate/chest,
 /obj/item/natural/cloth{
@@ -11581,7 +11573,7 @@
 /area/indoors/town/noble_manor)
 "Xh" = (
 /obj/structure/door{
-	name = "Tailor Shop"
+	name = "Tailor's Apartment"
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/tailor,
@@ -11939,6 +11931,14 @@
 /obj/structure/fluff/walldeco/feldshersign,
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
+"YF" = (
+/obj/structure/industrial_lift,
+/obj/effect/landmark/tram/queued_path{
+	next_path_id = "cargo_map_enter";
+	platform_code = "cargo_return_1"
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "YG" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty/dir{
@@ -96817,7 +96817,7 @@ xh
 xh
 xh
 xh
-xh
+RI
 xh
 xh
 xh
@@ -98186,7 +98186,7 @@ xh
 xh
 xh
 xh
-xh
+HP
 xh
 xh
 xh
@@ -99409,7 +99409,7 @@ GY
 GY
 yw
 xh
-uH
+xh
 xh
 xh
 xh
@@ -99556,7 +99556,7 @@ xh
 GY
 GY
 GY
-GY
+YF
 GY
 GY
 yw
@@ -139758,7 +139758,7 @@ xh
 xh
 xh
 xh
-UV
+xh
 xh
 xh
 xh
