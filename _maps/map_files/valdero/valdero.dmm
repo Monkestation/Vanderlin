@@ -1009,7 +1009,6 @@
 /area/indoors/town/church)
 "es" = (
 /obj/structure/winch{
-	gid = "keepnorthgate_in";
 	name = "winch (south)";
 	redstone_id = "keepnorthgate_in";
 	dir = 4
@@ -1133,7 +1132,6 @@
 /area/outdoors/exposed/church/graveyard)
 "eW" = (
 /obj/structure/winch{
-	gid = "keepnorthgate_out";
 	name = "winch (north)";
 	redstone_id = "keepnorthgate_out";
 	dir = 4
@@ -2837,7 +2835,6 @@
 "lZ" = (
 /obj/structure/gate/bars{
 	redstone_id = "fortentry_out";
-	gid = "fortentry";
 	pixel_x = -32
 	},
 /turf/open/floor/dirt/road,
@@ -3123,7 +3120,6 @@
 /area/outdoors/town)
 "mY" = (
 /obj/structure/winch{
-	gid = "keepsouthgate_in";
 	name = "winch (north)";
 	redstone_id = "keepsouthgate_in";
 	dir = 4
@@ -3763,7 +3759,6 @@
 /obj/structure/gate/bars{
 	name = "Southern Gate";
 	redstone_id = "keepsouthgate_out";
-	gid = "keepsouthgate_out";
 	pixel_x = -32
 	},
 /turf/open/floor/blocks,
@@ -7143,7 +7138,6 @@
 /area/indoors/town/vault)
 "DQ" = (
 /obj/structure/winch{
-	gid = "keepsouthgate_out";
 	name = "winch (south)";
 	redstone_id = "keepsouthgate_out";
 	dir = 4
@@ -7850,7 +7844,6 @@
 /obj/structure/gate/bars{
 	name = "Northern Gate";
 	redstone_id = "keepnorthgate_out";
-	gid = "keepnorthgate_out";
 	pixel_x = -32
 	},
 /turf/open/floor/cobblerock,
@@ -9857,7 +9850,6 @@
 /obj/structure/gate/bars{
 	name = "Northern Gate";
 	redstone_id = "keepnorthgate_in";
-	gid = "keepnorthgate_in";
 	pixel_x = -32
 	},
 /turf/open/floor/blocks,
@@ -12021,7 +12013,6 @@
 /obj/structure/gate/bars{
 	name = "Southern Gate";
 	redstone_id = "keepsouthgate_in";
-	gid = "keepsouthgate_in";
 	pixel_x = -32
 	},
 /turf/open/floor/cobblerock,
@@ -12158,7 +12149,6 @@
 "Zq" = (
 /obj/structure/gate/bars{
 	redstone_id = "fortentry";
-	gid = "fortentry";
 	pixel_x = -32
 	},
 /turf/open/floor/blocks/paving,
