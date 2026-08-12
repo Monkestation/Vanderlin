@@ -1,5 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - admin: "VV Modify Traits now uses a searchable TGUI list."
-  - rscadd: "Gave traits proper names in the selection list."

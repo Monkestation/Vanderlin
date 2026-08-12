@@ -1,4 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Dark Boots can now be repaired and the base path for boots is abstracted."

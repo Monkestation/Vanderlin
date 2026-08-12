@@ -59,13 +59,6 @@
 	if(!M)
 		M = H.apply_status_effect(/datum/status_effect/buff/arcyne_momentum)
 
-	if(M?.chant)
-		var/valid = FALSE
-		var/list/valid_skills
-		if(!valid)
-			to_chat(H, span_warning("This weapon does not match my chant!"))
-			return FALSE
-
 	if(M?.bound_weapon && !QDELETED(M.bound_weapon))
 		var/datum/component/arcyne_conduit/old_conduit = M.bound_weapon.GetComponent(/datum/component/arcyne_conduit)
 		if(old_conduit)
