@@ -1810,7 +1810,7 @@
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep/throne)
 "hH" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
@@ -1885,11 +1885,6 @@
 	wallclimb = 0;
 	name = "steep decorated stone wall"
 	},
-/area/outdoors/mountains)
-"ic" = (
-/obj/structure/industrial_lift/tram,
-/obj/structure/industrial_lift/tram,
-/turf/open/openspace,
 /area/outdoors/mountains)
 "ie" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4109,7 +4104,7 @@
 /turf/open/floor/wood,
 /area/indoors/town)
 "rr" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
@@ -5809,7 +5804,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/knight)
 "yw" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border,
 /turf/open/openspace,
 /area/outdoors/mountains)
@@ -7582,7 +7577,7 @@
 /obj/effect/landmark/tram/queued_path/cargo_map_enter{
 	next_path_id = "point_1"
 	},
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /turf/open/openspace,
 /area/outdoors/mountains)
 "FF" = (
@@ -7791,7 +7786,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor)
 "Gt" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
@@ -7978,10 +7973,6 @@
 "GW" = (
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
-"GY" = (
-/obj/structure/industrial_lift,
-/turf/open/openspace,
-/area/outdoors/mountains)
 "Ha" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/darker,
@@ -8018,7 +8009,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor)
 "Hk" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
@@ -8084,11 +8075,6 @@
 /obj/item/neuFarm/seed/cocaudo,
 /turf/open/floor/twig,
 /area/indoors/soilsons)
-"Ht" = (
-/obj/structure/industrial_lift,
-/obj/structure/industrial_lift,
-/turf/open/openspace,
-/area/outdoors/mountains)
 "Hu" = (
 /obj/structure/table/wood/counter/end{
 	dir = 8
@@ -8730,16 +8716,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/steward)
-"Ky" = (
-/obj/structure/industrial_lift/tram,
-/obj/structure/industrial_lift/tram{
-	icon_state = "corner";
-	icon = 'icons/turf/walls.dmi';
-	density = 1;
-	opacity = 1
-	},
-/turf/open/openspace,
-/area/outdoors/mountains)
 "Kz" = (
 /turf/open/floor/carpet,
 /area/indoors/town/garrison)
@@ -8821,7 +8797,7 @@
 /turf/open/floor/church,
 /area/indoors/town/church)
 "KV" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -8981,7 +8957,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/noble_manor)
 "LG" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
@@ -9490,7 +9466,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
 "NP" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
@@ -10162,7 +10138,7 @@
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/garrison)
 "QU" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
@@ -10326,7 +10302,7 @@
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
 "RM" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
@@ -11021,17 +10997,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
-"UK" = (
-/obj/structure/industrial_lift/tram{
-	icon_state = "roofg";
-	dir = 4
-	},
-/obj/structure/industrial_lift/tram{
-	icon_state = "roofg";
-	dir = 4
-	},
-/turf/open/openspace,
-/area/outdoors/mountains)
 "UL" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -11932,7 +11897,7 @@
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "YF" = (
-/obj/structure/industrial_lift,
+/obj/structure/industrial_lift/tram,
 /obj/effect/landmark/tram/queued_path{
 	next_path_id = "cargo_map_enter";
 	platform_code = "cargo_return_1"
@@ -76301,7 +76266,7 @@ DN
 DN
 zc
 DN
-ic
+DN
 ty
 xh
 xh
@@ -76451,7 +76416,7 @@ xh
 ty
 Id
 DN
-Ky
+ty
 DN
 dS
 ty
@@ -98794,9 +98759,9 @@ xh
 xh
 xh
 ty
-GY
-GY
-Ht
+DN
+DN
+DN
 DN
 DN
 ty
@@ -98946,7 +98911,7 @@ xh
 xh
 xh
 ty
-GY
+DN
 LG
 Gt
 Hk
@@ -99098,11 +99063,11 @@ xh
 xh
 xh
 ty
-GY
+DN
 yw
 xh
 hH
-GY
+DN
 ty
 xh
 xh
@@ -99250,11 +99215,11 @@ xh
 xh
 xh
 NP
-GY
-GY
+DN
+DN
 Eb
-GY
-GY
+DN
+DN
 yw
 xh
 xh
@@ -99401,12 +99366,12 @@ NM
 xh
 xh
 xh
-GY
-GY
-GY
+DN
+DN
+DN
 FE
-GY
-GY
+DN
+DN
 yw
 xh
 xh
@@ -99553,12 +99518,12 @@ NM
 NM
 xh
 xh
-GY
-GY
-GY
+DN
+DN
+DN
 YF
-GY
-GY
+DN
+DN
 yw
 xh
 xh
@@ -99706,11 +99671,11 @@ NM
 xh
 xh
 Hk
-GY
-GY
-GY
-GY
-GY
+DN
+DN
+DN
+DN
+DN
 yw
 xh
 xh
@@ -99859,9 +99824,9 @@ xh
 xh
 RM
 Hk
-GY
-GY
-GY
+DN
+DN
+DN
 LG
 KV
 xh
@@ -100012,7 +99977,7 @@ xh
 xh
 RM
 Hk
-GY
+DN
 LG
 KV
 xh
@@ -100164,7 +100129,7 @@ xh
 xh
 xh
 hH
-GY
+DN
 yw
 xh
 xh
@@ -121444,9 +121409,9 @@ xh
 xh
 Dg
 Dg
-UK
-UK
-UK
+Dg
+Dg
+Dg
 Dg
 Dg
 xh
