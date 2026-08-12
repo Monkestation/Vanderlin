@@ -42,6 +42,7 @@
 	)
 	isgoodguy = TRUE
 	chooses_name = FALSE
+	show_in_roundend = FALSE
 	ascension_level = 4
 	outfit = /datum/outfit/nitewalker
 	patron = /datum/patron/divine/noc

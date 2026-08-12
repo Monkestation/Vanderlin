@@ -35,6 +35,9 @@
 
 /datum/job/advclass/orphanadv
 	factions = list(FACTION_TOWN)
+	department_flag = YOUNGFOLK
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
+	jobs_always_know_me = list(JOB_MATRON)
 
 // BOOKISH BRAT - THE COURTLY CHILD
 
