@@ -183,7 +183,7 @@
 	if(!can_heal())
 		return FALSE
 
-	if((is_treated() || parent_bodypart?.limb_flags & BODYPART_GOOD_HEALER))
+	if((is_treated() || parent_bodypart?.bodypart_flags & BODYPART_GOOD_HEALER))
 		return TRUE
 	return damage_per_injury() <= autoheal_cutoff * (parent_mob.IsSleeping() ? 2 : 1)
 

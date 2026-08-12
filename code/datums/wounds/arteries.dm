@@ -81,7 +81,7 @@
 	crit_message = "A fountain of blood erupts from %VICTIM!"
 
 /datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, bclass)
-	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture) && !(bclass in ARTERY_HEART_BCLASSES))
+	if(affected.bodypart_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture) && !(bclass in ARTERY_HEART_BCLASSES))
 		return FALSE
 	// Must be vitals zone
 	if(affected.body_zone != BODY_ZONE_CHEST)

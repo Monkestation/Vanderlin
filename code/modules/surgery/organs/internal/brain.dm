@@ -17,7 +17,7 @@
 	slot = ORGAN_SLOT_BRAIN
 	unique_slot = ORGAN_SLOT_BRAIN
 	organ_efficiency = list(ORGAN_SLOT_BRAIN = 100)
-	organ_flags = ORGAN_VITAL
+	organ_flags = parent_type::organ_flags | ORGAN_VITAL
 	attack_verb = list("attacked", "slapped", "whacked")
 
 	///The brain's organ variables are significantly more different than the other organs, with half the decay rate for balance reasons, and twice the maxHealth

@@ -3,6 +3,7 @@
 	desc = "A severed snout. What did you cut this off of?"
 	icon_state = "snout" //placeholder
 	visible_organ = TRUE
+	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_SNOUT
 	organ_efficiency = list(ORGAN_SLOT_SNOUT = 100)

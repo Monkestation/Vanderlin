@@ -103,7 +103,7 @@
 #define BODYPART_FEATURE_FACE_DETAIL "facedetail"
 #define BODYPART_FEATURE_BRAND "brand"
 
-// ~flags for the limb_flags var on /obj/item/bodypart
+// ~flags for the bodypart_flags var on /obj/item/bodypart
 /// Can suffer artery wounds
 #define	BODYPART_HAS_ARTERY	(1<<0)
 #define BODYPART_CHRONIC_ARTHRITIS (1<<1)

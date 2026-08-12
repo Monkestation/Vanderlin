@@ -17,11 +17,11 @@
 	grid_width = 64
 	grid_height = 64
 
-	max_cavity_item_size = WEIGHT_CLASS_BULKY
-	max_cavity_volume = 8
+	max_cavity_item_size = WEIGHT_CLASS_NORMAL
+	max_cavity_volume = 2 + WEIGHT_CLASS_SMALL * 2
 
 	artery_type = list(ARTERY_HEAD, ARTERY_NECK)
-	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
+	bodypart_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
 
 	storage_type = /datum/storage/organ/head
 

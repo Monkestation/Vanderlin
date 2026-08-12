@@ -16,13 +16,13 @@
 	dismemberable = FALSE
 
 	max_cavity_item_size = WEIGHT_CLASS_BULKY
-	max_cavity_volume = 10
+	max_cavity_volume = 6 + WEIGHT_CLASS_NORMAL * 2
 
 	grid_width = 64
 	grid_height = 96
 
 	artery_type = list(ARTERY_CHEST, ARTERY_HEART)
-	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
+	bodypart_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
 
 	storage_type = /datum/storage/organ
 

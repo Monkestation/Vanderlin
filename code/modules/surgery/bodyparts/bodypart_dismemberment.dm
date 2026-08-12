@@ -204,7 +204,7 @@
 	phantom_owner.update_body()
 	phantom_owner.update_body_parts()
 
-	if(CHECK_BITFIELD(limb_flags, BODYPART_VITAL))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_VITAL))
 		phantom_owner.death()
 
 	if(move_to_floor)

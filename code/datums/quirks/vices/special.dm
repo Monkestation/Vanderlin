@@ -88,7 +88,7 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_HEAD)
-	BP?.limb_flags |= BODYPART_CHRONIC_MIGRAINE
+	BP?.bodypart_flags |= BODYPART_CHRONIC_MIGRAINE
 	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
 	return ..()

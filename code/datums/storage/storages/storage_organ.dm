@@ -105,6 +105,11 @@
 		return
 
 	if(!isorgan(to_remove))
+		// This sucks but oh well
+		if(istype(to_remove, /obj/item/natural/bundle/teeth) || istype(to_remove, /obj/item/natural/teeth))
+			if(messages)
+				user.balloon_alert(user, "needs a proper operation!")
+			return FALSE
 		if(!cavity_accessible())
 			if(messages)
 				user.balloon_alert(user, "bone in the way!")

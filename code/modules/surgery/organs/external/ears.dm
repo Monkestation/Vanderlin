@@ -3,6 +3,7 @@
 	icon_state = "ear"
 	desc = ""
 	visible_organ = TRUE
+	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 	zone = BODY_ZONE_PRECISE_EARS
 	slot = ORGAN_SLOT_EARS
 	organ_efficiency = list(ORGAN_SLOT_EARS = 50)
