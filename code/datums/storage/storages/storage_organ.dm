@@ -46,6 +46,16 @@
 /datum/storage/organ/handle_enter(datum/source, obj/item/arrived)
 	if(arrived.is_embedded)
 		return
+
+	// A bit hacky but organs rely on Insert, Remove is handled for us (begrudgingly)
+	if(isorgan(arrived))
+		var/obj/item/organ/organ_arrival = arrived
+		var/obj/item/bodypart/container = parent
+		if(container.owner && !organ_arrival.owner)
+			organ_arrival.Insert(container.owner)
+		else if(!organ_arrival.bodypart_owner)
+			organ_arrival.bodypart_insert(container)
+
 	return ..()
 
 /datum/storage/organ/return_inv(recursive)
