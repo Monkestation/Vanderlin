@@ -153,14 +153,6 @@
 	desc = "A decorated silver cane bearing a rontz at the top."
 	icon_state = "staffsheath"
 
-/obj/item/weapon/scabbard/cane/hand/Initialize(mapload)
-	. = ..()
-	create_storage(type = /datum/storage/no_interface/scabbard/sword)
-
-/obj/item/weapon/scabbard/cane/apply_components()
-	. = ..()
-	AddElement(/datum/element/walking_stick)
-
 /obj/item/weapon/scabbard/cane/getonmobprop(tag)
 	. = ..()
 	if(tag)
