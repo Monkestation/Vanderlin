@@ -64,6 +64,11 @@
 	return
 
 /datum/clan/nitewalker/apply_clan_components(mob/living/carbon/human/H)
+	var/datum/antagonist/vampire/vampirism = H.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(vampirism)
+		vampirism.isgoodguy = TRUE
+		vampirism.roundend_category = "Nitewardens"
+		vampirism.antagpanel_category = "Nitewarden"
 	return
 
 /datum/clan/nitewalker/setup_vampire_abilities(mob/living/carbon/human/H)

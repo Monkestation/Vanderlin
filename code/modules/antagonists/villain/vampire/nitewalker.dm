@@ -33,8 +33,6 @@
 
 /datum/antagonist/vampire/lord/nitewalker
 	name = "The Nitewalker"
-	antag_hud_type = null
-	antag_hud_name = null
 	confess_lines = list(
 		"HE KNOWS ALL!!",
 		"SILVER STILL STALKS THE NITE!!",
@@ -42,7 +40,8 @@
 	)
 	isgoodguy = TRUE
 	chooses_name = FALSE
-	show_in_roundend = FALSE
+	roundend_category = "Nitewardens"
+	antagpanel_category = "Nitewarden"
 	ascension_level = 4
 	outfit = /datum/outfit/nitewalker
 	patron = /datum/patron/divine/noc
