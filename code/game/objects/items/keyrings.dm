@@ -202,7 +202,7 @@
 		return NONE
 
 	if(length(contents) >= max_picks)
-		to_chat(user, span_warning("Too many lockpicks."))
+		user.balloon_alert(user, "too many picks!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(!user.temporarilyRemoveItemFromInventory(tool))
@@ -217,7 +217,7 @@
 		return
 
 	if(!length(contents))
-		user.balloon_alert("no picks!")
+		user.balloon_alert(user, "no picks!")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	var/obj/item/lockpick/K = locate() in contents
