@@ -153,3 +153,6 @@
   - rscadd: Dark Boots can now be repaired and the base path for boots is abstracted.
   ta3754859-max:
   - balance: Nerfed executioner sword cleave intent charge time to 5 seconds
+2026-08-13:
+  ModDownloading:
+  - balance: New weapons now always start fully sharp.
