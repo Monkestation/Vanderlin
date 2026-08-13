@@ -35,6 +35,7 @@
 
 	associated_skill = /datum/attribute/skill/magic/blood
 
+	required_form = null
 	spell_type = SPELL_BLOOD
 
 	charge_time = 4 SECONDS
@@ -72,7 +73,7 @@
 	speed = 3
 
 /obj/projectile/magic/aoe/fireball/rogue/great
-	name = "fireball"
+	name = "greater fireball"
 	exp_devi = 0
 	exp_heavy = 1
 	exp_light = 5
