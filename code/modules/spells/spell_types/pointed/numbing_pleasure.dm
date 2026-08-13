@@ -26,8 +26,8 @@
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		return	//No, you don't get to feel good. You're an undead mob. Feel bad.
 	cast_on.visible_message(span_info("[cast_on] begins to twitch as warmth radiates from them!"), span_notice("The pain from my wounds fade, every new one being a mere pleasant warmth!"))
-	phy.pain_mod *= 0.5	//Literally halves your pain modifier.
-	addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 0.5), 1 MINUTES)	//Adds back the 0.5 of pain, basically setting it back to 1.
+	phy.add_physiology_modifier(/datum/physiology_modifier/painkiller)
+	addtimer(CALLBACK(phy, TYPE_PROC_REF(/datum/physiology, remove_physiology_modifier), /datum/physiology_modifier/painkiller), 1 MINUTES)
 	cast_on.apply_status_effect(/datum/status_effect/buff/lux_drank/baothavitae)					//Basically lowers fortune by 2 but +3 speed, it's powerful. Drugs cus Baotha.
 
 /datum/action/cooldown/spell/painkiller/spell

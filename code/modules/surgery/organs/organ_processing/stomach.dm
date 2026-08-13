@@ -43,10 +43,8 @@
 			if(SPT_PROB(round(-owner.satiety/77), delta_time))
 				owner.set_jitter_if_lower(10 SECONDS)
 			hunger_rate *= 3
-		hunger_rate *= owner.physiology.hunger_mod
+		hunger_rate *= owner.physiology.get_hunger_mod()
 		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
-		if (ishuman(owner))
-			hunger_rate *= owner.dna.species.nutrition_mod
 		owner.adjust_nutrition(-hunger_rate * delta_time)
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req

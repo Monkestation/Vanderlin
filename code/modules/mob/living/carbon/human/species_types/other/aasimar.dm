@@ -111,8 +111,7 @@
 		/datum/body_marking/tonage,
 	)
 
-	pain_mod = 0.9 // 10% less pain from wounds
-	bleed_mod = 0.8 // 20% less bleed rate from injuries
+	species_mod = /datum/physiology_modifier/species/aasimar
 
 /datum/species/aasimar/check_roundstart_eligible()
 	return TRUE

@@ -145,7 +145,8 @@
 /mob/living/carbon/human/proc/handle_hygiene()
 	if(stat == DEAD || HAS_TRAIT(src, TRAIT_NOHYGIENE))
 		return
-	var/dirt_factor = HYGIENE_FACTOR * dna.species.hygiene_mod
+
+	var/dirt_factor = HYGIENE_FACTOR * physiology.get_hygiene_mod()
 	var/hygiene_adjustment = 0
 
 	//Are our clothes dirty?

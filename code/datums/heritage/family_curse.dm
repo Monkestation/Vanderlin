@@ -77,7 +77,7 @@
 	. = ..()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H.dna.species.nutrition_mod += 1.1
+		H.physiology.add_physiology_modifier(/datum/physiology_modifier/hunger_curse)
 
 /atom/movable/screen/alert/status_effect/family_curse/hunger
 	name = "Insatiable Appetite"

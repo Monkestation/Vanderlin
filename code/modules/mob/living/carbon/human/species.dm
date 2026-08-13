@@ -133,17 +133,8 @@
 	/// Prefix for spoken messages
 	var/say_mod = "says"
 
-	/// Multipler for how quickly nutrition decreases
-	var/nutrition_mod = 1
-	/// Multiplier for how quickly hygiene decreases
-	var/hygiene_mod = 1
-	/// Multipler for blood loss
-	var/bleed_mod = 1
-	/// Multipler for pain
-	var/pain_mod = 1
-	/// Electrocution coeffcient
-	var/siemens_coeff = 1
-
+	///our physiology species modifier
+	var/datum/physiology_modifier/species/species_mod
 
 	/// Type of damage melee attacks do
 	var/attack_type = BRUTE
@@ -775,7 +766,7 @@
 		var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
 		customizer_choice.validate_entry(human, entry)
 
-/datum/species/proc/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
+/datum/species/proc/on_species_gain(mob/living/carbon/human/C, datum/species/old_species, datum/preferences/pref_load)
 	// Drop the items the new species can't wear
 	if((AGENDER in species_traits))
 		C.gender = PLURAL
@@ -853,6 +844,8 @@
 		apply_customizers_to_character(C)
 
 	on_gender_update(C)
+	if(species_mod)
+		C.physiology.add_physiology_modifier(species_mod)
 	C.update_organ_requirements() //post species trait gains
 
 	if(!(C.status_flags & BUILDING_ORGANS))
@@ -891,6 +884,8 @@
 
 	if(inherent_factions)
 		C.remove_faction(inherent_factions)
+	if(species_mod)
+		C.physiology.remove_physiology_modifier(species_mod)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 
@@ -1975,7 +1970,7 @@
 	SEND_SIGNAL(H, COMSIG_MOB_APPLY_DAMAGE, damage, damagetype, def_zone)
 	var/hit_percent = 1
 	damage = max(damage - (blocked),0)
-	hit_percent = (hit_percent * (100-H.physiology.damage_resistance))/100
+	hit_percent = (hit_percent * (100-H.physiology.get_damage_resistance()))/100
 	if(!damage || (!forced && hit_percent <= 0))
 		return 0
 
@@ -1997,7 +1992,7 @@
 	switch(damagetype)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
-			damage_amount = forced ? damage : damage * hit_percent * H.physiology.brute_mod
+			damage_amount = forced ? damage : damage * hit_percent * H.physiology.get_brute_mod()
 			if(H.can_feel_pain())
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
@@ -2032,7 +2027,7 @@
 
 		if(BURN)
 			H.damageoverlaytemp = 20
-			damage_amount = forced ? damage : damage * hit_percent * H.physiology.burn_mod
+			damage_amount = forced ? damage : damage * hit_percent * H.physiology.get_burn_mod()
 			if(damage_amount > 10 && prob(damage_amount))
 				H.emote("pain")
 			if(flashes)
@@ -2052,19 +2047,19 @@
 			else
 				H.adjustFireLoss(damage_amount)
 		if(TOX)
-			damage_amount = forced ? damage : damage * hit_percent * H.physiology.tox_mod
+			damage_amount = forced ? damage : damage * hit_percent * H.physiology.get_tox_mod()
 			H.adjustToxLoss(damage_amount)
 
 		if(OXY)
-			damage_amount = forced ? damage : damage * hit_percent * H.physiology.oxy_mod
+			damage_amount = forced ? damage : damage * hit_percent * H.physiology.get_oxy_mod()
 			H.adjustOxyLoss(damage_amount)
 
 		if(CLONE)
-			damage_amount = forced ? damage : damage * hit_percent * H.physiology.clone_mod
+			damage_amount = forced ? damage : damage * hit_percent * H.physiology.get_clone_mod()
 			H.adjustCloneLoss(damage_amount)
 
 		if(BRAIN)
-			damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
+			damage_amount = forced ? damage : damage * hit_percent * H.physiology.get_brain_mod()
 			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)
 
 	return damage_amount
@@ -2161,7 +2156,7 @@
 		debuff_level = calculate_heat_debuff_level(heat_excess)
 		// Apply damage
 		if(burn_damage > 0)
-			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod, 0, CONFIG_GET(number/per_tick/max_fire_damage))
+			var/final_damage = CLAMP(burn_damage * H.physiology.get_heat_mod(), 0, CONFIG_GET(number/per_tick/max_fire_damage))
 			INVOKE_ASYNC(H, PROC_REF(apply_damage), final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
 			if(H.stat < UNCONSCIOUS && prob(burn_damage * 10 / 4))
 				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob, emote), "pain")
@@ -2178,7 +2173,7 @@
 		debuff_level = calculate_cold_debuff_level(cold_deficit)
 		// Apply damage
 		if(cold_damage > 0)
-			INVOKE_ASYNC(H, PROC_REF(apply_damage), cold_damage * H.physiology.cold_mod, BURN,  flashes = FALSE)
+			INVOKE_ASYNC(H, PROC_REF(apply_damage), cold_damage * H.physiology.get_cold_mod(), BURN,  flashes = FALSE)
 		// Apply building cold debuffs
 		apply_cold_debuffs(H, debuff_level, cold_deficit)
 	// Clear effects when in safe range
@@ -2432,7 +2427,7 @@
 ////////////
 
 /datum/species/proc/spec_stun(mob/living/carbon/human/H,amount)
-	. = H.physiology.stun_mod * amount
+	. = H.physiology.get_stun_mod() * amount
 
 //////////////
 //Space Move//

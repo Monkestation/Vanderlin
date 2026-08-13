@@ -125,7 +125,7 @@ And it also helps for the character set panel
 		H.has_reflection = FALSE
 		H.cut_overlay(H.reflective_icon)
 		H.mob_biotypes |= MOB_UNDEAD
-		H.physiology?.bleed_mod /= 2
+		H.physiology?.add_physiology_modifier(/datum/physiology_modifier/clan)
 
 		if(alt_sprite)
 			if (!alt_sprite_greyscale)
@@ -290,7 +290,7 @@ And it also helps for the character set panel
 	vampire.has_reflection = TRUE
 	vampire.create_reflection()
 	vampire.update_reflection()
-	vampire.physiology?.bleed_mod *= 2
+	vampire.physiology?.remove_physiology_modifier(/datum/physiology_modifier/clan)
 	vampire.mob_biotypes &= ~MOB_UNDEAD
 
 	clan_members -= vampire

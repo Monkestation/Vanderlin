@@ -117,7 +117,7 @@
 	attribute_initialize()
 
 	status_flags |= BUILDING_ORGANS
-
+	physiology = new() ///this is now core for species
 	//initialize limbs first
 	create_bodyparts()
 
@@ -125,8 +125,6 @@
 
 	if(dna.species)
 		set_species(dna.species.type, initial_set = TRUE)
-
-	physiology = new()
 
 	status_flags &= ~BUILDING_ORGANS
 	culture = GLOB.culture_singletons[culture]
@@ -866,7 +864,7 @@
 
 /mob/living/carbon/human/do_after_coefficent()
 	. = ..()
-	. *= physiology?.do_after_speed
+	. *= physiology?.get_do_after_speed()
 
 /mob/living/carbon/human/proc/skele_look()
 	dna.species.go_bald()

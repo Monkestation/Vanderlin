@@ -354,6 +354,10 @@
 	if (amount == 0)
 		return amount
 
+	if(amount > 0 && ishuman(parent))
+		var/mob/living/carbon/human/mob = parent
+		amount *= mob.physiology?.get_mana_regen_mod()
+
 	var/result = 0
 	if(!safe)
 		result = clamp(src.amount + amount, 0, maximum_mana_capacity)

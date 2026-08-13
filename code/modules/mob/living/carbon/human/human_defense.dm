@@ -433,8 +433,7 @@
 	else if(!(flags & SHOCK_NOGLOVES)) //This gets the siemens_coeff for all non tesla shocks
 		if(gloves)
 			siemens_coeff *= gloves.siemens_coefficient
-	siemens_coeff *= physiology.siemens_coeff
-	siemens_coeff *= dna.species.siemens_coeff
+	siemens_coeff *= physiology.get_siemens_coeff()
 	. = ..()
 	//Don't go further if the shock was blocked/too weak.
 	if(!.)
@@ -777,5 +776,5 @@
 
 /mob/living/carbon/human/getShock(painkiller_included)
 	. = ..()
-	if(dna?.species)
-		return . * dna?.species.pain_mod
+	if(physiology)
+		return . * physiology.get_pain_mod()

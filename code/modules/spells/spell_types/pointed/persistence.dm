@@ -31,10 +31,8 @@
 		if(ishuman(cast_on)) //BLEED AND PAIN
 			var/mob/living/carbon/human/human_target = cast_on
 			var/datum/physiology/phy = human_target.physiology
-			phy.bleed_mod *= 1.5
-			phy.pain_mod *= 1.5
-			addtimer(VARSET_CALLBACK(phy, bleed_mod, phy.bleed_mod /= 1.5), 19 SECONDS)
-			addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 1.5), 19 SECONDS)
+			phy.add_physiology_modifier(/datum/physiology_modifier/persistence)
+			addtimer(CALLBACK(phy, TYPE_PROC_REF(/datum/physiology, remove_physiology_modifier), /datum/physiology_modifier/persistence), 19 SECONDS)
 			human_target.visible_message(span_danger("[cast_on]'s wounds become inflamed as their vitality is sapped away!"), span_userdanger("Ravox inflames my wounds and weakens my body!"))
 		return
 
@@ -57,8 +55,8 @@
 		if(ishuman(C))
 			var/mob/living/carbon/human/human_target = C
 			var/datum/physiology/phy = human_target.physiology
-			phy.pain_mod *= 0.85 // 15% pain reduction
-			addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 0.85), 19 SECONDS)
+			phy.add_physiology_modifier(/datum/physiology_modifier/persistence_buff)
+			addtimer(CALLBACK(phy, TYPE_PROC_REF(/datum/physiology, remove_physiology_modifier), /datum/physiology_modifier/persistence_buff), 19 SECONDS)
 	else if(HAS_TRAIT(cast_on, TRAIT_SIMPLE_WOUNDS))
 		for(var/datum/wound/bleeder in cast_on.simple_wounds)
 			bleeder.woundpain = max(bleeder.sewn_woundpain, bleeder.woundpain * 0.5)

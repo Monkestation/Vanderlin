@@ -40,7 +40,7 @@
 	default_color = "3e3e3e"
 	use_skintones = TRUE
 
-	hygiene_mod = 1.25
+	species_mod = /datum/physiology_modifier/species/medicator
 
 	species_traits = list(NO_UNDERWEAR, HAIR, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_NASTY_EATER)

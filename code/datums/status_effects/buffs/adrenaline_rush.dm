@@ -17,7 +17,7 @@
 	var/mob/living/carbon/human/human = owner
 	if(istype(human))
 		human.blood_volume = min((human.blood_volume + blood_restore), BLOOD_VOLUME_NORMAL)
-		human.physiology.pain_mod *= 0.5
+		human.physiology.add_physiology_modifier(/datum/physiology_modifier/adrenaline_rush)
 
 /datum/status_effect/buff/adrenaline_rush/on_remove()
 	. = ..()
@@ -30,7 +30,7 @@
 /datum/status_effect/buff/adrenaline_rush/proc/clear_adrenaline_rush()
 	var/mob/living/carbon/human/human = owner
 	if(istype(human))
-		human.physiology.pain_mod *= 2
+		human.physiology.remove_physiology_modifier(/datum/physiology_modifier/adrenaline_rush)
 
 /datum/status_effect/buff/adrenaline_rush/ranged
 	effectedstats = list(STAT_SPEED = 2)

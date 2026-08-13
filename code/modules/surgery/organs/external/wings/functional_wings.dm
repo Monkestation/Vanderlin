@@ -102,7 +102,7 @@
 	wings_open = TRUE
 	human.update_body_parts()
 
-	human.physiology.stun_mod *= 2
+	human.physiology.add_physiology_modifier(/datum/physiology_modifier/flight)
 	init_signals(human)
 	passtable_on(human, SPECIES_FLIGHT_TRAIT)
 	human.set_resting(FALSE, TRUE)
@@ -127,7 +127,7 @@
 	wings_open = FALSE
 	human.update_body_parts()
 
-	human.physiology.stun_mod *= 0.5
+	human.physiology.remove_physiology_modifier(/datum/physiology_modifier/flight)
 	passtable_off(human, SPECIES_FLIGHT_TRAIT)
 
 	deltimer(flight_timer)

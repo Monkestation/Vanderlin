@@ -148,7 +148,7 @@
 #undef BLOOD_DRIP_RATE_MOD
 
 /mob/living/carbon/human/bleed(amount)
-	amount *= physiology?.bleed_mod
+	amount *= physiology?.get_bleed_mod()
 	return ..()
 
 /mob/living/proc/restore_blood()

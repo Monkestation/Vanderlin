@@ -130,7 +130,7 @@
 	inherent_biotypes = MOB_ROBOTIC | MOB_HUMANOID
 	exotic_bloodtype = /datum/blood_type/oil
 
-	bleed_mod = 0.7
+	species_mod = /datum/physiology_modifier/species/automaton
 	punch_damage = 5
 	kick_damage = 5
 

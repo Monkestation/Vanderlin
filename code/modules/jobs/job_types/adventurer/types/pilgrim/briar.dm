@@ -311,7 +311,7 @@
 	to_chat(user, span_good("The rumblings of a troll echo through the trees, your offering was acknowledged by the ancient dwellers of the forest."))
 	user.emote("rage", forced = TRUE)
 	ADD_TRAIT(user, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
-	user.physiology.pain_mod *= 0.6
+	user.physiology.add_physiology_modifier(/datum/physiology_modifier/black_briar)
 	user.remove_spell(/datum/action/cooldown/spell/healing)
 	user.add_spell(/datum/action/cooldown/spell/undirected/shapeshift/troll_form)
 	to_chat(user, span_warning("I no longer care for mending wounds, let the lords of the forest be known!"))

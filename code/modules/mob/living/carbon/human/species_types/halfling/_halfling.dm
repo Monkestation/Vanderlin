@@ -103,7 +103,7 @@
 		/datum/body_marking/tonage,
 	)
 
-	nutrition_mod = 2
+	species_mod = /datum/physiology_modifier/species/halfling
 
 /datum/species/halfling/check_roundstart_eligible()
 	return TRUE

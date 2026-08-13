@@ -122,7 +122,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.set_patron(/datum/patron/inhumen/graggar_zizo)
 			old_cm = dreamer.cmode_music
 			dreamer.cmode_music = 'sound/music/cmode/antag/combat_maniac.ogg'
-			phy.bleed_mod *= 0.5
+			phy.add_physiology_modifier(/datum/physiology_modifier/maniac)
 			for(var/datum/status_effect/effect in dreamer.status_effects) //necessary to prevent exploits
 				dreamer.remove_status_effect(effect)
 			dreamer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/maniac)
@@ -176,7 +176,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.cmode_music = old_cm
 			dreamer.remove_stat_modifier("[type]")
 			qdel(dreamer.GetComponent(/datum/component/theme_music))
-			phy.bleed_mod *= 2
+			phy.remove_physiology_modifier(/datum/physiology_modifier/maniac)
 			UnregisterSignal(dreamer, COMSIG_LIVING_DEATH)
 			var/client/client = dreamer?.client
 			if(client) //clear screenshake animation

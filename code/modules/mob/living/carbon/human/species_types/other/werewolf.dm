@@ -75,8 +75,7 @@
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 3)
 
 	changesource_flags = WABBAJACK
-	bleed_mod = 0.6
-	pain_mod = 0.2
+	species_mod = /datum/physiology_modifier/species/werewolf
 
 /datum/species/werewolf/send_voice(mob/living/carbon/human/H)
 	playsound(H, pick('sound/vo/mobs/wwolf/wolftalk1.ogg', 'sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
