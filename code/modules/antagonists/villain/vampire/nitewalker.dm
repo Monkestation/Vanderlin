@@ -142,11 +142,12 @@
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	gloves = /obj/item/clothing/gloves/leather
-	ring =  /obj/item/clothing/ring/silver/noc
+	ring =  /obj/item/clothing/ring/nitewalker
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
 	r_hand = /obj/item/weapon/sword/long/silver/nitewalker
+	l_hand = /obj/item/weapon/knife/dagger/steel/stiletto/nitewalker
 	backpack_contents = list(/obj/item/needle/blessed = 1)
 
 /datum/outfit/nitewalker/post_equip(mob/living/carbon/human/H)
@@ -170,3 +171,29 @@
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/knife/dagger/steel/stiletto/nitewalker
+	name = "nite's sting"
+	desc = "A needle thin blade forged of lunar silver. The Moon Prince is watching."
+	max_blade_int = 50000
+	max_integrity = 50000
+	resistance_flags = INDESTRUCTIBLE
+
+/obj/item/weapon/knife/dagger/steel/stiletto/nitewalker/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/lightning)
+	enchant(/datum/enchantment/on_hit/rewind)
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/ring/nitewalker
+	name = "nitewarden's ring"
+	icon_state = "bs_ring_ruby"
+	desc = "A ring of blacksteel with a shimmering rontz set within. It thrums with unseen power."
+	sellprice = 500
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/ring/nitewalker/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/life_eternal)
+	enchant(/datum/enchantment/leaping)
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
