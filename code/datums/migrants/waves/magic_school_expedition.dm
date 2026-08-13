@@ -147,31 +147,9 @@
 	name = "Magic School Expedition"
 	max_spawns = 1
 	shared_wave_type = /datum/migrant_wave/magic_school_expedition
-	downgrade_wave = /datum/migrant_wave/magic_school_expedition_down
 	weight = 5
 	roles = list(
 		/datum/migrant_role/magic_teacher = 1,
 		/datum/migrant_role/magic_student = 5
 	)
 	greet_text = "A teacher in travel-worn robes takes a seat, a cluster of young apprentices following close behind. Their satchels clink faintly with glass and metal, and the smell of old parchment drifts from their packs."
-
-/datum/migrant_wave/magic_school_expedition_down
-	name = "Magic School Expedition"
-	shared_wave_type = /datum/migrant_wave/magic_school_expedition
-	downgrade_wave = /datum/migrant_wave/magic_school_expedition_two
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/magic_teacher = 1,
-		/datum/migrant_role/magic_student = 3
-	)
-	greet_text = "The door opens to a weary teacher and a smaller band of pupils. Their robes are torn at the hems, and one student’s hands are wrapped in singed cloth."
-
-/datum/migrant_wave/magic_school_expedition_two
-	name = "Magic School Expedition"
-	shared_wave_type = /datum/migrant_wave/magic_school_expedition
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/magic_teacher = 1,
-		/datum/migrant_role/magic_student = 1
-	)
-	greet_text = "Only a single student remains beside the teacher. They sit quietly, eyes fixed on the table, as dark stains dry on the cuffs of their robes."

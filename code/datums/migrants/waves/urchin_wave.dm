@@ -99,30 +99,9 @@
 	name = "Urchin Gang"
 	max_spawns = 1
 	shared_wave_type = /datum/migrant_wave/urchin_wave
-	downgrade_wave = /datum/migrant_wave/urchin_wave_down
 	weight = 8
 	roles = list(
 		/datum/migrant_role/urchinbrain = 1,
 		/datum/migrant_role/urchinbrawn = 2,
 	)
 	greet_text = "There's two rules - one, you give the Boss your coin. Two, you don't mess with the boss. Three, I can't count that good..."
-
-/datum/migrant_wave/urchin_wave_down
-	name = "Urchin Gang"
-	shared_wave_type = /datum/migrant_wave/urchin_wave
-	downgrade_wave = /datum/migrant_wave/urchin_wave_down_two
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/urchinbrain = 1,
-		/datum/migrant_role/urchinbrawn = 1,
-	)
-	greet_text = "There's two rules - one, you give the Boss your coin. Two, you don't mess with the boss. Three, I can't count that good..."
-
-/datum/migrant_wave/urchin_wave_down_two
-	name = "The Urchin"
-	shared_wave_type = /datum/migrant_wave/urchin_wave
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/urchinbrain = 1,
-	)
-	greet_text = "You're tired of eating gruel, time for something completely different."
