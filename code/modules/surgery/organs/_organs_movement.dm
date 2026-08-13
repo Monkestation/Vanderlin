@@ -240,6 +240,6 @@
 	if(owner)
 		Remove(owner)
 	else if(bodypart_owner)
-		bodypart_remove(limb_owner = owner)
+		bodypart_remove(bodypart_owner)
 	else
 		stack_trace("Force removed an already removed organ!")
