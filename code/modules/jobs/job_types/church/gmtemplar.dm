@@ -28,7 +28,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_GMTEMPLAR
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -39,8 +39,9 @@
 	allowed_patrons = list(/datum/patron/divine/ravox)
 
 	outfit = /datum/outfit/gmtemplar
-	give_bank_account = 0
+	give_bank_account = 10
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	job_bitflag = BITFLAG_CHURCH
 

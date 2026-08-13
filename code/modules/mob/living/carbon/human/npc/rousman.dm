@@ -149,8 +149,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	inherent_traits = list(
 		TRAIT_KNOW_ROUS_DOORS,
 		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHIGHPRESSURE,
-		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RADIMMUNE,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_CRITICAL_WEAKNESS,
@@ -641,8 +639,10 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	//! MAGIC BALANCE POINT
+	ADD_TRAIT(seer, TRAIT_SORCERER, INNATE_TRAIT)
+	seer.adjust_technique_mastery_points(12)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
@@ -673,7 +673,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
 	belt = /obj/item/storage/belt/leather/black
-	l_pocket = /obj/item/book/granter/spellbook/expert
+	l_pocket = /obj/item/spellbook/expert/starter/earth
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
@@ -687,9 +687,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	seer.adjust_technique_mastery_points(14)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
-		seer.add_spell(spell)
+		seer.add_spell(spell, mastery_spell = TRUE)

@@ -4,8 +4,6 @@
  * Teleports the caster to a turf selected by get_destinations().
  */
 /datum/action/cooldown/spell/undirected/teleport
-	school = SCHOOL_TRANSLOCATION
-
 	/// What channel the teleport is done under.
 	var/teleport_channel = TELEPORT_CHANNEL_MAGIC
 	/// Whether we force the teleport to happen (ie, it cannot be blocked by noteleport areas or blessings or whatever)

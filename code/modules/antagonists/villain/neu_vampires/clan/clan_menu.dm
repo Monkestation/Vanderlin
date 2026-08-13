@@ -814,7 +814,7 @@
 				<div class="clan-desc">[user_clan ? user_clan.desc : ""]</div>
 			</div>
 			<div class="header-controls">
-				<a href='byond://?src=[REF(src)];action=refresh_clan_menu" class="header-btn">Refresh</a>
+				<a href='byond://?src=[REF(src)];action=refresh_clan_menu' class="header-btn">Refresh</a>
 			</div>
 		</div>
 

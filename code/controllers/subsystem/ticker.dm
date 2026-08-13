@@ -248,7 +248,7 @@ SUBSYSTEM_DEF(ticker)
 	//Get ALL town jobs
 	var/list/town_jobs = list()
 	for(var/datum/job/J as anything in SSjob.joinable_occupations)
-		if (J.faction == FACTION_TOWN)
+		if(FACTION_TOWN in J.factions)
 			town_jobs += J.title
 
 	//Now find players who readied with HIGH preference on those town jobs

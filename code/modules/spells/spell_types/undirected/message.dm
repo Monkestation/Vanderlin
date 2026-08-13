@@ -4,7 +4,7 @@
 	desc = "Latch onto the mind of one who is familiar to you, whispering a message into their head."
 	button_icon_state = "message"
 
-	point_cost = 1
+	required_form = FORM_AIR
 
 	charge_required = FALSE
 	spell_cost = 30

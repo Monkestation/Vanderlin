@@ -170,7 +170,7 @@
 		/obj/item/grown/log/tree/stick = 3,
 		/obj/item/natural/clod/dirt = 2
 	)
-	construct_tool = /obj/item/weapon/knife
+	construct_tool = /obj/item/weapon/hammer
 	category = "Walls"
 	floor_object = TRUE
 
@@ -180,6 +180,18 @@
 	result_type = /turf/closed/wall/mineral/decowood/vert
 	required_materials = list(
 		/obj/item/grown/log/tree/stick = 3,
+		/obj/item/natural/clod/dirt = 2
+	)
+	construct_tool = /obj/item/weapon/hammer
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/baddaub
+	name = "Poor Quality Daub Wall"
+	desc = "A speedily constructed daub wall of mediocre-at-best quality."
+	result_type = /turf/closed/wall/mineral/baddaub
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
 		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/hammer

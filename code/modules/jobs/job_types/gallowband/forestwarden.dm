@@ -29,7 +29,7 @@
 	tutorial = "You were born to the forest - no thorn, tree, nor troll is unknown to you while you stand under these leaves. You alone have proven worthy to lead the Gallowband, and you alone are trusted to hold this weight. Honour the ancient oaths to protect these woods and bear your symbolic helmet with pride. The Hunt calls you, and one dae, you will die in these woods, leaving the mantle to another."
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORWARDEN
@@ -50,6 +50,7 @@
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
 	give_bank_account = 45
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 	languages = list(/datum/language/gronnic)
 
@@ -88,7 +89,7 @@
 	armor = /obj/item/clothing/armor/plate
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/platelegs
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/visored/warden
 	gloves = /obj/item/clothing/gloves/leather
