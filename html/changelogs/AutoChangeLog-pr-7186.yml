@@ -1,8 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added Lunar Oracle admin preset."
-  - rscadd: "Added Lunar Anastasis miracle."
-  - rscadd: "Added Moonstrike miracle."
-  - rscadd: "Added Diagnosis miracle to Priest."
-  - rscadd: "Added an admin job category for fluff gimmick roles. Auto whitelisted to only staff but can be granted to players on a round-by-round basis. All jobs start disabled so category only appears when activated."

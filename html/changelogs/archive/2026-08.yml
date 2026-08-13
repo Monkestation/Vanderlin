@@ -96,3 +96,63 @@
 2026-08-11:
   CheffieGithub:
   - bugfix: Fixed clan interface not rendering right
+2026-08-12:
+  KevinfromHP:
+  - balance: Daewalker spawns more often based on a Vlord's ascension level.
+  - balance: Some holy things now scale based on a Vlord's ascension level rather
+      than a flat 1 or 0.
+  - bugfix: Fixed broken HTML in the Blood Rite prompt
+  - refactor: Vampire Lord Blood Rite cleanup
+  copper-404:
+  - rscadd: Added a variant of the daub wall for mapping purposes, complete with a
+      construction recipe.
+  - qol: Changed daub wall construction recipe to use a hammer instead of a knife.
+  dwasint:
+  - rscdel: player attunements
+  - rscdel: spell attunements
+  - rscadd: spell forms and techniques, spells are now split into a form and an optional
+      technique
+  - rscadd: bookcrafting system, now books can take more then a catalyst and doing
+      so provides buffs for all spells
+  - refactor: spells learned from your spellbook are now only kept if you are holding
+      the spellbook.
+  - rscadd: spellsword and spellfist spells
+  - rscadd: 100 new impact spells
+  - rscadd: 40 new cantrip spells
+  - refactor: lightning spells no longer hard stun constantly
+  - rscadd: arcyne necromancy
+  - refactor: summoning, it now has a downside where when your summons die you experience
+      backlash preventing resummon
+  - rscadd: sorcerer framework, unlike mages sorcerers cannot learn spells from a
+      spellbook in exchange for more innate points
+  - rscadd: spellbook granted spells now have a limited number of charges, to replenish
+      you need to use the rune of recharge.
+  - rscdel: attunement matrix
+  - refactor: spell cost, spell cast speed, and spell strength are now public information
+      on your equipment so its not impossible to tell what is giving you buffs, and
+      is no longer mutated by the spell you are casting
+  - qol: you can now examine spells with shift click to get name and desc
+  l3lb0t:
+  - bugfix: Hand subclasses now properly give leadership XP.
+  realforest2001:
+  - bugfix: Subclasses now have their factions set correctly.
+  - refactor: Changes how jobs know eachother.
+  - rscadd: Added Lunar Oracle admin preset.
+  - rscadd: Added Lunar Anastasis miracle.
+  - rscadd: Added Moonstrike miracle.
+  - rscadd: Added Diagnosis miracle to Priest.
+  - rscadd: Added an admin job category for fluff gimmick roles. Auto whitelisted
+      to only staff but can be granted to players on a round-by-round basis. All jobs
+      start disabled so category only appears when activated.
+  - rscadd: Bloodsucker Wretch now has the Vampire antag datum properly, their traits
+      and closecombat have been moved into the clan setup.
+  - bugfix: Factions are now inhereted from jobs as intended.
+  - code_imp: Changes faction var to factions on job as is list.
+  - admin: VV Modify Traits now uses a searchable TGUI list.
+  - rscadd: Gave traits proper names in the selection list.
+  - rscadd: Dark Boots can now be repaired and the base path for boots is abstracted.
+  ta3754859-max:
+  - balance: Nerfed executioner sword cleave intent charge time to 5 seconds
+2026-08-13:
+  ModDownloading:
+  - balance: New weapons now always start fully sharp.

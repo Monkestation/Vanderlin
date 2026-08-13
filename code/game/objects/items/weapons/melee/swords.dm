@@ -940,7 +940,6 @@
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	sellprice = 0
 	static_price = TRUE
-	randomize_blade_int = FALSE
 	item_weight = 1.6 KILOGRAMS
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
