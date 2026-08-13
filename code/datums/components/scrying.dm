@@ -120,7 +120,7 @@
 
 	var/real_cooldown = cooldown_duration + vision_duration
 	COOLDOWN_START(src, scry_cooldown, real_cooldown)
-	user.visible_message(span_danger("[user] stares into \the [name], [user.p_their()] eyes rolling back into [user.p_their()] head."), span_warning("My eyes roll into the back of my head as I'm lost in the depths of the orb."))
+	user.visible_message(span_danger("[user] stares into \the [name], [user.p_their()] eyes rolling back into [user.p_their()] head."), span_warning("My eyes roll into the back of my head as I'm lost in the depths of \the [name]."))
 	scrying_eye.orbit(found_target)
 	var/target_perception = GET_MOB_ATTRIBUTE_VALUE(found_target, STAT_PERCEPTION)
 	if(target_perception >= perception_face)
