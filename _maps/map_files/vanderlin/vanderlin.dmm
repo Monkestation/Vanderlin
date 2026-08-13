@@ -28123,6 +28123,10 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
+"mYy" = (
+/obj/structure/giantfur,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/town/keep/gate)
 "mYB" = (
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_y = 32
@@ -36929,6 +36933,10 @@
 /obj/item/weapon/polearm/spear,
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
+"qTx" = (
+/obj/structure/fluff/walldeco/painting/queen,
+/turf/closed/wall/mineral/stonebrick,
+/area/indoors/town/keep/gate)
 "qTE" = (
 /obj/machinery/essence/test_tube,
 /turf/open/floor/blocks/stonered/tiny,
@@ -40193,6 +40201,7 @@
 /area/outdoors/farm)
 "soA" = (
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/chair/stool/crafted,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
 "soE" = (
@@ -52391,6 +52400,10 @@
 /obj/item/natural/rock,
 /obj/item/natural/rock,
 /obj/item/natural/rock,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = -32;
+	pixel_y = 0
+	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
 "xuG" = (
@@ -156428,7 +156441,7 @@ biy
 aBm
 qDx
 qDx
-qDx
+mYy
 feP
 ngr
 ngr
@@ -156627,7 +156640,7 @@ biy
 biy
 biy
 biy
-hHM
+qTx
 qDx
 qDx
 qDx
