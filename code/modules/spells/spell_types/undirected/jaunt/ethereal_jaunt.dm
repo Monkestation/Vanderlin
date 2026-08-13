@@ -63,6 +63,7 @@
 	if(!holder)
 		CRASH("[type] attempted do_jaunt but failed to create a jaunt holder via enter_jaunt.")
 	holder.name = cast_on.name
+	SEND_SIGNAL(cast_on, COMSIG_FOV_HIDE)
 
 	if(jaunt_out_time > 0)
 		ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
@@ -181,6 +182,7 @@
 
 	REMOVE_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
 
+	SEND_SIGNAL(cast_on, COMSIG_FOV_SHOW)
 	if(final_point.density)
 		var/list/aside_turfs = get_adjacent_open_turfs(final_point)
 		if(length(aside_turfs))
