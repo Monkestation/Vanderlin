@@ -3,10 +3,20 @@
 	desc = "A steel nasal helmet, usually worn by the guards of any respectable fief."
 	icon_state = "nasal"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 2.3 KILOGRAMS
+
+/obj/item/clothing/head/helmet/nasal/iron
+	name = "nasal helmet"
+	desc = "A iron nasal helmet, usually worn by the guards of any somewhat respectable fief."
+	icon_state = "ironnasal"
+	sellprice = VALUE_CHEAP_IRON_HELMET
+	smeltresult = /obj/item/ingot/iron
+	body_parts_covered = COVERAGE_NASAL
+	max_integrity = INTEGRITY_STRONG
+	item_weight = 2.0 KILOGRAMS
 
 //................ Gallowglass ............... //
 
