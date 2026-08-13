@@ -3,8 +3,6 @@
 	desc = "Reveals the presence of toxins or poisons in nearby objects."
 	button_icon_state = "detect_poison"
 	cast_range = 2
-	point_cost = 2
-	attunements = list(/datum/attunement/life)
 	essences = list(/datum/thaumaturgical_essence/poison)
 
 /datum/action/cooldown/spell/essence/detect_poison/cast(atom/cast_on)
@@ -35,3 +33,12 @@
 	icon_state = "solosnake"
 	duration = 2 SECONDS
 	layer = EFFECTS_LAYER
+
+/datum/action/cooldown/spell/essence/detect_poison/spell
+	name = "Detect Toxin"
+	charge_required = TRUE
+	charge_time = 2 SECONDS
+	spell_cost = 10
+	spell_type = SPELL_MANA
+
+	required_form = FORM_LIFE

@@ -1,0 +1,70 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/adv_guild)
+"e" = (
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/adv_guild)
+"i" = (
+/obj/structure/bed/wool,
+/obj/item/bedsheet/pelt,
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+"q" = (
+/obj/structure/closet/crate/drawer{
+	pixel_y = 3
+	},
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+"r" = (
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+"t" = (
+/obj/structure/door/violet{
+	name = "Adventurer Bedroom 1";
+	lockid = "adv1"
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+"A" = (
+/obj/structure/fluff/wallclock,
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+"D" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/item/key/apartments/adv1,
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+"N" = (
+/obj/structure/table/wood/reinforced_alter,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/town/adv_guild)
+"Q" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/town/adv_guild)
+"Z" = (
+/obj/structure/chair/wood/alt,
+/turf/open/floor/carpet/green,
+/area/indoors/town/adv_guild)
+
+(1,1,1) = {"
+i
+q
+Q
+a
+"}
+(2,1,1) = {"
+A
+r
+Q
+t
+"}
+(3,1,1) = {"
+D
+Z
+N
+e
+"}

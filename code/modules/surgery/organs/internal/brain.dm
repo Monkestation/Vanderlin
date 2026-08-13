@@ -50,29 +50,21 @@
 
 	var/list/datum/brain_trauma/traumas = list()
 
-/obj/item/organ/brain/Insert(mob/living/carbon/brain_owner, special = FALSE, drop_if_replaced = FALSE, new_zone = null, no_id_transfer = FALSE)
+/obj/item/organ/brain/on_mob_insert(mob/living/carbon/brain_owner, special, movement_flags, new_zone)
 	. = ..()
 
 	name = initial(name)
 
 	if(brainmob)
-		if(brainmob?.key)
-			stack_trace("Decoy override brain with a key assigned - This should never happen.")
+		if(brain_owner.key)
+			brain_owner.ghostize()
 
+		if(brainmob.mind)
+			brainmob.mind.transfer_to(brain_owner)
 		else
-			if(brain_owner.key)
-				brain_owner.ghostize()
-
-			if(brainmob.mind)
-				brainmob.mind.transfer_to(brain_owner)
-			else
-				brain_owner.PossessByPlayer(brainmob.key)
-
-			brain_owner.set_suicide(HAS_TRAIT(brainmob, TRAIT_SUICIDED))
+			brain_owner.PossessByPlayer(brainmob.key)
 
 		QDEL_NULL(brainmob)
-	else
-		brain_owner.set_suicide(suicided)
 
 	for(var/datum/brain_trauma/trauma as anything in traumas)
 		if(trauma.owner)
@@ -95,17 +87,20 @@
 	if(damage >= medium_threshold)
 		brain_owner.add_stress(/datum/stress_event/brain_damage)
 
-/obj/item/organ/brain/Remove(mob/living/carbon/organ_owner, special, no_id_transfer = FALSE)
+/obj/item/organ/brain/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
+
 	update_brain_color(animate = FALSE) // once it's out in the world we need to make sure it's the right color
 	for(var/datum/brain_trauma/BT as anything in traumas)
 		BT.on_lose(TRUE)
 		BT.owner = null
 
-	if((!QDELETED(src) || !QDELETED(organ_owner)) && !no_id_transfer)
+	if((!QDELETED(src) || !QDELETED(organ_owner)) && !(movement_flags & NO_ID_TRANSFER))
 		transfer_identity(organ_owner)
-	organ_owner.update_body()
-	organ_owner.remove_stress(/datum/stress_event/brain_damage)
+
+	if(!special)
+		organ_owner.update_body()
+		organ_owner.remove_stress(/datum/stress_event/brain_damage)
 
 ///somehow slightly faster to not call parent...
 /obj/item/organ/brain/consider_processing(in_bleedout)
@@ -147,8 +142,7 @@
 	if(current_blood < max_blood_storage && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
 		var/obj/item/bodypart/parent = owner.get_bodypart(current_zone)
-		for(var/thing in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
-			var/obj/item/organ/candidate = thing
+		for(var/obj/item/organ/candidate as anything in shuffle(parent?.getorganslotlist(ORGAN_SLOT_ARTERY)))
 			if(candidate.current_blood && (candidate.get_slot_efficiency(ORGAN_SLOT_ARTERY) >= ORGAN_FAILING_EFFICIENCY))
 				artery = candidate
 				break

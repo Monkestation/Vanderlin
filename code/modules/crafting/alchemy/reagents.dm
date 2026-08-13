@@ -145,14 +145,14 @@
 	price_per_unit = 0.5
 
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M, efficiency)
-	M.mana_pool.adjust_mana(4 * efficiency)
+	M.safe_adjust_personal_mana(24 * efficiency)
 	..()
 
 /datum/reagent/medicine/manapot/weak
 	name = "Weak Mana Potion"
 
 /datum/reagent/medicine/manapot/weak/on_mob_life(mob/living/carbon/M, efficiency)
-	M.mana_pool.adjust_mana(2 * efficiency)
+	M.safe_adjust_personal_mana(12 * efficiency)
 	..()
 
 /datum/reagent/medicine/strongmana
@@ -165,7 +165,7 @@
 	price_per_unit = 3
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M, efficiency)
-	M.mana_pool.adjust_mana(8 * efficiency)
+	M.safe_adjust_personal_mana(48 * efficiency)
 	..()
 
 

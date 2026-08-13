@@ -414,17 +414,18 @@
 		paired_with.say(input_text)
 
 /obj/item/clothing/gloves/nomagic
+	name = "mana binding gloves"
 	icon = 'icons/roguetown/clothing/gloves.dmi'
 	bloody_icon_state = "bloodyhands"
 	icon_state = "angle"
 	w_class = WEIGHT_CLASS_SMALL
+	resistance_flags = FIRE_PROOF
 	item_weight = 100 GRAMS
 	var/active_item
 
 /obj/item/clothing/gloves/nomagic/Initialize(mapload)
 	. = ..()
-	name = "mana binding gloves"
-	resistance_flags = FIRE_PROOF
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE, 1, ITEM_SLOT_GLOVES)
 	///VANDERLIN TO DO
 
 /obj/item/clothing/gloves/nomagic/equipped(mob/living/user, slot)
@@ -655,8 +656,9 @@
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
 	item_weight = 40 GRAMS
-	var/obj/item/book/granter/spellbook/melded_quality = /obj/item/book/granter/spellbook/adept
+	var/obj/item/spellbook/melded_quality = /obj/item/spellbook/adept
 	var/shock_damage = 20
+	var/amplifier = 1
 
 /obj/item/natural/melded/t1
 	name = "arcanic meld"
@@ -672,8 +674,9 @@
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
 	item_weight = 50 GRAMS
-	melded_quality = /obj/item/book/granter/spellbook/expert
+	melded_quality = /obj/item/spellbook/expert
 	shock_damage = 40
+	amplifier = 1.25
 
 /obj/item/natural/melded/t3
 	name = "sorcerous weave"
@@ -681,8 +684,9 @@
 	icon_state = "wessence"
 	desc = "A melding of molten core, heartwood core and elemental fragment."
 	item_weight = 60 GRAMS
-	melded_quality = /obj/item/book/granter/spellbook/master
+	melded_quality = /obj/item/spellbook/master
 	shock_damage = 60
+	amplifier = 1.5
 
 /obj/item/natural/melded/t4
 	name = "magical confluence"
@@ -690,16 +694,18 @@
 	icon_state = "wessence"
 	desc = "A melding of abyssal flame, sylvan essence and elemental relic."
 	item_weight = 70 GRAMS
-	melded_quality = /obj/item/book/granter/spellbook/legendary
+	melded_quality = /obj/item/spellbook/legendary
 	shock_damage = 80
+	amplifier = 1.75
 
 /obj/item/natural/melded/t5
 	name = "arcanic aberation"
 	icon_state = "wessence"
 	desc = "A melding of arcyne fusion and voidstone. It pulses erratically, power coiled tightly within and dangerous. Many would be afraid of going near this, let alone holding it."
 	item_weight = 80 GRAMS
-	melded_quality = /obj/item/book/granter/spellbook/legendary
+	melded_quality = /obj/item/spellbook/legendary
 	shock_damage = 40
+	amplifier = 2
 
 /obj/structure/soul
 	name = "soul"

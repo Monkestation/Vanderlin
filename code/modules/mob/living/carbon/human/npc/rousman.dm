@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	name = "rousman"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,
@@ -148,8 +149,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	inherent_traits = list(
 		TRAIT_KNOW_ROUS_DOORS,
 		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHIGHPRESSURE,
-		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RADIMMUNE,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_CRITICAL_WEAKNESS,
@@ -330,16 +329,15 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_RATS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_RATS)
 	if(!randomize_rous_name)
 		name = "rousman"
 		real_name = "rousman"
 	add_traits(list(TRAIT_NOMOOD, TRAIT_NOHUNGER), SPECIES_TRAIT)
 
 /datum/component/rot/corpse/rousman/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/amt2add = 10 //1 second
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)
@@ -641,8 +639,10 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	//! MAGIC BALANCE POINT
+	ADD_TRAIT(seer, TRAIT_SORCERER, INNATE_TRAIT)
+	seer.adjust_technique_mastery_points(12)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
@@ -673,7 +673,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
 	belt = /obj/item/storage/belt/leather/black
-	l_pocket = /obj/item/book/granter/spellbook/expert
+	l_pocket = /obj/item/spellbook/expert/starter/earth
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
@@ -687,9 +687,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	seer.adjust_technique_mastery_points(14)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
-		seer.add_spell(spell)
+		seer.add_spell(spell, mastery_spell = TRUE)

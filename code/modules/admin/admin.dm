@@ -82,14 +82,14 @@
 	body += "Options panel for <b>[M]</b>"
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
-		body += "\[<A href='?_src_=holder;[HrefToken()];editrights=[(GLOB.admin_datums[M.client.ckey] || GLOB.deadmins[M.client.ckey]) ? "rank" : "add"];key=[M.key]'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+		body += "\[<A href='byond://?_src_=holder;[HrefToken()];editrights=[(GLOB.admin_datums[M.client.ckey] || GLOB.deadmins[M.client.ckey]) ? "rank" : "add"];key=[M.key]'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
 		if(CONFIG_GET(flag/use_exp_tracking))
-			body += "\[<A href='?_src_=holder;[HrefToken()];getplaytimewindow=[REF(M)]'>" + M.client.get_exp_living() + "</a>\]"
+			body += "\[<A href='byond://?_src_=holder;[HrefToken()];getplaytimewindow=[REF(M)]'>" + M.client.get_exp_living() + "</a>\]"
 
 	if(isnewplayer(M))
 		body += " <B>Hasn't Entered Game</B> "
 	else
-		body += " \[<A href='?_src_=holder;[HrefToken()];revive=[REF(M)]'>Heal</A>\] "
+		body += " \[<A href='byond://?_src_=holder;[HrefToken()];revive=[REF(M)]'>Heal</A>\] "
 
 	if(M.client)
 		body += "<br>\[<b>First Seen:</b> [M.client.player_join_date]\]"
@@ -101,20 +101,20 @@
 		else
 			body += "<i>Disabled</i>"
 		body += "<br><br><b>Show related accounts by:</b> "
-		body += "\[ <a href='?_src_=holder;[HrefToken()];showrelatedacc=cid;client=[REF(M.client)]'>CID</a> | "
-		body += "<a href='?_src_=holder;[HrefToken()];showrelatedacc=ip;client=[REF(M.client)]'>IP</a> \]"
+		body += "\[ <a href='byond://?_src_=holder;[HrefToken()];showrelatedacc=cid;client=[REF(M.client)]'>CID</a> | "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];showrelatedacc=ip;client=[REF(M.client)]'>IP</a> \]"
 
 		var/pq = get_playerquality(M.ckey, TRUE)
 		var/pq_num = get_playerquality(M.ckey, FALSE)
 		body += "<br><br>Player Quality: [pq] ([pq_num])"
-		body += "<br><a href='?_src_=holder;[HrefToken()];editpq=add;mob=[REF(M)]'>\[Modify PQ\]</a> "
-		body += "<a href='?_src_=holder;[HrefToken()];showpq=add;mob=[REF(M)]'>\[Check PQ\]</a> "
-		body += "<br><a href='?_src_=holder;[HrefToken()];edittriumphs=add;mob=[REF(M)]'>\[Modify Triumphs\]</a> "
-		body += "<a href='?_src_=holder;[HrefToken()];showtriumphs=add;mob=[REF(M)]'>\[Check Triumphs\]</a> "
+		body += "<br><a href='byond://?_src_=holder;[HrefToken()];editpq=add;mob=[REF(M)]'>\[Modify PQ\]</a> "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];showpq=add;mob=[REF(M)]'>\[Check PQ\]</a> "
+		body += "<br><a href='byond://?_src_=holder;[HrefToken()];edittriumphs=add;mob=[REF(M)]'>\[Modify Triumphs\]</a> "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];showtriumphs=add;mob=[REF(M)]'>\[Check Triumphs\]</a> "
 		body += "<br>"
-		body += "<a href='?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
-		body += "<a href='?_src_=holder;[HrefToken()];open_whitelist_panel=[REF(M)]'>\[Whitelists\]</a> "
-		body += "<a href='?_src_=holder;[HrefToken()];open_boost_panel=[REF(M)]'>\[JOB BOOST\]</a> "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];open_whitelist_panel=[REF(M)]'>\[Whitelists\]</a> "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];open_boost_panel=[REF(M)]'>\[JOB BOOST\]</a> "
 		if(M.attributes)
 			body += "<a href='byond://?_src_=holder;[HrefToken()];attributes=[REF(M)]'>\[GURPS\]</a> "
 
@@ -129,9 +129,9 @@
 			curse_string = human_mob.curses.Join(", ")
 			job = human_mob?.mind.assigned_role.title
 
-		body += "<br><br>Current Patron: <a href='?_src_=holder;[HrefToken()];changepatron=add;mob=[REF(M)]'>\[[patron ? patron : "NA"]\]</a>"
-		body += "<br>Current Curses: <a href='?_src_=holder;[HrefToken()];modifycurses=add;mob=[REF(M)]'>\[[curse_string ? curse_string : "NA"]\]</a>"
-		body += "<br>Current Job: <a href='?_src_=holder;[HrefToken()];setjob=add;mob=[REF(M)]'>\[[job ? job : "NA"]\]</a>"
+		body += "<br><br>Current Patron: <a href='byond://?_src_=holder;[HrefToken()];changepatron=add;mob=[REF(M)]'>\[[patron ? patron : "NA"]\]</a>"
+		body += "<br>Current Curses: <a href='byond://?_src_=holder;[HrefToken()];modifycurses=add;mob=[REF(M)]'>\[[curse_string ? curse_string : "NA"]\]</a>"
+		body += "<br>Current Job: <a href='byond://?_src_=holder;[HrefToken()];setjob=add;mob=[REF(M)]'>\[[job ? job : "NA"]\]</a>"
 
 		var/full_version = "Unknown"
 		if(M.client.byond_version)
@@ -139,51 +139,51 @@
 		body += "<br>\[<b>Byond version:</b> [full_version]\]"
 
 	body += "<br><br>\["
-	body += "<a href='?_src_=vars;[HrefToken()];Vars=[REF(M)]'>VV</a> - "
+	body += "<a href='byond://?_src_=vars;[HrefToken()];Vars=[REF(M)]'>VV</a> - "
 	if(M.mind)
-		body += "<a href='?_src_=holder;[HrefToken()];traitor=[REF(M)]'>TP</a> - "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];traitor=[REF(M)]'>TP</a> - "
 	else
-		body += "<a href='?_src_=holder;[HrefToken()];initmind=[REF(M)]'>Init Mind</a> - "
-	body += "<a href='?priv_msg=[M.ckey]'>PM</a> - "
-	body += "<a href='?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>SM</a> - "
-	body += "<a href='?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(M)]'>FLW</a> - "
+		body += "<a href='byond://?_src_=holder;[HrefToken()];initmind=[REF(M)]'>Init Mind</a> - "
+	body += "<a href='byond://?priv_msg=[M.ckey]'>PM</a> - "
+	body += "<a href='byond://?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>SM</a> - "
+	body += "<a href='byond://?_src_=holder;[HrefToken()];adminplayerobservefollow=[REF(M)]'>FLW</a> - "
 	var/source = LOGSRC_MOB
 	if(M.client)
 		source = LOGSRC_CLIENT
-	body += "<a href='?_src_=holder;[HrefToken()];individuallog=[REF(M)];log_src=[source]'>LOGS</a>\] <br>"
+	body += "<a href='byond://?_src_=holder;[HrefToken()];individuallog=[REF(M)];log_src=[source]'>LOGS</a>\] <br>"
 
 	body += "<b>Mob type</b> = [M.type]<br><br>"
 
-	body += "<A href='?_src_=holder;[HrefToken()];boot2=[REF(M)]'>Kick</A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];boot2=[REF(M)]'>Kick</A> | "
 	if(M.client)
-		body += "<A href='?_src_=holder;[HrefToken()];newbankey=[M.key];newbanip=[M.client.address];newbancid=[M.client.computer_id]'>Ban</A> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];newbankey=[M.key];newbanip=[M.client.address];newbancid=[M.client.computer_id]'>Ban</A> | "
 	else
-		body += "<A href='?_src_=holder;[HrefToken()];newbankey=[M.key]'>Ban</A> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];newbankey=[M.key]'>Ban</A> | "
 
-	body += "<A href='?_src_=holder;[HrefToken()];showmessageckey=[M.ckey]'>Notes | Messages | Watchlist</A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];showmessageckey=[M.ckey]'>Notes | Messages | Watchlist</A> | "
 	if(M.client)
-		body += "\ <A href='?_src_=holder;[HrefToken()];sendbacktolobby=[REF(M)]'>Send back to Lobby</A> | "
-		body += "<A href='?_src_=holder;[HrefToken()];cryomob=[REF(M)]'>CRYO</A>"
+		body += "\ <A href='byond://?_src_=holder;[HrefToken()];sendbacktolobby=[REF(M)]'>Send back to Lobby</A> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];cryomob=[REF(M)]'>CRYO</A>"
 		var/muted = M.client.prefs.muted
 		body += "<br><b>Mute: </b> "
-		body += "\[<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> | "
-		body += "<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_OOC]'><font color='[(muted & MUTE_OOC)?"red":"blue"]'>OOC</font></a> | "
-		body += "<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_PRAY]'><font color='[(muted & MUTE_PRAY)?"red":"blue"]'>PRAY</font></a> | "
-		body += "<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_ADMINHELP]'><font color='[(muted & MUTE_ADMINHELP)?"red":"blue"]'>ADMINHELP</font></a> | "
-		body += "<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a> | "
-		body += "<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>LOOC</font></a> | "
-		body += "<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_MEDITATE]'><font color='[(muted & MUTE_MEDITATE)?"red":"blue"]'>Meditate</font></a>\]"
-		body += "(<A href='?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)"
+		body += "\[<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_OOC]'><font color='[(muted & MUTE_OOC)?"red":"blue"]'>OOC</font></a> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_PRAY]'><font color='[(muted & MUTE_PRAY)?"red":"blue"]'>PRAY</font></a> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_ADMINHELP]'><font color='[(muted & MUTE_ADMINHELP)?"red":"blue"]'>ADMINHELP</font></a> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>LOOC</font></a> | "
+		body += "<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_MEDITATE]'><font color='[(muted & MUTE_MEDITATE)?"red":"blue"]'>Meditate</font></a>\]"
+		body += "(<A href='byond://?_src_=holder;[HrefToken()];mute=[M.ckey];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)"
 
 	body += "<br><br>"
-	body += "<A href='?_src_=holder;[HrefToken()];jumpto=[REF(M)]'><b>Jump to</b></A> | "
-	body += "<A href='?_src_=holder;[HrefToken()];getmob=[REF(M)]'>Get</A> | "
-	body += "<A href='?_src_=holder;[HrefToken()];sendmob=[REF(M)]'>Send To</A>"
+	body += "<A href='byond://?_src_=holder;[HrefToken()];jumpto=[REF(M)]'><b>Jump to</b></A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];getmob=[REF(M)]'>Get</A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];sendmob=[REF(M)]'>Send To</A>"
 
 	body += "<br><br>"
-	body += "<A href='?_src_=holder;[HrefToken()];traitor=[REF(M)]'>Traitor panel</A> | "
-	body += "<A href='?_src_=holder;[HrefToken()];narrateto=[REF(M)]'>Narrate to</A> | "
-	body += "<A href='?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>Subtle message</A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];traitor=[REF(M)]'>Traitor panel</A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];narrateto=[REF(M)]'>Narrate to</A> | "
+	body += "<A href='byond://?_src_=holder;[HrefToken()];subtlemessage=[REF(M)]'>Subtle message</A> | "
 
 	body += "</div>"
 
@@ -199,9 +199,9 @@
 	for(var/datum/language/ld as anything in GLOB.all_languages)
 		body += "<li>[initial(ld.name)] - "
 		if (M.mind?.language_holder?.has_language(ld))
-			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];remove_language=[REF(M)];language=[ld]'>Remove</a></li>"
+			body += "<a class='skill-btn' href='byond://?_src_=holder;[HrefToken()];remove_language=[REF(M)];language=[ld]'>Remove</a></li>"
 		else
-			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_language=[REF(M)];language=[ld]'>Grant</a></li>"
+			body += "<a class='skill-btn' href='byond://?_src_=holder;[HrefToken()];add_language=[REF(M)];language=[ld]'>Grant</a></li>"
 	body += "</ul></div>"
 
 	body += "<div id='quirks-section'>"
@@ -214,7 +214,7 @@
 			body += "<h4>Current Quirks:</h4><ul>"
 			for(var/datum/quirk/Q in H.quirks)
 				body += "<li>[initial(Q.name)] ([Q.point_value] pts) "
-				body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];remove_quirk=[REF(M)];quirk=[Q.type]'>Remove</a></li>"
+				body += "<a class='skill-btn' href='byond://?_src_=holder;[HrefToken()];remove_quirk=[REF(M)];quirk=[Q.type]'>Remove</a></li>"
 			body += "</ul>"
 		else
 			body += "<p><i>No quirks</i></p>"
@@ -249,7 +249,7 @@
 		body += "    var select = document.getElementById('quirk-select');"
 		body += "    var quirkType = select.value;"
 		body += "    if(quirkType) {"
-		body += "        window.location.href = '?_src_=holder;[HrefToken()];add_quirk=[REF(M)];quirk=' + encodeURIComponent(quirkType);"
+		body += "        window.location.href='byond://?_src_=holder;[HrefToken()];add_quirk=[REF(M)];quirk=' + encodeURIComponent(quirkType);"
 		body += "    }"
 		body += "}"
 		body += "</script>"

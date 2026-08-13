@@ -19,7 +19,7 @@
 
 /datum/attribute_holder/sheet/job/priest/old
 	raw_attribute_list = list(
-		 STAT_STRENGTH = 1,
+		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,
@@ -57,7 +57,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_PRIEST
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -68,6 +68,7 @@
 	allowed_patrons = list(/datum/patron/divine/astrata)
 
 	outfit = /datum/outfit/priest
+	give_bank_account = 30
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/templar,
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/acolyte,
@@ -127,7 +128,7 @@
 	f_title = "Ex-Priestess"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK)
 	department_flag = CHURCHMEN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 
@@ -136,7 +137,7 @@
 	f_title = "Vice Priestess"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK)
 	department_flag = CHURCHMEN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 

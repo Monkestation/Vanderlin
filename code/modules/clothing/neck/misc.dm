@@ -416,7 +416,7 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
 
-/obj/item/clothing/neck/gorget/kazengun
+/obj/item/clothing/neck/gorget/blackmeadow
 	name = "blackmeadow gorget"
 	desc = "A series of interlocking rings of metal set around the throat. Used by the kouken of Blackmeadow for precisely the same reason as the knights of Psydonia."
 	icon_state = "kazengunneckguard"
@@ -535,6 +535,15 @@
 /obj/item/clothing/neck/gorget/gold/king
 	name = "royal golden gorget"
 	sellprice = 300
+
+/obj/item/clothing/neck/gorget/silver
+	name = "silver gorget"
+	desc = "A sparkling set of plates designed to protect the neck, traditionally worn atop a jacket or cuirass. They seem to shine with moonlight, even in the darkness."
+	icon_state = "sgorget"
+
+/obj/item/clothing/neck/gorget/silver/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/collar_detonator
 	name = "collar detonator"

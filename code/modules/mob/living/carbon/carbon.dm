@@ -162,7 +162,7 @@
 			victim.take_bodypart_damage(10,check_armor = TRUE)
 			take_bodypart_damage(10,check_armor = TRUE)
 			if(victim.IsOffBalanced())
-				victim.Knockdown(30)
+				victim.CombatKnockdown(30)
 			visible_message("<span class='danger'>[src] crashes into [victim]!",\
 				"<span class='danger'>I violently crash into [victim]!</span>")
 		playsound(src, "genblunt", 100, TRUE)
@@ -220,6 +220,10 @@
 					if(!throwable_mob.buckled)
 						var/obj/item/grabbing/other_grab = offhand ? get_active_held_item() : get_inactive_held_item()
 						if(grab_state < GRAB_AGGRESSIVE)
+							if(HAS_TRAIT(throwable_mob, TRAIT_BIGGUY))
+								return
+							if(!HAS_TRAIT(src,TRAIT_BIGGUY))
+								return
 							stop_pulling(pulling_broke_free = TRUE)
 							return
 						stop_pulling(pulling_broke_free = TRUE)
@@ -307,7 +311,7 @@
 
 	var/datum/status_effect/bugged/effect = has_status_effect(/datum/status_effect/bugged)
 	if(effect && HAS_TRAIT(user, TRAIT_INQUISITION))
-		dat += "<BR><A href='?src=[REF(src)];item=[effect.device]'>BUGGED</A>"
+		dat += "<BR><A href='byond://?src=[REF(src)];item=[effect.device]'>BUGGED</A>"
 
 	dat += {"
 	<BR>
@@ -770,8 +774,113 @@
 		see_invisible = SEE_INVISIBLE_LEYLINES
 	if(see_override)
 		see_invisible = see_override
-	. = ..()
+	return ..()
 
+/mob/living/carbon/proc/update_eyes()
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(eye_organs, 1)
+	var/left_damage
+	if(!left_eye || has_wound(/datum/wound/facial/eyes/left/permanent))
+		left_damage = 3
+	else
+		left_damage = left_eye.get_eye_damage_level()
+
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(eye_organs, 2)
+	var/right_damage
+	if(!right_eye || has_wound(/datum/wound/facial/eyes/right/permanent))
+		right_damage = 3
+	else
+		right_damage = right_eye.get_eye_damage_level()
+
+	if((left_damage >= 3) && (right_damage >= 3))
+		become_blind(EYE_DAMAGE)
+		return TRUE
+
+	cure_blind(EYE_DAMAGE)
+
+	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
+	if(!fov)
+		if(left_damage in 1 to 2)
+			overlay_fullscreen("left_eye_damage", /atom/movable/screen/fullscreen/impaired/left, left_damage)
+		else
+			clear_fullscreen("left_eye_damage")
+		if(right_damage in 1 to 2)
+			overlay_fullscreen("right_eye_damage", /atom/movable/screen/fullscreen/impaired/right, right_damage)
+		else
+			clear_fullscreen("right_eye_damage")
+
+	update_fov_angles()
+	return TRUE
+
+/mob/living/carbon/update_fov_angles()
+	fovangle = initial(fovangle)
+	if(!fovangle)
+		return
+
+	var/mob/living/carbon/human/H = src
+	var/obj/item/organ/eyes/LE = LAZYACCESS(H.eye_organs, 1)
+	var/obj/item/organ/eyes/RE = LAZYACCESS(H.eye_organs, 2)
+	var/left_damage = (LE ? LE.get_eye_damage_level() : 3)
+	var/right_damage = (RE ? RE.get_eye_damage_level() : 3)
+	if(left_damage >= 3)
+		fovangle |= FOV_LEFT
+	if(right_damage >= 3)
+		fovangle |= FOV_RIGHT
+
+	if(H.head?.block2add)
+		fovangle |= H.head.block2add
+
+	if(H.wear_mask?.block2add)
+		fovangle |= H.wear_mask.block2add
+
+	if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_PERCEPTION) < 5)
+		fovangle |= FOV_LEFT
+		fovangle |= FOV_RIGHT
+	else
+		if(HAS_TRAIT(src, TRAIT_CYCLOPS_LEFT))
+			fovangle |= FOV_RIGHT
+		if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
+			fovangle |= FOV_LEFT
+
+	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
+	if(!fov)
+		return
+
+	if(!(fovangle & FOV_DEFAULT))
+		fov.fov_holder?.alpha = 0
+		return
+
+	var/new_shadow_angle
+	var/new_angle
+
+	if(fovangle & FOV_RIGHT)
+		if(fovangle & FOV_LEFT)
+			new_shadow_angle = FOV_270_DEGREES
+			new_angle = 0
+		else if(fovangle & FOV_BEHIND)
+			new_shadow_angle = FOV_180PLUS45_DEGREES
+			new_angle = -45
+		else
+			new_shadow_angle = FOV_180PLUS45_DEGREES
+			new_angle = 45
+	else if(fovangle & FOV_LEFT)
+		if(fovangle & FOV_BEHIND)
+			new_shadow_angle = FOV_180MINUS45_DEGREES
+			new_angle = 45
+		else
+			new_shadow_angle = FOV_180MINUS45_DEGREES
+			new_angle = -45
+	else if(fovangle & FOV_BEHIND)
+		new_shadow_angle = FOV_180_DEGREES
+		new_angle = 0
+	else
+		new_shadow_angle = FOV_90_DEGREES
+		new_angle = 0
+
+	// Nothing actually changed so we shouldn't need a rebuild
+	if(fov.fov_holder?.alpha && fov.shadow_angle == new_shadow_angle && fov.angle == new_angle)
+		return
+
+	fov.generate_fov_holder(src, new_shadow_angle, new_angle, register = FALSE, delete_holder = TRUE)
 
 //to recalculate and update the mob's total tint from tinted equipment it's wearing.
 /mob/living/carbon/proc/update_tint()
@@ -960,9 +1069,9 @@
 	if(CONFIG_GET(flag/near_death_experience))
 		if(. > HEALTH_THRESHOLD_NEARDEATH)
 			if(health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
-				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+				ADD_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 		else if(health > HEALTH_THRESHOLD_NEARDEATH)
-			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+			REMOVE_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 
 /mob/living/carbon/update_stat()
 	if(status_flags & GODMODE)
@@ -1054,12 +1163,19 @@
 	return ..()
 
 /mob/living/carbon/can_be_revived()
-	if(!mind)
+	. = ..()
+	if(!.)
+		return
+
+	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
+	if(!istype(H) || HAS_TRAIT(H, TRAIT_ROTTEN) || H.skeletonized)
 		return FALSE
-	var/obj/item/organ/brain/b = getorgan(/obj/item/organ/brain)
-	if(!istype(b) || b.brain_death)
+
+	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!istype(B) || B.brain_death)
 		return FALSE
-	return ..()
+
+	return TRUE
 
 /mob/living/carbon/harvest(mob/living/user)
 	if(QDELETED(src))
@@ -1100,7 +1216,6 @@
 	var/r_arm_index_next = 0
 	for(var/bodypart_path in bodyparts)
 		var/obj/item/bodypart/bodypart_instance = new bodypart_path()
-		bodypart_instance.set_owner(src)
 		bodyparts -= bodypart_path
 		add_bodypart(bodypart_instance)
 		switch(bodypart_instance.body_part)
@@ -1112,13 +1227,17 @@
 				r_arm_index_next += 2
 				bodypart_instance.held_index = r_arm_index_next //2, 4, 6, 8...
 				hand_bodyparts += bodypart_instance
-		for(var/obj/item/organ/stored_organ in bodypart_instance)
-			stored_organ.Insert(src)
 
 ///Proc to hook behavior on bodypart additions.
 /mob/living/carbon/proc/add_bodypart(obj/item/bodypart/new_bodypart)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	new_bodypart.on_adding(src)
 	bodyparts += new_bodypart
-	new_bodypart.set_owner(src)
+	new_bodypart.update_owner(src)
+
+	for(var/obj/item/organ/organ in new_bodypart)
+		organ.mob_insert(src)
 
 	switch(new_bodypart.body_part)
 		if(LEG_LEFT, LEG_RIGHT)
@@ -1130,8 +1249,18 @@
 			if(!new_bodypart.bodypart_disabled)
 				set_usable_hands(usable_hands + 1)
 
-///Proc to hook behavior on bodypart removals.
-/mob/living/carbon/proc/remove_bodypart(obj/item/bodypart/old_bodypart)
+///Proc to hook behavior on bodypart removals.  Do not directly call. You're looking for [/obj/item/bodypart/proc/drop_limb()].
+/mob/living/carbon/proc/remove_bodypart(obj/item/bodypart/old_bodypart, special)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	if(special)
+		for(var/obj/item/organ/organ in old_bodypart)
+			organ.bodypart_remove(limb_owner = src, movement_flags = NO_ID_TRANSFER)
+	else
+		for(var/obj/item/organ/organ in old_bodypart)
+			organ.mob_remove(src, special)
+
+	old_bodypart.on_removal(src)
 	bodyparts -= old_bodypart
 
 	switch(old_bodypart.body_part)
@@ -1143,11 +1272,6 @@
 			set_num_hands(num_hands - 1)
 			if(!old_bodypart.bodypart_disabled)
 				set_usable_hands(usable_hands - 1)
-
-/mob/living/carbon/proc/create_internal_organs()
-	for(var/obj/item/organ/I as anything in internal_organs)
-		if(!I.owner)
-			I.Insert(src)
 
 /mob/living/carbon/vv_get_dropdown()
 	. = ..()
@@ -1254,14 +1378,6 @@
 
 /mob/living/carbon/can_resist()
 	return bodyparts.len > 2 && ..()
-
-/mob/living/carbon/proc/hypnosis_vulnerable()
-	if(HAS_TRAIT(src, TRAIT_MINDSHIELD))
-		return FALSE
-	if(IsSleeping())
-		return TRUE
-	if(HAS_TRAIT(src, TRAIT_DUMB))
-		return TRUE
 
 /// Modifies the handcuffed value if a different value is passed, returning FALSE otherwise. The variable should only be changed through this proc.
 /mob/living/carbon/proc/set_handcuffed(new_value)
@@ -1418,6 +1534,7 @@
 	for(var/obj/item/bodypart/B in bodyparts)
 		B.skeletonize(lethal)
 	update_body_parts()
+	REMOVE_TRAIT(src, TRAIT_DEAF, NO_EARS)
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
@@ -1434,6 +1551,8 @@
 	eyes_two.switch_side(eyes_two.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
 	eyes_two.Insert(src, TRUE)
 	eye_dna.organ_type = old_eye_type
+
+	update_eyes() // ??? why
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()
@@ -1509,6 +1628,10 @@
 
 	return FALSE
 
+/mob/living/carbon/dropItemToGround(obj/item/item, force = FALSE, silent = FALSE, source)
+	if(item && ((item in internal_organs) || (item in bodyparts))) //let's not do this, aight?
+		return FALSE
+	return ..()
 /**
  * This proc is used to check a mobs item slots for a type or types, returns the first item found that matches or null
  */

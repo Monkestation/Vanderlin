@@ -114,19 +114,20 @@
 /mob/living/carbon/human/Initialize()
 	add_verb(src, /mob/living/proc/lay_down)
 
+	attribute_initialize()
+
 	status_flags |= BUILDING_ORGANS
+
 	//initialize limbs first
 	create_bodyparts()
 
-	attribute_initialize() // chud shit
 	setup_human_dna()
 
 	if(dna.species)
 		set_species(dna.species.type, initial_set = TRUE)
 
-	//initialise organs
-	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+
 	status_flags &= ~BUILDING_ORGANS
 	culture = GLOB.culture_singletons[culture]
 
@@ -1036,21 +1037,6 @@
 	. = ..()
 	if(attribute_sheet)
 		attributes?.add_sheet(attribute_sheet)
-	return INITIALIZE_HINT_LATELOAD
-
-/mob/living/carbon/human/species/LateInitialize()
-	. = ..()
-	var/turf/turf = get_turf(loc)
-	if(turf)
-		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
-			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
-				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			faction |= FACTION_MATTHIOS
-			SSmatthios_mobs.register_mob(src)
-		if(SSterrain_generation.get_island_at_location(turf))
-			faction |= "islander"
-			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
 
 /mob/living/carbon/human/species/after_creation()
 	. = ..()
@@ -1058,7 +1044,6 @@
 		var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
 		head?.sellprice = headprice
 		head?.randomize_price()
-
 
 /**
  * Called when this human should be washed

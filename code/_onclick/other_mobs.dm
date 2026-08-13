@@ -51,7 +51,7 @@
 		if(L.checkmiss(src))
 			return TRUE
 
-		if(!L.checkdefense(used_intent, src))
+		if(has_status_effect(/datum/status_effect/buff/empowered_strike) || !L.checkdefense(used_intent, src))
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE
@@ -173,7 +173,8 @@
 /// Returns true to cancel further attacks doesn't call
 /atom/proc/onbite(mob/living/user)
 	. = FALSE
-	if(!istype(user))
+	var/sig_return = SEND_SIGNAL(src, COMSIG_ATOM_BITTEN, user)
+	if(sig_return || !istype(user))
 		return TRUE
 
 /mob/living/onbite(mob/living/user)
@@ -229,7 +230,7 @@
 		var/used_limb = src.find_used_grab_limb(user, accurate = TRUE)
 		B.name = "[src]'s [parse_zone(used_limb)]"
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(used_limb))
-		BP.grabbedby += B
+		LAZYADD(BP.grabbedby, B)
 		B.grabbed = src
 		B.grabbee = user // don't use set_grabber() since bites aren't actually pulls
 		B.limb_grabbed = BP

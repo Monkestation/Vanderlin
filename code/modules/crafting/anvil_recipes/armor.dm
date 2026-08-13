@@ -1068,6 +1068,11 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/helmet/visored/silver/armet
 
+/datum/anvil_recipe/armor/silver/armetowl
+	name = "Lunar Owl Armet (+Steel Bar x2)"
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
+
 /datum/anvil_recipe/armor/silver/plateleg
 	name = "Silver Plate Chausses (+Steel Bar x2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
@@ -1096,6 +1101,11 @@
 	additional_items = list(/obj/item/ingot/silver)
 	created_item = /obj/item/clothing/shoes/boots/armor/silver
 	craftdiff = 4
+
+/datum/anvil_recipe/armor/silver/gorget
+	name = "Silver Gorget (+Steel Bar)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/neck/gorget/silver
 
 // --------- BLACKSTEEL -----------
 /datum/anvil_recipe/armor/blacksteel
@@ -1243,38 +1253,38 @@
 	craftdiff = 2
 
 
-/datum/anvil_recipe/armor/holysee_plate
+/datum/anvil_recipe/armor/grandmaster_plate
 	name = "holy silver plate"
 	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/ingot/silverblessed, /obj/item/ingot/silverblessed)
-	created_item = /obj/item/clothing/armor/plate/full/holysee
+	created_item = /obj/item/clothing/armor/plate/full/grandmaster
 	craftdiff = 4
 
-/datum/anvil_recipe/armor/holysee_chausses
+/datum/anvil_recipe/armor/grandmaster_chausses
 	name = "holy silver chausses"
 	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/ingot/silverblessed)
-	created_item = /obj/item/clothing/pants/platelegs/holysee
+	created_item = /obj/item/clothing/pants/platelegs/grandmaster
 	craftdiff = 3
 
-/datum/anvil_recipe/armor/holysee_bascinet
+/datum/anvil_recipe/armor/grandmaster_bascinet
 	name = "holy silver bascinet"
 	required_material = /obj/item/ingot/silverblessed
 	additional_items = list(/obj/item/ingot/silver)
-	created_item = /obj/item/clothing/head/helmet/heavy/holysee
+	created_item = /obj/item/clothing/head/helmet/heavy/grandmaster
 	craftdiff = 3
 
-/datum/anvil_recipe/armor/naledi_mask
-	name = "war scholar's mask"
+/datum/anvil_recipe/armor/preceptor_mask
+	name = "preceptor's mask"
 	required_material = /obj/item/ingot/gold
-	created_item = /obj/item/clothing/face/lordmask/naledi
+	created_item = /obj/item/clothing/face/lordmask/preceptor
 	craftdiff = 3
 
-/datum/anvil_recipe/armor/sojourner_mask
-	name = "sojourner's mask"
+/datum/anvil_recipe/armor/gold_preceptor_mask
+	name = "gold preceptor's mask"
 	required_material = /obj/item/ingot/gold
 	additional_items = list(/obj/item/ingot/gold)
-	created_item = /obj/item/clothing/face/lordmask/naledi/sojourner
+	created_item = /obj/item/clothing/face/lordmask/preceptor/gold
 	craftdiff = 4
 
 
@@ -1333,23 +1343,23 @@
 	created_item = /obj/item/clothing/head/helmet/heavy/volfplate/puritan
 	craftdiff = 4
 
-/datum/anvil_recipe/armor/atgervi_hauberk
-	name = "vagarian hauberk"
+/datum/anvil_recipe/armor/dwarven_hauberk
+	name = "dwarven hauberk"
 	required_material = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/chainmail/hauberk/atgervi
+	created_item = /obj/item/clothing/armor/chainmail/hauberk/dwarven
 	craftdiff = 3
 
-/datum/anvil_recipe/armor/atgervi_claws
+/datum/anvil_recipe/armor/beast_claws
 	name = "beast claws"
 	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/gloves/plate/atgervi
+	created_item = /obj/item/clothing/gloves/plate/beastclaws
 	craftdiff = 3
 
-/datum/anvil_recipe/armor/atgervi_helmet
+/datum/anvil_recipe/armor/owl_helmet
 	name = "owl helmet"
 	required_material = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/head/helmet/bascinet/atgervi
+	created_item = /obj/item/clothing/head/helmet/bascinet/owl
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/psydonboots

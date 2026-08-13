@@ -322,6 +322,12 @@
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
+/obj/structure/bars/wooden_arch
+	name = "decorative wooden arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	icon_state = "wooden_barrier"
+	attacked_sound = list("sound/combat/hits/onwood/woodimpact (1).ogg", "sound/combat/hits/onwood/woodimpact (2).ogg")
+
 /obj/structure/plank
 	name = "plank"
 	desc = ""
@@ -1095,7 +1101,10 @@
 	dir = NORTH
 	buckle_requires_restraints = 1
 	buckle_prevents_pull = 1
+	/// Divine or Inhumen
 	var/divine = TRUE
+	/// If you can walk through it as if it doesn't exist. This is a hand-holdy var.
+	var/pass_all_dir = FALSE
 
 /obj/structure/fluff/psycross/Initialize()
 	. = ..()
@@ -1118,13 +1127,15 @@
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
+	if(pass_all_dir)
+		return TRUE
 	if(get_dir(loc, mover) == dir)
-		return
+		return FALSE
 	return TRUE
 
 /obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(direction == dir)
+	if(!pass_all_dir && (direction == dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 

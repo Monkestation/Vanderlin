@@ -1,22 +1,10 @@
-/obj/effect/mob_spawn/human/demi
-	mob_species = /datum/species/demihuman
-
-/obj/effect/mob_spawn/human/demi/trader
-	outfit = /datum/outfit/bard
-
-/obj/effect/mob_spawn/human/elf
-	mob_species = /datum/species/elf/snow
-
-/obj/effect/mob_spawn/human/elf/trader
-	outfit = /datum/outfit/bard
-
 /datum/world_faction/coastal_merchants
 	faction_name = "Coastal Trade Union"
 	desc = "Seafaring traders with exotic wares"
 	faction_color = "#4682B4"
 	trader_outfits = list(
-		/obj/effect/mob_spawn/human/demi/trader,
-		/obj/effect/mob_spawn/human/elf/trader
+		/obj/effect/mob_spawn/corpse/human/hollow_kin/trader,
+		/obj/effect/mob_spawn/corpse/human/elf/trader,
 	)
 	trader_type_weights = list(
 		/datum/trader_data/sake_merchant = 4,
@@ -105,8 +93,8 @@
 		/datum/supply_pack/apparel/grenzel_shirt,
 		/datum/supply_pack/apparel/buckle_boots,
 		/datum/supply_pack/apparel/Puritan_shirt,
-		/datum/supply_pack/apparel/otavan_boots,
-		/datum/supply_pack/apparel/otavan_gloves,
+		/datum/supply_pack/apparel/grenzel_boots,
+		/datum/supply_pack/apparel/grenzel_gloves,
 		/datum/supply_pack/apparel/leathercollar,
 		/datum/supply_pack/apparel/thigh_boots,
 		/datum/supply_pack/apparel/black_gloves,

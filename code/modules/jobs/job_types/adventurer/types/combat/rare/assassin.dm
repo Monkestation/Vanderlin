@@ -86,7 +86,7 @@
 
 	pack_contents = list(
 		/obj/item/clothing/head/bardhat = ITEM_SLOT_HEAD,
-		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
+		/obj/item/clothing/shoes/boots/darkboots = ITEM_SLOT_SHOES,
 		/obj/item/clothing/pants/tights/colored/random = ITEM_SLOT_PANTS,
 		/obj/item/clothing/shirt/shortshirt = ITEM_SLOT_SHIRT,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
@@ -251,7 +251,7 @@
 
 	pack_contents = list(
 		/obj/item/clothing/head/fancyhat = ITEM_SLOT_HEAD,
-		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
+		/obj/item/clothing/shoes/boots/darkboots = ITEM_SLOT_SHOES,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_NECK,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
@@ -387,7 +387,7 @@
 		/obj/item/clothing/shirt/undershirt/colored/black = ITEM_SLOT_SHIRT,
 		/obj/item/clothing/gloves/fingerless = ITEM_SLOT_GLOVES,
 		/obj/item/clothing/pants/trou/leather = ITEM_SLOT_PANTS,
-		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
+		/obj/item/clothing/shoes/boots/darkboots = ITEM_SLOT_SHOES,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/weapon/mace/cudgel = ITEM_SLOT_BELT_R,
@@ -528,7 +528,7 @@
 		/obj/item/clothing/shirt/robe/faceless = ITEM_SLOT_ARMOR,
 		/obj/item/clothing/gloves/leather/black = ITEM_SLOT_GLOVES,
 		/obj/item/clothing/pants/trou/leather = ITEM_SLOT_PANTS,
-		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
+		/obj/item/clothing/shoes/boots/darkboots = ITEM_SLOT_SHOES,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_BELT_L,
 		/obj/item/weapon/knife/dagger/steel/stiletto = ITEM_SLOT_BELT_R,

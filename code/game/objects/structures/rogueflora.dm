@@ -320,7 +320,7 @@
 	///	for various luck based effects
 	var/luckydouble
 
-	var/list/looty = list()
+	var/list/looty
 	var/res_replenish
 	var/bushtype
 
@@ -354,14 +354,14 @@
 
 /obj/structure/flora/grass/proc/grass_replenish_loot()
 	if(bushtype && !(bushtype in looty))
-		looty += bushtype
+		LAZYADD(looty, bushtype)
 
 	if(guaranteed_loot)
 		for(var/path in guaranteed_loot)
-			looty += path
+			LAZYADD(looty, path)
 
 	if(bonus_loot && prob(BUSH_BONUS_LOOT_CHANCE))
-		looty += pick(bonus_loot)
+		LAZYADD(looty, pick(bonus_loot))
 
 /obj/structure/flora/grass/proc/start_search_loop(mob/living/user)
 	while(!QDELETED(src) && !QDELETED(user))

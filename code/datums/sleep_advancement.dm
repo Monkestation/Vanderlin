@@ -25,6 +25,9 @@
 	var/list/remaining_modes = list()
 	var/list/daily_skill_xp = list()  // skill typepath -> raw XP earned today
 
+	/// Is the UI open?
+	var/ui_is_open = FALSE
+
 /datum/sleep_adv/New(datum/mind/passed_mind)
 	. = ..()
 	mind = passed_mind
@@ -155,6 +158,7 @@
 	daily_skill_xp = list()
 
 /datum/sleep_adv/proc/show_ui(mob/living/user)
+	ui_is_open = TRUE
 	var/list/dat = list()
 	SSassets.transport.send_assets(user.client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
 	dat += {"
@@ -212,6 +216,8 @@
 			</body>
 		</html>
 	"}
+	if(HAS_TRAIT(mind.current, TRAIT_HASMAGIC))
+		dat += "<div class='class_bar_div'><a class='vagrant' href='byond://?src=[REF(src)];task=open_spellbook'>Reshape your innate magic</a></div>"
 	var/datum/browser/popup = new(user, "dreams", "<center>Dreams</center>", 350, 450, src)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
@@ -219,11 +225,14 @@
 	viable_sleep = TRUE
 
 /datum/sleep_adv/proc/close_ui()
+	if(!ui_is_open)
+		return
 	if(viable_sleep)
 		mind?.has_studied = FALSE
 	if(!mind.current)
 		return
 	mind.current << browse(null, "window=dreams")
+	ui_is_open = FALSE
 
 /datum/sleep_adv/proc/process_sleep()
 	if(is_considered_sleeping())
@@ -375,6 +384,11 @@
 			buy_special()
 		if("continue")
 			finish()
+			return
+		if("open_spellbook")
+			var/datum/spellbook/book = new(mind.current)
+			book.require_sleeping = TRUE
+			book.open_unlearn(mind.current)
 			return
 	show_ui(mind.current)
 

@@ -6,7 +6,7 @@
 #define ALL_ICONOCLAST_PATRONS  list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 #define ALL_ACOLYTE_PATRONS		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora) //No Necra because she has gravetenders
 
-#define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha", "The Great Hunt", "The Black Briar")
+#define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha", "The Great Hunt", "The Black Briar", "Graggazo")
 #define TEMPLE_PATRON_NAMES		list("Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora")
 
 #define TEN_CURSES list(\
@@ -114,8 +114,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_ALLCLASS "CAT_ALLCLASS" // just a define for allclass to not deal with actively typing strings
 #define CTAG_PILGRIM "CAT_PILGRIM"  // Pilgrim classes
 #define CTAG_ADVENTURER "CAT_ADVENTURER" // Adventurer classes
-#define CTAG_TOWNER "CAT_TOWNER" // Villager class - Villagers can use it
-#define CTAG_ANTAG "CAT_ANTAG" // Antag class - results in an antag
 #define CTAG_BANDIT	"CAT_BANDIT" // Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
 #define CTAG_CHALLENGE "CAT_CHALLENGE" // Challenge class - Meant to be free for everyone
 #define CTAG_MERCENARY "CAT_MERCENARY"
@@ -123,18 +121,15 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_FORGARRISON "CAT_FORGARRISON"
 #define CTAG_ADEPT "CAT_ADEPT" // Used for Adept class selection
 #define CTAG_SQUIRE "CAT_SQUIRE" // Squire Love, Classes, as above.
-#define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
 #define CTAG_HEIR "CAT_HEIR"
 #define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
 #define CTAG_COURTAGENT "CAT_COURT_AGENT"
 #define CTAG_MINOR_NOBLE "CAT_MINOR_NOBLE" // Minor Noble classes
 #define CTAG_CONSORT "CAT_CONSORT" // Consort classes
-#define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector
 #define CTAG_TOWN_ELDER "CAT_TOWN_ELDER" // Town Elder class - Handles Town Elder class selector
 #define CTAG_ROYALKNIGHT "CAT_ROYAL_KNIGHT"
 #define CTAG_ARCHIVIST "CAT_ARCHIVIST"
 #define CTAG_MENATARMS "CAT_MENATARMS"
-#define CTAG_SERVANT "CAT_SERVANT" // Servant class - 4 type of servant to fill in someplace.
 #define CTAG_GATEMASTER "CAT_GATEMASTER"
 #define CTAG_WRETCH "CAT_WRETCH"
 #define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses

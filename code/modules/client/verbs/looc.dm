@@ -78,7 +78,7 @@
 			continue
 		mobs += mob_client
 		if(mob_client in GLOB.admins)
-			added_text += " ([mob.ckey]) <A href='?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>\[MUTE\]</font></a>"
+			added_text += " ([mob.ckey]) <A href='byond://?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>\[MUTE\]</font></a>"
 
 		if(mob_client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_OOC)
 			to_chat(mob_client, "<font color='["#6699CC"]'><b><span class='prefix'>LOOC:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b></font>")
@@ -86,4 +86,4 @@
 	for(var/client/admin_client in GLOB.admins)
 		if(admin_client in mobs)
 			continue
-		to_chat(admin_client, "<font color='["#6699CC"]'><b><span class='prefix'>(R)LOOC:</span> <EM>[src.mob.name] ([mob.ckey]) <A href='?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>MUTE</font></a>:</EM> <span class='message'>[msg]</span></b></font>")
+		to_chat(admin_client, "<font color='["#6699CC"]'><b><span class='prefix'>(R)LOOC:</span> <EM>[src.mob.name] ([mob.ckey]) <A href='byond://?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>MUTE</font></a>:</EM> <span class='message'>[msg]</span></b></font>")

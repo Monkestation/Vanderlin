@@ -100,7 +100,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MONK
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
@@ -111,6 +111,7 @@
 	outfit = /datum/outfit/monk
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	job_bitflag = BITFLAG_CHURCH
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
@@ -196,6 +197,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/key/church
 	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+	backr = /obj/item/storage/backpack/satchel/cloth
 	backpack_contents = list(
 		/obj/item/needle = 1
 	)
@@ -234,19 +236,19 @@
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/padded/abyssor
 			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			armor = /obj/item/clothing/shirt/robe/abyssor
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/leather/headscarf
 			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			shirt = /obj/item/clothing/armor/gambeson/light
 			armor = /obj/item/clothing/armor/leather
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/roguehood/colored/random
 			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/padded/malumhood
@@ -260,5 +262,5 @@
 		else
 			head = /obj/item/clothing/head/roguehood/colored/random
 			neck = /obj/item/clothing/neck/psycross/silver
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			armor = /obj/item/clothing/shirt/robe/colored/plain

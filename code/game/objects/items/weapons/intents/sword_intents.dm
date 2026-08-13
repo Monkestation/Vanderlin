@@ -138,6 +138,13 @@
 	swingdelay = 1
 	item_damage_type = "slash"
 
+/datum/intent/sword/cut/zwei/reach
+	name = "cut"
+	damfactor = 1
+	reach = 2
+	swingdelay = 1
+	item_damage_type = "slash"
+
 /datum/intent/sword/cut/rapier
 	damfactor = 0.8
 	item_damage_type = "slash"
@@ -222,7 +229,7 @@
 	damfactor = 3
 	penfactor = AP_SWORD_CHOP + 5
 	acc_bonus = -50 // Only good if target is on the ground
-	chargetime = 5
+	chargetime = 5 SECONDS
 	chargedrain = 2
 	no_early_release = TRUE
 	misscost = 50

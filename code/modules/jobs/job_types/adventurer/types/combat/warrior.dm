@@ -54,7 +54,8 @@
 	var/static/list/selectableweapon = list(
 		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
 		"Axe" = /obj/item/weapon/axe/iron,
-		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/warhammer, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Warhammer" = /obj/item/weapon/mace/warhammer,
 		"Spear" = /obj/item/weapon/polearm/spear,
 		"Flail" = pick(list(/obj/item/weapon/flail, /obj/item/weapon/flail/militia)),
 		"Great flail" = /obj/item/weapon/flail/peasant,
@@ -72,7 +73,7 @@
 	switch(weaponchoice)
 		if("Sword")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
-		if("Axe", "Mace")
+		if("Axe", "Mace", "Warhammer")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 		if("Spear")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 10)
@@ -109,7 +110,7 @@
 /datum/outfit/adventurer/sfighter/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 
-	shoes = pick(/obj/item/clothing/shoes/boots, /obj/item/clothing/shoes/boots/furlinedboots) // no armored boots for common adventurers.
+	shoes = pick(/obj/item/clothing/shoes/boots/darkboots, /obj/item/clothing/shoes/boots/furlinedboots) // no armored boots for common adventurers.
 	gloves = pick(/obj/item/clothing/gloves/leather, /obj/item/clothing/gloves/leather/advanced, /obj/item/clothing/gloves/fingerless)
 	armor = pick(/obj/item/clothing/armor/chainmail/iron, /obj/item/clothing/armor/leather/splint, /obj/item/clothing/armor/cuirass/iron, /obj/item/clothing/armor/brigandine/light)
 	neck = pick(/obj/item/clothing/neck/chaincoif/iron, /obj/item/clothing/neck/gorget, /obj/item/clothing/neck/highcollier/iron, /obj/item/clothing/neck/coif/cloth, /obj/item/clothing/neck/coif)

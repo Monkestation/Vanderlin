@@ -1,6 +1,9 @@
 /mob/living/carbon/human/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	var/armorval = 0
 	var/organnum = 0
+	//!once phys mods are in change this
+	if(has_status_effect(/datum/status_effect/buff/iron_skin))
+		damage *= 0.75
 
 	if(def_zone)
 		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate)
@@ -242,7 +245,7 @@
 	. = ..()
 
 
-/mob/living/carbon/human/attacked_by(obj/item/I, mob/living/user)
+/mob/living/carbon/human/attacked_by(obj/item/I, mob/living/user, signal)
 	if(!I || !user)
 		return 0
 
@@ -268,7 +271,7 @@
 	SSblackbox.record_feedback("tally", "zone_targeted", 1, useder)
 
 	// the attacked_by code varies among species
-	return dna.species.spec_attacked_by(I, user, affecting, used_intent, src, useder, accurate)
+	return dna.species.spec_attacked_by(I, user, affecting, used_intent, src, useder, accurate, signal)
 
 /mob/living/carbon/human/attack_hand(mob/user)
 	. = ..()
@@ -654,7 +657,7 @@
 					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 				if(WOUND_BLUNT, WOUND_LASH)
 					mechanics_result += "Bandage bruises and lashes to allow them to heal."
-				if(WOUND_BURN)
+				if(WOUND_BURN, WOUND_INTENSE_BURN)
 					mechanics_result += "Disinfect and salve burns to allow them to heal."
 				if("germs")
 					mechanics_result += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."

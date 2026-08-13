@@ -320,42 +320,42 @@
 
 ///Adds stuttering to the message passed in
 /proc/stutter(phrase, power = 5)
-    phrase = html_decode(phrase)
-    var/leng = length(phrase)
-    . = ""
-    var/newletter = ""
-    var/rawchar = ""
-    var/static/regex/nostutter = regex(@@[aeiouAEIOU ""''()[\]{}.!?,:;_`~-]@)
-    var/word_start = TRUE // track if we're at the start of a new word
+	phrase = html_decode(phrase)
+	var/leng = length(phrase)
+	. = ""
+	var/newletter = ""
+	var/rawchar = ""
+	var/static/regex/nostutter = regex(@@[aeiouAEIOU ""''()[\]{}.!?,:;_`~-]@)
+	var/word_start = TRUE // track if we're at the start of a new word
 
-    for(var/i = 1, i <= leng, i += length(rawchar))
-        rawchar = newletter = phrase[i]
+	for(var/i = 1, i <= leng, i += length(rawchar))
+		rawchar = newletter = phrase[i]
 
-        // spaces/punctuation reset the word boundary
-        if(nostutter.Find(rawchar))
-            if(rawchar == " ")
-                word_start = TRUE
-            . += newletter
-            continue
+		// spaces/punctuation reset the word boundary
+		if(nostutter.Find(rawchar))
+			if(rawchar == " ")
+				word_start = TRUE
+			. += newletter
+			continue
 
-        if(word_start)
-            word_start = FALSE
-            // stutter more aggressively on word-initial consonants
-            if(prob(50 + power))
-                if(prob(10) && power >= 10)
-                    newletter = "[newletter]-[newletter]-[newletter]-[newletter]"
-                else if(prob(25) && power >= 6)
-                    newletter = "[newletter]-[newletter]-[newletter]"
-                else
-                    newletter = "[newletter]-[newletter]"
-        else
-            // rare mid-word stutter, much lower chance
-            if(prob(1 + power))
-                newletter = "[newletter]-[newletter]"
+		if(word_start)
+			word_start = FALSE
+			// stutter more aggressively on word-initial consonants
+			if(prob(50 + power))
+				if(prob(10) && power >= 10)
+					newletter = "[newletter]-[newletter]-[newletter]-[newletter]"
+				else if(prob(25) && power >= 6)
+					newletter = "[newletter]-[newletter]-[newletter]"
+				else
+					newletter = "[newletter]-[newletter]"
+		else
+			// rare mid-word stutter, much lower chance
+			if(prob(1 + power))
+				newletter = "[newletter]-[newletter]"
 
-        . += newletter
+		. += newletter
 
-    return sanitize(.)
+	return sanitize(.)
 
 ///Convert a message to derpy speak
 /proc/derpspeech(message, stuttering)
@@ -1003,3 +1003,10 @@
 
 	animate(my_client, pixel_x = oldx + mpx, pixel_y = oldy + mpy, time = duration, flags = ANIMATION_RELATIVE)
 	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)
+
+
+/mob/living/proc/is_swinging(disrupt_only = FALSE)
+	if(!disrupt_only)
+		return (has_status_effect(/datum/status_effect/swingdelay) || has_status_effect(/datum/status_effect/swingdelay/disrupt))
+	else
+		return (has_status_effect(/datum/status_effect/swingdelay/disrupt))

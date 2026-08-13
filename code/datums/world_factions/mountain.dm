@@ -1,15 +1,9 @@
-/obj/effect/mob_spawn/human/dwarf
-	mob_species = /datum/species/dwarf/mountain
-
-/obj/effect/mob_spawn/human/dwarf/trader
-	outfit = /datum/outfit/miner
-
 /datum/world_faction/mountain_clans
 	faction_name = "Dwarven Clans"
 	desc = "Hardy dwarves from the mountain passes"
 	faction_color = "#708090"
 	trader_outfits = list(
-		/obj/effect/mob_spawn/human/dwarf/trader
+		/obj/effect/mob_spawn/corpse/human/dwarf/trader
 	)
 	trader_type_weights = list(
 		/datum/trader_data/weapon_merchant = 15,
@@ -178,12 +172,12 @@
 	)
 	exotic_pool = list(
 		/datum/supply_pack/armor/steel/coatofplates,
-		/datum/supply_pack/apparel/atgervi_trousers,
-		/datum/supply_pack/apparel/atgervi_boots,
-		/datum/supply_pack/armor/steel/atgervihelm,
-		/datum/supply_pack/armor/steel/atgervichest,
-		/datum/supply_pack/armor/steel/atgervigloves,
-		/datum/supply_pack/weapons/shield/atgervishield,
+		/datum/supply_pack/apparel/furlined_trousers,
+		/datum/supply_pack/apparel/furlined_boots,
+		/datum/supply_pack/armor/steel/dwarvenhelm,
+		/datum/supply_pack/armor/steel/dwarvenchest,
+		/datum/supply_pack/armor/steel/beastclaws,
+		/datum/supply_pack/weapons/shield/dwarvenshield,
 		/datum/supply_pack/armor/steel/buckethelm,
 		/datum/supply_pack/armor/steel/chainmail_hauberk,
 		/datum/supply_pack/armor/steel/visorsallet,

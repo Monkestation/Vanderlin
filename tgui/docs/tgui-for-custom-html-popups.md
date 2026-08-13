@@ -94,7 +94,7 @@ If you need to inline multiple JS or CSS files, you can concatenate them for now
 It is very often necessary to exchange data between DM and JS, and in vanilla BYOND programming it is a huge pain in the butt, because the `browse()` API is very convoluted, out of box it can send only strings, and sending data back to DM requires using hrefs.
 
 ```
-location.href = '?src=12345&param=1'
+location.href='byond://?src=12345&param=1'
 ```
 
 If you're familiar with the href syntax of BYOND topic calls, then perhaps this doesn't surprise you, but this API artificially limits you to sending 2048 characters of string-typed data; you need to reinvent the wheel if you want to send something more complex than strings. It differs from the way you send messages from DM. And it's very hard to read as well.

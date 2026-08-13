@@ -46,23 +46,23 @@
 	. = ..()
 
 	var/static/list/thiefcloak_colors = list(
-		"Fyritius Dye"	="#b47011",\
-		"Winestain Red"	="#6b3737",\
-		"Maroon"		="#672c0d",\
-		"Blood Red"		="#770d0d",\
-		"Forest Green"	="#3f8b24",\
-		"Bog Green"		="#58793f",\
-		"Spring Green"	="#435436",\
-		"Royal Teal"	="#249589",\
-		"Mana Blue"		="#1b3c7a",\
-		"Berry"			="#38455b",\
-		"Lavender"		="#865c9c",\
-		"Majenta"		="#822b52",\
-		"Bark Brown"	="#685542",\
-		"Russet"		="#685542",\
-		"Chestnut"		="#5f3d21",\
-		"Old Leather"	="#473a30",\
-		"Ashen Black"	="#2f352f",\
+		"Fyritius Dye" = "#b47011",
+		"Winestain Red"	= "#6b3737",
+		"Maroon" = "#672c0d",
+		"Blood Red" = "#770d0d",
+		"Forest Green" = "#3f8b24",
+		"Bog Green" = "#58793f",
+		"Spring Green"  ="#435436",
+		"Royal Teal" = "#249589",
+		"Mana Blue" = "#1b3c7a",
+		"Berry" = "#38455b",
+		"Lavender" = "#865c9c",
+		"Majenta" = "#822b52",
+		"Bark Brown" = "#685542",
+		"Russet" = "#685542",
+		"Chestnut" = "#5f3d21",
+		"Old Leather" = "#473a30",
+		"Ashen Black" = "#2f352f",
 	)
 
 	var/obj/item/clothing/cloak/raincloak/thiefcloak = spawned.get_item_by_slot(ITEM_SLOT_CLOAK)
@@ -71,7 +71,7 @@
 	if(!choice)
 		return
 
-	if(!thiefcloak.loc == spawned)
+	if(thiefcloak.loc != spawned)
 		return
 
 	thiefcloak.color = thiefcloak_colors[choice]
@@ -81,7 +81,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	gloves = /obj/item/clothing/gloves/fingerless
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/mace/cudgel // TEMP until I make a blackjack- for now though this will do.
@@ -97,23 +97,23 @@
 	. = ..()
 
 	var/static/list/thiefcloak_colors = list(
-		"Fyritius Dye"	="#b47011",\
-		"Winestain Red"	="#6b3737",\
-		"Maroon"		="#672c0d",\
-		"Blood Red"		="#770d0d",\
-		"Forest Green"	="#3f8b24",\
-		"Bog Green"		="#58793f",\
-		"Spring Green"	="#435436",\
-		"Royal Teal"	="#249589",\
-		"Mana Blue"		="#1b3c7a",\
-		"Berry"			="#38455b",\
-		"Lavender"		="#865c9c",\
-		"Majenta"		="#822b52",\
-		"Bark Brown"	="#685542",\
-		"Russet"		="#685542",\
-		"Chestnut"		="#5f3d21",\
-		"Old Leather"	="#473a30",\
-		"Ashen Black"	="#2f352f",\
+		"Fyritius Dye" = "#b47011",
+		"Winestain Red"	= "#6b3737",
+		"Maroon" = "#672c0d",
+		"Blood Red" = "#770d0d",
+		"Forest Green" = "#3f8b24",
+		"Bog Green" = "#58793f",
+		"Spring Green"  ="#435436",
+		"Royal Teal" = "#249589",
+		"Mana Blue" = "#1b3c7a",
+		"Berry" = "#38455b",
+		"Lavender" = "#865c9c",
+		"Majenta" = "#822b52",
+		"Bark Brown" = "#685542",
+		"Russet" = "#685542",
+		"Chestnut" = "#5f3d21",
+		"Old Leather" = "#473a30",
+		"Ashen Black" = "#2f352f",
 	)
 
 	var/obj/item/clothing/cloak/raincloak/thiefcloak = H.get_item_by_slot(ITEM_SLOT_CLOAK)
