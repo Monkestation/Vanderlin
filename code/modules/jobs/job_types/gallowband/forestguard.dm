@@ -85,6 +85,7 @@
 /datum/job/advclass/forestguard
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	banned_patrons = list()
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/forestguard/infantry
 	raw_attribute_list = list(

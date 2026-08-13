@@ -35,14 +35,6 @@
 		"...you look up to your captors, smiling through broken teeth. the cackling brings a kick to your ribs... you spit a broken tooth out of your mouth, and mutter under your breath... you hear gurgling as a baptism of blue fire spews from his open mouth..."
 	)
 
-/datum/attribute/skill/magic/arcane/on_level_change(mob/owner, new_level, old_level)
-	var/old_tier = floor(old_level / 10)
-	var/new_tier = floor(new_level / 10)
-	if(new_tier > old_tier)
-		owner?.adjust_spell_points(new_tier - old_tier)
-	else if(new_tier < old_tier)
-		owner?.adjust_spell_points(new_tier - old_tier) // negative delta = remove points
-
 /datum/attribute/skill/magic/druidic
 	name = "Druidic Trickery"
 	desc = "Represents your character's ability to perform druidic magic. The higher your skill in Druidic Trickery, the more powerful your druidic magic will be."

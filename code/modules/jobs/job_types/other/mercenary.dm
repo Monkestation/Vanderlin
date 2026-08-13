@@ -40,3 +40,4 @@
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_DWARF_SUBTERRAN)
 	category_tags = list(CTAG_MERCENARY)
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT)
+	factions = list(FACTION_TOWN)

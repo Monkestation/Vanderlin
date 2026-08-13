@@ -73,7 +73,7 @@ export const RecipeBook = (props: any, context: any) => {
   };
 
   return (
-    <Window title={book_name} width={820} height={600}>
+    <Window title={book_name} width={820} height={640}>
       <Window.Content>
         <Box style={{ position: 'relative', width: '100%', height: '568px', display: 'flex' }}>
           <Sidebar recipes={recipes} lookup={recipeLookup} selectedRecipe={selectedRecipe} onSelect={handleSelect} />

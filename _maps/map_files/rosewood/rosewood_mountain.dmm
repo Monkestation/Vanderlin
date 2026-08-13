@@ -6485,7 +6485,7 @@
 /turf/open/floor/carpet/red,
 /area/under/mountains/anvil/dungeon/lower)
 "ZL" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/teleport,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/mana_siphon/teleport,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/dungeon)
 "ZN" = (

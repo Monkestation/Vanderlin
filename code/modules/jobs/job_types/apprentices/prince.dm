@@ -55,6 +55,7 @@
 	allowed_races = RACES_PLAYER_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE)
 	exp_types_granted = list(EXP_TYPE_NOBLE)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/heir/daring
 	raw_attribute_list = list(

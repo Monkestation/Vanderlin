@@ -33,6 +33,9 @@
 /datum/outfit/orphan
 	name = JOB_ORPHAN
 
+/datum/job/advclass/orphanadv
+	factions = list(FACTION_TOWN)
+
 // BOOKISH BRAT - THE COURTLY CHILD
 
 /datum/attribute_holder/sheet/job/advclass/orphanadv/bbrat

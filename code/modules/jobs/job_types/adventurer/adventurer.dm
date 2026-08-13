@@ -35,6 +35,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 	spawn_with_torch = TRUE
 	department_flag = OUTSIDERS
+	factions = list(FACTION_FOREIGNERS)
 
 /datum/job/adventurer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

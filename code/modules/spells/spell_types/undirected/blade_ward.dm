@@ -3,8 +3,6 @@
 	desc = "Improves constitution for a brief duration."
 	button_icon_state = "conjure_armor"
 
-	point_cost = 1
-
 	charge_required = FALSE
 	cooldown_time = 1 MINUTES
 	spell_cost = 30
@@ -12,14 +10,14 @@
 	invocation = "Blades, be dulled!"
 	invocation_type = INVOCATION_SHOUT
 	spell_flags = SPELL_RITUOS
-	attunements = list(
-		/datum/attunement/arcyne = 0.3,
-	)
+
+	required_form = FORM_ARCANE
+
 
 /datum/action/cooldown/spell/undirected/blade_ward/cast(atom/cast_on)
 	. = ..()
 	var/datum/status_effect/status = /datum/status_effect/buff/bladeward
-	var/duration_increase = max(0, attuned_strength * 1.5 MINUTES)
+	var/duration_increase = max(0, spell_magnitude_modifier * 1.5 MINUTES)
 	if(isliving(owner))
 		var/mob/living/L = owner
 		L.apply_status_effect(status, initial(status.duration) + duration_increase)
@@ -28,10 +26,10 @@
 			span_notice("I trace a sigil of warding in the air."),
 		)
 
-	if(attuned_strength < 1.5)
+	if(spell_magnitude_modifier < 1.5)
 		return
 
-	for(var/mob/living/extra_target in orange(FLOOR(attuned_strength, 1), owner))
+	for(var/mob/living/extra_target in orange(FLOOR(spell_magnitude_modifier, 1), owner))
 		extra_target.apply_status_effect(status, initial(status.duration) + duration_increase)
 		extra_target.visible_message(
 			span_info("[extra_target] has a sigil of warding appear over them."),
