@@ -169,7 +169,7 @@
 		L.adjustFireLoss(10)
 		L.AdjustKnockdown(3 SECONDS)
 		L.adjust_stamina(-50)
-		qdel(src)
+		remove_hand_with_no_refund(src)
 	return ..()
 
 /obj/item/melee/touch_attack/dropped(mob/user)

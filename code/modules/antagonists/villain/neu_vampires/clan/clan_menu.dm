@@ -1205,7 +1205,7 @@
 
 			var/datum/coven/C = user_covens[coven_name]
 			if(C)
-				C.addButtonExp(amount)
+				C.add_button_exp(amount)
 			generate_interface()
 
 		if("show_hierarchy")

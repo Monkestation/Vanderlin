@@ -425,7 +425,7 @@
  */
 
 //Used in the interface button
-/datum/coven/proc/addButtonExp(amount)
+/datum/coven/proc/add_button_exp(amount)
 	if(!amount || amount <= 0)
 		return
 
