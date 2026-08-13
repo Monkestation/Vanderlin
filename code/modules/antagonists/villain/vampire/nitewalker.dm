@@ -95,6 +95,8 @@
 	blade.grant_language(/datum/language/oldpsydonic)
 	blade.add_quirk(/datum/quirk/vice/addiction/godfearing)
 
+	blade.honorary_suffix = "the Nitewarden"
+
 	RegisterSignal(blade, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/antagonist/vampire/lord/nitewalker/on_removal()
