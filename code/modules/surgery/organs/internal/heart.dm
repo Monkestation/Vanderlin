@@ -45,7 +45,7 @@
 
 /obj/item/organ/heart/Initialize()
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 8 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 8 SECONDS, TIMER_DELETE_ME)
 
 /obj/item/organ/heart/examine(mob/user)
 	. = ..()
@@ -103,7 +103,7 @@
 	. = ..()
 
 	if(!special)
-		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS, TIMER_DELETE_ME)
 
 /obj/item/organ/heart/attack_self(mob/user)
 	. = ..()
@@ -111,7 +111,7 @@
 		user.visible_message(span_notice("[user] squeezes [src] to make it beat again!"), \
 					span_notice("You squeeze [src] to make it beat again!"))
 		Restart()
-		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS, TIMER_DELETE_ME)
 
 /obj/item/organ/heart/proc/can_stop()
 	return beating
