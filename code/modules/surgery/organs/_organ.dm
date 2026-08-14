@@ -134,7 +134,7 @@
 			bodypart_remove(bodypart_owner)
 	else if(owner)
 		if(QDESTROYING(owner))
-		// The mob is being deleted, don't update the mob
+			// The mob is being deleted, don't update the mob
 			Remove(owner, special=TRUE)
 		else
 			Remove(owner)
