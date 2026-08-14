@@ -229,7 +229,7 @@
 
 	last_injury = null
 
-	for(var/atom/movable/movable in contents)
+	for(var/atom/movable/movable as anything in contents)
 		qdel(movable)
 
 	if(bandage)

@@ -127,21 +127,22 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/organ/Destroy()
-	if(bodypart_owner && !owner && !QDELETED(bodypart_owner))
-		bodypart_remove(bodypart_owner)
-	else if(owner && QDESTROYING(owner))
-		// The mob is being deleted, don't update the mob
-		Remove(owner, special=TRUE)
+	if(bodypart_owner && !owner)
+		if(QDELETED(bodypart_owner))
+			bodypart_owner = null
+		else
+			bodypart_remove(bodypart_owner)
 	else if(owner)
-		Remove(owner)
+		if(QDESTROYING(owner))
+		// The mob is being deleted, don't update the mob
+			Remove(owner, special=TRUE)
+		else
+			Remove(owner)
 	else
 		STOP_PROCESSING(SSobj, src)
+
 	LAZYNULL(organ_efficiency_modification)
-	// This hides some bad behaviour so we want to find out why if it does happen
-	if(bodypart_owner)
-		var/owner_part = owner ? "[owner] ([AREACOORD(owner)])" : "NULL"
-		stack_trace("organ ([type]) owner [owner_part] deleted with bodypart owner [bodypart_owner] ([AREACOORD(bodypart_owner)])!")
-		bodypart_owner = null
+
 	return ..()
 
 /obj/item/organ/vv_edit_var(var_name, var_value)
