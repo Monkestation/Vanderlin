@@ -156,3 +156,9 @@
 2026-08-13:
   ModDownloading:
   - balance: New weapons now always start fully sharp.
+2026-08-14:
+  Avalon-Proto:
+  - map: The keep gate has been reinforced by master artificers and masons
+  - map: The steward is no longer a massive weakspot in the wall
+  - map: The area of the vault has been adjusted to stop items from falling into the
+      wall
