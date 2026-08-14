@@ -65,7 +65,7 @@
 
 /datum/ai_planning_subtree/loot/proc/_find_lootable_item_on_body(datum/component/ai_inventory_manager/inv, mob/living/pawn, mob/living/corpse, list/blacklist)
 	for(var/obj/item/held in corpse.contents)
-		if(QDELETED(held))
+		if(QDELETED(held) || held.item_flags & ABSTRACT)
 			continue
 		var/datum/storage/storage = held.atom_storage
 		if(storage)

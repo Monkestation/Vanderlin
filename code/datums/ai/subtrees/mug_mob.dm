@@ -32,7 +32,7 @@
 
 /datum/ai_planning_subtree/mug/proc/_find_muggable_item(datum/component/ai_inventory_manager/inv, mob/living/target)
 	for(var/obj/item/held in target.contents)
-		if(QDELETED(held))
+		if(QDELETED(held) || held.item_flags & ABSTRACT)
 			continue
 		var/datum/storage/storage = held.atom_storage
 		if(storage)
