@@ -660,11 +660,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 			coordinates = get_valid_coordinates(to_insert)
 		add_item_to_grid(to_insert, coordinates)
 
-	if(ismob(to_insert.loc))
-		var/mob/item_carrier = to_insert.loc
-		item_carrier.transferItemToLoc(to_insert, real_location) // This allows has_unequipped() to be properly called.
-	else
-		to_insert.forceMove(real_location)
+	do_insertion(to_insert, user)
 
 	SEND_SIGNAL(parent, COMSIG_ATOM_STORED_ITEM, to_insert, user, force)
 	SEND_SIGNAL(src, COMSIG_STORAGE_STORED_ITEM, to_insert, user, force)
@@ -673,6 +669,16 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	parent.update_appearance()
 
 	return TRUE
+
+/// Real insertion since somethings need to do it differently
+/datum/storage/proc/do_insertion(obj/item/to_insert, mob/user)
+	PROTECTED_PROC(TRUE)
+
+	if(ismob(to_insert.loc))
+		var/mob/item_carrier = to_insert.loc
+		item_carrier.transferItemToLoc(to_insert, real_location) // This allows has_unequipped() to be properly called.
+	else
+		to_insert.forceMove(real_location)
 
 /// Since items inside storages ignore transparency for QOL reasons, we're tracking when things are dropped onto them instead of our UI elements
 /datum/storage/proc/mousedrop_receive(atom/dropped_onto, atom/movable/target, mob/user, params)

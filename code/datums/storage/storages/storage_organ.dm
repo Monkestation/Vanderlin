@@ -47,12 +47,14 @@
 	if(arrived.is_embedded)
 		return
 
-	// A bit hacky but organs rely on Insert, Remove is handled for us (begrudgingly)
+	// Repeated from do_insertion, I do not like this but since organs being forced moved
+	// into limbs (outside of regular insertion) is possible, this is needed to prevent them breaking.
 	if(isorgan(arrived))
 		var/obj/item/organ/organ_arrival = arrived
 		var/obj/item/bodypart/container = parent
-		if(container.owner && !organ_arrival.owner)
-			organ_arrival.Insert(container.owner)
+		if(iscarbon(container.loc))
+			if(!organ_arrival.owner)
+				organ_arrival.Insert(container.loc)
 		else if(!organ_arrival.bodypart_owner)
 			organ_arrival.bodypart_insert(container)
 
@@ -108,6 +110,22 @@
 		if(messages)
 			user.balloon_alert(user, "too large!")
 		return FALSE
+
+/datum/storage/organ/do_insertion(obj/item/to_insert, mob/user)
+	if(!isorgan(to_insert))
+		return ..()
+
+	if(!user.temporarilyRemoveItemFromInventory(to_insert))
+		return
+
+	// Organs are very special snowflakes Insert or bodypart_insert will handle movement for us
+	var/obj/item/organ/organ_arrival = to_insert
+	var/obj/item/bodypart/container = parent
+	if(iscarbon(container.loc))
+		if(!organ_arrival.owner)
+			organ_arrival.Insert(container.loc)
+	else if(!organ_arrival.bodypart_owner)
+		organ_arrival.bodypart_insert(container)
 
 /datum/storage/organ/can_remove(obj/item/to_remove, mob/user, messages)
 	. = ..()
