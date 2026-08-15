@@ -164,6 +164,7 @@ GLOBAL_LIST_INIT(admin_special_positions, list(
 	/datum/job/admin/oracle::title,
 	/datum/job/admin/lunar_sentinel::title,
 	/datum/job/admin/lunar_champion::title,
+	/datum/job/admin/darkspawn::title,
 ))
 GLOBAL_PROTECT(admin_special_positions)
 

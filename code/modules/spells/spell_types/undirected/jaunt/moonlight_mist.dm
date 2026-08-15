@@ -1,13 +1,12 @@
-/* Disabled for compat with magic rework
 /datum/action/cooldown/spell/undirected/planar_shift
 	name = "Planar Shift"
-	desc = "This spell turns your form ethereal, making you invisible and able to pass through walls."
+	desc = "This spell turns your form ethereal, making you invisible and able to pass through walls. Unlike lesser variants, this shift is permanent."
 	button_icon_state = "jaunt"
 	sound = 'sound/magic/ethereal_enter.ogg'
 
 	cooldown_time = 25 SECONDS
 
-	school = SCHOOL_TRANSMUTATION
+	required_form = null
 	invocation_type = INVOCATION_NONE
 	spell_flags = SPELL_UNETCHABLE
 	charge_required = FALSE
@@ -50,6 +49,7 @@
 	RegisterSignal(holder_mob, COMSIG_MOB_EJECTED_FROM_JAUNT, PROC_REF(on_shift_exit))
 	spell_requirements |= SPELL_CASTABLE_WHILE_PHASED
 	cast_on.add_traits(list(TRAIT_MAGICALLY_PHASED, TRAIT_RUNECHAT_HIDDEN, TRAIT_WEATHER_IMMUNE), REF(src))
+	holder_mob.name = cast_on.name
 	SEND_SIGNAL(cast_on, COMSIG_FOV_HIDE)
 	// Don't do the feedback until we have runechat hidden.
 	// Otherwise the text will follow the shifter, which reveals where they're is travelling.
@@ -217,4 +217,3 @@
 	shifter.remove_traits(list(TRAIT_MAGICALLY_PHASED, TRAIT_RUNECHAT_HIDDEN, TRAIT_WEATHER_IMMUNE), REF(src))
 	// This needs to happen at the end, after all the traits and stuff is handled
 	SEND_SIGNAL(shifter, COMSIG_MOB_AFTER_EXIT_JAUNT, src)
-*/

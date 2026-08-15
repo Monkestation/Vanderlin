@@ -1,0 +1,11 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added VV dropdown option for enchanting items."
+  - rscadd: "Added a trait to stop decapitation without needing NODISMEMBER."
+  - admin: "Added a Lobby-OOC button for admins to talk to people in lobby."
+  - rscadd: "OOC is now prefixed with OOC and talking in lobby is prefixed with LOBBY."
+  - rscadd: "Added Darkspawn admin preset."
+  - rscadd: "Added Nitewalker admin preset."
+  - rscadd: "Ethereal Jaunt is detected with Arcyne Eye and no longer has a FOB blocker."
+  - bugfix: "Phantom Ear isn't abducted by teleport sigils."

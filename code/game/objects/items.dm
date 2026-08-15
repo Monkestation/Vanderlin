@@ -1759,3 +1759,51 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		data["sources"] = sources
 
 	return data
+
+
+/obj/item/vv_get_dropdown()
+	. = ..()
+	VV_DROPDOWN_OPTION("", "---")
+	VV_DROPDOWN_OPTION(VV_HK_ADDENCHANT, "Add Enchantment")
+	VV_DROPDOWN_OPTION(VV_HK_REMOVEENCHANT, "Remove Enchantment")
+
+/obj/item/vv_do_topic(list/href_list)
+	if(!(. = ..()))
+		return
+	var/obj/item/target = src
+	if(href_list[VV_HK_ADDENCHANT])
+		if(!check_rights(NONE))
+			return
+
+		var/list/enchantment_subtypes = sortList(subtypesof(/datum/enchantment), GLOBAL_PROC_REF(cmp_typepaths_asc))
+		var/result = tgui_input_list(usr, "Choose an Enchantment to add", "Add Enchantment", enchantment_subtypes)
+		if(isnull(result))
+			return
+		if(!usr)
+			return
+
+		if(QDELETED(src))
+			to_chat(usr, "That thing doesn't exist anymore!")
+			return
+
+		target.enchant(result)
+		log_admin("[key_name(usr)] has added [result] to [key_name(target)].")
+		message_admins(span_notice("[key_name_admin(usr)] has added [result] enchantment to [key_name_admin(target)]."))
+
+	if(href_list[VV_HK_REMOVEENCHANT])
+		if(!check_rights(NONE))
+			return
+
+		var/list/enchantments = target.enchantments.Copy()
+
+		var/path = tgui_input_list(usr, "Choose an enchantment to remove.", "Remove Enchantment", enchantments)
+		if(isnull(path))
+			return
+		if(!usr)
+			return
+		if(QDELETED(src))
+			to_chat(usr, "That thing doesn't exist anymore!")
+			return
+
+		target.remove_enchantment(path)
+		message_admins(span_notice("[key_name_admin(usr)] has removed [path] enchantment from [target]."))
