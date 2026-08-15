@@ -10,9 +10,6 @@
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
-	attunements = list(
-		/datum/attunement/earth = 0.6,
-	)
 
 	invocation = "Forest bind them..."
 	invocation_type = INVOCATION_WHISPER

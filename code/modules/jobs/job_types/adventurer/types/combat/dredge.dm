@@ -361,11 +361,26 @@
 			spawned.change_stat(STAT_INTELLIGENCE, 3)
 			spawned.change_stat(STAT_CONSTITUTION, -2)
 			spawned.change_stat(STAT_SPEED, -2)
-			spawned.adjust_spell_points(6)
+			spawned.adjust_form_mastery_points(6)
+			spawned.adjust_technique_mastery_points(2)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 			to_chat(spawned,span_info("\
 			I've studied the arcyne, those who step to me shall perish.")
 			)
+			var/static/list/selectable_books = list(
+				"Blazing Tome (Fire)" = /obj/item/spellbook/apprentice/starter/fire,
+				"Frostbound Tome (Ice)" = /obj/item/spellbook/apprentice/starter/ice,
+				"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/apprentice/starter/lightning,
+				"Stoneveined Tome (Earth)" = /obj/item/spellbook/apprentice/starter/earth,
+				"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/apprentice/starter/arcane,
+				"Grave-Touched Tome (Death)" = /obj/item/spellbook/apprentice/starter/death,
+				"Verdant Tome (Life)" = /obj/item/spellbook/apprentice/starter/life,
+				"Windswept Tome (Air)" = /obj/item/spellbook/apprentice/starter/air,
+				"Tidebound Tome (Water)" = /obj/item/spellbook/apprentice/starter/water,
+			)
+
+			INVOKE_ASYNC(src, TYPE_PROC_REF(/datum/job, grant_selected_spellbooks), spawned, selectable_books, 1)
+
 		if("Sword2")
 			spawned.change_stat(STAT_ENDURANCE, 1)
 			spawned.adjust_skillrank(/datum/attribute/skill/combat/swords, 3, TRUE)
@@ -803,7 +818,7 @@
 
 /datum/outfit/adventurer/dredge
 	name = "Dredge (Adventurer)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backl = /obj/item/storage/backpack/satchel
@@ -968,7 +983,7 @@
 				head = /obj/item/clothing/head/roguehood/colored/mage
 				armor = /obj/item/clothing/shirt/robe/colored/mage
 				beltl = /obj/item/reagent_containers/glass/bottle/manapot
-				beltr = /obj/item/book/granter/spellbook/apprentice
+
 			if("Sword2")
 				beltl = /obj/item/weapon/sword/short/iron
 				beltr = /obj/item/weapon/sword/short/iron
