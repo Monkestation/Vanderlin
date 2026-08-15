@@ -154,7 +154,7 @@
 
 /datum/action/cooldown/spell/attach_bodypart/blood_magic
 	name = "Bloodstitch"
-	button_icon_state = "limb_attach"
+	button_icon_state = "giants_strength"
 	sound = 'sound/gore/flesh_eat_03.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
 
