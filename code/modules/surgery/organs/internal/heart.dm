@@ -1,7 +1,8 @@
 /obj/item/organ/heart
 	name = "heart"
 	desc = "Following your HEART shall be the whole of LAW."
-	icon_state = "heart"
+	icon_state = "heart-off"
+	base_icon_state = "heart"
 	zone = BODY_ZONE_CHEST
 	organ_efficiency = list(ORGAN_SLOT_HEART = 100)
 	w_class = WEIGHT_CLASS_SMALL
@@ -16,10 +17,15 @@
 	oxygen_req = 5
 	nutriment_req = 3
 	hydration_req = 1.5
+	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/heart
+
 	/// Have we been bypassed to avoid nasty blockages?
 	var/open = FALSE
-	/// If we're not beating that is not a good sign
+
+	/// Whether the heart is currently beating.
+	/// Do not set this directly. Use Restart() and Stop() instead.
 	var/beating = TRUE
+
 	/// Whether we've already triggered the failing message this cycle, to avoid spam
 	var/failed = FALSE
 	///convulsion sounds
@@ -39,13 +45,6 @@
 
 	///humors we have yet to attach to the body
 	var/list/loose_humors = list()
-
-
-	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/heart
-
-/obj/item/organ/heart/Initialize()
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 8 SECONDS, TIMER_DELETE_ME)
 
 /obj/item/organ/heart/examine(mob/user)
 	. = ..()
@@ -102,14 +101,20 @@
 /obj/item/organ/heart/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 
-	if(!special)
+	if(!special && !QDELETED(src))
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS, TIMER_DELETE_ME)
+	owner?.stop_sound_channel(CHANNEL_HEARTBEAT)
 
 /obj/item/organ/heart/attack_self(mob/user)
 	. = ..()
+	if(.)
+		return
+
 	if(!beating)
-		user.visible_message(span_notice("[user] squeezes [src] to make it beat again!"), \
-					span_notice("You squeeze [src] to make it beat again!"))
+		user.visible_message(
+			span_notice("[user] squeezes [src] to make it beat again!"),
+			span_notice("You squeeze [src] to make it beat again!"),
+		)
 		Restart()
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS, TIMER_DELETE_ME)
 
@@ -117,8 +122,6 @@
 	return beating
 
 /obj/item/organ/heart/proc/stop_if_unowned()
-	if(QDELETED(src))
-		return
 	if(isnull(owner))
 		Stop()
 
@@ -146,6 +149,10 @@
 	current_blood = max(current_blood, 60)
 	consider_processing()
 	return TRUE
+
+/obj/item/organ/heart/update_icon_state()
+	. = ..()
+	icon_state = "[base_icon_state]-[beating ? "on" : "off"]"
 
 /obj/item/organ/heart/get_availability(datum/species/S, mob/living/carbon/owner_mob)
 	return (!(TRAIT_NOBLOOD in S.inherent_traits) && !(TRAIT_STABLEHEART in S.inherent_traits))
