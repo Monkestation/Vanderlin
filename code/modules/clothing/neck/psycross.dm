@@ -200,8 +200,11 @@
 
 /obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link
 	name = "blessed amulet of Dendor"
-	enchant(/datum/enchantment/divine_link)
 	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/divine_link)
 
 /obj/item/clothing/neck/psycross/silver/divine/abyssor
 	name = "amulet of Abyssor"
