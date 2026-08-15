@@ -133,7 +133,7 @@
 /datum/spell_mastery/proc/add_spells(datum/source, mob/living/user)
 	SIGNAL_HANDLER
 	holder = user
-	if(HAS_TRAIT(holder, TRAIT_SORCERER))
+	if(HAS_TRAIT(holder, TRAIT_SORCERER) || HAS_TRAIT(holder, TRAIT_BLOOD_SORCERER))
 		return
 	if(parent && (SEND_SIGNAL(parent, COMSIG_MASTERY_CHECK_PARENT) == COMPONENT_MASTERY_CANCEL))
 		return
@@ -284,7 +284,7 @@
 		var/mob/living/carbon/user = get_mastery_user()
 		if(!user)
 			return FALSE
-		if(!HAS_TRAIT(user, TRAIT_BLOOD_MAGE))
+		if(!HAS_TRAIT(user, TRAIT_BLOOD_MAGE) && !HAS_TRAIT(user, TRAIT_BLOOD_SORCERER) && !user.mind?.has_antag_datum(/datum/antagonist/vampire))
 			to_chat(user, span_bloody("I am not an adept enough blood mage and cannot wield this unholy power."))
 			return FALSE
 

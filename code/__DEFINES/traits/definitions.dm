@@ -501,8 +501,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CONJURED_SUMMON "conjured_summon"
 #define TRAIT_CONJURE_BACKLASH "conjure_backlash"
 
-#define TRAIT_SORCERER "Unattuned"
+#define TRAIT_SORCERER "Sorcerer"
 #define TRAIT_BLOOD_MAGE "Blood Mage"
+#define TRAIT_BLOOD_SORCERER "Blood Sorcerer"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
