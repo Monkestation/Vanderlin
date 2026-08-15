@@ -20462,7 +20462,6 @@
 /obj/item/key/graveyard,
 /obj/item/key/graveyard,
 /obj/structure/closet/keyrack,
-/obj/structure/closet/keyrack,
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
 	pixel_y = 0
@@ -55466,9 +55465,6 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/church)
 "xAz" = (
-/obj/structure/closet/crate/crafted_closet{
-	lockid = "butler"
-	},
 /obj/structure/closet/crate/crafted_closet{
 	lockid = "butler"
 	},
