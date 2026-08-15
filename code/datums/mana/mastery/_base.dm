@@ -280,6 +280,10 @@
 		return FALSE
 	if(amount > unspent_form_points)
 		return FALSE
+	if(form == FORM_BLOOD)
+		var/mob/living/carbon/user = get_mastery_user()
+		if(!user || !HAS_TRAIT(user, TRAIT_BLOOD_MAGE))
+			return FALSE
 
 	unspent_form_points -= amount
 	form_levels[form] = get_form_level(form) + amount
@@ -543,3 +547,11 @@
 	if(!parent)
 		return
 	SEND_SIGNAL(parent, COMSIG_MASTERY_CAST, spell.owner)
+
+/datum/spell_mastery/proc/get_mastery_user()
+	if(owner)
+		if(ismob(owner.parent))
+			return owner.parent
+	if(iscarbon(parent))
+		return parent
+	return

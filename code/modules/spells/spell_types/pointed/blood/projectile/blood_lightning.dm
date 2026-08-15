@@ -6,7 +6,7 @@
 
 	cast_range = 8
 	associated_skill = /datum/attribute/skill/magic/blood
-
+	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_DESTRUCTION
 
@@ -20,6 +20,13 @@
 	spell_cost = 40
 	spell_flags = SPELL_RITUOS
 	projectile_type = /obj/projectile/magic/bloodlightning
+
+/datum/action/cooldown/spell/projectile/blood_bolt/arcyne
+	name = "Arcyne Blood Bolt"
+	required_level = 4
+
+	spell_type = SPELL_MANA
+	required_form = FORM_WATER
 
 /obj/projectile/magic/bloodlightning
 	name = "blood bolt"
