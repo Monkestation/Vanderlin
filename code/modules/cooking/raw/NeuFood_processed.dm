@@ -313,7 +313,7 @@
 		qdel(M)
 
 /obj/item/reagent_containers/food/snacks/raisins/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 // -------------- STRAWBERRY -----------------
 
