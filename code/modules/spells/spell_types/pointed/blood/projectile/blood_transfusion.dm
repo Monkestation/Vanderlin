@@ -61,5 +61,5 @@
 	damage_type = BRUTE
 	nodamage = TRUE
 	speed = 0.3
-	light_color = "#e74141"
+	light_color = LIGHT_COLOR_BLOOD_MAGIC
 	light_outer_range =  7

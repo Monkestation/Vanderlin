@@ -5,12 +5,16 @@
 	sound = 'sound/magic/marked.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
 
-	cast_range = 1
+	cast_range = 2
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 14
+
+	invocation_type = INVOCATION_SHOUT
+	invocation = "Excieo cruor!!"
+	self_cast_possible = FALSE
 
 	charge_time = 8 SECONDS
 	charge_slowdown = 0.7

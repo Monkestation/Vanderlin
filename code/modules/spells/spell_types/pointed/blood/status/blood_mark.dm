@@ -9,6 +9,9 @@
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_ALTERATION
 
+	invocation_type = INVOCATION_WHISPER
+	invocation = "Sanguis nota"
+
 	charge_time = 2 SECONDS
 	charge_slowdown = 0.3
 	cooldown_time = 3 MINUTES

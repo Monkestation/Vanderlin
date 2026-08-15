@@ -199,6 +199,44 @@
 		M.adjust_stamina(-6 * efficiency, internal_regen = FALSE)
 	..()
 
+/datum/reagent/medicine/bloodpot
+	name = "Blood Potion"
+	description = "Gradually regenerates Vitae."
+	reagent_state = LIQUID
+	color = COLOR_BLOOD
+	taste_description = "blood"
+	scent_description = "sickly iron"
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
+	price_per_unit = 1.5
+	random_reagent_color = FALSE
+
+/datum/reagent/medicine/bloodpot/on_mob_life(mob/living/carbon/M, efficiency)
+	if(volume >= 60)
+		M.remove_reagent(/datum/reagent/medicine/bloodpot, 2) //No overhealing.
+	M.adjust_blood_volume(4 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.adjust_bloodpool(1 * efficiency)
+	..()
+
+/datum/reagent/medicine/strongbloodpot
+	name = "Strong Blood Potion"
+	description = "Gradually regenerates Vitae."
+	reagent_state = LIQUID
+	color = COLOR_MAROON
+	taste_description = "blood"
+	scent_description = "sickly iron"
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
+	price_per_unit = 3
+	random_reagent_color = FALSE
+
+/datum/reagent/medicine/strongbloodpot/on_mob_life(mob/living/carbon/M, efficiency)
+	if(volume >= 60)
+		M.remove_reagent(/datum/reagent/medicine/strongbloodpot, 2) //No overhealing.
+	M.adjust_blood_volume(8 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.adjust_bloodpool(2 * efficiency)
+	..()
+
 /datum/reagent/medicine/antidote
 	name = "Poison Antidote"
 	description = "Heals damage induced by toxins and poisons."

@@ -3447,6 +3447,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\rare\zalad.dm"
 #include "code\modules\jobs\job_types\adventurer\types\wretch\antiquarian.dm"
 #include "code\modules\jobs\job_types\adventurer\types\wretch\berserker.dm"
+#include "code\modules\jobs\job_types\adventurer\types\wretch\blood_mage.dm"
 #include "code\modules\jobs\job_types\adventurer\types\wretch\bloodsucker.dm"
 #include "code\modules\jobs\job_types\adventurer\types\wretch\deserter.dm"
 #include "code\modules\jobs\job_types\adventurer\types\wretch\hedgemage.dm"

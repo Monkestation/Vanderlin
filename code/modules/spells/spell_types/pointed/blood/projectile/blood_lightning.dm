@@ -28,6 +28,7 @@
 
 	spell_type = SPELL_MANA
 	required_form = FORM_WATER
+	projectile_type = /obj/projectile/magic/bloodlightning/lesser
 
 /obj/projectile/magic/bloodlightning
 	name = "blood bolt"
@@ -35,11 +36,11 @@
 	hitscan = TRUE
 	movement_type = FLYING
 	projectile_piercing = PROJECTILE_PIERCE_HIT
-	damage = 35
+	damage = 60
 	damage_type = BURN
 	nodamage = FALSE
 	speed = 0.3
-	light_color = "#802121"
+	light_color = LIGHT_COLOR_BLOOD_MAGIC
 	light_outer_range =  7
 
 /obj/projectile/magic/bloodlightning/on_hit(atom/target, blocked, pierce_hit)
@@ -47,3 +48,6 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		L.electrocute_act(1, src)
+
+/obj/projectile/magic/bloodlightning/lesser
+	damage = 35

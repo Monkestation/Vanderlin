@@ -8,6 +8,9 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 
+	invocation_type = INVOCATION_WHISPER
+	invocation = "Caedis conspectus"
+
 	charge_time = 2 SECONDS
 	charge_slowdown = 0.3
 	cooldown_time = 3 MINUTES

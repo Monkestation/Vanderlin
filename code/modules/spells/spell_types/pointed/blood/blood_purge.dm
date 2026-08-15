@@ -16,6 +16,9 @@
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 3
 
+	invocation_type = INVOCATION_WHISPER
+	invocation = "Caedis eruptor"
+
 /datum/action/cooldown/spell/blood_purge/cast(atom/cast_on)
 	. = ..()
 	if(!isliving(cast_on))
