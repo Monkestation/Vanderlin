@@ -22,4 +22,5 @@
 	var/mob/living/target = cast_on
 	target.reagents?.remove_all_type(/datum/reagent/toxin, 999)
 	target.reagents?.remove_all_type(/datum/reagent/poison, 999)
+	target.visible_message(span_info("A thin veil of red mist eminates from [cast_on] as their blood expels any toxins!"), span_notice("Needles! Needles stabbing me everywhere!"))
 	new /obj/effect/temp_visual/snake/twin_up(null, target)

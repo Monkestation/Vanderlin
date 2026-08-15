@@ -427,6 +427,18 @@
 	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
 	icon_state = "muscles"
 
+/datum/status_effect/debuff/revive_bloodmagic
+	id = "bloodcurse"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
+	duration = STATUS_EFFECT_PERMANENT
+	effectedstats = list(STAT_STRENGTH = -2, STAT_SPEED = -2, STAT_ENDURANCE = -2, STAT_CONSTITUTION = -2)
+	tick_interval = STATUS_EFFECT_NO_TICK
+
+/atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
+	name = "Blood Curse"
+	desc = "<span class='bloody '>I have returned from oblivion... but at what cost...</span>"
+	icon_state = "bloodcurse"
+
 /datum/status_effect/debuff/chilled
 	id = "chilled"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/chilled

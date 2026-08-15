@@ -34,6 +34,7 @@
 	var/amount_healed = base_healing
 	var/blood_restored = blood_restoration
 
+	cast_on.visible_message(span_info("[cast_on]'s blood reacts to strange forces!"), span_notice("My blood feels like its boiling and pulsing!"))
 	if(cast_on.clan && (cast_on != owner))
 		to_chat(owner, span_bloody("My blood mending is stronger upon a master of Vitae!"))
 		amount_healed *= 2

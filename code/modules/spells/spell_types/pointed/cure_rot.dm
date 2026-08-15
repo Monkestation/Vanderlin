@@ -34,11 +34,6 @@
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
-	if(cast_on.get_lux_status() != LUX_HAS_LUX)
-		to_chat(owner, span_warning("This filth cannot be revived by holy light!"))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
-
 	for(var/obj/item/bodypart/bodypart as anything in cast_on.bodyparts)
 		if(bodypart.skeletonized)
 			to_chat(owner, span_warning("They are too far gone."))
@@ -59,6 +54,21 @@
 				has_rot = TRUE
 				break
 
+
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+		if(!prob(33))
+			cast_on.visible_message(
+				span_warning("Divine Light struggles to burn through the Blood Curse upon [cast_on]!"),
+				span_bloody("The Blood Curse is resisting the Divine!"),
+			)
+			return FALSE
+		cast_on.remove_status_effect(/datum/status_effect/debuff/revive_bloodmagic)
+		cast_on.remove_status_effect(/datum/status_effect/debuff/blood_mark)
+		cast_on.visible_message(
+			span_warning("Divine Light burns through the Blood Curse upon [cast_on]!"),
+			span_bloody("The Blood Curse has been dispelled!"),
+		)
+		return
 
 	if(!has_rot && !was_zombie)
 		to_chat(owner, span_warning("Nothing happens."))

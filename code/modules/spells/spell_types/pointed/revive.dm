@@ -55,6 +55,11 @@
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
+		if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+			to_chat(owner, span_danger("[cast_on] is Blood Cursed! Permanently marked by Blood Magic, Divine Healing will never reach them again!"))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
+
 	for(var/obj/structure/fluff/psycross/S in view(5, owner))
 		target_cross = S
 		break

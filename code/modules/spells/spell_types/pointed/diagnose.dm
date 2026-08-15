@@ -34,6 +34,7 @@
 
 /datum/action/cooldown/spell/diagnose/blood
 	name = "Blood Scan"
+	sound = 'sound/magic/PSY.ogg'
 
 	cast_range = 4
 	associated_skill = /datum/attribute/skill/magic/blood
