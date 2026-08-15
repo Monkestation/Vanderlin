@@ -38,12 +38,6 @@
 	effectedstats = list(STAT_SPEED = -2, STAT_STRENGTH = -1, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1)
 	duration = 5 MINUTES
 
-/datum/status_effect/debuff/blood_mark/on_creation(mob/living/new_owner, duration_override, mob/living/origin_mob)
-	if(!origin_mob)
-		qdel(src)
-		return FALSE
-	return ..()
-
 /datum/status_effect/debuff/blood_mark/on_apply()
 	. = ..()
 	owner.add_stress(/datum/stress_event/blood_mark)

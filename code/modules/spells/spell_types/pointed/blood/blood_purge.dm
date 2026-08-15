@@ -3,9 +3,10 @@
 	desc = "Purges the bloodstream of a target of all toxins and poisons."
 	button_icon_state = "detect_poison"
 	cast_range = 3
+	charge_sound = 'sound/magic/chargingold.ogg'
 
 	charge_time = 2 SECONDS
-	cooldown_time = 3 MINUTES
+	cooldown_time = 1.5 MINUTES
 	charge_slowdown = 0.3
 	spell_cost = 75
 

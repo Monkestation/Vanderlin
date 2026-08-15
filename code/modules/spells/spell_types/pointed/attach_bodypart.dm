@@ -163,6 +163,7 @@
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 3
+	required_items = list()
 
 	charge_required = TRUE
 	charge_time = 2 SECONDS

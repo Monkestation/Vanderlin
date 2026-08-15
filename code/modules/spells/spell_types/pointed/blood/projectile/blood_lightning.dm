@@ -3,6 +3,7 @@
 	desc = "Launch a bolt of blood infused with lightning."
 	button_icon_state = "bloodlightning"
 	sound = 'sound/magic/vlightning.ogg'
+	charge_sound = 'sound/magic/chargingold.ogg'
 
 	cast_range = 8
 	associated_skill = /datum/attribute/skill/magic/blood

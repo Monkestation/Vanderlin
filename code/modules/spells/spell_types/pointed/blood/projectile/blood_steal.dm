@@ -3,6 +3,7 @@
 	desc = "Launch a bolt which leeches the blood of those hit."
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/vlightning.ogg'
+	charge_sound = 'sound/magic/chargingold.ogg'
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD
@@ -49,9 +50,11 @@
 		firer.adjust_bloodpool(vitae_value)
 		to_chat(firer, span_bloody("You drain Vitae from [target]."))
 		to_chat(target, span_bloody("[firer] has drained some of your Vitae!"))
+	else
+		to_chat(firer, span_bloody("[target] does not have enough Vitae to steal!"))
 
 /obj/projectile/magic/bloodsteal
-	name = "blood steal"
+	name = "draining bolt"
 	tracer_type = /obj/effect/projectile/tracer/bloodsteal
 	muzzle_type = null
 	impact_type = null

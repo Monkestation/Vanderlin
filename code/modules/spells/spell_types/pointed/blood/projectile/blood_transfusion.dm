@@ -3,6 +3,7 @@
 	desc = "Launch a bolt of your own blood to pass it to another."
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/vlightning.ogg'
+	charge_sound = 'sound/magic/chargingold.ogg'
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD
