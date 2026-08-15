@@ -4319,6 +4319,7 @@
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_steal.dm"
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_transfusion.dm"
 #include "code\modules\spells\spell_types\pointed\blood\status\blood_mark.dm"
+#include "code\modules\spells\spell_types\pointed\blood\status\blood_sight.dm"
 #include "code\modules\spells\spell_types\pointed\conjure\_conjure.dm"
 #include "code\modules\spells\spell_types\pointed\conjure\aether_knife.dm"
 #include "code\modules\spells\spell_types\pointed\conjure\garden_fae.dm"

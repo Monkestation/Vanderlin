@@ -32,19 +32,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	else if(incoming_clan)
 		default_clan = incoming_clan
 
-/datum/antagonist/vampire/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
-	. = ..()
-	if(!istype(examined))
-		return
-	if(!CAN_HAVE_BLOOD(examined))
-		return
-	var/cached_blood_volume = examined.get_blood_volume()
-	var/vitae = 0
-	var/datum/blood_type/BT = examined.get_blood_type()
-	if(istype(BT) && BT.vitae)
-		vitae = round(cached_blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
-
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
 	antag_hud_type = ANTAG_HUD_VAMPIRE

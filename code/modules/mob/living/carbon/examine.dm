@@ -86,6 +86,16 @@
 	/// Our health
 	LAZYADDASSOC(., EXAMINE_SECT_HEALTH, get_examine_health(user, P, .))
 
+	if(ishuman(user) && iscarbon(src) && CAN_HAVE_BLOOD(src))
+		var/mob/living/carbon/human/human_user = user
+		if(human_user.mind?.has_antag_datum(/datum/antagonist/vampire) || human_user.has_status_effect(/datum/status_effect/buff/blood_sight))
+			var/cached_blood_volume = get_blood_volume()
+			var/vitae = 0
+			var/datum/blood_type/BT = get_blood_type()
+			if(istype(BT) && BT.vitae)
+				vitae = round(cached_blood_volume * BT.vitae)
+			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
+
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
 		antag_datum.examine_target(user, src, P, .)
