@@ -362,7 +362,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision."),
 	TRAIT_STEELHEARTED = span_bloody("I am steel hearted. The horrors of life do not affect me."),
 	TRAIT_SORCERER = SPAN_GOD_NOC("I am a sorcerer, unable to wield magickal tomes but gifted with innate power."),
-	TRAIT_BLOOD_MAGE = span_bloody("I am a blood mage, wielding the unholy power of blood magic. Woe unto those who oppose me."),
+	TRAIT_BLOOD_MAGE = span_bloody("I am a skilled blood mage, wielding the unholy power of blood magic. Woe unto those who oppose me."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

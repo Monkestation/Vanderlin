@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/status/blood_mark
 	name = "Blood Mark"
-	desc = "Mark a target with blood, weakening their physical traits."
+	desc = "Mark a target with blood, weakening their physical traits. The Blood Mark will also prevent divine healing upon the target for its duration."
 	button_icon_state = "dream_track"
 	sound = 'sound/magic/psydonbleeds.ogg'
 
