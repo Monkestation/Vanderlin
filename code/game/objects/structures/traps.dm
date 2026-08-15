@@ -195,7 +195,7 @@
 /obj/structure/trap/poison/trigger_step_on(mob/living/victim)
 	..()
 	to_chat(victim,span_danger("I feel a slight prick from beneath me!"))
-	victim.reagents?.add_reagent(/datum/reagent/berrypoison,2.5)
+	victim.reagents?.add_reagent(/datum/reagent/poison/berry,2.5)
 	post_triggered()
 
 /obj/structure/trap/bomb

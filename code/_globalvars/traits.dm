@@ -213,6 +213,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Gatekeeper" = TRAIT_GATEKEEPER,
 		"Member of the Lunar Order" = TRAIT_LUNAR_ORDER,
 		"Close Combatant" = TRAIT_CLOSECOMBAT,
+		"Steel Hearted" = TRAIT_STEELHEARTED,
+		"Sorcerer" = TRAIT_SORCERER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -356,7 +358,9 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
 	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
 	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches."),
-	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision.")
+	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision."),
+	TRAIT_STEELHEARTED = span_bloody("I am steel hearted. The horrors of life do not affect me."),
+	TRAIT_SORCERER = SPAN_GOD_NOC("I am a sorcerer, unable to wield magickal tomes but gifted with innate power."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global
