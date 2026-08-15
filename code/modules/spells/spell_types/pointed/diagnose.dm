@@ -31,3 +31,14 @@
 
 	cooldown_time = 5 SECONDS
 	spell_cost = 5
+
+/datum/action/cooldown/spell/diagnose/blood
+	name = "Blood Scan"
+
+	cast_range = 4
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
+
+	cooldown_time = 5 SECONDS
+	spell_cost = 5

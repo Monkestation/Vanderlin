@@ -4311,6 +4311,7 @@
 #include "code\modules\spells\spell_types\pointed\beam\_beam.dm"
 #include "code\modules\spells\spell_types\pointed\beam\beam_of_frost.dm"
 #include "code\modules\spells\spell_types\pointed\beam\equalize.dm"
+#include "code\modules\spells\spell_types\pointed\blood\blood_purge.dm"
 #include "code\modules\spells\spell_types\pointed\blood\healing.dm"
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_lightning.dm"
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_steal.dm"
