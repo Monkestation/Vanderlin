@@ -8,3 +8,5 @@
 	blood_mage.adjust_technique_mastery_points(5)
 	blood_mage.adjust_form_mastery_points(6)
 	blood_mage.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, mastery_spell = TRUE)
+	blood_mage.adjust_bloodpool()
+	blood_mage.hud_used?.set_bloody_bloodpool()
