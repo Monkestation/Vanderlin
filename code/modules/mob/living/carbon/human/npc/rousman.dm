@@ -675,8 +675,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/arcane = 50,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/magic/blood = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/blood = 40,
 	)
 
 /datum/outfit/npc/rousman/seer_stronger/pre_equip(mob/living/carbon/human/seer)

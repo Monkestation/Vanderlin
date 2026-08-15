@@ -35,7 +35,6 @@
 
 	associated_skill = /datum/attribute/skill/magic/blood
 
-	required_form = null
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 

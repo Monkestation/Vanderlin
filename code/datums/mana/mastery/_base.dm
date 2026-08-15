@@ -285,7 +285,7 @@
 		if(!user)
 			return FALSE
 		if(!HAS_TRAIT(user, TRAIT_BLOOD_MAGE))
-			to_chat(user, span_bloody("I am not a blood mage and cannot wield this unholy power."))
+			to_chat(user, span_bloody("I am not an adept enough blood mage and cannot wield this unholy power."))
 			return FALSE
 
 	unspent_form_points -= amount

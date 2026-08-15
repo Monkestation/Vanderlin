@@ -6,7 +6,7 @@
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/punish_spawn
 	)
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA, TRAIT_DIVINE_SERVANT)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA, TRAIT_BLOOD_MAGE)
 	lord_title = "Nitewalker"
 
 /datum/clan/nitewalker
@@ -34,7 +34,8 @@
 		TRAIT_ZJUMP,
 		TRAIT_IMMUNE_TO_FRENZY,
 		TRAIT_COVEN_RESISTANT,
-		TRAIT_SILVER_IMMUNE
+		TRAIT_SILVER_IMMUNE,
+		TRAIT_DIVINE_SERVANT
 	)
 	leader_title = "Nitewalker"
 	leader = /datum/clan_leader/nitewalker
