@@ -1622,7 +1622,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	/// Check for item culture descriptions.
-	if (ishuman(user) && culture_description[1] != "Ambiguous" ) // make sure the mob has a culture to avoid unecessary controls.
+	if (ishuman(user) && length(culture_description)) // make sure the mob has a culture to avoid unecessary controls.
 		var/mob/living/carbon/human/humanexaminer = user
 		if(HAS_TRAIT(humanexaminer, TRAIT_CULTURAL_KNOWLEDGE))
 			for(var/culture_range = 1, culture_range <= culture_description.len, culture_range++)
