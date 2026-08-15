@@ -28,6 +28,9 @@
 	if(target.has_status_effect(/datum/status_effect/debuff/blood_mark))
 		to_chat(owner, span_bloody("[cast_on] already bears a Blood Mark!"))
 		return FALSE
+	if(target.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+		to_chat(owner, span_bloody("[cast_on] already bears a Blood Curse, marking them will be pointless!"))
+		return FALSE
 
 /datum/status_effect/debuff/blood_mark
 	id = "blood_mark_deb"

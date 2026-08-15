@@ -434,6 +434,12 @@
 	effectedstats = list(STAT_STRENGTH = -2, STAT_SPEED = -2, STAT_ENDURANCE = -2, STAT_CONSTITUTION = -2)
 	tick_interval = STATUS_EFFECT_NO_TICK
 
+/datum/status_effect/debuff/revive_bloodmagic/on_apply()
+	. = ..() // There can be only one.
+	if(owner.has_status_effect(/datum/status_effect/debuff/blood_mark))
+		owner.remove_status_effect(/datum/status_effect/debuff/blood_mark)
+
+
 /atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
 	name = "Blood Curse"
 	desc = "<span class='bloody '>I have returned from oblivion... but at what cost...</span>"
