@@ -72,7 +72,7 @@
 
 /datum/action/cooldown/spell/blood_healing/greater
 	name = "Greater Blood Mending"
-	background_icon = 'icons/mob/actions/roguespells.dmi'
+	button_icon = 'icons/mob/actions/roguespells.dmi'
 	button_icon_state = "healer" //Vampiric icon in theme with more of a vampiric strength.
 
 	charge_required = TRUE
