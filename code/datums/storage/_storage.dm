@@ -1235,13 +1235,14 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	if(!isobserver(to_show) && !display_contents)
 		return FALSE
 
-	if(to_show.active_storage != src && (to_show.stat == CONSCIOUS))
+	if(to_show.active_storage && to_show.active_storage != src)
+		to_show.active_storage.hide_contents(to_show)
+		// Item "finding" think traps and such
 		for(var/obj/item/thing in return_inv(recursive = FALSE))
 			if(thing.on_found(to_show))
 				to_show.active_storage.hide_contents(to_show)
 				return FALSE
 
-	to_show.active_storage?.hide_contents(to_show)
 	to_show.active_storage = src
 
 	if(ismovable(real_location))

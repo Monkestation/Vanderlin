@@ -39,7 +39,15 @@
 
 /datum/storage/no_interface/scabbard/sword/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
-	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword))
+	set_holdable(
+		list(/obj/item/weapon/sword),
+		list(
+			/obj/item/weapon/sword/long/exe,
+			/obj/item/weapon/sword/long/greatsword,
+			/obj/item/weapon/sword/long/daewalker,
+			/obj/item/weapon/sword/long/silver/nitewalker,
+		)
+	)
 
 /datum/storage/no_interface/scabbard/daewalker/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()

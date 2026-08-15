@@ -252,7 +252,7 @@
 	if(adj_mask)
 		source.client?.images += adj_mask
 	source.hud_used?.fov_holder = fov_holder
-	source.hud_used?.show_hud(HUD_STYLE_STANDARD)
+
 	if(source.client?.view && fov_holder && (source.client.view != "[current_fov_size[1]]x[current_fov_size[2]]"))
 		//this is beyond fucking stupid i hate myself
 		var/list/new_size = getviewsize(source.client.view)

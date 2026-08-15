@@ -143,17 +143,11 @@
 	gloves = /obj/item/clothing/gloves/leather
 	ring =  /obj/item/clothing/ring/nitewalker
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/scabbard/sword/noble
+	beltl = /obj/item/weapon/scabbard/sword/noble/daewalker
 	backl = /obj/item/storage/backpack/satchel/black
 	r_hand = /obj/item/weapon/sword/long/silver/nitewalker
 	l_hand = /obj/item/weapon/knife/dagger/steel/stiletto/nitewalker
 	backpack_contents = list(/obj/item/needle/blessed = 1)
-
-/datum/outfit/nitewalker/post_equip(mob/living/carbon/human/H)
-	..()
-	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/nitewalker), list())
-
 
 /obj/item/weapon/sword/long/silver/nitewalker
 	name = "nite's grace"
