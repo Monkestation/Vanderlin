@@ -194,8 +194,11 @@
 			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
-		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION) && (real_name in GLOB.inquis_suspect_players))
-			. += span_userdanger("SUSPECTED OF HERESY...")
+		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION))
+			if(real_name in GLOB.inquis_suspect_players)
+				. += span_userdanger("SUSPECTED OF HERESY...")
+			if(has_status_effect(/datum/status_effect/debuff/blood_mark))
+				. += span_bloody("Blood Marked!")
 
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
