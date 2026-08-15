@@ -198,7 +198,7 @@
 			if(real_name in GLOB.inquis_suspect_players)
 				. += span_userdanger("SUSPECTED OF HERESY...")
 			if(has_status_effect(/datum/status_effect/debuff/blood_mark))
-				. += span_bloody("Blood Marked!")
+				. += span_bloody("Marked by Blood Magic!")
 
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
