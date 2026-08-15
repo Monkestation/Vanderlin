@@ -65,8 +65,8 @@
 			. += span_notice("This truffle looks safe to eat.")
 
 /obj/item/reagent_containers/food/snacks/truffles/toxic
-	list_reagents = list(/datum/reagent/berrypoison/shroom = 4)
-	grind_results = list(/datum/reagent/berrypoison/shroom = 8)
+	list_reagents = list(/datum/reagent/poison/berry/shroom = 4)
+	grind_results = list(/datum/reagent/poison/berry/shroom = 8)
 	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/cooked/truffle

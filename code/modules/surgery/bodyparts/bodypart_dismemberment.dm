@@ -35,6 +35,9 @@
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
 
+	if(HAS_TRAIT(C, TRAIT_NODECAPITATE) && ((zone_precise == BODY_ZONE_HEAD) || (zone_precise == BODY_ZONE_PRECISE_NECK)))
+		return FALSE
+
 	if(SEND_SIGNAL(src, COMSIG_CARBON_DISMEMBER, src) & COMPONENT_CANCEL_DISMEMBER)
 		return FALSE //signal handled the dropping
 
@@ -155,6 +158,9 @@
 
 /obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise, forced)
 	. = ..()
+	if(HAS_TRAIT(owner, TRAIT_NODECAPITATE))
+		return FALSE
+
 	if(owner?.client)
 		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
 

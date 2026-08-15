@@ -14,12 +14,12 @@
 
 	var/found_poison = FALSE
 	for(var/obj/item/I in range(1, target_turf))
-		if(I.reagents && I.reagents.has_reagent(/datum/reagent/toxin))
+		if(I.reagents && I.reagents.has_reagent(/datum/reagent/toxin, check_subtypes = TRUE))
 			I.visible_message(span_warning("[I] glows with a sickly light!"))
 			new /obj/effect/temp_visual/solosnake(get_turf(I))
 			found_poison = TRUE
 			continue
-		if(I.reagents && I.reagents.has_reagent(/datum/reagent/poison))
+		if(I.reagents && I.reagents.has_reagent(/datum/reagent/poison, check_subtypes = TRUE))
 			I.visible_message(span_warning("[I] glows with a sickly light!"))
 			new /obj/effect/temp_visual/solosnake(get_turf(I))
 			found_poison = TRUE

@@ -1,6 +1,0 @@
-author: "Avalon-Proto"
-delete-after: True
-changes:
-  - map: "The keep gate has been reinforced by master artificers and masons"
-  - map: "The steward is no longer a massive weakspot in the wall"
-  - map: "The area of the vault has been adjusted to stop items from falling into the wall"
