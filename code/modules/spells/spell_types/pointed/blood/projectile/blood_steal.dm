@@ -30,7 +30,8 @@
 	var/mob/living/carbon/human/target = hit
 
 	var/blood_adjustment = target.default_blood_volume / 10
-	if(target.blood_volume < blood_adjustment)
+	if(target.blood_volume < (blood_adjustment + BLOOD_VOLUME_SURVIVE))
+		to_chat(firer, span_bloody("[target] does not have enough blood to steal!"))
 		return
 	target.adjust_blood_volume(-blood_adjustment)
 	firer.adjust_blood_volume(blood_adjustment)
