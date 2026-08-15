@@ -36,6 +36,7 @@
 	associated_skill = /datum/attribute/skill/magic/blood
 
 	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
 
 	charge_time = 4 SECONDS
 	spell_cost = 150

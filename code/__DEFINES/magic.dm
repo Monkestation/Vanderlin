@@ -227,6 +227,7 @@ DEFINE_BITFIELD(spell_requirements, list(
 #define FORM_LIFE "Life"
 #define FORM_AIR "Aeromancy"
 #define FORM_WATER "Hydromancy"
+#define FORM_BLOOD "Hemomancy"
 
 #define MASTERY_RANK_NOVICE 0
 #define MASTERY_RANK_ADEPT 2
@@ -249,7 +250,8 @@ GLOBAL_LIST_INIT(form_colors, list(
 	FORM_DEATH = "#800080",
 	FORM_EARTH = "#8B4513",
 	FORM_AIR = "#C0C0C0",
-	FORM_ARCANE = "#9932CC"
+	FORM_ARCANE = "#9932CC",
+	FORM_BLOOD = "#681818"
 ))
 
 GLOBAL_LIST_INIT(all_techniques, list(

@@ -7,7 +7,7 @@
 	cast_range = 8
 	associated_skill = /datum/attribute/skill/magic/blood
 
-	required_form = FORM_WATER
+	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "Blood Bolt!!"
