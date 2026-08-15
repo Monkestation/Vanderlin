@@ -84,9 +84,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
-		vampdude.hud_used?.shutdown_bloodpool()
-		vampdude.hud_used?.initialize_bloodpool()
-		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
+		vampdude.hud_used?.set_bloody_bloodpool()
 
 		if(forced)
 			vampdude.set_clan_direct(forcing_clan)

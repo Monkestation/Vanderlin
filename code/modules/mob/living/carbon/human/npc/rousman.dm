@@ -656,6 +656,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	//! MAGIC BALANCE POINT
 	ADD_TRAIT(seer, TRAIT_SORCERER, INNATE_TRAIT)
 	ADD_TRAIT(seer, TRAIT_BLOOD_MAGE, INNATE_TRAIT)
+	seer.hud_used?.set_bloody_bloodpool()
 	seer.adjust_technique_mastery_points(12)
 	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
@@ -698,7 +699,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
 		/datum/action/cooldown/spell/projectile/fireball,
-		/datum/action/cooldown/spell/projectile/blood_bolt/arcyne,
+		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 

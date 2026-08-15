@@ -274,6 +274,7 @@ GLOBAL_LIST_INIT(all_forms, list(
 	FORM_DEATH,
 	FORM_AIR,
 	FORM_WATER,
+	FORM_BLOOD,
 ))
 
 #define CHARGETIME_POKE 0.5 SECONDS // Staple poke spells

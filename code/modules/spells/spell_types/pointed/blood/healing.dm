@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/blood_healing
 	name = "Blood Mending"
 	desc = "Wield the power of blood to heal yourself or another."
-	background_icon = 'icons/mob/actions/spells/mage_augmentation.dmi'
+	button_icon = 'icons/mob/actions/spells/mage_augmentation.dmi'
 	button_icon_state = "blood_rush"
 	sound = 'sound/magic/enter_blood.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'

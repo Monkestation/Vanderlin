@@ -429,7 +429,7 @@ export const SpellBook = () => {
   const [page, setPage] = useState<'learn' | 'stats'>('learn');
 
   return (
-    <Window width={780} height={640} title="Spellcraft">
+    <Window width={880} height={640} title="Spellcraft">
       <Window.Content scrollable={false}>
         <Stack vertical fill>
           <Stack.Item>
