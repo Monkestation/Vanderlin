@@ -60,8 +60,6 @@
 	var/incorporeal_move = FALSE //FALSE is off, INCORPOREAL_MOVE_BASIC is normal, INCORPOREAL_MOVE_SHADOW is for ninjas
 								//and INCORPOREAL_MOVE_JAUNT is blocked by holy water/salt
 
-	var/list/surgeries //a list of surgery steps. generally empty, they're added when the player is performing them.
-
 	var/now_pushing = null //used by living/Bump() and living/PushAM() to prevent potential infinite loop.
 
 	var/cameraFollow = null
@@ -256,10 +254,12 @@
 	var/pegleg = 0			//Handles check & slowdown for peglegs. Fuckin' bootleg, literally, but hey it at least works.
 	var/pet_passive = FALSE
 
-	/// amount of spell points this mob currently has
-	var/spell_points
-	/// amount of spell points this mob has used
-	var/used_spell_points
+	var/list/summoned_minions
+	var/attack_relay_refs = 0
+	var/attack_relay_self_added = FALSE
+
+	/// Whether we are in a swingdelay, used to check for disrupted swingdelays.
+	var/swing_state = FALSE
 
 	var/list/affixes = list()
 	var/delve_level = 0
@@ -295,3 +295,5 @@
 	var/looking_vertically = NONE
 	///looking holder we use for look_up and look_down. we use this over resetting to the turf because we want to glide
 	var/atom/movable/looking_holder/looking_holder
+	///The NAME (not the reference) of the mob's summoner and probable master.
+	var/summoner = null

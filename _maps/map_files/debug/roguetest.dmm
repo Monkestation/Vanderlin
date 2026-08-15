@@ -353,16 +353,6 @@
 /obj/item/weapon/tongs,
 /turf/open/floor/cobble,
 /area/indoors)
-"ba" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood2";
-	dir = 10
-	},
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/turf/open/floor/carpet,
-/area/indoors)
 "bb" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood2";
@@ -412,11 +402,11 @@
 	icon_state = "tablewood2";
 	dir = 10
 	},
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/carpet,
 /area/indoors)
 "bi" = (
@@ -2639,6 +2629,16 @@
 "GE" = (
 /turf/open/openspace,
 /area)
+"GG" = (
+/obj/structure/table/wood{
+	icon_state = "tablewood2";
+	dir = 10
+	},
+/obj/item/clothing/head/helmet/kettle,
+/obj/item/clothing/head/helmet/kettle,
+/obj/item/clothing/head/helmet/kettle,
+/turf/open/floor/carpet,
+/area/indoors)
 "GJ" = (
 /turf/open/water/hotspring,
 /area/outdoors)
@@ -74534,7 +74534,7 @@ aK
 aN
 aR
 aW
-ba
+GG
 bf
 bi
 bl

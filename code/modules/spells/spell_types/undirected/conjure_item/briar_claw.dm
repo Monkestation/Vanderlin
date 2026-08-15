@@ -16,10 +16,6 @@
 	refresh_count = 0
 	delete_old = TRUE
 	item_outline = "#1bab68"
-	attunements = list(
-		/datum/attunement/blood = 0.3,
-		/datum/attunement/earth = 0.7
-	)
 
 /datum/action/cooldown/spell/undirected/conjure_item/briar_claw/can_cast_spell(feedback)
 	. = ..()
