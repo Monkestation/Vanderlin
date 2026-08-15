@@ -284,7 +284,6 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 	if(fov_holder)
 		screenmob.client?.screen |= fov_holder
 
-
 	return TRUE
 
 /datum/hud/proc/update_chromatic_aberration(intensity = 0, \
