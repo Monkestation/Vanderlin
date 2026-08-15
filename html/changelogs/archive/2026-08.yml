@@ -162,3 +162,18 @@
   - map: The steward is no longer a massive weakspot in the wall
   - map: The area of the vault has been adjusted to stop items from falling into the
       wall
+2026-08-15:
+  E231kei500bandai:
+  - spellcheck: head housekeeper is now called just "housekeeper"
+  MissyNym:
+  - map: The Prisoner now gets a random soilson wicker basket instead of a generic
+      one. What kind of seeds will they get, I wonder?
+  realforest2001:
+  - rscadd: Added VV dropdown option for enchanting items.
+  - rscadd: Added a trait to stop decapitation without needing NODISMEMBER.
+  - admin: Added a Lobby-OOC button for admins to talk to people in lobby.
+  - rscadd: OOC is now prefixed with OOC and talking in lobby is prefixed with LOBBY.
+  - rscadd: Added Darkspawn admin preset.
+  - rscadd: Added Nitewalker admin preset.
+  - rscadd: Ethereal Jaunt is detected with Arcyne Eye and no longer has a FOB blocker.
+  - bugfix: Phantom Ear isn't abducted by teleport sigils.

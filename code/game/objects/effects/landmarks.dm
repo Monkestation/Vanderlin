@@ -334,7 +334,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/outsider
 	name = "Outsiders"
-	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, ROLE_WRETCH)
+	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, ROLE_WRETCH, JOB_ADMIN_DARKSPAWN)
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/outsider/Initialize(mapload)

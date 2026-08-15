@@ -23003,12 +23003,12 @@
 /turf/open/floor/twig,
 /area/outdoors/basin/safe)
 "kJU" = (
-/obj/structure/closet/crate/chest/wicker,
 /obj/item/neuFarm/seed/oat,
 /obj/item/neuFarm/seed/oat,
 /obj/item/storage/sack,
 /obj/item/neuFarm/seed/wheat,
 /obj/item/neuFarm/seed/wheat,
+/obj/structure/closet/crate/chest/wicker/random_soilson,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "kKc" = (
