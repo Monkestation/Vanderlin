@@ -30,6 +30,7 @@
 		/datum/job/forestenforcer,
 		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
+		/datum/job/admin,
 	)
 
 	base_antags = 1

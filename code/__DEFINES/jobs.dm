@@ -227,10 +227,6 @@
 #define JOB_GRAVETENDER "Gravetender"
 #define JOB_TEMPLAR "Templar"
 
-#define JOB_ADMIN_ORACLE "Lunar Oracle"
-#define JOB_ADMIN_ORACLE_GUARD "Lunar Order Sentinel"
-#define JOB_ADMIN_ORACLE_GUARD_HVY "Lunar Order Champion"
-
 #define JOB_TOWNER "Towner"
 #define JOB_SOILSON "Soilson"
 #define JOB_MINER "Miner"
@@ -310,3 +306,8 @@
 #define JOB_BUTCHER "Butcher"
 
 #define ALT_TITLE_FLAG_PATREON_LOCKED (1<<0)
+
+#define JOB_ADMIN_ORACLE "Lunar Oracle"
+#define JOB_ADMIN_LUNAR_SENTINEL "Lunar Order Sentinel"
+#define JOB_ADMIN_LUNAR_CHAMPION "Lunar Order Champion"
+#define JOB_ADMIN_DARKSPAWN "Darkspawn"

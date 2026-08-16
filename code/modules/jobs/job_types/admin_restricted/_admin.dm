@@ -19,3 +19,5 @@
 	whitelisted_ckeys.Cut()
 	for(var/ckey in GLOB.admin_datums)
 		whitelisted_ckeys += ckey
+	if(!length(whitelisted_ckeys))
+		whitelisted_ckeys += "ADMINLOCK"
