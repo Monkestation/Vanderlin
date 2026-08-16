@@ -92,7 +92,7 @@
 		return
 
 	project.bloodpool = src
-	project.initiator = user
+	project.initiator = WEAKREF(user)
 	project.on_start(user)
 
 	active_projects[project_type] = project
@@ -188,7 +188,8 @@
 	var/paid_amount = 0
 	var/list/contributors = list()
 	var/obj/structure/vampire/bloodpool/bloodpool
-	var/mob/living/initiator
+	//body of the person who started it
+	var/datum/weakref/initiator
 	var/start_failure_message = "This project cannot be started."
 	var/completion_sound = 'sound/misc/batsound.ogg'
 
@@ -196,7 +197,7 @@
 	return TRUE
 
 /datum/vampire_project/proc/confirm_start(mob/living/user)
-	return tgui_alert(user, "Begin [display_name]?<BR>[description]<BR>Total Cost: [total_cost]<BR>You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
+	return tgui_alert(user, "Begin [display_name]?\n[description]\nTotal Cost: [total_cost]\nYou can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
 
 /datum/vampire_project/proc/on_start(mob/living/user)
 	return
@@ -256,129 +257,81 @@
 	description = "The ancient blood stirs once more. Forgotten whispers echo through the marrow of the land."
 	total_cost = VAMPCOST_ONE
 	completion_sound = 'sound/misc/batsound.ogg'
+	var/ascension_requirement = 0
+	var/next_phase = /datum/vampire_project/power_growth/second
 
 /datum/vampire_project/power_growth/can_start(mob/living/user, obj/structure/vampire/bloodpool/pool)
 	var/datum/antagonist/vampire/lord/lord = user.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
-	return lord && !lord.ascended
+	return lord && lord.ascension_level == ascension_requirement
 
 /datum/vampire_project/power_growth/on_complete()
 	// Find nearby vampire lords who can level up
-	for(var/mob/living/user in range(1, bloodpool))
-		var/datum/antagonist/vampire/lord/lord = user.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
-		if(lord && !lord.ascended)
-			var/mob/living/carbon/human/lord_body = user
-			to_chat(user, span_greentext("My power grows through collective sacrifice."))
-			lord_body.set_stat_modifier("[type]", list(
-				STAT_CONSTITUTION = 2,
-				STAT_ENDURANCE = 2,
-				STAT_FORTUNE = 2,
-				STAT_INTELLIGENCE = 2,
-				STAT_PERCEPTION = 2,
-				STAT_SPEED = 2,
-				STAT_STRENGTH = 2,
-			))
-			lord_body.maxbloodpool += 1000
-			bloodpool.available_project_types -= /datum/vampire_project/power_growth
-			bloodpool.available_project_types += /datum/vampire_project/power_growth_2
-			break
+	var/mob/living/target = initiator.resolve()
+	var/datum/antagonist/vampire/lord/lord = target?.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
+	if(!lord || lord.ascension_level != ascension_requirement)
+		return
+	to_chat(target, span_greentext("My power grows through collective sacrifice."))
+	var/mob/living/carbon/human/lord_body = target
+	lord_body.set_stat_modifier("[type]", list(
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_FORTUNE = 2,
+		STAT_INTELLIGENCE = 2,
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 2,
+		STAT_STRENGTH = 2,
+	))
+	lord.ascension_level++
+	lord_body.maxbloodpool += 1000
+	bloodpool.available_project_types -= type
+	if(next_phase)
+		bloodpool.available_project_types += next_phase
 
-/datum/vampire_project/power_growth_2
+/datum/vampire_project/power_growth/second
 	display_name = "Rite of Reclamation"
 	description = "Strength long sealed returns. The soil, the stone, and the shadows bend again to their rightful master."
 	total_cost = VAMPCOST_TWO
-	completion_sound = 'sound/misc/batsound.ogg'
+	ascension_requirement = 1
+	next_phase = /datum/vampire_project/power_growth/third
 
-/datum/vampire_project/power_growth_2/on_complete()
-	// Find nearby vampire lords who can level up
-	for(var/mob/living/user in range(1, bloodpool))
-		var/datum/antagonist/vampire/lord/lord = user.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
-		if(lord && !lord.ascended)
-			var/mob/living/carbon/human/lord_body = user
-			to_chat(user, span_greentext("My power grows through collective sacrifice."))
-			lord_body.set_stat_modifier("[type]", list(
-				STAT_CONSTITUTION = 2,
-				STAT_ENDURANCE = 2,
-				STAT_FORTUNE = 2,
-				STAT_INTELLIGENCE = 2,
-				STAT_PERCEPTION = 2,
-				STAT_SPEED = 2,
-				STAT_STRENGTH = 2,
-			))
-			lord_body.maxbloodpool += 1000
-			bloodpool.available_project_types -= /datum/vampire_project/power_growth_2
-			bloodpool.available_project_types += /datum/vampire_project/power_growth_3
-			break
-
-/datum/vampire_project/power_growth_3
+/datum/vampire_project/power_growth/third
 	display_name = "Rite of Dominion"
 	description = "The veil of time shreds. The Elder's will pours forth, binding trespassers within the grasp of the Land."
 	total_cost = VAMPCOST_THREE
-	completion_sound = 'sound/misc/batsound.ogg'
+	ascension_requirement = 2
+	next_phase = /datum/vampire_project/power_growth/fourth
 
-/datum/vampire_project/power_growth_3/on_complete()
-	// Find nearby vampire lords who can level up
-	for(var/mob/living/user in range(1, bloodpool))
-		var/datum/antagonist/vampire/lord/lord = user.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
-		if(lord && !lord.ascended)
-			var/mob/living/carbon/human/lord_body = user
-			to_chat(user, span_greentext("My power grows through collective sacrifice."))
-
-
-			lord_body.set_stat_modifier("[type]", list(
-				STAT_CONSTITUTION = 2,
-				STAT_ENDURANCE = 2,
-				STAT_FORTUNE = 2,
-				STAT_INTELLIGENCE = 2,
-				STAT_PERCEPTION = 2,
-				STAT_SPEED = 2,
-				STAT_STRENGTH = 2,
-			))
-			lord_body.maxbloodpool += 1000
-			bloodpool.available_project_types -= /datum/vampire_project/power_growth_3
-			bloodpool.available_project_types += /datum/vampire_project/power_growth_4
-			break
-
-/datum/vampire_project/power_growth_4
+/datum/vampire_project/power_growth/fourth
 	display_name = "Rite of Sovereignty"
 	description = "The Lord is whole. Ancient power saturates every stone and vein, for the Land and its master are one."
 	total_cost = VAMPCOST_FOUR
-	completion_sound = 'sound/misc/batsound.ogg'
+	ascension_requirement = 3
+	next_phase = null
 
-/datum/vampire_project/power_growth_4/on_complete()
-	// Find nearby vampire lords who can level up
-	for(var/mob/living/user in range(1, bloodpool))
-		var/datum/antagonist/vampire/lord/lord = user.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
-		if(lord && !lord.ascended)
-			var/mob/living/carbon/human/lord_body = user
-			lord_body.set_stat_modifier("[type]", list(
-				STAT_CONSTITUTION = 2,
-				STAT_ENDURANCE = 2,
-				STAT_FORTUNE = 2,
-				STAT_INTELLIGENCE = 2,
-				STAT_PERCEPTION = 2,
-				STAT_SPEED = 2,
-				STAT_STRENGTH = 2,
-			))
-			lord_body.maxbloodpool += 1000
-			to_chat(user, span_danger("I AM ANCIENT, I AM THE LAND. EVEN THE SUN BOWS TO ME."))
-			lord.ascended = TRUE
-			var/list/all_subordinates = user.clan_position.get_all_subordinates()
-			for(var/datum/clan_hierarchy_node/node as anything in all_subordinates)
-				var/mob/living/carbon/human/subordinate_body = node.assigned_member
-				if(!subordinate_body)
-					continue
-				subordinate_body.maxbloodpool += 1000
-				subordinate_body.set_stat_modifier("[type]", list(
-					STAT_CONSTITUTION = 2,
-					STAT_ENDURANCE = 2,
-					STAT_FORTUNE = 2,
-					STAT_INTELLIGENCE = 2,
-					STAT_PERCEPTION = 2,
-					STAT_SPEED = 2,
-					STAT_STRENGTH = 2,
-				))
-			bloodpool.available_project_types -= /datum/vampire_project/power_growth_4
-			break
+/datum/vampire_project/power_growth/fourth/on_complete()
+	var/mob/living/target = initiator.resolve()
+	var/datum/antagonist/vampire/lord/lord = target?.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
+	if(!lord || lord.ascension_level == ascension_requirement)
+		return
+	to_chat(target, span_danger("I AM ANCIENT, I AM THE LAND. EVEN THE SUN BOWS TO ME."))
+	SSmapping.retainer.vlord_ascended = TRUE
+	var/list/all_subordinates = target.clan_position.get_all_subordinates()
+	for(var/datum/clan_hierarchy_node/node as anything in all_subordinates)
+		var/mob/living/carbon/human/subordinate_body = node.assigned_member
+		if(!subordinate_body)
+			continue
+		subordinate_body.maxbloodpool += 1000
+		subordinate_body.set_stat_modifier("[type]", list(
+			STAT_CONSTITUTION = 2,
+			STAT_ENDURANCE = 2,
+			STAT_FORTUNE = 2,
+			STAT_INTELLIGENCE = 2,
+			STAT_PERCEPTION = 2,
+			STAT_SPEED = 2,
+			STAT_STRENGTH = 2,
+		))
+	..()
+
 /datum/vampire_project/amulet_crafting
 	display_name = "World Anchor"
 	description = "Forge a mystical amulet to bind souls across realms."

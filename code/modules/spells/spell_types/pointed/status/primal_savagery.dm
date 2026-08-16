@@ -4,13 +4,12 @@
 	button_icon_state = "wolf_head"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
 	associated_skill = /datum/attribute/skill/magic/druidic
-	attunements = list(
-		/datum/attunement/earth = 0.3,
-	)
 	invocation = "Teeth of a serpent."
 	invocation_type = INVOCATION_WHISPER
+
+	required_form = FORM_LIFE
+	required_technique = TECHNIQUE_ALTERATION
 
 	charge_required = FALSE
 	cooldown_time = 60 SECONDS

@@ -1,13 +1,10 @@
 /datum/action/cooldown/spell/essence/fire_cascade
-	name = "Fire Cascadec"
-	desc = "Unleash a spreading fan of slow-moving flame projectiles."
-	school = "evocation"
+	name = "Fire Cascade"
+	desc = "Unleash a nova of spreading flames."
 	button_icon_state = "fireaura"
 	spell_cost = 4
 	cooldown_time = 45 SECONDS
-	point_cost = 4
 	click_to_activate = TRUE
-	attunements = list(/datum/attunement/fire, /datum/attunement/aeromancy)
 	essences = list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/air)
 	var/flame_radius = 2
 	var/hotspot_lifetime = 3
@@ -26,3 +23,13 @@
 			new /obj/effect/hotspot(nearby_turf, null, null, hotspot_lifetime)
 
 		sleep(0.3 SECONDS)
+
+/datum/action/cooldown/spell/essence/fire_cascade/spell
+	name = "Cascade of Fire"
+	charge_required = TRUE
+	charge_time = 0.2 SECONDS
+	spell_cost = 40
+	spell_type = SPELL_MANA
+
+	required_form = FORM_FIRE
+	required_technique = TECHNIQUE_CREATION

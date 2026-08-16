@@ -320,7 +320,7 @@
 			return strings("accents/dwarf_replacement.json", "dwarf")
 		if("Infernal")
 			return strings("accents/spanish_replacement.json", "spanish")
-		if("Celestial")
+		if("Celestial", "Lunaris")
 			return
 		if("Orcish")
 			return strings("accents/halforc_replacement.json", "halforc")
@@ -1824,7 +1824,7 @@
 		harm(M, H, attacker_style)
 
 // We need to remove this
-/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone, accurate = FALSE)
+/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone, accurate = FALSE, signal)
 	if(!I || !affecting)
 		return FALSE
 
@@ -1877,6 +1877,8 @@
 	var/def_zone = affecting.body_zone
 
 	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
+	if(signal & COMPONENT_ITEM_NO_DEFENSE)
+		armor_block = 0
 	var/weakness = H.check_weakness(I, user)
 	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H, skip_dtype = TRUE)
 	SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, actual_damage)
