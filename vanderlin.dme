@@ -4313,7 +4313,6 @@
 #include "code\modules\spells\spell_types\pointed\beam\_beam.dm"
 #include "code\modules\spells\spell_types\pointed\beam\beam_of_frost.dm"
 #include "code\modules\spells\spell_types\pointed\beam\equalize.dm"
-#include "code\modules\spells\spell_types\pointed\blood\_blood_mage.dm"
 #include "code\modules\spells\spell_types\pointed\blood\blood_healing.dm"
 #include "code\modules\spells\spell_types\pointed\blood\blood_purge.dm"
 #include "code\modules\spells\spell_types\pointed\blood\dark_resurrection.dm"
