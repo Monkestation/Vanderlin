@@ -20,7 +20,7 @@
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH_APP
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 	bypass_lastclass = TRUE
@@ -46,7 +46,8 @@
 
 	traits = list(
 		TRAIT_FORAGER,
-		TRAIT_STEELHEARTED
+		TRAIT_STEELHEARTED,
+		TRAIT_GALLOWBAND
 	)
 	mind_traits = list(TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)

@@ -1,8 +1,8 @@
 /mob/living/carbon/human/species/zizombie
 	name = "rotten zizombie"
-
 	icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 	icon_state = "zizombie"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/zizombie
 	gender = PLURAL
 	bodyparts = list(/obj/item/bodypart/chest/zizombie, /obj/item/bodypart/head/zizombie, /obj/item/bodypart/l_arm/zizombie,
@@ -138,10 +138,7 @@
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_UNDEAD)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_UNDEAD)
 	name = "zizombie"
 	real_name = "zizombie"
 	mob_biotypes |= MOB_UNDEAD
@@ -158,7 +155,7 @@
 	name = "zizombie"
 	id = SPEC_ID_ZIZOMBIE
 	species_traits = list()
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
+	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = "human"
@@ -184,6 +181,8 @@
 	return TRUE
 
 /datum/component/rot/corpse/zizombie/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/amt2add = 10 //1 second
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)
@@ -293,10 +292,10 @@
 		head = /obj/item/clothing/head/roguehood/colored/uncolored
 	if(prob(50))
 		r_hand = /obj/item/weapon/sword/iron
-		shoes = /obj/item/clothing/shoes/boots
+		shoes = /obj/item/clothing/shoes/boots/darkboots
 	else
 		r_hand = /obj/item/weapon/mace/woodclub
-		shoes = /obj/item/clothing/shoes/boots
+		shoes = /obj/item/clothing/shoes/boots/darkboots
 
 ///////////////////////////////////////////////////////////// EVENTMIN SKELETONGS
 
@@ -322,7 +321,7 @@
 		if(1) //zizombie Warrior
 			r_hand = /obj/item/weapon/sword/iron
 			l_hand = /obj/item/weapon/shield/wood
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
@@ -333,7 +332,7 @@
 		if(2)//zizombie Warrior
 			r_hand = /obj/item/weapon/mace
 			l_hand = /obj/item/weapon/shield/wood
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
@@ -344,7 +343,7 @@
 		if(3) //zizombie Warrior
 			r_hand = /obj/item/weapon/flail
 			l_hand = /obj/item/weapon/shield/wood
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			belt = /obj/item/storage/belt/leather
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
@@ -357,7 +356,7 @@
 			armor = /obj/item/clothing/armor/chainmail/iron
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 			neck = /obj/item/clothing/neck/chaincoif
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			pants = /obj/item/clothing/pants/tights/colored/vagrant
 			wrists = /obj/item/clothing/wrists/bracers/leather
 			head = /obj/item/clothing/head/helmet/kettle
@@ -369,12 +368,12 @@
 			pants = /obj/item/clothing/pants/tights/colored/vagrant
 			wrists = /obj/item/clothing/wrists/bracers/leather
 			neck = /obj/item/clothing/neck/chaincoif
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			head = /obj/item/clothing/head/helmet/kettle
 		if(6) //zizombie Warrior
 			r_hand = /obj/item/weapon/sword/scimitar/messer
 			l_hand = /obj/item/weapon/knife/dagger
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 			pants = /obj/item/clothing/pants/tights/colored/vagrant
 			neck = /obj/item/clothing/neck/chaincoif

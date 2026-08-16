@@ -47,6 +47,7 @@ SUBSYSTEM_DEF(nightshift)
 		SSParticleWeather.selected_forecast.set_ambient_temperature(curtod)
 		current_tod = GLOB.tod
 		update_nightshift()
+		SStreasury.check_time_of_day(curtod)
 
 /datum/controller/subsystem/nightshift/proc/update_nightshift()
 	set waitfor = FALSE
@@ -75,7 +76,7 @@ SUBSYSTEM_DEF(nightshift)
 			add_stress(/datum/stress_event/night_owl_night)
 		if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
 			return ..()
-		if(HAS_TRAIT(src, TRAIT_NOSLEEP))
+		if(HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 			return ..()
 		if(tiredness >= 100)
 			apply_status_effect(/datum/status_effect/debuff/sleepytime)

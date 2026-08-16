@@ -52,11 +52,18 @@
 	for(var/tag in html_tags)
 		. = html_tag(tag, .)
 	if(include_honoraries)
-		if(honorary)
+		var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
+		if(spy)
+			if(spy.examine_prefix)
+				. = "[spy.examine_prefix] [.]"
+		else if(honorary)
 			. = "[honorary] [.]"
 		if(SSticker.regent_mob == src)
 			. = "Regent [.]"
-		if(honorary_suffix)
+		if(spy)
+			if(spy.examine_suffix)
+				. = "[spy.examine_suffix] [.]"
+		else if(honorary_suffix)
 			. += " [honorary_suffix]"
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
@@ -140,7 +147,7 @@
 	damage += dna.species.punch_damage
 	return damage
 
-/mob/living/carbon/human/proc/get_kick_damage(multiplier = 1)
+/mob/living/carbon/human/proc/get_kick_damage()
 	if(QDELETED(src) || !ishuman(src))
 		return
 
@@ -149,7 +156,7 @@
 	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
-		return 30 * multiplier
+		return 30
 
 	if(used_str >= 11)
 		damage = max(damage + (damage * ((used_str - 10) * 0.3)), 1)
@@ -159,7 +166,7 @@
 	if(shoes)
 		damage *= (1 + (shoes.armor_class * 0.2))
 
-	return damage * multiplier
+	return damage
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]

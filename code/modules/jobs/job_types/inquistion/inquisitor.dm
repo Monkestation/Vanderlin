@@ -2,7 +2,7 @@
 	title = JOB_PRAFEKT
 	f_title = "Frau Prafekt"
 	department_flag = INQUISITION
-	faction = "Station"
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -24,6 +24,8 @@
 	display_order = JDO_PURITAN
 	advclass_cat_rolls = list(CTAG_PURITAN = 20)
 	give_bank_account = 30
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
@@ -63,6 +65,7 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
+	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)
@@ -75,6 +78,7 @@
 	if(.)
 		spawned.maxbloodpool = initial(spawned.maxbloodpool)
 		spawned.hud_used?.shutdown_bloodpool()
+		qdel(spawned.GetComponent(/datum/component/bloodpool_regen))
 
 
 ////Classic Inquisitor with a much more underground twist. Use listening devices, sneak into places to gather evidence, track down suspicious individuals. Has relatively the same utility stats as Confessor, but fulfills a different niche in terms of their combative job as the head honcho.
@@ -448,3 +452,4 @@
 
 /datum/job/advclass/puritan
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)

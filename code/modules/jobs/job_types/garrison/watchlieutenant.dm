@@ -23,19 +23,25 @@
 /datum/attribute_holder/sheet/job/lieutenant/flail
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(20, 30)
+		/datum/attribute/skill/combat/whipsflails = list(23, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/polearm
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(20, 30)
+		/datum/attribute/skill/combat/polearms = list(23, 33)
 	)
 
 /datum/attribute_holder/sheet/job/lieutenant/sword
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(20, 30)
+		/datum/attribute/skill/combat/swords = list(23, 33)
+	)
+
+/datum/attribute_holder/sheet/job/lieutenant/mace
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(23, 33)
 	)
 
 /datum/job/lieutenant
@@ -52,7 +58,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CITYWATCHMEN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -61,12 +67,15 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(EXP_TYPE_GARRISON = 900)
 	honorary = "Lieutenant"
 	job_bitflag = BITFLAG_GARRISON
+	starting_wage = 35
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/lieutenant
 
@@ -85,6 +94,7 @@
 		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail), \
 		"Spear" = /obj/item/weapon/polearm/spear, \
 		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
+		"Warhammer" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/mace/warhammer), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
@@ -96,6 +106,8 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
+		if("Warhammer")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/mace)
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT

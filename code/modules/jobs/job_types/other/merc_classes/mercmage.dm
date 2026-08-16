@@ -64,13 +64,15 @@
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)//only noc or zizo worshippers can be mages
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	spell_points = 8 //less than courtmagician, more than an adventurer wizard
+	form_points = 8
+	technique_points = 1
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sellmage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old
 
 	traits = list(
-		TRAIT_NOBLE_BLOOD
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/job/advclass/mercenary/sellmage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -80,9 +82,43 @@
 	if(prob(1)) //extremely rare just like court mage
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
+/datum/job/advclass/mercenary/sellmage/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+
+	// Hat selection (visual equipment)
+	var/static/list/selectablehat = list(
+		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
+		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+	)
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+
+	// Robe selection (visual equipment)
+	var/static/list/selectablerobe = list(
+		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
+		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
+	)
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
+
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/adept/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/adept/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/adept/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/adept/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/adept/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/adept/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/adept/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/adept/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/adept/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
+
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
-	shirt = /obj/item/clothing/armor/gambeson
+	shirt = /obj/item/clothing/armor/chainmail/hauberk/iron
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary
@@ -93,29 +129,6 @@
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
 	backpack_contents = list(
-		/obj/item/book/granter/spellbook/adept = 1,
 		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/manapot = 1
 	)
-
-/datum/outfit/mercenary/sellmage/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(visuals_only)
-		return
-
-	// Hat selection (visual equipment)
-	var/static/list/selectablehat = list(
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-	)
-	equipped_human.select_equippable(equipped_human, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
-
-	// Robe selection (visual equipment)
-	var/static/list/selectablerobe = list(
-		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
-		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-	)
-	equipped_human.select_equippable(equipped_human, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")

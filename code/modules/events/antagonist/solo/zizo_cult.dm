@@ -1,3 +1,4 @@
+/*
 /datum/round_event_control/antagonist/solo/zizo_cult
 	name = "Zizo Cult"
 	tags = list(
@@ -6,7 +7,7 @@
 		TAG_VILLAIN,
 		TAG_MAGICAL
 	)
-	roundstart = TRUE
+	roundstart = FALSE
 	antag_flag = ROLE_ZIZOIDCULTIST
 	shared_occurence_type = SHARED_HIGH_THREAT
 
@@ -16,7 +17,7 @@
 	min_players = LOWPOP_THRESHOLD * READYUP_AVG
 	cost = 0.9
 
-	weight = 8
+	weight = 0
 
 	earliest_start = 0 SECONDS
 
@@ -45,6 +46,7 @@
 		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
+		/datum/job/admin,
 	)
 
 /datum/round_event/antagonist/solo/zizo_cultist
@@ -56,3 +58,4 @@
 		leader = TRUE
 	else
 		antag_mind.add_antag_datum(antag_datum)
+*/

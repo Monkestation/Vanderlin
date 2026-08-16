@@ -1,7 +1,7 @@
 /datum/job/rousman
 	title = "Rousman"
 	job_flags = JOB_EQUIP_RANK
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL

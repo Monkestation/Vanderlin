@@ -70,8 +70,7 @@
 	)
 
 /datum/antagonist/zizocultist/examine_target(mob/user, mob/examined, list/P, list/examine_contents)
-	var/mob/living/carbon/human/H = examined
-	if(istype(H) && H.virginity)
+	if(HAS_TRAIT(examined, TRAIT_VIRGIN))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, span_purple(html_tag("B", "[P[THEYRE]] a virgin!")))
 	. = ..()
 
@@ -130,9 +129,9 @@
 			return FALSE
 		if(new_owner.assigned_role.title in GLOB.inquisition_positions)
 			return FALSE
-		if(new_owner.unconvertable)
+		if(new_owner.assigned_role.title in GLOB.admin_special_positions)
 			return FALSE
-		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
+		if(new_owner.unconvertable)
 			return FALSE
 
 /datum/antagonist/zizocultist/proc/add_cultist(datum/mind/cult_mind)
@@ -193,7 +192,7 @@
 					traitorwin = FALSE
 				count += objective.triumph_count
 
-	var/special_role_text = lowertext(name)
+	var/special_role_text = LOWER_TEXT(name)
 	if(traitorwin)
 		if(count)
 			if(owner)

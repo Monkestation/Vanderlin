@@ -51,6 +51,10 @@
 "R" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/town)
+"V" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
 
 (1,1,1) = {"
 R
@@ -87,7 +91,7 @@ R
 (5,1,1) = {"
 y
 h
-N
+V
 l
 t
 R

@@ -322,6 +322,12 @@
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
+/obj/structure/bars/wooden_arch
+	name = "decorative wooden arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	icon_state = "wooden_barrier"
+	attacked_sound = list("sound/combat/hits/onwood/woodimpact (1).ogg", "sound/combat/hits/onwood/woodimpact (2).ogg")
+
 /obj/structure/plank
 	name = "plank"
 	desc = ""
@@ -998,7 +1004,7 @@
 	..()
 
 /obj/structure/fluff/statue/evil
-	name = "idol"
+	name = "Matthios Idol"
 	desc = "A statue built to the robber-god, Matthios. The visage resembles nobody in particular. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money."
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
@@ -1068,6 +1074,13 @@
 	else
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
 
+/obj/structure/fluff/statue/graggar
+	name = "Graggar Idol"
+	desc = "An ugly and crude stone statue in imitation of Graggar, bestial God of murder and cannibalism. The empty eye sockets seem to follow you."
+	icon_state = "graggaraltar"
+	icon = 'icons/roguetown/misc/tallstructure.dmi'
+
+
 /obj/structure/fluff/psycross
 	name = "pantheon cross"
 	desc = "A towering monument to the Ten. Marriages are performed under its shadow."
@@ -1088,7 +1101,10 @@
 	dir = NORTH
 	buckle_requires_restraints = 1
 	buckle_prevents_pull = 1
+	/// Divine or Inhumen
 	var/divine = TRUE
+	/// If you can walk through it as if it doesn't exist. This is a hand-holdy var.
+	var/pass_all_dir = FALSE
 
 /obj/structure/fluff/psycross/Initialize()
 	. = ..()
@@ -1111,13 +1127,15 @@
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
+	if(pass_all_dir)
+		return TRUE
 	if(get_dir(loc, mover) == dir)
-		return
+		return FALSE
 	return TRUE
 
 /obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(direction == dir)
+	if(!pass_all_dir && (direction == dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1232,7 +1250,7 @@
 
 	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
 	user.set_patron(real_patron)
-	to_chat(user, "<span class='god_[lowertext(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
+	to_chat(user, "<span class='god_[LOWER_TEXT(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
 	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [real_patron]")
 	visible_message("A bright light flashes out from [src] as it channels divine focus.")
 	AOE_flash(user, range = 5)
@@ -1331,7 +1349,7 @@
 		var/is_title = FALSE
 		if(second_last_index)
 			var/second_last_word = copytext(groom.real_name, second_last_index + 1, groom_name_index)
-			if((lowertext(second_last_word) == "the" || lowertext(second_last_word) == "of") && last_word)
+			if((LOWER_TEXT(second_last_word) == "the" || LOWER_TEXT(second_last_word) == "of") && last_word)
 				is_title = TRUE
 
 		if(is_title)
@@ -1358,7 +1376,7 @@
 		var/is_title_bride = FALSE
 		if(second_last_index_bride)
 			var/second_last_word_bride = copytext(bride.real_name, second_last_index_bride + 1, bride_name_index)
-			if((lowertext(second_last_word_bride) == "the" || lowertext(second_last_word_bride) == "of") && last_word_bride)
+			if((LOWER_TEXT(second_last_word_bride) == "the" || LOWER_TEXT(second_last_word_bride) == "of") && last_word_bride)
 				is_title_bride = TRUE
 
 		if(!is_title_bride && !findtext(bride.real_name, " the ") && !findtext(bride.real_name, " of "))

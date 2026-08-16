@@ -146,7 +146,7 @@
 
 	// backup bleed rate if you max out on burn damage
 	if((burn_dam / max_damage) >= 0.9)
-		bleed_rate += BLEED_DAMAGE_RATIO / 5
+		bleed_rate += BLEED_DAMAGE_RATIO / 10
 
 	var/our_state = return_surgical_state()
 	if(our_state & SURGERY_VESSELS_CLAMPED)
@@ -212,6 +212,8 @@
 				wounding_type = WOUND_BURN
 			if(BCLASS_LASHING)
 				wounding_type = WOUND_LASH
+			if(BCLASS_INTENSE_BURN)
+				wounding_type = WOUND_INTENSE_BURN
 
 	dam *= skeletonized_mod(wounding_type)
 

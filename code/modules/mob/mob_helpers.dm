@@ -210,39 +210,31 @@
 ///Would this zone be above the neck
 /proc/above_neck(zone)
 	var/list/zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
-	if(zones.Find(zone))
-		return 1
-	else
-		return 0
+	return (zone in zones)
+
 /**
  * Convert random parts of a passed in message to stars
  *
- * * n - the string to convert
- * * pr - probability any character gets changed
+ * * phrase - the string to convert
+ * * probability - probability any character gets changed
  *
  * This proc is dangerously laggy, avoid it or die
  */
-/proc/stars(n, pr)
-	n = html_encode(n)
-	if (pr == null)
-		pr = 25
-	if (pr <= 0)
-		return null
-	else
-		if (pr >= 100)
-			return n
-	var/te = n
-	var/t = ""
-	n = length(n)
-
-	for(var/p = 1 to min(n,MAX_BROADCAST_LEN))
-		if ((copytext(te, p, p + 1) == " " || prob(pr)))
-			t = text("[][]", t, copytext(te, p, p + 1))
+/proc/stars(phrase, probability = 25)
+	if(probability <= 0)
+		return phrase
+	phrase = html_decode(phrase)
+	var/leng = length(phrase)
+	. = ""
+	var/char = ""
+	for(var/i = 1, i <= leng, i += length(char))
+		char = phrase[i]
+		if(char == " " || !prob(probability))
+			. += char
 		else
-			t = text("[]*", t)
-	if(n > MAX_BROADCAST_LEN)
-		t += "..." //signals missing text
-	return sanitize(t)
+			. += "*"
+	return sanitize(.)
+
 /**
  * Makes you speak like you're drunk
  */
@@ -255,15 +247,15 @@
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,3)==3)
-			if(lowertext(newletter)=="o")
+			if(LOWER_TEXT(newletter)=="o")
 				newletter="u"
-			if(lowertext(newletter)=="s")
+			if(LOWER_TEXT(newletter)=="s")
 				newletter="ch"
-			if(lowertext(newletter)=="a")
+			if(LOWER_TEXT(newletter)=="a")
 				newletter="ah"
-			if(lowertext(newletter)=="u")
+			if(LOWER_TEXT(newletter)=="u")
 				newletter="oo"
-			if(lowertext(newletter)=="c")
+			if(LOWER_TEXT(newletter)=="c")
 				newletter="k"
 		if(rand(1,20)==20)
 			if(newletter==" ")
@@ -292,17 +284,17 @@
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,2)==2)
-			if(lowertext(newletter)=="o")
+			if(LOWER_TEXT(newletter)=="o")
 				newletter="u"
-			if(lowertext(newletter)=="t")
+			if(LOWER_TEXT(newletter)=="t")
 				newletter="ch"
-			if(lowertext(newletter)=="a")
+			if(LOWER_TEXT(newletter)=="a")
 				newletter="ah"
-			if(lowertext(newletter)=="u")
+			if(LOWER_TEXT(newletter)=="u")
 				newletter="oo"
-			if(lowertext(newletter)=="c")
+			if(LOWER_TEXT(newletter)=="c")
 				newletter=" NAR "
-			if(lowertext(newletter)=="s")
+			if(LOWER_TEXT(newletter)=="s")
 				newletter=" SIE "
 		if(rand(1,4)==4)
 			if(newletter==" ")
@@ -328,42 +320,42 @@
 
 ///Adds stuttering to the message passed in
 /proc/stutter(phrase, power = 5)
-    phrase = html_decode(phrase)
-    var/leng = length(phrase)
-    . = ""
-    var/newletter = ""
-    var/rawchar = ""
-    var/static/regex/nostutter = regex(@@[aeiouAEIOU ""''()[\]{}.!?,:;_`~-]@)
-    var/word_start = TRUE // track if we're at the start of a new word
+	phrase = html_decode(phrase)
+	var/leng = length(phrase)
+	. = ""
+	var/newletter = ""
+	var/rawchar = ""
+	var/static/regex/nostutter = regex(@@[aeiouAEIOU ""''()[\]{}.!?,:;_`~-]@)
+	var/word_start = TRUE // track if we're at the start of a new word
 
-    for(var/i = 1, i <= leng, i += length(rawchar))
-        rawchar = newletter = phrase[i]
+	for(var/i = 1, i <= leng, i += length(rawchar))
+		rawchar = newletter = phrase[i]
 
-        // spaces/punctuation reset the word boundary
-        if(nostutter.Find(rawchar))
-            if(rawchar == " ")
-                word_start = TRUE
-            . += newletter
-            continue
+		// spaces/punctuation reset the word boundary
+		if(nostutter.Find(rawchar))
+			if(rawchar == " ")
+				word_start = TRUE
+			. += newletter
+			continue
 
-        if(word_start)
-            word_start = FALSE
-            // stutter more aggressively on word-initial consonants
-            if(prob(50 + power))
-                if(prob(10) && power >= 10)
-                    newletter = "[newletter]-[newletter]-[newletter]-[newletter]"
-                else if(prob(25) && power >= 6)
-                    newletter = "[newletter]-[newletter]-[newletter]"
-                else
-                    newletter = "[newletter]-[newletter]"
-        else
-            // rare mid-word stutter, much lower chance
-            if(prob(1 + power))
-                newletter = "[newletter]-[newletter]"
+		if(word_start)
+			word_start = FALSE
+			// stutter more aggressively on word-initial consonants
+			if(prob(50 + power))
+				if(prob(10) && power >= 10)
+					newletter = "[newletter]-[newletter]-[newletter]-[newletter]"
+				else if(prob(25) && power >= 6)
+					newletter = "[newletter]-[newletter]-[newletter]"
+				else
+					newletter = "[newletter]-[newletter]"
+		else
+			// rare mid-word stutter, much lower chance
+			if(prob(1 + power))
+				newletter = "[newletter]-[newletter]"
 
-        . += newletter
+		. += newletter
 
-    return sanitize(.)
+	return sanitize(.)
 
 ///Convert a message to derpy speak
 /proc/derpspeech(message, stuttering)
@@ -963,11 +955,6 @@
 
 	..()
 
-///Can the mob hear
-/mob/proc/can_hear()
-	. = TRUE
-
-
 /**
  * Get the list of keywords for policy config
  *
@@ -1016,3 +1003,10 @@
 
 	animate(my_client, pixel_x = oldx + mpx, pixel_y = oldy + mpy, time = duration, flags = ANIMATION_RELATIVE)
 	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)
+
+
+/mob/living/proc/is_swinging(disrupt_only = FALSE)
+	if(!disrupt_only)
+		return (has_status_effect(/datum/status_effect/swingdelay) || has_status_effect(/datum/status_effect/swingdelay/disrupt))
+	else
+		return (has_status_effect(/datum/status_effect/swingdelay/disrupt))

@@ -230,7 +230,7 @@
 			amount -= 1
 			var/obj/F = new stacktype(get_turf(src))
 			H.put_in_hands(F)
-			user.balloon_alert(user, "I remove \a [F].")
+			user.balloon_alert(user, "i remove \a [F].")
 
 	update_bundle()
 

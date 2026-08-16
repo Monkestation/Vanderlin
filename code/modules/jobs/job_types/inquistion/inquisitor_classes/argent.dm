@@ -6,7 +6,7 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = 1,
 		STAT_FORTUNE = -1,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 35,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
@@ -29,31 +29,31 @@
 /datum/attribute_holder/sheet/job/argent/knives
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(30, 30)
+		/datum/attribute/skill/combat/knives = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/axesmaces
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/axesmaces = list(30, 30)
+		/datum/attribute/skill/combat/axesmaces = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/swords
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(30, 30)
+		/datum/attribute/skill/combat/swords = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/polearms
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/polearms = list(30, 30)
+		/datum/attribute/skill/combat/polearms = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/argent/whipsflails
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/whipsflails = list(30, 30)
+		/datum/attribute/skill/combat/whipsflails = list(33, 33)
 	)
 
 /datum/job/advclass/sacrestant/argent
@@ -183,12 +183,17 @@
 			stomach = new /obj/item/organ/stomach/acid_spit
 			stomach.Insert(spawned)
 		if("Goblin Eyes - Nightvision")
-			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
-			if(eyes)
+			var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
+			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 				eyes.Remove(spawned,1)
 				QDEL_NULL(eyes)
-			eyes = new /obj/item/organ/eyes/night_vision/nightmare
-			eyes.Insert(spawned)
+
+			var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+			var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+			LE.switch_side(LEFT_SIDE)
+
+			LE.Insert(spawned)
+			RE.Insert(spawned)
 		if("Greenskin Hands - Strong Grip")
 			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
@@ -203,7 +208,7 @@
 			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
 		if("Nightmare Ward - No Sleep and Anti-Scrying")
-			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_SLEEPIMMUNE, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
@@ -219,15 +224,15 @@
 	name = "Argent (Sacrestants)"
 	cloak = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	neck = /obj/item/clothing/neck/gorget
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	backl = /obj/item/gun/ballistic/bow/cross
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	shoes = /obj/item/clothing/shoes/psydonboots
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/key/inquisition = 1,
 		/obj/item/lockpickring/mundane = 1,

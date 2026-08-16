@@ -91,7 +91,7 @@
 	if(initial(B.stat_penalty) && initial(B.stat_reduction) > 0)
 		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = -initial(B.stat_reduction)))
 
-	to_chat(H, span_notice("Your experience as [lowertext(initial(B.name))] has shaped who you are today."))
+	to_chat(H, span_notice("Your experience as [LOWER_TEXT(initial(B.name))] has shaped who you are today."))
 
 /datum/quirk/boon/backstory/on_remove()
 	if(!ishuman(owner))
@@ -107,6 +107,7 @@
 		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = initial(B.stat_reduction)))
 
 	H.adjust_skill_exp_multiplier(initial(B.granted_skill), -initial(B.xp_multiplier))
+	return ..()
 
 /datum/backstory
 	/// The name of the backstory shown to players
@@ -127,13 +128,13 @@
 	var/xp_multiplier = 0.2
 
 	/// List of allowed ages (empty = all allowed)
-	var/list/allowed_ages = list()
+	var/list/allowed_ages
 	/// List of blocked ages
-	var/list/blocked_ages = list()
+	var/list/blocked_ages
 	/// List of allowed species (empty = all allowed)
-	var/list/allowed_species = list()
+	var/list/allowed_species
 	/// List of blocked species
-	var/list/blocked_species = list()
+	var/list/blocked_species
 
 
 /datum/backstory/proc/is_available(datum/preferences/prefs)
@@ -143,13 +144,13 @@
 	// Check age restrictions
 	if(length(allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in allowed_ages))
 		return FALSE
-	if(prefs.read_preference(/datum/preference/choiced/age) in blocked_ages)
+	if(length(blocked_ages) && (prefs.read_preference(/datum/preference/choiced/age) in blocked_ages))
 		return FALSE
 
 	// Check species restrictions
 	if(length(allowed_species) && !(prefs.pref_species in allowed_species))
 		return FALSE
-	if(prefs.pref_species in blocked_species)
+	if(length(blocked_species) && (prefs.pref_species in blocked_species))
 		return FALSE
 
 	return TRUE

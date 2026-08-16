@@ -1,5 +1,5 @@
 /mob/living/carbon/human/species/human/northern/thief //I'm a thief, give me your shit
-	faction = list("thieves")
+	faction = list(FACTION_HOSTILE)
 	ambushable = FALSE
 	dodgetime = 30
 	flee_in_pain = TRUE

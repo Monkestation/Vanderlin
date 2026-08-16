@@ -2120,12 +2120,6 @@
 	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"aki" = (
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast{
-	pixel_y = 0
-	},
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "akk" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "vanderlin-forest_mountain-forest";
@@ -2730,14 +2724,6 @@
 /obj/item/natural/feather,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"ane" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/storage/backpack/satchel/otavan,
-/obj/item/storage/backpack/satchel/otavan,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
-/turf/open/floor/church/purple,
-/area/indoors/town/church/inquisition)
 "anf" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/alt,
@@ -3366,10 +3352,6 @@
 /obj/effect/decal/cleanable/debris/stone,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
-"aqq" = (
-/obj/item/book/granter/spellbook/horrible,
-/turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aqr" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
@@ -6004,13 +5986,6 @@
 /obj/item/weapon/surgery/retractor/improv,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
-"aCr" = (
-/obj/structure/fluff/walldeco/painting/castle{
-	pixel_y = 32
-	},
-/obj/item/book/granter/spellbook/adept,
-/turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
 "aCs" = (
 /obj/structure/carpet/cyan,
 /obj/item/chair/stool/bar,
@@ -6059,7 +6034,7 @@
 /obj/structure/handcart{
 	dir = 4
 	},
-/obj/effect/mob_spawn/human/corpse/damaged,
+/obj/effect/mob_spawn/corpse/human/damaged,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aCD" = (
@@ -11308,6 +11283,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"duj" = (
+/obj/structure/fluff/walldeco/painting/castle{
+	pixel_y = 32
+	},
+/obj/item/spellbook/adept,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/upperkeep)
 "dwr" = (
 /obj/item/ingot/steel_slag,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -11854,6 +11836,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
+"gyn" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/storage/backpack/satchel/grenzel,
+/obj/item/storage/backpack/satchel/grenzel,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch/lantern,
+/turf/open/floor/church/purple,
+/area/indoors/town/church/inquisition)
 "gBK" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -13650,13 +13640,6 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
-"rjA" = (
-/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/adv,
-/obj/effect/decal/cleanable/ritual_rune/arcyne/attunement,
-/obj/item/riddleofsteel,
-/mob/living/simple_animal/hostile/retaliate/voiddragon/red,
-/turf/open/floor/plasteel/maniac,
-/area/indoors/mountains/anvil/keep)
 "rlV" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 4
@@ -14235,8 +14218,13 @@
 /obj/effect/decal/cleanable/ritual_rune/arcyne/empowerment{
 	pixel_y = -47
 	},
+/obj/item/weapon/greataxe/steel/slayer,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"uuv" = (
+/obj/item/spellbook/horrible,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/upperkeep)
 "uuP" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/carpet/lord/center,
@@ -14558,6 +14546,13 @@
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/peak)
+"vWl" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/adv,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/recharge,
+/obj/item/riddleofsteel,
+/mob/living/simple_animal/hostile/retaliate/voiddragon/red,
+/turf/open/floor/plasteel/maniac,
+/area/indoors/mountains/anvil/keep)
 "vXz" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 8
@@ -36955,7 +36950,7 @@ aEY
 aJv
 aJv
 uum
-aki
+aJv
 aJv
 aJv
 aEY
@@ -79613,7 +79608,7 @@ ayN
 aZG
 aHg
 aZG
-rjA
+vWl
 aZG
 aHg
 aZG
@@ -86392,7 +86387,7 @@ ado
 ado
 apE
 aVr
-ane
+gyn
 aIS
 awI
 aFz
@@ -113955,7 +113950,7 @@ auo
 ajO
 awo
 aRk
-aCr
+duj
 aZK
 axC
 aRk
@@ -114161,7 +114156,7 @@ aVs
 abx
 axa
 aRk
-aqq
+uuv
 and
 aRk
 aBr

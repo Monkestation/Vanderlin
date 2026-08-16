@@ -4,8 +4,6 @@
 	button_icon_state = "healingspring"
 	button_icon = 'icons/effects/effects.dmi'
 	cast_range = 2
-	point_cost = 8
-	attunements = list(/datum/attunement/life, /datum/attunement/blood)
 	essences = list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/water)
 
 /datum/action/cooldown/spell/essence/healing_spring/cast(atom/cast_on)
@@ -41,3 +39,14 @@
 		organ_healing = TRUE, \
 		healing_color = "#375637", \
 	)
+
+/datum/action/cooldown/spell/essence/healing_spring/spell
+	name = "Spring of Healing"
+	charge_required = TRUE
+	charge_time = 10 SECONDS
+	spell_cost = 120
+	spell_type = SPELL_MANA
+
+	required_form = FORM_EARTH
+	required_technique = TECHNIQUE_RESTORATION
+	required_level = 4

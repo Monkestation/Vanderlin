@@ -8,6 +8,7 @@
 	slowdown = 20
 	bullet_sizzle = TRUE
 	bullet_bounce_sound = null //needs a splashing sound one day.
+
 	smoothing_flags = SMOOTH_EDGE
 	smoothing_groups = SMOOTH_GROUP_FLOOR_LIQUID
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED + SMOOTH_GROUP_CLOSED_WALL
@@ -93,6 +94,12 @@
 	/// Randomize direction when initializing
 	var/randomize_dir = FALSE
 
+	/// If the tile can spawn bottles
+	var/bottle_spawner = TRUE
+
+	/// If the water takes on it's reagents color
+	var/uses_greyscale = TRUE
+
 /turf/open/water/Initialize(mapload)
 	if(randomize_dir)
 		dir = pick(GLOB.cardinals)
@@ -106,15 +113,17 @@
 
 	if(!isnull(fishing_datum))
 		add_lazy_fishing(fishing_datum)
+
 	ADD_TRAIT(src, TRAIT_CATCH_AND_RELEASE, INNATE_TRAIT)
 
-	if(mapload)
+	if(mapload && bottle_spawner)
 		if(!rand(0, 999)) // 1/1000 chance
 			new /obj/item/bottlemessage/ancient(src)
 	else
 		START_PROCESSING(SSobj, src)
 
 	base_icon_state = icon_state // in case you want to override the icon_state when initializing
+
 	handle_water()
 
 	return INITIALIZE_HINT_LATELOAD
@@ -147,7 +156,7 @@
 
 /turf/open/water/update_icon(updates = ALL)
 	. = ..()
-	if(!(updates & UPDATE_SMOOTHING))
+	if(!(updates & UPDATE_SMOOTHING) || !initial(smoothing_flags))
 		return
 
 	if(volume_status == WATER_VOLUME_DRY)
@@ -273,18 +282,20 @@
 			shovel.update_appearance(UPDATE_ICON_STATE)
 			ScrapeAway()
 			return TRUE
-	. = ..()
+	return ..()
 
 /turf/open/water/river/creatable/proc/try_modify_water(mob/user, obj/item/reagent_containers/glass/bucket/wooden/bucket)
-	if(user.used_intent.type == /datum/intent/splash)
-		if(bucket.reagents?.total_volume)
-			var/datum/reagent/container_reagent = bucket.reagents.get_master_reagent()
-			var/water_count = bucket.reagents.get_reagent_amount(container_reagent.type)
-			user.visible_message("[user] starts to fill [src].", "You start to fill [src].")
-			if(do_after(user, 3 SECONDS, src))
-				if(bucket.reagents.remove_reagent(container_reagent.type, clamp(container_reagent.volume, 1, 100)))
-					playsound(src, 'sound/foley/waterenter.ogg', 100, FALSE)
-					adjust_originate_watervolume(water_count)
+	if(user.used_intent.type != /datum/intent/splash)
+		return
+	if(!bucket.reagents?.total_volume)
+		return
+	var/datum/reagent/container_reagent = bucket.reagents.get_master_reagent()
+	var/water_count = bucket.reagents.get_reagent_amount(container_reagent.type)
+	user.visible_message("[user] starts to fill [src].", "You start to fill [src].")
+	if(do_after(user, 3 SECONDS, src))
+		if(bucket.reagents.remove_reagent(container_reagent.type, clamp(container_reagent.volume, 1, 100)))
+			playsound(src, 'sound/foley/waterenter.ogg', 100, FALSE)
+			adjust_originate_watervolume(water_count)
 
 ///We lazily add the immerse element when something is spawned or crosses this turf and not before.
 /turf/open/water/proc/on_atom_inited(datum/source, atom/movable/movable)
@@ -320,15 +331,15 @@
 /turf/open/water/proc/determine_swimming_properties()
 	switch(water_height)
 		if(WATER_HEIGHT_ANKLE)
-			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 2.5
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 1
 			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
 			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
 		if(WATER_HEIGHT_SHALLOW)
-			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 5
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 2.5
 			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
 			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
 		if(WATER_HEIGHT_DEEP)
-			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 7.5
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 5
 			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 5
 			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 2
 		if(WATER_HEIGHT_FULL)
@@ -411,7 +422,8 @@
 	if(water_volume < MINIMUM_WATER_VOLUME)
 		dry_up()
 		return
-	color = sanitize_hexcolor(water_reagent::color)
+	if(uses_greyscale)
+		color = sanitize_hexcolor(water_reagent::color)
 	fill_up()
 
 /turf/open/water/proc/fill_up()
@@ -448,7 +460,7 @@
 			stop_conveying(movable)
 
 /turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	..()
+	. = ..()
 	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg','sound/foley/water_land3.ogg'), 100, FALSE)
 
 /turf/open/water/proc/try_z_swim(mob/swimming_mob, going_up, forced)
@@ -866,13 +878,26 @@
 /turf/open/water/river
 	name = "water"
 	desc = "Crystal clear water! Flowing swiftly along the river."
-	icon_state = MAP_SWITCH("rivermove", "rivermove-dir")
+	icon_state = MAP_SWITCH("rivermove", "rivermove-rockc")
 	underlay_icon_state = "rock"
 	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
 	set_relationships_on_init = FALSE
 	fishing_datum = /datum/fish_source/river
 	river_current = TRUE
+
+
+/turf/open/water/river/flow
+	icon_state = "rockwd2"
+
+/turf/open/water/river/flow/west
+	dir = WEST
+
+/turf/open/water/river/flow/east
+	dir = EAST
+
+/turf/open/water/river/flow/north
+	dir = NORTH
 
 /turf/open/water/river/get_heuristic_slowdown(mob/traverser, travel_dir)
 	. = ..()
@@ -891,7 +916,7 @@
 	water.try_set_parent(src)
 
 /turf/open/water/river/under
-	icon_state = MAP_SWITCH("riverbotdeep", "rivermoveF-dir")
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-rockcf")
 	water_height = WATER_HEIGHT_FULL
 	immerse_overlay = null
 	shine = SHINE_MATTE
@@ -899,7 +924,7 @@
 
 /turf/open/water/river/dirt
 	desc = "Murky water, churning along the river."
-	icon_state = MAP_SWITCH("rivermove", "rivermovealt-dir")
+	icon_state = MAP_SWITCH("rivermove", "rivermove-dirtg")
 	underlay_icon_state = "dirt"
 	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
@@ -908,7 +933,24 @@
 	current_speed = 1 SECONDS
 
 /turf/open/water/river/dirt/under
-	icon_state = MAP_SWITCH("riverbotdeep", "rivermovealtF-dir")
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-dirtgf")
+	water_height = WATER_HEIGHT_FULL
+	immerse_overlay = null
+	shine = SHINE_MATTE
+	force_open_above = TRUE
+
+/turf/open/water/river/marsh
+	desc = "Marshy water, churning along the river."
+	icon_state = MAP_SWITCH("rivermove", "rivermove-dirtm")
+	underlay_icon_state = "dirt"
+	water_reagent = /datum/reagent/water/gross/marshy
+	cleanliness_factor = -3
+	slowdown = 5
+	slowdown = 1
+	current_speed = 1 SECONDS
+
+/turf/open/water/river/marsh/under
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-dirtmf")
 	water_height = WATER_HEIGHT_FULL
 	immerse_overlay = null
 	shine = SHINE_MATTE
@@ -917,10 +959,17 @@
 /turf/open/water/river/blood
 	name = "blood"
 	desc = "This river flows a viscous red."
-	icon_state = MAP_SWITCH("rivermove", "rivermovealt2-dir")
+	icon_state = MAP_SWITCH("rivermove", "rivermove-rockb")
 	underlay_icon_state = "rock"
 	water_reagent = /datum/reagent/blood
 	cleanliness_factor = -5
+
+/turf/open/water/river/blood/under
+	icon_state = MAP_SWITCH("riverbotdeep", "rivermove-rockbf")
+	water_height = WATER_HEIGHT_FULL
+	immerse_overlay = null
+	shine = SHINE_MATTE
+	force_open_above = TRUE
 
 /turf/open/water/acid // holy SHIT
 	name = "acid pool"
@@ -986,7 +1035,7 @@
 /// Piss
 /turf/open/water/river/sewer
 	desc = "Piss-laden water! Flowing swiftly along the river."
-	icon_state = MAP_SWITCH("rivermove", "rivermovealt-dir")
+	icon_state = MAP_SWITCH("rivermove", "rivermove-sewerg")
 	underlay_icon_state = "paving"
 	water_reagent = /datum/reagent/water/gross/sewer
 	cleanliness_factor = -5
