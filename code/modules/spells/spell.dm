@@ -943,7 +943,7 @@
 	if(used_cost <= 0)
 		return TRUE
 
-	if(!HAS_TRAIT(owner, TRAIT_NOSTAMINA))
+	if(!HAS_TRAIT(owner, TRAIT_NOSTAMINA) && spell_type != SPELL_BLOOD)
 		var/not_stamina_spell = (spell_type != SPELL_STAMINA)
 		if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
 			if(feedback)

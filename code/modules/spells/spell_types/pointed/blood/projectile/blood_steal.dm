@@ -25,7 +25,7 @@
 	var/current_mode = 1
 	var/list/modes = list(
 		list("name" = "Weak", "tag" = "WEAK", "amount" = 150),
-		list("name" = "Strong", "tag" = "STRNG", "amount" = 300),
+		list("name" = "Strong", "tag" = "STNG", "amount" = 300),
 	)
 
 /datum/action/cooldown/spell/projectile/blood_steal/Grant(mob/grant_to)
