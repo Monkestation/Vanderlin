@@ -20,7 +20,47 @@
 	spell_cost = 30
 	spell_flags = SPELL_RITUOS
 	projectile_type = /obj/projectile/magic/bloodsteal
-	var/vitae_value = 300
+	var/vitae_value = 150
+
+	var/current_mode = 1
+	var/list/modes = list(
+		list("name" = "Weak", "tag" = "WEAK", "amount" = 150),
+		list("name" = "Strong", "tag" = "STRNG", "amount" = 300),
+	)
+
+/datum/action/cooldown/spell/projectile/blood_steal/Grant(mob/grant_to)
+	. = ..()
+	apply_mode(current_mode)
+
+/datum/action/cooldown/spell/projectile/blood_steal/proc/apply_mode(index)
+	var/list/mode = modes[index]
+	vitae_value = mode["amount"]
+	spell_cost = mode["amount"] / 10
+	update_mode_maptext(mode["tag"])
+	if(vitae_value < 300)
+		invocation_type = INVOCATION_WHISPER
+	else
+		invocation_type = INVOCATION_SHOUT
+
+/datum/action/cooldown/spell/projectile/blood_steal/toggle_arc_mode(mob/user)
+	current_mode = (current_mode % length(modes)) + 1
+	apply_mode(current_mode)
+	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode."))
+
+/datum/action/cooldown/spell/projectile/blood_steal/proc/update_mode_maptext(tag)
+	for(var/datum/hud/hud as anything in viewers)
+		var/atom/movable/screen/movable/action_button/B = viewers[hud]
+		var/atom/movable/screen/arc_maptext_holder/holder
+		for(var/atom/movable/screen/arc_maptext_holder/existing in B.vis_contents)
+			holder = existing
+			break
+		if(!holder)
+			holder = new(B)
+			B.vis_contents.Add(holder)
+		holder.maptext = MAPTEXT(tag)
+		holder.color = "#b11212"
+
+
 
 /datum/action/cooldown/spell/projectile/blood_steal/on_cast_hit(atom/source, mob/living/carbon/human/firer, atom/hit, angle)
 	. = ..()
