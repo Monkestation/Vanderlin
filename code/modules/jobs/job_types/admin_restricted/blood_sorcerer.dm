@@ -57,7 +57,7 @@
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
 	)
-	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD MAGE")
+	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD SORCERER")
 
 	var/static/list/selectablerobe = list(
 		"Blood robes" = /obj/item/clothing/shirt/robe/colored/blood,
@@ -65,7 +65,7 @@
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
 	)
-	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD MAGE")
+	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD SORCERER")
 
 	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 4))
 	spawned.hud_used?.set_bloody_bloodpool()
@@ -76,12 +76,13 @@
 /datum/outfit/admin/blood_sorcerer
 	name = "Blood Sorcerer"
 	pants = /obj/item/clothing/pants/trou/leather/advanced
-	shoes = /obj/item/clothing/shoes/shortboots
+	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/half/colored/blood
 	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather/advanced
+	ring = /obj/item/clothing/ring/gold/rontz
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel/black
 	beltr = /obj/item/reagent_containers/glass/bottle/strongbloodpot

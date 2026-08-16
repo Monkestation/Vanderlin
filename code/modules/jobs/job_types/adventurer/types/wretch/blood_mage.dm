@@ -44,6 +44,7 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
+		"Blood hood" = /obj/item/clothing/head/roguehood/colored/blood,
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
 		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
 		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
@@ -54,6 +55,7 @@
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD MAGE")
 
 	var/static/list/selectablerobe = list(
+		"Blood robes" = /obj/item/clothing/shirt/robe/colored/blood,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
@@ -73,6 +75,7 @@
 	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/chain
+	ring = /obj/item/clothing/ring/silver/rontz
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/reagent_containers/glass/bottle/bloodpot

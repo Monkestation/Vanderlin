@@ -52,10 +52,10 @@
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_BLOOD_SENSE) || HAS_TRAIT(user, TRAIT_BLOOD_MAGE) || HAS_TRAIT(user, TRAIT_BLOOD_SORCERER))
 		. += span_bloody("The pearl contains [vitae_amount]/[max_vitae] Vitae")
+	else if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT))
+		. += SPAN_GOD_NECRA("A Necran could destroy this...")
 	else
 		. += span_warning("This just feels wrong... I should get rid of it.")
-	if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT))
-		. += SPAN_GOD_NECRA("A Necran could destroy this...")
 
 /obj/item/blood_pearl/attack_self(mob/user, list/modifiers)
 	. = ..()
