@@ -65,6 +65,9 @@
 /obj/item/clothing/head/roguehood/colored/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/roguehood/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/head/roguehood/colored/green
 	color = CLOTHING_FOREST_GREEN
 

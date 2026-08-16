@@ -311,3 +311,4 @@
 #define JOB_ADMIN_LUNAR_SENTINEL "Lunar Order Sentinel"
 #define JOB_ADMIN_LUNAR_CHAMPION "Lunar Order Champion"
 #define JOB_ADMIN_DARKSPAWN "Darkspawn"
+#define JOB_ADMIN_BLOOD_SORCERER "Blood Sorcerer"

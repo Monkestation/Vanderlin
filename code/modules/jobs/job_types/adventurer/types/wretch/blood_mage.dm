@@ -11,6 +11,7 @@
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 40,
+		/datum/attribute/skill/misc/medicine = 30,
 	)
 
 /datum/job/advclass/wretch/bloodmage
@@ -70,7 +71,7 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
 	shirt = /obj/item/clothing/shirt/tunic/colored
-	wrists = /obj/item/clothing/wrists/bracers
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/chain
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel

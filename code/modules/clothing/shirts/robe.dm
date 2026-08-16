@@ -131,6 +131,9 @@
 	color = pick(CLOTHING_BERRY_BLUE, CLOTHING_SPRING_GREEN, CLOTHING_TARAXACUM_YELLOW, CLOTHING_WINESTAIN_RED)
 	. = ..()
 
+/obj/item/clothing/shirt/robe/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/shirt/robe/wizard
 	name = "wizard's robe"
 	desc = "What wizard's ensemble would be complete without robes?"

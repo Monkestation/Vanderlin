@@ -1,27 +1,29 @@
 /datum/attribute_holder/sheet/job/blood_sorcerer
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = -1,
-		STAT_INTELLIGENCE = 4,
-		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/misc/climbing = 30,
-		/datum/attribute/skill/misc/athletics = 30,
+		STAT_INTELLIGENCE = 5,
+		STAT_PERCEPTION = 2,
+		/datum/attribute/skill/combat/polearms = 50,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
-		/datum/attribute/skill/magic/blood = 40,
+		/datum/attribute/skill/magic/blood = 60,
+		/datum/attribute/skill/misc/medicine = 40,
 	)
 
 /datum/job/admin/blood_sorcerer
-	title = "Blood Sorcerer"
+	title = JOB_ADMIN_BLOOD_SORCERER
 	tutorial = "You have been ostracized and hunted by society for your use of forbidden Blood Magic."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
+	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/divine/noc, /datum/patron/divine/pestra, /datum/patron/inhumen/zizo)
 	outfit = /datum/outfit/admin/blood_sorcerer
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
-	technique_points = 11
+	technique_points = 9
+	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	factions = list(FACTION_NEUTRAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
@@ -33,6 +35,7 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_BLOOD_SORCERER,
+		TRAIT_BLOOD_SENSE,
 		TRAIT_DEADNOSE
 	)
 
@@ -46,6 +49,7 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
+		"Blood hood" = /obj/item/clothing/head/roguehood/colored/blood,
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
 		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
 		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
@@ -56,6 +60,7 @@
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD MAGE")
 
 	var/static/list/selectablerobe = list(
+		"Blood robes" = /obj/item/clothing/shirt/robe/colored/blood,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
@@ -63,27 +68,28 @@
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD MAGE")
 
 	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 4))
-	spawned.adjust_bloodpool()
 	spawned.hud_used?.set_bloody_bloodpool()
-	spawned.adjust_form_mastery_points(14, specific_form = FORM_BLOOD)
+	spawned.adjust_form_mastery_points(11, specific_form = FORM_BLOOD)
+	spawned.maxbloodpool += 1000
+	spawned.set_bloodpool(2500)
 
 /datum/outfit/admin/blood_sorcerer
 	name = "Blood Sorcerer"
-	pants = /obj/item/clothing/pants/chainlegs
+	pants = /obj/item/clothing/pants/trou/leather/advanced
 	shoes = /obj/item/clothing/shoes/shortboots
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget
+	cloak = /obj/item/clothing/cloak/half/colored/blood
 	shirt = /obj/item/clothing/shirt/tunic/colored
-	wrists = /obj/item/clothing/wrists/bracers
-	gloves = /obj/item/clothing/gloves/chain
+	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
+	gloves = /obj/item/clothing/gloves/leather/advanced
 	belt = /obj/item/storage/belt/leather/black
-	backl = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel/black
 	beltr = /obj/item/reagent_containers/glass/bottle/strongbloodpot
-	r_hand = /obj/item/weapon/polearm/woodstaff
+	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
 	backpack_contents = list(
-		/obj/item/spellbook/expert/starter/blood = 1,
 		/obj/item/chalk = 1,
-		/obj/item/rope/chain = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
-		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/weapon/knife/dagger/silver/arcyne = 1
+		/obj/item/reagent_containers/glass/bottle/strongbloodpot = 1,
+		/obj/item/storage/belt/pouch/coins/mid = 1,
+		/obj/item/weapon/knife/dagger/steel/stiletto = 1
 	)
