@@ -73,6 +73,7 @@
 
 /datum/action/cooldown/spell/blood_healing/greater
 	name = "Greater Blood Mending"
+	desc = "Wield the power of blood to heal yourself or another with even greater potency."
 	button_icon = 'icons/mob/actions/roguespells.dmi'
 	button_icon_state = "healer" //Vampiric icon in theme with more of a vampiric strength.
 
