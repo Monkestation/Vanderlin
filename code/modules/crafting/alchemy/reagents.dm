@@ -204,7 +204,7 @@
 	description = "Gradually regenerates Vitae."
 	reagent_state = LIQUID
 	color = COLOR_BLOOD
-	taste_description = "blood"
+	taste_description = "sickly iron"
 	scent_description = "sickly iron"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
@@ -213,17 +213,17 @@
 
 /datum/reagent/medicine/bloodpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
-		M.remove_reagent(/datum/reagent/medicine/bloodpot, 2) //No overhealing.
+		M.remove_reagent(/datum/reagent/medicine/bloodpot, 2)
 	M.adjust_blood_volume(6 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
 	M.adjust_bloodpool(10 * efficiency)
 	..()
 
 /datum/reagent/medicine/strongbloodpot
 	name = "Strong Blood Potion"
-	description = "Gradually regenerates Vitae."
+	description = "Regenerates Vitae."
 	reagent_state = LIQUID
 	color = COLOR_MAROON
-	taste_description = "blood"
+	taste_description = "sickly iron"
 	scent_description = "sickly iron"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
@@ -232,7 +232,7 @@
 
 /datum/reagent/medicine/strongbloodpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
-		M.remove_reagent(/datum/reagent/medicine/strongbloodpot, 2) //No overhealing.
+		M.remove_reagent(/datum/reagent/medicine/strongbloodpot, 2)
 	M.adjust_blood_volume(12 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
 	M.adjust_bloodpool(15 * efficiency)
 	..()

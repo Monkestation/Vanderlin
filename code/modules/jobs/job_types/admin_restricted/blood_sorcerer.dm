@@ -1,4 +1,4 @@
-/datum/attribute_holder/sheet/job/bloodmage
+/datum/attribute_holder/sheet/job/blood_sorcerer
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
@@ -13,23 +13,26 @@
 		/datum/attribute/skill/magic/blood = 40,
 	)
 
-/datum/job/advclass/wretch/bloodmage
-	title = "Blood Mage"
+/datum/job/admin/blood_sorcerer
+	title = "Blood Sorcerer"
 	tutorial = "You have been ostracized and hunted by society for your use of forbidden Blood Magic."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	outfit = /datum/outfit/wretch/bloodmage
+	outfit = /datum/outfit/admin/blood_sorcerer
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
-	total_positions = 1
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
-	technique_points = 3 // This is mirrored by their form points manually, due to minimal technique-less spells. Do not increase either beyond 3.
+	technique_points = 11
 	factions = list(FACTION_NEUTRAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
 
+	magic_user = TRUE
+	knows_the_town = TRUE
+	known_by_the_town = FALSE
+
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_BLOOD_MAGE,
+		TRAIT_BLOOD_SORCERER,
 		TRAIT_DEADNOSE
 	)
 
@@ -39,7 +42,7 @@
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 	)
 
-/datum/job/advclass/wretch/bloodmage/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/admin/blood_sorcerer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 	var/static/list/selectablehat = list(
@@ -59,13 +62,13 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD MAGE")
 
-	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 2))
+	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 4))
 	spawned.adjust_bloodpool()
 	spawned.hud_used?.set_bloody_bloodpool()
-	spawned.adjust_form_mastery_points(technique_points, specific_form = FORM_BLOOD)
+	spawned.adjust_form_mastery_points(14, specific_form = FORM_BLOOD)
 
-/datum/outfit/wretch/bloodmage
-	name = "Blood Mage (Wretch)"
+/datum/outfit/admin/blood_sorcerer
+	name = "Blood Sorcerer"
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
@@ -74,7 +77,7 @@
 	gloves = /obj/item/clothing/gloves/chain
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/reagent_containers/glass/bottle/bloodpot
+	beltr = /obj/item/reagent_containers/glass/bottle/strongbloodpot
 	r_hand = /obj/item/weapon/polearm/woodstaff
 	backpack_contents = list(
 		/obj/item/spellbook/expert/starter/blood = 1,

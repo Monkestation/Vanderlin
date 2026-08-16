@@ -160,6 +160,7 @@
 		ADD_TRAIT(user, TRAIT_THERMAL_VISION,"thermal_vision")
 	else
 		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION,"thermal_vision")
+	user.update_sight()
 
 //............... Nosleep Circlet ............... //
 /obj/item/clothing/head/crown/circlet/sleepless

@@ -24,6 +24,7 @@
 
 /datum/action/cooldown/spell/projectile/blood_bolt/arcyne
 	name = "Arcyne Blood Bolt"
+	desc = "A weaker mimicry of a darker spell, launch a bolt of blood infused with lightning."
 	required_level = 4
 
 	spell_type = SPELL_MANA

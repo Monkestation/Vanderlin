@@ -87,4 +87,4 @@
 	base_healing = 30
 	wound_modifier = 0.5
 	blood_restoration = BLOOD_VOLUME_SURVIVE / 2
-	required_level = 6
+	required_level = 7

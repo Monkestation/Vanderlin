@@ -30,7 +30,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
 
-	outfit = /datum/outfit/lunar_champion
+	outfit = /datum/outfit/admin/lunar_champion
 
 	give_bank_account = 30
 	knows_the_town = TRUE
@@ -73,7 +73,7 @@
 		devotion.make_lunar_champion()
 		devotion.grant_to(spawned)
 
-/datum/outfit/lunar_champion
+/datum/outfit/admin/lunar_champion
 	name = JOB_ADMIN_LUNAR_CHAMPION
 	head = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 	neck = /obj/item/clothing/neck/gorget/silver

@@ -88,7 +88,7 @@
 
 	if(ishuman(user) && iscarbon(src) && CAN_HAVE_BLOOD(src))
 		var/mob/living/carbon/human/human_user = user
-		if(human_user.mind?.has_antag_datum(/datum/antagonist/vampire) || human_user.has_status_effect(/datum/status_effect/buff/blood_sight))
+		if(HAS_TRAIT(human_user, TRAIT_BLOOD_SENSE))
 			var/cached_blood_volume = get_blood_volume()
 			var/vitae = 0
 			var/datum/blood_type/BT = get_blood_type()

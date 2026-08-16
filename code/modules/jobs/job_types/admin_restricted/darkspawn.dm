@@ -36,7 +36,7 @@
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	allowed_patrons = list(/datum/patron/inhumen/zizo)
 
-	outfit = /datum/outfit/darkspawn
+	outfit = /datum/outfit/admin/darkspawn
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -126,7 +126,7 @@
 	LE.Insert(spawned)
 	RE.Insert(spawned)
 
-/datum/outfit/darkspawn
+/datum/outfit/admin/darkspawn
 	name = JOB_ADMIN_DARKSPAWN
 	pants = /obj/item/clothing/pants/trou/formal/shorts
 	shoes = /obj/item/clothing/shoes/courtphysician/female

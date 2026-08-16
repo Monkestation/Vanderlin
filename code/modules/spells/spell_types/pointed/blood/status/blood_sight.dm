@@ -27,10 +27,14 @@
 /datum/status_effect/buff/blood_sight/on_apply()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_THERMAL_VISION, "blood_sight")
+	ADD_TRAIT(owner, TRAIT_BLOOD_SENSE, "blood_sight")
+	owner.update_sight()
 
 /datum/status_effect/buff/blood_sight/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_THERMAL_VISION, "blood_sight")
+	REMOVE_TRAIT(owner, TRAIT_BLOOD_SENSE, "blood_sight")
+	owner.update_sight()
 
 // ##########################################################################################
 

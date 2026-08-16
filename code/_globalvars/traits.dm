@@ -217,6 +217,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Sorcerer" = TRAIT_SORCERER,
 		"Blood Mage" = TRAIT_BLOOD_MAGE,
 		"Blood Sorcerer" = TRAIT_BLOOD_SORCERER,
+		"Blood Sense" = TRAIT_BLOOD_SENSE,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
