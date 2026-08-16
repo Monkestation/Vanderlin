@@ -12,7 +12,7 @@
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 40,
 	)
-/*
+
 /datum/job/advclass/wretch/bloodmage
 	title = "Blood Mage"
 	tutorial = "You have been ostracized and hunted by society for your use of forbidden Blood Magic."
@@ -22,7 +22,6 @@
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	total_positions = 1
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
-	form_points = 5
 	technique_points = 3
 	factions = list(FACTION_NEUTRAL)
 
@@ -63,7 +62,8 @@
 	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 2))
 	spawned.adjust_bloodpool()
 	spawned.hud_used?.set_bloody_bloodpool()
-*/
+	spawned.adjust_form_mastery_points(5, specific_form = FORM_BLOOD)
+
 /datum/outfit/wretch/bloodmage
 	name = "Blood Mage (Wretch)"
 	pants = /obj/item/clothing/pants/chainlegs

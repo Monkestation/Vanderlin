@@ -10,6 +10,7 @@
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
 	spell_cost = 0
+	var/advanced_scan = FALSE
 
 /datum/action/cooldown/spell/diagnose/is_valid_target(atom/cast_on)
 	. = ..()
@@ -19,7 +20,7 @@
 
 /datum/action/cooldown/spell/diagnose/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	cast_on.check_for_injuries(owner, additional = TRUE)
+	cast_on.check_for_injuries(owner, advanced_scan, FALSE, TRUE)
 
 /datum/action/cooldown/spell/diagnose/holy
 	name = "Diagnosis"

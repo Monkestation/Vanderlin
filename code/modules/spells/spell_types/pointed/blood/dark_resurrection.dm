@@ -68,5 +68,5 @@
 	cast_on.adjust_jitter(100 SECONDS)
 	cast_on.adjust_blood_volume(BLOOD_VOLUME_OKAY, maximum = BLOOD_VOLUME_OKAY)
 	cast_on.visible_message(span_bloody("[cast_on] is revived by crimson light!"), span_bloody("I awake from the void."))
-	if(!HAS_TRAIT(cast_on, TRAIT_BLOOD_MAGE) && !cast_on.clan)
+	if(!HAS_TRAIT(cast_on, TRAIT_BLOOD_MAGE) && !HAS_TRAIT(cast_on, TRAIT_BLOOD_SORCERER) && !cast_on.mind?.has_antag_datum(/datum/antagonist/vampire))
 		cast_on.apply_status_effect(/datum/status_effect/debuff/revive_bloodmagic)

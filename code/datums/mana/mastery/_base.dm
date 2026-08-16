@@ -282,10 +282,11 @@
 		return FALSE
 	if(form == FORM_BLOOD)
 		var/mob/living/carbon/user = get_mastery_user()
-		if(!user)
-			return FALSE
-		if(!HAS_TRAIT(user, TRAIT_BLOOD_MAGE) && !HAS_TRAIT(user, TRAIT_BLOOD_SORCERER) && !user.mind?.has_antag_datum(/datum/antagonist/vampire))
+
+		if(user && !HAS_TRAIT(user, TRAIT_BLOOD_MAGE) && !HAS_TRAIT(user, TRAIT_BLOOD_SORCERER) && !user.mind?.has_antag_datum(/datum/antagonist/vampire))
 			to_chat(user, span_bloody("I am not an adept enough blood mage and cannot wield this unholy power."))
+			return FALSE
+		if(!user && !get_form_level(FORM_BLOOD))//Blood books can get more blood points.
 			return FALSE
 
 	unspent_form_points -= amount

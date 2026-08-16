@@ -214,8 +214,8 @@
 /datum/reagent/medicine/bloodpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/bloodpot, 2) //No overhealing.
-	M.adjust_blood_volume(4 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
-	M.adjust_bloodpool(1 * efficiency)
+	M.adjust_blood_volume(6 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.adjust_bloodpool(10 * efficiency)
 	..()
 
 /datum/reagent/medicine/strongbloodpot
@@ -233,8 +233,8 @@
 /datum/reagent/medicine/strongbloodpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/strongbloodpot, 2) //No overhealing.
-	M.adjust_blood_volume(8 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
-	M.adjust_bloodpool(2 * efficiency)
+	M.adjust_blood_volume(12 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.adjust_bloodpool(15 * efficiency)
 	..()
 
 /datum/reagent/medicine/antidote

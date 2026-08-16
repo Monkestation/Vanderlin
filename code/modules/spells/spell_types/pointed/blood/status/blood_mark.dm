@@ -25,7 +25,7 @@
 	if(!ishuman(cast_on))
 		return FALSE
 	var/mob/living/carbon/human/target = cast_on
-	if(target.clan || HAS_TRAIT(target, TRAIT_BLOOD_MAGE))
+	if(target.mind?.has_antag_datum(/datum/antagonist/vampire) || HAS_TRAIT(target, TRAIT_BLOOD_MAGE) || HAS_TRAIT(target, TRAIT_BLOOD_SORCERER))
 		to_chat(owner, span_bloody("I cannot mark another Blood Mage!"))
 		return FALSE
 	if(target.has_status_effect(/datum/status_effect/debuff/blood_mark))
