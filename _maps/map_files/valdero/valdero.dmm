@@ -393,13 +393,12 @@
 /turf/open/floor/tile,
 /area/indoors/town/vault)
 "bz" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 8
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
 /area/indoors/town/garrison)
 "bA" = (
 /obj/structure/rack,
@@ -659,13 +658,10 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/shop)
 "cs" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 1
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep/halls/e)
 "cu" = (
 /obj/effect/landmark/events/haunts,
@@ -801,13 +797,12 @@
 /turf/open/floor/twig,
 /area/indoors/soilsons)
 "db" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 4
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
 /area/indoors/town/garrison)
 "dc" = (
 /obj/structure/bookcase/random,
@@ -2286,13 +2281,10 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "iP" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 8
 	},
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/carpet/lord/right,
 /area/indoors/town/garrison)
 "iQ" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -2989,13 +2981,10 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
 "lo" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 1
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/halls/e)
 "lp" = (
 /obj/structure/closet/crate/chest{
@@ -4903,13 +4892,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/keep/halls/e)
 "sw" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 4
 	},
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/carpet/lord/left,
 /area/indoors/town/garrison)
 "sx" = (
 /obj/structure/fluff/railing/wood{
@@ -5435,13 +5421,12 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/merc_guild)
 "uA" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 4
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
 /area/indoors/town/garrison)
 "uB" = (
 /obj/effect/decal/woodpath,
@@ -5693,13 +5678,12 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/library)
 "vw" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 8
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
 /area/indoors/town/garrison)
 "vx" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -6139,13 +6123,10 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/merc_guild)
 "xk" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 1
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep/halls/e)
 "xl" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -7482,13 +7463,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/garrison)
 "BD" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 4
 	},
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/carpet/lord/corner,
 /area/indoors/town/garrison)
 "BE" = (
 /turf/open/floor/woodturned,
@@ -8127,13 +8105,12 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter/town)
 "Es" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 8
 	},
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
 /area/indoors/town/garrison)
 "Et" = (
 /obj/machinery/light/fueled/wallfire/candle,
@@ -9410,13 +9387,10 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town/church)
 "Ji" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 1
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/right,
 /area/indoors/town/garrison)
 "Jj" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -10020,9 +9994,6 @@
 	},
 /area/indoors/town/keep/throne)
 "LK" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 1
 	},
@@ -10464,13 +10435,10 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "Nr" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 8
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/center,
 /area/indoors/town/garrison)
 "Ns" = (
 /obj/structure/fluff/railing/border{
@@ -10733,9 +10701,6 @@
 /turf/open/floor/blocks/newstone,
 /area/outdoors/town)
 "Ov" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 1
 	},
@@ -11302,13 +11267,10 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/garrison)
 "QD" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 1
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/center,
 /area/indoors/town/garrison)
 "QE" = (
 /turf/open/floor/ruinedwood/turned/darker,
@@ -12135,13 +12097,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/garrison)
 "TL" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 4
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/center,
 /area/indoors/town/garrison)
 "TM" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -12218,13 +12177,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "Ua" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/l{
 	dir = 1
 	},
-/turf/open/floor/cobble,
+/turf/open/floor/carpet/lord/left,
 /area/indoors/town/garrison)
 "Uc" = (
 /obj/structure/fluff/nest,
@@ -12898,9 +12854,6 @@
 /turf/open/openspace,
 /area/indoors/town/keep/halls/e)
 "WW" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/stairs/fancy/c{
 	dir = 1
 	},
@@ -13292,13 +13245,12 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/smithy)
 "Yn" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 8
 	},
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
 /area/indoors/town/garrison)
 "Yq" = (
 /obj/structure/fluff/railing/border{
@@ -13577,13 +13529,10 @@
 /turf/open/floor/blocks,
 /area/indoors/town/garrison)
 "Zn" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
 /obj/structure/stairs/fancy/r{
 	dir = 4
 	},
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/carpet/lord/corner,
 /area/indoors/town/garrison)
 "Zo" = (
 /obj/structure/door/red,

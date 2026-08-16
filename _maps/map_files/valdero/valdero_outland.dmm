@@ -351,15 +351,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/mountains)
-"Cf" = (
-/obj/structure/stairs/stone/reddish{
-	dir = 8
-	},
-/obj/structure/stairs/stone/reddish{
-	dir = 8
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/mountains)
 "Cg" = (
 /turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
@@ -73488,7 +73479,7 @@ Sz
 Sz
 lD
 BP
-Cf
+BP
 BP
 cU
 cU
