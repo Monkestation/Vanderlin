@@ -39,6 +39,16 @@
 		TRAIT_DEADNOSE
 	)
 
+	languages = list(
+		/datum/language/elvish,
+		/datum/language/dwarvish,
+		/datum/language/zalad,
+		/datum/language/hellspeak,
+		/datum/language/newpsydonic,
+		/datum/language/orcish,
+		/datum/language/thievescant,
+	)
+
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight,
 		/datum/action/cooldown/spell/projectile/blood_steal,
