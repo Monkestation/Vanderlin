@@ -1114,7 +1114,7 @@
 		var/obj/item/storage = spawned.get_item_by_slot(slot)
 		if(!storage)
 			continue
-		if(storage.atom_storage?.attempt_insert(new_item, override = TRUE))
+		if(storage.atom_storage?.attempt_insert(new_item, override = TRUE, messages = FALSE))
 			handled = TRUE
 			break
 

@@ -133,9 +133,9 @@
 			update_inv_back()
 		if(ITEM_SLOT_BACKPACK)
 			not_handled = TRUE
-			if(backr?.atom_storage?.attempt_insert(equipping, src, !initial))
+			if(backr?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
 				not_handled = FALSE
-			if(not_handled && backl?.atom_storage?.attempt_insert(equipping, src, !initial))
+			else if(backl?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
 				not_handled = FALSE
 		else
 			not_handled = TRUE

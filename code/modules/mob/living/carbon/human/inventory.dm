@@ -173,15 +173,12 @@
 			update_inv_belt()
 		if(ITEM_SLOT_BACKPACK) // we don't need to check backpacks here, we already did in the carbon proc
 			not_handled = TRUE
-			if(beltr)
-				if(beltr.atom_storage.attempt_insert(equipping, src, TRUE))
-					not_handled = FALSE
-			if(beltl && not_handled)
-				if(beltl.atom_storage.attempt_insert(equipping, src, TRUE))
-					not_handled = FALSE
-			if(belt && not_handled)
-				if(belt.atom_storage.attempt_insert(equipping, src, TRUE))
-					not_handled = FALSE
+			if(belt?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
+				not_handled = FALSE
+			else if(beltr?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
+				not_handled = FALSE
+			else if(beltl?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
+				not_handled = FALSE
 		else
 			not_handled = TRUE
 
