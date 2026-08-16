@@ -1008,6 +1008,7 @@
 	icon = 'icons/hud/storage.dmi'
 	icon_state = "white"
 	plane = ABOVE_HUD_PLANE
+	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 96
 
