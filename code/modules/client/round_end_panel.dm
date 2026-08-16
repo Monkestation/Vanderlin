@@ -130,7 +130,7 @@
 	data += "<div style='display: table-cell; width: 50%; vertical-align: top; border-left: 1px solid #444; padding: 0 10px;'>"
 	data += "<font color='#9b6937'><span class='bold'>Total Deaths:</span></font> [GLOB.vanderlin_round_stats[STATS_DEATHS]]<br>"
 	data += "<font color='#6b5ba1'><span class='bold'>Noble Deaths:</span></font> [GLOB.vanderlin_round_stats[STATS_NOBLE_DEATHS]]<br>"
-	data += "<font color='#e6b327'><span class='bold'>Holy Revivals:</span></font> [GLOB.vanderlin_round_stats[STATS_ASTRATA_REVIVALS]]<br>"
+	data += "<font color='#e6b327'><span class='bold'>Holy Revivals:</span></font> [(GLOB.vanderlin_round_stats[STATS_ASTRATA_REVIVALS] + GLOB.vanderlin_round_stats[STATS_NOC_REVIVALS])]<br>"
 	data += "<font color='#2dc5bd'><span class='bold'>Lux Revivals:</span></font> [GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]]<br>"
 	data += "<font color='#2dc5bd'><span class='bold'>Successful CPRs:</span></font> [GLOB.vanderlin_round_stats[STATS_CPR_REVIVALS]]<br>"
 	data += "<font color='#7cc05c'><span class='bold'>Wounds Fixed:</span></font> [GLOB.vanderlin_round_stats[STATS_WOUNDS_FIXED]]<br>"

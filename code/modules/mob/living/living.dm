@@ -1032,6 +1032,10 @@
 		updatehealth()
 		get_up(TRUE)
 
+	// Reapply arcyne momentum if this mind had it before death
+	if(HAS_MIND_TRAIT(src, TRAIT_ARCYNE_MOMENTUM) && !has_status_effect(/datum/status_effect/buff/arcyne_momentum))
+		apply_status_effect(/datum/status_effect/buff/arcyne_momentum)
+
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
 
@@ -3006,11 +3010,11 @@
  *			  defaults to src and mind makes it transfer with the mind to new mobs.
  * * override - Replace existing spell if present, instead of returning early
  */
-/mob/living/proc/add_spell(datum/action/cooldown/spell/spell_type, silent = TRUE, source, override = FALSE)
+/mob/living/proc/add_spell(datum/action/cooldown/spell/spell_type, silent = TRUE, source, override = FALSE, mastery_spell = FALSE)
 	if(QDELETED(src))
 		return
 
-	var/datum/action/cooldown/spell = get_spell(spell_type, TRUE)
+	var/datum/action/cooldown/spell/spell = get_spell(spell_type, TRUE)
 	if(spell)
 		if(!override)
 			return
@@ -3027,6 +3031,9 @@
 		to_chat(src, span_nicegreen("I learnt [spell.name]!"))
 
 	spell.Grant(src)
+	if(mastery_spell && spell.required_form)
+		var/datum/spell_mastery/mastery = mana_pool?.get_mastery()
+		mastery?.grant_bonus_spell(spell, src)
 
 /mob/living/proc/remove_spell(datum/action/cooldown/spell/spell, return_skill_points = FALSE, silent = TRUE)
 	if(QDELETED(src))
@@ -3036,14 +3043,13 @@
 	if(!real_spell)
 		return
 
-	if(return_skill_points)
-		used_spell_points = max(used_spell_points - real_spell.point_cost, 0)
-		spell_points = max(spell_points + real_spell.point_cost, 0)
-		check_learnspell()
-
 	if(!silent)
 		to_chat(src, span_boldwarning("I forgot [real_spell.name]!"))
 
+	var/datum/spell_mastery/mastery = mana_pool?.get_mastery()
+	if(mastery && (real_spell in mastery.granted_actions))
+		mastery.granted_actions -= real_spell
+		mastery.unlocked_spells -= real_spell.type
 	qdel(real_spell)
 
 /**
@@ -3070,50 +3076,40 @@
 	if(!silent && !silent_individual)
 		to_chat(src, span_boldwarning("I forgot all my spells!"))
 
-/**
- * adjusts the amount of available spellpoints
- *
- * Args
- * * points - amount of points to grant or reduce
- * * used_points - ajust used points
-*/
-/mob/proc/adjust_spell_points(points, used_points = FALSE)
-
-/mob/living/adjust_spell_points(points, used_points = FALSE)
+/mob/living/adjust_form_mastery_points(points, used_points = FALSE, specific_form = null)
 	if(QDELETED(src))
 		return
 
-	if(used_points)
-		used_spell_points += points
-	else
-		spell_points += points
-
+	mana_pool?.get_mastery().adjust_form_mastery_points(points, used_points, specific_form)
+	if(points > 0)
+		mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	check_learnspell()
 
-/// Reset spell points and used spell points
-/mob/living/proc/reset_spell_points(silent = TRUE)
+/mob/living/adjust_technique_mastery_points(points, used_points = FALSE, specific_technique = null)
 	if(QDELETED(src))
 		return
 
-	spell_points = 0
-	used_spell_points = 0
-
-	if(!silent)
-		to_chat(src, span_boldwarning("I lost all my spellpoints!"))
-
+	mana_pool?.get_mastery().adjust_technique_mastery_points(points, used_points, specific_technique)
 	check_learnspell()
+
+/mob/living/reset_form_mastery_points(silent = TRUE)
+	if(QDELETED(src))
+		return
+
+	mana_pool?.get_mastery().reset_form_mastery_points(silent)
+
+/mob/living/reset_technique_mastery_points(silent = TRUE)
+	if(QDELETED(src))
+		return
+
+	mana_pool?.get_mastery().reset_technique_mastery_points(silent)
 
 /// Check if learnspell should be removed or granted
 /mob/living/proc/check_learnspell()
 	if(QDELETED(src))
 		return
 
-	if(get_spell(/datum/action/cooldown/spell/undirected/learn))
-		return
-
-	// Because of kobolds spellpoints can be decimal, but you can't do anything with that if below 1
-	if(floor(spell_points - used_spell_points) > 0)
-		add_spell(/datum/action/cooldown/spell/undirected/learn)
+	mana_pool?.get_mastery()
 
 /**
  * purges all spells and skills
@@ -3123,7 +3119,8 @@
 /mob/living/proc/purge_combat_knowledge(silent = TRUE)
 	purge_all_skills(silent)
 	remove_spells(silent = silent)
-	reset_spell_points(silent)
+	reset_technique_mastery_points(silent)
+	reset_form_mastery_points(silent)
 
 /mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))

@@ -536,6 +536,15 @@
 	name = "royal golden gorget"
 	sellprice = 300
 
+/obj/item/clothing/neck/gorget/silver
+	name = "silver gorget"
+	desc = "A sparkling set of plates designed to protect the neck, traditionally worn atop a jacket or cuirass. They seem to shine with moonlight, even in the darkness."
+	icon_state = "sgorget"
+
+/obj/item/clothing/neck/gorget/silver/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/collar_detonator
 	name = "collar detonator"
 	desc = "What seems to be an ordinary key at first is actually an enchanted contraption designed to \

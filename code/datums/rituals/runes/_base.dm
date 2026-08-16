@@ -61,6 +61,8 @@
 	var/associated_ritual = null
 	/// If TRUE, every item with attunement_values on the rune is pulled into selected_atoms
 	var/takes_all_items = FALSE
+	///are we glowing?
+	var/glowing = FALSE
 
 /obj/effect/decal/cleanable/ritual_rune/Initialize(mapload, set_keyword)
 	. = ..()

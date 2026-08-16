@@ -5,9 +5,8 @@
 	sound = 'sound/magic/vlightning.ogg'
 
 	associated_skill = /datum/attribute/skill/magic/blood
-	attunements = list(
-		/datum/attunement/blood = 0.7,
-	)
+	required_form = FORM_WATER
+	required_technique = TECHNIQUE_ALTERATION
 
 	invocation = "DR'N LF'E!"
 	invocation_type = INVOCATION_SHOUT
@@ -24,9 +23,6 @@
 	. = ..()
 
 	if(!firer || !ishuman(hit))
-		return
-
-	if(!firer.clan)
 		return
 
 	var/mob/living/carbon/human/H = hit

@@ -3,11 +3,6 @@
 	desc = "Grant yourself and any creatures adjacent to you free movement through rough terrain."
 	button_icon_state = "bush_jaunt"
 
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/aeromancy = 0.8,
-	)
-
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 

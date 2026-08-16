@@ -95,6 +95,9 @@
 #define VV_HK_OSAY "osay"
 #define VV_HK_MASS_DEL_TYPE "mass_delete_type"
 #define VV_HK_ARMOR_MOD "mod_obj_armor"
+#define VV_HK_ADDENCHANT "add_enchantment"
+#define VV_HK_REMOVEENCHANT "remove_enchantment"
+
 
 // /mob
 #define VV_HK_GIB "gib"

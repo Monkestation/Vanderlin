@@ -9,10 +9,6 @@
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 
-	attunements = list(
-		/datum/attunement/blood = 0.5,
-	)
-
 	invocation_type = INVOCATION_EMOTE
 	invocation = span_userdanger("<b>%CASTER</b> casts %PRONOUN_their hands outward!")
 	invocation_self_message = span_danger("I throw out an unholy snare!")
@@ -114,7 +110,7 @@
 	var/mob/living/target = hit_atom
 	to_chat(target, span_danger("My stomach hurts a lot!"))
 	target.emote("gag")
-	target.reagents?.add_reagent(/datum/reagent/organpoison, 2)
+	target.reagents?.add_reagent(/datum/reagent/poison/organ, 2)
 	playsound(target, 'sound/magic/marked.ogg', 50, TRUE)
 
 
