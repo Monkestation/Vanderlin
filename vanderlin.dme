@@ -3611,6 +3611,7 @@
 #include "code\modules\language\orc.dm"
 #include "code\modules\language\rousman.dm"
 #include "code\modules\language\sandspeak.dm"
+#include "code\modules\language\sanguine.dm"
 #include "code\modules\language\thieves_cant.dm"
 #include "code\modules\language\undead.dm"
 #include "code\modules\language\zalad.dm"

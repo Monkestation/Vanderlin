@@ -40,6 +40,7 @@
 	)
 
 	languages = list(
+		/datum/language/sanguine,
 		/datum/language/elvish,
 		/datum/language/dwarvish,
 		/datum/language/zalad,

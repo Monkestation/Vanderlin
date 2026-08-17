@@ -1,6 +1,6 @@
 /datum/language/celestial
 	name = "Celestial"
-	desc = ""
+	desc = "The language of the divine, primarily used by the Church of the Ten."
 	speech_verb = "says"
 	ask_verb = "asks"
 	exclaim_verb = "yells"

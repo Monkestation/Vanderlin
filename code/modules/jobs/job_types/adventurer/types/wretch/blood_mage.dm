@@ -34,6 +34,10 @@
 		TRAIT_DEADNOSE
 	)
 
+	languages = list(
+		/datum/language/sanguine
+	)
+
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight,
 		/datum/action/cooldown/spell/projectile/blood_steal,

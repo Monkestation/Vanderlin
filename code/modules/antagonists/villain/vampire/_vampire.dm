@@ -72,6 +72,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
 		vampdude.hud_used?.set_bloody_bloodpool()
+		vampdude.grant_language(/datum/language/sanguine)
 
 		if(forced)
 			vampdude.set_clan_direct(forcing_clan)
