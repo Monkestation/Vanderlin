@@ -77,7 +77,7 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD SORCERER")
 
-	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 4))
+	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 3))
 	spawned.hud_used?.set_bloody_bloodpool()
 	spawned.adjust_form_mastery_points(11, specific_form = FORM_BLOOD)
 	spawned.maxbloodpool += 1000

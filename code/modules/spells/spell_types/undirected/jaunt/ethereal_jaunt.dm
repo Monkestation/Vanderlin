@@ -238,6 +238,8 @@
 	sound = 'sound/magic/enter_blood.ogg'
 	cooldown_time = 35 SECONDS
 
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_ALTERATION
 	required_level = 12 //lol

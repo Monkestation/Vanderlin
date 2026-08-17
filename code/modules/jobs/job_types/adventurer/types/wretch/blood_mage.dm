@@ -62,7 +62,6 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD MAGE")
 
-	spawned.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_BLOOD = 2))
 	spawned.adjust_bloodpool()
 	spawned.hud_used?.set_bloody_bloodpool()
 	spawned.adjust_form_mastery_points(technique_points, specific_form = FORM_BLOOD)
