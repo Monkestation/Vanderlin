@@ -744,6 +744,10 @@
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 5
 	},
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
 /turf/open/floor/tile/brick,
 /area/under/town/basement)
 "arn" = (
@@ -12148,10 +12152,6 @@
 /obj/item/key/atarms,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /obj/effect/mapping_helpers/access/locker,
-/obj/item/key/walls,
-/obj/item/key/walls,
-/obj/item/key/walls,
-/obj/item/key/walls,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/garrison)
 "fBW" = (
@@ -15332,6 +15332,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "hfL" = (
@@ -18346,6 +18347,13 @@
 /area/under/town/basement)
 "iwZ" = (
 /turf/open/floor/blocks/paving,
+/area/under/town/basement)
+"ixj" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/cobble,
 /area/under/town/basement)
 "ixn" = (
 /turf/open/floor/carpet/lord/left,
@@ -22008,6 +22016,10 @@
 /obj/structure/door/window,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/keep/feast)
+"kbC" = (
+/obj/structure/closet/crate/chest/old_crate,
+/turf/open/floor/churchbrick,
+/area/indoors/town/clinic_large)
 "kbH" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
@@ -26591,7 +26603,6 @@
 /obj/structure/door/fancy{
 	name = "Guest Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/guest,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
@@ -28607,6 +28618,10 @@
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/orphanage)
+"mXc" = (
+/obj/structure/well/climb_up,
+/turf/open/water/clean/dirt/under,
+/area/under/town/basement)
 "mXW" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/carpet/royalblack,
@@ -29340,6 +29355,10 @@
 "nmu" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 1
+	},
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -30157,7 +30176,6 @@
 	dir = 8
 	},
 /obj/structure/fermentation_keg/water,
-/obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "nHs" = (
@@ -31885,7 +31903,6 @@
 /obj/structure/door/fancy{
 	name = "Guest Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/guest,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
@@ -32159,7 +32176,7 @@
 /turf/closed/wall/mineral/roofwall/innercorner,
 /area/indoors/town)
 "oxS" = (
-/obj/structure/well,
+/obj/structure/well/climb_down,
 /turf/open/floor/dirt,
 /area/indoors/town/clinic_large)
 "oyd" = (
@@ -43404,6 +43421,7 @@
 	dir = 4
 	},
 /obj/structure/fluff/walldeco/church/line,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
 "trR" = (
@@ -55024,7 +55042,6 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
 "ydE" = (
@@ -123972,7 +123989,7 @@ luJ
 luJ
 qFx
 jEQ
-tUV
+ixj
 fBg
 gir
 hiF
@@ -125391,7 +125408,7 @@ qFx
 tPJ
 tPJ
 vtX
-tPJ
+mXc
 qFx
 qFx
 hZn
@@ -164778,7 +164795,7 @@ biy
 fQg
 uNC
 oFi
-qdK
+kbC
 cpO
 alI
 fQg
